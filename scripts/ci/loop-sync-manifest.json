@@ -1800,11 +1800,11 @@
       "path": "generator/scripts/lib/events-utils.mjs",
       "sitePath": "scripts/lib/events-utils.mjs",
       "mode": "adapted",
-      "reason": "Utility del crawler eventi. L'adattamento reale e' uno solo — `REPO_ROOT` a `../../..` per lo stesso spostamento di cartella di `evergreen-article-refresh.mjs` — ed e' cio' che rende il file NON riallineabile con una copia. **Ma sotto quell'adattamento c'e' un ritardo, e va detto qui perche' nient'altro lo dira'**: il sito ha aggiunto il 2026-08-03 (809abec2) il parametro `deadline` a `enrichEventsWithLocaleFallbackTranslations`, che cappa il wall clock dello stadio di traduzione. Senza, quello stadio e' la cosa piu' lunga che i crawler nationwide fanno e ha cancellato `crawl-events` ogni giorno dal 2026-07-07: il checkpoint restava congelato e il dataset non veniva mai committato. Qui la fix NON c'e'. Va riapplicata a mano sopra l'adattamento, non copiata.",
+      "reason": "Utility del crawler eventi. L'adattamento reale e' uno solo — `REPO_ROOT` a `../../..` per lo stesso spostamento di cartella di `evergreen-article-refresh.mjs` — ed e' cio' che rende il file NON riallineabile con una copia. RIALLINEATO 2026-08-31 (issue #681): il parametro `deadline` di `enrichEventsWithLocaleFallbackTranslations` (aggiunto sul sito il 2026-08-03, 809abec2 — cappa il wall clock dello stadio di traduzione, la cui assenza aveva cancellato `crawl-events` ogni giorno dal 2026-07-07) e' stato riapplicato a mano sopra l'adattamento. Questo repo non ha pero' un caller di questa funzione (i crawler restano sul sito; qui si consuma solo il dataset assemblato via HTTP, vedi `refresh-events-digest.yml`), quindi il fix e' inerte finche' resta cosi' — portato comunque perche' e' un modulo condiviso e la divergenza era esplicitamente segnalata qui nel manifest. NON portata in questo giro: la pipeline di mirroring immagini che il sito ha aggiunto dopo l'allineamento precedente (commit 8bb8d125/c32b196a/f3d28485, 2026-08-20 — re-encode WebP via `sharp`, manifest `data/events-image-manifest.json`, rimozione delle immagini committate) — feature autonoma e sostanziosa, non il gap puntuale che questa entry segnalava; resta da valutare come item a se'.",
       "baseline": {
-        "site": "17534dd263c33453",
-        "corpus": "69fc810377df367c",
-        "alignedAt": "2026-08-09"
+        "site": "5512b80cc11441e6",
+        "corpus": "6eee90cba1cfb20c",
+        "alignedAt": "2026-08-31"
       }
     },
     {
