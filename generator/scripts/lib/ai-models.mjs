@@ -3060,19 +3060,23 @@ export async function flushScoresBeforeExit(timeoutMs = EXIT_FLUSH_TIMEOUT_MS) {
   if (!_firestoreDb || (_dirtyModels.size === 0 && !_persistTimer)) return true;
   let timer = null;
   const pending = _dirtyModels.size;
+  const startedAt = Date.now();
   try {
     const timeout = new Promise((resolve) => {
       timer = setTimeout(() => resolve('timeout'), timeoutMs);
       // NOT unref'd: this promise races a write we are deliberately waiting for.
     });
     const outcome = await Promise.race([flushScores().then(() => 'flushed'), timeout]);
+    const elapsedMs = Date.now() - startedAt;
     if (outcome === 'timeout') {
-      console.warn(`⚠️  [ScoreStore] Final flush timed out after ${timeoutMs}ms — ${pending} model(s) not persisted`);
+      console.log(`::warning::[ScoreStore] Final flush timed out after ${timeoutMs}ms (elapsed ${elapsedMs}ms) — ${pending} model(s) not persisted`);
       return false;
     }
+    console.log(`☁️  [ScoreStore] Final flush landed in ${elapsedMs}ms — ${pending} model(s) persisted`);
     return true;
   } catch (err) {
-    console.warn(`⚠️  [ScoreStore] Final flush failed: ${err?.message || err}`);
+    const elapsedMs = Date.now() - startedAt;
+    console.log(`::warning::[ScoreStore] Final flush failed after ${elapsedMs}ms: ${err?.message || err}`);
     return false;
   } finally {
     if (timer) clearTimeout(timer);
