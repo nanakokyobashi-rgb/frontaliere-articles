@@ -1,6 +1,6 @@
 {
   "crawlerKey": "bls",
-  "assembledAt": "2026-08-30T15:12:07.882Z",
+  "assembledAt": "2026-08-31T00:10:35.051Z",
   "jobs": [
     {
       "id": "bls-d2841b891ec3",
@@ -33,7 +33,7 @@
       "url": "https://jobs.bls.ch/offene-stellen/teamleiter-inwerkstatt/018ea1ac-f126-44b0-ae9f-d19992805f0e",
       "source": "BLS AG Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T15:11:55.425Z",
+      "crawledAt": "2026-08-31T00:10:23.002Z",
       "addressLocality": "Bönigen",
       "addressCountry": "CH",
       "country": "CH",
@@ -127,7 +127,7 @@
       "url": "https://jobs.bls.ch/offene-stellen/fachperson-beschriftung-und-grafik/dba4554d-b4c7-4b34-9dbe-5172c585b85b",
       "source": "BLS AG Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T15:11:54.561Z",
+      "crawledAt": "2026-08-31T00:10:22.202Z",
       "addressLocality": "Bönigen",
       "addressCountry": "CH",
       "country": "CH",
@@ -226,7 +226,7 @@
       "url": "https://jobs.bls.ch/offene-stellen/metallbauer-in-nautiker-in-thun/e010111f-5205-4020-9688-81bf2100eb0f",
       "source": "BLS AG Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T15:11:53.826Z",
+      "crawledAt": "2026-08-31T00:10:21.479Z",
       "addressLocality": "Bern",
       "addressCountry": "CH",
       "country": "CH",
@@ -323,7 +323,7 @@
       "url": "https://jobs.bls.ch/offene-stellen/metallbauer-in-nautiker-in-interlaken/149bbf4e-e1e4-437b-b72f-fbcc4472d71b",
       "source": "BLS AG Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T15:11:53.156Z",
+      "crawledAt": "2026-08-31T00:10:20.812Z",
       "addressLocality": "Interlaken",
       "addressCountry": "CH",
       "country": "CH",
@@ -419,7 +419,7 @@
       "url": "https://jobs.bls.ch/offene-stellen/servicetechniker-in-lueftung-und-klima/329f7c5f-e5f5-4897-8927-e1b7d9129ca4",
       "source": "BLS AG Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T15:11:48.266Z",
+      "crawledAt": "2026-08-31T00:10:20.141Z",
       "addressLocality": "Bern",
       "addressCountry": "CH",
       "country": "CH",
@@ -532,7 +532,7 @@
       "url": "https://jobs.bls.ch/offene-stellen/teilprojektleiter-in-projektmanagement-office-pmo/787cdb61-7897-4e58-8cf3-6e0e075a8941",
       "source": "BLS AG Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T15:11:42.760Z",
+      "crawledAt": "2026-08-31T00:10:17.163Z",
       "addressLocality": "Bern",
       "addressCountry": "CH",
       "country": "CH",
@@ -614,7 +614,7 @@
       "url": "https://jobs.bls.ch/offene-stellen/fachperson-reinigung-und-unterhalt/0d050a3c-138c-4ac3-af9e-acd4b632f1cf",
       "source": "BLS AG Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T15:11:38.661Z",
+      "crawledAt": "2026-08-31T00:10:11.522Z",
       "addressLocality": "Spiez",
       "addressCountry": "CH",
       "country": "CH",
@@ -774,7 +774,8 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "BE"
+      "addressRegion": "BE",
+      "crawlerMissStreak": 2
     },
     {
       "id": "bls-a5ea3ca62454",
@@ -807,7 +808,7 @@
       "url": "https://jobs.bls.ch/offene-stellen/fachperson-fahrmotoren/2c363dd2-257a-43f6-a3fb-5c8eac9165dc",
       "source": "BLS AG Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T15:11:37.325Z",
+      "crawledAt": "2026-08-31T00:10:05.276Z",
       "addressLocality": "Bönigen",
       "addressCountry": "CH",
       "country": "CH",
@@ -886,7 +887,7 @@
       "url": "https://jobs.bls.ch/offene-stellen/fachperson-mechanik/6544762b-6ae7-4752-a69c-b22a7026984a",
       "source": "BLS AG Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T15:11:36.546Z",
+      "crawledAt": "2026-08-31T00:10:04.341Z",
       "addressLocality": "Bönigen",
       "addressCountry": "CH",
       "country": "CH",
@@ -964,7 +965,7 @@
       "url": "https://jobs.bls.ch/offene-stellen/flottenmanager-in-bahnproduktion/e7518e76-0b9a-449b-b63f-fcdb8e28e128",
       "source": "BLS AG Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T15:11:35.770Z",
+      "crawledAt": "2026-08-31T00:10:03.522Z",
       "addressLocality": "Bern",
       "addressCountry": "CH",
       "country": "CH",
@@ -1060,7 +1061,7 @@
       "url": "https://jobs.bls.ch/offene-stellen/fahrzeugbereitsteller-in/a8bc0154-aea7-4676-8a48-44f8fdb1ba88",
       "source": "BLS AG Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T15:11:35.084Z",
+      "crawledAt": "2026-08-31T00:10:02.841Z",
       "addressLocality": "Spiez",
       "addressCountry": "CH",
       "country": "CH",
@@ -1114,7 +1115,7 @@
         }
       },
       "addressRegion": "BE",
-      "firstSeenAt": "2026-08-30T15:11:35.084Z"
+      "firstSeenAt": "2026-08-31T00:10:02.841Z"
     },
     {
       "id": "bls-f186869c46de",
@@ -1147,7 +1148,7 @@
       "url": "https://jobs.bls.ch/offene-stellen/fahrleitungsmonteur-in/125b4d58-28f5-4ccb-9977-c0157cf1f103",
       "source": "BLS AG Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T15:11:34.313Z",
+      "crawledAt": "2026-08-31T00:10:02.034Z",
       "addressLocality": "Bern",
       "addressCountry": "CH",
       "country": "CH",
@@ -1235,7 +1236,7 @@
       "url": "https://jobs.bls.ch/offene-stellen/automechatroniker-in-lastwagenmechaniker-in-automatiker-in/99858068-a3fb-41fb-aa2f-dbd64dae6eb0",
       "source": "BLS AG Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T15:11:33.524Z",
+      "crawledAt": "2026-08-31T00:10:01.184Z",
       "addressLocality": "Givisiez",
       "addressCountry": "CH",
       "country": "CH",
@@ -1281,7 +1282,7 @@
         }
       },
       "addressRegion": "FR",
-      "firstSeenAt": "2026-08-30T15:11:33.524Z"
+      "firstSeenAt": "2026-08-31T00:10:01.184Z"
     },
     {
       "id": "bls-c3cfa561d03b",
@@ -1314,7 +1315,7 @@
       "url": "https://jobs.bls.ch/offene-stellen/instandhalter-in-schienenfahrzeuge/d31bf417-0bf5-4aff-be08-d38c97a45489",
       "source": "BLS AG Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T15:11:32.717Z",
+      "crawledAt": "2026-08-31T00:10:00.320Z",
       "addressLocality": "Givisiez",
       "addressCountry": "CH",
       "country": "CH",
@@ -1368,7 +1369,7 @@
         }
       },
       "addressRegion": "FR",
-      "firstSeenAt": "2026-08-30T15:11:32.717Z"
+      "firstSeenAt": "2026-08-31T00:10:00.320Z"
     }
   ]
 }
