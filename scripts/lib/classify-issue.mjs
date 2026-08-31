@@ -93,6 +93,17 @@ export function classifyIssue(title = '', labels = []) {
     category = 'backlog';
   }
 
+  // `needs-human` è ASSORBENTE (ISSUES.md: "L'UNICA porta di rientro dallo
+  // stato `needs-human`" è `needs-human-sweep.yml`, che la rimuove
+  // esplicitamente prima di riaccodare). Se il triage instrada comunque
+  // un'issue che la porta già, quella porta viene bypassata e il ciclo
+  // normale brucia un run del fixer su qualcosa che uno sweep settimanale ha
+  // già giudicato non risolvibile in automatico — osservato su #649: il
+  // digest dello sweep stesso, creato con `needs-human`, è stato accodato ed
+  // è entrato in `agent:fix` nello stesso giorno. Non tocca `category`
+  // (resta visibile per telemetria), solo il route — come `crawler-transient`.
+  const needsHuman = has('needs-human');
+
   // Come sul sito: nessuna categoria è human-only. Le safety-valve del fixer
   // (root-cause non determinabile, capability-guard su workflows/secret) sono
   // generiche e restano — non sono guardrail di categoria.
@@ -107,7 +118,11 @@ export function classifyIssue(title = '', labels = []) {
   // fin dalla nascita) è finita in coda ed è stata promossa al fixer. Il guard
   // vive qui, sorgente unica per entrambi i percorsi.
   const route =
-    has('backlog') || has('crawler-transient') ? 'none' : category === 'publish' ? 'fix' : 'queue';
+    has('backlog') || has('crawler-transient') || needsHuman
+      ? 'none'
+      : category === 'publish'
+        ? 'fix'
+        : 'queue';
   const fuPrio =
     route === 'queue'
       ? has('priority:high') ||
