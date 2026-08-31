@@ -156,7 +156,7 @@ import {
   MAJOR_BLOCK_WEIGHT_THRESHOLD,
   dropSourceContradictedIssues,
 } from './lib/fact-check-consensus.mjs';
-import { runFactualityGates, formatIssues, formatRemediation, buildSourceContract, FACT_CHECK_CATEGORIES, assertNoFabricatedNormAcronyms } from './lib/article-factuality-gates.mjs';
+import { runFactualityGates, formatIssues, formatRemediation, buildSourceContract, FACT_CHECK_CATEGORIES, assertNoFabricatedNormAcronyms, detectTruncation } from './lib/article-factuality-gates.mjs';
 import { loadDefectMemory, learnedDenylist, learnedSuspects } from './lib/article-defect-memory.mjs';
 import {
   stripCompetitorPromotion,
@@ -9450,6 +9450,50 @@ ${terminologyByLang[targetLang] || ''}`;
         console.error(`  ⚠️  Retry ${field} (${locale}) non ha prodotto una traduzione valida — fallback al valore italiano`);
       } catch (retryErr) {
         console.error(`  ⚠️  Retry ${field} (${locale}) fallito: ${retryErr.message} — fallback al valore italiano`);
+      }
+      data.content[locale][field] = itValue;
+    }
+  }
+
+  // Detect a translated body field cut off mid-sentence (#635, follow-up to
+  // #634: permesso-dimora-b-obvaldo-rinnovo shipped with body1 EN/DE/FR
+  // truncated). The IT source already passed detectTruncation() at
+  // create-article.mjs's Step 3a.0b-bis, BEFORE this translateArticle() call
+  // exists — that gate cannot see a truncation the translation LLM call
+  // introduces on its own (a different call, a different output-cap hit), and
+  // the missing-field loop above only catches a field that came back EMPTY,
+  // not one that came back non-empty but cut off before the final sentence.
+  // Reuse the same detectTruncation() the post-hoc corpus check runs, retry
+  // the field once, and only fall back to the Italian value (same last-resort
+  // philosophy as the missing-field retry above) if the retry is still
+  // truncated.
+  for (const locale of ['en', 'de', 'fr']) {
+    const langName = locale === 'en' ? 'inglese' : locale === 'de' ? 'tedesco' : 'francese';
+    for (const field of ['body1', 'body2', 'body3']) {
+      const text = data.content[locale]?.[field];
+      if (!text) continue;
+      const isTruncated = detectTruncation(text, { label: `${locale}/${field}` })
+        .some((i) => i.severity === 'critical');
+      if (!isTruncated) continue;
+      const itValue = itContent[field];
+      console.error(`  ⚠️  Traduzione ${field} (${locale}) troncata — retry traduzione mirata...`);
+      try {
+        const parsed = await callWithRetry(
+          `Traduci OBBLIGATORIAMENTE in ${langName} il seguente campo per il sito Frontaliere Ticino. `
+          + `La traduzione deve essere COMPLETA fino all'ultima frase: non troncare, non interrompere a metà periodo. `
+          + `Rispondi SOLO con JSON (no markdown):\n\nCAMPO ITALIANO (${field}):\n${itValue}\n\nFormato risposta: {"${field}": "..."}`,
+          Math.max(5000, Math.ceil(countWords(itValue || '') * 5)),
+          `${locale}:${field}-truncation-retry`,
+        );
+        const retried = translatedStringOrNull(parsed?.[field]);
+        if (retried && !detectTruncation(retried, { label: `${locale}/${field}` }).some((i) => i.severity === 'critical')) {
+          data.content[locale][field] = sanitizeBodyText(retried);
+          console.error(`  ✅ ${field} (${locale}) ritradotto con successo dopo troncamento`);
+          continue;
+        }
+        console.error(`  ⚠️  Retry ${field} (${locale}) ancora troncato — fallback al valore italiano`);
+      } catch (retryErr) {
+        console.error(`  ⚠️  Retry troncamento ${field} (${locale}) fallito: ${retryErr.message} — fallback al valore italiano`);
       }
       data.content[locale][field] = itValue;
     }
