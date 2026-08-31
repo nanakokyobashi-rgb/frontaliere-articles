@@ -1,6 +1,6 @@
 {
   "crawlerKey": "okjob",
-  "assembledAt": "2026-08-30T15:03:20.579Z",
+  "assembledAt": "2026-08-30T23:52:40.103Z",
   "jobs": [
     {
       "id": "okjob-3661dd3cf3ef",
@@ -249,6 +249,205 @@
       },
       "addressRegion": "TI",
       "firstSeenAt": "2026-08-29T03:34:39.160Z"
+    },
+    {
+      "id": "okjob-42d349e614ed",
+      "slug": "30-08-2026-41800-bale-fixe-assistent-in-gesundheit-e-soziales-ags-100-ok-job-sa-succursale-di-mendrisio-lugano",
+      "slugByLocale": {
+        "de": "30-08-2026-41800-bale-fixe-assistent-in-gesundheit-und-soziales-ags-100-okjob-ch",
+        "it": "30-08-2026-41800-bale-fixe-assistent-in-gesundheit-e-soziales-ags-100-ok-job-sa-succursale-di-mendrisio-lugano",
+        "en": "30-08-2026-41800-bale-fixe-assistent-in-gesundheit-und-soziales-ags-100-okjob-ch",
+        "fr": "30-08-2026-41800-bale-fixe-assistent-in-gesundheit-und-soziales-ags-100-okjob-ch"
+      },
+      "company": "OK Job SA, succursale di Mendrisio",
+      "companyKey": "okjob",
+      "companyDomain": "okjob.ch",
+      "title": "30.08.2026 / 41800 Bâle / Fixe Assistent*in Gesundheit und Soziales AGS, 100%",
+      "titleByLocale": {
+        "de": "30.08.2026 / 41800 Bâle / Fixe Assistent*in Gesundheit und Soziales AGS, 100%",
+        "it": "30.08.2026 / 41800 Bâle / Fixe Assistent*in Gesundheit e Soziales AGS, 100%",
+        "en": "30.08.2026 / 41800 Bâle / Fixe Assistent*in Gesundheit und Soziales AGS, 100%",
+        "fr": "30.08.2026 / 41800 Bâle / Fixe Assistent*in Gesundheit und Soziales AGS, 100%"
+      },
+      "description": "30.08.2026 / 41800 Bâle / Fixe Assistent*in Gesundheit und Soziales AGS, 100% — OK Job SA, succursale di Mendrisio",
+      "descriptionByLocale": {
+        "de": "30.08.2026 / 41800 Bâle / Fixe Assistent*in Gesundheit und Soziales AGS, 100% — OK Job SA, succursale di Mendrisio"
+      },
+      "location": "Lugano",
+      "canton": "TI",
+      "url": "https://www.okjob.ch/de/jobangebote/assistentin-gesundheit-und-soziales-ags-100-basel/?ref=41800",
+      "source": "OK Job SA, succursale di Mendrisio Dedicated Parser",
+      "sourceLang": "de",
+      "crawledAt": "2026-08-30T23:52:25.199Z",
+      "addressLocality": "Lugano",
+      "addressCountry": "CH",
+      "country": "CH",
+      "category": "Altro",
+      "contract": "full-time",
+      "employmentType": "OTHER",
+      "experienceLevel": "mid",
+      "sector": "Altro",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-30",
+      "applyUrl": "https://www.okjob.ch/de/jobangebote/assistentin-gesundheit-und-soziales-ags-100-basel/?ref=41800",
+      "requirements": [],
+      "requirementsByLocale": {
+        "de": []
+      },
+      "needsRetranslation": true,
+      "previousSlugsByLocale": {
+        "it": [
+          "30-08-2026-41800-bale-fixe-assistent-in-gesundheit-und-soziales-ags-100-okjob-ch"
+        ]
+      },
+      "previousSlugs": [
+        "30-08-2026-41800-bale-fixe-assistent-in-gesundheit-und-soziales-ags-100-okjob-ch"
+      ],
+      "salaryMin": 49500,
+      "salaryMax": 75000,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 49500,
+          "maxValue": 75000,
+          "unitText": "YEAR"
+        }
+      },
+      "addressRegion": "TI",
+      "firstSeenAt": "2026-08-30T23:52:25.199Z"
+    },
+    {
+      "id": "okjob-ae78d27f1980",
+      "slug": "30-08-2026-41777-berne-temporaire-elektroinstallateur-in-efz-100-m-w-d-okjob-ch",
+      "slugByLocale": {
+        "it": "30-08-2026-41777-berne-temporaire-elektroinstallateur-in-efz-100-m-w-d-okjob-ch",
+        "en": "30-08-2026-41777-berne-temporaire-elektroinstallateur-in-efz-100-m-w-d-ok-job-sa-succursale-di-mendrisio-lugano",
+        "de": "30-08-2026-41777-berne-temporaire-elektroinstallateur-in-efz-100-m-w-d-ok-job-sa-succursale-di-mendrisio-lugano",
+        "fr": "30-08-2026-41777-berne-temporaire-elektroinstallateur-in-efz-100-m-w-d-ok-job-sa-succursale-di-mendrisio-lugano"
+      },
+      "company": "OK Job SA, succursale di Mendrisio",
+      "companyKey": "okjob",
+      "companyDomain": "okjob.ch",
+      "title": "30.08.2026 / 41777 Berne / Temporaire Elektroinstallateur*in EFZ 100% (m/w/d)",
+      "titleByLocale": {
+        "it": "30.08.2026 / 41777 Berne / Temporaire Installatore/trice elettrico/a*in CFC 100% (m/w/d)",
+        "de": "30.08.2026 / 41777 Berne / Temporaire Elektroinstallateur*in EFZ 100% (m/w/d)",
+        "en": "30.08.2026 / 41777 Berne / Temporaire Elektroinstallateur*in EFZ 100% (m/w/d)",
+        "fr": "30.08.2026 / 41777 Berne / Temporaire Elektroinstallateur*in EFZ 100% (m/w/d)"
+      },
+      "description": "30.08.2026 / 41777 Berne / Temporaire Elektroinstallateur*in EFZ 100% (m/w/d) — OK Job SA, succursale di Mendrisio",
+      "descriptionByLocale": {
+        "it": "30.08.2026 / 41777 Berne / Temporaire Elektroinstallateur*in EFZ 100% (m/w/d) — OK Job SA, succursale di Mendrisio"
+      },
+      "location": "Lugano",
+      "canton": "TI",
+      "url": "https://www.okjob.ch/de/jobangebote/elektroinstallateurin-efz-100-m-w-d-bern/?ref=41777",
+      "source": "OK Job SA, succursale di Mendrisio Dedicated Parser",
+      "sourceLang": "it",
+      "crawledAt": "2026-08-30T23:52:24.293Z",
+      "addressLocality": "Lugano",
+      "addressCountry": "CH",
+      "country": "CH",
+      "category": "Tecnica",
+      "contract": "full-time",
+      "employmentType": "OTHER",
+      "experienceLevel": "mid",
+      "sector": "Altro",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-30",
+      "applyUrl": "https://www.okjob.ch/de/jobangebote/elektroinstallateurin-efz-100-m-w-d-bern/?ref=41777",
+      "requirements": [],
+      "requirementsByLocale": {
+        "it": []
+      },
+      "needsRetranslation": true,
+      "salaryMin": 58000,
+      "salaryMax": 88000,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 58000,
+          "maxValue": 88000,
+          "unitText": "YEAR"
+        }
+      },
+      "addressRegion": "TI",
+      "firstSeenAt": "2026-08-30T23:52:24.293Z"
+    },
+    {
+      "id": "okjob-c0c11a8b66bb",
+      "slug": "30-08-2026-41774-berne-temporaire-montage-elektriker-in-cfc-m-w-d-ok-job-sa-succursale-di-mendrisio-lugano",
+      "slugByLocale": {
+        "de": "30-08-2026-41774-berne-temporaire-montage-elektriker-in-efz-m-w-d-okjob-ch",
+        "it": "30-08-2026-41774-berne-temporaire-montage-elektriker-in-cfc-m-w-d-ok-job-sa-succursale-di-mendrisio-lugano",
+        "en": "30-08-2026-41774-berne-temporaire-montage-elektriker-in-efz-m-w-d-okjob-ch",
+        "fr": "30-08-2026-41774-berne-temporaire-montage-elektriker-in-efz-m-w-d-okjob-ch"
+      },
+      "company": "OK Job SA, succursale di Mendrisio",
+      "companyKey": "okjob",
+      "companyDomain": "okjob.ch",
+      "title": "30.08.2026 / 41774 Berne / Temporaire Montage-Elektriker*in EFZ (m/w/d)",
+      "titleByLocale": {
+        "de": "30.08.2026 / 41774 Berne / Temporaire Montage-Elektriker*in EFZ (m/w/d)",
+        "it": "30.08.2026 / 41774 Berne / Temporaire Montage-Elektriker*in CFC (m/w/d)",
+        "en": "30.08.2026 / 41774 Berne / Temporaire Montage-Elektriker*in EFZ (m/w/d)",
+        "fr": "30.08.2026 / 41774 Berne / Temporaire Montage-Elektriker*in EFZ (m/w/d)"
+      },
+      "description": "30.08.2026 / 41774 Berne / Temporaire Montage-Elektriker*in EFZ (m/w/d) — OK Job SA, succursale di Mendrisio",
+      "descriptionByLocale": {
+        "de": "30.08.2026 / 41774 Berne / Temporaire Montage-Elektriker*in EFZ (m/w/d) — OK Job SA, succursale di Mendrisio"
+      },
+      "location": "Lugano",
+      "canton": "TI",
+      "url": "https://www.okjob.ch/de/jobangebote/montage-elektrikerin-efz-m-w-d-bern/?ref=41774",
+      "source": "OK Job SA, succursale di Mendrisio Dedicated Parser",
+      "sourceLang": "de",
+      "crawledAt": "2026-08-30T23:52:23.990Z",
+      "addressLocality": "Lugano",
+      "addressCountry": "CH",
+      "country": "CH",
+      "category": "Tecnica",
+      "contract": "full-time",
+      "employmentType": "OTHER",
+      "experienceLevel": "mid",
+      "sector": "Altro",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-30",
+      "applyUrl": "https://www.okjob.ch/de/jobangebote/montage-elektrikerin-efz-m-w-d-bern/?ref=41774",
+      "requirements": [],
+      "requirementsByLocale": {
+        "de": []
+      },
+      "needsRetranslation": true,
+      "previousSlugsByLocale": {
+        "it": [
+          "30-08-2026-41774-berne-temporaire-montage-elektriker-in-efz-m-w-d-okjob-ch"
+        ]
+      },
+      "previousSlugs": [
+        "30-08-2026-41774-berne-temporaire-montage-elektriker-in-efz-m-w-d-okjob-ch"
+      ],
+      "salaryMin": 58000,
+      "salaryMax": 88000,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 58000,
+          "maxValue": 88000,
+          "unitText": "YEAR"
+        }
+      },
+      "addressRegion": "TI",
+      "firstSeenAt": "2026-08-30T23:52:23.990Z"
     }
   ]
 }
