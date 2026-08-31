@@ -73,13 +73,39 @@
  */
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
+import { createHash } from 'node:crypto';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
+const ROOT = process.env.LOOP_REFERENCES_ROOT
+  ? path.resolve(process.env.LOOP_REFERENCES_ROOT)
+  : path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const SCRIPT_DIRS = ['scripts/ci', 'scripts/ci/lib', 'scripts/lib'];
 const WORKFLOW_DIR = '.github/workflows';
+const CRAWLER_CONTRACT_PATH = 'generator/data/crawler-cross-repo-contract.json';
+const crawlerContractAbsolute = path.join(ROOT, CRAWLER_CONTRACT_PATH);
+const CRAWLER_CONTRACT = fs.existsSync(crawlerContractAbsolute)
+  ? JSON.parse(fs.readFileSync(crawlerContractAbsolute, 'utf8'))
+  : null;
+const EXPECTED_CRAWLER_ARTIFACTS = [
+  ...Array.from({ length: 23 }, (_, index) => `crawler-group-${String(index + 1).padStart(2, '0')}.yml`),
+  'translate-pending.yml',
+];
+const CRAWLER_ARTIFACT_RELS = new Set(
+  (CRAWLER_CONTRACT?.artifacts ?? []).map((artifact) => `${WORKFLOW_DIR}/${artifact.file}`),
+);
+const CRAWLER_SITE_RUNTIME_PATHS = new Set(CRAWLER_CONTRACT?.siteRuntimePaths ?? []);
+
+function sha256(text) {
+  return createHash('sha256').update(text).digest('hex');
+}
+
+function isContractBoundSiteRuntimeCitation(citation) {
+  if (!CRAWLER_CONTRACT || !CRAWLER_ARTIFACT_RELS.has(citation.from)) return false;
+  if (CRAWLER_SITE_RUNTIME_PATHS.has(citation.token)) return true;
+  return citation.token === `.github/corpus-workflows/${path.basename(citation.from)}`;
+}
 
 /**
  * Estensioni ordinate dalla PIÙ LUNGA alla più corta.
@@ -1273,6 +1299,16 @@ const DECLARED_ABSENT = {
   },
 };
 
+// Prima del rollout, i caller reusable esistenti richiedono le dichiarazioni
+// legacy. Dopo l'arrivo del contract, gli stessi 24 path diventano standalone
+// hashati: le eccezioni generiche devono sparire e valgono solo i runtime path
+// esatti censiti dal contract.
+const ACTIVE_DECLARED_ABSENT = Object.fromEntries(
+  Object.entries(DECLARED_ABSENT).filter(([key]) =>
+    !CRAWLER_CONTRACT || !/^\.github\/workflows\/(?:crawler-group-\d{2}|translate-pending)\.yml :: /.test(key),
+  ),
+);
+
 const KINDS = new Set(['site-only', 'renamed-here', 'example', 'data']);
 const exists = (rel) => fs.existsSync(path.join(ROOT, rel));
 
@@ -1323,7 +1359,8 @@ test('ogni path citato dagli script del ciclo esiste, o la sua assenza è dichia
   const undeclared = [];
   for (const [key, c] of cited) {
     if (exists(c.resolved)) continue;
-    if (DECLARED_ABSENT[key]) continue;
+    if (isContractBoundSiteRuntimeCitation(c)) continue;
+    if (ACTIVE_DECLARED_ABSENT[key]) continue;
     undeclared.push(`${c.from}:${c.line} → ${c.token}${c.token === c.resolved ? '' : ` (cercato in ${c.resolved})`}`);
   }
 
@@ -1342,9 +1379,32 @@ test('ogni path citato dagli script del ciclo esiste, o la sua assenza è dichia
   );
 });
 
+test('con il contract, l eccezione runtime è chiusa sui 24 artifact hashati', {
+  skip: !CRAWLER_CONTRACT && 'contract crawler non ancora trasportato',
+}, () => {
+  const files = CRAWLER_CONTRACT.artifacts.map((artifact) => artifact.file).sort();
+  assert.deepEqual(files, [...EXPECTED_CRAWLER_ARTIFACTS].sort());
+  assert.equal(CRAWLER_ARTIFACT_RELS.size, 24);
+  assert.ok(CRAWLER_SITE_RUNTIME_PATHS.size > 0);
+  for (const artifact of CRAWLER_CONTRACT.artifacts) {
+    const rel = `${WORKFLOW_DIR}/${artifact.file}`;
+    assert.equal(sha256(fs.readFileSync(path.join(ROOT, rel), 'utf8')), artifact.artifactSha256, rel);
+  }
+  const citedRuntimePaths = new Set(
+    [...collectCitations().values()]
+      .filter((citation) => CRAWLER_ARTIFACT_RELS.has(citation.from))
+      .map((citation) => citation.token)
+      .filter((token) => token.startsWith('scripts/')),
+  );
+  assert.deepEqual(
+    [...citedRuntimePaths].sort(),
+    [...CRAWLER_SITE_RUNTIME_PATHS].sort(),
+  );
+});
+
 test('il registro delle assenze dichiarate è ben formato', () => {
   const bad = [];
-  for (const [key, d] of Object.entries(DECLARED_ABSENT)) {
+  for (const [key, d] of Object.entries(ACTIVE_DECLARED_ABSENT)) {
     if (!key.includes(' :: ')) bad.push(`${key}: chiave senza separatore ' :: '`);
     if (!KINDS.has(d.kind)) bad.push(`${key}: kind '${d.kind}' non è uno di ${[...KINDS].join('|')}`);
     // Una ragione di due parole non è una decisione, è un timbro.
@@ -1360,7 +1420,7 @@ test("una dichiarazione 'renamed-here' deve indicare un file che esiste davvero 
   // è una promessa verificabile, e se il corrispettivo locale si sposta questa
   // rompe invece di restare una frase vera solo il giorno in cui fu scritta.
   const broken = [];
-  for (const [key, d] of Object.entries(DECLARED_ABSENT)) {
+  for (const [key, d] of Object.entries(ACTIVE_DECLARED_ABSENT)) {
     if (d.kind !== 'renamed-here') continue;
     if (!exists(d.insteadOf)) broken.push(`${key}: insteadOf '${d.insteadOf}' non esiste`);
   }
@@ -1369,7 +1429,7 @@ test("una dichiarazione 'renamed-here' deve indicare un file che esiste davvero 
 
 test('nessuna dichiarazione stale: se il file dichiarato assente ora esiste, la voce va rimossa', () => {
   const stale = [];
-  for (const key of Object.keys(DECLARED_ABSENT)) {
+  for (const key of Object.keys(ACTIVE_DECLARED_ABSENT)) {
     const token = key.split(' :: ')[1];
     if (!token) continue;
     const target = resolveToken(token);
@@ -1388,7 +1448,7 @@ test('nessuna dichiarazione morta: ogni voce deve corrispondere a una citazione 
   // Senza questo, il registro diventa l'elenco delle scuse di ieri: voci che non
   // proteggono più niente ma continuano a coprire il path se qualcuno lo ricita.
   const cited = collectCitations();
-  const dead = Object.keys(DECLARED_ABSENT).filter((k) => !cited.has(k));
+  const dead = Object.keys(ACTIVE_DECLARED_ABSENT).filter((k) => !cited.has(k));
   assert.deepEqual(
     dead,
     [],
