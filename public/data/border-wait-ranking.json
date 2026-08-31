@@ -1,81 +1,81 @@
 {
-  "updatedAt": "2026-08-17",
+  "updatedAt": "2026-08-31",
   "windowDays": 7,
-  "weekStart": "2026-08-10",
-  "weekEnd": "2026-08-16",
+  "weekStart": "2026-08-24",
+  "weekEnd": "2026-08-30",
   "ranking": [
     {
       "slug": "campione-d-italia-bissone",
       "rank": 1,
-      "avgMinutes": 0.6,
-      "totalSamples": 70,
-      "trend": "better",
-      "deltaMinutes": -0.5
-    },
-    {
-      "slug": "chiasso-centro",
-      "rank": 2,
-      "avgMinutes": 1.7,
-      "totalSamples": 69,
-      "trend": "better",
-      "deltaMinutes": -0.7
+      "avgMinutes": 1,
+      "totalSamples": 58,
+      "trend": "flat",
+      "deltaMinutes": 0.2
     },
     {
       "slug": "chiasso-brogeda",
-      "rank": 3,
-      "avgMinutes": 2,
-      "totalSamples": 69,
-      "trend": "better",
-      "deltaMinutes": -8.2
+      "rank": 2,
+      "avgMinutes": 1.9,
+      "totalSamples": 58,
+      "trend": "worse",
+      "deltaMinutes": 0.5
     },
     {
-      "slug": "san-pietro",
-      "rank": 4,
-      "avgMinutes": 2.3,
-      "totalSamples": 71,
+      "slug": "chiasso-centro",
+      "rank": 3,
+      "avgMinutes": 2,
+      "totalSamples": 58,
       "trend": "flat",
-      "deltaMinutes": -0.4
+      "deltaMinutes": 0.4
+    },
+    {
+      "slug": "chiasso-strada",
+      "rank": 4,
+      "avgMinutes": 2,
+      "totalSamples": 58,
+      "trend": "flat",
+      "deltaMinutes": 0.4
     },
     {
       "slug": "gaggiolo",
       "rank": 5,
-      "avgMinutes": 2.4,
-      "totalSamples": 71,
-      "trend": "better",
-      "deltaMinutes": -2.9
+      "avgMinutes": 4.1,
+      "totalSamples": 58,
+      "trend": "worse",
+      "deltaMinutes": 1.3
     },
     {
-      "slug": "chiasso-strada",
+      "slug": "san-pietro",
       "rank": 6,
-      "avgMinutes": 2.5,
-      "totalSamples": 69,
-      "trend": "better",
-      "deltaMinutes": -8.9
+      "avgMinutes": 4.1,
+      "totalSamples": 58,
+      "trend": "worse",
+      "deltaMinutes": 1.3
     }
   ],
   "funFacts": {
     "bestSlug": "campione-d-italia-bissone",
-    "worstSlug": "chiasso-strada",
-    "deltaMinutesPerCrossing": 1.8,
-    "minutesPerYear": 838,
-    "hoursPerYear": 14,
-    "workingDaysLostPerYear": 0.6
+    "worstSlug": "san-pietro",
+    "deltaMinutesPerCrossing": 3.1,
+    "minutesPerYear": 1428,
+    "hoursPerYear": 23.8,
+    "workingDaysLostPerYear": 1
   },
   "movers": {
-    "improved": [
+    "improved": [],
+    "worsened": [
       {
-        "slug": "chiasso-strada",
-        "deltaMinutes": -8.892164087447801
-      },
-      {
-        "slug": "chiasso-brogeda",
-        "deltaMinutes": -8.174404323262097
+        "slug": "san-pietro",
+        "deltaMinutes": 1.281086729362591
       },
       {
         "slug": "gaggiolo",
-        "deltaMinutes": -2.8541417999522563
+        "deltaMinutes": 1.252638986629134
+      },
+      {
+        "slug": "chiasso-brogeda",
+        "deltaMinutes": 0.5119634060520761
       }
-    ],
-    "worsened": []
+    ]
   }
 }
