@@ -1,20 +1,21 @@
 {
   "key": "oscam",
   "label": "OSCAM",
-  "generatedAt": "2026-08-30T15:10:45.827Z",
+  "generatedAt": "2026-08-31T00:09:10.193Z",
   "total": 3,
   "newCount": 0,
   "updatedCount": 0,
   "removedCount": 0,
   "unchangedCount": 0,
-  "durationMs": 8286,
-  "avgDurationMs": 8286,
+  "durationMs": 7403,
+  "avgDurationMs": 7403,
   "durationHistory": [
     7495,
     8683,
     7193,
     6847,
-    8286
+    8286,
+    7403
   ],
   "newJobs": [],
   "updatedJobs": [],

@@ -1,6 +1,6 @@
 {
   "crawlerKey": "oscam",
-  "assembledAt": "2026-08-30T15:10:45.826Z",
+  "assembledAt": "2026-08-31T00:09:10.192Z",
   "jobs": [
     {
       "title": "Concorso Psicologo/a assistente (100%)",
@@ -18,7 +18,7 @@
       "employmentType": "FULL_TIME",
       "experienceLevel": "ENTRY",
       "source": "oscam-crawler",
-      "postedDate": "2026-08-30",
+      "postedDate": "2026-08-31",
       "titleByLocale": {
         "it": "Concorso Psicologo/a assistente (100%)",
         "en": "Concorso Psicologo/a assistente (100%)",
@@ -60,7 +60,7 @@
       },
       "addressLocality": "Castelrotto",
       "addressRegion": "TI",
-      "firstSeenAt": "2026-08-30T15:10:45.825Z"
+      "firstSeenAt": "2026-08-31T00:09:10.191Z"
     },
     {
       "title": "Concorso generale per medici assistenti 2025-2026",
