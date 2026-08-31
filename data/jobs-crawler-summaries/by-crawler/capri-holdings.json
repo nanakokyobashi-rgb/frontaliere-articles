@@ -1,20 +1,21 @@
 {
   "key": "capri-holdings",
   "label": "Capri Holdings",
-  "generatedAt": "2026-08-30T15:06:51.164Z",
+  "generatedAt": "2026-08-31T00:03:46.442Z",
   "total": 6,
   "newCount": 0,
   "updatedCount": 6,
   "removedCount": 0,
   "unchangedCount": 0,
-  "durationMs": 19198,
-  "avgDurationMs": 19198,
+  "durationMs": 17696,
+  "avgDurationMs": 17696,
   "durationHistory": [
     19566,
     19546,
     17497,
     15826,
-    19198
+    19198,
+    17696
   ],
   "newJobs": [],
   "updatedJobs": [
