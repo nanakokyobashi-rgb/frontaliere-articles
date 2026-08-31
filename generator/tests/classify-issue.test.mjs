@@ -115,6 +115,27 @@ test('un titolo publish SENZA backlog resta route fix (il guard non si allarga d
   assert.equal(r.route, 'fix');
 });
 
+test('needs-human non instrada mai: e\' assorbente, solo needs-human-sweep.yml la rimuove (#649)', () => {
+  // Il digest stesso dello sweep settimanale nasce con `needs-human` +
+  // `agent:no-age-out`: se il triage lo instrada comunque, la porta unica di
+  // rientro (lo sweep) viene bypassata e il ciclo normale promuove al fixer
+  // un tracker che "non ha una causa singola da riparare". Osservato su #649.
+  const r = classifyIssue('🧭 Decisioni del proprietario — digest', ['needs-human', 'automation', 'agent:no-age-out']);
+  assert.equal(r.route, 'none');
+  assert.equal(r.fuPrio, null);
+});
+
+test('needs-human vince anche su publish (nessuna label salta il guard)', () => {
+  const r = classifyIssue('Workflow Failure: Publish article data API', ['needs-human']);
+  assert.equal(r.route, 'none');
+});
+
+test('needs-human non cambia la category (resta visibile per telemetria, solo il route cambia)', () => {
+  const r = classifyIssue('Workflow Failure: engine lockstep drift', ['needs-human']);
+  assert.equal(r.category, 'engine');
+  assert.equal(r.route, 'none');
+});
+
 test('la CLI emette JSON con la forma attesa dallo YAML del triage', async () => {
   // Lo YAML fa `node -e "JSON.parse(...).category"`: se la forma cambia, il
   // triage legge undefined e non instrada nulla, in silenzio.
