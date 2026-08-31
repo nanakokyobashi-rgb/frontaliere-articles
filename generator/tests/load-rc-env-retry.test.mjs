@@ -151,3 +151,23 @@ test('fetchTemplateViaRest legge il body e passa la reason al classificatore pri
   assert.match(fnBody, /extractGoogleErrorReason\(bodyText\)/, 'un 403 deve leggere il body per estrarre la reason, non fermarsi allo status');
   assert.match(fnBody, /isRetryableRcFetchStatus\(rcRes\.status,\s*reason\)/, 'la reason estratta deve raggiungere il classificatore');
 });
+
+// refresh-daily-brief-data.mjs chiama lo stesso `isRetryableRcFetchStatus`
+// contro l'API REST di Firestore (stessa infra Google, stesso classificatore
+// condiviso) — senza leggere il body, un 403 di quota qui degrada in
+// silenzio il blocco daily-brief invece di riprovare (review PR #683).
+test("fetchJson e getDoc in refresh-daily-brief-data.mjs leggono il body e passano la reason al classificatore", () => {
+  const src = fs.readFileSync(path.join(ROOT, 'scripts/refresh-daily-brief-data.mjs'), 'utf8');
+  const fnBodyFetchJson = src.slice(
+    src.indexOf('async function fetchJson'),
+    src.indexOf('/** List every doc'),
+  );
+  const fnBodyGetDoc = src.slice(
+    src.indexOf('async function getDoc'),
+    src.indexOf('function loadServiceAccountCreds'),
+  );
+  for (const [name, fnBody] of [['fetchJson', fnBodyFetchJson], ['getDoc', fnBodyGetDoc]]) {
+    assert.match(fnBody, /extractGoogleErrorReason\(bodyText\)/, `${name}: un 403 deve leggere il body per estrarre la reason, non fermarsi allo status`);
+    assert.match(fnBody, /isRetryableRcFetchStatus\(res\.status,\s*reason\)/, `${name}: la reason estratta deve raggiungere il classificatore`);
+  }
+});
