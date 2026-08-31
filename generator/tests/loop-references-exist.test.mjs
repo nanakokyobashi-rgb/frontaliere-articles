@@ -1482,9 +1482,15 @@ test('con il contract, l eccezione runtime è chiusa sui 24 artifact e sull obse
       .map((citation) => citation.token)
       .filter((token) => token.startsWith('scripts/')),
   );
+  const expectedCitedRuntimePaths = new Set([
+    ...[...CRAWLER_SITE_RUNTIME_PATHS].filter((token) => token.startsWith('scripts/')),
+    ...CRAWLER_CONTRACT.observers
+      .map((observer) => observer.target)
+      .filter((token) => token.startsWith('scripts/')),
+  ]);
   assert.deepEqual(
     [...citedRuntimePaths].sort(),
-    [...CRAWLER_SITE_RUNTIME_PATHS].sort(),
+    [...expectedCitedRuntimePaths].sort(),
   );
 });
 
