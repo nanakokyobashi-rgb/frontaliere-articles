@@ -1,6 +1,6 @@
 {
   "crawlerKey": "eta-sa-swatch-group",
-  "assembledAt": "2026-08-30T15:43:21.295Z",
+  "assembledAt": "2026-08-30T23:27:23.035Z",
   "jobs": [
     {
       "id": "company-6oyznh",
@@ -20,8 +20,8 @@
       "source": "Company Careers Crawler",
       "companyKey": "eta-sa-swatch-group",
       "companyDomain": "eta.ch",
-      "crawledAt": "2026-08-30T15:43:13.804Z",
-      "firstSeenAt": "2026-08-30T15:43:13.804Z",
+      "crawledAt": "2026-08-30T23:27:15.048Z",
+      "firstSeenAt": "2026-08-30T23:27:15.048Z",
       "slugByLocale": {
         "de": "werkzeugmacher-polymechaniker-in-vor-ort-manufacture-horlogere-suisse-eta-sa-swatch-group-2540-grenchen-phone-6oyznh",
         "fr": "werkzeugmacher-polymechaniker-in-sur-place-eta-sa-swatch-group-2540-grenchen-phone-e62c9f",
