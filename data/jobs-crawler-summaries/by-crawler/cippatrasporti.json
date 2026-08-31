@@ -1,7 +1,7 @@
 {
   "key": "cippatrasporti",
   "label": "Cippà Trasporti SA",
-  "generatedAt": "2026-08-30T14:49:38.672Z",
+  "generatedAt": "2026-08-30T23:29:34.428Z",
   "total": 2,
   "discovered": null,
   "written": 2,
@@ -9,14 +9,15 @@
   "updatedCount": 2,
   "removedCount": 0,
   "unchangedCount": 0,
-  "durationMs": 5367,
-  "avgDurationMs": 5367,
+  "durationMs": 4442,
+  "avgDurationMs": 4442,
   "durationHistory": [
     4336,
     4140,
     5310,
     5516,
-    5367
+    5367,
+    4442
   ],
   "newJobs": [],
   "updatedJobs": [
@@ -32,7 +33,7 @@
       "url": "https://cippatrasporti.altamiraweb.com/annunci-lavoro/Customer-Service-Transport-Specialist-Commerciale-Trasporti-Chiasso-672753984.htm",
       "source": "Cippà Trasporti SA Dedicated Parser",
       "sourceLang": "it",
-      "crawledAt": "2026-08-30T14:49:35.013Z",
+      "crawledAt": "2026-08-30T23:29:31.494Z",
       "addressLocality": "Lugano",
       "addressCountry": "CH",
       "country": "CH",
@@ -67,7 +68,7 @@
       "url": "https://cippatrasporti.altamiraweb.com/annunci-lavoro/Ocean-Freight-Operations-Specialist-FCL-Project-Cargo-Trasporti-Chiasso-662670289.htm",
       "source": "Cippà Trasporti SA Dedicated Parser",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-30T14:49:35.335Z",
+      "crawledAt": "2026-08-30T23:29:31.816Z",
       "addressLocality": "Lugano",
       "addressCountry": "CH",
       "country": "CH",
