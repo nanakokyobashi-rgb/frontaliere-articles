@@ -9499,6 +9499,17 @@ ${terminologyByLang[targetLang] || ''}`;
       } catch (retryErr) {
         console.error(`  ⚠️  Retry troncamento ${field} (${locale}) fallito: ${retryErr.message} — fallback al valore italiano`);
       }
+      // Un fallback IT vuoto/assente non deve sovrascrivere il body tradotto
+      // troncato: perderebbe anche il testo parziale già presente, peggiorando
+      // la superficie pubblicata invece di ripararla (#686). Il ramo
+      // missing-field sopra copre solo il caso "campo assente"; questo loop
+      // parte da un campo già non-vuoto (riga `if (!text) continue;`), quindi
+      // può arrivare qui con `itValue` vuoto senza che nulla l'abbia già
+      // intercettato.
+      if (!itValue) {
+        console.warn(`  ⚠️  ${field} (${locale}) resta troncato: fallback IT vuoto/assente, valore tradotto troncato mantenuto`);
+        continue;
+      }
       data.content[locale][field] = itValue;
     }
   }
