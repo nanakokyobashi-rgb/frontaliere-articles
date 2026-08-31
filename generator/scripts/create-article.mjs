@@ -7709,6 +7709,20 @@ ISTRUZIONI TASSATIVE per questo tentativo:
 - NON reintrodurre lo stesso tipo di invenzione altrove nel testo.`
     : '';
 
+  // Identity refinement (#330 item 2): when validate() rejected the previous
+  // attempt's `id` (or a `slugs` entry) as the echoed prompt placeholder or an
+  // otherwise malformed value, feed the exact rejection + correction note
+  // (identityCorrectionNote(), built where the throw happens in validate())
+  // back into this attempt, mirroring headlineRefinementInstruction/
+  // factCheckRefinementInstruction above. Before this, `err.identityRejected`
+  // was set and never read — the retry regenerated blind and could echo the
+  // same rejected value again.
+  const identityRefinementInstruction = sourceContext?._identityRefinement
+    ? `\n\n⚠️ TENTATIVO PRECEDENTE RIGETTATO — id/slug non validi:
+${sourceContext._identityRefinement}
+Rigenera "id" e "slugs" seguendo ESATTAMENTE lo schema richiesto sopra (valore reale specifico dell'articolo, non il segnaposto), senza ripetere il valore appena rigettato.`
+    : '';
+
   // ── Multi-call generation with automatic model fallback ──
   // Supports model override via sourceContext._forceModel and temperature via sourceContext._temperature
   const forceModel = sourceContext?._forceModel;
@@ -7873,7 +7887,18 @@ Rispondi SOLO con JSON valido, senza markdown.` },
   // consegnare al writer una fonte inutilizzabile.
   const PROMPT_SOURCE_FLOOR_CHARS = 3000;
   const PROMPT_REMEDIATION_CAP_CHARS = 1200;
-  const _remediationFull = headlineRefinementInstruction + factCheckRefinementInstruction;
+  // Identity takes PRIORITY over headline/fact-check remediation rather than
+  // stacking with it. validate() (where an identity rejection is raised) runs
+  // BEFORE the headline and fact-check checks each attempt, so whenever
+  // identity is the reason THIS attempt is retrying, neither of the other two
+  // checks ran this attempt — any headlineRefinementInstruction/
+  // factCheckRefinementInstruction still in state at that point describes an
+  // earlier, already-superseded draft. Sending all three at once would also
+  // risk PROMPT_TOKEN_RAW_CEILING (news-prompt-token-budget.test.mjs pins a
+  // 12-token margin for the headline+fact-check combination alone): a single
+  // relevant note beats three where two are stale.
+  const _remediationFull = identityRefinementInstruction
+    || (headlineRefinementInstruction + factCheckRefinementInstruction);
   const _remediationShort = _clampRemediation(_remediationFull, PROMPT_REMEDIATION_CAP_CHARS);
   const _shrinkLadder = [
     { label: 'intero', sourceBody: truncatedContent, domainFacts: domainFactsBlock, remediation: _remediationFull },
@@ -13844,6 +13869,13 @@ async function generateAndValidateArticle(url, sourceContext = null) {
   // generation so callGemini can feed the exact flagged claims back to the model.
   /** @type {string|null} */
   let lastFactCheckErrors = null;
+  // Carries the previous attempt's id/slug rejection (validate()'s
+  // `identityRejected` throw, #330 item 2) into the next generation, mirroring
+  // lastHeadlineErrors/lastFactCheckErrors above. Was a dead flag before this:
+  // `err.identityRejected` was set and never read, so a retry after an
+  // id/slug rejection regenerated blind instead of being told what to fix.
+  /** @type {string|null} */
+  let lastIdentityErrors = null;
   // Il cap di input piu' permissivo che la flotta ha dichiarato rifiutando il
   // prompt. Zero finche' nessun tentativo l'ha detto; vedi il catch piu' sotto.
   let lastPromptTokenBudget = 0;
@@ -13974,6 +14006,9 @@ async function generateAndValidateArticle(url, sourceContext = null) {
       // Surface the previous attempt's fact-check rejections so callGemini can
       // tell the model exactly which invented claims to remove/correct.
       _factCheckRefinement: lastFactCheckErrors || undefined,
+      // Surface the previous attempt's id/slug rejection so callGemini can
+      // tell the model exactly what was wrong with the value it echoed back.
+      _identityRefinement: lastIdentityErrors || undefined,
       // Il budget che la FLOTTA ha dichiarato al tentativo precedente, non uno
       // che assumiamo noi. Vedi il blocco che lo consuma in callGemini.
       _promptTokenBudget: lastPromptTokenBudget || undefined,
@@ -14116,8 +14151,19 @@ async function generateAndValidateArticle(url, sourceContext = null) {
     // gate at the bottom of this function actually enforces.
     try {
       data = validate(rawData, { minBodyChars: computeAdaptiveMinChars(lengthBudgetSource) });
+      // Validation passed — any earlier id/slug rejection no longer applies to
+      // this draft, so clear it rather than carry it (stale) into a later
+      // retry triggered by an unrelated check further down.
+      lastIdentityErrors = null;
     } catch (validationErr) {
       console.error(`  ⚠️  Validazione fallita: ${validationErr.message}`);
+      // #330 item 2: feed the exact id/slug rejection reason (already includes
+      // identityCorrectionNote()'s guidance, see validate()) into the next
+      // attempt's prompt via genContext._identityRefinement, instead of
+      // regenerating blind and risking the same rejected value again.
+      if (validationErr.identityRejected) {
+        lastIdentityErrors = validationErr.message;
+      }
       if (attempt < maxAttempts) {
         console.error(`  🔄 Rigenero contenuto per errore di validazione (${attempt}/${maxAttempts})...`);
         continue;
@@ -14205,6 +14251,13 @@ async function generateAndValidateArticle(url, sourceContext = null) {
         headlineErr.qualityReject = true;
         throw headlineErr;
       }
+
+      // Headline conforms — clear any earlier rejection so a later retry
+      // triggered by an unrelated check (fact-check, word count) doesn't keep
+      // re-sending refinement text about a problem that is already fixed
+      // (#330 item 2 investigation: this and the two resets below are what
+      // free the token margin identityRefinement needs above).
+      lastHeadlineErrors = null;
 
       // Step 3a.0-titlesync: ensure <title> ↔ <h1> sync.
       //
@@ -14401,6 +14454,9 @@ async function generateAndValidateArticle(url, sourceContext = null) {
         }
         throw gateErr;
       }
+      // Gates passed — clear any earlier fact-check rejection carried from a
+      // previous attempt; see the headline reset above for why.
+      lastFactCheckErrors = null;
     }
 
     // Step 3a.0b-ter: conteggio parole IT — DETERMINISTICO, GRATIS, E PRIMA
@@ -14484,6 +14540,10 @@ async function generateAndValidateArticle(url, sourceContext = null) {
         }
         throw err;
       }
+      // LLM fact-check passed too — clear any earlier rejection (deterministic
+      // gates already do this above; repeated here since this is a distinct
+      // failure source that can set the same field independently).
+      lastFactCheckErrors = null;
       // NOTE: there is deliberately no `if (factResult.unverified)` branch here
       // any more. Since the verifier fails CLOSED (2026-07-28), `unverified`
       // only ever comes back paired with `passed: false`, which the branch above
