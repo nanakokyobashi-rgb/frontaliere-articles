@@ -13,6 +13,24 @@
   "notes": "Dedicated AGIE Charmilles crawler. Parses find-your-future.ch company profile page (Swissmem portal), CH-wide across all 26 cantons (per-job canton inferred from location). AGIE Charmilles SA = GF Machining Solutions (Georg Fischer), national manufacturer. HQ in Losone (TI), Via dei Pioppi 2, 6616; sites in Biel (BE), Langnau (BE), Meyrin (GE). EDM, milling, laser, AM machine tools.",
   "updatedAt": "2026-08-31T00:05:52.221Z",
   "seedMetaByUrl": {
+    "https://www.find-your-future.ch/it/arbeiten-mem-branche/branche-unternehmen/jobdetails/agie-charmilles-sa-polymechaniker/": {
+      "location": "Bienne",
+      "canton": "BE",
+      "company": "AGIE Charmilles SA",
+      "postedDate": "2026-08-31"
+    },
+    "https://www.find-your-future.ch/it/arbeiten-mem-branche/branche-unternehmen/jobdetails/agie-charmilles-sa-polymechaniker-80-100/": {
+      "location": "Biel/Bienne",
+      "canton": "BE",
+      "company": "AGIE Charmilles SA",
+      "postedDate": "2026-08-31"
+    },
+    "https://www.find-your-future.ch/it/arbeiten-mem-branche/branche-unternehmen/jobdetails/agie-charmilles-sa-polymechaniker-wmd-80-100/": {
+      "location": "Biel/Bienne",
+      "canton": "BE",
+      "company": "AGIE Charmilles SA",
+      "postedDate": "2026-08-31"
+    },
     "https://www.find-your-future.ch/it/arbeiten-mem-branche/branche-unternehmen/jobdetails/agie-charmilles-sa-commodity-manager-general-capital-expenses-mfd/": {
       "location": "Biel/Bienne",
       "canton": "BE",
@@ -26,12 +44,6 @@
       "postedDate": "2026-08-31"
     },
     "https://www.find-your-future.ch/it/arbeiten-mem-branche/branche-unternehmen/jobdetails/agie-charmilles-sa-diagnose-engineer/": {
-      "location": "Biel/Bienne",
-      "canton": "BE",
-      "company": "AGIE Charmilles SA",
-      "postedDate": "2026-08-31"
-    },
-    "https://www.find-your-future.ch/it/arbeiten-mem-branche/branche-unternehmen/jobdetails/agie-charmilles-sa-polymechaniker-wmd-80-100/": {
       "location": "Biel/Bienne",
       "canton": "BE",
       "company": "AGIE Charmilles SA",
@@ -61,20 +73,26 @@
       "company": "AGIE Charmilles SA",
       "postedDate": "2026-08-31"
     },
-    "https://www.find-your-future.ch/it/arbeiten-mem-branche/branche-unternehmen/jobdetails/agie-charmilles-sa-polymechaniker/": {
-      "location": "Bienne",
+    "https://www.find-your-future.ch/it/arbeiten-mem-branche/branche-unternehmen/jobdetails/agie-charmilles-sa-payroll-expert-sap/": {
+      "location": "Biel/Bienne",
+      "canton": "BE",
+      "company": "AGIE Charmilles SA",
+      "postedDate": "2026-08-31"
+    },
+    "https://www.find-your-future.ch/it/arbeiten-mem-branche/branche-unternehmen/jobdetails/agie-charmilles-sa-automatiker-werkzeugmaschinen-mwd/": {
+      "location": "Langnau im Emmental",
+      "canton": "BE",
+      "company": "AGIE Charmilles SA",
+      "postedDate": "2026-08-31"
+    },
+    "https://www.find-your-future.ch/it/arbeiten-mem-branche/branche-unternehmen/jobdetails/agie-charmilles-sa-cam-software-engineer/": {
+      "location": "Langnau im Emmental",
       "canton": "BE",
       "company": "AGIE Charmilles SA",
       "postedDate": "2026-08-31"
     },
     "https://www.find-your-future.ch/it/arbeiten-mem-branche/branche-unternehmen/jobdetails/agie-charmilles-sa-operativer-einkaufer-wmd/": {
       "location": "Langnau im Emmental",
-      "canton": "BE",
-      "company": "AGIE Charmilles SA",
-      "postedDate": "2026-08-31"
-    },
-    "https://www.find-your-future.ch/it/arbeiten-mem-branche/branche-unternehmen/jobdetails/agie-charmilles-sa-polymechaniker-80-100/": {
-      "location": "Biel/Bienne",
       "canton": "BE",
       "company": "AGIE Charmilles SA",
       "postedDate": "2026-08-31"
@@ -93,24 +111,6 @@
     },
     "https://www.find-your-future.ch/it/arbeiten-mem-branche/branche-unternehmen/jobdetails/agie-charmilles-sa-automatiker-efz-wmd-80-100/": {
       "location": "Biel/Bienne",
-      "canton": "BE",
-      "company": "AGIE Charmilles SA",
-      "postedDate": "2026-08-31"
-    },
-    "https://www.find-your-future.ch/it/arbeiten-mem-branche/branche-unternehmen/jobdetails/agie-charmilles-sa-payroll-expert-sap/": {
-      "location": "Biel/Bienne",
-      "canton": "BE",
-      "company": "AGIE Charmilles SA",
-      "postedDate": "2026-08-31"
-    },
-    "https://www.find-your-future.ch/it/arbeiten-mem-branche/branche-unternehmen/jobdetails/agie-charmilles-sa-automatiker-werkzeugmaschinen-mwd/": {
-      "location": "Langnau im Emmental",
-      "canton": "BE",
-      "company": "AGIE Charmilles SA",
-      "postedDate": "2026-08-31"
-    },
-    "https://www.find-your-future.ch/it/arbeiten-mem-branche/branche-unternehmen/jobdetails/agie-charmilles-sa-cam-software-engineer/": {
-      "location": "Langnau im Emmental",
       "canton": "BE",
       "company": "AGIE Charmilles SA",
       "postedDate": "2026-08-31"
