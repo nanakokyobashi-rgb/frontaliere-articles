@@ -4416,12 +4416,14 @@
       "previousSlugs": [
         "beratende-arztin-krankentaggeld-a-10-20-helsana-worblaufen-homeoffice",
         "indemnite-de-jour-de-maladie-pour-medecin-consultant-a-10-20-helsana-zurigo",
-        "indennita-giornaliera-di-malattia-a-10-20-helsana-zurigo"
+        "indennita-giornaliera-di-malattia-a-10-20-helsana-zurigo",
+        "beratende-arztin-krankentaggeld-a-10-20-helsana-zurigo"
       ],
       "previousSlugsByLocale": {
         "it": [
           "beratende-arztin-krankentaggeld-a-10-20-helsana-worblaufen-homeoffice",
-          "indennita-giornaliera-di-malattia-a-10-20-helsana-zurigo"
+          "indennita-giornaliera-di-malattia-a-10-20-helsana-zurigo",
+          "beratende-arztin-krankentaggeld-a-10-20-helsana-zurigo"
         ],
         "en": [
           "beratende-arztin-krankentaggeld-a-10-20-helsana-worblaufen-homeoffice"

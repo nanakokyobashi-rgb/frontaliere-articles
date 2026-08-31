@@ -1553,8 +1553,7 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "ZH",
-      "needsRetranslation": false
+      "addressRegion": "ZH"
     },
     {
       "id": "swiss-re-525f4b79d04b",
@@ -15042,12 +15041,17 @@
         "client-compliance-officer-swiss-re-ch",
         "client-compliance-officer-swiss-re-bratislava-sk",
         "client-compliance-officer-12-month-fixed-term-contract-swiss-re-ch",
-        "client-compliance-officer-12-month-fixed-term-contract-swiss-re-bratislava-sk"
+        "client-compliance-officer-12-month-fixed-term-contract-swiss-re-bratislava-sk",
+        "agent-de-conformite-des-clients-swiss-re-bratislava-sk",
+        "responsabile-della-conformita-al-cliente-swiss-re-bratislava-sk",
+        "client-compliance-officer-12-month-fixed-term-contract-swiss-re-zurich"
       ],
       "previousSlugsByLocale": {
         "it": [
           "client-compliance-officer-swiss-re-ch",
-          "client-compliance-officer-12-month-fixed-term-contract-swiss-re-ch"
+          "client-compliance-officer-12-month-fixed-term-contract-swiss-re-ch",
+          "responsabile-della-conformita-al-cliente-swiss-re-bratislava-sk",
+          "client-compliance-officer-12-month-fixed-term-contract-swiss-re-zurich"
         ],
         "fr": [
           "client-compliance-officer-swiss-re-ch",

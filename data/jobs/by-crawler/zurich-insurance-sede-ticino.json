@@ -2852,7 +2852,8 @@
       "previousSlugsByLocale": {
         "it": [
           "it-service-desk-administrator-zurich-insurance-sede-ticino-2026-the-opportunity",
-          "it-service-desk-administrator-zurich-insurance-sede-ticino-2026-the-opportunity-scxy8r"
+          "it-service-desk-administrator-zurich-insurance-sede-ticino-2026-the-opportunity-scxy8r",
+          "it-service-desk-administrator-zurich-insurance-sede-ticino-zurich"
         ],
         "fr": [
           "it-service-desk-administrator-zurich-insurance-sede-ticino-2026-the-opportunity-scxy8r"
@@ -2860,7 +2861,8 @@
       },
       "previousSlugs": [
         "it-service-desk-administrator-zurich-insurance-sede-ticino-2026-the-opportunity",
-        "it-service-desk-administrator-zurich-insurance-sede-ticino-2026-the-opportunity-scxy8r"
+        "it-service-desk-administrator-zurich-insurance-sede-ticino-2026-the-opportunity-scxy8r",
+        "it-service-desk-administrator-zurich-insurance-sede-ticino-zurich"
       ],
       "salaryMin": 91500,
       "salaryMax": 128000,
@@ -12348,18 +12350,25 @@
           "legal-claims-professional-financial-lines-zurich-insurance-sede-ticino-lugano-wbi29c",
           "legal-claims-professional-finanzlinien-zurich-insurance-sede-ticino-lugano",
           "professionnel-des-reclamations-legales-lignes-financieres-zurich-insurance-sede-ticino-lugano",
-          "legal-claims-professional-financial-lines-zurich-insurance-sede-ticino-lugano"
+          "legal-claims-professional-financial-lines-zurich-insurance-sede-ticino-lugano",
+          "sottoscrittore-istituzioni-finanziarie-zurich-insurance-sede-ticino-lugano",
+          "underwriter-financial-institutions-zurich-insurance-sede-ticino-lugano-spl2p7",
+          "underwriter-finanzinstitute-zurich-insurance-sede-ticino-lugano",
+          "souscripteur-institutions-financieres-zurich-insurance-sede-ticino-lugano"
         ],
         "de": [
           "underwriter-financial-lines-zurich-insurance-sede-ticino-lugano-32yg1f",
-          "legal-claims-professional-finanzlinien-zurich-insurance-sede-ticino-lugano"
+          "legal-claims-professional-finanzlinien-zurich-insurance-sede-ticino-lugano",
+          "underwriter-finanzinstitute-zurich-insurance-sede-ticino-lugano"
         ],
         "fr": [
           "underwriter-financial-lines-zurich-insurance-sede-ticino-lugano-32yg1f",
-          "professionnel-des-reclamations-legales-lignes-financieres-zurich-insurance-sede-ticino-lugano"
+          "professionnel-des-reclamations-legales-lignes-financieres-zurich-insurance-sede-ticino-lugano",
+          "souscripteur-institutions-financieres-zurich-insurance-sede-ticino-lugano"
         ],
         "en": [
-          "legal-claims-professional-financial-lines-zurich-insurance-sede-ticino-lugano-wbi29c"
+          "legal-claims-professional-financial-lines-zurich-insurance-sede-ticino-lugano-wbi29c",
+          "underwriter-financial-institutions-zurich-insurance-sede-ticino-lugano-spl2p7"
         ]
       },
       "previousSlugs": [
@@ -12369,7 +12378,11 @@
         "legal-claims-professional-financial-lines-zurich-insurance-sede-ticino-lugano-wbi29c",
         "legal-claims-professional-finanzlinien-zurich-insurance-sede-ticino-lugano",
         "professionnel-des-reclamations-legales-lignes-financieres-zurich-insurance-sede-ticino-lugano",
-        "legal-claims-professional-financial-lines-zurich-insurance-sede-ticino-lugano"
+        "legal-claims-professional-financial-lines-zurich-insurance-sede-ticino-lugano",
+        "sottoscrittore-istituzioni-finanziarie-zurich-insurance-sede-ticino-lugano",
+        "underwriter-financial-institutions-zurich-insurance-sede-ticino-lugano-spl2p7",
+        "underwriter-finanzinstitute-zurich-insurance-sede-ticino-lugano",
+        "souscripteur-institutions-financieres-zurich-insurance-sede-ticino-lugano"
       ],
       "salaryMin": 49500,
       "salaryMax": 75000,
