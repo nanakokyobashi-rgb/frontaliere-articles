@@ -90,9 +90,33 @@ jobs:
   # so a second attempt tends to hit a warm cache (matches the crawler-group-23
   # pilot: repeated cold-cache failures, then a success shortly after for the
   # same SHA).
-  translate_retry:
+  translate_retry_gate:
     needs: translate
     if: always() && needs.translate.result == 'failure'
+    runs-on: ubuntu-latest
+    permissions:
+      actions: read
+      contents: read
+    outputs:
+      before_logic: ${{ steps.classify.outputs.before_logic }}
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          sparse-checkout: |
+            scripts/ci
+          sparse-checkout-cone-mode: false
+      - name: Classify primary failure and back off
+        id: classify
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          node scripts/ci/classify-reusable-dispatch-failure.mjs \
+            --job-prefix "translate" \
+            --wait-seconds 60
+
+  translate_retry:
+    needs: translate_retry_gate
+    if: always() && needs.translate_retry_gate.outputs.before_logic == 'true'
     uses: valerielinc-ops/frontaliere-si-o-no/.github/workflows/translate-pending-logic.yml@main
     with:
       max_jobs: ${{ inputs.max_jobs }}
@@ -114,15 +138,25 @@ jobs:
     if: always() && needs.translate_retry.result == 'failure'
     runs-on: ubuntu-latest
     permissions:
+      actions: read
       contents: read
       issues: write
     steps:
       - uses: actions/checkout@v5
         with:
           sparse-checkout: |
+            scripts/ci
             scripts/lib
           sparse-checkout-cone-mode: false
+      - name: Verify the retry also failed before logic
+        id: classify
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          node scripts/ci/classify-reusable-dispatch-failure.mjs \
+            --job-prefix "translate_retry"
       - name: File/update the dispatch-failure issue
+        if: steps.classify.outputs.before_logic == 'true'
         env:
           GH_TOKEN: ${{ github.token }}
         run: |

@@ -514,6 +514,16 @@
       }
     },
     {
+      "path": "scripts/ci/classify-reusable-dispatch-failure.mjs",
+      "mode": "corpus-only",
+      "reason": "Classifica i fallimenti dei reusable workflow cross-repo prima di autorizzare il retry e prima di aprire l'alert di dispatch. I caller crawler-group-01..23 e translate-pending vivono soltanto nel corpus dopo la migrazione dei minuti Actions; sul sito resta la logica chiamata, non il wrapper che interroga la Jobs API della run corrente.",
+      "baseline": {
+        "site": null,
+        "corpus": "9e43bbfedc90ce4b",
+        "alignedAt": "2026-08-31"
+      }
+    },
+    {
       "path": "scripts/ci/scan-generation-health.mjs",
       "mode": "corpus-only",
       "reason": "Watchdog della pipeline di generazione: apre e richiude issue sulle run che escono `success` senza produrre articoli. Sul sito non esiste e non deve: dal cutover del 2026-08-02 e il corpus a generarlo, e ogni soglia qui e misurata sui dati DI QUESTO repo (215 intervalli fra articoli, 200 run di generate-article.yml, 3.846 articoli del corpus dopo #184). Portarlo la senza rimisurare darebbe un tasso di falsi positivi diverso. Il fratello `scan-failed-runs.mjs` copre la meta opposta (`conclusion == failure`) ed e registrato a parte.",

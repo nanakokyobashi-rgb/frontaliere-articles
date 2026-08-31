@@ -49,9 +49,33 @@ jobs:
       FIREBASE_SERVICE_ACCOUNT_JSON: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}
       CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
 
-  crawler_group_14_retry:
+  crawler_group_14_retry_gate:
     needs: crawler_group_14
     if: always() && needs.crawler_group_14.result == 'failure'
+    runs-on: ubuntu-latest
+    permissions:
+      actions: read
+      contents: read
+    outputs:
+      before_logic: ${{ steps.classify.outputs.before_logic }}
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          sparse-checkout: |
+            scripts/ci
+          sparse-checkout-cone-mode: false
+      - name: Classify primary failure and back off
+        id: classify
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          node scripts/ci/classify-reusable-dispatch-failure.mjs \
+            --job-prefix "crawler_group_14" \
+            --wait-seconds 60
+
+  crawler_group_14_retry:
+    needs: crawler_group_14_retry_gate
+    if: always() && needs.crawler_group_14_retry_gate.outputs.before_logic == 'true'
     uses: valerielinc-ops/frontaliere-si-o-no/.github/workflows/crawler-group-14-logic.yml@main
     with:
       skip_ai_translation: ${{ inputs.skip_ai_translation }}
@@ -71,15 +95,25 @@ jobs:
     if: always() && needs.crawler_group_14_retry.result == 'failure'
     runs-on: ubuntu-latest
     permissions:
+      actions: read
       contents: read
       issues: write
     steps:
       - uses: actions/checkout@v5
         with:
           sparse-checkout: |
+            scripts/ci
             scripts/lib
           sparse-checkout-cone-mode: false
+      - name: Verify the retry also failed before logic
+        id: classify
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          node scripts/ci/classify-reusable-dispatch-failure.mjs \
+            --job-prefix "crawler_group_14_retry"
       - name: File/update the dispatch-failure issue
+        if: steps.classify.outputs.before_logic == 'true'
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
