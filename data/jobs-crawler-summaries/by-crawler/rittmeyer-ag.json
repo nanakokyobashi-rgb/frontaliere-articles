@@ -1,14 +1,14 @@
 {
   "key": "rittmeyer-ag",
   "label": "Rittmeyer AG",
-  "generatedAt": "2026-08-30T23:43:54.852Z",
+  "generatedAt": "2026-08-31T00:08:28.916Z",
   "total": 8,
   "newCount": 0,
   "updatedCount": 8,
   "removedCount": 0,
   "unchangedCount": 0,
-  "durationMs": 11351,
-  "avgDurationMs": 11351,
+  "durationMs": 13758,
+  "avgDurationMs": 13758,
   "durationHistory": [
     9939,
     11726,
@@ -20,7 +20,8 @@
     11484,
     13462,
     13384,
-    11351
+    11351,
+    13758
   ],
   "newJobs": [],
   "updatedJobs": [
@@ -44,7 +45,7 @@
       "sector": "Energia",
       "source": "rittmeyer-dedicated-crawler",
       "sourceLang": "de",
-      "postedDate": "2026-08-30",
+      "postedDate": "2026-08-31",
       "employmentType": "other",
       "contractType": "other",
       "validThrough": "",
@@ -82,7 +83,7 @@
       "sector": "Energia",
       "source": "rittmeyer-dedicated-crawler",
       "sourceLang": "de",
-      "postedDate": "2026-08-30",
+      "postedDate": "2026-08-31",
       "employmentType": "other",
       "contractType": "other",
       "validThrough": "",
@@ -122,7 +123,7 @@
       "sector": "Energia",
       "source": "rittmeyer-dedicated-crawler",
       "sourceLang": "fr",
-      "postedDate": "2026-08-30",
+      "postedDate": "2026-08-31",
       "employmentType": "other",
       "contractType": "other",
       "validThrough": "",
@@ -131,14 +132,14 @@
       "salaryMax": 91500,
       "currency": "CHF",
       "firstSeenAt": "2026-08-12T22:07:29.169Z",
-      "needsRetranslation": true,
       "_qualityScore": 97,
       "_qualityBreakdown": {
         "cleanliness": 25,
         "richness": 22,
         "translation": 25,
         "completeness": 25
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "title": "Technicien de service (a) Région Fribourg, Bulle, Yverdon et environ",
@@ -160,7 +161,7 @@
       "sector": "Energia",
       "source": "rittmeyer-dedicated-crawler",
       "sourceLang": "fr",
-      "postedDate": "2026-08-30",
+      "postedDate": "2026-08-31",
       "employmentType": "other",
       "contractType": "other",
       "validThrough": "",
@@ -169,14 +170,14 @@
       "salaryMax": 106000,
       "currency": "CHF",
       "firstSeenAt": "2026-08-14T10:29:24.869Z",
-      "needsRetranslation": true,
       "_qualityScore": 97,
       "_qualityBreakdown": {
         "cleanliness": 25,
         "richness": 22,
         "translation": 25,
         "completeness": 25
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "title": "Service Techniker (a) Region Winterthur, Wil, St. Gallen",
@@ -198,7 +199,7 @@
       "sector": "Energia",
       "source": "rittmeyer-dedicated-crawler",
       "sourceLang": "de",
-      "postedDate": "2026-08-30",
+      "postedDate": "2026-08-31",
       "employmentType": "other",
       "contractType": "other",
       "validThrough": "",
@@ -235,7 +236,7 @@
       "sector": "Energia",
       "source": "rittmeyer-dedicated-crawler",
       "sourceLang": "de",
-      "postedDate": "2026-08-30",
+      "postedDate": "2026-08-31",
       "employmentType": "full-time",
       "contractType": "full-time",
       "validThrough": "",
@@ -245,14 +246,14 @@
       "currency": "CHF",
       "firstSeenAt": "2026-06-03T00:50:36.287Z",
       "retranslationAttempts": 0,
-      "needsRetranslation": true,
       "_qualityScore": 97,
       "_qualityBreakdown": {
         "cleanliness": 25,
         "richness": 22,
         "translation": 25,
         "completeness": 25
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "title": "Techniker Verkaufsinnendienst (a)",
@@ -274,7 +275,7 @@
       "sector": "Energia",
       "source": "rittmeyer-dedicated-crawler",
       "sourceLang": "de",
-      "postedDate": "2026-08-30",
+      "postedDate": "2026-08-31",
       "employmentType": "full-time",
       "contractType": "full-time",
       "validThrough": "",
@@ -309,7 +310,7 @@
       "sector": "Energia",
       "source": "rittmeyer-dedicated-crawler",
       "sourceLang": "it",
-      "postedDate": "2026-08-30",
+      "postedDate": "2026-08-31",
       "employmentType": "full-time",
       "contractType": "full-time",
       "validThrough": "",
