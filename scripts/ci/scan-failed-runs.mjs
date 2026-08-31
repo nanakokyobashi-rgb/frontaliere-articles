@@ -57,7 +57,7 @@
  */
 
 import { execFileSync } from 'node:child_process';
-import { createGithubIssue } from '../lib/github-issue-creator.mjs';
+import { createGithubIssue, searchSafePrefix } from '../lib/github-issue-creator.mjs';
 
 const ARGV = process.argv.slice(2);
 const flag = (n) => ARGV.includes(n);
@@ -246,10 +246,18 @@ function failedRuns() {
  * `Workflow Failure: <nome>`, cercare il titolo generico guarderebbe la issue
  * sbagliata — e l'anti-doppio-conteggio si spegnerebbe in silenzio proprio
  * sulla classe piu' costosa.
+ *
+ * Il prefisso di ricerca passa da `searchSafePrefix()` (stesso helper condiviso
+ * usato da `findIssueReportingRun` in scan-job-timeouts.mjs), non dal
+ * `title.slice(0, 60)` grezzo: quel taglio puo' spezzare una parola o lasciare
+ * una parentesi sbilanciata, e la ricerca `gh` su una frase cosi' rotta ritorna
+ * zero risultati — la issue canonica esiste ma non si trova, e se ne apre una
+ * doppia.
  */
-function alreadyReported(title, runUrl) {
+export function alreadyReported(title, runUrl) {
+  const titlePrefix = searchSafePrefix(title);
   const raw = gh(
-    ['issue', 'list', '--repo', REPO, '--state', 'open', '--search', title, '--json', 'number,title', '--limit', '10'],
+    ['issue', 'list', '--repo', REPO, '--state', 'open', '--search', `${titlePrefix} in:title`, '--json', 'number,title', '--limit', '10'],
     '[]',
   );
   let issues = [];
@@ -258,7 +266,7 @@ function alreadyReported(title, runUrl) {
   } catch {
     return false;
   }
-  const match = issues.filter((i) => (i.title || '').startsWith(title.slice(0, 60)));
+  const match = issues.filter((i) => (i.title || '').startsWith(titlePrefix));
   for (const i of match) {
     const body = gh(['issue', 'view', String(i.number), '--repo', REPO, '--json', 'body,comments', '--jq', '.body + (.comments | map(.body) | join("\n"))'], '');
     if (body.includes(runUrl)) return true;
