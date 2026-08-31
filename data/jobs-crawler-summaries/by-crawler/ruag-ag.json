@@ -1,20 +1,21 @@
 {
   "key": "ruag-ag",
   "label": "RUAG",
-  "generatedAt": "2026-08-30T15:04:20.245Z",
+  "generatedAt": "2026-08-30T23:47:32.754Z",
   "total": 58,
   "newCount": 0,
   "updatedCount": 0,
   "removedCount": 0,
   "unchangedCount": 60,
-  "durationMs": 88973,
-  "avgDurationMs": 88973,
+  "durationMs": 87249,
+  "avgDurationMs": 87249,
   "durationHistory": [
     71576,
     88573,
     91336,
     74076,
-    88973
+    88973,
+    87249
   ],
   "newJobs": [],
   "updatedJobs": [],
