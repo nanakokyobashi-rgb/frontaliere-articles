@@ -1,6 +1,6 @@
 {
   "crawlerKey": "supsi-dti",
-  "assembledAt": "2026-08-30T14:59:05.188Z",
+  "assembledAt": "2026-08-30T23:57:37.895Z",
   "jobs": [
     {
       "id": "company-l4u54a",
@@ -61,30 +61,9 @@
           "Buone capacità di comunicazione interpersonale.",
           "È richiesta la conoscenza operativa della lingua inglese, parlata e scritta."
         ],
-        "en": [
-          "La frequenza del Master MSE.",
-          "Formazione Bachelor in informatica o ingegneria.",
-          "Interessi di ricerca multidisciplinare nei settori del profilo di formazione in Data Science.",
-          "Solide conoscenze delle metodologie e dei linguaggi di programmazione come C++, Java, Python.",
-          "Buone capacità di comunicazione interpersonale.",
-          "È richiesta la conoscenza operativa della lingua inglese, parlata e scritta."
-        ],
-        "de": [
-          "La frequenza del Master MSE.",
-          "Formazione Bachelor in informatica o ingegneria.",
-          "Interessi di ricerca multidisciplinare nei settori del profilo di formazione in Data Science.",
-          "Solide conoscenze delle metodologie e dei linguaggi di programmazione come C++, Java, Python.",
-          "Buone capacità di comunicazione interpersonale.",
-          "È richiesta la conoscenza operativa della lingua inglese, parlata e scritta."
-        ],
-        "fr": [
-          "La frequenza del Master MSE.",
-          "Formazione Bachelor in informatica o ingegneria.",
-          "Interessi di ricerca multidisciplinare nei settori del profilo di formazione in Data Science.",
-          "Solide conoscenze delle metodologie e dei linguaggi di programmazione come C++, Java, Python.",
-          "Buone capacità di comunicazione interpersonale.",
-          "È richiesta la conoscenza operativa della lingua inglese, parlata e scritta."
-        ]
+        "en": [],
+        "de": [],
+        "fr": []
       },
       "country": "CH",
       "sourceLang": "it",
@@ -107,13 +86,24 @@
         "it": [
           "baccalaureat-en-education-master-mse-en-data-science-supsi-dti-lugano-grado-d",
           "baccalaureat-en-education-master-mse-en-data-science-supsi-dti-manno",
-          "bachelor-assistent-in-data-science-master-mse-supsi-dti-lugano"
+          "bachelor-assistent-in-data-science-master-mse-supsi-dti-lugano",
+          "assistenti-bachelor-in-formazione-master-mse-in-data-science-supsi-dti-lugano"
+        ],
+        "en": [
+          "assistenti-bachelor-in-formazione-master-mse-in-data-science-supsi-dti-lugano"
+        ],
+        "de": [
+          "assistenti-bachelor-in-formazione-master-mse-in-data-science-supsi-dti-lugano"
+        ],
+        "fr": [
+          "assistenti-bachelor-in-formazione-master-mse-in-data-science-supsi-dti-lugano"
         ]
       },
       "previousSlugs": [
         "baccalaureat-en-education-master-mse-en-data-science-supsi-dti-lugano-grado-d",
         "baccalaureat-en-education-master-mse-en-data-science-supsi-dti-manno",
-        "bachelor-assistent-in-data-science-master-mse-supsi-dti-lugano"
+        "bachelor-assistent-in-data-science-master-mse-supsi-dti-lugano",
+        "assistenti-bachelor-in-formazione-master-mse-in-data-science-supsi-dti-lugano"
       ]
     },
     {
@@ -179,36 +169,9 @@
           "della termodinamica e fluidodinamica e della simulazione.",
           "Buona capacità di comunicazione e di presentazione in inglese."
         ],
-        "en": [
-          "La frequenza del corso di Master MSE.",
-          "A dipendenza del settore per cui si invia la propria candidatura, formazione Bachelor in ingegneria: meccanica, dei materiali, aerospaziale, chimica, energetica.",
-          "Interessi di ricerca multidisciplinare e forte background (a dipendenza del settore) nel campo:",
-          "dei materiali ceramici e compositi e della manifattura additiva (stampa 3D);",
-          "dei materiali polimerici e compositi;",
-          "dell’ingegneria meccanica;",
-          "della termodinamica e fluidodinamica e della simulazione.",
-          "Buona capacità di comunicazione e di presentazione in inglese."
-        ],
-        "de": [
-          "La frequenza del corso di Master MSE.",
-          "A dipendenza del settore per cui si invia la propria candidatura, formazione Bachelor in ingegneria: meccanica, dei materiali, aerospaziale, chimica, energetica.",
-          "Interessi di ricerca multidisciplinare e forte background (a dipendenza del settore) nel campo:",
-          "dei materiali ceramici e compositi e della manifattura additiva (stampa 3D);",
-          "dei materiali polimerici e compositi;",
-          "dell’ingegneria meccanica;",
-          "della termodinamica e fluidodinamica e della simulazione.",
-          "Buona capacità di comunicazione e di presentazione in inglese."
-        ],
-        "fr": [
-          "La frequenza del corso di Master MSE.",
-          "A dipendenza del settore per cui si invia la propria candidatura, formazione Bachelor in ingegneria: meccanica, dei materiali, aerospaziale, chimica, energetica.",
-          "Interessi di ricerca multidisciplinare e forte background (a dipendenza del settore) nel campo:",
-          "dei materiali ceramici e compositi e della manifattura additiva (stampa 3D);",
-          "dei materiali polimerici e compositi;",
-          "dell’ingegneria meccanica;",
-          "della termodinamica e fluidodinamica e della simulazione.",
-          "Buona capacità di comunicazione e di presentazione in inglese."
-        ]
+        "en": [],
+        "de": [],
+        "fr": []
       },
       "country": "CH",
       "sourceLang": "it",
@@ -231,9 +194,16 @@
         "it": [
           "assistant-professors-bachelor-in-education-mse-master-in-mechanical-engineering-and-materials-supsi-dti-lugano",
           "bachelor-in-mse-training-in-mechanical-engineering-and-materials-supsi-dti-lugano",
-          "baccalaureat-en-ingenierie-mecanique-et-materiaux-supsi-dti-lugano"
+          "baccalaureat-en-ingenierie-mecanique-et-materiaux-supsi-dti-lugano",
+          "assistenti-bachelor-in-formazione-master-mse-in-mechanical-engineering-and-materials-supsi-dti-lugano"
         ],
         "fr": [
+          "assistenti-bachelor-in-formazione-master-mse-in-mechanical-engineering-and-materials-supsi-dti-lugano"
+        ],
+        "en": [
+          "assistenti-bachelor-in-formazione-master-mse-in-mechanical-engineering-and-materials-supsi-dti-lugano"
+        ],
+        "de": [
           "assistenti-bachelor-in-formazione-master-mse-in-mechanical-engineering-and-materials-supsi-dti-lugano"
         ]
       },
@@ -313,45 +283,9 @@
           "Attitudine al lavoro autonomo, spirito di iniziativa e capacità di operare in contesti di ricerca multidisciplinari.",
           "Ottima conoscenza della lingua inglese e di almeno una lingua nazionale; la conoscenza di una seconda lingua nazionale costituisce titolo preferenziale."
         ],
-        "en": [
-          "Master (MSc o MSE) in Ingegneria, preferibilmente in Ingegneria Industriale, Gestionale o discipline affini.",
-          "Esperienza di ricerca applicata sui temi della sostenibilità dei sistemi produttivi, con particolare attenzione all'integrazione tra metodi di valutazione, strumenti digitali e processi decisionali.",
-          "Comprovata capacità di contribuire allo sviluppo e all'evoluzione di metodi di valutazione della sostenibilità, includendo l'estensione verso nuove metriche, approcci prospettici (ex-ante), eco-cost e indicatori emergenti.",
-          "Esperienza nell'integrazione di metodi di sostenibilità con piattaforme software o strumenti digitali, collaborando con profili informatici per tradurre esigenze scientifiche in requisiti funzionali e supportare attività di testing e validazione.",
-          "Specializzazione tematica documentabile in almeno due dei seguenti ambiti, con capacità di sviluppare una linea di ricerca coerente e autonoma: materiali sostenibili e bio-based; carbon footprint, carbon removal e valutazione del potenziale di riduzione delle emissioni; energy minimization e ottimizzazione energetica nei sistemi produttivi; logistica sostenibile e integrazione tra sostenibilità e operations; end-of-life management di consumables, inclusi processi di sorting e individuazione di percorsi di valorizzazione ad alto valore aggiunto.",
-          "Capacità di coordinare piccoli team di ricerca nell'ambito di progetti di ricerca finanziati, mantenendo un approccio scientifico e collaborativo.",
-          "Capacità di sviluppare e consolidare una produzione scientifica autonoma, con contributi a conferenze e/o riviste scientifiche coerenti con la linea di ricerca.",
-          "Capacità di contribuire alla scrittura di proposte di progetto a livello nazionale ed europeo come naturale estensione della propria attività di ricerca.",
-          "Contributo ad attività di formazione e supervisione di studenti bachelor e master, in coerenza con le tematiche di ricerca sviluppate.",
-          "Attitudine al lavoro autonomo, spirito di iniziativa e capacità di operare in contesti di ricerca multidisciplinari.",
-          "Ottima conoscenza della lingua inglese e di almeno una lingua nazionale; la conoscenza di una seconda lingua nazionale costituisce titolo preferenziale."
-        ],
-        "de": [
-          "Master (MSc o MSE) in Ingegneria, preferibilmente in Ingegneria Industriale, Gestionale o discipline affini.",
-          "Esperienza di ricerca applicata sui temi della sostenibilità dei sistemi produttivi, con particolare attenzione all'integrazione tra metodi di valutazione, strumenti digitali e processi decisionali.",
-          "Comprovata capacità di contribuire allo sviluppo e all'evoluzione di metodi di valutazione della sostenibilità, includendo l'estensione verso nuove metriche, approcci prospettici (ex-ante), eco-cost e indicatori emergenti.",
-          "Esperienza nell'integrazione di metodi di sostenibilità con piattaforme software o strumenti digitali, collaborando con profili informatici per tradurre esigenze scientifiche in requisiti funzionali e supportare attività di testing e validazione.",
-          "Specializzazione tematica documentabile in almeno due dei seguenti ambiti, con capacità di sviluppare una linea di ricerca coerente e autonoma: materiali sostenibili e bio-based; carbon footprint, carbon removal e valutazione del potenziale di riduzione delle emissioni; energy minimization e ottimizzazione energetica nei sistemi produttivi; logistica sostenibile e integrazione tra sostenibilità e operations; end-of-life management di consumables, inclusi processi di sorting e individuazione di percorsi di valorizzazione ad alto valore aggiunto.",
-          "Capacità di coordinare piccoli team di ricerca nell'ambito di progetti di ricerca finanziati, mantenendo un approccio scientifico e collaborativo.",
-          "Capacità di sviluppare e consolidare una produzione scientifica autonoma, con contributi a conferenze e/o riviste scientifiche coerenti con la linea di ricerca.",
-          "Capacità di contribuire alla scrittura di proposte di progetto a livello nazionale ed europeo come naturale estensione della propria attività di ricerca.",
-          "Contributo ad attività di formazione e supervisione di studenti bachelor e master, in coerenza con le tematiche di ricerca sviluppate.",
-          "Attitudine al lavoro autonomo, spirito di iniziativa e capacità di operare in contesti di ricerca multidisciplinari.",
-          "Ottima conoscenza della lingua inglese e di almeno una lingua nazionale; la conoscenza di una seconda lingua nazionale costituisce titolo preferenziale."
-        ],
-        "fr": [
-          "Master (MSc o MSE) in Ingegneria, preferibilmente in Ingegneria Industriale, Gestionale o discipline affini.",
-          "Esperienza di ricerca applicata sui temi della sostenibilità dei sistemi produttivi, con particolare attenzione all'integrazione tra metodi di valutazione, strumenti digitali e processi decisionali.",
-          "Comprovata capacità di contribuire allo sviluppo e all'evoluzione di metodi di valutazione della sostenibilità, includendo l'estensione verso nuove metriche, approcci prospettici (ex-ante), eco-cost e indicatori emergenti.",
-          "Esperienza nell'integrazione di metodi di sostenibilità con piattaforme software o strumenti digitali, collaborando con profili informatici per tradurre esigenze scientifiche in requisiti funzionali e supportare attività di testing e validazione.",
-          "Specializzazione tematica documentabile in almeno due dei seguenti ambiti, con capacità di sviluppare una linea di ricerca coerente e autonoma: materiali sostenibili e bio-based; carbon footprint, carbon removal e valutazione del potenziale di riduzione delle emissioni; energy minimization e ottimizzazione energetica nei sistemi produttivi; logistica sostenibile e integrazione tra sostenibilità e operations; end-of-life management di consumables, inclusi processi di sorting e individuazione di percorsi di valorizzazione ad alto valore aggiunto.",
-          "Capacità di coordinare piccoli team di ricerca nell'ambito di progetti di ricerca finanziati, mantenendo un approccio scientifico e collaborativo.",
-          "Capacità di sviluppare e consolidare una produzione scientifica autonoma, con contributi a conferenze e/o riviste scientifiche coerenti con la linea di ricerca.",
-          "Capacità di contribuire alla scrittura di proposte di progetto a livello nazionale ed europeo come naturale estensione della propria attività di ricerca.",
-          "Contributo ad attività di formazione e supervisione di studenti bachelor e master, in coerenza con le tematiche di ricerca sviluppate.",
-          "Attitudine al lavoro autonomo, spirito di iniziativa e capacità di operare in contesti di ricerca multidisciplinari.",
-          "Ottima conoscenza della lingua inglese e di almeno una lingua nazionale; la conoscenza di una seconda lingua nazionale costituisce titolo preferenziale."
-        ]
+        "en": [],
+        "de": [],
+        "fr": []
       },
       "country": "CH",
       "sourceLang": "it",
@@ -458,51 +392,9 @@
           "Spirito d’iniziativa, capacità di lavorare in autonomia, attitudine al lavoro in team multidisciplinari e in contesti multiculturali; buone capacità comunicative.",
           "Ottima conoscenza della lingua inglese e padronanza di una lingua nazionale. La conoscenza di una seconda lingua nazionale costituisce titolo preferenziale."
         ],
-        "en": [
-          "Master in ambito tecnico-scientifico (p.es. Ingegneria Gestionale/Industriale, Ingegneria informatica, Data Science, Ingegneria dei sistemi o affini).",
-          "Almeno tre anni di esperienza qualificata di lavoro e/o di ricerca dopo il conseguimento del Master (i periodi in posizioni di assistente e/o dottorando sono considerati parte integrante dell’esperienza).",
-          "Comprovata esperienza nello sviluppo di soluzioni AI/ML e Data Analytics in contesti industriali o sperimentali (p.es. anomaly detection, diagnostica, classificazione, ottimizzazione, supporto decisionale).",
-          "Esperienza nella progettazione e implementazione di architetture dati e pipeline per l’integrazione di sorgenti eterogenee (p.es. sensori/IoT, sistemi di produzione, sistemi informativi aziendali), inclusa la gestione di basi dati (SQL e/o NoSQL).",
-          "Conoscenza di metodi e strumenti per Knowledge Engineering (p.es. ontologie, knowledge graph, semantic data modeling) e/o interesse documentabile allo sviluppo di approcci neuro-simbolici per l’explainable / trustworthy AI.",
-          "Esperienza nella redazione di deliverable tecnici e report di progetto di ricerca in ambito AI/ML, con attenzione alla coerenza metodologica, alla tracciabilità dei dati e alla chiarezza espositiva verso stakeholder eterogenei.",
-          "Ottima padronanza di linguaggi e strumenti per lo sviluppo software e data science (p.es. Python; conoscenza di toolchain per versionamento e collaborazione).",
-          "Produzione scientifica documentata su tematiche affini (p.es. almeno cinque pubblicazioni tra conferenze, journal o report tecnico-scientifici).",
-          "Capacità documentata di contribuire alla redazione di proposte di progetti di ricerca, e alla produzione di contributi scientifici e tecnici nell’ambito della sostenibilità ambientale e sociale.",
-          "Capacità di coordinare piccoli gruppi di ricerca nell'ambito di progetti di ricerca finanziati, mantenendo un approccio scientifico e collaborativo.",
-          "Esperienza (o forte familiarità) con quadri di ricerca nazionali e/o europei (p.es. Innosuisse, Horizon Europe/H2020) e con dinamiche di collaborazione pubblico‑privata.",
-          "Spirito d’iniziativa, capacità di lavorare in autonomia, attitudine al lavoro in team multidisciplinari e in contesti multiculturali; buone capacità comunicative.",
-          "Ottima conoscenza della lingua inglese e padronanza di una lingua nazionale. La conoscenza di una seconda lingua nazionale costituisce titolo preferenziale."
-        ],
-        "de": [
-          "Master in ambito tecnico-scientifico (p.es. Ingegneria Gestionale/Industriale, Ingegneria informatica, Data Science, Ingegneria dei sistemi o affini).",
-          "Almeno tre anni di esperienza qualificata di lavoro e/o di ricerca dopo il conseguimento del Master (i periodi in posizioni di assistente e/o dottorando sono considerati parte integrante dell’esperienza).",
-          "Comprovata esperienza nello sviluppo di soluzioni AI/ML e Data Analytics in contesti industriali o sperimentali (p.es. anomaly detection, diagnostica, classificazione, ottimizzazione, supporto decisionale).",
-          "Esperienza nella progettazione e implementazione di architetture dati e pipeline per l’integrazione di sorgenti eterogenee (p.es. sensori/IoT, sistemi di produzione, sistemi informativi aziendali), inclusa la gestione di basi dati (SQL e/o NoSQL).",
-          "Conoscenza di metodi e strumenti per Knowledge Engineering (p.es. ontologie, knowledge graph, semantic data modeling) e/o interesse documentabile allo sviluppo di approcci neuro-simbolici per l’explainable / trustworthy AI.",
-          "Esperienza nella redazione di deliverable tecnici e report di progetto di ricerca in ambito AI/ML, con attenzione alla coerenza metodologica, alla tracciabilità dei dati e alla chiarezza espositiva verso stakeholder eterogenei.",
-          "Ottima padronanza di linguaggi e strumenti per lo sviluppo software e data science (p.es. Python; conoscenza di toolchain per versionamento e collaborazione).",
-          "Produzione scientifica documentata su tematiche affini (p.es. almeno cinque pubblicazioni tra conferenze, journal o report tecnico-scientifici).",
-          "Capacità documentata di contribuire alla redazione di proposte di progetti di ricerca, e alla produzione di contributi scientifici e tecnici nell’ambito della sostenibilità ambientale e sociale.",
-          "Capacità di coordinare piccoli gruppi di ricerca nell'ambito di progetti di ricerca finanziati, mantenendo un approccio scientifico e collaborativo.",
-          "Esperienza (o forte familiarità) con quadri di ricerca nazionali e/o europei (p.es. Innosuisse, Horizon Europe/H2020) e con dinamiche di collaborazione pubblico‑privata.",
-          "Spirito d’iniziativa, capacità di lavorare in autonomia, attitudine al lavoro in team multidisciplinari e in contesti multiculturali; buone capacità comunicative.",
-          "Ottima conoscenza della lingua inglese e padronanza di una lingua nazionale. La conoscenza di una seconda lingua nazionale costituisce titolo preferenziale."
-        ],
-        "fr": [
-          "Master in ambito tecnico-scientifico (p.es. Ingegneria Gestionale/Industriale, Ingegneria informatica, Data Science, Ingegneria dei sistemi o affini).",
-          "Almeno tre anni di esperienza qualificata di lavoro e/o di ricerca dopo il conseguimento del Master (i periodi in posizioni di assistente e/o dottorando sono considerati parte integrante dell’esperienza).",
-          "Comprovata esperienza nello sviluppo di soluzioni AI/ML e Data Analytics in contesti industriali o sperimentali (p.es. anomaly detection, diagnostica, classificazione, ottimizzazione, supporto decisionale).",
-          "Esperienza nella progettazione e implementazione di architetture dati e pipeline per l’integrazione di sorgenti eterogenee (p.es. sensori/IoT, sistemi di produzione, sistemi informativi aziendali), inclusa la gestione di basi dati (SQL e/o NoSQL).",
-          "Conoscenza di metodi e strumenti per Knowledge Engineering (p.es. ontologie, knowledge graph, semantic data modeling) e/o interesse documentabile allo sviluppo di approcci neuro-simbolici per l’explainable / trustworthy AI.",
-          "Esperienza nella redazione di deliverable tecnici e report di progetto di ricerca in ambito AI/ML, con attenzione alla coerenza metodologica, alla tracciabilità dei dati e alla chiarezza espositiva verso stakeholder eterogenei.",
-          "Ottima padronanza di linguaggi e strumenti per lo sviluppo software e data science (p.es. Python; conoscenza di toolchain per versionamento e collaborazione).",
-          "Produzione scientifica documentata su tematiche affini (p.es. almeno cinque pubblicazioni tra conferenze, journal o report tecnico-scientifici).",
-          "Capacità documentata di contribuire alla redazione di proposte di progetti di ricerca, e alla produzione di contributi scientifici e tecnici nell’ambito della sostenibilità ambientale e sociale.",
-          "Capacità di coordinare piccoli gruppi di ricerca nell'ambito di progetti di ricerca finanziati, mantenendo un approccio scientifico e collaborativo.",
-          "Esperienza (o forte familiarità) con quadri di ricerca nazionali e/o europei (p.es. Innosuisse, Horizon Europe/H2020) e con dinamiche di collaborazione pubblico‑privata.",
-          "Spirito d’iniziativa, capacità di lavorare in autonomia, attitudine al lavoro in team multidisciplinari e in contesti multiculturali; buone capacità comunicative.",
-          "Ottima conoscenza della lingua inglese e padronanza di una lingua nazionale. La conoscenza di una seconda lingua nazionale costituisce titolo preferenziale."
-        ]
+        "en": [],
+        "de": [],
+        "fr": []
       },
       "country": "CH",
       "sourceLang": "it",
@@ -605,33 +497,9 @@
           "Attitudine al ragionamento logico, forte senso tecnico e buone capacità pratiche",
           "Spirito di iniziativa, proattività e capacità di lavorare in team"
         ],
-        "en": [
-          "La frequenza del Master MSE.",
-          "Formazione Bachelor in ingegneria elettronica o titolo affine.",
-          "Basi scientifiche in uno dei campi citati sopra.",
-          "Buona conoscenza della lingua inglese.",
-          "Buone capacità di comprensione, spirito metodico, accuratezza e precisione",
-          "Attitudine al ragionamento logico, forte senso tecnico e buone capacità pratiche",
-          "Spirito di iniziativa, proattività e capacità di lavorare in team"
-        ],
-        "de": [
-          "La frequenza del Master MSE.",
-          "Formazione Bachelor in ingegneria elettronica o titolo affine.",
-          "Basi scientifiche in uno dei campi citati sopra.",
-          "Buona conoscenza della lingua inglese.",
-          "Buone capacità di comprensione, spirito metodico, accuratezza e precisione",
-          "Attitudine al ragionamento logico, forte senso tecnico e buone capacità pratiche",
-          "Spirito di iniziativa, proattività e capacità di lavorare in team"
-        ],
-        "fr": [
-          "La frequenza del Master MSE.",
-          "Formazione Bachelor in ingegneria elettronica o titolo affine.",
-          "Basi scientifiche in uno dei campi citati sopra.",
-          "Buona conoscenza della lingua inglese.",
-          "Buone capacità di comprensione, spirito metodico, accuratezza e precisione",
-          "Attitudine al ragionamento logico, forte senso tecnico e buone capacità pratiche",
-          "Spirito di iniziativa, proattività e capacità di lavorare in team"
-        ]
+        "en": [],
+        "de": [],
+        "fr": []
       },
       "country": "CH",
       "sourceLang": "it",
@@ -736,30 +604,9 @@
           "Sostenibilità industriale.",
           "Robotica industriale, collaborativa e di servizio; Controllo di piattaforme mobili per applicazioni di ripristino superficiale mediante tecnologie laser pulsato."
         ],
-        "en": [
-          "La frequenza del Master MSE.",
-          "Formazione Bachelor in ingegneria o data science. Un’ammissione “su dossier” è possibile e da concordare.",
-          "Buone capacità di comunicazione e di presentazione in inglese.",
-          "Trasformazione digitale dei sistemi di produzione.",
-          "Sostenibilità industriale.",
-          "Robotica industriale, collaborativa e di servizio; Controllo di piattaforme mobili per applicazioni di ripristino superficiale mediante tecnologie laser pulsato."
-        ],
-        "de": [
-          "La frequenza del Master MSE.",
-          "Formazione Bachelor in ingegneria o data science. Un’ammissione “su dossier” è possibile e da concordare.",
-          "Buone capacità di comunicazione e di presentazione in inglese.",
-          "Trasformazione digitale dei sistemi di produzione.",
-          "Sostenibilità industriale.",
-          "Robotica industriale, collaborativa e di servizio; Controllo di piattaforme mobili per applicazioni di ripristino superficiale mediante tecnologie laser pulsato."
-        ],
-        "fr": [
-          "La frequenza del Master MSE.",
-          "Formazione Bachelor in ingegneria o data science. Un’ammissione “su dossier” è possibile e da concordare.",
-          "Buone capacità di comunicazione e di presentazione in inglese.",
-          "Trasformazione digitale dei sistemi di produzione.",
-          "Sostenibilità industriale.",
-          "Robotica industriale, collaborativa e di servizio; Controllo di piattaforme mobili per applicazioni di ripristino superficiale mediante tecnologie laser pulsato."
-        ]
+        "en": [],
+        "de": [],
+        "fr": []
       },
       "country": "CH",
       "sourceLang": "it",
@@ -881,36 +728,9 @@
           "Sviluppo di applicazioni in ambito realtà virtuale, realtà aumentata e realtà mista.",
           "Sviluppo di applicazioni in ambito audio-visual processing."
         ],
-        "en": [
-          "La frequenza del Master MSE nei profili di Computer Science o Data Science.",
-          "Formazione Bachelor in informatica o scienza dei dati.",
-          "Interessi di ricerca multidisciplinare in ambito ICT.",
-          "Buona capacità di comunicazione e di presentazione in inglese.",
-          "Sviluppo di applicazioni in ambito ingegneria del software in particolare; cloud-native application e sicurezza informatica.",
-          "Sviluppo di applicazioni in ambito data analysis e data processing.",
-          "Sviluppo di applicazioni in ambito realtà virtuale, realtà aumentata e realtà mista.",
-          "Sviluppo di applicazioni in ambito audio-visual processing."
-        ],
-        "de": [
-          "La frequenza del Master MSE nei profili di Computer Science o Data Science.",
-          "Formazione Bachelor in informatica o scienza dei dati.",
-          "Interessi di ricerca multidisciplinare in ambito ICT.",
-          "Buona capacità di comunicazione e di presentazione in inglese.",
-          "Sviluppo di applicazioni in ambito ingegneria del software in particolare; cloud-native application e sicurezza informatica.",
-          "Sviluppo di applicazioni in ambito data analysis e data processing.",
-          "Sviluppo di applicazioni in ambito realtà virtuale, realtà aumentata e realtà mista.",
-          "Sviluppo di applicazioni in ambito audio-visual processing."
-        ],
-        "fr": [
-          "La frequenza del Master MSE nei profili di Computer Science o Data Science.",
-          "Formazione Bachelor in informatica o scienza dei dati.",
-          "Interessi di ricerca multidisciplinare in ambito ICT.",
-          "Buona capacità di comunicazione e di presentazione in inglese.",
-          "Sviluppo di applicazioni in ambito ingegneria del software in particolare; cloud-native application e sicurezza informatica.",
-          "Sviluppo di applicazioni in ambito data analysis e data processing.",
-          "Sviluppo di applicazioni in ambito realtà virtuale, realtà aumentata e realtà mista.",
-          "Sviluppo di applicazioni in ambito audio-visual processing."
-        ]
+        "en": [],
+        "de": [],
+        "fr": []
       },
       "country": "CH",
       "sourceLang": "it",
@@ -1058,48 +878,9 @@
           "familiarità con strumenti di laboratorio elettronico",
           "interesse per sistemi di controllo e automazione"
         ],
-        "de": [
-          "Iscrizione o intenzione di iscriversi al Master MSE",
-          "Formazione Bachelor in ingegneria elettronica o disciplina affine",
-          "Buone competenze in elettronica analogica e digitale",
-          "Conoscenze di base nello sviluppo di sistemi embedded e acquisizione dati",
-          "Familiarità con sensori, attuatori e sistemi di misura",
-          "Interesse per applicazioni biomedicali e sistemi interdisciplinari",
-          "Conoscenza della lingua inglese",
-          "Buona capacità comunicativa e attitudine al lavoro in team",
-          "esperienza con microcontrollori e sistemi embedded",
-          "conoscenze di programmazione (C/C++, Python o equivalenti)",
-          "familiarità con strumenti di laboratorio elettronico",
-          "interesse per sistemi di controllo e automazione"
-        ],
-        "fr": [
-          "Iscrizione o intenzione di iscriversi al Master MSE",
-          "Formazione Bachelor in ingegneria elettronica o disciplina affine",
-          "Buone competenze in elettronica analogica e digitale",
-          "Conoscenze di base nello sviluppo di sistemi embedded e acquisizione dati",
-          "Familiarità con sensori, attuatori e sistemi di misura",
-          "Interesse per applicazioni biomedicali e sistemi interdisciplinari",
-          "Conoscenza della lingua inglese",
-          "Buona capacità comunicativa e attitudine al lavoro in team",
-          "esperienza con microcontrollori e sistemi embedded",
-          "conoscenze di programmazione (C/C++, Python o equivalenti)",
-          "familiarità con strumenti di laboratorio elettronico",
-          "interesse per sistemi di controllo e automazione"
-        ],
-        "en": [
-          "Iscrizione o intenzione di iscriversi al Master MSE",
-          "Formazione Bachelor in ingegneria elettronica o disciplina affine",
-          "Buone competenze in elettronica analogica e digitale",
-          "Conoscenze di base nello sviluppo di sistemi embedded e acquisizione dati",
-          "Familiarità con sensori, attuatori e sistemi di misura",
-          "Interesse per applicazioni biomedicali e sistemi interdisciplinari",
-          "Conoscenza della lingua inglese",
-          "Buona capacità comunicativa e attitudine al lavoro in team",
-          "esperienza con microcontrollori e sistemi embedded",
-          "conoscenze di programmazione (C/C++, Python o equivalenti)",
-          "familiarità con strumenti di laboratorio elettronico",
-          "interesse per sistemi di controllo e automazione"
-        ]
+        "de": [],
+        "fr": [],
+        "en": []
       },
       "country": "CH",
       "sourceLang": "it",
