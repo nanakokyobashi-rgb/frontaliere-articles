@@ -38,6 +38,7 @@ permissions:
   contents: read
   issues: write
   actions: read # elencare le run e i loro job
+  checks: read # leggere l'annotation che prova un vero timeout
 
 concurrency:
   group: workflow-failure-issues
@@ -94,9 +95,28 @@ jobs:
           # supportata dallo scanner per un eventuale caso futuro.
           IGNORE_WORKFLOWS: ''
         run: |
-          ARGS="--lookback-min ${{ github.event.inputs.lookback_min || '40' }}"
-          if [ "${{ github.event.inputs.dry_run }}" = "true" ]; then ARGS="$ARGS --dry-run"; fi
-          node scripts/ci/scan-failed-runs.mjs $ARGS
+          ARGS=(--lookback-min "${{ github.event.inputs.lookback_min || '40' }}")
+          if [ "${{ github.event.inputs.dry_run }}" = "true" ]; then ARGS+=(--dry-run); fi
+          node scripts/ci/scan-failed-runs.mjs "${ARGS[@]}"
+
+      # I timeout sono `cancelled`, quindi non raggiungono lo scanner sopra.
+      # Gli host-kill sono `failure`, ma scan-failed-runs li cede a questo
+      # detector specializzato per non contare lo stesso evento anche nel
+      # rolling ledger dei fallimenti ordinari.
+      - name: Scan timed out and host-killed jobs
+        env:
+          GH_TOKEN: ${{ env.GITHUB_PAT_NANAKO || secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+          TIMEOUT_SCAN_LOOKBACK_MINUTES: ${{ github.event.inputs.lookback_min || '40' }}
+          # Stesso settle del default dello scanner: evita di scambiare la
+          # finalizzazione dell'API Actions per uno step morto sull'host.
+          HOST_KILL_SETTLE_MS: '120000'
+        run: |
+          if [ "${{ github.event.inputs.dry_run }}" = "true" ]; then
+            node scripts/ci/scan-job-timeouts.mjs --dry-run
+          else
+            node scripts/ci/scan-job-timeouts.mjs
+          fi
 
       - name: Cleanup Firebase credentials
         if: always()
