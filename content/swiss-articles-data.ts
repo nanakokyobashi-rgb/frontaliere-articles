@@ -14590,6 +14590,24 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'citta-clima-30-kmh-strade',
+    category: 'novita',
+    date: '2026-08-31T22:02:28.131Z',
+    image: '/images/blog/citta-clima-30-kmh-strade.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
+   {
+    id: 'cooperazione-polizia-confini',
+    category: 'novita',
+    date: '2026-08-31T22:12:52.901Z',
+    image: '/images/blog/cooperazione-polizia-confini.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the
