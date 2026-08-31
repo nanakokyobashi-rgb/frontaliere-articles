@@ -1,19 +1,20 @@
 {
   "key": "afry",
   "label": "AFRY",
-  "generatedAt": "2026-08-30T14:43:25.731Z",
+  "generatedAt": "2026-08-30T23:59:10.186Z",
   "total": 64,
   "newCount": 2,
   "updatedCount": 61,
   "removedCount": 1,
   "unchangedCount": 1,
-  "durationMs": 98880,
-  "avgDurationMs": 98880,
+  "durationMs": 131938,
+  "avgDurationMs": 131938,
   "durationHistory": [
     143676,
     131564,
     97210,
-    98880
+    98880,
+    131938
   ],
   "newJobs": [
     {
@@ -141,8 +142,8 @@
       "salaryMin": 113500,
       "salaryMax": 172000,
       "currency": "CHF",
-      "needsRetranslation": true,
       "firstSeenAt": "2026-08-25T21:46:23.162Z",
+      "needsRetranslation": true,
       "_qualityScore": 83,
       "_qualityBreakdown": {
         "cleanliness": 25,
