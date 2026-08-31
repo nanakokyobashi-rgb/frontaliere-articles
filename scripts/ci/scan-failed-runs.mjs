@@ -219,11 +219,33 @@ export function partitionFailedJobsByOwner(jobs) {
   return { ordinary, timeoutScanner };
 }
 
+/**
+ * Il job piu' lungo del repo (`translate-pending.yml`, 350 minuti) puo' essere
+ * partito ben prima del cutoff della finestra e concludersi dentro: il cutoff
+ * lato query deve restare piu' largo di quello con cui si filtra per davvero
+ * (`since`, sotto), che guarda `updatedAt` — lo stesso motivo per cui #661 ha
+ * smesso di usare `createdAt` come clock in scan-job-timeouts.mjs.
+ */
+const MAX_RUN_DURATION_MIN = 350 + 60;
+
+/**
+ * Rete di sicurezza, non filtro primario: `--created` gia' delimita la query
+ * per data, quindi 60 fallimenti in piu' nella finestra non troncano piu' il
+ * fetch prima ancora di guardare il tempo (issue #674 — con `--limit 60` fisso
+ * un run ceduto a scan-job-timeouts.mjs e poi tornato ordinario poteva uscire
+ * dal fetch stesso, non solo dal filtro, se nel frattempo si accumulavano 60
+ * nuovi fallimenti). Se anche questo cap viene toccato lo si dice ad alta
+ * voce, stesso stile del cap su MAX_ISSUES qui sotto.
+ */
+const FAILED_RUNS_SAFETY_CAP = 500;
+
 /** Run fallite nella finestra, escluse quelle da pull_request e dai gate pre-merge in preview. */
 function failedRuns() {
   const since = new Date(Date.now() - LOOKBACK_MIN * 60_000).toISOString();
+  const queryCutoff = new Date(Date.now() - (LOOKBACK_MIN + MAX_RUN_DURATION_MIN) * 60_000).toISOString();
   const raw = gh(
-    ['run', 'list', '--repo', REPO, '--status', 'failure', '--limit', '60',
+    ['run', 'list', '--repo', REPO, '--status', 'failure', '--limit', String(FAILED_RUNS_SAFETY_CAP),
+      '--created', `>=${queryCutoff}`,
       '--json', 'databaseId,workflowName,conclusion,event,createdAt,updatedAt,headBranch,url'],
     '[]',
   );
@@ -232,6 +254,9 @@ function failedRuns() {
     runs = JSON.parse(raw || '[]');
   } catch {
     return [];
+  }
+  if (runs.length >= FAILED_RUNS_SAFETY_CAP) {
+    console.warn(`::warning::[scan-failed-runs] cap di sicurezza (${FAILED_RUNS_SAFETY_CAP}) raggiunto sulle run fallite — possibile troncamento oltre la finestra osservabile.`);
   }
   return runs.filter((r) => isReportableRun(r, { since }));
 }
