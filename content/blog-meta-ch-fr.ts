@@ -4828,6 +4828,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.divario-salariale-ust-2024-157.title': 'Ecart salarial OFS 2024 : baisse à 15,7 % en Suisse',
     'blog.article.divario-salariale-ust-2024-157.excerpt': 'OFS : en 2024, l\'écart salarial entre les femmes et les hommes est tombé à 15,7 % contre 16,2 % en 2022. Dans le privé, il reste à 17,2 %, dans le public à 12,8 %. Composant non expliqué à 640 CHF bruts.',
     'blog.article.divario-salariale-ust-2024-157.imageAlt': 'Immeuble de bureaux suisse moderne avec des employés à l\'entrée',
+    'blog.article.scorte-mangimi-proteici-svizzera.title': 'Stocks d\'aliments protéiques débloqués en Suisse : jusqu\'à 16\'000 tonnes',
+    'blog.article.scorte-mangimi-proteici-svizzera.excerpt': 'L\'AEP libère 20 % des stocks obligatoires de farine de soja pour les éleveurs, en raison de la sécheresse du Rhin et du Danube.',
+    'blog.article.scorte-mangimi-proteici-svizzera.imageAlt': 'Élevage suisse avec bovins près d\'une rivière asséchée',
 };
 
 export default blogMetaChFr;
