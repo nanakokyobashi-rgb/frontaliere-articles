@@ -9472,8 +9472,12 @@ ${terminologyByLang[targetLang] || ''}`;
     for (const field of ['body1', 'body2', 'body3']) {
       const text = data.content[locale]?.[field];
       if (!text) continue;
-      const isTruncated = detectTruncation(text, { label: `${locale}/${field}` })
-        .some((i) => i.severity === 'critical');
+      // Every issue detectTruncation() returns (critical AND major — e.g.
+      // 'incomplete-ending', the most common real-corpus truncation shape,
+      // is 'major') is by definition a truncation signal, so any non-empty
+      // result must trigger the retry — filtering to 'critical' only let the
+      // majority of real-corpus mid-sentence cuts through silently.
+      const isTruncated = detectTruncation(text, { label: `${locale}/${field}` }).length > 0;
       if (!isTruncated) continue;
       const itValue = itContent[field];
       console.error(`  ⚠️  Traduzione ${field} (${locale}) troncata — retry traduzione mirata...`);
@@ -9486,7 +9490,7 @@ ${terminologyByLang[targetLang] || ''}`;
           `${locale}:${field}-truncation-retry`,
         );
         const retried = translatedStringOrNull(parsed?.[field]);
-        if (retried && !detectTruncation(retried, { label: `${locale}/${field}` }).some((i) => i.severity === 'critical')) {
+        if (retried && detectTruncation(retried, { label: `${locale}/${field}` }).length === 0) {
           data.content[locale][field] = sanitizeBodyText(retried);
           console.error(`  ✅ ${field} (${locale}) ritradotto con successo dopo troncamento`);
           continue;
