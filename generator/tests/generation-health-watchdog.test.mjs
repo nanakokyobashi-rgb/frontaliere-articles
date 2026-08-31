@@ -474,6 +474,24 @@ describe('le condizioni sono SPENTE sulla normalità misurata', () => {
     assert.equal(verdictFor(m, 'prompt-oversize').firing, false);
     assert.ok(OVERSIZE_MIN_RUNS >= 2);
   });
+
+  test('#348: generation-idle non scambia una finestra TRONCATA per "zero articoli"', () => {
+    // Un burst di commit non-articolo (crawler dedicati, auto-translate, …)
+    // può esaurire le 3 pagine (300 commit) di `collectCommits` prima del
+    // cutoff. `lastArticleAt === null` in quel caso è "non ho letto abbastanza
+    // indietro per saperlo", non "guasto reale" — deve dare `available:false`.
+    const m = healthy();
+    m.commits.lastArticleAt = null;
+    m.commits.truncated = true;
+    assert.equal(verdictFor(m, 'generation-idle').available, false);
+  });
+
+  test('#348: section-dry, stesso troncamento sul lato per-sezione', () => {
+    const m = healthy();
+    m.commits.perSection.svizzera.lastArticleAt = null;
+    m.commits.truncated = true;
+    assert.equal(verdictFor(m, 'section-dry', 'svizzera').available, false);
+  });
 });
 
 describe('le condizioni sono ACCESE sui guasti realmente accaduti', () => {
@@ -483,6 +501,16 @@ describe('le condizioni sono ACCESE sui guasti realmente accaduti', () => {
     const v = verdictFor(m, 'generation-idle');
     assert.equal(v.firing, true);
     assert.match(v.body, /6\.5h/);
+  });
+
+  test('generation-idle: zero articoli in una finestra letta PER INTERO (non troncata) resta un guasto reale', () => {
+    // Regressione per #348: il fix su `truncated` non deve spegnere il caso
+    // genuino, cioè quando la finestra nominale è stata letta tutta e non
+    // conteneva nessun articolo.
+    const m = healthy();
+    m.commits.lastArticleAt = null;
+    const v = verdictFor(m, 'generation-idle');
+    assert.equal(v.firing, true);
   });
 
   test('section-dry: svizzera ferma 17h mentre frontaliere ne pubblica 14 (2026-08-08→09)', () => {
