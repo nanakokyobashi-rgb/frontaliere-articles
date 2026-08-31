@@ -1852,6 +1852,25 @@ export function runDrain() {
     // intatta e il tick successivo riparte dallo stesso primo candidato.
     if (!budget.take(`#${cand.number} (drain)`, ITEM_COST_MS)) break;
 
+    // Check: tracker permanente (`agent:no-age-out`, #5615/#5544/#649) — label-only,
+    // gira PRIMA del fetch del body (nessuna chiamata gh extra). `isPermanentTracker`
+    // già esclude questi tracker da `isAgeOutEligible`/`isReparkableCandidate`, ma
+    // NON dal loop di promozione principale: un tracker come il digest dello sweep
+    // settimanale (`needs-human-sweep.yml`) può entrare in coda (bug a monte, ora
+    // chiuso in `classify-issue.mjs`) e restarci finché non arriva in cima, dove
+    // veniva promosso a `agent:fix` come qualunque altro candidato — bruciando un
+    // run su qualcosa che per costruzione "non ha una causa singola da riparare"
+    // (vedi il commento su `isPermanentTracker`). Osservato su #649.
+    if (isPermanentTracker(cand)) {
+      console.log(`PARK #${cand.number} (tracker permanente, agent:no-age-out) → no promozione, non è un difetto singolo`);
+      const note = `⏭️ **Pre-flight drainer (zero-Claude, #649)**: questa issue porta \`agent:no-age-out\` — è un tracker/contatore permanente, non un difetto con una causa singola. Promuoverla a \`agent:fix\` brucia un run su qualcosa che per costruzione non è chiudibile da una PR. **Non promuovo**: rimuovo \`agent:fix-queued\` e parko (riapribile: togli \`fu-parked\` se il contesto cambia).\n\n<!-- FIX_OUTCOME: revenue-tracker-manual -->`;
+      if (DRY) { console.log(`[dry] park #${cand.number} (tracker permanente)`); continue; }
+      try { gh(['issue', 'comment', String(cand.number), '--repo', REPO, '--body', note], { json: false }); }
+      catch (e) { console.log(`::warning::comment #${cand.number} fallito: ${String(e).slice(0, 120)}`); }
+      edit(cand.number, { add: [LBL_PARKED], remove: [LBL_QUEUED, LBL_FIX] });
+      continue; // prova il prossimo in coda
+    }
+
     // Check: compress-contract-docs ratchet (escalation #5523) — title-only, gira
     // PRIMA del fetch del body (nessuna chiamata gh extra). Mai chiusa dal fixer
     // autonomo in 8 occorrenze storiche, sempre da una PR umana.
