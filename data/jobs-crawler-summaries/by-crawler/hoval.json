@@ -1,20 +1,21 @@
 {
   "key": "hoval",
   "label": "Hoval",
-  "generatedAt": "2026-08-30T15:36:13.497Z",
+  "generatedAt": "2026-08-30T23:21:48.663Z",
   "total": 9,
   "newCount": 0,
   "updatedCount": 9,
   "removedCount": 0,
   "unchangedCount": 0,
-  "durationMs": 11449,
-  "avgDurationMs": 11449,
+  "durationMs": 11374,
+  "avgDurationMs": 11374,
   "durationHistory": [
     12243,
     11487,
     11524,
     12370,
-    11449
+    11449,
+    11374
   ],
   "newJobs": [],
   "updatedJobs": [
