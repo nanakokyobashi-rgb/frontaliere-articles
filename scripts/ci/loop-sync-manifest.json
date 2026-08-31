@@ -2755,6 +2755,256 @@
         "corpus": "39a5509939e3e929",
         "alignedAt": "2026-08-25"
       }
+    },
+    {
+      "path": ".github/workflows/crawler-group-01.yml",
+      "sitePath": ".github/corpus-workflows/crawler-group-01.yml",
+      "mode": "identical",
+      "baseline": {
+        "site": "affe7915eaa7450f",
+        "corpus": "affe7915eaa7450f",
+        "alignedAt": "2026-08-31"
+      }
+    },
+    {
+      "path": ".github/workflows/crawler-group-02.yml",
+      "sitePath": ".github/corpus-workflows/crawler-group-02.yml",
+      "mode": "identical",
+      "baseline": {
+        "site": "97d5ee2edff9a85c",
+        "corpus": "97d5ee2edff9a85c",
+        "alignedAt": "2026-08-31"
+      }
+    },
+    {
+      "path": ".github/workflows/crawler-group-03.yml",
+      "sitePath": ".github/corpus-workflows/crawler-group-03.yml",
+      "mode": "identical",
+      "baseline": {
+        "site": "83d9780b6aa1c602",
+        "corpus": "83d9780b6aa1c602",
+        "alignedAt": "2026-08-31"
+      }
+    },
+    {
+      "path": ".github/workflows/crawler-group-04.yml",
+      "sitePath": ".github/corpus-workflows/crawler-group-04.yml",
+      "mode": "identical",
+      "baseline": {
+        "site": "74b73fdd1ced900a",
+        "corpus": "74b73fdd1ced900a",
+        "alignedAt": "2026-08-31"
+      }
+    },
+    {
+      "path": ".github/workflows/crawler-group-05.yml",
+      "sitePath": ".github/corpus-workflows/crawler-group-05.yml",
+      "mode": "identical",
+      "baseline": {
+        "site": "4dbc05fb881939da",
+        "corpus": "4dbc05fb881939da",
+        "alignedAt": "2026-08-31"
+      }
+    },
+    {
+      "path": ".github/workflows/crawler-group-06.yml",
+      "sitePath": ".github/corpus-workflows/crawler-group-06.yml",
+      "mode": "identical",
+      "baseline": {
+        "site": "b77e35bd5b5a2e32",
+        "corpus": "b77e35bd5b5a2e32",
+        "alignedAt": "2026-08-31"
+      }
+    },
+    {
+      "path": ".github/workflows/crawler-group-07.yml",
+      "sitePath": ".github/corpus-workflows/crawler-group-07.yml",
+      "mode": "identical",
+      "baseline": {
+        "site": "d664746500495cc5",
+        "corpus": "d664746500495cc5",
+        "alignedAt": "2026-08-31"
+      }
+    },
+    {
+      "path": ".github/workflows/crawler-group-08.yml",
+      "sitePath": ".github/corpus-workflows/crawler-group-08.yml",
+      "mode": "identical",
+      "baseline": {
+        "site": "5c9644502536ff8a",
+        "corpus": "5c9644502536ff8a",
+        "alignedAt": "2026-08-31"
+      }
+    },
+    {
+      "path": ".github/workflows/crawler-group-09.yml",
+      "sitePath": ".github/corpus-workflows/crawler-group-09.yml",
+      "mode": "identical",
+      "baseline": {
+        "site": "140a9a53a93cf2f2",
+        "corpus": "140a9a53a93cf2f2",
+        "alignedAt": "2026-08-31"
+      }
+    },
+    {
+      "path": ".github/workflows/crawler-group-10.yml",
+      "sitePath": ".github/corpus-workflows/crawler-group-10.yml",
+      "mode": "identical",
+      "baseline": {
+        "site": "5c715f4efcb3cebc",
+        "corpus": "5c715f4efcb3cebc",
+        "alignedAt": "2026-08-31"
+      }
+    },
+    {
+      "path": ".github/workflows/crawler-group-11.yml",
+      "sitePath": ".github/corpus-workflows/crawler-group-11.yml",
+      "mode": "identical",
+      "baseline": {
+        "site": "3d6a87f140eef0f0",
+        "corpus": "3d6a87f140eef0f0",
+        "alignedAt": "2026-08-31"
+      }
+    },
+    {
+      "path": ".github/workflows/crawler-group-12.yml",
+      "sitePath": ".github/corpus-workflows/crawler-group-12.yml",
+      "mode": "identical",
+      "baseline": {
+        "site": "b412f6172bb9c39f",
+        "corpus": "b412f6172bb9c39f",
+        "alignedAt": "2026-08-31"
+      }
+    },
+    {
+      "path": ".github/workflows/crawler-group-13.yml",
+      "sitePath": ".github/corpus-workflows/crawler-group-13.yml",
+      "mode": "identical",
+      "baseline": {
+        "site": "6cb28456407a04cf",
+        "corpus": "6cb28456407a04cf",
+        "alignedAt": "2026-08-31"
+      }
+    },
+    {
+      "path": ".github/workflows/crawler-group-14.yml",
+      "sitePath": ".github/corpus-workflows/crawler-group-14.yml",
+      "mode": "identical",
+      "baseline": {
+        "site": "c1f91aace48981e8",
+        "corpus": "c1f91aace48981e8",
+        "alignedAt": "2026-08-31"
+      }
+    },
+    {
+      "path": ".github/workflows/crawler-group-15.yml",
+      "sitePath": ".github/corpus-workflows/crawler-group-15.yml",
+      "mode": "identical",
+      "baseline": {
+        "site": "fc8e6ef7d37ef138",
+        "corpus": "fc8e6ef7d37ef138",
+        "alignedAt": "2026-08-31"
+      }
+    },
+    {
+      "path": ".github/workflows/crawler-group-16.yml",
+      "sitePath": ".github/corpus-workflows/crawler-group-16.yml",
+      "mode": "identical",
+      "baseline": {
+        "site": "b863c47ea180c5ec",
+        "corpus": "b863c47ea180c5ec",
+        "alignedAt": "2026-08-31"
+      }
+    },
+    {
+      "path": ".github/workflows/crawler-group-17.yml",
+      "sitePath": ".github/corpus-workflows/crawler-group-17.yml",
+      "mode": "identical",
+      "baseline": {
+        "site": "dc82a5d5f9f4b58d",
+        "corpus": "dc82a5d5f9f4b58d",
+        "alignedAt": "2026-08-31"
+      }
+    },
+    {
+      "path": ".github/workflows/crawler-group-18.yml",
+      "sitePath": ".github/corpus-workflows/crawler-group-18.yml",
+      "mode": "identical",
+      "baseline": {
+        "site": "f9c82e8e68f48a4d",
+        "corpus": "f9c82e8e68f48a4d",
+        "alignedAt": "2026-08-31"
+      }
+    },
+    {
+      "path": ".github/workflows/crawler-group-19.yml",
+      "sitePath": ".github/corpus-workflows/crawler-group-19.yml",
+      "mode": "identical",
+      "baseline": {
+        "site": "9c6e00ce9a7e2b5b",
+        "corpus": "9c6e00ce9a7e2b5b",
+        "alignedAt": "2026-08-31"
+      }
+    },
+    {
+      "path": ".github/workflows/crawler-group-20.yml",
+      "sitePath": ".github/corpus-workflows/crawler-group-20.yml",
+      "mode": "identical",
+      "baseline": {
+        "site": "9216524535113516",
+        "corpus": "9216524535113516",
+        "alignedAt": "2026-08-31"
+      }
+    },
+    {
+      "path": ".github/workflows/crawler-group-21.yml",
+      "sitePath": ".github/corpus-workflows/crawler-group-21.yml",
+      "mode": "identical",
+      "baseline": {
+        "site": "547c3e6b2b911f83",
+        "corpus": "547c3e6b2b911f83",
+        "alignedAt": "2026-08-31"
+      }
+    },
+    {
+      "path": ".github/workflows/crawler-group-22.yml",
+      "sitePath": ".github/corpus-workflows/crawler-group-22.yml",
+      "mode": "identical",
+      "baseline": {
+        "site": "5d3dfe354efccbfb",
+        "corpus": "5d3dfe354efccbfb",
+        "alignedAt": "2026-08-31"
+      }
+    },
+    {
+      "path": ".github/workflows/crawler-group-23.yml",
+      "sitePath": ".github/corpus-workflows/crawler-group-23.yml",
+      "mode": "identical",
+      "baseline": {
+        "site": "4a929b7585f61614",
+        "corpus": "4a929b7585f61614",
+        "alignedAt": "2026-08-31"
+      }
+    },
+    {
+      "path": ".github/workflows/translate-pending.yml",
+      "sitePath": ".github/corpus-workflows/translate-pending.yml",
+      "mode": "identical",
+      "baseline": {
+        "site": "371b6d0b4782c7a2",
+        "corpus": "371b6d0b4782c7a2",
+        "alignedAt": "2026-08-31"
+      }
+    },
+    {
+      "path": "generator/data/crawler-cross-repo-contract.json",
+      "sitePath": ".github/corpus-workflows/contract.json",
+      "mode": "identical",
+      "baseline": {
+        "site": "28b3c8cf88f6644b",
+        "corpus": "28b3c8cf88f6644b",
+        "alignedAt": "2026-08-31"
+      }
     }
   ]
 }
