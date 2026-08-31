@@ -140,7 +140,11 @@ jobs:
               echo "pushed to $TARGET"
               exit 0
             fi
-            echo "push attempt $attempt failed — rebasing onto $TARGET"
+            echo "push attempt $attempt failed"
+            if [ "$attempt" -eq 3 ]; then
+              break
+            fi
+            sleep 3
             # Same bookkeeping-conflict class as generate-article.yml (issue
             # #76): a full rescan can race an incremental appendCatalogEntry()
             # from a concurrent publish. Either way the file is entirely
@@ -148,7 +152,6 @@ jobs:
             # catch up is safe — see rebase-onto-remote.sh's header.
             bash scripts/lib/rebase-onto-remote.sh "$REMOTE" "$TARGET" \
               public/data/journalist-image-catalog.json || true
-            sleep 3
           done
           echo "::error::push failed after 3 attempts (git output above)"
           exit 1

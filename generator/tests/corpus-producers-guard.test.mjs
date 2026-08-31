@@ -102,6 +102,26 @@ const isProducer = (w) =>
 const producers = workflows.filter(isProducer);
 
 /**
+ * Extract the bounded push/rebase loop from workflows that carry one.
+ * The list is derived so a new producer cannot copy the stale-rebase pattern
+ * without joining the same regression check.
+ */
+function pushRetryLoop(w) {
+  const loops = [...w.active.matchAll(/for attempt in ([0-9 ]+); do[\s\S]*?\n\s+done/g)];
+  return loops.find((m) => /git push[^\n]*\$REMOTE[^\n]*HEAD:\$TARGET/.test(m[0])) ?? null;
+}
+
+const pushRetryCandidates = workflows.filter(
+  (w) =>
+    /git push[^\n]*\$REMOTE[^\n]*HEAD:\$TARGET/.test(w.active) &&
+    /(?:git pull --rebase|bash scripts\/lib\/rebase-onto-remote\.sh)/.test(w.active),
+);
+
+const pushRetriers = pushRetryCandidates
+  .map((w) => ({ ...w, retry: pushRetryLoop(w) }))
+  .filter((w) => w.retry);
+
+/**
  * Il corpo di uno step `run: |`. Volutamente senza parser YAML: il repo non ha
  * node_modules e questi test girano col solo `node --test`.
  */
@@ -160,6 +180,45 @@ test('un workflow che pusha su un branch di PR non e\' un produttore del corpus'
   const issueFix = workflows.find((w) => w.file === 'issue-fix.yml');
   assert.ok(issueFix, 'issue-fix.yml non esiste piu\': aggiornare questo test');
   assert.ok(!isProducer(issueFix), 'issue-fix.yml pusha su main? allora deve portare la guardia');
+});
+
+test('ogni retry pusha da una base fresca: backoff prima del rebase, nessun rebase finale sprecato', () => {
+  const nonEstratti = pushRetryCandidates.filter((w) => !pushRetryLoop(w)).map((w) => w.file);
+  assert.deepEqual(
+    nonEstratti,
+    [],
+    `workflow con push/rebase non coperti dal parser del test:\n  ${nonEstratti.join('\n  ')}`,
+  );
+  assert.ok(pushRetriers.length >= 7, `derivati solo ${pushRetriers.length} workflow con retry del push`);
+  for (const w of pushRetriers) {
+    const [block, rawAttempts] = w.retry;
+    const attempts = rawAttempts.trim().split(/\s+/);
+    const finalAttempt = attempts.at(-1);
+    const guard = block.match(
+      new RegExp(`if \\[ "\\$attempt" -eq ${finalAttempt} \\]; then\\s+break\\s+fi`),
+    );
+    assert.ok(guard, `${w.file}: la guardia finale deve contenere davvero break`);
+    const guardAt = guard.index;
+    const breakAt = guardAt + guard[0].indexOf('break');
+    const fiAt = guardAt + guard[0].lastIndexOf('fi');
+    const sleepAt = block.indexOf('sleep ', fiAt);
+    const rebaseAt = Math.max(
+      block.indexOf('git pull --rebase', fiAt),
+      block.indexOf('bash scripts/lib/rebase-onto-remote.sh', fiAt),
+    );
+
+    assert.notEqual(sleepAt, -1, `${w.file}: manca il backoff fra i tentativi concorrenti`);
+    assert.notEqual(rebaseAt, -1, `${w.file}: retry dichiarato senza refresh/rebase della base remota`);
+    assert.ok(
+      guardAt < breakAt && breakAt < fiAt && fiAt < sleepAt && sleepAt < rebaseAt,
+      `${w.file}: ordine richiesto: guardia con break → backoff → fetch/rebase → push immediato`,
+    );
+    assert.equal(
+      block.indexOf('sleep ', rebaseAt + 1),
+      -1,
+      `${w.file}: un'attesa dopo il rebase renderebbe di nuovo stantia la base prima del push`,
+    );
+  }
 });
 
 test('OGNI produttore del corpus ha lo step di guardia', () => {

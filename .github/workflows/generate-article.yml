@@ -1591,7 +1591,10 @@ jobs:
               echo "pushed to $TARGET"
               exit 0
             fi
-            echo "push attempt $attempt failed — rebasing onto $TARGET"
+            echo "push attempt $attempt failed"
+            if [ "$attempt" -eq 5 ]; then
+              break
+            fi
             # A conflict here is routinely NOT transient: this job rewrites the
             # bookkeeping caches below in full on every run, so two runs
             # started from different bases conflict for real and all five
@@ -1676,6 +1679,11 @@ jobs:
             # ledger sopra, ma UN SOLO file condiviso fra le due sezioni (nessuna
             # variante swiss-). Era assente dall'allowlist: un conflitto di
             # rebase su questo file abortiva il run esattamente come #76/#225/#496.
+            #
+            # Il backoff deve precedere fetch+rebase: dormire DOPO il rebase
+            # rende HEAD gia' stantio prima del tentativo successivo, proprio
+            # durante le raffiche di push dei crawler.
+            sleep $((attempt * 3))
             bash scripts/lib/rebase-onto-remote.sh "$REMOTE" "$TARGET" \
               data/topic-candidates-evergreen-rejected.json \
               data/topic-candidates-consumed.json \
@@ -1706,7 +1714,6 @@ jobs:
               --take-theirs data/blog-articles/ \
               --take-theirs data/swiss-articles/ \
               --take-theirs public/images/blog/ || true
-            sleep $((attempt * 3))
           done
           echo "::error::push failed after 5 attempts — the article is registered locally but not pushed"
           exit 1
