@@ -1,20 +1,21 @@
 {
   "key": "artisa-group",
   "label": "Artisa Group",
-  "generatedAt": "2026-08-30T15:04:54.025Z",
+  "generatedAt": "2026-08-30T23:43:59.931Z",
   "total": 3,
   "newCount": 0,
   "updatedCount": 1,
   "removedCount": 0,
   "unchangedCount": 0,
-  "durationMs": 4940,
-  "avgDurationMs": 4940,
+  "durationMs": 6718,
+  "avgDurationMs": 6718,
   "durationHistory": [
     5352,
     6896,
     6222,
     5993,
-    4940
+    4940,
+    6718
   ],
   "newJobs": [],
   "updatedJobs": [
