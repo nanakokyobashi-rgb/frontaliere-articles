@@ -209,9 +209,12 @@ jobs:
               echo "pushed to $TARGET"
               exit 0
             fi
-            echo "push attempt $attempt failed — rebasing onto $TARGET"
-            git pull --rebase "$REMOTE" "$TARGET" || { git rebase --abort 2>/dev/null || true; }
+            echo "push attempt $attempt failed"
+            if [ "$attempt" -eq 3 ]; then
+              break
+            fi
             sleep $((attempt * 3))
+            git pull --rebase "$REMOTE" "$TARGET" || { git rebase --abort 2>/dev/null || true; }
           done
           echo "::error::push failed after 3 attempts (git output above)"
           exit 1
