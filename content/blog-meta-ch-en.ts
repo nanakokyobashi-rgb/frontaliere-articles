@@ -4831,6 +4831,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.scorte-mangimi-proteici-svizzera.title': 'Protein feed stocks released in Switzerland: up to 16,000 tonnes',
     'blog.article.scorte-mangimi-proteici-svizzera.excerpt': 'The EPA frees 20% of the mandatory stocks of soybean meal for farmers, due to dry Rhine and Danube.',
     'blog.article.scorte-mangimi-proteici-svizzera.imageAlt': 'Swiss farm with cattle near a dried-up riverbed',
+    'blog.article.swatch-samsung-risarcimento-marchi.title': 'Swatch beats Samsung: 11.6 million in compensation',
+    'blog.article.swatch-samsung-risarcimento-marchi.excerpt': 'UK court orders Samsung to pay $11.6 million for infringement of Swiss watch brands in the Galaxy App Store between 2015 and 2019.',
+    'blog.article.swatch-samsung-risarcimento-marchi.imageAlt': 'Close-up of luxury Swiss watchfaces and mechanical components in professional studio photography',
 };
 
 export default blogMetaChEn;

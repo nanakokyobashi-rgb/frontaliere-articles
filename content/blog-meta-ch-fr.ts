@@ -4831,6 +4831,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.scorte-mangimi-proteici-svizzera.title': 'Stocks d\'aliments protéiques débloqués en Suisse : jusqu\'à 16\'000 tonnes',
     'blog.article.scorte-mangimi-proteici-svizzera.excerpt': 'L\'AEP libère 20 % des stocks obligatoires de farine de soja pour les éleveurs, en raison de la sécheresse du Rhin et du Danube.',
     'blog.article.scorte-mangimi-proteici-svizzera.imageAlt': 'Élevage suisse avec bovins près d\'une rivière asséchée',
+    'blog.article.swatch-samsung-risarcimento-marchi.title': 'Swatch bat Samsung : 11,6 millions d\'euros de dédommagement',
+    'blog.article.swatch-samsung-risarcimento-marchi.excerpt': 'Le tribunal britannique condamne Samsung à payer 11,6 millions de dollars pour violation de marques horlogères suisses sur le Galaxy App Store entre 2015 et 2019.',
+    'blog.article.swatch-samsung-risarcimento-marchi.imageAlt': 'Gros plan sur des cadrans de montres de luxe suisses et des composants mécaniques en photographie professionnelle',
 };
 
 export default blogMetaChFr;

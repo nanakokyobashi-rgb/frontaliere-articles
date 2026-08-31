@@ -4831,6 +4831,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.scorte-mangimi-proteici-svizzera.title': 'Eiweißfuttervorräte in der Schweiz freigeschaltet: bis zu 16\'000 Tonnen',
     'blog.article.scorte-mangimi-proteici-svizzera.excerpt': 'Die AEP gibt 20% der Pflichtvorräte an Sojamehl für die Viehzüchter frei, weil Rhein und Donau ausgetrocknet sind.',
     'blog.article.scorte-mangimi-proteici-svizzera.imageAlt': 'Schweizer Bauernhof mit Rindern an einem trockenen Flussbett',
+    'blog.article.swatch-samsung-risarcimento-marchi.title': 'Swatch schlägt Samsung: 11,6 Mio. Entschädigung',
+    'blog.article.swatch-samsung-risarcimento-marchi.excerpt': 'Ein britisches Gericht verurteilt Samsung zur Zahlung von 11,6 Millionen Dollar wegen Verletzung von Schweizer Uhrenmarken im Galaxy App Store zwischen 2015 und 2019.',
+    'blog.article.swatch-samsung-risarcimento-marchi.imageAlt': 'Nahaufnahme von Luxus-Uhrengehäusen und mechanischen Komponenten in professioneller Studiofotografie',
 };
 
 export default blogMetaChDe;

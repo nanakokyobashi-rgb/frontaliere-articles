@@ -4831,6 +4831,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.scorte-mangimi-proteici-svizzera.title': 'Scorte di mangimi proteici sbloccate in Svizzera: fino a 16\'000 tonnellate',
     'blog.article.scorte-mangimi-proteici-svizzera.excerpt': 'L\'AEP libera il 20% delle scorte obbligatorie di farina di soia per gli allevatori, causa Reno e Danubio in secca.',
     'blog.article.scorte-mangimi-proteici-svizzera.imageAlt': 'Allevamento svizzero con bovini vicino a un fiume in secca',
+    'blog.article.swatch-samsung-risarcimento-marchi.title': 'Swatch batte Samsung: 11,6 mln di risarcimento',
+    'blog.article.swatch-samsung-risarcimento-marchi.excerpt': 'Tribunale britannico condanna Samsung a pagare 11,6 milioni di dollari per violazione di marchi orologieri svizzeri nel Galaxy App Store tra 2015 e 2019.',
+    'blog.article.swatch-samsung-risarcimento-marchi.imageAlt': 'Dettagli di quadranti e componenti meccanici di orologi di lusso svizzeri in studio fotografico professionale',
 };
 
 export default blogMetaChIt;
