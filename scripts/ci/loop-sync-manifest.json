@@ -3003,8 +3003,68 @@
       "sitePath": ".github/corpus-workflows/contract.json",
       "mode": "identical",
       "baseline": {
-        "site": "a2ee3d8a84f9dfe6",
-        "corpus": "a2ee3d8a84f9dfe6",
+        "site": "98bb5b2ab55f027b",
+        "corpus": "98bb5b2ab55f027b",
+        "alignedAt": "2026-08-31"
+      }
+    },
+    {
+      "path": "generator/tests/crawler-cross-repo-artifacts.test.mjs",
+      "sitePath": ".github/corpus-workflows/observers/generator/tests/crawler-cross-repo-artifacts.test.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "a4b97d593486bd4f",
+        "corpus": "a4b97d593486bd4f",
+        "alignedAt": "2026-08-31"
+      }
+    },
+    {
+      "path": ".github/workflows/crawler-generation-observer-shadow.yml",
+      "sitePath": ".github/corpus-workflows/observers/workflows/crawler-generation-observer-shadow.yml",
+      "mode": "identical",
+      "baseline": {
+        "site": "7194dcbff3472e1e",
+        "corpus": "7194dcbff3472e1e",
+        "alignedAt": "2026-08-31"
+      }
+    },
+    {
+      "path": "scripts/ci/crawler-generation-observer-selector.mjs",
+      "sitePath": ".github/corpus-workflows/observers/scripts/crawler-generation-observer-selector.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "5021d14040bdb6fd",
+        "corpus": "5021d14040bdb6fd",
+        "alignedAt": "2026-08-31"
+      }
+    },
+    {
+      "path": "scripts/ci/lib/canonical-json-digest.mjs",
+      "sitePath": ".github/corpus-workflows/observers/scripts/lib/canonical-json-digest.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "a98a130d20cea211",
+        "corpus": "a98a130d20cea211",
+        "alignedAt": "2026-08-31"
+      }
+    },
+    {
+      "path": "scripts/ci/lib/crawler-generation-observer-report.mjs",
+      "sitePath": ".github/corpus-workflows/observers/scripts/lib/crawler-generation-observer-report.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "69107b2f9ac17860",
+        "corpus": "69107b2f9ac17860",
+        "alignedAt": "2026-08-31"
+      }
+    },
+    {
+      "path": "scripts/ci/lib/github-actions-read-client.mjs",
+      "sitePath": ".github/corpus-workflows/observers/scripts/lib/github-actions-read-client.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "b3d68540e6125bea",
+        "corpus": "b3d68540e6125bea",
         "alignedAt": "2026-08-31"
       }
     }
