@@ -1,5 +1,4 @@
 {
-  "https://www.swissinfo.ch/ita/economia-agraria/ceo-di-k%c3%a4gi-il-problema-pi%c3%b9-grande-sono-le-esportazioni/91377425": "ceo-kagi-esportazioni-difficolta",
   "https://www.swissinfo.ch/ita/catene-alimentari/vero-o-falso-nelle-catene-di-approvvigionamento-svizzere-esiste-il-lavoro-forzato/91809968": "lavoro-forzato-svizzera",
   "https://www.swissinfo.ch/ita/quinta-svizzera/andare-in-pensione-qui-o-altrove-queste-persone-svizzere-allestero-hanno-scelto-entrambe-le-opzioni/89982486": "frontalieri-pensione-altrove",
   "https://www.tio.ch/svizzera/attualita/1941604/milionari-reddito-zurigo-milione-vivono-franchi": "milionari-reddito-svizzera-2022",
@@ -1397,6 +1396,11 @@
   "https://www.admin.ch/it/newnsb/holsnqc6wk9s_okvufdf5": {
     "articleId": "divario-salariale-genere-agosto-2026",
     "ts": "2026-08-31T21:48:54.890Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/citt%c3%a0%3a-pi%c3%b9-margine-manovra-per-adattamento-climatico-sulle-strade/91979739": {
+    "articleId": "citta-clima-30-kmh-strade",
+    "ts": "2026-08-31T22:02:28.264Z",
     "keyForm": 2
   }
 }
