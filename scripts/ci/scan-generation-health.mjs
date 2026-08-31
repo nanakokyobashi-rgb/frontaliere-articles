@@ -119,6 +119,13 @@
  * Scambiare l'assenza di misura per salute è esattamente la classe di difetto
  * che questo scanner esiste per chiudere: non la si reintroduce qui dentro.
  *
+ * `available:false` da solo però non basta a coprire un caso: se la SORGENTE
+ * di `generation-idle`/`section-dry` (i commit di `main`) resta troncata per
+ * più passate di fila, quelle due condizioni restano cieche in silenzio finché
+ * dura. `commit-window-truncated` esiste per rendere quello stato VISIBILE —
+ * si apre e si richiude con la stessa simmetria di ogni altra condizione,
+ * niente contatore fra le passate (follow-up(#643) → #658).
+ *
  * ## Routing: `agent:fix-queued`, non `agent:fix` — deliberato
  *
  * `issue-fix.yml` ha `concurrency: group: issue-fix, cancel-in-progress: false`,
@@ -1172,6 +1179,54 @@ export const CONDITIONS = [
           'Va guardato prima: la quota dei provider LLM (una pausa globale è la causa più frequente e NON è',
           'un difetto di questo repo), poi `.github/workflows/generate-article.yml` e',
           '`generator/scripts/create-article.mjs`.',
+        ].join('\n') + footer(REMEASURE.commits),
+      };
+    },
+  },
+
+  {
+    id: 'commit-window-truncated',
+    scope: 'global',
+    priority: 3,
+    title: () => 'Watchdog generazione: finestra commit troncata, generation-idle/section-dry ciechi',
+    // follow-up(#643) → #658: `truncated` (sopra) rende `generation-idle` e
+    // `section-dry` `available:false` — corretto quando è un episodio isolato,
+    // ma se il burst che lo causa (crawler dedicati, auto-translate, slug
+    // regen) diventasse uno stato STEADY, quelle due condizioni resterebbero
+    // cieche a ogni passata finché il burst persiste: un falso-negativo
+    // occasionale e VISIBILE (questa condizione lo accende) è preferibile a un
+    // blind spot silenzioso e permanente. Misurato il 2026-08-31: un burst da
+    // 100 commit in 37 minuti consuma da solo il budget di 300 (vedi
+    // `collectCommits`).
+    //
+    // Nessuna soglia «da N run consecutivi»: lo scanner è stateless fra le
+    // passate (il workflow ha `contents: read`, non scrive un contatore), e
+    // l'apertura/chiusura della issue stessa fa da contatore — resta aperta
+    // finché il burst dura, si richiude da sola alla prima passata sana.
+    evaluate(m) {
+      if (!m.commits.available) return { available: false };
+      if (!m.commits.truncated) return { firing: false };
+      return {
+        firing: true,
+        body: [
+          `La lettura dei commit di \`main\` si è fermata dopo il budget di pagine`,
+          `(${m.commits.total} commit letti) **prima** di raggiungere il cutoff di`,
+          `**${m.commits.lookbackHours}h**: un burst di commit non-articolo ha consumato`,
+          'tutto il budget prima che la finestra nominale fosse letta per intero.',
+          '',
+          '`generation-idle` e `section-dry` trattano questo come `available:false`',
+          '(non misurato, non guasto) e NON aprono né chiudono issue mentre dura —',
+          'per costruzione, corretta per un burst isolato. Se questa condizione resta',
+          'accesa per più passate consecutive (il cron gira ogni 2h), il burst non è',
+          'più un episodio ma uno stato: le due condizioni sopra sono cieche da',
+          'altrettante ore, non da un singolo scan.',
+          '',
+          `- Commit letti: ${m.commits.total} (budget pagine esaurito).`,
+          `- Rifiutati (\`Record rejected topic candidates\`) nella parte letta: ${m.commits.rejected}.`,
+          '',
+          'Punto da cui guardare: quale processo sta producendo il burst su `main`',
+          '(crawler dedicati, auto-translate, slug regen) e se è legittimo che duri',
+          'così a lungo — non `generate-article.yml`, che qui non è la causa.',
         ].join('\n') + footer(REMEASURE.commits),
       };
     },
