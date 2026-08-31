@@ -302,16 +302,55 @@ export function isTrivialSecret(value) {
 }
 
 /**
- * Whether an HTTP status from the Remote Config REST fetch is worth retrying.
+ * Google API quota/rate-limit rejections that arrive as HTTP 403 instead of
+ * 429 — documented behaviour of the legacy Google API error envelope
+ * (`error.errors[].reason`) that `firebaseremoteconfig.googleapis.com` still
+ * uses, alongside the newer gRPC-status shape (`error.status`). Issue #247
+ * measured exactly this on 2026-08-31: a REST 403 (run 33440368972) that
+ * self-recovered eighteen minutes later (run 33441957650) with the SAME,
+ * unrotated service-account credentials — proof it was never a permission
+ * problem, just a transient quota rejection shaped like one.
+ */
+const QUOTA_RC_FETCH_REASONS = new Set([
+  'rateLimitExceeded',
+  'userRateLimitExceeded',
+  'dailyLimitExceededUnreg',
+  'quotaExceeded',
+  'RESOURCE_EXHAUSTED',
+]);
+
+/**
+ * Best-effort extraction of a Google API error reason from a REST error
+ * response body. Returns null on anything that doesn't parse or doesn't
+ * carry a recognizable reason — callers must treat null as "unknown", not
+ * "retryable".
+ */
+export function extractGoogleErrorReason(bodyText) {
+  try {
+    const parsed = JSON.parse(bodyText);
+    return parsed?.error?.errors?.[0]?.reason || parsed?.error?.status || null;
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * Whether an HTTP status (+ optional parsed error reason) from the Remote
+ * Config REST fetch is worth retrying.
  *
  * 429 and 5xx are transient — the exact failure mode behind issues #45, #54
  * and #171 ("Agent loop down: GITHUB_PAT failed to load"), all three of which
  * turned out NOT to be a real credential problem but a single unretried 429
  * or 503 from this endpoint. A 4xx other than 429 (bad JWT, wrong project)
- * will not resolve itself on retry.
+ * will not resolve itself on retry — UNLESS the 403 carries one of the
+ * QUOTA_RC_FETCH_REASONS above, in which case it is the same transient quota
+ * rejection wearing a different status code (see #247, 2026-08-31 recurrence).
+ * `reason` is omitted by existing 429/5xx callers and by any 403 whose body
+ * didn't parse, which keeps a plain 403 non-retryable exactly as before.
  */
-export function isRetryableRcFetchStatus(status) {
-  return status === 429 || status >= 500;
+export function isRetryableRcFetchStatus(status, reason) {
+  if (status === 429 || status >= 500) return true;
+  return status === 403 && QUOTA_RC_FETCH_REASONS.has(reason);
 }
 
 /** Exponential backoff in ms for retry attempt N (1-based), same shape as
@@ -402,8 +441,12 @@ async function fetchTemplateViaRest() {
       continue;
     }
     if (rcRes.ok) return rcRes.json();
-    lastErr = new Error(`Remote Config REST fetch failed: ${rcRes.status}`);
-    if (!isRetryableRcFetchStatus(rcRes.status)) throw lastErr;
+    // A 403 needs the body to tell a transient quota rejection apart from a
+    // real PERMISSION_DENIED — see isRetryableRcFetchStatus above (#247).
+    const bodyText = await rcRes.text().catch(() => '');
+    const reason = extractGoogleErrorReason(bodyText);
+    lastErr = new Error(`Remote Config REST fetch failed: ${rcRes.status}${reason ? ` (${reason})` : ''}`);
+    if (!isRetryableRcFetchStatus(rcRes.status, reason)) throw lastErr;
     if (attempt < RC_FETCH_ATTEMPTS) {
       await new Promise((r) => setTimeout(r, rcFetchBackoffMs(attempt)));
     }

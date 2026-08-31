@@ -16,7 +16,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { isRetryableRcFetchStatus, rcFetchBackoffMs, RC_FETCH_TIMEOUT_MS } from '../scripts/load-rc-env.mjs';
+import { isRetryableRcFetchStatus, extractGoogleErrorReason, rcFetchBackoffMs, RC_FETCH_TIMEOUT_MS } from '../scripts/load-rc-env.mjs';
 import { TOKEN_EXCHANGE_TIMEOUT_MS } from '../scripts/lib/google-service-account-token.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -108,4 +108,66 @@ test('exchangeAssertionForToken non ri-lancia subito su un fetch() rifiutato sen
     /if\s*\(err\?\.name\s*!==\s*'AbortError'\s*&&\s*err\?\.name\s*!==\s*'TimeoutError'\)\s*throw err;/,
     'un fallimento di rete nudo (DNS/TLS/connection reset, nessun Abort/TimeoutError) deve rientrare nel retry loop, non essere ri-lanciato al primo tentativo',
   );
+});
+
+// Recidiva del 2026-08-31 (run 33440368972): un REST 403 dalla Remote Config
+// che si è auto-risolto 18 minuti dopo (run 33441957650) con le STESSE
+// credenziali, mai ruotate — cioè non era mai un problema di permessi, ma un
+// rifiuto di quota che Google a volte veste da 403 invece che da 429 (vedi
+// `error.errors[].reason` nel body). Il classificatore precedente trattava
+// ogni 403 come un JWT invalido e rilanciava subito, saltando l'intero
+// retry budget su esattamente il fallimento transitorio misurato qui.
+test('un 403 "nudo" (nessuna reason riconosciuta) resta NON retryable — comportamento invariato', () => {
+  assert.equal(isRetryableRcFetchStatus(403), false);
+  assert.equal(isRetryableRcFetchStatus(403, undefined), false);
+  assert.equal(isRetryableRcFetchStatus(403, 'PERMISSION_DENIED'), false);
+});
+
+test('un 403 con reason di quota Google È retryable — stesso fallimento transitorio di #247 (2026-08-31)', () => {
+  for (const reason of ['rateLimitExceeded', 'userRateLimitExceeded', 'dailyLimitExceededUnreg', 'quotaExceeded', 'RESOURCE_EXHAUSTED']) {
+    assert.equal(isRetryableRcFetchStatus(403, reason), true, `reason=${reason} deve essere retryable`);
+  }
+});
+
+test('extractGoogleErrorReason legge sia la forma legacy (errors[].reason) sia quella gRPC-status (error.status)', () => {
+  assert.equal(
+    extractGoogleErrorReason(JSON.stringify({ error: { errors: [{ reason: 'rateLimitExceeded' }] } })),
+    'rateLimitExceeded',
+  );
+  assert.equal(
+    extractGoogleErrorReason(JSON.stringify({ error: { status: 'RESOURCE_EXHAUSTED' } })),
+    'RESOURCE_EXHAUSTED',
+  );
+  assert.equal(extractGoogleErrorReason('not json'), null);
+  assert.equal(extractGoogleErrorReason('{}'), null);
+});
+
+test('fetchTemplateViaRest legge il body e passa la reason al classificatore prima di ri-lanciare', () => {
+  const src = fs.readFileSync(path.join(ROOT, 'scripts/load-rc-env.mjs'), 'utf8');
+  const fnBody = src.slice(
+    src.indexOf('async function fetchTemplateViaRest'),
+    src.indexOf('// ─── Main'),
+  );
+  assert.match(fnBody, /extractGoogleErrorReason\(bodyText\)/, 'un 403 deve leggere il body per estrarre la reason, non fermarsi allo status');
+  assert.match(fnBody, /isRetryableRcFetchStatus\(rcRes\.status,\s*reason\)/, 'la reason estratta deve raggiungere il classificatore');
+});
+
+// refresh-daily-brief-data.mjs chiama lo stesso `isRetryableRcFetchStatus`
+// contro l'API REST di Firestore (stessa infra Google, stesso classificatore
+// condiviso) — senza leggere il body, un 403 di quota qui degrada in
+// silenzio il blocco daily-brief invece di riprovare (review PR #683).
+test("fetchJson e getDoc in refresh-daily-brief-data.mjs leggono il body e passano la reason al classificatore", () => {
+  const src = fs.readFileSync(path.join(ROOT, 'scripts/refresh-daily-brief-data.mjs'), 'utf8');
+  const fnBodyFetchJson = src.slice(
+    src.indexOf('async function fetchJson'),
+    src.indexOf('/** List every doc'),
+  );
+  const fnBodyGetDoc = src.slice(
+    src.indexOf('async function getDoc'),
+    src.indexOf('function loadServiceAccountCreds'),
+  );
+  for (const [name, fnBody] of [['fetchJson', fnBodyFetchJson], ['getDoc', fnBodyGetDoc]]) {
+    assert.match(fnBody, /extractGoogleErrorReason\(bodyText\)/, `${name}: un 403 deve leggere il body per estrarre la reason, non fermarsi allo status`);
+    assert.match(fnBody, /isRetryableRcFetchStatus\(res\.status,\s*reason\)/, `${name}: la reason estratta deve raggiungere il classificatore`);
+  }
 });
