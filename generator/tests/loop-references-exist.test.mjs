@@ -75,6 +75,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import fs from 'node:fs';
+import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -92,19 +93,91 @@ const EXPECTED_CRAWLER_ARTIFACTS = [
   ...Array.from({ length: 23 }, (_, index) => `crawler-group-${String(index + 1).padStart(2, '0')}.yml`),
   'translate-pending.yml',
 ];
-const CRAWLER_ARTIFACT_RELS = new Set(
-  (CRAWLER_CONTRACT?.artifacts ?? []).map((artifact) => `${WORKFLOW_DIR}/${artifact.file}`),
-);
-const CRAWLER_SITE_RUNTIME_PATHS = new Set(CRAWLER_CONTRACT?.siteRuntimePaths ?? []);
+const EXPECTED_CRAWLER_ARTIFACT_SET = new Set(EXPECTED_CRAWLER_ARTIFACTS);
+const EXPECTED_CRAWLER_OBSERVER_WORKFLOW_RELS = new Set([
+  `${WORKFLOW_DIR}/crawler-generation-observer-shadow.yml`,
+]);
 
 function sha256(text) {
   return createHash('sha256').update(text).digest('hex');
 }
 
-function isContractBoundSiteRuntimeCitation(citation) {
-  if (!CRAWLER_CONTRACT || !CRAWLER_ARTIFACT_RELS.has(citation.from)) return false;
-  if (CRAWLER_SITE_RUNTIME_PATHS.has(citation.token)) return true;
-  return citation.token === `.github/corpus-workflows/${path.basename(citation.from)}`;
+function isRegularFileWithoutSymlinkComponents(root, rel) {
+  const absoluteRoot = path.resolve(root);
+  const absolute = path.resolve(absoluteRoot, rel);
+  if (!absolute.startsWith(`${absoluteRoot}${path.sep}`)) return false;
+
+  let current = absoluteRoot;
+  try {
+    const rootStat = fs.lstatSync(current);
+    if (!rootStat.isDirectory() || rootStat.isSymbolicLink()) return false;
+    const parts = path.relative(absoluteRoot, absolute).split(path.sep);
+    for (const [index, part] of parts.entries()) {
+      current = path.join(current, part);
+      const stat = fs.lstatSync(current);
+      if (stat.isSymbolicLink()) return false;
+      const isLast = index === parts.length - 1;
+      if (isLast ? !stat.isFile() : !stat.isDirectory()) return false;
+    }
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+function createCrawlerContractBinding(contract, root) {
+  const artifactEntries = (contract?.artifacts ?? [])
+    .filter((artifact) => EXPECTED_CRAWLER_ARTIFACT_SET.has(artifact.file));
+  const artifactCounts = new Map();
+  for (const artifact of artifactEntries) {
+    artifactCounts.set(artifact.file, (artifactCounts.get(artifact.file) ?? 0) + 1);
+  }
+  const artifactHashes = new Map(
+    artifactEntries
+      .filter((artifact) => artifactCounts.get(artifact.file) === 1)
+      .map((artifact) => [`${WORKFLOW_DIR}/${artifact.file}`, artifact.artifactSha256]),
+  );
+
+  const observerWorkflowEntries = (contract?.observers ?? [])
+    .filter((observer) => EXPECTED_CRAWLER_OBSERVER_WORKFLOW_RELS.has(observer.target));
+  const observerTargetCounts = new Map();
+  for (const observer of observerWorkflowEntries) {
+    observerTargetCounts.set(observer.target, (observerTargetCounts.get(observer.target) ?? 0) + 1);
+  }
+  const observerWorkflowHashes = new Map(
+    observerWorkflowEntries
+      .filter((observer) => observerTargetCounts.get(observer.target) === 1)
+      .map((observer) => [observer.target, observer.sha256]),
+  );
+  const expectedHashes = new Map([...artifactHashes, ...observerWorkflowHashes]);
+  const hashBoundSourceRels = new Set();
+
+  for (const [rel, expectedHash] of expectedHashes) {
+    const absolute = path.join(root, rel);
+    if (!isRegularFileWithoutSymlinkComponents(root, rel)) continue;
+    if (sha256(fs.readFileSync(absolute, 'utf8')) === expectedHash) hashBoundSourceRels.add(rel);
+  }
+
+  return {
+    artifactRels: new Set(artifactHashes.keys()),
+    observerWorkflowRels: new Set(observerWorkflowHashes.keys()),
+    runtimeSourceRels: new Set(expectedHashes.keys()),
+    hashBoundSourceRels,
+    siteRuntimePaths: new Set(contract?.siteRuntimePaths ?? []),
+  };
+}
+
+const CRAWLER_CONTRACT_BINDING = createCrawlerContractBinding(CRAWLER_CONTRACT, ROOT);
+const CRAWLER_ARTIFACT_RELS = CRAWLER_CONTRACT_BINDING.artifactRels;
+const CRAWLER_OBSERVER_WORKFLOW_RELS = CRAWLER_CONTRACT_BINDING.observerWorkflowRels;
+const CRAWLER_RUNTIME_SOURCE_RELS = CRAWLER_CONTRACT_BINDING.runtimeSourceRels;
+const CRAWLER_SITE_RUNTIME_PATHS = CRAWLER_CONTRACT_BINDING.siteRuntimePaths;
+
+function isContractBoundSiteRuntimeCitation(citation, binding = CRAWLER_CONTRACT_BINDING) {
+  if (!binding.hashBoundSourceRels.has(citation.from)) return false;
+  if (binding.siteRuntimePaths.has(citation.token)) return true;
+  return binding.artifactRels.has(citation.from)
+    && citation.token === `.github/corpus-workflows/${path.basename(citation.from)}`;
 }
 
 /**
@@ -1379,20 +1452,33 @@ test('ogni path citato dagli script del ciclo esiste, o la sua assenza è dichia
   );
 });
 
-test('con il contract, l eccezione runtime è chiusa sui 24 artifact hashati', {
+test('con il contract, l eccezione runtime è chiusa sui 24 artifact e sull observer hashati', {
   skip: !CRAWLER_CONTRACT && 'contract crawler non ancora trasportato',
 }, () => {
   const files = CRAWLER_CONTRACT.artifacts.map((artifact) => artifact.file).sort();
   assert.deepEqual(files, [...EXPECTED_CRAWLER_ARTIFACTS].sort());
   assert.equal(CRAWLER_ARTIFACT_RELS.size, 24);
+  assert.equal(CRAWLER_CONTRACT.observers.length, CRAWLER_CONTRACT.observerCount);
+  assert.equal(
+    new Set(CRAWLER_CONTRACT.observers.map((observer) => observer.target)).size,
+    CRAWLER_CONTRACT.observers.length,
+    'i target observer devono essere unici',
+  );
+  const expectedPresentObserverWorkflows = [...EXPECTED_CRAWLER_OBSERVER_WORKFLOW_RELS]
+    .filter((rel) => isRegularFileWithoutSymlinkComponents(ROOT, rel));
+  assert.deepEqual(
+    [...CRAWLER_OBSERVER_WORKFLOW_RELS],
+    expectedPresentObserverWorkflows,
+  );
   assert.ok(CRAWLER_SITE_RUNTIME_PATHS.size > 0);
-  for (const artifact of CRAWLER_CONTRACT.artifacts) {
-    const rel = `${WORKFLOW_DIR}/${artifact.file}`;
-    assert.equal(sha256(fs.readFileSync(path.join(ROOT, rel), 'utf8')), artifact.artifactSha256, rel);
-  }
+  assert.deepEqual(
+    [...CRAWLER_CONTRACT_BINDING.hashBoundSourceRels].sort(),
+    [...CRAWLER_RUNTIME_SOURCE_RELS].sort(),
+    'ogni sorgente autorizzata deve coincidere con lo SHA dichiarato dal contract',
+  );
   const citedRuntimePaths = new Set(
     [...collectCitations().values()]
-      .filter((citation) => CRAWLER_ARTIFACT_RELS.has(citation.from))
+      .filter((citation) => CRAWLER_RUNTIME_SOURCE_RELS.has(citation.from))
       .map((citation) => citation.token)
       .filter((token) => token.startsWith('scripts/')),
   );
@@ -1400,6 +1486,65 @@ test('con il contract, l eccezione runtime è chiusa sui 24 artifact hashati', {
     [...citedRuntimePaths].sort(),
     [...CRAWLER_SITE_RUNTIME_PATHS].sort(),
   );
+});
+
+test('l observer non ottiene eccezioni se path o hash divergono dal contract chiuso', {
+  skip: CRAWLER_OBSERVER_WORKFLOW_RELS.size === 0 && 'observer workflow non ancora trasportato',
+}, () => {
+  const observerRel = [...EXPECTED_CRAWLER_OBSERVER_WORKFLOW_RELS][0];
+  const citation = { from: observerRel, token: 'scripts/crawler-generation-observer.mjs' };
+  assert.equal(isContractBoundSiteRuntimeCitation(citation), true);
+
+  const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'crawler-observer-contract-'));
+  try {
+    const observerText = fs.readFileSync(path.join(ROOT, observerRel), 'utf8');
+    const exactObserver = CRAWLER_CONTRACT.observers.find((observer) => observer.target === observerRel);
+    assert.ok(exactObserver, 'observer workflow assente dal contract');
+
+    fs.mkdirSync(path.join(tmp, path.dirname(observerRel)), { recursive: true });
+    fs.writeFileSync(path.join(tmp, observerRel), `${observerText}\n# tampered\n`);
+    const tamperedBinding = createCrawlerContractBinding(CRAWLER_CONTRACT, tmp);
+    assert.equal(isContractBoundSiteRuntimeCitation(citation, tamperedBinding), false);
+
+    fs.rmSync(path.join(tmp, observerRel));
+    const symlinkTarget = path.join(tmp, 'observer-target.yml');
+    fs.writeFileSync(symlinkTarget, observerText);
+    fs.symlinkSync(path.relative(path.dirname(path.join(tmp, observerRel)), symlinkTarget), path.join(tmp, observerRel));
+    const fileSymlinkBinding = createCrawlerContractBinding(CRAWLER_CONTRACT, tmp);
+    assert.equal(isContractBoundSiteRuntimeCitation(citation, fileSymlinkBinding), false);
+
+    const componentRoot = path.join(tmp, 'component-symlink-root');
+    const externalWorkflows = path.join(componentRoot, 'external', 'workflows');
+    fs.mkdirSync(externalWorkflows, { recursive: true });
+    fs.writeFileSync(path.join(externalWorkflows, path.basename(observerRel)), observerText);
+    fs.symlinkSync('external', path.join(componentRoot, '.github'));
+    const componentSymlinkBinding = createCrawlerContractBinding(CRAWLER_CONTRACT, componentRoot);
+    assert.equal(isContractBoundSiteRuntimeCitation(citation, componentSymlinkBinding), false);
+
+    const duplicateContract = structuredClone(CRAWLER_CONTRACT);
+    duplicateContract.observers.push(structuredClone(exactObserver));
+    duplicateContract.observerCount = duplicateContract.observers.length;
+    fs.rmSync(path.join(tmp, observerRel));
+    fs.writeFileSync(path.join(tmp, observerRel), observerText);
+    const duplicateBinding = createCrawlerContractBinding(duplicateContract, tmp);
+    assert.equal(isContractBoundSiteRuntimeCitation(citation, duplicateBinding), false);
+
+    const unexpectedRel = `${WORKFLOW_DIR}/unexpected-observer.yml`;
+    fs.writeFileSync(path.join(tmp, unexpectedRel), observerText);
+    const unexpectedContract = structuredClone(CRAWLER_CONTRACT);
+    unexpectedContract.observers = unexpectedContract.observers.map((observer) => (
+      observer.target === observerRel
+        ? { ...observer, target: unexpectedRel, sha256: sha256(observerText) }
+        : observer
+    ));
+    const unexpectedBinding = createCrawlerContractBinding(unexpectedContract, tmp);
+    assert.equal(
+      isContractBoundSiteRuntimeCitation({ ...citation, from: unexpectedRel }, unexpectedBinding),
+      false,
+    );
+  } finally {
+    fs.rmSync(tmp, { recursive: true, force: true });
+  }
 });
 
 test('il registro delle assenze dichiarate è ben formato', () => {
