@@ -1,5 +1,4 @@
 {
-  "https://www.swissinfo.ch/ita/siccit%c3%a0%3a-i-contadini-si-mobilitano%2c-arriva-la-borsa-dei-foraggi/91846359": "siccita-contadini-mobilitano",
   "https://www.swissinfo.ch/ita/emigrazione/emigrare-dalla-svizzera-alcuni-aspetti-fondamentali-riguardanti-le-tasse/88379792": "emigrazione-tasse-obblighi-dopo-partenza",
   "https://www.swissinfo.ch/ita/banche-cercano-pi%c3%b9-personale%2c-annunci-%2b14%25-in-luglio/91847006": "banche-cercano-piu-personale",
   "https://www.swissinfo.ch/ita/storia/cile-1988-cosa-possiamo-imparare-oggi-dalla-votazione-che-ha-posto-fine-a-una-dittatura/91611422": "cile-1988-democrazia-svizzera",
@@ -1477,6 +1476,11 @@
   "https://www.swissinfo.ch/ita/aziende-rilevano-carenze-nelle-competenze-di-base-degli-apprendisti/91986777": {
     "articleId": "apprendisti-lacune-competenze-base",
     "ts": "2026-09-01T13:14:00.968Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/economia/1947269/frequenze-comcom-telefonia-bando-rinnovo": {
+    "articleId": "telefonia-asta-frequenze-2029",
+    "ts": "2026-09-01T13:46:32.371Z",
     "keyForm": 2
   }
 }
