@@ -232,6 +232,14 @@ const resolveToken = (token) => (token.includes('/') ? token : `${WORKFLOW_DIR}/
  *                    niente, qui o altrove.
  */
 const DECLARED_ABSENT = {
+  'scripts/ci/followup-drainer.mjs :: mirror-articles-engine.yml': {
+    kind: 'site-only',
+    reason:
+      'Il commento spiega perche il drainer IDENTICO non puo aprire issue cross-repo: ' +
+      '`mirror-articles-engine.yml` vive sul sito e il suo ARTICLES_REPO_PAT e unidirezionale. ' +
+      'Il ramo implementato qui usa invece label e commento locali con il token del corpus; ' +
+      'nessuna chiamata runtime dipende dal workflow assente.',
+  },
   'scripts/ci/scan-generation-health.mjs :: mirror-articles-engine.yml': {
     kind: 'site-only',
     reason:
@@ -411,6 +419,13 @@ const DECLARED_ABSENT = {
       'quello, qui il ruolo lo copre `scripts/ci/followup-drainer.mjs`. Descrittiva — nessun ' +
       'chiamante di qui dipende dalla sua esistenza, e `scripts/ci/pr-body-contract.mjs` legge solo ' +
       '`violations`, non le nuove `warnings`.',
+  },
+  'scripts/lib/pr-body-sections-check.mjs :: .github/workflows/prospector-loop.yml': {
+    kind: 'site-only',
+    reason:
+      'Esempio storico nel docblock del controllo advisory sui path funnel-critical: nomina la ' +
+      'PR sito #6279 che ha toccato `prospector-loop.yml`. Il controllo opera sui `diffPaths` ' +
+      'ricevuti e non apre ne legge quel workflow; sul corpus la sua assenza e descrittiva.',
   },
   'scripts/lib/pr-body-filepath-check.mjs :: scripts/repair-blog-key-marker-corruption.mjs': {
     kind: 'site-only',

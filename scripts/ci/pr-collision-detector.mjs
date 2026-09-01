@@ -51,6 +51,9 @@
  */
 import { execFileSync } from 'node:child_process';
 import { commentOnce as commentOnceShared } from './lib/prComments.mjs';
+import { fetchPrFiles, GRAPHQL_FILES_CAP, REST_FILES_HARD_CAP } from './lib/fetchPrFiles.mjs';
+
+export { fetchPrFiles, GRAPHQL_FILES_CAP, REST_FILES_HARD_CAP };
 
 const DRY = process.argv.includes('--dry-run');
 const REPO = process.env.GITHUB_REPOSITORY || '';
@@ -132,6 +135,23 @@ export function computeColliders(nums, funnelFiles) {
   return colliders;
 }
 
+/**
+ * Cosa fare della label `collision-risk` su una PR che al momento NON risulta
+ * collidere. Pura ed esportata perche' e' la decisione che questo modulo
+ * esiste per prendere, e viveva inline in `main()` — cioe' senza copertura,
+ * esattamente come ci era finito il cap a 100.
+ *
+ * @returns {'add'|'keep'|'remove'|'none'}
+ */
+export function decideCollisionLabel({ collides, hasLabel, listComplete }) {
+  if (collides) return hasLabel ? 'none' : 'add';
+  if (!hasLabel) return 'none';
+  // «Nessuna collisione VISTA» e «non collide» coincidono solo se l'elenco era
+  // completo. Con una lista troncata o non recuperata, togliere la label
+  // sblocca l'auto-merge su una PR che puo' collidere davvero.
+  return listComplete ? 'remove' : 'keep';
+}
+
 function main() {
   if (!REPO) { console.error('GITHUB_REPOSITORY mancante'); process.exit(1); }
   console.log(`pr-collision-detector${DRY ? ' [DRY-RUN]' : ''} repo=${REPO}`);
@@ -139,13 +159,40 @@ function main() {
   let prs;
   try {
     prs = gh(['pr', 'list', '--repo', REPO, '--state', 'open', '--limit', '50',
-      '--json', 'number,labels,isDraft']);
+      '--json', 'number,labels,isDraft,author,headRefName,title']);
   } catch (e) {
     console.error(`gh pr list fallito: ${String(e).slice(0, 160)}`);
     process.exit(0);
   }
   prs = prs || [];
   if (prs.length < 1) { console.log('Nessuna PR aperta.'); return; }
+
+  // Chi sta lavorando sull'altra PR. Senza questo il commento dice CHE c'e' una
+  // collisione ma non A CHI parlarne, e con la flotta che apre PR in parallelo
+  // e' proprio quella l'informazione che serve: le due PR restano indipendenti
+  // (niente lock, niente serializzazione), quindi il coordinamento e' umano o
+  // fra agenti, e per coordinarsi bisogna sapere con chi.
+  //
+  // `author.login` identifica l'identita' che ha aperto la PR (spesso la stessa
+  // per tutta la flotta) e `headRefName` il branch, che per convenzione di
+  // questo repo nomina il task (`fix-6298`, `ci-step-audit`, ...): e' il
+  // discriminante utile quando l'autore e' lo stesso per tutti. Entrambi
+  // opzionali: un campo mancante degrada il testo, non lo rompe.
+  const whoBy = new Map(
+    (prs || []).map((p) => [
+      Number(p.number),
+      { login: p?.author?.login || '', branch: p?.headRefName || '', title: p?.title || '' },
+    ]),
+  );
+  /** Riga «chi ci lavora» per la PR `n`, vuota se non sappiamo niente. */
+  const whoFor = (n) => {
+    const w = whoBy.get(Number(n));
+    if (!w) return '';
+    const bits = [];
+    if (w.login) bits.push(`@${w.login}`);
+    if (w.branch) bits.push(`branch \`${w.branch}\``);
+    return bits.length ? ` (ci lavora ${bits.join(', ')})` : '';
+  };
 
   const candidates = new Set(selectCollisionCandidates(prs));
   const skipped = prs.length - candidates.size;
@@ -157,16 +204,34 @@ function main() {
   // scan (una per PR) e su una draft non serve a nulla.
   const funnelFiles = new Map(); // num -> Set(files)
   const hasLabel = new Map();    // num -> bool collision-risk già presente
+  const listComplete = new Map(); // num -> bool elenco file misurato completo
   for (const pr of prs) {
     hasLabel.set(pr.number, (pr.labels || []).some((l) => l.name === 'collision-risk'));
-    if (!candidates.has(pr.number)) { funnelFiles.set(pr.number, new Set()); continue; }
-    let files = [];
-    try {
-      files = gh(['pr', 'view', String(pr.number), '--repo', REPO, '--json', 'files',
-        '--jq', '[.files[].path]'], { allowFail: true }) || [];
-    } catch { files = []; }
+    // Le draft restano fuori dal grafo ma dentro il cleanup: non le
+    // interroghiamo, quindi il loro elenco e' completo per costruzione (vuoto
+    // perche' non lo cerchiamo, non perche' il fetch e' fallito).
+    if (!candidates.has(pr.number)) {
+      funnelFiles.set(pr.number, new Set());
+      listComplete.set(pr.number, true);
+      continue;
+    }
+    // `changedFiles` e `files` vengono da `fetchPrFiles` in UNA SOLA `gh pr
+    // view`, non piu' da un `pr.changedFiles` letto una volta sola nel `gh pr
+    // list` di sopra e via via piu' stale man mano che questo loop avanza —
+    // era la race di #6206 item 3.
+    const { files, complete, expected, reason } = fetchPrFiles(pr.number, gh, REPO);
     const set = new Set(files.filter(isFunnel));
     funnelFiles.set(pr.number, set);
+    listComplete.set(pr.number, complete);
+    if (!complete) {
+      // La causa cambia cosa farsene: `rest-hard-limit` e' il tetto dell'API e
+      // non rientra da solo, gli altri sono transitori (follow-up #6206 item 1).
+      const hardLimit = reason === 'rest-hard-limit';
+      console.log(`PR #${pr.number}: elenco file INCOMPLETO (${files.length}/${expected ?? '?'} attesi, causa: ${reason}) → una collisione puo' sfuggire, la label non verra' rimossa.`);
+      if (hardLimit) {
+        console.log(`PR #${pr.number}: ⚠️  il troncamento e' il tetto rigido di ${REST_FILES_HARD_CAP} file della REST GitHub, non un errore transitorio — nessun retry lo risolve.`);
+      }
+    }
     if (set.size) console.log(`PR #${pr.number}: ${set.size} file funnel-critical.`);
   }
 
@@ -177,15 +242,26 @@ function main() {
   // Applica/rimuovi label + commenta.
   for (const num of nums) {
     const cols = colliders.get(num);
+    const action = decideCollisionLabel({
+      collides: Boolean(cols && cols.size),
+      hasLabel: Boolean(hasLabel.get(num)),
+      listComplete: Boolean(listComplete.get(num)),
+    });
     if (cols && cols.size) {
-      if (!hasLabel.get(num)) addLabel(num, 'collision-risk');
+      if (action === 'add') addLabel(num, 'collision-risk');
       else console.log(`PR #${num}: collision-risk già presente.`);
       for (const [other, shared] of cols) {
         const list = shared.map((f) => `\`${f}\``).join(', ');
         commentOnce(num, `<!-- COLLISION:${other} -->`,
-          `⚠️ **collision-risk**: questa PR tocca file funnel-critical condivisi con la PR #${other}: ${list}. La seconda a raggiungere il merge DEVE prima rebasare oltre l'altra (\`git merge origin/main\` dopo che l'altra è mergiata) — l'auto-merge è bloccato finché \`collision-risk\` + dietro main. _Segnale deterministico da pr-collision-detector.yml (zero-Claude)._`);
+          `⚠️ **collision-risk**: questa PR tocca file funnel-critical condivisi con la PR #${other}${whoFor(other)}: ${list}. ` +
+          `Le due PR restano INDIPENDENTI — nessun lock le serializza — ma la seconda a raggiungere il merge DEVE prima rebasare oltre l'altra ` +
+          `(\`git merge origin/main\` dopo che l'altra è mergiata); l'auto-merge è bloccato finché \`collision-risk\` + dietro main. ` +
+          `Se ci sta lavorando qualcun altro, coordinatevi qui: chi mergia per primo lascia all'altro un rebase, non un conflitto a sorpresa. ` +
+          `_Segnale deterministico da pr-collision-detector.yml (cron ogni 30 min, zero-Claude)._`);
       }
-    } else if (hasLabel.get(num)) {
+    } else if (action === 'keep') {
+      console.log(`PR #${num}: nessuna collisione vista MA elenco file incompleto → tengo collision-risk (unknown ≠ non collide).`);
+    } else if (action === 'remove') {
       console.log(`PR #${num}: non collide più → rimuovo collision-risk.`);
       removeLabel(num, 'collision-risk');
     }
