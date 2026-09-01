@@ -1,5 +1,4 @@
 {
-  "https://www.tio.ch/rubriche/ospite/1942213/territorio-ricorso-snl-perocchi-claudio-rischia-prezzo-vale": "snl-ricorso-lago-maggiore",
   "https://www.tio.ch/ticino/attualita/1942169/istituzioni-fiducia-festival-carobbio-locarno-guscetti-bene": "marina-carobbio-guscetti-fiducia-istituzioni",
   "https://www.rsi.ch/s/3936792": "lex-netflix-cinema-svizzero-2025",
   "https://www.tio.ch/svizzera/economia/1942311/continua-bolla-svizzera-ubs-punti": "rischio-bolla-svizzera-2026",
@@ -1525,6 +1524,11 @@
   "https://www.tvsvizzera.it/tvs/lavoro-ed-economia/a-processo-presunto-punto-di-riferimento-finanziario-della-ndrangheta-in-svizzera/91978780": {
     "articleId": "processo-ndrangheta-svizzera",
     "ts": "2026-09-01T17:49:56.381Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/dare-alle-lenticchie-la-consistenza-della-carne%2c-ricerca-eth/91987836": {
+    "articleId": "legumi-texture-carne-ricerca-eth",
+    "ts": "2026-09-01T18:05:27.136Z",
     "keyForm": 2
   }
 }
