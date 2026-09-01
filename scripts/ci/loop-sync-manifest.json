@@ -3112,6 +3112,46 @@
         "corpus": "04610e738dedea36",
         "alignedAt": "2026-09-01"
       }
+    },
+    {
+      "path": ".github/workflows/translate-queue-recovery.yml",
+      "mode": "corpus-only",
+      "reason": "Recovery manuale corpus-only della coda translate: workflow_dispatch osserva per default e separa claim content-addressed ed executor at-most-once; lo schedule resta assente e blocked finche la preservazione non e provata.",
+      "baseline": {
+        "site": null,
+        "corpus": "7d9cf334704bf69a",
+        "alignedAt": "2026-09-01"
+      }
+    },
+    {
+      "path": "scripts/ci/translate-queue-recovery-claim.mjs",
+      "mode": "corpus-only",
+      "reason": "Planner e claim CAS zero-dependency corpus-only: riosserva la coda con budget bounded e puo creare soltanto un record Contents API immutabile, senza endpoint Actions mutanti.",
+      "baseline": {
+        "site": null,
+        "corpus": "74bfabc9c9098e5f",
+        "alignedAt": "2026-09-01"
+      }
+    },
+    {
+      "path": "scripts/ci/translate-queue-recovery-executor.mjs",
+      "mode": "corpus-only",
+      "reason": "Executor manuale zero-dependency corpus-only: verifica claim e stato sotto il lock translate e possiede un solo POST bounded al rerun dello stesso run ID, senza retry o fallback.",
+      "baseline": {
+        "site": null,
+        "corpus": "a2d355283de895e7",
+        "alignedAt": "2026-09-01"
+      }
+    },
+    {
+      "path": "generator/tests/translate-queue-recovery-mutation.test.mjs",
+      "mode": "corpus-only",
+      "reason": "Contratto deterministico corpus-only della recovery manuale: copre decision table, CAS concorrente, failure ambiguity, budget, permission e assenza di metodi o endpoint alternativi.",
+      "baseline": {
+        "site": null,
+        "corpus": "623f34c4ffad40a5",
+        "alignedAt": "2026-09-01"
+      }
     }
   ]
 }

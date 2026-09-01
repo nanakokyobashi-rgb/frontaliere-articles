@@ -1,0 +1,132 @@
+name: Translate Queue Recovery (manual, at most once)
+
+on:
+  workflow_dispatch:
+    inputs:
+      target_run_id:
+        description: Cancelled job-zero workflow_dispatch run ID to inspect or recover
+        required: true
+        type: string
+      mode:
+        description: Observe by default; claim_and_rerun performs one fail-closed rerun request
+        required: true
+        type: choice
+        default: observe_only
+        options:
+          - observe_only
+          - claim_and_rerun
+
+permissions:
+  actions: read
+  contents: read
+
+concurrency:
+  group: translate-queue-recovery-v2
+  cancel-in-progress: false
+  queue: max
+
+jobs:
+  observe:
+    if: ${{ github.ref == 'refs/heads/main' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    outputs:
+      decision: ${{ steps.observe.outputs.decision }}
+      eligible: ${{ steps.observe.outputs.eligible }}
+    steps:
+      - name: Observe requested recovery without writes
+        id: observe
+        shell: bash
+        env:
+          CLAIM_SCRIPT: ${{ runner.temp }}/translate-queue-recovery-claim.mjs
+          CLAIM_SCRIPT_URL: https://raw.githubusercontent.com/${{ github.repository }}/${{ github.sha }}/scripts/ci/translate-queue-recovery-claim.mjs
+          GITHUB_TOKEN: ${{ github.token }}
+          OBSERVER_SCRIPT: ${{ runner.temp }}/translate-queue-recovery.mjs
+          OBSERVER_SCRIPT_URL: https://raw.githubusercontent.com/${{ github.repository }}/${{ github.sha }}/scripts/ci/translate-queue-recovery.mjs
+          RECOVERY_MODE: ${{ inputs.mode }}
+          RECOVERY_PHASE: observe
+          TARGET_RUN_ID: ${{ inputs.target_run_id }}
+        run: |-
+          set -euo pipefail
+          curl --proto '=https' --tlsv1.2 --fail --silent --show-error \
+            --location --max-redirs 0 --connect-timeout 5 --max-time 20 --max-filesize 262144 \
+            --output "$OBSERVER_SCRIPT" "$OBSERVER_SCRIPT_URL"
+          curl --proto '=https' --tlsv1.2 --fail --silent --show-error \
+            --location --max-redirs 0 --connect-timeout 5 --max-time 20 --max-filesize 262144 \
+            --output "$CLAIM_SCRIPT" "$CLAIM_SCRIPT_URL"
+          node "$CLAIM_SCRIPT"
+
+  claim:
+    needs: observe
+    if: ${{ inputs.mode == 'claim_and_rerun' && needs.observe.outputs.eligible == 'true' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      actions: read
+      contents: write
+    outputs:
+      claim_commit_sha: ${{ steps.claim.outputs.claim_commit_sha }}
+      claim_created: ${{ steps.claim.outputs.claim_created }}
+      claim_key: ${{ steps.claim.outputs.claim_key }}
+    steps:
+      - name: Create immutable recovery claim
+        id: claim
+        shell: bash
+        env:
+          CLAIM_SCRIPT: ${{ runner.temp }}/translate-queue-recovery-claim.mjs
+          CLAIM_SCRIPT_URL: https://raw.githubusercontent.com/${{ github.repository }}/${{ github.sha }}/scripts/ci/translate-queue-recovery-claim.mjs
+          GITHUB_TOKEN: ${{ github.token }}
+          OBSERVER_SCRIPT: ${{ runner.temp }}/translate-queue-recovery.mjs
+          OBSERVER_SCRIPT_URL: https://raw.githubusercontent.com/${{ github.repository }}/${{ github.sha }}/scripts/ci/translate-queue-recovery.mjs
+          RECOVERY_MODE: claim_and_rerun
+          RECOVERY_PHASE: claim
+          TARGET_RUN_ID: ${{ inputs.target_run_id }}
+        run: |-
+          set -euo pipefail
+          curl --proto '=https' --tlsv1.2 --fail --silent --show-error \
+            --location --max-redirs 0 --connect-timeout 5 --max-time 20 --max-filesize 262144 \
+            --output "$OBSERVER_SCRIPT" "$OBSERVER_SCRIPT_URL"
+          curl --proto '=https' --tlsv1.2 --fail --silent --show-error \
+            --location --max-redirs 0 --connect-timeout 5 --max-time 20 --max-filesize 262144 \
+            --output "$CLAIM_SCRIPT" "$CLAIM_SCRIPT_URL"
+          node "$CLAIM_SCRIPT"
+
+  executor:
+    needs: claim
+    if: ${{ needs.claim.outputs.claim_created == 'true' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      actions: write
+      contents: read
+    concurrency:
+      group: jobs-data-pipeline
+      cancel-in-progress: false
+      queue: max
+    steps:
+      - name: Reobserve under target lock and request at most one rerun
+        shell: bash
+        env:
+          CLAIM_COMMIT_SHA: ${{ needs.claim.outputs.claim_commit_sha }}
+          CLAIM_KEY: ${{ needs.claim.outputs.claim_key }}
+          CLAIM_SCRIPT: ${{ runner.temp }}/translate-queue-recovery-claim.mjs
+          CLAIM_SCRIPT_URL: https://raw.githubusercontent.com/${{ github.repository }}/${{ github.sha }}/scripts/ci/translate-queue-recovery-claim.mjs
+          EXECUTOR_SCRIPT: ${{ runner.temp }}/translate-queue-recovery-executor.mjs
+          EXECUTOR_SCRIPT_URL: https://raw.githubusercontent.com/${{ github.repository }}/${{ github.sha }}/scripts/ci/translate-queue-recovery-executor.mjs
+          GITHUB_TOKEN: ${{ github.token }}
+          OBSERVER_SCRIPT: ${{ runner.temp }}/translate-queue-recovery.mjs
+          OBSERVER_SCRIPT_URL: https://raw.githubusercontent.com/${{ github.repository }}/${{ github.sha }}/scripts/ci/translate-queue-recovery.mjs
+          RECOVERY_WORKFLOW_RUN_ATTEMPT: ${{ github.run_attempt }}
+          TARGET_RUN_ID: ${{ inputs.target_run_id }}
+        run: |-
+          set -euo pipefail
+          curl --proto '=https' --tlsv1.2 --fail --silent --show-error \
+            --location --max-redirs 0 --connect-timeout 5 --max-time 20 --max-filesize 262144 \
+            --output "$OBSERVER_SCRIPT" "$OBSERVER_SCRIPT_URL"
+          curl --proto '=https' --tlsv1.2 --fail --silent --show-error \
+            --location --max-redirs 0 --connect-timeout 5 --max-time 20 --max-filesize 262144 \
+            --output "$CLAIM_SCRIPT" "$CLAIM_SCRIPT_URL"
+          curl --proto '=https' --tlsv1.2 --fail --silent --show-error \
+            --location --max-redirs 0 --connect-timeout 5 --max-time 20 --max-filesize 262144 \
+            --output "$EXECUTOR_SCRIPT" "$EXECUTOR_SCRIPT_URL"
+          node "$EXECUTOR_SCRIPT"
