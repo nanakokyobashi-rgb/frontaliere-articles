@@ -1,5 +1,4 @@
 {
-  "https://www.swissinfo.ch/ita/publibike-passa-in-mani-inglesi%2c-acquistata-da-fondo-d%27investimento/91839303": "publibike-investitore-britannico",
   "https://www.swissinfo.ch/ita/economia-sanitaria": "economia-sanitaria-svizzera",
   "https://www.tio.ch/ticino/attualita/1940819/fatture-affitto-e-cassa-malati-le-difficolta-di-98-famiglie": "frontaliere-ticino-98-famiglie-caso-solidale",
   "https://www.tio.ch/svizzera/economia/1941816/aumento-chiede-schweiz-angestellte-formazione": "angestellte-schweiz-aumento-2027",
@@ -1437,6 +1436,11 @@
   "https://www.tio.ch/svizzera/economia/1947226/tasso-riferimento-rimane-minimo-riduzione": {
     "articleId": "tasso-riferimento-ipotecario-1-25",
     "ts": "2026-09-01T06:41:37.879Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/svizzeri-chiedono-misure-contro-riscaldamento-climatico/91984730": {
+    "articleId": "svizzeri-chiedono-misure-clima",
+    "ts": "2026-09-01T10:00:23.698Z",
     "keyForm": 2
   }
 }
