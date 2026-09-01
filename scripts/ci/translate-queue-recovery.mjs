@@ -25,9 +25,36 @@ const API_ROOT = 'https://api.github.com';
 const REQUEST_TIMEOUT_MS = 8_000;
 const SHA_RE = /^[a-f0-9]{40}$/;
 const RUN_ID_RE = /^[1-9][0-9]{0,19}$/;
+const WORKFLOW_PATH_RE = /^\.github\/workflows\/[^/]+\.ya?ml$/;
+const TIMESTAMP_RE = /^(\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2})(?:\.(\d{1,3}))?Z$/;
 const ALLOWED_EVENTS = new Set(['schedule', 'workflow_dispatch']);
 const ACTIVE_STATUSES = new Set(['in_progress']);
 const PENDING_STATUSES = new Set(['pending', 'queued', 'requested', 'waiting']);
+const KNOWN_STATUSES = new Set([
+  ...ACTIVE_STATUSES,
+  ...PENDING_STATUSES,
+  'action_required',
+  'cancelled',
+  'completed',
+  'failure',
+  'neutral',
+  'skipped',
+  'stale',
+  'startup_failure',
+  'success',
+  'timed_out',
+]);
+const KNOWN_CONCLUSIONS = new Set([
+  'action_required',
+  'cancelled',
+  'failure',
+  'neutral',
+  'skipped',
+  'stale',
+  'startup_failure',
+  'success',
+  'timed_out',
+]);
 
 export const REASON_CODES = Object.freeze([
   'active_pending_present',
@@ -102,8 +129,17 @@ function validRunId(value) {
 }
 
 function validTimestamp(value) {
-  const milliseconds = Date.parse(String(value ?? ''));
-  return Number.isFinite(milliseconds) ? milliseconds : null;
+  if (typeof value !== 'string') return null;
+  const match = TIMESTAMP_RE.exec(value);
+  if (!match) return null;
+  const milliseconds = Date.parse(value);
+  if (!Number.isFinite(milliseconds)) return null;
+  const canonical = `${match[1]}.${(match[2] ?? '').padEnd(3, '0')}Z`;
+  return new Date(milliseconds).toISOString() === canonical ? milliseconds : null;
+}
+
+function validRequiredString(value) {
+  return typeof value === 'string' && value.length > 0 && value.trim() === value;
 }
 
 function compareRuns(left, right) {
@@ -238,10 +274,9 @@ async function listAllBoundedRuns(client, state) {
     if (collected.length >= declaredTotal) break;
   }
 
-  const ids = collected.map((run) => validRunId(run?.id));
+  const ids = collected.map((run) => validRunId(run?.id)).filter((id) => id !== null);
   if (declaredTotal > MAX_RUN_PAGES * RUNS_PER_PAGE
       || collected.length !== declaredTotal
-      || ids.some((id) => id === null)
       || new Set(ids).size !== ids.length) {
     failClosed(state, 'pagination_inconclusive');
   }
@@ -251,7 +286,26 @@ async function listAllBoundedRuns(client, state) {
 function collectShallowFacts(run, state, candidates) {
   const runId = validRunId(run?.id);
   if (runId === null || run === null || typeof run !== 'object' || Array.isArray(run)) {
-    addReason(state, 'malformed_run');
+    failClosed(state, 'malformed_run');
+    return;
+  }
+  if (!Number.isSafeInteger(run.workflow_id) || run.workflow_id <= 0
+      || typeof run.path !== 'string' || !WORKFLOW_PATH_RE.test(run.path)
+      || !validRequiredString(run.head_branch)
+      || !validRequiredString(run.event) || !/^[a-z][a-z0-9_]*$/.test(run.event)
+      || !validRequiredString(run.status) || !KNOWN_STATUSES.has(run.status)
+      || (run.conclusion !== null && !KNOWN_CONCLUSIONS.has(run.conclusion))
+      || !Number.isSafeInteger(run.run_attempt) || run.run_attempt < 1) {
+    failClosed(state, 'malformed_run', runId);
+    return;
+  }
+  if (typeof run.head_sha !== 'string' || !SHA_RE.test(run.head_sha)) {
+    failClosed(state, 'invalid_head_sha', runId);
+    return;
+  }
+  const createdMs = validTimestamp(run.created_at);
+  if (createdMs === null) {
+    failClosed(state, 'invalid_created_at', runId);
     return;
   }
 
@@ -272,12 +326,8 @@ function collectShallowFacts(run, state, candidates) {
     addReason(state, 'wrong_event', runId);
     eligible = false;
   }
-  if (!Number.isSafeInteger(run.run_attempt) || run.run_attempt !== 1) {
+  if (run.run_attempt !== 1) {
     addReason(state, 'wrong_attempt', runId);
-    eligible = false;
-  }
-  if (typeof run.head_sha !== 'string' || !SHA_RE.test(run.head_sha)) {
-    addReason(state, 'invalid_head_sha', runId);
     eligible = false;
   }
 
@@ -286,11 +336,6 @@ function collectShallowFacts(run, state, candidates) {
   if (isActive || isPending) {
     if (run.conclusion !== null) {
       addReason(state, 'wrong_conclusion', runId);
-      return;
-    }
-    const createdMs = validTimestamp(run.created_at);
-    if (createdMs === null) {
-      addReason(state, 'invalid_created_at', runId);
       return;
     }
     if (isActive) state.activeRunIds.push(runId);
@@ -305,10 +350,6 @@ function collectShallowFacts(run, state, candidates) {
   }
   if (run.conclusion !== 'cancelled') {
     addReason(state, 'wrong_conclusion', runId);
-    return;
-  }
-  if (validTimestamp(run.created_at) === null) {
-    addReason(state, 'invalid_created_at', runId);
     return;
   }
   if (eligible) candidates.push({ headSha: run.head_sha, runId });

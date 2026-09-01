@@ -3099,7 +3099,7 @@
       "reason": "Runtime zero-dependency corpus-only del watchdog translate: classifica run e job via GitHub API con budget GET fail-closed, emette soltanto JSON redatto e non possiede metodi o endpoint mutanti.",
       "baseline": {
         "site": null,
-        "corpus": "a562f928d4dac37b",
+        "corpus": "0767be50a319005e",
         "alignedAt": "2026-09-01"
       }
     },
@@ -3109,7 +3109,7 @@
       "reason": "Contratto Node deterministico corpus-only per watchdog e workflow translate: copre paginazione, budget, reason code, redazione e assenza by construction di qualsiasi capacità di recovery o scrittura remota.",
       "baseline": {
         "site": null,
-        "corpus": "e81adcd0bc33921b",
+        "corpus": "04610e738dedea36",
         "alignedAt": "2026-09-01"
       }
     }

@@ -171,19 +171,61 @@ test('classifica deterministicamente tutti i mismatch shallow e attempt>1', asyn
     run(10000000003, { head_branch: 'feature' }),
     run(10000000004, { event: 'push' }),
     run(10000000005, { run_attempt: 2 }),
-    run(10000000006, { head_sha: 'invalid' }),
-    run(10000000007, { status: 'mystery' }),
-    run(10000000008, { conclusion: 'success' }),
+    run(10000000006, { status: 'success' }),
+    run(10000000007, { conclusion: 'success' }),
   ];
   const { report } = await observe(fakeGithub({ pages: [rows] }));
   for (const reason of [
     'wrong_workflow', 'wrong_path', 'wrong_head_branch', 'wrong_event', 'wrong_attempt',
-    'invalid_head_sha', 'wrong_status', 'wrong_conclusion',
+    'wrong_status', 'wrong_conclusion',
   ]) {
     assert.equal(report.counts.byReason[reason], 1, reason);
   }
+  assert.equal(report.complete, true);
+  assert.equal(report.failClosed, false);
   assert.equal(report.counts.deepCandidates, 0);
   assert.equal(report.queryBudget.usedGets, 1);
+});
+
+test('metadata obbligatori mancanti o malformati falliscono chiusi senza candidati', async (t) => {
+  const cases = [
+    ['id missing', { id: undefined }, 'malformed_run'],
+    ['id malformed', { id: 'not-an-id' }, 'malformed_run'],
+    ['workflow_id missing', { workflow_id: undefined }, 'malformed_run'],
+    ['workflow_id wrong type', { workflow_id: String(TARGET_WORKFLOW_ID) }, 'malformed_run'],
+    ['path missing', { path: undefined }, 'malformed_run'],
+    ['path malformed', { path: 'translate-pending.yml' }, 'malformed_run'],
+    ['head_branch missing', { head_branch: undefined }, 'malformed_run'],
+    ['head_branch malformed', { head_branch: ' main ' }, 'malformed_run'],
+    ['head_sha missing', { head_sha: undefined }, 'invalid_head_sha'],
+    ['head_sha malformed', { head_sha: 'not-a-sha' }, 'invalid_head_sha'],
+    ['event missing', { event: undefined }, 'malformed_run'],
+    ['event malformed', { event: 'workflow dispatch' }, 'malformed_run'],
+    ['status missing', { status: undefined }, 'malformed_run'],
+    ['status malformed', { status: 'not-a-status' }, 'malformed_run'],
+    ['conclusion missing', { conclusion: undefined }, 'malformed_run'],
+    ['conclusion malformed', { conclusion: 7 }, 'malformed_run'],
+    ['run_attempt missing', { run_attempt: undefined }, 'malformed_run'],
+    ['run_attempt wrong type', { run_attempt: '1' }, 'malformed_run'],
+    ['created_at missing', { created_at: undefined }, 'invalid_created_at'],
+    ['created_at counterexample', { created_at: 'not-a-timestamp' }, 'invalid_created_at'],
+    ['created_at impossible date', { created_at: '2026-02-30T17:00:00.000Z' }, 'invalid_created_at'],
+  ];
+
+  for (const [name, overrides, reason] of cases) {
+    await t.test(name, async () => {
+      const fake = fakeGithub({ pages: [[run(11000000001, overrides)]] });
+      const { report } = await observe(fake);
+      assert.equal(report.complete, false);
+      assert.equal(report.failClosed, true);
+      assert.equal(report.counts.byReason[reason], 1);
+      assert.equal(report.counts.deepCandidates, 0);
+      assert.equal(report.counts.deepInspected, 0);
+      assert.equal(report.queryBudget.usedGets, 1);
+      assert.equal(fake.calls.length, 1);
+      assert.ok(fake.calls.every(({ options }) => options.method === 'GET'));
+    });
+  }
 });
 
 test('distingue ancestry non-descendant, unknown e blob errato', async () => {
