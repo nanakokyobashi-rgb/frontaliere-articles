@@ -1,5 +1,4 @@
 {
-  "https://www.tio.ch/ticino/attualita/1942055/previsto-un-altro-miglioramento-per-le-finanze-cantonali-cala-il-disavanzo": "calo-disavanzo-cantonale-2026",
   "https://www.tio.ch/ticino/attualita/1942092/stato-consiglio-canicola-lavoro-dialogo": "canicola-lavoro-dialogo-consiglio-stato",
   "https://www.tio.ch/svizzera/economia/1942079/materie-risultati-glencore-semestre-forte": "glencore-aumenta-utili-e-ricavi-nel-semestre",
   "https://www.swissinfo.ch/ita/raffreddare-le-citt%c3%a0-svizzere%3f-%22il-lavoro-%c3%a8-appena-iniziato%22/91851493": "raffreddare-le-citta-svizzere-il-lavoro-e-appena-iniziato",
@@ -1509,6 +1508,11 @@
   "https://www.swissinfo.ch/ita/impiegati-di-banca-accolgono-con-favore-normativa-ubs/91986411": {
     "articleId": "sindacato-banca-ubs-regolamentazione",
     "ts": "2026-09-01T15:27:16.348Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/economia/1947302/telefonia-comcom-asta-mercato-operatori": {
+    "articleId": "comcom-esclude-nuovi-operatori-mobile",
+    "ts": "2026-09-01T15:34:48.148Z",
     "keyForm": 2
   }
 }
