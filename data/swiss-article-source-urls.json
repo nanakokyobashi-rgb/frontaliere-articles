@@ -1,5 +1,4 @@
 {
-  "https://www.swissinfo.ch/ita/economia-sanitaria": "economia-sanitaria-svizzera",
   "https://www.tio.ch/ticino/attualita/1940819/fatture-affitto-e-cassa-malati-le-difficolta-di-98-famiglie": "frontaliere-ticino-98-famiglie-caso-solidale",
   "https://www.tio.ch/svizzera/economia/1941816/aumento-chiede-schweiz-angestellte-formazione": "angestellte-schweiz-aumento-2027",
   "https://www.tio.ch/svizzera/economia/1941808/swiss-fatturato-costi-carburante-conseguenze": "swiss-fatturato-costi-carburante-conseguenze",
@@ -1441,6 +1440,11 @@
   "https://www.swissinfo.ch/ita/svizzeri-chiedono-misure-contro-riscaldamento-climatico/91984730": {
     "articleId": "svizzeri-chiedono-misure-clima",
     "ts": "2026-09-01T10:00:23.698Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/attualita/1947247/inquilini-riduzione-affitto-associazione-asi": {
+    "articleId": "affitti-riduzione-tasso-riferimento",
+    "ts": "2026-09-01T10:15:10.226Z",
     "keyForm": 2
   }
 }
