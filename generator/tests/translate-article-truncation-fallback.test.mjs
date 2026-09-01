@@ -77,15 +77,20 @@ function extractMissingFieldLoop() {
 
 const MISSING_FIELD_LOOP_SRC = extractMissingFieldLoop();
 
-/** Esegue il loop missing-field ritagliato, stessa tecnica del loop sopra. */
-async function runMissingFieldLoop({ data, itContent, callWithRetry }) {
+/**
+ * Esegue il loop missing-field ritagliato, stessa tecnica del loop sopra.
+ * `detectTruncation` di default segnala sempre "pulito": i test che non lo
+ * passano esplicitamente non esercitano il ramo warning IT-esso-stesso-troncato
+ * (#705). `warnings` raccoglie i messaggi di `console.warn` per assert.
+ */
+async function runMissingFieldLoop({ data, itContent, callWithRetry, detectTruncation, warnings = [] }) {
   const translatedStringOrNull = (v) => (typeof v === 'string' && v.trim() ? v : null);
-  const silentConsole = { error: () => {}, warn: () => {} };
+  const capturingConsole = { error: () => {}, warn: (msg) => warnings.push(msg) };
   const fn = new Function(
-    'data', 'itContent', 'callWithRetry', 'translatedStringOrNull', 'console',
+    'data', 'itContent', 'callWithRetry', 'translatedStringOrNull', 'detectTruncation', 'console',
     `return (async () => { ${MISSING_FIELD_LOOP_SRC} })();`,
   );
-  await fn(data, itContent, callWithRetry, translatedStringOrNull, silentConsole);
+  await fn(data, itContent, callWithRetry, translatedStringOrNull, detectTruncation || (() => []), capturingConsole);
 }
 
 /**
@@ -108,11 +113,11 @@ const TRANSLATION_CHUNK_THRESHOLD = extractTranslationChunkThreshold();
  * `TRANSLATION_CHUNK_THRESHOLD`, `translatedStringOrNull`, `sanitizeBodyText`,
  * `countWords`, `console`).
  */
-async function runTruncationRetryLoop({ data, itContent, detectTruncation, callWithRetry, translateInChunks }) {
+async function runTruncationRetryLoop({ data, itContent, detectTruncation, callWithRetry, translateInChunks, warnings = [] }) {
   const translatedStringOrNull = (v) => (typeof v === 'string' && v.trim() ? v : null);
   const sanitizeBodyText = (v) => v;
   const countWords = (s) => String(s).split(/\s+/).filter(Boolean).length;
-  const silentConsole = { error: () => {}, warn: () => {} };
+  const capturingConsole = { error: () => {}, warn: (msg) => warnings.push(msg) };
   const noopTranslateInChunks = async () => {
     throw new Error('translateInChunks chiamato senza mock — il test non lo aspettava per un campo sotto soglia');
   };
@@ -123,7 +128,7 @@ async function runTruncationRetryLoop({ data, itContent, detectTruncation, callW
   );
   await fn(
     data, itContent, detectTruncation, callWithRetry, translateInChunks || noopTranslateInChunks,
-    TRANSLATION_CHUNK_THRESHOLD, translatedStringOrNull, sanitizeBodyText, countWords, silentConsole,
+    TRANSLATION_CHUNK_THRESHOLD, translatedStringOrNull, sanitizeBodyText, countWords, capturingConsole,
   );
 }
 
@@ -234,4 +239,53 @@ test('nessun troncamento rilevato: il campo non viene toccato', async () => {
   await runTruncationRetryLoop({ data, itContent, detectTruncation, callWithRetry });
 
   assert.equal(data.content.en.body1, 'A complete sentence.');
+});
+
+test('ramo truncation-retry: fallback IT esso stesso troncato — warning esplicito, pubblicato come ultima risorsa (#705)', async () => {
+  const truncatedIt = 'Questa frase italiana non finisce e';
+  const data = { content: { en: { body1: 'This sentence never ends and' } } };
+  const itContent = { body1: truncatedIt };
+  // Ogni testo (traduzione iniziale, retry, e la sorgente IT stessa) risulta
+  // troncato: prima del fix (#705) l'IT veniva pubblicato senza alcun
+  // controllo su questo terzo caso.
+  const detectTruncation = () => ['incomplete-ending'];
+  const callWithRetry = async () => { throw new Error('retry fallito'); };
+  const warnings = [];
+
+  await runTruncationRetryLoop({ data, itContent, detectTruncation, callWithRetry, warnings });
+
+  assert.equal(
+    data.content.en.body1,
+    truncatedIt,
+    'il fallback IT troncato viene comunque pubblicato come ultima risorsa (nessun fallback migliore disponibile)',
+  );
+  assert.ok(
+    warnings.some((w) => w.includes('ESSO STESSO troncato')),
+    `deve emettere un warning esplicito quando anche il fallback IT risulta troncato — warnings raccolti: ${JSON.stringify(warnings)}`,
+  );
+});
+
+test('ramo missing-field: fallback IT esso stesso troncato — warning esplicito, pubblicato come ultima risorsa (#705)', async () => {
+  const truncatedIt = 'Questo campo italiano non finisce e';
+  // `de` e `fr` sono già completi: il loop itera su tutte e tre le locali,
+  // e senza questi il loop leggerebbe `data.content['de'][field]` su un
+  // oggetto undefined non appena passa oltre `en`.
+  const complete = { title: 'T', excerpt: 'E', body1: 'B1', body2: 'B2', body3: 'B3' };
+  const data = { content: { en: { ...complete, body1: undefined }, de: { ...complete }, fr: { ...complete } } };
+  const itContent = { body1: truncatedIt, title: 'T', excerpt: 'E', body2: 'B2', body3: 'B3' };
+  const callWithRetry = async () => { throw new Error('retry fallito'); };
+  const detectTruncation = () => ['incomplete-ending'];
+  const warnings = [];
+
+  await runMissingFieldLoop({ data, itContent, callWithRetry, detectTruncation, warnings });
+
+  assert.equal(
+    data.content.en.body1,
+    truncatedIt,
+    'il fallback IT troncato viene comunque pubblicato come ultima risorsa (nessun fallback migliore disponibile)',
+  );
+  assert.ok(
+    warnings.some((w) => w.includes('ESSO STESSO troncato')),
+    `deve emettere un warning esplicito quando anche il fallback IT (campo mancante) risulta troncato — warnings raccolti: ${JSON.stringify(warnings)}`,
+  );
 });
