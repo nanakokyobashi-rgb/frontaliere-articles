@@ -37,7 +37,10 @@
  *
  *   entrambi mossi                                        →  `both-moved`
  *       L'unico caso che richiede davvero un umano: due modifiche indipendenti
- *       sullo stesso file. Nessun merge automatico, per scelta.
+ *       sullo stesso file. Nessun merge automatico, per scelta. Eccezione
+ *       (issue #680): se i due contenuti ATTUALI coincidono comunque, non c'e'
+ *       niente da riconciliare — verdetto `both-moved-converged`, solo
+ *       `--init`.
  *
  * ## `stranded-twin`: il `site-ahead` che non arriverà mai (issue #303)
  *
@@ -580,6 +583,21 @@ function classify(entry, now, base) {
     };
   }
 
+  // Entrambi i lati si sono mossi dalla baseline, ma sono arrivati allo STESSO
+  // contenuto (issue #680): non c'e' niente da riconciliare, perche' nessuno
+  // dei due deve "vincere" sull'altro. Senza questo controllo, `both-moved`
+  // manda in coda `needs-human` anche i casi gia' risolti da soli — rumore
+  // che si accumula esattamente come il bucket da 25 file che ha fatto
+  // scattare questa issue.
+  if (now.site === now.corpus) {
+    return {
+      state: 'both-moved-converged',
+      actionable: true,
+      headline: 'modificato su entrambi i lati, ma i due contenuti sono gia\' identici',
+      detail: 'Due modifiche indipendenti sullo stesso file dalla baseline sono arrivate allo stesso risultato: non serve leggere ne\' riconciliare niente, basta registrare la nuova baseline con `--init`.',
+    };
+  }
+
   return {
     state: 'both-moved',
     actionable: true,
@@ -750,7 +768,7 @@ async function main() {
       console.log('Niente che richieda una decisione: i due cicli sono allineati, o divergono solo dove dichiarato.');
     } else {
       // Ordine per urgenza decisionale, non alfabetico.
-      const ORDER = ['ghost-baseline', 'corpus-only-twin', 'stranded-twin', 'undeclared-drift', 'both-moved', 'site-ahead', 'corpus-only-pending-landed', 'missing-here', 'removed-on-site', 'corpus-ahead', 'corpus-only-pending'];
+      const ORDER = ['ghost-baseline', 'corpus-only-twin', 'stranded-twin', 'undeclared-drift', 'both-moved', 'both-moved-converged', 'site-ahead', 'corpus-only-pending-landed', 'missing-here', 'removed-on-site', 'corpus-ahead', 'corpus-only-pending'];
       actionable.sort((a, b) => ORDER.indexOf(a.state) - ORDER.indexOf(b.state));
       for (const r of actionable) {
         console.log(`  [${r.state}] ${r.path}`);
@@ -782,6 +800,7 @@ async function main() {
       section('corpus-only-twin', '🔴 Dichiarato `corpus-only`, ma il gemello esiste identico sul sito'),
       section('undeclared-drift', '🔴 Divergenza non dichiarata'),
       section('both-moved', '🔴 Modificato su entrambi i lati'),
+      section('both-moved-converged', '🟢 Modificato su entrambi i lati, ma gia\' convergente — solo da ri-baselinare'),
       section('site-ahead', '⬇️ Il sito è andato avanti — da portare qui'),
       section('corpus-only-pending-landed', '🟢 Il gemello atteso è arrivato sul sito — pronta la promozione'),
       section('missing-here', '⚠️ Dichiarato nel manifest ma assente'),
