@@ -259,18 +259,27 @@
       "path": "scripts/ci/pr-autorebase.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "3d66a99ec99d686f",
-        "corpus": "3d66a99ec99d686f",
-        "alignedAt": "2026-08-19"
+        "site": "464127cd97e0964f",
+        "corpus": "464127cd97e0964f",
+        "alignedAt": "2026-09-01"
       }
     },
     {
       "path": "scripts/ci/pr-collision-detector.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "39f60bc6108ce462",
-        "corpus": "39f60bc6108ce462",
-        "alignedAt": "2026-08-08"
+        "site": "835e4ba295e74c5a",
+        "corpus": "835e4ba295e74c5a",
+        "alignedAt": "2026-09-01"
+      }
+    },
+    {
+      "path": "scripts/ci/lib/fetchPrFiles.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "37f39cf4c84fd946",
+        "corpus": "37f39cf4c84fd946",
+        "alignedAt": "2026-09-01"
       }
     },
     {
@@ -331,9 +340,9 @@
       "path": "scripts/lib/pr-body-sections-check.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "d1bef9a16a4152f5",
-        "corpus": "d1bef9a16a4152f5",
-        "alignedAt": "2026-08-23"
+        "site": "bda6dc74ee93671d",
+        "corpus": "bda6dc74ee93671d",
+        "alignedAt": "2026-09-01"
       }
     },
     {
@@ -421,8 +430,8 @@
       "reason": "Il rilevatore di divergenza stesso. Vive qui perche' e' questo il lato che riceve il ciclo; il sito e' la sorgente e non ha bisogno di sorvegliare se stesso.",
       "baseline": {
         "site": null,
-        "corpus": "aba2ea9012e9f48f",
-        "alignedAt": "2026-08-14"
+        "corpus": "88ccdfd728c55fe9",
+        "alignedAt": "2026-09-01"
       }
     },
     {
@@ -489,9 +498,9 @@
       "path": "scripts/ci/close-recovered-failure-issues.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "8d41ac44922f6da9",
-        "corpus": "8d41ac44922f6da9",
-        "alignedAt": "2026-08-22"
+        "site": "a6671b111411316b",
+        "corpus": "a6671b111411316b",
+        "alignedAt": "2026-09-01"
       }
     },
     {
@@ -569,9 +578,9 @@
       "mode": "identical",
       "reason": "Portato lo stadio di decomposizione (sito #6228, byte-identico a origin/main del sito): routing agent:decompose-queued, DECOMPOSE-DRAIN/RESCUE, PARENT-CLOSE, rotazione scan parked-retry, fairness env-gated (env solo nel drainer.yml del sito: qui il blocco e' inerte), rimozione park network-audit.",
       "baseline": {
-        "site": "3bd44bfe8e8f7033",
-        "corpus": "3bd44bfe8e8f7033",
-        "alignedAt": "2026-08-21"
+        "site": "2f9a68733b9cef1d",
+        "corpus": "2f9a68733b9cef1d",
+        "alignedAt": "2026-09-01"
       }
     },
     {
@@ -735,8 +744,8 @@
       "reason": "Fratello di loop-scripts-closure.test.mjs per i riferimenti che NON sono import. Nato dal caso #45: alert-pat-down.mjs e' arrivato qui identical dichiarando che gh-pat-expiry-monitor.yml e' «l'unico punto di chiusura» del suo alert, con quel workflow assente — una issue priority:urgent che niente poteva chiudere, con le voci not-ported a 0 e la CI verde. Stessa forma del SiteShellContract: un contratto senza forma di import non e' coperto dai guard che seguono gli import. Ogni citazione non risolta va DICHIARATA con un kind chiuso e una ragione scritta, perche' l'intento non si indovina dalla prosa (la citazione contrastiva «e' X, non Y» nomina Y proprio per negarlo) — e' lo stesso errore che false-positive-declaration.mjs documenta. Il valore non e' classificare le 29 di oggi ma rendere impossibile aggiungere la 30esima in silenzio.",
       "baseline": {
         "site": null,
-        "corpus": "9405eae07fdbc04f",
-        "alignedAt": "2026-08-14"
+        "corpus": "07cb533c94bb7051",
+        "alignedAt": "2026-09-01"
       }
     },
     {
@@ -805,8 +814,8 @@
       "reason": "Il corpus e' nato con le sole label di default di GitHub: nessuna delle 13 del ciclo esisteva. `gh issue edit --add-label` NON crea la label mancante, fallisce — e nei workflow quel fallimento e' un warning non bloccante, quindi il ciclo sarebbe girato INERTE senza un errore. Il sito non ha questo script perche' le sue label ci sono da sempre; qui e' un prerequisito. Idempotente, girato come primo step di triage e fixer perche' una label cancellata per sbaglio ricreerebbe lo stesso stallo mesi dopo.",
       "baseline": {
         "site": null,
-        "corpus": "ad11637dc288da75",
-        "alignedAt": "2026-08-07"
+        "corpus": "b8a3fec5bc2ba8f5",
+        "alignedAt": "2026-09-01"
       }
     },
     {
@@ -1360,9 +1369,9 @@
       "mode": "identical",
       "reason": "Push con retry usato dai job che scrivono sugli shard. RIALLINEATO il 2026-08-24 (stranded-twin, 5.2gg): il sito aveva aggiunto il flag opt-in `--soft-fail-exhausted` (warn+exit 0 invece di exit 1 su MAX_ATTEMPTS esaurito, per un caller la cui data e' una recomputation a finestra scorrevole che si riprende da sola al giro dopo — vedi issue del sito #5568). Nessun caller di questo repo lo passa ancora, quindi la copia e' comportamentalmente no-op qui finche' non viene adottato. Il file cita esplicitamente issue del SITO (#2988, #4190, #4557, #3809, #4183, #5568): e' un gemello, non un omonimo. Le registrazioni dei merge driver (`known-slugs-shard`, `orphan-enriched-shard`, `ai-cache`, `compat-shard`) puntano a `scripts/ci/merge-*.mjs` che qui non esistono — innocuo: ogni `git config` finisce in `|| true` e nessun `.gitattributes` locale marca quei path, quindi il driver non viene mai invocato. Se un giorno un `.gitattributes` di questo repo marcasse uno di quei path, il driver mancante diventerebbe un guasto: e' l'unica condizione da tenere d'occhio.",
       "baseline": {
-        "site": "e28724127cb24a0f",
-        "corpus": "e28724127cb24a0f",
-        "alignedAt": "2026-08-24"
+        "site": "96f3a1440c3b3463",
+        "corpus": "96f3a1440c3b3463",
+        "alignedAt": "2026-09-01"
       }
     },
     {
@@ -2247,9 +2256,9 @@
       "sitePath": "scripts/lib/translation-glossary.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "e637abb68d4eda7e",
-        "corpus": "e637abb68d4eda7e",
-        "alignedAt": "2026-08-09"
+        "site": "96607fe11ac8a312",
+        "corpus": "96607fe11ac8a312",
+        "alignedAt": "2026-09-01"
       }
     },
     {
@@ -2298,11 +2307,17 @@
       "path": "host/constants.ts",
       "sitePath": "build-plugins/constants.ts",
       "mode": "adapted",
-      "reason": "Costanti del sito che l'engine legge via SiteShellContract. E' un ESTRATTO PER CHIUSURA di `build-plugins/constants.ts` (850 righe la': solo le ~15 dichiarazioni che il contratto raggiunge, 177 righe qui), quindi non potra' mai essere byte-identico e `adapted` e' il mode giusto. La sua intestazione dichiara pero' «These values MUST stay byte-equal to the main repo's» e nomina `host/host-drift.test.mjs` come guardia: **quel file non esiste, ne' qui ne' sul sito** (verificato su entrambi gli alberi git). Finche' non esiste, questa voce di manifest E' la guardia.",
+      "reason": "Costanti del sito che l'engine legge via SiteShellContract. E' un ESTRATTO PER CHIUSURA di `build-plugins/constants.ts` (850 righe la': solo le ~15 dichiarazioni che il contratto raggiunge, 177 righe qui), quindi non potra' mai essere byte-identico e `adapted` e' il mode giusto. Per questa sola entry `scalarFingerprint` confronta i 21 scalari authoritative: cambiamenti del sorgente fuori dalla chiusura restano stable, ma un digest diverso, mancante, malformato o non dichiarato non puo' mai essere stable. I comportamenti del contratto restano coperti dai fingerprint test esistenti; `host/host-drift.test.mjs` non esiste e non e' una guardia.",
       "baseline": {
-        "site": "62e473f867f388d7",
+        "site": "8318a415439ca0d0",
         "corpus": "7c8c22b48ee255aa",
-        "alignedAt": "2026-08-09"
+        "alignedAt": "2026-09-01"
+      },
+      "scalarFingerprint": {
+        "sitePath": "tests/articles-shell-contract-fingerprint.json",
+        "corpusPath": "host/shell-contract-fingerprint.json",
+        "scalarFields": 21,
+        "sha256": "5a25f79cdc8b61052b4f5d1840f7f99b529475d67ea1eaf677ae79ae62dae999"
       }
     },
     {
@@ -2495,9 +2510,9 @@
       "sitePath": "build-plugins/sharedWriteRegistry.ts",
       "mode": "identical",
       "baseline": {
-        "site": "8b993116044fb9f2",
-        "corpus": "8b993116044fb9f2",
-        "alignedAt": "2026-08-09"
+        "site": "a97ed1adc182a002",
+        "corpus": "a97ed1adc182a002",
+        "alignedAt": "2026-08-31"
       }
     },
     {
