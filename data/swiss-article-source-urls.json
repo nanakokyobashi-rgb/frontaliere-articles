@@ -1,5 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/economia/1942311/continua-bolla-svizzera-ubs-punti": "rischio-bolla-svizzera-2026",
   "https://www.tio.ch/dal-mondo/economia/1942414/apollo-easyjet-fondo-miliardi-acquisizione-franchi": "easyjet-apollon-acquisizione",
   "https://www.rsi.ch/s/3936696": "disoccupazione-svizzera-luglio-2026-seco",
   "https://www.rsi.ch/s/3937593": "casse-di-disoccupazione-superati-i-problemi-tecnici",
@@ -1537,6 +1536,11 @@
   "https://www.rsi.ch/s/4052268": {
     "articleId": "shein-ipo-hong-kong-malus-francese",
     "ts": "2026-09-01T19:56:56.153Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/vendite-auto-nuove-in-calo-in-agosto%2c-quasi-una-su-tre-%c3%a8-elettrica/91988908": {
+    "articleId": "vendite-auto-svizzera-agosto-2026",
+    "ts": "2026-09-01T21:20:56.815Z",
     "keyForm": 2
   }
 }
