@@ -1,5 +1,4 @@
 {
-  "https://www.swissinfo.ch/ita/topic/il-futuro-del-lavoro": "il-futuro-del-lavoro",
   "https://www.swissinfo.ch/ita/votazioni-federali-la-nostra-guida-al-voto-per-la-quinta-svizzera": "votazioni-federali-guida-2026",
   "https://www.swissinfo.ch/ita/publibike-passa-in-mani-inglesi%2c-acquistata-da-fondo-d%27investimento/91839303": "publibike-investitore-britannico",
   "https://www.swissinfo.ch/ita/economia-sanitaria": "economia-sanitaria-svizzera",
@@ -1429,6 +1428,11 @@
   "https://www.tio.ch/svizzera/attualita/1946769/fattura-sistema-puo-paziente-documento-fatture-ospedali": {
     "articleId": "drg-fatture-trasparenza",
     "ts": "2026-09-01T05:43:39.231Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/s/4051266": {
+    "articleId": "swiss-life-600-tagli-2028",
+    "ts": "2026-09-01T06:17:05.503Z",
     "keyForm": 2
   }
 }
