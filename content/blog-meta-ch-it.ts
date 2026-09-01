@@ -4888,6 +4888,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.premi-lamal-friburgo-sussidi.title': 'Premi LAMal Friburgo: franchigie e sussidi 2026',
     'blog.article.premi-lamal-friburgo-sussidi.excerpt': 'Franchigie LAMal nel Canton Friburgo, come scegliere, procedure per accedere alla riduzione di premio e scadenze ufficiali 2026.',
     'blog.article.premi-lamal-friburgo-sussidi.imageAlt': 'Reception di ufficio cantonale svizzero con operatore che aiuta una persona con documenti assicurativi LAMal',
+    'blog.article.sanzioni-onu-2026-aggiornamento.title': 'Aggiornamento delle sanzioni ONU: implicazioni per le aziende svizzere',
+    'blog.article.sanzioni-onu-2026-aggiornamento.excerpt': 'Il comitato di sanzioni dell\'ONU ha aggiornato la lista delle persone fisiche, imprese e organizzazioni sottoposte a sanzioni.',
+    'blog.article.sanzioni-onu-2026-aggiornamento.imageAlt': 'Vista aerea del Lago di Lugano con le montagne sullo sfondo, Svizzera.',
 };
 
 export default blogMetaChIt;

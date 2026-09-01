@@ -4888,6 +4888,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.premi-lamal-friburgo-sussidi.title': 'KVG premiums Fribourg: deductibles and subsidies 2026',
     'blog.article.premi-lamal-friburgo-sussidi.excerpt': 'KVG deductibles in the Canton of Fribourg, how to choose, procedures for accessing the premium reduction and official deadlines 2026.',
     'blog.article.premi-lamal-friburgo-sussidi.imageAlt': 'Swiss cantonal office reception showing healthcare worker assisting person with health insurance documents',
+    'blog.article.sanzioni-onu-2026-aggiornamento.title': 'UN sanctions update: implications for Swiss companies',
+    'blog.article.sanzioni-onu-2026-aggiornamento.excerpt': 'The UN Sanctions Committee has updated the list of individuals, companies and organizations subject to sanctions.',
+    'blog.article.sanzioni-onu-2026-aggiornamento.imageAlt': 'Aerial view of Lake Lugano with mountains in the background, Switzerland.',
 };
 
 export default blogMetaChEn;

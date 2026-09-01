@@ -14662,6 +14662,15 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'laura-bianchi',
     authorName: 'Laura Bianchi',
    },
+   {
+    id: 'sanzioni-onu-2026-aggiornamento',
+    category: 'novita',
+    date: '2026-09-01T05:18:16.458Z',
+    image: '/images/blog/sanzioni-onu-2026-aggiornamento.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

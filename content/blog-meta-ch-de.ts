@@ -4888,6 +4888,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.premi-lamal-friburgo-sussidi.title': 'KVG-Prämien Fribourg: Selbstbeteiligungen und Subventionen 2026',
     'blog.article.premi-lamal-friburgo-sussidi.excerpt': 'KVG-Franchisen im Kanton Freiburg, wie man wählt, Verfahren für den Zugang zur Prämienverbilligung und offizielle Fristen 2026.',
     'blog.article.premi-lamal-friburgo-sussidi.imageAlt': 'Empfangsbereich eines schweizer Kantonsamt mit Mitarbeiter der Person bei Krankenversicherungsdokumenten hilft',
+    'blog.article.sanzioni-onu-2026-aggiornamento.title': 'UN-Sanktionsupdate: Auswirkungen auf Schweizer Unternehmen',
+    'blog.article.sanzioni-onu-2026-aggiornamento.excerpt': 'Der UN-Sanktionsausschuss hat die Liste der Personen, Unternehmen und Organisationen, die Sanktionen unterliegen, aktualisiert.',
+    'blog.article.sanzioni-onu-2026-aggiornamento.imageAlt': 'Luftaufnahme des Luganer Sees mit den Bergen im Hintergrund, Schweiz.',
 };
 
 export default blogMetaChDe;

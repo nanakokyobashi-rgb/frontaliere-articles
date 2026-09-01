@@ -1,5 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/economia/1941661/bacher-publibike-investitore-passa-it": "publibike-passa-investitore-britannico",
   "https://www.tio.ch/svizzera/economia/1941704/luglio-auto-byd-vetture-tutte": "vendite-auto-svizzera-luglio-2026",
   "https://www.swissinfo.ch/ita/meno-volumi-alla-borsa-svizzera-in-luglio%2c-ha-pesato-il-calo-estivo/91840796": "rallentamento-borsa-svizzera-luglio",
   "https://www.swissinfo.ch/ita/topic/il-futuro-del-lavoro": "il-futuro-del-lavoro",
@@ -1417,6 +1416,11 @@
   "https://www.tio.ch/ticino/attualita/1947130/trasporti-personale-sev-violenza-aggressioni": {
     "articleId": "trasporti-pubblici-violenza-sev",
     "ts": "2026-09-01T00:27:09.408Z",
+    "keyForm": 2
+  },
+  "https://www.admin.ch/it/newnsb/n8mk5ezmi1vw": {
+    "articleId": "sanzioni-onu-2026-aggiornamento",
+    "ts": "2026-09-01T05:18:16.561Z",
     "keyForm": 2
   }
 }
