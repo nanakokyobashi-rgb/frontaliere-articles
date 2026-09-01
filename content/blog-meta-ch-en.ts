@@ -4912,6 +4912,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.affitti-riduzione-tasso-riferimento.title': 'Rents: rate down but the reduction is not automatic',
     'blog.article.affitti-riduzione-tasso-riferimento.excerpt': 'In 2025, the reference mortgage interest rate fell twice. Only 12% of tenants requested the reduction. The ASI reminds that it pays to actively request the reduction.',
     'blog.article.affitti-riduzione-tasso-riferimento.imageAlt': 'Evening view of Lugano city with residential buildings and lake scenery',
+    'blog.article.dogane-strumenti-digitali-merci.title': 'Customs, new digital tools for goods and purchases',
+    'blog.article.dogane-strumenti-digitali-merci.excerpt': 'DaziT concludes at the end of 2026 with Passar and QuickZoll. Simplification of cross-border traffic, modernized border controls.',
+    'blog.article.dogane-strumenti-digitali-merci.imageAlt': 'Modern digital customs control with Passar and QuickZoll apps displayed on screens at Swiss border checkpoint',
 };
 
 export default blogMetaChEn;

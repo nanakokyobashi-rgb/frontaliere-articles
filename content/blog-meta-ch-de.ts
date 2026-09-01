@@ -4912,6 +4912,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.affitti-riduzione-tasso-riferimento.title': 'Mieten: Zinssenkung, aber die Senkung erfolgt nicht automatisch',
     'blog.article.affitti-riduzione-tasso-riferimento.excerpt': 'Im Jahr 2025 sank der Referenzhypothekenzins zweimal. Nur 12 % der Mieter haben die Senkung beantragt. Die ASI erinnert daran, dass es sich lohnt, die Senkung aktiv zu beantragen.',
     'blog.article.affitti-riduzione-tasso-riferimento.imageAlt': 'Stadtansicht von Lugano bei Sonnenuntergang mit Wohngebäuden und Seepanorama',
+    'blog.article.dogane-strumenti-digitali-merci.title': 'Zoll, neue digitale Werkzeuge für Waren und Einkäufe',
+    'blog.article.dogane-strumenti-digitali-merci.excerpt': 'DaziT wird Ende 2026 mit Passar und QuickZoll abgeschlossen. Vereinfachung des grenzüberschreitenden Verkehrs, modernisierte Grenzkontrollen.',
+    'blog.article.dogane-strumenti-digitali-merci.imageAlt': 'Digitale Zollkontrolle mit Passar- und QuickZoll-Apps auf modernen Bildschirmen an einem Schweizer Grenzübergang',
 };
 
 export default blogMetaChDe;

@@ -4912,6 +4912,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.affitti-riduzione-tasso-riferimento.title': 'Loyers : baisse de tarif mais la réduction n’est pas automatique',
     'blog.article.affitti-riduzione-tasso-riferimento.excerpt': 'En 2025, le taux d’intérêt hypothécaire de référence a baissé deux fois. Seuls 12 % des locataires ont demandé cette réduction. L’ASI rappelle qu’il est payant de demander activement cette réduction.',
     'blog.article.affitti-riduzione-tasso-riferimento.imageAlt': 'Vue de Lugano au coucher du soleil avec immeubles résidentiels et lac en arrière-plan',
+    'blog.article.dogane-strumenti-digitali-merci.title': 'Douane, nouveaux outils numériques pour les biens et les achats',
+    'blog.article.dogane-strumenti-digitali-merci.excerpt': 'DaziT se conclut fin 2026 avec Passar et QuickZoll. Simplification du trafic transfrontalier, modernisation des contrôles frontaliers.',
+    'blog.article.dogane-strumenti-digitali-merci.imageAlt': 'Contrôle douanier numérique avec applications Passar et QuickZoll sur écrans modernes à un poste frontière suisse',
 };
 
 export default blogMetaChFr;

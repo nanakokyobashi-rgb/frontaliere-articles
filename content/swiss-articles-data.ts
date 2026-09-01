@@ -14734,6 +14734,15 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'dogane-strumenti-digitali-merci',
+    category: 'novita',
+    date: '2026-09-01T10:43:34.724Z',
+    image: '/images/blog/dogane-strumenti-digitali-merci.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

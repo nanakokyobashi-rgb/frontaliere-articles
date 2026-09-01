@@ -1663,6 +1663,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'tasso-riferimento-ipotecario-1-25': { it: 'tasso-riferimento-ipotecario-1-25', en: 'mortgage-reference-rate-remains-at-1-25', de: 'hypothekenreferenzzins-bleibt-bei-1-25', fr: 'taux-de-reference-hypothecaire-remporte-a-1-25' },
  'svizzeri-chiedono-misure-clima': { it: 'svizzeri-chiedono-misure-clima', en: 'swiss-demand-climate-measures', de: 'schweizer-fordern-klimamasnahmen', fr: 'suisses-demandent-mesures-climat' },
  'affitti-riduzione-tasso-riferimento': { it: 'affitti-riduzione-tasso-riferimento', en: 'rentals-reduction-reference-rate', de: 'mieten-reduktion-referenzsatz', fr: 'loyers-reduction-taux-reference' },
+ 'dogane-strumenti-digitali-merci': { it: 'dogane-strumenti-digitali-merci', en: 'customs-digital-tools-goods', de: 'zoll-digitale-werkzeuge-waren', fr: 'douanes-outils-numeriques-marchandises' },
 };
 
 export const REVERSE_SWISS: Record<ArticleLocale, Record<string, string>> = (() => {
