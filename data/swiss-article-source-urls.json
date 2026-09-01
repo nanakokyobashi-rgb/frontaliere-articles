@@ -1,5 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/economia/1941808/swiss-fatturato-costi-carburante-conseguenze": "swiss-fatturato-costi-carburante-conseguenze",
   "https://www.swissinfo.ch/ita/emigrazione/senza-lavoro-allestero-ecco-cosa-considerare-quando-si-ritorna-in-svizzera/88366386": "rientro-in-svizzera-senza-lavoro-guida",
   "https://www.tio.ch/svizzera/economia/1941815/leclanche-rapporto-difficolta-azienda-azioni": "leclanche-crisi-finanziaria-2025",
   "https://www.tio.ch/svizzera/economia/1941837/fondazioni-dati-svizzera-principato-liechtenstein-hacker": "attacco-hacker-liechtenstein-svizzera",
@@ -1453,6 +1452,11 @@
   "https://www.swissinfo.ch/ita/tasso-ipotecario-di-riferimento-non-cambia%2c-rimane-a-1%2c25%25/91984180": {
     "articleId": "tasso-ipotecario-riferimento-1-25-stabile",
     "ts": "2026-09-01T10:53:04.705Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/associazione-inquilini%2c-%22occorre-chiedere-riduzione-dell%27affitto%22/91985994": {
+    "articleId": "riduzione-affitto-tassi-ipotecari",
+    "ts": "2026-09-01T11:09:31.864Z",
     "keyForm": 2
   }
 }
