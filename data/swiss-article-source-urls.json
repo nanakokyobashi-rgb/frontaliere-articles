@@ -1,5 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/economia/1941815/leclanche-rapporto-difficolta-azienda-azioni": "leclanche-crisi-finanziaria-2025",
   "https://www.tio.ch/svizzera/economia/1941837/fondazioni-dati-svizzera-principato-liechtenstein-hacker": "attacco-hacker-liechtenstein-svizzera",
   "https://www.fiscoetasse.com/approfondimenti/17362-le-condizioni-per-lesenzione-totale-dal-dazio-nelle-situazioni-di-emergenza.html": "le-assenze-totale-dal-dazio-nelle-situazioni-di-emergenza",
   "https://www.swissinfo.ch/ita/prospettiva-svizzera/la-vigilanza-sulle-banche-in-svizzera-una-breve-storia-degli-scandali/91769822": "vigilanza-banche-svizzera-scandali",
@@ -1461,6 +1460,11 @@
   "https://www.swissinfo.ch/ita/commercio-al-dettaglio%2c-aumentano-le-vendite-in-luglio/91985445": {
     "articleId": "commercio-dettaglio-vendite-luglio-2025",
     "ts": "2026-09-01T11:48:32.552Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/s/4051353": {
+    "articleId": "tasso-ipotecario-riferimento-stabile",
+    "ts": "2026-09-01T12:04:28.107Z",
     "keyForm": 2
   }
 }
