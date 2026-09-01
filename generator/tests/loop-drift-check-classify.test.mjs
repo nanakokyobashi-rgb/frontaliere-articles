@@ -82,6 +82,25 @@ test('corpus-only-pending senza trackingIssue: resta actionable ma segnala il ca
   assert.match(verdict.detail, /ATTENZIONE/, 'un trackingIssue assente deve essere visibile nel report, non silenzioso');
 });
 
+test('both-moved: i due lati sono convergenti sullo stesso contenuto → actionable ma solo re-baseline, non riconciliazione (issue #680)', () => {
+  const entry = { path: 'scripts/ci/scan-job-timeouts.mjs', mode: 'identical' };
+  const base = { site: 'baseline-site', corpus: 'baseline-corpus' };
+  // Entrambi i lati si sono mossi dalla baseline, ma sono arrivati allo stesso hash.
+  const verdict = classify(entry, { site: 'same-hash', corpus: 'same-hash' }, base);
+  assert.equal(verdict.state, 'both-moved-converged');
+  assert.equal(verdict.actionable, true);
+  assert.match(verdict.detail, /--init/, 'deve dire che basta ri-registrare la baseline, non leggere due diff');
+});
+
+test('both-moved: contenuti ancora divergenti → resta il verdetto needs-human originale', () => {
+  const entry = { path: 'scripts/ci/scan-job-timeouts.mjs', mode: 'identical' };
+  const base = { site: 'baseline-site', corpus: 'baseline-corpus' };
+  const verdict = classify(entry, { site: 'site-now', corpus: 'corpus-now' }, base);
+  assert.equal(verdict.state, 'both-moved');
+  assert.equal(verdict.actionable, true);
+  assert.match(verdict.detail, /riconciliate a mano/);
+});
+
 test('importare il modulo non esegue loop-drift-check: nessun fetch, nessun process.exit', () => {
   // Senza guardia CLI, questo `import` avrebbe gia' chiamato main() sopra —
   // che fa rete e, con --issue, scrive sul repo — e chiuso il processo di test

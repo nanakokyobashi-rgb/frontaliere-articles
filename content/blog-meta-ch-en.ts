@@ -4900,6 +4900,12 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.breve-durata-friburgo-proroga.title': 'L Fribourg permit: validity, extension and requirements',
     'blog.article.breve-durata-friburgo-proroga.excerpt': 'The short-term L permit in the Canton of Fribourg is valid for a maximum of one year and can be renewed under specific conditions. Find out about duration, extension and constraints.',
     'blog.article.breve-durata-friburgo-proroga.imageAlt': 'Swiss administrative office with documents and computer representing cantonal permit procedures',
+    'blog.article.swiss-life-600-tagli-2028.title': 'Swiss Life cuts 600 posts by 2028',
+    'blog.article.swiss-life-600-tagli-2028.excerpt': 'Swiss insurance company reduces headcount through natural replacement. 200 reductions already started, another 100 by the end of 2026. Impact on the labor market.',
+    'blog.article.swiss-life-600-tagli-2028.imageAlt': 'Swiss modern office with digital displays and financial charts representing corporate restructuring.',
+    'blog.article.tasso-riferimento-ipotecario-1-25.title': 'Mortgage benchmark rate remains at record low of 1.25 percent',
+    'blog.article.tasso-riferimento-ipotecario-1-25.excerpt': 'The mortgage reference rate remains at 1.25 percent, keeping rents in Switzerland unchanged.',
+    'blog.article.tasso-riferimento-ipotecario-1-25.imageAlt': 'Aerial view of Lugano, Switzerland, with the cityscape and Lake Lugano in the background.',
 };
 
 export default blogMetaChEn;

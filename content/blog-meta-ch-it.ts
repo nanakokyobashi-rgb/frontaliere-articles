@@ -4900,6 +4900,12 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.breve-durata-friburgo-proroga.title': 'Permesso L Friburgo: validità, proroga e requisiti',
     'blog.article.breve-durata-friburgo-proroga.excerpt': 'Il permesso L di breve durata nel Cantone Friburgo ha validità massima di un anno ed è rinnovabile con specifiche condizioni. Scopri durata, proroga e vincoli.',
     'blog.article.breve-durata-friburgo-proroga.imageAlt': 'Ufficio amministrativo svizzero con documenti e computer per procedure di richiesta permessi cantonali',
+    'blog.article.swiss-life-600-tagli-2028.title': 'Swiss Life taglia 600 posti entro il 2028',
+    'blog.article.swiss-life-600-tagli-2028.excerpt': 'Compagnia assicurativa svizzera riduce organico tramite ricambio naturale. 200 riduzioni già avviate, altre 100 entro fine 2026. Impatto su mercato del lavoro.',
+    'blog.article.swiss-life-600-tagli-2028.imageAlt': 'Ufficio moderno svizzero con grafici finanziari e strumenti digitali che rappresentano il ridimensionamento di Swiss Life.',
+    'blog.article.tasso-riferimento-ipotecario-1-25.title': 'Tasso di riferimento ipotecario rimane al minimo storico dell\'1,25 per cento',
+    'blog.article.tasso-riferimento-ipotecario-1-25.excerpt': 'Il tasso di riferimento ipotecario rimane all\'1,25 per cento, mantenendo gli affitti in Svizzera invariati.',
+    'blog.article.tasso-riferimento-ipotecario-1-25.imageAlt': 'Vista aerea di Lugano, Svizzera, con il panorama della città e il Lago di Lugano sullo sfondo.',
 };
 
 export default blogMetaChIt;

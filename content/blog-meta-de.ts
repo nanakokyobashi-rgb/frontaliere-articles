@@ -11017,6 +11017,12 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.chiasso-potenziamento-a2-misure.title': 'Chiasso und A2: Stärkung und finanzielle Herausforderungen',
     'blog.article.chiasso-potenziamento-a2-misure.excerpt': 'Chiasso sieht sich mit komplizierten Projektionen für den Ausbau A2 Lugano-Mendrisio konfrontiert. Ustra bittet die Tessiner Exekutive um Begleitmassnahmen. Was das für Grenzgänger bedeutet.',
     'blog.article.chiasso-potenziamento-a2-misure.imageAlt': 'Luftaufnahme von Chiasso mit Schweizer-italienischer Grenzübergang und A2-Verkehr in der Dämmerung',
+    'blog.article.riqualifica-frontaliere-genitore-2026.title': 'Grenzüberschreitende Umschulung 2026: Fokus auf die Familie',
+    'blog.article.riqualifica-frontaliere-genitore-2026.excerpt': 'Neues grenzüberschreitendes Pendlerabkommen ab 2024: Requalifizierung 2026, Nettoanstieg und BVG für grenzüberschreitende Pendler mit Kindern. Steueranalyse und Betriebscheckliste.',
+    'blog.article.riqualifica-frontaliere-genitore-2026.imageAlt': 'Grenzpendlerin am Laptop während einer Weiterbildung mit Blick auf den Luganersee',
+    'blog.article.valutare-simulazione-ritorno-formazione.title': 'Bewertung der Rückkehr des Trainings: 2026 Anleitung',
+    'blog.article.valutare-simulazione-ritorno-formazione.excerpt': 'Wie man bewertet, ob sich eine Ausbildung lohnt: praktische Checkliste, Simulationsszenarien und Entscheidungskriterien für grenzüberschreitende Pendler im Jahr 2026.',
+    'blog.article.valutare-simulazione-ritorno-formazione.imageAlt': 'Fachperson studiert Schulungsunterlagen am Schreibtisch mit Blick auf den Luganersee',
 };
 
 export default blogMetaDe;
