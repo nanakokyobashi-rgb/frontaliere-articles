@@ -4882,6 +4882,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.swatch-vince-samsung-quadranti.title': 'Swatch bat Samsung en justice : 11,6 millions de compensation',
     'blog.article.swatch-vince-samsung-quadranti.excerpt': 'Swatch gagne à Londres contre Samsung : le tribunal condamne le géant à payer 11,6 millions de dollars pour contrefaçon de cadrans numériques.',
     'blog.article.swatch-vince-samsung-quadranti.imageAlt': 'Montre de luxe suisse à côté d\'un document de décision judiciaire, symbole de la victoire de Swatch contre Samsung',
+    'blog.article.trasporti-pubblici-violenza-sev.title': 'Les transports publics attaqués : la SEV élève la voix contre la violence',
+    'blog.article.trasporti-pubblici-violenza-sev.excerpt': 'Le 3 septembre, le syndicat SEV organise une journée d’action contre la violence contre les employés des transports publics, avec des événements dans plusieurs gares.',
+    'blog.article.trasporti-pubblici-violenza-sev.imageAlt': 'Protestation contre la violence envers les travailleurs des transports publics à la gare de Locarno',
 };
 
 export default blogMetaChFr;

@@ -1,5 +1,4 @@
 {
-  "https://www.rsi.ch/s/3925025": "le-scuse-di-pfister-alle-chiese",
   "https://www.tio.ch/svizzera/economia/1941661/bacher-publibike-investitore-passa-it": "publibike-passa-investitore-britannico",
   "https://www.tio.ch/svizzera/economia/1941704/luglio-auto-byd-vetture-tutte": "vendite-auto-svizzera-luglio-2026",
   "https://www.swissinfo.ch/ita/meno-volumi-alla-borsa-svizzera-in-luglio%2c-ha-pesato-il-calo-estivo/91840796": "rallentamento-borsa-svizzera-luglio",
@@ -1413,6 +1412,11 @@
   "https://www.rsi.ch/s/4050496": {
     "articleId": "swatch-vince-samsung-quadranti",
     "ts": "2026-09-01T00:19:56.888Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/ticino/attualita/1947130/trasporti-personale-sev-violenza-aggressioni": {
+    "articleId": "trasporti-pubblici-violenza-sev",
+    "ts": "2026-09-01T00:27:09.408Z",
     "keyForm": 2
   }
 }
