@@ -9508,6 +9508,13 @@ ${terminologyByLang[targetLang] || ''}`;
       } catch (retryErr) {
         console.error(`  ⚠️  Retry ${field} (${locale}) fallito: ${retryErr.message} — fallback al valore italiano`);
       }
+      // itValue non è mai ri-verificato con detectTruncation() prima di
+      // essere pubblicato come fallback: gemello dello stesso gap nel loop
+      // truncation-retry sotto (#705, follow-up a #699) — se la sorgente IT è
+      // essa stessa troncata, finora veniva pubblicata senza alcun segnale.
+      if (detectTruncation(itValue, { label: `it/${field}` }).length > 0) {
+        console.warn(`  🔴 ${field} (${locale}): fallback IT (campo mancante in traduzione) risulta ESSO STESSO troncato — pubblicato come ultima risorsa, richiede verifica manuale`);
+      }
       data.content[locale][field] = itValue;
     }
   }
@@ -9588,6 +9595,15 @@ ${terminologyByLang[targetLang] || ''}`;
       if (!itValue?.trim()) {
         console.warn(`  ⚠️  ${field} (${locale}) resta troncato: fallback IT vuoto/assente, valore tradotto troncato mantenuto`);
         continue;
+      }
+      // itValue passa qui perché è il campo IT sorgente — il commento a
+      // L9517-9519 sopra assume che abbia già superato detectTruncation() allo
+      // Step 3a.0b-bis, ma quel gate gira una volta sola, PRIMA di
+      // translateArticle(): non viene ripetuto qui. Se itValue arriva a questo
+      // fallback esso stesso troncato, veniva finora pubblicato senza alcun
+      // segnale (#705, follow-up a #699).
+      if (detectTruncation(itValue, { label: `it/${field}` }).length > 0) {
+        console.warn(`  🔴 ${field} (${locale}): fallback IT risulta ESSO STESSO troncato — pubblicato come ultima risorsa, richiede verifica manuale`);
       }
       data.content[locale][field] = itValue;
     }
