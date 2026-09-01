@@ -3003,8 +3003,8 @@
       "sitePath": ".github/corpus-workflows/contract.json",
       "mode": "identical",
       "baseline": {
-        "site": "3e28794b246c5c21",
-        "corpus": "3e28794b246c5c21",
+        "site": "c23232c5abbd03d3",
+        "corpus": "c23232c5abbd03d3",
         "alignedAt": "2026-09-01"
       }
     },
@@ -3013,9 +3013,9 @@
       "sitePath": ".github/corpus-workflows/observers/generator/tests/crawler-cross-repo-artifacts.test.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "a4b97d593486bd4f",
-        "corpus": "a4b97d593486bd4f",
-        "alignedAt": "2026-08-31"
+        "site": "1bb742122d5fa913",
+        "corpus": "1bb742122d5fa913",
+        "alignedAt": "2026-09-01"
       }
     },
     {
