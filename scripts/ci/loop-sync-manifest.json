@@ -3084,32 +3084,32 @@
       }
     },
     {
-      "path": ".github/workflows/translate-queue-rerun-probe.yml",
+      "path": ".github/workflows/translate-queue-recovery-watchdog.yml",
       "mode": "corpus-only",
-      "reason": "Workflow temporaneo NON-PRODUCTION specifico della coda di traduzione di questo corpus: crea soltanto una failure injection read-only per misurare se un rerun di una cancellazione job-zero conserva event e input. Il sito non possiede questa coda; workflow e schedule vanno rimossi con una PR immediata di cleanup dopo il probe.",
+      "reason": "Watchdog corpus-only della coda translate: osserva con sole GET bounded le run del workflow dichiarato e resta dry-run/observe-only. Il sito non possiede questa coda e la recovery schedulata resta blocked finche il rerun-preservation probe non e provato.",
       "baseline": {
         "site": null,
-        "corpus": "bc411f24c4ac1c71",
+        "corpus": "e7df4681b16237d6",
         "alignedAt": "2026-09-01"
       }
     },
     {
-      "path": "scripts/ci/verify-translate-queue-rerun-probe.mjs",
+      "path": "scripts/ci/translate-queue-recovery.mjs",
       "mode": "corpus-only",
-      "reason": "Runtime zero-dependency NON-PRODUCTION del solo probe corpus: valida e redige event/input della run e trattiene il blocker senza leggere o mutare la traduzione. Non ha un ruolo nel ciclo del sito e va rimosso con una PR immediata di cleanup dopo il probe job-zero.",
+      "reason": "Runtime zero-dependency corpus-only del watchdog translate: classifica run e job via GitHub API con budget GET fail-closed, emette soltanto JSON redatto e non possiede metodi o endpoint mutanti.",
       "baseline": {
         "site": null,
-        "corpus": "2ef7c9e40373d439",
+        "corpus": "a562f928d4dac37b",
         "alignedAt": "2026-09-01"
       }
     },
     {
-      "path": "generator/tests/translate-queue-rerun-probe.test.mjs",
+      "path": "generator/tests/translate-queue-recovery.test.mjs",
       "mode": "corpus-only",
-      "reason": "Contratto Node deterministico NON-PRODUCTION per il workflow e il runtime del probe corpus: pinna rerun attempt 1/2, redazione del token e assenza di capacità produttive nella prova job-zero. Non serve sul sito e va rimosso con una PR immediata di cleanup dopo il probe.",
+      "reason": "Contratto Node deterministico corpus-only per watchdog e workflow translate: copre paginazione, budget, reason code, redazione e assenza by construction di qualsiasi capacità di recovery o scrittura remota.",
       "baseline": {
         "site": null,
-        "corpus": "8b641deccfd1c017",
+        "corpus": "e81adcd0bc33921b",
         "alignedAt": "2026-09-01"
       }
     }
