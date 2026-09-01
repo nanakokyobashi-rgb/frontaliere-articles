@@ -9454,7 +9454,11 @@ ${terminologyByLang[targetLang] || ''}`;
     for (const field of ['title', 'excerpt', 'body1', 'body2', 'body3']) {
       if (data.content[locale][field]) continue;
       const itValue = itContent[field];
-      if (!itValue) {
+      // `itValue` composto di solo whitespace (es. ' ') è truthy: senza
+      // `.trim()` bypassa questo guard e viene comunque assegnato sotto come
+      // fallback, pubblicando un campo quasi-vuoto invece di far scattare
+      // l'errore upstream (#691, follow-up a #689).
+      if (!itValue?.trim()) {
         throw new Error(`Campo ${field} mancante nella traduzione ${locale} (e assente anche nella sorgente IT)`);
       }
       console.error(`  ⚠️  Campo ${field} mancante nella traduzione ${locale} — retry traduzione mirata...`);
@@ -9553,8 +9557,10 @@ ${terminologyByLang[targetLang] || ''}`;
       // missing-field sopra copre solo il caso "campo assente"; questo loop
       // parte da un campo già non-vuoto (riga `if (!text) continue;`), quindi
       // può arrivare qui con `itValue` vuoto senza che nulla l'abbia già
-      // intercettato.
-      if (!itValue) {
+      // intercettato. `itValue` di soli spazi (es. ' ') è truthy: senza
+      // `.trim()` il guard non scatta e sovrascrive il body tradotto
+      // troncato-ma-presente con un valore quasi-vuoto (#691, follow-up a #689).
+      if (!itValue?.trim()) {
         console.warn(`  ⚠️  ${field} (${locale}) resta troncato: fallback IT vuoto/assente, valore tradotto troncato mantenuto`);
         continue;
       }

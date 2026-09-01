@@ -48,11 +48,45 @@ function extractTruncationRetryLoop() {
   assert.notEqual(e, -1, 'fine del loop non trovata');
   const block = src.slice(a, e);
   assert.ok(block.includes('detectTruncation'), 'il ritaglio non contiene detectTruncation: anchor sbagliata');
-  assert.ok(block.includes('if (!itValue) {'), 'il ritaglio non contiene la guardia del fix (#686): anchor sbagliata');
+  assert.ok(block.includes('if (!itValue?.trim()) {'), 'il ritaglio non contiene la guardia del fix (#686/#691): anchor sbagliata');
   return block;
 }
 
 const LOOP_SRC = extractTruncationRetryLoop();
+
+/**
+ * Ritaglia il loop missing-field VERBATIM (gemello, simmetrico, del loop di
+ * truncation-retry sopra): stesso antipattern `!itValue`, stesso fix
+ * `!itValue?.trim()` (#691).
+ */
+function extractMissingFieldLoop() {
+  const marker = '`${locale}:${field}-missing-retry`,';
+  const m = src.indexOf(marker);
+  assert.notEqual(m, -1, 'marker non trovato — aggiornare questo test');
+  const startAnchor = "for (const locale of ['en', 'de', 'fr']) {";
+  const a = src.lastIndexOf(startAnchor, m);
+  assert.notEqual(a, -1, 'inizio del loop non trovato');
+  const endAnchor = '\n  // Detect a translated body field cut off mid-sentence';
+  const e = src.indexOf(endAnchor, m);
+  assert.notEqual(e, -1, 'fine del loop non trovata');
+  const block = src.slice(a, e);
+  assert.ok(block.includes('mancante nella traduzione'), 'il ritaglio non contiene il ramo missing-field: anchor sbagliata');
+  assert.ok(block.includes('if (!itValue?.trim()) {'), 'il ritaglio non contiene la guardia del fix (#691): anchor sbagliata');
+  return block;
+}
+
+const MISSING_FIELD_LOOP_SRC = extractMissingFieldLoop();
+
+/** Esegue il loop missing-field ritagliato, stessa tecnica del loop sopra. */
+async function runMissingFieldLoop({ data, itContent, callWithRetry }) {
+  const translatedStringOrNull = (v) => (typeof v === 'string' && v.trim() ? v : null);
+  const silentConsole = { error: () => {}, warn: () => {} };
+  const fn = new Function(
+    'data', 'itContent', 'callWithRetry', 'translatedStringOrNull', 'console',
+    `return (async () => { ${MISSING_FIELD_LOOP_SRC} })();`,
+  );
+  await fn(data, itContent, callWithRetry, translatedStringOrNull, silentConsole);
+}
 
 /**
  * Legge `TRANSLATION_CHUNK_THRESHOLD` dal sorgente invece di duplicarlo come
@@ -158,6 +192,36 @@ test('itValue >700 parole: il retry usa il sub-chunking di translateBodyField in
     data.content.en.body1,
     'Full English translation, complete.',
     'il risultato del sub-chunking deve sostituire il body troncato',
+  );
+});
+
+test('itValue whitespace-only: il body tradotto troncato NON viene sovrascritto (#691)', async () => {
+  const data = { content: { en: { body1: 'This sentence never ends and' } } };
+  // Un fallback fatto di soli spazi è truthy: senza `.trim()` bypassava il
+  // guard (#691, follow-up a #686/#689).
+  const itContent = { body1: '   ' };
+  const detectTruncation = () => ['incomplete-ending'];
+  const callWithRetry = async () => ({ body1: 'This sentence never ends and' });
+
+  await runTruncationRetryLoop({ data, itContent, detectTruncation, callWithRetry });
+
+  assert.equal(
+    data.content.en.body1,
+    'This sentence never ends and',
+    'il body troncato deve restare intatto quando il fallback IT è whitespace-only',
+  );
+});
+
+test('ramo missing-field: itValue whitespace-only lancia l\'errore invece di pubblicare un fallback quasi-vuoto (#691)', async () => {
+  const data = { content: { en: { body1: undefined, title: 'T', excerpt: 'E', body2: 'B2', body3: 'B3' } } };
+  // Un fallback fatto di soli spazi è truthy: senza `.trim()` il guard non
+  // scattava e il valore quasi-vuoto veniva assegnato invece di lanciare.
+  const itContent = { body1: '   ', title: 'T', excerpt: 'E', body2: 'B2', body3: 'B3' };
+  const callWithRetry = async () => { throw new Error('non dovrebbe essere chiamato: il guard deve lanciare prima'); };
+
+  await assert.rejects(
+    () => runMissingFieldLoop({ data, itContent, callWithRetry }),
+    /Campo body1 mancante nella traduzione en/,
   );
 });
 
