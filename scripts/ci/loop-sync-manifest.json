@@ -1981,11 +1981,12 @@
     {
       "path": "generator/scripts/lib/llm-json-repair.mjs",
       "sitePath": "scripts/lib/llm-json-repair.mjs",
-      "mode": "identical",
+      "mode": "adapted",
+      "reason": "Un'unica divergenza (issue #679): il commit d904c48c3 (#479, 2026-08-18) ha spostato `repairLlmJson` qui da `create-article.mjs` — motivo dato nell'intestazione del blocco, `create-article.mjs non e' importabile dalle gate del generatore (girano node --test senza npm ci)`, un vincolo di questo repo, non del sito. Il memo fix per lo spin esponenziale (#428) era gia' stato portato su entrambi i lati PRIMA di questa baseline (hash allineato 524dc16b7d1c0911), quindi la divergenza attuale e' solo il trasloco della funzione, non un fix di comportamento mancante al sito.",
       "baseline": {
         "site": "524dc16b7d1c0911",
-        "corpus": "524dc16b7d1c0911",
-        "alignedAt": "2026-08-18"
+        "corpus": "88c317784c0cf492",
+        "alignedAt": "2026-09-01"
       }
     },
     {
