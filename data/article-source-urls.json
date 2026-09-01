@@ -275,5 +275,55 @@
     "articleId": "traffico-ferroviario-bloccato-ticino",
     "ts": "2026-08-31T13:43:29.183Z",
     "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/commissione-lpp%3a-aumentare-il-tasso-d%27interesse-minimo-di-0%2c5-punti/91982518": {
+    "articleId": "aumento-tasso-interesse-lpp",
+    "ts": "2026-08-31T16:56:09.911Z",
+    "keyForm": 2
+  },
+  "https://www.laregione.ch/estero/confine/1947152/trenord-da-domani-biglietti-piu-cari-rincaro-del-3-88": {
+    "articleId": "trenord-rincaro-388-linee-ticino",
+    "ts": "2026-08-31T20:12:12.975Z",
+    "keyForm": 2
+  },
+  "https://comozero.it/attualita/provincia-di-como-sempre-meno-case-per-lavoratori-giovani-e-famiglie-sono-1302-gli-alloggi-sfitti": {
+    "articleId": "como-crisi-abitativa-alloggi-sfitti",
+    "ts": "2026-08-31T21:24:57.974Z",
+    "keyForm": 2
+  },
+  "https://www.laregione.ch/cantone/mendrisiotto/1947144/municipio-di-chiasso-extra-muros-proiezioni-finanziarie-complicate": {
+    "articleId": "chiasso-potenziamento-a2-misure",
+    "ts": "2026-09-01T05:24:55.241Z",
+    "keyForm": 2
+  },
+  "https://www.ticinonews.ch/ticino/galleria-moscia-acapulco-il-progetto-entra-nel-vivo-un-investimento-da-180-milioni-441726": {
+    "articleId": "galleria-moscia-acapulco-180-milioni",
+    "ts": "2026-09-01T10:37:01.451Z",
+    "keyForm": 2
+  },
+  "https://www.varesenews.it/2026/09/chiusure-notturne-tra-a8-e-diramazione-gallarate-gattico-il-4-settembre-percorsi-alternativi-e-orari/2667724": {
+    "articleId": "chiusure-notturne-a8-dir-gallarate-gattico",
+    "ts": "2026-09-01T12:13:48.256Z",
+    "keyForm": 2
+  },
+  "https://www.varesenews.it/2026/09/con-il-primo-settembre-aumentano-biglietti-e-abbonamenti-trenord/2667790": {
+    "articleId": "mobilita-trenord-aumento-biglietti-2026",
+    "ts": "2026-09-01T12:31:53.105Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/dogane%3a-nuova-informatica-a-udsc%2c-costi-gi%c3%b9%2c-benefici-per-economia/91987363": {
+    "articleId": "dogane-udsc-nuova-informatica",
+    "ts": "2026-09-01T13:39:37.686Z",
+    "keyForm": 2
+  },
+  "https://www.varesenews.it/2026/08/davide-bellotto-fillea-cgil-ancora-un-morto-sul-lavoro-non-possiamo-limitarci-a-contare-le-vittime/2666782": {
+    "articleId": "origgio-tragedia-cantiere-2026",
+    "ts": "2026-09-01T15:08:54.746Z",
+    "keyForm": 2
+  },
+  "https://www.varesenews.it/2026/09/confapi-tensioni-geopolitiche-e-credito-difficile-frenano-investimenti-e-crescita-delle-pmi/2667685": {
+    "articleId": "confapi-pmi-varese-credito-2026",
+    "ts": "2026-09-01T15:51:24.576Z",
+    "keyForm": 2
   }
 }

@@ -28,7 +28,7 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 import { getServiceAccountAccessToken } from './lib/google-service-account-token.mjs';
 import { writeJsonAtomic } from './lib/atomic-write-json.mjs';
 import { decodeFields, buildDailyBrief } from './lib/daily-brief-data.mjs';
-import { isRetryableRcFetchStatus, rcFetchBackoffMs, RC_FETCH_ATTEMPTS } from './load-rc-env.mjs';
+import { isRetryableRcFetchStatus, rcFetchBackoffMs, RC_FETCH_ATTEMPTS, extractGoogleErrorReason } from './load-rc-env.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = path.resolve(__dirname, '..', '..');
@@ -52,8 +52,13 @@ async function fetchJson(url, headers = {}) {
   for (let attempt = 1; attempt <= FETCH_ATTEMPTS; attempt++) {
     const res = await fetch(url, { headers, signal: AbortSignal.timeout(FETCH_TIMEOUT_MS) });
     if (res.ok) return res.json();
-    lastErr = new Error(`GET ${url} → HTTP ${res.status}`);
-    if (!isRetryableRcFetchStatus(res.status)) throw lastErr;
+    // A 403 needs the body to tell a transient quota rejection apart from a
+    // real PERMISSION_DENIED — same reasoning as fetchTemplateViaRest in
+    // load-rc-env.mjs (#247/#683).
+    const bodyText = await res.text().catch(() => '');
+    const reason = extractGoogleErrorReason(bodyText);
+    lastErr = new Error(`GET ${url} → HTTP ${res.status}${reason ? ` (${reason})` : ''}`);
+    if (!isRetryableRcFetchStatus(res.status, reason)) throw lastErr;
     if (attempt < FETCH_ATTEMPTS) await new Promise((r) => setTimeout(r, rcFetchBackoffMs(attempt)));
   }
   throw lastErr;
@@ -87,8 +92,11 @@ async function getDoc(token, docPath) {
       const doc = await res.json();
       return decodeFields(doc.fields);
     }
-    lastErr = new Error(`GET ${docPath} → HTTP ${res.status}`);
-    if (!isRetryableRcFetchStatus(res.status)) throw lastErr;
+    // Same quota-shaped-as-403 case as fetchJson above.
+    const bodyText = await res.text().catch(() => '');
+    const reason = extractGoogleErrorReason(bodyText);
+    lastErr = new Error(`GET ${docPath} → HTTP ${res.status}${reason ? ` (${reason})` : ''}`);
+    if (!isRetryableRcFetchStatus(res.status, reason)) throw lastErr;
     if (attempt < FETCH_ATTEMPTS) await new Promise((r) => setTimeout(r, rcFetchBackoffMs(attempt)));
   }
   throw lastErr;

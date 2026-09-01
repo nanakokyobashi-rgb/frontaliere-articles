@@ -156,7 +156,7 @@ import {
   MAJOR_BLOCK_WEIGHT_THRESHOLD,
   dropSourceContradictedIssues,
 } from './lib/fact-check-consensus.mjs';
-import { runFactualityGates, formatIssues, formatRemediation, buildSourceContract, FACT_CHECK_CATEGORIES, assertNoFabricatedNormAcronyms } from './lib/article-factuality-gates.mjs';
+import { runFactualityGates, formatIssues, formatRemediation, buildSourceContract, FACT_CHECK_CATEGORIES, assertNoFabricatedNormAcronyms, detectTruncation } from './lib/article-factuality-gates.mjs';
 import { loadDefectMemory, learnedDenylist, learnedSuspects } from './lib/article-defect-memory.mjs';
 import {
   stripCompetitorPromotion,
@@ -7709,6 +7709,20 @@ ISTRUZIONI TASSATIVE per questo tentativo:
 - NON reintrodurre lo stesso tipo di invenzione altrove nel testo.`
     : '';
 
+  // Identity refinement (#330 item 2): when validate() rejected the previous
+  // attempt's `id` (or a `slugs` entry) as the echoed prompt placeholder or an
+  // otherwise malformed value, feed the exact rejection + correction note
+  // (identityCorrectionNote(), built where the throw happens in validate())
+  // back into this attempt, mirroring headlineRefinementInstruction/
+  // factCheckRefinementInstruction above. Before this, `err.identityRejected`
+  // was set and never read — the retry regenerated blind and could echo the
+  // same rejected value again.
+  const identityRefinementInstruction = sourceContext?._identityRefinement
+    ? `\n\n⚠️ TENTATIVO PRECEDENTE RIGETTATO — id/slug non validi:
+${sourceContext._identityRefinement}
+Rigenera "id" e "slugs" seguendo ESATTAMENTE lo schema richiesto sopra (valore reale specifico dell'articolo, non il segnaposto), senza ripetere il valore appena rigettato.`
+    : '';
+
   // ── Multi-call generation with automatic model fallback ──
   // Supports model override via sourceContext._forceModel and temperature via sourceContext._temperature
   const forceModel = sourceContext?._forceModel;
@@ -7873,7 +7887,18 @@ Rispondi SOLO con JSON valido, senza markdown.` },
   // consegnare al writer una fonte inutilizzabile.
   const PROMPT_SOURCE_FLOOR_CHARS = 3000;
   const PROMPT_REMEDIATION_CAP_CHARS = 1200;
-  const _remediationFull = headlineRefinementInstruction + factCheckRefinementInstruction;
+  // Identity takes PRIORITY over headline/fact-check remediation rather than
+  // stacking with it. validate() (where an identity rejection is raised) runs
+  // BEFORE the headline and fact-check checks each attempt, so whenever
+  // identity is the reason THIS attempt is retrying, neither of the other two
+  // checks ran this attempt — any headlineRefinementInstruction/
+  // factCheckRefinementInstruction still in state at that point describes an
+  // earlier, already-superseded draft. Sending all three at once would also
+  // risk PROMPT_TOKEN_RAW_CEILING (news-prompt-token-budget.test.mjs pins a
+  // 12-token margin for the headline+fact-check combination alone): a single
+  // relevant note beats three where two are stale.
+  const _remediationFull = identityRefinementInstruction
+    || (headlineRefinementInstruction + factCheckRefinementInstruction);
   const _remediationShort = _clampRemediation(_remediationFull, PROMPT_REMEDIATION_CAP_CHARS);
   const _shrinkLadder = [
     { label: 'intero', sourceBody: truncatedContent, domainFacts: domainFactsBlock, remediation: _remediationFull },
@@ -8902,6 +8927,36 @@ function countWords(text = '') {
     .length;
 }
 
+// Fields exceeding this word count risk hitting the model's per-call output
+// cap in a single prompt — split into sub-chunks instead. Shared by every
+// translation path that can encounter an oversized body field (#688: the
+// truncation-retry loop used to skip this and re-send the whole field in one
+// prompt, reproducing the same truncation it was retrying to fix).
+const TRANSLATION_CHUNK_THRESHOLD = 700;
+
+// Split body text into ~chunkTarget-word pieces at paragraph boundaries, for
+// translating oversized fields as parallel sub-chunks that stay under the
+// model's per-call output cap.
+function splitIntoTranslationChunks(bodyText, chunkTarget = 500) {
+  const paragraphs = (bodyText || '').split(/\n\n+/);
+  const chunks = [];
+  let currentChunk = '';
+  let currentWords = 0;
+  for (const p of paragraphs) {
+    const pWords = countWords(p);
+    if (currentWords + pWords > chunkTarget && currentChunk) {
+      chunks.push(currentChunk);
+      currentChunk = p;
+      currentWords = pWords;
+    } else {
+      currentChunk += (currentChunk ? '\n\n' : '') + p;
+      currentWords += pWords;
+    }
+  }
+  if (currentChunk) chunks.push(currentChunk);
+  return chunks;
+}
+
 function italianBodyWordCount(data) {
   const it = data?.content?.it || {};
   return ['body1', 'body2', 'body3']
@@ -9199,6 +9254,27 @@ async function translateArticle(data) {
     }
   }
 
+  // Sub-chunk an oversized field into ~500-word paragraph pieces, translate
+  // each chunk in parallel via callWithRetry, and join. Shared by
+  // translateBodyField's initial translation below and the truncation-retry
+  // loop further down (#688): both send a field to the model as a single
+  // prompt when it's short, and both need the same chunking safety net once
+  // it isn't, since a single oversized prompt can hit the model's per-call
+  // output cap and come back truncated regardless of how many retries wrap it.
+  async function translateInChunks(bodyText, fieldKey, makeChunkPrompt, labelPrefix) {
+    const chunks = splitIntoTranslationChunks(bodyText);
+    const translated = await Promise.all(
+      chunks.map((chunk, i) =>
+        callWithRetry(
+          makeChunkPrompt(chunk, i, chunks.length),
+          Math.max(5000, Math.ceil(countWords(chunk) * 5)),
+          `${labelPrefix}-p${i + 1}`,
+        ),
+      ),
+    );
+    return joinTranslatedChunks(translated, fieldKey);
+  }
+
   async function translateContent(sourceLang, targetLang, targetLabel, sourceContent) {
     // Quota-free path: route through the dedicated free MT cascade so the LLM
     // daily quota is reserved for generation. Per-field failures are omitted and
@@ -9256,9 +9332,6 @@ ${terminologyByLang[targetLang] || ''}`;
     // Scale maxTokens to input size: ~2 tokens/word in, ~2.5 tokens/word out (translation expansion)
     const bodyTokens = (text) => Math.max(5000, Math.ceil(countWords(text || '') * 5));
 
-    // For body fields exceeding this threshold, split into sub-chunks and translate separately
-    const TRANSLATION_CHUNK_THRESHOLD = 700;
-
     async function translateBodyField(bodyKey, bodyText, lang) {
       const words = countWords(bodyText || '');
 
@@ -9281,42 +9354,22 @@ ${terminologyByLang[targetLang] || ''}`;
         return { [bodyKey]: sanitizeBodyText(text) };
       }
 
-      // Sub-chunk: split at paragraph boundaries into ~500-word pieces
+      // Sub-chunk: split at paragraph boundaries into ~500-word pieces,
+      // translate each in parallel, and join. A chunk the model returned as
+      // an object used to be stringified into the joined body as
+      // "[object Object]" — one corrupted paragraph in the middle of
+      // otherwise-good prose. translateInChunks refuses the whole field
+      // instead and lets the per-field recovery re-translate it.
       console.error(`    📦 ${lang}:${bodyKey} = ${words} parole → sub-chunking...`);
-      const paragraphs = (bodyText || '').split(/\n\n+/);
-      const chunks = [];
-      let currentChunk = '';
-      let currentWords = 0;
-      const chunkTarget = 500;
-
-      for (const p of paragraphs) {
-        const pWords = countWords(p);
-        if (currentWords + pWords > chunkTarget && currentChunk) {
-          chunks.push(currentChunk);
-          currentChunk = p;
-          currentWords = pWords;
-        } else {
-          currentChunk += (currentChunk ? '\n\n' : '') + p;
-          currentWords += pWords;
-        }
-      }
-      if (currentChunk) chunks.push(currentChunk);
-
-      // Translate each chunk in parallel
-      const translated = await Promise.all(
-        chunks.map((chunk, i) =>
-          callWithRetry(makePrompt(
-            `CONTENUTO ITALIANO DA TRADURRE (parte ${i + 1} di ${chunks.length}):\n- ${bodyKey}: ${chunk}`,
-            `{"${bodyKey}": "..."}`,
-          ), bodyTokens(chunk), `${lang}:${bodyKey.replace('body', 'b')}-p${i + 1}`),
+      const joined = await translateInChunks(
+        bodyText,
+        bodyKey,
+        (chunk, i, total) => makePrompt(
+          `CONTENUTO ITALIANO DA TRADURRE (parte ${i + 1} di ${total}):\n- ${bodyKey}: ${chunk}`,
+          `{"${bodyKey}": "..."}`,
         ),
+        `${lang}:${bodyKey.replace('body', 'b')}`,
       );
-
-      // Join translated chunks. A chunk the model returned as an object used to
-      // be stringified into the joined body as "[object Object]" — one corrupted
-      // paragraph in the middle of otherwise-good prose. Refuse the whole field
-      // instead and let the per-field recovery re-translate it.
-      const joined = joinTranslatedChunks(translated, bodyKey);
       if (joined === null) {
         console.error(`  ⚠️  ${lang}:${bodyKey} — almeno un chunk non è una stringa, campo scartato: recupero per-campo downstream`);
         return {};
@@ -9426,7 +9479,11 @@ ${terminologyByLang[targetLang] || ''}`;
     for (const field of ['title', 'excerpt', 'body1', 'body2', 'body3']) {
       if (data.content[locale][field]) continue;
       const itValue = itContent[field];
-      if (!itValue) {
+      // `itValue` composto di solo whitespace (es. ' ') è truthy: senza
+      // `.trim()` bypassa questo guard e viene comunque assegnato sotto come
+      // fallback, pubblicando un campo quasi-vuoto invece di far scattare
+      // l'errore upstream (#691, follow-up a #689).
+      if (!itValue?.trim()) {
         throw new Error(`Campo ${field} mancante nella traduzione ${locale} (e assente anche nella sorgente IT)`);
       }
       console.error(`  ⚠️  Campo ${field} mancante nella traduzione ${locale} — retry traduzione mirata...`);
@@ -9450,6 +9507,103 @@ ${terminologyByLang[targetLang] || ''}`;
         console.error(`  ⚠️  Retry ${field} (${locale}) non ha prodotto una traduzione valida — fallback al valore italiano`);
       } catch (retryErr) {
         console.error(`  ⚠️  Retry ${field} (${locale}) fallito: ${retryErr.message} — fallback al valore italiano`);
+      }
+      // itValue non è mai ri-verificato con detectTruncation() prima di
+      // essere pubblicato come fallback: gemello dello stesso gap nel loop
+      // truncation-retry sotto (#705, follow-up a #699) — se la sorgente IT è
+      // essa stessa troncata, finora veniva pubblicata senza alcun segnale.
+      if (detectTruncation(itValue, { label: `it/${field}` }).length > 0) {
+        console.warn(`  🔴 ${field} (${locale}): fallback IT (campo mancante in traduzione) risulta ESSO STESSO troncato — pubblicato come ultima risorsa, richiede verifica manuale`);
+      }
+      data.content[locale][field] = itValue;
+    }
+  }
+
+  // Detect a translated body field cut off mid-sentence (#635, follow-up to
+  // #634: permesso-dimora-b-obvaldo-rinnovo shipped with body1 EN/DE/FR
+  // truncated). The IT source already passed detectTruncation() at
+  // create-article.mjs's Step 3a.0b-bis, BEFORE this translateArticle() call
+  // exists — that gate cannot see a truncation the translation LLM call
+  // introduces on its own (a different call, a different output-cap hit), and
+  // the missing-field loop above only catches a field that came back EMPTY,
+  // not one that came back non-empty but cut off before the final sentence.
+  // Reuse the same detectTruncation() the post-hoc corpus check runs, retry
+  // the field once, and only fall back to the Italian value (same last-resort
+  // philosophy as the missing-field retry above) if the retry is still
+  // truncated.
+  for (const locale of ['en', 'de', 'fr']) {
+    const langName = locale === 'en' ? 'inglese' : locale === 'de' ? 'tedesco' : 'francese';
+    for (const field of ['body1', 'body2', 'body3']) {
+      const text = data.content[locale]?.[field];
+      if (!text) continue;
+      // Every issue detectTruncation() returns (critical AND major — e.g.
+      // 'incomplete-ending', the most common real-corpus truncation shape,
+      // is 'major') is by definition a truncation signal, so any non-empty
+      // result must trigger the retry — filtering to 'critical' only let the
+      // majority of real-corpus mid-sentence cuts through silently.
+      const isTruncated = detectTruncation(text, { label: `${locale}/${field}` }).length > 0;
+      if (!isTruncated) continue;
+      const itValue = itContent[field];
+      console.error(`  ⚠️  Traduzione ${field} (${locale}) troncata — retry traduzione mirata...`);
+      const buildRetryPrompt = (chunkText, i, total) => {
+        const partLabel = total > 1 ? `, parte ${i + 1} di ${total}` : '';
+        return `Traduci OBBLIGATORIAMENTE in ${langName} il seguente campo per il sito Frontaliere Ticino. `
+          + `La traduzione deve essere COMPLETA fino all'ultima frase: non troncare, non interrompere a metà periodo. `
+          + `Rispondi SOLO con JSON (no markdown):\n\nCAMPO ITALIANO (${field}${partLabel}):\n${chunkText}\n\nFormato risposta: {"${field}": "..."}`;
+      };
+      try {
+        let retried;
+        if (countWords(itValue || '') > TRANSLATION_CHUNK_THRESHOLD) {
+          // A single-prompt retry on an oversized field can hit the model's
+          // own output cap and come back truncated again — the exact failure
+          // this retry exists to fix, just relocated to the retry call
+          // instead of the original translation (#688). Reuse the same
+          // sub-chunking translateBodyField uses for the initial translation.
+          console.error(`    📦 ${locale}:${field} = ${countWords(itValue)} parole → sub-chunking retry...`);
+          retried = await translateInChunks(
+            itValue,
+            field,
+            buildRetryPrompt,
+            `${locale}:${field}-truncation-retry`,
+          );
+        } else {
+          const parsed = await callWithRetry(
+            buildRetryPrompt(itValue, 0, 1),
+            Math.max(5000, Math.ceil(countWords(itValue || '') * 5)),
+            `${locale}:${field}-truncation-retry`,
+          );
+          retried = translatedStringOrNull(parsed?.[field]);
+        }
+        if (retried && detectTruncation(retried, { label: `${locale}/${field}` }).length === 0) {
+          data.content[locale][field] = sanitizeBodyText(retried);
+          console.error(`  ✅ ${field} (${locale}) ritradotto con successo dopo troncamento`);
+          continue;
+        }
+        console.error(`  ⚠️  Retry ${field} (${locale}) ancora troncato — fallback al valore italiano`);
+      } catch (retryErr) {
+        console.error(`  ⚠️  Retry troncamento ${field} (${locale}) fallito: ${retryErr.message} — fallback al valore italiano`);
+      }
+      // Un fallback IT vuoto/assente non deve sovrascrivere il body tradotto
+      // troncato: perderebbe anche il testo parziale già presente, peggiorando
+      // la superficie pubblicata invece di ripararla (#686). Il ramo
+      // missing-field sopra copre solo il caso "campo assente"; questo loop
+      // parte da un campo già non-vuoto (riga `if (!text) continue;`), quindi
+      // può arrivare qui con `itValue` vuoto senza che nulla l'abbia già
+      // intercettato. `itValue` di soli spazi (es. ' ') è truthy: senza
+      // `.trim()` il guard non scatta e sovrascrive il body tradotto
+      // troncato-ma-presente con un valore quasi-vuoto (#691, follow-up a #689).
+      if (!itValue?.trim()) {
+        console.warn(`  ⚠️  ${field} (${locale}) resta troncato: fallback IT vuoto/assente, valore tradotto troncato mantenuto`);
+        continue;
+      }
+      // itValue passa qui perché è il campo IT sorgente — il commento a
+      // L9517-9519 sopra assume che abbia già superato detectTruncation() allo
+      // Step 3a.0b-bis, ma quel gate gira una volta sola, PRIMA di
+      // translateArticle(): non viene ripetuto qui. Se itValue arriva a questo
+      // fallback esso stesso troncato, veniva finora pubblicato senza alcun
+      // segnale (#705, follow-up a #699).
+      if (detectTruncation(itValue, { label: `it/${field}` }).length > 0) {
+        console.warn(`  🔴 ${field} (${locale}): fallback IT risulta ESSO STESSO troncato — pubblicato come ultima risorsa, richiede verifica manuale`);
       }
       data.content[locale][field] = itValue;
     }
@@ -13731,6 +13885,13 @@ async function generateAndValidateArticle(url, sourceContext = null) {
   // generation so callGemini can feed the exact flagged claims back to the model.
   /** @type {string|null} */
   let lastFactCheckErrors = null;
+  // Carries the previous attempt's id/slug rejection (validate()'s
+  // `identityRejected` throw, #330 item 2) into the next generation, mirroring
+  // lastHeadlineErrors/lastFactCheckErrors above. Was a dead flag before this:
+  // `err.identityRejected` was set and never read, so a retry after an
+  // id/slug rejection regenerated blind instead of being told what to fix.
+  /** @type {string|null} */
+  let lastIdentityErrors = null;
   // Il cap di input piu' permissivo che la flotta ha dichiarato rifiutando il
   // prompt. Zero finche' nessun tentativo l'ha detto; vedi il catch piu' sotto.
   let lastPromptTokenBudget = 0;
@@ -13861,6 +14022,9 @@ async function generateAndValidateArticle(url, sourceContext = null) {
       // Surface the previous attempt's fact-check rejections so callGemini can
       // tell the model exactly which invented claims to remove/correct.
       _factCheckRefinement: lastFactCheckErrors || undefined,
+      // Surface the previous attempt's id/slug rejection so callGemini can
+      // tell the model exactly what was wrong with the value it echoed back.
+      _identityRefinement: lastIdentityErrors || undefined,
       // Il budget che la FLOTTA ha dichiarato al tentativo precedente, non uno
       // che assumiamo noi. Vedi il blocco che lo consuma in callGemini.
       _promptTokenBudget: lastPromptTokenBudget || undefined,
@@ -14003,8 +14167,19 @@ async function generateAndValidateArticle(url, sourceContext = null) {
     // gate at the bottom of this function actually enforces.
     try {
       data = validate(rawData, { minBodyChars: computeAdaptiveMinChars(lengthBudgetSource) });
+      // Validation passed — any earlier id/slug rejection no longer applies to
+      // this draft, so clear it rather than carry it (stale) into a later
+      // retry triggered by an unrelated check further down.
+      lastIdentityErrors = null;
     } catch (validationErr) {
       console.error(`  ⚠️  Validazione fallita: ${validationErr.message}`);
+      // #330 item 2: feed the exact id/slug rejection reason (already includes
+      // identityCorrectionNote()'s guidance, see validate()) into the next
+      // attempt's prompt via genContext._identityRefinement, instead of
+      // regenerating blind and risking the same rejected value again.
+      if (validationErr.identityRejected) {
+        lastIdentityErrors = validationErr.message;
+      }
       if (attempt < maxAttempts) {
         console.error(`  🔄 Rigenero contenuto per errore di validazione (${attempt}/${maxAttempts})...`);
         continue;
@@ -14092,6 +14267,13 @@ async function generateAndValidateArticle(url, sourceContext = null) {
         headlineErr.qualityReject = true;
         throw headlineErr;
       }
+
+      // Headline conforms — clear any earlier rejection so a later retry
+      // triggered by an unrelated check (fact-check, word count) doesn't keep
+      // re-sending refinement text about a problem that is already fixed
+      // (#330 item 2 investigation: this and the two resets below are what
+      // free the token margin identityRefinement needs above).
+      lastHeadlineErrors = null;
 
       // Step 3a.0-titlesync: ensure <title> ↔ <h1> sync.
       //
@@ -14288,6 +14470,9 @@ async function generateAndValidateArticle(url, sourceContext = null) {
         }
         throw gateErr;
       }
+      // Gates passed — clear any earlier fact-check rejection carried from a
+      // previous attempt; see the headline reset above for why.
+      lastFactCheckErrors = null;
     }
 
     // Step 3a.0b-ter: conteggio parole IT — DETERMINISTICO, GRATIS, E PRIMA
@@ -14371,6 +14556,10 @@ async function generateAndValidateArticle(url, sourceContext = null) {
         }
         throw err;
       }
+      // LLM fact-check passed too — clear any earlier rejection (deterministic
+      // gates already do this above; repeated here since this is a distinct
+      // failure source that can set the same field independently).
+      lastFactCheckErrors = null;
       // NOTE: there is deliberately no `if (factResult.unverified)` branch here
       // any more. Since the verifier fails CLOSED (2026-07-28), `unverified`
       // only ever comes back paired with `passed: false`, which the branch above

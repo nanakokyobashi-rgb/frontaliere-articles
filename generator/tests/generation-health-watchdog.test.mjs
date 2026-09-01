@@ -492,6 +492,60 @@ describe('le condizioni sono SPENTE sulla normalità misurata', () => {
     m.commits.truncated = true;
     assert.equal(verdictFor(m, 'section-dry', 'svizzera').available, false);
   });
+
+  test('#658: commit-window-truncated è SPENTA quando la finestra è stata letta per intero', () => {
+    const m = healthy();
+    assert.equal(verdictFor(m, 'commit-window-truncated').firing, false);
+  });
+});
+
+describe('#658 — commit-window-truncated: il blind spot di generation-idle/section-dry diventa visibile', () => {
+  test('si accende quando `truncated` è vero, indipendentemente da `lastArticleAt`', () => {
+    // Il punto della issue: un burst STEADY (non isolato) mantiene `truncated`
+    // vero a ogni scan, e senza questa condizione `generation-idle`/`section-dry`
+    // restano `available:false` in silenzio, passata dopo passata.
+    const m = healthy();
+    m.commits.truncated = true;
+    const v = verdictFor(m, 'commit-window-truncated');
+    assert.equal(v.firing, true);
+    assert.match(v.body, /48h/); // lookbackHours della fixture
+  });
+
+  test('resta spenta quando la finestra è troncata SOLO nella misura per-sezione mancata (regressione ordine campi)', () => {
+    // `truncated` vive su `m.commits`, non nasce da `lastArticleAt === null`:
+    // deve restare vera anche quando ogni sezione ha comunque un articolo.
+    const m = healthy();
+    m.commits.truncated = false;
+    assert.equal(verdictFor(m, 'commit-window-truncated').firing, false);
+  });
+
+  test('non misurabile quando i commit stessi non sono disponibili', () => {
+    const m = healthy();
+    m.commits = { available: false };
+    assert.equal(verdictFor(m, 'commit-window-truncated').available, false);
+  });
+
+  test('si richiude da sola quando il burst finisce (stessa simmetria apri/chiudi di ogni altra condizione)', async () => {
+    const m = healthy();
+    m.commits.truncated = true;
+    const created = [];
+    const resolved = [];
+    await reconcile(evaluateConditions(m), {
+      createIssue: async (o) => { created.push(o.title); return { number: 1 }; },
+      resolveIssue: (t) => { resolved.push(t); return null; },
+      log: () => {},
+    });
+    assert.ok(created.includes(verdictFor(m, 'commit-window-truncated').title));
+
+    const healed = healthy();
+    healed.commits.truncated = false;
+    await reconcile(evaluateConditions(healed), {
+      createIssue: async (o) => { throw new Error(`non deve aprire "${o.title}"`); },
+      resolveIssue: (t) => { resolved.push(t); return { number: 9 }; },
+      log: () => {},
+    });
+    assert.ok(resolved.includes(verdictFor(healed, 'commit-window-truncated').title));
+  });
 });
 
 describe('le condizioni sono ACCESE sui guasti realmente accaduti', () => {

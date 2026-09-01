@@ -23,16 +23,65 @@ function occurrences(text, pattern) {
 }
 
 function crawlerIdsFromArtifact(text) {
-  return [...text.matchAll(/^\s+id: crawler-(.+)\n\s+background: true$/gm)]
-    .map((match) => match[1]);
+  const lines = text.split(/\r?\n/);
+  const crawlerIds = [];
+
+  for (let index = 0; index < lines.length; index += 1) {
+    const stepStart = /^(\s*)-\s+(.*)$/.exec(lines[index]);
+    if (!stepStart) continue;
+
+    const stepIndent = stepStart[1].length;
+    const fieldIndent = ' '.repeat(stepIndent + 2);
+    const fields = [fieldIndent + stepStart[2]];
+    for (let cursor = index + 1; cursor < lines.length; cursor += 1) {
+      const indentation = /^(\s*)\S/.exec(lines[cursor]);
+      if (indentation && indentation[1].length <= stepIndent) break;
+      fields.push(lines[cursor]);
+      index = cursor;
+    }
+
+    let crawlerId = '';
+    let background = false;
+    for (const line of fields) {
+      if (!line.startsWith(fieldIndent) || line.startsWith(`${fieldIndent}  `)) continue;
+      const id = /^\s*id:\s*crawler-([a-z0-9-]+)\s*$/.exec(line);
+      if (id) crawlerId = id[1];
+      if (/^\s*background:\s*true\s*$/.test(line)) background = true;
+    }
+    if (crawlerId && background) crawlerIds.push(crawlerId);
+  }
+
+  return crawlerIds;
 }
 
-test('il parser del roster ignora il wait terminale non-background', () => {
+test('il parser del roster tollera field-order e ignora wait o campi annidati non-background', () => {
   const workflow = [
-    '      id: crawler-coop',
-    '      background: true',
-    '      id: crawler-generation-wait',
-    '      wait-all: true',
+    '      - name: Run coop',
+    '        id: crawler-coop',
+    '        if: success()',
+    '        background: true',
+    '        run: echo coop',
+    '      - name: Run alfa',
+    '        background: true',
+    '        continue-on-error: false',
+    '        id: crawler-alfa',
+    '        run: echo alfa',
+    '      - name: Ignore nested shell text',
+    '        run: |-',
+    '          id: crawler-fake',
+    '          background: true',
+    '      - name: Wait',
+    '        id: crawler-generation-wait',
+    '        wait-all: true',
+  ].join('\n');
+  assert.deepEqual(crawlerIdsFromArtifact(workflow), ['coop', 'alfa']);
+});
+
+test('il parser del roster conserva il formato corrente minimale', () => {
+  const workflow = [
+    '      - name: Run coop',
+    '        id: crawler-coop',
+    '        background: true',
   ].join('\n');
   assert.deepEqual(crawlerIdsFromArtifact(workflow), ['coop']);
 });
@@ -41,7 +90,7 @@ test('il contratto censisce 23 gruppi + translate-pending e tutti i crawler unic
   assert.equal(CONTRACT.schemaVersion, 1);
   assert.equal(CONTRACT.groupCount, 23);
   assert.equal(CONTRACT.artifactCount, 24);
-  assert.equal(CONTRACT.observerCount, 2);
+  assert.equal(CONTRACT.observerCount, 6);
   assert.equal(CONTRACT.artifacts.length, 24);
 
   const groups = CONTRACT.artifacts.filter((artifact) => /^crawler-group-\d{2}\.yml$/.test(artifact.file));
@@ -52,7 +101,9 @@ test('il contratto censisce 23 gruppi + translate-pending e tutti i crawler unic
   assert.ok(CONTRACT.crawlerCount > 0);
   assert.ok(CONTRACT.siteRuntimePaths.length > 0);
   assert.deepEqual(CONTRACT.siteRuntimePaths, [...new Set(CONTRACT.siteRuntimePaths)].sort());
-  assert.ok(CONTRACT.siteRuntimePaths.every((runtimePath) => runtimePath.startsWith('scripts/')));
+  assert.ok(CONTRACT.siteRuntimePaths.every((runtimePath) =>
+    runtimePath.startsWith('scripts/') || runtimePath === 'functions/src/githubApiHeaders.js'));
+  assert.ok(CONTRACT.siteRuntimePaths.includes('functions/src/githubApiHeaders.js'));
   assert.ok(CONTRACT.artifacts.some((artifact) => artifact.file === 'translate-pending.yml'));
   for (const observer of CONTRACT.observers) {
     assert.equal(sha256(readFileSync(path.join(ROOT, observer.target), 'utf8')), observer.sha256);
@@ -61,13 +112,34 @@ test('il contratto censisce 23 gruppi + translate-pending e tutti i crawler unic
     path.join(WORKFLOWS, 'crawler-generation-observer-shadow.yml'),
     'utf8',
   );
-  assert.match(observerWorkflow, /^run-name: crawler-generation-sentinel-\$\{\{ inputs\.generation_token \}\}$/m);
+  assert.match(observerWorkflow, /format\('crawler-generation-sentinel-\{0\}', inputs\.generation_token\)/);
+  assert.match(observerWorkflow, /format\('crawler-generation-observer-event-\{0\}', github\.event\.workflow_run\.id\)/);
   assert.match(observerWorkflow, /^  workflow_dispatch:$/m);
-  assert.doesNotMatch(observerWorkflow, /^  workflow_run:$/m);
+  assert.match(observerWorkflow, /^  workflow_run:$/m);
+  assert.match(observerWorkflow, /^  schedule:$/m);
+  assert.match(observerWorkflow, /cron: '23 2,8,14,20 \* \* \*'/);
+  assert.match(observerWorkflow, /max-parallel: 2/);
+  assert.match(observerWorkflow, /group: crawler-generation-observer-\$\{\{ matrix\.generation\.generation_token \}\}/);
+  assert.match(observerWorkflow, /name: crawler-generation-observer-\$\{\{ matrix\.generation\.generation_token \}\}/);
+  assert.match(observerWorkflow, /crawler-generation-observer-selector\.mjs/);
+  assert.deepEqual(
+    [...observerWorkflow.matchAll(/^      - (Crawler Group \d{2} \(sparse cross-repo execution\))$/gm)]
+      .map((match) => match[1]),
+    Array.from(
+      { length: 23 },
+      (_, index) => `Crawler Group ${String(index + 1).padStart(2, '0')} (sparse cross-repo execution)`,
+    ),
+  );
+  assert.match(
+    observerWorkflow,
+    /!startsWith\(github\.event\.workflow_run\.display_title, 'crawler-generation--group-'\)/,
+  );
+  assert.match(observerWorkflow, /TRIGGER_RUN_ID: \$\{\{ github\.event\.workflow_run\.id \}\}/);
   assert.match(observerWorkflow, /^  actions: read$/m);
   assert.match(observerWorkflow, /^  contents: read$/m);
   assert.doesNotMatch(observerWorkflow, /^\s+(?:actions|contents): write$/m);
   assert.doesNotMatch(observerWorkflow, /translate-pending|repository_dispatch|git push|secrets\./);
+  assert.doesNotMatch(observerWorkflow, /\b(?:POST|issues: write|contents: write)\b/);
 });
 
 test('ogni artifact coincide con lo hash emesso dal generatore del sito', () => {

@@ -338,4 +338,42 @@ describe('wiring — create-article.mjs usa il protocollo sui due campi', () => 
         'cioe\' la forma ambigua che questa fix toglie',
     );
   });
+
+  // ═══════════════════════════════════════════════════════════════════════
+  // #330 item 2 — il rigetto dell'id RIGENERA (visto sopra), ma finche' il
+  // flag `err.identityRejected` non viene mai letto il retry rigenera CIECO:
+  // stessa richiesta, nessuna indicazione di cosa era sbagliato, rischio di
+  // riecheggiare lo stesso valore rigettato. Il gemello gia' cablato e'
+  // `selectionCorrectionNote()` per l'headline (#188); queste asserzioni
+  // pinnano che `identityCorrectionNote()` ora percorre la stessa strada.
+  // ═══════════════════════════════════════════════════════════════════════
+  it('il rigetto dell\'id viene letto e rispedito al modello al retry successivo (#330)', () => {
+    assert.match(
+      src,
+      /if \(validationErr\.identityRejected\) \{\s*\n\s*lastIdentityErrors = validationErr\.message;/,
+      '`err.identityRejected` e\' impostato al rigetto ma non e\' mai letto dal catch: il retry rigenera cieco',
+    );
+    assert.match(
+      src,
+      /_identityRefinement: lastIdentityErrors \|\| undefined,/,
+      'la nota di correzione non viene passata al prompt del tentativo successivo via genContext',
+    );
+    assert.match(
+      src,
+      /const identityRefinementInstruction = sourceContext\?\.\_identityRefinement/,
+      'il prompt non costruisce l\'istruzione di correzione a partire da `_identityRefinement`',
+    );
+  });
+
+  it('una validazione riuscita azzera il rigetto d\'identita\' residuo (non lo trascina a un retry successivo)', () => {
+    const i = src.indexOf('data = validate(rawData, { minBodyChars: computeAdaptiveMinChars(lengthBudgetSource) });');
+    assert.ok(i > 0, 'la chiamata a validate() nel loop di generazione non e\' piu\' nel sorgente');
+    const blocco = src.slice(i, i + 400);
+    assert.match(
+      blocco,
+      /lastIdentityErrors = null;/,
+      'senza reset al successo, un rigetto id di un tentativo precedente resterebbe nel prompt di un retry ' +
+        'innescato da un controllo non correlato (fact-check, conteggio parole)',
+    );
+  });
 });

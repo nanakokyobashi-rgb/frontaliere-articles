@@ -81152,6 +81152,630 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-cirimido-frontaliere-ticino-lavoro': {
+    title: 'Vivere a Cirimido, lavorare in Ticino: guida frontaliere',
+    description: 'Trasferirsi a Cirimido e lavorare in Ticino da frontaliere: guida completa su Permesso G, imposta alla fonte, AVS/LPP, costi della vita, valichi di confine.',
+    keywords: 'frontalieri, ticino, svizzera, italia, vivere, cirimido, lavorare, scopri',
+    ogTitle: 'Vivere a Cirimido: guida frontaliere per Ticino',
+    ogDescription: 'Scopri come vivere a Cirimido (Lombardia) e lavorare in Ticino da frontaliere: Permesso G obbligatorio, imposta alla fonte in Svizzera, AVS/LPP, LAMal, tempi ai valichi di Brogeda e Gaggiolo, confronto costi Italia-Svizzera, vantaggi economici',
+    canonicalPath: '/articoli-frontaliere/cirimido-frontaliere-ticino-lavoro',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Vivere a Cirimido, lavorare in Ticino: guida frontaliere",
+      "description": "Trasferirsi a Cirimido e lavorare in Ticino da frontaliere: guida completa su Permesso G, imposta alla fonte, AVS/LPP, costi della vita, valichi di confine.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/cirimido-frontaliere-ticino-lavoro.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista aerea di Mendrisio, Ticino, con paesaggio collinare, vigneti e confine svizzero-italiano al tramonto."
+      },
+      "datePublished": "2026-08-31T16:30:40+00:00",
+      "dateModified": "2026-08-31T16:30:40+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/cirimido-frontaliere-ticino-lavoro/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-aumento-tasso-interesse-lpp': {
+    title: 'Commissione LPP: aumento tasso minimo a 1,75% | Frontaliere Ticino',
+    description: 'La Commissione LPP chiede incremento tasso minimo dal 1,25% all\'1,75%. Cosa cambia per i frontalieri che lavorano in Svizzera. Dati aggiornati 2026',
+    keywords: 'frontalieri, ticino, svizzera, italia, commissione, aumento, tasso, minimo',
+    ogTitle: 'Commissione LPP: aumenta tasso minimo previdenza',
+    ogDescription: 'La Commissione federale della previdenza professionale raccomanda aumento del tasso d\'interesse minimo dal 1,25% all\'1,75% nei fondi previdenziali obbligatori svizzeri. Scopri l\'impatto per i frontalieri.',
+    canonicalPath: '/articoli-frontaliere/aumento-tasso-interesse-lpp',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Commissione LPP: aumento tasso minimo a 1,75%",
+      "description": "La Commissione LPP chiede incremento tasso minimo dal 1,25% all'1,75%. Cosa cambia per i frontalieri che lavorano in Svizzera. Dati aggiornati 2026",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/aumento-tasso-interesse-lpp.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Consulenza previdenziale in ufficio moderno a Lugano con vista sul lago di Lugano"
+      },
+      "datePublished": "2026-08-31T16:56:09+00:00",
+      "dateModified": "2026-08-31T16:56:09+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/laura-bianchi/#person",
+        "name": "Laura Bianchi",
+        "url": "https://frontaliereticino.ch/autori/laura-bianchi/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/aumento-tasso-interesse-lpp/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-trenord-rincaro-388-linee-ticino': {
+    title: 'Trenord, rincaro del 3,88% sulle linee con il Ticino',
+    description: 'Dal 1° settembre Trenord applica un rincaro del 3,88% su biglietti e abbonamenti, disposto dalla Giunta di Regione Lombardia. Interessate anche le linee',
+    keywords: 'frontalieri, ticino, svizzera, italia, trenord, rincaro, sulle, linee',
+    ogTitle: 'Trenord, rincaro del 3,88% dal 1° settembre sulle linee col Ticino',
+    ogDescription: 'La Giunta di Regione Lombardia ha disposto un rincaro del 3,88% su biglietti e abbonamenti Trenord, in vigore dal 1° settembre. L\'aumento tocca anche le linee transfrontaliere con il Canton Ticino. Restano esclusi il Malpensa Express (tariffa',
+    canonicalPath: '/articoli-frontaliere/trenord-rincaro-388-linee-ticino',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Trenord, rincaro del 3,88% sulle linee con il Ticino",
+      "description": "Dal 1° settembre Trenord applica un rincaro del 3,88% su biglietti e abbonamenti, disposto dalla Giunta di Regione Lombardia. Interessate anche le linee",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/trenord-rincaro-388-linee-ticino.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Treno regionale Trenord in stazione al confine con il Canton Ticino"
+      },
+      "datePublished": "2026-08-31T20:12:12+00:00",
+      "dateModified": "2026-08-31T20:12:12+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/trenord-rincaro-388-linee-ticino/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-como-crisi-abitativa-alloggi-sfitti': {
+    title: 'Crisi casa a Como: 1.302 alloggi sfitti, giovani in fuga',
+    description: 'Nel luglio 2025 sono 1.302 gli alloggi pubblici sfitti in provincia di Como. CGIL, CISL e UIL denunciano crisi abitativa che spinge lavoratori verso il mercato',
+    keywords: 'frontalieri, ticino, svizzera, italia, crisi, casa, como, alloggi',
+    ogTitle: 'Crisi casa a Como: 1.302 alloggi sfitti, giovani in fuga',
+    ogDescription: 'Nel luglio 2025 sono 1.302 gli alloggi pubblici sfitti in provincia di Como. CGIL Como, CISL dei Laghi e UIL del Lario denunciano una crisi abitativa che spinge i lavoratori verso il mercato del lavoro svizzero. Scopri i dati e le soluzioni proposte.',
+    canonicalPath: '/articoli-frontaliere/como-crisi-abitativa-alloggi-sfitti',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Crisi casa a Como: 1.302 alloggi sfitti, giovani in fuga",
+      "description": "Nel luglio 2025 sono 1.302 gli alloggi pubblici sfitti in provincia di Como. CGIL, CISL e UIL denunciano crisi abitativa che spinge lavoratori verso il mercato",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/como-crisi-abitativa-alloggi-sfitti.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista del lago di Como con edifici residenziali, simbolo della provincia attrattiva ma con costi abitativi elevati"
+      },
+      "datePublished": "2026-08-31T21:24:57+00:00",
+      "dateModified": "2026-08-31T21:24:57+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/como-crisi-abitativa-alloggi-sfitti/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-frontaliere-licenziamento-famiglia-figli-2026': {
+    title: 'Frontaliere licenziato 2026: preavviso, indennità e figli',
+    description: 'Frontaliere licenziato nel 2026: preavviso secondo il CO, indennità INPS, LAMal e credito d\'imposta per famiglie con figli in Ticino. Dati aggiornati 2026',
+    keywords: 'frontalieri, ticino, svizzera, italia, licenziato, preavviso, indennità, figli',
+    ogTitle: 'Frontaliere licenziato 2026: preavviso, indennità e figli',
+    ogDescription: 'Scenario completo per il frontaliere con famiglia e figli: preavviso secondo il CO svizzero, Nuovo Accordo in vigore dal 2024, credito d\'imposta nel quadro CE, copertura LAMal e posizione contributiva INPS dopo la cessazione del rapporto di lavoro',
+    canonicalPath: '/articoli-frontaliere/frontaliere-licenziamento-famiglia-figli-2026',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Frontaliere licenziato 2026: preavviso, indennità e figli",
+      "description": "Frontaliere licenziato nel 2026: preavviso secondo il CO, indennità INPS, LAMal e credito d'imposta per famiglie con figli in Ticino. Dati aggiornati 2026",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/frontaliere-licenziamento-famiglia-figli-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Valico di frontiera in Ticino all'alba con automobile in coda per il pendolarismo"
+      },
+      "datePublished": "2026-08-31T23:02:27+00:00",
+      "dateModified": "2026-08-31T23:02:27+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/frontaliere-licenziamento-famiglia-figli-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-chiasso-potenziamento-a2-misure': {
+    title: 'Chiasso e A2: potenziamento e sfide finanziarie',
+    description: 'Chiasso affronta proiezioni complicate per il potenziamento A2 Lugano-Mendrisio. Ustra chiede misure accompagnatorie all\'Esecutivo ticinese. Cosa significa',
+    keywords: 'frontalieri, ticino, svizzera, italia, chiasso, potenziamento, sfide, finanziarie',
+    ogTitle: 'Chiasso: potenziamento A2 e sfide finanziarie',
+    ogDescription: 'Il Municipio di Chiasso affronta proiezioni finanziarie complicate in vista del potenziamento dell\'A2 fra Lugano e Mendrisio. Ustra chiede misure accompagnatorie all\'Esecutivo cantonale. Quale impatto per il frontaliere? Scopri come la viabilità',
+    canonicalPath: '/articoli-frontaliere/chiasso-potenziamento-a2-misure',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Chiasso e A2: potenziamento e sfide finanziarie",
+      "description": "Chiasso affronta proiezioni complicate per il potenziamento A2 Lugano-Mendrisio. Ustra chiede misure accompagnatorie all'Esecutivo ticinese. Cosa significa",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/chiasso-potenziamento-a2-misure.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Veduta aerea di Chiasso con valico svizzero-italiano e traffico sulla A2 al crepuscolo"
+      },
+      "datePublished": "2026-09-01T05:24:55+00:00",
+      "dateModified": "2026-09-01T05:24:55+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/chiasso-potenziamento-a2-misure/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-riqualifica-frontaliere-genitore-2026': {
+    title: 'Riqualifica frontaliere 2026: focus famiglia | Frontaliere Ticino',
+    description: 'Nuovo Accordo Frontalieri 2026: come funziona la riqualifica professionale per frontalieri con figli. Benefici fiscali, esenzioni, imposta alla fonte',
+    keywords: 'frontalieri, ticino, svizzera, italia, riqualifica, focus, famiglia, nuovo',
+    ogTitle: 'Riqualifica frontaliere 2026: focus famiglia',
+    ogDescription: 'Frontaliere con figli che si riqualificano nel 2026? Scopri come il Nuovo Accordo Frontalieri dal 2024 aumenta il tuo netto stipendio, con esenzioni fiscali fino a €10.000 e coordinamento INPS-AVS. Calcola il vantaggio in 5 minuti.',
+    canonicalPath: '/articoli-frontaliere/riqualifica-frontaliere-genitore-2026',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Riqualifica frontaliere 2026: focus famiglia",
+      "description": "Nuovo Accordo Frontalieri 2026: come funziona la riqualifica professionale per frontalieri con figli. Benefici fiscali, esenzioni, imposta alla fonte",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/riqualifica-frontaliere-genitore-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Donna frontaliera al computer durante una videolezione di formazione professionale, con vista sul Lago di Lugano"
+      },
+      "datePublished": "2026-09-01T06:09:35+00:00",
+      "dateModified": "2026-09-01T06:09:35+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/riqualifica-frontaliere-genitore-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-valutare-simulazione-ritorno-formazione': {
+    title: 'Valutare il ritorno della formazione: guida pratica 2026',
+    description: 'Guida pratica per valutare il ritorno di una formazione professionale nel 2026. Checklist, simulazione ROI e scenari per frontalieri Ticino. Dati aggiornati',
+    keywords: 'frontalieri, ticino, svizzera, italia, valutare, ritorno, formazione, pratica',
+    ogTitle: 'Valutare il ritorno della formazione: guida 2026',
+    ogDescription: 'Decidi se un corso di formazione conviene davvero. Scopri come valutare il ritorno con una checklist pratica, simulare il ROI, confrontare scenari e usare gli strumenti per pianificare il tuo percorso professionale da frontaliere nel 2026.',
+    canonicalPath: '/articoli-frontaliere/valutare-simulazione-ritorno-formazione',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Valutare il ritorno della formazione: guida pratica 2026",
+      "description": "Guida pratica per valutare il ritorno di una formazione professionale nel 2026. Checklist, simulazione ROI e scenari per frontalieri Ticino. Dati aggiornati",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/valutare-simulazione-ritorno-formazione.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Professionista che studia documenti di formazione su una scrivania con vista sul Lago di Lugano"
+      },
+      "datePublished": "2026-09-01T06:31:25+00:00",
+      "dateModified": "2026-09-01T06:31:25+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/valutare-simulazione-ritorno-formazione/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-vivere-villette-frontaliere': {
+    title: 'Vivere a Villette e lavorare in Ticino da frontaliere',
+    description: 'Vivere a Villette da frontaliere e lavorare in Ticino: trasporti, costi e vantaggi fiscali. Guida ai valichi, norme AVS, Permesso G e scadenze amministrative.',
+    keywords: 'frontalieri, ticino, svizzera, italia, vivere, villette, lavorare, trasporti',
+    ogTitle: 'Vivere a Villette e lavorare in Ticino da frontaliere',
+    ogDescription: 'Vivere a Villette da frontaliere e lavorare in Ticino: trasporti, costi e vantaggi fiscali. Guida ai valichi, norme AVS, Permesso G e scadenze amministrative.',
+    canonicalPath: '/articoli-frontaliere/vivere-villette-frontaliere',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Vivere a Villette e lavorare in Ticino da frontaliere",
+      "description": "Vivere a Villette da frontaliere e lavorare in Ticino: trasporti, costi e vantaggi fiscali. Guida ai valichi, norme AVS, Permesso G e scadenze amministrative.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/vivere-villette-frontaliere.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista residenziale di una piccola cittadina in provincia di Como al confine con il Ticino"
+      },
+      "datePublished": "2026-09-01T06:59:48+00:00",
+      "dateModified": "2026-09-01T06:59:48+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/vivere-villette-frontaliere/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-bollettino-frontaliere-2026-09-01': {
+    title: 'Bollettino del frontaliere – 1 settembre 2026: a Ponte Tresa 33 minuti di coda',
+    description: 'Bollettino frontalieri del 1 settembre 2026: code ai valichi stamattina, dove la benzina costa meno, cambio franco-euro e nuovi annunci di lavoro in Svizzera.',
+    keywords: 'bollettino frontaliere, dogana, attesa dogana, code valichi ticino, prezzi benzina confine, cambio franco euro, lavoro svizzera, frontalieri ticino',
+    ogTitle: 'Bollettino del frontaliere – 1 settembre 2026: a Ponte Tresa 33 minuti di coda',
+    ogDescription: 'I numeri del 1 settembre 2026 per i frontalieri: quanto si aspetta a ogni valico stamattina, in quali comuni conviene fare il pieno, quanto vale oggi il franco e quanti annunci di lavoro sono usciti in Svizzera.',
+    canonicalPath: '/articoli-frontaliere/bollettino-frontaliere-2026-09-01',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Bollettino del frontaliere – 1 settembre 2026: a Ponte Tresa 33 minuti di coda",
+      "description": "Bollettino frontalieri del 1 settembre 2026: code ai valichi stamattina, dove la benzina costa meno, cambio franco-euro e nuovi annunci di lavoro in Svizzera.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/bollettino-frontaliere-2026-09-01.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "I numeri del giorno per i frontalieri – 1 settembre 2026: attese ai valichi, prezzi benzina, cambio franco-euro e annunci di lavoro"
+      },
+      "datePublished": "2026-09-01T09:51:15+00:00",
+      "dateModified": "2026-09-01T09:51:15+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/bollettino-frontaliere-2026-09-01/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-galleria-moscia-acapulco-180-milioni': {
+    title: 'Galleria Moscia-Acapulco: 180 milioni per la viabilità',
+    description: 'Il progetto della galleria Moscia-Acapulco e la riqualifica della strada litoranea rappresentano un investimento significativo per il miglioramento',
+    keywords: 'frontalieri, ticino, svizzera, italia, galleria, moscia-acapulco, milioni, viabilità',
+    ogTitle: 'Galleria Moscia-Acapulco: un investimento da 180 milioni',
+    ogDescription: 'Il progetto della galleria Moscia-Acapulco e la riqualifica della strada litoranea rappresentano un investimento significativo per il miglioramento della viabilità e della qualità della vita dei frontalieri. La galleria a canna unica e a traffico',
+    canonicalPath: '/articoli-frontaliere/galleria-moscia-acapulco-180-milioni',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Galleria Moscia-Acapulco: 180 milioni per la viabilità",
+      "description": "Il progetto della galleria Moscia-Acapulco e la riqualifica della strada litoranea rappresentano un investimento significativo per il miglioramento",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/galleria-moscia-acapulco-180-milioni.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista aerea del progetto della galleria Moscia-Acapulco in Ticino"
+      },
+      "datePublished": "2026-09-01T10:37:01+00:00",
+      "dateModified": "2026-09-01T10:37:01+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/galleria-moscia-acapulco-180-milioni/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-chiusure-notturne-a8-dir-gallarate-gattico': {
+    title: 'Chiusure notturne tra A8 e Diramazione Gallarate-Gattico il 4 settembre',
+    description: 'Autostrade per l\'Italia annuncia chiusure notturne tra A8 e Diramazione Gallarate-Gattico per lavori di pavimentazione e barriere antirumore. Dati aggiornati',
+    keywords: 'frontalieri, ticino, svizzera, italia, chiusure, notturne, diramazione, gallarate-gattico',
+    ogTitle: 'Chiusure notturne tra A8 e Diramazione Gallarate-Gattico il 4 settembre',
+    ogDescription: 'Autostrade per l\'Italia ha annunciato una serie di chiusure notturne lungo le arterie autostradali del Varesotto per consentire interventi di pavimentazione e il potenziamento delle barriere antirumore. I provvedimenti saranno attivi dalle ore 21:00',
+    canonicalPath: '/articoli-frontaliere/chiusure-notturne-a8-dir-gallarate-gattico',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Chiusure notturne tra A8 e Diramazione Gallarate-Gattico il 4 settembre",
+      "description": "Autostrade per l'Italia annuncia chiusure notturne tra A8 e Diramazione Gallarate-Gattico per lavori di pavimentazione e barriere antirumore. Dati aggiornati",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/chiusure-notturne-a8-dir-gallarate-gattico.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Chiusure notturne tra A8 e Diramazione Gallarate-Gattico"
+      },
+      "datePublished": "2026-09-01T12:13:48+00:00",
+      "dateModified": "2026-09-01T12:13:48+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/chiusure-notturne-a8-dir-gallarate-gattico/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-mobilita-trenord-aumento-biglietti-2026': {
+    title: 'Con il primo settembre aumentano biglietti e abbonamenti Trenord',
+    description: 'Dal 1° settembre 2026, i biglietti e abbonamenti Trenord subiscono aumenti significativi, con impatti su tratte come Gallarate-Milano. Dati aggiornati 2026',
+    keywords: 'frontalieri, ticino, svizzera, italia, primo, settembre, aumentano, biglietti',
+    ogTitle: 'Aumento biglietti Trenord dal 1° settembre 2026',
+    ogDescription: 'Dal 1° settembre 2026, i biglietti e abbonamenti Trenord subiscono aumenti significativi, con impatti su tratte come Gallarate-Milano. Scopri di più su Frontaliere Ticino.',
+    canonicalPath: '/articoli-frontaliere/mobilita-trenord-aumento-biglietti-2026',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Con il primo settembre aumentano biglietti e abbonamenti Trenord",
+      "description": "Dal 1° settembre 2026, i biglietti e abbonamenti Trenord subiscono aumenti significativi, con impatti su tratte come Gallarate-Milano. Dati aggiornati 2026",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/mobilita-trenord-aumento-biglietti-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Aumento dei biglietti Trenord dal 1° settembre 2026"
+      },
+      "datePublished": "2026-09-01T12:31:53+00:00",
+      "dateModified": "2026-09-01T12:31:53+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/mobilita-trenord-aumento-biglietti-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-dogane-udsc-nuova-informatica': {
+    title: 'Nuova informatica a UDSC: costi giù, benefici per l\'economia',
+    description: 'Il programma DaziT dell\'UDSC si conclude alla fine del 2023, con una riduzione di 125 milioni di franchi nei costi di regolamentazione per l\'economia.',
+    keywords: 'frontalieri, ticino, svizzera, italia, nuova, informatica, udsc, costi',
+    ogTitle: 'Nuova informatica a UDSC: costi giù, benefici per l\'economia',
+    ogDescription: 'Scopri come il programma DaziT dell\'UDSC sta riducendo i costi di regolamentazione per l\'economia e migliorando l\'efficienza delle attività doganali.',
+    canonicalPath: '/articoli-frontaliere/dogane-udsc-nuova-informatica',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Nuova informatica a UDSC: costi giù, benefici per l'economia",
+      "description": "Il programma DaziT dell'UDSC si conclude alla fine del 2023, con una riduzione di 125 milioni di franchi nei costi di regolamentazione per l'economia.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/dogane-udsc-nuova-informatica.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Ufficio federale della dogana e della sicurezza dei confini a Lugano"
+      },
+      "datePublished": "2026-09-01T13:39:37+00:00",
+      "dateModified": "2026-09-01T13:39:37+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/dogane-udsc-nuova-informatica/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-origgio-tragedia-cantiere-2026': {
+    title: 'Tragedia in cantiere a Origgio: morto un uomo di 55 anni',
+    description: 'Un uomo di 55 anni ha perso la vita in un infortunio sul lavoro a Origgio. Davide Bellotto della Fillea Cgil Varese: «Non conosciamo ancora i dettagli»',
+    keywords: 'frontalieri, ticino, svizzera, italia, tragedia, cantiere, origgio, morto',
+    ogTitle: 'Tragedia in cantiere a Origgio: morto un uomo di 55 anni',
+    ogDescription: 'Un uomo di 55 anni ha perso la vita in un infortunio sul lavoro a Origgio. Davide Bellotto della Fillea Cgil Varese: «Non conosciamo ancora i dettagli». La sicurezza nei cantieri è un tema cruciale per i frontalieri.',
+    canonicalPath: '/articoli-frontaliere/origgio-tragedia-cantiere-2026',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Tragedia in cantiere a Origgio: morto un uomo di 55 anni",
+      "description": "Un uomo di 55 anni ha perso la vita in un infortunio sul lavoro a Origgio. Davide Bellotto della Fillea Cgil Varese: «Non conosciamo ancora i dettagli»",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/origgio-tragedia-cantiere-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Scene di un cantiere a Origgio dopo una tragedia sul lavoro"
+      },
+      "datePublished": "2026-09-01T15:08:54+00:00",
+      "dateModified": "2026-09-01T15:08:54+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/origgio-tragedia-cantiere-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-confapi-pmi-varese-credito-2026': {
+    title: 'Confapi: credito difficile blocca investimenti PMI Nord',
+    description: 'Rapporto Confapi su 2.000 PMI: 60% in difficoltà per geopolitica e credito. Impatto diretto su occupazione e salari dei frontalieri Varese-Ticino.',
+    keywords: 'frontalieri, ticino, svizzera, italia, confapi, credito, difficile, blocca',
+    ogTitle: 'Confapi: credito difficile blocca investimenti PMI Nord',
+    ogDescription: 'Il rapporto Confapi su 2.000 PMI italiane mostra produzione in calo per il 60%, ordini in contrazione per il 64,18%. Tensioni geopolitiche e credito difficile frenano assunzioni nei settori Varese. Impatto diretto sui salari e occupazione',
+    canonicalPath: '/articoli-frontaliere/confapi-pmi-varese-credito-2026',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Confapi: credito difficile blocca investimenti PMI Nord",
+      "description": "Rapporto Confapi su 2.000 PMI: 60% in difficoltà per geopolitica e credito. Impatto diretto su occupazione e salari dei frontalieri Varese-Ticino.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/confapi-pmi-varese-credito-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Area industriale di Mendrisio al confine con la provincia di Varese, Ticino"
+      },
+      "datePublished": "2026-09-01T15:51:24+00:00",
+      "dateModified": "2026-09-01T15:51:24+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/confapi-pmi-varese-credito-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

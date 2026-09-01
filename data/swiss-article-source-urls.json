@@ -1,38 +1,4 @@
 {
-  "https://www.swissinfo.ch/ita/economia-agraria/ceo-di-k%c3%a4gi-il-problema-pi%c3%b9-grande-sono-le-esportazioni/91377425": "ceo-kagi-esportazioni-difficolta",
-  "https://www.swissinfo.ch/ita/catene-alimentari/vero-o-falso-nelle-catene-di-approvvigionamento-svizzere-esiste-il-lavoro-forzato/91809968": "lavoro-forzato-svizzera",
-  "https://www.swissinfo.ch/ita/quinta-svizzera/andare-in-pensione-qui-o-altrove-queste-persone-svizzere-allestero-hanno-scelto-entrambe-le-opzioni/89982486": "frontalieri-pensione-altrove",
-  "https://www.tio.ch/svizzera/attualita/1941604/milionari-reddito-zurigo-milione-vivono-franchi": "milionari-reddito-svizzera-2022",
-  "https://www.rsi.ch/s/3925025": "le-scuse-di-pfister-alle-chiese",
-  "https://www.tio.ch/svizzera/economia/1941661/bacher-publibike-investitore-passa-it": "publibike-passa-investitore-britannico",
-  "https://www.tio.ch/svizzera/economia/1941704/luglio-auto-byd-vetture-tutte": "vendite-auto-svizzera-luglio-2026",
-  "https://www.swissinfo.ch/ita/meno-volumi-alla-borsa-svizzera-in-luglio%2c-ha-pesato-il-calo-estivo/91840796": "rallentamento-borsa-svizzera-luglio",
-  "https://www.swissinfo.ch/ita/topic/il-futuro-del-lavoro": "il-futuro-del-lavoro",
-  "https://www.swissinfo.ch/ita/votazioni-federali-la-nostra-guida-al-voto-per-la-quinta-svizzera": "votazioni-federali-guida-2026",
-  "https://www.swissinfo.ch/ita/publibike-passa-in-mani-inglesi%2c-acquistata-da-fondo-d%27investimento/91839303": "publibike-investitore-britannico",
-  "https://www.swissinfo.ch/ita/economia-sanitaria": "economia-sanitaria-svizzera",
-  "https://www.tio.ch/ticino/attualita/1940819/fatture-affitto-e-cassa-malati-le-difficolta-di-98-famiglie": "frontaliere-ticino-98-famiglie-caso-solidale",
-  "https://www.tio.ch/svizzera/economia/1941816/aumento-chiede-schweiz-angestellte-formazione": "angestellte-schweiz-aumento-2027",
-  "https://www.tio.ch/svizzera/economia/1941808/swiss-fatturato-costi-carburante-conseguenze": "swiss-fatturato-costi-carburante-conseguenze",
-  "https://www.swissinfo.ch/ita/emigrazione/senza-lavoro-allestero-ecco-cosa-considerare-quando-si-ritorna-in-svizzera/88366386": "rientro-in-svizzera-senza-lavoro-guida",
-  "https://www.tio.ch/svizzera/economia/1941815/leclanche-rapporto-difficolta-azienda-azioni": "leclanche-crisi-finanziaria-2025",
-  "https://www.tio.ch/svizzera/economia/1941837/fondazioni-dati-svizzera-principato-liechtenstein-hacker": "attacco-hacker-liechtenstein-svizzera",
-  "https://www.fiscoetasse.com/approfondimenti/17362-le-condizioni-per-lesenzione-totale-dal-dazio-nelle-situazioni-di-emergenza.html": "le-assenze-totale-dal-dazio-nelle-situazioni-di-emergenza",
-  "https://www.swissinfo.ch/ita/prospettiva-svizzera/la-vigilanza-sulle-banche-in-svizzera-una-breve-storia-degli-scandali/91769822": "vigilanza-banche-svizzera-scandali",
-  "https://www.swissinfo.ch/ita/siccit%c3%a0%3a-i-contadini-si-mobilitano%2c-arriva-la-borsa-dei-foraggi/91846359": "siccita-contadini-mobilitano",
-  "https://www.swissinfo.ch/ita/emigrazione/emigrare-dalla-svizzera-alcuni-aspetti-fondamentali-riguardanti-le-tasse/88379792": "emigrazione-tasse-obblighi-dopo-partenza",
-  "https://www.swissinfo.ch/ita/banche-cercano-pi%c3%b9-personale%2c-annunci-%2b14%25-in-luglio/91847006": "banche-cercano-piu-personale",
-  "https://www.swissinfo.ch/ita/storia/cile-1988-cosa-possiamo-imparare-oggi-dalla-votazione-che-ha-posto-fine-a-una-dittatura/91611422": "cile-1988-democrazia-svizzera",
-  "https://www.swissinfo.ch/ita/topic/sicurezza-del-paziente": "medicina-di-genere-svizzera",
-  "https://www.swissinfo.ch/ita/frontiere-della-ricerca": "frontiere-ricerca-svizzera-2025",
-  "https://www.tio.ch/svizzera/attualita/1942029/caldo-reddito-donne-anziani-adattamento": "caldo-disparita-sociali-ginevra",
-  "https://www.tio.ch/svizzera/attualita/1942044/francia-affitti-alloggio-spinge-trasferirsi": "svizzeri-fuga-estero-costo-casa",
-  "https://www.tio.ch/ticino/attualita/1942055/previsto-un-altro-miglioramento-per-le-finanze-cantonali-cala-il-disavanzo": "calo-disavanzo-cantonale-2026",
-  "https://www.tio.ch/ticino/attualita/1942092/stato-consiglio-canicola-lavoro-dialogo": "canicola-lavoro-dialogo-consiglio-stato",
-  "https://www.tio.ch/svizzera/economia/1942079/materie-risultati-glencore-semestre-forte": "glencore-aumenta-utili-e-ricavi-nel-semestre",
-  "https://www.swissinfo.ch/ita/raffreddare-le-citt%c3%a0-svizzere%3f-%22il-lavoro-%c3%a8-appena-iniziato%22/91851493": "raffreddare-le-citta-svizzere-il-lavoro-e-appena-iniziato",
-  "https://www.tio.ch/rubriche/ospite/1942213/territorio-ricorso-snl-perocchi-claudio-rischia-prezzo-vale": "snl-ricorso-lago-maggiore",
-  "https://www.tio.ch/ticino/attualita/1942169/istituzioni-fiducia-festival-carobbio-locarno-guscetti-bene": "marina-carobbio-guscetti-fiducia-istituzioni",
   "https://www.rsi.ch/s/3936792": "lex-netflix-cinema-svizzero-2025",
   "https://www.tio.ch/svizzera/economia/1942311/continua-bolla-svizzera-ubs-punti": "rischio-bolla-svizzera-2026",
   "https://www.tio.ch/dal-mondo/economia/1942414/apollo-easyjet-fondo-miliardi-acquisizione-franchi": "easyjet-apollon-acquisizione",
@@ -995,8 +961,8 @@
     "keyForm": 2
   },
   "https://www.tvsvizzera.it/tvs/lavoro-ed-economia/gli-svizzeri-non-hanno-mai-guadagnato-e-risparmiato-come-oggi/91955878": {
-    "articleId": "reddito-record-risparmio-svizzeri",
-    "ts": "2026-08-26T16:59:55.374Z",
+    "articleId": "svizzeri-risparmiano-piu-che-mai",
+    "ts": "2026-08-31T21:13:26.175Z",
     "keyForm": 2
   },
   "https://www.tio.ch/svizzera/economia/1946190/rail-primo-borsa-semestre-stadler": {
@@ -1372,6 +1338,201 @@
   "https://www.tio.ch/svizzera/economia/1947107/licenziamenti-skyguide-consultazione-prevede-numero": {
     "articleId": "skyguide-licenziamenti-consultazione",
     "ts": "2026-08-31T15:49:35.976Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/politica/1947133/consiglio-due-chiede-scuole-smartphone-parlamento-velo": {
+    "articleId": "divieto-velo-cellulari-scuole",
+    "ts": "2026-08-31T16:44:29.431Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/s/4024606": {
+    "articleId": "siccita-depuratori-crisi-acque",
+    "ts": "2026-08-31T17:06:56.757Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/commissione-cst-frena-governo-su-capitale-proprio-grandi-banche/91982900": {
+    "articleId": "commissione-cst-copertura-banche-svizzere",
+    "ts": "2026-08-31T20:27:08.556Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/economia/1947110/norme-banche-consiglio-stati-commissione": {
+    "articleId": "ubs-norme-bancarie-compromesso",
+    "ts": "2026-08-31T21:35:37.016Z",
+    "keyForm": 2
+  },
+  "https://www.admin.ch/it/newnsb/holsnqc6wk9s_okvufdf5": {
+    "articleId": "divario-salariale-genere-agosto-2026",
+    "ts": "2026-08-31T21:48:54.890Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/citt%c3%a0%3a-pi%c3%b9-margine-manovra-per-adattamento-climatico-sulle-strade/91979739": {
+    "articleId": "citta-clima-30-kmh-strade",
+    "ts": "2026-08-31T22:02:28.264Z",
+    "keyForm": 2
+  },
+  "https://www.admin.ch/it/newnsb/3jitzu6cmeuk": {
+    "articleId": "cooperazione-polizia-confini",
+    "ts": "2026-08-31T22:12:53.035Z",
+    "keyForm": 2
+  },
+  "https://www.laregione.ch/svizzera/svizzera/1947100/i-partiti-hanno-annunciato-finanziamenti-per-complessivi-24-6-milioni": {
+    "articleId": "dichiarazioni-cdf-partiti-2025",
+    "ts": "2026-09-01T00:09:59.156Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/s/4050496": {
+    "articleId": "swatch-vince-samsung-quadranti",
+    "ts": "2026-09-01T00:19:56.888Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/ticino/attualita/1947130/trasporti-personale-sev-violenza-aggressioni": {
+    "articleId": "trasporti-pubblici-violenza-sev",
+    "ts": "2026-09-01T00:27:09.408Z",
+    "keyForm": 2
+  },
+  "https://www.admin.ch/it/newnsb/n8mk5ezmi1vw": {
+    "articleId": "sanzioni-onu-2026-aggiornamento",
+    "ts": "2026-09-01T05:18:16.561Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/economia/1947217/life-swiss-svizzera-lavoro-posti": {
+    "articleId": "swiss-life-taglio-posti-lavoro-2028",
+    "ts": "2026-09-01T05:35:30.216Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/attualita/1946769/fattura-sistema-puo-paziente-documento-fatture-ospedali": {
+    "articleId": "drg-fatture-trasparenza",
+    "ts": "2026-09-01T05:43:39.231Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/s/4051266": {
+    "articleId": "swiss-life-600-tagli-2028",
+    "ts": "2026-09-01T06:17:05.503Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/economia/1947226/tasso-riferimento-rimane-minimo-riduzione": {
+    "articleId": "tasso-riferimento-ipotecario-1-25",
+    "ts": "2026-09-01T06:41:37.879Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/svizzeri-chiedono-misure-contro-riscaldamento-climatico/91984730": {
+    "articleId": "svizzeri-chiedono-misure-clima",
+    "ts": "2026-09-01T10:00:23.698Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/attualita/1947247/inquilini-riduzione-affitto-associazione-asi": {
+    "articleId": "affitti-riduzione-tasso-riferimento",
+    "ts": "2026-09-01T10:15:10.226Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/s/4051479": {
+    "articleId": "dogane-strumenti-digitali-merci",
+    "ts": "2026-09-01T10:43:34.847Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/tasso-ipotecario-di-riferimento-non-cambia%2c-rimane-a-1%2c25%25/91984180": {
+    "articleId": "tasso-ipotecario-riferimento-1-25-stabile",
+    "ts": "2026-09-01T10:53:04.705Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/associazione-inquilini%2c-%22occorre-chiedere-riduzione-dell%27affitto%22/91985994": {
+    "articleId": "riduzione-affitto-tassi-ipotecari",
+    "ts": "2026-09-01T11:09:31.864Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/commercio-al-dettaglio%2c-aumentano-le-vendite-in-luglio/91985445": {
+    "articleId": "commercio-dettaglio-vendite-luglio-2025",
+    "ts": "2026-09-01T11:48:32.552Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/s/4051353": {
+    "articleId": "tasso-ipotecario-riferimento-stabile",
+    "ts": "2026-09-01T12:04:28.107Z",
+    "keyForm": 2
+  },
+  "https://www.admin.ch/it/newnsb/8bjbd2b5j7tz": {
+    "articleId": "formazione-azienda-prioritario",
+    "ts": "2026-09-01T12:20:18.348Z",
+    "keyForm": 2
+  },
+  "https://www.admin.ch/it/newnsb/e-pdmv8w0nn3": {
+    "articleId": "dazit-termine-2026",
+    "ts": "2026-09-01T12:39:20.293Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/aziende-rilevano-carenze-nelle-competenze-di-base-degli-apprendisti/91986777": {
+    "articleId": "apprendisti-lacune-competenze-base",
+    "ts": "2026-09-01T13:14:00.968Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/economia/1947269/frequenze-comcom-telefonia-bando-rinnovo": {
+    "articleId": "telefonia-asta-frequenze-2029",
+    "ts": "2026-09-01T13:46:32.371Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/novartis-interrompe-studi-clinici-dopo-decessi-di-pazienti/91987477": {
+    "articleId": "novartis-studio-clinico-sospeso",
+    "ts": "2026-09-01T14:05:34.514Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/ticino/politica/1947321/chi-provoca-disordini-paga-una-mozione-propone-sanzioni-fino-a-30-000-franchi": {
+    "articleId": "sanzioni-disordini-rimborso-mendrisio",
+    "ts": "2026-09-01T14:17:27.889Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/economia/1947342/capitale-ubs-miliardi-proposta-cet1": {
+    "articleId": "ubs-ermotti-capital-requirements",
+    "ts": "2026-09-01T14:38:54.299Z",
+    "keyForm": 2
+  },
+  "https://www.admin.ch/it/newnsb/ozmbl-ca5ee4": {
+    "articleId": "tasso-ipotecario-riferimento-1-25-2026",
+    "ts": "2026-09-01T14:51:28.869Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/economia/1947297/asib-ubs-impiegati-sostegno-svizzera": {
+    "articleId": "asib-normativa-ubs-sostegno",
+    "ts": "2026-09-01T15:00:15.416Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/ubs%3a-%22apprezziamo-lavoro-svolto%2c-ma-no-a-proposta-concreta%22/91987864": {
+    "articleId": "ubs-requisiti-patrimoniali",
+    "ts": "2026-09-01T15:19:06.995Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/impiegati-di-banca-accolgono-con-favore-normativa-ubs/91986411": {
+    "articleId": "sindacato-banca-ubs-regolamentazione",
+    "ts": "2026-09-01T15:27:16.348Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/economia/1947302/telefonia-comcom-asta-mercato-operatori": {
+    "articleId": "comcom-esclude-nuovi-operatori-mobile",
+    "ts": "2026-09-01T15:34:48.148Z",
+    "keyForm": 2
+  },
+  "https://www.admin.ch/it/newnsb/gtstudico3hi": {
+    "articleId": "audizione-concezione-energia-eolica",
+    "ts": "2026-09-01T15:42:13.822Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/economia/1947373/citta-taxi-svizzera-dieci-lucerna-mondo-testa-paese": {
+    "articleId": "lucerna-taxi-cari-mondo",
+    "ts": "2026-09-01T17:00:15.767Z",
+    "keyForm": 2
+  },
+  "https://www.tvsvizzera.it/tvs/lavoro-ed-economia/a-processo-presunto-punto-di-riferimento-finanziario-della-ndrangheta-in-svizzera/91978780": {
+    "articleId": "processo-ndrangheta-svizzera",
+    "ts": "2026-09-01T17:49:56.381Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/dare-alle-lenticchie-la-consistenza-della-carne%2c-ricerca-eth/91987836": {
+    "articleId": "legumi-texture-carne-ricerca-eth",
+    "ts": "2026-09-01T18:05:27.136Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/settore-dei-servizi%2c-forte-aumento-del-fatturato-in-giugno/91989104": {
+    "articleId": "settore-servizi-aumento-fatturato-giugno",
+    "ts": "2026-09-01T18:16:11.745Z",
     "keyForm": 2
   }
 }
