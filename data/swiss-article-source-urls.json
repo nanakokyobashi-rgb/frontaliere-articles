@@ -1,5 +1,4 @@
 {
-  "https://www.rsi.ch/s/3936792": "lex-netflix-cinema-svizzero-2025",
   "https://www.tio.ch/svizzera/economia/1942311/continua-bolla-svizzera-ubs-punti": "rischio-bolla-svizzera-2026",
   "https://www.tio.ch/dal-mondo/economia/1942414/apollo-easyjet-fondo-miliardi-acquisizione-franchi": "easyjet-apollon-acquisizione",
   "https://www.rsi.ch/s/3936696": "disoccupazione-svizzera-luglio-2026-seco",
@@ -1533,6 +1532,11 @@
   "https://www.swissinfo.ch/ita/settore-dei-servizi%2c-forte-aumento-del-fatturato-in-giugno/91989104": {
     "articleId": "settore-servizi-aumento-fatturato-giugno",
     "ts": "2026-09-01T18:16:11.745Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/s/4052268": {
+    "articleId": "shein-ipo-hong-kong-malus-francese",
+    "ts": "2026-09-01T19:56:56.153Z",
     "keyForm": 2
   }
 }
