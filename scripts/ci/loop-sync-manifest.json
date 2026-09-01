@@ -241,9 +241,9 @@
       "path": "scripts/ci/followup-resolution-match.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "64da1ac9881f00e1",
-        "corpus": "64da1ac9881f00e1",
-        "alignedAt": "2026-08-07"
+        "site": "e7deb440849ecc8b",
+        "corpus": "e7deb440849ecc8b",
+        "alignedAt": "2026-09-01"
       }
     },
     {
@@ -286,9 +286,9 @@
       "path": "scripts/ci/scan-job-timeouts.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "88976db01c98d1cb",
-        "corpus": "88976db01c98d1cb",
-        "alignedAt": "2026-08-19"
+        "site": "f0a07afaa69fb18a",
+        "corpus": "f0a07afaa69fb18a",
+        "alignedAt": "2026-09-01"
       }
     },
     {
@@ -968,9 +968,9 @@
       "path": "scripts/ci/stale-claim-detector.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "817402350589fd49",
-        "corpus": "817402350589fd49",
-        "alignedAt": "2026-08-08"
+        "site": "05cef42b82dc86bf",
+        "corpus": "05cef42b82dc86bf",
+        "alignedAt": "2026-09-01"
       }
     },
     {
