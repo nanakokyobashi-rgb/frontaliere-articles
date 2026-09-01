@@ -11,6 +11,8 @@ import {
   RECOVERY_REASON_CODES,
   TARGET_EXECUTION_CAPABILITY,
   TARGET_EXECUTION_CAPABILITY_SCHEMA,
+  TARGET_ONLY_MAX_INSPECTION_GET_REQUESTS,
+  TARGET_ONLY_OBSERVATION_MODE,
   createRecoveryClaim,
   runRecoveryClaim,
 } from '../../scripts/ci/translate-queue-recovery-claim.mjs';
@@ -41,10 +43,19 @@ const TARGET_RUN_ID = '33534757741';
 const TARGET_HEAD_SHA = 'a'.repeat(40);
 const CLAIM_COMMIT_SHA = 'c'.repeat(40);
 const NOW = Date.parse('2026-09-01T21:00:00.000Z');
+// Contract-only fixture: deliberately distinct from the live v0 workflow blob.
+// The runtime never loads this capability from env; tests inject it directly.
+const TEST_ATTESTED_WORKFLOW_BLOB_SHA = 'd'.repeat(40);
 const TEST_TARGET_CAPABILITY = Object.freeze({
   executionDedupeProtocolVersion: 1,
   schema: TARGET_EXECUTION_CAPABILITY_SCHEMA,
-  workflowBlobSha: TARGET_WORKFLOW_BLOB_SHA,
+  successorGuardVersion: 1,
+  targetExecutionDedupe: 'effectively_once',
+  workflowBlobSha: TEST_ATTESTED_WORKFLOW_BLOB_SHA,
+});
+const TEST_NO_SUCCESSOR_GUARD_CAPABILITY = Object.freeze({
+  ...TEST_TARGET_CAPABILITY,
+  successorGuardVersion: 0,
 });
 
 function response(status, body = {}, headers = {}) {
@@ -99,15 +110,22 @@ function fakeGithub({
   livenessSnapshots = null,
   malformedPutResponse = false,
   pages = null,
+  pendingAfterFinalLiveness = false,
+  pendingAfterStatus = null,
   postError = false,
   postStatus = 201,
   putStatus = 201,
   run = targetRun(),
   totalCount = null,
-  workflowBlobSha = TARGET_WORKFLOW_BLOB_SHA,
+  workflowBlobSha = TEST_ATTESTED_WORKFLOW_BLOB_SHA,
 } = {}) {
   const calls = [];
-  const state = { claimBytes: initialClaim };
+  const state = {
+    claimBytes: initialClaim,
+    pendingPresent: false,
+    postWhilePending: false,
+    putWhilePending: false,
+  };
   const listedPages = pages ?? [[run]];
   const listedTotal = totalCount ?? listedPages.reduce((sum, page) => sum + page.length, 0);
   let livenessCalls = 0;
@@ -129,6 +147,12 @@ function fakeGithub({
         const snapshot = livenessSnapshots?.[round] ?? flattened;
         livenessCalls += 1;
         const rows = snapshot.filter((row) => row.status === status);
+        if (pendingAfterStatus?.round === round && pendingAfterStatus.status === status) {
+          state.pendingPresent = true;
+        }
+        if (pendingAfterFinalLiveness && round === 1 && livenessCalls === 10) {
+          state.pendingPresent = true;
+        }
         return response(200, { total_count: rows.length, workflow_runs: rows });
       }
       const page = Number(url.searchParams.get('page'));
@@ -179,6 +203,7 @@ function fakeGithub({
         });
       }
       if (options.method === 'PUT') {
+        state.putWhilePending = state.pendingPresent;
         const body = JSON.parse(options.body);
         const bytes = Buffer.from(body.content, 'base64');
         state.claimBytes = dropClaimAfterPut ? null : bytes;
@@ -193,6 +218,7 @@ function fakeGithub({
 
     if (options.method === 'POST'
         && url.pathname === `/repos/${TARGET_REPOSITORY}/actions/runs/${TARGET_RUN_ID}/rerun`) {
+      state.postWhilePending = state.pendingPresent;
       if (postError) throw new Error(TOKEN);
       return response(postStatus, '');
     }
@@ -208,6 +234,7 @@ async function observe(fake, overrides = {}) {
     now: NOW,
     phase: 'observe',
     repository: TARGET_REPOSITORY,
+    targetCapability: TEST_TARGET_CAPABILITY,
     targetRunId: TARGET_RUN_ID,
     token: TOKEN,
     ...overrides,
@@ -260,7 +287,9 @@ test('observe_only classifica un candidato ma non possiede effetti remoti', asyn
   assert.equal(report.primaryReason, 'eligible_observe_only');
   assert.equal(report.complete, true);
   assert.equal(report.failClosed, false);
-  assert.ok(report.reasonCodes.includes('queue_empty'));
+  assert.equal(report.observationMode, TARGET_ONLY_OBSERVATION_MODE);
+  assert.equal(report.queue.state, 'empty_at_observation');
+  assert.ok(report.reasonCodes.includes('empty_at_observation'));
   assert.ok(report.reasonCodes.includes('eligible_observe_only'));
   assert.equal(mutatingCalls(fake).length, 0);
   assert.ok(report.queryBudget.usedGets <= MAX_PHASE_GET_REQUESTS);
@@ -299,14 +328,14 @@ test('distingue active, pending, entrambi e assenza simultanea', async (t) => {
       expected: 'active_and_pending_present',
       rows: [queueRun(33534757742, 'in_progress'), queueRun(33534757743, 'pending')],
     },
-    { expected: 'queue_empty', rows: [] },
+    { expected: 'empty_at_observation', rows: [] },
   ]) {
     await t.test(scenario.expected, async () => {
       const fake = fakeGithub({ pages: [[targetRun(), ...scenario.rows]] });
       const { report } = await observe(fake);
-      if (scenario.expected === 'queue_empty') {
+      if (scenario.expected === 'empty_at_observation') {
         assert.equal(report.decision, 'observe_only');
-        assert.ok(report.reasonCodes.includes('queue_empty'));
+        assert.ok(report.reasonCodes.includes('empty_at_observation'));
       } else {
         assert.equal(report.decision, 'blocked');
         assert.equal(report.primaryReason, scenario.expected);
@@ -414,8 +443,11 @@ test('claim e content address sono canonici, stabili e bounded', () => {
   assert.equal(first.document.maxMutationRequests, 1);
   assert.equal(first.document.sourceEvent, 'workflow_dispatch');
   assert.equal(first.document.sourceRunAttempt, 1);
-  assert.equal(first.document.workflowBlobSha, TARGET_WORKFLOW_BLOB_SHA);
+  assert.equal(first.document.workflowBlobSha, TEST_ATTESTED_WORKFLOW_BLOB_SHA);
   assert.equal(first.document.executionDedupeProtocolVersion, 1);
+  assert.equal(first.document.targetExecutionDedupe, 'effectively_once');
+  assert.equal(first.document.successorGuardVersion, 1);
+  assert.equal(first.document.queueState, 'empty_at_observation');
 });
 
 test('claim create-only 201 viene verificato byte-identical e abilita solo questa invocazione', async () => {
@@ -427,11 +459,12 @@ test('claim create-only 201 viene verificato byte-identical e abilita solo quest
   assert.equal(report.mutationBudget.usedPuts, 1);
   assert.equal(mutatingCalls(fake).filter(({ options }) => options.method === 'PUT').length, 1);
   assert.equal(mutatingCalls(fake).filter(({ options }) => options.method === 'POST').length, 0);
+  assert.equal(report.queryBudget.usedGets, TARGET_ONLY_MAX_INSPECTION_GET_REQUESTS + 1);
   assert.ok(report.queryBudget.usedGets <= MAX_PHASE_GET_REQUESTS);
 });
 
 test('target live senza capability dedupe v1 si ferma prima di claim e rerun', async () => {
-  const fake = fakeGithub();
+  const fake = fakeGithub({ workflowBlobSha: TARGET_WORKFLOW_BLOB_SHA });
   const { report } = await runRecoveryClaim({
     fetchImpl: fake.fetchImpl,
     mode: 'claim_and_rerun',
@@ -444,14 +477,47 @@ test('target live senza capability dedupe v1 si ferma prima di claim e rerun', a
   });
   assert.equal(report.decision, 'blocked');
   assert.equal(report.primaryReason, 'target_execution_dedupe_not_live');
+  assert.ok(report.reasonCodes.includes('target_successor_guard_not_live'));
   assert.equal(report.complete, true);
   assert.equal(report.failClosed, false);
+  assert.equal(report.queryBudget.usedGets, TARGET_ONLY_MAX_INSPECTION_GET_REQUESTS - 1);
   assert.equal(mutatingCalls(fake).length, 0);
   assert.equal(report.mutationBudget.usedPuts, 0);
   assert.deepEqual(TARGET_EXECUTION_CAPABILITY, {
     executionDedupeProtocolVersion: 0,
     schema: TARGET_EXECUTION_CAPABILITY_SCHEMA,
+    successorGuardVersion: 0,
+    targetExecutionDedupe: 'not_live',
     workflowBlobSha: TARGET_WORKFLOW_BLOB_SHA,
+  });
+  const executorFake = fakeGithub({ workflowBlobSha: TARGET_WORKFLOW_BLOB_SHA });
+  const executor = await execute(executorFake, {
+    targetCapability: TARGET_EXECUTION_CAPABILITY,
+  });
+  assert.equal(executor.report.decision, 'blocked');
+  assert.ok(executor.report.reasonCodes.includes('target_execution_dedupe_not_live'));
+  assert.ok(executor.report.reasonCodes.includes('target_successor_guard_not_live'));
+  assert.equal(executorFake.calls.filter(({ options }) => options.method === 'POST').length, 0);
+  assert.notEqual(TEST_TARGET_CAPABILITY.workflowBlobSha, TARGET_WORKFLOW_BLOB_SHA);
+});
+
+test('dedupe effectively-once senza successor guard resta zero-write', async (t) => {
+  await t.test('claim', async () => {
+    const fake = fakeGithub();
+    const { report } = await claim(fake, {
+      targetCapability: TEST_NO_SUCCESSOR_GUARD_CAPABILITY,
+    });
+    assert.equal(report.primaryReason, 'target_successor_guard_not_live');
+    assert.equal(mutatingCalls(fake).length, 0);
+  });
+  await t.test('executor', async () => {
+    const fake = fakeGithub();
+    const { report } = await execute(fake, {
+      targetCapability: TEST_NO_SUCCESSOR_GUARD_CAPABILITY,
+    });
+    assert.equal(report.primaryReason, 'post_claim_state_changed');
+    assert.ok(report.reasonCodes.includes('target_successor_guard_not_live'));
+    assert.equal(mutatingCalls(fake).length, 0);
   });
 });
 
@@ -465,20 +531,37 @@ test('capability malformata o estesa fallisce prima di qualunque fetch', async (
   assert.equal(fake.calls.length, 0);
 });
 
-test('storia oltre 200 non impedisce target esatto e claim con censimento completo', async () => {
-  const history = Array.from({ length: 200 }, (_, index) => targetRun({
-    conclusion: 'success',
+test('target-only ignora 201 cancellazioni profonde e raggiunge il blocker capability', async () => {
+  const history = Array.from({ length: 201 }, (_, index) => targetRun({
+    conclusion: 'cancelled',
     id: 41000000000 + index,
   }));
   const fake = fakeGithub({
-    pages: [history.slice(0, 100), history.slice(100)],
+    pages: [history.slice(0, 100), history.slice(100, 200), history.slice(200)],
     run: targetRun(),
     totalCount: 201,
+    workflowBlobSha: TARGET_WORKFLOW_BLOB_SHA,
   });
-  const { report } = await claim(fake);
-  assert.equal(report.decision, 'claim_created');
+  const { report } = await runRecoveryClaim({
+    fetchImpl: fake.fetchImpl,
+    mode: 'claim_and_rerun',
+    now: NOW,
+    phase: 'claim',
+    repository: TARGET_REPOSITORY,
+    targetCapability: TARGET_EXECUTION_CAPABILITY,
+    targetRunId: TARGET_RUN_ID,
+    token: TOKEN,
+  });
+  assert.equal(report.decision, 'blocked');
+  assert.equal(report.primaryReason, 'target_execution_dedupe_not_live');
   assert.equal(report.failClosed, false);
-  assert.equal(fake.calls.filter(({ options }) => options.method === 'PUT').length, 1);
+  assert.equal(report.queryBudget.usedGets, TARGET_ONLY_MAX_INSPECTION_GET_REQUESTS - 1);
+  assert.ok(!report.reasonCodes.includes('query_budget_exhausted'));
+  assert.equal(fake.calls.filter(({ url }) => (
+    url.pathname.endsWith(`/actions/workflows/${TARGET_WORKFLOW_ID}/runs`)
+      && url.searchParams.get('status') === null
+  )).length, 0);
+  assert.equal(mutatingCalls(fake).length, 0);
 });
 
 test('nuova pending nella riosservazione finale deferisce prima di PUT o POST', async (t) => {
@@ -496,6 +579,67 @@ test('nuova pending nella riosservazione finale deferisce prima di PUT o POST', 
     assert.ok(report.reasonCodes.includes('pending_present'));
     assert.equal(fake.calls.filter(({ options }) => options.method === 'POST').length, 0);
   });
+});
+
+test('pending dopo la query del proprio status non consente write senza successor guard', async (t) => {
+  const race = { round: 1, status: 'queued' };
+  for (const [name, targetCapability] of [
+    ['live-v0', TARGET_EXECUTION_CAPABILITY],
+    ['successor-guard-v0', TEST_NO_SUCCESSOR_GUARD_CAPABILITY],
+  ]) {
+    await t.test(`${name}-claim`, async () => {
+      const fake = fakeGithub({
+        pendingAfterStatus: race,
+        workflowBlobSha: targetCapability.workflowBlobSha,
+      });
+      const { report } = await claim(fake, { targetCapability });
+      assert.equal(report.decision, 'blocked');
+      assert.equal(fake.state.pendingPresent, true);
+      assert.equal(fake.state.putWhilePending, false);
+      assert.equal(mutatingCalls(fake).length, 0);
+    });
+    await t.test(`${name}-executor`, async () => {
+      const fake = fakeGithub({
+        pendingAfterStatus: race,
+        workflowBlobSha: targetCapability.workflowBlobSha,
+      });
+      const { report } = await execute(fake, { targetCapability });
+      assert.equal(report.decision, 'blocked');
+      assert.equal(fake.state.pendingPresent, true);
+      assert.equal(fake.state.postWhilePending, false);
+      assert.equal(mutatingCalls(fake).length, 0);
+    });
+  }
+});
+
+test('pending dopo ultimo GET final-liveness non consente write senza successor guard', async (t) => {
+  for (const [name, targetCapability] of [
+    ['live-v0', TARGET_EXECUTION_CAPABILITY],
+    ['successor-guard-v0', TEST_NO_SUCCESSOR_GUARD_CAPABILITY],
+  ]) {
+    await t.test(`${name}-claim`, async () => {
+      const fake = fakeGithub({
+        pendingAfterFinalLiveness: true,
+        workflowBlobSha: targetCapability.workflowBlobSha,
+      });
+      const { report } = await claim(fake, { targetCapability });
+      assert.equal(report.decision, 'blocked');
+      assert.equal(fake.state.pendingPresent, true);
+      assert.equal(fake.state.putWhilePending, false);
+      assert.equal(mutatingCalls(fake).length, 0);
+    });
+    await t.test(`${name}-executor`, async () => {
+      const fake = fakeGithub({
+        pendingAfterFinalLiveness: true,
+        workflowBlobSha: targetCapability.workflowBlobSha,
+      });
+      const { report } = await execute(fake, { targetCapability });
+      assert.equal(report.decision, 'blocked');
+      assert.equal(fake.state.pendingPresent, true);
+      assert.equal(fake.state.postWhilePending, false);
+      assert.equal(mutatingCalls(fake).length, 0);
+    });
+  }
 });
 
 test('risposta claim malformata o verifica post-201 assente consuma senza autorizzare', async (t) => {

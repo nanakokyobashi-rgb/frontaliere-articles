@@ -8,7 +8,7 @@ on:
         required: true
         type: string
       mode:
-        description: Observe by default; claim_and_rerun is blocked until target dedupe v1 is live
+        description: Observe by default; writes require target dedupe and successor guard v1
         required: true
         type: choice
         default: observe_only
