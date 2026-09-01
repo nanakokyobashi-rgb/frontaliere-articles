@@ -4915,6 +4915,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.dogane-strumenti-digitali-merci.title': 'Zoll, neue digitale Werkzeuge für Waren und Einkäufe',
     'blog.article.dogane-strumenti-digitali-merci.excerpt': 'DaziT wird Ende 2026 mit Passar und QuickZoll abgeschlossen. Vereinfachung des grenzüberschreitenden Verkehrs, modernisierte Grenzkontrollen.',
     'blog.article.dogane-strumenti-digitali-merci.imageAlt': 'Digitale Zollkontrolle mit Passar- und QuickZoll-Apps auf modernen Bildschirmen an einem Schweizer Grenzübergang',
+    'blog.article.tasso-ipotecario-riferimento-1-25-stabile.title': 'Der Referenzhypothekenzins bleibt bei 1,25 %: Was ändert sich bei den Mieten',
+    'blog.article.tasso-ipotecario-riferimento-1-25-stabile.excerpt': 'FOAB bestätigt den Parameter für das dritte Quartal bei 1,25 %: historisch niedrig, durchschnittlicher Hypothekenzins 1,31 %, SNB bleibt bei 0,0 %. Was passiert jetzt mit Mietern und Vermietern?',
+    'blog.article.tasso-ipotecario-riferimento-1-25-stabile.imageAlt': 'Fassade eines Schweizer Wohnhauses mit Mietwohnungen',
 };
 
 export default blogMetaChDe;

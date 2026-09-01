@@ -4915,6 +4915,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.dogane-strumenti-digitali-merci.title': 'Customs, new digital tools for goods and purchases',
     'blog.article.dogane-strumenti-digitali-merci.excerpt': 'DaziT concludes at the end of 2026 with Passar and QuickZoll. Simplification of cross-border traffic, modernized border controls.',
     'blog.article.dogane-strumenti-digitali-merci.imageAlt': 'Modern digital customs control with Passar and QuickZoll apps displayed on screens at Swiss border checkpoint',
+    'blog.article.tasso-ipotecario-riferimento-1-25-stabile.title': 'Reference mortgage rate remains at 1.25%: what changes for rents',
+    'blog.article.tasso-ipotecario-riferimento-1-25-stabile.excerpt': 'FOAB confirms the parameter at 1.25% for the third quarter: historic low, average mortgage rate at 1.31%, SNB stuck at 0.0%. What happens now for tenants and landlords.',
+    'blog.article.tasso-ipotecario-riferimento-1-25-stabile.imageAlt': 'Facade of a Swiss residential apartment building with rental flats',
 };
 
 export default blogMetaChEn;

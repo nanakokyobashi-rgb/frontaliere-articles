@@ -4915,6 +4915,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.dogane-strumenti-digitali-merci.title': 'Douane, nouveaux outils numériques pour les biens et les achats',
     'blog.article.dogane-strumenti-digitali-merci.excerpt': 'DaziT se conclut fin 2026 avec Passar et QuickZoll. Simplification du trafic transfrontalier, modernisation des contrôles frontaliers.',
     'blog.article.dogane-strumenti-digitali-merci.imageAlt': 'Contrôle douanier numérique avec applications Passar et QuickZoll sur écrans modernes à un poste frontière suisse',
+    'blog.article.tasso-ipotecario-riferimento-1-25-stabile.title': 'Taux hypothécaire à 1,25 % : impact sur les loyers',
+    'blog.article.tasso-ipotecario-riferimento-1-25-stabile.excerpt': 'FOAB confirme ce paramètre à 1,25 % pour le troisième trimestre : historiquement bas, taux hypothécaire moyen à 1,31 %, SNB bloquée à 0,0 %. Que se passe-t-il maintenant pour les locataires et les propriétaires.',
+    'blog.article.tasso-ipotecario-riferimento-1-25-stabile.imageAlt': 'Façade d\'un immeuble résidentiel suisse avec appartements en location',
 };
 
 export default blogMetaChFr;

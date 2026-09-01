@@ -1,5 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/economia/1941816/aumento-chiede-schweiz-angestellte-formazione": "angestellte-schweiz-aumento-2027",
   "https://www.tio.ch/svizzera/economia/1941808/swiss-fatturato-costi-carburante-conseguenze": "swiss-fatturato-costi-carburante-conseguenze",
   "https://www.swissinfo.ch/ita/emigrazione/senza-lavoro-allestero-ecco-cosa-considerare-quando-si-ritorna-in-svizzera/88366386": "rientro-in-svizzera-senza-lavoro-guida",
   "https://www.tio.ch/svizzera/economia/1941815/leclanche-rapporto-difficolta-azienda-azioni": "leclanche-crisi-finanziaria-2025",
@@ -1449,6 +1448,11 @@
   "https://www.rsi.ch/s/4051479": {
     "articleId": "dogane-strumenti-digitali-merci",
     "ts": "2026-09-01T10:43:34.847Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/tasso-ipotecario-di-riferimento-non-cambia%2c-rimane-a-1%2c25%25/91984180": {
+    "articleId": "tasso-ipotecario-riferimento-1-25-stabile",
+    "ts": "2026-09-01T10:53:04.705Z",
     "keyForm": 2
   }
 }
