@@ -4885,6 +4885,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.trasporti-pubblici-violenza-sev.title': 'Trasporti pubblici sotto attacco: il SEV alza la voce contro la violenza',
     'blog.article.trasporti-pubblici-violenza-sev.excerpt': 'Il 3 settembre, il sindacato SEV organizza una giornata d\'azione contro la violenza sui dipendenti dei mezzi pubblici, con eventi in diverse stazioni ferroviarie.',
     'blog.article.trasporti-pubblici-violenza-sev.imageAlt': 'Protesta contro la violenza ai lavoratori dei trasporti pubblici alla stazione di Locarno',
+    'blog.article.premi-lamal-friburgo-sussidi.title': 'Premi LAMal Friburgo: franchigie e sussidi 2026',
+    'blog.article.premi-lamal-friburgo-sussidi.excerpt': 'Franchigie LAMal nel Canton Friburgo, come scegliere, procedure per accedere alla riduzione di premio e scadenze ufficiali 2026.',
+    'blog.article.premi-lamal-friburgo-sussidi.imageAlt': 'Reception di ufficio cantonale svizzero con operatore che aiuta una persona con documenti assicurativi LAMal',
 };
 
 export default blogMetaChIt;

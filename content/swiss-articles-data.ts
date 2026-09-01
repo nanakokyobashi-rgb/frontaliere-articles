@@ -14653,6 +14653,15 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'premi-lamal-friburgo-sussidi',
+    category: 'pratico',
+    date: '2026-09-01T00:44:12.131Z',
+    image: '/images/blog/premi-lamal-friburgo-sussidi.webp',
+    hasCalculator: true,
+    authorSlug: 'laura-bianchi',
+    authorName: 'Laura Bianchi',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

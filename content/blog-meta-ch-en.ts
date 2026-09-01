@@ -4885,6 +4885,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.trasporti-pubblici-violenza-sev.title': 'Public transport under attack: the SEV raises its voice against violence',
     'blog.article.trasporti-pubblici-violenza-sev.excerpt': 'On 3 September, the SEV union organises a day of action against violence against public transport employees, with events at different train stations.',
     'blog.article.trasporti-pubblici-violenza-sev.imageAlt': 'Protest against violence towards public transport workers at Locarno station',
+    'blog.article.premi-lamal-friburgo-sussidi.title': 'KVG premiums Fribourg: deductibles and subsidies 2026',
+    'blog.article.premi-lamal-friburgo-sussidi.excerpt': 'KVG deductibles in the Canton of Fribourg, how to choose, procedures for accessing the premium reduction and official deadlines 2026.',
+    'blog.article.premi-lamal-friburgo-sussidi.imageAlt': 'Swiss cantonal office reception showing healthcare worker assisting person with health insurance documents',
 };
 
 export default blogMetaChEn;

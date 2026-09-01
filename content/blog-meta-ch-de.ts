@@ -4885,6 +4885,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.trasporti-pubblici-violenza-sev.title': 'Öffentlicher Nahverkehr unter Angriff: Die SEV erhebt ihre Stimme gegen Gewalt',
     'blog.article.trasporti-pubblici-violenza-sev.excerpt': 'Am 3. September organisiert die Gewerkschaft SEV einen Aktionstag gegen Gewalt gegen Mitarbeiter des öffentlichen Nahverkehrs, mit Veranstaltungen an mehreren Bahnhöfen.',
     'blog.article.trasporti-pubblici-violenza-sev.imageAlt': 'Protest gegen Gewalt gegen Mitarbeiter des öffentlichen Nahverkehrs am Bahnhof Locarno',
+    'blog.article.premi-lamal-friburgo-sussidi.title': 'KVG-Prämien Fribourg: Selbstbeteiligungen und Subventionen 2026',
+    'blog.article.premi-lamal-friburgo-sussidi.excerpt': 'KVG-Franchisen im Kanton Freiburg, wie man wählt, Verfahren für den Zugang zur Prämienverbilligung und offizielle Fristen 2026.',
+    'blog.article.premi-lamal-friburgo-sussidi.imageAlt': 'Empfangsbereich eines schweizer Kantonsamt mit Mitarbeiter der Person bei Krankenversicherungsdokumenten hilft',
 };
 
 export default blogMetaChDe;

@@ -4885,6 +4885,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.trasporti-pubblici-violenza-sev.title': 'Les transports publics attaqués : la SEV élève la voix contre la violence',
     'blog.article.trasporti-pubblici-violenza-sev.excerpt': 'Le 3 septembre, le syndicat SEV organise une journée d’action contre la violence contre les employés des transports publics, avec des événements dans plusieurs gares.',
     'blog.article.trasporti-pubblici-violenza-sev.imageAlt': 'Protestation contre la violence envers les travailleurs des transports publics à la gare de Locarno',
+    'blog.article.premi-lamal-friburgo-sussidi.title': 'Primes LAMal Fribourg : franchises et subventions 2026',
+    'blog.article.premi-lamal-friburgo-sussidi.excerpt': 'Les franchises KVG dans le canton de Fribourg, comment choisir, les procédures pour accéder à la réduction de prime et les délais officiels 2026.',
+    'blog.article.premi-lamal-friburgo-sussidi.imageAlt': 'Accueil d\'un bureau cantonal suisse avec agent aidant une personne avec des documents d\'assurance-maladie',
 };
 
 export default blogMetaChFr;

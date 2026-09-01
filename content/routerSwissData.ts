@@ -1654,6 +1654,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'dichiarazioni-cdf-partiti-2025': { it: 'dichiarazioni-cdf-partiti-2025', en: 'political-funding-declarations-2025', de: 'parteifinanzierung-cdf-2025', fr: 'declarations-financement-partis-2025' },
  'swatch-vince-samsung-quadranti': { it: 'swatch-vince-samsung-quadranti', en: 'swatch-wins-samsung-watchfaces', de: 'swatch-gewinnt-samsung-uhrenblatter', fr: 'swatch-bat-samsung-cadrans' },
  'trasporti-pubblici-violenza-sev': { it: 'trasporti-pubblici-violenza-sev', en: 'public-transport-violence-sev', de: 'oeffentlicher-nahverkehr-gewalt-sev', fr: 'transport-public-violence-sev' },
+ 'premi-lamal-friburgo-sussidi': { it: 'premi-lamal-friburgo-sussidi', en: 'health-insurance-premiums-fribourg-subsidies', de: 'praemien-krankenversicherung-freiburg-subventionen', fr: 'primes-assurance-maladie-fribourg-subventions' },
 };
 
 export const REVERSE_SWISS: Record<ArticleLocale, Record<string, string>> = (() => {
