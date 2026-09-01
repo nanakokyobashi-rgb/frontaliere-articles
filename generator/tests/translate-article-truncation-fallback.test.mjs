@@ -55,22 +55,42 @@ function extractTruncationRetryLoop() {
 const LOOP_SRC = extractTruncationRetryLoop();
 
 /**
+ * Legge `TRANSLATION_CHUNK_THRESHOLD` dal sorgente invece di duplicarlo come
+ * costante nel test (AGENTS.md #6: un valore condiviso ha una sola sorgente):
+ * se la soglia cambia in create-article.mjs, questo test la segue.
+ */
+function extractTranslationChunkThreshold() {
+  const m = src.match(/const TRANSLATION_CHUNK_THRESHOLD = (\d+);/);
+  assert.ok(m, 'TRANSLATION_CHUNK_THRESHOLD non trovato nel sorgente — aggiornare questo test');
+  return Number(m[1]);
+}
+
+const TRANSLATION_CHUNK_THRESHOLD = extractTranslationChunkThreshold();
+
+/**
  * Esegue il loop ritagliato dentro una funzione async iniettando i mock come
  * variabili di chiusura (stessa forma delle dipendenze reali di
- * `translateArticle`: `detectTruncation`, `callWithRetry`,
- * `translatedStringOrNull`, `sanitizeBodyText`, `countWords`, `console`).
+ * `translateArticle`: `detectTruncation`, `callWithRetry`, `translateInChunks`,
+ * `TRANSLATION_CHUNK_THRESHOLD`, `translatedStringOrNull`, `sanitizeBodyText`,
+ * `countWords`, `console`).
  */
-async function runTruncationRetryLoop({ data, itContent, detectTruncation, callWithRetry }) {
+async function runTruncationRetryLoop({ data, itContent, detectTruncation, callWithRetry, translateInChunks }) {
   const translatedStringOrNull = (v) => (typeof v === 'string' && v.trim() ? v : null);
   const sanitizeBodyText = (v) => v;
   const countWords = (s) => String(s).split(/\s+/).filter(Boolean).length;
   const silentConsole = { error: () => {}, warn: () => {} };
+  const noopTranslateInChunks = async () => {
+    throw new Error('translateInChunks chiamato senza mock — il test non lo aspettava per un campo sotto soglia');
+  };
   const fn = new Function(
-    'data', 'itContent', 'detectTruncation', 'callWithRetry',
-    'translatedStringOrNull', 'sanitizeBodyText', 'countWords', 'console',
+    'data', 'itContent', 'detectTruncation', 'callWithRetry', 'translateInChunks',
+    'TRANSLATION_CHUNK_THRESHOLD', 'translatedStringOrNull', 'sanitizeBodyText', 'countWords', 'console',
     `return (async () => { ${LOOP_SRC} })();`,
   );
-  await fn(data, itContent, detectTruncation, callWithRetry, translatedStringOrNull, sanitizeBodyText, countWords, silentConsole);
+  await fn(
+    data, itContent, detectTruncation, callWithRetry, translateInChunks || noopTranslateInChunks,
+    TRANSLATION_CHUNK_THRESHOLD, translatedStringOrNull, sanitizeBodyText, countWords, silentConsole,
+  );
 }
 
 test('itValue vuoto: il body tradotto troncato NON viene sovrascritto (#686)', async () => {
@@ -112,6 +132,33 @@ test('itValue non-vuoto: il fallback resta quello atteso (nessuna regressione)',
   await runTruncationRetryLoop({ data, itContent, detectTruncation, callWithRetry });
 
   assert.equal(data.content.fr.body3, 'Testo italiano completo.');
+});
+
+test('itValue >700 parole: il retry usa il sub-chunking di translateBodyField invece di una singola chiamata monolitica (#688)', async () => {
+  const longIt = Array.from({ length: TRANSLATION_CHUNK_THRESHOLD + 1 }, (_, i) => `parola${i}`).join(' ');
+  const data = { content: { en: { body1: 'Truncated sentence and' } } };
+  const itContent = { body1: longIt };
+  // Troncato al primo giro, pulito dopo il retry mirato.
+  const detectTruncation = (text) => (text === 'Truncated sentence and' ? ['incomplete-ending'] : []);
+  const callWithRetry = async () => {
+    throw new Error('callWithRetry non deve ricevere l\'intero campo lungo in una sola chiamata');
+  };
+  let translateInChunksCall = null;
+  const translateInChunks = async (bodyText, fieldKey, makeChunkPrompt, labelPrefix) => {
+    translateInChunksCall = { bodyText, fieldKey, labelPrefix };
+    return 'Full English translation, complete.';
+  };
+
+  await runTruncationRetryLoop({ data, itContent, detectTruncation, callWithRetry, translateInChunks });
+
+  assert.ok(translateInChunksCall, 'translateInChunks non è stato chiamato per un body >700 parole');
+  assert.equal(translateInChunksCall.bodyText, longIt);
+  assert.equal(translateInChunksCall.fieldKey, 'body1');
+  assert.equal(
+    data.content.en.body1,
+    'Full English translation, complete.',
+    'il risultato del sub-chunking deve sostituire il body troncato',
+  );
 });
 
 test('nessun troncamento rilevato: il campo non viene toccato', async () => {
