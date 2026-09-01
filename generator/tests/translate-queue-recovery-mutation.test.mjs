@@ -263,7 +263,6 @@ async function execute(fake, overrides = {}) {
   });
   if (fake.state.claimBytes === null) fake.state.claimBytes = recoveryClaim.bytes;
   return runRecoveryExecutor({
-    claimCommitSha: CLAIM_COMMIT_SHA,
     claimKey: recoveryClaim.claimKey,
     fetchImpl: fake.fetchImpl,
     now: NOW,
@@ -728,6 +727,7 @@ test('executor rilegge il claim sotto lock e invia un solo POST all endpoint esa
   const { report } = await execute(fake);
   assert.equal(report.decision, 'rerun_requested');
   assert.equal(report.primaryReason, 'rerun_requested');
+  assert.equal(report.claim.commitSha, null);
   assert.ok(report.reasonCodes.includes('claim_verified'));
   assert.ok(report.reasonCodes.includes('rerun_authorized'));
   assert.equal(report.mutationBudget.usedPosts, 1);
@@ -737,6 +737,23 @@ test('executor rilegge il claim sotto lock e invia un solo POST all endpoint esa
   assert.equal(writes[0].url.pathname,
     `/repos/${TARGET_REPOSITORY}/actions/runs/${TARGET_RUN_ID}/rerun`);
   assert.equal(writes[0].options.body, undefined);
+});
+
+test('executor non accetta un commit SHA dichiarato dal chiamante', async (t) => {
+  for (const [name, overrides] of [
+    ['assente', {}],
+    ['diverso', { claimCommitSha: 'e'.repeat(40) }],
+  ]) {
+    await t.test(name, async () => {
+      const fake = fakeGithub();
+      const { report } = await execute(fake, overrides);
+      assert.equal(report.decision, 'rerun_requested');
+      assert.equal(report.claim.commitSha, null);
+      assert.equal(mutatingCalls(fake).filter(({ options }) => options.method === 'POST').length, 1);
+    });
+  }
+  assert.doesNotMatch(EXECUTOR_RUNTIME, /claimCommitSha|CLAIM_COMMIT_SHA/);
+  assert.doesNotMatch(WORKFLOW.slice(WORKFLOW.indexOf('  executor:')), /CLAIM_COMMIT_SHA/);
 });
 
 test('post-claim state change consuma il claim senza POST', async (t) => {

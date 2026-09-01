@@ -107,7 +107,6 @@ jobs:
       - name: Reobserve under target lock and request at most one rerun
         shell: bash
         env:
-          CLAIM_COMMIT_SHA: ${{ needs.claim.outputs.claim_commit_sha }}
           CLAIM_KEY: ${{ needs.claim.outputs.claim_key }}
           CLAIM_SCRIPT: ${{ runner.temp }}/translate-queue-recovery-claim.mjs
           CLAIM_SCRIPT_URL: https://raw.githubusercontent.com/${{ github.repository }}/${{ github.sha }}/scripts/ci/translate-queue-recovery-claim.mjs

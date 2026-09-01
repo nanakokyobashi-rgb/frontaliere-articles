@@ -3119,7 +3119,7 @@
       "reason": "Recovery manuale corpus-only della coda translate: workflow_dispatch osserva per default in target-only e mantiene claim/executor separati; claim_and_rerun resta bloccato prima delle write finche il blob target non attesta dedupe effectively-once e successor guard v1. Lo schedule resta assente per policy anche con preservazione provata.",
       "baseline": {
         "site": null,
-        "corpus": "245813ce437e29d5",
+        "corpus": "98bd862e092f15e3",
         "alignedAt": "2026-09-01"
       }
     },
@@ -3139,7 +3139,7 @@
       "reason": "Executor manuale zero-dependency corpus-only: verifica claim, capability dedupe effectively-once, successor guard v1 e nuova liveness target-only sotto il lock translate prima dell'unico endpoint POST testabile; il target live v0 rende il percorso POST irraggiungibile.",
       "baseline": {
         "site": null,
-        "corpus": "eacb18aec3feb972",
+        "corpus": "a01b5a35d86ca688",
         "alignedAt": "2026-09-01"
       }
     },
@@ -3149,7 +3149,7 @@
       "reason": "Contratto deterministico corpus-only della recovery manuale: copre 201 cancellazioni profonde senza consumare il target-only budget, capability live v0, fixture attestata dedupe effectively-once/successor guard v1, race post-status e post-final-liveness a zero write senza guard, CAS, failure ambiguity e singolo endpoint mutante.",
       "baseline": {
         "site": null,
-        "corpus": "e7bf88f6ef4a44c0",
+        "corpus": "bdcc6c58d4009ef8",
         "alignedAt": "2026-09-01"
       }
     }

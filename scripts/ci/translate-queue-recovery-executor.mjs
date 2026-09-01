@@ -17,7 +17,6 @@ export const MAX_EXECUTOR_POST_REQUESTS = 1;
 
 const API_ROOT = 'https://api.github.com';
 const REQUEST_TIMEOUT_MS = 10_000;
-const SHA_RE = /^[a-f0-9]{40}$/;
 const SHA256_RE = /^[a-f0-9]{64}$/;
 
 export function createRecoveryExecutorClient({
@@ -70,7 +69,6 @@ export function createRecoveryExecutorClient({
 }
 
 export async function runRecoveryExecutor({
-  claimCommitSha,
   claimKey,
   clock = Date.now,
   fetchImpl = globalThis.fetch,
@@ -84,7 +82,6 @@ export async function runRecoveryExecutor({
   const deadlineAt = clock() + PROCESS_TIMEOUT_MS;
   const invalidBinding = !validTargetRunId(targetRunId)
     || typeof claimKey !== 'string' || !SHA256_RE.test(claimKey)
-    || typeof claimCommitSha !== 'string' || !SHA_RE.test(claimCommitSha)
     || workflowRunAttempt !== '1';
   if (invalidBinding) {
     const inspection = {
@@ -100,7 +97,6 @@ export async function runRecoveryExecutor({
       target: null,
     };
     return buildRecoveryReport({
-      claimCommitSha,
       decision: 'blocked',
       inspection,
       mode: 'claim_and_rerun',
@@ -130,7 +126,6 @@ export async function runRecoveryExecutor({
   });
   if (!inspection.eligible) {
     return buildRecoveryReport({
-      claimCommitSha,
       decision: 'blocked',
       inspection,
       mode: 'claim_and_rerun',
@@ -154,7 +149,6 @@ export async function runRecoveryExecutor({
       throw new RecoveryFailure('mutation_outcome_unknown_or_failed');
     }
     return buildRecoveryReport({
-      claimCommitSha,
       decision: 'rerun_requested',
       inspection,
       mode: 'claim_and_rerun',
@@ -172,7 +166,6 @@ export async function runRecoveryExecutor({
     inspection.complete = false;
     inspection.failClosed = true;
     return buildRecoveryReport({
-      claimCommitSha,
       decision: 'blocked',
       inspection,
       mode: 'claim_and_rerun',
@@ -193,7 +186,6 @@ const isMain = process.argv[1]
   && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url);
 if (isMain) {
   runRecoveryExecutor({
-    claimCommitSha: process.env.CLAIM_COMMIT_SHA,
     claimKey: process.env.CLAIM_KEY,
     repository: process.env.GITHUB_REPOSITORY,
     targetRunId: process.env.TARGET_RUN_ID,
