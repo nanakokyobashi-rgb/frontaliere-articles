@@ -1,5 +1,4 @@
 {
-  "https://www.swissinfo.ch/ita/storia/cile-1988-cosa-possiamo-imparare-oggi-dalla-votazione-che-ha-posto-fine-a-una-dittatura/91611422": "cile-1988-democrazia-svizzera",
   "https://www.swissinfo.ch/ita/topic/sicurezza-del-paziente": "medicina-di-genere-svizzera",
   "https://www.swissinfo.ch/ita/frontiere-della-ricerca": "frontiere-ricerca-svizzera-2025",
   "https://www.tio.ch/svizzera/attualita/1942029/caldo-reddito-donne-anziani-adattamento": "caldo-disparita-sociali-ginevra",
@@ -1489,6 +1488,11 @@
   "https://www.tio.ch/ticino/politica/1947321/chi-provoca-disordini-paga-una-mozione-propone-sanzioni-fino-a-30-000-franchi": {
     "articleId": "sanzioni-disordini-rimborso-mendrisio",
     "ts": "2026-09-01T14:17:27.889Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/economia/1947342/capitale-ubs-miliardi-proposta-cet1": {
+    "articleId": "ubs-ermotti-capital-requirements",
+    "ts": "2026-09-01T14:38:54.299Z",
     "keyForm": 2
   }
 }
