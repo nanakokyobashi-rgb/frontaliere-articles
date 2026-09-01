@@ -56,7 +56,12 @@ export function createJwtAssertion(creds, scope) {
  */
 export function extractOAuthErrorReason(bodyText) {
   try {
-    return JSON.parse(bodyText)?.error || null;
+    const { error } = JSON.parse(bodyText) ?? {};
+    // RFC 6749 error codes are always a string; the googleapis.com REST
+    // envelope this is NOT parsing puts an object here instead (see
+    // extractGoogleErrorReason in load-rc-env.mjs) — reject that shape
+    // rather than returning it as a truthy-but-wrong "reason".
+    return typeof error === 'string' ? error : null;
   } catch {
     return null;
   }
