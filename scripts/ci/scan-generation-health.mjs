@@ -1799,7 +1799,18 @@ export function collectCommits(repo, lookbackHours) {
   let rejected = 0;
   let lastArticleAt = null;
   let reachedCutoff = false;
-  const MAX_PAGES = 3;
+  // Rimisurato il 2026-09-01 (#668): con MAX_PAGES=3 (300 commit) la finestra
+  // letta si fermava a ~45,3h su 300 commit reali di `main` (2026-08-31T00:00
+  // → 2026-09-01T21:21), sotto il cutoff nominale di 48h — e per questo
+  // `commit-window-truncated` era rimasta accesa per passate consecutive
+  // invece che per un burst isolato: dei 300 commit, 152 (51%) erano
+  // `Auto-update … jobs (dedicated crawler)`, cioè il traffico di crawler è
+  // uno STATO stabile, non uno spike raro. Al ritmo misurato (~6,6 commit/h)
+  // 300 coprono ~45h, sotto le 48h nominali; 500 ne coprono ~76h, col 58% di
+  // margine sul cutoff. Il costo è due chiamate `gh api` in più SOLO quando la
+  // finestra le richiede davvero (il loop esce prima al cutoff raggiunto),
+  // trascurabile a cron ogni 2h.
+  const MAX_PAGES = 5;
 
   let page = 1;
   for (; page <= MAX_PAGES && !reachedCutoff; page++) {
@@ -1834,10 +1845,10 @@ export function collectCommits(repo, lookbackHours) {
     }
   }
 
-  // Troncato: il budget di `MAX_PAGES` pagine (300 commit) si è esaurito PRIMA
+  // Troncato: il budget di `MAX_PAGES` pagine (500 commit) si è esaurito PRIMA
   // di raggiungere `cutoff`. Un burst di commit non-generazione (i crawler
-  // job — misurato: 100 commit in 37 minuti il 2026-08-31) può consumare 300
-  // commit in meno di un'ora, molto sotto le `lookbackHours` nominali. Quando
+  // job — misurato: 100 commit in 37 minuti il 2026-08-31) può consumare il
+  // budget in meno di un'ora, molto sotto le `lookbackHours` nominali. Quando
   // questo succede, `lastArticleAt === null` NON è «zero articoli nella
   // finestra»: è «non letta abbastanza finestra per saperlo». Le due condizioni
   // che usano `lastArticleAt === null` come prova estrema (`generation-idle`,
