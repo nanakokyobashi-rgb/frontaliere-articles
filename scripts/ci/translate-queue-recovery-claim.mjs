@@ -6,12 +6,15 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import {
   QUEUE_MAX_BOUNDARY_SHA,
+  MAX_LIVENESS_GET_REQUESTS,
+  RERUN_PRESERVATION_PROOF,
   TARGET_BRANCH,
   TARGET_REPOSITORY,
   TARGET_WORKFLOW_BLOB_SHA,
   TARGET_WORKFLOW_ID,
   TARGET_WORKFLOW_PATH,
   observeTranslateQueue,
+  observeTranslateQueueLiveness,
 } from './translate-queue-recovery.mjs';
 
 export const MUTATION_REPORT_SCHEMA = 'translate-queue-recovery-mutation/v1';
@@ -23,6 +26,12 @@ export const MAX_PHASE_PUT_REQUESTS = 1;
 export const MAX_MUTATION_REPORT_BYTES = 16 * 1024;
 export const REQUEST_TIMEOUT_MS = 10_000;
 export const PROCESS_TIMEOUT_MS = 240_000;
+export const TARGET_EXECUTION_CAPABILITY_SCHEMA = 'translate-target-execution-capability/v1';
+export const TARGET_EXECUTION_CAPABILITY = Object.freeze({
+  executionDedupeProtocolVersion: 0,
+  schema: TARGET_EXECUTION_CAPABILITY_SCHEMA,
+  workflowBlobSha: TARGET_WORKFLOW_BLOB_SHA,
+});
 
 const API_ROOT = 'https://api.github.com';
 const MAX_RESPONSE_BYTES = 4 * 1024 * 1024;
@@ -59,6 +68,7 @@ export const RECOVERY_REASON_CODES = Object.freeze([
   'invalid_mode',
   'invalid_phase',
   'invalid_repository',
+  'liveness_census_inconclusive',
   'missing_token',
   'mutation_outcome_unknown_or_failed',
   'observation_incomplete',
@@ -69,8 +79,8 @@ export const RECOVERY_REASON_CODES = Object.freeze([
   'queue_empty',
   'rerun_authorized',
   'rerun_requested',
-  'schedule_preservation_not_proven',
   'target_state_not_recoverable',
+  'target_execution_dedupe_not_live',
   'workflow_blob_mismatch',
   'workflow_mismatch',
 ]);
@@ -119,6 +129,19 @@ function validTimestamp(value) {
 
 export function validTargetRunId(value) {
   return typeof value === 'string' && RUN_ID_RE.test(value);
+}
+
+function validTargetCapability(value) {
+  if (value === null || typeof value !== 'object' || Array.isArray(value)) return false;
+  const keys = Object.keys(value).sort();
+  return keys.length === 3
+    && keys[0] === 'executionDedupeProtocolVersion'
+    && keys[1] === 'schema'
+    && keys[2] === 'workflowBlobSha'
+    && value.schema === TARGET_EXECUTION_CAPABILITY_SCHEMA
+    && [0, 1].includes(value.executionDedupeProtocolVersion)
+    && typeof value.workflowBlobSha === 'string'
+    && SHA_RE.test(value.workflowBlobSha);
 }
 
 function normalizeApiRunId(value) {
@@ -277,12 +300,18 @@ export function createClaimGithubClient({
   };
 }
 
-export function createRecoveryClaim({ headSha, targetRunId }) {
-  if (!validTargetRunId(targetRunId) || typeof headSha !== 'string' || !SHA_RE.test(headSha)) {
+export function createRecoveryClaim({
+  headSha,
+  targetCapability = TARGET_EXECUTION_CAPABILITY,
+  targetRunId,
+}) {
+  if (!validTargetRunId(targetRunId) || typeof headSha !== 'string' || !SHA_RE.test(headSha)
+      || !validTargetCapability(targetCapability)) {
     throw new TypeError('invalid_claim_tuple');
   }
   const tuple = {
     branch: TARGET_BRANCH,
+    executionDedupeProtocolVersion: targetCapability.executionDedupeProtocolVersion,
     maxMutationRequests: 1,
     mutation: 'rerun_same_run',
     queueMaxBoundarySha: QUEUE_MAX_BOUNDARY_SHA,
@@ -292,7 +321,7 @@ export function createRecoveryClaim({ headSha, targetRunId }) {
     sourceHeadSha: headSha,
     sourceRunAttempt: 1,
     targetRunId,
-    workflowBlobSha: TARGET_WORKFLOW_BLOB_SHA,
+    workflowBlobSha: targetCapability.workflowBlobSha,
     workflowId: TARGET_WORKFLOW_ID,
     workflowPath: TARGET_WORKFLOW_PATH,
   };
@@ -403,10 +432,15 @@ export async function inspectRecoveryTarget({
   fetchImpl = globalThis.fetch,
   now = Date.now(),
   repository = TARGET_REPOSITORY,
+  requireExecutionDedupe = false,
+  targetCapability = TARGET_EXECUTION_CAPABILITY,
   targetRunId,
   token = '',
 } = {}) {
   if (!validTargetRunId(targetRunId)) return failureInspection({ code: 'invalid_input' });
+  if (typeof requireExecutionDedupe !== 'boolean' || !validTargetCapability(targetCapability)) {
+    return failureInspection({ code: 'invalid_input' });
+  }
   if (repository !== TARGET_REPOSITORY) return failureInspection({ code: 'invalid_repository' });
   if (typeof token !== 'string' || token.length === 0) {
     return failureInspection({ code: 'missing_token' });
@@ -455,7 +489,6 @@ export async function inspectRecoveryTarget({
   if (target.workflowId !== TARGET_WORKFLOW_ID) return early('workflow_mismatch', true);
   if (target.path !== TARGET_WORKFLOW_PATH) return early('path_mismatch', true);
   if (target.headBranch !== TARGET_BRANCH) return early('head_branch_mismatch', true);
-  if (target.event === 'schedule') return early('schedule_preservation_not_proven', true);
   if (target.event !== 'workflow_dispatch') return early('event_not_recoverable', true);
   if (target.runAttempt > 1) return early('already_recovered_observed', true);
   if (target.status !== 'completed' || target.conclusion !== 'cancelled') {
@@ -504,9 +537,17 @@ export async function inspectRecoveryTarget({
     clock,
     deadlineAt,
     fetchImpl,
-    maxGets: MAX_PHASE_GET_REQUESTS - observerGets - preflightClient.budget().usedGets,
+    maxGets: MAX_PHASE_GET_REQUESTS
+      - observerGets
+      - preflightClient.budget().usedGets
+      - MAX_LIVENESS_GET_REQUESTS,
     token,
   });
+  let finalLivenessGets = 0;
+  let queueCounts = {
+    active: observer.report.counts.active,
+    pending: observer.report.counts.pending,
+  };
   const finish = ({ claim = null, complete = true, eligible = false, primaryReason, target = null }) => ({
     claim,
     complete,
@@ -515,16 +556,19 @@ export async function inspectRecoveryTarget({
     primaryReason,
     queryBudget: {
       maxGets: MAX_PHASE_GET_REQUESTS,
-      usedGets: preflightClient.budget().usedGets + observerGets + client.budget().usedGets,
+      usedGets: preflightClient.budget().usedGets
+        + observerGets
+        + client.budget().usedGets
+        + finalLivenessGets,
     },
     queue: {
-      active: observer.report.counts.active,
-      pending: observer.report.counts.pending,
-      state: observer.report.counts.active > 0 && observer.report.counts.pending > 0
+      active: queueCounts.active,
+      pending: queueCounts.pending,
+      state: queueCounts.active > 0 && queueCounts.pending > 0
         ? 'active_and_pending'
-        : observer.report.counts.active > 0
+        : queueCounts.active > 0
           ? 'active'
-          : observer.report.counts.pending > 0 ? 'pending' : 'empty',
+          : queueCounts.pending > 0 ? 'pending' : 'empty',
     },
     reasonCodes: orderedReasons(reasons),
     target,
@@ -555,7 +599,7 @@ export async function inspectRecoveryTarget({
     if (workflow.payload?.type !== 'file' || typeof workflow.payload?.sha !== 'string') {
       return fail('observation_incomplete', target);
     }
-    if (workflow.payload.sha !== TARGET_WORKFLOW_BLOB_SHA) {
+    if (workflow.payload.sha !== targetCapability.workflowBlobSha) {
       return block('workflow_blob_mismatch', target);
     }
 
@@ -572,14 +616,33 @@ export async function inspectRecoveryTarget({
     }
     if (jobs.payload.total_count > 0) return block('cancelled_with_jobs', target);
 
-    const active = observer.report.counts.active;
-    const pending = observer.report.counts.pending;
+    const finalLiveness = await observeTranslateQueueLiveness({
+      fetchImpl,
+      now,
+      repository,
+      token,
+    });
+    finalLivenessGets = finalLiveness.queryBudget.usedGets;
+    if (finalLiveness.complete !== true || finalLiveness.failClosed !== false
+        || finalLivenessGets !== MAX_LIVENESS_GET_REQUESTS) {
+      for (const reason of finalLiveness.reasonCodes ?? []) {
+        if (RECOVERY_REASON_CODES.includes(reason)) reasons.add(reason);
+      }
+      return fail('observation_incomplete', target);
+    }
+    queueCounts = finalLiveness.counts;
+    const active = queueCounts.active;
+    const pending = queueCounts.pending;
     if (active > 0 && pending > 0) return block('active_and_pending_present', target);
     if (active > 0) return block('active_present', target);
     if (pending > 0) return block('pending_present', target);
     reasons.add('queue_empty');
 
-    const claim = createRecoveryClaim({ headSha: target.headSha, targetRunId });
+    if (requireExecutionDedupe && targetCapability.executionDedupeProtocolVersion !== 1) {
+      return block('target_execution_dedupe_not_live', target);
+    }
+
+    const claim = createRecoveryClaim({ headSha: target.headSha, targetCapability, targetRunId });
     const claimState = await readClaim(client, claim);
     if (claimState.state === 'exact') {
       if (acceptedClaimKey === claim.claimKey) {
@@ -614,7 +677,9 @@ export function buildRecoveryReport({
   const report = {
     capabilities: {
       recoverySchedule: {
-        reason: 'rerun_preservation_not_proven',
+        preservation: 'verified',
+        proof: RERUN_PRESERVATION_PROOF,
+        reason: 'blocked_by_policy_and_target_dedupe',
         state: 'blocked',
       },
     },
@@ -653,6 +718,7 @@ export async function runRecoveryClaim({
   now = Date.now(),
   phase = 'observe',
   repository = TARGET_REPOSITORY,
+  targetCapability = TARGET_EXECUTION_CAPABILITY,
   targetRunId,
   token = '',
 } = {}) {
@@ -682,6 +748,8 @@ export async function runRecoveryClaim({
     fetchImpl,
     now,
     repository,
+    requireExecutionDedupe: mode === 'claim_and_rerun',
+    targetCapability,
     targetRunId,
     token,
   });

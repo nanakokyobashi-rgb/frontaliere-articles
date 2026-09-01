@@ -3086,7 +3086,7 @@
     {
       "path": ".github/workflows/translate-queue-recovery-watchdog.yml",
       "mode": "corpus-only",
-      "reason": "Watchdog corpus-only della coda translate: osserva con sole GET bounded le run del workflow dichiarato e resta dry-run/observe-only. Il sito non possiede questa coda e la recovery schedulata resta blocked finche il rerun-preservation probe non e provato.",
+      "reason": "Watchdog corpus-only della coda translate: censisce active/pending con sole GET bounded e separa la copertura storica troncabile. La preservazione rerun schedule e provata da workflow 347680591, run 33550046319, artifact 9817045831, schema v1 e token hash sha256:8f28835373c43bd2c90b532bd294eba56d827e64b979fb38a8924e898fca0c91; lo schedule recovery resta blocked per policy e target dedupe non live.",
       "baseline": {
         "site": null,
         "corpus": "e7df4681b16237d6",
@@ -3096,60 +3096,60 @@
     {
       "path": "scripts/ci/translate-queue-recovery.mjs",
       "mode": "corpus-only",
-      "reason": "Runtime zero-dependency corpus-only del watchdog translate: classifica run e job via GitHub API con budget GET fail-closed, emette soltanto JSON redatto e non possiede metodi o endpoint mutanti.",
+      "reason": "Runtime zero-dependency corpus-only del watchdog translate: censisce la liveness corrente con query status complete, dichiara la copertura bounded della discovery storica ed emette soltanto JSON redatto GET-only con prova schedule verificata ma recovery blocked per policy e target dedupe.",
       "baseline": {
         "site": null,
-        "corpus": "0767be50a319005e",
+        "corpus": "3989696495f1421d",
         "alignedAt": "2026-09-01"
       }
     },
     {
       "path": "generator/tests/translate-queue-recovery.test.mjs",
       "mode": "corpus-only",
-      "reason": "Contratto Node deterministico corpus-only per watchdog e workflow translate: copre paginazione, budget, reason code, redazione e assenza by construction di qualsiasi capacità di recovery o scrittura remota.",
+      "reason": "Contratto Node deterministico corpus-only per watchdog e workflow translate: copre censimento corrente indipendente da oltre 200 run storiche, discovery troncata, budget, prova schedule redatta e assenza by construction di scritture remote.",
       "baseline": {
         "site": null,
-        "corpus": "04610e738dedea36",
+        "corpus": "c12eec9e434e0632",
         "alignedAt": "2026-09-01"
       }
     },
     {
       "path": ".github/workflows/translate-queue-recovery.yml",
       "mode": "corpus-only",
-      "reason": "Recovery manuale corpus-only della coda translate: workflow_dispatch osserva per default e separa claim content-addressed ed executor at-most-once; lo schedule resta assente e blocked finche la preservazione non e provata.",
+      "reason": "Recovery manuale corpus-only della coda translate: workflow_dispatch osserva per default e mantiene claim/executor separati; claim_and_rerun resta bloccato prima delle write finche la capability dedupe v1 non e attestata dal blob target. Lo schedule resta assente per policy anche con preservazione provata.",
       "baseline": {
         "site": null,
-        "corpus": "7d9cf334704bf69a",
+        "corpus": "2316405395a45742",
         "alignedAt": "2026-09-01"
       }
     },
     {
       "path": "scripts/ci/translate-queue-recovery-claim.mjs",
       "mode": "corpus-only",
-      "reason": "Planner e claim CAS zero-dependency corpus-only: riosserva la coda con budget bounded e puo creare soltanto un record Contents API immutabile, senza endpoint Actions mutanti.",
+      "reason": "Planner e claim CAS zero-dependency corpus-only: valida target esatto, riosserva la liveness prima della write e richiede capability dedupe v1 bound al blob; il target live v0 si ferma deterministicamente senza PUT.",
       "baseline": {
         "site": null,
-        "corpus": "74bfabc9c9098e5f",
+        "corpus": "db8d1aba3f563540",
         "alignedAt": "2026-09-01"
       }
     },
     {
       "path": "scripts/ci/translate-queue-recovery-executor.mjs",
       "mode": "corpus-only",
-      "reason": "Executor manuale zero-dependency corpus-only: verifica claim e stato sotto il lock translate e possiede un solo POST bounded al rerun dello stesso run ID, senza retry o fallback.",
+      "reason": "Executor manuale zero-dependency corpus-only: verifica claim, capability dedupe e nuova liveness sotto il lock translate prima dell'unico endpoint POST testabile; il target live v0 rende il percorso POST irraggiungibile.",
       "baseline": {
         "site": null,
-        "corpus": "a2d355283de895e7",
+        "corpus": "648c0ed63a06f2a2",
         "alignedAt": "2026-09-01"
       }
     },
     {
       "path": "generator/tests/translate-queue-recovery-mutation.test.mjs",
       "mode": "corpus-only",
-      "reason": "Contratto deterministico corpus-only della recovery manuale: copre decision table, CAS concorrente, failure ambiguity, budget, permission e assenza di metodi o endpoint alternativi.",
+      "reason": "Contratto deterministico corpus-only della recovery manuale: copre storia oltre 200, barriera capability live v0, fixture dedupe v1, race nuova pending, CAS, failure ambiguity, budget e singolo endpoint mutante.",
       "baseline": {
         "site": null,
-        "corpus": "623f34c4ffad40a5",
+        "corpus": "7e67e3c3f7fc6738",
         "alignedAt": "2026-09-01"
       }
     }

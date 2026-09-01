@@ -77,6 +77,7 @@ export async function runRecoveryExecutor({
   repository = TARGET_REPOSITORY,
   targetRunId,
   token = '',
+  targetCapability,
   workflowRunAttempt,
 } = {}) {
   const deadlineAt = clock() + PROCESS_TIMEOUT_MS;
@@ -120,6 +121,8 @@ export async function runRecoveryExecutor({
     fetchImpl,
     now,
     repository,
+    requireExecutionDedupe: true,
+    targetCapability,
     targetRunId,
     token,
   });

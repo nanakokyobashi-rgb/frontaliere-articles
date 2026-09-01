@@ -9,6 +9,8 @@ import {
   MAX_CLAIM_BYTES,
   MAX_PHASE_GET_REQUESTS,
   RECOVERY_REASON_CODES,
+  TARGET_EXECUTION_CAPABILITY,
+  TARGET_EXECUTION_CAPABILITY_SCHEMA,
   createRecoveryClaim,
   runRecoveryClaim,
 } from '../../scripts/ci/translate-queue-recovery-claim.mjs';
@@ -39,6 +41,11 @@ const TARGET_RUN_ID = '33534757741';
 const TARGET_HEAD_SHA = 'a'.repeat(40);
 const CLAIM_COMMIT_SHA = 'c'.repeat(40);
 const NOW = Date.parse('2026-09-01T21:00:00.000Z');
+const TEST_TARGET_CAPABILITY = Object.freeze({
+  executionDedupeProtocolVersion: 1,
+  schema: TARGET_EXECUTION_CAPABILITY_SCHEMA,
+  workflowBlobSha: TARGET_WORKFLOW_BLOB_SHA,
+});
 
 function response(status, body = {}, headers = {}) {
   const normalized = new Map(Object.entries(headers).map(([key, value]) => [key.toLowerCase(), value]));
@@ -89,6 +96,7 @@ function fakeGithub({
   dropClaimAfterPut = false,
   initialClaim = null,
   jobsByRun = {},
+  livenessSnapshots = null,
   malformedPutResponse = false,
   pages = null,
   postError = false,
@@ -102,6 +110,7 @@ function fakeGithub({
   const state = { claimBytes: initialClaim };
   const listedPages = pages ?? [[run]];
   const listedTotal = totalCount ?? listedPages.reduce((sum, page) => sum + page.length, 0);
+  let livenessCalls = 0;
 
   const fetchImpl = async (rawUrl, options = {}) => {
     const url = new URL(rawUrl);
@@ -113,6 +122,15 @@ function fakeGithub({
 
     const listPath = `/repos/${TARGET_REPOSITORY}/actions/workflows/${TARGET_WORKFLOW_ID}/runs`;
     if (options.method === 'GET' && url.pathname === listPath) {
+      const status = url.searchParams.get('status');
+      if (status !== null) {
+        const flattened = listedPages.flat();
+        const round = Math.floor(livenessCalls / 5);
+        const snapshot = livenessSnapshots?.[round] ?? flattened;
+        livenessCalls += 1;
+        const rows = snapshot.filter((row) => row.status === status);
+        return response(200, { total_count: rows.length, workflow_runs: rows });
+      }
       const page = Number(url.searchParams.get('page'));
       return response(200, {
         total_count: listedTotal,
@@ -204,6 +222,7 @@ async function claim(fake, overrides = {}) {
     phase: 'claim',
     repository: TARGET_REPOSITORY,
     targetRunId: TARGET_RUN_ID,
+    targetCapability: TEST_TARGET_CAPABILITY,
     token: TOKEN,
     ...overrides,
   });
@@ -212,6 +231,7 @@ async function claim(fake, overrides = {}) {
 async function execute(fake, overrides = {}) {
   const recoveryClaim = createRecoveryClaim({
     headSha: TARGET_HEAD_SHA,
+    targetCapability: TEST_TARGET_CAPABILITY,
     targetRunId: TARGET_RUN_ID,
   });
   if (fake.state.claimBytes === null) fake.state.claimBytes = recoveryClaim.bytes;
@@ -221,6 +241,7 @@ async function execute(fake, overrides = {}) {
     fetchImpl: fake.fetchImpl,
     now: NOW,
     repository: TARGET_REPOSITORY,
+    targetCapability: TEST_TARGET_CAPABILITY,
     targetRunId: TARGET_RUN_ID,
     token: TOKEN,
     workflowRunAttempt: '1',
@@ -261,8 +282,11 @@ test('schedule resta blocked anche quando il target sarebbe altrimenti recuperab
   const run = targetRun({ event: 'schedule' });
   const fake = fakeGithub({ run });
   const { report } = await claim(fake);
-  assert.equal(report.primaryReason, 'schedule_preservation_not_proven');
+  assert.equal(report.primaryReason, 'event_not_recoverable');
   assert.equal(report.capabilities.recoverySchedule.state, 'blocked');
+  assert.equal(report.capabilities.recoverySchedule.preservation, 'verified');
+  assert.equal(report.capabilities.recoverySchedule.reason,
+    'blocked_by_policy_and_target_dedupe');
   assert.equal(mutatingCalls(fake).length, 0);
   assert.equal(fake.calls.length, 1, 'schedule deve bloccarsi prima della scansione/deep GET');
 });
@@ -351,20 +375,13 @@ test('input run ID resta una stringa decimale e mode/phase invalidi non fanno fe
   }
 });
 
-test('API error, rate limit, rete e paginazione inconclusiva bloccano ogni write', async (t) => {
+test('API error, rate limit e rete bloccano ogni write', async (t) => {
   const scenarios = [
     () => fakeGithub({ apiFault: async () => response(500, {}) }),
     () => fakeGithub({
       apiFault: async () => response(403, {}, { 'x-ratelimit-remaining': '0' }),
     }),
     () => fakeGithub({ apiFault: async () => { throw new Error(TOKEN); } }),
-    () => fakeGithub({
-      pages: [
-        Array.from({ length: 100 }, (_, index) => targetRun({ id: 40000000000 + index })),
-        Array.from({ length: 100 }, (_, index) => targetRun({ id: 40000000100 + index })),
-      ],
-      totalCount: 201,
-    }),
   ];
   for (const makeFake of scenarios) {
     await t.test(String(scenarios.indexOf(makeFake)), async () => {
@@ -380,8 +397,16 @@ test('API error, rate limit, rete e paginazione inconclusiva bloccano ogni write
 });
 
 test('claim e content address sono canonici, stabili e bounded', () => {
-  const first = createRecoveryClaim({ headSha: TARGET_HEAD_SHA, targetRunId: TARGET_RUN_ID });
-  const second = createRecoveryClaim({ headSha: TARGET_HEAD_SHA, targetRunId: TARGET_RUN_ID });
+  const first = createRecoveryClaim({
+    headSha: TARGET_HEAD_SHA,
+    targetCapability: TEST_TARGET_CAPABILITY,
+    targetRunId: TARGET_RUN_ID,
+  });
+  const second = createRecoveryClaim({
+    headSha: TARGET_HEAD_SHA,
+    targetCapability: TEST_TARGET_CAPABILITY,
+    targetRunId: TARGET_RUN_ID,
+  });
   assert.equal(first.claimKey, second.claimKey);
   assert.equal(first.claimPath, `${CLAIM_ROOT}/${first.claimKey}.json`);
   assert.ok(first.bytes.equals(second.bytes));
@@ -390,6 +415,7 @@ test('claim e content address sono canonici, stabili e bounded', () => {
   assert.equal(first.document.sourceEvent, 'workflow_dispatch');
   assert.equal(first.document.sourceRunAttempt, 1);
   assert.equal(first.document.workflowBlobSha, TARGET_WORKFLOW_BLOB_SHA);
+  assert.equal(first.document.executionDedupeProtocolVersion, 1);
 });
 
 test('claim create-only 201 viene verificato byte-identical e abilita solo questa invocazione', async () => {
@@ -402,6 +428,74 @@ test('claim create-only 201 viene verificato byte-identical e abilita solo quest
   assert.equal(mutatingCalls(fake).filter(({ options }) => options.method === 'PUT').length, 1);
   assert.equal(mutatingCalls(fake).filter(({ options }) => options.method === 'POST').length, 0);
   assert.ok(report.queryBudget.usedGets <= MAX_PHASE_GET_REQUESTS);
+});
+
+test('target live senza capability dedupe v1 si ferma prima di claim e rerun', async () => {
+  const fake = fakeGithub();
+  const { report } = await runRecoveryClaim({
+    fetchImpl: fake.fetchImpl,
+    mode: 'claim_and_rerun',
+    now: NOW,
+    phase: 'claim',
+    repository: TARGET_REPOSITORY,
+    targetCapability: TARGET_EXECUTION_CAPABILITY,
+    targetRunId: TARGET_RUN_ID,
+    token: TOKEN,
+  });
+  assert.equal(report.decision, 'blocked');
+  assert.equal(report.primaryReason, 'target_execution_dedupe_not_live');
+  assert.equal(report.complete, true);
+  assert.equal(report.failClosed, false);
+  assert.equal(mutatingCalls(fake).length, 0);
+  assert.equal(report.mutationBudget.usedPuts, 0);
+  assert.deepEqual(TARGET_EXECUTION_CAPABILITY, {
+    executionDedupeProtocolVersion: 0,
+    schema: TARGET_EXECUTION_CAPABILITY_SCHEMA,
+    workflowBlobSha: TARGET_WORKFLOW_BLOB_SHA,
+  });
+});
+
+test('capability malformata o estesa fallisce prima di qualunque fetch', async () => {
+  const fake = fakeGithub();
+  const { report } = await claim(fake, {
+    targetCapability: { ...TEST_TARGET_CAPABILITY, invented: true },
+  });
+  assert.equal(report.primaryReason, 'invalid_input');
+  assert.equal(report.failClosed, true);
+  assert.equal(fake.calls.length, 0);
+});
+
+test('storia oltre 200 non impedisce target esatto e claim con censimento completo', async () => {
+  const history = Array.from({ length: 200 }, (_, index) => targetRun({
+    conclusion: 'success',
+    id: 41000000000 + index,
+  }));
+  const fake = fakeGithub({
+    pages: [history.slice(0, 100), history.slice(100)],
+    run: targetRun(),
+    totalCount: 201,
+  });
+  const { report } = await claim(fake);
+  assert.equal(report.decision, 'claim_created');
+  assert.equal(report.failClosed, false);
+  assert.equal(fake.calls.filter(({ options }) => options.method === 'PUT').length, 1);
+});
+
+test('nuova pending nella riosservazione finale deferisce prima di PUT o POST', async (t) => {
+  const pending = queueRun(33534757799, 'queued');
+  await t.test('claim', async () => {
+    const fake = fakeGithub({ livenessSnapshots: [[], [pending]] });
+    const { report } = await claim(fake);
+    assert.equal(report.primaryReason, 'pending_present');
+    assert.equal(mutatingCalls(fake).length, 0);
+  });
+  await t.test('executor', async () => {
+    const fake = fakeGithub({ livenessSnapshots: [[], [pending]] });
+    const { report } = await execute(fake);
+    assert.equal(report.primaryReason, 'post_claim_state_changed');
+    assert.ok(report.reasonCodes.includes('pending_present'));
+    assert.equal(fake.calls.filter(({ options }) => options.method === 'POST').length, 0);
+  });
 });
 
 test('risposta claim malformata o verifica post-201 assente consuma senza autorizzare', async (t) => {
@@ -455,7 +549,11 @@ test('race CAS 409/422 si risolve una sola volta e non autorizza executor', asyn
 });
 
 test('claim esistente o incoerente e crash dopo claim non possono generare retry', async (t) => {
-  const exact = createRecoveryClaim({ headSha: TARGET_HEAD_SHA, targetRunId: TARGET_RUN_ID });
+  const exact = createRecoveryClaim({
+    headSha: TARGET_HEAD_SHA,
+    targetCapability: TEST_TARGET_CAPABILITY,
+    targetRunId: TARGET_RUN_ID,
+  });
   await t.test('existing exact', async () => {
     const fake = fakeGithub({ initialClaim: exact.bytes });
     const { report } = await claim(fake);
@@ -503,7 +601,11 @@ test('post-claim state change consuma il claim senza POST', async (t) => {
     targetRun({ conclusion: null, status: 'queued' }),
   ]) {
     await t.test(`${run.status}-${run.run_attempt}`, async () => {
-      const exact = createRecoveryClaim({ headSha: TARGET_HEAD_SHA, targetRunId: TARGET_RUN_ID });
+      const exact = createRecoveryClaim({
+        headSha: TARGET_HEAD_SHA,
+        targetCapability: TEST_TARGET_CAPABILITY,
+        targetRunId: TARGET_RUN_ID,
+      });
       const fake = fakeGithub({ initialClaim: exact.bytes, run });
       const { report } = await execute(fake);
       assert.equal(report.decision, 'blocked');
@@ -592,7 +694,7 @@ test('workflow limita trigger, permission, concurrency e runtime per costruzione
 
   assert.doesNotMatch(
     WORKFLOW,
-    /secrets\.|GITHUB_PAT|firebase|actions\/checkout|setup-node|npm (?:ci|install)|(?:^|\s)gh\s/i,
+    /secrets\.|GITHUB_PAT|firebase|TARGET_EXECUTION_CAPABILITY|actions\/checkout|setup-node|npm (?:ci|install)|(?:^|\s)gh\s/i,
   );
   assert.equal((WORKFLOW.match(/raw\.githubusercontent\.com\/\$\{\{ github\.repository \}\}\/\$\{\{ github\.sha \}\}/g) ?? []).length, 7);
   assert.equal((WORKFLOW.match(/--max-redirs 0/g) ?? []).length, 7);

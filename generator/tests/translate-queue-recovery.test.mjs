@@ -18,6 +18,8 @@ import {
   TARGET_WORKFLOW_BLOB_SHA,
   TARGET_WORKFLOW_ID,
   TARGET_WORKFLOW_PATH,
+  RERUN_PRESERVATION_PROOF,
+  createReadOnlyGithubClient,
   observeTranslateQueue,
 } from '../../scripts/ci/translate-queue-recovery.mjs';
 
@@ -67,6 +69,7 @@ function run(id, overrides = {}) {
 function fakeGithub({
   compareByHead = {},
   contentsByHead = {},
+  currentRuns = null,
   jobsByRun = {},
   pages = [[]],
   totalCount = pages.reduce((sum, page) => sum + page.length, 0),
@@ -80,6 +83,11 @@ function fakeGithub({
     assert.equal(options.headers.Authorization, `Bearer ${TOKEN}`);
 
     if (url.pathname === `/repos/${TARGET_REPOSITORY}/actions/workflows/${TARGET_WORKFLOW_ID}/runs`) {
+      const status = url.searchParams.get('status');
+      if (status !== null) {
+        const rows = (currentRuns ?? pages.flat()).filter((row) => row.status === status);
+        return response(200, { total_count: rows.length, workflow_runs: rows });
+      }
       const page = Number(url.searchParams.get('page'));
       assert.equal(url.searchParams.get('branch'), TARGET_BRANCH);
       assert.equal(url.searchParams.get('per_page'), '100');
@@ -158,9 +166,13 @@ test('classifica active/pending e cancellazioni jobs=0/jobs>0 senza soglia stale
   assert.equal(report.queue.staleThreshold, 'not_evaluated');
   assert.ok(report.reasonCodes.includes('queue_age_observed_no_threshold'));
   assert.equal(report.capabilities.recoverySchedule.state, 'blocked');
+  assert.equal(report.capabilities.recoverySchedule.preservation, 'verified');
+  assert.deepEqual(report.capabilities.recoverySchedule.proof, RERUN_PRESERVATION_PROOF);
+  assert.equal(report.capabilities.recoverySchedule.reason,
+    'blocked_by_policy_and_target_dedupe');
   assert.equal(report.capabilities.alreadyRecovered.state, 'not_evaluated');
   assert.equal(report.capabilities.claimState.state, 'not_evaluated');
-  assert.equal(report.queryBudget.usedGets, 7);
+  assert.equal(report.queryBudget.usedGets, 12);
   assert.ok(Buffer.byteLength(json) <= MAX_REPORT_BYTES);
 });
 
@@ -184,7 +196,7 @@ test('classifica deterministicamente tutti i mismatch shallow e attempt>1', asyn
   assert.equal(report.complete, true);
   assert.equal(report.failClosed, false);
   assert.equal(report.counts.deepCandidates, 0);
-  assert.equal(report.queryBudget.usedGets, 1);
+  assert.equal(report.queryBudget.usedGets, 6);
 });
 
 test('metadata obbligatori mancanti o malformati falliscono chiusi senza candidati', async (t) => {
@@ -221,8 +233,8 @@ test('metadata obbligatori mancanti o malformati falliscono chiusi senza candida
       assert.equal(report.counts.byReason[reason], 1);
       assert.equal(report.counts.deepCandidates, 0);
       assert.equal(report.counts.deepInspected, 0);
-      assert.equal(report.queryBudget.usedGets, 1);
-      assert.equal(fake.calls.length, 1);
+      assert.equal(report.queryBudget.usedGets, 6);
+      assert.equal(fake.calls.length, 6);
       assert.ok(fake.calls.every(({ options }) => options.method === 'GET'));
     });
   }
@@ -267,42 +279,81 @@ test('pagina al massimo due volte e stabilizza samples per data/id', async () =>
   const fake = fakeGithub({ pages: [rows.slice(0, 100), rows.slice(100)] });
   const { report } = await observe(fake);
   assert.equal(report.counts.scannedRuns, 101);
-  assert.equal(report.queryBudget.usedGets, 2);
+  assert.equal(report.queryBudget.usedGets, 7);
   assert.deepEqual(
     report.samples.wrong_conclusion.slice(0, 2),
     ['30000000001', '30000000000'],
   );
-  assert.equal(fake.calls.filter(({ url }) => url.pathname.endsWith('/runs')).length, 2);
+  assert.equal(fake.calls.filter(({ url }) => (
+    url.pathname.endsWith('/runs') && url.searchParams.get('status') === null
+  )).length, 2);
 });
 
-test('paginazione inconclusiva fallisce chiusa senza deep GET', async () => {
-  const first = Array.from({ length: 100 }, (_, index) => run(40000000000 + index));
-  const second = Array.from({ length: 100 }, (_, index) => run(40000000100 + index));
-  const fake = fakeGithub({ pages: [first, second], totalCount: 201 });
+test('oltre 200 run storiche tronca discovery senza invalidare il censimento corrente', async () => {
+  const first = Array.from({ length: 100 }, (_, index) => run(40000000000 + index, {
+    conclusion: 'success',
+  }));
+  const second = Array.from({ length: 100 }, (_, index) => run(40000000100 + index, {
+    conclusion: 'success',
+  }));
+  const current = run(40100000000, {
+    conclusion: null,
+    created_at: '2026-09-01T17:10:52.000Z',
+    status: 'queued',
+  });
+  const fake = fakeGithub({ currentRuns: [current], pages: [first, second], totalCount: 201 });
   const { report } = await observe(fake);
-  assert.equal(report.failClosed, true);
+  assert.equal(report.complete, true);
+  assert.equal(report.failClosed, false);
   assert.equal(report.counts.byReason.pagination_inconclusive, 1);
+  assert.equal(report.discovery.state, 'truncated');
+  assert.equal(report.discovery.truncated, true);
+  assert.equal(report.discovery.declaredTotal, 201);
+  assert.equal(report.counts.pending, 1);
+  assert.equal(report.queue.activePendingPresent, true);
   assert.equal(report.counts.deepInspected, 0);
-  assert.equal(report.queryBudget.usedGets, 2);
+  assert.equal(report.queryBudget.usedGets, 7);
 });
 
-test('budget GET non supera 30 e fallisce chiuso prima di una mutazione', async () => {
-  const candidates = Array.from({ length: 10 }, (_, index) => run(
-    50000000000 + index,
-    { head_sha: `${String(index).padStart(40, '0')}` },
-  ));
-  const fake = fakeGithub({ pages: [candidates] });
-  const { report } = await observe(fake);
-  assert.equal(report.queryBudget.usedGets, MAX_GET_REQUESTS);
-  assert.equal(report.queryBudget.exhausted, true);
-  assert.equal(report.counts.byReason.query_budget_exhausted, 1);
+test('censimento corrente oltre la singola pagina fallisce chiuso indipendentemente dalla storia', async () => {
+  const currentRuns = Array.from({ length: 101 }, (_, index) => run(40200000000 + index, {
+    conclusion: null,
+    status: 'queued',
+  }));
+  const { report } = await observe(fakeGithub({ currentRuns, pages: [[]] }));
+  assert.equal(report.complete, false);
   assert.equal(report.failClosed, true);
-  assert.equal(fake.calls.length, MAX_GET_REQUESTS);
+  assert.equal(report.counts.byReason.liveness_census_inconclusive, 1);
+  assert.equal(report.queryBudget.usedGets, 3);
+});
+
+test('client GET esaurisce deterministicamente il budget prima della trentesima GET runtime', async () => {
+  let calls = 0;
+  const client = createReadOnlyGithubClient({
+    fetchImpl: async () => {
+      calls += 1;
+      return response(200, {});
+    },
+    token: TOKEN,
+  });
+  for (let index = 0; index < MAX_GET_REQUESTS; index += 1) {
+    await client.getJson(`/repos/${TARGET_REPOSITORY}/budget/${index}`);
+  }
+  await assert.rejects(
+    client.getJson(`/repos/${TARGET_REPOSITORY}/budget/exhausted`),
+    /query_budget_exhausted/,
+  );
+  assert.equal(calls, MAX_GET_REQUESTS);
+  assert.deepEqual(client.budget(), {
+    exhausted: true,
+    maxGets: MAX_GET_REQUESTS,
+    usedGets: MAX_GET_REQUESTS,
+  });
   assert.equal(MAX_GET_REQUESTS + BOOTSTRAP_GET_REQUESTS, MAX_TOTAL_GET_REQUESTS);
   assert.equal(MAX_TOTAL_GET_REQUESTS, 30);
 });
 
-test('limite deep di 20 e esplicito e fail-closed', async () => {
+test('limite deep di 20 e budget residuo troncano discovery senza occultare la coda', async () => {
   const candidates = Array.from({ length: MAX_DEEP_CANDIDATES + 1 }, (_, index) => run(
     60000000000 + index,
     { head_sha: createHash('sha1').update(String(index)).digest('hex') },
@@ -310,7 +361,9 @@ test('limite deep di 20 e esplicito e fail-closed', async () => {
   const { report } = await observe(fakeGithub({ pages: [candidates] }));
   assert.equal(report.counts.deepCandidates, MAX_DEEP_CANDIDATES + 1);
   assert.equal(report.counts.byReason.deep_candidate_limit_exceeded, 1);
-  assert.equal(report.failClosed, true);
+  assert.equal(report.failClosed, false);
+  assert.equal(report.discovery.state, 'truncated');
+  assert.equal(report.discovery.truncated, true);
   assert.ok(report.queryBudget.usedGets <= MAX_GET_REQUESTS);
 });
 
@@ -405,6 +458,13 @@ test('target e manifest sono pinning corpus-only esatti', () => {
   assert.equal(TARGET_WORKFLOW_PATH, '.github/workflows/translate-pending.yml');
   assert.equal(TARGET_WORKFLOW_BLOB_SHA, 'f782b4b2761ab87ba7792d256b64ab09c2e206ea');
   assert.equal(QUEUE_MAX_BOUNDARY_SHA, '5e5114b73f37a0c47625f00baff13942fe8b186b');
+  assert.deepEqual(RERUN_PRESERVATION_PROOF, {
+    artifactId: '9817045831',
+    runId: '33550046319',
+    schema: 'translate-queue-rerun-preservation-proof/v1',
+    tokenHash: 'sha256:8f28835373c43bd2c90b532bd294eba56d827e64b979fb38a8924e898fca0c91',
+    workflowId: 347680591,
+  });
 
   const manifest = JSON.parse(readFileSync(MANIFEST_PATH, 'utf8'));
   const expected = new Set([

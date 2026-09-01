@@ -10,10 +10,17 @@ export const TARGET_WORKFLOW_PATH = '.github/workflows/translate-pending.yml';
 export const TARGET_WORKFLOW_BLOB_SHA = 'f782b4b2761ab87ba7792d256b64ab09c2e206ea';
 export const TARGET_BRANCH = 'main';
 export const QUEUE_MAX_BOUNDARY_SHA = '5e5114b73f37a0c47625f00baff13942fe8b186b';
-export const RECOVERY_PROOF_CUTOFF = '2026-09-01T17:20:00.000Z';
+export const RERUN_PRESERVATION_PROOF = Object.freeze({
+  artifactId: '9817045831',
+  runId: '33550046319',
+  schema: 'translate-queue-rerun-preservation-proof/v1',
+  tokenHash: 'sha256:8f28835373c43bd2c90b532bd294eba56d827e64b979fb38a8924e898fca0c91',
+  workflowId: 347680591,
+});
 export const MAX_RUN_PAGES = 2;
 export const RUNS_PER_PAGE = 100;
 export const MAX_DEEP_CANDIDATES = 20;
+export const MAX_LIVENESS_GET_REQUESTS = 5;
 export const MAX_TOTAL_GET_REQUESTS = 30;
 export const BOOTSTRAP_GET_REQUESTS = 1;
 export const MAX_GET_REQUESTS = MAX_TOTAL_GET_REQUESTS - BOOTSTRAP_GET_REQUESTS;
@@ -30,6 +37,9 @@ const TIMESTAMP_RE = /^(\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2})(?:\.(\d{1,3}))?Z$/;
 const ALLOWED_EVENTS = new Set(['schedule', 'workflow_dispatch']);
 const ACTIVE_STATUSES = new Set(['in_progress']);
 const PENDING_STATUSES = new Set(['pending', 'queued', 'requested', 'waiting']);
+if (ACTIVE_STATUSES.size + PENDING_STATUSES.size !== MAX_LIVENESS_GET_REQUESTS) {
+  throw new TypeError('invalid_liveness_budget');
+}
 const KNOWN_STATUSES = new Set([
   ...ACTIVE_STATUSES,
   ...PENDING_STATUSES,
@@ -75,13 +85,14 @@ export const REASON_CODES = Object.freeze([
   'invalid_head_sha',
   'invalid_mode',
   'invalid_repository',
+  'liveness_census_inconclusive',
   'malformed_run',
   'missing_token',
   'no_active_pending',
   'pagination_inconclusive',
   'queue_age_observed_no_threshold',
   'query_budget_exhausted',
-  'recovery_schedule_blocked_not_proven',
+  'recovery_schedule_blocked_by_policy_and_target_dedupe',
   'wrong_blob',
   'wrong_conclusion',
   'wrong_event',
@@ -161,6 +172,12 @@ function makeInitialState(nowMs) {
     activeRunIds: [],
     pendingRunIds: [],
     queueCreatedMs: [],
+    discovery: {
+      declaredTotal: 0,
+      maxRuns: MAX_RUN_PAGES * RUNS_PER_PAGE,
+      state: 'complete',
+      truncated: false,
+    },
     complete: true,
   };
 }
@@ -250,6 +267,37 @@ export function createReadOnlyGithubClient({ fetchImpl, token }) {
   };
 }
 
+async function listCurrentQueueRuns(client, state) {
+  const collected = [];
+  const seen = new Set();
+  for (const status of [...ACTIVE_STATUSES, ...PENDING_STATUSES]) {
+    const query = new URLSearchParams({
+      branch: TARGET_BRANCH,
+      page: '1',
+      per_page: String(RUNS_PER_PAGE),
+      status,
+    });
+    const payload = await client.getJson(
+      `/repos/${TARGET_REPOSITORY}/actions/workflows/${TARGET_WORKFLOW_ID}/runs?${query}`,
+    );
+    if (!Number.isSafeInteger(payload?.total_count) || payload.total_count < 0
+        || payload.total_count > RUNS_PER_PAGE
+        || !Array.isArray(payload?.workflow_runs)
+        || payload.workflow_runs.length !== payload.total_count) {
+      throw new ObservationFailure('liveness_census_inconclusive');
+    }
+    for (const run of payload.workflow_runs) {
+      const runId = validRunId(run?.id);
+      if (runId === null || run?.status !== status || seen.has(runId)) {
+        throw new ObservationFailure('liveness_census_inconclusive');
+      }
+      seen.add(runId);
+      collected.push(run);
+    }
+  }
+  return collected.sort(compareRuns);
+}
+
 async function listAllBoundedRuns(client, state) {
   const collected = [];
   let declaredTotal = null;
@@ -269,21 +317,32 @@ async function listAllBoundedRuns(client, state) {
       throw new ObservationFailure('api_incomplete');
     }
     if (declaredTotal === null) declaredTotal = payload.total_count;
-    if (payload.total_count !== declaredTotal) throw new ObservationFailure('pagination_inconclusive');
+    if (payload.total_count !== declaredTotal) {
+      addReason(state, 'pagination_inconclusive');
+      state.discovery.state = 'inconclusive';
+      state.discovery.truncated = true;
+      break;
+    }
     collected.push(...payload.workflow_runs);
     if (collected.length >= declaredTotal) break;
   }
 
   const ids = collected.map((run) => validRunId(run?.id)).filter((id) => id !== null);
-  if (declaredTotal > MAX_RUN_PAGES * RUNS_PER_PAGE
-      || collected.length !== declaredTotal
-      || new Set(ids).size !== ids.length) {
-    failClosed(state, 'pagination_inconclusive');
+  const incomplete = declaredTotal > MAX_RUN_PAGES * RUNS_PER_PAGE
+    || collected.length !== declaredTotal
+    || new Set(ids).size !== ids.length;
+  if (incomplete) {
+    addReason(state, 'pagination_inconclusive');
+    state.discovery.state = declaredTotal > MAX_RUN_PAGES * RUNS_PER_PAGE
+      ? 'truncated'
+      : 'inconclusive';
+    state.discovery.truncated = true;
   }
+  state.discovery.declaredTotal = declaredTotal;
   return collected.slice(0, MAX_RUN_PAGES * RUNS_PER_PAGE).sort(compareRuns);
 }
 
-function collectShallowFacts(run, state, candidates) {
+function collectShallowFacts(run, state, candidates, { collectQueue = true } = {}) {
   const runId = validRunId(run?.id);
   if (runId === null || run === null || typeof run !== 'object' || Array.isArray(run)) {
     failClosed(state, 'malformed_run');
@@ -338,9 +397,11 @@ function collectShallowFacts(run, state, candidates) {
       addReason(state, 'wrong_conclusion', runId);
       return;
     }
-    if (isActive) state.activeRunIds.push(runId);
-    if (isPending) state.pendingRunIds.push(runId);
-    state.queueCreatedMs.push(createdMs);
+    if (collectQueue) {
+      if (isActive) state.activeRunIds.push(runId);
+      if (isPending) state.pendingRunIds.push(runId);
+      state.queueCreatedMs.push(createdMs);
+    }
     return;
   }
 
@@ -416,7 +477,7 @@ function buildReport(state, client) {
   }
   addReason(state, 'already_recovered_not_evaluated');
   addReason(state, 'claim_state_not_evaluated');
-  addReason(state, 'recovery_schedule_blocked_not_proven');
+  addReason(state, 'recovery_schedule_blocked_by_policy_and_target_dedupe');
 
   const oldestCreatedMs = state.queueCreatedMs.length > 0
     ? Math.min(...state.queueCreatedMs)
@@ -429,8 +490,9 @@ function buildReport(state, client) {
       alreadyRecovered: { state: 'not_evaluated' },
       claimState: { state: 'not_evaluated' },
       recoverySchedule: {
-        proofCutoff: RECOVERY_PROOF_CUTOFF,
-        reason: 'rerun_preservation_not_proven',
+        preservation: 'verified',
+        proof: RERUN_PRESERVATION_PROOF,
+        reason: 'blocked_by_policy_and_target_dedupe',
         state: 'blocked',
       },
     },
@@ -444,6 +506,10 @@ function buildReport(state, client) {
       scannedRuns: state.scannedRuns,
     },
     decision: 'observe_only',
+    discovery: {
+      ...state.discovery,
+      scannedRuns: state.scannedRuns,
+    },
     failClosed: !state.complete,
     observedAt: new Date(state.nowMs).toISOString(),
     queryBudget: client.budget(),
@@ -498,17 +564,26 @@ export async function observeTranslateQueue({
   }
 
   try {
+    const currentRuns = await listCurrentQueueRuns(client, state);
+    for (const run of currentRuns) collectShallowFacts(run, state, [], { collectQueue: true });
     const runs = await listAllBoundedRuns(client, state);
     state.scannedRuns = runs.length;
     if (!state.complete) return buildReport(state, client);
 
     const candidates = [];
-    for (const run of runs) collectShallowFacts(run, state, candidates);
+    for (const run of runs) collectShallowFacts(run, state, candidates, { collectQueue: false });
     state.deepCandidates = candidates.length;
     if (candidates.length > MAX_DEEP_CANDIDATES) {
-      failClosed(state, 'deep_candidate_limit_exceeded');
+      addReason(state, 'deep_candidate_limit_exceeded');
+      state.discovery.state = 'truncated';
+      state.discovery.truncated = true;
     }
     for (const candidate of candidates.slice(0, MAX_DEEP_CANDIDATES)) {
+      if (client.budget().maxGets - client.budget().usedGets < 3) {
+        state.discovery.state = 'truncated';
+        state.discovery.truncated = true;
+        break;
+      }
       await inspectCandidate(client, state, candidate);
     }
   } catch (error) {
@@ -516,6 +591,34 @@ export async function observeTranslateQueue({
     failClosed(state, code);
   }
   return buildReport(state, client);
+}
+
+export async function observeTranslateQueueLiveness({
+  fetchImpl = globalThis.fetch,
+  now = Date.now(),
+  repository = TARGET_REPOSITORY,
+  token = '',
+} = {}) {
+  if (!Number.isFinite(now)) throw new TypeError('invalid_now');
+  const state = makeInitialState(now);
+  const client = createReadOnlyGithubClient({ fetchImpl, token });
+  if (repository !== TARGET_REPOSITORY || typeof token !== 'string' || token.length === 0) {
+    failClosed(state, repository !== TARGET_REPOSITORY ? 'invalid_repository' : 'missing_token');
+  } else {
+    try {
+      const currentRuns = await listCurrentQueueRuns(client, state);
+      for (const run of currentRuns) collectShallowFacts(run, state, [], { collectQueue: true });
+    } catch (error) {
+      failClosed(state, error instanceof ObservationFailure ? error.code : 'api_incomplete');
+    }
+  }
+  return {
+    complete: state.complete,
+    counts: { active: state.activeRunIds.length, pending: state.pendingRunIds.length },
+    failClosed: !state.complete,
+    queryBudget: client.budget(),
+    reasonCodes: REASON_CODES.filter((code) => state.reasons.counts[code] > 0),
+  };
 }
 
 const isMain = process.argv[1]
