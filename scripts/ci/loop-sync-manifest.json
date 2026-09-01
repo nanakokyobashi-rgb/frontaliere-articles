@@ -3067,6 +3067,36 @@
         "corpus": "b3d68540e6125bea",
         "alignedAt": "2026-08-31"
       }
+    },
+    {
+      "path": ".github/workflows/translate-queue-rerun-probe.yml",
+      "mode": "corpus-only",
+      "reason": "Workflow temporaneo NON-PRODUCTION specifico della coda di traduzione di questo corpus: crea soltanto una failure injection read-only per misurare se un rerun di una cancellazione job-zero conserva event e input. Il sito non possiede questa coda; workflow e schedule vanno rimossi con una PR immediata di cleanup dopo il probe.",
+      "baseline": {
+        "site": null,
+        "corpus": "bc411f24c4ac1c71",
+        "alignedAt": "2026-09-01"
+      }
+    },
+    {
+      "path": "scripts/ci/verify-translate-queue-rerun-probe.mjs",
+      "mode": "corpus-only",
+      "reason": "Runtime zero-dependency NON-PRODUCTION del solo probe corpus: valida e redige event/input della run e trattiene il blocker senza leggere o mutare la traduzione. Non ha un ruolo nel ciclo del sito e va rimosso con una PR immediata di cleanup dopo il probe job-zero.",
+      "baseline": {
+        "site": null,
+        "corpus": "2ef7c9e40373d439",
+        "alignedAt": "2026-09-01"
+      }
+    },
+    {
+      "path": "generator/tests/translate-queue-rerun-probe.test.mjs",
+      "mode": "corpus-only",
+      "reason": "Contratto Node deterministico NON-PRODUCTION per il workflow e il runtime del probe corpus: pinna rerun attempt 1/2, redazione del token e assenza di capacità produttive nella prova job-zero. Non serve sul sito e va rimosso con una PR immediata di cleanup dopo il probe.",
+      "baseline": {
+        "site": null,
+        "corpus": "8b641deccfd1c017",
+        "alignedAt": "2026-09-01"
+      }
     }
   ]
 }
