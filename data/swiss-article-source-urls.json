@@ -1,5 +1,4 @@
 {
-  "https://www.swissinfo.ch/ita/prospettiva-svizzera/la-vigilanza-sulle-banche-in-svizzera-una-breve-storia-degli-scandali/91769822": "vigilanza-banche-svizzera-scandali",
   "https://www.swissinfo.ch/ita/siccit%c3%a0%3a-i-contadini-si-mobilitano%2c-arriva-la-borsa-dei-foraggi/91846359": "siccita-contadini-mobilitano",
   "https://www.swissinfo.ch/ita/emigrazione/emigrare-dalla-svizzera-alcuni-aspetti-fondamentali-riguardanti-le-tasse/88379792": "emigrazione-tasse-obblighi-dopo-partenza",
   "https://www.swissinfo.ch/ita/banche-cercano-pi%c3%b9-personale%2c-annunci-%2b14%25-in-luglio/91847006": "banche-cercano-piu-personale",
@@ -1473,6 +1472,11 @@
   "https://www.admin.ch/it/newnsb/e-pdmv8w0nn3": {
     "articleId": "dazit-termine-2026",
     "ts": "2026-09-01T12:39:20.293Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/aziende-rilevano-carenze-nelle-competenze-di-base-degli-apprendisti/91986777": {
+    "articleId": "apprendisti-lacune-competenze-base",
+    "ts": "2026-09-01T13:14:00.968Z",
     "keyForm": 2
   }
 }
