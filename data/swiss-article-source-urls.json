@@ -1,5 +1,4 @@
 {
-  "https://www.swissinfo.ch/ita/meno-volumi-alla-borsa-svizzera-in-luglio%2c-ha-pesato-il-calo-estivo/91840796": "rallentamento-borsa-svizzera-luglio",
   "https://www.swissinfo.ch/ita/topic/il-futuro-del-lavoro": "il-futuro-del-lavoro",
   "https://www.swissinfo.ch/ita/votazioni-federali-la-nostra-guida-al-voto-per-la-quinta-svizzera": "votazioni-federali-guida-2026",
   "https://www.swissinfo.ch/ita/publibike-passa-in-mani-inglesi%2c-acquistata-da-fondo-d%27investimento/91839303": "publibike-investitore-britannico",
@@ -1425,6 +1424,11 @@
   "https://www.tio.ch/svizzera/economia/1947217/life-swiss-svizzera-lavoro-posti": {
     "articleId": "swiss-life-taglio-posti-lavoro-2028",
     "ts": "2026-09-01T05:35:30.216Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/attualita/1946769/fattura-sistema-puo-paziente-documento-fatture-ospedali": {
+    "articleId": "drg-fatture-trasparenza",
+    "ts": "2026-09-01T05:43:39.231Z",
     "keyForm": 2
   }
 }
