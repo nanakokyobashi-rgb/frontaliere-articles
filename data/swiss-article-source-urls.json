@@ -1,5 +1,4 @@
 {
-  "https://www.swissinfo.ch/ita/emigrazione/senza-lavoro-allestero-ecco-cosa-considerare-quando-si-ritorna-in-svizzera/88366386": "rientro-in-svizzera-senza-lavoro-guida",
   "https://www.tio.ch/svizzera/economia/1941815/leclanche-rapporto-difficolta-azienda-azioni": "leclanche-crisi-finanziaria-2025",
   "https://www.tio.ch/svizzera/economia/1941837/fondazioni-dati-svizzera-principato-liechtenstein-hacker": "attacco-hacker-liechtenstein-svizzera",
   "https://www.fiscoetasse.com/approfondimenti/17362-le-condizioni-per-lesenzione-totale-dal-dazio-nelle-situazioni-di-emergenza.html": "le-assenze-totale-dal-dazio-nelle-situazioni-di-emergenza",
@@ -1457,6 +1456,11 @@
   "https://www.swissinfo.ch/ita/associazione-inquilini%2c-%22occorre-chiedere-riduzione-dell%27affitto%22/91985994": {
     "articleId": "riduzione-affitto-tassi-ipotecari",
     "ts": "2026-09-01T11:09:31.864Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/commercio-al-dettaglio%2c-aumentano-le-vendite-in-luglio/91985445": {
+    "articleId": "commercio-dettaglio-vendite-luglio-2025",
+    "ts": "2026-09-01T11:48:32.552Z",
     "keyForm": 2
   }
 }
