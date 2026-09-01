@@ -1,5 +1,4 @@
 {
-  "https://www.swissinfo.ch/ita/votazioni-federali-la-nostra-guida-al-voto-per-la-quinta-svizzera": "votazioni-federali-guida-2026",
   "https://www.swissinfo.ch/ita/publibike-passa-in-mani-inglesi%2c-acquistata-da-fondo-d%27investimento/91839303": "publibike-investitore-britannico",
   "https://www.swissinfo.ch/ita/economia-sanitaria": "economia-sanitaria-svizzera",
   "https://www.tio.ch/ticino/attualita/1940819/fatture-affitto-e-cassa-malati-le-difficolta-di-98-famiglie": "frontaliere-ticino-98-famiglie-caso-solidale",
@@ -1433,6 +1432,11 @@
   "https://www.rsi.ch/s/4051266": {
     "articleId": "swiss-life-600-tagli-2028",
     "ts": "2026-09-01T06:17:05.503Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/economia/1947226/tasso-riferimento-rimane-minimo-riduzione": {
+    "articleId": "tasso-riferimento-ipotecario-1-25",
+    "ts": "2026-09-01T06:41:37.879Z",
     "keyForm": 2
   }
 }
