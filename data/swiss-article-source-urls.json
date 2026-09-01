@@ -1,5 +1,4 @@
 {
-  "https://www.tio.ch/ticino/attualita/1942169/istituzioni-fiducia-festival-carobbio-locarno-guscetti-bene": "marina-carobbio-guscetti-fiducia-istituzioni",
   "https://www.rsi.ch/s/3936792": "lex-netflix-cinema-svizzero-2025",
   "https://www.tio.ch/svizzera/economia/1942311/continua-bolla-svizzera-ubs-punti": "rischio-bolla-svizzera-2026",
   "https://www.tio.ch/dal-mondo/economia/1942414/apollo-easyjet-fondo-miliardi-acquisizione-franchi": "easyjet-apollon-acquisizione",
@@ -1529,6 +1528,11 @@
   "https://www.swissinfo.ch/ita/dare-alle-lenticchie-la-consistenza-della-carne%2c-ricerca-eth/91987836": {
     "articleId": "legumi-texture-carne-ricerca-eth",
     "ts": "2026-09-01T18:05:27.136Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/settore-dei-servizi%2c-forte-aumento-del-fatturato-in-giugno/91989104": {
+    "articleId": "settore-servizi-aumento-fatturato-giugno",
+    "ts": "2026-09-01T18:16:11.745Z",
     "keyForm": 2
   }
 }
