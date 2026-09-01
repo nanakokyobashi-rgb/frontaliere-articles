@@ -8902,6 +8902,36 @@ function countWords(text = '') {
     .length;
 }
 
+// Fields exceeding this word count risk hitting the model's per-call output
+// cap in a single prompt — split into sub-chunks instead. Shared by every
+// translation path that can encounter an oversized body field (#688: the
+// truncation-retry loop used to skip this and re-send the whole field in one
+// prompt, reproducing the same truncation it was retrying to fix).
+const TRANSLATION_CHUNK_THRESHOLD = 700;
+
+// Split body text into ~chunkTarget-word pieces at paragraph boundaries, for
+// translating oversized fields as parallel sub-chunks that stay under the
+// model's per-call output cap.
+function splitIntoTranslationChunks(bodyText, chunkTarget = 500) {
+  const paragraphs = (bodyText || '').split(/\n\n+/);
+  const chunks = [];
+  let currentChunk = '';
+  let currentWords = 0;
+  for (const p of paragraphs) {
+    const pWords = countWords(p);
+    if (currentWords + pWords > chunkTarget && currentChunk) {
+      chunks.push(currentChunk);
+      currentChunk = p;
+      currentWords = pWords;
+    } else {
+      currentChunk += (currentChunk ? '\n\n' : '') + p;
+      currentWords += pWords;
+    }
+  }
+  if (currentChunk) chunks.push(currentChunk);
+  return chunks;
+}
+
 function italianBodyWordCount(data) {
   const it = data?.content?.it || {};
   return ['body1', 'body2', 'body3']
@@ -9199,6 +9229,27 @@ async function translateArticle(data) {
     }
   }
 
+  // Sub-chunk an oversized field into ~500-word paragraph pieces, translate
+  // each chunk in parallel via callWithRetry, and join. Shared by
+  // translateBodyField's initial translation below and the truncation-retry
+  // loop further down (#688): both send a field to the model as a single
+  // prompt when it's short, and both need the same chunking safety net once
+  // it isn't, since a single oversized prompt can hit the model's per-call
+  // output cap and come back truncated regardless of how many retries wrap it.
+  async function translateInChunks(bodyText, fieldKey, makeChunkPrompt, labelPrefix) {
+    const chunks = splitIntoTranslationChunks(bodyText);
+    const translated = await Promise.all(
+      chunks.map((chunk, i) =>
+        callWithRetry(
+          makeChunkPrompt(chunk, i, chunks.length),
+          Math.max(5000, Math.ceil(countWords(chunk) * 5)),
+          `${labelPrefix}-p${i + 1}`,
+        ),
+      ),
+    );
+    return joinTranslatedChunks(translated, fieldKey);
+  }
+
   async function translateContent(sourceLang, targetLang, targetLabel, sourceContent) {
     // Quota-free path: route through the dedicated free MT cascade so the LLM
     // daily quota is reserved for generation. Per-field failures are omitted and
@@ -9256,9 +9307,6 @@ ${terminologyByLang[targetLang] || ''}`;
     // Scale maxTokens to input size: ~2 tokens/word in, ~2.5 tokens/word out (translation expansion)
     const bodyTokens = (text) => Math.max(5000, Math.ceil(countWords(text || '') * 5));
 
-    // For body fields exceeding this threshold, split into sub-chunks and translate separately
-    const TRANSLATION_CHUNK_THRESHOLD = 700;
-
     async function translateBodyField(bodyKey, bodyText, lang) {
       const words = countWords(bodyText || '');
 
@@ -9281,42 +9329,22 @@ ${terminologyByLang[targetLang] || ''}`;
         return { [bodyKey]: sanitizeBodyText(text) };
       }
 
-      // Sub-chunk: split at paragraph boundaries into ~500-word pieces
+      // Sub-chunk: split at paragraph boundaries into ~500-word pieces,
+      // translate each in parallel, and join. A chunk the model returned as
+      // an object used to be stringified into the joined body as
+      // "[object Object]" — one corrupted paragraph in the middle of
+      // otherwise-good prose. translateInChunks refuses the whole field
+      // instead and lets the per-field recovery re-translate it.
       console.error(`    📦 ${lang}:${bodyKey} = ${words} parole → sub-chunking...`);
-      const paragraphs = (bodyText || '').split(/\n\n+/);
-      const chunks = [];
-      let currentChunk = '';
-      let currentWords = 0;
-      const chunkTarget = 500;
-
-      for (const p of paragraphs) {
-        const pWords = countWords(p);
-        if (currentWords + pWords > chunkTarget && currentChunk) {
-          chunks.push(currentChunk);
-          currentChunk = p;
-          currentWords = pWords;
-        } else {
-          currentChunk += (currentChunk ? '\n\n' : '') + p;
-          currentWords += pWords;
-        }
-      }
-      if (currentChunk) chunks.push(currentChunk);
-
-      // Translate each chunk in parallel
-      const translated = await Promise.all(
-        chunks.map((chunk, i) =>
-          callWithRetry(makePrompt(
-            `CONTENUTO ITALIANO DA TRADURRE (parte ${i + 1} di ${chunks.length}):\n- ${bodyKey}: ${chunk}`,
-            `{"${bodyKey}": "..."}`,
-          ), bodyTokens(chunk), `${lang}:${bodyKey.replace('body', 'b')}-p${i + 1}`),
+      const joined = await translateInChunks(
+        bodyText,
+        bodyKey,
+        (chunk, i, total) => makePrompt(
+          `CONTENUTO ITALIANO DA TRADURRE (parte ${i + 1} di ${total}):\n- ${bodyKey}: ${chunk}`,
+          `{"${bodyKey}": "..."}`,
         ),
+        `${lang}:${bodyKey.replace('body', 'b')}`,
       );
-
-      // Join translated chunks. A chunk the model returned as an object used to
-      // be stringified into the joined body as "[object Object]" — one corrupted
-      // paragraph in the middle of otherwise-good prose. Refuse the whole field
-      // instead and let the per-field recovery re-translate it.
-      const joined = joinTranslatedChunks(translated, bodyKey);
       if (joined === null) {
         console.error(`  ⚠️  ${lang}:${bodyKey} — almeno un chunk non è una stringa, campo scartato: recupero per-campo downstream`);
         return {};
@@ -9481,15 +9509,35 @@ ${terminologyByLang[targetLang] || ''}`;
       if (!isTruncated) continue;
       const itValue = itContent[field];
       console.error(`  ⚠️  Traduzione ${field} (${locale}) troncata — retry traduzione mirata...`);
-      try {
-        const parsed = await callWithRetry(
-          `Traduci OBBLIGATORIAMENTE in ${langName} il seguente campo per il sito Frontaliere Ticino. `
+      const buildRetryPrompt = (chunkText, i, total) => {
+        const partLabel = total > 1 ? `, parte ${i + 1} di ${total}` : '';
+        return `Traduci OBBLIGATORIAMENTE in ${langName} il seguente campo per il sito Frontaliere Ticino. `
           + `La traduzione deve essere COMPLETA fino all'ultima frase: non troncare, non interrompere a metà periodo. `
-          + `Rispondi SOLO con JSON (no markdown):\n\nCAMPO ITALIANO (${field}):\n${itValue}\n\nFormato risposta: {"${field}": "..."}`,
-          Math.max(5000, Math.ceil(countWords(itValue || '') * 5)),
-          `${locale}:${field}-truncation-retry`,
-        );
-        const retried = translatedStringOrNull(parsed?.[field]);
+          + `Rispondi SOLO con JSON (no markdown):\n\nCAMPO ITALIANO (${field}${partLabel}):\n${chunkText}\n\nFormato risposta: {"${field}": "..."}`;
+      };
+      try {
+        let retried;
+        if (countWords(itValue || '') > TRANSLATION_CHUNK_THRESHOLD) {
+          // A single-prompt retry on an oversized field can hit the model's
+          // own output cap and come back truncated again — the exact failure
+          // this retry exists to fix, just relocated to the retry call
+          // instead of the original translation (#688). Reuse the same
+          // sub-chunking translateBodyField uses for the initial translation.
+          console.error(`    📦 ${locale}:${field} = ${countWords(itValue)} parole → sub-chunking retry...`);
+          retried = await translateInChunks(
+            itValue,
+            field,
+            buildRetryPrompt,
+            `${locale}:${field}-truncation-retry`,
+          );
+        } else {
+          const parsed = await callWithRetry(
+            buildRetryPrompt(itValue, 0, 1),
+            Math.max(5000, Math.ceil(countWords(itValue || '') * 5)),
+            `${locale}:${field}-truncation-retry`,
+          );
+          retried = translatedStringOrNull(parsed?.[field]);
+        }
         if (retried && detectTruncation(retried, { label: `${locale}/${field}` }).length === 0) {
           data.content[locale][field] = sanitizeBodyText(retried);
           console.error(`  ✅ ${field} (${locale}) ritradotto con successo dopo troncamento`);
