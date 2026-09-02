@@ -1,5 +1,4 @@
 {
-  "https://www.tio.ch/ticino/attualita/1942653/cinema-finanziamento-aumento-festival-ssr": "lindustriaaudiovisivaisundersoppressione",
   "https://www.rsi.ch/s/3934878": "siccita-foraggio-nasce-borsa-online",
   "https://www.tio.ch/ticino/politica/1942871/a2-ancora-al-collasso-il-ticino-non-puo-essere-ostaggio-del-traffico-di-transito": "a2-ancora-al-collasso",
   "https://www.tio.ch/ticino/attualita/1942925/lavori-settembre-interscambio-nodo-entrano-fase": "nodo-di-interscambio-lavori-settembre",
@@ -1565,6 +1564,11 @@
   "https://www.admin.ch/it/newnsb/qehxviifpjad": {
     "articleId": "voto-elettronico-neuchatel-2028",
     "ts": "2026-09-02T09:15:51.327Z",
+    "keyForm": 2
+  },
+  "https://www.admin.ch/it/newnsb/hbmvdm0uldvu": {
+    "articleId": "lpp-fondi-libero-passaggio-tesoreria",
+    "ts": "2026-09-02T09:26:14.504Z",
     "keyForm": 2
   }
 }
