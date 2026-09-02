@@ -24,9 +24,12 @@
  * La review (#723) chiedeva di verificare la collisione contro il corpus
  * reale, non solo argomentarla. Misurato qui su tutti gli annunci raccolti
  * (`data/jobs/by-crawler` + `data/jobs/expired/by-crawler`, ~55k record):
- * 173 record fanno scattare il trigger `frontalier`, e ZERO di questi
- * nominano anche vocabolario reale di guardia di confine/dogana nello stesso
- * record. Il rischio segnalato dal reviewer come "basso" e' quindi verificato
+ * 172 record fanno scattare il trigger `frontalier` (flatten ricorsivo su
+ * `requirementsByLocale`, che e' un array per locale e non una stringa —
+ * un filtro piatto lo scartava silenziosamente, vedi `jobSearchableText`),
+ * e ZERO di questi nominano anche vocabolario reale di guardia di
+ * confine/dogana nello stesso record. Il rischio segnalato dal reviewer
+ * come "basso" e' quindi verificato
  * vero sul corpus attuale — questo test lo rende un invariante testato, non
  * un'assunzione in un commento: se un futuro crawl introduce quella
  * coesistenza, questo gate lo scopre prima che la correzione parta silenziosa
@@ -62,13 +65,15 @@ function jobDirs() {
 // human wouldn't call "the same sentence").
 const TEXT_FIELDS = ['title', 'titleByLocale', 'description', 'descriptionByLocale', 'requirements', 'requirementsByLocale'];
 
+function collectStrings(value, parts) {
+  if (typeof value === 'string') parts.push(value);
+  else if (Array.isArray(value)) for (const v of value) collectStrings(v, parts);
+  else if (value && typeof value === 'object') for (const v of Object.values(value)) collectStrings(v, parts);
+}
+
 function jobSearchableText(job) {
   const parts = [];
-  for (const field of TEXT_FIELDS) {
-    const value = job[field];
-    if (typeof value === 'string') parts.push(value);
-    else if (value && typeof value === 'object') parts.push(...Object.values(value).filter((v) => typeof v === 'string'));
-  }
+  for (const field of TEXT_FIELDS) collectStrings(job[field], parts);
   return parts.join('\n');
 }
 
