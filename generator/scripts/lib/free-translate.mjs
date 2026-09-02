@@ -23,6 +23,12 @@
 import { translateWithMyMemory } from './mymemory-translate.mjs';
 import { finalizeTranslatedText, maskProtectedTokens } from './translation-glossary.mjs';
 import { translateWithLocalOpusMt, localOpusMtEnabled } from './local-opus-mt.mjs';
+import {
+  extractOAuthErrorReason,
+  isRetryableTokenExchangeStatus,
+  TOKEN_EXCHANGE_ATTEMPTS,
+  TOKEN_EXCHANGE_TIMEOUT_MS,
+} from './google-service-account-token.mjs';
 
 // ── Config ──────────────────────────────────────────────────────────────────
 // DeepL: support multiple API keys with automatic rotation on quota exhaustion.
@@ -770,27 +776,57 @@ async function translateWithAzure(text, sourceLang, targetLang) {
 
 // ── Google Cloud Translation (official API, 500K free/month) ───────────────
 
-/** Exchange OAuth2 refresh token for a short-lived access token. */
+/**
+ * Exchange OAuth2 refresh token for a short-lived access token.
+ *
+ * Retries 429/5xx and a 403 carrying a recognized OAuth quota error, using
+ * the same classifier as the sibling JWT-bearer exchange in
+ * `exchangeAssertionForToken` (lib/google-service-account-token.mjs, #701):
+ * this call hits the identical `oauth2.googleapis.com/token` endpoint with
+ * the identical RFC 6749 error shape, just a different `grant_type`
+ * (`refresh_token` vs `urn:ietf:params:oauth:grant-type:jwt-bearer`) — a
+ * transient 403-quota here is the same failure class, not a different one
+ * (#730, follow-up to #701). A non-retryable failure still returns `''`
+ * rather than throwing, matching the pre-#730 contract: the caller
+ * (`translateWithGoogleCloud`) falls through to the next cascade tier either
+ * way, and this is one tier among ten, not the sole credential path.
+ */
 async function _getGoogleCloudAccessToken() {
   if (_gcOAuth.accessToken && Date.now() < _gcOAuth.expiresAt - 60_000) {
     return _gcOAuth.accessToken;
   }
-  const res = await fetch('https://oauth2.googleapis.com/token', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    body: new URLSearchParams({
-      client_id: _gcOAuth.clientId,
-      client_secret: _gcOAuth.clientSecret,
-      refresh_token: _gcOAuth.refreshToken,
-      grant_type: 'refresh_token',
-    }),
-    signal: AbortSignal.timeout(TIMEOUT_MS),
-  });
-  if (!res.ok) return '';
-  const data = await res.json();
-  _gcOAuth.accessToken = data.access_token || '';
-  _gcOAuth.expiresAt = Date.now() + (data.expires_in || 3600) * 1000;
-  return _gcOAuth.accessToken;
+  for (let attempt = 1; attempt <= TOKEN_EXCHANGE_ATTEMPTS; attempt++) {
+    let res;
+    try {
+      res = await fetch('https://oauth2.googleapis.com/token', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams({
+          client_id: _gcOAuth.clientId,
+          client_secret: _gcOAuth.clientSecret,
+          refresh_token: _gcOAuth.refreshToken,
+          grant_type: 'refresh_token',
+        }),
+        signal: AbortSignal.timeout(TOKEN_EXCHANGE_TIMEOUT_MS),
+      });
+    } catch {
+      // Timeout or a bare network failure (DNS/TLS/connection reset) — both
+      // transient, same reasoning as exchangeAssertionForToken (#247).
+      if (attempt < TOKEN_EXCHANGE_ATTEMPTS) await delay(1000 * 2 ** (attempt - 1));
+      continue;
+    }
+    if (res.ok) {
+      const data = await res.json();
+      _gcOAuth.accessToken = data.access_token || '';
+      _gcOAuth.expiresAt = Date.now() + (data.expires_in || 3600) * 1000;
+      return _gcOAuth.accessToken;
+    }
+    const text = await res.text().catch(() => '');
+    const reason = extractOAuthErrorReason(text);
+    if (!isRetryableTokenExchangeStatus(res.status, reason)) return '';
+    if (attempt < TOKEN_EXCHANGE_ATTEMPTS) await delay(1000 * 2 ** (attempt - 1));
+  }
+  return '';
 }
 
 async function translateWithGoogleCloud(text, sourceLang, targetLang) {

@@ -97,7 +97,9 @@ export function isRetryableTokenExchangeStatus(status, reason) {
 // same backoff formula, same credential chain, so a per-minute quota
 // rejection on this hop needs the same ~63s retry budget to reach the next
 // quota window instead of exhausting itself inside the one already spent.
-const TOKEN_EXCHANGE_ATTEMPTS = 7;
+// Exported so free-translate.mjs's own oauth2.googleapis.com/token exchange
+// (#730) shares the attempt count instead of pinning its own copy.
+export const TOKEN_EXCHANGE_ATTEMPTS = 7;
 
 // Wall-clock cap per attempt (follow-up #199 to #173/#198): neither `fetch`
 // call here nor its sibling in load-rc-env.mjs's `fetchTemplateViaRest` had
