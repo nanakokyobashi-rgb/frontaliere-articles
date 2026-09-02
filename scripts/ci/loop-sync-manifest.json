@@ -1436,9 +1436,9 @@
       "path": "scripts/lib/shard-git-helpers.sh",
       "mode": "identical",
       "baseline": {
-        "site": "d8e87c84a4c2b386",
-        "corpus": "d8e87c84a4c2b386",
-        "alignedAt": "2026-08-09"
+        "site": "21b8d26ccab4b107",
+        "corpus": "21b8d26ccab4b107",
+        "alignedAt": "2026-09-01"
       }
     },
     {
