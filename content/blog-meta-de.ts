@@ -11123,6 +11123,18 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.la-frontiera-fiscale-tra-italia-e-svizzera-nella-circolazione-delle-opere-darte.title': 'Steuergrenze Kunstwerke: IVA, Konfiskation, Verhältnismäßigkeit',
     'blog.article.la-frontiera-fiscale-tra-italia-e-svizzera-nella-circolazione-delle-opere-darte.excerpt': 'Die Steuergrenze zwischen Italien und der Schweiz im Umlauf von Kunstwerken: Einfuhr-MwSt, Beschlagnahmung und Verhältnismäßigkeit nach dem Verfassungsgericht Nr. 93/2025',
     'blog.article.la-frontiera-fiscale-tra-italia-e-svizzera-nella-circolazione-delle-opere-darte.imageAlt': 'Redaktionelles Bild zu: La frontiera fiscale tra Italia e Svizzera nella circolazione delle opere d’arte: IVA all’importazione, confisca e proporzionalità dopo Corte cost. n. 93/2025 e Cass. civ., Sez. Unite, ord. n. 24764/2026',
+    'blog.article.vivere-ternate-lavorare-ticino-frontaliere.title': 'Wohnen in Ternate und Arbeiten im Tessin als Grenzgänger',
+    'blog.article.vivere-ternate-lavorare-ticino-frontaliere.excerpt': 'Entdecken Sie die Verbindungen, die Reisezeiten, die Lebenshaltungskosten sowie die Vor- und Nachteile des Transfers.',
+    'blog.article.vivere-ternate-lavorare-ticino-frontaliere.imageAlt': 'Panoramablick auf den Luganersee',
+    'blog.article.besnate-lavorare-ticino-frontaliere.title': 'Leben in Besnate und Arbeiten im Tessin: als Grenzgänger',
+    'blog.article.besnate-lavorare-ticino-frontaliere.excerpt': 'Wie funktioniert die Besteuerung, die Rechte und die praktische Organisation für diejenigen, die in Besnate leben und als Grenzgänger im Tessin arbeiten.',
+    'blog.article.besnate-lavorare-ticino-frontaliere.imageAlt': 'Nördliche Tessiner Grenzlandschaft bei Sonnenuntergang, mit Alpenhügeln und italienischen Tälern in der Ferne.',
+    'blog.article.vivere-varano-borghi-lavorare-ticino.title': 'Wohnen in Varano Borghi, Arbeiten im Tessin: Grenzüberschreitendes Fahren',
+    'blog.article.vivere-varano-borghi-lavorare-ticino.excerpt': 'Bewilligung G, Steuern und Verfahren für Grenzgänger, die in Varano Borghi leben und im Kanton Tessin arbeiten.',
+    'blog.article.vivere-varano-borghi-lavorare-ticino.imageAlt': 'Blick auf Grenzübergang Brogeda zwischen der Schweiz und Italien mit Alpenlandschaft.',
+    'blog.article.crodo-frontaliere-guida-pratica.title': 'Crodo: Leitfaden für Grenzgänger, die im Tessin arbeiten',
+    'blog.article.crodo-frontaliere-guida-pratica.excerpt': 'Crodo bietet niedrige Lebenshaltungskosten und schnellen Zugang zu den Tessiner Pässen. Vollständige Anleitung: Bewilligung G, Steuer mit neuer Vereinbarung 2024, AHV/BVG, KVG, Rückerstattungen und praktische Verfahren.',
+    'blog.article.crodo-frontaliere-guida-pratica.imageAlt': 'Alpines Bergland an der Grenze zwischen Piemont und Tessin mit kleiner italienischer Gemeinde im Tal',
 };
 
 export default blogMetaDe;

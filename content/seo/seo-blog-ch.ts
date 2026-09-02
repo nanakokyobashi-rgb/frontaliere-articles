@@ -67139,6 +67139,279 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-franco-euro-minimi-anno': {
+    title: 'Franco svizzero ai minimi rispetto all\'euro: cosa significa per gli investitori',
+    description: 'Il franco svizzero continua a indebolirsi rispetto all\'euro, raggiungendo il minimo da un anno. Scopri le implicazioni per gli investitori. Dati aggiornati 2026',
+    keywords: 'frontalieri, ticino, svizzera, italia, franco, svizzero, minimi, rispetto',
+    ogTitle: 'Franco svizzero ai minimi rispetto all\'euro',
+    ogDescription: 'Il franco svizzero continua a indebolirsi rispetto all\'euro, raggiungendo il minimo da un anno. Scopri le implicazioni per gli investitori e cosa fare per proteggere i tuoi investimenti.',
+    canonicalPath: '/articoli-svizzera/franco-euro-minimi-anno/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Franco svizzero ai minimi rispetto all'euro: cosa significa per gli investitori",
+      "description": "Il franco svizzero continua a indebolirsi rispetto all'euro, raggiungendo il minimo da un anno. Scopri le implicazioni per gli investitori. Dati aggiornati 2026",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/franco-euro-minimi-anno.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista aerea del Lago di Lugano con le Alpi svizzere sullo sfondo"
+      },
+      "datePublished": "2026-09-02T15:41:21+00:00",
+      "dateModified": "2026-09-02T15:41:21+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/franco-euro-minimi-anno/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-estate-calda-svizzera-2026': {
+    title: 'Un\'estate su due sarà più calda di quella attuale',
+    description: 'Secondo il climatologo Reto Knutti, un\'estate su due sarà più calda di quella attuale. Interventi urgenti necessari sulle città. Dati aggiornati 2026',
+    keywords: 'frontalieri, ticino, svizzera, italia, estate, sarà, calda, quella',
+    ogTitle: 'Un\'estate su due sarà più calda di quella attuale',
+    ogDescription: 'Secondo il climatologo Reto Knutti, un\'estate su due sarà più calda di quella attuale. Interventi urgenti necessari sulle città per affrontare il caldo estremo e la siccità.',
+    canonicalPath: '/articoli-svizzera/estate-calda-svizzera-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Un'estate su due sarà più calda di quella attuale",
+      "description": "Secondo il climatologo Reto Knutti, un'estate su due sarà più calda di quella attuale. Interventi urgenti necessari sulle città. Dati aggiornati 2026",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/estate-calda-svizzera-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista aerea di una città svizzera con spazi verdi e edifici moderni, che evidenzia l'impatto del cambiamento climatico."
+      },
+      "datePublished": "2026-09-02T15:49:18+00:00",
+      "dateModified": "2026-09-02T15:49:18+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/estate-calda-svizzera-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-naturalizzazione-canton-sciaffusa-requisiti-procedura': {
+    title: 'Naturalizzazione nel cantone di Sciaffusa: requisiti e procedura',
+    description: 'Scopri i requisiti e la procedura per la naturalizzazione ordinaria nel Cantone di Sciaffusa. Informazioni dettagliate sui test di integrazione e lingua.',
+    keywords: 'frontalieri, ticino, svizzera, italia, naturalizzazione, cantone, sciaffusa, requisiti',
+    ogTitle: 'Naturalizzazione nel Cantone di Sciaffusa: Requisiti e Procedura',
+    ogDescription: 'Scopri i requisiti e la procedura per la naturalizzazione ordinaria nel Cantone di Sciaffusa. Informazioni dettagliate sui test di integrazione e lingua.',
+    canonicalPath: '/articoli-svizzera/naturalizzazione-canton-sciaffusa-requisiti-procedura/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Naturalizzazione nel cantone di Sciaffusa: requisiti e procedura",
+      "description": "Scopri i requisiti e la procedura per la naturalizzazione ordinaria nel Cantone di Sciaffusa. Informazioni dettagliate sui test di integrazione e lingua.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/naturalizzazione-canton-sciaffusa-requisiti-procedura.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista panoramica di Sciaffusa con il fiume Reno"
+      },
+      "datePublished": "2026-09-02T16:29:26+00:00",
+      "dateModified": "2026-09-02T16:29:26+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/naturalizzazione-canton-sciaffusa-requisiti-procedura/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-acquistare-casa-zurigo-mutuo-fondi': {
+    title: 'Comprare casa a Zurigo: mutuo, fondi propri e tasse',
+    description: 'Guida completa all\'acquisto di casa nel Canton Zurigo: mutuo ipotecario, fondi propri richiesti, imposta sui trapassi, spese notarili e procedure federali',
+    keywords: 'frontalieri, ticino, svizzera, italia, comprare, casa, zurigo, mutuo',
+    ogTitle: 'Comprare casa a Zurigo: guida al mutuo e alle imposte',
+    ogDescription: 'Procedura completa per comprare casa nel Canton Zurigo. Scopri come funziona il mutuo ipotecario, quali fondi propri servono, quali sono le imposte sui trapassi, le spese notarili e gli oneri accessori. Checklist pratica e strumenti online',
+    canonicalPath: '/articoli-svizzera/acquistare-casa-zurigo-mutuo-fondi/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Comprare casa a Zurigo: mutuo, fondi propri e tasse",
+      "description": "Guida completa all'acquisto di casa nel Canton Zurigo: mutuo ipotecario, fondi propri richiesti, imposta sui trapassi, spese notarili e procedure federali",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/acquistare-casa-zurigo-mutuo-fondi.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Paesaggio residenziale svizzero con case tradizionali e moderne circondateda giardini verdi"
+      },
+      "datePublished": "2026-09-02T17:14:38+00:00",
+      "dateModified": "2026-09-02T17:14:38+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/acquistare-casa-zurigo-mutuo-fondi/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-aziende-svizzere-semestre-2026': {
+    title: 'Aziende svizzere, risultati semestrali oltre le stime',
+    description: 'Nel primo semestre, 24 su 30 società SLI hanno superato le aspettative di mercato. Stime profitti 2026 riviste al +18% per investimenti in intelligenza',
+    keywords: 'frontalieri, ticino, svizzera, italia, aziende, svizzere, risultati, semestrali',
+    ogTitle: 'Aziende svizzere, risultati oltre le stime del primo semestre',
+    ogDescription: '24 su 30 società SLI hanno superato stime nel primo semestre, con stime profitti 2026 riviste al +18%. Investimenti in IA e domanda industriale forte trainano crescita. Scopri l\'impatto su LPP/BVG e cosa fare come investitore in Svizzera.',
+    canonicalPath: '/articoli-svizzera/aziende-svizzere-semestre-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Aziende svizzere, risultati semestrali oltre le stime",
+      "description": "Nel primo semestre, 24 su 30 società SLI hanno superato le aspettative di mercato. Stime profitti 2026 riviste al +18% per investimenti in intelligenza",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/aziende-svizzere-semestre-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Borsa svizzera: professionisti analizzano dati finanziari di aziende quotate negli indici SLI e SMI"
+      },
+      "datePublished": "2026-09-02T17:30:06+00:00",
+      "dateModified": "2026-09-02T17:30:06+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/aziende-svizzere-semestre-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-abbonamenti-trasporti-sciaffusa-tariffe': {
+    title: 'Abbonamenti trasporti Sciaffusa: zone e tariffe',
+    description: 'Guida agli abbonamenti trasporti pubblici cantone Sciaffusa: comunità tariffaria, abbonamenti mensili/annuali, metà-prezzo, GA e sconti studenti.',
+    keywords: 'frontalieri, ticino, svizzera, italia, abbonamenti, trasporti, sciaffusa, zone',
+    ogTitle: 'Abbonamenti trasporti Sciaffusa: zone e tariffe',
+    ogDescription: 'Scopri come scegliere l\'abbonamento giusto per i trasporti pubblici nel cantone Sciaffusa: abbonamenti mensili e annuali, metà-prezzo nazionale, GA illimitato e sconti per studenti e apprendisti. Guida completa a tariffe e procedure.',
+    canonicalPath: '/articoli-svizzera/abbonamenti-trasporti-sciaffusa-tariffe/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Abbonamenti trasporti Sciaffusa: zone e tariffe",
+      "description": "Guida agli abbonamenti trasporti pubblici cantone Sciaffusa: comunità tariffaria, abbonamenti mensili/annuali, metà-prezzo, GA e sconti studenti.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/abbonamenti-trasporti-sciaffusa-tariffe.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Stazione ferroviaria svizzera con cartellonistica di zone tariffarie e informazioni su abbonamenti"
+      },
+      "datePublished": "2026-09-02T18:05:58+00:00",
+      "dateModified": "2026-09-02T18:05:58+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/abbonamenti-trasporti-sciaffusa-tariffe/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-salari-mercato-lavoro-sciaffusa-settori': {
+    title: 'Salari e mercato del lavoro a Sciaffusa | Frontaliere Ticino',
+    description: 'Struttura salariale svizzera per livelli di formazione, contributi previdenziali (AVS/LPP), fiscalità e contratti collettivi. Guida pratica al mercato',
+    keywords: 'frontalieri, ticino, svizzera, italia, salari, mercato, lavoro, sciaffusa',
+    ogTitle: 'Salari e mercato del lavoro a Sciaffusa | Frontaliere Ticino',
+    ogDescription: 'Come funziona il mercato del lavoro svizzero: differenziali salariali per formazione, sistema previdenziale (AVS/LPP), contratti collettivi, salario minimo cantonale. Verifiche pratiche e calcolatore stipendi.',
+    canonicalPath: '/articoli-svizzera/salari-mercato-lavoro-sciaffusa-settori/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Salari e mercato del lavoro a Sciaffusa",
+      "description": "Struttura salariale svizzera per livelli di formazione, contributi previdenziali (AVS/LPP), fiscalità e contratti collettivi. Guida pratica al mercato",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/salari-mercato-lavoro-sciaffusa-settori.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Ambiente di lavoro svizzero con documenti di stipendio, calcolatore e vista sulle Alpi da ufficio moderno"
+      },
+      "datePublished": "2026-09-02T18:39:40+00:00",
+      "dateModified": "2026-09-02T18:39:40+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/salari-mercato-lavoro-sciaffusa-settori/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

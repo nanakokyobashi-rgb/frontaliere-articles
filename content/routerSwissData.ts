@@ -1750,6 +1750,13 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'pa30-autonomia-agricoltori': { it: 'pa30-autonomia-agricoltori', en: 'pa30-farmer-autonomy', de: 'pa30-baeuerliche-autonomie', fr: 'pa30-autonomie-agriculteurs' },
  'novartis-130-ristrutturazione-basilea': { it: 'novartis-130-ristrutturazione-basilea', en: 'novartis-130-restructuring-basel', de: 'novartis-130-umstrukturierung-basel', fr: 'novartis-130-restructuration-bale' },
  'formazione-professionale-tirocinio-zurigo': { it: 'formazione-professionale-tirocinio-zurigo', en: 'vocational-training-apprenticeship-zurich', de: 'berufsausbildung-lehrling-zurich', fr: 'formation-professionnelle-apprentissage-zurich' },
+ 'franco-euro-minimi-anno': { it: 'franco-euro-minimi-anno', en: 'franco-euro-at-minimum-for-a-year', de: 'franco-euro-auf-jahresminimum', fr: 'franco-euro-au-minimum-de-l-annee' },
+ 'estate-calda-svizzera-2026': { it: 'estate-calda-svizzera-2026', en: 'swiss-summer-2026-heatwave', de: 'schweizer-sommer-2026-hitzewelle', fr: 'ete-suisse-2026-vague-de-chaleur' },
+ 'naturalizzazione-canton-sciaffusa-requisiti-procedura': { it: 'naturalizzazione-canton-sciaffusa-requisiti-procedura', en: 'naturalization-canton-schaffhausen-requirements-procedure', de: 'einburgerung-kanton-schaffhausen-voraussetzungen-verfahren', fr: 'naturalisation-canton-schaffhouse-requis-exigences-procedure' },
+ 'acquistare-casa-zurigo-mutuo-fondi': { it: 'acquistare-casa-zurigo-mutuo-fondi', en: 'buy-house-zurich-mortgage-financing', de: 'haus-kaufen-zuerich-hypothek-eigenkapital', fr: 'acheter-maison-zurich-hypotheque-fonds-propres' },
+ 'aziende-svizzere-semestre-2026': { it: 'aziende-svizzere-semestre-2026', en: 'swiss-companies-semester-2026', de: 'schweizer-unternehmen-semester-2026', fr: 'entreprises-suisses-semestre-2026' },
+ 'abbonamenti-trasporti-sciaffusa-tariffe': { it: 'abbonamenti-trasporti-sciaffusa-tariffe', en: 'schaffhausen-transport-passes-zones-fares', de: 'schaffhausen-oeffentliche-verkehrsmittel-abos-zonen', fr: 'schaffhouse-transports-publics-abonnements-zones' },
+ 'salari-mercato-lavoro-sciaffusa-settori': { it: 'salari-mercato-lavoro-sciaffusa-settori', en: 'salaries-labour-market-schaffhausen-sectors', de: 'loehne-arbeitsmarkt-schaffhausen-sektoren', fr: 'salaires-marche-travail-schaffhouse-secteurs' },
 };
 
 export const REVERSE_SWISS: Record<ArticleLocale, Record<string, string>> = (() => {

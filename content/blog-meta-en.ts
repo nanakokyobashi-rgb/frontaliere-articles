@@ -11124,6 +11124,18 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.la-frontiera-fiscale-tra-italia-e-svizzera-nella-circolazione-delle-opere-darte.title': 'Art Tax Border: Italy-Switzerland',
     'blog.article.la-frontiera-fiscale-tra-italia-e-svizzera-nella-circolazione-delle-opere-darte.excerpt': 'The tax frontier between Italy and Switzerland in the circulation of works of art: VAT on importation, confiscation and proportionality after Court cost. n. 93/2025',
     'blog.article.la-frontiera-fiscale-tra-italia-e-svizzera-nella-circolazione-delle-opere-darte.imageAlt': 'Editorial image related to: La frontiera fiscale tra Italia e Svizzera nella circolazione delle opere d’arte: IVA all’importazione, confisca e proporzionalità dopo Corte cost. n. 93/2025 e Cass. civ., Sez. Unite, ord. n. 24764/2026',
+    'blog.article.vivere-ternate-lavorare-ticino-frontaliere.title': 'Living in Ternate and working in Ticino as a border worker',
+    'blog.article.vivere-ternate-lavorare-ticino-frontaliere.excerpt': 'Learn about connections, travel times, cost of living, and the advantages and disadvantages of transferring.',
+    'blog.article.vivere-ternate-lavorare-ticino-frontaliere.imageAlt': 'Panoramic view of Lake Lugano',
+    'blog.article.besnate-lavorare-ticino-frontaliere.title': 'Living in Besnate and working in Ticino: as a border worker',
+    'blog.article.besnate-lavorare-ticino-frontaliere.excerpt': 'How taxation, rights and practical organisation work for those who live in Besnate and work in Ticino as border workers.',
+    'blog.article.besnate-lavorare-ticino-frontaliere.imageAlt': 'Northern Ticino border landscape at sunset, with Alpine hills and Italian valleys in the distance.',
+    'blog.article.vivere-varano-borghi-lavorare-ticino.title': 'Living in Varano Borghi, working in Ticino: border guide',
+    'blog.article.vivere-varano-borghi-lavorare-ticino.excerpt': 'Permit G, taxation and procedure for border workers living in Varano Borghi and working in the Canton of Ticino.',
+    'blog.article.vivere-varano-borghi-lavorare-ticino.imageAlt': 'View of Brogeda border crossing between Switzerland and Italy with Alpine landscape.',
+    'blog.article.crodo-frontaliere-guida-pratica.title': 'Crodo: guide for border workers working in Ticino',
+    'blog.article.crodo-frontaliere-guida-pratica.excerpt': 'Crodo offers low cost of living and quick access to Ticino passes. Complete guide: G permit, tax with new 2024 agreement, AVS/LPP, LAMal, refreshments and practical procedures.',
+    'blog.article.crodo-frontaliere-guida-pratica.imageAlt': 'Alpine mountain landscape at the Piedmont-Ticino border with village nestled in forested valley',
 };
 
 export default blogMetaEn;

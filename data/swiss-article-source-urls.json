@@ -1,7 +1,4 @@
 {
-  "https://www.seco.admin.ch/it/newnsb/yhzhoj7tt8onslbz0nd4p": "condotta-aziendale-responsabile-ocse-assegna-giudizio-positivo",
-  "https://www.seco.admin.ch/it": "seco-dazi-stati-uniti-2026",
-  "https://www.seco.admin.ch/it/newnsb/trdfttbubc7bqcchvympa": "dazi-usa-consiglio-federale-2026",
   "https://www.rsi.ch/s/3941484": "calore-data-center-poco-sfruttato",
   "https://www.seco.admin.ch/it/newnsb/694365w3t5ffzsh9nguou": "fit-partnership-2026",
   "https://www.tio.ch/rubriche/ospite/1943121/anni-piano-clima-emergenza-matteo-buzzi": "piano-energetico-climatico-ticino-sfide",
@@ -1621,6 +1618,21 @@
   "https://www.tio.ch/svizzera/economia/1947576/novartis-posti-lavoro-produzione-campus": {
     "articleId": "novartis-130-ristrutturazione-basilea",
     "ts": "2026-09-02T14:56:07.344Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/franco%3a-scende-ancora-rispetto-all%27euro%2c-ai-minimi-da-un-anno/91993996": {
+    "articleId": "franco-euro-minimi-anno",
+    "ts": "2026-09-02T15:41:21.798Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/attualita/1947572/knutti-caldo-estate-svizzera-siccita-due": {
+    "articleId": "estate-calda-svizzera-2026",
+    "ts": "2026-09-02T15:49:18.915Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/aziende-svizzere-stanno-bene%2c-risultati-semestrali-oltre-le-stime/91995924": {
+    "articleId": "aziende-svizzere-semestre-2026",
+    "ts": "2026-09-02T17:30:06.878Z",
     "keyForm": 2
   }
 }

@@ -11122,9 +11122,21 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.mornago-frontaliere.title': 'Vivere a Mornago, lavorare in Ticino: tassazione e permesso G',
     'blog.article.mornago-frontaliere.excerpt': 'Dal 1° gennaio 2024 il Nuovo Accordo Frontalieri garantisce franchigia €10.000 ai nuovi frontalieri. Scopri tassazione, AVS, LPP e LAMal per chi vive a Mornago e lavora in Ticino.',
     'blog.article.mornago-frontaliere.imageAlt': 'Il confine tra Ticino e Lombardia da Mendrisio verso Mornago, con le colline verdi della provincia di Varese sullo sfondo',
-    'blog.article.la-frontiera-fiscale-tra-italia-e-svizzera-nella-circolazione-delle-opere-darte.title': 'La frontiera fiscale tra Italia e Svizzera nella circolazione delle opere d’arte: IVA all’importazione, confisca e proporzionalità dopo Corte cost. n. 93/2025 e Cass. civ., Sez. Unite, ord. n. 24764/2026',
+    'blog.article.la-frontiera-fiscale-tra-italia-e-svizzera-nella-circolazione-delle-opere-darte.title': 'La frontiera fiscale tra Italia e Svizzera nella circolazione delle opere d’arte',
     'blog.article.la-frontiera-fiscale-tra-italia-e-svizzera-nella-circolazione-delle-opere-darte.excerpt': 'La frontiera fiscale tra Italia e Svizzera nella circolazione delle opere d’arte: IVA all’importazione, confisca e proporzionalità dopo Corte cost. n. 93/2025',
     'blog.article.la-frontiera-fiscale-tra-italia-e-svizzera-nella-circolazione-delle-opere-darte.imageAlt': 'Immagine editoriale relativa a: La frontiera fiscale tra Italia e Svizzera nella circolazione delle opere d’arte: IVA all’importazione, confisca e proporzionalità dopo Corte cost. n. 93/2025 e Cass. civ., Sez. Unite, ord. n. 24764/2026',
+    'blog.article.vivere-ternate-lavorare-ticino-frontaliere.title': 'Vivere a Ternate e lavorare in Ticino da frontaliere',
+    'blog.article.vivere-ternate-lavorare-ticino-frontaliere.excerpt': 'Scopri i collegamenti, i tempi di percorrenza, il costo della vita e i vantaggi e svantaggi del trasferimento.',
+    'blog.article.vivere-ternate-lavorare-ticino-frontaliere.imageAlt': 'Vista panoramica del Lago di Lugano',
+    'blog.article.besnate-lavorare-ticino-frontaliere.title': 'Vivere a Besnate e lavorare in Ticino: come frontaliere',
+    'blog.article.besnate-lavorare-ticino-frontaliere.excerpt': 'Come funziona la fiscalità, i diritti e l\'organizzazione pratica per chi vive a Besnate e lavora in Ticino da frontaliere.',
+    'blog.article.besnate-lavorare-ticino-frontaliere.imageAlt': 'Paesaggio del confine nord del Ticino al tramonto, con colline alpine e valli italiane sullo sfondo.',
+    'blog.article.vivere-varano-borghi-lavorare-ticino.title': 'Vivere a Varano Borghi, lavorare in Ticino: guida frontaliere',
+    'blog.article.vivere-varano-borghi-lavorare-ticino.excerpt': 'Permesso G, fiscalità e procedura per frontalieri che vivono a Varano Borghi e lavorano nel Canton Ticino.',
+    'blog.article.vivere-varano-borghi-lavorare-ticino.imageAlt': 'Veduta del valico di Brogeda tra Ticino e Italia, zona di confine con paesaggio alpino mattutino.',
+    'blog.article.crodo-frontaliere-guida-pratica.title': 'Crodo: guida per frontalieri che lavorano in Ticino',
+    'blog.article.crodo-frontaliere-guida-pratica.excerpt': 'Crodo offre costo della vita basso e accesso rapido ai valichi del Ticino. Guida completa: permesso G, fisco con nuovo accordo 2024, AVS/LPP, LAMal, ristorni e procedure pratiche.',
+    'blog.article.crodo-frontaliere-guida-pratica.imageAlt': 'Paesaggio montano del confine tra Piemonte e Ticino con piccolo paese alpino tra boschi e vallate',
 };
 
 export default blogMetaIt;
