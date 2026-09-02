@@ -1,5 +1,4 @@
 {
-  "https://www.seco.admin.ch/it": "seco-dazi-stati-uniti-2026",
   "https://www.seco.admin.ch/it/newnsb/trdfttbubc7bqcchvympa": "dazi-usa-consiglio-federale-2026",
   "https://www.rsi.ch/s/3941484": "calore-data-center-poco-sfruttato",
   "https://www.seco.admin.ch/it/newnsb/694365w3t5ffzsh9nguou": "fit-partnership-2026",
@@ -1625,6 +1624,11 @@
   "https://www.swissinfo.ch/ita/franco%3a-scende-ancora-rispetto-all%27euro%2c-ai-minimi-da-un-anno/91993996": {
     "articleId": "franco-euro-minimi-anno",
     "ts": "2026-09-02T15:41:21.798Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/attualita/1947572/knutti-caldo-estate-svizzera-siccita-due": {
+    "articleId": "estate-calda-svizzera-2026",
+    "ts": "2026-09-02T15:49:18.915Z",
     "keyForm": 2
   }
 }
