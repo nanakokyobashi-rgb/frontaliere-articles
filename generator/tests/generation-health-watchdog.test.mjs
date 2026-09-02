@@ -31,6 +31,9 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import {
   CONDITIONS,
+  COMMIT_COLLECTION_MAX_MS,
+  COMMIT_COLLECTION_MAX_PAGES,
+  exitCodeForCollectionError,
   IDLE_HOURS,
   OVERSIZE_MIN_MODELS,
   OVERSIZE_MIN_RUNS,
@@ -50,6 +53,7 @@ import {
   TOTAL_REJECTION_MIN_GATE_RUNS,
   TOTAL_REJECTION_RATE,
   collectCorpus,
+  collectCommits,
   evaluateConditions,
   findDuplicateTopicPairs,
   isDegradedOutcome,
@@ -545,6 +549,55 @@ describe('#658 — commit-window-truncated: il blind spot di generation-idle/sec
       log: () => {},
     });
     assert.ok(resolved.includes(verdictFor(healed, 'commit-window-truncated').title));
+  });
+});
+
+describe('#658 — raccolta commit: il cutoff è obbligatorio e fail-closed', () => {
+  const at = (hoursAgo, subject = 'chore: crawler update') =>
+    `${new Date(NOW - hoursAgo * H).toISOString()}\t${subject}`;
+  const pageOf = (count, hoursAgo) => Array.from(
+    { length: count },
+    (_, i) => at(hoursAgo + i / 100, i === 0 ? 'Generate blog article (svizzera)' : undefined),
+  ).join('\n');
+
+  test('legge oltre 500 commit e raggiunge il cutoff di 48h', () => {
+    const pages = new Map([
+      [1, pageOf(100, 1)], [2, pageOf(100, 8)], [3, pageOf(100, 15)],
+      [4, pageOf(100, 22)], [5, pageOf(100, 29)], [6, pageOf(100, 36)],
+      [7, `${pageOf(99, 43)}\n${at(49)}`],
+    ]);
+    const m = collectCommits('owner/repo', 48, { now: () => NOW, fetchPage: (page) => pages.get(page) });
+    assert.equal(m.truncated, false);
+    assert.equal(m.total, 699);
+    assert.equal(m.lastArticleAt, NOW - H);
+  });
+
+  test('esaurimento budget, API e record malformi falliscono duramente con un messaggio stabile', () => {
+    const exhaustive = () => collectCommits('owner/repo', 48, {
+      now: () => NOW,
+      fetchPage: () => pageOf(100, 1),
+    });
+    assert.throws(exhaustive, /commit-window collection failed: page budget exhausted before cutoff/);
+    assert.throws(exhaustive, /commit-window collection failed: page budget exhausted before cutoff/);
+    assert.throws(() => collectCommits('owner/repo', 48, { now: () => NOW, fetchPage: () => null }), /GitHub API unavailable/);
+    assert.throws(() => collectCommits('owner/repo', 48, { now: () => NOW, fetchPage: () => 'not-a-commit' }), /malformed GitHub API record/);
+    assert.throws(() => collectCommits('owner/repo', 48, { now: () => NOW, fetchPage: () => 'invalid-date\tchore' }), /malformed GitHub API timestamp/);
+  });
+
+  test('il budget di tempo è esplicito e non avvia una richiesta dopo la deadline', () => {
+    let calls = 0;
+    let clockCalls = 0;
+    assert.throws(() => collectCommits('owner/repo', 48, {
+      now: () => (clockCalls++ === 0 ? NOW : NOW + COMMIT_COLLECTION_MAX_MS),
+      fetchPage: () => { calls++; return ''; },
+    }), /request-time budget exhausted before cutoff/);
+    assert.equal(calls, 0);
+    assert.ok(COMMIT_COLLECTION_MAX_PAGES >= 8, '755 commit in 47,72h richiedono almeno otto pagine');
+  });
+
+  test('un fallimento della raccolta rende il workflow rosso, gli altri restano soft', () => {
+    assert.equal(exitCodeForCollectionError(new Error('commit-window collection failed: API unavailable')), 1);
+    assert.equal(exitCodeForCollectionError(new Error('un errore non correlato')), 0);
   });
 });
 
