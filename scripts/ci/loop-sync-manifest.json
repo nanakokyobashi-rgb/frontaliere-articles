@@ -623,11 +623,11 @@
     {
       "path": "scripts/lib/classify-issue.mjs",
       "mode": "adapted",
-      "reason": "Superficie del modulo e CLI IDENTICHE al sito — classifyIssue(title,labels) -> {category,autofix,route,fuPrio} — cosi' triage-sweep.mjs e lo YAML del triage restano copiabili. Cambiano solo le categorie: il sito ha crawler/revenue/RPM, qui ci sono publish (l'unica che salta la coda: se publish-api non riparte il sito serve dati vecchi in silenzio), engine (si rompe dietro una CI verde), generation (il grosso del volume, transiente da provider LLM) e ci.",
+      "reason": "Superficie del modulo e CLI IDENTICHE al sito — classifyIssue(title,labels) -> {category,autofix,route,fuPrio} — cosi' triage-sweep.mjs e lo YAML del triage restano copiabili. Cambiano solo le categorie: il sito ha crawler/revenue/RPM, qui ci sono publish (l'unica che salta la coda: se publish-api non riparte il sito serve dati vecchi in silenzio), engine (si rompe dietro una CI verde), generation (il grosso del volume, transiente da provider LLM) e ci. RIALLINEATO 2026-09-02 (corpus-ahead, issue #722): due aggiunte locali dopo la baseline, entrambe `route: 'none'` come `crawler-transient`, nessuna presente sul sito (verificato su raw.githubusercontent.com/valerielinc-ops/frontaliere-si-o-no@main). (1) categoria `backlog` (nanako#28 punto 6, nanako#40): la label vince su qualunque categoria decisa dal titolo perche' una issue-contenitore puo' nominare 'publish' o 'engine' nel corpo senza essere quel guasto; prima l'unico modo di escluderla era `fu-parked`, un uso improprio della label (significa 'parcheggiata dopo troppi tentativi', non 'non e' lavoro per un agente'). (2) assorbimento di `needs-human` (issue #649): se il triage instrada comunque un'issue che porta gia' quella label, il route normale brucerebbe un run del fixer su qualcosa che `needs-human-sweep.yml` ha gia' giudicato non risolvibile in automatico — osservato sul digest dello sweep stesso, rientrato in `agent:fix` lo stesso giorno. Non e' un miglioramento del meccanismo da proporre al sito: entrambe le label (`backlog`, `needs-human`) e i workflow che le gestiscono (`needs-human-sweep.yml`) sono topologia di QUESTO loop, che il sito non ha.",
       "baseline": {
         "site": "04d09fd104293724",
-        "corpus": "c81475da91104f57",
-        "alignedAt": "2026-08-07"
+        "corpus": "0e26068466dd7c25",
+        "alignedAt": "2026-09-02"
       }
     },
     {
