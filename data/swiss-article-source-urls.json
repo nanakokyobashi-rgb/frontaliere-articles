@@ -1,5 +1,4 @@
 {
-  "https://www.tio.ch/dal-mondo/economia/1942414/apollo-easyjet-fondo-miliardi-acquisizione-franchi": "easyjet-apollon-acquisizione",
   "https://www.rsi.ch/s/3936696": "disoccupazione-svizzera-luglio-2026-seco",
   "https://www.rsi.ch/s/3937593": "casse-di-disoccupazione-superati-i-problemi-tecnici",
   "https://www.fiscoetasse.com/new-rassegna-stampa/4371-rimborsi-da-modello-730-il-monte-ritenute-si-amplia-anche-alle-imposte-sostitutive.html": "rimborsi-730-sostituti-imposta",
@@ -1541,6 +1540,11 @@
   "https://www.swissinfo.ch/ita/vendite-auto-nuove-in-calo-in-agosto%2c-quasi-una-su-tre-%c3%a8-elettrica/91988908": {
     "articleId": "vendite-auto-svizzera-agosto-2026",
     "ts": "2026-09-01T21:20:56.815Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/attualita/1947461/ffs-posti-posto-consigli-orario-pendolari-post": {
+    "articleId": "ffs-consigli-posti-sedere-pendolari",
+    "ts": "2026-09-02T07:14:02.922Z",
     "keyForm": 2
   }
 }
