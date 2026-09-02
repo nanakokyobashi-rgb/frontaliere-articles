@@ -17,7 +17,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { isRetryableRcFetchStatus, extractGoogleErrorReason, rcFetchBackoffMs, RC_FETCH_TIMEOUT_MS } from '../scripts/load-rc-env.mjs';
-import { TOKEN_EXCHANGE_TIMEOUT_MS } from '../scripts/lib/google-service-account-token.mjs';
+import { TOKEN_EXCHANGE_TIMEOUT_MS, extractOAuthErrorReason, isRetryableTokenExchangeStatus } from '../scripts/lib/google-service-account-token.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 
@@ -170,4 +170,57 @@ test("fetchJson e getDoc in refresh-daily-brief-data.mjs leggono il body e passa
     assert.match(fnBody, /extractGoogleErrorReason\(bodyText\)/, `${name}: un 403 deve leggere il body per estrarre la reason, non fermarsi allo status`);
     assert.match(fnBody, /isRetryableRcFetchStatus\(res\.status,\s*reason\)/, `${name}: la reason estratta deve raggiungere il classificatore`);
   }
+});
+
+// #693: follow-up a #683/#247. `exchangeAssertionForToken` in
+// lib/google-service-account-token.mjs è il gemello diretto di
+// fetchTemplateViaRest, ma un hop più a monte — l'endpoint OAuth2 di Google
+// (oauth2.googleapis.com/token) usa la forma di errore piatta RFC 6749
+// (`{error, error_description}`), non l'envelope googleapis.com REST che
+// extractGoogleErrorReason parsa, quindi ha bisogno del proprio
+// extractor/classificatore invece di riusare quello della RC fetch su un
+// body di forma diversa.
+test('un 403 "nudo" (nessun error code OAuth riconosciuto) resta NON retryable sul token exchange', () => {
+  assert.equal(isRetryableTokenExchangeStatus(403), false);
+  assert.equal(isRetryableTokenExchangeStatus(403, undefined), false);
+  assert.equal(isRetryableTokenExchangeStatus(403, 'invalid_grant'), false);
+  assert.equal(isRetryableTokenExchangeStatus(403, 'unauthorized_client'), false);
+});
+
+test('un 403 con error code OAuth di quota È retryable sul token exchange — stessa classe di #247', () => {
+  for (const reason of ['rate_limit_exceeded', 'quota_exceeded']) {
+    assert.equal(isRetryableTokenExchangeStatus(403, reason), true, `reason=${reason} deve essere retryable`);
+  }
+});
+
+test('429 e 5xx sono retryable anche sul classificatore del token exchange', () => {
+  assert.equal(isRetryableTokenExchangeStatus(429), true);
+  assert.equal(isRetryableTokenExchangeStatus(500), true);
+  assert.equal(isRetryableTokenExchangeStatus(503), true);
+});
+
+test('4xx diversi da 429/403-quota NON sono retryable sul token exchange', () => {
+  assert.equal(isRetryableTokenExchangeStatus(400), false);
+  assert.equal(isRetryableTokenExchangeStatus(401), false);
+  assert.equal(isRetryableTokenExchangeStatus(404), false);
+});
+
+test('extractOAuthErrorReason legge la forma piatta RFC 6749 ({error, error_description}), non l\'envelope googleapis.com', () => {
+  assert.equal(
+    extractOAuthErrorReason(JSON.stringify({ error: 'rate_limit_exceeded', error_description: 'slow down' })),
+    'rate_limit_exceeded',
+  );
+  assert.equal(extractOAuthErrorReason(JSON.stringify({ error: 'invalid_grant' })), 'invalid_grant');
+  assert.equal(extractOAuthErrorReason('not json'), null);
+  assert.equal(extractOAuthErrorReason('{}'), null);
+  // L'envelope googleapis.com REST (usato da extractGoogleErrorReason) non ha
+  // un campo `error` stringa in cima — deve tornare null, non un match casuale.
+  assert.equal(extractOAuthErrorReason(JSON.stringify({ error: { errors: [{ reason: 'rateLimitExceeded' }] } })), null);
+});
+
+test('exchangeAssertionForToken legge il body e passa la reason OAuth al proprio classificatore prima di ri-lanciare', () => {
+  const src = fs.readFileSync(path.join(ROOT, 'scripts/lib/google-service-account-token.mjs'), 'utf8');
+  const fnBody = src.slice(src.indexOf('export async function exchangeAssertionForToken'));
+  assert.match(fnBody, /extractOAuthErrorReason\(text\)/, 'un 403 deve leggere il body per estrarre il codice errore OAuth, non fermarsi allo status');
+  assert.match(fnBody, /isRetryableTokenExchangeStatus\(res\.status,\s*reason\)/, 'la reason estratta deve raggiungere il classificatore dedicato al token exchange');
 });

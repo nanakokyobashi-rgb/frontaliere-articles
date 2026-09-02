@@ -44,6 +44,55 @@ export function createJwtAssertion(creds, scope) {
   return `${unsigned}.${sign.sign(creds.private_key, 'base64url')}`;
 }
 
+/**
+ * Google's OAuth2 token endpoint (`oauth2.googleapis.com/token`) uses the
+ * flat RFC 6749 error shape (`{error, error_description}`), NOT the
+ * googleapis.com REST envelope (`error.errors[].reason` / `error.status`)
+ * that `extractGoogleErrorReason` in load-rc-env.mjs parses — the two
+ * endpoints are different Google services with different error bodies, so
+ * the same parser does not apply here (follow-up to #683, issue #693).
+ * Returns null on anything that doesn't parse or doesn't carry an `error`
+ * field — callers must treat null as "unknown", not "retryable".
+ */
+export function extractOAuthErrorReason(bodyText) {
+  try {
+    const { error } = JSON.parse(bodyText) ?? {};
+    // RFC 6749 error codes are always a string; the googleapis.com REST
+    // envelope this is NOT parsing puts an object here instead (see
+    // extractGoogleErrorReason in load-rc-env.mjs) — reject that shape
+    // rather than returning it as a truthy-but-wrong "reason".
+    return typeof error === 'string' ? error : null;
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * OAuth error codes documented for Google's authorization server that
+ * signal a transient rate/quota rejection rather than a bad assertion —
+ * distinct from RFC 6749's grant-level codes (`invalid_grant`,
+ * `unauthorized_client`, …), which are never retriable. No production 403 in
+ * this shape has been observed yet on this endpoint (see #693); this set
+ * exists so that if/when one lands, it is classified the same way the
+ * sibling Remote Config 403 already is (#247), instead of the classifier
+ * seeing it for the first time.
+ */
+const QUOTA_TOKEN_EXCHANGE_REASONS = new Set([
+  'rate_limit_exceeded',
+  'quota_exceeded',
+]);
+
+/**
+ * Whether an HTTP status (+ optional parsed OAuth `error` code) from the
+ * token exchange is worth retrying. Same shape as isRetryableRcFetchStatus
+ * in load-rc-env.mjs, adapted to the OAuth2 error vocabulary of this
+ * endpoint rather than the googleapis.com REST one.
+ */
+export function isRetryableTokenExchangeStatus(status, reason) {
+  if (status === 429 || status >= 500) return true;
+  return status === 403 && QUOTA_TOKEN_EXCHANGE_REASONS.has(reason);
+}
+
 // Kept in lockstep with RC_FETCH_ATTEMPTS in load-rc-env.mjs (issue #263):
 // same backoff formula, same credential chain, so a per-minute quota
 // rejection on this hop needs the same ~63s retry budget to reach the next
@@ -62,10 +111,12 @@ export const TOKEN_EXCHANGE_TIMEOUT_MS = 30_000;
 /**
  * Exchange a signed assertion for an access token.
  *
- * Retries 429/5xx: this call sits directly upstream of the Remote Config
- * fetch in load-rc-env.mjs's REST fallback, and a single transient failure
- * here produces the exact same symptom as one in the RC fetch itself — see
- * isRetryableRcFetchStatus in load-rc-env.mjs, which retries the sibling call.
+ * Retries 429/5xx, and a 403 whose body carries a recognized OAuth quota
+ * error (see isRetryableTokenExchangeStatus): this call sits directly
+ * upstream of the Remote Config fetch in load-rc-env.mjs's REST fallback,
+ * and a single transient failure here produces the exact same symptom as
+ * one in the RC fetch itself — see isRetryableRcFetchStatus in
+ * load-rc-env.mjs, which retries the sibling call the same way.
  * @param {string} assertion
  * @returns {Promise<string>} access token
  */
@@ -107,8 +158,12 @@ export async function exchangeAssertionForToken(assertion) {
       return data.access_token;
     }
     const text = await res.text();
-    lastErr = new Error(`OAuth token exchange failed: ${res.status} ${text}`);
-    if (res.status !== 429 && res.status < 500) throw lastErr;
+    // A 403 needs the body to tell a transient quota rejection apart from a
+    // real grant-level rejection (invalid_grant, unauthorized_client, …) —
+    // see isRetryableTokenExchangeStatus above (#693, follow-up to #247/#683).
+    const reason = extractOAuthErrorReason(text);
+    lastErr = new Error(`OAuth token exchange failed: ${res.status}${reason ? ` (${reason})` : ''} ${text}`);
+    if (!isRetryableTokenExchangeStatus(res.status, reason)) throw lastErr;
     if (attempt < TOKEN_EXCHANGE_ATTEMPTS) {
       await new Promise((r) => setTimeout(r, 1000 * 2 ** (attempt - 1)));
     }
