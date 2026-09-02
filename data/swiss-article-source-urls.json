@@ -1,5 +1,4 @@
 {
-  "https://www.laregione.ch/economia/economia/1940645/caldo-salute-ritardi-imprese-canicola": "imprese-edili-svizzere-chiedono-stop-penali",
   "https://www.laregione.ch/svizzera/svizzera/1942782/sottomissione-baume-schneider-protezione-chiede-federale": "elisabeth-baume-schneider-protezione-chimica",
   "https://www.laregione.ch/svizzera/svizzera/1942729/carenza-insegnamento-insegnanti-svizzera-segnali-mostra": "carenza-insegnanti-svizzera",
   "https://www.laregione.ch/economia/economia/1941287/calore-ondate-miliardi-dollari-perdite-produttivita-catastrofi": "catastrofi-naturali-perdite-112-miliardi-dollari",
@@ -1581,6 +1580,11 @@
   "https://www.admin.ch/it/newnsb/egx1xhifgtun": {
     "articleId": "postazione-lavoro-sovranita-digitale",
     "ts": "2026-09-02T10:24:41.647Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/s/4054524": {
+    "articleId": "aiuti-malattie-rare-2025",
+    "ts": "2026-09-02T11:33:45.167Z",
     "keyForm": 2
   }
 }
