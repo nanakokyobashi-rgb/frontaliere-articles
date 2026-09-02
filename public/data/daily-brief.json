@@ -1,31 +1,31 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-01T09:51:13.345Z",
-  "dateIso": "2026-09-01",
+  "generatedAt": "2026-09-02T09:23:07.799Z",
+  "dateIso": "2026-09-02",
   "counts": {
     "availableBlocks": 4,
     "crossings": 141,
     "fuelMunicipalities": 518,
     "exchangePoints": 32,
-    "jobsActive": 25341
+    "jobsActive": 25270
   },
   "blocks": {
     "borderWait": {
       "available": true,
-      "updatedAt": "2026-09-01T09:04:01.520Z",
+      "updatedAt": "2026-09-02T08:18:13.326Z",
       "count": 141,
-      "zeroWaitCount": 106,
+      "zeroWaitCount": 109,
       "worst": {
-        "slug": "ponte-tresa",
-        "name": "Ponte Tresa",
-        "waitMinutes": 33
+        "slug": "chiasso-brogeda",
+        "name": "Chiasso-Brogeda",
+        "waitMinutes": 8
       },
       "crossings": [
         {
-          "slug": "ponte-tresa",
-          "name": "Ponte Tresa",
-          "waitMinutes": 33,
-          "status": "red",
+          "slug": "chiasso-brogeda",
+          "name": "Chiasso-Brogeda",
+          "waitMinutes": 8,
+          "status": "yellow",
           "direction": "Entrambi"
         },
         {
@@ -36,22 +36,15 @@
           "direction": "Entrambi"
         },
         {
+          "slug": "haag-bendern",
+          "name": "Haag-Bendern",
+          "waitMinutes": 3,
+          "status": "green",
+          "direction": "Entrambi"
+        },
+        {
           "slug": "laufenburg-laufenburg-ag",
           "name": "Laufenburg (Baden) – Laufenburg AG",
-          "waitMinutes": 2,
-          "status": "green",
-          "direction": "Entrambi"
-        },
-        {
-          "slug": "rielasingen-worblingen-ramsen-hofenacker",
-          "name": "Rielasingen-Worblingen – Ramsen-Hofenacker",
-          "waitMinutes": 2,
-          "status": "green",
-          "direction": "Entrambi"
-        },
-        {
-          "slug": "st-margrethen-hochst",
-          "name": "St. Margrethen-Höchst",
           "waitMinutes": 2,
           "status": "green",
           "direction": "Entrambi"
@@ -64,9 +57,9 @@
           "direction": "Entrambi"
         },
         {
-          "slug": "waldshut-tiengen-koblenz-ag",
-          "name": "Waldshut-Tiengen – Koblenz AG",
-          "waitMinutes": 2,
+          "slug": "au-lustenau",
+          "name": "Au-Lustenau",
+          "waitMinutes": 1,
           "status": "green",
           "direction": "Entrambi"
         },
@@ -78,8 +71,8 @@
           "direction": "Entrambi"
         },
         {
-          "slug": "basel-weil-am-rhein-freiburgerstrasse",
-          "name": "Basel – Weil am Rhein, Freiburgerstrasse",
+          "slug": "basel-weil-am-rhein-autostrada-a2-a5",
+          "name": "Basel – Weil am Rhein, Autostrada A2/A5",
           "waitMinutes": 1,
           "status": "green",
           "direction": "Entrambi"
@@ -113,13 +106,6 @@
           "direction": "Entrambi"
         },
         {
-          "slug": "chiasso-centro",
-          "name": "Chiasso Centro (Ponte Chiasso)",
-          "waitMinutes": 1,
-          "status": "green",
-          "direction": "Entrambi"
-        },
-        {
           "slug": "chiasso-strada",
           "name": "Chiasso-Strada",
           "waitMinutes": 1,
@@ -129,13 +115,6 @@
         {
           "slug": "ferney-voltaire-grand-saconnex",
           "name": "Ferney-Voltaire / Grand-Saconnex",
-          "waitMinutes": 1,
-          "status": "green",
-          "direction": "Entrambi"
-        },
-        {
-          "slug": "forcola-di-livigno",
-          "name": "Forcola di Livigno",
           "waitMinutes": 1,
           "status": "green",
           "direction": "Entrambi"
@@ -155,29 +134,15 @@
           "direction": "Entrambi"
         },
         {
-          "slug": "haag-bendern",
-          "name": "Haag-Bendern",
-          "waitMinutes": 1,
-          "status": "green",
-          "direction": "Entrambi"
-        },
-        {
           "slug": "inzlingen-riehen",
           "name": "Inzlingen – Riehen",
           "waitMinutes": 1,
           "status": "green",
-          "direction": "IT → CH"
+          "direction": "Entrambi"
         },
         {
           "slug": "konstanz-kreuzlingen",
           "name": "Konstanz – Kreuzlingen",
-          "waitMinutes": 1,
-          "status": "green",
-          "direction": "Entrambi"
-        },
-        {
-          "slug": "konstanz-tagerwilen-autostrada-b33n-a7",
-          "name": "Konstanz – Tägerwilen, Autostrada B33n/A7",
           "waitMinutes": 1,
           "status": "green",
           "direction": "Entrambi"
@@ -204,13 +169,6 @@
           "direction": "Entrambi"
         },
         {
-          "slug": "maslianico-pizzamiglio",
-          "name": "Maslianico-Pizzamiglio",
-          "waitMinutes": 1,
-          "status": "green",
-          "direction": "Entrambi"
-        },
-        {
           "slug": "moillesulaz",
           "name": "Moillesulaz",
           "waitMinutes": 1,
@@ -227,6 +185,13 @@
         {
           "slug": "passo-dello-spluga",
           "name": "Passo dello Spluga (Montespluga)",
+          "waitMinutes": 1,
+          "status": "green",
+          "direction": "Entrambi"
+        },
+        {
+          "slug": "ponte-tresa",
+          "name": "Ponte Tresa",
           "waitMinutes": 1,
           "status": "green",
           "direction": "Entrambi"
@@ -260,8 +225,22 @@
           "direction": "Entrambi"
         },
         {
-          "slug": "stuhlingen-hallau",
-          "name": "Stühlingen – Hallau",
+          "slug": "rielasingen-worblingen-ramsen-hofenacker",
+          "name": "Rielasingen-Worblingen – Ramsen-Hofenacker",
+          "waitMinutes": 1,
+          "status": "green",
+          "direction": "Entrambi"
+        },
+        {
+          "slug": "st-margrethen-hochst",
+          "name": "St. Margrethen-Höchst",
+          "waitMinutes": 1,
+          "status": "green",
+          "direction": "Entrambi"
+        },
+        {
+          "slug": "waldshut-tiengen-koblenz-ag",
+          "name": "Waldshut-Tiengen – Koblenz AG",
           "waitMinutes": 1,
           "status": "green",
           "direction": "Entrambi"
@@ -269,13 +248,6 @@
         {
           "slug": "anieres",
           "name": "Anières",
-          "waitMinutes": 0,
-          "status": "green",
-          "direction": "Entrambi"
-        },
-        {
-          "slug": "au-lustenau",
-          "name": "Au-Lustenau",
           "waitMinutes": 0,
           "status": "green",
           "direction": "Entrambi"
@@ -295,8 +267,8 @@
           "direction": "Entrambi"
         },
         {
-          "slug": "basel-weil-am-rhein-autostrada-a2-a5",
-          "name": "Basel – Weil am Rhein, Autostrada A2/A5",
+          "slug": "basel-weil-am-rhein-freiburgerstrasse",
+          "name": "Basel – Weil am Rhein, Freiburgerstrasse",
           "waitMinutes": 0,
           "status": "green",
           "direction": "Entrambi"
@@ -397,7 +369,7 @@
           "name": "Büsingen am Hochrhein – Schaffhausen, Rheinhaldenstrasse",
           "waitMinutes": 0,
           "status": "green",
-          "direction": "IT → CH"
+          "direction": "Entrambi"
         },
         {
           "slug": "busingen-am-hochrhein-schaffhausen-vogelingasschen",
@@ -428,8 +400,8 @@
           "direction": "Entrambi"
         },
         {
-          "slug": "chiasso-brogeda",
-          "name": "Chiasso-Brogeda",
+          "slug": "chiasso-centro",
+          "name": "Chiasso Centro (Ponte Chiasso)",
           "waitMinutes": 0,
           "status": "green",
           "direction": "Entrambi"
@@ -540,6 +512,13 @@
           "direction": "Entrambi"
         },
         {
+          "slug": "forcola-di-livigno",
+          "name": "Forcola di Livigno",
+          "waitMinutes": 0,
+          "status": "green",
+          "direction": "Entrambi"
+        },
+        {
           "slug": "gailingen-am-hochrhein-dorflingen",
           "name": "Gailingen am Hochrhein – Dörflingen",
           "waitMinutes": 0,
@@ -551,7 +530,7 @@
           "name": "Gailingen am Hochrhein – Ramsen SH",
           "waitMinutes": 0,
           "status": "green",
-          "direction": "IT → CH"
+          "direction": "Entrambi"
         },
         {
           "slug": "giogo-di-santa-maria",
@@ -579,14 +558,14 @@
           "name": "Gottmadingen – Thayngen, Autostrada A81/A4",
           "waitMinutes": 0,
           "status": "green",
-          "direction": "IT → CH"
+          "direction": "Entrambi"
         },
         {
           "slug": "gottmadingen-thayngen-ebringerstrasse",
           "name": "Gottmadingen – Thayngen, Ebringerstrasse",
           "waitMinutes": 0,
           "status": "green",
-          "direction": "IT → CH"
+          "direction": "Entrambi"
         },
         {
           "slug": "goumois",
@@ -600,7 +579,7 @@
           "name": "Grenzach-Wyhlen – Riehen",
           "waitMinutes": 0,
           "status": "green",
-          "direction": "IT → CH"
+          "direction": "Entrambi"
         },
         {
           "slug": "hermance",
@@ -701,6 +680,13 @@
           "direction": "Entrambi"
         },
         {
+          "slug": "konstanz-tagerwilen-autostrada-b33n-a7",
+          "name": "Konstanz – Tägerwilen, Autostrada B33n/A7",
+          "waitMinutes": 0,
+          "status": "green",
+          "direction": "Entrambi"
+        },
+        {
           "slug": "kriessern-mader",
           "name": "Kriessern-Mäder",
           "waitMinutes": 0,
@@ -792,6 +778,13 @@
           "direction": "Entrambi"
         },
         {
+          "slug": "maslianico-pizzamiglio",
+          "name": "Maslianico-Pizzamiglio",
+          "waitMinutes": 0,
+          "status": "green",
+          "direction": "Entrambi"
+        },
+        {
           "slug": "merishausen-tengen",
           "name": "Merishausen – Tengen",
           "waitMinutes": 0,
@@ -831,7 +824,7 @@
           "name": "Opfertshofen – Tengen",
           "waitMinutes": 0,
           "status": "green",
-          "direction": "IT → CH"
+          "direction": "Entrambi"
         },
         {
           "slug": "perly",
@@ -852,7 +845,7 @@
           "name": "Ramsen-Moskau – Rielasingen-Worblingen",
           "waitMinutes": 0,
           "status": "green",
-          "direction": "IT → CH"
+          "direction": "Entrambi"
         },
         {
           "slug": "rheineck-gai-au",
@@ -939,6 +932,13 @@
           "direction": "Entrambi"
         },
         {
+          "slug": "stuhlingen-hallau",
+          "name": "Stühlingen – Hallau",
+          "waitMinutes": 0,
+          "status": "green",
+          "direction": "Entrambi"
+        },
+        {
           "slug": "stuhlingen-schleitheim",
           "name": "Stühlingen – Schleitheim",
           "waitMinutes": 0,
@@ -1012,11 +1012,11 @@
     },
     "fuel": {
       "available": true,
-      "generatedAt": "2026-09-01T06:47:28.277Z",
+      "generatedAt": "2026-09-02T06:25:34.724Z",
       "municipalityCount": 518,
-      "cheaperItalyCount": 77,
-      "cheaperSwissCount": 65,
-      "tieCount": 4,
+      "cheaperItalyCount": 67,
+      "cheaperSwissCount": 67,
+      "tieCount": 11,
       "cheapestItaly": [
         {
           "municipality": "Livigno",
@@ -1051,60 +1051,60 @@
       ],
       "bestSavings": [
         {
+          "municipality": "Domaso",
+          "province": "CO",
+          "cheaperCountry": "IT",
+          "italyPriceEur": 1.999,
+          "swissPriceEur": 2.544,
+          "swissPriceChf": 2.39,
+          "saving50LEur": 27.25
+        },
+        {
           "municipality": "Livigno",
           "province": "SO",
           "cheaperCountry": "IT",
           "italyPriceEur": 1.528,
-          "swissPriceEur": 2.069,
+          "swissPriceEur": 2.065,
           "swissPriceChf": 1.94,
-          "saving50LEur": 27.05
+          "saving50LEur": 26.85
         },
         {
-          "municipality": "Aprica",
-          "province": "SO",
+          "municipality": "Dongo",
+          "province": "CO",
           "cheaperCountry": "IT",
-          "italyPriceEur": 1.919,
-          "swissPriceEur": 2.112,
-          "swissPriceChf": 1.98,
-          "saving50LEur": 9.65
-        },
-        {
-          "municipality": "Premeno",
-          "province": "VB",
-          "cheaperCountry": "CH",
-          "italyPriceEur": 2.088,
-          "swissPriceEur": 1.92,
-          "swissPriceChf": 1.8,
-          "saving50LEur": 8.4
+          "italyPriceEur": 2.079,
+          "swissPriceEur": 2.544,
+          "swissPriceChf": 2.39,
+          "saving50LEur": 23.25
         }
       ],
       "cheapestSwissStation": {
         "name": "SOCAR Samnaun",
         "sp95PriceChf": 1.38,
-        "sp95PriceEur": 1.472,
+        "sp95PriceEur": 1.469,
         "nearestMunicipality": "Curon Venosta (BZ)"
       }
     },
     "exchange": {
       "available": true,
-      "rate": 1.0668,
-      "lastDate": "2026-08-31",
-      "prevRate": 1.0663,
-      "prevDate": "2026-08-30",
-      "delta1d": 0.0005,
-      "rate7dAgo": 1.0684,
-      "delta7d": -0.0016,
+      "rate": 1.0657,
+      "lastDate": "2026-09-01",
+      "prevRate": 1.0667,
+      "prevDate": "2026-08-31",
+      "delta1d": -0.001,
+      "rate7dAgo": 1.0679,
+      "delta7d": -0.0022,
       "source": "frankfurter",
       "pointCount": 32
     },
     "jobs": {
       "available": true,
-      "generatedAt": "2026-09-01T06:48:18.470Z",
-      "activeJobs": 25341,
+      "generatedAt": "2026-09-02T07:31:26.677Z",
+      "activeJobs": 25270,
       "activeCompanies": 841,
-      "todayAdded": 4821,
-      "yesterdayAdded": 115,
-      "last7dAdded": 10839
+      "todayAdded": 249,
+      "yesterdayAdded": 5982,
+      "last7dAdded": 10998
     }
   }
 }
