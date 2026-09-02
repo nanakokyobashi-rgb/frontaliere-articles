@@ -31,7 +31,7 @@
  */
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { classify } from '../../scripts/ci/loop-drift-check.mjs';
+import { classify, scalarFingerprintVerdict } from '../../scripts/ci/loop-drift-check.mjs';
 
 const BASE = { site: null, corpus: null };
 
@@ -107,4 +107,40 @@ test('importare il modulo non esegue loop-drift-check: nessun fetch, nessun proc
   // con process.exit() prima ancora di arrivare a questa riga. Se questo file
   // e' arrivato fin qui verde, la guardia c'e'.
   assert.equal(typeof classify, 'function');
+});
+
+const FINGERPRINT = { version: 1, scalarFields: 21, sha256: 'a'.repeat(64) };
+const FINGERPRINT_ENTRY = {
+  scalarFingerprint: {
+    sitePath: 'tests/articles-shell-contract-fingerprint.json',
+    corpusPath: 'host/shell-contract-fingerprint.json',
+    scalarFields: 21,
+    sha256: 'a'.repeat(64),
+  },
+};
+
+test('fingerprint scalare invariata assolve un sorgente adapted cambiato fuori contratto', () => {
+  const verdict = scalarFingerprintVerdict(FINGERPRINT_ENTRY, { site: JSON.stringify(FINGERPRINT), corpus: JSON.stringify(FINGERPRINT) });
+  assert.deepEqual(verdict, { checked: true, valid: true, matches: true });
+});
+
+test('fingerprint scalare diversa resta site-ahead, mai stable', () => {
+  const verdict = scalarFingerprintVerdict(FINGERPRINT_ENTRY, {
+    site: JSON.stringify({ ...FINGERPRINT, sha256: 'b'.repeat(64) }),
+    corpus: JSON.stringify(FINGERPRINT),
+  });
+  assert.equal(verdict.valid, true);
+  assert.equal(verdict.matches, false);
+});
+
+test('fingerprint mancante, malformata o incoerente fallisce chiuso', () => {
+  for (const [site, corpus] of [
+    [null, JSON.stringify(FINGERPRINT)],
+    ['{}', JSON.stringify(FINGERPRINT)],
+    [JSON.stringify({ ...FINGERPRINT, sha256: 'b'.repeat(64) }), JSON.stringify({ ...FINGERPRINT, sha256: 'b'.repeat(64) })],
+  ]) {
+    const verdict = scalarFingerprintVerdict(FINGERPRINT_ENTRY, { site, corpus });
+    assert.equal(verdict.valid, false);
+    assert.equal(verdict.matches, false);
+  }
 });

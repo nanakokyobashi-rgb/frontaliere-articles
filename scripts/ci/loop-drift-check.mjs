@@ -185,14 +185,48 @@ function localHash(rel) {
  * raw.githubusercontent basta e non consuma rate-limit autenticato.
  * 404 → null (il file non esiste più là: è un segnale, non un errore).
  */
-async function siteHash(rel) {
+async function siteFile(rel) {
   const url = `https://raw.githubusercontent.com/${SITE_REPO}/${SITE_REF}/${rel}`;
   const headers = { 'User-Agent': 'loop-drift-check' };
   if (process.env.GH_TOKEN) headers.Authorization = `Bearer ${process.env.GH_TOKEN}`;
   const res = await fetch(url, { headers });
   if (res.status === 404) return null;
   if (!res.ok) throw new Error(`GET ${rel} → HTTP ${res.status}`);
-  return sha256(Buffer.from(await res.arrayBuffer()));
+  return Buffer.from(await res.arrayBuffer());
+}
+
+async function siteHash(rel) {
+  const file = await siteFile(rel);
+  return file === null ? null : sha256(file);
+}
+
+function scalarFingerprintVerdict(entry, { site, corpus }) {
+  const spec = entry.scalarFingerprint;
+  if (!spec) return { checked: false, valid: true, matches: true };
+  const parse = (raw, side) => {
+    if (!raw) return { error: `fingerprint ${side} mancante` };
+    try {
+      const value = JSON.parse(Buffer.isBuffer(raw) ? raw.toString('utf8') : raw);
+      if (value?.version !== 1 || !Number.isInteger(value.scalarFields) || value.scalarFields <= 0 || typeof value.sha256 !== 'string' || !/^[a-f0-9]{64}$/.test(value.sha256)) {
+        return { error: `fingerprint ${side} malformata` };
+      }
+      return { value };
+    } catch {
+      return { error: `fingerprint ${side} malformata` };
+    }
+  };
+  const siteParsed = parse(site, 'sito');
+  const corpusParsed = parse(corpus, 'corpus');
+  if (siteParsed.error || corpusParsed.error) return { checked: true, valid: false, matches: false, detail: siteParsed.error || corpusParsed.error };
+  const siteValue = siteParsed.value;
+  const corpusValue = corpusParsed.value;
+  if (siteValue.scalarFields !== corpusValue.scalarFields || siteValue.sha256 !== corpusValue.sha256) {
+    return { checked: true, valid: true, matches: false, detail: 'fingerprint scalare diversa fra sito e corpus' };
+  }
+  if (siteValue.scalarFields !== spec.scalarFields || siteValue.sha256 !== spec.sha256) {
+    return { checked: true, valid: false, matches: false, detail: 'fingerprint scalare incoerente con il digest dichiarato nel manifest' };
+  }
+  return { checked: true, valid: true, matches: true };
 }
 
 /**
@@ -640,7 +674,27 @@ async function main() {
       continue;
     }
 
-    const verdict = classify(entry, now, base);
+    let verdict = classify(entry, now, base);
+    if (entry.scalarFingerprint && (verdict.state === 'stable' || verdict.state === 'site-ahead')) {
+      let fingerprint;
+      try {
+        fingerprint = scalarFingerprintVerdict(entry, {
+          site: await siteFile(entry.scalarFingerprint.sitePath),
+          corpus: fs.existsSync(path.join(ROOT, entry.scalarFingerprint.corpusPath))
+            ? fs.readFileSync(path.join(ROOT, entry.scalarFingerprint.corpusPath))
+            : null,
+        });
+      } catch (e) {
+        fingerprint = { checked: true, valid: false, matches: false, detail: `lettura fingerprint fallita: ${String(e.message || e).slice(0, 120)}` };
+      }
+      if (!fingerprint.valid) {
+        verdict = { state: 'check-failed', actionable: true, headline: 'confronto fingerprint scalare non verificabile', detail: fingerprint.detail };
+      } else if (fingerprint.matches) {
+        verdict = { state: 'stable', actionable: false, headline: 'allineato sul contratto scalare', detail: entry.reason || '' };
+      } else {
+        verdict = { state: 'site-ahead', actionable: true, headline: 'il contratto scalare del sito e andato avanti, qui no', detail: fingerprint.detail };
+      }
+    }
 
     // Issue #148: un file assente da un lato non produce un confronto in
     // `classify()`, quindi una baseline fabbricata (presa da un ramo mai
@@ -849,4 +903,4 @@ if (process.argv[1] && process.argv[1].endsWith('loop-drift-check.mjs')) {
   );
 }
 
-export { classify, ghostVerdict, strandedVerdict, corpusOnlyTwinVerdict, gitBlobSha };
+export { classify, ghostVerdict, strandedVerdict, corpusOnlyTwinVerdict, gitBlobSha, scalarFingerprintVerdict };

@@ -155,11 +155,11 @@
       "path": "scripts/ci/check-quota-backoff.mjs",
       "mode": "adapted",
       "baseline": {
-        "site": "a7f167aabfdd636e",
-        "corpus": "fc8539ea6d2ffaae",
-        "alignedAt": "2026-08-21"
+        "site": "bf224268fbd47bd1",
+        "corpus": "6c032139b592a864",
+        "alignedAt": "2026-09-01"
       },
-      "reason": "Aggiunto QUOTA_BEACON_PEER_REPO: i workflow Claude di questo repo onorano ANCHE il beacon 429 del sito e cedono; il sito non legge mai il nostro. Il 429 e' per-account, quindi un limite visto la' predice il nostro. E' cio' che rende 'il corpus non affama il sito' una proprieta' strutturale invece di una speranza sulla cadenza dei cron. La variabile e' opzionale e non impostata sul sito, quindi lo stesso file resterebbe valido anche la': candidato a risalire (classe corpus-ahead). 2026-08-21: entrambi i lati estesi con QUOTA_LBL_ACTIVE/REQUEUE (stadio decompose) e beacon-scan su entrambe le famiglie di label; resta adapted per il peer-beacon che il sito non ha."
+      "reason": "Aggiunto QUOTA_BEACON_PEER_REPO: i workflow Claude di questo repo onorano ANCHE il beacon 429 del sito e cedono; il sito non legge mai il nostro. Il 429 e' per-account, quindi un limite visto la' predice il nostro. E' cio' che rende 'il corpus non affama il sito' una proprieta' strutturale invece di una speranza sulla cadenza dei cron. La variabile e' opzionale e non impostata sul sito, quindi lo stesso file resterebbe valido anche la': candidato a risalire (classe corpus-ahead). 2026-08-21: entrambi i lati estesi con QUOTA_LBL_ACTIVE/REQUEUE (stadio decompose) e beacon-scan su entrambe le famiglie di label; resta adapted per il peer-beacon che il sito non ha. 2026-09-01: riapplicato sopra l'estensione locale il tetto ISSUE_LIST_LIMIT del sito (commit 5e150325, #6309) — `--limit 100` su `gh issue list` tagliava le issue piu' vecchie in silenzio quando la coda supera 100 voci; ora e' 300, sovrascrivibile via FOLLOWUP_ISSUE_LIST_LIMIT, con un warning quando la vista resta parziale."
     },
     {
       "path": "scripts/ci/check-workflows-scope.mjs",
@@ -259,18 +259,27 @@
       "path": "scripts/ci/pr-autorebase.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "3d66a99ec99d686f",
-        "corpus": "3d66a99ec99d686f",
-        "alignedAt": "2026-08-19"
+        "site": "464127cd97e0964f",
+        "corpus": "464127cd97e0964f",
+        "alignedAt": "2026-09-01"
       }
     },
     {
       "path": "scripts/ci/pr-collision-detector.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "39f60bc6108ce462",
-        "corpus": "39f60bc6108ce462",
-        "alignedAt": "2026-08-08"
+        "site": "835e4ba295e74c5a",
+        "corpus": "835e4ba295e74c5a",
+        "alignedAt": "2026-09-01"
+      }
+    },
+    {
+      "path": "scripts/ci/lib/fetchPrFiles.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "37f39cf4c84fd946",
+        "corpus": "37f39cf4c84fd946",
+        "alignedAt": "2026-09-01"
       }
     },
     {
@@ -331,9 +340,9 @@
       "path": "scripts/lib/pr-body-sections-check.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "d1bef9a16a4152f5",
-        "corpus": "d1bef9a16a4152f5",
-        "alignedAt": "2026-08-23"
+        "site": "bda6dc74ee93671d",
+        "corpus": "bda6dc74ee93671d",
+        "alignedAt": "2026-09-01"
       }
     },
     {
@@ -421,8 +430,8 @@
       "reason": "Il rilevatore di divergenza stesso. Vive qui perche' e' questo il lato che riceve il ciclo; il sito e' la sorgente e non ha bisogno di sorvegliare se stesso.",
       "baseline": {
         "site": null,
-        "corpus": "aba2ea9012e9f48f",
-        "alignedAt": "2026-08-14"
+        "corpus": "88ccdfd728c55fe9",
+        "alignedAt": "2026-09-01"
       }
     },
     {
@@ -489,9 +498,9 @@
       "path": "scripts/ci/close-recovered-failure-issues.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "8d41ac44922f6da9",
-        "corpus": "8d41ac44922f6da9",
-        "alignedAt": "2026-08-22"
+        "site": "a6671b111411316b",
+        "corpus": "a6671b111411316b",
+        "alignedAt": "2026-09-01"
       }
     },
     {
@@ -569,9 +578,9 @@
       "mode": "identical",
       "reason": "Portato lo stadio di decomposizione (sito #6228, byte-identico a origin/main del sito): routing agent:decompose-queued, DECOMPOSE-DRAIN/RESCUE, PARENT-CLOSE, rotazione scan parked-retry, fairness env-gated (env solo nel drainer.yml del sito: qui il blocco e' inerte), rimozione park network-audit.",
       "baseline": {
-        "site": "3bd44bfe8e8f7033",
-        "corpus": "3bd44bfe8e8f7033",
-        "alignedAt": "2026-08-21"
+        "site": "2f9a68733b9cef1d",
+        "corpus": "2f9a68733b9cef1d",
+        "alignedAt": "2026-09-01"
       }
     },
     {
@@ -735,8 +744,8 @@
       "reason": "Fratello di loop-scripts-closure.test.mjs per i riferimenti che NON sono import. Nato dal caso #45: alert-pat-down.mjs e' arrivato qui identical dichiarando che gh-pat-expiry-monitor.yml e' «l'unico punto di chiusura» del suo alert, con quel workflow assente — una issue priority:urgent che niente poteva chiudere, con le voci not-ported a 0 e la CI verde. Stessa forma del SiteShellContract: un contratto senza forma di import non e' coperto dai guard che seguono gli import. Ogni citazione non risolta va DICHIARATA con un kind chiuso e una ragione scritta, perche' l'intento non si indovina dalla prosa (la citazione contrastiva «e' X, non Y» nomina Y proprio per negarlo) — e' lo stesso errore che false-positive-declaration.mjs documenta. Il valore non e' classificare le 29 di oggi ma rendere impossibile aggiungere la 30esima in silenzio.",
       "baseline": {
         "site": null,
-        "corpus": "9405eae07fdbc04f",
-        "alignedAt": "2026-08-14"
+        "corpus": "07cb533c94bb7051",
+        "alignedAt": "2026-09-01"
       }
     },
     {
@@ -805,8 +814,8 @@
       "reason": "Il corpus e' nato con le sole label di default di GitHub: nessuna delle 13 del ciclo esisteva. `gh issue edit --add-label` NON crea la label mancante, fallisce — e nei workflow quel fallimento e' un warning non bloccante, quindi il ciclo sarebbe girato INERTE senza un errore. Il sito non ha questo script perche' le sue label ci sono da sempre; qui e' un prerequisito. Idempotente, girato come primo step di triage e fixer perche' una label cancellata per sbaglio ricreerebbe lo stesso stallo mesi dopo.",
       "baseline": {
         "site": null,
-        "corpus": "ad11637dc288da75",
-        "alignedAt": "2026-08-07"
+        "corpus": "b8a3fec5bc2ba8f5",
+        "alignedAt": "2026-09-01"
       }
     },
     {
@@ -1360,9 +1369,9 @@
       "mode": "identical",
       "reason": "Push con retry usato dai job che scrivono sugli shard. RIALLINEATO il 2026-08-24 (stranded-twin, 5.2gg): il sito aveva aggiunto il flag opt-in `--soft-fail-exhausted` (warn+exit 0 invece di exit 1 su MAX_ATTEMPTS esaurito, per un caller la cui data e' una recomputation a finestra scorrevole che si riprende da sola al giro dopo — vedi issue del sito #5568). Nessun caller di questo repo lo passa ancora, quindi la copia e' comportamentalmente no-op qui finche' non viene adottato. Il file cita esplicitamente issue del SITO (#2988, #4190, #4557, #3809, #4183, #5568): e' un gemello, non un omonimo. Le registrazioni dei merge driver (`known-slugs-shard`, `orphan-enriched-shard`, `ai-cache`, `compat-shard`) puntano a `scripts/ci/merge-*.mjs` che qui non esistono — innocuo: ogni `git config` finisce in `|| true` e nessun `.gitattributes` locale marca quei path, quindi il driver non viene mai invocato. Se un giorno un `.gitattributes` di questo repo marcasse uno di quei path, il driver mancante diventerebbe un guasto: e' l'unica condizione da tenere d'occhio.",
       "baseline": {
-        "site": "e28724127cb24a0f",
-        "corpus": "e28724127cb24a0f",
-        "alignedAt": "2026-08-24"
+        "site": "96f3a1440c3b3463",
+        "corpus": "96f3a1440c3b3463",
+        "alignedAt": "2026-09-01"
       }
     },
     {
@@ -1972,11 +1981,12 @@
     {
       "path": "generator/scripts/lib/llm-json-repair.mjs",
       "sitePath": "scripts/lib/llm-json-repair.mjs",
-      "mode": "identical",
+      "mode": "adapted",
+      "reason": "Un'unica divergenza (issue #679): il commit d904c48c3 (#479, 2026-08-18) ha spostato `repairLlmJson` qui da `create-article.mjs` — motivo dato nell'intestazione del blocco, `create-article.mjs non e' importabile dalle gate del generatore (girano node --test senza npm ci)`, un vincolo di questo repo, non del sito. Il memo fix per lo spin esponenziale (#428) era gia' stato portato su entrambi i lati PRIMA di questa baseline (hash allineato 524dc16b7d1c0911), quindi la divergenza attuale e' solo il trasloco della funzione, non un fix di comportamento mancante al sito.",
       "baseline": {
         "site": "524dc16b7d1c0911",
-        "corpus": "524dc16b7d1c0911",
-        "alignedAt": "2026-08-18"
+        "corpus": "88c317784c0cf492",
+        "alignedAt": "2026-09-01"
       }
     },
     {
@@ -2247,9 +2257,9 @@
       "sitePath": "scripts/lib/translation-glossary.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "e637abb68d4eda7e",
-        "corpus": "e637abb68d4eda7e",
-        "alignedAt": "2026-08-09"
+        "site": "96607fe11ac8a312",
+        "corpus": "96607fe11ac8a312",
+        "alignedAt": "2026-09-01"
       }
     },
     {
@@ -2298,11 +2308,17 @@
       "path": "host/constants.ts",
       "sitePath": "build-plugins/constants.ts",
       "mode": "adapted",
-      "reason": "Costanti del sito che l'engine legge via SiteShellContract. E' un ESTRATTO PER CHIUSURA di `build-plugins/constants.ts` (850 righe la': solo le ~15 dichiarazioni che il contratto raggiunge, 177 righe qui), quindi non potra' mai essere byte-identico e `adapted` e' il mode giusto. La sua intestazione dichiara pero' «These values MUST stay byte-equal to the main repo's» e nomina `host/host-drift.test.mjs` come guardia: **quel file non esiste, ne' qui ne' sul sito** (verificato su entrambi gli alberi git). Finche' non esiste, questa voce di manifest E' la guardia.",
+      "reason": "Costanti del sito che l'engine legge via SiteShellContract. E' un ESTRATTO PER CHIUSURA di `build-plugins/constants.ts` (850 righe la': solo le ~15 dichiarazioni che il contratto raggiunge, 177 righe qui), quindi non potra' mai essere byte-identico e `adapted` e' il mode giusto. Per questa sola entry `scalarFingerprint` confronta i 21 scalari authoritative: cambiamenti del sorgente fuori dalla chiusura restano stable, ma un digest diverso, mancante, malformato o non dichiarato non puo' mai essere stable. I comportamenti del contratto restano coperti dai fingerprint test esistenti; `host/host-drift.test.mjs` non esiste e non e' una guardia.",
       "baseline": {
-        "site": "62e473f867f388d7",
+        "site": "8318a415439ca0d0",
         "corpus": "7c8c22b48ee255aa",
-        "alignedAt": "2026-08-09"
+        "alignedAt": "2026-09-01"
+      },
+      "scalarFingerprint": {
+        "sitePath": "tests/articles-shell-contract-fingerprint.json",
+        "corpusPath": "host/shell-contract-fingerprint.json",
+        "scalarFields": 21,
+        "sha256": "5a25f79cdc8b61052b4f5d1840f7f99b529475d67ea1eaf677ae79ae62dae999"
       }
     },
     {
@@ -2495,9 +2511,9 @@
       "sitePath": "build-plugins/sharedWriteRegistry.ts",
       "mode": "identical",
       "baseline": {
-        "site": "8b993116044fb9f2",
-        "corpus": "8b993116044fb9f2",
-        "alignedAt": "2026-08-09"
+        "site": "a97ed1adc182a002",
+        "corpus": "a97ed1adc182a002",
+        "alignedAt": "2026-08-31"
       }
     },
     {
@@ -2763,9 +2779,9 @@
       "sitePath": ".github/corpus-workflows/crawler-group-01.yml",
       "mode": "identical",
       "baseline": {
-        "site": "c017e1b16dc587fd",
-        "corpus": "c017e1b16dc587fd",
-        "alignedAt": "2026-08-31"
+        "site": "55e4b4de0c3a01ae",
+        "corpus": "55e4b4de0c3a01ae",
+        "alignedAt": "2026-09-01"
       }
     },
     {
@@ -2773,9 +2789,9 @@
       "sitePath": ".github/corpus-workflows/crawler-group-02.yml",
       "mode": "identical",
       "baseline": {
-        "site": "72fb3c1b8a397959",
-        "corpus": "72fb3c1b8a397959",
-        "alignedAt": "2026-08-31"
+        "site": "262c4d2b29f03609",
+        "corpus": "262c4d2b29f03609",
+        "alignedAt": "2026-09-01"
       }
     },
     {
@@ -2783,9 +2799,9 @@
       "sitePath": ".github/corpus-workflows/crawler-group-03.yml",
       "mode": "identical",
       "baseline": {
-        "site": "a529f871c3c26659",
-        "corpus": "a529f871c3c26659",
-        "alignedAt": "2026-08-31"
+        "site": "08c9748f3e58346e",
+        "corpus": "08c9748f3e58346e",
+        "alignedAt": "2026-09-01"
       }
     },
     {
@@ -2793,9 +2809,9 @@
       "sitePath": ".github/corpus-workflows/crawler-group-04.yml",
       "mode": "identical",
       "baseline": {
-        "site": "abf1d214426e19d6",
-        "corpus": "abf1d214426e19d6",
-        "alignedAt": "2026-08-31"
+        "site": "c2b095bd3ff45802",
+        "corpus": "c2b095bd3ff45802",
+        "alignedAt": "2026-09-01"
       }
     },
     {
@@ -2803,9 +2819,9 @@
       "sitePath": ".github/corpus-workflows/crawler-group-05.yml",
       "mode": "identical",
       "baseline": {
-        "site": "924456c39064b3f8",
-        "corpus": "924456c39064b3f8",
-        "alignedAt": "2026-08-31"
+        "site": "23e13ac5f7e8ffda",
+        "corpus": "23e13ac5f7e8ffda",
+        "alignedAt": "2026-09-01"
       }
     },
     {
@@ -2813,9 +2829,9 @@
       "sitePath": ".github/corpus-workflows/crawler-group-06.yml",
       "mode": "identical",
       "baseline": {
-        "site": "7fe4cb38c0f32521",
-        "corpus": "7fe4cb38c0f32521",
-        "alignedAt": "2026-08-31"
+        "site": "53f13f1b57c43f81",
+        "corpus": "53f13f1b57c43f81",
+        "alignedAt": "2026-09-01"
       }
     },
     {
@@ -2823,9 +2839,9 @@
       "sitePath": ".github/corpus-workflows/crawler-group-07.yml",
       "mode": "identical",
       "baseline": {
-        "site": "497cd088902bd4d5",
-        "corpus": "497cd088902bd4d5",
-        "alignedAt": "2026-08-31"
+        "site": "f2da6798e5e3cf63",
+        "corpus": "f2da6798e5e3cf63",
+        "alignedAt": "2026-09-01"
       }
     },
     {
@@ -2833,9 +2849,9 @@
       "sitePath": ".github/corpus-workflows/crawler-group-08.yml",
       "mode": "identical",
       "baseline": {
-        "site": "fbdaa68c67b38a47",
-        "corpus": "fbdaa68c67b38a47",
-        "alignedAt": "2026-08-31"
+        "site": "9d85c5b0af25a194",
+        "corpus": "9d85c5b0af25a194",
+        "alignedAt": "2026-09-01"
       }
     },
     {
@@ -2843,9 +2859,9 @@
       "sitePath": ".github/corpus-workflows/crawler-group-09.yml",
       "mode": "identical",
       "baseline": {
-        "site": "4e185a61ee088c1f",
-        "corpus": "4e185a61ee088c1f",
-        "alignedAt": "2026-08-31"
+        "site": "a6c5041b3db205fe",
+        "corpus": "a6c5041b3db205fe",
+        "alignedAt": "2026-09-01"
       }
     },
     {
@@ -2853,9 +2869,9 @@
       "sitePath": ".github/corpus-workflows/crawler-group-10.yml",
       "mode": "identical",
       "baseline": {
-        "site": "c707ed1ac7c4556f",
-        "corpus": "c707ed1ac7c4556f",
-        "alignedAt": "2026-08-31"
+        "site": "9db823f46085b2a0",
+        "corpus": "9db823f46085b2a0",
+        "alignedAt": "2026-09-01"
       }
     },
     {
@@ -2863,8 +2879,8 @@
       "sitePath": ".github/corpus-workflows/crawler-group-11.yml",
       "mode": "identical",
       "baseline": {
-        "site": "08244c6562cee716",
-        "corpus": "08244c6562cee716",
+        "site": "64009fd11cc92c5e",
+        "corpus": "64009fd11cc92c5e",
         "alignedAt": "2026-09-01"
       }
     },
@@ -2873,9 +2889,9 @@
       "sitePath": ".github/corpus-workflows/crawler-group-12.yml",
       "mode": "identical",
       "baseline": {
-        "site": "3a2caf77fa091e3e",
-        "corpus": "3a2caf77fa091e3e",
-        "alignedAt": "2026-08-31"
+        "site": "6c49c166f2256846",
+        "corpus": "6c49c166f2256846",
+        "alignedAt": "2026-09-01"
       }
     },
     {
@@ -2883,9 +2899,9 @@
       "sitePath": ".github/corpus-workflows/crawler-group-13.yml",
       "mode": "identical",
       "baseline": {
-        "site": "d1319bd9659d6877",
-        "corpus": "d1319bd9659d6877",
-        "alignedAt": "2026-08-31"
+        "site": "b132e11dfe149918",
+        "corpus": "b132e11dfe149918",
+        "alignedAt": "2026-09-01"
       }
     },
     {
@@ -2893,9 +2909,9 @@
       "sitePath": ".github/corpus-workflows/crawler-group-14.yml",
       "mode": "identical",
       "baseline": {
-        "site": "b2da43ed87272c9d",
-        "corpus": "b2da43ed87272c9d",
-        "alignedAt": "2026-08-31"
+        "site": "6b035a25dd4ec12b",
+        "corpus": "6b035a25dd4ec12b",
+        "alignedAt": "2026-09-01"
       }
     },
     {
@@ -2903,9 +2919,9 @@
       "sitePath": ".github/corpus-workflows/crawler-group-15.yml",
       "mode": "identical",
       "baseline": {
-        "site": "ecb5529c6776446a",
-        "corpus": "ecb5529c6776446a",
-        "alignedAt": "2026-08-31"
+        "site": "578f3072dc2938e5",
+        "corpus": "578f3072dc2938e5",
+        "alignedAt": "2026-09-01"
       }
     },
     {
@@ -2913,9 +2929,9 @@
       "sitePath": ".github/corpus-workflows/crawler-group-16.yml",
       "mode": "identical",
       "baseline": {
-        "site": "7c1e4a54ea9b6f4c",
-        "corpus": "7c1e4a54ea9b6f4c",
-        "alignedAt": "2026-08-31"
+        "site": "13e268af2cb493fc",
+        "corpus": "13e268af2cb493fc",
+        "alignedAt": "2026-09-01"
       }
     },
     {
@@ -2923,9 +2939,9 @@
       "sitePath": ".github/corpus-workflows/crawler-group-17.yml",
       "mode": "identical",
       "baseline": {
-        "site": "3500ed42b5407ac1",
-        "corpus": "3500ed42b5407ac1",
-        "alignedAt": "2026-08-31"
+        "site": "d441c1da8486ff0d",
+        "corpus": "d441c1da8486ff0d",
+        "alignedAt": "2026-09-01"
       }
     },
     {
@@ -2933,9 +2949,9 @@
       "sitePath": ".github/corpus-workflows/crawler-group-18.yml",
       "mode": "identical",
       "baseline": {
-        "site": "3aee19b2b1c027e6",
-        "corpus": "3aee19b2b1c027e6",
-        "alignedAt": "2026-09-01"
+        "site": "15a4e838a54162af",
+        "corpus": "15a4e838a54162af",
+        "alignedAt": "2026-09-02"
       }
     },
     {
@@ -2943,9 +2959,9 @@
       "sitePath": ".github/corpus-workflows/crawler-group-19.yml",
       "mode": "identical",
       "baseline": {
-        "site": "422431e811a96bf9",
-        "corpus": "422431e811a96bf9",
-        "alignedAt": "2026-08-31"
+        "site": "94e578e68d01f49f",
+        "corpus": "94e578e68d01f49f",
+        "alignedAt": "2026-09-01"
       }
     },
     {
@@ -2953,9 +2969,9 @@
       "sitePath": ".github/corpus-workflows/crawler-group-20.yml",
       "mode": "identical",
       "baseline": {
-        "site": "782a01a79e2e6632",
-        "corpus": "782a01a79e2e6632",
-        "alignedAt": "2026-08-31"
+        "site": "b4a6d55a47aa292b",
+        "corpus": "b4a6d55a47aa292b",
+        "alignedAt": "2026-09-01"
       }
     },
     {
@@ -2963,9 +2979,9 @@
       "sitePath": ".github/corpus-workflows/crawler-group-21.yml",
       "mode": "identical",
       "baseline": {
-        "site": "a5feb4994082570c",
-        "corpus": "a5feb4994082570c",
-        "alignedAt": "2026-08-31"
+        "site": "2ba55d1970174d20",
+        "corpus": "2ba55d1970174d20",
+        "alignedAt": "2026-09-01"
       }
     },
     {
@@ -2973,9 +2989,9 @@
       "sitePath": ".github/corpus-workflows/crawler-group-22.yml",
       "mode": "identical",
       "baseline": {
-        "site": "88696abe15e15a88",
-        "corpus": "88696abe15e15a88",
-        "alignedAt": "2026-08-31"
+        "site": "d6c114129db19ef2",
+        "corpus": "d6c114129db19ef2",
+        "alignedAt": "2026-09-01"
       }
     },
     {
@@ -2983,9 +2999,9 @@
       "sitePath": ".github/corpus-workflows/crawler-group-23.yml",
       "mode": "identical",
       "baseline": {
-        "site": "797ea29d1280f2e2",
-        "corpus": "797ea29d1280f2e2",
-        "alignedAt": "2026-08-31"
+        "site": "c5b3619c86c4a88f",
+        "corpus": "c5b3619c86c4a88f",
+        "alignedAt": "2026-09-01"
       }
     },
     {
@@ -2993,8 +3009,8 @@
       "sitePath": ".github/corpus-workflows/translate-pending.yml",
       "mode": "identical",
       "baseline": {
-        "site": "aced770b48f52973",
-        "corpus": "aced770b48f52973",
+        "site": "5a9537680bb5fddb",
+        "corpus": "5a9537680bb5fddb",
         "alignedAt": "2026-09-01"
       }
     },
@@ -3003,9 +3019,9 @@
       "sitePath": ".github/corpus-workflows/contract.json",
       "mode": "identical",
       "baseline": {
-        "site": "3e28794b246c5c21",
-        "corpus": "3e28794b246c5c21",
-        "alignedAt": "2026-09-01"
+        "site": "c2c1839f18fd801d",
+        "corpus": "c2c1839f18fd801d",
+        "alignedAt": "2026-09-02"
       }
     },
     {
@@ -3013,9 +3029,9 @@
       "sitePath": ".github/corpus-workflows/observers/generator/tests/crawler-cross-repo-artifacts.test.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "a4b97d593486bd4f",
-        "corpus": "a4b97d593486bd4f",
-        "alignedAt": "2026-08-31"
+        "site": "3f3664844cfd951c",
+        "corpus": "3f3664844cfd951c",
+        "alignedAt": "2026-09-01"
       }
     },
     {
@@ -3023,9 +3039,9 @@
       "sitePath": ".github/corpus-workflows/observers/workflows/crawler-generation-observer-shadow.yml",
       "mode": "identical",
       "baseline": {
-        "site": "7194dcbff3472e1e",
-        "corpus": "7194dcbff3472e1e",
-        "alignedAt": "2026-08-31"
+        "site": "8c57f8228b65aabd",
+        "corpus": "8c57f8228b65aabd",
+        "alignedAt": "2026-09-01"
       }
     },
     {
@@ -3033,9 +3049,9 @@
       "sitePath": ".github/corpus-workflows/observers/scripts/crawler-generation-observer-selector.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "5021d14040bdb6fd",
-        "corpus": "5021d14040bdb6fd",
-        "alignedAt": "2026-08-31"
+        "site": "e113301d2b884cda",
+        "corpus": "e113301d2b884cda",
+        "alignedAt": "2026-09-01"
       }
     },
     {
@@ -3053,9 +3069,9 @@
       "sitePath": ".github/corpus-workflows/observers/scripts/lib/crawler-generation-observer-report.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "69107b2f9ac17860",
-        "corpus": "69107b2f9ac17860",
-        "alignedAt": "2026-08-31"
+        "site": "a4a2bcbae04fd4ee",
+        "corpus": "a4a2bcbae04fd4ee",
+        "alignedAt": "2026-09-01"
       }
     },
     {
@@ -3066,6 +3082,86 @@
         "site": "b3d68540e6125bea",
         "corpus": "b3d68540e6125bea",
         "alignedAt": "2026-08-31"
+      }
+    },
+    {
+      "path": ".github/workflows/translate-queue-recovery-watchdog.yml",
+      "mode": "corpus-only",
+      "reason": "Watchdog corpus-only della coda translate: censisce active/pending con sole GET bounded e separa la copertura storica troncabile. La preservazione rerun schedule e provata da workflow 347680591, run 33550046319, artifact 9817045831, schema v1 e token hash sha256:8f28835373c43bd2c90b532bd294eba56d827e64b979fb38a8924e898fca0c91; lo schedule recovery resta blocked per policy, target dedupe e successor guard non live.",
+      "baseline": {
+        "site": null,
+        "corpus": "e7df4681b16237d6",
+        "alignedAt": "2026-09-01"
+      }
+    },
+    {
+      "path": "scripts/ci/translate-queue-recovery.mjs",
+      "mode": "corpus-only",
+      "reason": "Runtime zero-dependency corpus-only del watchdog translate: censisce la liveness corrente con query status complete, dichiara la copertura bounded della discovery storica ed emette soltanto JSON redatto GET-only con prova schedule verificata ma recovery blocked per policy, target dedupe e successor guard.",
+      "baseline": {
+        "site": null,
+        "corpus": "3989696495f1421d",
+        "alignedAt": "2026-09-01"
+      }
+    },
+    {
+      "path": "generator/tests/translate-queue-recovery.test.mjs",
+      "mode": "corpus-only",
+      "reason": "Contratto Node deterministico corpus-only per watchdog e workflow translate: copre censimento corrente indipendente da oltre 200 run storiche, discovery troncata, budget, prova schedule redatta e assenza by construction di scritture remote.",
+      "baseline": {
+        "site": null,
+        "corpus": "c12eec9e434e0632",
+        "alignedAt": "2026-09-01"
+      }
+    },
+    {
+      "path": ".github/workflows/translate-queue-recovery.yml",
+      "mode": "corpus-only",
+      "reason": "Recovery manuale corpus-only della coda translate: workflow_dispatch osserva per default in target-only e mantiene claim/executor separati; claim_and_rerun resta bloccato prima delle write finche il blob target non attesta dedupe effectively-once e successor guard v1. Lo schedule resta assente per policy anche con preservazione provata.",
+      "baseline": {
+        "site": null,
+        "corpus": "98bd862e092f15e3",
+        "alignedAt": "2026-09-01"
+      }
+    },
+    {
+      "path": "scripts/ci/translate-queue-recovery-claim.mjs",
+      "mode": "corpus-only",
+      "reason": "Planner e claim CAS zero-dependency corpus-only: usa target-only senza discovery storica, riserva il budget per target/ancestry/blob/jobs/guard finali e richiede capability blob-bound con dedupe effectively-once e successor guard v1; empty_at_observation non promette atomicita e il target live v0 resta senza PUT.",
+      "baseline": {
+        "site": null,
+        "corpus": "de213eae0556c476",
+        "alignedAt": "2026-09-01"
+      }
+    },
+    {
+      "path": "scripts/ci/translate-queue-recovery-executor.mjs",
+      "mode": "corpus-only",
+      "reason": "Executor manuale zero-dependency corpus-only: verifica claim, capability dedupe effectively-once, successor guard v1 e nuova liveness target-only sotto il lock translate prima dell'unico endpoint POST testabile; il target live v0 rende il percorso POST irraggiungibile.",
+      "baseline": {
+        "site": null,
+        "corpus": "a01b5a35d86ca688",
+        "alignedAt": "2026-09-01"
+      }
+    },
+    {
+      "path": "generator/tests/translate-queue-recovery-mutation.test.mjs",
+      "mode": "corpus-only",
+      "reason": "Contratto deterministico corpus-only della recovery manuale: copre 201 cancellazioni profonde senza consumare il target-only budget, capability live v0, fixture attestata dedupe effectively-once/successor guard v1, race post-status e post-final-liveness a zero write senza guard, CAS, failure ambiguity e singolo endpoint mutante.",
+      "baseline": {
+        "site": null,
+        "corpus": "bdcc6c58d4009ef8",
+        "alignedAt": "2026-09-01"
+      }
+    },
+    {
+      "path": "scripts/ci/lib/crawler-generation-token.mjs",
+      "sitePath": ".github/corpus-workflows/observers/scripts/lib/crawler-generation-token.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "b3a086d1d9d34ce5",
+        "corpus": "b3a086d1d9d34ce5",
+        "alignedAt": "2026-09-01"
       }
     }
   ]

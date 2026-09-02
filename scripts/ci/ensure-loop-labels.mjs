@@ -61,6 +61,7 @@ export const LABELS = [
   ['decompose-retried', 'e99695', 'Run di decomposizione morta e ri-armata una volta: alla seconda morte fu-parked'],
   ['stale-review', 'f9d0c4', 'Stallo rilevato: la PR non ha segnale a valle'],
   ['collision-risk', 'e99695', 'Modifica file gia toccati da un altra PR aperta'],
+  ['has-conflicts', 'b60205', 'Conflitto reale con main: autorebase sospeso finche il branch non viene risolto'],
   ['needs-human', '7057ff', 'Nessun processo automatico la sbloccherà: serve una mano umana'],
   ['autorebase-reopen-failed', 'b60205', 'close+reopen rotto a meta: NON cancellare l head ref, la PR va riaperta a mano'],
   ['maybe-resolved', 'bfd4f2', 'Il pre-flight la ritiene forse gia risolta: verificare prima di rilanciare il fixer'],

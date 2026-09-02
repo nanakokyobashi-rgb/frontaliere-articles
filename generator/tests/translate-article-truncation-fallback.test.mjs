@@ -48,11 +48,50 @@ function extractTruncationRetryLoop() {
   assert.notEqual(e, -1, 'fine del loop non trovata');
   const block = src.slice(a, e);
   assert.ok(block.includes('detectTruncation'), 'il ritaglio non contiene detectTruncation: anchor sbagliata');
-  assert.ok(block.includes('if (!itValue) {'), 'il ritaglio non contiene la guardia del fix (#686): anchor sbagliata');
+  assert.ok(block.includes('if (!itValue?.trim()) {'), 'il ritaglio non contiene la guardia del fix (#686/#691): anchor sbagliata');
   return block;
 }
 
 const LOOP_SRC = extractTruncationRetryLoop();
+
+/**
+ * Ritaglia il loop missing-field VERBATIM (gemello, simmetrico, del loop di
+ * truncation-retry sopra): stesso antipattern `!itValue`, stesso fix
+ * `!itValue?.trim()` (#691).
+ */
+function extractMissingFieldLoop() {
+  const marker = '`${locale}:${field}-missing-retry`,';
+  const m = src.indexOf(marker);
+  assert.notEqual(m, -1, 'marker non trovato — aggiornare questo test');
+  const startAnchor = "for (const locale of ['en', 'de', 'fr']) {";
+  const a = src.lastIndexOf(startAnchor, m);
+  assert.notEqual(a, -1, 'inizio del loop non trovato');
+  const endAnchor = '\n  // Detect a translated body field cut off mid-sentence';
+  const e = src.indexOf(endAnchor, m);
+  assert.notEqual(e, -1, 'fine del loop non trovata');
+  const block = src.slice(a, e);
+  assert.ok(block.includes('mancante nella traduzione'), 'il ritaglio non contiene il ramo missing-field: anchor sbagliata');
+  assert.ok(block.includes('if (!itValue?.trim()) {'), 'il ritaglio non contiene la guardia del fix (#691): anchor sbagliata');
+  return block;
+}
+
+const MISSING_FIELD_LOOP_SRC = extractMissingFieldLoop();
+
+/**
+ * Esegue il loop missing-field ritagliato, stessa tecnica del loop sopra.
+ * `detectTruncation` di default segnala sempre "pulito": i test che non lo
+ * passano esplicitamente non esercitano il ramo warning IT-esso-stesso-troncato
+ * (#705). `warnings` raccoglie i messaggi di `console.warn` per assert.
+ */
+async function runMissingFieldLoop({ data, itContent, callWithRetry, detectTruncation, warnings = [] }) {
+  const translatedStringOrNull = (v) => (typeof v === 'string' && v.trim() ? v : null);
+  const capturingConsole = { error: () => {}, warn: (msg) => warnings.push(msg) };
+  const fn = new Function(
+    'data', 'itContent', 'callWithRetry', 'translatedStringOrNull', 'detectTruncation', 'console',
+    `return (async () => { ${MISSING_FIELD_LOOP_SRC} })();`,
+  );
+  await fn(data, itContent, callWithRetry, translatedStringOrNull, detectTruncation || (() => []), capturingConsole);
+}
 
 /**
  * Legge `TRANSLATION_CHUNK_THRESHOLD` dal sorgente invece di duplicarlo come
@@ -74,11 +113,11 @@ const TRANSLATION_CHUNK_THRESHOLD = extractTranslationChunkThreshold();
  * `TRANSLATION_CHUNK_THRESHOLD`, `translatedStringOrNull`, `sanitizeBodyText`,
  * `countWords`, `console`).
  */
-async function runTruncationRetryLoop({ data, itContent, detectTruncation, callWithRetry, translateInChunks }) {
+async function runTruncationRetryLoop({ data, itContent, detectTruncation, callWithRetry, translateInChunks, warnings = [] }) {
   const translatedStringOrNull = (v) => (typeof v === 'string' && v.trim() ? v : null);
   const sanitizeBodyText = (v) => v;
   const countWords = (s) => String(s).split(/\s+/).filter(Boolean).length;
-  const silentConsole = { error: () => {}, warn: () => {} };
+  const capturingConsole = { error: () => {}, warn: (msg) => warnings.push(msg) };
   const noopTranslateInChunks = async () => {
     throw new Error('translateInChunks chiamato senza mock — il test non lo aspettava per un campo sotto soglia');
   };
@@ -89,7 +128,7 @@ async function runTruncationRetryLoop({ data, itContent, detectTruncation, callW
   );
   await fn(
     data, itContent, detectTruncation, callWithRetry, translateInChunks || noopTranslateInChunks,
-    TRANSLATION_CHUNK_THRESHOLD, translatedStringOrNull, sanitizeBodyText, countWords, silentConsole,
+    TRANSLATION_CHUNK_THRESHOLD, translatedStringOrNull, sanitizeBodyText, countWords, capturingConsole,
   );
 }
 
@@ -161,6 +200,36 @@ test('itValue >700 parole: il retry usa il sub-chunking di translateBodyField in
   );
 });
 
+test('itValue whitespace-only: il body tradotto troncato NON viene sovrascritto (#691)', async () => {
+  const data = { content: { en: { body1: 'This sentence never ends and' } } };
+  // Un fallback fatto di soli spazi è truthy: senza `.trim()` bypassava il
+  // guard (#691, follow-up a #686/#689).
+  const itContent = { body1: '   ' };
+  const detectTruncation = () => ['incomplete-ending'];
+  const callWithRetry = async () => ({ body1: 'This sentence never ends and' });
+
+  await runTruncationRetryLoop({ data, itContent, detectTruncation, callWithRetry });
+
+  assert.equal(
+    data.content.en.body1,
+    'This sentence never ends and',
+    'il body troncato deve restare intatto quando il fallback IT è whitespace-only',
+  );
+});
+
+test('ramo missing-field: itValue whitespace-only lancia l\'errore invece di pubblicare un fallback quasi-vuoto (#691)', async () => {
+  const data = { content: { en: { body1: undefined, title: 'T', excerpt: 'E', body2: 'B2', body3: 'B3' } } };
+  // Un fallback fatto di soli spazi è truthy: senza `.trim()` il guard non
+  // scattava e il valore quasi-vuoto veniva assegnato invece di lanciare.
+  const itContent = { body1: '   ', title: 'T', excerpt: 'E', body2: 'B2', body3: 'B3' };
+  const callWithRetry = async () => { throw new Error('non dovrebbe essere chiamato: il guard deve lanciare prima'); };
+
+  await assert.rejects(
+    () => runMissingFieldLoop({ data, itContent, callWithRetry }),
+    /Campo body1 mancante nella traduzione en/,
+  );
+});
+
 test('nessun troncamento rilevato: il campo non viene toccato', async () => {
   const data = { content: { en: { body1: 'A complete sentence.' } } };
   const itContent = { body1: 'Una frase completa.' };
@@ -170,4 +239,53 @@ test('nessun troncamento rilevato: il campo non viene toccato', async () => {
   await runTruncationRetryLoop({ data, itContent, detectTruncation, callWithRetry });
 
   assert.equal(data.content.en.body1, 'A complete sentence.');
+});
+
+test('ramo truncation-retry: fallback IT esso stesso troncato — warning esplicito, pubblicato come ultima risorsa (#705)', async () => {
+  const truncatedIt = 'Questa frase italiana non finisce e';
+  const data = { content: { en: { body1: 'This sentence never ends and' } } };
+  const itContent = { body1: truncatedIt };
+  // Ogni testo (traduzione iniziale, retry, e la sorgente IT stessa) risulta
+  // troncato: prima del fix (#705) l'IT veniva pubblicato senza alcun
+  // controllo su questo terzo caso.
+  const detectTruncation = () => ['incomplete-ending'];
+  const callWithRetry = async () => { throw new Error('retry fallito'); };
+  const warnings = [];
+
+  await runTruncationRetryLoop({ data, itContent, detectTruncation, callWithRetry, warnings });
+
+  assert.equal(
+    data.content.en.body1,
+    truncatedIt,
+    'il fallback IT troncato viene comunque pubblicato come ultima risorsa (nessun fallback migliore disponibile)',
+  );
+  assert.ok(
+    warnings.some((w) => w.includes('ESSO STESSO troncato')),
+    `deve emettere un warning esplicito quando anche il fallback IT risulta troncato — warnings raccolti: ${JSON.stringify(warnings)}`,
+  );
+});
+
+test('ramo missing-field: fallback IT esso stesso troncato — warning esplicito, pubblicato come ultima risorsa (#705)', async () => {
+  const truncatedIt = 'Questo campo italiano non finisce e';
+  // `de` e `fr` sono già completi: il loop itera su tutte e tre le locali,
+  // e senza questi il loop leggerebbe `data.content['de'][field]` su un
+  // oggetto undefined non appena passa oltre `en`.
+  const complete = { title: 'T', excerpt: 'E', body1: 'B1', body2: 'B2', body3: 'B3' };
+  const data = { content: { en: { ...complete, body1: undefined }, de: { ...complete }, fr: { ...complete } } };
+  const itContent = { body1: truncatedIt, title: 'T', excerpt: 'E', body2: 'B2', body3: 'B3' };
+  const callWithRetry = async () => { throw new Error('retry fallito'); };
+  const detectTruncation = () => ['incomplete-ending'];
+  const warnings = [];
+
+  await runMissingFieldLoop({ data, itContent, callWithRetry, detectTruncation, warnings });
+
+  assert.equal(
+    data.content.en.body1,
+    truncatedIt,
+    'il fallback IT troncato viene comunque pubblicato come ultima risorsa (nessun fallback migliore disponibile)',
+  );
+  assert.ok(
+    warnings.some((w) => w.includes('ESSO STESSO troncato')),
+    `deve emettere un warning esplicito quando anche il fallback IT (campo mancante) risulta troncato — warnings raccolti: ${JSON.stringify(warnings)}`,
+  );
 });

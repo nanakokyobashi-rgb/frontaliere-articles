@@ -1,0 +1,39 @@
+name: Translate Queue Recovery Watchdog (observe only)
+
+on:
+  schedule:
+    - cron: '37 * * * *'
+  workflow_dispatch:
+
+permissions:
+  actions: read
+  contents: read
+
+concurrency:
+  group: translate-queue-recovery-watchdog-v1
+  cancel-in-progress: false
+  queue: max
+
+jobs:
+  observe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Fetch immutable zero-dependency watchdog
+        shell: bash
+        env:
+          WATCHDOG_SCRIPT: ${{ runner.temp }}/translate-queue-recovery.mjs
+          WATCHDOG_SCRIPT_URL: https://raw.githubusercontent.com/${{ github.repository }}/${{ github.sha }}/scripts/ci/translate-queue-recovery.mjs
+        run: |-
+          set -euo pipefail
+          curl --proto '=https' --tlsv1.2 --fail --silent --show-error \
+            --location --max-redirs 0 --connect-timeout 5 --max-time 20 --max-filesize 262144 \
+            --output "$WATCHDOG_SCRIPT" "$WATCHDOG_SCRIPT_URL"
+
+      - name: Observe translate queue without recovery
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          RECOVERY_MODE: dry-run
+          WATCHDOG_SCRIPT: ${{ runner.temp }}/translate-queue-recovery.mjs
+        run: node "$WATCHDOG_SCRIPT"
