@@ -1,9 +1,4 @@
 {
-  "https://www.laregione.ch/svizzera/svizzera/1943004/sharing-svizzera-villars-job-casi-softwareone": "job-sharing-svizzera",
-  "https://www.laregione.ch/svizzera/svizzera/1942794/stress-siccita-aumento-svizzera-famiglie": "siccita-stress-famiglie",
-  "https://www.laregione.ch/economia/economia/1940627/riciclaggio-infrastrutture-empa-energie-potrebbero": "potenziale-riciclaggio-infrastrutture-energie-fossili",
-  "https://www.seco.admin.ch/it/newnsb/5jmupircsv0d-fvrwvlof": "patto-diritti-economici-sociali-e-culturali-sviluppi-svizzera",
-  "https://www.tio.ch/svizzera/economia/1942984/reno-svizzera-merci-camion-essere": "reno-svizzera-merci-camion-essere",
   "https://www.seco.admin.ch/it/newnsb/yhzhoj7tt8onslbz0nd4p": "condotta-aziendale-responsabile-ocse-assegna-giudizio-positivo",
   "https://www.seco.admin.ch/it": "seco-dazi-stati-uniti-2026",
   "https://www.seco.admin.ch/it/newnsb/trdfttbubc7bqcchvympa": "dazi-usa-consiglio-federale-2026",
@@ -1601,6 +1596,31 @@
   "https://www.tio.ch/svizzera/economia/1947550/svizzera-euro-tassi-franco-agosto": {
     "articleId": "franco-svizzero-euro-minimi",
     "ts": "2026-09-02T12:44:14.777Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/ticino/politica/1947569/piu-lavori-piu-ti-resta": {
+    "articleId": "laps-ticino-incentivi-lavoro",
+    "ts": "2026-09-02T13:49:51.192Z",
+    "keyForm": 2
+  },
+  "https://www.admin.ch/it/newnsb/3wqfmopvqj4sdn-juiuw9": {
+    "articleId": "consiglio-federale-nomina-walser",
+    "ts": "2026-09-02T14:04:53.653Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/svizzera-sta-diventando-meno-attrattiva-per-le-multinazionali/91994544": {
+    "articleId": "svizzera-perde-attrattiva-multinazionali",
+    "ts": "2026-09-02T14:19:40.736Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/cf%3a-politica-agricola-2030%2c-pi%c3%b9-margine-di-manovra-a-agricoltori/91993680": {
+    "articleId": "pa30-autonomia-agricoltori",
+    "ts": "2026-09-02T14:41:47.799Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/economia/1947576/novartis-posti-lavoro-produzione-campus": {
+    "articleId": "novartis-130-ristrutturazione-basilea",
+    "ts": "2026-09-02T14:56:07.344Z",
     "keyForm": 2
   }
 }

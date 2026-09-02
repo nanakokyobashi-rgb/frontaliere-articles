@@ -82634,6 +82634,84 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-mornago-frontaliere': {
+    title: 'Vivere a Mornago, lavorare in Ticino: tassazione e permesso G',
+    description: 'Dal 1° gennaio 2024 nuove regole per frontalieri. Franchigia €10.000, imposta alla fonte svizzera, AVS, LPP, LAMal: guida completa per chi vive a Mornago',
+    keywords: 'frontalieri, ticino, svizzera, italia, vivere, mornago, lavorare, tassazione',
+    ogTitle: 'Vivere a Mornago, lavorare in Ticino: tassazione e permesso G',
+    ogDescription: 'Sei frontaliere tra Mornago e Ticino? Scopri come funzionano il permesso G, l\'imposta alla fonte svizzera, i contributi AVS/LPP, la franchigia €10.000 e l\'assicurazione malattia LAMal. Guida pratica 2024–2025.',
+    canonicalPath: '/articoli-frontaliere/mornago-frontaliere',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Vivere a Mornago, lavorare in Ticino: tassazione e permesso G",
+      "description": "Dal 1° gennaio 2024 nuove regole per frontalieri. Franchigia €10.000, imposta alla fonte svizzera, AVS, LPP, LAMal: guida completa per chi vive a Mornago",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/mornago-frontaliere.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Il confine tra Ticino e Lombardia da Mendrisio verso Mornago, con le colline verdi della provincia di Varese sullo sfondo"
+      },
+      "datePublished": "2026-09-02T13:35:07+00:00",
+      "dateModified": "2026-09-02T13:35:07+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/mornago-frontaliere/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-la-frontiera-fiscale-tra-italia-e-svizzera-nella-circolazione-delle-opere-darte': {
+    title: 'La frontiera fiscale tra Italia e Svizzera nella circolazione delle opere d’arte: IVA all’importazione, confisca e proporzionalità dopo Corte cost. n. 93/2025 e Cass. civ., Sez. Unite, ord. n. 24764/2026',
+    description: 'La frontiera fiscale tra Italia e Svizzera nella circolazione delle opere d’arte: IVA all’importazione, confisca e proporzionalità dopo Corte cost. n. 93/2025',
+    keywords: 'frontalieri, ticino, svizzera, italia, frontiera, fiscale, nella, circolazione',
+    ogTitle: 'La frontiera fiscale tra Italia e Svizzera nella circolazione delle opere d’arte: IVA all’importazione, confisca e proporzionalità dopo Corte cost. n. 93/2025 e Cass. civ., Sez. Unite, ord. n. 24764/2026',
+    ogDescription: 'La frontiera fiscale tra Italia e Svizzera nella circolazione delle opere d’arte: IVA all’importazione, confisca e proporzionalità dopo Corte cost. n. 93/2025',
+    canonicalPath: '/articoli-frontaliere/la-frontiera-fiscale-tra-italia-e-svizzera-nella-circolazione-delle-opere-darte',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "La frontiera fiscale tra Italia e Svizzera nella circolazione delle opere d’arte: IVA all’importazione, confisca e proporzionalità dopo Corte cost. n. 93/2025 e Cass. civ., Sez. Unite, ord. n. 24764/2026",
+      "description": "La frontiera fiscale tra Italia e Svizzera nella circolazione delle opere d’arte: IVA all’importazione, confisca e proporzionalità dopo Corte cost. n. 93/2025",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/places/lago-lugano.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine editoriale relativa a: La frontiera fiscale tra Italia e Svizzera nella circolazione delle opere d’arte: IVA all’importazione, confisca e proporzionalità dopo Corte cost. n. 93/2025 e Cass. civ., Sez. Unite, ord. n. 24764/2026"
+      },
+      "datePublished": "2026-09-02T15:13:26+00:00",
+      "dateModified": "2026-09-02T15:13:26+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/samuele-valente/#person",
+        "name": "Samuele Valente",
+        "url": "https://frontaliereticino.ch/autori/samuele-valente/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/la-frontiera-fiscale-tra-italia-e-svizzera-nella-circolazione-delle-opere-darte/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

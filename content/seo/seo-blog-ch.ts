@@ -66905,6 +66905,201 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-laps-ticino-incentivi-lavoro': {
+    title: 'Più lavori, più ti resta: la riforma LAPS ticinese',
+    description: 'Riforma LAPS in Ticino: come incentivi temporanei al lavoro combattono l\'«effetto soglia» e l\'impatto dei premi LAMal sui beneficiari di prestazioni sociali.',
+    keywords: 'frontalieri, ticino, svizzera, italia, lavori, resta, riforma, laps',
+    ogTitle: 'Più lavori, più ti resta: riforma LAPS in Ticino',
+    ogDescription: 'La mozione leghista propone meccanismi di incentivazione temporanea per chi aumenta l\'attività lavorativa: franchigie supplementari e rimborsi spese. Combattere il disincentivo creato dai premi LAMal in aumento e dalla soglia di riduzione',
+    canonicalPath: '/articoli-svizzera/laps-ticino-incentivi-lavoro/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Più lavori, più ti resta: la riforma LAPS ticinese",
+      "description": "Riforma LAPS in Ticino: come incentivi temporanei al lavoro combattono l'«effetto soglia» e l'impatto dei premi LAMal sui beneficiari di prestazioni sociali.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/laps-ticino-incentivi-lavoro.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Aula del Gran Consiglio ticinese durante dibattito su riforme delle prestazioni sociali e incentivi al lavoro"
+      },
+      "datePublished": "2026-09-02T13:49:51+00:00",
+      "dateModified": "2026-09-02T13:49:51+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/laps-ticino-incentivi-lavoro/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-consiglio-federale-nomina-walser': {
+    title: 'Il Consiglio federale nomina Tobias Walser presso il Consiglio dei PF',
+    description: 'Tobias Walser, esperto in scienze ambientali, è stato nominato delegato delle assemblee universitarie dei Politecnici Federali di Zurigo e Losanna.',
+    keywords: 'frontalieri, ticino, svizzera, italia, consiglio, federale, nomina, tobias',
+    ogTitle: 'Il Consiglio federale nomina Tobias Walser presso il Consiglio dei PF',
+    ogDescription: 'Tobias Walser, esperto in scienze ambientali, è stato nominato delegato delle assemblee universitarie dei Politecnici Federali di Zurigo e Losanna. Entrerà in carica il 1° settembre 2026.',
+    canonicalPath: '/articoli-svizzera/consiglio-federale-nomina-walser/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Il Consiglio federale nomina Tobias Walser presso il Consiglio dei PF",
+      "description": "Tobias Walser, esperto in scienze ambientali, è stato nominato delegato delle assemblee universitarie dei Politecnici Federali di Zurigo e Losanna.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/consiglio-federale-nomina-walser.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista aerea di Lugano, Svizzera, con il lago e le montagne sullo sfondo."
+      },
+      "datePublished": "2026-09-02T14:04:53+00:00",
+      "dateModified": "2026-09-02T14:04:53+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/consiglio-federale-nomina-walser/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-svizzera-perde-attrattiva-multinazionali': {
+    title: 'Svizzera meno attrattiva per multinazionali: allarme McKinsey',
+    description: 'Il 70% dei CEO avverte che la Svizzera perde competitività internazionale. Studio McKinsey critica procedure, imposta OCSE e infrastrutture per nuovi',
+    keywords: 'frontalieri, ticino, svizzera, italia, meno, attrattiva, multinazionali, allarme',
+    ogTitle: 'Svizzera meno attrattiva per multinazionali: allarme McKinsey',
+    ogDescription: 'Secondo lo studio McKinsey il 70% dei CEO ritiene che la Svizzera stia perdendo competitività internazionale. Critiche a procedure, fiscalità OCSE e infrastrutture minacciano gli investimenti stranieri e la crescita economica del paese.',
+    canonicalPath: '/articoli-svizzera/svizzera-perde-attrattiva-multinazionali/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Svizzera meno attrattiva per multinazionali: allarme McKinsey",
+      "description": "Il 70% dei CEO avverte che la Svizzera perde competitività internazionale. Studio McKinsey critica procedure, imposta OCSE e infrastrutture per nuovi",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/svizzera-perde-attrattiva-multinazionali.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Skyline urbana svizzera con grattacieli moderni e attività economica, simbolo della competitività della piazza elvetica."
+      },
+      "datePublished": "2026-09-02T14:19:40+00:00",
+      "dateModified": "2026-09-02T14:19:40+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/svizzera-perde-attrattiva-multinazionali/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-pa30-autonomia-agricoltori': {
+    title: 'PA 2030+: più libertà agli agricoltori svizzeri',
+    description: 'Il Consiglio federale avvia consultazione su PA30+: autonomia gestionale, meno burocrazia, digitalizzazione e 13,8 miliardi CHF per agricoltura 2030-2033.',
+    keywords: 'frontalieri, ticino, svizzera, italia, libertà, agli, agricoltori, svizzeri',
+    ogTitle: 'PA 2030+: più libertà agli agricoltori svizzeri',
+    ogDescription: 'Nuova politica agricola svizzera 2030+ con maggior autonomia gestionale agli agricoltori, digitalizzazione, riduzione burocrazia e 13,8 miliardi CHF di spesa federale. Consultazione fino all\'8 dicembre.',
+    canonicalPath: '/articoli-svizzera/pa30-autonomia-agricoltori/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "PA 2030+: più libertà agli agricoltori svizzeri",
+      "description": "Il Consiglio federale avvia consultazione su PA30+: autonomia gestionale, meno burocrazia, digitalizzazione e 13,8 miliardi CHF per agricoltura 2030-2033.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/pa30-autonomia-agricoltori.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Campo agricolo svizzero con colture mature durante l'ora dorata, simboleggia i cambiamenti della politica agricola 2030+"
+      },
+      "datePublished": "2026-09-02T14:41:47+00:00",
+      "dateModified": "2026-09-02T14:41:47+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/pa30-autonomia-agricoltori/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-novartis-130-ristrutturazione-basilea': {
+    title: 'Novartis taglia 130 posti di lavoro a Basilea | Frontaliere Ticino',
+    description: 'Novartis annuncia il taglio di fino a 130 posti di lavoro a Basilea entro fine 2027. Motivo: trasferimento attività al Novartis Campus e scadenza contratti.',
+    keywords: 'frontalieri, ticino, svizzera, italia, novartis, taglia, posti, lavoro',
+    ogTitle: 'Novartis taglia 130 posti di lavoro a Basilea',
+    ogDescription: 'Novartis taglia fino a 130 posti di lavoro a Basilea entro fine 2027. Scadenza contratti di locazione e trasferimento di attività al Novartis Campus motivo del taglio. Dal 2018, il gruppo ha eliminato quasi 3.000 posti in Svizzera. Reazione critica',
+    canonicalPath: '/articoli-svizzera/novartis-130-ristrutturazione-basilea/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Novartis taglia 130 posti di lavoro a Basilea",
+      "description": "Novartis annuncia il taglio di fino a 130 posti di lavoro a Basilea entro fine 2027. Motivo: trasferimento attività al Novartis Campus e scadenza contratti.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/novartis-130-ristrutturazione-basilea.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Campus di produzione e ricerca di un'azienda farmaceutica svizzera con architettura moderna"
+      },
+      "datePublished": "2026-09-02T14:56:07+00:00",
+      "dateModified": "2026-09-02T14:56:07+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/novartis-130-ristrutturazione-basilea/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

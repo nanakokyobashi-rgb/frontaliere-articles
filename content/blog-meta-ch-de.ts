@@ -5155,6 +5155,21 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.permesso-l-zurigo-validita-proroga.title': 'Ausweis L Zürich: Gültigkeit, Erneuerung und Verlängerung',
     'blog.article.permesso-l-zurigo-validita-proroga.excerpt': 'Erlaubnis L: maximale Laufzeit von einem Jahr, verlängerbar, wenn der Vertrag fortgesetzt wird. Übergang auf Bewilligung B und Einschränkungen des Arbeitgebers im Kanton Zürich.',
     'blog.article.permesso-l-zurigo-validita-proroga.imageAlt': 'Schweizer Alpenumgebung mit offiziellen Arbeitsgenehmigungsdokumenten und Verwaltungsunterlagen',
+    'blog.article.laps-ticino-incentivi-lavoro.title': 'Je mehr Sie arbeiten, desto mehr bleibt Ihnen: die Tessiner LAPS-Reform',
+    'blog.article.laps-ticino-incentivi-lavoro.excerpt': 'Die Liga fordert eine Reform des LAPS mit temporären Arbeitsanreizen, um die «Armutsfalle» zu beseitigen und die Auswirkungen der KVG-Prämien zu bekämpfen.',
+    'blog.article.laps-ticino-incentivi-lavoro.imageAlt': 'Tessiner Kantonsparlament in Bellinzona während Debatte über Sozialleistungen und Arbeitsanreize',
+    'blog.article.consiglio-federale-nomina-walser.title': 'Bundesrat ernennt Tobias Walser zum ETH-Rat',
+    'blog.article.consiglio-federale-nomina-walser.excerpt': 'Tobias Walser, Experte für Umweltwissenschaften, wurde zum Delegierten der Universitätsversammlungen der Eidgenössischen Technischen Hochschulen Zürich und Lausanne ernannt.',
+    'blog.article.consiglio-federale-nomina-walser.imageAlt': 'Luftaufnahme von Lugano, Schweiz, mit dem See und den Bergen im Hintergrund.',
+    'blog.article.svizzera-perde-attrattiva-multinazionali.title': 'Schweiz weniger attraktiv für multinationale Konzerne: McKinsey-Alarm',
+    'blog.article.svizzera-perde-attrattiva-multinazionali.excerpt': '70% der CEOs warnen, dass die Schweiz an Wettbewerbsfähigkeit verliert. Kritik an langwierigen Verfahren, OECD-Steuer und mangelhafter Infrastruktur bedrohen ausländische Investitionen.',
+    'blog.article.svizzera-perde-attrattiva-multinazionali.imageAlt': 'Skyline einer Schweizer Metropole mit modernen Bürogebäuden, Symbol der Wirtschaftsleistung.',
+    'blog.article.pa30-autonomia-agricoltori.title': 'PA 2030+: Mehr Freiheit für Schweizer Landwirte',
+    'blog.article.pa30-autonomia-agricoltori.excerpt': 'Der Bundesrat eröffnet die Vernehmlassung zu PA30+: Verwaltungsautonomie, weniger Bürokratie, Digitalisierung und 13,8 Mrd. CHF Investitionen in die Landwirtschaft 2030-2033.',
+    'blog.article.pa30-autonomia-agricoltori.imageAlt': 'Schweizer Ackerfeld mit reifen Kulturen während der Goldenen Stunde, symbolisiert Agrarpolitik 2030+ Veränderungen',
+    'blog.article.novartis-130-ristrutturazione-basilea.title': 'Novartis streicht 130 Stellen in Basel',
+    'blog.article.novartis-130-ristrutturazione-basilea.excerpt': 'Novartis kündigt den Abbau von bis zu 130 Arbeitsplätzen in Basel bis Ende 2027 an. Grund: Übertragung von Vermögenswerten auf den Novartis Campus und Ablauf von Verträgen.',
+    'blog.article.novartis-130-ristrutturazione-basilea.imageAlt': 'Modernes Produktions- und Forschungscampus eines Schweizer Pharmaunternehmens mit zeitgenössischer Architektur',
 };
 
 export default blogMetaChDe;

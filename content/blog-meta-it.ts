@@ -11119,6 +11119,12 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.svizzera-perde-attrattiva-aziende.title': 'La Svizzera sta perdendo attrattiva per le aziende',
     'blog.article.svizzera-perde-attrattiva-aziende.excerpt': 'Sette CEO su dieci vedono un calo dell\'attrattiva svizzera rispetto alla concorrenza internazionale.',
     'blog.article.svizzera-perde-attrattiva-aziende.imageAlt': 'Vista aerea di Lugano, Svizzera, con skyline moderno e montagne circostanti.',
+    'blog.article.mornago-frontaliere.title': 'Vivere a Mornago, lavorare in Ticino: tassazione e permesso G',
+    'blog.article.mornago-frontaliere.excerpt': 'Dal 1° gennaio 2024 il Nuovo Accordo Frontalieri garantisce franchigia €10.000 ai nuovi frontalieri. Scopri tassazione, AVS, LPP e LAMal per chi vive a Mornago e lavora in Ticino.',
+    'blog.article.mornago-frontaliere.imageAlt': 'Il confine tra Ticino e Lombardia da Mendrisio verso Mornago, con le colline verdi della provincia di Varese sullo sfondo',
+    'blog.article.la-frontiera-fiscale-tra-italia-e-svizzera-nella-circolazione-delle-opere-darte.title': 'La frontiera fiscale tra Italia e Svizzera nella circolazione delle opere d’arte: IVA all’importazione, confisca e proporzionalità dopo Corte cost. n. 93/2025 e Cass. civ., Sez. Unite, ord. n. 24764/2026',
+    'blog.article.la-frontiera-fiscale-tra-italia-e-svizzera-nella-circolazione-delle-opere-darte.excerpt': 'La frontiera fiscale tra Italia e Svizzera nella circolazione delle opere d’arte: IVA all’importazione, confisca e proporzionalità dopo Corte cost. n. 93/2025',
+    'blog.article.la-frontiera-fiscale-tra-italia-e-svizzera-nella-circolazione-delle-opere-darte.imageAlt': 'Immagine editoriale relativa a: La frontiera fiscale tra Italia e Svizzera nella circolazione delle opere d’arte: IVA all’importazione, confisca e proporzionalità dopo Corte cost. n. 93/2025 e Cass. civ., Sez. Unite, ord. n. 24764/2026',
 };
 
 export default blogMetaIt;

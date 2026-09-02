@@ -5155,6 +5155,21 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.permesso-l-zurigo-validita-proroga.title': 'Permesso L Zurigo: validità, rinnovo e proroga',
     'blog.article.permesso-l-zurigo-validita-proroga.excerpt': 'Permesso L: durata massima un anno, rinnovabile se il contratto continua. Transizione al permesso B e vincoli del datore di lavoro nel Cantone di Zurigo.',
     'blog.article.permesso-l-zurigo-validita-proroga.imageAlt': 'Veduta alpina svizzera con documenti amministrativi e moduli di permesso di lavoro',
+    'blog.article.laps-ticino-incentivi-lavoro.title': 'Più lavori, più ti resta: la riforma LAPS ticinese',
+    'blog.article.laps-ticino-incentivi-lavoro.excerpt': 'La Lega chiede una riforma della LAPS con incentivi temporanei al lavoro per eliminare la «trappola della povertà» e combattere l\'impatto dei premi LAMal.',
+    'blog.article.laps-ticino-incentivi-lavoro.imageAlt': 'Aula del Gran Consiglio ticinese durante dibattito su riforme delle prestazioni sociali e incentivi al lavoro',
+    'blog.article.consiglio-federale-nomina-walser.title': 'Il Consiglio federale nomina Tobias Walser presso il Consiglio dei PF',
+    'blog.article.consiglio-federale-nomina-walser.excerpt': 'Tobias Walser, esperto in scienze ambientali, è stato nominato delegato delle assemblee universitarie dei Politecnici Federali di Zurigo e Losanna.',
+    'blog.article.consiglio-federale-nomina-walser.imageAlt': 'Vista aerea di Lugano, Svizzera, con il lago e le montagne sullo sfondo.',
+    'blog.article.svizzera-perde-attrattiva-multinazionali.title': 'Svizzera meno attrattiva per multinazionali: allarme McKinsey',
+    'blog.article.svizzera-perde-attrattiva-multinazionali.excerpt': 'Il 70% dei CEO avverte che la Svizzera perde competitività. Critiche a procedure lunghe, imposta OCSE e infrastrutture carenti minacciano gli investimenti stranieri.',
+    'blog.article.svizzera-perde-attrattiva-multinazionali.imageAlt': 'Skyline urbana svizzera con grattacieli moderni e attività economica, simbolo della competitività della piazza elvetica.',
+    'blog.article.pa30-autonomia-agricoltori.title': 'PA 2030+: più libertà agli agricoltori svizzeri',
+    'blog.article.pa30-autonomia-agricoltori.excerpt': 'Il Consiglio federale avvia consultazione su PA30+: autonomia gestionale, meno burocrazia, digitalizzazione e 13,8 miliardi CHF di investimento per agricoltura 2030-2033.',
+    'blog.article.pa30-autonomia-agricoltori.imageAlt': 'Campo agricolo svizzero con colture mature durante l\'ora dorata, simboleggia i cambiamenti della politica agricola 2030+',
+    'blog.article.novartis-130-ristrutturazione-basilea.title': 'Novartis taglia 130 posti di lavoro a Basilea',
+    'blog.article.novartis-130-ristrutturazione-basilea.excerpt': 'Novartis annuncia il taglio di fino a 130 posti di lavoro a Basilea entro fine 2027. Motivo: trasferimento attività al Novartis Campus e scadenza contratti.',
+    'blog.article.novartis-130-ristrutturazione-basilea.imageAlt': 'Campus di produzione e ricerca di un\'azienda farmaceutica svizzera con architettura moderna',
 };
 
 export default blogMetaChIt;
