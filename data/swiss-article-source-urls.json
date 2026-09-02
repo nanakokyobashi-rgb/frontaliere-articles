@@ -1,5 +1,4 @@
 {
-  "https://www.laregione.ch/economia/economia/1942022/miliardi-quotazione-glencore-australia-utile": "glencore-quotazione-australia",
   "https://www.laregione.ch/svizzera/svizzera/1943004/sharing-svizzera-villars-job-casi-softwareone": "job-sharing-svizzera",
   "https://www.laregione.ch/svizzera/svizzera/1942794/stress-siccita-aumento-svizzera-famiglie": "siccita-stress-famiglie",
   "https://www.laregione.ch/economia/economia/1940627/riciclaggio-infrastrutture-empa-energie-potrebbero": "potenziale-riciclaggio-infrastrutture-energie-fossili",
@@ -1597,6 +1596,11 @@
   "https://www.rsi.ch/s/4054659": {
     "articleId": "margine-manovra-agricoltori-svizzera",
     "ts": "2026-09-02T12:34:51.829Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/economia/1947550/svizzera-euro-tassi-franco-agosto": {
+    "articleId": "franco-svizzero-euro-minimi",
+    "ts": "2026-09-02T12:44:14.777Z",
     "keyForm": 2
   }
 }
