@@ -1,5 +1,4 @@
 {
-  "https://www.laregione.ch/economia/economia/1941287/calore-ondate-miliardi-dollari-perdite-produttivita-catastrofi": "catastrofi-naturali-perdite-112-miliardi-dollari",
   "https://www.laregione.ch/economia/economia/1942022/miliardi-quotazione-glencore-australia-utile": "glencore-quotazione-australia",
   "https://www.laregione.ch/svizzera/svizzera/1943004/sharing-svizzera-villars-job-casi-softwareone": "job-sharing-svizzera",
   "https://www.laregione.ch/svizzera/svizzera/1942794/stress-siccita-aumento-svizzera-famiglie": "siccita-stress-famiglie",
@@ -1593,6 +1592,11 @@
   "https://www.admin.ch/it/newnsb/sdanuz7ynr9j": {
     "articleId": "consiglio-federale-consultazione-agricola-2030",
     "ts": "2026-09-02T12:18:01.923Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/s/4054659": {
+    "articleId": "margine-manovra-agricoltori-svizzera",
+    "ts": "2026-09-02T12:34:51.829Z",
     "keyForm": 2
   }
 }
