@@ -1,5 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/economia/1942984/reno-svizzera-merci-camion-essere": "reno-svizzera-merci-camion-essere",
   "https://www.seco.admin.ch/it/newnsb/yhzhoj7tt8onslbz0nd4p": "condotta-aziendale-responsabile-ocse-assegna-giudizio-positivo",
   "https://www.seco.admin.ch/it": "seco-dazi-stati-uniti-2026",
   "https://www.seco.admin.ch/it/newnsb/trdfttbubc7bqcchvympa": "dazi-usa-consiglio-federale-2026",
@@ -1617,6 +1616,11 @@
   "https://www.swissinfo.ch/ita/cf%3a-politica-agricola-2030%2c-pi%c3%b9-margine-di-manovra-a-agricoltori/91993680": {
     "articleId": "pa30-autonomia-agricoltori",
     "ts": "2026-09-02T14:41:47.799Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/economia/1947576/novartis-posti-lavoro-produzione-campus": {
+    "articleId": "novartis-130-ristrutturazione-basilea",
+    "ts": "2026-09-02T14:56:07.344Z",
     "keyForm": 2
   }
 }
