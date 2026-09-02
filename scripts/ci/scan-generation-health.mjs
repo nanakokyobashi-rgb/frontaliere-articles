@@ -1742,8 +1742,14 @@ export function exitCodeForCollectionError(error) {
 export function collectCommits(repo, lookbackHours, {
   now = () => Date.now(),
   fetchPage,
-  resolveHead = (timeout) => fetchPage ? '0'.repeat(40) : gh(['api', `repos/${repo}/commits/main`, '--jq', '.sha'], null, { timeout }),
+  resolveHead,
 } = {}) {
+  // `fetchPage` è un seam di test: senza il suo `resolveHead` esplicito non
+  // esiste una ref immutabile da passargli. Non fabbricare uno SHA plausibile:
+  // nasconderebbe a un chiamante reale una lettura non pinnata di `main`.
+  if (fetchPage && typeof resolveHead !== 'function') {
+    throw new Error(`${COMMIT_COLLECTION_FAILURE_PREFIX} injected fetchPage requires resolveHead`);
+  }
   const startedAt = now();
   const cutoff = startedAt - lookbackHours * 3_600_000;
   const deadline = startedAt + COMMIT_COLLECTION_MAX_MS;
@@ -1756,7 +1762,9 @@ export function collectCommits(repo, lookbackHours, {
   let reachedCutoff = false;
   const headBudgetMs = deadline - now();
   if (headBudgetMs <= 0) throw new Error(`${COMMIT_COLLECTION_FAILURE_PREFIX} request-time budget exhausted before cutoff`);
-  const head = resolveHead(headBudgetMs);
+  const head = (resolveHead || ((timeout) => gh(
+    ['api', `repos/${repo}/commits/main`, '--jq', '.sha'], null, { timeout },
+  )))(headBudgetMs);
   if (!/^[0-9a-f]{40}$/i.test(String(head))) throw new Error(`${COMMIT_COLLECTION_FAILURE_PREFIX} GitHub API returned malformed main SHA before cutoff`);
   const readPage = fetchPage || ((page, timeout) => gh(['api', `repos/${repo}/commits?sha=${head}&per_page=100&page=${page}`,
     '--jq', '.[] | "\\(.commit.committer.date)\\t\\(.commit.message | split("\\n")[0])"'], null, { timeout }));
