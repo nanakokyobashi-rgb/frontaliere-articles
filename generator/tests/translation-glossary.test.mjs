@@ -41,6 +41,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { TRANSLATION_GLOSSARY, applyGlossaryCorrections } from '../scripts/lib/translation-glossary.mjs';
+import { ITALIAN_BORDER_GUARD_ANCHOR } from '../scripts/lib/article-locale-lexicon.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = path.join(__dirname, '..', '..');
@@ -51,8 +52,41 @@ const frontalierEntry = TRANSLATION_GLOSSARY.find((entry) => entry.trigger.sourc
 // description can be written in (it/de/fr) — the concrete phrasing a
 // legitimate mention of an actual border guard would use, as opposed to the
 // glossary's mistranslation-output vocabulary (which is EN/DE/FR).
-const REAL_BORDER_GUARD_VOCAB_RE =
-  /guardia di confine|guardia doganale|guardia di frontiera|guardia confinaria|corpo delle guardie di confine|\bcgcf\b|grenzwache\b|grenzwächter|grenzwaechter|grenzschütz|grenzschuetz|grenzbeamt|garde-fronti[eè]re|gardes-fronti[eè]re|douanier|doganier|border guard|frontier guard/i;
+//
+// Issue #735 (follow-up of #723/#731): the previous version of this regex was
+// a hand-written literal list ("guardia di confine", "doganier", ...) that
+// missed inflected forms — plain "guardia" never matches the plural "guardie"
+// (a vowel change, not a suffix, so substring matching can't bridge it), and
+// it had no path to "agente/funzionario doganale" or the CURRENT official
+// customs/border authority acronyms (UDSC/AFD/BAZG). The Italian half is
+// therefore delegated to `ITALIAN_BORDER_GUARD_ANCHOR`
+// (article-locale-lexicon.mjs) instead of re-deriving a second copy of the
+// same vocabulary: it already stems for singular/plural (`guardi\w*`,
+// `dogan\w*`, `confinari\w*`) and already carries those acronyms, having been
+// built and tuned against the same real corpus for the same false-friend
+// class (AGENTS.md #6 — one source for a shared value). DE/FR/EN stay local
+// because that anchor only speaks Italian.
+const REAL_BORDER_GUARD_VOCAB_RE = new RegExp(
+  [
+    ITALIAN_BORDER_GUARD_ANCHOR.source,
+    '\\bcgcf\\b',
+    'grenzwache\\b',
+    'grenzwacht\\w*',
+    'grenzw(?:ä|ae)chter\\w*',
+    'grenzsch(?:ü|ue)tz\\w*',
+    'grenzbeamt\\w*',
+    '\\bgwk\\b',
+    'garde-fronti[eè]re\\w*',
+    'gardes-fronti[eè]res?',
+    'douanier\\w*',
+    'border\\s+guards?',
+    'frontier\\s+guards?',
+    'customs\\s+officers?',
+  ]
+    .map((source) => `(?:${source})`)
+    .join('|'),
+  'i',
+);
 
 function jobDirs() {
   return ['data/jobs/by-crawler', 'data/jobs/expired/by-crawler']
@@ -95,6 +129,30 @@ describe('translation-glossary: frontalier body-safety (issue #723)', () => {
       fieldType: 'description',
     });
     assert.equal(out, 'We are looking for cross-border commuters for the night shift.');
+  });
+
+  it('REAL_BORDER_GUARD_VOCAB_RE covers inflected/synonym forms a literal list missed (issue #735)', () => {
+    const shouldMatch = [
+      'guardie di confine',           // IT plural — "guardia" never matched "guardie"
+      'Corpo delle Guardie di confine',
+      'agente doganale',              // customs vocab not gated on "guardia"
+      'funzionario doganale',
+      'guardia di finanza',
+      'polizia di frontiera',
+      'guardie confinarie',           // adjective plural
+      'UDSC',                         // current Swiss customs/border authority acronyms
+      'AFD',
+      'BAZG',
+      'Grenzwächterin',
+      'Grenzwachtkorps',
+      'GWK',
+      'gardes-frontières',
+      'douaniers',
+      'customs officers',
+    ];
+    for (const phrase of shouldMatch) {
+      assert.ok(REAL_BORDER_GUARD_VOCAB_RE.test(phrase), `expected a match for "${phrase}"`);
+    }
   });
 
   it('real crawled corpus: zero records mention frontalieri and a real border guard together', () => {
