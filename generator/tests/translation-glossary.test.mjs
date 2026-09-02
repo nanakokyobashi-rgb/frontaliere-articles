@@ -64,26 +64,29 @@ const frontalierEntry = TRANSLATION_GLOSSARY.find((entry) => entry.trigger.sourc
 // same vocabulary: it already stems for singular/plural (`guardi\w*`,
 // `dogan\w*`, `confinari\w*`) and already carries those acronyms, having been
 // built and tuned against the same real corpus for the same false-friend
-// class (AGENTS.md #6 — one source for a shared value). DE/FR/EN stay local
-// because that anchor only speaks Italian.
+// class (AGENTS.md #6 — one source for a shared value).
+//
+// Kept as ONE regex per LANGUAGE, not merged into one: crawled records carry
+// per-locale text (`titleByLocale`/`descriptionByLocale`/`requirementsByLocale`),
+// and a merged pattern tested against the whole multi-language blob cross-
+// contaminates languages — measured live here: the Italian anchor's
+// `finanzier\w*` (guardia di finanza officer) also matches the unrelated
+// German word "Finanzierung" (financing), which flagged 54 real records as
+// false-positive collisions the first time this was tried unscoped. Each
+// regex below is applied only to the text collected under its own locale key
+// (see `collectLocaleTexts`), which is what actually eliminates the
+// cross-language false positive instead of just special-casing this one word.
+const REAL_BORDER_GUARD_VOCAB_BY_LOCALE = {
+  it: new RegExp(`(?:${ITALIAN_BORDER_GUARD_ANCHOR.source})|\\bcgcf\\b`, 'i'),
+  de: /grenzwache\b|grenzwacht\w*|grenzw(?:ä|ae)chter\w*|grenzsch(?:ü|ue)tz\w*|grenzbeamt\w*|\bgwk\b/i,
+  fr: /garde-fronti[eè]re\w*|gardes-fronti[eè]res?|douanier\w*/i,
+  en: /border\s+guards?|frontier\s+guards?|customs\s+officers?/i,
+};
+// Union of all locale patterns — for asserting vocabulary coverage in the
+// abstract (below), independent of which language field it lives in.
 const REAL_BORDER_GUARD_VOCAB_RE = new RegExp(
-  [
-    ITALIAN_BORDER_GUARD_ANCHOR.source,
-    '\\bcgcf\\b',
-    'grenzwache\\b',
-    'grenzwacht\\w*',
-    'grenzw(?:ä|ae)chter\\w*',
-    'grenzsch(?:ü|ue)tz\\w*',
-    'grenzbeamt\\w*',
-    '\\bgwk\\b',
-    'garde-fronti[eè]re\\w*',
-    'gardes-fronti[eè]res?',
-    'douanier\\w*',
-    'border\\s+guards?',
-    'frontier\\s+guards?',
-    'customs\\s+officers?',
-  ]
-    .map((source) => `(?:${source})`)
+  Object.values(REAL_BORDER_GUARD_VOCAB_BY_LOCALE)
+    .map((re) => `(?:${re.source})`)
     .join('|'),
   'i',
 );
@@ -109,6 +112,37 @@ function jobSearchableText(job) {
   const parts = [];
   for (const field of TEXT_FIELDS) collectStrings(job[field], parts);
   return parts.join('\n');
+}
+
+const KNOWN_VOCAB_LOCALES = Object.keys(REAL_BORDER_GUARD_VOCAB_BY_LOCALE);
+
+// Buckets text by the language it is actually written in, so the collision
+// check below can apply each locale's vocabulary only to its own text
+// instead of a merged multi-language blob (see REAL_BORDER_GUARD_VOCAB_BY_LOCALE
+// above for why that cross-contaminates). `title`/`description`/`requirements`
+// are the flat, single-language originals — attributed to `job.sourceLang` —
+// while the `*ByLocale` companions are already split by locale key. Text
+// whose language can't be attributed (missing/unknown `sourceLang`, or a
+// locale key outside it/en/de/fr) falls into `other`, which the corpus scan
+// below checks against every language's vocabulary — the same conservative,
+// false-negative-safe behaviour this test had before locale-scoping existed.
+function collectLocaleTexts(job) {
+  const byLocale = { it: [], en: [], de: [], fr: [] };
+  const other = [];
+  const src = String(job.sourceLang || '').toLowerCase();
+  const targetForFlatField = KNOWN_VOCAB_LOCALES.includes(src) ? byLocale[src] : other;
+
+  for (const field of ['title', 'description', 'requirements']) {
+    collectStrings(job[field], targetForFlatField);
+  }
+  for (const field of ['titleByLocale', 'descriptionByLocale', 'requirementsByLocale']) {
+    const value = job[field];
+    if (!value || typeof value !== 'object') continue;
+    for (const [locale, localeValue] of Object.entries(value)) {
+      collectStrings(localeValue, KNOWN_VOCAB_LOCALES.includes(locale) ? byLocale[locale] : other);
+    }
+  }
+  return { byLocale, other };
 }
 
 describe('translation-glossary: frontalier body-safety (issue #723)', () => {
@@ -175,10 +209,14 @@ describe('translation-glossary: frontalier body-safety (issue #723)', () => {
         const jobs = Array.isArray(data) ? data : (Array.isArray(data.jobs) ? data.jobs : []);
         for (const job of jobs) {
           recordsScanned++;
-          const text = jobSearchableText(job);
-          if (!frontalierEntry.trigger.test(text)) continue;
+          if (!frontalierEntry.trigger.test(jobSearchableText(job))) continue;
           triggerHits++;
-          if (REAL_BORDER_GUARD_VOCAB_RE.test(text)) {
+          const { byLocale, other } = collectLocaleTexts(job);
+          const otherText = other.join('\n');
+          const hasCollision = KNOWN_VOCAB_LOCALES.some((locale) =>
+            REAL_BORDER_GUARD_VOCAB_BY_LOCALE[locale].test(`${byLocale[locale].join('\n')}\n${otherText}`),
+          );
+          if (hasCollision) {
             collisions.push({ file, id: job.id || job.slug });
           }
         }
