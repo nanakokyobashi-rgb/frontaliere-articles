@@ -196,6 +196,15 @@ describe('translation-glossary: frontalier body-safety (issue #723)', () => {
     let recordsScanned = 0;
     let triggerHits = 0;
     const collisions = [];
+    // Issue #741 (follow-up of #737): this repo has no dedicated gate that
+    // validates data/jobs/** before this suite runs — the write is atomic
+    // (temp+rename, site-side `atomic-write-json.mjs`) which rules out
+    // truncation, but atomicity says nothing about the payload itself being
+    // well-formed JSON. A malformed file used to be silently skipped here on
+    // the unconfirmed assumption that "something else" catches it. Since
+    // nothing else in this repo does, this canary is that gate: a parse
+    // failure now fails the corpus scan instead of vanishing into `continue`.
+    const unparsable = [];
 
     for (const dir of dirs) {
       for (const file of fs.readdirSync(dir)) {
@@ -203,8 +212,9 @@ describe('translation-glossary: frontalier body-safety (issue #723)', () => {
         let data;
         try {
           data = JSON.parse(fs.readFileSync(path.join(dir, file), 'utf8'));
-        } catch {
-          continue; // not this test's concern — covered by JSON-validity gates elsewhere
+        } catch (err) {
+          unparsable.push({ file, error: err.message });
+          continue;
         }
         const jobs = Array.isArray(data) ? data : (Array.isArray(data.jobs) ? data.jobs : []);
         for (const job of jobs) {
@@ -223,6 +233,11 @@ describe('translation-glossary: frontalier body-safety (issue #723)', () => {
       }
     }
 
+    assert.deepEqual(
+      unparsable,
+      [],
+      `found ${unparsable.length} unparsable JSON file(s) under data/jobs/**: ` + JSON.stringify(unparsable),
+    );
     assert.ok(recordsScanned > 1000, `expected a substantial corpus, got ${recordsScanned} records`);
     assert.deepEqual(
       collisions,
