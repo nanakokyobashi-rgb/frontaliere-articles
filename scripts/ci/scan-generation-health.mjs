@@ -119,12 +119,8 @@
  * Scambiare l'assenza di misura per salute è esattamente la classe di difetto
  * che questo scanner esiste per chiudere: non la si reintroduce qui dentro.
  *
- * `available:false` da solo però non basta a coprire un caso: se la SORGENTE
- * di `generation-idle`/`section-dry` (i commit di `main`) resta troncata per
- * più passate di fila, quelle due condizioni restano cieche in silenzio finché
- * dura. `commit-window-truncated` esiste per rendere quello stato VISIBILE —
- * si apre e si richiude con la stessa simmetria di ogni altra condizione,
- * niente contatore fra le passate (follow-up(#643) → #658).
+ * La raccolta dei commit raggiunge il cutoff oppure fallisce il job con un
+ * errore stabile: una finestra parziale non viene mai trattata come misura.
  *
  * ## Routing: `agent:fix-queued`, non `agent:fix` — deliberato
  *
@@ -1137,13 +1133,6 @@ export const CONDITIONS = [
       if (!m.commits.available) return { available: false };
       const last = m.commits.lastArticleAt;
       if (last === null) {
-        if (m.commits.truncated) {
-          // La finestra letta è più stretta di `lookbackHours` (budget di
-          // pagine esaurito prima del cutoff, tipicamente un burst di commit
-          // dei crawler): non sappiamo se un `Generate blog article` esiste
-          // appena fuori dai commit letti. Non misurato, non «guasto».
-          return { available: false };
-        }
         // Nessun articolo in TUTTA la finestra di commit letta: è la forma
         // estrema della stessa condizione, non un'assenza di dato.
         return {
@@ -1179,54 +1168,6 @@ export const CONDITIONS = [
           'Va guardato prima: la quota dei provider LLM (una pausa globale è la causa più frequente e NON è',
           'un difetto di questo repo), poi `.github/workflows/generate-article.yml` e',
           '`generator/scripts/create-article.mjs`.',
-        ].join('\n') + footer(REMEASURE.commits),
-      };
-    },
-  },
-
-  {
-    id: 'commit-window-truncated',
-    scope: 'global',
-    priority: 3,
-    title: () => 'Watchdog generazione: finestra commit troncata, generation-idle/section-dry ciechi',
-    // follow-up(#643) → #658: `truncated` (sopra) rende `generation-idle` e
-    // `section-dry` `available:false` — corretto quando è un episodio isolato,
-    // ma se il burst che lo causa (crawler dedicati, auto-translate, slug
-    // regen) diventasse uno stato STEADY, quelle due condizioni resterebbero
-    // cieche a ogni passata finché il burst persiste: un falso-negativo
-    // occasionale e VISIBILE (questa condizione lo accende) è preferibile a un
-    // blind spot silenzioso e permanente. Misurato il 2026-08-31: un burst da
-    // 100 commit in 37 minuti consuma da solo il budget di 300 (vedi
-    // `collectCommits`).
-    //
-    // Nessuna soglia «da N run consecutivi»: lo scanner è stateless fra le
-    // passate (il workflow ha `contents: read`, non scrive un contatore), e
-    // l'apertura/chiusura della issue stessa fa da contatore — resta aperta
-    // finché il burst dura, si richiude da sola alla prima passata sana.
-    evaluate(m) {
-      if (!m.commits.available) return { available: false };
-      if (!m.commits.truncated) return { firing: false };
-      return {
-        firing: true,
-        body: [
-          `La lettura dei commit di \`main\` si è fermata dopo il budget di pagine`,
-          `(${m.commits.total} commit letti) **prima** di raggiungere il cutoff di`,
-          `**${m.commits.lookbackHours}h**: un burst di commit non-articolo ha consumato`,
-          'tutto il budget prima che la finestra nominale fosse letta per intero.',
-          '',
-          '`generation-idle` e `section-dry` trattano questo come `available:false`',
-          '(non misurato, non guasto) e NON aprono né chiudono issue mentre dura —',
-          'per costruzione, corretta per un burst isolato. Se questa condizione resta',
-          'accesa per più passate consecutive (il cron gira ogni 2h), il burst non è',
-          'più un episodio ma uno stato: le due condizioni sopra sono cieche da',
-          'altrettante ore, non da un singolo scan.',
-          '',
-          `- Commit letti: ${m.commits.total} (budget pagine esaurito).`,
-          `- Rifiutati (\`Record rejected topic candidates\`) nella parte letta: ${m.commits.rejected}.`,
-          '',
-          'Punto da cui guardare: quale processo sta producendo il burst su `main`',
-          '(crawler dedicati, auto-translate, slug regen) e se è legittimo che duri',
-          'così a lungo — non `generate-article.yml`, che qui non è la causa.',
         ].join('\n') + footer(REMEASURE.commits),
       };
     },
@@ -1605,12 +1546,6 @@ export const CONDITIONS = [
       const other = SECTIONS.find((s) => s !== section);
       const otherPer = m.commits.perSection[other];
       const last = per.lastArticleAt;
-      if (last === null && m.commits.truncated) {
-        // Stesso caso di `generation-idle`: la finestra letta è più stretta
-        // del nominale, quindi «nessun articolo di questa sezione» non è
-        // distinguibile da «non ancora letto abbastanza indietro».
-        return { available: false };
-      }
       const since = last === null ? m.commits.windowStart : last;
       const hours = (m.now - since) / 3_600_000;
       if (hours < SECTION_DRY_HOURS) return { firing: false };
@@ -1780,9 +1715,11 @@ export async function reconcile(verdicts, io) {
 // Raccolta delle misure — l'unica parte che parla con la rete e col disco.
 // ─────────────────────────────────────────────────────────────────────────────
 
-function gh(args, fallback = null) {
+function gh(args, fallback = null, { timeout } = {}) {
   try {
-    return execFileSync('gh', args, { encoding: 'utf8', maxBuffer: 64 * 1024 * 1024, stdio: ['ignore', 'pipe', 'pipe'] }).trim();
+    return execFileSync('gh', args, {
+      encoding: 'utf8', maxBuffer: 64 * 1024 * 1024, stdio: ['ignore', 'pipe', 'pipe'], timeout,
+    }).trim();
   } catch (e) {
     console.warn(`[generation-health] gh ${args.slice(0, 3).join(' ')} fallito: ${String(e.message).slice(0, 140)}`);
     return fallback;
@@ -1790,8 +1727,26 @@ function gh(args, fallback = null) {
 }
 
 /** Storia di `main`: chi ha prodotto un articolo e quando. */
-export function collectCommits(repo, lookbackHours) {
-  const cutoff = Date.now() - lookbackHours * 3_600_000;
+// Il budget deve superare il picco misurato di 755 commit in 47,72h (#658), ma
+// restare finito: 24 pagine coprono 2.400 commit e la chiamata intera non può
+// rubare più di 45 secondi al watchdog, che ha un timeout di job di 15 minuti.
+export const COMMIT_COLLECTION_MAX_PAGES = 24;
+export const COMMIT_COLLECTION_MAX_MS = 45_000;
+export const COMMIT_COLLECTION_FAILURE_PREFIX = 'commit-window collection failed:';
+
+export function exitCodeForCollectionError(error) {
+  return error instanceof Error && error.message.startsWith(COMMIT_COLLECTION_FAILURE_PREFIX) ? 1 : 0;
+}
+
+/** Storia di `main`: chi ha prodotto un articolo e quando. */
+export function collectCommits(repo, lookbackHours, {
+  now = () => Date.now(),
+  fetchPage,
+  resolveHead = (timeout) => fetchPage ? '0'.repeat(40) : gh(['api', `repos/${repo}/commits/main`, '--jq', '.sha'], null, { timeout }),
+} = {}) {
+  const startedAt = now();
+  const cutoff = startedAt - lookbackHours * 3_600_000;
+  const deadline = startedAt + COMMIT_COLLECTION_MAX_MS;
   const perSection = Object.fromEntries(
     SECTIONS.map((s) => [s, { articles: 0, rejected: 0, lastArticleAt: null, timestamps: [] }]),
   );
@@ -1799,24 +1754,18 @@ export function collectCommits(repo, lookbackHours) {
   let rejected = 0;
   let lastArticleAt = null;
   let reachedCutoff = false;
-  // Rimisurato il 2026-09-01 (#668): con MAX_PAGES=3 (300 commit) la finestra
-  // letta si fermava a ~45,3h su 300 commit reali di `main` (2026-08-31T00:00
-  // → 2026-09-01T21:21), sotto il cutoff nominale di 48h — e per questo
-  // `commit-window-truncated` era rimasta accesa per passate consecutive
-  // invece che per un burst isolato: dei 300 commit, 152 (51%) erano
-  // `Auto-update … jobs (dedicated crawler)`, cioè il traffico di crawler è
-  // uno STATO stabile, non uno spike raro. Al ritmo misurato (~6,6 commit/h)
-  // 300 coprono ~45h, sotto le 48h nominali; 500 ne coprono ~76h, col 58% di
-  // margine sul cutoff. Il costo è due chiamate `gh api` in più SOLO quando la
-  // finestra le richiede davvero (il loop esce prima al cutoff raggiunto),
-  // trascurabile a cron ogni 2h.
-  const MAX_PAGES = 5;
-
+  const headBudgetMs = deadline - now();
+  if (headBudgetMs <= 0) throw new Error(`${COMMIT_COLLECTION_FAILURE_PREFIX} request-time budget exhausted before cutoff`);
+  const head = resolveHead(headBudgetMs);
+  if (!/^[0-9a-f]{40}$/i.test(String(head))) throw new Error(`${COMMIT_COLLECTION_FAILURE_PREFIX} GitHub API returned malformed main SHA before cutoff`);
+  const readPage = fetchPage || ((page, timeout) => gh(['api', `repos/${repo}/commits?sha=${head}&per_page=100&page=${page}`,
+    '--jq', '.[] | "\\(.commit.committer.date)\\t\\(.commit.message | split("\\n")[0])"'], null, { timeout }));
   let page = 1;
-  for (; page <= MAX_PAGES && !reachedCutoff; page++) {
-    const raw = gh(['api', `repos/${repo}/commits?sha=main&per_page=100&page=${page}`,
-      '--jq', '.[] | "\\(.commit.committer.date)\\t\\(.commit.message | split("\\n")[0])"']);
-    if (raw === null) return { available: false, lookbackHours };
+  for (; page <= COMMIT_COLLECTION_MAX_PAGES && !reachedCutoff; page++) {
+    const remainingMs = deadline - now();
+    if (remainingMs <= 0) throw new Error(`${COMMIT_COLLECTION_FAILURE_PREFIX} request-time budget exhausted before cutoff`);
+    const raw = readPage(page, remainingMs, head);
+    if (raw === null) throw new Error(`${COMMIT_COLLECTION_FAILURE_PREFIX} GitHub API unavailable before cutoff`);
     const lines = raw.split('\n').filter(Boolean);
     // Meno di 100 righe: `main` non ha più storia oltre questa pagina, quindi
     // non c'è nient'altro da leggere — equivale a raggiungere il cutoff, non a
@@ -1825,8 +1774,9 @@ export function collectCommits(repo, lookbackHours) {
     if (!lines.length) break;
     for (const line of lines) {
       const tab = line.indexOf('\t');
+      if (tab <= 0) throw new Error(`${COMMIT_COLLECTION_FAILURE_PREFIX} malformed GitHub API record before cutoff`);
       const ts = Date.parse(line.slice(0, tab));
-      if (!Number.isFinite(ts)) continue;
+      if (!Number.isFinite(ts)) throw new Error(`${COMMIT_COLLECTION_FAILURE_PREFIX} malformed GitHub API timestamp before cutoff`);
       if (ts < cutoff) { reachedCutoff = true; continue; }
       total++;
       const parsed = parseGenerationCommit(line.slice(tab + 1));
@@ -1845,20 +1795,14 @@ export function collectCommits(repo, lookbackHours) {
     }
   }
 
-  // Troncato: il budget di `MAX_PAGES` pagine (500 commit) si è esaurito PRIMA
-  // di raggiungere `cutoff`. Un burst di commit non-generazione (i crawler
-  // job — misurato: 100 commit in 37 minuti il 2026-08-31) può consumare il
-  // budget in meno di un'ora, molto sotto le `lookbackHours` nominali. Quando
-  // questo succede, `lastArticleAt === null` NON è «zero articoli nella
-  // finestra»: è «non letta abbastanza finestra per saperlo». Le due condizioni
-  // che usano `lastArticleAt === null` come prova estrema (`generation-idle`,
-  // `section-dry`) devono trattarlo come non misurato, non come guasto — è
-  // esattamente la classe di difetto che questo scanner esiste per chiudere.
-  const truncated = !reachedCutoff;
+  // Una finestra non raggiunta non è una misura parziale: è un errore duro.
+  // Restituire `available:false` renderebbe generation-idle/section-dry ciechi
+  // senza far fallire il job; un messaggio stabile lascia al workflow-failure
+  // loop una sola issue deduplicata finché API, input o budget non guariscono.
+  if (!reachedCutoff) throw new Error(`${COMMIT_COLLECTION_FAILURE_PREFIX} page budget exhausted before cutoff`);
 
   return {
     available: true,
-    truncated,
     lookbackHours,
     windowStart: cutoff,
     total,
@@ -2028,6 +1972,29 @@ function routeToQueue(issue) {
   }
 }
 
+export async function collectMeasurements(repo, {
+  commitLookback, maxLogRuns, runLookback, now = Date.now,
+  collectCommitsFn = collectCommits, collectRunLogsFn = collectRunLogs, collectCorpusFn = collectCorpus,
+} = {}) {
+  let commits;
+  let commitCollectionError = null;
+  try {
+    commits = collectCommitsFn(repo, commitLookback);
+  } catch (error) {
+    if (!exitCodeForCollectionError(error)) throw error;
+    commitCollectionError = error;
+    commits = { available: false, lookbackHours: commitLookback };
+  }
+  return {
+    measurements: {
+      now: now(), commits,
+      runs: await collectRunLogsFn(repo, { maxRuns: maxLogRuns, lookbackHours: runLookback }),
+      corpus: collectCorpusFn(REPO_ROOT),
+    },
+    commitCollectionError,
+  };
+}
+
 async function main() {
   const repo = process.env.GITHUB_REPOSITORY || process.env.GH_REPO || '';
   if (!repo) {
@@ -2040,12 +2007,10 @@ async function main() {
   const maxLogRuns = Number(val('--max-log-runs', String(MAX_LOG_RUNS_DEFAULT)));
   const maxIssues = Number(val('--max-issues', '3'));
 
-  const measurements = {
-    now: Date.now(),
-    commits: collectCommits(repo, commitLookback),
-    runs: await collectRunLogs(repo, { maxRuns: maxLogRuns, lookbackHours: runLookback }),
-    corpus: collectCorpus(REPO_ROOT),
-  };
+  const { measurements, commitCollectionError } = await collectMeasurements(repo, {
+    commitLookback, maxLogRuns, runLookback,
+  });
+  if (commitCollectionError) console.error(`[generation-health] ${commitCollectionError.message}; continuo con log e corpus, poi fallisco il job.`);
 
   console.log(
     `[generation-health] commits=${measurements.commits.available ? measurements.commits.total : 'n/d'}`
@@ -2066,7 +2031,7 @@ async function main() {
     maxIssues,
     dryRun,
   });
-  return 0;
+  return exitCodeForCollectionError(commitCollectionError);
 }
 
 // Solo in modalità CLI: senza la guardia, importare questo modulo da un test lo
@@ -2075,11 +2040,9 @@ if (process.argv[1] && process.argv[1].endsWith('scan-generation-health.mjs')) {
   main().then(
     (c) => process.exit(c),
     (e) => {
-      // PROCEED-SAFE, come `scan-failed-runs.mjs`: un watchdog rotto non deve far
-      // fallire il workflow che lo ospita, altrimenti diventa esso stesso il
-      // fallimento ricorrente da segnalare.
-      console.error(`[generation-health] errore non fatale: ${e && e.stack ? e.stack : e}`);
-      process.exit(0);
+      const exitCode = exitCodeForCollectionError(e);
+      console.error(`[generation-health] errore ${exitCode ? 'fatale' : 'non fatale'}: ${e && e.stack ? e.stack : e}`);
+      process.exit(exitCode);
     },
   );
 }
