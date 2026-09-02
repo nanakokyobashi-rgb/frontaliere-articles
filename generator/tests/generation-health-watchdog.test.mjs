@@ -54,6 +54,7 @@ import {
   TOTAL_REJECTION_RATE,
   collectCorpus,
   collectCommits,
+  collectMeasurements,
   evaluateConditions,
   findDuplicateTopicPairs,
   isDegradedOutcome,
@@ -479,77 +480,6 @@ describe('le condizioni sono SPENTE sulla normalità misurata', () => {
     assert.ok(OVERSIZE_MIN_RUNS >= 2);
   });
 
-  test('#348: generation-idle non scambia una finestra TRONCATA per "zero articoli"', () => {
-    // Un burst di commit non-articolo (crawler dedicati, auto-translate, …)
-    // può esaurire le 3 pagine (300 commit) di `collectCommits` prima del
-    // cutoff. `lastArticleAt === null` in quel caso è "non ho letto abbastanza
-    // indietro per saperlo", non "guasto reale" — deve dare `available:false`.
-    const m = healthy();
-    m.commits.lastArticleAt = null;
-    m.commits.truncated = true;
-    assert.equal(verdictFor(m, 'generation-idle').available, false);
-  });
-
-  test('#348: section-dry, stesso troncamento sul lato per-sezione', () => {
-    const m = healthy();
-    m.commits.perSection.svizzera.lastArticleAt = null;
-    m.commits.truncated = true;
-    assert.equal(verdictFor(m, 'section-dry', 'svizzera').available, false);
-  });
-
-  test('#658: commit-window-truncated è SPENTA quando la finestra è stata letta per intero', () => {
-    const m = healthy();
-    assert.equal(verdictFor(m, 'commit-window-truncated').firing, false);
-  });
-});
-
-describe('#658 — commit-window-truncated: il blind spot di generation-idle/section-dry diventa visibile', () => {
-  test('si accende quando `truncated` è vero, indipendentemente da `lastArticleAt`', () => {
-    // Il punto della issue: un burst STEADY (non isolato) mantiene `truncated`
-    // vero a ogni scan, e senza questa condizione `generation-idle`/`section-dry`
-    // restano `available:false` in silenzio, passata dopo passata.
-    const m = healthy();
-    m.commits.truncated = true;
-    const v = verdictFor(m, 'commit-window-truncated');
-    assert.equal(v.firing, true);
-    assert.match(v.body, /48h/); // lookbackHours della fixture
-  });
-
-  test('resta spenta quando la finestra è troncata SOLO nella misura per-sezione mancata (regressione ordine campi)', () => {
-    // `truncated` vive su `m.commits`, non nasce da `lastArticleAt === null`:
-    // deve restare vera anche quando ogni sezione ha comunque un articolo.
-    const m = healthy();
-    m.commits.truncated = false;
-    assert.equal(verdictFor(m, 'commit-window-truncated').firing, false);
-  });
-
-  test('non misurabile quando i commit stessi non sono disponibili', () => {
-    const m = healthy();
-    m.commits = { available: false };
-    assert.equal(verdictFor(m, 'commit-window-truncated').available, false);
-  });
-
-  test('si richiude da sola quando il burst finisce (stessa simmetria apri/chiudi di ogni altra condizione)', async () => {
-    const m = healthy();
-    m.commits.truncated = true;
-    const created = [];
-    const resolved = [];
-    await reconcile(evaluateConditions(m), {
-      createIssue: async (o) => { created.push(o.title); return { number: 1 }; },
-      resolveIssue: (t) => { resolved.push(t); return null; },
-      log: () => {},
-    });
-    assert.ok(created.includes(verdictFor(m, 'commit-window-truncated').title));
-
-    const healed = healthy();
-    healed.commits.truncated = false;
-    await reconcile(evaluateConditions(healed), {
-      createIssue: async (o) => { throw new Error(`non deve aprire "${o.title}"`); },
-      resolveIssue: (t) => { resolved.push(t); return { number: 9 }; },
-      log: () => {},
-    });
-    assert.ok(resolved.includes(verdictFor(healed, 'commit-window-truncated').title));
-  });
 });
 
 describe('#658 — raccolta commit: il cutoff è obbligatorio e fail-closed', () => {
@@ -567,9 +497,23 @@ describe('#658 — raccolta commit: il cutoff è obbligatorio e fail-closed', ()
       [7, `${pageOf(99, 43)}\n${at(49)}`],
     ]);
     const m = collectCommits('owner/repo', 48, { now: () => NOW, fetchPage: (page) => pages.get(page) });
-    assert.equal(m.truncated, false);
     assert.equal(m.total, 699);
     assert.equal(m.lastArticleAt, NOW - H);
+  });
+
+  test('pinna main una volta sola e passa lo stesso SHA a ogni pagina', () => {
+    const seen = [];
+    let resolved = 0;
+    collectCommits('owner/repo', 48, {
+      now: () => NOW,
+      resolveHead: () => { resolved++; return 'a'.repeat(40); },
+      fetchPage: (page, _timeout, sha) => {
+        seen.push([page, sha]);
+        return page === 1 ? pageOf(100, 1) : `${at(49)}\n`;
+      },
+    });
+    assert.equal(resolved, 1);
+    assert.deepEqual(seen, [[1, 'a'.repeat(40)], [2, 'a'.repeat(40)]]);
   });
 
   test('esaurimento budget, API e record malformi falliscono duramente con un messaggio stabile', () => {
@@ -598,6 +542,20 @@ describe('#658 — raccolta commit: il cutoff è obbligatorio e fail-closed', ()
   test('un fallimento della raccolta rende il workflow rosso, gli altri restano soft', () => {
     assert.equal(exitCodeForCollectionError(new Error('commit-window collection failed: API unavailable')), 1);
     assert.equal(exitCodeForCollectionError(new Error('un errore non correlato')), 0);
+  });
+
+  test('un errore commit conserva le misure e gli observer indipendenti', async () => {
+    const runs = healthy().runs;
+    const corpus = healthy().corpus;
+    const result = await collectMeasurements('owner/repo', {
+      commitLookback: 48, maxLogRuns: 1, runLookback: 12, now: () => NOW,
+      collectCommitsFn: () => { throw new Error('commit-window collection failed: GitHub API unavailable before cutoff'); },
+      collectRunLogsFn: async () => runs, collectCorpusFn: () => corpus,
+    });
+    assert.equal(result.measurements.commits.available, false);
+    assert.equal(result.measurements.runs, runs);
+    assert.equal(result.measurements.corpus, corpus);
+    assert.equal(exitCodeForCollectionError(result.commitCollectionError), 1);
   });
 });
 
