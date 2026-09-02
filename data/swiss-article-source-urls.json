@@ -1,5 +1,4 @@
 {
-  "https://www.tio.ch/ticino/politica/1942871/a2-ancora-al-collasso-il-ticino-non-puo-essere-ostaggio-del-traffico-di-transito": "a2-ancora-al-collasso",
   "https://www.tio.ch/ticino/attualita/1942925/lavori-settembre-interscambio-nodo-entrano-fase": "nodo-di-interscambio-lavori-settembre",
   "https://www.laregione.ch/economia/economia/1940645/caldo-salute-ritardi-imprese-canicola": "imprese-edili-svizzere-chiedono-stop-penali",
   "https://www.laregione.ch/svizzera/svizzera/1942782/sottomissione-baume-schneider-protezione-chiede-federale": "elisabeth-baume-schneider-protezione-chimica",
@@ -1573,6 +1572,11 @@
   "https://www.admin.ch/it/newnsb/qvbx3mydemku": {
     "articleId": "penuria-insegnanti-rapporto-cause-dati",
     "ts": "2026-09-02T09:33:18.401Z",
+    "keyForm": 2
+  },
+  "https://www.laregione.ch/svizzera/svizzera/1947513/un-tribunale-ordina-ai-promotori-dell-iniziativa-sulla-neutralita-di-correggere-il-loro-bollettino": {
+    "articleId": "tribunale-ordina-bollettino-neutralita",
+    "ts": "2026-09-02T09:41:45.292Z",
     "keyForm": 2
   }
 }
