@@ -1743,6 +1743,13 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'consiglio-federale-consultazione-agricola-2030': { it: 'consiglio-federale-consultazione-agricola-2030', en: 'federal-council-agriculture-consultation-2030', de: 'bundesrat-agrarberatum-2030', fr: 'conseil-federal-consultation-agriculture-2030' },
  'margine-manovra-agricoltori-svizzera': { it: 'margine-manovra-agricoltori-svizzera', en: 'farmers-maneuver-margin-switzerland-2030', de: 'handlungsspielraum-bauern-schweiz-2030', fr: 'marge-manoeuvre-agriculteurs-suisse-2030' },
  'franco-svizzero-euro-minimi': { it: 'franco-svizzero-euro-minimi', en: 'swiss-franc-euro-minima', de: 'schweizer-franken-euro-minima', fr: 'franc-suisse-euro-minima' },
+ 'permesso-l-zurigo-validita-proroga': { it: 'permesso-l-zurigo-validita-proroga', en: 'permit-l-zurich-validity-renewal', de: 'aufenthaltserlaubnis-l-zurich-gueltig-verlaengerung', fr: 'permis-l-zurich-validite-renouvellement' },
+ 'laps-ticino-incentivi-lavoro': { it: 'laps-ticino-incentivi-lavoro', en: 'laps-ticino-work-incentives', de: 'laps-tessin-arbeitsanreize', fr: 'laps-tessin-incitations-travail' },
+ 'consiglio-federale-nomina-walser': { it: 'consiglio-federale-nomina-walser', en: 'federal-council-appoints-walser', de: 'bundesrat-ernennt-walser', fr: 'conseil-federal-nomme-walser' },
+ 'svizzera-perde-attrattiva-multinazionali': { it: 'svizzera-perde-attrattiva-multinazionali', en: 'switzerland-loses-appeal-multinationals', de: 'schweiz-verliert-attraktivitaet-multinationalkonzerne', fr: 'suisse-perd-attractivite-multinationales' },
+ 'pa30-autonomia-agricoltori': { it: 'pa30-autonomia-agricoltori', en: 'pa30-farmer-autonomy', de: 'pa30-baeuerliche-autonomie', fr: 'pa30-autonomie-agriculteurs' },
+ 'novartis-130-ristrutturazione-basilea': { it: 'novartis-130-ristrutturazione-basilea', en: 'novartis-130-restructuring-basel', de: 'novartis-130-umstrukturierung-basel', fr: 'novartis-130-restructuration-bale' },
+ 'formazione-professionale-tirocinio-zurigo': { it: 'formazione-professionale-tirocinio-zurigo', en: 'vocational-training-apprenticeship-zurich', de: 'berufsausbildung-lehrling-zurich', fr: 'formation-professionnelle-apprentissage-zurich' },
 };
 
 export const REVERSE_SWISS: Record<ArticleLocale, Record<string, string>> = (() => {

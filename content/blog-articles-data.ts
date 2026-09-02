@@ -33222,6 +33222,24 @@ const RAW_ARTICLES = [
  authorSlug: 'marco-ferrari',
  authorName: 'Marco Ferrari',
  },
+ {
+ id: 'mornago-frontaliere',
+ category: 'fiscale',
+ date: '2026-09-02T13:35:07.451Z',
+ image: '/images/blog/mornago-frontaliere.webp',
+ hasCalculator: true,
+ authorSlug: 'marco-ferrari',
+ authorName: 'Marco Ferrari',
+ },
+ {
+ id: 'la-frontiera-fiscale-tra-italia-e-svizzera-nella-circolazione-delle-opere-darte',
+ category: 'fiscale',
+ date: '2026-09-02T15:13:26.337Z',
+ image: '/images/places/lago-lugano.webp',
+ hasCalculator: false,
+ authorSlug: 'samuele-valente',
+ authorName: 'Samuele Valente',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)
