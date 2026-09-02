@@ -1,5 +1,4 @@
 {
-  "https://www.laregione.ch/svizzera/svizzera/1942729/carenza-insegnamento-insegnanti-svizzera-segnali-mostra": "carenza-insegnanti-svizzera",
   "https://www.laregione.ch/economia/economia/1941287/calore-ondate-miliardi-dollari-perdite-produttivita-catastrofi": "catastrofi-naturali-perdite-112-miliardi-dollari",
   "https://www.laregione.ch/economia/economia/1942022/miliardi-quotazione-glencore-australia-utile": "glencore-quotazione-australia",
   "https://www.laregione.ch/svizzera/svizzera/1943004/sharing-svizzera-villars-job-casi-softwareone": "job-sharing-svizzera",
@@ -1589,6 +1588,11 @@
   "https://www.tio.ch/svizzera/politica/1947536/agricoltori-margine-manovra-politica-cf": {
     "articleId": "politica-agricola-2030-tagli-120-milioni",
     "ts": "2026-09-02T11:48:15.361Z",
+    "keyForm": 2
+  },
+  "https://www.admin.ch/it/newnsb/sdanuz7ynr9j": {
+    "articleId": "consiglio-federale-consultazione-agricola-2030",
+    "ts": "2026-09-02T12:18:01.923Z",
     "keyForm": 2
   }
 }
