@@ -68,6 +68,7 @@ import {
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
 const H = 3_600_000;
 const NOW = Date.parse('2026-08-10T16:00:00.000Z');
+const TEST_MAIN_SHA = 'a'.repeat(40);
 
 // ── Campioni VERBATIM da run reali. Non riscriverli a mano: sono il contratto
 // col produttore, e la loro forma esatta è l'unica cosa che il parser deve
@@ -496,7 +497,11 @@ describe('#658 — raccolta commit: il cutoff è obbligatorio e fail-closed', ()
       [4, pageOf(100, 22)], [5, pageOf(100, 29)], [6, pageOf(100, 36)],
       [7, `${pageOf(99, 43)}\n${at(49)}`],
     ]);
-    const m = collectCommits('owner/repo', 48, { now: () => NOW, fetchPage: (page) => pages.get(page) });
+    const m = collectCommits('owner/repo', 48, {
+      now: () => NOW,
+      resolveHead: () => TEST_MAIN_SHA,
+      fetchPage: (page) => pages.get(page),
+    });
     assert.equal(m.total, 699);
     assert.equal(m.lastArticleAt, NOW - H);
   });
@@ -506,26 +511,34 @@ describe('#658 — raccolta commit: il cutoff è obbligatorio e fail-closed', ()
     let resolved = 0;
     collectCommits('owner/repo', 48, {
       now: () => NOW,
-      resolveHead: () => { resolved++; return 'a'.repeat(40); },
+      resolveHead: () => { resolved++; return TEST_MAIN_SHA; },
       fetchPage: (page, _timeout, sha) => {
         seen.push([page, sha]);
         return page === 1 ? pageOf(100, 1) : `${at(49)}\n`;
       },
     });
     assert.equal(resolved, 1);
-    assert.deepEqual(seen, [[1, 'a'.repeat(40)], [2, 'a'.repeat(40)]]);
+    assert.deepEqual(seen, [[1, TEST_MAIN_SHA], [2, TEST_MAIN_SHA]]);
+  });
+
+  test('un fetchPage iniettato richiede il resolveHead dello stesso transport', () => {
+    assert.throws(
+      () => collectCommits('owner/repo', 48, { now: () => NOW, fetchPage: () => '' }),
+      /commit-window collection failed: injected fetchPage requires resolveHead/,
+    );
   });
 
   test('esaurimento budget, API e record malformi falliscono duramente con un messaggio stabile', () => {
     const exhaustive = () => collectCommits('owner/repo', 48, {
       now: () => NOW,
+      resolveHead: () => TEST_MAIN_SHA,
       fetchPage: () => pageOf(100, 1),
     });
     assert.throws(exhaustive, /commit-window collection failed: page budget exhausted before cutoff/);
     assert.throws(exhaustive, /commit-window collection failed: page budget exhausted before cutoff/);
-    assert.throws(() => collectCommits('owner/repo', 48, { now: () => NOW, fetchPage: () => null }), /GitHub API unavailable/);
-    assert.throws(() => collectCommits('owner/repo', 48, { now: () => NOW, fetchPage: () => 'not-a-commit' }), /malformed GitHub API record/);
-    assert.throws(() => collectCommits('owner/repo', 48, { now: () => NOW, fetchPage: () => 'invalid-date\tchore' }), /malformed GitHub API timestamp/);
+    assert.throws(() => collectCommits('owner/repo', 48, { now: () => NOW, resolveHead: () => TEST_MAIN_SHA, fetchPage: () => null }), /GitHub API unavailable/);
+    assert.throws(() => collectCommits('owner/repo', 48, { now: () => NOW, resolveHead: () => TEST_MAIN_SHA, fetchPage: () => 'not-a-commit' }), /malformed GitHub API record/);
+    assert.throws(() => collectCommits('owner/repo', 48, { now: () => NOW, resolveHead: () => TEST_MAIN_SHA, fetchPage: () => 'invalid-date\tchore' }), /malformed GitHub API timestamp/);
   });
 
   test('il budget di tempo è esplicito e non avvia una richiesta dopo la deadline', () => {
@@ -533,6 +546,7 @@ describe('#658 — raccolta commit: il cutoff è obbligatorio e fail-closed', ()
     let clockCalls = 0;
     assert.throws(() => collectCommits('owner/repo', 48, {
       now: () => (clockCalls++ === 0 ? NOW : NOW + COMMIT_COLLECTION_MAX_MS),
+      resolveHead: () => TEST_MAIN_SHA,
       fetchPage: () => { calls++; return ''; },
     }), /request-time budget exhausted before cutoff/);
     assert.equal(calls, 0);
