@@ -1,5 +1,4 @@
 {
-  "https://www.seco.admin.ch/it/newnsb/mc7vaab5u5ch2wcjouxbs": "lotta-lavoro-nero-consultazione",
   "https://www.seco.admin.ch/it/newnsb/nioazl9cj1f0d5qgjbkd6": "mercato-lavoro-svizzera-luglio-2026",
   "https://www.seco.admin.ch/it/newnsb/_imibsiprkllgtkiysvor": "lotta-lavoro-nero-2025",
   "https://www.laregione.ch/economia/economia/1942280/group-partners-miliardi-aroma-zone-trattative": "partners-group-trattative-aroma-zone",
@@ -1653,6 +1652,11 @@
   "https://www.rsi.ch/s/4056264": {
     "articleId": "affitti-benzina-spingono-inflazione",
     "ts": "2026-09-03T08:35:51.842Z",
+    "keyForm": 2
+  },
+  "https://www.seco.admin.ch/it/newnsb/xrrzulvt1pbc": {
+    "articleId": "pil-q2-2026-industria-forte",
+    "ts": "2026-09-03T08:52:00.557Z",
     "keyForm": 2
   }
 }
