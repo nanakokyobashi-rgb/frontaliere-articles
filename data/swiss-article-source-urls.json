@@ -1,5 +1,4 @@
 {
-  "https://www.seco.admin.ch/it/newnsb/_esttpjrhazmvtpcm9qxn": "mercato-lavoro-svizzera-giugno-2026",
   "https://www.laregione.ch/economia/economia/1942012/sandoz-miliardi-dollari-primo-biosimilari-fatturato-semestre": "sandoz-biosimilari-2026",
   "https://www.laregione.ch/economia/economia/1940892/glencore-produzione-rame-calo-miliardi": "glencore-produzione-riscrittura",
   "https://www.seco.admin.ch/it/la-seco-in-qualita-di-datore-di-lavoro": "lavorare-seco",
@@ -1673,6 +1672,11 @@
   "https://www.swissinfo.ch/ita/prezzo-benzina-e-diesel-aumenta%2c-sfiora-i-massimi-dell%27anno/91999541": {
     "articleId": "benzina-diesel-massimi-anno-2026",
     "ts": "2026-09-03T12:07:43.045Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/s/4056678": {
+    "articleId": "tardoc-medici-famiglia-svizzera",
+    "ts": "2026-09-03T12:29:03.974Z",
     "keyForm": 2
   }
 }
