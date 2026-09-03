@@ -1,5 +1,4 @@
 {
-  "https://www.seco.admin.ch/it/newnsb/ohqzdeeggxr9tah-z1olx": "libera-circolazione-mercato-lavoro-2026",
   "https://www.laregione.ch/temablog/publiredazionale": "publiredazionale-aziende-informano",
   "https://www.laregione.ch/economia/economia/1941228/apple-chip-tre-stime-supply-chain-ia-carenza": "apple-chip-supply-chain-impatto",
   "https://tuttojob.ch": "annunci-di-lavoro-svizzera",
@@ -1701,6 +1700,11 @@
   "https://www.swissinfo.ch/ita/seco%3a-%22non-%c3%a8-un-boom%2c-ma-la-crescita-ha-un%27ampia-base%22/91999934": {
     "articleId": "seco-ampia-base-crescita",
     "ts": "2026-09-03T14:40:29.726Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/politica/1947849/svizzera-pacchetto-governi-bilaterali-iii": {
+    "articleId": "bilaterali-iii-governi-cantonali",
+    "ts": "2026-09-03T14:48:14.035Z",
     "keyForm": 2
   }
 }
