@@ -1,0 +1,617 @@
+name: PR ❌ check fixer (bounded, check richiesto rosso su PR bot)
+
+# Gemello di `pr-redflag-fixer.yml`, per il sintomo che quello NON copre.
+#
+# Il 🔴-fixer parte su `pull_request_review`: chiude i finding che il reviewer
+# SCRIVE. Ma il reviewer legge il DIFF, non la CI — quindi una PR autonoma con
+# il check richiesto rosso e nessun `🔴 Important` non ha nessun meccanismo che
+# la guardi. Resta rossa finche' un umano non ci inciampa.
+#
+# ── PERCHE' QUI SERVE PIU' CHE SUL SITO (2026-09-03) ────────────────────────
+# Da quando la Claude review vive DENTRO `tests.yml`, il check richiesto e' UNO
+# solo e porta quattro cose: contratto del body, unit + closure gates, verdetto
+# della review, gate di `generator-ci`. Un rosso li' e' quindi piu' probabile e
+# piu' bloccante di prima — e con l'auto-merge NATIVO non c'e' piu' nessuno
+# script nostro che, guardando il rosso, possa almeno dirlo. GitHub aspetta e
+# basta.
+#
+# NON agisce mai su PR scritte da persone, ne' su un rosso che non e' piu'
+# quello della HEAD corrente: un rosso stantio e' gia' stato superato da un
+# push, e "ripararlo" vorrebbe dire lavorare su una diagnosi vecchia.
+#
+# ANTI-LOOP: marker `<!-- REDCHECK_FIX_ROUND: N -->`, cap 2 → `needs-human` e
+# STOP senza Claude, identico al gemello e per la stessa ragione (frugalita' di
+# quota: non bruciare turni in un ciclo che non converge). La quota e'
+# CONDIVISA col sito.
+on:
+  workflow_run:
+    workflows: ['tests']
+    types: [completed]
+  workflow_dispatch:
+    inputs:
+      pr:
+        description: 'Numero PR da riparare (bypassa il gate workflow_run)'
+        required: true
+
+# Serializzato per BRANCH, non per numero PR: nel contesto `workflow_run` il
+# numero non e' affidabile (`pull_requests` e' spesso vuoto), mentre
+# `head_branch` c'e' sempre. Due round Claude concorrenti sullo stesso branch si
+# sovrascriverebbero il push.
+concurrency:
+  group: redcheck-fix-${{ github.event.workflow_run.head_branch || github.event.inputs.pr }}
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+  id-token: write
+
+jobs:
+  # Preflight senza checkout, solo `gh`: risolve la PR e applica OGNI gate prima
+  # di spendere un checkout da 28.777 file. `actionable=false` → skip verde,
+  # nessun round consumato. Stessa forma del gemello.
+  preflight:
+    # `tests` gira su `pull_request`, su `workflow_dispatch` e su `push` a
+    # `main`. Il ramo `push` va escluso: su `main` non c'e' nessuna PR da
+    # riparare, e un rosso li' e' il problema di `content-gates-main`, non di
+    # questo workflow. Il `workflow_dispatch` invece NON va escluso — e' cosi'
+    # che `pr-autorebase.yml` ri-testa una head appena rebasata, e quei rossi
+    # sono fra i piu' probabili.
+    if: >-
+      github.event_name == 'workflow_dispatch' ||
+      (github.event.workflow_run.conclusion == 'failure' &&
+       github.event.workflow_run.event != 'push')
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    outputs:
+      actionable: ${{ steps.pre.outputs.actionable }}
+      pr_number: ${{ steps.pre.outputs.pr_number }}
+      head_ref: ${{ steps.pre.outputs.head_ref }}
+      failed_run_id: ${{ steps.pre.outputs.failed_run_id }}
+      head_sha: ${{ steps.pre.outputs.head_sha }}
+    steps:
+      - name: PR azionabile, e il rosso e' ancora quello della HEAD?
+        id: pre
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          EVENT_NAME: ${{ github.event_name }}
+          DISPATCH_PR: ${{ github.event.inputs.pr }}
+          RUN_ID: ${{ github.event.workflow_run.id }}
+          RUN_SHA: ${{ github.event.workflow_run.head_sha }}
+          RUN_BRANCH: ${{ github.event.workflow_run.head_branch }}
+        run: |
+          set -uo pipefail
+          skip() { echo "$1"; echo "actionable=false" >> "$GITHUB_OUTPUT"; exit 0; }
+
+          if [ "$EVENT_NAME" = "workflow_dispatch" ]; then
+            PR="$DISPATCH_PR"
+            HEAD_SHA=$(gh api "repos/$REPO/pulls/$PR" --jq '.head.sha' 2>/dev/null || echo "")
+            RUN_ID=$(gh run list --repo "$REPO" --workflow=tests.yml --limit 20 \
+              --json databaseId,headSha,conclusion \
+              --jq "[.[] | select(.headSha==\"$HEAD_SHA\" and .conclusion==\"failure\")][0].databaseId" 2>/dev/null || echo "")
+            if [ -z "$RUN_ID" ] || [ "$RUN_ID" = "null" ]; then
+              skip "Nessuna run tests fallita sulla HEAD di #$PR → niente da riparare (no-op)."
+            fi
+          else
+            # `pull_requests` del workflow_run e' spesso vuoto: la via robusta e'
+            # cercare la PR aperta con questo head branch.
+            PR=$(gh api "repos/$REPO/pulls?state=open&per_page=100" \
+              --jq "[.[] | select(.head.ref==\"$RUN_BRANCH\")][0].number" 2>/dev/null || echo "")
+            if [ -z "$PR" ] || [ "$PR" = "null" ]; then
+              skip "Nessuna PR aperta per il branch '$RUN_BRANCH' → skip (no-op)."
+            fi
+          fi
+
+          pr=$(gh api "repos/$REPO/pulls/$PR" 2>/dev/null || echo "")
+          if [ -z "$pr" ]; then
+            skip "PR #$PR non leggibile → skip (no-op)."
+          fi
+
+          state=$(printf '%s' "$pr" | jq -r '.state')
+          draft=$(printf '%s' "$pr" | jq -r '.draft')
+          author_type=$(printf '%s' "$pr" | jq -r '.user.type')
+          author=$(printf '%s' "$pr" | jq -r '.user.login')
+          head_ref=$(printf '%s' "$pr" | jq -r '.head.ref')
+          head_sha=$(printf '%s' "$pr" | jq -r '.head.sha')
+
+          if [ "$state" != "open" ]; then
+            skip "PR #$PR non piu' OPEN (state=$state) → gia' risolta, skip (no-op)."
+          fi
+          if [ "$draft" = "true" ]; then
+            skip "PR #$PR e' draft → fuori scope (come ogni altro strato), skip (no-op)."
+          fi
+
+          # La PR del mirror engine ha il proprio auto-merge dedicato e il body
+          # generato dal workflow del sito: riscriverla qui e' un errore di
+          # categoria, esattamente come pretenderne il contratto del body.
+          if [ "$head_ref" = "engine-lockstep-auto" ]; then
+            skip "PR #$PR e' la lockstep del mirror engine → fuori scope, skip (no-op)."
+          fi
+
+          # Scope: solo PR autonome. Identico al gemello, e per lo stesso
+          # motivo: un fixer che riscrive la PR di una persona e' fuori mandato.
+          case "$head_ref" in
+            fix/*) autonomous=true ;;
+            *) [ "$author_type" = "Bot" ] && autonomous=true || autonomous=false ;;
+          esac
+          if [ "$autonomous" != "true" ]; then
+            skip "PR #$PR e' di una persona ($author, head '$head_ref') → fuori scope per design, skip (no-op)."
+          fi
+
+          # Il rosso deve essere quello della HEAD CORRENTE. Un rosso su uno SHA
+          # superato e' gia' stato risolto da un push successivo, e "ripararlo"
+          # significherebbe lavorare su una diagnosi vecchia.
+          if [ "$EVENT_NAME" != "workflow_dispatch" ] && [ "$RUN_SHA" != "$head_sha" ]; then
+            skip "Il rosso e' del commit $RUN_SHA ma la HEAD e' $head_sha → rosso stantio, gia' superato da un push. Skip (no-op)."
+          fi
+
+          # La CI corrente deve essere DAVVERO rossa adesso: fra il trigger e qui
+          # un rerun puo' aver rimesso verde, e allora non c'e' niente da fixare.
+          rollup=$(gh api "repos/$REPO/commits/$head_sha/check-runs?per_page=100" \
+            --jq '[.check_runs[] | select(.conclusion=="failure") | .name] | join(", ")' 2>/dev/null || echo "")
+          if [ -z "$rollup" ]; then
+            skip "Nessun check in stato failure sulla HEAD adesso → gia' rientrato, skip (no-op)."
+          fi
+
+          # Non correre sopra il gemello: se il 🔴-fixer sta girando su questo
+          # branch, il suo push arriverebbe sopra il nostro (o viceversa).
+          busy=$(gh run list --repo "$REPO" --workflow=pr-redflag-fixer.yml --branch "$head_ref" \
+            --json status --jq '[.[] | select(.status=="in_progress" or .status=="queued")] | length' 2>/dev/null || echo 0)
+          if [ "${busy:-0}" -gt 0 ]; then
+            skip "Il 🔴-fixer sta gia' girando su '$head_ref' → skip per evitare una push race (no-op, si rivaluta al prossimo rosso)."
+          fi
+
+          echo "PR #$PR ('$head_ref') rossa su: $rollup → azionabile."
+          {
+            echo "actionable=true"
+            echo "pr_number=$PR"
+            echo "head_ref=$head_ref"
+            echo "failed_run_id=$RUN_ID"
+            echo "head_sha=$head_sha"
+          } >> "$GITHUB_OUTPUT"
+
+  redcheck-fix:
+    needs: preflight
+    if: needs.preflight.outputs.actionable == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+          # Lo SHA verificato dal preflight, NON il nome del branch. Il preflight
+          # ha appena stabilito che il rosso e' di QUESTO commit; se fra la sua
+          # fine e l'avvio di questo job arriva un push (il rescuer, l'autorebase,
+          # una persona), checkoutare il NOME del branch darebbe all'agente un
+          # albero piu' nuovo del `failing.txt` che sta leggendo — una diagnosi
+          # su codice che non ha davanti. Con lo SHA i due combaciano sempre, e
+          # se il branch e' nel frattempo avanzato il push finale viene rifiutato
+          # come non-fast-forward: un fallimento pulito invece di un fix cieco.
+          ref: ${{ needs.preflight.outputs.head_sha }}
+          # `content/` pesa: blobless partial clone, come issue-fix. Sicuro —
+          # il fixer legge e scrive i file dell'head e fa `git merge origin/main`:
+          # servono i blob dei file toccati, non la storia dei blob.
+          filter: blob:none
+        # Tetto sullo step → `failure` diagnosticabile invece di `cancelled`.
+        timeout-minutes: 15
+
+      # Profilassi anti-401. `claude-code-action` esige che il workflow file in
+      # esecuzione sia BYTE-IDENTICO a `main`, e dal 2026-09-03 il workflow che
+      # ospita la review e' `tests.yml`. Se `main` lo aggiorna DOPO il branch, la
+      # re-review innescata dal push qui sotto fallirebbe `401 Workflow
+      # validation failed`: nessun `## LGTM`, quindi review gate rosso, quindi il
+      # ❌-fix risulterebbe fallito senza colpa propria. Allineare PRIMA: il
+      # merge e' no-op se il branch e' gia' fresco. Su conflitto → warning e si
+      # prosegue, il branch resta com'era.
+      - name: Align review workflows (merge origin/main, anti-401 drift)
+        run: |
+          set -uo pipefail
+          git config user.name "Valerie Linc"
+          git config user.email "valerielinc@gmail.com"
+          git fetch origin main -q || true
+          if git merge origin/main -m "chore: merge main (anti-401 workflow drift)" -q 2>/dev/null; then
+            echo "Branch allineato a origin/main (o gia' fresco)."
+          else
+            git merge --abort 2>/dev/null || true
+            echo "::warning::merge di origin/main in conflitto — proseguo sul branch com'era; se la review va in 401 il round successivo lo vedra'."
+          fi
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: '22'
+
+      - name: Prepare Firebase credentials
+        env:
+          FIREBASE_SERVICE_ACCOUNT_JSON: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}
+        run: |
+          if [ -n "$FIREBASE_SERVICE_ACCOUNT_JSON" ]; then
+            printf '%s' "$FIREBASE_SERVICE_ACCOUNT_JSON" > /tmp/firebase-sa.json
+            echo "GOOGLE_APPLICATION_CREDENTIALS=/tmp/firebase-sa.json" >> "$GITHUB_ENV"
+          else
+            echo "⚠️ Nessuna Firebase SA — GITHUB_PAT_NANAKO non caricato; il push del fix userebbe GITHUB_TOKEN, che non ri-triggera la re-review."
+          fi
+
+      - name: Load secrets from Remote Config (GITHUB_PAT_NANAKO)
+        continue-on-error: true
+        run: node generator/scripts/load-rc-env.mjs
+
+      # Token-down = degrado silenzioso a catena del ciclo autonomo. Alert
+      # inline deterministico, dedup sul titolo canonico del monitor daily
+      # (`gh-pat-expiry-monitor.yml`), che resta l'owner dell'auto-close.
+      # `GH_TOKEN` e' il GITHUB_TOKEN, non il PAT: e' il PAT la cosa rotta.
+      - name: Alert token-down (dedup, zero-Claude)
+        if: env.GITHUB_PAT_NANAKO == ''
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+        run: node scripts/ci/alert-pat-down.mjs --workflow "${{ github.workflow }}" --run-url "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+
+      # ── Round cap + capability guard + tier (deterministico, prima di Claude)
+      # Conta i marker `<!-- REDCHECK_FIX_ROUND: N -->` gia' sulla PR. A N>=2 →
+      # escalation a `needs-human`, STOP senza Claude. Il capability guard:
+      # se la PR tocca `.github/workflows/**` e non c'e' un token con lo scope
+      # `workflow`, il push verrebbe rifiutato DOPO che il lavoro e' stato fatto
+      # — cioe' un run intero speso e buttato.
+      - name: Round cap + capability guard + tier
+        id: guard
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          PR_NUMBER: ${{ needs.preflight.outputs.pr_number }}
+          HAS_PAT: ${{ env.GITHUB_PAT_NANAKO != '' }}
+        run: |
+          set -uo pipefail
+          MAX_ROUNDS=2
+
+          comments=$(gh api "repos/$REPO/issues/$PR_NUMBER/comments" --paginate \
+            --jq '[.[] | .body] | join("\n")' 2>/dev/null || echo "")
+          ROUND=$(printf '%s' "$comments" | grep -oE 'REDCHECK_FIX_ROUND: [0-9]+' \
+            | grep -oE '[0-9]+' | sort -rn | head -1 || true)
+          ROUND=${ROUND:-0}
+          NEXT=$((ROUND + 1))
+          echo "Round ❌-check-fix correnti: $ROUND (cap $MAX_ROUNDS)"
+
+          if [ "$ROUND" -ge "$MAX_ROUNDS" ]; then
+            echo "::warning::Round cap raggiunto ($ROUND >= $MAX_ROUNDS) → escalation needs-human, no Claude."
+            gh pr edit "$PR_NUMBER" --repo "$REPO" --add-label "needs-human" 2>/dev/null \
+              || echo "label needs-human assente — la crea ensure-loop-labels.mjs"
+            gh pr comment "$PR_NUMBER" --repo "$REPO" --body "$(printf '🛑 **needs-human** (auto): il ❌-check-fixer ha gia tentato %s round senza far tornare verde la CI. STOP automatico (anti-loop, frugalita di quota). Serve revisione umana: apri il job fallito e leggi le righe di fallimento.' "$ROUND")" \
+              2>/dev/null || true
+            echo "proceed=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          # `gh pr view --json files` tronca a 100 senza dirlo, e qui una PR di
+          # corpus ne ha migliaia: il capability guard si deciderebbe su un
+          # campione. `fetch-pr-files.mjs` pagina davvero e dichiara se l'elenco
+          # e' completo.
+          result=$(node scripts/ci/fetch-pr-files.mjs --repo "$REPO" --pr "$PR_NUMBER" 2>/dev/null || echo '{}')
+          expected=$(echo "$result" | jq -r '.expected // 0')
+          count=$(echo "$result" | jq -r '.count // 0')
+          files_complete=$(echo "$result" | jq -r 'if .complete then 1 else 0 end')
+          reason=$(echo "$result" | jq -r '.reason // "unknown"')
+          files=$(echo "$result" | jq -r '(.files // [])[]')
+          if [ "$files_complete" != "1" ]; then
+            echo "::warning::Elenco file INCOMPLETO ($count/$expected, causa: $reason) → capability guard e tier trattano la PR come se toccasse i workflow e codice funnel-critical."
+          fi
+          touches_wf=$(echo "$files" | grep -E '^\.github/workflows/' || true)
+          # Elenco incompleto = «non lo so», e su un capability guard «non lo so»
+          # deve pesare come «si'»: il costo di sbagliare in questa direzione e'
+          # uno skip con commento, quello opposto e' un run Claude bruciato e un
+          # push che fallisce alla fine.
+          if { [ -n "$touches_wf" ] || [ "$files_complete" != "1" ]; } && [ "$HAS_PAT" != "true" ]; then
+            bt=$(printf '\x60')
+            if [ -n "$touches_wf" ]; then
+              skip_why="la PR tocca ${bt}.github/workflows/**${bt}"
+            else
+              skip_why="l'elenco file e' incompleto, quindi non si puo' escludere che la PR tocchi ${bt}.github/workflows/**${bt}"
+            fi
+            echo "::warning::Skip capability workflows (causa: $skip_why), manca il PAT con scope workflow → push rifiutato, skip senza bruciare un turno Claude."
+            gh pr comment "$PR_NUMBER" --repo "$REPO" \
+              --body "⏭️ ❌-check-fixer skip: ${skip_why} e non e' disponibile un PAT con scope ${bt}workflow${bt} → il push fallirebbe. Applicare il fix a mano." \
+              2>/dev/null || true
+            echo "proceed=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          # Tier: `high` se la PR tocca il codice che PRODUCE o RENDE la
+          # superficie pubblicata — `generator/`, `engine/`, `host/`, gli script
+          # che emettono `dist/api/` e i workflow. Modello unificato su entrambi
+          # i tier; restano distinti per telemetria e per il prompt.
+          crit=$(echo "$files" | grep -E '^(generator/|engine/|host/|\.github/workflows/)' || true)
+          crit2=$(echo "$files" | grep -E '^scripts/' | grep -vE '^scripts/(ci|dev)/' || true)
+          if [ -n "$crit$crit2" ] || [ "$files_complete" != "1" ]; then
+            echo "tier=high" >> "$GITHUB_OUTPUT"
+          else
+            echo "tier=normal" >> "$GITHUB_OUTPUT"
+          fi
+          echo "model=claude-sonnet-5" >> "$GITHUB_OUTPUT"
+
+          # Il marker del round si posta PRIMA di invocare Claude: se la run
+          # muore, il round e' comunque contato e l'anti-loop tiene.
+          gh pr comment "$PR_NUMBER" --repo "$REPO" --body "$(printf '<!-- REDCHECK_FIX_ROUND: %s -->\n_❌-check-fixer round %s/%s avviato (auto)._' "$NEXT" "$NEXT" "$MAX_ROUNDS")" \
+            2>/dev/null || true
+          echo "proceed=true" >> "$GITHUB_OUTPUT"
+          echo "round=$NEXT" >> "$GITHUB_OUTPUT"
+
+      # `actions/checkout` persiste `http.https://github.com/.extraheader`, che
+      # PREVALE sullo `x-access-token:` del remote: senza azzerarlo il set-url e'
+      # inerte e il push viaggia come `github-actions[bot]` — che per
+      # anti-ricorsione non ri-triggera `tests`, quindi nessuna re-review.
+      - name: Configure push remote (PAT)
+        if: steps.guard.outputs.proceed == 'true' && env.GITHUB_PAT_NANAKO != ''
+        env:
+          PUSH_TOKEN: ${{ env.GITHUB_PAT_NANAKO }}
+          REPO: ${{ github.repository }}
+        run: |
+          git config --unset-all "http.https://github.com/.extraheader" || true
+          git remote set-url origin "https://x-access-token:${PUSH_TOKEN}@github.com/${REPO}.git"
+
+      # SHA di partenza (post-merge origin/main, pre-Claude): il classify finale
+      # lo confronta con la HEAD remota per capire se il round ha davvero
+      # pushato un fix. Un round che pusha e' SUCCESS anche se la CLI e' poi
+      # morta ai turni in cleanup.
+      - name: Record base SHA (pre-Claude)
+        id: base
+        if: steps.guard.outputs.proceed == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          PR_NUMBER: ${{ needs.preflight.outputs.pr_number }}
+        run: |
+          echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+          # Baseline dei commenti PRE-Claude (dopo il marker del round): serve al
+          # classify per distinguere «Claude ha lasciato una spiegazione» da
+          # «Claude non ha fatto ne' detto nulla» quando esce pulito senza push.
+          n=$(gh api "repos/$REPO/issues/$PR_NUMBER/comments" --paginate --jq 'length' 2>/dev/null || echo 0)
+          echo "comments=${n:-0}" >> "$GITHUB_OUTPUT"
+
+      # Contesto del rosso, deterministico e BOUNDED, prima di spendere un turno
+      # Claude. Due ragioni per farlo qui e non nel prompt: il log di una run e'
+      # grande, e farlo scaricare all'agente brucia turni di setup — il primo
+      # consumatore misurato su questo ciclo. E il filtro giusto e' noto.
+      #
+      # ── IL FILTRO COPRE TUTTE E QUATTRO LE FAMIGLIE, NON SOLO TAP ─────────
+      # Il gemello sul sito cerca le righe `FAIL ` di vitest. Qui i gate girano
+      # sotto `node --test`, che scrive TAP: i fallimenti sono `not ok N` e `✖`.
+      # Copiare il filtro del sito darebbe un `failing.txt` VUOTO su ogni rosso —
+      # un contesto che non contiene il fallimento e' peggio di nessun contesto,
+      # perche' l'agente lo legge e conclude che non c'e' niente da riparare.
+      #
+      # Ma il TAP da solo NON basta, ed e' lo stesso difetto un passo piu' in la'.
+      # Il check richiesto porta QUATTRO famiglie e solo una di esse parla TAP:
+      #   - contratto del body        → `::error::Contratto del body violato ...`
+      #   - unit + closure gates      → TAP (`not ok N`, `✖`)
+      #   - verdetto della review     → `::error::Nessuna review Claude approvante ...`
+      #   - gate di `generator-ci`    → `::error::generator-ci-gate: ... = failure`
+      # Con il solo filtro TAP, un rosso delle altre tre produce un `failing.txt`
+      # che dice `# fail 0` mentre il vero rosso resta fuori: e' esattamente il
+      # «peggio di nessun contesto» che il paragrafo qui sopra dichiara di voler
+      # evitare. Quindi si raccolgono anche le righe `::error::`.
+      #
+      # E per `generator-ci` non basta nemmeno quello: quel gate ATTENDE un
+      # check-run prodotto da un ALTRO workflow, quindi il log del fallimento non
+      # e' nella run di `tests` che stiamo leggendo. Quando il blocco `::error::`
+      # nomina quel gate si scarica anche il log fallito di `generator-ci.yml`
+      # sullo STESSO sha — altrimenti l'agente vedrebbe «generator-ci e' rosso» e
+      # nient'altro, cioe' un verdetto senza la diagnosi che serve per ripararlo.
+      - name: Collect failing check context (zero-Claude)
+        id: ctx
+        if: steps.guard.outputs.proceed == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          FAILED_RUN_ID: ${{ needs.preflight.outputs.failed_run_id }}
+          HEAD_SHA: ${{ needs.preflight.outputs.head_sha }}
+          HEAD_REF: ${{ needs.preflight.outputs.head_ref }}
+        run: |
+          set -uo pipefail
+          OUT="$RUNNER_TEMP/redcheck"
+          mkdir -p "$OUT"
+
+          # Solo i job FALLITI della run: `--log-failed` evita di scaricare
+          # l'intero log della suite verde.
+          gh run view "$FAILED_RUN_ID" --repo "$REPO" --log-failed > "$OUT/raw.log" 2>/dev/null || true
+          if [ ! -s "$OUT/raw.log" ]; then
+            echo "::warning::log della run $FAILED_RUN_ID non leggibile → l'agente dovra' ricavarsi il fallimento da solo."
+            : > "$OUT/failing.txt"
+          else
+            # Il log CI porta gli escape ANSI come TESTO, non come byte: vanno
+            # tolti o il grep sui nomi dei test non aggancia niente.
+            sed -e 's/\x1b\[[0-9;]*m//g' -e 's/\^\[\[[0-9;]*m//g' "$OUT/raw.log" > "$OUT/clean.log"
+            strip='s/^[^\t]*\t[^\t]*\t[0-9T:.Z-]*//'
+            # Dedup che PRESERVA L'ORDINE del log, non `sort -u`: con
+            # l'ordinamento alfabetico il cap `head` taglia per iniziale, e la
+            # riga che nomina `generator-ci-gate` puo' cadere fuori proprio
+            # quando i gate rossi sono tanti — saltando in silenzio il download
+            # del log separato, cioe' il caso che questo blocco esiste per
+            # coprire. Con l'ordine del log, cio' che sopravvive al cap e' cio'
+            # che e' fallito PRIMA, che e' anche l'ordine in cui si diagnostica.
+            grep -E '::error::' "$OUT/clean.log" | sed "$strip" | awk '!seen[$0]++' | head -20 > "$OUT/errors.txt" || : > "$OUT/errors.txt"
+            {
+              echo "### Gate falliti (righe \`::error::\`)"
+              if [ -s "$OUT/errors.txt" ]; then cat "$OUT/errors.txt"; else echo "(nessuna)"; fi
+              echo
+              echo "### Test falliti (TAP: righe \`not ok\` e \`✖\`)"
+              grep -E '(^|[[:space:]])(not ok [0-9]+|✖) ' "$OUT/clean.log" \
+                | sed "$strip" | sort -u | head -40
+              echo
+              echo "### Riepilogo node --test"
+              grep -E '^[^\t]*\t[^\t]*\t[0-9T:.Z-]*[[:space:]]*# (tests|pass|fail|cancelled) ' "$OUT/clean.log" \
+                | sed "$strip" | sort -u | head -10
+              echo
+              echo "### Estratto attorno al primo fallimento"
+              grep -n -m1 -E '(^|[[:space:]])(not ok [0-9]+|✖|::error::)' "$OUT/clean.log" | cut -d: -f1 | while read -r n; do
+                sed -n "$((n)),$((n+120))p" "$OUT/clean.log"
+              done
+            } > "$OUT/failing.txt" 2>/dev/null || true
+
+            # `generator-ci` fallisce in un'ALTRA run: il gate dentro `tests` si
+            # limita a leggerne il check-run. Senza questo blocco l'agente
+            # leggerebbe «generator-ci e' rosso» e nient'altro — un verdetto
+            # senza la diagnosi che serve per ripararlo.
+            if grep -q 'generator-ci-gate' "$OUT/clean.log" 2>/dev/null; then
+              # `--branch` e non le ultime 20 run GLOBALI del workflow: questo
+              # repo ha decine di run concorrenti (crawler, batch FAQ, sweep), e
+              # una finestra globale puo' non contenere piu' la run del nostro
+              # sha — il fixer direbbe «nessuna run fallita» quando la run c'e',
+              # solo piu' indietro nella lista.
+              #
+              # E la conclusione NON e' solo `failure`: un `timed_out` o un
+              # `cancelled` sono altrettanto «non riuscita», e trattarli come
+              # assenza faceva stampare «probabile timeout in attesa» — una
+              # frase giusta per caso su un timeout e fuorviante su un cancel.
+              # Qui si prende la run e si DICE quale conclusione ha avuto.
+              GEN=$(gh run list --repo "$REPO" --workflow=generator-ci.yml --branch "$HEAD_REF" --limit 50 \
+                --json databaseId,headSha,conclusion,status \
+                --jq "[.[] | select(.headSha==\"$HEAD_SHA\" and .status==\"completed\" and .conclusion!=\"success\" and .conclusion!=\"skipped\")][0] | \"\(.databaseId // \"\") \(.conclusion // \"\")\"" 2>/dev/null || echo "")
+              GEN_RUN=$(printf '%s' "$GEN" | awk '{print $1}')
+              GEN_CONCL=$(printf '%s' "$GEN" | awk '{print $2}')
+              if [ -n "$GEN_RUN" ] && [ "$GEN_RUN" != "null" ]; then
+                gh run view "$GEN_RUN" --repo "$REPO" --log-failed 2>/dev/null \
+                  | sed -e 's/\x1b\[[0-9;]*m//g' -e 's/\^\[\[[0-9;]*m//g' > "$OUT/gen.log" || : > "$OUT/gen.log"
+                {
+                  echo
+                  echo "### generator-ci (run $GEN_RUN, conclusion=$GEN_CONCL, workflow SEPARATO — e' li' che vive il fallimento)"
+                  grep -E '(^|[[:space:]])(not ok [0-9]+|✖|::error::|Error:|AssertionError)' "$OUT/gen.log" \
+                    | sed "$strip" | sort -u | head -30
+                  echo
+                  echo "#### Estratto"
+                  tail -c 6000 "$OUT/gen.log"
+                } >> "$OUT/failing.txt" 2>/dev/null || true
+              else
+                # Nessuna run CONCLUSA non-success sullo sha. Le due cause
+                # possibili sono opposte e vanno dette entrambe, senza sceglierne
+                # una a caso: o il gate e' scaduto aspettando una run che non ha
+                # mai concluso, oppure la run c'e' ma non e' su questo branch.
+                echo "::warning::generator-ci-gate rosso ma nessuna run conclusa non-success di generator-ci.yml su $HEAD_SHA (branch $HEAD_REF)."
+                printf '\n### generator-ci\nIl gate ha dichiarato rosso ma su questo sha non esiste una run CONCLUSA di generator-ci.yml con esito diverso da success. Le due cause possibili: il gate e scaduto in attesa (la run non ha mai concluso entro il tetto), oppure la run esiste ma non su questo branch. Controlla a mano: gh run list --workflow=generator-ci.yml --json headSha,status,conclusion\n' >> "$OUT/failing.txt"
+              fi
+            fi
+          fi
+
+          # Cap duro: il contesto non deve diventare esso stesso il consumatore
+          # di turni che questo step esiste per evitare.
+          head -c 32000 "$OUT/failing.txt" > "$OUT/failing.trim" 2>/dev/null || : > "$OUT/failing.trim"
+          mv "$OUT/failing.trim" "$OUT/failing.txt"
+          echo "contesto raccolto: $(wc -c < "$OUT/failing.txt") byte."
+          sed -n '1,25p' "$OUT/failing.txt"
+
+      # Niente proxy di compressione, per la stessa ragione della review in
+      # `tests.yml`: qui l'input dell'agente e' un LOG, e la differenza fra un
+      # rosso vero e un falso rosso sta nelle righe che un compressore toglie.
+      - name: Run Claude ❌-check-fix
+        id: claude_fix
+        if: steps.guard.outputs.proceed == 'true'
+        # Non far fallire il job sull'exit non-zero dell'action: il `Classify
+        # outcome` finale decide il colore sul LAVORO reale (commit pushato), non
+        # sul subtype della CLI.
+        continue-on-error: true
+        uses: anthropics/claude-code-action@v1
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_NUMBER: ${{ needs.preflight.outputs.pr_number }}
+          REPO: ${{ github.repository }}
+          FIX_TIER: ${{ steps.guard.outputs.tier }}
+          FIX_ROUND: ${{ steps.guard.outputs.round }}
+        with:
+          # Auth via subscription Max (zero costo API). MAI ANTHROPIC_API_KEY.
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          # Stessa identita' dello step `Configure push remote` qui sopra: senza
+          # questo input `claude-code-action` conia un proprio token e RISCRIVE
+          # il remote (`replaceCheckoutCredentials()`), buttando via quello
+          # appena configurato — e ogni fix su `.github/workflows/**` morirebbe
+          # al push nonostante il capability guard lo avesse lasciato passare.
+          github_token: ${{ env.GITHUB_PAT_NANAKO }}
+          show_full_output: true
+          allowed_bots: 'github-actions[bot], claude[bot]'
+          claude_args: "--max-turns 60 --model ${{ steps.guard.outputs.model }} --dangerously-skip-permissions"
+          prompt: |
+            Il branch e' gia' checkoutato sulla head della PR #${{ needs.preflight.outputs.pr_number }}, che ha il **check richiesto ROSSO**.
+
+            **Obiettivo:** far tornare verde la CI su questo branch, senza indebolire nulla. NON mergiare.
+
+            **Il contesto del fallimento e' GIA' stato raccolto** (zero-Claude) in `${{ runner.temp }}/redcheck/failing.txt`: nomi dei test falliti, riepilogo, ed estratto attorno al primo fallimento. **Leggilo con `Read` come PRIMA cosa.** Non rieseguire `gh run view --log`: e' lo stesso output, pesa molto, e scaricarlo e' il primo consumatore di turni misurato su questo ciclo.
+
+            **REGOLA #0, che viene prima di ogni altra: non si fa passare un test indebolendolo.**
+            E' il modo ovvio e sbagliato di chiudere questo task, ed e' vietato da `AGENTS.md`. Concretamente, NON puoi: cancellare, rinominare o mettere `.skip` su un test; rilassare un'asserzione perche' «tanto il valore nuovo e' quello giusto» (soglia alzata, uguaglianza trasformata in disuguaglianza, regex allargata, assert rimossa); allargare un ratchet, un floor o un budget per accogliere una regressione; aggiungere un file a un'allowlist SOLO per zittire il guard. Se la strada giusta ti sembra una di queste, quasi sempre significa che e' il **codice della PR** a essere sbagliato: fixa quello.
+
+            **L'unica eccezione, e va guadagnata:** alcuni guard di questo repo dichiarano ESSI STESSI una via d'uscita sanzionata, nel proprio sorgente. Puoi usarla solo se: (a) il guard la documenta esplicitamente, (b) verifichi la condizione **contro il codice**, non contro l'intento, e (c) scrivi nel commento QUALE codice hai letto e COSA ti garantisce. Se non puoi fare tutte e tre, non e' la tua strada.
+
+            **Il check richiesto qui porta QUATTRO cose**, e la prima domanda e' quale delle quattro e' rossa: il contratto del body della PR, i gate `node --test`, il verdetto della Claude review (un `🔴 Important` aperto rende rosso il check — quello NON lo ripari tu, lo ripara il 🔴-fixer), e il gate di `generator-ci` sulle PR che toccano `generator/`, `engine/`, `host/`. Se il rosso e' il verdetto della review, commenta dicendolo e TERMINA: sovrapporti al gemello produrrebbe una push race.
+
+            **Metodo:**
+            - Capisci PERCHE' fallisce prima di toccare qualcosa.
+            - Riproduci in locale prima di fixare: `node --test <file-del-test>`. Un fix non riprodotto non e' un fix. Il checkout NON ha `node_modules` e i gate di questo repo sono dependency-free (`node:test`, `node:assert`): non lanciare `npm`/`npx`.
+            - **Verifica che il rosso sia davvero della PR.** Un gate che legge `content/` puo' essere rosso per un articolo che nessuna PR ha scritto: quello e' un rosso EREDITATO da `main`. Commenta dicendolo, con la prova, e TERMINA senza toccare la PR — ripararlo qui lo nasconderebbe invece di risolverlo (e i gate sul contenuto girano apposta in `content-gates-main.yml`, dove il segnale e' azionabile).
+            - Fix CHIRURGICO alla CLASSE del difetto: se il fallimento segnala un pattern, cerca i sibling e sweepa l'intera classe nella STESSA commit, o giustifica ogni sibling non toccato in `## Non implementato (ancora)`.
+            - CODE vs DATA: non scorrere i blob sotto `content/`, `dist/`, `data/`, `public/`; fixa il CODICE che li genera.
+            - Rilancia il test dopo il fix e verifica che sia verde, prima di committare.
+
+            **Chiusura:**
+            - Commit con l'identita' gia' configurata (Valerie Linc), messaggio conventional.
+            - Push sullo stesso branch: `git push origin HEAD:${{ needs.preflight.outputs.head_ref }}`. Il remote e' gia' autenticato col PAT → ri-attiva `tests`, e con esso la re-review.
+            - Aggiorna il body della PR (`gh pr edit`) mantenendo `## Implementato` (aggiungi cosa hai riparato e perche' il test falliva) e `## Non implementato (ancora)`, con lo stato letterale su ogni bullet.
+
+            **Vincoli:**
+            - SOLO il check rosso. Non rifare la PR, niente drive-by.
+            - Se non e' fixabile con confidenza (root cause non chiara, serve giudizio umano, o l'unica via sarebbe indebolire un gate) → commenta «❌ check non auto-fixabile: <motivo>» e TERMINA senza commit. Il round cap porta a `needs-human` da solo: e' l'esito giusto, non una sconfitta.
+            - **Token-lever:** le letture e le chiamate `gh` indipendenti vanno emesse in parallelo nello stesso messaggio, mai una per turno — un messaggio con piu' tool-call resta 1 turno.
+            - Una sola passata: diagnostica, fixa, valida, committa, pusha, aggiorna il body, STOP.
+
+      - name: Claude usage metrics
+        if: always() && steps.guard.outputs.proceed == 'true'
+        continue-on-error: true
+        run: node scripts/ci/claude-usage-summary.mjs "${{ steps.claude_fix.outputs.execution_file }}" "pr-redcheck-fixer"
+
+      - name: Cleanup Firebase credentials
+        if: always()
+        run: rm -f /tmp/firebase-sa.json
+
+      # Il colore del job e' il LAVORO reale del round, non l'exit della CLI.
+      #  - commit pushato sul branch → SUCCESS (la re-review girera'). Vale anche
+      #    se la CLI e' morta ai turni DOPO il push.
+      #  - nessun push + CLI fallita → non-progresso reale → ROSSO.
+      #  - nessun push + CLI pulita + un commento NUOVO → terminale legittimo
+      #    (es. «non auto-fixabile», come chiede il prompt) → verde.
+      #  - nessun push + CLI pulita + NESSUN commento → non-progresso SILENZIOSO
+      #    → ROSSO. E' il caso che senza questo ramo sarebbe indistinguibile da un
+      #    round che ha davvero lavorato: uscirebbe verde, e ne' il rescuer ne' il
+      #    round-cap potrebbero piu' raccoglierlo, perche' un round «riuscito» non
+      #    ri-arma niente.
+      - name: Classify outcome (work-done, not CLI exit)
+        if: always() && steps.guard.outputs.proceed == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          PR_NUMBER: ${{ needs.preflight.outputs.pr_number }}
+          HEAD_REF: ${{ needs.preflight.outputs.head_ref }}
+          BASE_SHA: ${{ steps.base.outputs.sha }}
+          BASE_COMMENTS: ${{ steps.base.outputs.comments }}
+          CLAUDE_OUTCOME: ${{ steps.claude_fix.outcome }}
+        run: |
+          set -uo pipefail
+          HEAD_NOW=$(git rev-parse HEAD 2>/dev/null || echo "")
+          git fetch origin "$HEAD_REF" -q 2>/dev/null || true
+          REMOTE_SHA=$(git rev-parse "origin/$HEAD_REF" 2>/dev/null || echo "")
+          echo "base=$BASE_SHA local=$HEAD_NOW remote=$REMOTE_SHA claude=$CLAUDE_OUTCOME"
+          if [ -n "$HEAD_NOW" ] && [ -n "$BASE_SHA" ] && [ "$HEAD_NOW" != "$BASE_SHA" ] && [ "$REMOTE_SHA" = "$HEAD_NOW" ]; then
+            echo "Fix pushato questo round (HEAD avanzato e presente su origin/$HEAD_REF) → round SUCCESS. Job verde anche se la CLI e' uscita '$CLAUDE_OUTCOME'."
+            exit 0
+          fi
+          if [ "$CLAUDE_OUTCOME" = "failure" ]; then
+            echo "::error::❌-check-fix: nessun commit pushato e la run Claude e' fallita ('$CLAUDE_OUTCOME') → non-progresso reale. Job ROSSO (segnale preservato; il round-cap porta a needs-human a N>=2)."
+            exit 1
+          fi
+          NOW_COMMENTS=$(gh api "repos/$REPO/issues/$PR_NUMBER/comments" --paginate --jq 'length' 2>/dev/null || echo "${BASE_COMMENTS:-0}")
+          if [ "${NOW_COMMENTS:-0}" -le "${BASE_COMMENTS:-0}" ]; then
+            echo "::error::❌-check-fix: nessun commit pushato, CLI uscita '$CLAUDE_OUTCOME', e nessun commento nuovo a spiegare perche' (commenti $BASE_COMMENTS→$NOW_COMMENTS) → non-progresso SILENZIOSO, non un terminale legittimo. Job ROSSO."
+            exit 1
+          fi
+          echo "Nessun push ma CLI terminata pulita ('$CLAUDE_OUTCOME') con una spiegazione nuova sulla PR → terminale legittimo (es. non auto-fixabile). Job verde."
+          exit 0
