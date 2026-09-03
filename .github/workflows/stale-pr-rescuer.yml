@@ -13,7 +13,7 @@ name: Stale PR rescuer (self-healing signal)
 #   B) 🔴 Important non ripreso: il reviewer l'ha postato sull'head corrente,
 #      l'auto-merge è skippato e non arriva nessun commit nuovo. Se sul thread
 #      c'è `<!-- REDFLAG_FIX_ROUND:` il 🔴 è già chiuso proceduralmente dal
-#      fixer (nessun commit): si dispatcha `pr-review-loop.yml`. Senza quel
+#      fixer (nessun commit): si RILANCIA il run di `tests` sull'head. Senza quel
 #      marker il 🔴 è ancora aperto e resta il consiglio di un commit nuovo.
 #   C) test non-`success` sull'head e nessun run in volo. È la classe che
 #      cadeva in un `else` MUTO: una PR con i test rossi non ha — e non può
@@ -33,8 +33,9 @@ name: Stale PR rescuer (self-healing signal)
 #
 # Quel che mancava è il RIMEDIO. In quello stato A dice «`git merge origin/main`
 # e push», che è la cura per una coda congestionata, non per una review vecchia:
-# dal 2026-08-13 `pr-review-loop.yml` ha un `workflow_dispatch` con l'input `pr`
-# (#286, direzione 1 della stessa #201) e la cura è UN comando. D non allarga la
+# dal 2026-09-03 la review vive DENTRO `tests.yml` sul trigger `pull_request`
+# (era un workflow a sé su `workflow_run`, #286 / direzione 1 della #201),
+# quindi RILANCIARE quel run riesegue la review, e la cura è UN comando. D non allarga la
 # rete — è un SOTTOINSIEME stretto di A, quindi l'insieme delle PR etichettate
 # non cambia di una — cambia solo l'istruzione che il commento consegna.
 #
@@ -43,7 +44,7 @@ name: Stale PR rescuer (self-healing signal)
 #      superata»: resta in A. Sono 25 PR su 172 senza nessuna review Claude.
 #   2. l'ultima review NON deve contenere `## LGTM`. Una LGTM su un commit
 #      precedente seguita da commit di soli content/data è uno stato SANO e
-#      progettato — è il `Re-review guard` di `pr-review-loop.yml`, che salta
+#      progettato — è il `Re-review guard` dentro `tests.yml`, che salta
 #      Claude apposta e porta avanti la LGTM. Senza questo guard sarebbero
 #      arrivati 2 falsi positivi su 41 intervalli, uno dei quali proprio sulla
 #      #181, la PR da cui nasce la #201.
@@ -73,7 +74,7 @@ on:
   # inizierebbe. Il cron da solo non basta: GitHub lo deprioritizza sotto
   # carico e può saltare ore.
   workflow_run:
-    workflows: ['PR Review (Claude single-pass)']
+    workflows: ['tests']
     types: [completed]
   schedule:
     - cron: '35 * * * *'
@@ -90,7 +91,7 @@ permissions:
   checks: read # commits/{sha}/check-runs sull'head reale della PR
   pull-requests: write
   issues: write
-  actions: write # workflow_dispatch di pr-review-loop.yml (classe B + REDFLAG_FIX_ROUND)
+  actions: write # rerun del run di tests.yml (classe B + REDFLAG_FIX_ROUND)
 
 concurrency:
   group: stale-pr-rescuer
@@ -199,7 +200,7 @@ jobs:
               # D — direzione 3 della #201. Sottoinsieme stretto di A: nessuna PR
               # in più viene etichettata, cambia solo il rimedio consegnato.
               REASON="ultima review più vecchia dell'head: è su \`${LAST_CID:0:7}\`, l'head è \`${HEAD:0:7}\`, non chiude con \`## LGTM\` e i test sull'head sono verdi — i findings sono stati ripresi da un commit nuovo e nessuno ha ri-revisionato"
-              RESCUE="\`gh workflow run pr-review-loop.yml --repo $REPO -f pr=$N\`. Un rerun di \`tests\` NON produce l'evento \`workflow_run\` che fa ripartire il reviewer, quindi senza questo dispatch (o senza un altro commit sul branch \`$BRANCH\`) la review non riparte mai e la PR resta verde e ferma."
+              RESCUE="rilancia il run di \`tests\` più recente su \`${HEAD:0:7}\` (\`gh run rerun <id> --repo $REPO\`): da quando la review vive DENTRO \`tests.yml\` sul trigger \`pull_request\`, un rerun la riesegue davvero — prima serviva un dispatch a parte perché il reviewer girava su \`workflow_run\` e un rerun non ne produce uno."
             elif [ "$TESTS_CONCL" = "success" ] && [ "$LAST_CID" != "$HEAD" ]; then
               CLASS="A"
               REASON="test verdi sull'head corrente da >2h ma nessuna review li ha coperti"
@@ -218,7 +219,7 @@ jobs:
             else
               echo "PR #$N nessuno stallo noto (check=$TESTS_CONCL pending=$TESTS_PENDING) — skip"
               # L'altra metà della #314. `stale-review` non veniva TOLTA da
-              # nessuno, e finché resta costa due volte: `pr-review-loop.yml`
+              # nessuno, e finché resta costa due volte: la review in `tests.yml`
               # salta la PR (quindi verde e mai revisionata), e
               # `recycle-stale-prs` la conta fra le chiudibili a 24h — cioè un
               # segnale scaduto può far chiudere una PR sana.
@@ -241,7 +242,7 @@ jobs:
             # Prima c'era, in cima al ciclo, `[ -n "$HAS_LABEL" ] && continue`:
             # bastava una label perché la PR non venisse MAI più classificata.
             # È la combinazione peggiore, perché `stale-review` è anche ciò che
-            # fa saltare la PR a `pr-review-loop.yml`. Una PR entrata in classe
+            # fa saltare la PR alla review in `tests.yml`. Una PR entrata in classe
             # C (test rossi), riparata dopo, diventa una classe D — verde, con
             # una review vecchia — che nessuno poteva più vedere: verde per ogni
             # gate, senza review, per sempre.
@@ -272,7 +273,7 @@ jobs:
             # dispatch è quindi SEPARATA da quella del commento — (dispatch,
             # HEAD) — e va controllata PRIMA del `continue` sull'idempotenza
             # generica, non dopo.
-            DISPATCH_MARKER="<!-- stale-pr-rescuer dispatch=pr-review-loop head=${HEAD:0:7} -->"
+            DISPATCH_MARKER="<!-- stale-pr-rescuer rerun=tests head=${HEAD:0:7} -->"
             NEEDS_DISPATCH=false
             if [ "$CLASS" = "B" ]; then
               case "$POSTED_BODIES" in
@@ -296,17 +297,29 @@ jobs:
               esac
             fi
 
-            # B + marker del fixer: il 🔴 è chiuso senza commit, quindi `tests`
-            # non riparte e `pr-review-loop` non si innesca. La maniglia
-            # (`workflow_dispatch`, #286) esiste; qui la si chiama. Senza il
-            # marker il consiglio resta un commit nuovo. D consegna lo stesso
-            # comando nel testo del RESCUE e NON lo esegue.
+            # B + marker del fixer: il 🔴 è chiuso senza commit, quindi nessun
+            # evento nuovo fa ripartire la review. Dal 2026-09-03 la maniglia
+            # non è più un `workflow_dispatch` del reviewer (che non esiste
+            # più come workflow a sé): la review è uno step di `tests.yml` sul
+            # trigger `pull_request`, quindi RILANCIARE quel run la riesegue —
+            # ed è ciò che la #201 chiedeva e che allora non funzionava.
+            # Senza il marker del fixer il consiglio resta un commit nuovo.
+            # D consegna lo stesso comando nel testo del RESCUE e NON lo esegue.
             EXTRA_MARKER=""
             if [ "$NEEDS_DISPATCH" = "true" ]; then
-              RESCUE="\`gh workflow run pr-review-loop.yml --repo $REPO -f pr=$N\` — dispatchato da questo run: il 🔴 è chiuso proceduralmente dal redflag-fixer (nessun commit nuovo), e un commit vuoto non è la cura."
-              gh workflow run pr-review-loop.yml --repo "$REPO" -f pr="$N" \
-                && { echo "PR #$N: review riaperta via workflow_dispatch (classe B, marker REDFLAG_FIX_ROUND)"; EXTRA_MARKER="$DISPATCH_MARKER"; } \
-                || echo "::warning::dispatch pr-review-loop fallito su PR #$N"
+              # Il run da rilanciare è quello di `tests` sull'head CORRENTE: un
+              # rerun di un run su un head vecchio revieverebbe codice superato.
+              RERUN_ID=$(gh run list --repo "$REPO" --workflow tests.yml --branch "$BRANCH" \
+                --limit 30 --json databaseId,headSha,status \
+                --jq "[.[] | select(.headSha==\"$HEAD\" and .status==\"completed\")] | first | .databaseId // empty" 2>/dev/null || true)
+              if [ -n "$RERUN_ID" ]; then
+                RESCUE="\`gh run rerun $RERUN_ID --repo $REPO\` — rilanciato da questo run: il 🔴 è chiuso proceduralmente dal redflag-fixer (nessun commit nuovo), e un commit vuoto non è la cura."
+                gh run rerun "$RERUN_ID" --repo "$REPO" \
+                  && { echo "PR #$N: review riaperta rilanciando il run tests $RERUN_ID (classe B, marker REDFLAG_FIX_ROUND)"; EXTRA_MARKER="$DISPATCH_MARKER"; } \
+                  || echo "::warning::rerun del run tests $RERUN_ID fallito su PR #$N"
+              else
+                echo "::warning::PR #$N: nessun run completato di tests.yml su ${HEAD:0:7} da rilanciare."
+              fi
             fi
 
             gh pr edit "$N" --repo "$REPO" --add-label "stale-review" 2>/dev/null || \

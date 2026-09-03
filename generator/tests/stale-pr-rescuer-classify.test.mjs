@@ -190,6 +190,19 @@ case "$sub" in
   workflow)
     printf 'WORKFLOW_RUN %s\\n' "$*" >> ${JSON.stringify(calls)}
     ;;
+  run)
+    # \`gh run list\` risponde con l'id gia' filtrato dal --jq del workflow (lo
+    # stub non interpreta jq): un solo run completato di tests.yml sull'head.
+    # \`gh run rerun\` e' la SCRITTURA, e finisce in \`calls\` come le altre.
+    action="$1"; shift
+    case "$action" in
+      list) echo 4242 ;;
+      rerun)
+        printf 'RUN_RERUN %s\\n' "$1" >> ${JSON.stringify(calls)}
+        ;;
+      *) exit 0 ;;
+    esac
+    ;;
   *) exit 0 ;;
 esac
 exit 0
@@ -268,8 +281,14 @@ exec /usr/bin/grep "$@"
       pr: Number(m[1]),
       body: m[2],
     }));
+    // Dal 2026-09-03 la riapertura della review non e' piu' un
+    // `gh workflow run` del reviewer (che non esiste piu' come workflow a
+    // se'): e' un `gh run rerun` del run di `tests`, che ospita la review.
+    // Entrambe le forme restano raccolte, cosi' un ritorno alla vecchia
+    // sarebbe visibile invece che silenzioso.
     const workflowRuns = [...raw.matchAll(/^WORKFLOW_RUN (.+)$/gm)].map((m) => m[1]);
-    return { labeled, unlabeled, comments, stdout, workflowRuns };
+    const reruns = [...raw.matchAll(/^RUN_RERUN (.+)$/gm)].map((m) => m[1]);
+    return { labeled, unlabeled, comments, stdout, workflowRuns, reruns };
   } finally {
     rmSync(dir, { recursive: true, force: true });
   }
@@ -328,7 +347,7 @@ test('D — review più vecchia dell\'head con test verdi: la classe scatta', op
   );
 });
 
-test('D — il rimedio è il dispatch della review, non «mergia main e pusha»', opts, () => {
+test('D — il rimedio è il rilancio del run di tests, non «mergia main e pusha»', opts, () => {
   const r = runScan({
     prs: openPr(),
     checks: checkRuns({ concl: 'success' }),
@@ -337,19 +356,20 @@ test('D — il rimedio è il dispatch della review, non «mergia main e pusha»'
   const body = only(r);
   assert.match(
     body,
-    /pr-review-loop\.yml/,
-    'Il commento non nomina `pr-review-loop.yml`: la maniglia della #286 (direzione 1 della #201) è ' +
-      `l'unica cura in un comando per questo stato, e senza il suo nome il segnale non è azionabile.\n${body}`,
+    /gh run rerun/,
+    'Il commento non nomina il rilancio del run di `tests`: da quando la review vive dentro quel ' +
+      `workflow è l'unica cura in un comando per questo stato, e senza il suo nome il segnale non è azionabile.\n${body}`,
   );
-  assert.match(body, /-f pr=901/, `Il dispatch va consegnato con il numero della PR già dentro.\n${body}`);
+  assert.match(body, /tests/, `Il rimedio deve nominare il workflow da rilanciare.\n${body}`);
   assert.doesNotMatch(
     body,
     /git merge origin\/main/,
     `Rimedio della classe A su uno stato di classe D: il merge di main non fa ripartire nessuna review.\n${body}`,
   );
-  // #488: D consegna il comando nel RESCUE, non lo esegue. Il dispatch reale
+  // #488: D consegna il comando nel RESCUE, non lo esegue. Il rilancio reale
   // è solo sul ramo B con marker REDFLAG_FIX_ROUND.
-  assert.deepEqual(r.workflowRuns, [], `D non deve dispatchare pr-review-loop: ${r.workflowRuns.join(' | ')}`);
+  assert.deepEqual(r.reruns, [], `D non deve rilanciare il run di tests: ${r.reruns.join(' | ')}`);
+  assert.deepEqual(r.workflowRuns, [], `D non deve dispatchare nessun workflow: ${r.workflowRuns.join(' | ')}`);
 });
 
 // ── 2. I tre guard sui falsi positivi ──────────────────────────────────────
@@ -648,28 +668,28 @@ const classB = ({ posted = [], dryRun = false } = {}) =>
 
 const REDFLAG_ROUND = '<!-- REDFLAG_FIX_ROUND: 1 -->\n_🔴-fixer round 1/2 avviato (auto)._';
 
-test('#488 — B + REDFLAG_FIX_ROUND: un dispatch -f pr= della review', opts, () => {
+test('#488 — B + REDFLAG_FIX_ROUND: un rerun del run di tests', opts, () => {
   const r = classB({ posted: [{ body: REDFLAG_ROUND }] });
   assert.equal(
-    r.workflowRuns.length,
+    r.reruns.length,
     1,
-    `Atteso UN workflow_dispatch, ricevuti ${r.workflowRuns.length}: ${r.workflowRuns.join(' | ')}\n${r.stdout}`,
+    `Atteso UN rerun del run di tests, ricevuti ${r.reruns.length}: ${r.reruns.join(' | ')}\n${r.stdout}`,
   );
-  assert.match(
-    r.workflowRuns[0],
-    /pr-review-loop\.yml/,
-    `Il dispatch deve nominare pr-review-loop.yml, non un altro workflow.\n${r.workflowRuns[0]}`,
+  assert.equal(
+    r.reruns[0],
+    '4242',
+    `Il rerun deve usare l'id che \`gh run list\` ha risolto sull'head, non un id inventato.\n${r.reruns[0]}`,
   );
-  assert.match(
-    r.workflowRuns[0],
-    /-f pr=901/,
-    `Il dispatch deve portare -f pr= della PR sotto esame, già valorizzato.\n${r.workflowRuns[0]}`,
+  assert.deepEqual(
+    r.workflowRuns,
+    [],
+    `Nessun \`gh workflow run\`: il reviewer non esiste piu' come workflow a se'.\n${r.workflowRuns.join(' | ')}`,
   );
   const body = only(r);
   assert.match(
     body,
-    /pr-review-loop\.yml/,
-    `Il RESCUE deve nominare il dispatch, non un commit finto.\n${body}`,
+    /gh run rerun 4242/,
+    `Il RESCUE deve nominare il rerun eseguito, non un commit finto.\n${body}`,
   );
   assert.doesNotMatch(
     body,
@@ -678,20 +698,20 @@ test('#488 — B + REDFLAG_FIX_ROUND: un dispatch -f pr= della review', opts, ()
   );
 });
 
-test('#488 — B senza marker REDFLAG_FIX_ROUND: zero dispatch, consiglio commit', opts, () => {
+test('#488 — B senza marker REDFLAG_FIX_ROUND: zero rerun, consiglio commit', opts, () => {
   const r = classB({ posted: [] });
   assert.deepEqual(
-    r.workflowRuns,
+    r.reruns,
     [],
-    `Senza REDFLAG_FIX_ROUND il 🔴 è ancora aperto: dispatchare la review la rifarebbe sullo stesso finding.\n${r.stdout}`,
+    `Senza REDFLAG_FIX_ROUND il 🔴 è ancora aperto: rilanciare la review la rifarebbe sullo stesso finding.\n${r.stdout}`,
   );
   const body = only(r);
   assert.match(body, /nuovo commit/, `Senza marker il rimedio resta un commit che chiuda il 🔴.\n${body}`);
 });
 
-test('#488 — B + marker in dry_run: non dispatcha', opts, () => {
+test('#488 — B + marker in dry_run: non rilancia', opts, () => {
   const r = classB({ posted: [{ body: REDFLAG_ROUND }], dryRun: true });
-  assert.deepEqual(r.workflowRuns, [], `dry_run non deve dispatchare.\n${r.stdout}`);
+  assert.deepEqual(r.reruns, [], `dry_run non deve rilanciare il run di tests.\n${r.stdout}`);
   assert.deepEqual(r.comments, [], `dry_run non deve commentare.\n${r.stdout}`);
   assert.deepEqual(r.labeled, []);
 });
@@ -702,41 +722,40 @@ test('#488 — B + marker in dry_run: non dispatcha', opts, () => {
 // `REDFLAG_FIX_ROUND` (il fixer è un workflow separato, in coda dietro
 // `redflag-fix-$PR` con `cancel-in-progress: false`, e può slittare ore), il
 // marker generale `class=B head=X` finisce nei commenti passati. Quando
-// `REDFLAG_FIX_ROUND` arriva DOPO, un run successivo deve comunque dispatchare:
-// la chiave del dispatch è (dispatch, HEAD), non (CLASSE, HEAD).
+// `REDFLAG_FIX_ROUND` arriva DOPO, un run successivo deve comunque rilanciare:
+// la chiave dell'azione è (rerun, HEAD), non (CLASSE, HEAD).
 
-test('#576 — B senza marker poi REDFLAG_FIX_ROUND arriva dopo: il dispatch scatta comunque', opts, () => {
+test('#576 — B senza marker poi REDFLAG_FIX_ROUND arriva dopo: il rerun scatta comunque', opts, () => {
   const first = classB({ posted: [] });
-  assert.deepEqual(first.workflowRuns, [], `Al primo giro senza marker non deve dispatchare.\n${first.stdout}`);
+  assert.deepEqual(first.reruns, [], `Al primo giro senza marker non deve rilanciare.\n${first.stdout}`);
   const generalComment = only(first);
 
   const second = classB({ posted: [{ body: generalComment }, { body: REDFLAG_ROUND }] });
   assert.equal(
-    second.workflowRuns.length,
+    second.reruns.length,
     1,
     'Il marker generale `class=B head=X`, postato PRIMA che arrivasse REDFLAG_FIX_ROUND, ha ' +
-      `congelato il dispatch anche dopo che il marker del fixer è arrivato: è di nuovo lo stallo ` +
+      `congelato il rerun anche dopo che il marker del fixer è arrivato: è di nuovo lo stallo ` +
       `di #484, solo spostato di un giro.\n${second.stdout}`,
   );
-  assert.match(second.workflowRuns[0], /pr-review-loop\.yml/);
-  assert.match(second.workflowRuns[0], /-f pr=901/);
+  assert.equal(second.reruns[0], '4242');
 });
 
-test('#576 — B con dispatch già fatto su questo head: nessun secondo dispatch', opts, () => {
+test('#576 — B con rerun già fatto su questo head: nessun secondo rerun', opts, () => {
   const first = classB({ posted: [{ body: REDFLAG_ROUND }] });
-  assert.equal(first.workflowRuns.length, 1, first.stdout);
-  const dispatchedComment = only(first);
+  assert.equal(first.reruns.length, 1, first.stdout);
+  const rerunComment = only(first);
 
-  const second = classB({ posted: [{ body: REDFLAG_ROUND }, { body: dispatchedComment }] });
+  const second = classB({ posted: [{ body: REDFLAG_ROUND }, { body: rerunComment }] });
   assert.deepEqual(
-    second.workflowRuns,
+    second.reruns,
     [],
-    `Il dispatch è già avvenuto su questo head: un secondo run non deve ridispatchare.\n${second.stdout}`,
+    `Il rerun è già avvenuto su questo head: un secondo giro non deve rilanciare di nuovo.\n${second.stdout}`,
   );
-  assert.deepEqual(second.comments, [], 'nessuna azione attesa: il verdetto è già stato consegnato e dispatchato');
+  assert.deepEqual(second.comments, [], 'nessuna azione attesa: il verdetto è già stato consegnato e rilanciato');
 });
 
-test('#488 — D + REDFLAG_FIX_ROUND: zero invocazioni extra (il dispatch resta nel RESCUE)', opts, () => {
+test('#488 — D + REDFLAG_FIX_ROUND: zero invocazioni extra (il rerun resta nel RESCUE)', opts, () => {
   const r = runScan({
     prs: openPr(),
     checks: checkRuns({ concl: 'success' }),
@@ -744,10 +763,10 @@ test('#488 — D + REDFLAG_FIX_ROUND: zero invocazioni extra (il dispatch resta 
     comments: [{ body: REDFLAG_ROUND }],
   });
   assert.deepEqual(
-    r.workflowRuns,
+    r.reruns,
     [],
-    'D consegna `gh workflow run pr-review-loop.yml` nel testo del commento e NON lo esegue: ' +
-      `un dispatch extra riaprirebbe una review che il commento ha già chiesto a un umano.\n${r.stdout}`,
+    'D consegna `gh run rerun` nel testo del commento e NON lo esegue: ' +
+      `un rerun extra riaprirebbe una review che il commento ha già chiesto a un umano.\n${r.stdout}`,
   );
-  assert.match(only(r), /pr-review-loop\.yml/);
+  assert.match(only(r), /gh run rerun/);
 });

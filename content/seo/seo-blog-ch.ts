@@ -67100,6 +67100,1449 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-formazione-professionale-tirocinio-zurigo': {
+    title: 'Apprendistato nel Canton Zurigo: guida pratica',
+    description: 'Come trovare un posto di tirocinio, comprendere il contratto di apprendista, le retribuzioni e la maturità professionale nel Canton Zurigo. Dati aggiornati 2026',
+    keywords: 'frontalieri, ticino, svizzera, italia, apprendistato, canton, zurigo, pratica',
+    ogTitle: 'Apprendistato nel Canton Zurigo: guida pratica',
+    ogDescription: 'Guida completa all\'apprendistato nel Canton Zurigo: come trovare un posto di tirocinio, retribuzioni crescenti per anno, diritti legali dell\'apprendista e accesso alla maturità professionale. Sistema duale svizzero spiegato.',
+    canonicalPath: '/articoli-svizzera/formazione-professionale-tirocinio-zurigo/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Apprendistato nel Canton Zurigo: guida pratica",
+      "description": "Come trovare un posto di tirocinio, comprendere il contratto di apprendista, le retribuzioni e la maturità professionale nel Canton Zurigo. Dati aggiornati 2026",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/formazione-professionale-tirocinio-zurigo.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Aula di formazione professionale svizzera con apprendisti al lavoro su postazioni didattiche"
+      },
+      "datePublished": "2026-09-02T15:25:49+00:00",
+      "dateModified": "2026-09-02T15:25:49+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/formazione-professionale-tirocinio-zurigo/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-franco-euro-minimi-anno': {
+    title: 'Franco svizzero ai minimi rispetto all\'euro: cosa significa per gli investitori',
+    description: 'Il franco svizzero continua a indebolirsi rispetto all\'euro, raggiungendo il minimo da un anno. Scopri le implicazioni per gli investitori. Dati aggiornati 2026',
+    keywords: 'frontalieri, ticino, svizzera, italia, franco, svizzero, minimi, rispetto',
+    ogTitle: 'Franco svizzero ai minimi rispetto all\'euro',
+    ogDescription: 'Il franco svizzero continua a indebolirsi rispetto all\'euro, raggiungendo il minimo da un anno. Scopri le implicazioni per gli investitori e cosa fare per proteggere i tuoi investimenti.',
+    canonicalPath: '/articoli-svizzera/franco-euro-minimi-anno/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Franco svizzero ai minimi rispetto all'euro: cosa significa per gli investitori",
+      "description": "Il franco svizzero continua a indebolirsi rispetto all'euro, raggiungendo il minimo da un anno. Scopri le implicazioni per gli investitori. Dati aggiornati 2026",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/franco-euro-minimi-anno.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista aerea del Lago di Lugano con le Alpi svizzere sullo sfondo"
+      },
+      "datePublished": "2026-09-02T15:41:21+00:00",
+      "dateModified": "2026-09-02T15:41:21+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/franco-euro-minimi-anno/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-estate-calda-svizzera-2026': {
+    title: 'Un\'estate su due sarà più calda di quella attuale',
+    description: 'Secondo il climatologo Reto Knutti, un\'estate su due sarà più calda di quella attuale. Interventi urgenti necessari sulle città. Dati aggiornati 2026',
+    keywords: 'frontalieri, ticino, svizzera, italia, estate, sarà, calda, quella',
+    ogTitle: 'Un\'estate su due sarà più calda di quella attuale',
+    ogDescription: 'Secondo il climatologo Reto Knutti, un\'estate su due sarà più calda di quella attuale. Interventi urgenti necessari sulle città per affrontare il caldo estremo e la siccità.',
+    canonicalPath: '/articoli-svizzera/estate-calda-svizzera-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Un'estate su due sarà più calda di quella attuale",
+      "description": "Secondo il climatologo Reto Knutti, un'estate su due sarà più calda di quella attuale. Interventi urgenti necessari sulle città. Dati aggiornati 2026",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/estate-calda-svizzera-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista aerea di una città svizzera con spazi verdi e edifici moderni, che evidenzia l'impatto del cambiamento climatico."
+      },
+      "datePublished": "2026-09-02T15:49:18+00:00",
+      "dateModified": "2026-09-02T15:49:18+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/estate-calda-svizzera-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-naturalizzazione-canton-sciaffusa-requisiti-procedura': {
+    title: 'Naturalizzazione nel cantone di Sciaffusa: requisiti e procedura',
+    description: 'Scopri i requisiti e la procedura per la naturalizzazione ordinaria nel Cantone di Sciaffusa. Informazioni dettagliate sui test di integrazione e lingua.',
+    keywords: 'frontalieri, ticino, svizzera, italia, naturalizzazione, cantone, sciaffusa, requisiti',
+    ogTitle: 'Naturalizzazione nel Cantone di Sciaffusa: Requisiti e Procedura',
+    ogDescription: 'Scopri i requisiti e la procedura per la naturalizzazione ordinaria nel Cantone di Sciaffusa. Informazioni dettagliate sui test di integrazione e lingua.',
+    canonicalPath: '/articoli-svizzera/naturalizzazione-canton-sciaffusa-requisiti-procedura/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Naturalizzazione nel cantone di Sciaffusa: requisiti e procedura",
+      "description": "Scopri i requisiti e la procedura per la naturalizzazione ordinaria nel Cantone di Sciaffusa. Informazioni dettagliate sui test di integrazione e lingua.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/naturalizzazione-canton-sciaffusa-requisiti-procedura.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista panoramica di Sciaffusa con il fiume Reno"
+      },
+      "datePublished": "2026-09-02T16:29:26+00:00",
+      "dateModified": "2026-09-02T16:29:26+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/naturalizzazione-canton-sciaffusa-requisiti-procedura/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-acquistare-casa-zurigo-mutuo-fondi': {
+    title: 'Comprare casa a Zurigo: mutuo, fondi propri e tasse',
+    description: 'Guida completa all\'acquisto di casa nel Canton Zurigo: mutuo ipotecario, fondi propri richiesti, imposta sui trapassi, spese notarili e procedure federali',
+    keywords: 'frontalieri, ticino, svizzera, italia, comprare, casa, zurigo, mutuo',
+    ogTitle: 'Comprare casa a Zurigo: guida al mutuo e alle imposte',
+    ogDescription: 'Procedura completa per comprare casa nel Canton Zurigo. Scopri come funziona il mutuo ipotecario, quali fondi propri servono, quali sono le imposte sui trapassi, le spese notarili e gli oneri accessori. Checklist pratica e strumenti online',
+    canonicalPath: '/articoli-svizzera/acquistare-casa-zurigo-mutuo-fondi/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Comprare casa a Zurigo: mutuo, fondi propri e tasse",
+      "description": "Guida completa all'acquisto di casa nel Canton Zurigo: mutuo ipotecario, fondi propri richiesti, imposta sui trapassi, spese notarili e procedure federali",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/acquistare-casa-zurigo-mutuo-fondi.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Paesaggio residenziale svizzero con case tradizionali e moderne circondateda giardini verdi"
+      },
+      "datePublished": "2026-09-02T17:14:38+00:00",
+      "dateModified": "2026-09-02T17:14:38+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/acquistare-casa-zurigo-mutuo-fondi/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-aziende-svizzere-semestre-2026': {
+    title: 'Aziende svizzere, risultati semestrali oltre le stime',
+    description: 'Nel primo semestre, 24 su 30 società SLI hanno superato le aspettative di mercato. Stime profitti 2026 riviste al +18% per investimenti in intelligenza',
+    keywords: 'frontalieri, ticino, svizzera, italia, aziende, svizzere, risultati, semestrali',
+    ogTitle: 'Aziende svizzere, risultati oltre le stime del primo semestre',
+    ogDescription: '24 su 30 società SLI hanno superato stime nel primo semestre, con stime profitti 2026 riviste al +18%. Investimenti in IA e domanda industriale forte trainano crescita. Scopri l\'impatto su LPP/BVG e cosa fare come investitore in Svizzera.',
+    canonicalPath: '/articoli-svizzera/aziende-svizzere-semestre-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Aziende svizzere, risultati semestrali oltre le stime",
+      "description": "Nel primo semestre, 24 su 30 società SLI hanno superato le aspettative di mercato. Stime profitti 2026 riviste al +18% per investimenti in intelligenza",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/aziende-svizzere-semestre-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Borsa svizzera: professionisti analizzano dati finanziari di aziende quotate negli indici SLI e SMI"
+      },
+      "datePublished": "2026-09-02T17:30:06+00:00",
+      "dateModified": "2026-09-02T17:30:06+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/aziende-svizzere-semestre-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-abbonamenti-trasporti-sciaffusa-tariffe': {
+    title: 'Abbonamenti trasporti Sciaffusa: zone e tariffe',
+    description: 'Guida agli abbonamenti trasporti pubblici cantone Sciaffusa: comunità tariffaria, abbonamenti mensili/annuali, metà-prezzo, GA e sconti studenti.',
+    keywords: 'frontalieri, ticino, svizzera, italia, abbonamenti, trasporti, sciaffusa, zone',
+    ogTitle: 'Abbonamenti trasporti Sciaffusa: zone e tariffe',
+    ogDescription: 'Scopri come scegliere l\'abbonamento giusto per i trasporti pubblici nel cantone Sciaffusa: abbonamenti mensili e annuali, metà-prezzo nazionale, GA illimitato e sconti per studenti e apprendisti. Guida completa a tariffe e procedure.',
+    canonicalPath: '/articoli-svizzera/abbonamenti-trasporti-sciaffusa-tariffe/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Abbonamenti trasporti Sciaffusa: zone e tariffe",
+      "description": "Guida agli abbonamenti trasporti pubblici cantone Sciaffusa: comunità tariffaria, abbonamenti mensili/annuali, metà-prezzo, GA e sconti studenti.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/abbonamenti-trasporti-sciaffusa-tariffe.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Stazione ferroviaria svizzera con cartellonistica di zone tariffarie e informazioni su abbonamenti"
+      },
+      "datePublished": "2026-09-02T18:05:58+00:00",
+      "dateModified": "2026-09-02T18:05:58+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/abbonamenti-trasporti-sciaffusa-tariffe/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-salari-mercato-lavoro-sciaffusa-settori': {
+    title: 'Salari e mercato del lavoro a Sciaffusa | Frontaliere Ticino',
+    description: 'Struttura salariale svizzera per livelli di formazione, contributi previdenziali (AVS/LPP), fiscalità e contratti collettivi. Guida pratica al mercato',
+    keywords: 'frontalieri, ticino, svizzera, italia, salari, mercato, lavoro, sciaffusa',
+    ogTitle: 'Salari e mercato del lavoro a Sciaffusa | Frontaliere Ticino',
+    ogDescription: 'Come funziona il mercato del lavoro svizzero: differenziali salariali per formazione, sistema previdenziale (AVS/LPP), contratti collettivi, salario minimo cantonale. Verifiche pratiche e calcolatore stipendi.',
+    canonicalPath: '/articoli-svizzera/salari-mercato-lavoro-sciaffusa-settori/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Salari e mercato del lavoro a Sciaffusa",
+      "description": "Struttura salariale svizzera per livelli di formazione, contributi previdenziali (AVS/LPP), fiscalità e contratti collettivi. Guida pratica al mercato",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/salari-mercato-lavoro-sciaffusa-settori.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Ambiente di lavoro svizzero con documenti di stipendio, calcolatore e vista sulle Alpi da ufficio moderno"
+      },
+      "datePublished": "2026-09-02T18:39:40+00:00",
+      "dateModified": "2026-09-02T18:39:40+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/salari-mercato-lavoro-sciaffusa-settori/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-aprire-attivita-argovia-registro-commercio': {
+    title: 'Aprire un\'attività in Argovia: registro commercio e costi',
+    description: 'Guida completa su come aprire un\'impresa in Argovia: forme giuridiche, registrazione, capitale minimo, tasse d\'iscrizione e obblighi fiscali/previdenziali.',
+    keywords: 'frontalieri, ticino, svizzera, italia, aprire, attività, argovia, registro',
+    ogTitle: 'Aprire un\'attività in Argovia: registro commercio e costi',
+    ogDescription: 'Scopri la procedura completa per avviare un\'impresa in Argovia: dalla scelta della forma giuridica alla registrazione al registro commercio, imposte e contributi previdenziali.',
+    canonicalPath: '/articoli-svizzera/aprire-attivita-argovia-registro-commercio/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Aprire un'attività in Argovia: registro commercio e costi",
+      "description": "Guida completa su come aprire un'impresa in Argovia: forme giuridiche, registrazione, capitale minimo, tasse d'iscrizione e obblighi fiscali/previdenziali.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/aprire-attivita-argovia-registro-commercio.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Facciata di un ufficio amministrativo cantonale svizzero per il registro di commercio"
+      },
+      "datePublished": "2026-09-02T19:25:41+00:00",
+      "dateModified": "2026-09-02T19:25:41+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/aprire-attivita-argovia-registro-commercio/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-consultazione-politica-agricola-2030': {
+    title: 'Consultazione aperta dal Dipartimento federale',
+    description: 'Il Consiglio federale ha proposto adeguamenti legislativi per la politica agricola 2030+. Consultazione aperta dal 2 settembre al 8 dicembre 2026.',
+    keywords: 'frontalieri, ticino, svizzera, italia, consultazione, aperta, dipartimento, federale',
+    ogTitle: 'Consultazione sulla politica agricola 2030+',
+    ogDescription: 'Il Consiglio federale ha proposto una serie di adeguamenti legislativi per la politica agricola 2030+. La consultazione è aperta dal 2 settembre al 8 dicembre 2026.',
+    canonicalPath: '/articoli-svizzera/consultazione-politica-agricola-2030/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Consultazione aperta dal Dipartimento federale",
+      "description": "Il Consiglio federale ha proposto adeguamenti legislativi per la politica agricola 2030+. Consultazione aperta dal 2 settembre al 8 dicembre 2026.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/consultazione-politica-agricola-2030.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Agricoltori svizzeri discutono le nuove normative agricole in un campo di grano."
+      },
+      "datePublished": "2026-09-02T20:00:22+00:00",
+      "dateModified": "2026-09-02T20:00:22+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/consultazione-politica-agricola-2030/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-dazi-usa-seco-svizzera-2026': {
+    title: 'Nuovi dazi USA su beni svizzeri: cosa cambia dal 2026',
+    description: 'Dal 24 luglio 2026, dazi USA fino al 12,5% sui beni svizzeri. Scopri le implicazioni per l\'export e il ruolo della SECO nell\'ottimizzazione degli accordi.',
+    keywords: 'frontalieri, ticino, svizzera, italia, nuovi, dazi, beni, svizzeri',
+    ogTitle: 'Nuovi dazi USA sui beni svizzeri: guida SECO 2026',
+    ogDescription: 'Dal 24 luglio 2026, gli Stati Uniti hanno introdotto dazi aggiuntivi fino al 12,5% sui prodotti elvetici. La SECO guida le imprese nella gestione dei costi e delle nuove norme commerciali dopo l\'accordo del 20 agosto 2026.',
+    canonicalPath: '/articoli-svizzera/dazi-usa-seco-svizzera-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Nuovi dazi USA su beni svizzeri: cosa cambia dal 2026",
+      "description": "Dal 24 luglio 2026, dazi USA fino al 12,5% sui beni svizzeri. Scopri le implicazioni per l'export e il ruolo della SECO nell'ottimizzazione degli accordi.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/dazi-usa-seco-svizzera-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Uffici della SECO in Svizzera"
+      },
+      "datePublished": "2026-09-02T20:36:08+00:00",
+      "dateModified": "2026-09-02T20:36:08+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/dazi-usa-seco-svizzera-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-diritto-locazione-zurigo-deposito-disdetta': {
+    title: 'Affitti Zurigo: diritto di locazione e procedure',
+    description: 'Diritto di locazione nel Canton Zurigo: deposito cauzionale, contestazione canone, disdetta e procedura presso l\'autorità di conciliazione. Guida completa.',
+    keywords: 'frontalieri, ticino, svizzera, italia, affitti, zurigo, diritto, locazione',
+    ogTitle: 'Affitti Zurigo: diritto di locazione e procedure',
+    ogDescription: 'Affitti nel Canton Zurigo: scopri deposito cauzionale, contestazione canone, disdetta e procedure legali. Termini, moduli ufficiali e come contattare l\'autorità di conciliazione.',
+    canonicalPath: '/articoli-svizzera/diritto-locazione-zurigo-deposito-disdetta/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Affitti Zurigo: diritto di locazione e procedure",
+      "description": "Diritto di locazione nel Canton Zurigo: deposito cauzionale, contestazione canone, disdetta e procedura presso l'autorità di conciliazione. Guida completa.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/diritto-locazione-zurigo-deposito-disdetta.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Palazzo residenziale moderno in Svizzera con facciata contemporanea e finestre luminose"
+      },
+      "datePublished": "2026-09-02T21:00:25+00:00",
+      "dateModified": "2026-09-02T21:00:25+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/diritto-locazione-zurigo-deposito-disdetta/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-aprire-attivita-appenzello-esterno-costi': {
+    title: 'Aprire attività ad Appenzello Esterno: costi | Frontaliere Ticino',
+    description: 'Registrazione nel registro di commercio: forme giuridiche, obblighi fiscali, contributi AVS/AI e LAMal. Guida pratica ad Appenzello Esterno. Dati aggiornati',
+    keywords: 'frontalieri, ticino, svizzera, italia, aprire, attività, appenzello, esterno',
+    ogTitle: 'Aprire attività ad Appenzello Esterno',
+    ogDescription: 'Scopri come registrare un\'impresa ad Appenzello Esterno: registro commercio, forme giuridiche (ditta individuale, Sagl, Sa), obblighi fiscali IFD/IVA, contributi AVS/AI/IPG (10.6%), e costi LAMal. Guida pratica passo dopo passo per imprenditori',
+    canonicalPath: '/articoli-svizzera/aprire-attivita-appenzello-esterno-costi/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Aprire attività ad Appenzello Esterno: costi",
+      "description": "Registrazione nel registro di commercio: forme giuridiche, obblighi fiscali, contributi AVS/AI e LAMal. Guida pratica ad Appenzello Esterno. Dati aggiornati",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/aprire-attivita-appenzello-esterno-costi.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Ufficio moderno svizzero con documenti di registrazione attività e portale registro di commercio online"
+      },
+      "datePublished": "2026-09-02T21:48:26+00:00",
+      "dateModified": "2026-09-02T21:48:26+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/aprire-attivita-appenzello-esterno-costi/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-impresa-appenzello-esterno-registrazione': {
+    title: 'Registrare un\'impresa ad Appenzello esterno | Frontaliere Ticino',
+    description: 'Registrazione azienda nel canton Appenzello Esterno: forme giuridiche, costi iscrizione, tasse cantonali e comunali, obblighi assicurativi AVS, LPP, LAMal.',
+    keywords: 'frontalieri, ticino, svizzera, italia, registrare, impresa, appenzello, esterno',
+    ogTitle: 'Registrare un\'impresa ad Appenzello Esterno',
+    ogDescription: 'Guida completa su come registrare un\'azienda nel cantone di Appenzello Esterno: scelta forma giuridica (ditta individuale, SA, SARL), registrazione al registro di commercio, costi di iscrizione, tasse federali-cantonali-comunali, contributi AVS/AI',
+    canonicalPath: '/articoli-svizzera/impresa-appenzello-esterno-registrazione/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Registrare un'impresa ad Appenzello esterno",
+      "description": "Registrazione azienda nel canton Appenzello Esterno: forme giuridiche, costi iscrizione, tasse cantonali e comunali, obblighi assicurativi AVS, LPP, LAMal.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/impresa-appenzello-esterno-registrazione.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Edificio di un'amministrazione cantonale svizzera con sportelli del registro di commercio"
+      },
+      "datePublished": "2026-09-02T22:17:30+00:00",
+      "dateModified": "2026-09-02T22:17:30+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/impresa-appenzello-esterno-registrazione/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-mercato-lavoro-appenzello-esterno': {
+    title: 'Salari e mercato del lavoro in Appenzello Esterno',
+    description: 'Analisi completa del mercato del lavoro svizzero: stipendi per livello di formazione, settori, contratti collettivi, protezioni e salario minimo nei cantoni.',
+    keywords: 'frontalieri, ticino, svizzera, italia, salari, mercato, lavoro, appenzello',
+    ogTitle: 'Salari e mercato del lavoro in Appenzello Esterno',
+    ogDescription: 'Scopri come variano i salari in Svizzera per formazione, settore e cantone. Guida completa su contratti collettivi, salario minimo cantonale e protezioni del lavoratore dipendente.',
+    canonicalPath: '/articoli-svizzera/mercato-lavoro-appenzello-esterno/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Salari e mercato del lavoro in Appenzello Esterno",
+      "description": "Analisi completa del mercato del lavoro svizzero: stipendi per livello di formazione, settori, contratti collettivi, protezioni e salario minimo nei cantoni.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/mercato-lavoro-appenzello-esterno.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Professionisti che lavorano in un ufficio moderno svizzero con vista panoramica sulla città"
+      },
+      "datePublished": "2026-09-02T22:40:23+00:00",
+      "dateModified": "2026-09-02T22:40:23+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/mercato-lavoro-appenzello-esterno/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-permesso-dimora-b-appenzello-interno-requisiti-rinnovo': {
+    title: 'Permesso di dimora B nel Cantone di Appenzello Interno: requisiti e rinnovo',
+    description: 'Scopri i requisiti e la procedura di rinnovo del permesso di dimora B nel Cantone di Appenzello Interno. Dati aggiornati 2026 per frontalieri in Ticino.',
+    keywords: 'frontalieri, ticino, svizzera, italia, permesso, dimora, cantone, appenzello',
+    ogTitle: 'Permesso di dimora B nel Cantone di Appenzello Interno: requisiti e rinnovo',
+    ogDescription: 'Scopri i requisiti e la procedura di rinnovo del permesso di dimora B nel Cantone di Appenzello Interno. L\'ufficio cantonale della migrazione fornisce assistenza e informazioni sui requisiti, i documenti necessari e le procedure di rinnovo.',
+    canonicalPath: '/articoli-svizzera/permesso-dimora-b-appenzello-interno-requisiti-rinnovo/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Permesso di dimora B nel Cantone di Appenzello Interno: requisiti e rinnovo",
+      "description": "Scopri i requisiti e la procedura di rinnovo del permesso di dimora B nel Cantone di Appenzello Interno. Dati aggiornati 2026 per frontalieri in Ticino.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/permesso-dimora-b-appenzello-interno-requisiti-rinnovo.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Castelgrande fortress in Bellinzona, Switzerland"
+      },
+      "datePublished": "2026-09-02T23:10:49+00:00",
+      "dateModified": "2026-09-02T23:10:49+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/permesso-dimora-b-appenzello-interno-requisiti-rinnovo/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-premi-cassa-malati-appenzello-interno-riduzione': {
+    title: 'Premi cassa malati nel Cantone di Appenzello Interno e riduzione premi',
+    description: 'Scopri le fasce di premio, franchigie e modelli alternativi per l\'assicurazione malattia obbligatoria nel Cantone di Appenzello Interno. Dati aggiornati 2026',
+    keywords: 'frontalieri, ticino, svizzera, italia, premi, cassa, malati, cantone',
+    ogTitle: 'Premi cassa malati nel Cantone di Appenzello Interno e riduzione premi',
+    ogDescription: 'Scopri le fasce di premio, franchigie e modelli alternativi per l\'assicurazione malattia obbligatoria nel Cantone di Appenzello Interno. Informati sui requisiti per ottenere la riduzione dei premi e come richiederla.',
+    canonicalPath: '/articoli-svizzera/premi-cassa-malati-appenzello-interno-riduzione/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Premi cassa malati nel Cantone di Appenzello Interno e riduzione premi",
+      "description": "Scopri le fasce di premio, franchigie e modelli alternativi per l'assicurazione malattia obbligatoria nel Cantone di Appenzello Interno. Dati aggiornati 2026",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/premi-cassa-malati-appenzello-interno-riduzione.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista aerea del Cantone di Appenzello Interno con montagne e laghi, Svizzera"
+      },
+      "datePublished": "2026-09-02T23:34:05+00:00",
+      "dateModified": "2026-09-02T23:34:05+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/premi-cassa-malati-appenzello-interno-riduzione/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-domicilio-c-appenzello-interno-domanda': {
+    title: 'Permesso C Appenzello Interno: requisiti e domanda',
+    description: 'Permesso C Appenzello Interno: 10 anni residenza (5 UE/AELS), criteri integrazione, conoscenze linguistiche tedesco. Procedura SEM federale e naturalizzazione.',
+    keywords: 'frontalieri, ticino, svizzera, italia, permesso, appenzello, interno, requisiti',
+    ogTitle: 'Permesso C Appenzello Interno: come ottenerlo',
+    ogDescription: 'Scopri i requisiti per il permesso C (domicilio permanente) ad Appenzello Interno: 10 anni residenza, integrazione linguistica, criteri cantonali. Guida pratica per domanda SEM e naturalizzazione ordinaria svizzera.',
+    canonicalPath: '/articoli-svizzera/domicilio-c-appenzello-interno-domanda/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Permesso C Appenzello Interno: requisiti e domanda",
+      "description": "Permesso C Appenzello Interno: 10 anni residenza (5 UE/AELS), criteri integrazione, conoscenze linguistiche tedesco. Procedura SEM federale e naturalizzazione.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/domicilio-c-appenzello-interno-domanda.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Strada residenziale svizzera con case tradizionali e campanile di chiesa, emblema di stabilità e integrazione locale."
+      },
+      "datePublished": "2026-09-02T23:56:51+00:00",
+      "dateModified": "2026-09-02T23:56:51+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/domicilio-c-appenzello-interno-domanda/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-avs-calcolo-rendita-zurigo': {
+    title: 'Calcolo della rendita AVS e prestazioni complementari nel cantone di Zurigo',
+    description: 'Scopri come la cassa di compensazione cantonale di Zurigo gestisce il calcolo della rendita AVS e delle prestazioni complementari per garantire una pensione',
+    keywords: 'frontalieri, ticino, svizzera, italia, calcolo, rendita, prestazioni, complementari',
+    ogTitle: 'Calcolo della Rendita AVS e Prestazioni Complementari nel Cantone di Zurigo',
+    ogDescription: 'La cassa di compensazione cantonale di Zurigo gestisce il calcolo della rendita AVS e delle prestazioni complementari per garantire una pensione adeguata. Scopri di più sulle implicazioni per lavoratori e pensionati.',
+    canonicalPath: '/articoli-svizzera/avs-calcolo-rendita-zurigo/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Calcolo della rendita AVS e prestazioni complementari nel cantone di Zurigo",
+      "description": "Scopri come la cassa di compensazione cantonale di Zurigo gestisce il calcolo della rendita AVS e delle prestazioni complementari per garantire una pensione",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/avs-calcolo-rendita-zurigo.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Un pensionato svizzero calcola la sua rendita AVS a Zurigo"
+      },
+      "datePublished": "2026-09-03T00:24:33+00:00",
+      "dateModified": "2026-09-03T00:24:33+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/laura-bianchi/#person",
+        "name": "Laura Bianchi",
+        "url": "https://frontaliereticino.ch/autori/laura-bianchi/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/avs-calcolo-rendita-zurigo/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-permesso-l-proroga-appenzello-interno': {
+    title: 'Permesso L: durata e proroga in Svizzera | Frontaliere Ticino',
+    description: 'Il permesso L di breve durata consente di lavorare fino a 1 anno in Svizzera. Scopri come funziona la proroga, i vincoli del datore di lavoro e il passaggio',
+    keywords: 'frontalieri, ticino, svizzera, italia, permesso, durata, proroga, breve',
+    ogTitle: 'Permesso L: durata e proroga in Svizzera',
+    ogDescription: 'Il permesso L di breve durata consente di lavorare fino a 1 anno in Svizzera. Scopri come funziona la proroga, i vincoli del datore di lavoro e il passaggio al permesso B.',
+    canonicalPath: '/articoli-svizzera/permesso-l-proroga-appenzello-interno/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Permesso L: durata e proroga in Svizzera",
+      "description": "Il permesso L di breve durata consente di lavorare fino a 1 anno in Svizzera. Scopri come funziona la proroga, i vincoli del datore di lavoro e il passaggio",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/permesso-l-proroga-appenzello-interno.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Ufficio amministrativo svizzero con cartelle di permessi di lavoro e documenti ufficiali sulla scrivania"
+      },
+      "datePublished": "2026-09-03T00:40:57+00:00",
+      "dateModified": "2026-09-03T00:40:57+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/permesso-l-proroga-appenzello-interno/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-salari-lavoro-argovia-guida': {
+    title: 'Salari e mercato del lavoro in Argovia: guida | Frontaliere Ticino',
+    description: 'Scopri come funziona il mercato del lavoro nel cantone Argovia: salari, tassazione, contributi sociali e diritti federali. Guida pratica per lavoratori',
+    keywords: 'frontalieri, ticino, svizzera, italia, salari, mercato, lavoro, argovia',
+    ogTitle: 'Salari e mercato del lavoro in Argovia: guida',
+    ogDescription: 'Il mercato del lavoro svizzero nel cantone Argovia: come funziona la retribuzione, la tassazione, i contributi sociali obbligatori e i diritti dei lavoratori secondo le normative federali e cantonali. Scopri orario massimo, ferie minime, maternità',
+    canonicalPath: '/articoli-svizzera/salari-lavoro-argovia-guida/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Salari e mercato del lavoro in Argovia: guida",
+      "description": "Scopri come funziona il mercato del lavoro nel cantone Argovia: salari, tassazione, contributi sociali e diritti federali. Guida pratica per lavoratori",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/salari-lavoro-argovia-guida.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Ufficio moderno svizzero con dipendenti al lavoro, che rappresenta il mercato del lavoro elvetico."
+      },
+      "datePublished": "2026-09-03T01:06:36+00:00",
+      "dateModified": "2026-09-03T01:06:36+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/salari-lavoro-argovia-guida/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-lavoro-argovia-salari-diritti': {
+    title: 'Salari e mercato del lavoro canton Argovia | Frontaliere Ticino',
+    description: 'Guida ai salari, mercato del lavoro e diritti del dipendente in Canton Argovia: stipendi, contratti collettivi, contributi AVS/LPP, orari e protezioni legali.',
+    keywords: 'frontalieri, ticino, svizzera, italia, salari, mercato, lavoro, canton',
+    ogTitle: 'Salari e mercato del lavoro canton Argovia',
+    ogDescription: 'Come funziona il mercato del lavoro in Argovia: stipendi, contratti collettivi, contributi previdenziali, diritti, orari di lavoro, ferie e protezioni per maternità e paternità secondo la legge federale svizzera.',
+    canonicalPath: '/articoli-svizzera/lavoro-argovia-salari-diritti/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Salari e mercato del lavoro canton Argovia",
+      "description": "Guida ai salari, mercato del lavoro e diritti del dipendente in Canton Argovia: stipendi, contratti collettivi, contributi AVS/LPP, orari e protezioni legali.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/lavoro-argovia-salari-diritti.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Distretto commerciale svizzero con uffici moderni e lavoratori: simbolo del mercato del lavoro e dell'occupazione"
+      },
+      "datePublished": "2026-09-03T01:55:14+00:00",
+      "dateModified": "2026-09-03T01:55:14+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/lavoro-argovia-salari-diritti/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-premi-cassa-malati-canton-turgovia-riduzione': {
+    title: 'Premi cassa malati Canton Turgovia: riduzione | Frontaliere Ticino',
+    description: 'Scopri i premi e le franchigie della LAMal nel Canton Turgovia: guida completa a riduzione, sussidi e procedure di richiesta per risparmiare. Dati aggiornati',
+    keywords: 'frontalieri, ticino, svizzera, italia, premi, cassa, malati, canton',
+    ogTitle: 'Premi cassa malati Canton Turgovia: riduzione',
+    ogDescription: 'Come ottenere la riduzione dei premi della LAMal nel Canton Turgovia: franchigie disponibili (CHF 300-2500), criteri di elegibilità, procedure di richiesta e passaggi per richiedere il sussidio cantonale. Guida pratica 2026.',
+    canonicalPath: '/articoli-svizzera/premi-cassa-malati-canton-turgovia-riduzione/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Premi cassa malati Canton Turgovia: riduzione",
+      "description": "Scopri i premi e le franchigie della LAMal nel Canton Turgovia: guida completa a riduzione, sussidi e procedure di richiesta per risparmiare. Dati aggiornati",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/premi-cassa-malati-canton-turgovia-riduzione.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Ufficio amministrativo cantonale svizzero con documenti di assicurazione malattia su scrivania"
+      },
+      "datePublished": "2026-09-03T02:24:34+00:00",
+      "dateModified": "2026-09-03T02:24:34+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/premi-cassa-malati-canton-turgovia-riduzione/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-comprare-casa-turgovia-mutuo': {
+    title: 'Comprare casa in Turgovia: tasse e mutuo ipotecario',
+    description: 'Acquistare immobile in Turgovia: costi fiscali, fondi propri richiesti, sostenibilità mutuo ipotecario, procedure notarili e tempistiche nazionali svizzere.',
+    keywords: 'frontalieri, ticino, svizzera, italia, comprare, casa, turgovia, tasse',
+    ogTitle: 'Comprare casa in Turgovia: tasse e mutuo',
+    ogDescription: 'Guida pratica all\'acquisto immobiliare nel canton Turgovia: imposte su trapassi, diritti notarili, criteri bancari sulla sostenibilità del mutuo, e procedura passo dopo passo dal compromesso alla trascrizione fondiaria.',
+    canonicalPath: '/articoli-svizzera/comprare-casa-turgovia-mutuo/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Comprare casa in Turgovia: tasse e mutuo ipotecario",
+      "description": "Acquistare immobile in Turgovia: costi fiscali, fondi propri richiesti, sostenibilità mutuo ipotecario, procedure notarili e tempistiche nazionali svizzere.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/comprare-casa-turgovia-mutuo.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Veduta aerea di una proprietà residenziale svizzera nel paesaggio alpino del Turgovia, campi verdi e cielo sereno, fotografia immobiliare professionale."
+      },
+      "datePublished": "2026-09-03T02:50:15+00:00",
+      "dateModified": "2026-09-03T02:50:15+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/comprare-casa-turgovia-mutuo/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-apprendistato-formazione-interno-ch': {
+    title: 'Apprendistato e formazione Appenzello Interno: la guida',
+    description: 'Apprendistato nel Cantone Appenzello Interno: come trovare un tirocinio, sottoscrivere il contratto, retribuzione minima, contributi sociali, maturità',
+    keywords: 'frontalieri, ticino, svizzera, italia, apprendistato, formazione, appenzello, interno',
+    ogTitle: 'Apprendistato Appenzello Interno: guida tirocini e contratti',
+    ogDescription: 'Guida completa all\'apprendistato nel Cantone Appenzello Interno: come trovare un tirocinio, sottoscrivere il contratto, conoscere retribuzione minima, contributi sociali e accedere alla maturità professionale.',
+    canonicalPath: '/articoli-svizzera/apprendistato-formazione-interno-ch/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Apprendistato e formazione Appenzello Interno: la guida",
+      "description": "Apprendistato nel Cantone Appenzello Interno: come trovare un tirocinio, sottoscrivere il contratto, retribuzione minima, contributi sociali, maturità",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/apprendistato-formazione-interno-ch.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Laboratorio di tirocinio professionale in Svizzera: apprendista al lavoro con attrezzi e macchinari moderni in aula di formazione"
+      },
+      "datePublished": "2026-09-03T03:39:20+00:00",
+      "dateModified": "2026-09-03T03:39:20+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/apprendistato-formazione-interno-ch/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-mutuo-ipotecario-appenzello-interno': {
+    title: 'Comprare casa ad Appenzello Interno: mutuo e imposte',
+    description: 'Guida all\'acquisto di un immobile in Appenzello Interno. Analisi di costi, imposte sui trapassi, spese notarili, mutuo ipotecario e sostenibilità finanziaria.',
+    keywords: 'frontalieri, ticino, svizzera, italia, comprare, casa, appenzello, interno',
+    ogTitle: 'Comprare casa ad Appenzello Interno: mutuo e imposte',
+    ogDescription: 'Acquistare immobili in Appenzello Interno: guida completa a prezzi, mutui ipotecari, imposte federali e cantonali, spese notarili e criteri di solvibilità finanziaria per i compratori in Svizzera.',
+    canonicalPath: '/articoli-svizzera/mutuo-ipotecario-appenzello-interno/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Comprare casa ad Appenzello Interno: mutuo e imposte",
+      "description": "Guida all'acquisto di un immobile in Appenzello Interno. Analisi di costi, imposte sui trapassi, spese notarili, mutuo ipotecario e sostenibilità finanziaria.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/mutuo-ipotecario-appenzello-interno.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Una casa svizzera moderna con documenti ipotecari su tavolo, rappresenta l'acquisto immobiliare e il mutuo."
+      },
+      "datePublished": "2026-09-03T04:12:57+00:00",
+      "dateModified": "2026-09-03T04:12:57+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/mutuo-ipotecario-appenzello-interno/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-appenzello-interno-sostenibilita': {
+    title: 'Comprare casa Appenzello Interno: mutuo e tasse',
+    description: 'Procedura, fondi propri, sostenibilità mutuo, spese notarili e imposte cantonali per acquistare immobili in Appenzello Interno. Dati aggiornati 2026',
+    keywords: 'frontalieri, ticino, svizzera, italia, comprare, casa, appenzello, interno',
+    ogTitle: 'Comprare casa Appenzello Interno: mutuo e tasse',
+    ogDescription: 'Procedura, fondi propri, sostenibilità mutuo, spese notarili e imposte cantonali per acquistare immobili in Appenzello Interno.',
+    canonicalPath: '/articoli-svizzera/appenzello-interno-sostenibilita/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Comprare casa Appenzello Interno: mutuo e tasse",
+      "description": "Procedura, fondi propri, sostenibilità mutuo, spese notarili e imposte cantonali per acquistare immobili in Appenzello Interno. Dati aggiornati 2026",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/appenzello-interno-sostenibilita.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Facciate di edifici residenziali in una regione alpina svizzera con illuminazione mattutina."
+      },
+      "datePublished": "2026-09-03T04:44:30+00:00",
+      "dateModified": "2026-09-03T04:44:30+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/appenzello-interno-sostenibilita/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-naturalizzazione-appenzello-interno-procedura': {
+    title: 'Naturalizzazione Appenzello Interno: requisiti e procedura',
+    description: 'Guida pratica alla naturalizzazione ordinaria in Appenzello Interno: anni di residenza, test lingua e integrazione, tasse, durata. Procedura completa.',
+    keywords: 'frontalieri, ticino, svizzera, italia, naturalizzazione, appenzello, interno, requisiti',
+    ogTitle: 'Naturalizzazione Appenzello Interno: guida pratica',
+    ogDescription: 'Scopri i requisiti e la procedura per la naturalizzazione ordinaria in Appenzello Interno. Tempi di residenza, test linguistico, tasse e come presentare la domanda presso le autorità cantonali e comunali.',
+    canonicalPath: '/articoli-svizzera/naturalizzazione-appenzello-interno-procedura/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Naturalizzazione Appenzello Interno: requisiti e procedura",
+      "description": "Guida pratica alla naturalizzazione ordinaria in Appenzello Interno: anni di residenza, test lingua e integrazione, tasse, durata. Procedura completa.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/naturalizzazione-appenzello-interno-procedura.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Ufficio amministrativo svizzero con documenti di naturalizzazione e paesaggio di Appenzello Interno."
+      },
+      "datePublished": "2026-09-03T05:16:23+00:00",
+      "dateModified": "2026-09-03T05:16:23+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/naturalizzazione-appenzello-interno-procedura/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-abbonamenti-trasporti-appenzello-interno': {
+    title: 'Abbonamenti trasporti Appenzello Interno: zone tariffe',
+    description: 'Guida ai trasporti pubblici nel canton Appenzello Interno: comunità tariffaria, zone, abbonamenti annuali e mensili, metà-prezzo, GA, sconti studenti',
+    keywords: 'frontalieri, ticino, svizzera, italia, abbonamenti, trasporti, appenzello, interno',
+    ogTitle: 'Abbonamenti trasporti Appenzello Interno: zone tariffe',
+    ogDescription: 'Scopri come funzionano gli abbonamenti ai trasporti pubblici nel canton Appenzello Interno. Guide pratiche su zone, tariffe, metà-prezzo, GA e sconti per studenti e apprendisti.',
+    canonicalPath: '/articoli-svizzera/abbonamenti-trasporti-appenzello-interno/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Abbonamenti trasporti Appenzello Interno: zone tariffe",
+      "description": "Guida ai trasporti pubblici nel canton Appenzello Interno: comunità tariffaria, zone, abbonamenti annuali e mensili, metà-prezzo, GA, sconti studenti",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/abbonamenti-trasporti-appenzello-interno.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Stazione dei trasporti pubblici nel canton Appenzello Interno con biglietteria, orari regionali e passeggeri"
+      },
+      "datePublished": "2026-09-03T05:33:21+00:00",
+      "dateModified": "2026-09-03T05:33:21+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/abbonamenti-trasporti-appenzello-interno/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-avs-prestazioni-complementari-lacune-contributive': {
+    title: 'AVS e prestazioni complementari: lacune contributive',
+    description: 'Guida completa al primo pilastro AVS svizzero: calcolo rendita, lacune contributive, cassa di compensazione cantonale e prestazioni complementari per il minimo',
+    keywords: 'frontalieri, ticino, svizzera, italia, prestazioni, complementari, lacune, contributive',
+    ogTitle: 'AVS e prestazioni complementari: calcolo della rendita',
+    ogDescription: 'Come funziona il primo pilastro della previdenza svizzera: calcolo rendita AVS, lacune contributive, ruolo della cassa di compensazione cantonale e prestazioni complementari per garantire il minimo vitale.',
+    canonicalPath: '/articoli-svizzera/avs-prestazioni-complementari-lacune-contributive/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "AVS e prestazioni complementari: lacune contributive",
+      "description": "Guida completa al primo pilastro AVS svizzero: calcolo rendita, lacune contributive, cassa di compensazione cantonale e prestazioni complementari per il minimo",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/avs-prestazioni-complementari-lacune-contributive.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Persona anziana consulta estratto della carriera contributiva AVS presso cassa di compensazione cantonale"
+      },
+      "datePublished": "2026-09-03T06:11:24+00:00",
+      "dateModified": "2026-09-03T06:11:24+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/laura-bianchi/#person",
+        "name": "Laura Bianchi",
+        "url": "https://frontaliereticino.ch/autori/laura-bianchi/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/avs-prestazioni-complementari-lacune-contributive/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-assegni-familiari-lucerna-guida': {
+    title: 'Assegni familiari nel Canton Lucerna: guida alla domanda',
+    description: 'Scopri come richiedere gli assegni familiari nel Canton Lucerna. Procedura, ruolo delle casse di compensazione e gestione della pratica amministrativa.',
+    keywords: 'frontalieri, ticino, svizzera, italia, assegni, familiari, canton, lucerna',
+    ogTitle: 'Assegni familiari Canton Lucerna: guida alla domanda',
+    ogDescription: 'Informazioni pratiche sulle prestazioni familiari nel Canton Lucerna: come inoltrare la richiesta, i requisiti e l\'importanza della comunicazione con la cassa di compensazione.',
+    canonicalPath: '/articoli-svizzera/assegni-familiari-lucerna-guida/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Assegni familiari nel Canton Lucerna: guida alla domanda",
+      "description": "Scopri come richiedere gli assegni familiari nel Canton Lucerna. Procedura, ruolo delle casse di compensazione e gestione della pratica amministrativa.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/assegni-familiari-lucerna-guida.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Documenti amministrativi e calcolatrice su una scrivania in ufficio."
+      },
+      "datePublished": "2026-09-03T06:36:14+00:00",
+      "dateModified": "2026-09-03T06:36:14+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/assegni-familiari-lucerna-guida/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-prezzi-consumo-aumentati-agosto-2026': {
+    title: 'In agosto i prezzi al consumo sono aumentati dello 0,4%',
+    description: 'L\'indice dei prezzi al consumo (IPC) è aumentato dello 0,4% ad agosto 2026 rispetto al mese precedente, raggiungendo 101,5 punti (dicembre 2025 = 100).',
+    keywords: 'frontalieri, ticino, svizzera, italia, agosto, prezzi, consumo, sono',
+    ogTitle: 'In agosto i prezzi al consumo sono aumentati dello 0,4%',
+    ogDescription: 'L\'indice dei prezzi al consumo (IPC) è aumentato dello 0,4% ad agosto 2026 rispetto al mese precedente, raggiungendo 101,5 punti (dicembre 2025 = 100). Questo aumento ha implicazioni pratiche per i consumatori svizzeri e per i frontalieri',
+    canonicalPath: '/articoli-svizzera/prezzi-consumo-aumentati-agosto-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "In agosto i prezzi al consumo sono aumentati dello 0,4%",
+      "description": "L'indice dei prezzi al consumo (IPC) è aumentato dello 0,4% ad agosto 2026 rispetto al mese precedente, raggiungendo 101,5 punti (dicembre 2025 = 100).",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/prezzi-consumo-aumentati-agosto-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista aerea di Lugano con il Lago Lugano sullo sfondo, che mostra l'attività economica e la vita quotidiana."
+      },
+      "datePublished": "2026-09-03T07:46:38+00:00",
+      "dateModified": "2026-09-03T07:46:38+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/prezzi-consumo-aumentati-agosto-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-emissioni-co2-vcp-2025': {
+    title: 'Emissioni CO2 VCP: risultati 2025 e obiettivi raggiungibili',
+    description: 'Nel 2025 le prescrizioni sulle emissioni di CO2 si applicano ai veicoli commerciali pesanti in Svizzera. Importatori raggiungono i target, sanzioni contenute',
+    keywords: 'frontalieri, ticino, svizzera, italia, emissioni, risultati, obiettivi, raggiungibili',
+    ogTitle: 'Prescrizioni CO2 VCP 2025: flotta 20,8% elettrica, obiettivi raggiunti',
+    ogDescription: 'Primo bilancio 2025 delle prescrizioni CO2 sui veicoli commerciali pesanti in Svizzera. Importatori raggiungono i target ambientali, sanzioni contenute a 303.000 CHF, quota VCP completamente elettrici al 20,8% sopra media europea.',
+    canonicalPath: '/articoli-svizzera/emissioni-co2-vcp-2025/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Emissioni CO2 VCP: risultati 2025 e obiettivi raggiungibili",
+      "description": "Nel 2025 le prescrizioni sulle emissioni di CO2 si applicano ai veicoli commerciali pesanti in Svizzera. Importatori raggiungono i target, sanzioni contenute",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/emissioni-co2-vcp-2025.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Camion completamente elettrico su strada svizzera con catena montuosa sullo sfondo"
+      },
+      "datePublished": "2026-09-03T08:20:50+00:00",
+      "dateModified": "2026-09-03T08:20:50+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/emissioni-co2-vcp-2025/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-affitti-benzina-spingono-inflazione': {
+    title: 'L\'inflazione torna a salire dopo 4 mesi | Frontaliere Ticino',
+    description: 'Inflazione agosto 0,8%, risalita dopo 4 mesi. Affitti, benzina le cause. BNS monitora. Prossima riunione 24 settembre. Leggi impatto sul costo della vita.',
+    keywords: 'frontalieri, ticino, svizzera, italia, inflazione, torna, salire, dopo',
+    ogTitle: 'L\'inflazione torna a salire dopo 4 mesi',
+    ogDescription: 'Inflazione svizzera agosto 0,8%, risalita dopo 4 mesi. Affitti e benzina tra le cause principali di rincaro. BNS monitorizza il trend con obiettivo 0-2%. Prossima riunione 24 settembre. Scopri l\'impatto sul costo della vita e cosa aspettarsi',
+    canonicalPath: '/articoli-svizzera/affitti-benzina-spingono-inflazione/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "L'inflazione torna a salire dopo 4 mesi",
+      "description": "Inflazione agosto 0,8%, risalita dopo 4 mesi. Affitti, benzina le cause. BNS monitora. Prossima riunione 24 settembre. Leggi impatto sul costo della vita.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/affitti-benzina-spingono-inflazione.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Un economista analizza grafici di inflazione e indice dei prezzi al consumo, con vista su Berna di sfondo."
+      },
+      "datePublished": "2026-09-03T08:35:51+00:00",
+      "dateModified": "2026-09-03T08:35:51+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/affitti-benzina-spingono-inflazione/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-pil-q2-2026-industria-forte': {
+    title: 'PIL Q2 2026: +1,5% trimestrale, crescita industria',
+    description: 'Nel Q2 2026 il PIL svizzero cresce dell\'1,5% al netto degli eventi sportivi, più forte dal 2021. Spinta dall\'industria chimico-farmaceutica (+10,5%) e rimbalzo',
+    keywords: 'frontalieri, ticino, svizzera, italia, trimestrale, crescita, industria, svizzero',
+    ogTitle: 'PIL Q2 2026: +1,5% trimestrale, crescita industria',
+    ogDescription: 'Nel Q2 2026 il PIL svizzero cresce dell\'1,5% al netto degli eventi sportivi, più forte dal 2021. Spinta dall\'industria chimico-farmaceutica (+10,5%) e rimbalzo della domanda interna.',
+    canonicalPath: '/articoli-svizzera/pil-q2-2026-industria-forte/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "PIL Q2 2026: +1,5% trimestrale, crescita industria",
+      "description": "Nel Q2 2026 il PIL svizzero cresce dell'1,5% al netto degli eventi sportivi, più forte dal 2021. Spinta dall'industria chimico-farmaceutica (+10,5%) e rimbalzo",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/pil-q2-2026-industria-forte.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Grattacieli del distretto finanziario svizzero con grafici di crescita economica su schermo digitale"
+      },
+      "datePublished": "2026-09-03T08:52:00+00:00",
+      "dateModified": "2026-09-03T08:52:00+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/pil-q2-2026-industria-forte/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-calo-natalita-finanze-pubbliche': {
+    title: 'AFF: il calo della natalità pesa sulle finanze svizzere',
+    description: 'L\'Amministrazione federale delle finanze analizza l\'impatto del calo delle nascite sulla stabilità economica e previdenziale della Svizzera nel documento n. 30.',
+    keywords: 'frontalieri, ticino, svizzera, italia, calo, natalità, pesa, sulle',
+    ogTitle: 'AFF: il calo della natalità pesa sulle finanze svizzere',
+    ogDescription: 'Nuovo documento di lavoro dell\'AFF sui rischi demografici per il sistema di sicurezza sociale e le casse pubbliche svizzere.',
+    canonicalPath: '/articoli-svizzera/calo-natalita-finanze-pubbliche/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "AFF: il calo della natalità pesa sulle finanze svizzere",
+      "description": "L'Amministrazione federale delle finanze analizza l'impatto del calo delle nascite sulla stabilità economica e previdenziale della Svizzera nel documento n. 30.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/calo-natalita-finanze-pubbliche.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Sede dell'Amministrazione federale delle finanze a Berna."
+      },
+      "datePublished": "2026-09-03T09:13:41+00:00",
+      "dateModified": "2026-09-03T09:13:41+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/calo-natalita-finanze-pubbliche/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-petizione-delocalizzazioni-svizzera': {
+    title: 'Petizione contro delocalizzazione di Posta e Swisscom',
+    description: 'Transfair lancia una petizione per fermare la delocalizzazione di posti di lavoro e know-how all\'estero da parte di Posta e Swisscom. Dati aggiornati 2026',
+    keywords: 'frontalieri, ticino, svizzera, italia, petizione, contro, delocalizzazione, posta',
+    ogTitle: 'Petizione contro la delocalizzazione di impieghi all\'estero da parte di Posta e Swisscom',
+    ogDescription: 'Transfair lancia una petizione per fermare la delocalizzazione di posti di lavoro e know-how all\'estero da parte di Posta e Swisscom, aziende in maggioranza di proprietà della Confederazione.',
+    canonicalPath: '/articoli-svizzera/petizione-delocalizzazioni-svizzera/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Petizione contro delocalizzazione di Posta e Swisscom",
+      "description": "Transfair lancia una petizione per fermare la delocalizzazione di posti di lavoro e know-how all'estero da parte di Posta e Swisscom. Dati aggiornati 2026",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/petizione-delocalizzazioni-svizzera.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista aerea di Bellinzona, Svizzera, con i castelli storici e l'infrastruttura moderna."
+      },
+      "datePublished": "2026-09-03T09:30:21+00:00",
+      "dateModified": "2026-09-03T09:30:21+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/petizione-delocalizzazioni-svizzera/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

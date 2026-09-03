@@ -1,26 +1,31 @@
 /**
- * auto-merge-eval.mjs — decisione di auto-merge (deterministico, zero-Claude).
+ * auto-merge-eval.mjs — i gate deterministici del merge (zero-Claude).
  *
- * Centralizza la SINGOLA valutazione di merge usata da entrambi i trigger di
- * auto-merge-on-lgtm.yml:
- *   - `pull_request_review: submitted` (il reviewer ha appena postato `## LGTM`)
- *   - `workflow_run` del workflow `tests` completato (vitest appena concluso)
- * In passato la decisione viveva inline nello YAML e bloccava SOLO su vitest
- * conclusion == failure: se vitest era pending/mancante l'auto-merge PROCEDEVA →
- * una PR poteva mergiare PRIMA che i test finissero, e se poi andavano rossi
- * main andava rosso (osservato #1454: LGTM mentre vitest girava → vitest failure
- * → main red cascade). Qui il merge scatta SOLO con vitest == success.
+ * ## Cos'e' diventato dal 2026-09-03
  *
- * Dato un PR number, valuta (e logga ogni gate):
+ * Non e' piu' il DECISORE del merge: quella decisione e' passata all'auto-merge
+ * NATIVO di GitHub, che aspetta il check richiesto dal ruleset su `main`.
+ * Questo file resta la LIBRERIA dei suoi gate — il fingerprint del contributo,
+ * il riconoscimento dell'autore fidato, il completeness contract del body, il
+ * path-filter di `generator-ci` — importati da `review-gate.mjs`,
+ * `generator-ci-gate.mjs` e `pr-contribution-fingerprint.mjs`, cioe' dagli step
+ * che PRODUCONO quel check. Il `main()` in fondo sopravvive come CLI di
+ * diagnosi: stampa la valutazione completa di una PR senza mergiare niente.
+ *
+ * Tenere le funzioni qui e non riscriverle nei tre chiamanti e' il punto: sono
+ * gia' coperte dai test di questo repo, e due copie della stessa semantica di
+ * «contributo invariato» sarebbero un drift garantito.
+ *
+ * Dato un PR number, `main()` valuta (e logga ogni gate):
  *   1. PR aperta e NON draft.
  *   2. Ultima review del bot reviewer (login startsWith `claude`, type Bot) sulla
  *      HEAD corrente contiene `## LGTM` e NON `🔴 Important`.
  *      DRIFT-FALLBACK (zero-Claude): se manca `## LGTM` E manca un `🔴`, ma la PR
- *      modifica `pr-review-loop.yml` (→ il reviewer Claude non può girare per
- *      workflow-validation 401) ED è di autore fidato ED ha `pr-body-contract`
- *      verde → approva su gate deterministici al posto della review (rimuove
- *      l'unico caso di merge MANUALE residuo). Un `🔴` reale blocca comunque.
- *   3. check-run `vitest (unit + integration)` sulla HEAD == `success`
+ *      modifica il workflow che OSPITA la review (→ il reviewer Claude non può
+ *      girare per workflow-validation 401) ED è di autore fidato ED ha il
+ *      completeness contract del body verde → approva su gate deterministici al
+ *      posto della review. Un `🔴` reale blocca comunque.
+ *   3. check-run `CI_CHECK_NAME` (qui `tests (node --test)`) sulla HEAD == `success`
  *      (NON solo != failure: richiede success → niente merge su pending/missing).
  *   4. Generator CI gate (#242): SOLO se la PR tocca i path che fanno scattare
  *      `generator-ci.yml` (`GENERATOR_CI_TRIGGER_PATHS` — generator/, engine/,
@@ -114,7 +119,7 @@ function notifyAwaitingVitest(pr) {
  * se il contributo a `sha` è byte-identico a quello su cui claude[bot] aveva
  * dato `## LGTM`, il codice approvato non è cambiato → l'approvazione regge,
  * SENZA ri-eseguire la review (zero Claude). Tutto via compare API (nessun
- * git locale → nessuna modifica al checkout di auto-merge-on-lgtm.yml).
+ * git locale → il chiamante non ha bisogno di un checkout).
  * Conservativo: qualunque incertezza (compare troncato, patch mancanti su file
  * grossi, errore API) → ritorna null → niente carry-forward (stale come prima).
  */
@@ -137,13 +142,23 @@ export function prContributionFingerprint(sha) {
 }
 
 // File NON reviewabili come code (dati/static rigenerati): esclusi dal
-// fingerprint del contributo. Stessa lista del tier-gate di pr-review-loop.yml
-// e degli exclude del diff reviewer. Così un push che tocca SOLO questi (es. un
-// crawler che rigenera `data/jobs/*.json`) NON cambia il fingerprint CODE → il
-// carry-forward dell'LGTM regge senza ri-eseguire la review (zero Claude),
-// mentre il gate vitest resta sull'head fresco. Prima il carry-forward valeva
-// SOLO per i rebase di puro main-merge; ora anche per i push data/docs-only.
-export const NON_REVIEWABLE_FINGERPRINT_RE = /^(data|public|reports|_newsletter_variants|docs)\//;
+// fingerprint del contributo. Stessa lista del tier-gate della review in tests.yml
+// e degli exclude del diff reviewer. Così un push che tocca SOLO questi NON
+// cambia il fingerprint CODE → il carry-forward dell'LGTM regge senza
+// ri-eseguire la review (zero Claude), mentre il gate dei test resta sull'head
+// fresco. Prima il carry-forward valeva SOLO per i rebase di puro main-merge;
+// ora anche per i push di solo corpus.
+//
+// ── L'ALBERO E' QUELLO DI QUESTO REPO, e fino al 2026-09-03 non lo era ──────
+// La lista era arrivata dal sito PAROLA PER PAROLA (`data|public|reports|
+// _newsletter_variants|docs`), cioè nominando due cartelle che qui non esistono
+// e OMETTENDO `content/` e `dist/` — le uniche due che qui cambiano da sole. Il
+// risultato è che il carry-forward, la cui ragione d'essere su questo repo è
+// proprio la churn del corpus (~90 push al giorno su `main` che riscrivono
+// `content/`), non scattava MAI sul caso per cui esiste: ogni rigenerazione
+// cambiava il fingerprint e faceva ripartire una review a vuoto. La stessa
+// lista, nella forma corpus, sta in `NONCODE_RE` dentro `tests.yml`.
+export const NON_REVIEWABLE_FINGERPRINT_RE = /^(content|data|dist|public)\//;
 
 /**
  * Costruisce il fingerprint del contributo CODE da `files` (l'array `.files`
@@ -215,7 +230,7 @@ export function isTrustedDriftAuthor(meta) {
     (/^(claude|github-actions)/i.test(meta.login || '') || meta.login === 'frontaliere-automation[bot]');
 }
 
-// Required-headers regex — MIRROR di `.github/workflows/pr-body-contract.yml`
+// Required-headers regex — MIRROR dello step «PR-body completeness» di `.github/workflows/tests.yml`
 // (step `check`, righe ~46-47). Quel job è github-script SENZA `actions/checkout`
 // → non può `require` un modulo del repo, quindi non si può condividere via
 // import (stessa situazione del mirror REDFLAG_IMPORTANT_RE ↔ bash di
@@ -292,7 +307,7 @@ export function collisionGateDecision({ behind = 0, mergedPeers = [] } = {}) {
 
 /**
  * Drift-fallback (zero-Claude): quando il reviewer Claude NON ha potuto postare
- * `## LGTM` perché la PR modifica `pr-review-loop.yml` (workflow-validation 401),
+ * `## LGTM` perché la PR modifica il workflow che ospita la review (workflow-validation 401),
  * approva il merge su GATE DETERMINISTICI al posto della review:
  *   (a) la PR modifica davvero un drift-file (REVIEW_WORKFLOW_DRIFT_FILES);
  *   (b) autore fidato (owner/membro/collaboratore o bot interno);
@@ -315,7 +330,7 @@ function evaluateDriftFallback() {
     return false;
   }
   if (!isReviewWorkflowDriftPR(files)) {
-    console.log('drift-fallback: la PR non modifica un workflow di review (pr-review-loop.yml) — no fallback; un push nuovo ri-attiverà la review.');
+    console.log('drift-fallback: la PR non modifica un workflow di review — no fallback; un push nuovo ri-attiverà la review.');
     return false;
   }
   const driftFiles = files.filter((f) => REVIEW_WORKFLOW_DRIFT_FILES.includes(f));
@@ -427,12 +442,12 @@ function main() {
     // qui è un 🟡/❓ senza LGTM (es. ❓ funnel-critical non escalato, dove
     // REVIEW.md vieta `## LGTM`) — RISPETTALA, non scavalcarla, indipendentemente
     // dal commit a cui si riferisce (la review poteva essere su un commit
-    // precedente, prima che la PR aggiungesse la modifica a `pr-review-loop.yml`).
+    // precedente, prima che la PR aggiungesse la modifica al workflow di review).
     if (lastBot) {
       return fail(`Esiste una review claude-bot non-approvante (no '## LGTM', no 🔴 — es. ❓/🟡 aperto) — skip; il drift-fallback non scavalca una review esistente, serve un push fresco o risoluzione manuale.`);
     }
     // Nessuna review affatto → tipicamente il reviewer non ha potuto girare perché
-    // la PR modifica `pr-review-loop.yml` (401). Prova il drift-fallback
+    // la PR modifica il workflow che ospita la review (401). Prova il drift-fallback
     // deterministico (autore fidato + body-contract). false → skip (ri-valuta al
     // prossimo `tests`/push).
     if (!evaluateDriftFallback()) {
