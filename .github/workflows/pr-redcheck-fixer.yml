@@ -408,6 +408,7 @@ jobs:
           REPO: ${{ github.repository }}
           FAILED_RUN_ID: ${{ needs.preflight.outputs.failed_run_id }}
           HEAD_SHA: ${{ needs.preflight.outputs.head_sha }}
+          HEAD_REF: ${{ needs.preflight.outputs.head_ref }}
         run: |
           set -uo pipefail
           OUT="$RUNNER_TEMP/redcheck"
@@ -424,7 +425,14 @@ jobs:
             # tolti o il grep sui nomi dei test non aggancia niente.
             sed -e 's/\x1b\[[0-9;]*m//g' -e 's/\^\[\[[0-9;]*m//g' "$OUT/raw.log" > "$OUT/clean.log"
             strip='s/^[^\t]*\t[^\t]*\t[0-9T:.Z-]*//'
-            grep -E '::error::' "$OUT/clean.log" | sed "$strip" | sort -u | head -20 > "$OUT/errors.txt" || : > "$OUT/errors.txt"
+            # Dedup che PRESERVA L'ORDINE del log, non `sort -u`: con
+            # l'ordinamento alfabetico il cap `head` taglia per iniziale, e la
+            # riga che nomina `generator-ci-gate` puo' cadere fuori proprio
+            # quando i gate rossi sono tanti — saltando in silenzio il download
+            # del log separato, cioe' il caso che questo blocco esiste per
+            # coprire. Con l'ordine del log, cio' che sopravvive al cap e' cio'
+            # che e' fallito PRIMA, che e' anche l'ordine in cui si diagnostica.
+            grep -E '::error::' "$OUT/clean.log" | sed "$strip" | awk '!seen[$0]++' | head -20 > "$OUT/errors.txt" || : > "$OUT/errors.txt"
             {
               echo "### Gate falliti (righe \`::error::\`)"
               if [ -s "$OUT/errors.txt" ]; then cat "$OUT/errors.txt"; else echo "(nessuna)"; fi
@@ -447,16 +455,29 @@ jobs:
             # limita a leggerne il check-run. Senza questo blocco l'agente
             # leggerebbe «generator-ci e' rosso» e nient'altro — un verdetto
             # senza la diagnosi che serve per ripararlo.
-            if grep -q 'generator-ci-gate' "$OUT/errors.txt" 2>/dev/null; then
-              GEN_RUN=$(gh run list --repo "$REPO" --workflow=generator-ci.yml --limit 20 \
-                --json databaseId,headSha,conclusion \
-                --jq "[.[] | select(.headSha==\"$HEAD_SHA\" and .conclusion==\"failure\")][0].databaseId" 2>/dev/null || echo "")
+            if grep -q 'generator-ci-gate' "$OUT/clean.log" 2>/dev/null; then
+              # `--branch` e non le ultime 20 run GLOBALI del workflow: questo
+              # repo ha decine di run concorrenti (crawler, batch FAQ, sweep), e
+              # una finestra globale puo' non contenere piu' la run del nostro
+              # sha — il fixer direbbe «nessuna run fallita» quando la run c'e',
+              # solo piu' indietro nella lista.
+              #
+              # E la conclusione NON e' solo `failure`: un `timed_out` o un
+              # `cancelled` sono altrettanto «non riuscita», e trattarli come
+              # assenza faceva stampare «probabile timeout in attesa» — una
+              # frase giusta per caso su un timeout e fuorviante su un cancel.
+              # Qui si prende la run e si DICE quale conclusione ha avuto.
+              GEN=$(gh run list --repo "$REPO" --workflow=generator-ci.yml --branch "$HEAD_REF" --limit 50 \
+                --json databaseId,headSha,conclusion,status \
+                --jq "[.[] | select(.headSha==\"$HEAD_SHA\" and .status==\"completed\" and .conclusion!=\"success\" and .conclusion!=\"skipped\")][0] | \"\(.databaseId // \"\") \(.conclusion // \"\")\"" 2>/dev/null || echo "")
+              GEN_RUN=$(printf '%s' "$GEN" | awk '{print $1}')
+              GEN_CONCL=$(printf '%s' "$GEN" | awk '{print $2}')
               if [ -n "$GEN_RUN" ] && [ "$GEN_RUN" != "null" ]; then
                 gh run view "$GEN_RUN" --repo "$REPO" --log-failed 2>/dev/null \
                   | sed -e 's/\x1b\[[0-9;]*m//g' -e 's/\^\[\[[0-9;]*m//g' > "$OUT/gen.log" || : > "$OUT/gen.log"
                 {
                   echo
-                  echo "### generator-ci (run $GEN_RUN, workflow SEPARATO — e' li' che vive il fallimento)"
+                  echo "### generator-ci (run $GEN_RUN, conclusion=$GEN_CONCL, workflow SEPARATO — e' li' che vive il fallimento)"
                   grep -E '(^|[[:space:]])(not ok [0-9]+|✖|::error::|Error:|AssertionError)' "$OUT/gen.log" \
                     | sed "$strip" | sort -u | head -30
                   echo
@@ -464,8 +485,12 @@ jobs:
                   tail -c 6000 "$OUT/gen.log"
                 } >> "$OUT/failing.txt" 2>/dev/null || true
               else
-                echo "::warning::generator-ci-gate rosso ma nessuna run fallita di generator-ci.yml trovata su $HEAD_SHA — il gate potrebbe essere scaduto in attesa (pending oltre il tetto) invece che fallito."
-                printf '\n### generator-ci\nIl gate ha dichiarato rosso ma non esiste una run FALLITA di generator-ci.yml su questo sha: probabile timeout in attesa, non un fallimento dei suoi test.\n' >> "$OUT/failing.txt"
+                # Nessuna run CONCLUSA non-success sullo sha. Le due cause
+                # possibili sono opposte e vanno dette entrambe, senza sceglierne
+                # una a caso: o il gate e' scaduto aspettando una run che non ha
+                # mai concluso, oppure la run c'e' ma non e' su questo branch.
+                echo "::warning::generator-ci-gate rosso ma nessuna run conclusa non-success di generator-ci.yml su $HEAD_SHA (branch $HEAD_REF)."
+                printf '\n### generator-ci\nIl gate ha dichiarato rosso ma su questo sha non esiste una run CONCLUSA di generator-ci.yml con esito diverso da success. Le due cause possibili: il gate e scaduto in attesa (la run non ha mai concluso entro il tetto), oppure la run esiste ma non su questo branch. Controlla a mano: gh run list --workflow=generator-ci.yml --json headSha,status,conclusion\n' >> "$OUT/failing.txt"
               fi
             fi
           fi

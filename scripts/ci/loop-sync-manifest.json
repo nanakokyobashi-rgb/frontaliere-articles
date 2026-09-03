@@ -3198,7 +3198,7 @@
       "reason": "Gemello del workflow del sito per il check richiesto ROSSO su una PR autonoma, il sintomo che il 🔴-fixer non copre (quello legge il diff, non la CI). Adattato su quattro punti non copiabili: (1) identita' di push GITHUB_PAT_NANAKO da Remote Config, non un token di GitHub App — questo repo non ha la App del sito; (2) niente npm ci ne' vitest: i gate qui sono dependency-free e il fixer riproduce con node --test; (3) il filtro del log e' TAP (`not ok N`, `✖`), non le righe `FAIL ` di vitest — copiare il filtro del sito darebbe un contesto VUOTO su ogni rosso, che e' peggio di nessun contesto perche' l'agente lo legge e conclude che non c'e' niente; (4) niente proxy di compressione, per la stessa ragione della review in tests.yml: qui l'input dell'agente e' un log. In piu' qui: lo skip su engine-lockstep-auto e il paragrafo del prompt che spiega quali QUATTRO cose porta il check richiesto e quale delle quattro NON e' compito suo (il verdetto della review lo ripara il gemello). Due divergenze in piu' dal sito, entrambe da un finding della review su questa stessa PR: (a) il contesto raccoglie ANCHE le righe `::error::` e, quando nominano il gate di generator-ci, scarica il log fallito di generator-ci.yml sullo stesso sha — il check richiesto qui porta quattro famiglie e solo una parla TAP, quindi il filtro TAP da solo lasciava fuori il rosso vero nelle altre tre; (b) il checkout usa lo SHA verificato dal preflight, non il nome del branch, cosi' l'albero e la diagnosi non possono divergere se arriva un push nel frattempo.",
       "baseline": {
         "site": "84011cb61e180899",
-        "corpus": "7b412d8cf8fec0f6",
+        "corpus": "3c4389f6fd2b0a62",
         "alignedAt": "2026-09-03"
       }
     }
