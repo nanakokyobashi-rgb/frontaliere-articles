@@ -1,5 +1,4 @@
 {
-  "https://www.laregione.ch/economia": "economia-svizzera-nazionale-2026",
   "https://www.tio.ch/svizzera/politica/1943173/svizzera-neutralita-iniziativa-prassi-consiglio": "neutralita-prassi-svizzera",
   "https://www.laregione.ch/svizzera/svizzera/1943160/semestre-bell-primo-storia-stato": "bell-bellinzona-aziendale-2026",
   "https://www.laregione.ch/svizzera/svizzera/1943176/svizzera-iniziativa-neutralita-prassi-consiglio-settembre-federale-chiede": "consiglio-federale-iniziativa-neutralita",
@@ -1721,6 +1720,11 @@
   "https://www.swissinfo.ch/ita/riserve-naturali-messe-a-dura-prova-da-siccit%c3%a0/91999663": {
     "articleId": "riserve-naturali-siccita-estate-2024",
     "ts": "2026-09-03T16:11:14.748Z",
+    "keyForm": 2
+  },
+  "https://www.laregione.ch/svizzera/svizzera/1947883/medici-di-famiglia-e-dell-infanzia-criticano-il-nuovo-tariffario-medico": {
+    "articleId": "tariffario-ambulatoriale-cure-base",
+    "ts": "2026-09-03T17:34:19.168Z",
     "keyForm": 2
   }
 }
