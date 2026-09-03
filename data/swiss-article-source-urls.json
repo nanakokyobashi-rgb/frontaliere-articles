@@ -1,5 +1,4 @@
 {
-  "https://www.laregione.ch/economia/economia/1940791/logitech-esercizio-primo-franchi-miliardi": "logitech-2026-2027",
   "https://www.laregione.ch/economia/economia/1941131/mammut-proprieta-cpe-cinese-marchio-investitore": "mammut-proprieta-investitore-cinese",
   "https://www.seco.admin.ch/it/newnsb/ohqzdeeggxr9tah-z1olx": "libera-circolazione-mercato-lavoro-2026",
   "https://www.laregione.ch/temablog/publiredazionale": "publiredazionale-aziende-informano",
@@ -1693,6 +1692,11 @@
   "https://www.admin.ch/it/newnsb/s-hhonja-wbo": {
     "articleId": "comitato-consultivo-svizzera-digitale",
     "ts": "2026-09-03T14:15:06.214Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/economia/1947841/ubs-pil-crescita-corregge-rialzo-stima": {
+    "articleId": "ubs-pil-crescita-2026-rialzo",
+    "ts": "2026-09-03T14:31:01.468Z",
     "keyForm": 2
   }
 }
