@@ -1,5 +1,4 @@
 {
-  "https://www.swissinfo.ch/ita/alcon-cresce-nel-secondo-trimestre-2026/91876907": "alcon-risultati-finanziari-q2-2026",
   "https://www.laregione.ch/economia": "economia-svizzera-nazionale-2026",
   "https://www.tio.ch/svizzera/politica/1943173/svizzera-neutralita-iniziativa-prassi-consiglio": "neutralita-prassi-svizzera",
   "https://www.laregione.ch/svizzera/svizzera/1943160/semestre-bell-primo-storia-stato": "bell-bellinzona-aziendale-2026",
@@ -1717,6 +1716,11 @@
   "https://www.swissinfo.ch/ita/inflazione-aumenta-in-svizzera%2c-banca-nazionale-ritoccher%c3%a0-tassi%3f/92001563": {
     "articleId": "inflazione-svizzera-bns-tassi",
     "ts": "2026-09-03T15:18:35.895Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/riserve-naturali-messe-a-dura-prova-da-siccit%c3%a0/91999663": {
+    "articleId": "riserve-naturali-siccita-estate-2024",
+    "ts": "2026-09-03T16:11:14.748Z",
     "keyForm": 2
   }
 }
