@@ -47,6 +47,20 @@
  * servirà: se e quando `isAvoidableMaxTurns` imparerà a leggerlo, la semantica è
  * già scritta e testata (`generator/tests/harvest-escalation-rules.test.mjs`).
  *
+ * ## Il rapporto col checkpoint WIP di `issue-fix.yml` (2026-09-03)
+ *
+ * Questo file OSSERVA branch che esistono. Il checkpoint deterministico dello
+ * step «Salva il lavoro parziale» li FA esistere: prima, un run che moriva ai
+ * turni prima di poter pushare non lasciava nemmeno il branch da osservare, e i
+ * dieci casi misurati qui sopra sono solo quelli in cui l'agente era arrivato al
+ * push da solo. I due strati sono complementari e non si sovrappongono — il
+ * checkpoint scrive, questo legge — quindi la loro composizione e' che il
+ * lavoro pagato diventa VISIBILE anche quando la CLI e' stata uccisa a meta'.
+ *
+ * Conseguenza attesa sulle misure: il numero di branch orfani trovati da questo
+ * rilevatore CRESCERA'. Non e' un peggioramento, e' lavoro che prima spariva col
+ * container e ora ha un nome.
+ *
  * ## Zero Claude, zero quota
  *
  * Solo `gh api` in lettura. Non genera niente, non chiama nessun modello, e in

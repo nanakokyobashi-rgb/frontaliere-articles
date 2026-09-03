@@ -346,6 +346,103 @@ jobs:
             - Se la root cause non è determinabile con confidenza → NON forzare un fix: commenta "Root cause non determinata: <cosa hai trovato>. Serve indagine umana." e TERMINA senza PR.
             - **Telemetria (OBBLIGATORIO):** l'ULTIMO commento che posti sulla issue DEVE contenere un marker su riga propria — in testa o in coda, indifferentemente: `<!-- FIX_OUTCOME: <code> -->`, con `<code>` fra `pr-created`, `blocked-workflows-scope`, `blocked-secrets`, `blocked-admin-settings`, `no-root-cause`, `overlap-skip`, `pr-already-open`, `already-fixed`. Se apri una PR e non posti altro, posta comunque un commento col solo marker. Senza marker, il drainer non sa distinguere un verdetto da una run morta e ri-accoda a vuoto.
 
+      - name: Salva il lavoro parziale (WIP checkpoint deterministico, zero-Claude)
+        # PERCHE' ESISTE. Il checkpoint WIP c'era gia', ma come PASSO DEL PROMPT,
+        # cioe' affidato alla scelta dell'agente. Un run che muore per
+        # `error_max_turns` muore proprio quando non ha piu' turni per eseguirlo:
+        # l'istruzione arriva esattamente quando non puo' piu' essere seguita.
+        # Sul sito, sulle 29 issue parcheggiate con verdetto `max-turns`, VENTI
+        # non avevano nessun branch `fix/issue-N` su origin — il diff era morto
+        # col container, insieme ai turni gia' pagati per produrlo.
+        #
+        # Questo step e' la meta' deterministica: gira `if: always()`, dopo
+        # Claude e prima di qualunque telemetria, quindi coglie l'albero di
+        # lavoro anche quando la CLI e' stata uccisa. La resume-logic dello step
+        # «Check for resumable WIP branch» esiste gia' e sa ripartire da
+        # `fix/issue-N`: senza questo step non aveva quasi mai un branch da
+        # riprendere.
+        #
+        # NON tocca niente quando c'e' gia' una PR (il lavoro e' consegnato) o
+        # quando l'albero e' pulito e non c'e' nulla davanti a origin/main (non
+        # c'era lavoro da salvare). Best-effort in senso stretto: qualunque
+        # fallimento e' un warning, mai un job rosso — un salvataggio mancato non
+        # deve trasformare un run terminato in un run fallito.
+        if: always() && steps.quota.outputs.quota_blocked != 'true' && steps.preflight.outputs.already_resolved != 'true' && steps.scope_guard.outputs.workflows_blocked != 'true' && steps.claim.outputs.in_flight != 'true'
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          ISSUE: ${{ github.event.issue.number }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          set -uo pipefail
+          BRANCH="fix/issue-$ISSUE"
+
+          PR_STATE=$(gh pr list --repo "$REPO" --head "$BRANCH" --state all --json state \
+            --jq '[.[] | select(.state=="OPEN" or .state=="MERGED")] | length' 2>/dev/null || echo 0)
+          if [ "${PR_STATE:-0}" != "0" ]; then
+            echo "wip-salvage: PR gia' aperta/mergiata su $BRANCH → il lavoro e' consegnato, niente da salvare."
+            exit 0
+          fi
+
+          # Il branch di lavoro puo' non essere quello corrente se l'agente e'
+          # morto prima del checkout: in quel caso si crea qui.
+          CUR=$(git rev-parse --abbrev-ref HEAD 2>/dev/null || echo HEAD)
+          if [ "$CUR" != "$BRANCH" ]; then
+            git checkout -B "$BRANCH" >/dev/null 2>&1 || true
+          fi
+
+          DIRTY=$(git status --porcelain 2>/dev/null | head -c 1)
+          AHEAD=$(git rev-list --count origin/main..HEAD 2>/dev/null || echo 0)
+          if [ -z "$DIRTY" ] && [ "${AHEAD:-0}" = "0" ]; then
+            echo "wip-salvage: albero pulito e 0 commit davanti a origin/main → nessun lavoro da salvare."
+            exit 0
+          fi
+
+          if [ -n "$DIRTY" ]; then
+            # `git add -A` e non un elenco: qui non si sa cosa l'agente ha
+            # toccato, ed e' proprio cio' che va conservato. Il checkout di
+            # questo job non e' sparse, quindi non c'e' il rischio di perdere
+            # modifiche fuori dal cono.
+            git add -A
+            git commit -q -m "wip(issue-$ISSUE): checkpoint automatico di un run terminato senza PR" \
+              -m "Salvato da issue-fix.yml (step deterministico), non dall'agente: il run e' finito senza aprire una PR e senza eseguire il checkpoint del prompt — il caso tipico e' error_max_turns, che finisce i turni proprio prima di poterlo fare." \
+              -m "Run: $RUN_URL" || echo "wip-salvage: commit vuoto o rifiutato, continuo."
+          fi
+
+          # Ri-applica l'identita' di push: dopo claude-code-action il remote
+          # porta la credenziale che l'action ha ricevuto, e l'extraheader di
+          # actions/checkout ha comunque la precedenza sull'URL — stessa
+          # trappola documentata nello step «Configure git identity».
+          if [ -n "${GITHUB_PAT_NANAKO:-}" ]; then
+            git config --unset-all http."https://github.com/".extraheader 2>/dev/null || true
+            git remote set-url origin "https://x-access-token:${GITHUB_PAT_NANAKO}@github.com/${REPO}.git"
+          fi
+
+          if git push -u origin "$BRANCH" 2>&1 | tail -3; then
+            SHA=$(git rev-parse --short HEAD)
+            FILES=$(git diff --name-only origin/main..HEAD | head -20)
+            N=$(git diff --name-only origin/main..HEAD | wc -l | tr -d ' ')
+            echo "wip-salvage: $BRANCH pushato ($N file, $SHA)."
+            {
+              echo "💾 **Lavoro parziale salvato** (step deterministico di \`issue-fix\`, zero-Claude)"
+              echo
+              echo "Questo run e' terminato senza aprire una PR, quindi il diff che aveva in mano sarebbe morto col container. E' stato committato e pushato su \`$BRANCH\` (\`$SHA\`, $N file):"
+              echo
+              echo '```'
+              echo "$FILES"
+              echo '```'
+              echo
+              echo "Il prossimo tentativo **riprende da qui** invece di ripartire da zero (resume-logic del fixer). Se il diff non e' pertinente, il fixer lo scarta da se' con un \`git reset --hard origin/main\`."
+              echo
+              echo "Run: $RUN_URL"
+            } > /tmp/wip-note.md
+            gh issue comment "$ISSUE" --repo "$REPO" --body-file /tmp/wip-note.md >/dev/null 2>&1 \
+              || echo "::warning::wip-salvage: commento sulla issue non postato (il branch pero' e' salvo)."
+          else
+            echo "::warning::wip-salvage: push di $BRANCH fallito — il lavoro resta solo nel container e andra' perso."
+          fi
+
       - name: Claude usage metrics
         if: always() && steps.quota.outputs.quota_blocked != 'true' && steps.preflight.outputs.already_resolved != 'true' && steps.scope_guard.outputs.workflows_blocked != 'true' && steps.claim.outputs.in_flight != 'true'
         continue-on-error: true
@@ -415,6 +512,89 @@ jobs:
           ISSUE_NUMBER: ${{ github.event.issue.number }}
           SITE_TOKEN: ${{ env.GITHUB_PAT }}
         run: node scripts/ci/handoff-to-site.mjs
+
+      - name: Emit FIX_OUTCOME telemetry (deterministic backstop)
+        # Il prompt CHIEDE all'agente di postare un marker granulare
+        # `<!-- FIX_OUTCOME: <code> -->`, ma un marker emesso dal prompt e'
+        # inaffidabile per costruzione: chi muore ai turni non lo scrive, e sul
+        # sito e' stato osservato un run che aveva l'istruzione e non ha postato
+        # niente. Questo backstop garantisce che il lessons-harvester e il
+        # drainer abbiano SEMPRE un marker da interrogare: `pr-created` se
+        # questo run ha aperto una PR su `fix/issue-<N>`, altrimenti un grezzo
+        # `no-pr-unspecified`.
+        #
+        # Non sovrascrive MAI il marker granulare dell'agente: se ce n'e' gia'
+        # uno, esce. Il gate `if:` salta i corti-circuiti di pre-flight, che
+        # hanno gia' postato il proprio marker specifico — senza quel salto
+        # questo step ci scriverebbe sopra `no-pr-unspecified` e avvelenerebbe
+        # il segnale invece di completarlo. Best-effort: non fallisce mai.
+        if: always() && steps.quota.outputs.quota_blocked != 'true' && steps.preflight.outputs.already_resolved != 'true' && steps.scope_guard.outputs.workflows_blocked != 'true' && steps.claim.outputs.in_flight != 'true'
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          ISSUE: ${{ github.event.issue.number }}
+        run: |
+          set -uo pipefail
+          HAS=$(gh issue view "$ISSUE" --repo "$REPO" --json comments \
+            --jq '[.comments[].body | select(test("<!-- FIX_OUTCOME:"))] | length' 2>/dev/null || echo 0)
+          if [ "${HAS:-0}" != "0" ]; then
+            echo "Marker FIX_OUTCOME gia' presente (postato dall'agente) — nessun backstop necessario."
+            exit 0
+          fi
+          PR=$(gh pr list --repo "$REPO" --head "fix/issue-$ISSUE" --state open --json number \
+            --jq '.[0].number // empty' 2>/dev/null || true)
+          if [ -n "${PR:-}" ]; then OUT=pr-created; else OUT=no-pr-unspecified; fi
+          echo "FIX_OUTCOME issue=$ISSUE outcome=$OUT (backstop deterministico)"
+          gh issue comment "$ISSUE" --repo "$REPO" --body "$(printf '<!-- FIX_OUTCOME: %s -->\n_Outcome rilevato dal post-step deterministico (telemetria lessons-harvester)._' "$OUT")" || true
+
+      # Il colore del job e' il LAVORO reale del run, non l'exit della CLI.
+      #  - PR aperta o gia' MERGED per la issue (`fix/issue-<N>`) -> SUCCESS.
+      #    Vale ANCHE se la CLI e' morta `error_max_turns` DOPO che la PR era
+      #    stata aperta: e' un falso-fallimento, il lavoro e' consegnato ed e'
+      #    gia' in review.
+      #  - nessuna PR + CLI FAILED -> non-delivery reale -> ROSSO. Il segnale
+      #    serve al drainer e al report di salute del ciclo, e non va mascherato.
+      #  - nessuna PR + CLI SUCCESS -> terminale pulito (blocked / already-fixed
+      #    / no-root-cause: l'agente ha deciso di NON aprire PR) -> verde.
+      # I fallimenti infra a monte (setup, pre-flight) restano rossi da soli:
+      # quegli step non hanno `continue-on-error`. Nessun gate abbassato — la PR
+      # passa comunque dal reviewer; qui si disambigua «intenzionale» da «crash».
+      - name: Classify outcome (work-done, not CLI exit)
+        if: always() && steps.quota.outputs.quota_blocked != 'true' && steps.preflight.outputs.already_resolved != 'true' && steps.scope_guard.outputs.workflows_blocked != 'true' && steps.claim.outputs.in_flight != 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          ISSUE: ${{ github.event.issue.number }}
+          CLAUDE_OUTCOME: ${{ steps.claude_fix.outcome }}
+        run: |
+          set -uo pipefail
+          PR_STATE=$(gh pr list --repo "$REPO" --head "fix/issue-$ISSUE" --state all --json number,state \
+            --jq '[.[] | select(.state=="OPEN" or .state=="MERGED")] | .[0].number // empty' 2>/dev/null || true)
+          echo "issue=$ISSUE pr(head fix/issue-$ISSUE, open|merged)=${PR_STATE:-<none>} claude=$CLAUDE_OUTCOME"
+          if [ -n "${PR_STATE:-}" ]; then
+            echo "PR #$PR_STATE esiste (open/merged) per la issue -> run SUCCESS. Job verde anche se la CLI e' uscita '$CLAUDE_OUTCOME' (falso-fallimento: lavoro consegnato)."
+            exit 0
+          fi
+          if [ "$CLAUDE_OUTCOME" = "failure" ]; then
+            # Quota esaurita (429): il job resta comunque ROSSO — non e' un
+            # successo e non ha consegnato niente, quindi nessun falso-verde.
+            # Cambia solo il MESSAGGIO: attribuire questi run al «fixer che non
+            # sa fixare» e' una misattribuzione, e sul sito ha tenuto acceso un
+            # allarme per sette report senza che nessuno risalisse alla causa.
+            # Claude non ha eseguito (0 turni, costo 0): il recupero corretto e'
+            # aspettare la finestra, e lo fa il marker `rate-limited` emesso
+            # dallo step precedente, che il drainer legge.
+            RL=$(gh issue view "$ISSUE" --repo "$REPO" --json comments \
+              --jq '[.comments[].body | select(test("<!-- FIX_OUTCOME: rate-limited -->"))] | length' 2>/dev/null || echo 0)
+            if [ "${RL:-0}" != "0" ]; then
+              echo "::error::issue-fix #$ISSUE: run terminata su QUOTA Claude esaurita (429) al primo turno — l'agente non ha letto la issue (0 turni, costo 0). Non e' un fallimento di diagnosi: la issue e' stata ri-accodata SENZA consumare un tentativo. Job ROSSO perche' nessuna PR e' stata consegnata (nessun falso-verde)."
+              exit 1
+            fi
+            echo "::error::issue-fix #$ISSUE: nessuna PR aperta/mergiata e la CLI e' fallita ('$CLAUDE_OUTCOME') -> non-delivery reale. Job ROSSO (segnale preservato per il drainer e il report di salute)."
+            exit 1
+          fi
+          echo "Nessuna PR ma la CLI e' uscita pulita ('$CLAUDE_OUTCOME') -> terminale legittimo (blocked/already-fixed/no-root-cause). Job verde."
 
       - name: Release in-progress claim (zero-Claude, mutex)
         if: always() && steps.quota.outputs.quota_blocked != 'true' && steps.claim.outcome != 'skipped' && steps.claim.outputs.in_flight != 'true'
