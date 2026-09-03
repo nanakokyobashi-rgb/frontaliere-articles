@@ -2969,9 +2969,9 @@
       "sitePath": ".github/corpus-workflows/contract.json",
       "mode": "identical",
       "baseline": {
-        "site": "8ca1e0dcf2cdcc47",
-        "corpus": "8ca1e0dcf2cdcc47",
-        "alignedAt": "2026-09-02"
+        "site": "eef4cc97d59561d8",
+        "corpus": "eef4cc97d59561d8",
+        "alignedAt": "2026-09-03"
       }
     },
     {
@@ -3029,9 +3029,9 @@
       "sitePath": ".github/corpus-workflows/observers/scripts/lib/github-actions-read-client.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "b3d68540e6125bea",
-        "corpus": "b3d68540e6125bea",
-        "alignedAt": "2026-08-31"
+        "site": "a3c0b3742061e9e1",
+        "corpus": "a3c0b3742061e9e1",
+        "alignedAt": "2026-09-03"
       }
     },
     {
