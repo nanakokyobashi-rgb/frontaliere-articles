@@ -407,10 +407,10 @@
     {
       "path": ".github/workflows/tests.yml",
       "mode": "adapted",
-      "reason": "Stesso RUOLO del tests.yml del sito — dal 2026-09-03 su entrambi i lati e' il job UNICO che produce il check richiesto dal ruleset su `main`: contratto del body, test, Claude review col suo verdetto. Il contenuto resta interamente diverso: qui e' `node --test` dependency-free, senza vitest, senza shard, senza npm ci, e il NONCODE_RE nomina l'albero di questo repo (content/, dist/). In piu' qui, e non sul sito: lo step finale `generator-ci-gate`, perche' il ruleset puo' richiedere solo contesti presenti su OGNI PR e generator-ci.yml e' path-scoped. Diverge anche sul TRIGGER: qui gira anche su `push` a `main`, perche' il rescue `stuck-red` di pr-autorebase.mjs legge actions/workflows/tests.yml/runs?branch=main e senza una run success li' non ha prova da esibire (#267); il `push` e' pero' scopato a `main`, altrimenti ogni commit su un branch con PR aperta pagherebbe DUE review Claude.",
+      "reason": "Stesso RUOLO del tests.yml del sito — dal 2026-09-03 su entrambi i lati e' il job UNICO che produce il check richiesto dal ruleset su `main`: contratto del body, test, Claude review col suo verdetto. Il contenuto resta interamente diverso: qui e' `node --test` dependency-free, senza vitest, senza shard, senza npm ci, e il NONCODE_RE nomina l'albero di questo repo (content/, dist/). In piu' qui, e non sul sito: lo step finale `generator-ci-gate`, perche' il ruleset puo' richiedere solo contesti presenti su OGNI PR e generator-ci.yml e' path-scoped. Diverge anche sul TRIGGER: qui gira anche su `push` a `main`, perche' il rescue `stuck-red` di pr-autorebase.mjs legge actions/workflows/tests.yml/runs?branch=main e senza una run success li' non ha prova da esibire (#267); il `push` e' pero' scopato a `main`, altrimenti ogni commit su un branch con PR aperta pagherebbe DUE review Claude. Una divergenza deliberata dal sito: qui la review NON monta il proxy di compressione Headroom. Comprime in modo lossy cio' che i tool restituiscono al modello, e su questo repo il prodotto del reviewer sono le misure (counts di manifest.json, righe di log che distinguono un rosso vero da un falso rosso); e' la stessa ragione per cui il proprietario lo ha scartato lato sessione il 2026-09-03. Resta montato su issue-fix/issue-decompose, dove c'era gia'.",
       "baseline": {
         "site": "99c1b8fd3c0c4196",
-        "corpus": "a38bc6c3c26b484b",
+        "corpus": "92f0aa125cb0edb2",
         "alignedAt": "2026-09-03"
       }
     },

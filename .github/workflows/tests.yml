@@ -12,8 +12,7 @@ name: tests
 #
 # Prima il merge lo decideva un workflow dedicato all'auto-merge su LGTM, oggi
 # rimosso: leggeva la review, il check `tests`, la collisione, e chiamava
-# `gh pr merge`. Con l'auto-merge
-# NATIVO di GitHub quella decisione non e' piu' nostra — e' il ruleset su `main`
+# `gh pr merge`. Con l'auto-merge NATIVO di GitHub quella decisione non e' piu' nostra — e' il ruleset su `main`
 # a dire quali check devono essere verdi. Un gate che vive in un workflow
 # separato diventa quindi invisibile al ruleset: la PR mergerebbe con la review
 # rossa, o senza review affatto. Ficcando il verdetto della review DENTRO il job
@@ -391,13 +390,16 @@ jobs:
             set_tier normal claude-sonnet-5 35
           fi
 
-      # Fail-open per costruzione: se il proxy non installa o non diventa
-      # pronto, `ANTHROPIC_BASE_URL` resta vuoto e Claude parla diretto ad
-      # Anthropic. Il gate della review non e' MAI bloccato dal layer di
-      # compressione. Stessa action gia' in uso da `issue-fix`/`issue-decompose`.
-      - name: Setup Headroom compression proxy
-        if: steps.resolve.outputs.should_review == 'true' && steps.guard.outputs.skip != 'true'
-        uses: ./.github/actions/setup-headroom
+      # NIENTE proxy di compressione su questo step, e non e' una dimenticanza.
+      # Il gemello sul sito ne monta uno; qui no, per la stessa ragione per cui
+      # il proprietario lo ha scartato lato sessione il 2026-09-03: comprime in
+      # modo LOSSY cio' che i tool restituiscono al modello, e su questo repo il
+      # prodotto del reviewer sono le MISURE — il conteggio in `manifest.json`,
+      # le righe di un log che distinguono un rosso vero da un falso rosso. Il
+      # risparmio di token non paga il rischio di un verdetto dato su un input
+      # potato. Resta montato su `issue-fix`/`issue-decompose`, dove esisteva
+      # gia': toglierlo di la' e' una decisione separata, non un effetto
+      # collaterale di questa.
 
       # Prefetch zero-Claude: si scarica UNA volta cio' che il prompt farebbe
       # rifare turno-per-turno. Costo Claude nullo, puro bash — e sui transcript
