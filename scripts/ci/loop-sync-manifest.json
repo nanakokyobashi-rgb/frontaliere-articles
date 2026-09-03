@@ -116,19 +116,9 @@
       "mode": "adapted",
       "reason": "Divergenza a DUE direzioni, nessuna delle quali e' copiabile — per questo non e' piu' `identical` (riconciliazione di nanako#318 punto 2). QUI in piu': il gate 4 `generator-ci` (#242/#252), che esige il check-run del generatore sulle PR che toccano generator/engine/host — sul sito quel workflow non esiste, portarcelo bloccherebbe ogni PR in attesa di un check che nessuno emette. SUL SITO in piu': l'osservazione #5552 (`lib/checkRunObservation.mjs` + `lib/prComments.mjs`, che qui non esistono), che elenca i check-run completati sulla HEAD senza bloccare. Copiare in una delle due direzioni romperebbe l'altro lato, quindi restano diversi apposta; la sorveglianza sulla baseline resta accesa e intercetta comunque una modifica futura su uno dei due lati.",
       "baseline": {
-        "site": "10feadc6b55c8e66",
-        "corpus": "fa39cd1f4da86f5c",
-        "alignedAt": "2026-08-14"
-      }
-    },
-    {
-      "path": "scripts/ci/auto-merge-sweep.mjs",
-      "mode": "corpus-only",
-      "reason": "Rimosso sul sito in PR #6606 'chore(ci): use GitHub native auto-merge' (2026-08-27): il sweep periodico e' stato sostituito dall'auto-merge nativo di GitHub, la logica di gate resta in scripts/ci/auto-merge-eval.mjs (adapted, ancora presente su entrambi i lati). Qui resta necessario: questo repo e' di un account diverso senza la GitHub App del sito e non puo' abilitare l'auto-merge nativo con l'identita' di merge corretta (GITHUB_PAT_NANAKO), e deve fare la dispatch esplicita di publish-api.yml dopo il merge — vedi .github/workflows/auto-merge-sweep.yml.",
-      "baseline": {
-        "site": null,
-        "corpus": "d3eb47642f8c151e",
-        "alignedAt": "2026-08-31"
+        "site": "201eb0ba8586389f",
+        "corpus": "0de66640755babac",
+        "alignedAt": "2026-09-03"
       }
     },
     {
@@ -351,8 +341,8 @@
       "reason": "Verifica che i path citati fra backtick nel body di una PR ESISTANO. E' il secondo giro dell'escalation #140: `pr-body-sections-check` guarda la presenza della sezione, `pr-body-nextstep-check` la forma dello stato, e un body puo' essere di forma perfetta e citare file che qui non ci sono — sulla #358 `checkNextStepStates` dava `ok: true` mentre il reviewer spendeva un ciclo per dire che due path non esistevano. Sul sito non esiste, e non e' `corpus-only-pending`: il perimetro (`KNOWN_ROOTS`) e la dislocazione `scripts/` -> `generator/scripts/` sono la topologia di QUESTO repo, e la soglia advisory e' calibrata sulle 45 PR mergiate di qui (misura nel docblock). Sul sito quei due pezzi andrebbero rimisurati da zero, quindi la' e' un modulo diverso, non lo stesso file. Stessa politica del gemello `pr-body-nextstep-check.mjs`, corpus-only per la stessa ragione.",
       "baseline": {
         "site": null,
-        "corpus": "31b0d14f22b58836",
-        "alignedAt": "2026-08-15"
+        "corpus": "9b4844fb79d66cf3",
+        "alignedAt": "2026-09-03"
       }
     },
     {
@@ -379,9 +369,9 @@
       "mode": "adapted",
       "reason": "Il check-run atteso dall'auto-merge qui si chiama `tests (node --test)`, non `vitest (unit + integration)`: questo repo non usa vitest. Differisce UNA riga; il nome dell'export resta `VITEST_CHECK_NAME` proprio per non far divergere i tre consumer (auto-merge-eval, pr-autorebase, vitestCheck), che restano identici e copiabili. Il valore e' sovrascrivibile via env CI_CHECK_NAME: il giorno in cui il sito adotta la stessa riga, i due file tornano identici e questa voce diventa `identical`.",
       "baseline": {
-        "site": "1a8ac5c935d29d8f",
-        "corpus": "38fa70152f8d238d",
-        "alignedAt": "2026-08-07"
+        "site": "8780f8f6a78a118e",
+        "corpus": "32ca44d6b7bce619",
+        "alignedAt": "2026-09-03"
       }
     },
     {
@@ -417,11 +407,11 @@
     {
       "path": ".github/workflows/tests.yml",
       "mode": "adapted",
-      "reason": "Stesso RUOLO del tests.yml del sito (produce il check-run che l'auto-merge aspetta) ma contenuto interamente diverso: qui e' `node --test` dependency-free, senza vitest, senza shard, senza npm ci. Il `name:` del workflow resta `tests` perche' il trigger workflow_run di auto-merge-on-lgtm lo referenzia per nome. Dal 2026-08-18 diverge anche sul TRIGGER: qui gira su `push` senza `branches-ignore`, quindi anche su `main`, perche' `mainTestsRuns()` di `pr-autorebase.mjs` legge `actions/workflows/tests.yml/runs?branch=main` e senza una run `success` li' il rescue `stuck-red` non ha prova da esibire (misurato: `total_count = 0` su 849 run, cinque PR bloccate). Il `concurrency` e' condizionale per la stessa ragione: su `main` `cancel-in-progress: false`, come sul sito, perche' una run cancellata non e' ne' completed ne' success.",
+      "reason": "Stesso RUOLO del tests.yml del sito — dal 2026-09-03 su entrambi i lati e' il job UNICO che produce il check richiesto dal ruleset su `main`: contratto del body, test, Claude review col suo verdetto. Il contenuto resta interamente diverso: qui e' `node --test` dependency-free, senza vitest, senza shard, senza npm ci, e il NONCODE_RE nomina l'albero di questo repo (content/, dist/). In piu' qui, e non sul sito: lo step finale `generator-ci-gate`, perche' il ruleset puo' richiedere solo contesti presenti su OGNI PR e generator-ci.yml e' path-scoped. Diverge anche sul TRIGGER: qui gira anche su `push` a `main`, perche' il rescue `stuck-red` di pr-autorebase.mjs legge actions/workflows/tests.yml/runs?branch=main e senza una run success li' non ha prova da esibire (#267); il `push` e' pero' scopato a `main`, altrimenti ogni commit su un branch con PR aperta pagherebbe DUE review Claude.",
       "baseline": {
-        "site": "5fa890e4a23a6619",
-        "corpus": "7110d899cd4af8c6",
-        "alignedAt": "2026-08-18"
+        "site": "99c1b8fd3c0c4196",
+        "corpus": "a38bc6c3c26b484b",
+        "alignedAt": "2026-09-03"
       }
     },
     {
@@ -462,26 +452,6 @@
         "site": "4eee66a5917239d8",
         "corpus": "8fa19800e54df34d",
         "alignedAt": "2026-08-07"
-      }
-    },
-    {
-      "path": ".github/workflows/pr-review-loop.yml",
-      "mode": "corpus-only",
-      "reason": "Rimosso sul sito in PR #6571 'Unify tests PR review workflow' (2026-08-26): la review delle PR e' stata assorbita dentro tests.yml. Qui resta un workflow a parte perche' .github/workflows/tests.yml di questo repo (gia' adapted) copre i gate di generazione/pubblicazione del corpus, non la review Claude — che qui e' quota-condivisa col sito (AGENTS.md, 'Il ciclo autonomo') e va tenuta isolabile, non fusa in un job che gira su ogni push indipendentemente dalla quota.",
-      "baseline": {
-        "site": null,
-        "corpus": "b7826bd6e68803ba",
-        "alignedAt": "2026-08-31"
-      }
-    },
-    {
-      "path": ".github/workflows/auto-merge-on-lgtm.yml",
-      "mode": "corpus-only",
-      "reason": "Rimosso sul sito in PR #6606 'chore(ci): use GitHub native auto-merge' (2026-08-27), sostituito dall'auto-merge nativo di GitHub. Qui resta necessario: identita' di merge = GITHUB_PAT_NANAKO da Remote Config (questo repo e' di un altro account e non ha la GitHub App del sito, quindi non puo' abilitare l'auto-merge nativo con l'identita' corretta); ponte RC in generator/scripts/load-rc-env.mjs; nessun npm ci. In piu' una rete di sicurezza che non esiste sul sito: se il merge avviene col GITHUB_TOKEN di fallback, l'anti-ricorsione impedisce a publish-api.yml di partire e la superficie dati resterebbe vecchia in silenzio — lo step finale la dispatcha esplicitamente.",
-      "baseline": {
-        "site": null,
-        "corpus": "c810a90b47eb97ea",
-        "alignedAt": "2026-08-31"
       }
     },
     {
@@ -759,16 +729,6 @@
       }
     },
     {
-      "path": ".github/workflows/auto-merge-sweep.yml",
-      "mode": "corpus-only",
-      "reason": "Rimosso sul sito in PR #6606 'chore(ci): use GitHub native auto-merge' (2026-08-27): il sito ha spostato il trigger sull'auto-merge nativo di GitHub. Qui resta necessario: identita' di merge GITHUB_PAT_NANAKO, CI_CHECK_NAME di questo repo, niente npm ci, cadenza sfasata (12,42 invece di */15), e nessuna GitHub App per abilitare il nativo con l'identita' corretta. La logica di gate resta in auto-merge-eval.mjs (adapted, ancora presente su entrambi i lati), condivisa con l'auto-merge event-driven.",
-      "baseline": {
-        "site": null,
-        "corpus": "56d67d1ff1324e57",
-        "alignedAt": "2026-08-31"
-      }
-    },
-    {
       "path": ".github/workflows/pr-collision-detector.yml",
       "mode": "adapted",
       "reason": "Niente npm ci, cadenza sfasata (18,48). Lo script sottostante e' identical.",
@@ -794,18 +754,8 @@
       "reason": "Runner del gate sul body. I due moduli che fanno il lavoro (pr-body-sections-check, pr-body-closes-check) sono condivisi col sito e restano `identical`; questo e' solo la colla — il pr-body-contract.yml del sito incorpora invece una decina di check del suo dominio (CLS degli slot pubblicitari, lookbehind client, pattern sibling) che qui non hanno senso.",
       "baseline": {
         "site": null,
-        "corpus": "fc59c832f678d46e",
-        "alignedAt": "2026-08-07"
-      }
-    },
-    {
-      "path": ".github/workflows/pr-body-contract.yml",
-      "mode": "corpus-only",
-      "reason": "Rimosso sul sito in PR #6475 'sequenzializza collision/contract/typecheck/vitest per-PR (4 job paralleli -> 1)' (2026-08-25): le due verifiche sul contratto del body sono confluite dentro tests.yml per abbassare la concorrenza per-PR. Qui resta un workflow a parte perche' e' gia' un sottoinsieme generico di quello del sito (solo le due verifiche sul contratto, senza i check di dominio) e gira senza Claude: intercettare la violazione qui evita di spendere un ciclo di review (quota condivisa) per una cosa che una regex sa, e fondersi in .github/workflows/tests.yml (adapted, node --test dependency-free) accoppierebbe due concern separati apposta.",
-      "baseline": {
-        "site": null,
-        "corpus": "fd457b4af761ef94",
-        "alignedAt": "2026-08-31"
+        "corpus": "41814094f1b064f4",
+        "alignedAt": "2026-09-03"
       }
     },
     {
@@ -833,9 +783,9 @@
       "mode": "adapted",
       "reason": "Il nome del check-run sul sito e' hardcoded DUE volte dentro jq; qui arriva da CI_CHECK_NAME e viene passato con --arg. Un literal in piu' nello YAML sarebbe una seconda sorgente di verita' per lo stesso valore — la classe di drift che ci-check-name.test.mjs sorveglia, e che dentro una stringa jq nessun test vedrebbe. Cadenza :35.",
       "baseline": {
-        "site": "e309ac041a8cc34a",
-        "corpus": "0186cb72bef9d3cd",
-        "alignedAt": "2026-08-07"
+        "site": "f9e7b8ab68fdbe20",
+        "corpus": "ab254432bf4d6588",
+        "alignedAt": "2026-09-03"
       }
     },
     {
@@ -853,9 +803,9 @@
       "mode": "adapted",
       "reason": "Niente npm ci, ponte RC del corpus, identita' GITHUB_PAT_NANAKO. Il gate sul reviewer (startsWith 'claude') e' gia' repo-agnostico. RIALLINEATO 2026-08-09 senza portare nulla: il sito ha cambiato una riga sola, `HAS_PAT: ${{ env.APP_TOKEN != '' || env.GITHUB_PAT != '' }}` -> `${{ env.APP_TOKEN_WORKFLOWS == 'true' || env.GITHUB_PAT != '' }}`. Qui la riga 212 e' gia' `HAS_PAT: ${{ env.GITHUB_PAT_NANAKO != '' }}`: la modifica cade dentro la zona adattata al 100%, e questo repo non ha una GitHub App da cui leggere APP_TOKEN_WORKFLOWS. RESIDUO NOTO, non chiuso qui: il commento sopra HAS_PAT (righe 195-204) afferma ancora che «HAS_PAT accetta ORA anche APP_TOKEN», falso su questo repo, e lo step di push (riga 279) si gata su `env.APP_TOKEN != '' || env.GITHUB_PAT != ''` mentre PUSH_TOKEN e' GITHUB_PAT_NANAKO (riga 281) — variabili disallineate. Il gate passa comunque perche' GITHUB_PAT e' mappato in load-rc-env.mjs, quindi l'effetto pratico non e' stato verificato.",
       "baseline": {
-        "site": "abb2b47aaba25e2c",
-        "corpus": "3e7c07bca43b6c78",
-        "alignedAt": "2026-08-09"
+        "site": "170ff67e67b6397d",
+        "corpus": "fb0598f183e27b60",
+        "alignedAt": "2026-09-03"
       }
     },
     {
@@ -863,9 +813,9 @@
       "mode": "adapted",
       "reason": "Tre adattamenti sostanziali: FOLLOWUP_ELIGIBLE_AUTHORS con gli autori di QUESTO repo (senza, il filtro resta quello del sito e il batch sarebbe SEMPRE vuoto — il workflow girerebbe ogni tre ore senza trovare nulla e senza un errore); il gate autore dentro il prompt allineato; QUOTA_BEACON_PEER_REPO per cedere al sito; cron 40 */3 sfasato.",
       "baseline": {
-        "site": "7ebca8a5727691c2",
-        "corpus": "e3e038db53e07967",
-        "alignedAt": "2026-08-07"
+        "site": "5e8e926af147845d",
+        "corpus": "cdb587f35f2f3209",
+        "alignedAt": "2026-09-03"
       }
     },
     {
@@ -3162,6 +3112,55 @@
         "site": "b3a086d1d9d34ce5",
         "corpus": "b3a086d1d9d34ce5",
         "alignedAt": "2026-09-01"
+      }
+    },
+    {
+      "path": ".github/workflows/enable-native-automerge.yml",
+      "mode": "adapted",
+      "reason": "Gemello del workflow del sito che arruola le PR nell'auto-merge nativo di GitHub. Adattato su due punti non copiabili: (1) il ponte Remote Config e' generator/scripts/load-rc-env.mjs, non scripts/load-rc-env.mjs, e i due file raw scaricati sono quelli; (2) l'identita' di merge e' GITHUB_PAT_NANAKO, non GITHUB_PAT — questo repo e' di un altro account. Il secondo punto e' anche la ragione per cui l'auto-merge nativo QUI e' diventato possibile: l'obiezione registrata sulle voci rimosse in questa stessa PR (\"non puo' abilitare il nativo con l'identita' corretta perche' manca la GitHub App del sito\") confondeva due cose — il nativo mergia con l'identita' di CHI lo abilita, e un PAT owner basta, quindi publish-api.yml continua a scattare.",
+      "baseline": {
+        "site": "2a0de9e28318d264",
+        "corpus": "4be1dbefeafc6837",
+        "alignedAt": "2026-09-03"
+      }
+    },
+    {
+      "path": "scripts/ci/review-gate.mjs",
+      "mode": "corpus-only",
+      "reason": "Il verdetto della Claude review come step del check-run richiesto. Sul sito lo stesso gate e' scritto INLINE nello YAML di tests.yml (uno step `run:` in bash+jq): qui e' un .mjs perche' riusa le funzioni gia' testate di auto-merge-eval.mjs (fingerprint del contributo, autore fidato, completeness contract del body) invece di riscriverne la semantica in bash — due copie della stessa nozione di \"contributo invariato\" sarebbero un drift garantito. Nessun gemello sul sito da sorvegliare.",
+      "baseline": {
+        "site": null,
+        "corpus": "af03743d2297761b",
+        "alignedAt": "2026-09-03"
+      }
+    },
+    {
+      "path": "scripts/ci/generator-ci-gate.mjs",
+      "mode": "corpus-only",
+      "reason": "Porta il gate condizionale su generator-ci.yml (ex gate 4 di auto-merge-eval) dentro il job che produce il check richiesto dal ruleset: il ruleset puo' richiedere solo contesti presenti su OGNI PR, e generator-ci.yml e' path-scoped. Non ha e non puo' avere un gemello: generator-ci.yml esiste solo qui.",
+      "baseline": {
+        "site": null,
+        "corpus": "3608f4765cefad14",
+        "alignedAt": "2026-09-03"
+      }
+    },
+    {
+      "path": "scripts/ci/fetch-pr-files.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "f1157a12e3653a06",
+        "corpus": "f1157a12e3653a06",
+        "alignedAt": "2026-09-03"
+      }
+    },
+    {
+      "path": ".github/workflows/orphan-push-warn.yml",
+      "mode": "corpus-only",
+      "reason": "Segnala il push atterrato sul branch di una PR gia' MERGED (#532). Era il primo job del workflow dell'auto-merge su LGTM, rimosso in questa stessa PR; non poteva seguirlo dentro tests.yml perche' li' il `push:` e' scopato a `main` di proposito, mentre questo job vuole esattamente i push sui branch — il trigger opposto. Sul sito il problema non si pone (delete_branch_on_merge + un ciclo di worktree diverso), quindi non c'e' un gemello da sorvegliare.",
+      "baseline": {
+        "site": null,
+        "corpus": "a39f5f73f7a07cec",
+        "alignedAt": "2026-09-03"
       }
     }
   ]

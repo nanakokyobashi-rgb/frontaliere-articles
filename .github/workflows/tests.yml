@@ -1,87 +1,101 @@
 name: tests
 
-# Il check-run che l'auto-merge aspetta prima di mergiare qualunque PR.
+# Il check-run che governa il merge di QUALUNQUE PR di questo repo.
 #
-# ## Perché esiste, invece di riusare generator-ci.yml
+# Dal 2026-09-03 questo file non contiene piu' solo i test: contiene l'INTERO
+# cancello della PR — contratto del body, unit + closure gates, e la Claude
+# review col suo verdetto. E' l'allineamento all'architettura del sito
+# (valerielinc-ops/frontaliere-si-o-no#6571 e #6606), portata qui perche' i due
+# repo condividono il ciclo agentico e la quota Claude.
 #
-# `generator-ci.yml` è path-scoped di proposito (`generator/**`, `package.json`,
-# sé stesso): è il gate del generatore, e farlo girare su ogni PR sarebbe
-# sprecato. Ma l'auto-merge portato dal sito ha un invariante non negoziabile —
-# **mai mergiare su un check pending o MANCANTE** (regressione #1454 del sito:
-# una PR mergiata mentre i test giravano, poi rossi, ha portato `main` rosso).
+# ## Perche' un job solo, e perche' proprio questo
 #
-# Su un CI path-scoped quell'invariante si comporta in un modo che non si vede
-# finché non è tardi: una PR che tocca solo `.github/workflows/` o `scripts/ci/`
-# non fa scattare `generator-ci`, quindi produce **zero check-run**, quindi il
-# gate resta insoddisfatto per sempre e la PR non mergia mai. Non fallisce:
-# resta ferma. Misurato su questo repo — la PR #12 (un solo file workflow) ha
-# riportato `no checks reported`. È lo stesso modo di rompersi che ha lasciato
-# una PR verde ferma 9 ore in attesa di un umano.
+# Prima il merge lo decideva un workflow dedicato all'auto-merge su LGTM, oggi
+# rimosso: leggeva la review, il check `tests`, la collisione, e chiamava
+# `gh pr merge`. Con l'auto-merge
+# NATIVO di GitHub quella decisione non e' piu' nostra — e' il ruleset su `main`
+# a dire quali check devono essere verdi. Un gate che vive in un workflow
+# separato diventa quindi invisibile al ruleset: la PR mergerebbe con la review
+# rossa, o senza review affatto. Ficcando il verdetto della review DENTRO il job
+# che produce il check richiesto, un 🔴 Important rende rosso esattamente il
+# check su cui l'auto-merge nativo aspetta. E' un irrigidimento del cancello, ed
+# e' voluto.
 #
-# Quindi il gate ha bisogno di un check che esista su OGNI PR, qualunque path
+# Lo stesso vale per il contratto del body: il workflow che lo verificava girava,
+# poteva diventare rosso, e non fermava niente (identica misura sul sito, issue
+# #5552). Ora e' uno step di questo job.
+#
+# ## Perche' esiste, invece di riusare generator-ci.yml
+#
+# `generator-ci.yml` e' path-scoped di proposito (`generator/**`,
+# `package.json`, se' stesso): e' il gate del generatore, e farlo girare su ogni
+# PR sarebbe sprecato. Ma il gate del merge ha un invariante non negoziabile —
+# **mai mergiare su un check pending o MANCANTE**. Su un CI path-scoped una PR
+# che tocca solo `.github/workflows/` o `scripts/ci/` non fa scattare
+# `generator-ci`, quindi produce zero check-run, quindi non mergia mai. Non
+# fallisce: resta ferma. Misurato sulla PR #12 («no checks reported»).
+#
+# Il gate ha quindi bisogno di un check che esista su OGNI PR, qualunque path
 # tocchi. Costa poco: le gate del generatore sono dependency-free (`node:test`,
 # `node:assert`), niente `npm ci`, niente browser.
 #
-# Il `name:` del workflow è `tests` per combaciare con quello del sito: il
-# trigger `workflow_run` di `auto-merge-on-lgtm.yml` lo referenzia per nome, e
-# tenerli uguali è ciò che permette allo YAML dei due repo di restare allineato
-# (vedi scripts/ci/loop-sync-manifest.json).
-
-# ── Perché `main` è dentro, dal 2026-08-18 ──────────────────────────────────
+# ## Il `name:` del job NON cambia, ed e' deliberato
 #
-# Fino a oggi qui c'era `push: branches-ignore: [main]`. Sembrava innocuo — i
-# file di codice si toccano solo via PR — e invece spegneva un pezzo del ciclo
-# che non nomina questo workflow via import, quindi nessun guard lo copriva.
+# Il job fa quattro cose e si chiama ancora `tests (node --test)`. E' fuorviante
+# ed e' l'opzione meno pericolosa: quel nome e' `CI_CHECK_NAME` in
+# `scripts/ci/lib/constants.mjs`, lo legge `pr-autorebase.mjs` e lo REQUISISCE
+# il ruleset su `main`. Rinominarlo significa un ruleset che aspetta un contesto
+# che nessuno produce piu' — nessun errore, solo una coda che si ferma.
+# `generator/tests/ci-check-name.test.mjs` confronta i due valori.
+#
+# ## Perche' `main` e' fra i trigger
 #
 # `pr-autorebase.mjs` ha un rescue `stuck-red` per la PR rossa a causa di un
 # dato di `main` e non per colpa sua. Il suo ramo `red-main`
 # (`scripts/ci/lib/vitestCheck.mjs`, `vitestFailureIsNotAttributableToPr`) chiede
 # UNA prova: che esista una run COMPLETATA e `success` di **questo** workflow sul
-# branch `main`, più recente del rosso della PR. La legge `mainTestsRuns()`
-# (`scripts/ci/pr-autorebase.mjs`) da
-# `actions/workflows/tests.yml/runs?branch=main` — l'endpoint è keyed sul NOME DI
-# QUESTO FILE, quindi nessun workflow affiancato può soddisfarlo.
+# branch `main`, piu' recente del rosso della PR. La legge `mainTestsRuns()` da
+# `actions/workflows/tests.yml/runs?branch=main` — l'endpoint e' keyed sul NOME
+# DI QUESTO FILE, quindi nessun workflow affiancato puo' soddisfarlo.
 #
-# Misurato il 2026-08-18: `total_count = 0` su 849 run. Zero, e per costruzione.
-# Con l'altra uscita del rescue (`stale`, >24h) fuori portata, una PR rossa per
-# un dato di `main` entra in uno stato ASSORBENTE: senza verde non parte
-# `pr-review-loop`, quindi niente `## LGTM` e niente label, quindi nessuno dei
-# segnali `near-merge` — e la classe che esiste apposta per romperlo era spenta.
-# Cinque PR bloccate in un giorno; il log della run 32128625124 lo dice in
-# chiaro: «PR #414 non near-merge (no LGTM/collision-risk/stale-review/stuck-red)
-# — skip.»
+# Il `push:` e' pero' scopato a `main` e non piu' aperto a tutti i branch: da
+# quando la review vive qui dentro, un `push:` senza filtro produrrebbe DUE run
+# per ogni commit su un branch con PR aperta (una da `push`, una da
+# `pull_request`) — cioe' DUE review Claude sullo stesso codice, sulla quota
+# condivisa col sito. Il segnale su `main` resta intatto; il doppione sparisce.
 #
-# È la stessa forma di `SiteShellContract`: un file `identical`
-# (`pr-autorebase.mjs`) che dipende dal COMPORTAMENTO di un file `adapted`
-# (questo) senza nominarlo via import. `loop-references-exist.test.mjs` segue le
-# citazioni testuali, non questa — ed è il motivo per cui la dipendenza sta
-# scritta qui, accanto al trigger che la soddisfa.
-#
-# Il gate sul CONTENUTO generato è un'altra cosa e vive altrove
-# (`.github/workflows/content-gates-main.yml`): lì gira il sottoinsieme dei gate
-# che leggono `content/**`, con gli offender in una issue. Questo trigger serve
-# al verdetto su `main`, non alla diagnosi.
+# Il gate sul CONTENUTO generato e' un'altra cosa e vive altrove
+# (`.github/workflows/content-gates-main.yml`): li' gira il sottoinsieme dei
+# gate che leggono `content/**`, con gli offender in una issue.
 on:
+  # `edited` e' load-bearing: un'edit del body deve rivalidare il contratto.
+  # `ready_for_review` idem — finche' la PR e' draft la review non gira, e senza
+  # questo trigger una draft promossa non avrebbe piu' nessun evento che la
+  # faccia partire (`synchronize` fira sui push, non sul cambio di stato).
   pull_request:
+    types: [opened, synchronize, reopened, ready_for_review, edited]
   push:
+    branches: [main]
   workflow_dispatch:
 
+# Union dei permessi dei tre workflow fusi qui dentro: i test non ne chiedevano
+# (default), `pr-body-contract` scriveva la sticky sulla PR, la review posta il
+# proprio verdetto e i commenti di diagnosi.
 permissions:
   contents: read
+  pull-requests: write
+  issues: write
+  id-token: write
 
-# `cancel-in-progress` è vero OVUNQUE TRANNE che su `main`, e la differenza è
-# tutta nel consumatore. Su un branch conta solo l'ultimo push. Su `main` conta
-# che una run ARRIVI IN FONDO: `mainTestsRuns()` filtra `status=completed` e
-# `conclusion == success`, e una run cancellata non è né l'uno né l'altro. Con
-# `main` che avanza ogni ~8 minuti per la generazione articoli, cancellare in
-# corso vorrebbe dire tenere `total_count = 0` esattamente come prima, con un
-# trigger in più a far credere il contrario. È la stessa forma del gemello sul
-# sito (`tests-main`, `cancel-in-progress: false`).
-#
-# Con `cancel-in-progress: false` la coda resta comunque limitata: GitHub tiene
-# al più una run in esecuzione e una in attesa per gruppo, e cancella le pending
-# più vecchie. Il repo è pubblico, quindi i minuti sono gratis; il tetto vero è
-# la coda, e questa forma la limita per costruzione.
+# `cancel-in-progress` e' vero OVUNQUE TRANNE che su `main`, e la differenza e'
+# tutta nel consumatore. Su un branch conta solo l'ultimo push — e cancellare la
+# run vecchia risparmia anche la review Claude che avrebbe girato su un codice
+# gia' superato. Su `main` conta invece che una run ARRIVI IN FONDO:
+# `mainTestsRuns()` filtra `status=completed` e `conclusion == success`, e una
+# run cancellata non e' ne' l'uno ne' l'altro. Con `main` che avanza ogni ~8
+# minuti per la generazione articoli, cancellare in corso vorrebbe dire tenere
+# `total_count = 0` esattamente come prima, con un trigger in piu' a far credere
+# il contrario.
 concurrency:
   group: ${{ github.ref == 'refs/heads/main' && 'tests-main' || format('tests-{0}', github.ref) }}
   cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
@@ -89,54 +103,544 @@ concurrency:
 jobs:
   tests:
     # Questo `name:` DEVE combaciare byte-per-byte con `CI_CHECK_NAME`
-    # (scripts/ci/lib/constants.mjs). Se divergono, il gate legge conclusion ''
-    # in silenzio e nessuna PR mergia più — nessun errore, solo una coda che si
-    # ferma. Il guard test `generator/tests/ci-check-name.test.mjs` confronta i
-    # due valori e rompe la build se si separano.
+    # (scripts/ci/lib/constants.mjs) E con il contesto richiesto dal ruleset su
+    # `main`. Se divergono, il gate legge conclusion '' in silenzio e nessuna PR
+    # mergia piu' — nessun errore, solo una coda che si ferma. Il guard test
+    # `generator/tests/ci-check-name.test.mjs` confronta i due valori.
     name: tests (node --test)
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    # 10 minuti bastavano ai soli test; la review Claude no. Il timeout e' un
+    # anti-runaway, non un budget: un job ucciso a meta' review fabbrica un
+    # `cancelled`, che nessun `if: failure()` vede e che blocca il merge di PR
+    # sane. Stesso valore del sito.
+    timeout-minutes: 360
+    env:
+      # Path NON-code: rigenerati o pubblicati, mai reviewabili riga-per-riga.
+      # `content/` e' il corpus articoli (14.888 file), `dist/` la superficie
+      # API generata da scripts/build-api.mjs, `data/` gli input, `public/` gli
+      # asset. Sorgente unica: re-review guard e tier-decision leggono questa
+      # var, mai una regex duplicata.
+      NONCODE_RE: '^(content/|data/|dist/|public/)|(^|/)(package-lock\.json)$|\.(snap|png|jpe?g|webp|gif|svg|ico|woff2?)$'
     steps:
       - uses: actions/checkout@v5
         with:
+          # Il reviewer non usa la git-history (lavora sul bundle prefetchato +
+          # Read/Grep sul working tree) e `content/` pesa: depth 1. Il
+          # fingerprint del contributo passa dalla compare API, non da git.
           fetch-depth: 1
 
       - uses: actions/setup-node@v5
         with:
           node-version: '22'
 
+      # ══════════════════════════════════════════════════════════════════════
+      # FAMIGLIA 1/3 — contratto del body (ex workflow `PR body contract`)
+      #
+      # `!cancelled()` sul primo step di ogni famiglia: un rosso di un'altra
+      # famiglia NON deve impedire a questa di girare — era la proprieta' dei
+      # workflow separati, e va conservata ora che sono step. Dentro una
+      # famiglia la catena resta fail-fast.
+      #
+      # Due esclusioni, entrambe portate qui dal workflow che sostituisce:
+      #  - le draft sono lavoro in corso, il body si completa prima di uscirne;
+      #  - `engine-lockstep-auto` e' la PR del MIRROR dell'engine: il body lo
+      #    genera il workflow del sito, non un agente di qui, e pretendere il
+      #    contratto umano su di essa e' un errore di categoria.
+      # ══════════════════════════════════════════════════════════════════════
+      - name: PR-body completeness + multi-issue Closes (zero-Claude)
+        if: >-
+          ${{ !cancelled() && github.event_name == 'pull_request' &&
+          github.event.pull_request.draft == false &&
+          github.event.pull_request.head.ref != 'engine-lockstep-auto' }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: node scripts/ci/pr-body-contract.mjs "${{ github.event.pull_request.number }}"
+
+      # ══════════════════════════════════════════════════════════════════════
+      # FAMIGLIA 2/3 — unit + closure gates
+      #
       # ── PERCHE' NON E' PIU' LA CARTELLA INTERA ───────────────────────────
       #
-      # Questo è il check-run che l'auto-merge aspetta prima di mergiare
-      # QUALUNQUE PR. Finché eseguiva tutta la cartella, eseguiva anche i gate
-      # che leggono `content/` — il corpus generato dai bot, che cambia senza
-      # che nessuna PR lo tocchi (~90 push al giorno su `main`).
+      # Questo e' il check-run che governa il merge di QUALUNQUE PR. Finche'
+      # eseguiva tutta la cartella, eseguiva anche i gate che leggono
+      # `content/` — il corpus generato dai bot, che cambia senza che nessuna PR
+      # lo tocchi (~90 push al giorno su `main`).
       #
       # Misurato il 2026-08-19: l'articolo `vivere-villa-guardia-lavorare-ticino`
-      # («Villa Guardia» è un comune, «guardia» l'alias del mestiere
+      # («Villa Guardia» e' un comune, «guardia» l'alias del mestiere
       # `agente-sicurezza`) ha reso rosso `article-topic-coverage-guard` su
-      # `main` e su OGNI branch, e **nessuna PR ha potuto auto-mergiare per sei
-      # ore** — per un dato che nessuna di loro aveva scritto e che nessuna
-      # poteva riparare. Il 2026-08-18 era già successo con sei PR e tre gate
-      # diversi (#410, #413, #414, #416, #417, #418): `gh pr update-branch` le
-      # ha rese verdi 9/9 senza cambiare una riga.
+      # `main` e su OGNI branch, e nessuna PR ha potuto auto-mergiare per sei
+      # ore — per un dato che nessuna di loro aveva scritto e che nessuna poteva
+      # riparare.
       #
-      # La copertura non si perde, si sposta dove il segnale è azionabile:
+      # La copertura non si perde, si sposta dove il segnale e' azionabile:
       # `generator-ci.yml` esegue l'INTERA cartella sulle PR che toccano
-      # `generator/**` (quindi una PR che tocca un gate lo esegue comunque, ed è
-      # un check richiesto dall'auto-merge per quelle PR), e
-      # `content-gates-main.yml` li esegue sui push a `main` aprendo UNA issue
-      # deduplicata invece di rendere rossa una PR che non c'entra.
+      # `generator/**`, e `content-gates-main.yml` li esegue sui push a `main`
+      # aprendo UNA issue deduplicata invece di rendere rossa una PR che non
+      # c'entra.
       #
       # Lo script esce !=0 senza stampare niente se la lista collassa: un
       # `node --test` su una lista vuota passerebbe verde avendo eseguito nulla.
-      #
-      # Il glob non c'è più ma la sua ragione resta: `node --test <dir>` su
+      # Il glob non c'e' piu' ma la sua ragione resta: `node --test <dir>` su
       # Node 22 collassa la cartella in UN test fallito invece di scoprire i
-      # file, quindi si passano i path uno per uno (stessa nota di
-      # generator-ci.yml).
+      # file, quindi si passano i path uno per uno.
+      # ══════════════════════════════════════════════════════════════════════
       - name: Unit + closure gates (i gate sul contenuto girano altrove)
+        if: ${{ !cancelled() }}
         run: |
           set -euo pipefail
           files=$(node scripts/ci/list-pr-gate-tests.mjs)
           node --test $files
+
+      # ══════════════════════════════════════════════════════════════════════
+      # FAMIGLIA 3/3 — Claude review + verdetto (ex workflow di review dedicato)
+      #
+      # Girava su `workflow_run[tests]` proprio per non spendere Claude su
+      # codice rosso. Quel risparmio NON si perde: gli step qui sotto stanno
+      # DOPO le due famiglie precedenti e la catena e' fail-fast, quindi con i
+      # test rossi la review non parte comunque. Cio' che si guadagna e' che il
+      # verdetto finisce nello stesso check-run che il ruleset richiede.
+      #
+      # Il rovescio del `workflow_run` era che il workflow eseguito era sempre
+      # quello di `main`, quindi una PR che modificava il reviewer non mandava
+      # in 401 la propria review. Da qui in poi lo fa: la copertura di quel caso
+      # e' il drift-fallback deterministico dentro `scripts/ci/review-gate.mjs`
+      # (autore fidato + completeness contract), e `REVIEW_WORKFLOW_DRIFT_FILES`
+      # ora nomina QUESTO file.
+      # ══════════════════════════════════════════════════════════════════════
+      - name: Resolve PR
+        id: resolve
+        # `engine-lockstep-auto` e' la PR del mirror dell'engine, il cui
+        # contenuto e' gia' stato reviewato SUL SITO prima di essere mirrorato.
+        # Reviewarlo di nuovo qui spende quota condivisa per ripetere un
+        # giudizio gia' dato — e un `## LGTM` negato bloccherebbe il canale con
+        # cui le correzioni all'engine scendono.
+        if: >-
+          ${{ github.event_name == 'pull_request' &&
+          github.event.pull_request.draft == false &&
+          github.event.pull_request.head.ref != 'engine-lockstep-auto' }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PRN: ${{ github.event.pull_request.number }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+          REPO: ${{ github.repository }}
+        run: |
+          set -uo pipefail
+          title=$(gh pr view "$PRN" --repo "$REPO" --json title --jq '.title // ""' 2>/dev/null || true)
+          {
+            echo "pr_number=$PRN"
+            echo "should_review=true"
+            echo "head_sha=$HEAD_SHA"
+          } >> "$GITHUB_OUTPUT"
+          # Il titolo puo' contenere caratteri speciali → delimitatore heredoc.
+          {
+            echo "title<<__TITLE_EOF__"
+            echo "$title"
+            echo "__TITLE_EOF__"
+          } >> "$GITHUB_OUTPUT"
+          echo "Risolto PR #$PRN sulla head $HEAD_SHA."
+
+      # Re-review guard: se il delta DALL'ULTIMA review `## LGTM` tocca solo
+      # file non-code, non si rispende Claude. Su questo repo e' il risparmio
+      # principale: i workflow di generazione riscrivono `content/` di continuo,
+      # e senza questo guard ogni rigenerazione su una PR gia' approvata farebbe
+      # ripartire una review a vuoto. Conservativo: nessuna LGTM precedente, o
+      # compare vuoto/errore → review piena.
+      - name: Re-review guard (skip Claude when no code changed since last LGTM)
+        id: guard
+        if: steps.resolve.outputs.should_review == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          PR_NUMBER: ${{ steps.resolve.outputs.pr_number }}
+          HEAD_SHA: ${{ steps.resolve.outputs.head_sha }}
+          REPO: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+          last=$(gh api "repos/$REPO/pulls/$PR_NUMBER/reviews" --paginate \
+            --jq '[.[] | select(.user.type=="Bot" and (.user.login|test("claude";"i")) and (.body|contains("## LGTM")))] | last | .commit_id // empty' 2>/dev/null || true)
+          if [ -z "$last" ]; then
+            echo "skip=false" >> "$GITHUB_OUTPUT"; echo "Nessuna review LGTM precedente → review piena."; exit 0
+          fi
+          changed=$(gh api "repos/$REPO/compare/$last...$HEAD_SHA" --jq '.files[].filename' 2>/dev/null || true)
+          if [ -z "$changed" ]; then
+            echo "skip=false" >> "$GITHUB_OUTPUT"; echo "Compare vuoto/errore → review piena (conservativo)."; exit 0
+          fi
+          code=$(echo "$changed" | grep -vE "$NONCODE_RE" || true)
+          if [ -z "$code" ]; then
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+            echo "Delta dall'ultima LGTM = solo content/data (nessun code) → skip Claude; il review gate legge la LGTM in carry-forward."
+            exit 0
+          fi
+          # Il compare 2-dot vede anche il codice che main ha portato con un
+          # rebase — ma quello NON e' il contributo della PR. Si confronta
+          # allora il fingerprint del contributo (3-dot vs merge-base,
+          # code-only): se e' invariato, la PR non ha cambiato il proprio codice
+          # → skip. Stessa funzione che usa il review gate per il carry-forward
+          # → niente drift.
+          fpHead=$(node scripts/ci/pr-contribution-fingerprint.mjs "$HEAD_SHA" 2>/dev/null || echo NULL)
+          fpLast=$(node scripts/ci/pr-contribution-fingerprint.mjs "$last" 2>/dev/null || echo NULL)
+          if [ -n "$fpHead" ] && [ "$fpHead" != "NULL" ] && [ "$fpHead" = "$fpLast" ]; then
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+            echo "Contributo CODE invariato dall'ultima LGTM (fingerprint $fpHead) → skip Claude."
+          else
+            echo "skip=false" >> "$GITHUB_OUTPUT"; echo "Code del contributo cambiato (fpHead=$fpHead fpLast=$fpLast) → review piena."
+          fi
+
+      - name: Determine review tier
+        id: tier
+        if: steps.resolve.outputs.should_review == 'true' && steps.guard.outputs.skip != 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_NUMBER: ${{ steps.resolve.outputs.pr_number }}
+          HEAD_SHA: ${{ steps.resolve.outputs.head_sha }}
+          REPO: ${{ github.repository }}
+        # Il tier si decide SOLO sul codice. Funnel-critical qui significa: cio'
+        # che produce o rende la superficie pubblicata che il sito consuma —
+        # `engine/` (rende le pagine articolo), `host/` (l'altra meta' del
+        # SiteShellContract), `generator/` (genera gli articoli), gli script che
+        # emettono `dist/api/`, e i workflow. Un bug li' esce live senza che il
+        # sito faccia un deploy, quindi il probing rigoroso paga.
+        #
+        # I cap turni NON sono un budget di lavoro: sono un anti-runaway sopra
+        # il p99 dei run sani. Un run che muore al cap brucia la quota intera e
+        # lascia la PR ferma senza verdetto — peggio di qualche turno in piu'.
+        run: |
+          set -euo pipefail
+          set_tier() {
+            echo "tier=$1" >> "$GITHUB_OUTPUT"
+            echo "model=$2" >> "$GITHUB_OUTPUT"
+            echo "max_turns=$3" >> "$GITHUB_OUTPUT"
+            echo "Review tier: $1 ($2, max-turns $3)"
+          }
+          # `gh pr view --json files` TRONCA a 100 file senza dirlo, e su questo
+          # repo una PR che rigenera il corpus ne ha migliaia: il tier si
+          # deciderebbe su un campione, e con >100 file `content/` in testa
+          # all'alfabeto la lista code uscirebbe vuota → `minimal` su una PR che
+          # tocca `engine/`. `fetch-pr-files.mjs` pagina davvero e dichiara se
+          # l'elenco e' completo.
+          result=$(node scripts/ci/fetch-pr-files.mjs --repo "$REPO" --pr "$PR_NUMBER" 2>/dev/null || echo '{}')
+          expected=$(echo "$result" | jq -r '.expected // 0')
+          count=$(echo "$result" | jq -r '.count // 0')
+          files_complete=$(echo "$result" | jq -r 'if .complete then 1 else 0 end')
+          reason=$(echo "$result" | jq -r '.reason // "unknown"')
+          files=$(echo "$result" | jq -r '(.files // [])[]')
+          # `&& files_complete = 1` non e' ridondante: un elenco vuoto puo' voler
+          # dire «zero file davvero» oppure «il fetch e' andato muto», e senza
+          # questa congiunzione il secondo caso sceglierebbe `normal`
+          # scavalcando il guard di incompletezza qui sotto.
+          if [ -z "$files" ] && [ "$files_complete" = "1" ]; then
+            echo "Lista file vuota (PR rebase-only o vuota)."
+            set_tier normal claude-sonnet-5 35
+            exit 0
+          fi
+          # Elenco incompleto: il tier NON si decide su un campione.
+          if [ "$files_complete" != "1" ]; then
+            echo "Elenco file INCOMPLETO ($count/$expected, causa: $reason) → tier high forzato: niente minimal, niente decisione funnel su un campione."
+            set_tier high claude-sonnet-5 60
+            exit 0
+          fi
+          code_files=$(echo "$files" | grep -vE "$NONCODE_RE" || true)
+          if [ -z "$code_files" ]; then
+            # Una PR di soli articoli/dati non ha contributo reviewabile: resta
+            # da verificare solo il contratto del body. E' il caso PIU' FREQUENTE
+            # su questo repo, dove i workflow di generazione committano corpus.
+            echo "PR di soli content/data (nessun codice toccato) → tier minimal."
+            set_tier minimal claude-sonnet-5 12
+            exit 0
+          fi
+          # funnel_crit <file-list> → exit 0 se la lista contiene codice
+          # funnel-critical. Come sul sito, gli helper CI/dev e gli audit
+          # read-only sono ESCLUSI: verificano soltanto, non emettono nulla.
+          funnel_crit() {
+            local fs="$1" a b
+            a=$(echo "$fs" | grep -E '^(generator/|engine/|host/|\.github/workflows/)' || true)
+            b=$(echo "$fs" | grep -E '^scripts/' | grep -vE '^scripts/(ci|dev)/' | grep -viE '(audit|analytics|report)' || true)
+            [ -n "$a$b" ]
+          }
+
+          # Re-review incrementale: se esiste gia' una review Claude su un commit
+          # precedente, si valuta SOLO il delta, non l'intera PR.
+          lastRev=$(gh api "repos/$REPO/pulls/$PR_NUMBER/reviews" --paginate \
+            --jq '[.[] | select(.user.type=="Bot" and (.user.login|test("claude";"i")))] | last | .commit_id // empty' 2>/dev/null || true)
+          if [ -n "$lastRev" ] && [ "$lastRev" != "$HEAD_SHA" ]; then
+            delta_code=$(gh api "repos/$REPO/compare/$lastRev...$HEAD_SHA" --jq '.files[].filename' 2>/dev/null \
+              | grep -Fxf <(echo "$code_files") || true)
+            if [ -n "$delta_code" ]; then
+              echo "incremental_base=$lastRev" >> "$GITHUB_OUTPUT"
+              echo "Re-review incrementale: solo il delta dei file PR da $lastRev:"; echo "$delta_code"
+              if funnel_crit "$delta_code"; then
+                set_tier incremental-high claude-sonnet-5 35
+              else
+                set_tier incremental claude-sonnet-5 35
+              fi
+              exit 0
+            fi
+            echo "Nessun delta-code nei file PR dall'ultima review → review piena."
+          fi
+
+          code_file_count=$(echo "$code_files" | grep -c . || true)
+          if funnel_crit "$code_files"; then
+            if [ "$code_file_count" -ge 25 ]; then
+              set_tier high-mega claude-sonnet-5 90
+            else
+              set_tier high claude-sonnet-5 60
+            fi
+          else
+            set_tier normal claude-sonnet-5 35
+          fi
+
+      # Fail-open per costruzione: se il proxy non installa o non diventa
+      # pronto, `ANTHROPIC_BASE_URL` resta vuoto e Claude parla diretto ad
+      # Anthropic. Il gate della review non e' MAI bloccato dal layer di
+      # compressione. Stessa action gia' in uso da `issue-fix`/`issue-decompose`.
+      - name: Setup Headroom compression proxy
+        if: steps.resolve.outputs.should_review == 'true' && steps.guard.outputs.skip != 'true'
+        uses: ./.github/actions/setup-headroom
+
+      # Prefetch zero-Claude: si scarica UNA volta cio' che il prompt farebbe
+      # rifare turno-per-turno. Costo Claude nullo, puro bash — e sui transcript
+      # del sito il setup ripetuto era il primo consumatore di turni.
+      #
+      # Gira su TUTTI i tier, `minimal` compreso: quel tier legge `pr.json` e la
+      # lista file, e saltare lo step lasciava il reviewer senza il suo unico
+      # input (misura del sito, #6205). Cio' che su `minimal` resta saltato e'
+      # il `gh pr diff`, che su una PR di corpus puo' essere enorme.
+      - name: Prefetch review context (zero-Claude, saves turns)
+        id: prefetch
+        if: steps.resolve.outputs.should_review == 'true' && steps.guard.outputs.skip != 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_NUMBER: ${{ steps.resolve.outputs.pr_number }}
+          HEAD_SHA: ${{ steps.resolve.outputs.head_sha }}
+          INCREMENTAL_BASE: ${{ steps.tier.outputs.incremental_base }}
+          REPO: ${{ github.repository }}
+          CTX_DIR: ${{ runner.temp }}/review-ctx
+          TIER: ${{ steps.tier.outputs.tier }}
+        run: |
+          set -uo pipefail
+          mkdir -p "$CTX_DIR"
+          gh pr view "$PR_NUMBER" --repo "$REPO" --json title,body,labels > "$CTX_DIR/pr.json" \
+            || echo '{}' > "$CTX_DIR/pr.json"
+          # L'elenco vero passa dalla REST paginata, non dal campo `files` del
+          # payload GraphQL, che tronca a 100 senza dirlo.
+          gh api "repos/$REPO/pulls/$PR_NUMBER/files" --paginate --jq '.[].filename' \
+            > "$CTX_DIR/files.txt" 2>/dev/null || : > "$CTX_DIR/files.txt"
+          # Gli --exclude sono la ragione per cui una PR con 500 articoli
+          # rigenerati non fa esplodere il diff: `content/` da solo ha 14.888
+          # file. Su `minimal` il diff e' vuoto per costruzione; su una review
+          # incrementale il diff completo e' inutile e puo' essere enorme.
+          if [ "${TIER:-}" = "minimal" ]; then
+            : > "$CTX_DIR/diff.patch"
+          elif [ -n "${INCREMENTAL_BASE:-}" ]; then
+            echo "(review incrementale: diff completo omesso, vedi delta.patch)" > "$CTX_DIR/diff.patch"
+          else
+            gh pr diff "$PR_NUMBER" --repo "$REPO" \
+              --exclude 'content/**' --exclude 'data/**' --exclude 'dist/**' --exclude 'public/**' \
+              > "$CTX_DIR/diff.patch" \
+              || echo "(diff fetch fallito — rieseguire gh pr diff a mano)" > "$CTX_DIR/diff.patch"
+          fi
+          if [ -n "${INCREMENTAL_BASE:-}" ]; then
+            if gh api "repos/$REPO/compare/$INCREMENTAL_BASE...$HEAD_SHA" > "$CTX_DIR/compare.json" 2>/dev/null; then
+              jq -r '.files[]? | select(.filename|test("^(content|data|dist|public)/")|not) | .filename' \
+                "$CTX_DIR/compare.json" > "$CTX_DIR/delta-files.txt"
+              jq -r '.files[]? | select(.filename|test("^(content|data|dist|public)/")|not) | "\(.filename)\n\(.patch // "(binary/large)")"' \
+                "$CTX_DIR/compare.json" > "$CTX_DIR/delta.patch"
+            else
+              echo "(delta fetch fallito — compare non disponibile)" > "$CTX_DIR/delta.patch"
+              : > "$CTX_DIR/delta-files.txt"
+            fi
+          fi
+          # Claude non ha bisogno dell'elenco completo dei file di corpus: per la
+          # review servono il body, il diff code e i file code toccati.
+          grep -vE "$NONCODE_RE" "$CTX_DIR/files.txt" > "$CTX_DIR/code-files.txt" || : > "$CTX_DIR/code-files.txt"
+          if [ -n "${INCREMENTAL_BASE:-}" ]; then
+            grep -vE "$NONCODE_RE" "$CTX_DIR/delta-files.txt" > "$CTX_DIR/review-code-files.txt" || : > "$CTX_DIR/review-code-files.txt"
+          else
+            cp "$CTX_DIR/code-files.txt" "$CTX_DIR/review-code-files.txt"
+          fi
+          # Unico input Claude: una fotografia deterministica del contesto gia'
+          # raccolto, cosi' il reviewer fa un solo Read iniziale e non
+          # ricostruisce il contesto con gh/grep in turni successivi.
+          {
+            echo "# PR review bundle"
+            echo
+            echo "## Metadata"
+            echo "- PR: #$PR_NUMBER"
+            echo "- HEAD: $HEAD_SHA"
+            echo "- Tier: ${TIER:-unknown}"
+            echo "- Incremental base: ${INCREMENTAL_BASE:-none}"
+            echo "- Changed file entries: $(wc -l < "$CTX_DIR/files.txt")"
+            echo "- Changed code file entries (full PR, tier only): $(wc -l < "$CTX_DIR/code-files.txt")"
+            echo "- Review code file entries (delta-scoped when incremental): $(wc -l < "$CTX_DIR/review-code-files.txt")"
+            echo "- Code diff lines: $(wc -l < "$CTX_DIR/diff.patch")"
+            echo
+            echo "## PR metadata"
+            cat "$CTX_DIR/pr.json"
+            echo
+            echo "## Changed code-file list"
+            cat "$CTX_DIR/review-code-files.txt"
+            echo
+            echo "## Code-only diff"
+            cat "$CTX_DIR/diff.patch"
+            echo
+            echo "## Incremental delta"
+            if [ -f "$CTX_DIR/delta.patch" ]; then cat "$CTX_DIR/delta.patch"; else echo "No incremental base: this is a full review."; fi
+          } > "$CTX_DIR/review-bundle.md"
+          echo "Contesto prefetchato in $CTX_DIR:"
+          ls -la "$CTX_DIR"
+
+      - name: Run Claude review
+        id: claude_review
+        if: steps.resolve.outputs.should_review == 'true' && steps.guard.outputs.skip != 'true'
+        # Un fallimento dell'action non deve abortire il job prima che il guard
+        # sotto possa classificarlo: e' il guard a decidere se fallire forte.
+        continue-on-error: true
+        uses: anthropics/claude-code-action@v1
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_NUMBER: ${{ steps.resolve.outputs.pr_number }}
+          PR_TITLE: ${{ steps.resolve.outputs.title }}
+          HEAD_SHA: ${{ steps.resolve.outputs.head_sha }}
+          REVIEW_TIER: ${{ steps.tier.outputs.tier }}
+          INCREMENTAL_BASE: ${{ steps.tier.outputs.incremental_base }}
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          # Mai `*`. Le PR aperte dal fixer sono di `claude[bot]`; quelle del
+          # mirror engine-lockstep e delle automation interne di
+          # `github-actions[bot]`. Senza whitelist claude-code-action aborta
+          # "non-human actor".
+          allowed_bots: 'github-actions[bot], claude[bot]'
+          show_full_output: true
+          # `--dangerously-skip-permissions` funziona sotto `pull_request` come
+          # funzionava sotto `workflow_run`: e' su `schedule`/`workflow_dispatch`
+          # che `permissionMode` ricade a "default" nonostante il flag e quasi
+          # ogni Bash torna "requires approval" (rollback #3269, run
+          # 28594653701: 36 blocchi, zero commenti postati). Questo workflow non
+          # ha piu' un ramo dispatch che invochi la review, quindi la riga resta
+          # una sola.
+          claude_args: "--max-turns ${{ steps.tier.outputs.max_turns }} --model ${{ steps.tier.outputs.model }} --dangerously-skip-permissions"
+          prompt: |
+            Reviewer automatico PR #${{ steps.resolve.outputs.pr_number }} (HEAD ${{ steps.resolve.outputs.head_sha }}). Tier: ${{ steps.tier.outputs.tier }}.
+
+            Questo repo (`frontaliere-articles`) pubblica una superficie dati su HTTP che il sito consuma in produzione: `dist/api/` (manifest, articles.json, meta per locale, slugs, sitemap blog, dieci feed RSS, news-ticker). Un bug in cio' che la genera esce **live senza che il sito faccia un deploy** — non c'e' una build del sito a fare da rete.
+
+            Leggi `REVIEW.md`: e' l'unica fonte di verita' per severity, scope, check richiesti e formato. NON leggere `AGENTS.md` salvo che REVIEW.md richieda un non-negotiable preciso.
+
+            Il bundle deterministico e' gia' pronto in `${{ runner.temp }}/review-ctx/`: `review-bundle.md` e' l'input primario e contiene metadata della PR, la lista dei file code in scope, il diff del solo codice, il delta incrementale quando c'e'. I path rigenerati (`content/`, `data/`, `dist/`, `public/`) sono deliberatamente esclusi: non sono codice, non vanno reviewati riga-per-riga ne' contati come finding — valuta solo se il codice che li genera e' corretto. Leggi il bundle PRIMA di usare gh o gli strumenti sul repo, e non rieseguire `gh pr view`, `gh pr diff` o `gh api compare` salvo che il bundle dichiari incompleta una sezione.
+
+            **Tier `minimal` (PR di soli content/data, ZERO code) — percorso corto, ≤6 turni:** NON leggere `REVIEW.md`, niente cross-file probing, niente adversarial check (no-op senza codice). Fai SOLO: leggi il bundle; verifica il contratto del body (`## Implementato` e `## Non implementato (ancora)` presenti, ogni bullet sensato, nessun placeholder vuoto o `TBD`); se e' a posto posta una review breve che chiude con `## LGTM`, altrimenti `🟡` (o `🔴 Important` se grave) e NIENTE `## LGTM`. Fermati dopo aver postato.
+
+            Se `INCREMENTAL_BASE` e' valorizzato, revieva SOLO il delta e le sue interazioni: i commit fino a quel punto sono gia' stati approvati. Sei comunque autorizzato a Read/grep i file pieni per il CONTESTO — l'obiettivo e' non rispendere token su codice gia' approvato, non chiudere gli occhi sulle interazioni.
+
+            **Disciplina turni (budget rigido, tutti i tier tranne `minimal`):** hai ${{ steps.tier.outputs.max_turns }} turni. Un messaggio con tool-call = 1 turno indipendentemente da quanti tool_use contiene, quindi le probe indipendenti vanno emesse in parallelo nello stesso messaggio, mai una per turno. `PR_NUMBER`/`HEAD_SHA`/`INCREMENTAL_BASE` sono gia' nell'env: mai spendere un turno per rileggerli. Il checkout NON ha `node_modules`: niente `npm`/`npx`/test runner, il verdetto si basa sulla lettura statica. Entro cinque turni dal cap DEVI aver postato la review: se hai ancora verifiche aperte, postale come `❓ q:` invece di continuare a probeare. Una review postata con un `❓` sblocca il loop; una review MAI postata brucia il run intero senza verdetto.
+
+            **Workflow di review come da REVIEW.md:** completeness contract → `Implementato` con occhio critico → `Non implementato` filtro scopo → scope drift → ripetizione di pattern cross-file → conformita' al piano di test → claim di performance non validati → output.
+            - Tier `high`, `high-mega` o `incremental-high`: aggiungi una sezione `## Adversarial check` con esattamente 3 rischi REALI non verificati, prima del summary. Mai «manca un test».
+            - Sezioni mancanti + tier `high`/`high-mega`: posta il 🔴 process MA NON terminare — prosegui con la review sostanziale nello stesso pass. Solo il tier normal puo' terminare al process gate.
+            - Escalation ❓ su cio' che tocca la superficie pubblicata: un `❓ q` il cui soggetto impatta `dist/api/`, le sitemap, i feed RSS, gli slug o i canonical va promosso a 🔴 oppure aperto come follow-up issue e linkato. Mai un ❓ passivo accanto a `## LGTM`: li' un errore e' gia' in produzione.
+            - Niente finding «manca un test»: elenca rischi di COMPORTAMENTO non verificati. Eccezione: un BUG in un test ESISTENTE (assertion o regex leaky, fixture con date assolute).
+
+            Posta ESATTAMENTE una review con `gh pr review ${PR_NUMBER} --comment --body "<markdown nel formato di REVIEW.md>"`. Chiudi con `## LGTM` solo quando non c'e' un `🔴 Important` aperto, nessuna domanda funnel-critical irrisolta e il contratto del body e' valido. Incerto → `❓ q:`, mai speculazione. Lavora read-only: niente edit, commit, push, npm o test. Fermati subito dopo aver postato.
+
+      # claude-code-action puo' uscire 0 anche quando il run e' abortito su un
+      # errore API transiente SENZA aver postato una review: il job sembra verde
+      # ma la PR si ferma in silenzio. Si classifica dal log di esecuzione.
+      - name: Fail on transient API error (no review posted)
+        if: always() && steps.resolve.outputs.should_review == 'true' && steps.guard.outputs.skip != 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_NUMBER: ${{ steps.resolve.outputs.pr_number }}
+          REVIEW_OUTCOME: ${{ steps.claude_review.outcome }}
+          EXEC_FILE: ${{ steps.claude_review.outputs.execution_file }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          REVIEW_TIER: ${{ steps.tier.outputs.tier }}
+          REVIEW_MAX_TURNS: ${{ steps.tier.outputs.max_turns }}
+        run: |
+          set -uo pipefail
+          # max_turns PRIMA del 429, e l'ordine e' sostanziale: la regex del 429
+          # contiene un `rate[ _-]?limit` nudo che matcha i metadata di
+          # rate-limit-headroom presenti su OGNI chiamata, anche riuscita.
+          # Combinata con `is_error:true` (settato genericamente anche su un
+          # abort per max_turns), una review semplicemente finita i turni
+          # verrebbe scambiata per un 429 e declassata a warning — job verde,
+          # zero review postate, nessun segnale.
+          if [ -n "${EXEC_FILE:-}" ] && [ -f "${EXEC_FILE}" ] \
+             && grep -qE '"terminal_reason"[[:space:]]*:[[:space:]]*"max_turns"' "${EXEC_FILE}"; then
+            NUM_TURNS=$(grep -oE '"num_turns"[[:space:]]*:[[:space:]]*[0-9]+' "${EXEC_FILE}" | tail -1 | grep -oE '[0-9]+' || true)
+            BODY=$(printf '⚠️ **Review automatica fallita** (`terminal_reason=max_turns`, tier `%s`, cap %s turni, usati %s): Claude ha esaurito il budget prima di postare un verdetto. Nessuna review pubblicata — il check di questo job resta rosso e l auto-merge non puo scattare.\n\nLog: %s\n\nPer sbloccare: rilancia il run di `tests` piu recente di questa PR, oppure fai la review a mano col contratto di `REVIEW.md`.\n\nSe questa PR ha gia avuto una morte `max_turns`, un retry raramente basta: valuta di splittarla.' "${REVIEW_TIER:-?}" "${REVIEW_MAX_TURNS:-?}" "${NUM_TURNS:-?}" "$RUN_URL")
+            gh pr comment "$PR_NUMBER" --body "$BODY" || echo "::warning::gh pr comment fallito (non bloccante)."
+            echo "::error::Review Claude morta su max-turns (tier=${REVIEW_TIER:-?}, cap=${REVIEW_MAX_TURNS:-?}, turni=${NUM_TURNS:-?}) senza postare — rilancia, o splitta la PR se ricorre."
+            exit 1
+          fi
+          # 429: NON fallire QUI. Un errore esplicito inviterebbe a un re-run che
+          # ricolpisce la quota GIA' esaurita → tempesta auto-amplificante. Il
+          # merge resta comunque bloccato, perche' il review gate sotto non
+          # trova nessun `## LGTM` sulla head e fallisce lui.
+          if [ -n "${EXEC_FILE:-}" ] && [ -f "${EXEC_FILE}" ] \
+             && grep -qE '"is_error"[[:space:]]*:[[:space:]]*true' "${EXEC_FILE}" \
+             && grep -qiE '"api_error_status"[[:space:]]*:[[:space:]]*429|"type"[[:space:]]*:[[:space:]]*"rate_limit_error"|rate[ _-]?limit|too many requests' "${EXEC_FILE}"; then
+            echo "::warning::Review abortita su 429 (quota). Non fallisco QUI: eviterei solo di amplificare i re-run sulla quota condivisa col sito. Il review gate blocchera' comunque il merge."
+            exit 0
+          fi
+          if [ "${REVIEW_OUTCOME}" = "failure" ]; then
+            echo "::error::claude-code-action fallita (outcome=failure) — rilancia il job."
+            exit 1
+          fi
+          if [ -n "${EXEC_FILE:-}" ] && [ -f "${EXEC_FILE}" ]; then
+            if grep -qE '"is_error"[[:space:]]*:[[:space:]]*true' "${EXEC_FILE}" \
+               && grep -qiE '"api_error_status"[[:space:]]*:[[:space:]]*5[0-9][0-9]|overloaded|server_error|internal server error|api error: 5' "${EXEC_FILE}"; then
+              echo "::error::Review abortita su un 5xx transiente senza postare — rilancia il job."
+              exit 1
+            fi
+          fi
+          echo "Step di review concluso senza errori API non recuperati."
+
+      # ── IL VERDETTO ──────────────────────────────────────────────────────
+      # E' questo step a rendere il check-run rosso quando manca il `## LGTM` o
+      # c'e' un `🔴 Important`, ed e' per questo che l'auto-merge NATIVO non puo'
+      # scavalcare la review: il ruleset su `main` richiede questo check.
+      #
+      # Gira anche quando la review e' stata SALTATA dal guard (carry-forward) e
+      # quando l'action e' morta: in quei casi il verdetto sta comunque nelle
+      # review gia' postate, e non trovarne una approvante deve bloccare.
+      - name: Require approving Claude review
+        id: review_gate
+        if: always() && steps.resolve.outputs.should_review == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          PR_NUMBER: ${{ steps.resolve.outputs.pr_number }}
+          HEAD_SHA: ${{ steps.resolve.outputs.head_sha }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: node scripts/ci/review-gate.mjs
+
+      - name: Claude usage metrics
+        # Solo se la review e' effettivamente girata: a review skippata non c'e'
+        # execution_file da riassumere. Best-effort, non fallisce mai il job.
+        if: always() && steps.resolve.outputs.should_review == 'true' && steps.guard.outputs.skip != 'true'
+        run: node scripts/ci/claude-usage-summary.mjs "${{ steps.claude_review.outputs.execution_file }}" "pr-review"
+
+      # ── IL SECONDO VERDETTO CONDIZIONALE ─────────────────────────────────
+      # `generator-ci.yml` e' path-scoped, quindi il suo check-run NON esiste su
+      # ogni PR e il ruleset non puo' richiederlo (bloccherebbe per sempre le PR
+      # che non lo attivano). Il gate condizionale che teneva il workflow
+      # dell'auto-merge su LGTM torna quindi dentro il job che PRODUCE il check
+      # richiesto. Non e' escluso su `engine-lockstep-auto`: quella PR e' esente
+      # dalla review perche' gia' giudicata sul sito, ma il contratto
+      # engine/host e' proprio cio' che deve essere verificato QUI.
+      #
+      # Sta in fondo di proposito: quando ci arriva, `generator-ci` ha gia' avuto
+      # tutta la durata della review per concludere, quindi l'attesa e' quasi
+      # sempre nulla.
+      - name: Generator CI gate (solo per le PR che ne toccano i path)
+        if: >-
+          ${{ always() && github.event_name == 'pull_request' &&
+          github.event.pull_request.draft == false }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        run: node scripts/ci/generator-ci-gate.mjs

@@ -723,7 +723,7 @@ jobs:
       # esistere nel processo che chiama callLLM.
       #
       # Il secret esiste gia' in questo repo (CLAUDE_CODE_OAUTH_TOKEN, lo stesso
-      # del piano Max usato da pr-review-loop.yml/issue-fix.yml): non c'e' nulla
+      # del piano Max usato dalla review in tests.yml e da issue-fix.yml): non c'e' nulla
       # da provisionare, mancava solo il cablaggio.
       # continue-on-error: true — issue #367. Gli step delle composite action
       # non supportano continue-on-error (nulla lo assorbe dentro

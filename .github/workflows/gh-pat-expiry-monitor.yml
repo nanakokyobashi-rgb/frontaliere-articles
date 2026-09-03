@@ -169,7 +169,7 @@ jobs:
               "### Impatto, altrimenti silenzioso" \
               "Con \`GITHUB_PAT_NANAKO\` mancante o non valido questi workflow degradano al" \
               "loro percorso inerte, con al massimo un \`::warning::\` che non legge nessuno:" \
-              "- \`auto-merge-on-lgtm.yml\` — merge col GITHUB_TOKEN, che **non ri-triggera \`publish-api.yml\`**: la superficie dati servita al sito resta vecchia senza un errore da nessuna parte" \
+              "- \`enable-native-automerge.yml\` — l'auto-merge nativo non viene arruolato, oppure lo sarebbe col GITHUB_TOKEN, che **non ri-triggera \`publish-api.yml\`**: la superficie dati servita al sito resta vecchia senza un errore da nessuna parte" \
               "- \`pr-autorebase.yml\` — niente push del rebase, niente dispatch di \`tests.yml\`" \
               "- \`issue-triage.yml\` / \`followup-drainer.yml\` — routing e drain fermi" \
               "- \`recycle-stale-prs.yml\` — re-queue \`agent:fix\` saltato" \

@@ -1,5 +1,6 @@
 <!--
-  Il body di questa PR ha un gate deterministico: `pr-body-contract.yml`.
+  Il body di questa PR ha un gate deterministico: lo step «PR-body completeness»
+  di `tests.yml`, dentro il check-run che governa il merge.
   Non e' burocrazia — le due sezioni sono i due input di `auto-merge-eval`, e
   `Closes` e' l'unica cosa che chiude la issue al merge.
 

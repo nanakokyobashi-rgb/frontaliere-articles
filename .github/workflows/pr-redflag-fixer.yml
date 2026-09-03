@@ -2,7 +2,7 @@ name: PR 🔴 fixer (bounded loop-closure on bot PRs)
 
 # Quando il reviewer Claude posta un `🔴` su una PR autonoma (bot-authored o
 # head `fix/*`), questo workflow auto-applica il fix sullo stesso branch — in
-# modo BOUNDED. Il push ri-triggera pr-review-loop (re-review) → se pulito,
+# modo BOUNDED. Il push ri-triggera la review dentro tests.yml (re-review) → se pulito,
 # auto-merge; se 🔴 di nuovo, questo workflow ri-parte fino al round cap.
 # NON agisce mai su PR scritte da umani.
 #
@@ -116,7 +116,7 @@ jobs:
         timeout-minutes: 15
 
       # Profilassi workflow-validation drift (anti-401): la GitHub App del reviewer
-      # esige che `.github/workflows/pr-review-loop.yml` sul branch sia BYTE-IDENTICO
+      # esige che `.github/workflows/tests.yml` sul branch sia BYTE-IDENTICO
       # a `main`. Se `main` ha aggiornato un workflow di review DOPO il branch, la
       # re-review (ri-triggerata dal push del fix sotto) fallirebbe `401 Workflow
       # validation failed`, review vuota, niente `## LGTM`, niente auto-merge — e il
@@ -161,7 +161,7 @@ jobs:
 
       # Primary identity for the fix push below = GitHub App installation token
       # (`frontaliere-automation[bot]`): auto-mints, no expiry babysit, and its
-      # push re-triggers pr-review-loop just like the PAT (no GITHUB_TOKEN
+      # push re-triggers the review inside tests.yml just like the PAT (no GITHUB_TOKEN
       # anti-recursion). Falls back to env.GITHUB_PAT (#2861/#2899).
       - name: Mint App token (primary identity, PAT fallback)
         continue-on-error: true
@@ -244,7 +244,7 @@ jobs:
             exit 0
           fi
 
-          # Tier (mirror di pr-review-loop / issue-fix): high se la PR
+          # Tier (mirror della review in tests.yml e di issue-fix): high se la PR
           # tocca CODE funnel-critical (tests/, build-plugins/, scripts/lib/,
           # services/seo*), normal altrimenti. Modello UNIFICATO claude-sonnet-5
           # su entrambi i tier (owner 2026-07-17: mai claude-sonnet-4-6); i tier
@@ -271,7 +271,7 @@ jobs:
           git config user.name "Valerie Linc"
           git config user.email "valerielinc@gmail.com"
 
-      # Push via App token (primario) / PAT (fallback) — ri-attiva pr-review-loop
+      # Push via App token (primario) / PAT (fallback) — ri-attiva la review dentro tests.yml
       # = re-review. Senza nessuno dei due il push userebbe GITHUB_TOKEN e la
       # re-review non partirebbe (anti-ricorsione); il fix verrebbe comunque
       # committato. Esposto come remote authenticato.
@@ -382,7 +382,7 @@ jobs:
           #
           # Vuoto (non `secrets.GITHUB_TOKEN`) come fallback: gli eventi del
           # GITHUB_TOKEN non ri-attivano i workflow a valle, quindi il push del
-          # fix non farebbe ripartire `pr-review-loop` — la re-review che questo
+          # fix non farebbe ripartire la review dentro tests.yml — la re-review che questo
           # workflow esiste per innescare. Vuoto = ramo di default dell'action
           # (conia un token proprio), cioe' il comportamento odierno.
           github_token: ${{ env.GITHUB_PAT_NANAKO }}
@@ -400,7 +400,7 @@ jobs:
           # (rationale completo: post-merge-followup.yml claude_args comment, stesso
           # fix, evita drift tra copie duplicate).
           # 45->60 (2026-07-17, owner): bump fleet-wide di tutti i cap max-turns
-          # Claude dopo l'ennesimo error_max_turns (pr-review-loop run 29556645538).
+          # Claude dopo l'ennesimo error_max_turns (run 29556645538 del vecchio workflow di review).
           claude_args: "--max-turns 60 --model ${{ steps.guard.outputs.model }} --dangerously-skip-permissions"
           prompt: |
             Sei l'agent di chiusura 🔴 per la PR #${{ github.event.pull_request.number }} ("${{ github.event.pull_request.title }}"). Tier: ${{ steps.guard.outputs.tier }}. Round: ${{ steps.guard.outputs.round }}/2.
@@ -417,7 +417,7 @@ jobs:
             - CODE vs DATA: non scorrere i blob `data/**`/`public/**`; fixa il CODE che li genera.
             - Esegui i test pertinenti: `npm test` (o il subset rilevante) per validare il fix prima di committare.
             - Commit con identity canonica già configurata (Valerie Linc <valerielinc@gmail.com>), messaggio conventional, nessuna email non-canonica in coda.
-            - Push sullo stesso branch: `git push origin HEAD:${{ github.event.pull_request.head.ref }}`. Il remote `origin` è autenticato con il token passato a questa action come `github_token` (il PAT, quando disponibile): l'action riscrive `origin` all'avvio, quindi vale QUEL token, non quello configurato dagli step precedenti. Non è il GITHUB_TOKEN → il push ri-attiva `pr-review-loop` (re-review), e i file sotto `.github/workflows/**` sono pushabili. Se il push fallisce per scope/auth → prima di arrenderti verifica `git remote -v` (deve mostrare `x-access-token:***@github.com`); se dice `without workflows permission`, il PAT non è arrivato: documenta in un commento e TERMINA.
+            - Push sullo stesso branch: `git push origin HEAD:${{ github.event.pull_request.head.ref }}`. Il remote `origin` è autenticato con il token passato a questa action come `github_token` (il PAT, quando disponibile): l'action riscrive `origin` all'avvio, quindi vale QUEL token, non quello configurato dagli step precedenti. Non è il GITHUB_TOKEN → il push ri-attiva la review dentro tests.yml (re-review), e i file sotto `.github/workflows/**` sono pushabili. Se il push fallisce per scope/auth → prima di arrenderti verifica `git remote -v` (deve mostrare `x-access-token:***@github.com`); se dice `without workflows permission`, il PAT non è arrivato: documenta in un commento e TERMINA.
             - Aggiorna il body della PR (`gh pr edit $PR_NUMBER --body`) mantenendo `## Implementato` (aggiungi cosa hai fixato) + `## Non implementato (ancora)`.
 
             **Constraint:**

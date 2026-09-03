@@ -88,22 +88,33 @@ export const REDFLAG_IMPORTANT_RE = /🔴\s*\*{0,2}\s*Important\s*\*{0,2}\s*[:�
  * sulla PR → niente `## LGTM` → l'auto-merge normale non scatta → senza fallback
  * la PR resta ferma in attesa di un merge manuale.
  *
- * È SOLO `pr-review-loop.yml`: la GitHub App del reviewer esige che il workflow
- * file in esecuzione sia byte-identico alla versione su `main` (`Workflow
- * validation failed. 401`). Una PR che lo MODIFICA ha per definizione un
- * contenuto diverso da main → 401 → review job rosso, nessun `## LGTM` postato.
- * Verificato che gli altri file storicamente citati come "merge manuale"
- * (`auto-merge-on-lgtm.yml`, `post-merge-followup.yml`, `REVIEW.md`,
- * `FOLLOWUP.md`) NON driftano: il reviewer (che esegue `pr-review-loop.yml`,
- * invariato) gira e posta `## LGTM` normalmente (`post-merge-followup` per giunta
+ * È SOLO `tests.yml`, perché dal 2026-09-03 è LÌ che vive la Claude review: la
+ * GitHub App del reviewer esige che il workflow file in esecuzione sia
+ * byte-identico alla versione su `main` (`Workflow validation failed. 401`). Una
+ * PR che lo MODIFICA ha per definizione un contenuto diverso da main → 401 →
+ * nessun `## LGTM` postato.
+ *
+ * ── ATTENZIONE, questa costante ha cambiato REFERENTE, non solo nome ────────
+ * Prima puntava al workflow di review dedicato, che girava su `workflow_run` e
+ * quindi eseguiva SEMPRE la versione di `main`: una PR che lo modificava non
+ * mandava in 401 la propria review, e il drift-fallback serviva solo al caso
+ * limite. Ora il reviewer gira su `pull_request`, cioè sulla versione DEL
+ * BRANCH: la 401 su una PR che tocca `tests.yml` non è più un caso limite, è la
+ * norma. Se questa lista non segue il file che ospita la review, ogni PR sul CI
+ * resta ferma per sempre senza che niente diventi rosso.
+ *
+ * Gli altri file storicamente citati come "merge manuale"
+ * (`post-merge-followup.yml`, `REVIEW.md`, `FOLLOWUP.md`) NON driftano: il
+ * reviewer gira e posta `## LGTM` normalmente (`post-merge-followup` per giunta
  * gira su `pull_request: closed`, post-merge → non gatekeepa il merge). Tenere
  * la lista MINIMA limita la superficie "merge senza review Claude" del fallback.
  *
- * Usato da `auto-merge-eval.mjs` (drift-fallback: gate deterministici al posto
- * dell'`## LGTM` mancante). Se in futuro un altro workflow su `pull_request`
- * inizia a invocare il claude-code-action, aggiungilo qui.
+ * Usato da `review-gate.mjs` e `auto-merge-eval.mjs` (drift-fallback: gate
+ * deterministici al posto dell'`## LGTM` mancante). Se in futuro un altro
+ * workflow su `pull_request` inizia a invocare il claude-code-action,
+ * aggiungilo qui.
  */
-export const REVIEW_WORKFLOW_DRIFT_FILES = ['.github/workflows/pr-review-loop.yml'];
+export const REVIEW_WORKFLOW_DRIFT_FILES = ['.github/workflows/tests.yml'];
 
 /**
  * Nome del check-run del job `test` di `.github/workflows/generator-ci.yml`

@@ -32,7 +32,7 @@
  *
  * ## Corpus-only, e perché
  *
- * Il `pr-body-contract.yml` del sito è molto più grande: incorpora una decina
+ * Lo step gemello del sito è molto più grande: incorpora una decina
  * di check specifici del suo dominio (CLS degli slot AdSense, lookbehind lato
  * client, pattern dei sibling...) che qui non hanno senso. Questo è il
  * sottoinsieme generico — le due verifiche sul contratto del body — costruito
