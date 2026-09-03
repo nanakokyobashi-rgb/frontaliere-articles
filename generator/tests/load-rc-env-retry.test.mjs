@@ -224,3 +224,22 @@ test('exchangeAssertionForToken legge il body e passa la reason OAuth al proprio
   assert.match(fnBody, /extractOAuthErrorReason\(text\)/, 'un 403 deve leggere il body per estrarre il codice errore OAuth, non fermarsi allo status');
   assert.match(fnBody, /isRetryableTokenExchangeStatus\(res\.status,\s*reason\)/, 'la reason estratta deve raggiungere il classificatore dedicato al token exchange');
 });
+
+// #730: follow-up a #701. `_getGoogleCloudAccessToken` in free-translate.mjs
+// chiama lo stesso endpoint `oauth2.googleapis.com/token` di
+// `exchangeAssertionForToken` (solo `grant_type` diverso: `refresh_token`
+// invece di jwt-bearer), ma non aveva alcun retry loop — qualsiasi
+// fallimento, incluso un 403-quota transitorio della stessa classe appena
+// corretta nel gemello, degradava silenziosamente a '' dentro la cascata di
+// provider di traduzione.
+test('_getGoogleCloudAccessToken in free-translate.mjs riusa il classificatore condiviso del token exchange, non uno proprio', () => {
+  const src = fs.readFileSync(path.join(ROOT, 'scripts/lib/free-translate.mjs'), 'utf8');
+  const fnBody = src.slice(
+    src.indexOf('async function _getGoogleCloudAccessToken'),
+    src.indexOf('async function translateWithGoogleCloud'),
+  );
+  assert.match(fnBody, /extractOAuthErrorReason\(text\)/, 'un 403 deve leggere il body per estrarre il codice errore OAuth, non fermarsi allo status');
+  assert.match(fnBody, /isRetryableTokenExchangeStatus\(res\.status,\s*reason\)/, 'la reason estratta deve raggiungere il classificatore dedicato al token exchange');
+  assert.match(fnBody, /for\s*\(let attempt = 1; attempt <= TOKEN_EXCHANGE_ATTEMPTS; attempt\+\+\)/, 'deve retryare fino a TOKEN_EXCHANGE_ATTEMPTS invece di arrendersi al primo fallimento');
+  assert.match(fnBody, /signal:\s*AbortSignal\.timeout\(TOKEN_EXCHANGE_TIMEOUT_MS\)/, 'deve condividere il timeout del token exchange, non uno slegato');
+});
