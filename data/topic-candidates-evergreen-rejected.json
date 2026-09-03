@@ -1,11 +1,5 @@
 {
   "keywords": [
-    "patente di guida canton Appenzello Interno conversione ed esami",
-    "salari e mercato del lavoro canton Lucerna settori e livelli",
-    "patente di guida canton Lucerna conversione ed esami",
-    "imposta di successione e donazione canton Appenzello Interno aliquote",
-    "imposte cantonali canton San Gallo aliquote e deduzioni",
-    "premi cassa malati canton San Gallo e riduzione premi",
     "permesso di dimora B canton San Gallo requisiti e rinnovo",
     "tassazione frontalieri 2026 nuovo accordo",
     "ingresso in svizzera frontalieri documenti dogana 2026",
@@ -499,7 +493,13 @@
     "frontaliere bonus famiglia 2026",
     "frontaliere assicurazione auto Svizzera Italia",
     "frontaliere detrazioni fiscali Italia 2026",
-    "frontaliere mutuo casa Svizzera requisiti"
+    "frontaliere mutuo casa Svizzera requisiti",
+    "frontaliere pensione complementare terzo pilastro",
+    "frontaliere spese sanitarie rimborsabili Italia",
+    "frontaliere lavoro stagionale Ticino",
+    "frontaliere trasporto pubblico abbonamenti sconti",
+    "richiesta permesso g step by step",
+    "imposte alla fonte ticino calcolatore"
   ],
   "strikes": {
     "frontaliere farmacista ticino stipendio requisiti": 3,
@@ -637,7 +637,7 @@
     "frontaliere detrazioni fiscali Italia 2026": 1,
     "frontaliere pensione complementare terzo pilastro": 1,
     "frontaliere spese sanitarie rimborsabili Italia": 1,
-    "telelavoro frontalieri 2026": 1,
+    "telelavoro frontalieri 2026": 2,
     "avs e prestazioni complementari canton Zurigo cassa di compensazione": 2,
     "quellensteuer schweiz tarife 2026": 3,
     "grenzgänger schweiz steuern 2026": 1,

@@ -1,5 +1,4 @@
 {
-  "https://www.laregione.ch/economia/economia/1941028/primo-semestre-perdita-obiettivi-trimestre": "lastminute-com-perdita-obiettivi-trimestre",
   "https://www.laregione.ch/economia/economia/1940791/logitech-esercizio-primo-franchi-miliardi": "logitech-2026-2027",
   "https://www.laregione.ch/economia/economia/1941131/mammut-proprieta-cpe-cinese-marchio-investitore": "mammut-proprieta-investitore-cinese",
   "https://www.seco.admin.ch/it/newnsb/ohqzdeeggxr9tah-z1olx": "libera-circolazione-mercato-lavoro-2026",
@@ -1689,6 +1688,11 @@
   "https://www.tio.ch/svizzera/attualita/1947737/medici-famiglia-mfe-tardoc-aumento-infanzia": {
     "articleId": "tardoc-rivalutazione-famiglia",
     "ts": "2026-09-03T13:26:50.396Z",
+    "keyForm": 2
+  },
+  "https://www.admin.ch/it/newnsb/s-hhonja-wbo": {
+    "articleId": "comitato-consultivo-svizzera-digitale",
+    "ts": "2026-09-03T14:15:06.214Z",
     "keyForm": 2
   }
 }
