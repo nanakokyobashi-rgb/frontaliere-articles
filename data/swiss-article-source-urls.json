@@ -1,5 +1,4 @@
 {
-  "https://www.seco.admin.ch/it/newnsb/nk5t9rvaswyxx3xizdkom": "servizio-di-accreditamento-svizzero-diventa-parte-integrante",
   "https://www.seco.admin.ch/it/newnsb/_esttpjrhazmvtpcm9qxn": "mercato-lavoro-svizzera-giugno-2026",
   "https://www.laregione.ch/economia/economia/1942012/sandoz-miliardi-dollari-primo-biosimilari-fatturato-semestre": "sandoz-biosimilari-2026",
   "https://www.laregione.ch/economia/economia/1940892/glencore-produzione-rame-calo-miliardi": "glencore-produzione-riscrittura",
@@ -1669,6 +1668,11 @@
   "https://www.swissinfo.ch/ita/salari-salgono-dello-0%2c4%25-quest%27anno%2c-ma-l%27inflazione-sar%c3%a0-pi%c3%b9-alta/91999164": {
     "articleId": "salari-svizzera-2026-inflazione",
     "ts": "2026-09-03T11:50:43.394Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/prezzo-benzina-e-diesel-aumenta%2c-sfiora-i-massimi-dell%27anno/91999541": {
+    "articleId": "benzina-diesel-massimi-anno-2026",
+    "ts": "2026-09-03T12:07:43.045Z",
     "keyForm": 2
   }
 }
