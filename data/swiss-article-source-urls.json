@@ -1,5 +1,4 @@
 {
-  "https://www.seco.admin.ch/it/newnsb/_imibsiprkllgtkiysvor": "lotta-lavoro-nero-2025",
   "https://www.laregione.ch/economia/economia/1942280/group-partners-miliardi-aroma-zone-trattative": "partners-group-trattative-aroma-zone",
   "https://www.seco.admin.ch/it/newnsb/nk5t9rvaswyxx3xizdkom": "servizio-di-accreditamento-svizzero-diventa-parte-integrante",
   "https://www.seco.admin.ch/it/newnsb/_esttpjrhazmvtpcm9qxn": "mercato-lavoro-svizzera-giugno-2026",
@@ -1661,6 +1660,11 @@
   "https://www.admin.ch/it/newnsb/vwrqaoztclwf": {
     "articleId": "calo-natalita-finanze-pubbliche",
     "ts": "2026-09-03T09:13:41.237Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/%22basta-delocalizzazioni-posta-e-swisscom%22%2c-lanciata-una-petizione/91998672": {
+    "articleId": "petizione-delocalizzazioni-svizzera",
+    "ts": "2026-09-03T09:30:21.608Z",
     "keyForm": 2
   }
 }
