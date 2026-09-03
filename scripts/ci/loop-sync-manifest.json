@@ -284,10 +284,11 @@
     {
       "path": "scripts/ci/scan-job-timeouts.mjs",
       "mode": "identical",
+      "reason": "RICONCILIATO 2026-09-03 (both-moved, issue #760). Baseline f0a07afa era reale da entrambi i lati (corpus 38f32dc, sito 40ba839, 2026-08-31). Poi si sono mossi tutti e due sullo STESSO problema: qui #700 (issue #692 item 1) ha limitato il fetch lato server con `created` >= cutoff - MAX_RUN_DURATION_MIN (350+60 min) piu' un RUN_LISTING_SAFETY_CAP di 2000; il sito, in valerielinc-ops#7101, ha portato lo stesso fix e lo ha esteso. Riconciliazione a favore del sito, ripristinando `identical`, perche' la sua versione e' un superinsieme stretto della nostra su entrambi i punti in cui la nostra sbaglia: (a) l'orizzonte. `MAX_RUN_DURATION_MIN` presume che una run non possa essere piu' vecchia del job piu' lungo, ma il timeout di un job non limita l'eta' della RUN — coda, `needs` e attesa di approvazione stanno tutti prima; il bound lato server e' 35 giorni (`MAX_WORKFLOW_RUN_AGE_MIN`), l'unico che non escluda una run ancora capace di aggiornarsi dentro il cutoff. Con la finestra stretta un timeout su una run in coda da ore restava invisibile, cioe' esattamente il blind spot che #692 voleva chiudere. (b) il cap dell'API. Con un filtro `created` GitHub restituisce al massimo 1.000 risultati per search: allargare l'orizzonte a 35 giorni senza bisecare la finestra troncherebbe in silenzio, e il nostro cap locale a 2000 era gia' irraggiungibile. Il sito biseca `created` finche' ogni search sta sotto il limite, pagina tutte le pagine e deduplica per run id. Il solo residuo locale, `e'` -> `è` in un commento, non e' una divergenza da difendere.",
       "baseline": {
-        "site": "f0a07afaa69fb18a",
-        "corpus": "f0a07afaa69fb18a",
-        "alignedAt": "2026-09-01"
+        "site": "ae283f60522fc850",
+        "corpus": "ae283f60522fc850",
+        "alignedAt": "2026-09-03"
       }
     },
     {
