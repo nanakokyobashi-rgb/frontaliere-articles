@@ -1,5 +1,4 @@
 {
-  "https://www.laregione.ch/svizzera/svizzera/1943160/semestre-bell-primo-storia-stato": "bell-bellinzona-aziendale-2026",
   "https://www.laregione.ch/svizzera/svizzera/1943176/svizzera-iniziativa-neutralita-prassi-consiglio-settembre-federale-chiede": "consiglio-federale-iniziativa-neutralita",
   "https://www.laregione.ch/economia/economia/1941261/apple-memoria-chip-crescita-stime-ricavi-tre": "apple-stime-reducono",
   "https://www.tio.ch/svizzera/economia/1943202/miliardi-swiss-rischio-re-danni-media-catastrofi-anni": "catastrofi-naturali-2026-danni-inferiori-media",
@@ -1729,6 +1728,11 @@
   "https://www.swissinfo.ch/ita/aeroporto-di-ginevra-%c3%a8-un-motore-per-la-regione%2c-vale-3%2c3-miliardi/92002579": {
     "articleId": "aeroporto-ginevra-motore-3-3-miliardi",
     "ts": "2026-09-03T19:31:08.188Z",
+    "keyForm": 2
+  },
+  "https://www.cdt.ch/news/svizzera/swiss-life-prevede-di-tagliare-600-posti-di-lavoro-entro-il-2028-438041": {
+    "articleId": "assicurazioni-tagli-occupazione-2028",
+    "ts": "2026-09-03T21:39:03.599Z",
     "keyForm": 2
   }
 }
