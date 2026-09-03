@@ -646,8 +646,8 @@
       "reason": "Stessa struttura del contratto del sito, non-negoziabili di questo repo: mai importare content/ nel sito, l'engine si modifica in packages/articles del SITO (qui verrebbe sovrascritto dal mirror), SiteShellContract e host/ viaggiano insieme, il glob obbligatorio in node --test. RIALLINEATO 2026-08-09 senza portare nulla: il diff del sito dalla baseline precedente e' UNA riga, che aggiunge «CWV field criterion (#5001) docs/CWV-FIELD-CRITERION.md» alla sezione «Reference Docs». Qui non si applica per due motivi verificati: questo AGENTS.md non ha una sezione «Reference Docs» (le sue sono Cos'e' questo repo / La superficie pubblica / Non-negoziabili / Build e test / Credenziali / Il ciclo autonomo), e il repo non ha una cartella docs/ (404). Una modifica futura del sito che invece si applichi tornera' a comparire, perche' la baseline e' aggiornata all'hash di oggi, non disattivata.",
       "baseline": {
         "site": "7b52bedf01d44f0d",
-        "corpus": "0860b171ac7b0751",
-        "alignedAt": "2026-08-09"
+        "corpus": "b10670c48facff7b",
+        "alignedAt": "2026-09-03"
       }
     },
     {
