@@ -1,5 +1,4 @@
 {
-  "https://www.tio.ch/rubriche/ospite/1943121/anni-piano-clima-emergenza-matteo-buzzi": "piano-energetico-climatico-ticino-sfide",
   "https://www.laregione.ch/economia/economia/1942739/chip-memoria-data-prezzi-center-carenza-scorte": "ramaggedon-crisi-chip-memoria",
   "https://www.laregione.ch/economia/economia/1940630/franchi-banca-servizi-banche-fornitori-fedelta": "fedelta-bancaria-costi-analisi",
   "https://www.seco.admin.ch/it/newnsb/mc7vaab5u5ch2wcjouxbs": "lotta-lavoro-nero-consultazione",
@@ -1641,6 +1640,11 @@
   "https://www.seco.admin.ch/it": {
     "articleId": "dazi-usa-seco-svizzera-2026",
     "ts": "2026-09-02T20:36:08.227Z",
+    "keyForm": 2
+  },
+  "https://www.admin.ch/it/newnsb/nsut8um5sbxj": {
+    "articleId": "prezzi-consumo-aumentati-agosto-2026",
+    "ts": "2026-09-03T07:46:38.845Z",
     "keyForm": 2
   }
 }
