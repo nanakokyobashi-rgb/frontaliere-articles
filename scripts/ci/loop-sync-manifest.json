@@ -1853,10 +1853,10 @@
       "mode": "adapted",
       "baseline": {
         "site": "3cd3caf6cb78e3d1",
-        "corpus": "e2e2c532b45bfbf0",
-        "alignedAt": "2026-08-31"
+        "corpus": "3e207fe6eb04d3f3",
+        "alignedAt": "2026-09-03"
       },
-      "reason": "Ritento anche su un fallimento di rete grezzo (TypeError 'fetch failed', DNS/TLS), non solo su AbortError/TimeoutError: issue #247 ha misurato il caso network-failure atterrare 272ms dopo l'avvio della richiesta sulla fetch RC gemella in load-rc-env.mjs, che ritenta ogni rejection per la stessa ragione. Rilanciare grezzo qualunque errore diverso da Abort/TimeoutError (comportamento precedente) saltava l'intero budget di retry TOKEN_EXCHANGE_ATTEMPTS/~63s proprio sul fallimento che doveva sopravvivere. E' un MIGLIORAMENTO del meccanismo: candidato a risalire al sito (scripts/lib/google-service-account-token.mjs), che resta sulla sola distinzione Abort/TimeoutError."
+      "reason": "Ritento anche su un fallimento di rete grezzo (TypeError 'fetch failed', DNS/TLS), non solo su AbortError/TimeoutError: issue #247 ha misurato il caso network-failure atterrare 272ms dopo l'avvio della richiesta sulla fetch RC gemella in load-rc-env.mjs, che ritenta ogni rejection per la stessa ragione. Rilanciare grezzo qualunque errore diverso da Abort/TimeoutError (comportamento precedente) saltava l'intero budget di retry TOKEN_EXCHANGE_ATTEMPTS/~63s proprio sul fallimento che doveva sopravvivere. E' un MIGLIORAMENTO del meccanismo: candidato a risalire al sito (scripts/lib/google-service-account-token.mjs), che resta sulla sola distinzione Abort/TimeoutError. RIALLINEATO 2026-09-03 (follow-up #734 item 3), due drift ulteriori nel frattempo: fix #701 ha aggiunto `isRetryableTokenExchangeStatus`/`extractOAuthErrorReason`/`QUOTA_TOKEN_EXCHANGE_REASONS` per ritentare anche un 403-con-quota sul token exchange OAuth (stesso pattern del 403 RC gemello in load-rc-env.mjs, #247), migliorando lo stesso meccanismo descritto sopra — ancora non proposto al sito; e #738/issue-730 ha reso `TOKEN_EXCHANGE_ATTEMPTS` un `export const` perche' `free-translate.mjs` condivida il budget di retry sul proprio token exchange OAuth invece di duplicare la costante — quest'ultimo e' locale per costruzione (il gemello di free-translate.mjs sul sito non ha bisogno di condividerla con questo file)."
     },
     {
       "path": "generator/scripts/lib/haversine.mjs",
