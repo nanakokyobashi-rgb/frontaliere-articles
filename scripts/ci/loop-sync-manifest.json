@@ -643,11 +643,11 @@
     {
       "path": ".github/workflows/issue-fix.yml",
       "mode": "adapted",
-      "reason": "Gate sender esteso agli account del progetto (la label di routing la applica il PAT di questo repo, di un altro account); identita' di push GITHUB_PAT_NANAKO invece del token GitHub App; gate test `node --test` invece di vitest; niente npm ci; il pre-flight di quota passa QUOTA_BEACON_PEER_REPO per cedere al sito. Prompt riscritto sul dominio di questo repo (superficie dist/api, contratto engine/host, content/ come dati). RIALLINEATO 2026-08-09 da `both-moved`, con le due modifiche verificate DISGIUNTE. Il sito ha sostituito `env.APP_TOKEN == ''` con `env.APP_TOKEN_WORKFLOWS != 'true'` nel gate del capability guard (riga 185 la'): qui quella stessa espressione era gia' `env.GITHUB_PAT_NANAKO == ''` (riga 136), cioe' il sito ha cambiato esattamente cio' che questo fork aveva gia' rimpiazzato. Il corpus si e' mosso per conto suo con #93 (rimozione dell'http.<host>.extraheader che rendeva inerte il set-url col PAT, e l'`ISSUE:` mancante per mark-claude-terminal-outcome.mjs). Nessuna delle due tocca cio' che l'altra ha toccato.",
+      "reason": "Gate sender esteso agli account del progetto (la label di routing la applica il PAT di questo repo, di un altro account); identita' di push GITHUB_PAT_NANAKO invece del token GitHub App; gate test `node --test` invece di vitest; niente npm ci; il pre-flight di quota passa QUOTA_BEACON_PEER_REPO per cedere al sito. Prompt riscritto sul dominio di questo repo (superficie dist/api, contratto engine/host, content/ come dati). RIALLINEATO 2026-08-09 da `both-moved`, con le due modifiche verificate DISGIUNTE. Il sito ha sostituito `env.APP_TOKEN == ''` con `env.APP_TOKEN_WORKFLOWS != 'true'` nel gate del capability guard (riga 185 la'): qui quella stessa espressione era gia' `env.GITHUB_PAT_NANAKO == ''` (riga 136), cioe' il sito ha cambiato esattamente cio' che questo fork aveva gia' rimpiazzato. Il corpus si e' mosso per conto suo con #93 (rimozione dell'http.<host>.extraheader che rendeva inerte il set-url col PAT, e l'`ISSUE:` mancante per mark-claude-terminal-outcome.mjs). Nessuna delle due tocca cio' che l'altra ha toccato. Dal 2026-09-03 porta anche i tre step deterministici post-Claude del sito: il checkpoint WIP che salva su `fix/issue-N` il diff di un run morto ai turni, il backstop `FIX_OUTCOME` che garantisce un marker al drainer anche quando l'agente non lo posta, e il classificatore che colora il job sul LAVORO consegnato invece che sull'exit della CLI. Adattati all'identita' di push di questo repo (GITHUB_PAT_NANAKO invece del token di App) e al fatto che ogni `gh` qui vuole `--repo`.",
       "baseline": {
         "site": "082c8cfe1e649be2",
-        "corpus": "9d96f186232c697b",
-        "alignedAt": "2026-08-09"
+        "corpus": "80229a8f4efa5633",
+        "alignedAt": "2026-09-03"
       }
     },
     {
