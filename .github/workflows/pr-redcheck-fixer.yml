@@ -69,6 +69,7 @@ jobs:
       pr_number: ${{ steps.pre.outputs.pr_number }}
       head_ref: ${{ steps.pre.outputs.head_ref }}
       failed_run_id: ${{ steps.pre.outputs.failed_run_id }}
+      head_sha: ${{ steps.pre.outputs.head_sha }}
     steps:
       - name: PR azionabile, e il rosso e' ancora quello della HEAD?
         id: pre
@@ -168,6 +169,7 @@ jobs:
             echo "pr_number=$PR"
             echo "head_ref=$head_ref"
             echo "failed_run_id=$RUN_ID"
+            echo "head_sha=$head_sha"
           } >> "$GITHUB_OUTPUT"
 
   redcheck-fix:
@@ -180,7 +182,15 @@ jobs:
         uses: actions/checkout@v5
         with:
           fetch-depth: 0
-          ref: ${{ needs.preflight.outputs.head_ref }}
+          # Lo SHA verificato dal preflight, NON il nome del branch. Il preflight
+          # ha appena stabilito che il rosso e' di QUESTO commit; se fra la sua
+          # fine e l'avvio di questo job arriva un push (il rescuer, l'autorebase,
+          # una persona), checkoutare il NOME del branch darebbe all'agente un
+          # albero piu' nuovo del `failing.txt` che sta leggendo — una diagnosi
+          # su codice che non ha davanti. Con lo SHA i due combaciano sempre, e
+          # se il branch e' nel frattempo avanzato il push finale viene rifiutato
+          # come non-fast-forward: un fallimento pulito invece di un fix cieco.
+          ref: ${{ needs.preflight.outputs.head_sha }}
           # `content/` pesa: blobless partial clone, come issue-fix. Sicuro —
           # il fixer legge e scrive i file dell'head e fa `git merge origin/main`:
           # servono i blob dei file toccati, non la storia dei blob.
@@ -366,12 +376,30 @@ jobs:
       # grande, e farlo scaricare all'agente brucia turni di setup — il primo
       # consumatore misurato su questo ciclo. E il filtro giusto e' noto.
       #
-      # ── IL FILTRO E' QUELLO DI `node --test`, NON DI VITEST ────────────────
+      # ── IL FILTRO COPRE TUTTE E QUATTRO LE FAMIGLIE, NON SOLO TAP ─────────
       # Il gemello sul sito cerca le righe `FAIL ` di vitest. Qui i gate girano
-      # sotto `node --test`, che scrive TAP: i fallimenti sono `not ok N - <nome>`
-      # e le righe `✖`. Copiare il filtro del sito darebbe un `failing.txt` VUOTO
-      # su ogni rosso — un contesto che non contiene il fallimento e' peggio di
-      # nessun contesto, perche' l'agente lo legge e conclude che non c'e' niente.
+      # sotto `node --test`, che scrive TAP: i fallimenti sono `not ok N` e `✖`.
+      # Copiare il filtro del sito darebbe un `failing.txt` VUOTO su ogni rosso —
+      # un contesto che non contiene il fallimento e' peggio di nessun contesto,
+      # perche' l'agente lo legge e conclude che non c'e' niente da riparare.
+      #
+      # Ma il TAP da solo NON basta, ed e' lo stesso difetto un passo piu' in la'.
+      # Il check richiesto porta QUATTRO famiglie e solo una di esse parla TAP:
+      #   - contratto del body        → `::error::Contratto del body violato ...`
+      #   - unit + closure gates      → TAP (`not ok N`, `✖`)
+      #   - verdetto della review     → `::error::Nessuna review Claude approvante ...`
+      #   - gate di `generator-ci`    → `::error::generator-ci-gate: ... = failure`
+      # Con il solo filtro TAP, un rosso delle altre tre produce un `failing.txt`
+      # che dice `# fail 0` mentre il vero rosso resta fuori: e' esattamente il
+      # «peggio di nessun contesto» che il paragrafo qui sopra dichiara di voler
+      # evitare. Quindi si raccolgono anche le righe `::error::`.
+      #
+      # E per `generator-ci` non basta nemmeno quello: quel gate ATTENDE un
+      # check-run prodotto da un ALTRO workflow, quindi il log del fallimento non
+      # e' nella run di `tests` che stiamo leggendo. Quando il blocco `::error::`
+      # nomina quel gate si scarica anche il log fallito di `generator-ci.yml`
+      # sullo STESSO sha — altrimenti l'agente vedrebbe «generator-ci e' rosso» e
+      # nient'altro, cioe' un verdetto senza la diagnosi che serve per ripararlo.
       - name: Collect failing check context (zero-Claude)
         id: ctx
         if: steps.guard.outputs.proceed == 'true'
@@ -379,6 +407,7 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REPO: ${{ github.repository }}
           FAILED_RUN_ID: ${{ needs.preflight.outputs.failed_run_id }}
+          HEAD_SHA: ${{ needs.preflight.outputs.head_sha }}
         run: |
           set -uo pipefail
           OUT="$RUNNER_TEMP/redcheck"
@@ -394,25 +423,56 @@ jobs:
             # Il log CI porta gli escape ANSI come TESTO, non come byte: vanno
             # tolti o il grep sui nomi dei test non aggancia niente.
             sed -e 's/\x1b\[[0-9;]*m//g' -e 's/\^\[\[[0-9;]*m//g' "$OUT/raw.log" > "$OUT/clean.log"
+            strip='s/^[^\t]*\t[^\t]*\t[0-9T:.Z-]*//'
+            grep -E '::error::' "$OUT/clean.log" | sed "$strip" | sort -u | head -20 > "$OUT/errors.txt" || : > "$OUT/errors.txt"
             {
+              echo "### Gate falliti (righe \`::error::\`)"
+              if [ -s "$OUT/errors.txt" ]; then cat "$OUT/errors.txt"; else echo "(nessuna)"; fi
+              echo
               echo "### Test falliti (TAP: righe \`not ok\` e \`✖\`)"
               grep -E '(^|[[:space:]])(not ok [0-9]+|✖) ' "$OUT/clean.log" \
-                | sed 's/^[^\t]*\t[^\t]*\t[0-9T:.Z-]*//' | sort -u | head -40
+                | sed "$strip" | sort -u | head -40
               echo
               echo "### Riepilogo node --test"
               grep -E '^[^\t]*\t[^\t]*\t[0-9T:.Z-]*[[:space:]]*# (tests|pass|fail|cancelled) ' "$OUT/clean.log" \
-                | sed 's/^[^\t]*\t[^\t]*\t[0-9T:.Z-]*//' | sort -u | head -10
+                | sed "$strip" | sort -u | head -10
               echo
               echo "### Estratto attorno al primo fallimento"
-              grep -n -m1 -E '(^|[[:space:]])(not ok [0-9]+|✖) ' "$OUT/clean.log" | cut -d: -f1 | while read -r n; do
+              grep -n -m1 -E '(^|[[:space:]])(not ok [0-9]+|✖|::error::)' "$OUT/clean.log" | cut -d: -f1 | while read -r n; do
                 sed -n "$((n)),$((n+120))p" "$OUT/clean.log"
               done
             } > "$OUT/failing.txt" 2>/dev/null || true
+
+            # `generator-ci` fallisce in un'ALTRA run: il gate dentro `tests` si
+            # limita a leggerne il check-run. Senza questo blocco l'agente
+            # leggerebbe «generator-ci e' rosso» e nient'altro — un verdetto
+            # senza la diagnosi che serve per ripararlo.
+            if grep -q 'generator-ci-gate' "$OUT/errors.txt" 2>/dev/null; then
+              GEN_RUN=$(gh run list --repo "$REPO" --workflow=generator-ci.yml --limit 20 \
+                --json databaseId,headSha,conclusion \
+                --jq "[.[] | select(.headSha==\"$HEAD_SHA\" and .conclusion==\"failure\")][0].databaseId" 2>/dev/null || echo "")
+              if [ -n "$GEN_RUN" ] && [ "$GEN_RUN" != "null" ]; then
+                gh run view "$GEN_RUN" --repo "$REPO" --log-failed 2>/dev/null \
+                  | sed -e 's/\x1b\[[0-9;]*m//g' -e 's/\^\[\[[0-9;]*m//g' > "$OUT/gen.log" || : > "$OUT/gen.log"
+                {
+                  echo
+                  echo "### generator-ci (run $GEN_RUN, workflow SEPARATO — e' li' che vive il fallimento)"
+                  grep -E '(^|[[:space:]])(not ok [0-9]+|✖|::error::|Error:|AssertionError)' "$OUT/gen.log" \
+                    | sed "$strip" | sort -u | head -30
+                  echo
+                  echo "#### Estratto"
+                  tail -c 6000 "$OUT/gen.log"
+                } >> "$OUT/failing.txt" 2>/dev/null || true
+              else
+                echo "::warning::generator-ci-gate rosso ma nessuna run fallita di generator-ci.yml trovata su $HEAD_SHA — il gate potrebbe essere scaduto in attesa (pending oltre il tetto) invece che fallito."
+                printf '\n### generator-ci\nIl gate ha dichiarato rosso ma non esiste una run FALLITA di generator-ci.yml su questo sha: probabile timeout in attesa, non un fallimento dei suoi test.\n' >> "$OUT/failing.txt"
+              fi
+            fi
           fi
 
           # Cap duro: il contesto non deve diventare esso stesso il consumatore
           # di turni che questo step esiste per evitare.
-          head -c 24000 "$OUT/failing.txt" > "$OUT/failing.trim" 2>/dev/null || : > "$OUT/failing.trim"
+          head -c 32000 "$OUT/failing.txt" > "$OUT/failing.trim" 2>/dev/null || : > "$OUT/failing.trim"
           mv "$OUT/failing.trim" "$OUT/failing.txt"
           echo "contesto raccolto: $(wc -c < "$OUT/failing.txt") byte."
           sed -n '1,25p' "$OUT/failing.txt"
