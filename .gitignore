@@ -10,3 +10,10 @@ data/events.json
 # LOCAL: committing it would conflict on every concurrent article.
 public/images/blog/thumbnails/.thumbcache.json
 public/images/places/thumbnails/.thumbcache.json
+
+# CLAUDE.md resta LOCALE, come nel sito (riga 1 del suo .gitignore). Le regole
+# di questo repo stanno in AGENTS.md, che e' versionato e sorvegliato dal
+# manifest del ciclo. Un CLAUDE.md committato conterrebbe solo il blocco
+# generato da GitNexus: zero regole, proprio dove un agente cerca le
+# non-negoziabili del corpus.
+CLAUDE.md
