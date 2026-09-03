@@ -2680,8 +2680,8 @@
       "reason": "Rilevatore dei branch `fix/issue-N` che una run morta `max-turns` ha pushato senza mai aprire una PR: misurati 10 branch, 12 commit, zero PR (2026-08-13). Nessuno strato del ciclo li vede, perche' stale-pr-rescuer e recycle-stale-prs raccolgono PR e questi branch non ne hanno mai avuta una. Corpus-only perche' la domanda e' sul REPO, non sulla regola: i branch orfani sono diversi nei due repo. Il predicato puro che al sito servirebbe (`classifyMaxTurnsRun`) sta qui e non in `harvest-agent-lessons.mjs`, che e' `identical`: se il sito lo adottera', il grado giusto diventera' `identical`.",
       "baseline": {
         "site": null,
-        "corpus": "73e560e3faa36676",
-        "alignedAt": "2026-08-13"
+        "corpus": "59e9973b0b93a612",
+        "alignedAt": "2026-09-03"
       }
     },
     {
