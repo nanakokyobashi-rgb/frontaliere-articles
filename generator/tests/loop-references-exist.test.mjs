@@ -230,6 +230,26 @@ const resolveToken = (token) => (token.includes('/') ? token : `${WORKFLOW_DIR}/
  *   `data`         — il token NON è un riferimento: è un nome di file usato come
  *                    DATO (voce di una allow/deny-list). Non deve risolvere a
  *                    niente, qui o altrove.
+ *   `retired`      — il referente NON esiste più su NESSUNO dei due repo, e la
+ *                    citazione è prosa storica: descrive com'era organizzato il
+ *                    ciclo, non un file da cui qualcosa dipende. È nato il
+ *                    2026-09-03, quando la Claude review è stata assorbita in
+ *                    `tests.yml` su entrambi i lati e i quattro workflow che
+ *                    facevano review e merge sono spariti: undici file
+ *                    `identical` continuavano a nominarli in un commento.
+ *
+ *                    NON è un `site-only` travestito, e la differenza è
+ *                    operativa: `site-only` dice «vai a cercarlo là», e su un
+ *                    referente cancellato quella è un'istruzione falsa.
+ *
+ *                    `retired` è ammesso SOLO quando il file citante è
+ *                    `identical` nel manifest: lì riscrivere la frase qui
+ *                    fabbricherebbe un `corpus-ahead` su un commento, e la
+ *                    correzione va fatta sul sito e fatta scendere. Su un file
+ *                    `adapted` o `corpus-only` la frase si riscrive e basta —
+ *                    ed è ciò che questa stessa PR ha fatto per le altre
+ *                    ventiquattro citazioni. Il vincolo è verificato: vedi il
+ *                    test «`retired` solo su file `identical`».
  */
 const DECLARED_ABSENT = {
   'scripts/ci/followup-drainer.mjs :: mirror-articles-engine.yml': {
@@ -257,13 +277,6 @@ const DECLARED_ABSENT = {
       'nominato per dire che porta `content/` ed e\' dispatch-only (in via di cancellazione), ' +
       'cioe\' che nemmeno lui porta `generator/`. Se venisse cancellato davvero l\'affermazione ' +
       'del body diventa piu\' vera, non meno: e\' il caso in cui l\'assenza non rompe niente.',
-  },
-  '.github/workflows/auto-merge-on-lgtm.yml :: scripts/load-rc-env.mjs': {
-    kind: 'renamed-here',
-    insteadOf: 'generator/scripts/load-rc-env.mjs',
-    reason:
-      'Citazione CONTRASTIVA: la riga nomina il path del sito per dire che qui il ponte RC ' +
-      'non e\' quello. Il testo e\' corretto cosi\' com\'e\'; e\' il grep a non poterlo sapere.',
   },
   'scripts/ci/alert-pat-down.mjs :: scripts/load-rc-env.mjs': {
     kind: 'renamed-here',
@@ -1385,6 +1398,105 @@ const DECLARED_ABSENT = {
       'ESCLUSIVAMENTE nel sito; questo file e\' il bersaglio, non il chiamante. ' +
       'Descrittiva.',
   },
+  'scripts/ci/claude-rate-limit.mjs :: pr-review-loop.yml': {
+    kind: 'retired',
+    reason:
+      'Il referente e\' sparito da ENTRAMBI i repo il 2026-09-03: la Claude review vive ora ' +
+      'dentro `tests.yml` e i quattro workflow che facevano review, contratto del body e ' +
+      'merge non esistono piu\'. La frase qui e\' storica e descrittiva — nota che il vecchio reviewer gestiva gia\' il 429 dal suo lato, e quel comportamento e\' stato portato nello step di tests.yml. ' +
+      'Il file e\' `identical` nel manifest: riscriverla qui fabbricherebbe un `corpus-ahead` ' +
+      'su un commento, quindi la correzione va fatta sul sito e fatta scendere.',
+  },
+  'scripts/ci/fetch-pr-files.mjs :: pr-review-loop.yml': {
+    kind: 'retired',
+    reason:
+      'Il referente e\' sparito da ENTRAMBI i repo il 2026-09-03: la Claude review vive ora ' +
+      'dentro `tests.yml` e i quattro workflow che facevano review, contratto del body e ' +
+      'merge non esistono piu\'. La frase qui e\' storica e descrittiva — elenca i due chiamanti storici del CLI, che oggi sono il tier-gate dentro tests.yml e pr-redflag-fixer.yml. ' +
+      'Il file e\' `identical` nel manifest: riscriverla qui fabbricherebbe un `corpus-ahead` ' +
+      'su un commento, quindi la correzione va fatta sul sito e fatta scendere.',
+  },
+  'scripts/ci/harvest-agent-lessons.mjs :: pr-body-contract.yml': {
+    kind: 'retired',
+    reason:
+      'Il referente e\' sparito da ENTRAMBI i repo il 2026-09-03: la Claude review vive ora ' +
+      'dentro `tests.yml` e i quattro workflow che facevano review, contratto del body e ' +
+      'merge non esistono piu\'. La frase qui e\' storica e descrittiva — nomina il vecchio workflow del contratto del body, ora uno step di tests.yml. ' +
+      'Il file e\' `identical` nel manifest: riscriverla qui fabbricherebbe un `corpus-ahead` ' +
+      'su un commento, quindi la correzione va fatta sul sito e fatta scendere.',
+  },
+  'scripts/ci/lib/fetchPrFiles.mjs :: pr-review-loop.yml': {
+    kind: 'retired',
+    reason:
+      'Il referente e\' sparito da ENTRAMBI i repo il 2026-09-03: la Claude review vive ora ' +
+      'dentro `tests.yml` e i quattro workflow che facevano review, contratto del body e ' +
+      'merge non esistono piu\'. La frase qui e\' storica e descrittiva — porta la stessa lista di chiamanti storici del CLI che lo avvolge. ' +
+      'Il file e\' `identical` nel manifest: riscriverla qui fabbricherebbe un `corpus-ahead` ' +
+      'su un commento, quindi la correzione va fatta sul sito e fatta scendere.',
+  },
+  'scripts/ci/lib/reopen-breaker.mjs :: pr-review-loop.yml': {
+    kind: 'retired',
+    reason:
+      'Il referente e\' sparito da ENTRAMBI i repo il 2026-09-03: la Claude review vive ora ' +
+      'dentro `tests.yml` e i quattro workflow che facevano review, contratto del body e ' +
+      'merge non esistono piu\'. La frase qui e\' storica e descrittiva — ricorda che il reviewer girava solo su workflow_run success: il vincolo «niente review su codice rosso» regge ancora, ora per fail-fast dentro il job. ' +
+      'Il file e\' `identical` nel manifest: riscriverla qui fabbricherebbe un `corpus-ahead` ' +
+      'su un commento, quindi la correzione va fatta sul sito e fatta scendere.',
+  },
+  'scripts/ci/lib/vitestCheck.mjs :: pr-review-loop.yml': {
+    kind: 'retired',
+    reason:
+      'Il referente e\' sparito da ENTRAMBI i repo il 2026-09-03: la Claude review vive ora ' +
+      'dentro `tests.yml` e i quattro workflow che facevano review, contratto del body e ' +
+      'merge non esistono piu\'. La frase qui e\' storica e descrittiva — ripete in due punti del docblock la stessa nota sul trigger workflow_run. ' +
+      'Il file e\' `identical` nel manifest: riscriverla qui fabbricherebbe un `corpus-ahead` ' +
+      'su un commento, quindi la correzione va fatta sul sito e fatta scendere.',
+  },
+  'scripts/ci/mark-claude-terminal-outcome.mjs :: pr-review-loop.yml': {
+    kind: 'retired',
+    reason:
+      'Il referente e\' sparito da ENTRAMBI i repo il 2026-09-03: la Claude review vive ora ' +
+      'dentro `tests.yml` e i quattro workflow che facevano review, contratto del body e ' +
+      'merge non esistono piu\'. La frase qui e\' storica e descrittiva — cita la precedenza max_turns-prima-di-429 che il vecchio reviewer applicava e che lo step di tests.yml applica ancora. ' +
+      'Il file e\' `identical` nel manifest: riscriverla qui fabbricherebbe un `corpus-ahead` ' +
+      'su un commento, quindi la correzione va fatta sul sito e fatta scendere.',
+  },
+  'scripts/ci/pr-autorebase.mjs :: pr-review-loop.yml': {
+    kind: 'retired',
+    reason:
+      'Il referente e\' sparito da ENTRAMBI i repo il 2026-09-03: la Claude review vive ora ' +
+      'dentro `tests.yml` e i quattro workflow che facevano review, contratto del body e ' +
+      'merge non esistono piu\'. La frase qui e\' storica e descrittiva — descrive quale workflow riparte dopo un rebase: oggi e\' `tests`, e con esso la review. ' +
+      'Il file e\' `identical` nel manifest: riscriverla qui fabbricherebbe un `corpus-ahead` ' +
+      'su un commento, quindi la correzione va fatta sul sito e fatta scendere.',
+  },
+  'scripts/ci/pr-contribution-fingerprint.mjs :: pr-review-loop.yml': {
+    kind: 'retired',
+    reason:
+      'Il referente e\' sparito da ENTRAMBI i repo il 2026-09-03: la Claude review vive ora ' +
+      'dentro `tests.yml` e i quattro workflow che facevano review, contratto del body e ' +
+      'merge non esistono piu\'. La frase qui e\' storica e descrittiva — nomina il re-review guard che consuma questo fingerprint, ora dentro tests.yml. ' +
+      'Il file e\' `identical` nel manifest: riscriverla qui fabbricherebbe un `corpus-ahead` ' +
+      'su un commento, quindi la correzione va fatta sul sito e fatta scendere.',
+  },
+  'scripts/lib/pr-body-closes-check.mjs :: pr-body-contract.yml': {
+    kind: 'retired',
+    reason:
+      'Il referente e\' sparito da ENTRAMBI i repo il 2026-09-03: la Claude review vive ora ' +
+      'dentro `tests.yml` e i quattro workflow che facevano review, contratto del body e ' +
+      'merge non esistono piu\'. La frase qui e\' storica e descrittiva — nomina il workflow che usava il modulo, ora uno step di tests.yml. ' +
+      'Il file e\' `identical` nel manifest: riscriverla qui fabbricherebbe un `corpus-ahead` ' +
+      'su un commento, quindi la correzione va fatta sul sito e fatta scendere.',
+  },
+  'scripts/lib/pr-body-sections-check.mjs :: pr-body-contract.yml': {
+    kind: 'retired',
+    reason:
+      'Il referente e\' sparito da ENTRAMBI i repo il 2026-09-03: la Claude review vive ora ' +
+      'dentro `tests.yml` e i quattro workflow che facevano review, contratto del body e ' +
+      'merge non esistono piu\'. La frase qui e\' storica e descrittiva — porta la stessa citazione del modulo gemello. ' +
+      'Il file e\' `identical` nel manifest: riscriverla qui fabbricherebbe un `corpus-ahead` ' +
+      'su un commento, quindi la correzione va fatta sul sito e fatta scendere.',
+  },
 };
 
 // Prima del rollout, i caller reusable esistenti richiedono le dichiarazioni
@@ -1397,7 +1509,7 @@ const ACTIVE_DECLARED_ABSENT = Object.fromEntries(
   ),
 );
 
-const KINDS = new Set(['site-only', 'renamed-here', 'example', 'data']);
+const KINDS = new Set(['site-only', 'renamed-here', 'example', 'data', 'retired']);
 const exists = (rel) => fs.existsSync(path.join(ROOT, rel));
 
 function sourceFiles() {
@@ -1579,6 +1691,35 @@ test('il registro delle assenze dichiarate è ben formato', () => {
     if (d.kind !== 'renamed-here' && d.insteadOf) bad.push(`${key}: insteadOf ha senso solo per 'renamed-here'`);
   }
   assert.deepEqual(bad, [], `Voci malformate in DECLARED_ABSENT:\n  ${bad.join('\n  ')}`);
+});
+
+test("`retired` solo su file `identical`", () => {
+  // `retired` dice «il referente non esiste più da nessuna parte, e la frase è
+  // storica». È una dichiarazione onesta esattamente quando riscriverla qui
+  // sarebbe DANNOSO — cioè sul file `identical`, dove un'edit locale fabbrica
+  // un `corpus-ahead` su un commento e la correzione appartiene al sito.
+  //
+  // Su un file `adapted` o `corpus-only` quella scusa non esiste: la frase si
+  // riscrive, e questo assert impedisce che `retired` diventi la scorciatoia
+  // per non farlo. È lo stesso principio per cui non esiste un kind per
+  // «assente ma portante».
+  const manifest = JSON.parse(
+    fs.readFileSync(path.join(ROOT, 'scripts/ci/loop-sync-manifest.json'), 'utf8'),
+  );
+  const modeOf = new Map(manifest.files.map((f) => [f.path, f.mode]));
+  const bad = [];
+  for (const [key, d] of Object.entries(ACTIVE_DECLARED_ABSENT)) {
+    if (d.kind !== 'retired') continue;
+    const citing = key.split(' :: ')[0];
+    const mode = modeOf.get(citing);
+    if (mode !== 'identical') {
+      bad.push(
+        `${key}: il file citante è '${mode ?? 'fuori manifest'}', non 'identical' — ` +
+          'riscrivi la frase invece di dichiararla `retired`.',
+      );
+    }
+  }
+  assert.deepEqual(bad, [], `\`retired\` usato dove la frase andava riscritta:\n  ${bad.join('\n  ')}`);
 });
 
 test("una dichiarazione 'renamed-here' deve indicare un file che esiste davvero qui", () => {

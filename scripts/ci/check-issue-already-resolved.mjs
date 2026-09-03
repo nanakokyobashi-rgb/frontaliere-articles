@@ -29,7 +29,7 @@
  *   - If an open PR already references the issue (in-flight) → proceed (work in progress,
  *     status-quo token still present is expected).
  *   - Ambiguous / weak / no match → DO NOTHING, exit 0 with already_resolved=false → the
- *     normal fixer runs unchanged. The cascade (issue-fix → pr-review-loop → auto-merge)
+ *     normal fixer runs unchanged. The cascade (issue-fix → tests+review → auto-merge)
  *     is untouched for every non-short-circuited issue.
  *
  * On short-circuit it removes `agent:fix` (so the issue is not re-dispatched), adds
@@ -160,7 +160,7 @@ export function isAggregate(title, body) {
   // title happens to contain "batch"/"sweep"/"bulk" as an ordinary word
   // (e.g. "batch backfill re-checks tier-3...") was misclassified as an
   // aggregate despite explicitly saying "1 item deferred" — a false-positive
-  // that wrongly blocked `pr-body-contract` on a fully-completed single item
+  // that wrongly blocked the PR-body contract gate on a fully-completed single item
   // (#3378).
   if (m) return Number(m[1]) >= 2;
   return /\b(?:sweep|batch|bulk)\b/i.test(text);

@@ -83726,6 +83726,162 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-frontaliere-730-ristorni-2026': {
+    title: 'Detrazioni fiscali frontalieri Italia 2026 | Frontaliere Ticino',
+    description: 'Nuovo Accordo Frontalieri dal 2024: come recuperare le tasse con il 730. Esenzione €7.500 (vecchi) vs €10.000 (nuovi). Ristorni e credito d\'imposta spiegati.',
+    keywords: 'frontalieri, ticino, svizzera, italia, detrazioni, fiscali, nuovo, accordo',
+    ogTitle: 'Detrazioni fiscali frontalieri Italia 2026',
+    ogDescription: 'Nuovo Accordo Frontalieri dal 2024: come recuperare le tasse con il 730. Esenzione €7.500 (vecchi) vs €10.000 (nuovi). Ristorni e credito d\'imposta spiegati.',
+    canonicalPath: '/articoli-frontaliere/frontaliere-730-ristorni-2026',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Detrazioni fiscali frontalieri Italia 2026",
+      "description": "Nuovo Accordo Frontalieri dal 2024: come recuperare le tasse con il 730. Esenzione €7.500 (vecchi) vs €10.000 (nuovi). Ristorni e credito d'imposta spiegati.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/frontaliere-730-ristorni-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Lugano al confine CH-Italia: fulcro del lavoro transfrontaliero e della tassazione"
+      },
+      "datePublished": "2026-09-03T08:45:12+00:00",
+      "dateModified": "2026-09-03T08:45:12+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/frontaliere-730-ristorni-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-frontaliere-dichiarazione-730-2026': {
+    title: 'Frontaliere: dichiarazione 730 e credito d\'imposta',
+    description: 'Guida completa al 730 per frontalieri Italia 2026: credito d\'imposta, doppia imposizione, franchigie €7\'500–€10\'000, nuovo accordo 2024, procedure.',
+    keywords: 'frontalieri, ticino, svizzera, italia, dichiarazione, credito, imposta, pratica',
+    ogTitle: 'Frontaliere 730: credito d\'imposta 2026',
+    ogDescription: 'Scopri come il frontaliere dichiara il reddito in Italia evitando doppia imposizione. Credito d\'imposta, nuovo accordo 2024, franchigie, procedure e scadenze spiegate passo dopo passo.',
+    canonicalPath: '/articoli-frontaliere/frontaliere-dichiarazione-730-2026',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Frontaliere: dichiarazione 730 e credito d'imposta",
+      "description": "Guida completa al 730 per frontalieri Italia 2026: credito d'imposta, doppia imposizione, franchigie €7'500–€10'000, nuovo accordo 2024, procedure.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/frontaliere-dichiarazione-730-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Modulo 730 con documenti fiscali, calcolatrice e banconote svizzere su scrivania in legno"
+      },
+      "datePublished": "2026-09-03T09:01:24+00:00",
+      "dateModified": "2026-09-03T09:01:24+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/frontaliere-dichiarazione-730-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-frontaliere-tassazione-crediti-detrazioni': {
+    title: 'Detrazioni fiscali per frontalieri 2026 | Frontaliere Ticino',
+    description: 'Detrazioni e crediti d\'imposta per chi lavora in Svizzera e risiede in Italia: franchigie €7.500–€10.000, quadro CE, dichiarazione redditi. Dati aggiornati 2026',
+    keywords: 'frontalieri, ticino, svizzera, italia, detrazioni, fiscali, crediti, imposta',
+    ogTitle: 'Detrazioni fiscali per frontalieri 2026',
+    ogDescription: 'Detrazioni e crediti d\'imposta per chi lavora in Svizzera e risiede in Italia: franchigie €7.500–€10.000, quadro CE, dichiarazione redditi.',
+    canonicalPath: '/articoli-frontaliere/frontaliere-tassazione-crediti-detrazioni',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Detrazioni fiscali per frontalieri 2026",
+      "description": "Detrazioni e crediti d'imposta per chi lavora in Svizzera e risiede in Italia: franchigie €7.500–€10.000, quadro CE, dichiarazione redditi. Dati aggiornati 2026",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/frontaliere-tassazione-crediti-detrazioni.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Veduta aerea di Mendrisio e del valico doganale tra Svizzera e Italia al mattino"
+      },
+      "datePublished": "2026-09-03T09:20:22+00:00",
+      "dateModified": "2026-09-03T09:20:22+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/frontaliere-tassazione-crediti-detrazioni/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-bollettino-frontaliere-2026-09-03': {
+    title: 'Bollettino del frontaliere – 3 settembre 2026: 719 nuovi annunci di lavoro ieri',
+    description: 'Bollettino frontalieri del 3 settembre 2026: code ai valichi stamattina, dove la benzina costa meno, cambio franco-euro e nuovi annunci di lavoro in Svizzera.',
+    keywords: 'bollettino frontaliere, dogana, attesa dogana, code valichi ticino, prezzi benzina confine, cambio franco euro, lavoro svizzera, frontalieri ticino',
+    ogTitle: 'Bollettino del frontaliere – 3 settembre 2026: 719 nuovi annunci di lavoro ieri',
+    ogDescription: 'I numeri del 3 settembre 2026 per i frontalieri: quanto si aspetta a ogni valico stamattina, in quali comuni conviene fare il pieno, quanto vale oggi il franco e quanti annunci di lavoro sono usciti in Svizzera.',
+    canonicalPath: '/articoli-frontaliere/bollettino-frontaliere-2026-09-03',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Bollettino del frontaliere – 3 settembre 2026: 719 nuovi annunci di lavoro ieri",
+      "description": "Bollettino frontalieri del 3 settembre 2026: code ai valichi stamattina, dove la benzina costa meno, cambio franco-euro e nuovi annunci di lavoro in Svizzera.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/bollettino-frontaliere-2026-09-03.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "I numeri del giorno per i frontalieri – 3 settembre 2026: attese ai valichi, prezzi benzina, cambio franco-euro e annunci di lavoro"
+      },
+      "datePublished": "2026-09-03T09:32:54+00:00",
+      "dateModified": "2026-09-03T09:32:54+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/samuele-valente/#person",
+        "name": "Samuele Valente",
+        "url": "https://frontaliereticino.ch/autori/samuele-valente/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/bollettino-frontaliere-2026-09-03/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

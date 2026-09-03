@@ -58,8 +58,8 @@ jobs:
     # 10 minuti quel margine si assottiglia abbastanza da rischiare un
     # timeout-kill del job a metà retry, che appare come `cancelled` invece di
     # un fallimento pulito. 15 allinea questo job al resto della famiglia
-    # auto-merge-*/pr-* che gira sullo stesso script (auto-merge-on-lgtm.yml,
-    # auto-merge-sweep.yml, pr-autorebase.yml, pr-redflag-fixer.yml).
+    # auto-merge-*/pr-* che gira sullo stesso script (pr-autorebase.yml,
+    # pr-redflag-fixer.yml).
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@v5
@@ -89,8 +89,8 @@ jobs:
           echo "GOOGLE_APPLICATION_CREDENTIALS=$RUNNER_TEMP/sa.json" >> "$GITHUB_ENV"
 
       - name: Load secrets from Remote Config
-        # Come in ogni altro workflow che invoca questo script (auto-merge-on-lgtm.yml,
-        # auto-merge-sweep.yml, issue-triage.yml, ecc.): lo script esce SEMPRE 0 by
+        # Come in ogni altro workflow che invoca questo script (issue-triage.yml,
+        # followup-drainer.yml, ecc.): lo script esce SEMPRE 0 by
         # design, quindi questo non maschera un fallimento reale — è qui per
         # coerenza con la famiglia e perché il caso "PAT assente" è già gestito
         # esplicitamente allo step di merge sotto (exit 1 con messaggio chiaro),

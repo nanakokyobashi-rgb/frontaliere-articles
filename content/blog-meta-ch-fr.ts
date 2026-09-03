@@ -5269,6 +5269,18 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.emissioni-co2-vcp-2025.title': 'Émissions de CO2 VCP : résultats 2025 et objectifs atteignables',
     'blog.article.emissioni-co2-vcp-2025.excerpt': 'En 2025, les prescriptions CO2 sur les poids lourds entrent en vigueur en Suisse : les importateurs atteignent les cibles avec 20,8% de flotte entièrement électrique.',
     'blog.article.emissioni-co2-vcp-2025.imageAlt': 'Camion électrique sur route suisse avec chaîne alpine en arrière-plan',
+    'blog.article.affitti-benzina-spingono-inflazione.title': 'L\'inflation repart à la hausse au bout de 4 mois',
+    'blog.article.affitti-benzina-spingono-inflazione.excerpt': 'En août, l\'inflation suisse est à 0,8%, après quatre mois de baisse. Loyers et essence entre les causes. La Banque nationale surveille de près.',
+    'blog.article.affitti-benzina-spingono-inflazione.imageAlt': 'Un économiste analyse des graphiques d\'inflation et des données d\'indice des prix à la consommation, vue de Berne.',
+    'blog.article.pil-q2-2026-industria-forte.title': 'PIB Q2 2026 : +1,5% trimestriel, croissance de l\'industrie',
+    'blog.article.pil-q2-2026-industria-forte.excerpt': 'Au Q2 2026, le PIB suisse croît de 1,5% hors événements sportifs, au plus fort depuis 2021. Poussée par l\'industrie chimique et pharmaceutique (+10,5 %) et rebond de la demande intérieure.',
+    'blog.article.pil-q2-2026-industria-forte.imageAlt': 'Gratte-ciel du quartier financier suisse avec graphiques de croissance économique sur écran numérique',
+    'blog.article.calo-natalita-finanze-pubbliche.title': 'Aff : la baisse de la natalité pèse sur les finances suisses',
+    'blog.article.calo-natalita-finanze-pubbliche.excerpt': 'L\'AFF analyse l\'impact du plus bas historique des naissances sur la stabilité des systèmes de sécurité sociale et sur les caisses publiques à long terme.',
+    'blog.article.calo-natalita-finanze-pubbliche.imageAlt': 'Bâtiment de l\'Administration fédérale des finances à Berne.',
+    'blog.article.petizione-delocalizzazioni-svizzera.title': 'Pétition contre la délocalisation de La Poste et Swisscom',
+    'blog.article.petizione-delocalizzazioni-svizzera.excerpt': 'Transfair lance une pétition pour mettre fin aux délocalisations d\'emplois et de savoir-faire à l\'étranger par Poste et Swisscom.',
+    'blog.article.petizione-delocalizzazioni-svizzera.imageAlt': 'Vue aérienne de Bellinzona, Suisse, avec des châteaux historiques et des infrastructures modernes.',
 };
 
 export default blogMetaChFr;

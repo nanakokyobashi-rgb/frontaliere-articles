@@ -103,8 +103,14 @@ superficie servita al sito resta vecchia in silenzio.
 
 ## Il ciclo autonomo
 
-Le PR ricevono una review automatica (`pr-review-loop`) e vengono mergiate
-quando sono verdi (`auto-merge-on-lgtm`). I workflow che falliscono aprono una
+Le PR ricevono una review automatica e vengono mergiate quando sono verdi. Dal
+2026-09-03 sono la STESSA cosa: contratto del body, test e Claude review col suo
+verdetto sono le tre famiglie di step di `tests.yml`, che produce il check-run
+`tests (node --test)`; il ruleset su `main` richiede quel check e l'auto-merge
+NATIVO di GitHub aspetta lui. Un `🔴 Important` rende rosso quel check, quindi il
+merge non puo' scavalcare la review. `enable-native-automerge.yml` si limita ad
+arruolare la PR nel meccanismo, con l'identita' del PAT owner perche' il merge
+faccia scattare `publish-api.yml`. I workflow che falliscono aprono una
 issue (`workflow-failure-issues`), che viene classificata e instradata
 (`issue-triage`) e infine lavorata dal fixer (`issue-fix`), una alla volta.
 

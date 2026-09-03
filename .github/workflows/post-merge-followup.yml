@@ -245,7 +245,7 @@ jobs:
           #
           # E la correlazione regge in modo esatto, che è ciò che le due ipotesi
           # precedenti non facevano: `allowed_non_write_users` è valorizzato in
-          # QUESTO workflow e in nessun altro del repo — issue-fix, pr-review-loop,
+          # QUESTO workflow e in nessun altro del repo — issue-fix, la review in tests.yml,
           # pr-redflag-fixer e lessons-harvester non ce l'hanno, e nessuno dei
           # quattro ha il guasto. Non era né il proxy Headroom né lo scoped
           # `--allowedTools` (lessons-harvester usa `--allowedTools` ed è sano).
@@ -277,7 +277,7 @@ jobs:
           # actor bot distinti — entrambi vanno in whitelist o claude-code-action aborta
           # "Workflow initiated by non-human actor":
           #  - `frontaliere-automation[bot]`: actor del path PRIMARIO di cascade
-          #    post-LGTM (`auto-merge-on-lgtm.yml` mergia con APP_TOKEN). CORREZIONE
+          #    post-LGTM (l'auto-merge mergia con l'identita' del PAT). CORREZIONE
           #    2026-07-01: l'assunzione "lo schedule gira come github-actions[bot]" era
           #    sbagliata — `triggering_actor` osservato sui run schedulati è
           #    `frontaliere-automation[bot]` (ultimo autore del commit che ha introdotto
@@ -310,7 +310,7 @@ jobs:
           # workflow gira su `schedule`) risolvono `permissionMode` a "default"
           # nonostante il flag, bloccando quasi ogni Bash con "requires approval"
           # (confermato sul run 28594653701 di oggi, 13:43Z: 36 blocchi, zero
-          # comment postato). pr-review-loop.yml (trigger `workflow_run`) e
+          # comment postato). La review dentro tests.yml (trigger `pull_request`) e
           # issue-fix.yml (trigger `issues`) invece OTTENGONO bypassPermissions
           # regolarmente con la stessa config — il pattern correla con
           # l'event_name del trigger (schedule/workflow_dispatch → sempre bloccato,

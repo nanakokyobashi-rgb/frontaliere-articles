@@ -292,7 +292,8 @@ jobs:
           # Gli eventi generati dal GITHUB_TOKEN non ri-attivano i workflow a
           # valle (anti-ricorsione di GitHub), quindi con quel fallback una PR
           # aperta durante un caricamento RC fallito non riceverebbe piu' ne'
-          # `tests` ne' `pr-review-loop`: resterebbe ferma e verde per sempre.
+          # `tests`, quindi nemmeno la review che vive dentro `tests`:
+          # resterebbe ferma e verde per sempre.
           # La stringa vuota e' invece il ramo di DEFAULT documentato
           # dell'action, che in quel caso conia un token proprio e lo revoca a
           # fine run — cioe' esattamente il comportamento di oggi.

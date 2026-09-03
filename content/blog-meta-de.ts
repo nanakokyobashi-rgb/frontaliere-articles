@@ -11201,6 +11201,20 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.sciopero-treni-settembre-2026.title': 'Streik der Züge vom 7. bis 8. September: 24 Stunden Stopp',
     'blog.article.sciopero-treni-settembre-2026.excerpt': 'Der von Cub Trasporti und Sgb proklamierte nationale Protest wird die Mitarbeiter der Gruppe Fs, Trenitalia und Trenord einbeziehen. Garantieleistungen und Ersatzbusse für die Verbindung mit Malpensa sind vorgesehen.',
     'blog.article.sciopero-treni-settembre-2026.imageAlt': 'Luftaufnahme eines Bahnhofs in Tessin während eines Streiks, mit Bussen, die den Zugverkehr ersetzen.',
+    'blog.article.frontaliere-730-ristorni-2026.title': 'Grenzsteuerabzüge Italien 2026',
+    'blog.article.frontaliere-730-ristorni-2026.excerpt': 'Neue Frontalieri-Vereinbarung ab 2024: So erhalten Sie die Steuern mit der 730 zurück. Befreiung € 7.500 (alt) vs. € 10.000 (neu). Restaurants und Steuergutschriften erklärt.',
+    'blog.article.frontaliere-730-ristorni-2026.imageAlt': 'Lugano an der Schweiz-Italien-Grenze: Zentrum der Grenzarbeit und Doppelbesteuerung',
+    'blog.article.frontaliere-dichiarazione-730-2026.title': 'Frontend: Erklärung 730 und Steuergutschrift',
+    'blog.article.frontaliere-dichiarazione-730-2026.excerpt': 'Ein praktischer Leitfaden zur Abgabe der Steuererklärung 730 für Grenzgänger im Jahr 2026: Wie man die Steuergutschrift erhält, Doppelbesteuerung vermeidet und welche neuen Ausnahmen es im Rahmen des neuen Abkommens gibt.',
+    'blog.article.frontaliere-dichiarazione-730-2026.imageAlt': 'Italienisches Steuerformular 730 mit Dokumenten, Taschenrechner und Schweizer Banknoten auf Schreibtisch',
+    'blog.article.frontaliere-tassazione-crediti-detrazioni.title': 'Steuerabzüge für Grenzgänger 2026',
+    'blog.article.frontaliere-tassazione-crediti-detrazioni.excerpt': 'Steuerabzüge und -gutschriften für diejenigen, die in der Schweiz arbeiten und in Italien wohnen: Selbstbehalte€ 7.500- € 10.000, CE-Rahmen, Steuererklärung.',
+    'blog.article.frontaliere-tassazione-crediti-detrazioni.imageAlt': 'Luftaufnahme von Mendrisio und der Schweizer-italienischen Zollgrenze',
+    'blog.article.bollettino-frontaliere-2026-09-03.title': 'Grenzgänger-Tagesbulletin – 3. September 2026: 719 neue Stellenangebote gestern',
+    'blog.article.bollettino-frontaliere-2026-09-03.excerpt': 'Die Zahlen von heute, 3. September 2026, für Grenzgänger: die heute Morgen gemessenen Wartezeiten an den Übergängen, die Gemeinden mit dem günstigsten Benzin, der Franken-Euro-Kurs vom Schlusskurs und die neu ausgeschriebenen Stellen in der Schweiz. Täglich aus unserem Monitoring.',
+    'blog.article.bollettino-frontaliere-2026-09-03.imageAlt': 'Die Zahlen des Tages für Grenzgänger – 3. September 2026: Wartezeiten, Benzinpreise, CHF-EUR-Kurs und Stellenangebote',
+    'blog.article.bollettino-frontaliere-2026-09-03.seoDescription': 'Grenzgänger-Bulletin vom 3. September 2026: Wartezeiten an den Grenzübergängen, günstigstes Benzin, Franken-Euro-Kurs und neue Stellenangebote in der Schweiz.',
+    'blog.article.bollettino-frontaliere-2026-09-03.ogDescription': 'Die Zahlen vom 3. September 2026 für Grenzgänger: wie lange man heute Morgen an jedem Übergang wartet, in welchen Gemeinden das Benzin am günstigsten ist, was der Franken heute wert ist und wie viele Stellen neu dazugekommen sind.',
 };
 
 export default blogMetaDe;

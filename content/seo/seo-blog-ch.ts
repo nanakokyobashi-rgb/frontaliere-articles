@@ -68387,6 +68387,162 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-affitti-benzina-spingono-inflazione': {
+    title: 'L\'inflazione torna a salire dopo 4 mesi | Frontaliere Ticino',
+    description: 'Inflazione agosto 0,8%, risalita dopo 4 mesi. Affitti, benzina le cause. BNS monitora. Prossima riunione 24 settembre. Leggi impatto sul costo della vita.',
+    keywords: 'frontalieri, ticino, svizzera, italia, inflazione, torna, salire, dopo',
+    ogTitle: 'L\'inflazione torna a salire dopo 4 mesi',
+    ogDescription: 'Inflazione svizzera agosto 0,8%, risalita dopo 4 mesi. Affitti e benzina tra le cause principali di rincaro. BNS monitorizza il trend con obiettivo 0-2%. Prossima riunione 24 settembre. Scopri l\'impatto sul costo della vita e cosa aspettarsi',
+    canonicalPath: '/articoli-svizzera/affitti-benzina-spingono-inflazione/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "L'inflazione torna a salire dopo 4 mesi",
+      "description": "Inflazione agosto 0,8%, risalita dopo 4 mesi. Affitti, benzina le cause. BNS monitora. Prossima riunione 24 settembre. Leggi impatto sul costo della vita.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/affitti-benzina-spingono-inflazione.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Un economista analizza grafici di inflazione e indice dei prezzi al consumo, con vista su Berna di sfondo."
+      },
+      "datePublished": "2026-09-03T08:35:51+00:00",
+      "dateModified": "2026-09-03T08:35:51+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/affitti-benzina-spingono-inflazione/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-pil-q2-2026-industria-forte': {
+    title: 'PIL Q2 2026: +1,5% trimestrale, crescita industria',
+    description: 'Nel Q2 2026 il PIL svizzero cresce dell\'1,5% al netto degli eventi sportivi, più forte dal 2021. Spinta dall\'industria chimico-farmaceutica (+10,5%) e rimbalzo',
+    keywords: 'frontalieri, ticino, svizzera, italia, trimestrale, crescita, industria, svizzero',
+    ogTitle: 'PIL Q2 2026: +1,5% trimestrale, crescita industria',
+    ogDescription: 'Nel Q2 2026 il PIL svizzero cresce dell\'1,5% al netto degli eventi sportivi, più forte dal 2021. Spinta dall\'industria chimico-farmaceutica (+10,5%) e rimbalzo della domanda interna.',
+    canonicalPath: '/articoli-svizzera/pil-q2-2026-industria-forte/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "PIL Q2 2026: +1,5% trimestrale, crescita industria",
+      "description": "Nel Q2 2026 il PIL svizzero cresce dell'1,5% al netto degli eventi sportivi, più forte dal 2021. Spinta dall'industria chimico-farmaceutica (+10,5%) e rimbalzo",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/pil-q2-2026-industria-forte.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Grattacieli del distretto finanziario svizzero con grafici di crescita economica su schermo digitale"
+      },
+      "datePublished": "2026-09-03T08:52:00+00:00",
+      "dateModified": "2026-09-03T08:52:00+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/pil-q2-2026-industria-forte/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-calo-natalita-finanze-pubbliche': {
+    title: 'AFF: il calo della natalità pesa sulle finanze svizzere',
+    description: 'L\'Amministrazione federale delle finanze analizza l\'impatto del calo delle nascite sulla stabilità economica e previdenziale della Svizzera nel documento n. 30.',
+    keywords: 'frontalieri, ticino, svizzera, italia, calo, natalità, pesa, sulle',
+    ogTitle: 'AFF: il calo della natalità pesa sulle finanze svizzere',
+    ogDescription: 'Nuovo documento di lavoro dell\'AFF sui rischi demografici per il sistema di sicurezza sociale e le casse pubbliche svizzere.',
+    canonicalPath: '/articoli-svizzera/calo-natalita-finanze-pubbliche/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "AFF: il calo della natalità pesa sulle finanze svizzere",
+      "description": "L'Amministrazione federale delle finanze analizza l'impatto del calo delle nascite sulla stabilità economica e previdenziale della Svizzera nel documento n. 30.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/calo-natalita-finanze-pubbliche.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Sede dell'Amministrazione federale delle finanze a Berna."
+      },
+      "datePublished": "2026-09-03T09:13:41+00:00",
+      "dateModified": "2026-09-03T09:13:41+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/calo-natalita-finanze-pubbliche/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-petizione-delocalizzazioni-svizzera': {
+    title: 'Petizione contro delocalizzazione di Posta e Swisscom',
+    description: 'Transfair lancia una petizione per fermare la delocalizzazione di posti di lavoro e know-how all\'estero da parte di Posta e Swisscom. Dati aggiornati 2026',
+    keywords: 'frontalieri, ticino, svizzera, italia, petizione, contro, delocalizzazione, posta',
+    ogTitle: 'Petizione contro la delocalizzazione di impieghi all\'estero da parte di Posta e Swisscom',
+    ogDescription: 'Transfair lancia una petizione per fermare la delocalizzazione di posti di lavoro e know-how all\'estero da parte di Posta e Swisscom, aziende in maggioranza di proprietà della Confederazione.',
+    canonicalPath: '/articoli-svizzera/petizione-delocalizzazioni-svizzera/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Petizione contro delocalizzazione di Posta e Swisscom",
+      "description": "Transfair lancia una petizione per fermare la delocalizzazione di posti di lavoro e know-how all'estero da parte di Posta e Swisscom. Dati aggiornati 2026",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/petizione-delocalizzazioni-svizzera.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista aerea di Bellinzona, Svizzera, con i castelli storici e l'infrastruttura moderna."
+      },
+      "datePublished": "2026-09-03T09:30:21+00:00",
+      "dateModified": "2026-09-03T09:30:21+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/petizione-delocalizzazioni-svizzera/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

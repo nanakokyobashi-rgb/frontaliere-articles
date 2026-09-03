@@ -1,0 +1,71 @@
+name: Orphan push warn
+
+# Un `git push` sul branch di una PR gia' MERGED riesce comunque: GitHub lo
+# accetta, il commit resta fuori da `main`, e nessuno lo dice. Non e' un errore,
+# e' un'ASSENZA — la stessa classe di difetto che `loop-workflow-triggers.test.mjs`
+# sorveglia. E' successo a monte della #524: il commit di fix della #523 e'
+# atterrato dopo l'auto-merge ed e' rimasto orfano.
+#
+# Questo job e' SEGNALE, non blocco: commenta sulla PR (numero + sha) ed esce 0.
+#
+# ── PERCHE' E' UN WORKFLOW A SE' DAL 2026-09-03 ─────────────────────────────
+# Viveva come primo job del workflow dell'auto-merge su LGTM, che aveva gia' il
+# trigger `push` per altre ragioni. Quel workflow e' stato rimosso quando il
+# merge e' passato all'auto-merge nativo di GitHub, e questo job non poteva
+# seguirlo dentro `tests.yml`: li' il `push:` e' scopato a `main` di proposito
+# (un push su un branch con PR aperta pagherebbe una seconda review Claude),
+# mentre QUESTO job vuole esattamente i push sui branch — cioe' il trigger
+# opposto. Due domande diverse, due workflow.
+on:
+  push:
+    branches-ignore: [main]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  warn-orphan-push:
+    # `github.event.deleted != true` esclude il push di cancellazione del branch
+    # che `gh pr merge --squash --delete-branch` genera su OGNI squash-merge:
+    # senza questo guard, quel push (sha tutto-zero) trova la PR appena chiusa
+    # come MERGED e posta l'avviso di «push orfano» a ogni singolo merge.
+    if: github.event.deleted != true
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Warn if this push is on a MERGED PR branch (orphan push)
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          HEAD_REF: ${{ github.ref_name }}
+          SHA: ${{ github.sha }}
+        run: |
+          set -uo pipefail
+          # Niente `set -e`: un gh che fallisce non deve rendere rosso il push.
+          # Il job e' un segnale; l'exit e' sempre 0.
+          if [ -z "${HEAD_REF:-}" ] || [ -z "${REPO:-}" ]; then
+            echo "ref o repo assenti — niente da segnalare."
+            exit 0
+          fi
+          # Una PR aperta sulla stessa head non e' orfana: e' il ciclo normale.
+          OPEN=$(gh pr list --repo "$REPO" --head "$HEAD_REF" --state open \
+            --json number --jq '.[0].number // empty' 2>/dev/null || true)
+          if [ -n "${OPEN:-}" ]; then
+            echo "PR #$OPEN aperta su $HEAD_REF — push non orfano."
+            exit 0
+          fi
+          MERGED=$(gh pr list --repo "$REPO" --head "$HEAD_REF" --state merged \
+            --json number --jq '.[0].number // empty' 2>/dev/null || true)
+          if [ -z "${MERGED:-}" ]; then
+            echo "Nessuna PR MERGED associata a $HEAD_REF — niente da segnalare."
+            exit 0
+          fi
+          echo "::warning::Push orfano: commit $SHA sul branch $HEAD_REF della PR #$MERGED già MERGED."
+          BODY=$(printf '%s\n\n%s\n\n%s' \
+            "⚠️ Push orfano dopo merge" \
+            "Il commit ${SHA} è atterrato sul branch ${HEAD_REF} della PR #${MERGED}, che è già MERGED. Il commit non è su main e resterebbe orfano in silenzio." \
+            "Recuperalo con una nuova PR (cherry-pick) se deve entrare.")
+          gh pr comment "$MERGED" --repo "$REPO" --body "$BODY" \
+            || echo "Commento su PR #$MERGED fallito — il push resta un segnale, non un blocco."
+          exit 0

@@ -1782,6 +1782,10 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'assegni-familiari-lucerna-guida': { it: 'assegni-familiari-lucerna-guida', en: 'family-allowances-lucerne-guide', de: 'familienzulagen-luzern-leitfaden', fr: 'allocations-familiales-lucerne-guide' },
  'prezzi-consumo-aumentati-agosto-2026': { it: 'prezzi-consumo-aumentati-agosto-2026', en: 'consumer-prices-increased-august-2026', de: 'verbraucherpreise-steigen-im-august-2026', fr: 'hausse-des-prix-a-la-consommation-en-aout-2026' },
  'emissioni-co2-vcp-2025': { it: 'emissioni-co2-vcp-2025', en: 'emissions-co2-hdt-2025', de: 'co2-emissionen-sfw-2025', fr: 'emissions-co2-pvc-2025' },
+ 'affitti-benzina-spingono-inflazione': { it: 'affitti-benzina-spingono-inflazione', en: 'rent-petrol-drive-swiss-inflation', de: 'mietpreise-benzin-treiben-inflation', fr: 'loyers-essence-poussent-inflation' },
+ 'pil-q2-2026-industria-forte': { it: 'pil-q2-2026-industria-forte', en: 'gdp-q2-2026-strong-industry-growth', de: 'bip-q2-2026-industrie-starkes-wachstum', fr: 'pib-q2-2026-industrie-croissance-forte' },
+ 'calo-natalita-finanze-pubbliche': { it: 'calo-natalita-finanze-pubbliche', en: 'birth-rate-decline-public-finances', de: 'geburtenraten-finanzpolitik-schweiz', fr: 'baisse-natalite-finances-publiques' },
+ 'petizione-delocalizzazioni-svizzera': { it: 'petizione-delocalizzazioni-svizzera', en: 'petition-against-outsourcing-switzerland', de: 'petition-gegen-outsourcing-schweiz', fr: 'petition-contre-la-delocalisation-suisse' },
 };
 
 export const REVERSE_SWISS: Record<ArticleLocale, Record<string, string>> = (() => {

@@ -1,40 +1,26 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-02T09:23:07.799Z",
-  "dateIso": "2026-09-02",
+  "generatedAt": "2026-09-03T09:32:51.382Z",
+  "dateIso": "2026-09-03",
   "counts": {
     "availableBlocks": 4,
     "crossings": 141,
     "fuelMunicipalities": 518,
     "exchangePoints": 32,
-    "jobsActive": 25270
+    "jobsActive": 25500
   },
   "blocks": {
     "borderWait": {
       "available": true,
-      "updatedAt": "2026-09-02T08:18:13.326Z",
+      "updatedAt": "2026-09-03T08:27:22.726Z",
       "count": 141,
-      "zeroWaitCount": 109,
+      "zeroWaitCount": 110,
       "worst": {
-        "slug": "chiasso-brogeda",
-        "name": "Chiasso-Brogeda",
-        "waitMinutes": 8
+        "slug": "haag-bendern",
+        "name": "Haag-Bendern",
+        "waitMinutes": 3
       },
       "crossings": [
-        {
-          "slug": "chiasso-brogeda",
-          "name": "Chiasso-Brogeda",
-          "waitMinutes": 8,
-          "status": "yellow",
-          "direction": "Entrambi"
-        },
-        {
-          "slug": "porto-ceresio-brusino",
-          "name": "Porto Ceresio-Brusino",
-          "waitMinutes": 6,
-          "status": "yellow",
-          "direction": "Entrambi"
-        },
         {
           "slug": "haag-bendern",
           "name": "Haag-Bendern",
@@ -50,16 +36,23 @@
           "direction": "Entrambi"
         },
         {
-          "slug": "thonex-vallard",
-          "name": "Thônex-Vallard (Autoroute Blanche)",
+          "slug": "ponte-tresa",
+          "name": "Ponte Tresa",
           "waitMinutes": 2,
           "status": "green",
           "direction": "Entrambi"
         },
         {
-          "slug": "au-lustenau",
-          "name": "Au-Lustenau",
-          "waitMinutes": 1,
+          "slug": "porto-ceresio-brusino",
+          "name": "Porto Ceresio-Brusino",
+          "waitMinutes": 2,
+          "status": "green",
+          "direction": "Entrambi"
+        },
+        {
+          "slug": "thonex-vallard",
+          "name": "Thônex-Vallard (Autoroute Blanche)",
+          "waitMinutes": 2,
           "status": "green",
           "direction": "Entrambi"
         },
@@ -80,13 +73,6 @@
         {
           "slug": "basel-weil-am-rhein-hiltalingerstrasse",
           "name": "Basel – Weil am Rhein, Hiltalingerstrasse",
-          "waitMinutes": 1,
-          "status": "green",
-          "direction": "Entrambi"
-        },
-        {
-          "slug": "blumberg-bargen-sh-autostrasse-h4",
-          "name": "Blumberg – Bargen SH, Autostrasse H4",
           "waitMinutes": 1,
           "status": "green",
           "direction": "Entrambi"
@@ -120,15 +106,15 @@
           "direction": "Entrambi"
         },
         {
-          "slug": "gaggiolo",
-          "name": "Gaggiolo (Cantello-Stabio)",
+          "slug": "forcola-di-livigno",
+          "name": "Forcola di Livigno",
           "waitMinutes": 1,
           "status": "green",
           "direction": "Entrambi"
         },
         {
-          "slug": "gottmadingen-ramsen-hofenacker",
-          "name": "Gottmadingen – Ramsen-Hofenacker",
+          "slug": "gaggiolo",
+          "name": "Gaggiolo (Cantello-Stabio)",
           "waitMinutes": 1,
           "status": "green",
           "direction": "Entrambi"
@@ -143,6 +129,13 @@
         {
           "slug": "konstanz-kreuzlingen",
           "name": "Konstanz – Kreuzlingen",
+          "waitMinutes": 1,
+          "status": "green",
+          "direction": "Entrambi"
+        },
+        {
+          "slug": "konstanz-tagerwilen-autostrada-b33n-a7",
+          "name": "Konstanz – Tägerwilen, Autostrada B33n/A7",
           "waitMinutes": 1,
           "status": "green",
           "direction": "Entrambi"
@@ -169,6 +162,13 @@
           "direction": "Entrambi"
         },
         {
+          "slug": "maslianico-pizzamiglio",
+          "name": "Maslianico-Pizzamiglio",
+          "waitMinutes": 1,
+          "status": "green",
+          "direction": "Entrambi"
+        },
+        {
           "slug": "moillesulaz",
           "name": "Moillesulaz",
           "waitMinutes": 1,
@@ -185,13 +185,6 @@
         {
           "slug": "passo-dello-spluga",
           "name": "Passo dello Spluga (Montespluga)",
-          "waitMinutes": 1,
-          "status": "green",
-          "direction": "Entrambi"
-        },
-        {
-          "slug": "ponte-tresa",
-          "name": "Ponte Tresa",
           "waitMinutes": 1,
           "status": "green",
           "direction": "Entrambi"
@@ -253,6 +246,13 @@
           "direction": "Entrambi"
         },
         {
+          "slug": "au-lustenau",
+          "name": "Au-Lustenau",
+          "waitMinutes": 0,
+          "status": "green",
+          "direction": "Entrambi"
+        },
+        {
           "slug": "bardonnex",
           "name": "Bardonnex",
           "waitMinutes": 0,
@@ -297,6 +297,13 @@
         {
           "slug": "blumberg-bargen-sh-alte-bargener-strasse",
           "name": "Blumberg – Bargen SH, Alte Bargener Strasse",
+          "waitMinutes": 0,
+          "status": "green",
+          "direction": "Entrambi"
+        },
+        {
+          "slug": "blumberg-bargen-sh-autostrasse-h4",
+          "name": "Blumberg – Bargen SH, Autostrasse H4",
           "waitMinutes": 0,
           "status": "green",
           "direction": "Entrambi"
@@ -407,6 +414,13 @@
           "direction": "Entrambi"
         },
         {
+          "slug": "chiasso-brogeda",
+          "name": "Chiasso-Brogeda",
+          "waitMinutes": 0,
+          "status": "green",
+          "direction": "Entrambi"
+        },
+        {
           "slug": "clivio-ligornetto",
           "name": "Clivio-Ligornetto",
           "waitMinutes": 0,
@@ -512,13 +526,6 @@
           "direction": "Entrambi"
         },
         {
-          "slug": "forcola-di-livigno",
-          "name": "Forcola di Livigno",
-          "waitMinutes": 0,
-          "status": "green",
-          "direction": "Entrambi"
-        },
-        {
           "slug": "gailingen-am-hochrhein-dorflingen",
           "name": "Gailingen am Hochrhein – Dörflingen",
           "waitMinutes": 0,
@@ -549,6 +556,13 @@
         {
           "slug": "gottmadingen-buch-blindenhausen-sh",
           "name": "Gottmadingen – Buch-Blindenhausen SH",
+          "waitMinutes": 0,
+          "status": "green",
+          "direction": "Entrambi"
+        },
+        {
+          "slug": "gottmadingen-ramsen-hofenacker",
+          "name": "Gottmadingen – Ramsen-Hofenacker",
           "waitMinutes": 0,
           "status": "green",
           "direction": "Entrambi"
@@ -680,13 +694,6 @@
           "direction": "Entrambi"
         },
         {
-          "slug": "konstanz-tagerwilen-autostrada-b33n-a7",
-          "name": "Konstanz – Tägerwilen, Autostrada B33n/A7",
-          "waitMinutes": 0,
-          "status": "green",
-          "direction": "Entrambi"
-        },
-        {
           "slug": "kriessern-mader",
           "name": "Kriessern-Mäder",
           "waitMinutes": 0,
@@ -773,13 +780,6 @@
         {
           "slug": "martina-nauders",
           "name": "Martina-Nauders (Finstermünz)",
-          "waitMinutes": 0,
-          "status": "green",
-          "direction": "Entrambi"
-        },
-        {
-          "slug": "maslianico-pizzamiglio",
-          "name": "Maslianico-Pizzamiglio",
           "waitMinutes": 0,
           "status": "green",
           "direction": "Entrambi"
@@ -1012,23 +1012,17 @@
     },
     "fuel": {
       "available": true,
-      "generatedAt": "2026-09-02T06:25:34.724Z",
+      "generatedAt": "2026-09-03T06:29:34.258Z",
       "municipalityCount": 518,
-      "cheaperItalyCount": 67,
-      "cheaperSwissCount": 67,
-      "tieCount": 11,
+      "cheaperItalyCount": 56,
+      "cheaperSwissCount": 88,
+      "tieCount": 3,
       "cheapestItaly": [
         {
           "municipality": "Livigno",
           "province": "SO",
           "minPriceEur": 1.528,
           "stationName": "TOTAL ERG - LIVIGNO"
-        },
-        {
-          "municipality": "Sondrio",
-          "province": "SO",
-          "minPriceEur": 1.839,
-          "stationName": "IP"
         },
         {
           "municipality": "Veduggio con Colzano",
@@ -1043,68 +1037,74 @@
           "stationName": "ENI 2904"
         },
         {
-          "municipality": "Gera Lario",
-          "province": "CO",
+          "municipality": "Aprica",
+          "province": "SO",
           "minPriceEur": 1.919,
-          "stationName": "IPERAL CARBURANTI GERA LARIO"
+          "stationName": "DISTRIBUTORE ENI APRICA"
+        },
+        {
+          "municipality": "Cucciago",
+          "province": "CO",
+          "minPriceEur": 1.949,
+          "stationName": "M.P.R. SAS"
         }
       ],
       "bestSavings": [
-        {
-          "municipality": "Domaso",
-          "province": "CO",
-          "cheaperCountry": "IT",
-          "italyPriceEur": 1.999,
-          "swissPriceEur": 2.544,
-          "swissPriceChf": 2.39,
-          "saving50LEur": 27.25
-        },
         {
           "municipality": "Livigno",
           "province": "SO",
           "cheaperCountry": "IT",
           "italyPriceEur": 1.528,
-          "swissPriceEur": 2.065,
+          "swissPriceEur": 2.059,
           "swissPriceChf": 1.94,
-          "saving50LEur": 26.85
+          "saving50LEur": 26.55
         },
         {
-          "municipality": "Dongo",
-          "province": "CO",
+          "municipality": "Aprica",
+          "province": "SO",
           "cheaperCountry": "IT",
-          "italyPriceEur": 2.079,
-          "swissPriceEur": 2.544,
-          "swissPriceChf": 2.39,
-          "saving50LEur": 23.25
+          "italyPriceEur": 1.919,
+          "swissPriceEur": 2.101,
+          "swissPriceChf": 1.98,
+          "saving50LEur": 9.1
+        },
+        {
+          "municipality": "Premeno",
+          "province": "VB",
+          "cheaperCountry": "CH",
+          "italyPriceEur": 2.088,
+          "swissPriceEur": 1.91,
+          "swissPriceChf": 1.8,
+          "saving50LEur": 8.9
         }
       ],
       "cheapestSwissStation": {
         "name": "SOCAR Samnaun",
         "sp95PriceChf": 1.38,
-        "sp95PriceEur": 1.469,
+        "sp95PriceEur": 1.464,
         "nearestMunicipality": "Curon Venosta (BZ)"
       }
     },
     "exchange": {
       "available": true,
-      "rate": 1.0657,
-      "lastDate": "2026-09-01",
-      "prevRate": 1.0667,
-      "prevDate": "2026-08-31",
-      "delta1d": -0.001,
-      "rate7dAgo": 1.0679,
-      "delta7d": -0.0022,
+      "rate": 1.0652,
+      "lastDate": "2026-09-02",
+      "prevRate": 1.0658,
+      "prevDate": "2026-09-01",
+      "delta1d": -0.0006,
+      "rate7dAgo": 1.0666,
+      "delta7d": -0.0014,
       "source": "frankfurter",
       "pointCount": 32
     },
     "jobs": {
       "available": true,
-      "generatedAt": "2026-09-02T07:31:26.677Z",
-      "activeJobs": 25270,
-      "activeCompanies": 841,
-      "todayAdded": 249,
-      "yesterdayAdded": 5982,
-      "last7dAdded": 10998
+      "generatedAt": "2026-09-03T04:31:32.959Z",
+      "activeJobs": 25500,
+      "activeCompanies": 844,
+      "todayAdded": 415,
+      "yesterdayAdded": 719,
+      "last7dAdded": 8281
     }
   }
 }

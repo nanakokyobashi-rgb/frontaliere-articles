@@ -33474,6 +33474,42 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'frontaliere-730-ristorni-2026',
+ category: 'fiscale',
+ date: '2026-09-03T08:45:12.299Z',
+ image: '/images/blog/frontaliere-730-ristorni-2026.webp',
+ hasCalculator: true,
+ authorSlug: 'marco-ferrari',
+ authorName: 'Marco Ferrari',
+ },
+ {
+ id: 'frontaliere-dichiarazione-730-2026',
+ category: 'fiscale',
+ date: '2026-09-03T09:01:24.024Z',
+ image: '/images/blog/frontaliere-dichiarazione-730-2026.webp',
+ hasCalculator: true,
+ authorSlug: 'marco-ferrari',
+ authorName: 'Marco Ferrari',
+ },
+ {
+ id: 'frontaliere-tassazione-crediti-detrazioni',
+ category: 'fiscale',
+ date: '2026-09-03T09:20:21.947Z',
+ image: '/images/blog/frontaliere-tassazione-crediti-detrazioni.webp',
+ hasCalculator: true,
+ authorSlug: 'marco-ferrari',
+ authorName: 'Marco Ferrari',
+ },
+ {
+ id: 'bollettino-frontaliere-2026-09-03',
+ category: 'novita',
+ date: '2026-09-03T09:32:54.025Z',
+ image: '/images/blog/bollettino-frontaliere-2026-09-03.webp',
+ hasCalculator: false,
+ authorSlug: 'samuele-valente',
+ authorName: 'Samuele Valente',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)
