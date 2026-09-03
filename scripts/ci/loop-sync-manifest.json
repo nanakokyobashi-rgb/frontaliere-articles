@@ -3191,6 +3191,16 @@
         "corpus": "383513e5f6cacb88",
         "alignedAt": "2026-09-03"
       }
+    },
+    {
+      "path": ".github/workflows/pr-redcheck-fixer.yml",
+      "mode": "adapted",
+      "reason": "Gemello del workflow del sito per il check richiesto ROSSO su una PR autonoma, il sintomo che il 🔴-fixer non copre (quello legge il diff, non la CI). Adattato su quattro punti non copiabili: (1) identita' di push GITHUB_PAT_NANAKO da Remote Config, non un token di GitHub App — questo repo non ha la App del sito; (2) niente npm ci ne' vitest: i gate qui sono dependency-free e il fixer riproduce con node --test; (3) il filtro del log e' TAP (`not ok N`, `✖`), non le righe `FAIL ` di vitest — copiare il filtro del sito darebbe un contesto VUOTO su ogni rosso, che e' peggio di nessun contesto perche' l'agente lo legge e conclude che non c'e' niente; (4) niente proxy di compressione, per la stessa ragione della review in tests.yml: qui l'input dell'agente e' un log. In piu' qui: lo skip su engine-lockstep-auto e il paragrafo del prompt che spiega quali QUATTRO cose porta il check richiesto e quale delle quattro NON e' compito suo (il verdetto della review lo ripara il gemello).",
+      "baseline": {
+        "site": "84011cb61e180899",
+        "corpus": "b78cb4b784efa9b2",
+        "alignedAt": "2026-09-03"
+      }
     }
   ]
 }
