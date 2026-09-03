@@ -11203,6 +11203,15 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.sciopero-treni-settembre-2026.title': 'Sciopero treni 7-8 settembre: 24 ore di stop',
     'blog.article.sciopero-treni-settembre-2026.excerpt': 'La protesta nazionale proclamata da Cub Trasporti e Sgb coinvolgerà il personale del Gruppo Fs, Trenitalia e Trenord. Previste le fasce di garanzia e bus sostitutivi per il collegamento con Malpensa.',
     'blog.article.sciopero-treni-settembre-2026.imageAlt': 'Vista aerea di una stazione ferroviaria in Ticino durante uno sciopero, con autobus che sostituiscono i treni.',
+    'blog.article.frontaliere-730-ristorni-2026.title': 'Detrazioni fiscali frontalieri Italia 2026',
+    'blog.article.frontaliere-730-ristorni-2026.excerpt': 'Nuovo Accordo Frontalieri dal 2024: come recuperare le tasse con il 730. Esenzione €7.500 (vecchi) vs €10.000 (nuovi). Ristorni e credito d\'imposta spiegati.',
+    'blog.article.frontaliere-730-ristorni-2026.imageAlt': 'Lugano al confine CH-Italia: fulcro del lavoro transfrontaliero e della tassazione',
+    'blog.article.frontaliere-dichiarazione-730-2026.title': 'Frontaliere: dichiarazione 730 e credito d\'imposta',
+    'blog.article.frontaliere-dichiarazione-730-2026.excerpt': 'Guida pratica alla dichiarazione 730 per frontalieri 2026: come ottenere il credito d\'imposta, evitare doppia imposizione, nuove franchigie dal Nuovo Accordo.',
+    'blog.article.frontaliere-dichiarazione-730-2026.imageAlt': 'Modulo 730 con documenti fiscali, calcolatrice e banconote svizzere su scrivania in legno',
+    'blog.article.frontaliere-tassazione-crediti-detrazioni.title': 'Detrazioni fiscali per frontalieri 2026',
+    'blog.article.frontaliere-tassazione-crediti-detrazioni.excerpt': 'Detrazioni e crediti d\'imposta per chi lavora in Svizzera e risiede in Italia: franchigie €7.500–€10.000, quadro CE, dichiarazione redditi.',
+    'blog.article.frontaliere-tassazione-crediti-detrazioni.imageAlt': 'Veduta aerea di Mendrisio e del valico doganale tra Svizzera e Italia al mattino',
 };
 
 export default blogMetaIt;

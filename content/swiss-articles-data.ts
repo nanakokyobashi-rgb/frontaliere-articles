@@ -15805,6 +15805,33 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'affitti-benzina-spingono-inflazione',
+    category: 'novita',
+    date: '2026-09-03T08:35:51.708Z',
+    image: '/images/blog/affitti-benzina-spingono-inflazione.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
+   {
+    id: 'pil-q2-2026-industria-forte',
+    category: 'novita',
+    date: '2026-09-03T08:52:00.410Z',
+    image: '/images/blog/pil-q2-2026-industria-forte.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
+   {
+    id: 'calo-natalita-finanze-pubbliche',
+    category: 'novita',
+    date: '2026-09-03T09:13:41.092Z',
+    image: '/images/blog/calo-natalita-finanze-pubbliche.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

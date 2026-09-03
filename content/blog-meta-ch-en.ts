@@ -5269,6 +5269,15 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.emissioni-co2-vcp-2025.title': 'VCP CO2 emissions: 2025 results and achievable targets',
     'blog.article.emissioni-co2-vcp-2025.excerpt': 'In 2025, the CO2 requirements for heavy commercial vehicles in Switzerland come into force: importers reach their targets with 20.8% of the fleet being fully electric.',
     'blog.article.emissioni-co2-vcp-2025.imageAlt': 'Electric heavy-duty truck on Swiss road with Alpine mountains in the background',
+    'blog.article.affitti-benzina-spingono-inflazione.title': 'Inflation rises again after 4 months',
+    'blog.article.affitti-benzina-spingono-inflazione.excerpt': 'In August, Swiss inflation was at 0.8%, after four months of declines. Rent and gasoline among the causes. The National Bank monitors carefully.',
+    'blog.article.affitti-benzina-spingono-inflazione.imageAlt': 'An economist analyzes inflation charts and consumer price index data with Bern cityscape in background.',
+    'blog.article.pil-q2-2026-industria-forte.title': 'Q2 GDP 2026: +1.5% quarterly, industry growth',
+    'blog.article.pil-q2-2026-industria-forte.excerpt': 'In Q2 2026, Swiss GDP grew by 1.5% net of sporting events, the strongest since 2021. Boosted by the chemical-pharmaceutical industry (+10.5%) and rebound in domestic demand.',
+    'blog.article.pil-q2-2026-industria-forte.imageAlt': 'Swiss financial district skyscrapers with economic growth charts on digital display',
+    'blog.article.calo-natalita-finanze-pubbliche.title': 'AFF: declining birth rate weighs on Swiss finances',
+    'blog.article.calo-natalita-finanze-pubbliche.excerpt': 'The AFF analyses the impact of the historical low of births on the stability of social security systems and on public funds in the long term.',
+    'blog.article.calo-natalita-finanze-pubbliche.imageAlt': 'Swiss Federal Finance Administration building in Bern.',
 };
 
 export default blogMetaChEn;

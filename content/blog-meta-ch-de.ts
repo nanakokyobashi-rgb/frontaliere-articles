@@ -5269,6 +5269,15 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.emissioni-co2-vcp-2025.title': 'CO2-Emissionen VCP: Ergebnisse 2025 und erreichbare Ziele',
     'blog.article.emissioni-co2-vcp-2025.excerpt': 'Im Jahr 2025 treten die CO2-Vorschriften für schwere Nutzfahrzeuge in der Schweiz in Kraft: Importeure erreichen die Zielvorgaben mit 20,8% vollelektrischer Flotte.',
     'blog.article.emissioni-co2-vcp-2025.imageAlt': 'Vollelektrischer Lastkraftwagen auf Schweizer Straße mit Alpenkette im Hintergrund',
+    'blog.article.affitti-benzina-spingono-inflazione.title': 'Inflation steigt nach 4 Monaten wieder an',
+    'blog.article.affitti-benzina-spingono-inflazione.excerpt': 'Im August liegt die Schweizer Inflation nach viermonatigen Rückgängen bei 0,8%. Mieten und Benzin gehören zu den Ursachen. Die Nationalbank überwacht aufmerksam.',
+    'blog.article.affitti-benzina-spingono-inflazione.imageAlt': 'Ein Ökonom analysiert Inflationsdiagramme und Verbraucherpreisindexdaten mit Berner Skyline im Hintergrund.',
+    'blog.article.pil-q2-2026-industria-forte.title': 'BIP Q2 2026: +1,5% vierteljährlich, Wachstum Industrie',
+    'blog.article.pil-q2-2026-industria-forte.excerpt': 'Im Q2 2026 wuchs das Schweizer BIP ohne Sportveranstaltungen um 1,5%, stärker seit 2021. Auftrieb durch die chemisch-pharmazeutische Industrie (+10,5%) und Erholung der Inlandsnachfrage.',
+    'blog.article.pil-q2-2026-industria-forte.imageAlt': 'Schweizer Finanzviertel mit Wirtschaftswachstumsgrafiken auf digitalem Display',
+    'blog.article.calo-natalita-finanze-pubbliche.title': 'EFV: Geburtenrückgang belastet Schweizer Finanzen',
+    'blog.article.calo-natalita-finanze-pubbliche.excerpt': 'Die EFV analysiert die Auswirkungen des historischen Geburtenminimums auf die langfristige Stabilität der Sozialversicherungssysteme und der öffentlichen Kassen.',
+    'blog.article.calo-natalita-finanze-pubbliche.imageAlt': 'Gebäude der Eidgenössischen Finanzverwaltung in Bern.',
 };
 
 export default blogMetaChDe;

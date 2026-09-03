@@ -11202,6 +11202,15 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.sciopero-treni-settembre-2026.title': 'Train strike 7-8 September: 24-hour stoppage',
     'blog.article.sciopero-treni-settembre-2026.excerpt': 'The national protest proclaimed by Cub Trasporti and SGB will involve the personnel of the FS Group, Trenitalia and Trenord. Warranty bands and replacement buses are provided for the connection with Malpensa.',
     'blog.article.sciopero-treni-settembre-2026.imageAlt': 'Aerial view of a train station in Ticino during a strike, with buses replacing train services.',
+    'blog.article.frontaliere-730-ristorni-2026.title': 'Border tax deductions Italy 2026',
+    'blog.article.frontaliere-730-ristorni-2026.excerpt': 'New Frontier Agreement from 2024: how to recover taxes with 730. Exemption €7,500 (old) vs €10,000 (new). Explained returns and tax credit.',
+    'blog.article.frontaliere-730-ristorni-2026.imageAlt': 'Lugano at the Swiss-Italian border: heart of cross-border work and dual taxation',
+    'blog.article.frontaliere-dichiarazione-730-2026.title': 'Cross-border workers: 730 tax return and tax credit',
+    'blog.article.frontaliere-dichiarazione-730-2026.excerpt': 'Practical guide to the 730 declaration for border workers 2026: how to obtain the tax credit, avoid double taxation, new deductibles from the New Agreement.',
+    'blog.article.frontaliere-dichiarazione-730-2026.imageAlt': 'Italian tax form 730 with fiscal documents, calculator and Swiss banknotes on wooden desk',
+    'blog.article.frontaliere-tassazione-crediti-detrazioni.title': 'Tax deductions for border workers 2026',
+    'blog.article.frontaliere-tassazione-crediti-detrazioni.excerpt': 'Deductions and tax credits for those who work in Switzerland and reside in Italy: deductibles €7,500-€10,000, EC framework, tax return.',
+    'blog.article.frontaliere-tassazione-crediti-detrazioni.imageAlt': 'Aerial view of Mendrisio and Swiss-Italian customs border crossing in daylight',
 };
 
 export default blogMetaEn;
