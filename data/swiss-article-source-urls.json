@@ -1,5 +1,4 @@
 {
-  "https://www.laregione.ch/economia/economia/1942012/sandoz-miliardi-dollari-primo-biosimilari-fatturato-semestre": "sandoz-biosimilari-2026",
   "https://www.laregione.ch/economia/economia/1940892/glencore-produzione-rame-calo-miliardi": "glencore-produzione-riscrittura",
   "https://www.seco.admin.ch/it/la-seco-in-qualita-di-datore-di-lavoro": "lavorare-seco",
   "https://www.laregione.ch/economia/economia/1941028/primo-semestre-perdita-obiettivi-trimestre": "lastminute-com-perdita-obiettivi-trimestre",
@@ -1677,6 +1676,11 @@
   "https://www.rsi.ch/s/4056678": {
     "articleId": "tardoc-medici-famiglia-svizzera",
     "ts": "2026-09-03T12:29:03.974Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/economia-svizzera-in-forte-crescita%2c-stima-trimestrale-confermata/91998072": {
+    "articleId": "economia-svizzera-crescita-q2-2026",
+    "ts": "2026-09-03T12:45:38.828Z",
     "keyForm": 2
   }
 }
