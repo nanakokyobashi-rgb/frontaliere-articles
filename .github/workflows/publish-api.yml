@@ -213,7 +213,7 @@ jobs:
       # generazione ha prodotto un corpo con una legge inventata («LTL 1995»);
       # alle 22:38 il sync l'ha portato sul sito, alle 22:45 `main` DEL SITO e'
       # andato rosso su `article-fabrication-guard`, e da li' ogni PR del sito
-      # e' rimasta bloccata a cascata per ~13 ore — `pr-review-loop` gira solo
+      # e' rimasta bloccata a cascata per ~13 ore — la review gira solo
       # su `tests` verde. Un singolo articolo su ~14.700 ha fermato il merge di
       # un intero repo.
       #
@@ -225,7 +225,7 @@ jobs:
       #
       # AGGIORNAMENTO 2026-08-18. Questo blocco diceva anche di NON togliere
       # `branches-ignore` da `tests.yml`, perche' `tests` e' il trigger
-      # `workflow_run` di `pr-review-loop` e `auto-merge-on-lgtm` e 111
+      # `workflow_run` del reviewer e dell'auto-merge di allora, e 111
       # completamenti/giorno su main sarebbero diventati ~+333 run/giorno, 111
       # delle quali dispatch a vuoto del reviewer. Il `branches-ignore` e' stato
       # tolto lo stesso, per una ragione che allora non era in vista: il rescue
@@ -234,14 +234,20 @@ jobs:
       # cinque PR sono rimaste bloccate in uno stato assorbente.
       #
       # E la stima di +333 e' stata rimisurata, perche' era la sola obiezione
-      # seria: il reviewer NON parte, il suo job ha gia' l'`if`
-      # `workflow_run.event == 'pull_request'` e una run su main ha evento
-      # `push` — la run di `pr-review-loop` viene creata e il job SALTA, zero
-      # quota Claude. Parte invece `auto-merge-on-lgtm`, il cui `if` guarda
-      # solo `conclusion == 'success'`: ~103 run/giorno da ~20s (mediana
-      # misurata su 40 run), job bounded e senza Claude. Il costo reale e'
-      # quindi ~103 run di `tests` (~45s ciascuna in CI) piu' ~103 di
-      # auto-merge, non +333 con il reviewer dentro.
+      # seria: il reviewer NON parte su una run di main, perche' il suo job ha
+      # gia' un `if` sull'evento e una run su main ha evento `push` — zero
+      # quota Claude. Il costo reale era quindi ~103 run di `tests` (~45s
+      # ciascuna in CI) piu' ~103 di auto-merge, non +333 col reviewer dentro.
+      #
+      # AGGIORNAMENTO 2026-09-03. Dal giorno in cui la review e' entrata dentro
+      # `tests.yml`, quel conto e' cambiato in meglio due volte: i due workflow
+      # `workflow_run` (reviewer e auto-merge) non esistono piu' — sono uno step
+      # e l'auto-merge nativo — e il `push:` di `tests.yml` e' scopato a `main`,
+      # quindi un push su un branch con PR aperta non produce piu' la seconda
+      # run. Resta ~103 run di `tests` al giorno su main, e nient'altro. Il
+      # guard `github.event_name == 'pull_request'` sugli step della review e'
+      # quel che tiene la quota Claude fuori da queste run: e' pinnato da
+      # `generator/tests/loop-workflow-triggers.test.mjs`.
       #
       # PERCHE' PROPRIO QUESTE DUE SUITE. Sono le uniche del repo che non
       # chiedono dipendenze — `node:test` piu' l'expect-shim locale — quindi

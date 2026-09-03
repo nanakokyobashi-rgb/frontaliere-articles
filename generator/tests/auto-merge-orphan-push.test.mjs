@@ -2,14 +2,18 @@
  * auto-merge-orphan-push.test.mjs — un push sul branch di una PR già MERGED
  * non deve restare orfano in silenzio (issue #532).
  *
- * Il difetto vive nel blocco `on:` di auto-merge-on-lgtm.yml. I due trigger
- * originali (`pull_request_review` + `workflow_run[tests]`) non vedono un
- * git push successivo al merge: GitHub accetta il push, il commit resta
- * fuori da main, e nessuno lo dice. Non è un errore, è un'ASSENZA — la
- * stessa classe di `loop-workflow-triggers.test.mjs`.
+ * Il difetto vive nel blocco `on:` del workflow. GitHub accetta il push, il
+ * commit resta fuori da main, e nessuno lo dice. Non è un errore, è un'ASSENZA
+ * — la stessa classe di `loop-workflow-triggers.test.mjs`.
+ *
+ * Il rilevatore era il primo job del workflow dell'auto-merge su LGTM finché
+ * quello è esistito; dal 2026-09-03 vive in `orphan-push-warn.yml`, perché il
+ * merge è passato all'auto-merge nativo e `tests.yml` — l'unico altro posto
+ * dove avrebbe potuto stare — ha il `push:` scopato a `main`, cioè il trigger
+ * OPPOSTO a quello che serve qui.
  *
  * Questo test NON reimplementa il workflow. Legge lo YAML shipped e
- * asserisce le tre cose che, se sparissero, riaprirebbero il silenzio:
+ * asserisce le cose che, se sparissero, riaprirebbero il silenzio:
  *   (a) il blocco `on` prima di `jobs` contiene `push`;
  *   (b) esiste uno step/job che parla di MERGED o orphan push;
  *   (c) il job `auto-merge` è gated via dal trigger push.
@@ -21,7 +25,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
-const WORKFLOW = path.join(ROOT, '.github/workflows/auto-merge-on-lgtm.yml');
+const WORKFLOW = path.join(ROOT, '.github/workflows/orphan-push-warn.yml');
 const src = fs.readFileSync(WORKFLOW, 'utf8');
 
 /** Solo le righe eseguibili: i commenti CITANO il difetto, e un match sul
@@ -38,7 +42,7 @@ const ATTIVE = active(src);
  *  metrica della scheda; qui si asserisce sul testo attivo, non sui commenti. */
 function onBlock(text) {
   const jobsAt = text.search(/\njobs:\s*\n/);
-  assert.notEqual(jobsAt, -1, 'auto-merge-on-lgtm.yml non ha una sezione `jobs:`');
+  assert.notEqual(jobsAt, -1, 'orphan-push-warn.yml non ha una sezione `jobs:`');
   const head = text.slice(0, jobsAt);
   const onAt = head.search(/\non:\s*\n/);
   assert.notEqual(onAt, -1, 'auto-merge-on-lgtm.yml non ha un blocco `on:`');
@@ -102,16 +106,9 @@ test('(d) il job warn-orphan-push ignora il push di cancellazione branch del pro
   );
 });
 
-test('(c) il job auto-merge è gated via dal trigger push', () => {
-  const job = jobBlock(ATTIVE, 'auto-merge');
-  assert.ok(job, 'job `auto-merge` non trovato');
-  assert.match(
-    job,
-    /github\.event_name\s*!=\s*'push'/,
-    'Il job `auto-merge` non è gated su `github.event_name != \'push\'`. ' +
-      'Un push su un branch di PR aprirebbe la valutazione di squash-merge, ' +
-      'che su una head già MERGED non ha niente da mergiare ma consuma la ' +
-      'stessa identità (PAT / checkout / Remote Config) per un segnale che ' +
-      'non le appartiene.',
-  );
-});
+// Il test (c) — «il job `auto-merge` e' gateato su `event_name != 'push'`» —
+// e' stato rimosso il 2026-09-03 insieme al suo oggetto: il merge e' passato
+// all'auto-merge nativo di GitHub e non esiste piu' un job di merge che
+// condivida il trigger `push` con questo. La proprieta' che il test difendeva
+// (il push non deve far partire una valutazione di merge) ora vale
+// by construction: questo workflow ha SOLO il trigger `push` e SOLO questo job.

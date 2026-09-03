@@ -59,7 +59,7 @@ Non bloccare l'auto-merge sui nit non-funnel. Il blocco resta solo su 🔴 e sul
 
 ## Tier review
 
-Il tier è calcolato dal workflow (`pr-review-loop.yml`) e passato nel prompt; questa tabella è il razionale.
+Il tier è calcolato dallo step `Determine review tier` di `tests.yml` e passato nel prompt; questa tabella è il razionale.
 
 **Il tier si decide SOLO sul CODE.** `content/` (14.888 file di corpus), `data/`, `dist/` (superficie generata) e `public/` non sono codice: non escalano il tier e non vanno revieweati riga per riga.
 
@@ -166,4 +166,4 @@ Prefix: `🔴 Important` / `🟡 Nit` / `🟣 Pre-existing` / `❓ q:`.
 
 Zero 🔴 → chiudi con `## LGTM` e una frase di recap.
 
-**Critico:** la stringa esatta `## LGTM` fa scattare l'auto-merge in `auto-merge-on-lgtm.yml`. Non scriverla mai se hai aperto un 🔴 nei findings o nell'adversarial check, **né se hai un ❓ sulla superficie pubblicata non escalato**: o lo promuovi a 🔴, o apri una follow-up issue e lo dichiari.
+**Critico:** la stringa esatta `## LGTM` è ciò che `scripts/ci/review-gate.mjs` cerca per lasciare VERDE il check richiesto dal ruleset — cioè è la condizione dell'auto-merge nativo. Non scriverla mai se hai aperto un 🔴 nei findings o nell'adversarial check, **né se hai un ❓ sulla superficie pubblicata non escalato**: o lo promuovi a 🔴, o apri una follow-up issue e lo dichiari.

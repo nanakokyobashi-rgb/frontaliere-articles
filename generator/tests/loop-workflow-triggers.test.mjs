@@ -44,7 +44,7 @@ const active = (src) =>
     .filter((l) => !l.trim().startsWith('#'))
     .join('\n');
 
-const PRL = active(read('.github/workflows/pr-review-loop.yml'));
+const TESTS = active(read('.github/workflows/tests.yml'));
 const GA = active(read('.github/workflows/generate-article.yml'));
 
 /** Il blocco di un job: da `\n  <nome>:` al job successivo allo stesso livello. */
@@ -56,100 +56,94 @@ function jobBlock(src, name) {
   return next === -1 ? rest : rest.slice(0, next);
 }
 
-// ── #5614 (metà corpus) — l'evento nel concurrency group ─────────────────────
+// ── L'unificazione tests+review (2026-09-03): tre invarianti nuove ──────────
 //
-// `tests.yml` gira sia su `pull_request` sia su `push`, quindi un push su un
-// branch con PR aperta produce DUE run di `tests` con lo stesso `head_branch`,
-// quindi due run di `pr-review-loop`. Con il group keyed SOLO sul branch e
-// `cancel-in-progress: true` le due si cancellavano a vicenda, e la perdente era
-// sempre quella che contava: la run nata dal `push` viene saltata dal gate `if:`
-// (che pretende `workflow_run.event == 'pull_request'`), quindi uccideva la
-// review vera senza lasciare niente al suo posto. 25 coppie `cancelled`+`skipped`
-// su 400 run, l'ultima il 2026-08-12T10:49:59Z.
+// La review non e' piu' un workflow a se' su `workflow_run`: e' una famiglia di
+// step dentro `tests.yml`, sul trigger `pull_request`. Le tre asserzioni qui
+// sotto sostituiscono quelle che pinnavano il vecchio reviewer, e coprono le
+// stesse tre classi di difetto — che non sono sparite, hanno cambiato forma.
 
-test("pr-review-loop: il concurrency group discrimina l'EVENTO, non solo il branch", () => {
-  const m = PRL.match(/\nconcurrency:\n\s+group:\s*(.+)/);
-  assert.ok(m, 'blocco `concurrency:` di primo livello non trovato in pr-review-loop.yml');
-  const group = m[1];
-  assert.ok(
-    group.includes('github.event.workflow_run.event'),
-    'Il group NON interpola l\'evento che ha fatto partire `tests`.\n' +
-      'Senza, la run da `push` e quella da `pull_request` per lo stesso branch finiscono nello\n' +
-      'stesso slot e, con cancel-in-progress: true, la prima cancella la review vera lasciando\n' +
-      `uno skip al suo posto. Group attuale: ${group}`,
-  );
-  assert.ok(
-    group.includes('head_branch'),
-    `Il group ha smesso di essere per-branch: due PR diverse si cancellerebbero. Group: ${group}`,
-  );
-});
-
-// ── #201 — la maniglia manuale ───────────────────────────────────────────────
+// ── #5614, nella sua forma nuova ────────────────────────────────────────────
 //
-// Un rerun di `tests` non produce nessun evento `workflow_run` utile, quindi una
-// PR riparata dal redflag-fixer resta verde, con una sola review vecchia, per
-// sempre. Il trigger è l'unica via d'uscita che non dipenda dallo stato di un
-// altro agente.
-
-test('pr-review-loop: esiste workflow_dispatch con il numero di PR come input', () => {
-  const onBlock = PRL.slice(PRL.indexOf('\non:'), PRL.indexOf('\nconcurrency:'));
+// Prima: `tests.yml` girava su `pull_request` E su `push` senza filtro, quindi
+// un push su un branch con PR aperta produceva DUE run di `tests` e quindi DUE
+// run del reviewer, che si cancellavano a vicenda nello stesso slot di
+// concurrency. La cura di allora era discriminare l'evento nel group.
+//
+// Ora la review sta DENTRO `tests`, quindi due run di `tests` non sono piu' due
+// run che si contendono uno slot: sono DUE REVIEW CLAUDE sullo stesso codice,
+// pagate entrambe sulla quota condivisa col sito. Non c'e' un group che possa
+// ripararlo — va tolta la seconda run alla fonte, scopando `push:` a `main`.
+test('tests: il trigger `push` e\' scopato a `main`, altrimenti ogni commit paga due review', () => {
+  const onBlock = TESTS.slice(TESTS.indexOf('\non:'), TESTS.indexOf('\npermissions:'));
+  const m = onBlock.match(/\n {2}push:\n((?: {4}.*\n)*)/);
+  assert.ok(m, 'blocco `push:` non trovato nei trigger di tests.yml');
   assert.match(
-    onBlock,
-    /workflow_dispatch:/,
-    'Senza `workflow_dispatch` una PR ferma dopo un rerun di `tests` non ha nessun modo di ' +
-      'farsi revieware: il loop dipende dal re-trigger via push, che in un rerun non c\'è.',
-  );
-  assert.match(onBlock, /\n\s+pr:\n/, 'il dispatch non dichiara l\'input `pr`');
-  assert.match(onBlock, /\n\s+required: true\n/, 'l\'input `pr` non è obbligatorio');
-});
-
-test('pr-review-loop: il gate `if:` ammette il dispatch, altrimenti il trigger è decorativo', () => {
-  const job = jobBlock(PRL, 'review');
-  assert.ok(job, 'job `review` non trovato');
-  assert.match(
-    job,
-    /github\.event_name == 'workflow_dispatch'/,
-    'Il job resta gateato sul solo `workflow_run`: il trigger manuale partirebbe e verrebbe ' +
-      'saltato, cioè esattamente lo stesso silenzio della #201 con un run in più.',
+    m[1],
+    /branches:\s*\[\s*main\s*\]/,
+    'Il `push:` non e\' scopato a `main`. Da quando la review vive qui dentro, un push su un\n' +
+      'branch con PR aperta produce una run da `push` E una da `pull_request`: due review Claude\n' +
+      'sullo stesso commit, sulla quota condivisa col sito. Il segnale che il `push` su `main`\n' +
+      'serve a dare (la prova `success` che il rescue `stuck-red` di pr-autorebase cerca) resta\n' +
+      `intatto con il filtro. Blocco attuale: ${m[1].trim()}`,
   );
 });
 
-test('pr-review-loop: fuori dal resolve nessuno legge più workflow_run.head_sha', () => {
-  const hits = PRL.match(/\$\{\{ github\.event\.workflow_run\.head_sha \}\}/g) || [];
-  assert.equal(
-    hits.length,
-    1,
-    'Su `workflow_dispatch` `github.event.workflow_run` è nullo, quindi ogni riferimento diretto ' +
-      'a `head_sha` diventa la stringa vuota — e uno `actions/checkout` con `ref: ""` prende il ' +
-      'DEFAULT BRANCH: il reviewer leggerebbe `main` credendo di leggere la PR, e la review ' +
-      'sarebbe sbagliata senza nessun errore. L\'unica occorrenza ammessa è `RUN_HEAD_SHA` nello ' +
-      `step di resolve, che è chi normalizza le due strade. Trovate: ${hits.length}.`,
-  );
+// ── #201, nella sua forma nuova ─────────────────────────────────────────────
+//
+// La #201 nasceva dal trigger `workflow_run`: un `gh run rerun` di `tests` non
+// ne produce uno utile, quindi una PR riparata dal redflag-fixer restava ferma
+// con una sola review vecchia, per sempre. La cura di allora era un
+// `workflow_dispatch` con l'input `pr`.
+//
+// Con la review su `pull_request` quel buco si chiude per COSTRUZIONE: rilanciare
+// il run di `tests` riesegue il payload `pull_request` e quindi la review. La
+// condizione perche' regga e' che gli step della review siano gateati
+// sull'EVENTO — se lo fossero su altro, un rerun li salterebbe e la #201
+// tornerebbe identica sotto un nome diverso.
+test('tests: la review e\' gateata su `pull_request`, cosi\' un rerun la riesegue', () => {
+  const job = jobBlock(TESTS, 'tests');
+  assert.ok(job, 'job `tests` non trovato');
+  const resolve = job.slice(job.indexOf('- name: Resolve PR'));
+  assert.ok(resolve.length > 0, 'step `Resolve PR` non trovato');
   assert.match(
-    PRL,
-    /ref: \$\{\{ steps\.resolve\.outputs\.head_sha \}\}/,
-    'il checkout non usa la head normalizzata dal resolve',
+    resolve.slice(0, 1200),
+    /github\.event_name == 'pull_request'/,
+    'Lo step che decide se revieware non guarda l\'evento: su un `push` a `main` proverebbe a\n' +
+      'risolvere una PR che non esiste, e su un rerun non ripartirebbe. Il rerun del run di\n' +
+      '`tests` e\' l\'unica maniglia rimasta (la usa stale-pr-rescuer, classe B).',
   );
 });
 
-test('pr-review-loop: sul ramo dispatch i permessi sono scoped, non skip-permissions', () => {
-  const m = PRL.match(/claude_args: "([^"]*)"/);
-  assert.ok(m, '`claude_args` non trovato');
-  const args = m[1];
+// ── Il verdetto deve girare ANCHE quando la review non gira ─────────────────
+//
+// Il review gate e' cio' che rende rosso il check richiesto dal ruleset quando
+// manca il `## LGTM`. Se fosse gateato sullo skip del re-review guard, una PR
+// con la review saltata (carry-forward) uscirebbe VERDE senza che nessuno abbia
+// verificato che quella LGTM esista davvero — cioe' l'auto-merge nativo
+// mergerebbe su un check che non ha giudicato niente. Deve girare `always()` e
+// non dipendere dallo skip.
+test('tests: il review gate gira sempre, anche a review saltata', () => {
+  const job = jobBlock(TESTS, 'tests');
+  const i = job.indexOf('- name: Require approving Claude review');
+  assert.ok(i !== -1, 'step `Require approving Claude review` non trovato');
+  const step = job.slice(i, i + 800);
+  const cond = step.match(/\n\s+if: (.+)/);
+  assert.ok(cond, 'lo step del review gate non ha un `if:`');
   assert.ok(
-    args.includes("github.event_name == 'workflow_dispatch'"),
-    'IL FLAG NON È CONDIZIONATO AL TRIGGER. Le run `schedule`/`workflow_dispatch` risolvono ' +
-      '`permissionMode` a "default" NONOSTANTE `--dangerously-skip-permissions` (rollback #3269: ' +
-      '36 Bash bloccati con "requires approval", zero comment postati). Una maniglia manuale che ' +
-      'apre una sessione incapace di postare la review non chiude la #201, la riproduce.\n' +
-      `claude_args: ${args}`,
+    cond[1].includes('always()'),
+    `Il review gate non gira su always(): un fallimento a monte lo salterebbe e il check ` +
+      `richiesto uscirebbe verde senza verdetto. if: ${cond[1]}`,
   );
-  assert.ok(args.includes('--allowedTools'), 'il ramo dispatch non ripiega su `--allowedTools`');
   assert.ok(
-    args.includes('--dangerously-skip-permissions'),
-    'il ramo `workflow_run` deve conservare il flag: lì funziona, ed è il percorso caldo',
+    !cond[1].includes('guard.outputs.skip'),
+    'Il review gate e\' gateato sullo skip del re-review guard: una PR con la review saltata\n' +
+      'per carry-forward passerebbe SENZA che nessuno verifichi che la LGTM esista. Il gate\n' +
+      'legge le review gia\' postate, quindi non ha bisogno che Claude sia girato in QUESTA run.\n' +
+      `if: ${cond[1]}`,
   );
 });
+
 
 // ── #212 / #193 — lo sfratto dalla coda di concurrency ───────────────────────
 //
