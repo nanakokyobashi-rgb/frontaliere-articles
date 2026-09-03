@@ -190,7 +190,7 @@ jobs:
           github_token: ${{ env.GITHUB_PAT_NANAKO || secrets.GITHUB_TOKEN }}
           show_full_output: true
           allowed_bots: 'github-actions[bot], claude[bot]'
-          claude_args: "--max-turns 60 --model claude-sonnet-5 --dangerously-skip-permissions"
+          claude_args: "--effort medium --max-turns 60 --model claude-opus-5 --dangerously-skip-permissions"
           prompt: |
             Sei lo sweep settimanale delle issue `needs-human` di questo repo (il CORPUS, `$REPO`). Il tuo compito: separare le decisioni VERE del proprietario dal resto, e rimettere il resto nel ciclo autonomo. NON implementi fix e NON apri PR.
 

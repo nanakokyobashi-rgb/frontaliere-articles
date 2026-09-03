@@ -330,7 +330,7 @@ jobs:
           else
             echo "tier=normal" >> "$GITHUB_OUTPUT"
           fi
-          echo "model=claude-sonnet-5" >> "$GITHUB_OUTPUT"
+          echo "model=claude-opus-5" >> "$GITHUB_OUTPUT"
 
           # Il marker del round si posta PRIMA di invocare Claude: se la run
           # muore, il round e' comunque contato e l'anti-loop tiene.
@@ -530,7 +530,7 @@ jobs:
           github_token: ${{ env.GITHUB_PAT_NANAKO }}
           show_full_output: true
           allowed_bots: 'github-actions[bot], claude[bot]'
-          claude_args: "--max-turns 60 --model ${{ steps.guard.outputs.model }} --dangerously-skip-permissions"
+          claude_args: "--effort medium --max-turns 60 --model ${{ steps.guard.outputs.model }} --dangerously-skip-permissions"
           prompt: |
             Il branch e' gia' checkoutato sulla head della PR #${{ needs.preflight.outputs.pr_number }}, che ha il **check richiesto ROSSO**.
 
