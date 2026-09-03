@@ -1,0 +1,91 @@
+name: Reconcile done-but-open follow-ups
+
+# Zero-Claude. Chiude il buco fra «una issue follow-up e' stata risolta» e
+# «qualcuno l'ha chiusa».
+#
+# Molte issue `follow-up` vengono soddisfatte in silenzio da una PR successiva
+# che tocca lo stesso file — l'autore non sapeva che la follow-up esistesse e
+# non ha scritto `Closes #N`. Restano aperte, e su questo repo restare aperte
+# non e' inerte: il triage le auto-instrada ad `agent:fix`, quindi ogni giro
+# ri-accende il fixer sulla quota Max CONDIVISA col sito per un lavoro gia'
+# fatto. E' lo stesso costo che i quattro pre-flight di `issue-fix` esistono per
+# evitare, pagato un anello prima.
+#
+# Due stadi, con doppia conferma separata nel tempo:
+#  1. prima rilevazione → UN commento consultivo + label `maybe-resolved`. E' la
+#     finestra di grazia: un umano puo' obiettare prima del giro successivo.
+#  2. seconda conferma (la issue porta gia' `maybe-resolved`, e' ancora
+#     risolta, non e' un'aggregata multi-item e non ha label di blocco) →
+#     CHIUSURA automatica con la citazione, label `fu-resolved-auto`,
+#     `--reason completed`. Reversibile: si riapre se il difetto ricompare.
+#
+# Kill switch: `vars.RECONCILE_NO_AUTOCLOSE=1` sul repo, o l'input per-run, per
+# tornare al solo stadio 1.
+#
+# ── ADATTAMENTO rispetto al sito (manifest: `adapted`) ──────────────────────
+# Cambia SOLO il profilo di checkout e la cadenza. L'albero da escludere qui e'
+# `content/` (14.888 file di corpus), `dist/` (la superficie pubblicata) e
+# `public/`: nessuna follow-up cita quei path come CODICE da riparare, e
+# tenerli fuori fa scendere il checkout da minuti a secondi.
+#
+# L'esclusione e' sicura nella direzione che conta, e vale la pena dirlo: se una
+# follow-up citasse davvero un file escluso, `citedFiles()` non lo vedrebbe
+# (`fileExists` falso) e la issue NON verrebbe rilevata come risolta. Il costo
+# di sbagliare e' quindi una chiusura MANCATA, mai una chiusura sbagliata.
+#
+# Il cron e' sfasato da quello del sito (06:00) per la stessa ragione degli
+# altri workflow di questo repo: non contendersi i runner e la quota nello
+# stesso minuto.
+on:
+  schedule:
+    - cron: '25 6 * * *' # ogni giorno alle 06:25 UTC (il sito gira alle 06:00)
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Solo rilevazione e stampa, nessuna scrittura.'
+        required: false
+        default: 'false'
+        type: string
+      no_autoclose:
+        description: 'Forza il solo stadio 1 (segnala, non chiude mai).'
+        required: false
+        default: 'false'
+        type: string
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: followup-reconcile
+  cancel-in-progress: false
+
+jobs:
+  reconcile:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 1
+          sparse-checkout: |
+            /*
+            !/content/
+            !/dist/
+            !/public/
+            !/data/
+          sparse-checkout-cone-mode: false
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: '22'
+
+      - name: Reconcile follow-ups
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+          DRY_RUN: ${{ github.event.inputs.dry_run == 'true' && '1' || '' }}
+          NO_AUTOCLOSE: ${{ (github.event.inputs.no_autoclose == 'true' || vars.RECONCILE_NO_AUTOCLOSE == '1') && '1' || '' }}
+        run: node scripts/ci/reconcile-followups.mjs

@@ -65,6 +65,11 @@ export const LABELS = [
   ['needs-human', '7057ff', 'Nessun processo automatico la sbloccherà: serve una mano umana'],
   ['autorebase-reopen-failed', 'b60205', 'close+reopen rotto a meta: NON cancellare l head ref, la PR va riaperta a mano'],
   ['maybe-resolved', 'bfd4f2', 'Il pre-flight la ritiene forse gia risolta: verificare prima di rilanciare il fixer'],
+  // Chiusa dallo stadio 2 di reconcile-followups.mjs: seconda conferma
+  // deterministica dopo la finestra di grazia di `maybe-resolved`. La label
+  // resta sulla issue chiusa perche' e' la traccia di CHI l'ha chiusa: senza,
+  // una chiusura automatica e una umana sono indistinguibili a posteriori.
+  ['fu-resolved-auto', 'c2e0c6', 'Follow-up chiusa in automatico dopo due conferme deterministiche separate nel tempo'],
   ['backlog', '5319e7', 'Issue-contenitore: classify-issue.mjs la instrada a route none, mai al fixer'],
   ['blocked-workflows-scope', 'd4c5f9', 'Il fix richiede .github/workflows ma il token non ha lo scope: serve una mano'],
   ['awaiting-production-proof', 'c5def5', 'Merge atterrato, chiusura sospesa: serve la prova di una run su main prima di richiuderla'],

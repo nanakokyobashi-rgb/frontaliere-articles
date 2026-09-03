@@ -309,14 +309,6 @@ const DECLARED_ABSENT = {
       'mano una volta e mai scritta da nessuna parte: e\' esattamente la classe di difetto ' +
       'che questo guard esiste per non far ripetere.',
   },
-  'scripts/ci/followup-resolution-match.mjs :: scripts/ci/reconcile-followups.mjs': {
-    kind: 'site-only',
-    reason:
-      'Il docstring dice «used by BOTH» elencando due consumatori: qui ne esiste solo uno ' +
-      '(`check-issue-already-resolved.mjs`), quindi la frase e\' vera sul sito e imprecisa ' +
-      'qui. Descrittiva: il matcher e\' puro e funziona identico con un solo chiamante — ' +
-      'l\'assenza del passaggio advisory schedulato non rompe niente, toglie uno strato.',
-  },
   '.github/workflows/publish-api.yml :: scripts/lib/deploy-it-pages-prep.sh': {
     kind: 'site-only',
     reason:
@@ -653,12 +645,6 @@ const DECLARED_ABSENT = {
     reason:
       'Idem: stessa argomentazione sul digest evergreen, che dopo la prima registrazione scrive ' +
       'sempre fuori da registerArticleFiles(). Descrittiva, non una dipendenza.',
-  },
-  '.github/workflows/post-merge-followup.yml :: followup-reconcile.yml': {
-    kind: 'site-only',
-    reason:
-      'Citato come PATTERN da imitare («Pattern = followup-reconcile.yml»), non come ' +
-      'workflow da invocare: e\' un riferimento di progetto, e il workflow vive sul sito.',
   },
   '.github/workflows/refresh-events-digest.yml :: crawl-events.yml': {
     kind: 'site-only',

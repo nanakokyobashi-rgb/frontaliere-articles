@@ -1,0 +1,115 @@
+name: Auto-merge enroll sweep
+
+# Rete di sicurezza per l'ARRUOLAMENTO nell'auto-merge nativo, non per il merge.
+#
+# `enable-native-automerge.yml` arruola una PR su `opened`/`reopened`/
+# `ready_for_review`. Se quel run fallisce — Remote Config che non risponde, un
+# 5xx dell'API, un evento perso — la PR non viene arruolata MAI PIU': non c'e'
+# un altro evento che ci riprovi. Da fuori e' indistinguibile da una PR sana:
+# tutti i check verdi, nessun rosso, e nessun merge. E' esattamente la forma di
+# stallo che questo repo ha gia' pagato due volte (la #12 col check mancante, la
+# #201 con la review che non ripartiva): niente fallisce, qualcosa si ferma.
+#
+# Il vecchio `auto-merge-sweep` faceva il MERGE da se' ogni mezz'ora ed e' stato
+# rimosso col passaggio al nativo. Questo non lo resuscita: non mergia niente,
+# non legge review, non conosce i gate. Chiama la stessa API che chiamerebbe
+# l'arruolamento all'apertura, e da li' in poi decide GitHub, che aspetta il
+# check richiesto dal ruleset — cioe' il job `tests` col verdetto della review
+# dentro. Un arruolamento in piu' non puo' quindi mergiare niente che non
+# sarebbe mergiato comunque.
+#
+# ── PERCHE' L'IDENTITA' DEVE ESSERE IL PAT ─────────────────────────────────
+# L'auto-merge nativo mergia con l'identita' di CHI lo ha abilitato. Arruolare
+# col `GITHUB_TOKEN` darebbe un merge di `github-actions[bot]`, e GitHub non fa
+# mai partire un workflow da un evento generato da quel token: `publish-api.yml`
+# non scatterebbe e il corpus smetterebbe di pubblicare senza che niente
+# diventi rosso. Nessun PAT, nessun arruolamento — si esce senza fare danni.
+on:
+  schedule:
+    - cron: '18,48 * * * *' # sfasato dai cron di pr-autorebase (22,52)
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pull-requests: write
+
+concurrency:
+  group: auto-merge-enroll-sweep
+  cancel-in-progress: false
+
+jobs:
+  enroll:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      # Come `enable-native-automerge.yml`: servono solo il loader di Remote
+      # Config e il suo helper JWT, e un checkout dovrebbe scaricare l'albero
+      # intero (28.777 file) prima che lo sparse possa selezionarli.
+      - name: Download workflow helpers
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          helper_dir="${RUNNER_TEMP}/native-automerge-helpers"
+          mkdir -p "$helper_dir/lib"
+          gh api "repos/${GITHUB_REPOSITORY}/contents/generator/scripts/load-rc-env.mjs?ref=main" \
+            --header 'Accept: application/vnd.github.raw+json' \
+            > "$helper_dir/load-rc-env.mjs"
+          gh api "repos/${GITHUB_REPOSITORY}/contents/generator/scripts/lib/google-service-account-token.mjs?ref=main" \
+            --header 'Accept: application/vnd.github.raw+json' \
+            > "$helper_dir/lib/google-service-account-token.mjs"
+          echo "NATIVE_AUTOMERGE_HELPER_DIR=$helper_dir" >> "$GITHUB_ENV"
+
+      - name: Prepare Firebase credentials
+        env:
+          FIREBASE_SERVICE_ACCOUNT_JSON: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}
+        run: |
+          if [ -z "$FIREBASE_SERVICE_ACCOUNT_JSON" ]; then
+            echo "::error::FIREBASE_SERVICE_ACCOUNT_JSON non configurato — senza Remote Config non c'e' il PAT."
+            exit 1
+          fi
+          printf %s "$FIREBASE_SERVICE_ACCOUNT_JSON" > /tmp/firebase-sa.json
+          echo "GOOGLE_APPLICATION_CREDENTIALS=/tmp/firebase-sa.json" >> "$GITHUB_ENV"
+
+      - name: Load PAT from Remote Config
+        run: node "$NATIVE_AUTOMERGE_HELPER_DIR/load-rc-env.mjs"
+
+      - name: Enroll open PRs that nobody enrolled
+        env:
+          REPO: ${{ github.repository }}
+        run: |
+          set -uo pipefail
+          if [ -z "${GITHUB_PAT_NANAKO:-}" ]; then
+            echo "::error::GITHUB_PAT_NANAKO non caricato da Remote Config — non arruolo niente: un auto-merge di github-actions[bot] non farebbe partire publish-api.yml."
+            exit 1
+          fi
+          export GH_TOKEN="$GITHUB_PAT_NANAKO"
+          # `--paginate` e non `gh pr list --limit N`: quel sottocomando TRONCA
+          # in silenzio, e oltre il taglio una PR semplicemente non esiste per
+          # questo workflow — che e' il difetto che il workflow esiste per non
+          # avere. `autoMergeRequest` e' null quando nessuno l'ha arruolata.
+          prs=$(gh pr list --repo "$REPO" --state open --json number,isDraft,autoMergeRequest \
+            --limit 200 --jq '.[] | select(.isDraft == false and .autoMergeRequest == null) | .number' \
+            2>/dev/null || true)
+          if [ -z "${prs:-}" ]; then
+            echo "Nessuna PR aperta da arruolare."
+            exit 0
+          fi
+          n=0
+          for pr in $prs; do
+            # Fail-soft per singola PR: una che rifiuta l'arruolamento (base
+            # non protetta, conflitti, permessi) non deve impedire alle altre
+            # di essere arruolate — il caso peggiore e' che il prossimo giro
+            # ci riprovi fra mezz'ora.
+            if gh pr merge "$pr" --repo "$REPO" --auto --squash --delete-branch 2>&1 | tail -2; then
+              echo "PR #$pr arruolata nell'auto-merge nativo."
+              n=$((n + 1))
+            else
+              echo "::warning::PR #$pr non arruolata — riprovo al prossimo giro."
+            fi
+          done
+          echo "Arruolate $n PR."
+
+      - name: Cleanup Firebase credentials
+        if: always()
+        run: rm -f /tmp/firebase-sa.json

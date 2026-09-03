@@ -764,8 +764,8 @@
       "reason": "Il corpus e' nato con le sole label di default di GitHub: nessuna delle 13 del ciclo esisteva. `gh issue edit --add-label` NON crea la label mancante, fallisce — e nei workflow quel fallimento e' un warning non bloccante, quindi il ciclo sarebbe girato INERTE senza un errore. Il sito non ha questo script perche' le sue label ci sono da sempre; qui e' un prerequisito. Idempotente, girato come primo step di triage e fixer perche' una label cancellata per sbaglio ricreerebbe lo stesso stallo mesi dopo.",
       "baseline": {
         "site": null,
-        "corpus": "b8a3fec5bc2ba8f5",
-        "alignedAt": "2026-09-01"
+        "corpus": "cd556496fc4e86c6",
+        "alignedAt": "2026-09-03"
       }
     },
     {
@@ -3160,6 +3160,35 @@
       "baseline": {
         "site": null,
         "corpus": "a39f5f73f7a07cec",
+        "alignedAt": "2026-09-03"
+      }
+    },
+    {
+      "path": "scripts/ci/reconcile-followups.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "09507c1fb90d4cd9",
+        "corpus": "09507c1fb90d4cd9",
+        "alignedAt": "2026-09-03"
+      }
+    },
+    {
+      "path": ".github/workflows/followup-reconcile.yml",
+      "mode": "adapted",
+      "reason": "Gemello del workflow del sito. Cambia SOLO il profilo di checkout e la cadenza: l'albero da escludere qui e' content/ (14.888 file di corpus), dist/ (la superficie pubblicata), public/ e data/. L'esclusione e' sicura nella direzione che conta: se una follow-up citasse un file escluso, citedFiles() non lo vedrebbe e la issue NON sarebbe rilevata come risolta — il costo di sbagliare e' una chiusura MANCATA, mai una chiusura sbagliata. Cron sfasato (06:25 invece di 06:00) come gli altri workflow di questo repo.",
+      "baseline": {
+        "site": "c44fe32935eb540a",
+        "corpus": "c68f9bd1573e3fbd",
+        "alignedAt": "2026-09-03"
+      }
+    },
+    {
+      "path": ".github/workflows/auto-merge-enroll-sweep.yml",
+      "mode": "corpus-only",
+      "reason": "Rete di sicurezza sull'ARRUOLAMENTO nell'auto-merge nativo, non sul merge. Se il run di enable-native-automerge.yml fallisce all'apertura della PR (Remote Config muto, 5xx, evento perso) non c'e' nessun altro evento che ci riprovi: la PR resta verde e ferma per sempre, che e' la stessa forma di stallo della #12 e della #201. Sul sito questo sweep non esiste — la' l'arruolamento non e' mai stato misurato come punto di rottura e il ciclo ha altre reti — quindi non c'e' un gemello da sorvegliare. Non mergia niente: chiama la stessa API dell'arruolamento, e da li' decide GitHub aspettando il check richiesto dal ruleset.",
+      "baseline": {
+        "site": null,
+        "corpus": "383513e5f6cacb88",
         "alignedAt": "2026-09-03"
       }
     }
