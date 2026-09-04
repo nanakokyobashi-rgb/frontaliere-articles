@@ -1708,6 +1708,15 @@ const DEFAULT_OPTS = {
    * che arriva da `process.env`) sono opt-out veri e non scivolano nel ramo che
    * scrive. Vedi il commento su quella funzione.
    *
+   * COSA IL FLAG NON SPEGNE (#812): gli effetti IN PROCESSO. `markModelExhausted`
+   * riceve il flag come parametro invece di essere saltata, quindi un modello a
+   * quota esaurita, in timeout o su un host morto finisce comunque in
+   * `_exhaustedModels` e viene saltato per il resto della run — solo la proposta
+   * al ledger sparisce. E' la stessa divisione della discovery (marchio si',
+   * ledger no) e di `cooldownProvider`, ed e' una cosa sola in tutto il modulo:
+   * saltare anche il marchio faceva ripagare a ogni giro della cascata lo stesso
+   * 429/404 che il breaker esiste per non ripagare.
+   *
    * LIMITE ESPLICITO — la discovery non e' coperta da questo flag. E' per
    * processo, non per chiamata: `discoverFreeModels()` marca `stale` i modelli
    * che un provider non offre piu' e quel marchio va nel ledger. Un chiamante
@@ -2963,6 +2972,12 @@ export const DISCOVERY_PROVIDERS = Object.freeze([
 ]);
 
 let _discoveryDone = false;
+// Modalita' `recordScore` della discovery che ha vinto la corsa all'idempotenza.
+// Serve a distinguere «gia' fatta» da «gia' fatta CON LO STESSO contratto»: una
+// discovery girata in opt-out ha marchiato e potato la catena senza scrivere il
+// ledger, e un chiamante di produzione che arrivasse dopo erediterebbe quella
+// catena in silenzio (vedi discoverFreeModels).
+let _discoveryRecordScore = true;
 const _dynamicModels = [];
 // modelId → provider name, for ids pruned from DEFAULT_CHAIN because the provider stopped
 // offering them (see the markStale block in _discoverProvider). Diagnostics + re-entry
@@ -3082,6 +3097,15 @@ export async function _discoverProvider(cfg, { recordScore = true } = {}) {
       break;
     }
     const fullId = `${cfg.prefix}${id}`;
+    // Re-entry: il provider offre di nuovo questo id, quindi la prova su cui
+    // poggiava il ban `stale` e' smentita. Senza questa riga il re-inject della
+    // policy di re-entry documentata sotto sarebbe cosmetico — l'id tornerebbe
+    // nella catena ma resterebbe in `_exhaustedModels`, cioe' saltato lo stesso.
+    if (_prunedStale.delete(fullId) && _exhaustReason.get(fullId) === 'stale') {
+      _exhaustedModels.delete(fullId);
+      _exhaustReason.delete(fullId);
+      _exhaustDetail.delete(fullId);
+    }
     _dynamicModels.push(fullId);
     DEFAULT_CHAIN.push(fullId);
     added++;
@@ -3160,18 +3184,47 @@ export async function _discoverProvider(cfg, { recordScore = true } = {}) {
  * Il prune della catena resta in ogni caso: e' in memoria, muore col processo e
  * non ha niente a che vedere col ledger.
  *
- * ATTENZIONE all'idempotenza: la prima invocazione vince per tutto il processo.
- * `initScoreStore()` chiama la discovery col default (`true`), quindi un
- * chiamante diagnostico deve o non inizializzare lo store, o fare la discovery
- * in opt-out PRIMA — non dopo, quando sarebbe un no-op silenzioso.
+ * IDEMPOTENZA PER MODALITA', NON PER PROCESSO (#812). «Gira una volta sola» era
+ * vero finche' diagnostica e produzione non condividevano il processo. Se lo
+ * condividono, la prima invocazione congelava l'esito per tutte le altre: un
+ * chiamante di produzione che arrivasse dopo una discovery diagnostica ereditava
+ * senza un segnale una catena potata su un listing raccolto con chiavi e timing
+ * diagnostici — nessun errore, solo una cascata piu' corta di quella che la
+ * produzione avrebbe costruito. E nel verso opposto un `recordScore: false` che
+ * arrivasse secondo era un no-op silenzioso, cioe' un opt-out mai onorato.
+ *
+ * Quindi: si ri-esegue SOLO nel verso diagnostica → produzione, e al massimo una
+ * volta (dopo, `_discoveryRecordScore` e' `true` e nessuna escalation resta).
+ * L'add loop re-inietta gli id che il provider offre di nuovo e ne annulla il
+ * marchio `stale`, quindi la ri-esecuzione ricostruisce la catena di produzione
+ * invece di limitarsi a osservare che e' stata potata. Nel verso opposto
+ * (produzione gia' fatta, arriva un opt-out) non si ri-esegue — la catena e' gia'
+ * quella giusta e rifare il giro scriverebbe il ledger, cioe' esattamente cio'
+ * che il flag vieta — ma il no-op viene NOMINATO invece di essere silenzioso.
+ *
+ * `initScoreStore()` chiama la discovery col default (`true`): un chiamante
+ * diagnostico che voglia una sola sweep deve continuare a fare la discovery in
+ * opt-out PRIMA di inizializzare lo store.
  */
 export async function discoverFreeModels({ recordScore = true } = {}) {
-  if (_discoveryDone) return _dynamicModels;
+  const wantsRecord = coerceRecordScore(recordScore);
+  // L'unica escalation ammessa: diagnostica gia' fatta, arriva la produzione.
+  const escalates = _discoveryDone && wantsRecord && !_discoveryRecordScore;
+  if (_discoveryDone && !escalates) {
+    if (!wantsRecord) {
+      console.warn("⚠️  [Discovery] recordScore:false ignorato — la discovery di questo processo e' gia' stata fatta in modalita' di produzione; l'opt-out va richiesto PRIMA della prima discovery");
+    }
+    return _dynamicModels;
+  }
+  if (escalates) {
+    console.warn("⚠️  [Discovery] la catena di questo processo viene da una discovery in opt-out (recordScore:false) — la rieseguo per il chiamante di produzione");
+  }
   _discoveryDone = true;
+  _discoveryRecordScore = wantsRecord;
 
   await Promise.all(DISCOVERY_PROVIDERS.map(async (cfg) => {
     try {
-      await _discoverProvider(cfg, { recordScore });
+      await _discoverProvider(cfg, { recordScore: wantsRecord });
     } catch (e) {
       const msg = e?.name === 'AbortError' ? 'timeout' : (e?.message || String(e));
       console.warn(`⚠️  [Discovery:${cfg.name}] Failed (${msg}) — using static list`);
@@ -3646,14 +3699,22 @@ export function recordModelContentSuccess(modelId) {
  * already bounds total retry time, so removing the ban here doesn't risk an
  * unbounded loop.
  */
-export function recordModelContentFailure(modelId) {
+export function recordModelContentFailure(modelId, { recordScore = true } = {}) {
   if (!modelId) return;
-  recordModelFailure(modelId);
+  const record = coerceRecordScore(recordScore);
+  // Stessa divisione del ramo di fallimento di callLLM e della discovery: cio'
+  // che e' in processo si fa sempre (il conteggio consecutivo e il marchio, che
+  // sono cio' che evita di ripagare un modello che sbaglia payload a ogni giro),
+  // la proposta al ledger condiviso `ai_model_scores/_all` no. Questa funzione e'
+  // esportata e la chiamano i validatori FUORI da callLLM: senza il parametro,
+  // un flusso diagnostico che passi dalla validazione di contenuto scriveva il
+  // documento condiviso pur avendo chiesto l'opt-out su ogni chiamata (#812).
+  if (record) recordModelFailure(modelId);
   const count = (_consecutiveContentFailures.get(modelId) || 0) + 1;
   _consecutiveContentFailures.set(modelId, count);
   if (_isLastResortProvider(modelId)) return;
   if (count >= MAX_CONSECUTIVE_CONTENT_FAILURES) {
-    markModelExhausted(modelId, 'content');
+    markModelExhausted(modelId, 'content', '', { recordScore: record });
     _stats.exhausted++;
     console.warn(`🚫 [${modelId}] Exhausted after ${count} consecutive content-quality failures`);
   }
@@ -4340,6 +4401,14 @@ export function resetState() {
   _ghExhaustedPats.clear();
   _exhaustReason.clear();
   _prunedStale.clear();
+  // La discovery e' l'unico stato di processo che sopravviveva a resetState:
+  // dopo il reset la catena non porta piu' ne' i marchi ne' le potature della
+  // sweep precedente, quindi lasciare `_discoveryDone` a true avrebbe reso
+  // permanente un esito di cui si e' appena buttata via la meta' in-processo.
+  // `_dynamicModels`/`DEFAULT_CHAIN` NON si azzerano: sono la catena viva che i
+  // chiamanti hanno gia' in mano, e l'add loop salta cio' che e' gia' presente.
+  _discoveryDone = false;
+  _discoveryRecordScore = true;
   _exhaustedLogged.clear();
   _preflightSkipLogged.clear();
   _providerCooldown.clear();
@@ -5257,8 +5326,12 @@ async function _callOpenAICompatible(apiModel, messages, opts, { endpoint, apiKe
         // (daily-limit-looking response, stale local/OmniRoute auth 401) must
         // never hard-ban a last-resort provider. See _isLastResortProvider.
         if (isDailyLimitError(res.status, raw)) {
-          if (!_suppressExhaustionMark && !_isLastResortProvider(modelForTracking) && _shouldRecordScore(opts)) {
-            markModelExhausted(modelForTracking);
+          if (!_suppressExhaustionMark && !_isLastResortProvider(modelForTracking)) {
+            // recordScore non decide SE marchiare, solo se proporlo al ledger
+            // (vedi markModelExhausted): un modello a quota esaurita va saltato
+            // per il resto della run anche per un chiamante diagnostico, o la
+            // cascata ripaga il suo 429 a ogni giro.
+            markModelExhausted(modelForTracking, 'quota', '', { recordScore: _shouldRecordScore(opts) });
             _stats.exhausted++;
           }
           throw new Error(`[${displayModel}] Daily request limit reached`);
@@ -5282,8 +5355,9 @@ async function _callOpenAICompatible(apiModel, messages, opts, { endpoint, apiKe
               _learnSchemaIncompatible(modelForTracking);
             }
           }
-          if (nrc.markExhausted && !_isLastResortProvider(modelForTracking) && _shouldRecordScore(opts)) {
-            markModelExhausted(modelForTracking, 'nonretryable', `HTTP ${res.status}`);
+          if (nrc.markExhausted && !_isLastResortProvider(modelForTracking)) {
+            // Marchio sempre, ledger sotto flag — vedi il ramo daily-limit sopra.
+            markModelExhausted(modelForTracking, 'nonretryable', `HTTP ${res.status}`, { recordScore: _shouldRecordScore(opts) });
             _stats.exhausted++;
           }
           const err = new Error(`[${displayModel}] HTTP ${res.status}: ${raw.slice(0, 300)}`);
@@ -6424,10 +6498,10 @@ async function _callGeminiRaw(model, messages, opts) {
       if (!res.ok) {
         // Quota / rate-limit — mark exhausted if it looks permanent
         if (isDailyLimitError(res.status, raw)) {
-          if (_shouldRecordScore(opts)) {
-            markModelExhausted(model);
-            _stats.exhausted++;
-          }
+          // Marchio sempre, ledger sotto flag — gemello Gemini del ramo
+          // daily-limit di _callOpenAICompatible.
+          markModelExhausted(model, 'quota', '', { recordScore: _shouldRecordScore(opts) });
+          _stats.exhausted++;
           throw new Error(`[${model}] Daily quota reached`);
         }
         // Non-retryable client errors (unknown model, context too small)
@@ -6444,7 +6518,7 @@ async function _callGeminiRaw(model, messages, opts) {
               _learnSchemaIncompatible(model);
             }
           }
-          if (nrc.markExhausted && _shouldRecordScore(opts)) {
+          if (nrc.markExhausted) {
             // 'nonretryable', NOT the default 'quota': this is the Gemini twin
             // of the _callOpenAICompatible non-retryable branch, which already
             // labels correctly. Left at the default, a 404/unknown-model here
@@ -6452,7 +6526,7 @@ async function _callGeminiRaw(model, messages, opts) {
             // if it were a daily quota — exactly the over-persistence #4073
             // removed (quota-only persist gate in _persistScoresToFirestore).
             // Review 🔴 on #4073.
-            markModelExhausted(model, 'nonretryable', `HTTP ${res.status}`);
+            markModelExhausted(model, 'nonretryable', `HTTP ${res.status}`, { recordScore: _shouldRecordScore(opts) });
             _stats.exhausted++;
           }
           const err = new Error(`[${model}] HTTP ${res.status}: ${raw.slice(0, 300)}`);
@@ -7128,8 +7202,10 @@ export async function callLLM(messages, opts = {}) {
         // PROVIDER.LOCAL carve-out on recordModelContentFailure above: no
         // external quota, so exhausting it mid-run just guarantees zero
         // output for the rest of the wall-clock budget.
-        if (count >= MAX_CONSECUTIVE_429 && !_isLastResortProvider(model) && _shouldRecordScore(o)) {
-          markModelExhausted(model);
+        if (count >= MAX_CONSECUTIVE_429 && !_isLastResortProvider(model)) {
+          // Marchio sempre, ledger sotto flag: e' il breaker che impedisce di
+          // ripagare lo stesso 429 a ogni giro della cascata.
+          markModelExhausted(model, 'quota', '', { recordScore: _shouldRecordScore(o) });
           _stats.exhausted++;
           console.warn(`🚫 [${model}] Exhausted after ${count} consecutive 429s`);
         }
@@ -7162,8 +7238,8 @@ export async function callLLM(messages, opts = {}) {
           console.warn(`⏱️  [${model}] Timed out at the adaptive ${Math.round((e.adaptiveTimeoutMs || 0) / 1000)}s ceiling (caller asked ${Math.round((o.timeout || 0) / 1000)}s) — not exhausting on our own guess (${n}/${ADAPTIVE_TIMEOUT_MAX_CLAMPED_FAILURES})`);
         }
       }
-      if (isTimeoutFailure && !spared && !_isLastResortProvider(model) && _shouldRecordScore(o)) {
-        markModelExhausted(model, 'timeout');
+      if (isTimeoutFailure && !spared && !_isLastResortProvider(model)) {
+        markModelExhausted(model, 'timeout', '', { recordScore: _shouldRecordScore(o) });
         _stats.exhausted++;
         markedExhausted = true;
       }
@@ -7184,20 +7260,22 @@ export async function callLLM(messages, opts = {}) {
       // last-resort. Con `LOCAL_LLM_URL`/`OMNIROUTE_URL` puntati a un host
       // remoto la prova torna valida e il breaker deve scattare.
       //
-      // Il gate `recordScore` copre SOLO il marchio, non il cooldown, e la
-      // divisione e' deliberata: `markModelExhausted` scrive `_dirtyModels` e
-      // quindi il ledger condiviso `ai_model_scores/_all` (vedi
-      // DEFAULT_OPTS.recordScore), mentre `cooldownProvider` e' in-processo e
-      // muore col processo. Spegnere anche il cooldown farebbe pagare a un
-      // chiamante diagnostico un connect morto per OGNI id fratello — cioe'
-      // rinuncerebbe alla meta' di #475 che vale di piu' proprio nel caso d'uso
-      // che questo flag serve. Questo ramo non esiste sul gemello del sito
+      // Il gate `recordScore` copre SOLO la scrittura al ledger, ne' il cooldown
+      // ne' il marchio, e la divisione e' deliberata: di `markModelExhausted`
+      // solo `_dirtyModels` finisce nel documento condiviso `ai_model_scores/_all`
+      // (vedi DEFAULT_OPTS.recordScore), mentre l'appartenenza a
+      // `_exhaustedModels` e `cooldownProvider` sono in-processo e muoiono col
+      // processo. Per questo il flag scende come PARAMETRO (#812) invece di
+      // saltare la chiamata: spegnere anche il marchio o il cooldown farebbe
+      // pagare a un chiamante diagnostico un connect morto per OGNI id fratello
+      // — cioe' rinuncerebbe alla meta' di #475 che vale di piu' proprio nel
+      // caso d'uso che questo flag serve. Questo ramo non esiste sul gemello del sito
       // (e' nato qui con #475, ed e' una delle ragioni per cui la voce e'
       // `adapted` nel manifest dal 2026-09-04): senza questa riga la discesa del flag
       // lascerebbe scoperta l'unica scrittura al ledger che il corpus ha in piu'.
       if (!isTimeoutFailure && e.hostUnreachable && !_isHostUnreachableExempt(model, e)) {
-        if (!markedExhausted && _shouldRecordScore(o)) {
-          markModelExhausted(model, 'nonretryable', e.hostUnreachable);
+        if (!markedExhausted) {
+          markModelExhausted(model, 'nonretryable', e.hostUnreachable, { recordScore: _shouldRecordScore(o) });
           _stats.exhausted++;
           markedExhausted = true;
         }
