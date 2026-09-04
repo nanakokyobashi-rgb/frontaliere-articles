@@ -121,11 +121,31 @@ const MAX_FILES = parsePositiveNum(process.env.TRANSPORT_MAX_FILES, 25, {
 });
 
 /**
+ * Una FRAZIONE, non una percentuale. `parsePositiveNum` valida solo `> 0`,
+ * quindi `TRANSPORT_MAX_FAILURE_RATIO=25` (chi pensa in percentuale) passerebbe
+ * e renderebbe `ratio > maxRatio` sempre falso: la difesa dal buio SPARIREBBE
+ * invece di fallire — la stessa classe del tetto qui sopra, e per questo va
+ * chiusa nello stesso modo, non lasciata a un follow-up.
+ */
+export function parseRatio(raw, fallback, { label, warn = console.warn, tool = 'transport-identical-twins' } = {}) {
+  const n = parsePositiveNum(raw, fallback, { label, warn, tool });
+  if (n > 1) {
+    warn(
+      `::warning::[${tool}] ${label}=${String(raw)} e' una FRAZIONE fra 0 e 1, non una percentuale — `
+        + `override IGNORATO, si prosegue col default ${fallback}. `
+        + 'Attenzione: il comportamento che stavi comprando NON e\' attivo.',
+    );
+    return fallback;
+  }
+  return n;
+}
+
+/**
  * Frazione di fetch fallite oltre la quale la passata è BUIO, non silenzio.
  * Sotto la soglia restano transienti: un 429 isolato su 159 path non deve
  * rendere rossa una passata che ha comunque verificato tutto il resto.
  */
-const MAX_FAILURE_RATIO = parsePositiveNum(process.env.TRANSPORT_MAX_FAILURE_RATIO, 0.25, {
+const MAX_FAILURE_RATIO = parseRatio(process.env.TRANSPORT_MAX_FAILURE_RATIO, 0.25, {
   label: 'TRANSPORT_MAX_FAILURE_RATIO',
   tool: 'transport-identical-twins',
 });
@@ -197,24 +217,37 @@ export function couplingBlockers(couplings = []) {
  *   couplings        [{ path, mode }] gli accoppiamenti locali della voce
  *                    (rilevanti solo per un fixture: vedi `isFixture`).
  *
- * Ritorna `{ transport, state, reason }`. `transport: true` SOLO per un
- * `identical` in `site-ahead` con una destinazione scrivibile: ogni altro
- * verdetto è un no con la sua ragione, mai un silenzio.
+ * Ritorna `{ transport, permanent, state, reason }`. `transport: true` SOLO per
+ * un `identical` in `site-ahead` con una destinazione scrivibile: ogni altro
+ * verdetto è un no con la sua ragione, mai un silenzio. `permanent` dice se
+ * quel no scade (vedi `permanentBlock`).
  */
-export function transportVerdict(entry, now, base, { outOfScopePrefixes = [], couplings = [] } = {}) {
-  const state = classify(entry, now, base).state;
+/**
+ * Le ragioni per cui una voce non è copiabile in NESSUN giro, separate da
+ * quelle che scadono. È la distinzione su cui poggia il tetto: un vicino
+ * escluso perché `site-ahead` non lo è ancora (o perché la sua fetch è
+ * fallita) torna candidato domani, e rinviare l'altra metà è corretto; un
+ * vicino bloccato da `couplingBlockers`, da `unsafeTarget` o da `outOfScope`
+ * non tornerà MAI, e rinviare l'altra metà è un no permanente travestito da
+ * «aspetta il prossimo giro».
+ *
+ * Ritorna la ragione (stringa) o `null`. È la sorgente unica: `transportVerdict`
+ * la usa per il proprio verdetto e `main()` per costruire l'insieme dei path
+ * bloccati per sempre che il tetto deve saper riconoscere.
+ */
+export function permanentBlock(entry, { outOfScopePrefixes = [], couplings = [] } = {}) {
   if (entry.mode !== 'identical') {
-    return { transport: false, state, reason: `mode \`${entry.mode}\`: solo \`identical\` è copiabile così com'è` };
+    return `mode \`${entry.mode}\`: solo \`identical\` è copiabile così com'è`;
   }
   // Difesa in profondità: una voce `identical` sotto un prefisso `outOfScope`
   // non dovrebbe esistere (i due insiemi sono disgiunti per costruzione), ma se
   // ci finisse avrebbe DUE trasporti sullo stesso path — il mirror e questo.
   const covered = outOfScopePrefixes.find((p) => entry.path.startsWith(p));
   if (covered) {
-    return { transport: false, state, reason: `\`${covered}\` è outOfScope: ha già un trasporto suo, due canali sullo stesso path sono un conflitto` };
+    return `\`${covered}\` è outOfScope: ha già un trasporto suo, due canali sullo stesso path sono un conflitto`;
   }
   const unsafe = unsafeTarget(entry.path);
-  if (unsafe) return { transport: false, state, reason: `destinazione non scrivibile (${unsafe})` };
+  if (unsafe) return `destinazione non scrivibile (${unsafe})`;
   // L'insieme trasportabile dev'essere CHIUSO, non solo enumerato: un fixture
   // copiato da solo mette rossa la PR di trasporto, che resta aperta e spegne
   // il canale. Vale a prescindere dallo stato, così la ragione è leggibile
@@ -222,17 +255,20 @@ export function transportVerdict(entry, now, base, { outOfScopePrefixes = [], co
   if (isFixture(entry.path)) {
     const blockers = couplingBlockers(couplings);
     if (blockers.length) {
-      return {
-        transport: false,
-        state,
-        reason: `fixture accoppiato a ${blockers.length} path non \`identical\` (${blockers.slice(0, 3).join(', ')}): una copia isolata mette rossa la PR di trasporto`,
-      };
+      return `fixture accoppiato a ${blockers.length} path non \`identical\` (${blockers.slice(0, 3).join(', ')}): una copia isolata mette rossa la PR di trasporto`;
     }
   }
+  return null;
+}
+
+export function transportVerdict(entry, now, base, { outOfScopePrefixes = [], couplings = [] } = {}) {
+  const state = classify(entry, now, base).state;
+  const forever = permanentBlock(entry, { outOfScopePrefixes, couplings });
+  if (forever) return { transport: false, permanent: true, state, reason: forever };
   if (state !== 'site-ahead') {
-    return { transport: false, state, reason: `stato \`${state}\`: copiabile solo \`site-ahead\` (il sito avanti, questo lato fermo sulla baseline)` };
+    return { transport: false, permanent: false, state, reason: `stato \`${state}\`: copiabile solo \`site-ahead\` (il sito avanti, questo lato fermo sulla baseline)` };
   }
-  return { transport: true, state, reason: 'il sito è andato avanti e qui nessuno ha toccato il file: la copia è esatta' };
+  return { transport: true, permanent: false, state, reason: 'il sito è andato avanti e qui nessuno ha toccato il file: la copia è esatta' };
 }
 
 /**
@@ -263,11 +299,29 @@ export function transportVerdict(entry, now, base, { outOfScopePrefixes = [], co
  *                 quelli che non sono diventati candidati: è da lì che arriva
  *                 il verso inverso (un candidato non fixture ha `couplings: []`
  *                 e da solo non saprebbe di essere pinnato da nessuno).
+ *   blockedForever Set dei path che `permanentBlock` esclude in OGNI giro.
+ *
+ * E qui sta la differenza che il rinvio da solo non fa. Un vicino che tornerà
+ * candidato domani rende il taglio un RINVIO; un vicino bloccato per sempre —
+ * `generator/tests/crawler-cross-repo-artifacts.test.mjs` è accoppiato a
+ * `scripts/ci/loop-sync-manifest.json`, `corpus-only`, che non sarà mai
+ * `identical` — lo rende un NO PERMANENTE: appena quel fixture esce da
+ * `stable`, i file che pinna (`scripts/ci/close-recovered-failure-issues.mjs`,
+ * `generator/data/crawler-cross-repo-contract.json`) verrebbero scartati a ogni
+ * giro, con «aspetta il giro in cui ci stanno insieme» per un giro che non
+ * arriva mai: una fix del sito che non scende più, in silenzio, con la passata
+ * verde. Il taglio resta — copiare una metà sola mette comunque rossa la PR —
+ * ma la ragione dice «copia a mano», che è l'unica azione che lo sblocca, e il
+ * flag `permanent` la porta fino al report.
+ *
+ * La permanenza si PROPAGA: se A cade per un vicino bloccato per sempre, anche
+ * B che cade per colpa di A cade per sempre.
  *
  * Ritorna `{ chosen, dropped, capped }`. `capped` è UN conteggio solo — i
  * candidati non copiati in questa passata — e `dropped` ne porta le ragioni.
  */
-export function closeTransportSet(candidates, { maxFiles = 25, alignedPaths = new Set(), couplingGraph = [] } = {}) {
+export function closeTransportSet(candidates, { maxFiles = 25, alignedPaths = new Set(), couplingGraph = [], blockedForever = new Set() } = {}) {
+  const permanent = new Set(blockedForever);
   const candidatePaths = new Set(candidates.map((c) => c.path));
   const neighbours = new Map();
   const link = (a, b) => {
@@ -293,14 +347,19 @@ export function closeTransportSet(candidates, { maxFiles = 25, alignedPaths = ne
   for (let changed = true; changed; ) {
     changed = false;
     for (const [rel, c] of [...kept]) {
-      const split = [...(neighbours.get(rel) || [])].filter((q) => !kept.has(q) && !alignedPaths.has(q));
+      const split = [...(neighbours.get(rel) || [])].filter((q) => !kept.has(q) && !alignedPaths.has(q)).sort();
       if (!split.length) continue;
+      const forever = split.filter((q) => permanent.has(q));
       kept.delete(rel);
+      if (forever.length) permanent.add(rel);
       dropped.push({
         path: rel,
         candidate: candidatePaths.has(rel),
-        split: split.sort(),
-        reason: `separato dai suoi accoppiamenti (${split.sort().join(', ')}): una metà copiata senza l\u2019altra mette rossa la PR di trasporto — aspetta il giro in cui ci stanno insieme`,
+        split,
+        permanent: forever.length > 0,
+        reason: forever.length
+          ? `accoppiato a ${forever.join(', ')}, che nessun giro potra\u2019 copiare: il rinvio non scade, serve una copia a mano delle due meta\u2019 insieme`
+          : `separato dai suoi accoppiamenti (${split.join(', ')}): una metà copiata senza l\u2019altra mette rossa la PR di trasporto — aspetta il giro in cui ci stanno insieme`,
       });
       changed = true;
     }
@@ -321,17 +380,30 @@ export function closeTransportSet(candidates, { maxFiles = 25, alignedPaths = ne
  * un minimo assoluto perché su pochi path una frazione è rumore. Il caso
  * «tutte fallite» è rosso comunque: lì non c'è niente di verificato di cui il
  * report possa parlare.
+ *
+ * `missing` conta l'altra metà del buio, e non era guardata: **un 404 non
+ * lancia**. `siteFile()` ritorna `null` (è un segnale: il file non esiste più
+ * là), quindi se `SITE_REPO`/`SITE_REF` non risolvono più — branch rinominato,
+ * repo reso privato, che su `raw.githubusercontent` dà 404 e non 403 — TUTTE le
+ * voci prendono `site: null`, finiscono in `skipped` come
+ * `removed-on-site`/`missing-here`, `failed` resta 0 e la passata esce verde
+ * con «0 da portare, 0 non verificati». È il modo più probabile di perdere
+ * l'intero canale, ed è esattamente il buio che questo verdetto esiste per
+ * chiudere. Un'assenza di massa è un ref sbagliato, non N rimozioni simultanee;
+ * una o due assenze restano un dato normale e non fanno rosso.
  */
-export function fetchFailureVerdict(attempted, failed, { maxRatio = 0.25, minFailures = 3 } = {}) {
-  if (attempted <= 0 || failed <= 0) return { red: false, reason: null };
-  if (failed >= attempted) {
-    return { red: true, reason: `tutte le ${attempted} fetch dal sito sono fallite: la passata non ha verificato NIENTE` };
+export function fetchFailureVerdict(attempted, failed, { maxRatio = 0.25, minFailures = 3, missing = 0 } = {}) {
+  const unverified = failed + missing;
+  if (attempted <= 0 || unverified <= 0) return { red: false, reason: null };
+  const detail = missing > 0 ? ` (${failed} fetch fallite, ${missing} assenti sul sito: il ref e\u2019 sbagliato, non ${missing} rimozioni simultanee)` : '';
+  if (unverified >= attempted) {
+    return { red: true, reason: `nessuna delle ${attempted} voci e\u2019 stata verificata${detail || ': tutte le fetch dal sito sono fallite'}: la passata non ha verificato NIENTE` };
   }
-  const ratio = failed / attempted;
-  if (failed >= minFailures && ratio > maxRatio) {
+  const ratio = unverified / attempted;
+  if (unverified >= minFailures && ratio > maxRatio) {
     return {
       red: true,
-      reason: `${failed}/${attempted} fetch dal sito fallite (${(ratio * 100).toFixed(0)}%, soglia ${(maxRatio * 100).toFixed(0)}%): il report «0 da portare» non significa piu\u2019 niente`,
+      reason: `${unverified}/${attempted} voci non verificate${detail} (${(ratio * 100).toFixed(0)}%, soglia ${(maxRatio * 100).toFixed(0)}%): il report «0 da portare» non significa piu\u2019 niente`,
     };
   }
   return { red: false, reason: null };
@@ -417,7 +489,9 @@ async function main() {
   const failed = [];
   const couplingGraph = [];
   const alignedPaths = new Set();
+  const blockedForever = new Set();
   let attempted = 0;
+  let missingOnSite = 0;
 
   for (const entry of manifest.files) {
     if (entry.mode !== 'identical') continue;
@@ -425,11 +499,24 @@ async function main() {
     const sitePath = entry.sitePath || rel;
     const base = entry.baseline || { site: null, corpus: null };
 
+    const couplings = isFixture(rel) ? localCouplings(rel, modeOf) : [];
+    // Raccolto per OGNI fixture, non solo per i candidati: e' la mappa inversa
+    // di cui il tetto ha bisogno per non copiare un file lasciando indietro il
+    // golden che lo pinna (il fixture puo' essere stato escluso prima).
+    if (couplings.length) couplingGraph.push({ path: rel, couplings });
+    // Non dipende dagli hash, quindi si sa PRIMA della fetch — ed e' cio' che
+    // permette al tetto di distinguere un rinvio da un no che non scade.
+    if (permanentBlock(entry, { outOfScopePrefixes, couplings })) blockedForever.add(rel);
+
     let content;
     let now;
     attempted += 1;
     try {
       content = await siteFile(sitePath);
+      // Un 404 non lancia: qui non c'e' un errore da mettere in `failed`, ma
+      // nemmeno una verifica. Contato a parte, e' la meta' del buio che
+      // `fetchFailureVerdict` non poteva vedere.
+      if (content === null) missingOnSite += 1;
       now = { site: content === null ? null : sha256(content), corpus: localHash(rel) };
     } catch (e) {
       // PROCEED-SAFE come il drift check: una fetch fallita non deve far
@@ -439,11 +526,6 @@ async function main() {
       continue;
     }
 
-    const couplings = isFixture(rel) ? localCouplings(rel, modeOf) : [];
-    // Raccolto per OGNI fixture, non solo per i candidati: e' la mappa inversa
-    // di cui il tetto ha bisogno per non copiare un file lasciando indietro il
-    // golden che lo pinna (il fixture puo' essere stato escluso prima).
-    if (couplings.length) couplingGraph.push({ path: rel, couplings });
     const verdict = transportVerdict(entry, now, base, { outOfScopePrefixes, couplings });
     if (!verdict.transport) {
       skipped.push({ path: rel, state: verdict.state, reason: verdict.reason });
@@ -464,8 +546,12 @@ async function main() {
     maxFiles: MAX_FILES,
     alignedPaths,
     couplingGraph,
+    blockedForever,
   });
   for (const d of dropped) skipped.push({ path: d.path, state: 'site-ahead', reason: d.reason });
+  // I rinvii che non scadono non sono «al prossimo giro»: sono una copia a mano
+  // che nessuno farà se il report non la nomina.
+  const manual = dropped.filter((d) => d.permanent);
 
   const transported = [];
   for (const { entry, path: rel, sitePath, content, now, base } of chosen) {
@@ -489,16 +575,17 @@ async function main() {
   // guarda il diff. «Non ho potuto guardare» invece sì — è indistinguibile dal
   // primo nel report, quindi deve distinguersi nell'EXIT CODE, o il canale si
   // spegne restando verde.
-  const dark = fetchFailureVerdict(attempted, failed.length, { maxRatio: MAX_FAILURE_RATIO });
+  const dark = fetchFailureVerdict(attempted, failed.length, { maxRatio: MAX_FAILURE_RATIO, missing: missingOnSite });
 
   if (AS_JSON) {
-    console.log(JSON.stringify({ apply: APPLY, transported, capped, failed, skipped, dark }, null, 2));
+    console.log(JSON.stringify({ apply: APPLY, transported, capped, failed, missingOnSite, manual, skipped, dark }, null, 2));
   } else {
     const mode = APPLY ? 'APPLY' : 'dry-run';
     console.log(`transport-identical-twins (${mode}): ${transported.length} da portare, ${skipped.length} fermi, ${failed.length} non verificati`);
     for (const t of transported) console.log(`  ⬇ ${t.path}  ←  ${t.sitePath}  (${t.from} → ${t.to})`);
     if (capped) console.log(`  ⏸ altri ${capped} candidati non copiati oggi (tetto di ${MAX_FILES} file, più le metà che il taglio avrebbe separato): restano al prossimo giro`);
     for (const f of failed) console.log(`  ⚠ ${f.path}: ${f.reason}`);
+    for (const m of manual) console.log(`  ⛔ ${m.path}: ${m.reason}`);
     // Gli skip attivi — quelli che una persona deve guardare — sono i soli
     // stampati: elencare 150 `stable` ogni giorno è la riga che nessuno legge.
     for (const s of skipped.filter((x) => x.state !== 'stable')) console.log(`  · ${s.path}: ${s.reason}`);
