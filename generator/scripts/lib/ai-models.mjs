@@ -1500,6 +1500,15 @@ function _isSameMachineHost(host) {
   // IPv4-mapped / IPv4-compatible IPv6: ::ffff:127.0.0.1, ::ffff:0:127.0.0.1
   const mapped = /^::(?:ffff:(?:0{1,4}:)?)?(\d{1,3}(?:\.\d{1,3}){3})$/.exec(h);
   if (mapped) h = mapped[1];
+  // `new URL()` normalizza la forma IPv4-mapped a esadecimale — `::ffff:127.0.0.1`
+  // esce da `hostname` come `[::ffff:7f00:1]`, quindi la forma puntata da sola
+  // non basta: e' proprio quella che il parser NON restituisce mai.
+  const hexMapped = /^::ffff:(?:0{1,4}:)?([0-9a-f]{1,4}):([0-9a-f]{1,4})$/.exec(h);
+  if (hexMapped) {
+    const hi = parseInt(hexMapped[1], 16);
+    const lo = parseInt(hexMapped[2], 16);
+    h = `${hi >> 8}.${hi & 0xff}.${lo >> 8}.${lo & 0xff}`;
+  }
   if (/^127\./.test(h) || h === '::1' || h === '::' || h === '0.0.0.0') return true;
   if (h === 'localhost' || h.endsWith('.localhost')) return true;
   if (h === 'host.docker.internal' || h === 'gateway.docker.internal') return true;

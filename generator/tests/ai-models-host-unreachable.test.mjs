@@ -36,6 +36,7 @@
 
 import { strict as assert } from 'node:assert';
 import { describe, it, beforeEach, afterEach, mock } from 'node:test';
+import { networkInterfaces } from 'node:os';
 
 import {
   classifyHostUnreachable,
@@ -431,11 +432,25 @@ describe('esenzione dal breaker: loopback vs host remoto', () => {
     process.env.OMNIROUTE_ENABLED = '1';
     process.env.OMNIROUTE_URL = 'https://gateway.example.invalid/v1/chat/completions';
     process.env.AI_MODELS_FORCE_CHAIN = 'omniroute/auto';
-    globalThis.fetch = async () => new Response('rate limit exceeded', { status: 429 });
+    let calls = 0;
+    globalThis.fetch = async () => { calls++; return new Response('rate limit exceeded', { status: 429 }); };
 
-    await assert.rejects(
-      () => callLLM([{ role: 'user', content: 'x' }], { maxRetriesPerModel: 1, backoffMs: 1, timeout: 5000 }),
-    );
+    // DUE chiamate, non una (#813). Una sola `callLLM` conta UN 429 e il ban
+    // scatta a MAX_CONSECUTIVE_429 = 2: con una chiamata sola questo assert
+    // resterebbe verde anche sostituendo `_isLastResortProvider` con
+    // `_isHostUnreachableExempt` nel ramo del 429 — cioe' non pinnerebbe
+    // affatto l'esenzione che dice di misurare. La catena e' pinnata a un solo
+    // id, quindi il contatore non si azzera fra le due chiamate.
+    for (let i = 0; i < 2; i++) {
+      await assert.rejects(
+        () => callLLM([{ role: 'user', content: 'x' }], { maxRetriesPerModel: 1, backoffMs: 1, timeout: 5000 }),
+      );
+    }
+    // Se il secondo 429 non venisse mai composto (un cooldown che salta l'id,
+    // un reset del contatore) l'assert sotto tornerebbe verde per il motivo
+    // sbagliato: il contatore non arriverebbe alla soglia nemmeno senza
+    // esenzione.
+    assert.ok(calls >= 2, `attesi due 429 contro omniroute, visti ${calls}`);
 
     const stats = getStats();
     assert.ok(!stats.exhaustedModels.includes('omniroute/auto'), `un 429 non deve bannare omniroute: ${stats.exhaustedModels.join(', ')}`);
@@ -852,5 +867,269 @@ describe('durata del cooldown per causa (#803)', () => {
       ghCalls().length > primaDellaScadenza,
       `un 429 non deve prolungare la finestra di una causa piu' grave: attesi piu' di ${primaDellaScadenza} connect, visti ${ghCalls().length}`,
     );
+  });
+});
+
+
+/**
+ * ── #813: LOOPBACK IN TUTTE LE FORME, E LA MACCHINA E' PIU' GRANDE DEL LOOPBACK ─
+ *
+ * `_isLoopbackUrl` leggeva quattro forme (`localhost`, `::1`, `0.0.0.0`,
+ * `127.*`) e ne mancavano altrettante che arrivano davvero: `[::]`, la forma
+ * IPv4-mapped `::ffff:127.0.0.1`, e i nomi sotto `.localhost` che RFC 6761
+ * riserva al loopback. Ma il buco piu' costoso non e' una forma: `PROVIDER.LOCAL`
+ * e' documentato come «il runner CI o una VM self-hosted», e su una VM il
+ * server locale si indirizza di routine con l'IP di interfaccia o
+ * `host.docker.internal` — che loopback non sono. Li' ECONNREFUSED continua a
+ * significare «il server non gira», cioe' la finestra per cui `local/` esiste,
+ * e il ban lo rendeva irreversibile per la run: zero articoli invece che una
+ * run degradata.
+ */
+describe('#813 — esenzione: le forme del loopback e la stessa macchina', () => {
+  const ENV_KEYS = [
+    'AI_MODELS_FORCE_CHAIN', 'AI_MODELS_PREFER', 'GH_MODELS_PAT',
+    'LOCAL_LLM_ENABLED', 'LOCAL_LLM_URL',
+  ];
+  let envBackup = {};
+  let realFetch;
+
+  beforeEach(() => {
+    envBackup = Object.fromEntries(ENV_KEYS.map((k) => [k, process.env[k]]));
+    for (const k of ENV_KEYS) delete process.env[k];
+    process.env.GH_MODELS_PAT = 'test-pat';
+    process.env.LOCAL_LLM_ENABLED = '1';
+    process.env.AI_MODELS_FORCE_CHAIN = 'local/fallback';
+    realFetch = globalThis.fetch;
+    globalThis.fetch = async () => { throw undiciFetchFailed('ECONNREFUSED'); };
+    resetState();
+  });
+
+  afterEach(() => {
+    globalThis.fetch = realFetch;
+    for (const k of ENV_KEYS) {
+      if (envBackup[k] === undefined) delete process.env[k];
+      else process.env[k] = envBackup[k];
+    }
+    resetState();
+  });
+
+  // Ogni voce e' una forma che `new URL()` produce davvero e che la guardia
+  // precedente leggeva come «host remoto».
+  for (const url of [
+    'http://[::ffff:127.0.0.1]:8080/v1/chat/completions',
+    'http://[::]:8080/v1/chat/completions',
+    'http://[::1]:8080/v1/chat/completions',
+    'http://llm.localhost:8080/v1/chat/completions',
+    'http://127.0.0.53:8080/v1/chat/completions',
+  ]) {
+    it(`${url} e' loopback e resta esente`, async () => {
+      process.env.LOCAL_LLM_URL = url;
+      await assert.rejects(
+        () => callLLM([{ role: 'user', content: 'x' }], { maxRetriesPerModel: 1, backoffMs: 1, timeout: 5000 }),
+      );
+      const stats = getStats();
+      assert.ok(!stats.exhaustedModels.includes('local/fallback'), `nessun ban atteso su ${url}, visti: ${stats.exhaustedModels.join(', ')}`);
+      assert.equal(stats.activeCooldowns.local, undefined, `nessun cooldown atteso su ${url}: ${JSON.stringify(stats.activeCooldowns)}`);
+    });
+  }
+
+  it('un indirizzo di interfaccia di QUESTA macchina non e\' un host remoto morto', async () => {
+    // Il caso della VM self-hosted, preso dalle interfacce reali del processo
+    // invece che da un letterale: e' l'unica forma che non si puo' inventare.
+    const own = Object.values(networkInterfaces())
+      .flat()
+      .find((i) => i && !i.internal && i.family === 'IPv4');
+    if (!own) return; // runner senza interfacce esterne: niente da misurare
+
+    process.env.LOCAL_LLM_URL = `http://${own.address}:8080/v1/chat/completions`;
+    await assert.rejects(
+      () => callLLM([{ role: 'user', content: 'x' }], { maxRetriesPerModel: 1, backoffMs: 1, timeout: 5000 }),
+    );
+    const stats = getStats();
+    assert.ok(!stats.exhaustedModels.includes('local/fallback'), `nessun ban atteso sul proprio IP, visti: ${stats.exhaustedModels.join(', ')}`);
+    assert.equal(stats.activeCooldowns.local, undefined, `nessun cooldown atteso sul proprio IP: ${JSON.stringify(stats.activeCooldowns)}`);
+  });
+
+  it('host.docker.internal e\' la stessa macchina, vista da un container', async () => {
+    process.env.LOCAL_LLM_URL = 'http://host.docker.internal:8080/v1/chat/completions';
+    await assert.rejects(
+      () => callLLM([{ role: 'user', content: 'x' }], { maxRetriesPerModel: 1, backoffMs: 1, timeout: 5000 }),
+    );
+    assert.ok(!getStats().exhaustedModels.includes('local/fallback'), 'nessun ban atteso su host.docker.internal');
+  });
+
+  // Il contrappunto che tiene onesta la regola: un host davvero remoto continua
+  // ad armare il breaker, che e' cio' che #793 ha comprato.
+  it('un gateway remoto arma ancora il breaker', async () => {
+    process.env.LOCAL_LLM_URL = 'https://gateway.example.invalid/v1/chat/completions';
+    await assert.rejects(
+      () => callLLM([{ role: 'user', content: 'x' }], { maxRetriesPerModel: 1, backoffMs: 1, timeout: 5000 }),
+    );
+    const stats = getStats();
+    assert.ok(stats.exhaustedModels.includes('local/fallback'), `atteso il ban su host remoto, visti: ${stats.exhaustedModels.join(', ')}`);
+    assert.ok(stats.activeCooldowns.local > 0, `atteso il cooldown su host remoto: ${JSON.stringify(stats.activeCooldowns)}`);
+  });
+});
+
+/**
+ * ── #813: SI GIUDICA IL SOCKET APERTO, NON LA STRINGA CONFIGURATA ──────────
+ *
+ * `_callLocal` passa un `dispatcher`, e una `fetch` puo' passare per un proxy
+ * d'ambiente: il connect rifiutato che torna indietro puo' venire dal proxy
+ * locale, non dall'host. L'URL configurato dice «gateway remoto», il peer
+ * effettivamente contattato dice `127.0.0.1:3128` — e il ban scriveva «host
+ * morto» nel ledger CONDIVISO su un endpoint che nessuno ha mai chiamato.
+ */
+describe('#813 — il peer rifiutato decide, non l\'URL', () => {
+  const ENV_KEYS = [
+    'AI_MODELS_FORCE_CHAIN', 'AI_MODELS_PREFER', 'GH_MODELS_PAT',
+    'HTTPS_PROXY', 'https_proxy', 'HTTP_PROXY', 'http_proxy',
+    'ALL_PROXY', 'all_proxy', 'NO_PROXY', 'no_proxy',
+    ...Array.from({ length: 8 }, (_, i) => `GH_MODELS_PAT_${i + 2}`),
+  ];
+  let envBackup = {};
+  let realFetch;
+
+  // Un ECONNREFUSED che porta l'indirizzo del peer, come lo produce undici.
+  const refusedFrom = (address, port) => Object.assign(new TypeError('fetch failed'), {
+    cause: Object.assign(new Error(`connect ECONNREFUSED ${address}:${port}`), {
+      code: 'ECONNREFUSED', address, port, syscall: 'connect',
+    }),
+  });
+
+  beforeEach(() => {
+    envBackup = Object.fromEntries(ENV_KEYS.map((k) => [k, process.env[k]]));
+    for (const k of ENV_KEYS) delete process.env[k];
+    process.env.GH_MODELS_PAT = 'test-pat';
+    process.env.AI_MODELS_FORCE_CHAIN = 'gpt-4o-mini';
+    realFetch = globalThis.fetch;
+    resetState();
+  });
+
+  afterEach(() => {
+    globalThis.fetch = realFetch;
+    for (const k of ENV_KEYS) {
+      if (envBackup[k] === undefined) delete process.env[k];
+      else process.env[k] = envBackup[k];
+    }
+    resetState();
+  });
+
+  it('un connect rifiutato DA QUESTA MACCHINA non giudica l\'host remoto', async () => {
+    globalThis.fetch = async () => { throw refusedFrom('127.0.0.1', 3128); };
+
+    await assert.rejects(
+      () => callLLM([{ role: 'user', content: 'x' }], { maxRetriesPerModel: 1, backoffMs: 1, timeout: 5000 }),
+    );
+
+    const stats = getStats();
+    assert.ok(!stats.exhaustedModels.includes('gpt-4o-mini'), `il proxy locale spento non deve bannare il modello, visti: ${stats.exhaustedModels.join(', ')}`);
+    assert.equal(stats.activeCooldowns.github, undefined, `nessun cooldown atteso: ${JSON.stringify(stats.activeCooldowns)}`);
+  });
+
+  it('un connect rifiutato dall\'host remoto arma il breaker come prima', async () => {
+    globalThis.fetch = async () => { throw refusedFrom('20.20.20.20', 443); };
+
+    await assert.rejects(
+      () => callLLM([{ role: 'user', content: 'x' }], { maxRetriesPerModel: 1, backoffMs: 1, timeout: 5000 }),
+    );
+
+    const stats = getStats();
+    assert.ok(stats.exhaustedModels.includes('gpt-4o-mini'), `atteso il ban sull'host remoto, visti: ${stats.exhaustedModels.join(', ')}`);
+    assert.ok(stats.activeCooldowns.github > 0, `atteso il cooldown: ${JSON.stringify(stats.activeCooldowns)}`);
+  });
+
+  it('con un proxy d\'ambiente configurato nessun connect parla dell\'host', async () => {
+    // Qui l'errore NON porta indirizzi (il caso comune: il fallimento arriva
+    // impacchettato dal dispatcher). L'unica cosa che si sa e' che il peer
+    // contattato non era l'host di destinazione.
+    process.env.HTTPS_PROXY = 'http://proxy.internal:3128';
+    globalThis.fetch = async () => { throw undiciFetchFailed('ECONNREFUSED'); };
+
+    await assert.rejects(
+      () => callLLM([{ role: 'user', content: 'x' }], { maxRetriesPerModel: 1, backoffMs: 1, timeout: 5000 }),
+    );
+
+    const stats = getStats();
+    assert.ok(!stats.exhaustedModels.includes('gpt-4o-mini'), `dietro un proxy nessun ban, visti: ${stats.exhaustedModels.join(', ')}`);
+    assert.equal(stats.activeCooldowns.github, undefined, `nessun cooldown atteso dietro un proxy: ${JSON.stringify(stats.activeCooldowns)}`);
+  });
+
+  it('NO_PROXY=* e\' una variabile impostata che non intercetta nulla', async () => {
+    // Il confine: la sola PRESENZA della variabile non deve spegnere #475.
+    process.env.HTTPS_PROXY = 'http://proxy.internal:3128';
+    process.env.NO_PROXY = '*';
+    globalThis.fetch = async () => { throw undiciFetchFailed('ECONNREFUSED'); };
+
+    await assert.rejects(
+      () => callLLM([{ role: 'user', content: 'x' }], { maxRetriesPerModel: 1, backoffMs: 1, timeout: 5000 }),
+    );
+
+    assert.ok(getStats().exhaustedModels.includes('gpt-4o-mini'), 'senza proxy effettivo il breaker resta armato');
+  });
+});
+
+/**
+ * ── #813: IL FLAP DEL RESOLVER NON BANNA L'ULTIMA RISORSA ──────────────────
+ *
+ * L'escalation di #770 promuove tre `EAI_AGAIN` consecutivi sullo stesso
+ * provider a verdetto sull'host. Con `LOCAL_LLM_URL`/`OMNIROUTE_URL` puntati a
+ * un NOME DNS, un resolver che inciampa tre volte manda in ban + cooldown
+ * proprio la riga finale della catena — quella che esiste per la finestra
+ * «tutti gli altri esauriti» — su una prova che il codice stesso definisce
+ * transitoria. Il contatore continua a salire: e' la conseguenza a non
+ * applicarsi.
+ */
+describe('#813 — l\'escalation del flap salta i provider di ultima risorsa', () => {
+  const ENV_KEYS = [
+    'AI_MODELS_FORCE_CHAIN', 'AI_MODELS_PREFER', 'GH_MODELS_PAT',
+    'OMNIROUTE_ENABLED', 'OMNIROUTE_URL',
+  ];
+  let envBackup = {};
+  let realFetch;
+
+  beforeEach(() => {
+    envBackup = Object.fromEntries(ENV_KEYS.map((k) => [k, process.env[k]]));
+    for (const k of ENV_KEYS) delete process.env[k];
+    process.env.GH_MODELS_PAT = 'test-pat';
+    process.env.OMNIROUTE_ENABLED = '1';
+    process.env.OMNIROUTE_URL = 'https://gateway.example.invalid/v1/chat/completions';
+    process.env.AI_MODELS_FORCE_CHAIN = 'omniroute/auto';
+    realFetch = globalThis.fetch;
+    globalThis.fetch = async () => { throw undiciFetchFailed('EAI_AGAIN'); };
+    resetState();
+  });
+
+  afterEach(() => {
+    globalThis.fetch = realFetch;
+    for (const k of ENV_KEYS) {
+      if (envBackup[k] === undefined) delete process.env[k];
+      else process.env[k] = envBackup[k];
+    }
+    resetState();
+  });
+
+  it('tre flap di fila non bannano omniroute e non lo congelano', async () => {
+    for (let i = 0; i < 3; i++) {
+      await assert.rejects(
+        () => callLLM([{ role: 'user', content: 'x' }], { maxRetriesPerModel: 1, backoffMs: 1, timeout: 5000 }),
+      );
+    }
+
+    const stats = getStats();
+    assert.equal(stats.resolverFlaps.omniroute, 3, `i flap vanno comunque contati: ${JSON.stringify(stats.resolverFlaps)}`);
+    assert.ok(!stats.exhaustedModels.includes('omniroute/auto'), `nessun ban da flap sull'ultima risorsa, visti: ${stats.exhaustedModels.join(', ')}`);
+    assert.equal(stats.activeCooldowns.omniroute, undefined, `nessun cooldown da flap sull'ultima risorsa: ${JSON.stringify(stats.activeCooldowns)}`);
+  });
+
+  it('su un provider normale l\'escalation resta quella di #770', async () => {
+    process.env.AI_MODELS_FORCE_CHAIN = 'gpt-4o-mini,gpt-4.1-mini,gpt-4o';
+
+    await assert.rejects(
+      () => callLLM([{ role: 'user', content: 'x' }], { maxRetriesPerModel: 1, backoffMs: 1, timeout: 5000 }),
+    );
+
+    const stats = getStats();
+    assert.ok(stats.activeCooldowns.github > 0, `atteso il cooldown dopo l'escalation: ${JSON.stringify(stats.activeCooldowns)}`);
   });
 });
