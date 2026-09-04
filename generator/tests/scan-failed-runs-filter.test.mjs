@@ -18,6 +18,9 @@ import {
   buildLostArticleReport,
   isDeclaredSkipOnly,
   DECLARED_SKIP_STEP_RE,
+  DEFAULT_RUN_QUERY_HORIZON_MIN,
+  parseHorizonMin,
+  horizonPressureMin,
 } from '../../scripts/ci/scan-failed-runs.mjs';
 import { TITLE_RE } from '../../scripts/ci/close-recovered-failure-issues.mjs';
 import { isExclusivelyWorkflowScoped } from '../../scripts/ci/check-workflows-scope.mjs';
@@ -346,4 +349,46 @@ test('#170: il filtro NON e\' un allowlist di workflow — il nome dello step e\
   assert.equal(DECLARED_SKIP_STEP_RE.test('Post-merge follow-up triage'), false);
   assert.equal(DECLARED_SKIP_STEP_RE.test('Pre-flight — quota backoff gate (zero-Claude)'), false,
     'il pre-flight e\' PROCEED-SAFE (continue-on-error) e non fallisce mai: non deve entrare nel filtro');
+});
+
+/**
+ * Orizzonte della query `--created` (issue #762 item 3).
+ *
+ * Il filtro vero e' `updatedAt >= since`, ma la query puo' discriminare solo
+ * per `created`: l'orizzonte deve quindi coprire la coda, non la sola durata
+ * del job piu' lungo. La versione precedente valeva 350+60 minuti, cioe'
+ * presumeva che una run non potesse essere piu' vecchia del proprio job — la
+ * stessa assunzione che #761 ha smentito sul gemello scan-job-timeouts.mjs.
+ */
+test('l\'orizzonte della query copre l\'attesa in coda, non la sola durata del job', () => {
+  // 24h di coda (il bound che GitHub stesso impone) + 350 min di job + margine.
+  assert.ok(
+    DEFAULT_RUN_QUERY_HORIZON_MIN >= 24 * 60 + 350,
+    `orizzonte ${DEFAULT_RUN_QUERY_HORIZON_MIN} min: non copre una run rimasta in coda 24h`,
+  );
+  // Il vecchio valore era 410: se qualcuno lo reintroduce, questo test lo dice.
+  assert.ok(DEFAULT_RUN_QUERY_HORIZON_MIN > 410);
+});
+
+test('SCAN_FAILED_RUNS_HORIZON_MIN sovrascrive solo con un numero positivo', () => {
+  assert.equal(parseHorizonMin('90'), 90);
+  assert.equal(parseHorizonMin(undefined), DEFAULT_RUN_QUERY_HORIZON_MIN);
+  assert.equal(parseHorizonMin(''), DEFAULT_RUN_QUERY_HORIZON_MIN);
+  assert.equal(parseHorizonMin('non-un-numero'), DEFAULT_RUN_QUERY_HORIZON_MIN);
+  assert.equal(parseHorizonMin('0'), DEFAULT_RUN_QUERY_HORIZON_MIN);
+  assert.equal(parseHorizonMin('-5'), DEFAULT_RUN_QUERY_HORIZON_MIN);
+});
+
+test('una run segnalabile vicina al bordo dell\'orizzonte alza un warning', () => {
+  const nowMs = Date.parse('2026-09-04T12:00:00Z');
+  const horizonMin = 1000;
+  const at = (min) => ({ createdAt: new Date(nowMs - min * 60_000).toISOString() });
+
+  // Sotto il 90% dell'orizzonte: nessuna pressione, nessun rumore.
+  assert.equal(horizonPressureMin([at(10), at(500)], { nowMs, horizonMin }), null);
+  // Oltre: si segnala la piu' vecchia, che e' quella piu' vicina a sparire.
+  assert.equal(horizonPressureMin([at(10), at(950), at(980)], { nowMs, horizonMin }), 980);
+  // Date rotte o assenti non fanno ne' passare ne' fallire nulla.
+  assert.equal(horizonPressureMin([{ createdAt: 'boh' }, {}], { nowMs, horizonMin }), null);
+  assert.equal(horizonPressureMin(null, { nowMs, horizonMin }), null);
 });
