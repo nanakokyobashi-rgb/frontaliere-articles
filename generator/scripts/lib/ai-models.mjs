@@ -4089,6 +4089,7 @@ export function resetState() {
   _lastResortOrderWarned = false;
   _competingTiersWarned = false;
   _preferredModelsWarned = false;
+  _recordScoreWarned.clear();
   _claudeCliCallsThisRun = 0;
   _claudeCliMaxCallsWarned = false;
   _responseCache.clear();
