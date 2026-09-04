@@ -1,5 +1,4 @@
 {
-  "https://www.laregione.ch/svizzera/svizzera/1943254/svizzera-croce-prassi-usam-estero-pmi-prodotti-contesta-fabbricati": "svizzera-usam-croce-svizzera-polemica",
   "https://www.laregione.ch/svizzera/svizzera/1943245/siccita-carne-prezzi-bell-offerta-far-caldo": "caldo-non-frene-consumi-carne-ma-siccia-potrebbe-far-salire-prezzi",
   "https://www.rsi.ch/s/3947664": "bilaterali-iii-vacilla-misura-accompagnamento",
   "https://www.tio.ch/svizzera/economia/1943310/ubs-sessione-proposta-lex-fondi": "lex-ubs-proposta-compromesso",
@@ -1781,6 +1780,11 @@
   "https://www.tio.ch/svizzera/politica/1947961/guerra-svp-junge-svizzera-neutralita-video-iniziativa-film-jsvp": {
     "articleId": "soldati-svizzera-video-guerra",
     "ts": "2026-09-04T16:44:26.090Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/s/4058283": {
+    "articleId": "volkswagen-taglia-50mila-posti-2030",
+    "ts": "2026-09-04T17:04:53.316Z",
     "keyForm": 2
   }
 }
