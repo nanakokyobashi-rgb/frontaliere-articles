@@ -792,11 +792,11 @@
     {
       "path": ".github/workflows/recycle-stale-prs.yml",
       "mode": "adapted",
-      "reason": "Niente npm ci, ponte RC del corpus, identita' GITHUB_PAT_NANAKO, cron 50 6 sfasato dal 40 6 del sito. In piu' il Gate 0 su `autorebase-reopen-failed`, che il sito non ha e non gli serve: quella label dice \"non cancellare questo head ref\", e il suo lettore dev'essere il workflow che cancella branch. Sul sito lo fa `worktree-branch-janitor.yml`; qui quel workflow non esiste e l'unico che cancella branch e' questo, quindi e' qui che la label deve avere effetto. Sostituzione dichiarata anche in generator/tests/loop-references-exist.test.mjs, che sorveglia la citazione del janitor in pr-autorebase.mjs.",
+      "reason": "Niente npm ci, ponte RC del corpus, identita' GITHUB_PAT_NANAKO, cron 50 6 sfasato dal 40 6 del sito. In piu' il Gate 0 su `autorebase-reopen-failed`, che il sito non ha e non gli serve: quella label dice \"non cancellare questo head ref\", e il suo lettore dev'essere il workflow che cancella branch. Sul sito lo fa `worktree-branch-janitor.yml`; qui quel workflow non esiste e l'unico che cancella branch e' questo, quindi e' qui che la label deve avere effetto. Sostituzione dichiarata anche in generator/tests/loop-references-exist.test.mjs, che sorveglia la citazione del janitor in pr-autorebase.mjs. ADATTAMENTO 2026-09-04 (issue #733): la lista `needs-human` dello step \"Surface needs-human PRs and issues\" esclude l'issue dedup di quello stesso step, filtrando sulla chiave di dedup (`DEDUP_TITLE`, unica sorgente del titolo, letta anche da --title). Lo step assumeva di non poter comparire nella propria lista perche' creato con `automation` e non con `needs-human`; il followup-drainer ha aggiunto `needs-human` alla issue #733 il 2026-09-02T13:39:50Z e da li' il report si auto-elenca, rendendo irraggiungibile la condizione di chiusura che scrive nel proprio corpo. Coperto da generator/tests/needs-human-digest-self-listing.test.mjs. E' un MIGLIORAMENTO del meccanismo, non un adattamento al corpus: candidato a risalire al sito, dove lo stesso step porta la stessa assunzione.",
       "baseline": {
         "site": "8e2799b49ef8ad31",
-        "corpus": "a9f721dcc219c572",
-        "alignedAt": "2026-08-18"
+        "corpus": "4f703b4f03d50815",
+        "alignedAt": "2026-09-04"
       }
     },
     {
