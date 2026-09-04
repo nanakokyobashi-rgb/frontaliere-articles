@@ -379,6 +379,43 @@ async function main() {
     fs.rmSync(tmpDir, { recursive: true, force: true });
   }
 
+  // ── Step 7b: gli /assets/ appena riscritti sul CDN esistono davvero? ──
+  // L'offload riscrive OGNI `/assets/<file>` su ${CDN_BASE} senza guardia di
+  // esistenza. Per og/data/images l'ordine del deploy la rende superflua (i
+  // byte sono stati caricati prima); per /assets/ no: questo repo non builda
+  // né spinge dist/assets, quindi quei riferimenti puntano al bundle
+  // dell'ULTIMO deploy del sito. Da #764 il contratto trasporta anche
+  // `/assets/partnerize-tag.js`, emesso dal SITO: se non è sul CDN, ogni
+  // pagina pubblicata qui lo carica a vuoto — nessuna eccezione, nessun gate
+  // rosso, zero tracking affiliato. NON-FATAL e fail-open per costruzione
+  // (vedi scripts/lib/cdn-asset-existence.mjs): non si rinuncia a pubblicare
+  // un articolo perché manca uno script di tracking, ma il 404 smette di
+  // essere invisibile.
+  try {
+    const { collectCdnAssetRefs, verifyCdnAssetRefs, formatCdnAssetReport } = await import(
+      './lib/cdn-asset-existence.mjs'
+    );
+    const refs = new Set();
+    const collectFrom = (dir) => {
+      for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
+        const fp = path.join(dir, e.name);
+        if (e.isDirectory()) collectFrom(fp);
+        else if (e.isFile() && path.extname(fp) === '.html') {
+          for (const url of collectCdnAssetRefs(fs.readFileSync(fp, 'utf-8'), CDN_BASE)) refs.add(url);
+        }
+      }
+    };
+    collectFrom(distDir);
+    if (refs.size > 0) {
+      const results = await verifyCdnAssetRefs({ urls: [...refs] });
+      for (const line of formatCdnAssetReport(results)) console.log(line);
+    } else {
+      console.log('[cdn-asset-check] nessun riferimento /assets/ riscritto sul CDN da verificare');
+    }
+  } catch (err) {
+    console.log(`[cdn-asset-check] verifica saltata (non-fatale): ${(err && err.message) || err}`);
+  }
+
   // ── Summary JSON for stream B (shard push) / stream C (workflow) ──
   const sectionShardKey = args.section === 'frontaliere' ? 'articolifrontaliere' : 'articolisvizzera';
   const shardSlugs = JSON.parse(
