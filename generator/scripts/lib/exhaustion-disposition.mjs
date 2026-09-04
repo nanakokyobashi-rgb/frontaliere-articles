@@ -231,15 +231,31 @@ function deferralTally(breakdown) {
     : {};
   const echoTransient = Math.min(Math.max(0, Number(echo.transient) || 0), transient);
   const echoPersistent = Math.min(Math.max(0, Number(echo.persistent) || 0), persistent);
-  // Il totale degli echi non puo' essere minore della somma dei due secchi
-  // (sarebbero echi non attribuiti a nessuno) ne' maggiore del totale.
-  const echoTotal = Math.min(
-    Math.max(Math.max(0, Number(echo.total) || 0), echoTransient + echoPersistent),
-    total,
-  );
-  const netTotal = total - echoTotal;
-  const netTransient = Math.min(transient - echoTransient, netTotal);
-  const netPersistent = Math.min(persistent - echoPersistent, netTotal - netTransient);
+  // La parte di `echo.total` NON ripartita fra i due secchi e' fatta di echi
+  // AMBIGUI, e deve stare nella massa ambigua — non nel totale. Clamparla al
+  // totale la lascia uscire dal solo DENOMINATORE, che e' l'unico modo di
+  // inventare un differimento: con `{transient:53, persistent:52, total:106,
+  // providerCooldownSkips:{total:50}}` darebbe 53/56 = 0,946 → differimento,
+  // dove il lordo 53/106 = 0,500 (la run 31823202761) diceva rosso. E l'eco
+  // ambiguo non e' un caso di laboratorio: basta una `skipPhrase` futura che
+  // non matchi ne' `transientRe` ne' `persistentRe` — oggi le due frasi
+  // matchano per costruzione, cioe' «una riformulazione di distanza», la
+  // stessa trappola che `classifyExhaustionCause` si nomina addosso.
+  const echoUnattributed = Math.max(0, Math.max(0, Number(echo.total) || 0) - echoTransient - echoPersistent);
+  const ambiguousMass = Math.max(0, total - transient - persistent);
+  // ...e se non ci sta, il campo CONTRADDICE il breakdown: non e' una misura,
+  // e la parte non collocabile non compra sconti sul denominatore. Clamparla
+  // (invece che scartarla) basterebbe a ribaltare la run 31823202761 con un
+  // `{total: 999}`: massa ambigua 1 → 53/105 = 0,5047 → differimento inventato
+  // da un campo rotto. Non attribuito ⇒ non tolto, che e' la stessa polarita'
+  // di ogni altro dubbio in questo file.
+  const echoAmbiguous = echoUnattributed <= ambiguousMass ? echoUnattributed : 0;
+  // Somma dei tre secchi, non un `echo.total` clampato: cosi' ogni riga tolta
+  // dal denominatore e' una riga tolta anche dal secchio in cui votava.
+  const echoTotal = Math.min(echoTransient + echoPersistent + echoAmbiguous, total);
+  const netTotal = Math.max(0, total - echoTotal);
+  const netTransient = Math.min(Math.max(0, transient - echoTransient), netTotal);
+  const netPersistent = Math.min(Math.max(0, persistent - echoPersistent), netTotal - netTransient);
   return {
     transient: netTransient,
     persistent: netPersistent,
@@ -249,16 +265,42 @@ function deferralTally(breakdown) {
   };
 }
 
+function passesShare(transient, total) {
+  return total > 0 && transient / total > QUOTA_DEFERRAL_MIN_TRANSIENT_SHARE;
+}
+
 export function isLegitimateQuotaDeferral(err) {
   if (!err || typeof err !== 'object') return false;
   if (err.code !== 'ALL_MODELS_EXHAUSTED') return false;
-  const { transient, total } = deferralTally(err.exhaustionBreakdown);
+  const { transient, total, providerCooldownSkips } = deferralTally(err.exhaustionBreakdown);
   // Senza denominatore non si puo' affermare niente, e l'affermazione non
   // dimostrata qui vale «rosso»: e' la direzione in cui l'errore costa meno.
   // Vale anche per una cascata di soli echi: un guasto solo, ripetuto, non e'
   // la prova che aspettare aiuti.
   if (total <= 0) return false;
-  return transient / total > QUOTA_DEFERRAL_MIN_TRANSIENT_SHARE;
+  // ── QUANDO GLI ECHI SONO LA MAGGIORANZA, LA SOTTRAZIONE NON VOTA ─────────
+  //
+  // Togliere gli echi restringe il campione, e un campione piccolo si ribalta
+  // con un voto — e' la stessa ragione per cui il quoziente si prende sul
+  // TOTALE («dieci ore di produzione ferma decise da una `d`»). Aritmetica sul
+  // codice: 12 host irraggiungibili (12 guasti persistenti VERI) + 81 echi
+  // persistenti + 13 timeout su 106 righe → netto 13/25 = 0,52 → differimento,
+  // exit 0, nessun articolo e nessun alert, dove il lordo 13/106 = 0,12 era
+  // rosso. Dodici host che rifiutano la connessione non si curano a mezzanotte.
+  //
+  // Quindi: quando le righe tolte sono piu' di quelle rimaste, il differimento
+  // deve reggere ANCHE sui numeri lordi. Non e' un pavimento arbitrario sul
+  // campione — che boccerebbe la notte di quota vera in cui quasi ogni riga e'
+  // un eco `cooling down` (share lordo ~1,0, differimento onesto) — ma il
+  // divieto preciso: la sottrazione puo' confermare un verdetto, non ribaltarlo
+  // da sola quando e' lei la maggioranza delle prove.
+  if (providerCooldownSkips > total) {
+    const b = err.exhaustionBreakdown || {};
+    const grossTransient = Math.max(0, Number(b.transient) || 0);
+    const grossTotal = Math.max(0, Number(b.total) || 0);
+    if (!passesShare(grossTransient, grossTotal)) return false;
+  }
+  return passesShare(transient, total);
 }
 
 /**
@@ -277,6 +319,11 @@ export function quotaDeferralShare(err) {
     ...tally,
     share: tally.total > 0 ? tally.transient / tally.total : 0,
     required: QUOTA_DEFERRAL_MIN_TRANSIENT_SHARE,
+    // Senza questo flag la riga diagnostica potrebbe dichiarare uno share SOPRA
+    // soglia accanto a un differimento RIFIUTATO — il guardrail di maggioranza
+    // sopra decide su altro — ed e' esattamente il modo in cui una metrica
+    // smette di essere letta.
+    echoDominated: tally.providerCooldownSkips > tally.total,
   };
 }
 
