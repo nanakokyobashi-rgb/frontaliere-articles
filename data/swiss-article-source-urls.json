@@ -1,5 +1,4 @@
 {
-  "https://www.laregione.ch/svizzera/svizzera/1943169/dibattito-clima-comparis-scelte-consumi": "svizzeri-clima-consumi-sondaggio",
   "https://www.tio.ch/svizzera/economia/1943275/svizzera-croce-prassi-usam-produzione-prodotti-contesta": "usam-croce-svizzera-polemica",
   "https://www.tio.ch/svizzera/economia/1943282/danni-aziende-siccita-agricoltura-franchi": "siccita-danni-agricoltura-svizzera",
   "https://www.laregione.ch/svizzera/svizzera/1943254/svizzera-croce-prassi-usam-estero-pmi-prodotti-contesta-fabbricati": "svizzera-usam-croce-svizzera-polemica",
@@ -1769,6 +1768,11 @@
   "https://www.tio.ch/svizzera/economia/1948052/volkswagen-fornitori-conseguenze-volumi-industria": {
     "articleId": "volkswagen-fornitori-svizzeri",
     "ts": "2026-09-04T12:27:39.823Z",
+    "keyForm": 2
+  },
+  "https://www.admin.ch/it/newnsb/b2f6vq9fb0d6": {
+    "articleId": "aggiornamento-direttiva-crs-2026",
+    "ts": "2026-09-04T13:42:36.149Z",
     "keyForm": 2
   }
 }
