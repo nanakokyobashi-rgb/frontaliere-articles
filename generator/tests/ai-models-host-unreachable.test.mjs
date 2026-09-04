@@ -984,7 +984,7 @@ describe('#813 — il peer rifiutato decide, non l\'URL', () => {
   const ENV_KEYS = [
     'AI_MODELS_FORCE_CHAIN', 'AI_MODELS_PREFER', 'GH_MODELS_PAT',
     'HTTPS_PROXY', 'https_proxy', 'HTTP_PROXY', 'http_proxy',
-    'ALL_PROXY', 'all_proxy', 'NO_PROXY', 'no_proxy',
+    'ALL_PROXY', 'all_proxy', 'NO_PROXY', 'no_proxy', 'NODE_USE_ENV_PROXY', 'NODE_OPTIONS',
     ...Array.from({ length: 8 }, (_, i) => `GH_MODELS_PAT_${i + 2}`),
   ];
   let envBackup = {};
@@ -1039,10 +1039,12 @@ describe('#813 — il peer rifiutato decide, non l\'URL', () => {
     assert.ok(stats.activeCooldowns.github > 0, `atteso il cooldown: ${JSON.stringify(stats.activeCooldowns)}`);
   });
 
-  it('con un proxy d\'ambiente configurato nessun connect parla dell\'host', async () => {
+  it('con un proxy d\'ambiente ONORATO dal runtime nessun connect parla dell\'host', async () => {
     // Qui l'errore NON porta indirizzi (il caso comune: il fallimento arriva
     // impacchettato dal dispatcher). L'unica cosa che si sa e' che il peer
-    // contattato non era l'host di destinazione.
+    // contattato non era l'host di destinazione — e lo si sa solo perche' il
+    // runtime legge davvero le variabili proxy.
+    process.env.NODE_USE_ENV_PROXY = '1';
     process.env.HTTPS_PROXY = 'http://proxy.internal:3128';
     globalThis.fetch = async () => { throw undiciFetchFailed('ECONNREFUSED'); };
 
@@ -1055,8 +1057,40 @@ describe('#813 — il peer rifiutato decide, non l\'URL', () => {
     assert.equal(stats.activeCooldowns.github, undefined, `nessun cooldown atteso dietro un proxy: ${JSON.stringify(stats.activeCooldowns)}`);
   });
 
+  // La `fetch` globale di Node non legge le variabili proxy senza
+  // `--use-env-proxy`/`NODE_USE_ENV_PROXY`, e questo modulo non installa
+  // nessun `ProxyAgent`: un'immagine che esporta `HTTPS_PROXY` per git o apt
+  // non deve spegnere il breaker di #475 su OGNI provider.
+  it('HTTPS_PROXY senza NODE_USE_ENV_PROXY non esenta: la richiesta e\' diretta', async () => {
+    process.env.HTTPS_PROXY = 'http://proxy.internal:3128';
+    globalThis.fetch = async () => { throw undiciFetchFailed('ECONNREFUSED'); };
+
+    await assert.rejects(
+      () => callLLM([{ role: 'user', content: 'x' }], { maxRetriesPerModel: 1, backoffMs: 1, timeout: 5000 }),
+    );
+
+    const stats = getStats();
+    assert.ok(stats.exhaustedModels.includes('gpt-4o-mini'), `senza proxy onorato il breaker resta armato, visti: ${stats.exhaustedModels.join(', ')}`);
+    assert.ok(stats.activeCooldowns.github > 0, `atteso il cooldown: ${JSON.stringify(stats.activeCooldowns)}`);
+  });
+
+  // `HTTP_PROXY` non puo' intercettare un endpoint `https`: gli endpoint in
+  // chiaro sono quelli di loopback, che rispondono gia' a valle.
+  it('HTTP_PROXY da solo non esenta un endpoint https', async () => {
+    process.env.NODE_USE_ENV_PROXY = '1';
+    process.env.HTTP_PROXY = 'http://proxy.internal:3128';
+    globalThis.fetch = async () => { throw undiciFetchFailed('ECONNREFUSED'); };
+
+    await assert.rejects(
+      () => callLLM([{ role: 'user', content: 'x' }], { maxRetriesPerModel: 1, backoffMs: 1, timeout: 5000 }),
+    );
+
+    assert.ok(getStats().exhaustedModels.includes('gpt-4o-mini'), 'HTTP_PROXY non intercetta https: il breaker resta armato');
+  });
+
   it('NO_PROXY=* e\' una variabile impostata che non intercetta nulla', async () => {
     // Il confine: la sola PRESENZA della variabile non deve spegnere #475.
+    process.env.NODE_USE_ENV_PROXY = '1';
     process.env.HTTPS_PROXY = 'http://proxy.internal:3128';
     process.env.NO_PROXY = '*';
     globalThis.fetch = async () => { throw undiciFetchFailed('ECONNREFUSED'); };

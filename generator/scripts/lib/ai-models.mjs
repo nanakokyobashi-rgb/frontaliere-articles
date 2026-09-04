@@ -1570,15 +1570,41 @@ function _refusedPeerIsLocal(err) {
 }
 
 /**
- * True quando l'ambiente instrada le richieste HTTP attraverso un proxy. Con
- * un proxy in mezzo NESSUN codice di connect parla dell'host di destinazione,
- * quindi non c'e' niente da bannare (#813). `NO_PROXY=*` e' il caso in cui la
- * variabile e' impostata ma non intercetta nulla, e va escluso: altrimenti la
- * sola presenza della variabile spegnerebbe il breaker di #475.
+ * True quando il runtime HONORA le variabili proxy d'ambiente. La `fetch`
+ * globale di Node NON le legge da sola: servono `--use-env-proxy` o
+ * `NODE_USE_ENV_PROXY`, e questo modulo non installa nessun `ProxyAgent`
+ * (l'unico dispatcher e' l'`undici.Agent` nudo di `_getLocalDispatcher`).
+ * Senza quel flag la richiesta parte DIRETTA verso l'host, e l'ECONNREFUSED
+ * che torna e' proprio il verdetto sull'host di destinazione che il breaker
+ * di #475 esiste per leggere: leggere la sola presenza di `HTTPS_PROXY` —
+ * esportata di routine da un'immagine container per git/curl/apt — lo
+ * spegnerebbe per OGNI provider, in silenzio e senza un errore.
+ */
+function _envProxyIsHonoured() {
+  const flag = (process.env.NODE_USE_ENV_PROXY || '').trim().toLowerCase();
+  if (flag && flag !== '0' && flag !== 'false') return true;
+  const argv = [
+    ...(process.execArgv || []),
+    ...String(process.env.NODE_OPTIONS || '').split(/\s+/),
+  ];
+  if (argv.includes('--no-use-env-proxy')) return false;
+  return argv.some((a) => a === '--use-env-proxy' || a.startsWith('--use-env-proxy='));
+}
+
+/**
+ * True quando l'ambiente instrada davvero le richieste HTTPS attraverso un
+ * proxy. Con un proxy in mezzo NESSUN codice di connect parla dell'host di
+ * destinazione, quindi non c'e' niente da bannare (#813) — ma solo se il
+ * runtime lo onora (`_envProxyIsHonoured`), altrimenti la premessa e' falsa.
+ * `HTTP_PROXY` da solo non basta: non intercetta un endpoint `https`, e gli
+ * endpoint in chiaro sono quelli di loopback, gia' coperti a valle.
+ * `NO_PROXY=*` e' la variabile impostata che non intercetta nulla, e va
+ * esclusa: altrimenti la sola presenza spegnerebbe il breaker di #475.
  */
 function _envProxyMayIntercept() {
+  if (!_envProxyIsHonoured()) return false;
   const pick = (n) => (process.env[n] || process.env[n.toLowerCase()] || '').trim();
-  if (!pick('ALL_PROXY') && !pick('HTTPS_PROXY') && !pick('HTTP_PROXY')) return false;
+  if (!pick('ALL_PROXY') && !pick('HTTPS_PROXY')) return false;
   return pick('NO_PROXY') !== '*';
 }
 
@@ -1615,8 +1641,9 @@ function _isHostUnreachableExempt(modelId, err) {
   // #813 — cio' che si giudica e' il SOCKET, non la stringa di configurazione,
   // e vale per OGNI provider: un connect rifiutato da un proxy locale, o da un
   // qualunque peer su questa macchina, non e' una prova sull'host di
-  // destinazione. Con un proxy d'ambiente attivo non lo e' nemmeno quando
-  // l'errore non porta indirizzi, perche' il peer contattato non e' l'host.
+  // destinazione. Con un proxy d'ambiente che il runtime ONORA davvero non lo
+  // e' nemmeno quando l'errore non porta indirizzi: il peer contattato non e'
+  // l'host. Senza quel flag la richiesta e' diretta e il verdetto vale.
   if (_refusedPeerIsLocal(err)) return true;
   if (_envProxyMayIntercept()) return true;
   if (p === PROVIDER.LOCAL) return _isLoopbackUrl(getLocalLlmUrl());
