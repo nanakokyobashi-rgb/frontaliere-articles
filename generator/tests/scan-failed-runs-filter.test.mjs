@@ -23,6 +23,7 @@ import {
   parsePositiveNum,
   horizonPressure,
   fetchRunsBisected,
+  parseRunListJson,
 } from '../../scripts/ci/scan-failed-runs.mjs';
 import { TITLE_RE } from '../../scripts/ci/close-recovered-failure-issues.mjs';
 import { isExclusivelyWorkflowScoped } from '../../scripts/ci/check-workflows-scope.mjs';
@@ -410,6 +411,31 @@ test('un override malformato lo dice ad alta voce, uno assente no', () => {
   assert.equal(parsePositiveNum('-3', 5, { label: '--max-issues', warn }), 5);
   assert.equal(seen.length, 2);
   assert.match(seen[0], /--lookback-min=40m/);
+
+  // #811 item 6 — `--gate -1` disattiva il gate di ricorrenza (stesso `-1` che
+  // `main()` passa gia' come `consecutiveGate` per l'articolo perso). Rifiutarlo
+  // come "non positivo" degradava a 3 gridando «override IGNORATO»: la leva non
+  // esisteva piu' da CLI, e l'operatore otteneva il contrario di cio' che chiedeva.
+  seen.length = 0;
+  assert.equal(parsePositiveNum('-1', 3, { label: '--gate', warn, sentinels: [-1] }), -1);
+  assert.equal(parsePositiveNum(-1, 3, { label: '--gate', warn, sentinels: [-1] }), -1);
+  assert.deepEqual(seen, [], 'un sentinel dichiarato non e\' un override tradito: nessun warning');
+
+  // Il sentinel vale SOLO dove e' dichiarato, e solo per quel valore: `-1` su
+  // una durata resta un errore, e `-2` non diventa magico su `--gate`.
+  assert.equal(parsePositiveNum('-1', 40, { label: '--lookback-min', warn }), 40);
+  assert.equal(parsePositiveNum('-2', 3, { label: '--gate', warn, sentinels: [-1] }), 3);
+  assert.equal(seen.length, 2);
+  assert.match(seen[1], /valori speciali ammessi \(-1\)/);
+
+  // "Leva non tirata" non deve diventare "leva tirata a 0" per un sentinel 0:
+  // `Number('')` e `Number(null)` valgono 0, il sentinel richiede un valore presente.
+  seen.length = 0;
+  assert.equal(parsePositiveNum(undefined, 3, { label: '--gate', warn, sentinels: [0] }), 3);
+  assert.equal(parsePositiveNum('', 3, { label: '--gate', warn, sentinels: [0] }), 3);
+  assert.equal(parsePositiveNum(null, 3, { label: '--gate', warn, sentinels: [0] }), 3);
+  assert.equal(parsePositiveNum('0', 3, { label: '--gate', warn, sentinels: [0] }), 0);
+  assert.deepEqual(seen, []);
 });
 
 /**
@@ -544,20 +570,109 @@ test('la slice con query fallita (null) grida invece di passare per risolta', ()
   assert.match(warnings[0], /FALLITA/);
   assert.match(warnings[0], new RegExp(new Date(startMs).toISOString()), 'il warning nomina la finestra non letta');
 
-  // Fallimento di UNA sola slice sotto bisezione: le altre restano valide, ma
-  // la finestra persa viene comunque dichiarata.
+  // Fallimento PERSISTENTE di una sola sotto-finestra: le altre restano
+  // valide, e la finestra persa viene dichiarata con i suoi estremi.
+  //
+  // L'assertion di prima era `partial.length > 0`, verde anche se OGNI
+  // sotto-slice fosse tornata `null` — le run che la soddisfacevano venivano
+  // dal batch di primo livello, letto PRIMA che qualunque sotto-finestra
+  // fallisse. Qui si asserisce il set esatto di `databaseId` (#811 item 7).
   const cap = 2;
   const all = Array.from({ length: 6 }, (_, i) => ({
     databaseId: i,
     createdAt: new Date(startMs + i * 300 * 60_000).toISOString(),
   }));
+  const window = (aIso, bIso) => {
+    const aMs = Date.parse(aIso);
+    const bMs = bIso === null ? nowMs : Date.parse(bIso);
+    return all
+      .filter((r) => Date.parse(r.createdAt) >= aMs && Date.parse(r.createdAt) <= bMs)
+      .sort((x, y) => Date.parse(y.createdAt) - Date.parse(x.createdAt))
+      .slice(0, cap);
+  };
+  // La meta' piu' VECCHIA di primo livello — quella che la bisezione esiste
+  // per recuperare — fallisce SEMPRE, retry con split compreso.
+  const midMs = Math.floor((startMs + nowMs) / 2);
   const partialWarnings = [];
-  let failed = 0;
   const partial = fetchRunsBisected(startMs, null, {
+    fetchWindow: (aIso, bIso) => (Date.parse(aIso) <= midMs && bIso !== null ? null : window(aIso, bIso)),
+    nowMs,
+    cap,
+    warn: (m) => partialWarnings.push(m),
+  });
+  // Le sole run leggibili sono quelle della meta' RECENTE: la 5 e la 4 (dal
+  // batch di primo livello e dalle sue sotto-finestre). La 0, 1, 2 e 3 cadono
+  // tutte nella meta' vecchia, che nemmeno il retry con split legge.
+  assert.deepEqual(
+    partial.map((r) => r.databaseId).sort((a, b) => a - b),
+    [4, 5],
+    'restano ESATTAMENTE le run delle slice riuscite',
+  );
+  const lost = partialWarnings.filter((m) => /FALLITA/.test(m));
+  assert.equal(lost.length, 1, 'una finestra persa, un warning — ne\' zero ne\' uno per foglia');
+  assert.match(lost[0], new RegExp(new Date(startMs).toISOString()), 'il warning nomina la finestra persa');
+});
+
+/**
+ * #811 item 2 — se la query fallisce PER AMPIEZZA (timeout lato `gh`, range
+ * `--created A..B` rifiutato per estensione), lo split e' il rimedio: era
+ * l'unico caso in cui non veniva tentato, e la finestra larga che fallisce
+ * sistematicamente restava a copertura ZERO dove il codice pre-bisezione
+ * almeno troncava.
+ */
+test('la slice fallita viene ritentata UNA volta con lo split prima di essere dichiarata persa', () => {
+  const nowMs = Date.parse('2026-09-04T12:00:00Z');
+  const startMs = nowMs - 1890 * 60_000;
+  const all = Array.from({ length: 6 }, (_, i) => ({
+    databaseId: i,
+    createdAt: new Date(startMs + i * 300 * 60_000).toISOString(),
+  }));
+  const maxSpanMs = Math.floor((nowMs - startMs) / 2) + 1;
+  const warnings = [];
+  const calls = [];
+  const got = fetchRunsBisected(startMs, null, {
+    // Ogni finestra piu' larga della meta' fallisce: e' la firma del timeout
+    // per ampiezza. Le due meta' passano.
     fetchWindow: (aIso, bIso) => {
-      // La prima sotto-finestra (la meta' piu' VECCHIA, quella che la
-      // bisezione esiste per recuperare) e' anche quella che fallisce.
-      if (bIso !== null && failed++ === 0) return null;
+      calls.push([aIso, bIso]);
+      const aMs = Date.parse(aIso);
+      const bMs = bIso === null ? nowMs : Date.parse(bIso);
+      if (bMs - aMs > maxSpanMs) return null;
+      return all.filter((r) => {
+        const c = Date.parse(r.createdAt);
+        return c >= aMs && c <= bMs;
+      });
+    },
+    nowMs,
+    cap: 100,
+    warn: (m) => warnings.push(m),
+  });
+  assert.deepEqual(
+    got.map((r) => r.databaseId).sort((a, b) => a - b),
+    [0, 1, 2, 3, 4, 5],
+    'lo split recupera l\'intera finestra che la query larga non sapeva leggere',
+  );
+  assert.deepEqual(warnings, [], 'una finestra recuperata dal retry non e\' una perdita');
+  assert.equal(calls.length, 3, 'una chiamata fallita + le due meta\': il retry non e\' ricorsivo');
+});
+
+/**
+ * #811 item 4 — `byId` eredita l'ordine di INSERIMENTO (primo livello, poi
+ * meta' vecchia, poi recente): dopo una bisezione l'ordine di `gh run list`
+ * non vale piu'. A valle il raggruppamento per workflow lo eredita e il cap
+ * `MAX_ISSUES` tronca, quindi QUALI workflow ricevono la issue smetterebbe di
+ * essere "i piu' recenti" senza che nulla fallisca.
+ */
+test('dopo la bisezione le run tornano ordinate per createdAt decrescente', () => {
+  const nowMs = Date.parse('2026-09-04T12:00:00Z');
+  const startMs = nowMs - 1890 * 60_000;
+  const cap = 2;
+  const all = Array.from({ length: 8 }, (_, i) => ({
+    databaseId: i,
+    createdAt: new Date(startMs + i * 200 * 60_000).toISOString(),
+  }));
+  const got = fetchRunsBisected(startMs, null, {
+    fetchWindow: (aIso, bIso) => {
       const aMs = Date.parse(aIso);
       const bMs = bIso === null ? nowMs : Date.parse(bIso);
       return all
@@ -567,13 +682,46 @@ test('la slice con query fallita (null) grida invece di passare per risolta', ()
     },
     nowMs,
     cap,
-    warn: (m) => partialWarnings.push(m),
+    warn: () => {},
   });
-  assert.ok(partial.length > 0, 'le slice riuscite restano');
-  assert.ok(
-    partialWarnings.some((m) => /FALLITA/.test(m)),
-    'la slice fallita non puo\' chiudersi in silenzio',
-  );
+  assert.deepEqual(got.map((r) => r.databaseId), [7, 6, 5, 4, 3, 2, 1, 0]);
+
+  // Una run senza `createdAt` leggibile non si infila in cima al cap.
+  const undated = fetchRunsBisected(startMs, null, {
+    fetchWindow: () => [{ databaseId: 'x' }, all[0], { databaseId: 'y', createdAt: 'boh' }, all[3]],
+    nowMs,
+    cap: 100,
+    warn: () => {},
+  });
+  assert.deepEqual(undated.map((r) => r.databaseId), [3, 0, 'x', 'y']);
+});
+
+/**
+ * #811 item 1 — `gh run list --json` stampa `[]` quando non trova niente:
+ * stdout VUOTO su exit 0 e' una finestra NON letta, non una finestra vuota.
+ * `JSON.parse(raw || '[]')` la faceva cadere su `[]`, e `[].length < cap`
+ * chiude la slice come risolta — il buco muto rientrava dalla porta accanto.
+ */
+test('stdout vuoto su exit 0 e\' una finestra non letta, non una finestra vuota', () => {
+  assert.deepEqual(parseRunListJson('[]'), [], 'la finestra davvero vuota resta leggibile');
+  assert.deepEqual(parseRunListJson('[{"databaseId":1}]'), [{ databaseId: 1 }]);
+  for (const unread of ['', '   ', '\n', null, undefined, '{"a":1}', '3', 'null', 'non-json']) {
+    assert.equal(parseRunListJson(unread), null, `${JSON.stringify(unread)} deve valere "non letta"`);
+  }
+
+  // E il `null` arriva davvero fino alla bisezione, che lo grida.
+  const nowMs = Date.parse('2026-09-04T12:00:00Z');
+  const warnings = [];
+  const got = fetchRunsBisected(nowMs - 60_000, null, {
+    fetchWindow: () => parseRunListJson(''),
+    nowMs,
+    cap: 2,
+    maxDepth: 0,
+    warn: (m) => warnings.push(m),
+  });
+  assert.equal(got.length, 0);
+  assert.equal(warnings.length, 1);
+  assert.match(warnings[0], /FALLITA/);
 });
 
 /** Output di `gh` illeggibile o di forma inattesa: errore, non finestra vuota. */
