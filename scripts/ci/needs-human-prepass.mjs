@@ -89,6 +89,31 @@ const REPO = process.env.GH_REPO || process.env.GITHUB_REPOSITORY || '';
 const DRY = process.argv.includes('--dry-run');
 
 /**
+ * Lettura di una manopola numerica da `process.env`, con fallback.
+ *
+ * `Number(env || d)` non basta e il modo in cui non basta e' silenzioso: un
+ * valore non numerico (`PREPASS_VERDICT_MAX_AGE_DAYS=30d`, un incolla con uno
+ * spazio) da' `NaN`, e ogni confronto con `NaN` e' `false` — cioe' la finestra
+ * di validita' non scade MAI e la guardia che questo file esiste per avere
+ * diventa codice morto senza una riga di log. E' la stessa forma del difetto
+ * dell'item 1 (#815): una guardia disattivata da un input degenere, non da una
+ * decisione. Un valore illeggibile torna al default e lo DICE.
+ *
+ * @param {string|undefined} raw
+ * @param {number} fallback
+ * @returns {number}
+ */
+export function posNum(raw, fallback) {
+  if (raw == null || String(raw).trim() === '') return fallback;
+  const n = Number(raw);
+  if (!Number.isFinite(n) || n <= 0) {
+    console.log(`::warning::needs-human-prepass: valore non numerico "${raw}" per una manopola → default ${fallback}.`);
+    return fallback;
+  }
+  return n;
+}
+
+/**
  * Cap volutamente BASSO, e tarato sulla portata a valle, non sulla dimensione
  * della coda.
  *
@@ -99,7 +124,7 @@ const DRY = process.argv.includes('--dry-run');
  * soli. Con 17 `needs-human` e la coda oggi a zero, 10/giorno le fa rientrare
  * tutte in due giorni.
  */
-const MAX_PER_RUN = Number(process.env.PREPASS_MAX_PER_RUN || 10);
+const MAX_PER_RUN = posNum(process.env.PREPASS_MAX_PER_RUN, 10);
 
 /**
  * Le famiglie di issue APERTE DA UN MONITOR DI QUESTO REPO, riconosciute sul
@@ -173,12 +198,96 @@ export const STALE_BLOCK_VERDICTS = new Set(['blocked-secrets']);
  * di essere vincolante, e la issue torna a valere quanto la sua famiglia — un
  * run del fixer, che è l'errore economico giusto rispetto all'immobilità.
  */
-export const VERDICT_MAX_AGE_DAYS = Number(process.env.PREPASS_VERDICT_MAX_AGE_DAYS || 30);
+export const VERDICT_MAX_AGE_DAYS = posNum(process.env.PREPASS_VERDICT_MAX_AGE_DAYS, 30);
+
+/**
+ * Soglia oltre la quale una run coi lookup del verdetto falliti smette di
+ * somigliare a una run normale (#815, item 2).
+ *
+ * La guardia `verdictLookupFailed` e' per-issue e degrada bene su un fallimento
+ * SPORADICO (un secondary rate-limit su qualche lettura): ogni issue diventa un
+ * `keep` conservativo, ed e' la direzione giusta. Ma su un fallimento
+ * SISTEMATICO — PAT scaduto, permessi revocati, API down — il degrado non e'
+ * parziale: ogni lettura fallisce, TUTTE le issue diventano `keep`, lo script
+ * esce 0, e il riassunto finale (`requeue=0 decompose=0 keep=17`) e' quello di
+ * una run in cui non c'era semplicemente niente da fare. Cioe' l'unica porta di
+ * rientro da `needs-human` puo' essere chiusa per settimane senza che nulla
+ * fallisca: la stessa forma del difetto che questo file esiste per chiudere,
+ * un piano piu' in su.
+ *
+ * Rapporto E minimo assoluto: il solo rapporto renderebbe rosso un repo con una
+ * sola issue `needs-human` e un singolo 502 di rete, che e' rumore.
+ */
+export const LOOKUP_FAILURE_MAX_RATIO = posNum(process.env.PREPASS_LOOKUP_FAILURE_MAX_RATIO, 0.5);
+export const LOOKUP_FAILURE_MIN_COUNT = posNum(process.env.PREPASS_LOOKUP_FAILURE_MIN_COUNT, 3);
+
+/**
+ * La run e' degradata al punto da non essere piu' interpretabile? Pura.
+ * @param {number} failed  lookup falliti
+ * @param {number} attempted  lookup tentati
+ * @returns {boolean}
+ */
+export function isLookupDegraded(failed, attempted) {
+  if (attempted <= 0) return false;
+  return failed >= LOOKUP_FAILURE_MIN_COUNT && failed / attempted >= LOOKUP_FAILURE_MAX_RATIO;
+}
+
+/**
+ * Il marker che il pre-pass lascia sul commento con cui ri-accoda una issue
+ * PERCHE' il verdetto e' scaduto (o non e' databile).
+ *
+ * E' HTML comment, quindi invisibile a chi legge la issue, e non e' un
+ * `FIX_OUTCOME`: questo stadio non emette verdetti, conta i propri giri. Serve
+ * perche' il contatore dei cicli non ha nessun altro posto dove stare — il
+ * pre-pass e' stateless per costruzione (zero-Claude, nessun artifact, gira dal
+ * cron con il solo `GITHUB_TOKEN`), e la memoria disponibile e' quella che si
+ * scrive dove la si rilegge: i commenti della issue, che vengono gia' letti per
+ * il verdetto. Zero chiamate in piu'.
+ */
+export const PREPASS_EXPIRY_MARKER = '<!-- PREPASS_EXPIRY_REQUEUE -->';
+
+/**
+ * Quanti cicli scadenza→requeue prima di smettere (#815, item 3).
+ *
+ * 3 giri sono ~90 giorni con la finestra di default: abbastanza da coprire il
+ * caso vero per cui la finestra esiste (la causa a monte E' cambiata e il
+ * verdetto descrive un mondo che non c'e' piu'), e abbastanza pochi da non far
+ * girare un'oscillazione mensile per un anno prima che qualcuno se ne accorga.
+ * Il terzo tentativo che fallisce come i primi due non e' un'ipotesi nuova.
+ */
+export const EXPIRY_REQUEUE_MAX_CYCLES = posNum(process.env.PREPASS_EXPIRY_REQUEUE_MAX_CYCLES, 3);
+
+/**
+ * Quante volte questo stadio ha gia' ri-accodato la issue per scadenza del
+ * verdetto, contate sui suoi stessi commenti. Pura.
+ * @param {Array<{body?: string}>} comments
+ * @returns {number}
+ */
+export function countExpiryRequeues(comments) {
+  let n = 0;
+  for (const c of comments || []) if (String(c?.body || '').includes(PREPASS_EXPIRY_MARKER)) n++;
+  return n;
+}
 
 /**
  * Ultimo verdetto + il suo istante, da una lista di commenti (forma REST o
  * GraphQL). Pura. `at` è `null` se il commento non ha una data parsabile — chi
  * legge non deve poter confondere «senza data» con «vecchissimo».
+ *
+ * Un verdetto SENZA data non viene più scartato (#815, item 1). Scartarlo
+ * sembrava conservativo e non lo era: le due forme accettate qui hanno chiavi
+ * diverse (`created_at` REST, `createdAt` GraphQL) e nessuna delle due è
+ * garantita da un tipo, quindi bastava che una arrivasse senza data perché
+ * l'esito tornasse `{null, null}` — cioè «nessun verdetto», che è
+ * indistinguibile dal caso in cui davvero nessun fixer è mai passato. Ora il
+ * verdetto emerge con `at: null`, e la DECISIONE di che farne sta in un posto
+ * solo: `prepassDecision`, che tratta «senza data» come non vincolante.
+ *
+ * Un verdetto datato batte sempre uno senza data, a qualunque distanza: una
+ * data c'è o non c'è, e un `at` inventato per ordinarli sarebbe di nuovo
+ * «assente» travestito da «antico». Fra due senza data vince l'ultimo in ordine
+ * di lista, che è l'ordine cronologico con cui l'API li restituisce.
+ *
  * @param {Array<{body?: string, created_at?: string, createdAt?: string}>} comments
  * @returns {{outcome: string|null, at: number|null}}
  */
@@ -186,12 +295,15 @@ export function latestVerdictEntry(comments) {
   let latest = null;
   let latestAt = null;
   let at = -Infinity;
+  let undated = null;
   for (const c of comments || []) {
     const m = FIX_OUTCOME_RE.exec(String(c?.body || ''));
     if (!m) continue;
     const t = Date.parse(c?.created_at ?? c?.createdAt);
-    if (!Number.isNaN(t) && t >= at) { at = t; latest = m[1].toLowerCase(); latestAt = t; }
+    if (Number.isNaN(t)) { undated = m[1].toLowerCase(); continue; }
+    if (t >= at) { at = t; latest = m[1].toLowerCase(); latestAt = t; }
   }
+  if (latest === null && undated !== null) return { outcome: undated, at: null };
   return { outcome: latest, at: latestAt };
 }
 
@@ -243,12 +355,13 @@ export function needsVerdictLookup(title = '') {
  * marker di verdetto), non sulla prosa.
  *
  * @param {{title?: string, labels?: string[], verdict?: string|null,
- *          verdictAt?: number|null, verdictLookupFailed?: boolean, now?: number}} iss
- * @returns {{action: 'requeue'|'decompose'|'keep', reason: string}}
+ *          verdictAt?: number|null, verdictLookupFailed?: boolean,
+ *          expiryRequeues?: number, now?: number}} iss
+ * @returns {{action: 'requeue'|'decompose'|'keep', reason: string, expiryRequeue?: boolean}}
  */
 export function prepassDecision({
-  title = '', labels = [], verdict = null,
-  verdictAt = null, verdictLookupFailed = false, now = Date.now(),
+  title = '', labels = [], verdict = null, verdictAt = null,
+  verdictLookupFailed = false, expiryRequeues = 0, now = Date.now(),
 } = {}) {
   // Un tracker permanente è aperto per scelta: non si accoda e non si scorpora.
   if (labels.includes('agent:no-age-out')) return { action: 'keep', reason: 'tracker permanente' };
@@ -348,14 +461,46 @@ export function prepassDecision({
   // verdetto scaduto descrive un mondo che non c'è più, e trattarlo come
   // vincolante trasforma questo ramo in un secondo stato assorbente.
   if (verdict && PREPASS_VERDICT_BEATS_FAMILY.has(verdict)) {
+    // «Senza data» non è «fresco» (#815, item 1). Il ramo che vincolava era
+    // `ageMs == null → expired = false`: un verdetto di cui non si conosce
+    // l'istante teneva la issue in `keep` PER SEMPRE, che è esattamente lo stato
+    // assorbente che la finestra di validità esiste per chiudere — e con l'unico
+    // segnale possibile, l'immobilità della issue. La finestra è un bound
+    // sull'ETÀ: se l'età non è calcolabile, il bound non è dimostrabile, e un
+    // vincolo indimostrabile non si applica. Non-vincolante ≠ verdetto
+    // cancellato: la ragione lo dice, così la scelta è leggibile nel commento
+    // che il pre-pass lascia sulla issue invece di essere dedotta dal silenzio.
     const ageMs = verdictAt == null ? null : now - verdictAt;
-    const expired = ageMs != null && ageMs > VERDICT_MAX_AGE_DAYS * 86400000;
-    if (!expired) {
+    if (ageMs == null) {
+      return {
+        action: 'requeue',
+        expiryRequeue: true,
+        reason: `famiglia di monitor riconosciuta (${monitor}), verdetto \`${verdict}\` SENZA data leggibile: non databile ⇒ non vincolante (la finestra di ${VERDICT_MAX_AGE_DAYS}g non è verificabile)`,
+      };
+    }
+    if (ageMs <= VERDICT_MAX_AGE_DAYS * 86400000) {
       return { action: 'keep', reason: `verdetto \`${verdict}\` non ri-accodabile a costo zero: resta per il giudizio dello sweep settimanale` };
+    }
+    // Scaduto — ma la scadenza da sola non accerta che la causa sia cambiata
+    // (#815, item 3). Se non lo è, il fixer ri-fallisce, scrive un verdetto
+    // fresco, e trenta giorni dopo si ripete: non uno stato assorbente ma
+    // un'oscillazione a periodo mensile, che nel riassunto è indistinguibile da
+    // un ri-accodo legittimo. Il contatore è il numero di volte che QUESTO ramo
+    // ha già instradato la issue (marker `PREPASS_EXPIRY_MARKER` nei suoi stessi
+    // commenti): oltre il tetto, il ri-accodo ha smesso di essere un'ipotesi
+    // nuova ed è la stessa scommessa persa N volte. Allora si torna a `keep`,
+    // cioè al giudizio dello sweep settimanale — che è dove una causa che non
+    // cambia da mesi va guardata da qualcuno, non ri-tentata a orologeria.
+    if (expiryRequeues >= EXPIRY_REQUEUE_MAX_CYCLES) {
+      return {
+        action: 'keep',
+        reason: `oscillazione scadenza→requeue: ${expiryRequeues} giri già fatti (tetto ${EXPIRY_REQUEUE_MAX_CYCLES}) col verdetto \`${verdict}\` che si riforma ogni volta — la causa a monte non è cambiata, serve il giudizio dello sweep`,
+      };
     }
     return {
       action: 'requeue',
-      reason: `famiglia di monitor riconosciuta (${monitor}), verdetto \`${verdict}\` scaduto (${Math.floor(ageMs / 86400000)}g > ${VERDICT_MAX_AGE_DAYS}g): non più vincolante`,
+      expiryRequeue: true,
+      reason: `famiglia di monitor riconosciuta (${monitor}), verdetto \`${verdict}\` scaduto (${Math.floor(ageMs / 86400000)}g > ${VERDICT_MAX_AGE_DAYS}g): non più vincolante — giro ${expiryRequeues + 1}/${EXPIRY_REQUEUE_MAX_CYCLES}`,
     };
   }
   return { action: 'requeue', reason: `famiglia di monitor riconosciuta (${monitor})` };
@@ -385,6 +530,7 @@ function main() {
   const counts = { requeue: 0, decompose: 0, keep: 0 };
   let acted = 0;
   let lookupFailed = 0;
+  let lookupAttempted = 0;
   for (const iss of ordered) {
     const labels = (iss.labels || []).map((l) => l.name);
     // Il verdetto costa una lettura: si paga per tutte tranne la famiglia
@@ -392,10 +538,16 @@ function main() {
     let verdict = null;
     let verdictAt = null;
     let verdictLookupFailed = false;
+    let expiryRequeues = 0;
     if (needsVerdictLookup(iss.title)) {
+      lookupAttempted++;
       try {
         const cs = gh(['api', `repos/${REPO}/issues/${iss.number}/comments?per_page=100`, '--paginate']);
-        ({ outcome: verdict, at: verdictAt } = latestVerdictEntry(Array.isArray(cs) ? cs : []));
+        const comments = Array.isArray(cs) ? cs : [];
+        ({ outcome: verdict, at: verdictAt } = latestVerdictEntry(comments));
+        // Stessa lettura, nessuna chiamata in piu': i giri di questo stadio
+        // stanno nei commenti che abbiamo gia' in mano.
+        expiryRequeues = countExpiryRequeues(comments);
       } catch (e) {
         // Un fallimento di lettura NON è «nessun verdetto»: va dichiarato, o su
         // rate-limit l'intera run degrada al comportamento pre-#778 in silenzio.
@@ -404,7 +556,7 @@ function main() {
         console.log(`::warning::needs-human-prepass: #${iss.number} verdetto non leggibile (${String(e).slice(0, 120)}) → keep conservativo.`);
       }
     }
-    const d = prepassDecision({ title: iss.title, labels, verdict, verdictAt, verdictLookupFailed });
+    const d = prepassDecision({ title: iss.title, labels, verdict, verdictAt, verdictLookupFailed, expiryRequeues });
     counts[d.action]++;
     if (d.action === 'keep') continue;
 
@@ -415,7 +567,11 @@ function main() {
     acted++;
     const add = d.action === 'requeue' ? 'agent:fix-queued' : 'agent:decompose-queued';
     if (DRY) { console.log(`[dry] #${iss.number} → ${add} (${d.reason}) — "${iss.title.slice(0, 60)}"`); continue; }
-    const note = `🔁 **Pre-pass deterministico dello sweep (zero-Claude)**: ${d.reason}. Questa issue non contiene una decisione del proprietario — i driver di decisione stanno in \`VISION.md\` del sito (\`valerielinc-ops/frontaliere-si-o-no\`, sorgente unica) — quindi torna nel ciclo autonomo invece di occupare un'azione del cap del run Claude.`;
+    // Il marker va SOLO sui ri-accodi per scadenza: e' il contatore dell'item 3,
+    // e includerlo nei requeue di famiglia normali lo farebbe contare giri che
+    // non sono oscillazioni.
+    const mark = d.expiryRequeue ? `\n\n${PREPASS_EXPIRY_MARKER}` : '';
+    const note = `🔁 **Pre-pass deterministico dello sweep (zero-Claude)**: ${d.reason}. Questa issue non contiene una decisione del proprietario — i driver di decisione stanno in \`VISION.md\` del sito (\`valerielinc-ops/frontaliere-si-o-no\`, sorgente unica) — quindi torna nel ciclo autonomo invece di occupare un'azione del cap del run Claude.${mark}`;
     try {
       gh(['issue', 'comment', String(iss.number), '--repo', REPO, '--body', note], { json: false });
       gh(['issue', 'edit', String(iss.number), '--repo', REPO,
@@ -429,7 +585,23 @@ function main() {
   if (lookupFailed) {
     // In cima al riassunto sta il numero, non il dettaglio: una run in cui i
     // verdetti non si leggono NON è una run che ha deciso «nessun verdetto».
-    console.log(`::warning::needs-human-prepass: ${lookupFailed} verdetti non leggibili (rate-limit?) → altrettanti \`keep\` conservativi, non decisioni.`);
+    console.log(`::warning::needs-human-prepass: ${lookupFailed}/${lookupAttempted} verdetti non leggibili (rate-limit?) → altrettanti \`keep\` conservativi, non decisioni.`);
+  }
+  if (isLookupDegraded(lookupFailed, lookupAttempted)) {
+    // Riga di riassunto DEDICATA **e** exit non-zero. Il `::warning::` da solo
+    // non basta: nessuno guarda i log di un job verde, e il job resterebbe
+    // verde. Uscendo ≠ 0 il fallimento risale a `workflow-failure-issues`, che
+    // apre `Workflow Failure: Needs-human sweep` — famiglia riconosciuta
+    // dall'allowlist qui sopra, quindi la porta chiusa entra da sola nella coda
+    // del ciclo invece di aspettare che qualcuno noti l'immobilità.
+    //
+    // Nessuna mutazione viene persa: una run degradata decide `keep` su ogni
+    // issue per costruzione (la guardia `verdictLookupFailed`), quindi non c'è
+    // lavoro a metà da proteggere, e il giro successivo del cron ricomincia da
+    // capo.
+    console.log(`needs-human-prepass: LOOKUP DEGRADATO — ${lookupFailed}/${lookupAttempted} verdetti non leggibili (≥${LOOKUP_FAILURE_MIN_COUNT} e ≥${Math.round(LOOKUP_FAILURE_MAX_RATIO * 100)}%): questa run NON è una run normale, le sue decisioni sono tutte \`keep\` per input mancante.`);
+    console.log('::error::needs-human-prepass: credenziale o API dei commenti non utilizzabile → l\'unica porta di rientro da `needs-human` è chiusa. Run marcata rossa apposta: un fallimento sistematico non deve uscire 0.');
+    process.exitCode = 1;
   }
 }
 

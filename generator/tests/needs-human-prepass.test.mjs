@@ -23,6 +23,12 @@ import {
   needsVerdictLookup,
   latestVerdictEntry,
   VERDICT_MAX_AGE_DAYS,
+  countExpiryRequeues,
+  PREPASS_EXPIRY_MARKER,
+  EXPIRY_REQUEUE_MAX_CYCLES,
+  isLookupDegraded,
+  LOOKUP_FAILURE_MIN_COUNT,
+  posNum,
 } from '../../scripts/ci/needs-human-prepass.mjs';
 import { isDecomposeEligible } from '../../scripts/ci/followup-drainer.mjs';
 
@@ -232,16 +238,24 @@ test('regressione site #7313/#7307: il verdetto batte il riconoscimento di famig
   // l'ha dal #5608, il file qui e' `adapted` e il drift check confronta solo gli
   // `identical`. Senza, una issue di famiglia monitor gia' chiusa da un verdetto
   // tornava in coda a costo zero per riprodurlo.
+  // `verdictAt` e' esplicito da #815: un verdetto senza data non e' piu' trattato
+  // come fresco, quindi la regressione che questo test difende si esprime su un
+  // verdetto DATABILE — che e' anche l'unico caso in cui la finestra di #780 ha
+  // qualcosa da dire.
+  const now = Date.parse('2026-09-04T00:00:00Z');
+  const fresh = now - 86400000;
   for (const v of ['no-root-cause', 'max-turns', 'blocked-workflows-scope', 'already-fixed']) {
     for (const t of ['Crawler Failure: Run zurich', 'Workflow Failure: Generate Blog Article']) {
-      const d = prepassDecision({ title: t, verdict: v });
+      const d = prepassDecision({ title: t, verdict: v, verdictAt: fresh, now });
       assert.equal(d.action, 'keep', `${v} / ${t}`);
       assert.match(d.reason, new RegExp(v.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')));
     }
   }
   // Senza verdetto la famiglia decide come prima: la fix non chiude l'uscita.
   assert.equal(prepassDecision({ title: 'Crawler Failure: Run zurich' }).action, 'requeue');
-  assert.equal(prepassDecision({ title: 'Crawler Failure: Run zurich', verdict: 'pr-created' }).action, 'requeue');
+  assert.equal(prepassDecision({
+    title: 'Crawler Failure: Run zurich', verdict: 'pr-created', verdictAt: fresh, now,
+  }).action, 'requeue');
 });
 
 test('il verdetto batte il requeue ma NON lo scorporo (🔴 della review di #778)', () => {
@@ -346,10 +360,6 @@ test('#780: dentro la finestra il verdetto resta vincolante (nessuna regressione
       title: 'Crawler Failure: Run zurich', verdict: v, verdictAt: fresh, now,
     }).action, 'keep', v);
   }
-  // Verdetto senza data parsabile: si resta al comportamento conservativo.
-  assert.equal(prepassDecision({
-    title: 'Crawler Failure: Run zurich', verdict: 'max-turns', verdictAt: null, now,
-  }).action, 'keep');
 });
 
 test('#780: latestVerdictEntry restituisce l\'istante del verdetto vincente', () => {
@@ -364,8 +374,140 @@ test('#780: latestVerdictEntry restituisce l\'istante del verdetto vincente', ()
   // Nessun marker → nessuna data: «assente» non deve poter passare per «antico».
   assert.deepEqual(latestVerdictEntry([{ body: 'solo testo' }]), { outcome: null, at: null });
   assert.deepEqual(latestVerdictEntry(null), { outcome: null, at: null });
-  // Un commento con data non parsabile non vince: `at` resta coerente con l'esito.
+  // #815/1: un verdetto senza data NON viene piu' scartato — emerge con
+  // `at: null`. Scartarlo sembrava conservativo e non lo era: rendeva «verdetto
+  // illeggibile» indistinguibile da «nessun fixer e' mai passato», e la
+  // decisione su che farne spariva dal punto in cui si prende.
   const bad = latestVerdictEntry([{ body: '<!-- FIX_OUTCOME: max-turns -->', created_at: 'non-una-data' }]);
-  assert.equal(bad.outcome, null);
+  assert.equal(bad.outcome, 'max-turns');
   assert.equal(bad.at, null);
+  // Ma un verdetto DATATO batte sempre uno senza data, a qualunque distanza:
+  // un `at` inventato per ordinarli sarebbe «assente» travestito da «antico».
+  const mixed = latestVerdictEntry([
+    { body: '<!-- FIX_OUTCOME: max-turns -->' },
+    { body: '<!-- FIX_OUTCOME: no-root-cause -->', created_at: '2020-01-01T00:00:00Z' },
+  ]);
+  assert.equal(mixed.outcome, 'no-root-cause');
+  assert.equal(mixed.at, Date.parse('2020-01-01T00:00:00Z'));
+});
+
+// ── #815/1: «senza data» non e' «fresco» ───────────────────────────────────
+
+test('#815: un verdetto senza data leggibile non e\' piu\' vincolante per sempre', () => {
+  // Il ramo era `ageMs == null → expired = false`, cioe' esattamente lo stato
+  // assorbente che la finestra di validita' esiste per chiudere: la issue
+  // restava in `keep` PER SEMPRE e l'unico segnale era la sua immobilita'. La
+  // finestra e' un bound sull'ETA': se l'eta' non e' calcolabile, il bound non
+  // e' dimostrabile, e un vincolo indimostrabile non si applica.
+  const now = Date.parse('2026-09-04T00:00:00Z');
+  for (const v of ['max-turns', 'no-root-cause', 'already-fixed']) {
+    const d = prepassDecision({
+      title: 'Crawler Failure: Run zurich', verdict: v, verdictAt: null, now,
+    });
+    assert.equal(d.action, 'requeue', v);
+    assert.match(d.reason, /senza data/i);
+    // E conta come giro di oscillazione, o il contatore dell'item 3 non lo vede.
+    assert.equal(d.expiryRequeue, true, v);
+  }
+});
+
+test('#815: «senza data» non scavalca le guardie che vengono prima', () => {
+  // L'ordine non cambia: owner-only e lookup fallito decidono prima, e un
+  // verdetto non databile non li deve trasformare in una mutazione.
+  assert.equal(prepassDecision({
+    title: 'Agent loop down: GITHUB_PAT failed to load', verdict: 'max-turns', verdictAt: null,
+  }).action, 'keep');
+  assert.equal(prepassDecision({
+    title: 'Crawler Failure: Run zurich', verdict: 'max-turns', verdictAt: null,
+    verdictLookupFailed: true,
+  }).action, 'keep');
+});
+
+// ── #815/3: l'oscillazione mensile ha un tetto ─────────────────────────────
+
+test('#815: dopo N cicli scadenza→requeue lo stadio smette di ri-accodare', () => {
+  const now = Date.parse('2026-09-04T00:00:00Z');
+  const old = now - (VERDICT_MAX_AGE_DAYS + 1) * 86400000;
+  const base = { title: 'Crawler Failure: Run zurich', verdict: 'max-turns', verdictAt: old, now };
+
+  // Sotto il tetto il ri-accodo resta quello di prima (nessuna regressione su
+  // #780), ma ora e' marcato: e' il marker a rendere contabile il giro.
+  for (let n = 0; n < EXPIRY_REQUEUE_MAX_CYCLES; n++) {
+    const d = prepassDecision({ ...base, expiryRequeues: n });
+    assert.equal(d.action, 'requeue', `giro ${n}`);
+    assert.equal(d.expiryRequeue, true, `giro ${n}`);
+  }
+
+  // Al tetto ci si ferma: la scadenza non accerta che la causa sia cambiata, e
+  // il terzo tentativo che fallisce come i primi due non e' un'ipotesi nuova —
+  // e' un'oscillazione a periodo mensile che nel riassunto somiglia a un
+  // ri-accodo legittimo. `keep` = giudizio dello sweep settimanale.
+  const stop = prepassDecision({ ...base, expiryRequeues: EXPIRY_REQUEUE_MAX_CYCLES });
+  assert.equal(stop.action, 'keep');
+  assert.match(stop.reason, /oscillazione/i);
+  assert.equal(stop.expiryRequeue, undefined);
+});
+
+test('#815: il contatore dei cicli si legge dai commenti dello stadio stesso', () => {
+  // Il pre-pass e' stateless per costruzione (zero-Claude, nessun artifact): la
+  // sola memoria disponibile e' quella che scrive dove la rilegge.
+  assert.equal(countExpiryRequeues([]), 0);
+  assert.equal(countExpiryRequeues(null), 0);
+  assert.equal(countExpiryRequeues([
+    { body: `nota\n\n${PREPASS_EXPIRY_MARKER}` },
+    { body: 'un requeue di famiglia normale, senza marker' },
+    { body: `altra nota\n\n${PREPASS_EXPIRY_MARKER}` },
+    { body: '<!-- FIX_OUTCOME: max-turns -->' },
+  ]), 2);
+});
+
+test('#815: il tetto non tocca il requeue di famiglia senza verdetto', () => {
+  // Il contatore vale solo per il ramo scadenza: una famiglia riconosciuta e
+  // senza verdetto vincolante si ri-accoda come sempre, anche con dei giri alle
+  // spalle. Altrimenti il tetto diventerebbe un nuovo stato assorbente.
+  const d = prepassDecision({
+    title: 'Crawler Failure: Run zurich', verdict: null,
+    expiryRequeues: EXPIRY_REQUEUE_MAX_CYCLES + 5,
+  });
+  assert.equal(d.action, 'requeue');
+  assert.equal(d.expiryRequeue, undefined);
+});
+
+// ── #815/2: un fallimento SISTEMATICO del lookup non e' una run normale ────
+
+test('#815: la soglia distingue il fallimento sporadico da quello sistematico', () => {
+  // Sporadico: la guardia per-issue degrada bene, e la run resta normale.
+  assert.equal(isLookupDegraded(0, 17), false);
+  assert.equal(isLookupDegraded(1, 17), false);
+  assert.equal(isLookupDegraded(LOOKUP_FAILURE_MIN_COUNT - 1, 4), false);
+  // Sistematico (PAT scaduto, permessi revocati): ogni lettura fallisce, TUTTE
+  // le issue diventano `keep`, e senza soglia il riassunto `requeue=0 keep=17`
+  // e' identico a quello di una run in cui non c'era niente da fare.
+  assert.equal(isLookupDegraded(17, 17), true);
+  assert.equal(isLookupDegraded(9, 17), true);
+  // Il minimo assoluto protegge il repo con poche issue: un solo 502 di rete su
+  // una sola lettura e' rumore, non una porta chiusa.
+  assert.equal(isLookupDegraded(1, 1), false);
+  // Nessun lookup tentato non e' un degrado: e' una lista vuota.
+  assert.equal(isLookupDegraded(0, 0), false);
+});
+
+// ── la manopola illeggibile non spegne la guardia ─────────────────────────
+
+test('#815: una manopola non numerica torna al default invece di mutare la guardia', () => {
+  // `Number(env || d)` dava `NaN` su `30d` o su un incolla con uno spazio, e
+  // ogni confronto con `NaN` e' `false`: la finestra non scadeva MAI e la
+  // guardia diventava codice morto senza una riga di log. E' la stessa forma
+  // dell'item 1 — una guardia disattivata da un input degenere.
+  assert.equal(posNum(undefined, 30), 30);
+  assert.equal(posNum('', 30), 30);
+  assert.equal(posNum('30d', 30), 30);
+  assert.equal(posNum('  ', 30), 30);
+  assert.equal(posNum('0', 30), 30);
+  assert.equal(posNum('-5', 30), 30);
+  assert.equal(posNum('7', 30), 7);
+  assert.equal(posNum('0.5', 1), 0.5);
+  // E i valori vivi restano numeri utilizzabili.
+  assert.ok(Number.isFinite(VERDICT_MAX_AGE_DAYS) && VERDICT_MAX_AGE_DAYS > 0);
+  assert.ok(Number.isFinite(EXPIRY_REQUEUE_MAX_CYCLES) && EXPIRY_REQUEUE_MAX_CYCLES > 0);
 });

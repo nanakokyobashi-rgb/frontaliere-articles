@@ -89,6 +89,26 @@ test('lastVerdictComment è null quando non c\'è nessun marker', () => {
   assert.equal(lastVerdictComment(null), null);
 });
 
+test('#815: un verdetto senza data non viene scartato come «nessun verdetto»', () => {
+  // Gemello `corpus-only` dell'item 1 di #815. Le due forme accettate hanno
+  // chiavi diverse (`created_at` REST, `createdAt` GraphQL) e nessuna e'
+  // garantita da un tipo: scartare il commento senza data faceva tornare `null`,
+  // indistinguibile dal caso in cui nessun fixer e' mai passato. Qui il costo e'
+  // preciso — un `blocked-workflows-scope` che nomina un file del sito non
+  // verrebbe MAI spedito, e l'unico segnale sarebbe una diagnosi che non arriva.
+  const got = lastVerdictComment([
+    { body: `<!-- FIX_OUTCOME: blocked-admin-settings -->\n${MIRROR_BODY}`, created_at: 'non-una-data' },
+  ]);
+  assert.equal(got.verdict, 'blocked-admin-settings');
+  assert.ok(got.body.includes('create-article.mjs'));
+  // Ma un verdetto DATATO batte sempre uno senza data, a qualunque distanza.
+  const mixed = lastVerdictComment([
+    { body: '<!-- FIX_OUTCOME: blocked-admin-settings -->' },
+    { body: '<!-- FIX_OUTCOME: no-root-cause -->', created_at: '2020-01-01T00:00:00Z' },
+  ]);
+  assert.equal(mixed.verdict, 'no-root-cause');
+});
+
 test('il repo di destinazione è il sito, non un placeholder', () => {
   assert.match(SITE_REPO, /^valerielinc-ops\/frontaliere-si-o-no$/);
 });
