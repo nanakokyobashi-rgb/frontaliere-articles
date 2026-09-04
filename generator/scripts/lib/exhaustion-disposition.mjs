@@ -181,14 +181,82 @@ export const QUOTA_DEFERRAL_MIN_TRANSIENT_SHARE = 0.5;
  * @param {unknown} err l'errore risalito fino al catch di primo livello
  * @returns {boolean} true → differire e' onesto, exit EXIT_NO_ARTICLE_DECLARED
  */
+/**
+ * ── GLI ECHI DI UN GUASTO NON SONO UN CAMPIONE (issue #805) ────────────────
+ *
+ * Il quoziente sopra e' onesto solo se ogni riga di `errors` e' un fallimento
+ * INDIPENDENTE. Le righe di skip da cooldown di provider non lo sono: quando un
+ * provider prende un 429 — o il suo host smette di rispondere — ogni id
+ * fratello servito da quell'host lascia la sua riga, ~12 per GitHub, e sono
+ * tutte lo stesso guasto, gia' contato una volta da chi il cooldown l'ha messo.
+ *
+ * Su un roster da ~106 valgono ~11 punti di share, cioe' piu' del margine con
+ * cui la soglia decide: un solo provider morto sposta da solo il verdetto di
+ * una notte di quota VERA. Prima di #767 quelle righe dicevano `cooling down`
+ * (vocabolario transitorio) e GONFIAVANO lo share; da #767 la causa persistente
+ * scrive `non-retryable` e lo SGONFIANO. La polarita' si e' invertita, la
+ * distorsione e' rimasta: e' il denominatore a essere sbagliato, non la soglia
+ * — esattamente cio' che il commento di QUOTA_DEFERRAL_MIN_TRANSIENT_SHARE
+ * diceva gia' («IL DIFETTO NON E' LA SOGLIA, E' IL DENOMINATORE»).
+ *
+ * Quindi l'eco esce dal conteggio, e il guasto resta contato UNA volta. Sulla
+ * notte misurata con l'host GitHub giu' — transient 51, persistent 55, total
+ * 106, di cui 11 skip da cooldown — lo share passa da 51/106 = 0,481 (rosso,
+ * Workflow-Failure su una condizione che si cura a mezzanotte) a 51/95 = 0,537
+ * (differimento dichiarato, EXIT_NO_ARTICLE_DECLARED).
+ *
+ * RETRO-COMPATIBILE PER COSTRUZIONE. `providerCooldownSkips` arriva da
+ * `classifyExhaustionCause` (ai-models.mjs); un errore serializzato prima di
+ * #805, o un mock che non lo popola, degrada a zero e ottiene il quoziente di
+ * oggi, byte per byte. Ogni sottrazione e' inoltre clampata al secchio da cui
+ * esce: un campo incoerente non deve poter produrre un denominatore ≤ 0 o un
+ * numeratore piu' grande del totale — cioe' non deve poter INVENTARE un
+ * differimento, che e' l'unico errore che qui costa ore di silenzio.
+ *
+ * PERCHE' RIPARTITO PER SECCHIO e non un totale nudo. In una notte di quota
+ * vera gli echi votano TRANSITORIO (`cooling down`), quindi vanno tolti anche
+ * dal numeratore: toglierli dal solo denominatore darebbe share > 1 e, nel caso
+ * limite di una cascata fatta di soli echi, una divisione per zero.
+ *
+ * @param {unknown} breakdown `err.exhaustionBreakdown`
+ * @returns {{transient:number,persistent:number,ambiguous:number,total:number,providerCooldownSkips:number}}
+ */
+function deferralTally(breakdown) {
+  const b = (breakdown && typeof breakdown === 'object') ? breakdown : {};
+  const transient = Math.max(0, Number(b.transient) || 0);
+  const persistent = Math.max(0, Number(b.persistent) || 0);
+  const total = Math.max(0, Number(b.total) || 0);
+  const echo = (b.providerCooldownSkips && typeof b.providerCooldownSkips === 'object')
+    ? b.providerCooldownSkips
+    : {};
+  const echoTransient = Math.min(Math.max(0, Number(echo.transient) || 0), transient);
+  const echoPersistent = Math.min(Math.max(0, Number(echo.persistent) || 0), persistent);
+  // Il totale degli echi non puo' essere minore della somma dei due secchi
+  // (sarebbero echi non attribuiti a nessuno) ne' maggiore del totale.
+  const echoTotal = Math.min(
+    Math.max(Math.max(0, Number(echo.total) || 0), echoTransient + echoPersistent),
+    total,
+  );
+  const netTotal = total - echoTotal;
+  const netTransient = Math.min(transient - echoTransient, netTotal);
+  const netPersistent = Math.min(persistent - echoPersistent, netTotal - netTransient);
+  return {
+    transient: netTransient,
+    persistent: netPersistent,
+    ambiguous: Math.max(0, netTotal - netTransient - netPersistent),
+    total: netTotal,
+    providerCooldownSkips: echoTotal,
+  };
+}
+
 export function isLegitimateQuotaDeferral(err) {
   if (!err || typeof err !== 'object') return false;
   if (err.code !== 'ALL_MODELS_EXHAUSTED') return false;
-  const breakdown = err.exhaustionBreakdown || {};
-  const transient = Number(breakdown.transient) || 0;
-  const total = Number(breakdown.total) || 0;
+  const { transient, total } = deferralTally(err.exhaustionBreakdown);
   // Senza denominatore non si puo' affermare niente, e l'affermazione non
   // dimostrata qui vale «rosso»: e' la direzione in cui l'errore costa meno.
+  // Vale anche per una cascata di soli echi: un guasto solo, ripetuto, non e'
+  // la prova che aspettare aiuti.
   if (total <= 0) return false;
   return transient / total > QUOTA_DEFERRAL_MIN_TRANSIENT_SHARE;
 }
@@ -199,16 +267,15 @@ export function isLegitimateQuotaDeferral(err) {
  * numero azionabile non deve dipendere da chi legge la prosa.
  */
 export function quotaDeferralShare(err) {
-  const breakdown = (err && err.exhaustionBreakdown) || {};
-  const transient = Number(breakdown.transient) || 0;
-  const persistent = Number(breakdown.persistent) || 0;
-  const total = Number(breakdown.total) || 0;
+  // Gli STESSI numeri su cui il predicato ha deciso — al netto degli echi di
+  // cooldown (deferralTally): una riga diagnostica che riportasse il totale
+  // lordo spiegherebbe un verdetto diverso da quello preso, ed e' il modo in
+  // cui una metrica smette di essere letta. `providerCooldownSkips` dice
+  // quante righe sono state tolte, cosi' il totale lordo resta ricostruibile.
+  const tally = deferralTally(err && err.exhaustionBreakdown);
   return {
-    transient,
-    persistent,
-    ambiguous: Math.max(0, total - transient - persistent),
-    total,
-    share: total > 0 ? transient / total : 0,
+    ...tally,
+    share: tally.total > 0 ? tally.transient / tally.total : 0,
     required: QUOTA_DEFERRAL_MIN_TRANSIENT_SHARE,
   };
 }
