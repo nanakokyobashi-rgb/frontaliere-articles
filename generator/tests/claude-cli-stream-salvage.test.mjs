@@ -224,7 +224,13 @@ describe('il ramo di timeout usa davvero il salvataggio, e non punisce il modell
     );
     assert.match(
       SRC,
-      /const transportOnly = !!e\.transportFault && provider === PROVIDER\.CLAUDE_CLI;[\s\S]{0,220}?transportOnly,\s*\n\s*\}\);/,
+      // La chiamata e' nominata esplicitamente invece di essere solo «entro 220
+      // caratteri dalla dichiarazione»: la finestra di prossimita' si e' rotta
+      // appena la chiamata e' finita dentro la guardia `recordScore` (#630),
+      // cioe' su un cambiamento che non toccava affatto cio' che questo test
+      // misura. Ancorare sul nome e' piu' stretto, non piu' largo — prima
+      // qualunque oggetto con un campo `transportOnly` sarebbe bastato.
+      /const transportOnly = !!e\.transportFault && provider === PROVIDER\.CLAUDE_CLI;[\s\S]{0,400}?recordModelFailure\(model, \{[\s\S]{0,200}?transportOnly,\s*\n\s*\}\);/,
       'callLLM deve propagare il flag a recordModelFailure',
     );
   });
