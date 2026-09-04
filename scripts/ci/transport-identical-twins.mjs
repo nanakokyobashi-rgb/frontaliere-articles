@@ -80,12 +80,21 @@
  *   SITE_REPO / SITE_REF   letti da `loop-drift-check.mjs` (stessa sorgente).
  *   GH_TOKEN               opzionale; il repo del sito è pubblico.
  *   TRANSPORT_MAX_FILES    default 25; tetto di file copiati in una passata.
+ *   TRANSPORT_MAX_FAILURE_RATIO  default 0.25; oltre questa frazione di fetch
+ *                          fallite la passata esce ROSSA invece che verde.
+ *
+ * ## Uscita
+ *
+ * `0` anche quando non c'e' niente da portare: e' il caso normale. L'unica
+ * uscita rossa e' il BUIO sul canale — troppe fetch fallite perche' il report
+ * («0 da portare, N non verificati») significhi ancora qualcosa.
  */
 import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 import { classify, siteFile } from './loop-drift-check.mjs';
+import { parsePositiveNum } from './scan-failed-runs.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const MANIFEST_PATH = path.join(ROOT, 'scripts/ci/loop-sync-manifest.json');
@@ -99,8 +108,27 @@ const AS_JSON = ARGS.has('--json');
  * il sito rinomina mezzo albero e questo script aprirebbe una PR da 100 file
  * che nessuno rivede davvero. Oltre il tetto la passata si ferma e lo dice,
  * così la copia resta un atto leggibile.
+ *
+ * Validato, non solo letto: `Number('venticinque')` è `NaN`, e
+ * `transported.length >= NaN` è sempre falso — il tetto SPARIREBBE invece di
+ * fallire, che è il contrario di quello che una difesa deve fare quando la si
+ * configura male (stessa classe degli override malformati di #797/#811).
+ * `parsePositiveNum` è la sorgente unica di quella validazione.
  */
-const MAX_FILES = Number(process.env.TRANSPORT_MAX_FILES || 25);
+const MAX_FILES = parsePositiveNum(process.env.TRANSPORT_MAX_FILES, 25, {
+  label: 'TRANSPORT_MAX_FILES',
+  tool: 'transport-identical-twins',
+});
+
+/**
+ * Frazione di fetch fallite oltre la quale la passata è BUIO, non silenzio.
+ * Sotto la soglia restano transienti: un 429 isolato su 159 path non deve
+ * rendere rossa una passata che ha comunque verificato tutto il resto.
+ */
+const MAX_FAILURE_RATIO = parsePositiveNum(process.env.TRANSPORT_MAX_FAILURE_RATIO, 0.25, {
+  label: 'TRANSPORT_MAX_FAILURE_RATIO',
+  tool: 'transport-identical-twins',
+});
 
 const sha256 = (buf) => crypto.createHash('sha256').update(buf).digest('hex').slice(0, 16);
 
@@ -207,6 +235,108 @@ export function transportVerdict(entry, now, base, { outOfScopePrefixes = [], co
   return { transport: true, state, reason: 'il sito è andato avanti e qui nessuno ha toccato il file: la copia è esatta' };
 }
 
+/**
+ * Il tetto per passata applicato in modo CHIUSO: taglia i candidati oltre
+ * `maxFiles`, poi scarta anche quelli che il taglio avrebbe separato dal loro
+ * accoppiamento. La relazione è trattata come SIMMETRICA, ed è questo il punto:
+ *
+ *   - se il fixture resta e il file che pinna cade oltre il tetto, il golden
+ *     descrive codice che qui non c'è ancora;
+ *   - se cade il FIXTURE e resta il file che pinna, il golden locale descrive
+ *     codice che qui è appena cambiato.
+ *
+ * Sono la stessa incoerenza, non due casi: PR rossa, non mergiabile, e da lì il
+ * guard «una PR di trasporto alla volta» spegne il canale in silenzio. Il verso
+ * fixture→codice era coperto; questo copre entrambi con la stessa mappa.
+ *
+ * Un accoppiamento fuori dai candidati non è automaticamente benigno: se è
+ * `identical` ma è stato escluso PRIMA (fetch fallita, `unsafeTarget`, i gemelli
+ * sotto `.github/workflows/`, o uno stato che non è `site-ahead`) allora qui
+ * resta indietro mentre l'altra metà avanza — di nuovo la stessa incoerenza.
+ * Solo un accoppiamento VERIFICATO allineato (`alignedPaths`, cioè `stable`)
+ * non blocca.
+ *
+ *   candidates    [{ path, couplings }] in ordine, già filtrati da `transportVerdict`.
+ *   maxFiles      il tetto per passata.
+ *   alignedPaths  Set dei path verificati allineati su entrambi i lati.
+ *   couplingGraph [{ path, couplings }] raccolto per OGNI fixture, anche per
+ *                 quelli che non sono diventati candidati: è da lì che arriva
+ *                 il verso inverso (un candidato non fixture ha `couplings: []`
+ *                 e da solo non saprebbe di essere pinnato da nessuno).
+ *
+ * Ritorna `{ chosen, dropped, capped }`. `capped` è UN conteggio solo — i
+ * candidati non copiati in questa passata — e `dropped` ne porta le ragioni.
+ */
+export function closeTransportSet(candidates, { maxFiles = 25, alignedPaths = new Set(), couplingGraph = [] } = {}) {
+  const candidatePaths = new Set(candidates.map((c) => c.path));
+  const neighbours = new Map();
+  const link = (a, b) => {
+    if (a === b) return;
+    if (!neighbours.has(a)) neighbours.set(a, new Set());
+    neighbours.get(a).add(b);
+  };
+  for (const node of [...couplingGraph, ...candidates]) {
+    for (const k of node.couplings || []) {
+      // Un accoppiamento non `identical` non è trasportabile in nessun giro:
+      // blocca già in `transportVerdict`, e come arco renderebbe il suo
+      // fixture non copiabile per sempre — un no permanente travestito da tetto.
+      if (k.mode !== 'identical') continue;
+      link(node.path, k.path);
+      link(k.path, node.path);
+    }
+  }
+
+  const kept = new Map(candidates.slice(0, maxFiles).map((c) => [c.path, c]));
+  const dropped = [];
+  // Punto fisso: scartare A può separare B da A, quindi una passata sola non
+  // basta. L'insieme si restringe a ogni giro, quindi termina.
+  for (let changed = true; changed; ) {
+    changed = false;
+    for (const [rel, c] of [...kept]) {
+      const split = [...(neighbours.get(rel) || [])].filter((q) => !kept.has(q) && !alignedPaths.has(q));
+      if (!split.length) continue;
+      kept.delete(rel);
+      dropped.push({
+        path: rel,
+        candidate: candidatePaths.has(rel),
+        split: split.sort(),
+        reason: `separato dai suoi accoppiamenti (${split.sort().join(', ')}): una metà copiata senza l\u2019altra mette rossa la PR di trasporto — aspetta il giro in cui ci stanno insieme`,
+      });
+      changed = true;
+    }
+  }
+
+  const chosen = candidates.filter((c) => kept.has(c.path));
+  return { chosen, dropped, capped: candidates.length - chosen.length };
+}
+
+/**
+ * Il canale è al BUIO, non in silenzio? Se `raw.githubusercontent` risponde
+ * 429/5xx su tutti i path, ogni voce finisce in `failed`, la passata stampa
+ * «0 da portare, N non verificati» e esce VERDE: nessuna PR, nessun allarme, e
+ * il trasporto si spegne esattamente come il mirror disabilitato per tre
+ * settimane, con il log giornaliero come unica traccia.
+ *
+ * La soglia è una frazione e non un numero fisso perché l'insieme cresce, e ha
+ * un minimo assoluto perché su pochi path una frazione è rumore. Il caso
+ * «tutte fallite» è rosso comunque: lì non c'è niente di verificato di cui il
+ * report possa parlare.
+ */
+export function fetchFailureVerdict(attempted, failed, { maxRatio = 0.25, minFailures = 3 } = {}) {
+  if (attempted <= 0 || failed <= 0) return { red: false, reason: null };
+  if (failed >= attempted) {
+    return { red: true, reason: `tutte le ${attempted} fetch dal sito sono fallite: la passata non ha verificato NIENTE` };
+  }
+  const ratio = failed / attempted;
+  if (failed >= minFailures && ratio > maxRatio) {
+    return {
+      red: true,
+      reason: `${failed}/${attempted} fetch dal sito fallite (${(ratio * 100).toFixed(0)}%, soglia ${(maxRatio * 100).toFixed(0)}%): il report «0 da portare» non significa piu\u2019 niente`,
+    };
+  }
+  return { red: false, reason: null };
+}
+
 /** Il testo di un file locale, o `null` se assente o non leggibile come testo. */
 function localText(rel) {
   const abs = path.join(ROOT, rel);
@@ -285,6 +415,9 @@ async function main() {
   const candidates = [];
   const skipped = [];
   const failed = [];
+  const couplingGraph = [];
+  const alignedPaths = new Set();
+  let attempted = 0;
 
   for (const entry of manifest.files) {
     if (entry.mode !== 'identical') continue;
@@ -294,6 +427,7 @@ async function main() {
 
     let content;
     let now;
+    attempted += 1;
     try {
       content = await siteFile(sitePath);
       now = { site: content === null ? null : sha256(content), corpus: localHash(rel) };
@@ -306,9 +440,16 @@ async function main() {
     }
 
     const couplings = isFixture(rel) ? localCouplings(rel, modeOf) : [];
+    // Raccolto per OGNI fixture, non solo per i candidati: e' la mappa inversa
+    // di cui il tetto ha bisogno per non copiare un file lasciando indietro il
+    // golden che lo pinna (il fixture puo' essere stato escluso prima).
+    if (couplings.length) couplingGraph.push({ path: rel, couplings });
     const verdict = transportVerdict(entry, now, base, { outOfScopePrefixes, couplings });
     if (!verdict.transport) {
       skipped.push({ path: rel, state: verdict.state, reason: verdict.reason });
+      // Solo un accoppiamento VERIFICATO allineato non blocca l'altra meta'.
+      // Ogni altro skip (e ogni fetch fallita) lascia questo lato indietro.
+      if (verdict.state === 'stable') alignedPaths.add(rel);
       continue;
     }
     candidates.push({ entry, path: rel, sitePath, content, now, base, couplings });
@@ -319,24 +460,12 @@ async function main() {
   // accoppiamenti. Una passata che copia il golden e lascia indietro il file
   // che pinna è incoerente per costruzione — la stessa rottura del fixture
   // copiato da solo, prodotta dal tetto invece che dal manifest.
-  const kept = candidates.slice(0, MAX_FILES);
-  const keptPaths = new Set(kept.map((c) => c.path));
-  const candidatePaths = new Set(candidates.map((c) => c.path));
-  const chosen = [];
-  let capped = candidates.length - kept.length;
-  for (const c of kept) {
-    const split = c.couplings.filter((k) => candidatePaths.has(k.path) && !keptPaths.has(k.path));
-    if (split.length) {
-      capped += 1;
-      skipped.push({
-        path: c.path,
-        state: 'site-ahead',
-        reason: `fixture separato dal tetto dai suoi accoppiamenti (${split.map((k) => k.path).join(', ')}): aspetta il giro in cui ci stanno insieme`,
-      });
-      continue;
-    }
-    chosen.push(c);
-  }
+  const { chosen, dropped, capped } = closeTransportSet(candidates, {
+    maxFiles: MAX_FILES,
+    alignedPaths,
+    couplingGraph,
+  });
+  for (const d of dropped) skipped.push({ path: d.path, state: 'site-ahead', reason: d.reason });
 
   const transported = [];
   for (const { entry, path: rel, sitePath, content, now, base } of chosen) {
@@ -356,21 +485,29 @@ async function main() {
     fs.writeFileSync(MANIFEST_PATH, `${JSON.stringify(manifest, null, 2)}\n`);
   }
 
+  // «Niente da portare» non è un fallimento, ed è il caso NORMALE: chi chiama
+  // guarda il diff. «Non ho potuto guardare» invece sì — è indistinguibile dal
+  // primo nel report, quindi deve distinguersi nell'EXIT CODE, o il canale si
+  // spegne restando verde.
+  const dark = fetchFailureVerdict(attempted, failed.length, { maxRatio: MAX_FAILURE_RATIO });
+
   if (AS_JSON) {
-    console.log(JSON.stringify({ apply: APPLY, transported, capped, failed, skipped }, null, 2));
+    console.log(JSON.stringify({ apply: APPLY, transported, capped, failed, skipped, dark }, null, 2));
   } else {
     const mode = APPLY ? 'APPLY' : 'dry-run';
     console.log(`transport-identical-twins (${mode}): ${transported.length} da portare, ${skipped.length} fermi, ${failed.length} non verificati`);
     for (const t of transported) console.log(`  ⬇ ${t.path}  ←  ${t.sitePath}  (${t.from} → ${t.to})`);
-    if (capped) console.log(`  ⏸ altri ${capped} oltre il tetto di ${MAX_FILES} file: restano al prossimo giro`);
+    if (capped) console.log(`  ⏸ altri ${capped} candidati non copiati oggi (tetto di ${MAX_FILES} file, più le metà che il taglio avrebbe separato): restano al prossimo giro`);
     for (const f of failed) console.log(`  ⚠ ${f.path}: ${f.reason}`);
     // Gli skip attivi — quelli che una persona deve guardare — sono i soli
     // stampati: elencare 150 `stable` ogni giorno è la riga che nessuno legge.
     for (const s of skipped.filter((x) => x.state !== 'stable')) console.log(`  · ${s.path}: ${s.reason}`);
   }
 
-  // Sempre 0: un trasporto che non trova niente da portare non è un
-  // fallimento, ed è il caso NORMALE. Chi chiama guarda il diff.
+  if (dark.red) {
+    console.error(`transport-identical-twins: ${dark.reason}`);
+    return 1;
+  }
   return 0;
 }
 

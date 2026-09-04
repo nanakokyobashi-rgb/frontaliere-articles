@@ -97,12 +97,18 @@ const DRY_RUN = flag('--dry-run');
  * sentinel vanno DICHIARATI dal chiamante, uno per leva: un `-1` accettato
  * ovunque riaprirebbe il buco su `--lookback-min`, dove non significa niente.
  *
+ * `tool` esiste perche' questo helper e' la sorgente UNICA della validazione
+ * anche fuori da qui (`transport-identical-twins.mjs`, che senza di lui aveva
+ * un `Number(env)` a `NaN` con cui il tetto per passata spariva invece di
+ * fallire): il prefisso del warning deve nominare chi ha davvero ignorato
+ * l'override, altrimenti il log manda a leggere lo script sbagliato.
+ *
  * @param {unknown} raw valore grezzo (argv o env)
  * @param {number} fallback default da usare se `raw` e' assente o illeggibile
- * @param {{label: string, warn?: (msg: string) => void, sentinels?: number[]}} opts
+ * @param {{label: string, warn?: (msg: string) => void, sentinels?: number[], tool?: string}} opts
  * @returns {number} il valore, il sentinel, o `fallback`
  */
-export function parsePositiveNum(raw, fallback, { label, warn = console.warn, sentinels = [] } = {}) {
+export function parsePositiveNum(raw, fallback, { label, warn = console.warn, sentinels = [], tool = 'scan-failed-runs' } = {}) {
   const n = Number(raw);
   if (Number.isFinite(n) && n > 0) return n;
   // `Number('')` e' 0 e `Number(null)` pure: il sentinel si concede solo a un
@@ -112,7 +118,7 @@ export function parsePositiveNum(raw, fallback, { label, warn = console.warn, se
   if (present && Number.isFinite(n) && sentinels.includes(n)) return n;
   if (present) {
     warn(
-      `::warning::[scan-failed-runs] ${label}=${String(raw)} non e' un numero positivo`
+      `::warning::[${tool}] ${label}=${String(raw)} non e' un numero positivo`
         + `${sentinels.length ? ` ne' uno dei valori speciali ammessi (${sentinels.join(', ')})` : ''} — `
         + `override IGNORATO, si prosegue col default ${fallback}. `
         + 'Attenzione: il comportamento che stavi comprando NON e\' attivo.',

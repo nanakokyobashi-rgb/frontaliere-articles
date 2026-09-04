@@ -62,12 +62,20 @@ jobs:
       # Una PR di trasporto alla volta. Senza questo guard un giorno in cui la
       # review e' lenta produce N PR sovrapposte sugli stessi file, che e'
       # esattamente il rumore che il manifest esiste per evitare.
+      #
+      # Il conteggio si fa sul campo `headRefName`, non con `--search head:`: i
+      # branch reali sono `transport/identical-twins-<RUN_ID>`, quindi quel
+      # guard funzionava solo se la qualifica `head:` facesse prefix match. Se
+      # il match fosse esatto conterebbe 0 PER SEMPRE e lo schedule impilerebbe
+      # una PR al giorno sugli stessi file, restando verde a ogni run — un guard
+      # che non si accorge di non guardare niente. `startswith` sul nome del
+      # branch non ha quella semantica da indovinare.
       - name: Guard — trasporto gia' in volo
         id: guard
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          OPEN=$(gh pr list --state open --search 'head:transport/identical-twins' --json number --jq 'length')
+          OPEN=$(gh pr list --state open --limit 100 --json headRefName --jq '[.[] | select(.headRefName | startswith("transport/identical-twins"))] | length')
           echo "open_transports=$OPEN" >> "$GITHUB_OUTPUT"
           if [ "$OPEN" != "0" ]; then
             echo "Una PR di trasporto e' gia' aperta — niente di nuovo oggi."
@@ -145,7 +153,20 @@ jobs:
           git config user.email 'github-actions[bot]@users.noreply.github.com'
           git remote set-url origin "https://x-access-token:${GH_TOKEN}@github.com/${REPO}.git"
           git checkout -b "$BRANCH"
-          git add -A
+          # Si stagia l'insieme ENUMERATO da `--apply`, non tutto cio' che e'
+          # sporco nel checkout: l'argomento «l'enumerazione E' il
+          # confinamento» vale solo se arriva fino al COMMIT. Con `git add -A`
+          # qualunque residuo di uno step precedente entrerebbe in una PR che
+          # passa dall'auto-merge nativo, elencando nel body solo i file
+          # trasportati.
+          node -e '
+            const fs = require("fs");
+            const r = require("/tmp/transport.json");
+            fs.writeFileSync("/tmp/transport-paths.txt", r.transported.map((t) => t.path).join("\n") + "\n");
+          '
+          xargs -r -d '\n' -a /tmp/transport-paths.txt git add --
+          git add -- scripts/ci/loop-sync-manifest.json
+          echo "Staged:"; git diff --cached --name-only
           git commit -m "chore(loop): porta ${PORTED} gemelli identical dal sito"
           git push -u origin "$BRANCH"
           gh pr create --base main --head "$BRANCH" \
