@@ -171,14 +171,21 @@ export function extractSitePaths(body) {
  * verdetto giusto, il nome del repo del sito, e almeno un path — perché è la
  * congiunzione che ha selezionato 4 casi su 4 senza falsi.
  *
- * `no-root-cause` porta una QUARTA condizione, e senza di essa non sarebbe
- * instradabile affatto: almeno uno dei path citati dev'essere dichiarato
- * `identical` nel manifest. Il verdetto e' ambiguo per costruzione — copre sia
- * il vicolo cieco vero sia il mirror — e le altre tre condizioni non lo
- * disambiguano: misurato il 2026-09-04 sulle 26 issue aperte con un verdetto,
- * la sola congiunzione a tre avrebbe spedito anche #694 (path `adapted` e
- * corpus-only, lavoro NOSTRO) e chiuso qui una issue legittima. Con il vincolo
- * sul manifest la selezione e' 1 su 26, ed e' #316 — l'unica che il mirror
+ * `no-root-cause` usa invece verdetto + path + **manifest**, e SOSTITUISCE la
+ * condizione sul nome del repo invece di aggiungersi ad essa. Due misure del
+ * 2026-09-04 sulle 26 issue aperte con un verdetto:
+ *
+ * - La congiunzione a tre non basta a disambiguare questo verdetto, che copre
+ *   sia il vicolo cieco vero sia il mirror: avrebbe spedito anche #694, i cui
+ *   path sono `adapted` e corpus-only — lavoro NOSTRO — chiudendo qui una issue
+ *   legittima. Peggio del parcheggio che il hand-off esiste per togliere.
+ * - Il nome del repo in prosa e' un falso negativo: dei 14 verdetti di #316,
+ *   4 non scrivono lo slug `frontaliere-si-o-no` pur diagnosticando lo stesso
+ *   file `identical`. Legare la consegna alla prosa dell'agente la rende un
+ *   terno al lotto, mentre `mode: identical` nel manifest **e'** l'affermazione
+ *   che quel file e' condiviso col sito: e' evidenza piu' forte, non piu' debole.
+ *
+ * Con questa regola la selezione e' 1 su 26, ed e' #316 — l'unica che il mirror
  * blocca davvero.
  *
  * @returns {{handoff: boolean, paths: string[], reason: string}}
@@ -186,10 +193,6 @@ export function extractSitePaths(body) {
 export function handoffDecision({ verdict, body, lockedPaths } = {}) {
   if (!verdict || !HANDOFF_VERDICTS.has(verdict)) {
     return { handoff: false, paths: [], reason: `verdetto non instradabile: ${verdict ?? 'nessuno'}` };
-  }
-  const siteName = SITE_REPO.split('/')[1];
-  if (!String(body || '').includes(siteName)) {
-    return { handoff: false, paths: [], reason: 'la diagnosi non nomina il repo del sito' };
   }
   const paths = extractSitePaths(body);
   if (!paths.length) {
@@ -210,6 +213,10 @@ export function handoffDecision({ verdict, body, lockedPaths } = {}) {
       paths,
       reason: `diagnosi bloccata dal mirror su ${blocked.join(', ')}`,
     };
+  }
+  const siteName = SITE_REPO.split('/')[1];
+  if (!String(body || '').includes(siteName)) {
+    return { handoff: false, paths: [], reason: 'la diagnosi non nomina il repo del sito' };
   }
   return { handoff: true, paths, reason: `diagnosi con ${paths.length} path del sito` };
 }
