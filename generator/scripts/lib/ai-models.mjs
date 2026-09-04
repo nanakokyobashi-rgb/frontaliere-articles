@@ -1568,9 +1568,83 @@ const DEFAULT_OPTS = {
    * ordina la cascata di produzione, inquinando l'ordinamento reale con dati che
    * non descrivono un uso di produzione. Default `true`: ogni altro chiamante
    * (crawler, generazione articoli, ecc.) continua a scrivere come prima.
+   *
+   * Il valore passa da `coerceRecordScore()`: NON e' un confronto con `false`,
+   * quindi `0`, `null`, `''` e la stringa `'false'` (la forma tipica di un flag
+   * che arriva da `process.env`) sono opt-out veri e non scivolano nel ramo che
+   * scrive. Vedi il commento su quella funzione.
+   *
+   * LIMITE ESPLICITO — la discovery non e' coperta da questo flag. E' per
+   * processo, non per chiamata: `discoverFreeModels()` marca `stale` i modelli
+   * che un provider non offre piu' e quel marchio va nel ledger. Un chiamante
+   * diagnostico che faccia discovery deve chiederne l'opt-out a parte, con
+   * `discoverFreeModels({ recordScore: false })` (o `initScoreStore()`, che la
+   * invoca per suo conto col default). Vedi il blocco su `discoverFreeModels`.
    */
   recordScore: true,
 };
+
+/**
+ * Valori gia' segnalati come non booleani, per non ripetere il warning a ogni
+ * chiamata di un loop diagnostico.
+ */
+const _recordScoreWarned = new Set();
+
+/**
+ * Normalizza `recordScore` a un booleano vero.
+ *
+ * ── Perche' non basta `!== false` ─────────────────────────────────────────
+ *
+ * Il gate storico era un confronto diretto con `false`, ripetuto in una dozzina di
+ * punti. Sotto quella forma SOLO il booleano `false` e' un opt-out: `0`,
+ * `null`, `''` e soprattutto la stringa `'false'` passano il gate e scrivono
+ * `ai_model_scores/_all`, cioe' il documento che `sortChainByScore()` legge per
+ * ordinare la cascata di produzione — condiviso fra questo repo e il sito.
+ *
+ * `'false'` non e' un caso di scuola: e' esattamente cio' che si ottiene da
+ * `process.env.X`, e il chiamante piu' esposto e' proprio quello diagnostico
+ * (`smoke-test-ai-models.mjs` sul gemello), che invoca l'intera catena a
+ * freddo. Il fallimento e' silenzioso: nessun errore, solo punteggi di
+ * produzione che si muovono per dei ping.
+ *
+ * Coercizione e non rifiuto: un `throw` su un valore inatteso trasformerebbe
+ * un flag diagnostico sbagliato in una generazione rotta in produzione. La
+ * direzione del danno e' asimmetrica — scrivere quando il chiamante crede di
+ * essere in opt-out inquina un documento condiviso, non scrivere quando
+ * credeva di registrare perde un punteggio ricostruibile al giro dopo — quindi
+ * ogni falsy vale `false`, e le stringhe passano dal set esplicito sotto.
+ */
+const _RECORD_SCORE_FALSE_STRINGS = new Set(['false', '0', 'no', 'off', '']);
+
+export function coerceRecordScore(value) {
+  if (value === undefined) return true;          // flag assente → default DEFAULT_OPTS
+  if (typeof value === 'boolean') return value;
+  if (typeof value === 'string') {
+    const norm = value.trim().toLowerCase();
+    if (!_recordScoreWarned.has(norm)) {
+      _recordScoreWarned.add(norm);
+      console.warn(`\u26a0\ufe0f  [recordScore] valore stringa "${value}" normalizzato a ${!_RECORD_SCORE_FALSE_STRINGS.has(norm)} — passa un booleano`);
+    }
+    return !_RECORD_SCORE_FALSE_STRINGS.has(norm);
+  }
+  const coerced = Boolean(value);
+  const key = `${typeof value}:${String(value)}`;
+  if (!_recordScoreWarned.has(key)) {
+    _recordScoreWarned.add(key);
+    console.warn(`\u26a0\ufe0f  [recordScore] valore non booleano ${key} normalizzato a ${coerced} — passa un booleano`);
+  }
+  return coerced;
+}
+
+/**
+ * Unica lettura del flag dentro il modulo. I gate la usano invece di ripetere
+ * il confronto: le opzioni arrivano gia' normalizzate dalle due porte pubbliche
+ * (`callLLM` / `callSingleModel`), ma la coercizione e' idempotente e copre
+ * anche un `opts` costruito a mano da un test o da un chiamante interno.
+ */
+function _shouldRecordScore(opts) {
+  return coerceRecordScore(opts?.recordScore);
+}
 
 /**
  * Providers known to honor OpenAI's `response_format: { type: 'json_schema' }`
@@ -2670,7 +2744,7 @@ export function collectOfferedIds(cfg, list) {
  * listing shape auto-detect, the `maxAdd` cap, and the `offeredIds.size > 0`
  * markStale guard. Production callers go through `discoverFreeModels`.
  */
-export async function _discoverProvider(cfg) {
+export async function _discoverProvider(cfg, { recordScore = true } = {}) {
   const apiKey = cfg.getKey();
   if (!apiKey) return { added: 0, stale: 0 };
 
@@ -2764,7 +2838,10 @@ export async function _discoverProvider(cfg) {
       (m) => m.startsWith(cfg.prefix) && !offeredIds.has(m.slice(prefixLen)),
     );
     for (const model of staleIds) {
-      markModelExhausted(model, 'stale');
+      // Il marchio in-processo serve sempre (una copia pre-prune della catena
+      // deve saltare l'id); la scrittura sul ledger e' invece cio' che un
+      // chiamante diagnostico deve poter escludere — vedi discoverFreeModels.
+      markModelExhausted(model, 'stale', '', { recordScore });
       _prunedStale.set(model, cfg.name);
       stale++;
     }
@@ -2792,14 +2869,30 @@ export async function _discoverProvider(cfg) {
 /**
  * Run dynamic discovery across all configured providers in parallel.
  * Idempotent for the process lifetime; never throws.
+ *
+ * `recordScore: false` e' l'opt-out della discovery, gemello di quello di
+ * `callLLM` ma su un asse diverso: il flag di `callLLM` e' PER CHIAMATA, questa
+ * e' PER PROCESSO e gira una volta sola. Serve perche' il ramo `markStale`
+ * scrive `ai_model_scores/_all` esattamente come una cascata fallita: un
+ * chiamante diagnostico che facesse discovery prima di pingare la catena
+ * sporcherebbe il documento condiviso pur avendo chiesto l'opt-out su OGNI
+ * chiamata — cioe' proprio cio' che il flag esiste per impedire.
+ *
+ * Il prune della catena resta in ogni caso: e' in memoria, muore col processo e
+ * non ha niente a che vedere col ledger.
+ *
+ * ATTENZIONE all'idempotenza: la prima invocazione vince per tutto il processo.
+ * `initScoreStore()` chiama la discovery col default (`true`), quindi un
+ * chiamante diagnostico deve o non inizializzare lo store, o fare la discovery
+ * in opt-out PRIMA — non dopo, quando sarebbe un no-op silenzioso.
  */
-export async function discoverFreeModels() {
+export async function discoverFreeModels({ recordScore = true } = {}) {
   if (_discoveryDone) return _dynamicModels;
   _discoveryDone = true;
 
   await Promise.all(DISCOVERY_PROVIDERS.map(async (cfg) => {
     try {
-      await _discoverProvider(cfg);
+      await _discoverProvider(cfg, { recordScore });
     } catch (e) {
       const msg = e?.name === 'AbortError' ? 'timeout' : (e?.message || String(e));
       console.warn(`⚠️  [Discovery:${cfg.name}] Failed (${msg}) — using static list`);
@@ -2813,8 +2906,8 @@ export async function discoverFreeModels() {
  * Backward-compatible alias. Older call sites referenced the OpenRouter-only
  * discovery; it now triggers the full multi-provider sweep (still idempotent).
  */
-export async function discoverOpenRouterFreeModels() {
-  return discoverFreeModels();
+export async function discoverOpenRouterFreeModels(opts = {}) {
+  return discoverFreeModels(opts);
 }
 
 // ── Firestore init & load ────────────────────────────────────
@@ -3698,12 +3791,19 @@ export function getDeclaredRequestTokenLimit(model) {
 // exhaustion (account-independent → rotation cannot help, and re-trying would
 // neutralise those circuit-breakers). Default 'quota' covers the daily-limit and
 // rate-limit paths; the non-quota breakers pass an explicit reason.
-export function markModelExhausted(modelId, reason = 'quota', detail = '') {
+// `recordScore: false` scinde le due meta' di questa funzione: il marchio resta
+// IN PROCESSO (il modello va comunque saltato per il resto della run — e' cio'
+// che evita di pagarne il 404/429), ma non viene proposto al ledger condiviso.
+// La divisione e' la stessa gia' adottata per `cooldownProvider` nel gate di
+// callLLM: in-processo si', documento condiviso no.
+export function markModelExhausted(modelId, reason = 'quota', detail = '', { recordScore = true } = {}) {
   _exhaustedModels.add(modelId);
   _exhaustReason.set(modelId, reason);
   if (detail) _exhaustDetail.set(modelId, detail);
-  _dirtyModels.add(modelId);
-  _schedulePersist();
+  if (coerceRecordScore(recordScore)) {
+    _dirtyModels.add(modelId);
+    _schedulePersist();
+  }
   console.warn(`🚫 Model ${modelId} marked as exhausted (${reason}) — will be skipped for rest of run`);
 }
 
@@ -4858,7 +4958,7 @@ async function _callOpenAICompatible(apiModel, messages, opts, { endpoint, apiKe
         // (daily-limit-looking response, stale local/OmniRoute auth 401) must
         // never hard-ban a last-resort provider. See _isLastResortProvider.
         if (isDailyLimitError(res.status, raw)) {
-          if (!_suppressExhaustionMark && !_isLastResortProvider(modelForTracking) && opts.recordScore !== false) {
+          if (!_suppressExhaustionMark && !_isLastResortProvider(modelForTracking) && _shouldRecordScore(opts)) {
             markModelExhausted(modelForTracking);
             _stats.exhausted++;
           }
@@ -4873,7 +4973,7 @@ async function _callOpenAICompatible(apiModel, messages, opts, { endpoint, apiKe
           // after the fact from logs. Gated like markModelExhausted below —
           // diagnostic-only callers (see DEFAULT_OPTS.recordScore) must not
           // teach the shared cascade a runtime-learned cap either.
-          if (opts.recordScore !== false) {
+          if (_shouldRecordScore(opts)) {
             _learnRequestTokenLimit(modelForTracking, raw);
             // Same reasoning: a 400 with this exact shape only happens when we
             // requested schema mode (responseFormat.type === 'json_schema') and
@@ -4883,7 +4983,7 @@ async function _callOpenAICompatible(apiModel, messages, opts, { endpoint, apiKe
               _learnSchemaIncompatible(modelForTracking);
             }
           }
-          if (nrc.markExhausted && !_isLastResortProvider(modelForTracking) && opts.recordScore !== false) {
+          if (nrc.markExhausted && !_isLastResortProvider(modelForTracking) && _shouldRecordScore(opts)) {
             markModelExhausted(modelForTracking, 'nonretryable', `HTTP ${res.status}`);
             _stats.exhausted++;
           }
@@ -6025,7 +6125,7 @@ async function _callGeminiRaw(model, messages, opts) {
       if (!res.ok) {
         // Quota / rate-limit — mark exhausted if it looks permanent
         if (isDailyLimitError(res.status, raw)) {
-          if (opts.recordScore !== false) {
+          if (_shouldRecordScore(opts)) {
             markModelExhausted(model);
             _stats.exhausted++;
           }
@@ -6039,13 +6139,13 @@ async function _callGeminiRaw(model, messages, opts) {
           // markModelExhausted below — diagnostic-only callers (see
           // DEFAULT_OPTS.recordScore) must not teach the shared cascade a
           // runtime-learned cap either.
-          if (opts.recordScore !== false) {
+          if (_shouldRecordScore(opts)) {
             _learnRequestTokenLimit(model, raw);
             if (nrc.reason === 'schema_unsupported' && useGeminiSchema) {
               _learnSchemaIncompatible(model);
             }
           }
-          if (nrc.markExhausted && opts.recordScore !== false) {
+          if (nrc.markExhausted && _shouldRecordScore(opts)) {
             // 'nonretryable', NOT the default 'quota': this is the Gemini twin
             // of the _callOpenAICompatible non-retryable branch, which already
             // labels correctly. Left at the default, a 404/unknown-model here
@@ -6331,6 +6431,9 @@ function _routeModelCall(model, messages, opts) {
  */
 export async function callSingleModel(messages, opts = {}) {
   const o = { ...DEFAULT_OPTS, ...opts };
+  // Normalizzato una volta sola, qui: da questo punto in giu' `o.recordScore`
+  // e' un booleano, per i gate come per chiunque legga le opzioni.
+  o.recordScore = coerceRecordScore(o.recordScore);
   const model = o.model || AI_MODELS.GPT4O;
 
   if (_shouldSkipExhausted(model)) {
@@ -6381,6 +6484,7 @@ export async function callLLM(messages, opts = {}) {
   }
 
   const o = { ...DEFAULT_OPTS, ...opts };
+  o.recordScore = coerceRecordScore(o.recordScore);
 
   // Opt-in response cache: reuse identical deterministic prompts within the run
   // (e.g. fact-check re-checking an unchanged article body across regeneration
@@ -6614,7 +6718,7 @@ export async function callLLM(messages, opts = {}) {
 
       // ✅ Success — boost this model's score so it stays near the top
       // (skipped for diagnostic-only callers, see DEFAULT_OPTS.recordScore)
-      if (o.recordScore !== false) recordModelSuccess(model);
+      if (_shouldRecordScore(o)) recordModelSuccess(model);
       _consecutive429.delete(model); // FRO-325: reset 429 counter on success
       _clampedTimeouts.delete(model); // an answer clears the adaptive-ceiling doubt
       _resolverFlaps.delete(provider); // the name resolved: the flap streak is over (#770)
@@ -6713,7 +6817,7 @@ export async function callLLM(messages, opts = {}) {
         // PROVIDER.LOCAL carve-out on recordModelContentFailure above: no
         // external quota, so exhausting it mid-run just guarantees zero
         // output for the rest of the wall-clock budget.
-        if (count >= MAX_CONSECUTIVE_429 && !_isLastResortProvider(model) && o.recordScore !== false) {
+        if (count >= MAX_CONSECUTIVE_429 && !_isLastResortProvider(model) && _shouldRecordScore(o)) {
           markModelExhausted(model);
           _stats.exhausted++;
           console.warn(`🚫 [${model}] Exhausted after ${count} consecutive 429s`);
@@ -6747,7 +6851,7 @@ export async function callLLM(messages, opts = {}) {
           console.warn(`⏱️  [${model}] Timed out at the adaptive ${Math.round((e.adaptiveTimeoutMs || 0) / 1000)}s ceiling (caller asked ${Math.round((o.timeout || 0) / 1000)}s) — not exhausting on our own guess (${n}/${ADAPTIVE_TIMEOUT_MAX_CLAMPED_FAILURES})`);
         }
       }
-      if (isTimeoutFailure && !spared && !_isLastResortProvider(model) && o.recordScore !== false) {
+      if (isTimeoutFailure && !spared && !_isLastResortProvider(model) && _shouldRecordScore(o)) {
         markModelExhausted(model, 'timeout');
         _stats.exhausted++;
         markedExhausted = true;
@@ -6780,7 +6884,7 @@ export async function callLLM(messages, opts = {}) {
       // del sito (e' nato qui con #475): senza questa riga la discesa del flag
       // lascerebbe scoperta l'unica scrittura al ledger che il corpus ha in piu'.
       if (!isTimeoutFailure && e.hostUnreachable && !_isHostUnreachableExempt(model)) {
-        if (!markedExhausted && o.recordScore !== false) {
+        if (!markedExhausted && _shouldRecordScore(o)) {
           markModelExhausted(model, 'nonretryable', e.hostUnreachable);
           _stats.exhausted++;
           markedExhausted = true;
@@ -6841,7 +6945,7 @@ export async function callLLM(messages, opts = {}) {
       // giusto dove contarli.
       const transportOnly = !!e.transportFault && provider === PROVIDER.CLAUDE_CLI;
       // (skipped for diagnostic-only callers, see DEFAULT_OPTS.recordScore)
-      if (o.recordScore !== false) {
+      if (_shouldRecordScore(o)) {
         recordModelFailure(model, {
           nonRetryable: !!e.nonRetryable,
           exhausted: isExhausted || isTimeoutFailure,
