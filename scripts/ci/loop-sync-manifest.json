@@ -2258,7 +2258,7 @@
       "path": "host/constants.ts",
       "sitePath": "build-plugins/constants.ts",
       "mode": "adapted",
-      "reason": "Costanti del sito che l'engine legge via SiteShellContract. E' un ESTRATTO PER CHIUSURA di `build-plugins/constants.ts` (850 righe la': solo le ~15 dichiarazioni che il contratto raggiunge, 177 righe qui), quindi non potra' mai essere byte-identico e `adapted` e' il mode giusto. Per questa sola entry `scalarFingerprint` confronta i 21 scalari authoritative: cambiamenti del sorgente fuori dalla chiusura restano stable, ma un digest diverso, mancante, malformato o non dichiarato non puo' mai essere stable. I comportamenti del contratto restano coperti dai fingerprint test esistenti; `host/host-drift.test.mjs` non esiste e non e' una guardia.",
+      "reason": "Costanti del sito che l'engine legge via SiteShellContract. E' un ESTRATTO PER CHIUSURA di `build-plugins/constants.ts` (850 righe la': solo le ~15 dichiarazioni che il contratto raggiunge, 177 righe qui), quindi non potra' mai essere byte-identico e `adapted` e' il mode giusto. Per questa sola entry `scalarFingerprint` confronta i 22 scalari authoritative: cambiamenti del sorgente fuori dalla chiusura restano stable, ma un digest diverso, mancante, malformato o non dichiarato non puo' mai essere stable. I comportamenti del contratto restano coperti dai fingerprint test esistenti; `host/host-drift.test.mjs` non esiste e non e' una guardia.",
       "baseline": {
         "site": "8318a415439ca0d0",
         "corpus": "7c8c22b48ee255aa",
@@ -2469,7 +2469,7 @@
     {
       "path": "host/shell-contract-fingerprint.json",
       "mode": "corpus-only",
-      "reason": "Impronta dei 41 membri di SiteShellContract, prodotta e verificata da `host/tests/shell-contract-fingerprint.test.mjs`. Artefatto di questo lato: e' il gate runtime che impedisce di spedire l'engine senza la sua meta' `host/`.",
+      "reason": "Impronta dei 42 membri di SiteShellContract, prodotta e verificata da `host/tests/shell-contract-fingerprint.test.mjs`. Artefatto di questo lato: e' il gate runtime che impedisce di spedire l'engine senza la sua meta' `host/`.",
       "baseline": {
         "site": null,
         "corpus": "2db6595933fc9e97",
