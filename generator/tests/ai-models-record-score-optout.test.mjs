@@ -36,8 +36,11 @@ import { describe, it, beforeEach, afterEach } from 'node:test';
 
 import {
   callLLM,
+  coerceRecordScore,
   getStats,
   resetState,
+  DEFAULT_CHAIN,
+  _discoverProvider,
 } from '../scripts/lib/ai-models.mjs';
 
 // La forma REALE che undici produce per un host che non accetta connessioni:
@@ -157,6 +160,164 @@ describe('callLLM({ recordScore: false }) — opt-out dal ledger di produzione',
     assert.ok(
       stats.activeCooldowns.github > 0,
       `il cooldown del provider non e' un dato di ledger e deve restare attivo, visti: ${JSON.stringify(stats.activeCooldowns)}`,
+    );
+  });
+});
+
+
+/**
+ * ── #783.1 — L'OPT-OUT E' UN FLAG, NON IL BOOLEANO `false` ─────────────────
+ *
+ * Il gate storico era `recordScore !== false`: sotto quella forma SOLO il
+ * booleano `false` e' un opt-out, mentre `0`, `null`, `''` e la stringa
+ * `'false'` passano e scrivono `ai_model_scores/_all`. `'false'` e' la forma
+ * tipica di un valore che arriva da `process.env`, e il chiamante piu' esposto
+ * e' proprio quello diagnostico. Il fallimento e' silenzioso: nessun errore,
+ * solo punteggi di produzione che si muovono per dei ping.
+ *
+ * Il caso `recordScore: true` in coda e' il confine: senza, un coercitore che
+ * restituisse sempre `false` passerebbe tutti gli altri.
+ */
+describe('#783 — valori falsy non-false sono opt-out veri', () => {
+  let envBackup = {};
+  let realFetch;
+
+  beforeEach(() => {
+    envBackup = Object.fromEntries(ENV_KEYS.map((k) => [k, process.env[k]]));
+    for (const k of ENV_KEYS) delete process.env[k];
+    process.env.GH_MODELS_PAT = 'test-pat';
+    process.env.AI_MODELS_FORCE_CHAIN = 'gpt-4o-mini,gpt-4.1-mini';
+    realFetch = globalThis.fetch;
+    resetState();
+  });
+
+  afterEach(() => {
+    globalThis.fetch = realFetch;
+    for (const k of ENV_KEYS) {
+      if (envBackup[k] === undefined) delete process.env[k];
+      else process.env[k] = envBackup[k];
+    }
+    resetState();
+  });
+
+  for (const value of ['false', 'FALSE', ' false ', '0', 'no', 'off', '', 0, null]) {
+    it(`recordScore: ${JSON.stringify(value)} non tocca il ledger`, async () => {
+      globalThis.fetch = async () => dailyLimitResponse();
+
+      await assert.rejects(() => callLLM([{ role: 'user', content: 'x' }], { ...CALL_OPTS, recordScore: value }));
+
+      const stats = getStats();
+      assert.equal(
+        stats.dirtyModels,
+        0,
+        `recordScore=${JSON.stringify(value)} ha sporcato ${stats.dirtyModels} modelli: il chiamante credeva di essere in opt-out`,
+      );
+      assert.deepEqual(stats.scoreBoard, [], `nessun punteggio doveva muoversi con recordScore=${JSON.stringify(value)}`);
+      assert.deepEqual(stats.exhaustedModels, [], `nessun ban doveva raggiungere il ledger con recordScore=${JSON.stringify(value)}`);
+    });
+  }
+
+  for (const value of [true, 'true', '1', 'yes', undefined]) {
+    it(`recordScore: ${JSON.stringify(value)} continua a scrivere`, async () => {
+      globalThis.fetch = async () => dailyLimitResponse();
+
+      const opts = { ...CALL_OPTS };
+      if (value !== undefined) opts.recordScore = value;
+      await assert.rejects(() => callLLM([{ role: 'user', content: 'x' }], opts));
+
+      assert.ok(
+        getStats().dirtyModels > 0,
+        `recordScore=${JSON.stringify(value)} non e' un opt-out: spegnere il ledger qui sarebbe una regressione silenziosa della produzione`,
+      );
+    });
+  }
+
+  it('coerceRecordScore normalizza a booleano, senza mai lanciare', () => {
+    for (const falsy of [false, 'false', 'FALSE', ' off ', '0', '', 0, null, NaN]) {
+      assert.equal(coerceRecordScore(falsy), false, `${JSON.stringify(falsy)} doveva valere false`);
+    }
+    for (const truthy of [true, 'true', '1', 'sì', 1, {}]) {
+      assert.equal(coerceRecordScore(truthy), true, `${JSON.stringify(truthy)} doveva valere true`);
+    }
+    // Il flag assente e' il default di DEFAULT_OPTS, non un opt-out.
+    assert.equal(coerceRecordScore(undefined), true);
+  });
+});
+
+/**
+ * ── #783.2 — LA DISCOVERY SCRIVEVA IL LEDGER FUORI DAL GATE ────────────────
+ *
+ * Il ramo `markStale` di `_discoverProvider` chiama `markModelExhausted`, che
+ * fa `_dirtyModels.add()` + `_schedulePersist()` come qualsiasi fallimento di
+ * cascata. Stava fuori dall'opt-out perche' la discovery e' per processo mentre
+ * il flag e' per chiamata: un chiamante diagnostico che facesse discovery prima
+ * di pingare la catena sporcava comunque il documento condiviso.
+ *
+ * Il prune della catena invece deve restare in ogni caso — e' in memoria, muore
+ * col processo, e non ha niente a che vedere col ledger.
+ */
+describe('#783 — discovery: opt-out dal ledger, prune invariato', () => {
+  const PREFIX = 'openrouter/';
+  const DEAD = `${PREFIX}zz-decommissioned-783:free`;
+  let chainBackup;
+  let realFetch;
+  let keyBackup;
+
+  const cfg = {
+    name: 'TestProv',
+    prefix: PREFIX,
+    getKey: () => 'test-key',
+    url: 'https://example.invalid/models',
+    markStale: true,
+    pick: (m) => m?.id || null,
+  };
+
+  beforeEach(() => {
+    keyBackup = process.env.OPENROUTER_API_KEY;
+    chainBackup = [...DEFAULT_CHAIN];
+    DEFAULT_CHAIN.push(DEAD);
+    realFetch = globalThis.fetch;
+    // Il listing offre un solo id, e non e' quello morto: `offeredIds.size > 0`
+    // supera la guardia anti-glitch, quindi il ramo markStale scatta davvero.
+    globalThis.fetch = async () => ({
+      ok: true,
+      status: 200,
+      json: async () => ({ data: [{ id: 'zz-alive-783:free' }] }),
+    });
+    resetState();
+  });
+
+  afterEach(() => {
+    globalThis.fetch = realFetch;
+    if (keyBackup === undefined) delete process.env.OPENROUTER_API_KEY;
+    else process.env.OPENROUTER_API_KEY = keyBackup;
+    DEFAULT_CHAIN.length = 0;
+    DEFAULT_CHAIN.push(...chainBackup);
+    resetState();
+  });
+
+  it('con recordScore: false non lascia niente da persistere', async () => {
+    const { stale } = await _discoverProvider(cfg, { recordScore: false });
+
+    assert.ok(stale > 0, 'il ramo markStale non e\' scattato: il test misurerebbe il nulla');
+    assert.equal(
+      getStats().dirtyModels,
+      0,
+      `la discovery ha sporcato ${getStats().dirtyModels} modelli pur essendo in opt-out`,
+    );
+    // ...ma il modello morto e' comunque saltato per il resto della run e
+    // rimosso dalla catena: entrambe le meta' sono in memoria.
+    assert.ok(getStats().exhaustedModels.includes(DEAD), 'il marchio in-processo deve restare, o l\'id morto costa un fallback');
+    assert.ok(!DEFAULT_CHAIN.includes(DEAD), 'il prune della catena non dipende dal ledger');
+  });
+
+  it('col default la discovery continua a scrivere', async () => {
+    const { stale } = await _discoverProvider(cfg);
+
+    assert.ok(stale > 0, 'il ramo markStale non e\' scattato: il test misurerebbe il nulla');
+    assert.ok(
+      getStats().dirtyModels > 0,
+      'la produzione deve continuare a persistere gli id decommissionati: spegnere anche questo non sarebbe un opt-out',
     );
   });
 });
