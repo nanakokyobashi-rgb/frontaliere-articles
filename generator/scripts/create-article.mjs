@@ -275,6 +275,8 @@ import { reportStrippedControlChars } from './lib/control-char-write-report.mjs'
 import {
   beginRegisterLock as beginRegisterLockImpl,
   endRegisterLock as endRegisterLockImpl,
+  resolveRegisterLock as resolveRegisterLockImpl,
+  REGISTER_LOCK_FILE,
 } from './lib/register-lock.mjs';
 // Il protocollo di riferimento del prompt di selezione headline (issue #188).
 // Le due liste del prompt — candidate e articoli gia' pubblicati — avevano la
@@ -2758,6 +2760,50 @@ function beginRegisterLock(id) {
 
 function endRegisterLock() {
   return endRegisterLockImpl(PROJECT_ROOT);
+}
+
+// The files a completed registration must ALL carry the id in, used to tell a
+// benign leftover lock from a genuinely split corpus (see
+// `resolveRegisterLock`). Derived from the same `SECTION` config the
+// `modifyXxx()` functions read, so the two cannot drift apart: the slug data
+// file (`modifyRouterTs`), the article registry (`modifyBlogArticlesTsx`), the
+// four meta files and the four per-locale body files (`modifyI18nTs` +
+// `modifyLocaleFile`), and the SEO file (`modifySeoService`). `modifySitemap`
+// and `modifySitemapNews` are deliberately absent: both are no-ops here (the
+// sitemaps are derived from the whole corpus by scripts/build-api.mjs), so
+// they have no per-id state that could be half-written.
+function registerLockTargets(id) {
+  const targets = [
+    { label: SECTION.slugDataFile, absPath: resolve(SECTION.slugDataFile), needle: id },
+    { label: SECTION.registryFile, absPath: resolve(SECTION.registryFile), needle: id },
+    { label: SECTION.seoFile, absPath: resolve(SECTION.seoFile), needle: id },
+  ];
+  for (const locale of ['it', 'en', 'de', 'fr']) {
+    const metaFile = `services/locales/${SECTION.metaPrefix}-${locale}.ts`;
+    const bodyFile = `services/locales/${SECTION.bodyDir}/${locale}/${id}.ts`;
+    targets.push({ label: metaFile, absPath: resolve(metaFile), needle: `blog.article.${id}.` });
+    // The body file IS the registration: its mere existence is the entry, so
+    // there is no needle to look for inside it.
+    targets.push({ label: bodyFile, absPath: resolve(bodyFile), needle: null });
+  }
+  return targets;
+}
+
+// Called once at the top of `main()`. Throws only on a corpus actually left
+// split by an interrupted registration; a lock whose id turns out to be
+// consistently present (transaction committed) or consistently absent (nothing
+// written yet) is cleared and the run proceeds — otherwise one interrupted run
+// would brick every later run on a corpus that is in fact fine.
+function resolveRegisterLockAtStartup() {
+  const outcome = resolveRegisterLockImpl(PROJECT_ROOT, registerLockTargets);
+  if (outcome.state !== 'clean') {
+    console.error(`  ♻️  ${REGISTER_LOCK_FILE}: marker di registrazione lasciato da un run interrotto`);
+  }
+  if (outcome.state === 'committed') {
+    console.error(`  ♻️  Lock di registrazione orfano per "${outcome.id}": i file di registrazione sono coerenti (transazione completata), lock rimosso`);
+  } else if (outcome.state === 'nothing-written') {
+    console.error(`  ♻️  Lock di registrazione orfano per "${outcome.id}": nessun file di registrazione lo cita (nessuna scrittura avvenuta), lock rimosso`);
+  }
 }
 
 // ── Section config (--section=frontaliere|svizzera) ──────────────
@@ -12904,6 +12950,12 @@ async function exitAfterFlush(code) {
 }
 
 async function main() {
+  // Prima di qualsiasi altra cosa: se una registrazione precedente e' stata
+  // interrotta a meta' delle 9 scritture, il corpus e' incoerente e generare
+  // sopra lo peggiorerebbe soltanto (issue #562). Il controllo e'
+  // deterministico e gratuito, quindi sta qui e non dopo la generazione.
+  resolveRegisterLockAtStartup();
+
   // Positional <url> = first non-flag argv (so `--section=` can precede it).
   let url = process.argv.slice(2).find((a) => !a.startsWith('--'));
   let headlines = null;

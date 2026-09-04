@@ -23,7 +23,13 @@
 import { readFileSync, writeFileSync, mkdirSync, existsSync, unlinkSync } from 'node:fs';
 import path from 'node:path';
 
-export const REGISTER_LOCK_FILE = '.tmp/register-in-progress.json';
+// Deliberately NOT under `.tmp/`, which is gitignored. A run killed mid-write
+// leaves its partial writes on disk, and `generate-article.yml` sweeps them
+// into a commit with `git add -A` — a lock under `.tmp/` would be the one
+// piece of that evidence NOT committed, so the next run (a fresh checkout)
+// would inherit the split corpus with nothing left to detect it. Tracked here,
+// the registration-in-progress marker travels with the damage it describes.
+export const REGISTER_LOCK_FILE = 'generator/data/register-in-progress.json';
 
 export function registerLockPath(projectRoot) {
   return path.join(projectRoot, REGISTER_LOCK_FILE);
@@ -58,4 +64,86 @@ export function beginRegisterLock(projectRoot, id) {
  */
 export function endRegisterLock(projectRoot) {
   try { unlinkSync(registerLockPath(projectRoot)); } catch { /* already gone */ }
+}
+
+/**
+ * Reads the lock left by an interrupted registration, or `null` when there
+ * isn't one. A lock whose JSON is unreadable is still a lock — it is reported
+ * with `id: null`, never swallowed as "clean".
+ */
+export function readRegisterLock(projectRoot) {
+  const lockPath = registerLockPath(projectRoot);
+  if (!existsSync(lockPath)) return null;
+  try {
+    const parsed = JSON.parse(readFileSync(lockPath, 'utf-8'));
+    return { id: typeof parsed?.id === 'string' ? parsed.id : null, ...parsed };
+  } catch {
+    return { id: null, unreadable: true };
+  }
+}
+
+/**
+ * Splits the registration targets into the ones that already carry the id and
+ * the ones that don't. `needle === null` means "the file's mere existence is
+ * the registration" (the per-article body files), everything else is a
+ * substring lookup in the file that was appended to.
+ */
+export function registrationTargetStatus(targets) {
+  const present = [];
+  const absent = [];
+  for (const t of targets) {
+    let has = false;
+    if (existsSync(t.absPath)) {
+      if (t.needle == null) has = true;
+      else {
+        try { has = readFileSync(t.absPath, 'utf-8').includes(t.needle); } catch { has = false; }
+      }
+    }
+    (has ? present : absent).push(t.label);
+  }
+  return { present, absent };
+}
+
+/**
+ * The startup half of the transaction, called once at the top of `main()`.
+ *
+ * A lock on disk only says a registration *started*; it does not say the
+ * corpus is broken. Two of the three possible states are benign and must
+ * self-heal, or the generator would brick itself permanently on the first
+ * interrupted run and every later run would open a workflow-failure issue for
+ * a corpus that is actually fine:
+ *
+ *  - the id is in NONE of the targets — the kill landed before the first
+ *    write, or a later step rolled the article back: nothing to repair;
+ *  - the id is in ALL of them — the kill landed after the last write but
+ *    before `endRegisterLock()`: the transaction did commit.
+ *
+ * Only a genuine SPLIT (some targets registered, some not) is the failure
+ * this lock exists to catch, and that one throws: continuing would layer a
+ * second registration on top of a corpus nobody could untangle afterwards.
+ *
+ * `buildTargets(id)` is supplied by the caller because the 9 paths depend on
+ * the `--section` config, which lives in create-article.mjs.
+ */
+export function resolveRegisterLock(projectRoot, buildTargets) {
+  const lock = readRegisterLock(projectRoot);
+  if (!lock) return { state: 'clean' };
+  if (!lock.id) {
+    throw new Error(
+      `registration lock at ${REGISTER_LOCK_FILE} is unreadable, so the id of the interrupted ` +
+        'registration is unknown and the 9 files cannot be cross-checked. Inspect the corpus by ' +
+        'hand and remove the lock file.',
+    );
+  }
+  const { present, absent } = registrationTargetStatus(buildTargets(lock.id));
+  if (present.length > 0 && absent.length > 0) {
+    throw new Error(
+      `registration of "${lock.id}" was interrupted mid-write and left the corpus SPLIT across the ` +
+        `registration files: registered in [${present.join(', ')}] but missing from ` +
+        `[${absent.join(', ')}]. Refusing to generate on top of an inconsistent corpus — repair the ` +
+        `missing entries (or remove the partial ones) by hand, then delete ${REGISTER_LOCK_FILE}.`,
+    );
+  }
+  endRegisterLock(projectRoot);
+  return { state: present.length > 0 ? 'committed' : 'nothing-written', id: lock.id };
 }
