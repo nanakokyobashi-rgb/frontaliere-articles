@@ -1950,12 +1950,22 @@ export function getCallLatencyStats() {
 // get a temporary cooldown to avoid wasting retries on sibling models.
 // Maps provider name → cooldown-until timestamp (ms).
 const _providerCooldown = new Map();
-// Why a provider is cooling down, provider name → short human cause. Kept
+// Why a provider is cooling down, provider name → { reason, skipPhrase }. Kept
 // beside _providerCooldown (not folded into its value) so the timestamp read
 // path stays a plain number. Two causes exist today — a 429 and an unreachable
 // host (nanako#475) — and the pre-flight skip line has to name the right one:
 // "recent 429" on a host that never answered sends the reader hunting a quota
 // that was never hit. AGENTS.md #6: one source, both messages read it.
+//
+// `skipPhrase` is a SECOND field and not a rewording of `reason` because the
+// pre-flight skip line is TALLIED, not just read: classifyExhaustionCause has
+// `cooling down` in its transient vocabulary. A host that refuses the
+// connection is the opposite of transient, and with 12 GitHub ids in the chain
+// it would cast up to 11 transient votes — enough to flip `transientExhaustion`
+// (`transient >= persistent`; run 31823202761 turned on ONE vote) and make a
+// permanent fault exit 0, green, with no article and no alert. So that cause
+// carries `non-retryable` — the vocabulary the persistent regex already keys
+// on — and "cooling down" stays reserved for the 429.
 const _providerCooldownReason = new Map();
 const PROVIDER_COOLDOWN_MS = 60_000; // 1 minute cooldown after 429
 
@@ -1976,15 +1986,25 @@ function isProviderCoolingDown(provider) {
   return true;
 }
 
-function cooldownProvider(provider, reason = 'rate-limited') {
+function cooldownProvider(provider, reason = 'rate-limited', skipPhrase = `cooling down (${reason})`) {
   const until = Date.now() + PROVIDER_COOLDOWN_MS;
   _providerCooldown.set(provider, until);
-  _providerCooldownReason.set(provider, reason);
+  _providerCooldownReason.set(provider, { reason, skipPhrase });
   console.warn(`🧊 Provider ${provider} cooled down for ${PROVIDER_COOLDOWN_MS / 1000}s (${reason})`);
 }
 
 function providerCooldownReason(provider) {
-  return _providerCooldownReason.get(provider) || 'rate-limited';
+  return _providerCooldownReason.get(provider)?.reason || 'rate-limited';
+}
+
+/**
+ * How a sibling model skipped by this cooldown must DESCRIBE it in `errors` —
+ * the same array classifyExhaustionCause tallies. Defaults to the 429 wording
+ * so an unset cause reads as it always has; see _providerCooldownReason for
+ * why the unreachable-host cause must not say "cooling down".
+ */
+function providerCooldownSkipPhrase(provider) {
+  return _providerCooldownReason.get(provider)?.skipPhrase || 'cooling down (rate-limited)';
 }
 
 // Single source of truth for what counts a "last-resort" model and its
@@ -6331,16 +6351,22 @@ export async function callLLM(messages, opts = {}) {
       continue;
     }
 
-    // Skip models whose provider is cooling down (recent 429). Was silent
-    // (errors.push only) until run 30333856358's investigation — a whole
-    // last-resort tier stuck in cooldown left zero trace unless the entire
-    // chain also failed. Logged once per model+cause (see _logPreflightSkipOnce).
+    // Skip models whose provider is cooling down (recent 429) or is not
+    // answering at all. Was silent (errors.push only) until run 30333856358's
+    // investigation — a whole last-resort tier stuck in cooldown left zero
+    // trace unless the entire chain also failed. Logged once per model+cause
+    // (see _logPreflightSkipOnce).
+    //
+    // The phrase comes from the cooldown cause and is NOT hardcoded here: this
+    // line lands in `errors`, which classifyExhaustionCause tallies into the
+    // transient/persistent vote that decides whether a run with no article is
+    // green. See _providerCooldownReason.
     const provider = getProvider(model);
     if (isProviderCoolingDown(provider)) {
-      const cooldownCause = providerCooldownReason(provider);
-      _logPreflightSkipOnce(model, 'cooldown', `provider ${provider} cooling down (${cooldownCause})`);
-      errors.push(`${model}: skipped — provider ${provider} cooling down (${cooldownCause})`);
-      _recordLastResortSkip(model, 'provider cooling down');
+      const skipPhrase = providerCooldownSkipPhrase(provider);
+      _logPreflightSkipOnce(model, 'cooldown', `provider ${provider} ${skipPhrase}`);
+      errors.push(`${model}: skipped — provider ${provider} ${skipPhrase}`);
+      _recordLastResortSkip(model, `provider ${skipPhrase}`);
       continue;
     }
 
@@ -6562,7 +6588,14 @@ export async function callLLM(messages, opts = {}) {
           markedExhausted = true;
         }
         if (!isProviderCoolingDown(provider)) {
-          cooldownProvider(provider, `host unreachable: ${e.hostUnreachable}`);
+          cooldownProvider(
+            provider,
+            `host unreachable: ${e.hostUnreachable}`,
+            // Deliberately without "cooling down": the siblings' skip line is
+            // counted by classifyExhaustionCause, and a host that refuses the
+            // connection is a persistent fault, not a transient one.
+            `unreachable (${e.hostUnreachable}), non-retryable`,
+          );
           _stats.providerCooldowns++;
           console.warn(`🚫 [${model}] Host unreachable (${e.hostUnreachable}) — cooling down provider ${provider}; its sibling models are skipped instead of re-dialling a dead host`);
         }

@@ -147,6 +147,26 @@ describe('callLLM contro un host che non accetta connessioni', () => {
     assert.ok(stats.activeCooldowns.github > 0, `atteso un cooldown su github, visti: ${JSON.stringify(stats.activeCooldowns)}`);
   });
 
+  it('il fratello saltato vota PERSISTENTE, non transitorio', async () => {
+    // Il costo del cooldown non e' solo un connect risparmiato: la riga di skip
+    // che produce finisce in `errors`, e `classifyExhaustionCause` la conta.
+    // `cooling down` e' vocabolario TRANSITORIO li' dentro, e con 12 id GitHub
+    // un host definitivamente morto aggiungerebbe fino a 11 voti transitori —
+    // `transientExhaustion` e' `transient >= persistent` e la run 31823202761
+    // si e' decisa per UN voto. Il risultato sarebbe `create-article.mjs` che
+    // differisce: exit 0, run verde, nessun articolo, nessun alert, su un host
+    // che non torna. Quindi questa causa si nomina `non-retryable`.
+    const err = await callLLM([{ role: 'user', content: 'x' }], { maxRetriesPerModel: 3, backoffMs: 1, timeout: 5000 })
+      .then(() => null, (e) => e);
+
+    assert.ok(err, 'la catena deve fallire');
+    assert.match(err.message, /skipped — provider github unreachable \(ENOTFOUND\), non-retryable/);
+    assert.doesNotMatch(err.message, /cooling down/, 'un host che non risponde non e\' un 429');
+    assert.equal(err.exhaustionBreakdown.transient, 0, `nessun voto transitorio atteso: ${err.message}`);
+    assert.ok(err.exhaustionBreakdown.persistent >= 1, `atteso almeno un voto persistente: ${JSON.stringify(err.exhaustionBreakdown)}`);
+    assert.equal(err.transientExhaustion, false, 'una run senza articolo su un host morto non deve essere verde');
+  });
+
   it('un ECONNRESET resta ritentabile — il confine della regola', async () => {
     globalThis.fetch = async (url) => {
       fetchCalls.push(String(url));
