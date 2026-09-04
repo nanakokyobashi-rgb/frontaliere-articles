@@ -1,5 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/economia/1943282/danni-aziende-siccita-agricoltura-franchi": "siccita-danni-agricoltura-svizzera",
   "https://www.laregione.ch/svizzera/svizzera/1943254/svizzera-croce-prassi-usam-estero-pmi-prodotti-contesta-fabbricati": "svizzera-usam-croce-svizzera-polemica",
   "https://www.laregione.ch/svizzera/svizzera/1943245/siccita-carne-prezzi-bell-offerta-far-caldo": "caldo-non-frene-consumi-carne-ma-siccia-potrebbe-far-salire-prezzi",
   "https://www.rsi.ch/s/3947664": "bilaterali-iii-vacilla-misura-accompagnamento",
@@ -1777,6 +1776,11 @@
   "https://www.tio.ch/svizzera/economia/1948077/raffineria-prodotti-cressier-fornitura-fermo-garantita-carburante": {
     "articleId": "cressier-guasto-benzina-garantita",
     "ts": "2026-09-04T14:04:31.101Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/politica/1947961/guerra-svp-junge-svizzera-neutralita-video-iniziativa-film-jsvp": {
+    "articleId": "soldati-svizzera-video-guerra",
+    "ts": "2026-09-04T16:44:26.090Z",
     "keyForm": 2
   }
 }
