@@ -6618,7 +6618,14 @@ export async function callLLM(messages, opts = {}) {
       const scoreNote = transportOnly
         ? `guasto di trasporto, score invariato → ${_modelScores.get(model) || 0}`
         : `score → ${_modelScores.get(model) || 0}`;
-      console.warn(`❌ [${model}] Failed${markedExhausted ? ' (timeout → exhausted)' : ''} (${scoreNote}): ${msg.slice(0, 200)}`);
+      // Il motivo del ban va nominato, non presunto: da #475 questa riga puo'
+      // essere raggiunta anche da un host irraggiungibile, e leggere "timeout"
+      // su una connessione mai stabilita manda chi indaga a cercare un modello
+      // lento invece di un host morto.
+      const exhaustNote = markedExhausted
+        ? (isTimeoutFailure ? ' (timeout → exhausted)' : ` (${e.hostUnreachable || 'nonretryable'} → exhausted)`)
+        : '';
+      console.warn(`❌ [${model}] Failed${exhaustNote} (${scoreNote}): ${msg.slice(0, 200)}`);
       // Continue to next model in chain
     }
   }
