@@ -54,6 +54,10 @@
  *   GH_TOKEN            necessario per gh.
  *   GITHUB_REPOSITORY   owner/repo (auto in Actions).
  *   IGNORE_WORKFLOWS    lista separata da virgole di `name:` da ignorare.
+ *   SCAN_FAILED_RUNS_HORIZON_MIN
+ *                       minuti di orizzonte della query `--created` (vedi
+ *                       DEFAULT_RUN_QUERY_HORIZON_MIN). Non e' la finestra di
+ *                       lookback: quella resta `--lookback-min`.
  */
 
 import { execFileSync } from 'node:child_process';
@@ -220,13 +224,87 @@ export function partitionFailedJobsByOwner(jobs) {
 }
 
 /**
- * Il job piu' lungo del repo (`translate-pending.yml`, 350 minuti) puo' essere
- * partito ben prima del cutoff della finestra e concludersi dentro: il cutoff
- * lato query deve restare piu' largo di quello con cui si filtra per davvero
- * (`since`, sotto), che guarda `updatedAt` — lo stesso motivo per cui #661 ha
- * smesso di usare `createdAt` come clock in scan-job-timeouts.mjs.
+ * Il job piu' lungo del repo (`translate-pending.yml`, 350 minuti). Serve solo
+ * come ADDENDO dell'orizzonte qui sotto: da solo non e' un bound sull'eta' di
+ * una run.
  */
-const MAX_RUN_DURATION_MIN = 350 + 60;
+const MAX_JOB_DURATION_MIN = 350;
+
+/**
+ * Quanto una run puo' restare in CODA prima di eseguire.
+ *
+ * E' il pezzo che mancava. Il `timeout-minutes` di un job limita l'ESECUZIONE,
+ * non l'eta' della run: la coda di concorrenza (`concurrency` con
+ * `cancel-in-progress: false`), le catene di `needs` e l'attesa di un runner
+ * stanno tutte PRIMA che il cronometro del job parta. E' la stessa assunzione
+ * che #761 ha gia' smentito sul gemello `scan-job-timeouts.mjs`, dove la
+ * riconciliazione a favore del sito e' stata accettata proprio sull'argomento
+ * (a): «il timeout di un job non limita l'eta' della RUN».
+ *
+ * Il bound onesto e' quello che GitHub stesso impone: un job che resta in coda
+ * oltre 24 ore viene cancellato. Una run che oggi risulta `failure` ha quindi
+ * eseguito, e non puo' aver aspettato piu' di cosi' prima di farlo.
+ */
+const MAX_RUN_QUEUE_WAIT_MIN = 24 * 60;
+
+/**
+ * Orizzonte della query `--created`, che NON e' il filtro.
+ *
+ * Il filtro vero e' `since` su `updatedAt` (`isReportableRun`); la query puo'
+ * discriminare solo per `created`, quindi il suo cutoff deve coprire la massima
+ * distanza possibile fra creazione e ultimo aggiornamento di una run.
+ *
+ * Prima valeva `LOOKBACK_MIN + 350 + 60`: ~7 ore. Una run rimasta in coda piu'
+ * a lungo e fallita DENTRO la finestra di lookback aveva `createdAt` fuori dal
+ * cutoff, quindi non usciva nemmeno dalla query — nessuna issue, nessun
+ * warning, nessun conteggio nel gate di ricorrenza. E' esattamente il blind
+ * spot che #692 voleva chiudere, sopravvissuto qui perche' #700/#761 hanno
+ * sistemato solo lo scanner dei timeout.
+ *
+ * Perche' non i 35 giorni della retention, come il gemello: li' la query e' su
+ * `cancelled` (migliaia di run) e per stare sotto il cap di 1.000 risultati per
+ * search va bisecata pagina per pagina — il costo che #762 item 2 contesta
+ * proprio su quello scanner. Qui il filtro e' `failure`, decine di run al
+ * giorno: ~31 ore di orizzonte restano UNA chiamata sotto il cap. Il caso
+ * residuo (una run in attesa di approvazione di un environment, fino a 30
+ * giorni) si compra con `SCAN_FAILED_RUNS_HORIZON_MIN`, senza toccare il
+ * codice e senza imporre la paginazione a ogni giro.
+ */
+export const DEFAULT_RUN_QUERY_HORIZON_MIN = MAX_RUN_QUEUE_WAIT_MIN + MAX_JOB_DURATION_MIN + 60;
+
+/**
+ * @param {string|undefined} raw valore grezzo di `SCAN_FAILED_RUNS_HORIZON_MIN`
+ * @returns {number} minuti; il default se il valore e' assente, non numerico o <= 0
+ */
+export function parseHorizonMin(raw) {
+  const n = Number(raw);
+  return Number.isFinite(n) && n > 0 ? n : DEFAULT_RUN_QUERY_HORIZON_MIN;
+}
+
+const RUN_QUERY_HORIZON_MIN = parseHorizonMin(process.env.SCAN_FAILED_RUNS_HORIZON_MIN);
+
+/**
+ * L'orizzonte e' una stima, quindi va sorvegliato invece che creduto: e' la
+ * mancanza di questa sorveglianza ad aver reso la perdita silenziosa per mesi.
+ * Se una run segnalabile arriva vicina al bordo del cutoff, l'assunzione sta
+ * per diventare vincolante e lo si dice ad alta voce — a costo zero, senza
+ * nessuna chiamata in piu'.
+ *
+ * @param {Array<{createdAt?: string, updatedAt?: string}>} runs run gia' filtrate
+ * @param {{nowMs: number, horizonMin: number}} opts
+ * @returns {number|null} eta' in minuti della run piu' vecchia oltre la soglia, o null
+ */
+export function horizonPressureMin(runs, { nowMs, horizonMin }) {
+  const threshold = horizonMin * 0.9;
+  let worst = null;
+  for (const r of Array.isArray(runs) ? runs : []) {
+    const created = Date.parse(r?.createdAt ?? '');
+    if (!Number.isFinite(created)) continue;
+    const ageMin = (nowMs - created) / 60_000;
+    if (ageMin >= threshold && (worst === null || ageMin > worst)) worst = ageMin;
+  }
+  return worst;
+}
 
 /**
  * Rete di sicurezza, non filtro primario: `--created` gia' delimita la query
@@ -241,8 +319,9 @@ const FAILED_RUNS_SAFETY_CAP = 500;
 
 /** Run fallite nella finestra, escluse quelle da pull_request e dai gate pre-merge in preview. */
 function failedRuns() {
-  const since = new Date(Date.now() - LOOKBACK_MIN * 60_000).toISOString();
-  const queryCutoff = new Date(Date.now() - (LOOKBACK_MIN + MAX_RUN_DURATION_MIN) * 60_000).toISOString();
+  const nowMs = Date.now();
+  const since = new Date(nowMs - LOOKBACK_MIN * 60_000).toISOString();
+  const queryCutoff = new Date(nowMs - (LOOKBACK_MIN + RUN_QUERY_HORIZON_MIN) * 60_000).toISOString();
   const raw = gh(
     ['run', 'list', '--repo', REPO, '--status', 'failure', '--limit', String(FAILED_RUNS_SAFETY_CAP),
       '--created', `>=${queryCutoff}`,
@@ -258,7 +337,17 @@ function failedRuns() {
   if (runs.length >= FAILED_RUNS_SAFETY_CAP) {
     console.warn(`::warning::[scan-failed-runs] cap di sicurezza (${FAILED_RUNS_SAFETY_CAP}) raggiunto sulle run fallite — possibile troncamento oltre la finestra osservabile.`);
   }
-  return runs.filter((r) => isReportableRun(r, { since }));
+  const reportable = runs.filter((r) => isReportableRun(r, { since }));
+  const pressure = horizonPressureMin(reportable, { nowMs, horizonMin: RUN_QUERY_HORIZON_MIN });
+  if (pressure !== null) {
+    console.warn(
+      `::warning::[scan-failed-runs] una run segnalabile ha ${Math.round(pressure)} minuti di eta' `
+        + `contro un orizzonte di ${RUN_QUERY_HORIZON_MIN} — l'attesa in coda si sta avvicinando al `
+        + 'cutoff `--created`, oltre il quale i fallimenti sparirebbero dalla query in silenzio. '
+        + 'Alzare SCAN_FAILED_RUNS_HORIZON_MIN.',
+    );
+  }
+  return reportable;
 }
 
 /**
