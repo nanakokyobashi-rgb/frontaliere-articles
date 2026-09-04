@@ -44,6 +44,26 @@
  * trasporto ce l'ha già (il mirror), e due canali sullo stesso path sono un
  * conflitto, non una ridondanza.
  *
+ * ## L'insieme deve essere CHIUSO, non solo enumerato
+ *
+ * Enumerare i path `identical` confina la SCRITTURA, ma non basta a rendere
+ * coerente una passata: un fixture può essere byte-identico al sito e pinnare
+ * codice che qui è `adapted`/`corpus-only`. È il caso di
+ * `host/tests/shell-contract-functions.golden.json`, che pinna le funzioni di
+ * `host/siteShellBootstrap.ts` (composto sopra `host/htmlTemplate.ts`,
+ * `host/constants.ts`, `host/shared/seoContentTokens.ts` — tutti fuori
+ * dall'insieme di partenza per costruzione). Copiarlo DA SOLO fa fallire
+ * `host/tests/shell-contract-functions.test.mjs`, e la PR di trasporto resta
+ * aperta e non mergiabile: da lì il guard «una PR alla volta» del workflow
+ * spegne ogni passata successiva e il canale si ferma SENZA che nulla
+ * fallisca. Lo stesso taglio arriva dal tetto per passata, che può separare
+ * un fixture dai suoi soggetti in due giri diversi.
+ *
+ * Per questo un fixture (golden/snapshot, o un file sotto un albero di test) si
+ * copia solo se i suoi ACCOPPIAMENTI locali — i file che lo citano e i file che
+ * cita — sono a loro volta `identical`. Un accoppiamento non registrato nel
+ * manifest è locale per definizione, quindi vale come un no.
+ *
  * ## Cosa NON fa
  *
  * Non mergia e non decide: scrive i file e aggiorna la baseline delle sole voci
@@ -107,6 +127,37 @@ export function unsafeTarget(rel) {
 }
 
 /**
+ * Un fixture è un file il cui contenuto È l'aspettativa di un test: un
+ * golden/snapshot, o qualunque file che vive dentro un albero di test. Sono i
+ * soli path per cui «byte-identico al sito» non implica «coerente qui»: il loro
+ * significato sta nel codice che li legge, non in loro.
+ *
+ * Il predicato è volutamente stretto. Ogni sorgente e' accoppiata a qualcosa,
+ * e allargarlo a tutto l'albero trasformerebbe il trasporto in un no
+ * permanente; un fixture invece fallisce in modo DIVERSO — non a render time,
+ * ma come test rosso su una PR che nessuno può mergiare, e che spegne il
+ * canale (il guard «una PR di trasporto alla volta»).
+ */
+export function isFixture(rel) {
+  const segs = String(rel || '').split('/');
+  const base = segs.pop() || '';
+  if (/\.(golden|snapshot|fixture)\./.test(base)) return true;
+  return segs.some((seg) => seg === 'test' || seg === 'tests' || seg === 'fixtures' || seg === '__fixtures__' || seg === 'snapshots');
+}
+
+/**
+ * Gli accoppiamenti che impediscono una copia isolata: i path locali legati al
+ * fixture che NON sono `identical`. Un path non registrato nel manifest è
+ * locale per definizione — non ha un gemello dichiarato sul sito — quindi conta
+ * come bloccante, non come sconosciuto.
+ *
+ *   couplings   [{ path, mode }] i file che citano il fixture e quelli che cita.
+ */
+export function couplingBlockers(couplings = []) {
+  return couplings.filter((c) => c.mode !== 'identical').map((c) => c.path).sort();
+}
+
+/**
  * Decide se UNA voce va copiata giù dal sito. Pura: prende gli hash già
  * calcolati, come `classify()` — è questo a renderla testabile offline, senza
  * rete e senza scrivere niente.
@@ -115,12 +166,14 @@ export function unsafeTarget(rel) {
  *   now              { site, corpus } gli hash di ORA, `null` se assente.
  *   base             la baseline registrata ({ site, corpus }).
  *   outOfScopePrefixes  i prefissi `scope.outOfScope` del manifest.
+ *   couplings        [{ path, mode }] gli accoppiamenti locali della voce
+ *                    (rilevanti solo per un fixture: vedi `isFixture`).
  *
  * Ritorna `{ transport, state, reason }`. `transport: true` SOLO per un
  * `identical` in `site-ahead` con una destinazione scrivibile: ogni altro
  * verdetto è un no con la sua ragione, mai un silenzio.
  */
-export function transportVerdict(entry, now, base, { outOfScopePrefixes = [] } = {}) {
+export function transportVerdict(entry, now, base, { outOfScopePrefixes = [], couplings = [] } = {}) {
   const state = classify(entry, now, base).state;
   if (entry.mode !== 'identical') {
     return { transport: false, state, reason: `mode \`${entry.mode}\`: solo \`identical\` è copiabile così com'è` };
@@ -134,10 +187,87 @@ export function transportVerdict(entry, now, base, { outOfScopePrefixes = [] } =
   }
   const unsafe = unsafeTarget(entry.path);
   if (unsafe) return { transport: false, state, reason: `destinazione non scrivibile (${unsafe})` };
+  // L'insieme trasportabile dev'essere CHIUSO, non solo enumerato: un fixture
+  // copiato da solo mette rossa la PR di trasporto, che resta aperta e spegne
+  // il canale. Vale a prescindere dallo stato, così la ragione è leggibile
+  // anche quando il fixture e' ancora `stable`.
+  if (isFixture(entry.path)) {
+    const blockers = couplingBlockers(couplings);
+    if (blockers.length) {
+      return {
+        transport: false,
+        state,
+        reason: `fixture accoppiato a ${blockers.length} path non \`identical\` (${blockers.slice(0, 3).join(', ')}): una copia isolata mette rossa la PR di trasporto`,
+      };
+    }
+  }
   if (state !== 'site-ahead') {
     return { transport: false, state, reason: `stato \`${state}\`: copiabile solo \`site-ahead\` (il sito avanti, questo lato fermo sulla baseline)` };
   }
   return { transport: true, state, reason: 'il sito è andato avanti e qui nessuno ha toccato il file: la copia è esatta' };
+}
+
+/** Il testo di un file locale, o `null` se assente o non leggibile come testo. */
+function localText(rel) {
+  const abs = path.join(ROOT, rel);
+  try {
+    const stat = fs.statSync(abs);
+    if (!stat.isFile() || stat.size > 2 * 1024 * 1024) return null;
+    return fs.readFileSync(abs, 'utf8');
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * Gli accoppiamenti LOCALI di un fixture, in due direzioni:
+ *
+ *   - chi lo cita — il test che lo legge (`shell-contract-functions.test.mjs`
+ *     per il golden delle funzioni del contratto);
+ *   - chi cita — i path che il fixture stesso nomina, quando e' codice.
+ *
+ * Chi lo cita si cerca nella sola directory del fixture: un golden e il test
+ * che lo legge stanno accanto, e il test lo nomina per basename. Allargare la
+ * scansione a tutto il manifest sarebbe degenere — il manifest ELENCA ogni
+ * path, quindi ogni fixture risulterebbe accoppiato al manifest e bloccato per
+ * la ragione sbagliata.
+ *
+ * Legge solo l'albero LOCALE: niente rete, quindi un test la può chiamare.
+ */
+export function localCouplings(rel, modeOf) {
+  const base = rel.split('/').pop();
+  const dir = path.dirname(rel);
+  const neighbours = fs.existsSync(path.join(ROOT, dir))
+    ? fs.readdirSync(path.join(ROOT, dir)).map((n) => path.posix.join(dir, n))
+    : [];
+  const found = new Set();
+
+  for (const other of neighbours) {
+    if (other === rel) continue;
+    const text = localText(other);
+    if (text && text.includes(base)) found.add(other);
+  }
+
+  const own = localText(rel);
+  if (own) {
+    // Specificatori relativi (`../../scripts/ci/close-recovered-failure-issues.mjs`) e path repo-relative
+    // citati come stringa (`'scripts/ci/loop-sync-manifest.json'`). Solo quelli
+    // che esistono davvero qui diventano un accoppiamento: il resto è prosa.
+    for (const m of own.matchAll(/\.{1,2}\/[\w./-]+/g)) {
+      const abs = path.resolve(ROOT, dir, m[0]);
+      if (abs.startsWith(ROOT + path.sep) && fs.existsSync(abs) && fs.statSync(abs).isFile()) {
+        found.add(path.relative(ROOT, abs).split(path.sep).join('/'));
+      }
+    }
+    for (const m of own.matchAll(/['"`]([\w.-]+(?:\/[\w.-]+)+)['"`]/g)) {
+      const cand = m[1];
+      if (cand.startsWith('.') && !cand.startsWith('.github')) continue;
+      const abs = path.join(ROOT, cand);
+      if (abs.startsWith(ROOT + path.sep) && fs.existsSync(abs) && fs.statSync(abs).isFile()) found.add(cand);
+    }
+  }
+  found.delete(rel);
+  return [...found].sort().map((c) => ({ path: c, mode: modeOf.get(c) || 'non registrato' }));
 }
 
 /** Hash del file locale, o null se non esiste. */
@@ -149,12 +279,12 @@ function localHash(rel) {
 async function main() {
   const manifest = JSON.parse(fs.readFileSync(MANIFEST_PATH, 'utf8'));
   const outOfScopePrefixes = (manifest.scope?.outOfScope || []).map((x) => x.prefix);
+  const modeOf = new Map(manifest.files.map((e) => [e.path, e.mode]));
   const today = new Date().toISOString().slice(0, 10);
 
-  const transported = [];
+  const candidates = [];
   const skipped = [];
   const failed = [];
-  let capped = 0;
 
   for (const entry of manifest.files) {
     if (entry.mode !== 'identical') continue;
@@ -175,16 +305,41 @@ async function main() {
       continue;
     }
 
-    const verdict = transportVerdict(entry, now, base, { outOfScopePrefixes });
+    const couplings = isFixture(rel) ? localCouplings(rel, modeOf) : [];
+    const verdict = transportVerdict(entry, now, base, { outOfScopePrefixes, couplings });
     if (!verdict.transport) {
       skipped.push({ path: rel, state: verdict.state, reason: verdict.reason });
       continue;
     }
-    if (transported.length >= MAX_FILES) {
+    candidates.push({ entry, path: rel, sitePath, content, now, base, couplings });
+  }
+
+  // Il tetto si applica DOPO aver raccolto tutti i candidati, non durante: e'
+  // l'unico modo di sapere se tagliarlo separerebbe un fixture dai suoi
+  // accoppiamenti. Una passata che copia il golden e lascia indietro il file
+  // che pinna è incoerente per costruzione — la stessa rottura del fixture
+  // copiato da solo, prodotta dal tetto invece che dal manifest.
+  const kept = candidates.slice(0, MAX_FILES);
+  const keptPaths = new Set(kept.map((c) => c.path));
+  const candidatePaths = new Set(candidates.map((c) => c.path));
+  const chosen = [];
+  let capped = candidates.length - kept.length;
+  for (const c of kept) {
+    const split = c.couplings.filter((k) => candidatePaths.has(k.path) && !keptPaths.has(k.path));
+    if (split.length) {
       capped += 1;
+      skipped.push({
+        path: c.path,
+        state: 'site-ahead',
+        reason: `fixture separato dal tetto dai suoi accoppiamenti (${split.map((k) => k.path).join(', ')}): aspetta il giro in cui ci stanno insieme`,
+      });
       continue;
     }
+    chosen.push(c);
+  }
 
+  const transported = [];
+  for (const { entry, path: rel, sitePath, content, now, base } of chosen) {
     if (APPLY) {
       const abs = path.join(ROOT, rel);
       fs.mkdirSync(path.dirname(abs), { recursive: true });

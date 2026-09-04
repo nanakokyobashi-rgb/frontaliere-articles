@@ -35,7 +35,18 @@
  */
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { transportVerdict, unsafeTarget } from '../../scripts/ci/transport-identical-twins.mjs';
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+import {
+  couplingBlockers,
+  isFixture,
+  localCouplings,
+  transportVerdict,
+  unsafeTarget,
+} from '../../scripts/ci/transport-identical-twins.mjs';
+
+const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 
 /** Una voce `identical` con la baseline allineata su entrambi i lati. */
 const twin = (over = {}) => ({
@@ -129,5 +140,76 @@ test('un path del manifest non è una destinazione fidata', () => {
   // Il rifiuto deve valere anche DENTRO il verdetto, non solo nell'helper:
   // è lì che decide se si scrive.
   const v = transportVerdict(twin({ path: '../fuori.mjs' }), { site: 'bbbb', corpus: 'aaaa' }, BASE);
+  assert.equal(v.transport, false);
+});
+
+// ---------------------------------------------------------------------------
+// L'insieme trasportabile dev'essere CHIUSO, non solo enumerato.
+//
+// `host/tests/shell-contract-functions.golden.json` è `identical`, ma pinna le
+// funzioni di `host/siteShellBootstrap.ts` (`corpus-only`, composto sopra
+// `host/htmlTemplate.ts`, `host/constants.ts`, `host/shared/seoContentTokens.ts`
+// — tutti `adapted`). Copiarlo da solo mette rosso
+// `host/tests/shell-contract-functions.test.mjs` su una PR di trasporto che
+// nessuno può mergiare, e il guard «una PR alla volta» del workflow spegne da lì
+// ogni passata successiva: il canale si ferma SENZA che nulla fallisca.
+// ---------------------------------------------------------------------------
+
+test('un fixture accoppiato a un file non `identical` non si copia da solo', () => {
+  const entry = twin({ path: 'host/tests/shell-contract-functions.golden.json' });
+  const v = transportVerdict(entry, { site: 'bbbb', corpus: 'aaaa' }, BASE, {
+    couplings: [{ path: 'host/tests/shell-contract-functions.test.mjs', mode: 'corpus-only' }],
+  });
+  assert.equal(v.state, 'site-ahead');
+  assert.equal(v.transport, false, 'il golden da solo mette rossa la PR di trasporto, che poi spegne il canale');
+  assert.match(v.reason, /fixture/);
+});
+
+test('un fixture i cui accoppiamenti sono tutti `identical` resta copiabile', () => {
+  const entry = twin({ path: 'host/tests/shell-contract-functions.golden.json' });
+  const v = transportVerdict(entry, { site: 'bbbb', corpus: 'aaaa' }, BASE, {
+    couplings: [{ path: 'host/tests/shell-contract-functions.test.mjs', mode: 'identical' }],
+  });
+  assert.equal(v.transport, true, 'la chiusura è la condizione, non un divieto sui fixture');
+});
+
+test('un accoppiamento non registrato nel manifest vale come un no', () => {
+  // Non registrato = nessun gemello dichiarato sul sito = locale per
+  // definizione. Trattarlo come «sconosciuto, quindi ok» riaprirebbe il buco.
+  assert.deepEqual(couplingBlockers([{ path: 'host/tests/x.test.mjs', mode: 'non registrato' }]), ['host/tests/x.test.mjs']);
+  assert.deepEqual(couplingBlockers([{ path: 'host/shared/safeTruncate.ts', mode: 'identical' }]), []);
+});
+
+test('gli accoppiamenti non bloccano una sorgente normale, solo i fixture', () => {
+  // Ogni sorgente è accoppiata a qualcosa: estendere la regola oltre i fixture
+  // trasformerebbe il trasporto in un no permanente.
+  assert.equal(isFixture('host/tests/shell-contract-functions.golden.json'), true);
+  assert.equal(isFixture('generator/tests/loop-labels.test.mjs'), true);
+  assert.equal(isFixture('scripts/ci/x.golden.json'), true);
+  assert.equal(isFixture('host/shared/localeEmitFilter.ts'), false);
+  assert.equal(isFixture('scripts/ci/close-recovered-failure-issues.mjs'), false);
+
+  const v = transportVerdict(twin(), { site: 'bbbb', corpus: 'aaaa' }, BASE, {
+    couplings: [{ path: 'scripts/ci/auto-merge-eval.mjs', mode: 'adapted' }],
+  });
+  assert.equal(v.transport, true);
+});
+
+test("nell'albero di oggi il golden del contratto NON è trasportabile", () => {
+  // Guard sul repo reale, offline: se un giorno il test che legge il golden
+  // diventasse `identical`, questo caso lo direbbe invece di lasciarlo passare
+  // in silenzio.
+  const manifest = JSON.parse(fs.readFileSync(path.join(ROOT, 'scripts/ci/loop-sync-manifest.json'), 'utf8'));
+  const modeOf = new Map(manifest.files.map((e) => [e.path, e.mode]));
+  const rel = 'host/tests/shell-contract-functions.golden.json';
+  assert.equal(modeOf.get(rel), 'identical', 'il golden è dichiarato `identical`: è per questo che serve il guard');
+
+  const couplings = localCouplings(rel, modeOf);
+  assert.ok(
+    couplings.some((c) => c.path === 'host/tests/shell-contract-functions.test.mjs'),
+    'il test che legge il golden dev\'essere visto come accoppiamento',
+  );
+  const entry = manifest.files.find((e) => e.path === rel);
+  const v = transportVerdict(entry, { site: 'bbbb', corpus: entry.baseline.corpus }, entry.baseline, { couplings });
   assert.equal(v.transport, false);
 });
