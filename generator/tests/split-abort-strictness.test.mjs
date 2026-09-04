@@ -81,6 +81,7 @@ import {
   normalizeItalianContentFromPayload,
   hasUsableContentText,
   isTopicGateAbortVerdict,
+  findUnreadableContentEvidence,
   recoverMisplacedFaq,
   BODY_ONLY_FIELDS,
   META_ONLY_FIELDS,
@@ -113,7 +114,7 @@ const DEPS = [
   '_splitCall1', 'useGeminiDirect', 'callLLM', 'AI_MODELS', 'temperature',
   'IT_GENERATION_MAX_TOKENS', 'forceModel', 'GH_MODEL_HEAVY',
   'PREFERRED_GENERATION_MODELS', '_preferActiveThisAttempt', 'repairLlmJson',
-  'normalizeItalianContentFromPayload', 'hasUsableContentText', 'isTopicGateAbortVerdict', 'recoverMisplacedFaq',
+  'normalizeItalianContentFromPayload', 'hasUsableContentText', 'isTopicGateAbortVerdict', 'findUnreadableContentEvidence', 'recoverMisplacedFaq',
   // #485: le due chiamate dichiarano a `callLLM` i campi che la loro meta'
   // produce davvero, invece di lasciarglieli dedurre dal testo del prompt.
   'BODY_ONLY_FIELDS', 'META_ONLY_FIELDS',
@@ -210,6 +211,7 @@ async function run({ risposte }) {
     normalizeItalianContentFromPayload,
     hasUsableContentText,
     isTopicGateAbortVerdict,
+    findUnreadableContentEvidence,
     recoverMisplacedFaq,
     BODY_ONLY_FIELDS,
     META_ONLY_FIELDS,
