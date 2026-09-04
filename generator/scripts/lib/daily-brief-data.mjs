@@ -77,6 +77,19 @@ const JOBS_HISTORY_MOVEMENT_COUNTERS = ['added', 'updated', 'removed'];
  */
 const ISO_DAY_RE = /^\d{4}-\d{2}-\d{2}$/;
 
+/**
+ * `Number(null)` is 0 and `Number('')` is 0, so a counter the aggregator emits
+ * as null would read as a real zero — the same "0 published as a fact" shape
+ * the zero-day rule below exists to stop. Only actual numbers (and numeric
+ * strings) count.
+ */
+function toFiniteNumber(value) {
+  const n = typeof value === 'number' ? value
+    : typeof value === 'string' && value.trim() !== '' ? Number(value)
+      : NaN;
+  return Number.isFinite(n) ? n : NaN;
+}
+
 /** UTC-midnight ms for a canonical day string, `NaN` for anything else. */
 function isoDayMs(value) {
   return ISO_DAY_RE.test(value ?? '') ? Date.parse(`${value}T00:00:00Z`) : NaN;
@@ -297,14 +310,14 @@ export function jobsCorpusFrozenReason(stats, { todayIso } = {}) {
     return `jobs history stops at ${newest.date}, ${lagDays}d before ${todayIso} (max ${JOBS_HISTORY_MAX_LAG_DAYS}d) — corpus is not advancing`;
   }
 
-  const counters = JOBS_HISTORY_COUNTERS.map((key) => Number(newest[key]));
+  const counters = JOBS_HISTORY_COUNTERS.map((key) => toFiniteNumber(newest[key]));
   if (!counters.every((value) => Number.isFinite(value))) return null;
 
   // A CLOSED day on which nothing was added, updated or removed is not an idle
   // day on this corpus — it has thousands of daily updates — it is a crawler
   // that did not run. Publishing it would put "0 new listings yesterday" in the
   // edition as a fact, which is worse than dropping the section.
-  if (JOBS_HISTORY_MOVEMENT_COUNTERS.every((key) => Number(newest[key]) === 0)) {
+  if (JOBS_HISTORY_MOVEMENT_COUNTERS.every((key) => toFiniteNumber(newest[key]) === 0)) {
     return `jobs history day ${newest.date} closed with added/updated/removed all at 0 — the crawler did not run, that is not a quiet day`;
   }
 
@@ -313,7 +326,7 @@ export function jobsCorpusFrozenReason(stats, { todayIso } = {}) {
   // counter on a day that moved is implausible as a coincidence.
   if (rows.length < 2) return null;
   const prev = rows[rows.length - 2];
-  const replayed = JOBS_HISTORY_COUNTERS.every((key) => Number(newest[key]) === Number(prev[key]));
+  const replayed = JOBS_HISTORY_COUNTERS.every((key) => toFiniteNumber(newest[key]) === toFiniteNumber(prev[key]));
   if (replayed) {
     return `jobs history day ${newest.date} replays ${prev.date} field-for-field — corpus did not advance`;
   }
@@ -329,7 +342,7 @@ export function shapeJobs(stats, { nowMs = Date.now(), todayIso } = {}) {
     return unavailable(`jobs stats are ${Math.round((nowMs - generatedMs) / HOUR_MS)}h old (max ${JOBS_MAX_AGE_MS / HOUR_MS}h)`);
   }
   const totals = stats.totals || {};
-  const activeJobs = Number(totals.activeJobs);
+  const activeJobs = toFiniteNumber(totals.activeJobs);
   if (!Number.isFinite(activeJobs) || activeJobs <= 0) return unavailable('jobs stats carry no activeJobs total');
   const frozenReason = jobsCorpusFrozenReason(stats, { todayIso });
   if (frozenReason) return unavailable(frozenReason);
@@ -339,7 +352,8 @@ export function shapeJobs(stats, { nowMs = Date.now(), todayIso } = {}) {
   if (todayIso && Array.isArray(stats.history)) {
     const yesterdayIso = new Date(isoDayMs(todayIso) - 24 * HOUR_MS).toISOString().slice(0, 10);
     const entry = stats.history.find((h) => h?.date === yesterdayIso);
-    if (entry && Number.isFinite(Number(entry.added))) yesterdayAdded = Number(entry.added);
+    const added = toFiniteNumber(entry?.added);
+    if (Number.isFinite(added)) yesterdayAdded = added;
     // The headline of the section IS this number. If the aggregator appends
     // yesterday's closed row only after the 05:05 cron, the block would go out
     // `available: true` with the figure missing — degrade instead, the same way
@@ -352,10 +366,10 @@ export function shapeJobs(stats, { nowMs = Date.now(), todayIso } = {}) {
     available: true,
     generatedAt: stats.generatedAt,
     activeJobs,
-    activeCompanies: Number.isFinite(Number(totals.activeCompanies)) ? Number(totals.activeCompanies) : null,
-    todayAdded: Number.isFinite(Number(totals.todayAdded)) ? Number(totals.todayAdded) : null,
+    activeCompanies: Number.isFinite(toFiniteNumber(totals.activeCompanies)) ? toFiniteNumber(totals.activeCompanies) : null,
+    todayAdded: Number.isFinite(toFiniteNumber(totals.todayAdded)) ? toFiniteNumber(totals.todayAdded) : null,
     yesterdayAdded,
-    last7dAdded: Number.isFinite(Number(totals?.last7d?.added)) ? Number(totals.last7d.added) : null,
+    last7dAdded: Number.isFinite(toFiniteNumber(totals?.last7d?.added)) ? toFiniteNumber(totals.last7d.added) : null,
   };
 }
 
