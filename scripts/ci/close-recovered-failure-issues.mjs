@@ -883,40 +883,56 @@ function hasNoTimeoutEvidence(databaseId, repo = REPO, token) {
     { allowFailure: true, token },
   );
   if (out === null) return false;
+  let data;
   try {
-    const data = JSON.parse(out);
-    const jobs = data?.jobs;
-    const totalCount = Number(data?.total_count);
-    if (!Array.isArray(jobs) || !Number.isInteger(totalCount) || totalCount !== jobs.length) return false;
-    for (const job of jobs) {
-      // Un job CONCLUSO in rosso e' gia' la prova che la run e' un fallimento, comunque sia
-      // finita la run che lo contiene: `cancelled` a livello di run vuol dire solo che
-      // qualcuno ha fermato cio' che restava. Senza questa uscita il ramo si sbilanciava
-      // verso il CLOSE — l'unico del file a farlo — perche' il `continue` qui sotto salta
-      // ogni job non-`cancelled` e la funzione finisce comunque a `true`, togliendo la run
-      // da numeratore E denominatore. `timed_out` e' nello stesso insieme per la ragione
-      // opposta e piu' forte: e' un timeout gia' dichiarato dall'API, senza annotation da
-      // leggere.
-      if (job?.conclusion === 'failure' || job?.conclusion === 'timed_out') return false;
-      if (job?.conclusion !== 'cancelled') continue;
-      if (!job?.check_run_url) return false;
-      const annotations = gh(['api', `${job.check_run_url}/annotations`, '--paginate', '--slurp'], { allowFailure: true, token });
-      if (annotations === null) return false;
-      let parsed;
-      try {
-        parsed = JSON.parse(annotations);
-      } catch {
-        return false;
-      }
-      if (!hasReadableAnnotations(parsed)) return false;
-      if (hasTimeoutAnnotation(parsed)) {
-        return false;
-      }
-    }
-    return true;
+    data = JSON.parse(out);
   } catch {
     return false;
   }
+  return hasNoTimeoutEvidenceFromJobs(data, (checkRunUrl) => {
+    const annotations = gh(['api', `${checkRunUrl}/annotations`, '--paginate', '--slurp'], { allowFailure: true, token });
+    if (annotations === null) return null;
+    try {
+      return JSON.parse(annotations);
+    } catch {
+      return null;
+    }
+  });
+}
+
+/**
+ * La meta' PURA di `hasNoTimeoutEvidence`: dato il payload della Jobs API e un lettore di
+ * annotation iniettabile, la run `cancelled` e' priva di prove di timeout?
+ *
+ * Estratta per la stessa ragione di `dropPhantomCancellations`: e' il ramo che decide se
+ * una run sparisce dallo storico, e un ramo del genere va provato con un test, non a
+ * occhio. `hasNoTimeoutEvidence` non e' testabile perche' parla con `gh` a ogni riga;
+ * questa lo e'.
+ *
+ * `readAnnotations(checkRunUrl)` torna le pagine gia' parsate, o `null` se la lettura e'
+ * fallita — e `null` non e' `[]`, che qui e' la distinzione portante.
+ */
+export function hasNoTimeoutEvidenceFromJobs(data, readAnnotations) {
+  const jobs = data?.jobs;
+  const totalCount = Number(data?.total_count);
+  if (!Array.isArray(jobs) || !Number.isInteger(totalCount) || totalCount !== jobs.length) return false;
+  for (const job of jobs) {
+    // Un job CONCLUSO in rosso e' gia' la prova che la run e' un fallimento, comunque sia
+    // finita la run che lo contiene: `cancelled` a livello di run vuol dire solo che
+    // qualcuno ha fermato cio' che restava. Senza questa uscita il ramo si sbilanciava
+    // verso il CLOSE — l'unico del file a farlo — perche' il `continue` qui sotto salta
+    // ogni job non-`cancelled` e la funzione finisce comunque a `true`, togliendo la run
+    // da numeratore E denominatore. `timed_out` e' nello stesso insieme per la ragione
+    // opposta e piu' forte: e' un timeout gia' dichiarato dall'API, senza annotation da
+    // leggere.
+    if (job?.conclusion === 'failure' || job?.conclusion === 'timed_out') return false;
+    if (job?.conclusion !== 'cancelled') continue;
+    if (!job?.check_run_url) return false;
+    const pages = readAnnotations(job.check_run_url);
+    if (!hasReadableAnnotations(pages)) return false;
+    if (hasTimeoutAnnotation(pages)) return false;
+  }
+  return true;
 }
 
 /** True when any paginated check-run annotation proves a timeout. */
