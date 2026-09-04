@@ -5449,6 +5449,18 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.permesso-c-glarona-come-richiederlo.title': 'Genehmigung C Glarus: Anforderungen, Verfahren und Antrag',
     'blog.article.permesso-c-glarona-come-richiederlo.excerpt': 'Ständiger Wohnsitz im Kanton Glarus: Leitfaden zu den Anforderungen der C-Bewilligung, Sprachkenntnisse, Integration und Antragsverfahren bei den kantonalen Behörden.',
     'blog.article.permesso-c-glarona-come-richiederlo.imageAlt': 'Schweizer Kantonsamt mit Aufenthaltsgenehmigungsdokumenten und Ausweisen auf dem Schreibtisch',
+    'blog.article.soldati-svizzera-video-guerra.title': 'Tote Schweizer Soldaten: Junge SVP schockiert mit Kriegsvideo',
+    'blog.article.soldati-svizzera-video-guerra.excerpt': 'Die SVP-Jugend fördert das Ja zur Neutralitätsinitiative mit einem selbst produzierten Kriegsfilm, der eine Schweiz im Krieg zeigt.',
+    'blog.article.soldati-svizzera-video-guerra.imageAlt': 'Schweizer Soldaten in einem Kriegsvideo',
+    'blog.article.volkswagen-taglia-50mila-posti-2030.title': 'Volkswagen streicht weitere 50’000 Stellen',
+    'blog.article.volkswagen-taglia-50mila-posti-2030.excerpt': 'Der Volkswagen Konzern hat einen Sanierungsplan angekündigt, der den Abbau von weiteren 50’000 Arbeitsplätzen bis 2030 vorsieht.',
+    'blog.article.volkswagen-taglia-50mila-posti-2030.imageAlt': 'Luftaufnahme von Lugano mit dem Luganersee im Hintergrund',
+    'blog.article.apprendistato-svizzera-guida-pratica.title': 'Aus- und Weiterbildung: So funktioniert es in der Schweiz',
+    'blog.article.apprendistato-svizzera-guida-pratica.excerpt': 'Erfahren Sie, wie die Lehre in der Schweiz funktioniert: von der Suche nach dem Praktikum bis zum Vertrag, von der Vergütung über den Rechtsschutz bis zur Berufsmaturität.',
+    'blog.article.apprendistato-svizzera-guida-pratica.imageAlt': 'Junger Lehrling arbeitet in modernem Schweizer Betrieb während praktischer Ausbildung',
+    'blog.article.tirocinio-formazione-professionale-glarona.title': 'Lehre und Berufsausbildung im Kanton Glarus',
+    'blog.article.tirocinio-formazione-professionale-glarona.excerpt': 'Wie man ein Praktikum findet, einen Vertrag abschliesst, die Entlohnung des Lernenden kennt und die Berufsmaturität im Kanton Glarus erlangt.',
+    'blog.article.tirocinio-formazione-professionale-glarona.imageAlt': 'Lehrling bei praktischer Berufsausbildung in einem Schweizer Betrieb mit Ausbilder',
 };
 
 export default blogMetaChDe;

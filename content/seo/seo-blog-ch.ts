@@ -70727,6 +70727,162 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-soldati-svizzera-video-guerra': {
+    title: 'Soldati svizzeri morti: i Giovani UDC scioccano con un video di guerra',
+    description: 'I Giovani UDC promuovono il sì all\'iniziativa sulla neutralità con un film bellico autoprodotto che mostra una Svizzera in guerra. Dati aggiornati 2026',
+    keywords: 'frontalieri, ticino, svizzera, italia, soldati, svizzeri, morti, giovani',
+    ogTitle: 'Soldati svizzeri morti: i Giovani UDC scioccano con un video di guerra',
+    ogDescription: 'Scopri come i Giovani UDC stanno promuovendo il sì all\'iniziativa sulla neutralità con un film bellico che mostra una Svizzera in guerra.',
+    canonicalPath: '/articoli-svizzera/soldati-svizzera-video-guerra/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Soldati svizzeri morti: i Giovani UDC scioccano con un video di guerra",
+      "description": "I Giovani UDC promuovono il sì all'iniziativa sulla neutralità con un film bellico autoprodotto che mostra una Svizzera in guerra. Dati aggiornati 2026",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/soldati-svizzera-video-guerra.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Soldati svizzeri in un video di guerra"
+      },
+      "datePublished": "2026-09-04T16:44:25+00:00",
+      "dateModified": "2026-09-04T16:44:25+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/soldati-svizzera-video-guerra/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-volkswagen-taglia-50mila-posti-2030': {
+    title: 'Volkswagen taglia altri 50’000 posti di lavoro',
+    description: 'Il gruppo Volkswagen ha annunciato un piano di risanamento che prevede il taglio di ulteriori 50’000 posti di lavoro entro il 2030. Dati aggiornati 2026',
+    keywords: 'frontalieri, ticino, svizzera, italia, volkswagen, taglia, altri, posti',
+    ogTitle: 'Volkswagen taglia altri 50’000 posti di lavoro',
+    ogDescription: 'Il gruppo Volkswagen ha annunciato un piano di risanamento che prevede il taglio di ulteriori 50’000 posti di lavoro entro il 2030, portando il totale delle perdite occupazionali a 100’000. I siti di produzione maggiormente colpiti saranno quelli',
+    canonicalPath: '/articoli-svizzera/volkswagen-taglia-50mila-posti-2030/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Volkswagen taglia altri 50’000 posti di lavoro",
+      "description": "Il gruppo Volkswagen ha annunciato un piano di risanamento che prevede il taglio di ulteriori 50’000 posti di lavoro entro il 2030. Dati aggiornati 2026",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/volkswagen-taglia-50mila-posti-2030.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista aerea di Lugano con il Lago Lugano sullo sfondo"
+      },
+      "datePublished": "2026-09-04T17:04:53+00:00",
+      "dateModified": "2026-09-04T17:04:53+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/volkswagen-taglia-50mila-posti-2030/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-apprendistato-svizzera-guida-pratica': {
+    title: 'Apprendistato e formazione: come funziona in Svizzera',
+    description: 'Guida completa all\'apprendistato svizzero: come trovare un tirocinio, contratto, retribuzione, diritti legali e maturità professionale per studi universitari.',
+    keywords: 'frontalieri, ticino, svizzera, italia, apprendistato, formazione, funziona, scopri',
+    ogTitle: 'Apprendistato svizzero: guida pratica a tirocinio e formazione',
+    ogDescription: 'Scopri come funziona l\'apprendistato in Svizzera: ricerca del tirocinio, protezioni legali, retribuzione, contributi sociali, maturità professionale e accesso all\'università.',
+    canonicalPath: '/articoli-svizzera/apprendistato-svizzera-guida-pratica/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Apprendistato e formazione: come funziona in Svizzera",
+      "description": "Guida completa all'apprendistato svizzero: come trovare un tirocinio, contratto, retribuzione, diritti legali e maturità professionale per studi universitari.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/apprendistato-svizzera-guida-pratica.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Giovane apprendista lavora in officina svizzera moderna durante la formazione pratica con attrezzi professionali"
+      },
+      "datePublished": "2026-09-04T17:31:51+00:00",
+      "dateModified": "2026-09-04T17:31:51+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/apprendistato-svizzera-guida-pratica/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-tirocinio-formazione-professionale-glarona': {
+    title: 'Apprendistato e formazione professionale nel canton Glarona',
+    description: 'Guida pratica all\'apprendistato nel canton Glarona: come trovare un tirocinio, il contratto, la retribuzione dell\'apprendista e la maturità professionale.',
+    keywords: 'frontalieri, ticino, svizzera, italia, apprendistato, formazione, professionale, canton',
+    ogTitle: 'Apprendistato e formazione professionale nel canton Glarona',
+    ogDescription: 'Scopri come trovare un tirocinio nel canton Glarona, il contratto di tirocinio, la retribuzione dell\'apprendista secondo il ramo e il percorso verso la maturità professionale. Informazioni pratiche e risorse cantonali.',
+    canonicalPath: '/articoli-svizzera/tirocinio-formazione-professionale-glarona/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Apprendistato e formazione professionale nel canton Glarona",
+      "description": "Guida pratica all'apprendistato nel canton Glarona: come trovare un tirocinio, il contratto, la retribuzione dell'apprendista e la maturità professionale.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/tirocinio-formazione-professionale-glarona.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Un giovane apprendista durante una lezione pratica di formazione professionale in un'azienda svizzera con istruttore"
+      },
+      "datePublished": "2026-09-04T17:52:44+00:00",
+      "dateModified": "2026-09-04T17:52:44+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/tirocinio-formazione-professionale-glarona/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

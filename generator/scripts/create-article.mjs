@@ -148,7 +148,7 @@ import { JSON_QUOTE_SAFETY_RULE_IT, describeJsonParseError, describeRawForDiagno
 // modulo puro perche' le gate del generatore girano `node --test` senza `npm ci`
 // e non possono importare QUESTO file: cosi' il test esegue lo stesso oggetto
 // codice della produzione invece di una copia. Vedi l'intestazione del modulo.
-import { REQUIRED_IT_BODY_FIELDS, BODY_ONLY_FIELDS, META_ONLY_FIELDS, normalizeItalianContentFromPayload, classifyBody2Payload, resolveBody2Validation, recoverMisplacedFaq } from './lib/body2-payload-verdict.mjs';
+import { REQUIRED_IT_BODY_FIELDS, BODY_ONLY_FIELDS, META_ONLY_FIELDS, normalizeItalianContentFromPayload, classifyBody2Payload, isTopicGateAbortVerdict, resolveBody2Validation, recoverMisplacedFaq } from './lib/body2-payload-verdict.mjs';
 import { describePayloadRejection } from './lib/llm-payload-diagnostics.mjs';
 import {
   factCheckFingerprint,
@@ -8520,7 +8520,13 @@ Rispondi SOLO con JSON valido, senza markdown.` },
     // quando il valle lo riconoscerebbe come tale, e la soglia dei 500 char
     // resta a decidere l'ALTRA domanda — proseguire alla 2/2 o ricadere sulla
     // chiamata unica — che e' cio' per cui e' sempre servita.
-    const _valleAbortirebbe = !normalizeItalianContentFromPayload(bodyData, primaryLocale);
+    // Il predicato e' quello del valle, e ora e' LETTERALMENTE la stessa
+    // funzione (`isTopicGateAbortVerdict`), non una riga che gli somiglia: la
+    // meta' 1/2 chiede `BODY_ONLY_FIELDS`, quindi un rifiuto che porta un
+    // `title` alla radice — dove lo schema non impone `null` — resta un abort
+    // per entrambi i gate invece di diventare auto-contraddizione qui e
+    // `reject` la'.
+    const _valleAbortirebbe = isTopicGateAbortVerdict(bodyData, { locale: primaryLocale, expectedFields: BODY_ONLY_FIELDS });
     if (_abortDichiarato && _valleAbortirebbe) {
       // NESSUNA USCITA MUTA. E' il silenzio di questo ramo che ha reso il
       // difetto invisibile per un giorno intero mentre bruciava il roster:
@@ -8898,8 +8904,15 @@ Rispondi SOLO con JSON valido, senza markdown.` },
   // budget on doomed local/fallback re-attempts. When content is actually
   // present the model contradicted its own abort signal; trust the content
   // it produced over the flag instead of throwing.
-  const itContentPreAbortCheck = itData?.abort_topical_relevance === true ? normalizeItalianContentFromPayload(itData) : null;
-  if (itData?.abort_topical_relevance === true && !itContentPreAbortCheck) {
+  // I soli campi meta non contraddicono nulla: un rifiuto puo' avere un
+  // titolo, non puo' avere l'articolo. `isTopicGateAbortVerdict` guarda i
+  // campi di CORPO, cosi' un abort che si intitola alla radice non finisce
+  // qui sotto come «contract violation» con content.it vuoto.
+  const _abortSenzaCorpo = isTopicGateAbortVerdict(itData);
+  const itContentPreAbortCheck = itData?.abort_topical_relevance === true && !_abortSenzaCorpo
+    ? normalizeItalianContentFromPayload(itData)
+    : null;
+  if (itData?.abort_topical_relevance === true && _abortSenzaCorpo) {
     const reason = String(itData.reason || '').slice(0, 500) || '(no reason)';
     console.error(`  ⏭️  [topic-gate] Generation aborted by REGOLA #0 — source lacks real frontaliere angle.`);
     console.error(`     Reason: ${reason}`);

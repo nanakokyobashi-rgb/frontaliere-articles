@@ -5449,6 +5449,18 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.permesso-c-glarona-come-richiederlo.title': 'Glarus C Permit: Requirements, Procedures and Application',
     'blog.article.permesso-c-glarona-come-richiederlo.excerpt': 'Permanent residence in Canton Glarus: guide to C permit requirements, language skills, integration and application procedure with cantonal authorities.',
     'blog.article.permesso-c-glarona-come-richiederlo.imageAlt': 'Swiss cantonal administration office with residency permit C documents and identity card on desk',
+    'blog.article.soldati-svizzera-video-guerra.title': 'Dead Swiss Soldiers: Young UDC shocks with war video',
+    'blog.article.soldati-svizzera-video-guerra.excerpt': 'The UDC Youth are promoting a yes to the neutrality initiative with a self-produced war film showing a Switzerland at war.',
+    'blog.article.soldati-svizzera-video-guerra.imageAlt': 'Swiss soldiers in a war video',
+    'blog.article.volkswagen-taglia-50mila-posti-2030.title': 'Volkswagen cuts another 50,000 jobs',
+    'blog.article.volkswagen-taglia-50mila-posti-2030.excerpt': 'The Volkswagen Group has announced a restructuring plan that envisages the cutting of an additional 50,000 jobs by 2030.',
+    'blog.article.volkswagen-taglia-50mila-posti-2030.imageAlt': 'Aerial view of Lugano with Lake Lugano in the background',
+    'blog.article.apprendistato-svizzera-guida-pratica.title': 'Apprenticeship and training: how it works in Switzerland',
+    'blog.article.apprendistato-svizzera-guida-pratica.excerpt': 'Find out how apprenticeships work in Switzerland: from traineeship research to contract, from pay to legal protections to professional maturity.',
+    'blog.article.apprendistato-svizzera-guida-pratica.imageAlt': 'Young apprentice working in modern Swiss workshop during hands-on professional training',
+    'blog.article.tirocinio-formazione-professionale-glarona.title': 'Apprenticeship and vocational training in the canton of Glarus',
+    'blog.article.tirocinio-formazione-professionale-glarona.excerpt': 'How to find an internship, enter into a contract, learn about the apprentice\'s salary and achieve professional maturity in the canton of Glarus.',
+    'blog.article.tirocinio-formazione-professionale-glarona.imageAlt': 'Young apprentice during practical vocational training in a Swiss company workshop with instructor',
 };
 
 export default blogMetaChEn;

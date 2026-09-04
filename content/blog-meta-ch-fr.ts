@@ -5449,6 +5449,18 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.permesso-c-glarona-come-richiederlo.title': 'Permis C Glaris : exigences, procédures et demande',
     'blog.article.permesso-c-glarona-come-richiederlo.excerpt': 'Résidence permanente dans le canton de Glaris : guide des exigences du permis C, des connaissances linguistiques, de l\'intégration et de la procédure de demande auprès des autorités cantonales.',
     'blog.article.permesso-c-glarona-come-richiederlo.imageAlt': 'Bureau d\'administration cantonale suisse avec documents de permis de résidence C et carte d\'identité',
+    'blog.article.soldati-svizzera-video-guerra.title': 'Soldats suisses morts : les Jeunes UDC choquent avec une vidéo de guerre',
+    'blog.article.soldati-svizzera-video-guerra.excerpt': 'Les Jeunes UDC promeuvent le oui à l\'initiative sur la neutralité avec un film de guerre autoproduit montrant une Suisse en guerre.',
+    'blog.article.soldati-svizzera-video-guerra.imageAlt': 'Soldats suisses dans une vidéo de guerre',
+    'blog.article.volkswagen-taglia-50mila-posti-2030.title': 'Volkswagen supprime 50’000 emplois supplémentaires',
+    'blog.article.volkswagen-taglia-50mila-posti-2030.excerpt': 'Le groupe Volkswagen a annoncé un plan de redressement prévoyant la suppression de 50’000 emplois supplémentaires d\'ici 2030.',
+    'blog.article.volkswagen-taglia-50mila-posti-2030.imageAlt': 'Vue aérienne de Lugano avec le lac de Lugano en arrière-plan',
+    'blog.article.apprendistato-svizzera-guida-pratica.title': 'Apprentissage et formation : comment ça marche en Suisse',
+    'blog.article.apprendistato-svizzera-guida-pratica.excerpt': 'Découvrez comment fonctionne l\'apprentissage en Suisse : de la recherche du stage au contrat, de la rémunération aux protections légales jusqu\'à la maturité professionnelle.',
+    'blog.article.apprendistato-svizzera-guida-pratica.imageAlt': 'Jeune apprenti travaillant en atelier suisse moderne pendant la formation pratique',
+    'blog.article.tirocinio-formazione-professionale-glarona.title': 'Apprentissage et formation professionnelle dans le canton de Glaris',
+    'blog.article.tirocinio-formazione-professionale-glarona.excerpt': 'Comment trouver un stage, conclure un contrat, connaître la rémunération de l\'apprenti et atteindre la maturité professionnelle dans le canton de Glaris.',
+    'blog.article.tirocinio-formazione-professionale-glarona.imageAlt': 'Apprenti en formation professionnelle pratique dans une entreprise suisse avec instructeur',
 };
 
 export default blogMetaChFr;

@@ -11329,6 +11329,12 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.como-export-svizzera-2026.title': 'Als Export -2,2%, Schweiz wächst mit +21,2%',
     'blog.article.como-export-svizzera-2026.excerpt': 'Die Provinz Como verzeichnet einen Exportrückgang von 2,2%. Textil um 7,9% zurück, aber die Schweiz wächst: +21,2%. UIL-Analyse zu Sektoren und Beschäftigung.',
     'blog.article.como-export-svizzera-2026.imageAlt': 'Luftaufnahme des Mendrisio-Bezirks, Grenzregion zwischen Tessin und der Lombardei',
+    'blog.article.lavori-stazione-gallarate-2026.title': 'Arbeiten am Bahnhof Gallarate: Änderungen an der Linie S5 und Ersatzbusse',
+    'blog.article.lavori-stazione-gallarate-2026.excerpt': 'Vom 14. September bis 5. Oktober 2026 wurden Wartungsarbeiten am Bahnhof Gallarate durchgeführt. Änderungen an der Linie S5 Treviglio-Gallarate-Varese und Ersatzbusse.',
+    'blog.article.lavori-stazione-gallarate-2026.imageAlt': 'Luftaufnahme des Bahnhofs Gallarate während der Wartungsarbeiten',
+    'blog.article.aumento-bollette-varese-frontalieri.title': 'Rechnungen +39% in Varese: Auswirkungen auf die Grenzen',
+    'blog.article.aumento-bollette-varese-frontalieri.excerpt': 'Herbst und Winter mit Energieschub in der Provinz Varese. Geschätzte Steigerungen von 39 %. Was das für diejenigen bedeutet, die im Kanton Tessin arbeiten.',
+    'blog.article.aumento-bollette-varese-frontalieri.imageAlt': 'Wohnzimmer in der Provinz Varese mit Herbstblick auf die Bündner Berge',
 };
 
 export default blogMetaDe;

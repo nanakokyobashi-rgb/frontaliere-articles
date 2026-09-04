@@ -16345,6 +16345,42 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'soldati-svizzera-video-guerra',
+    category: 'novita',
+    date: '2026-09-04T16:44:25.957Z',
+    image: '/images/blog/soldati-svizzera-video-guerra.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
+   {
+    id: 'volkswagen-taglia-50mila-posti-2030',
+    category: 'novita',
+    date: '2026-09-04T17:04:53.178Z',
+    image: '/images/blog/volkswagen-taglia-50mila-posti-2030.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
+   {
+    id: 'apprendistato-svizzera-guida-pratica',
+    category: 'pratico',
+    date: '2026-09-04T17:31:51.830Z',
+    image: '/images/blog/apprendistato-svizzera-guida-pratica.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
+   {
+    id: 'tirocinio-formazione-professionale-glarona',
+    category: 'pratico',
+    date: '2026-09-04T17:52:44.489Z',
+    image: '/images/blog/tirocinio-formazione-professionale-glarona.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

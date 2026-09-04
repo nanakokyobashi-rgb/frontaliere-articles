@@ -85364,6 +85364,84 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-lavori-stazione-gallarate-2026': {
+    title: 'Lavori alla stazione di Gallarate: modifiche alla linea S5 e bus sostitutivi',
+    description: 'Dal 14 settembre al 5 ottobre 2026, lavori di manutenzione alla stazione di Gallarate. Modifiche alla linea S5 Treviglio-Gallarate-Varese e bus sostitutivi.',
+    keywords: 'frontalieri, ticino, svizzera, italia, lavori, alla, stazione, gallarate',
+    ogTitle: 'Lavori alla stazione di Gallarate: modifiche alla linea S5 e bus sostitutivi',
+    ogDescription: 'Dal 14 settembre al 5 ottobre 2026, lavori di manutenzione alla stazione di Gallarate. Modifiche alla linea S5 Treviglio-Gallarate-Varese e bus sostitutivi. Pendolari invitati a consultare gli orari aggiornati e a pianificare i loro spostamenti',
+    canonicalPath: '/articoli-frontaliere/lavori-stazione-gallarate-2026',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Lavori alla stazione di Gallarate: modifiche alla linea S5 e bus sostitutivi",
+      "description": "Dal 14 settembre al 5 ottobre 2026, lavori di manutenzione alla stazione di Gallarate. Modifiche alla linea S5 Treviglio-Gallarate-Varese e bus sostitutivi.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/lavori-stazione-gallarate-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista aerea della stazione di Gallarate durante i lavori di manutenzione"
+      },
+      "datePublished": "2026-09-04T16:09:59+00:00",
+      "dateModified": "2026-09-04T16:09:59+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/lavori-stazione-gallarate-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-aumento-bollette-varese-frontalieri': {
+    title: 'Bollette +39% a Varese: impatto frontalieri | Frontaliere Ticino',
+    description: 'Aumenti bollette del 39% stimati in provincia di Varese per autunno-inverno 2026. Impatto su frontalieri Ticino-Varese: strategie di risparmio e pianificazione.',
+    keywords: 'frontalieri, ticino, svizzera, italia, bollette, varese, impatto, autunno',
+    ogTitle: 'Bollette +39% a Varese: come impatta frontalieri',
+    ogDescription: 'La provincia di Varese si prepara a una stangata energetica con aumenti stimati del 39% per autunno e inverno 2026. Cosa significa per frontalieri che lavorano in Canton Ticino, strategie di risparmio e pianificazione del budget.',
+    canonicalPath: '/articoli-frontaliere/aumento-bollette-varese-frontalieri',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Bollette +39% a Varese: impatto frontalieri",
+      "description": "Aumenti bollette del 39% stimati in provincia di Varese per autunno-inverno 2026. Impatto su frontalieri Ticino-Varese: strategie di risparmio e pianificazione.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/aumento-bollette-varese-frontalieri.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Soggiorno residenziale nella provincia di Varese con veduta autunnale verso i monti del Canton Ticino"
+      },
+      "datePublished": "2026-09-04T18:05:43+00:00",
+      "dateModified": "2026-09-04T18:05:43+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/aumento-bollette-varese-frontalieri/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;
