@@ -2267,8 +2267,8 @@
       "scalarFingerprint": {
         "sitePath": "tests/articles-shell-contract-fingerprint.json",
         "corpusPath": "host/shell-contract-fingerprint.json",
-        "scalarFields": 21,
-        "sha256": "5a25f79cdc8b61052b4f5d1840f7f99b529475d67ea1eaf677ae79ae62dae999"
+        "scalarFields": 22,
+        "sha256": "a8d61011f201bab590ebe2b4220429823048d6ccefe6a192fdd3ccbf95bc8bf7"
       }
     },
     {

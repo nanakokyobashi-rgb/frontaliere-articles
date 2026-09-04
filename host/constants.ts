@@ -93,6 +93,24 @@ export const GTAG_SNIPPET = `<script async crossorigin="anonymous" src="https://
  ${CF_BEACON_SNIPPET}`;
 
 /**
+ * Partnerize Partner Tag — programma affiliato Wise.
+ *
+ * Meta' corpus del contratto: il sito lo definisce in
+ * `build-plugins/constants.ts` insieme al codice vero
+ * (`PARTNERIZE_TAG_CONTENT`), che `staticScriptsPlugin.ts` scrive in
+ * `dist/assets/partnerize-tag.js`. Qui serve solo il tag `<script>`, che
+ * DEVE restare byte-identico a quello del sito: il fingerprint scalare del
+ * contratto (`host/shell-contract-fingerprint.json` e la entry
+ * `scalarFingerprint` di `scripts/ci/loop-sync-manifest.json`) confronta i
+ * due lati, e un carattere di differenza li fa divergere.
+ *
+ * Il path `/assets/...` viene riscritto su ASSET_CDN dalla stessa
+ * pipeline che gia' rebasa `gtag-init.js`, quindi il file arriva dal deploy
+ * del sito senza che questo repo debba emetterlo.
+ */
+export const PARTNERIZE_TAG_SNIPPET = `<script defer src="/assets/partnerize-tag.js"></script>`;
+
+/**
  * Google AdSense loader snippet. Included in every statically-generated page
  * (job detail, hubs, fuel, health premiums, orphan queries, etc.) so Auto Ads
  * can serve on pages that do not mount the <AdSenseBanner> React component.
