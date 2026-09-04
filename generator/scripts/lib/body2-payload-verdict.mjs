@@ -390,12 +390,116 @@ export function isTopicGateAbortPayload(parsed) {
  * @param {string[]} [opts.expectedFields] i campi che la chiamata ha chiesto.
  * @returns {boolean}
  */
+/**
+ * ── IL CORPO CHE IL NORMALIZZATORE NON SA LEGGERE ──────────────────────────
+ *
+ * `normalizeItalianContentFromPayload` accetta un campo SOLO se e' una
+ * stringa (`typeof === 'string'`) su una chiave DICHIARATA. Un corpo emesso
+ * in un'altra forma — `body1` come array o oggetto, o il testo parcheggiato
+ * su una chiave che nessuno schema nomina (`content.it.body`, `text`,
+ * `content` come stringa alla radice) — per lui non esiste: torna `null`
+ * esattamente come su un abort puro.
+ *
+ * Finche' quel `null` significava «reject», la differenza non costava niente:
+ * la rigenerazione recuperava la risposta. Da quando lo stesso `null` puo'
+ * significare «abort di REGOLA #0», cioe' un esito TERMINALE che chiude la
+ * sezione senza articolo e senza push su `content/**`, i due casi devono
+ * essere distinti PRIMA: un modello che ha scritto l'articolo in una forma
+ * sbagliata non ha rifiutato la fonte, e buttarlo via senza rigenerare e'
+ * il danno che l'abort esiste per non fare, applicato al payload sbagliato.
+ *
+ * Quindi: se c'e' TRACCIA di contenuto che il normalizzatore non legge, il
+ * flag non basta piu' e il verdetto torna `reject` (rigenerabile). Un abort
+ * puro — campi `null` o assenti, `reason` alla radice — non ha nessuna di
+ * queste tracce e resta un abort, byte per byte come prima.
+ *
+ * ## Dove si guarda, e perche' NON ovunque
+ *
+ * Dentro `content.*` lo schema impone `null` per contratto: qualunque chiave
+ * che porti sostanza li' dentro contraddice l'abort, tranne i campi META
+ * (`title`/`excerpt`, «un rifiuto puo' intitolarsi») e `faq`.
+ *
+ * Alla RADICE no: li' vivono `reason`, `id`, `category`, `imagePrompt` — un
+ * abort conforme li porta, e leggerli come contenuto renderebbe `reject` ogni
+ * rifiuto, cioe' rimetterebbe le cinque rigenerazioni che #807 ha tolto.
+ * Alla radice contano solo le chiavi di FORMA corpo, e una stringa vi conta
+ * solo se e' grande quanto un articolo: la spiegazione di un rifiuto sta in
+ * `reason` e non arriva a `ROOT_BODYISH_TEXT_MIN_CHARS`.
+ */
+const BODYISH_KEY_RE = /^(?:body|text|testo|content|article|articolo|paragraf[oi]|paragraphs?)(?:[_-]?\d+)?$/i;
+
+/** Chiavi che dentro `content.*` NON contraddicono un abort. */
+const ABORT_COMPATIBLE_CONTENT_KEYS = [...META_ONLY_FIELDS, 'faq', 'reason', 'abort_topical_relevance'];
+
+/**
+ * Soglia della sola radice: sotto questa lunghezza una stringa su chiave di
+ * forma corpo non e' un articolo, ed e' piu' probabile che sia l'eco del
+ * rifiuto. Il falso positivo qui costa rigenerazioni contro un modello che
+ * ha obbedito — il costo che questo modulo esiste per togliere.
+ */
+const ROOT_BODYISH_TEXT_MIN_CHARS = 200;
+
+/** Un valore non-stringa porta sostanza? (array/oggetto vuoti non contano.) */
+function hasSubstance(value) {
+  if (value == null) return false;
+  if (typeof value === 'string') return hasUsableContentText(value);
+  if (Array.isArray(value)) return value.length > 0;
+  if (typeof value === 'object') return Object.keys(value).length > 0;
+  return true;
+}
+
+/**
+ * Torna la chiave che porta contenuto NON leggibile dal normalizzatore, o
+ * `null` se non ce n'e'. Esportata perche' i gate a monte (lo split in
+ * create-article.mjs) possano NOMINARLA nel log invece di dedurla.
+ */
+export function findUnreadableContentEvidence(payload, locale = 'it') {
+  if (!payload || typeof payload !== 'object') return null;
+
+  const content = payload.content;
+  const contentCandidates = [];
+  if (content && typeof content === 'object') {
+    if (content[locale] && typeof content[locale] === 'object') contentCandidates.push([`content.${locale}`, content[locale]]);
+    contentCandidates.push(['content', content]);
+  }
+
+  for (const [where, candidate] of contentCandidates) {
+    for (const [key, value] of Object.entries(candidate)) {
+      if (ABORT_COMPATIBLE_CONTENT_KEYS.includes(key)) continue;
+      // Una stringa su un campo DICHIARATO la legge gia' il normalizzatore:
+      // se e' arrivata qui e' vuota o `"null"`, e non e' evidenza di niente.
+      if (typeof value === 'string' && REQUIRED_IT_BODY_FIELDS.includes(key)) continue;
+      // `content.it` e' un oggetto anche quando e' il candidato `content`:
+      // non lo si conta come contenuto di se stesso.
+      if (where === 'content' && key === locale) continue;
+      if (hasSubstance(value)) return `${where}.${key}`;
+    }
+  }
+
+  for (const [key, value] of Object.entries(payload)) {
+    if (!BODYISH_KEY_RE.test(key) && !BODY_ONLY_FIELDS.includes(key)) continue;
+    if (typeof value === 'string') {
+      if (hasUsableContentText(value) && value.trim().length >= ROOT_BODYISH_TEXT_MIN_CHARS) return key;
+      continue;
+    }
+    // `content` come oggetto e' gia' stato guardato campo per campo sopra.
+    if (key === 'content' && value && typeof value === 'object') continue;
+    if (hasSubstance(value)) return key;
+  }
+
+  return null;
+}
+
 export function isTopicGateAbortVerdict(parsed, { locale = 'it', expectedFields = REQUIRED_IT_BODY_FIELDS } = {}) {
   if (!isTopicGateAbortPayload(parsed)) return false;
 
   const fields = Array.isArray(expectedFields) && expectedFields.length > 0
     ? expectedFields
     : REQUIRED_IT_BODY_FIELDS;
+
+  // Il corpo emesso in una forma che il normalizzatore non legge non e' un
+  // rifiuto: e' una risposta da RIGENERARE (vedi `findUnreadableContentEvidence`).
+  if (findUnreadableContentEvidence(parsed, locale)) return false;
 
   // Abort puro: nessuno dei campi attesi e' valorizzato, in nessun candidato.
   if (!normalizeItalianContentFromPayload(parsed, locale, fields)) return true;
@@ -462,7 +566,15 @@ export function classifyBody2Payload({
   const missing = [];
 
   if (!itContent) {
-    missing.push('content.it non normalizzabile');
+    // Quando il payload dichiara l'abort MA porta contenuto in una forma che
+    // il normalizzatore non legge, NOMINARE la chiave e' l'unica cosa che
+    // distingue questo rigetto da un payload vuoto: senza, il log dice
+    // «non normalizzabile» su una risposta che il modello ha scritto per
+    // intero (vedi `findUnreadableContentEvidence`).
+    const evidenza = isTopicGateAbortPayload(parsed) ? findUnreadableContentEvidence(parsed, locale) : null;
+    missing.push(evidenza
+      ? `content.it non normalizzabile (abort dichiarato ma contenuto su ${evidenza})`
+      : 'content.it non normalizzabile');
     return { verdict: 'reject', itContent: null, missing };
   }
 

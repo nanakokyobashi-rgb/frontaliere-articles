@@ -8563,10 +8563,12 @@ Rispondi SOLO con JSON valido, senza markdown.` },
     }
     if (_abortDichiarato) {
       // Stessa riga del valle, stesso verdetto, stesso contatore. Il contatore
-      // serve QUI e non basta quello del valle: il payload che uscira' dalla
-      // 2/2 (`merged`) nasce da `metaData`, la cui meta' non ha
-      // `abort_topical_relevance`, quindi la contraddizione non arriva mai al
-      // gate di valle e sparirebbe dal run report.
+      // serve QUI e non basta quello del valle: `merged` nasce da `metaData` e
+      // il flag della 1/2 non ci arriva mai — quello della 2/2, se c'e', viene
+      // tolto nel merge (vedi `abort_topical_relevance` la' sotto), perche' la
+      // meta' `meta` non ha il corpo su cui il gate di valle giudicherebbe.
+      // Senza questo incremento la contraddizione della 1/2 sparirebbe dal run
+      // report.
       console.error(
         `  ⚠️  [prompt-split] chiamata 1/2 ha dichiarato abort_topical_relevance=true MA ha `
         + `anche reso ${articolo.length}ch di corpo — contract violation, trusting content `
@@ -8643,8 +8645,31 @@ Rispondi SOLO con JSON valido, senza markdown.` },
     // modello che risponde con body1 come array/oggetto (invece di stringa)
     // spedirebbe quel valore grezzo nel content pubblicato senza questo
     // controllo (issue #578).
+    // ── IL FLAG NON ATTRAVERSA IL MERGE ──────────────────────────────────
+    //
+    // `{...metaData}` portava `abort_topical_relevance` fin dentro `merged`.
+    // La meta' `meta` puo' dichiararlo (`isTopicGateAbortVerdict` con
+    // `META_ONLY_FIELDS` non lo tratta come abort quando title/excerpt ci
+    // sono: senza corpo fra i campi attesi «niente corpo» non e' evidenza di
+    // rifiuto, e il contenuto vince sul flag). Ma a valle quel flag veniva
+    // riletto sui body di `merged` — che vengono dalla 1/2, non da lei —
+    // loggato come «contract violation» e contato in
+    // RUN_REPORT.topicGateSelfContradictions per una meta' che il corpo non
+    // l'ha nemmeno visto: il contatore delle auto-contraddizioni misurava un
+    // caso che non esiste. Un abort VERO della 2/2 non passa di qui: senza
+    // title ne' excerpt `metaBlock` e' `null` e la risposta muore prima, in
+    // `validateItalianPayload`, come qualunque meta' meta vuota.
+    const { abort_topical_relevance: _abortMetaScartato, reason: _reasonMetaScartata, ...metaDataSenzaAbort } = metaData || {};
+    if (_abortMetaScartato != null) {
+      console.error(
+        `  ⚠️  [prompt-split] chiamata 2/2 (meta) ha dichiarato `
+        + `abort_topical_relevance=${JSON.stringify(_abortMetaScartato)} pur avendo reso i metadati: `
+        + `flag NON propagato al merge — la meta' meta non vede il corpo su cui il gate di valle giudica `
+        + `(reason: "${String(_reasonMetaScartata || '').slice(0, 200)}").`,
+      );
+    }
     const merged = {
-      ...metaData,
+      ...metaDataSenzaAbort,
       content: {
         ...(metaData?.content || {}),
         [primaryLocale]: {
