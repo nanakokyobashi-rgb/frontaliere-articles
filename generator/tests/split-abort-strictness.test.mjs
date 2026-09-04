@@ -79,6 +79,7 @@ import { fileURLToPath } from 'node:url';
 import { repairLlmJson } from '../scripts/lib/llm-json-repair.mjs';
 import {
   normalizeItalianContentFromPayload,
+  isTopicGateAbortVerdict,
   recoverMisplacedFaq,
   BODY_ONLY_FIELDS,
   META_ONLY_FIELDS,
@@ -111,7 +112,7 @@ const DEPS = [
   '_splitCall1', 'useGeminiDirect', 'callLLM', 'AI_MODELS', 'temperature',
   'IT_GENERATION_MAX_TOKENS', 'forceModel', 'GH_MODEL_HEAVY',
   'PREFERRED_GENERATION_MODELS', '_preferActiveThisAttempt', 'repairLlmJson',
-  'normalizeItalianContentFromPayload', 'recoverMisplacedFaq',
+  'normalizeItalianContentFromPayload', 'isTopicGateAbortVerdict', 'recoverMisplacedFaq',
   // #485: le due chiamate dichiarano a `callLLM` i campi che la loro meta'
   // produce davvero, invece di lasciarglieli dedurre dal testo del prompt.
   'BODY_ONLY_FIELDS', 'META_ONLY_FIELDS',
@@ -206,6 +207,7 @@ async function run({ risposte }) {
     _preferActiveThisAttempt: false,
     repairLlmJson,
     normalizeItalianContentFromPayload,
+    isTopicGateAbortVerdict,
     recoverMisplacedFaq,
     BODY_ONLY_FIELDS,
     META_ONLY_FIELDS,
@@ -449,9 +451,16 @@ test('lo split e il gate di valle decidono l\'abort con gli stessi due criteri',
     /if \(bodyData\?\.abort_topical_relevance\)/.test(codice), false,
     'test di verita\' LASCA rimesso nello split: e\' il difetto che questo file esiste per pinnare',
   );
+  // #801: il predicato non e' piu' una riga che SOMIGLIA a quella del valle,
+  // e' la stessa funzione. Un abort che si intitola alla radice (dove lo
+  // schema non impone `null`) deve restare un abort per entrambi i gate.
   assert.ok(
-    codice.includes('normalizeItalianContentFromPayload(bodyData'),
-    'lo split ha smesso di usare il predicato di usabilita\' DEL VALLE: allineare il solo flag non basta',
+    codice.includes('isTopicGateAbortVerdict(bodyData'),
+    'lo split ha smesso di usare il predicato di abort DEL VALLE: allineare il solo flag non basta',
+  );
+  assert.ok(
+    src.includes('isTopicGateAbortVerdict(itData'),
+    'il gate di valle non usa piu\' il predicato condiviso: i due lati possono divergere di nuovo',
   );
   assert.ok(
     src.includes('itData?.abort_topical_relevance === true'),

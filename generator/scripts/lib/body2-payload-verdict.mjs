@@ -326,6 +326,73 @@ export function isTopicGateAbortPayload(parsed) {
 }
 
 /**
+ * Il payload e' un abort di REGOLA #0 *da trattare come tale*?
+ *
+ * `isTopicGateAbortPayload` legge il solo flag; questa legge il flag INSIEME
+ * alla forma del payload, cioe' risponde alla domanda che i gate si pongono
+ * davvero: «il modello ha rifiutato, o si e' contraddetto?».
+ *
+ * ## Il caso che mancava: i campi meta ALLA RADICE
+ *
+ * Lo schema impone `null` sui campi di `content`, NON alla radice del payload.
+ * Un modello che esercita REGOLA #0 e INTITOLA il proprio rifiuto —
+ *
+ *     {"abort_topical_relevance":true,"reason":"la fonte non riguarda…",
+ *      "title":"Rifiuto: fonte non pertinente",
+ *      "content":{"it":{"title":null,"excerpt":null,"body1":null,…}}}
+ *
+ * — non viola nulla di dichiarato, ma rendeva `hasAnyField` vero in
+ * `normalizeItalianContentFromPayload` (che cerca `title` anche alla radice,
+ * per la forma mista di `haiku`). Il ramo dell'abort, guardato da `!itContent`,
+ * non scattava: verdetto `reject` con `missing:['excerpt','body1','body2',
+ * 'body3']`, CINQUE rigenerazioni contro un modello che aveva OBBEDITO, e la
+ * sezione chiusa senza articolo — esattamente il costo che questo modulo
+ * esiste per togliere (run 32175400548).
+ *
+ * ## La regola, e perche' il corpo e' l'unico testimone che conta
+ *
+ * Un rifiuto puo' portare un titolo; NON puo' portare l'articolo. Quindi:
+ *
+ *   - nessun campo atteso valorizzato        → abort (il caso puro, invariato);
+ *   - campi di CORPO valorizzati             → NON abort: il modello si e'
+ *     contraddetto e la guardia del chiamante sceglie il contenuto sopra il
+ *     flag (decisione del 2026-07-06, run 28802314827);
+ *   - solo campi META (title/excerpt), da qualunque candidato → abort.
+ *
+ * ## Perche' il terzo caso vale solo se il corpo era ATTESO
+ *
+ * Sulla meta' `meta` dello split (`expectedFields = META_ONLY_FIELDS`) il corpo
+ * e' assente PER COSTRUZIONE — lo schema `article_metadata_only` non lo
+ * dichiara nemmeno. Li' «niente corpo» non e' evidenza di rifiuto, e trattarlo
+ * come tale butterebbe via un `title`/`excerpt` validi (con il corpo gia'
+ * generato dalla 1/2) sulla sola fede di un flag che quella meta' non doveva
+ * nemmeno emettere. Il falso positivo qui e' il danno peggiore dei due, come
+ * per `isTopicGateAbortPayload`: quindi senza campi di corpo fra gli attesi si
+ * resta al comportamento precedente, cioe' contenuto sopra flag.
+ *
+ * @param {unknown} parsed
+ * @param {object}  [opts]
+ * @param {string}  [opts.locale]         la lingua primaria attesa.
+ * @param {string[]} [opts.expectedFields] i campi che la chiamata ha chiesto.
+ * @returns {boolean}
+ */
+export function isTopicGateAbortVerdict(parsed, { locale = 'it', expectedFields = REQUIRED_IT_BODY_FIELDS } = {}) {
+  if (!isTopicGateAbortPayload(parsed)) return false;
+
+  const fields = Array.isArray(expectedFields) && expectedFields.length > 0
+    ? expectedFields
+    : REQUIRED_IT_BODY_FIELDS;
+
+  // Abort puro: nessuno dei campi attesi e' valorizzato, in nessun candidato.
+  if (!normalizeItalianContentFromPayload(parsed, locale, fields)) return true;
+
+  const bodyAttesi = fields.filter((f) => BODY_ONLY_FIELDS.includes(f));
+  if (bodyAttesi.length === 0) return false;
+
+  return !normalizeItalianContentFromPayload(parsed, locale, bodyAttesi);
+}
+
+/**
  * Classifica una risposta di generazione IT gia' riparata e parsata.
  *
  * @param {object}  args
@@ -369,9 +436,12 @@ export function classifyBody2Payload({
   const itContent = parseErr ? null : normalizeItalianContentFromPayload(parsed, locale, expectedFields);
 
   // ── Ramo 1: l'abort, riconosciuto PRIMA del ramo «non normalizzabile» ──
-  // Solo quando il contenuto e' davvero assente: con `itContent` popolato il
-  // modello si e' contraddetto, e la decisione spetta al chiamante.
-  if (!itContent && !parseErr && isTopicGateAbortPayload(parsed)) {
+  // Solo quando il CORPO e' davvero assente: con i body popolati il modello si
+  // e' contraddetto, e la decisione spetta al chiamante. I soli campi meta —
+  // il `title` che un modello mette al proprio rifiuto, spesso alla radice del
+  // payload dove lo schema non impone `null` — non sono contenuto: vedi
+  // `isTopicGateAbortVerdict`.
+  if (!parseErr && isTopicGateAbortVerdict(parsed, { locale, expectedFields })) {
     return { verdict: 'topic-gate-abort', itContent: null, missing: [] };
   }
 
