@@ -127,7 +127,7 @@
       "mode": "adapted",
       "reason": "Preflight di sintassi TypeScript sui corpi. Gemello di tests/blog-body-typescript-syntax.test.ts del sito: stessa validazione (esbuild transform, loader ts, solo sintassi), adattata al percorso di PUBBLICAZIONE invece che alle PR — la' e' un test su pull_request, qui gli articoli atterrano per push diretto su main, quindi un gate sulle PR non ne vedrebbe mai uno. Registrato 'adapted' e non 'corpus-only': il file sul sito ESISTE, e dichiararlo assente renderebbe loop-drift-check cieco proprio alla divergenza fra i due — il caso peggiore descritto in CLAUDE.md.",
       "baseline": {
-        "site": "57f158ab7858270e",
+        "site": "82a682cdf5586ce4",
         "corpus": "f42a7f15c4fdfae2",
         "alignedAt": "2026-08-18"
       }
@@ -213,7 +213,7 @@
       "reason": "Compone la lista di test che `tests.yml` esegue su una PR: tutta `generator/tests/` MENO i gate che leggono `content/`, che girano in `generator-ci.yml` (PR che toccano `generator/**`) e in `content-gates-main.yml` (push su `main`). Esiste perche' il corpus cambia senza che nessuna PR lo tocchi — ~90 push al giorno dai bot produttori — e un check rosso per un dato che l'autore non ha scritto e non puo' riparare non sta misurando quella PR. Corpus-only: il sito non ha ne' i bot produttori ne' `content/`, e il suo `tests.yml` e' gia' `adapted`.",
       "baseline": {
         "site": null,
-        "corpus": "e147905a05fb6df9",
+        "corpus": "cacc2d36336aad46",
         "alignedAt": "2026-08-20"
       }
     },
@@ -617,7 +617,7 @@
       "reason": "Gate sender esteso agli account del progetto (la label di routing la applica il PAT di questo repo, di un altro account); identita' di push GITHUB_PAT_NANAKO invece del token GitHub App; gate test `node --test` invece di vitest; niente npm ci; il pre-flight di quota passa QUOTA_BEACON_PEER_REPO per cedere al sito. Prompt riscritto sul dominio di questo repo (superficie dist/api, contratto engine/host, content/ come dati). RIALLINEATO 2026-08-09 da `both-moved`, con le due modifiche verificate DISGIUNTE. Il sito ha sostituito `env.APP_TOKEN == ''` con `env.APP_TOKEN_WORKFLOWS != 'true'` nel gate del capability guard (riga 185 la'): qui quella stessa espressione era gia' `env.GITHUB_PAT_NANAKO == ''` (riga 136), cioe' il sito ha cambiato esattamente cio' che questo fork aveva gia' rimpiazzato. Il corpus si e' mosso per conto suo con #93 (rimozione dell'http.<host>.extraheader che rendeva inerte il set-url col PAT, e l'`ISSUE:` mancante per mark-claude-terminal-outcome.mjs). Nessuna delle due tocca cio' che l'altra ha toccato. Dal 2026-09-03 porta anche i tre step deterministici post-Claude del sito: il checkpoint WIP che salva su `fix/issue-N` il diff di un run morto ai turni, il backstop `FIX_OUTCOME` che garantisce un marker al drainer anche quando l'agente non lo posta, e il classificatore che colora il job sul LAVORO consegnato invece che sull'exit della CLI. Adattati all'identita' di push di questo repo (GITHUB_PAT_NANAKO invece del token di App) e al fatto che ogni `gh` qui vuole `--repo`.",
       "baseline": {
         "site": "082c8cfe1e649be2",
-        "corpus": "80229a8f4efa5633",
+        "corpus": "f7785cfe023fcd95",
         "alignedAt": "2026-09-03"
       }
     },
@@ -853,7 +853,7 @@
       "reason": "Backstop deterministico del marker di idempotenza del triage post-merge (#99). Vive solo qui: il sito ha il proprio equivalente per FIX_OUTCOME dentro issue-fix.yml, non uno script separato, quindi non c'e' gemello da tenere allineato.",
       "baseline": {
         "site": null,
-        "corpus": "4ec95a7368587970",
+        "corpus": "a65ac747e77f419b",
         "alignedAt": "2026-08-09"
       }
     },
@@ -920,7 +920,7 @@
       "reason": "Wrapper di retry generico per i comandi di rete del percorso di pubblicazione (npx). Fratello di scripts/lib/npm-ci-retry.sh, che copre i soli `npm ci`; vive qui perche' e' il ciclo di pubblicazione a usarlo e il sito non ha un equivalente.",
       "baseline": {
         "site": null,
-        "corpus": "250f479cee7368bb",
+        "corpus": "2e68972552cef864",
         "alignedAt": "2026-08-09"
       }
     },
@@ -1612,7 +1612,7 @@
       "reason": "Riscrittura in place di excerpt/seoDescription/ogDescription (meta) e description/ogDescription (SEO) per un articolo gia' registrato — il write path che mancava per issue #85 (registerArticleFiles scrive questi campi una volta sola). Nato per il Bollettino del Frontaliere ma senza dipendenza dal builder: nessun omonimo sul sito.",
       "baseline": {
         "site": null,
-        "corpus": "f5c1cdae63bac041",
+        "corpus": "9137af56958025a8",
         "alignedAt": "2026-08-10"
       }
     },
@@ -1722,7 +1722,7 @@
       "mode": "identical",
       "baseline": {
         "site": "a7bf06d3eb603f12",
-        "corpus": "a7bf06d3eb603f12",
+        "corpus": "932fe1b70c79076e",
         "alignedAt": "2026-08-26"
       }
     },
@@ -1997,7 +1997,7 @@
       "reason": "Rende rumoroso e recuperabile lo strip dei control character in scrittura (#95). Vive solo qui: e' il generatore ad avere i sette choke point di scrittura portati da #75, e il sito non genera articoli. La sanificazione condivisa e' scripts/lib/sanitize-control-chars.mjs, che e' un'altra voce.",
       "baseline": {
         "site": null,
-        "corpus": "b15e05c286a34620",
+        "corpus": "1679443707fd73d1",
         "alignedAt": "2026-08-09"
       }
     },
@@ -3141,7 +3141,7 @@
       "reason": "Il verdetto della Claude review come step del check-run richiesto. Sul sito lo stesso gate e' scritto INLINE nello YAML di tests.yml (uno step `run:` in bash+jq): qui e' un .mjs perche' riusa le funzioni gia' testate di auto-merge-eval.mjs (fingerprint del contributo, autore fidato, completeness contract del body) invece di riscriverne la semantica in bash — due copie della stessa nozione di \"contributo invariato\" sarebbero un drift garantito. Nessun gemello sul sito da sorvegliare.",
       "baseline": {
         "site": null,
-        "corpus": "af03743d2297761b",
+        "corpus": "8299c4f5f058226a",
         "alignedAt": "2026-09-03"
       }
     },
@@ -3151,7 +3151,7 @@
       "reason": "Porta il gate condizionale su generator-ci.yml (ex gate 4 di auto-merge-eval) dentro il job che produce il check richiesto dal ruleset: il ruleset puo' richiedere solo contesti presenti su OGNI PR, e generator-ci.yml e' path-scoped. Non ha e non puo' avere un gemello: generator-ci.yml esiste solo qui.",
       "baseline": {
         "site": null,
-        "corpus": "3608f4765cefad14",
+        "corpus": "fa25df2f5bba0fa1",
         "alignedAt": "2026-09-03"
       }
     },
@@ -3209,7 +3209,7 @@
       "reason": "Il TRASPORTO dei gemelli `identical` di questo manifest (issue #331). Vive solo qui per la stessa ragione del drift check: e' questo il lato che RICEVE il ciclo, e un trasporto tirato non ha un gemello sul sito da sorvegliare. Il canale spinto — l'allowlist di mirror-articles-engine.yml — resta fermo a engine/ perche' copia directory INTERE e sotto scripts/**/host/** vivono decine di voci `adapted`: allargarlo le sovrascriverebbe. Questo script non ha quel problema perche' non copia mai una directory, solo i path dichiarati `identical` uno per uno, dal loro `sitePath`.",
       "baseline": {
         "site": null,
-        "corpus": "6fc02479e0cb0303",
+        "corpus": "75333f0662fd2700",
         "alignedAt": "2026-09-04"
       }
     },
@@ -3229,7 +3229,7 @@
       "reason": "Il lock di transazione delle 9 scritture di `registerArticleFiles()` (issue #562). Nasce qui e resta qui per due ragioni indipendenti. (1) Il difetto e' operativo SOLO su questo repo: dopo il cutover del 2026-08-02 il gemello del sito `scripts/create-article.mjs` non produce piu' articoli, quindi la' non esiste una registrazione multi-file che un kill possa spezzare a meta' — stessa premessa gia' argomentata per `source-url-ledger.mjs`, e per la stessa ragione NON e' `corpus-only-pending`: non c'e' un lavoro da tracciare sul sito, e una issue li' aprirebbe una PR del fixer su un percorso morto. (2) I bersagli che il lock confronta sono i path del CORPUS (`SECTION.slugDataFile`, `SECTION.registryFile`, `services/locales/...` riscritti da `corpusPath()`): sul sito quei path sono il repo stesso. Il modulo e' tenuto puro — solo builtin `node:fs`/`node:path`, nessun import da create-article.mjs — quindi resta copiabile senza adattamenti se un giorno il sito tornasse a generare. La meta' che vive dentro `create-article.mjs` (`registerLockTargets`/`resolveRegisterLockAtStartup`) e' li' perche' dipende da `SECTION`, e quel file e' gia' `adapted`.",
       "baseline": {
         "site": null,
-        "corpus": "07d611cf1f969f74",
+        "corpus": "d2b40f5b6c230d3c",
         "alignedAt": "2026-09-04"
       }
     },
