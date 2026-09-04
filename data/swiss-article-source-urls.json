@@ -1,5 +1,4 @@
 {
-  "https://www.laregione.ch/economia/economia/1941261/apple-memoria-chip-crescita-stime-ricavi-tre": "apple-stime-reducono",
   "https://www.tio.ch/svizzera/economia/1943202/miliardi-swiss-rischio-re-danni-media-catastrofi-anni": "catastrofi-naturali-2026-danni-inferiori-media",
   "https://www.laregione.ch/svizzera/svizzera/1943213/ia-manpower-competenze-aziende-intenzioni-cinque": "aziende-svizzere-assunzioni-manpower",
   "https://www.tio.ch/svizzera/economia/1943208/rialzo-bns-primo-giugno-tassi-interesse": "tassi-interesse-bns-2027",
@@ -1737,6 +1736,11 @@
   "https://www.tio.ch/ticino/cronaca/1946429/ricerca-eoc-guarda-svizzera-giornata": {
     "articleId": "ricerca-medicina-ticino-innovazione",
     "ts": "2026-09-04T04:37:39.508Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/ticino/attualita/1947960/bally-caslano-lavoro-ag-stabilimento": {
+    "articleId": "bally-caslano-licenziamenti-2025",
+    "ts": "2026-09-04T04:55:26.729Z",
     "keyForm": 2
   }
 }
