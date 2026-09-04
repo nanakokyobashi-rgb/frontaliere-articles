@@ -310,23 +310,47 @@ export function jobsCorpusFrozenReason(stats, { todayIso } = {}) {
     return `jobs history stops at ${newest.date}, ${lagDays}d before ${todayIso} (max ${JOBS_HISTORY_MAX_LAG_DAYS}d) — corpus is not advancing`;
   }
 
-  const counters = JOBS_HISTORY_COUNTERS.map((key) => toFiniteNumber(newest[key]));
-  if (!counters.every((value) => Number.isFinite(value))) return null;
+  // The zero-day rule is decided on the movement counters ALONE, and before the
+  // four-field completeness check that only the replay rule needs. Requiring
+  // `totalJobs`/`updated`/`removed` up front would return "corpus fine" on a
+  // row that carries just `totalJobs` and `added` — the very shape this
+  // module's own healthy fixture uses — so the rule would be inert on the
+  // producer shape it is most likely to meet, and `added: 0` would headline the
+  // edition as "0 new listings yesterday".
+  const movement = JOBS_HISTORY_MOVEMENT_COUNTERS
+    .map((key) => ({ key, value: toFiniteNumber(newest[key]) }))
+    .filter(({ value }) => Number.isFinite(value));
+
+  // With the lag rule satisfied the newest closed row IS D-1, the row whose
+  // `added` the section headlines with. A D-1 carrying no readable movement
+  // counter at all says nothing about whether the crawler ran, so the guard
+  // degrades rather than passing an unjudged corpus (`NaN === 0` is false, so
+  // staying silent here would be failing open by accident rather than by
+  // decision).
+  if (movement.length === 0) {
+    return `jobs history day ${newest.date} carries no readable added/updated/removed — the corpus-advance guard cannot tell whether the crawler ran`;
+  }
 
   // A CLOSED day on which nothing was added, updated or removed is not an idle
   // day on this corpus — it has thousands of daily updates — it is a crawler
   // that did not run. Publishing it would put "0 new listings yesterday" in the
-  // edition as a fact, which is worse than dropping the section.
-  if (JOBS_HISTORY_MOVEMENT_COUNTERS.every((key) => toFiniteNumber(newest[key]) === 0)) {
-    return `jobs history day ${newest.date} closed with added/updated/removed all at 0 — the crawler did not run, that is not a quiet day`;
+  // edition as a fact, which is worse than dropping the section. Judged on the
+  // counters the row actually carries: an absent counter is not a zero.
+  if (movement.every(({ value }) => value === 0)) {
+    const carried = movement.map(({ key }) => key).join('/');
+    return `jobs history day ${newest.date} closed with ${carried} all at 0 — the crawler did not run, that is not a quiet day`;
   }
 
   // A row can be present, and moving, and still be a replay of the previous
   // day. With the all-zero case handled above, a field-for-field match of every
-  // counter on a day that moved is implausible as a coincidence.
+  // counter on a day that moved is implausible as a coincidence. This is the
+  // one rule that needs all four counters on BOTH rows: without them there is
+  // nothing to compare, so it abstains instead of degrading.
   if (rows.length < 2) return null;
   const prev = rows[rows.length - 2];
-  const replayed = JOBS_HISTORY_COUNTERS.every((key) => toFiniteNumber(newest[key]) === toFiniteNumber(prev[key]));
+  const pairs = JOBS_HISTORY_COUNTERS.map((key) => [toFiniteNumber(newest[key]), toFiniteNumber(prev[key])]);
+  if (!pairs.every(([a, b]) => Number.isFinite(a) && Number.isFinite(b))) return null;
+  const replayed = pairs.every(([a, b]) => a === b);
   if (replayed) {
     return `jobs history day ${newest.date} replays ${prev.date} field-for-field — corpus did not advance`;
   }

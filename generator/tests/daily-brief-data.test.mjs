@@ -387,6 +387,46 @@ test('jobs: a moving corpus stays available, a closed day at zero does not', () 
     history: [{ date: '2026-08-07', totalJobs: 22645, added: 0, updated: 0, removed: 0 }],
   };
   assert.match(shapeJobs(loneZeroDay, { nowMs: NOW, todayIso: TODAY }).reason, /all at 0/);
+  // The producer shape the healthy fixture itself uses — `totalJobs` and
+  // `added`, no `updated`/`removed` — must reach the rule too. Gating it behind
+  // a four-field completeness check made it inert exactly here, and the block
+  // went out `available: true` with `yesterdayAdded: 0` to headline with.
+  const partialShapeZeroDay = {
+    ...JOBS_STATS,
+    history: [
+      { date: '2026-08-06', totalJobs: 22645, added: 480 },
+      { date: '2026-08-07', totalJobs: 22645, added: 0 },
+    ],
+  };
+  const partialZero = shapeJobs(partialShapeZeroDay, { nowMs: NOW, todayIso: TODAY });
+  assert.equal(partialZero.available, false);
+  assert.match(partialZero.reason, /added all at 0/);
+
+  // An absent counter is not a zero: a day that moved on the counters it does
+  // carry stays publishable.
+  const partialShapeMoving = {
+    ...JOBS_STATS,
+    history: [
+      { date: '2026-08-06', totalJobs: 22100, added: 0, removed: 0 },
+      { date: '2026-08-07', totalJobs: 22645, added: 591 },
+    ],
+  };
+  assert.equal(shapeJobs(partialShapeMoving, { nowMs: NOW, todayIso: TODAY }).available, true);
+
+  // No readable movement counter at all on the closed D-1: the guard cannot
+  // tell whether the crawler ran, and degrades instead of failing open on
+  // `NaN === 0`.
+  const noMovementCounters = {
+    ...JOBS_STATS,
+    history: [
+      { date: '2026-08-06', totalJobs: 22100, added: 512 },
+      { date: '2026-08-07', totalJobs: 22645, added: null },
+    ],
+  };
+  const unjudgeable = shapeJobs(noMovementCounters, { nowMs: NOW, todayIso: TODAY });
+  assert.equal(unjudgeable.available, false);
+  assert.match(unjudgeable.reason, /carries no readable added\/updated\/removed/);
+
   // No `todayIso` (no corpus clock to compare against) keeps the old behaviour.
   assert.equal(shapeJobs(JOBS_STATS, { nowMs: NOW }).available, true);
 });
