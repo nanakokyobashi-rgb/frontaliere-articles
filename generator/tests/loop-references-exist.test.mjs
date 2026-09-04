@@ -287,6 +287,22 @@ const DECLARED_ABSENT = {
       'correzione andrebbe fatta sul sito per non creare un corpus-ahead su un file ' +
       'dichiarato uguale.',
   },
+  'scripts/ci/transport-identical-twins.mjs :: mirror-articles-engine.yml': {
+    kind: 'site-only',
+    reason:
+      'Stessa citazione contrastiva del gemello in `loop-drift-check.mjs`, e per la stessa ' +
+      'ragione: il trasporto tirato esiste PERCHE\' il mirror del sito copia directory intere ' +
+      'e non puo\' allargarsi oltre `engine/` senza sovrascrivere le voci `adapted`. La riga ' +
+      'lo nomina per dire cosa questo script NON e\'. Niente qui dipende dalla sua esistenza: ' +
+      'se comparisse in questo repo la frase diventerebbe falsa, non vera.',
+  },
+  '.github/workflows/transport-identical-twins.yml :: mirror-articles-engine.yml': {
+    kind: 'site-only',
+    reason:
+      'La meta\' YAML della stessa citazione contrastiva: l\'intestazione spiega perche\' il ' +
+      'canale TIRATO non ha bisogno della prova di confinamento che il canale SPINTO del sito ' +
+      'esigerebbe. Nessuno step di questo workflow chiama quel file, ne\' aspetta che esista.',
+  },
   'scripts/ci/loop-drift-check.mjs :: mirror-articles-engine.yml': {
     kind: 'site-only',
     reason:
