@@ -7054,7 +7054,14 @@ export async function callLLM(messages, opts = {}) {
       return result;
     } catch (e) {
       const msg = e?.message || String(e);
-      errors.push(`${model}: ${msg.slice(0, 200)}`);
+      // L'indice si tiene perche' la riga va RIQUALIFICATA piu' sotto (#818):
+      // il messaggio grezzo di un flap del resolver e' `fetch failed`, che non
+      // matcha ne' transientRe ne' persistentRe in classifyExhaustionCause —
+      // quindi finisce nel secchio ambiguo e non vota. Una catena svuotata
+      // interamente da flap dava `transient: 0` → `transientExhaustion: false`
+      // → nessun differimento e un Bug «Workflow Failure» aperto per un guasto
+      // che questo stesso modulo definisce transitorio per costruzione.
+      const errorRow = errors.push(`${model}: ${msg.slice(0, 200)}`) - 1;
       _recordLastResortOutcome(model, 'failed');
 
       // claude CLI binary missing (spawn ENOENT — install step failed/was
@@ -7089,29 +7096,56 @@ export async function callLLM(messages, opts = {}) {
       // the fault a resolver failure describes: the name of the host, which
       // every sibling id shares. Only failed attempts count; a success on the
       // same provider clears it (see the reset next to _consecutive429).
-      if (!e.hostUnreachable) {
-        const flapCode = classifyTransientResolver(e);
-        if (flapCode) {
-          const flaps = (_resolverFlaps.get(provider) || 0) + 1;
-          _resolverFlaps.set(provider, flaps);
-          // #813 — l'escalation NON si applica ai provider di ultima risorsa.
-          // Il flap e' una prova che il codice stesso definisce transitoria, e
-          // promuoverla qui manda `local/`/`omniroute/` — cioe' l'ultima riga
-          // della catena, quella che esiste per la finestra «tutti gli altri
-          // esauriti» — nel ramo ban + cooldown su tre inciampi del resolver.
-          // Il loro URL e' per-macchina e sovrascrivibile (LOCAL_LLM_URL,
-          // OMNIROUTE_URL): un nome DNS che non risolve per un attimo li' costa
-          // la run intera a zero articoli invece che degradata. Il contatore
-          // continua a salire — resta visibile in `getStats().resolverFlaps` —
-          // ma la conseguenza no.
-          if (flaps >= RESOLVER_FLAP_ESCALATION && _isLastResortProvider(model)) {
-            console.warn(`🔁 [${model}] ${flaps} consecutive resolver failures (${flapCode}) on ${provider} — last-resort provider: still retryable, no ban and no provider cooldown`);
-          } else if (flaps >= RESOLVER_FLAP_ESCALATION) {
-            e.hostUnreachable = flapCode;
-            console.warn(`🚫 [${model}] ${flaps} consecutive resolver failures (${flapCode}) on ${provider} — no longer treating it as a hiccup`);
-          } else {
-            console.warn(`🔁 [${model}] Resolver flap (${flapCode}) on ${provider} ${flaps}/${RESOLVER_FLAP_ESCALATION} — retryable, no ban and no provider cooldown`);
-          }
+      //
+      // «Consecutive» e' letterale (#818): un fallimento di ALTRA classe sullo
+      // stesso provider chiude la striscia esattamente come la chiude un
+      // successo — gemello del reset di `_consecutive429` qui sotto. Senza
+      // questa riga tre flap sparsi su tutta la run, con 429 e timeout in
+      // mezzo, escalavano come tre di fila: la soglia misurava «tre flap
+      // qualsiasi nella run» invece di «il resolver e' rotto adesso».
+      const flapCode = e.hostUnreachable ? null : classifyTransientResolver(e);
+      if (!flapCode) {
+        _resolverFlaps.delete(provider);
+      } else {
+        const flaps = (_resolverFlaps.get(provider) || 0) + 1;
+        _resolverFlaps.set(provider, flaps);
+        // #813 — l'escalation NON si applica ai provider di ultima risorsa.
+        // Il flap e' una prova che il codice stesso definisce transitoria, e
+        // promuoverla qui manda `local/`/`omniroute/` — cioe' l'ultima riga
+        // della catena, quella che esiste per la finestra «tutti gli altri
+        // esauriti» — nel ramo ban + cooldown su tre inciampi del resolver.
+        // Il loro URL e' per-macchina e sovrascrivibile (LOCAL_LLM_URL,
+        // OMNIROUTE_URL): un nome DNS che non risolve per un attimo li' costa
+        // la run intera a zero articoli invece che degradata. Il contatore
+        // continua a salire — resta visibile in `getStats().resolverFlaps` —
+        // ma la conseguenza no.
+        if (flaps >= RESOLVER_FLAP_ESCALATION && _isLastResortProvider(model)) {
+          console.warn(`🔁 [${model}] ${flaps} consecutive resolver failures (${flapCode}) on ${provider} — last-resort provider: still retryable, no ban and no provider cooldown`);
+          // Il modello resta ritentabile, quindi la sua riga vota transitorio
+          // come quella di un flap sotto soglia (#818).
+          errors[errorRow] += ` — resolver flap (${flapCode}), host temporarily unresolvable, retryable`;
+        } else if (flaps >= RESOLVER_FLAP_ESCALATION) {
+          e.hostUnreachable = flapCode;
+          // Azzerato QUI (#818): l'escalation ha gia' speso la striscia — ban
+          // + cooldown sono stati emessi. Lasciare il contatore a `>= soglia`
+          // significava che, scaduto il cooldown, il PRIMO flap successivo
+          // bannava di nuovo all'istante: il ciclo successivo non misurava
+          // piu' tre inciampi, ne' misurava piu' niente.
+          _resolverFlaps.delete(provider);
+          console.warn(`🚫 [${model}] ${flaps} consecutive resolver failures (${flapCode}) on ${provider} — no longer treating it as a hiccup`);
+          // Stesso vocabolario della riga di skip dei fratelli, e per la
+          // stessa ragione (vedi `_providerCooldownReason`): un flap escalato
+          // mette la catena fuori gioco, e votare «transitorio» qui e'
+          // esattamente l'esito verde-senza-articolo.
+          errors[errorRow] += ` — unreachable (${flapCode}), non-retryable`;
+        } else {
+          console.warn(`🔁 [${model}] Resolver flap (${flapCode}) on ${provider} ${flaps}/${RESOLVER_FLAP_ESCALATION} — retryable, no ban and no provider cooldown`);
+          // La riga grezza e' `fetch failed`, che non vota (vedi il commento
+          // su `errorRow`). Una catena svuotata da flap sotto soglia e'
+          // transitoria per definizione del modulo stesso: senza questa
+          // qualificazione `transientExhaustion` restava falso e il chiamante
+          // apriva un Bug invece di differire (#818).
+          errors[errorRow] += ` — resolver flap (${flapCode}), host temporarily unresolvable, retryable`;
         }
       }
       const isExhausted =
@@ -7195,7 +7229,20 @@ export async function callLLM(messages, opts = {}) {
       // (e' nato qui con #475, ed e' una delle ragioni per cui la voce e'
       // `adapted` nel manifest dal 2026-09-04): senza questa riga la discesa del flag
       // lascerebbe scoperta l'unica scrittura al ledger che il corpus ha in piu'.
-      if (!isTimeoutFailure && e.hostUnreachable && !_isHostUnreachableExempt(model, e)) {
+      //
+      // PRECEDENZA FRA I DUE RAMI (#818). La condizione era `!isTimeoutFailure`,
+      // cioe' la PAROLA «timeout»/«aborted» nel messaggio annullava una prova
+      // di irraggiungibilita' gia' classificata. Due modi di arrivarci: un
+      // abort scattato mentre il resolver ritentava dentro la stessa call, e un
+      // flap escalato da RESOLVER_FLAP_ESCALATION il cui errore porta anche
+      // quella parola. In entrambi `e.hostUnreachable` c'e' — e' un verdetto
+      // letto dal codice syscall o dalla soglia, non dedotto dal testo — ma ne'
+      // ban ne' cooldown venivano emessi, quindi il contatore continuava a
+      // salire senza mai produrre l'effetto per cui esiste. Il tag vince: e'
+      // l'evidenza piu' forte delle due. `spared` resta rispettato — un timeout
+      // sotto un ceiling che ABBIAMO ristretto noi non e' ancora una prova, ed
+      // era gia' escluso da qui prima (implicava `isTimeoutFailure`).
+      if (e.hostUnreachable && !spared && !_isHostUnreachableExempt(model, e)) {
         if (!markedExhausted && _shouldRecordScore(o)) {
           markModelExhausted(model, 'nonretryable', e.hostUnreachable);
           _stats.exhausted++;

@@ -42,6 +42,7 @@ import {
   classifyHostUnreachable,
   classifyTransientResolver,
   callLLM,
+  isQuotaExhaustedError,
   getStats,
   resetState,
 } from '../scripts/lib/ai-models.mjs';
@@ -1165,5 +1166,128 @@ describe('#813 — l\'escalation del flap salta i provider di ultima risorsa', (
 
     const stats = getStats();
     assert.ok(stats.activeCooldowns.github > 0, `atteso il cooldown dopo l'escalation: ${JSON.stringify(stats.activeCooldowns)}`);
+  });
+});
+
+
+/**
+ * ── #818: IL CONTATORE DEVE MISURARE «TRE DI FILA, ADESSO» ─────────────────
+ *
+ * Follow-up di #770. Il confine fra flap e host morto era giusto; il contatore
+ * che lo attraversa no, in tre modi che si sommano:
+ *
+ *   1. era azzerato SOLO da un successo, quindi tre flap sparsi su tutta la run
+ *      con 429 e timeout in mezzo escalavano come tre consecutivi;
+ *   2. non era azzerato dopo l'escalation, quindi scaduto il cooldown il PRIMO
+ *      flap successivo bannava di nuovo all'istante;
+ *   3. la riga che il flap lascia in `errors` e' `fetch failed`, che non matcha
+ *      ne' `transientRe` ne' `persistentRe`: una catena svuotata interamente da
+ *      flap sotto soglia dava `transient: 0` → `transientExhaustion: false` →
+ *      nessun differimento e un Bug «Workflow Failure» aperto per un guasto che
+ *      questo modulo definisce transitorio per costruzione;
+ *   4. il ramo timeout scavalcava l'escalation: bastava la parola «aborted» nel
+ *      messaggio del flap perche' `e.hostUnreachable` posato dall'escalation
+ *      venisse ignorato — ne' ban ne' cooldown, e il contatore che sale per
+ *      niente.
+ */
+describe('callLLM — il contatore dei flap del resolver (#818)', () => {
+  const ENV_KEYS = ['AI_MODELS_FORCE_CHAIN', 'GH_MODELS_PAT', 'AI_MODELS_PREFER'];
+  let envBackup = {};
+  let realFetch;
+
+  beforeEach(() => {
+    envBackup = Object.fromEntries(ENV_KEYS.map((k) => [k, process.env[k]]));
+    for (const k of ENV_KEYS) delete process.env[k];
+    process.env.GH_MODELS_PAT = 'test-pat';
+    realFetch = globalThis.fetch;
+    resetState();
+  });
+
+  afterEach(() => {
+    globalThis.fetch = realFetch;
+    for (const k of ENV_KEYS) {
+      if (envBackup[k] === undefined) delete process.env[k];
+      else process.env[k] = envBackup[k];
+    }
+    resetState();
+  });
+
+  const OPTS = { maxRetriesPerModel: 1, backoffMs: 1, timeout: 5000 };
+  const run = () => callLLM([{ role: 'user', content: 'x' }], OPTS).then(() => null, (e) => e);
+
+  it('un fallimento di ALTRA classe chiude la striscia, come un successo', async () => {
+    // Flap, guasto qualunque, flap, flap: due flap consecutivi alla fine, non
+    // tre. Prima di #818 il contatore arrivava a 3 e bannava.
+    process.env.AI_MODELS_FORCE_CHAIN = 'gpt-4o-mini,gpt-4.1-mini,gpt-4o,gpt-4.1';
+    const script = ['EAI_AGAIN', 'other', 'EAI_AGAIN', 'EAI_AGAIN'];
+    let i = 0;
+    globalThis.fetch = async () => {
+      const step = script[Math.min(i++, script.length - 1)];
+      if (step === 'other') throw new Error('HTTP 503: upstream hiccup');
+      throw undiciFetchFailed('EAI_AGAIN');
+    };
+
+    const err = await run();
+    assert.ok(err, 'la catena deve fallire');
+    const stats = getStats();
+    assert.equal(stats.resolverFlaps.github, 2, `attesi 2 flap consecutivi: ${JSON.stringify(stats.resolverFlaps)}`);
+    assert.equal(stats.activeCooldowns.github, undefined, 'sotto soglia il provider resta disponibile');
+    assert.equal(stats.exhaustedModels.length, 0, `nessun ban atteso, visti: ${stats.exhaustedModels.join(', ')}`);
+  });
+
+  it('l\'escalation azzera il contatore che ha appena speso', async () => {
+    process.env.AI_MODELS_FORCE_CHAIN = 'gpt-4o-mini,gpt-4.1-mini,gpt-4o';
+    globalThis.fetch = async () => { throw undiciFetchFailed('EAI_AGAIN'); };
+
+    const err = await run();
+    assert.ok(err, 'la catena deve fallire');
+    const stats = getStats();
+    assert.ok(stats.activeCooldowns.github > 0, `atteso il cooldown dell'escalation: ${JSON.stringify(stats.activeCooldowns)}`);
+    // Il conto riparte da zero: scaduto il cooldown servono di nuovo TRE flap,
+    // non uno. Lasciarlo a `>= soglia` faceva del secondo ban un colpo istantaneo.
+    assert.equal(stats.resolverFlaps.github, undefined, `contatore atteso azzerato: ${JSON.stringify(stats.resolverFlaps)}`);
+  });
+
+  it('una catena svuotata da flap sotto soglia vota TRANSITORIO', async () => {
+    // La riga grezza e' `fetch failed`, che non vota: senza qualificazione
+    // `transientExhaustion` restava falso e il chiamante apriva un Bug.
+    process.env.AI_MODELS_FORCE_CHAIN = 'gpt-4o-mini,gpt-4.1-mini';
+    globalThis.fetch = async () => { throw undiciFetchFailed('EAI_AGAIN'); };
+
+    const err = await run();
+    assert.ok(err, 'la catena deve fallire');
+    assert.equal(err.exhaustionBreakdown.transient, 2, `attesi 2 voti transitori: ${err.message}`);
+    assert.equal(err.exhaustionBreakdown.persistent, 0, `nessun voto persistente atteso: ${err.message}`);
+    assert.equal(err.transientExhaustion, true, 'un flap sotto soglia e\' transitorio per costruzione');
+    assert.equal(isQuotaExhaustedError(err), true, 'il chiamante deve differire, non aprire un Bug');
+  });
+
+  it('un flap ESCALATO vota persistente, come la riga di skip dei fratelli', async () => {
+    process.env.AI_MODELS_FORCE_CHAIN = 'gpt-4o-mini,gpt-4.1-mini,gpt-4o';
+    globalThis.fetch = async () => { throw undiciFetchFailed('EAI_AGAIN'); };
+
+    const err = await run();
+    assert.ok(err, 'la catena deve fallire');
+    assert.match(err.message, /unreachable \(EAI_AGAIN\), non-retryable/);
+    assert.ok(err.exhaustionBreakdown.persistent >= 1, `atteso almeno un voto persistente: ${JSON.stringify(err.exhaustionBreakdown)}`);
+  });
+
+  it('la parola «aborted» nel messaggio non scavalca l\'escalation', async () => {
+    // Un abort scattato mentre il resolver ritenta dentro la stessa call: il
+    // codice syscall dice `EAI_AGAIN`, il testo dice «aborted». Il tag posato
+    // dall'escalation vince — altrimenti il contatore sale senza mai produrre
+    // ne' ban ne' cooldown, cioe' l'effetto per cui esiste.
+    process.env.AI_MODELS_FORCE_CHAIN = 'gpt-4o-mini,gpt-4.1-mini,gpt-4o';
+    globalThis.fetch = async () => {
+      throw Object.assign(new TypeError('fetch failed: the request was aborted'), {
+        cause: Object.assign(new Error('EAI_AGAIN api.example:443'), { code: 'EAI_AGAIN' }),
+      });
+    };
+
+    const err = await run();
+    assert.ok(err, 'la catena deve fallire');
+    const stats = getStats();
+    assert.ok(stats.activeCooldowns.github > 0, `atteso il cooldown dopo l'escalation: ${JSON.stringify(stats.activeCooldowns)}`);
+    assert.ok(stats.exhaustedModels.includes('gpt-4o'), `atteso il modello dell'escalation esaurito, visti: ${stats.exhaustedModels.join(', ')}`);
   });
 });
