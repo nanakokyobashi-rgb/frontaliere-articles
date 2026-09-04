@@ -148,7 +148,7 @@ import { JSON_QUOTE_SAFETY_RULE_IT, describeJsonParseError, describeRawForDiagno
 // modulo puro perche' le gate del generatore girano `node --test` senza `npm ci`
 // e non possono importare QUESTO file: cosi' il test esegue lo stesso oggetto
 // codice della produzione invece di una copia. Vedi l'intestazione del modulo.
-import { REQUIRED_IT_BODY_FIELDS, BODY_ONLY_FIELDS, META_ONLY_FIELDS, normalizeItalianContentFromPayload, classifyBody2Payload, isTopicGateAbortVerdict, resolveBody2Validation, recoverMisplacedFaq, hasUsableContentText } from './lib/body2-payload-verdict.mjs';
+import { REQUIRED_IT_BODY_FIELDS, BODY_ONLY_FIELDS, META_ONLY_FIELDS, normalizeItalianContentFromPayload, classifyBody2Payload, isTopicGateAbortVerdict, findUnreadableContentEvidence, resolveBody2Validation, recoverMisplacedFaq, hasUsableContentText } from './lib/body2-payload-verdict.mjs';
 import { describePayloadRejection } from './lib/llm-payload-diagnostics.mjs';
 import {
   factCheckFingerprint,
@@ -8561,7 +8561,29 @@ Rispondi SOLO con JSON valido, senza markdown.` },
       );
       return JSON.stringify(bodyData);
     }
-    if (_abortDichiarato) {
+    // La 1/2 ha dichiarato l'abort ma il valle NON lo riconoscerebbe: o il
+    // corpo e' leggibile (auto-contraddizione, sotto), o e' in una forma che
+    // il normalizzatore non legge — e allora non e' un rifiuto, e' una
+    // risposta da rigenerare. NOMINARE la chiave e' l'unico modo di vedere la
+    // classe: senza, il ramo qui sotto direbbe «MA ha anche reso 0ch di
+    // corpo», che descrive un payload vuoto invece di un articolo scritto in
+    // una forma sbagliata.
+    const _evidenzaNonLetta = _abortDichiarato && !_valleAbortirebbe
+      ? findUnreadableContentEvidence(bodyData, primaryLocale)
+      : null;
+    if (_evidenzaNonLetta) {
+      console.error(
+        `  ⚠️  [prompt-split] chiamata 1/2 ha dichiarato abort_topical_relevance=true MA porta `
+        + `contenuto su ${_evidenzaNonLetta}, forma che il normalizzatore non legge: NON e' un abort `
+        + `terminale, ricado sulla chiamata unica e rigenero `
+        + `(reason: "${String(bodyData.reason || '').slice(0, 200)}").`,
+      );
+    }
+    // Auto-contraddizione VERA: il corpo c'e' ed e' leggibile. La forma non
+    // letta sopra non e' questa — contarla qui gonfierebbe
+    // RUN_REPORT.topicGateSelfContradictions con un caso in cui il flag e il
+    // corpo non si contraddicono affatto: il corpo, per il gate, non c'e'.
+    if (_abortDichiarato && !_evidenzaNonLetta) {
       // Stessa riga del valle, stesso verdetto, stesso contatore. Il contatore
       // serve QUI e non basta quello del valle: il payload che uscira' dalla
       // 2/2 (`merged`) nasce da `metaData`, la cui meta' non ha
@@ -8956,9 +8978,25 @@ Rispondi SOLO con JSON valido, senza markdown.` },
 
   const itContent = itContentPreAbortCheck || normalizeItalianContentFromPayload(itData);
   if (!itContent) {
+    // Il flag c'e' ma il gate sopra non ha abortito: il corpo e' in una forma
+    // che il normalizzatore non legge (`body1` array/oggetto, `content.it.body`,
+    // `text`). E' un rigetto RIGENERABILE, non un rifiuto — e va NOMINATO, o la
+    // classe resta invisibile dietro «non può essere normalizzata».
+    const _evidenzaNonLetta = itData?.abort_topical_relevance === true
+      ? findUnreadableContentEvidence(itData)
+      : null;
+    if (_evidenzaNonLetta) {
+      console.error(
+        `  ⚠️  [topic-gate] abort_topical_relevance=true MA il payload porta contenuto su `
+        + `${_evidenzaNonLetta}, forma che il normalizzatore non legge: rigetto rigenerabile, `
+        + `non abort terminale (reason: "${String(itData.reason || '').slice(0, 200)}").`,
+      );
+    }
     // qualityReject=true: same content-quality class as the JSON-parse and
     // missing-field siblings above/below — see their comments for why.
-    const err = new Error('Risposta IT non contiene content.it e non può essere normalizzata');
+    const err = new Error(_evidenzaNonLetta
+      ? `Risposta IT non normalizzabile: abort dichiarato ma contenuto su ${_evidenzaNonLetta}`
+      : 'Risposta IT non contiene content.it e non può essere normalizzata');
     err.qualityReject = true;
     throw err;
   }
