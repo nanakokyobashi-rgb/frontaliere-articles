@@ -80,6 +80,7 @@ import { repairLlmJson } from '../scripts/lib/llm-json-repair.mjs';
 import {
   normalizeItalianContentFromPayload,
   recoverMisplacedFaq,
+  isLiteralNullString,
   BODY_ONLY_FIELDS,
   META_ONLY_FIELDS,
 } from '../scripts/lib/body2-payload-verdict.mjs';
@@ -112,6 +113,9 @@ const DEPS = [
   'IT_GENERATION_MAX_TOKENS', 'forceModel', 'GH_MODEL_HEAVY',
   'PREFERRED_GENERATION_MODELS', '_preferActiveThisAttempt', 'repairLlmJson',
   'normalizeItalianContentFromPayload', 'recoverMisplacedFaq',
+  // #786: il gate dello split riusa il predicato del valle sulla stringa
+  // letterale "null", invece di una copia locale (`raw.trim()` nudo).
+  'isLiteralNullString',
   // #485: le due chiamate dichiarano a `callLLM` i campi che la loro meta'
   // produce davvero, invece di lasciarglieli dedurre dal testo del prompt.
   'BODY_ONLY_FIELDS', 'META_ONLY_FIELDS',
@@ -207,6 +211,7 @@ async function run({ risposte }) {
     repairLlmJson,
     normalizeItalianContentFromPayload,
     recoverMisplacedFaq,
+    isLiteralNullString,
     BODY_ONLY_FIELDS,
     META_ONLY_FIELDS,
     primaryLocale: 'it',
@@ -456,5 +461,65 @@ test('lo split e il gate di valle decidono l\'abort con gli stessi due criteri',
   assert.ok(
     src.includes('itData?.abort_topical_relevance === true'),
     'il gate di valle non usa piu\' `=== true`: questo test pinna un allineamento, non un lato solo',
+  );
+});
+
+// ── 6. Il RAW della 1/2 vince, MA con lo stesso predicato del valle ──────
+//
+// #786. Qui il RAW vinceva con `raw.trim()` nudo, mentre il valle scarta la
+// stringa letterale `"null"` (`isLiteralNullString`, body2-payload-verdict.mjs)
+// — la serializzazione di `null` misurata proprio su `haiku`. Su
+// `content.it = { body1: "null", body2: <reale>, body3: <reale> }` il RAW
+// «null» vinceva, il blocco normalizzato non veniva mai guardato, e
+// l'articolo usciva con un paragrafo il cui testo e' `null`: `articolo.length`
+// supera i 500 grazie agli altri due, `validateItalianPayload` vede body1 non
+// vuoto, e il pezzo arriva a `content/` e da li' a `dist/api/` senza che nulla
+// fallisca. E' il punto esatto in cui i due gate divergevano.
+test('body1 = "null" letterale recuperabile da un altro candidato: vince il valore vero, non la stringa', async () => {
+  const misto = JSON.stringify({
+    content: { it: { body1: 'null', body2: CORPO_BUONO.body2, body3: CORPO_BUONO.body3 } },
+    // Lo stesso campo, genuino, in un'altra delle tre forme che il valle guarda.
+    body1: CORPO_BUONO.body1,
+  });
+  // Pin non circolare: e' il PREDICATO DEL VALLE a dire che "null" non e' contenuto.
+  assert.equal(isLiteralNullString('null'), true);
+  assert.equal(normalizeItalianContentFromPayload(JSON.parse(misto), 'it', BODY_ONLY_FIELDS).body1, CORPO_BUONO.body1.trim());
+
+  const { out, chiamate, log } = await run({ risposte: [misto, PAYLOAD_META] });
+  assert.equal(chiamate.length, 2, `la 2/2 non e' partita. Log:\n${log}`);
+  assert.notEqual(out, null, `lo split e' caduto in fallback pur avendo il body1 genuino. Log:\n${log}`);
+  const payload = JSON.parse(out);
+  assert.equal(
+    payload.content.it.body1, CORPO_BUONO.body1.trim(),
+    `il RAW "null" ha vinto sul valore genuino: il paragrafo uscirebbe pubblicato col testo "null". Log:\n${log}`,
+  );
+});
+
+test('body1 = "null" letterale NON recuperabile ⇒ fallback alla chiamata unica, non un merge monco', async () => {
+  const soloNull = JSON.stringify({
+    content: { it: { body1: '"null"', body2: CORPO_BUONO.body2, body3: CORPO_BUONO.body3 } },
+  });
+
+  const { out, chiamate, log } = await run({ risposte: [soloNull] });
+  // Il merge senza body1 morirebbe a valle in `validateItalianPayload` SENZA
+  // rigenerazione ne' rotazione di modello; la chiamata unica invece rigenera.
+  assert.equal(out, null, `merge consegnato con un body serializzato come "null". Log:\n${log}`);
+  assert.equal(chiamate.length, 1, 'la 2/2 non deve partire su una 1/2 inutilizzabile');
+  // Nessuna uscita muta: e' il silenzio a rendere questa classe invisibile.
+  assert.match(
+    log, /stringa letterale "null"/,
+    `il body scartato non compare nei log: resta invisibile proprio il caso che questa fix illumina. Log:\n${log}`,
+  );
+});
+
+test('il gate dello split e il valle usano LO STESSO predicato sul "null" letterale', () => {
+  const codice = SPLIT_SRC.split('\n').filter((l) => !l.trim().startsWith('//')).join('\n');
+  assert.ok(
+    codice.includes('isLiteralNullString('),
+    'il gate dello split non usa piu\' il predicato del valle: torna la divergenza che pubblicava un paragrafo "null"',
+  );
+  assert.equal(
+    /if \(typeof raw === 'string' && raw\.trim\(\)\) continue;/.test(codice), false,
+    '`raw.trim()` nudo rimesso nel gate: e\' la copia locale che questo file esiste per pinnare',
   );
 });

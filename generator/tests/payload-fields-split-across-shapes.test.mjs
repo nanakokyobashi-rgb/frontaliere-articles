@@ -66,7 +66,11 @@ test('la priorita fra i candidati resta content[locale] > content > radice, camp
 });
 
 test('un campo davvero assente resta mancante: la ricerca per campo non inventa contenuto', () => {
-  const payload = { content: { it: { title: 'Solo il titolo' } } };
+  // Il titolo e' PLAUSIBILE apposta (>= FIELD_MIN_CHARS.title, #786): qui si
+  // misura che un campo davvero assente resti `missing`, non il floor di
+  // lunghezza — un titolo da 14 char farebbe passare il test per il motivo
+  // sbagliato.
+  const payload = { content: { it: { title: 'Solo il titolo, e nessun excerpt' } } };
 
   const { verdict, missing } = classifyBody2Payload({ parsed: payload, expectedFields: META_ONLY_FIELDS });
   assert.equal(verdict, 'reject');

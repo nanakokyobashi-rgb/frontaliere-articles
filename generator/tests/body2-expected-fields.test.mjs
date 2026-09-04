@@ -75,6 +75,7 @@ import {
   resolveBody2Validation,
   classifyBody2Payload,
   normalizeItalianContentFromPayload,
+  isLiteralNullString,
   recoverMisplacedFaq,
   REQUIRED_IT_BODY_FIELDS,
   BODY_ONLY_FIELDS,
@@ -250,6 +251,9 @@ const SPLIT_DEPS = [
   'IT_GENERATION_MAX_TOKENS', 'forceModel', 'GH_MODEL_HEAVY',
   'PREFERRED_GENERATION_MODELS', '_preferActiveThisAttempt', 'repairLlmJson',
   'normalizeItalianContentFromPayload', 'recoverMisplacedFaq', 'BODY_ONLY_FIELDS', 'META_ONLY_FIELDS',
+  // #786: il gate dello split riusa il predicato del valle sulla stringa
+  // letterale "null", invece di una copia locale (`raw.trim()` nudo).
+  'isLiteralNullString',
   'primaryLocale', 'RUN_REPORT', '_buildHalf', '_splitMode', 'SECTION_NAME',
   'generationAttempt', '_splitBudgetLog', 'console',
 ];
@@ -283,6 +287,7 @@ async function runSplit({ risposte }) {
     repairLlmJson,
     normalizeItalianContentFromPayload,
     recoverMisplacedFaq,
+    isLiteralNullString,
     BODY_ONLY_FIELDS,
     META_ONLY_FIELDS,
     primaryLocale: 'it',
