@@ -52,18 +52,34 @@ const DRY = process.argv.includes('--dry-run');
 /** I verdetti che possono nascondere un «lato sbagliato del mirror». */
 export const HANDOFF_VERDICTS = new Set(['blocked-admin-settings', 'blocked-workflows-scope']);
 
-/** Ultimo verdetto + il corpo che lo porta. Pura. */
+/**
+ * Ultimo verdetto + il corpo che lo porta. Pura.
+ *
+ * Un verdetto SENZA data parsabile non viene scartato (#815, item 1: stessa
+ * classe, gemello `corpus-only` di `needs-human-prepass.mjs`). Le due forme
+ * accettate qui hanno chiavi diverse (`created_at` REST, `createdAt` GraphQL) e
+ * nessuna delle due e' garantita da un tipo: se la data manca, scartare il
+ * commento fa tornare `null`, cioe' «nessun verdetto» — indistinguibile dal caso
+ * in cui nessun fixer e' mai passato. Qui il costo e' preciso: un
+ * `blocked-workflows-scope` che nomina un file del sito non verrebbe MAI
+ * spedito, e l'unico segnale sarebbe una diagnosi che non arriva mai di la'.
+ *
+ * Un verdetto datato batte sempre uno senza data; fra due senza data vince
+ * l'ultimo in ordine di lista, che e' l'ordine cronologico dell'API.
+ */
 export function lastVerdictComment(comments) {
   let best = null;
   let at = -Infinity;
+  let undated = null;
   for (const c of comments || []) {
     const body = String(c?.body || '');
     const m = FIX_OUTCOME_RE.exec(body);
     if (!m) continue;
     const t = Date.parse(c?.created_at ?? c?.createdAt);
-    if (!Number.isNaN(t) && t >= at) { at = t; best = { verdict: m[1].toLowerCase(), body }; }
+    if (Number.isNaN(t)) { undated = { verdict: m[1].toLowerCase(), body }; continue; }
+    if (t >= at) { at = t; best = { verdict: m[1].toLowerCase(), body }; }
   }
-  return best;
+  return best ?? undated;
 }
 
 /**
