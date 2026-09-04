@@ -8697,6 +8697,9 @@ Rispondi SOLO con JSON valido, senza markdown.` },
     // spedirebbe quel valore grezzo nel content pubblicato senza questo
     // controllo (issue #578).
     const merged = {
+      // Radice della 2/2 SENZA `abort_topical_relevance`/`reason` (#829):
+      // sono chiavi della meta' BODY, e propagarle faceva scattare a valle
+      // l'auto-contraddizione su un corpo che veniva dalla 1/2.
       ...Object.fromEntries(
         Object.entries(metaData || {}).filter(([k]) => !META_ROOT_KEYS_ESCLUSE.includes(k)),
       ),
