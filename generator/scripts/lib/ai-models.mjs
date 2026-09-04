@@ -1511,6 +1511,19 @@ const DEFAULT_OPTS = {
    * Vedi il blocco di commento su applyPreferOverride.
    */
   prefer: undefined,
+  /**
+   * Se `false`, l'esito di questa chiamata NON tocca `ai_model_scores/_all` —
+   * niente recordModelSuccess/recordModelFailure, quindi niente scrittura sul
+   * ledger di produzione. Serve ai chiamanti puramente diagnostici (es.
+   * smoke-test-ai-models.mjs, che pinga ogni modello di DEFAULT_CHAIN una volta
+   * al giorno solo per verificare disponibilita'): callLLM() auto-inizializza lo
+   * score store al primo uso, quindi senza questo flag un ping diagnostico
+   * fallito abbassa il punteggio di un modello sano nello stesso documento che
+   * ordina la cascata di produzione, inquinando l'ordinamento reale con dati che
+   * non descrivono un uso di produzione. Default `true`: ogni altro chiamante
+   * (crawler, generazione articoli, ecc.) continua a scrivere come prima.
+   */
+  recordScore: true,
 };
 
 /**
@@ -1950,6 +1963,23 @@ export function getCallLatencyStats() {
 // get a temporary cooldown to avoid wasting retries on sibling models.
 // Maps provider name → cooldown-until timestamp (ms).
 const _providerCooldown = new Map();
+// Why a provider is cooling down, provider name → { reason, skipPhrase }. Kept
+// beside _providerCooldown (not folded into its value) so the timestamp read
+// path stays a plain number. Two causes exist today — a 429 and an unreachable
+// host (nanako#475) — and the pre-flight skip line has to name the right one:
+// "recent 429" on a host that never answered sends the reader hunting a quota
+// that was never hit. AGENTS.md #6: one source, both messages read it.
+//
+// `skipPhrase` is a SECOND field and not a rewording of `reason` because the
+// pre-flight skip line is TALLIED, not just read: classifyExhaustionCause has
+// `cooling down` in its transient vocabulary. A host that refuses the
+// connection is the opposite of transient, and with 12 GitHub ids in the chain
+// it would cast up to 11 transient votes — enough to flip `transientExhaustion`
+// (`transient >= persistent`; run 31823202761 turned on ONE vote) and make a
+// permanent fault exit 0, green, with no article and no alert. So that cause
+// carries `non-retryable` — the vocabulary the persistent regex already keys
+// on — and "cooling down" stays reserved for the 429.
+const _providerCooldownReason = new Map();
 const PROVIDER_COOLDOWN_MS = 60_000; // 1 minute cooldown after 429
 
 // Ceiling applied to a provider's `Retry-After` header (some return 86399 =
@@ -1963,15 +1993,31 @@ function isProviderCoolingDown(provider) {
   if (!until) return false;
   if (Date.now() >= until) {
     _providerCooldown.delete(provider);
+    _providerCooldownReason.delete(provider);
     return false;
   }
   return true;
 }
 
-function cooldownProvider(provider) {
+function cooldownProvider(provider, reason = 'rate-limited', skipPhrase = `cooling down (${reason})`) {
   const until = Date.now() + PROVIDER_COOLDOWN_MS;
   _providerCooldown.set(provider, until);
-  console.warn(`🧊 Provider ${provider} cooled down for ${PROVIDER_COOLDOWN_MS / 1000}s (rate-limited)`);
+  _providerCooldownReason.set(provider, { reason, skipPhrase });
+  console.warn(`🧊 Provider ${provider} cooled down for ${PROVIDER_COOLDOWN_MS / 1000}s (${reason})`);
+}
+
+function providerCooldownReason(provider) {
+  return _providerCooldownReason.get(provider)?.reason || 'rate-limited';
+}
+
+/**
+ * How a sibling model skipped by this cooldown must DESCRIBE it in `errors` —
+ * the same array classifyExhaustionCause tallies. Defaults to the 429 wording
+ * so an unset cause reads as it always has; see _providerCooldownReason for
+ * why the unreachable-host cause must not say "cooling down".
+ */
+function providerCooldownSkipPhrase(provider) {
+  return _providerCooldownReason.get(provider)?.skipPhrase || 'cooling down (rate-limited)';
 }
 
 // Single source of truth for what counts a "last-resort" model and its
@@ -3749,6 +3795,7 @@ export function getStats() {
     ..._stats,
     exhaustedModels: [..._exhaustedModels],
     consecutive429s: Object.fromEntries(_consecutive429),  // FRO-325
+    resolverFlaps: Object.fromEntries(_resolverFlaps),     // #770
     activeCooldowns: Object.fromEntries([..._providerCooldown].map(([p, t]) => [p, Math.max(0, Math.ceil((t - Date.now()) / 1000))])),
     scoreBoard: getScoreBoard(),
     runOutcomes: getRunOutcomes(),
@@ -3870,12 +3917,14 @@ export function resetState() {
   _exhaustedLogged.clear();
   _preflightSkipLogged.clear();
   _providerCooldown.clear();
+  _providerCooldownReason.clear();
   _modelScores.clear();
   _modelDetails.clear();
   _dirtyModels.clear();
   _pendingCounterDeltas.clear();
   _runOutcomes.clear();
   _consecutive429.clear();
+  _resolverFlaps.clear();
   _callLatency.clear();
   _clampedTimeouts.clear();
   _consecutiveContentFailures.clear();
@@ -3975,6 +4024,120 @@ export function isQuotaExhaustedError(err) {
     msg.includes('free-models-per-day') ||
     msg.includes('free models per day')
   );
+}
+
+/**
+ * Detect a failure that happened BEFORE any HTTP status existed: the host did
+ * not accept a connection at all (DNS miss, refused, unroutable).
+ *
+ * ── WHY THIS IS A CLASS, NOT A ONE-OFF (nanako#475) ────────────────────────
+ *
+ * `classifyNonRetryableError` only ever sees a `res.status`, so it can only
+ * classify a host that ANSWERS. A retired host stops answering, and then every
+ * one of its models raises `TypeError: fetch failed` — which is neither
+ * `nonRetryable` nor a timeout, so it fell through to the generic
+ * "Otherwise retry" branch and burned `maxRetriesPerModel` attempts WITH
+ * backoff sleeps, per model, every run.
+ *
+ * Measured on GH_MODELS_BASE (models.inference.ai.azure.com), the host behind
+ * every GitHub-hosted id in the chain:
+ *   2026-08-18 → HTTP 404, empty body   (answers, denies the route)
+ *   2026-09-04 → curl exit code 000     (does not answer at all)
+ * The 404 was already handled (one dead round-trip per model per run); the
+ * 000 is NOT, and it costs strictly more than the 404 it replaced, because a
+ * connect failure re-enters the retry loop where a 404 short-circuits it.
+ *
+ * Deliberately narrow. Only connection-ESTABLISHMENT codes that are
+ * AUTHORITATIVE about the host are listed: ECONNRESET / EPIPE (mid-stream
+ * drops), socket timeouts and EAI_AGAIN (the resolver's own «try again»,
+ * #770 — see TRANSIENT_RESOLVER_CODES below) stay retryable, because those are
+ * transient on a host that is otherwise up, and the timeout branch already
+ * owns the hang case. Widening this set trades a real retry for a false ban.
+ *
+ * undici wraps the cause one or two levels down and, for a multi-address DNS
+ * result, as an AggregateError, so the walk below is not defensive padding —
+ * `e.code` alone is `undefined` for every real `fetch failed`.
+ *
+ * @returns {string|null} the syscall code (for the log/ban reason), or null.
+ */
+const HOST_UNREACHABLE_CODES = new Set([
+  'ENOTFOUND',      // DNS: authoritative «this name does not exist»
+  'ECONNREFUSED',   // host answers the SYN with a reset — nothing listening
+  'EHOSTUNREACH',
+  'ENETUNREACH',
+  'EHOSTDOWN',
+]);
+
+/**
+ * `EAI_AGAIN` is NOT in the set above, and the distinction is the whole point
+ * (#770). `ENOTFOUND` is an AUTHORITATIVE answer — the name does not exist,
+ * and nothing about the next attempt changes that. `EAI_AGAIN` is
+ * `getaddrinfo`'s literal «try again»: a temporary resolver failure, which on
+ * a CI runner is a routine hiccup, not a verdict about the host. Treated as
+ * unreachable it cost a model exhausted for the run PLUS the 60s provider
+ * cooldown — i.e. every sibling id served by that host — for a fault that
+ * usually clears on the next round-trip.
+ *
+ * So a flap is retryable like ECONNRESET/EPIPE, and the retry loop's backoff
+ * is exactly the "try again" the code asks for. What #475 bought is not given
+ * back, only made conditional: `callLLM` counts flaps per provider, and at
+ * RESOLVER_FLAP_ESCALATION consecutive failed model attempts against the same
+ * provider the resolver is no longer hiccuping — the flap is promoted to a
+ * full unreachable and takes the ban + cooldown path unchanged.
+ */
+const TRANSIENT_RESOLVER_CODES = new Set(['EAI_AGAIN']);
+
+/**
+ * Failed model attempts on one provider, all ending in a resolver flap, after
+ * which the flap stops being read as transient. Three and not two: two is one
+ * unlucky pair of models, and the cost of guessing wrong here is the cost #770
+ * was opened about.
+ */
+const RESOLVER_FLAP_ESCALATION = 3;
+
+/** @type {Map<string, number>} provider → consecutive resolver flaps */
+const _resolverFlaps = new Map();
+
+export function classifyHostUnreachable(err) {
+  const seen = new Set();
+  const walk = (e, depth) => {
+    if (!e || typeof e !== 'object' || depth > 4 || seen.has(e)) return null;
+    seen.add(e);
+    if (typeof e.code === 'string' && HOST_UNREACHABLE_CODES.has(e.code)) return e.code;
+    if (Array.isArray(e.errors)) {
+      for (const sub of e.errors) {
+        const hit = walk(sub, depth + 1);
+        if (hit) return hit;
+      }
+    }
+    return walk(e.cause, depth + 1);
+  };
+  return walk(err, 0);
+}
+
+/**
+ * Same walk as `classifyHostUnreachable`, for the codes that mean «temporary,
+ * try again» rather than «this host is not there» (see TRANSIENT_RESOLVER_CODES).
+ * Pure and idempotent like its twin: the counting lives in `callLLM`, so
+ * classifying the same error twice costs nothing observable.
+ *
+ * @returns {string|null} the syscall code (for the log/escalation reason), or null.
+ */
+export function classifyTransientResolver(err) {
+  const seen = new Set();
+  const walk = (e, depth) => {
+    if (!e || typeof e !== 'object' || depth > 4 || seen.has(e)) return null;
+    seen.add(e);
+    if (typeof e.code === 'string' && TRANSIENT_RESOLVER_CODES.has(e.code)) return e.code;
+    if (Array.isArray(e.errors)) {
+      for (const sub of e.errors) {
+        const hit = walk(sub, depth + 1);
+        if (hit) return hit;
+      }
+    }
+    return walk(e.cause, depth + 1);
+  };
+  return walk(err, 0);
 }
 
 /**
@@ -4649,7 +4812,7 @@ async function _callOpenAICompatible(apiModel, messages, opts, { endpoint, apiKe
         // (daily-limit-looking response, stale local/OmniRoute auth 401) must
         // never hard-ban a last-resort provider. See _isLastResortProvider.
         if (isDailyLimitError(res.status, raw)) {
-          if (!_suppressExhaustionMark && !_isLastResortProvider(modelForTracking)) {
+          if (!_suppressExhaustionMark && !_isLastResortProvider(modelForTracking) && opts.recordScore !== false) {
             markModelExhausted(modelForTracking);
             _stats.exhausted++;
           }
@@ -4661,16 +4824,20 @@ async function _callOpenAICompatible(apiModel, messages, opts, { endpoint, apiKe
           // Learn the real size cap from `raw` while it's still untruncated —
           // the Error message below slices it to 300 chars (and callers slice
           // further to 200 for logging), which is why this can't be recovered
-          // after the fact from logs.
-          _learnRequestTokenLimit(modelForTracking, raw);
-          // Same reasoning: a 400 with this exact shape only happens when we
-          // requested schema mode (responseFormat.type === 'json_schema') and
-          // the model rejected it — remember it so future cascade passes stop
-          // paying the round-trip for a request shape this model never accepts.
-          if (nrc.reason === 'schema_unsupported' && responseFormat?.type === 'json_schema') {
-            _learnSchemaIncompatible(modelForTracking);
+          // after the fact from logs. Gated like markModelExhausted below —
+          // diagnostic-only callers (see DEFAULT_OPTS.recordScore) must not
+          // teach the shared cascade a runtime-learned cap either.
+          if (opts.recordScore !== false) {
+            _learnRequestTokenLimit(modelForTracking, raw);
+            // Same reasoning: a 400 with this exact shape only happens when we
+            // requested schema mode (responseFormat.type === 'json_schema') and
+            // the model rejected it — remember it so future cascade passes stop
+            // paying the round-trip for a request shape this model never accepts.
+            if (nrc.reason === 'schema_unsupported' && responseFormat?.type === 'json_schema') {
+              _learnSchemaIncompatible(modelForTracking);
+            }
           }
-          if (nrc.markExhausted && !_isLastResortProvider(modelForTracking)) {
+          if (nrc.markExhausted && !_isLastResortProvider(modelForTracking) && opts.recordScore !== false) {
             markModelExhausted(modelForTracking, 'nonretryable', `HTTP ${res.status}`);
             _stats.exhausted++;
           }
@@ -4745,6 +4912,15 @@ async function _callOpenAICompatible(apiModel, messages, opts, { endpoint, apiKe
       if (e.message?.includes('Daily request limit')) throw e;
       // Re-throw non-retryable errors immediately (unknown model, context limit)
       if (e.nonRetryable) throw e;
+      // Il tag va posato PRIMA di ogni `throw`, non dentro il ramo che i soli
+      // tentativi non-finali raggiungono (#769): con `maxRetriesPerModel: 1`
+      // — valore legittimo e usato — il primo tentativo e' gia' l'ultimo,
+      // quindi l'errore usciva dal `throw` qui sotto NON taggato e il circuit
+      // breaker di callLLM() non scattava: nessun cooldown del provider, e i
+      // modelli fratelli dello stesso host ripagavano ciascuno il proprio
+      // connect morto — cioe' esattamente il costo che #475 aveva tolto.
+      const unreachableCode = classifyHostUnreachable(e);
+      if (unreachableCode) e.hostUnreachable = unreachableCode;
       // Re-throw on last attempt
       if (attempt >= opts.maxRetriesPerModel) throw e;
       // Timeout errors: never retry within this call. A hang against the full
@@ -4764,6 +4940,12 @@ async function _callOpenAICompatible(apiModel, messages, opts, { endpoint, apiKe
         }
         throw e;
       }
+      // Host unreachable: never retry within this call, for the same reason as
+      // the timeout branch above — the next attempt is 100% certain to fail
+      // identically, since nothing about a refused connection changes in
+      // `attempt * backoffMs`. Tagged so the callLLM() cascade can apply its
+      // circuit breaker (see classifyHostUnreachable, nanako#475).
+      if (unreachableCode) throw e;
       // Otherwise retry
       _stats.retries++;
       const waitMs = attempt * opts.backoffMs;
@@ -5778,20 +5960,27 @@ async function _callGeminiRaw(model, messages, opts) {
       if (!res.ok) {
         // Quota / rate-limit — mark exhausted if it looks permanent
         if (isDailyLimitError(res.status, raw)) {
-          markModelExhausted(model);
-          _stats.exhausted++;
+          if (opts.recordScore !== false) {
+            markModelExhausted(model);
+            _stats.exhausted++;
+          }
           throw new Error(`[${model}] Daily quota reached`);
         }
         // Non-retryable client errors (unknown model, context too small)
         const nrc = classifyNonRetryableError(res.status, raw);
         if (nrc.nonRetryable) {
           // Learn the real size cap from `raw` while it's still untruncated —
-          // see the matching call in _callOpenAICompatible for why.
-          _learnRequestTokenLimit(model, raw);
-          if (nrc.reason === 'schema_unsupported' && useGeminiSchema) {
-            _learnSchemaIncompatible(model);
+          // see the matching call in _callOpenAICompatible for why. Gated like
+          // markModelExhausted below — diagnostic-only callers (see
+          // DEFAULT_OPTS.recordScore) must not teach the shared cascade a
+          // runtime-learned cap either.
+          if (opts.recordScore !== false) {
+            _learnRequestTokenLimit(model, raw);
+            if (nrc.reason === 'schema_unsupported' && useGeminiSchema) {
+              _learnSchemaIncompatible(model);
+            }
           }
-          if (nrc.markExhausted) {
+          if (nrc.markExhausted && opts.recordScore !== false) {
             // 'nonretryable', NOT the default 'quota': this is the Gemini twin
             // of the _callOpenAICompatible non-retryable branch, which already
             // labels correctly. Left at the default, a 404/unknown-model here
@@ -5843,11 +6032,20 @@ async function _callGeminiRaw(model, messages, opts) {
     } catch (e) {
       if (e.message?.includes('Daily quota')) throw e;
       if (e.nonRetryable) throw e;
+      // Tag prima del `throw` dell'ultimo tentativo — gemello della riga in
+      // _callOpenAICompatible, stessa ragione (#769).
+      const unreachableCode = classifyHostUnreachable(e);
+      if (unreachableCode) e.hostUnreachable = unreachableCode;
       if (attempt >= opts.maxRetriesPerModel) throw e;
       // Timeout errors: never retry within this call — see matching comment in
       // _callOpenAICompatible (same rationale, sibling pattern kept in sync).
       const isTimeout = e.name === 'AbortError' || e.name === 'TimeoutError' || /timeout|aborted/i.test(e.message || '');
       if (isTimeout) throw e;
+      // Host unreachable — sibling of the branch in _callOpenAICompatible,
+      // kept in sync (nanako#475). Gemini's host is alive today, but the
+      // antipattern is the loop's, not the host's: a `fetch failed` here fell
+      // through to the generic retry exactly the same way.
+      if (unreachableCode) throw e;
       _stats.retries++;
       const waitMs = attempt * opts.backoffMs;
       console.warn(`⚠️  [${model}] Error retry ${attempt}/${opts.maxRetriesPerModel}: ${e.message?.slice(0, 150)}`);
@@ -6239,15 +6437,22 @@ export async function callLLM(messages, opts = {}) {
       continue;
     }
 
-    // Skip models whose provider is cooling down (recent 429). Was silent
-    // (errors.push only) until run 30333856358's investigation — a whole
-    // last-resort tier stuck in cooldown left zero trace unless the entire
-    // chain also failed. Logged once per model+cause (see _logPreflightSkipOnce).
+    // Skip models whose provider is cooling down (recent 429) or is not
+    // answering at all. Was silent (errors.push only) until run 30333856358's
+    // investigation — a whole last-resort tier stuck in cooldown left zero
+    // trace unless the entire chain also failed. Logged once per model+cause
+    // (see _logPreflightSkipOnce).
+    //
+    // The phrase comes from the cooldown cause and is NOT hardcoded here: this
+    // line lands in `errors`, which classifyExhaustionCause tallies into the
+    // transient/persistent vote that decides whether a run with no article is
+    // green. See _providerCooldownReason.
     const provider = getProvider(model);
     if (isProviderCoolingDown(provider)) {
-      _logPreflightSkipOnce(model, 'cooldown', `provider ${provider} cooling down (rate-limited)`);
-      errors.push(`${model}: skipped — provider ${provider} cooling down (recent 429)`);
-      _recordLastResortSkip(model, 'provider cooling down');
+      const skipPhrase = providerCooldownSkipPhrase(provider);
+      _logPreflightSkipOnce(model, 'cooldown', `provider ${provider} ${skipPhrase}`);
+      errors.push(`${model}: skipped — provider ${provider} ${skipPhrase}`);
+      _recordLastResortSkip(model, `provider ${skipPhrase}`);
       continue;
     }
 
@@ -6343,9 +6548,11 @@ export async function callLLM(messages, opts = {}) {
       const result = await _callModel(model, messages, o);
 
       // ✅ Success — boost this model's score so it stays near the top
-      recordModelSuccess(model);
+      // (skipped for diagnostic-only callers, see DEFAULT_OPTS.recordScore)
+      if (o.recordScore !== false) recordModelSuccess(model);
       _consecutive429.delete(model); // FRO-325: reset 429 counter on success
       _clampedTimeouts.delete(model); // an answer clears the adaptive-ceiling doubt
+      _resolverFlaps.delete(provider); // the name resolved: the flap streak is over (#770)
       _recordLastResortOutcome(model, 'served');
       if (provider === PROVIDER.CLAUDE_CLI) _claudeCliConsecutiveTimeouts = 0;
       if (provider === PROVIDER.OMNIROUTE) _omniRouteConsecutiveFailures = 0;
@@ -6397,6 +6604,36 @@ export async function callLLM(messages, opts = {}) {
       }
 
       // ❌ Failure — penalize this model's score so it drops in priority
+      // La causa si LEGGE qui, non si assume che qualcuno l'abbia scritta
+      // (#769). I retry loop dei caller fetch taggano gia', ma il tag e' una
+      // convenzione fra funzioni: ogni caller che non la conosce (claude-cli,
+      // _callLocal, un provider aggiunto domani) consegnerebbe un connect
+      // morto indistinguibile da un errore qualunque, e il breaker sotto
+      // resterebbe fermo. `classifyHostUnreachable` e' pura e idempotente,
+      // quindi la seconda classificazione non costa niente di osservabile.
+      if (!e.hostUnreachable) {
+        const unreachableCode = classifyHostUnreachable(e);
+        if (unreachableCode) e.hostUnreachable = unreachableCode;
+      }
+      // Resolver flap (#770): transient by definition, so it does NOT ban the
+      // model nor freeze the provider — until it stops looking transient. The
+      // counter is per PROVIDER and not per model because that is the scope of
+      // the fault a resolver failure describes: the name of the host, which
+      // every sibling id shares. Only failed attempts count; a success on the
+      // same provider clears it (see the reset next to _consecutive429).
+      if (!e.hostUnreachable) {
+        const flapCode = classifyTransientResolver(e);
+        if (flapCode) {
+          const flaps = (_resolverFlaps.get(provider) || 0) + 1;
+          _resolverFlaps.set(provider, flaps);
+          if (flaps >= RESOLVER_FLAP_ESCALATION) {
+            e.hostUnreachable = flapCode;
+            console.warn(`🚫 [${model}] ${flaps} consecutive resolver failures (${flapCode}) on ${provider} — no longer treating it as a hiccup`);
+          } else {
+            console.warn(`🔁 [${model}] Resolver flap (${flapCode}) on ${provider} ${flaps}/${RESOLVER_FLAP_ESCALATION} — retryable, no ban and no provider cooldown`);
+          }
+        }
+      }
       const isExhausted =
         msg.includes('Daily request limit') ||
         msg.includes('Daily quota') ||
@@ -6411,7 +6648,7 @@ export async function callLLM(messages, opts = {}) {
         // PROVIDER.LOCAL carve-out on recordModelContentFailure above: no
         // external quota, so exhausting it mid-run just guarantees zero
         // output for the rest of the wall-clock budget.
-        if (count >= MAX_CONSECUTIVE_429 && !_isLastResortProvider(model)) {
+        if (count >= MAX_CONSECUTIVE_429 && !_isLastResortProvider(model) && o.recordScore !== false) {
           markModelExhausted(model);
           _stats.exhausted++;
           console.warn(`🚫 [${model}] Exhausted after ${count} consecutive 429s`);
@@ -6445,10 +6682,52 @@ export async function callLLM(messages, opts = {}) {
           console.warn(`⏱️  [${model}] Timed out at the adaptive ${Math.round((e.adaptiveTimeoutMs || 0) / 1000)}s ceiling (caller asked ${Math.round((o.timeout || 0) / 1000)}s) — not exhausting on our own guess (${n}/${ADAPTIVE_TIMEOUT_MAX_CLAMPED_FAILURES})`);
         }
       }
-      if (isTimeoutFailure && !spared && !_isLastResortProvider(model)) {
+      if (isTimeoutFailure && !spared && !_isLastResortProvider(model) && o.recordScore !== false) {
         markModelExhausted(model, 'timeout');
         _stats.exhausted++;
         markedExhausted = true;
+      }
+      // Unreachable-host circuit breaker (nanako#475). Same shape as the
+      // timeout breaker above, one level stronger on the provider: a host that
+      // refuses the connection refuses it for EVERY id it serves, so exhausting
+      // just this model would still pay one dead connect per sibling. The
+      // cooldown is the existing 429 mechanism reused — bounded and in-process,
+      // so a host that comes back is picked up again rather than banned.
+      //
+      // `_isLastResortProvider` exemption is load-bearing, not symmetry:
+      // _callLocal talks to 127.0.0.1 and raises ECONNREFUSED whenever the
+      // local server simply isn't running, which is the NORMAL state on a CI
+      // runner. Banning on it would make local/ unusable as a last resort —
+      // the trap in nanako#362 / tests/local-llm-fallback.
+      //
+      // Il gate `recordScore` copre SOLO il marchio, non il cooldown, e la
+      // divisione e' deliberata: `markModelExhausted` scrive `_dirtyModels` e
+      // quindi il ledger condiviso `ai_model_scores/_all` (vedi
+      // DEFAULT_OPTS.recordScore), mentre `cooldownProvider` e' in-processo e
+      // muore col processo. Spegnere anche il cooldown farebbe pagare a un
+      // chiamante diagnostico un connect morto per OGNI id fratello — cioe'
+      // rinuncerebbe alla meta' di #475 che vale di piu' proprio nel caso d'uso
+      // che questo flag serve. Questo ramo non esiste sul gemello `identical`
+      // del sito (e' nato qui con #475): senza questa riga la discesa del flag
+      // lascerebbe scoperta l'unica scrittura al ledger che il corpus ha in piu'.
+      if (!isTimeoutFailure && e.hostUnreachable && !_isLastResortProvider(model)) {
+        if (!markedExhausted && o.recordScore !== false) {
+          markModelExhausted(model, 'nonretryable', e.hostUnreachable);
+          _stats.exhausted++;
+          markedExhausted = true;
+        }
+        if (!isProviderCoolingDown(provider)) {
+          cooldownProvider(
+            provider,
+            `host unreachable: ${e.hostUnreachable}`,
+            // Deliberately without "cooling down": the siblings' skip line is
+            // counted by classifyExhaustionCause, and a host that refuses the
+            // connection is a persistent fault, not a transient one.
+            `unreachable (${e.hostUnreachable}), non-retryable`,
+          );
+          _stats.providerCooldowns++;
+          console.warn(`🚫 [${model}] Host unreachable (${e.hostUnreachable}) — cooling down provider ${provider}; its sibling models are skipped instead of re-dialling a dead host`);
+        }
       }
       // claude-cli's own timeout-storm circuit breaker (see
       // _claudeCliTimeoutStormDetected declaration) — separate from the
@@ -6492,16 +6771,26 @@ export async function callLLM(messages, opts = {}) {
       // NON e' toccato — quello conta i guasti del canale, ed e' il posto
       // giusto dove contarli.
       const transportOnly = !!e.transportFault && provider === PROVIDER.CLAUDE_CLI;
-      recordModelFailure(model, {
-        nonRetryable: !!e.nonRetryable,
-        exhausted: isExhausted || isTimeoutFailure,
-        transportOnly,
-      });
+      // (skipped for diagnostic-only callers, see DEFAULT_OPTS.recordScore)
+      if (o.recordScore !== false) {
+        recordModelFailure(model, {
+          nonRetryable: !!e.nonRetryable,
+          exhausted: isExhausted || isTimeoutFailure,
+          transportOnly,
+        });
+      }
 
       const scoreNote = transportOnly
         ? `guasto di trasporto, score invariato → ${_modelScores.get(model) || 0}`
         : `score → ${_modelScores.get(model) || 0}`;
-      console.warn(`❌ [${model}] Failed${markedExhausted ? ' (timeout → exhausted)' : ''} (${scoreNote}): ${msg.slice(0, 200)}`);
+      // Il motivo del ban va nominato, non presunto: da #475 questa riga puo'
+      // essere raggiunta anche da un host irraggiungibile, e leggere "timeout"
+      // su una connessione mai stabilita manda chi indaga a cercare un modello
+      // lento invece di un host morto.
+      const exhaustNote = markedExhausted
+        ? (isTimeoutFailure ? ' (timeout → exhausted)' : ` (${e.hostUnreachable || 'nonretryable'} → exhausted)`)
+        : '';
+      console.warn(`❌ [${model}] Failed${exhaustNote} (${scoreNote}): ${msg.slice(0, 200)}`);
       // Continue to next model in chain
     }
   }

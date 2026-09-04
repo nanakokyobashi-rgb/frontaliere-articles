@@ -33807,6 +33807,24 @@ const RAW_ARTICLES = [
  authorSlug: 'marco-ferrari',
  authorName: 'Marco Ferrari',
  },
+ {
+ id: 'sciopero-tilo-italia-2026',
+ category: 'novita',
+ date: '2026-09-04T09:42:01.798Z',
+ image: '/images/blog/sciopero-tilo-italia-2026.webp',
+ hasCalculator: true,
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
+ {
+ id: 'lavoro-remoto-estero-vacanza',
+ category: 'fiscale',
+ date: '2026-09-04T11:58:26.343Z',
+ image: '/images/blog/lavoro-remoto-estero-vacanza.webp',
+ hasCalculator: true,
+ authorSlug: 'marco-ferrari',
+ authorName: 'Marco Ferrari',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

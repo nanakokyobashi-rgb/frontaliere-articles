@@ -85,7 +85,7 @@ jobs:
       # The other two thirds of the same contract, and until now NOTHING ran
       # them. The coverage gate above checks only PRESENCE (`k in shell &&
       # !== undefined`); `host/tests/` holds the two files that check the
-      # VALUES (a SHA over the 21 scalars that render into every <head>) and
+      # VALUES (a SHA over the 22 scalars that render into every <head>) and
       # the BEHAVIOUR (a golden of the function half, recorded from the site's
       # own bootstrap at transport time). Both were orphaned by the same
       # one-line cause: `tests.yml` and the suite above both discover with

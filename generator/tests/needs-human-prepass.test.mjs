@@ -206,15 +206,54 @@ test('nessuna sovrapposizione fra allowlist e famiglia owner-only', () => {
 
 // ── La lettura del verdetto si paga solo quando serve ──────────────────────
 
-test('needsVerdictLookup: le famiglie decise dal titolo non pagano una gh api', () => {
-  // Il verdetto conta SOLO nel ramo `STALE_BLOCK_VERDICTS`, che `prepassDecision`
-  // valuta dopo aver gia' scartato le due famiglie riconosciute sul titolo.
-  // Pagarlo per quelle e' una chiamata buttata (nit della review di #595).
-  for (const t of ['Workflow Failure: Generate Blog Article', 'follow-up(#386): x', 'Loop drift: il ciclo autonomo diverge dal sito']) {
-    assert.equal(needsVerdictLookup(t), false, t);
+test('needsVerdictLookup: la famiglia monitor ORA lo paga, altrimenti la guardia e\' morta', () => {
+  // Invertito rispetto al #595, e deliberatamente. Allora il verdetto contava
+  // solo nel ramo `STALE_BLOCK_VERDICTS`, valutato dopo aver scartato le
+  // famiglie sul titolo, quindi pagarlo per quelle era una chiamata buttata.
+  // Ora esiste il ramo `PREPASS_VERDICT_BEATS_FAMILY`, che si applica PROPRIO ai
+  // titoli di famiglia: saltare la lettura per loro renderebbe la guardia codice
+  // morto esattamente sul caso che l'ha motivata (site #7313: `Crawler Failure:
+  // Run zurich` e `Run volg` ri-accodate col verdetto `max-turns` intatto).
+  for (const t of ['Workflow Failure: Generate Blog Article', 'Crawler Failure: Run zurich', 'follow-up(#386): x', 'Loop drift: il ciclo autonomo diverge dal sito']) {
+    assert.equal(needsVerdictLookup(t), true, t);
   }
+  // La sola famiglia owner-only resta esente: `prepassDecision` la decide PRIMA
+  // di guardare il verdetto, quindi leggerlo non cambierebbe l'esito.
   for (const t of ['Agent loop down: GITHUB_PAT failed to load', 'GH_PAT expiry warning: rotate']) {
     assert.equal(needsVerdictLookup(t), false, t);
+  }
+});
+
+test('regressione site #7313/#7307: il verdetto batte il riconoscimento di famiglia', () => {
+  // Questa guardia non era MAI scesa su questa meta': il gemello del sito ce
+  // l'ha dal #5608, il file qui e' `adapted` e il drift check confronta solo gli
+  // `identical`. Senza, una issue di famiglia monitor gia' chiusa da un verdetto
+  // tornava in coda a costo zero per riprodurlo.
+  for (const v of ['no-root-cause', 'max-turns', 'blocked-workflows-scope', 'already-fixed']) {
+    for (const t of ['Crawler Failure: Run zurich', 'Workflow Failure: Generate Blog Article']) {
+      const d = prepassDecision({ title: t, verdict: v });
+      assert.equal(d.action, 'keep', `${v} / ${t}`);
+      assert.match(d.reason, new RegExp(v.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')));
+    }
+  }
+  // Senza verdetto la famiglia decide come prima: la fix non chiude l'uscita.
+  assert.equal(prepassDecision({ title: 'Crawler Failure: Run zurich' }).action, 'requeue');
+  assert.equal(prepassDecision({ title: 'Crawler Failure: Run zurich', verdict: 'pr-created' }).action, 'requeue');
+});
+
+test('il verdetto batte il requeue ma NON lo scorporo (🔴 della review di #778)', () => {
+  // La guardia stava PRIMA del ramo `isAggregate` e gli toglieva il `decompose`.
+  // E' l'opposto del criterio che la costante dichiara: lo scorporo CAMBIA
+  // l'input del fixer esattamente come la scheda dello sweep — e' il ramo che il
+  // drainer stesso sceglie su `max-turns` (DECOMPOSE-ROUTE). Un container di
+  // famiglia monitor con un verdetto catturato deve continuare a scorporarsi.
+  for (const v of ['max-turns', 'no-root-cause']) {
+    for (const t of [
+      'follow-up(#386): 3 items deferred — qualcosa',
+      'Workflow Failure: sweep dei crawler',
+    ]) {
+      assert.equal(prepassDecision({ title: t, verdict: v }).action, 'decompose', `${v} / ${t}`);
+    }
   }
 });
 
