@@ -278,6 +278,18 @@ const MAX_JOB_DURATION_MIN = 350;
  * Il bound onesto e' quello che GitHub stesso impone: un job che resta in coda
  * oltre 24 ore viene cancellato. Una run che oggi risulta `failure` ha quindi
  * eseguito, e non puo' aver aspettato piu' di cosi' prima di farlo.
+ *
+ * Resta un'ASSUNZIONE, e come tale non va creduta: quel ragionamento tiene solo
+ * se ogni percorso verso `conclusion: failure` passa dall'esecuzione di un job,
+ * mentre un errore di valutazione del workflow, un `needs` risolto in failure
+ * dopo una lunga attesa o un deployment gate scaduto possono dare a una run
+ * un'eta' arbitraria (#789 item 3). Per questo il valore qui e' solo il PUNTO
+ * DI PARTENZA: la verifica sta in `horizonPressure()`, che misura lo span
+ * `createdAt -> updatedAt` realmente osservato su ogni run tornata dalla query
+ * e alza la voce se si avvicina all'orizzonte. Misurato il 2026-09-04 su 800
+ * run `failure` di questo repo: span massimo 227 minuti, p99 112 — l'orizzonte
+ * di default ha ~8x di margine, e nessuna delle 40 run campionate era arrivata
+ * a `failure` senza eseguire almeno un job.
  */
 const MAX_RUN_QUEUE_WAIT_MIN = 24 * 60;
 

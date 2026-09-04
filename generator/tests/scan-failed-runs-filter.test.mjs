@@ -20,7 +20,9 @@ import {
   DECLARED_SKIP_STEP_RE,
   DEFAULT_RUN_QUERY_HORIZON_MIN,
   parseHorizonMin,
-  horizonPressureMin,
+  parsePositiveNum,
+  horizonPressure,
+  fetchRunsBisected,
 } from '../../scripts/ci/scan-failed-runs.mjs';
 import { TITLE_RE } from '../../scripts/ci/close-recovered-failure-issues.mjs';
 import { isExclusivelyWorkflowScoped } from '../../scripts/ci/check-workflows-scope.mjs';
@@ -371,24 +373,149 @@ test('l\'orizzonte della query copre l\'attesa in coda, non la sola durata del j
 });
 
 test('SCAN_FAILED_RUNS_HORIZON_MIN sovrascrive solo con un numero positivo', () => {
-  assert.equal(parseHorizonMin('90'), 90);
-  assert.equal(parseHorizonMin(undefined), DEFAULT_RUN_QUERY_HORIZON_MIN);
-  assert.equal(parseHorizonMin(''), DEFAULT_RUN_QUERY_HORIZON_MIN);
-  assert.equal(parseHorizonMin('non-un-numero'), DEFAULT_RUN_QUERY_HORIZON_MIN);
-  assert.equal(parseHorizonMin('0'), DEFAULT_RUN_QUERY_HORIZON_MIN);
-  assert.equal(parseHorizonMin('-5'), DEFAULT_RUN_QUERY_HORIZON_MIN);
+  const quiet = () => {};
+  assert.equal(parseHorizonMin('90', { warn: quiet }), 90);
+  assert.equal(parseHorizonMin(undefined, { warn: quiet }), DEFAULT_RUN_QUERY_HORIZON_MIN);
+  assert.equal(parseHorizonMin('', { warn: quiet }), DEFAULT_RUN_QUERY_HORIZON_MIN);
+  assert.equal(parseHorizonMin('non-un-numero', { warn: quiet }), DEFAULT_RUN_QUERY_HORIZON_MIN);
+  assert.equal(parseHorizonMin('0', { warn: quiet }), DEFAULT_RUN_QUERY_HORIZON_MIN);
+  assert.equal(parseHorizonMin('-5', { warn: quiet }), DEFAULT_RUN_QUERY_HORIZON_MIN);
 });
 
-test('una run segnalabile vicina al bordo dell\'orizzonte alza un warning', () => {
-  const nowMs = Date.parse('2026-09-04T12:00:00Z');
+/**
+ * #789 item 2 — un override malformato degradava al default IN SILENZIO, e la
+ * leva e' l'unica via documentata per comprare il caso delle run in attesa di
+ * approvazione: chi la tira crede di aver chiuso quel caso.
+ */
+test('un override malformato lo dice ad alta voce, uno assente no', () => {
+  const seen = [];
+  const warn = (m) => seen.push(m);
+
+  assert.equal(parseHorizonMin('2d', { warn }), DEFAULT_RUN_QUERY_HORIZON_MIN);
+  assert.equal(seen.length, 1, 'un valore non parsabile deve produrre un warning');
+  assert.match(seen[0], /::warning::/);
+  assert.match(seen[0], /SCAN_FAILED_RUNS_HORIZON_MIN=2d/);
+
+  // Il default non e' un tradimento di nessuna intenzione: resta muto.
+  seen.length = 0;
+  parseHorizonMin(undefined, { warn });
+  parseHorizonMin('', { warn });
+  parseHorizonMin('   ', { warn });
+  parseHorizonMin('4320', { warn });
+  assert.deepEqual(seen, []);
+
+  // Stessa classe sugli argv: `--lookback-min 40m` azzererebbe la finestra.
+  seen.length = 0;
+  assert.equal(parsePositiveNum('40m', 40, { label: '--lookback-min', warn }), 40);
+  assert.equal(parsePositiveNum('-3', 5, { label: '--max-issues', warn }), 5);
+  assert.equal(seen.length, 2);
+  assert.match(seen[0], /--lookback-min=40m/);
+});
+
+/**
+ * #789 items 3 e 4 — il canary misurava l'ETA' delle sole run segnalabili:
+ * banda utile ~225 minuti su un orizzonte di 1.850, e bound delle 24h di coda
+ * assunto invece che misurato. La quantita' che decide se una run sfugge alla
+ * query e' lo SPAN `createdAt -> updatedAt`, ed e' definita su OGNI run tornata
+ * dalla query.
+ */
+test('la pressione sull\'orizzonte si misura sullo span, su tutte le run della query', () => {
+  const base = Date.parse('2026-09-04T12:00:00Z');
   const horizonMin = 1000;
-  const at = (min) => ({ createdAt: new Date(nowMs - min * 60_000).toISOString() });
+  const span = (min, updatedAgoMin = 0) => ({
+    createdAt: new Date(base - (min + updatedAgoMin) * 60_000).toISOString(),
+    updatedAt: new Date(base - updatedAgoMin * 60_000).toISOString(),
+    url: `https://example.test/${min}`,
+  });
 
   // Sotto il 90% dell'orizzonte: nessuna pressione, nessun rumore.
-  assert.equal(horizonPressureMin([at(10), at(500)], { nowMs, horizonMin }), null);
-  // Oltre: si segnala la piu' vecchia, che e' quella piu' vicina a sparire.
-  assert.equal(horizonPressureMin([at(10), at(950), at(980)], { nowMs, horizonMin }), 980);
+  const calm = horizonPressure([span(10), span(500)], { horizonMin });
+  assert.equal(calm.overThreshold, 0);
+  assert.equal(Math.round(calm.maxSpanMin), 500);
+  assert.equal(calm.sampled, 2);
+
+  // Oltre: si contano TUTTE le run vicine al cutoff, non solo la peggiore.
+  const hot = horizonPressure([span(10), span(950), span(980)], { horizonMin });
+  assert.equal(hot.overThreshold, 2);
+  assert.equal(Math.round(hot.maxSpanMin), 980);
+
+  // La run non deve essere aggiornata di recente per contare: e' proprio il
+  // caso che la banda stretta del canary precedente non vedeva.
+  const stale = horizonPressure([span(960, 5000)], { horizonMin });
+  assert.equal(stale.overThreshold, 1);
+
+  // Una run che fallisce senza aver mai eseguito un job contribuisce con lo
+  // span che ha davvero: nessun bound di 24h dato per buono.
+  const gate = horizonPressure([span(3 * 24 * 60)], { horizonMin });
+  assert.equal(gate.overThreshold, 1);
+  assert.ok(gate.maxSpanMin > 24 * 60);
+
   // Date rotte o assenti non fanno ne' passare ne' fallire nulla.
-  assert.equal(horizonPressureMin([{ createdAt: 'boh' }, {}], { nowMs, horizonMin }), null);
-  assert.equal(horizonPressureMin(null, { nowMs, horizonMin }), null);
+  const broken = horizonPressure([{ createdAt: 'boh' }, {}], { horizonMin });
+  assert.equal(broken.sampled, 0);
+  assert.equal(broken.maxSpanMin, null);
+  assert.equal(horizonPressure(null, { horizonMin }).sampled, 0);
+});
+
+/**
+ * #789 item 1 — `gh run list` torna ordinato per `createdAt` DECRESCENTE:
+ * un cap raggiunto tronca le run PIU' VECCHIE, cioe' esattamente la classe che
+ * l'orizzonte largo esiste per recuperare. La bisezione la recupera.
+ */
+test('il cap raggiunto biseca la finestra invece di perdere le run piu\' vecchie', () => {
+  const nowMs = Date.parse('2026-09-04T12:00:00Z');
+  const startMs = nowMs - 1890 * 60_000;
+  const cap = 4;
+  // 10 run distribuite sull'intera finestra: una singola query capped ne
+  // restituirebbe solo le 4 piu' recenti.
+  const all = Array.from({ length: 10 }, (_, i) => ({
+    databaseId: i,
+    createdAt: new Date(startMs + i * 180 * 60_000).toISOString(),
+  }));
+  const calls = [];
+  const fetchWindow = (aIso, bIso) => {
+    calls.push([aIso, bIso]);
+    const aMs = Date.parse(aIso);
+    const bMs = bIso === null ? nowMs : Date.parse(bIso);
+    return all
+      .filter((r) => {
+        const c = Date.parse(r.createdAt);
+        return c >= aMs && c <= bMs;
+      })
+      .sort((x, y) => Date.parse(y.createdAt) - Date.parse(x.createdAt))
+      .slice(0, cap);
+  };
+
+  const got = fetchRunsBisected(startMs, null, { fetchWindow, nowMs, cap, warn: () => {} });
+  assert.deepEqual(got.map((r) => r.databaseId).sort((a, b) => a - b), [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
+  assert.ok(calls.length > 1, 'la finestra piena deve essere bisecata');
+
+  // Caso normale: una sola chiamata, nessun costo aggiunto.
+  const cheapCalls = [];
+  const cheap = fetchRunsBisected(startMs, null, {
+    fetchWindow: (a, b) => { cheapCalls.push([a, b]); return all.slice(0, 2); },
+    nowMs,
+    cap,
+    warn: () => {},
+  });
+  assert.equal(cheapCalls.length, 1);
+  assert.equal(cheap.length, 2);
+  assert.equal(cheapCalls[0][1], null, 'la finestra di primo livello resta aperta a destra');
+});
+
+test('la bisezione esausta dichiara QUALE estremo e\' stato troncato', () => {
+  const nowMs = Date.parse('2026-09-04T12:00:00Z');
+  const warnings = [];
+  const got = fetchRunsBisected(nowMs - 60_000, null, {
+    // Sempre piena: la bisezione non puo' risolvere, deve dirlo.
+    fetchWindow: () => [{ databaseId: 1 }, { databaseId: 2 }],
+    nowMs,
+    cap: 2,
+    maxDepth: 2,
+    warn: (m) => warnings.push(m),
+  });
+  assert.equal(got.length, 2);
+  assert.ok(warnings.length > 0);
+  assert.match(warnings[0], /::warning::/);
+  assert.match(warnings[0], /VECCHIO/, 'il warning deve dire che a sparire sono le run piu\' vecchie');
 });
