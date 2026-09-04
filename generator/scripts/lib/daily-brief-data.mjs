@@ -50,10 +50,37 @@ export const JOBS_MAX_AGE_MS = 48 * HOUR_MS;
  * `date`) rather than on a producer timestamp; these two rules give the jobs
  * block the same property.
  */
-/** The newest CLOSED history day may lag `todayIso` by at most this many days. */
-export const JOBS_HISTORY_MAX_LAG_DAYS = 2;
+/**
+ * The newest CLOSED history day may lag `todayIso` by at most this many days.
+ *
+ * The healthy baseline is **1**, not 0: the tail of the raw series is the day
+ * in progress, which the guard scopes out, so on a corpus that is advancing
+ * normally the newest closed day is always yesterday. A lag of 2 therefore
+ * already means the closed row for D-1 never landed — the same state in which
+ * `shapeJobs` would have no `yesterdayAdded` to headline with. So 1 is both
+ * the tightest and the only honest value: raising it buys nothing but extra
+ * calendar days of a frozen corpus published as fact.
+ */
+export const JOBS_HISTORY_MAX_LAG_DAYS = 1;
 /** Counters compared field-for-field to detect a replayed (frozen) day. */
 const JOBS_HISTORY_COUNTERS = ['totalJobs', 'added', 'updated', 'removed'];
+/** Counters that must move on a day the crawler actually ran. */
+const JOBS_HISTORY_MOVEMENT_COUNTERS = ['added', 'updated', 'removed'];
+
+/**
+ * Canonical `YYYY-MM-DD`. Both date series here are ordered and windowed with
+ * string comparison (`a.date.localeCompare(b.date)`, `date < todayIso`), which
+ * is only sound on zero-padded days: a row emitted as `2026-8-6` sorts AFTER
+ * `2026-08-08` and would silently fall out of every window, making the guards
+ * fail *open*. So the shape is validated, and a violation is a signal rather
+ * than something to drop quietly.
+ */
+const ISO_DAY_RE = /^\d{4}-\d{2}-\d{2}$/;
+
+/** UTC-midnight ms for a canonical day string, `NaN` for anything else. */
+function isoDayMs(value) {
+  return ISO_DAY_RE.test(value ?? '') ? Date.parse(`${value}T00:00:00Z`) : NaN;
+}
 
 /** Decode a single Firestore REST value into plain JS. */
 export function decodeValue(v) {
@@ -188,15 +215,23 @@ export function shapeFuel(meta, { nowMs = Date.now() } = {}) {
  */
 export function shapeExchange(doc, { todayIso } = {}) {
   if (!doc || typeof doc !== 'object') return unavailable('exchangeHistory/chf-eur-1m missing');
-  const points = (Array.isArray(doc.points) ? doc.points : [])
-    .filter((p) => p && typeof p.date === 'string' && Number.isFinite(Number(p.rate)))
+  const rawPoints = Array.isArray(doc.points) ? doc.points : [];
+  // Same reason as the jobs history: the series is ordered and windowed with
+  // string comparison, so a non-canonical day is a finding, not a row to drop.
+  const nonCanonical = rawPoints.filter((p) => p && typeof p === 'object' && !ISO_DAY_RE.test(p.date ?? ''));
+  if (nonCanonical.length > 0) {
+    const sample = JSON.stringify(nonCanonical[0]?.date ?? null);
+    return unavailable(`${nonCanonical.length} exchange point(s) carry a date that is not YYYY-MM-DD (first: ${sample})`);
+  }
+  const points = rawPoints
+    .filter((p) => p && Number.isFinite(Number(p.rate)))
     .map((p) => ({ date: p.date, rate: Number(p.rate) }))
     .sort((a, b) => a.date.localeCompare(b.date));
   if (points.length < 2) return unavailable(`only ${points.length} exchange points`);
   const last = points[points.length - 1];
   const prev = points[points.length - 2];
-  const todayMs = Date.parse(todayIso || '');
-  const lastMs = Date.parse(last.date);
+  const todayMs = isoDayMs(todayIso);
+  const lastMs = isoDayMs(last.date);
   if (!Number.isFinite(todayMs)) return unavailable('todayIso missing/invalid');
   const ageDays = (todayMs - lastMs) / (24 * HOUR_MS);
   if (ageDays > EXCHANGE_MAX_AGE_DAYS) {
@@ -233,30 +268,51 @@ export function shapeExchange(doc, { todayIso } = {}) {
  * the day BEFORE `todayIso` for this reason.
  */
 export function jobsCorpusFrozenReason(stats, { todayIso } = {}) {
-  if (!todayIso) return null;
-  const todayMs = Date.parse(todayIso);
+  const todayMs = isoDayMs(todayIso);
   if (!Number.isFinite(todayMs)) return null;
-  const rows = (Array.isArray(stats?.history) ? stats.history : [])
-    .filter((h) => h && typeof h.date === 'string' && Number.isFinite(Date.parse(h.date)))
+  const history = Array.isArray(stats?.history) ? stats.history : [];
+
+  // A row whose date is not canonical cannot be ordered against the others.
+  // Dropping it would empty the window and return "corpus fine" — the exact
+  // silent-staleness shape this guard exists to close — so a format change is
+  // reported as a finding instead.
+  const malformed = history.filter((h) => !h || typeof h !== 'object' || !ISO_DAY_RE.test(h.date ?? ''));
+  if (malformed.length > 0) {
+    const sample = JSON.stringify(malformed[0]?.date ?? null);
+    return `jobs history carries ${malformed.length} row(s) whose date is not YYYY-MM-DD (first: ${sample}) — the corpus-advance guard cannot read the series`;
+  }
+
+  const rows = history
     .filter((h) => h.date < todayIso)
     .sort((a, b) => a.date.localeCompare(b.date));
   if (rows.length === 0) return null;
 
   const newest = rows[rows.length - 1];
-  const lagDays = Math.round((todayMs - Date.parse(newest.date)) / (24 * HOUR_MS));
+  // Both operands are UTC midnight of a canonical day, so the quotient is a
+  // whole number of civil days; `Math.floor` keeps it that way even if a row
+  // ever carried a time component, where rounding up would degrade a corpus
+  // that had in fact advanced.
+  const lagDays = Math.floor((todayMs - isoDayMs(newest.date)) / (24 * HOUR_MS));
   if (lagDays > JOBS_HISTORY_MAX_LAG_DAYS) {
     return `jobs history stops at ${newest.date}, ${lagDays}d before ${todayIso} (max ${JOBS_HISTORY_MAX_LAG_DAYS}d) — corpus is not advancing`;
   }
 
-  // A row can be present and still be a replay of the previous day. Requiring
-  // every counter to match exactly — and `updated` to be non-zero, so two
-  // genuinely empty days are not flagged — makes a coincidence implausible on
-  // a corpus with thousands of daily updates.
-  if (rows.length < 2) return null;
-  const prev = rows[rows.length - 2];
   const counters = JOBS_HISTORY_COUNTERS.map((key) => Number(newest[key]));
   if (!counters.every((value) => Number.isFinite(value))) return null;
-  if (!(Number(newest.updated) > 0)) return null;
+
+  // A CLOSED day on which nothing was added, updated or removed is not an idle
+  // day on this corpus — it has thousands of daily updates — it is a crawler
+  // that did not run. Publishing it would put "0 new listings yesterday" in the
+  // edition as a fact, which is worse than dropping the section.
+  if (JOBS_HISTORY_MOVEMENT_COUNTERS.every((key) => Number(newest[key]) === 0)) {
+    return `jobs history day ${newest.date} closed with added/updated/removed all at 0 — the crawler did not run, that is not a quiet day`;
+  }
+
+  // A row can be present, and moving, and still be a replay of the previous
+  // day. With the all-zero case handled above, a field-for-field match of every
+  // counter on a day that moved is implausible as a coincidence.
+  if (rows.length < 2) return null;
+  const prev = rows[rows.length - 2];
   const replayed = JOBS_HISTORY_COUNTERS.every((key) => Number(newest[key]) === Number(prev[key]));
   if (replayed) {
     return `jobs history day ${newest.date} replays ${prev.date} field-for-field — corpus did not advance`;
@@ -281,9 +337,16 @@ export function shapeJobs(stats, { nowMs = Date.now(), todayIso } = {}) {
   // history series is the honest daily number, todayAdded is the live partial.
   let yesterdayAdded = null;
   if (todayIso && Array.isArray(stats.history)) {
-    const yesterdayIso = new Date(Date.parse(todayIso) - 24 * HOUR_MS).toISOString().slice(0, 10);
+    const yesterdayIso = new Date(isoDayMs(todayIso) - 24 * HOUR_MS).toISOString().slice(0, 10);
     const entry = stats.history.find((h) => h?.date === yesterdayIso);
     if (entry && Number.isFinite(Number(entry.added))) yesterdayAdded = Number(entry.added);
+    // The headline of the section IS this number. If the aggregator appends
+    // yesterday's closed row only after the 05:05 cron, the block would go out
+    // `available: true` with the figure missing — degrade instead, the same way
+    // a stale row degrades.
+    if (yesterdayAdded === null) {
+      return unavailable(`jobs history has no closed row for ${yesterdayIso} — no "new listings yesterday" figure to publish`);
+    }
   }
   return {
     available: true,
