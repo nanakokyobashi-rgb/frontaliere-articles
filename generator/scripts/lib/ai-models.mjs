@@ -1462,7 +1462,7 @@ function getApiKeyForProvider(provider) {
  * Orthogonal to AI_COMPETING_TIERS (2026-07-29): this is about a PROVIDER's
  * technical properties (no real quota / ephemeral instance), not its current
  * tier RANK. omniroute/claude-cli stay exempt here even while promoted to
- * tier-0 — the 60s per-provider cooldown (cooldownProvider(), unconditional,
+ * tier-0 — the per-provider cooldown (cooldownProvider(), unconditional,
  * see the main callLLM loop) plus ordinary score-based sinking on failure
  * already bound the "retry forever" risk without needing the ban too.
  */
@@ -2081,7 +2081,9 @@ export function getCallLatencyStats() {
 
 // Provider-level cooldown: when a provider returns 429, all its models
 // get a temporary cooldown to avoid wasting retries on sibling models.
-// Maps provider name → cooldown-until timestamp (ms).
+// Maps provider name → cooldown-until timestamp (ms), `Infinity` when the
+// cause is persistent and the ban lasts the whole run (see
+// PROVIDER_COOLDOWN_DURATION_MS).
 const _providerCooldown = new Map();
 // Why a provider is cooling down, provider name → { reason, skipPhrase }. Kept
 // beside _providerCooldown (not folded into its value) so the timestamp read
@@ -2121,6 +2123,32 @@ const PROVIDER_COOLDOWN_MS = 60_000; // 1 minute cooldown after 429
  */
 const COOLDOWN_SEVERITY = Object.freeze({ transient: 0, persistent: 1 });
 
+/**
+ * Quanto dura il cooldown, PER CAUSA (#803).
+ *
+ * `PROVIDER_COOLDOWN_MS` e' la semantica del 429: il bucket di quota si
+ * ricarica da solo, quindi 60s dopo ha senso riprovare. Un host che non
+ * accetta connessioni NON si ricarica da solo, e dargli la stessa finestra
+ * significa che alla scadenza il primo fratello ricompone il numero, fallisce,
+ * viene esaurito e riapre il cooldown: non «1 connect per run» (#767) ma **1
+ * connect al minuto per provider** finche' la catena non e' consumata. Su una
+ * run di cinque minuti erano 5 round-trip morti invece di 1.
+ *
+ * Quindi la causa persistente non scade: il ban vale per l'INTERA run. Non e'
+ * un ban eterno — `_providerCooldown` e' in-processo e muore col processo, e
+ * `resetState()` lo azzera comunque; e' esattamente la stessa durata che gia'
+ * hanno gli altri breaker su guasto persistente (`_exhaustedModels`, la storm
+ * di claude-cli), che sono run-scoped per la stessa ragione.
+ */
+const PROVIDER_COOLDOWN_DURATION_MS = Object.freeze({
+  [COOLDOWN_SEVERITY.transient]: PROVIDER_COOLDOWN_MS,
+  [COOLDOWN_SEVERITY.persistent]: Infinity,
+});
+
+function providerCooldownDurationMs(severity) {
+  return PROVIDER_COOLDOWN_DURATION_MS[severity] ?? PROVIDER_COOLDOWN_MS;
+}
+
 // Ceiling applied to a provider's `Retry-After` header (some return 86399 =
 // 24h, which would freeze the pipeline). Read in two places that must never
 // drift apart: the 429 backoff in _callOpenAICompatible, and _hardCallCapMs
@@ -2157,12 +2185,19 @@ function cooldownProvider(
   const prevSeverity = wasCoolingDown
     ? (_providerCooldownReason.get(provider)?.severity ?? COOLDOWN_SEVERITY.transient)
     : -1;
-  _providerCooldown.set(provider, Date.now() + PROVIDER_COOLDOWN_MS);
+  const durationMs = providerCooldownDurationMs(severity);
+  const until = durationMs === Infinity ? Infinity : Date.now() + durationMs;
+  // La finestra si sposta solo in AVANTI. Rinfrescarla e' sempre giusto (chi ha
+  // appena fallito ha appena dimostrato che il provider e' da evitare), ma
+  // ACCORCIARLA no: un 429 che atterra dopo un host morto scriverebbe 60s sopra
+  // il ban di run e riaprirebbe il ri-dial che #803 chiude. E' lo stesso
+  // invariante di COOLDOWN_SEVERITY sulla causa, applicato alla scadenza.
+  _providerCooldown.set(provider, Math.max(wasCoolingDown ? (_providerCooldown.get(provider) ?? 0) : 0, until));
   // Retrocedere la causa e' l'unica scrittura vietata: vedi COOLDOWN_SEVERITY.
   if (severity < prevSeverity) return 'refreshed';
   _providerCooldownReason.set(provider, { reason, skipPhrase, severity });
   if (!wasCoolingDown) {
-    console.warn(`🧊 Provider ${provider} cooled down for ${PROVIDER_COOLDOWN_MS / 1000}s (${reason})`);
+    console.warn(`🧊 Provider ${provider} cooled down for ${durationMs === Infinity ? 'the rest of the run' : `${durationMs / 1000}s`} (${reason})`);
     return 'created';
   }
   if (severity > prevSeverity) {
@@ -4008,6 +4043,7 @@ export function getStats() {
     exhaustedModels: [..._exhaustedModels],
     consecutive429s: Object.fromEntries(_consecutive429),  // FRO-325
     resolverFlaps: Object.fromEntries(_resolverFlaps),     // #770
+    // Secondi residui; `Infinity` = ban di run (host irraggiungibile, #803).
     activeCooldowns: Object.fromEntries([..._providerCooldown].map(([p, t]) => [p, Math.max(0, Math.ceil((t - Date.now()) / 1000))])),
     scoreBoard: getScoreBoard(),
     runOutcomes: getRunOutcomes(),
