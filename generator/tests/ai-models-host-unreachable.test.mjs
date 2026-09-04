@@ -349,3 +349,177 @@ describe('callLLM contro un resolver che inciampa (#770)', () => {
     assert.equal(stats.exhaustedModels.length, 0, `nessun ban sotto soglia, visti: ${stats.exhaustedModels.join(', ')}`);
   });
 });
+
+/**
+ * ── #781: L'ESENZIONE SI DECIDE SULL'ENDPOINT, NON SULLA CLASSE ────────────
+ *
+ * Il breaker di #475 chiede «un connect rifiutato qui prova che un host e'
+ * morto?». `_isLastResortProvider` risponde a un'altra domanda — «questo
+ * provider ha una quota giornaliera?» — ed e' quella giusta per il ban da 429
+ * e da timeout, non per questa.
+ *
+ * `local/` e `omniroute/` puntano di DEFAULT a 127.0.0.1: li' ECONNREFUSED
+ * dice «il server non gira su questo runner», stato normale in CI. Ma i due
+ * URL sono sovrascrivibili, e verso un host remoto lo stesso codice torna a
+ * essere la prova che l'esenzione stava buttando via.
+ */
+describe('esenzione dal breaker: loopback vs host remoto', () => {
+  const ENV_KEYS = [
+    'AI_MODELS_FORCE_CHAIN', 'AI_MODELS_PREFER', 'GH_MODELS_PAT',
+    'OMNIROUTE_ENABLED', 'OMNIROUTE_URL',
+    'LOCAL_LLM_ENABLED', 'LOCAL_LLM_URL',
+  ];
+  let envBackup = {};
+  let realFetch;
+
+  beforeEach(() => {
+    envBackup = Object.fromEntries(ENV_KEYS.map((k) => [k, process.env[k]]));
+    for (const k of ENV_KEYS) delete process.env[k];
+    realFetch = globalThis.fetch;
+    resetState();
+  });
+
+  afterEach(() => {
+    globalThis.fetch = realFetch;
+    for (const k of ENV_KEYS) {
+      if (envBackup[k] === undefined) delete process.env[k];
+      else process.env[k] = envBackup[k];
+    }
+    resetState();
+  });
+
+  // Un connect rifiutato verso un endpoint di loopback descrive UNA macchina,
+  // e il ban lo scriverebbe nel ledger Firestore CONDIVISO da tutte le run.
+  for (const [label, env, model, provider] of [
+    ['omniroute', { OMNIROUTE_ENABLED: '1' }, 'omniroute/auto', 'omniroute'],
+    ['local',     { LOCAL_LLM_ENABLED: '1' }, 'local/fallback', 'local'],
+  ]) {
+    it(`${label} su loopback resta esente — il server spento non e' un host morto`, async () => {
+      Object.assign(process.env, env);
+      process.env.AI_MODELS_FORCE_CHAIN = model;
+      globalThis.fetch = async () => { throw undiciFetchFailed('ECONNREFUSED'); };
+
+      await assert.rejects(
+        () => callLLM([{ role: 'user', content: 'x' }], { maxRetriesPerModel: 1, backoffMs: 1, timeout: 5000 }),
+      );
+
+      const stats = getStats();
+      assert.ok(!stats.exhaustedModels.includes(model), `${model} non va bannato su loopback, visti: ${stats.exhaustedModels.join(', ')}`);
+      assert.equal(stats.activeCooldowns[provider], undefined, `nessun cooldown atteso su loopback: ${JSON.stringify(stats.activeCooldowns)}`);
+    });
+
+    it(`${label} verso un host REMOTO arma il breaker come ogni altro provider`, async () => {
+      Object.assign(process.env, env);
+      process.env.AI_MODELS_FORCE_CHAIN = model;
+      process.env[label === 'omniroute' ? 'OMNIROUTE_URL' : 'LOCAL_LLM_URL'] =
+        'https://gateway.example.invalid/v1/chat/completions';
+      globalThis.fetch = async () => { throw undiciFetchFailed('ECONNREFUSED'); };
+
+      await assert.rejects(
+        () => callLLM([{ role: 'user', content: 'x' }], { maxRetriesPerModel: 1, backoffMs: 1, timeout: 5000 }),
+      );
+
+      const stats = getStats();
+      assert.ok(stats.exhaustedModels.includes(model), `atteso ${model} esaurito su host remoto morto, visti: ${stats.exhaustedModels.join(', ')}`);
+      assert.ok(stats.activeCooldowns[provider] > 0, `atteso il cooldown su host remoto morto: ${JSON.stringify(stats.activeCooldowns)}`);
+    });
+  }
+
+  // Il 429 e il timeout restano esenti a prescindere dall'endpoint: quella
+  // esenzione risponde alla domanda sulla QUOTA, che l'URL non tocca.
+  it('un host remoto non toglie a omniroute l\'esenzione dal ban da 429', async () => {
+    process.env.OMNIROUTE_ENABLED = '1';
+    process.env.OMNIROUTE_URL = 'https://gateway.example.invalid/v1/chat/completions';
+    process.env.AI_MODELS_FORCE_CHAIN = 'omniroute/auto';
+    globalThis.fetch = async () => new Response('rate limit exceeded', { status: 429 });
+
+    await assert.rejects(
+      () => callLLM([{ role: 'user', content: 'x' }], { maxRetriesPerModel: 1, backoffMs: 1, timeout: 5000 }),
+    );
+
+    const stats = getStats();
+    assert.ok(!stats.exhaustedModels.includes('omniroute/auto'), `un 429 non deve bannare omniroute: ${stats.exhaustedModels.join(', ')}`);
+  });
+});
+
+/**
+ * ── #781: IL PERCORSO MULTI-PAT NON PRODUCE UN VERDETTO DI UNA SOLA IDENTITA' ─
+ *
+ * Il dubbio: `_callGitHub` prova PAT diversi, quindi un `hostUnreachable` che
+ * esce di li' potrebbe descrivere UN account e mettere in cooldown l'intero
+ * provider. Non e' cosi', e queste due prove pinnano il perche':
+ *
+ *   - solo `_isGhPatQuotaError` fa ruotare; un connect rifiutato propaga nudo
+ *     l'errore del singolo tentativo, senza aggregazione;
+ *   - i codici host-unreachable sono PRE-AUTENTICAZIONE verso un endpoint
+ *     costante, quindi il PAT — che e' un header — non puo' cambiarne l'esito.
+ *
+ * Se una delle due cade, il breaker va ri-condizionato alla rotazione.
+ */
+describe('_callGitHub multi-PAT e il verdetto sull\'host', () => {
+  const ENV_KEYS = ['AI_MODELS_FORCE_CHAIN', 'AI_MODELS_PREFER', 'GH_MODELS_PAT', 'GH_MODELS_PAT_2'];
+  let envBackup = {};
+  let realFetch;
+  let auths;
+  const ghAuths = () => auths;
+
+  beforeEach(() => {
+    envBackup = Object.fromEntries(ENV_KEYS.map((k) => [k, process.env[k]]));
+    for (const k of ENV_KEYS) delete process.env[k];
+    process.env.GH_MODELS_PAT = 'pat-uno';
+    process.env.GH_MODELS_PAT_2 = 'pat-due';
+    process.env.AI_MODELS_FORCE_CHAIN = 'gpt-4o-mini';
+    auths = [];
+    realFetch = globalThis.fetch;
+    resetState();
+  });
+
+  afterEach(() => {
+    globalThis.fetch = realFetch;
+    for (const k of ENV_KEYS) {
+      if (envBackup[k] === undefined) delete process.env[k];
+      else process.env[k] = envBackup[k];
+    }
+    resetState();
+  });
+
+  // Il connect e' identico per ogni identita': ruotare ripagherebbe N connect
+  // morti verso lo stesso host — esattamente il costo che #475 ha tolto.
+  it('un connect rifiutato non ruota sul secondo PAT e arma il breaker', async () => {
+    globalThis.fetch = async (url, init) => {
+      if (String(url).includes('models.inference.ai.azure.com')) {
+        auths.push(init?.headers?.Authorization || init?.headers?.authorization || '');
+        throw undiciFetchFailed('ECONNREFUSED');
+      }
+      throw undiciFetchFailed('ECONNREFUSED');
+    };
+
+    await assert.rejects(
+      () => callLLM([{ role: 'user', content: 'x' }], { maxRetriesPerModel: 1, backoffMs: 1, timeout: 5000 }),
+    );
+
+    assert.equal(ghAuths().length, 1, `un solo connect atteso, non uno per PAT: visti ${ghAuths().length}`);
+    const stats = getStats();
+    assert.ok(stats.exhaustedModels.includes('gpt-4o-mini'), `atteso il modello esaurito, visti: ${stats.exhaustedModels.join(', ')}`);
+    assert.ok(stats.activeCooldowns.github > 0, `atteso il cooldown del provider: ${JSON.stringify(stats.activeCooldowns)}`);
+  });
+
+  // Il contrappunto: un errore che DIPENDE dall'identita' ruota, e non decide
+  // niente sull'host. E' la riga che separa le due classi.
+  it('un 429 del primo PAT ruota sul secondo invece di giudicare l\'host', async () => {
+    globalThis.fetch = async (url, init) => {
+      if (!String(url).includes('models.inference.ai.azure.com')) throw undiciFetchFailed('ECONNREFUSED');
+      const auth = String(init?.headers?.Authorization || init?.headers?.authorization || '');
+      auths.push(auth);
+      if (auth.includes('pat-uno')) return new Response('rate limit exceeded', { status: 429 });
+      return new Response(JSON.stringify({ choices: [{ message: { content: 'ok' } }] }), { status: 200 });
+    };
+
+    const out = await callLLM([{ role: 'user', content: 'x' }], { maxRetriesPerModel: 1, backoffMs: 1, timeout: 5000 });
+
+    assert.equal(out, 'ok');
+    assert.equal(ghAuths().length, 2, `attesi due tentativi, uno per PAT: visti ${ghAuths().length}`);
+    assert.ok(ghAuths()[1].includes('pat-due'), `il secondo tentativo deve usare il PAT #2: ${ghAuths()[1]}`);
+    assert.equal(getStats().activeCooldowns.github, undefined, 'un 429 di un account non deve congelare il provider');
+  });
+});
