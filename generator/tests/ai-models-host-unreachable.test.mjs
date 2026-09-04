@@ -35,7 +35,7 @@
  */
 
 import { strict as assert } from 'node:assert';
-import { describe, it, beforeEach, afterEach } from 'node:test';
+import { describe, it, beforeEach, afterEach, mock } from 'node:test';
 
 import {
   classifyHostUnreachable,
@@ -639,5 +639,111 @@ describe('promozione della causa del cooldown (#787)', () => {
     assert.match(later.message, /skipped — provider github unreachable \(ENOTFOUND\), non-retryable/);
     assert.doesNotMatch(later.message, /cooling down/, 'il 429 tardivo non deve riscrivere la causa');
     assert.equal(later.transientExhaustion, false, 'la causa persistente deve reggere');
+  });
+});
+
+/**
+ * ── IL BAN DI UN HOST MORTO VALE PER L'INTERA RUN (#803) ───────────────────
+ *
+ * `PROVIDER_COOLDOWN_MS` e' 60_000 perche' nasce dal 429: il bucket di quota si
+ * ricarica da solo, quindi dopo un minuto riprovare e' la cosa giusta. Un host
+ * che non accetta connessioni non si ricarica da solo, e con la stessa finestra
+ * la scadenza rimetteva in gioco il primo fratello ancora eleggibile: ricompone
+ * il numero, fallisce, viene esaurito, riapre il cooldown. Il costo reale non
+ * era «1 connect per run» (#767) ma **1 connect al minuto per provider**, e una
+ * run del generatore dura minuti.
+ *
+ * Le due prove qui sono una coppia, e vanno lette insieme: la prima pinna che
+ * la causa persistente NON scade, la seconda che il ban lungo non ha inghiottito
+ * anche il 429 — che deve continuare a scadere dopo 60s, o un limite di quota
+ * transitorio spegnerebbe il provider per tutta la run.
+ */
+describe('durata del cooldown per causa (#803)', () => {
+  // Come nel blocco della promozione: con piu' di un PAT il 429 non apre il
+  // cooldown del provider (la quota e' dell'account), e la seconda prova
+  // misurerebbe un cooldown che non c'e' mai stato.
+  const ENV_KEYS = [
+    'AI_MODELS_FORCE_CHAIN', 'GH_MODELS_PAT', 'AI_MODELS_PREFER',
+    ...Array.from({ length: 8 }, (_, i) => `GH_MODELS_PAT_${i + 2}`),
+  ];
+  const OPTS = { maxRetriesPerModel: 1, backoffMs: 1, timeout: 5000 };
+  let envBackup = {};
+  let realFetch;
+  let fetchCalls;
+  const ghCalls = () => fetchCalls.filter((u) => u.includes('models.inference.ai.azure.com'));
+
+  beforeEach(() => {
+    envBackup = Object.fromEntries(ENV_KEYS.map((k) => [k, process.env[k]]));
+    for (const k of ENV_KEYS) delete process.env[k];
+    process.env.GH_MODELS_PAT = 'test-pat';
+    // Sei id GitHub: prima della fix ogni scadenza della finestra ne rimetteva
+    // in gioco UNO, quindi la catena bastava a pagare un connect al minuto.
+    process.env.AI_MODELS_FORCE_CHAIN = 'gpt-4o-mini,gpt-4.1-mini,gpt-4o,gpt-4.1,o4-mini,phi-4';
+    fetchCalls = [];
+    realFetch = globalThis.fetch;
+    // Solo `Date`: i timer veri restano veri, cosi' il backoff e gli abort
+    // interni non vengono congelati da un orologio che non avanza da solo.
+    mock.timers.enable({ apis: ['Date'] });
+    resetState();
+  });
+
+  afterEach(() => {
+    mock.timers.reset();
+    globalThis.fetch = realFetch;
+    for (const k of ENV_KEYS) {
+      if (envBackup[k] === undefined) delete process.env[k];
+      else process.env[k] = envBackup[k];
+    }
+    resetState();
+  });
+
+  it('un host irraggiungibile non viene ri-diallato a ogni scadenza dei 60s', async () => {
+    globalThis.fetch = async (url) => {
+      fetchCalls.push(String(url));
+      throw undiciFetchFailed('ENOTFOUND');
+    };
+
+    await assert.rejects(() => callLLM([{ role: 'user', content: 'x' }], OPTS));
+    assert.equal(ghCalls().length, 1, `un solo connect atteso dalla prima chiamata, visti ${ghCalls().length}`);
+
+    // Cinque minuti di run, cioe' cinque scadenze della finestra da 60s, con
+    // una chiamata dopo ciascuna — la forma di un generatore che macina.
+    for (let minuto = 1; minuto <= 5; minuto++) {
+      mock.timers.tick(61_000);
+      await assert.rejects(() => callLLM([{ role: 'user', content: 'x' }], OPTS));
+    }
+
+    assert.equal(
+      ghCalls().length, 1,
+      `l'host morto va composto UNA volta per run, non a ogni scadenza: visti ${ghCalls().length} connect`,
+    );
+    assert.equal(
+      getStats().activeCooldowns.github, Infinity,
+      `il cooldown persistente non deve avere scadenza: ${JSON.stringify(getStats().activeCooldowns)}`,
+    );
+  });
+
+  it('un 429 continua a scadere dopo 60s — il ban lungo non si estende al transitorio', async () => {
+    globalThis.fetch = async (url) => {
+      if (!String(url).includes('models.inference.ai.azure.com')) throw undiciFetchFailed('ENOTFOUND');
+      fetchCalls.push(String(url));
+      return new Response('rate limit exceeded', { status: 429 });
+    };
+
+    await assert.rejects(() => callLLM([{ role: 'user', content: 'x' }], OPTS));
+    const primoGiro = ghCalls().length;
+    assert.ok(primoGiro >= 1, 'il primo giro deve aver chiamato l\'host');
+    assert.notEqual(
+      getStats().activeCooldowns.github, Infinity,
+      'un 429 non e\' un guasto persistente: la sua finestra deve restare finita',
+    );
+
+    mock.timers.tick(61_000);
+    await assert.rejects(() => callLLM([{ role: 'user', content: 'x' }], OPTS));
+
+    assert.ok(
+      ghCalls().length > primoGiro,
+      `scaduti i 60s il provider torna eleggibile: attesi piu' di ${primoGiro} connect, visti ${ghCalls().length}`,
+    );
   });
 });
