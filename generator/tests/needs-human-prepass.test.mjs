@@ -241,6 +241,22 @@ test('regressione site #7313/#7307: il verdetto batte il riconoscimento di famig
   assert.equal(prepassDecision({ title: 'Crawler Failure: Run zurich', verdict: 'pr-created' }).action, 'requeue');
 });
 
+test('il verdetto batte il requeue ma NON lo scorporo (🔴 della review di #778)', () => {
+  // La guardia stava PRIMA del ramo `isAggregate` e gli toglieva il `decompose`.
+  // E' l'opposto del criterio che la costante dichiara: lo scorporo CAMBIA
+  // l'input del fixer esattamente come la scheda dello sweep — e' il ramo che il
+  // drainer stesso sceglie su `max-turns` (DECOMPOSE-ROUTE). Un container di
+  // famiglia monitor con un verdetto catturato deve continuare a scorporarsi.
+  for (const v of ['max-turns', 'no-root-cause']) {
+    for (const t of [
+      'follow-up(#386): 3 items deferred — qualcosa',
+      'Workflow Failure: sweep dei crawler',
+    ]) {
+      assert.equal(prepassDecision({ title: t, verdict: v }).action, 'decompose', `${v} / ${t}`);
+    }
+  }
+});
+
 test('needsVerdictLookup: un titolo non riconosciuto lo paga, ed e\' giusto', () => {
   // E' l'unico caso in cui il verdetto puo' cambiare l'esito: senza la lettura,
   // un `blocked-secrets` superato resterebbe parcheggiato per sempre.

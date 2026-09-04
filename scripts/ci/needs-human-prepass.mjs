@@ -180,9 +180,14 @@ export function latestVerdict(comments) {
  * la lettura per loro renderebbe la guardia codice morto esattamente dove serve.
  *
  * Resta esente la sola famiglia owner-only: lì `prepassDecision` ritorna `keep`
- * PRIMA di guardare il verdetto, quindi la lettura non cambierebbe nulla. Il
- * costo aggiunto è una `gh api` per issue di famiglia monitor, dentro un cap di
- * 10 azioni per run.
+ * PRIMA di guardare il verdetto, quindi la lettura non cambierebbe nulla.
+ *
+ * Il costo aggiunto è una `gh api` PAGINATA sui commenti per ogni issue non
+ * owner-only della lista, fino al `--limit 300` di `main()` — e NON «dentro il
+ * cap di 10 azioni», che non c'entra: il lookup avviene per ogni issue prima di
+ * `prepassDecision`, e le decisioni `keep` fanno `continue` prima ancora che
+ * `acted >= MAX_PER_RUN` venga guardato. Il cap limita le MUTAZIONI, non le
+ * letture.
  *
  * @param {string} title
  * @returns {boolean} true se serve leggere i commenti
@@ -223,23 +228,6 @@ export function prepassDecision({ title = '', labels = [], verdict = null } = {}
     return { action: 'requeue', reason: `verdetto \`${verdict}\` superato dalla decisione del 2026-08-24 sui secret` };
   }
 
-  // Il verdetto batte il riconoscimento di famiglia. Questa guardia mancava del
-  // tutto su questa metà: il gemello sul sito ce l'ha dal #5608, dove il loop è
-  // stato misurato (`PostHog Exception:` → `no-root-cause` → re-accodo di questo
-  // pre-pass il giorno dopo → stesso verdetto, tre volte in tre run), e qui non
-  // è mai scesa perché il file è `adapted` e il drift check confronta soltanto
-  // gli `identical`. Senza, un'issue di famiglia monitor che il fixer ha già
-  // chiuso con un verdetto torna in coda a costo zero per riprodurlo.
-  //
-  // L'insieme è `NON_RETRYABLE` più `max-turns` (site #7313, escalation #7307).
-  // Il criterio non è «il verdetto è definitivo» ma «questo stadio sa cambiare
-  // qualcosa prima di rimettere in coda?»: il pre-pass non sa scrivere una
-  // scheda, quindi un ri-accodo sul solo titolo rifà la stessa run allo stesso
-  // costo. Lo sweep Claude una scheda la scrive, e resta la porta di rientro.
-  if (verdict && PREPASS_VERDICT_BEATS_FAMILY.has(verdict)) {
-    return { action: 'keep', reason: `verdetto \`${verdict}\` non ri-accodabile a costo zero: resta per il giudizio dello sweep settimanale` };
-  }
-
   const monitor = MONITOR_TITLE_PATTERNS.find((re) => re.test(title));
   if (!monitor) return { action: 'keep', reason: 'famiglia non riconosciuta: la valuta il run Claude' };
 
@@ -266,6 +254,29 @@ export function prepassDecision({ title = '', labels = [], verdict = null } = {}
   // rilevatore è importato invece che riscritto.
   if (isAggregate(title, '')) {
     return { action: 'decompose', reason: 'container multi-item generato da un monitor' };
+  }
+  // Il verdetto batte il riconoscimento di famiglia — ma SOLO il `requeue`, ed è
+  // per questo che sta qui sotto e non prima dello scorporo.
+  //
+  // Questa guardia non era mai scesa su questa metà: il gemello del sito ce l'ha
+  // dal #5608, dove il loop è stato misurato (`PostHog Exception:` →
+  // `no-root-cause` → re-accodo di questo pre-pass il giorno dopo → stesso
+  // verdetto, tre volte in tre run), e qui il file è `adapted`, che il drift
+  // check non confronta. Senza, un'issue di famiglia monitor già chiusa da un
+  // verdetto tornava in coda a costo zero per riprodurlo.
+  //
+  // L'insieme è `NON_RETRYABLE` più `max-turns` (site #7313, escalation #7307).
+  // Il criterio non è «il verdetto è definitivo» ma «questo stadio sa cambiare
+  // qualcosa prima di rimettere in coda?». Ed è esattamente il criterio che
+  // impone la POSIZIONE: lo scorporo qui sopra **cambia** l'input del fixer come
+  // lo cambia la scheda dello sweep — è il ramo che il drainer stesso sceglie su
+  // `max-turns` (DECOMPOSE-ROUTE) e che il commento sopra `isAggregate` chiama
+  // «il modo documentato di rifare max-turns» se lo si salta. Mettere la guardia
+  // prima gliela toglieva, trasformando in `keep` un container che aveva
+  // un'uscita buona (🔴 della review di questa PR). Qui sotto intercetta il solo
+  // ri-accodo intero, che è l'unica azione che non cambia niente.
+  if (verdict && PREPASS_VERDICT_BEATS_FAMILY.has(verdict)) {
+    return { action: 'keep', reason: `verdetto \`${verdict}\` non ri-accodabile a costo zero: resta per il giudizio dello sweep settimanale` };
   }
   return { action: 'requeue', reason: `famiglia di monitor riconosciuta (${monitor})` };
 }
