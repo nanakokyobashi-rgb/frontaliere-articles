@@ -21,8 +21,11 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { execFileSync } from 'node:child_process';
-import { mkdtempSync, rmSync, writeFileSync, mkdirSync, existsSync, readFileSync } from 'node:fs';
+import { mkdtempSync, writeFileSync, mkdirSync, existsSync, readFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
+// Non `rmSync` diretta: git scrive in `.git/` dopo l'uscita del comando e la
+// rimozione alza ENOTEMPTY. Il perche' e la misura stanno nel modulo.
+import { rmTempTree } from './rm-temp-tree.mjs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { backstop, findDuplicates, mergeSource } from '../../scripts/lib/merge-content-registry-conflict.mjs';
@@ -110,7 +113,7 @@ function makeWorld() {
     upstream,
     work,
     other,
-    cleanup: () => rmSync(root, { recursive: true, force: true }),
+    cleanup: () => rmTempTree(root),
   };
 }
 

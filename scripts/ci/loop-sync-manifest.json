@@ -2508,6 +2508,16 @@
       }
     },
     {
+      "path": "host/tests/shell-contract-env.mjs",
+      "mode": "corpus-only",
+      "reason": "Normalizzazione dell'ambiente per i due gate che pinnano SiteShellContract (issue #788): il digest degli scalari copre `cdnPreconnectHint`, che `host/constants.ts` deriva da `process.env.ASSET_CDN` a module-evaluation time, quindi senza azzerarlo il gate cross-repo dipende dall'ambiente del runner. Artefatto di questo lato: nessun omonimo sul sito.",
+      "baseline": {
+        "site": null,
+        "corpus": "3f851d3a1aff3783",
+        "alignedAt": "2026-09-04"
+      }
+    },
+    {
       "path": "host/tests/shell-contract-functions.golden.json",
       "sitePath": "tests/articles-shell-contract-functions.golden.json",
       "mode": "identical",
@@ -3220,6 +3230,16 @@
       "baseline": {
         "site": null,
         "corpus": "07d611cf1f969f74",
+        "alignedAt": "2026-09-04"
+      }
+    },
+    {
+      "path": "scripts/lib/cdn-asset-existence.mjs",
+      "mode": "corpus-only",
+      "reason": "Verifica di esistenza degli `/assets/` riscritti sul CDN dal fast-publish (issue #788). Solo qui: sul sito l'offload gira dentro il deploy che ha appena buildato e spinto `dist/assets`, quindi l'esistenza e' garantita dall'ordine; questo repo non builda nulla sotto `dist/assets` e riscrive riferimenti al bundle dell'ultimo deploy del sito.",
+      "baseline": {
+        "site": null,
+        "corpus": "fa051a94fac7eb5d",
         "alignedAt": "2026-09-04"
       }
     }
