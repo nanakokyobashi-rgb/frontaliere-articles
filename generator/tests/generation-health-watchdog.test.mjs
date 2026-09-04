@@ -1388,7 +1388,7 @@ describe('routing della fix: nessun body promette un mirror che non esiste', () 
     );
   });
 
-  test('ogni istruzione di routing su un file `identical` manda la fix su ENTRAMBI i repo', () => {
+  test('ogni istruzione di routing su un file sorvegliato manda la fix dove il `mode` dice', () => {
     // Formulata in POSITIVO di proposito. La versione ovvia — «nessun body
     // contiene "scende al mirror"» — si spegne da sola nel momento in cui la
     // riga viene riscritta: sparisce la stringa, sparisce il trigger, e il
@@ -1397,7 +1397,14 @@ describe('routing della fix: nessun body promette un mirror che non esiste', () 
     // presenza di un'istruzione di routing (il body nomina il manifest), che
     // non sparisce riscrivendo la frase, e l'asserzione è su cosa deve dire.
     const manifest = JSON.parse(fs.readFileSync(path.join(ROOT, 'scripts', 'ci', 'loop-sync-manifest.json'), 'utf-8'));
-    const identical = new Set(manifest.files.filter((f) => f.mode === 'identical').map((f) => f.path));
+    // `identical` E `adapted`: sono i due mode che un body puo' istradare, e
+    // l'errore ha una forma diversa per ciascuno. Guardare solo `identical`
+    // rendeva il trigger dipendente dal mode DI OGGI: il giorno in cui una
+    // voce passa ad `adapted` (issue #806 su `ai-models.mjs`) la finestra
+    // usciva dal conteggio e l'istruzione smetteva di essere guardata proprio
+    // mentre diventava piu' facile da sbagliare.
+    const modeOf = new Map(manifest.files.map((f) => [f.path, f.mode]));
+    const routed = (p) => (modeOf.get(p) === 'identical' || modeOf.get(p) === 'adapted') && !carriedByAMirror(p);
     const lines = source.split('\n');
     const offenders = [];
     let routingWindows = 0;
@@ -1408,11 +1415,21 @@ describe('routing della fix: nessun body promette un mirror che non esiste', () 
       const window = paragraphAround(lines, i);
       const named = [...window.matchAll(/`([A-Za-z0-9_@./-]+\.(?:mjs|ts|tsx))(?::[\d-]+)?`/g)]
         .map((m) => m[1])
-        .filter((p) => identical.has(p) && !carriedByAMirror(p));
+        .filter(routed);
       if (named.length === 0) continue;
       routingWindows += 1;
-      if (!/entrambi i repo/i.test(window)) {
-        offenders.push(`L${i + 1} (${named.join(', ')}): l'istruzione non dice di applicare la fix a ENTRAMBI i repo`);
+      const identicalNamed = named.filter((p) => modeOf.get(p) === 'identical');
+      const adaptedNamed = named.filter((p) => modeOf.get(p) === 'adapted');
+      if (identicalNamed.length > 0 && !/entrambi i repo/i.test(window)) {
+        offenders.push(`L${i + 1} (${identicalNamed.join(', ')}): l'istruzione non dice di applicare la fix a ENTRAMBI i repo`);
+      }
+      // Su un file `adapted` le due copie sono divergenti per costruzione:
+      // promettere una copia — via mirror o «copiabile cosi' com'e'» — manda
+      // a sovrascrivere codice che vive solo da un lato. E' precisamente il
+      // rischio di `ai-models.mjs`, la cui copia del sito non ha il breaker
+      // host-unreachable (#475, #767).
+      if (adaptedNamed.length > 0 && /copiabil|basta copiare|si copia/i.test(window)) {
+        offenders.push(`L${i + 1} (${adaptedNamed.join(', ')}): promette una copia su un file \`adapted\`, che diverge di proposito`);
       }
       if (/scende al\s*\n?\s*'?,?\s*'?mirror|scende al mirror/.test(window)) {
         offenders.push(`L${i + 1} (${named.join(', ')}): promette un trasporto via mirror che non esiste per quel path`);
@@ -1430,14 +1447,28 @@ describe('routing della fix: nessun body promette un mirror che non esiste', () 
     // servono due. Copre solo i path che il manifest conosce.
     const manifest = JSON.parse(fs.readFileSync(path.join(ROOT, 'scripts', 'ci', 'loop-sync-manifest.json'), 'utf-8'));
     const modeOf = new Map(manifest.files.map((f) => [f.path, f.mode]));
-    const offenders = [];
-    for (const m of source.matchAll(/`([A-Za-z0-9_@./-]+\.(?:mjs|ts|tsx))(?::[\d-]+)?`([^\n]{0,160})/g)) {
-      const declared = modeOf.get(m[1]);
-      if (!declared) continue;
-      const claimed = m[2].match(/`(identical|adapted|corpus-only|not-ported)`/);
-      if (claimed && claimed[1] !== declared) offenders.push(`${m[1]}: dichiarato \`${claimed[1]}\`, nel manifest è \`${declared}\``);
+    // Ogni claim di `mode` va appaiato al file citato PIÙ VICINO SOPRA di lui
+    // nello stesso paragrafo, non a una finestra di caratteri sulla stessa
+    // riga: i `body` sono array di stringhe una per riga del literal, quindi
+    // path e claim cadono quasi sempre su righe diverse — `ai-models.mjs` è
+    // citato a L1376 e il suo `mode` dichiarato a L1378 (dove fino a questa
+    // PR si leggeva `identical`). Il lookahead
+    // `[^\n]{0,160}` di prima non arrivava mai fin lì, e il test restava verde
+    // su una dichiarazione falsa. L'appaiamento posizionale regge anche i
+    // paragrafi che citano due file con `mode` diversi (L1209).
+    const lines = source.split('\n');
+    const TOKEN = /`([A-Za-z0-9_@./-]+\.(?:mjs|ts|tsx))(?::[\d-]+)?`|`(identical|adapted|corpus-only|not-ported)`/g;
+    const offenders = new Set();
+    for (let i = 0; i < lines.length; i += 1) {
+      if (!/`[A-Za-z0-9_@./-]+\.(?:mjs|ts|tsx)(?::[\d-]+)?`/.test(lines[i])) continue;
+      let cited = null;
+      for (const m of paragraphAround(lines, i).matchAll(TOKEN)) {
+        if (m[1]) { cited = m[1]; continue; }
+        const declared = cited && modeOf.get(cited);
+        if (declared && m[2] !== declared) offenders.add(`${cited}: dichiarato \`${m[2]}\`, nel manifest è \`${declared}\``);
+      }
     }
-    assert.deepEqual(offenders, []);
+    assert.deepEqual([...offenders], []);
   });
 });
 

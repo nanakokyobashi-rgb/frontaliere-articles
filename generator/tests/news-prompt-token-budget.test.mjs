@@ -477,7 +477,8 @@ test('la distanza news − evergreen resta quella dei tre blocchi noti', () => {
 
 test('IT_GENERATION_MAX_TOKENS non esclude nessun modello per output cap', () => {
   // MODEL_MAX_OUTPUT_TOKENS non e' esportato: si legge dal sorgente di
-  // ai-models.mjs, che e' `mode: identical` e va letto, mai scritto, da qui.
+  // ai-models.mjs, che questo test legge e non scrive mai. (Il `mode` della
+  // voce e' `adapted` dal 2026-09-04, issue #806: le due copie divergono.)
   const aiSrc = readFileSync(AI_MODELS_SRC, 'utf-8');
   const table = cut('const MODEL_MAX_OUTPUT_TOKENS = {', '\n};', { from: aiSrc });
   const limits = [...table.matchAll(/:\s*(\d+),/g)].map((m) => Number(m[1]));

@@ -1218,9 +1218,11 @@ let _claudeCliUnlimitedWarned = false;
  * tetto che c'era.
  *
  * NON e' stata cambiata in «0 = nessuna chiamata», per tre motivi:
- *   1. e' la convenzione gia' documentata e testata su questo file, che e'
- *      `mode: identical` col gemello del sito — invertirla di soppiatto qui
- *      renderebbe i due lati d'accordo sul testo e in disaccordo sui fatti;
+ *   1. e' la convenzione gia' documentata e testata su questo file, che dal
+ *      2026-09-04 e' `mode: adapted` col gemello del sito (issue #806) ma
+ *      condivide con lui QUESTA convenzione — invertirla di soppiatto qui
+ *      renderebbe i due lati d'accordo sul testo e in disaccordo sui fatti,
+ *      e la riapplicazione sul sito e' a mano, mai una copia sopra la sua;
  *   2. `0 = illimitato` e' la stessa convenzione degli altri cap del file, e
  *      spezzarla in un punto solo e' peggio che tenerla;
  *   3. spegnere Haiku ha gia' due leve vere (vedi il warn qui sotto), quindi
@@ -7033,8 +7035,9 @@ export async function callLLM(messages, opts = {}) {
       // muore col processo. Spegnere anche il cooldown farebbe pagare a un
       // chiamante diagnostico un connect morto per OGNI id fratello — cioe'
       // rinuncerebbe alla meta' di #475 che vale di piu' proprio nel caso d'uso
-      // che questo flag serve. Questo ramo non esiste sul gemello `identical`
-      // del sito (e' nato qui con #475): senza questa riga la discesa del flag
+      // che questo flag serve. Questo ramo non esiste sul gemello del sito
+      // (e' nato qui con #475, ed e' una delle ragioni per cui la voce e'
+      // `adapted` nel manifest dal 2026-09-04): senza questa riga la discesa del flag
       // lascerebbe scoperta l'unica scrittura al ledger che il corpus ha in piu'.
       if (!isTimeoutFailure && e.hostUnreachable && !_isHostUnreachableExempt(model)) {
         if (!markedExhausted && _shouldRecordScore(o)) {

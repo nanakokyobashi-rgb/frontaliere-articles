@@ -259,16 +259,17 @@ describe('cap di chiamate per-run — la domanda che la guardia del prompt deve 
     // run non supera le 40 chiamate.
     //
     // La convenzione NON e' stata invertita (vedi `_getClaudeCliMaxCallsPerRun`:
-    // e' condivisa col gemello `mode: identical` del sito e con gli altri cap
-    // del file). Al suo posto c'e' un warn-once, e questa riga che impedisce a
+    // e' condivisa col gemello del sito — `mode: adapted` dal 2026-09-04, issue
+    // #806, ma su QUESTO cap i due lati coincidono — e con gli altri cap del
+    // file). Al suo posto c'e' un warn-once, e questa riga che impedisce a
     // un futuro «sistemiamo 0 = spento» di passare per una svista.
     process.env.CLAUDE_CLI_MAX_CALLS_PER_RUN = '0';
     assert.equal(
       isPerRunCallCapReached(HAIKU), false,
       'con "0" il cap deve risultare DISATTIVATO. Se questa riga diventa true, '
       + 'la semantica e\' stata invertita qui e non sul gemello del sito: i due '
-      + 'lati di un file `identical` sarebbero d\'accordo sul testo e in '
-      + 'disaccordo sui fatti.',
+      + 'lati sarebbero d\'accordo sul testo e in disaccordo sui fatti, e la voce '
+      + 'e\' `adapted` (#806): sul sito si riapplica a mano, non si copia.',
     );
     // La leva che spegne davvero e' un'altra, ed e' quella sopra.
     process.env.AI_MODELS_PREFER = '';
