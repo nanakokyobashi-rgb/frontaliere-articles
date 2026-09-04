@@ -1471,6 +1471,52 @@ function _isLastResortProvider(modelId) {
   return p === PROVIDER.LOCAL || p === PROVIDER.CLAUDE_CLI || p === PROVIDER.OMNIROUTE;
 }
 
+/**
+ * True when a URL points at this machine. Hostname only — the port is
+ * irrelevant to the question, and IPv6 arrives bracketed from `URL`.
+ */
+function _isLoopbackUrl(url) {
+  let host;
+  try { host = new URL(url).hostname.toLowerCase(); } catch { return false; }
+  if (host.startsWith('[') && host.endsWith(']')) host = host.slice(1, -1);
+  return host === 'localhost' || host === '::1' || host === '0.0.0.0' || /^127\./.test(host);
+}
+
+/**
+ * ── L'ESENZIONE DAL BREAKER HOST-UNREACHABLE SI DECIDE SULL'ENDPOINT ────────
+ *
+ * `_isLastResortProvider` risponde a «questo provider ha una quota
+ * giornaliera?», ed e' la domanda giusta per il ban da 429 e da timeout. NON
+ * e' la domanda che il breaker di #475 pone. Quello chiede: «un connect
+ * rifiutato qui e' la prova che un host e' morto?» — e la risposta non dipende
+ * dal provider, dipende da CHI si sta chiamando (#781):
+ *
+ *   - `local/` e `omniroute/` puntano di default a 127.0.0.1 (:8080 e :20128).
+ *     Li' `ECONNREFUSED` significa «il server non e' in esecuzione su questo
+ *     runner», che e' lo stato NORMALE in CI, non un host morto. Bannare su
+ *     quello rende local/ inutilizzabile come ultima risorsa — la trappola di
+ *     nanako#362 / tests/local-llm-fallback — e scrive nel ledger Firestore
+ *     CONDIVISO un verdetto che descrive una macchina sola.
+ *   - Ma entrambi gli URL sono sovrascrivibili (`LOCAL_LLM_URL`,
+ *     `OMNIROUTE_URL`). Puntati a un host REMOTO, un connect morto e'
+ *     indistinguibile da quello di GitHub, e l'esenzione regalava proprio la
+ *     meta' di #475 che li' vale: il connect morto ripagato ad ogni giro.
+ *   - `claude-cli` non compone nessun numero: e' `spawn`. Un codice di connect
+ *     che emergesse da li' parlerebbe del processo, non di un host remoto,
+ *     quindi resta esente incondizionatamente (il suo breaker e' la tempesta
+ *     di timeout, `_claudeCliTimeoutStormDetected`).
+ *
+ * Restringere l'esenzione a «endpoint di loopback» tiene intatto tutto cio'
+ * che era load-bearing e toglie solo il caso che non lo e' mai stato.
+ */
+function _isHostUnreachableExempt(modelId) {
+  const p = getProvider(modelId);
+  if (p === PROVIDER.CLAUDE_CLI) return true;
+  if (p === PROVIDER.LOCAL) return _isLoopbackUrl(getLocalLlmUrl());
+  if (p === PROVIDER.OMNIROUTE) return _isLoopbackUrl(getOmniRouteUrl());
+  return false;
+}
+
 // Backward-compatible helpers (kept for external code)
 function isGitHubModel(model) { return getProvider(model) === PROVIDER.GITHUB; }
 function isGeminiModel(model) { return getProvider(model) === PROVIDER.GEMINI; }
@@ -4982,6 +5028,25 @@ async function _callGitHub(model, messages, opts) {
   }
   // Multi-PAT: try non-exhausted PATs first; if all are flagged exhausted this
   // run, fall back to trying them all again (a daily limit may have lifted).
+  //
+  // Nessun errore viene AGGREGATO fra PAT diversi, ed e' la ragione per cui il
+  // tag `hostUnreachable` che esce di qui e' un verdetto legittimo sull'host
+  // (#781). Due proprieta' lo reggono, e vanno tenute insieme:
+  //
+  //   1. solo `_isGhPatQuotaError` fa ruotare. Un errore di connessione cade
+  //      nel `throw err` e propaga NUDO l'errore di quel singolo tentativo:
+  //      chi lo classifica a valle vede un errore, non una somma.
+  //   2. `HOST_UNREACHABLE_CODES` contiene solo codici PRE-AUTENTICAZIONE
+  //      (DNS, SYN, routing) verso `GH_MODELS_BASE`, che e' una costante
+  //      identica per ogni PAT. Il PAT e' un header: non puo' cambiare l'esito
+  //      di una risoluzione o di un connect. Quindi «una sola identita' ha
+  //      fallito» e «l'host non risponde» non sono in conflitto — sono lo
+  //      stesso fatto, e ruotare gli altri PAT ripagherebbe N connect morti
+  //      verso lo stesso host, cioe' proprio il costo che #475 ha tolto.
+  //
+  // Se un giorno un codice IDENTITY-DEPENDENT entrasse in quell'insieme (o i
+  // PAT smettessero di condividere l'endpoint), il punto 2 cade e la rotazione
+  // andrebbe richiesta prima di armare il breaker.
   const fresh = pats.map((_, i) => i).filter((i) => !_ghExhaustedPats.has(i));
   const order = fresh.length ? fresh : pats.map((_, i) => i);
   let lastErr;
@@ -6694,11 +6759,15 @@ export async function callLLM(messages, opts = {}) {
       // cooldown is the existing 429 mechanism reused — bounded and in-process,
       // so a host that comes back is picked up again rather than banned.
       //
-      // `_isLastResortProvider` exemption is load-bearing, not symmetry:
-      // _callLocal talks to 127.0.0.1 and raises ECONNREFUSED whenever the
-      // local server simply isn't running, which is the NORMAL state on a CI
-      // runner. Banning on it would make local/ unusable as a last resort —
-      // the trap in nanako#362 / tests/local-llm-fallback.
+      // L'esenzione e' load-bearing, non simmetria: _callLocal parla con
+      // 127.0.0.1 e alza ECONNREFUSED ogni volta che il server locale non e'
+      // in esecuzione, che sul runner CI e' lo stato NORMALE. Bannare su
+      // quello renderebbe local/ inutilizzabile come ultima risorsa — la
+      // trappola di nanako#362 / tests/local-llm-fallback. Ma la condizione e'
+      // `_isHostUnreachableExempt` e NON `_isLastResortProvider` (#781): e' il
+      // loopback a rendere il connect rifiutato non-probante, non la classe
+      // last-resort. Con `LOCAL_LLM_URL`/`OMNIROUTE_URL` puntati a un host
+      // remoto la prova torna valida e il breaker deve scattare.
       //
       // Il gate `recordScore` copre SOLO il marchio, non il cooldown, e la
       // divisione e' deliberata: `markModelExhausted` scrive `_dirtyModels` e
@@ -6710,7 +6779,7 @@ export async function callLLM(messages, opts = {}) {
       // che questo flag serve. Questo ramo non esiste sul gemello `identical`
       // del sito (e' nato qui con #475): senza questa riga la discesa del flag
       // lascerebbe scoperta l'unica scrittura al ledger che il corpus ha in piu'.
-      if (!isTimeoutFailure && e.hostUnreachable && !_isLastResortProvider(model)) {
+      if (!isTimeoutFailure && e.hostUnreachable && !_isHostUnreachableExempt(model)) {
         if (!markedExhausted && o.recordScore !== false) {
           markModelExhausted(model, 'nonretryable', e.hostUnreachable);
           _stats.exhausted++;
