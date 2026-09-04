@@ -2259,7 +2259,7 @@
       "path": "host/constants.ts",
       "sitePath": "build-plugins/constants.ts",
       "mode": "adapted",
-      "reason": "Costanti del sito che l'engine legge via SiteShellContract. E' un ESTRATTO PER CHIUSURA di `build-plugins/constants.ts` (850 righe la': solo le ~15 dichiarazioni che il contratto raggiunge, 177 righe qui), quindi non potra' mai essere byte-identico e `adapted` e' il mode giusto. Per questa sola entry `scalarFingerprint` confronta i 21 scalari authoritative: cambiamenti del sorgente fuori dalla chiusura restano stable, ma un digest diverso, mancante, malformato o non dichiarato non puo' mai essere stable. I comportamenti del contratto restano coperti dai fingerprint test esistenti; `host/host-drift.test.mjs` non esiste e non e' una guardia.",
+      "reason": "Costanti del sito che l'engine legge via SiteShellContract. E' un ESTRATTO PER CHIUSURA di `build-plugins/constants.ts` (850 righe la': solo le ~15 dichiarazioni che il contratto raggiunge, 177 righe qui), quindi non potra' mai essere byte-identico e `adapted` e' il mode giusto. Per questa sola entry `scalarFingerprint` confronta i 22 scalari authoritative: cambiamenti del sorgente fuori dalla chiusura restano stable, ma un digest diverso, mancante, malformato o non dichiarato non puo' mai essere stable. I comportamenti del contratto restano coperti dai fingerprint test esistenti; `host/host-drift.test.mjs` non esiste e non e' una guardia.",
       "baseline": {
         "site": "8318a415439ca0d0",
         "corpus": "7c8c22b48ee255aa",
@@ -2268,8 +2268,8 @@
       "scalarFingerprint": {
         "sitePath": "tests/articles-shell-contract-fingerprint.json",
         "corpusPath": "host/shell-contract-fingerprint.json",
-        "scalarFields": 21,
-        "sha256": "5a25f79cdc8b61052b4f5d1840f7f99b529475d67ea1eaf677ae79ae62dae999"
+        "scalarFields": 22,
+        "sha256": "a8d61011f201bab590ebe2b4220429823048d6ccefe6a192fdd3ccbf95bc8bf7"
       }
     },
     {
@@ -2470,7 +2470,7 @@
     {
       "path": "host/shell-contract-fingerprint.json",
       "mode": "corpus-only",
-      "reason": "Impronta dei 41 membri di SiteShellContract, prodotta e verificata da `host/tests/shell-contract-fingerprint.test.mjs`. Artefatto di questo lato: e' il gate runtime che impedisce di spedire l'engine senza la sua meta' `host/`.",
+      "reason": "Impronta dei 42 membri di SiteShellContract, prodotta e verificata da `host/tests/shell-contract-fingerprint.test.mjs`. Artefatto di questo lato: e' il gate runtime che impedisce di spedire l'engine senza la sua meta' `host/`.",
       "baseline": {
         "site": null,
         "corpus": "2db6595933fc9e97",

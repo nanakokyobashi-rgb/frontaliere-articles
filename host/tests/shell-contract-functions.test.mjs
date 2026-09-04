@@ -1,6 +1,6 @@
 // Standing gate on the FUNCTION half of SiteShellContract.
 //
-// shell-contract-fingerprint.test.mjs pins the 21 scalar fields — the strings
+// shell-contract-fingerprint.test.mjs pins the 22 scalar fields — the strings
 // and numbers that render into every <head>. It cannot pin the functions:
 // `esc`, `rootShell`, `railGutters`, `WriteCollector`, `titleSuffix`,
 // `inlineScriptJson`, … are code, and a SHA over their source would fire on
