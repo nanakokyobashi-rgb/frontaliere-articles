@@ -50,7 +50,7 @@ export const JOBS_MAX_AGE_MS = 48 * HOUR_MS;
  * `date`) rather than on a producer timestamp; these two rules give the jobs
  * block the same property.
  */
-/** The newest history day may lag `todayIso` by at most this many days. */
+/** The newest CLOSED history day may lag `todayIso` by at most this many days. */
 export const JOBS_HISTORY_MAX_LAG_DAYS = 2;
 /** Counters compared field-for-field to detect a replayed (frozen) day. */
 const JOBS_HISTORY_COUNTERS = ['totalJobs', 'added', 'updated', 'removed'];
@@ -223,6 +223,14 @@ export function shapeExchange(doc, { todayIso } = {}) {
  * when the corpus has visibly stopped moving, or `null` when it has advanced
  * (or when the series carries too little signal to judge — in that case the
  * `generatedAt` guard remains the only one, as before).
+ *
+ * Only CLOSED days are read. The aggregator seeds a `history` row for the day
+ * in progress that mirrors the live partials in `totals`, so the raw tail of
+ * the series is always "today": comparing it against `todayIso` would make the
+ * lag rule inert, and comparing it field-for-field against a full day would put
+ * two non-homogeneous quantities side by side. Scoping to `date < todayIso` is
+ * the same idiom `windowFileNames` uses for the border-wait window, which ends
+ * the day BEFORE `todayIso` for this reason.
  */
 export function jobsCorpusFrozenReason(stats, { todayIso } = {}) {
   if (!todayIso) return null;
@@ -230,6 +238,7 @@ export function jobsCorpusFrozenReason(stats, { todayIso } = {}) {
   if (!Number.isFinite(todayMs)) return null;
   const rows = (Array.isArray(stats?.history) ? stats.history : [])
     .filter((h) => h && typeof h.date === 'string' && Number.isFinite(Date.parse(h.date)))
+    .filter((h) => h.date < todayIso)
     .sort((a, b) => a.date.localeCompare(b.date));
   if (rows.length === 0) return null;
 

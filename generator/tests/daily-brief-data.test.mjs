@@ -220,6 +220,56 @@ test('jobs: degrades on a day that replays the previous one field-for-field', ()
   assert.match(block.reason, /replays 2026-08-06/);
 });
 
+test('jobs: the live partial row for today is not read as a closed day', () => {
+  // The aggregator seeds a row for the day in progress mirroring `totals`.
+  // With that row in the tail, the lag rule would always measure 0 and the
+  // replay rule would compare a partial day against a full one.
+  const stopped = {
+    ...JOBS_STATS,
+    totals: { ...JOBS_STATS.totals, activeJobs: 22645, todayAdded: 12 },
+    history: [
+      { date: '2026-08-01', totalJobs: 22100, added: 512, updated: 21000, removed: 200 },
+      { date: '2026-08-04', totalJobs: 22645, added: 591, updated: 21500, removed: 210 },
+      { date: TODAY, totalJobs: 22645, added: 12, updated: 300, removed: 4 },
+    ],
+  };
+  const block = shapeJobs(stopped, { nowMs: NOW, todayIso: TODAY });
+  assert.equal(block.available, false);
+  assert.match(block.reason, /2026-08-04/);
+  assert.match(block.reason, /not advancing/);
+
+  // Symmetrically, a partial today that happens to carry over the previous
+  // day's counters is not a replay finding: the freeze is judged on closed days.
+  const carryOver = {
+    ...JOBS_STATS,
+    history: [
+      { date: '2026-08-06', totalJobs: 22352, added: 480, updated: 21900, removed: 228 },
+      { date: '2026-08-07', totalJobs: 22645, added: 591, updated: 22100, removed: 298 },
+      { date: TODAY, totalJobs: 22645, added: 591, updated: 22100, removed: 298 },
+    ],
+  };
+  assert.equal(shapeJobs(carryOver, { nowMs: NOW, todayIso: TODAY }).available, true);
+
+  // A series whose only row is today carries no closed day to judge: the
+  // `generatedAt` guard stays the only one, as before.
+  const todayOnly = { ...JOBS_STATS, history: [{ date: TODAY, totalJobs: 22645, added: 12, updated: 300, removed: 4 }] };
+  assert.equal(shapeJobs(todayOnly, { nowMs: NOW, todayIso: TODAY }).available, true);
+});
+
+test('jobs: a replayed pair of closed days is still caught behind a partial today', () => {
+  const replayedBehindToday = {
+    ...JOBS_STATS,
+    history: [
+      { date: '2026-08-06', totalJobs: 22943, added: 33, updated: 22557, removed: 3 },
+      { date: '2026-08-07', totalJobs: 22943, added: 33, updated: 22557, removed: 3 },
+      { date: TODAY, totalJobs: 22943, added: 5, updated: 900, removed: 1 },
+    ],
+  };
+  const block = shapeJobs(replayedBehindToday, { nowMs: NOW, todayIso: TODAY });
+  assert.equal(block.available, false);
+  assert.match(block.reason, /replays 2026-08-06/);
+});
+
 test('jobs: a moving corpus and a series without counters both stay available', () => {
   const moving = {
     ...JOBS_STATS,
