@@ -1474,14 +1474,103 @@ function _isLastResortProvider(modelId) {
 }
 
 /**
+ * True when a literal address/name denotes THIS machine. Two families, and
+ * the second is the one #813 was opened about:
+ *
+ *   - loopback in every shape it actually arrives in. `URL` brackets IPv6, a
+ *     link-local address can carry a `%zone` suffix, undici hands back the
+ *     resolved literal (so `::ffff:127.0.0.1`, the IPv4-mapped form, is a real
+ *     input), and RFC 6761 reserves `localhost` AND everything under it —
+ *     `llm.localhost` is required to resolve to the loopback, so reading only
+ *     the exact string `localhost` misses a name the RFC guarantees.
+ *     `0.0.0.0`/`::` are the unspecified address: dialled, they mean "here".
+ *   - same machine WITHOUT being loopback: a self-hosted runner reaching its
+ *     own LAN/Tailscale address, or `host.docker.internal` from a container.
+ *     `PROVIDER.LOCAL` is documented as "the CI runner or a self-hosted VM",
+ *     and on a VM the local server is routinely addressed by an interface IP.
+ *     There ECONNREFUSED still means «the server is not running», which is the
+ *     normal state local/ exists to survive — not a dead remote host.
+ */
+function _isSameMachineHost(host) {
+  if (typeof host !== 'string' || !host) return false;
+  let h = host.trim().toLowerCase();
+  if (h.startsWith('[') && h.endsWith(']')) h = h.slice(1, -1);
+  const zone = h.indexOf('%');            // fe80::1%eth0 — the zone is not part of the address
+  if (zone !== -1) h = h.slice(0, zone);
+  // IPv4-mapped / IPv4-compatible IPv6: ::ffff:127.0.0.1, ::ffff:0:127.0.0.1
+  const mapped = /^::(?:ffff:(?:0{1,4}:)?)?(\d{1,3}(?:\.\d{1,3}){3})$/.exec(h);
+  if (mapped) h = mapped[1];
+  if (/^127\./.test(h) || h === '::1' || h === '::' || h === '0.0.0.0') return true;
+  if (h === 'localhost' || h.endsWith('.localhost')) return true;
+  if (h === 'host.docker.internal' || h === 'gateway.docker.internal') return true;
+  return _ownAddresses().has(h);
+}
+
+/**
+ * This process's own interface addresses, read once. `node:os` is pulled with
+ * `process.getBuiltinModule` because this module deliberately has no top-level
+ * imports; a failure here degrades to "no extra addresses", never throws.
+ * @type {Set<string>|null}
+ */
+let _ownAddressCache = null;
+function _ownAddresses() {
+  if (_ownAddressCache) return _ownAddressCache;
+  const out = new Set();
+  try {
+    const os = process.getBuiltinModule?.('node:os');
+    for (const list of Object.values(os?.networkInterfaces?.() || {})) {
+      for (const iface of list || []) {
+        if (iface?.address) out.add(String(iface.address).toLowerCase().split('%')[0]);
+      }
+    }
+    const hostname = os?.hostname?.();
+    if (hostname) out.add(String(hostname).toLowerCase());
+  } catch { /* no interfaces readable — loopback literals still cover CI */ }
+  _ownAddressCache = out;
+  return out;
+}
+
+/**
  * True when a URL points at this machine. Hostname only — the port is
- * irrelevant to the question, and IPv6 arrives bracketed from `URL`.
+ * irrelevant to the question.
  */
 function _isLoopbackUrl(url) {
-  let host;
-  try { host = new URL(url).hostname.toLowerCase(); } catch { return false; }
-  if (host.startsWith('[') && host.endsWith(']')) host = host.slice(1, -1);
-  return host === 'localhost' || host === '::1' || host === '0.0.0.0' || /^127\./.test(host);
+  try { return _isSameMachineHost(new URL(url).hostname); } catch { return false; }
+}
+
+/**
+ * ── IL VERDETTO SI DA' SUL SOCKET APERTO, NON SULLA STRINGA CONFIGURATA ────
+ *
+ * `_isHostUnreachableExempt` giudicava l'URL di configurazione, ma il connect
+ * rifiutato puo' venire da tutt'altro peer: `fetch` puo' passare per un proxy
+ * d'ambiente, e allora `ECONNREFUSED 127.0.0.1:3128` e' il proxy locale che
+ * non gira — non l'host remoto, che nessuno ha mai contattato (#813). Bannare
+ * li' scrive «host morto» nel ledger CONDIVISO su un endpoint sano.
+ *
+ * L'errore lo dice: undici mette `address`/`port` del tentativo di connect
+ * nella catena delle cause. Quando l'indirizzo rifiutato e' questa macchina,
+ * il connect descrive questa macchina — qualunque cosa dica l'URL.
+ *
+ * @returns {boolean} true se il peer rifiutato e' locale; false se l'errore
+ *   non porta indirizzi (mock, spawn, DNS fallito prima del connect).
+ */
+function _refusedPeerIsLocal(err) {
+  return _walkErrorChain(err, (e) => (
+    typeof e.address === 'string' && _isSameMachineHost(e.address) ? true : null
+  )) === true;
+}
+
+/**
+ * True quando l'ambiente instrada le richieste HTTP attraverso un proxy. Con
+ * un proxy in mezzo NESSUN codice di connect parla dell'host di destinazione,
+ * quindi non c'e' niente da bannare (#813). `NO_PROXY=*` e' il caso in cui la
+ * variabile e' impostata ma non intercetta nulla, e va escluso: altrimenti la
+ * sola presenza della variabile spegnerebbe il breaker di #475.
+ */
+function _envProxyMayIntercept() {
+  const pick = (n) => (process.env[n] || process.env[n.toLowerCase()] || '').trim();
+  if (!pick('ALL_PROXY') && !pick('HTTPS_PROXY') && !pick('HTTP_PROXY')) return false;
+  return pick('NO_PROXY') !== '*';
 }
 
 /**
@@ -1511,9 +1600,16 @@ function _isLoopbackUrl(url) {
  * Restringere l'esenzione a «endpoint di loopback» tiene intatto tutto cio'
  * che era load-bearing e toglie solo il caso che non lo e' mai stato.
  */
-function _isHostUnreachableExempt(modelId) {
+function _isHostUnreachableExempt(modelId, err) {
   const p = getProvider(modelId);
   if (p === PROVIDER.CLAUDE_CLI) return true;
+  // #813 — cio' che si giudica e' il SOCKET, non la stringa di configurazione,
+  // e vale per OGNI provider: un connect rifiutato da un proxy locale, o da un
+  // qualunque peer su questa macchina, non e' una prova sull'host di
+  // destinazione. Con un proxy d'ambiente attivo non lo e' nemmeno quando
+  // l'errore non porta indirizzi, perche' il peer contattato non e' l'host.
+  if (_refusedPeerIsLocal(err)) return true;
+  if (_envProxyMayIntercept()) return true;
   if (p === PROVIDER.LOCAL) return _isLoopbackUrl(getLocalLlmUrl());
   if (p === PROVIDER.OMNIROUTE) return _isLoopbackUrl(getOmniRouteUrl());
   return false;
@@ -4399,21 +4495,44 @@ const RESOLVER_FLAP_ESCALATION = 3;
 /** @type {Map<string, number>} provider → consecutive resolver flaps */
 const _resolverFlaps = new Map();
 
-export function classifyHostUnreachable(err) {
+/**
+ * Walk an error's `cause` chain and `AggregateError.errors` (undici wraps the
+ * syscall two levels down, and hands back an AggregateError when DNS returned
+ * several addresses), returning the first non-null value `pick` produces.
+ * Depth- and cycle-bounded: a self-referential chain must not hang the run.
+ *
+ * UNA sola implementazione della camminata (AGENTS.md #6): le tre domande che
+ * la usano — il codice unreachable, il flap del resolver, l'indirizzo del peer
+ * rifiutato — differiscono solo per `pick`, e tre copie della ricorsione
+ * significherebbero tre posti dove correggere il prossimo incapsulamento.
+ *
+ * @template T
+ * @param {unknown} err
+ * @param {(e: any) => T|null} pick
+ * @returns {T|null}
+ */
+function _walkErrorChain(err, pick) {
   const seen = new Set();
   const walk = (e, depth) => {
     if (!e || typeof e !== 'object' || depth > 4 || seen.has(e)) return null;
     seen.add(e);
-    if (typeof e.code === 'string' && HOST_UNREACHABLE_CODES.has(e.code)) return e.code;
+    const hit = pick(e);
+    if (hit !== null && hit !== undefined) return hit;
     if (Array.isArray(e.errors)) {
       for (const sub of e.errors) {
-        const hit = walk(sub, depth + 1);
-        if (hit) return hit;
+        const found = walk(sub, depth + 1);
+        if (found !== null && found !== undefined) return found;
       }
     }
     return walk(e.cause, depth + 1);
   };
   return walk(err, 0);
+}
+
+export function classifyHostUnreachable(err) {
+  return _walkErrorChain(err, (e) => (
+    typeof e.code === 'string' && HOST_UNREACHABLE_CODES.has(e.code) ? e.code : null
+  ));
 }
 
 /**
@@ -4425,20 +4544,9 @@ export function classifyHostUnreachable(err) {
  * @returns {string|null} the syscall code (for the log/escalation reason), or null.
  */
 export function classifyTransientResolver(err) {
-  const seen = new Set();
-  const walk = (e, depth) => {
-    if (!e || typeof e !== 'object' || depth > 4 || seen.has(e)) return null;
-    seen.add(e);
-    if (typeof e.code === 'string' && TRANSIENT_RESOLVER_CODES.has(e.code)) return e.code;
-    if (Array.isArray(e.errors)) {
-      for (const sub of e.errors) {
-        const hit = walk(sub, depth + 1);
-        if (hit) return hit;
-      }
-    }
-    return walk(e.cause, depth + 1);
-  };
-  return walk(err, 0);
+  return _walkErrorChain(err, (e) => (
+    typeof e.code === 'string' && TRANSIENT_RESOLVER_CODES.has(e.code) ? e.code : null
+  ));
 }
 
 /**
@@ -6950,7 +7058,19 @@ export async function callLLM(messages, opts = {}) {
         if (flapCode) {
           const flaps = (_resolverFlaps.get(provider) || 0) + 1;
           _resolverFlaps.set(provider, flaps);
-          if (flaps >= RESOLVER_FLAP_ESCALATION) {
+          // #813 — l'escalation NON si applica ai provider di ultima risorsa.
+          // Il flap e' una prova che il codice stesso definisce transitoria, e
+          // promuoverla qui manda `local/`/`omniroute/` — cioe' l'ultima riga
+          // della catena, quella che esiste per la finestra «tutti gli altri
+          // esauriti» — nel ramo ban + cooldown su tre inciampi del resolver.
+          // Il loro URL e' per-macchina e sovrascrivibile (LOCAL_LLM_URL,
+          // OMNIROUTE_URL): un nome DNS che non risolve per un attimo li' costa
+          // la run intera a zero articoli invece che degradata. Il contatore
+          // continua a salire — resta visibile in `getStats().resolverFlaps` —
+          // ma la conseguenza no.
+          if (flaps >= RESOLVER_FLAP_ESCALATION && _isLastResortProvider(model)) {
+            console.warn(`🔁 [${model}] ${flaps} consecutive resolver failures (${flapCode}) on ${provider} — last-resort provider: still retryable, no ban and no provider cooldown`);
+          } else if (flaps >= RESOLVER_FLAP_ESCALATION) {
             e.hostUnreachable = flapCode;
             console.warn(`🚫 [${model}] ${flaps} consecutive resolver failures (${flapCode}) on ${provider} — no longer treating it as a hiccup`);
           } else {
@@ -7039,7 +7159,7 @@ export async function callLLM(messages, opts = {}) {
       // (e' nato qui con #475, ed e' una delle ragioni per cui la voce e'
       // `adapted` nel manifest dal 2026-09-04): senza questa riga la discesa del flag
       // lascerebbe scoperta l'unica scrittura al ledger che il corpus ha in piu'.
-      if (!isTimeoutFailure && e.hostUnreachable && !_isHostUnreachableExempt(model)) {
+      if (!isTimeoutFailure && e.hostUnreachable && !_isHostUnreachableExempt(model, e)) {
         if (!markedExhausted && _shouldRecordScore(o)) {
           markModelExhausted(model, 'nonretryable', e.hostUnreachable);
           _stats.exhausted++;
