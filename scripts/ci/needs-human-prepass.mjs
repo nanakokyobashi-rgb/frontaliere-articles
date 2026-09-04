@@ -75,6 +75,10 @@ import { isAggregate } from './check-issue-already-resolved.mjs';
 // Il marker di verdetto ha UNA definizione, non una quinta copia: vedi il punto
 // 4 dell'intestazione.
 import { FIX_OUTCOME_RE } from './close-recovered-failure-issues.mjs';
+// Stessa ragione: l'insieme dei verdetti che questo stadio non può ri-accodare
+// da solo vive in UN posto, `followup-drainer.mjs`, che possiede la semantica
+// dei verdetti. Importarlo tiene le due letture allineate per costruzione.
+import { PREPASS_VERDICT_BEATS_FAMILY } from './followup-drainer.mjs';
 
 const REPO = process.env.GH_REPO || process.env.GITHUB_REPOSITORY || '';
 const DRY = process.argv.includes('--dry-run');
@@ -164,16 +168,32 @@ export function latestVerdict(comments) {
  * Il verdetto va letto (una `gh api` per issue) oppure il titolo decide da solo?
  *
  * Pura, così il risparmio è verificabile invece che dedotto dal codice di
- * `main()`. Il verdetto conta SOLO nel ramo `STALE_BLOCK_VERDICTS`, che
- * `prepassDecision` valuta dopo aver già scartato le due famiglie riconosciute
- * sul titolo: pagarlo per quelle è una chiamata buttata.
+ * `main()`.
+ *
+ * **La famiglia monitor non è più esente**, e senza questa riga il resto della
+ * fix non esisterebbe: fino a oggi il verdetto contava solo nel ramo
+ * `STALE_BLOCK_VERDICTS`, che `prepassDecision` valuta dopo aver scartato le due
+ * famiglie riconosciute sul titolo, quindi pagarlo per quelle era una chiamata
+ * buttata. Ora c'è il ramo `PREPASS_VERDICT_BEATS_FAMILY`, che si applica
+ * **proprio** ai titoli di famiglia — è il caso che ha prodotto il loop misurato
+ * sul sito (`Crawler Failure: Run zurich`/`Run volg`, escalation #7307). Saltare
+ * la lettura per loro renderebbe la guardia codice morto esattamente dove serve.
+ *
+ * Resta esente la sola famiglia owner-only: lì `prepassDecision` ritorna `keep`
+ * PRIMA di guardare il verdetto, quindi la lettura non cambierebbe nulla.
+ *
+ * Il costo aggiunto è una `gh api` PAGINATA sui commenti per ogni issue non
+ * owner-only della lista, fino al `--limit 300` di `main()` — e NON «dentro il
+ * cap di 10 azioni», che non c'entra: il lookup avviene per ogni issue prima di
+ * `prepassDecision`, e le decisioni `keep` fanno `continue` prima ancora che
+ * `acted >= MAX_PER_RUN` venga guardato. Il cap limita le MUTAZIONI, non le
+ * letture.
  *
  * @param {string} title
  * @returns {boolean} true se serve leggere i commenti
  */
 export function needsVerdictLookup(title = '') {
-  return !MONITOR_TITLE_PATTERNS.some((re) => re.test(title))
-    && !OWNER_ONLY_TITLE_PATTERNS.some((re) => re.test(title));
+  return !OWNER_ONLY_TITLE_PATTERNS.some((re) => re.test(title));
 }
 
 /**
@@ -235,6 +255,29 @@ export function prepassDecision({ title = '', labels = [], verdict = null } = {}
   if (isAggregate(title, '')) {
     return { action: 'decompose', reason: 'container multi-item generato da un monitor' };
   }
+  // Il verdetto batte il riconoscimento di famiglia — ma SOLO il `requeue`, ed è
+  // per questo che sta qui sotto e non prima dello scorporo.
+  //
+  // Questa guardia non era mai scesa su questa metà: il gemello del sito ce l'ha
+  // dal #5608, dove il loop è stato misurato (`PostHog Exception:` →
+  // `no-root-cause` → re-accodo di questo pre-pass il giorno dopo → stesso
+  // verdetto, tre volte in tre run), e qui il file è `adapted`, che il drift
+  // check non confronta. Senza, un'issue di famiglia monitor già chiusa da un
+  // verdetto tornava in coda a costo zero per riprodurlo.
+  //
+  // L'insieme è `NON_RETRYABLE` più `max-turns` (site #7313, escalation #7307).
+  // Il criterio non è «il verdetto è definitivo» ma «questo stadio sa cambiare
+  // qualcosa prima di rimettere in coda?». Ed è esattamente il criterio che
+  // impone la POSIZIONE: lo scorporo qui sopra **cambia** l'input del fixer come
+  // lo cambia la scheda dello sweep — è il ramo che il drainer stesso sceglie su
+  // `max-turns` (DECOMPOSE-ROUTE) e che il commento sopra `isAggregate` chiama
+  // «il modo documentato di rifare max-turns» se lo si salta. Mettere la guardia
+  // prima gliela toglieva, trasformando in `keep` un container che aveva
+  // un'uscita buona (🔴 della review di questa PR). Qui sotto intercetta il solo
+  // ri-accodo intero, che è l'unica azione che non cambia niente.
+  if (verdict && PREPASS_VERDICT_BEATS_FAMILY.has(verdict)) {
+    return { action: 'keep', reason: `verdetto \`${verdict}\` non ri-accodabile a costo zero: resta per il giudizio dello sweep settimanale` };
+  }
   return { action: 'requeue', reason: `famiglia di monitor riconosciuta (${monitor})` };
 }
 
@@ -263,8 +306,8 @@ function main() {
   let acted = 0;
   for (const iss of ordered) {
     const labels = (iss.labels || []).map((l) => l.name);
-    // Il verdetto costa una lettura: si paga SOLO quando il titolo non basta,
-    // cioè quando né la famiglia di monitor né quella owner-only lo decidono.
+    // Il verdetto costa una lettura: si paga per tutte tranne la famiglia
+    // owner-only, l'unica che `prepassDecision` decide prima di guardarlo.
     let verdict = null;
     if (needsVerdictLookup(iss.title)) {
       try {
