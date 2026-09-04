@@ -136,7 +136,11 @@ export function shapeBorderWait(docs, { nowMs = Date.now() } = {}) {
   const rows = [];
   let newestMs = 0;
   for (const d of docs) {
-    const wait = Number(d?.waitTimeMinutes);
+    // `decodeValue` returns null both for `nullValue` and for any Firestore
+    // type it does not handle, and `Number(null)` is a finite 0: a crossing
+    // with no reading would pass the filter below as a real 0-minute wait,
+    // inflate `zeroWaitCount` and count toward the minimum-crossings gate.
+    const wait = toFiniteNumber(d?.waitTimeMinutes);
     const updatedMs = Date.parse(d?.lastUpdate || '');
     if (!Number.isFinite(wait) || wait < 0) continue;
     if (!Number.isFinite(updatedMs) || nowMs - updatedMs > BORDER_WAIT_DOC_MAX_AGE_MS) continue;
@@ -237,8 +241,10 @@ export function shapeExchange(doc, { todayIso } = {}) {
     return unavailable(`${nonCanonical.length} exchange point(s) carry a date that is not YYYY-MM-DD (first: ${sample})`);
   }
   const points = rawPoints
-    .filter((p) => p && Number.isFinite(Number(p.rate)))
-    .map((p) => ({ date: p.date, rate: Number(p.rate) }))
+    // Same coercion rule as the border-wait block: a point the producer emits
+    // with a null rate must not read as a rate of 0.
+    .map((p) => ({ date: p?.date, rate: toFiniteNumber(p?.rate) }))
+    .filter((p) => Number.isFinite(p.rate))
     .sort((a, b) => a.date.localeCompare(b.date));
   if (points.length < 2) return unavailable(`only ${points.length} exchange points`);
   const last = points[points.length - 1];

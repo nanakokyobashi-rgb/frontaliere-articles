@@ -88,6 +88,24 @@ test('borderWait: degrades when even the newest update is too old', () => {
   assert.match(block.reason, /newest crossing update/);
 });
 
+test('borderWait: a crossing with no reading is dropped, not counted as a 0-minute wait', () => {
+  // `decodeValue` maps both `nullValue` and any unhandled Firestore type to
+  // null, and `Number(null)` is a finite 0 — the row would enter `crossings[]`
+  // as a real zero wait and count toward the minimum-crossings gate.
+  const docs = manyCrossings(BORDER_WAIT_MIN_CROSSINGS + 4);
+  for (let i = 0; i < 5; i++) docs[i].waitTimeMinutes = null;
+  const withNulls = shapeBorderWait(docs, { nowMs: NOW });
+  assert.equal(withNulls.available, false);
+  assert.match(withNulls.reason, new RegExp(`only ${BORDER_WAIT_MIN_CROSSINGS - 1} fresh crossings`));
+
+  const one = manyCrossings(BORDER_WAIT_MIN_CROSSINGS + 1);
+  one[1].waitTimeMinutes = null;
+  const block = shapeBorderWait(one, { nowMs: NOW });
+  assert.equal(block.available, true);
+  assert.equal(block.count, BORDER_WAIT_MIN_CROSSINGS);
+  assert.equal(block.crossings.some((c) => c.slug === one[1].slug), false);
+});
+
 // ---------------------------------------------------------------- fuel
 
 const FUEL_META = {
@@ -166,6 +184,21 @@ test('exchange: a non-canonical point date degrades instead of being dropped', (
   const block = shapeExchange(doc, { todayIso: TODAY });
   assert.equal(block.available, false);
   assert.match(block.reason, /not YYYY-MM-DD/);
+});
+
+test('exchange: a point with a null rate is dropped, not read as a rate of 0', () => {
+  const doc = {
+    points: [
+      { date: '2026-08-01', rate: 1.064 },
+      { date: '2026-08-07', rate: null },
+      { date: '2026-08-08', rate: 1.0695 },
+    ],
+  };
+  const block = shapeExchange(doc, { todayIso: TODAY });
+  assert.equal(block.available, true);
+  assert.equal(block.pointCount, 2);
+  assert.equal(block.prevRate, 1.064);
+  assert.equal(block.prevDate, '2026-08-01');
 });
 
 // ---------------------------------------------------------------- jobs
