@@ -4047,11 +4047,12 @@ export function isQuotaExhaustedError(err) {
  * 000 is NOT, and it costs strictly more than the 404 it replaced, because a
  * connect failure re-enters the retry loop where a 404 short-circuits it.
  *
- * Deliberately narrow. Only connection-ESTABLISHMENT codes are listed:
- * ECONNRESET / EPIPE (mid-stream drops) and socket timeouts stay retryable,
- * because those are transient on a host that is otherwise up, and the timeout
- * branch already owns the hang case. Widening this set trades a real retry
- * for a false ban.
+ * Deliberately narrow. Only connection-ESTABLISHMENT codes that are
+ * AUTHORITATIVE about the host are listed: ECONNRESET / EPIPE (mid-stream
+ * drops), socket timeouts and EAI_AGAIN (the resolver's own «try again»,
+ * #770 — see TRANSIENT_RESOLVER_CODES below) stay retryable, because those are
+ * transient on a host that is otherwise up, and the timeout branch already
+ * owns the hang case. Widening this set trades a real retry for a false ban.
  *
  * undici wraps the cause one or two levels down and, for a multi-address DNS
  * result, as an AggregateError, so the walk below is not defensive padding —
