@@ -1447,14 +1447,33 @@ describe('routing della fix: nessun body promette un mirror che non esiste', () 
     // servono due. Copre solo i path che il manifest conosce.
     const manifest = JSON.parse(fs.readFileSync(path.join(ROOT, 'scripts', 'ci', 'loop-sync-manifest.json'), 'utf-8'));
     const modeOf = new Map(manifest.files.map((f) => [f.path, f.mode]));
-    const offenders = [];
-    for (const m of source.matchAll(/`([A-Za-z0-9_@./-]+\.(?:mjs|ts|tsx))(?::[\d-]+)?`([^\n]{0,160})/g)) {
-      const declared = modeOf.get(m[1]);
-      if (!declared) continue;
-      const claimed = m[2].match(/`(identical|adapted|corpus-only|not-ported)`/);
-      if (claimed && claimed[1] !== declared) offenders.push(`${m[1]}: dichiarato \`${claimed[1]}\`, nel manifest è \`${declared}\``);
+    // Il testo da guardare è il PARAGRAFO, non la riga: i `body` sono array di
+    // stringhe una per riga del literal, quindi il path e il `mode` che gli si
+    // attribuisce cadono quasi sempre su righe diverse (era il caso di
+    // `ai-models.mjs`, citato a L1376 e dichiarato `identical` a L1378). Con un
+    // lookahead vincolato alla riga il claim non veniva mai confrontato col
+    // manifest e il test restava verde su una dichiarazione falsa.
+    // Ogni claim di `mode` va appaiato al file citato PIÙ VICINO SOPRA di lui
+    // nello stesso paragrafo, non a una finestra di caratteri sulla stessa
+    // riga: i `body` sono array di stringhe una per riga del literal, quindi
+    // path e claim cadono quasi sempre su righe diverse — `ai-models.mjs` è
+    // citato a L1376 e il suo `mode` dichiarato a L1378. Il lookahead
+    // `[^\n]{0,160}` di prima non arrivava mai fin lì, e il test restava verde
+    // su una dichiarazione falsa. L'appaiamento posizionale regge anche i
+    // paragrafi che citano due file con `mode` diversi (L1209).
+    const lines = source.split('\n');
+    const TOKEN = /`([A-Za-z0-9_@./-]+\.(?:mjs|ts|tsx))(?::[\d-]+)?`|`(identical|adapted|corpus-only|not-ported)`/g;
+    const offenders = new Set();
+    for (let i = 0; i < lines.length; i += 1) {
+      if (!/`[A-Za-z0-9_@./-]+\.(?:mjs|ts|tsx)(?::[\d-]+)?`/.test(lines[i])) continue;
+      let cited = null;
+      for (const m of paragraphAround(lines, i).matchAll(TOKEN)) {
+        if (m[1]) { cited = m[1]; continue; }
+        const declared = cited && modeOf.get(cited);
+        if (declared && m[2] !== declared) offenders.add(`${cited}: dichiarato \`${m[2]}\`, nel manifest è \`${declared}\``);
+      }
     }
-    assert.deepEqual(offenders, []);
+    assert.deepEqual([...offenders], []);
   });
 });
 

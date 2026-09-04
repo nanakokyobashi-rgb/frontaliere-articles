@@ -23,8 +23,9 @@
  *      il test una misura e non una tautologia — senza questo caso, un
  *      `recordScore` che spegnesse TUTTO passerebbe il punto 1 comunque;
  *   3. il ramo host-irraggiungibile di #475 e' coperto quanto gli altri.
- *      Esiste solo in questo repo (il gemello `identical` del sito non ce
- *      l'ha), quindi la discesa 1:1 del flag dal sito lo lasciava scoperto:
+ *      Esiste solo in questo repo (il gemello del sito non ce l'ha: e' una
+ *      delle ragioni per cui la voce e' `adapted` nel manifest dal 2026-09-04,
+ *      issue #806), quindi la discesa 1:1 del flag dal sito lo lasciava scoperto:
  *      `markModelExhausted` scrive `_dirtyModels` come `recordModelFailure`.
  *      Il cooldown del provider, che invece e' in-processo, resta attivo — la
  *      meta' di #475 che risparmia un connect morto per id fratello serve
