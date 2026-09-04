@@ -28,9 +28,10 @@
  *   2. un host irraggiungibile costa UN tentativo, non `maxRetriesPerModel`;
  *   3. i modelli FRATELLI dello stesso host non pagano ciascuno il proprio
  *      connect morto — il provider va in cooldown;
- *   4. ECONNRESET e i timeout restano ritentabili. E' il confine che rende la
- *      regola sicura: un reset a meta' stream e' transitorio su un host vivo,
- *      e allargare l'insieme scambierebbe un retry legittimo per un ban.
+ *   4. ECONNRESET, i timeout e `EAI_AGAIN` (#770) restano ritentabili. E' il
+ *      confine che rende la regola sicura: un reset a meta' stream e' transitorio
+ *      su un host vivo, e allargare l'insieme scambierebbe un retry legittimo
+ *      per un ban.
  */
 
 import { strict as assert } from 'node:assert';
@@ -38,6 +39,7 @@ import { describe, it, beforeEach, afterEach } from 'node:test';
 
 import {
   classifyHostUnreachable,
+  classifyTransientResolver,
   callLLM,
   getStats,
   resetState,
@@ -64,7 +66,6 @@ describe('classifyHostUnreachable', () => {
   it('riconosce i codici di connessione attraverso il wrapping di undici', () => {
     assert.equal(classifyHostUnreachable(undiciFetchFailed('ENOTFOUND')), 'ENOTFOUND');
     assert.equal(classifyHostUnreachable(undiciFetchFailed('ECONNREFUSED')), 'ECONNREFUSED');
-    assert.equal(classifyHostUnreachable(undiciFetchFailed('EAI_AGAIN')), 'EAI_AGAIN');
     assert.equal(classifyHostUnreachable(undiciAggregate('EHOSTUNREACH')), 'EHOSTUNREACH');
     // Errore nudo (non passato da fetch) — stessa classe, stessa risposta.
     assert.equal(classifyHostUnreachable(Object.assign(new Error('x'), { code: 'ENETUNREACH' })), 'ENETUNREACH');
@@ -74,6 +75,9 @@ describe('classifyHostUnreachable', () => {
     // Un reset a meta' stream: l\'host e\' vivo, il retry ha senso.
     assert.equal(classifyHostUnreachable(undiciFetchFailed('ECONNRESET')), null);
     assert.equal(classifyHostUnreachable(undiciFetchFailed('EPIPE')), null);
+    // #770 — `EAI_AGAIN` e' `getaddrinfo` che dice «riprova», non una risposta
+    // autorevole come `ENOTFOUND`: sta nell'altra classe, non in questa.
+    assert.equal(classifyHostUnreachable(undiciFetchFailed('EAI_AGAIN')), null);
     // Il timeout ha gia' il suo ramo, con la sua motivazione: non va rubato.
     assert.equal(classifyHostUnreachable(Object.assign(new Error('t'), { name: 'AbortError' })), null);
     assert.equal(classifyHostUnreachable(new Error('HTTP 404: ')), null);
@@ -87,6 +91,31 @@ describe('classifyHostUnreachable', () => {
     a.cause = b;
     b.cause = a;
     assert.equal(classifyHostUnreachable(a), null);
+  });
+});
+
+describe('classifyTransientResolver', () => {
+  it('riconosce il flap del resolver attraverso il wrapping di undici', () => {
+    assert.equal(classifyTransientResolver(undiciFetchFailed('EAI_AGAIN')), 'EAI_AGAIN');
+    assert.equal(classifyTransientResolver(undiciAggregate('EAI_AGAIN')), 'EAI_AGAIN');
+  });
+
+  it('non ruba cio\' che appartiene alla classe irraggiungibile', () => {
+    // Le due classi sono DISGIUNTE: se un codice cadesse in entrambe, l'ordine
+    // di classificazione in callLLM deciderebbe il comportamento per caso.
+    for (const code of ['ENOTFOUND', 'ECONNREFUSED', 'EHOSTUNREACH', 'ENETUNREACH', 'EHOSTDOWN']) {
+      assert.equal(classifyTransientResolver(undiciFetchFailed(code)), null, code);
+    }
+    assert.equal(classifyTransientResolver(undiciFetchFailed('ECONNRESET')), null);
+    assert.equal(classifyTransientResolver(null), null);
+  });
+
+  it('non entra in ciclo su una catena di cause auto-referenziale', () => {
+    const a = new Error('a');
+    const b = new Error('b');
+    a.cause = b;
+    b.cause = a;
+    assert.equal(classifyTransientResolver(a), null);
   });
 });
 
@@ -219,5 +248,104 @@ describe('callLLM contro un host che non accetta connessioni', () => {
 
     assert.equal(ghCalls().length, 3, `un reset transitorio va ritentato fino a maxRetriesPerModel, visti ${ghCalls().length} tentativi`);
     assert.equal(getStats().activeCooldowns.github, undefined, 'un reset non deve congelare il provider');
+  });
+});
+
+/**
+ * ── UN HICCUP DEL RESOLVER NON E' UN VERDETTO SULL'HOST (#770) ─────────────
+ *
+ * `EAI_AGAIN` viaggiava nello stesso insieme di `ENOTFOUND`, ma i due codici
+ * non dicono la stessa cosa: `ENOTFOUND` e' una risposta AUTOREVOLE («questo
+ * nome non esiste»), `EAI_AGAIN` e' letteralmente «riprova». Un singolo
+ * inciampo del resolver sul runner costava quindi il modello esaurito per la
+ * run PIU' i 60s di cooldown del provider — cioe' tutti i fratelli serviti da
+ * quell'host — per un guasto che di norma passa al round-trip successivo.
+ *
+ * Cio' che #475 ha comprato non viene restituito, viene reso CONDIZIONALE: il
+ * flap e' ritentabile finche' sembra un flap, e alla terza chiamata fallita di
+ * fila sullo stesso provider smette di sembrarlo e prende il ramo di #475
+ * senza modifiche.
+ */
+describe('callLLM contro un resolver che inciampa (#770)', () => {
+  const ENV_KEYS = ['AI_MODELS_FORCE_CHAIN', 'GH_MODELS_PAT', 'AI_MODELS_PREFER'];
+  let envBackup = {};
+  let realFetch;
+  let fetchCalls;
+  const ghCalls = () => fetchCalls.filter((u) => u.includes('models.inference.ai.azure.com'));
+
+  beforeEach(() => {
+    envBackup = Object.fromEntries(ENV_KEYS.map((k) => [k, process.env[k]]));
+    for (const k of ENV_KEYS) delete process.env[k];
+    process.env.GH_MODELS_PAT = 'test-pat';
+    fetchCalls = [];
+    realFetch = globalThis.fetch;
+    resetState();
+  });
+
+  afterEach(() => {
+    globalThis.fetch = realFetch;
+    for (const k of ENV_KEYS) {
+      if (envBackup[k] === undefined) delete process.env[k];
+      else process.env[k] = envBackup[k];
+    }
+    resetState();
+  });
+
+  it('un flap non esaurisce il modello e non congela il provider', async () => {
+    process.env.AI_MODELS_FORCE_CHAIN = 'gpt-4o-mini';
+    globalThis.fetch = async (url) => {
+      fetchCalls.push(String(url));
+      throw undiciFetchFailed('EAI_AGAIN');
+    };
+
+    await assert.rejects(
+      () => callLLM([{ role: 'user', content: 'x' }], { maxRetriesPerModel: 3, backoffMs: 1, timeout: 5000 }),
+    );
+
+    const stats = getStats();
+    // Il backoff del retry loop E' il «try again» che il codice chiede.
+    assert.equal(ghCalls().length, 3, `un flap va ritentato fino a maxRetriesPerModel, visti ${ghCalls().length}`);
+    assert.equal(stats.activeCooldowns.github, undefined, 'un hiccup del resolver non deve congelare il provider');
+    assert.ok(!stats.exhaustedModels.includes('gpt-4o-mini'), `il modello non va bannato per un flap: ${stats.exhaustedModels.join(', ')}`);
+    assert.equal(stats.resolverFlaps.github, 1, `atteso un flap contato: ${JSON.stringify(stats.resolverFlaps)}`);
+  });
+
+  it('alla terza chiamata fallita di fila il flap smette di essere un flap', async () => {
+    // Tre id GitHub: tre tentativi di modello falliti sullo stesso provider.
+    process.env.AI_MODELS_FORCE_CHAIN = 'gpt-4o-mini,gpt-4.1-mini,gpt-4o';
+    globalThis.fetch = async (url) => {
+      fetchCalls.push(String(url));
+      throw undiciFetchFailed('EAI_AGAIN');
+    };
+
+    await assert.rejects(
+      () => callLLM([{ role: 'user', content: 'x' }], { maxRetriesPerModel: 1, backoffMs: 1, timeout: 5000 }),
+    );
+
+    const stats = getStats();
+    // Con maxRetriesPerModel: 1 ogni modello costa un connect: i primi due
+    // sono flap ritentabili, il terzo scala e prende il ramo di #475.
+    assert.equal(ghCalls().length, 3, `attesi 3 connect prima dell'escalation, visti ${ghCalls().length}`);
+    assert.ok(stats.activeCooldowns.github > 0, `atteso il cooldown dopo l'escalation: ${JSON.stringify(stats.activeCooldowns)}`);
+    assert.ok(stats.exhaustedModels.includes('gpt-4o'), `atteso il modello dell'escalation esaurito, visti: ${stats.exhaustedModels.join(', ')}`);
+  });
+
+  it('l\'escalation e\' per provider, non globale', async () => {
+    // Il guasto che `EAI_AGAIN` descrive e' il nome dell'host, che i fratelli
+    // dello STESSO provider condividono — non i modelli di un altro.
+    process.env.AI_MODELS_FORCE_CHAIN = 'gpt-4o-mini,gpt-4.1-mini';
+    globalThis.fetch = async (url) => {
+      fetchCalls.push(String(url));
+      throw undiciFetchFailed('EAI_AGAIN');
+    };
+
+    await assert.rejects(
+      () => callLLM([{ role: 'user', content: 'x' }], { maxRetriesPerModel: 1, backoffMs: 1, timeout: 5000 }),
+    );
+
+    const stats = getStats();
+    assert.equal(stats.resolverFlaps.github, 2, `attesi 2 flap sotto soglia: ${JSON.stringify(stats.resolverFlaps)}`);
+    assert.equal(stats.activeCooldowns.github, undefined, 'sotto soglia il provider resta disponibile');
+    assert.equal(stats.exhaustedModels.length, 0, `nessun ban sotto soglia, visti: ${stats.exhaustedModels.join(', ')}`);
   });
 });
