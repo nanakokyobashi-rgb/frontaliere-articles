@@ -86,18 +86,34 @@ const DRY_RUN = flag('--dry-run');
  * Il silenzio e' voluto SOLO per "assente" e "stringa vuota": li' il default e'
  * la risposta giusta e non c'e' nessuna intenzione tradita.
  *
+ * ## `sentinels`: i valori non positivi che in QUESTO file vogliono dire qualcosa
+ *
+ * "Positivo" e' la regola giusta per una durata o un conteggio, non per una
+ * leva a tre stati. `--gate -1` disattiva il gate di ricorrenza (lo stesso
+ * `-1` che `main()` passa gia' per l'articolo perso, vedi `consecutiveGate` in
+ * `github-issue-creator.mjs`): rifiutarlo come "non positivo" ha reso quella
+ * leva inesistente da CLI — degradava a 3 gridando «override IGNORATO», cioe'
+ * il contrario di quello che l'operatore aveva chiesto (#811 item 6). I
+ * sentinel vanno DICHIARATI dal chiamante, uno per leva: un `-1` accettato
+ * ovunque riaprirebbe il buco su `--lookback-min`, dove non significa niente.
+ *
  * @param {unknown} raw valore grezzo (argv o env)
  * @param {number} fallback default da usare se `raw` e' assente o illeggibile
- * @param {{label: string, warn?: (msg: string) => void}} opts
- * @returns {number} il valore, o `fallback`
+ * @param {{label: string, warn?: (msg: string) => void, sentinels?: number[]}} opts
+ * @returns {number} il valore, il sentinel, o `fallback`
  */
-export function parsePositiveNum(raw, fallback, { label, warn = console.warn } = {}) {
+export function parsePositiveNum(raw, fallback, { label, warn = console.warn, sentinels = [] } = {}) {
   const n = Number(raw);
   if (Number.isFinite(n) && n > 0) return n;
+  // `Number('')` e' 0 e `Number(null)` pure: il sentinel si concede solo a un
+  // valore davvero presente, altrimenti "leva non tirata" diventerebbe "leva
+  // tirata a 0" per qualunque sentinel che valga 0.
   const present = raw !== undefined && raw !== null && String(raw).trim() !== '';
+  if (present && Number.isFinite(n) && sentinels.includes(n)) return n;
   if (present) {
     warn(
-      `::warning::[scan-failed-runs] ${label}=${String(raw)} non e' un numero positivo — `
+      `::warning::[scan-failed-runs] ${label}=${String(raw)} non e' un numero positivo`
+        + `${sentinels.length ? ` ne' uno dei valori speciali ammessi (${sentinels.join(', ')})` : ''} — `
         + `override IGNORATO, si prosegue col default ${fallback}. `
         + 'Attenzione: il comportamento che stavi comprando NON e\' attivo.',
     );
@@ -107,7 +123,9 @@ export function parsePositiveNum(raw, fallback, { label, warn = console.warn } =
 
 const LOOKBACK_MIN = parsePositiveNum(val('--lookback-min', undefined), 40, { label: '--lookback-min' });
 const MAX_ISSUES = parsePositiveNum(val('--max-issues', undefined), 5, { label: '--max-issues' });
-const GATE = parsePositiveNum(val('--gate', undefined), 3, { label: '--gate' });
+// `-1` e' un valore DICHIARATO per questa leva: disattiva il gate di ricorrenza
+// in `github-issue-creator.mjs` (stesso `-1` usato piu' sotto per l'articolo perso).
+const GATE = parsePositiveNum(val('--gate', undefined), 3, { label: '--gate', sentinels: [-1] });
 const REPO = process.env.GITHUB_REPOSITORY || '';
 /**
  * Lista dei workflow da ignorare, dal valore grezzo della env.
@@ -348,14 +366,18 @@ const RUN_QUERY_HORIZON_MIN = parseHorizonMin(process.env.SCAN_FAILED_RUNS_HORIZ
  * `needs` risolto in failure dopo una lunga attesa o per un deployment gate
  * scaduto contribuisce al campione con lo span che ha davvero.
  *
- * ## Perche' su TUTTE le run della query, non sulle sole segnalabili
+ * ## Su quali run, e perche' non su tutte quelle della query
  *
- * Il canary precedente vedeva solo le run gia' filtrate da `isReportableRun`,
- * cioe' quelle aggiornate dentro i 40 minuti di lookback: la banda utile era
- * di ~225 minuti su un orizzonte di 1.850, e un salto di regime che non
- * passasse per quella fessura restava muto (#789 item 4). Lo span invece e'
- * definito su ogni run tornata dalla query — campione ~40x piu' grande, stesso
- * costo, nessuna chiamata in piu'.
+ * Il canary precedente vedeva solo le run gia' filtrate da `isReportableRun`
+ * CON il lookback, cioe' quelle aggiornate dentro i 40 minuti: la banda utile
+ * era di ~225 minuti su un orizzonte di 1.850, e un salto di regime che non
+ * passasse per quella fessura restava muto (#789 item 4). Cade quindi il
+ * filtro `since` — che e' esattamente la soglia che lo span rischia di
+ * scavalcare — ma NON gli altri: una run da `pull_request` o un workflow in
+ * IGNORE_WORKFLOWS non finisce nel report a nessuno span, quindi il suo tempo
+ * in coda non e' pressione sull'orizzonte e non deve chiedere di alzarlo
+ * (#811 item 5). Il campione resta ~40x quello di prima, stesso costo,
+ * nessuna chiamata in piu': chi chiama passa `isReportableRun(r, {since: null})`.
  *
  * Misura di riferimento al 2026-09-04 su questo repo: 800 run `failure`, span
  * massimo 227 minuti, p99 112. L'orizzonte di default (1.850) ha quindi un
@@ -449,43 +471,123 @@ export function fetchRunsBisected(startMs, endMs, opts) {
   } = opts;
   const byId = new Map();
 
-  const slice = (aMs, bMs, depth) => {
-    const aIso = new Date(aMs).toISOString();
-    const bIso = bMs === null ? null : new Date(bMs).toISOString();
+  const iso = (ms) => new Date(ms).toISOString();
+  const warnUnread = (aIso, bIso) => {
+    warn(
+      `::warning::[scan-failed-runs] query FALLITA sulla finestra ${aIso}..`
+        + `${bIso ?? 'ora'} — nessuna run letta li' dentro, e la scansione prosegue `
+        + 'sul resto: i fallimenti caduti in questa finestra NON sono stati esaminati '
+        + '(niente issue, niente gate) e nessuno li ripeschera\' al giro successivo, '
+        + 'che riparte da una finestra piu\' recente.',
+    );
+  };
+
+  /**
+   * @returns {'read'|'unread'} `'unread'` SOLO quando `quiet` ha soppresso il
+   *   warning e quindi tocca al chiamante dichiarare la perdita. In ogni altro
+   *   caso la slice ha gia' detto quello che aveva da dire, e l'antenato non
+   *   deve ripeterlo: e' questo a garantire un warning per finestra persa, ne'
+   *   zero ne' due.
+   */
+  const slice = (aMs, bMs, depth, { retryOnFail = true, quiet = false } = {}) => {
+    const aIso = iso(aMs);
+    const bIso = bMs === null ? null : iso(bMs);
+    const rightEndMs = bMs === null ? nowMs : bMs;
+    const midMs = Math.floor((aMs + rightEndMs) / 2);
+    const splittable = depth < maxDepth && midMs > aMs && midMs < rightEndMs;
     const batch = fetchWindow(aIso, bIso);
+
     if (!Array.isArray(batch)) {
-      warn(
-        `::warning::[scan-failed-runs] query FALLITA sulla finestra ${aIso}..`
-          + `${bIso ?? 'ora'} — nessuna run letta li' dentro, e la scansione prosegue `
-          + 'sul resto: i fallimenti caduti in questa finestra NON sono stati esaminati '
-          + '(niente issue, niente gate) e nessuno li ripeschera\' al giro successivo, '
-          + 'che riparte da una finestra piu\' recente.',
-      );
-      return;
+      // Ritento UNA volta con lo split. Se la query e' fallita PER AMPIEZZA
+      // (timeout lato `gh`, range `--created A..B` rifiutato per estensione),
+      // lo split e' esattamente il rimedio — e prima di questo ramo era
+      // l'unico caso in cui NON veniva tentato: la finestra larga che
+      // fallisce sistematicamente restava a copertura ZERO a ogni giro, dove
+      // il codice pre-bisezione almeno troncava (#811 item 2).
+      //
+      // Il retry non e' ricorsivo (`retryOnFail: false` sui figli): un
+      // fallimento persistente costa 2 chiamate in piu' in tutto, non 2^depth.
+      if (retryOnFail && splittable) {
+        const left = slice(aMs, midMs, depth + 1, { retryOnFail: false, quiet: true });
+        const right = slice(midMs + 1, bMs, depth + 1, { retryOnFail: false, quiet: true });
+        if (left === 'read' && right === 'read') return 'read';
+        if (left === 'read' || right === 'read') {
+          // Meta' recuperata: si dichiara SOLO la meta' persa, senza
+          // sovrastimare la perdita sull'intera finestra.
+          const [lostA, lostB] = left === 'read' ? [iso(midMs + 1), bIso] : [aIso, iso(midMs)];
+          warnUnread(lostA, lostB);
+          return 'read';
+        }
+        // Entrambe fallite: non e' un problema d'ampiezza. Un solo warning,
+        // sulla finestra originale — che e' l'estensione esatta della perdita.
+      }
+      if (quiet) return 'unread';
+      warnUnread(aIso, bIso);
+      return 'read';
     }
+
     for (const r of batch) {
       byId.set(r?.databaseId ?? `${r?.url ?? ''}${r?.createdAt ?? ''}`, r);
     }
-    if (batch.length < cap) return;
-    const rightEndMs = bMs === null ? nowMs : bMs;
-    const midMs = Math.floor((aMs + rightEndMs) / 2);
-    if (depth >= maxDepth || midMs <= aMs || midMs >= rightEndMs) {
+    if (batch.length < cap) return 'read';
+    if (!splittable) {
       warn(
         `::warning::[scan-failed-runs] cap di sicurezza (${cap}) ancora raggiunto dopo ${depth} `
           + `bisezioni sulla finestra ${aIso}..${bIso ?? 'ora'} — `
           + 'il troncamento di `gh run list` cade sulle run con `createdAt` piu\' VECCHIO, '
           + 'cioe\' proprio quelle rimaste a lungo in coda: in questa slice possono mancare.',
       );
-      return;
+      return 'read';
     }
     // Intervalli disgiunti al millisecondo: nessun buco, nessun doppio
     // conteggio sul confine (`byId` resta comunque l'ultima difesa).
+    // I figli da CAP parlano da soli (nessun `quiet`) e riaprono il budget di
+    // retry: la loro finestra e' gia' piu' stretta di quella del padre.
     slice(aMs, midMs, depth + 1);
     slice(midMs + 1, bMs, depth + 1);
+    return 'read';
   };
 
   slice(startMs, endMs, 0);
-  return [...byId.values()];
+  // Riordino ESPLICITO per `createdAt` decrescente. `byId` eredita l'ordine di
+  // inserimento — batch di primo livello, poi meta' piu' vecchia, poi piu'
+  // recente — quindi dopo una bisezione l'ordine di `gh run list` non vale
+  // piu'. A valle `byWorkflow` lo eredita e il cap `MAX_ISSUES` tronca: senza
+  // questo, QUALI workflow ricevono la issue in questa passata smette di
+  // essere "i piu' recenti" e nulla fallisce (#811 item 4).
+  const createdMs = (r) => {
+    const t = Date.parse(r?.createdAt ?? '');
+    return Number.isFinite(t) ? t : -1; // run senza data valida: in fondo.
+  };
+  return [...byId.values()].sort((a, b) => createdMs(b) - createdMs(a));
+}
+
+/**
+ * Lo stdout di `gh run list --json` in una lista di run, o `null` per "finestra
+ * NON letta".
+ *
+ * Le tre forme che devono restare distinte da `[]`:
+ *
+ * - `null` — `gh()` e' andato in errore di processo (exit != 0, ENOBUFS).
+ * - **stringa vuota su exit 0** — `--json` stampa `[]` quando non trova niente,
+ *   quindi `''` significa che l'output non e' arrivato: auth scaduta gestita
+ *   internamente, stdout redirezionato, binario che esce 0 senza scrivere.
+ *   Farla cadere su `[]` (`JSON.parse(raw || '[]')`) rimetteva dalla porta
+ *   accanto il buco muto che la bisezione esiste per chiudere, perche'
+ *   `[].length < cap` chiude la slice come RISOLTA (#811 item 1).
+ * - JSON illeggibile o di forma inattesa (un oggetto, un numero).
+ *
+ * @param {string|null} raw
+ * @returns {Array<object>|null}
+ */
+export function parseRunListJson(raw) {
+  if (raw === null || raw === undefined || String(raw).trim() === '') return null;
+  try {
+    const parsed = JSON.parse(raw);
+    return Array.isArray(parsed) ? parsed : null;
+  } catch {
+    return null;
+  }
 }
 
 /** Run fallite nella finestra, escluse quelle da pull_request e dai gate pre-merge in preview. */
@@ -502,19 +604,18 @@ function failedRuns() {
         '--json', 'databaseId,workflowName,conclusion,event,createdAt,updatedAt,headBranch,url'],
       null,
     );
-    if (raw === null) return null;
-    try {
-      const parsed = JSON.parse(raw || '[]');
-      // Output illeggibile o di forma inattesa: e' un errore, non una finestra
-      // vuota. Trattarlo come `[]` rimetterebbe il buco muto.
-      return Array.isArray(parsed) ? parsed : null;
-    } catch {
-      return null;
-    }
+    return parseRunListJson(raw);
   };
   const runs = fetchRunsBisected(queryCutoffMs, null, { fetchWindow, nowMs });
   const reportable = runs.filter((r) => isReportableRun(r, { since }));
-  const pressure = horizonPressure(runs, { horizonMin: RUN_QUERY_HORIZON_MIN });
+  // Il canary si misura sulle run che possono DAVVERO essere perse dal report:
+  // stesso filtro di `reportable` ma senza `since`, che e' proprio la soglia
+  // che lo span rischia di scavalcare. Le run da `pull_request` e i workflow
+  // in IGNORE_WORKFLOWS non entrano nel report a nessuno span, quindi una PR
+  // run rimasta a lungo in coda non deve chiedere di alzare l'orizzonte
+  // (#811 item 5).
+  const losable = runs.filter((r) => isReportableRun(r, { since: null }));
+  const pressure = horizonPressure(losable, { horizonMin: RUN_QUERY_HORIZON_MIN });
   if (pressure.maxSpanMin !== null) {
     console.log(
       `[scan-failed-runs] span createdAt->updatedAt massimo osservato: `
