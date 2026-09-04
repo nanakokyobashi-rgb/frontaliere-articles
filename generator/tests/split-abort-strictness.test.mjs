@@ -397,6 +397,39 @@ for (const [nome, builder] of [
   });
 }
 
+// ── 5c. Payload MISTO: le forme si mescolano nella stessa risposta (#546) ─
+//
+// La forma misurata su `haiku`: parte dei campi sotto `content.it`, i
+// restanti alla radice. `bodyContent` sceglieva IL CANDIDATO IN BLOCCO — se
+// `content[primaryLocale]` portava anche uno solo fra body1|body2|body3
+// vinceva interamente, e le altre due forme non venivano piu' guardate — cosi'
+// i campi rimasti nell'altra forma sparivano QUI, dopo che il verdetto a valle
+// li aveva giudicati `ok`, e la risposta moriva in `validateItalianPayload`
+// con «Campo body2 mancante per it»: senza rigenerazione ne' rotazione di
+// modello. E' la forma del difetto #494, gia' fixato per `metaBlock`
+// sull'altra meta' dello split, e lo stesso antipattern che
+// `normalizeItalianContentFromPayload` ha smesso di applicare a valle.
+test('payload misto (body1 sotto content.it, body2/body3 alla radice) ⇒ tutti e tre i body sopravvivono all\'assemblaggio', async () => {
+  const misto = JSON.stringify({
+    content: { it: { body1: CORPO_BUONO.body1 } },
+    body2: CORPO_BUONO.body2,
+    body3: CORPO_BUONO.body3,
+  });
+  // Non circolare: e' il predicato DEL VALLE a dire che i tre campi ci sono.
+  const visti = normalizeItalianContentFromPayload(JSON.parse(misto), 'it', BODY_ONLY_FIELDS);
+  assert.ok(visti.body1 && visti.body2 && visti.body3, 'il valle non vede i tre body: fixture sbagliata');
+
+  const { out, chiamate, log } = await run({ risposte: [misto, PAYLOAD_META] });
+  assert.equal(chiamate.length, 2, `la 2/2 non e' partita sul payload misto. Log:\n${log}`);
+  assert.notEqual(out, null, `lo split e' caduto in fallback sul payload misto. Log:\n${log}`);
+  const payload = JSON.parse(out);
+  // Il campo nella forma normale resta RAW, byte per byte; quelli recuperati
+  // dall'altra forma passano dal blocco normalizzato, quindi trimmati.
+  assert.equal(payload.content.it.body1, CORPO_BUONO.body1, 'il body1 della forma normale non e\' sopravvissuto RAW');
+  assert.equal(payload.content.it.body2, CORPO_BUONO.body2.trim(), 'body2 perso: il candidato vincente ha oscurato la radice');
+  assert.equal(payload.content.it.body3, CORPO_BUONO.body3.trim(), 'body3 perso: il candidato vincente ha oscurato la radice');
+});
+
 // ── 5. Drift guard sul sorgente: i due gate restano allineati ────────────
 //
 // Le asserzioni sopra muoiono se il comportamento regredisce; questa dice
