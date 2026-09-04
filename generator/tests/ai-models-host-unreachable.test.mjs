@@ -623,32 +623,57 @@ describe('promozione della causa del cooldown (#787)', () => {
   // lanciato. Senza l'ordine di gravita', quel 429 riscriverebbe la causa in
   // `cooling down (rate-limited)` e i fratelli successivi tornerebbero a
   // votare transitorio su un host che non risponde.
+  // Due cose che questa prova deve possedere invece di sperarle (#830):
+  //
+  //   1. L'ORDINE DELLA CATENA. `opts.chain` non e' un pin: senza
+  //      `AI_MODELS_FORCE_CHAIN` callLLM lo passa per `sortChainByScore` e
+  //      `applyModelsPrefer`, che riordinano — e su un ordine riordinato il
+  //      429 non atterra piu' sull'id che la prova crede. La catena va quindi
+  //      forzata prima di OGNI chiamata (l'override viene letto quando la
+  //      chiamata risolve la propria catena, non quando la promise nasce).
+  //   2. CHE IL 429 ATTERRI DAVVERO. Se il cooldown dell'host morto si aprisse
+  //      prima che la fetch rate-limited sia partita, il pre-flight salterebbe
+  //      l'id e nessun 429 arriverebbe mai: le assertion sotto resterebbero
+  //      verdi anche sul codice PRE-fix, cioe' la prova smetterebbe di essere
+  //      una prova senza che nulla fallisca. Il gate `inFlight429` sequenzia
+  //      le due cause, e `served429` verifica che il 429 sia stato servito.
   it('un 429 atterrato dopo non retrocede la causa a transitoria', async () => {
-    delete process.env.AI_MODELS_FORCE_CHAIN;
+    let served429 = 0;
     let releaseLate429;
+    let enter429;
     const late429 = new Promise((resolve) => { releaseLate429 = resolve; });
+    const inFlight429 = new Promise((resolve) => { enter429 = resolve; });
     globalThis.fetch = async (url, init) => {
       if (!String(url).includes('models.inference.ai.azure.com')) throw undiciFetchFailed('ENOTFOUND');
       ghCalls += 1;
       if (String(init?.body || '').includes('gpt-4o-mini')) throw undiciFetchFailed('ENOTFOUND');
+      enter429();
       await late429;
+      served429 += 1;
       return new Response('rate limit exceeded', { status: 429 });
     };
 
     const opts = { maxRetriesPerModel: 2, backoffMs: 1, timeout: 5000 };
     // Il 429 e' in volo per primo ma resta appeso al gate.
-    const rateLimited = callLLM([{ role: 'user', content: 'x' }], { ...opts, chain: ['gpt-4.1-mini'] })
+    process.env.AI_MODELS_FORCE_CHAIN = 'gpt-4.1-mini';
+    const rateLimited = callLLM([{ role: 'user', content: 'x' }], opts)
       .then(() => null, (e) => e);
+    // Da qui in poi la fetch del 429 e' entrata: il pre-flight non puo' piu'
+    // cancellarla, e l'ordine fra le due cause smette di essere una corsa.
+    await inFlight429;
     // L'host muore mentre l'altro aspetta: la causa persistente viene scritta.
-    const unreachable = await callLLM([{ role: 'user', content: 'x' }], { ...opts, chain: ['gpt-4o-mini'] })
+    process.env.AI_MODELS_FORCE_CHAIN = 'gpt-4o-mini';
+    const unreachable = await callLLM([{ role: 'user', content: 'x' }], opts)
       .then(() => null, (e) => e);
     assert.ok(unreachable, 'la chiamata sull\'host morto deve fallire');
     releaseLate429();
     assert.ok(await rateLimited, 'anche la chiamata rate-limited deve fallire');
+    assert.ok(served429 >= 1, 'il 429 tardivo non e\' mai atterrato: la prova sarebbe vacua');
 
     // Un terzo fratello, dopo entrambe: la causa che legge deve essere ancora
     // quella persistente.
-    const later = await callLLM([{ role: 'user', content: 'x' }], { ...opts, chain: ['gpt-4o'] })
+    process.env.AI_MODELS_FORCE_CHAIN = 'gpt-4o';
+    const later = await callLLM([{ role: 'user', content: 'x' }], opts)
       .then(() => null, (e) => e);
 
     assert.ok(later, 'la catena deve fallire');
@@ -825,10 +850,20 @@ describe('durata del cooldown per causa (#803)', () => {
    * resolver che aveva solo detto «riprova».
    */
   it('un 429 tardivo non prolunga la finestra del flap escalato (#809)', async () => {
-    delete process.env.AI_MODELS_FORCE_CHAIN;
+    // Come nel blocco #787, la prova si compra le due cose che altrimenti
+    // sarebbero speranze (#830): la catena e' pinnata prima di OGNI chiamata
+    // (`opts.chain` da solo passa per `sortChainByScore` / `applyModelsPrefer`
+    // e viene riordinato), e il 429 e' ancorato al tempo MOCKATO — entra prima
+    // che la finestra del flap si apra, e viene servito solo dopo il tick, con
+    // `at429` a dimostrarlo. Senza, un 429 mai atterrato lascerebbe l'ultima
+    // assertion verde anche sul codice pre-fix.
     const OPTS_429 = { ...OPTS, maxRetriesPerModel: 2 };
+    let served429 = 0;
+    let at429 = null;
     let release429;
+    let enter429;
     const late429 = new Promise((resolve) => { release429 = resolve; });
+    const inFlight429 = new Promise((resolve) => { enter429 = resolve; });
     globalThis.fetch = async (url, init) => {
       if (!String(url).includes('models.inference.ai.azure.com')) throw undiciFetchFailed('EAI_AGAIN');
       fetchCalls.push(String(url));
@@ -836,19 +871,26 @@ describe('durata del cooldown per causa (#803)', () => {
       // del flap non e' quasi scaduta: e' la forma reale — le chiamate corrono
       // in parallelo, e un 429 partito prima puo' atterrare molto dopo.
       if (String(init?.body || '').includes('phi-4')) {
+        enter429();
         await late429;
+        served429 += 1;
+        at429 = Date.now();
         return new Response('rate limit exceeded', { status: 429 });
       }
       throw undiciFetchFailed('EAI_AGAIN');
     };
 
-    const rateLimited = callLLM([{ role: 'user', content: 'x' }], { ...OPTS_429, chain: ['phi-4'] })
+    process.env.AI_MODELS_FORCE_CHAIN = 'phi-4';
+    const rateLimited = callLLM([{ role: 'user', content: 'x' }], OPTS_429)
       .then(() => null, (e) => e);
+    // Il 429 e' in volo PRIMA che la finestra si apra: e' l'unico ordine in cui
+    // il pre-flight non lo cancella, e non dipende da chi vince una corsa.
+    await inFlight429;
+    const apertura = Date.now();
 
     // Tre flap di fila sullo stesso provider: la finestra da 5 minuti si apre.
-    await assert.rejects(() => callLLM([{ role: 'user', content: 'x' }], {
-      ...OPTS, chain: ['gpt-4o-mini', 'gpt-4.1-mini', 'gpt-4o'],
-    }));
+    process.env.AI_MODELS_FORCE_CHAIN = 'gpt-4o-mini,gpt-4.1-mini,gpt-4o';
+    await assert.rejects(() => callLLM([{ role: 'user', content: 'x' }], OPTS));
     const finestraFlap = getStats().activeCooldowns.github;
     assert.ok(
       Number.isFinite(finestraFlap) && finestraFlap > 60,
@@ -859,10 +901,16 @@ describe('durata del cooldown per causa (#803)', () => {
     mock.timers.tick(250_000);
     release429();
     assert.ok(await rateLimited, 'anche la chiamata rate-limited deve fallire');
+    assert.ok(served429 >= 1, 'il 429 tardivo non e\' mai atterrato: la prova sarebbe vacua');
+    assert.ok(
+      at429 !== null && at429 - apertura >= 250_000,
+      `il 429 deve atterrare DOPO il tick, sul tempo mockato: ${at429 - apertura}ms dall'apertura`,
+    );
 
     const primaDellaScadenza = ghCalls().length;
     mock.timers.tick(51_000); // 301s dall'apertura: la finestra del flap e' scaduta
-    await assert.rejects(() => callLLM([{ role: 'user', content: 'x' }], { ...OPTS, chain: ['gpt-4.1'] }));
+    process.env.AI_MODELS_FORCE_CHAIN = 'gpt-4.1';
+    await assert.rejects(() => callLLM([{ role: 'user', content: 'x' }], OPTS));
 
     assert.ok(
       ghCalls().length > primaDellaScadenza,
