@@ -15712,6 +15712,14 @@ export async function registerArticleFiles(data, opts = {}) {
   sanitizePromptPlaceholders(data);
   clampSeoDescriptions(data);
   const slugs = deriveAndSanitizeArticleSlugs(data);
+  // Sul percorso di scrittura CONDIVISO, per la stessa ragione argomentata
+  // sopra: generate-daily-brief-article.mjs, generate-events-digest-article.mjs,
+  // generate-border-wait-ranking-article.mjs e publish-journalist-article.mjs
+  // importano registerArticleFiles() direttamente e non hanno il `main()` di
+  // questo file, quindi non passano mai dal controllo d'avvio. Senza questa
+  // riga un marker orfano li farebbe morire su `beginRegisterLock()` con un
+  // errore duro anche quando il corpus e' perfettamente coerente.
+  resolveRegisterLockAtStartup();
   beginRegisterLock(data.id);
   modifyRouterTs(data);
   modifyBlogArticlesTsx(data);
