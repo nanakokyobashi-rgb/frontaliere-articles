@@ -108,10 +108,13 @@ describe('callLLM({ recordScore: false }) — opt-out dal ledger di produzione',
       [],
       `nessun punteggio doveva muoversi, visti: ${JSON.stringify(stats.scoreBoard)}`,
     );
+    // ...ma il marchio IN PROCESSO resta, esattamente come nella discovery
+    // (#812): e' cio' che evita di ripagare lo stesso 429 a ogni giro della
+    // cascata, e muore col processo senza toccare Firestore.
     assert.deepEqual(
-      stats.exhaustedModels,
-      [],
-      `nessun modello doveva essere marchiato esausto, visti: ${stats.exhaustedModels.join(', ')}`,
+      stats.exhaustedModels.slice().sort(),
+      ['gpt-4.1-mini', 'gpt-4o-mini'],
+      `il ban in-processo deve restare per entrambi gli id a quota esaurita, visti: ${stats.exhaustedModels.join(', ')}`,
     );
   });
 
@@ -149,12 +152,13 @@ describe('callLLM({ recordScore: false }) — opt-out dal ledger di produzione',
       0,
       `un host morto ha sporcato ${stats.dirtyModels} modelli in un ping diagnostico`,
     );
-    assert.deepEqual(
-      stats.exhaustedModels,
-      [],
-      `nessun ban doveva raggiungere il ledger, visti: ${stats.exhaustedModels.join(', ')}`,
+    // Il ban in-processo invece resta (#812): su un host morto e' cio' che
+    // impedisce di ritentare lo stesso id, e non e' un dato di ledger.
+    assert.ok(
+      stats.exhaustedModels.includes('gpt-4o-mini'),
+      `il ban in-processo dell'host morto deve restare, visti: ${stats.exhaustedModels.join(', ')}`,
     );
-    // ...ma il cooldown in-processo resta: e' la meta' di #475 che evita un
+    // ...e il cooldown in-processo resta: e' la meta' di #475 che evita un
     // connect morto per ogni id fratello, e muore col processo senza toccare
     // Firestore. Un diagnostico che percorre l'intera catena e' proprio chi ne
     // beneficia di piu'.
