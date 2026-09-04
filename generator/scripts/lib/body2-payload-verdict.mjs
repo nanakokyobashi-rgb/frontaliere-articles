@@ -226,14 +226,26 @@ export function resolveBody2Validation({ jsonMode = false, expectedFields = null
 /**
  * Estrae il blocco di contenuto nella lingua primaria da un payload di
  * generazione, tollerando le tre forme che i modelli producono davvero:
- * `content.it.*`, `content.*` (locale saltato), o i campi alla radice.
+ * `content.it.*`, `content.*` (locale saltato), o i campi alla radice — E la
+ * loro COMBINAZIONE nella stessa risposta. Un modello puo' scrivere alcuni
+ * campi in una forma e i restanti in un'altra: misurato su `haiku`, che
+ * parcheggia `title`/`excerpt` alla radice mentre i `body1..3` stanno
+ * correttamente sotto `content.it` (issue #483/#546).
  *
- * Torna `null` quando NESSUNO dei candidati porta almeno un campo non vuoto —
- * il che include, per costruzione, il payload di abort di REGOLA #0. Quel
+ * Ogni campo e' quindi cercato INDIPENDENTEMENTE attraverso tutti i
+ * candidati, nello stesso ordine di priorita'. La regola precedente — «il
+ * primo candidato con almeno un campo non vuoto vince, gli altri non si
+ * guardano piu'» — faceva sparire i campi genuini lasciati in un candidato
+ * diverso da quello che aveva vinto sul primo campo trovato, e li riportava
+ * a valle come `missing`: da li' l'apparenza che il modello omettesse campi
+ * `required` che invece aveva prodotto.
+ *
+ * Torna `null` quando NESSUN campo, in NESSUN candidato, e' non vuoto — il
+ * che include, per costruzione, il payload di abort di REGOLA #0. Quel
  * `null` da solo NON significa «malformato»: e' `classifyBody2Payload()` a
  * distinguere i due casi.
  *
- * `fields` restringe sia la ricerca del candidato sia il blocco restituito ai
+ * `fields` restringe sia la ricerca fra i candidati sia il blocco restituito ai
  * campi che il chiamante ha davvero chiesto (vedi `resolveBody2Validation`).
  * Il default e' l'articolo completo, quindi i chiamanti a due argomenti — il
  * gate dello split e i due della normalizzazione a valle in create-article.mjs
@@ -249,22 +261,22 @@ export function normalizeItalianContentFromPayload(payload, locale = 'it', field
   }
   candidates.push(payload);
 
-  for (const candidate of candidates) {
-    if (!candidate || typeof candidate !== 'object') continue;
-    const block = {};
-    let hasAnyField = false;
+  const block = {};
+  let hasAnyField = false;
 
-    for (const field of fields) {
-      let value = typeof candidate[field] === 'string' ? candidate[field].trim() : '';
-      if (isLiteralNullString(value)) value = '';
-      if (value) hasAnyField = true;
-      block[field] = value;
+  for (const field of fields) {
+    let value = '';
+    for (const candidate of candidates) {
+      if (!candidate || typeof candidate !== 'object') continue;
+      let raw = typeof candidate[field] === 'string' ? candidate[field].trim() : '';
+      if (isLiteralNullString(raw)) raw = '';
+      if (raw) { value = raw; break; }
     }
-
-    if (hasAnyField) return block;
+    if (value) hasAnyField = true;
+    block[field] = value;
   }
 
-  return null;
+  return hasAnyField ? block : null;
 }
 
 /**

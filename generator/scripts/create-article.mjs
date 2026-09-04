@@ -8451,13 +8451,34 @@ Rispondi SOLO con JSON valido, senza markdown.` },
     // object del modello, non il blocco normalizzato: `normalizeItalianContentFromPayload`
     // fa `.trim()` sui valori, e il corpo della 1/2 deve sopravvivere
     // all'assemblaggio byte per byte (vedi il test «il corpo della 1/2
-    // sopravvive all'assemblaggio»). Il fallback tollerante scatta solo
-    // quando la forma normale non porta nessuno dei tre campi.
+    // sopravvive all'assemblaggio»).
+    //
+    // MA IL RAW VINCE CAMPO PER CAMPO, NON IN BLOCCO. La regola precedente —
+    // «se `content[primaryLocale]` porta ANCHE UNO SOLO fra body1|body2|body3
+    // allora vince interamente, le altre due forme non si guardano piu'» — e'
+    // lo stesso antipattern che il valle ha appena smesso di applicare
+    // (body2-payload-verdict.mjs): sul payload MISTO misurato su `haiku`
+    // (parte dei body sotto `content.it`, i restanti alla radice) i campi
+    // rimasti nell'altra forma sparivano QUI, dopo che il verdetto a valle li
+    // aveva giudicati `ok`, e la risposta moriva piu' a valle in
+    // `validateItalianPayload` con «Campo body2 mancante per it», senza
+    // rigenerazione ne' rotazione di modello. E' la forma del difetto #494,
+    // gia' fixato per `metaBlock` sull'altra meta' dello split.
+    //
+    // Quindi: base RAW (che porta anche le chiavi che BODY_ONLY_FIELDS non
+    // nomina, `faq` in testa), e i soli campi body che il RAW non ha come
+    // stringa non vuota vengono riempiti dal blocco normalizzato — che li
+    // cerca su tutti i candidati. Dove il RAW c'e', sopravvive byte per byte.
     const _bodyContentDiretto = bodyData?.content?.[primaryLocale];
-    const bodyContent = (_bodyContentDiretto && typeof _bodyContentDiretto === 'object'
-      && (_bodyContentDiretto.body1 || _bodyContentDiretto.body2 || _bodyContentDiretto.body3))
-      ? _bodyContentDiretto
-      : (normalizeItalianContentFromPayload(bodyData, primaryLocale, BODY_ONLY_FIELDS) || {});
+    const _bodyDirettoOggetto = (_bodyContentDiretto && typeof _bodyContentDiretto === 'object')
+      ? _bodyContentDiretto : {};
+    const _bodyNormalizzato = normalizeItalianContentFromPayload(bodyData, primaryLocale, BODY_ONLY_FIELDS) || {};
+    const bodyContent = { ..._bodyDirettoOggetto };
+    for (const k of BODY_ONLY_FIELDS) {
+      const raw = bodyContent[k];
+      if (typeof raw === 'string' && raw.trim()) continue;
+      if (typeof _bodyNormalizzato[k] === 'string' && _bodyNormalizzato[k]) bodyContent[k] = _bodyNormalizzato[k];
+    }
     const articolo = [bodyContent.body1, bodyContent.body2, bodyContent.body3]
       .filter((x) => typeof x === 'string' && x.trim()).join('\n\n');
     const _abortDichiarato = bodyData?.abort_topical_relevance === true;
