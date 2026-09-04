@@ -123,7 +123,12 @@ export function parseCascades(text) {
     const m = CASCADE_RE.exec(line);
     if (!m) { unrecognised += 1; continue; }
     lines += 1;
-    const payload = m[1];
+    // La stessa cascata compare anche INCASSATA in una stringa JSON (le note
+    // del report di run), dove la riga finisce con la chiusura delle
+    // virgolette: senza normalizzare la coda, quel terzo eco avrebbe una
+    // chiave diversa e verrebbe contato come una seconda cascata — cioe' il
+    // doppio conteggio che questa deduplicazione esiste per togliere.
+    const payload = m[1].replace(/[\s",]+$/, '');
     if (seen.has(payload)) continue;
     seen.add(payload);
     const cut = PROMPT_BUDGET_TAIL_RE.exec(payload);
