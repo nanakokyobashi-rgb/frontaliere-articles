@@ -16,6 +16,7 @@ import {
   shapeJobs,
   buildDailyBrief,
   BORDER_WAIT_MIN_CROSSINGS,
+  JOBS_HISTORY_MAX_LAG_DAYS,
 } from '../scripts/lib/daily-brief-data.mjs';
 
 const NOW = Date.parse('2026-08-08T05:00:00Z');
@@ -174,6 +175,121 @@ test('jobs: uses yesterday from the history series, keeps the live partial', () 
 test('jobs: degrades on stale generatedAt and on zero totals', () => {
   assert.equal(shapeJobs({ ...JOBS_STATS, generatedAt: '2026-08-05T00:00:00Z' }, { nowMs: NOW, todayIso: TODAY }).available, false);
   assert.equal(shapeJobs({ generatedAt: FRESH, totals: {} }, { nowMs: NOW, todayIso: TODAY }).available, false);
+});
+
+test('jobs: degrades when the history series stops advancing, however fresh generatedAt is', () => {
+  // The aggregator keeps stamping a current `generatedAt` over a corpus that
+  // stopped moving: only the corpus clock can see it.
+  const frozen = {
+    ...JOBS_STATS,
+    history: [
+      { date: '2026-08-01', totalJobs: 22100, added: 512 },
+      { date: '2026-08-04', totalJobs: 22645, added: 591 },
+    ],
+  };
+  const block = shapeJobs(frozen, { nowMs: NOW, todayIso: TODAY });
+  assert.equal(block.available, false);
+  assert.match(block.reason, /2026-08-04/);
+  assert.match(block.reason, /not advancing/);
+});
+
+test(`jobs: tolerates a history lag up to ${JOBS_HISTORY_MAX_LAG_DAYS}d`, () => {
+  const lagging = {
+    ...JOBS_STATS,
+    history: [
+      { date: '2026-08-05', totalJobs: 22100, added: 512 },
+      { date: '2026-08-06', totalJobs: 22645, added: 591 },
+    ],
+  };
+  assert.equal(shapeJobs(lagging, { nowMs: NOW, todayIso: TODAY }).available, true);
+});
+
+test('jobs: degrades on a day that replays the previous one field-for-field', () => {
+  // The measured 2026-08-29 → 2026-08-30 freeze that motivated the guard,
+  // shifted onto the fixture clock. The row exists, so a lag check alone
+  // would pass it.
+  const replayed = {
+    ...JOBS_STATS,
+    history: [
+      { date: '2026-08-06', totalJobs: 22943, added: 33, updated: 22557, removed: 3 },
+      { date: '2026-08-07', totalJobs: 22943, added: 33, updated: 22557, removed: 3 },
+    ],
+  };
+  const block = shapeJobs(replayed, { nowMs: NOW, todayIso: TODAY });
+  assert.equal(block.available, false);
+  assert.match(block.reason, /replays 2026-08-06/);
+});
+
+test('jobs: the live partial row for today is not read as a closed day', () => {
+  // The aggregator seeds a row for the day in progress mirroring `totals`.
+  // With that row in the tail, the lag rule would always measure 0 and the
+  // replay rule would compare a partial day against a full one.
+  const stopped = {
+    ...JOBS_STATS,
+    totals: { ...JOBS_STATS.totals, activeJobs: 22645, todayAdded: 12 },
+    history: [
+      { date: '2026-08-01', totalJobs: 22100, added: 512, updated: 21000, removed: 200 },
+      { date: '2026-08-04', totalJobs: 22645, added: 591, updated: 21500, removed: 210 },
+      { date: TODAY, totalJobs: 22645, added: 12, updated: 300, removed: 4 },
+    ],
+  };
+  const block = shapeJobs(stopped, { nowMs: NOW, todayIso: TODAY });
+  assert.equal(block.available, false);
+  assert.match(block.reason, /2026-08-04/);
+  assert.match(block.reason, /not advancing/);
+
+  // Symmetrically, a partial today that happens to carry over the previous
+  // day's counters is not a replay finding: the freeze is judged on closed days.
+  const carryOver = {
+    ...JOBS_STATS,
+    history: [
+      { date: '2026-08-06', totalJobs: 22352, added: 480, updated: 21900, removed: 228 },
+      { date: '2026-08-07', totalJobs: 22645, added: 591, updated: 22100, removed: 298 },
+      { date: TODAY, totalJobs: 22645, added: 591, updated: 22100, removed: 298 },
+    ],
+  };
+  assert.equal(shapeJobs(carryOver, { nowMs: NOW, todayIso: TODAY }).available, true);
+
+  // A series whose only row is today carries no closed day to judge: the
+  // `generatedAt` guard stays the only one, as before.
+  const todayOnly = { ...JOBS_STATS, history: [{ date: TODAY, totalJobs: 22645, added: 12, updated: 300, removed: 4 }] };
+  assert.equal(shapeJobs(todayOnly, { nowMs: NOW, todayIso: TODAY }).available, true);
+});
+
+test('jobs: a replayed pair of closed days is still caught behind a partial today', () => {
+  const replayedBehindToday = {
+    ...JOBS_STATS,
+    history: [
+      { date: '2026-08-06', totalJobs: 22943, added: 33, updated: 22557, removed: 3 },
+      { date: '2026-08-07', totalJobs: 22943, added: 33, updated: 22557, removed: 3 },
+      { date: TODAY, totalJobs: 22943, added: 5, updated: 900, removed: 1 },
+    ],
+  };
+  const block = shapeJobs(replayedBehindToday, { nowMs: NOW, todayIso: TODAY });
+  assert.equal(block.available, false);
+  assert.match(block.reason, /replays 2026-08-06/);
+});
+
+test('jobs: a moving corpus and a series without counters both stay available', () => {
+  const moving = {
+    ...JOBS_STATS,
+    history: [
+      { date: '2026-08-06', totalJobs: 22352, added: 480, updated: 21900, removed: 228 },
+      { date: '2026-08-07', totalJobs: 22645, added: 591, updated: 22100, removed: 298 },
+    ],
+  };
+  assert.equal(shapeJobs(moving, { nowMs: NOW, todayIso: TODAY }).available, true);
+  // Two idle days are not a replay: without updates there is nothing to freeze.
+  const idle = {
+    ...JOBS_STATS,
+    history: [
+      { date: '2026-08-06', totalJobs: 22645, added: 0, updated: 0, removed: 0 },
+      { date: '2026-08-07', totalJobs: 22645, added: 0, updated: 0, removed: 0 },
+    ],
+  };
+  assert.equal(shapeJobs(idle, { nowMs: NOW, todayIso: TODAY }).available, true);
+  // No `todayIso` (no corpus clock to compare against) keeps the old behaviour.
+  assert.equal(shapeJobs(JOBS_STATS, { nowMs: NOW }).available, true);
 });
 
 // ---------------------------------------------------------------- assembly
