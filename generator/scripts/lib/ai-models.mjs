@@ -72,6 +72,14 @@
  * - MISTRAL_API_KEY — Mistral AI API key (optional, free tier)
  */
 
+// L'unico import statico del modulo, e serve una ragione (#821): il voto che
+// decide `transientExhaustion` deve girare sugli STESSI secchi al netto degli
+// echi di cooldown su cui gira `isLegitimateQuotaDeferral`, e quella
+// sottrazione ha una sola sorgente (AGENTS.md #6). `exhaustion-disposition.mjs`
+// non importa niente a sua volta e non ha effetti collaterali al load: nessun
+// ciclo, nessun costo per chi importa ai-models.mjs per il solo catalogo.
+import { isTransientMajority } from './exhaustion-disposition.mjs';
+
 // ── Model catalog ────────────────────────────────────────────
 export const AI_MODELS = Object.freeze({
   // ── GitHub Models (OpenAI-compatible, shared GH_MODELS_PAT) ──
@@ -7418,8 +7426,18 @@ export async function callLLM(messages, opts = {}) {
   // the alert. The report doesn't reclassify the failure — it hands the caller
   // the number it needs to fix the prompt and try again deliberately.
   err.exhaustionBreakdown = classifyExhaustionCause(errors);
-  err.transientExhaustion = err.exhaustionBreakdown.transient > 0
-    && err.exhaustionBreakdown.transient >= err.exhaustionBreakdown.persistent;
+  //
+  // Il voto e' AL NETTO degli echi di cooldown di provider (#821): le righe di
+  // skip che UN solo guasto — un 429, o un host morto — lascia una volta per
+  // ogni id fratello di quel provider non sono fallimenti indipendenti, e su un
+  // roster da ~106 sono ~12 voti su una maggioranza che si e' gia' decisa per
+  // UNO (run 31823202761: 53 vs 52). La polarita' NON cambia: il pareggio resta
+  // al transitorio (`tie: 'transient'` = il `>=` di sempre), cambia solo il
+  // campione. La sottrazione vive in exhaustion-disposition.mjs, dove vive
+  // anche quella del quoziente: due copie diverse dello stesso sgonfiaggio
+  // farebbero rispondere i tre predicati su campioni diversi dello stesso
+  // errore — che e' esattamente cio' che #821 e' venuta a chiudere.
+  err.transientExhaustion = isTransientMajority(err.exhaustionBreakdown, { tie: 'transient' });
   throw err;
 }
 
