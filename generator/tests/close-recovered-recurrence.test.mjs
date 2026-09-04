@@ -33,6 +33,10 @@ import {
   CHRONIC_LABELS,
   DEFAULT_CHRONIC_RECURRENCES,
   DEFAULT_RECURRENCE_WINDOW_HOURS,
+  hasReadableAnnotations,
+  hasTimeoutAnnotation,
+  hasNoTimeoutEvidenceFromJobs,
+  dropPhantomCancellations,
 } from '../../scripts/ci/close-recovered-failure-issues.mjs';
 import { lostArticleTitle } from '../../scripts/ci/scan-failed-runs.mjs';
 
@@ -367,4 +371,84 @@ test('la soglia 5 resta selettiva sulla famiglia crawler', () => {
   for (const n of [6, 9]) {
     assert.equal(decideChronicEscalation(sample(n), { now }).hold, true, `${n} ricorrenze è cronica`);
   }
+});
+
+
+// --- issue #816: la prova di timeout non si deduce dal silenzio -------------------
+
+const TIMEOUT_MSG = 'The job running on runner GitHub Actions 4 has exceeded the maximum execution time of 30 minutes.';
+const jobsPayload = (...jobs) => ({ total_count: jobs.length, jobs });
+const cancelledJob = (name = 'typecheck (tsc --noEmit)') => ({
+  name, conclusion: 'cancelled', check_run_url: `https://api.github.com/repos/o/r/check-runs/${name}`,
+});
+const readsNothing = () => [];
+const readsEmptyPage = () => [[]];
+const readsTimeout = () => [[{ message: TIMEOUT_MSG }]];
+const readsUnrelated = () => [[{ message: 'Process completed with exit code 1.' }]];
+const readFails = () => null;
+
+test('#816 — pagine annotations vuote non sono la prova che il timeout non c\'è', () => {
+  // `--paginate --slurp` su un endpoint senza contenuto restituisce `[]` o `[[]]`: con il
+  // solo `.every()` entrambe erano vacuamente "leggibili", quindi "nessun timeout".
+  assert.equal(hasReadableAnnotations([]), false, 'nessuna pagina = nessuna lettura');
+  assert.equal(hasReadableAnnotations([[]]), false, 'una pagina vuota = nessuna lettura');
+  assert.equal(hasReadableAnnotations([[], []]), false, 'tutte le pagine vuote = nessuna lettura');
+  assert.equal(hasReadableAnnotations(null), false);
+  assert.equal(hasReadableAnnotations([[{ message: 'x' }, { noMessage: true }]]), false, 'una annotation illeggibile invalida la lettura');
+  assert.equal(hasReadableAnnotations([[], [{ message: 'x' }]]), true, 'una pagina vuota + una piena resta una lettura valida');
+  assert.equal(hasReadableAnnotations(readsTimeout()), true);
+});
+
+test('#816 — un timeout con annotation vuote NON viene tolto dallo storico', () => {
+  for (const read of [readsNothing, readsEmptyPage, readFails]) {
+    assert.equal(
+      hasNoTimeoutEvidenceFromJobs(jobsPayload(cancelledJob()), read),
+      false,
+      'senza una annotation letta non si conclude "nessun timeout": la run resta nello storico',
+    );
+  }
+  assert.equal(hasNoTimeoutEvidenceFromJobs(jobsPayload(cancelledJob()), readsTimeout), false, 'timeout provato');
+  assert.equal(hasNoTimeoutEvidenceFromJobs(jobsPayload(cancelledJob()), readsUnrelated), true, 'annotation lette, nessuna di timeout');
+});
+
+test('#816 — lo scarto in coda (#5333) resta phantom: non ha job, quindi non ha annotation', () => {
+  assert.equal(hasNoTimeoutEvidenceFromJobs(jobsPayload(), readsNothing), true);
+  assert.deepEqual(
+    dropPhantomCancellations(
+      [{ conclusion: 'cancelled', databaseId: 1 }, { conclusion: 'failure', databaseId: 2 }],
+      () => true,
+    ),
+    [{ conclusion: 'failure', databaseId: 2 }],
+  );
+});
+
+test('#816 — una run cancelled con un job failure è un fallimento, non una cancellazione fantasma', () => {
+  const failedJob = { name: 'build', conclusion: 'failure' };
+  assert.equal(
+    hasNoTimeoutEvidenceFromJobs(jobsPayload(failedJob, cancelledJob()), readsUnrelated),
+    false,
+    'il job rosso esce subito: la run non può sparire da numeratore e denominatore',
+  );
+  assert.equal(
+    hasNoTimeoutEvidenceFromJobs(jobsPayload({ name: 'slow', conclusion: 'timed_out' }), readsUnrelated),
+    false,
+    '`timed_out` è un timeout già dichiarato dall\'API',
+  );
+  assert.equal(
+    hasNoTimeoutEvidenceFromJobs(jobsPayload({ name: 'ok', conclusion: 'success' }, { name: 'skip', conclusion: 'skipped' }), readsUnrelated),
+    true,
+    'success/skipped non sono prove di fallimento',
+  );
+});
+
+test('#816 — payload troncato o job senza check-run: PROCEED-SAFE verso l\'hold', () => {
+  assert.equal(hasNoTimeoutEvidenceFromJobs({ total_count: 3, jobs: [cancelledJob()] }, readsTimeout), false, 'listing troncato');
+  assert.equal(hasNoTimeoutEvidenceFromJobs(null, readsUnrelated), false);
+  assert.equal(hasNoTimeoutEvidenceFromJobs(jobsPayload({ name: 'x', conclusion: 'cancelled' }), readsUnrelated), false, 'senza check_run_url non c\'è niente da leggere');
+});
+
+test('#816 — hasTimeoutAnnotation riconosce entrambe le forme del messaggio GitHub', () => {
+  assert.equal(hasTimeoutAnnotation([[{ message: TIMEOUT_MSG }]]), true);
+  assert.equal(hasTimeoutAnnotation([[], [{ message: 'The job has exceeded the maximum number of minutes allowed.' }]]), true);
+  assert.equal(hasTimeoutAnnotation(readsUnrelated()), false);
 });
