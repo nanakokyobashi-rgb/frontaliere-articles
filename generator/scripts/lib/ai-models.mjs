@@ -1950,6 +1950,13 @@ export function getCallLatencyStats() {
 // get a temporary cooldown to avoid wasting retries on sibling models.
 // Maps provider name → cooldown-until timestamp (ms).
 const _providerCooldown = new Map();
+// Why a provider is cooling down, provider name → short human cause. Kept
+// beside _providerCooldown (not folded into its value) so the timestamp read
+// path stays a plain number. Two causes exist today — a 429 and an unreachable
+// host (nanako#475) — and the pre-flight skip line has to name the right one:
+// "recent 429" on a host that never answered sends the reader hunting a quota
+// that was never hit. AGENTS.md #6: one source, both messages read it.
+const _providerCooldownReason = new Map();
 const PROVIDER_COOLDOWN_MS = 60_000; // 1 minute cooldown after 429
 
 // Ceiling applied to a provider's `Retry-After` header (some return 86399 =
@@ -1963,15 +1970,21 @@ function isProviderCoolingDown(provider) {
   if (!until) return false;
   if (Date.now() >= until) {
     _providerCooldown.delete(provider);
+    _providerCooldownReason.delete(provider);
     return false;
   }
   return true;
 }
 
-function cooldownProvider(provider) {
+function cooldownProvider(provider, reason = 'rate-limited') {
   const until = Date.now() + PROVIDER_COOLDOWN_MS;
   _providerCooldown.set(provider, until);
-  console.warn(`🧊 Provider ${provider} cooled down for ${PROVIDER_COOLDOWN_MS / 1000}s (rate-limited)`);
+  _providerCooldownReason.set(provider, reason);
+  console.warn(`🧊 Provider ${provider} cooled down for ${PROVIDER_COOLDOWN_MS / 1000}s (${reason})`);
+}
+
+function providerCooldownReason(provider) {
+  return _providerCooldownReason.get(provider) || 'rate-limited';
 }
 
 // Single source of truth for what counts a "last-resort" model and its
@@ -3870,6 +3883,7 @@ export function resetState() {
   _exhaustedLogged.clear();
   _preflightSkipLogged.clear();
   _providerCooldown.clear();
+  _providerCooldownReason.clear();
   _modelScores.clear();
   _modelDetails.clear();
   _dirtyModels.clear();
@@ -3975,6 +3989,65 @@ export function isQuotaExhaustedError(err) {
     msg.includes('free-models-per-day') ||
     msg.includes('free models per day')
   );
+}
+
+/**
+ * Detect a failure that happened BEFORE any HTTP status existed: the host did
+ * not accept a connection at all (DNS miss, refused, unroutable).
+ *
+ * ── WHY THIS IS A CLASS, NOT A ONE-OFF (nanako#475) ────────────────────────
+ *
+ * `classifyNonRetryableError` only ever sees a `res.status`, so it can only
+ * classify a host that ANSWERS. A retired host stops answering, and then every
+ * one of its models raises `TypeError: fetch failed` — which is neither
+ * `nonRetryable` nor a timeout, so it fell through to the generic
+ * "Otherwise retry" branch and burned `maxRetriesPerModel` attempts WITH
+ * backoff sleeps, per model, every run.
+ *
+ * Measured on GH_MODELS_BASE (models.inference.ai.azure.com), the host behind
+ * every GitHub-hosted id in the chain:
+ *   2026-08-18 → HTTP 404, empty body   (answers, denies the route)
+ *   2026-09-04 → curl exit code 000     (does not answer at all)
+ * The 404 was already handled (one dead round-trip per model per run); the
+ * 000 is NOT, and it costs strictly more than the 404 it replaced, because a
+ * connect failure re-enters the retry loop where a 404 short-circuits it.
+ *
+ * Deliberately narrow. Only connection-ESTABLISHMENT codes are listed:
+ * ECONNRESET / EPIPE (mid-stream drops) and socket timeouts stay retryable,
+ * because those are transient on a host that is otherwise up, and the timeout
+ * branch already owns the hang case. Widening this set trades a real retry
+ * for a false ban.
+ *
+ * undici wraps the cause one or two levels down and, for a multi-address DNS
+ * result, as an AggregateError, so the walk below is not defensive padding —
+ * `e.code` alone is `undefined` for every real `fetch failed`.
+ *
+ * @returns {string|null} the syscall code (for the log/ban reason), or null.
+ */
+const HOST_UNREACHABLE_CODES = new Set([
+  'ENOTFOUND',      // DNS: name does not resolve
+  'EAI_AGAIN',      // DNS: resolver failure
+  'ECONNREFUSED',   // host answers the SYN with a reset — nothing listening
+  'EHOSTUNREACH',
+  'ENETUNREACH',
+  'EHOSTDOWN',
+]);
+
+export function classifyHostUnreachable(err) {
+  const seen = new Set();
+  const walk = (e, depth) => {
+    if (!e || typeof e !== 'object' || depth > 4 || seen.has(e)) return null;
+    seen.add(e);
+    if (typeof e.code === 'string' && HOST_UNREACHABLE_CODES.has(e.code)) return e.code;
+    if (Array.isArray(e.errors)) {
+      for (const sub of e.errors) {
+        const hit = walk(sub, depth + 1);
+        if (hit) return hit;
+      }
+    }
+    return walk(e.cause, depth + 1);
+  };
+  return walk(err, 0);
 }
 
 /**
@@ -4762,6 +4835,16 @@ async function _callOpenAICompatible(apiModel, messages, opts, { endpoint, apiKe
         if (providerName === 'OmniRoute') {
           console.warn(`⏱️  [ai-models] OmniRoute auto call timed out before a response arrived (no x-omniroute-* headers to log) — check local ~/.omniroute/storage.sqlite call_logs table or the OmniRoute dashboard for which provider it was routing to.`);
         }
+        throw e;
+      }
+      // Host unreachable: never retry within this call, for the same reason as
+      // the timeout branch above — the next attempt is 100% certain to fail
+      // identically, since nothing about a refused connection changes in
+      // `attempt * backoffMs`. Tagged so the callLLM() cascade can apply its
+      // circuit breaker (see classifyHostUnreachable, nanako#475).
+      const unreachableCode = classifyHostUnreachable(e);
+      if (unreachableCode) {
+        e.hostUnreachable = unreachableCode;
         throw e;
       }
       // Otherwise retry
@@ -5848,6 +5931,15 @@ async function _callGeminiRaw(model, messages, opts) {
       // _callOpenAICompatible (same rationale, sibling pattern kept in sync).
       const isTimeout = e.name === 'AbortError' || e.name === 'TimeoutError' || /timeout|aborted/i.test(e.message || '');
       if (isTimeout) throw e;
+      // Host unreachable — sibling of the branch in _callOpenAICompatible,
+      // kept in sync (nanako#475). Gemini's host is alive today, but the
+      // antipattern is the loop's, not the host's: a `fetch failed` here fell
+      // through to the generic retry exactly the same way.
+      const unreachableCode = classifyHostUnreachable(e);
+      if (unreachableCode) {
+        e.hostUnreachable = unreachableCode;
+        throw e;
+      }
       _stats.retries++;
       const waitMs = attempt * opts.backoffMs;
       console.warn(`⚠️  [${model}] Error retry ${attempt}/${opts.maxRetriesPerModel}: ${e.message?.slice(0, 150)}`);
@@ -6245,8 +6337,9 @@ export async function callLLM(messages, opts = {}) {
     // chain also failed. Logged once per model+cause (see _logPreflightSkipOnce).
     const provider = getProvider(model);
     if (isProviderCoolingDown(provider)) {
-      _logPreflightSkipOnce(model, 'cooldown', `provider ${provider} cooling down (rate-limited)`);
-      errors.push(`${model}: skipped — provider ${provider} cooling down (recent 429)`);
+      const cooldownCause = providerCooldownReason(provider);
+      _logPreflightSkipOnce(model, 'cooldown', `provider ${provider} cooling down (${cooldownCause})`);
+      errors.push(`${model}: skipped — provider ${provider} cooling down (${cooldownCause})`);
       _recordLastResortSkip(model, 'provider cooling down');
       continue;
     }
@@ -6449,6 +6542,30 @@ export async function callLLM(messages, opts = {}) {
         markModelExhausted(model, 'timeout');
         _stats.exhausted++;
         markedExhausted = true;
+      }
+      // Unreachable-host circuit breaker (nanako#475). Same shape as the
+      // timeout breaker above, one level stronger on the provider: a host that
+      // refuses the connection refuses it for EVERY id it serves, so exhausting
+      // just this model would still pay one dead connect per sibling. The
+      // cooldown is the existing 429 mechanism reused — bounded and in-process,
+      // so a host that comes back is picked up again rather than banned.
+      //
+      // `_isLastResortProvider` exemption is load-bearing, not symmetry:
+      // _callLocal talks to 127.0.0.1 and raises ECONNREFUSED whenever the
+      // local server simply isn't running, which is the NORMAL state on a CI
+      // runner. Banning on it would make local/ unusable as a last resort —
+      // the trap in nanako#362 / tests/local-llm-fallback.
+      if (!isTimeoutFailure && e.hostUnreachable && !_isLastResortProvider(model)) {
+        if (!markedExhausted) {
+          markModelExhausted(model, 'nonretryable', e.hostUnreachable);
+          _stats.exhausted++;
+          markedExhausted = true;
+        }
+        if (!isProviderCoolingDown(provider)) {
+          cooldownProvider(provider, `host unreachable: ${e.hostUnreachable}`);
+          _stats.providerCooldowns++;
+          console.warn(`🚫 [${model}] Host unreachable (${e.hostUnreachable}) — cooling down provider ${provider}; its sibling models are skipped instead of re-dialling a dead host`);
+        }
       }
       // claude-cli's own timeout-storm circuit breaker (see
       // _claudeCliTimeoutStormDetected declaration) — separate from the
