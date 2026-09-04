@@ -114,9 +114,51 @@ function stripOneWrappingQuotePair(value) {
   return value;
 }
 
-function isLiteralNullString(value) {
+/**
+ * Esportata perche' il gate dello split in `create-article.mjs` decide LA
+ * STESSA COSA su un valore GREZZO del modello (`raw.trim()` nudo), e i due
+ * predicati divergevano: su `content.it = { body1: "null", body2: <reale>,
+ * body3: <reale> }` — la serializzazione di `null` misurata su `haiku` — il
+ * RAW «null» vinceva sul blocco normalizzato, che qui invece lo svuota. Il
+ * paragrafo usciva pubblicato col testo `null`. Un valore condiviso ha UNA
+ * sorgente (AGENTS.md #6): il valle e il gate usano questo predicato, non due
+ * copie che si allontanano.
+ */
+export function isLiteralNullString(value) {
   return LITERAL_NULL_STRING_RE.test(value) || LITERAL_NULL_STRING_RE.test(stripOneWrappingQuotePair(value));
 }
+
+/**
+ * ── IL FLOOR DI PLAUSIBILITA' SUI CAMPI DI TESTO ───────────────────────────
+ *
+ * `normalizeItalianContentFromPayload` cerca ogni campo su TUTTI i candidati
+ * (`content[locale]`, `content`, radice) e adotta la prima stringa non vuota.
+ * Un campo lungo tre caratteri, o un residuo del prompt parcheggiato alla
+ * radice, e' «non vuoto» e usciva quindi `ok`. Per i body la cosa moriva piu'
+ * a valle sulla lunghezza dell'articolo; per i META no: `title` diventa slug e
+ * canonical, e questo repo pubblica senza che il sito ribuildi — l'URL
+ * sbagliato e' live subito.
+ *
+ * DIMENSIONAMENTO, sul corpus reale e non a tavolino. Misurato sui 5.565
+ * `title` e 5.569 `excerpt` italiani pubblicati (`content/blog-meta-it.ts` +
+ * `content/blog-meta-ch-it.ts`, 2026-09-04):
+ *
+ *              n      min   p1    p5    mediana
+ *   title      5565   16    34    42    57
+ *   excerpt    5569   37    66    87    138
+ *
+ * I floor stanno SOTTO il minimo osservato (15 < 16, 30 < 37): su tutto il
+ * corpus pubblicato non rigetterebbero nemmeno un articolo. Non sono una
+ * soglia di qualita' — quella non si misura in caratteri — ma un pavimento di
+ * PLAUSIBILITA': sotto, il valore non e' un titolo corto, e' un altro tipo di
+ * cosa (un `"n/a"`, un troncamento, un'etichetta). Alzarli verso p1 farebbe il
+ * danno peggiore dei due: rigenerare contro un modello che ha obbedito.
+ *
+ * `body2` era gia' qui, come costante inline: sta nella stessa tabella perche'
+ * e' la stessa domanda, e perche' una soglia in due posti e' una soglia che
+ * diverge.
+ */
+export const FIELD_MIN_CHARS = { title: 15, excerpt: 30, body2: 40 };
 
 /**
  * ── CHI DECIDE QUALI CAMPI SONO ATTESI ─────────────────────────────────────
@@ -387,11 +429,19 @@ export function classifyBody2Payload({
       missing.push(field);
     }
   }
-  // La soglia sul body2 vale solo dove il body2 e' stato CHIESTO. Sulla meta'
-  // `meta` dello split non lo e': `itContent.body2` sarebbe `undefined` e il
-  // controllo passerebbe comunque, ma tenerlo legato ai campi attesi dice
-  // perche' — non e' un caso fortunato, e' il contratto.
-  if (expectedFields.includes('body2') && itContent.body2 && itContent.body2.trim().length < 40) missing.push('body2<40');
+  // I floor valgono solo sui campi CHIESTI. Sulla meta' `meta` dello split
+  // `itContent.body2` sarebbe `undefined` e il controllo passerebbe comunque,
+  // ma tenerlo legato ai campi attesi dice perche' — non e' un caso fortunato,
+  // e' il contratto. Il campo ASSENTE e' gia' in `missing` per il ciclo sopra:
+  // qui si giudica solo il campo presente ma implausibile.
+  for (const field of expectedFields) {
+    const min = FIELD_MIN_CHARS[field];
+    if (!min) continue;
+    const val = itContent[field];
+    if (typeof val === 'string' && val.trim().length > 0 && val.trim().length < min) {
+      missing.push(`${field}<${min}`);
+    }
+  }
   // Language sanity — fallback models occasionally drift to CJK / Cyrillic
   // when prompted in Italian. Treat as malformed output: penalises the model,
   // chain rotates, no budget burned at the outer headline-validation layer.

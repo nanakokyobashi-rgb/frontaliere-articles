@@ -148,7 +148,7 @@ import { JSON_QUOTE_SAFETY_RULE_IT, describeJsonParseError, describeRawForDiagno
 // modulo puro perche' le gate del generatore girano `node --test` senza `npm ci`
 // e non possono importare QUESTO file: cosi' il test esegue lo stesso oggetto
 // codice della produzione invece di una copia. Vedi l'intestazione del modulo.
-import { REQUIRED_IT_BODY_FIELDS, BODY_ONLY_FIELDS, META_ONLY_FIELDS, normalizeItalianContentFromPayload, classifyBody2Payload, resolveBody2Validation, recoverMisplacedFaq } from './lib/body2-payload-verdict.mjs';
+import { REQUIRED_IT_BODY_FIELDS, BODY_ONLY_FIELDS, META_ONLY_FIELDS, normalizeItalianContentFromPayload, classifyBody2Payload, resolveBody2Validation, recoverMisplacedFaq, isLiteralNullString } from './lib/body2-payload-verdict.mjs';
 import { describePayloadRejection } from './lib/llm-payload-diagnostics.mjs';
 import {
   factCheckFingerprint,
@@ -8497,10 +8497,28 @@ Rispondi SOLO con JSON valido, senza markdown.` },
       ? _bodyContentDiretto : {};
     const _bodyNormalizzato = normalizeItalianContentFromPayload(bodyData, primaryLocale, BODY_ONLY_FIELDS) || {};
     const bodyContent = { ..._bodyDirettoOggetto };
+    // IL RAW VINCE, MA CON LO STESSO PREDICATO DEL VALLE. Qui c'era
+    // `raw.trim()` nudo: qualunque stringa non vuota vinceva, inclusa la
+    // stringa letterale `"null"` — che e' come il modello serializza il `null`
+    // che lo schema dichiara sui campi di `content` (misurato su `haiku`, la
+    // stessa classe del filtro `isLiteralNullString` nel modulo del verdetto).
+    // Su `content.it = { body1: "null", body2: <reale>, body3: <reale> }` il
+    // RAW «null» vinceva, il blocco normalizzato — che quel valore lo svuota —
+    // non veniva mai guardato, e l'articolo usciva con un paragrafo il cui
+    // testo e' `null`: `articolo.length` supera i 500 grazie agli altri due,
+    // `validateItalianPayload` vede body1 non vuoto, e il pezzo arriva a
+    // `content/` e da li' a `dist/api/` senza che nulla fallisca. Era il punto
+    // esatto in cui i due gate divergevano (#786).
+    const _bodyNullLetterali = [];
     for (const k of BODY_ONLY_FIELDS) {
       const raw = bodyContent[k];
-      if (typeof raw === 'string' && raw.trim()) continue;
-      if (typeof _bodyNormalizzato[k] === 'string' && _bodyNormalizzato[k]) bodyContent[k] = _bodyNormalizzato[k];
+      const rawTrim = typeof raw === 'string' ? raw.trim() : '';
+      if (rawTrim && !isLiteralNullString(rawTrim)) continue;
+      if (typeof _bodyNormalizzato[k] === 'string' && _bodyNormalizzato[k]) { bodyContent[k] = _bodyNormalizzato[k]; continue; }
+      // Il `"null"` non recuperato NON puo' restare: sopravviverebbe allo
+      // spread di `merged` e finirebbe pubblicato come testo. Si toglie, e la
+      // meta' body resta senza quel campo — cio' che il valle vedeva gia'.
+      if (rawTrim) { delete bodyContent[k]; _bodyNullLetterali.push(k); }
     }
     const articolo = [bodyContent.body1, bodyContent.body2, bodyContent.body3]
       .filter((x) => typeof x === 'string' && x.trim()).join('\n\n');
@@ -8556,6 +8574,18 @@ Rispondi SOLO con JSON valido, senza markdown.` },
         ? ` (abort_topical_relevance=${JSON.stringify(bodyData.abort_topical_relevance)}, ne' true ne' assente: ignorato da entrambi i gate)`
         : '';
       console.error(`  ⚠️ [prompt-split] chiamata 1/2 ha reso ${articolo.length}ch di corpo${_flagAnomalo}: ricado sulla chiamata unica.`);
+      return null;
+    }
+    // NESSUNA USCITA MUTA, e nessun merge a campo mancante: un body serializzato
+    // come `"null"` e non recuperabile da un altro candidato lascerebbe `merged`
+    // senza quel campo, che a valle muore in `validateItalianPayload` SENZA
+    // rigenerazione ne' rotazione di modello. La chiamata unica invece rigenera:
+    // e' il percorso di recupero che esiste gia' per ogni altra 1/2 inutilizzabile.
+    if (_bodyNullLetterali.length > 0) {
+      console.error(
+        `  ⚠️ [prompt-split] chiamata 1/2 ha serializzato la stringa letterale "null" su `
+        + `${_bodyNullLetterali.join(', ')} (nessun altro candidato la porta): ricado sulla chiamata unica.`,
+      );
       return null;
     }
 
