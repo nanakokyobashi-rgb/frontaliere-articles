@@ -125,6 +125,147 @@ test('senza denominatore non si differisce (l\'affermazione non dimostrata vale 
   assert.equal(isLegitimateQuotaDeferral(other), false, 'solo una cascata svuotata si differisce');
 });
 
+/**
+ * ── GLI ECHI DI UN COOLDOWN DI PROVIDER NON VOTANO (issue #805) ─────────────
+ *
+ * Stessa forma di errore, con in piu' il campo che `classifyExhaustionCause`
+ * ora allega: quante delle righe di `errors` sono skip di fratelli causati da
+ * UN solo cooldown di provider, e in quale secchio hanno votato.
+ */
+function conEchi({ transient, persistent, total, echi }) {
+  const err = run31823202761({ transient, persistent, total });
+  err.exhaustionBreakdown.providerCooldownSkips = echi;
+  return err;
+}
+
+test('la notte di quota con l\'host GitHub morto torna un differimento (#805)', () => {
+  // La misura della issue: 106 righe, di cui 11 sono i fratelli GitHub saltati
+  // per il cooldown messo da UN host irraggiungibile — gia' contato per conto
+  // suo. Post-#767 quelle 11 votano persistente e SGONFIANO lo share sotto la
+  // soglia, facendo uscire rossa una notte che si cura a mezzanotte.
+  const err = conEchi({
+    transient: 51, persistent: 55, total: 106,
+    echi: { total: 11, transient: 0, persistent: 11 },
+  });
+  const lordo = 51 / 106;
+  assert.ok(lordo < QUOTA_DEFERRAL_MIN_TRANSIENT_SHARE, `premessa: col denominatore lordo e' rosso (${lordo})`);
+
+  const s = quotaDeferralShare(err);
+  assert.equal(s.total, 95, 'gli 11 echi escono dal denominatore');
+  assert.equal(s.transient, 51, 'il numeratore non cambia: gli echi votavano persistente');
+  assert.equal(s.persistent, 44);
+  assert.equal(s.providerCooldownSkips, 11, 'quante righe sono state tolte resta leggibile');
+  assert.equal(s.share, 51 / 95);
+  assert.equal(isLegitimateQuotaDeferral(err), true, 'un guasto solo non decide il verdetto di 106 righe');
+});
+
+test('sottrarre gli echi non salva uno share genuinamente basso (#805)', () => {
+  // La meta' simmetrica, ed e' quella che rende la fix accettabile: se il
+  // roster e' davvero mezzo rotto per ragioni indipendenti, togliere gli echi
+  // non lo porta sopra soglia. 40 transitori su 95 netti = 0,42 → rosso.
+  const err = conEchi({
+    transient: 40, persistent: 55, total: 106,
+    echi: { total: 11, transient: 0, persistent: 11 },
+  });
+  assert.equal(quotaDeferralShare(err).share, 40 / 95);
+  assert.equal(isLegitimateQuotaDeferral(err), false);
+
+  // E senza un solo eco — roster mezzo senza chiavi — il comportamento e'
+  // quello di sempre.
+  const senzaEchi = run31823202761({ transient: 50, persistent: 56, total: 106 });
+  assert.equal(isLegitimateQuotaDeferral(senzaEchi), false);
+});
+
+test('gli echi TRANSITORI escono anche dal numeratore (niente share > 1) (#805)', () => {
+  // Una notte di quota vera prende l'altra causa di cooldown: ogni provider
+  // risponde 429, e i fratelli scrivono `cooling down` — vocabolario
+  // transitorio. Toglierli dal solo denominatore darebbe share > 1, e nel caso
+  // limite di una cascata di soli echi una divisione per zero.
+  const err = conEchi({
+    transient: 106, persistent: 0, total: 106,
+    echi: { total: 96, transient: 96, persistent: 0 },
+  });
+  const s = quotaDeferralShare(err);
+  assert.equal(s.total, 10);
+  assert.equal(s.transient, 10);
+  assert.equal(s.share, 1, 'lo share resta una frazione, non sfonda 1');
+  assert.equal(isLegitimateQuotaDeferral(err), true);
+
+  // Cascata fatta di SOLI echi: nessun fallimento indipendente da misurare.
+  // L'affermazione non dimostrata vale rosso, come per il denominatore a zero.
+  const soliEchi = conEchi({
+    transient: 12, persistent: 0, total: 12,
+    echi: { total: 12, transient: 12, persistent: 0 },
+  });
+  assert.equal(quotaDeferralShare(soliEchi).share, 0);
+  assert.equal(isLegitimateQuotaDeferral(soliEchi), false);
+});
+
+test('l\'eco NON ripartito non esce dal solo denominatore (#805)', () => {
+  // Un `echo.total` piu' grande della somma dei due secchi non e' un totale
+  // nudo da clampare: e' massa che, uscendo dal denominatore senza uscire da
+  // nessun secchio, GONFIA lo share. Sulla run 31823202761 (53/106 = 0,500,
+  // rosso) bastano 50 echi non ripartiti per portarla a 53/56 = 0,946.
+  const err = conEchi({ transient: 53, persistent: 52, total: 106, echi: { total: 50 } });
+  const s = quotaDeferralShare(err);
+  assert.equal(s.total, 106, 'la massa non collocabile nel secchio ambiguo (1 riga) non compra denominatore');
+  assert.equal(s.share, 53 / 106);
+  assert.equal(isLegitimateQuotaDeferral(err), false, 'nessun differimento inventato dal denominatore');
+
+  // E l'eco ambiguo VERO — una `skipPhrase` futura che non matcha nessuna
+  // delle due regex — viene tolto, perche' ci sta nella massa ambigua.
+  const ambiguoVero = conEchi({ transient: 51, persistent: 44, total: 106, echi: { total: 11 } });
+  const a = quotaDeferralShare(ambiguoVero);
+  assert.equal(a.total, 95, 'gli 11 echi ambigui stanno negli 11 ambigui e escono');
+  assert.equal(a.transient, 51, 'nessuno dei due secchi si muove: gli echi non votavano');
+  assert.equal(isLegitimateQuotaDeferral(ambiguoVero), true);
+});
+
+test('quando gli echi sono la maggioranza la sottrazione non ribalta il verdetto (#805)', () => {
+  // 12 host irraggiungibili (12 guasti persistenti VERI, che a mezzanotte ci
+  // sono ancora) + 81 echi dei loro fratelli + 13 timeout. Il netto e' 13/25 =
+  // 0,52 su 25 righe: sopra soglia per UN voto, su un campione che gli echi
+  // hanno ridotto a un quarto. Il lordo, 13/106 = 0,12, era rosso.
+  const err = conEchi({
+    transient: 13, persistent: 93, total: 106,
+    echi: { total: 81, transient: 0, persistent: 81 },
+  });
+  const s = quotaDeferralShare(err);
+  assert.equal(s.total, 25);
+  assert.ok(s.share > s.required, `premessa: sul netto passerebbe (${s.share})`);
+  assert.equal(s.echoDominated, true, 'la riga diagnostica dice perche\' e\' rosso lo stesso');
+  assert.equal(isLegitimateQuotaDeferral(err), false, '12 host morti non si curano a mezzanotte');
+
+  // La notte di quota VERA fatta quasi tutta di echi `cooling down` resta un
+  // differimento: li' il verdetto regge anche sul lordo (~1,0), e la
+  // sottrazione lo conferma invece di ribaltarlo.
+  const quotaVera = conEchi({
+    transient: 106, persistent: 0, total: 106,
+    echi: { total: 96, transient: 96, persistent: 0 },
+  });
+  assert.equal(quotaDeferralShare(quotaVera).echoDominated, true);
+  assert.equal(isLegitimateQuotaDeferral(quotaVera), true);
+});
+
+test('senza il campo nuovo il verdetto e\' quello di oggi, byte per byte (#805)', () => {
+  // Retro-compatibilita': un errore serializzato prima di #805, o un chiamante
+  // che non popola il campo, non deve cambiare comportamento.
+  const err = run31823202761();
+  assert.equal(err.exhaustionBreakdown.providerCooldownSkips, undefined);
+  assert.equal(quotaDeferralShare(err).share, 53 / 106);
+  assert.equal(quotaDeferralShare(err).providerCooldownSkips, 0);
+  assert.equal(isLegitimateQuotaDeferral(err), false);
+
+  // E un campo malformato degrada allo stesso posto invece di INVENTARE un
+  // differimento: nessuna sottrazione puo' superare il secchio da cui esce.
+  for (const echi of [null, 'undici', { total: 999 }, { total: -5, transient: -5 }, { transient: 999 }]) {
+    const rotto = conEchi({ transient: 53, persistent: 52, total: 106, echi });
+    const s = quotaDeferralShare(rotto);
+    assert.ok(s.total >= 0 && s.transient >= 0 && s.transient <= s.total, `tally coerente per ${JSON.stringify(echi)}`);
+    assert.equal(isLegitimateQuotaDeferral(rotto), false, `nessun differimento inventato da ${JSON.stringify(echi)}`);
+  }
+});
+
 // ── 2. IL CABLAGGIO in create-article.mjs ──────────────────────────────────
 
 test('le sei ragioni legittime escono TUTTE con la costante, e nessun\'altra', () => {
