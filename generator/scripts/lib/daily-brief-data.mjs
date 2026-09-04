@@ -30,6 +30,30 @@ export const FUEL_MAX_AGE_MS = 48 * HOUR_MS;
 /** FX has weekend gaps; five calendar days tolerates Fri→Wed without lying. */
 export const EXCHANGE_MAX_AGE_DAYS = 5;
 export const JOBS_MAX_AGE_MS = 48 * HOUR_MS;
+/**
+ * `jobs-stats.json` carries two independent clocks and only one of them is the
+ * corpus. `generatedAt` is stamped by the stats aggregator, which runs on its
+ * own schedule and re-emits a payload whether or not new job data landed —
+ * so it stays fresh across a frozen corpus and the block above never degrades.
+ * `history` is the corpus clock: one row per day, sourced from the data that
+ * was actually pushed.
+ *
+ * Measured, not hypothetical: on 2026-08-30 the series carried a row that was
+ * a field-for-field replay of 2026-08-29 (`totalJobs` 22943, `added` 33,
+ * `updated` 22557, `removed` 3), then caught up with a +5982 spike on 09-01.
+ * `generatedAt` was fresh throughout, so the edition published a carried-over
+ * "new listings yesterday" figure as fact. Same silent-staleness shape as
+ * a tolerated push-contention loss upstream: nothing fails, the number is just
+ * old (#744).
+ *
+ * `shapeExchange` already keys on the data's own advance (the last point's
+ * `date`) rather than on a producer timestamp; these two rules give the jobs
+ * block the same property.
+ */
+/** The newest history day may lag `todayIso` by at most this many days. */
+export const JOBS_HISTORY_MAX_LAG_DAYS = 2;
+/** Counters compared field-for-field to detect a replayed (frozen) day. */
+const JOBS_HISTORY_COUNTERS = ['totalJobs', 'added', 'updated', 'removed'];
 
 /** Decode a single Firestore REST value into plain JS. */
 export function decodeValue(v) {
@@ -194,6 +218,43 @@ export function shapeExchange(doc, { todayIso } = {}) {
   };
 }
 
+/**
+ * Corpus-advance check over the `history` series. Returns a degradation reason
+ * when the corpus has visibly stopped moving, or `null` when it has advanced
+ * (or when the series carries too little signal to judge — in that case the
+ * `generatedAt` guard remains the only one, as before).
+ */
+export function jobsCorpusFrozenReason(stats, { todayIso } = {}) {
+  if (!todayIso) return null;
+  const todayMs = Date.parse(todayIso);
+  if (!Number.isFinite(todayMs)) return null;
+  const rows = (Array.isArray(stats?.history) ? stats.history : [])
+    .filter((h) => h && typeof h.date === 'string' && Number.isFinite(Date.parse(h.date)))
+    .sort((a, b) => a.date.localeCompare(b.date));
+  if (rows.length === 0) return null;
+
+  const newest = rows[rows.length - 1];
+  const lagDays = Math.round((todayMs - Date.parse(newest.date)) / (24 * HOUR_MS));
+  if (lagDays > JOBS_HISTORY_MAX_LAG_DAYS) {
+    return `jobs history stops at ${newest.date}, ${lagDays}d before ${todayIso} (max ${JOBS_HISTORY_MAX_LAG_DAYS}d) — corpus is not advancing`;
+  }
+
+  // A row can be present and still be a replay of the previous day. Requiring
+  // every counter to match exactly — and `updated` to be non-zero, so two
+  // genuinely empty days are not flagged — makes a coincidence implausible on
+  // a corpus with thousands of daily updates.
+  if (rows.length < 2) return null;
+  const prev = rows[rows.length - 2];
+  const counters = JOBS_HISTORY_COUNTERS.map((key) => Number(newest[key]));
+  if (!counters.every((value) => Number.isFinite(value))) return null;
+  if (!(Number(newest.updated) > 0)) return null;
+  const replayed = JOBS_HISTORY_COUNTERS.every((key) => Number(newest[key]) === Number(prev[key]));
+  if (replayed) {
+    return `jobs history day ${newest.date} replays ${prev.date} field-for-field — corpus did not advance`;
+  }
+  return null;
+}
+
 /** Jobs block from the CDN `jobs-stats.json` payload. */
 export function shapeJobs(stats, { nowMs = Date.now(), todayIso } = {}) {
   if (!stats || typeof stats !== 'object') return unavailable('jobs-stats.json missing');
@@ -205,6 +266,8 @@ export function shapeJobs(stats, { nowMs = Date.now(), todayIso } = {}) {
   const totals = stats.totals || {};
   const activeJobs = Number(totals.activeJobs);
   if (!Number.isFinite(activeJobs) || activeJobs <= 0) return unavailable('jobs stats carry no activeJobs total');
+  const frozenReason = jobsCorpusFrozenReason(stats, { todayIso });
+  if (frozenReason) return unavailable(frozenReason);
   // The morning cron runs before the day has accumulated: "yesterday" from the
   // history series is the honest daily number, todayAdded is the live partial.
   let yesterdayAdded = null;
