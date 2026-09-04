@@ -272,6 +272,12 @@ import {
 } from './lib/article-meta-block.mjs';
 import { sanitizeText } from '../../scripts/lib/sanitize-control-chars.mjs';
 import { reportStrippedControlChars } from './lib/control-char-write-report.mjs';
+import {
+  beginRegisterLock as beginRegisterLockImpl,
+  endRegisterLock as endRegisterLockImpl,
+  resolveRegisterLock as resolveRegisterLockImpl,
+  REGISTER_LOCK_FILE,
+} from './lib/register-lock.mjs';
 // Il protocollo di riferimento del prompt di selezione headline (issue #188).
 // Le due liste del prompt — candidate e articoli gia' pubblicati — avevano la
 // STESSA sintassi `[n]`, quindi un riferimento del modello era leggibile in due
@@ -2728,6 +2734,98 @@ function write(rel, content) {
   } catch (err) {
     try { unlinkSync(tmp); } catch { /* best-effort cleanup */ }
     throw err;
+  }
+}
+
+// ── Multi-file registration lock (issue #562) ─────────────────
+// The 9-file article registration (router, blog list, i18n, three locale
+// files, SEO service, sitemap, sitemap-news — both here and in the primary
+// AI flow's own write step, which duplicates the same sequence instead of
+// calling registerArticleFiles()) has no cross-file transaction: each write()
+// above is atomic on its OWN target (issue #561), but nothing stops a kill —
+// or any other failure — landing BETWEEN two of the nine calls, which leaves
+// the corpus with an id registered in some files and not others.
+// `generate-article.yml`'s two-section retry loop runs this script twice in
+// the SAME checkout, so a killed first attempt's partial writes are still on
+// disk when the second attempt's `git add -A` later sweeps everything into
+// one commit — nothing before this lock ever compared the 9 files against
+// each other to catch it.
+//
+// The lock mechanism itself lives in lib/register-lock.mjs, not here — see
+// that module's header for why (this file imports jsdom statically, so
+// nothing inside it is reachable by `node --test` without node_modules).
+function beginRegisterLock(id) {
+  // SECTION_NAME travels INTO the lock file: `generate-article.yml` runs the
+  // two sections in the same checkout (the retry chain alternates them), so
+  // the process that later resolves the lock is routinely running as the
+  // OTHER section. Without the recorded section the cross-check would look
+  // for a svizzera id in the frontaliere files, find it nowhere, and clear
+  // the marker as "nothing written" over a split corpus.
+  return beginRegisterLockImpl(PROJECT_ROOT, id, SECTION_NAME);
+}
+
+function endRegisterLock() {
+  return endRegisterLockImpl(PROJECT_ROOT);
+}
+
+// The files a completed registration must ALL carry the id in, used to tell a
+// benign leftover lock from a genuinely split corpus (see
+// `resolveRegisterLock`). Derived from the same section config the
+// `modifyXxx()` functions read, so the two cannot drift apart: the slug data
+// file (`modifyRouterTs`), the article registry (`modifyBlogArticlesTsx`), the
+// four meta files and the four per-locale body files (`modifyI18nTs` +
+// `modifyLocaleFile`), and the SEO file (`modifySeoService`). `modifySitemap`
+// and `modifySitemapNews` are deliberately absent: both are no-ops here (the
+// sitemaps are derived from the whole corpus by scripts/build-api.mjs), so
+// they have no per-id state that could be half-written.
+//
+// `sectionName` is the section RECORDED IN THE LOCK, not SECTION_NAME: the two
+// differ whenever `generate-article.yml` alternates sections in the same
+// checkout, and building the targets from the current process's section would
+// compare a svizzera id against the frontaliere files — absent from all of
+// them, so a genuinely split corpus would be classified `nothing-written` and
+// the marker cleared. An unknown recorded section is a hard error: silently
+// falling back to the current one is exactly the mis-comparison above.
+function registerLockTargets(id, sectionName = SECTION_NAME) {
+  const section = ARTICLE_SECTION_CONFIGS[sectionName];
+  if (!section) {
+    throw new Error(
+      `Il lock di registrazione cita la sezione sconosciuta "${sectionName}": impossibile ` +
+        `determinare i file di registrazione da confrontare (valide: ` +
+        `${Object.keys(ARTICLE_SECTION_CONFIGS).join(', ')}). Ispeziona il corpus a mano e ` +
+        `rimuovi ${REGISTER_LOCK_FILE}.`,
+    );
+  }
+  const targets = [
+    { label: section.slugDataFile, absPath: resolve(section.slugDataFile), needle: id },
+    { label: section.registryFile, absPath: resolve(section.registryFile), needle: id },
+    { label: section.seoFile, absPath: resolve(section.seoFile), needle: id },
+  ];
+  for (const locale of ['it', 'en', 'de', 'fr']) {
+    const metaFile = `services/locales/${section.metaPrefix}-${locale}.ts`;
+    const bodyFile = `services/locales/${section.bodyDir}/${locale}/${id}.ts`;
+    targets.push({ label: metaFile, absPath: resolve(metaFile), needle: `blog.article.${id}.` });
+    // The body file IS the registration: its mere existence is the entry, so
+    // there is no needle to look for inside it.
+    targets.push({ label: bodyFile, absPath: resolve(bodyFile), needle: null });
+  }
+  return targets;
+}
+
+// Called once at the top of `main()`. Throws only on a corpus actually left
+// split by an interrupted registration; a lock whose id turns out to be
+// consistently present (transaction committed) or consistently absent (nothing
+// written yet) is cleared and the run proceeds — otherwise one interrupted run
+// would brick every later run on a corpus that is in fact fine.
+function resolveRegisterLockAtStartup() {
+  const outcome = resolveRegisterLockImpl(PROJECT_ROOT, registerLockTargets);
+  if (outcome.state !== 'clean') {
+    console.error(`  ♻️  ${REGISTER_LOCK_FILE}: marker di registrazione lasciato da un run interrotto`);
+  }
+  if (outcome.state === 'committed') {
+    console.error(`  ♻️  Lock di registrazione orfano per "${outcome.id}" (sezione ${outcome.section}): i file di registrazione sono coerenti (transazione completata), lock rimosso`);
+  } else if (outcome.state === 'nothing-written') {
+    console.error(`  ♻️  Lock di registrazione orfano per "${outcome.id}" (sezione ${outcome.section}): nessun file di registrazione lo cita (nessuna scrittura avvenuta), lock rimosso`);
   }
 }
 
@@ -12896,6 +12994,12 @@ async function exitAfterFlush(code) {
 }
 
 async function main() {
+  // Prima di qualsiasi altra cosa: se una registrazione precedente e' stata
+  // interrotta a meta' delle 9 scritture, il corpus e' incoerente e generare
+  // sopra lo peggiorerebbe soltanto (issue #562). Il controllo e'
+  // deterministico e gratuito, quindi sta qui e non dopo la generazione.
+  resolveRegisterLockAtStartup();
+
   // Positional <url> = first non-flag argv (so `--section=` can precede it).
   let url = process.argv.slice(2).find((a) => !a.startsWith('--'));
   let headlines = null;
@@ -14967,6 +15071,7 @@ async function generateAndValidateArticle(url, sourceContext = null) {
 
   // Step 4: Modify files
   console.error('\n📂 Modifica file sorgente:');
+  beginRegisterLock(data.id);
   modifyRouterTs(data);
   modifyBlogArticlesTsx(data);
   modifyI18nTs(data);
@@ -14976,6 +15081,7 @@ async function generateAndValidateArticle(url, sourceContext = null) {
   modifySeoService(data);
   modifySitemap(data);
   modifySitemapNews(data);
+  endRegisterLock();
 
   // Step 4a.2: RSS feeds — NOT regenerated here any more (issue #4974 item 2).
   //
@@ -15650,6 +15756,15 @@ export async function registerArticleFiles(data, opts = {}) {
   sanitizePromptPlaceholders(data);
   clampSeoDescriptions(data);
   const slugs = deriveAndSanitizeArticleSlugs(data);
+  // Sul percorso di scrittura CONDIVISO, per la stessa ragione argomentata
+  // sopra: generate-daily-brief-article.mjs, generate-events-digest-article.mjs,
+  // generate-border-wait-ranking-article.mjs e publish-journalist-article.mjs
+  // importano registerArticleFiles() direttamente e non hanno il `main()` di
+  // questo file, quindi non passano mai dal controllo d'avvio. Senza questa
+  // riga un marker orfano li farebbe morire su `beginRegisterLock()` con un
+  // errore duro anche quando il corpus e' perfettamente coerente.
+  resolveRegisterLockAtStartup();
+  beginRegisterLock(data.id);
   modifyRouterTs(data);
   modifyBlogArticlesTsx(data);
   modifyI18nTs(data);
@@ -15659,6 +15774,7 @@ export async function registerArticleFiles(data, opts = {}) {
   modifySeoService(data);
   modifySitemap(data);
   if (!opts.skipNews) modifySitemapNews(data);
+  endRegisterLock();
   validateStructuredData(data);
   // RSS regeneration removed with #4974 item 2 — see the sibling call site
   // above. `opts.skipRss` is kept accepted-and-ignored so existing callers
