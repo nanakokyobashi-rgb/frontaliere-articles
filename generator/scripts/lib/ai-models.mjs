@@ -2082,8 +2082,8 @@ export function getCallLatencyStats() {
 // Provider-level cooldown: when a provider returns 429, all its models
 // get a temporary cooldown to avoid wasting retries on sibling models.
 // Maps provider name → cooldown-until timestamp (ms), `Infinity` when the
-// cause is persistent and the ban lasts the whole run (see
-// PROVIDER_COOLDOWN_DURATION_MS).
+// cause is an authoritative unreachable and the ban lasts the whole run (see
+// PROVIDER_COOLDOWN_DURATION_MS: three durations, one per cause).
 const _providerCooldown = new Map();
 // Why a provider is cooling down, provider name → { reason, skipPhrase }. Kept
 // beside _providerCooldown (not folded into its value) so the timestamp read
@@ -2104,6 +2104,16 @@ const _providerCooldown = new Map();
 const _providerCooldownReason = new Map();
 const PROVIDER_COOLDOWN_MS = 60_000; // 1 minute cooldown after 429
 
+// Quanto dura il cooldown aperto da un flap del resolver ESCALATO (#770): tre
+// fallimenti `EAI_AGAIN` di fila sullo stesso provider. Finito, e non il ban di
+// run della causa autoritativa, perche' `EAI_AGAIN` resta il «try again» del
+// resolver: e' un verdetto sul RESOLVER di questo runner, non sull'host. Un
+// hiccup DNS che dura piu' di tre tentativi merita piu' dei 60s del 429 — che
+// il provider tornerebbe a comporre subito — ma deve scadere, o tre hiccup al
+// minuto uno spegnerebbero la catena tier-0 per una run di ore e il generatore
+// scenderebbe sui last-resort senza che niente fallisca.
+const RESOLVER_FLAP_COOLDOWN_MS = 5 * PROVIDER_COOLDOWN_MS; // 5 minuti
+
 /**
  * Ordine di gravita' fra le cause di cooldown (#787).
  *
@@ -2120,8 +2130,15 @@ const PROVIDER_COOLDOWN_MS = 60_000; // 1 minute cooldown after 429
  * PROMOSSO da uno persistente, e un persistente non viene mai retrocesso da un
  * 429 che arriva dopo. La finestra invece si rinfresca sempre — chi ha appena
  * fallito ha appena dimostrato che il provider e' ancora da evitare.
+ *
+ * Il gradino di mezzo (`resolverFlap`, #770/#803) e' la stessa scala vista
+ * dalla durata: un flap escalato parla come una causa persistente — la sua riga
+ * di skip dice `unreachable (...), non-retryable`, perche' cio' che il
+ * classificatore deve NON leggere e' «transitorio» su una catena gia' fuori
+ * gioco — ma non e' un verdetto autoritativo sull'host, quindi la sua finestra
+ * scade (vedi PROVIDER_COOLDOWN_DURATION_MS).
  */
-const COOLDOWN_SEVERITY = Object.freeze({ transient: 0, persistent: 1 });
+const COOLDOWN_SEVERITY = Object.freeze({ transient: 0, resolverFlap: 1, persistent: 2 });
 
 /**
  * Quanto dura il cooldown, PER CAUSA (#803).
@@ -2139,9 +2156,20 @@ const COOLDOWN_SEVERITY = Object.freeze({ transient: 0, persistent: 1 });
  * `resetState()` lo azzera comunque; e' esattamente la stessa durata che gia'
  * hanno gli altri breaker su guasto persistente (`_exhaustedModels`, la storm
  * di claude-cli), che sono run-scoped per la stessa ragione.
+ *
+ * Il ban di run vale pero' solo per un verdetto AUTORITATIVO sull'host — un
+ * codice di `HOST_UNREACHABLE_CODES`. Il flap del resolver escalato (#770)
+ * arriva allo stesso ramo con `e.hostUnreachable = 'EAI_AGAIN'`, ma quello che
+ * il resolver ha detto e' «riprova»: dargli `Infinity` significherebbe che tre
+ * hiccup DNS su un runner CI — la cosa che #770 ha classificato come
+ * transitoria — spengono il provider per tutta la run, e su `github` l'intera
+ * catena tier-0 con lui, in silenzio (`_resolverFlaps` si azzera solo su un
+ * successo che non arriverebbe mai piu', perche' il provider non viene piu'
+ * composto). Da qui il gradino di mezzo, finito e piu' lungo dei 60s.
  */
 const PROVIDER_COOLDOWN_DURATION_MS = Object.freeze({
   [COOLDOWN_SEVERITY.transient]: PROVIDER_COOLDOWN_MS,
+  [COOLDOWN_SEVERITY.resolverFlap]: RESOLVER_FLAP_COOLDOWN_MS,
   [COOLDOWN_SEVERITY.persistent]: Infinity,
 });
 
@@ -4323,9 +4351,9 @@ const HOST_UNREACHABLE_CODES = new Set([
  * and nothing about the next attempt changes that. `EAI_AGAIN` is
  * `getaddrinfo`'s literal «try again»: a temporary resolver failure, which on
  * a CI runner is a routine hiccup, not a verdict about the host. Treated as
- * unreachable it cost a model exhausted for the run PLUS the 60s provider
- * cooldown — i.e. every sibling id served by that host — for a fault that
- * usually clears on the next round-trip.
+ * unreachable it cost a model exhausted for the run PLUS a provider cooldown —
+ * i.e. every sibling id served by that host — for a fault that usually clears
+ * on the next round-trip.
  *
  * So a flap is retryable like ECONNRESET/EPIPE, and the retry loop's backoff
  * is exactly the "try again" the code asks for. What #475 bought is not given
@@ -4333,6 +4361,12 @@ const HOST_UNREACHABLE_CODES = new Set([
  * RESOLVER_FLAP_ESCALATION consecutive failed model attempts against the same
  * provider the resolver is no longer hiccuping — the flap is promoted to a
  * full unreachable and takes the ban + cooldown path unchanged.
+ *
+ * «Unchanged» stops at the cooldown DURATION (#803): the run-long ban is for a
+ * code in HOST_UNREACHABLE_CODES, which is authoritative about the host. An
+ * escalated flap gets RESOLVER_FLAP_COOLDOWN_MS instead — longer than the 429's
+ * 60s, but finite, because the thing it describes is a resolver that says
+ * "try again", and three hiccups at minute one must not cost the whole run.
  */
 const TRANSIENT_RESOLVER_CODES = new Set(['EAI_AGAIN']);
 
@@ -6999,14 +7033,25 @@ export async function callLLM(messages, opts = {}) {
         // scrivere `cooling down (rate-limited)` in `errors` — vocabolario
         // transitorio — su un host morto. `cooldownProvider` decide da se' se
         // creare, promuovere o solo rinfrescare (vedi COOLDOWN_SEVERITY).
+        //
+        // La GRAVITA' si legge dal codice, non dal ramo (#803): qui arrivano
+        // due cose diverse. Un codice di HOST_UNREACHABLE_CODES e' un verdetto
+        // autoritativo sull'host e vale per la run intera; un `EAI_AGAIN`
+        // escalato da RESOLVER_FLAP_ESCALATION (#770) e' il resolver che ha
+        // detto «riprova» tre volte — abbastanza per smettere di comporre il
+        // numero adesso, non per dichiarare morto l'host fino a fine run.
+        const authoritative = HOST_UNREACHABLE_CODES.has(e.hostUnreachable);
         const cooldownOutcome = cooldownProvider(
           provider,
           `host unreachable: ${e.hostUnreachable}`,
           // Deliberately without "cooling down": the siblings' skip line is
           // counted by classifyExhaustionCause, and a host that refuses the
-          // connection is a persistent fault, not a transient one.
+          // connection is a persistent fault, not a transient one. Un flap
+          // escalato tiene la stessa frase: la catena e' fuori gioco lo stesso,
+          // e votare «transitorio» li' e' esattamente l'esito verde-senza-
+          // articolo che _providerCooldownReason descrive.
           `unreachable (${e.hostUnreachable}), non-retryable`,
-          COOLDOWN_SEVERITY.persistent,
+          authoritative ? COOLDOWN_SEVERITY.persistent : COOLDOWN_SEVERITY.resolverFlap,
         );
         // Una promozione non e' un secondo cooldown: contarla gonfierebbe il
         // numero del riepilogo rispetto a prima di questa modifica, quando la

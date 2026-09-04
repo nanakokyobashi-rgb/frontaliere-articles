@@ -653,10 +653,13 @@ describe('promozione della causa del cooldown (#787)', () => {
  * era «1 connect per run» (#767) ma **1 connect al minuto per provider**, e una
  * run del generatore dura minuti.
  *
- * Le due prove qui sono una coppia, e vanno lette insieme: la prima pinna che
- * la causa persistente NON scade, la seconda che il ban lungo non ha inghiottito
- * anche il 429 — che deve continuare a scadere dopo 60s, o un limite di quota
- * transitorio spegnerebbe il provider per tutta la run.
+ * Le prove qui vanno lette insieme, perche' cio' che pinnano e' un CONFINE, e
+ * un confine ha due lati: la prima dice che la causa autoritativa NON scade; la
+ * seconda che il flap del resolver escalato (#770), che arriva allo stesso ramo
+ * con `e.hostUnreachable = 'EAI_AGAIN'`, prende invece una finestra finita — o
+ * tre hiccup DNS spegnerebbero la catena tier-0 per una run intera; la terza
+ * che il ban lungo non ha inghiottito nemmeno il 429, che deve continuare a
+ * scadere dopo 60s.
  */
 describe('durata del cooldown per causa (#803)', () => {
   // Come nel blocco della promozione: con piu' di un PAT il 429 non apre il
@@ -723,23 +726,71 @@ describe('durata del cooldown per causa (#803)', () => {
     );
   });
 
+  // Il flap del resolver arriva allo STESSO ramo dell'host morto — #770 gli
+  // scrive `e.hostUnreachable = 'EAI_AGAIN'` quando smette di sembrare un
+  // hiccup — ma non e' la stessa cosa: `EAI_AGAIN` e' il resolver che dice
+  // «riprova», non un verdetto sull'host. Con il ban di run tre hiccup DNS su
+  // un runner CI spegnerebbero il provider per ore, e su `github` l'intera
+  // catena tier-0 con lui, in silenzio: `_resolverFlaps` si azzera solo su un
+  // successo, che non puo' arrivare da un provider che non viene piu' composto.
+  it('un flap escalato (#770) prende una finestra finita, non il ban di run', async () => {
+    globalThis.fetch = async (url) => {
+      fetchCalls.push(String(url));
+      throw undiciFetchFailed('EAI_AGAIN');
+    };
+
+    await assert.rejects(() => callLLM([{ role: 'user', content: 'x' }], OPTS));
+    const dopoEscalation = ghCalls().length;
+    assert.equal(dopoEscalation, 3, `attesi 3 connect prima dell'escalation, visti ${dopoEscalation}`);
+    // `activeCooldowns` e' il tempo che RESTA, in secondi.
+    const rimasti = getStats().activeCooldowns.github;
+    assert.ok(
+      Number.isFinite(rimasti) && rimasti > 60,
+      `la finestra del flap dev'essere finita e piu' lunga dei 60s del 429: ${JSON.stringify(getStats().activeCooldowns)}`,
+    );
+
+    // Dentro la finestra il provider resta fuori gioco — cio' che #770 compra.
+    mock.timers.tick(61_000);
+    await assert.rejects(() => callLLM([{ role: 'user', content: 'x' }], OPTS));
+    assert.equal(
+      ghCalls().length, dopoEscalation,
+      `dentro la finestra del flap non si ricompone il numero: visti ${ghCalls().length} connect`,
+    );
+
+    // Scaduta, si riprova: e' l'unico modo in cui un resolver che si riallinea
+    // a meta' run puo' essere scoperto.
+    mock.timers.tick(5 * 60_000);
+    await assert.rejects(() => callLLM([{ role: 'user', content: 'x' }], OPTS));
+    assert.ok(
+      ghCalls().length > dopoEscalation,
+      `scaduta la finestra il resolver va ri-provato: visti ${ghCalls().length} connect, attesi piu' di ${dopoEscalation}`,
+    );
+  });
+
   it('un 429 continua a scadere dopo 60s — il ban lungo non si estende al transitorio', async () => {
+    // `maxRetriesPerModel: 2` come il blocco della promozione (#787): il
+    // cooldown da 429 vive nel ramo retryable di `_callOpenAICompatible`
+    // (`attempt < opts.maxRetriesPerModel`), quindi con 1 — dove il primo
+    // tentativo e' gia' l'ultimo — `cooldownProvider` non viene mai chiamata e
+    // la prova guarderebbe una finestra che non e' mai stata aperta.
+    const OPTS_429 = { ...OPTS, maxRetriesPerModel: 2 };
     globalThis.fetch = async (url) => {
       if (!String(url).includes('models.inference.ai.azure.com')) throw undiciFetchFailed('ENOTFOUND');
       fetchCalls.push(String(url));
       return new Response('rate limit exceeded', { status: 429 });
     };
 
-    await assert.rejects(() => callLLM([{ role: 'user', content: 'x' }], OPTS));
+    await assert.rejects(() => callLLM([{ role: 'user', content: 'x' }], OPTS_429));
     const primoGiro = ghCalls().length;
     assert.ok(primoGiro >= 1, 'il primo giro deve aver chiamato l\'host');
-    assert.notEqual(
-      getStats().activeCooldowns.github, Infinity,
-      'un 429 non e\' un guasto persistente: la sua finestra deve restare finita',
+    const rimasti = getStats().activeCooldowns.github;
+    assert.ok(
+      Number.isFinite(rimasti) && rimasti > 0,
+      `un 429 non e' un guasto persistente: la sua finestra dev'essere aperta e finita, vista ${JSON.stringify(getStats().activeCooldowns)}`,
     );
 
     mock.timers.tick(61_000);
-    await assert.rejects(() => callLLM([{ role: 'user', content: 'x' }], OPTS));
+    await assert.rejects(() => callLLM([{ role: 'user', content: 'x' }], OPTS_429));
 
     assert.ok(
       ghCalls().length > primoGiro,
