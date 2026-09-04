@@ -1,0 +1,387 @@
+#!/usr/bin/env node
+/**
+ * transport-identical-twins.mjs — il trasporto che ai gemelli `identical` del
+ * manifest mancava (issue #331, follow-up di #326 e #303).
+ *
+ * ## Il buco che chiude
+ *
+ * `loop-drift-check.mjs` sa dire che un gemello `identical` è fermo indietro, e
+ * da quanto (`stranded-twin`, issue #303). Non lo porta: «non mergia, non apre
+ * PR, non riscrive niente». Per ognuna delle voci `identical` del manifest la
+ * discesa era quindi **una copia a mano**, e il 2026-08-14 cinque gemelli erano
+ * fermi fino a 15,75 giorni — fra questi `host/shared/localeEmitFilter.ts`, che
+ * sul sito aveva già prodotto `/en.html` `/de.html` `/fr.html` a 404 (#5327) e
+ * qui girava ancora col difetto. Il verdetto rende il ritardo visibile e datato;
+ * non lo elimina.
+ *
+ * ## Perché QUI, e non allargando l'allowlist del mirror
+ *
+ * L'altra strada — estendere l'allowlist di `mirror-articles-engine.yml` (che
+ * gira sul SITO) oltre `engine/` — è bloccata, e per una ragione che non scade:
+ * quell'allowlist copia **directory intere**, e sotto `scripts/**`/`host/**`
+ * vivono decine di file `adapted`, diversi apposta (es.
+ * `scripts/ci/auto-merge-eval.mjs`, che qui ha un gate in più e sul sito
+ * un'osservazione che qui non esiste). Sovrascriverli sarebbe la metà
+ * distruttiva del vecchio mirror, spostata da `content/` a `generator/`. Da qui
+ * la richiesta di una «prova di confinamento» equivalente a
+ * `packages-articles-confinement.test.ts` prima di allargare.
+ *
+ * Questo script prende la direzione opposta e non ha bisogno di quella prova:
+ *
+ *   - **è tirato, non spinto**: gira in questo repo, che è il lato che RICEVE;
+ *   - **è guidato dal manifest, file per file**: copia solo i path dichiarati
+ *     `mode: "identical"`, dal loro `sitePath`. Un file `adapted` non è
+ *     "protetto da un'eccezione" — non è proprio nell'insieme di partenza, e
+ *     nessuna directory viene mai copiata in blocco. Il confinamento che la
+ *     prova AST dimostrerebbe per un albero, qui è l'enumerazione stessa;
+ *   - **copia solo `site-ahead`**: il verdetto arriva da `classify()` di
+ *     `loop-drift-check.mjs`, importata, non reimplementata. Se questo lato si
+ *     è mosso (`corpus-ahead`, `both-moved`, `undeclared-drift`) non si tocca
+ *     niente: una divergenza a due direzioni è una decisione, e questo script
+ *     non ha il contesto per prenderla — esattamente come il drift check.
+ *
+ * `engine/` resta fuori: è `outOfScope` nel manifest PROPRIO perché un
+ * trasporto ce l'ha già (il mirror), e due canali sullo stesso path sono un
+ * conflitto, non una ridondanza.
+ *
+ * ## L'insieme deve essere CHIUSO, non solo enumerato
+ *
+ * Enumerare i path `identical` confina la SCRITTURA, ma non basta a rendere
+ * coerente una passata: un fixture può essere byte-identico al sito e pinnare
+ * codice che qui è `adapted`/`corpus-only`. È il caso di
+ * `host/tests/shell-contract-functions.golden.json`, che pinna le funzioni di
+ * `host/siteShellBootstrap.ts` (composto sopra `host/htmlTemplate.ts`,
+ * `host/constants.ts`, `host/shared/seoContentTokens.ts` — tutti fuori
+ * dall'insieme di partenza per costruzione). Copiarlo DA SOLO fa fallire
+ * `host/tests/shell-contract-functions.test.mjs`, e la PR di trasporto resta
+ * aperta e non mergiabile: da lì il guard «una PR alla volta» del workflow
+ * spegne ogni passata successiva e il canale si ferma SENZA che nulla
+ * fallisca. Lo stesso taglio arriva dal tetto per passata, che può separare
+ * un fixture dai suoi soggetti in due giri diversi.
+ *
+ * Per questo un fixture (golden/snapshot, o un file sotto un albero di test) si
+ * copia solo se i suoi ACCOPPIAMENTI locali — i file che lo citano e i file che
+ * cita — sono a loro volta `identical`. Un accoppiamento non registrato nel
+ * manifest è locale per definizione, quindi vale come un no.
+ *
+ * ## Cosa NON fa
+ *
+ * Non mergia e non decide: scrive i file e aggiorna la baseline delle sole voci
+ * copiate. La PR la apre il workflow, e passa dalla review come ogni altra.
+ * Senza `--apply` non scrive niente: la modalità di default è il dry-run.
+ *
+ * ## Uso
+ *
+ *   node scripts/ci/transport-identical-twins.mjs            # dry-run, report
+ *   node scripts/ci/transport-identical-twins.mjs --json     # dry-run, JSON
+ *   node scripts/ci/transport-identical-twins.mjs --apply    # scrive + baseline
+ *
+ * Env:
+ *   SITE_REPO / SITE_REF   letti da `loop-drift-check.mjs` (stessa sorgente).
+ *   GH_TOKEN               opzionale; il repo del sito è pubblico.
+ *   TRANSPORT_MAX_FILES    default 25; tetto di file copiati in una passata.
+ */
+import fs from 'node:fs';
+import path from 'node:path';
+import crypto from 'node:crypto';
+import { fileURLToPath } from 'node:url';
+import { classify, siteFile } from './loop-drift-check.mjs';
+
+const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
+const MANIFEST_PATH = path.join(ROOT, 'scripts/ci/loop-sync-manifest.json');
+
+const ARGS = new Set(process.argv.slice(2));
+const APPLY = ARGS.has('--apply');
+const AS_JSON = ARGS.has('--json');
+
+/**
+ * Tetto per passata. Non è una difesa dai file: è una difesa dal GIORNO in cui
+ * il sito rinomina mezzo albero e questo script aprirebbe una PR da 100 file
+ * che nessuno rivede davvero. Oltre il tetto la passata si ferma e lo dice,
+ * così la copia resta un atto leggibile.
+ */
+const MAX_FILES = Number(process.env.TRANSPORT_MAX_FILES || 25);
+
+const sha256 = (buf) => crypto.createHash('sha256').update(buf).digest('hex').slice(0, 16);
+
+/**
+ * Un path del manifest è un dato, e un dato che diventa una destinazione di
+ * scrittura va trattato come non fidato: `..`, path assoluto o separatore
+ * Windows farebbero uscire la copia dal checkout. È l'unico punto dello script
+ * che scrive, quindi è l'unico punto dove serve.
+ *
+ * `.github/workflows/` è escluso a parte, e non per la sicurezza del path: il
+ * token del ciclo non ha lo scope `workflows`, quindi una copia lì produrrebbe
+ * un push RIFIUTATO dopo aver scritto il file — cioè una passata che fallisce
+ * in fondo invece che all'inizio. Quei 20 gemelli restano una copia a mano.
+ */
+export function unsafeTarget(rel) {
+  if (typeof rel !== 'string' || rel.trim() === '') return 'path vuoto';
+  if (rel.includes('\\')) return 'separatore non POSIX';
+  if (path.posix.isAbsolute(rel) || path.isAbsolute(rel)) return 'path assoluto';
+  if (rel.split('/').includes('..')) return 'path risalente';
+  const abs = path.resolve(ROOT, rel);
+  if (abs !== ROOT && !abs.startsWith(ROOT + path.sep)) return 'destinazione fuori dal checkout';
+  if (rel.startsWith('.github/workflows/')) return 'workflow: il token del ciclo non ha lo scope `workflows`';
+  return null;
+}
+
+/**
+ * Un fixture è un file il cui contenuto È l'aspettativa di un test: un
+ * golden/snapshot, o qualunque file che vive dentro un albero di test. Sono i
+ * soli path per cui «byte-identico al sito» non implica «coerente qui»: il loro
+ * significato sta nel codice che li legge, non in loro.
+ *
+ * Il predicato è volutamente stretto. Ogni sorgente e' accoppiata a qualcosa,
+ * e allargarlo a tutto l'albero trasformerebbe il trasporto in un no
+ * permanente; un fixture invece fallisce in modo DIVERSO — non a render time,
+ * ma come test rosso su una PR che nessuno può mergiare, e che spegne il
+ * canale (il guard «una PR di trasporto alla volta»).
+ */
+export function isFixture(rel) {
+  const segs = String(rel || '').split('/');
+  const base = segs.pop() || '';
+  if (/\.(golden|snapshot|fixture)\./.test(base)) return true;
+  return segs.some((seg) => seg === 'test' || seg === 'tests' || seg === 'fixtures' || seg === '__fixtures__' || seg === 'snapshots');
+}
+
+/**
+ * Gli accoppiamenti che impediscono una copia isolata: i path locali legati al
+ * fixture che NON sono `identical`. Un path non registrato nel manifest è
+ * locale per definizione — non ha un gemello dichiarato sul sito — quindi conta
+ * come bloccante, non come sconosciuto.
+ *
+ *   couplings   [{ path, mode }] i file che citano il fixture e quelli che cita.
+ */
+export function couplingBlockers(couplings = []) {
+  return couplings.filter((c) => c.mode !== 'identical').map((c) => c.path).sort();
+}
+
+/**
+ * Decide se UNA voce va copiata giù dal sito. Pura: prende gli hash già
+ * calcolati, come `classify()` — è questo a renderla testabile offline, senza
+ * rete e senza scrivere niente.
+ *
+ *   entry            la voce di manifest (`path`, `mode`, `sitePath`, `baseline`).
+ *   now              { site, corpus } gli hash di ORA, `null` se assente.
+ *   base             la baseline registrata ({ site, corpus }).
+ *   outOfScopePrefixes  i prefissi `scope.outOfScope` del manifest.
+ *   couplings        [{ path, mode }] gli accoppiamenti locali della voce
+ *                    (rilevanti solo per un fixture: vedi `isFixture`).
+ *
+ * Ritorna `{ transport, state, reason }`. `transport: true` SOLO per un
+ * `identical` in `site-ahead` con una destinazione scrivibile: ogni altro
+ * verdetto è un no con la sua ragione, mai un silenzio.
+ */
+export function transportVerdict(entry, now, base, { outOfScopePrefixes = [], couplings = [] } = {}) {
+  const state = classify(entry, now, base).state;
+  if (entry.mode !== 'identical') {
+    return { transport: false, state, reason: `mode \`${entry.mode}\`: solo \`identical\` è copiabile così com'è` };
+  }
+  // Difesa in profondità: una voce `identical` sotto un prefisso `outOfScope`
+  // non dovrebbe esistere (i due insiemi sono disgiunti per costruzione), ma se
+  // ci finisse avrebbe DUE trasporti sullo stesso path — il mirror e questo.
+  const covered = outOfScopePrefixes.find((p) => entry.path.startsWith(p));
+  if (covered) {
+    return { transport: false, state, reason: `\`${covered}\` è outOfScope: ha già un trasporto suo, due canali sullo stesso path sono un conflitto` };
+  }
+  const unsafe = unsafeTarget(entry.path);
+  if (unsafe) return { transport: false, state, reason: `destinazione non scrivibile (${unsafe})` };
+  // L'insieme trasportabile dev'essere CHIUSO, non solo enumerato: un fixture
+  // copiato da solo mette rossa la PR di trasporto, che resta aperta e spegne
+  // il canale. Vale a prescindere dallo stato, così la ragione è leggibile
+  // anche quando il fixture e' ancora `stable`.
+  if (isFixture(entry.path)) {
+    const blockers = couplingBlockers(couplings);
+    if (blockers.length) {
+      return {
+        transport: false,
+        state,
+        reason: `fixture accoppiato a ${blockers.length} path non \`identical\` (${blockers.slice(0, 3).join(', ')}): una copia isolata mette rossa la PR di trasporto`,
+      };
+    }
+  }
+  if (state !== 'site-ahead') {
+    return { transport: false, state, reason: `stato \`${state}\`: copiabile solo \`site-ahead\` (il sito avanti, questo lato fermo sulla baseline)` };
+  }
+  return { transport: true, state, reason: 'il sito è andato avanti e qui nessuno ha toccato il file: la copia è esatta' };
+}
+
+/** Il testo di un file locale, o `null` se assente o non leggibile come testo. */
+function localText(rel) {
+  const abs = path.join(ROOT, rel);
+  try {
+    const stat = fs.statSync(abs);
+    if (!stat.isFile() || stat.size > 2 * 1024 * 1024) return null;
+    return fs.readFileSync(abs, 'utf8');
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * Gli accoppiamenti LOCALI di un fixture, in due direzioni:
+ *
+ *   - chi lo cita — il test che lo legge (`shell-contract-functions.test.mjs`
+ *     per il golden delle funzioni del contratto);
+ *   - chi cita — i path che il fixture stesso nomina, quando e' codice.
+ *
+ * Chi lo cita si cerca nella sola directory del fixture: un golden e il test
+ * che lo legge stanno accanto, e il test lo nomina per basename. Allargare la
+ * scansione a tutto il manifest sarebbe degenere — il manifest ELENCA ogni
+ * path, quindi ogni fixture risulterebbe accoppiato al manifest e bloccato per
+ * la ragione sbagliata.
+ *
+ * Legge solo l'albero LOCALE: niente rete, quindi un test la può chiamare.
+ */
+export function localCouplings(rel, modeOf) {
+  const base = rel.split('/').pop();
+  const dir = path.dirname(rel);
+  const neighbours = fs.existsSync(path.join(ROOT, dir))
+    ? fs.readdirSync(path.join(ROOT, dir)).map((n) => path.posix.join(dir, n))
+    : [];
+  const found = new Set();
+
+  for (const other of neighbours) {
+    if (other === rel) continue;
+    const text = localText(other);
+    if (text && text.includes(base)) found.add(other);
+  }
+
+  const own = localText(rel);
+  if (own) {
+    // Specificatori relativi (`../../scripts/ci/close-recovered-failure-issues.mjs`) e path repo-relative
+    // citati come stringa (`'scripts/ci/loop-sync-manifest.json'`). Solo quelli
+    // che esistono davvero qui diventano un accoppiamento: il resto è prosa.
+    for (const m of own.matchAll(/\.{1,2}\/[\w./-]+/g)) {
+      const abs = path.resolve(ROOT, dir, m[0]);
+      if (abs.startsWith(ROOT + path.sep) && fs.existsSync(abs) && fs.statSync(abs).isFile()) {
+        found.add(path.relative(ROOT, abs).split(path.sep).join('/'));
+      }
+    }
+    for (const m of own.matchAll(/['"`]([\w.-]+(?:\/[\w.-]+)+)['"`]/g)) {
+      const cand = m[1];
+      if (cand.startsWith('.') && !cand.startsWith('.github')) continue;
+      const abs = path.join(ROOT, cand);
+      if (abs.startsWith(ROOT + path.sep) && fs.existsSync(abs) && fs.statSync(abs).isFile()) found.add(cand);
+    }
+  }
+  found.delete(rel);
+  return [...found].sort().map((c) => ({ path: c, mode: modeOf.get(c) || 'non registrato' }));
+}
+
+/** Hash del file locale, o null se non esiste. */
+function localHash(rel) {
+  const p = path.join(ROOT, rel);
+  return fs.existsSync(p) ? sha256(fs.readFileSync(p)) : null;
+}
+
+async function main() {
+  const manifest = JSON.parse(fs.readFileSync(MANIFEST_PATH, 'utf8'));
+  const outOfScopePrefixes = (manifest.scope?.outOfScope || []).map((x) => x.prefix);
+  const modeOf = new Map(manifest.files.map((e) => [e.path, e.mode]));
+  const today = new Date().toISOString().slice(0, 10);
+
+  const candidates = [];
+  const skipped = [];
+  const failed = [];
+
+  for (const entry of manifest.files) {
+    if (entry.mode !== 'identical') continue;
+    const rel = entry.path;
+    const sitePath = entry.sitePath || rel;
+    const base = entry.baseline || { site: null, corpus: null };
+
+    let content;
+    let now;
+    try {
+      content = await siteFile(sitePath);
+      now = { site: content === null ? null : sha256(content), corpus: localHash(rel) };
+    } catch (e) {
+      // PROCEED-SAFE come il drift check: una fetch fallita non deve far
+      // saltare le altre copie, e soprattutto non deve MAI valere come "il
+      // file non c'è più sul sito" (che sarebbe una rimozione inventata).
+      failed.push({ path: rel, reason: String(e.message || e).slice(0, 120) });
+      continue;
+    }
+
+    const couplings = isFixture(rel) ? localCouplings(rel, modeOf) : [];
+    const verdict = transportVerdict(entry, now, base, { outOfScopePrefixes, couplings });
+    if (!verdict.transport) {
+      skipped.push({ path: rel, state: verdict.state, reason: verdict.reason });
+      continue;
+    }
+    candidates.push({ entry, path: rel, sitePath, content, now, base, couplings });
+  }
+
+  // Il tetto si applica DOPO aver raccolto tutti i candidati, non durante: e'
+  // l'unico modo di sapere se tagliarlo separerebbe un fixture dai suoi
+  // accoppiamenti. Una passata che copia il golden e lascia indietro il file
+  // che pinna è incoerente per costruzione — la stessa rottura del fixture
+  // copiato da solo, prodotta dal tetto invece che dal manifest.
+  const kept = candidates.slice(0, MAX_FILES);
+  const keptPaths = new Set(kept.map((c) => c.path));
+  const candidatePaths = new Set(candidates.map((c) => c.path));
+  const chosen = [];
+  let capped = candidates.length - kept.length;
+  for (const c of kept) {
+    const split = c.couplings.filter((k) => candidatePaths.has(k.path) && !keptPaths.has(k.path));
+    if (split.length) {
+      capped += 1;
+      skipped.push({
+        path: c.path,
+        state: 'site-ahead',
+        reason: `fixture separato dal tetto dai suoi accoppiamenti (${split.map((k) => k.path).join(', ')}): aspetta il giro in cui ci stanno insieme`,
+      });
+      continue;
+    }
+    chosen.push(c);
+  }
+
+  const transported = [];
+  for (const { entry, path: rel, sitePath, content, now, base } of chosen) {
+    if (APPLY) {
+      const abs = path.join(ROOT, rel);
+      fs.mkdirSync(path.dirname(abs), { recursive: true });
+      fs.writeFileSync(abs, content);
+      // Dopo la copia i due lati sono lo STESSO byte: la baseline è quell'hash
+      // su entrambi i lati. Scriverla qui è ciò che impedisce al prossimo giro
+      // di drift check di rileggere la copia appena fatta come una divergenza.
+      entry.baseline = { site: now.site, corpus: now.site, alignedAt: today };
+    }
+    transported.push({ path: rel, sitePath, from: base.site, to: now.site });
+  }
+
+  if (APPLY && transported.length) {
+    fs.writeFileSync(MANIFEST_PATH, `${JSON.stringify(manifest, null, 2)}\n`);
+  }
+
+  if (AS_JSON) {
+    console.log(JSON.stringify({ apply: APPLY, transported, capped, failed, skipped }, null, 2));
+  } else {
+    const mode = APPLY ? 'APPLY' : 'dry-run';
+    console.log(`transport-identical-twins (${mode}): ${transported.length} da portare, ${skipped.length} fermi, ${failed.length} non verificati`);
+    for (const t of transported) console.log(`  ⬇ ${t.path}  ←  ${t.sitePath}  (${t.from} → ${t.to})`);
+    if (capped) console.log(`  ⏸ altri ${capped} oltre il tetto di ${MAX_FILES} file: restano al prossimo giro`);
+    for (const f of failed) console.log(`  ⚠ ${f.path}: ${f.reason}`);
+    // Gli skip attivi — quelli che una persona deve guardare — sono i soli
+    // stampati: elencare 150 `stable` ogni giorno è la riga che nessuno legge.
+    for (const s of skipped.filter((x) => x.state !== 'stable')) console.log(`  · ${s.path}: ${s.reason}`);
+  }
+
+  // Sempre 0: un trasporto che non trova niente da portare non è un
+  // fallimento, ed è il caso NORMALE. Chi chiama guarda il diff.
+  return 0;
+}
+
+// Solo in modalita' CLI: senza guardia, importare questo modulo da un test
+// farebbe rete e, con --apply, scriverebbe sull'albero.
+if (process.argv[1] && process.argv[1].endsWith('transport-identical-twins.mjs')) {
+  main().then(
+    (code) => process.exit(code),
+    (e) => {
+      console.error(`transport-identical-twins fallito: ${e && e.stack ? e.stack : e}`);
+      process.exit(1);
+    },
+  );
+}

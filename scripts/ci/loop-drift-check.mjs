@@ -903,4 +903,7 @@ if (process.argv[1] && process.argv[1].endsWith('loop-drift-check.mjs')) {
   );
 }
 
-export { classify, ghostVerdict, strandedVerdict, corpusOnlyTwinVerdict, gitBlobSha, scalarFingerprintVerdict };
+// `siteFile` e' esportata per `transport-identical-twins.mjs` (issue #331): il
+// trasporto deve leggere il sito con la STESSA sorgente di URL, ref e token del
+// checker, altrimenti i due potrebbero guardare due `main` diversi.
+export { classify, ghostVerdict, strandedVerdict, corpusOnlyTwinVerdict, gitBlobSha, scalarFingerprintVerdict, siteFile };
