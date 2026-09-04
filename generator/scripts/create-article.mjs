@@ -148,7 +148,7 @@ import { JSON_QUOTE_SAFETY_RULE_IT, describeJsonParseError, describeRawForDiagno
 // modulo puro perche' le gate del generatore girano `node --test` senza `npm ci`
 // e non possono importare QUESTO file: cosi' il test esegue lo stesso oggetto
 // codice della produzione invece di una copia. Vedi l'intestazione del modulo.
-import { REQUIRED_IT_BODY_FIELDS, BODY_ONLY_FIELDS, META_ONLY_FIELDS, normalizeItalianContentFromPayload, classifyBody2Payload, isTopicGateAbortVerdict, findUnreadableContentEvidence, resolveBody2Validation, recoverMisplacedFaq, hasUsableContentText } from './lib/body2-payload-verdict.mjs';
+import { REQUIRED_IT_BODY_FIELDS, BODY_ONLY_FIELDS, META_ONLY_FIELDS, normalizeItalianContentFromPayload, classifyBody2Payload, isTopicGateAbortVerdict, findUnreadableContentEvidence, resolveBody2Validation, recoverMisplacedFaq, hasUsableContentText, hasUsableTranslatedText } from './lib/body2-payload-verdict.mjs';
 import { describePayloadRejection } from './lib/llm-payload-diagnostics.mjs';
 import {
   factCheckFingerprint,
@@ -9677,7 +9677,13 @@ ${terminologyByLang[targetLang] || ''}`;
       // paragrafo il cui testo e' `null`. Qui, a differenza del percorso IT,
       // non c'e' nessun `normalizeItalianContentFromPayload` a valle:
       // `validateItalianPayload` gira solo su `content.it`.
-      if (hasUsableContentText(data.content[locale][field])) continue;
+      //
+      // `hasUsableTranslatedText` e non `hasUsableContentText`: qui il locale
+      // e' de/en/fr, e li' `Null` con la maiuscola e' la parola tedesca per
+      // «zero», non una serializzazione. Col predicato della sorgente un
+      // title/excerpt DE legittimo si leggeva come MANCANTE e cadeva sul
+      // fallback IT, pubblicando testo italiano sotto `/de/` (#831).
+      if (hasUsableTranslatedText(data.content[locale][field])) continue;
       const itValue = itContent[field];
       // `itValue` composto di solo whitespace (es. ' ') è truthy: senza
       // `.trim()` bypassa questo guard e viene comunque assegnato sotto come
@@ -9833,7 +9839,7 @@ ${terminologyByLang[targetLang] || ''}`;
             1000,
             `${locale}:${field}-retry`,
           );
-          if (hasUsableContentText(retryResult?.[field]) && retryResult[field].trim() !== itVal) {
+          if (hasUsableTranslatedText(retryResult?.[field]) && retryResult[field].trim() !== itVal) {
             data.content[locale][field] = retryResult[field];
             console.error(`  ✅ [translation-check] ${locale.toUpperCase()}.${field} ritradotto con successo`);
           } else {

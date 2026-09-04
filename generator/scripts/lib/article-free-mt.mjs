@@ -12,7 +12,7 @@
  * runs `main()` on import, so its internals can't be imported directly.
  */
 
-import { hasUsableContentText } from './body2-payload-verdict.mjs';
+import { hasUsableTranslatedText } from './body2-payload-verdict.mjs';
 
 const NAV_LINK_RE = /\[[^\]]+\]\(nav:[^)]+\)/g;
 const NAV_SENTINEL_RE = /0NAV(\d+)0/g;
@@ -38,7 +38,7 @@ const NAV_SENTINEL_RE = /0NAV(\d+)0/g;
  * missing-translation retry runs and, failing that, falls back to the IT source.
  * A stringified object is unrecoverable; a missing field is not.
  *
- * Il test di non-vuoto e' `hasUsableContentText` e non un `value.trim()` nudo:
+ * Il test di non-vuoto e' `hasUsableTranslatedText` e non un `value.trim()` nudo:
  * un modello che serializza il `null` come STRINGA (`"null"` — la forma
  * misurata su `haiku` in #799) supera il trim, e qui non c'e' nessun
  * `normalizeItalianContentFromPayload` a valle a ripulirlo, perche'
@@ -47,12 +47,17 @@ const NAV_SENTINEL_RE = /0NAV(\d+)0/g;
  * e nei feed RSS. Fallendo CHIUSI qui il campo si legge come mancante e la
  * recovery per-campo (retry mirato -> fallback IT) lo recupera.
  *
+ * Il predicato e' quello dei campi TRADOTTI: solo la forma serializzata
+ * (`null` minuscolo) e' scartata, perche' `Null` maiuscolo e' la parola
+ * tedesca per «zero» e scartarla farebbe pubblicare il testo IT sotto `/de/`
+ * (#831).
+ *
  * @param {unknown} value raw field value as parsed from the model's JSON
  * @returns {string|null} the string, or null when it is anything else / blank
  *          / the literal serialization of `null`
  */
 export function translatedStringOrNull(value) {
-  return hasUsableContentText(value) ? value : null;
+  return hasUsableTranslatedText(value) ? value : null;
 }
 
 /**
@@ -157,10 +162,12 @@ export async function translateFieldFreeMt({
     onWarn(`free-MT ${targetLang}:${fieldType} failed (${err?.message || err})`);
     return '';
   }
-  // Stesso predicato del percorso LLM: un motore MT che restituisce la
-  // stringa `"null"` (o un non-stringa) deve leggersi come "nessuna
-  // traduzione" e cedere alla recovery per-campo, non essere pubblicato.
-  if (!hasUsableContentText(out)) return '';
+  // Stesso predicato del percorso LLM sui campi tradotti: un motore MT che
+  // restituisce la stringa serializzata `"null"` (o un non-stringa) deve
+  // leggersi come "nessuna traduzione" e cedere alla recovery per-campo, non
+  // essere pubblicato. `Null` maiuscolo, invece, e' una traduzione DE valida
+  // («zero») e resta (#831).
+  if (!hasUsableTranslatedText(out)) return '';
   let restored = String(out);
   if (expected > 0) {
     const r = restore(restored);
