@@ -5443,6 +5443,12 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.cressier-guasto-benzina-garantita.title': 'Cressier arrêté, essence garantie par les stocks',
     'blog.article.cressier-guasto-benzina-garantita.excerpt': 'Raffinerie de Cressier arrêtée pour panne technique cette semaine. Elle couvre 30 % des besoins suisses. Des stocks obligatoires garantissent l\'approvisionnement en essence, diesel et kérosène.',
     'blog.article.cressier-guasto-benzina-garantita.imageAlt': 'Installation de raffinerie pétrolière moderne avec tours de contrôle et réservoirs de stockage dans le paysage industriel suisse',
+    'blog.article.domanda-permesso-c-glarona-guida.title': 'Permis C Glaris : exigences et comment postuler',
+    'blog.article.domanda-permesso-c-glarona-guida.excerpt': 'Guide complet du permis de séjour C dans le canton de Glaris : années de résidence requises, intégration, procédures de demande et passage vers la naturalisation.',
+    'blog.article.domanda-permesso-c-glarona-guida.imageAlt': 'Bâtiment administratif suisse avec drapeaux et signalétique officielle pour les services de résidence.',
+    'blog.article.permesso-c-glarona-come-richiederlo.title': 'Permis C Glaris : exigences, procédures et demande',
+    'blog.article.permesso-c-glarona-come-richiederlo.excerpt': 'Résidence permanente dans le canton de Glaris : guide des exigences du permis C, des connaissances linguistiques, de l\'intégration et de la procédure de demande auprès des autorités cantonales.',
+    'blog.article.permesso-c-glarona-come-richiederlo.imageAlt': 'Bureau d\'administration cantonale suisse avec documents de permis de résidence C et carte d\'identité',
 };
 
 export default blogMetaChFr;

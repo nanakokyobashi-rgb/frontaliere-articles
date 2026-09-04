@@ -5443,6 +5443,12 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.cressier-guasto-benzina-garantita.title': 'Cressier ferma, benzina garantita dalle scorte',
     'blog.article.cressier-guasto-benzina-garantita.excerpt': 'Raffineria di Cressier ferma per guasto tecnico questa settimana. Copre il 30% del fabbisogno svizzero. Scorte obbligatorie garantiscono l\'approvvigionamento di benzina, diesel e kerosene.',
     'blog.article.cressier-guasto-benzina-garantita.imageAlt': 'Impianto industriale di raffineria moderna con torri di controllo e cisterne di stoccaggio nel paesaggio svizzero',
+    'blog.article.domanda-permesso-c-glarona-guida.title': 'Permesso C Glarona: requisiti e come fare domanda',
+    'blog.article.domanda-permesso-c-glarona-guida.excerpt': 'Guida completa al permesso di domicilio C nel canton Glarona: anni di residenza richiesti, integrazione, procedure di domanda e passaggio verso la naturalizzazione.',
+    'blog.article.domanda-permesso-c-glarona-guida.imageAlt': 'Palazzo amministrativo svizzero con bandiera e insegne ufficiali, sede degli uffici per permessi di residenza.',
+    'blog.article.permesso-c-glarona-come-richiederlo.title': 'Permesso C Glarona: requisiti, procedure e domanda',
+    'blog.article.permesso-c-glarona-come-richiederlo.excerpt': 'Residenza permanente in Cantone Glarona: guida ai requisiti del permesso C, conoscenze linguistiche, integrazione e procedura di domanda presso le autorità cantonali.',
+    'blog.article.permesso-c-glarona-come-richiederlo.imageAlt': 'Ufficio amministrativo svizzero con documenti di permesso di domicilio C e carta d\'identità sulla scrivania',
 };
 
 export default blogMetaChIt;
