@@ -182,9 +182,9 @@
       "path": "scripts/ci/claude-rate-limit.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "5a9fc41530afbf1b",
-        "corpus": "5a9fc41530afbf1b",
-        "alignedAt": "2026-08-31"
+        "site": "1387162334c8f6ed",
+        "corpus": "1387162334c8f6ed",
+        "alignedAt": "2026-09-04"
       }
     },
     {
@@ -469,9 +469,9 @@
       "path": "scripts/ci/close-recovered-failure-issues.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "a6671b111411316b",
-        "corpus": "a6671b111411316b",
-        "alignedAt": "2026-09-01"
+        "site": "8f1ccdc5e6a4524c",
+        "corpus": "8f1ccdc5e6a4524c",
+        "alignedAt": "2026-09-04"
       }
     },
     {
@@ -861,9 +861,9 @@
       "path": "scripts/ci/harvest-agent-lessons.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "72c91051ffe812d9",
-        "corpus": "72c91051ffe812d9",
-        "alignedAt": "2026-08-31"
+        "site": "4357728b4a52cfbc",
+        "corpus": "4357728b4a52cfbc",
+        "alignedAt": "2026-09-04"
       }
     },
     {
