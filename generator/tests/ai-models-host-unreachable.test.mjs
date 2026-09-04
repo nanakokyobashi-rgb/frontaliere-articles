@@ -167,6 +167,45 @@ describe('callLLM contro un host che non accetta connessioni', () => {
     assert.equal(err.transientExhaustion, false, 'una run senza articolo su un host morto non deve essere verde');
   });
 
+  // ── #769: IL TAG NON DEVE DIPENDERE DA QUANTI TENTATIVI RESTANO ─────────
+  // Il tag `hostUnreachable` veniva posato in un ramo che solo i tentativi
+  // NON finali raggiungono: il `throw` dell'ultimo tentativo lo precedeva.
+  // Con `maxRetriesPerModel: 1` il primo tentativo e' gia' l'ultimo, quindi
+  // l'errore usciva nudo e il breaker di callLLM() non scattava — il conto
+  // dei connect morti tornava a uno per id, che e' proprio cio' che #475 ha
+  // tolto. Il test precedente non lo vedeva perche' passa 3.
+  it('taglia i fratelli anche con maxRetriesPerModel: 1', async () => {
+    await assert.rejects(
+      () => callLLM([{ role: 'user', content: 'x' }], { maxRetriesPerModel: 1, backoffMs: 1, timeout: 5000 }),
+    );
+
+    const stats = getStats();
+    assert.equal(ghCalls().length, 1, `un solo connect atteso anche con un solo tentativo, visti ${ghCalls().length}: ${ghCalls().join(', ')}`);
+    assert.ok(stats.exhaustedModels.includes('gpt-4o-mini'), `atteso gpt-4o-mini esaurito, visti: ${stats.exhaustedModels.join(', ')}`);
+    assert.ok(stats.activeCooldowns.github > 0, `atteso un cooldown su github, visti: ${JSON.stringify(stats.activeCooldowns)}`);
+  });
+
+  // Il tag e' una convenzione fra funzioni, e callLLM non deve dipenderne:
+  // la causa e' LEGGIBILE dall'errore. Qui l'errore esce dal retry loop per
+  // una porta che il tagging non attraversa (`nonRetryable`), come farebbe
+  // un caller che quella convenzione non la conosce — claude-cli, o un
+  // provider aggiunto domani. Il breaker deve scattare lo stesso.
+  it('classifica la causa anche su un errore uscito senza tag', async () => {
+    globalThis.fetch = async (url) => {
+      fetchCalls.push(String(url));
+      throw Object.assign(undiciFetchFailed('ENOTFOUND'), { nonRetryable: true });
+    };
+
+    const err = await callLLM([{ role: 'user', content: 'x' }], { maxRetriesPerModel: 3, backoffMs: 1, timeout: 5000 })
+      .then(() => null, (e) => e);
+
+    assert.ok(err, 'la catena deve fallire');
+    assert.equal(ghCalls().length, 1, `un solo connect atteso, visti ${ghCalls().length}: ${ghCalls().join(', ')}`);
+    assert.ok(getStats().activeCooldowns.github > 0, `atteso un cooldown su github, visti: ${JSON.stringify(getStats().activeCooldowns)}`);
+    assert.match(err.message, /skipped — provider github unreachable \(ENOTFOUND\), non-retryable/);
+    assert.equal(err.transientExhaustion, false, 'una run senza articolo su un host morto non deve essere verde');
+  });
+
   it('un ECONNRESET resta ritentabile — il confine della regola', async () => {
     globalThis.fetch = async (url) => {
       fetchCalls.push(String(url));

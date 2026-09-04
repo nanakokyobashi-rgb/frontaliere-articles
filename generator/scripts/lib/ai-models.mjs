@@ -4855,6 +4855,15 @@ async function _callOpenAICompatible(apiModel, messages, opts, { endpoint, apiKe
       if (e.message?.includes('Daily request limit')) throw e;
       // Re-throw non-retryable errors immediately (unknown model, context limit)
       if (e.nonRetryable) throw e;
+      // Il tag va posato PRIMA di ogni `throw`, non dentro il ramo che i soli
+      // tentativi non-finali raggiungono (#769): con `maxRetriesPerModel: 1`
+      // — valore legittimo e usato — il primo tentativo e' gia' l'ultimo,
+      // quindi l'errore usciva dal `throw` qui sotto NON taggato e il circuit
+      // breaker di callLLM() non scattava: nessun cooldown del provider, e i
+      // modelli fratelli dello stesso host ripagavano ciascuno il proprio
+      // connect morto — cioe' esattamente il costo che #475 aveva tolto.
+      const unreachableCode = classifyHostUnreachable(e);
+      if (unreachableCode) e.hostUnreachable = unreachableCode;
       // Re-throw on last attempt
       if (attempt >= opts.maxRetriesPerModel) throw e;
       // Timeout errors: never retry within this call. A hang against the full
@@ -4879,11 +4888,7 @@ async function _callOpenAICompatible(apiModel, messages, opts, { endpoint, apiKe
       // identically, since nothing about a refused connection changes in
       // `attempt * backoffMs`. Tagged so the callLLM() cascade can apply its
       // circuit breaker (see classifyHostUnreachable, nanako#475).
-      const unreachableCode = classifyHostUnreachable(e);
-      if (unreachableCode) {
-        e.hostUnreachable = unreachableCode;
-        throw e;
-      }
+      if (unreachableCode) throw e;
       // Otherwise retry
       _stats.retries++;
       const waitMs = attempt * opts.backoffMs;
@@ -5970,6 +5975,10 @@ async function _callGeminiRaw(model, messages, opts) {
     } catch (e) {
       if (e.message?.includes('Daily quota')) throw e;
       if (e.nonRetryable) throw e;
+      // Tag prima del `throw` dell'ultimo tentativo — gemello della riga in
+      // _callOpenAICompatible, stessa ragione (#769).
+      const unreachableCode = classifyHostUnreachable(e);
+      if (unreachableCode) e.hostUnreachable = unreachableCode;
       if (attempt >= opts.maxRetriesPerModel) throw e;
       // Timeout errors: never retry within this call — see matching comment in
       // _callOpenAICompatible (same rationale, sibling pattern kept in sync).
@@ -5979,11 +5988,7 @@ async function _callGeminiRaw(model, messages, opts) {
       // kept in sync (nanako#475). Gemini's host is alive today, but the
       // antipattern is the loop's, not the host's: a `fetch failed` here fell
       // through to the generic retry exactly the same way.
-      const unreachableCode = classifyHostUnreachable(e);
-      if (unreachableCode) {
-        e.hostUnreachable = unreachableCode;
-        throw e;
-      }
+      if (unreachableCode) throw e;
       _stats.retries++;
       const waitMs = attempt * opts.backoffMs;
       console.warn(`⚠️  [${model}] Error retry ${attempt}/${opts.maxRetriesPerModel}: ${e.message?.slice(0, 150)}`);
@@ -6541,6 +6546,17 @@ export async function callLLM(messages, opts = {}) {
       }
 
       // ❌ Failure — penalize this model's score so it drops in priority
+      // La causa si LEGGE qui, non si assume che qualcuno l'abbia scritta
+      // (#769). I retry loop dei caller fetch taggano gia', ma il tag e' una
+      // convenzione fra funzioni: ogni caller che non la conosce (claude-cli,
+      // _callLocal, un provider aggiunto domani) consegnerebbe un connect
+      // morto indistinguibile da un errore qualunque, e il breaker sotto
+      // resterebbe fermo. `classifyHostUnreachable` e' pura e idempotente,
+      // quindi la seconda classificazione non costa niente di osservabile.
+      if (!e.hostUnreachable) {
+        const unreachableCode = classifyHostUnreachable(e);
+        if (unreachableCode) e.hostUnreachable = unreachableCode;
+      }
       const isExhausted =
         msg.includes('Daily request limit') ||
         msg.includes('Daily quota') ||
