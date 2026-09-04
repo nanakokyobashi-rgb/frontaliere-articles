@@ -17,3 +17,16 @@ public/images/places/thumbnails/.thumbcache.json
 # generato da GitNexus: zero regole, proprio dove un agente cerca le
 # non-negoziabili del corpus.
 CLAUDE.md
+
+# Immagini eventi mirrorate: NON committate (portato dal sito, #6163).
+# La cartella tiene SOLO cio' che il run corrente ha mirrorato, che e'
+# esattamente cio' che viene caricato sul CDN prima che il run esca; il sito le
+# legge da cdn.frontaliereticino.ch (services/cdnImageBase.ts). L'indice
+# committato <stableId> -> <ext> e' data/events-image-manifest.json, ed e' cio'
+# che impedisce al crawler di ri-scaricare quello che ha gia'.
+#
+# `/*` + negazione, non un `public/images/events/` semplice: git non puo'
+# ri-includere nulla dentro una DIRECTORY esclusa, quindi l'eccezione catalog/
+# sarebbe silenziosamente morta col pattern piu' semplice.
+public/images/events/*
+!public/images/events/catalog/

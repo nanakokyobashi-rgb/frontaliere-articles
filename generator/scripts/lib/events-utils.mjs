@@ -599,26 +599,181 @@ export function resolveItalianFrontierComuni(geo, { maxKm = 15 } = {}) {
 // crawl time, store under public/images/events/, and let the existing CDN
 // offload pipeline (scripts/offload-generated-images-cdn.mjs,
 // services/cdnImageBase.ts) serve them from our own domain, same as
-// brand/provider logos. Idempotent: skips the network fetch when the file
-// already exists, so re-running a crawler doesn't re-download unchanged images.
+// brand/provider logos. Idempotent: skips the network fetch for anything the
+// manifest below already lists, so re-running a crawler doesn't re-download
+// unchanged images.
+//
+// The images are written under public/images/events/ but are NOT committed
+// (#6163, .gitignore): the directory holds ONLY what the current run mirrored,
+// which is exactly what crawl-events.yml uploads to the CDN before it exits.
 const EVENT_IMAGE_DIR = path.join(REPO_ROOT, 'public', 'images', 'events');
-const EVENT_IMAGE_MAX_BYTES = 4 * 1024 * 1024; // 4MB guard against a mis-served asset
+// Committed index of every image already mirrored to the CDN, `<stableId>` ->
+// `<ext>` (issue #6163). It replaces the existsSync() probe below as the
+// authoritative "do we already have this one?" answer, because the 5'568
+// mirrored files are no longer in git: they are 4'108 MB — 59% of the tracked
+// tree — and every one of them is already served from
+// cdn.frontaliereticino.ch (verified exhaustively, all 5'568 → 200 image/*,
+// not sampled). Without an index that survives without the bytes, the probe
+// would miss on every event every night and the crawler would re-download the
+// whole catalogue from the source sites daily — the exact traffic the
+// no-hotlink requirement exists to prevent, and it would re-fill the directory
+// in git, undoing the removal.
+//
+// Path is resolved LAZILY and honours EVENTS_IMAGE_MANIFEST_PATH so a test can
+// point it at a temp file: a module-scope const would make every mirror test
+// rewrite the tracked 294 KB manifest as a side effect, and a crashed test
+// would leave it dirty for whatever stages `data/` next.
+const EVENT_IMAGE_MANIFEST_REL = path.join('data', 'events-image-manifest.json');
+function eventImageManifestPath() {
+  const override = process.env.EVENTS_IMAGE_MANIFEST_PATH;
+  return override ? path.resolve(override) : path.join(REPO_ROOT, EVENT_IMAGE_MANIFEST_REL);
+}
+
+// `null` = not loaded yet; `false` = load FAILED (see loadEventImageManifest).
+let eventImageManifest = null;
+let eventImageManifestFile = null;
+
+/**
+ * Read the manifest once per process, keyed by the resolved path so a test that
+ * re-points EVENTS_IMAGE_MANIFEST_PATH gets a fresh read instead of the
+ * previous file's cache.
+ *
+ * A missing or unparseable manifest returns `false`, NOT an empty object, and
+ * that distinction is the whole safety property: an empty object is a perfectly
+ * valid manifest that happens to know nothing, so recording into it and writing
+ * it back would replace a 5'568-entry tracked index with today's handful of
+ * entries — and the next run would then re-download every image the truncated
+ * manifest forgot. Fail-closed: no index, no write. The run still works (it
+ * falls through to the existsSync probe and, failing that, re-downloads), it
+ * just refuses to persist a file it cannot have merged correctly.
+ */
+function loadEventImageManifest() {
+  const file = eventImageManifestPath();
+  if (eventImageManifest !== null && eventImageManifestFile === file) return eventImageManifest;
+  eventImageManifestFile = file;
+  try {
+    const parsed = JSON.parse(readFileSync(file, 'utf8'));
+    if (!parsed || typeof parsed !== 'object' || Array.isArray(parsed)) throw new Error('not a JSON object');
+    eventImageManifest = parsed;
+  } catch (err) {
+    console.warn(
+      `::warning::[events] image manifest unreadable at ${file} (${err?.message || err}) — ` +
+        'mirrored images cannot be deduped this run and the manifest will NOT be rewritten ' +
+        '(refusing to truncate a tracked index)',
+    );
+    eventImageManifest = false;
+  }
+  return eventImageManifest;
+}
+
+/**
+ * Record one newly mirrored image and persist immediately.
+ *
+ * Written per image rather than once at the end of the run on purpose: this
+ * job has a documented history of being killed by `timeout-minutes` before its
+ * final commit step (see the two "survives downstream failures" steps in
+ * .github/workflows/crawl-events.yml — myswitzerland lost a month of progress
+ * to exactly that). A manifest flushed only at the end would be lost the same
+ * way, and the cost of losing it is re-downloading the whole catalogue. At
+ * ~300 KB and a few hundred new images a night the rewrite is not worth
+ * optimising away.
+ */
+function recordEventImage(safeId, ext) {
+  const manifest = loadEventImageManifest();
+  if (manifest === false) return;
+  if (manifest[safeId] === ext) return;
+  manifest[safeId] = ext;
+  const sorted = {};
+  for (const key of Object.keys(manifest).sort()) sorted[key] = manifest[key];
+  eventImageManifest = sorted;
+  try {
+    const file = eventImageManifestPath();
+    mkdirSync(path.dirname(file), { recursive: true });
+    writeFileSync(file, `${JSON.stringify(sorted, null, 2)}\n`);
+  } catch (err) {
+    console.warn(`::warning::[events] could not write image manifest: ${err?.message || err}`);
+  }
+}
+
+/** Test seam: drop the in-process manifest cache. */
+export function resetEventImageManifestCache() {
+  eventImageManifest = null;
+  eventImageManifestFile = null;
+}
+export const EVENT_IMAGE_MAX_BYTES = 4 * 1024 * 1024; // 4MB guard against a mis-served asset
 const EVENT_IMAGE_USER_AGENT = 'Mozilla/5.0 (compatible; FrontaliereTicinoBot/1.0; +https://frontaliereticino.ch)';
+
+// Re-encode before storing: the source sites serve print-resolution originals
+// (measured 2026-08-20 over the whole folder: 4'089 jpg/png averaging 936-1'226 KB,
+// the largest 4.1 MB), and this crawler runs daily, so storing the bytes verbatim
+// added 3'154 MB to the repo in 30 days — 46% of the entire tracked tree in a
+// single month. 1600px is deliberately above what any layout requests, so the
+// saving comes from the format and not from throwing away resolution: on a
+// 12-file sample spanning the size distribution, most sources are already
+// <=1600px wide and are not resized at all, yet the sample still comes down 87%.
+const EVENT_IMAGE_MAX_WIDTH = 1600;
+// Portrait sources (extreme aspect ratio) had no bound on the resulting
+// height: `resize({ width })` alone only constrains the horizontal axis, so a
+// very tall source stayed very tall after re-encoding. Same cap as the width
+// — `fit: 'inside'` only applies whichever bound is actually the binding one
+// for a given source, so ordinary landscape photos resize exactly as before.
+const EVENT_IMAGE_MAX_HEIGHT = 1600;
+const EVENT_IMAGE_WEBP_QUALITY = 82;
+const EVENT_IMAGE_WEBP_EFFORT = 6;
 
 function extFromContentType(contentType) {
   const ct = String(contentType || '').toLowerCase();
   if (ct.includes('png')) return 'png';
   if (ct.includes('webp')) return 'webp';
+  if (ct.includes('gif')) return 'gif';
+  if (ct.includes('avif')) return 'avif';
   return 'jpg';
+}
+
+/**
+ * Re-encode a downloaded event image to WebP, capped at EVENT_IMAGE_MAX_WIDTH
+ * x EVENT_IMAGE_MAX_HEIGHT (whichever bound is binding for the source's
+ * aspect ratio).
+ * Returns `{ buf, ext }` — always something storable, never throws.
+ *
+ * Two deliberate fallbacks to the original bytes, both of which keep the image
+ * rather than losing it:
+ *   • sharp unavailable or unable to decode → store the source as-is. The job of
+ *     this function is to mirror the image; an optimiser that fails must not cost
+ *     the events funnel its picture. It logs, because a silent fallback here means
+ *     the growth quietly resumes.
+ *   • re-encode came out no smaller → keep the original. Sources that already
+ *     serve an optimised WebP (ge-agenda ships 2.5-5 KB files) would otherwise be
+ *     made bigger by a pointless round-trip. Same guard as
+ *     scripts/backfill-blog-webp.mjs.
+ */
+async function encodeEventImage(buf, contentType) {
+  const originalExt = extFromContentType(contentType);
+  try {
+    const sharp = (await import('sharp')).default;
+    const out = await sharp(buf)
+      .resize({ width: EVENT_IMAGE_MAX_WIDTH, height: EVENT_IMAGE_MAX_HEIGHT, fit: 'inside', withoutEnlargement: true })
+      .webp({ quality: EVENT_IMAGE_WEBP_QUALITY, effort: EVENT_IMAGE_WEBP_EFFORT })
+      .toBuffer();
+    if (out.length >= buf.length) return { buf, ext: originalExt };
+    return { buf: out, ext: 'webp' };
+  } catch (err) {
+    console.warn(`[events] image re-encode failed, storing original: ${err?.message || err}`);
+    return { buf, ext: originalExt };
+  }
 }
 
 /**
  * Download an event's source image once and store it locally under
  * `public/images/events/<sourceKey>-<rawId>.<ext>`. Returns the site-relative
- * path (e.g. `/images/events/guidle-Acv6rYJ.jpg`) on success, or `null` on any
+ * path (e.g. `/images/events/guidle-Acv6rYJ.webp`) on success, or `null` on any
  * failure (missing URL, network error, oversized/non-image response) — callers
  * MUST treat a null return as "no image" (never fall back to the original
  * remote URL, that would defeat the no-hotlink requirement).
+ *
+ * The stored extension is normally `webp` — encodeEventImage re-encodes what
+ * was downloaded; the source's own extension survives only when that is
+ * skipped.
  */
 export async function mirrorEventImage(sourceUrl, stableId) {
   if (!sourceUrl || !/^https?:\/\//i.test(sourceUrl)) return null;
@@ -626,6 +781,16 @@ export async function mirrorEventImage(sourceUrl, stableId) {
   if (!safeId) return null;
 
   mkdirSync(EVENT_IMAGE_DIR, { recursive: true });
+  // 1. The committed manifest — the only probe that still works now that the
+  //    mirrored bytes live on the CDN instead of in git.
+  const manifest = loadEventImageManifest();
+  const knownExt = manifest === false ? null : manifest[safeId];
+  if (typeof knownExt === 'string' && knownExt) return `/images/events/${safeId}.${knownExt}`;
+  // 2. On-disk fallback, kept deliberately: within a single run the crawler
+  //    writes real files (which the CDN push step then uploads), and a manifest
+  //    that failed to load leaves this as the only dedup left. It costs four
+  //    stat() calls and is the difference between "re-download one image" and
+  //    "re-download the catalogue".
   const existingMatch = ['jpg', 'jpeg', 'png', 'webp']
     .map((ext) => path.join(EVENT_IMAGE_DIR, `${safeId}.${ext}`))
     .find((p) => existsSync(p));
@@ -636,11 +801,12 @@ export async function mirrorEventImage(sourceUrl, stableId) {
     if (!res.ok) return null;
     const contentType = res.headers.get('content-type') || '';
     if (!contentType.startsWith('image/')) return null;
-    const buf = Buffer.from(await res.arrayBuffer());
-    if (buf.byteLength === 0 || buf.byteLength > EVENT_IMAGE_MAX_BYTES) return null;
-    const ext = extFromContentType(contentType);
+    const raw = Buffer.from(await res.arrayBuffer());
+    if (raw.byteLength === 0 || raw.byteLength > EVENT_IMAGE_MAX_BYTES) return null;
+    const { buf, ext } = await encodeEventImage(raw, contentType);
     const fileName = `${safeId}.${ext}`;
     writeFileSync(path.join(EVENT_IMAGE_DIR, fileName), buf);
+    recordEventImage(safeId, ext);
     return `/images/events/${fileName}`;
   } catch {
     return null;
