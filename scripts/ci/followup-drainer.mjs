@@ -1428,6 +1428,35 @@ export function isReparkableCandidate(iss) {
   if (isPermanentTracker(iss)) return false;                   // tracker permanente (#5615/#5544)
   return reparkGenOf(iss) < MAX_REPARK_GEN;                    // generation-cap
 }
+
+/**
+ * Il DRAIN può promuovere questa issue a `agent:fix`? (#826)
+ *
+ * Era l'UNICO stadio del drainer senza l'esclusione dello stadio decompose che
+ * i quattro gemelli hanno già (`isAgeOutCandidate`, `isReparkableCandidate`,
+ * VERDICT-EXIT, `isDecomposeEligible`), e la differenza si pagava in run Claude
+ * intere: un padre `decomposed:1` che rientra in coda (ramo RE-QUEUE orfano,
+ * oppure il verdetto `overlap-skip` — volutamente ri-tentabile perché in
+ * generale transiente) veniva promosso, il fixer leggeva la issue, constatava
+ * che lo scope è tutto nelle figlie ed emetteva `overlap-skip` → re-queue →
+ * stessa run. Bounded da MAX_ATTEMPTS, quindi fino a 3 run per padre, tutte con
+ * esito noto in partenza e calcolabile da una label a costo zero (misurato su
+ * #786: `overlap-skip` ×3). La quota è condivisa col sito e questo repo ha
+ * precedenza inferiore: sono run sottratte al ciclo del sito.
+ *
+ * Per un padre decomposto l'overlap non è transiente ma STRUTTURALE: dura
+ * finché le figlie sono aperte, e quando si chiudono è il PARENT-CLOSE a
+ * chiudere il padre — senza alcuna run del fixer. Le issue nello stadio
+ * decompose (`agent:decompose-queued`/`agent:decomposing`) sono escluse per la
+ * stessa ragione dei gemelli: sono già in lavorazione altrove.
+ * Puro (solo label) → testabile.
+ * @param {{labels?: Array<{name:string}>}} iss
+ */
+export function isDrainPromotable(iss) {
+  if (has(iss, LBL_PARKED)) return false;
+  if (has(iss, LBL_DECOMP_QUEUED) || has(iss, LBL_DECOMP) || has(iss, LBL_DECOMPOSED)) return false;
+  return true;
+}
 /** WF-scope = il fix toccherebbe .github/workflows (capability-guard) → non
  * auto-fixabile. Riusa `detectWorkflowScoped` (stesso detector di
  * `check-workflows-scope.mjs`, vedi `scripts/lib/workflow-scope-detect.mjs`)
@@ -2442,6 +2471,17 @@ export function runDrain() {
     //    all'age-out close) issue mai lette da nessun agent (#5008 #5004 #5001
     //    #4974). Un tentativo si consuma quando l'agent PROVA, non quando la
     //    quota gliel'ha impedito.
+    // La seconda porta del ciclo chiuso di #826: entrambi i rami di re-queue qui
+    // sotto (ZERO_WORK e rescue orfano) rimettono in coda senza guardare
+    // `decomposed:1`, e il DRAIN — ora che filtra — parkerebbe il padre solo al
+    // tick successivo. Chiuderla qui evita il ping-pong fra le label. Sotto
+    // backoff di quota si aspetta: `agent:fix` è la label su cui `quotaScanPool`
+    // cerca il beacon del reset, toglierla ora lo perderebbe.
+    if (has(iss, LBL_DECOMPOSED) && quotaBackoffUntil === null) {
+      console.log(`PARK #${iss.number} (padre ${LBL_DECOMPOSED} senza PR) → no re-queue: lo scope è nelle figlie, lo chiude il PARENT-CLOSE`);
+      edit(iss.number, { add: [LBL_PARKED], remove: [LBL_FIX, LBL_QUEUED] });
+      continue;
+    }
     if (outcome && ZERO_WORK.has(outcome)) {
       if (quotaBackoffUntil !== null) {
         console.log(`HOLD #${iss.number} (${outcome}, finestra quota ancora aperta) → resta agent:fix come beacon, nessun tentativo consumato`);
@@ -2654,8 +2694,36 @@ export function runDrain() {
   // stampato al momento della decisione, qui si onora e basta.
   if (fairnessHold) return;
 
-  const queued = listIssues(LBL_QUEUED)
-    .filter((i) => !has(i, LBL_PARKED))
+  const pool = listIssues(LBL_QUEUED).filter((i) => !has(i, LBL_PARKED));
+
+  // Pre-flight zero-Claude (#826): ciò che `isDrainPromotable` esclude non va
+  // solo SALTATO, va tolto dalla coda — altrimenti resta `agent:fix-queued` per
+  // sempre, primo nell'ordinamento e ri-valutato a ogni tick. Due esiti diversi
+  // perché gli stadi sono diversi:
+  //  • padre `decomposed:1` → park + commento col verdetto. È lo stesso esito che
+  //    il fixer produrrebbe (`overlap-skip`), calcolato da una label invece che
+  //    da una run Claude. Non si chiude qui: lo chiude il PARENT-CLOSE quando le
+  //    figlie sono chiuse.
+  //  • issue nello stadio decompose → si toglie SOLO `agent:fix-queued` (label
+  //    stantia): parcarla la strapperebbe al drain decompose, che filtra i
+  //    `fu-parked` esattamente come questo.
+  for (const iss of pool.filter((i) => !isDrainPromotable(i))) {
+    if (!budget.take(`#${iss.number} (drain pre-flight)`, ITEM_COST_MS)) break;
+    if (!has(iss, LBL_DECOMPOSED)) {
+      console.log(`DEQUEUE #${iss.number} (già nello stadio decompose) → tolgo ${LBL_QUEUED}, la promozione la fa il drain decompose`);
+      if (!DRY) edit(iss.number, { remove: [LBL_QUEUED] });
+      continue;
+    }
+    console.log(`PARK #${iss.number} (padre ${LBL_DECOMPOSED}) → no promozione, il verdetto sarebbe overlap-skip deterministico`);
+    if (DRY) { console.log(`[dry] park #${iss.number} (padre decomposto)`); continue; }
+    const note = `⏭️ **Pre-flight drainer (zero-Claude, #826)**: questa issue è un padre **decomposto** (\`${LBL_DECOMPOSED}\`). Il suo scope è interamente coperto dalle sub-issue dichiarate dal marker \`DECOMPOSED_INTO\`, che hanno la loro dispatch: promuoverla a \`agent:fix\` produrrebbe un verdetto \`overlap-skip\` **noto in partenza**, fino a \`MAX_ATTEMPTS\` run Claude a testa (misurato su #786: ×3) sottratte a una quota condivisa.\n\nL'overlap di un padre decomposto non è transiente ma strutturale: dura finché le figlie sono aperte, e quando si chiudono è il **PARENT-CLOSE** del drainer a chiudere questo padre — senza bisogno di alcuna run del fixer. **Non promuovo**: tolgo \`${LBL_QUEUED}\` e parko (il padre resta aperto come tracker della decomposizione).\n\n<!-- FIX_OUTCOME: overlap-skip -->`;
+    try { gh(['issue', 'comment', String(iss.number), '--repo', REPO, '--body', note], { json: false }); }
+    catch (e) { console.log(`::warning::comment #${iss.number} fallito: ${String(e).slice(0, 120)}`); }
+    edit(iss.number, { add: [LBL_PARKED], remove: [LBL_QUEUED, LBL_FIX] });
+  }
+
+  const queued = pool
+    .filter(isDrainPromotable)
     .sort((a, b) => prioRank(a) - prioRank(b) || Date.parse(a.createdAt) - Date.parse(b.createdAt));
   if (!queued.length) { console.log('coda vuota → niente da promuovere.'); return; }
 
