@@ -421,8 +421,8 @@
       "reason": "Il rilevatore di divergenza stesso. Vive qui perche' e' questo il lato che riceve il ciclo; il sito e' la sorgente e non ha bisogno di sorvegliare se stesso.",
       "baseline": {
         "site": null,
-        "corpus": "88ccdfd728c55fe9",
-        "alignedAt": "2026-09-01"
+        "corpus": "1edda184e5897507",
+        "alignedAt": "2026-09-04"
       }
     },
     {
@@ -3191,6 +3191,16 @@
         "site": null,
         "corpus": "383513e5f6cacb88",
         "alignedAt": "2026-09-03"
+      }
+    },
+    {
+      "path": "scripts/ci/transport-identical-twins.mjs",
+      "mode": "corpus-only",
+      "reason": "Il TRASPORTO dei gemelli `identical` di questo manifest (issue #331). Vive solo qui per la stessa ragione del drift check: e' questo il lato che RICEVE il ciclo, e un trasporto tirato non ha un gemello sul sito da sorvegliare. Il canale spinto — l'allowlist di mirror-articles-engine.yml — resta fermo a engine/ perche' copia directory INTERE e sotto scripts/**/host/** vivono decine di voci `adapted`: allargarlo le sovrascriverebbe. Questo script non ha quel problema perche' non copia mai una directory, solo i path dichiarati `identical` uno per uno, dal loro `sitePath`.",
+      "baseline": {
+        "site": null,
+        "corpus": "6fc02479e0cb0303",
+        "alignedAt": "2026-09-04"
       }
     },
     {

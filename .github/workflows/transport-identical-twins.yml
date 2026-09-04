@@ -1,0 +1,153 @@
+name: Transport identical twins (pull-side)
+
+# Il TRASPORTO che ai gemelli `identical` del manifest mancava (issue #331,
+# follow-up di #326 e #303). Zero Claude: legge il manifest, copia dal sito i
+# soli file dichiarati `identical` e fermi in `site-ahead`, apre UNA PR che
+# passa dalla review come ogni altra.
+#
+# ── Perche' un canale TIRATO, e non l'allowlist del mirror ──────────────────
+# `mirror-articles-engine.yml` gira sul SITO e copia DIRECTORY INTERE: si ferma
+# a `engine/` perche' quello e' l'unico albero con una prova di confinamento, e
+# allargarlo a `scripts/**`/`host/**` sovrascriverebbe le decine di voci
+# `adapted` che vivono li' — la meta' distruttiva del vecchio mirror, spostata
+# da `content/` a `generator/`.
+#
+# Questo canale non ha bisogno di quella prova: non copia mai una directory, ma
+# i singoli path che il manifest dichiara `identical`, dal loro `sitePath`. Un
+# file `adapted` non e' protetto da un'eccezione — non e' proprio nell'insieme
+# di partenza. E copia SOLO `site-ahead` (`classify()` di loop-drift-check):
+# se questo lato si e' mosso, non si tocca niente.
+#
+# `engine/` resta fuori: e' `outOfScope` nel manifest PROPRIO perche' ha gia' il
+# mirror, e due canali sullo stesso path sono un conflitto, non una ridondanza.
+#
+# ── Cosa NON fa ────────────────────────────────────────────────────────────
+# Non mergia e non forza: apre una PR normale. La review e l'auto-merge nativo
+# decidono come sempre. Una PR di trasporto alla volta (guard qui sotto), cosi'
+# un giorno storto non impila copie che nessuno rivede.
+on:
+  schedule:
+    - cron: '47 4 * * *' # ogni giorno alle 04:47 UTC, prima del drift check delle 07:31
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Solo report, nessuna scrittura e nessuna PR.'
+        required: false
+        default: 'false'
+        type: string
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: transport-identical-twins
+  cancel-in-progress: false
+
+jobs:
+  transport:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 1
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: '22'
+
+      # Una PR di trasporto alla volta. Senza questo guard un giorno in cui la
+      # review e' lenta produce N PR sovrapposte sugli stessi file, che e'
+      # esattamente il rumore che il manifest esiste per evitare.
+      - name: Guard — trasporto gia' in volo
+        id: guard
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          OPEN=$(gh pr list --state open --search 'head:transport/identical-twins' --json number --jq 'length')
+          echo "open_transports=$OPEN" >> "$GITHUB_OUTPUT"
+          if [ "$OPEN" != "0" ]; then
+            echo "Una PR di trasporto e' gia' aperta — niente di nuovo oggi."
+          fi
+
+      - name: Write Firebase SA (se presente)
+        if: steps.guard.outputs.open_transports == '0'
+        continue-on-error: true
+        env:
+          FIREBASE_SERVICE_ACCOUNT_JSON: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}
+        run: |
+          set -uo pipefail
+          if [ -n "${FIREBASE_SERVICE_ACCOUNT_JSON:-}" ]; then
+            printf '%s' "$FIREBASE_SERVICE_ACCOUNT_JSON" > /tmp/firebase-sa.json
+            echo "GOOGLE_APPLICATION_CREDENTIALS=/tmp/firebase-sa.json" >> "$GITHUB_ENV"
+          fi
+
+      # Ponte Remote Config → env: da qui arriva `GITHUB_PAT_NANAKO`.
+      - name: Load secrets from Remote Config
+        if: steps.guard.outputs.open_transports == '0'
+        continue-on-error: true
+        run: node generator/scripts/load-rc-env.mjs
+
+      # Il dry-run gira SEMPRE, anche senza PAT: il report nel log e' gia' la
+      # meta' osservativa, e senza di lui un run senza credenziali non
+      # lascerebbe traccia di cosa avrebbe portato.
+      - name: Cosa c'e' da portare (dry-run)
+        if: steps.guard.outputs.open_transports == '0'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SITE_REPO: valerielinc-ops/frontaliere-si-o-no
+          SITE_REF: main
+        run: node scripts/ci/transport-identical-twins.mjs
+
+      # Senza PAT non si scrive: un push col GITHUB_TOKEN non fa partire i
+      # workflow sulla PR (anti-ricorsione), quindi il check richiesto non
+      # verrebbe mai emesso e la PR resterebbe verde-e-ferma per sempre — la
+      # stessa forma di stallo che `enable-native-automerge` esiste per evitare.
+      - name: Copia e apri la PR
+        if: steps.guard.outputs.open_transports == '0' && github.event.inputs.dry_run != 'true' && env.GITHUB_PAT_NANAKO != ''
+        env:
+          GH_TOKEN: ${{ env.GITHUB_PAT_NANAKO }}
+          REPO: ${{ github.repository }}
+          SITE_REPO: valerielinc-ops/frontaliere-si-o-no
+          SITE_REF: main
+        run: |
+          set -euo pipefail
+          node scripts/ci/transport-identical-twins.mjs --apply --json > /tmp/transport.json
+          PORTED=$(node -e 'console.log(require("/tmp/transport.json").transported.length)')
+          if [ "$PORTED" = "0" ]; then
+            echo "Nessun gemello da portare: niente PR."
+            exit 0
+          fi
+          # Il corpo si scrive da Node su file: un heredoc dentro un blocco
+          # `run:` indentato porterebbe la sua indentazione DENTRO il markdown,
+          # e `## Implementato` rientrato non e' piu' un heading — il contratto
+          # del body (`pr-body-contract`) lo leggerebbe come assente.
+          node -e '
+            const fs = require("fs");
+            const r = require("/tmp/transport.json");
+            const list = r.transported.map((t) => "- `" + t.path + "` \u2190 `" + t.sitePath + "` del sito").join("\n");
+            fs.writeFileSync("/tmp/pr-body.md", [
+              "## Implementato",
+              "- Copia automatica dei gemelli dichiarati `mode: identical` in `scripts/ci/loop-sync-manifest.json` che il sito ha portato avanti mentre questo lato restava fermo sulla baseline (stato `site-ahead`), piu\u2019 la baseline riallineata per le sole voci copiate. Aperta da `.github/workflows/transport-identical-twins.yml` (issue #331).",
+              "",
+              list,
+              "",
+              "## Non implementato (ancora)",
+              "- Le voci `adapted` e i gemelli sotto `.github/workflows/`: fuori dall\u2019insieme di partenza per costruzione \u2014 le prime perche\u2019 differiscono apposta, i secondi perche\u2019 il token del ciclo non ha lo scope `workflows`. Restano una copia a mano, e il drift check continua a datarle: in questa PR, blocked.",
+              "",
+            ].join("\n"));
+          '
+          BRANCH="transport/identical-twins-${GITHUB_RUN_ID}"
+          git config user.name 'github-actions[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          git remote set-url origin "https://x-access-token:${GH_TOKEN}@github.com/${REPO}.git"
+          git checkout -b "$BRANCH"
+          git add -A
+          git commit -m "chore(loop): porta ${PORTED} gemelli identical dal sito"
+          git push -u origin "$BRANCH"
+          gh pr create --base main --head "$BRANCH" \
+            --title "chore(loop): trasporto di ${PORTED} gemelli \`identical\` dal sito" \
+            --body-file /tmp/pr-body.md
