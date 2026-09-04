@@ -40,8 +40,23 @@ export function registerLockPath(projectRoot) {
  * overwriting a lock left by an interrupted registration — the corpus may
  * already be inconsistent, and layering a new registration on top would only
  * add a second interleaving nobody could untangle afterwards.
+ *
+ * `section` is recorded alongside the id and is NOT optional: the 9 targets
+ * are section-scoped (the frontaliere registry, slug map, SEO file and locale
+ * chunks are different files from the svizzera ones — the two sections do not
+ * share a single target), and `generate-article.yml` alternates the two
+ * sections inside the SAME checkout. Resolving the lock against whichever
+ * section the NEXT process happens to run as would compare a svizzera id
+ * against the frontaliere files, find it in none of them, and clear the lock
+ * as "nothing written" over a genuinely split corpus.
  */
-export function beginRegisterLock(projectRoot, id) {
+export function beginRegisterLock(projectRoot, id, section) {
+  if (typeof section !== 'string' || section === '') {
+    throw new Error(
+      `beginRegisterLock() requires the article section (got ${JSON.stringify(section)}): the ` +
+        'registration targets are section-scoped and cannot be cross-checked on a later run without it.',
+    );
+  }
   const lockPath = registerLockPath(projectRoot);
   if (existsSync(lockPath)) {
     let stale = lockPath;
@@ -54,7 +69,11 @@ export function beginRegisterLock(projectRoot, id) {
     );
   }
   mkdirSync(path.dirname(lockPath), { recursive: true });
-  writeFileSync(lockPath, JSON.stringify({ id, pid: process.pid, startedAt: new Date().toISOString() }, null, 2), 'utf-8');
+  writeFileSync(
+    lockPath,
+    JSON.stringify({ id, section, pid: process.pid, startedAt: new Date().toISOString() }, null, 2),
+    'utf-8',
+  );
 }
 
 /**
@@ -69,16 +88,22 @@ export function endRegisterLock(projectRoot) {
 /**
  * Reads the lock left by an interrupted registration, or `null` when there
  * isn't one. A lock whose JSON is unreadable is still a lock — it is reported
- * with `id: null`, never swallowed as "clean".
+ * with `id: null`, never swallowed as "clean". `id` and `section` are
+ * normalised AFTER the spread, so a malformed value in the file cannot put
+ * itself back through `...parsed`.
  */
 export function readRegisterLock(projectRoot) {
   const lockPath = registerLockPath(projectRoot);
   if (!existsSync(lockPath)) return null;
   try {
     const parsed = JSON.parse(readFileSync(lockPath, 'utf-8'));
-    return { id: typeof parsed?.id === 'string' ? parsed.id : null, ...parsed };
+    return {
+      ...parsed,
+      id: typeof parsed?.id === 'string' ? parsed.id : null,
+      section: typeof parsed?.section === 'string' && parsed.section !== '' ? parsed.section : null,
+    };
   } catch {
-    return { id: null, unreadable: true };
+    return { id: null, section: null, unreadable: true };
   }
 }
 
@@ -122,28 +147,34 @@ export function registrationTargetStatus(targets) {
  * this lock exists to catch, and that one throws: continuing would layer a
  * second registration on top of a corpus nobody could untangle afterwards.
  *
- * `buildTargets(id)` is supplied by the caller because the 9 paths depend on
- * the `--section` config, which lives in create-article.mjs.
+ * `buildTargets(id, section)` is supplied by the caller because the 9 paths
+ * depend on the `--section` config, which lives in create-article.mjs. It is
+ * called with the section RECORDED IN THE LOCK, never with the one the
+ * current process was launched with: the two differ every time
+ * `generate-article.yml` alternates sections in the same checkout, and
+ * comparing an id against the other section's files would classify a split
+ * corpus as untouched.
  */
 export function resolveRegisterLock(projectRoot, buildTargets) {
   const lock = readRegisterLock(projectRoot);
   if (!lock) return { state: 'clean' };
-  if (!lock.id) {
+  if (!lock.id || !lock.section) {
     throw new Error(
-      `registration lock at ${REGISTER_LOCK_FILE} is unreadable, so the id of the interrupted ` +
-        'registration is unknown and the 9 files cannot be cross-checked. Inspect the corpus by ' +
-        'hand and remove the lock file.',
+      `registration lock at ${REGISTER_LOCK_FILE} is unreadable or missing its ` +
+        `${lock.id ? 'section' : 'id'}, so the interrupted registration cannot be located and the ` +
+        '9 files cannot be cross-checked. Inspect the corpus by hand and remove the lock file.',
     );
   }
-  const { present, absent } = registrationTargetStatus(buildTargets(lock.id));
+  const { present, absent } = registrationTargetStatus(buildTargets(lock.id, lock.section));
   if (present.length > 0 && absent.length > 0) {
     throw new Error(
-      `registration of "${lock.id}" was interrupted mid-write and left the corpus SPLIT across the ` +
+      `registration of "${lock.id}" (section "${lock.section}") was interrupted mid-write and left ` +
+        `the corpus SPLIT across the ` +
         `registration files: registered in [${present.join(', ')}] but missing from ` +
         `[${absent.join(', ')}]. Refusing to generate on top of an inconsistent corpus — repair the ` +
         `missing entries (or remove the partial ones) by hand, then delete ${REGISTER_LOCK_FILE}.`,
     );
   }
   endRegisterLock(projectRoot);
-  return { state: present.length > 0 ? 'committed' : 'nothing-written', id: lock.id };
+  return { state: present.length > 0 ? 'committed' : 'nothing-written', id: lock.id, section: lock.section };
 }

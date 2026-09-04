@@ -45,27 +45,39 @@ import {
 } from '../scripts/lib/register-lock.mjs';
 
 const ARTICLE_ID = 'permesso-g-frontalieri-2026';
+const SECTION = 'frontaliere';
 
 function sandbox() {
   return fs.mkdtempSync(path.join(os.tmpdir(), 'register-lock-'));
 }
 
 /**
- * Gli stessi bersagli che `registerLockTargets()` costruisce da `SECTION` in
- * create-article.mjs: le 9 chiamate `modifyXxx()` scrivono 11 file, perche'
- * `modifyI18nTs`/`modifyLocaleFile` ne toccano due per locale (meta + body) e
- * `modifySitemap`/`modifySitemapNews` sono no-op in questo repo.
+ * Gli stessi bersagli che `registerLockTargets()` costruisce dalla config di
+ * sezione in create-article.mjs: le 9 chiamate `modifyXxx()` scrivono 11 file,
+ * perche' `modifyI18nTs`/`modifyLocaleFile` ne toccano due per locale (meta +
+ * body) e `modifySitemap`/`modifySitemapNews` sono no-op in questo repo.
+ *
+ * I path sono scopati alla SEZIONE, come nel codice reale: le due sezioni non
+ * condividono nemmeno un bersaglio, ed e' questo che rende fatale confrontare
+ * un id contro i file dell'altra sezione.
  */
+const SECTION_FILES = {
+  frontaliere: { slug: 'data/routerBlogData.ts', registry: 'data/blog-articles-data.ts', seo: 'services/seo/seo-blog-5.ts', metaPrefix: 'blog-meta', bodyDir: 'blog-body' },
+  svizzera: { slug: 'data/routerSwissData.ts', registry: 'data/swiss-articles-data.ts', seo: 'services/seo/seo-blog-ch.ts', metaPrefix: 'blog-meta-ch', bodyDir: 'blog-body-ch' },
+};
+
 function makeTargets(root) {
-  return (id) => {
+  return (id, section = SECTION) => {
+    const cfg = SECTION_FILES[section];
+    if (!cfg) throw new Error(`sezione sconosciuta nel lock: "${section}"`);
     const rel = [
-      ['data/routerBlogData.ts', id],
-      ['data/blog-articles-data.ts', id],
-      ['services/seo/seo-blog-5.ts', id],
+      [cfg.slug, id],
+      [cfg.registry, id],
+      [cfg.seo, id],
     ];
     for (const locale of ['it', 'en', 'de', 'fr']) {
-      rel.push([`services/locales/blog-meta-${locale}.ts`, `blog.article.${id}.`]);
-      rel.push([`services/locales/blog-body/${locale}/${id}.ts`, null]);
+      rel.push([`services/locales/${cfg.metaPrefix}-${locale}.ts`, `blog.article.${id}.`]);
+      rel.push([`services/locales/${cfg.bodyDir}/${locale}/${id}.ts`, null]);
     }
     return rel.map(([r, needle]) => ({ label: r, absPath: path.join(root, r), needle }));
   };
@@ -80,7 +92,7 @@ test('il marker sopravvive a un crash a meta\' della sequenza di 9 scritture', (
   // Il kill atterra a meta': i primi passi hanno scritto, gli altri no.
   const failAt = 4;
   assert.throws(() => {
-    beginRegisterLock(root, ARTICLE_ID);
+    beginRegisterLock(root, ARTICLE_ID, SECTION);
     steps.forEach((t, i) => {
       if (i === failAt) throw new Error('kill simulato');
       fs.mkdirSync(path.dirname(t.absPath), { recursive: true });
@@ -105,7 +117,7 @@ test('il run successivo RIFIUTA di procedere su un corpus spezzato', () => {
   const build = makeTargets(root);
   const steps = build(ARTICLE_ID);
   assert.throws(() => {
-    beginRegisterLock(root, ARTICLE_ID);
+    beginRegisterLock(root, ARTICLE_ID, SECTION);
     steps.forEach((t, i) => {
       if (i === 4) throw new Error('kill simulato');
       fs.mkdirSync(path.dirname(t.absPath), { recursive: true });
@@ -145,9 +157,9 @@ test('una registrazione completata non lascia marker e non blocca il run dopo', 
  * scrivono l'id su bersagli distinti, con il lock aperto prima del primo e
  * chiuso dopo l'ultimo.
  */
-function runRegistration(root, id, build, { failAt = -1 } = {}) {
-  const steps = build(id);
-  beginRegisterLock(root, id);
+function runRegistration(root, id, build, { failAt = -1, section = SECTION } = {}) {
+  const steps = build(id, section);
+  beginRegisterLock(root, id, section);
   steps.forEach((t, i) => {
     if (i === failAt) throw new Error('kill simulato');
     fs.mkdirSync(path.dirname(t.absPath), { recursive: true });
@@ -165,16 +177,16 @@ test('marker orfano ma corpus coerente: si auto-ripara invece di bloccare per se
   const rootAll = sandbox();
   const buildAll = build(rootAll);
   runRegistration(rootAll, ARTICLE_ID, buildAll);
-  beginRegisterLock(rootAll, ARTICLE_ID); // marker rimasto indietro
-  assert.deepEqual(resolveRegisterLock(rootAll, buildAll), { state: 'committed', id: ARTICLE_ID });
+  beginRegisterLock(rootAll, ARTICLE_ID, SECTION); // marker rimasto indietro
+  assert.deepEqual(resolveRegisterLock(rootAll, buildAll), { state: 'committed', id: ARTICLE_ID, section: SECTION });
   assert.equal(fs.existsSync(registerLockPath(rootAll)), false, 'il lock benigno viene rimosso');
 
   // Caso B — il kill e' atterrato PRIMA della prima scrittura: nessun file
   // cita l'id, il corpus e' intatto.
   const rootNone = sandbox();
   const buildNone = build(rootNone);
-  beginRegisterLock(rootNone, ARTICLE_ID);
-  assert.deepEqual(resolveRegisterLock(rootNone, buildNone), { state: 'nothing-written', id: ARTICLE_ID });
+  beginRegisterLock(rootNone, ARTICLE_ID, SECTION);
+  assert.deepEqual(resolveRegisterLock(rootNone, buildNone), { state: 'nothing-written', id: ARTICLE_ID, section: SECTION });
   assert.equal(fs.existsSync(registerLockPath(rootNone)), false);
 });
 
@@ -191,9 +203,57 @@ test('un lock illeggibile e\' comunque un lock, mai letto come "pulito"', () => 
 
 test('beginRegisterLock non sovrascrive un lock esistente', () => {
   const root = sandbox();
-  beginRegisterLock(root, ARTICLE_ID);
-  assert.throws(() => beginRegisterLock(root, 'altro-articolo'), /registration lock still present/);
+  beginRegisterLock(root, ARTICLE_ID, SECTION);
+  assert.throws(() => beginRegisterLock(root, 'altro-articolo', SECTION), /registration lock still present/);
   // Il lock originale e' intatto: sovrascriverlo perderebbe l'id da
   // confrontare coi 9 file.
   assert.equal(readRegisterLock(root).id, ARTICLE_ID);
+});
+
+test('il lock resta risolto sulla SEZIONE registrata, non su quella del run successivo', () => {
+  // `generate-article.yml` gira le due sezioni nello STESSO checkout (la
+  // catena di retry le alterna), quindi il processo che trova il marker sta
+  // di norma girando come l'ALTRA sezione. Prima che il lock portasse con se'
+  // la propria sezione, i bersagli venivano costruiti da quella corrente: un
+  // id svizzero cercato nei file frontaliere non c'e' in nessuno, il caso
+  // veniva classificato `nothing-written` e il marker cancellato — proprio
+  // sopra il corpus spezzato che doveva denunciare.
+  const root = sandbox();
+  const build = makeTargets(root);
+  const swissId = 'imposta-preventiva-ch-2026';
+
+  assert.throws(() => {
+    runRegistration(root, swissId, build, { failAt: 4, section: 'svizzera' });
+  }, /kill simulato/);
+
+  // Il run successivo gira `--section=frontaliere`: i suoi bersagli non
+  // citano nemmeno un id svizzero. Il default di `build` e' infatti
+  // frontaliere, ma `resolveRegisterLock` deve ignorarlo e passare la sezione
+  // letta dal lock.
+  assert.equal(readRegisterLock(root).section, 'svizzera');
+  assert.throws(
+    () => resolveRegisterLock(root, build),
+    (err) => /SPLIT/.test(err.message)
+      && err.message.includes(swissId)
+      && err.message.includes('svizzera')
+      && err.message.includes('data/routerSwissData.ts'),
+    'lo split svizzero deve essere rilevato anche da un run frontaliere',
+  );
+  assert.ok(fs.existsSync(registerLockPath(root)), 'il marker non viene cancellato dal run dell\'altra sezione');
+});
+
+test('un lock senza sezione non viene risolto a indovinare', () => {
+  // Un marker con id ma senza sezione (JSON scritto a mano, o troncato dopo
+  // il campo id) non permette di sapere QUALI file confrontare: cadere sulla
+  // sezione corrente e' esattamente la mis-comparazione che il campo esiste
+  // per impedire.
+  const root = sandbox();
+  const lockPath = registerLockPath(root);
+  fs.mkdirSync(path.dirname(lockPath), { recursive: true });
+  fs.writeFileSync(lockPath, JSON.stringify({ id: ARTICLE_ID }), 'utf-8');
+  assert.equal(readRegisterLock(root).section, null);
+  assert.throws(() => resolveRegisterLock(root, makeTargets(root)), /missing its section/);
+  // E aprire un lock senza sezione e' impedito alla fonte.
+  fs.rmSync(lockPath);
+  assert.throws(() => beginRegisterLock(root, ARTICLE_ID), /requires the article section/);
 });

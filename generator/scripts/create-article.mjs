@@ -2755,7 +2755,13 @@ function write(rel, content) {
 // that module's header for why (this file imports jsdom statically, so
 // nothing inside it is reachable by `node --test` without node_modules).
 function beginRegisterLock(id) {
-  return beginRegisterLockImpl(PROJECT_ROOT, id);
+  // SECTION_NAME travels INTO the lock file: `generate-article.yml` runs the
+  // two sections in the same checkout (the retry chain alternates them), so
+  // the process that later resolves the lock is routinely running as the
+  // OTHER section. Without the recorded section the cross-check would look
+  // for a svizzera id in the frontaliere files, find it nowhere, and clear
+  // the marker as "nothing written" over a split corpus.
+  return beginRegisterLockImpl(PROJECT_ROOT, id, SECTION_NAME);
 }
 
 function endRegisterLock() {
@@ -2764,7 +2770,7 @@ function endRegisterLock() {
 
 // The files a completed registration must ALL carry the id in, used to tell a
 // benign leftover lock from a genuinely split corpus (see
-// `resolveRegisterLock`). Derived from the same `SECTION` config the
+// `resolveRegisterLock`). Derived from the same section config the
 // `modifyXxx()` functions read, so the two cannot drift apart: the slug data
 // file (`modifyRouterTs`), the article registry (`modifyBlogArticlesTsx`), the
 // four meta files and the four per-locale body files (`modifyI18nTs` +
@@ -2772,15 +2778,32 @@ function endRegisterLock() {
 // and `modifySitemapNews` are deliberately absent: both are no-ops here (the
 // sitemaps are derived from the whole corpus by scripts/build-api.mjs), so
 // they have no per-id state that could be half-written.
-function registerLockTargets(id) {
+//
+// `sectionName` is the section RECORDED IN THE LOCK, not SECTION_NAME: the two
+// differ whenever `generate-article.yml` alternates sections in the same
+// checkout, and building the targets from the current process's section would
+// compare a svizzera id against the frontaliere files — absent from all of
+// them, so a genuinely split corpus would be classified `nothing-written` and
+// the marker cleared. An unknown recorded section is a hard error: silently
+// falling back to the current one is exactly the mis-comparison above.
+function registerLockTargets(id, sectionName = SECTION_NAME) {
+  const section = ARTICLE_SECTION_CONFIGS[sectionName];
+  if (!section) {
+    throw new Error(
+      `Il lock di registrazione cita la sezione sconosciuta "${sectionName}": impossibile ` +
+        `determinare i file di registrazione da confrontare (valide: ` +
+        `${Object.keys(ARTICLE_SECTION_CONFIGS).join(', ')}). Ispeziona il corpus a mano e ` +
+        `rimuovi ${REGISTER_LOCK_FILE}.`,
+    );
+  }
   const targets = [
-    { label: SECTION.slugDataFile, absPath: resolve(SECTION.slugDataFile), needle: id },
-    { label: SECTION.registryFile, absPath: resolve(SECTION.registryFile), needle: id },
-    { label: SECTION.seoFile, absPath: resolve(SECTION.seoFile), needle: id },
+    { label: section.slugDataFile, absPath: resolve(section.slugDataFile), needle: id },
+    { label: section.registryFile, absPath: resolve(section.registryFile), needle: id },
+    { label: section.seoFile, absPath: resolve(section.seoFile), needle: id },
   ];
   for (const locale of ['it', 'en', 'de', 'fr']) {
-    const metaFile = `services/locales/${SECTION.metaPrefix}-${locale}.ts`;
-    const bodyFile = `services/locales/${SECTION.bodyDir}/${locale}/${id}.ts`;
+    const metaFile = `services/locales/${section.metaPrefix}-${locale}.ts`;
+    const bodyFile = `services/locales/${section.bodyDir}/${locale}/${id}.ts`;
     targets.push({ label: metaFile, absPath: resolve(metaFile), needle: `blog.article.${id}.` });
     // The body file IS the registration: its mere existence is the entry, so
     // there is no needle to look for inside it.
@@ -2800,9 +2823,9 @@ function resolveRegisterLockAtStartup() {
     console.error(`  ♻️  ${REGISTER_LOCK_FILE}: marker di registrazione lasciato da un run interrotto`);
   }
   if (outcome.state === 'committed') {
-    console.error(`  ♻️  Lock di registrazione orfano per "${outcome.id}": i file di registrazione sono coerenti (transazione completata), lock rimosso`);
+    console.error(`  ♻️  Lock di registrazione orfano per "${outcome.id}" (sezione ${outcome.section}): i file di registrazione sono coerenti (transazione completata), lock rimosso`);
   } else if (outcome.state === 'nothing-written') {
-    console.error(`  ♻️  Lock di registrazione orfano per "${outcome.id}": nessun file di registrazione lo cita (nessuna scrittura avvenuta), lock rimosso`);
+    console.error(`  ♻️  Lock di registrazione orfano per "${outcome.id}" (sezione ${outcome.section}): nessun file di registrazione lo cita (nessuna scrittura avvenuta), lock rimosso`);
   }
 }
 
