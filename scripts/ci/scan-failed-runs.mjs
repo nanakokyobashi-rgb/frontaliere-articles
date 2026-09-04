@@ -422,9 +422,20 @@ const FAILED_RUNS_MAX_SPLIT_DEPTH = 8;
  * Puro e iniettabile: `fetchWindow(startIso, endIso|null)` fa la chiamata vera
  * in produzione e viene sostituito nei test.
  *
+ * `fetchWindow` DEVE distinguere "finestra vuota" (`[]`) da "query fallita"
+ * (`null`): sono lo stesso valore per `gh`, che degrada al fallback su
+ * qualunque errore, ma qui hanno conseguenze opposte. `[]` chiude la slice come
+ * risolta — ed e' corretto, sotto il cap non c'e' altro da leggere. Se anche un
+ * errore valesse `[]`, la bisezione dichiarerebbe copertura completa proprio
+ * sulla finestra che NON ha letto, e il troncamento — che prima della
+ * bisezione emetteva sempre il suo `::warning::` al cap raggiunto — tornerebbe
+ * muto. Vale in particolare per il ramo `--created A..B`, che esiste solo sotto
+ * bisezione: se GitHub rifiutasse quella forma di range, ogni slice tornerebbe
+ * indistinguibile da una finestra vuota.
+ *
  * @param {number} startMs estremo inferiore (incluso)
  * @param {number|null} endMs estremo superiore (incluso), o `null` per "aperta a destra"
- * @param {{fetchWindow: (a: string, b: string|null) => Array<object>, nowMs: number,
+ * @param {{fetchWindow: (a: string, b: string|null) => Array<object>|null, nowMs: number,
  *          cap?: number, maxDepth?: number, warn?: (m: string) => void}} opts
  * @returns {Array<object>} run deduplicate per `databaseId`
  */
@@ -439,18 +450,29 @@ export function fetchRunsBisected(startMs, endMs, opts) {
   const byId = new Map();
 
   const slice = (aMs, bMs, depth) => {
-    const batch = fetchWindow(new Date(aMs).toISOString(), bMs === null ? null : new Date(bMs).toISOString());
-    for (const r of Array.isArray(batch) ? batch : []) {
+    const aIso = new Date(aMs).toISOString();
+    const bIso = bMs === null ? null : new Date(bMs).toISOString();
+    const batch = fetchWindow(aIso, bIso);
+    if (!Array.isArray(batch)) {
+      warn(
+        `::warning::[scan-failed-runs] query FALLITA sulla finestra ${aIso}..`
+          + `${bIso ?? 'ora'} — nessuna run letta li' dentro, e la scansione prosegue `
+          + 'sul resto: i fallimenti caduti in questa finestra NON sono stati esaminati '
+          + '(niente issue, niente gate) e nessuno li ripeschera\' al giro successivo, '
+          + 'che riparte da una finestra piu\' recente.',
+      );
+      return;
+    }
+    for (const r of batch) {
       byId.set(r?.databaseId ?? `${r?.url ?? ''}${r?.createdAt ?? ''}`, r);
     }
-    if (!Array.isArray(batch) || batch.length < cap) return;
+    if (batch.length < cap) return;
     const rightEndMs = bMs === null ? nowMs : bMs;
     const midMs = Math.floor((aMs + rightEndMs) / 2);
     if (depth >= maxDepth || midMs <= aMs || midMs >= rightEndMs) {
       warn(
         `::warning::[scan-failed-runs] cap di sicurezza (${cap}) ancora raggiunto dopo ${depth} `
-          + `bisezioni sulla finestra ${new Date(aMs).toISOString()}..`
-          + `${bMs === null ? 'ora' : new Date(bMs).toISOString()} — `
+          + `bisezioni sulla finestra ${aIso}..${bIso ?? 'ora'} — `
           + 'il troncamento di `gh run list` cade sulle run con `createdAt` piu\' VECCHIO, '
           + 'cioe\' proprio quelle rimaste a lungo in coda: in questa slice possono mancare.',
       );
@@ -472,17 +494,22 @@ function failedRuns() {
   const since = new Date(nowMs - LOOKBACK_MIN * 60_000).toISOString();
   const queryCutoffMs = nowMs - (LOOKBACK_MIN + RUN_QUERY_HORIZON_MIN) * 60_000;
   const fetchWindow = (startIso, endIso) => {
+    // Fallback `null`, non `'[]'`: qui "gh e' fallito" e "la finestra e' vuota"
+    // devono restare due cose diverse — vedi `fetchRunsBisected`.
     const raw = gh(
       ['run', 'list', '--repo', REPO, '--status', 'failure', '--limit', String(FAILED_RUNS_SAFETY_CAP),
         '--created', endIso === null ? `>=${startIso}` : `${startIso}..${endIso}`,
         '--json', 'databaseId,workflowName,conclusion,event,createdAt,updatedAt,headBranch,url'],
-      '[]',
+      null,
     );
+    if (raw === null) return null;
     try {
       const parsed = JSON.parse(raw || '[]');
-      return Array.isArray(parsed) ? parsed : [];
+      // Output illeggibile o di forma inattesa: e' un errore, non una finestra
+      // vuota. Trattarlo come `[]` rimetterebbe il buco muto.
+      return Array.isArray(parsed) ? parsed : null;
     } catch {
-      return [];
+      return null;
     }
   };
   const runs = fetchRunsBisected(queryCutoffMs, null, { fetchWindow, nowMs });

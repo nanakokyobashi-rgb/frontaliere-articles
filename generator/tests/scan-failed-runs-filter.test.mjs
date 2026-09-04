@@ -519,3 +519,75 @@ test('la bisezione esausta dichiara QUALE estremo e\' stato troncato', () => {
   assert.match(warnings[0], /::warning::/);
   assert.match(warnings[0], /VECCHIO/, 'il warning deve dire che a sparire sono le run piu\' vecchie');
 });
+
+/**
+ * Una slice la cui query FALLISCE non e' una slice risolta. Se errore e
+ * finestra vuota collassano sullo stesso `[]`, la bisezione dichiara copertura
+ * completa proprio sulla finestra che non ha letto, e il troncamento — che
+ * prima della bisezione partiva SEMPRE al cap raggiunto — torna muto.
+ */
+test('la slice con query fallita (null) grida invece di passare per risolta', () => {
+  const nowMs = Date.parse('2026-09-04T12:00:00Z');
+  const startMs = nowMs - 1890 * 60_000;
+
+  // Fallimento totale: nessuna run letta, un warning esplicito, zero silenzio.
+  const warnings = [];
+  const got = fetchRunsBisected(startMs, null, {
+    fetchWindow: () => null,
+    nowMs,
+    cap: 4,
+    warn: (m) => warnings.push(m),
+  });
+  assert.equal(got.length, 0);
+  assert.equal(warnings.length, 1, 'un solo warning: il fallimento non fa fan-out di bisezione');
+  assert.match(warnings[0], /::warning::/);
+  assert.match(warnings[0], /FALLITA/);
+  assert.match(warnings[0], new RegExp(new Date(startMs).toISOString()), 'il warning nomina la finestra non letta');
+
+  // Fallimento di UNA sola slice sotto bisezione: le altre restano valide, ma
+  // la finestra persa viene comunque dichiarata.
+  const cap = 2;
+  const all = Array.from({ length: 6 }, (_, i) => ({
+    databaseId: i,
+    createdAt: new Date(startMs + i * 300 * 60_000).toISOString(),
+  }));
+  const partialWarnings = [];
+  let failed = 0;
+  const partial = fetchRunsBisected(startMs, null, {
+    fetchWindow: (aIso, bIso) => {
+      // La prima sotto-finestra (la meta' piu' VECCHIA, quella che la
+      // bisezione esiste per recuperare) e' anche quella che fallisce.
+      if (bIso !== null && failed++ === 0) return null;
+      const aMs = Date.parse(aIso);
+      const bMs = bIso === null ? nowMs : Date.parse(bIso);
+      return all
+        .filter((r) => Date.parse(r.createdAt) >= aMs && Date.parse(r.createdAt) <= bMs)
+        .sort((x, y) => Date.parse(y.createdAt) - Date.parse(x.createdAt))
+        .slice(0, cap);
+    },
+    nowMs,
+    cap,
+    warn: (m) => partialWarnings.push(m),
+  });
+  assert.ok(partial.length > 0, 'le slice riuscite restano');
+  assert.ok(
+    partialWarnings.some((m) => /FALLITA/.test(m)),
+    'la slice fallita non puo\' chiudersi in silenzio',
+  );
+});
+
+/** Output di `gh` illeggibile o di forma inattesa: errore, non finestra vuota. */
+test('la slice con batch non-array e\' trattata come query fallita', () => {
+  const nowMs = Date.parse('2026-09-04T12:00:00Z');
+  for (const bad of [undefined, {}, '[]', 0]) {
+    const warnings = [];
+    const got = fetchRunsBisected(nowMs - 60_000, null, {
+      fetchWindow: () => bad,
+      nowMs,
+      cap: 2,
+      warn: (m) => warnings.push(m),
+    });
+    assert.equal(got.length, 0);
+    assert.match(warnings[0] ?? '', /FALLITA/, `batch ${JSON.stringify(bad)} deve gridare`);
+  }
+});
