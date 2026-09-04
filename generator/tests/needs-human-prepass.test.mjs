@@ -21,7 +21,10 @@ import {
   OWNER_ONLY_TITLE_PATTERNS,
   STALE_BLOCK_VERDICTS,
   needsVerdictLookup,
+  latestVerdictEntry,
+  VERDICT_MAX_AGE_DAYS,
 } from '../../scripts/ci/needs-human-prepass.mjs';
+import { isDecomposeEligible } from '../../scripts/ci/followup-drainer.mjs';
 
 // ── Le famiglie riconosciute sono QUELLE DI QUESTO REPO ────────────────────
 // Non sono copiabili dal sito: i titoli li scrivono i monitor di qui. Ogni voce
@@ -262,4 +265,107 @@ test('needsVerdictLookup: un titolo non riconosciuto lo paga, ed e\' giusto', ()
   // un `blocked-secrets` superato resterebbe parcheggiato per sempre.
   assert.equal(needsVerdictLookup('breaker timeout per-provider: 8 modelli nvidia'), true);
   assert.equal(needsVerdictLookup(''), true);
+});
+
+// ── #780/1: lo scorporo si propone solo se il promotore lo accetterebbe ─────
+
+test('#780: un container con una label che il promotore rifiuta NON va in decompose-queued', () => {
+  // `isDecomposeEligible` (followup-drainer) esclude i padri gia' decomposti, le
+  // figlie e le gia' triagiate `already-resolved`. Il pre-pass decideva sul solo
+  // titolo: toglieva `needs-human` e metteva `agent:decompose-queued`, il
+  // promotore rifiutava, e la issue restava fuori da OGNI coda — la forma
+  // «smette di avanzare in silenzio».
+  for (const l of ['decomposed:1', 'from-decompose', 'maybe-resolved']) {
+    const d = prepassDecision({
+      title: 'follow-up(#6205): 3 items deferred — REST files-cap',
+      labels: [l],
+    });
+    assert.equal(d.action, 'keep', l);
+    assert.match(d.reason, new RegExp(l.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')));
+  }
+  // Senza quelle label lo scorporo resta la decisione giusta.
+  assert.equal(prepassDecision({
+    title: 'follow-up(#6205): 3 items deferred — REST files-cap',
+  }).action, 'decompose');
+});
+
+test('#780: il predicato e\' QUELLO del promotore, non una parafrasi', () => {
+  // Se il drainer aggiunge un'esclusione, il pre-pass la eredita gratis: qui si
+  // pretende che le due letture non possano divergere per costruzione.
+  const title = 'follow-up(#6205): 3 items deferred — REST files-cap';
+  for (const l of ['decomposed:1', 'from-decompose', 'maybe-resolved', 'agent:decompose', 'agent:decompose-queued']) {
+    const eligible = isDecomposeEligible({ labels: [{ name: l }] });
+    assert.equal(eligible, false, l);
+    assert.equal(prepassDecision({ title, labels: [l] }).action, 'keep', l);
+  }
+});
+
+// ── #780/2: lookup fallito ≠ nessun verdetto ───────────────────────────────
+
+test('#780: un lookup del verdetto fallito da\' keep, non il requeue di famiglia', () => {
+  // Su secondary rate-limit ogni lettura tornava `null` e la famiglia decideva
+  // `requeue` esattamente come prima di #778: il loop si riapriva senza una riga
+  // di log. `keep` costa un giro di sweep; il requeue costa un run del fixer che
+  // riproduce un verdetto gia' pagato.
+  for (const t of ['Crawler Failure: Run zurich', 'Workflow Failure: Generate Blog Article']) {
+    const d = prepassDecision({ title: t, verdict: null, verdictLookupFailed: true });
+    assert.equal(d.action, 'keep', t);
+    assert.match(d.reason, /lookup fallito/i);
+  }
+  // E non tocca nemmeno lo scorporo: senza verdetto leggibile non si muta nulla.
+  assert.equal(prepassDecision({
+    title: 'follow-up(#6205): 3 items deferred — REST files-cap', verdictLookupFailed: true,
+  }).action, 'keep');
+});
+
+test('#780: la famiglia owner-only resta owner-only anche col lookup fallito', () => {
+  const d = prepassDecision({
+    title: 'Agent loop down: GITHUB_PAT failed to load', verdictLookupFailed: true,
+  });
+  assert.equal(d.action, 'keep');
+  assert.match(d.reason, /proprietario/i);
+});
+
+// ── #780/3: il verdetto vincolante ha una finestra di validita' ────────────
+
+test('#780: un verdetto piu\' vecchio della finestra non e\' piu\' vincolante', () => {
+  const now = Date.parse('2026-09-04T00:00:00Z');
+  const old = now - (VERDICT_MAX_AGE_DAYS + 1) * 86400000;
+  const d = prepassDecision({
+    title: 'Crawler Failure: Run zurich', verdict: 'max-turns', verdictAt: old, now,
+  });
+  assert.equal(d.action, 'requeue');
+  assert.match(d.reason, /scadut/i);
+});
+
+test('#780: dentro la finestra il verdetto resta vincolante (nessuna regressione su #778)', () => {
+  const now = Date.parse('2026-09-04T00:00:00Z');
+  const fresh = now - (VERDICT_MAX_AGE_DAYS - 1) * 86400000;
+  for (const v of ['max-turns', 'no-root-cause', 'already-fixed']) {
+    assert.equal(prepassDecision({
+      title: 'Crawler Failure: Run zurich', verdict: v, verdictAt: fresh, now,
+    }).action, 'keep', v);
+  }
+  // Verdetto senza data parsabile: si resta al comportamento conservativo.
+  assert.equal(prepassDecision({
+    title: 'Crawler Failure: Run zurich', verdict: 'max-turns', verdictAt: null, now,
+  }).action, 'keep');
+});
+
+test('#780: latestVerdictEntry restituisce l\'istante del verdetto vincente', () => {
+  // Senza l'istante, la finestra di validita' non e' calcolabile: e' il motivo
+  // per cui `latestVerdict` diventa un wrapper invece di restare la sorgente.
+  const e = latestVerdictEntry([
+    { body: '<!-- FIX_OUTCOME: no-root-cause -->', created_at: '2026-08-19T10:00:00Z' },
+    { body: '<!-- FIX_OUTCOME: max-turns -->', createdAt: '2026-08-22T10:00:00Z' },
+  ]);
+  assert.equal(e.outcome, 'max-turns');
+  assert.equal(e.at, Date.parse('2026-08-22T10:00:00Z'));
+  // Nessun marker → nessuna data: «assente» non deve poter passare per «antico».
+  assert.deepEqual(latestVerdictEntry([{ body: 'solo testo' }]), { outcome: null, at: null });
+  assert.deepEqual(latestVerdictEntry(null), { outcome: null, at: null });
+  // Un commento con data non parsabile non vince: `at` resta coerente con l'esito.
+  const bad = latestVerdictEntry([{ body: '<!-- FIX_OUTCOME: max-turns -->', created_at: 'non-una-data' }]);
+  assert.equal(bad.outcome, null);
+  assert.equal(bad.at, null);
 });
