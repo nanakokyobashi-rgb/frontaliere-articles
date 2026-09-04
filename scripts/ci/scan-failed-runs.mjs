@@ -562,6 +562,34 @@ export function fetchRunsBisected(startMs, endMs, opts) {
   return [...byId.values()].sort((a, b) => createdMs(b) - createdMs(a));
 }
 
+/**
+ * Lo stdout di `gh run list --json` in una lista di run, o `null` per "finestra
+ * NON letta".
+ *
+ * Le tre forme che devono restare distinte da `[]`:
+ *
+ * - `null` — `gh()` e' andato in errore di processo (exit != 0, ENOBUFS).
+ * - **stringa vuota su exit 0** — `--json` stampa `[]` quando non trova niente,
+ *   quindi `''` significa che l'output non e' arrivato: auth scaduta gestita
+ *   internamente, stdout redirezionato, binario che esce 0 senza scrivere.
+ *   Farla cadere su `[]` (`JSON.parse(raw || '[]')`) rimetteva dalla porta
+ *   accanto il buco muto che la bisezione esiste per chiudere, perche'
+ *   `[].length < cap` chiude la slice come RISOLTA (#811 item 1).
+ * - JSON illeggibile o di forma inattesa (un oggetto, un numero).
+ *
+ * @param {string|null} raw
+ * @returns {Array<object>|null}
+ */
+export function parseRunListJson(raw) {
+  if (raw === null || raw === undefined || String(raw).trim() === '') return null;
+  try {
+    const parsed = JSON.parse(raw);
+    return Array.isArray(parsed) ? parsed : null;
+  } catch {
+    return null;
+  }
+}
+
 /** Run fallite nella finestra, escluse quelle da pull_request e dai gate pre-merge in preview. */
 function failedRuns() {
   const nowMs = Date.now();
@@ -576,22 +604,7 @@ function failedRuns() {
         '--json', 'databaseId,workflowName,conclusion,event,createdAt,updatedAt,headBranch,url'],
       null,
     );
-    // Stdout VUOTO su exit 0 non e' una finestra vuota: `gh run list --json`
-    // stampa `[]` quando non trova niente, quindi "" significa che l'output
-    // non e' arrivato (auth scaduta gestita internamente, stdout redirezionato,
-    // binario che esce 0 senza scrivere). Il ramo `null` sopra copre solo
-    // l'errore di PROCESSO: far cadere "" su `[]` rimetterebbe dalla porta
-    // accanto lo stesso buco muto che la bisezione esiste per chiudere —
-    // `[].length < cap` chiude la slice come RISOLTA (#811 item 1).
-    if (raw === null || String(raw).trim() === '') return null;
-    try {
-      const parsed = JSON.parse(raw);
-      // Output illeggibile o di forma inattesa: e' un errore, non una finestra
-      // vuota. Trattarlo come `[]` rimetterebbe il buco muto.
-      return Array.isArray(parsed) ? parsed : null;
-    } catch {
-      return null;
-    }
+    return parseRunListJson(raw);
   };
   const runs = fetchRunsBisected(queryCutoffMs, null, { fetchWindow, nowMs });
   const reportable = runs.filter((r) => isReportableRun(r, { since }));
