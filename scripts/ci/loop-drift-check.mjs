@@ -112,7 +112,9 @@
  *   node scripts/ci/loop-drift-check.mjs             # report leggibile + exit 0
  *   node scripts/ci/loop-drift-check.mjs --json      # report JSON su stdout
  *   node scripts/ci/loop-drift-check.mjs --strict    # exit 1 se c'è drift azionabile
- *   node scripts/ci/loop-drift-check.mjs --init      # (ri)registra le baseline correnti
+ *   node scripts/ci/loop-drift-check.mjs --init      # (ri)registra le baseline correnti (TUTTE le voci)
+ *   node scripts/ci/loop-drift-check.mjs --init --only <path>[,<path>]
+ *                                                    # ...solo quelle voci (issue #653)
  *   node scripts/ci/loop-drift-check.mjs --no-provenance  # salta la verifica di provenienza (iterazione locale)
  *
  * Env:
@@ -156,7 +158,8 @@ const PROVENANCE_HISTORY_CAP = Number(process.env.PROVENANCE_HISTORY_CAP || 100)
 // `strandedVerdict` per la calibrazione del default.
 const STRANDED_AFTER_DAYS = Number(process.env.STRANDED_AFTER_DAYS || 3);
 
-const ARGS = new Set(process.argv.slice(2));
+const RAW_ARGS = process.argv.slice(2);
+const ARGS = new Set(RAW_ARGS);
 const AS_JSON = ARGS.has('--json');
 const STRICT = ARGS.has('--strict');
 const INIT = ARGS.has('--init');
@@ -166,6 +169,64 @@ const AS_ISSUE = ARGS.has('--issue');
 // hash e' cambiato dalla baseline. Di routine resta accesa: e' l'unica cosa
 // che questo script fa per non ripetere la #148.
 const NO_PROVENANCE = ARGS.has('--no-provenance');
+
+/**
+ * Path elencati in `--only` (`--only=a,b` o `--only a b`), o null se assente.
+ * Restringe `--init` a quelle sole voci: vedi `resolveInitTargets`.
+ */
+function parseOnly(argv) {
+  const out = [];
+  for (let i = 0; i < argv.length; i += 1) {
+    const a = argv[i];
+    if (a === '--only') {
+      // Forma separata: consuma i token successivi finche' non ricomincia una flag.
+      while (i + 1 < argv.length && !argv[i + 1].startsWith('--')) out.push(argv[(i += 1)]);
+    } else if (a.startsWith('--only=')) {
+      out.push(a.slice('--only='.length));
+    }
+  }
+  if (!out.length) return null;
+  return out.flatMap((v) => v.split(',')).map((v) => v.trim()).filter(Boolean);
+}
+
+/**
+ * Decide QUALI voci `--init` deve riscrivere (issue #653).
+ *
+ * ## Perché `--init` senza filtro produce le baseline fantasma
+ *
+ * `--init` è tutto-o-niente: riscrive le baseline di TUTTE le voci del
+ * manifest. Chi deve registrarne una sola — il caso normale: si aggiunge un
+ * file e lo si dichiara — non può usarlo, perché dichiarerebbe «allineate»
+ * altre trecento voci che nessuno ha letto, incluse quelle in `site-ahead` che
+ * aspettano una decisione. Quindi la baseline della voce nuova viene scritta
+ * A MANO, e una stringa esadecimale scritta a mano è plausibile ma non è un
+ * hash: è esattamente il `ghost-baseline` che `checkBaselineProvenance()`
+ * scopre solo al cron successivo, dopo il merge.
+ *
+ * Misurato il 2026-09-04: 12 voci fantasma, 5 delle quali nate DOPO l'apertura
+ * della issue che ne contava 7 — la classe si ricrea da sola finché
+ * registrare una voce sola resta impossibile.
+ *
+ * `--only` è quell'affordance mancante: `--init --only <path>` scrive la
+ * baseline REALE della sola voce indicata e non tocca le altre.
+ *
+ * PURA e senza rete, come `ghostVerdict` e `classify`: è questo a renderla
+ * testabile offline.
+ *
+ * @param {string[]|null} only  i path chiesti (null → nessun filtro).
+ * @param {string[]} manifestPaths  i `path` dichiarati nel manifest.
+ * @returns {{targets: Set<string>|null, unknown: string[]}} `targets` null
+ *   significa «tutte» (comportamento storico di `--init`).
+ */
+function resolveInitTargets(only, manifestPaths) {
+  if (!only) return { targets: null, unknown: [] };
+  const declared = new Set(manifestPaths);
+  const unknown = only.filter((p) => !declared.has(p));
+  return { targets: new Set(only), unknown };
+}
+
+const ONLY = parseOnly(RAW_ARGS);
+const TODAY = new Date().toISOString().slice(0, 10);
 
 const sha256 = (buf) => crypto.createHash('sha256').update(buf).digest('hex').slice(0, 16);
 
@@ -644,8 +705,28 @@ async function main() {
   const manifest = readManifest();
   const results = [];
 
+  // Issue #653: `--init --only <path>` registra la baseline REALE di UNA voce
+  // senza toccare le altre. Un path non dichiarato è un errore duro e non un
+  // no-op silenzioso: un `--only` scritto male che non scrive niente e esce 0
+  // riporta esattamente alla scrittura a mano che ha prodotto i fantasmi.
+  const { targets: INIT_TARGETS, unknown: INIT_UNKNOWN } = resolveInitTargets(
+    ONLY,
+    manifest.files.map((f) => f.path),
+  );
+  if (INIT_UNKNOWN.length) {
+    console.error(`--only: path non dichiarati nel manifest: ${INIT_UNKNOWN.join(', ')}`);
+    return 1;
+  }
+  if (ONLY && !INIT) {
+    console.error('--only ha senso solo insieme a --init: senza, il report va emesso su TUTTE le voci.');
+    return 1;
+  }
+
   for (const entry of manifest.files) {
     const rel = entry.path;
+    // Prima di qualunque rete: una voce fuori dal filtro non va nemmeno
+    // interrogata sul sito.
+    if (INIT && INIT_TARGETS && !INIT_TARGETS.has(rel)) continue;
     const sitePath = entry.sitePath || rel;
     const base = entry.baseline || { site: null, corpus: null };
 
@@ -670,7 +751,10 @@ async function main() {
       // richiede esplicitamente. La promozione resta un atto cosciente: cambia
       // il `mode` a mano, POI `--init` registra la baseline vera.
       const siteBaseline = (entry.mode === 'corpus-only' || entry.mode === 'corpus-only-pending') ? null : now.site;
-      entry.baseline = { site: siteBaseline, corpus: now.corpus, alignedAt: manifest.alignedAt || null };
+      // Con `--only` l'allineamento riguarda QUESTA voce e oggi: `manifest.alignedAt`
+      // resta la data dell'ultimo allineamento globale, che non è avvenuto.
+      const alignedAt = INIT_TARGETS ? TODAY : (manifest.alignedAt || null);
+      entry.baseline = { site: siteBaseline, corpus: now.corpus, alignedAt };
       continue;
     }
 
@@ -760,9 +844,13 @@ async function main() {
   }
 
   if (INIT) {
-    manifest.alignedAt = new Date().toISOString().slice(0, 10);
+    if (!INIT_TARGETS) manifest.alignedAt = new Date().toISOString().slice(0, 10);
     fs.writeFileSync(MANIFEST_PATH, `${JSON.stringify(manifest, null, 2)}\n`);
-    console.log(`Baseline registrate per ${manifest.files.length} file (alignedAt=${manifest.alignedAt}).`);
+    console.log(
+      INIT_TARGETS
+        ? `Baseline registrate per ${INIT_TARGETS.size} file (alignedAt=${TODAY}): ${[...INIT_TARGETS].join(', ')}.`
+        : `Baseline registrate per ${manifest.files.length} file (alignedAt=${manifest.alignedAt}).`,
+    );
     return 0;
   }
 
@@ -906,4 +994,4 @@ if (process.argv[1] && process.argv[1].endsWith('loop-drift-check.mjs')) {
 // `siteFile` e' esportata per `transport-identical-twins.mjs` (issue #331): il
 // trasporto deve leggere il sito con la STESSA sorgente di URL, ref e token del
 // checker, altrimenti i due potrebbero guardare due `main` diversi.
-export { classify, ghostVerdict, strandedVerdict, corpusOnlyTwinVerdict, gitBlobSha, scalarFingerprintVerdict, siteFile };
+export { classify, ghostVerdict, parseOnly, resolveInitTargets, strandedVerdict, corpusOnlyTwinVerdict, gitBlobSha, scalarFingerprintVerdict, siteFile };
