@@ -2186,6 +2186,26 @@ function providerCooldownSkipPhrase(provider) {
   return _providerCooldownReason.get(provider)?.skipPhrase || 'cooling down (rate-limited)';
 }
 
+/**
+ * La riga che un fratello saltato lascia in `errors`, e il riconoscitore che la
+ * ritrova nel tally. Le due meta' vivono qui insieme, e non come un template
+ * scritto a mano nel ciclo piu' una regex scritta a mano nel classificatore,
+ * per la ragione di AGENTS.md #6: il conteggio degli echi di #805 si fa
+ * ESATTAMENTE su questa forma, e una riscrittura del template che non
+ * aggiornasse il riconoscitore rimetterebbe in piedi il denominatore gonfiato
+ * senza far fallire niente.
+ *
+ * `skipPhrase` NON entra nel riconoscitore: le due cause di cooldown scrivono
+ * frasi opposte di proposito (`cooling down (rate-limited)` vs
+ * `unreachable (...), non-retryable`, vedi _providerCooldownReason), e cio' che
+ * qualifica la riga come eco e' il fatto che il modello sia stato saltato per
+ * il cooldown del suo PROVIDER, non quale delle due cause l'ha messo.
+ */
+function providerCooldownSkipLine(model, provider, skipPhrase) {
+  return `${model}: skipped — provider ${provider} ${skipPhrase}`;
+}
+const PROVIDER_COOLDOWN_SKIP_RE = /:\s*skipped\s+\u2014\s+provider\s+\S+\s/i;
+
 // Single source of truth for what counts a "last-resort" model and its
 // prefix (AGENTS.md #6 — do not re-declare 'local/'/'omniroute/'/'claude-cli/'
 // yet again below). Declared here, ahead of _freshLastResortStats, because
@@ -6667,7 +6687,7 @@ export async function callLLM(messages, opts = {}) {
     if (isProviderCoolingDown(provider)) {
       const skipPhrase = providerCooldownSkipPhrase(provider);
       _logPreflightSkipOnce(model, 'cooldown', `provider ${provider} ${skipPhrase}`);
-      errors.push(`${model}: skipped — provider ${provider} ${skipPhrase}`);
+      errors.push(providerCooldownSkipLine(model, provider, skipPhrase));
       _recordLastResortSkip(model, `provider ${skipPhrase}`);
       continue;
     }
@@ -7122,12 +7142,41 @@ export function classifyExhaustionCause(errors) {
   const transientRe = /daily (request )?limit|daily quota|exceeded your current quota|plan and billing|free.?models.?per.?day|\b429\b|rate.?limit|resource.?exhausted|cooling down|timeout|timed out|aborted|overloaded|\b5\d\d\b|temporarily/i;
   let transient = 0;
   let persistent = 0;
+  // ── GLI ECHI DI UN SOLO GUASTO (#805) ────────────────────────────────────
+  //
+  // Le righe di skip da cooldown di provider NON sono guasti indipendenti: sono
+  // UN solo guasto — il 429 o l'host morto che ha messo il cooldown, gia'
+  // contato per conto suo — ripetuto una volta per ogni id fratello servito da
+  // quel provider (~12 per GitHub). Restano nel tally, perche' il messaggio
+  // aggregato deve continuare a dire cosa e' successo a ogni modello; ma chi ne
+  // fa un QUOZIENTE deve poterle togliere dal denominatore, e senza questo
+  // conteggio non ha modo di sapere quante siano.
+  //
+  // Perche' conta: su un roster da ~106 un provider morto sposta lo share di
+  // ~11 punti, cioe' decide DA SOLO se una notte di quota vera esce verde
+  // (differimento) o rossa con Workflow-Failure. Prima di #767 gonfiava lo
+  // share (le righe dicevano `cooling down` = transitorio), dopo #767 lo
+  // sgonfia (dicono `non-retryable` = persistente): la polarita' e' cambiata,
+  // la distorsione no. Il consumatore e' isLegitimateQuotaDeferral in
+  // exhaustion-disposition.mjs, che degrada al comportamento odierno quando il
+  // campo manca.
+  const providerCooldownSkips = { total: 0, transient: 0, persistent: 0 };
   for (const reason of errors) {
     const isTransient = transientRe.test(reason);
     const isPersistent = persistentRe.test(reason);
     if (isTransient) transient += 1;
     else if (isPersistent) persistent += 1;
     // neither → ambiguous, left out of the tally
+    if (PROVIDER_COOLDOWN_SKIP_RE.test(reason)) {
+      // Ripartito per secchio e non solo in totale: chi sottrae deve togliere
+      // l'eco dal NUMERATORE quando l'eco votava transitorio (una notte di
+      // quota vera: ogni provider 429, ogni fratello saltato) e solo dal
+      // denominatore quando votava persistente. Un totale nudo non distingue i
+      // due casi, e sbagliarlo porta share > 1 o un denominatore azzerato.
+      providerCooldownSkips.total += 1;
+      if (isTransient) providerCooldownSkips.transient += 1;
+      else if (isPersistent) providerCooldownSkips.persistent += 1;
+    }
   }
-  return { transient, persistent, total: errors.length };
+  return { transient, persistent, total: errors.length, providerCooldownSkips };
 }
