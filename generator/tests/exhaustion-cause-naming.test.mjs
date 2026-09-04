@@ -264,6 +264,58 @@ describe('classifyExhaustionCause — le cause di skip finiscono nel secchio giu
   });
 });
 
+describe('classifyExhaustionCause — gli echi di un cooldown di provider si contano a parte (#805)', () => {
+  // La riga che il pre-flight di callLLM scrive per ogni fratello saltato. Le due
+  // cause di cooldown scrivono frasi OPPOSTE di proposito (#767): il 429 resta
+  // vocabolario transitorio, l'host morto vocabolario persistente. Entrambe sono
+  // echi dello stesso singolo guasto.
+  const echoCooling = (m) => `${m}: skipped — provider github cooling down (rate-limited)`;
+  const echoDead = (m) => `${m}: skipped — provider github unreachable (ECONNREFUSED), non-retryable`;
+
+  it('un eco persistente resta nel tally MA e\' dichiarato come eco', () => {
+    const b = classifyExhaustionCause([echoDead('gh/gpt-4o')]);
+    assert.equal(b.total, 1, 'il messaggio aggregato non perde righe');
+    assert.equal(b.persistent, 1, '#767: l\'host morto vota persistente');
+    assert.deepEqual(b.providerCooldownSkips, { total: 1, transient: 0, persistent: 1 });
+  });
+
+  it('un eco transitorio e\' contato nel secchio transitorio', () => {
+    const b = classifyExhaustionCause([echoCooling('gh/gpt-4o')]);
+    assert.equal(b.transient, 1);
+    assert.deepEqual(b.providerCooldownSkips, { total: 1, transient: 1, persistent: 0 });
+  });
+
+  it('le altre righe di skip NON sono echi — il riconoscitore non deborda', () => {
+    const b = classifyExhaustionCause([
+      'cf/m0: skipped — no API key for provider cloudflare',
+      'm1: skipped — request ~10066 tokens exceeds 8000-token input cap',
+      'q0: skipped — exhausted (daily limit / consecutive 429s)',
+      'gh/m0: failed — provider github returned HTTP 500',
+      'claude-cli/haiku: claude CLI timed out after 120000ms',
+    ]);
+    assert.equal(b.total, 5);
+    assert.deepEqual(b.providerCooldownSkips, { total: 0, transient: 0, persistent: 0 });
+  });
+
+  it('la notte misurata: 11 fratelli GitHub sono UN guasto, non undici', () => {
+    // Un provider morto su un roster da ~106: il guasto vero (il modello che ha
+    // incassato ECONNREFUSED) resta contato una volta, gli 11 fratelli saltati
+    // sono la sua eco.
+    const guasto = ['gh/m0: fetch failed (ECONNREFUSED), non-retryable'];
+    const echi = Array.from({ length: 11 }, (_, i) => echoDead(`gh/m${i + 1}`));
+    const resto = [
+      ...Array.from({ length: 51 }, (_, i) => `q${i}: skipped — exhausted (daily limit / consecutive 429s)`),
+      ...Array.from({ length: 43 }, (_, i) => `cf/m${i}: skipped — no API key for provider cloudflare`),
+    ];
+    const b = classifyExhaustionCause([...guasto, ...echi, ...resto]);
+    assert.equal(b.total, 106);
+    assert.equal(b.transient, 51);
+    assert.equal(b.persistent, 55, '1 guasto + 11 echi + 43 senza chiave');
+    assert.equal(b.providerCooldownSkips.total, 11);
+    assert.equal(b.providerCooldownSkips.persistent, 11);
+  });
+});
+
 describe('roster — nessun modello ritirato, nessun buco', () => {
   it('un modello ritirato esce dal giro da solo, senza curare il roster a mano', () => {
     // I tre modelli che Google ha ritirato il 2026-08-14 restano in AI_MODELS DI
