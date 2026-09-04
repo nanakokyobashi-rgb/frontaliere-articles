@@ -168,9 +168,15 @@ export function hasUsableContentText(value) {
  * `Null` e' la parola tedesca corrente per «zero», e un titolo o un excerpt
  * DE il cui testo intero e' `Null` verrebbe letto come MANCANTE. La recovery
  * per-campo non ha niente da recuperare — il campo tradotto e' giusto — quindi
- * cade sulla sorgente e pubblica il testo ITALIANO sotto `/de/`: in
- * `content/`, in `dist/api/meta-de.json` e nel feed RSS `de`. Non e' un `null`
- * pubblicato, e' un locale sbagliato pubblicato, e nessun gate a valle lo vede.
+ * cade sulla sorgente e pubblica il testo ITALIANO sotto `/de/`: nel corpus,
+ * nella meta del locale e nel suo feed RSS. Non e' un `null` pubblicato, e' un
+ * locale sbagliato pubblicato, e nessun gate a valle lo vede.
+ *
+ * (I path della superficie non sono nominati qui di proposito: il censimento
+ * dei choke-point di `corpus-write-atomic.test.mjs` matcha sul TESTO del file
+ * e di tutti i suoi import relativi, quindi una radice pubblicata citata in un
+ * commento di questo modulo marcherebbe come scrittore di artefatti pubblicati
+ * ogni file che lo importa — `events-utils.mjs` per primo.)
  *
  * La forma misurata su `haiku` in #799 e' `"null"` minuscolo — la sola che una
  * serializzazione puo' produrre — quindi restringere alla grafia serializzata

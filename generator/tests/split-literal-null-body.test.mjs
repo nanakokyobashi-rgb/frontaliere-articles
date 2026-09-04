@@ -44,6 +44,7 @@ import { repairLlmJson } from '../scripts/lib/llm-json-repair.mjs';
 import {
   normalizeItalianContentFromPayload,
   hasUsableContentText,
+  hasUsableTranslatedText,
   isLiteralNullString,
   isTopicGateAbortVerdict,
   findUnreadableContentEvidence,
@@ -158,6 +159,30 @@ test('isLiteralNullString/hasUsableContentText: "null" in ogni forma non e\' con
   for (const v of ['null', 'NULL', 'Null', ' null ', '"null"', "'null'", '" null "']) {
     assert.equal(isLiteralNullString(v), true, `${JSON.stringify(v)} doveva essere un null letterale`);
     assert.equal(hasUsableContentText(v), false, `${JSON.stringify(v)} non e\' contenuto usabile`);
+  }
+});
+
+// Il predicato dei campi TRADOTTI e' piu' stretto di proposito: sulla lingua
+// SORGENTE (italiano) nessuna grafia di `null` e' una parola, quindi
+// rifiutarle tutte non puo' cancellare contenuto; su un campo tradotto `Null`
+// e' la parola tedesca per «zero», e rifiutarla fa pubblicare il testo IT
+// sotto `/de/` (#831). Solo la grafia SERIALIZZATA — minuscola, l'unica che
+// `String(null)`/`JSON.stringify(null)` producono — resta scartata ovunque.
+test('hasUsableTranslatedText: scarta solo la grafia serializzata, non il «Null» tedesco (#831)', () => {
+  for (const v of ['null', ' null ', '"null"', "'null'", '" null "']) {
+    assert.equal(hasUsableTranslatedText(v), false, `${JSON.stringify(v)} e\' una serializzazione di null`);
+    assert.equal(hasUsableContentText(v), false, `${JSON.stringify(v)} non e\' contenuto nemmeno sulla sorgente`);
+  }
+  for (const v of ['Null', 'NULL', '"Null"', 'Null Grad Celsius']) {
+    assert.equal(hasUsableTranslatedText(v), true, `${JSON.stringify(v)} e\' testo tradotto legittimo`);
+  }
+  // Sulla sorgente il predicato NON si e' allentato: `Null`/`NULL` restano
+  // scartati li', altrimenti #822 si riaprirebbe dal lato del payload IT.
+  for (const v of ['Null', 'NULL', '"Null"']) {
+    assert.equal(hasUsableContentText(v), false, `${JSON.stringify(v)} deve restare scartato sul payload sorgente`);
+  }
+  for (const v of ['', '   ', null, undefined, 42, {}]) {
+    assert.equal(hasUsableTranslatedText(v), false, `${JSON.stringify(v)} non e\' una stringa non vuota`);
   }
 });
 
