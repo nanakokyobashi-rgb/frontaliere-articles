@@ -1,12 +1,5 @@
 {
   "keywords": [
-    "assegni familiari canton Obvaldo importi e domanda",
-    "vivere a Binago e lavorare in Ticino da frontaliere",
-    "vivere a Castelnuovo Bozzente e lavorare in Ticino da frontaliere",
-    "vivere a Dizzasco e lavorare in Ticino da frontaliere",
-    "vivere a Fino Mornasco e lavorare in Ticino da frontaliere",
-    "permesso L di breve durata canton San Gallo validità e proroga",
-    "sistema scolastico canton San Gallo iscrizione e cicli",
     "vivere a Oltrona di San Mamette e lavorare in Ticino da frontaliere",
     "vivere a Solbiate con Cagno e lavorare in Ticino da frontaliere",
     "vivere a Tremezzina e lavorare in Ticino da frontaliere",
@@ -499,7 +492,14 @@
     "sistema scolastico canton Svitto iscrizione e cicli",
     "mercato degli affitti canton Svitto canoni medi e diritto di locazione",
     "avs e prestazioni complementari canton Svitto cassa di compensazione",
-    "aprire un'attività canton Svitto registro di commercio e costi"
+    "aprire un'attività canton Svitto registro di commercio e costi",
+    "imposta di successione e donazione canton Svitto aliquote",
+    "premi cassa malati canton Obvaldo e riduzione premi",
+    "permesso di dimora B canton Obvaldo requisiti e rinnovo",
+    "permesso L di breve durata canton Obvaldo validità e proroga",
+    "assegni familiari canton Obvaldo importi e domanda",
+    "avs e prestazioni complementari canton Turgovia cassa di compensazione",
+    "abbonamenti trasporti pubblici canton Turgovia zone e tariffe"
   ],
   "strikes": {
     "frontaliere farmacista ticino stipendio requisiti": 3,
