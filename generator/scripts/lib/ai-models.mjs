@@ -2130,8 +2130,11 @@ const RESOLVER_FLAP_COOLDOWN_MS = 5 * PROVIDER_COOLDOWN_MS; // 5 minuti
  *
  * Quindi la causa si muove in una direzione sola: un cooldown transitorio viene
  * PROMOSSO da uno persistente, e un persistente non viene mai retrocesso da un
- * 429 che arriva dopo. La finestra invece si rinfresca sempre — chi ha appena
- * fallito ha appena dimostrato che il provider e' ancora da evitare.
+ * 429 che arriva dopo. La finestra segue la causa (#809): si rinfresca quando
+ * l'evento e' di gravita' >= a quella in corso — chi ha appena fallito ha
+ * appena dimostrato che il provider e' ancora da evitare — e resta ferma sul
+ * ramo demoted, dove spostarla in avanti prolungherebbe una causa PIU' grave
+ * con un evento che non la giustifica.
  *
  * Il gradino di mezzo (`resolverFlap`, #770/#803) e' la stessa scala vista
  * dalla durata: un flap escalato parla come una causa persistente — la sua riga
@@ -2201,8 +2204,8 @@ function isProviderCoolingDown(provider) {
  *
  * @returns {'created'|'upgraded'|'refreshed'} `created` = il provider non era
  * in cooldown; `upgraded` = lo era, ma con una causa meno grave, ora sostituita;
- * `refreshed` = lo era gia' con una causa di gravita' >=, quindi solo la
- * finestra e' stata riportata avanti. Il chiamante ne ha bisogno per non
+ * `refreshed` = lo era gia' con una causa di gravita' >= (finestra riportata
+ * avanti) oppure PIU' grave (niente toccato, #809). Il chiamante ne ha bisogno per non
  * contare due volte lo stesso cooldown in `_stats` e per non ripetere il log.
  */
 function cooldownProvider(
@@ -2217,14 +2220,27 @@ function cooldownProvider(
     : -1;
   const durationMs = providerCooldownDurationMs(severity);
   const until = durationMs === Infinity ? Infinity : Date.now() + durationMs;
-  // La finestra si sposta solo in AVANTI. Rinfrescarla e' sempre giusto (chi ha
-  // appena fallito ha appena dimostrato che il provider e' da evitare), ma
-  // ACCORCIARLA no: un 429 che atterra dopo un host morto scriverebbe 60s sopra
-  // il ban di run e riaprirebbe il ri-dial che #803 chiude. E' lo stesso
-  // invariante di COOLDOWN_SEVERITY sulla causa, applicato alla scadenza.
-  _providerCooldown.set(provider, Math.max(wasCoolingDown ? (_providerCooldown.get(provider) ?? 0) : 0, until));
-  // Retrocedere la causa e' l'unica scrittura vietata: vedi COOLDOWN_SEVERITY.
+  // Causa e FINESTRA si muovono insieme, e il ramo demoted non muove nessuna
+  // delle due (#809). Retrocedere la causa e' vietato (COOLDOWN_SEVERITY), ma
+  // fin qui la scadenza veniva riportata avanti PRIMA del gate: un 429 che
+  // atterra su una finestra da flap del resolver quasi scaduta la spostava di
+  // altri 60s LASCIANDOCI SOPRA la causa piu' grave. Con una catena a ~12 id
+  // GitHub quei 429 arrivano a raffica, quindi la finestra dei 5 minuti si
+  // riapriva a ogni evento transitorio e la riga di skip continuava a votare
+  // `unreachable (...), non-retryable` a tempo indefinito — cioe' esattamente
+  // il pin che #803 aveva scongiurato dandole una durata finita, rimesso in
+  // piedi da eventi che non dicono niente sull'host.
+  //
+  // Chi ha appena fallito ha appena dimostrato che il provider e' da evitare,
+  // ma quella prova e' gia' contenuta nella finestra in corso, che e' PIU'
+  // lunga (la durata cresce con la gravita'). E non c'e' niente da perdere:
+  // alla scadenza il provider torna eleggibile, e se il 429 e' ancora vero il
+  // primo fratello riapre un cooldown transitorio con la causa giusta.
   if (severity < prevSeverity) return 'refreshed';
+  // A pari gravita' o in promozione la finestra si sposta in AVANTI, mai
+  // indietro: `Infinity` di un ban di run non deve essere accorciato da una
+  // seconda scrittura persistente, e a pari causa il rinnovo e' il punto.
+  _providerCooldown.set(provider, Math.max(wasCoolingDown ? (_providerCooldown.get(provider) ?? 0) : 0, until));
   _providerCooldownReason.set(provider, { reason, skipPhrase, severity });
   if (!wasCoolingDown) {
     console.warn(`🧊 Provider ${provider} cooled down for ${durationMs === Infinity ? 'the rest of the run' : `${durationMs / 1000}s`} (${reason})`);

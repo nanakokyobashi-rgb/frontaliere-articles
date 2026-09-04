@@ -797,4 +797,60 @@ describe('durata del cooldown per causa (#803)', () => {
       `scaduti i 60s il provider torna eleggibile: attesi piu' di ${primoGiro} connect, visti ${ghCalls().length}`,
     );
   });
+
+  /**
+   * Il terzo lato del confine (#809). L'ordine di gravita' vieta di RETROCEDERE
+   * la causa, ma la finestra veniva riportata avanti prima di quel gate: un 429
+   * atterrato su un cooldown da flap quasi scaduto ne spostava la scadenza di
+   * altri 60s lasciandoci sopra la causa piu' grave. Con una catena a ~12 id
+   * GitHub i 429 arrivano a raffica, quindi la finestra finita che #803 ha dato
+   * al flap tornava a essere il ban di run che #803 gli aveva negato — e per
+   * tutto quel tempo la riga di skip continuava a votare `non-retryable`, su un
+   * resolver che aveva solo detto «riprova».
+   */
+  it('un 429 tardivo non prolunga la finestra del flap escalato (#809)', async () => {
+    delete process.env.AI_MODELS_FORCE_CHAIN;
+    const OPTS_429 = { ...OPTS, maxRetriesPerModel: 2 };
+    let release429;
+    const late429 = new Promise((resolve) => { release429 = resolve; });
+    globalThis.fetch = async (url, init) => {
+      if (!String(url).includes('models.inference.ai.azure.com')) throw undiciFetchFailed('EAI_AGAIN');
+      fetchCalls.push(String(url));
+      // Solo `phi-4` porta il 429, e resta appeso al gate finche' la finestra
+      // del flap non e' quasi scaduta: e' la forma reale — le chiamate corrono
+      // in parallelo, e un 429 partito prima puo' atterrare molto dopo.
+      if (String(init?.body || '').includes('phi-4')) {
+        await late429;
+        return new Response('rate limit exceeded', { status: 429 });
+      }
+      throw undiciFetchFailed('EAI_AGAIN');
+    };
+
+    const rateLimited = callLLM([{ role: 'user', content: 'x' }], { ...OPTS_429, chain: ['phi-4'] })
+      .then(() => null, (e) => e);
+
+    // Tre flap di fila sullo stesso provider: la finestra da 5 minuti si apre.
+    await assert.rejects(() => callLLM([{ role: 'user', content: 'x' }], {
+      ...OPTS, chain: ['gpt-4o-mini', 'gpt-4.1-mini', 'gpt-4o'],
+    }));
+    const finestraFlap = getStats().activeCooldowns.github;
+    assert.ok(
+      Number.isFinite(finestraFlap) && finestraFlap > 60,
+      `attesa la finestra finita del flap: ${JSON.stringify(getStats().activeCooldowns)}`,
+    );
+
+    // Il 429 atterra a finestra quasi finita: i suoi 60s cadrebbero OLTRE.
+    mock.timers.tick(250_000);
+    release429();
+    assert.ok(await rateLimited, 'anche la chiamata rate-limited deve fallire');
+
+    const primaDellaScadenza = ghCalls().length;
+    mock.timers.tick(51_000); // 301s dall'apertura: la finestra del flap e' scaduta
+    await assert.rejects(() => callLLM([{ role: 'user', content: 'x' }], { ...OPTS, chain: ['gpt-4.1'] }));
+
+    assert.ok(
+      ghCalls().length > primaDellaScadenza,
+      `un 429 non deve prolungare la finestra di una causa piu' grave: attesi piu' di ${primaDellaScadenza} connect, visti ${ghCalls().length}`,
+    );
+  });
 });
