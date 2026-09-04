@@ -34,6 +34,27 @@
  *
  * Non e' un'asserzione indebolita: nessun test cambia cosa verifica: cambia
  * solo che il teardown aspetta che git abbia finito invece di correre con lui.
+ *
+ * ## Il secondo difetto: l'errore di teardown che SOSTITUISCE l'asserzione (#817)
+ *
+ * Ogni chiamante e' `try { ...asserzioni... } finally { rmTempTree(dir) }`. Una
+ * eccezione lanciata dal `finally` SCARTA quella in volo: se il corpo era gia'
+ * fallito con un'asserzione, il report mostra `ENOTEMPTY` al posto della
+ * diagnosi vera. E' la stessa perdita di diagnosi che il retry sopra esiste per
+ * evitare — con in piu' ~1.8s di finestra in cui capitarci.
+ *
+ * Un `finally` non puo' sapere se un'eccezione sta gia' propagando, e mettere
+ * il `catch` che lo scoprirebbe in ~20 call site e' una modifica meccanica che
+ * si dimentica al 21esimo. Quindi `rmTempTree` **non rilancia piu'**: registra
+ * il fallimento e lo fa valere a fine processo (`process.on('exit')`), dove
+ * stampa la diagnosi e mette `exitCode = 1`. Il file di test resta ROSSO —
+ * `node --test` legge l'uscita non-zero del figlio come fallimento — ma
+ * l'asserzione del corpo arriva intatta al report, cioe' entrambe le diagnosi
+ * sopravvivono invece di eliminarsi a vicenda.
+ *
+ * Non e' un gate abbassato: prima un teardown fallito rendeva rosso il test
+ * sbagliato, adesso rende rosso il file con la sua riga. Un'eccezione ingoiata
+ * lo era; una che sposta il verdetto a fine processo no.
  */
 
 import { rmSync } from 'node:fs';
@@ -47,22 +68,57 @@ function sleepSync(ms) {
   Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, ms);
 }
 
+/** Teardown falliti, riportati a fine processo invece che dal `finally`. */
+const leaks = [];
+let exitHookInstalled = false;
+
+function reportAtExit(dir, err) {
+  leaks.push({ dir, err });
+  if (exitHookInstalled) return;
+  exitHookInstalled = true;
+  process.on('exit', () => {
+    if (!leaks.length) return;
+    for (const { dir: d, err: e } of leaks) {
+      console.error(
+        `[rm-temp-tree] teardown NON riuscito su ${d}: ${e.code || 'errore'} ${e.message}\n` +
+          '  (non rilanciato dal finally per non sostituire l\'asserzione del test; ' +
+          'il file resta rosso via exit code)',
+      );
+    }
+    // Dentro un handler 'exit' l'assegnazione e' ancora letta da Node per
+    // determinare il codice finale: e' cio' che rende rosso il file di test.
+    process.exitCode = 1;
+  });
+}
+
 /**
  * `rmSync(dir, { recursive, force })` ritentato dall'inizio finche' l'errore e'
  * transitorio. Backoff lineare: 50, 100, ... ms, ~1.8s in totale con gli 8
  * tentativi di default — due ordini di grandezza sopra i ~100ms in cui il gc
  * staccato di git finisce, e comunque limitato.
  *
- * L'ultimo tentativo rilancia: una directory che dopo 1.8s e' ancora occupata
- * non e' la race di git, ed e' giusto che il test lo dica invece di ingoiarlo.
+ * Esaurita la pazienza (o su un errore non transitorio) **non rilancia**: la
+ * chiamata avviene in un `finally`, dove lanciare scarterebbe l'eccezione in
+ * volo. Il fallimento viene registrato e riportato a fine processo, con
+ * `exitCode = 1` — il verdetto non si perde, l'asserzione nemmeno.
+ *
+ * @param {string} dir
+ * `rmImpl` e `onFailure` esistono per i test di questo modulo: registrare il
+ * fallimento nel registro globale renderebbe rosso il file che lo verifica.
+ *
+ * @param {{attempts?: number, delayMs?: number, rmImpl?: (dir: string, opts: object) => void,
+ *          onFailure?: (dir: string, err: Error) => void}} [opts]
  */
-export function rmTempTree(dir, { attempts = 8, delayMs = 50 } = {}) {
+export function rmTempTree(dir, { attempts = 8, delayMs = 50, rmImpl = rmSync, onFailure = reportAtExit } = {}) {
   for (let i = 1; ; i++) {
     try {
-      rmSync(dir, { recursive: true, force: true });
+      rmImpl(dir, { recursive: true, force: true });
       return;
     } catch (err) {
-      if (i >= attempts || !TRANSIENT.has(err.code)) throw err;
+      if (i >= attempts || !TRANSIENT.has(err.code)) {
+        onFailure(dir, err);
+        return;
+      }
       sleepSync(delayMs * i);
     }
   }

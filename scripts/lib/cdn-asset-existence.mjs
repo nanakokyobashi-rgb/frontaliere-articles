@@ -47,7 +47,25 @@
  *
  * Fail-open su ogni errore di rete/timeout: un DNS che flappa non deve
  * produrre un avviso che accusa il CDN di non avere un file che ha.
+ *
+ * ## DUE COSE CHE «NON ESPLODONO» (follow-up di #790, issue #817)
+ *
+ *   · **offload fallito vs niente da riscrivere.** L'offload e' NON-FATAL per
+ *     costruzione: su un guard leak, un `CDN_BASE` assente o QUALSIASI errore
+ *     lascia `dist` intatto ed esce 0. In quel caso qui non si trova nessun URL
+ *     CDN — esattamente come nel caso sano in cui non c'era nulla da riscrivere.
+ *     Il segnale piu' interessante era quello che il log presentava come
+ *     normale. La discriminante e' l'HTML stesso: se i `/assets/` sono rimasti
+ *     SAME-ORIGIN, il rewrite non e' avvenuto (vedi
+ *     {@link formatOffloadCoverageReport}).
+ *   · **budget sulle HEAD.** La verifica e' in serie dentro il percorso di
+ *     pubblicazione: senza un tetto, il costo peggiore cresce linearmente col
+ *     numero di URL distinti e un CDN che pende allunga la run senza far
+ *     fallire niente. {@link verifyCdnAssetRefs} si ferma al tetto e LO DICE
+ *     (`state: 'skipped'`) invece di scomparire dentro un totale piu' basso.
  */
+
+import { ASSET_EXT_ALTERNATION, ASSETS_SAME_ORIGIN_RX } from '../../host/shared/cdnAssetOffloadRx.mjs';
 
 /**
  * Estrae gli URL `${cdnBase}/assets/<file>` distinti da un testo HTML.
@@ -62,12 +80,16 @@
 export function collectCdnAssetRefs(html, cdnBase) {
   const base = String(cdnBase || '').replace(/\/+$/, '');
   if (!base) return [];
-  // Stessa coda-di-file dell'offload (ASSET_FILE): tutto ciò che il rewrite
+  // Stesso alfabeto di estensioni dell'offload — importato, non ricopiato
+  // (AGENTS.md #6): tutto ciò che il rewrite
   // può aver prodotto, e nient'altro. Tenuta deliberatamente conservativa —
   // un URL che non matcha qui semplicemente non viene verificato.
   const re = new RegExp(
     base.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') +
-      "/assets/([^\"'\\s)?]+?\\.(?:js|mjs|css|woff2?|ttf|otf|eot|png|jpe?g|webp|avif|gif|svg|ico|json))",
+      // `(?![A-Za-z0-9])` chiude l'estensione: senza, il ramo `js`
+      // dell'alternanza matcha il prefisso di `f.json` e la HEAD partirebbe
+      // verso `f.js` — un URL che nessuno serve, cioe' un falso `missing`.
+      `/assets/([^\"'\\s)?]+?\\.(?:${ASSET_EXT_ALTERNATION})(?![A-Za-z0-9]))`,
     'g',
   );
   const out = [];
@@ -82,17 +104,58 @@ export function collectCdnAssetRefs(html, cdnBase) {
 }
 
 /**
- * Verifica l'esistenza di ogni URL con una HEAD.
+ * Tetto sul NUMERO di URL verificati in una run. Oggi i riferimenti distinti
+ * sono una manciata; il tetto non serve a limitarli, serve a pinnare il costo
+ * peggiore perche' non cresca con l'HTML senza che nessuno se ne accorga.
+ */
+export const CDN_ASSET_CHECK_MAX_URLS = 24;
+
+/**
+ * Tetto sul TEMPO complessivo. Le HEAD sono in serie e ciascuna vale
+ * `timeoutMs`: senza budget, N URL su un CDN che pende costano N × timeout
+ * DENTRO il percorso di pubblicazione, in silenzio. Controllato PRIMA di ogni
+ * richiesta, quindi il costo reale e' `budgetMs` + l'ultima richiesta in volo.
+ */
+export const CDN_ASSET_CHECK_BUDGET_MS = 30_000;
+
+/**
+ * Verifica l'esistenza di ogni URL con una HEAD, entro un tetto complessivo.
+ *
+ * Gli URL oltre il tetto NON vengono silenziosamente omessi: escono con
+ * `state: 'skipped'`, cosi' il report distingue «verificati e presenti» da
+ * «non guardati» (la stessa distinzione che questo modulo esiste per fare).
  *
  * @param {object} a
  * @param {string[]} a.urls
  * @param {typeof fetch} [a.fetchImpl]  iniettabile per i test (default: fetch globale)
  * @param {number} [a.timeoutMs]        timeout per richiesta
- * @returns {Promise<Array<{url: string, state: 'present'|'missing'|'unknown', status: number|null, error: string|null}>>}
+ * @param {number} [a.maxUrls]          tetto sul numero di URL verificati
+ * @param {number} [a.budgetMs]         tetto sul tempo complessivo della verifica
+ * @param {() => number} [a.now]        orologio iniettabile per i test
+ * @returns {Promise<Array<{url: string, state: 'present'|'missing'|'unknown'|'skipped', status: number|null, error: string|null}>>}
  */
-export async function verifyCdnAssetRefs({ urls, fetchImpl = fetch, timeoutMs = 8000 }) {
+export async function verifyCdnAssetRefs({
+  urls,
+  fetchImpl = fetch,
+  timeoutMs = 8000,
+  maxUrls = CDN_ASSET_CHECK_MAX_URLS,
+  budgetMs = CDN_ASSET_CHECK_BUDGET_MS,
+  now = Date.now,
+}) {
   const results = [];
+  const startedAt = now();
+  let checked = 0;
   for (const url of urls) {
+    if (checked >= maxUrls) {
+      results.push({ url, state: 'skipped', status: null, error: `tetto di ${maxUrls} URL raggiunto` });
+      continue;
+    }
+    const elapsed = now() - startedAt;
+    if (elapsed >= budgetMs) {
+      results.push({ url, state: 'skipped', status: null, error: `budget di ${budgetMs}ms esaurito (${elapsed}ms)` });
+      continue;
+    }
+    checked += 1;
     try {
       let res = await fetchImpl(url, { method: 'HEAD', redirect: 'follow', signal: AbortSignal.timeout(timeoutMs) });
       // Alcune origin non implementano HEAD (405/501): la domanda è
@@ -122,7 +185,9 @@ export async function verifyCdnAssetRefs({ urls, fetchImpl = fetch, timeoutMs = 
  *
  * Solo i `missing` diventano `::warning::` — un `unknown` è rumore di rete e un
  * avviso che si ripete senza essere azionabile è il modo in cui gli avvisi
- * smettono di essere letti.
+ * smettono di essere letti. Uno `skipped` non è né rumore né un difetto del
+ * CDN: è la verifica che si è fermata al tetto, e va detto perché il riepilogo
+ * non si legga come «tutto verificato».
  *
  * @param {Array<{url: string, state: string, status: number|null, error: string|null}>} results
  * @param {string} [prefix] etichetta del log
@@ -145,10 +210,79 @@ export function formatCdnAssetReport(results, prefix = '[cdn-asset-check]') {
         unknown.map((r) => `${r.url} (${r.status ?? r.error})`).join(', '),
     );
   }
+  const skipped = results.filter((r) => r.state === 'skipped');
+  if (skipped.length) {
+    lines.push(
+      `${prefix} verifica fermata al tetto: ${skipped.length} URL NON guardati ` +
+        `(${skipped[0].error}). Non sono «presenti»: sono ignoti.`,
+    );
+  }
   lines.push(
-    `${prefix} ${results.length} asset CDN distinti verificati ; ` +
+    `${prefix} ${results.length - skipped.length} asset CDN distinti verificati ; ` +
       `${results.filter((r) => r.state === 'present').length} presenti ; ${missing.length} mancanti ; ` +
-      `${unknown.length} non verificabili`,
+      `${unknown.length} non verificabili` +
+      (skipped.length ? ` ; ${skipped.length} non guardati (tetto)` : ''),
   );
   return lines;
+}
+
+/**
+ * L'HTML pubblicato contiene ancora un riferimento `/assets/` SAME-ORIGIN?
+ *
+ * È la discriminante fra «l'offload non ha riscritto niente» e «non c'era
+ * niente da riscrivere»: l'offload sostituisce OGNI `/assets/` same-origin con
+ * `${cdnBase}/assets/`, quindi un same-origin superstite dopo l'offload
+ * significa che il rewrite non è avvenuto — su questo repo `dist/assets` non
+ * esiste, quindi quel riferimento non è servibile da nessuno.
+ *
+ * Usa lo stesso matcher del gate di deploy (`ASSETS_SAME_ORIGIN_RX`), non una
+ * copia: se l'alfabeto cambia lì, cambia qui (AGENTS.md #6).
+ *
+ * @param {string} html
+ * @returns {boolean}
+ */
+export function hasSameOriginAssetRef(html) {
+  return ASSETS_SAME_ORIGIN_RX.test(String(html || ''));
+}
+
+/**
+ * Righe di copertura dell'offload: che cosa significa non aver trovato URL CDN.
+ *
+ * Tre esiti distinti dove prima ce n'era uno solo (issue #817, item 1):
+ *
+ *   · `sameOriginFiles` non vuoto → **l'offload non ha riscritto.** È un
+ *     `::warning::`: lo script è NON-FATAL e su qualunque errore lascia `dist`
+ *     intatto ed esce 0, quindi questo è l'UNICO punto in cui il guasto è
+ *     osservabile. Le pagine di questa run servono `/assets/` same-origin, che
+ *     su questo repo non esiste.
+ *   · nessun same-origin e nessun URL CDN → non c'era davvero niente da
+ *     riscrivere. Riga informativa, e ora lo dice per esteso.
+ *   · URL CDN presenti → nessuna riga di copertura: parla il report delle HEAD.
+ *
+ * @param {object} a
+ * @param {number} a.cdnRefCount            URL `${cdnBase}/assets/…` distinti trovati
+ * @param {string[]} a.sameOriginFiles      path (relativi) con un `/assets/` same-origin superstite
+ * @param {string} [a.prefix]               etichetta del log
+ * @returns {string[]}
+ */
+export function formatOffloadCoverageReport({ cdnRefCount, sameOriginFiles, prefix = '[cdn-asset-check]' }) {
+  const stragglers = sameOriginFiles || [];
+  if (stragglers.length) {
+    const sample = stragglers.slice(0, 5).join(', ');
+    const more = stragglers.length > 5 ? ` (+${stragglers.length - 5} altri)` : '';
+    return [
+      `::warning::${prefix} ${stragglers.length} file HTML hanno ancora riferimenti /assets/ ` +
+        `SAME-ORIGIN dopo l'offload: ${sample}${more}. L'offload NON ha riscritto — e' non-fatale e ` +
+        "esce 0 lasciando dist intatto su CDN_BASE assente, guard leak o errore interno, quindi " +
+        "questo e' l'unico segnale. Non e' «niente da riscrivere»: dist/assets non esiste in questo " +
+        'repo, quindi quei riferimenti non sono servibili da nessuno.',
+    ];
+  }
+  if (!cdnRefCount) {
+    return [
+      `${prefix} nessun riferimento /assets/ nell'HTML pubblicato: ne' riscritto sul CDN ne' rimasto ` +
+        "same-origin, quindi non c'era davvero niente da riscrivere ne' da verificare",
+    ];
+  }
+  return [];
 }

@@ -391,26 +391,35 @@ async function main() {
   // (vedi scripts/lib/cdn-asset-existence.mjs): non si rinuncia a pubblicare
   // un articolo perché manca uno script di tracking, ma il 404 smette di
   // essere invisibile.
+  //
+  // Assenza di URL CDN NON vuol dire «niente da riscrivere» (#817): l'offload
+  // e' non-fatale e su qualunque errore lascia dist intatto ed esce 0, quindi
+  // i due mondi producevano la stessa riga rassicurante. La discriminante e'
+  // il `/assets/` SAME-ORIGIN superstite, che si raccoglie nella stessa
+  // passata.
   try {
-    const { collectCdnAssetRefs, verifyCdnAssetRefs, formatCdnAssetReport } = await import(
-      './lib/cdn-asset-existence.mjs'
-    );
+    const { collectCdnAssetRefs, hasSameOriginAssetRef, verifyCdnAssetRefs, formatCdnAssetReport, formatOffloadCoverageReport } =
+      await import('./lib/cdn-asset-existence.mjs');
     const refs = new Set();
+    const sameOriginFiles = [];
     const collectFrom = (dir) => {
       for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
         const fp = path.join(dir, e.name);
         if (e.isDirectory()) collectFrom(fp);
         else if (e.isFile() && path.extname(fp) === '.html') {
-          for (const url of collectCdnAssetRefs(fs.readFileSync(fp, 'utf-8'), CDN_BASE)) refs.add(url);
+          const html = fs.readFileSync(fp, 'utf-8');
+          for (const url of collectCdnAssetRefs(html, CDN_BASE)) refs.add(url);
+          if (hasSameOriginAssetRef(html)) sameOriginFiles.push(path.relative(distDir, fp));
         }
       }
     };
     collectFrom(distDir);
+    for (const line of formatOffloadCoverageReport({ cdnRefCount: refs.size, sameOriginFiles })) {
+      console.log(line);
+    }
     if (refs.size > 0) {
       const results = await verifyCdnAssetRefs({ urls: [...refs] });
       for (const line of formatCdnAssetReport(results)) console.log(line);
-    } else {
-      console.log('[cdn-asset-check] nessun riferimento /assets/ riscritto sul CDN da verificare');
     }
   } catch (err) {
     console.log(`[cdn-asset-check] verifica saltata (non-fatale): ${(err && err.message) || err}`);
