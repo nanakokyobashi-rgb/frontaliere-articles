@@ -254,16 +254,29 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_REPO: ${{ github.repository }}
+          # UNICA sorgente del titolo: e' insieme la chiave di dedup di
+          # github-issue-creator.mjs e il selettore che esclude questa stessa
+          # issue dalla propria lista. Duplicarlo fra i due usi le farebbe
+          # divergere in silenzio, e la seconda tornerebbe a auto-elencarsi.
+          DEDUP_TITLE: 'needs-human: PR bloccate in attesa di revisione umana'
         run: |
           set -uo pipefail
           PRS=$(gh pr list --repo "$GH_REPO" --state open --label needs-human \
             --json number,title,updatedAt \
             --jq '.[] | "- #\(.number) \(.title) (ultimo update \(.updatedAt))"')
-          # L'issue dedup di questo stesso step porta `automation`, non
-          # `needs-human`: non puo' auto-elencarsi.
+          # L'issue dedup di questo stesso step nasce con `automation` e NON
+          # con `needs-human` — ma niente le impedisce di riceverla dopo: il
+          # followup-drainer gliel'ha messa il 2026-09-02T13:39:50Z (issue
+          # #733), e dal commento di recurrence successivo l'issue si elenca
+          # fra i propri item. Un report che si auto-elenca non converge mai:
+          # la condizione di chiusura che questo stesso step scrive nel body
+          # («Chiudila quando entrambe le liste sono vuote») diventa
+          # irraggiungibile, perche' la lista issue contiene sempre almeno se
+          # stessa. L'esclusione va fatta QUI, sulla chiave di dedup, non
+          # sperando che la label resti quella di partenza.
           ISSUES=$(gh issue list --repo "$GH_REPO" --state open --label needs-human \
             --limit 200 --json number,title,updatedAt \
-            --jq '.[] | "- #\(.number) \(.title) (ultimo update \(.updatedAt))"')
+            --jq '.[] | select(.title != env.DEDUP_TITLE) | "- #\(.number) \(.title) (ultimo update \(.updatedAt))"')
           if [ -z "$PRS" ] && [ -z "$ISSUES" ]; then
             echo "Niente needs-human aperto (ne PR ne issue)."
             exit 0
@@ -275,7 +288,7 @@ jobs:
           [ -n "$ISSUES" ] || ISSUES='_(nessuna)_'
           DESC=$(printf 'Nessun processo automatico sblocchera questi oggetti, e su `needs-human` la label e un filtro di ESCLUSIONE dalle code del drainer, non una segnalazione. Servono occhi umani.\n\n**PR** (%s) — il fixer dei red-flag ha raggiunto il round-cap e si e fermato (anti-loop), oppure sono draft parcheggiate, che ogni strato del ciclo salta by-design:\n\n%s\n\n**Issue** (%s) — escalate dal followup-drainer (too-large) o dal gate cronico di close-recovered-failure-issues.mjs (un guasto che ricorre oltre soglia). Restano fuori dal pool dei retry parcheggiati e dal rescue agent:fix dei crawler finche portano la label:\n\n%s\n\n_Issue dedup giornaliera da recycle-stale-prs.yml (zero-Claude); si aggiorna con un commento di recurrence finche esiste qualcosa di needs-human. Chiudila quando entrambe le liste sono vuote._' "$PR_COUNT" "$PRS" "$ISSUE_COUNT" "$ISSUES")
           node scripts/lib/github-issue-creator.mjs \
-            --title "needs-human: PR bloccate in attesa di revisione umana" \
+            --title "$DEDUP_TITLE" \
             --description "$DESC" \
             --priority 2 \
             --label automation \
