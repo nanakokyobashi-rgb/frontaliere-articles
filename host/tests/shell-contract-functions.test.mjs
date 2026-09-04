@@ -28,9 +28,20 @@ import assert from 'node:assert/strict';
 import { readFileSync, writeFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
+import { normalizeContractEnv } from './shell-contract-env.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const GOLDEN = path.join(HERE, 'shell-contract-functions.golden.json');
+
+// Stessa normalizzazione del gemello sugli scalari, e per la stessa ragione:
+// la golden è registrata contro un ambiente pulito, e questo file la ri-registra
+// con `--record`. Registrarla su un runner con ASSET_CDN esportata cablerebbe
+// l'ambiente di quel runner dentro la baseline. Nessuna delle funzioni pinnate
+// oggi legge ASSET_CDN (l'unica a leggerla è la derivazione di
+// cdnPreconnectHint, che è uno scalare) — ma il bootstrap importato è lo stesso
+// modulo, quindi la superficie pinnata da QUESTO file è esposta alla stessa
+// classe di difetto appena una funzione del contratto ne dipenderà.
+normalizeContractEnv();
 
 /**
  * Fixed inputs chosen to exercise the branches the article path actually
