@@ -71,9 +71,43 @@ const val = (n, d) => {
 };
 
 const DRY_RUN = flag('--dry-run');
-const LOOKBACK_MIN = Number(val('--lookback-min', '40'));
-const MAX_ISSUES = Number(val('--max-issues', '5'));
-const GATE = Number(val('--gate', '3'));
+
+/**
+ * Un override numerico che non si lascia leggere deve DIRLO.
+ *
+ * `Number('2d')` e' `NaN`, e un `NaN` che degrada al default e' indistinguibile
+ * da "nessun override": chi ha tirato la leva crede di averla tirata. Vale per
+ * gli argv (`--lookback-min 40m` azzererebbe la finestra: `since` diventa
+ * `Invalid Date`, ogni confronto e' `false`, la scansione trova ZERO run e
+ * stampa "nessuna run fallita") e vale per `SCAN_FAILED_RUNS_HORIZON_MIN`, che
+ * e' l'unica leva documentata per comprare il caso residuo delle run in attesa
+ * di approvazione (fino a 30 giorni).
+ *
+ * Il silenzio e' voluto SOLO per "assente" e "stringa vuota": li' il default e'
+ * la risposta giusta e non c'e' nessuna intenzione tradita.
+ *
+ * @param {unknown} raw valore grezzo (argv o env)
+ * @param {number} fallback default da usare se `raw` e' assente o illeggibile
+ * @param {{label: string, warn?: (msg: string) => void}} opts
+ * @returns {number} il valore, o `fallback`
+ */
+export function parsePositiveNum(raw, fallback, { label, warn = console.warn } = {}) {
+  const n = Number(raw);
+  if (Number.isFinite(n) && n > 0) return n;
+  const present = raw !== undefined && raw !== null && String(raw).trim() !== '';
+  if (present) {
+    warn(
+      `::warning::[scan-failed-runs] ${label}=${String(raw)} non e' un numero positivo — `
+        + `override IGNORATO, si prosegue col default ${fallback}. `
+        + 'Attenzione: il comportamento che stavi comprando NON e\' attivo.',
+    );
+  }
+  return fallback;
+}
+
+const LOOKBACK_MIN = parsePositiveNum(val('--lookback-min', undefined), 40, { label: '--lookback-min' });
+const MAX_ISSUES = parsePositiveNum(val('--max-issues', undefined), 5, { label: '--max-issues' });
+const GATE = parsePositiveNum(val('--gate', undefined), 3, { label: '--gate' });
 const REPO = process.env.GITHUB_REPOSITORY || '';
 /**
  * Lista dei workflow da ignorare, dal valore grezzo della env.
@@ -274,36 +308,72 @@ export const DEFAULT_RUN_QUERY_HORIZON_MIN = MAX_RUN_QUEUE_WAIT_MIN + MAX_JOB_DU
 
 /**
  * @param {string|undefined} raw valore grezzo di `SCAN_FAILED_RUNS_HORIZON_MIN`
+ * @param {{warn?: (msg: string) => void}} [opts]
  * @returns {number} minuti; il default se il valore e' assente, non numerico o <= 0
  */
-export function parseHorizonMin(raw) {
-  const n = Number(raw);
-  return Number.isFinite(n) && n > 0 ? n : DEFAULT_RUN_QUERY_HORIZON_MIN;
+export function parseHorizonMin(raw, opts = {}) {
+  return parsePositiveNum(raw, DEFAULT_RUN_QUERY_HORIZON_MIN, {
+    label: 'SCAN_FAILED_RUNS_HORIZON_MIN',
+    ...opts,
+  });
 }
 
 const RUN_QUERY_HORIZON_MIN = parseHorizonMin(process.env.SCAN_FAILED_RUNS_HORIZON_MIN);
 
 /**
- * L'orizzonte e' una stima, quindi va sorvegliato invece che creduto: e' la
- * mancanza di questa sorveglianza ad aver reso la perdita silenziosa per mesi.
- * Se una run segnalabile arriva vicina al bordo del cutoff, l'assunzione sta
- * per diventare vincolante e lo si dice ad alta voce — a costo zero, senza
- * nessuna chiamata in piu'.
+ * L'orizzonte e' una stima, quindi va MISURATO invece che creduto: e' la
+ * mancanza di questa misura ad aver reso la perdita silenziosa per mesi.
  *
- * @param {Array<{createdAt?: string, updatedAt?: string}>} runs run gia' filtrate
- * @param {{nowMs: number, horizonMin: number}} opts
- * @returns {number|null} eta' in minuti della run piu' vecchia oltre la soglia, o null
+ * ## Cosa si misura, e perche' non piu' l'eta' della run
+ *
+ * La quantita' che decide se una run sfugge alla query non e' la sua eta', ma
+ * lo SPAN `createdAt -> updatedAt`: il filtro vero e' `updatedAt >= since`,
+ * la query puo' discriminare solo su `createdAt`, quindi si perde esattamente
+ * la run il cui span supera l'orizzonte. Misurare lo span invece dell'eta'
+ * toglie di mezzo il bound assunto delle 24h di coda (#789 item 3): non serve
+ * piu' credere che ogni `conclusion: failure` sia passata dall'esecuzione di
+ * un job — una run che fallisce per errore di valutazione del workflow, per un
+ * `needs` risolto in failure dopo una lunga attesa o per un deployment gate
+ * scaduto contribuisce al campione con lo span che ha davvero.
+ *
+ * ## Perche' su TUTTE le run della query, non sulle sole segnalabili
+ *
+ * Il canary precedente vedeva solo le run gia' filtrate da `isReportableRun`,
+ * cioe' quelle aggiornate dentro i 40 minuti di lookback: la banda utile era
+ * di ~225 minuti su un orizzonte di 1.850, e un salto di regime che non
+ * passasse per quella fessura restava muto (#789 item 4). Lo span invece e'
+ * definito su ogni run tornata dalla query — campione ~40x piu' grande, stesso
+ * costo, nessuna chiamata in piu'.
+ *
+ * Misura di riferimento al 2026-09-04 su questo repo: 800 run `failure`, span
+ * massimo 227 minuti, p99 112. L'orizzonte di default (1.850) ha quindi un
+ * margine di ~8x sull'osservato — ed e' questo numero, non l'assunzione, che
+ * il log qui sotto tiene sotto osservazione a ogni giro.
+ *
+ * @param {Array<{createdAt?: string, updatedAt?: string, url?: string}>} runs
+ * @param {{horizonMin: number, thresholdRatio?: number}} opts
+ * @returns {{maxSpanMin: number|null, sampled: number, overThreshold: number,
+ *            thresholdMin: number, worst: object|null}}
  */
-export function horizonPressureMin(runs, { nowMs, horizonMin }) {
-  const threshold = horizonMin * 0.9;
+export function horizonPressure(runs, { horizonMin, thresholdRatio = 0.9 }) {
+  const thresholdMin = horizonMin * thresholdRatio;
+  let maxSpanMin = null;
+  let sampled = 0;
+  let overThreshold = 0;
   let worst = null;
   for (const r of Array.isArray(runs) ? runs : []) {
     const created = Date.parse(r?.createdAt ?? '');
-    if (!Number.isFinite(created)) continue;
-    const ageMin = (nowMs - created) / 60_000;
-    if (ageMin >= threshold && (worst === null || ageMin > worst)) worst = ageMin;
+    const updated = Date.parse(r?.updatedAt ?? r?.createdAt ?? '');
+    if (!Number.isFinite(created) || !Number.isFinite(updated) || updated < created) continue;
+    sampled += 1;
+    const spanMin = (updated - created) / 60_000;
+    if (maxSpanMin === null || spanMin > maxSpanMin) {
+      maxSpanMin = spanMin;
+      worst = r;
+    }
+    if (spanMin >= thresholdMin) overThreshold += 1;
   }
-  return worst;
+  return { maxSpanMin, sampled, overThreshold, thresholdMin, worst };
 }
 
 /**
@@ -312,38 +382,114 @@ export function horizonPressureMin(runs, { nowMs, horizonMin }) {
  * fetch prima ancora di guardare il tempo (issue #674 — con `--limit 60` fisso
  * un run ceduto a scan-job-timeouts.mjs e poi tornato ordinario poteva uscire
  * dal fetch stesso, non solo dal filtro, se nel frattempo si accumulavano 60
- * nuovi fallimenti). Se anche questo cap viene toccato lo si dice ad alta
- * voce, stesso stile del cap su MAX_ISSUES qui sotto.
+ * nuovi fallimenti).
+ *
+ * Ma un cap su `gh run list` NON tronca a caso: la lista torna ordinata per
+ * `createdAt` DECRESCENTE, quindi a sparire sono sempre le run PIU' VECCHIE
+ * della finestra — cioe' esattamente la classe che l'orizzonte largo di #763
+ * esiste per recuperare (la run rimasta a lungo in coda). Sotto una tempesta
+ * di fallimenti il fix regrediva in silenzio al blind spot proprio quando
+ * serve di piu' (#789 item 1). Da qui la bisezione: se una finestra torna
+ * piena, la si taglia in due e si interroga ogni meta', finche' nessuna slice
+ * e' al cap. Costo zero nel caso normale — una sola chiamata, come prima —
+ * e nessun buco nel caso patologico.
  */
 const FAILED_RUNS_SAFETY_CAP = 500;
+
+/**
+ * Profondita' massima della bisezione. 8 split su ~31,5 ore portano la slice
+ * minima a ~7 minuti: oltre, il taglio non separa piu' nulla di utile e la
+ * cosa onesta e' dichiarare il troncamento con i suoi estremi invece di
+ * ricorrere all'infinito.
+ */
+const FAILED_RUNS_MAX_SPLIT_DEPTH = 8;
+
+/**
+ * Fetch di una finestra `created`, bisecata quando tocca il cap.
+ *
+ * Puro e iniettabile: `fetchWindow(startIso, endIso|null)` fa la chiamata vera
+ * in produzione e viene sostituito nei test.
+ *
+ * @param {number} startMs estremo inferiore (incluso)
+ * @param {number|null} endMs estremo superiore (incluso), o `null` per "aperta a destra"
+ * @param {{fetchWindow: (a: string, b: string|null) => Array<object>, nowMs: number,
+ *          cap?: number, maxDepth?: number, warn?: (m: string) => void}} opts
+ * @returns {Array<object>} run deduplicate per `databaseId`
+ */
+export function fetchRunsBisected(startMs, endMs, opts) {
+  const {
+    fetchWindow,
+    nowMs,
+    cap = FAILED_RUNS_SAFETY_CAP,
+    maxDepth = FAILED_RUNS_MAX_SPLIT_DEPTH,
+    warn = console.warn,
+  } = opts;
+  const byId = new Map();
+
+  const slice = (aMs, bMs, depth) => {
+    const batch = fetchWindow(new Date(aMs).toISOString(), bMs === null ? null : new Date(bMs).toISOString());
+    for (const r of Array.isArray(batch) ? batch : []) {
+      byId.set(r?.databaseId ?? `${r?.url ?? ''}${r?.createdAt ?? ''}`, r);
+    }
+    if (!Array.isArray(batch) || batch.length < cap) return;
+    const rightEndMs = bMs === null ? nowMs : bMs;
+    const midMs = Math.floor((aMs + rightEndMs) / 2);
+    if (depth >= maxDepth || midMs <= aMs || midMs >= rightEndMs) {
+      warn(
+        `::warning::[scan-failed-runs] cap di sicurezza (${cap}) ancora raggiunto dopo ${depth} `
+          + `bisezioni sulla finestra ${new Date(aMs).toISOString()}..`
+          + `${bMs === null ? 'ora' : new Date(bMs).toISOString()} — `
+          + 'il troncamento di `gh run list` cade sulle run con `createdAt` piu\' VECCHIO, '
+          + 'cioe\' proprio quelle rimaste a lungo in coda: in questa slice possono mancare.',
+      );
+      return;
+    }
+    // Intervalli disgiunti al millisecondo: nessun buco, nessun doppio
+    // conteggio sul confine (`byId` resta comunque l'ultima difesa).
+    slice(aMs, midMs, depth + 1);
+    slice(midMs + 1, bMs, depth + 1);
+  };
+
+  slice(startMs, endMs, 0);
+  return [...byId.values()];
+}
 
 /** Run fallite nella finestra, escluse quelle da pull_request e dai gate pre-merge in preview. */
 function failedRuns() {
   const nowMs = Date.now();
   const since = new Date(nowMs - LOOKBACK_MIN * 60_000).toISOString();
-  const queryCutoff = new Date(nowMs - (LOOKBACK_MIN + RUN_QUERY_HORIZON_MIN) * 60_000).toISOString();
-  const raw = gh(
-    ['run', 'list', '--repo', REPO, '--status', 'failure', '--limit', String(FAILED_RUNS_SAFETY_CAP),
-      '--created', `>=${queryCutoff}`,
-      '--json', 'databaseId,workflowName,conclusion,event,createdAt,updatedAt,headBranch,url'],
-    '[]',
-  );
-  let runs = [];
-  try {
-    runs = JSON.parse(raw || '[]');
-  } catch {
-    return [];
-  }
-  if (runs.length >= FAILED_RUNS_SAFETY_CAP) {
-    console.warn(`::warning::[scan-failed-runs] cap di sicurezza (${FAILED_RUNS_SAFETY_CAP}) raggiunto sulle run fallite — possibile troncamento oltre la finestra osservabile.`);
-  }
+  const queryCutoffMs = nowMs - (LOOKBACK_MIN + RUN_QUERY_HORIZON_MIN) * 60_000;
+  const fetchWindow = (startIso, endIso) => {
+    const raw = gh(
+      ['run', 'list', '--repo', REPO, '--status', 'failure', '--limit', String(FAILED_RUNS_SAFETY_CAP),
+        '--created', endIso === null ? `>=${startIso}` : `${startIso}..${endIso}`,
+        '--json', 'databaseId,workflowName,conclusion,event,createdAt,updatedAt,headBranch,url'],
+      '[]',
+    );
+    try {
+      const parsed = JSON.parse(raw || '[]');
+      return Array.isArray(parsed) ? parsed : [];
+    } catch {
+      return [];
+    }
+  };
+  const runs = fetchRunsBisected(queryCutoffMs, null, { fetchWindow, nowMs });
   const reportable = runs.filter((r) => isReportableRun(r, { since }));
-  const pressure = horizonPressureMin(reportable, { nowMs, horizonMin: RUN_QUERY_HORIZON_MIN });
-  if (pressure !== null) {
+  const pressure = horizonPressure(runs, { horizonMin: RUN_QUERY_HORIZON_MIN });
+  if (pressure.maxSpanMin !== null) {
+    console.log(
+      `[scan-failed-runs] span createdAt->updatedAt massimo osservato: `
+        + `${Math.round(pressure.maxSpanMin)} min su ${pressure.sampled} run, `
+        + `contro un orizzonte di ${RUN_QUERY_HORIZON_MIN} min.`,
+    );
+  }
+  if (pressure.overThreshold > 0) {
     console.warn(
-      `::warning::[scan-failed-runs] una run segnalabile ha ${Math.round(pressure)} minuti di eta' `
-        + `contro un orizzonte di ${RUN_QUERY_HORIZON_MIN} — l'attesa in coda si sta avvicinando al `
-        + 'cutoff `--created`, oltre il quale i fallimenti sparirebbero dalla query in silenzio. '
+      `::warning::[scan-failed-runs] ${pressure.overThreshold} run con span createdAt->updatedAt `
+        + `oltre ${Math.round(pressure.thresholdMin)} minuti (peggiore: ${Math.round(pressure.maxSpanMin)} min, `
+        + `${pressure.worst?.url ?? 'url ignoto'}) contro un orizzonte di ${RUN_QUERY_HORIZON_MIN} — `
+        + 'lo scarto fra creazione e ultimo aggiornamento si sta avvicinando al cutoff `--created`, '
+        + 'oltre il quale i fallimenti sparirebbero dalla query in silenzio. '
         + 'Alzare SCAN_FAILED_RUNS_HORIZON_MIN.',
     );
   }
