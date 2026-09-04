@@ -1,5 +1,4 @@
 {
-  "https://www.swissinfo.ch/ita/aziende-rimangono-prudenti%2c-scarsa-propensione-ad-assumere/91880258": "aziende-rimangono-prudenti",
   "https://www.laregione.ch/svizzera/svizzera/1943169/dibattito-clima-comparis-scelte-consumi": "svizzeri-clima-consumi-sondaggio",
   "https://www.tio.ch/svizzera/economia/1943275/svizzera-croce-prassi-usam-produzione-prodotti-contesta": "usam-croce-svizzera-polemica",
   "https://www.tio.ch/svizzera/economia/1943282/danni-aziende-siccita-agricoltura-franchi": "siccita-danni-agricoltura-svizzera",
@@ -1765,6 +1764,11 @@
   "https://www.tio.ch/ticino/attualita/1948018/la-sicurezza-informatica-al-centro-non-possiamo-limitarci-a-costruire-muri-sempre-piu-alti": {
     "articleId": "sicurezza-informatica-cyber-security-day-ated",
     "ts": "2026-09-04T12:08:12.075Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/economia/1948052/volkswagen-fornitori-conseguenze-volumi-industria": {
+    "articleId": "volkswagen-fornitori-svizzeri",
+    "ts": "2026-09-04T12:27:39.823Z",
     "keyForm": 2
   }
 }
