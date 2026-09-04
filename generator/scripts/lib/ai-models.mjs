@@ -2102,6 +2102,25 @@ const _providerCooldown = new Map();
 const _providerCooldownReason = new Map();
 const PROVIDER_COOLDOWN_MS = 60_000; // 1 minute cooldown after 429
 
+/**
+ * Ordine di gravita' fra le cause di cooldown (#787).
+ *
+ * Le due cause non sono intercambiabili e NON arrivano in un ordine garantito:
+ * il primo id GitHub della catena puo' prendere un 429 e il secondo trovare
+ * l'host morto, o viceversa. Chi scrive per ultimo decideva la frase — e la
+ * frase e' un VOTO, perche' e' la riga di skip che i fratelli lasciano in
+ * `errors` e che `classifyExhaustionCause` conta. Con `transient >= persistent`
+ * (run 31823202761 decisa per UN voto) lasciare `cooling down (rate-limited)`
+ * su un host che non accetta connessioni fa uscire la run VERDE, senza
+ * articolo e senza alert, su un guasto che non si cura da solo.
+ *
+ * Quindi la causa si muove in una direzione sola: un cooldown transitorio viene
+ * PROMOSSO da uno persistente, e un persistente non viene mai retrocesso da un
+ * 429 che arriva dopo. La finestra invece si rinfresca sempre — chi ha appena
+ * fallito ha appena dimostrato che il provider e' ancora da evitare.
+ */
+const COOLDOWN_SEVERITY = Object.freeze({ transient: 0, persistent: 1 });
+
 // Ceiling applied to a provider's `Retry-After` header (some return 86399 =
 // 24h, which would freeze the pipeline). Read in two places that must never
 // drift apart: the 429 backoff in _callOpenAICompatible, and _hardCallCapMs
@@ -2119,11 +2138,38 @@ function isProviderCoolingDown(provider) {
   return true;
 }
 
-function cooldownProvider(provider, reason = 'rate-limited', skipPhrase = `cooling down (${reason})`) {
-  const until = Date.now() + PROVIDER_COOLDOWN_MS;
-  _providerCooldown.set(provider, until);
-  _providerCooldownReason.set(provider, { reason, skipPhrase });
-  console.warn(`🧊 Provider ${provider} cooled down for ${PROVIDER_COOLDOWN_MS / 1000}s (${reason})`);
+/**
+ * Mette (o rinnova) il cooldown di un provider.
+ *
+ * @returns {'created'|'upgraded'|'refreshed'} `created` = il provider non era
+ * in cooldown; `upgraded` = lo era, ma con una causa meno grave, ora sostituita;
+ * `refreshed` = lo era gia' con una causa di gravita' >=, quindi solo la
+ * finestra e' stata riportata avanti. Il chiamante ne ha bisogno per non
+ * contare due volte lo stesso cooldown in `_stats` e per non ripetere il log.
+ */
+function cooldownProvider(
+  provider,
+  reason = 'rate-limited',
+  skipPhrase = `cooling down (${reason})`,
+  severity = COOLDOWN_SEVERITY.transient,
+) {
+  const wasCoolingDown = isProviderCoolingDown(provider);
+  const prevSeverity = wasCoolingDown
+    ? (_providerCooldownReason.get(provider)?.severity ?? COOLDOWN_SEVERITY.transient)
+    : -1;
+  _providerCooldown.set(provider, Date.now() + PROVIDER_COOLDOWN_MS);
+  // Retrocedere la causa e' l'unica scrittura vietata: vedi COOLDOWN_SEVERITY.
+  if (severity < prevSeverity) return 'refreshed';
+  _providerCooldownReason.set(provider, { reason, skipPhrase, severity });
+  if (!wasCoolingDown) {
+    console.warn(`🧊 Provider ${provider} cooled down for ${PROVIDER_COOLDOWN_MS / 1000}s (${reason})`);
+    return 'created';
+  }
+  if (severity > prevSeverity) {
+    console.warn(`🧊 Provider ${provider} — causa del cooldown promossa a «${reason}» (persistente batte transitorio)`);
+    return 'upgraded';
+  }
+  return 'refreshed';
 }
 
 function providerCooldownReason(provider) {
@@ -6890,16 +6936,27 @@ export async function callLLM(messages, opts = {}) {
           _stats.exhausted++;
           markedExhausted = true;
         }
-        if (!isProviderCoolingDown(provider)) {
-          cooldownProvider(
-            provider,
-            `host unreachable: ${e.hostUnreachable}`,
-            // Deliberately without "cooling down": the siblings' skip line is
-            // counted by classifyExhaustionCause, and a host that refuses the
-            // connection is a persistent fault, not a transient one.
-            `unreachable (${e.hostUnreachable}), non-retryable`,
-          );
-          _stats.providerCooldowns++;
+        // Nessuna guardia `if (!isProviderCoolingDown(provider))` qui (#787): un
+        // provider gia' in cooldown per un 429 che poi si scopre irraggiungibile
+        // deve far cambiare la CAUSA, non essere lasciato con quella vecchia.
+        // La guardia usciva prima di scriverla, e i fratelli continuavano a
+        // scrivere `cooling down (rate-limited)` in `errors` — vocabolario
+        // transitorio — su un host morto. `cooldownProvider` decide da se' se
+        // creare, promuovere o solo rinfrescare (vedi COOLDOWN_SEVERITY).
+        const cooldownOutcome = cooldownProvider(
+          provider,
+          `host unreachable: ${e.hostUnreachable}`,
+          // Deliberately without "cooling down": the siblings' skip line is
+          // counted by classifyExhaustionCause, and a host that refuses the
+          // connection is a persistent fault, not a transient one.
+          `unreachable (${e.hostUnreachable}), non-retryable`,
+          COOLDOWN_SEVERITY.persistent,
+        );
+        // Una promozione non e' un secondo cooldown: contarla gonfierebbe il
+        // numero del riepilogo rispetto a prima di questa modifica, quando la
+        // guardia impediva del tutto la seconda scrittura.
+        if (cooldownOutcome === 'created') _stats.providerCooldowns++;
+        if (cooldownOutcome !== 'refreshed') {
           console.warn(`🚫 [${model}] Host unreachable (${e.hostUnreachable}) — cooling down provider ${provider}; its sibling models are skipped instead of re-dialling a dead host`);
         }
       }
