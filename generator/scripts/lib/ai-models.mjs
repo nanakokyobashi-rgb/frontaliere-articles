@@ -3795,6 +3795,7 @@ export function getStats() {
     ..._stats,
     exhaustedModels: [..._exhaustedModels],
     consecutive429s: Object.fromEntries(_consecutive429),  // FRO-325
+    resolverFlaps: Object.fromEntries(_resolverFlaps),     // #770
     activeCooldowns: Object.fromEntries([..._providerCooldown].map(([p, t]) => [p, Math.max(0, Math.ceil((t - Date.now()) / 1000))])),
     scoreBoard: getScoreBoard(),
     runOutcomes: getRunOutcomes(),
@@ -3923,6 +3924,7 @@ export function resetState() {
   _pendingCounterDeltas.clear();
   _runOutcomes.clear();
   _consecutive429.clear();
+  _resolverFlaps.clear();
   _callLatency.clear();
   _clampedTimeouts.clear();
   _consecutiveContentFailures.clear();
@@ -4058,13 +4060,42 @@ export function isQuotaExhaustedError(err) {
  * @returns {string|null} the syscall code (for the log/ban reason), or null.
  */
 const HOST_UNREACHABLE_CODES = new Set([
-  'ENOTFOUND',      // DNS: name does not resolve
-  'EAI_AGAIN',      // DNS: resolver failure
+  'ENOTFOUND',      // DNS: authoritative «this name does not exist»
   'ECONNREFUSED',   // host answers the SYN with a reset — nothing listening
   'EHOSTUNREACH',
   'ENETUNREACH',
   'EHOSTDOWN',
 ]);
+
+/**
+ * `EAI_AGAIN` is NOT in the set above, and the distinction is the whole point
+ * (#770). `ENOTFOUND` is an AUTHORITATIVE answer — the name does not exist,
+ * and nothing about the next attempt changes that. `EAI_AGAIN` is
+ * `getaddrinfo`'s literal «try again»: a temporary resolver failure, which on
+ * a CI runner is a routine hiccup, not a verdict about the host. Treated as
+ * unreachable it cost a model exhausted for the run PLUS the 60s provider
+ * cooldown — i.e. every sibling id served by that host — for a fault that
+ * usually clears on the next round-trip.
+ *
+ * So a flap is retryable like ECONNRESET/EPIPE, and the retry loop's backoff
+ * is exactly the "try again" the code asks for. What #475 bought is not given
+ * back, only made conditional: `callLLM` counts flaps per provider, and at
+ * RESOLVER_FLAP_ESCALATION consecutive failed model attempts against the same
+ * provider the resolver is no longer hiccuping — the flap is promoted to a
+ * full unreachable and takes the ban + cooldown path unchanged.
+ */
+const TRANSIENT_RESOLVER_CODES = new Set(['EAI_AGAIN']);
+
+/**
+ * Failed model attempts on one provider, all ending in a resolver flap, after
+ * which the flap stops being read as transient. Three and not two: two is one
+ * unlucky pair of models, and the cost of guessing wrong here is the cost #770
+ * was opened about.
+ */
+const RESOLVER_FLAP_ESCALATION = 3;
+
+/** @type {Map<string, number>} provider → consecutive resolver flaps */
+const _resolverFlaps = new Map();
 
 export function classifyHostUnreachable(err) {
   const seen = new Set();
@@ -4072,6 +4103,31 @@ export function classifyHostUnreachable(err) {
     if (!e || typeof e !== 'object' || depth > 4 || seen.has(e)) return null;
     seen.add(e);
     if (typeof e.code === 'string' && HOST_UNREACHABLE_CODES.has(e.code)) return e.code;
+    if (Array.isArray(e.errors)) {
+      for (const sub of e.errors) {
+        const hit = walk(sub, depth + 1);
+        if (hit) return hit;
+      }
+    }
+    return walk(e.cause, depth + 1);
+  };
+  return walk(err, 0);
+}
+
+/**
+ * Same walk as `classifyHostUnreachable`, for the codes that mean «temporary,
+ * try again» rather than «this host is not there» (see TRANSIENT_RESOLVER_CODES).
+ * Pure and idempotent like its twin: the counting lives in `callLLM`, so
+ * classifying the same error twice costs nothing observable.
+ *
+ * @returns {string|null} the syscall code (for the log/escalation reason), or null.
+ */
+export function classifyTransientResolver(err) {
+  const seen = new Set();
+  const walk = (e, depth) => {
+    if (!e || typeof e !== 'object' || depth > 4 || seen.has(e)) return null;
+    seen.add(e);
+    if (typeof e.code === 'string' && TRANSIENT_RESOLVER_CODES.has(e.code)) return e.code;
     if (Array.isArray(e.errors)) {
       for (const sub of e.errors) {
         const hit = walk(sub, depth + 1);
@@ -6495,6 +6551,7 @@ export async function callLLM(messages, opts = {}) {
       if (o.recordScore !== false) recordModelSuccess(model);
       _consecutive429.delete(model); // FRO-325: reset 429 counter on success
       _clampedTimeouts.delete(model); // an answer clears the adaptive-ceiling doubt
+      _resolverFlaps.delete(provider); // the name resolved: the flap streak is over (#770)
       _recordLastResortOutcome(model, 'served');
       if (provider === PROVIDER.CLAUDE_CLI) _claudeCliConsecutiveTimeouts = 0;
       if (provider === PROVIDER.OMNIROUTE) _omniRouteConsecutiveFailures = 0;
@@ -6556,6 +6613,25 @@ export async function callLLM(messages, opts = {}) {
       if (!e.hostUnreachable) {
         const unreachableCode = classifyHostUnreachable(e);
         if (unreachableCode) e.hostUnreachable = unreachableCode;
+      }
+      // Resolver flap (#770): transient by definition, so it does NOT ban the
+      // model nor freeze the provider — until it stops looking transient. The
+      // counter is per PROVIDER and not per model because that is the scope of
+      // the fault a resolver failure describes: the name of the host, which
+      // every sibling id shares. Only failed attempts count; a success on the
+      // same provider clears it (see the reset next to _consecutive429).
+      if (!e.hostUnreachable) {
+        const flapCode = classifyTransientResolver(e);
+        if (flapCode) {
+          const flaps = (_resolverFlaps.get(provider) || 0) + 1;
+          _resolverFlaps.set(provider, flaps);
+          if (flaps >= RESOLVER_FLAP_ESCALATION) {
+            e.hostUnreachable = flapCode;
+            console.warn(`🚫 [${model}] ${flaps} consecutive resolver failures (${flapCode}) on ${provider} — no longer treating it as a hiccup`);
+          } else {
+            console.warn(`🔁 [${model}] Resolver flap (${flapCode}) on ${provider} ${flaps}/${RESOLVER_FLAP_ESCALATION} — retryable, no ban and no provider cooldown`);
+          }
+        }
       }
       const isExhausted =
         msg.includes('Daily request limit') ||
