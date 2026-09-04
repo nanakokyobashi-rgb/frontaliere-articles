@@ -35,7 +35,7 @@
  */
 
 import { strict as assert } from 'node:assert';
-import { describe, it, beforeEach, afterEach } from 'node:test';
+import { describe, it, beforeEach, afterEach, mock } from 'node:test';
 
 import {
   classifyHostUnreachable,
@@ -639,5 +639,162 @@ describe('promozione della causa del cooldown (#787)', () => {
     assert.match(later.message, /skipped — provider github unreachable \(ENOTFOUND\), non-retryable/);
     assert.doesNotMatch(later.message, /cooling down/, 'il 429 tardivo non deve riscrivere la causa');
     assert.equal(later.transientExhaustion, false, 'la causa persistente deve reggere');
+  });
+});
+
+/**
+ * ── IL BAN DI UN HOST MORTO VALE PER L'INTERA RUN (#803) ───────────────────
+ *
+ * `PROVIDER_COOLDOWN_MS` e' 60_000 perche' nasce dal 429: il bucket di quota si
+ * ricarica da solo, quindi dopo un minuto riprovare e' la cosa giusta. Un host
+ * che non accetta connessioni non si ricarica da solo, e con la stessa finestra
+ * la scadenza rimetteva in gioco il primo fratello ancora eleggibile: ricompone
+ * il numero, fallisce, viene esaurito, riapre il cooldown. Il costo reale non
+ * era «1 connect per run» (#767) ma **1 connect al minuto per provider**, e una
+ * run del generatore dura minuti.
+ *
+ * Le prove qui vanno lette insieme, perche' cio' che pinnano e' un CONFINE, e
+ * un confine ha due lati: la prima dice che la causa autoritativa NON scade; la
+ * seconda che il flap del resolver escalato (#770), che arriva allo stesso ramo
+ * con `e.hostUnreachable = 'EAI_AGAIN'`, prende invece una finestra finita — o
+ * tre hiccup DNS spegnerebbero la catena tier-0 per una run intera; la terza
+ * che il ban lungo non ha inghiottito nemmeno il 429, che deve continuare a
+ * scadere dopo 60s.
+ */
+describe('durata del cooldown per causa (#803)', () => {
+  // Come nel blocco della promozione: con piu' di un PAT il 429 non apre il
+  // cooldown del provider (la quota e' dell'account), e la seconda prova
+  // misurerebbe un cooldown che non c'e' mai stato.
+  const ENV_KEYS = [
+    'AI_MODELS_FORCE_CHAIN', 'GH_MODELS_PAT', 'AI_MODELS_PREFER',
+    ...Array.from({ length: 8 }, (_, i) => `GH_MODELS_PAT_${i + 2}`),
+  ];
+  const OPTS = { maxRetriesPerModel: 1, backoffMs: 1, timeout: 5000 };
+  let envBackup = {};
+  let realFetch;
+  let fetchCalls;
+  const ghCalls = () => fetchCalls.filter((u) => u.includes('models.inference.ai.azure.com'));
+
+  beforeEach(() => {
+    envBackup = Object.fromEntries(ENV_KEYS.map((k) => [k, process.env[k]]));
+    for (const k of ENV_KEYS) delete process.env[k];
+    process.env.GH_MODELS_PAT = 'test-pat';
+    // Sei id GitHub: prima della fix ogni scadenza della finestra ne rimetteva
+    // in gioco UNO, quindi la catena bastava a pagare un connect al minuto.
+    process.env.AI_MODELS_FORCE_CHAIN = 'gpt-4o-mini,gpt-4.1-mini,gpt-4o,gpt-4.1,o4-mini,phi-4';
+    fetchCalls = [];
+    realFetch = globalThis.fetch;
+    // Solo `Date`: i timer veri restano veri, cosi' il backoff e gli abort
+    // interni non vengono congelati da un orologio che non avanza da solo.
+    mock.timers.enable({ apis: ['Date'] });
+    resetState();
+  });
+
+  afterEach(() => {
+    mock.timers.reset();
+    globalThis.fetch = realFetch;
+    for (const k of ENV_KEYS) {
+      if (envBackup[k] === undefined) delete process.env[k];
+      else process.env[k] = envBackup[k];
+    }
+    resetState();
+  });
+
+  it('un host irraggiungibile non viene ri-diallato a ogni scadenza dei 60s', async () => {
+    globalThis.fetch = async (url) => {
+      fetchCalls.push(String(url));
+      throw undiciFetchFailed('ENOTFOUND');
+    };
+
+    await assert.rejects(() => callLLM([{ role: 'user', content: 'x' }], OPTS));
+    assert.equal(ghCalls().length, 1, `un solo connect atteso dalla prima chiamata, visti ${ghCalls().length}`);
+
+    // Cinque minuti di run, cioe' cinque scadenze della finestra da 60s, con
+    // una chiamata dopo ciascuna — la forma di un generatore che macina.
+    for (let minuto = 1; minuto <= 5; minuto++) {
+      mock.timers.tick(61_000);
+      await assert.rejects(() => callLLM([{ role: 'user', content: 'x' }], OPTS));
+    }
+
+    assert.equal(
+      ghCalls().length, 1,
+      `l'host morto va composto UNA volta per run, non a ogni scadenza: visti ${ghCalls().length} connect`,
+    );
+    assert.equal(
+      getStats().activeCooldowns.github, Infinity,
+      `il cooldown persistente non deve avere scadenza: ${JSON.stringify(getStats().activeCooldowns)}`,
+    );
+  });
+
+  // Il flap del resolver arriva allo STESSO ramo dell'host morto — #770 gli
+  // scrive `e.hostUnreachable = 'EAI_AGAIN'` quando smette di sembrare un
+  // hiccup — ma non e' la stessa cosa: `EAI_AGAIN` e' il resolver che dice
+  // «riprova», non un verdetto sull'host. Con il ban di run tre hiccup DNS su
+  // un runner CI spegnerebbero il provider per ore, e su `github` l'intera
+  // catena tier-0 con lui, in silenzio: `_resolverFlaps` si azzera solo su un
+  // successo, che non puo' arrivare da un provider che non viene piu' composto.
+  it('un flap escalato (#770) prende una finestra finita, non il ban di run', async () => {
+    globalThis.fetch = async (url) => {
+      fetchCalls.push(String(url));
+      throw undiciFetchFailed('EAI_AGAIN');
+    };
+
+    await assert.rejects(() => callLLM([{ role: 'user', content: 'x' }], OPTS));
+    const dopoEscalation = ghCalls().length;
+    assert.equal(dopoEscalation, 3, `attesi 3 connect prima dell'escalation, visti ${dopoEscalation}`);
+    // `activeCooldowns` e' il tempo che RESTA, in secondi.
+    const rimasti = getStats().activeCooldowns.github;
+    assert.ok(
+      Number.isFinite(rimasti) && rimasti > 60,
+      `la finestra del flap dev'essere finita e piu' lunga dei 60s del 429: ${JSON.stringify(getStats().activeCooldowns)}`,
+    );
+
+    // Dentro la finestra il provider resta fuori gioco — cio' che #770 compra.
+    mock.timers.tick(61_000);
+    await assert.rejects(() => callLLM([{ role: 'user', content: 'x' }], OPTS));
+    assert.equal(
+      ghCalls().length, dopoEscalation,
+      `dentro la finestra del flap non si ricompone il numero: visti ${ghCalls().length} connect`,
+    );
+
+    // Scaduta, si riprova: e' l'unico modo in cui un resolver che si riallinea
+    // a meta' run puo' essere scoperto.
+    mock.timers.tick(5 * 60_000);
+    await assert.rejects(() => callLLM([{ role: 'user', content: 'x' }], OPTS));
+    assert.ok(
+      ghCalls().length > dopoEscalation,
+      `scaduta la finestra il resolver va ri-provato: visti ${ghCalls().length} connect, attesi piu' di ${dopoEscalation}`,
+    );
+  });
+
+  it('un 429 continua a scadere dopo 60s — il ban lungo non si estende al transitorio', async () => {
+    // `maxRetriesPerModel: 2` come il blocco della promozione (#787): il
+    // cooldown da 429 vive nel ramo retryable di `_callOpenAICompatible`
+    // (`attempt < opts.maxRetriesPerModel`), quindi con 1 — dove il primo
+    // tentativo e' gia' l'ultimo — `cooldownProvider` non viene mai chiamata e
+    // la prova guarderebbe una finestra che non e' mai stata aperta.
+    const OPTS_429 = { ...OPTS, maxRetriesPerModel: 2 };
+    globalThis.fetch = async (url) => {
+      if (!String(url).includes('models.inference.ai.azure.com')) throw undiciFetchFailed('ENOTFOUND');
+      fetchCalls.push(String(url));
+      return new Response('rate limit exceeded', { status: 429 });
+    };
+
+    await assert.rejects(() => callLLM([{ role: 'user', content: 'x' }], OPTS_429));
+    const primoGiro = ghCalls().length;
+    assert.ok(primoGiro >= 1, 'il primo giro deve aver chiamato l\'host');
+    const rimasti = getStats().activeCooldowns.github;
+    assert.ok(
+      Number.isFinite(rimasti) && rimasti > 0,
+      `un 429 non e' un guasto persistente: la sua finestra dev'essere aperta e finita, vista ${JSON.stringify(getStats().activeCooldowns)}`,
+    );
+
+    mock.timers.tick(61_000);
+    await assert.rejects(() => callLLM([{ role: 'user', content: 'x' }], OPTS_429));
+
+    assert.ok(
+      ghCalls().length > primoGiro,
+      `scaduti i 60s il provider torna eleggibile: attesi piu' di ${primoGiro} connect, visti ${ghCalls().length}`,
+    );
   });
 });
