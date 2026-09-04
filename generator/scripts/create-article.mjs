@@ -4493,7 +4493,12 @@ function buildArticleJsonSchema(primaryLocale = 'it', part = 'full') {
 
 function validateItalianPayload(contentIt, locale = 'it') {
   for (const field of REQUIRED_IT_BODY_FIELDS) {
-    if (!contentIt?.[field] || contentIt[field].trim().length < 1) {
+    // `hasUsableContentText` e non un `.trim()` nudo: oggi ogni chiamante passa
+    // l'output gia' filtrato di `normalizeItalianContentFromPayload`, ma il
+    // giorno in cui uno gli passa un blocco RAW la stringa `"null"` passerebbe
+    // il gate (#799). Copre anche un campo non-stringa, su cui `.trim()`
+    // lanciava un TypeError invece del qualityReject.
+    if (!hasUsableContentText(contentIt?.[field])) {
       // qualityReject=true: missing-field is the same content-quality class as
       // callLLM's body2-validation throws (malformed/incomplete generation),
       // not an infrastructure error — isQualityRejectError() didn't match a
@@ -9627,7 +9632,14 @@ ${terminologyByLang[targetLang] || ''}`;
   for (const locale of ['en', 'de', 'fr']) {
     const langName = locale === 'en' ? 'inglese' : locale === 'de' ? 'tedesco' : 'francese';
     for (const field of ['title', 'excerpt', 'body1', 'body2', 'body3']) {
-      if (data.content[locale][field]) continue;
+      // Truthiness nuda: la stringa `"null"` (serializzazione letterale del
+      // null, la forma misurata su `haiku` in #799) la supera, quindi il campo
+      // NON veniva ritradotto ne' cadeva sul fallback IT e finiva in
+      // `content/`, in `dist/api/meta-<locale>.json` e nel feed RSS come
+      // paragrafo il cui testo e' `null`. Qui, a differenza del percorso IT,
+      // non c'e' nessun `normalizeItalianContentFromPayload` a valle:
+      // `validateItalianPayload` gira solo su `content.it`.
+      if (hasUsableContentText(data.content[locale][field])) continue;
       const itValue = itContent[field];
       // `itValue` composto di solo whitespace (es. ' ') è truthy: senza
       // `.trim()` bypassa questo guard e viene comunque assegnato sotto come
@@ -9783,7 +9795,7 @@ ${terminologyByLang[targetLang] || ''}`;
             1000,
             `${locale}:${field}-retry`,
           );
-          if (retryResult?.[field] && retryResult[field].trim() !== itVal) {
+          if (hasUsableContentText(retryResult?.[field]) && retryResult[field].trim() !== itVal) {
             data.content[locale][field] = retryResult[field];
             console.error(`  ✅ [translation-check] ${locale.toUpperCase()}.${field} ritradotto con successo`);
           } else {
@@ -10093,7 +10105,9 @@ function validate(data, opts = {}) {
       }
     }
     for (const field of ['title', 'excerpt', 'body1', 'body2', 'body3']) {
-      if (!data.content[locale][field]) {
+      // Ultima rete prima della scrittura, per TUTTI i locali: un campo che
+      // vale la stringa `"null"` e' mancante quanto uno vuoto (#799).
+      if (!hasUsableContentText(data.content[locale][field])) {
         const err = new Error(`Campo ${field} mancante per ${locale}`);
         err.qualityReject = true;
         throw err;
