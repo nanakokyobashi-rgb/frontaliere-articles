@@ -78,7 +78,12 @@ import { FIX_OUTCOME_RE } from './close-recovered-failure-issues.mjs';
 // Stessa ragione: l'insieme dei verdetti che questo stadio non può ri-accodare
 // da solo vive in UN posto, `followup-drainer.mjs`, che possiede la semantica
 // dei verdetti. Importarlo tiene le due letture allineate per costruzione.
-import { PREPASS_VERDICT_BEATS_FAMILY } from './followup-drainer.mjs';
+// Stessa ragione anche per l'eleggibilità allo scorporo: il predicato che il
+// promotore applica a valle (`isDecomposeEligible`) è QUELLO, non una sua
+// parafrasi qui. Instradare a `decompose-queued` una issue che il promotore
+// rifiuta la fa uscire da `needs-human` senza entrare in nessuna coda: nessuno
+// la guarda più, ed è la forma «smette di avanzare in silenzio» (#780).
+import { PREPASS_VERDICT_BEATS_FAMILY, isDecomposeEligible } from './followup-drainer.mjs';
 
 const REPO = process.env.GH_REPO || process.env.GITHUB_REPOSITORY || '';
 const DRY = process.argv.includes('--dry-run');
@@ -151,17 +156,48 @@ export const OWNER_ONLY_TITLE_PATTERNS = [
  */
 export const STALE_BLOCK_VERDICTS = new Set(['blocked-secrets']);
 
-/** Ultimo verdetto da una lista di commenti (forma REST o GraphQL). Pura. */
-export function latestVerdict(comments) {
+/**
+ * Finestra di validità del verdetto, in giorni.
+ *
+ * Il ramo `PREPASS_VERDICT_BEATS_FAMILY` tratta il verdetto come vincolante:
+ * senza un bound, un `max-turns` di settimane fa tiene la issue in `keep` PER
+ * SEMPRE anche quando la causa a monte è cambiata da un pezzo (crawler rimesso
+ * a posto, workflow riscritto). L'unica uscita rimasta sarebbe lo sweep
+ * settimanale, che ha un cap di azioni per run — cioè di nuovo uno stato
+ * assorbente, che è esattamente il difetto che questo file esiste per chiudere.
+ *
+ * 30 giorni perché è ~4 giri dello sweep settimanale: abbastanza da non
+ * ri-accodare un verdetto ancora fresco (il loop misurato sul sito si
+ * riproduceva nel giro di GIORNI), abbastanza poco da non superare un mese di
+ * immobilità. Scaduto il termine il verdetto non viene cancellato: smette solo
+ * di essere vincolante, e la issue torna a valere quanto la sua famiglia — un
+ * run del fixer, che è l'errore economico giusto rispetto all'immobilità.
+ */
+export const VERDICT_MAX_AGE_DAYS = Number(process.env.PREPASS_VERDICT_MAX_AGE_DAYS || 30);
+
+/**
+ * Ultimo verdetto + il suo istante, da una lista di commenti (forma REST o
+ * GraphQL). Pura. `at` è `null` se il commento non ha una data parsabile — chi
+ * legge non deve poter confondere «senza data» con «vecchissimo».
+ * @param {Array<{body?: string, created_at?: string, createdAt?: string}>} comments
+ * @returns {{outcome: string|null, at: number|null}}
+ */
+export function latestVerdictEntry(comments) {
   let latest = null;
+  let latestAt = null;
   let at = -Infinity;
   for (const c of comments || []) {
     const m = FIX_OUTCOME_RE.exec(String(c?.body || ''));
     if (!m) continue;
     const t = Date.parse(c?.created_at ?? c?.createdAt);
-    if (!Number.isNaN(t) && t >= at) { at = t; latest = m[1].toLowerCase(); }
+    if (!Number.isNaN(t) && t >= at) { at = t; latest = m[1].toLowerCase(); latestAt = t; }
   }
-  return latest;
+  return { outcome: latest, at: latestAt };
+}
+
+/** Ultimo verdetto da una lista di commenti (forma REST o GraphQL). Pura. */
+export function latestVerdict(comments) {
+  return latestVerdictEntry(comments).outcome;
 }
 
 /**
@@ -206,10 +242,14 @@ export function needsVerdictLookup(title = '') {
  * sotto. La decisione si prende su ciò che è contrattuale (titolo, label,
  * marker di verdetto), non sulla prosa.
  *
- * @param {{title?: string, labels?: string[], verdict?: string|null}} iss
+ * @param {{title?: string, labels?: string[], verdict?: string|null,
+ *          verdictAt?: number|null, verdictLookupFailed?: boolean, now?: number}} iss
  * @returns {{action: 'requeue'|'decompose'|'keep', reason: string}}
  */
-export function prepassDecision({ title = '', labels = [], verdict = null } = {}) {
+export function prepassDecision({
+  title = '', labels = [], verdict = null,
+  verdictAt = null, verdictLookupFailed = false, now = Date.now(),
+} = {}) {
   // Un tracker permanente è aperto per scelta: non si accoda e non si scorpora.
   if (labels.includes('agent:no-age-out')) return { action: 'keep', reason: 'tracker permanente' };
   // Già in volo da qualche parte: non si tocca.
@@ -222,6 +262,16 @@ export function prepassDecision({ title = '', labels = [], verdict = null } = {}
   const ownerOnly = OWNER_ONLY_TITLE_PATTERNS.find((re) => re.test(title));
   if (ownerOnly) {
     return { action: 'keep', reason: 'famiglia credenziali: la chiude solo il proprietario (rotazione declinata il 2026-08-18)' };
+  }
+
+  // Lookup del verdetto fallito ≠ nessun verdetto. Su secondary rate-limit ogni
+  // lettura torna vuota, e senza questa riga la famiglia decide `requeue`
+  // esattamente come prima che la guardia sul verdetto esistesse: il loop che
+  // #778 ha chiuso si riapre, e per un motivo che non compare da nessuna parte.
+  // `keep` è il default onesto — «non so dirlo» — e costa un giro di sweep, non
+  // un run del fixer che riproduce un verdetto già pagato.
+  if (verdictLookupFailed) {
+    return { action: 'keep', reason: 'verdetto non leggibile (lookup fallito): nessuna decisione su un input mancante' };
   }
 
   if (verdict && STALE_BLOCK_VERDICTS.has(verdict)) {
@@ -252,7 +302,25 @@ export function prepassDecision({ title = '', labels = [], verdict = null } = {}
   // l'oggetto della issue #568: quando quella si chiude, questo pre-pass ne
   // eredita il miglioramento senza modifiche, ed è il motivo per cui il
   // rilevatore è importato invece che riscritto.
+  //
+  // Lo scorporo si propone solo se il promotore a valle lo accetterebbe: il
+  // predicato è il SUO (`isDecomposeEligible`), importato e non riscritto. Le
+  // label che lo escludono (`decomposed:1`, `from-decompose`, `maybe-resolved`)
+  // non sono visibili da qui come «già in lavorazione» — quelle sono filtrate
+  // sopra — quindi senza questa guardia il pre-pass toglieva `needs-human` e
+  // metteva `agent:decompose-queued` su una issue che il promotore rifiuta: via
+  // dallo stato assorbente, dentro a nessuna coda. `keep` invece della fall-
+  // through a `requeue` perché ri-accodare intero un container multi-item è il
+  // modo documentato di rifare `max-turns`: se lo scorporo è precluso, la
+  // decisione è di giudizio e la prende il run Claude dello sweep.
   if (isAggregate(title, '')) {
+    if (!isDecomposeEligible({ labels: labels.map((name) => ({ name })) })) {
+      const blocking = labels.filter((l) => ['decomposed:1', 'from-decompose', 'maybe-resolved'].includes(l));
+      return {
+        action: 'keep',
+        reason: `container multi-item ma NON scorporabile a valle${blocking.length ? ` (${blocking.join(', ')})` : ''}: il promotore lo rifiuterebbe`,
+      };
+    }
     return { action: 'decompose', reason: 'container multi-item generato da un monitor' };
   }
   // Il verdetto batte il riconoscimento di famiglia — ma SOLO il `requeue`, ed è
@@ -275,8 +343,20 @@ export function prepassDecision({ title = '', labels = [], verdict = null } = {}
   // prima gliela toglieva, trasformando in `keep` un container che aveva
   // un'uscita buona (🔴 della review di questa PR). Qui sotto intercetta il solo
   // ri-accodo intero, che è l'unica azione che non cambia niente.
+  //
+  // …e solo finché il verdetto è RECENTE (vedi `VERDICT_MAX_AGE_DAYS`): un
+  // verdetto scaduto descrive un mondo che non c'è più, e trattarlo come
+  // vincolante trasforma questo ramo in un secondo stato assorbente.
   if (verdict && PREPASS_VERDICT_BEATS_FAMILY.has(verdict)) {
-    return { action: 'keep', reason: `verdetto \`${verdict}\` non ri-accodabile a costo zero: resta per il giudizio dello sweep settimanale` };
+    const ageMs = verdictAt == null ? null : now - verdictAt;
+    const expired = ageMs != null && ageMs > VERDICT_MAX_AGE_DAYS * 86400000;
+    if (!expired) {
+      return { action: 'keep', reason: `verdetto \`${verdict}\` non ri-accodabile a costo zero: resta per il giudizio dello sweep settimanale` };
+    }
+    return {
+      action: 'requeue',
+      reason: `famiglia di monitor riconosciuta (${monitor}), verdetto \`${verdict}\` scaduto (${Math.floor(ageMs / 86400000)}g > ${VERDICT_MAX_AGE_DAYS}g): non più vincolante`,
+    };
   }
   return { action: 'requeue', reason: `famiglia di monitor riconosciuta (${monitor})` };
 }
@@ -304,18 +384,27 @@ function main() {
 
   const counts = { requeue: 0, decompose: 0, keep: 0 };
   let acted = 0;
+  let lookupFailed = 0;
   for (const iss of ordered) {
     const labels = (iss.labels || []).map((l) => l.name);
     // Il verdetto costa una lettura: si paga per tutte tranne la famiglia
     // owner-only, l'unica che `prepassDecision` decide prima di guardarlo.
     let verdict = null;
+    let verdictAt = null;
+    let verdictLookupFailed = false;
     if (needsVerdictLookup(iss.title)) {
       try {
         const cs = gh(['api', `repos/${REPO}/issues/${iss.number}/comments?per_page=100`, '--paginate']);
-        verdict = latestVerdict(Array.isArray(cs) ? cs : []);
-      } catch { verdict = null; }
+        ({ outcome: verdict, at: verdictAt } = latestVerdictEntry(Array.isArray(cs) ? cs : []));
+      } catch (e) {
+        // Un fallimento di lettura NON è «nessun verdetto»: va dichiarato, o su
+        // rate-limit l'intera run degrada al comportamento pre-#778 in silenzio.
+        verdictLookupFailed = true;
+        lookupFailed++;
+        console.log(`::warning::needs-human-prepass: #${iss.number} verdetto non leggibile (${String(e).slice(0, 120)}) → keep conservativo.`);
+      }
     }
-    const d = prepassDecision({ title: iss.title, labels, verdict });
+    const d = prepassDecision({ title: iss.title, labels, verdict, verdictAt, verdictLookupFailed });
     counts[d.action]++;
     if (d.action === 'keep') continue;
 
@@ -337,6 +426,11 @@ function main() {
     }
   }
   console.log(`needs-human-prepass: requeue=${counts.requeue} decompose=${counts.decompose} keep=${counts.keep} (azioni eseguite: ${acted}).`);
+  if (lookupFailed) {
+    // In cima al riassunto sta il numero, non il dettaglio: una run in cui i
+    // verdetti non si leggono NON è una run che ha deciso «nessun verdetto».
+    console.log(`::warning::needs-human-prepass: ${lookupFailed} verdetti non leggibili (rate-limit?) → altrettanti \`keep\` conservativi, non decisioni.`);
+  }
 }
 
 if (process.argv[1] && process.argv[1].endsWith('needs-human-prepass.mjs')) main();
