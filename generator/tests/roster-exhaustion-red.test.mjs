@@ -31,6 +31,9 @@ import { spawnSync } from 'node:child_process';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
+// La rimozione dei temp che ospitano un repo git vero: `rmSync` diretta corre
+// con il gc staccato di git e alza ENOTEMPTY. Misura e motivo nel modulo.
+import { rmTempTree } from './rm-temp-tree.mjs';
 import { fileURLToPath } from 'node:url';
 
 import {
@@ -218,7 +221,7 @@ function runGenerateBlock({ nodeExit, writesArticle = false }) {
     });
     return { status: res.status, stdout: res.stdout || '', outputs: fs.readFileSync(outFile, 'utf8') };
   } finally {
-    fs.rmSync(dir, { recursive: true, force: true });
+    rmTempTree(dir);
   }
 }
 

@@ -61,6 +61,9 @@ import fs from 'node:fs';
 import path from 'node:path';
 import os from 'node:os';
 import { fileURLToPath } from 'node:url';
+// La rimozione dei temp che ospitano un repo git vero: `rmSync` diretta corre
+// con il gc staccato di git e alza ENOTEMPTY. Misura e motivo nel modulo.
+import { rmTempTree } from './rm-temp-tree.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
 const WF_DIR = path.join(ROOT, '.github', 'workflows');
@@ -346,7 +349,8 @@ function makeCorpusMirror() {
   return tmp;
 }
 
-/** Un repo git usa e getta, con `content/` dentro. */
+/** Un repo git usa e getta, con `content/` dentro. Rimosso con `rmTempTree`:
+ *  vedi il modulo per la race ENOTEMPTY del gc staccato di git. */
 function makeTempRepo() {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'guard-block-'));
   execFileSync('git', ['init', '-q', dir]);
@@ -404,7 +408,7 @@ for (const p of producers.filter((x) => x.file !== 'generate-article.yml')) {
       assert.equal(res.status, 0, `${p.file}: un run che non tocca content/ non deve morire su un difetto altrui`);
       assert.equal(res.nodeCalls, '', `${p.file}: le suite sono state lanciate su un corpus che questo run non ha toccato`);
     } finally {
-      fs.rmSync(dir, { recursive: true, force: true });
+      rmTempTree(dir);
     }
   });
 
@@ -419,7 +423,7 @@ for (const p of producers.filter((x) => x.file !== 'generate-article.yml')) {
       }
       assert.match(res.summary, /RIFIUTATA/, `${p.file}: il rifiuto non arriva nel job summary, quindi nessuno lo vede`);
     } finally {
-      fs.rmSync(dir, { recursive: true, force: true });
+      rmTempTree(dir);
     }
   });
 
@@ -430,7 +434,7 @@ for (const p of producers.filter((x) => x.file !== 'generate-article.yml')) {
       const res = runGuardBlock(extractRun(p.src, GUARD_NAME), { dir, nodeExit: 0 });
       assert.equal(res.status, 0, `${p.file}: una scrittura pulita non deve essere bloccata`);
     } finally {
-      fs.rmSync(dir, { recursive: true, force: true });
+      rmTempTree(dir);
     }
   });
 }
