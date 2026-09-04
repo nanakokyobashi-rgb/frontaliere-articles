@@ -22,9 +22,12 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import {
   collectCdnAssetRefs,
+  hasSameOriginAssetRef,
   verifyCdnAssetRefs,
   formatCdnAssetReport,
+  formatOffloadCoverageReport,
 } from '../../scripts/lib/cdn-asset-existence.mjs';
+import { ASSET_EXT_ALTERNATION } from '../../host/shared/cdnAssetOffloadRx.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const CDN = 'https://cdn.frontaliereticino.ch';
@@ -120,4 +123,113 @@ test('publish-article-fast.mjs verifica gli asset DOPO l\'offload', () => {
     'la verifica gira PRIMA dell\'offload: lì gli URL CDN non esistono ancora nell\'HTML e ' +
       'la verifica non guarda niente.',
   );
+});
+
+// ═══════════════════════════════════════════════════════════════════════════
+// #817 item 1 — «offload fallito» non deve leggersi come «niente da riscrivere»
+// ═══════════════════════════════════════════════════════════════════════════
+
+test('hasSameOriginAssetRef distingue il ref non riscritto da quello riscritto', () => {
+  assert.equal(hasSameOriginAssetRef('<link rel="stylesheet" href="/assets/index-abc.css">'), true);
+  assert.equal(hasSameOriginAssetRef('<script src="assets/partnerize-tag.js"></script>'), true);
+  assert.equal(hasSameOriginAssetRef(`<script src="${CDN}/assets/partnerize-tag.js"></script>`), false);
+  assert.equal(hasSameOriginAssetRef('<p>nessun asset</p>'), false);
+  assert.equal(hasSameOriginAssetRef(''), false);
+});
+
+test('IL DIFETTO: offload non eseguito e «niente da riscrivere» hanno righe DIVERSE', () => {
+  // Offload fallito: lo script e' non-fatale, lascia dist intatto ed esce 0.
+  // Zero URL CDN — identico al caso sano, se non fosse per il same-origin.
+  const rotto = formatOffloadCoverageReport({
+    cdnRefCount: 0,
+    sameOriginFiles: ['it/articolo/index.html', 'en/article/index.html'],
+  });
+  assert.ok(
+    rotto.some((l) => l.startsWith('::warning::')),
+    'un offload che non ha riscritto niente deve produrre un avviso: e\' l\'unico punto in cui ' +
+      'quel guasto e\' osservabile, perche\' lo script esce 0',
+  );
+  assert.match(rotto[0], /SAME-ORIGIN/);
+  assert.match(rotto[0], /it\/articolo\/index\.html/);
+
+  // Caso sano: nessun asset da nessuna parte.
+  const sano = formatOffloadCoverageReport({ cdnRefCount: 0, sameOriginFiles: [] });
+  assert.equal(sano.filter((l) => l.startsWith('::warning::')).length, 0);
+  assert.notDeepEqual(sano, rotto, 'i due mondi devono essere distinguibili nel log');
+  assert.match(sano[0], /niente da riscrivere/);
+
+  // Offload riuscito: parla il report delle HEAD, non la copertura.
+  assert.deepEqual(formatOffloadCoverageReport({ cdnRefCount: 3, sameOriginFiles: [] }), []);
+});
+
+test('publish-article-fast.mjs raccoglie anche i same-origin superstiti', () => {
+  const src = fs.readFileSync(path.join(ROOT, 'scripts/publish-article-fast.mjs'), 'utf-8');
+  assert.ok(
+    src.includes('hasSameOriginAssetRef') && src.includes('formatOffloadCoverageReport'),
+    'lo step 7b non distingue piu\' un offload fallito da «niente da riscrivere» (#817)',
+  );
+});
+
+// ═══════════════════════════════════════════════════════════════════════════
+// #817 item 2 — un tetto sulle HEAD, e il tetto si vede
+// ═══════════════════════════════════════════════════════════════════════════
+
+test('verifyCdnAssetRefs si ferma al tetto di URL e marca il resto skipped', async () => {
+  const seen = [];
+  const fetchImpl = async (url) => {
+    seen.push(url);
+    return { ok: true, status: 200 };
+  };
+  const urls = Array.from({ length: 5 }, (_, i) => `${CDN}/assets/a${i}.js`);
+  const res = await verifyCdnAssetRefs({ urls, fetchImpl, maxUrls: 2 });
+  assert.equal(seen.length, 2, 'il tetto non ha fermato le richieste: il costo peggiore resta non pinnato');
+  assert.deepEqual(
+    res.map((r) => r.state),
+    ['present', 'present', 'skipped', 'skipped', 'skipped'],
+  );
+  assert.match(res[2].error, /tetto di 2 URL/);
+});
+
+test('verifyCdnAssetRefs si ferma al budget di tempo (CDN che pende)', async () => {
+  let clock = 0;
+  const fetchImpl = async () => {
+    clock += 8000; // ogni HEAD costa un timeout intero
+    return { ok: true, status: 200 };
+  };
+  const urls = Array.from({ length: 10 }, (_, i) => `${CDN}/assets/a${i}.js`);
+  const res = await verifyCdnAssetRefs({ urls, fetchImpl, budgetMs: 20000, now: () => clock });
+  const checked = res.filter((r) => r.state !== 'skipped');
+  assert.equal(checked.length, 3, 'senza budget la verifica sarebbe costata 10 timeout in serie');
+  assert.match(res[3].error, /budget di 20000ms/);
+});
+
+test('formatCdnAssetReport non conta gli skipped come verificati', () => {
+  const lines = formatCdnAssetReport([
+    { url: `${CDN}/assets/ok.js`, state: 'present', status: 200, error: null },
+    { url: `${CDN}/assets/mai-guardato.js`, state: 'skipped', status: null, error: 'tetto di 1 URL raggiunto' },
+  ]);
+  assert.ok(
+    lines.some((l) => /1 asset CDN distinti verificati/.test(l)),
+    'lo skipped e\' finito dentro il totale dei verificati: un URL non guardato si legge come guardato',
+  );
+  assert.ok(lines.some((l) => /1 non guardati \(tetto\)/.test(l)));
+  assert.equal(
+    lines.filter((l) => l.startsWith('::warning::')).length,
+    0,
+    'uno skipped non e\' un difetto del CDN, non deve avvisare',
+  );
+});
+
+test('l\'alfabeto delle estensioni ha UNA sorgente (AGENTS.md #6)', () => {
+  const src = fs.readFileSync(path.join(ROOT, 'scripts/lib/cdn-asset-existence.mjs'), 'utf-8');
+  assert.ok(
+    src.includes('ASSET_EXT_ALTERNATION'),
+    'l\'alfabeto e\' tornato a essere ricopiato: se drifta rispetto all\'offload, ' +
+      'un URL riscritto smette di essere verificato senza che nulla lo dica',
+  );
+  // e la sorgente unica copre davvero cio' che il rewrite produce
+  for (const ext of ['js', 'css', 'woff2', 'json']) {
+    assert.ok(new RegExp(`\\b${ext}\\b`).test(ASSET_EXT_ALTERNATION.replace(/\|/g, ' ')));
+    assert.deepEqual(collectCdnAssetRefs(`<x href="${CDN}/assets/f.${ext}">`, CDN), [`${CDN}/assets/f.${ext}`]);
+  }
 });

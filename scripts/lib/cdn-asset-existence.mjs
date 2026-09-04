@@ -86,7 +86,10 @@ export function collectCdnAssetRefs(html, cdnBase) {
   // un URL che non matcha qui semplicemente non viene verificato.
   const re = new RegExp(
     base.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') +
-      `/assets/([^\"'\\s)?]+?\\.(?:${ASSET_EXT_ALTERNATION}))`,
+      // `(?![A-Za-z0-9])` chiude l'estensione: senza, il ramo `js`
+      // dell'alternanza matcha il prefisso di `f.json` e la HEAD partirebbe
+      // verso `f.js` — un URL che nessuno serve, cioe' un falso `missing`.
+      `/assets/([^\"'\\s)?]+?\\.(?:${ASSET_EXT_ALTERNATION})(?![A-Za-z0-9]))`,
     'g',
   );
   const out = [];

@@ -91,11 +91,6 @@ function reportAtExit(dir, err) {
   });
 }
 
-/** I teardown falliti finora, per i test di questo modulo. Non svuota. */
-export function tempTreeLeaks() {
-  return leaks.map(({ dir, err }) => ({ dir, code: err.code || null, message: err.message }));
-}
-
 /**
  * `rmSync(dir, { recursive, force })` ritentato dall'inizio finche' l'errore e'
  * transitorio. Backoff lineare: 50, 100, ... ms, ~1.8s in totale con gli 8
@@ -108,16 +103,20 @@ export function tempTreeLeaks() {
  * `exitCode = 1` — il verdetto non si perde, l'asserzione nemmeno.
  *
  * @param {string} dir
- * @param {{attempts?: number, delayMs?: number, rmImpl?: (dir: string, opts: object) => void}} [opts]
+ * `rmImpl` e `onFailure` esistono per i test di questo modulo: registrare il
+ * fallimento nel registro globale renderebbe rosso il file che lo verifica.
+ *
+ * @param {{attempts?: number, delayMs?: number, rmImpl?: (dir: string, opts: object) => void,
+ *          onFailure?: (dir: string, err: Error) => void}} [opts]
  */
-export function rmTempTree(dir, { attempts = 8, delayMs = 50, rmImpl = rmSync } = {}) {
+export function rmTempTree(dir, { attempts = 8, delayMs = 50, rmImpl = rmSync, onFailure = reportAtExit } = {}) {
   for (let i = 1; ; i++) {
     try {
       rmImpl(dir, { recursive: true, force: true });
       return;
     } catch (err) {
       if (i >= attempts || !TRANSIENT.has(err.code)) {
-        reportAtExit(dir, err);
+        onFailure(dir, err);
         return;
       }
       sleepSync(delayMs * i);
