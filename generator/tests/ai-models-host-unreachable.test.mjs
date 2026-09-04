@@ -523,3 +523,121 @@ describe('_callGitHub multi-PAT e il verdetto sull\'host', () => {
     assert.equal(getStats().activeCooldowns.github, undefined, 'un 429 di un account non deve congelare il provider');
   });
 });
+
+/**
+ * ── UNA CAUSA DI COOLDOWN SI PROMUOVE, NON SI RETROCEDE (#787) ─────────────
+ *
+ * `cooldownProvider` viene chiamata da due posti con due cause diverse — il
+ * 429 e l'host irraggiungibile — e NON in un ordine garantito: dentro lo
+ * stesso modello, il primo tentativo puo' prendere un 429 (che apre il
+ * cooldown e ritenta) e il secondo trovare l'host morto.
+ *
+ * Il ramo di #475 usciva su `if (!isProviderCoolingDown(provider))`, cioe'
+ * proprio quando la causa era gia' scritta — e restava quella del 429. La
+ * frase che i fratelli lasciano in `errors` e' un VOTO: `cooling down` sta nel
+ * vocabolario transitorio di `classifyExhaustionCause`, e con 12 id GitHub in
+ * catena un host definitivamente morto tornava a votare «riprova domani».
+ * Esito: `create-article.mjs` differisce, exit 0, run verde, nessun articolo,
+ * nessun alert — esattamente cio' che il round 2 di #767 esisteva per evitare.
+ */
+describe('promozione della causa del cooldown (#787)', () => {
+  // Tutti i PAT aggiuntivi vanno tolti, non solo il #2: con piu' di
+  // un'identita' il 429 NON apre il cooldown (`_suppressExhaustionMark`,
+  // la quota e' dell'account, non del provider) e lo scenario che questo
+  // blocco misura non si formerebbe affatto. Il runner CI ne ha impostati
+  // due, quindi senza questa riga il test passerebbe anche senza la fix.
+  const ENV_KEYS = [
+    'AI_MODELS_FORCE_CHAIN', 'GH_MODELS_PAT', 'AI_MODELS_PREFER',
+    ...Array.from({ length: 8 }, (_, i) => `GH_MODELS_PAT_${i + 2}`),
+  ];
+  let envBackup = {};
+  let realFetch;
+  let ghCalls;
+
+  beforeEach(() => {
+    envBackup = Object.fromEntries(ENV_KEYS.map((k) => [k, process.env[k]]));
+    for (const k of ENV_KEYS) delete process.env[k];
+    process.env.GH_MODELS_PAT = 'test-pat';
+    // Due id GitHub: il secondo e' il fratello che eredita la causa del primo.
+    process.env.AI_MODELS_FORCE_CHAIN = 'gpt-4o-mini,gpt-4.1-mini';
+    ghCalls = 0;
+    realFetch = globalThis.fetch;
+    resetState();
+  });
+
+  afterEach(() => {
+    globalThis.fetch = realFetch;
+    for (const k of ENV_KEYS) {
+      if (envBackup[k] === undefined) delete process.env[k];
+      else process.env[k] = envBackup[k];
+    }
+    resetState();
+  });
+
+  it('un 429 seguito da un host morto fa votare i fratelli PERSISTENTE', async () => {
+    globalThis.fetch = async (url) => {
+      if (!String(url).includes('models.inference.ai.azure.com')) throw undiciFetchFailed('ENOTFOUND');
+      ghCalls += 1;
+      // 1° tentativo: 429 → apre il cooldown del provider con causa transitoria
+      // e ritenta DENTRO lo stesso modello (nessun re-check pre-flight).
+      if (ghCalls === 1) return new Response('rate limit exceeded', { status: 429 });
+      // 2° tentativo: l'host non accetta piu' connessioni.
+      throw undiciFetchFailed('ENOTFOUND');
+    };
+
+    const err = await callLLM([{ role: 'user', content: 'x' }], { maxRetriesPerModel: 2, backoffMs: 1, timeout: 5000 })
+      .then(() => null, (e) => e);
+
+    assert.ok(err, 'la catena deve fallire');
+    assert.equal(ghCalls, 2, `attesi due tentativi sul primo id e nessuno sul fratello, visti ${ghCalls}`);
+    assert.ok(getStats().activeCooldowns.github > 0, `atteso il cooldown del provider: ${JSON.stringify(getStats().activeCooldowns)}`);
+    // La riga del fratello nomina la causa NUOVA, non quella con cui il
+    // cooldown era stato aperto.
+    assert.match(err.message, /skipped — provider github unreachable \(ENOTFOUND\), non-retryable/);
+    assert.doesNotMatch(err.message, /skipped — provider github cooling down/, 'la causa del 429 non deve sopravvivere all\'host morto');
+    assert.equal(err.exhaustionBreakdown.transient, 0, `nessun voto transitorio atteso: ${err.message}`);
+    assert.ok(err.exhaustionBreakdown.persistent >= 1, `atteso almeno un voto persistente: ${JSON.stringify(err.exhaustionBreakdown)}`);
+    assert.equal(err.transientExhaustion, false, 'una run senza articolo su un host morto non deve essere verde');
+  });
+
+  // Il verso opposto della stessa regola. Le due cause non arrivano solo in
+  // sequenza: le chiamate a `callLLM` corrono in parallelo, e un 429 partito
+  // PRIMA che l'host morisse puo' atterrare DOPO. Il pre-flight non lo ferma —
+  // il fratello aveva gia' superato il controllo del cooldown quando e' stato
+  // lanciato. Senza l'ordine di gravita', quel 429 riscriverebbe la causa in
+  // `cooling down (rate-limited)` e i fratelli successivi tornerebbero a
+  // votare transitorio su un host che non risponde.
+  it('un 429 atterrato dopo non retrocede la causa a transitoria', async () => {
+    delete process.env.AI_MODELS_FORCE_CHAIN;
+    let releaseLate429;
+    const late429 = new Promise((resolve) => { releaseLate429 = resolve; });
+    globalThis.fetch = async (url, init) => {
+      if (!String(url).includes('models.inference.ai.azure.com')) throw undiciFetchFailed('ENOTFOUND');
+      ghCalls += 1;
+      if (String(init?.body || '').includes('gpt-4o-mini')) throw undiciFetchFailed('ENOTFOUND');
+      await late429;
+      return new Response('rate limit exceeded', { status: 429 });
+    };
+
+    const opts = { maxRetriesPerModel: 2, backoffMs: 1, timeout: 5000 };
+    // Il 429 e' in volo per primo ma resta appeso al gate.
+    const rateLimited = callLLM([{ role: 'user', content: 'x' }], { ...opts, chain: ['gpt-4.1-mini'] })
+      .then(() => null, (e) => e);
+    // L'host muore mentre l'altro aspetta: la causa persistente viene scritta.
+    const unreachable = await callLLM([{ role: 'user', content: 'x' }], { ...opts, chain: ['gpt-4o-mini'] })
+      .then(() => null, (e) => e);
+    assert.ok(unreachable, 'la chiamata sull\'host morto deve fallire');
+    releaseLate429();
+    assert.ok(await rateLimited, 'anche la chiamata rate-limited deve fallire');
+
+    // Un terzo fratello, dopo entrambe: la causa che legge deve essere ancora
+    // quella persistente.
+    const later = await callLLM([{ role: 'user', content: 'x' }], { ...opts, chain: ['gpt-4o'] })
+      .then(() => null, (e) => e);
+
+    assert.ok(later, 'la catena deve fallire');
+    assert.match(later.message, /skipped — provider github unreachable \(ENOTFOUND\), non-retryable/);
+    assert.doesNotMatch(later.message, /cooling down/, 'il 429 tardivo non deve riscrivere la causa');
+    assert.equal(later.transientExhaustion, false, 'la causa persistente deve reggere');
+  });
+});
