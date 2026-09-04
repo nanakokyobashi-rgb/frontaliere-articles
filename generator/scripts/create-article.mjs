@@ -148,7 +148,7 @@ import { JSON_QUOTE_SAFETY_RULE_IT, describeJsonParseError, describeRawForDiagno
 // modulo puro perche' le gate del generatore girano `node --test` senza `npm ci`
 // e non possono importare QUESTO file: cosi' il test esegue lo stesso oggetto
 // codice della produzione invece di una copia. Vedi l'intestazione del modulo.
-import { REQUIRED_IT_BODY_FIELDS, BODY_ONLY_FIELDS, META_ONLY_FIELDS, normalizeItalianContentFromPayload, classifyBody2Payload, isTopicGateAbortVerdict, resolveBody2Validation, recoverMisplacedFaq } from './lib/body2-payload-verdict.mjs';
+import { REQUIRED_IT_BODY_FIELDS, BODY_ONLY_FIELDS, META_ONLY_FIELDS, normalizeItalianContentFromPayload, classifyBody2Payload, isTopicGateAbortVerdict, resolveBody2Validation, recoverMisplacedFaq, hasUsableContentText } from './lib/body2-payload-verdict.mjs';
 import { describePayloadRejection } from './lib/llm-payload-diagnostics.mjs';
 import {
   factCheckFingerprint,
@@ -8497,13 +8497,31 @@ Rispondi SOLO con JSON valido, senza markdown.` },
       ? _bodyContentDiretto : {};
     const _bodyNormalizzato = normalizeItalianContentFromPayload(bodyData, primaryLocale, BODY_ONLY_FIELDS) || {};
     const bodyContent = { ..._bodyDirettoOggetto };
+    //
+    // «IL RAW VINCE» VUOL DIRE «IL RAW PORTA CONTENUTO», non «il RAW e' non
+    // vuoto». La stringa letterale `"null"` e' la serializzazione sbagliata
+    // del `null` JSON che il payload di abort di REGOLA #0 dichiara per quel
+    // campo, e il valle la scarta gia' (`hasUsableContentText`/
+    // `isLiteralNullString`, body2-payload-verdict.mjs). Con un test di vuoto
+    // NUDO (`raw.trim()`) il RAW «null» vinceva qui, il blocco normalizzato —
+    // che quel filtro lo applica — non veniva mai guardato, e l'articolo
+    // usciva con un paragrafo il cui testo e' `null`: gli altri due body
+    // portavano `articolo.length` oltre i 500, `validateItalianPayload` vedeva
+    // `body1` non vuoto, e il pezzo arrivava a `content/` e a `dist/api/`
+    // senza che nulla fallisse. Il predicato e' LETTERALMENTE quello del
+    // valle, non una riga che gli somiglia (vedi `isTopicGateAbortVerdict`
+    // qui sotto, stessa scelta).
     for (const k of BODY_ONLY_FIELDS) {
-      const raw = bodyContent[k];
-      if (typeof raw === 'string' && raw.trim()) continue;
-      if (typeof _bodyNormalizzato[k] === 'string' && _bodyNormalizzato[k]) bodyContent[k] = _bodyNormalizzato[k];
+      if (hasUsableContentText(bodyContent[k])) continue;
+      if (typeof _bodyNormalizzato[k] === 'string' && _bodyNormalizzato[k]) { bodyContent[k] = _bodyNormalizzato[k]; continue; }
+      // Nessuna delle tre forme porta contenuto per questo campo: il RAW
+      // `"null"` non va lasciato in piedi, o `validateItalianPayload` lo
+      // conterebbe come campo presente e pubblicherebbe il paragrafo `null`
+      // invece di rigenerare.
+      if (typeof bodyContent[k] === 'string') bodyContent[k] = '';
     }
     const articolo = [bodyContent.body1, bodyContent.body2, bodyContent.body3]
-      .filter((x) => typeof x === 'string' && x.trim()).join('\n\n');
+      .filter(hasUsableContentText).join('\n\n');
     const _abortDichiarato = bodyData?.abort_topical_relevance === true;
     const _corpoUsabile = articolo.length >= 500;
     // ALLINEARE IL FLAG NON BASTA: va allineato anche il PREDICATO DI
