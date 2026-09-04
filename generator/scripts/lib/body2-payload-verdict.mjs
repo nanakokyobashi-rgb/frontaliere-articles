@@ -114,8 +114,23 @@ function stripOneWrappingQuotePair(value) {
   return value;
 }
 
-function isLiteralNullString(value) {
-  return LITERAL_NULL_STRING_RE.test(value) || LITERAL_NULL_STRING_RE.test(stripOneWrappingQuotePair(value));
+export function isLiteralNullString(value) {
+  if (typeof value !== 'string') return false;
+  const trimmed = value.trim();
+  return LITERAL_NULL_STRING_RE.test(trimmed) || LITERAL_NULL_STRING_RE.test(stripOneWrappingQuotePair(trimmed));
+}
+
+/**
+ * Testo di contenuto UTILIZZABILE: stringa non vuota dopo il trim che non sia
+ * la serializzazione letterale di `null`. E' il predicato con cui
+ * `normalizeItalianContentFromPayload` scarta gia' `"null"`, esportato perche'
+ * i gate A MONTE lo condividano invece di riscrivere un `value.trim()` nudo —
+ * che la stringa `"null"` supera. Un test di vuoto nudo sul percorso di
+ * assemblaggio dello split faceva vincere il RAW `"null"` sul blocco
+ * normalizzato e pubblicava un paragrafo il cui testo e' `null`.
+ */
+export function hasUsableContentText(value) {
+  return typeof value === 'string' && value.trim().length > 0 && !isLiteralNullString(value);
 }
 
 /**
@@ -289,8 +304,7 @@ export function normalizeItalianContentFromPayload(payload, locale = 'it', field
 export function isPresentFaq(value) {
   if (value == null || value === '') return false;
   if (typeof value === 'string') {
-    const trimmed = value.trim();
-    return trimmed.length > 0 && !isLiteralNullString(trimmed);
+    return hasUsableContentText(value);
   }
   if (Array.isArray(value)) return value.length > 0;
   if (typeof value === 'object') return Object.keys(value).length > 0;

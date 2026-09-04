@@ -7,8 +7,9 @@
  * fallisce (o resta troncato), il codice eseguiva incondizionatamente
  * `data.content[locale][field] = itValue` con `itValue = itContent[field]`,
  * senza controllare che fosse non-vuoto. Il ramo missing-field poco sopra
- * valida solo il caso "campo assente" (`if (data.content[locale][field])
- * continue;`), quindi questo loop parte già da un campo non-vuoto — può
+ * valida solo il caso "campo assente" (`if (hasUsableContentText(data.content
+ * [locale][field])) continue;`), quindi questo loop parte già da un campo
+ * con contenuto utilizzabile — può
  * arrivare al fallback con `itValue` vuoto/assente senza che nulla l'abbia
  * intercettato prima. Risultato: il fallback sostituiva un body tradotto
  * troncato con una stringa vuota/undefined, peggiorando la superficie
@@ -30,6 +31,11 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+// I predicati sono quelli VERI, non una copia: `translatedStringOrNull` e'
+// esattamente la funzione che il loop ritagliato riceve in produzione, e una
+// copia locale nel test divergerebbe in silenzio dal fix (AGENTS.md #6).
+import { translatedStringOrNull } from '../scripts/lib/article-free-mt.mjs';
+import { hasUsableContentText } from '../scripts/lib/body2-payload-verdict.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const CREATE_ARTICLE = path.resolve(HERE, '../scripts/create-article.mjs');
@@ -84,13 +90,12 @@ const MISSING_FIELD_LOOP_SRC = extractMissingFieldLoop();
  * (#705). `warnings` raccoglie i messaggi di `console.warn` per assert.
  */
 async function runMissingFieldLoop({ data, itContent, callWithRetry, detectTruncation, warnings = [] }) {
-  const translatedStringOrNull = (v) => (typeof v === 'string' && v.trim() ? v : null);
   const capturingConsole = { error: () => {}, warn: (msg) => warnings.push(msg) };
   const fn = new Function(
-    'data', 'itContent', 'callWithRetry', 'translatedStringOrNull', 'detectTruncation', 'console',
+    'data', 'itContent', 'callWithRetry', 'translatedStringOrNull', 'hasUsableContentText', 'detectTruncation', 'console',
     `return (async () => { ${MISSING_FIELD_LOOP_SRC} })();`,
   );
-  await fn(data, itContent, callWithRetry, translatedStringOrNull, detectTruncation || (() => []), capturingConsole);
+  await fn(data, itContent, callWithRetry, translatedStringOrNull, hasUsableContentText, detectTruncation || (() => []), capturingConsole);
 }
 
 /**
@@ -114,7 +119,6 @@ const TRANSLATION_CHUNK_THRESHOLD = extractTranslationChunkThreshold();
  * `countWords`, `console`).
  */
 async function runTruncationRetryLoop({ data, itContent, detectTruncation, callWithRetry, translateInChunks, warnings = [] }) {
-  const translatedStringOrNull = (v) => (typeof v === 'string' && v.trim() ? v : null);
   const sanitizeBodyText = (v) => v;
   const countWords = (s) => String(s).split(/\s+/).filter(Boolean).length;
   const capturingConsole = { error: () => {}, warn: (msg) => warnings.push(msg) };
@@ -288,4 +292,53 @@ test('ramo missing-field: fallback IT esso stesso troncato — warning esplicito
     warnings.some((w) => w.includes('ESSO STESSO troncato')),
     `deve emettere un warning esplicito quando anche il fallback IT (campo mancante) risulta troncato — warnings raccolti: ${JSON.stringify(warnings)}`,
   );
+});
+
+// ── La stringa letterale "null" nel percorso di TRADUZIONE (#799) ───────────
+//
+// Gemello vivo del difetto che #799 chiude sul merge dello split: il gate
+// «campo tradotto presente» era una truthiness nuda, e `"null"` — la
+// serializzazione che `haiku` produce quando decide di non rispondere — la
+// supera. A differenza del percorso IT qui NON c'e' nessun
+// `normalizeItalianContentFromPayload` a valle (`validateItalianPayload` gira
+// solo su `content.it`): il campo sarebbe finito in `content/`, in
+// `dist/api/meta-de.json` e nel feed RSS `de` come paragrafo il cui testo e'
+// `null`.
+
+test('ramo missing-field: body1 tradotto = "null" viene letto come MANCANTE e ritradotto (#799)', async () => {
+  const complete = { title: 'T', excerpt: 'E', body1: 'B1', body2: 'B2', body3: 'B3' };
+  const data = { content: { en: { ...complete }, de: { ...complete, body1: 'null' }, fr: { ...complete } } };
+  const itContent = { body1: 'Corpo italiano reale.', title: 'T', excerpt: 'E', body2: 'B2', body3: 'B3' };
+  const calls = [];
+  const callWithRetry = async (_prompt, _tokens, label) => {
+    calls.push(label);
+    return { body1: 'Echter deutscher Text.' };
+  };
+
+  await runMissingFieldLoop({ data, itContent, callWithRetry });
+
+  assert.deepEqual(calls, ['de:body1-missing-retry'], 'il retry mirato deve partire proprio su de:body1');
+  assert.equal(data.content.de.body1, 'Echter deutscher Text.');
+});
+
+test('ramo missing-field: "null" doppiamente serializzato e maiuscolo — stesso esito, fallback IT quando il retry non produce nulla (#799)', async () => {
+  const complete = { title: 'T', excerpt: 'E', body1: 'B1', body2: 'B2', body3: 'B3' };
+  const data = { content: { en: { ...complete, excerpt: '"null"' }, de: { ...complete, body3: 'NULL' }, fr: { ...complete } } };
+  const itContent = { body1: 'B1it', title: 'Tit', excerpt: 'Excerpt italiano.', body2: 'B2it', body3: 'Body3 italiano.' };
+  // Il retry restituisce a sua volta `"null"`: `translatedStringOrNull` lo
+  // rifiuta, quindi si cade sul valore italiano invece di pubblicare `null`.
+  const callWithRetry = async () => ({ excerpt: 'null', body3: 'null' });
+
+  await runMissingFieldLoop({ data, itContent, callWithRetry });
+
+  assert.equal(data.content.en.excerpt, 'Excerpt italiano.');
+  assert.equal(data.content.de.body3, 'Body3 italiano.');
+});
+
+test('translatedStringOrNull: rifiuta la serializzazione letterale di null, non il testo reale', () => {
+  for (const v of ['null', 'NULL', ' null ', '"null"', "'null'", '', '   ', null, undefined, {}, ['x']]) {
+    assert.equal(translatedStringOrNull(v), null, `deve rifiutare ${JSON.stringify(v)}`);
+  }
+  assert.equal(translatedStringOrNull('  Testo reale.  '), '  Testo reale.  ', 'il testo reale passa BYTE PER BYTE, senza trim');
+  assert.equal(translatedStringOrNull('"Nullo" e\' un cognome'), '"Nullo" e\' un cognome');
 });
