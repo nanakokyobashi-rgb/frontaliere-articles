@@ -1,5 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/economia/1943310/ubs-sessione-proposta-lex-fondi": "lex-ubs-proposta-compromesso",
   "https://www.laregione.ch/svizzera/svizzera/1943313/credito-commissione-cps-n-munizioni-propone-difesa": "commissione-propone-500-milioni-munizioni",
   "https://www.swissinfo.ch/ita/settore-agricolo-segnala-danni-per-oltre-19-milioni/91881144": "settore-agricolo-danni-19-milioni",
   "https://www.rsi.ch/s/3946014": "viaggi-e-consumi-senza-rinunce",
@@ -1793,6 +1792,11 @@
   "https://www.tio.ch/newsblog/valute-e-frontiere/1947998/franco-euro-cosa-dicono-i-dati-e-quali-prospettive-si-aprono-per-i-prossimi-mesi": {
     "articleId": "franco-euro-analisi-cambio-dati",
     "ts": "2026-09-05T06:06:30.843Z",
+    "keyForm": 2
+  },
+  "https://www.admin.ch/it/newnsb/t5pmx9db2vpc": {
+    "articleId": "osce-conferenza-berna",
+    "ts": "2026-09-05T10:04:57.884Z",
     "keyForm": 2
   }
 }
