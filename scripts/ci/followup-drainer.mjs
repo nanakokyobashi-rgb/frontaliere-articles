@@ -244,7 +244,8 @@ const SCAN_ROTATION_PERIOD_MS = Number(process.env.FOLLOWUP_SCAN_ROTATION_MS || 
 // di consumare i tentativi residui (3 run identiche → 1). Esclusi di proposito:
 // `overlap-skip`/`pr-already-open` (transienti: la PR bloccante può mergiare →
 // ri-tentabile) e l'ASSENZA di marker (run crashata/max_turns davvero orfana →
-// rescue normale). `pr-created` non arriva qui: `hasFixPR` lo intercetta prima.
+// rescue normale). `pr-created` ha una strada sua (`DELIVERED`, sotto): non e
+// un verdetto fermo, ma nemmeno una run morta.
 // `skip-duplicate-diagnosis` (#5288): stesso verdetto fermo di
 // `blocked-workflows-scope`, da cui è stato separato solo per non far salire il
 // bucket dell'harvester quando il guard FUNZIONA (vedi check-workflows-scope.mjs,
@@ -403,6 +404,36 @@ export function verdictExitDecision(outcome, { hasPR = false, noAutoclose = fals
 // Questo è lo stato assorbente lato fixer, gemello di quello del grafo di
 // recupero PR fixato in #5099: un verdetto che nessun predicato copriva.
 export const ZERO_WORK = new Set(['rate-limited']);
+
+// Esiti DELIVERED: la run è arrivata IN FONDO e ha consegnato una PR. È il
+// percorso di SUCCESSO del fixer, e fino a qui nessun predicato lo copriva.
+//
+// L'assunzione che lo escludeva è scritta due blocchi più su — «`pr-created`
+// non arriva qui: `hasFixPR` lo intercetta prima» — ed è falsa appena la PR
+// esce dallo stato `open`: `hasFixPR` interroga `gh pr list --state open`
+// (riga ~1643), quindi al merge torna `false`. Se la issue è ancora aperta —
+// ed è il caso NORMALE, non l'eccezione: ISSUES.md impone `Refs #<n>` e non
+// `Closes` sia per le issue aggregate sia per i fix provabili solo da una run
+// su `main` (`awaiting-production-proof`) — il rescue la vede come
+// «`agent:fix` vecchio, nessuna PR, nessun verdetto utile» e cade nel ramo
+// finale, che il commento accanto descrive come «run davvero morta, nessun
+// verdetto»: ri-accodata **consumando un tentativo**.
+//
+// Misurato su #733 (corpus, 2026-09-05): due cicli consecutivi conclusi con
+// `pr-created` e PR MERGIATA (#772 il 09-04T09:56, #906 il 09-05T12:54), e
+// dopo ciascuno un RE-QUEUE con `fu-attempt`++ — 09-04T10:32 → `fu-attempt:1`,
+// 09-05T13:13 → `fu-attempt:2`. Al terzo ciclo riuscito la issue tocca
+// `MAX_ATTEMPTS` e viene parcheggiata `fu-parked`, cioè esce dalla coda per
+// aver funzionato tre volte. Il contatore dei tentativi misura i FALLIMENTI:
+// spenderlo su una consegna riuscita è la stessa confusione già corretta per
+// ZERO_WORK («un tentativo si consuma quando l'agent PROVA»), un passo più in
+// là — qui l'agent ha provato E consegnato.
+//
+// Ri-accodare senza consumare tentativi non è un loop aperto: il ciclo
+// successivo o trova l'item seguente (altra PR, altro `pr-created`) o non
+// trova più niente da fare ed emette `already-fixed`/`no-root-cause`, che sono
+// `NON_RETRYABLE` → park. Il bound è il verdetto del fixer, non il contatore.
+export const DELIVERED = new Set(['pr-created']);
 
 const FIX_OUTCOME_RE = /<!--\s*FIX_OUTCOME:\s*([a-z0-9-]+)\s*-->/i;
 // I fallback deterministici del backstop (issue-fix.yml "post-step
@@ -1750,7 +1781,7 @@ export const CRAWLER_MAX_ATTEMPTS = Number(process.env.FOLLOWUP_CRAWLER_MAX_ATTE
  * @param {{outcome: string|null, ageMin: number, attempt?: number, hasPR?: boolean,
  *          quotaBackoffActive?: boolean, settleMin?: number, orphanMinAgeMin?: number,
  *          maxAttempts?: number}} args
- * @returns {{action: 'skip'|'settling'|'hold-quota'|'requeue'|'requeue-zero-work'|'park-max-turns'|'park-verdict'|'park-attempts', nextAttempt: number, reason: string}}
+ * @returns {{action: 'skip'|'settling'|'hold-quota'|'requeue'|'requeue-zero-work'|'requeue-delivered'|'park-max-turns'|'park-verdict'|'park-attempts', nextAttempt: number, reason: string}}
  */
 export function crawlerFixDecision({
   outcome,
@@ -1774,6 +1805,11 @@ export function crawlerFixDecision({
       : keep('requeue-zero-work', `${outcome}, finestra quota chiusa (tentativo NON consumato)`);
   }
   if (outcome && NON_RETRYABLE.has(outcome)) return keep('park-verdict', `verdetto non-ri-tentabile: ${outcome}`);
+  // Gemello del ramo DELIVERED del rescue queue-managed: `hasPR` sopra guarda
+  // solo le PR APERTE, quindi al merge una run riuscita ricadeva nel ramo
+  // finale «nessun verdetto (run cancellata-in-coda / crashata / mai partita)»
+  // e consumava un tentativo. Ri-arma senza consumarlo.
+  if (outcome && DELIVERED.has(outcome)) return keep('requeue-delivered', `${outcome}, PR non più aperta (tentativo NON consumato)`);
   if (isSettlingPromotion({ outcome: outcome ?? null, ageMin, settleMin })) return keep('settling', 'promozione fresca, run non ancora visibile');
   if (ageMin < orphanMinAgeMin) return keep('skip', `senza verdetto ma giovane (${Math.round(ageMin)}min < ${orphanMinAgeMin}min)`);
   const nextAttempt = attempt + 1;
@@ -2496,6 +2532,18 @@ export function runDrain() {
       edit(iss.number, { add: [LBL_PARKED], remove: [LBL_FIX, LBL_QUEUED] });
       continue;
     }
+    if (outcome && DELIVERED.has(outcome)) {
+      // Run conclusa CON una PR, e la PR non è più aperta (`hasPR` sopra è
+      // false → mergiata o chiusa). La issue è ancora aperta perché la PR ha
+      // usato `Refs` e non `Closes`: aggregata (un item per ciclo) o
+      // `awaiting-production-proof`. Il ciclo successivo è legittimo — è il
+      // modo in cui un'aggregata converge — ma NON deve costare un tentativo:
+      // `fu-attempt` conta i fallimenti, e tre consegne riuscite parcheggiavano
+      // la issue (#733, due merge e `fu-attempt:2`).
+      console.log(`RE-QUEUE #${iss.number} (${outcome}, PR non più aperta) → tentativo NON consumato (la run ha consegnato)`);
+      edit(iss.number, { add: [LBL_QUEUED], remove: [LBL_FIX] });
+      continue;
+    }
     // error_max_turns = turn-budget esaurito in modo DETERMINISTICO: ri-tentare
     // lo stesso item lo riproduce a parità di turni. Con il circuit-breaker
     // (is_aggregate un item alla volta) e il cap alzato (50 turni high / 40 normal),
@@ -2575,6 +2623,11 @@ export function runDrain() {
     }
     if (d.action === 'requeue-zero-work') {
       console.log(`RE-ARM CRAWLER ${tag} (${d.reason}) → agent:fix-queued, il DRAIN lo ripromuove a slot libero`);
+      edit(iss.number, { add: [LBL_QUEUED, 'fu-prio:high'], remove: [LBL_FIX] });
+      continue;
+    }
+    if (d.action === 'requeue-delivered') {
+      console.log(`RE-ARM CRAWLER ${tag} (${d.reason}) → agent:fix-queued, tentativo NON consumato`);
       edit(iss.number, { add: [LBL_QUEUED, 'fu-prio:high'], remove: [LBL_FIX] });
       continue;
     }
