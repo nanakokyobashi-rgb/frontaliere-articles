@@ -58,12 +58,49 @@ const CLOSED_LABEL = 'fu-resolved-auto';
 const KEEP_OPEN_LABELS = new Set(['pinned', 'keep-open', 'revenue', 'tracker', 'do-not-close']);
 
 /**
+ * Item enumerati STRUTTURALMENTE nel body: `## 1.` / `## 2.` (>=2 sezioni numerate) oppure
+ * `- **Titolo**` / `- [ ] **Titolo**` (>=2 bullet top-level con lead in grassetto).
+ *
+ * Perche' esiste (#568): i rilevatori di aggregati leggevano SOLO il titolo — un conteggio
+ * esplicito ("N items deferred", N>=2) o le parole `sweep|batch|bulk`. I follow-up
+ * multi-item che post-merge-followup.yml genera SENZA conteggio nel titolo (clausole unite
+ * da "+", item enumerati nel corpo) restavano invisibili. Misurato il 2026-09-05 su tre
+ * esempi dell'escalation #560: #374 (5 item, dichiarati tali dal fixer stesso), #505 (2) e
+ * #466 (3) davano `isAggregate` false su 3/3 e `isAvoidableAlreadyFixed` true su 3/3 —
+ * cioe' contati come burn "evitabile" dal gate dell'harvester pur essendo aggregati la cui
+ * risoluzione e' scaglionata su piu' PR, gonfiando proprio il bucket che ha innescato #560.
+ *
+ * La direzione dell'errore resta sicura in tutti i chiamanti: un falso positivo fa
+ * PROCEDERE il fixer (nessun corto-circuito), NON auto-chiudere un aggregato parziale e
+ * NON contare un burn — mai il contrario. Il conteggio esplicito nel titolo resta
+ * autoritativo e continua a corto-circuitare PRIMA di qui (#3378).
+ *
+ * DUPLICATA di proposito in `check-issue-already-resolved.mjs`, `harvest-agent-lessons.mjs`
+ * e `reconcile-followups.mjs`: i tre file sono `mode: identical` nel manifest, quindi
+ * estrarre un modulo comune e' lavoro del SITO (una de-duplicazione fatta qui viene
+ * sovrascritta al mirror successivo — stessa ragione gia' scritta nel manifest per
+ * `needs-human-prepass.mjs`). Il legame e' coperto da un test invece che da un import,
+ * che e' l'uscita prevista da AGENTS.md #6 nella forma di `ci-check-name.test.mjs`:
+ * `generator/tests/aggregate-detectors-agree.test.mjs` fallisce se una copia diverge.
+ *
+ * @param {string} body corpo della issue
+ * @returns {boolean} true se il corpo enumera >=2 item
+ */
+export function hasEnumeratedItems(body) {
+  const b = String(body || '');
+  const numberedSections = (b.match(/^#{2,4}[ \t]*\d+[.)](?=[ \t]|$)/gm) || []).length;
+  if (numberedSections >= 2) return true;
+  const boldLeadBullets = (b.match(/^[-*][ \t]+(?:\[[ xX]\][ \t]*)?\*\*/gm) || []).length;
+  return boldLeadBullets >= 2;
+}
+
+/**
  * A title like "follow-up(#X): 3 item deferred — …" with N≥2 → multi-item aggregate.
  * These never auto-close: a prose-only sub-item contributes no gating code token, so the
  * matcher's "ALL tokens present" can be true while that sub-item is still undone — closing
  * would silently drop it. Single-item follow-ups (no count, or "1 item") are eligible.
  *
- * Two detectors, OR'd:
+ * Tre detectors, OR'd:
  *   1. Numeric count `N items` with N≥2.
  *   2. Keyword fallback `sweep|batch|bulk` — a sweep enumerates many targets WITHOUT an
  *      "N items" count (e.g. "Sweep: ~30 crawlers", #1826). Without this it scores as
@@ -71,10 +108,14 @@ const KEEP_OPEN_LABELS = new Set(['pinned', 'keep-open', 'revenue', 'tracker', '
  *      silently auto-close a partially-resolved sweep, dropping the remaining targets
  *      (29 of 30). Mirrors the same fallback added to issue-fix.yml / check-issue-
  *      already-resolved.mjs (single bug class across the sibling aggregate detectors).
+ *   3. Item enumerati nel BODY (`hasEnumeratedItems`, #568) — la forma che un follow-up
+ *      multi-item prende quando il titolo non dichiara nessun conteggio.
  * @param {string} title
+ * @param {string} [body] corpo della issue: senza, un aggregato che enumera gli item nel
+ *   corpo torna eleggibile all'auto-chiusura sulla prova di UN solo item.
  * @returns {boolean}
  */
-export function isAggregateTitle(title = '') {
+export function isAggregateTitle(title = '', body = '') {
   const t = String(title);
   const m = t.match(/\b(\d+)\s+items?\b/i);
   // An explicit count is authoritative once present — trust it fully instead
@@ -84,7 +125,11 @@ export function isAggregateTitle(title = '') {
   // (e.g. "1 item deferred ... batch backfill...") is misclassified as an
   // aggregate despite explicitly saying "1 item" (#3378).
   if (m) return Number(m[1]) >= 2;
-  return /\b(?:sweep|batch|bulk)\b/i.test(t);
+  if (/\b(?:sweep|batch|bulk)\b/i.test(t)) return true;
+  // 3. Item enumerati nel BODY (#568): un follow-up multi-item senza conteggio nel titolo
+  //    scorreva qui come single-item ed era `closeEligible` — cioe' auto-chiuso sulla prova
+  //    di UN solo item, che e' esattamente il drop silenzioso che questa funzione previene.
+  return hasEnumeratedItems(body);
 }
 
 /** Count of code-punctuation marks in a token (specificity proxy). */
@@ -216,7 +261,7 @@ function main() {
     const labelNames = (iss.labels || []).map((l) => l.name);
     const hasMaybeResolved = labelNames.includes(LABEL);
     const blocked = labelNames.some((n) => KEEP_OPEN_LABELS.has(n));
-    const isAggregate = isAggregateTitle(iss.title);
+    const isAggregate = isAggregateTitle(iss.title, iss.body || '');
     const hasPriorFlag = alreadyCommented(iss.number);
     const strongEvidence = isStrongAutoCloseEvidence(evidence.map((e) => e.tok));
     const action = decideReconcileAction({
