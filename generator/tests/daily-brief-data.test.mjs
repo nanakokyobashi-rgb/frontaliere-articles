@@ -552,12 +552,21 @@ test('jobs: the format check stops at the window the guard reads', () => {
   assert.equal(flagged.reason.includes('2026-3-20'), false, 'the archive row must not be reported');
 
   // A row that cannot be placed at all cannot be excluded from the window
-  // either, so it stays a finding wherever it sits in the series.
-  const unplaceable = {
-    ...JOBS_STATS,
-    history: [{ date: 'ieri', totalJobs: 1, added: 1 }, ...JOBS_STATS.history],
-  };
-  assert.match(shapeJobs(unplaceable, { nowMs: NOW, todayIso: TODAY }).reason, /not YYYY-MM-DD/);
+  // either, so it stays a finding wherever it sits in the series. A date that
+  // does not EXIST counts as unplaceable, however well-formed it looks:
+  // `Date.UTC(2026, 12, 40)` answers 2027-02-09, which would place the row
+  // outside the window and let it past a check the scoping has to keep
+  // fail-closed inside it; and `2026-02-31` satisfies the canonical regex while
+  // the ISO parser reads it as March 3 — it would sort in February, be measured
+  // in March, and with `isoDayMs` NaN it would sail through the lag rule
+  // (`NaN > 1` is false) so the guard would answer "corpus fine" off a date
+  // nobody can have.
+  for (const date of ['ieri', '2026-13-40', '2026-13-4', '2026-02-31', '2026-00-10']) {
+    const unplaceable = { ...JOBS_STATS, history: [{ date, totalJobs: 1, added: 1 }, ...JOBS_STATS.history] };
+    const block = shapeJobs(unplaceable, { nowMs: NOW, todayIso: TODAY });
+    assert.equal(block.available, false, `${date} must not pass as a readable day`);
+    assert.match(block.reason, /not YYYY-MM-DD/, `${date} must be reported as a format finding`);
+  }
 });
 
 test('exchange: a legacy point outside the read window does not switch the block off', () => {

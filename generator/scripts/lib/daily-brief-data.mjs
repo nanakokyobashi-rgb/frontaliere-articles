@@ -129,9 +129,21 @@ function finiteOrNull(value) {
   return Number.isFinite(n) ? n : null;
 }
 
-/** UTC-midnight ms for a canonical day string, `NaN` for anything else. */
+/**
+ * UTC-midnight ms for a canonical day string, `NaN` for anything else.
+ *
+ * "Canonical" has to mean a day that EXISTS, not just the right count of
+ * digits. The ISO parser accepts `2026-02-31` and answers March 3, so such a
+ * row would sort in February and be measured in March; and where the parser
+ * does refuse (`2026-13-40`), the `NaN` used to slip through the lag rule,
+ * because `NaN > JOBS_HISTORY_MAX_LAG_DAYS` is false and the guard then
+ * answered "corpus fine" off a date that does not exist. The round-trip on
+ * `getUTCDate()` closes both.
+ */
 function isoDayMs(value) {
-  return ISO_DAY_RE.test(value ?? '') ? Date.parse(`${value}T00:00:00Z`) : NaN;
+  if (!ISO_DAY_RE.test(value ?? '')) return NaN;
+  const ms = Date.parse(`${value}T00:00:00Z`);
+  return Number.isFinite(ms) && new Date(ms).getUTCDate() === Number(value.slice(8, 10)) ? ms : NaN;
 }
 
 /**
@@ -160,7 +172,15 @@ function isoDayMs(value) {
 const LOOSE_DAY_RE = /^(\d{4})-(\d{1,2})-(\d{1,2})/;
 function placeDayMs(value) {
   const m = LOOSE_DAY_RE.exec(typeof value === 'string' ? value : '');
-  return m ? Date.UTC(Number(m[1]), Number(m[2]) - 1, Number(m[3])) : NaN;
+  if (!m) return NaN;
+  const [year, month, day] = [Number(m[1]), Number(m[2]), Number(m[3])];
+  // Out-of-range components are refused, never normalised: `Date.UTC(2026, 12, 40)`
+  // cheerfully answers 2027-02-09, which would place `2026-13-40` OUTSIDE the
+  // window and let it slip past a check the scoping has to keep fail-closed
+  // inside it. A row nobody can place stays a finding.
+  if (month < 1 || month > 12 || day < 1 || day > 31) return NaN;
+  const ms = Date.UTC(year, month - 1, day);
+  return new Date(ms).getUTCDate() === day ? ms : NaN;
 }
 
 function nonCanonicalInWindow(rows, { fromMs, toMs = Infinity }) {
@@ -169,7 +189,8 @@ function nonCanonicalInWindow(rows, { fromMs, toMs = Infinity }) {
     // history they are unreadable (and `h.date` would throw), in the exchange
     // series they carry no rate and drop out on their own.
     if (!row || typeof row !== 'object') return false;
-    if (ISO_DAY_RE.test(row.date ?? '')) return false;
+    // Readable means "a real day", not "the right number of digits".
+    if (Number.isFinite(isoDayMs(row.date))) return false;
     const placedMs = placeDayMs(row.date);
     if (!Number.isFinite(placedMs)) return true;
     return placedMs >= fromMs && placedMs < toMs;
@@ -341,7 +362,7 @@ export function shapeExchange(doc, { todayIso } = {}) {
     // below always has a real day to subtract from. Every non-canonical point
     // that could reach a verdict has already degraded above; what is left is
     // outside the window, and reading it is what the scoping decided not to do.
-    .filter((p) => Number.isFinite(p.rate) && ISO_DAY_RE.test(p.date ?? ''))
+    .filter((p) => Number.isFinite(p.rate) && Number.isFinite(isoDayMs(p.date)))
     .sort((a, b) => a.date.localeCompare(b.date));
   if (points.length < 2) return unavailable(`only ${points.length} exchange points`);
   const last = points[points.length - 1];
@@ -433,7 +454,7 @@ export function jobsCorpusFrozenReason(stats, { todayIso } = {}) {
   // already degraded above; the ones left are archive outside the window, and
   // reading them is what the scoping just decided not to do.
   const rows = history
-    .filter((h) => ISO_DAY_RE.test(h.date ?? '') && h.date < todayIso)
+    .filter((h) => Number.isFinite(isoDayMs(h.date)) && h.date < todayIso)
     .sort((a, b) => a.date.localeCompare(b.date));
   if (rows.length === 0) return null;
 
@@ -550,6 +571,15 @@ export function shapeJobs(stats, { nowMs = Date.now(), todayIso } = {}) {
  * A same-day rerun (the `workflow_dispatch` path, which rewrites today's
  * edition) inherits the streak instead of adding to it: rerunning the job is
  * not another edition.
+ *
+ * Two deliberate limits. The unit is EDITIONS, not days: only `dateIso` is
+ * compared, so a run that never reached `writeJsonAtomic` (Firestore outage,
+ * runner failure) does not advance the count, and three editions can span more
+ * than three mornings — the alarm can arrive late, never early. And a snapshot
+ * carrying no `degradedEditions` at all counts as 0, so a revert of this code
+ * or a hand-edited snapshot silently restarts every streak: the count is a
+ * cache of observations, not a ledger, and losing it costs a delay, never a
+ * false alarm.
  */
 function degradedEditions(block, previousStreak, { sameDay }) {
   if (block.available) return 0;
