@@ -29083,15 +29083,6 @@ const RAW_ARTICLES = [
  authorName: 'Marco Ferrari',
  },
  {
- id: 'courmayeur-lavora-vallese-frontaliere',
- category: 'pratico',
- date: '2026-08-11T13:20:31.436Z',
- image: '/images/blog/courmayeur-lavora-vallese-frontaliere.webp',
- hasCalculator: true,
- authorSlug: 'redazione',
- authorName: 'Redazione Frontaliere Ticino',
- },
- {
  id: 'vivere-gignod-lavorare-vallese-frontaliere',
  category: 'pratico',
  date: '2026-08-11T13:27:08.849Z',

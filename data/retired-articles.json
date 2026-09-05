@@ -18,6 +18,20 @@
       }
     },
     {
+      "id": "courmayeur-lavora-vallese-frontaliere",
+      "section": "frontaliere",
+      "winnerId": "vivere-courmayeur-e-lavorare-vallese-da-frontaliere",
+      "winnerSection": "frontaliere",
+      "retiredOn": "2026-09-05",
+      "duplicateOf": [],
+      "slugs": {
+        "it": "courmayeur-lavora-vallese-frontaliere",
+        "en": "courmayeur-work-vallese-frontalier",
+        "de": "courmayeur-arbeitet-vallese-frontalier",
+        "fr": "courmayeur-travaille-vallese-frontalier"
+      }
+    },
+    {
       "id": "effetto-domino-fallite-aziende-svizzera",
       "section": "svizzera",
       "winnerId": "fallimenti-aziende-svizzera-1994",
