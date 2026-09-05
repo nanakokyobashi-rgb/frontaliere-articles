@@ -4820,6 +4820,96 @@ function assertNoFabricatedLaborOfficeCrossLocale(data) {
   }
 }
 
+/**
+ * Gate deterministico sui body en/de/fr FINITI — BLOCCANTE (issue #5661).
+ *
+ * ── Il buco che chiude ──────────────────────────────────────────────────────
+ *
+ * `runFactualityGates()` gira allo Step 3a.0b-bis su `data.content.it` e SOLO
+ * li'. Le tre traduzioni non passano mai dal gate: al punto di ammissione
+ * girano due soli assert mirati (`assertNoFabricatedLaborOfficeCrossLocale`
+ * qui sopra e `assertNoFabricatedNormAcronyms`), che coprono due famiglie di
+ * sigle e nient'altro. Tutto il resto — troncamenti, parentesi non chiuse,
+ * grassetto non chiuso, importi dell'italiano spariti nella traduzione, falsi
+ * amici — non ha mai avuto un verdetto sulla meta' tradotta dell'articolo.
+ *
+ * L'asimmetria e' misurata, non supposta. `audit-article-factuality.mjs` sugli
+ * 871 articoli aggiunti a `origin/main` nei 14 giorni al 2026-09-05:
+ *
+ *     locale   flagged   con rilievo bloccante
+ *     it          2,8%                       0
+ *     en         45,6%                      59
+ *     de         46,7%                      32
+ *     fr         47,5%                      31
+ *
+ * 62 articoli su 871 (7,1%) sono usciti con almeno un rilievo bloccante, e
+ * tutti e 62 lo avevano SOLTANTO in en/de/fr: zero in italiano. Il gate non e'
+ * debole, e' scollegato dalla meta' dell'articolo che nessuno gli fa vedere.
+ * Il commento dentro `runFactualityGates` lo prevedeva gia' («il giorno in cui
+ * le traduzioni passeranno di qui il controllo c'e' gia'»): questa e' la
+ * chiamata che mancava, non un gate nuovo.
+ *
+ * ── Perche' qui e non dentro translateArticle() ─────────────────────────────
+ *
+ * Perche' il testo continua a essere mutato DOPO la traduzione: Step 3c (strip
+ * dei tag <a> e dei link `nav:` non validi), Step 3d (CTA e link interni
+ * iniettati), Step 3e (citazione della fonte appesa a body3). Il retry di
+ * troncamento dentro `translateArticle()` giudica un testo che non e' ancora
+ * quello che finisce su disco. Questo e' il primo istante in cui `data` E' cio'
+ * che verra' scritto, ed e' condiviso: sta accanto a
+ * `sanitizePromptPlaceholders()`, che e' gia' su ENTRAMBI i percorsi di
+ * scrittura — il flusso AI primario allo Step 3a.1, e `registerArticleFiles()`
+ * per daily-brief / events-digest / border-wait-ranking / journalist.
+ *
+ * ── Perche' segnala e blocca, e non riscrive mai ────────────────────────────
+ *
+ * Un detector collegato a una riscrittura trasforma ogni falso positivo in un
+ * danno attivo (i titoli job riscritti dal tedesco, 2026-08-10). Qui non si
+ * riscrive niente: si stampa e, sul bloccante, si rigetta. I falsi positivi di
+ * lingua sono gia' gestiti DENTRO il gate da `adjudicateAgainstItalian()`, che
+ * degrada a `major` ogni `critical` non presente anche nell'italiano — quindi
+ * un limite del riconoscimento in en/de/fr non blocca per costruzione.
+ *
+ * La chiamata e' identica a quella di `audit-article-factuality.mjs`, percio'
+ * il verdetto di questo gate e quello dell'audit retrospettivo coincidono per
+ * costruzione: l'osservatore non puo' divergere dal gate che osserva.
+ *
+ * `ARTICLE_TRANSLATION_GATE=0` lo disarma (stessa convenzione di
+ * `ARTICLE_TRANSLATE_FREE_MT`), per lasciare all'owner la leva sul volume
+ * senza un cambio di codice.
+ */
+function assertTranslationsPassFactualityGates(data) {
+  if (String(process.env.ARTICLE_TRANSLATION_GATE ?? '1') === '0') return;
+  const it = data?.content?.it;
+  if (!it) return;
+  const italianSections = { body1: it.body1 || '', body2: it.body2 || '', body3: it.body3 || '' };
+  // Senza italiano di riferimento i controlli di fedelta' non girano e il gate
+  // emette `translation-unadjudicated`: non c'e' nulla contro cui giudicare.
+  if (!Object.values(italianSections).some((s) => s.trim())) return;
+
+  const blocking = [];
+  for (const locale of ['en', 'de', 'fr']) {
+    const content = data?.content?.[locale];
+    if (!content) continue;
+    const sections = { body1: content.body1 || '', body2: content.body2 || '', body3: content.body3 || '' };
+    if (!Object.values(sections).some((s) => s.trim())) continue;
+    const result = runFactualityGates({ sections, locale, italianSections });
+    if (result.issues.length > 0) {
+      console.error(`  🔍 Gate fattualita' [${locale}]: ${result.issues.length} rilievi, ${result.blocking.length} bloccanti`);
+      console.error(formatIssues(result.issues));
+    }
+    blocking.push(...result.blocking);
+  }
+  if (blocking.length === 0) return;
+  const err = new Error(
+    `Articolo rigettato — ${blocking.length} rilievi bloccanti nei body tradotti:\n${formatIssues(blocking)}`,
+  );
+  // Stessa classe di ogni altro rigetto di qualita' in questo file: il loop di
+  // generazione ruota alla headline successiva invece di far cadere la run.
+  err.qualityReject = true;
+  throw err;
+}
+
 // ── Reference sheet of verified domain facts ──
 // Fed into the LLM fact-check prompt so the model cross-checks against known-good data
 // instead of relying solely on training data. NOT section-branched (unlike
@@ -15300,6 +15390,13 @@ async function generateAndValidateArticle(url, sourceContext = null) {
     throw e;
   }
 
+  // Step 3a.2: gate deterministico sui body tradotti — BLOCCANTE (#5661).
+  // Stesso punto e stessa ragione dello Step 3a.1 qui sopra: e' dopo tutte le
+  // mutazioni del testo (3c strip, 3d CTA/link, 3e citazione) e prima di
+  // qualunque scrittura, quindi giudica esattamente cio' che finira' su disco.
+  // Vedi il commento della funzione per la misura che lo motiva.
+  assertTranslationsPassFactualityGates(data);
+
   // Step 3b: Generate article image via Gemini native image generation
   console.error('🎨 Generazione immagine articolo:');
   const imagePath = await generateArticleImage(data);
@@ -16023,6 +16120,12 @@ export async function registerArticleFiles(data, opts = {}) {
   // Prima di clampSeoDescriptions: troncare a 160 caratteri un campo che e' il
   // segnaposto lo renderebbe solo un segnaposto piu' corto.
   sanitizePromptPlaceholders(data);
+  // Stessa ragione, stesso percorso condiviso: i quattro produttori secondari
+  // (daily-brief, events-digest, border-wait-ranking, journalist) importano
+  // registerArticleFiles() direttamente e non passano mai dallo Step 3a.2 del
+  // flusso primario. Senza questa chiamata resterebbero l'unica via per cui un
+  // body tradotto con un rilievo bloccante arriva su disco (#5661).
+  assertTranslationsPassFactualityGates(data);
   clampSeoDescriptions(data);
   const slugs = deriveAndSanitizeArticleSlugs(data);
   // Sul percorso di scrittura CONDIVISO, per la stessa ragione argomentata
