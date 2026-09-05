@@ -37,13 +37,18 @@
  */
 
 import { strict as assert } from 'node:assert';
+import { readFileSync } from 'node:fs';
+import path from 'node:path';
 import { describe, it, beforeEach, afterEach } from 'node:test';
+import { fileURLToPath } from 'node:url';
 
 import {
   callLLM,
   coerceRecordScore,
   discoverFreeModels,
   getStats,
+  recordModelContentFailure,
+  recordModelSuccess,
   resetState,
   DEFAULT_CHAIN,
   _discoverProvider,
@@ -543,6 +548,129 @@ describe('#843 — discoverFreeModels(): il latch di processo muore con resetSta
       warnings.filter((w) => w.includes('[Discovery]')),
       [],
       `stessa modalita' (\'false\' e false coincidono dopo coerceRecordScore): nessun warning atteso, visti: ${JSON.stringify(warnings)}`,
+    );
+  });
+});
+
+
+/**
+ * ── #845 — IL WRITER DELLA VALIDAZIONE DI CONTENUTO ────────────────────────
+ *
+ * `recordModelContentFailure()` e' ESPORTATO e vive fuori da `callLLM`: chi lo
+ * chiama sono i validatori di contenuto (`body2-payload-verdict.mjs`,
+ * `itLanguageCheck.mjs` lo citano come il meccanismo con cui la generazione
+ * ruota modello dopo un payload rifiutato). Il gate `recordScore` di `callLLM`
+ * sta sui SUOI call site interni e non poteva quindi coprirlo: un flusso
+ * diagnostico che passasse dalla validazione scriveva `ai_model_scores/_all`
+ * mentre l'opt-out era attivo su ogni altra superficie — era l'ultimo writer
+ * del modulo rimasto senza parametro.
+ *
+ * Qui si misura la promessa, non la firma:
+ *   1. in opt-out, N fallimenti di contenuto (>= MAX_CONSECUTIVE_CONTENT_FAILURES)
+ *      lasciano `_dirtyModels` vuoto e `scoreBoard` fermo — cioe' ne' la penale
+ *      di `recordModelFailure` ne' il `markModelExhausted('content')` arrivano
+ *      al documento condiviso;
+ *   2. ...ma il ban di run RESTA (#846): l'opt-out spegne il ledger, non il
+ *      circuit breaker;
+ *   3. il default continua a scrivere — e' il confine che rende la misura vera;
+ *   4. `'false'` (la forma che arriva da `process.env`) e' un opt-out vero come
+ *      il booleano, perche' il valore passa da `coerceRecordScore()` (#783).
+ */
+describe('#845 — recordModelContentFailure({ recordScore }) non tocca il ledger in opt-out', () => {
+  const MODEL = 'openai/gpt-4o-mini-content-test';
+
+  beforeEach(() => { resetState(); });
+  afterEach(() => { resetState(); });
+
+  for (const optOut of [false, 'false', 0, null, '']) {
+    it(`recordScore: ${JSON.stringify(optOut)} — niente da persistere, ma il ban di run resta`, () => {
+      recordModelContentFailure(MODEL, { recordScore: optOut });
+      recordModelContentFailure(MODEL, { recordScore: optOut });
+
+      const stats = getStats();
+      assert.equal(
+        stats.dirtyModels,
+        0,
+        `la validazione di contenuto ha sporcato ${stats.dirtyModels} modelli in opt-out: al prossimo flush finiscono in ai_model_scores/_all, che ordina la produzione`,
+      );
+      assert.deepEqual(
+        stats.scoreBoard,
+        [],
+        `nessun punteggio doveva muoversi, visti: ${JSON.stringify(stats.scoreBoard)}`,
+      );
+      assert.ok(
+        stats.exhaustedModels.includes(MODEL),
+        `il ban di run deve valere anche in opt-out (#846), visti: ${stats.exhaustedModels.join(', ') || 'nessuno'}`,
+      );
+    });
+  }
+
+  it('il default SCRIVE — confine che rende la misura vera', () => {
+    recordModelContentFailure(MODEL);
+    recordModelContentFailure(MODEL);
+
+    const stats = getStats();
+    assert.ok(
+      stats.dirtyModels > 0,
+      'il default deve continuare a proporre al ledger: un opt-out che vale per tutti e\' una regressione silenziosa della produzione',
+    );
+    assert.ok(
+      stats.scoreBoard.some((e) => e.model === MODEL && e.score < 0),
+      `il default deve continuare a penalizzare in memoria, visti: ${JSON.stringify(stats.scoreBoard)}`,
+    );
+    assert.ok(stats.exhaustedModels.includes(MODEL), 'il ban di contenuto vale col default');
+  });
+
+  it('un fallimento in opt-out non lascia un delta che un writer di produzione poi spedisce', () => {
+    // Il delta di contatore vive in una mappa SEPARATA da `_dirtyModels`: se
+    // l'opt-out lo accumulasse comunque, il primo writer di produzione sullo
+    // stesso modello lo troverebbe in coda e lo scriverebbe come incremento
+    // atomico. Il tally di run invece deve restare: e' memoria di processo.
+    recordModelContentFailure(MODEL, { recordScore: false });
+    const outcomes = getStats().runOutcomes.find((o) => o.model === MODEL);
+    assert.ok(outcomes && outcomes.failures >= 1, `il tally di run resta anche in opt-out, visto: ${JSON.stringify(outcomes)}`);
+
+    recordModelSuccess(MODEL);
+    const entry = getStats().scoreBoard.find((e) => e.model === MODEL);
+    assert.ok(entry, 'il writer di produzione deve comunque registrare');
+    assert.equal(
+      entry.failures,
+      0,
+      `il fallimento diagnostico e' rientrato dalla finestra nei dettagli persistiti: ${JSON.stringify(entry)}`,
+    );
+  });
+});
+
+/**
+ * ── IL FLAG DEVE ARRIVARE DAL CALL SITE DI PRODUZIONE (#845) ────────────────
+ *
+ * `recordModelContentFailure()` e' esportata e ha UN solo call site di
+ * produzione in tutto l'albero: `callLLM()` di `create-article.mjs`, nel ramo
+ * «output JSON incompleto». Il parametro `recordScore` senza quella
+ * propagazione e' irraggiungibile da qualunque percorso reale — l'opt-out
+ * esisterebbe nel modulo e non nella produzione, e un chiamante diagnostico
+ * scriverebbe comunque `ai_model_scores/_all`.
+ *
+ * Misurato sul SORGENTE perche' `create-article.mjs` non e' importabile dalle
+ * gate del generatore (girano `node --test` senza `npm ci`): stessa tecnica di
+ * split-merge-abort-flag.test.mjs.
+ */
+describe('propagazione di recordScore dal call site di produzione', () => {
+  const SRC = readFileSync(
+    path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../scripts/create-article.mjs'),
+    'utf-8',
+  );
+
+  it('create-article.mjs passa opts.recordScore a recordModelContentFailure', () => {
+    const calls = [...SRC.matchAll(/recordModelContentFailure\(([^)]*)\)/g)]
+      .map((m) => m[1])
+      .filter((args) => !/^\s*$/.test(args));
+
+    assert.equal(calls.length, 1, `atteso un solo call site, visti: ${JSON.stringify(calls)}`);
+    assert.match(
+      calls[0],
+      /recordScore:\s*opts\.recordScore/,
+      `il call site non propaga il flag — l'opt-out del ledger resta irraggiungibile: ${calls[0]}`,
     );
   });
 });

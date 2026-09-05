@@ -504,6 +504,86 @@ export const SET_DESCRIPTORS = new Set([
 ]);
 
 /**
+ * Le chiamate con cui un fixture non NOMINA un path, lo LEGGE. `import` e
+ * `require` ci stanno perché un modulo importato è contenuto quanto un JSON
+ * parsato: cambia sotto, e l'aspettativa del test cambia con lui.
+ */
+const READ_CALLS = 'readFileSync|readFile|createReadStream|openSync|require|import';
+
+/**
+ * Il fixture LEGGE quel path, o si limita a nominarlo?
+ *
+ * Due forme, perché il literal quasi mai è l'argomento diretto:
+ *
+ *   - la chiamata di lettura col literal fra i suoi argomenti, anche annidato
+ *     in un `path.join(ROOT, ...)`. `[^)]*` si ferma alla PRIMA parentesi
+ *     chiusa, quindi il match non scavalca la chiamata e non prende il literal
+ *     di una riga successiva;
+ *   - l'`import`/`export ... from` statico, che non è una chiamata e quindi
+ *     non ha parentesi da guardare;
+ *   - l'alias: il path legato a una costante (`const P = path.join(ROOT, '…')`)
+ *     e la costante passata alla lettura più sotto.
+ *
+ * Il verso incerto è VOLUTAMENTE «legge»: un match di troppo tiene un
+ * accoppiamento che forse non c'è — costa una copia a mano nominata nel report
+ * — mentre un match mancato dichiara chiuso un insieme che non lo è, cioè la PR
+ * di trasporto rossa che spegne il canale.
+ */
+export function readsContentOf(rel, text) {
+  const src = typeof text === 'string' ? text : '';
+  const lit = `['"\`]${String(rel).replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}['"\`]`;
+  if (new RegExp(`\\b(?:${READ_CALLS})\\s*\\([^)]*${lit}`).test(src)) return true;
+  if (new RegExp(`(?:^|[\\n;])\\s*(?:import|export)\\b[^;]*${lit}`).test(src)) return true;
+  for (const m of src.matchAll(new RegExp(`(?:const|let|var)\\s+([A-Za-z_$][\\w$]*)\\s*=[^;]*${lit}`, 'g'))) {
+    if (new RegExp(`\\b(?:${READ_CALLS})\\s*\\([^)]*\\b${m[1]}\\b`).test(src)) return true;
+  }
+  return false;
+}
+
+/**
+ * L'altro verso: un path che il fixture NOMINA è un accoppiamento vero — quello
+ * è codice che il fixture legge — tranne il manifest solo NOMINATO (issue #889).
+ *
+ * `SET_DESCRIPTORS` filtra i CITER, e lì i quattro descrittori si equivalgono:
+ * enumerano ogni path del set, quindi il loro match non dice niente sul
+ * fixture. Nel verso «chi cita il fixture» l'insieme NON è lo stesso, e
+ * riusarlo tale e quale rimetterebbe il falso silenzio di #853: un fixture che
+ * importa davvero `transport-identical-twins.mjs` o `loop-drift-check.mjs`
+ * dipende da quel codice, e copiarlo senza la sua metà è la classe «engine
+ * senza `host/`».
+ *
+ * Il manifest è l'unico candidato all'eccezione perché non è un input che il
+ * trasporto possa rompere: è il LIBRO MASTRO del trasporto stesso, riscritto da
+ * `--apply` nella stessa passata che copia la voce
+ * (`baseline.site`/`baseline.corpus`). E poiché è `corpus-only` per costruzione
+ * («Questo file.»), contarlo come bloccante non è un rinvio: è un NO
+ * PERMANENTE.
+ *
+ * **Ma l'eccezione vale solo per chi lo NOMINA, non per chi lo LEGGE**, e la
+ * differenza è misurabile su
+ * `generator/tests/crawler-cross-repo-artifacts.test.mjs`: quel fixture non
+ * verifica che il manifest esista, asserisce sul suo CONTENUTO contro un altro
+ * file — per ogni `artifacts[]` del contract pretende l'entry
+ * `.github/workflows/<file>` con `mode`, `sitePath` e `baseline` uguali a
+ * `artifactSha256`. Quelle entry non entrano nell'insieme chiuso: il fixture le
+ * nomina via template, e i loro path sono `unsafeTarget` («il token del ciclo
+ * non ha lo scope `workflows`»), quindi nessuna passata potrà mai riscriverle.
+ * Portare giù il fixture e il contract lasciando il manifest fermo fa fallire
+ * il test su `mapping loop-sync assente` o su una `baseline` diversa — cioè
+ * esattamente la PR di trasporto rossa che `permanentBlock` esiste per evitare.
+ * Il libro mastro è neutro finché lo si nomina; sul suo contenuto è un
+ * accoppiamento come gli altri.
+ */
+export function namedIsCoupling(rel, ownText) {
+  if (rel !== SET_MANIFEST_REL) return true;
+  // Senza il testo del fixture non so se lo legge, e «non lo so» non e' «non lo
+  // legge»: il verso conservativo tiene l'accoppiamento, come per il buio di
+  // `readLocal()`.
+  if (typeof ownText !== 'string') return true;
+  return readsContentOf(rel, ownText);
+}
+
+/**
  * Un file locale letto come TESTO, con lo stato esplicito.
  *
  * `null` non basta: «non esiste», «non è testo» e «non ho potuto leggerlo»
@@ -682,17 +762,20 @@ export function localCouplings(rel, modeOf) {
     // Specificatori relativi (`../../scripts/ci/close-recovered-failure-issues.mjs`) e path repo-relative
     // citati come stringa (`'scripts/ci/loop-sync-manifest.json'`). Solo quelli
     // che esistono davvero qui diventano un accoppiamento: il resto è prosa.
+    const cite = (relPath) => {
+      if (namedIsCoupling(relPath, ownText)) found.add(relPath);
+    };
     for (const m of ownText.matchAll(/\.{1,2}\/[\w./-]+/g)) {
       const abs = path.resolve(ROOT, dir, m[0]);
       if (abs.startsWith(ROOT + path.sep) && fs.existsSync(abs) && fs.statSync(abs).isFile()) {
-        found.add(path.relative(ROOT, abs).split(path.sep).join('/'));
+        cite(path.relative(ROOT, abs).split(path.sep).join('/'));
       }
     }
     for (const m of ownText.matchAll(/['"`]([\w.-]+(?:\/[\w.-]+)+)['"`]/g)) {
       const cand = m[1];
       if (cand.startsWith('.') && !cand.startsWith('.github')) continue;
       const abs = path.join(ROOT, cand);
-      if (abs.startsWith(ROOT + path.sep) && fs.existsSync(abs) && fs.statSync(abs).isFile()) found.add(cand);
+      if (abs.startsWith(ROOT + path.sep) && fs.existsSync(abs) && fs.statSync(abs).isFile()) cite(cand);
     }
   }
   found.delete(rel);

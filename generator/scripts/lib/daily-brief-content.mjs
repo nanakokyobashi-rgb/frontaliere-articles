@@ -546,7 +546,15 @@ function buildLocaleContent(locale, brief, headline) {
   const parts2 = [`## ${t.fuelH}`];
   const fuel = blocks.fuel;
   if (fuel?.available) {
-    parts2.push(t.fuelLead(fuel));
+    // The lead sentence asserts three counted facts ("su N comuni monitorati …
+    // in Svizzera in X casi e in Italia in Y"). `shapeFuel` now reports an
+    // unreadable summary field as `null` instead of coercing it to 0, and a
+    // sentence that says "in 0 casi" from a field the producer never sent is a
+    // fabricated number in a bulletin that sells itself on measured ones. No
+    // counters, no sentence: the table below carries the section on its own.
+    if ([fuel.municipalityCount, fuel.cheaperSwissCount, fuel.cheaperItalyCount].every((n) => Number.isFinite(n))) {
+      parts2.push(t.fuelLead(fuel));
+    }
     if (fuel.cheapestItaly.length >= 2) {
       parts2.push(mdTable(t.fuelCols, fuel.cheapestItaly.map((m) => [`${m.municipality} (${m.province})`, t.fuelPrice(m.minPriceEur)])));
     }

@@ -45,6 +45,8 @@ import {
   fetchFailureVerdict,
   isFixture,
   localCouplings,
+  namedIsCoupling,
+  readsContentOf,
   parseRatio,
   permanentBlock,
   realignFromCommitted,
@@ -380,6 +382,90 @@ test('il descrittore del set è un ELENCO chiuso, non «nomina il manifest»', (
     couplings.filter((c) => SET_DESCRIPTORS.has(c)),
     [],
     'i descrittori del set non sono consumatori',
+  );
+});
+
+test('il manifest NOMINATO in prosa non e\u2019 un accoppiamento; LETTO lo resta (#889)', () => {
+  const manifest = JSON.parse(fs.readFileSync(path.join(ROOT, 'scripts/ci/loop-sync-manifest.json'), 'utf8'));
+  const modeOf = new Map(manifest.files.map((e) => [e.path, e.mode]));
+
+  // Il caso dell'eccezione, sul repo reale: il fixture cita il manifest in un
+  // commento — «il file e' sceso allineato con la PR» — e non lo apre mai. Lì
+  // il match non dice niente sul fixture, ed e' il ramo che #883 non filtrava.
+  const named = 'generator/tests/github-issue-creator-reopen-default.test.mjs';
+  const namedText = fs.readFileSync(path.join(ROOT, named), 'utf8');
+  assert.ok(namedText.includes('scripts/ci/loop-sync-manifest.json'), 'il fixture NOMINA davvero il manifest');
+  assert.equal(readsContentOf('scripts/ci/loop-sync-manifest.json', namedText), false);
+  assert.ok(
+    !localCouplings(named, modeOf).some((c) => c.path === 'scripts/ci/loop-sync-manifest.json'),
+    'nominare il libro mastro non accoppia al libro mastro',
+  );
+
+  // E il caso opposto, che l'eccezione a tappeto sbagliava: questo fixture non
+  // verifica che il manifest esista, ASSERISCE sul suo contenuto contro il
+  // contract (`baseline` = `artifactSha256` per ogni artifact). Le entry
+  // `.github/workflows/*` su cui asserisce sono `unsafeTarget`, quindi nessuna
+  // passata potra' riscriverle: portare giu' fixture e contract lasciando il
+  // manifest fermo e' la PR di trasporto rossa che spegne il canale.
+  const reads = 'generator/tests/crawler-cross-repo-artifacts.test.mjs';
+  const entry = manifest.files.find((e) => e.path === reads);
+  assert.equal(entry.mode, 'identical', 'il caso vale solo su un gemello che il canale potrebbe portare');
+  assert.equal(
+    readsContentOf('scripts/ci/loop-sync-manifest.json', fs.readFileSync(path.join(ROOT, reads), 'utf8')),
+    true,
+  );
+  const couplings = localCouplings(reads, modeOf);
+  assert.ok(
+    couplings.some((c) => c.path === 'scripts/ci/loop-sync-manifest.json'),
+    'chi legge il manifest resta accoppiato al manifest',
+  );
+  assert.ok(
+    permanentBlock(entry, { outOfScopePrefixes: manifest.scope.outOfScope || [], couplings }),
+    'e il blocco conservativo resta: la copia a mano e\u2019 l\u2019unica azione che lo sblocca',
+  );
+});
+
+test('readsContentOf distingue il literal letto — annidato o via alias — dalla citazione', () => {
+  const rel = 'scripts/ci/loop-sync-manifest.json';
+  // L'argomento annidato in un `path.join(ROOT, ...)`: la forma reale, il
+  // literal non e' quasi mai l'argomento diretto.
+  assert.equal(readsContentOf(rel, "JSON.parse(\n  readFileSync(path.join(ROOT, 'scripts/ci/loop-sync-manifest.json'), 'utf8'),\n)"), true);
+  // L'alias: il path legato a una costante, la costante letta piu' sotto.
+  assert.equal(
+    readsContentOf(rel, "const M = path.join(ROOT, 'scripts/ci/loop-sync-manifest.json');\nconst raw = readFileSync(M, 'utf8');"),
+    true,
+  );
+  assert.equal(readsContentOf(rel, "import manifest from 'scripts/ci/loop-sync-manifest.json' with { type: 'json' };"), true);
+  // La sola citazione: la costante c'e' ma nessuno la apre.
+  assert.equal(readsContentOf(rel, "const M = 'scripts/ci/loop-sync-manifest.json';\nassert.ok(list.includes(M));"), false);
+  assert.equal(readsContentOf(rel, ' * ogni adattamento e\u2019 dichiarato in `scripts/ci/loop-sync-manifest.json`.'), false);
+  // Un altro path letto nello stesso file non tinge il manifest: il match e'
+  // per literal, non per «questo file legge qualcosa».
+  assert.equal(readsContentOf(rel, "readFileSync(CONTRACT_PATH, 'utf8');\n// vedi `scripts/ci/loop-sync-manifest.json`"), false);
+});
+
+test('l\u2019eccezione e\u2019 il solo manifest, e solo da nominato: gli altri descrittori restano accoppiamenti', () => {
+  // L'asimmetria fra i due versi, resa un test perché è l'errore facile:
+  // riusare `SET_DESCRIPTORS` anche qui rimetterebbe il falso silenzio di #853
+  // su un fixture che importa DAVVERO uno script del ciclo.
+  const prose = ' * vedi `scripts/ci/loop-sync-manifest.json` e gli altri descrittori.';
+  for (const d of SET_DESCRIPTORS) {
+    assert.equal(
+      namedIsCoupling(d, prose),
+      d !== 'scripts/ci/loop-sync-manifest.json',
+      `${d}: solo il manifest e\u2019 un non-accoppiamento anche da citato`,
+    );
+  }
+  // Senza il testo del fixture non si sa se lo legge, e «non lo so» non e' «non
+  // lo cita»: il verso conservativo tiene l'accoppiamento.
+  assert.equal(namedIsCoupling('scripts/ci/loop-sync-manifest.json', undefined), true);
+
+  const modeOf = new Map([['scripts/ci/loop-drift-check.mjs', 'adapted']]);
+  const rel = 'generator/tests/transport-identical-twins.test.mjs';
+  const couplings = localCouplings(rel, modeOf).map((c) => c.path);
+  assert.ok(
+    couplings.includes('scripts/ci/transport-identical-twins.mjs'),
+    'questo test importa lo script: copiarlo senza la sua metà è la classe «engine senza host/»',
   );
 });
 

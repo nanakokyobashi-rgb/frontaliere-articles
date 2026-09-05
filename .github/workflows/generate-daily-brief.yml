@@ -109,7 +109,12 @@ jobs:
           printf '%s' "$FIREBASE_SERVICE_ACCOUNT_JSON" > "$RUNNER_TEMP/sa.json"
           echo "GOOGLE_APPLICATION_CREDENTIALS=$RUNNER_TEMP/sa.json" >> "$GITHUB_ENV"
 
+      # A block degraded for three editions in a row is an upstream contract
+      # change, not an outage, and this step DETECTS it — it does not fail on
+      # it. The red is spent by the gate step after `Commit and push` below:
+      # see the header of `reportDegradationAlarms`.
       - name: Refresh the day's data snapshot
+        id: refresh
         env:
           DRY_RUN: ${{ steps.mode.outputs.dry == 'true' && '1' || '0' }}
         run: node generator/scripts/refresh-daily-brief-data.mjs
@@ -273,3 +278,50 @@ jobs:
             echo "- Pushed: ${{ steps.commit.outputs.pushed || 'n/a' }}"
             echo "- Target ref: ${{ github.ref_name }}"
           } >> "$GITHUB_STEP_SUMMARY"
+
+      # ── L'allarme di degradazione permanente, ULTIMO step del job (#882) ──
+      #
+      # La posizione e' il contenuto di questo step, non un dettaglio, e ha gia'
+      # sbagliato due volte.
+      #
+      # Non sul refresh: lo streak per blocco vive solo dentro
+      # `public/data/daily-brief.json`, e l'unico punto che lo rende durevole e'
+      # il `git add` dello step `Commit and push`. Un exit code non-zero sul
+      # refresh salta commit e push, quindi lo streak avanzato muore sul runner,
+      # il checkout del giorno dopo rilegge lo snapshot di D-1 e la STESSA
+      # edizione riattraversa la soglia: rosso ogni mattina e bollettino mai
+      # pubblicato, cioe' la regressione che l'allarme esiste per chiudere.
+      #
+      # E nemmeno subito dopo il commit: `Push hero + thumbnail to the CDN` non
+      # ha nessuna status function nel suo `if:`, quindi eredita un `success()`
+      # implicito e un `exit 1` prima di lui lo salta. L'hero
+      # `bollettino-frontaliere-<data>.webp` e' l'og:image esatto che Discover
+      # fetcha: saltarlo lascia un 404 all'edge che `cf-purge-cache.mjs` non
+      # ripulisce e che nessuna run successiva ripara, perche' quello step
+      # lavora solo sull'ID del giorno corrente e da domani `degradation_crossed`
+      # e' false per sempre. Il rosso costerebbe un pezzo dell'edizione su cui
+      # viene speso.
+      #
+      # Quindi: ULTIMO. Ogni step che qualcuno aggiungera' a questo job va messo
+      # PRIMA di questo, e `daily-brief-degradation-alarm.test.mjs` lo pretende.
+      #
+      # `steps.commit` puo' non aver pushato (niente in stage): lo snapshot con
+      # lo streak nuovo e' comunque committato quando c'e' un'edizione, e il
+      # verdetto vale lo stesso — l'attraversamento va detto anche in un giorno
+      # senza edizione.
+      - name: Degradation alarm — un blocco degradato da tre edizioni di fila
+        if: steps.mode.outputs.dry != 'true' && steps.refresh.outputs.degradation_crossed == 'true'
+        run: |
+          set -euo pipefail
+          BLOCKS='${{ steps.refresh.outputs.degradation_blocks }}'
+          {
+            echo "### ✖ Bollettino: degradazione permanente — \`$BLOCKS\`"
+            echo
+            echo "Questi blocchi degradano da tre edizioni consecutive. Non e' un'interruzione della fonte: e' un cambio di forma o di contratto a monte, e il Bollettino esce da giorni senza quelle sezioni **con la run verde**."
+            echo
+            echo "L'edizione di oggi **e' stata generata e committata** (questo step viene dopo il push): la run e' rossa per farsi leggere, non per fermare il giornale."
+            echo
+            echo "Le annotazioni \`::error::\` nello step \`Refresh the day's data snapshot\` nominano blocco, streak e ragione. Ripara la fonte o la guardia; dall'edizione successiva la run torna verde da sola."
+          } >> "$GITHUB_STEP_SUMMARY"
+          echo "::error::daily-brief: $BLOCKS degradati da tre edizioni consecutive — vedi il summary di questa run"
+          exit 1
