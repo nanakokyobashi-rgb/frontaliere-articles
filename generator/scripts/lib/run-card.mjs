@@ -79,7 +79,7 @@ export function buildRunCard(report) {
  * ── LA SCRITTURA STA QUI, E NON NEL CHIAMANTE ───────────────────────────────
  *
  * `create-article.mjs` ha un proprio `write()`/`resolve()` che passano da
- * `corpusPath()`: sono il choke point che traduce `services/locales/…` in
+ * `corpusPath`: sono il choke point che traduce `services/locales/…` in
  * `content/…`, e presuppongono un path RELATIVO al repo. Con un path assoluto
  * — che e' esattamente cio' che `$RUNNER_TEMP/generate-diagnostics/…` e' —
  * `resolve()` produce `${PROJECT_ROOT}/` + il path assoluto, cioe' fa atterrare
@@ -96,6 +96,18 @@ export function buildRunCard(report) {
  * importabile, quindi finche' la scrittura stava li' dentro nessun test poteva
  * accorgersi che la card atterrava altrove — ed e' precisamente cio' che e'
  * successo.
+ *
+ * NOTA PER CHI EDITA QUESTO COMMENTO: sopra, `corpusPath` e' scritto SENZA la
+ * parentesi aperta, e va lasciato cosi'. Il censimento di
+ * `corpus-write-atomic.test.mjs` cerca quel nome seguito da una parentesi
+ * aperta, e non guarda solo il file che lo contiene: `reachableSource()`
+ * concatena la sorgente di ogni import relativo, quindi quella sola parentesi
+ * in questa prosa farebbe fallire il censimento a QUALUNQUE file sotto
+ * `generator/scripts` che importi questo modulo e usi `writeFileSync`, per una
+ * ragione che non lo riguarda. (Scritta la prima volta con la parentesi, questa
+ * nota faceva fallire il censimento spiegando come non farlo fallire.) Il
+ * modulo non scrive niente sotto una radice pubblicata: il suo unico target e'
+ * `RUN_CARD_FILE`, in `$RUNNER_TEMP`.
  *
  * @param {string} file path della card (assoluto o relativo al cwd)
  * @param {any} report il `RUN_REPORT`

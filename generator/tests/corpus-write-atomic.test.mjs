@@ -56,25 +56,20 @@ const COVERED_ELSEWHERE = ['generator/scripts/create-article.mjs'];
 // `refresh-events-dataset`: la cache della fetch). Restano elencati perche' il
 // censimento non li perda di vista: toglierli da qui e' l'unico modo per
 // rimetterli in gioco.
-// `run-card.mjs` sta qui per la ragione piu' debole possibile, e va scritta
-// perche' e' un limite noto del criterio: il censimento e' un match TESTUALE, e
-// questo file lo attiva solo perche' il commento di `writeRunCard()` NOMINA
-// `corpusPath()` per spiegare perche' NON lo usa. Non scrive niente sotto una
-// radice pubblicata: il suo unico target e' `RUN_CARD_FILE`, che il workflow
-// punta dentro `$RUNNER_TEMP/generate-diagnostics` — fuori dal workspace di
-// proposito, cosi' che il `git add -A` dello step di commit non possa portarlo
-// su main.
-//
-// Ed e' comunque rigenerabile nel senso che questa lista chiede: la card e'
-// riscritta a ogni run, e una card troncata non produce un silenzio — il
-// lettore la conta come `unreadable`, che e' l'invariante per cui l'intera
-// strumentazione esiste (un denominatore che non nasconde cio' che non ha
-// visto). Se un giorno la card dovesse finire sotto una radice pubblicata, va
-// tolta da qui e resa atomica.
+// `generator/scripts/lib/run-card.mjs` NON sta in nessuna di queste liste, ed
+// e' la risposta giusta invece della piu' comoda. Ci era finito per un giro,
+// perche' il criterio e' un match TESTUALE e la prosa di `writeRunCard()`
+// nominava il letterale che `PUBLISHED` cerca — per spiegare perche' NON lo
+// usa. Dichiararlo qui avrebbe reso verde il censimento affermando una cosa
+// falsa (che scriva un artefatto pubblicato) e avrebbe lasciato in piedi il
+// guaio vero: `reachableSource()` concatena la sorgente degli import, quindi
+// quel letterale avrebbe fatto fallire il censimento a ogni futuro file sotto
+// `generator/scripts` che importi quel modulo e usi `writeFileSync`. Il
+// letterale e' stato tolto alla fonte, con una nota che dice perche' non va
+// rimesso.
 const REGENERABLE_STATE = [
   'generator/scripts/lib/article-topic-selector.mjs',
   'generator/scripts/refresh-events-dataset.mjs',
-  'generator/scripts/lib/run-card.mjs',
 ];
 
 const NOT_WORKFLOW_DRIVEN = [
