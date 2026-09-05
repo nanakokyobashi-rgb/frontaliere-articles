@@ -325,18 +325,64 @@ export function tallyFindings(prs, { bucketOf = bucketFinding } = {}) {
 // re-fires escalation #2290 perpetually with no actionable fix (you cannot make
 // the gate aggressive enough without dropping real bugs — explicitly forbidden by
 // the gate's bias-to-PROCEED invariant). Those two classes:
-//   1. AGGREGATE follow-ups ("N item deferred", N≥2, or sweep/batch/bulk): the gate
-//      refuses to short-circuit them (one item resolved ≠ all). Their title carries
-//      the count verbatim (post-merge-followup.yml batches them, AGENTS.md #925), so
-//      this is detectable from the title alone — no extra body fetch.
+//   1. AGGREGATE follow-ups ("N item deferred", N≥2, sweep/batch/bulk, o item enumerati
+//      nel corpo): the gate refuses to short-circuit them (one item resolved ≠ all).
+//      Il titolo porta il conteggio verbatim SOLO quando post-merge-followup.yml lo
+//      scrive (AGENTS.md #925); quando non lo scrive gli item stanno nel BODY, che dal
+//      #568 questo classificatore legge (`hasEnumeratedItems`) — il body arriva dalla
+//      `issue list` che questo stadio fa comunque, senza una fetch in più.
 //   2. NON-follow-up issues (crawler-health, validation-failure, free-form): the
 //      gate's scope is `follow-up`-labelled only; everything else is always let
 //      through. A crawler-health `stale` that auto-resolves transiently (#2147) can
 //      never be pre-empted by a content-token matcher.
 // Same feedback-loop class as the reconcile-bot / pre-flight-deterministic skips in
 // the outcome loop below: don't count burn that no safe gate could have prevented.
-// Pure → unit-tested. `labels` is an array of label-name strings.
-export function isAvoidableAlreadyFixed(title, labels) {
+/**
+ * Item enumerati STRUTTURALMENTE nel body: `## 1.` / `## 2.` (>=2 sezioni numerate),
+ * `1. **Titolo.**` / `2. **Titolo.**` (>=2 item di lista ordinata con lead in grassetto)
+ * oppure `- **Titolo**` / `- [ ] **Titolo**` (>=2 bullet top-level con lead in grassetto).
+ *
+ * Perche' esiste (#568): i rilevatori di aggregati leggevano SOLO il titolo — un conteggio
+ * esplicito ("N items deferred", N>=2) o le parole `sweep|batch|bulk`. I follow-up
+ * multi-item che post-merge-followup.yml genera SENZA conteggio nel titolo (clausole unite
+ * da "+", item enumerati nel corpo) restavano invisibili. Misurato il 2026-09-05 su tre
+ * esempi dell'escalation #560: #374 (5 item, dichiarati tali dal fixer stesso), #505 (2) e
+ * #466 (3) davano `isAggregate` false su 3/3 e `isAvoidableAlreadyFixed` true su 3/3 —
+ * cioe' contati come burn "evitabile" dal gate dell'harvester pur essendo aggregati la cui
+ * risoluzione e' scaglionata su piu' PR, gonfiando proprio il bucket che ha innescato #560.
+ *
+ * La direzione dell'errore resta sicura in tutti i chiamanti: un falso positivo fa
+ * PROCEDERE il fixer (nessun corto-circuito), NON auto-chiudere un aggregato parziale e
+ * NON contare un burn — mai il contrario. Il conteggio esplicito nel titolo resta
+ * autoritativo e continua a corto-circuitare PRIMA di qui (#3378).
+ *
+ * DUPLICATA di proposito in `check-issue-already-resolved.mjs`, `harvest-agent-lessons.mjs`
+ * e `reconcile-followups.mjs`: i tre file sono `mode: identical` nel manifest, quindi
+ * estrarre un modulo comune e' lavoro del SITO (una de-duplicazione fatta qui viene
+ * sovrascritta al mirror successivo — stessa ragione gia' scritta nel manifest per
+ * `needs-human-prepass.mjs`). Il legame e' coperto da un test invece che da un import,
+ * che e' l'uscita prevista da AGENTS.md #6 nella forma di `ci-check-name.test.mjs`:
+ * `generator/tests/aggregate-detectors-agree.test.mjs` fallisce se una copia diverge.
+ *
+ * @param {string} body corpo della issue
+ * @returns {boolean} true se il corpo enumera >=2 item
+ */
+export function hasEnumeratedItems(body) {
+  const b = String(body || '');
+  const numberedSections = (b.match(/^#{2,4}[ \t]*\d+[.)](?=[ \t]|$)/gm) || []).length;
+  if (numberedSections >= 2) return true;
+  // Lista ordinata con lead in grassetto: `1. **Titolo.**` / `2. **Titolo.**` (#831, #832).
+  // Il grassetto e' cio' che distingue l'item enumerato dai passi di una procedura numerata.
+  const orderedBoldItems = (b.match(/^[ \t]*\d+[.)][ \t]+\*\*/gm) || []).length;
+  if (orderedBoldItems >= 2) return true;
+  const boldLeadBullets = (b.match(/^[-*][ \t]+(?:\[[ xX]\][ \t]*)?\*\*/gm) || []).length;
+  return boldLeadBullets >= 2;
+}
+
+// Pure → unit-tested. `labels` is an array of label-name strings; `body` è il corpo della
+// issue, opzionale solo per retro-compatibilità delle firme — senza di esso i follow-up
+// multi-item che enumerano gli item nel corpo tornano a contare come burn evitabile (#568).
+export function isAvoidableAlreadyFixed(title, labels, body = '') {
   const names = Array.isArray(labels) ? labels : [];
   if (!names.includes('follow-up')) return false; // out of the gate's scope
   const t = String(title || '');
@@ -347,6 +393,7 @@ export function isAvoidableAlreadyFixed(title, labels) {
   // was misclassified as an aggregate (#3378).
   if (m) return Number(m[1]) < 2;
   if (/\b(?:sweep|batch|bulk)\b/i.test(t)) return false; // aggregate by keyword (no explicit count stated)
+  if (hasEnumeratedItems(body)) return false; // aggregate by enumerazione nel corpo (#568)
   return true; // single-item follow-up → the gate's real target → countable
 }
 
@@ -431,7 +478,7 @@ export function orphanNoteBody(r) {
     + `recuperabile — la resume-logic del fixer riparte da qui.\n\n${ORPHAN_NOTE_MARKER}`;
 }
 
-export function isAvoidableMaxTurns(title, labels, delivery = false) {
+export function isAvoidableMaxTurns(title, labels, delivery = false, body = '') {
   const names = Array.isArray(labels) ? labels : [];
   const t = String(title || '');
   // `delivery` accepts the legacy boolean (`hasDeliveredPr`) or the richer
@@ -453,6 +500,7 @@ export function isAvoidableMaxTurns(title, labels, delivery = false) {
   const m = t.match(/(\d+)\s+items?\s+deferred/i);
   if (m) return Number(m[1]) < 2;
   if (/\b(?:sweep|batch|bulk)\b/i.test(t)) return false; // aggregate by keyword (no explicit count stated)
+  if (hasEnumeratedItems(body)) return false; // aggregate by enumerazione nel corpo (#568)
   return true; // single-item, still-routable → fixable loop → countable
 }
 
@@ -799,7 +847,7 @@ async function main() {
   // visible without reading 31 run logs by hand.
   const recoverableMaxTurns = [];
   const fixIssues = ghJson(['issue', 'list', '--search', `label:agent:triaged updated:>=${sinceDay}`,
-    '--state', 'all', '--limit', String(MAX_ISSUES), '--json', 'number,title,labels']) || [];
+    '--state', 'all', '--limit', String(MAX_ISSUES), '--json', 'number,title,labels,body']) || [];
   for (const issue of fixIssues.slice(0, MAX_ISSUES)) {
     const { number } = issue;
     const labelNames = (issue.labels || []).map((l) => l.name);
@@ -855,7 +903,7 @@ async function main() {
       // is the EXPECTED confirmation path, not preventable burn → don't escalate it
       // (root cause of #2290: bucket re-fired at 9/14d, all 5 examples aggregate or
       // non-follow-up). Single-item follow-ups — the gate's real target — still count.
-      if (code === 'already-fixed' && !isAvoidableAlreadyFixed(issue.title, labelNames)) continue;
+      if (code === 'already-fixed' && !isAvoidableAlreadyFixed(issue.title, labelNames, issue.body || '')) continue;
       // `max-turns` on an aggregate multi-item issue (over-budget by construction,
       // the per-item circuit-breaker's target) or on an issue the drainer has already
       // parked `needs-human` (structurally non-fixable: malformed body / network-audit
@@ -874,7 +922,7 @@ async function main() {
           recoverableMaxTurns.push({ issue: number, title: (issue.title || '').slice(0, 80), ...recoverable });
         }
         if (!isAvoidableMaxTurns(issue.title, labelNames,
-          { hasDeliveredPr, hasRecoverableBranch: Boolean(recoverable) })) continue;
+          { hasDeliveredPr, hasRecoverableBranch: Boolean(recoverable) }, issue.body || '')) continue;
       }
       // `overlap-skip` / `pr-already-open`: deferral by the loop's own scheduling rule,
       // declared TRANSIENT by followup-drainer.mjs — expected, not preventable burn. Only

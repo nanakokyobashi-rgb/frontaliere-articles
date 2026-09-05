@@ -139,9 +139,51 @@ const io = {
 };
 
 /**
- * Aggregate follow-up: never short-circuit on one match (one item resolved ≠ all). Two
+ * Item enumerati STRUTTURALMENTE nel body: `## 1.` / `## 2.` (>=2 sezioni numerate),
+ * `1. **Titolo.**` / `2. **Titolo.**` (>=2 item di lista ordinata con lead in grassetto)
+ * oppure `- **Titolo**` / `- [ ] **Titolo**` (>=2 bullet top-level con lead in grassetto).
+ *
+ * Perche' esiste (#568): i rilevatori di aggregati leggevano SOLO il titolo — un conteggio
+ * esplicito ("N items deferred", N>=2) o le parole `sweep|batch|bulk`. I follow-up
+ * multi-item che post-merge-followup.yml genera SENZA conteggio nel titolo (clausole unite
+ * da "+", item enumerati nel corpo) restavano invisibili. Misurato il 2026-09-05 su tre
+ * esempi dell'escalation #560: #374 (5 item, dichiarati tali dal fixer stesso), #505 (2) e
+ * #466 (3) davano `isAggregate` false su 3/3 e `isAvoidableAlreadyFixed` true su 3/3 —
+ * cioe' contati come burn "evitabile" dal gate dell'harvester pur essendo aggregati la cui
+ * risoluzione e' scaglionata su piu' PR, gonfiando proprio il bucket che ha innescato #560.
+ *
+ * La direzione dell'errore resta sicura in tutti i chiamanti: un falso positivo fa
+ * PROCEDERE il fixer (nessun corto-circuito), NON auto-chiudere un aggregato parziale e
+ * NON contare un burn — mai il contrario. Il conteggio esplicito nel titolo resta
+ * autoritativo e continua a corto-circuitare PRIMA di qui (#3378).
+ *
+ * DUPLICATA di proposito in `check-issue-already-resolved.mjs`, `harvest-agent-lessons.mjs`
+ * e `reconcile-followups.mjs`: i tre file sono `mode: identical` nel manifest, quindi
+ * estrarre un modulo comune e' lavoro del SITO (una de-duplicazione fatta qui viene
+ * sovrascritta al mirror successivo — stessa ragione gia' scritta nel manifest per
+ * `needs-human-prepass.mjs`). Il legame e' coperto da un test invece che da un import,
+ * che e' l'uscita prevista da AGENTS.md #6 nella forma di `ci-check-name.test.mjs`:
+ * `generator/tests/aggregate-detectors-agree.test.mjs` fallisce se una copia diverge.
+ *
+ * @param {string} body corpo della issue
+ * @returns {boolean} true se il corpo enumera >=2 item
+ */
+export function hasEnumeratedItems(body) {
+  const b = String(body || '');
+  const numberedSections = (b.match(/^#{2,4}[ \t]*\d+[.)](?=[ \t]|$)/gm) || []).length;
+  if (numberedSections >= 2) return true;
+  // Lista ordinata con lead in grassetto: `1. **Titolo.**` / `2. **Titolo.**` (#831, #832).
+  // Il grassetto e' cio' che distingue l'item enumerato dai passi di una procedura numerata.
+  const orderedBoldItems = (b.match(/^[ \t]*\d+[.)][ \t]+\*\*/gm) || []).length;
+  if (orderedBoldItems >= 2) return true;
+  const boldLeadBullets = (b.match(/^[-*][ \t]+(?:\[[ xX]\][ \t]*)?\*\*/gm) || []).length;
+  return boldLeadBullets >= 2;
+}
+
+/**
+ * Aggregate follow-up: never short-circuit on one match (one item resolved != all). Three
  * detectors, OR'd:
- *   1. Numeric count "N items deferred" with N>=2.
+ *   1. Numeric count "N items deferred" with N>=2 — authoritative once stated.
  *   2. Keyword fallback `sweep|batch|bulk` — a sweep enumerates many targets WITHOUT an
  *      "N items deferred" count (e.g. "Sweep: ~30 crawlers", #1826). Without it the sweep
  *      scores single-item and the preflight short-circuits after the FIRST resolved target,
@@ -149,21 +191,24 @@ const io = {
  *      false aggregate just lets the normal fixer run (safe), never a false short-circuit.
  *      Mirrors the same fallback in reconcile-followups.mjs / issue-fix.yml (single bug
  *      class across the sibling aggregate detectors).
+ *   3. Item enumerati nel BODY (`hasEnumeratedItems`, #568) — la forma che i follow-up
+ *      multi-item prendono quando il titolo non porta nessun conteggio.
  */
 export function isAggregate(title, body) {
   const text = `${title}\n${body}`;
   const m = text.match(/(\d+)\s+items?\s+deferred/i);
-  // An explicit count is authoritative once stated — trust it fully rather
-  // than falling through to the keyword heuristic below, which exists ONLY
-  // for aggregates that never state a count (e.g. "Sweep: ~30 crawlers").
+  // An explicit count is authoritative once stated - trust it fully rather
+  // than falling through to the heuristics below, which exist ONLY for
+  // aggregates that never state a count (e.g. "Sweep: ~30 crawlers").
   // Without this short-circuit, a genuinely single-item follow-up whose
   // title happens to contain "batch"/"sweep"/"bulk" as an ordinary word
   // (e.g. "batch backfill re-checks tier-3...") was misclassified as an
-  // aggregate despite explicitly saying "1 item deferred" — a false-positive
+  // aggregate despite explicitly saying "1 item deferred" - a false-positive
   // that wrongly blocked the PR-body contract gate on a fully-completed single item
   // (#3378).
   if (m) return Number(m[1]) >= 2;
-  return /\b(?:sweep|batch|bulk)\b/i.test(text);
+  if (/\b(?:sweep|batch|bulk)\b/i.test(text)) return true;
+  return hasEnumeratedItems(body);
 }
 
 function main() {
