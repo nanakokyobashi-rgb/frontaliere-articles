@@ -283,7 +283,12 @@ jobs:
             if [ "$attempt" -eq 3 ]; then
               break
             fi
-            sleep 3
+            # Backoff CRESCENTE, come negli altri produttori: 3 tentativi a 3s
+            # fissi danno meno margine cumulativo prima di arrendersi sotto una
+            # collisione di push reale e sostenuta (follow-up #659 di #644).
+            # E deve precedere fetch+rebase: dormire DOPO rende HEAD gia'
+            # stantio prima del tentativo successivo.
+            sleep $((attempt * 3))
             # Same non-transient conflict as generate-article.yml (issue #76):
             # data/batch-faq-progress.json is resumability bookkeeping rewritten
             # in full each run, so retrying the identical rebase cannot succeed.

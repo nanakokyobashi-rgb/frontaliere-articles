@@ -224,6 +224,33 @@ test('ogni retry pusha da una base fresca: backoff prima del rebase, nessun reba
   }
 });
 
+test('il backoff fra i tentativi cresce con $attempt, in OGNI workflow che ritenta il push', () => {
+  // Follow-up #659 di #644: il riordino aveva pinnato l'ORDINE (backoff prima
+  // del rebase) ma non la FORMA del backoff, e due produttori su sette erano
+  // rimasti a `sleep 3` fisso. Tre tentativi a 3s danno 6s di margine
+  // cumulativo contro i 9s dei fratelli: sotto una collisione di push reale e
+  // sostenuta si arrendono prima, e il commit del corpus non atterra.
+  //
+  // La lista e' DERIVATA da `pushRetriers`, non scritta qui: un produttore
+  // nuovo che copia il backoff fisso nasce rosso senza che nessuno debba
+  // ricordarsi di aggiungerlo.
+  const fissi = [];
+  for (const w of pushRetriers) {
+    const [block] = w.retry;
+    const sleeps = [...block.matchAll(/^\s*sleep (.+)$/gm)].map((m) => m[1].trim());
+    assert.ok(sleeps.length > 0, `${w.file}: manca il backoff fra i tentativi concorrenti`);
+    // Cresce = l'espressione NOMINA `attempt`. Pinnare la formula esatta
+    // vieterebbe un backoff diverso ma comunque crescente, che non e' il difetto.
+    for (const expr of sleeps) if (!/\battempt\b/.test(expr)) fissi.push(`${w.file}: sleep ${expr}`);
+  }
+  assert.deepEqual(
+    fissi,
+    [],
+    'backoff fisso fra i tentativi: va uniformato al crescente `sleep $((attempt * 3))` degli altri produttori.\n  ' +
+      fissi.join('\n  '),
+  );
+});
+
 test('OGNI produttore del corpus ha lo step di guardia', () => {
   const senza = producers.filter((p) => guardIndexOf(p.src) === -1).map((p) => p.file);
   assert.deepEqual(

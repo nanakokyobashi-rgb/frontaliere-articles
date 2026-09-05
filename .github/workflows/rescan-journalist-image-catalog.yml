@@ -144,7 +144,12 @@ jobs:
             if [ "$attempt" -eq 3 ]; then
               break
             fi
-            sleep 3
+            # Backoff CRESCENTE, come negli altri produttori: 3 tentativi a 3s
+            # fissi danno meno margine cumulativo prima di arrendersi sotto una
+            # collisione di push reale e sostenuta (follow-up #659 di #644).
+            # E deve precedere fetch+rebase: dormire DOPO rende HEAD gia'
+            # stantio prima del tentativo successivo.
+            sleep $((attempt * 3))
             # Same bookkeeping-conflict class as generate-article.yml (issue
             # #76): a full rescan can race an incremental appendCatalogEntry()
             # from a concurrent publish. Either way the file is entirely
