@@ -46,6 +46,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { truncateSlugAtWordBoundary } from '../scripts/lib/slug-truncate.mjs';
+import { metaFieldPlausibilityMiss } from '../scripts/lib/body2-payload-verdict.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
 const CREATE_ARTICLE = path.join(ROOT, 'generator', 'scripts', 'create-article.mjs');
@@ -79,15 +80,21 @@ function loadSlugSandbox() {
     'export function relocalizeSlugsAfterTranslation(data, opts = {}) {',
   );
   const code = `${slugify}\n${placeholderGuard}\n${relocalize}`.replace(/^export /gm, '');
+  // `metaFieldPlausibilityMiss` entra in sandbox IMPORTATO dal suo modulo, non
+  // ricopiato (AGENTS.md #6): `localizedTitleSlugCandidate` lo attraversa, ed
+  // e' cio' che tiene un titolo tradotto troppo corto per essere un titolo
+  // fuori dallo slug pubblicato (#798).
   return new Function(
     'truncateSlugAtWordBoundary',
-    `${code}\nreturn { slugifySlugPart, inspectSlugForPromptPlaceholder, relocalizeSlugsAfterTranslation, markProvisionalItSlug, PROVISIONAL_IT_SLUG_FIELD };`,
-  )(truncateSlugAtWordBoundary);
+    'metaFieldPlausibilityMiss',
+    `${code}\nreturn { slugifySlugPart, inspectSlugForPromptPlaceholder, localizedTitleSlugCandidate, relocalizeSlugsAfterTranslation, markProvisionalItSlug, PROVISIONAL_IT_SLUG_FIELD };`,
+  )(truncateSlugAtWordBoundary, metaFieldPlausibilityMiss);
 }
 
 const {
   slugifySlugPart,
   inspectSlugForPromptPlaceholder,
+  localizedTitleSlugCandidate,
   relocalizeSlugsAfterTranslation,
   markProvisionalItSlug,
   PROVISIONAL_IT_SLUG_FIELD,
@@ -186,7 +193,13 @@ describe('relocalizeSlugsAfterTranslation — lo slug di un locale non e’ l’
     // e' la causa del difetto, non il difetto.
     const cases = [
       { mutate: (d) => { d.content.en = {}; }, reason: 'titolo tradotto assente' },
-      { mutate: (d) => { d.content.en = { title: '— — —' }; }, reason: 'titolo tradotto non slugificabile' },
+      // Sopra il floor di plausibilita' (13 char / 7 parole) di proposito: la
+      // causa in prova qui e' «non slugificabile», e con un titolo piu' corto
+      // scatterebbe prima il floor, che e' una causa diversa.
+      { mutate: (d) => { d.content.en = { title: '— — — — — — —' }; }, reason: 'titolo tradotto non slugificabile' },
+      // #798: il non-vuoto non basta. `Titel` e' slugificabile e non e' un
+      // segnaposto — diventerebbe `/en/<hub>/titel/` senza questo ramo.
+      { mutate: (d) => { d.content.en = { title: 'Titel' }; }, reason: 'titolo tradotto sotto il floor di plausibilita\' (title<12)' },
       // Il titolo tradotto che slugifica esattamente sull'italiano: succede con
       // i titoli fatti di soli nomi propri ("Gaggiolo", "Chiasso").
       { mutate: (d) => { d.content.en = { title: d.slugs.it.replace(/-/g, ' ') }; }, reason: 'titolo tradotto identico all\'italiano' },

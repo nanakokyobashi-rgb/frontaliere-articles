@@ -92,6 +92,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { truncateSlugAtWordBoundary } from '../scripts/lib/slug-truncate.mjs';
+import { metaFieldPlausibilityMiss } from '../scripts/lib/body2-payload-verdict.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
 const CREATE_ARTICLE = path.join(ROOT, 'generator', 'scripts', 'create-article.mjs');
@@ -135,6 +136,10 @@ function loadGuard() {
     // una ragione che non c'entra nulla con i segnaposto.
     sliceFn("export const PROVISIONAL_IT_SLUG_FIELD = '_slugsProvisionalFromIt';"),
     sliceFn('function clearProvisionalItSlug(data, locale) {'),
+    // L'unico helper che deriva uno slug da un titolo localizzato: i quattro
+    // rami sotto esame ci passano tutti, e senza il suo blocco la sandbox
+    // esplode su un nome non definito invece che sui segnaposto (#798).
+    sliceFn('function localizedTitleSlugCandidate(localizedTitle) {'),
     sliceFn('export function relocalizeSlugsAfterTranslation(data, opts = {}) {'),
     sliceFn('export function deriveAndSanitizeArticleSlugs(data) {'),
   ]
@@ -143,6 +148,7 @@ function loadGuard() {
   return new Function(
     'console',
     'truncateSlugAtWordBoundary',
+    'metaFieldPlausibilityMiss',
     'sectionLocaleSlugTaken',
     'reportSlugI18nEvent',
     'RUN_REPORT',
@@ -168,6 +174,9 @@ function freshGuard() {
   const sandbox = loadGuard()(
     fakeConsole,
     truncateSlugAtWordBoundary,
+    // Importato dal suo modulo, non ricopiato (AGENTS.md #6): e' il floor che
+    // `localizedTitleSlugCandidate` somma al classificatore.
+    metaFieldPlausibilityMiss,
     () => false,
     () => {},
     { slugs: { localizedFromTitle: 0, relocalized: 0, itFallback: 0, itFallbackDetail: [] } },

@@ -270,3 +270,29 @@ test('ogni retry che sostituisce un title/excerpt riapplica il floor', () => {
     assert.ok(re.test(src), `sito della classe #798 senza floor: ${re}`);
   }
 });
+
+test('ogni slug derivato da un titolo localizzato passa dal floor, non dal classificatore nudo', () => {
+  // Il consumatore VERO del titolo tradotto e' lo slug: `data.slugs[locale]`
+  // e' URL e canonical di /en/, /de/, /fr/, live senza rebuild del sito e non
+  // correggibile a valle. Quattro punti di create-article.mjs lo derivano dal
+  // titolo localizzato, e prima di #798 tutti e quattro chiedevano solo che il
+  // titolo fosse slugificabile: un `title` DE `Titel` passava e pubblicava
+  // `/de/<hub>/titel/`. Il floor sta ORA nell'unico helper condiviso, quindi
+  // il pin e' doppio — l'helper esiste e nessun sito lo scavalca.
+  const src = fs.readFileSync(path.join(REPO, 'generator/scripts/create-article.mjs'), 'utf8');
+  assert.ok(
+    /function localizedTitleSlugCandidate\(localizedTitle\) \{[\s\S]*?metaFieldPlausibilityMiss\('title', testo\)/.test(src),
+    "localizedTitleSlugCandidate() non applica piu' il floor al titolo che diventa slug",
+  );
+  // `= …` esclude la dichiarazione della funzione stessa dal conteggio.
+  const derivazioni = src.match(/= localizedTitleSlugCandidate\(localizedTitle\);/g) || [];
+  assert.equal(
+    derivazioni.length,
+    4,
+    `i punti che derivano uno slug da un titolo localizzato sono 4: trovati ${derivazioni.length} passaggi dall'helper`,
+  );
+  assert.ok(
+    !/inspectSlugForPromptPlaceholder\(localizedTitle\)/.test(src),
+    'un sito deriva ancora lo slug dal titolo localizzato col classificatore NUDO, senza floor',
+  );
+});
