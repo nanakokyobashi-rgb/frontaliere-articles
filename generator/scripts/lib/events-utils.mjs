@@ -21,7 +21,7 @@ import { truncateSlugAtWordBoundary } from './slug-truncate.mjs';
 import CANTON_URL_SLUGS from '../../data/canton-url-slugs.json' with { type: 'json' };
 import { MUNICIPALITIES } from '../../data/municipalities.ts';
 import { freeTranslateWithRetry } from './free-translate.mjs';
-import { hasUsableContentText } from './body2-payload-verdict.mjs';
+import { hasUsableTranslatedText } from './body2-payload-verdict.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 // `../../..`: same one-level-deeper correction as evergreen-article-refresh.mjs
@@ -949,10 +949,15 @@ const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
  * network, no mutation. Exported for direct unit testing.
  */
 export function localesNeedingTranslation(byLocale, locales = ['it', 'en', 'de', 'fr']) {
-  // `hasUsableContentText` e non un `.trim()` nudo: un motore MT che risponde
-  // con la stringa `"null"` conterebbe come locale PRESENTE e il titolo `null`
-  // resterebbe nel record pubblicato (#799).
-  const present = locales.filter((l) => hasUsableContentText(byLocale?.[l]));
+  // `hasUsableTranslatedText` e non un `.trim()` nudo: un motore MT che
+  // risponde con la stringa serializzata `"null"` conterebbe come locale
+  // PRESENTE e il titolo `null` resterebbe nel record pubblicato (#799). Il
+  // predicato e' quello dei campi tradotti, ed e' PER LOCALE — questa mappa e'
+  // lingua naturale, e `Null` maiuscolo e' un titolo DE legittimo («zero»):
+  // scartarlo marcherebbe il locale come mancante e lo farebbe riempire col
+  // testo della sorgente (#831). Su it/en/fr `Null` resta scartato: li' non e'
+  // una parola, e la deroga toglierebbe la rete senza salvare niente.
+  const present = locales.filter((l) => hasUsableTranslatedText(byLocale?.[l], l));
   const normalized = new Map();
   const counts = new Map();
   for (const l of present) {
@@ -982,7 +987,7 @@ async function fillLocaleGaps(byLocale, cache, { fieldType, locales, delayMs, tr
   const needing = localesNeedingTranslation(byLocale, locales);
   if (needing.length === 0) return byLocale;
 
-  const present = locales.filter((l) => hasUsableContentText(byLocale?.[l]));
+  const present = locales.filter((l) => hasUsableTranslatedText(byLocale?.[l], l));
   if (present.length === 0) return byLocale;
   const sourceLocale = present.find((l) => !needing.includes(l)) || present[0];
   const sourceText = byLocale[sourceLocale];
@@ -994,16 +999,16 @@ async function fillLocaleGaps(byLocale, cache, { fieldType, locales, delayMs, tr
     const cacheKey = `${fieldType}::${sourceLocale}::${normalizedSource}`;
     const entry = cache[cacheKey] || {};
     let translated = entry[target];
-    if (!hasUsableContentText(translated)) {
+    if (!hasUsableTranslatedText(translated, target)) {
       translated = await translateFn({ text: sourceText, sourceLang: sourceLocale, targetLang: target, fieldType, maxRetries: 1 });
-      if (hasUsableContentText(translated)) {
+      if (hasUsableTranslatedText(translated, target)) {
         cache[cacheKey] = { ...entry, [target]: translated };
         if (translateFn === freeTranslateWithRetry) await sleep(delayMs);
       }
     }
     // Una traduzione `"null"` non deve ne' entrare in cache ne' sovrascrivere
     // il gap: il locale resta scoperto e cade sul testo della sorgente.
-    if (hasUsableContentText(translated)) updated[target] = translated;
+    if (hasUsableTranslatedText(translated, target)) updated[target] = translated;
   }
   return updated;
 }

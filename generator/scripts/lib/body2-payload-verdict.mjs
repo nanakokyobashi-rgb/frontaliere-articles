@@ -104,6 +104,38 @@ export const META_ONLY_FIELDS = ['title', 'excerpt'];
  */
 const LITERAL_NULL_STRING_RE = /^null$/i;
 
+/**
+ * La forma SERIALIZZATA, e solo quella. `String(null)` e `JSON.stringify(null)`
+ * producono sempre `null` MINUSCOLO: non esiste una serializzazione che scriva
+ * `Null` o `NULL`. La distinzione conta perche' `Null` con la maiuscola e' la
+ * parola tedesca corrente per «zero» — e i sostantivi tedeschi sono sempre
+ * maiuscoli, quindi la maiuscola non e' un caso fortunato: e' la forma NORMALE
+ * della parola. Vedi `hasUsableTranslatedText`.
+ */
+const SERIALIZED_NULL_STRING_RE = /^null$/;
+
+/**
+ * I locali in cui `null` e' una PAROLA della lingua, e quindi in cui la sola
+ * grafia serializzata (minuscola) puo' essere scartata da
+ * `hasUsableTranslatedText`. Oggi: solo il tedesco — `Null` e' la parola
+ * corrente per «zero», e i sostantivi tedeschi sono sempre maiuscoli.
+ *
+ * Non e' una congettura da mantenere a mano su tutti i locali possibili: il
+ * set dei locali tradotti e' gia' enumerato letteralmente nel codice
+ * (`['en','de','fr']` in `create-article.mjs`, `['it','en','de','fr']` in
+ * `events-utils.mjs`), e per en/fr `Null`/`NULL` come testo INTERO di un
+ * `title`/`excerpt` non e' prosa: la deroga li' cancellerebbe la recovery
+ * (#822) senza salvare nessuna parola reale. Un locale non elencato — e un
+ * locale ASSENTE, cioe' un chiamante che non lo passa — resta sul predicato
+ * severo: si fallisce CHIUSI.
+ */
+const LOCALES_WITH_NULL_AS_WORD = new Set(['de']);
+
+/** `true` se in `locale` il `null` maiuscolo e' una parola, non una serializzazione. */
+export function localeHasNullAsWord(locale) {
+  return LOCALES_WITH_NULL_AS_WORD.has(String(locale ?? '').trim().toLowerCase());
+}
+
 /** Toglie al piu' una coppia wrapping di `'` o `"` dopo il trim. */
 function stripOneWrappingQuotePair(value) {
   if (value.length < 2) return value;
@@ -114,10 +146,32 @@ function stripOneWrappingQuotePair(value) {
   return value;
 }
 
-export function isLiteralNullString(value) {
+function matchesNullLiteral(value, re) {
   if (typeof value !== 'string') return false;
   const trimmed = value.trim();
-  return LITERAL_NULL_STRING_RE.test(trimmed) || LITERAL_NULL_STRING_RE.test(stripOneWrappingQuotePair(trimmed));
+  return re.test(trimmed) || re.test(stripOneWrappingQuotePair(trimmed));
+}
+
+export function isLiteralNullString(value) {
+  return matchesNullLiteral(value, LITERAL_NULL_STRING_RE);
+}
+
+/**
+ * Come `isLiteralNullString`, ma sul testo di un locale TRADOTTO in cui `null`
+ * e' una parola: solo la forma serializzata (minuscola) conta. Vedi
+ * `hasUsableTranslatedText`.
+ */
+export function isSerializedNullString(value) {
+  return matchesNullLiteral(value, SERIALIZED_NULL_STRING_RE);
+}
+
+/**
+ * Il predicato di «null letterale» che vale per `locale`: la sola grafia
+ * serializzata dove `null` e' una parola della lingua (de), tutte le grafie
+ * altrove — e quando il locale non e' noto.
+ */
+export function isNullStringForLocale(value, locale) {
+  return localeHasNullAsWord(locale) ? isSerializedNullString(value) : isLiteralNullString(value);
 }
 
 /**
@@ -131,6 +185,44 @@ export function isLiteralNullString(value) {
  */
 export function hasUsableContentText(value) {
   return typeof value === 'string' && value.trim().length > 0 && !isLiteralNullString(value);
+}
+
+/**
+ * Testo UTILIZZABILE di un campo TRADOTTO (`content.de/en/fr`,
+ * `titleByLocale`, l'uscita della cascata free-MT). Stessa regola di
+ * `hasUsableContentText` tranne una, e SOLO nei locali in cui `null` e' una
+ * parola della lingua (`LOCALES_WITH_NULL_AS_WORD`, oggi il solo `de`): li' il
+ * `null` letterale conta solo nella forma SERIALIZZATA, minuscola.
+ *
+ * `locale` va quindi passato da ogni chiamante. Senza — o su un locale non
+ * elencato, en/fr compresi — il predicato e' identico a `hasUsableContentText`:
+ * un `title` en che vale `NULL` non e' prosa inglese, resta un campo mancante,
+ * e la recovery per-campo (retry mirato -> fallback IT) continua a coprirlo
+ * come prima di #831.
+ *
+ * Perche' i due predicati divergono. `hasUsableContentText` giudica il payload
+ * che il modello produce nella lingua SORGENTE (italiano): li' `null` non e'
+ * una parola in nessuna grafia, quindi rifiutare anche `Null`/`NULL` non puo'
+ * cancellare contenuto. Su un campo tradotto la stessa regola non e' neutra:
+ * `Null` e' la parola tedesca corrente per «zero», e un titolo o un excerpt
+ * DE il cui testo intero e' `Null` verrebbe letto come MANCANTE. La recovery
+ * per-campo non ha niente da recuperare — il campo tradotto e' giusto — quindi
+ * cade sulla sorgente e pubblica il testo ITALIANO sotto `/de/`: nel corpus,
+ * nella meta del locale e nel suo feed RSS. Non e' un `null` pubblicato, e' un
+ * locale sbagliato pubblicato, e nessun gate a valle lo vede.
+ *
+ * (I path della superficie non sono nominati qui di proposito: il censimento
+ * dei choke-point di `corpus-write-atomic.test.mjs` matcha sul TESTO del file
+ * e di tutti i suoi import relativi, quindi una radice pubblicata citata in un
+ * commento di questo modulo marcherebbe come scrittore di artefatti pubblicati
+ * ogni file che lo importa — `events-utils.mjs` per primo.)
+ *
+ * La forma misurata su `haiku` in #799 e' `"null"` minuscolo — la sola che una
+ * serializzazione puo' produrre — quindi restringere alla grafia serializzata
+ * non riapre nulla di cio' che #822 ha chiuso.
+ */
+export function hasUsableTranslatedText(value, locale) {
+  return typeof value === 'string' && value.trim().length > 0 && !isNullStringForLocale(value, locale);
 }
 
 /**

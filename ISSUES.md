@@ -81,6 +81,14 @@ l'unica pending, quindi non può essere cancellata.
    Una keyword `Closes` **per issue, una per riga**: GitHub chiude solo la prima
    dopo la keyword, quindi `Closes #a #b` lascia `#b` aperta.
 
+   **Eccezione — issue aggregata.** Il circuit-breaker qui sotto fa chiudere
+   **un item su N**: `Closes #<n>` chiuderebbe al merge il tracker insieme agli
+   item appena deferiti in `## Non implementato`, e non resterebbe niente da
+   ri-accodare. `scripts/ci/reconcile-followups.mjs` si rifiuta gia' di
+   auto-chiudere un aggregato (`closeEligible = ... && !isAggregate`) — la
+   keyword nel body bypassa quella protezione. **Usa `Refs #<n>`** e lascia la
+   issue aperta per il giro successivo.
+
    **Eccezione — fix provabile solo da una run su `main`.** Se la PR tocca
    `.github/workflows/**` o la config dell'action Claude (`claude_args`,
    `settings`, sandbox, `permissionMode`) per un bug osservabile solo a
@@ -104,6 +112,10 @@ fallire, perché si paga tutto e non si ottiene niente.
 **Regola ferrea:** fixa **esattamente un item**, poi fermati. Anche con turni
 residui. Gli altri vanno elencati in `## Non implementato`, che li ri-accoda.
 Ogni ciclo chiude almeno un item, quindi converge.
+
+E nel body della PR **`Refs #<n>`, mai `Closes #<n>`**: la PR chiude un item, non
+il tracker. Con `Closes`, GitHub chiude l'aggregato al merge e gli item deferiti
+spariscono con lui — la convergenza si ferma al primo ciclo.
 
 ## Terminare senza PR è un esito legittimo
 
