@@ -5584,6 +5584,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.permesso-vallese-b-procedure.title': 'Permis B Valais : exigences et renouvellement',
     'blog.article.permesso-vallese-b-procedure.excerpt': 'Comment renouveler le permis de séjour B en Valais : les exigences, les documents nécessaires et les procédures auprès de l\'Office cantonal des migrations.',
     'blog.article.permesso-vallese-b-procedure.imageAlt': 'Documents pour permis de séjour B auprès d\'une administration cantonale suisse',
+    'blog.article.locazione-friburgo-guida-inquilini.title': 'Location Fribourg : guide du droit du locataire',
+    'blog.article.locazione-friburgo-guida-inquilini.excerpt': 'Dépôt maximum 3 mois loyer, résiliation sur formulaire cantonal, contestation dans les 30 jours. Les règles fédérales du Code des obligations garantissent une protection uniforme en Suisse.',
+    'blog.article.locazione-friburgo-guida-inquilini.imageAlt': 'Immeuble résidentiel du canton de Fribourg avec unités de logements et campagne environnante',
 };
 
 export default blogMetaChFr;

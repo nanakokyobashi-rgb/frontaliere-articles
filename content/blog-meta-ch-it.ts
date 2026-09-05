@@ -5584,6 +5584,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.permesso-vallese-b-procedure.title': 'Permesso B Vallese: requisiti e rinnovo',
     'blog.article.permesso-vallese-b-procedure.excerpt': 'Come rinnovare il permesso di dimora B nel Vallese: i requisiti, i documenti necessari e le procedure presso l\'Ufficio cantonale della migrazione.',
     'blog.article.permesso-vallese-b-procedure.imageAlt': 'Documenti e moduli per il permesso di dimora B presso un ufficio cantonale svizzero',
+    'blog.article.locazione-friburgo-guida-inquilini.title': 'Locazione Friburgo: guida al diritto dell\'inquilino',
+    'blog.article.locazione-friburgo-guida-inquilini.excerpt': 'Deposito max 3 mesi pigione, disdetta su modulo cantonale, contestazione entro 30 giorni. Le regole federali del Codice Obbligazioni garantiscono protezione uniforme in Svizzera.',
+    'blog.article.locazione-friburgo-guida-inquilini.imageAlt': 'Edificio residenziale nel Canton Friburgo con dettagli di unità abitative e campagna circostante',
 };
 
 export default blogMetaChIt;

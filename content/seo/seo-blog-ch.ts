@@ -72482,6 +72482,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-locazione-friburgo-guida-inquilini': {
+    title: 'Locazione Friburgo: guida al diritto dell\'inquilino',
+    description: 'Deposito max 3 mesi pigione, disdetta su modulo cantonale, contestazione entro 30 giorni. Le regole federali del Codice Obbligazioni garantiscono protezione',
+    keywords: 'frontalieri, ticino, svizzera, italia, locazione, friburgo, diritto, dell',
+    ogTitle: 'Locazione Friburgo: guida al diritto dell\'inquilino',
+    ogDescription: 'Deposito max 3 mesi pigione, disdetta su modulo cantonale, contestazione entro 30 giorni. Le regole federali del Codice Obbligazioni garantiscono protezione uniforme in Svizzera.',
+    canonicalPath: '/articoli-svizzera/locazione-friburgo-guida-inquilini/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Locazione Friburgo: guida al diritto dell'inquilino",
+      "description": "Deposito max 3 mesi pigione, disdetta su modulo cantonale, contestazione entro 30 giorni. Le regole federali del Codice Obbligazioni garantiscono protezione",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/locazione-friburgo-guida-inquilini.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Edificio residenziale nel Canton Friburgo con dettagli di unità abitative e campagna circostante"
+      },
+      "datePublished": "2026-09-05T17:49:10+00:00",
+      "dateModified": "2026-09-05T17:49:10+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/locazione-friburgo-guida-inquilini/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

@@ -1887,6 +1887,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'permesso-b-friburgo-requisiti-rinnovo': { it: 'permesso-b-friburgo-requisiti-rinnovo', en: 'residence-permit-b-fribourg-requirements-renewal', de: 'aufenthaltserlaubnis-b-freiburg-verlaengerung', fr: 'permis-sejour-b-fribourg-renouvellement' },
  'premi-lamal-vallese-riduzione': { it: 'premi-lamal-vallese-riduzione', en: 'valais-lamal-premiums-reduction', de: 'vallese-lamal-praemien-reduktion', fr: 'valais-lamal-cotisazioni-riduzione' },
  'permesso-vallese-b-procedure': { it: 'permesso-vallese-b-procedure', en: 'valais-residence-permit-b-procedures', de: 'walliser-aufenthaltsbewilligung-b-verfahren', fr: 'permis-sejour-b-valais-procedures' },
+ 'locazione-friburgo-guida-inquilini': { it: 'locazione-friburgo-guida-inquilini', en: 'fribourg-rental-tenants-guide', de: 'mietrecht-freiburg-mieterleitfaden', fr: 'location-fribourg-guide-locataires' },
 };
 
 export const REVERSE_SWISS: Record<ArticleLocale, Record<string, string>> = (() => {

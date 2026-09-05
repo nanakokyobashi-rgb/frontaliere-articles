@@ -5584,6 +5584,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.permesso-vallese-b-procedure.title': 'Permit B Valais: requirements and renewal',
     'blog.article.permesso-vallese-b-procedure.excerpt': 'How to renew the residence permit B in Valais: the requirements, the necessary documents and the procedures at the Cantonal Office of Migration.',
     'blog.article.permesso-vallese-b-procedure.imageAlt': 'Residence permit B documents and forms at a Swiss cantonal migration office',
+    'blog.article.locazione-friburgo-guida-inquilini.title': 'Lease Freiburg: Tenant\'s Right Guide',
+    'blog.article.locazione-friburgo-guida-inquilini.excerpt': 'Maximum deposit 3 months rent, cancellation on cantonal form, dispute within 30 days. The federal rules of the Bonds Code guarantee uniform protection in Switzerland.',
+    'blog.article.locazione-friburgo-guida-inquilini.imageAlt': 'Residential building in Fribourg Canton with apartment units and surrounding countryside',
 };
 
 export default blogMetaChEn;

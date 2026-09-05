@@ -5584,6 +5584,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.permesso-vallese-b-procedure.title': 'B-Bewilligung Wallis: Voraussetzungen und Erneuerung',
     'blog.article.permesso-vallese-b-procedure.excerpt': 'So erneuern Sie die Aufenthaltsbewilligung B im Wallis: Voraussetzungen, erforderliche Unterlagen und Verfahren beim kantonalen Migrationsamt.',
     'blog.article.permesso-vallese-b-procedure.imageAlt': 'Dokumente für Aufenthaltsbewilligung B in einem Schweizer Kantonsamtssitz',
+    'blog.article.locazione-friburgo-guida-inquilini.title': 'Vermietung Freiburg: Leitfaden zum Mieterrecht',
+    'blog.article.locazione-friburgo-guida-inquilini.excerpt': 'Kaution max. 3 Monate Miete, Kündigung auf kantonalem Formular, Beanstandung innerhalb von 30 Tagen. Die eidgenössischen Regeln des Obligationenrechts gewährleisten einen einheitlichen Schutz in der Schweiz.',
+    'blog.article.locazione-friburgo-guida-inquilini.imageAlt': 'Wohngebäude im Kanton Freiburg mit Wohneinheiten und umliegender Landschaft',
 };
 
 export default blogMetaChDe;
