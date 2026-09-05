@@ -3708,20 +3708,20 @@ function _registerExitHooks() {
  * come prima.
  */
 export function recordModelSuccess(modelId, { recordScore = true } = {}) {
-  const wantsRecord = coerceRecordScore(recordScore);
-  // Il punteggio e i dettagli sono la META' LEDGER anche quando sembrano solo
-  // memoria: `_persistScoresToFirestore` scrive `score` come valore ASSOLUTO
-  // letto da `_modelScores`, quindi un punto guadagnato in opt-out finirebbe
-  // comunque nel documento condiviso appena un altro writer sporca lo stesso
-  // modello. Sotto opt-out resta quindi il solo tally di run.
-  if (wantsRecord) {
-    _modelScores.set(modelId, (_modelScores.get(modelId) || 0) + SCORE_SUCCESS);
-    const d = _modelDetails.get(modelId) || { successes: 0, failures: 0 };
-    d.successes++;
-    _modelDetails.set(modelId, d);
+  // Il punteggio e i dettagli sono meta' LEDGER anche se sembrano solo memoria:
+  // `_persistScoresToFirestore` scrive `score` come valore ASSOLUTO letto da
+  // `_modelScores`, quindi un punto guadagnato in opt-out raggiungerebbe il
+  // documento condiviso appena un writer di produzione sporca lo stesso
+  // modello. In opt-out resta il solo tally di run.
+  if (!coerceRecordScore(recordScore)) {
+    _bumpRunOutcome(modelId, 'successes');
+    return;
   }
-  _bumpOutcome(modelId, 'successes', wantsRecord);
-  if (!wantsRecord) return;
+  _modelScores.set(modelId, (_modelScores.get(modelId) || 0) + SCORE_SUCCESS);
+  const d = _modelDetails.get(modelId) || { successes: 0, failures: 0 };
+  d.successes++;
+  _modelDetails.set(modelId, d);
+  _bumpOutcome(modelId, 'successes');
   _dirtyModels.add(modelId);
   _schedulePersist();
 }
@@ -3732,19 +3732,23 @@ export function recordModelSuccess(modelId, { recordScore = true } = {}) {
  * empties on every successful write, the run tally never does (printRunSummary
  * reads it at the very end).
  */
-function _bumpOutcome(modelId, field, recordScore = true) {
-  // Sotto opt-out il delta NON si accumula: e' la meta' destinata al documento
-  // condiviso, e restare in coda non e' innocuo — al primo momento in cui un
-  // altro writer sporca lo stesso modello, `_persistScoresToFirestore` lo
-  // troverebbe li' e lo scriverebbe come incremento atomico. Il tally di run
-  // sotto invece resta sempre: e' in memoria, lo legge printRunSummary, e un
-  // chiamante diagnostico e' proprio quello che ha bisogno di vedere i propri
-  // esiti a fine run.
-  if (coerceRecordScore(recordScore)) {
-    const pending = _pendingCounterDeltas.get(modelId) || { successes: 0, failures: 0 };
-    pending[field]++;
-    _pendingCounterDeltas.set(modelId, pending);
-  }
+function _bumpOutcome(modelId, field) {
+  const pending = _pendingCounterDeltas.get(modelId) || { successes: 0, failures: 0 };
+  pending[field]++;
+  _pendingCounterDeltas.set(modelId, pending);
+  _bumpRunOutcome(modelId, field);
+}
+
+/**
+ * Solo la meta' IN MEMORIA di `_bumpOutcome`, per i chiamanti in opt-out dal
+ * ledger (#845): il tally di run non lascia il processo — lo legge
+ * printRunSummary — e un chiamante diagnostico e' proprio quello che ha
+ * bisogno di rileggere i propri esiti a fine run. Il delta di `_bumpOutcome`
+ * invece e' destinato a `ai_model_scores/_all` e in opt-out non deve nemmeno
+ * accumularsi: resterebbe in coda finche' un writer di produzione sporca lo
+ * stesso modello, e verrebbe spedito allora come incremento atomico.
+ */
+function _bumpRunOutcome(modelId, field) {
   const run = _runOutcomes.get(modelId) || { successes: 0, failures: 0 };
   run[field]++;
   _runOutcomes.set(modelId, run);
@@ -3831,21 +3835,28 @@ export function recordModelContentFailure(modelId, { recordScore = true } = {}) 
  * puo' quindi restare.
  */
 export function recordModelFailure(modelId, { nonRetryable = false, exhausted = false, transportOnly = false, recordScore = true } = {}) {
-  const wantsRecord = coerceRecordScore(recordScore);
   const penalty = transportOnly ? 0
                 : exhausted ? SCORE_EXHAUSTED
                 : nonRetryable ? SCORE_NON_RETRYABLE
                 : SCORE_RETRYABLE_FAIL;
+  // #845 — opt-out dal ledger condiviso, stessa normalizzazione di #783. Sta
+  // qui e non sui soli `_dirtyModels`/`_schedulePersist` perche' penale e
+  // dettagli sono ingressi DELLA SCRITTURA (`score` va out come assoluto,
+  // `successes`/`failures` come delta): lasciarli correre in opt-out li fa
+  // arrivare comunque a `ai_model_scores/_all` col primo writer di produzione
+  // che sporca lo stesso modello. E' la differenza con `markModelExhausted`,
+  // dove la meta' in-processo (`_exhaustedModels`) non entra nel documento.
+  if (!coerceRecordScore(recordScore)) {
+    _bumpRunOutcome(modelId, 'failures');
+    return;
+  }
   // Solo se c'e' davvero una penale: un `+ 0` creerebbe una voce a punteggio 0
   // per un modello mai visto, spostandolo nell'ordinamento della cascata.
-  if (wantsRecord && penalty !== 0) _modelScores.set(modelId, (_modelScores.get(modelId) || 0) + penalty);
-  if (wantsRecord) {
-    const d = _modelDetails.get(modelId) || { successes: 0, failures: 0 };
-    d.failures++;
-    _modelDetails.set(modelId, d);
-  }
-  _bumpOutcome(modelId, 'failures', wantsRecord);
-  if (!wantsRecord) return;
+  if (penalty !== 0) _modelScores.set(modelId, (_modelScores.get(modelId) || 0) + penalty);
+  const d = _modelDetails.get(modelId) || { successes: 0, failures: 0 };
+  d.failures++;
+  _modelDetails.set(modelId, d);
+  _bumpOutcome(modelId, 'failures');
   _dirtyModels.add(modelId);
   _schedulePersist();
 }
