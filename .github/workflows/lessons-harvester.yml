@@ -56,12 +56,31 @@ jobs:
       # and the schedule would stack one PR a day, green every time — a guard
       # that can't tell it is guarding nothing. `startswith` has no such
       # semantics to guess at.
+      #
+      # Counted with `gh api --paginate`, NOT `gh pr list --limit N`: that
+      # subcommand has no `--paginate` and its `--limit` truncates silently.
+      # `gh pr list` sorts by creation DESCENDING, and the PR this guard must
+      # see is by construction the OLD one — yesterday's, still unreviewed.
+      # Past the cut it does not exist for the workflow: the guard counts 0,
+      # stays green, and the schedule stacks one harvest PR a day. Same failure
+      # mode as the old `--search head:`, back through the other door (issue
+      # #871 item 3).
       - name: Guard — existing open proposal
         id: guard
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
         run: |
-          OPEN=$(gh pr list --state open --limit 100 --json headRefName --jq '[.[] | select(.headRefName | startswith("lessons/auto-harvest"))] | length')
+          # `set -e`: an API failure turns the step RED instead of counting 0
+          # and opening one more duplicate. A guard that could not look is not
+          # a green guard.
+          set -euo pipefail
+          # `head.repo.full_name == env.REPO`: su una PR da un FORK `head.ref` non
+          # e' qualificato, quindi chiunque puo' aprire un branch chiamato come
+          # il nostro e far contare 1 a questo guard — che poi si spegnerebbe
+          # da solo per sempre. Il prefisso e' un nome, non un permesso.
+          gh api --paginate "repos/$REPO/pulls?state=open&per_page=100" --jq '.[] | select(.head.repo.full_name == env.REPO) | .head.ref' > /tmp/open-prs.txt
+          OPEN=$(grep -c '^lessons/auto-harvest' /tmp/open-prs.txt || true)
           echo "open_proposals=$OPEN" >> "$GITHUB_OUTPUT"
           if [ "$OPEN" != "0" ]; then
             echo "A harvest proposal PR is already open — skipping today's run."

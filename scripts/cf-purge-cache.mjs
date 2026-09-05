@@ -72,8 +72,19 @@
  */
 import { resolveZoneId as resolveZoneIdShared } from './lib/cf-analytics.mjs';
 import { purgeBodiesForUrls } from './lib/cf-purge-variants.mjs';
+import { parsePositiveNum } from './lib/parse-positive-num.mjs';
 
-const PURGE_SETTLE_MS = Number(process.env.CF_PURGE_SETTLE_MS) || 20_000;
+// `Number(env) || 20_000` copriva `NaN`, `0` e `''` ma NON un negativo:
+// `CF_PURGE_SETTLE_MS=-5` passava, e `setTimeout` con un valore negativo parte
+// SUBITO — l'attesa di propagazione del purge saltava del tutto, senza un
+// errore da nessuna parte. Quinto call-site della classe di #871, nel ciclo di
+// pubblicazione: un purge che non si e' propagato lascia servire la variante
+// vecchia dal CDN e nessuno lo dice.
+const PURGE_SETTLE_MS = parsePositiveNum(process.env.CF_PURGE_SETTLE_MS, 20_000, {
+  label: 'CF_PURGE_SETTLE_MS',
+  tool: 'cf-purge-cache',
+  integer: true,
+});
 const MAX_TARGETED_FILES = 30; // Cloudflare free-plan `files` purge_cache cap.
 
 const REST_BASE = 'https://api.cloudflare.com/client/v4';

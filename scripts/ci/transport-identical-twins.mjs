@@ -108,7 +108,10 @@ import crypto from 'node:crypto';
 import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import { classify, siteFile } from './loop-drift-check.mjs';
-import { parsePositiveNum } from './scan-failed-runs.mjs';
+// Dalla libreria e non da `scan-failed-runs.mjs`: quello e' una CLI che apre
+// issue, e importarla per leggere un numero tira dentro
+// `github-issue-creator.mjs` e le sue costanti di argv.
+import { parsePositiveNum } from '../lib/parse-positive-num.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const MANIFEST_PATH = path.join(ROOT, 'scripts/ci/loop-sync-manifest.json');
@@ -137,7 +140,25 @@ const REALIGN_FILE = (RAW_ARGS.find((a) => a.startsWith('--realign=')) || '').sl
 const MAX_FILES = parsePositiveNum(process.env.TRANSPORT_MAX_FILES, 25, {
   label: 'TRANSPORT_MAX_FILES',
   tool: 'transport-identical-twins',
+  // Un tetto FRAZIONARIO passa il test "positivo" e poi viene troncato:
+  // `TRANSPORT_MAX_FILES=0.5` da' `slice(0, 0)`, zero copie e un «niente da
+  // portare» verde. E' lo stesso spegnimento silenzioso del `NaN`, per un
+  // valore che `> 0` non intercetta (issue #871).
+  integer: true,
 });
+
+/**
+ * Codice d'uscita per «copiato quello che si poteva, ma resta un no permanente
+ * con divergenza reale».
+ *
+ * Distinto da 1 — che vuol dire «NON copiare», il buio delle fetch che invalida
+ * la passata intera — perche' qui gli altri gemelli si copiano benissimo e uno
+ * solo di loro ha bisogno di una mano. Riusare 1 avrebbe fermato il trasporto
+ * di TUTTI finche' una persona non interviene: un canale che wedgia il canale.
+ * Con 2 lo step di apply porta il resto, apre la PR, e alza il rosso DOPO —
+ * vedi `.github/workflows/transport-identical-twins.yml` (issue #871 item 4).
+ */
+export const EXIT_MANUAL_NEEDED = 2;
 
 /**
  * Una FRAZIONE, non una percentuale. `parsePositiveNum` valida solo `> 0`,
@@ -649,6 +670,7 @@ async function main() {
   const candidates = [];
   const skipped = [];
   const failed = [];
+  const manual = [];
   const couplingGraph = [];
   const alignedPaths = new Set();
   const blockedForever = new Set();
@@ -691,6 +713,16 @@ async function main() {
     const verdict = transportVerdict(entry, now, base, { outOfScopePrefixes, couplings });
     if (!verdict.transport) {
       skipped.push({ path: rel, state: verdict.state, reason: verdict.reason });
+      // Un no PERMANENTE su un file che il sito ha gia' portato avanti non e'
+      // uno skip: e' una copia a mano che nessuno fara' se il report non la
+      // nomina, e che nessun giro futuro di questo canale ripeschera'. Un
+      // blocco permanente su un file `stable` invece non deve niente a
+      // nessuno — i 25 gemelli sotto `.github/workflows/` sono in quello stato
+      // per costruzione — e tenerli qui renderebbe la passata rossa ogni
+      // giorno, cioe' un canale che si smette di leggere (issue #871 item 4).
+      if (verdict.permanent && verdict.state === 'site-ahead') {
+        manual.push({ path: rel, state: verdict.state, reason: verdict.reason });
+      }
       // Solo un accoppiamento VERIFICATO allineato non blocca l'altra meta'.
       // Ogni altro skip (e ogni fetch fallita) lascia questo lato indietro.
       if (verdict.state === 'stable') alignedPaths.add(rel);
@@ -712,8 +744,12 @@ async function main() {
   });
   for (const d of dropped) skipped.push({ path: d.path, state: 'site-ahead', reason: d.reason });
   // I rinvii che non scadono non sono «al prossimo giro»: sono una copia a mano
-  // che nessuno farà se il report non la nomina.
-  const manual = dropped.filter((d) => d.permanent);
+  // che nessuno farà se il report non la nomina. I candidati che il tetto ha
+  // separato da una metà bloccata per sempre si uniscono ai no permanenti già
+  // raccolti sopra: la stessa cosa arrivata da due porte.
+  for (const d of dropped.filter((x) => x.permanent)) {
+    manual.push({ path: d.path, state: 'site-ahead', reason: d.reason });
+  }
 
   const transported = [];
   for (const { entry, path: rel, sitePath, content, now, base } of chosen) {
@@ -764,6 +800,21 @@ async function main() {
   if (dark.red) {
     console.error(`transport-identical-twins: ${dark.reason}`);
     return 1;
+  }
+  // Prima, la riga `⛔` e il campo `manual` vivevano nel log di una passata
+  // VERDE, e nessuno step leggeva quel campo: il gemello restava indietro per
+  // sempre e il solo ripescaggio ipotizzato (`stranded-twin` dopo 3 giorni) era
+  // a sua volta spegnibile in silenzio dal difetto dell'item 1. Ora il
+  // fallimento del workflow apre la sua issue via `scan-failed-runs.mjs`.
+  //
+  // Misurato il 2026-09-05 su `main`: 26 blocchi permanenti, TUTTI `stable`,
+  // quindi questo insieme e' vuoto e la passata resta verde.
+  if (manual.length) {
+    console.error(
+      `transport-identical-twins: ${manual.length} gemelli \`identical\` sono \`site-ahead\` e bloccati per SEMPRE `
+      + `(${manual.map((m) => m.path).join(', ')}): nessun giro di questo canale li portera\u2019, serve una copia a mano.`,
+    );
+    return EXIT_MANUAL_NEEDED;
   }
   return 0;
 }
