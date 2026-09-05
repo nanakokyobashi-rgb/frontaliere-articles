@@ -96,23 +96,32 @@ export const MIRROR_LOCKED_MODES = new Set(['identical']);
 const MANIFEST_PATH = fileURLToPath(new URL('./loop-sync-manifest.json', import.meta.url));
 
 /**
- * I path che il manifest dichiara bloccati dal mirror. Letti dalla SORGENTE
- * UNICA (`scripts/ci/loop-sync-manifest.json`), non da un elenco ricopiato qui:
- * se un file cambia `mode`, questa decisione cambia con lui, gratis.
+ * I path che il manifest dichiara bloccati dal mirror, come mappa
+ * **path del corpus → path del sito**. Letti dalla SORGENTE UNICA
+ * (`scripts/ci/loop-sync-manifest.json`), non da un elenco ricopiato qui: se un
+ * file cambia `mode`, questa decisione cambia con lui, gratis.
+ *
+ * I due lati NON hanno lo stesso path: 112 dei 157 entry `identical` portano un
+ * `sitePath` diverso (`host/shared/clauseTail.mjs` →
+ * `build-plugins/shared/clauseTail.mjs`). La chiave resta il path del corpus,
+ * perche' e' la forma in cui il fixer scrive la diagnosi; il valore e' quello da
+ * spedire, perche' e' l'unico che di la' esiste. Stessa risoluzione
+ * (`sitePath || path`) di `transport-identical-twins.mjs` e `loop-drift-check.mjs`,
+ * gli altri due lettori del manifest che parlano al repo del sito.
  */
 export function mirrorLockedPaths(manifestPath = MANIFEST_PATH) {
   try {
     const man = JSON.parse(readFileSync(manifestPath, 'utf8'));
-    return new Set(
-      (man?.files || [])
-        .filter((f) => MIRROR_LOCKED_MODES.has(f?.mode))
-        .map((f) => f?.path)
-        .filter(Boolean),
-    );
+    const out = new Map();
+    for (const f of man?.files || []) {
+      if (!MIRROR_LOCKED_MODES.has(f?.mode) || !f?.path) continue;
+      out.set(f.path, f.sitePath || f.path);
+    }
+    return out;
   } catch {
-    // Manifest illeggibile → insieme vuoto: nessun `no-root-cause` viene
+    // Manifest illeggibile → mappa vuota: nessun `no-root-cause` viene
     // spedito. Il fallimento sicuro e' non consegnare, non consegnare a caso.
-    return new Set();
+    return new Map();
   }
 }
 
@@ -188,23 +197,37 @@ export function extractSitePaths(body) {
  * Con questa regola la selezione e' 1 su 26, ed e' #316 — l'unica che il mirror
  * blocca davvero.
  *
- * @returns {{handoff: boolean, paths: string[], reason: string}}
+ * `paths` sono i path **come esistono sul sito** (`sitePath` del manifest quando
+ * differisce): il match resta sul path del corpus, che e' la forma in cui il
+ * fixer scrive la diagnosi, ma spedire quella forma manderebbe il fixer di la' a
+ * cercare un file che nel suo repo non c'e'.
+ *
+ * `residual` sono i path citati che il mirror NON porta — lavoro che resta qui.
+ * Non e' un dettaglio di reporting: e' cio' che decide se la issue di origine si
+ * puo' chiudere `completed` (vedi `main`), perche' una issue aggregata come #316
+ * porta anche item su file `adapted` che nessun mirror consegnera'.
+ *
+ * @returns {{handoff: boolean, paths: string[], residual: string[], reason: string}}
  */
 export function handoffDecision({ verdict, body, lockedPaths } = {}) {
   if (!verdict || !HANDOFF_VERDICTS.has(verdict)) {
-    return { handoff: false, paths: [], reason: `verdetto non instradabile: ${verdict ?? 'nessuno'}` };
+    return { handoff: false, paths: [], residual: [], reason: `verdetto non instradabile: ${verdict ?? 'nessuno'}` };
   }
   const paths = extractSitePaths(body);
   if (!paths.length) {
-    return { handoff: false, paths: [], reason: 'nessun path citato: la diagnosi non è azionabile così com\'è' };
+    return { handoff: false, paths: [], residual: [], reason: 'nessun path citato: la diagnosi non è azionabile così com\'è' };
   }
   if (verdict === 'no-root-cause') {
     const locked = lockedPaths ?? mirrorLockedPaths();
+    // Il manifest e' una mappa corpus→sito; una `Set` iniettata resta accettata e
+    // vale come identita' (il path del sito e' lo stesso del corpus).
+    const siteOf = (p) => (typeof locked.get === 'function' ? locked.get(p) : null) || p;
     const blocked = paths.filter((p) => locked.has(p));
     if (!blocked.length) {
       return {
         handoff: false,
         paths: [],
+        residual: [],
         reason: 'no-root-cause senza path `identical` nel manifest: vicolo cieco, non lato sbagliato del mirror',
       };
     }
@@ -214,17 +237,22 @@ export function handoffDecision({ verdict, body, lockedPaths } = {}) {
     // elencarli di la' sotto «path del sito» direbbe al ciclo del sito di
     // cambiare file che il mirror non condivide. Il corpo integrale della
     // diagnosi viaggia comunque sotto, quindi il contesto non si perde.
+    const sitePaths = [...new Set(blocked.map(siteOf))];
     return {
       handoff: true,
-      paths: blocked,
-      reason: `diagnosi bloccata dal mirror su ${blocked.join(', ')}`,
+      paths: sitePaths,
+      residual: paths.filter((p) => !locked.has(p)),
+      reason: `diagnosi bloccata dal mirror su ${sitePaths.join(', ')}`,
     };
   }
   const siteName = SITE_REPO.split('/')[1];
   if (!String(body || '').includes(siteName)) {
-    return { handoff: false, paths: [], reason: 'la diagnosi non nomina il repo del sito' };
+    return { handoff: false, paths: [], residual: [], reason: 'la diagnosi non nomina il repo del sito' };
   }
-  return { handoff: true, paths, reason: `diagnosi con ${paths.length} path del sito` };
+  // I `blocked-*` scrivono gia' i path COME LI VEDE IL SITO (il fixer li ha letti
+  // di la'): niente traduzione, e niente residuo — la forma misurata 4 su 4 e'
+  // «un solo file, e vive sul sito».
+  return { handoff: true, paths, residual: [], reason: `diagnosi con ${paths.length} path del sito` };
 }
 
 /** Titolo della issue sul sito. Pura — e il discriminante sta PRIMO. */
@@ -308,12 +336,36 @@ function main() {
 
   // Solo DOPO che la issue esiste di là si tocca questa: se l'apertura fallisce,
   // qui non resta traccia da ripulire e il prossimo giro riprova da zero.
+  //
+  // La chiusura NON è automatica. «Consegnata» e «risolta» coincidono solo
+  // quando TUTTO ciò che la diagnosi nomina scende col mirror. Una issue
+  // aggregata non è così: #316 porta anche un item su `scripts/lib/classify-issue.mjs`,
+  // che è `adapted` — lavoro NOSTRO — e vive nel body della issue, mentre di là
+  // viaggiano titolo + ultimo commento di verdetto. Chiuderla `completed`
+  // dichiarerebbe risolto anche quell'item e ne farebbe evaporare l'unico
+  // portatore, in silenzio e per effetto della consegna stessa.
+  //
+  // Quando resta un path citato che il mirror non porta si consegna e si
+  // PARCHEGGIA: `needs-human` + via le label di routing è l'esclusione che il
+  // drainer già usa (`followup-drainer.mjs`, i filtri di promozione), quindi la
+  // issue non ri-paga le run che questo script esiste per togliere, e
+  // `needs-human-sweep.yml` è la porta di rientro nel ciclo.
+  const residual = d.residual || [];
+  const tail = residual.length
+    ? `**Non la chiudo**: la diagnosi cita anche ${residual.map((p) => `\`${p}\``).join(', ')}, che il manifest NON dichiara \`identical\` — è lavoro di questo repo, il mirror non lo porterà, e questa issue ne resta l'unico portatore. La parcheggio in \`needs-human\` togliendo le label di routing, così non ri-paga run mentre aspetta.`
+    : 'Chiudo qui: quando la fix scenderà col mirror, la condizione che ha aperto questa issue non ci sarà più.';
   try {
     gh(['issue', 'comment', ISSUE, '--repo', REPO, '--body',
-      `📤 **Consegnata al sito**: ${url}\n\nIl fix vive in \`${SITE_REPO}\` e il ciclo di là ora ce l'ha, con la diagnosi di questo run riportata integralmente. Chiudo qui: quando la fix scenderà col mirror, la condizione che ha aperto questa issue non ci sarà più.`], { json: false });
-    gh(['issue', 'close', ISSUE, '--repo', REPO, '--reason', 'completed'], { json: false });
+      `📤 **Consegnata al sito**: ${url}\n\nIl fix vive in \`${SITE_REPO}\` e il ciclo di là ora ce l'ha, con la diagnosi di questo run riportata integralmente. ${tail}`], { json: false });
+    if (residual.length) {
+      gh(['issue', 'edit', ISSUE, '--repo', REPO,
+        '--add-label', 'needs-human', '--remove-label', 'agent:fix', '--remove-label', 'agent:fix-queued'], { json: false });
+    } else {
+      gh(['issue', 'close', ISSUE, '--repo', REPO, '--reason', 'completed'], { json: false });
+    }
   } catch (e) {
-    console.log(`::warning::handoff-to-site: #${ISSUE} consegnata ma non chiusa (${String(e).slice(0, 100)}). La issue del sito esiste: nessun lavoro perso.`);
+    const what = residual.length ? 'non parcheggiata' : 'non chiusa';
+    console.log(`::warning::handoff-to-site: #${ISSUE} consegnata ma ${what} (${String(e).slice(0, 100)}). La issue del sito esiste: nessun lavoro perso.`);
   }
 }
 

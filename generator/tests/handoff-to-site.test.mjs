@@ -133,6 +133,59 @@ test('mirrorLockedPaths legge il manifest reale, non un elenco ricopiato', () =>
   assert.equal(locked.has('scripts/lib/classify-issue.mjs'), false);
 });
 
+// --- i due lati non hanno lo stesso path ---
+
+test('mirrorLockedPaths mappa sul `sitePath`, che nella maggior parte dei casi DIFFERISCE', () => {
+  // 112 dei 157 entry `identical` portano un `sitePath` diverso dal path del
+  // corpus. Spedire il path del corpus manderebbe il fixer di là a cercare un
+  // file che nel suo repo non esiste — e la consegna esiste per essere precisa.
+  const locked = mirrorLockedPaths();
+  assert.equal(locked.get('host/shared/clauseTail.mjs'), 'build-plugins/shared/clauseTail.mjs');
+  // Quando `sitePath` manca, i due lati coincidono: identità, non `undefined`.
+  assert.equal(locked.get('scripts/ci/followup-drainer.mjs'), 'scripts/ci/followup-drainer.mjs');
+  for (const [corpusPath, sitePath] of locked) assert.ok(sitePath, `sitePath vuoto per ${corpusPath}`);
+});
+
+test('si matcha sul path del CORPUS e si spedisce quello del SITO', () => {
+  // Il fixer scrive la diagnosi coi path di QUESTO repo (è qui che gira), quindi
+  // il match resta sul path del corpus; ma la issue di là li presenta come
+  // «path del sito», e lì deve leggere la forma che di là esiste.
+  const d = handoffDecision({
+    verdict: 'no-root-cause',
+    body: 'Root cause: la stopword manca in `host/shared/clauseTail.mjs`, `mode: identical` col sito.',
+    lockedPaths: new Map([['host/shared/clauseTail.mjs', 'build-plugins/shared/clauseTail.mjs']]),
+  });
+  assert.equal(d.handoff, true);
+  assert.deepEqual(d.paths, ['build-plugins/shared/clauseTail.mjs']);
+});
+
+// --- la consegna non è la risoluzione: il residuo decide la chiusura ---
+
+test('i path citati che il mirror NON porta tornano come `residual`', () => {
+  // #316 è aggregata: l'item 2 vive su `scripts/lib/classify-issue.mjs`, che è
+  // `adapted` — nostro, e nessun mirror lo consegnerà. Chiudere la issue
+  // `completed` dopo la consegna dichiarerebbe risolto anche quello e ne farebbe
+  // evaporare l'unico portatore. `residual` è ciò che fa parcheggiare invece di
+  // chiudere (vedi `main`).
+  const d = handoffDecision({
+    verdict: 'no-root-cause',
+    body: 'Item 1: `isQueueManaged` in `scripts/ci/followup-drainer.mjs` (identical). '
+      + 'Item 2: il mislabel silenzioso in `scripts/lib/classify-issue.mjs`.',
+    lockedPaths: LOCKED,
+  });
+  assert.equal(d.handoff, true);
+  assert.deepEqual(d.paths, ['scripts/ci/followup-drainer.mjs']);
+  assert.deepEqual(d.residual, ['scripts/lib/classify-issue.mjs']);
+});
+
+test('nessun residuo quando tutto ciò che è citato scende col mirror', () => {
+  const solo = 'Root cause: `isQueueManaged` in `scripts/ci/followup-drainer.mjs`, `mode: identical`.';
+  assert.deepEqual(handoffDecision({ verdict: 'no-root-cause', body: solo, lockedPaths: LOCKED }).residual, []);
+  // I `blocked-*` non cambiano: la forma misurata 4 su 4 è «un solo file, e vive
+  // sul sito», quindi niente residuo e la chiusura resta quella di sempre.
+  assert.deepEqual(handoffDecision({ verdict: 'blocked-admin-settings', body: MIRROR_BODY }).residual, []);
+});
+
 test('manifest illeggibile → non si spedisce niente (fallimento sicuro)', () => {
   assert.equal(mirrorLockedPaths('/nonexistent/loop-sync-manifest.json').size, 0);
   assert.equal(
