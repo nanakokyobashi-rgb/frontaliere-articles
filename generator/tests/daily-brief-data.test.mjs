@@ -14,6 +14,7 @@ import {
   shapeFuel,
   shapeExchange,
   shapeJobs,
+  jobsCorpusFrozenReason,
   buildDailyBrief,
   BORDER_WAIT_MIN_CROSSINGS,
   JOBS_HISTORY_MAX_LAG_DAYS,
@@ -462,6 +463,29 @@ test('jobs: a moving corpus stays available, a closed day at zero does not', () 
 
   // No `todayIso` (no corpus clock to compare against) keeps the old behaviour.
   assert.equal(shapeJobs(JOBS_STATS, { nowMs: NOW }).available, true);
+});
+
+test('jobs: an absent history series degrades, exactly like an empty one', () => {
+  // `generatedAt` is the aggregator's clock, not the corpus's: it stays fresh
+  // over a corpus that stopped moving. With no `history` there is no corpus
+  // clock at all, so nobody has judged the payload — publishing `jobsActive`
+  // and a "new listings yesterday" figure from it is the fail-open shape.
+  const { history, ...noHistory } = JOBS_STATS;
+  const absent = shapeJobs(noHistory, { nowMs: NOW, todayIso: TODAY });
+  assert.equal(absent.available, false);
+  assert.match(absent.reason, /no history series/);
+
+  // Same verdict for a series of the wrong type, and for the empty series that
+  // already degraded before this fix: the three shapes carry the same amount of
+  // corpus signal (none), so they must not disagree.
+  const wrongType = shapeJobs({ ...JOBS_STATS, history: {} }, { nowMs: NOW, todayIso: TODAY });
+  assert.equal(wrongType.available, false);
+  assert.match(wrongType.reason, /no history series/);
+  assert.equal(shapeJobs({ ...JOBS_STATS, history: [] }, { nowMs: NOW, todayIso: TODAY }).available, false);
+
+  // The guard itself, read directly: absent series in, reason out.
+  assert.match(jobsCorpusFrozenReason(noHistory, { todayIso: TODAY }), /no history series/);
+  assert.equal(jobsCorpusFrozenReason(JOBS_STATS, { todayIso: TODAY }), null);
 });
 
 // ---------------------------------------------------------------- assembly
