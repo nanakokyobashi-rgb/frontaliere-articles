@@ -3699,9 +3699,21 @@ async function _persistScoresToFirestore() {
       tomorrow.setUTCDate(tomorrow.getUTCDate() + 1);
       tomorrow.setUTCHours(0, 0, 0, 0);
       entry.exhaustedUntil = tomorrow.toISOString();
-    } else {
+    } else if (counterDelta?.successes) {
+      // Il campo si AZZERA solo con una prova in mano: una risposta buona da
+      // questo modello in questo processo dice che l'account non e' a quota, e
+      // il ban persistito va tolto (e' il caso della rotazione multi-PAT).
       entry.exhaustedUntil = null;
     }
+    // Altrimenti il campo e' OMESSO, per la stessa ragione di `score` e dei
+    // contatori qui sopra: con `{merge: true}` uno `null` assoluto CANCELLA il
+    // ban di quota che un'altra macchina ha appena scritto sul documento
+    // condiviso. Un modello puo' essere dirty per un motivo che non dice niente
+    // sulla quota — un cap appreso, una schema-incompatibility, una voce della
+    // migrazione legacy, un fallimento di rete — e azzerare da li' rimanda ogni
+    // altro workflow a ripagare i 429 fino a mezzanotte, in silenzio. Non serve
+    // nemmeno a ripulire i ban scaduti: il restore di `initScoreStore()` ignora
+    // gia' un `exhaustedUntil` nel passato (`if (resetTime > now)`).
 
     // Runtime-learned request-token ceiling (see _learnRequestTokenLimit).
     // Not a daily quota — no local/fallback exemption needed.

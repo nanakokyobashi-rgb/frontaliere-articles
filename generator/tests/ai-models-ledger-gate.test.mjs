@@ -358,6 +358,61 @@ describe('#875 — resetState() lascia uno stato coerente', () => {
     );
   });
 
+  // Stesso anti-pattern cinquanta righe sotto quello di item 1: `exhaustedUntil`
+  // usciva come `null` ASSOLUTO per ogni modello sporco che non risulta
+  // quota-exhausted IN QUESTO processo, e con {merge:true} quel null cancella il
+  // ban di quota che un'altra macchina ha appena persistito sullo stesso
+  // documento condiviso — ogni altro workflow torna a pagare i 429 fino a
+  // mezzanotte, in silenzio.
+  it('un modello sporco per un altro motivo non azzera il ban di quota altrui', async () => {
+    const store = makeStore();
+    resetState();
+    __installScoreStoreForTests(store.db, null);
+
+    markModelExhausted('gpt-4o-mini', 'stale');
+    await flushScores();
+
+    const entry = store.last()?.models?.['gpt-4o-mini'];
+    assert.ok(entry, `il modello doveva essere proposto: ${JSON.stringify(store.last())}`);
+    assert.ok(
+      !('exhaustedUntil' in entry),
+      'il campo `exhaustedUntil` va OMESSO quando questo processo non ha una prova: uno `null` assoluto '
+      + `cancella il ban di quota scritto da un'altra macchina. Scritto: ${JSON.stringify(entry)}`,
+    );
+  });
+
+  it('un successo in questo processo azzera eccome il ban persistito', async () => {
+    const store = makeStore();
+    resetState();
+    __installScoreStoreForTests(store.db, null);
+
+    // La prova che rende legittima la cancellazione: il modello ha risposto, quindi
+    // l'account non e' a quota (e' il caso della rotazione multi-PAT).
+    recordModelSuccess('gpt-4o-mini');
+    await flushScores();
+
+    const entry = store.last()?.models?.['gpt-4o-mini'];
+    assert.equal(
+      entry?.exhaustedUntil, null,
+      `un successo misurato qui deve togliere il ban: ${JSON.stringify(entry)}`,
+    );
+  });
+
+  it('una quota esaurita qui continua a scrivere la data di reset', async () => {
+    const store = makeStore();
+    resetState();
+    __installScoreStoreForTests(store.db, null);
+
+    markModelExhausted('gpt-4o-mini', 'quota');
+    await flushScores();
+
+    const entry = store.last()?.models?.['gpt-4o-mini'];
+    assert.ok(
+      typeof entry?.exhaustedUntil === 'string' && !Number.isNaN(Date.parse(entry.exhaustedUntil)),
+      `la quota esaurita resta persistita: ${JSON.stringify(entry)}`,
+    );
+  });
+
   it('un modello con un punteggio vero lo scrive eccome', async () => {
     const store = makeStore();
     resetState();
