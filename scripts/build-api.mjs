@@ -847,3 +847,116 @@ console.log(`[build-api] wrote ${Object.keys(written).length} files to dist/api`
   }
   console.log(`[build-api] manifest byte-size gate: ${Object.keys(declared).length} artifacts match on disk`);
 }
+
+// ── Final gate: manifest.counts descrive il set davvero servito ───────────
+//
+// Terzo gate della stessa famiglia dei due qui sopra, e per lo stesso motivo.
+// `manifest.json` ha due meta': `files` (byte per artefatto) e `counts`
+// (cardinalita' del set). AGENTS.md nomina `counts` per PRIMA — «permette di
+// rifiutare un set troncato *prima* di usarlo» — ma fino a qui era l'unica
+// meta' senza rete: ogni numero veniva da una variabile in memoria catturata a
+// meta' pipeline, mai riletta dai byte che finiscono davvero in `dist/api/`.
+// Un filtro applicato alla serializzazione ma non al contatore (o viceversa)
+// non rompe niente: il manifest resta internamente coerente e il set servito
+// e' un altro. E' esattamente il caso peggiore di AGENTS.md, quello che non
+// fallisce da solo — e il sito non ribuilda, quindi va live subito.
+//
+// La rilettura e' dal DISCO, non dalle variabili: un gate che ricontrolla la
+// stessa memoria che ha scritto il numero verifica se stesso e non puo' mai
+// fallire. Un artefatto opzionale assente vale 0, che e' il valore che i
+// rami `not emitted` qui sopra lasciano nel contatore.
+{
+  const outPath = (name) => path.join(OUT, name);
+  const exists = (name) => fs.existsSync(outPath(name));
+  const readOut = (name) => fs.readFileSync(outPath(name), 'utf-8');
+  const jsonOut = (name) => JSON.parse(readOut(name));
+  const derivedIfPresent = (name, derive) => (exists(name) ? derive() : 0);
+  const occurrences = (text, needle) => text.split(needle).length - 1;
+  // `<url>` con la parentesi chiusa non collide con `<urlset>`.
+  const sitemapUrls = (name) => derivedIfPresent(name, () => occurrences(readOut(name), '<url>'));
+
+  // I feed si riconoscono dal documento, non dal nome: una convenzione di
+  // naming e' proprio cio' che un writer nuovo puo' non rispettare, e le
+  // sitemap sono `<urlset>`, quindi non c'e' collisione.
+  const feeds = fs
+    .readdirSync(OUT)
+    .filter((f) => f.endsWith('.xml'))
+    .map((f) => readOut(f))
+    .filter((xml) => xml.includes('<rss'));
+
+  const derived = {
+    articles: derivedIfPresent('articles.json', () => jsonOut('articles.json').length),
+    swissArticles: derivedIfPresent('swiss-articles.json', () => jsonOut('swiss-articles.json').length),
+    sitemapBlogUrls: sitemapUrls('sitemap-blog.xml'),
+    sitemapBlogChUrls: sitemapUrls('sitemap-blog-ch.xml'),
+    rssFeeds: feeds.length,
+    rssItems: feeds.reduce((total, xml) => total + occurrences(xml, '<item>'), 0),
+    tickerArticles: derivedIfPresent('news-ticker-live.json', () => jsonOut('news-ticker-live.json').articles.length),
+    newsCandidates: sitemapUrls(NEWS_CANDIDATES),
+    images: derivedIfPresent(IMAGE_MANIFEST, () => jsonOut(IMAGE_MANIFEST).images.length),
+    borderRankingEntries: derivedIfPresent(BORDER_RANKING, () => jsonOut(BORDER_RANKING).ranking.length),
+    // Il payload servito porta il proprio `counts.availableBlocks`: e' quello
+    // che il consumer legge, quindi e' quella la sorgente su disco da
+    // confrontare — non il `parsed` del file sorgente in `public/data/`.
+    dailyBriefBlocks: derivedIfPresent(DAILY_BRIEF, () => Number(jsonOut(DAILY_BRIEF).counts.availableBlocks)),
+  };
+
+  // `tickerArticlesShadowed` conta cio' che e' stato ESCLUSO dal ticker:
+  // non ha una controparte fra i byte serviti, per costruzione. Va elencato
+  // qui e non semplicemente dimenticato, perche' il controllo di
+  // esaustivita' sotto e' la parte che protegge dal contatore FUTURO.
+  const NOT_ON_DISK = new Set(['tickerArticlesShadowed']);
+
+  const declared = jsonOut('manifest.json').counts;
+  const unchecked = Object.keys(declared).filter(
+    (key) => !(key in derived) && !NOT_ON_DISK.has(key),
+  );
+  if (unchecked.length) {
+    throw new Error(
+      `manifest.counts carries counters this gate does not re-derive: ${unchecked.join(', ')} — ` +
+        `wire them into the gate, or declare them in NOT_ON_DISK with the reason`,
+    );
+  }
+
+  const mismatches = [];
+  for (const [key, actual] of Object.entries(derived)) {
+    if (declared[key] !== actual) {
+      mismatches.push(`${key}: declared ${declared[key]}, on disk ${actual}`);
+    }
+  }
+  // `slugs.json` non ha un contatore proprio in `counts`, ma indicizza lo
+  // stesso set di `articles.json`, e il consumer lo verifica gia' contro il
+  // manifest: `validateAnnouncedSurface()` in scripts/reconcile-article-shards.mjs
+  // rifiuta la superficie se `slugs.blog` e `counts.articles` non combaciano.
+  // Senza la stessa asserzione qui, questo repo puo' PUBBLICARE una superficie
+  // che il consumer rifiutera' a valle — e il sito non ribuilda, quindi il
+  // rifiuto arriva in produzione invece che alla build che l'ha prodotta.
+  if (exists('slugs.json')) {
+    const slugs = jsonOut('slugs.json');
+    const indexed = { blog: 'articles', swiss: 'swissArticles' };
+    for (const [section, counter] of Object.entries(indexed)) {
+      const keys = Object.keys(slugs?.[section] ?? {}).length;
+      if (keys !== declared[counter]) {
+        mismatches.push(`slugs.${section}: ${keys} ids, manifest.counts.${counter} declares ${declared[counter]}`);
+      }
+    }
+  }
+
+  // Le immagini sono l'unico artefatto che il consumer non puo' ri-derivare,
+  // quindi il file trasferito conta quanto la voce che lo indicizza: una
+  // copia interrotta a meta' lascia l'indice pieno e la cartella corta.
+  const webpDir = path.join(OUT, 'images', 'blog');
+  const webpOnDisk = fs.existsSync(webpDir)
+    ? fs.readdirSync(webpDir).filter((f) => f.endsWith('.webp')).length
+    : 0;
+  if (webpOnDisk !== derived.images) {
+    mismatches.push(`images: ${IMAGE_MANIFEST} lists ${derived.images}, images/blog holds ${webpOnDisk}`);
+  }
+
+  if (mismatches.length) {
+    throw new Error(`manifest.counts does not describe the set served:\n  ${mismatches.join('\n  ')}`);
+  }
+  console.log(
+    `[build-api] manifest counts gate: ${Object.keys(derived).length} counters match the artifacts on disk`,
+  );
+}

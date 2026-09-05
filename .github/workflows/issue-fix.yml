@@ -46,8 +46,28 @@ on:
 # Un fixer alla volta. La coda `agent:fix-queued` esiste proprio perché questo
 # slot è serializzato: promuovere più issue insieme le farebbe morire
 # cancellate-in-coda.
+# Chiave PER-ISSUE. `concurrency` e' valutata a livello di WORKFLOW, cioe' PRIMA
+# dell'`if:` del job: con un `group:` costante OGNI evento issue del repo entra
+# in questa coda — anche quelli che l'`if:` scarta come `skipped` — e ogni nuova
+# pending SFRATTA (`cancelled`) la precedente, perche' `cancel-in-progress: false`
+# protegge la run in corso e non le pending. La profondita' e' 1, non N. E
+# poiche' `on: issues:[labeled]` e' one-shot, l'evento della run sfrattata e'
+# consumato: la label resta sulla issue e NIENTE la ri-arma.
+#
+# Misurato su QUESTO repo il 2026-09-05, prima della fix:
+#   09-04: 290 run create, 73 `cancelled`, 50 `success`; 09-05: 110 create,
+#   20 `cancelled`, 24 `success`. Quasi una run utile su due andava persa.
+#
+# Con la chiave per-issue due issue DIVERSE non si sfrattano piu', mentre due
+# eventi sulla STESSA issue continuano a serializzare — l'unica mutua esclusione
+# che serviva. Il fallback `|| github.run_id` non serve oggi (`issues` e' l'unico
+# trigger, quindi il numero c'e' sempre) ed esiste perche' un trigger senza issue
+# nel payload, aggiunto un domani, renderebbe la chiave di nuovo costante e
+# riporterebbe gli sfratti in silenzio.
+#
+# Stessa fix, stessa causa, sul sito: valerielinc-ops/frontaliere-si-o-no#7497.
 concurrency:
-  group: issue-fix
+  group: issue-fix-${{ github.event.issue.number || github.run_id }}
   cancel-in-progress: false
 
 permissions:
