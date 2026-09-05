@@ -72677,6 +72677,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-pride-belgrado-25-anni': {
+    title: 'A Belgrado il Pride celebra 25 anni, e ritorna alle origini',
+    description: 'Il Pride a Belgrado celebra 25 anni, evidenziando conquiste e richieste ancora senza risposta per i diritti Lgbtq+. Dati aggiornati 2026 per frontalieri',
+    keywords: 'frontalieri, ticino, svizzera, italia, belgrado, pride, celebra, anni',
+    ogTitle: 'Pride a Belgrado: 25 anni di celebrazioni e battaglie aperte',
+    ogDescription: 'La manifestazione del Pride a Belgrado celebra 25 anni, mettendo in luce conquiste e battaglie ancora aperte per i diritti della comunità Lgbtq+.',
+    canonicalPath: '/articoli-svizzera/pride-belgrado-25-anni/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "A Belgrado il Pride celebra 25 anni, e ritorna alle origini",
+      "description": "Il Pride a Belgrado celebra 25 anni, evidenziando conquiste e richieste ancora senza risposta per i diritti Lgbtq+. Dati aggiornati 2026 per frontalieri",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/pride-belgrado-25-anni.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Parata del Pride a Belgrado, Serbia, con partecipanti diversi e striscioni colorati."
+      },
+      "datePublished": "2026-09-05T19:13:22+00:00",
+      "dateModified": "2026-09-05T19:13:22+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/pride-belgrado-25-anni/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

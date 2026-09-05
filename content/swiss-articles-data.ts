@@ -16795,6 +16795,15 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'pride-belgrado-25-anni',
+    category: 'novita',
+    date: '2026-09-05T19:13:22.197Z',
+    image: '/images/blog/pride-belgrado-25-anni.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

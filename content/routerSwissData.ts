@@ -1892,6 +1892,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'ridurre-traffico-trasporti-pubblici': { it: 'ridurre-traffico-trasporti-pubblici', en: 'reduce-traffic-public-transport', de: 'verkehr-reduzieren-oeffliche-verkehrsmittel', fr: 'reduire-trafic-transports-publics' },
  'come-trovare-tirocinio-grigioni': { it: 'come-trovare-tirocinio-grigioni', en: 'how-to-find-apprenticeship-graubunden', de: 'lehrstelle-graubuenden-finden', fr: 'comment-trouver-apprentissage-grisons' },
  'asilo-nido-custodia-bambini-canton-soletta-costi': { it: 'asilo-nido-custodia-bambini-canton-soletta-costi', en: 'childcare-costs-canton-solothurn', de: 'kinderbetreuungskosten-kanton-solothurn', fr: 'couts-de-garde-d-enfants-canton-de-soleure' },
+ 'pride-belgrado-25-anni': { it: 'pride-belgrado-25-anni', en: 'belgrade-pride-25-years', de: 'belgrad-pride-25-jahre', fr: 'pride-belgrade-25-ans' },
 };
 
 export const REVERSE_SWISS: Record<ArticleLocale, Record<string, string>> = (() => {

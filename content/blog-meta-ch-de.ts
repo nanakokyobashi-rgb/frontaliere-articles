@@ -5599,6 +5599,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.asilo-nido-custodia-bambini-canton-soletta-costi.title': 'Kindertagesstätte und Kinderbetreuung im Kanton Solothurn: Kosten und Tarife',
     'blog.article.asilo-nido-custodia-bambini-canton-soletta-costi.excerpt': 'Informieren Sie sich über die Kosten und Tarife für die Kinderbetreuung im Kanton Solothurn inklusive Kindergärten, Tagesfamilien und Kindergarten.',
     'blog.article.asilo-nido-custodia-bambini-canton-soletta-costi.imageAlt': 'Eine Kinderbetreuungseinrichtung im Kanton Solothurn, Schweiz',
+    'blog.article.pride-belgrado-25-anni.title': 'Belgrad: Pride feiert 25 Jahre',
+    'blog.article.pride-belgrado-25-anni.excerpt': 'Die Veranstaltung hebt Errungenschaften und offene Kämpfe für LGBTQ+ -Rechte hervor.',
+    'blog.article.pride-belgrado-25-anni.imageAlt': 'Pride-Parade in Belgrad, Serbien, mit diversen Teilnehmern und bunten Bannern.',
 };
 
 export default blogMetaChDe;

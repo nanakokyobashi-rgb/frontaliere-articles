@@ -5599,6 +5599,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.asilo-nido-custodia-bambini-canton-soletta-costi.title': 'Asilo nido e custodia bambini nel Canton Soletta: costi e tariffe',
     'blog.article.asilo-nido-custodia-bambini-canton-soletta-costi.excerpt': 'Scopri i costi e le tariffe per la custodia dei bambini nel Canton Soletta, inclusi asili nido, famiglie diurne e doposcuola.',
     'blog.article.asilo-nido-custodia-bambini-canton-soletta-costi.imageAlt': 'Un asilo nido nel Canton Soletta, Svizzera',
+    'blog.article.pride-belgrado-25-anni.title': 'A Belgrado il Pride celebra 25 anni, e ritorna alle origini',
+    'blog.article.pride-belgrado-25-anni.excerpt': 'La manifestazione evidenzia conquiste e battaglie aperte per i diritti Lgbtq+.',
+    'blog.article.pride-belgrado-25-anni.imageAlt': 'Parata del Pride a Belgrado, Serbia, con partecipanti diversi e striscioni colorati.',
 };
 
 export default blogMetaChIt;

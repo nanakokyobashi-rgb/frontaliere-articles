@@ -5599,6 +5599,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.asilo-nido-custodia-bambini-canton-soletta-costi.title': 'Nursery and childcare in the canton of Solothurn: costs and fees',
     'blog.article.asilo-nido-custodia-bambini-canton-soletta-costi.excerpt': 'Find out about childcare costs and fees in the Canton of Solothurn, including nurseries, day families and afterschool.',
     'blog.article.asilo-nido-custodia-bambini-canton-soletta-costi.imageAlt': 'A childcare facility in the Canton of Solothurn, Switzerland',
+    'blog.article.pride-belgrado-25-anni.title': 'In Belgrade, Pride celebrates 25 years, and goes back to its origins',
+    'blog.article.pride-belgrado-25-anni.excerpt': 'The event highlights achievements and open battles for LGBTQ+ rights.',
+    'blog.article.pride-belgrado-25-anni.imageAlt': 'Pride parade in Belgrade, Serbia, with diverse participants and colorful banners.',
 };
 
 export default blogMetaChEn;

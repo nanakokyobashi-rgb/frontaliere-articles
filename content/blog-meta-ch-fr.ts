@@ -5599,6 +5599,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.asilo-nido-custodia-bambini-canton-soletta-costi.title': 'Garderie et garde d\'enfants dans le canton de Soleure : coûts et tarifs',
     'blog.article.asilo-nido-custodia-bambini-canton-soletta-costi.excerpt': 'Découvrez les coûts et les tarifs pour la garde des enfants dans le canton de Soleure, y compris les crèches, les familles de jour et après l\'école.',
     'blog.article.asilo-nido-custodia-bambini-canton-soletta-costi.imageAlt': 'Une crèche dans le canton de Soleure, Suisse',
+    'blog.article.pride-belgrado-25-anni.title': 'À Belgrade, la Pride fête ses 25 ans et revient à ses origines',
+    'blog.article.pride-belgrado-25-anni.excerpt': 'L\'événement met en évidence les conquêtes et les batailles ouvertes pour les droits LGBTQ+.',
+    'blog.article.pride-belgrado-25-anni.imageAlt': 'Défilé de la Pride à Belgrade, Serbie, avec des participants divers et des banderoles colorées.',
 };
 
 export default blogMetaChFr;
