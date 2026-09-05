@@ -40,6 +40,7 @@ import { networkInterfaces } from 'node:os';
 
 import {
   classifyHostUnreachable,
+  classifyResolverResetEvidence,
   classifyTransientResolver,
   callLLM,
   isQuotaExhaustedError,
@@ -1428,5 +1429,153 @@ describe('#838 — endpoint per-macchina: ban di run si, ledger condiviso no', (
     const stats = getStats();
     assert.ok(stats.exhaustedModels.includes('gpt-4o-mini'), `atteso il ban, visti: ${stats.exhaustedModels.join(', ')}`);
     assert.ok(scoreOf(stats, 'gpt-4o-mini') < 0, `atteso il punteggio penalizzato: ${JSON.stringify(stats.scoreBoard)}`);
+  });
+});
+
+/**
+ * ── CHI CHIUDE LA STRISCIA, E CON CHE PROVA (#848 item 3) ───────────────────
+ *
+ * `_resolverFlaps` si azzera su QUALUNQUE fallimento di altra classe (#818).
+ * La lettura alternativa — chiuderla solo sulle classi che PROVANO che il
+ * resolver funziona — non si sceglie a occhio: su `github`, dodici fratelli e
+ * una notte di quota, i 429 alternati ai flap possono impedire per sempre
+ * all'escalation di scattare, ma restringere il reset comprerebbe quel caso
+ * pagando dei falsi ban. Serve il numero, da run reali.
+ *
+ * Questo blocco blocca il METRO, non la decisione: il comportamento resta
+ * quello di #818 (la striscia si chiude comunque), e in piu' ogni reset che
+ * butta via una striscia VIVA viene classificato e contato in
+ * `getStats().resolverFlapResets`. `silent` e' la classe che non prova niente
+ * sul resolver, ed e' il numero che deciderà l'item.
+ */
+describe('classifyResolverResetEvidence — la prova che il fallimento porta sul resolver (#848)', () => {
+  it('una risposta HTTP ricevuta prova che il nome e\' stato risolto', () => {
+    assert.equal(classifyResolverResetEvidence(new Error('[gpt-4o] HTTP 503: upstream hiccup')), 'resolved');
+    assert.equal(classifyResolverResetEvidence(new Error('[gpt-4o] HTTP 429: rate limited')), 'resolved');
+  });
+
+  it('un codice post-risoluzione prova la risoluzione, anche sotto l\'incapsulamento di undici', () => {
+    assert.equal(classifyResolverResetEvidence(undiciFetchFailed('ECONNREFUSED')), 'resolved');
+    assert.equal(classifyResolverResetEvidence(undiciFetchFailed('ECONNRESET')), 'resolved');
+    assert.equal(classifyResolverResetEvidence(undiciAggregate('ECONNREFUSED')), 'resolved');
+    // Risposta AUTORITATIVA del resolver: il nome non esiste, ma il resolver
+    // ha risposto — che e' esattamente la domanda che questa funzione fa.
+    assert.equal(classifyResolverResetEvidence(undiciFetchFailed('ENOTFOUND')), 'resolved');
+  });
+
+  it('un abort o un timeout senza risposta non prova niente', () => {
+    assert.equal(classifyResolverResetEvidence(Object.assign(new Error('aborted'), { name: 'AbortError' })), 'silent');
+    // `code: 23` e' il codice DOMException — un NUMERO, non un codice syscall
+    // (la misura di #848 item 2, scritta accanto al ramo in ai-models.mjs).
+    assert.equal(classifyResolverResetEvidence(Object.assign(new Error('The operation was aborted'), { name: 'TimeoutError', code: 23 })), 'silent');
+    // Il binario che manca non e' un fatto sulla rete.
+    assert.equal(classifyResolverResetEvidence(Object.assign(new Error('spawn claude ENOENT'), { code: 'ENOENT' })), 'silent');
+    assert.equal(classifyResolverResetEvidence(new Error('Empty response from model')), 'silent');
+  });
+});
+
+describe('callLLM — il reset della striscia si conta per classe (#848 item 3)', () => {
+  const ENV_KEYS = ['AI_MODELS_FORCE_CHAIN', 'GH_MODELS_PAT', 'AI_MODELS_PREFER'];
+  let envBackup = {};
+  let realFetch;
+
+  beforeEach(() => {
+    envBackup = Object.fromEntries(ENV_KEYS.map((k) => [k, process.env[k]]));
+    for (const k of ENV_KEYS) delete process.env[k];
+    process.env.GH_MODELS_PAT = 'test-pat';
+    realFetch = globalThis.fetch;
+    resetState();
+  });
+
+  afterEach(() => {
+    globalThis.fetch = realFetch;
+    for (const k of ENV_KEYS) {
+      if (envBackup[k] === undefined) delete process.env[k];
+      else process.env[k] = envBackup[k];
+    }
+    resetState();
+  });
+
+  const OPTS = { maxRetriesPerModel: 1, backoffMs: 1, timeout: 5000 };
+  const run = () => callLLM([{ role: 'user', content: 'x' }], OPTS).then(() => null, (e) => e);
+
+  it('un 503 che chiude una striscia viva e\' contato come `resolved`', async () => {
+    process.env.AI_MODELS_FORCE_CHAIN = 'gpt-4o-mini,gpt-4.1-mini,gpt-4o,gpt-4.1';
+    const script = ['EAI_AGAIN', 'other', 'EAI_AGAIN', 'EAI_AGAIN'];
+    let i = 0;
+    globalThis.fetch = async () => {
+      const step = script[Math.min(i++, script.length - 1)];
+      if (step === 'other') throw new Error('HTTP 503: upstream hiccup');
+      throw undiciFetchFailed('EAI_AGAIN');
+    };
+
+    assert.ok(await run(), 'la catena deve fallire');
+    const row = getStats().resolverFlapResets.github;
+    assert.ok(row, `atteso un reset contato: ${JSON.stringify(getStats().resolverFlapResets)}`);
+    assert.equal(row.resolved, 1, `atteso un reset con prova: ${JSON.stringify(row)}`);
+    assert.equal(row.silent, 0, `nessun reset cieco atteso: ${JSON.stringify(row)}`);
+    assert.equal(row.streaksDiscarded, 1, `una sola striscia buttata via: ${JSON.stringify(row)}`);
+  });
+
+  it('un abort senza risposta che chiude una striscia viva e\' contato come `silent`', async () => {
+    process.env.AI_MODELS_FORCE_CHAIN = 'gpt-4o-mini,gpt-4.1-mini,gpt-4o,gpt-4.1';
+    const script = ['EAI_AGAIN', 'abort', 'EAI_AGAIN', 'EAI_AGAIN'];
+    let i = 0;
+    globalThis.fetch = async () => {
+      const step = script[Math.min(i++, script.length - 1)];
+      if (step === 'abort') throw Object.assign(new Error('The operation was aborted'), { name: 'AbortError' });
+      throw undiciFetchFailed('EAI_AGAIN');
+    };
+
+    assert.ok(await run(), 'la catena deve fallire');
+    const row = getStats().resolverFlapResets.github;
+    assert.ok(row, `atteso un reset contato: ${JSON.stringify(getStats().resolverFlapResets)}`);
+    assert.equal(row.silent, 1, `atteso il reset cieco: ${JSON.stringify(row)}`);
+    assert.equal(row.resolved, 0, `nessun reset con prova atteso: ${JSON.stringify(row)}`);
+    // Il COMPORTAMENTO non cambia: la striscia si chiude comunque, e alla fine
+    // restano due flap consecutivi, non tre. La misura non decide l'item.
+    assert.equal(getStats().resolverFlaps.github, 2, `attesi 2 flap consecutivi: ${JSON.stringify(getStats().resolverFlaps)}`);
+  });
+
+  it('un reset a contatore gia\' vuoto non e\' un evento e non si conta', async () => {
+    process.env.AI_MODELS_FORCE_CHAIN = 'gpt-4o-mini,gpt-4.1-mini';
+    globalThis.fetch = async () => { throw new Error('HTTP 503: upstream hiccup'); };
+
+    assert.ok(await run(), 'la catena deve fallire');
+    assert.deepEqual(getStats().resolverFlapResets, {}, 'nessuna striscia viva, nessun conteggio');
+  });
+
+  it('un successo che chiude una striscia viva e\' contato come `success`', async () => {
+    process.env.AI_MODELS_FORCE_CHAIN = 'gpt-4o-mini,gpt-4.1-mini';
+    let first = true;
+    globalThis.fetch = async () => {
+      if (first) { first = false; throw undiciFetchFailed('EAI_AGAIN'); }
+      return {
+        ok: true,
+        status: 200,
+        text: async () => JSON.stringify({ choices: [{ message: { content: 'ciao' } }] }),
+      };
+    };
+
+    const out = await callLLM([{ role: 'user', content: 'x' }], OPTS);
+    assert.ok(out, 'la seconda riga deve servire');
+    const row = getStats().resolverFlapResets.github;
+    assert.ok(row, `atteso un reset contato: ${JSON.stringify(getStats().resolverFlapResets)}`);
+    assert.equal(row.success, 1, `atteso il reset da successo: ${JSON.stringify(row)}`);
+  });
+
+  it('`resetState()` azzera anche il conteggio dei reset', async () => {
+    process.env.AI_MODELS_FORCE_CHAIN = 'gpt-4o-mini,gpt-4.1-mini,gpt-4o,gpt-4.1';
+    const script = ['EAI_AGAIN', 'other'];
+    let i = 0;
+    globalThis.fetch = async () => {
+      if (script[Math.min(i++, script.length - 1)] === 'other') throw new Error('HTTP 503: upstream hiccup');
+      throw undiciFetchFailed('EAI_AGAIN');
+    };
+
+    await run();
+    assert.ok(getStats().resolverFlapResets.github, 'precondizione: un reset contato');
+    resetState();
+    assert.deepEqual(getStats().resolverFlapResets, {}, 'il conteggio muore con lo stato di run');
   });
 });
