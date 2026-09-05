@@ -5605,6 +5605,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.volo-easyjet-valencia-ginevra.title': 'Vol easyJet Valence-Genève détourné à Nice par mauvais temps',
     'blog.article.volo-easyjet-valencia-ginevra.excerpt': 'Trois passagers racontent des moments de peur lors de l\'atterrissage. 31 vols retardés et trois détournés en raison de fortes tempêtes.',
     'blog.article.volo-easyjet-valencia-ginevra.imageAlt': 'Vue aérienne de la ville de Lugano et de son lac, Suisse',
+    'blog.article.permesso-dimora-b-canton-vallese-requisiti-rinnovo.title': 'Permis B Valais : exigences, documents et renouvellement',
+    'blog.article.permesso-dimora-b-canton-vallese-requisiti-rinnovo.excerpt': 'Découvrez les exigences, les documents nécessaires et la procédure de renouvellement du permis de séjour B dans le canton du Valais.',
+    'blog.article.permesso-dimora-b-canton-vallese-requisiti-rinnovo.imageAlt': 'Vue panoramique du Lac de Lugano avec le Monte San Salvatore',
 };
 
 export default blogMetaChFr;

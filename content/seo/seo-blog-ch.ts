@@ -72755,6 +72755,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-permesso-dimora-b-canton-vallese-requisiti-rinnovo': {
+    title: 'Permesso di dimora B nel Canton Vallese: requisiti, documenti e rinnovo',
+    description: 'Scopri i requisiti, i documenti necessari e la procedura di rinnovo del permesso di dimora B nel Canton Vallese. Informazioni pratiche e consigli utili.',
+    keywords: 'frontalieri, ticino, svizzera, italia, permesso, dimora, canton, vallese',
+    ogTitle: 'Permesso di dimora B nel Canton Vallese: requisiti, documenti e rinnovo',
+    ogDescription: 'Scopri i requisiti, i documenti necessari e la procedura di rinnovo del permesso di dimora B nel Canton Vallese. Informazioni pratiche e consigli utili per garantire un rinnovo senza problemi.',
+    canonicalPath: '/articoli-svizzera/permesso-dimora-b-canton-vallese-requisiti-rinnovo/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Permesso di dimora B nel Canton Vallese: requisiti, documenti e rinnovo",
+      "description": "Scopri i requisiti, i documenti necessari e la procedura di rinnovo del permesso di dimora B nel Canton Vallese. Informazioni pratiche e consigli utili.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/permesso-dimora-b-canton-vallese-requisiti-rinnovo.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista panoramica del Lago di Lugano con il Monte San Salvatore"
+      },
+      "datePublished": "2026-09-05T20:58:25+00:00",
+      "dateModified": "2026-09-05T20:58:25+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/permesso-dimora-b-canton-vallese-requisiti-rinnovo/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

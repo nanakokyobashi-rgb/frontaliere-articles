@@ -5605,6 +5605,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.volo-easyjet-valencia-ginevra.title': 'EasyJet Valencia-Geneva flight diverted to Nice due to bad weather',
     'blog.article.volo-easyjet-valencia-ginevra.excerpt': 'Three passengers recount moments of fear during landing. 31 flights delayed and three hijacked due to severe storms.',
     'blog.article.volo-easyjet-valencia-ginevra.imageAlt': 'Aerial view of Lugano city and lake, Switzerland',
+    'blog.article.permesso-dimora-b-canton-vallese-requisiti-rinnovo.title': 'Residence permit B in the Canton of Valais: requirements, documents and renewal',
+    'blog.article.permesso-dimora-b-canton-vallese-requisiti-rinnovo.excerpt': 'Learn about the requirements, the necessary documents and the procedure for renewing the B residence permit in the Canton of Valais.',
+    'blog.article.permesso-dimora-b-canton-vallese-requisiti-rinnovo.imageAlt': 'Panoramic view of Lake Lugano with Monte San Salvatore',
 };
 
 export default blogMetaChEn;

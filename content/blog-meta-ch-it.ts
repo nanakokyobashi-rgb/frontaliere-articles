@@ -5605,6 +5605,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.volo-easyjet-valencia-ginevra.title': 'Volo easyJet Valencia-Ginevra deviato a Nizza per maltempo',
     'blog.article.volo-easyjet-valencia-ginevra.excerpt': 'Tre passeggeri raccontano attimi di paura durante l\'atterraggio. 31 voli ritardati e tre dirottati a causa di forti temporali.',
     'blog.article.volo-easyjet-valencia-ginevra.imageAlt': 'Vista aerea di Lugano e del suo lago, Svizzera',
+    'blog.article.permesso-dimora-b-canton-vallese-requisiti-rinnovo.title': 'Permesso di dimora B nel Canton Vallese: requisiti, documenti e rinnovo',
+    'blog.article.permesso-dimora-b-canton-vallese-requisiti-rinnovo.excerpt': 'Scopri i requisiti, i documenti necessari e la procedura di rinnovo del permesso di dimora B nel Canton Vallese.',
+    'blog.article.permesso-dimora-b-canton-vallese-requisiti-rinnovo.imageAlt': 'Vista panoramica del Lago di Lugano con il Monte San Salvatore',
 };
 
 export default blogMetaChIt;

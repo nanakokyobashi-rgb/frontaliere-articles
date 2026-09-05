@@ -5605,6 +5605,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.volo-easyjet-valencia-ginevra.title': 'EasyJet-Flug Valencia-Genf wegen schlechtem Wetter nach Nizza umgeleitet',
     'blog.article.volo-easyjet-valencia-ginevra.excerpt': 'Drei Passagiere berichten von beängstigenden Momenten bei der Landung. 31 Flüge verspätet und drei wegen heftiger Stürme umgeleitet.',
     'blog.article.volo-easyjet-valencia-ginevra.imageAlt': 'Luftaufnahme der Stadt Lugano und des Sees, Schweiz',
+    'blog.article.permesso-dimora-b-canton-vallese-requisiti-rinnovo.title': 'Aufenthaltsbewilligung B im Wallis: Voraussetzungen, Dokumente und Verlängerung',
+    'blog.article.permesso-dimora-b-canton-vallese-requisiti-rinnovo.excerpt': 'Informieren Sie sich über die Voraussetzungen, die erforderlichen Unterlagen und das Verfahren zur Verlängerung der Aufenthaltsbewilligung B im Kanton Wallis.',
+    'blog.article.permesso-dimora-b-canton-vallese-requisiti-rinnovo.imageAlt': 'Panoramablick auf den Luganersee mit dem Monte San Salvatore',
 };
 
 export default blogMetaChDe;
