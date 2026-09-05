@@ -125,7 +125,18 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SITE_REPO: valerielinc-ops/frontaliere-si-o-no
           SITE_REF: main
-        run: node scripts/ci/transport-identical-twins.mjs
+        run: |
+          set -uo pipefail
+          rc=0
+          node scripts/ci/transport-identical-twins.mjs || rc=$?
+          # exit 2 = «c'e' un no permanente con divergenza reale». NON deve
+          # fermare qui la passata: gli altri gemelli si copiano benissimo, e
+          # far fallire il dry-run salterebbe lo step di apply (l'`if:` ha un
+          # `success()` implicito), cioe' un gemello bloccato per sempre
+          # fermerebbe il trasporto di TUTTI finche' una persona non copia a
+          # mano. Il rosso lo alza lo step di apply, DOPO aver aperto la PR.
+          [ "$rc" = "2" ] && rc=0
+          exit "$rc"
 
       # Senza PAT non si scrive: un push col GITHUB_TOKEN non fa partire i
       # workflow sulla PR (anti-ricorsione), quindi il check richiesto non
@@ -140,11 +151,18 @@ jobs:
           SITE_REF: main
         run: |
           set -euo pipefail
-          node scripts/ci/transport-identical-twins.mjs --apply --json > /tmp/transport.json
+          # `rc=2` (blocchi permanenti con divergenza reale) non ferma la copia:
+          # il report e' gia' scritto, gli altri gemelli partono, e il codice si
+          # ripropaga all'ULTIMA riga di questo step — cosi' il workflow esce
+          # rosso e `scan-failed-runs.mjs` apre la sua issue, ma la PR di oggi
+          # e' stata aperta lo stesso. Ogni altro codice resta bloccante.
+          rc=0
+          node scripts/ci/transport-identical-twins.mjs --apply --json > /tmp/transport.json || rc=$?
+          if [ "$rc" != "0" ] && [ "$rc" != "2" ]; then exit "$rc"; fi
           PORTED=$(node -e 'console.log(require("/tmp/transport.json").transported.length)')
           if [ "$PORTED" = "0" ]; then
             echo "Nessun gemello da portare: niente PR."
-            exit 0
+            exit "$rc"
           fi
           # Il corpo si scrive da Node su file: un heredoc dentro un blocco
           # `run:` indentato porterebbe la sua indentazione DENTRO il markdown,
@@ -211,3 +229,5 @@ jobs:
           gh pr create --base main --head "$BRANCH" \
             --title "chore(loop): trasporto di ${PORTED} gemelli \`identical\` dal sito" \
             --body-file /tmp/pr-body.md
+          # ULTIMA riga: il no permanente diventa rosso solo ora, a PR aperta.
+          exit "$rc"

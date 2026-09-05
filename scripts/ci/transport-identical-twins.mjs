@@ -148,6 +148,19 @@ const MAX_FILES = parsePositiveNum(process.env.TRANSPORT_MAX_FILES, 25, {
 });
 
 /**
+ * Codice d'uscita per «copiato quello che si poteva, ma resta un no permanente
+ * con divergenza reale».
+ *
+ * Distinto da 1 — che vuol dire «NON copiare», il buio delle fetch che invalida
+ * la passata intera — perche' qui gli altri gemelli si copiano benissimo e uno
+ * solo di loro ha bisogno di una mano. Riusare 1 avrebbe fermato il trasporto
+ * di TUTTI finche' una persona non interviene: un canale che wedgia il canale.
+ * Con 2 lo step di apply porta il resto, apre la PR, e alza il rosso DOPO —
+ * vedi `.github/workflows/transport-identical-twins.yml` (issue #871 item 4).
+ */
+export const EXIT_MANUAL_NEEDED = 2;
+
+/**
  * Una FRAZIONE, non una percentuale. `parsePositiveNum` valida solo `> 0`,
  * quindi `TRANSPORT_MAX_FAILURE_RATIO=25` (chi pensa in percentuale) passerebbe
  * e renderebbe `ratio > maxRatio` sempre falso: la difesa dal buio SPARIREBBE
@@ -282,7 +295,7 @@ export function permanentBlock(entry, { outOfScopePrefixes = [], couplings = [] 
   if (isFixture(entry.path)) {
     const blockers = couplingBlockers(couplings);
     if (blockers.length) {
-      return `fixture accoppiato a ${blockers.length} path non \`identical\` o non leggibili (${blockers.slice(0, 3).join(', ')}): una copia isolata mette rossa la PR di trasporto`;
+      return `fixture accoppiato a ${blockers.length} path non \`identical\` (${blockers.slice(0, 3).join(', ')}): una copia isolata mette rossa la PR di trasporto`;
     }
   }
   return null;
@@ -436,66 +449,16 @@ export function fetchFailureVerdict(attempted, failed, { maxRatio = 0.25, minFai
   return { red: false, reason: null };
 }
 
-/**
- * Il testo di un file locale, con TRE esiti distinti — perché due di loro
- * portavano allo stesso silenzio (issue #853).
- *
- *   stringa     il contenuto: si può cercare dentro.
- *   `undefined` non c'è niente da leggere: una directory, o un path che qui
- *               non esiste. È un'assenza VERA — un fixture che questo lato non
- *               ha ancora non può avere un consumer locale — e non blocca.
- *   `null`      è un file, ma non l'ho letto: sopra i 2 MB, o un errore di
- *               I/O. Questo NON è «non lo cita», è «non ho guardato», e la
- *               vecchia firma lo restituiva indistinguibile dal caso sopra:
- *               un fixture risultava senza accoppiamenti e quindi copiabile da
- *               solo, cioè verde per non aver letto.
- */
+/** Il testo di un file locale, o `null` se assente o non leggibile come testo. */
 function localText(rel) {
   const abs = path.join(ROOT, rel);
-  let stat;
   try {
-    stat = fs.statSync(abs);
-  } catch {
-    return undefined;
-  }
-  if (!stat.isFile()) return undefined;
-  if (stat.size > 2 * 1024 * 1024) return null;
-  try {
+    const stat = fs.statSync(abs);
+    if (!stat.isFile() || stat.size > 2 * 1024 * 1024) return null;
     return fs.readFileSync(abs, 'utf8');
   } catch {
     return null;
   }
-}
-
-/**
- * Il modo assegnato a un vicino che non si è potuto LEGGERE.
- *
- * Non è un modo del manifest: è il segnale che la scansione non ha visto quel
- * file. Passa da `couplingBlockers` come qualunque altro non-`identical`, che
- * è esattamente il trattamento voluto — «non ho guardato» deve pesare come un
- * accoppiamento bloccante, non come una via libera.
- */
-export const MODE_UNREADABLE = 'illeggibile';
-
-/**
- * La parte DECIDIBILE di `localCouplings`, separata dall'I/O perché sia
- * verificabile: dati i vicini già letti, quali accoppiano il fixture.
- *
- * `neighbours` è `[{ path, text }]` dove `text` è ciò che `localText` ha
- * restituito. Un `text === null` (file non letto) entra come
- * `MODE_UNREADABLE`; un `text === undefined` (directory, o assente) non entra:
- * lì non c'era niente da leggere.
- */
-export function couplingsFromNeighbours(base, neighbours, modeOf) {
-  const found = new Map();
-  for (const { path: p, text } of neighbours) {
-    if (text === null) {
-      found.set(p, MODE_UNREADABLE);
-      continue;
-    }
-    if (typeof text === 'string' && text.includes(base)) found.set(p, modeOf.get(p) || 'non registrato');
-  }
-  return found;
 }
 
 /**
@@ -516,34 +479,18 @@ export function couplingsFromNeighbours(base, neighbours, modeOf) {
 export function localCouplings(rel, modeOf) {
   const base = rel.split('/').pop();
   const dir = path.dirname(rel);
-  let names;
-  try {
-    names = fs.readdirSync(path.join(ROOT, dir));
-  } catch {
-    // La directory non c'è, o non si è potuta elencare. Se il fixture stesso
-    // non esiste qui — il caso normale di una PRIMA copia — non c'è nessun
-    // consumer locale da trovare e l'assenza è vera. Se invece il fixture c'è
-    // ma la sua directory non si elenca, la scansione ha fallito: il fixture
-    // si dichiara accoppiato a se stesso come illeggibile, e non si copia.
-    names = null;
+  const neighbours = fs.existsSync(path.join(ROOT, dir))
+    ? fs.readdirSync(path.join(ROOT, dir)).map((n) => path.posix.join(dir, n))
+    : [];
+  const found = new Set();
+
+  for (const other of neighbours) {
+    if (other === rel) continue;
+    const text = localText(other);
+    if (text && text.includes(base)) found.add(other);
   }
-  const found = names === null && localText(rel) !== undefined
-    ? new Map([[dir, MODE_UNREADABLE]])
-    : couplingsFromNeighbours(
-      base,
-      (names || []).filter((n) => path.posix.join(dir, n) !== rel).map((n) => {
-        const p = path.posix.join(dir, n);
-        return { path: p, text: localText(p) };
-      }),
-      modeOf,
-    );
 
   const own = localText(rel);
-  // Un path già marcato illeggibile non si declassa a «modo del manifest»
-  // perché il fixture lo cita: quel file resta uno che non abbiamo letto.
-  const add = (p) => {
-    if (found.get(p) !== MODE_UNREADABLE) found.set(p, modeOf.get(p) || 'non registrato');
-  };
   if (own) {
     // Specificatori relativi (`../../scripts/ci/close-recovered-failure-issues.mjs`) e path repo-relative
     // citati come stringa (`'scripts/ci/loop-sync-manifest.json'`). Solo quelli
@@ -551,23 +498,18 @@ export function localCouplings(rel, modeOf) {
     for (const m of own.matchAll(/\.{1,2}\/[\w./-]+/g)) {
       const abs = path.resolve(ROOT, dir, m[0]);
       if (abs.startsWith(ROOT + path.sep) && fs.existsSync(abs) && fs.statSync(abs).isFile()) {
-        add(path.relative(ROOT, abs).split(path.sep).join('/'));
+        found.add(path.relative(ROOT, abs).split(path.sep).join('/'));
       }
     }
     for (const m of own.matchAll(/['"`]([\w.-]+(?:\/[\w.-]+)+)['"`]/g)) {
       const cand = m[1];
       if (cand.startsWith('.') && !cand.startsWith('.github')) continue;
       const abs = path.join(ROOT, cand);
-      if (abs.startsWith(ROOT + path.sep) && fs.existsSync(abs) && fs.statSync(abs).isFile()) add(cand);
+      if (abs.startsWith(ROOT + path.sep) && fs.existsSync(abs) && fs.statSync(abs).isFile()) found.add(cand);
     }
   }
   found.delete(rel);
-  // DOPO la delete: il fixture che non si è potuto leggere è l'unico caso in
-  // cui il path del fixture stesso deve restare nell'elenco. Le sue citazioni
-  // uscenti non sono state viste, quindi la chiusura dell'insieme non è
-  // dimostrata e la copia isolata non è autorizzata.
-  if (own === null) found.set(rel, MODE_UNREADABLE);
-  return [...found.keys()].sort().map((c) => ({ path: c, mode: found.get(c) }));
+  return [...found].sort().map((c) => ({ path: c, mode: modeOf.get(c) || 'non registrato' }));
 }
 
 /** Hash del file locale, o null se non esiste. */
@@ -775,10 +717,9 @@ async function main() {
       // uno skip: e' una copia a mano che nessuno fara' se il report non la
       // nomina, e che nessun giro futuro di questo canale ripeschera'. Un
       // blocco permanente su un file `stable` invece non deve niente a
-      // nessuno — i 25 gemelli sotto `.github/workflows/` sono in quello
-      // stato per costruzione — e tenerli qui renderebbe la passata rossa
-      // ogni giorno, cioe' un canale che si smette di leggere (issue #871
-      // item 4).
+      // nessuno — i 25 gemelli sotto `.github/workflows/` sono in quello stato
+      // per costruzione — e tenerli qui renderebbe la passata rossa ogni
+      // giorno, cioe' un canale che si smette di leggere (issue #871 item 4).
       if (verdict.permanent && verdict.state === 'site-ahead') {
         manual.push({ path: rel, state: verdict.state, reason: verdict.reason });
       }
@@ -804,7 +745,7 @@ async function main() {
   for (const d of dropped) skipped.push({ path: d.path, state: 'site-ahead', reason: d.reason });
   // I rinvii che non scadono non sono «al prossimo giro»: sono una copia a mano
   // che nessuno farà se il report non la nomina. I candidati che il tetto ha
-  // separato da una meta' bloccata per sempre si uniscono ai no permanenti gia'
+  // separato da una metà bloccata per sempre si uniscono ai no permanenti già
   // raccolti sopra: la stessa cosa arrivata da due porte.
   for (const d of dropped.filter((x) => x.permanent)) {
     manual.push({ path: d.path, state: 'site-ahead', reason: d.reason });
@@ -860,12 +801,12 @@ async function main() {
     console.error(`transport-identical-twins: ${dark.reason}`);
     return 1;
   }
-  // Un `permanent` con divergenza reale esce ROSSO. Il canale a valle esiste
-  // gia': un fallimento di questo workflow apre la sua issue via
-  // `scan-failed-runs.mjs`, che e' l'unica cosa che qualcuno legge. Prima, la
-  // riga `⛔` e il campo `manual` vivevano nel log di una passata VERDE — cioe'
-  // il gemello restava indietro per sempre e il solo ripescaggio ipotizzato
-  // (`stranded-twin` dopo 3 giorni) era a sua volta spegnibile in silenzio.
+  // Prima, la riga `⛔` e il campo `manual` vivevano nel log di una passata
+  // VERDE, e nessuno step leggeva quel campo: il gemello restava indietro per
+  // sempre e il solo ripescaggio ipotizzato (`stranded-twin` dopo 3 giorni) era
+  // a sua volta spegnibile in silenzio dal difetto dell'item 1. Ora il
+  // fallimento del workflow apre la sua issue via `scan-failed-runs.mjs`.
+  //
   // Misurato il 2026-09-05 su `main`: 26 blocchi permanenti, TUTTI `stable`,
   // quindi questo insieme e' vuoto e la passata resta verde.
   if (manual.length) {
@@ -873,7 +814,7 @@ async function main() {
       `transport-identical-twins: ${manual.length} gemelli \`identical\` sono \`site-ahead\` e bloccati per SEMPRE `
       + `(${manual.map((m) => m.path).join(', ')}): nessun giro di questo canale li portera\u2019, serve una copia a mano.`,
     );
-    return 1;
+    return EXIT_MANUAL_NEEDED;
   }
   return 0;
 }
