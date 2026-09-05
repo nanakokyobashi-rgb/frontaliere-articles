@@ -36,6 +36,7 @@ import {
   classifyExhaustionCause,
   classifyNonRetryableError,
 } from '../scripts/lib/ai-models.mjs';
+import { isTransientMajority } from '../scripts/lib/exhaustion-disposition.mjs';
 
 // Il corpo esatto che l'API Gemini ha restituito nella run 31823202761.
 const GOOGLE_RETIRED_BODY = JSON.stringify({
@@ -248,8 +249,12 @@ describe('classifyExhaustionCause — le cause di skip finiscono nel secchio giu
       `persistente deve vincere: ${dopo.persistent} vs ${dopo.transient}`,
     );
     // E' questa disuguaglianza a decidere `transientExhaustion`, che decide
-    // l'exit code, che decide se la run e' verde.
-    const transientExhaustion = dopo.transient > 0 && dopo.transient >= dopo.persistent;
+    // l'exit code, che decide se la run e' verde. Il flag passa dall'helper di
+    // produzione (`isTransientMajority`, `tie: 'transient'`) e non dalla vecchia
+    // formula LORDA scritta a mano: qui i secchi non portano echi di cooldown,
+    // quindi i due valori coincidono, ma la premessa resta cio' che `callLLM`
+    // emette davvero.
+    const transientExhaustion = isTransientMajority(dopo, { tie: 'transient' });
     assert.equal(transientExhaustion, false, 'la run non deve piu\' differire su un guasto persistente');
 
     // Con la vecchia denominazione i 16 a pagamento tornavano transitori e il

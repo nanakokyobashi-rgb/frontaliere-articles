@@ -41,6 +41,7 @@ import {
   EXIT_NO_ARTICLE_DECLARED,
   isInputCapDeferralVeto,
   inputCapVetoSummary,
+  isTransientMajority,
 } from '../scripts/lib/exhaustion-disposition.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
@@ -60,7 +61,14 @@ function productionExhaustionError({ transient = 53, persistent = 53, capCount =
   const err = new Error('All AI models failed. Chain: [...]. Errors: ...');
   err.code = 'ALL_MODELS_EXHAUSTED';
   err.exhaustionBreakdown = { transient, persistent, total: 107 };
-  err.transientExhaustion = transient > 0 && transient >= persistent;
+  // Il flag si costruisce con l'helper da cui passa la PRODUZIONE
+  // (`ai-models.mjs`: `isTransientMajority(breakdown, { tie: 'transient' })`),
+  // non riscrivendo a mano la vecchia formula LORDA `transient > 0 &&
+  // transient >= persistent` — che #879 ha tolto dal codice vero. Sui
+  // breakdown di questo file i due valori coincidono, perche' nessuno porta
+  // `providerCooldownSkips`; ma la premessa di un guardiano deve essere cio'
+  // che `callLLM` emette, non un controfattuale che gli somiglia oggi.
+  err.transientExhaustion = isTransientMajority(err.exhaustionBreakdown, { tie: 'transient' });
   err.inputCapReport = capCount > 0
     ? { count: capCount, maxSkippedReqLimit: 8000, minSkippedReqLimit: 3000, estimatedRequestTokens: 9740 }
     : null;
