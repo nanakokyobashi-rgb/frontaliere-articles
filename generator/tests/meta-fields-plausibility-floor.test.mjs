@@ -170,3 +170,103 @@ for (const field of META_ONLY_FIELDS) {
     );
   });
 }
+
+// ── 4. Il floor vale anche sui META TRADOTTI (en/de/fr) ───────────────────
+//
+// Il `title` localizzato non e' una copia dell'IT gia' validato: e' l'output di
+// una chiamata SEPARATA (`translateArticle`, o il percorso free-MT), e diventa
+// `data.slugs[locale]` via `relocalizeSlugsAfterTranslation` — URL e canonical
+// di `/en/`, `/de/`, `/fr/`, live senza rebuild del sito. Il corpus pubblicato
+// dimostra che la degenerazione NASCE in traduzione: tre campi DE valgono
+// letteralmente `...`, passati dal guard di non-vuoto perche' non erano vuoti.
+
+const LOCALI_TRADOTTI = ['en', 'de', 'fr'];
+
+function raccogliCampoLocale(locale, suffix) {
+  const valori = [];
+  const re = new RegExp(`\\.${suffix}':\\s*'((?:[^'\\\\]|\\\\.)*)'`, 'g');
+  for (const rel of [`content/blog-meta-${locale}.ts`, `content/blog-meta-ch-${locale}.ts`]) {
+    const file = path.join(REPO, rel);
+    if (!fs.existsSync(file)) continue;
+    const src = fs.readFileSync(file, 'utf8');
+    for (const m of src.matchAll(re)) valori.push(m[1].replace(/\\(.)/g, '$1'));
+  }
+  return valori.map((v) => v.trim()).filter(Boolean);
+}
+
+test('il floor prende i meta tradotti degeneri REALMENTE pubblicati', () => {
+  // Misura al 2026-09-05: `de` porta due `title` e un `excerpt` uguali a `...`.
+  // Se questo assert cade perche' non ci sono piu' offender, il corpus e' stato
+  // ripulito — va bene, ma allora va aggiornata la misura, non tolto il floor.
+  const degeneri = [];
+  for (const locale of LOCALI_TRADOTTI) {
+    for (const field of META_ONLY_FIELDS) {
+      const valori = raccogliCampoLocale(locale, field);
+      assert.ok(valori.length >= CONTEGGIO_MINIMO, `letti solo ${valori.length} ${field} ${locale}`);
+      for (const v of valori) if (metaFieldPlausibilityMiss(field, v)) degeneri.push([locale, field, v]);
+    }
+  }
+  assert.ok(
+    degeneri.some(([, , v]) => v === '...'),
+    `atteso almeno un meta tradotto degenere ('...') nel corpus, trovati: ${JSON.stringify(degeneri)}`,
+  );
+});
+
+test('il floor NON e\' un rastrello sui meta tradotti: pochi falsi positivi', () => {
+  // I locali tradotti hanno titoli corti ma legittimi che l'IT non ha
+  // (`Working DRY`, `Suisse-Italie`, `Hôtel Flaz`). Su quelli il costo e' UNA
+  // chiamata di retry, mai una pubblicazione peggiore — il ramo floor-miss di
+  // `translateArticle` tiene il valore tradotto e non scende sul fallback IT
+  // (#831). Il tetto qui esiste perche' alzare la soglia verso la mediana
+  // trasformerebbe quel costo in un rastrello: 15 su ~22.600 campi e' il bordo.
+  let offender = 0;
+  let totale = 0;
+  for (const locale of LOCALI_TRADOTTI) {
+    for (const field of META_ONLY_FIELDS) {
+      const valori = raccogliCampoLocale(locale, field);
+      totale += valori.length;
+      offender += valori.filter((v) => metaFieldPlausibilityMiss(field, v)).length;
+    }
+  }
+  assert.ok(totale >= CONTEGGIO_MINIMO * 4, `scan parziale: solo ${totale} campi tradotti letti`);
+  assert.ok(offender <= 15, `il floor rigetterebbe ${offender} meta tradotti reali su ${totale}: troppo alto`);
+});
+
+test('translateArticle applica il floor ai meta tradotti senza cadere sul fallback IT', () => {
+  const src = fs.readFileSync(path.join(REPO, 'generator/scripts/create-article.mjs'), 'utf8');
+  const loop = src.slice(
+    src.indexOf("for (const field of ['title', 'excerpt', 'body1', 'body2', 'body3'])"),
+  );
+  const corpo = loop.slice(0, loop.indexOf('detectTruncation(itValue'));
+  assert.ok(
+    /metaFieldPlausibilityMiss\(field, valoreTradotto\)/.test(corpo),
+    'il loop dei campi tradotti non applica il floor di plausibilita\'',
+  );
+  assert.ok(
+    /const ultimaRisorsa = floorMiss \? valoreTradotto : null/.test(corpo),
+    'un floor-miss deve tenere il valore TRADOTTO, non cadere sul fallback IT (#831)',
+  );
+});
+
+test('ogni retry che sostituisce un title/excerpt riapplica il floor', () => {
+  // La classe di #798 non e' un punto solo: ovunque un retry rimpiazzi un campo
+  // meta con l'output di un modello, il non-vuoto non basta — su `title` quella
+  // stringa diventa lo slug. `capBlogTitle` NON fa da rete: torna il titolo
+  // verbatim (`truncated: false` sempre), quindi non impone nessun floor.
+  const src = fs.readFileSync(path.join(REPO, 'generator/scripts/create-article.mjs'), 'utf8');
+  const siti = [
+    // title-cap retry IT, dopo validateItalianPayload
+    /const capRetryMiss = metaFieldPlausibilityMiss\('title', retryParsed\?\.title\);/,
+    // title-cap retry sui locali tradotti
+    /const capRetryMiss = metaFieldPlausibilityMiss\('title', retryResult\?\.title\);/,
+    // retry "traduzione identica all'italiano"
+    /const retryMiss = metaFieldPlausibilityMiss\(field, retryResult\?\.\[field\]\);/,
+    // esito del retry mirato sul campo mancante/implausibile
+    /const retriedMiss = retried \? metaFieldPlausibilityMiss\(field, retried\) : null;/,
+    // excerpt della pipeline giornalista (non passa da validateItalianPayload)
+    /const excerptMiss = metaFieldPlausibilityMiss\('excerpt', excerpt\);/,
+  ];
+  for (const re of siti) {
+    assert.ok(re.test(src), `sito della classe #798 senza floor: ${re}`);
+  }
+});
