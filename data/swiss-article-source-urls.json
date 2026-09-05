@@ -1,5 +1,4 @@
 {
-  "https://www.swissinfo.ch/ita/on%3a-trimestre-record-con-forte-crescita-in-asia%2c-ma-gi%c3%b9-in-borsa/91880689": "on-trimestre-record",
   "https://www.rsi.ch/s/3943950": "caldo-prezzi-inflazione-climatica",
   "https://www.tio.ch/svizzera/economia/1943270/svizzera-croce-ige-swiss-marchio-made-valgono": "come-usare-la-croce-svizzera-sui-prodotti-esteri",
   "https://www.laregione.ch/svizzera/svizzera/1943349/ubs-fumata-lex-red-ats": "portale-informazione-svizzera-italiana",
@@ -1809,6 +1808,11 @@
   "https://www.tio.ch/svizzera/cronaca/1948195/polizia-intervento-goldach-entita-scuola-concluso-sg": {
     "articleId": "intervento-polizia-goldach-scuola",
     "ts": "2026-09-05T10:47:04.665Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/zh%3a-processo-junge-tat%3b-procura-chiede-condanna%2c-difesa-assoluzione/92008105": {
+    "articleId": "processo-junge-tat-zurigo",
+    "ts": "2026-09-05T10:54:48.947Z",
     "keyForm": 2
   }
 }
