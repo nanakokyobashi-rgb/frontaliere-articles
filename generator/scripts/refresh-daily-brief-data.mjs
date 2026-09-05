@@ -23,7 +23,7 @@
  *   TODAY_ISO=2026-08-08 …   # pin "today" (tests/CI)
  */
 import path from 'node:path';
-import { readFileSync } from 'node:fs';
+import { readFileSync, appendFileSync } from 'node:fs';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { getServiceAccountAccessToken } from './lib/google-service-account-token.mjs';
 import { writeJsonAtomic } from './lib/atomic-write-json.mjs';
@@ -186,19 +186,39 @@ function printPlan(brief) {
  * upstream, not a source having a bad morning, and the pipeline has no other
  * way to say so: the snapshot is written, the edition is one section shorter,
  * the run is green, and that repeats until somebody happens to read a bulletin.
- * So the run fails. The snapshot is already on disk when this happens — the
- * streak keeps counting, and a `workflow_dispatch` rerun still renders the
- * edition from it once the alarm has been seen.
+ * So the crossing is announced — loudly, on the run and in its summary — and
+ * the count that produced it is committed with the snapshot.
  *
- * The red is spent on the edition that CROSSES the threshold, and only that
- * one. This script is the first step of `generate-daily-brief.yml`, so a
- * non-zero exit code skips the generate/guard/commit/push steps that follow:
- * a streak that stayed fatal at `>= threshold` would delete the bulletin —
- * every day, not "one section shorter" — until somebody repaired the source,
- * and the same rerun that is supposed to render the edition would re-enter
- * through this same step and fail again. From the second alarming edition on,
- * the `::error::` annotation still goes out and the run stays green.
+ * NOT with the exit code, and the reason is structural. This script is the
+ * FIRST step of `generate-daily-brief.yml`, and generation, guard, RC and
+ * `Commit and push` all sit behind its implicit `if: success()`. A non-zero
+ * exit here does not merely skip today's edition: it skips the COMMIT, so the
+ * snapshot `writeJsonAtomic` just wrote never leaves the runner. Tomorrow's
+ * checkout restores the D-1 snapshot, the streak recomputes to the same value,
+ * the crossing reads as new again, and the red repeats every morning forever —
+ * exactly the permanent outage the crossing logic was added to avoid, with the
+ * bulletin gone as well. A `workflow_dispatch` cannot break the loop either: it
+ * checks out the COMMITTED file, not the one the failed run left behind.
+ *
+ * So the alarm's job is to be impossible to miss, not to be fatal: an
+ * `::error::` annotation on the run plus a block in `$GITHUB_STEP_SUMMARY`,
+ * while the streak keeps advancing inside a snapshot that actually gets
+ * committed. Making the run itself red needs a verdict step AFTER
+ * `Commit and push`, and the workflow is outside the scope of this change —
+ * see `## Non implementato (ancora)` on the PR.
  */
+function appendStepSummary(text) {
+  const file = process.env.GITHUB_STEP_SUMMARY;
+  if (!file) return;
+  try {
+    appendFileSync(file, `${text}\n`);
+  } catch (err) {
+    // A summary that cannot be written must not take the refresh down with it.
+    console.warn(`⚠️  could not write the step summary: ${err.message}`);
+  }
+}
+
+/** Announce every block whose degradation has outlived the threshold. */
 export function reportDegradationAlarms(brief, { dryRun, previous = null }) {
   const alarms = degradationAlarms(brief, previous);
   if (alarms.length === 0) return;
@@ -210,13 +230,18 @@ export function reportDegradationAlarms(brief, { dryRun, previous = null }) {
     console.warn(dryRun ? `⚠️  ${line}` : `::error::${line}`);
   }
   if (dryRun) return;
-  const crossing = alarms.filter((a) => a.crossed);
-  if (crossing.length === 0) {
-    console.warn(`⚠️  ${alarms.length} block(s) still degraded past ${MAX_CONSECUTIVE_DEGRADED_EDITIONS} editions — already reported on the edition that crossed the threshold. The run stays green so today's bulletin is still generated and committed.`);
-    return;
-  }
-  console.error(`❌ ${crossing.length} block(s) degraded for ${MAX_CONSECUTIVE_DEGRADED_EDITIONS} editions in a row. That is an upstream shape/contract change, not an outage — the bulletin has been publishing without those sections and nothing was failing. Fix the source or the guard; the snapshot is written, so a rerun renders today's edition.`);
-  process.exitCode = 1;
+  const crossed = alarms.filter((a) => a.crossed);
+  const headline = crossed.length > 0
+    ? `${crossed.map((a) => a.block).join(', ')} just reached ${MAX_CONSECUTIVE_DEGRADED_EDITIONS} degraded editions in a row`
+    : `${alarms.map((a) => a.block).join(', ')} still degraded past ${MAX_CONSECUTIVE_DEGRADED_EDITIONS} editions`;
+  console.error(`❌ ${headline}. That is an upstream shape/contract change, not an outage — the bulletin has been publishing without those sections and nothing was failing.`);
+  appendStepSummary([
+    `### ⚠️ Bollettino: degradazione persistente — ${headline}`,
+    '',
+    ...alarms.map((a) => `- \`${a.block}\`: ${a.editions} edizioni consecutive — ${a.reason}`),
+    '',
+    "Non e' un'interruzione della fonte: a questo punto e' un contratto cambiato a monte. Il contatore vive in `public/data/daily-brief.json` (`blocks.<nome>.degradedEditions`) e continua a salire finche' qualcuno non ripara la fonte o il guard.",
+  ].join('\n'));
 }
 
 async function main() {

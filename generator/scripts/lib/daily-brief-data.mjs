@@ -614,19 +614,27 @@ function degradedEditions(block, previousStreak, { sameDay }) {
  */
 export function degradationAlarms(brief, previous = null) {
   return Object.entries(brief?.blocks || {})
-    .filter(([, b]) => !b?.available && Number(b?.degradedEditions) >= MAX_CONSECUTIVE_DEGRADED_EDITIONS)
+    // Same reader as `previousDegradedEditions` below, deliberately: with one
+    // side on `Number()` and the other on `Number.isFinite`, a snapshot whose
+    // field round-tripped to the string "3" would raise the alarm and count as
+    // a previous streak of 0 — every edition a fresh crossing, forever.
+    .filter(([, b]) => !b?.available && blockDegradedEditions(b) >= MAX_CONSECUTIVE_DEGRADED_EDITIONS)
     .map(([block, b]) => ({
       block,
-      editions: b.degradedEditions,
+      editions: blockDegradedEditions(b),
       reason: b.reason,
       crossed: previousDegradedEditions(previous, block) < MAX_CONSECUTIVE_DEGRADED_EDITIONS,
     }));
 }
 
+/** The streak a block carries; anything unreadable counts as 0. */
+function blockDegradedEditions(block) {
+  return Number.isFinite(block?.degradedEditions) ? block.degradedEditions : 0;
+}
+
 /** The streak the previous snapshot recorded for `block`; absent counts as 0. */
 function previousDegradedEditions(previous, block) {
-  const n = previous?.blocks?.[block]?.degradedEditions;
-  return Number.isFinite(n) ? n : 0;
+  return blockDegradedEditions(previous?.blocks?.[block]);
 }
 
 /**
@@ -637,8 +645,12 @@ function previousDegradedEditions(previous, block) {
  * it carries nothing but the per-block degradation streaks forward.
  */
 export function buildDailyBrief({ todayIso, nowMs = Date.now(), borderWaitDocs, fuelMetadata, exchangeDoc, jobsStats, previous = null }) {
-  if (!todayIso || !/^\d{4}-\d{2}-\d{2}$/.test(todayIso)) {
-    throw new Error(`buildDailyBrief: todayIso must be YYYY-MM-DD, got ${JSON.stringify(todayIso)}`);
+  // Same test as everywhere else in the module: a day that exists. The raw
+  // regex used to let `2026-02-31` through here and have it refused deeper in,
+  // which wrote and committed a snapshot whose `dateIso` is a day nobody has —
+  // and build-api.mjs publishes that field.
+  if (!Number.isFinite(isoDayMs(todayIso))) {
+    throw new Error(`buildDailyBrief: todayIso must be a real YYYY-MM-DD day, got ${JSON.stringify(todayIso)}`);
   }
   const sameDay = previous?.dateIso === todayIso;
   const blocks = {
