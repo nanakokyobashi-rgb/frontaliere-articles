@@ -38,6 +38,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import crypto from 'node:crypto';
 import {
   closeTransportSet,
   couplingBlockers,
@@ -46,6 +47,7 @@ import {
   localCouplings,
   parseRatio,
   permanentBlock,
+  realignFromCommitted,
   transportVerdict,
   unsafeTarget,
 } from '../../scripts/ci/transport-identical-twins.mjs';
@@ -437,4 +439,83 @@ test('TRANSPORT_MAX_FAILURE_RATIO è una frazione, non una percentuale', () => {
   let msg = '';
   parseRatio('25', 0.25, { label: 'TRANSPORT_MAX_FAILURE_RATIO', warn: (m) => { msg = m; } });
   assert.match(msg, /\[transport-identical-twins\] TRANSPORT_MAX_FAILURE_RATIO=25/);
+});
+
+// ── La baseline registra i byte COMMITTATI, non quelli scaricati (#852) ──────
+//
+// `--apply` scrive `baseline.corpus` con l'hash dei byte SCARICATI, prima che
+// il commit esista. Se i byte committati differiscono — normalizzazione di
+// line ending, filtro `clean`, staging incompleto — il manifest atterra su
+// `main` con una baseline che non descrive nessuno dei due lati, e il giorno
+// dopo il drift check legge `corpus-ahead` su un file che nessuno ha toccato:
+// una riga actionable permanente, cioe' il modo in cui un report smette di
+// essere letto.
+
+const hash16 = (buf) => crypto.createHash('sha256').update(buf).digest('hex').slice(0, 16);
+
+/** Un manifest con una sola voce, gia' "trasportata" con l'hash dei byte scaricati. */
+const transported = (over = {}) => ({
+  files: [{
+    path: 'scripts/ci/alert-pat-down.mjs',
+    mode: 'identical',
+    baseline: { site: hash16('scaricato\r\n'), corpus: hash16('scaricato\r\n'), alignedAt: '2026-09-05' },
+    ...over,
+  }],
+});
+
+test('la baseline si riallinea sui byte committati quando differiscono dai byte scaricati', () => {
+  const manifest = transported();
+  const committed = Buffer.from('scaricato\n'); // normalizzato al commit
+  const { corrections, unreadable } = realignFromCommitted(manifest, ['scripts/ci/alert-pat-down.mjs'], () => committed);
+
+  assert.deepEqual(unreadable, []);
+  assert.equal(corrections.length, 1);
+  assert.equal(corrections[0].to, hash16(committed));
+  assert.equal(manifest.files[0].baseline.corpus, hash16(committed));
+});
+
+test('si corregge SOLO `baseline.corpus`: `baseline.site` resta un blob che sul sito esiste', () => {
+  // Sovrascrivere anche `baseline.site` con un hash locale fabbricherebbe
+  // esattamente la `ghost-baseline` che `checkBaselineProvenance()` esiste per
+  // intercettare (#148): un hash registrato che non e' mai stato reale.
+  const manifest = transported();
+  const siteBefore = manifest.files[0].baseline.site;
+  realignFromCommitted(manifest, ['scripts/ci/alert-pat-down.mjs'], () => Buffer.from('scaricato\n'));
+
+  assert.equal(manifest.files[0].baseline.site, siteBefore);
+  assert.equal(manifest.files[0].baseline.alignedAt, '2026-09-05', 'la data dell\'allineamento non cambia: e\' lo stesso atto');
+});
+
+test('byte committati identici a quelli scaricati: nessuna correzione, nessuna riscrittura', () => {
+  const manifest = transported();
+  const { corrections, unreadable } = realignFromCommitted(manifest, ['scripts/ci/alert-pat-down.mjs'], () => Buffer.from('scaricato\r\n'));
+  assert.deepEqual(corrections, []);
+  assert.deepEqual(unreadable, []);
+});
+
+test('una voce NON trasportata non si tocca, per quanto divergente', () => {
+  // Il caso pericoloso: `corpus-ahead` legittimo. Riallinearlo cancellerebbe
+  // una divergenza vera che va letta a mano, cioe' il contrario del fix.
+  const manifest = transported();
+  const { corrections } = realignFromCommitted(manifest, [], () => Buffer.from('tutt\'altro'));
+  assert.deepEqual(corrections, []);
+  assert.equal(manifest.files[0].baseline.corpus, hash16('scaricato\r\n'));
+});
+
+test('un path trasportato non leggibile dal commit e\' un errore, non un silenzio', () => {
+  // La meta' peggiore del buco: la baseline lo dichiara allineato e il file nel
+  // commit non c'e'. Verde qui significa manifest rotto su `main`.
+  const manifest = transported();
+  const { corrections, unreadable } = realignFromCommitted(manifest, ['scripts/ci/alert-pat-down.mjs'], () => {
+    throw new Error("fatal: path 'scripts/ci/alert-pat-down.mjs' does not exist in 'HEAD'");
+  });
+  assert.deepEqual(corrections, []);
+  assert.equal(unreadable.length, 1);
+  assert.match(unreadable[0].reason, /does not exist/);
+});
+
+test('un path trasportato assente dal manifest non passa in silenzio', () => {
+  const manifest = transported();
+  const { unreadable } = realignFromCommitted(manifest, ['host/mai-registrato.ts'], () => Buffer.from('x'));
+  assert.deepEqual(unreadable.map((u) => u.path), ['host/mai-registrato.ts']);
 });
