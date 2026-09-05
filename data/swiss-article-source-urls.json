@@ -1,5 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/politica/1943297/bilaterali-tutele-iii-commissione-consiglio": "no-tutele-sindacalisti-bilaterali-iii",
   "https://www.swissinfo.ch/ita/cf%3a-casse-malattia%2c-un-tetto-ai-salari-dei-manager/91884787": "tetto-salari-manager-casse-malattia",
   "https://www.tio.ch/ticino/politica/1943411/comuni-utili-gettito-tui-cantone": "tassa-utili-immobiliari-comuni",
   "https://www.tio.ch/svizzera/attualita/1943434/km-federale-consiglio-citta-zone-interviene": "zone-30-kmh-intervento-consiglio-federale",
@@ -1825,6 +1824,11 @@
   "https://www.swissinfo.ch/ita/prio%2eswiss%3a-alcuni-medici-specialisti-esagerano-con-tardoc/92010294": {
     "articleId": "prio-swiss-medici-specialisti-tardoc",
     "ts": "2026-09-05T13:56:33.347Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/tg%3a-colpito-a-morte-da-cesto-di-mongolfiera/92006537": {
+    "articleId": "morte-mongolfiera-ticino",
+    "ts": "2026-09-05T14:06:08.331Z",
     "keyForm": 2
   }
 }
