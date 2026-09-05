@@ -230,7 +230,13 @@ describe('il ramo di timeout usa davvero il salvataggio, e non punisce il modell
       // cioe' su un cambiamento che non toccava affatto cio' che questo test
       // misura. Ancorare sul nome e' piu' stretto, non piu' largo — prima
       // qualunque oggetto con un campo `transportOnly` sarebbe bastato.
-      /const transportOnly = !!e\.transportFault && provider === PROVIDER\.CLAUDE_CLI;[\s\S]{0,400}?recordModelFailure\(model, \{[\s\S]{0,200}?transportOnly,\s*\n\s*\}\);/,
+      // #838 ha aggiunto una SECONDA causa a punteggio zero (un endpoint
+      // per-macchina irraggiungibile), quindi la dichiarazione non e' piu' una
+      // riga sola. La clausola di claude-cli resta pinnata alla lettera — cio'
+      // che questo test misura — e la coda `[\s\S]` copre solo le eventuali
+      // disgiunzioni aggiunte dopo: allentarla oltre il `;` renderebbe di nuovo
+      // sufficiente un qualunque oggetto con un campo `transportOnly`.
+      /const transportOnly = \(!!e\.transportFault && provider === PROVIDER\.CLAUDE_CLI\)[\s\S]{0,200}?;[\s\S]{0,400}?recordModelFailure\(model, \{[\s\S]{0,200}?transportOnly,\s*\n\s*\}\);/,
       'callLLM deve propagare il flag a recordModelFailure',
     );
   });

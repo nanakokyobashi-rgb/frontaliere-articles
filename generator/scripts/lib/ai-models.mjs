@@ -1651,6 +1651,43 @@ function _isHostUnreachableExempt(modelId, err) {
   return false;
 }
 
+/**
+ * ── UN ENDPOINT PER-MACCHINA NON PUO' SCRIVERE NEL LEDGER CONDIVISO (#838) ──
+ *
+ * `_isHostUnreachableExempt` decide SE il breaker arma. Questa decide DOVE il
+ * suo verdetto ha diritto di vivere, e le due domande sono diverse.
+ *
+ * `local/fallback` e `omniroute/auto` sono id STABILI in un documento
+ * condiviso (`ai_model_scores/_all`), ma l'host che servono e' configurazione
+ * PER-MACCHINA: `LOCAL_LLM_URL`/`OMNIROUTE_URL`. Puntato un gateway remoto
+ * morto, il breaker di #475 arma a ragione — quel connect e' una prova — ma la
+ * prova descrive SOLO questo runner. Persistendola, ogni altra macchina eredita
+ * un verdetto su un endpoint che non ha mai avuto: il suo `LOCAL_LLM_URL` puo'
+ * essere il loopback con un server vivo, e si ritrova l'ultima riga della
+ * catena affondata nel punteggio da un guasto che non e' suo.
+ *
+ * Per gli altri provider l'endpoint e' una costante del modulo, uguale ovunque:
+ * li' un host morto e' un fatto condivisibile, e il ban persiste come prima.
+ *
+ * Il taglio e' quindi fra le due meta' del breaker, non fra i provider:
+ * l'effetto IN PROCESSO (marchio di esaurimento + cooldown del provider) resta
+ * intero — e' quello che impedisce di ricomporre un numero morto per ogni id
+ * fratello, cioe' la meta' di #475 che vale di piu' — mentre la scrittura sul
+ * ledger condiviso non parte.
+ *
+ * @returns {boolean} true quando l'endpoint del modello e' configurazione di
+ *   questa macchina, quindi un verdetto su di esso non e' condivisibile.
+ */
+function _isPerMachineEndpoint(modelId) {
+  const p = getProvider(modelId);
+  // Non «last-resort»: la proprieta' che conta e' che l'indirizzo arrivi
+  // dall'ambiente di QUESTA macchina (LOCAL_LLM_URL, OMNIROUTE_URL). claude-cli
+  // non compone nessun numero ed e' esente dal breaker a monte, quindi qui non
+  // arriva mai; se un domani un provider a endpoint fisso diventasse
+  // configurabile, e' questa lista a doversi allungare, non l'altra.
+  return p === PROVIDER.LOCAL || p === PROVIDER.OMNIROUTE;
+}
+
 // Backward-compatible helpers (kept for external code)
 function isGitHubModel(model) { return getProvider(model) === PROVIDER.GITHUB; }
 function isGeminiModel(model) { return getProvider(model) === PROVIDER.GEMINI; }
@@ -7201,6 +7238,12 @@ export async function callLLM(messages, opts = {}) {
         _stats.exhausted++;
         markedExhausted = true;
       }
+      // Un guasto di irraggiungibilita' su un endpoint di QUESTA macchina
+      // (#838): il breaker arma lo stesso, ma il verdetto non e' condivisibile.
+      // Calcolato qui perche' lo leggono due punti — il ban sotto e la penale
+      // di punteggio in fondo al catch — e devono rispondere allo stesso fatto.
+      const perMachineEndpointFault = !!e.hostUnreachable && !spared
+        && !_isHostUnreachableExempt(model, e) && _isPerMachineEndpoint(model);
       // Unreachable-host circuit breaker (nanako#475). Same shape as the
       // timeout breaker above, one level stronger on the provider: a host that
       // refuses the connection refuses it for EVERY id it serves, so exhausting
@@ -7242,9 +7285,18 @@ export async function callLLM(messages, opts = {}) {
       // l'evidenza piu' forte delle due. `spared` resta rispettato — un timeout
       // sotto un ceiling che ABBIAMO ristretto noi non e' ancora una prova, ed
       // era gia' escluso da qui prima (implicava `isTimeoutFailure`).
+      //
+      // BAN PERSISTITO ≠ BAN DI RUN (#838). Armare il breaker e scrivere il
+      // suo verdetto nel ledger CONDIVISO sono due decisioni separate: l'host
+      // di `local/`/`omniroute/` e' configurazione per-macchina, quindi il
+      // connect morto e' una prova vera ma valida solo qui. Vedi
+      // `_isPerMachineEndpoint`: in processo cambia nulla — marchio e cooldown
+      // restano — mentre verso Firestore non parte niente.
       if (e.hostUnreachable && !spared && !_isHostUnreachableExempt(model, e)) {
         if (!markedExhausted && _shouldRecordScore(o)) {
-          markModelExhausted(model, 'nonretryable', e.hostUnreachable);
+          markModelExhausted(model, 'nonretryable', e.hostUnreachable, {
+            recordScore: !perMachineEndpointFault,
+          });
           _stats.exhausted++;
           markedExhausted = true;
         }
@@ -7324,7 +7376,19 @@ export async function callLLM(messages, opts = {}) {
       // punteggio. Il breaker di trasporto sopra (_claudeCliConsecutiveTimeouts)
       // NON e' toccato — quello conta i guasti del canale, ed e' il posto
       // giusto dove contarli.
-      const transportOnly = !!e.transportFault && provider === PROVIDER.CLAUDE_CLI;
+      //
+      // Un endpoint per-macchina morto sta nella stessa famiglia (#838), e per
+      // la ragione piu' forte: la penale di punteggio e' l'UNICA meta' del
+      // breaker che finisce davvero nel documento condiviso — `exhaustedUntil`
+      // non viene scritto per un ban `nonretryable` (vedi
+      // _persistScoresToFirestore), quindi senza questa riga il ban «non
+      // persistito» sopra resterebbe una promessa e la cascata di ogni altra
+      // macchina continuerebbe a ereditare il verdetto sotto forma di rank. Il
+      // CONTEGGIO del fallimento resta, come per il guasto di trasporto: un
+      // modello che fallisce e non compare mai fra i falliti e' il modo piu'
+      // rapido per rendere invisibile il prossimo incidente.
+      const transportOnly = (!!e.transportFault && provider === PROVIDER.CLAUDE_CLI)
+        || perMachineEndpointFault;
       // (skipped for diagnostic-only callers, see DEFAULT_OPTS.recordScore)
       if (_shouldRecordScore(o)) {
         recordModelFailure(model, {
@@ -7334,8 +7398,11 @@ export async function callLLM(messages, opts = {}) {
         });
       }
 
+      // La causa va nominata anche qui: "guasto di trasporto" su un gateway
+      // remoto morto manderebbe chi indaga a cercare un cap nostro invece
+      // dell'URL configurato su questo runner.
       const scoreNote = transportOnly
-        ? `guasto di trasporto, score invariato → ${_modelScores.get(model) || 0}`
+        ? `${perMachineEndpointFault ? 'endpoint per-macchina irraggiungibile' : 'guasto di trasporto'}, score invariato → ${_modelScores.get(model) || 0}`
         : `score → ${_modelScores.get(model) || 0}`;
       // Il motivo del ban va nominato, non presunto: da #475 questa riga puo'
       // essere raggiunta anche da un host irraggiungibile, e leggere "timeout"
