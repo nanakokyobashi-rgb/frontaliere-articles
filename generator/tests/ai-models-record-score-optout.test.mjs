@@ -18,7 +18,11 @@
  *      `_dirtyModels` VUOTO — cioe' non c'e' niente da persistere, che e' la
  *      forma osservabile di «il ledger non e' stato toccato»; e lascia
  *      `_modelScores` invariato, cioe' nemmeno l'ordinamento in memoria di
- *      questo processo e' stato inquinato;
+ *      questo processo e' stato inquinato. Il MARCHIO di esaurimento invece
+ *      RESTA (#846): spegnerlo faceva ripagare a ogni passata l'errore di un
+ *      modello gia' fuori quota, ed era la divisione opposta a quella della
+ *      discovery. Il confine fra le due meta' e' misurato qui — `dirtyModels`,
+ *      `scoreBoard` e `activeCooldowns` restano esattamente quelli di prima;
  *   2. il default (flag assente) continua a scrivere: e' il confine che rende
  *      il test una misura e non una tautologia — senza questo caso, un
  *      `recordScore` che spegnesse TUTTO passerebbe il punto 1 comunque;
@@ -109,10 +113,17 @@ describe('callLLM({ recordScore: false }) — opt-out dal ledger di produzione',
       [],
       `nessun punteggio doveva muoversi, visti: ${JSON.stringify(stats.scoreBoard)}`,
     );
+    // ...ma il MARCHIO in-processo resta, e deve (#846). L'opt-out spegne il
+    // ledger, non il circuit breaker: un modello a quota esaurita che non entra
+    // in `_exhaustedModels` viene ritentato a ogni giro della cascata, e il
+    // chiamante diagnostico e' proprio quello che la percorre tutta — pagava
+    // quindi lo stesso 429 a ogni passata. Il ban muore col processo e non
+    // raggiunge nessun documento condiviso: e' `dirtyModels === 0` qui sopra a
+    // misurarlo. Stessa divisione del ramo markStale della discovery.
     assert.deepEqual(
-      stats.exhaustedModels,
-      [],
-      `nessun modello doveva essere marchiato esausto, visti: ${stats.exhaustedModels.join(', ')}`,
+      [...stats.exhaustedModels].sort(),
+      ['gpt-4.1-mini', 'gpt-4o-mini'],
+      `il ban di run deve valere anche in opt-out, visti: ${stats.exhaustedModels.join(', ')}`,
     );
   });
 
@@ -150,10 +161,13 @@ describe('callLLM({ recordScore: false }) — opt-out dal ledger di produzione',
       0,
       `un host morto ha sporcato ${stats.dirtyModels} modelli in un ping diagnostico`,
     );
+    // Il ban di run resta anche qui (#846) — e' `dirtyModels === 0` a dire che
+    // niente ha raggiunto il ledger. Un solo id: il fratello non viene mai
+    // provato, perche' il cooldown del provider qui sotto lo salta prima.
     assert.deepEqual(
       stats.exhaustedModels,
-      [],
-      `nessun ban doveva raggiungere il ledger, visti: ${stats.exhaustedModels.join(', ')}`,
+      ['gpt-4o-mini'],
+      `il ban di run deve valere anche in opt-out, visti: ${stats.exhaustedModels.join(', ')}`,
     );
     // ...ma il cooldown in-processo resta: e' la meta' di #475 che evita un
     // connect morto per ogni id fratello, e muore col processo senza toccare
@@ -215,7 +229,12 @@ describe('#783 — valori falsy non-false sono opt-out veri', () => {
         `recordScore=${JSON.stringify(value)} ha sporcato ${stats.dirtyModels} modelli: il chiamante credeva di essere in opt-out`,
       );
       assert.deepEqual(stats.scoreBoard, [], `nessun punteggio doveva muoversi con recordScore=${JSON.stringify(value)}`);
-      assert.deepEqual(stats.exhaustedModels, [], `nessun ban doveva raggiungere il ledger con recordScore=${JSON.stringify(value)}`);
+      // Il ban di run resta: l'opt-out e' sul ledger, non sul breaker (#846).
+      assert.deepEqual(
+        [...stats.exhaustedModels].sort(),
+        ['gpt-4.1-mini', 'gpt-4o-mini'],
+        `il ban di run doveva valere anche con recordScore=${JSON.stringify(value)}, visti: ${stats.exhaustedModels.join(', ')}`,
+      );
     });
   }
 

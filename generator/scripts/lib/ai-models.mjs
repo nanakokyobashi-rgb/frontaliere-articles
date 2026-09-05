@@ -1745,6 +1745,15 @@ const DEFAULT_OPTS = {
    * che arriva da `process.env`) sono opt-out veri e non scivolano nel ramo che
    * scrive. Vedi il commento su quella funzione.
    *
+   * COSA IL FLAG NON SPEGNE (#846). Il ban di run resta: un modello a quota
+   * esaurita, 404 non ritentabile, in timeout o su host morto entra comunque
+   * in `_exhaustedModels` e viene saltato per il resto del processo — e' solo
+   * la proposta al ledger condiviso a non partire. Il gate sta quindi sul
+   * PARAMETRO `recordScore` di `markModelExhausted`, mai sul suo call site:
+   * e' la stessa divisione che la discovery adotta nel ramo markStale, ed e'
+   * cio' che evita al chiamante diagnostico — proprio quello che percorre la
+   * catena intera — di ripagare lo stesso errore a ogni giro.
+   *
    * LIMITE ESPLICITO — la discovery non e' coperta da questo flag. E' per
    * processo, non per chiamata: `discoverFreeModels()` marca `stale` i modelli
    * che un provider non offre piu' e quel marchio va nel ledger. Un chiamante
