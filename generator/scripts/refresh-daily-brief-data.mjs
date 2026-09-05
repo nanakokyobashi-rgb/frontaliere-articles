@@ -15,7 +15,9 @@
  * load-rc-env.mjs). Every source degrades per block (see lib/daily-brief-data);
  * only zero available blocks skips the write, and still exits 0 — a day
  * without data must not break the cron (the article generator then refuses the
- * stale snapshot on its own dateIso check).
+ * stale snapshot on its own dateIso check). The degradation streaks are kept
+ * OUT of that skipped write, in `data/daily-brief-degradation.json`, so a total
+ * blackout still counts its days (#885).
  *
  * Usage:
  *   npx -y tsx@4 generator/scripts/refresh-daily-brief-data.mjs
@@ -27,13 +29,21 @@ import { readFileSync, appendFileSync } from 'node:fs';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { getServiceAccountAccessToken } from './lib/google-service-account-token.mjs';
 import { writeJsonAtomic } from './lib/atomic-write-json.mjs';
-import { decodeFields, buildDailyBrief, degradationAlarms, MAX_CONSECUTIVE_DEGRADED_EDITIONS } from './lib/daily-brief-data.mjs';
+import { decodeFields, buildDailyBrief, degradationAlarms, degradationState, MAX_CONSECUTIVE_DEGRADED_EDITIONS } from './lib/daily-brief-data.mjs';
 import { MIN_AVAILABLE_BLOCKS } from './lib/daily-brief-content.mjs';
 import { isRetryableRcFetchStatus, rcFetchBackoffMs, RC_FETCH_ATTEMPTS, extractGoogleErrorReason } from './load-rc-env.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = path.resolve(__dirname, '..', '..');
 export const OUTPUT_PATH = path.join(REPO_ROOT, 'public', 'data', 'daily-brief.json');
+/**
+ * The durable per-block degradation streaks. A sidecar and not the snapshot
+ * because the snapshot is NOT written on the 0/4-blocks branch — see
+ * `degradationState` in lib/daily-brief-data.mjs for the whole reasoning. It
+ * lives under `data/` (producer bookkeeping), never under `public/data/`:
+ * nothing in the published surface should have to know it exists.
+ */
+export const DEGRADATION_STATE_PATH = path.join(REPO_ROOT, 'data', 'daily-brief-degradation.json');
 
 const PROJECT_ID = 'frontaliere-ticino';
 const FIRESTORE_BASE = `https://firestore.googleapis.com/v1/projects/${PROJECT_ID}/databases/(default)/documents`;
@@ -122,10 +132,11 @@ async function tryFetch(label, fn) {
 }
 
 /**
- * Yesterday's snapshot, or `null` when there is none to read. The only durable
- * state this pipeline has: it carries the per-block degradation streaks that
- * `degradationAlarms` reads. Unreadable is the same as absent — a snapshot that
- * cannot be parsed must not stop today's refresh, it just restarts the count.
+ * Yesterday's snapshot, or `null` when there is none to read. It carries a copy
+ * of the per-block degradation streaks, and is the fallback source for them
+ * when the sidecar (`DEGRADATION_STATE_PATH`) is not there yet. Unreadable is
+ * the same as absent — a snapshot that cannot be parsed must not stop today's
+ * refresh, it just restarts the count.
  */
 export function readPreviousSnapshot(snapshotPath = OUTPUT_PATH) {
   try {
@@ -133,6 +144,30 @@ export function readPreviousSnapshot(snapshotPath = OUTPUT_PATH) {
   } catch {
     return null;
   }
+}
+
+/**
+ * The streaks the last edition recorded, from the sidecar — falling back to the
+ * previous snapshot when there is no sidecar yet (the first run after #885
+ * landed, or one that lost the file), so the counts carry over instead of
+ * restarting. Unreadable is the same as absent on both, for the same reason as
+ * above: a bookkeeping file must never stop a refresh.
+ *
+ * The returned value is a snapshot-shaped carrier — `dateIso` plus
+ * `blocks.<name>.degradedEditions` — which is all `buildDailyBrief` and
+ * `degradationAlarms` ever read from `previous`.
+ */
+export function readDegradationState(statePath = DEGRADATION_STATE_PATH, snapshotPath = OUTPUT_PATH) {
+  try {
+    const state = JSON.parse(readFileSync(statePath, 'utf-8'));
+    if (state && typeof state === 'object') return state;
+  } catch { /* absent or corrupt — fall through to the snapshot */ }
+  return readPreviousSnapshot(snapshotPath);
+}
+
+/** Persist today's streaks. Written on EVERY non-dry run, 0/4 blocks included. */
+export function writeDegradationState(brief, statePath = DEGRADATION_STATE_PATH) {
+  writeJsonAtomic(statePath, degradationState(brief));
 }
 
 export async function collectDailyBrief({ todayIso, nowMs = Date.now(), previous = readPreviousSnapshot() } = {}) {
@@ -209,10 +244,12 @@ function printPlan(brief) {
  * reaches `main`, tomorrow reads `previous >= threshold` and is green again —
  * the red is spent once, on the crossing edition, without costing a bulletin.
  *
- * A crossing this run will NOT record (`persisted: false`: the dry self-test,
- * and the 0/4-blocks branch that deliberately keeps yesterday's snapshot) is
- * announced and never turned into a verdict: nothing would remember it, so it
- * would fail again tomorrow for the same crossing, forever.
+ * A crossing this run will NOT record (`persisted: false` — the dry self-test,
+ * which writes nothing at all) is announced and never turned into a verdict:
+ * nothing would remember it, so it would fail again tomorrow for the same
+ * crossing, forever. The 0/4-blocks branch used to be in that list and is not
+ * any more (#885): it skips the SNAPSHOT, but it still writes the streaks to
+ * `DEGRADATION_STATE_PATH`, which the commit step carries to `main`.
  */
 
 /**
@@ -270,7 +307,7 @@ export function reportDegradationAlarms(brief, { dryRun, previous = null, persis
     '',
     ...alarms.map((a) => `- \`${a.block}\`: ${a.editions} edizioni consecutive — ${a.reason}`),
     '',
-    "Non e' un'interruzione della fonte: a questo punto e' un contratto cambiato a monte. Il contatore vive in `public/data/daily-brief.json` (`blocks.<nome>.degradedEditions`) e continua a salire finche' qualcuno non ripara la fonte o il guard.",
+    "Non e' un'interruzione della fonte: a questo punto e' un contratto cambiato a monte. Il contatore vive in `data/daily-brief-degradation.json` (`blocks.<nome>.degradedEditions`, ricopiato in `public/data/daily-brief.json` nei giorni con edizione) e continua a salire finche' qualcuno non ripara la fonte o il guard.",
   ].join('\n'));
   if (crossed.length === 0) return;
   if (!persisted) {
@@ -287,7 +324,7 @@ async function main() {
   // Read once and hand the same snapshot to both: it carries the streaks the
   // brief counts forward AND the streaks the alarm compares against to tell
   // the edition that crosses the threshold from the ones after it.
-  const previous = readPreviousSnapshot();
+  const previous = readDegradationState();
   const brief = await collectDailyBrief({ todayIso, previous });
   printPlan(brief);
 
@@ -299,11 +336,17 @@ async function main() {
   if (brief.counts.availableBlocks === 0) {
     // All four sources down: leave yesterday's snapshot in place. The article
     // generator refuses it via dateIso, the cron commits nothing, stays green.
-    console.warn('⚠️  0/4 blocks available — NOT writing daily-brief.json (previous snapshot left untouched).');
-    reportDegradationAlarms(brief, { dryRun, previous, persisted: false });
+    // The STREAKS are written anyway (#885): they are the only reason this
+    // branch had a memory hole, and they do not belong to yesterday's payload.
+    // Without this, a blackout re-read the same `previous` every morning and
+    // the count stuck at 1 forever, so the threshold was never reached.
+    writeDegradationState(brief);
+    console.warn('⚠️  0/4 blocks available — NOT writing daily-brief.json (previous snapshot left untouched); degradation streaks persisted separately.');
+    reportDegradationAlarms(brief, { dryRun, previous });
     return;
   }
   writeJsonAtomic(OUTPUT_PATH, brief);
+  writeDegradationState(brief);
   console.log(`✅ wrote ${path.relative(REPO_ROOT, OUTPUT_PATH)} (${brief.counts.availableBlocks}/4 blocks).`);
   // After the write, never before: the alarm sets a non-zero exit code, and the
   // snapshot must still land so the streak advances and the edition remains
