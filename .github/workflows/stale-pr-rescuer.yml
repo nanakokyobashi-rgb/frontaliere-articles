@@ -211,7 +211,15 @@ jobs:
               CLASS="A"
               REASON="test verdi sull'head corrente da >2h ma nessuna review li ha coperti"
               RESCUE="\`git fetch origin main && git merge origin/main\` nel branch \`$BRANCH\`, poi push. Se il merge non serve, può essere solo coda congestionata: attendi."
-            elif echo "$LAST_BODY" | grep -qP '🔴\s*\*{0,2}\s*Important\s*\*{0,2}\s*[:—-]' && [ "$LAST_CID" = "$HEAD" ]; then
+            # `^[^🟡🟢❓]*` e `(?<!\`)` chiudono la terza variante della classe sulla
+            # POSIZIONE invece che sul vocabolario (misurata sulla PR #909): un
+            # 🔴 Important CITATO dentro la riga di un altro finding, o dentro un code
+            # span, non e' il marker di quella riga — e portava i due punti come quello
+            # vero, quindi il rimedio precedente non lo vedeva. grep e' gia' orientato
+            # alla riga, quindi il pattern e' REDFLAG_IMPORTANT_RE.source senza il `\n`
+            # nella classe negata; il guard `mirror bash` di
+            # generator/tests/redflag-important-marker.test.mjs lo pretende verbatim.
+            elif echo "$LAST_BODY" | grep -qP '^[^🟡🟢❓]*(?<!`)🔴\s*\*{0,2}\s*Important\s*\*{0,2}\s*[:—-]' && [ "$LAST_CID" = "$HEAD" ]; then
               CLASS="B"
               # Regex allineata a REDFLAG_IMPORTANT_RE: un `grep -q "🔴"` nudo
               # scatterebbe anche sulla prosa di NEGAZIONE del reviewer ("zero

@@ -75,13 +75,51 @@ export const VITEST_SHARD_NAME_RE = /^vitest shard \d+\/\d+$/;
  * bold/dash form) has punctuation immediately after "Important"; plain
  * continuation prose does not.
  *
- * NB: `pr-redflag-fixer.yml`'s preflight greps the SAME shape in bash
- * (`grep -qP '🔴\s*\*{0,2}\s*Important\s*\*{0,2}\s*[:—-]'`) — a YAML `if:` cannot
- * import this regex, so keep the two equivalent. `stale-pr-rescuer.yml`'s Class B
- * check now mirrors it too (previously an even broader bare `🔴`, with the same
- * false-positive exposure).
+ * POSIZIONE, non solo forma (2026-09-05). Il delimitatore da solo non basta, e la
+ * terza variante della classe e' stata misurata proprio qui: sulla PR #909 una
+ * review con `## Findings (Important: 0, Nit: 3)` e `## LGTM` regolari CITAVA un
+ * marker dentro il testo di un proprio nit — «... 🟡 Nit: ... Verificato:
+ * «🔴 Important: il path non gestito raggiunge `parsePath` e il router.» →
+ * stripped ...» — e il review gate rendeva ROSSA una PR approvata. Il marker
+ * citato porta i due punti come quello vero, quindi il rimedio di #3330
+ * (pretendere la punteggiatura dopo "Important") non lo vede.
+ *
+ * Cio' che distingue un marker da una citazione non e' il vocabolario ma la
+ * POSIZIONE NELLA STRUTTURA: il marker APRE la riga del proprio finding (al piu'
+ * preceduto da una location label — `- `, `` `path.mjs:L12`: ``), mentre una
+ * citazione sta DENTRO una riga che ha gia' aperto un ALTRO finding, oppure dentro
+ * un code span. Da qui le due clausole, entrambe strutturali e non lessicali:
+ *
+ *   1. `^[^\n🟡🟢❓]*` — sulla stessa riga, prima del marker, nessun glifo di
+ *      severita' PIU' BASSA: se la riga ha gia' aperto un 🟡/🟢/❓, il 🔴 che segue
+ *      e' testo riportato, non il verdetto della riga. `🔴` NON e' escluso, di
+ *      proposito: un 🔴 decorativo prima del marker non deve poterlo nascondere —
+ *      dove la regola e' incerta si sbaglia in direzione ROSSA.
+ *   2. `(?<!\`)` — un marker incollato a un backtick sta dentro un code span,
+ *      cioe' e' testo citato. Le location label reali chiudono con `` `: `` o `: `,
+ *      mai con un backtick attaccato al glifo.
+ *
+ * Il conteggio dichiarato `## Findings (Important: N)` NON e' un ingresso del gate,
+ * di proposito: su 172 review bot reali dei due repo c'e' su 170/172, e soprattutto
+ * potrebbe spostare il verdetto solo da rosso a VERDE — un reviewer che scrive
+ * `Important: 0` e poi un 🔴 vero spegnerebbe il gate. Resta l'oracolo indipendente
+ * del test (`generator/tests/redflag-important-marker.test.mjs`).
+ *
+ * Misura: sulle stesse 172 review il verdetto cambia su UNA sola, la #909; gli
+ * altri 54 corpi con un marker vero restano rossi e nessuno passa da verde a rosso.
+ * Gemello del sito: `scripts/ci/lib/constants.mjs` in valerielinc-ops/frontaliere-si-o-no
+ * (`mode: adapted` nel manifest, quindi la modifica si fa qui e non scende dal mirror).
+ *
+ * NB: il preflight di `pr-redflag-fixer.yml` e la Classe B di
+ * `stale-pr-rescuer.yml` grepano la STESSA forma in bash — un `if:`/`run:` YAML non
+ * puo' importare questa regex. `grep` e' gia' orientato alla riga, quindi il pattern
+ * bash e' questa `.source` senza il `\n` nella classe negata:
+ * `grep -qP '^[^🟡🟢❓]*(?<!\`)🔴\s*\*{0,2}\s*Important\s*\*{0,2}\s*[:—-]'`.
+ * Le tre copie non possono piu' divergere in silenzio: il guard `mirror bash` di
+ * `generator/tests/redflag-important-marker.test.mjs` deriva il pattern atteso da
+ * questa `.source` e lo pretende, verbatim, in entrambi i workflow.
  */
-export const REDFLAG_IMPORTANT_RE = /🔴\s*\*{0,2}\s*Important\s*\*{0,2}\s*[:—-]/;
+export const REDFLAG_IMPORTANT_RE = /^[^\n🟡🟢❓]*(?<!`)🔴\s*\*{0,2}\s*Important\s*\*{0,2}\s*[:—-]/mu;
 
 /**
  * File la cui modifica impedisce STRUTTURALMENTE al reviewer Claude di girare
