@@ -5587,6 +5587,15 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.locazione-friburgo-guida-inquilini.title': 'Vermietung Freiburg: Leitfaden zum Mieterrecht',
     'blog.article.locazione-friburgo-guida-inquilini.excerpt': 'Kaution max. 3 Monate Miete, Kündigung auf kantonalem Formular, Beanstandung innerhalb von 30 Tagen. Die eidgenössischen Regeln des Obligationenrechts gewährleisten einen einheitlichen Schutz in der Schweiz.',
     'blog.article.locazione-friburgo-guida-inquilini.imageAlt': 'Wohngebäude im Kanton Freiburg mit Wohneinheiten und umliegender Landschaft',
+    'blog.article.tirocinio-retribuzione-maturita-grigioni.title': 'Lehre im Kanton Graubünden: Lehre und Matura',
+    'blog.article.tirocinio-retribuzione-maturita-grigioni.excerpt': 'Vollständiger Leitfaden für die Lehre in Graubünden: Wie finde ich eine Lehrstelle, Vergütung mit Vorsorgebeiträgen, garantierte Mindestferien und eidgenössische Berufsmaturität?',
+    'blog.article.tirocinio-retribuzione-maturita-grigioni.imageAlt': 'Junger Lehrling in einer Schweizer Werkstatt während einer praktischen Ausbildungslektion',
+    'blog.article.ridurre-traffico-trasporti-pubblici.title': 'Verkehr eindämmen: Günstige Tickets reichen nicht aus',
+    'blog.article.ridurre-traffico-trasporti-pubblici.excerpt': 'Eine HSLU-Studie zeigt, dass Praktikabilität, sicheres Parken und Gepäcktransport wichtiger sind als der Preis, um den öffentlichen Verkehr zu fördern.',
+    'blog.article.ridurre-traffico-trasporti-pubblici.imageAlt': 'Moderne Schweizer Bahnhofstation mit Zügen und Fahrgästen, Symbol für Mobilität im öffentlichen Nahverkehr',
+    'blog.article.come-trovare-tirocinio-grigioni.title': 'So finden Sie ein Praktikum im Kanton Graubünden',
+    'blog.article.come-trovare-tirocinio-grigioni.excerpt': 'Leitfaden zur Berufsbildung in Graubünden: Lehrverträge, Lehrlingsentgelt, Sozialbeiträge und Berufsmaturität im Schweizer System.',
+    'blog.article.come-trovare-tirocinio-grigioni.imageAlt': 'Junger Lehrling beim Erlernen eines Handwerks in einer Schweizer Alpenwerkstatt',
 };
 
 export default blogMetaChDe;

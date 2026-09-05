@@ -11423,6 +11423,12 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.figino-serenza-frontaliere-ticino.title': 'Figino Serenza: guida per frontalieri in Ticino',
     'blog.article.figino-serenza-frontaliere-ticino.excerpt': 'Permesso G, tassazione, LAMal e costi: tutto quello che cambia se vivi a Figino Serenza e lavori nel Canton Ticino da frontaliere.',
     'blog.article.figino-serenza-frontaliere-ticino.imageAlt': 'Veduta di Lugano con il lago al tramonto, destinazione lavorativa tipica di frontalieri residenti in Lombardia.',
+    'blog.article.vivere-bellagio-lavorare-ticino-frontaliere.title': 'Vivere a Bellagio, lavorare in Ticino: guida frontaliere',
+    'blog.article.vivere-bellagio-lavorare-ticino-frontaliere.excerpt': 'Trasferirsi a Bellagio e lavorare in Ticino come frontaliere: scopri il regime fiscale, i contributi AVS, la LAMal e come pianificare il trasferimento.',
+    'blog.article.vivere-bellagio-lavorare-ticino-frontaliere.imageAlt': 'Veduta di Lugano e il suo lago, con montagne, area di lavoro ticinese per frontalieri',
+    'blog.article.vivere-griante-lavorare-ticino-frontaliere.title': 'Vivere a Griante e lavorare in Ticino da frontaliere',
+    'blog.article.vivere-griante-lavorare-ticino-frontaliere.excerpt': 'Vantaggi, procedure, costi e normativa per chi sceglie di vivere a Griante lavorando nel Canton Ticino come frontaliere',
+    'blog.article.vivere-griante-lavorare-ticino-frontaliere.imageAlt': 'Vista del lago di Como a Griante con edifici residenziali e paesaggio montano',
 };
 
 export default blogMetaIt;

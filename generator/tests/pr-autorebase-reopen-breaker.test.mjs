@@ -175,7 +175,7 @@ describe('il contatore sopravvive al close+reopen', () => {
     const body = renderReopenBudget({
       count: 2, max: DEFAULT_MAX_REOPENS, fingerprint: fp, action: 'reopen', reason: 'x',
     });
-    expect(parseReopenBudget(body)).toEqual({ count: 2, fingerprint: fp });
+    expect(parseReopenBudget(body)).toEqual({ count: 2, fingerprint: fp, reviewGateUsed: false });
   });
 
   it('uno stato illeggibile non blocca la PR (fail-open)', () => {
@@ -348,5 +348,57 @@ describe('il nome del check e quello di QUESTO repo, non quello del sito', () =>
     const d = decideReopen({ vitestConclusion: 'failure', fingerprint: fp, prior: null });
     expect(d.reason).toContain(VITEST_CHECK_NAME);
     expect(d.reason).not.toContain('vitest (unit + integration)');
+  });
+});
+
+describe('review-gate: il rosso della review non e il rosso dei test (#7429)', () => {
+  // Dal 2026-09-03 la Claude review e' uno STEP del job che produce il check
+  // richiesto, quindi quel job e' rosso anche a TEST VERDI, quando a fallire e'
+  // `Require approving Claude review`. E' esattamente il rosso di questa PR di
+  // trasporto: leggerlo come «test rotti» manda a cercare un `not ok` che nel
+  // log non c'e' e nega il riciclo proprio dove funzionerebbe.
+  const redFp = reopenFingerprint({ ...green, vitestConclusion: 'failure' });
+
+  it('a budget speso la causa e nominata: review gate, non test', () => {
+    const d = decideReopen({
+      vitestConclusion: 'failure', fingerprint: redFp, prior: null, reviewGateFailure: true,
+    });
+    expect(d.action).toBe('skip-failing-check');
+    expect(d.cause).toBe('review-gate');
+    expect(d.reason).toContain('## LGTM');
+    expect(d.reason).not.toContain('Serve far passare i test');
+  });
+
+  it('senza il flag lo stesso rosso resta attribuito ai TEST', () => {
+    const d = decideReopen({ vitestConclusion: 'failure', fingerprint: redFp, prior: null });
+    expect(d.cause).toBe('tests');
+    expect(d.reason).toContain('Serve far passare i test');
+  });
+
+  it('il one-shot sopravvive al reset dell impronta, altrimenti e perpetuo', () => {
+    // L'impronta include il numero di review, che ogni reopen incrementa: un
+    // flag appaiato ad essa si azzererebbe a ogni giro e l'eccezione
+    // ricicherebbe all'infinito — il livelock #5896/#5906 in altra forma.
+    const spent = renderReopenBudget({
+      count: 1, max: DEFAULT_MAX_REOPENS, fingerprint: redFp,
+      action: 'reopen', reason: 'x', cause: 'review-gate', reviewGateUsed: true,
+    });
+    expect(parseReopenBudget(spent)?.reviewGateUsed).toBe(true);
+    const other = reopenFingerprint({ ...green, vitestConclusion: 'failure', reviewCount: 1 });
+    expect(parseReopenBudget(spent)?.fingerprint).not.toBe(other);
+    expect(parseReopenBudget(spent)?.reviewGateUsed).toBe(true);
+    // fail-OPEN: uno stato scritto prima di #7429 non blocca nessuno.
+    const fresh = renderReopenBudget({
+      count: 1, max: DEFAULT_MAX_REOPENS, fingerprint: redFp, action: 'reopen', reason: 'x',
+    });
+    expect(parseReopenBudget(fresh)?.reviewGateUsed).toBe(false);
+  });
+
+  it('WIRING: il call-site legge e ri-scrive il flag, altrimenti e one-shot solo a parole', () => {
+    // Il flag vive nello sticky del budget, non in RAM: se il call-site non lo
+    // rilegge dal `prior` e non lo ri-scrive, l'eccezione si ri-concede a ogni
+    // tick e il breaker sul review gate non esiste.
+    expect(script).toMatch(/prior\s*&&\s*prior\.reviewGateUsed/);
+    expect(script).toMatch(/reviewGateUsed,?\s*$/m);
   });
 });

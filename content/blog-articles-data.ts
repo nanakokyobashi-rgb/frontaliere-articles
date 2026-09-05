@@ -34122,6 +34122,24 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'vivere-bellagio-lavorare-ticino-frontaliere',
+ category: 'pratico',
+ date: '2026-09-05T18:22:51.078Z',
+ image: '/images/blog/vivere-bellagio-lavorare-ticino-frontaliere.webp',
+ hasCalculator: true,
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
+ {
+ id: 'vivere-griante-lavorare-ticino-frontaliere',
+ category: 'pratico',
+ date: '2026-09-05T18:52:04.554Z',
+ image: '/images/blog/vivere-griante-lavorare-ticino-frontaliere.webp',
+ hasCalculator: true,
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

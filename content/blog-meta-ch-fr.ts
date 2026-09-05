@@ -5587,6 +5587,15 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.locazione-friburgo-guida-inquilini.title': 'Location Fribourg : guide du droit du locataire',
     'blog.article.locazione-friburgo-guida-inquilini.excerpt': 'Dépôt maximum 3 mois loyer, résiliation sur formulaire cantonal, contestation dans les 30 jours. Les règles fédérales du Code des obligations garantissent une protection uniforme en Suisse.',
     'blog.article.locazione-friburgo-guida-inquilini.imageAlt': 'Immeuble résidentiel du canton de Fribourg avec unités de logements et campagne environnante',
+    'blog.article.tirocinio-retribuzione-maturita-grigioni.title': 'Apprentissage dans le canton des Grisons : apprentissage et maturité',
+    'blog.article.tirocinio-retribuzione-maturita-grigioni.excerpt': 'Guide complet de l\'apprentissage dans les Grisons : comment trouver un poste d\'apprentissage, rémunération avec cotisations de sécurité sociale, vacances minimales garanties et maturité professionnelle fédérale.',
+    'blog.article.tirocinio-retribuzione-maturita-grigioni.imageAlt': 'Jeune apprenti dans un atelier suisse pendant une leçon de formation pratique',
+    'blog.article.ridurre-traffico-trasporti-pubblici.title': 'Réduire le trafic : des billets pas chers ne suffisent pas',
+    'blog.article.ridurre-traffico-trasporti-pubblici.excerpt': 'Une étude HSLU révèle que la praticité, les parkings sécurisés et le transport des bagages sont plus importants que le prix pour encourager les transports en commun.',
+    'blog.article.ridurre-traffico-trasporti-pubblici.imageAlt': 'Gare ferroviaire moderne suisse avec trains et passagers, symbole de la mobilité des transports publics',
+    'blog.article.come-trovare-tirocinio-grigioni.title': 'Comment trouver un stage dans le canton des Grisons',
+    'blog.article.come-trovare-tirocinio-grigioni.excerpt': 'Guide de la formation professionnelle dans les Grisons : contrats de stage, rémunération de l\'apprenti, cotisations sociales et maturité professionnelle dans le système suisse.',
+    'blog.article.come-trovare-tirocinio-grigioni.imageAlt': 'Jeune apprenti apprenant un métier dans un atelier alpin suisse',
 };
 
 export default blogMetaChFr;

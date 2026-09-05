@@ -1,5 +1,4 @@
 {
-  "https://www.swissinfo.ch/ita/tre-banche-cantonali-%28be%2c-sg%2c-bl%29%2c-tre-volte-profitti-in-crescita/91885072": "tre-banche-cantonali-be-sg-bl-profitti-in-crescita",
   "https://www.swissinfo.ch/ita/insolvenze-ai-massimi-da-30-anni/91884439": "insolvenze-ai-massimi-da-30-anni",
   "https://www.swissinfo.ch/ita/cf%3a-no-all%27iniziativa-sulla-piazza-finanziaria/91884875": "consiglio-federale-no-iniziativa-finanziaria",
   "https://www.rsi.ch/info/svizzera/perch%c3%a9-il-caldo-fa-salire-i-prezzi--3943950.html": "inflazione-climatica-prezzi-svizzera",
@@ -1841,6 +1840,11 @@
   "https://www.tio.ch/svizzera/cronaca/1948224/amante-della-pedopornografia-ma-faceva-l-educatore-in-un-asilo-nido": {
     "articleId": "asilo-nido-controlli-minori",
     "ts": "2026-09-05T16:05:02.364Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/ticino/attualita/1948227/come-ridurre-il-traffico-sulle-strade-i-biglietti-piu-economici-non-bastano": {
+    "articleId": "ridurre-traffico-trasporti-pubblici",
+    "ts": "2026-09-05T18:30:02.406Z",
     "keyForm": 2
   }
 }

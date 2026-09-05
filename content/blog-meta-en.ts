@@ -11422,6 +11422,12 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.figino-serenza-frontaliere-ticino.title': 'Figino Serenza: guide for border workers in Ticino',
     'blog.article.figino-serenza-frontaliere-ticino.excerpt': 'Permit G, taxation, LAMal and costs: everything that changes if you live in Figino Serenza and work in the Canton of Ticino as a border worker.',
     'blog.article.figino-serenza-frontaliere-ticino.imageAlt': 'Aerial view of Lugano, Ticino and its lake at sunset, typical workplace destination for Italian cross-border commuters.',
+    'blog.article.vivere-bellagio-lavorare-ticino-frontaliere.title': 'Living in Bellagio, working in Ticino: border guide',
+    'blog.article.vivere-bellagio-lavorare-ticino-frontaliere.excerpt': 'Moving to Bellagio and working in Ticino as a border worker: discover the tax regime, AVS contributions, LAMal and how to plan the transfer.',
+    'blog.article.vivere-bellagio-lavorare-ticino-frontaliere.imageAlt': 'Panoramic view of Lugano lake with mountains, representing a Ticino workplace for cross-border commuters',
+    'blog.article.vivere-griante-lavorare-ticino-frontaliere.title': 'Living in Griante and working in Ticino as a border worker',
+    'blog.article.vivere-griante-lavorare-ticino-frontaliere.excerpt': 'Benefits, procedures, costs and regulations for those who choose to live in Griante working in the Canton of Ticino as a border worker',
+    'blog.article.vivere-griante-lavorare-ticino-frontaliere.imageAlt': 'Lake Como view at Griante with residential buildings and mountain landscape',
 };
 
 export default blogMetaEn;

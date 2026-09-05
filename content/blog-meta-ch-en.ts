@@ -5587,6 +5587,15 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.locazione-friburgo-guida-inquilini.title': 'Lease Freiburg: Tenant\'s Right Guide',
     'blog.article.locazione-friburgo-guida-inquilini.excerpt': 'Maximum deposit 3 months rent, cancellation on cantonal form, dispute within 30 days. The federal rules of the Bonds Code guarantee uniform protection in Switzerland.',
     'blog.article.locazione-friburgo-guida-inquilini.imageAlt': 'Residential building in Fribourg Canton with apartment units and surrounding countryside',
+    'blog.article.tirocinio-retribuzione-maturita-grigioni.title': 'Apprenticeship in the Canton of Graubünden: internship and maturity',
+    'blog.article.tirocinio-retribuzione-maturita-grigioni.excerpt': 'Complete guide to apprenticeship in Graubünden: how to find an internship, salary with social security contributions, guaranteed minimum holidays and federal professional maturity.',
+    'blog.article.tirocinio-retribuzione-maturita-grigioni.imageAlt': 'Young apprentice in Swiss vocational workshop during practical training session',
+    'blog.article.ridurre-traffico-trasporti-pubblici.title': 'Reducing traffic: cheap tickets are not enough',
+    'blog.article.ridurre-traffico-trasporti-pubblici.excerpt': 'An HSLU study reveals that convenience, secure parking and luggage transport are more important than price to encourage public transport.',
+    'blog.article.ridurre-traffico-trasporti-pubblici.imageAlt': 'Modern Swiss train station with trains and passengers, representing public transport mobility in Switzerland',
+    'blog.article.come-trovare-tirocinio-grigioni.title': 'How to find an internship in the Canton of Graubünden',
+    'blog.article.come-trovare-tirocinio-grigioni.excerpt': 'Guide to vocational training in Graubünden: internship contracts, apprentice remuneration, social contributions and professional maturity in the Swiss system.',
+    'blog.article.come-trovare-tirocinio-grigioni.imageAlt': 'Young apprentice learning a trade in a Swiss Alpine workshop during apprenticeship',
 };
 
 export default blogMetaChEn;

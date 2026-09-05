@@ -5587,6 +5587,15 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.locazione-friburgo-guida-inquilini.title': 'Locazione Friburgo: guida al diritto dell\'inquilino',
     'blog.article.locazione-friburgo-guida-inquilini.excerpt': 'Deposito max 3 mesi pigione, disdetta su modulo cantonale, contestazione entro 30 giorni. Le regole federali del Codice Obbligazioni garantiscono protezione uniforme in Svizzera.',
     'blog.article.locazione-friburgo-guida-inquilini.imageAlt': 'Edificio residenziale nel Canton Friburgo con dettagli di unità abitative e campagna circostante',
+    'blog.article.tirocinio-retribuzione-maturita-grigioni.title': 'Apprendistato nel Canton Grigioni: tirocinio e maturità',
+    'blog.article.tirocinio-retribuzione-maturita-grigioni.excerpt': 'Guida completa all\'apprendistato in Grigioni: come trovare un posto di tirocinio, retribuzione con contributi previdenziali, vacanze minime garantite e maturità professionale federale.',
+    'blog.article.tirocinio-retribuzione-maturita-grigioni.imageAlt': 'Giovane apprendista in officina svizzera durante lezione pratica di formazione professionale',
+    'blog.article.ridurre-traffico-trasporti-pubblici.title': 'Ridurre il traffico: biglietti economici non bastano',
+    'blog.article.ridurre-traffico-trasporti-pubblici.excerpt': 'Uno studio HSLU rivela che praticità, parcheggi certi e trasporto bagagli sono più importanti del prezzo per incentivare i trasporti pubblici.',
+    'blog.article.ridurre-traffico-trasporti-pubblici.imageAlt': 'Stazione ferroviaria svizzera moderna con treni e passeggeri, simbolo della mobilità su trasporti pubblici',
+    'blog.article.come-trovare-tirocinio-grigioni.title': 'Come trovare un tirocinio nel Cantone Grigioni',
+    'blog.article.come-trovare-tirocinio-grigioni.excerpt': 'Guida alla formazione professionale nel Grigioni: contratti di tirocinio, retribuzione dell\'apprendista, contributi sociali e maturità professionale nel sistema svizzero.',
+    'blog.article.come-trovare-tirocinio-grigioni.imageAlt': 'Giovane apprendista impara un mestiere in laboratorio alpino svizzero durante il tirocinio',
 };
 
 export default blogMetaChIt;
