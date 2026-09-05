@@ -37,6 +37,7 @@
 import { strict as assert } from 'node:assert';
 import { describe, it, beforeEach, afterEach, mock } from 'node:test';
 import { networkInterfaces } from 'node:os';
+import { readFileSync } from 'node:fs';
 
 import {
   classifyHostUnreachable,
@@ -45,6 +46,7 @@ import {
   callLLM,
   isQuotaExhaustedError,
   getStats,
+  printRunSummary,
   resetState,
 } from '../scripts/lib/ai-models.mjs';
 
@@ -1562,6 +1564,87 @@ describe('callLLM — il reset della striscia si conta per classe (#848 item 3)'
     const row = getStats().resolverFlapResets.github;
     assert.ok(row, `atteso un reset contato: ${JSON.stringify(getStats().resolverFlapResets)}`);
     assert.equal(row.success, 1, `atteso il reset da successo: ${JSON.stringify(row)}`);
+  });
+
+  // Il conteggio serve a decidere l'item solo se esce dal processo: senza una
+  // riga nel riepilogo di fine run, harvestarlo vuol dire scaricare il log
+  // intero di ogni run e cercare le `console.warn` per evento — e uno zero
+  // raccolto cosi' non si distingue da un log troncato.
+  const summaryOf = () => {
+    const out = [];
+    const orig = console.log;
+    console.log = (...a) => out.push(a.map(String).join(' '));
+    try { printRunSummary(); } finally { console.log = orig; }
+    return out.join('\n');
+  };
+  const flapLineOf = (text) => text.split('\n').find((l) => l.includes('resolver flaps:'));
+
+  it('il riepilogo di fine run porta il conteggio per classe', async () => {
+    process.env.AI_MODELS_FORCE_CHAIN = 'gpt-4o-mini,gpt-4.1-mini,gpt-4o,gpt-4.1';
+    const script = ['EAI_AGAIN', 'abort', 'EAI_AGAIN', 'EAI_AGAIN'];
+    let i = 0;
+    globalThis.fetch = async () => {
+      const step = script[Math.min(i++, script.length - 1)];
+      if (step === 'abort') throw Object.assign(new Error('The operation was aborted'), { name: 'AbortError' });
+      throw undiciFetchFailed('EAI_AGAIN');
+    };
+
+    assert.ok(await run(), 'la catena deve fallire');
+    const line = flapLineOf(summaryOf());
+    assert.ok(line, 'il riepilogo deve portare la riga dei flap');
+    assert.match(line, /resets github silent=1 resolved=0 success=0 escalated=0 \(1 discarded\)/, line);
+    // La striscia ancora viva a fine run e' l'altra meta' del fatto: dice
+    // quanto mancava alla soglia quando il reset l'ha buttata via.
+    assert.match(line, /open \[github=2\/3\]/, line);
+  });
+
+  it('la striscia spesa dall\'escalation e\' contata, non cancellata', async () => {
+    // Prima della review di #945 l'escalation faceva `_resolverFlaps.delete()`
+    // a mano: la striscia spariva da ENTRAMBE le mappe, quindi una run con tre
+    // flap consecutivi e un provider bannato stampava la stessa identica riga
+    // di una run senza un solo flap — «misurata, zero» a fondo scala, che e'
+    // proprio l'ambiguita' che questa riga esiste per togliere.
+    process.env.AI_MODELS_FORCE_CHAIN = 'gpt-4o-mini,gpt-4.1-mini,gpt-4o,gpt-4.1';
+    globalThis.fetch = async () => { throw undiciFetchFailed('EAI_AGAIN'); };
+    assert.ok(await run(), 'la catena deve fallire');
+    const line = flapLineOf(summaryOf());
+    assert.ok(line, 'il riepilogo deve portare la riga dei flap');
+    assert.doesNotMatch(line, /none this run/, `l\'escalation non deve sparire: ${line}`);
+    assert.match(line, /escalated=[1-9]/, line);
+  });
+
+  it('una run senza reset stampa comunque la riga — e\' il denominatore', () => {
+    const line = flapLineOf(summaryOf());
+    assert.equal(line, '   resolver flaps: none this run', `riga vista: ${line}`);
+  });
+
+  // La riga corretta non serve a niente se la stampa solo il ramo che pubblica
+  // un articolo: le run in cui una striscia di flap ha svuotato la catena
+  // finiscono `deferred`/`error`, escono da `exitAfterFlush()` e sarebbero
+  // proprio quelle assenti dal campione. Il denominatore vive nel WIRING, e
+  // `create-article.mjs` non e' importabile qui (la sua closure tira dentro
+  // sharp/undici/…, e in CI non c'e' `node_modules`): si pinna sul sorgente,
+  // come fa gia' pre-spend-gate-telemetry.test.mjs per `PRESPEND_GATE_OUTCOME`.
+  it('il riepilogo esce da `finalizeRunReport()`, cioe\' da ogni percorso terminale', () => {
+    const src = readFileSync(
+      new URL('../scripts/create-article.mjs', import.meta.url),
+      'utf-8',
+    );
+    const start = src.indexOf('function finalizeRunReport(status, extra = {}) {');
+    assert.notEqual(start, -1, 'delimitatore di finalizeRunReport da aggiornare');
+    const endRel = src.slice(start).search(/\n\}\n/);
+    assert.notEqual(endRel, -1, 'chiusura di finalizeRunReport non trovata');
+    const finalize = src.slice(start, start + endRel + 2);
+
+    assert.match(finalize, /\bprintRunSummary\(\)/, 'il riepilogo deve essere emesso da finalizeRunReport');
+    // Un secondo call site rimetterebbe la riga sul solo ramo felice — e la
+    // conterebbe due volte li', che e' l'altra meta' del denominatore rotto.
+    const callSites = src.match(/^\s*printRunSummary\(\);/gm) || [];
+    assert.equal(
+      callSites.length,
+      1,
+      `atteso un solo call site di printRunSummary() in create-article.mjs, visti ${callSites.length}`,
+    );
   });
 
   it('`resetState()` azzera anche il conteggio dei reset', async () => {
