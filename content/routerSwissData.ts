@@ -1895,6 +1895,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'pride-belgrado-25-anni': { it: 'pride-belgrado-25-anni', en: 'belgrade-pride-25-years', de: 'belgrad-pride-25-jahre', fr: 'pride-belgrade-25-ans' },
  'volo-easyjet-valencia-ginevra': { it: 'volo-easyjet-valencia-ginevra', en: 'easyjet-flight-valencia-geneva', de: 'easyjet-flug-valencia-genf', fr: 'vol-easyjet-valence-geneve' },
  'permesso-dimora-b-canton-vallese-requisiti-rinnovo': { it: 'permesso-dimora-b-canton-vallese-requisiti-rinnovo', en: 'residence-permit-b-valais-requirements-renewal', de: 'aufenthaltsbewilligung-b-wallis-voraussetzungen-verlaengerung', fr: 'permis-de-sejour-b-valais-conditions-renouvellement' },
+ 'pacifismo-neutralita-buzzi': { it: 'pacifismo-neutralita-buzzi', en: 'pacifism-armed-neutrality-buzzi', de: 'pazifismus-bewaffnete-neutralitaet-buzzi', fr: 'pacifisme-neutralite-armee-buzzi' },
 };
 
 export const REVERSE_SWISS: Record<ArticleLocale, Record<string, string>> = (() => {

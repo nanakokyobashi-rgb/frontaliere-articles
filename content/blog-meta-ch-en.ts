@@ -5608,6 +5608,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.permesso-dimora-b-canton-vallese-requisiti-rinnovo.title': 'Residence permit B in the Canton of Valais: requirements, documents and renewal',
     'blog.article.permesso-dimora-b-canton-vallese-requisiti-rinnovo.excerpt': 'Learn about the requirements, the necessary documents and the procedure for renewing the B residence permit in the Canton of Valais.',
     'blog.article.permesso-dimora-b-canton-vallese-requisiti-rinnovo.imageAlt': 'Panoramic view of Lake Lugano with Monte San Salvatore',
+    'blog.article.pacifismo-neutralita-buzzi.title': 'Pacifism vs neutrality: Buzzi\'s no to the UDC',
+    'blog.article.pacifismo-neutralita-buzzi.excerpt': 'Matteo Buzzi, a Verdi MP, criticises the UDC initiative on armed neutrality. It proposes nonviolent civil defense instead of rearmament.',
+    'blog.article.pacifismo-neutralita-buzzi.imageAlt': 'Locarno cityscape in Ticino, hometown of Green MP Matteo Buzzi',
 };
 
 export default blogMetaChEn;

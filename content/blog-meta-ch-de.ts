@@ -5608,6 +5608,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.permesso-dimora-b-canton-vallese-requisiti-rinnovo.title': 'Aufenthaltsbewilligung B im Wallis: Voraussetzungen, Dokumente und Verlängerung',
     'blog.article.permesso-dimora-b-canton-vallese-requisiti-rinnovo.excerpt': 'Informieren Sie sich über die Voraussetzungen, die erforderlichen Unterlagen und das Verfahren zur Verlängerung der Aufenthaltsbewilligung B im Kanton Wallis.',
     'blog.article.permesso-dimora-b-canton-vallese-requisiti-rinnovo.imageAlt': 'Panoramablick auf den Luganersee mit dem Monte San Salvatore',
+    'blog.article.pacifismo-neutralita-buzzi.title': 'Pazifismus vs. Neutralität: Buzzis Nein zur SVP',
+    'blog.article.pacifismo-neutralita-buzzi.excerpt': 'Der Grünen-Abgeordnete Matteo Buzzi kritisiert die SVP-Initiative zur bewaffneten Neutralität. Er schlägt gewaltfreien Zivilschutz statt Aufrüstung vor.',
+    'blog.article.pacifismo-neutralita-buzzi.imageAlt': 'Stadtblick Locarno im Tessin, Heimatstadt von Grünen-Abgeordneter Matteo Buzzi',
 };
 
 export default blogMetaChDe;

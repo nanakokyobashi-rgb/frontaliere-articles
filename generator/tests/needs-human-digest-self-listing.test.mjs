@@ -102,3 +102,62 @@ test('a liste vuote lo step richiude l issue dedup, non si limita a uscire', () 
     'il resolve deve usare la stessa DEDUP_TITLE con cui l issue viene creata',
   );
 });
+
+/**
+ * Secondo residuo permanente, stessa forma del primo: il digest dello sweep
+ * (`🧭 Decisioni del proprietario`) nasce in `needs-human-sweep.yml` con
+ * `needs-human,automation,agent:no-age-out` e lo sweep ha il divieto esplicito di
+ * togliergli quella label. Finche' veniva elencato qui, `ISSUES` non poteva
+ * essere vuoto e la chiusura promessa nel corpo restava irraggiungibile — cioe'
+ * l'assorbente di #733 con un'altra issue al posto di questa.
+ */
+test('la lista issue esclude i tracker permanenti', () => {
+  const step = surfaceStep();
+  const issueQuery = /ISSUES=\$\(gh issue list([\s\S]*?)--jq '([^']+)'\)/.exec(step);
+  assert.ok(issueQuery, 'query `gh issue list` dello step non trovata');
+  assert.match(
+    issueQuery[1],
+    /--json [\w,]*\blabels\b/,
+    'senza `labels` nel --json il filtro sulla label non ha su cosa lavorare',
+  );
+  assert.match(
+    issueQuery[2],
+    /select\(\s*\[\s*\.labels\[\]\.name\s*\]\s*\|\s*index\(\s*env\.LBL_PERMANENT_TRACKER\s*\)\s*\|\s*not\s*\)/,
+    'il jq deve escludere i tracker permanenti per LABEL, o la lista non si svuota mai',
+  );
+});
+
+test('la label del tracker permanente ha la stessa sorgente degli script del ciclo', () => {
+  // Uno YAML non puo' importare da un modulo: il legame fra il valore qui e
+  // quello che followup-drainer/needs-human-prepass usano per riconoscere lo
+  // stesso oggetto e' questo test (AGENTS.md #6). Se divergono, il digest
+  // elenca un tracker che ogni altro stadio salta, e torna a non convergere.
+  const step = surfaceStep();
+  const assignment = /\n\s+LBL_PERMANENT_TRACKER:\s*'([^']+)'/.exec(step);
+  assert.ok(assignment, 'lo step deve definire LBL_PERMANENT_TRACKER come env');
+  assert.equal(
+    [...step.matchAll(/\n\s+LBL_PERMANENT_TRACKER:\s/g)].length,
+    1,
+    'LBL_PERMANENT_TRACKER definita piu di una volta',
+  );
+  const label = assignment[1];
+
+  const drainer = readFileSync(path.join(ROOT, 'scripts/ci/followup-drainer.mjs'), 'utf8');
+  const declared = /const LBL_NO_AGE_OUT = '([^']+)';/.exec(drainer);
+  assert.ok(declared, 'LBL_NO_AGE_OUT non trovata in followup-drainer.mjs');
+  assert.equal(label, declared[1], 'la label dello YAML e quella del drainer sono divergenti');
+
+  const prepass = readFileSync(path.join(ROOT, 'scripts/ci/needs-human-prepass.mjs'), 'utf8');
+  assert.ok(
+    prepass.includes(`'${label}'`),
+    'needs-human-prepass.mjs non riconosce piu questa label come tracker permanente',
+  );
+
+  // E la sorgente che la APPLICA: senza questa, il filtro escluderebbe una
+  // classe che nessuno popola piu.
+  const sweep = readFileSync(path.join(ROOT, '.github/workflows/needs-human-sweep.yml'), 'utf8');
+  assert.ok(
+    sweep.includes(label),
+    'needs-human-sweep.yml non crea piu il digest con la label di tracker permanente',
+  );
+});
