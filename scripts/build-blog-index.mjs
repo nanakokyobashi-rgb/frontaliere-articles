@@ -47,6 +47,9 @@ import { sanitizeDeep, assertNoControlChars } from './lib/sanitize-control-chars
 import { reportStrippedControlCharsDeep } from '../generator/scripts/lib/control-char-write-report.mjs';
 import { unescapeTsValue } from '../generator/scripts/lib/meta-field-regex.mjs';
 import { parsePositiveNum } from './lib/parse-positive-num.mjs';
+// Il pavimento anti-troncamento, derivato dal corpus invece che scritto a mano:
+// stessa sorgente unica che usa il gate di pubblicazione (scripts/ci/verify-api-floors.mjs).
+import { floorFrom, sectionFloor } from './lib/corpus-floors.mjs';
 
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..');
 const outIdx = process.argv.indexOf('--out');
@@ -58,8 +61,21 @@ const SECTIONS = [
   { name: 'svizzera', registry: 'content/swiss-articles-data.ts', metaPrefix: 'blog-meta-ch' },
 ];
 
-/** Minimum entries below which the registry parse is assumed broken, not empty. */
-const MIN_ENTRIES = 50;
+/**
+ * Il pavimento sotto cui il parse del registro e' rotto, non vuoto.
+ *
+ * Era `const MIN_ENTRIES = 50`, gemello esatto del `counts.articles -lt 100` di
+ * `publish-api.yml`: una costante tarata una volta e mai piu' toccata mentre il
+ * corpus cresceva. Misurato il 2026-09-05, le due sezioni tengono 3785 e 1850
+ * file di corpo — il pavimento copriva l'1,3% del caso peggiore, quindi un
+ * indice troncato al 2% passava e veniva pubblicato come «non vuoto».
+ *
+ * Ora e' derivato dal corpus su disco a ogni run (`scripts/lib/corpus-floors.mjs`),
+ * quindi scala da solo e non ha una taratura che scade.
+ */
+function sectionEntryFloor(section) {
+  return sectionFloor(ROOT, section);
+}
 
 /**
  * How many of the newest articles the FAST-PATH index carries.
@@ -181,8 +197,9 @@ let failed = false;
 
 for (const section of SECTIONS) {
   const registry = readRegistry(section.registry);
-  if (registry.length < MIN_ENTRIES) {
-    console.error(`[blog-index] ${section.name}: registry parsed to ${registry.length} entries (< ${MIN_ENTRIES}) — refusing to publish a truncated index`);
+  const registryFloor = sectionEntryFloor(section.name);
+  if (registry.length < registryFloor) {
+    console.error(`[blog-index] ${section.name}: registry parsed to ${registry.length} entries (< ${registryFloor}, derived from the corpus on disk) — refusing to publish a truncated index`);
     failed = true;
     continue;
   }
@@ -220,8 +237,12 @@ for (const section of SECTIONS) {
         authorSlug: a.authorSlug,
       });
     }
-    if (entries.length < MIN_ENTRIES) {
-      console.error(`[blog-index] ${section.name}/${locale}: only ${entries.length} entries — refusing`);
+    // Per locale il riferimento e' il registro appena validato, non il corpus:
+    // una lingua puo' legittimamente perdere le voci senza titolo da nessuna
+    // parte, ma non puo' perderne la maggior parte.
+    const localeFloor = floorFrom(registry.length);
+    if (entries.length < localeFloor) {
+      console.error(`[blog-index] ${section.name}/${locale}: only ${entries.length} entries (< ${localeFloor}) — refusing`);
       failed = true;
       continue;
     }
