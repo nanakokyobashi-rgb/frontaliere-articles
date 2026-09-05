@@ -45,6 +45,7 @@ import {
   fetchFailureVerdict,
   isFixture,
   localCouplings,
+  namedIsCoupling,
   parseRatio,
   permanentBlock,
   realignFromCommitted,
@@ -380,6 +381,56 @@ test('il descrittore del set è un ELENCO chiuso, non «nomina il manifest»', (
     couplings.filter((c) => SET_DESCRIPTORS.has(c)),
     [],
     'i descrittori del set non sono consumatori',
+  );
+});
+
+test('il manifest non blocca nemmeno dal verso «path che il fixture nomina» (#889)', () => {
+  const manifest = JSON.parse(fs.readFileSync(path.join(ROOT, 'scripts/ci/loop-sync-manifest.json'), 'utf8'));
+  const modeOf = new Map(manifest.files.map((e) => [e.path, e.mode]));
+  const rel = 'generator/tests/crawler-cross-repo-artifacts.test.mjs';
+  const entry = manifest.files.find((e) => e.path === rel);
+  assert.equal(entry.mode, 'identical', 'il caso vale solo su un gemello che il canale potrebbe portare');
+  assert.ok(
+    fs.readFileSync(path.join(ROOT, rel), 'utf8').includes('scripts/ci/loop-sync-manifest.json'),
+    'il fixture NOMINA davvero il manifest: è il ramo che #883 non filtrava',
+  );
+
+  const couplings = localCouplings(rel, modeOf);
+  assert.ok(
+    !couplings.some((c) => c.path === 'scripts/ci/loop-sync-manifest.json'),
+    'il libro mastro del trasporto non è un accoppiamento del fixture',
+  );
+  // Il verdetto cambia, ed è il punto: il manifest è `corpus-only` per
+  // costruzione, quindi contarlo era un no PERMANENTE, non un rinvio.
+  assert.equal(
+    permanentBlock(entry, { outOfScopePrefixes: manifest.scope.outOfScope || [], couplings }),
+    null,
+    'l’unico fixture `identical` del set torna trasportabile',
+  );
+  // E il rilevamento vero regge: gli accoppiamenti reali restano, tutti
+  // `identical`, quindi il tetto li porta insieme.
+  assert.deepEqual(couplingBlockers(couplings), [], 'nessun altro accoppiamento fuori dall’insieme');
+  assert.ok(couplings.some((c) => c.path === 'generator/data/crawler-cross-repo-contract.json'));
+  assert.ok(couplings.some((c) => c.path === 'scripts/ci/close-recovered-failure-issues.mjs'));
+});
+
+test('l’eccezione è il solo manifest: gli altri descrittori restano accoppiamenti se il fixture li cita', () => {
+  // L'asimmetria fra i due versi, resa un test perché è l'errore facile:
+  // riusare `SET_DESCRIPTORS` anche qui rimetterebbe il falso silenzio di #853
+  // su un fixture che importa DAVVERO uno script del ciclo.
+  for (const d of SET_DESCRIPTORS) {
+    assert.equal(
+      namedIsCoupling(d),
+      d !== 'scripts/ci/loop-sync-manifest.json',
+      `${d}: solo il manifest è un non-accoppiamento anche da citato`,
+    );
+  }
+  const modeOf = new Map([['scripts/ci/loop-drift-check.mjs', 'adapted']]);
+  const rel = 'generator/tests/transport-identical-twins.test.mjs';
+  const couplings = localCouplings(rel, modeOf).map((c) => c.path);
+  assert.ok(
+    couplings.includes('scripts/ci/transport-identical-twins.mjs'),
+    'questo test importa lo script: copiarlo senza la sua metà è la classe «engine senza host/»',
   );
 });
 
