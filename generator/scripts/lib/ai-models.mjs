@@ -3834,6 +3834,15 @@ function _registerExitHooks() {
 /** Record a model success — boosts its rank and persists to Firestore */
 export function recordModelSuccess(modelId, { recordScore = true } = {}) {
   if (!modelId) return;
+  // In opt-out non si muove NIENTE che il ledger possa poi spedire — nemmeno
+  // `_modelScores`, che il flush legge come valore assoluto: bastava che il
+  // modello diventasse dirty per un'altra ragione perche' il punteggio inquinato
+  // dal ping diagnostico partisse comunque. Resta il solo tally di run, che
+  // muore col processo. Vedi il gemello in `recordModelFailure`.
+  if (!coerceRecordScore(recordScore)) {
+    _bumpOutcome(modelId, 'successes', { ledger: false });
+    return;
+  }
   _modelScores.set(modelId, (_modelScores.get(modelId) || 0) + SCORE_SUCCESS);
   const d = _modelDetails.get(modelId) || { successes: 0, failures: 0 };
   d.successes++;
@@ -3944,6 +3953,16 @@ export function recordModelFailure(modelId, { nonRetryable = false, exhausted = 
   // TypeError si porta via la diagnostica proprio del giro andato male.
   // Riproducibile su `main` con due `recordModelFailure`, uno dei quali senza id.
   if (!modelId) return;
+  // Opt-out del chiamante: il fallimento resta CONTATO nella run — un modello
+  // che fallisce senza comparire fra i falliti rende invisibile il prossimo
+  // incidente — ma non muove niente che il flush possa spedire. Il gate sta
+  // qui e non attorno al call site (#846) proprio perche' i chiamanti esterni
+  // (`recordModelContentFailure`, e da li' `create-article.mjs`) lo ereditino
+  // senza doverselo ricordare.
+  if (!coerceRecordScore(recordScore)) {
+    _bumpOutcome(modelId, 'failures', { ledger: false });
+    return;
+  }
   const penalty = transportOnly ? 0
                 : exhausted ? SCORE_EXHAUSTED
                 : nonRetryable ? SCORE_NON_RETRYABLE
