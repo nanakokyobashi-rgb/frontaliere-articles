@@ -757,6 +757,12 @@ function classify(entry, now, base, deps = manifestDepsOf(entry)) {
       actionable: true,
       headline: 'modificato qui, fermo sul sito',
       detail:
+        // Su una voce `adapted` la `reason` e' gia' la risposta alla domanda
+        // che la riga pone ("si porta al sito?"), e a volte e' «non si puo'»
+        // (issue #892). Ometterla lasciava il consiglio generico a invitare a
+        // una risalita che il sito non puo' ricevere: `site-ahead` la stampa
+        // gia' per la stessa ragione, questo verso no.
+        (mode === 'adapted' ? `ADATTATO: ${reason || 'ragione non dichiarata'} ` : '') +
         'Una modifica locale che il sito non ha. Se e\' un adattamento a questo repo, aggiorna la baseline (`--init`) e dichiarala nel manifest. Se e\' un MIGLIORAMENTO del meccanismo, vale la pena proporlo al sito: e\' codice che serve a entrambi i cicli.',
     };
   }
