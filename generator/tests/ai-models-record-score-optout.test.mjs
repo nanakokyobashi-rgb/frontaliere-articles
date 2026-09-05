@@ -38,6 +38,7 @@ import { describe, it, beforeEach, afterEach } from 'node:test';
 import {
   callLLM,
   coerceRecordScore,
+  discoverFreeModels,
   getStats,
   resetState,
   DEFAULT_CHAIN,
@@ -319,6 +320,139 @@ describe('#783 — discovery: opt-out dal ledger, prune invariato', () => {
     assert.ok(
       getStats().dirtyModels > 0,
       'la produzione deve continuare a persistere gli id decommissionati: spegnere anche questo non sarebbe un opt-out',
+    );
+  });
+});
+
+
+/**
+ * ── #843 — LA PORTA PUBBLICA DELLA DISCOVERY: RESET E SILENZIO ─────────────
+ *
+ * I due casi di #783.2 qui sopra chiamano `_discoverProvider` DIRETTAMENTE, e
+ * cosi' schivano il latch `_discoveryDone` che sta un livello sopra, in
+ * `discoverFreeModels()`. Chi passa dalla porta pubblica lo trova invece:
+ *
+ *   (a) `resetState()` non lo azzerava. Il reset butta via marchi, potature e
+ *       punteggi — cioe' tutto cio' che la sweep precedente aveva prodotto — ma
+ *       lasciava `true` il flag che dice «gia' fatta»: la discovery restava
+ *       congelata per il resto del processo su un esito che non esisteva piu',
+ *       e nessun chiamante successivo poteva piu' ricostruirla. Senza questo
+ *       caso il test non distingue il reset dalla fortuna.
+ *   (b) un secondo chiamante con un `recordScore` diverso riceve l'esito del
+ *       primo: il suo flag non ha nessun effetto. L'idempotenza e' voluta, il
+ *       silenzio no — `initScoreStore()` fa la discovery col default, quindi e'
+ *       proprio l'auto-init a vincere di norma la corsa contro un diagnostico.
+ */
+describe('#843 — discoverFreeModels(): il latch di processo muore con resetState()', () => {
+  const PREFIX = 'openrouter/';
+  const DEAD = `${PREFIX}zz-decommissioned-843:free`;
+  // Ogni chiave di discovery: azzerate tutte tranne OpenRouter, altrimenti un
+  // provider con la chiave presente nell'ambiente girerebbe contro lo stub e
+  // aggiungerebbe id col SUO prefisso, rendendo il conteggio non deterministico.
+  const DISCOVERY_KEYS = [
+    'OPENROUTER_API_KEY', 'GROQ_API_KEY', 'CEREBRAS_API_KEY', 'MISTRAL_API_KEY',
+    'NVIDIA_API_KEY', 'NVIDIA_NIM_API_KEY', 'SAMBANOVA_API_KEY', 'TOGETHER_API_KEY',
+    'FIREWORKS_API_KEY', 'COHERE_API_KEY', 'CHUTES_API_KEY', 'HUGGINGFACE_API_KEY',
+    'ZAI_API_KEY', 'ZHIPU_API_KEY', 'CF_ACCOUNT_ID', 'CF_API_TOKEN',
+  ];
+  let chainBackup;
+  let realFetch;
+  let realWarn;
+  let keyBackup = {};
+  let warnings = [];
+
+  beforeEach(() => {
+    keyBackup = Object.fromEntries(DISCOVERY_KEYS.map((k) => [k, process.env[k]]));
+    for (const k of DISCOVERY_KEYS) delete process.env[k];
+    process.env.OPENROUTER_API_KEY = 'test-key';
+    chainBackup = [...DEFAULT_CHAIN];
+    realFetch = globalThis.fetch;
+    // Un solo id offerto, diverso da quello morto: `offeredIds.size > 0` supera
+    // la guardia anti-glitch, quindi il ramo markStale scatta davvero.
+    globalThis.fetch = async () => ({
+      ok: true,
+      status: 200,
+      // `context_length` esplicito: il `pick` di OpenRouter impone il floor
+      // MIN_DISCOVERY_CONTEXT_TOKENS, e un id senza contesto verrebbe scartato
+      // → `offeredIds.size === 0` → la guardia anti-glitch spegne markStale.
+      json: async () => ({ data: [{ id: 'zz-alive-843:free', context_length: 200_000 }] }),
+    });
+    realWarn = console.warn;
+    warnings = [];
+    console.warn = (...a) => { warnings.push(a.join(' ')); };
+    resetState();
+  });
+
+  afterEach(() => {
+    console.warn = realWarn;
+    globalThis.fetch = realFetch;
+    for (const k of DISCOVERY_KEYS) {
+      if (keyBackup[k] === undefined) delete process.env[k];
+      else process.env[k] = keyBackup[k];
+    }
+    DEFAULT_CHAIN.length = 0;
+    DEFAULT_CHAIN.push(...chainBackup);
+    resetState();
+  });
+
+  it('dopo resetState() la discovery si rifa\', e il recordScore del nuovo chiamante vale', async () => {
+    DEFAULT_CHAIN.push(DEAD);
+    await discoverFreeModels();
+    assert.ok(
+      getStats().dirtyModels > 0,
+      'la prima discovery col default doveva scrivere: senza, il caso non misura il reset ma il nulla',
+    );
+
+    resetState();
+    assert.equal(getStats().dirtyModels, 0, 'resetState() deve aver ripulito il ledger in sospeso');
+
+    // La sweep precedente ha potato l'id morto dalla catena; il reset butta via
+    // il suo marchio ma non lo rimette in catena. Lo rimettiamo noi: e' cio' che
+    // la seconda discovery deve tornare a vedere se sta davvero rigirando.
+    DEFAULT_CHAIN.push(DEAD);
+    await discoverFreeModels({ recordScore: false });
+
+    assert.ok(
+      getStats().exhaustedModels.includes(DEAD),
+      "la seconda discovery non e' stata eseguita: il latch _discoveryDone e' sopravvissuto a resetState(), quindi l'esito del primo chiamante e' congelato per tutto il processo",
+    );
+    assert.ok(!DEFAULT_CHAIN.includes(DEAD), 'il prune della catena deve valere anche nella sweep post-reset');
+    assert.equal(
+      getStats().dirtyModels,
+      0,
+      `il recordScore:false del secondo chiamante non ha avuto effetto: ha sporcato ${getStats().dirtyModels} modelli`,
+    );
+  });
+
+  it('senza reset, un flag diverso e\' un no-op — ma nominato', async () => {
+    DEFAULT_CHAIN.push(DEAD);
+    await discoverFreeModels();
+    const dirtyAfterFirst = getStats().dirtyModels;
+    assert.ok(dirtyAfterFirst > 0, 'la prima discovery col default doveva scrivere');
+
+    warnings = [];
+    DEFAULT_CHAIN.push(DEAD);
+    await discoverFreeModels({ recordScore: false });
+
+    assert.ok(
+      warnings.some((w) => w.includes('[Discovery]') && w.includes('recordScore')),
+      `un opt-out ignorato deve lasciare un segnale, warning visti: ${JSON.stringify(warnings)}`,
+    );
+    // L'idempotenza resta: la seconda chiamata non rifa' il giro, quindi non
+    // scrive nulla di nuovo e non ripota la catena.
+    assert.equal(getStats().dirtyModels, dirtyAfterFirst, 'la seconda chiamata non deve rieseguire la discovery');
+    assert.ok(DEFAULT_CHAIN.includes(DEAD), 'nessuna seconda sweep: l\'id rimesso in catena resta li\'');
+  });
+
+  it('stesso flag, nessun warning: il confine che tiene il segnale utile', async () => {
+    await discoverFreeModels({ recordScore: false });
+    warnings = [];
+    await discoverFreeModels({ recordScore: 'false' });
+
+    assert.deepEqual(
+      warnings.filter((w) => w.includes('[Discovery]')),
+      [],
+      `stessa modalita' (\'false\' e false coincidono dopo coerceRecordScore): nessun warning atteso, visti: ${JSON.stringify(warnings)}`,
     );
   });
 });

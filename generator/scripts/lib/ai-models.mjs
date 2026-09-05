@@ -4408,7 +4408,7 @@ export function resetState() {
   _prunedStale.clear();
   // La discovery era l'unico latch di processo che sopravviveva al reset: dopo
   // questa funzione la catena non porta piu' ne' i marchi ne' le potature della
-  // sweep precedente, quindi lasciare `_discoveryDone` a `true` avrebbe reso
+  // sweep precedente, quindi lasciare il latch della discovery a `true` avrebbe reso
   // permanente l'esito di cui si e' appena buttata via la meta' in-processo, e
   // il `recordScore` di ogni chiamante successivo sarebbe restato senza effetto.
   // `_dynamicModels`/`DEFAULT_CHAIN` NON si azzerano: sono la catena viva che i
