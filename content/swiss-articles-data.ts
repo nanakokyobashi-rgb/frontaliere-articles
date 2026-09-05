@@ -16786,6 +16786,42 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'asilo-nido-custodia-bambini-canton-soletta-costi',
+    category: 'pratico',
+    date: '2026-09-05T19:02:52.084Z',
+    image: '/images/blog/asilo-nido-custodia-bambini-canton-soletta-costi.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
+   {
+    id: 'pride-belgrado-25-anni',
+    category: 'novita',
+    date: '2026-09-05T19:13:22.197Z',
+    image: '/images/blog/pride-belgrado-25-anni.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
+   {
+    id: 'volo-easyjet-valencia-ginevra',
+    category: 'novita',
+    date: '2026-09-05T20:47:35.581Z',
+    image: '/images/blog/volo-easyjet-valencia-ginevra.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
+   {
+    id: 'permesso-dimora-b-canton-vallese-requisiti-rinnovo',
+    category: 'pratico',
+    date: '2026-09-05T20:58:25.674Z',
+    image: '/images/blog/permesso-dimora-b-canton-vallese-requisiti-rinnovo.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

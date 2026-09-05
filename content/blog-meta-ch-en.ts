@@ -5596,6 +5596,18 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.come-trovare-tirocinio-grigioni.title': 'How to find an internship in the Canton of Graubünden',
     'blog.article.come-trovare-tirocinio-grigioni.excerpt': 'Guide to vocational training in Graubünden: internship contracts, apprentice remuneration, social contributions and professional maturity in the Swiss system.',
     'blog.article.come-trovare-tirocinio-grigioni.imageAlt': 'Young apprentice learning a trade in a Swiss Alpine workshop during apprenticeship',
+    'blog.article.asilo-nido-custodia-bambini-canton-soletta-costi.title': 'Nursery and childcare in the canton of Solothurn: costs and fees',
+    'blog.article.asilo-nido-custodia-bambini-canton-soletta-costi.excerpt': 'Find out about childcare costs and fees in the Canton of Solothurn, including nurseries, day families and afterschool.',
+    'blog.article.asilo-nido-custodia-bambini-canton-soletta-costi.imageAlt': 'A childcare facility in the Canton of Solothurn, Switzerland',
+    'blog.article.pride-belgrado-25-anni.title': 'In Belgrade, Pride celebrates 25 years, and goes back to its origins',
+    'blog.article.pride-belgrado-25-anni.excerpt': 'The event highlights achievements and open battles for LGBTQ+ rights.',
+    'blog.article.pride-belgrado-25-anni.imageAlt': 'Pride parade in Belgrade, Serbia, with diverse participants and colorful banners.',
+    'blog.article.volo-easyjet-valencia-ginevra.title': 'EasyJet Valencia-Geneva flight diverted to Nice due to bad weather',
+    'blog.article.volo-easyjet-valencia-ginevra.excerpt': 'Three passengers recount moments of fear during landing. 31 flights delayed and three hijacked due to severe storms.',
+    'blog.article.volo-easyjet-valencia-ginevra.imageAlt': 'Aerial view of Lugano city and lake, Switzerland',
+    'blog.article.permesso-dimora-b-canton-vallese-requisiti-rinnovo.title': 'Residence permit B in the Canton of Valais: requirements, documents and renewal',
+    'blog.article.permesso-dimora-b-canton-vallese-requisiti-rinnovo.excerpt': 'Learn about the requirements, the necessary documents and the procedure for renewing the B residence permit in the Canton of Valais.',
+    'blog.article.permesso-dimora-b-canton-vallese-requisiti-rinnovo.imageAlt': 'Panoramic view of Lake Lugano with Monte San Salvatore',
 };
 
 export default blogMetaChEn;
