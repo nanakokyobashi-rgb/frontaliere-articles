@@ -22,6 +22,7 @@ import { fileURLToPath } from 'node:url';
 import {
   formatRefundComment,
   pickRoundCommentId,
+  refundMarkerName,
   roundMarkerRe,
 } from '../../scripts/ci/refund-fix-round.mjs';
 
@@ -78,6 +79,31 @@ test('il commento di rimborso non ri-arma il contatore ne` finge un verdetto di 
   assert.match(body, /five_hour/);
 });
 
+// ── L'handle di re-trigger ───────────────────────────────────────────────────
+// Cancellare il marker di round rimborsa il round MA disarma anche la classe B
+// di `stale-pr-rescuer.yml`, che decide il rerun di `tests` sulla PRESENZA di
+// `<!-- REDFLAG_FIX_ROUND:` — l'unico evento che rifa ripartire il fixer senza
+// un commit umano. Senza un handle sostitutivo il rimborso lascia la PR ferma
+// col budget intero: il round non speso non serve a niente se nessuno lo spende.
+
+test('refundMarkerName: handle derivato dal marker di round, mai il marker stesso', () => {
+  assert.equal(refundMarkerName('REDFLAG_FIX_ROUND'), 'REDFLAG_FIX_REFUNDED');
+  assert.equal(refundMarkerName('REDCHECK_FIX_ROUND'), 'REDCHECK_FIX_REFUNDED');
+});
+
+test('il commento di rimborso porta l`handle di re-trigger, invisibile al contatore', () => {
+  for (const { marker } of FIXERS) {
+    const body = formatRefundComment({
+      round: 1, workflow: 'pr-fixer', resetsAt: null, rateLimitType: null, runUrl: '', marker,
+    });
+    assert.match(body, new RegExp(`<!-- ${refundMarkerName(marker)}: 1 -->`),
+      `senza handle il rimborso disarma il rerun della classe B di stale-pr-rescuer.yml`);
+    // Il grep dei fixer: `grep -oE '<MARKER>: [0-9]+'`. L'handle non deve matcharlo.
+    assert.ok(!new RegExp(`${marker}: [0-9]+`).test(body),
+      `l'handle ri-armerebbe il contatore dei round: il rimborso si annullerebbe da solo`);
+  }
+});
+
 test('senza resetsAt il beacon viene omesso, non scritto vuoto', () => {
   const body = formatRefundComment({
     round: 1, workflow: 'pr-redflag-fixer', resetsAt: null, rateLimitType: null, runUrl: '',
@@ -88,6 +114,12 @@ test('senza resetsAt il beacon viene omesso, non scritto vuoto', () => {
 for (const { file, marker } of FIXERS) {
   test(`${path.basename(file)}: guard con pre-flight di quota e rimborso cablato su ${marker}`, () => {
     const yaml = fs.readFileSync(path.join(ROOT, file), 'utf-8');
+
+    // Anche lo skip pre-flight deve lasciare l'handle di re-trigger: li' il
+    // marker di round non viene MAI postato, quindi la classe B non avrebbe
+    // nessun segnale e la PR resterebbe ferma senza aver consumato niente.
+    assert.ok(yaml.includes(`<!-- ${refundMarkerName(marker)}: 0 -->`),
+      `${file}: lo skip per quota non lascia \`${refundMarkerName(marker)}\` → nessun re-trigger`);
 
     // Il conteggio dei round e il rimborso devono parlare dello STESSO marker.
     assert.ok(yaml.includes(`${marker}: [0-9]+`),
@@ -108,3 +140,17 @@ for (const { file, marker } of FIXERS) {
       `${file}: il gate di quota deve precedere la scrittura del marker di round`);
   });
 }
+
+// Il nome dell'handle vive in tre posti che non possono importarsi (AGENTS.md
+// #6): `refundMarkerName()`, la bash dello skip nei due fixer, e il `case` del
+// rescuer. Qui si chiude il triangolo sul lato che tiene in piedi il ciclo: se
+// il rescuer smette di riconoscere l'handle, il rimborso torna a essere uno
+// stallo silenzioso.
+test('stale-pr-rescuer: la classe B riconosce anche l`handle di rimborso', () => {
+  const yaml = fs.readFileSync(path.join(ROOT, '.github/workflows/stale-pr-rescuer.yml'), 'utf-8');
+  assert.ok(yaml.includes(`<!-- ${refundMarkerName('REDFLAG_FIX_ROUND')}:`),
+    'stale-pr-rescuer.yml non guarda l`handle di rimborso: dopo un 429 la PR resta ferma ' +
+    'per sempre, perche` refund-fix-round.mjs cancella proprio il marker che il rescuer legge');
+  assert.ok(yaml.includes("*'<!-- REDFLAG_FIX_ROUND:'*"),
+    'stale-pr-rescuer.yml non guarda piu` il marker di round della classe B');
+});

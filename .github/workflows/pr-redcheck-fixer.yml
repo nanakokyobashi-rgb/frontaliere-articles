@@ -277,7 +277,15 @@ jobs:
             | grep -oE 'quota_blocked=(true|false)' | tail -1 | cut -d= -f2 || true)
           if [ "${QUOTA:-false}" = "true" ]; then
             echo "::warning::Finestra di rate-limit Claude aperta -> skip senza consumare un round (il prossimo trigger riparte col budget intero)."
-            gh pr comment "$PR_NUMBER" --repo "$REPO" --body "$(printf '⏳ ❌-check-fixer skip: finestra di quota Claude ancora aperta (beacon di backoff attivo) -> nessun round consumato, nessun turno bruciato. Il prossimo trigger reale riparte col budget intero.')" \
+            # Handle di re-trigger: la classe B di `stale-pr-rescuer.yml` decide il
+            # rerun di `tests` sulla PRESENZA di un marker del fixer sul thread, ed
+            # e' l'unico modo in cui il fixer riparte senza un commit umano. Uscire
+            # di qui senza lasciarne uno rende lo skip di quota uno stallo. Il nome
+            # e' quello di `refundMarkerName()` in `scripts/ci/refund-fix-round.mjs`
+            # (unica sorgente, legame coperto da `generator/tests/refund-fix-round.test.mjs`):
+            # `_FIX_REFUNDED` non fa match sul grep del contatore `_FIX_ROUND`, quindi
+            # ri-arma il re-trigger senza ri-armare il round. `: 0` = nessun round preso.
+            gh pr comment "$PR_NUMBER" --repo "$REPO" --body "$(printf '<!-- REDCHECK_FIX_REFUNDED: 0 -->\n⏳ ❌-check-fixer skip: finestra di quota Claude ancora aperta (beacon di backoff attivo) -> nessun round consumato, nessun turno bruciato. Il prossimo trigger reale riparte col budget intero.')" \
               2>/dev/null || true
             echo "proceed=false" >> "$GITHUB_OUTPUT"
             exit 0

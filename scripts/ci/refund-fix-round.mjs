@@ -30,11 +30,27 @@
  * quindi al valore che aveva prima della run: il prossimo trigger reale riparte
  * con il budget intero.
  *
+ * ## Il marker di round ha DUE lettori, non uno
+ *
+ * Oltre al contatore (`grep -oE '<MARKER>: [0-9]+'`), la PRESENZA di
+ * `<!-- REDFLAG_FIX_ROUND:` sul thread e' il segnale su cui la classe B di
+ * `stale-pr-rescuer.yml` decide il rerun di `tests` — cioe' l'unico modo in cui
+ * il 🔴-fixer riparte senza un commit umano (la review vive dentro `tests.yml`
+ * e un rerun ri-emette `pull_request_review`). Cancellare il marker rimborsa il
+ * round ma disarmerebbe anche quel re-trigger: dopo un 429 la PR resterebbe
+ * ferma con il budget intero e nessuno a spenderlo.
+ *
+ * Per questo il commento di rimborso porta un handle SEPARATO,
+ * `<!-- <PREFIX>_FIX_REFUNDED: N -->` (`refundMarkerName`), che il rescuer
+ * accetta accanto a quello di round: non fa match sul grep del contatore
+ * (`_FIX_ROUND` != `_FIX_REFUNDED`), quindi ri-arma il re-trigger senza
+ * ri-armare il round.
+ *
  * Cancellare è l'operazione giusta e non una scorciatoia: il contatore È il
  * numero di marker presenti (`grep -oE '<MARKER>: [0-9]+' | sort -rn | head -1`),
  * quindi non esiste modo di "decrementarlo" se non togliendo il marker che non
  * andava scritto. Il round rimborsato resta comunque tracciato dal commento di
- * spiegazione, che non contiene il marker.
+ * spiegazione, che non contiene il marker di round.
  *
  * Env:
  *   GH_TOKEN     necessario per gh.
@@ -105,19 +121,33 @@ export function pickRoundCommentId(comments, marker, round) {
 }
 
 /**
+ * Il nome dell'handle di re-trigger derivato dal marker di round. Unica
+ * sorgente del nome (lo YAML del pre-flight e il rescuer lo ripetono in bash e
+ * non possono importarlo: il legame è coperto da un test, AGENTS.md #6). Puro.
+ * @param {string} marker
+ * @returns {string}
+ */
+export function refundMarkerName(marker) {
+  return String(marker || '').replace(/_ROUND$/, '') + '_REFUNDED';
+}
+
+/**
  * Il commento che sostituisce il marker rimborsato. Puro → testabile.
  * NB: NON contiene il marker di round (verrebbe ri-contato) e NON contiene un
  * `FIX_OUTCOME`, che è telemetria delle issue e qui confonderebbe il drainer.
- * Il beacon `QUOTA_RESETS_AT` invece sì: è il dato che rende la finestra
- * osservabile anche da chi legge la PR.
+ * Porta invece l'handle `<PREFIX>_FIX_REFUNDED`, che tiene armata la classe B
+ * di `stale-pr-rescuer.yml` (l'unico re-trigger del fixer senza commit umano)
+ * senza toccare il contatore. Il beacon `QUOTA_RESETS_AT` c'è per lo stesso
+ * motivo: è il dato che rende la finestra osservabile a chi legge la PR.
  * @param {{ round: string|number, workflow: string, resetsAt: number|null,
- *           rateLimitType: string|null, runUrl: string }} o
+ *           rateLimitType: string|null, runUrl: string, marker?: string }} o
  */
-export function formatRefundComment({ round, workflow, resetsAt, rateLimitType, runUrl }) {
+export function formatRefundComment({ round, workflow, resetsAt, rateLimitType, runUrl, marker }) {
   const when = Number.isFinite(Number(resetsAt)) && Number(resetsAt) > 0
     ? new Date(Number(resetsAt) * 1000).toISOString().replace('T', ' ').slice(0, 16) + ' UTC'
     : null;
   return [
+    marker ? `<!-- ${refundMarkerName(marker)}: ${round} -->` : null,
     resetsAt ? `<!-- QUOTA_RESETS_AT: ${Math.round(Number(resetsAt))} -->` : null,
     `⏳ **Quota Claude esaurita${rateLimitType ? ` (\`${rateLimitType}\`)` : ''}** — \`${workflow}\` è uscito su HTTP 429:`,
     'Claude **non ha letto questa PR** e non ha speso token (0 turni, $0).',
@@ -161,7 +191,9 @@ function main() {
     return;
   }
 
-  const body = formatRefundComment({ round: ROUND, workflow: WORKFLOW, resetsAt, rateLimitType, runUrl: RUN_URL });
+  const body = formatRefundComment({
+    round: ROUND, workflow: WORKFLOW, resetsAt, rateLimitType, runUrl: RUN_URL, marker: MARKER,
+  });
   console.log(`429 rilevato → rimborso del round ${ROUND} (commento ${id}) sulla PR #${PR}.`);
   if (DRY_RUN) {
     console.log(body);
