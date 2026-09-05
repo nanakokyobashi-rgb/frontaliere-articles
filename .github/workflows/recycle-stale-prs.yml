@@ -270,7 +270,7 @@ jobs:
           # #733), e dal commento di recurrence successivo l'issue si elenca
           # fra i propri item. Un report che si auto-elenca non converge mai:
           # la condizione di chiusura che questo stesso step scrive nel body
-          # («Chiudila quando entrambe le liste sono vuote») diventa
+          # (liste entrambe vuote, richiusa sotto con `--resolve`) diventa
           # irraggiungibile, perche' la lista issue contiene sempre almeno se
           # stessa. L'esclusione va fatta QUI, sulla chiave di dedup, non
           # sperando che la label resti quella di partenza.
@@ -278,7 +278,24 @@ jobs:
             --limit 200 --json number,title,updatedAt \
             --jq '.[] | select(.title != env.DEDUP_TITLE) | "- #\(.number) \(.title) (ultimo update \(.updatedAt))"')
           if [ -z "$PRS" ] && [ -z "$ISSUES" ]; then
-            echo "Niente needs-human aperto (ne PR ne issue)."
+            # Liste vuote = la condizione di chiusura che il corpo promette.
+            # Uscire e basta la lasciava non mantenuta: l'issue dedup restava
+            # aperta con un elenco ormai falso, e nessun altro processo la
+            # chiude (close-recovered-failure-issues.mjs copre le famiglie
+            # `Workflow Failure:` / `Crawler Failure:`, non questo titolo).
+            # #733 ne e' l'osservazione: dopo il fix dell'auto-elencamento la
+            # sua lista puo' finalmente svuotarsi, ma senza un chiuditore
+            # sarebbe rimasta aperta lo stesso — un secondo assorbente dietro
+            # al primo. `--resolve` e' la stessa via che gia' richiude gli
+            # allarmi a titolo stabile (ticker-shadow-alert.mjs,
+            # lockstep-stall-watch.mjs) e cerca l'issue con LA STESSA
+            # ricerca per titolo con cui la creerebbe: aprire e richiudere
+            # restano simmetrici sulla chiave di dedup.
+            echo "Niente needs-human aperto (ne PR ne issue): richiudo l'issue dedup, se aperta."
+            node scripts/lib/github-issue-creator.mjs \
+              --resolve \
+              --title "$DEDUP_TITLE" \
+              --workflow "Recycle stale PRs"
             exit 0
           fi
           PR_COUNT=0; [ -n "$PRS" ] && PR_COUNT=$(printf '%s\n' "$PRS" | wc -l | tr -d ' ')
@@ -286,7 +303,7 @@ jobs:
           echo "needs-human aperti: $PR_COUNT PR, $ISSUE_COUNT issue"
           [ -n "$PRS" ] || PRS='_(nessuna)_'
           [ -n "$ISSUES" ] || ISSUES='_(nessuna)_'
-          DESC=$(printf 'Nessun processo automatico sblocchera questi oggetti, e su `needs-human` la label e un filtro di ESCLUSIONE dalle code del drainer, non una segnalazione. Servono occhi umani.\n\n**PR** (%s) — il fixer dei red-flag ha raggiunto il round-cap e si e fermato (anti-loop), oppure sono draft parcheggiate, che ogni strato del ciclo salta by-design:\n\n%s\n\n**Issue** (%s) — escalate dal followup-drainer (too-large) o dal gate cronico di close-recovered-failure-issues.mjs (un guasto che ricorre oltre soglia). Restano fuori dal pool dei retry parcheggiati e dal rescue agent:fix dei crawler finche portano la label:\n\n%s\n\n_Issue dedup giornaliera da recycle-stale-prs.yml (zero-Claude); si aggiorna con un commento di recurrence finche esiste qualcosa di needs-human. Chiudila quando entrambe le liste sono vuote._' "$PR_COUNT" "$PRS" "$ISSUE_COUNT" "$ISSUES")
+          DESC=$(printf 'Nessun processo automatico sblocchera questi oggetti, e su `needs-human` la label e un filtro di ESCLUSIONE dalle code del drainer, non una segnalazione. Servono occhi umani.\n\n**PR** (%s) — il fixer dei red-flag ha raggiunto il round-cap e si e fermato (anti-loop), oppure sono draft parcheggiate, che ogni strato del ciclo salta by-design:\n\n%s\n\n**Issue** (%s) — escalate dal followup-drainer (too-large) o dal gate cronico di close-recovered-failure-issues.mjs (un guasto che ricorre oltre soglia). Restano fuori dal pool dei retry parcheggiati e dal rescue agent:fix dei crawler finche portano la label:\n\n%s\n\n_Issue dedup giornaliera da recycle-stale-prs.yml (zero-Claude); si aggiorna con un commento di recurrence finche esiste qualcosa di needs-human, e si richiude da sola al primo run in cui entrambe le liste sono vuote._' "$PR_COUNT" "$PRS" "$ISSUE_COUNT" "$ISSUES")
           node scripts/lib/github-issue-creator.mjs \
             --title "$DEDUP_TITLE" \
             --description "$DESC" \

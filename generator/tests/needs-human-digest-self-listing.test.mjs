@@ -72,12 +72,33 @@ test('la lista issue esclude l issue dedup stessa', () => {
 
 test('la condizione di chiusura promessa nel corpo resta raggiungibile', () => {
   const step = surfaceStep();
-  // Il corpo promette la chiusura a liste vuote; lo step esce prima di creare
-  // o aggiornare l'issue quando entrambe sono vuote.
-  assert.match(step, /Chiudila quando entrambe le liste sono vuote/);
+  // Il corpo promette la chiusura a liste vuote; lo step non deve creare ne
+  // aggiornare l'issue quando entrambe sono vuote.
+  assert.match(step, /si richiude da sola al primo run in cui entrambe le liste sono vuote/);
+  const emptyBranch = /if \[ -z "\$PRS" \] && \[ -z "\$ISSUES" \]; then([\s\S]*?)\n\s+fi\n/.exec(step);
+  assert.ok(emptyBranch, 'ramo "liste vuote" non trovato: la promessa del corpo non e mantenuta');
+  assert.match(emptyBranch[1], /\n\s+exit 0/, 'a liste vuote lo step non deve ricreare il digest');
+});
+
+test('a liste vuote lo step richiude l issue dedup, non si limita a uscire', () => {
+  // Raggiungere la condizione di chiusura non basta: nessun altro processo
+  // chiude questo titolo — close-recovered-failure-issues.mjs copre le
+  // famiglie `Workflow Failure:` / `Crawler Failure:`. Senza questa chiamata
+  // l'issue dedup resta aperta con un elenco falso, che e' il difetto di #733
+  // un passo piu' in la'.
+  const step = surfaceStep();
+  const emptyBranch = /if \[ -z "\$PRS" \] && \[ -z "\$ISSUES" \]; then([\s\S]*?)\n\s+fi\n/.exec(step);
+  assert.ok(emptyBranch, 'ramo "liste vuote" non trovato');
   assert.match(
-    step,
-    /if \[ -z "\$PRS" \] && \[ -z "\$ISSUES" \]; then\n\s+echo[^\n]*\n\s+exit 0/,
-    'senza early-exit a liste vuote la promessa del corpo non e mantenuta',
+    emptyBranch[1],
+    /node scripts\/lib\/github-issue-creator\.mjs[\s\S]*?--resolve/,
+    'a liste vuote lo step deve richiudere l issue dedup con --resolve',
+  );
+  // Stessa chiave di dedup dell'apertura (AGENTS.md #6): apertura e chiusura
+  // devono cercare la stessa issue, o si chiude qualcos'altro o niente.
+  assert.match(
+    emptyBranch[1],
+    /--title "\$DEDUP_TITLE"/,
+    'il resolve deve usare la stessa DEDUP_TITLE con cui l issue viene creata',
   );
 });
