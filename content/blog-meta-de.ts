@@ -11424,6 +11424,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.figino-serenza-frontaliere-ticino.title': 'Figino Serenza: Leitfaden für Grenzgänger im Tessin',
     'blog.article.figino-serenza-frontaliere-ticino.excerpt': 'G-Bewilligung, Besteuerung, KVG und Kosten: Alles, was sich ändert, wenn Sie als Grenzgänger in Figino Serenza leben und im Kanton Tessin arbeiten.',
     'blog.article.figino-serenza-frontaliere-ticino.imageAlt': 'Luftansicht von Lugano und seinem See bei Sonnenuntergang, typisches Arbeitsziel für Grenzgänger.',
+    'blog.article.vivere-bellagio-lavorare-ticino-frontaliere.title': 'Wohnen in Bellagio, Arbeiten im Tessin: Grenzführer',
+    'blog.article.vivere-bellagio-lavorare-ticino-frontaliere.excerpt': 'Umzug nach Bellagio und Arbeit im Tessin als Grenzgänger: Erfahren Sie mehr über das Steuersystem, die AHV-Beiträge, das KVG und wie Sie den Umzug planen.',
+    'blog.article.vivere-bellagio-lavorare-ticino-frontaliere.imageAlt': 'Panoramablick auf Lugano und den See mit Bergen, ein Arbeitsplatz im Tessin für Grenzgänger',
 };
 
 export default blogMetaDe;
