@@ -1679,13 +1679,37 @@ function _isHostUnreachableExempt(modelId, err) {
  *   questa macchina, quindi un verdetto su di esso non e' condivisibile.
  */
 function _isPerMachineEndpoint(modelId) {
-  const p = getProvider(modelId);
-  // Non «last-resort»: la proprieta' che conta e' che l'indirizzo arrivi
-  // dall'ambiente di QUESTA macchina (LOCAL_LLM_URL, OMNIROUTE_URL). claude-cli
-  // non compone nessun numero ed e' esente dal breaker a monte, quindi qui non
-  // arriva mai; se un domani un provider a endpoint fisso diventasse
-  // configurabile, e' questa lista a doversi allungare, non l'altra.
-  return p === PROVIDER.LOCAL || p === PROVIDER.OMNIROUTE;
+  return PER_MACHINE_ENDPOINT_ENV[getProvider(modelId)] !== undefined;
+}
+
+/**
+ * Il registro che DEFINISCE «per-macchina»: provider → variabile d'ambiente che
+ * ne sovrascrive l'endpoint (#874, item 3).
+ *
+ * Prima questa domanda si rispondeva con `p === PROVIDER.LOCAL || p ===
+ * PROVIDER.OMNIROUTE`, cioe' con «quale provider e'», mentre la proprieta' che
+ * conta e' «l'indirizzo arriva dall'ambiente di QUESTA macchina». Le due liste
+ * coincidono oggi, e il commento chiedeva di allungarne una a mano il giorno in
+ * cui un provider a endpoint fisso avesse preso un override di base URL da env:
+ * una promessa affidata alla memoria, che niente avrebbe fatto scattare.
+ *
+ * Qui la lista e' UNA, dichiara la variabile d'ambiente e non solo il provider,
+ * ed e' vincolata da un assert: `ai-models-ledger-gate.test.mjs` legge il
+ * sorgente del modulo, raccoglie ogni `process.env.<QUALCOSA>_URL` che vi
+ * compare e pretende che l'insieme sia esattamente quello dei valori qui sotto.
+ * Un `process.env.NUOVO_PROVIDER_URL` aggiunto senza toccare questa tabella
+ * rende rosso quel test invece di persistere in silenzio.
+ *
+ * claude-cli non compone nessun numero (nessun URL da env) e resta fuori.
+ */
+const PER_MACHINE_ENDPOINT_ENV = Object.freeze({
+  [PROVIDER.LOCAL]: 'LOCAL_LLM_URL',
+  [PROVIDER.OMNIROUTE]: 'OMNIROUTE_URL',
+});
+
+/** Test seam per l'assert che lega la tabella qui sopra al sorgente. */
+export function _perMachineEndpointEnvVars() {
+  return Object.values(PER_MACHINE_ENDPOINT_ENV);
 }
 
 // Backward-compatible helpers (kept for external code)
@@ -2360,6 +2384,21 @@ function providerCooldownDurationMs(severity) {
   return PROVIDER_COOLDOWN_DURATION_MS[severity] ?? PROVIDER_COOLDOWN_MS;
 }
 
+/**
+ * Test seam per l'invariante che `cooldownProvider` da' per scontato (#849
+ * item 3): la GRAVITA' e' usata come proxy della DURATA RESIDUA. Il ramo
+ * `severity < prevSeverity` esce senza toccare la finestra proprio perche' si
+ * assume che una causa piu' grave abbia sempre una finestra piu' lunga — vero
+ * oggi, ma niente nel codice lo impone. Una quarta causa aggiunta domani con
+ * gravita' alta e durata corta accorcerebbe la finestra in silenzio.
+ * `ai-models-ledger-gate.test.mjs` pinna qui la monotonia.
+ */
+export function _cooldownSeverityDurations() {
+  return Object.entries(COOLDOWN_SEVERITY)
+    .map(([name, severity]) => ({ name, severity, durationMs: providerCooldownDurationMs(severity) }))
+    .sort((a, b) => a.severity - b.severity);
+}
+
 // Ceiling applied to a provider's `Retry-After` header (some return 86399 =
 // 24h, which would freeze the pipeline). Read in two places that must never
 // drift apart: the 429 backoff in _callOpenAICompatible, and _hardCallCapMs
@@ -2627,6 +2666,62 @@ const _modelDetails = new Map();
 
 /** @type {Set<string>} models whose score changed since last persist */
 const _dirtyModels = new Set();
+
+/**
+ * ── L'UNICA PORTA VERSO `ai_model_scores/_all` ────────────────────────────
+ *
+ * `_dirtyModels.add(id)` e' cio' che propone un modello al documento CONDIVISO
+ * col sito: quello che `sortChainByScore()` legge per ordinare la cascata di
+ * produzione su ogni macchina. Prima di questa funzione quella coppia di righe
+ * (`add` + `_schedulePersist()`) era copiata in sei punti — recordModelSuccess,
+ * recordModelFailure, markModelExhausted, _learnRequestTokenLimit,
+ * _learnSchemaIncompatible, la migrazione legacy di initScoreStore — e OGNUNO
+ * decideva per conto suo se aveva il diritto di scrivere. Il risultato e' la
+ * famiglia di difetti #838/#845/#864/#874: ogni difesa aggiunta copriva un solo
+ * percorso, e il giro dopo ne emergeva un altro rimasto scoperto.
+ *
+ * Qui la decisione e' UNA e sta a valle di tutti i writer, quindi un writer
+ * nuovo la eredita senza doversene ricordare. I due motivi per rifiutare:
+ *
+ *  1. OPT-OUT DEL CHIAMANTE (`recordScore`, #630/#783/#846). Un chiamante
+ *     diagnostico (smoke-test-ai-models.mjs) percorre l'intera catena per
+ *     verificare disponibilita': i suoi esiti non descrivono nessun uso di
+ *     produzione e non devono riordinarla. Il MARCHIO in-processo resta —
+ *     l'opt-out spegne il ledger, non il circuit breaker.
+ *
+ *  2. ENDPOINT PER-MACCHINA (#838/#864/#874). `local/fallback` e
+ *     `omniroute/auto` sono id STABILI in un documento condiviso, ma l'host che
+ *     servono arriva da `LOCAL_LLM_URL`/`OMNIROUTE_URL`, cioe' dalla
+ *     configurazione di QUESTO runner. Qualunque verdetto su di essi descrive
+ *     una macchina sola. Il rifiuto e' incondizionato — NON dipende dalla forma
+ *     dell'errore: prima si agganciava a `e.hostUnreachable`, cioe' a un codice
+ *     syscall, e un gateway rotto in un modo che RISPONDE (502 di un reverse
+ *     proxy, captive portal che rende 200 non-JSON, handshake TLS fallito senza
+ *     codice di rete) passava indenne (#874 item 1). E copre l'INTERO record,
+ *     non il solo punteggio: `failures`, `maxRequestTokens`,
+ *     `schemaIncompatible` ed `exhaustedUntil` viaggiano tutti nella stessa
+ *     entry, e finche' il gate stava sullo score bastava che il modello
+ *     diventasse dirty per un'altra ragione perche' rientrassero dalla porta di
+ *     servizio (#874 item 2, #864).
+ *
+ * `persist: false` serve alla sola migrazione legacy→aggregato di
+ * `initScoreStore()`, che marca in blocco e lascia flushare al giro normale:
+ * schedulare li' un persist per ogni id caricato potrebbe superare
+ * PERSIST_MUTATION_THRESHOLD e far partire una scrittura a caricamento ancora
+ * in corso.
+ *
+ * @returns {boolean} true se la proposta e' stata accettata. I chiamanti che
+ *   hanno una META' NON-LEDGER da eseguire comunque (il conteggio di run, il
+ *   marchio in-processo) leggono questo valore invece di ripetere il test.
+ */
+function _proposeLedgerWrite(modelId, recordScore = true, { persist = true } = {}) {
+  if (!modelId) return false;
+  if (!coerceRecordScore(recordScore)) return false;
+  if (_isPerMachineEndpoint(modelId)) return false;
+  _dirtyModels.add(modelId);
+  if (persist) _schedulePersist();
+  return true;
+}
 
 /**
  * Per-model successes/failures accumulated since the LAST SUCCESSFUL persist —
@@ -3008,6 +3103,11 @@ export const DISCOVERY_PROVIDERS = Object.freeze([
   // unusable ids. HF stays statically curated in AI_MODELS/DEFAULT_CHAIN.
 ]);
 
+// Latch della discovery: `false` finche' non e' partita, poi la PROMESSA della
+// sweep in corso o conclusa (#875 item 2). Memoizzare la promessa e non un
+// booleano e' cio' che fa aspettare il secondo chiamante invece di consegnargli
+// `_dynamicModels` a meta' popolamento. Azzerato da `resetState()`.
+/** @type {false | Promise<string[]>} */
 let _discoveryDone = false;
 // Modalita' `recordScore` con cui la discovery di questo processo e' stata
 // fatta. Non serve a decidere se rifarla (l'idempotenza resta), ma a distinguere
@@ -3024,6 +3124,22 @@ const _dynamicModels = [];
 // modelId → provider name, for ids pruned from DEFAULT_CHAIN because the provider stopped
 // offering them (see the markStale block in _discoverProvider). Diagnostics + re-entry
 // audit only: nothing reads it to make a routing decision, and it is per-process.
+//
+// ── PERCHE' `resetState()` NON LO SVUOTA (#875 item 3) ────────────────────
+//
+// Il prune del ramo markStale fa uno `splice` su `DEFAULT_CHAIN`, ed e'
+// DEFINITIVO: un id tolto torna solo quando una discovery successiva lo rivede
+// nel listing del provider. `resetState()` NON ricostruisce la catena — e' una
+// decisione deliberata, documentata li': `DEFAULT_CHAIN` e' un array vivo che i
+// chiamanti hanno gia' in mano, e riscriverlo li' orfanerebbe.
+//
+// Il reset pero' faceva `_prunedStale.clear()`, cioe' buttava via il REGISTRO
+// delle potature lasciando in piedi le potature: la catena restava accorciata e
+// nessuna diagnostica sapeva piu' dire da quale provider e perche'. Bastava che
+// la sweep post-reset incontrasse un listing degenere (`offeredIds.size === 0`,
+// la guardia anti-glitch) perche' quello stato restasse per tutto il processo.
+// Il registro sopravvive quindi al reset esattamente come sopravvivono i fatti
+// che descrive.
 const _prunedStale = new Map();
 
 /** Ids pruned from the roster this process because their provider decommissioned them. */
@@ -3271,24 +3387,31 @@ export async function discoverFreeModels({ recordScore = true } = {}) {
       console.warn(
         `⚠️  [Discovery] recordScore:${wantsRecord} ignorato — la discovery di questo processo e' gia' stata fatta con recordScore:${_discoveryRecordScore} `
         + 'e non viene rifatta: ricevi quell\'esito. L\'opt-out va richiesto PRIMA della prima discovery (initScoreStore() la fa col default), '
-        + 'oppure dopo un resetState().',
+        + 'oppure dopo un resetState() — che AZZERA i punteggi: la sweep successiva non riscrive comunque il ledger a zero, '
+        + 'perche\' il flush OMETTE `score` per un modello di cui questo processo non ne ha uno.',
       );
     }
-    return _dynamicModels;
+    // Il latch e' la PROMESSA, non un booleano (#875 item 2). Alzando un flag
+    // prima dell'`await`, un secondo chiamante arrivato mentre la sweep era in
+    // volo non aspettava: riceveva `_dynamicModels` a meta' popolamento e lo
+    // trattava come lista completa. Qui riceve la stessa promessa e quindi lo
+    // stesso array, ma solo quando e' finito.
+    return _discoveryDone;
   }
-  _discoveryDone = true;
   _discoveryRecordScore = wantsRecord;
+  _discoveryDone = (async () => {
+    await Promise.all(DISCOVERY_PROVIDERS.map(async (cfg) => {
+      try {
+        await _discoverProvider(cfg, { recordScore: wantsRecord });
+      } catch (e) {
+        const msg = e?.name === 'AbortError' ? 'timeout' : (e?.message || String(e));
+        console.warn(`⚠️  [Discovery:${cfg.name}] Failed (${msg}) — using static list`);
+      }
+    }));
+    return _dynamicModels;
+  })();
 
-  await Promise.all(DISCOVERY_PROVIDERS.map(async (cfg) => {
-    try {
-      await _discoverProvider(cfg, { recordScore: wantsRecord });
-    } catch (e) {
-      const msg = e?.name === 'AbortError' ? 'timeout' : (e?.message || String(e));
-      console.warn(`⚠️  [Discovery:${cfg.name}] Failed (${msg}) — using static list`);
-    }
-  }));
-
-  return _dynamicModels;
+  return _discoveryDone;
 }
 
 /**
@@ -3375,8 +3498,10 @@ export async function initScoreStore() {
         entries.push([modelId, data]);
         // Mark every migrated model as dirty so the next flush rewrites it
         // into the aggregate doc — after which the legacy docs become
-        // unused snapshots and can be deleted out-of-band.
-        _dirtyModels.add(modelId);
+        // unused snapshots and can be deleted out-of-band. Passa dalla porta
+        // come ogni altro writer: una voce legacy di un endpoint per-macchina
+        // non va ri-pubblicata nell'aggregato (#874).
+        _proposeLedgerWrite(modelId, true, { persist: false });
       }
     }
 
@@ -3506,13 +3631,23 @@ async function _persistScoresToFirestore() {
   const modelsDelta = {};
   for (const modelId of toPersist) {
     const details = _modelDetails.get(modelId) || { successes: 0, failures: 0 };
-    const score = _modelScores.get(modelId) || 0;
-
     const entry = {
       modelId,                 // Original model ID (with slashes)
-      score,
       updatedAt: now,
     };
+
+    // `score` e' OMESSO quando questo processo non ne ha uno, esattamente come i
+    // contatori qui sotto e per la stessa ragione (#875 item 1). Un modello puo'
+    // essere dirty per un motivo che non e' un punteggio — un ban `stale` della
+    // discovery, un cap appreso — e `_modelScores.get(id) || 0` scriveva allora
+    // uno ZERO ASSOLUTO sopra il valore reale del documento condiviso. Il caso
+    // che lo rende raggiungibile e' `resetState()` seguito da una nuova
+    // `discoverFreeModels()`: il reset svuota `_modelScores` ma lascia in piedi
+    // `_firestoreDb`, quindi il ramo markStale proponeva `score: 0` per ogni id
+    // il cui punteggio era appena stato buttato via. Con `{merge: true}` un
+    // campo assente lascia intatto quello gia' scritto: non sapere non e' piu'
+    // la stessa cosa che sapere zero.
+    if (_modelScores.has(modelId)) entry.score = _modelScores.get(modelId);
 
     // successes/failures go out as an ATOMIC INCREMENT of this process's delta,
     // never as the absolute total (see _pendingCounterDeltas for the measured
@@ -3565,9 +3700,21 @@ async function _persistScoresToFirestore() {
       tomorrow.setUTCDate(tomorrow.getUTCDate() + 1);
       tomorrow.setUTCHours(0, 0, 0, 0);
       entry.exhaustedUntil = tomorrow.toISOString();
-    } else {
+    } else if (counterDelta?.successes) {
+      // Il campo si AZZERA solo con una prova in mano: una risposta buona da
+      // questo modello in questo processo dice che l'account non e' a quota, e
+      // il ban persistito va tolto (e' il caso della rotazione multi-PAT).
       entry.exhaustedUntil = null;
     }
+    // Altrimenti il campo e' OMESSO, per la stessa ragione di `score` e dei
+    // contatori qui sopra: con `{merge: true}` uno `null` assoluto CANCELLA il
+    // ban di quota che un'altra macchina ha appena scritto sul documento
+    // condiviso. Un modello puo' essere dirty per un motivo che non dice niente
+    // sulla quota — un cap appreso, una schema-incompatibility, una voce della
+    // migrazione legacy, un fallimento di rete — e azzerare da li' rimanda ogni
+    // altro workflow a ripagare i 429 fino a mezzanotte, in silenzio. Non serve
+    // nemmeno a ripulire i ban scaduti: il restore di `initScoreStore()` ignora
+    // gia' un `exhaustedUntil` nel passato (`if (resetTime > now)`).
 
     // Runtime-learned request-token ceiling (see _learnRequestTokenLimit).
     // Not a daily quota — no local/fallback exemption needed.
@@ -3698,14 +3845,22 @@ function _registerExitHooks() {
 // ── Score mutation (with Firestore persistence) ──────────────
 
 /** Record a model success — boosts its rank and persists to Firestore */
-export function recordModelSuccess(modelId) {
+export function recordModelSuccess(modelId, { recordScore = true } = {}) {
+  if (!modelId) return;
+  // In opt-out non si muove NIENTE che il ledger possa poi spedire — nemmeno
+  // `_modelScores`, che il flush legge come valore assoluto: bastava che il
+  // modello diventasse dirty per un'altra ragione perche' il punteggio inquinato
+  // dal ping diagnostico partisse comunque. Resta il solo tally di run, che
+  // muore col processo. Vedi il gemello in `recordModelFailure`.
+  if (!coerceRecordScore(recordScore)) {
+    _bumpOutcome(modelId, 'successes', { ledger: false });
+    return;
+  }
   _modelScores.set(modelId, (_modelScores.get(modelId) || 0) + SCORE_SUCCESS);
   const d = _modelDetails.get(modelId) || { successes: 0, failures: 0 };
   d.successes++;
   _modelDetails.set(modelId, d);
-  _bumpOutcome(modelId, 'successes');
-  _dirtyModels.add(modelId);
-  _schedulePersist();
+  _bumpOutcome(modelId, 'successes', { ledger: _proposeLedgerWrite(modelId, recordScore) });
 }
 
 /**
@@ -3713,11 +3868,23 @@ export function recordModelSuccess(modelId) {
  * Two maps and not one because they are cleared by different events: the delta
  * empties on every successful write, the run tally never does (printRunSummary
  * reads it at the very end).
+ *
+ * `ledger: false` scrive SOLO la seconda meta'. E' il verdetto della porta
+ * (`_proposeLedgerWrite`) che decide: `_pendingCounterDeltas` e' payload del
+ * documento condiviso — esce come `FieldValue.increment(n)` sul campo
+ * `failures` — mentre `_runOutcomes` muore col processo ed e' cio' che il
+ * riepilogo di run legge. Erano una cosa sola, ed era la «porta di servizio» di
+ * #874 item 2: soppresso il punteggio, il CONTATORE di un endpoint per-macchina
+ * continuava a incrementare il record condiviso. Il fallimento resta contato
+ * dove serve — un modello che fallisce senza comparire fra i falliti rende
+ * invisibile il prossimo incidente — ma nel tally di run, non nel ledger.
  */
-function _bumpOutcome(modelId, field) {
-  const pending = _pendingCounterDeltas.get(modelId) || { successes: 0, failures: 0 };
-  pending[field]++;
-  _pendingCounterDeltas.set(modelId, pending);
+function _bumpOutcome(modelId, field, { ledger = true } = {}) {
+  if (ledger) {
+    const pending = _pendingCounterDeltas.get(modelId) || { successes: 0, failures: 0 };
+    pending[field]++;
+    _pendingCounterDeltas.set(modelId, pending);
+  }
   const run = _runOutcomes.get(modelId) || { successes: 0, failures: 0 };
   run[field]++;
   _runOutcomes.set(modelId, run);
@@ -3755,15 +3922,27 @@ export function recordModelContentSuccess(modelId) {
  * fail (every model already exhausted). deadlineMs (RUN_WALL_BUDGET_MS)
  * already bounds total retry time, so removing the ban here doesn't risk an
  * unbounded loop.
+ *
+ * ── `recordScore` (#845) ──────────────────────────────────────────────────
+ *
+ * Questa e' una funzione ESPORTATA, e i suoi chiamanti veri stanno FUORI da
+ * `callLLM`: sono i validatori di contenuto (`body2-payload-verdict.mjs`,
+ * `itLanguageCheck.mjs`), che la usano come meccanismo di rotazione del
+ * modello. Finche' non accettava il parametro, un flusso diagnostico che
+ * validava una risposta scriveva `ai_model_scores/_all` in opt-OUT: nessun modo
+ * di chiedere il contrario. Il flag scende ora ai due writer che chiama —
+ * `recordModelFailure` e `markModelExhausted` — e la divisione e' quella di
+ * sempre: il MARCHIO in-processo resta (e' cio' che fa ruotare il modello, e non
+ * e' un dato di ledger), la proposta al documento condiviso no.
  */
-export function recordModelContentFailure(modelId) {
+export function recordModelContentFailure(modelId, { recordScore = true } = {}) {
   if (!modelId) return;
-  recordModelFailure(modelId);
+  recordModelFailure(modelId, { recordScore });
   const count = (_consecutiveContentFailures.get(modelId) || 0) + 1;
   _consecutiveContentFailures.set(modelId, count);
   if (_isLastResortProvider(modelId)) return;
   if (count >= MAX_CONSECUTIVE_CONTENT_FAILURES) {
-    markModelExhausted(modelId, 'content');
+    markModelExhausted(modelId, 'content', '', { recordScore });
     _stats.exhausted++;
     console.warn(`🚫 [${modelId}] Exhausted after ${count} consecutive content-quality failures`);
   }
@@ -3779,7 +3958,24 @@ export function recordModelContentFailure(modelId) {
  * (`Nok/0ko`) proprio mentre sta fallendo, che e' il modo piu' rapido per
  * rendere invisibile il prossimo incidente.
  */
-export function recordModelFailure(modelId, { nonRetryable = false, exhausted = false, transportOnly = false } = {}) {
+export function recordModelFailure(modelId, { nonRetryable = false, exhausted = false, transportOnly = false, recordScore = true } = {}) {
+  // Stessa guardia che `recordModelContentFailure` ha sempre avuto, e per una
+  // ragione misurabile: senza, un id falsy entra in `_runOutcomes` come chiave
+  // e `getRunOutcomes()` esplode nel comparatore (`a.model.localeCompare`) —
+  // dentro `getStats()`, cioe' dentro il riepilogo di fine run, dove un
+  // TypeError si porta via la diagnostica proprio del giro andato male.
+  // Riproducibile su `main` con due `recordModelFailure`, uno dei quali senza id.
+  if (!modelId) return;
+  // Opt-out del chiamante: il fallimento resta CONTATO nella run — un modello
+  // che fallisce senza comparire fra i falliti rende invisibile il prossimo
+  // incidente — ma non muove niente che il flush possa spedire. Il gate sta
+  // qui e non attorno al call site (#846) proprio perche' i chiamanti esterni
+  // (`recordModelContentFailure`, e da li' `create-article.mjs`) lo ereditino
+  // senza doverselo ricordare.
+  if (!coerceRecordScore(recordScore)) {
+    _bumpOutcome(modelId, 'failures', { ledger: false });
+    return;
+  }
   const penalty = transportOnly ? 0
                 : exhausted ? SCORE_EXHAUSTED
                 : nonRetryable ? SCORE_NON_RETRYABLE
@@ -3790,9 +3986,7 @@ export function recordModelFailure(modelId, { nonRetryable = false, exhausted = 
   const d = _modelDetails.get(modelId) || { successes: 0, failures: 0 };
   d.failures++;
   _modelDetails.set(modelId, d);
-  _bumpOutcome(modelId, 'failures');
-  _dirtyModels.add(modelId);
-  _schedulePersist();
+  _bumpOutcome(modelId, 'failures', { ledger: _proposeLedgerWrite(modelId, recordScore) });
 }
 
 /**
@@ -4189,10 +4383,7 @@ export function markModelExhausted(modelId, reason = 'quota', detail = '', { rec
   _exhaustedModels.add(modelId);
   _exhaustReason.set(modelId, reason);
   if (detail) _exhaustDetail.set(modelId, detail);
-  if (coerceRecordScore(recordScore)) {
-    _dirtyModels.add(modelId);
-    _schedulePersist();
-  }
+  _proposeLedgerWrite(modelId, recordScore);
   console.warn(`🚫 Model ${modelId} marked as exhausted (${reason}) — will be skipped for rest of run`);
 }
 
@@ -4449,12 +4640,19 @@ export function resetState() {
   _exhaustedModels.clear();
   _ghExhaustedPats.clear();
   _exhaustReason.clear();
-  _prunedStale.clear();
+  // `_prunedStale` NON si azzera (#875 item 3). Il reset butta via i MARCHI di
+  // esaurimento, ma non le potature: lo splice su `DEFAULT_CHAIN` e' definitivo
+  // e la catena resta accorciata (vedi il commento su `_prunedStale`, e la riga
+  // qui sotto sul perche' la catena non si ricostruisce). Svuotare il registro
+  // lasciava quindi in piedi il fatto e cancellava l'unica traccia che sapesse
+  // dire da quale provider veniva e perche' — se poi la sweep successiva
+  // incontrava un listing degenere, quello stato durava tutto il processo.
+  //
   // La discovery era l'unico latch di processo che sopravviveva al reset: dopo
-  // questa funzione la catena non porta piu' ne' i marchi ne' le potature della
-  // sweep precedente, quindi lasciare il latch della discovery a `true` avrebbe reso
-  // permanente l'esito di cui si e' appena buttata via la meta' in-processo, e
-  // il `recordScore` di ogni chiamante successivo sarebbe restato senza effetto.
+  // questa funzione la catena non porta piu' i marchi della sweep precedente,
+  // quindi lasciare il latch della discovery alzato avrebbe reso permanente
+  // l'esito di cui si e' appena buttata via la meta' in-processo, e il
+  // `recordScore` di ogni chiamante successivo sarebbe restato senza effetto.
   // `_dynamicModels`/`DEFAULT_CHAIN` NON si azzerano: sono la catena viva che i
   // chiamanti hanno gia' in mano, e l'add loop salta cio' che e' gia' presente.
   _discoveryDone = false;
@@ -5109,13 +5307,16 @@ function _parseRequestTokenLimit(bodyText = '') {
  * to reject every prompt this codebase generates (~8-9k tokens), so a parsed
  * value this small is almost certainly a misparse, not a real limit.
  */
-function _learnRequestTokenLimit(modelForTracking, bodyText) {
+function _learnRequestTokenLimit(modelForTracking, bodyText, { recordScore = true } = {}) {
   const limit = _parseRequestTokenLimit(bodyText);
   if (!limit || limit < 500) return;
   if (_learnedRequestTokenLimits.get(modelForTracking) === limit) return;
   _learnedRequestTokenLimits.set(modelForTracking, limit);
-  _dirtyModels.add(modelForTracking);
-  _schedulePersist();
+  // Il cap resta valido IN PROCESSO (e' cio' che evita di ripagare un 400 per
+  // ogni id fratello); verso il ledger passa dalla porta, che lo rifiuta se
+  // l'endpoint e' per-macchina — un Ollama servito a 8k su questo runner non
+  // deve insegnare quel tetto a tutte le altre macchine (#864).
+  _proposeLedgerWrite(modelForTracking, recordScore);
 }
 
 /**
@@ -5136,11 +5337,11 @@ const _learnedSchemaIncompatible = new Set();
  * shouldUseSchemaMode() stops requesting it for this model going forward
  * (in-run immediately, cross-run via Firestore). No-op if already known.
  */
-function _learnSchemaIncompatible(modelForTracking) {
+function _learnSchemaIncompatible(modelForTracking, { recordScore = true } = {}) {
   if (_learnedSchemaIncompatible.has(modelForTracking)) return;
   _learnedSchemaIncompatible.add(modelForTracking);
-  _dirtyModels.add(modelForTracking);
-  _schedulePersist();
+  // Stessa divisione di _learnRequestTokenLimit qui sopra (#864).
+  _proposeLedgerWrite(modelForTracking, recordScore);
 }
 
 /**
@@ -5399,15 +5600,19 @@ async function _callOpenAICompatible(apiModel, messages, opts, { endpoint, apiKe
           // after the fact from logs. Gated like markModelExhausted below —
           // diagnostic-only callers (see DEFAULT_OPTS.recordScore) must not
           // teach the shared cascade a runtime-learned cap either.
-          if (_shouldRecordScore(opts)) {
-            _learnRequestTokenLimit(modelForTracking, raw);
-            // Same reasoning: a 400 with this exact shape only happens when we
-            // requested schema mode (responseFormat.type === 'json_schema') and
-            // the model rejected it — remember it so future cascade passes stop
-            // paying the round-trip for a request shape this model never accepts.
-            if (nrc.reason === 'schema_unsupported' && responseFormat?.type === 'json_schema') {
-              _learnSchemaIncompatible(modelForTracking);
-            }
+          // Gate sul PARAMETRO, non attorno alla chiamata (#846/#864): il cap
+          // appreso ha due meta' e solo una e' di ledger. In processo serve
+          // SEMPRE — e' cio' che evita di ripagare il 400 «Request too large»
+          // per ogni id fratello — e proprio il chiamante diagnostico e' quello
+          // che la catena la percorre tutta. Attorno alla chiamata il flag
+          // spegneva anche quella meta'.
+          _learnRequestTokenLimit(modelForTracking, raw, { recordScore: _shouldRecordScore(opts) });
+          // Same reasoning: a 400 with this exact shape only happens when we
+          // requested schema mode (responseFormat.type === 'json_schema') and
+          // the model rejected it — remember it so future cascade passes stop
+          // paying the round-trip for a request shape this model never accepts.
+          if (nrc.reason === 'schema_unsupported' && responseFormat?.type === 'json_schema') {
+            _learnSchemaIncompatible(modelForTracking, { recordScore: _shouldRecordScore(opts) });
           }
           if (nrc.markExhausted && !_isLastResortProvider(modelForTracking)) {
             // Gate sul parametro, non sul call site (#846).
@@ -5436,8 +5641,14 @@ async function _callOpenAICompatible(apiModel, messages, opts, { endpoint, apiKe
           // multi-PAT): a 429 on one account must not freeze every GitHub model
           // for the run when another account's quota is still available.
           if (is429 && !_suppressExhaustionMark) {
-            cooldownProvider(getProvider(modelForTracking));
-            _stats.providerCooldowns++;
+            // Solo `created` e' un cooldown NUOVO (#849 item 1). Da #809
+            // `cooldownProvider` puo' essere un no-op completo — un 429
+            // transitorio su una finestra `resolverFlap`/`persistent` gia'
+            // aperta esce senza toccare ne' finestra ne' causa — e contarlo
+            // gonfiava una riga che `scan-generation-health` legge per
+            // giudicare la salute della generazione. Stessa forma del call
+            // site del ramo host-unreachable, che lo faceva gia' giusto.
+            if (cooldownProvider(getProvider(modelForTracking)) === 'created') _stats.providerCooldowns++;
           }
           // Respect Retry-After header if present (seconds or HTTP-date)
           // Cap at 2 minutes — some providers (e.g. Cerebras) return Retry-After: 86399 (24h)
@@ -6567,11 +6778,10 @@ async function _callGeminiRaw(model, messages, opts) {
           // markModelExhausted below — diagnostic-only callers (see
           // DEFAULT_OPTS.recordScore) must not teach the shared cascade a
           // runtime-learned cap either.
-          if (_shouldRecordScore(opts)) {
-            _learnRequestTokenLimit(model, raw);
-            if (nrc.reason === 'schema_unsupported' && useGeminiSchema) {
-              _learnSchemaIncompatible(model);
-            }
+          // Gemello del ramo OpenAI-compatibile: gate sul parametro (#846/#864).
+          _learnRequestTokenLimit(model, raw, { recordScore: _shouldRecordScore(opts) });
+          if (nrc.reason === 'schema_unsupported' && useGeminiSchema) {
+            _learnSchemaIncompatible(model, { recordScore: _shouldRecordScore(opts) });
           }
           if (nrc.markExhausted) {
             // 'nonretryable', NOT the default 'quota': this is the Gemini twin
@@ -6594,8 +6804,8 @@ async function _callGeminiRaw(model, messages, opts) {
         if (isRetryableError(res.status, raw) && attempt < opts.maxRetriesPerModel) {
           _stats.retries++;
           if (res.status === 429) {
-            cooldownProvider(PROVIDER.GEMINI);
-            _stats.providerCooldowns++;
+            // Vedi il gemello nel ramo OpenAI-compatibile (#849 item 1).
+            if (cooldownProvider(PROVIDER.GEMINI) === 'created') _stats.providerCooldowns++;
           }
           // Respect Retry-After header if present (capped at 2 minutes)
           const MAX_RETRY_AFTER_MS_GEMINI = 2 * 60 * 1000;
@@ -7149,7 +7359,12 @@ export async function callLLM(messages, opts = {}) {
 
       // ✅ Success — boost this model's score so it stays near the top
       // (skipped for diagnostic-only callers, see DEFAULT_OPTS.recordScore)
-      if (_shouldRecordScore(o)) recordModelSuccess(model);
+      // Gate sul PARAMETRO, non attorno alla chiamata (#846): saltare la
+      // chiamata intera fa perdere anche il TALLY DI RUN, che non e' un dato di
+      // ledger — muore col processo — ed e' cio' che il riepilogo legge. Una run
+      // diagnostica finiva percio' con `0ok/0ko` su modelli che aveva chiamato
+      // davvero, che e' la lettura che rende invisibile il prossimo incidente.
+      recordModelSuccess(model, { recordScore: _shouldRecordScore(o) });
       _consecutive429.delete(model); // FRO-325: reset 429 counter on success
       _clampedTimeouts.delete(model); // an answer clears the adaptive-ceiling doubt
       _resolverFlaps.delete(provider); // the name resolved: the flap streak is over (#770)
@@ -7335,10 +7550,18 @@ export async function callLLM(messages, opts = {}) {
         _stats.exhausted++;
         markedExhausted = true;
       }
-      // Un guasto di irraggiungibilita' su un endpoint di QUESTA macchina
-      // (#838): il breaker arma lo stesso, ma il verdetto non e' condivisibile.
-      // Calcolato qui perche' lo leggono due punti — il ban sotto e la penale
-      // di punteggio in fondo al catch — e devono rispondere allo stesso fatto.
+      // Un guasto su un endpoint di QUESTA macchina (#838). Non decide piu' se
+      // il ledger viene scritto — quella domanda ha una risposta sola e sta in
+      // `_proposeLedgerWrite`, che rifiuta un id per-macchina qualunque sia la
+      // forma dell'errore (#874 item 1). Qui resta perche' governa due cose
+      // in-processo: la penale di punteggio in fondo al catch (`transportOnly`,
+      // cioe' «conta il fallimento ma non farlo pagare») e la parola con cui la
+      // riga di log lo nomina. Resta quindi agganciato a `e.hostUnreachable`,
+      // che e' la classe di guasto per cui quella carve-out di punteggio e'
+      // stata misurata; il gateway rotto in un modo che RISPONDE (502 di un
+      // reverse proxy, captive portal che rende 200 non-JSON, handshake TLS
+      // senza codice syscall) non ha bisogno di passare di qui, perche' e' il
+      // ledger la cosa da proteggere e li' lo copre la porta.
       const perMachineEndpointFault = !!e.hostUnreachable && !spared
         && !_isHostUnreachableExempt(model, e) && _isPerMachineEndpoint(model);
       // Unreachable-host circuit breaker (nanako#475). Same shape as the
@@ -7389,16 +7612,61 @@ export async function callLLM(messages, opts = {}) {
       // connect morto e' una prova vera ma valida solo qui. Vedi
       // `_isPerMachineEndpoint`: in processo cambia nulla — marchio e cooldown
       // restano — mentre verso Firestore non parte niente.
+      // MISURATO (#848 item 2, 2026-09-05, node 26.4 / undici). La domanda era
+      // se un abort a connect in corso verso un gateway REMOTO porti un codice
+      // di `HOST_UNREACHABLE_CODES` nella cause chain: se lo portasse, questo
+      // ramo bannerebbe l'ULTIMA riga della catena — quella che esiste per la
+      // finestra «tutti gli altri esauriti» — dove prima la parola «aborted» la
+      // salvava. Le tre forme reali:
+      //
+      //   abort su connect appeso  → TimeoutError, `code: 23` (NUMERO: e' il
+      //                              codice DOMException), cause chain vuota;
+      //   connect rifiutato        → TypeError «fetch failed» → cause `ECONNREFUSED`;
+      //   nome non risolvibile     → TypeError «fetch failed» → cause `ENOTFOUND`.
+      //
+      // `classifyHostUnreachable` richiede `typeof e.code === 'string'`, quindi
+      // il primo caso non arma niente. La sovrapposizione temuta non esiste: un
+      // errore che porta insieme un codice di rete e la parola «aborted» ha
+      // ricevuto un RST o un NXDOMAIN, cioe' una prova vera sull'host, non un
+      // abort nostro. Il ramo resta com'e'.
       if (e.hostUnreachable && !spared && !_isHostUnreachableExempt(model, e)) {
+        // La CAUSA si riscrive SEMPRE, anche se il ramo timeout ha gia' marcato
+        // (#848 item 1). Un errore che porta insieme un codice di
+        // `HOST_UNREACHABLE_CODES` e la parola «timeout»/«aborted» — cioe'
+        // esattamente lo scenario per cui il tag vince sul ramo timeout —
+        // lasciava `_exhaustReason` a `timeout`, quindi `_exhaustSkipCause`
+        // emetteva `timeout circuit-breaker` e `classifyExhaustionCause` lo
+        // contava TRANSITORIO a ogni tick successivo della catena, mentre la
+        // riga di skip dei fratelli, per lo STESSO guasto, diceva `unreachable
+        // (...), non-retryable` e votava persistente. Il tally che decide fra
+        // differimento silenzioso e Workflow Failure riceveva due voti opposti
+        // per un guasto solo. `markModelExhausted` sovrascrive
+        // `_exhaustReason`/`_exhaustDetail`, quindi basta chiamarla fuori dalla
+        // guardia; il CONTEGGIO e il latch restano dentro, per non contare due
+        // volte lo stesso esaurimento.
+        //
+        // `recordScore`: due ragioni indipendenti per non scrivere il ledger, un
+        // solo parametro (#846) — l'opt-out del chiamante e, dal 2026-09-05,
+        // l'endpoint per-macchina, che ora vive dentro `_proposeLedgerWrite` e
+        // non ha piu' bisogno di essere ripetuto qui (#874).
         if (!markedExhausted) {
-          // Due ragioni indipendenti per NON scrivere il ledger, un solo
-          // parametro (#846): l'opt-out del chiamante e l'endpoint per-macchina
-          // di #838. Il marchio in-processo resta in entrambi i casi.
           markModelExhausted(model, 'nonretryable', e.hostUnreachable, {
-            recordScore: _shouldRecordScore(o) && !perMachineEndpointFault,
+            recordScore: _shouldRecordScore(o),
           });
           _stats.exhausted++;
           markedExhausted = true;
+        } else {
+          // Il ramo timeout ha gia' bannato: qui si corregge la sola CAUSA, non
+          // si riemette il ban. Ri-chiamare `markModelExhausted` avrebbe fatto
+          // il lavoro giusto sulla causa e tre di troppo: una seconda proposta
+          // al ledger, un secondo `_mutationCount`, e soprattutto una SECONDA
+          // riga `🚫 Model … marked as exhausted`, che
+          // `scripts/ci/exhaustion-reason-report.mjs` conta con una regex
+          // globale (`EXHAUSTION_LINE_RE`) — un guasto solo sarebbe pesato due
+          // volte, e con due cause opposte, nel giudizio sulla salute della
+          // generazione.
+          _exhaustReason.set(model, 'nonretryable');
+          if (e.hostUnreachable) _exhaustDetail.set(model, e.hostUnreachable);
         }
         // Nessuna guardia `if (!isProviderCoolingDown(provider))` qui (#787): un
         // provider gia' in cooldown per un 429 che poi si scopre irraggiungibile
@@ -7489,14 +7757,15 @@ export async function callLLM(messages, opts = {}) {
       // rapido per rendere invisibile il prossimo incidente.
       const transportOnly = (!!e.transportFault && provider === PROVIDER.CLAUDE_CLI)
         || perMachineEndpointFault;
-      // (skipped for diagnostic-only callers, see DEFAULT_OPTS.recordScore)
-      if (_shouldRecordScore(o)) {
-        recordModelFailure(model, {
-          nonRetryable: !!e.nonRetryable,
-          exhausted: isExhausted || isTimeoutFailure,
-          transportOnly,
-        });
-      }
+      // Gemello del ramo di successo: gate sul PARAMETRO, cosi' il fallimento
+      // resta contato nel tally di run anche per un chiamante diagnostico
+      // (see DEFAULT_OPTS.recordScore).
+      recordModelFailure(model, {
+        nonRetryable: !!e.nonRetryable,
+        exhausted: isExhausted || isTimeoutFailure,
+        transportOnly,
+        recordScore: _shouldRecordScore(o),
+      });
 
       // La causa va nominata anche qui: "guasto di trasporto" su un gateway
       // remoto morto manderebbe chi indaga a cercare un cap nostro invece

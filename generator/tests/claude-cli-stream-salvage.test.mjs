@@ -236,7 +236,13 @@ describe('il ramo di timeout usa davvero il salvataggio, e non punisce il modell
       // che questo test misura — e la coda `[\s\S]` copre solo le eventuali
       // disgiunzioni aggiunte dopo: allentarla oltre il `;` renderebbe di nuovo
       // sufficiente un qualunque oggetto con un campo `transportOnly`.
-      /const transportOnly = \(!!e\.transportFault && provider === PROVIDER\.CLAUDE_CLI\)[\s\S]{0,200}?;[\s\S]{0,400}?recordModelFailure\(model, \{[\s\S]{0,200}?transportOnly,\s*\n\s*\}\);/,
+      // Dal 2026-09-05 la chiamata porta anche `recordScore` — il gate e' sul
+      // PARAMETRO e non piu' attorno al call site (#846), cosi' il tally di run
+      // sopravvive a una run diagnostica. `transportOnly,` resta pinnato alla
+      // lettera, che e' cio' che questo test misura; la coda ammette le
+      // proprieta' aggiunte dopo di esso invece di pretendere che sia l'ultima,
+      // che era un'assunzione sull'ORDINE delle chiavi e non sul flag.
+      /const transportOnly = \(!!e\.transportFault && provider === PROVIDER\.CLAUDE_CLI\)[\s\S]{0,200}?;[\s\S]{0,700}?recordModelFailure\(model, \{[\s\S]{0,200}?transportOnly,[\s\S]{0,200}?\n\s*\}\);/,
       'callLLM deve propagare il flag a recordModelFailure',
     );
   });
@@ -248,8 +254,25 @@ describe('il ramo di timeout usa davvero il salvataggio, e non punisce il modell
     const dopo = SRC.slice(SRC.indexOf('const penalty = transportOnly ? 0'));
     const corpo = dopo.slice(0, dopo.indexOf('\n}'));
     assert.match(corpo, /d\.failures\+\+/, 'il contatore dei fallimenti deve restare incondizionato');
-    assert.match(corpo, /_bumpOutcome\(modelId, 'failures'\)/, 'l\'outcome deve finire nel ledger comunque');
+    assert.match(corpo, /_bumpOutcome\(modelId, 'failures'/, 'l\'outcome deve essere contato comunque');
     assert.match(corpo, /if \(penalty !== 0\) _modelScores\.set/, 'un `+ 0` creerebbe una voce spuria a punteggio 0');
+
+    // Dal 2026-09-05 `_bumpOutcome` ha DUE meta' (#874 item 2): il delta verso
+    // `ai_model_scores/_all`, che passa dalla porta del ledger e puo' essere
+    // rifiutato, e il tally di run, che muore col processo. Cio' che questo
+    // test misura e' la seconda: un fallimento non pagato deve comunque
+    // comparire nel riepilogo di run, altrimenti il modello si legge `Nok/0ko`
+    // proprio mentre sta fallendo. Il pin e' quindi sul CORPO di `_bumpOutcome`:
+    // il ramo `_runOutcomes` sta fuori dal `if (ledger)`, cioe' dopo la sua
+    // chiusura.
+    const bump = SRC.slice(SRC.indexOf('function _bumpOutcome('));
+    const bumpBody = bump.slice(0, bump.indexOf('\n}'));
+    const fineGate = bumpBody.indexOf('  }');
+    assert.ok(fineGate > 0, `il gate \`if (ledger)\` non e' piu' riconoscibile in _bumpOutcome: ${bumpBody}`);
+    assert.ok(
+      bumpBody.indexOf('_runOutcomes.set(modelId, run)') > fineGate,
+      `il tally di run e' finito DENTRO il gate del ledger: un fallimento non persistito sparirebbe anche dal riepilogo di run.\n${bumpBody}`,
+    );
   });
 
   it('il breaker di trasporto NON viene disarmato dalla carve-out', () => {
