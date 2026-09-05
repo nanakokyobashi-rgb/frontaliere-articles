@@ -35,7 +35,7 @@ import { fileURLToPath } from 'node:url';
 // esattamente la funzione che il loop ritagliato riceve in produzione, e una
 // copia locale nel test divergerebbe in silenzio dal fix (AGENTS.md #6).
 import { translatedStringOrNull } from '../scripts/lib/article-free-mt.mjs';
-import { hasUsableContentText } from '../scripts/lib/body2-payload-verdict.mjs';
+import { hasUsableContentText, hasUsableTranslatedText } from '../scripts/lib/body2-payload-verdict.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const CREATE_ARTICLE = path.resolve(HERE, '../scripts/create-article.mjs');
@@ -92,10 +92,10 @@ const MISSING_FIELD_LOOP_SRC = extractMissingFieldLoop();
 async function runMissingFieldLoop({ data, itContent, callWithRetry, detectTruncation, warnings = [] }) {
   const capturingConsole = { error: () => {}, warn: (msg) => warnings.push(msg) };
   const fn = new Function(
-    'data', 'itContent', 'callWithRetry', 'translatedStringOrNull', 'hasUsableContentText', 'detectTruncation', 'console',
+    'data', 'itContent', 'callWithRetry', 'translatedStringOrNull', 'hasUsableTranslatedText', 'detectTruncation', 'console',
     `return (async () => { ${MISSING_FIELD_LOOP_SRC} })();`,
   );
-  await fn(data, itContent, callWithRetry, translatedStringOrNull, hasUsableContentText, detectTruncation || (() => []), capturingConsole);
+  await fn(data, itContent, callWithRetry, translatedStringOrNull, hasUsableTranslatedText, detectTruncation || (() => []), capturingConsole);
 }
 
 /**
@@ -321,9 +321,9 @@ test('ramo missing-field: body1 tradotto = "null" viene letto come MANCANTE e ri
   assert.equal(data.content.de.body1, 'Echter deutscher Text.');
 });
 
-test('ramo missing-field: "null" doppiamente serializzato e maiuscolo — stesso esito, fallback IT quando il retry non produce nulla (#799)', async () => {
+test('ramo missing-field: "null" doppiamente serializzato — fallback IT quando il retry non produce nulla (#799)', async () => {
   const complete = { title: 'T', excerpt: 'E', body1: 'B1', body2: 'B2', body3: 'B3' };
-  const data = { content: { en: { ...complete, excerpt: '"null"' }, de: { ...complete, body3: 'NULL' }, fr: { ...complete } } };
+  const data = { content: { en: { ...complete, excerpt: '"null"' }, de: { ...complete, body3: 'null' }, fr: { ...complete } } };
   const itContent = { body1: 'B1it', title: 'Tit', excerpt: 'Excerpt italiano.', body2: 'B2it', body3: 'Body3 italiano.' };
   // Il retry restituisce a sua volta `"null"`: `translatedStringOrNull` lo
   // rifiuta, quindi si cade sul valore italiano invece di pubblicare `null`.
@@ -335,10 +335,79 @@ test('ramo missing-field: "null" doppiamente serializzato e maiuscolo — stesso
   assert.equal(data.content.de.body3, 'Body3 italiano.');
 });
 
+// ── «Null» tedesco: contenuto, non campo mancante (#831) ───────────────────
+//
+// Il rovescio del test sopra. `Null` e' la parola tedesca corrente per «zero»,
+// e i sostantivi tedeschi sono SEMPRE maiuscoli: col predicato della sorgente
+// (`hasUsableContentText`, case-insensitive) un campo DE il cui testo intero
+// e' `Null` si leggeva come MANCANTE. Il retry non ha niente da correggere —
+// la traduzione e' giusta — quindi si cadeva sul valore ITALIANO, e il locale
+// `de` pubblicava testo italiano. Nessun gate a valle lo vede: e' prosa non
+// vuota, solo nella lingua sbagliata.
+test('ramo missing-field: un campo DE che vale «Null» (zero, in tedesco) NON e\' mancante e non cade sull\'italiano (#831)', async () => {
+  const complete = { title: 'T', excerpt: 'E', body1: 'B1', body2: 'B2', body3: 'B3' };
+  const data = { content: { en: { ...complete }, de: { ...complete, title: 'Null' }, fr: { ...complete } } };
+  const itContent = { body1: 'B1it', title: 'Zero', excerpt: 'Eit', body2: 'B2it', body3: 'B3it' };
+  const calls = [];
+  const callWithRetry = async (_p, _t, label) => { calls.push(label); return { title: 'Null' }; };
+
+  await runMissingFieldLoop({ data, itContent, callWithRetry });
+
+  assert.deepEqual(calls, [], 'nessun retry: il campo tradotto c\'e\', non e\' mancante');
+  assert.equal(data.content.de.title, 'Null', 'il titolo DE legittimo non deve essere sostituito dal testo italiano');
+});
+
+// Il rovescio del rovescio: la deroga e' TEDESCA, non generica. In inglese e
+// in francese `NULL` come testo INTERO di un campo non e' prosa, e a valle non
+// c'e' nessuna rete — l'ultimo gate prima della scrittura gira solo su `['it']`
+// — quindi un `title` en che vale `NULL` arriverebbe verbatim nel corpus, in
+// `meta-en` e nel feed RSS `en`. Su quei locali il campo deve continuare a
+// leggersi come MANCANTE: retry mirato e, se non produce nulla, fallback IT.
+test('ramo missing-field: «NULL» su en/fr resta un campo mancante (la deroga #831 e\' solo tedesca)', async () => {
+  const complete = { title: 'T', excerpt: 'E', body1: 'B1', body2: 'B2', body3: 'B3' };
+  const data = {
+    content: {
+      en: { ...complete, title: 'NULL' },
+      de: { ...complete },
+      fr: { ...complete, excerpt: 'Null' },
+    },
+  };
+  const itContent = { title: 'Titolo italiano.', excerpt: 'Excerpt italiano.', body1: 'B1it', body2: 'B2it', body3: 'B3it' };
+  const calls = [];
+  // Il retry restituisce a sua volta la stessa grafia: rifiutata, quindi si
+  // cade sul valore italiano invece di pubblicare `NULL` sotto /en/ e /fr/.
+  const callWithRetry = async (_p, _t, label) => {
+    calls.push(label);
+    return { title: 'NULL', excerpt: 'Null' };
+  };
+
+  await runMissingFieldLoop({ data, itContent, callWithRetry });
+
+  assert.deepEqual(calls, ['en:title-missing-retry', 'fr:excerpt-missing-retry'], 'il retry mirato deve partire su en e fr');
+  assert.equal(data.content.en.title, 'Titolo italiano.');
+  assert.equal(data.content.fr.excerpt, 'Excerpt italiano.');
+  assert.equal(data.content.de.title, 'T', 'il locale de non e\' toccato da questo caso');
+});
+
 test('translatedStringOrNull: rifiuta la serializzazione letterale di null, non il testo reale', () => {
-  for (const v of ['null', 'NULL', ' null ', '"null"', "'null'", '', '   ', null, undefined, {}, ['x']]) {
-    assert.equal(translatedStringOrNull(v), null, `deve rifiutare ${JSON.stringify(v)}`);
+  for (const v of ['null', ' null ', '"null"', "'null'", '', '   ', null, undefined, {}, ['x']]) {
+    assert.equal(translatedStringOrNull(v, 'de'), null, `deve rifiutare ${JSON.stringify(v)}`);
   }
-  assert.equal(translatedStringOrNull('  Testo reale.  '), '  Testo reale.  ', 'il testo reale passa BYTE PER BYTE, senza trim');
-  assert.equal(translatedStringOrNull('"Nullo" e\' un cognome'), '"Nullo" e\' un cognome');
+  assert.equal(translatedStringOrNull('  Testo reale.  ', 'de'), '  Testo reale.  ', 'il testo reale passa BYTE PER BYTE, senza trim');
+  assert.equal(translatedStringOrNull('"Nullo" e\' un cognome', 'de'), '"Nullo" e\' un cognome');
+  // #831: la deroga alla grafia maiuscola vale SOLO su `de`, dove `Null` e' la
+  // parola per «zero». `String(null)`/`JSON.stringify(null)` non producono
+  // altro che `null` minuscolo, quindi su `de` una maiuscola non e' mai una
+  // serializzazione; su en/fr — e senza locale — lo si tratta come campo
+  // mancante e la recovery per-campo lo ripara (#822).
+  for (const v of ['Null', 'NULL', 'Null.', '"Null"']) {
+    assert.equal(translatedStringOrNull(v, 'de'), v, `deve tenere ${JSON.stringify(v)} su de: non e' una serializzazione`);
+  }
+  for (const v of ['Null', 'NULL', '"Null"']) {
+    for (const loc of ['en', 'fr', undefined]) {
+      assert.equal(translatedStringOrNull(v, loc), null, `${JSON.stringify(v)} non e' prosa in ${loc}`);
+    }
+  }
+  // Il punto finale non e' la parola: `Null.` non e' `null` in nessun locale.
+  assert.equal(translatedStringOrNull('Null.', 'en'), 'Null.');
 });
