@@ -11427,6 +11427,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.figino-serenza-frontaliere-ticino.title': 'Figino Serenza : guide pour les frontaliers au Tessin',
     'blog.article.figino-serenza-frontaliere-ticino.excerpt': 'Permis G, fiscalité, LAMal et coûts : tout ce qui change si vous vivez à Figino Serenza et travaillez dans le canton du Tessin en tant que frontalier.',
     'blog.article.figino-serenza-frontaliere-ticino.imageAlt': 'Vue aérienne de Lugano et son lac au coucher du soleil, destination de travail commune pour frontaliers.',
+    'blog.article.vivere-bellagio-lavorare-ticino-frontaliere.title': 'Vivre à Bellagio, travailler au Tessin : guide frontalier',
+    'blog.article.vivere-bellagio-lavorare-ticino-frontaliere.excerpt': 'Déménager à Bellagio et travailler au Tessin en tant que frontalier : découvrez le régime fiscal, les cotisations AVS, la LAMal et comment planifier le transfert.',
+    'blog.article.vivere-bellagio-lavorare-ticino-frontaliere.imageAlt': 'Vue panoramique de Lugano et son lac avec montagnes, zone de travail tessinoise pour frontaliers',
 };
 
 export default blogMetaFr;

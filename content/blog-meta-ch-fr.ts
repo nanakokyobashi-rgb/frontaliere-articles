@@ -5590,6 +5590,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.tirocinio-retribuzione-maturita-grigioni.title': 'Apprentissage dans le canton des Grisons : apprentissage et maturité',
     'blog.article.tirocinio-retribuzione-maturita-grigioni.excerpt': 'Guide complet de l\'apprentissage dans les Grisons : comment trouver un poste d\'apprentissage, rémunération avec cotisations de sécurité sociale, vacances minimales garanties et maturité professionnelle fédérale.',
     'blog.article.tirocinio-retribuzione-maturita-grigioni.imageAlt': 'Jeune apprenti dans un atelier suisse pendant une leçon de formation pratique',
+    'blog.article.ridurre-traffico-trasporti-pubblici.title': 'Réduire le trafic : des billets pas chers ne suffisent pas',
+    'blog.article.ridurre-traffico-trasporti-pubblici.excerpt': 'Une étude HSLU révèle que la praticité, les parkings sécurisés et le transport des bagages sont plus importants que le prix pour encourager les transports en commun.',
+    'blog.article.ridurre-traffico-trasporti-pubblici.imageAlt': 'Gare ferroviaire moderne suisse avec trains et passagers, symbole de la mobilité des transports publics',
 };
 
 export default blogMetaChFr;

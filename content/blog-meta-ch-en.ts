@@ -5590,6 +5590,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.tirocinio-retribuzione-maturita-grigioni.title': 'Apprenticeship in the Canton of Graubünden: internship and maturity',
     'blog.article.tirocinio-retribuzione-maturita-grigioni.excerpt': 'Complete guide to apprenticeship in Graubünden: how to find an internship, salary with social security contributions, guaranteed minimum holidays and federal professional maturity.',
     'blog.article.tirocinio-retribuzione-maturita-grigioni.imageAlt': 'Young apprentice in Swiss vocational workshop during practical training session',
+    'blog.article.ridurre-traffico-trasporti-pubblici.title': 'Reducing traffic: cheap tickets are not enough',
+    'blog.article.ridurre-traffico-trasporti-pubblici.excerpt': 'An HSLU study reveals that convenience, secure parking and luggage transport are more important than price to encourage public transport.',
+    'blog.article.ridurre-traffico-trasporti-pubblici.imageAlt': 'Modern Swiss train station with trains and passengers, representing public transport mobility in Switzerland',
 };
 
 export default blogMetaChEn;
