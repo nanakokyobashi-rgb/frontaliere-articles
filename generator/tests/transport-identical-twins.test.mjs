@@ -51,6 +51,7 @@ import {
   transportVerdict,
   unsafeTarget,
 } from '../../scripts/ci/transport-identical-twins.mjs';
+import { classify } from '../../scripts/ci/loop-drift-check.mjs';
 import { parsePositiveNum } from '../../scripts/ci/scan-failed-runs.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
@@ -450,6 +451,13 @@ test('TRANSPORT_MAX_FAILURE_RATIO è una frazione, non una percentuale', () => {
 // dopo il drift check legge `corpus-ahead` su un file che nessuno ha toccato:
 // una riga actionable permanente, cioe' il modo in cui un report smette di
 // essere letto.
+//
+// La meta' meno ovvia: su un `identical` la correzione DA SOLA non chiude
+// niente. Scrivere `baseline.corpus = committed` con `committed !== base.site`
+// sposta solo la riga actionable — da `corpus-ahead` a `undeclared-drift`, che
+// e' piu' in alto nel report e per giunta esclude quella voce dal trasporto.
+// Quindi il caso «i byte committati non sono quelli del sito» esce ROSSO, e la
+// correzione silenziosa resta ai casi in cui ricostruisce davvero `stable`.
 
 const hash16 = (buf) => crypto.createHash('sha256').update(buf).digest('hex').slice(0, 16);
 
@@ -463,27 +471,67 @@ const transported = (over = {}) => ({
   }],
 });
 
-test('la baseline si riallinea sui byte committati quando differiscono dai byte scaricati', () => {
+test('byte committati diversi da quelli del sito: la voce esce ROSSA, la baseline non si tocca', () => {
+  // Il gemello non e' byte-identico. Registrare qui `baseline.corpus` non lo
+  // renderebbe tale: lo consegnerebbe al drift check come divergenza.
   const manifest = transported();
   const committed = Buffer.from('scaricato\n'); // normalizzato al commit
-  const { corrections, unreadable } = realignFromCommitted(manifest, ['scripts/ci/alert-pat-down.mjs'], () => committed);
+  const { corrections, mismatched, unreadable } = realignFromCommitted(manifest, ['scripts/ci/alert-pat-down.mjs'], () => committed);
 
   assert.deepEqual(unreadable, []);
-  assert.equal(corrections.length, 1);
-  assert.equal(corrections[0].to, hash16(committed));
-  assert.equal(manifest.files[0].baseline.corpus, hash16(committed));
+  assert.deepEqual(corrections, []);
+  assert.equal(mismatched.length, 1);
+  assert.equal(mismatched[0].committed, hash16(committed));
+  assert.equal(mismatched[0].site, hash16('scaricato\r\n'));
+  assert.deepEqual(manifest.files[0].baseline, transported().files[0].baseline, 'baseline intatta: la decisione non e\' di questo passaggio');
 });
 
-test('si corregge SOLO `baseline.corpus`: `baseline.site` resta un blob che sul sito esiste', () => {
+test('la baseline rifiutata sarebbe `undeclared-drift` permanente, non `stable`', () => {
+  // Il motivo per cui il caso sopra e' rosso invece che corretto in silenzio.
+  // Si simula la scrittura che NON si fa e la si passa a `classify()`: nessuno
+  // dei due lati si e' mosso dalla baseline, ma gli hash non coincidono.
+  const site = hash16('scaricato\r\n');
+  const committed = hash16('scaricato\n');
+  const entry = { path: 'scripts/ci/alert-pat-down.mjs', mode: 'identical' };
+  const base = { site, corpus: committed };
+  const verdict = classify(entry, { site, corpus: committed }, base);
+
+  assert.equal(verdict.state, 'undeclared-drift');
+  assert.equal(verdict.actionable, true, 'la riga actionable di #852 non sparirebbe: cambierebbe solo nome');
+  // E una voce in `undeclared-drift` non si copia piu': il gemello smetterebbe
+  // di aggiornarsi senza che niente fallisca.
+  assert.equal(transportVerdict(entry, { site, corpus: committed }, base).transport, false);
+});
+
+test('correzione: `baseline.corpus` stale ma byte committati uguali a quelli del sito → `stable`', () => {
+  // L'unico caso in cui riscrivere la baseline ricostruisce l'invariante vero.
+  const manifest = transported({ baseline: { site: hash16('scaricato\r\n'), corpus: 'stale00000000000', alignedAt: '2026-09-05' } });
+  const siteBefore = manifest.files[0].baseline.site;
+  const { corrections, mismatched } = realignFromCommitted(manifest, ['scripts/ci/alert-pat-down.mjs'], () => Buffer.from('scaricato\r\n'));
+
+  assert.deepEqual(mismatched, []);
+  assert.equal(corrections.length, 1);
+  assert.equal(corrections[0].from, 'stale00000000000');
+  assert.equal(corrections[0].to, hash16('scaricato\r\n'));
   // Sovrascrivere anche `baseline.site` con un hash locale fabbricherebbe
   // esattamente la `ghost-baseline` che `checkBaselineProvenance()` esiste per
   // intercettare (#148): un hash registrato che non e' mai stato reale.
-  const manifest = transported();
-  const siteBefore = manifest.files[0].baseline.site;
-  realignFromCommitted(manifest, ['scripts/ci/alert-pat-down.mjs'], () => Buffer.from('scaricato\n'));
-
   assert.equal(manifest.files[0].baseline.site, siteBefore);
   assert.equal(manifest.files[0].baseline.alignedAt, '2026-09-05', 'la data dell\'allineamento non cambia: e\' lo stesso atto');
+
+  const base = manifest.files[0].baseline;
+  assert.equal(classify(manifest.files[0], { site: base.site, corpus: base.corpus }, base).state, 'stable');
+});
+
+test('su una voce `adapted` i due lati POSSONO differire: la correzione resta lecita', () => {
+  // La regola del rosso e' sul modo, non sul path: un `adapted` con
+  // `baseline.site !== baseline.corpus` e' `stable` per `classify()`.
+  const manifest = transported({ mode: 'adapted', reason: 'gate in piu\' qui', baseline: { site: hash16('sito\n'), corpus: hash16('vecchio\n'), alignedAt: '2026-09-05' } });
+  const { corrections, mismatched } = realignFromCommitted(manifest, ['scripts/ci/alert-pat-down.mjs'], () => Buffer.from('adattato\n'));
+
+  assert.deepEqual(mismatched, []);
+  assert.equal(corrections.length, 1);
+  assert.equal(manifest.files[0].baseline.corpus, hash16('adattato\n'));
 });
 
 test('byte committati identici a quelli scaricati: nessuna correzione, nessuna riscrittura', () => {

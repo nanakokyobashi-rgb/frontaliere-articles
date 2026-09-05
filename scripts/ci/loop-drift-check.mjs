@@ -643,6 +643,9 @@ function classify(entry, now, base) {
 async function main() {
   const manifest = readManifest();
   const results = [];
+  // Le voci che `--init` registra come `identical` pur avendo i due lati
+  // diversi: vanno dette QUI, non lasciate al report del giorno dopo.
+  const divergentInit = [];
 
   for (const entry of manifest.files) {
     const rel = entry.path;
@@ -671,6 +674,17 @@ async function main() {
       // il `mode` a mano, POI `--init` registra la baseline vera.
       const siteBaseline = (entry.mode === 'corpus-only' || entry.mode === 'corpus-only-pending') ? null : now.site;
       entry.baseline = { site: siteBaseline, corpus: now.corpus, alignedAt: manifest.alignedAt || null };
+      // Stessa classe del riallineamento del trasporto (#852): una baseline
+      // `identical` con i due lati diversi e' `undeclared-drift` alla passata
+      // successiva — actionable per sempre, e la voce esce dal trasporto
+      // (`transportVerdict()` non copia un `undeclared-drift`). Qui non si
+      // rifiuta la scrittura, perche' `--init` e' un atto manuale e la
+      // registrazione dello stato attuale e' proprio cio' che gli si chiede:
+      // si dice ad alta voce cosa si sta registrando, invece di lasciarlo
+      // scoprire al report di domani.
+      if (entry.mode === 'identical' && now.site !== null && now.corpus !== null && now.site !== now.corpus) {
+        divergentInit.push(rel);
+      }
       continue;
     }
 
@@ -763,6 +777,9 @@ async function main() {
     manifest.alignedAt = new Date().toISOString().slice(0, 10);
     fs.writeFileSync(MANIFEST_PATH, `${JSON.stringify(manifest, null, 2)}\n`);
     console.log(`Baseline registrate per ${manifest.files.length} file (alignedAt=${manifest.alignedAt}).`);
+    for (const rel of divergentInit) {
+      console.error(`  ⚠ ${rel}: registrato \`identical\` con i due lati DIVERSI — la prossima passata lo leggera' \`undeclared-drift\` e il trasporto smettera' di copiarlo. Riallinea il file, oppure marcalo \`adapted\` con la sua ragione.`);
+    }
     return 0;
   }
 

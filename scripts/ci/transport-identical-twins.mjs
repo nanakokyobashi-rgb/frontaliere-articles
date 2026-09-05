@@ -72,8 +72,11 @@
  *
  * La baseline che `--apply` registra è però quella dei byte SCARICATI, scritta
  * prima che il commit esista (issue #852). A chiuderla è `--realign=<lista>`,
- * un passaggio distinto che gira sul commit appena creato e riporta
- * `baseline.corpus` sui byte che ci sono finiti davvero.
+ * un passaggio distinto che gira sul commit appena creato e confronta la
+ * baseline con i byte che ci sono finiti davvero: la riallinea dove questo
+ * ricostruisce l'invariante di `classify()`, ed esce ROSSO — prima del push —
+ * dove i byte committati non sono quelli del sito, perché lì la voce non è un
+ * gemello byte-identico e nessuna baseline la renderebbe tale.
  *
  * ## Uso
  *
@@ -515,9 +518,29 @@ function localHash(rel) {
  * realmente scaricati dal sito: e' un blob che su quel lato ESISTE, e
  * sovrascriverlo con un hash locale fabbricherebbe esattamente la
  * `ghost-baseline` che `checkBaselineProvenance()` esiste per intercettare
- * (issue #148). Dopo la correzione i due lati sono di nuovo `stable` per
- * `classify()` — sito fermo sul suo hash, corpus fermo sul suo — che e'
- * l'invariante vero, non l'uguaglianza dei due campi.
+ * (issue #148).
+ *
+ * ## Perche' su un `identical` la correzione da sola NON basta
+ *
+ * Per un gemello `mode: identical` scrivere `baseline.corpus = committed`
+ * quando `committed !== baseline.site` non produce `stable`: al giro dopo
+ * nessuno dei due lati si e' mosso dalla propria baseline, ma
+ * `now.site !== now.corpus`, e `classify()` entra nel ramo `undeclared-drift`
+ * — actionable, in cima al report, con la remediation sbagliata («riallinea il
+ * file, oppure marcalo `adapted`») per una differenza di soli byte. Peggio:
+ * `transportVerdict()` non copia un `undeclared-drift`, quindi quel gemello
+ * smette di aggiornarsi tutti i giorni senza che niente fallisca — la forma di
+ * guasto che questo repo riconosce come la peggiore. La riga actionable
+ * permanente di #852 non sparirebbe: cambierebbe solo nome.
+ *
+ * Il fatto sotto e' che se i byte committati non sono quelli scaricati, quel
+ * gemello **non e' byte-identico** e non e' un `identical` trasportabile.
+ * Quindi il disallineamento esce ROSSO — prima del push, cioe' prima che il
+ * manifest atterri su `main` — e la decisione (correggere la copia, o degradare
+ * la voce ad `adapted` con la sua `reason`) resta a chi ha il contesto per
+ * prenderla. La correzione silenziosa e' ammessa solo dove ricostruisce
+ * davvero l'invariante di `classify()`: `committed === baseline.site` su un
+ * `identical`, o una voce di modo diverso, dove i due lati POSSONO differire.
  *
  *   manifest        il manifest parsato (mutato in place).
  *   paths           i path trasportati in questa passata: le sole voci su cui
@@ -526,11 +549,12 @@ function localHash(rel) {
  *   readCommitted   (rel) => Buffer dei byte committati; lancia se il path non
  *                   e' nel commit.
  *
- * Ritorna `{ corrections, unreadable }`.
+ * Ritorna `{ corrections, mismatched, unreadable }`.
  */
 export function realignFromCommitted(manifest, paths, readCommitted) {
   const wanted = new Set(paths);
   const corrections = [];
+  const mismatched = [];
   const unreadable = [];
 
   for (const entry of manifest.files || []) {
@@ -549,6 +573,14 @@ export function realignFromCommitted(manifest, paths, readCommitted) {
     const committed = sha256(bytes);
     const base = entry.baseline || {};
     if (base.corpus === committed) continue;
+    // Un `identical` i cui byte committati non sono quelli serviti dal sito non
+    // e' un gemello: scrivere qui la baseline lo consegnerebbe al drift check
+    // come `undeclared-drift` permanente, e al trasporto come voce che non si
+    // copia piu'. Si lascia la baseline com'e' e si esce rossi.
+    if ((entry.mode || 'identical') === 'identical' && committed !== (base.site ?? null)) {
+      mismatched.push({ path: entry.path, site: base.site ?? null, committed });
+      continue;
+    }
     corrections.push({ path: entry.path, from: base.corpus ?? null, to: committed });
     entry.baseline = { ...base, corpus: committed };
   }
@@ -559,7 +591,7 @@ export function realignFromCommitted(manifest, paths, readCommitted) {
   const missingWanted = [...wanted].filter((rel) => !(manifest.files || []).some((e) => e.path === rel));
   for (const rel of missingWanted) unreadable.push({ path: rel, reason: 'path trasportato assente dal manifest' });
 
-  return { corrections, unreadable };
+  return { corrections, mismatched, unreadable };
 }
 
 /** I byte committati di un path, letti da `HEAD` invece che dal working tree. */
@@ -574,16 +606,22 @@ function realignMain(listFile) {
     .map((x) => x.trim())
     .filter(Boolean);
   const manifest = JSON.parse(fs.readFileSync(MANIFEST_PATH, 'utf8'));
-  const { corrections, unreadable } = realignFromCommitted(manifest, paths, committedBytes);
+  const { corrections, mismatched, unreadable } = realignFromCommitted(manifest, paths, committedBytes);
 
   if (corrections.length) fs.writeFileSync(MANIFEST_PATH, `${JSON.stringify(manifest, null, 2)}\n`);
 
   if (AS_JSON) {
-    console.log(JSON.stringify({ realign: true, paths: paths.length, corrections, unreadable }, null, 2));
+    console.log(JSON.stringify({ realign: true, paths: paths.length, corrections, mismatched, unreadable }, null, 2));
   } else {
     console.log(`transport-identical-twins (realign): ${paths.length} voci verificate sul commit, ${corrections.length} baseline corrette`);
     for (const c of corrections) console.log(`  ✎ ${c.path}: baseline.corpus ${c.from} → ${c.to} (byte committati)`);
+    for (const m of mismatched) console.error(`  ✖ ${m.path}: i byte COMMITTATI (${m.committed}) non sono quelli serviti dal sito (${m.site}) — non e’ un gemello byte-identico`);
     for (const u of unreadable) console.error(`  ⚠ ${u.path}: ${u.reason}`);
+  }
+
+  if (mismatched.length) {
+    console.error(`transport-identical-twins: ${mismatched.length} path trasportati sono stati committati con byte diversi da quelli del sito. Registrarli come baseline darebbe ‘undeclared-drift’ permanente al drift check e li escluderebbe dal trasporto: correggi la copia (normalizzazione, filtro ‘clean’, staging), oppure degrada la voce a ‘adapted’ con la sua ‘reason’.`);
+    return 1;
   }
 
   if (unreadable.length) {
@@ -594,6 +632,14 @@ function realignMain(listFile) {
 }
 
 async function main() {
+  // `--realign lista.txt` (con lo spazio) e `--realign=` vuoto lascerebbero
+  // `REALIGN_FILE` a `null`: si cadrebbe qui sotto nel dry-run di rete — exit
+  // 0, baseline mai verificata, step VERDE. Un no-op silenzioso su questo
+  // passaggio e' indistinguibile dal successo, quindi e' un errore.
+  if (RAW_ARGS.some((a) => a === '--realign' || a === '--realign=')) {
+    console.error('transport-identical-twins: --realign vuole la forma --realign=<file> (un path per riga)');
+    return 1;
+  }
   if (REALIGN_FILE) return realignMain(REALIGN_FILE);
   const manifest = JSON.parse(fs.readFileSync(MANIFEST_PATH, 'utf8'));
   const outOfScopePrefixes = (manifest.scope?.outOfScope || []).map((x) => x.prefix);
