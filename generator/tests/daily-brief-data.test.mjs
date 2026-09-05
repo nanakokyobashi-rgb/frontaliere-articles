@@ -675,11 +675,25 @@ test('a block degraded edition after edition raises an alarm instead of degradin
   assert.deepEqual(streaks, [1, 2, 3]);
   assert.deepEqual(degradationAlarms(build(day(8), null)), [], 'one bad morning is not an alarm');
 
-  const alarms = degradationAlarms(previous);
+  const dayTwo = build(day(9), build(day(8), null));
+  const alarms = degradationAlarms(previous, dayTwo);
   assert.equal(alarms.length, 1);
   assert.equal(alarms[0].block, 'jobs');
   assert.equal(alarms[0].editions, MAX_CONSECUTIVE_DEGRADED_EDITIONS);
   assert.match(alarms[0].reason, /no history series/);
+  assert.equal(alarms[0].crossed, true, 'day three is where the streak reaches the threshold');
+
+  // Day four and beyond: still an alarm, no longer a crossing. The caller may
+  // only fail the run on a crossing — this script is the first step of the
+  // workflow, and a permanent red would stop the edition being generated at
+  // all, every day, instead of publishing it one section shorter.
+  const stillBroken = build(day(11), previous);
+  assert.equal(stillBroken.blocks.jobs.degradedEditions, MAX_CONSECUTIVE_DEGRADED_EDITIONS + 1);
+  assert.equal(degradationAlarms(stillBroken, previous)[0].crossed, false);
+
+  // A same-day rerun re-reads the snapshot the crossing edition wrote: the
+  // streak is inherited, so the rerun is not a crossing and can render.
+  assert.equal(degradationAlarms(build(day(10), previous), previous)[0].crossed, false);
 
   // A same-day rerun (`workflow_dispatch` rewrites today's edition) is not
   // another edition: the streak is inherited, not incremented.

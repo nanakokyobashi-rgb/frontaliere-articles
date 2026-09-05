@@ -189,9 +189,18 @@ function printPlan(brief) {
  * So the run fails. The snapshot is already on disk when this happens — the
  * streak keeps counting, and a `workflow_dispatch` rerun still renders the
  * edition from it once the alarm has been seen.
+ *
+ * The red is spent on the edition that CROSSES the threshold, and only that
+ * one. This script is the first step of `generate-daily-brief.yml`, so a
+ * non-zero exit code skips the generate/guard/commit/push steps that follow:
+ * a streak that stayed fatal at `>= threshold` would delete the bulletin —
+ * every day, not "one section shorter" — until somebody repaired the source,
+ * and the same rerun that is supposed to render the edition would re-enter
+ * through this same step and fail again. From the second alarming edition on,
+ * the `::error::` annotation still goes out and the run stays green.
  */
-export function reportDegradationAlarms(brief, { dryRun }) {
-  const alarms = degradationAlarms(brief);
+export function reportDegradationAlarms(brief, { dryRun, previous = null }) {
+  const alarms = degradationAlarms(brief, previous);
   if (alarms.length === 0) return;
   for (const a of alarms) {
     const line = `daily-brief: the ${a.block} block has been degraded for ${a.editions} consecutive editions — ${a.reason}`;
@@ -201,26 +210,35 @@ export function reportDegradationAlarms(brief, { dryRun }) {
     console.warn(dryRun ? `⚠️  ${line}` : `::error::${line}`);
   }
   if (dryRun) return;
-  console.error(`❌ ${alarms.length} block(s) degraded for ${MAX_CONSECUTIVE_DEGRADED_EDITIONS}+ editions in a row. That is an upstream shape/contract change, not an outage — the bulletin has been publishing without those sections and nothing was failing. Fix the source or the guard, then rerun.`);
+  const crossing = alarms.filter((a) => a.crossed);
+  if (crossing.length === 0) {
+    console.warn(`⚠️  ${alarms.length} block(s) still degraded past ${MAX_CONSECUTIVE_DEGRADED_EDITIONS} editions — already reported on the edition that crossed the threshold. The run stays green so today's bulletin is still generated and committed.`);
+    return;
+  }
+  console.error(`❌ ${crossing.length} block(s) degraded for ${MAX_CONSECUTIVE_DEGRADED_EDITIONS} editions in a row. That is an upstream shape/contract change, not an outage — the bulletin has been publishing without those sections and nothing was failing. Fix the source or the guard; the snapshot is written, so a rerun renders today's edition.`);
   process.exitCode = 1;
 }
 
 async function main() {
   const dryRun = process.env.DRY_RUN === '1' || process.env.DRY_RUN === 'true';
   const todayIso = process.env.TODAY_ISO || new Date().toISOString().slice(0, 10);
-  const brief = await collectDailyBrief({ todayIso });
+  // Read once and hand the same snapshot to both: it carries the streaks the
+  // brief counts forward AND the streaks the alarm compares against to tell
+  // the edition that crosses the threshold from the ones after it.
+  const previous = readPreviousSnapshot();
+  const brief = await collectDailyBrief({ todayIso, previous });
   printPlan(brief);
 
   if (dryRun) {
     console.log('DRY_RUN — no files written.');
-    reportDegradationAlarms(brief, { dryRun });
+    reportDegradationAlarms(brief, { dryRun, previous });
     return;
   }
   if (brief.counts.availableBlocks === 0) {
     // All four sources down: leave yesterday's snapshot in place. The article
     // generator refuses it via dateIso, the cron commits nothing, stays green.
     console.warn('⚠️  0/4 blocks available — NOT writing daily-brief.json (previous snapshot left untouched).');
-    reportDegradationAlarms(brief, { dryRun });
+    reportDegradationAlarms(brief, { dryRun, previous });
     return;
   }
   writeJsonAtomic(OUTPUT_PATH, brief);
@@ -228,7 +246,7 @@ async function main() {
   // After the write, never before: the alarm sets a non-zero exit code, and the
   // snapshot must still land so the streak advances and the edition remains
   // renderable from it.
-  reportDegradationAlarms(brief, { dryRun });
+  reportDegradationAlarms(brief, { dryRun, previous });
 }
 
 const invokedDirectly = (() => {

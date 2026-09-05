@@ -61,6 +61,36 @@ test('a block degraded past the threshold turns the run red', () => {
   assert.ok(lines.some((l) => l.includes('no history series')), 'the reason travels with the alarm');
 });
 
+test('the alarm is fatal only on the edition that crosses the threshold', () => {
+  // This script is the FIRST step of generate-daily-brief.yml: a non-zero exit
+  // code skips generation, guard, commit and push. A streak only grows, so a
+  // red that fired on every `>= threshold` edition would stop the bulletin
+  // from being published at all, every day, until a human fixed the source —
+  // the opposite of the per-block degradation this module guarantees. The
+  // annotation keeps going out; only the exit code is spent once.
+  const past = briefWithStreak(MAX_CONSECUTIVE_DEGRADED_EDITIONS + 2);
+  const previous = briefWithStreak(MAX_CONSECUTIVE_DEGRADED_EDITIONS + 1);
+  const { lines, exitCode } = capture(() => reportDegradationAlarms(past, { dryRun: false, previous }));
+  assert.equal(exitCode, undefined, 'an already-reported streak must not delete today\'s edition');
+  assert.ok(lines.some((l) => l.startsWith('::error::') && l.includes('jobs')), lines.join('\n'));
+
+  // The crossing edition itself: previous snapshot still under the threshold.
+  const crossing = capture(() => reportDegradationAlarms(
+    briefWithStreak(MAX_CONSECUTIVE_DEGRADED_EDITIONS),
+    { dryRun: false, previous: briefWithStreak(MAX_CONSECUTIVE_DEGRADED_EDITIONS - 1) },
+  ));
+  assert.equal(crossing.exitCode, 1, 'the edition that reaches the threshold is the red one');
+
+  // And the same-day rerun of that very edition — the `workflow_dispatch` path
+  // the alarm is supposed to leave renderable — reads back the snapshot the
+  // failing run wrote (streak inherited, not incremented) and stays green.
+  const rerun = capture(() => reportDegradationAlarms(
+    briefWithStreak(MAX_CONSECUTIVE_DEGRADED_EDITIONS),
+    { dryRun: false, previous: briefWithStreak(MAX_CONSECUTIVE_DEGRADED_EDITIONS) },
+  ));
+  assert.equal(rerun.exitCode, undefined, 'a rerun must be able to render the edition');
+});
+
 test('a source having a bad morning stays green', () => {
   for (const editions of [1, MAX_CONSECUTIVE_DEGRADED_EDITIONS - 1]) {
     const { lines, exitCode } = capture(() => reportDegradationAlarms(briefWithStreak(editions), { dryRun: false }));

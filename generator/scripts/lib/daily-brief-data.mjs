@@ -551,10 +551,9 @@ export function shapeJobs(stats, { nowMs = Date.now(), todayIso } = {}) {
  * edition) inherits the streak instead of adding to it: rerunning the job is
  * not another edition.
  */
-function degradedEditions(block, previousBlock, { sameDay }) {
+function degradedEditions(block, previousStreak, { sameDay }) {
   if (block.available) return 0;
-  const previous = Number.isFinite(previousBlock?.degradedEditions) ? previousBlock.degradedEditions : 0;
-  return sameDay ? Math.max(previous, 1) : previous + 1;
+  return sameDay ? Math.max(previousStreak, 1) : previousStreak + 1;
 }
 
 /**
@@ -572,11 +571,32 @@ function degradedEditions(block, previousBlock, { sameDay }) {
  * must stay a note in the log, and anything that survives three consecutive
  * runs is not an outage. The caller decides what "made to look at" means —
  * `refresh-daily-brief-data.mjs` fails the run.
+ *
+ * `crossed` is the edition on which the streak REACHES the threshold, read off
+ * the previous snapshot: it is the only one that may be made fatal. A streak
+ * only grows, so `>= threshold` is true every day from then on, and a caller
+ * that fails on it would take the whole edition down every morning until a
+ * human fixes the source — the exact opposite of the per-block degradation
+ * this module exists to guarantee. The alarm still travels on the later days;
+ * only its lethality is spent once. With no previous snapshot to compare (its
+ * first read, or an unreadable one) the alarm counts as crossing: losing it is
+ * worse than repeating it, and the next edition has a snapshot again.
  */
-export function degradationAlarms(brief) {
+export function degradationAlarms(brief, previous = null) {
   return Object.entries(brief?.blocks || {})
     .filter(([, b]) => !b?.available && Number(b?.degradedEditions) >= MAX_CONSECUTIVE_DEGRADED_EDITIONS)
-    .map(([block, b]) => ({ block, editions: b.degradedEditions, reason: b.reason }));
+    .map(([block, b]) => ({
+      block,
+      editions: b.degradedEditions,
+      reason: b.reason,
+      crossed: previousDegradedEditions(previous, block) < MAX_CONSECUTIVE_DEGRADED_EDITIONS,
+    }));
+}
+
+/** The streak the previous snapshot recorded for `block`; absent counts as 0. */
+function previousDegradedEditions(previous, block) {
+  const n = previous?.blocks?.[block]?.degradedEditions;
+  return Number.isFinite(n) ? n : 0;
 }
 
 /**
@@ -598,7 +618,7 @@ export function buildDailyBrief({ todayIso, nowMs = Date.now(), borderWaitDocs, 
     jobs: shapeJobs(jobsStats, { nowMs, todayIso }),
   };
   for (const [name, block] of Object.entries(blocks)) {
-    block.degradedEditions = degradedEditions(block, previous?.blocks?.[name], { sameDay });
+    block.degradedEditions = degradedEditions(block, previousDegradedEditions(previous, name), { sameDay });
   }
   const availableBlocks = Object.values(blocks).filter((b) => b.available).length;
   return {
