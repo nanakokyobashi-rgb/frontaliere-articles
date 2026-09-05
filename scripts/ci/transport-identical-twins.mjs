@@ -504,6 +504,31 @@ export const SET_DESCRIPTORS = new Set([
 ]);
 
 /**
+ * L'altro verso: un path che il fixture NOMINA è un accoppiamento vero — quello
+ * è codice che il fixture legge — tranne il manifest (issue #889).
+ *
+ * `SET_DESCRIPTORS` filtra i CITER, e lì i quattro descrittori si equivalgono:
+ * enumerano ogni path del set, quindi il loro match non dice niente sul
+ * fixture. Nel verso «chi cita il fixture» l'insieme NON è lo stesso, e
+ * riusarlo tale e quale rimetterebbe il falso silenzio di #853: un fixture che
+ * importa davvero `transport-identical-twins.mjs` o `loop-drift-check.mjs`
+ * dipende da quel codice, e copiarlo senza la sua metà è la classe «engine
+ * senza `host/`».
+ *
+ * Il manifest è l'unica eccezione perché non è un input che il trasporto possa
+ * rompere: è il LIBRO MASTRO del trasporto stesso, riscritto da `--apply` nella
+ * stessa passata che copia la voce (`baseline.site`/`baseline.corpus`). Un
+ * fixture che lo legge — `generator/tests/crawler-cross-repo-artifacts.test.mjs`
+ * verifica che gli artefatti del contratto abbiano il loro mapping — non è
+ * accoppiato al suo CONTENUTO di ieri. E poiché il manifest è `corpus-only` per
+ * costruzione («Questo file.»), contarlo come bloccante non era un rinvio: era
+ * un NO PERMANENTE sull'unico fixture `identical` che il canale poteva portare.
+ */
+export function namedIsCoupling(rel) {
+  return rel !== SET_MANIFEST_REL;
+}
+
+/**
  * Un file locale letto come TESTO, con lo stato esplicito.
  *
  * `null` non basta: «non esiste», «non è testo» e «non ho potuto leggerlo»
@@ -682,17 +707,20 @@ export function localCouplings(rel, modeOf) {
     // Specificatori relativi (`../../scripts/ci/close-recovered-failure-issues.mjs`) e path repo-relative
     // citati come stringa (`'scripts/ci/loop-sync-manifest.json'`). Solo quelli
     // che esistono davvero qui diventano un accoppiamento: il resto è prosa.
+    const cite = (relPath) => {
+      if (namedIsCoupling(relPath)) found.add(relPath);
+    };
     for (const m of ownText.matchAll(/\.{1,2}\/[\w./-]+/g)) {
       const abs = path.resolve(ROOT, dir, m[0]);
       if (abs.startsWith(ROOT + path.sep) && fs.existsSync(abs) && fs.statSync(abs).isFile()) {
-        found.add(path.relative(ROOT, abs).split(path.sep).join('/'));
+        cite(path.relative(ROOT, abs).split(path.sep).join('/'));
       }
     }
     for (const m of ownText.matchAll(/['"`]([\w.-]+(?:\/[\w.-]+)+)['"`]/g)) {
       const cand = m[1];
       if (cand.startsWith('.') && !cand.startsWith('.github')) continue;
       const abs = path.join(ROOT, cand);
-      if (abs.startsWith(ROOT + path.sep) && fs.existsSync(abs) && fs.statSync(abs).isFile()) found.add(cand);
+      if (abs.startsWith(ROOT + path.sep) && fs.existsSync(abs) && fs.statSync(abs).isFile()) cite(cand);
     }
   }
   found.delete(rel);
