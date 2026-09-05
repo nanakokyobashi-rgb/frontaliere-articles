@@ -1592,10 +1592,25 @@ describe('callLLM — il reset della striscia si conta per classe (#848 item 3)'
     assert.ok(await run(), 'la catena deve fallire');
     const line = flapLineOf(summaryOf());
     assert.ok(line, 'il riepilogo deve portare la riga dei flap');
-    assert.match(line, /resets github silent=1 resolved=0 success=0 \(1 discarded\)/, line);
+    assert.match(line, /resets github silent=1 resolved=0 success=0 escalated=0 \(1 discarded\)/, line);
     // La striscia ancora viva a fine run e' l'altra meta' del fatto: dice
     // quanto mancava alla soglia quando il reset l'ha buttata via.
     assert.match(line, /open \[github=2\/3\]/, line);
+  });
+
+  it('la striscia spesa dall\'escalation e\' contata, non cancellata', async () => {
+    // Prima della review di #945 l'escalation faceva `_resolverFlaps.delete()`
+    // a mano: la striscia spariva da ENTRAMBE le mappe, quindi una run con tre
+    // flap consecutivi e un provider bannato stampava la stessa identica riga
+    // di una run senza un solo flap — «misurata, zero» a fondo scala, che e'
+    // proprio l'ambiguita' che questa riga esiste per togliere.
+    process.env.AI_MODELS_FORCE_CHAIN = 'gpt-4o-mini,gpt-4.1-mini,gpt-4o,gpt-4.1';
+    globalThis.fetch = async () => { throw undiciFetchFailed('EAI_AGAIN'); };
+    assert.ok(await run(), 'la catena deve fallire');
+    const line = flapLineOf(summaryOf());
+    assert.ok(line, 'il riepilogo deve portare la riga dei flap');
+    assert.doesNotMatch(line, /none this run/, `l\'escalation non deve sparire: ${line}`);
+    assert.match(line, /escalated=[1-9]/, line);
   });
 
   it('una run senza reset stampa comunque la riga — e\' il denominatore', () => {

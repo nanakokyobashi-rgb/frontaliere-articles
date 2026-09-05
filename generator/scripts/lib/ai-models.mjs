@@ -4594,7 +4594,7 @@ function _formatResolverFlapLine(s) {
     .map(([p, n]) => `${p}=${n}/${RESOLVER_FLAP_ESCALATION}`)
     .join(', ');
   const resets = Object.entries(s.resolverFlapResets)
-    .map(([p, r]) => `${p} silent=${r.silent} resolved=${r.resolved} success=${r.success} (${r.streaksDiscarded} discarded)`)
+    .map(([p, r]) => `${p} silent=${r.silent} resolved=${r.resolved} success=${r.success} escalated=${r.escalated} (${r.streaksDiscarded} discarded)`)
     .join(' · ');
   if (!open && !resets) return '   resolver flaps: none this run';
   const parts = [];
@@ -5008,16 +5008,26 @@ export function classifyResolverResetEvidence(err) {
  */
 const _resolverFlapResets = new Map();
 
-const _freshResolverFlapResets = () => ({ success: 0, resolved: 0, silent: 0, streaksDiscarded: 0 });
+const _freshResolverFlapResets = () => ({ success: 0, resolved: 0, silent: 0, escalated: 0, streaksDiscarded: 0 });
 
 /**
- * L'UNICO punto in cui la striscia si chiude senza che l'escalation l'abbia
- * spesa (AGENTS.md #6): i due call site — il successo e il fallimento di altra
- * classe — devono contare con lo stesso metro, o il numero che #848 item 3
- * aspetta descriverebbe meta' degli eventi.
+ * L'UNICO punto in cui una striscia di flap si chiude (AGENTS.md #6): i tre
+ * call site — il successo, il fallimento di altra classe e l'escalation —
+ * devono contare con lo stesso metro, o il numero che #848 item 3 aspetta
+ * descriverebbe meta' degli eventi.
+ *
+ * `escalated` e' entrato qui dopo la review di #945. Prima l'escalation
+ * cancellava `_resolverFlaps` a mano e non passava di qua, quindi la striscia
+ * spesa spariva da ENTRAMBE le mappe: una run con tre flap consecutivi e un
+ * provider bannato stampava la stessa identica riga di una run senza un solo
+ * flap. L'harvest leggeva «misurata, zero» dove il fenomeno era arrivato a
+ * fondo scala — l'ambiguita' che la riga esiste per togliere.
+ *
+ * Il ramo last-resort (#813) NON passa di qua, ed e' corretto: li' la striscia
+ * non viene chiusa affatto, resta aperta e visibile in `open [...]`.
  *
  * @param {string} provider
- * @param {'success'|'resolved'|'silent'} evidence
+ * @param {'success'|'resolved'|'silent'|'escalated'} evidence
  */
 function _recordResolverFlapReset(provider, evidence) {
   const streak = _resolverFlaps.get(provider) || 0;
@@ -5032,7 +5042,9 @@ function _recordResolverFlapReset(provider, evidence) {
   // risponderebbe con «almeno una».
   const what = evidence === 'silent'
     ? 'un fallimento che non prova niente sul resolver'
-    : evidence === 'success' ? 'un successo' : 'un fallimento con risposta ricevuta';
+    : evidence === 'success' ? 'un successo'
+      : evidence === 'escalated' ? 'l\'escalation (ban + cooldown)'
+        : 'un fallimento con risposta ricevuta';
   console.warn(`🧮 [${provider}] striscia di flap del resolver (${streak}/${RESOLVER_FLAP_ESCALATION}) chiusa da ${what} (#848)`);
 }
 
@@ -7614,7 +7626,11 @@ export async function callLLM(messages, opts = {}) {
           // significava che, scaduto il cooldown, il PRIMO flap successivo
           // bannava di nuovo all'istante: il ciclo successivo non misurava
           // piu' tre inciampi, ne' misurava piu' niente.
-          _resolverFlaps.delete(provider);
+          // Passa dal recorder invece di cancellare a mano: la striscia spesa
+          // dall'escalation e' un evento che #848 item 3 deve contare come gli
+          // altri. Cancellandola qui spariva da entrambe le mappe e la run
+          // stampava «none this run» a fondo scala (review di #945).
+          _recordResolverFlapReset(provider, 'escalated');
           console.warn(`🚫 [${model}] ${flaps} consecutive resolver failures (${flapCode}) on ${provider} — no longer treating it as a hiccup`);
           // Stesso vocabolario della riga di skip dei fratelli, e per la
           // stessa ragione (vedi `_providerCooldownReason`): un flap escalato
