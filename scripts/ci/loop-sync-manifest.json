@@ -3227,6 +3227,17 @@
       }
     },
     {
+      "path": "scripts/ci/refund-fix-round.mjs",
+      "mode": "corpus-only-pending",
+      "reason": "Rimborsa il round di `pr-redcheck-fixer.yml` / `pr-redflag-fixer.yml` quando la run Claude e' morta su 429: il marker di round si posta PRIMA di invocare Claude (giusto per un crash, sbagliato per un 429, dove l'agente non e' mai partito) e al cap la PR prende `needs-human`, che qui e' un filtro di ESCLUSIONE da ogni coda automatica. Gemello lato PR di cio' che `check-quota-backoff.mjs` + il marker `rate-limited` gia' fanno lato issue («la issue non consuma un tentativo»). `corpus-only-pending` e non `corpus-only`: i due fixer esistono anche sul sito con lo stesso anti-loop e la stessa quota condivisa, quindi la stessa catena assorbente e' li' non chiusa — va portato, ma dal lato del sito.",
+      "trackingIssue": "https://github.com/nanakokyobashi-rgb/frontaliere-articles/issues/733",
+      "baseline": {
+        "site": null,
+        "corpus": "18cec097441b38b3",
+        "alignedAt": "2026-09-05"
+      }
+    },
+    {
       "path": "scripts/ci/reconcile-followups.mjs",
       "mode": "identical",
       "baseline": {
