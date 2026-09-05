@@ -319,6 +319,17 @@
       }
     },
     {
+      "path": "scripts/lib/parse-positive-num.mjs",
+      "mode": "corpus-only-pending",
+      "reason": "La lettura validata di un override numerico da env o argv, estratta qui da `scripts/ci/scan-failed-runs.mjs` (#871). Non e' `corpus-only`: il sito ha la STESSA classe di difetto e nessun equivalente. Misurato il 2026-09-05 su `main` del sito: 449 occorrenze di `Number(process.env.X || N)` in 308 file sotto `scripts/**`, e zero risultati per `parsePositiveNum|parsePositiveInt|readPositiveEnv|envPositive`. Il gemello dovrebbe scendere di la', quindi la voce resta `pending` finche' non atterra — poi si promuove a `identical` a mano e si toglie `trackingIssue`.",
+      "trackingIssue": "https://github.com/nanakokyobashi-rgb/frontaliere-articles/issues/884",
+      "baseline": {
+        "site": null,
+        "corpus": "4342dbe439942728",
+        "alignedAt": "2026-09-05"
+      }
+    },
+    {
       "path": "scripts/lib/pr-body-closes-check.mjs",
       "mode": "identical",
       "baseline": {
