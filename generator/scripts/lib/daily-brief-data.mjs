@@ -289,7 +289,16 @@ export function shapeExchange(doc, { todayIso } = {}) {
 export function jobsCorpusFrozenReason(stats, { todayIso } = {}) {
   const todayMs = isoDayMs(todayIso);
   if (!Number.isFinite(todayMs)) return null;
-  const history = Array.isArray(stats?.history) ? stats.history : [];
+  // An absent (or non-array) series is not "too little signal to judge": it is
+  // NO corpus clock at all, and `generatedAt` — the only clock left — stays
+  // fresh across a frozen corpus by construction. Degrading `history: []` while
+  // letting `history` missing through would make the whole guard optional at
+  // the producer's discretion, which is the fail-open shape this module exists
+  // to close.
+  if (!Array.isArray(stats?.history)) {
+    return 'jobs-stats.json carries no history series — the corpus-advance guard has no clock to judge the corpus with';
+  }
+  const history = stats.history;
 
   // A row whose date is not canonical cannot be ordered against the others.
   // Dropping it would empty the window and return "corpus fine" — the exact
@@ -379,9 +388,13 @@ export function shapeJobs(stats, { nowMs = Date.now(), todayIso } = {}) {
   // The morning cron runs before the day has accumulated: "yesterday" from the
   // history series is the honest daily number, todayAdded is the live partial.
   let yesterdayAdded = null;
-  if (todayIso && Array.isArray(stats.history)) {
+  if (todayIso) {
+    // Not gated on the series being an array: with no series there is no
+    // yesterday figure either, and skipping the rule here would republish the
+    // same fail-open the guard above just closed, one level down.
+    const history = Array.isArray(stats.history) ? stats.history : [];
     const yesterdayIso = new Date(isoDayMs(todayIso) - 24 * HOUR_MS).toISOString().slice(0, 10);
-    const entry = stats.history.find((h) => h?.date === yesterdayIso);
+    const entry = history.find((h) => h?.date === yesterdayIso);
     const added = toFiniteNumber(entry?.added);
     if (Number.isFinite(added)) yesterdayAdded = added;
     // The headline of the section IS this number. If the aggregator appends
