@@ -1,5 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/attualita/1943434/km-federale-consiglio-citta-zone-interviene": "zone-30-kmh-intervento-consiglio-federale",
   "https://www.swissinfo.ch/ita/tre-banche-cantonali-%28be%2c-sg%2c-bl%29%2c-tre-volte-profitti-in-crescita/91885072": "tre-banche-cantonali-be-sg-bl-profitti-in-crescita",
   "https://www.swissinfo.ch/ita/insolvenze-ai-massimi-da-30-anni/91884439": "insolvenze-ai-massimi-da-30-anni",
   "https://www.swissinfo.ch/ita/cf%3a-no-all%27iniziativa-sulla-piazza-finanziaria/91884875": "consiglio-federale-no-iniziativa-finanziaria",
@@ -1837,6 +1836,11 @@
   "https://www.rsi.ch/s/4061343": {
     "articleId": "falso-allarme-goldach",
     "ts": "2026-09-05T14:27:14.940Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/cronaca/1948224/amante-della-pedopornografia-ma-faceva-l-educatore-in-un-asilo-nido": {
+    "articleId": "asilo-nido-controlli-minori",
+    "ts": "2026-09-05T16:05:02.364Z",
     "keyForm": 2
   }
 }
