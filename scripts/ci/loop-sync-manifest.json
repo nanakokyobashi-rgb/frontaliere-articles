@@ -1466,7 +1466,8 @@
     {
       "path": "generator/scripts/lib/article-free-mt.mjs",
       "sitePath": "scripts/lib/article-free-mt.mjs",
-      "mode": "identical",
+      "mode": "adapted",
+      "reason": "NON e' piu' `identical` dal 2026-09-05 (#892): dopo #878 questo file importa `hasUsableTranslatedText`/`hasUsableContentText` da `generator/scripts/lib/body2-payload-verdict.mjs`, che e' `corpus-only` e sul sito NON esiste (404 su `scripts/lib/body2-payload-verdict.mjs`). Il mirror non e' \"da fare\": e' impossibile — copiare il file verbatim porterebbe sul sito un `import` che non risolve, rompendo con `ERR_MODULE_NOT_FOUND` i suoi due consumer reali la', `scripts/repair-object-object-bodies.mjs` e `tests/scripts/article-free-mt.test.ts`. Misura del 2026-09-05 su `origin` dei due lati: 190 righe qui, 159 sul sito, 36 solo-corpus e 5 SOLO-SITO — quindi nemmeno una copia nell'altro verso e' innocua. La divergenza e' la fix di #831/#868 item 4 (il marker di fallimento `Null`/`null` letto come prosa e pubblicato): il sito ne resta senza, e se `repair-object-object-bodies.mjs` tratta output di motori MT gratuiti ha la stessa classe di bug, da verificare separatamente sul suo repo. Il ritorno a `identical` passa da una delle due uscite che spostano il confine fra i repo — portare `body2-payload-verdict.mjs` sul sito, o estrarre i due predicati in un modulo terzo dependency-free `identical` da entrambi i lati — e nessuna delle due si decide qui. La baseline NON viene rigenerata: con la baseline intatta il drift check continua a dire che i due lati sono divergenti invece di dichiarare allineato uno stato che non lo e'.",
       "baseline": {
         "site": "0f3dd9cefcb52b17",
         "corpus": "0f3dd9cefcb52b17",

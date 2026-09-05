@@ -519,12 +519,118 @@ async function siteBlobIndex() {
 }
 
 /**
+ * I due `mode` che dichiarano il file ASSENTE dal sito. `not-ported` e'
+ * l'opposto (il sito ce l'ha, qui deliberatamente no) e non blocca niente.
+ */
+const ABSENT_ON_SITE_MODES = new Set(['corpus-only', 'corpus-only-pending']);
+
+/**
+ * Import RELATIVI di un modulo, risolti a path repo-relative e filtrati su
+ * cio' che il manifest conosce. PURA: prende il testo, non legge il disco.
+ *
+ * La regex e' quella di `loop-scripts-closure.test.mjs`, con `export ... from`
+ * in piu': solo import a inizio riga (una riga di PROSA che cita un import in
+ * un commento non e' una dipendenza), e clausola `[^'";]*?` invece di `.*?`
+ * perche' senza `\n` nella classe negata un import BRACED SU PIU' RIGHE viene
+ * visto — e' la forma con cui quel guard era cieco su 6 specificatori reali.
+ *
+ * @param {string} rel     path del file importatore, relativo alla radice
+ * @param {string} source  testo del file
+ * @param {(candidate: string) => boolean} known  candidato -> il manifest lo conosce
+ * @returns {string[]} path repo-relative dei moduli importati e riconosciuti
+ */
+function resolvedLocalImports(rel, source, known) {
+  const re = /^[ \t]*(?:import|export)\s+(?:[^'";]*?\sfrom\s+)?(['"])([^'"]+)\1/gm;
+  const dir = path.posix.dirname(rel);
+  const out = [];
+  let m;
+  while ((m = re.exec(source))) {
+    const spec = m[2];
+    if (!spec.startsWith('.')) continue; // i pacchetti non hanno un gemello da dichiarare
+    const base = path.posix.normalize(path.posix.join(dir, spec));
+    // Gli specificatori del ciclo portano l'estensione, ma engine/ e host/
+    // usano la forma senza: si prova la stessa risoluzione di Node.
+    const hit = [base, `${base}.mjs`, `${base}.js`, `${base}/index.mjs`, `${base}/index.js`].find(known);
+    if (hit && !out.includes(hit)) out.push(hit);
+  }
+  return out;
+}
+
+/**
+ * La contraddizione che il manifest puo' dichiarare senza accorgersene: una
+ * voce `identical` che importa un modulo dichiarato ASSENTE dal sito (issue
+ * #892).
+ *
+ * Le due dichiarazioni sono coerenti una per una e si contraddicono insieme.
+ * `identical` vuol dire "il file la' e' lo stesso, quindi e' copiabile nei due
+ * versi"; ma copiarlo porterebbe sul sito un `import` di un modulo che li' non
+ * esiste, cioe' un `ERR_MODULE_NOT_FOUND` a carico dei suoi consumer. Il
+ * mirror non e' "da fare": e' IMPOSSIBILE finche' la dipendenza resta
+ * corpus-only.
+ *
+ * Senza questo verdetto il file compare come `corpus-ahead` — "modificato qui,
+ * fermo sul sito, candidato a risalire" — che e' la riga esatta che invita
+ * alla riparazione impossibile. E' successo su
+ * `generator/scripts/lib/article-free-mt.mjs` dopo #878: la fix di #831/#868
+ * gli ha dato un import di `body2-payload-verdict.mjs`, `corpus-only` e
+ * assente sul sito (404).
+ *
+ * PURA come `ghostVerdict` e `strandedVerdict`: prende i fatti gia' raccolti.
+ *
+ * @param {object} a
+ * @param {string} a.mode  il `mode` della voce di manifest
+ * @param {Array<{path: string, mode: string|undefined}>} [a.deps]  dipendenze
+ *   locali gia' risolte. Vuoto = nessun verdetto (fail-open: un file
+ *   illeggibile o un import che non risolve non deve produrre un rosso).
+ * @returns {{blocked: boolean, deps: Array<{path: string, mode: string}>}}
+ */
+function unmirrorableDepsVerdict({ mode, deps = [] }) {
+  // Solo `identical`. `adapted` DICHIARA gia' di differire, e una dipendenza
+  // corpus-only e' uno dei modi legittimi di differire: segnalarla sarebbe
+  // rumore su 27 voci che stanno bene come sono (misura del 2026-09-05).
+  if (mode !== 'identical') return { blocked: false, deps: [] };
+  const blocked = (deps || [])
+    .filter((d) => d && ABSENT_ON_SITE_MODES.has(d.mode))
+    .sort((a, b) => a.path.localeCompare(b.path));
+  return { blocked: blocked.length > 0, deps: blocked };
+}
+
+/** Indice `path -> mode` del manifest, letto una volta sola. */
+let MODE_INDEX = null;
+function modeIndex() {
+  if (!MODE_INDEX) MODE_INDEX = new Map(readManifest().files.map((f) => [f.path, f.mode]));
+  return MODE_INDEX;
+}
+
+/**
+ * Le dipendenze dichiarate di UNA voce, lette dal disco. Sta qui e non nel
+ * chiamante perche' `classify()` ha DUE chiamanti — `main()` e
+ * `transportVerdict()` di `transport-identical-twins.mjs`, che passa tre
+ * argomenti — e un default calcolato dal chiamante avrebbe coperto solo il
+ * primo: il trasporto avrebbe continuato a copiare sopra il file la versione
+ * del sito, che e' la direzione che cancella il lavoro.
+ *
+ * Fail-open su ogni errore di lettura: `unmirrorableDepsVerdict` con `deps`
+ * vuoto non emette nessun verdetto.
+ */
+function manifestDepsOf(entry) {
+  if (!entry || entry.mode !== 'identical' || !entry.path) return [];
+  try {
+    const source = fs.readFileSync(path.join(ROOT, entry.path), 'utf8');
+    const index = modeIndex();
+    return resolvedLocalImports(entry.path, source, (c) => index.has(c)).map((p) => ({ path: p, mode: index.get(p) }));
+  } catch {
+    return [];
+  }
+}
+
+/**
  * Classifica UN file. Ritorna {state, actionable, headline, detail}.
  *
  * `actionable` distingue ciò che richiede una decisione da ciò che è solo
  * cronaca: un report che segnala tutto non viene letto.
  */
-function classify(entry, now, base) {
+function classify(entry, now, base, deps = manifestDepsOf(entry)) {
   const { path: rel, mode, reason } = entry;
 
   if (mode === 'corpus-only') {
@@ -592,6 +698,27 @@ function classify(entry, now, base) {
       actionable: true,
       headline: 'dichiarato nel manifest ma assente qui',
       detail: 'Il manifest lo elenca come portato, ma il file non esiste. Portalo, o marcalo `not-ported` con una ragione.',
+    };
+  }
+
+  // Issue #892: prima di dire CHI si e' mosso, si dice se il mirror e'
+  // possibile. Una voce `identical` che importa un modulo assente dal sito e'
+  // una contraddizione del manifest, e vale a prescindere dagli hash: il
+  // verdetto sul movimento (`corpus-ahead`, "candidato a risalire al sito")
+  // manderebbe a fare una copia che sul sito non si carica.
+  const unmirrorable = unmirrorableDepsVerdict({ mode, deps });
+  if (unmirrorable.blocked) {
+    const names = unmirrorable.deps.map((d) => `\`${d.path}\` (${d.mode})`).join(', ');
+    return {
+      state: 'identical-unmirrorable',
+      actionable: true,
+      headline: 'marcato `identical`, ma importa un modulo che il sito non ha',
+      detail:
+        `Import verso ${names}: copiare questo file sul sito ci porterebbe un \`import\` che li' non risolve, ` +
+        "e romperebbe i suoi consumer con un `ERR_MODULE_NOT_FOUND`. Il mirror non e' da fare: e' impossibile " +
+        'finche\' la dipendenza resta assente. Tre uscite: portare anche la dipendenza sul sito e promuoverla, ' +
+        'riclassificare QUESTA voce `adapted` con la `reason` che nomina la dipendenza, oppure estrarre la parte ' +
+        'condivisa in un modulo terzo `identical` su entrambi i lati.',
     };
   }
 
@@ -856,7 +983,7 @@ async function main() {
       console.log('Niente che richieda una decisione: i due cicli sono allineati, o divergono solo dove dichiarato.');
     } else {
       // Ordine per urgenza decisionale, non alfabetico.
-      const ORDER = ['ghost-baseline', 'corpus-only-twin', 'stranded-twin', 'undeclared-drift', 'both-moved', 'both-moved-converged', 'site-ahead', 'corpus-only-pending-landed', 'missing-here', 'removed-on-site', 'corpus-ahead', 'corpus-only-pending'];
+      const ORDER = ['ghost-baseline', 'corpus-only-twin', 'identical-unmirrorable', 'stranded-twin', 'undeclared-drift', 'both-moved', 'both-moved-converged', 'site-ahead', 'corpus-only-pending-landed', 'missing-here', 'removed-on-site', 'corpus-ahead', 'corpus-only-pending'];
       actionable.sort((a, b) => ORDER.indexOf(a.state) - ORDER.indexOf(b.state));
       for (const r of actionable) {
         console.log(`  [${r.state}] ${r.path}`);
@@ -886,6 +1013,7 @@ async function main() {
       section('ghost-baseline', '💀 Baseline fantasma — mai esistita nella storia esaminata'),
       section('stranded-twin', `🚨 Gemello \`identical\` fermo indietro da oltre ${STRANDED_AFTER_DAYS} giorni — nessun trasporto lo porta`),
       section('corpus-only-twin', '🔴 Dichiarato `corpus-only`, ma il gemello esiste identico sul sito'),
+      section('identical-unmirrorable', '🔴 Dichiarato `identical`, ma importa un modulo che il sito non ha'),
       section('undeclared-drift', '🔴 Divergenza non dichiarata'),
       section('both-moved', '🔴 Modificato su entrambi i lati'),
       section('both-moved-converged', '🟢 Modificato su entrambi i lati, ma gia\' convergente — solo da ri-baselinare'),
@@ -940,4 +1068,4 @@ if (process.argv[1] && process.argv[1].endsWith('loop-drift-check.mjs')) {
 // `siteFile` e' esportata per `transport-identical-twins.mjs` (issue #331): il
 // trasporto deve leggere il sito con la STESSA sorgente di URL, ref e token del
 // checker, altrimenti i due potrebbero guardare due `main` diversi.
-export { classify, ghostVerdict, strandedVerdict, corpusOnlyTwinVerdict, gitBlobSha, scalarFingerprintVerdict, siteFile };
+export { classify, ghostVerdict, strandedVerdict, corpusOnlyTwinVerdict, unmirrorableDepsVerdict, resolvedLocalImports, gitBlobSha, scalarFingerprintVerdict, siteFile };
