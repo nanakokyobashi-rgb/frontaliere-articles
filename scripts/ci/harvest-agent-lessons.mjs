@@ -270,10 +270,30 @@ export function isGenuineSiblingClassViolation(text) {
 // il difetto. La clausola si chiude al primo confine di frase (`.`/`;`/`—`/a
 // capo), cosi' non mangia il resto della riga.
 const IMPACT_VERB = String.raw`impatt\w*|impact\b|ricadut\w*|tocca\w*|toccano|toccat\w*|toccare|touch\w*|raggiung\w*|reach\w*|coinvolg\w*|affect\w*`;
+// Il corpo di una clausola si chiude al primo confine di frase, ma un punto e'
+// confine SOLO se seguito da spazio o da fine riga: dentro un code span
+// (`articles.json`, `create-article.mjs`, `publish-api.yml`) non lo e'. Senza
+// questa distinzione la ricognizione negata resta mezza in piedi appena nomina un
+// file, cioe' nel caso DOMINANTE su questo repo, dove l'elenco delle cose non
+// toccate e' fatto di nomi di file: «nessun impatto su `articles.json`, sulle
+// sitemap o sui feed» si troncava a «nessun impatto su `articles» e lasciava
+// scansionabile «.json`, sulle sitemap o sui feed» — bucket `canonical-sitemap`.
+const CLAUSE_BODY = String.raw`(?:[^.;—\n]|\.(?!\s|$))`;
+// (C) La negazione E' il difetto quando la riga afferma uno SWEEP incompleto: «lo
+//     stesso anti-pattern in `cf-purge-cache.mjs` non e' toccato». E' la
+//     formulazione che REVIEW.md prescrive per un finding di classe, ed e' anche
+//     il tell `non toccat` della TAXONOMY `sibling-class-fix`, che collide per
+//     costruzione con `toccat\w*` di IMPACT_VERB. Su una riga cosi' lo strip non
+//     deve girare, altrimenti il bucket process piu' canonico perde la sua entrata
+//     piu' tipica: misurato sulle ultime 114 PR mergiate, 6 righe su 50 con
+//     «negazione + participio» sono findings di sweep veri (#880 e #822 su tutte).
+//     I tell sono quelli della TAXONOMY meno la negazione, cosi' le due
+//     definizioni di «riga di sweep» non possono divergere.
+const SWEEP_ASSERTION_RE = /stesso anti-?pattern|file gemello|stesso costrutto|sibling|class-complete|ramo (?:equivalente|gemello)/iu;
 // (A) negazione PRIMA del verbo: «nessun impatto su …», «nulla tocca …»,
 //     «nessun articolo nuovo raggiunge …», «no impact on …».
 const NEGATED_IMPACT_CLAUSE_RE =
-  new RegExp(String.raw`\b(?:nessun\w*|nulla|niente|zero|senza|non|no)\b(?:\s+\S+){0,3}?\s+(?:${IMPACT_VERB})[^.;—\n]*`, 'giu');
+  new RegExp(String.raw`\b(?:nessun\w*|nulla|niente|zero|senza|non|not|no)\b(?:\s+\S+){0,3}?\s+(?:${IMPACT_VERB})${CLAUSE_BODY}*`, 'giu');
 // (B) negazione DOPO il verbo, in forma contrastiva: «il ramo tocca l'automazione
 //     delle issue di CI, non `dist/api/`, le sitemap, i feed o gli slug». Qui il
 //     vocabolario del bucket sta nella coda negata, quindi si toglie SOLO quella
@@ -282,9 +302,11 @@ const NEGATED_IMPACT_CLAUSE_RE =
 //     contrastivita' sono obbligatorie: sono cio' che distingue questa coda da un
 //     «non» qualsiasi piu' avanti nella frase.
 const CONTRASTIVE_NEGATED_TAIL_RE =
-  new RegExp(String.raw`(?<=\b(?:${IMPACT_VERB})\b[^.;—\n]{0,120}),\s*(?:e\s+|ma\s+)?non\b[^.;—\n]*`, 'giu');
+  new RegExp(String.raw`(?<=\b(?:${IMPACT_VERB})\b${CLAUSE_BODY}{0,120}),\s*(?:e\s+|ma\s+)?(?:non|not)\b${CLAUSE_BODY}*`, 'giu');
 export function stripNegatedImpactClauses(text) {
-  return String(text ?? '')
+  const s = String(text ?? '');
+  if (SWEEP_ASSERTION_RE.test(s)) return s;
+  return s
     .replace(NEGATED_IMPACT_CLAUSE_RE, ' ')
     .replace(CONTRASTIVE_NEGATED_TAIL_RE, ' ');
 }

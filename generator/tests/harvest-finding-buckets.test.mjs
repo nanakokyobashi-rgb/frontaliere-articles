@@ -102,3 +102,56 @@ test('end-to-end: sei PR con la sola ricognizione negata non aprono un bucket ca
   const { counts } = tallyFindings(prs);
   assert.equal(counts['canonical-sitemap'] ?? 0, 0, `bucket ${JSON.stringify(counts)}`);
 });
+
+// --- Round 2: le tre imprecisioni della regex misurate dalla review di #909 ---
+// Tutte e tre riproducibili importando il modulo: il primo confine di frase era
+// un punto NUDO, quindi bastava che la ricognizione nominasse un file perche' la
+// clausola si troncasse a meta' e il resto tornasse scansionabile. Su questo repo
+// la ricognizione nomina quasi sempre un file, quindi era il caso dominante.
+
+test('il punto dentro un code span non e\' confine di frase: la ricognizione sparisce intera', () => {
+  // Prima: lo strip si fermava su `articles` e lasciava «.json`, sulle sitemap o
+  // sui feed» → `canonical-sitemap`. Stessa forma con qualunque estensione.
+  for (const file of ['articles.json', 'meta-it.json', 'publish-api.yml', 'build-rss.mjs']) {
+    const line = `🟡 Nit: nessun impatto su \`${file}\`, sulle sitemap o sui feed.`;
+    assert.doesNotMatch(stripNegatedImpactClauses(line), /sitemap/, `residuo su ${file}`);
+    assert.notEqual(bucketFinding(line), 'canonical-sitemap', `bucket su ${file}`);
+  }
+});
+
+test('il punto SEGUITO da spazio resta confine: la frase dopo la ricognizione e\' ancora scansionabile', () => {
+  const line = '🔴 Important: nessun impatto su `manifest.json` o sulle sitemap. Il JSON-LD emette `baseSalary` senza valuta.';
+  assert.match(stripNegatedImpactClauses(line), /baseSalary/);
+  assert.equal(bucketFinding(line), 'structured-data');
+});
+
+test('la coda contrastiva sopravvive a un punto nel nome del file negato', () => {
+  // Prima: il punto di `.mjs` spezzava il lookbehind e la coda non veniva tolta
+  // affatto, quindi `slugs.json`/sitemap/feed restavano a fare punteggio.
+  const line = '🟡 Nit: il fix tocca `create-article.mjs`, non `slugs.json`, le sitemap o i feed.';
+  const stripped = stripNegatedImpactClauses(line);
+  assert.match(stripped, /create-article\.mjs/);
+  assert.doesNotMatch(stripped, /le sitemap o i feed/);
+  assert.notEqual(bucketFinding(line), 'canonical-sitemap');
+});
+
+test('la negazione inglese `not` conta quanto `no impact on`', () => {
+  // `IMPACT_VERB` portava gia' touch/reach/affect, ma l'elenco delle negazioni
+  // aveva solo `no`: la forma piu' comune in inglese («does not touch») passava.
+  assert.notEqual(bucketFinding('🟡 Nit: this refactor does not touch `dist/api/`, sitemaps or feeds.'), 'canonical-sitemap');
+  assert.notEqual(bucketFinding('🟡 Nit: the change does not affect slugs, sitemaps or canonical URLs.'), 'canonical-sitemap');
+  assert.notEqual(bucketFinding('🟡 Nit: no impact on `dist/api/`, sitemaps or feeds.'), 'canonical-sitemap');
+});
+
+test('lo sweep incompleto NON e\' una ricognizione: la negazione li\' e\' il difetto', () => {
+  // `non toccat` e' insieme il tell della TAXONOMY `sibling-class-fix` e una
+  // negazione + participio di `IMPACT_VERB`: senza il guard lo strip mangiava la
+  // forma che REVIEW.md prescrive per un finding di classe. Riga verbatim da #880.
+  const verbatim = '`scripts/cf-purge-cache.mjs`:L76: 🟡 Nit: stesso anti-pattern che la PR chiude altrove, non toccato — `Number(process.env.CF_PURGE_SETTLE_MS) || 20_000` copre `NaN`.';
+  assert.equal(stripNegatedImpactClauses(verbatim), verbatim, 'la riga di sweep non va toccata');
+  assert.equal(bucketFinding(verbatim), 'sibling-class-fix');
+  // e la forma senza il tell letterale della taxonomy resta almeno nella rete fingerprint
+  const equivalente = '🔴 Important: il ramo equivalente in `build-rss.mjs` non e\' toccato dalla PR.';
+  assert.equal(stripNegatedImpactClauses(equivalente), equivalente);
+  assert.ok(bucketFinding(equivalente), 'non deve sparire nel nulla');
+});
