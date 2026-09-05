@@ -218,6 +218,10 @@ export function auditExhaustion(events, nowMs) {
   return findings;
 }
 
+/** I due separatori con cui `callLLM` compone il messaggio aggregato. */
+const ERRORS_SEPARATOR = ' | ';
+const CHAIN_SEPARATOR = ' → ';
+
 /**
  * ── IL MESSAGGIO AGGREGATO, NON LE RIGHE DI `markModelExhausted` (#854) ─────
  *
@@ -241,10 +245,11 @@ export function auditExhaustion(events, nowMs) {
  */
 export function parseAggregateExhaustion(text) {
   const out = [];
-  const re = /All AI models failed\. Chain: \[[^\]]*\]\. Errors: (.*)$/gm;
+  const re = /All AI models failed\. Chain: \[([^\]]*)\]\. Errors: (.*)$/gm;
   let m;
   while ((m = re.exec(typeof text === 'string' ? text : '')) !== null) {
-    const parts = m[1].split(' | ');
+    const chain = m[1].split(CHAIN_SEPARATOR).map((s) => s.trim()).filter(Boolean);
+    const parts = splitErrorEntries(m[2], chain);
     const budget = parts.find((p) => p.startsWith('Prompt budget:'));
     const capMatch = budget && budget.match(/Prompt budget:\s*(\d+) model/);
     out.push({
@@ -253,6 +258,50 @@ export function parseAggregateExhaustion(text) {
     });
   }
   return out;
+}
+
+/**
+ * ── PERCHE' LO SPLIT NON PUO' ESSERE UNO `split(' | ')` ─────────────────────
+ *
+ * `callLLM` unisce `errors` con ` | `, ma una delle voci e' testo di provider
+ * ripassato tale e quale (`${model}: ${msg.slice(0, 200)}`, ai-models.mjs). Un
+ * messaggio che contenga ` | ` si spezza quindi in due voci e gonfia sia
+ * `total` sia i secchi di `classifyExhaustionCause` — cioe' proprio i numeri su
+ * cui il verdetto lordo/netto viene calibrato. Non e' un difetto di produzione
+ * (il messaggio resta leggibile), ma un conteggio gonfio dentro la MISURA e'
+ * indistinguibile dal dato vero.
+ *
+ * Il separatore non e' recuperabile — non esiste una sequenza che il testo di
+ * un provider non possa contenere. Cio' che invece e' strutturato, e viaggia
+ * nella STESSA riga, e' la catena: `Chain: [m1 → m2 → ...]`. Ogni voce di
+ * `errors` comincia per costruzione con `<model>: `, e quel `<model>` e' uno
+ * dei modelli della catena (tutte le `errors.push` di `callLLM` hanno quel
+ * prefisso). Quindi un frammento che NON comincia con il prefisso di un modello
+ * della catena non e' una voce: e' la coda della voce precedente, spezzata da
+ * un ` | ` interno, e va ricucita.
+ *
+ * Se la catena non e' leggibile (gruppo vuoto) si degrada allo split nudo:
+ * senza ancore, ricucire tutto in una voce sola sarebbe un errore piu' grande
+ * di quello che si vuole evitare.
+ *
+ * Pura → testabile.
+ *
+ * @param {string} payload il testo dopo `Errors: `
+ * @param {string[]} chainModels i modelli letti da `Chain: [...]`
+ * @returns {string[]} le voci di `errors`, piu' l'eventuale coda `Prompt budget:`
+ */
+export function splitErrorEntries(payload, chainModels) {
+  const fragments = String(payload == null ? '' : payload).split(ERRORS_SEPARATOR);
+  const models = Array.isArray(chainModels) ? chainModels.filter(Boolean) : [];
+  if (!models.length) return fragments;
+  const startsEntry = (f) => f.startsWith('Prompt budget:')
+    || models.some((model) => f.startsWith(`${model}: `));
+  const entries = [];
+  for (const f of fragments) {
+    if (entries.length && !startsEntry(f)) entries[entries.length - 1] += ERRORS_SEPARATOR + f;
+    else entries.push(f);
+  }
+  return entries;
 }
 
 /**
