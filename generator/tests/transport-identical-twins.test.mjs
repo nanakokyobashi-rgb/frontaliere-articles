@@ -48,6 +48,8 @@ import {
   parseRatio,
   permanentBlock,
   realignFromCommitted,
+  couplingScanRoot,
+  unreadableCouplings,
   transportVerdict,
   unsafeTarget,
 } from '../../scripts/ci/transport-identical-twins.mjs';
@@ -220,6 +222,96 @@ test("nell'albero di oggi il golden del contratto NON è trasportabile", () => {
   const entry = manifest.files.find((e) => e.path === rel);
   const v = transportVerdict(entry, { site: 'bbbb', corpus: entry.baseline.corpus }, entry.baseline, { couplings });
   assert.equal(v.transport, false);
+});
+
+// ---------------------------------------------------------------------------
+// «Chiuso» dichiarato senza aver guardato (issue #853, follow-up di #819 Item 6)
+//
+// Due modi in cui `localCouplings()` diceva «nessun accoppiamento» senza avere
+// quella risposta: la scansione ferma alla directory del fixture (un consumer
+// in una directory sorella non produceva match) e `localText()` che tornava
+// `null` sopra il tetto di lettura e su OGNI errore di I/O, in modo
+// indistinguibile da «non lo cita». Il risultato è lo stesso in entrambi i
+// casi: una metà copiata da sola, cioè la PR di trasporto rossa che spegne il
+// canale.
+// ---------------------------------------------------------------------------
+
+test('il sottoalbero di scansione è il pacchetto, non la directory del fixture', () => {
+  assert.equal(couplingScanRoot('host/tests/shell-contract-functions.golden.json'), 'host');
+  assert.equal(couplingScanRoot('generator/tests/crawler-cross-repo-artifacts.test.mjs'), 'generator');
+  assert.equal(couplingScanRoot('scripts/ci/x.golden.json'), 'scripts');
+});
+
+test('un accoppiamento non letto blocca, e con la ragione GIUSTA', () => {
+  const blind = [{ path: 'host/tests/huge.json', mode: 'illeggibile', unreadable: '9000000 byte, oltre il tetto di lettura' }];
+  assert.deepEqual(unreadableCouplings(blind), [{ path: 'host/tests/huge.json', reason: '9000000 byte, oltre il tetto di lettura' }]);
+  // Bloccante anche per la via generica: `mode` non è `identical`.
+  assert.deepEqual(couplingBlockers(blind), ['host/tests/huge.json']);
+
+  const reason = permanentBlock(twin({ path: 'host/tests/x.golden.json' }), { couplings: blind });
+  assert.ok(reason, 'un fixture con un accoppiamento cieco non è copiabile');
+  assert.match(reason, /non leggibili/, 'la ragione dice che il rilevamento è cieco, non che esiste una dipendenza non `identical`');
+  assert.ok(!/accoppiato a 1 path/.test(reason), 'la ragione generica manderebbe a cercare una dipendenza che non si sa se esiste');
+});
+
+test('il buio si legge PRIMA degli accoppiamenti noti: la ragione non si perde', () => {
+  const reason = permanentBlock(twin({ path: 'host/tests/x.golden.json' }), {
+    couplings: [
+      { path: 'host/x.test.mjs', mode: 'corpus-only' },
+      { path: 'host/tests/huge.json', mode: 'illeggibile', unreadable: 'lettura fallita (EACCES)' },
+    ],
+  });
+  assert.match(reason, /non leggibili/);
+});
+
+test('un accoppiamento leggibile e `identical` non è cieco', () => {
+  assert.deepEqual(unreadableCouplings([{ path: 'host/x.ts', mode: 'identical' }]), []);
+  assert.equal(permanentBlock(twin({ path: 'host/tests/x.golden.json' }), { couplings: [{ path: 'host/x.ts', mode: 'identical' }] }), null);
+});
+
+test('sul repo reale: un citer in una directory SORELLA viene visto, un file non letto blocca', () => {
+  const manifest = JSON.parse(fs.readFileSync(path.join(ROOT, 'scripts/ci/loop-sync-manifest.json'), 'utf8'));
+  const modeOf = new Map(manifest.files.map((e) => [e.path, e.mode]));
+  const rel = 'host/tests/shell-contract-functions.golden.json';
+  const base = rel.split('/').pop();
+  // Fuori da `host/tests/`, cioè invisibile alla scansione della sola directory.
+  const sibling = 'host/seo/issue-853-sibling-citer.tmp.mjs';
+  const oversize = 'host/tests/issue-853-oversize.tmp.json';
+  try {
+    fs.writeFileSync(path.join(ROOT, sibling), `// finto consumer: legge ${base}\n`);
+    const couplings = localCouplings(rel, modeOf);
+    assert.ok(
+      couplings.some((c) => c.path === sibling),
+      'un consumer in una directory sorella dev\'essere un accoppiamento, non un silenzio',
+    );
+    assert.equal(couplings.find((c) => c.path === sibling).mode, 'non registrato');
+
+    fs.writeFileSync(path.join(ROOT, oversize), 'x'.repeat(2 * 1024 * 1024 + 1));
+    const blind = unreadableCouplings(localCouplings(rel, modeOf));
+    assert.ok(
+      blind.some((c) => c.path === oversize),
+      'un file oltre il tetto di lettura è «non lo so», e «non lo so» non è «non lo cita»',
+    );
+  } finally {
+    fs.rmSync(path.join(ROOT, sibling), { force: true });
+    fs.rmSync(path.join(ROOT, oversize), { force: true });
+  }
+});
+
+test('allargare la scansione non la rende degenere: i descrittori del set non contano', () => {
+  const manifest = JSON.parse(fs.readFileSync(path.join(ROOT, 'scripts/ci/loop-sync-manifest.json'), 'utf8'));
+  const modeOf = new Map(manifest.files.map((e) => [e.path, e.mode]));
+  const rel = 'generator/tests/crawler-cross-repo-artifacts.test.mjs';
+  const couplings = localCouplings(rel, modeOf).map((c) => c.path);
+  // Questo file stesso nomina il path del fixture come DATO di un caso, e cita
+  // il manifest: parla del set, non legge il fixture. Contarlo lo bloccherebbe
+  // per sempre — è la degenerazione per cui la scansione era rimasta confinata.
+  assert.ok(
+    !couplings.includes('generator/tests/transport-identical-twins.test.mjs'),
+    'un descrittore del set non è un consumer del fixture',
+  );
+  // E il rilevamento vero regge ancora: il contratto che il fixture legge c'è.
+  assert.ok(couplings.includes('generator/data/crawler-cross-repo-contract.json'));
 });
 
 // ---------------------------------------------------------------------------

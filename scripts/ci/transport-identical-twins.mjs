@@ -64,6 +64,12 @@
  * cita — sono a loro volta `identical`. Un accoppiamento non registrato nel
  * manifest è locale per definizione, quindi vale come un no.
  *
+ * E «nessun accoppiamento» vale solo se ho davvero guardato: chi cita si cerca
+ * in tutto il pacchetto, non nella sola directory del fixture, e un file del
+ * sottoalbero che non sono riuscito a leggere entra fra gli accoppiamenti come
+ * `illeggibile` invece di sparire in un `null` indistinguibile da «non lo
+ * cita» (issue #853).
+ *
  * ## Cosa NON fa
  *
  * Non mergia e non decide: scrive i file e aggiorna la baseline delle sole voci
@@ -517,20 +523,29 @@ export function couplingScanRoot(rel) {
 
 const SCAN_SKIP_DIRS = new Set(['node_modules', '.git', 'dist', 'coverage', 'content', 'public']);
 
-function walkSubtree(root, acc = []) {
+/**
+ * I file del sottoalbero, più le directory che non ho potuto ELENCARE.
+ *
+ * Una `readdirSync` fallita è la stessa ambiguità di una lettura fallita, un
+ * livello più su: i file lì dentro non sono «assenti», sono invisibili. Inghiottirla
+ * ridarebbe un «nessun accoppiamento» che significa «non ho guardato».
+ */
+function walkSubtree(root, acc = [], blind = new Map()) {
   let entries;
   try {
     entries = fs.readdirSync(path.join(ROOT, root), { withFileTypes: true });
-  } catch {
-    return acc;
+  } catch (e) {
+    // La directory che non c'è non nasconde niente; ogni altro errore sì.
+    if (!e || e.code !== 'ENOENT') blind.set(root, `readdir fallita (${e && e.code ? e.code : e})`);
+    return { files: acc, blind };
   }
   for (const e of entries) {
     if (SCAN_SKIP_DIRS.has(e.name)) continue;
     const rel = path.posix.join(root, e.name);
-    if (e.isDirectory()) walkSubtree(rel, acc);
+    if (e.isDirectory()) walkSubtree(rel, acc, blind);
     else if (e.isFile()) acc.push(rel);
   }
-  return acc;
+  return { files: acc, blind };
 }
 
 /**
@@ -558,7 +573,9 @@ export function localCouplings(rel, modeOf) {
   const found = new Set();
   const unreadable = new Map();
 
-  for (const other of walkSubtree(couplingScanRoot(rel))) {
+  const scan = walkSubtree(couplingScanRoot(rel));
+  for (const [d, reason] of scan.blind) unreadable.set(d, reason);
+  for (const other of scan.files) {
     if (other === rel) continue;
     const read = readLocal(other);
     if (read.state === 'unreadable') {
