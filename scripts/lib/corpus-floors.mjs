@@ -130,3 +130,161 @@ export function sectionFloor(root, section, retention = FLOOR_RETENTION) {
   }
   return floorFrom(source, retention);
 }
+
+// ── I locali del corpus, e il pavimento a specchio che se ne deriva ─────────
+
+/**
+ * I quattro locali che ogni radice di corpi tiene, in mirror.
+ *
+ * Non e' una taratura come `minFiles: 3000`: e' la cardinalita' dei locali, che
+ * non cresce col corpus. La differenza e' il punto — una costante che invecchia
+ * col corpus si svuota da sola, una che descrive la FORMA del corpus no.
+ *
+ * Sorgente unica di fatto: `RSS_LOCALES` in `engine/rssFeeds.mjs`. Non e'
+ * importabile qui (questo modulo e' sincrono e senza dipendenze, ed e' letto da
+ * `scripts/ci/**`), quindi il legame e' coperto da un test —
+ * `generator/tests/blog-body-floor-derived.test.mjs`, stesso schema di
+ * `ci-check-name.test.mjs` (AGENTS.md #6).
+ */
+export const CORPUS_LOCALES = ['it', 'en', 'de', 'fr'];
+
+/** Conta ricorsivamente i file con estensione `ext` sotto `dir`. Assente -> 0. */
+function countFilesDeep(dir, ext) {
+  let entries;
+  try {
+    entries = fs.readdirSync(dir, { withFileTypes: true });
+  } catch (err) {
+    if (err.code === 'ENOENT') return 0;
+    throw err;
+  }
+  let n = 0;
+  for (const entry of entries) {
+    const full = path.join(dir, entry.name);
+    if (entry.isDirectory()) n += countFilesDeep(full, ext);
+    else if (entry.isFile() && full.endsWith(ext)) n += 1;
+  }
+  return n;
+}
+
+/** Quanti corpi tiene ciascun locale di una radice. `{ it: n, en: n, … }`. */
+export function countBodiesByLocale(root, rel, locales = CORPUS_LOCALES) {
+  const out = {};
+  for (const locale of locales) out[locale] = countFilesDeep(path.join(root, rel, locale), '.ts');
+  return out;
+}
+
+/**
+ * Quanti file una radice di corpi DEVE tenere, derivato dalla radice stessa.
+ *
+ * PERCHE' NON UNA COSTANTE. `minFiles: 3000` (e `MIN_FILES_TOTAL = 3000`) erano
+ * l'antipattern che #910 dichiarava di aver spazzato: tarati una volta contro il
+ * corpus di quel giorno, mentre `content/blog-body` oggi ne tiene 15k. Il gate
+ * non si rompe, si svuota restando verde — e alzarli comprerebbe qualche mese e
+ * ricreerebbe lo stesso difetto.
+ *
+ * IL RIFERIMENTO. Un corpus di corpi e' MIRRORATO sui locali: lo stesso insieme
+ * di articoli esiste quattro volte. Il locale piu' popolato e' quindi la verita'
+ * di terra per gli altri tre, e l'atteso della radice e' `max × |locali|`. E'
+ * derivato (scala col corpus per sempre, nessuna taratura da rivedere) e in piu'
+ * e' STRETTAMENTE piu' forte della soglia assoluta: un locale mezzo
+ * materializzato — cartella rinominata, checkout sparse su una sola lingua —
+ * lasciava `3000` ampiamente soddisfatto ed e' esattamente la forma del buco del
+ * 2026-07-29, `blog-body-ch` mai guardata.
+ *
+ * `0` significa radice assente o vuota, che NON e' un pavimento a zero: il
+ * chiamante deve trattarlo come assenza del riferimento (vedi
+ * `missingCorpusMessage`).
+ */
+export function mirrorExpectation(byLocale, locales = CORPUS_LOCALES) {
+  const counts = locales.map((l) => byLocale[l] ?? 0);
+  const max = counts.reduce((a, b) => (b > a ? b : a), 0);
+  return max * locales.length;
+}
+
+// ── La popolazione che genera i feed ───────────────────────────────────────
+
+/** Dove vivono i chunk SEO in QUESTO repo (il sito li tiene sotto `services/seo`). */
+export const SEO_DIR = path.join('content', 'seo');
+
+/**
+ * Il pattern di inizio-voce dei chunk SEO.
+ *
+ * COPIA DICHIARATA di `entryRe` in `parseSeoBlogs` (`engine/rssFeeds.mjs`), che
+ * non e' esportata — e `engine/` e' mirrorato dal sito, quindi non si modifica
+ * da qui (AGENTS.md #3). Il legame e' coperto da
+ * `generator/tests/feed-floor-population.test.mjs`, che rilegge il sorgente
+ * dell'engine e confronta le due regex: se l'engine cambia parser, il test
+ * cade invece di lasciare il pavimento tarato su una popolazione fantasma.
+ */
+export const SEO_ENTRY_RE = /'blog-([^']+)':\s*\{/g;
+
+/** Quante voci tengono, in totale, i chunk SEO passati. */
+export function countSeoEntries(root, seoFiles, seoDir = SEO_DIR) {
+  let n = 0;
+  for (const file of seoFiles) {
+    let src;
+    try {
+      src = fs.readFileSync(path.join(root, seoDir, file), 'utf-8');
+    } catch (err) {
+      if (err.code === 'ENOENT') continue; // stesso ramo di parseSeoBlogs: chunk assente = zero voci
+      throw err;
+    }
+    n += (src.match(SEO_ENTRY_RE) || []).length;
+  }
+  return n;
+}
+
+/** I chunk `seo-blog*.ts` che stanno DAVVERO su disco. */
+export function listSeoChunks(root, seoDir = SEO_DIR) {
+  try {
+    return fs
+      .readdirSync(path.join(root, seoDir))
+      .filter((f) => /^seo-blog.*\.ts$/.test(f))
+      .sort();
+  } catch (err) {
+    if (err.code === 'ENOENT') return [];
+    throw err;
+  }
+}
+
+// ── Il margine, e la sorveglianza del rapporto ─────────────────────────────
+
+/**
+ * Quanto sopra il pavimento il rapporto osservato e' gia' degno di un allarme.
+ *
+ * `FLOOR_RETENTION = 0.9` e' misurato su un rapporto che NON e' stazionario: i
+ * due lati contano cose diverse (i file di corpo `it` da una parte, le voci del
+ * registro dall'altra), e oggi restano allineati solo perche'
+ * `scripts/retire-article.mjs` cancella corpo e voce insieme. Qualunque flusso
+ * che lasci un corpo senza voce — orfani, ritiri a meta', import parziali —
+ * sposta il rapporto verso il basso in modo MONOTONO, e al -10% il gate comincia
+ * a rifiutare una pubblicazione sana.
+ *
+ * Una deriva monotona ha una proprieta' utile: attraversa la banda prima del
+ * muro. Questa e' la banda. Non allarga il pavimento — non muove nessuna
+ * decisione di pass/fail — rende solo visibile l'avvicinamento, che oggi non
+ * misura nessuno.
+ */
+export const WARN_MARGIN = 0.05;
+
+/**
+ * Il rapporto osservato fra cio' che l'artefatto dichiara e cio' che il corpus
+ * tiene. `null` quando l'atteso non e' un riferimento valido: un rapporto su
+ * zero non e' «infinito», e' assenza di misura.
+ */
+export function retentionOf(declared, expected) {
+  if (!Number.isFinite(expected) || expected <= 0) return null;
+  if (!Number.isFinite(declared)) return null;
+  return declared / expected;
+}
+
+/**
+ * Il rapporto e' ancora sopra il pavimento ma dentro la banda di margine?
+ * `false` anche quando non c'e' misura: un avviso su un riferimento assente
+ * duplicherebbe la violazione che il chiamante emette gia'.
+ */
+export function withinWarnBand(declared, expected, retention = FLOOR_RETENTION, margin = WARN_MARGIN) {
+  const ratio = retentionOf(declared, expected);
+  if (ratio === null) return false;
+  return ratio >= retention && ratio < retention + margin;
+}
