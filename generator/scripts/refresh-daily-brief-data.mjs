@@ -27,7 +27,8 @@ import { readFileSync } from 'node:fs';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { getServiceAccountAccessToken } from './lib/google-service-account-token.mjs';
 import { writeJsonAtomic } from './lib/atomic-write-json.mjs';
-import { decodeFields, buildDailyBrief } from './lib/daily-brief-data.mjs';
+import { decodeFields, buildDailyBrief, degradationAlarms, MAX_CONSECUTIVE_DEGRADED_EDITIONS } from './lib/daily-brief-data.mjs';
+import { MIN_AVAILABLE_BLOCKS } from './lib/daily-brief-content.mjs';
 import { isRetryableRcFetchStatus, rcFetchBackoffMs, RC_FETCH_ATTEMPTS, extractGoogleErrorReason } from './load-rc-env.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -120,7 +121,21 @@ async function tryFetch(label, fn) {
   }
 }
 
-export async function collectDailyBrief({ todayIso, nowMs = Date.now() } = {}) {
+/**
+ * Yesterday's snapshot, or `null` when there is none to read. The only durable
+ * state this pipeline has: it carries the per-block degradation streaks that
+ * `degradationAlarms` reads. Unreadable is the same as absent — a snapshot that
+ * cannot be parsed must not stop today's refresh, it just restarts the count.
+ */
+export function readPreviousSnapshot(snapshotPath = OUTPUT_PATH) {
+  try {
+    return JSON.parse(readFileSync(snapshotPath, 'utf-8'));
+  } catch {
+    return null;
+  }
+}
+
+export async function collectDailyBrief({ todayIso, nowMs = Date.now(), previous = readPreviousSnapshot() } = {}) {
   const creds = loadServiceAccountCreds();
   const token = await getServiceAccountAccessToken(creds, FIRESTORE_SCOPE);
   const [borderWaitDocs, fuelMetadata, exchangeDoc, jobsStats] = await Promise.all([
@@ -129,7 +144,14 @@ export async function collectDailyBrief({ todayIso, nowMs = Date.now() } = {}) {
     tryFetch('exchangeHistory/chf-eur-1m', () => getDoc(token, 'exchangeHistory/chf-eur-1m')),
     tryFetch('jobs-stats', () => fetchJson(JOBS_STATS_URL)),
   ]);
-  return buildDailyBrief({ todayIso, nowMs, borderWaitDocs, fuelMetadata, exchangeDoc, jobsStats });
+  return buildDailyBrief({ todayIso, nowMs, borderWaitDocs, fuelMetadata, exchangeDoc, jobsStats, previous });
+}
+
+/** `DEGRADED (3rd edition in a row) — reason`: the streak belongs in the log. */
+function degradedLine(block) {
+  const n = block.degradedEditions;
+  const streak = Number.isFinite(n) && n > 1 ? ` (${n} editions in a row)` : '';
+  return `DEGRADED${streak} — ${block.reason}`;
 }
 
 function printPlan(brief) {
@@ -138,19 +160,49 @@ function printPlan(brief) {
   const b = blocks.borderWait;
   console.log(b.available
     ? `  🛃 borderWait: ${b.count} crossings, worst ${b.worst.name} ${b.worst.waitMinutes}min, ${b.zeroWaitCount} at zero`
-    : `  🛃 borderWait: DEGRADED — ${b.reason}`);
+    : `  🛃 borderWait: ${degradedLine(b)}`);
   const f = blocks.fuel;
   console.log(f.available
-    ? `  ⛽ fuel: ${f.municipalityCount} municipalities, cheapest IT ${f.cheapestItaly[0]?.municipality ?? 'n/a'} ${f.cheapestItaly[0]?.minPriceEur ?? ''}€/L, CH cheaper in ${f.cheaperSwissCount}`
-    : `  ⛽ fuel: DEGRADED — ${f.reason}`);
+    ? `  ⛽ fuel: ${f.municipalityCount ?? '?'} municipalities, cheapest IT ${f.cheapestItaly[0]?.municipality ?? 'n/a'} ${f.cheapestItaly[0]?.minPriceEur ?? ''}€/L, CH cheaper in ${f.cheaperSwissCount ?? '?'}`
+    : `  ⛽ fuel: ${degradedLine(f)}`);
   const e = blocks.exchange;
   console.log(e.available
     ? `  💱 exchange: 1 CHF = ${e.rate}€ (${e.lastDate}), Δ1d ${e.delta1d}, Δ7d ${e.delta7d}`
-    : `  💱 exchange: DEGRADED — ${e.reason}`);
+    : `  💱 exchange: ${degradedLine(e)}`);
   const j = blocks.jobs;
   console.log(j.available
     ? `  💼 jobs: ${j.activeJobs} active, +${j.yesterdayAdded ?? '?'} yesterday, +${j.last7dAdded ?? '?'} in 7d`
-    : `  💼 jobs: DEGRADED — ${j.reason}`);
+    : `  💼 jobs: ${degradedLine(j)}`);
+  // The edition that will not exist is worth one explicit line. Without it the
+  // only trace of a day with no bulletin is `3/4 blocks` above and a commit
+  // step that finds nothing staged, both of which look like a normal run.
+  if (counts.availableBlocks < MIN_AVAILABLE_BLOCKS) {
+    console.warn(`⚠️  NO EDITION TODAY: ${counts.availableBlocks} available blocks, ${MIN_AVAILABLE_BLOCKS} needed — the generator will refuse this snapshot and nothing will be committed.`);
+  }
+}
+
+/**
+ * A block degraded for three editions running is a contract that changed
+ * upstream, not a source having a bad morning, and the pipeline has no other
+ * way to say so: the snapshot is written, the edition is one section shorter,
+ * the run is green, and that repeats until somebody happens to read a bulletin.
+ * So the run fails. The snapshot is already on disk when this happens — the
+ * streak keeps counting, and a `workflow_dispatch` rerun still renders the
+ * edition from it once the alarm has been seen.
+ */
+export function reportDegradationAlarms(brief, { dryRun }) {
+  const alarms = degradationAlarms(brief);
+  if (alarms.length === 0) return;
+  for (const a of alarms) {
+    const line = `daily-brief: the ${a.block} block has been degraded for ${a.editions} consecutive editions — ${a.reason}`;
+    // In dry mode (the on-push self-test) the alarm is real but it belongs to
+    // production, not to the change being tested: reporting it as an error
+    // would paint an unrelated push red.
+    console.warn(dryRun ? `⚠️  ${line}` : `::error::${line}`);
+  }
+  if (dryRun) return;
+  console.error(`❌ ${alarms.length} block(s) degraded for ${MAX_CONSECUTIVE_DEGRADED_EDITIONS}+ editions in a row. That is an upstream shape/contract change, not an outage — the bulletin has been publishing without those sections and nothing was failing. Fix the source or the guard, then rerun.`);
+  process.exitCode = 1;
 }
 
 async function main() {
@@ -161,16 +213,22 @@ async function main() {
 
   if (dryRun) {
     console.log('DRY_RUN — no files written.');
+    reportDegradationAlarms(brief, { dryRun });
     return;
   }
   if (brief.counts.availableBlocks === 0) {
     // All four sources down: leave yesterday's snapshot in place. The article
     // generator refuses it via dateIso, the cron commits nothing, stays green.
     console.warn('⚠️  0/4 blocks available — NOT writing daily-brief.json (previous snapshot left untouched).');
+    reportDegradationAlarms(brief, { dryRun });
     return;
   }
   writeJsonAtomic(OUTPUT_PATH, brief);
   console.log(`✅ wrote ${path.relative(REPO_ROOT, OUTPUT_PATH)} (${brief.counts.availableBlocks}/4 blocks).`);
+  // After the write, never before: the alarm sets a non-zero exit code, and the
+  // snapshot must still land so the streak advances and the edition remains
+  // renderable from it.
+  reportDegradationAlarms(brief, { dryRun });
 }
 
 const invokedDirectly = (() => {

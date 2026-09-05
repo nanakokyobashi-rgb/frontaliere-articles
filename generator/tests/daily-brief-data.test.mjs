@@ -16,8 +16,10 @@ import {
   shapeJobs,
   jobsCorpusFrozenReason,
   buildDailyBrief,
+  degradationAlarms,
   BORDER_WAIT_MIN_CROSSINGS,
   JOBS_HISTORY_MAX_LAG_DAYS,
+  MAX_CONSECUTIVE_DEGRADED_EDITIONS,
 } from '../scripts/lib/daily-brief-data.mjs';
 
 const NOW = Date.parse('2026-08-08T05:00:00Z');
@@ -461,8 +463,24 @@ test('jobs: a moving corpus stays available, a closed day at zero does not', () 
   assert.equal(unjudgeable.available, false);
   assert.match(unjudgeable.reason, /carries no readable added\/updated\/removed/);
 
-  // No `todayIso` (no corpus clock to compare against) keeps the old behaviour.
-  assert.equal(shapeJobs(JOBS_STATS, { nowMs: NOW }).available, true);
+});
+
+test('jobs: no todayIso is no verdict, and no verdict is not "corpus fine"', () => {
+  // The last fail-open door in this guard. `shapeJobs` without a clock used to
+  // publish `activeJobs` and a "new listings yesterday" figure from a corpus
+  // nobody had judged: the corpus-advance rules abstained, and abstention read
+  // as approval. `buildDailyBrief` validates `todayIso` and is the only caller
+  // today, which is why this was reachable only by the NEXT caller.
+  for (const opts of [{ nowMs: NOW }, { nowMs: NOW, todayIso: null }, { nowMs: NOW, todayIso: '2026-8-8' }]) {
+    const block = shapeJobs(JOBS_STATS, opts);
+    assert.equal(block.available, false, `expected degradation for ${JSON.stringify(opts.todayIso ?? null)}`);
+    assert.match(block.reason, /no day to judge against/);
+  }
+  assert.match(jobsCorpusFrozenReason(JOBS_STATS, {}), /no day to judge against/);
+
+  // Same input one level up used to throw a RangeError out of `new Date(NaN)`
+  // in the yesterday lookup; it degrades now, like every other unreadable clock.
+  assert.doesNotThrow(() => shapeJobs(JOBS_STATS, { nowMs: NOW, todayIso: 'oggi' }));
 });
 
 test('jobs: an absent history series degrades, exactly like an empty one', () => {
@@ -488,6 +506,123 @@ test('jobs: an absent history series degrades, exactly like an empty one', () =>
   assert.equal(jobsCorpusFrozenReason(JOBS_STATS, { todayIso: TODAY }), null);
 });
 
+test('jobs: the format check stops at the window the guard reads', () => {
+  // `jobs-stats.json` carried 164 rows back to 2026-03-20 on 2026-09-05 and the
+  // corpus-advance guard reads two of them. Judging the shape of all 164 means
+  // one legacy row takes the block down forever for a date nobody parses.
+  const archiveJunk = {
+    ...JOBS_STATS,
+    history: [
+      { date: '2026-3-20', totalJobs: 942, added: 0 },
+      { date: '2026-4-1', totalJobs: 980, added: 3 },
+      { date: '2026-08-06', totalJobs: 22100, added: 512 },
+      { date: '2026-08-07', totalJobs: 22645, added: 591 },
+    ],
+  };
+  const block = shapeJobs(archiveJunk, { nowMs: NOW, todayIso: TODAY });
+  assert.equal(block.available, true, block.reason);
+  assert.equal(block.yesterdayAdded, 591);
+
+  // The partial row for the day in progress is outside the closed-day window
+  // too: the guard scopes it out of every verdict, so its shape cannot matter.
+  const partialTodayJunk = {
+    ...JOBS_STATS,
+    history: [
+      { date: '2026-08-06', totalJobs: 22100, added: 512 },
+      { date: '2026-08-07', totalJobs: 22645, added: 591 },
+      { date: '2026-8-8', totalJobs: 22700, added: 12 },
+    ],
+  };
+  assert.equal(shapeJobs(partialTodayJunk, { nowMs: NOW, todayIso: TODAY }).available, true);
+
+  // Inside the window it is still a finding: `2026-8-6` sorts after
+  // `2026-08-07`, so keeping it would skew the newest closed row and dropping
+  // it would hide a producer that changed shape on the days that are read.
+  const inWindowJunk = {
+    ...JOBS_STATS,
+    history: [
+      { date: '2026-3-20', totalJobs: 942, added: 0 },
+      { date: '2026-8-6', totalJobs: 22100, added: 512 },
+      { date: '2026-08-07', totalJobs: 22645, added: 591 },
+    ],
+  };
+  const flagged = shapeJobs(inWindowJunk, { nowMs: NOW, todayIso: TODAY });
+  assert.equal(flagged.available, false);
+  assert.match(flagged.reason, /not YYYY-MM-DD \(first: "2026-8-6"\)/);
+  assert.equal(flagged.reason.includes('2026-3-20'), false, 'the archive row must not be reported');
+
+  // A row that cannot be placed at all cannot be excluded from the window
+  // either, so it stays a finding wherever it sits in the series.
+  const unplaceable = {
+    ...JOBS_STATS,
+    history: [{ date: 'ieri', totalJobs: 1, added: 1 }, ...JOBS_STATS.history],
+  };
+  assert.match(shapeJobs(unplaceable, { nowMs: NOW, todayIso: TODAY }).reason, /not YYYY-MM-DD/);
+});
+
+test('exchange: a legacy point outside the read window does not switch the block off', () => {
+  // The 1m series is ~32 points and the block reads the last two plus the newest
+  // point at or before lastDate-7d. One non-canonical point at the head used to
+  // cost ~30 editions of exchange block for a date the block never looks at.
+  const doc = {
+    points: [
+      { date: '2026-7-12', rate: 1.041 },
+      { date: '2026-08-01', rate: 1.064 },
+      { date: '2026-08-07', rate: 1.068 },
+      { date: '2026-08-08', rate: 1.0695 },
+    ],
+  };
+  const block = shapeExchange(doc, { todayIso: TODAY });
+  assert.equal(block.available, true, block.reason);
+  assert.equal(block.rate, 1.0695);
+  assert.equal(block.pointCount, 3);
+
+  // Inside the window the finding stands: it would sort past the newest point
+  // and skew both the freshness check and the 7d lookback.
+  const near = { points: [...doc.points, { date: '2026-8-7', rate: 0.951 }] };
+  assert.match(shapeExchange(near, { todayIso: TODAY }).reason, /not YYYY-MM-DD \(first: "2026-8-7"\)/);
+});
+
+test('fuel: an unreadable summary counter is null, never a published zero', () => {
+  // `Number(null) || 0` printed "conviene fare il pieno in Svizzera in 0 casi"
+  // out of a field the producer had simply stopped sending — the same "0 as a
+  // fact" shape the jobs zero-day rule exists to stop, one block over.
+  const noCounters = { ...FUEL_META, summary: { ...FUEL_META.summary, cheaperSwissCount: null, municipalityCount: undefined } };
+  const block = shapeFuel(noCounters, { nowMs: NOW });
+  assert.equal(block.available, true, 'the rankings still carry the section');
+  assert.equal(block.cheaperSwissCount, null);
+  assert.equal(block.municipalityCount, null);
+  assert.equal(block.cheaperItalyCount, 66);
+
+  // The payload counter stays numeric for its consumers.
+  const brief = buildDailyBrief({
+    todayIso: TODAY, nowMs: NOW, borderWaitDocs: manyCrossings(40), fuelMetadata: noCounters, exchangeDoc: EXCHANGE_DOC, jobsStats: JOBS_STATS,
+  });
+  assert.equal(brief.counts.fuelMunicipalities, 0);
+});
+
+test('borderWait: the producer emits a number for every crossing (measured, then pinned)', () => {
+  // Measured against Firestore `trafficCurrent` on 2026-09-05: 141 documents,
+  // all 141 carrying `waitTimeMinutes` as an `integerValue`, none as
+  // `nullValue` and none absent; 136 of them at a real 0 alongside
+  // `status: green` and `totalCrossingMinutes: 0`. So the published
+  // `zeroWaitCount` counts crossings with no queue, not crossings with no
+  // reading, and the null rule below is a guard against a producer change
+  // rather than a correction of today's numbers — which is what the decoder
+  // makes possible: `decodeValue` maps an unhandled Firestore type to null too.
+  const docs = manyCrossings(BORDER_WAIT_MIN_CROSSINGS + 2);
+  const numeric = shapeBorderWait(docs, { nowMs: NOW });
+  assert.equal(numeric.count, BORDER_WAIT_MIN_CROSSINGS + 2);
+  const zeros = numeric.zeroWaitCount;
+  assert.ok(zeros > 0);
+
+  // Flip one 0 to "no reading": the count drops, the zero count drops with it.
+  const withNull = docs.map((d, i) => (i === 2 ? { ...d, waitTimeMinutes: null } : d));
+  const block = shapeBorderWait(withNull, { nowMs: NOW });
+  assert.equal(block.count, BORDER_WAIT_MIN_CROSSINGS + 1);
+  assert.equal(block.zeroWaitCount, zeros - 1);
+});
+
 // ---------------------------------------------------------------- assembly
 
 test('buildDailyBrief: counts available blocks, keeps degraded ones as notes', () => {
@@ -510,4 +645,62 @@ test('buildDailyBrief: counts available blocks, keeps degraded ones as notes', (
 
 test('buildDailyBrief: refuses a malformed todayIso outright', () => {
   assert.throws(() => buildDailyBrief({ todayIso: 'oggi' }), /YYYY-MM-DD/);
+});
+
+test('a block degraded edition after edition raises an alarm instead of degrading forever', () => {
+  // The failure mode nothing else here can see: an upstream shape change (the
+  // aggregator trims `history`, a counter is renamed) degrades the jobs block
+  // EVERY day. The edition keeps publishing on the other three blocks, the run
+  // stays green, and the bulletin is permanently one section shorter. Per-block
+  // degradation has no memory, so the streak rides in the snapshot itself.
+  const day = (n) => `2026-08-${String(n).padStart(2, '0')}`;
+  const build = (dateIso, previous) => buildDailyBrief({
+    todayIso: dateIso,
+    nowMs: Date.parse(`${dateIso}T05:00:00Z`),
+    borderWaitDocs: manyCrossings(40).map((d) => ({ ...d, lastUpdate: `${dateIso}T04:30:00.000Z` })),
+    fuelMetadata: { ...FUEL_META, generatedAt: `${dateIso}T04:30:00.000Z` },
+    exchangeDoc: { points: [{ date: day(1), rate: 1.064 }, { date: dateIso, rate: 1.0695 }] },
+    // The shape change: `history` gone for good, everything else healthy.
+    jobsStats: { generatedAt: `${dateIso}T04:30:00.000Z`, totals: JOBS_STATS.totals },
+    previous,
+  });
+
+  let previous = null;
+  const streaks = [];
+  for (const n of [8, 9, 10]) {
+    previous = build(day(n), previous);
+    streaks.push(previous.blocks.jobs.degradedEditions);
+    assert.equal(previous.counts.availableBlocks, 3, 'the edition still publishes — that is the point');
+  }
+  assert.deepEqual(streaks, [1, 2, 3]);
+  assert.deepEqual(degradationAlarms(build(day(8), null)), [], 'one bad morning is not an alarm');
+
+  const alarms = degradationAlarms(previous);
+  assert.equal(alarms.length, 1);
+  assert.equal(alarms[0].block, 'jobs');
+  assert.equal(alarms[0].editions, MAX_CONSECUTIVE_DEGRADED_EDITIONS);
+  assert.match(alarms[0].reason, /no history series/);
+
+  // A same-day rerun (`workflow_dispatch` rewrites today's edition) is not
+  // another edition: the streak is inherited, not incremented.
+  assert.equal(build(day(10), previous).blocks.jobs.degradedEditions, 3);
+
+  // And a block that recovers resets — the alarm is about a permanent shape
+  // change, not about a source that had a bad week once.
+  const recovered = buildDailyBrief({
+    todayIso: day(11),
+    nowMs: Date.parse(`${day(11)}T05:00:00Z`),
+    borderWaitDocs: manyCrossings(40).map((d) => ({ ...d, lastUpdate: `${day(11)}T04:30:00.000Z` })),
+    fuelMetadata: { ...FUEL_META, generatedAt: `${day(11)}T04:30:00.000Z` },
+    exchangeDoc: { points: [{ date: day(4), rate: 1.064 }, { date: day(11), rate: 1.0695 }] },
+    jobsStats: {
+      generatedAt: `${day(11)}T04:30:00.000Z`,
+      totals: JOBS_STATS.totals,
+      history: [{ date: day(9), totalJobs: 22100, added: 512 }, { date: day(10), totalJobs: 22645, added: 591 }],
+    },
+    previous,
+  });
+  assert.equal(recovered.blocks.jobs.available, true, recovered.blocks.jobs.reason);
+  assert.equal(recovered.blocks.jobs.degradedEditions, 0);
+  assert.deepEqual(degradationAlarms(recovered), []);
 });
