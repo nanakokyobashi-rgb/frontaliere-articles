@@ -35,7 +35,18 @@ import { fileURLToPath } from 'node:url';
 // esattamente la funzione che il loop ritagliato riceve in produzione, e una
 // copia locale nel test divergerebbe in silenzio dal fix (AGENTS.md #6).
 import { translatedStringOrNull } from '../scripts/lib/article-free-mt.mjs';
-import { hasUsableContentText, hasUsableTranslatedText } from '../scripts/lib/body2-payload-verdict.mjs';
+import { hasUsableContentText, hasUsableTranslatedText, metaFieldPlausibilityMiss } from '../scripts/lib/body2-payload-verdict.mjs';
+
+// Riempitivo dei campi meta nelle fixture. NON e' un dettaglio di stile: dal
+// floor di plausibilita' (#798) il loop missing-field giudica anche `title` e
+// `excerpt`, quindi un segnaposto di un carattere farebbe partire un retry
+// mirato che questi test non stanno misurando. Le fixture portano meta
+// plausibili; l'oggetto dei test — `"null"`, il «Null» tedesco, il fallback IT
+// — resta esattamente lo stesso.
+const META_PLAUSIBILI = {
+  title: 'Titolo di prova plausibile',
+  excerpt: 'Un riassunto di prova abbastanza lungo.',
+};
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const CREATE_ARTICLE = path.resolve(HERE, '../scripts/create-article.mjs');
@@ -92,10 +103,13 @@ const MISSING_FIELD_LOOP_SRC = extractMissingFieldLoop();
 async function runMissingFieldLoop({ data, itContent, callWithRetry, detectTruncation, warnings = [] }) {
   const capturingConsole = { error: () => {}, warn: (msg) => warnings.push(msg) };
   const fn = new Function(
-    'data', 'itContent', 'callWithRetry', 'translatedStringOrNull', 'hasUsableTranslatedText', 'detectTruncation', 'console',
+    'data', 'itContent', 'callWithRetry', 'translatedStringOrNull', 'hasUsableTranslatedText', 'metaFieldPlausibilityMiss', 'detectTruncation', 'console',
     `return (async () => { ${MISSING_FIELD_LOOP_SRC} })();`,
   );
-  await fn(data, itContent, callWithRetry, translatedStringOrNull, hasUsableTranslatedText, detectTruncation || (() => []), capturingConsole);
+  // `metaFieldPlausibilityMiss` e' il floor VERO (#798), non un mock: il ramo
+  // floor-miss del loop tiene il valore tradotto invece di cadere sul fallback
+  // IT, e un mock qui non proverebbe quel comportamento.
+  await fn(data, itContent, callWithRetry, translatedStringOrNull, hasUsableTranslatedText, metaFieldPlausibilityMiss, detectTruncation || (() => []), capturingConsole);
 }
 
 /**
@@ -222,10 +236,10 @@ test('itValue whitespace-only: il body tradotto troncato NON viene sovrascritto 
 });
 
 test('ramo missing-field: itValue whitespace-only lancia l\'errore invece di pubblicare un fallback quasi-vuoto (#691)', async () => {
-  const data = { content: { en: { body1: undefined, title: 'T', excerpt: 'E', body2: 'B2', body3: 'B3' } } };
+  const data = { content: { en: { body1: undefined, ...META_PLAUSIBILI, body2: 'B2', body3: 'B3' } } };
   // Un fallback fatto di soli spazi è truthy: senza `.trim()` il guard non
   // scattava e il valore quasi-vuoto veniva assegnato invece di lanciare.
-  const itContent = { body1: '   ', title: 'T', excerpt: 'E', body2: 'B2', body3: 'B3' };
+  const itContent = { body1: '   ', ...META_PLAUSIBILI, body2: 'B2', body3: 'B3' };
   const callWithRetry = async () => { throw new Error('non dovrebbe essere chiamato: il guard deve lanciare prima'); };
 
   await assert.rejects(
@@ -274,9 +288,9 @@ test('ramo missing-field: fallback IT esso stesso troncato — warning esplicito
   // `de` e `fr` sono già completi: il loop itera su tutte e tre le locali,
   // e senza questi il loop leggerebbe `data.content['de'][field]` su un
   // oggetto undefined non appena passa oltre `en`.
-  const complete = { title: 'T', excerpt: 'E', body1: 'B1', body2: 'B2', body3: 'B3' };
+  const complete = { ...META_PLAUSIBILI, body1: 'B1', body2: 'B2', body3: 'B3' };
   const data = { content: { en: { ...complete, body1: undefined }, de: { ...complete }, fr: { ...complete } } };
-  const itContent = { body1: truncatedIt, title: 'T', excerpt: 'E', body2: 'B2', body3: 'B3' };
+  const itContent = { body1: truncatedIt, ...META_PLAUSIBILI, body2: 'B2', body3: 'B3' };
   const callWithRetry = async () => { throw new Error('retry fallito'); };
   const detectTruncation = () => ['incomplete-ending'];
   const warnings = [];
@@ -306,9 +320,9 @@ test('ramo missing-field: fallback IT esso stesso troncato — warning esplicito
 // `null`.
 
 test('ramo missing-field: body1 tradotto = "null" viene letto come MANCANTE e ritradotto (#799)', async () => {
-  const complete = { title: 'T', excerpt: 'E', body1: 'B1', body2: 'B2', body3: 'B3' };
+  const complete = { ...META_PLAUSIBILI, body1: 'B1', body2: 'B2', body3: 'B3' };
   const data = { content: { en: { ...complete }, de: { ...complete, body1: 'null' }, fr: { ...complete } } };
-  const itContent = { body1: 'Corpo italiano reale.', title: 'T', excerpt: 'E', body2: 'B2', body3: 'B3' };
+  const itContent = { body1: 'Corpo italiano reale.', ...META_PLAUSIBILI, body2: 'B2', body3: 'B3' };
   const calls = [];
   const callWithRetry = async (_prompt, _tokens, label) => {
     calls.push(label);
@@ -322,7 +336,7 @@ test('ramo missing-field: body1 tradotto = "null" viene letto come MANCANTE e ri
 });
 
 test('ramo missing-field: "null" doppiamente serializzato — fallback IT quando il retry non produce nulla (#799)', async () => {
-  const complete = { title: 'T', excerpt: 'E', body1: 'B1', body2: 'B2', body3: 'B3' };
+  const complete = { ...META_PLAUSIBILI, body1: 'B1', body2: 'B2', body3: 'B3' };
   const data = { content: { en: { ...complete, excerpt: '"null"' }, de: { ...complete, body3: 'null' }, fr: { ...complete } } };
   const itContent = { body1: 'B1it', title: 'Tit', excerpt: 'Excerpt italiano.', body2: 'B2it', body3: 'Body3 italiano.' };
   // Il retry restituisce a sua volta `"null"`: `translatedStringOrNull` lo
@@ -344,8 +358,15 @@ test('ramo missing-field: "null" doppiamente serializzato — fallback IT quando
 // la traduzione e' giusta — quindi si cadeva sul valore ITALIANO, e il locale
 // `de` pubblicava testo italiano. Nessun gate a valle lo vede: e' prosa non
 // vuota, solo nella lingua sbagliata.
-test('ramo missing-field: un campo DE che vale «Null» (zero, in tedesco) NON e\' mancante e non cade sull\'italiano (#831)', async () => {
-  const complete = { title: 'T', excerpt: 'E', body1: 'B1', body2: 'B2', body3: 'B3' };
+//
+// Dal floor di plausibilita' (#798) un `title` DE di quattro caratteri fa
+// partire UNA ritraduzione mirata — un title di quel calibro e' esattamente la
+// forma degenere che diventa slug. Cio' che #831 protegge resta intatto ed e'
+// il punto di questo test: quando il retry non produce di meglio, il campo NON
+// scende sul fallback IT. Sul solo floor-miss l'ultima risorsa e' il valore
+// TRADOTTO, mai l'italiano sotto `/de/`.
+test('ramo missing-field: un campo DE che vale «Null» (zero, in tedesco) non cade sull\'italiano (#831/#798)', async () => {
+  const complete = { ...META_PLAUSIBILI, body1: 'B1', body2: 'B2', body3: 'B3' };
   const data = { content: { en: { ...complete }, de: { ...complete, title: 'Null' }, fr: { ...complete } } };
   const itContent = { body1: 'B1it', title: 'Zero', excerpt: 'Eit', body2: 'B2it', body3: 'B3it' };
   const calls = [];
@@ -353,8 +374,23 @@ test('ramo missing-field: un campo DE che vale «Null» (zero, in tedesco) NON e
 
   await runMissingFieldLoop({ data, itContent, callWithRetry });
 
+  assert.deepEqual(calls, ['de:title-missing-retry'], 'il floor chiede UNA ritraduzione, non di piu\'');
+  assert.equal(data.content.de.title, 'Null', 'il titolo DE non deve essere sostituito dal testo italiano');
+});
+
+test('ramo missing-field: il campo DE sotto il floor NON e\' mancante — il body gemello non fa scattare nulla (#831)', async () => {
+  // Il rovescio senza il floor di mezzo: sui body il floor meta non esiste, e
+  // `Null` tedesco resta contenuto a tutti gli effetti — zero retry, come prima.
+  const complete = { ...META_PLAUSIBILI, body1: 'B1', body2: 'B2', body3: 'B3' };
+  const data = { content: { en: { ...complete }, de: { ...complete, body1: 'Null' }, fr: { ...complete } } };
+  const itContent = { body1: 'B1it', ...META_PLAUSIBILI, body2: 'B2it', body3: 'B3it' };
+  const calls = [];
+  const callWithRetry = async (_p, _t, label) => { calls.push(label); return { body1: 'Null' }; };
+
+  await runMissingFieldLoop({ data, itContent, callWithRetry });
+
   assert.deepEqual(calls, [], 'nessun retry: il campo tradotto c\'e\', non e\' mancante');
-  assert.equal(data.content.de.title, 'Null', 'il titolo DE legittimo non deve essere sostituito dal testo italiano');
+  assert.equal(data.content.de.body1, 'Null', 'il body DE legittimo non deve essere sostituito dal testo italiano');
 });
 
 // Il rovescio del rovescio: la deroga e' TEDESCA, non generica. In inglese e
@@ -364,7 +400,7 @@ test('ramo missing-field: un campo DE che vale «Null» (zero, in tedesco) NON e
 // `meta-en` e nel feed RSS `en`. Su quei locali il campo deve continuare a
 // leggersi come MANCANTE: retry mirato e, se non produce nulla, fallback IT.
 test('ramo missing-field: «NULL» su en/fr resta un campo mancante (la deroga #831 e\' solo tedesca)', async () => {
-  const complete = { title: 'T', excerpt: 'E', body1: 'B1', body2: 'B2', body3: 'B3' };
+  const complete = { ...META_PLAUSIBILI, body1: 'B1', body2: 'B2', body3: 'B3' };
   const data = {
     content: {
       en: { ...complete, title: 'NULL' },
@@ -386,7 +422,7 @@ test('ramo missing-field: «NULL» su en/fr resta un campo mancante (la deroga #
   assert.deepEqual(calls, ['en:title-missing-retry', 'fr:excerpt-missing-retry'], 'il retry mirato deve partire su en e fr');
   assert.equal(data.content.en.title, 'Titolo italiano.');
   assert.equal(data.content.fr.excerpt, 'Excerpt italiano.');
-  assert.equal(data.content.de.title, 'T', 'il locale de non e\' toccato da questo caso');
+  assert.equal(data.content.de.title, META_PLAUSIBILI.title, 'il locale de non e\' toccato da questo caso');
 });
 
 test('translatedStringOrNull: rifiuta la serializzazione letterale di null, non il testo reale', () => {

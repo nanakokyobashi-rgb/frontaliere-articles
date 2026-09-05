@@ -148,7 +148,7 @@ import { JSON_QUOTE_SAFETY_RULE_IT, describeJsonParseError, describeRawForDiagno
 // modulo puro perche' le gate del generatore girano `node --test` senza `npm ci`
 // e non possono importare QUESTO file: cosi' il test esegue lo stesso oggetto
 // codice della produzione invece di una copia. Vedi l'intestazione del modulo.
-import { REQUIRED_IT_BODY_FIELDS, BODY_ONLY_FIELDS, META_ONLY_FIELDS, normalizeItalianContentFromPayload, classifyBody2Payload, isTopicGateAbortVerdict, findUnreadableContentEvidence, resolveBody2Validation, recoverMisplacedFaq, hasUsableContentText, hasUsableTranslatedText } from './lib/body2-payload-verdict.mjs';
+import { REQUIRED_IT_BODY_FIELDS, BODY_ONLY_FIELDS, META_ONLY_FIELDS, metaFieldPlausibilityMiss, normalizeItalianContentFromPayload, classifyBody2Payload, isTopicGateAbortVerdict, findUnreadableContentEvidence, resolveBody2Validation, recoverMisplacedFaq, hasUsableContentText, hasUsableTranslatedText } from './lib/body2-payload-verdict.mjs';
 import { describePayloadRejection } from './lib/llm-payload-diagnostics.mjs';
 import {
   factCheckFingerprint,
@@ -4183,7 +4183,16 @@ async function generateExcerpt(title, body1, body2, body3) {
     ];
     const raw = await _aiCallLLM(messages, { temperature: 0.5, maxTokens: 200, timeout: 30_000 });
     const excerpt = String(raw || '').replace(/^["'“”]+|["'“”]+$/g, '').trim();
-    if (excerpt) return capBlogDescription(excerpt).value;
+    // Il non-vuoto non basta (#798): questa e' la sola sorgente dell'`excerpt`
+    // della pipeline giornalista, che non passa da `validateItalianPayload`.
+    // Un `...` finirebbe in `content/`, in `meta-<locale>.json` e nei feed.
+    // Sotto il floor si usa il fallback deterministico dal corpo, che e' prosa
+    // vera — meglio di un riassunto degenere, e non costa una chiamata.
+    const excerptMiss = metaFieldPlausibilityMiss('excerpt', excerpt);
+    if (excerpt && !excerptMiss) return capBlogDescription(excerpt).value;
+    if (excerptMiss) {
+      console.warn(`  ⚠️  generateExcerpt: riassunto sotto il floor (${excerptMiss}) — uso fallback troncato dal corpo`);
+    }
   } catch (err) {
     console.warn(`  ⚠️  generateExcerpt fallito, uso fallback troncato: ${err.message}`);
   }
@@ -4626,6 +4635,25 @@ function validateItalianPayload(contentIt, locale = 'it') {
 
   if (contentIt.body2.trim().length < 40) {
     throw new Error(`Campo body2 troppo corto per ${locale}`);
+  }
+
+  // Lo stesso floor sui campi meta, e per la stessa ragione (#798): senza,
+  // qui passava qualunque `title` non vuoto — un moncone di 3 char, o l'eco
+  // del prompt adottato campo per campo — e da li' diventava slug + canonical
+  // live, senza rebuild del sito. Questo gate vede l'articolo gia' MERGIATO
+  // dalle due meta' dello split, quindi copre anche il caso in cui la meta'
+  // meta e' stata recuperata da un candidato diverso a valle del verdetto.
+  // La soglia e' importata, non ricopiata: AGENTS.md #6.
+  for (const field of META_ONLY_FIELDS) {
+    const sottoSoglia = metaFieldPlausibilityMiss(field, contentIt?.[field]);
+    if (sottoSoglia) {
+      // `troppo corto` e' la formula che `isQualityRejectError()` riconosce:
+      // una fonte che non produce un titolo plausibile e' un problema di
+      // qualita' per-headline, si passa alla successiva senza far cadere la run.
+      const err = new Error(`Campo ${field} troppo corto per ${locale} (${sottoSoglia})`);
+      err.qualityReject = true;
+      throw err;
+    }
   }
 }
 
@@ -9283,16 +9311,26 @@ Rispondi SOLO con JSON valido, senza markdown.` },
             },
           ],
           // Title reformulation is a short, low-stakes rewrite to ≤60 chars whose
-          // length floor is guaranteed by the deterministic capBlogTitle() below
+          // length floor is enforced by metaFieldPlausibilityMiss() on the retry
+          // result below (capBlogTitle() does NOT impose one: it returns the
+          // title verbatim, normalising whitespace and the brand suffix only)
           // (and the try/catch falls back to the hard cap on any failure), so a
           // premium GPT-4o call here is wasted quota — GPT-4o-mini reformulates a
           // one-line title to a length target just as well. forceModel still wins.
           { model: forceModel || GH_MODEL_LIGHT, temperature: 0.3, maxTokens: 200, jsonMode: true, timeout: 30_000 },
         );
         const retryParsed = JSON.parse(repairLlmJson(retryRaw));
-        if (retryParsed?.title && typeof retryParsed.title === 'string') {
+        // Il title che `validateItalianPayload` ha appena validato NON e' il
+        // title che arriva allo slug: questo retry lo sostituisce dopo il gate.
+        // Il commento sopra dice che il floor «e' garantito da capBlogTitle()»,
+        // ma `capBlogTitle` non tronca e non impone piu' nessun floor — quindi
+        // il floor va riapplicato qui, o il gate di #798 si scavalca da solo.
+        const capRetryMiss = metaFieldPlausibilityMiss('title', retryParsed?.title);
+        if (retryParsed?.title && typeof retryParsed.title === 'string' && !capRetryMiss) {
           itContent.title = retryParsed.title;
           console.error(`  ✅ [title-cap] IT title ritornato a ${retryParsed.title.length} caratteri`);
+        } else if (capRetryMiss) {
+          console.warn(`  ⚠️ [title-cap] IT title del retry sotto il floor (${capRetryMiss}) — scartato, resta il titolo validato`);
         }
       } catch (retryErr) {
         console.warn(`  ⚠️ [title-cap] Retry titolo IT fallito: ${retryErr.message} — applico hard cap`);
@@ -9949,16 +9987,47 @@ ${terminologyByLang[targetLang] || ''}`;
       // pubblicando testo italiano sotto `/de/` (#831). Su en/fr la deroga
       // NON vale: li' `Null`/`NULL` come testo intero non e' prosa, quindi
       // resta un campo mancante e il retry mirato lo ripara come prima.
-      if (hasUsableTranslatedText(data.content[locale][field], locale)) continue;
+      //
+      // IL NON-VUOTO NON BASTA SUI META TRADOTTI (#798). Il `title` localizzato
+      // non e' una copia dell'IT gia' validato: e' l'output di una chiamata
+      // SEPARATA (`translateArticle`, o il percorso free-MT di
+      // `lib/article-free-mt.mjs`), quindi la degenerazione puo' NASCERE in
+      // traduzione. E quel title diventa `data.slugs[locale]` — lo ri-deriva
+      // `relocalizeSlugsAfterTranslation` — cioe' URL e canonical di `/en/`,
+      // `/de/`, `/fr/`, live senza rebuild del sito. Il corpus pubblicato lo
+      // dimostra: tre campi DE valgono letteralmente `...` (due `title`, un
+      // `excerpt`), passati di qui perche' non erano vuoti.
+      // Stesso floor del percorso IT, IMPORTATO e non ricopiato (AGENTS.md #6):
+      // il floor e' sulla forma del campo, non sulla lingua.
+      const valoreTradotto = data.content[locale][field];
+      const traduzioneUsabile = hasUsableTranslatedText(valoreTradotto, locale);
+      const floorMiss = traduzioneUsabile ? metaFieldPlausibilityMiss(field, valoreTradotto) : null;
+      if (traduzioneUsabile && !floorMiss) continue;
+      // ULTIMA RISORSA ASIMMETRICA. Un campo implausibile e' comunque prosa
+      // NELLA LINGUA GIUSTA: se il retry non produce di meglio si tiene quello,
+      // MAI il fallback IT, che pubblicherebbe italiano sotto `/de/` (#831).
+      // Misurato sul corpus tradotto pubblicato: il floor tocca 5 campi su
+      // 22.631 (`Working DRY`, `Suisse-Italie`, `Hôtel Flaz` — titoli corti ma
+      // veri) oltre ai tre `...`. Su quei cinque il costo massimo e' UNA
+      // chiamata di retry in piu', mai una pubblicazione peggiore di oggi.
+      const ultimaRisorsa = floorMiss ? valoreTradotto : null;
       const itValue = itContent[field];
       // `itValue` composto di solo whitespace (es. ' ') è truthy: senza
       // `.trim()` bypassa questo guard e viene comunque assegnato sotto come
       // fallback, pubblicando un campo quasi-vuoto invece di far scattare
       // l'errore upstream (#691, follow-up a #689).
       if (!itValue?.trim()) {
+        if (ultimaRisorsa) {
+          console.warn(`  ⚠️  ${field} (${locale}) ${floorMiss}: sorgente IT assente, niente da ritradurre — valore tradotto mantenuto`);
+          continue;
+        }
         throw new Error(`Campo ${field} mancante nella traduzione ${locale} (e assente anche nella sorgente IT)`);
       }
-      console.error(`  ⚠️  Campo ${field} mancante nella traduzione ${locale} — retry traduzione mirata...`);
+      console.error(
+        floorMiss
+          ? `  ⚠️  Campo ${field} nella traduzione ${locale} troppo corto per essere un ${field} (${floorMiss}) — retry traduzione mirata...`
+          : `  ⚠️  Campo ${field} mancante nella traduzione ${locale} — retry traduzione mirata...`,
+      );
       try {
         // Reuse the in-scope callWithRetry (callLLM + JSON repair + truncation
         // back-off) for a focused single-field re-translation.
@@ -9971,14 +10040,23 @@ ${terminologyByLang[targetLang] || ''}`;
         // different from the IT value, so the old check ASSIGNED it. Require a
         // real string so a non-string retry falls through to the IT fallback.
         const retried = translatedStringOrNull(parsed?.[field], locale);
-        if (retried && String(retried).trim() !== String(itValue).trim()) {
+        // Il floor vale anche sull'ESITO del retry: un retry che risponde `...`
+        // e' la stessa degenerazione, solo un turno piu' tardi.
+        const retriedMiss = retried ? metaFieldPlausibilityMiss(field, retried) : null;
+        if (retried && !retriedMiss && String(retried).trim() !== String(itValue).trim()) {
           data.content[locale][field] = retried;
           console.error(`  ✅ Campo ${field} (${locale}) ritradotto con successo dopo missing-field retry`);
           continue;
         }
-        console.error(`  ⚠️  Retry ${field} (${locale}) non ha prodotto una traduzione valida — fallback al valore italiano`);
+        console.error(`  ⚠️  Retry ${field} (${locale}) non ha prodotto una traduzione valida${retriedMiss ? ` (${retriedMiss})` : ''} — ${ultimaRisorsa ? 'valore tradotto mantenuto' : 'fallback al valore italiano'}`);
       } catch (retryErr) {
-        console.error(`  ⚠️  Retry ${field} (${locale}) fallito: ${retryErr.message} — fallback al valore italiano`);
+        console.error(`  ⚠️  Retry ${field} (${locale}) fallito: ${retryErr.message} — ${ultimaRisorsa ? 'valore tradotto mantenuto' : 'fallback al valore italiano'}`);
+      }
+      // Vedi `ultimaRisorsa` sopra: sul solo floor-miss non si scende MAI sul
+      // fallback IT. Italiano sotto `/de/` (#831) e' peggio di un titolo corto.
+      if (ultimaRisorsa) {
+        console.warn(`  🔴 ${field} (${locale}) resta sotto il floor (${floorMiss}) dopo il retry — valore tradotto mantenuto, richiede verifica manuale`);
+        continue;
       }
       // itValue non è mai ri-verificato con detectTruncation() prima di
       // essere pubblicato come fallback: gemello dello stesso gap nel loop
@@ -10106,11 +10184,16 @@ ${terminologyByLang[targetLang] || ''}`;
             1000,
             `${locale}:${field}-retry`,
           );
-          if (hasUsableTranslatedText(retryResult?.[field], locale) && retryResult[field].trim() !== itVal) {
+          // Gemello di #798: anche qui il retry SOSTITUIVA il campo con
+          // qualunque stringa non vuota, e su `title` quella stringa diventa
+          // slug e canonical del locale. Il floor scarta il moncone e il campo
+          // resta quello di partenza — mai peggio di prima del retry.
+          const retryMiss = metaFieldPlausibilityMiss(field, retryResult?.[field]);
+          if (hasUsableTranslatedText(retryResult?.[field], locale) && !retryMiss && retryResult[field].trim() !== itVal) {
             data.content[locale][field] = retryResult[field];
             console.error(`  ✅ [translation-check] ${locale.toUpperCase()}.${field} ritradotto con successo`);
           } else {
-            console.error(`  ⚠️  [translation-check] ${locale.toUpperCase()}.${field} ancora identico dopo retry — accettato con warning`);
+            console.error(`  ⚠️  [translation-check] ${locale.toUpperCase()}.${field} ancora identico dopo retry${retryMiss ? ` o sotto il floor (${retryMiss})` : ''} — accettato con warning`);
           }
         } catch (retryErr) {
           console.error(`  ⚠️  [translation-check] Retry fallito per ${locale}.${field}: ${retryErr.message}`);
@@ -10136,9 +10219,17 @@ ${terminologyByLang[targetLang] || ''}`;
           1000,
           `${locale}:title-length-retry`,
         );
-        if (retryResult?.title && typeof retryResult.title === 'string') {
+        // Il retry accorcia: chiedendo «MASSIMO 60 caratteri» il modo tipico di
+        // sbagliare e' accorciare TROPPO, e `capBlogTitle` sotto non impone
+        // nessun floor (torna il titolo verbatim). Senza questo guard un
+        // title-cap retry degenere diventa lo slug del locale — stessa classe
+        // di #798, solo per la via della lunghezza massima.
+        const capRetryMiss = metaFieldPlausibilityMiss('title', retryResult?.title);
+        if (retryResult?.title && typeof retryResult.title === 'string' && !capRetryMiss) {
           localeContent.title = retryResult.title;
           console.error(`  ✅ [title-cap] ${locale.toUpperCase()} title ritradotto a ${retryResult.title.length} caratteri`);
+        } else if (capRetryMiss) {
+          console.warn(`  ⚠️ [title-cap] ${locale.toUpperCase()} title del retry sotto il floor (${capRetryMiss}) — scartato, resta il titolo precedente`);
         }
       } catch (retryErr) {
         console.warn(`  ⚠️ [title-cap] Retry titolo ${locale} fallito: ${retryErr.message} — applico hard cap`);
