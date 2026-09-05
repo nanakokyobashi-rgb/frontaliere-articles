@@ -1,10 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/economia/1943270/svizzera-croce-ige-swiss-marchio-made-valgono": "come-usare-la-croce-svizzera-sui-prodotti-esteri",
-  "https://www.laregione.ch/svizzera/svizzera/1943349/ubs-fumata-lex-red-ats": "portale-informazione-svizzera-italiana",
-  "https://www.tio.ch/svizzera/politica/1943297/bilaterali-tutele-iii-commissione-consiglio": "no-tutele-sindacalisti-bilaterali-iii",
-  "https://www.swissinfo.ch/ita/cf%3a-casse-malattia%2c-un-tetto-ai-salari-dei-manager/91884787": "tetto-salari-manager-casse-malattia",
-  "https://www.tio.ch/ticino/politica/1943411/comuni-utili-gettito-tui-cantone": "tassa-utili-immobiliari-comuni",
-  "https://www.tio.ch/svizzera/attualita/1943434/km-federale-consiglio-citta-zone-interviene": "zone-30-kmh-intervento-consiglio-federale",
   "https://www.swissinfo.ch/ita/tre-banche-cantonali-%28be%2c-sg%2c-bl%29%2c-tre-volte-profitti-in-crescita/91885072": "tre-banche-cantonali-be-sg-bl-profitti-in-crescita",
   "https://www.swissinfo.ch/ita/insolvenze-ai-massimi-da-30-anni/91884439": "insolvenze-ai-massimi-da-30-anni",
   "https://www.swissinfo.ch/ita/cf%3a-no-all%27iniziativa-sulla-piazza-finanziaria/91884875": "consiglio-federale-no-iniziativa-finanziaria",
@@ -1817,6 +1811,36 @@
   "https://www.rsi.ch/s/4061616": {
     "articleId": "mezzo-miliardo-contadini-mercosur",
     "ts": "2026-09-05T11:11:32.077Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/attualita/1948218/medici-specialisti-alcuni-esagerano-prioswiss-tardoc-direttrice": {
+    "articleId": "medici-specialisti-fatturazioni-svizzera",
+    "ts": "2026-09-05T13:45:01.980Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/prio%2eswiss%3a-alcuni-medici-specialisti-esagerano-con-tardoc/92010294": {
+    "articleId": "prio-swiss-medici-specialisti-tardoc",
+    "ts": "2026-09-05T13:56:33.347Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/tg%3a-colpito-a-morte-da-cesto-di-mongolfiera/92006537": {
+    "articleId": "morte-mongolfiera-ticino",
+    "ts": "2026-09-05T14:06:08.331Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/ticino/cronaca/1948197/fiamme-in-piena-notte-alla-scuola-professionale": {
+    "articleId": "incendio-notturno-scuola-professionale-biasca",
+    "ts": "2026-09-05T14:17:14.593Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/s/4061343": {
+    "articleId": "falso-allarme-goldach",
+    "ts": "2026-09-05T14:27:14.940Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/cronaca/1948224/amante-della-pedopornografia-ma-faceva-l-educatore-in-un-asilo-nido": {
+    "articleId": "asilo-nido-controlli-minori",
+    "ts": "2026-09-05T16:05:02.364Z",
     "keyForm": 2
   }
 }
