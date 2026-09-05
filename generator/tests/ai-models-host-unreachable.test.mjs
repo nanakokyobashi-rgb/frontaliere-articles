@@ -45,6 +45,7 @@ import {
   callLLM,
   isQuotaExhaustedError,
   getStats,
+  printRunSummary,
   resetState,
 } from '../scripts/lib/ai-models.mjs';
 
@@ -1562,6 +1563,43 @@ describe('callLLM — il reset della striscia si conta per classe (#848 item 3)'
     const row = getStats().resolverFlapResets.github;
     assert.ok(row, `atteso un reset contato: ${JSON.stringify(getStats().resolverFlapResets)}`);
     assert.equal(row.success, 1, `atteso il reset da successo: ${JSON.stringify(row)}`);
+  });
+
+  // Il conteggio serve a decidere l'item solo se esce dal processo: senza una
+  // riga nel riepilogo di fine run, harvestarlo vuol dire scaricare il log
+  // intero di ogni run e cercare le `console.warn` per evento — e uno zero
+  // raccolto cosi' non si distingue da un log troncato.
+  const summaryOf = () => {
+    const out = [];
+    const orig = console.log;
+    console.log = (...a) => out.push(a.map(String).join(' '));
+    try { printRunSummary(); } finally { console.log = orig; }
+    return out.join('\n');
+  };
+  const flapLineOf = (text) => text.split('\n').find((l) => l.includes('resolver flaps:'));
+
+  it('il riepilogo di fine run porta il conteggio per classe', async () => {
+    process.env.AI_MODELS_FORCE_CHAIN = 'gpt-4o-mini,gpt-4.1-mini,gpt-4o,gpt-4.1';
+    const script = ['EAI_AGAIN', 'abort', 'EAI_AGAIN', 'EAI_AGAIN'];
+    let i = 0;
+    globalThis.fetch = async () => {
+      const step = script[Math.min(i++, script.length - 1)];
+      if (step === 'abort') throw Object.assign(new Error('The operation was aborted'), { name: 'AbortError' });
+      throw undiciFetchFailed('EAI_AGAIN');
+    };
+
+    assert.ok(await run(), 'la catena deve fallire');
+    const line = flapLineOf(summaryOf());
+    assert.ok(line, 'il riepilogo deve portare la riga dei flap');
+    assert.match(line, /resets github silent=1 resolved=0 success=0 \(1 discarded\)/, line);
+    // La striscia ancora viva a fine run e' l'altra meta' del fatto: dice
+    // quanto mancava alla soglia quando il reset l'ha buttata via.
+    assert.match(line, /open \[github=2\/3\]/, line);
+  });
+
+  it('una run senza reset stampa comunque la riga — e\' il denominatore', () => {
+    const line = flapLineOf(summaryOf());
+    assert.equal(line, '   resolver flaps: none this run', `riga vista: ${line}`);
   });
 
   it('`resetState()` azzera anche il conteggio dei reset', async () => {
