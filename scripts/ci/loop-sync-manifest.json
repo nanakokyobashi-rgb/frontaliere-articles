@@ -3032,8 +3032,8 @@
       "sitePath": ".github/corpus-workflows/contract.json",
       "mode": "identical",
       "baseline": {
-        "site": "a1b456d8640887a3",
-        "corpus": "a1b456d8640887a3",
+        "site": "9da82c40dd83c8eb",
+        "corpus": "9da82c40dd83c8eb",
         "alignedAt": "2026-09-05"
       }
     },
@@ -3172,9 +3172,9 @@
       "sitePath": ".github/corpus-workflows/observers/scripts/lib/crawler-generation-token.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "b3a086d1d9d34ce5",
-        "corpus": "b3a086d1d9d34ce5",
-        "alignedAt": "2026-09-01"
+        "site": "76c39e7b60dc1f6c",
+        "corpus": "76c39e7b60dc1f6c",
+        "alignedAt": "2026-09-05"
       }
     },
     {
