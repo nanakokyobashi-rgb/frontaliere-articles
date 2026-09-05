@@ -565,8 +565,9 @@ export function shapeJobs(stats, { nowMs = Date.now(), todayIso } = {}) {
  * edition, but on its own it has no memory: a source that degrades once is a
  * morning, and a source that degrades every morning is indistinguishable from
  * it in the snapshot, in the log and in the run's exit code. The previous
- * snapshot is the only durable state this pipeline has — it is committed with
- * every edition — so the streak rides in it.
+ * streak therefore has to be durable: it is committed with every edition, in
+ * the snapshot AND in the sidecar `degradationState` writes (the sidecar is
+ * what survives the 0/4-blocks branch, which skips the snapshot — #885).
  *
  * A same-day rerun (the `workflow_dispatch` path, which rewrites today's
  * edition) inherits the streak instead of adding to it: rerunning the job is
@@ -680,5 +681,39 @@ export function buildDailyBrief({ todayIso, nowMs = Date.now(), borderWaitDocs, 
       jobsActive: blocks.jobs.available ? blocks.jobs.activeJobs : 0,
     },
     blocks,
+  };
+}
+
+/**
+ * The per-block streaks, in the shape `degradationAlarms` and `buildDailyBrief`
+ * already read — so the sidecar file that carries them across a day WITHOUT a
+ * snapshot is the same reader, not a second one.
+ *
+ * Why a sidecar at all (#885). The streak used to ride only inside
+ * `public/data/daily-brief.json`, and that snapshot is deliberately NOT
+ * rewritten on the `0/4 blocks` branch (yesterday's copy is left in place).
+ * So a total blackout re-read the same `previous` every morning, recomputed the
+ * same streak of 1, and never reached the threshold: the one outage shape the
+ * alarm exists for was the one shape it could not see.
+ *
+ * Writing the empty snapshot instead was the other candidate and is worse: it
+ * would overwrite a good snapshot with a 0-block one, and `build-api.mjs`
+ * refuses to publish that (`carries no available blocks`) — a bookkeeping
+ * counter would take the whole API surface down.
+ *
+ * Not two sources of truth: this is derived from the same `brief` in the same
+ * run, and the sidecar is the ONLY thing read back (the snapshot is a fallback
+ * for the run that finds no sidecar yet, e.g. the first one after this lands).
+ * `dateIso` rides along because a same-day rerun must inherit the streak
+ * instead of adding to it.
+ */
+export function degradationState(brief) {
+  return {
+    schemaVersion: 1,
+    generatedAt: brief.generatedAt,
+    dateIso: brief.dateIso,
+    blocks: Object.fromEntries(
+      Object.entries(brief?.blocks || {}).map(([name, b]) => [name, { degradedEditions: blockDegradedEditions(b) }]),
+    ),
   };
 }

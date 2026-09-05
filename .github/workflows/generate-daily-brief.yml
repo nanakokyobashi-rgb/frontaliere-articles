@@ -13,9 +13,11 @@ name: Generate Daily Brief Edition (Bollettino del Frontaliere)
 #     ranking whose window is public. A missing SA is a config error and fails
 #     the run; a missing DATA SOURCE only degrades its block (per-block
 #     degradation lives in the scripts, not here).
-#   - A day with fewer than 2 fresh blocks produces NO edition and exits 0
-#     without committing: a day without data must not break the cron, and an
-#     empty edition must never be published (loadSnapshot enforces both).
+#   - A day with fewer than 2 fresh blocks produces NO edition and exits 0:
+#     a day without data must not break the cron, and an empty edition must
+#     never be published (loadSnapshot enforces both). The only thing such a
+#     day still commits is `data/daily-brief-degradation.json`, the streak
+#     ledger — see the `git add` below and issue #885.
 #   - The hero + thumbnail are pushed to R2 after the commit (best-effort,
 #     same upload-cdn-file.sh as fast-publish): the og:image in the static
 #     HTML points at cdn.frontaliereticino.ch, and Discover reads exactly
@@ -203,7 +205,14 @@ jobs:
           # the green exit below). The seo glob covers a shard roll past
           # seo-blog-5.
           shopt -s nullglob
+          # `data/daily-brief-degradation.json` is the streak ledger and is the
+          # ONE path that must be staged even on a day with no edition: the
+          # 0/4-blocks branch skips the snapshot on purpose, and without this
+          # add the count would die on the runner and a permanent blackout
+          # would never reach the threshold (#885). The refresh step writes it
+          # on every non-dry run, so it exists here whenever this step runs.
           git add public/data/daily-brief.json \
+                  data/daily-brief-degradation.json \
                   content/blogArticleIds.ts \
                   content/routerBlogData.ts \
                   content/blog-articles-data.ts \
@@ -305,10 +314,11 @@ jobs:
       # Quindi: ULTIMO. Ogni step che qualcuno aggiungera' a questo job va messo
       # PRIMA di questo, e `daily-brief-degradation-alarm.test.mjs` lo pretende.
       #
-      # `steps.commit` puo' non aver pushato (niente in stage): lo snapshot con
-      # lo streak nuovo e' comunque committato quando c'e' un'edizione, e il
-      # verdetto vale lo stesso — l'attraversamento va detto anche in un giorno
-      # senza edizione.
+      # `steps.commit` puo' non aver pushato (niente in stage): lo streak nuovo
+      # e' comunque committato — nello snapshot quando c'e' un'edizione, e in
+      # `data/daily-brief-degradation.json` sempre, anche a 0/4 blocchi (#885)
+      # — e il verdetto vale lo stesso: l'attraversamento va detto anche in un
+      # giorno senza edizione.
       - name: Degradation alarm — un blocco degradato da tre edizioni di fila
         if: steps.mode.outputs.dry != 'true' && steps.refresh.outputs.degradation_crossed == 'true'
         run: |
