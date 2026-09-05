@@ -1,12 +1,5 @@
 {
   "keywords": [
-    "permesso di dimora B canton Friburgo requisiti e rinnovo",
-    "permesso di domicilio C canton Friburgo requisiti e domanda",
-    "frontaliere licenziamento diritti preavviso indennita 2026 simulazione pratica",
-    "frontaliere formazione professionale riqualifica corsi 2026",
-    "frontaliere formazione professionale riqualifica corsi 2026 famiglia con figli",
-    "frontaliere formazione professionale riqualifica corsi 2026 single",
-    "frontaliere formazione professionale riqualifica corsi 2026 simulazione pratica",
     "vivere a Venegono Inferiore e lavorare in Ticino da frontaliere",
     "premi cassa malati canton Friburgo e riduzione premi",
     "vivere a Bregnano e lavorare in Ticino da frontaliere",
@@ -499,7 +492,14 @@
     "cercare lavoro in svizzera guida pratica 2026 canton Argovia",
     "sistema sanitario svizzero lamal guida 2026 canton Ginevra",
     "vivere a Castiglione Olona e lavorare in Ticino da frontaliere",
-    "patente di guida canton Zugo conversione ed esami"
+    "patente di guida canton Zugo conversione ed esami",
+    "frontaliere licenziamento diritti preavviso indennita 2026 oltre 20 km",
+    "frontaliere licenziamento diritti preavviso indennita 2026 famiglia con figli",
+    "frontaliere licenziamento diritti preavviso indennita 2026 single",
+    "frontaliere licenziamento diritti preavviso indennita 2026 simulazione pratica",
+    "frontaliere formazione professionale riqualifica corsi 2026",
+    "frontaliere formazione professionale riqualifica corsi 2026 famiglia con figli",
+    "frontaliere formazione professionale riqualifica corsi 2026 single"
   ],
   "strikes": {
     "frontaliere farmacista ticino stipendio requisiti": 3,
@@ -757,6 +757,7 @@
     "vivere a Berbenno di Valtellina e lavorare in Grigioni da frontaliere": 1,
     "vivere a Oltrona di San Mamette e lavorare in Ticino da frontaliere": 1,
     "premi cassa malati canton Appenzello Interno e riduzione premi": 1,
-    "frontaliere cambio datore lavoro procedura permesso 2026 oltre 20 km": 1
+    "frontaliere cambio datore lavoro procedura permesso 2026 oltre 20 km": 1,
+    "frontaliere formazione professionale riqualifica corsi 2026 simulazione pratica": 1
   }
 }
