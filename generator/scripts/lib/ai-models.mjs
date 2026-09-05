@@ -1778,6 +1778,13 @@ const DEFAULT_OPTS = {
    * cio' che evita al chiamante diagnostico — proprio quello che percorre la
    * catena intera — di ripagare lo stesso errore a ogni giro.
    *
+   * LIMITE ESPLICITO — i writer puramente in-processo non prendono il flag
+   * (#887). `recordModelContentSuccess()` azzera lo streak del breaker di
+   * contenuto e non propone niente al ledger: gatare il reset mentre il bump del
+   * gemello resta lascerebbe il chiamante diagnostico capace solo di spingere il
+   * breaker verso il ban. Un opt-out esplicito la' non e' comunque silenzioso —
+   * vedi il blocco su quella funzione.
+   *
    * LIMITE ESPLICITO — la discovery non e' coperta da questo flag. E' per
    * processo, non per chiamata: `discoverFreeModels()` marca `stale` i modelli
    * che un provider non offre piu' e quel marchio va nel ledger. Un chiamante
