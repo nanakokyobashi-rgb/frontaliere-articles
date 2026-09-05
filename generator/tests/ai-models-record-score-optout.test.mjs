@@ -37,7 +37,10 @@
  */
 
 import { strict as assert } from 'node:assert';
+import { readFileSync } from 'node:fs';
+import path from 'node:path';
 import { describe, it, beforeEach, afterEach } from 'node:test';
+import { fileURLToPath } from 'node:url';
 
 import {
   callLLM,
@@ -634,6 +637,40 @@ describe('#845 — recordModelContentFailure({ recordScore }) non tocca il ledge
       entry.failures,
       0,
       `il fallimento diagnostico e' rientrato dalla finestra nei dettagli persistiti: ${JSON.stringify(entry)}`,
+    );
+  });
+});
+
+/**
+ * ── IL FLAG DEVE ARRIVARE DAL CALL SITE DI PRODUZIONE (#845) ────────────────
+ *
+ * `recordModelContentFailure()` e' esportata e ha UN solo call site di
+ * produzione in tutto l'albero: `callLLM()` di `create-article.mjs`, nel ramo
+ * «output JSON incompleto». Il parametro `recordScore` senza quella
+ * propagazione e' irraggiungibile da qualunque percorso reale — l'opt-out
+ * esisterebbe nel modulo e non nella produzione, e un chiamante diagnostico
+ * scriverebbe comunque `ai_model_scores/_all`.
+ *
+ * Misurato sul SORGENTE perche' `create-article.mjs` non e' importabile dalle
+ * gate del generatore (girano `node --test` senza `npm ci`): stessa tecnica di
+ * split-merge-abort-flag.test.mjs.
+ */
+describe('propagazione di recordScore dal call site di produzione', () => {
+  const SRC = readFileSync(
+    path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../scripts/create-article.mjs'),
+    'utf-8',
+  );
+
+  it('create-article.mjs passa opts.recordScore a recordModelContentFailure', () => {
+    const calls = [...SRC.matchAll(/recordModelContentFailure\(([^)]*)\)/g)]
+      .map((m) => m[1])
+      .filter((args) => !/^\s*$/.test(args));
+
+    assert.equal(calls.length, 1, `atteso un solo call site, visti: ${JSON.stringify(calls)}`);
+    assert.match(
+      calls[0],
+      /recordScore:\s*opts\.recordScore/,
+      `il call site non propaga il flag — l'opt-out del ledger resta irraggiungibile: ${calls[0]}`,
     );
   });
 });

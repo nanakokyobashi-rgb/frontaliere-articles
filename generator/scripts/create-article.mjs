@@ -5609,8 +5609,20 @@ async function callLLM(messages, opts = {}) {
         // exits. When wallBudgetExceeded() is true the throw below is caused by
         // time pressure, not by model output quality; scoring it as a failure would
         // bias Firestore ai_model_scores against a model that may be perfectly fine.
+        //
+        // `recordScore` scende sul PARAMETRO, non sul call site (#845/#846):
+        // questo e' l'UNICO call site di produzione di
+        // recordModelContentFailure(), quindi senza la propagazione l'opt-out
+        // del modulo non sarebbe raggiungibile da nessun percorso reale — un
+        // chiamante `callLLM(messages, { recordScore: false })` scriverebbe
+        // comunque `ai_model_scores/_all`, il documento che sortChainByScore()
+        // legge per ordinare la cascata che genera il corpus. Sul parametro e
+        // non attorno alla chiamata perche' il ban di run e il contatore
+        // consecutivo di contenuto devono restare anche in opt-out: e' memoria
+        // di processo, e il chiamante diagnostico e' proprio quello che ha
+        // bisogno di rileggere i propri esiti. `undefined` = default true.
         if (!wallBudgetExceeded()) {
-          recordModelContentFailure(modelUsedRef.model);
+          recordModelContentFailure(modelUsedRef.model, { recordScore: opts.recordScore });
         }
         // Bail out of this retry budget the moment the run-wide wall-clock
         // deadline is gone, instead of blindly looping to maxBody2Retries.
