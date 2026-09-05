@@ -1745,6 +1745,15 @@ const DEFAULT_OPTS = {
    * che arriva da `process.env`) sono opt-out veri e non scivolano nel ramo che
    * scrive. Vedi il commento su quella funzione.
    *
+   * COSA IL FLAG NON SPEGNE (#846). Il ban di run resta: un modello a quota
+   * esaurita, 404 non ritentabile, in timeout o su host morto entra comunque
+   * in `_exhaustedModels` e viene saltato per il resto del processo — e' solo
+   * la proposta al ledger condiviso a non partire. Il gate sta quindi sul
+   * PARAMETRO `recordScore` di `markModelExhausted`, mai sul suo call site:
+   * e' la stessa divisione che la discovery adotta nel ramo markStale, ed e'
+   * cio' che evita al chiamante diagnostico — proprio quello che percorre la
+   * catena intera — di ripagare lo stesso errore a ogni giro.
+   *
    * LIMITE ESPLICITO — la discovery non e' coperta da questo flag. E' per
    * processo, non per chiamata: `discoverFreeModels()` marca `stale` i modelli
    * che un provider non offre piu' e quel marchio va nel ledger. Un chiamante
@@ -5336,8 +5345,11 @@ async function _callOpenAICompatible(apiModel, messages, opts, { endpoint, apiKe
         // (daily-limit-looking response, stale local/OmniRoute auth 401) must
         // never hard-ban a last-resort provider. See _isLastResortProvider.
         if (isDailyLimitError(res.status, raw)) {
-          if (!_suppressExhaustionMark && !_isLastResortProvider(modelForTracking) && _shouldRecordScore(opts)) {
-            markModelExhausted(modelForTracking);
+          if (!_suppressExhaustionMark && !_isLastResortProvider(modelForTracking)) {
+            // `recordScore` sul PARAMETRO, non sulla chiamata (#846): il flag
+            // significa «niente ledger», mai «niente marchio». Vedi il ramo
+            // markStale di _discoverProvider, che adotta la stessa forma.
+            markModelExhausted(modelForTracking, 'quota', '', { recordScore: _shouldRecordScore(opts) });
             _stats.exhausted++;
           }
           throw new Error(`[${displayModel}] Daily request limit reached`);
@@ -5361,8 +5373,11 @@ async function _callOpenAICompatible(apiModel, messages, opts, { endpoint, apiKe
               _learnSchemaIncompatible(modelForTracking);
             }
           }
-          if (nrc.markExhausted && !_isLastResortProvider(modelForTracking) && _shouldRecordScore(opts)) {
-            markModelExhausted(modelForTracking, 'nonretryable', `HTTP ${res.status}`);
+          if (nrc.markExhausted && !_isLastResortProvider(modelForTracking)) {
+            // Gate sul parametro, non sul call site (#846).
+            markModelExhausted(modelForTracking, 'nonretryable', `HTTP ${res.status}`, {
+              recordScore: _shouldRecordScore(opts),
+            });
             _stats.exhausted++;
           }
           const err = new Error(`[${displayModel}] HTTP ${res.status}: ${raw.slice(0, 300)}`);
@@ -6503,10 +6518,9 @@ async function _callGeminiRaw(model, messages, opts) {
       if (!res.ok) {
         // Quota / rate-limit — mark exhausted if it looks permanent
         if (isDailyLimitError(res.status, raw)) {
-          if (_shouldRecordScore(opts)) {
-            markModelExhausted(model);
-            _stats.exhausted++;
-          }
+          // Gate sul parametro, non sul call site (#846).
+          markModelExhausted(model, 'quota', '', { recordScore: _shouldRecordScore(opts) });
+          _stats.exhausted++;
           throw new Error(`[${model}] Daily quota reached`);
         }
         // Non-retryable client errors (unknown model, context too small)
@@ -6523,7 +6537,7 @@ async function _callGeminiRaw(model, messages, opts) {
               _learnSchemaIncompatible(model);
             }
           }
-          if (nrc.markExhausted && _shouldRecordScore(opts)) {
+          if (nrc.markExhausted) {
             // 'nonretryable', NOT the default 'quota': this is the Gemini twin
             // of the _callOpenAICompatible non-retryable branch, which already
             // labels correctly. Left at the default, a 404/unknown-model here
@@ -6531,7 +6545,10 @@ async function _callGeminiRaw(model, messages, opts) {
             // if it were a daily quota — exactly the over-persistence #4073
             // removed (quota-only persist gate in _persistScoresToFirestore).
             // Review 🔴 on #4073.
-            markModelExhausted(model, 'nonretryable', `HTTP ${res.status}`);
+            // Gate sul parametro, non sul call site (#846).
+            markModelExhausted(model, 'nonretryable', `HTTP ${res.status}`, {
+              recordScore: _shouldRecordScore(opts),
+            });
             _stats.exhausted++;
           }
           const err = new Error(`[${model}] HTTP ${res.status}: ${raw.slice(0, 300)}`);
@@ -7241,8 +7258,9 @@ export async function callLLM(messages, opts = {}) {
         // PROVIDER.LOCAL carve-out on recordModelContentFailure above: no
         // external quota, so exhausting it mid-run just guarantees zero
         // output for the rest of the wall-clock budget.
-        if (count >= MAX_CONSECUTIVE_429 && !_isLastResortProvider(model) && _shouldRecordScore(o)) {
-          markModelExhausted(model);
+        if (count >= MAX_CONSECUTIVE_429 && !_isLastResortProvider(model)) {
+          // Gate sul parametro, non sul call site (#846).
+          markModelExhausted(model, 'quota', '', { recordScore: _shouldRecordScore(o) });
           _stats.exhausted++;
           console.warn(`🚫 [${model}] Exhausted after ${count} consecutive 429s`);
         }
@@ -7275,8 +7293,9 @@ export async function callLLM(messages, opts = {}) {
           console.warn(`⏱️  [${model}] Timed out at the adaptive ${Math.round((e.adaptiveTimeoutMs || 0) / 1000)}s ceiling (caller asked ${Math.round((o.timeout || 0) / 1000)}s) — not exhausting on our own guess (${n}/${ADAPTIVE_TIMEOUT_MAX_CLAMPED_FAILURES})`);
         }
       }
-      if (isTimeoutFailure && !spared && !_isLastResortProvider(model) && _shouldRecordScore(o)) {
-        markModelExhausted(model, 'timeout');
+      if (isTimeoutFailure && !spared && !_isLastResortProvider(model)) {
+        // Gate sul parametro, non sul call site (#846).
+        markModelExhausted(model, 'timeout', '', { recordScore: _shouldRecordScore(o) });
         _stats.exhausted++;
         markedExhausted = true;
       }
@@ -7335,9 +7354,12 @@ export async function callLLM(messages, opts = {}) {
       // `_isPerMachineEndpoint`: in processo cambia nulla — marchio e cooldown
       // restano — mentre verso Firestore non parte niente.
       if (e.hostUnreachable && !spared && !_isHostUnreachableExempt(model, e)) {
-        if (!markedExhausted && _shouldRecordScore(o)) {
+        if (!markedExhausted) {
+          // Due ragioni indipendenti per NON scrivere il ledger, un solo
+          // parametro (#846): l'opt-out del chiamante e l'endpoint per-macchina
+          // di #838. Il marchio in-processo resta in entrambi i casi.
           markModelExhausted(model, 'nonretryable', e.hostUnreachable, {
-            recordScore: !perMachineEndpointFault,
+            recordScore: _shouldRecordScore(o) && !perMachineEndpointFault,
           });
           _stats.exhausted++;
           markedExhausted = true;
