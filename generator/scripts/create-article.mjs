@@ -148,7 +148,7 @@ import { JSON_QUOTE_SAFETY_RULE_IT, describeJsonParseError, describeRawForDiagno
 // modulo puro perche' le gate del generatore girano `node --test` senza `npm ci`
 // e non possono importare QUESTO file: cosi' il test esegue lo stesso oggetto
 // codice della produzione invece di una copia. Vedi l'intestazione del modulo.
-import { REQUIRED_IT_BODY_FIELDS, BODY_ONLY_FIELDS, META_ONLY_FIELDS, normalizeItalianContentFromPayload, classifyBody2Payload, isTopicGateAbortVerdict, findUnreadableContentEvidence, resolveBody2Validation, recoverMisplacedFaq, hasUsableContentText, hasUsableTranslatedText } from './lib/body2-payload-verdict.mjs';
+import { REQUIRED_IT_BODY_FIELDS, BODY_ONLY_FIELDS, META_ONLY_FIELDS, metaFieldPlausibilityMiss, normalizeItalianContentFromPayload, classifyBody2Payload, isTopicGateAbortVerdict, findUnreadableContentEvidence, resolveBody2Validation, recoverMisplacedFaq, hasUsableContentText, hasUsableTranslatedText } from './lib/body2-payload-verdict.mjs';
 import { describePayloadRejection } from './lib/llm-payload-diagnostics.mjs';
 import {
   factCheckFingerprint,
@@ -4626,6 +4626,25 @@ function validateItalianPayload(contentIt, locale = 'it') {
 
   if (contentIt.body2.trim().length < 40) {
     throw new Error(`Campo body2 troppo corto per ${locale}`);
+  }
+
+  // Lo stesso floor sui campi meta, e per la stessa ragione (#798): senza,
+  // qui passava qualunque `title` non vuoto — un moncone di 3 char, o l'eco
+  // del prompt adottato campo per campo — e da li' diventava slug + canonical
+  // live, senza rebuild del sito. Questo gate vede l'articolo gia' MERGIATO
+  // dalle due meta' dello split, quindi copre anche il caso in cui la meta'
+  // meta e' stata recuperata da un candidato diverso a valle del verdetto.
+  // La soglia e' importata, non ricopiata: AGENTS.md #6.
+  for (const field of META_ONLY_FIELDS) {
+    const sottoSoglia = metaFieldPlausibilityMiss(field, contentIt?.[field]);
+    if (sottoSoglia) {
+      // `troppo corto` e' la formula che `isQualityRejectError()` riconosce:
+      // una fonte che non produce un titolo plausibile e' un problema di
+      // qualita' per-headline, si passa alla successiva senza far cadere la run.
+      const err = new Error(`Campo ${field} troppo corto per ${locale} (${sottoSoglia})`);
+      err.qualityReject = true;
+      throw err;
+    }
   }
 }
 

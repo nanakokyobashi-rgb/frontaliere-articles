@@ -90,6 +90,58 @@ export const BODY_ONLY_FIELDS = ['body1', 'body2', 'body3'];
 export const META_ONLY_FIELDS = ['title', 'excerpt'];
 
 /**
+ * FLOOR DI PLAUSIBILITA' SUI CAMPI META.
+ *
+ * Fino al 2026-09-05 l'unico floor di lunghezza del verdetto era `body2<40`:
+ * su `title` ed `excerpt` bastava UN carattere non vuoto perche' il verdetto
+ * uscisse `ok`. Un `title` di 3 char — o l'eco del prompt che un modello
+ * parcheggia alla radice del payload e che dopo #768 viene adottato campo per
+ * campo — diventa quindi slug + canonical, e va LIVE senza rebuild del sito.
+ * Un titolo non e' rigenerabile a valle: lo slug e' l'URL.
+ *
+ * Le soglie sono dimensionate sul corpus PUBBLICATO, non a tavolino. Sui 5.658
+ * title IT di `content/blog-meta-it.ts` + `content/blog-meta-ch-it.ts`:
+ * min 16 char / 2 parole, p1 34 char, mediana 57. Sugli excerpt: min 37 char /
+ * 4 parole, p1 66 char, mediana 138. I floor stanno SOTTO il minimo osservato
+ * — nessun articolo gia' pubblicato li violerebbe (lo dimostra lo strato di
+ * scan in `generator/tests/meta-fields-plausibility-floor.test.mjs`) — perche'
+ * il gate deve prendere il moncone, non decidere lo stile editoriale.
+ *
+ * Il floor sulle parole esiste separato da quello sui caratteri perche' le due
+ * degenerazioni sono diverse: `abc` e' corto, `Frontalierefrontaliere` no ma
+ * resta una parola sola incollata. Il corpus non ha titoli di 1 parola.
+ */
+export const META_FIELD_PLAUSIBILITY_FLOORS = {
+  title: { minChars: 12, minWords: 2 },
+  excerpt: { minChars: 25, minWords: 3 },
+};
+
+/**
+ * Il campo meta viola il floor? Torna la voce da mettere in `missing` (stessa
+ * forma di `body2<40`: `title<12`, `excerpt<3w`), oppure `null` se e' a posto.
+ *
+ * Un campo VUOTO torna `null` di proposito: l'assenza e' gia' segnalata a
+ * monte come `missing: [field]`, e duplicarla nasconderebbe il motivo vero.
+ * Un campo che non ha floor (i body, `faq`, qualunque cosa arrivi domani)
+ * torna `null`: qui si giudica solo cio' che e' stato dimensionato.
+ *
+ * Vive qui, accanto al verdetto, perche' e' la stessa soglia che serve al
+ * gate a valle (`validateItalianPayload` in create-article.mjs, sull'articolo
+ * gia' MERGIATO dalle due meta' dello split). Due copie della stessa costante
+ * divergerebbero in silenzio — AGENTS.md #6.
+ */
+export function metaFieldPlausibilityMiss(field, value) {
+  const floor = META_FIELD_PLAUSIBILITY_FLOORS[field];
+  if (!floor) return null;
+  if (typeof value !== 'string') return null;
+  const testo = value.trim();
+  if (!testo) return null;
+  if (testo.length < floor.minChars) return `${field}<${floor.minChars}`;
+  if (testo.split(/\s+/).length < floor.minWords) return `${field}<${floor.minWords}w`;
+  return null;
+}
+
+/**
  * Un modello che emette la stringa letterale `"null"` su un campo di
  * `content` sta serializzando male il `null` JSON che il payload di abort di
  * REGOLA #0 dichiara per quello stesso campo — non sta scrivendo contenuto.
@@ -817,6 +869,13 @@ export function classifyBody2Payload({
   // controllo passerebbe comunque, ma tenerlo legato ai campi attesi dice
   // perche' — non e' un caso fortunato, e' il contratto.
   if (expectedFields.includes('body2') && itContent.body2 && itContent.body2.trim().length < 40) missing.push('body2<40');
+  // Lo stesso floor, sui campi meta. `metaFieldPlausibilityMiss` conosce solo
+  // `title` ed `excerpt`, quindi l'intersezione con `expectedFields` e' gia'
+  // implicita: sulla meta' `body` dello split non scatta niente.
+  for (const field of expectedFields) {
+    const sottoSoglia = metaFieldPlausibilityMiss(field, itContent?.[field]);
+    if (sottoSoglia) missing.push(sottoSoglia);
+  }
   // Language sanity — fallback models occasionally drift to CJK / Cyrillic
   // when prompted in Italian. Treat as malformed output: penalises the model,
   // chain rotates, no budget burned at the outer headline-validation layer.
