@@ -45,6 +45,9 @@ import {
   formatRunLine,
   KNOWN_REASONS,
   PERSISTED_REASONS,
+  parseAggregateExhaustion,
+  deferralVerdicts,
+  formatVerdictLine,
 } from '../../scripts/ci/exhaustion-reason-report.mjs';
 
 const NOW = Date.parse('2026-08-13T14:30:00Z');
@@ -167,4 +170,101 @@ test('il sommario di un run pulito non riporta motivi', () => {
   assert.equal(s.distinctReasons, 0);
   assert.deepEqual(s.persistedModels, []);
   assert.match(formatRunLine(123, s), /run 123/);
+});
+
+
+/**
+ * ── IL CONFRONTO LORDO/NETTO SU UNA RUN PASSATA (#854) ──────────────────────
+ *
+ * La misura che #821 chiede — «quanti verdetti di deferral cambiano fra secchi
+ * lordi e netti» — si fa rileggendo il messaggio aggregato di `callLLM` dai log
+ * e rifacendo il conto con LE STESSE regex della produzione
+ * (`classifyExhaustionCause`, importata: niente copia locale delle due regex,
+ * AGENTS.md #6).
+ *
+ * Questi casi sono l'osservatore di quel parser. Senza, il giorno in cui il
+ * formato del messaggio cambia — o le due regex si spostano — il report smette
+ * di trovare cascate e stampa `flip: 0/0` invece di fallire: uno zero che si
+ * legge «nessun verdetto cambia» quando vuol dire «non ho letto niente».
+ *
+ * La fixture riproduce la MECCANICA della run 31823202761 passando per le regex
+ * vere: 41 fallimenti transitori indipendenti, 52 persistenti, e 12 fratelli
+ * GitHub saltati con `cooling down` — vocabolario TRANSITORIO, quindi contati
+ * nel secchio E come echi. Al lordo sono 53 vs 52, la maggioranza che si decide
+ * per un voto; al netto sono 41 vs 52. Un solo host morto ribalta l'exit code.
+ */
+const cascataConEchiGithub = (() => {
+  const errors = [];
+  for (let i = 0; i < 41; i++) errors.push(`t${i}: skipped — exhausted (daily limit)`);
+  for (let i = 0; i < 52; i++) errors.push(`p${i}: skipped — no API key configured`);
+  // Forma letterale di `providerCooldownSkipLine`: e' quella che
+  // PROVIDER_COOLDOWN_SKIP_RE riconosce, e la `skipPhrase` che matcha
+  // `transientRe`. Dodici id fratelli, UN solo 429.
+  for (let i = 0; i < 12; i++) errors.push(`gh-${i}: skipped — provider github cooling down after 429`);
+  return '2026-08-14T04:08:01Z   ⚠️  Tentativo 1 fallito: All AI models failed. '
+    + `Chain: [a → b]. Errors: ${errors.join(' | ')}`;
+})();
+
+test('il parser ricostruisce l\'array `errors` dal messaggio aggregato (#854)', () => {
+  const found = parseAggregateExhaustion(cascataConEchiGithub);
+  assert.equal(found.length, 1, 'una cascata svuotata, una voce');
+  assert.equal(found[0].errors.length, 105, 'ogni riga di `errors` torna separata');
+  assert.equal(found[0].capCount, 0, 'nessun rifiuto su taglia in questa cascata');
+
+  const v = deferralVerdicts(found[0]);
+  assert.equal(v.breakdown.transient, 53, `secchio transitorio: ${JSON.stringify(v.breakdown)}`);
+  assert.equal(v.breakdown.persistent, 52, `secchio persistente: ${JSON.stringify(v.breakdown)}`);
+  assert.equal(v.breakdown.total, 105, 'il totale sono le righe');
+  assert.equal(v.breakdown.providerCooldownSkips.total, 12, 'i dodici echi sono contati');
+  assert.equal(v.breakdown.providerCooldownSkips.transient, 12,
+    '`cooling down` e\' vocabolario transitorio: l\'eco vota, ed e\' per questo che va tolto');
+});
+
+test('lordo e netto DIVERGONO sulla meccanica della run 31823202761 (#854)', () => {
+  // Il numero che #854 esiste per produrre. Il lordo dice 53 >= 52 → verde con
+  // differimento; il netto sa che dodici righe sono l'eco di UN 429 e conta
+  // 41 vs 52 → rosso. Se questa asserzione cade, `flip: 0/N` non significa
+  // piu' «nessun verdetto cambia».
+  const v = deferralVerdicts(parseAggregateExhaustion(cascataConEchiGithub)[0]);
+  assert.equal(v.grossTransient, true, 'il calcolo pre-#857 differiva su questa cascata');
+  assert.equal(v.netTransient, false, 'quello di oggi no');
+  assert.equal(v.flip, true, 'la cascata deve contare come flip');
+  assert.match(formatVerdictLine(31823202761, v), /← FLIP/);
+});
+
+test('la coda `Prompt budget:` non e\' una riga di errore, ma e\' la premessa del veto', () => {
+  // `callLLM` appende il report di taglia allo stesso messaggio con lo stesso
+  // separatore ` | `. Contarlo aggiungerebbe una riga fantasma a ogni cascata
+  // con rifiuti su taglia; ignorarlo del tutto perderebbe `inputCapReport`,
+  // cioe' la premessa senza la quale `isInputCapDeferralVeto` non si applica.
+  const msg = 'All AI models failed. Chain: [a]. Errors: '
+    + 'x: skipped — exhausted (daily limit) | y: skipped — no API key'
+    + ' | Prompt budget: 3 model(s) refused a ~9000-token request;'
+    + ' the most permissive cap among them is 4000 tokens (over by ~5000).';
+  const [c] = parseAggregateExhaustion(msg);
+  assert.equal(c.errors.length, 2, 'due righe di errore, non tre');
+  assert.equal(c.capCount, 3, 'e tre modelli che hanno rifiutato sulla taglia');
+
+  // 1 vs 1: il pareggio. Con rifiuti su taglia #357 lo da' al persistente.
+  const v = deferralVerdicts(c);
+  assert.equal(v.grossVeto, true, 'il pareggio con cap.count > 0 e\' un veto');
+  assert.equal(v.netVeto, true, 'e resta tale al netto: qui non ci sono echi');
+});
+
+test('senza `inputCapReport` il veto non si applica e non entra nel confronto', () => {
+  // Distinguere «non si applica» da «si applica e dice no»: contare la prima
+  // come `veto=false` gonfierebbe il denominatore del flip con cascate su cui
+  // il predicato non ha nemmeno guardato i secchi.
+  const [c] = parseAggregateExhaustion(
+    'All AI models failed. Chain: [a]. Errors: x: skipped — no API key',
+  );
+  const v = deferralVerdicts(c);
+  assert.equal(v.grossVeto, false);
+  assert.equal(v.netVeto, false);
+  assert.equal(v.flip, false, 'nessun verdetto da confrontare, nessun flip');
+});
+
+test('un log senza cascate non produce voci (lo zero e\' vero, non vacuo)', () => {
+  assert.deepEqual(parseAggregateExhaustion('run pulita, nessun esaurimento'), []);
+  assert.deepEqual(parseAggregateExhaustion(undefined), []);
 });

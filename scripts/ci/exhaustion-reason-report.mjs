@@ -74,9 +74,13 @@
  * Uso:
  *   node scripts/ci/exhaustion-reason-report.mjs --runs 6
  *   gh run view <id> --log | node scripts/ci/exhaustion-reason-report.mjs --stdin
+ *   node scripts/ci/exhaustion-reason-report.mjs --deferral-verdicts --runs 40
  */
 
 import { execFileSync } from 'node:child_process';
+
+import { classifyExhaustionCause } from '../../generator/scripts/lib/ai-models.mjs';
+import { isTransientMajority } from '../../generator/scripts/lib/exhaustion-disposition.mjs';
 
 /**
  * La riga che `markModelExhausted` emette:
@@ -214,6 +218,96 @@ export function auditExhaustion(events, nowMs) {
   return findings;
 }
 
+/**
+ * ── IL MESSAGGIO AGGREGATO, NON LE RIGHE DI `markModelExhausted` (#854) ─────
+ *
+ * `callLLM` costruisce l'errore finale come
+ * `All AI models failed. Chain: [...]. Errors: <e1> | <e2> | ...` e, quando
+ * almeno un modello ha rifiutato sulla TAGLIA, ci appende
+ * ` | Prompt budget: N model(s) refused ...`. Quel `<e1> | <e2> | ...` E'
+ * l'array `errors` che `classifyExhaustionCause` conta, ricostruibile carattere
+ * per carattere: e' l'unico modo di rifare il verdetto di una run passata senza
+ * averla eseguita.
+ *
+ * La coda `Prompt budget:` esce dall'array — non e' una riga di errore, e
+ * contarla ne aggiungerebbe una fantasma a ogni run con rifiuti su taglia — ma
+ * la sua presenza si conserva: e' `inputCapReport.count > 0`, cioe' la premessa
+ * di `isInputCapDeferralVeto`.
+ *
+ * Pura → testabile.
+ *
+ * @param {string} text testo di log
+ * @returns {Array<{errors: string[], capCount: number}>} una voce per cascata svuotata
+ */
+export function parseAggregateExhaustion(text) {
+  const out = [];
+  const re = /All AI models failed\. Chain: \[[^\]]*\]\. Errors: (.*)$/gm;
+  let m;
+  while ((m = re.exec(typeof text === 'string' ? text : '')) !== null) {
+    const parts = m[1].split(' | ');
+    const budget = parts.find((p) => p.startsWith('Prompt budget:'));
+    const capMatch = budget && budget.match(/Prompt budget:\s*(\d+) model/);
+    out.push({
+      errors: parts.filter((p) => !p.startsWith('Prompt budget:')),
+      capCount: capMatch ? Number(capMatch[1]) : 0,
+    });
+  }
+  return out;
+}
+
+/**
+ * I DUE verdetti — LORDO e NETTO — sulla stessa cascata.
+ *
+ * `gross` riproduce alla lettera il calcolo che i due predicati facevano prima
+ * di #856/#857 (`transient > 0 && transient >= persistent` per
+ * `transientExhaustion`; `!(transient > persistent)` per il veto): e' il
+ * CONTROFATTUALE, e va scritto qui esplicitamente perche' nel codice di
+ * produzione non esiste piu'. `net` chiama l'helper vero, quello da cui i due
+ * predicati passano oggi.
+ *
+ * `flip` e' la misura che #854 chiede: la cascata su cui le due aritmetiche
+ * NON danno lo stesso esito, cioe' una run in cui togliere gli echi di cooldown
+ * cambia l'exit code di produzione.
+ *
+ * Pura → testabile.
+ *
+ * @param {{errors: string[], capCount: number}} cascade
+ * @returns {{breakdown: object, grossTransient: boolean, netTransient: boolean, grossVeto: boolean, netVeto: boolean, flip: boolean}}
+ */
+export function deferralVerdicts(cascade) {
+  const errors = (cascade && Array.isArray(cascade.errors)) ? cascade.errors : [];
+  const capCount = Number(cascade && cascade.capCount) || 0;
+  const breakdown = classifyExhaustionCause(errors);
+  const grossTransient = breakdown.transient > 0 && breakdown.transient >= breakdown.persistent;
+  const netTransient = isTransientMajority(breakdown, { tie: 'transient' });
+  // Il veto vive solo dove `callLLM` ha allegato un `inputCapReport`: senza
+  // rifiuti su taglia il predicato esce `false` prima di guardare i secchi, e
+  // contarlo come «nessun veto» confonderebbe «non si applica» con «si applica
+  // e dice no» — cioe' gonfierebbe il denominatore del flip.
+  const grossVeto = capCount > 0 && !(breakdown.transient > breakdown.persistent);
+  const netVeto = capCount > 0 && !isTransientMajority(breakdown, { tie: 'persistent' });
+  return {
+    breakdown,
+    grossTransient,
+    netTransient,
+    grossVeto,
+    netVeto,
+    flip: grossTransient !== netTransient || grossVeto !== netVeto,
+  };
+}
+
+/** Riga di report per una cascata, LORDO contro NETTO. Pura → testabile. */
+export function formatVerdictLine(runId, v) {
+  const b = v.breakdown;
+  const echo = b.providerCooldownSkips || { total: 0, transient: 0, persistent: 0 };
+  const yn = (x) => (x ? 'SI' : 'no');
+  return `run ${runId} t=${String(b.transient).padStart(3)} p=${String(b.persistent).padStart(3)} `
+    + `tot=${String(b.total).padStart(3)} echi=${echo.total}(t${echo.transient}/p${echo.persistent}) `
+    + `transientExhaustion lordo=${yn(v.grossTransient)} netto=${yn(v.netTransient)} `
+    + `veto lordo=${yn(v.grossVeto)} netto=${yn(v.netVeto)}`
+    + (v.flip ? '  ← FLIP' : '');
+}
+
 /** Riga di report per una singola run. Pura → testabile. */
 export function formatRunLine(runId, summary) {
   const reasons = Object.entries(summary.byReason)
@@ -265,6 +359,30 @@ async function main() {
   try { runs = JSON.parse(raw || '[]'); } catch { runs = []; }
   if (runs.length === 0) {
     console.log('Nessuna run leggibile → niente da riportare.');
+    return;
+  }
+
+  if (argv.includes('--deferral-verdicts')) {
+    let cascades = 0;
+    let flips = 0;
+    let runsConCascata = 0;
+    for (const r of runs) {
+      const found = parseAggregateExhaustion(gh(['run', 'view', String(r.databaseId), ...repoArgs, '--log']));
+      if (found.length) runsConCascata++;
+      for (const c of found) {
+        const v = deferralVerdicts(c);
+        cascades++;
+        if (v.flip) flips++;
+        console.log(formatVerdictLine(r.databaseId, v));
+      }
+    }
+    // Il denominatore sono le CASCATE, non le run: una run puo' svuotare la
+    // catena piu' volte (un tentativo per sezione) e ogni svuotamento e' un
+    // verdetto suo. Le run senza nemmeno una cascata non hanno un verdetto da
+    // confrontare, e tenerle nel denominatore diluirebbe la misura fino a
+    // renderla illeggibile.
+    console.log(`\ncascate confrontabili: ${cascades} su ${runsConCascata}/${runs.length} run lette`);
+    console.log(`flip: ${flips}/${cascades} cascate`);
     return;
   }
 
