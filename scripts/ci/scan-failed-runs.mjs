@@ -62,6 +62,7 @@
 
 import { execFileSync } from 'node:child_process';
 import { createGithubIssue, searchSafePrefix } from '../lib/github-issue-creator.mjs';
+import { parsePositiveNum } from '../lib/parse-positive-num.mjs';
 
 const ARGV = process.argv.slice(2);
 const flag = (n) => ARGV.includes(n);
@@ -72,60 +73,13 @@ const val = (n, d) => {
 
 const DRY_RUN = flag('--dry-run');
 
-/**
- * Un override numerico che non si lascia leggere deve DIRLO.
- *
- * `Number('2d')` e' `NaN`, e un `NaN` che degrada al default e' indistinguibile
- * da "nessun override": chi ha tirato la leva crede di averla tirata. Vale per
- * gli argv (`--lookback-min 40m` azzererebbe la finestra: `since` diventa
- * `Invalid Date`, ogni confronto e' `false`, la scansione trova ZERO run e
- * stampa "nessuna run fallita") e vale per `SCAN_FAILED_RUNS_HORIZON_MIN`, che
- * e' l'unica leva documentata per comprare il caso residuo delle run in attesa
- * di approvazione (fino a 30 giorni).
- *
- * Il silenzio e' voluto SOLO per "assente" e "stringa vuota": li' il default e'
- * la risposta giusta e non c'e' nessuna intenzione tradita.
- *
- * ## `sentinels`: i valori non positivi che in QUESTO file vogliono dire qualcosa
- *
- * "Positivo" e' la regola giusta per una durata o un conteggio, non per una
- * leva a tre stati. `--gate -1` disattiva il gate di ricorrenza (lo stesso
- * `-1` che `main()` passa gia' per l'articolo perso, vedi `consecutiveGate` in
- * `github-issue-creator.mjs`): rifiutarlo come "non positivo" ha reso quella
- * leva inesistente da CLI — degradava a 3 gridando «override IGNORATO», cioe'
- * il contrario di quello che l'operatore aveva chiesto (#811 item 6). I
- * sentinel vanno DICHIARATI dal chiamante, uno per leva: un `-1` accettato
- * ovunque riaprirebbe il buco su `--lookback-min`, dove non significa niente.
- *
- * `tool` esiste perche' questo helper e' la sorgente UNICA della validazione
- * anche fuori da qui (`transport-identical-twins.mjs`, che senza di lui aveva
- * un `Number(env)` a `NaN` con cui il tetto per passata spariva invece di
- * fallire): il prefisso del warning deve nominare chi ha davvero ignorato
- * l'override, altrimenti il log manda a leggere lo script sbagliato.
- *
- * @param {unknown} raw valore grezzo (argv o env)
- * @param {number} fallback default da usare se `raw` e' assente o illeggibile
- * @param {{label: string, warn?: (msg: string) => void, sentinels?: number[], tool?: string}} opts
- * @returns {number} il valore, il sentinel, o `fallback`
- */
-export function parsePositiveNum(raw, fallback, { label, warn = console.warn, sentinels = [], tool = 'scan-failed-runs' } = {}) {
-  const n = Number(raw);
-  if (Number.isFinite(n) && n > 0) return n;
-  // `Number('')` e' 0 e `Number(null)` pure: il sentinel si concede solo a un
-  // valore davvero presente, altrimenti "leva non tirata" diventerebbe "leva
-  // tirata a 0" per qualunque sentinel che valga 0.
-  const present = raw !== undefined && raw !== null && String(raw).trim() !== '';
-  if (present && Number.isFinite(n) && sentinels.includes(n)) return n;
-  if (present) {
-    warn(
-      `::warning::[${tool}] ${label}=${String(raw)} non e' un numero positivo`
-        + `${sentinels.length ? ` ne' uno dei valori speciali ammessi (${sentinels.join(', ')})` : ''} — `
-        + `override IGNORATO, si prosegue col default ${fallback}. `
-        + 'Attenzione: il comportamento che stavi comprando NON e\' attivo.',
-    );
-  }
-  return fallback;
-}
+// La lettura degli override numerici vive in `scripts/lib/parse-positive-num.mjs`:
+// la stessa validazione serve a `transport-identical-twins.mjs`, a
+// `loop-drift-check.mjs` e a `build-blog-index.mjs`, e importarla da QUESTO
+// file significherebbe tirarsi dentro `github-issue-creator.mjs` e l'intera
+// CLI che apre issue solo per leggere un numero. Ri-esportata qui perche' i
+// chiamanti storici (e i test che la pinnano) continuino a trovarla.
+export { parsePositiveNum } from '../lib/parse-positive-num.mjs';
 
 const LOOKBACK_MIN = parsePositiveNum(val('--lookback-min', undefined), 40, { label: '--lookback-min' });
 const MAX_ISSUES = parsePositiveNum(val('--max-issues', undefined), 5, { label: '--max-issues' });

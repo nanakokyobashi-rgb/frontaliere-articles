@@ -42,6 +42,8 @@ import crypto from 'node:crypto';
 import {
   closeTransportSet,
   couplingBlockers,
+  couplingsFromNeighbours,
+  MODE_UNREADABLE,
   fetchFailureVerdict,
   isFixture,
   localCouplings,
@@ -186,6 +188,43 @@ test('un accoppiamento non registrato nel manifest vale come un no', () => {
   // definizione. Trattarlo come «sconosciuto, quindi ok» riaprirebbe il buco.
   assert.deepEqual(couplingBlockers([{ path: 'host/tests/x.test.mjs', mode: 'non registrato' }]), ['host/tests/x.test.mjs']);
   assert.deepEqual(couplingBlockers([{ path: 'host/shared/safeTruncate.ts', mode: 'identical' }]), []);
+});
+
+test('un vicino che non si e\u2019 potuto LEGGERE non vale «non lo cita» (issue #853)', () => {
+  // `localText()` tornava `null` sopra i 2 MB e su OGNI errore di lettura, in
+  // modo indistinguibile da «questo file non nomina il fixture». Un fixture il
+  // cui unico consumer e\u2019 un file troppo grande risultava percio\u2019 SENZA
+  // accoppiamenti — cioe\u2019 copiabile da solo — per non aver guardato. E\u2019 la
+  // stessa forma di guasto del gate che si spegne invece di fallire: verde
+  // perche\u2019 non ha letto, non perche\u2019 ha letto e non ha trovato niente.
+  const modeOf = new Map([['host/tests/huge.bin', 'identical']]);
+  const base = 'shell-contract-functions.golden.json';
+
+  // `undefined` = non c'e\u2019 niente da leggere (una directory, o un path
+  // assente): quella e\u2019 un'assenza VERA e non deve bloccare, altrimenti la
+  // prima copia di un fixture nuovo sarebbe impossibile.
+  assert.deepEqual(
+    [...couplingsFromNeighbours(base, [{ path: 'host/tests/sub', text: undefined }], modeOf).keys()],
+    [],
+  );
+
+  // `null` = e\u2019 un file, non l'ho letto. Entra come illeggibile...
+  const found = couplingsFromNeighbours(base, [{ path: 'host/tests/huge.bin', text: null }], modeOf);
+  assert.equal(found.get('host/tests/huge.bin'), MODE_UNREADABLE);
+  // ...e il modo del manifest NON lo salva: era `identical`, e un `identical`
+  // sarebbe passato da `couplingBlockers` senza bloccare niente.
+  assert.deepEqual(
+    couplingBlockers([...found].map(([p, mode]) => ({ path: p, mode }))),
+    ['host/tests/huge.bin'],
+  );
+
+  // Un vicino letto davvero si comporta come prima.
+  const cited = couplingsFromNeighbours(
+    base,
+    [{ path: 'host/tests/x.test.mjs', text: `read('${base}')` }, { path: 'host/tests/y.mjs', text: 'niente' }],
+    new Map([['host/tests/x.test.mjs', 'corpus-only']]),
+  );
+  assert.deepEqual([...cited], [['host/tests/x.test.mjs', 'corpus-only']]);
 });
 
 test('gli accoppiamenti non bloccano una sorgente normale, solo i fixture', () => {

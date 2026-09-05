@@ -46,6 +46,7 @@ import path from 'node:path';
 import { sanitizeDeep, assertNoControlChars } from './lib/sanitize-control-chars.mjs';
 import { reportStrippedControlCharsDeep } from '../generator/scripts/lib/control-char-write-report.mjs';
 import { unescapeTsValue } from '../generator/scripts/lib/meta-field-regex.mjs';
+import { parsePositiveNum } from './lib/parse-positive-num.mjs';
 
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..');
 const outIdx = process.argv.indexOf('--out');
@@ -67,8 +68,20 @@ const MIN_ENTRIES = 50;
  * alongside it and the consumer escalates when this window cannot close its
  * gap (see the slice below). Tuning this trades bytes on the common path
  * against how often that escalation fires.
+ *
+ * Read through `parsePositiveNum`, not `Number(env) || 150`: the `||` form
+ * covers `NaN`, `0` and `''` but NOT a negative, and `BLOG_INDEX_LIMIT=-5`
+ * turned the slice below into `entries.slice(0, -5)` — the fast-path index
+ * PUBLISHED with the five newest articles missing, accepted by the site
+ * without an error and shown short in every list (issue #871 item 2). A
+ * fractional value was the same failure from the other side: `slice(0, 0.5)`
+ * is `slice(0, 0)`, an empty index, hence `integer: true`.
  */
-const RECENT_LIMIT = Number(process.env.BLOG_INDEX_LIMIT) || 150;
+const RECENT_LIMIT = parsePositiveNum(process.env.BLOG_INDEX_LIMIT, 150, {
+  label: 'BLOG_INDEX_LIMIT',
+  tool: 'build-blog-index',
+  integer: true,
+});
 
 const REPO = 'valerielinc-ops/frontaliere-si-o-no';
 const SHA = 'main';

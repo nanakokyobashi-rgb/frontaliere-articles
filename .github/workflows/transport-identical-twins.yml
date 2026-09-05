@@ -70,12 +70,29 @@ jobs:
       # una PR al giorno sugli stessi file, restando verde a ogni run — un guard
       # che non si accorge di non guardare niente. `startswith` sul nome del
       # branch non ha quella semantica da indovinare.
+      #
+      # Il conteggio si fa con `gh api --paginate` e NON con `gh pr list
+      # --limit N`: quel sottocomando non ha `--paginate` e il suo `--limit`
+      # TRONCA in silenzio. `gh pr list` ordina per creazione DISCENDENTE, e la
+      # PR che questo guard deve vedere e' per costruzione la VECCHIA — quella
+      # aperta ieri e non ancora rivista. Oltre il taglio non esiste per il
+      # workflow: il guard conta 0, resta verde, e lo schedule impila una PR di
+      # trasporto al giorno sugli stessi file. E' lo stesso failure mode del
+      # vecchio `--search head:`, rientrato dall'altra porta (issue #871 item
+      # 3). `auto-merge-enroll-sweep.yml` e `stale-pr-rescuer.yml` lo avevano
+      # gia' imparato.
       - name: Guard — trasporto gia' in volo
         id: guard
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
         run: |
-          OPEN=$(gh pr list --state open --limit 100 --json headRefName --jq '[.[] | select(.headRefName | startswith("transport/identical-twins"))] | length')
+          # `set -e`: se la chiamata API fallisce lo step esce ROSSO invece di
+          # contare 0 e aprire una copia in piu'. Un guard che non ha potuto
+          # guardare non e' un guard verde.
+          set -euo pipefail
+          gh api --paginate "repos/$REPO/pulls?state=open&per_page=100" --jq '.[].head.ref' > /tmp/open-prs.txt
+          OPEN=$(grep -c '^transport/identical-twins' /tmp/open-prs.txt || true)
           echo "open_transports=$OPEN" >> "$GITHUB_OUTPUT"
           if [ "$OPEN" != "0" ]; then
             echo "Una PR di trasporto e' gia' aperta — niente di nuovo oggi."
