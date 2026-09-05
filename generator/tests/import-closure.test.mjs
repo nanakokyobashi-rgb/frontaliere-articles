@@ -35,24 +35,35 @@ function sourceFiles(dir, acc = []) {
   return acc;
 }
 
-const SPECIFIER = /(?:^|\n)\s*(?:import|export)[^'"\n]*?from\s*['"]([^'"]+)['"]/g;
-const BARE_IMPORT = /(?:^|\n)\s*import\s*['"](\.[^'"]+)['"]/g;
+// Clausola `[^'";]*?` e non `[^'"\n]*?`: senza `\n` nella classe negata un
+// import BRACED SU PIÙ RIGHE viene visto. Con il newline escluso questa riga
+// era cieca su 102 specificatori relativi reali sotto generator/ (fra cui
+// `create-article.mjs` → `./lib/fact-check-consensus.mjs`), cioè proprio la
+// classe che il guard esiste per chiudere: un modulo rimosso o rinominato e
+// importato in quella forma lasciava il guard verde, e saltava fuori come
+// `ERR_MODULE_NOT_FOUND` a generazione — corpus e superficie fermi, CI verde.
+// Vietare `'`, `"` e `;` impedisce al match non greedy di attraversare la fine
+// dello statement e agganciare la stringa dell'import successivo.
+// `^[ \t]*` e non `\s*` dopo il newline: `\s` mangia i newline e farebbe
+// ripartire l'ancora a metà di una riga di commento che cita un import.
+// Il `from` è opzionale solo per `import`, così il side-effect import
+// (`import './x.mjs'`) resta coperto senza che `export default './x'` — che
+// non è una dipendenza — venga contato.
+const SPECIFIER =
+  /^[ \t]*(?:import\s+(?:[^'";]*?\sfrom\s+)?|export\s+[^'";]*?\sfrom\s+)(['"])([^'"]+)\1/gm;
 
 test('every relative import under generator/ resolves to a file that exists', () => {
   const missing = [];
   for (const file of sourceFiles(GENERATOR_ROOT)) {
     const src = fs.readFileSync(file, 'utf-8');
-    for (const re of [SPECIFIER, BARE_IMPORT]) {
-      re.lastIndex = 0;
-      for (const m of src.matchAll(re)) {
-        const spec = m[1];
-        if (!spec.startsWith('.')) continue;
-        const abs = path.resolve(path.dirname(file), spec);
-        if (!fs.existsSync(abs)) {
-          missing.push(
-            `${path.relative(GENERATOR_ROOT, file)} → ${spec} (${path.relative(GENERATOR_ROOT, abs)})`,
-          );
-        }
+    for (const m of src.matchAll(SPECIFIER)) {
+      const spec = m[2];
+      if (!spec.startsWith('.')) continue;
+      const abs = path.resolve(path.dirname(file), spec);
+      if (!fs.existsSync(abs)) {
+        missing.push(
+          `${path.relative(GENERATOR_ROOT, file)} → ${spec} (${path.relative(GENERATOR_ROOT, abs)})`,
+        );
       }
     }
   }
