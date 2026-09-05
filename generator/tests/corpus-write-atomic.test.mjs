@@ -52,29 +52,27 @@ const COVERED_ELSEWHERE = ['generator/scripts/create-article.mjs'];
 // intercetta, ma NON riscrivono in place qualcosa che un altro processo
 // consuma senza poterlo rigenerare: sono contatori di stato e cache. Un
 // troncamento qui si ricostruisce al giro dopo — verificato leggendo cosa
-// scrivono (`article-topic-selector`: tracker e contatori JSON;
-// `refresh-events-dataset`: la cache della fetch). Restano elencati perche' il
-// censimento non li perda di vista: toglierli da qui e' l'unico modo per
-// rimetterli in gioco.
-// `run-card.mjs` sta qui per la ragione piu' debole possibile, e va scritta
-// perche' e' un limite noto del criterio: il censimento e' un match TESTUALE, e
-// questo file lo attiva solo perche' il commento di `writeRunCard()` NOMINA
-// `corpusPath()` per spiegare perche' NON lo usa. Non scrive niente sotto una
-// radice pubblicata: il suo unico target e' `RUN_CARD_FILE`, che il workflow
-// punta dentro `$RUNNER_TEMP/generate-diagnostics` — fuori dal workspace di
-// proposito, cosi' che il `git add -A` dello step di commit non possa portarlo
-// su main.
-//
-// Ed e' comunque rigenerabile nel senso che questa lista chiede: la card e'
-// riscritta a ogni run, e una card troncata non produce un silenzio — il
-// lettore la conta come `unreadable`, che e' l'invariante per cui l'intera
-// strumentazione esiste (un denominatore che non nasconde cio' che non ha
-// visto). Se un giorno la card dovesse finire sotto una radice pubblicata, va
-// tolta da qui e resa atomica.
+// scrive (`article-topic-selector`: tracker e contatori JSON). Resta elencato
+// perche' il censimento non lo perda di vista: toglierlo da qui e' l'unico modo
+// per rimetterlo in gioco.
+// `generator/scripts/lib/run-card.mjs` NON sta in nessuna di queste liste, ed
+// e' la risposta giusta invece della piu' comoda. Ci era finito per un giro,
+// perche' il criterio girava anche sui COMMENTI e la prosa di `writeRunCard()`
+// nominava un letterale che `PUBLISHED` cerca — per spiegare perche' NON lo
+// usa. Dichiararlo qui avrebbe reso verde il censimento affermando una cosa
+// falsa (che scriva un artefatto pubblicato). Ora il criterio guarda il CODICE
+// (vedi `codeOnly()` piu' sotto), quindi il caso non si pone piu' — ne' per
+// quel modulo ne' per gli altri sei punti in `lib/` dove una radice pubblicata
+// compare in un commento.
+// `refresh-events-dataset.mjs` stava qui per lo stesso motivo e non ci sta
+// piu': il suo unico match era la prosa che racconta cosa scrive
+// `assemble-events-dataset.mjs` NEL REPO DEL SITO. Quel file scrive solo la
+// cache della fetch, e una voce che non corrisponde a nessun match e' peggio
+// che inutile — scusa in anticipo un write futuro nello stesso file, senza che
+// nessuna assertion lo dica. Se un giorno tocchera' davvero `public/data`, il
+// censimento lo ritrova dal codice.
 const REGENERABLE_STATE = [
   'generator/scripts/lib/article-topic-selector.mjs',
-  'generator/scripts/refresh-events-dataset.mjs',
-  'generator/scripts/lib/run-card.mjs',
 ];
 
 const NOT_WORKFLOW_DRIVEN = [
@@ -158,6 +156,51 @@ test("l'elenco dei choke-point copre ogni scrittura di un artefatto pubblicato",
   // uno specificatore relativo, seguito ricorsivamente: se il path e' definito
   // in un modulo importato — come gia' avviene per `corpusPath` via
   // `lib/corpus-paths.mjs` — quel modulo entra comunque nel testo controllato.
+  //
+  // #902 round 2: il criterio e' testuale di proposito — grossolano e difficile
+  // da aggirare per sbaglio — ma il testo di un COMMENTO non e' mai il target
+  // di un write. Sei moduli sotto `lib/` nominano una radice pubblicata solo
+  // per raccontare cosa fa qualcun altro (`ai-models`, `prompt-placeholder-
+  // guard`, `article-free-mt`, `daily-brief-content`, `daily-brief-data`,
+  // `run-card`), e siccome il match gira sulla sorgente RAGGIUNGIBILE quella
+  // prosa non falliva addosso a loro: falliva addosso al primo file futuro che
+  // li importasse scrivendo qualcosa, con un messaggio che parla di artefatti
+  // pubblicati mentre il vero motivo e' una parola in una prosa altrui. Per
+  // cinque dei sei non esisteva nemmeno un carattere da togliere: `corpusPath\(`
+  // e' l'unica alternativa che chiede una parentesi, `blog-body` e `dist/api`
+  // sono substring nude. Quindi la riparazione sta qui, nel criterio.
+  //
+  // `codeOnly()` toglie SOLO i commenti che occupano la riga intera (`//` a
+  // inizio riga e blocchi `/* … */` aperti a inizio riga). Deliberatamente
+  // conservativo: un commento in coda a una riga di codice resta dentro, e con
+  // lui il falso positivo, perche' il costo dei due errori non e' simmetrico —
+  // togliere troppo perde un choke-point vero in silenzio, togliere troppo poco
+  // lascia solo il rumore che c'era prima. L'assertion in fondo pinna la
+  // direzione pericolosa: se lo stripping mangiasse codice, i choke-point noti
+  // smetterebbero di matchare e la suite diventa rossa.
+  const codeOnly = (src) => {
+    const out = [];
+    let inBlock = false;
+    for (const line of src.split('\n')) {
+      const t = line.trim();
+      if (inBlock) {
+        const end = line.indexOf('*/');
+        if (end === -1) { out.push(''); continue; }
+        inBlock = false;
+        out.push(line.slice(end + 2));
+        continue;
+      }
+      if (t.startsWith('//')) { out.push(''); continue; }
+      if (t.startsWith('/*')) {
+        if (!t.includes('*/')) inBlock = true;
+        out.push('');
+        continue;
+      }
+      out.push(line);
+    }
+    return out.join('\n');
+  };
+
   const PUBLISHED = /blog-body|blog-articles-data|corpusPath\(|'public',\s*'data'|public\/data|dist\/api/;
   const dir = path.join(root, 'generator', 'scripts');
 
@@ -185,7 +228,7 @@ test("l'elenco dei choke-point copre ogni scrittura di un artefatto pubblicato",
     if (ancestors.has(file)) return ''; // ciclo genuino nel ramo corrente: non cacheare
     ancestors.add(file);
     let src;
-    try { src = fs.readFileSync(file, 'utf-8'); } catch { ancestors.delete(file); return ''; }
+    try { src = codeOnly(fs.readFileSync(file, 'utf-8')); } catch { ancestors.delete(file); return ''; }
     let combined = src;
     for (const m of src.matchAll(/\bfrom\s+'(\.[^']+)'/g)) {
       const resolved = resolveRelativeImport(file, m[1]);
@@ -202,7 +245,7 @@ test("l'elenco dei choke-point copre ogni scrittura di un artefatto pubblicato",
       const p = path.join(d, e.name);
       if (e.isDirectory()) { walk(p); continue; }
       if (!e.name.endsWith('.mjs')) continue;
-      const src = fs.readFileSync(p, 'utf-8');
+      const src = codeOnly(fs.readFileSync(p, 'utf-8'));
       if (/writeFileSync\(/.test(src) && PUBLISHED.test(reachableSource(p))) {
         found.push(path.relative(root, p));
       }
@@ -216,6 +259,20 @@ test("l'elenco dei choke-point copre ogni scrittura di un artefatto pubblicato",
     ...REGENERABLE_STATE,
     ...NOT_WORKFLOW_DRIVEN,
   ]);
+  // La contro-prova dello stripping, nella direzione che fa danno in silenzio:
+  // se `codeOnly()` mangiasse codice — un template literal le cui righe
+  // iniziano con `*`, per dire — il censimento smetterebbe di vedere i write
+  // veri e `missing` resterebbe vuoto per il motivo sbagliato. I choke-point
+  // gia' noti devono continuare a matchare il criterio: sono l'unico campione
+  // di cui sappiamo con certezza la risposta giusta.
+  const blind = [...CHOKE_POINTS.map(([rel]) => rel), ...COVERED_ELSEWHERE]
+    .filter((rel) => !found.includes(rel));
+  assert.deepEqual(blind, [],
+    "il criterio non vede piu' questi choke-point noti: "
+    + `${blind.join(', ')}. Se non li hai appena tolti dalla lista, e' `
+    + "`codeOnly()` che sta togliendo codice invece di soli commenti: il "
+    + 'censimento sarebbe verde perche\' cieco.');
+
   const missing = found.filter((f) => !listed.has(f));
   assert.deepEqual(missing, [],
     'questi file scrivono un artefatto pubblicato ma non sono censiti: '

@@ -97,6 +97,18 @@ export function buildRunCard(report) {
  * accorgersi che la card atterrava altrove — ed e' precisamente cio' che e'
  * successo.
  *
+ * NOTA PER CHI EDITA QUESTO COMMENTO: qui sopra `corpusPath()` e' nominato in
+ * prosa, e per un giro cio' e' bastato a far fallire il censimento di
+ * `corpus-write-atomic.test.mjs`, che cerca quel letterale nella sorgente
+ * raggiungibile di ogni file che scrive — non solo nel file che lo contiene,
+ * ma anche in quella dei suoi import. Il difetto non stava nella prosa: stava
+ * nel criterio, che guardava anche i commenti, e li' e' stato riparato
+ * (`codeOnly()`). Vale comunque saperlo: questo modulo non scrive niente sotto
+ * una radice pubblicata — il suo unico target e' `RUN_CARD_FILE`, che il
+ * workflow punta in `$RUNNER_TEMP`, fuori dal workspace di proposito — e se un
+ * giorno lo facesse davvero, il posto dove dirlo e' una delle liste di quel
+ * test, non un commento riscritto per non farsi vedere.
+ *
  * @param {string} file path della card (assoluto o relativo al cwd)
  * @param {any} report il `RUN_REPORT`
  * @returns {string} il path assoluto scritto
