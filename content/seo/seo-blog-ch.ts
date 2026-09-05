@@ -72833,6 +72833,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-soletta-naturalizzazione-procedura': {
+    title: 'Naturalizzazione Soletta: requisiti e procedura',
+    description: 'Come naturalizzarsi nel Canton Soletta: requisiti federali, criteri cantonali, test di lingua, procedura e tempi della naturalizzazione ordinaria.',
+    keywords: 'frontalieri, ticino, svizzera, italia, naturalizzazione, soletta, requisiti, procedura',
+    ogTitle: 'Naturalizzazione Soletta: come diventare cittadino',
+    ogDescription: 'Guida completa alla naturalizzazione nel Canton Soletta: requisiti federali e cantonali, anni di residenza richiesti, test di lingua, criteri di integrazione, procedure e tempi per ottenere la cittadinanza svizzera.',
+    canonicalPath: '/articoli-svizzera/soletta-naturalizzazione-procedura/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Naturalizzazione Soletta: requisiti e procedura",
+      "description": "Come naturalizzarsi nel Canton Soletta: requisiti federali, criteri cantonali, test di lingua, procedura e tempi della naturalizzazione ordinaria.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/soletta-naturalizzazione-procedura.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Documenti ufficiali di naturalizzazione svizzera e passaporto su una scrivania in un ufficio dell'amministrazione cantonale."
+      },
+      "datePublished": "2026-09-05T21:39:31+00:00",
+      "dateModified": "2026-09-05T21:39:31+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/soletta-naturalizzazione-procedura/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

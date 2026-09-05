@@ -5611,6 +5611,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.pacifismo-neutralita-buzzi.title': 'Pacifism vs neutrality: Buzzi\'s no to the UDC',
     'blog.article.pacifismo-neutralita-buzzi.excerpt': 'Matteo Buzzi, a Verdi MP, criticises the UDC initiative on armed neutrality. It proposes nonviolent civil defense instead of rearmament.',
     'blog.article.pacifismo-neutralita-buzzi.imageAlt': 'Locarno cityscape in Ticino, hometown of Green MP Matteo Buzzi',
+    'blog.article.soletta-naturalizzazione-procedura.title': 'Slab Naturalization: requirements and procedure',
+    'blog.article.soletta-naturalizzazione-procedura.excerpt': 'How to become a Swiss citizen in Solothurn: years of residence, language and integration tests, municipal taxes and process times.',
+    'blog.article.soletta-naturalizzazione-procedura.imageAlt': 'Official Swiss naturalization documents and passport on a desk in a cantonal administration office.',
 };
 
 export default blogMetaChEn;

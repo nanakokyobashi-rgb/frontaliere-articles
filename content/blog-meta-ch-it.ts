@@ -5611,6 +5611,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.pacifismo-neutralita-buzzi.title': 'Pacifismo vs neutralità: il no di Buzzi all\'UDC',
     'blog.article.pacifismo-neutralita-buzzi.excerpt': 'Matteo Buzzi, deputato Verdi, critica l\'iniziativa UDC sulla neutralità armata. Propone difesa civile nonviolenta anziché riarmo.',
     'blog.article.pacifismo-neutralita-buzzi.imageAlt': 'Veduta di Locarno in Ticino, città d\'origine del deputato Verdi Matteo Buzzi',
+    'blog.article.soletta-naturalizzazione-procedura.title': 'Naturalizzazione Soletta: requisiti e procedura',
+    'blog.article.soletta-naturalizzazione-procedura.excerpt': 'Come diventare cittadino svizzero in Soletta: anni di residenza, test di lingua e integrazione, tasse comunali e tempi del processo.',
+    'blog.article.soletta-naturalizzazione-procedura.imageAlt': 'Documenti ufficiali di naturalizzazione svizzera e passaporto su una scrivania in un ufficio dell\'amministrazione cantonale.',
 };
 
 export default blogMetaChIt;

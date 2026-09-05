@@ -1896,6 +1896,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'volo-easyjet-valencia-ginevra': { it: 'volo-easyjet-valencia-ginevra', en: 'easyjet-flight-valencia-geneva', de: 'easyjet-flug-valencia-genf', fr: 'vol-easyjet-valence-geneve' },
  'permesso-dimora-b-canton-vallese-requisiti-rinnovo': { it: 'permesso-dimora-b-canton-vallese-requisiti-rinnovo', en: 'residence-permit-b-valais-requirements-renewal', de: 'aufenthaltsbewilligung-b-wallis-voraussetzungen-verlaengerung', fr: 'permis-de-sejour-b-valais-conditions-renouvellement' },
  'pacifismo-neutralita-buzzi': { it: 'pacifismo-neutralita-buzzi', en: 'pacifism-armed-neutrality-buzzi', de: 'pazifismus-bewaffnete-neutralitaet-buzzi', fr: 'pacifisme-neutralite-armee-buzzi' },
+ 'soletta-naturalizzazione-procedura': { it: 'soletta-naturalizzazione-procedura', en: 'soletta-naturalization-requirements-procedure', de: 'soletta-einbuergerung-anforderungen-verfahren', fr: 'soletta-naturalisation-conditions-procedure' },
 };
 
 export const REVERSE_SWISS: Record<ArticleLocale, Record<string, string>> = (() => {

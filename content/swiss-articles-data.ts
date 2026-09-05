@@ -16831,6 +16831,15 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'soletta-naturalizzazione-procedura',
+    category: 'pratico',
+    date: '2026-09-05T21:39:31.653Z',
+    image: '/images/blog/soletta-naturalizzazione-procedura.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

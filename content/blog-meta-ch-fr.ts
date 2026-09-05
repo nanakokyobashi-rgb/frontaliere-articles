@@ -5611,6 +5611,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.pacifismo-neutralita-buzzi.title': 'Pacifisme vs neutralité : le non de Buzzi à l\'UDC',
     'blog.article.pacifismo-neutralita-buzzi.excerpt': 'Matteo Buzzi, député Verdi, critique l\'initiative UDC sur la neutralité armée. Propose la défense civile non violente au lieu du réarmement.',
     'blog.article.pacifismo-neutralita-buzzi.imageAlt': 'Vue de Locarno au Tessin, ville d\'origine du député Vert Matteo Buzzi',
+    'blog.article.soletta-naturalizzazione-procedura.title': 'Naturalisation Soleure : exigences et procédure',
+    'blog.article.soletta-naturalizzazione-procedura.excerpt': 'Comment devenir citoyen suisse à Soleure : années de résidence, tests de langue et d\'intégration, taxes municipales et temps du procès.',
+    'blog.article.soletta-naturalizzazione-procedura.imageAlt': 'Documents officiels de naturalisation suisse et passeport sur un bureau dans une administration cantonale.',
 };
 
 export default blogMetaChFr;

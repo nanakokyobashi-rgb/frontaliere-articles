@@ -5611,6 +5611,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.pacifismo-neutralita-buzzi.title': 'Pazifismus vs. Neutralität: Buzzis Nein zur SVP',
     'blog.article.pacifismo-neutralita-buzzi.excerpt': 'Der Grünen-Abgeordnete Matteo Buzzi kritisiert die SVP-Initiative zur bewaffneten Neutralität. Er schlägt gewaltfreien Zivilschutz statt Aufrüstung vor.',
     'blog.article.pacifismo-neutralita-buzzi.imageAlt': 'Stadtblick Locarno im Tessin, Heimatstadt von Grünen-Abgeordneter Matteo Buzzi',
+    'blog.article.soletta-naturalizzazione-procedura.title': 'Einbürgerung Solothurn: Anforderungen und Verfahren',
+    'blog.article.soletta-naturalizzazione-procedura.excerpt': 'Wie man Schweizer Bürger in Solothurn wird: Jahre des Wohnsitzes, Sprach- und Integrationstests, Gemeindesteuern und Prozesszeiten.',
+    'blog.article.soletta-naturalizzazione-procedura.imageAlt': 'Offizielle Schweizer Einbürgerungsdokumente und Pass auf einem Schreibtisch in einem Kantonsamt.',
 };
 
 export default blogMetaChDe;
