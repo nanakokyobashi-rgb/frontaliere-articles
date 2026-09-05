@@ -112,7 +112,9 @@
  *   node scripts/ci/loop-drift-check.mjs             # report leggibile + exit 0
  *   node scripts/ci/loop-drift-check.mjs --json      # report JSON su stdout
  *   node scripts/ci/loop-drift-check.mjs --strict    # exit 1 se c'è drift azionabile
- *   node scripts/ci/loop-drift-check.mjs --init      # (ri)registra le baseline correnti
+ *   node scripts/ci/loop-drift-check.mjs --init      # (ri)registra le baseline correnti (TUTTE le voci)
+ *   node scripts/ci/loop-drift-check.mjs --init --only <path>[,<path>]
+ *                                                    # ...solo quelle voci (issue #653)
  *   node scripts/ci/loop-drift-check.mjs --no-provenance  # salta la verifica di provenienza (iterazione locale)
  *
  * Env:
@@ -173,7 +175,8 @@ const STRANDED_AFTER_DAYS = parsePositiveNum(process.env.STRANDED_AFTER_DAYS, 3,
   tool: 'loop-drift-check',
 });
 
-const ARGS = new Set(process.argv.slice(2));
+const RAW_ARGS = process.argv.slice(2);
+const ARGS = new Set(RAW_ARGS);
 const AS_JSON = ARGS.has('--json');
 const STRICT = ARGS.has('--strict');
 const INIT = ARGS.has('--init');
@@ -183,6 +186,62 @@ const AS_ISSUE = ARGS.has('--issue');
 // hash e' cambiato dalla baseline. Di routine resta accesa: e' l'unica cosa
 // che questo script fa per non ripetere la #148.
 const NO_PROVENANCE = ARGS.has('--no-provenance');
+
+/**
+ * I path elencati in `--only` (`--only=a,b`, oppure `--only a b`), o null se la
+ * flag non c'e'. PURA: legge argv, non tocca disco ne' rete.
+ */
+function parseOnly(argv) {
+  const out = [];
+  for (let i = 0; i < argv.length; i += 1) {
+    const a = argv[i];
+    if (a === '--only') {
+      // Forma separata: consuma i token finche' non ricomincia una flag.
+      while (i + 1 < argv.length && !argv[i + 1].startsWith('--')) out.push(argv[(i += 1)]);
+    } else if (a.startsWith('--only=')) {
+      out.push(a.slice('--only='.length));
+    }
+  }
+  if (!out.length) return null;
+  return out.flatMap((v) => v.split(',')).map((v) => v.trim()).filter(Boolean);
+}
+
+/**
+ * Quali voci `--init` deve riscrivere (issue #653).
+ *
+ * ## Perche' `--init` senza filtro FABBRICA le baseline fantasma
+ *
+ * `--init` e' tutto-o-niente: riscrive la baseline di TUTTE le voci del
+ * manifest. Chi ne deve registrare una sola — il caso normale: si aggiunge un
+ * file e lo si dichiara — non puo' usarlo, perche' dichiarerebbe «allineate»
+ * altre trecento voci che nessuno ha letto, comprese quelle in `site-ahead`
+ * che aspettano una decisione. Quindi la baseline della voce nuova viene
+ * scritta A MANO, e una stringa esadecimale scritta a mano e' plausibile ma
+ * non e' un hash: e' esattamente il `ghost-baseline` che
+ * `checkBaselineProvenance()` scopre solo al cron successivo, dopo il merge.
+ *
+ * Misurato il 2026-09-05: 13 voci fantasma, 6 delle quali dichiarate DOPO
+ * l'apertura della issue che ne contava 7 — la classe si ricrea da sola
+ * finche' registrarne una sola resta impossibile.
+ *
+ * `--only` e' l'affordance mancante: scrive la baseline REALE delle sole voci
+ * indicate e non tocca le altre.
+ *
+ * PURA e senza rete, come `ghostVerdict` e `classify`: e' questo a renderla
+ * testabile offline.
+ *
+ * @param {string[]|null} only          i path chiesti (null → nessun filtro).
+ * @param {string[]} manifestPaths      i `path` dichiarati nel manifest.
+ * @returns {{targets: Set<string>|null, unknown: string[]}} `targets` null
+ *   significa «tutte», cioe' il comportamento storico di `--init`.
+ */
+function resolveInitTargets(only, manifestPaths) {
+  if (!only) return { targets: null, unknown: [] };
+  const declared = new Set(manifestPaths);
+  return { targets: new Set(only), unknown: only.filter((p) => !declared.has(p)) };
+}
+
+const ONLY = parseOnly(RAW_ARGS);
 
 const sha256 = (buf) => crypto.createHash('sha256').update(buf).digest('hex').slice(0, 16);
 
@@ -792,6 +851,18 @@ function classify(entry, now, base, deps = manifestDepsOf(entry)) {
 
 async function main() {
   const manifest = readManifest();
+  const { targets: initTargets, unknown: initUnknown } = resolveInitTargets(ONLY, manifest.files.map((f) => f.path));
+  if (ONLY && !INIT) {
+    console.error('`--only` ha senso solo con `--init`: senza, il report va letto per intero.');
+    return 1;
+  }
+  if (initUnknown.length) {
+    // Un path non dichiarato e' quasi sempre un refuso, e proseguire
+    // scriverebbe un manifest che NON contiene la voce che si voleva
+    // registrare — cioe' il silenzio che questa flag esiste per togliere.
+    console.error(`--only: path non dichiarati nel manifest: ${initUnknown.join(', ')}`);
+    return 1;
+  }
   const results = [];
   // Le voci che `--init` registra come `identical` pur avendo i due lati
   // diversi: vanno dette QUI, non lasciate al report del giorno dopo.
@@ -801,6 +872,11 @@ async function main() {
     const rel = entry.path;
     const sitePath = entry.sitePath || rel;
     const base = entry.baseline || { site: null, corpus: null };
+
+    // `--init --only`: le voci fuori target non si toccano E non si
+    // interrogano — il salto sta PRIMA di `siteHash()`, altrimenti
+    // registrarne una costerebbe comunque trecento fetch.
+    if (INIT && initTargets && !initTargets.has(rel)) continue;
 
     let now;
     try {
@@ -823,7 +899,14 @@ async function main() {
       // richiede esplicitamente. La promozione resta un atto cosciente: cambia
       // il `mode` a mano, POI `--init` registra la baseline vera.
       const siteBaseline = (entry.mode === 'corpus-only' || entry.mode === 'corpus-only-pending') ? null : now.site;
-      entry.baseline = { site: siteBaseline, corpus: now.corpus, alignedAt: manifest.alignedAt || null };
+      entry.baseline = {
+        site: siteBaseline,
+        corpus: now.corpus,
+        // Con `--only` l'allineamento e' di OGGI e riguarda solo questa voce:
+        // ereditare `manifest.alignedAt` le darebbe la data dell'ultimo
+        // `--init` globale, che per questa voce non e' mai avvenuto.
+        alignedAt: initTargets ? new Date().toISOString().slice(0, 10) : (manifest.alignedAt || null),
+      };
       // Stessa classe del riallineamento del trasporto (#852): una baseline
       // `identical` con i due lati diversi e' `undeclared-drift` alla passata
       // successiva — actionable per sempre, e la voce esce dal trasporto
@@ -924,9 +1007,16 @@ async function main() {
   }
 
   if (INIT) {
-    manifest.alignedAt = new Date().toISOString().slice(0, 10);
+    // `manifest.alignedAt` e' la data dell'ultimo allineamento INTEGRALE: con
+    // `--only` non c'e' stato, e bumparlo direbbe che trecento voci sono state
+    // rilette oggi quando non le ha guardate nessuno.
+    if (!initTargets) manifest.alignedAt = new Date().toISOString().slice(0, 10);
     fs.writeFileSync(MANIFEST_PATH, `${JSON.stringify(manifest, null, 2)}\n`);
-    console.log(`Baseline registrate per ${manifest.files.length} file (alignedAt=${manifest.alignedAt}).`);
+    console.log(
+      initTargets
+        ? `Baseline registrate per ${initTargets.size} file: ${[...initTargets].join(', ')}.`
+        : `Baseline registrate per ${manifest.files.length} file (alignedAt=${manifest.alignedAt}).`,
+    );
     for (const rel of divergentInit) {
       console.error(`  ⚠ ${rel}: registrato \`identical\` con i due lati DIVERSI — la prossima passata lo leggera' \`undeclared-drift\` e il trasporto smettera' di copiarlo. Riallinea il file, oppure marcalo \`adapted\` con la sua ragione.`);
     }
@@ -1035,7 +1125,7 @@ async function main() {
       '',
       `\`stranded-twin\` (issue #303) è un \`site-ahead\` a cui è stata misurata l'ETÀ: un gemello dichiarato \`identical\` che il sito ha lasciato indietro da più di ${STRANDED_AFTER_DAYS} giorni. La distinzione è la sola cosa che separa "qualcuno lo porterà" da "non lo porterà nessuno", perché **nessuna** voce \`identical\` di questo manifest ha un trasporto automatico: \`mirror-articles-engine.yml\` copre \`engine/\`, e \`engine/\` è \`outOfScope\` qui proprio per quel motivo. I due insiemi sono disgiunti per costruzione, quindi per ogni file di questo manifest il trasporto è una copia a mano — e finché non la si fa, la riga qui sopra è l'unica cosa che lo dice.`,
       '',
-      '`ghost-baseline` (issue #148) è diverso da tutte le altre classi: non descrive dove si è mosso il codice, dice che il DATO della baseline non è mai stato reale — verificato contro l\'intera storia disponibile del path su quel lato (o, se la storia supera il cap di ricerca, la entry non compare qui: un mancato match parziale resta silenzioso per non produrre falsi rossi). La correzione è ricalcolare la baseline dal contenuto REALE, non semplicemente rilanciare `--init`, perché `--init` scrive `now`, che per una entry già rotta potrebbe anch\'esso non essere il valore che ci si aspetta.',
+      '`ghost-baseline` (issue #148) è diverso da tutte le altre classi: non descrive dove si è mosso il codice, dice che il DATO della baseline non è mai stato reale — verificato contro l\'intera storia disponibile del path su quel lato (o, se la storia supera il cap di ricerca, la entry non compare qui: un mancato match parziale resta silenzioso per non produrre falsi rossi). La correzione è ricalcolare la baseline dal contenuto REALE — l\'hash del blob a cui quel lato era davvero allineato alla data di `alignedAt` — e non semplicemente rilanciare `--init`, perché `--init` scrive `now`, che per una entry già rotta potrebbe anch\'esso non essere il valore che ci si aspetta. Se `now` è invece il valore giusto (la voce è nuova e non si è più mossa), `--init --only <path>` la registra da sola, senza dichiarare allineate le altre trecento (issue #653).',
       '',
       '`corpus-only-pending` non è un errore neanche lei: è un promemoria che punta a un lavoro già tracciato altrove (vedi `trackingIssue` in ogni riga). Non richiede un\'azione qui finché non diventa `-landed` — a quel punto la voce va promossa a mano.',
       '',
@@ -1074,4 +1164,4 @@ if (process.argv[1] && process.argv[1].endsWith('loop-drift-check.mjs')) {
 // `siteFile` e' esportata per `transport-identical-twins.mjs` (issue #331): il
 // trasporto deve leggere il sito con la STESSA sorgente di URL, ref e token del
 // checker, altrimenti i due potrebbero guardare due `main` diversi.
-export { classify, ghostVerdict, strandedVerdict, corpusOnlyTwinVerdict, unmirrorableDepsVerdict, resolvedLocalImports, gitBlobSha, scalarFingerprintVerdict, siteFile };
+export { classify, parseOnly, resolveInitTargets, ghostVerdict, strandedVerdict, corpusOnlyTwinVerdict, unmirrorableDepsVerdict, resolvedLocalImports, gitBlobSha, scalarFingerprintVerdict, siteFile };
