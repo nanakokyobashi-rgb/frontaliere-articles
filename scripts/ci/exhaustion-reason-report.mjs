@@ -74,9 +74,25 @@
  * Uso:
  *   node scripts/ci/exhaustion-reason-report.mjs --runs 6
  *   gh run view <id> --log | node scripts/ci/exhaustion-reason-report.mjs --stdin
+ *
+ * E il modo che misura i due voti di deferral sul messaggio aggregato (#854):
+ *   node scripts/ci/exhaustion-reason-report.mjs --deferral-verdicts --runs 40
+ *   gh run view <id> --log | node scripts/ci/exhaustion-reason-report.mjs --deferral-verdicts --stdin
  */
 
 import { execFileSync } from 'node:child_process';
+// Le due regex del voto vivono in ai-models.mjs e l'aritmetica del netto in
+// exhaustion-disposition.mjs: si IMPORTANO, non si ricopiano (AGENTS.md #6).
+// Una copia locale delle regex renderebbe questo report capace di misurare un
+// verdetto che la produzione non prende — cioe' esattamente il difetto che sta
+// misurando. Entrambi i moduli sono importabili senza rete: `ai-models.mjs` non
+// ha un solo import di primo livello e `firebase-admin` lo carica lazy.
+import { classifyExhaustionCause } from '../../generator/scripts/lib/ai-models.mjs';
+import {
+  isInputCapDeferralVeto,
+  isTransientMajority,
+  inputCapVetoSummary,
+} from '../../generator/scripts/lib/exhaustion-disposition.mjs';
 
 /**
  * La riga che `markModelExhausted` emette:
@@ -224,6 +240,167 @@ export function formatRunLine(runId, summary) {
     `modelli=${String(summary.distinctModels).padStart(3)}  persistiti=${summary.persistedModels.length}  ${reasons}`;
 }
 
+/**
+ * ── IL MESSAGGIO AGGREGATO, NON LE RIGHE DI MARCATURA (issue #854) ──────────
+ *
+ * Tutto ciò che sta sopra aggrega `markModelExhausted`, cioè le marcature per
+ * MOTIVO. I due voti di maggioranza che decidono l'exit code di produzione —
+ * `transientExhaustion` (ai-models.mjs) e `isInputCapDeferralVeto`
+ * (exhaustion-disposition.mjs) — non leggono quelle righe: leggono l'array
+ * `errors` che finisce nel messaggio aggregato
+ *
+ *   `All AI models failed. Chain: [...]. Errors: <e1> | <e2> | … [| Prompt budget: …]`
+ *
+ * Sono due campioni diversi, e finora questo report vedeva solo il primo:
+ * «quanto pesano gli echi di cooldown sulle due maggioranze» (punto 1 di #821)
+ * non era ricavabile con lo strumento che c'era, pur essendo
+ * `providerCooldownSkips` già nel breakdown da #805.
+ *
+ * `.` non matcha il newline, quindi la cattura si ferma a fine riga: il
+ * messaggio è emesso su una riga sola, e un log di `gh run view --log` la
+ * prefissa con `job\tstep\ttimestamp`, che sta PRIMA del letterale ancorato.
+ */
+export const AGGREGATE_MESSAGE_RE = /All AI models failed\. Chain: \[[^\]]*\]\. Errors: (.*)/g;
+
+/**
+ * Il separatore che chiude la lista degli errori. `callLLM` appende il report
+ * di budget con la STESSA `' | '` che separa gli errori, quindi senza tagliare
+ * qui la coda entrerebbe nel tally come un errore fantasma. Non è innocuo
+ * neanche quando nessuna delle due regex lo colloca: `classifyExhaustionCause`
+ * incrementa `total` per OGNI riga, e `total` è il denominatore su cui #805
+ * misura gli echi e su cui `isLegitimateQuotaDeferral` prende il suo quoziente.
+ */
+export const PROMPT_BUDGET_SEPARATOR = ' | Prompt budget: ';
+
+/** `| Prompt budget: 38 model(s) refused a ~9740-token request; …` */
+export const PROMPT_BUDGET_REFUSALS_RE = /Prompt budget: (\d+) model\(s\) refused/;
+
+/**
+ * Ogni messaggio aggregato presente nel testo, ricomposto nella forma su cui i
+ * due predicati votano: la lista `errors` e il numero di rifiuti su input cap
+ * (che è `inputCapReport.count`, cioè il gate che arma il veto).
+ *
+ * Pura → testabile.
+ * @param {string} text
+ * @returns {Array<{errors: string[], capRefusals: number}>}
+ */
+export function parseAggregateErrors(text) {
+  const out = [];
+  const re = new RegExp(AGGREGATE_MESSAGE_RE.source, 'g');
+  let m;
+  while ((m = re.exec(String(text || ''))) !== null) {
+    const tail = m[1];
+    const cut = tail.indexOf(PROMPT_BUDGET_SEPARATOR);
+    const listPart = cut >= 0 ? tail.slice(0, cut) : tail;
+    const budgetPart = cut >= 0 ? tail.slice(cut) : '';
+    const capM = budgetPart.match(PROMPT_BUDGET_REFUSALS_RE);
+    out.push({
+      errors: listPart.split(' | ').map((s) => s.trim()).filter(Boolean),
+      capRefusals: capM ? Number(capM[1]) : 0,
+    });
+  }
+  return out;
+}
+
+/**
+ * Lo STESSO breakdown con gli echi di cooldown azzerati. È così che si ottiene
+ * il verdetto LORDO senza riscrivere il confronto: `isTransientMajority` e
+ * `isInputCapDeferralVeto` girano su un campione in cui non c'è niente da
+ * sottrarre, quindi collassano esattamente sul `>=` di `classifyExhaustionCause`
+ * e sul `!(>)` che `isInputCapDeferralVeto` aveva prima di #856.
+ *
+ * Il lordo NON è ricopiato a mano proprio perché è il termine di paragone: una
+ * copia dell'aritmetica renderebbe il `flip` misurato sulla differenza fra la
+ * produzione e questo file, invece che fra due campioni.
+ */
+function grossOf(breakdown) {
+  return { ...breakdown, providerCooldownSkips: { total: 0, transient: 0, persistent: 0 } };
+}
+
+/**
+ * `transientExhaustion` come lo calcola `callLLM` (ai-models.mjs: `transient > 0
+ * && transient >= persistent`), ma sul campione che gli si passa. Il `> 0` si
+ * legge sul secchio transitorio DI QUEL CAMPIONE — al netto, una cascata i cui
+ * soli transitori erano echi di un unico cooldown non ha una sola prova
+ * indipendente che aspettare aiuti.
+ */
+function transientExhaustionVerdict(breakdown) {
+  const buckets = inputCapVetoSummary({ exhaustionBreakdown: breakdown });
+  return buckets.transient > 0 && isTransientMajority(breakdown, { tie: 'transient' });
+}
+
+/**
+ * I due verdetti, LORDO contro NETTO, su un singolo messaggio aggregato.
+ *
+ * `veto` include il gate `cap.count > 0`: senza un solo rifiuto su taglia il
+ * veto non è armato e resta falso da entrambe le parti, che è il verdetto vero
+ * — riportare la sola maggioranza direbbe «cambia» dove la produzione non
+ * cambia niente.
+ *
+ * Pura → testabile.
+ * @param {{errors: string[], capRefusals: number}} sample
+ */
+export function deferralVerdicts(sample) {
+  const errors = Array.isArray(sample && sample.errors) ? sample.errors : [];
+  const capRefusals = Math.max(0, Number(sample && sample.capRefusals) || 0);
+  const net = classifyExhaustionCause(errors);
+  const gross = grossOf(net);
+  const inputCapReport = capRefusals > 0 ? { count: capRefusals } : null;
+  const asErr = (breakdown) => ({ code: 'ALL_MODELS_EXHAUSTED', inputCapReport, exhaustionBreakdown: breakdown });
+  const buckets = inputCapVetoSummary({ exhaustionBreakdown: net });
+  const verdicts = {
+    grossTransientExhaustion: transientExhaustionVerdict(gross),
+    netTransientExhaustion: transientExhaustionVerdict(net),
+    grossInputCapVeto: isInputCapDeferralVeto(asErr(gross)),
+    netInputCapVeto: isInputCapDeferralVeto(asErr(net)),
+  };
+  return {
+    transient: net.transient,
+    persistent: net.persistent,
+    total: net.total,
+    ambiguous: Math.max(0, net.total - net.transient - net.persistent),
+    echoTotal: net.providerCooldownSkips.total,
+    echoTransient: net.providerCooldownSkips.transient,
+    echoPersistent: net.providerCooldownSkips.persistent,
+    netTransient: buckets.transient,
+    netPersistent: buckets.persistent,
+    echoDominated: buckets.echoDominated,
+    capRefusals,
+    ...verdicts,
+    flipped: verdicts.grossTransientExhaustion !== verdicts.netTransientExhaustion
+      || verdicts.grossInputCapVeto !== verdicts.netInputCapVeto,
+  };
+}
+
+const si = (b) => (b ? 'si' : 'no');
+
+/** Riga di report per un messaggio aggregato. Pura → testabile. */
+export function formatVerdictLine(runId, v) {
+  return `run ${runId}  t=${v.transient} p=${v.persistent} amb=${v.ambiguous} tot=${v.total}`
+    + `  echi=${v.echoTotal}(t${v.echoTransient}/p${v.echoPersistent})`
+    + `  netto=${v.netTransient}/${v.netPersistent}  cap=${v.capRefusals}`
+    + `  transientExhaustion L=${si(v.grossTransientExhaustion)} N=${si(v.netTransientExhaustion)}`
+    + `  inputCapVeto L=${si(v.grossInputCapVeto)} N=${si(v.netInputCapVeto)}`
+    + (v.echoDominated ? '  [echi-dominanti]' : '')
+    + (v.flipped ? '  ⇄ FLIP' : '');
+}
+
+/**
+ * Il campione di una run: l'ULTIMO messaggio aggregato del log, non il primo.
+ * È quello risalito fino al catch di primo livello di `create-article.mjs`,
+ * cioè l'unico su cui i due predicati hanno davvero deciso un exit code; le
+ * cascate svuotate prima possono essere state riprese da un retry di sezione.
+ * `null` quando la run non ne contiene nessuno — non è un difetto, è una run
+ * che non ha svuotato la cascata, e va tenuta fuori dal denominatore.
+ *
+ * Pura → testabile.
+ * @param {string} text
+ */
+export function pickDecidingSample(text) {
+  const samples = parseAggregateErrors(text);
+  return samples.length ? samples[samples.length - 1] : null;
+}
+
 // ── CLI (sola lettura) ───────────────────────────────────────────────────────
 
 const repoArgs = process.env.GH_REPO ? ['--repo', process.env.GH_REPO] : [];
@@ -243,9 +420,65 @@ async function readStdin() {
   return Buffer.concat(chunks).toString('utf-8');
 }
 
+/**
+ * Il modo `--deferral-verdicts`: per ogni run, i due voti LORDO contro NETTO.
+ *
+ * Il denominatore di `flip:` sono le run CONFRONTABILI — quelle il cui log
+ * contiene un messaggio aggregato — e non le run scandite. Una run che non ha
+ * mai svuotato la cascata non ha un verdetto, e metterla al denominatore
+ * diluirebbe la misura verso lo zero proprio come farebbe un parser rotto: due
+ * cause opposte con lo stesso numero in fondo. Per questo le due cifre restano
+ * separate anche nell'output.
+ */
+async function mainDeferralVerdicts(argv) {
+  if (argv.includes('--stdin')) {
+    const sample = pickDecidingSample(await readStdin());
+    if (!sample) {
+      console.log('Nessun messaggio aggregato «All AI models failed» → nessun verdetto confrontabile.');
+      return;
+    }
+    const v = deferralVerdicts(sample);
+    console.log(formatVerdictLine('<stdin>', v));
+    console.log(`\nflip: ${v.flipped ? 1 : 0}/1 run`);
+    return;
+  }
+
+  const rIdx = argv.indexOf('--runs');
+  const limit = rIdx >= 0 ? Number(argv[rIdx + 1]) || 40 : 40;
+  const raw = gh(['run', 'list', ...repoArgs, '--workflow=generate-article.yml',
+    '--limit', String(limit), '--json', 'databaseId,conclusion']);
+  let runs = [];
+  try { runs = JSON.parse(raw || '[]'); } catch { runs = []; }
+  if (runs.length === 0) {
+    console.log('Nessuna run leggibile → niente da riportare.');
+    return;
+  }
+
+  let comparable = 0;
+  let flips = 0;
+  for (const r of runs) {
+    const sample = pickDecidingSample(gh(['run', 'view', String(r.databaseId), ...repoArgs, '--log']));
+    if (!sample) {
+      console.log(`run ${r.databaseId}  — nessun messaggio aggregato (cascata mai svuotata)`);
+      continue;
+    }
+    comparable += 1;
+    const v = deferralVerdicts(sample);
+    if (v.flipped) flips += 1;
+    console.log(formatVerdictLine(r.databaseId, v));
+  }
+  console.log(`\nrun scandite: ${runs.length} · confrontabili: ${comparable}`);
+  console.log(`flip: ${flips}/${comparable} run`);
+}
+
 async function main() {
   const argv = process.argv.slice(2);
   const now = Date.now();
+
+  if (argv.includes('--deferral-verdicts')) {
+    await mainDeferralVerdicts(argv);
+    return;
+  }
 
   if (argv.includes('--stdin')) {
     const events = parseExhaustionEvents(await readStdin());
