@@ -709,6 +709,32 @@ test('#488 — B senza marker REDFLAG_FIX_ROUND: zero rerun, consiglio commit', 
   assert.match(body, /nuovo commit/, `Senza marker il rimedio resta un commit che chiuda il 🔴.\n${body}`);
 });
 
+// #733: `refund-fix-round.mjs` CANCELLA il marker di round quando un 429 ha
+// impedito a Claude di leggere la PR, e lascia al suo posto
+// `REDFLAG_FIX_REFUNDED`. Se il rescuer guardasse solo `REDFLAG_FIX_ROUND`, il
+// rimborso spegnerebbe l'unico re-trigger del fixer: PR ferma, budget intero,
+// nessun evento a spenderlo. Qui il round non e' stato CHIUSO ma NON LETTO —
+// il rimedio (rerun di `tests`) e' lo stesso e piu' urgente.
+const REDFLAG_REFUNDED =
+  '<!-- REDFLAG_FIX_REFUNDED: 1 -->\n⏳ **Quota Claude esaurita** — Claude non ha letto questa PR.';
+
+test('#733 — B + REDFLAG_FIX_REFUNDED (429, round rimborsato): il rerun scatta lo stesso', opts, () => {
+  const r = classB({ posted: [{ body: REDFLAG_REFUNDED }] });
+  assert.equal(
+    r.reruns.length,
+    1,
+    'Dopo un 429 il marker di round non esiste piu (rimborsato): senza riconoscere ' +
+      `l'handle di rimborso la PR resta ferma per sempre.\n${r.stdout}`,
+  );
+  assert.equal(r.reruns[0], '4242');
+  const body = only(r);
+  assert.doesNotMatch(
+    body,
+    /nuovo commit/,
+    `Il 🔴 non e' stato letto da nessuno: un commit nuovo non e' la cura.\n${body}`,
+  );
+});
+
 test('#488 — B + marker in dry_run: non rilancia', opts, () => {
   const r = classB({ posted: [{ body: REDFLAG_ROUND }], dryRun: true });
   assert.deepEqual(r.reruns, [], `dry_run non deve rilanciare il run di tests.\n${r.stdout}`);

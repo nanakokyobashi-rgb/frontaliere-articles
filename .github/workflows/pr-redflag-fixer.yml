@@ -214,6 +214,29 @@ jobs:
           set -uo pipefail
           MAX_ROUNDS=2
 
+          # Beacon di quota PRIMA di qualunque altra cosa: il marker di round si
+          # posta piu' sotto e non e' revocabile a costo zero, quindi entrare qui
+          # con la finestra 429 gia' aperta vuol dire spendere un round contro un
+          # muro noto. `GITHUB_OUTPUT=` disarma la scrittura del gate: la
+          # decisione la legge questo step da stdout, non i suoi output.
+          QUOTA=$(GITHUB_OUTPUT= node scripts/ci/check-quota-backoff.mjs 2>/dev/null \
+            | grep -oE 'quota_blocked=(true|false)' | tail -1 | cut -d= -f2 || true)
+          if [ "${QUOTA:-false}" = "true" ]; then
+            echo "::warning::Finestra di rate-limit Claude aperta -> skip senza consumare un round (il prossimo trigger riparte col budget intero)."
+            # Handle di re-trigger: la classe B di `stale-pr-rescuer.yml` decide il
+            # rerun di `tests` sulla PRESENZA di un marker del fixer sul thread, ed
+            # e' l'unico modo in cui il fixer riparte senza un commit umano. Uscire
+            # di qui senza lasciarne uno rende lo skip di quota uno stallo. Il nome
+            # e' quello di `refundMarkerName()` in `scripts/ci/refund-fix-round.mjs`
+            # (unica sorgente, legame coperto da `generator/tests/refund-fix-round.test.mjs`):
+            # `_FIX_REFUNDED` non fa match sul grep del contatore `_FIX_ROUND`, quindi
+            # ri-arma il re-trigger senza ri-armare il round. `: 0` = nessun round preso.
+            gh pr comment "$PR_NUMBER" --repo "$REPO" --body "$(printf '<!-- REDFLAG_FIX_REFUNDED: 0 -->\n⏳ 🔴-fixer skip: finestra di quota Claude ancora aperta (beacon di backoff attivo) -> nessun round consumato, nessun turno bruciato. Il prossimo trigger reale riparte col budget intero.')" \
+              2>/dev/null || true
+            echo "proceed=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
           # Round corrente = numero di marker già presenti.
           comments=$(gh api "repos/$REPO/issues/$PR_NUMBER/comments" --paginate \
             --jq '[.[] | .body] | join("\n")' 2>/dev/null || echo "")
@@ -428,6 +451,26 @@ jobs:
       - name: Claude usage metrics
         if: always() && steps.guard.outputs.proceed == 'true'
         run: node scripts/ci/claude-usage-summary.mjs "${{ steps.claude_review.outputs.execution_file }}" "pr-redflag-fixer"
+
+      # Un 429 non e' un round: Claude non e' mai partito (0 turni, $0) e non ha
+      # letto la PR. Il marker di round pero' e' gia' stato postato dal guard,
+      # quindi senza rimborso due finestre di quota consecutive spingono la PR a
+      # `needs-human` — che qui e' un filtro di ESCLUSIONE da ogni coda
+      # automatica (#733), cioe' uno stato assorbente. Gemello lato PR di
+      # `check-quota-backoff.mjs` + marker `rate-limited` del lato issue.
+      - name: Refund round on Claude quota 429 (zero-Claude)
+        if: always() && steps.guard.outputs.proceed == 'true'
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+          PR: ${{ github.event.pull_request.number }}
+          MARKER: REDFLAG_FIX_ROUND
+          ROUND: ${{ steps.guard.outputs.round }}
+          EXEC_FILE: ${{ steps.claude_review.outputs.execution_file }}
+          WORKFLOW: pr-redflag-fixer
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: node scripts/ci/refund-fix-round.mjs
 
       - name: Cleanup Firebase credentials
         if: always()
