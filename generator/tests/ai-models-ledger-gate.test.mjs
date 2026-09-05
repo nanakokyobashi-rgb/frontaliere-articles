@@ -43,14 +43,29 @@ import {
 
 const SRC = readFileSync(new URL('../scripts/lib/ai-models.mjs', import.meta.url), 'utf8');
 
-// Il sorgente SENZA commenti. Necessario perche' i commenti di quel modulo
-// citano il codice per esteso — nomi di variabili d'ambiente compresi — e un
-// grep sul testo grezzo scambierebbe un esempio dentro un docblock per una
-// lettura vera. Sostituzione con spazi e non con nulla, cosi' gli offset delle
-// righe restano quelli del file.
-const SRC_CODE = SRC
-  .replace(/\/\*[\s\S]*?\*\//g, (m) => m.replace(/[^\n]/g, ' '))
-  .replace(/(^|[^:])\/\/[^\n]*/g, (m, p1) => p1 + ' '.repeat(m.length - p1.length));
+// Il sorgente con le RIGHE di commento svuotate. Necessario perche' i commenti
+// di quel modulo citano il codice per esteso — nomi di variabili d'ambiente
+// compresi — e un grep sul testo grezzo scambierebbe un esempio dentro un
+// docblock per una lettura vera.
+//
+// Filtro per RIGA e non a blocchi, deliberatamente. La versione a blocchi
+// (`replace(/\/\*[\s\S]*?\*\//g, ...)` prima dei commenti riga) e' cieca in un
+// modo che non si vede: un `/*` che compare DENTRO un commento `//` apre un
+// finto blocco, e il primo `*/` successivo lo chiude portandosi via tutto il
+// CODICE in mezzo. Non e' teorico — misurato su questo stesso file: la riga
+// `// cookie only gates /api/* management routes` faceva sparire una delle tre
+// occorrenze di `_dirtyModels.add(` e l'intero blocco `catch` di `callLLM`,
+// cioe' 4.732 righe su 7.535 e proprio la regione dove vivono #838 e #848. Un
+// gate strutturale cieco sul 63% del modulo e' peggio di nessun gate, perche'
+// il verde sembra una prova.
+//
+// Un filtro per riga non ha quel modo di fallire: al massimo lascia passare un
+// commento in coda a una riga di codice, che al peggio produce un falso
+// POSITIVO — il test si lamenta di troppo, non di troppo poco. Le righe sono
+// svuotate e non tolte, cosi' i numeri di riga restano quelli del file.
+const SRC_CODE = SRC.split('\n')
+  .map((riga) => (/^\s*(\/\/|\/\*|\*)/.test(riga) ? '' : riga))
+  .join('\n');
 
 const ENV_KEYS = [
   'AI_MODELS_FORCE_CHAIN', 'AI_MODELS_PREFER', 'GH_MODELS_PAT',
@@ -90,7 +105,11 @@ describe('#874/#864/#845 — una sola porta di scrittura verso ai_model_scores/_
     const funzioneDi = (n) => {
       const prima = SRC_CODE.split('\n').slice(0, n);
       for (let i = prima.length - 1; i >= 0; i--) {
-        const m = prima[i].match(/^(?:async )?function (\w+)\(/);
+        // `export function` e i metodi contano quanto una `function` nuda: senza
+        // `export` nel pattern, un `_dirtyModels.add(` dentro una funzione
+        // ESPORTATA veniva attribuito alla dichiarazione precedente — e se
+        // quella era la porta, il pin restava verde su una violazione vera.
+        const m = prima[i].match(/^(?:export\s+)?(?:async\s+)?function (\w+)\s*\(/);
         if (m) return m[1];
       }
       return '(top-level)';
@@ -354,10 +373,69 @@ describe('#875 — resetState() lascia uno stato coerente', () => {
   // Item 2. `_discoveryDone = true` precedeva il `Promise.all`: un secondo
   // chiamante arrivato mentre la sweep era in volo non aspettava e riceveva
   // `_dynamicModels` a meta' popolamento, trattandolo come lista completa.
-  it('due chiamanti concorrenti ricevono la stessa lista, e finita', async () => {
+  it('il secondo chiamante ASPETTA la sweep invece di ricevere una lista a meta\'', async () => {
+    // `assert.equal(a, b)` NON misura niente qui: entrambi i rami rendono lo
+    // STESSO oggetto `_dynamicModels`, quindi l'identita' era gia' vera prima
+    // del fix. Il difetto di #875 item 2 e' TEMPORALE — il secondo chiamante
+    // riceveva l'array mentre la sweep era ancora in volo — e va quindi
+    // osservato nel tempo: la sweep viene tenuta ferma su un `fetch` che non
+    // risolve, e si guarda se il secondo chiamante si e' gia' liberato.
     resetState();
-    const [a, b] = await Promise.all([discoverFreeModels(), discoverFreeModels()]);
-    assert.equal(a, b, 'il secondo chiamante deve ricevere la promessa memoizzata, non un array a meta\' popolamento');
+    const realFetch = globalThis.fetch;
+    // Senza almeno una chiave di discovery, `_discoverProvider` esce prima del
+    // `fetch` per OGNI provider: la sweep finisce nello stesso turno e il
+    // cancello sotto non trattiene niente — cioe' il test tornerebbe a non
+    // misurare nulla. Una sola chiave accesa, le altre spente, cosi' il turno
+    // di rete e' esattamente uno.
+    const CHIAVI = [
+      'OPENROUTER_API_KEY', 'GROQ_API_KEY', 'CEREBRAS_API_KEY', 'MISTRAL_API_KEY',
+      'NVIDIA_API_KEY', 'NVIDIA_NIM_API_KEY', 'SAMBANOVA_API_KEY', 'TOGETHER_API_KEY',
+      'FIREWORKS_API_KEY', 'COHERE_API_KEY', 'CHUTES_API_KEY', 'HUGGINGFACE_API_KEY',
+      'ZAI_API_KEY', 'ZHIPU_API_KEY', 'CF_ACCOUNT_ID', 'CF_API_TOKEN',
+    ];
+    const chiaviBackup = Object.fromEntries(CHIAVI.map((k) => [k, process.env[k]]));
+    for (const k of CHIAVI) delete process.env[k];
+    process.env.OPENROUTER_API_KEY = 'test-key';
+
+    let apriIlCancello;
+    const cancello = new Promise((r) => { apriIlCancello = r; });
+    let fetchChiamato = false;
+    globalThis.fetch = async () => {
+      fetchChiamato = true;
+      await cancello;
+      return { ok: true, status: 200, headers: new Map(), json: async () => ({ data: [] }), text: async () => '{"data":[]}' };
+    };
+
+    try {
+      const primo = discoverFreeModels();
+      let secondoRisolto = false;
+      const secondo = discoverFreeModels().then((v) => { secondoRisolto = true; return v; });
+
+      // Qualche giro di microtask e un turno di event loop: con un latch
+      // booleano il ramo «gia' fatta» e' un `return` immediato, quindi qui
+      // sarebbe gia' vero.
+      await new Promise((r) => setImmediate(r));
+      await new Promise((r) => setImmediate(r));
+      assert.ok(fetchChiamato, 'la sweep non ha nemmeno provato la rete: il cancello non trattiene niente e il caso non misura');
+      assert.equal(
+        secondoRisolto,
+        false,
+        'il secondo chiamante si e\' liberato mentre la sweep era ancora in volo: riceve `_dynamicModels` a meta\' '
+        + 'popolamento e lo tratta come lista completa (#875 item 2 — il latch deve essere la promessa, non un booleano)',
+      );
+
+      apriIlCancello();
+      const [a, b] = await Promise.all([primo, secondo]);
+      assert.equal(secondoRisolto, true, 'dopo la sweep il secondo chiamante deve essere risolto');
+      assert.equal(a, b, 'e deve aver ricevuto la stessa lista del primo');
+    } finally {
+      apriIlCancello();
+      globalThis.fetch = realFetch;
+      for (const k of CHIAVI) {
+        if (chiaviBackup[k] === undefined) delete process.env[k];
+        else process.env[k] = chiaviBackup[k];
+      }
+    }
   });
 
   // Item 3. `_prunedStale.clear()` buttava via il REGISTRO delle potature
@@ -445,17 +523,23 @@ describe('#848/#849 — un guasto, un voto', () => {
   // riepilogo di run contava dial che non erano stati girati — e quel testo e'
   // cio' che `scan-generation-health` legge per giudicare la generazione.
   it('ogni _stats.providerCooldowns++ e\' guardato da `=== \'created\'`', () => {
-    const conteggi = [...SRC.matchAll(/_stats\.providerCooldowns\+\+/g)];
-    assert.ok(conteggi.length >= 3, `attesi almeno tre call site, trovati ${conteggi.length}`);
-    for (const m of conteggi) {
-      const prima = SRC.slice(Math.max(0, m.index - 220), m.index);
-      assert.match(
-        prima,
-        /=== 'created'/,
-        'un `_stats.providerCooldowns++` non guardato da `=== \'created\'`: da #809 cooldownProvider puo\' essere '
-        + `un no-op completo, e contarlo gonfia la riga che scan-generation-health legge.\n...${prima.slice(-160)}`,
-      );
-    }
+    // Per RIGA, non con una finestra di byte. La finestra e' esattamente
+    // l'ancoraggio che si sfalda appena il file si muove — e si e' gia'
+    // sfaldata una volta, quando svuotare le righe di commento ha cambiato
+    // tutti gli offset. Tutti e tre i call site portano la guardia sulla
+    // stessa riga, quindi la riga E' l'unita' giusta.
+    const righe = SRC_CODE.split('\n')
+      .map((riga, i) => ({ n: i + 1, riga: riga.trim() }))
+      .filter(({ riga }) => riga.includes('_stats.providerCooldowns++'));
+
+    assert.ok(righe.length >= 3, `attesi almeno tre call site, trovati ${righe.length}`);
+    assert.deepEqual(
+      righe.filter(({ riga }) => !riga.includes("=== 'created'")).map(({ n, riga }) => `${n}: ${riga}`),
+      [],
+      'un `_stats.providerCooldowns++` non guardato da `=== \'created\'`: da #809 cooldownProvider puo\' essere '
+      + 'un no-op completo (un 429 transitorio su una finestra gia\' aperta esce senza toccare ne\' finestra ne\' '
+      + 'causa), e contarlo gonfia la riga che scan-generation-health legge per giudicare la generazione.',
+    );
   });
 
   // #849 item 3. Il gate `severity < prevSeverity` esce senza toccare la

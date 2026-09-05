@@ -236,7 +236,13 @@ describe('il ramo di timeout usa davvero il salvataggio, e non punisce il modell
       // che questo test misura — e la coda `[\s\S]` copre solo le eventuali
       // disgiunzioni aggiunte dopo: allentarla oltre il `;` renderebbe di nuovo
       // sufficiente un qualunque oggetto con un campo `transportOnly`.
-      /const transportOnly = \(!!e\.transportFault && provider === PROVIDER\.CLAUDE_CLI\)[\s\S]{0,200}?;[\s\S]{0,400}?recordModelFailure\(model, \{[\s\S]{0,200}?transportOnly,\s*\n\s*\}\);/,
+      // Dal 2026-09-05 la chiamata porta anche `recordScore` — il gate e' sul
+      // PARAMETRO e non piu' attorno al call site (#846), cosi' il tally di run
+      // sopravvive a una run diagnostica. `transportOnly,` resta pinnato alla
+      // lettera, che e' cio' che questo test misura; la coda ammette le
+      // proprieta' aggiunte dopo di esso invece di pretendere che sia l'ultima,
+      // che era un'assunzione sull'ORDINE delle chiavi e non sul flag.
+      /const transportOnly = \(!!e\.transportFault && provider === PROVIDER\.CLAUDE_CLI\)[\s\S]{0,200}?;[\s\S]{0,700}?recordModelFailure\(model, \{[\s\S]{0,200}?transportOnly,[\s\S]{0,200}?\n\s*\}\);/,
       'callLLM deve propagare il flag a recordModelFailure',
     );
   });

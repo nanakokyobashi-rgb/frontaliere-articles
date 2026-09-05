@@ -7343,7 +7343,12 @@ export async function callLLM(messages, opts = {}) {
 
       // ✅ Success — boost this model's score so it stays near the top
       // (skipped for diagnostic-only callers, see DEFAULT_OPTS.recordScore)
-      if (_shouldRecordScore(o)) recordModelSuccess(model);
+      // Gate sul PARAMETRO, non attorno alla chiamata (#846): saltare la
+      // chiamata intera fa perdere anche il TALLY DI RUN, che non e' un dato di
+      // ledger — muore col processo — ed e' cio' che il riepilogo legge. Una run
+      // diagnostica finiva percio' con `0ok/0ko` su modelli che aveva chiamato
+      // davvero, che e' la lettura che rende invisibile il prossimo incidente.
+      recordModelSuccess(model, { recordScore: _shouldRecordScore(o) });
       _consecutive429.delete(model); // FRO-325: reset 429 counter on success
       _clampedTimeouts.delete(model); // an answer clears the adaptive-ceiling doubt
       _resolverFlaps.delete(provider); // the name resolved: the flap streak is over (#770)
@@ -7724,14 +7729,15 @@ export async function callLLM(messages, opts = {}) {
       // rapido per rendere invisibile il prossimo incidente.
       const transportOnly = (!!e.transportFault && provider === PROVIDER.CLAUDE_CLI)
         || perMachineEndpointFault;
-      // (skipped for diagnostic-only callers, see DEFAULT_OPTS.recordScore)
-      if (_shouldRecordScore(o)) {
-        recordModelFailure(model, {
-          nonRetryable: !!e.nonRetryable,
-          exhausted: isExhausted || isTimeoutFailure,
-          transportOnly,
-        });
-      }
+      // Gemello del ramo di successo: gate sul PARAMETRO, cosi' il fallimento
+      // resta contato nel tally di run anche per un chiamante diagnostico
+      // (see DEFAULT_OPTS.recordScore).
+      recordModelFailure(model, {
+        nonRetryable: !!e.nonRetryable,
+        exhausted: isExhausted || isTimeoutFailure,
+        transportOnly,
+        recordScore: _shouldRecordScore(o),
+      });
 
       // La causa va nominata anche qui: "guasto di trasporto" su un gateway
       // remoto morto manderebbe chi indaga a cercare un cap nostro invece
