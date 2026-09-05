@@ -264,6 +264,22 @@ test('isAvoidableAlreadyFixed non è inerte in nessuna delle due direzioni', () 
     'senza la label `follow-up` la issue è fuori dallo scope della pre-flight');
   assert.equal(isAvoidableAlreadyFixed('follow-up(#9): una cosa sola', FU), true,
     'il follow-up a un solo item è il bersaglio vero del gate');
+  // #568: il multi-item SENZA conteggio nel titolo — item enumerati nel corpo
+  // come sezioni numerate (#374, #505) o bullet in grassetto (#466). Misurato il
+  // 2026-09-05: 3 esempi su 5 del bucket che ha innescato l'escalation #560
+  // erano di questa forma e venivano contati come burn evitabile pur essendo
+  // aggregati risolvibili solo su più PR.
+  assert.equal(
+    isAvoidableAlreadyFixed('follow-up(#373): gemello da portare + retry sopra cap', FU,
+      '## 1. Gemello da portare\n\nTesto.\n\n## 2. Il retry resta sopra il cap\n\nTesto.'),
+    false, 'sezioni numerate nel corpo: è un aggregato anche senza conteggio nel titolo');
+  assert.equal(
+    isAvoidableAlreadyFixed('follow-up(#450): 4 modelli irraggiungibili + 2 rischi', FU,
+      '- [ ] **Primo item.** Testo.\n- [ ] **Secondo item.** Testo.'),
+    false, 'bullet con lead in grassetto: stessa forma, stesso verdetto');
+  assert.equal(
+    isAvoidableAlreadyFixed('follow-up(#9): una cosa sola', FU, '## 1. La cosa\n\nTesto.'),
+    true, 'una sola sezione numerata non enumera niente: resta un item solo');
 });
 
 test('isAvoidableNoRootCause non è inerte in nessuna delle due direzioni', () => {
