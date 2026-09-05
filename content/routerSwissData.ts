@@ -1890,6 +1890,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'locazione-friburgo-guida-inquilini': { it: 'locazione-friburgo-guida-inquilini', en: 'fribourg-rental-tenants-guide', de: 'mietrecht-freiburg-mieterleitfaden', fr: 'location-fribourg-guide-locataires' },
  'tirocinio-retribuzione-maturita-grigioni': { it: 'tirocinio-retribuzione-maturita-grigioni', en: 'vocational-apprenticeship-graubunden', de: 'lehre-lohn-berufsmaturaet-graubuenden', fr: 'apprentissage-salaire-maturite-grisons' },
  'ridurre-traffico-trasporti-pubblici': { it: 'ridurre-traffico-trasporti-pubblici', en: 'reduce-traffic-public-transport', de: 'verkehr-reduzieren-oeffliche-verkehrsmittel', fr: 'reduire-trafic-transports-publics' },
+ 'come-trovare-tirocinio-grigioni': { it: 'come-trovare-tirocinio-grigioni', en: 'how-to-find-apprenticeship-graubunden', de: 'lehrstelle-graubuenden-finden', fr: 'comment-trouver-apprentissage-grisons' },
 };
 
 export const REVERSE_SWISS: Record<ArticleLocale, Record<string, string>> = (() => {

@@ -5593,6 +5593,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.ridurre-traffico-trasporti-pubblici.title': 'Reducing traffic: cheap tickets are not enough',
     'blog.article.ridurre-traffico-trasporti-pubblici.excerpt': 'An HSLU study reveals that convenience, secure parking and luggage transport are more important than price to encourage public transport.',
     'blog.article.ridurre-traffico-trasporti-pubblici.imageAlt': 'Modern Swiss train station with trains and passengers, representing public transport mobility in Switzerland',
+    'blog.article.come-trovare-tirocinio-grigioni.title': 'How to find an internship in the Canton of Graubünden',
+    'blog.article.come-trovare-tirocinio-grigioni.excerpt': 'Guide to vocational training in Graubünden: internship contracts, apprentice remuneration, social contributions and professional maturity in the Swiss system.',
+    'blog.article.come-trovare-tirocinio-grigioni.imageAlt': 'Young apprentice learning a trade in a Swiss Alpine workshop during apprenticeship',
 };
 
 export default blogMetaChEn;

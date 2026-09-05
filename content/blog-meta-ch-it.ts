@@ -5593,6 +5593,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.ridurre-traffico-trasporti-pubblici.title': 'Ridurre il traffico: biglietti economici non bastano',
     'blog.article.ridurre-traffico-trasporti-pubblici.excerpt': 'Uno studio HSLU rivela che praticità, parcheggi certi e trasporto bagagli sono più importanti del prezzo per incentivare i trasporti pubblici.',
     'blog.article.ridurre-traffico-trasporti-pubblici.imageAlt': 'Stazione ferroviaria svizzera moderna con treni e passeggeri, simbolo della mobilità su trasporti pubblici',
+    'blog.article.come-trovare-tirocinio-grigioni.title': 'Come trovare un tirocinio nel Cantone Grigioni',
+    'blog.article.come-trovare-tirocinio-grigioni.excerpt': 'Guida alla formazione professionale nel Grigioni: contratti di tirocinio, retribuzione dell\'apprendista, contributi sociali e maturità professionale nel sistema svizzero.',
+    'blog.article.come-trovare-tirocinio-grigioni.imageAlt': 'Giovane apprendista impara un mestiere in laboratorio alpino svizzero durante il tirocinio',
 };
 
 export default blogMetaChIt;

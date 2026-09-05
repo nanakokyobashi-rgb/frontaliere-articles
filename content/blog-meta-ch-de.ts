@@ -5593,6 +5593,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.ridurre-traffico-trasporti-pubblici.title': 'Verkehr eindämmen: Günstige Tickets reichen nicht aus',
     'blog.article.ridurre-traffico-trasporti-pubblici.excerpt': 'Eine HSLU-Studie zeigt, dass Praktikabilität, sicheres Parken und Gepäcktransport wichtiger sind als der Preis, um den öffentlichen Verkehr zu fördern.',
     'blog.article.ridurre-traffico-trasporti-pubblici.imageAlt': 'Moderne Schweizer Bahnhofstation mit Zügen und Fahrgästen, Symbol für Mobilität im öffentlichen Nahverkehr',
+    'blog.article.come-trovare-tirocinio-grigioni.title': 'So finden Sie ein Praktikum im Kanton Graubünden',
+    'blog.article.come-trovare-tirocinio-grigioni.excerpt': 'Leitfaden zur Berufsbildung in Graubünden: Lehrverträge, Lehrlingsentgelt, Sozialbeiträge und Berufsmaturität im Schweizer System.',
+    'blog.article.come-trovare-tirocinio-grigioni.imageAlt': 'Junger Lehrling beim Erlernen eines Handwerks in einer Schweizer Alpenwerkstatt',
 };
 
 export default blogMetaChDe;

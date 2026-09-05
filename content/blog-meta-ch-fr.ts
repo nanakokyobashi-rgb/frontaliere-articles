@@ -5593,6 +5593,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.ridurre-traffico-trasporti-pubblici.title': 'Réduire le trafic : des billets pas chers ne suffisent pas',
     'blog.article.ridurre-traffico-trasporti-pubblici.excerpt': 'Une étude HSLU révèle que la praticité, les parkings sécurisés et le transport des bagages sont plus importants que le prix pour encourager les transports en commun.',
     'blog.article.ridurre-traffico-trasporti-pubblici.imageAlt': 'Gare ferroviaire moderne suisse avec trains et passagers, symbole de la mobilité des transports publics',
+    'blog.article.come-trovare-tirocinio-grigioni.title': 'Comment trouver un stage dans le canton des Grisons',
+    'blog.article.come-trovare-tirocinio-grigioni.excerpt': 'Guide de la formation professionnelle dans les Grisons : contrats de stage, rémunération de l\'apprenti, cotisations sociales et maturité professionnelle dans le système suisse.',
+    'blog.article.come-trovare-tirocinio-grigioni.imageAlt': 'Jeune apprenti apprenant un métier dans un atelier alpin suisse',
 };
 
 export default blogMetaChFr;
