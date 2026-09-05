@@ -5596,6 +5596,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.come-trovare-tirocinio-grigioni.title': 'Come trovare un tirocinio nel Cantone Grigioni',
     'blog.article.come-trovare-tirocinio-grigioni.excerpt': 'Guida alla formazione professionale nel Grigioni: contratti di tirocinio, retribuzione dell\'apprendista, contributi sociali e maturità professionale nel sistema svizzero.',
     'blog.article.come-trovare-tirocinio-grigioni.imageAlt': 'Giovane apprendista impara un mestiere in laboratorio alpino svizzero durante il tirocinio',
+    'blog.article.asilo-nido-custodia-bambini-canton-soletta-costi.title': 'Asilo nido e custodia bambini nel Canton Soletta: costi e tariffe',
+    'blog.article.asilo-nido-custodia-bambini-canton-soletta-costi.excerpt': 'Scopri i costi e le tariffe per la custodia dei bambini nel Canton Soletta, inclusi asili nido, famiglie diurne e doposcuola.',
+    'blog.article.asilo-nido-custodia-bambini-canton-soletta-costi.imageAlt': 'Un asilo nido nel Canton Soletta, Svizzera',
 };
 
 export default blogMetaChIt;

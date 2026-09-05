@@ -5596,6 +5596,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.come-trovare-tirocinio-grigioni.title': 'How to find an internship in the Canton of Graubünden',
     'blog.article.come-trovare-tirocinio-grigioni.excerpt': 'Guide to vocational training in Graubünden: internship contracts, apprentice remuneration, social contributions and professional maturity in the Swiss system.',
     'blog.article.come-trovare-tirocinio-grigioni.imageAlt': 'Young apprentice learning a trade in a Swiss Alpine workshop during apprenticeship',
+    'blog.article.asilo-nido-custodia-bambini-canton-soletta-costi.title': 'Nursery and childcare in the canton of Solothurn: costs and fees',
+    'blog.article.asilo-nido-custodia-bambini-canton-soletta-costi.excerpt': 'Find out about childcare costs and fees in the Canton of Solothurn, including nurseries, day families and afterschool.',
+    'blog.article.asilo-nido-custodia-bambini-canton-soletta-costi.imageAlt': 'A childcare facility in the Canton of Solothurn, Switzerland',
 };
 
 export default blogMetaChEn;

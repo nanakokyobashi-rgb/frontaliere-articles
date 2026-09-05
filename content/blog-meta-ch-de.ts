@@ -5596,6 +5596,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.come-trovare-tirocinio-grigioni.title': 'So finden Sie ein Praktikum im Kanton Graubünden',
     'blog.article.come-trovare-tirocinio-grigioni.excerpt': 'Leitfaden zur Berufsbildung in Graubünden: Lehrverträge, Lehrlingsentgelt, Sozialbeiträge und Berufsmaturität im Schweizer System.',
     'blog.article.come-trovare-tirocinio-grigioni.imageAlt': 'Junger Lehrling beim Erlernen eines Handwerks in einer Schweizer Alpenwerkstatt',
+    'blog.article.asilo-nido-custodia-bambini-canton-soletta-costi.title': 'Kindertagesstätte und Kinderbetreuung im Kanton Solothurn: Kosten und Tarife',
+    'blog.article.asilo-nido-custodia-bambini-canton-soletta-costi.excerpt': 'Informieren Sie sich über die Kosten und Tarife für die Kinderbetreuung im Kanton Solothurn inklusive Kindergärten, Tagesfamilien und Kindergarten.',
+    'blog.article.asilo-nido-custodia-bambini-canton-soletta-costi.imageAlt': 'Eine Kinderbetreuungseinrichtung im Kanton Solothurn, Schweiz',
 };
 
 export default blogMetaChDe;

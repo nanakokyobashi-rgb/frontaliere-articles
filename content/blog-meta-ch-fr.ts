@@ -5596,6 +5596,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.come-trovare-tirocinio-grigioni.title': 'Comment trouver un stage dans le canton des Grisons',
     'blog.article.come-trovare-tirocinio-grigioni.excerpt': 'Guide de la formation professionnelle dans les Grisons : contrats de stage, rémunération de l\'apprenti, cotisations sociales et maturité professionnelle dans le système suisse.',
     'blog.article.come-trovare-tirocinio-grigioni.imageAlt': 'Jeune apprenti apprenant un métier dans un atelier alpin suisse',
+    'blog.article.asilo-nido-custodia-bambini-canton-soletta-costi.title': 'Garderie et garde d\'enfants dans le canton de Soleure : coûts et tarifs',
+    'blog.article.asilo-nido-custodia-bambini-canton-soletta-costi.excerpt': 'Découvrez les coûts et les tarifs pour la garde des enfants dans le canton de Soleure, y compris les crèches, les familles de jour et après l\'école.',
+    'blog.article.asilo-nido-custodia-bambini-canton-soletta-costi.imageAlt': 'Une crèche dans le canton de Soleure, Suisse',
 };
 
 export default blogMetaChFr;
