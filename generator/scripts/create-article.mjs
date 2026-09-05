@@ -2859,6 +2859,12 @@ function endRegisterLock() {
   return endRegisterLockImpl(PROJECT_ROOT);
 }
 
+// The BlogArticleId union file, declared once (AGENTS.md #6): `modifyRouterUnion`
+// writes it, `registerLockTargets` cross-checks it and the git-add list stages
+// it. A second literal is how it dropped out of the lock's targets to begin
+// with.
+const ROUTER_UNION_FILE = 'packages/articles/content/blogArticleIds.ts';
+
 // The files a completed registration must ALL carry the id in, used to tell a
 // benign leftover lock from a genuinely split corpus (see
 // `resolveRegisterLock`). Derived from the same section config the
@@ -2887,18 +2893,44 @@ function registerLockTargets(id, sectionName = SECTION_NAME) {
         `rimuovi ${REGISTER_LOCK_FILE}.`,
     );
   }
+  // `label` goes through corpusPath() like `absPath` does: it is the only
+  // thing the SPLIT error gives a human to repair by hand, and the unmapped
+  // form names paths (`data/…`, `services/locales/…`) that do not exist in
+  // this repository — the files live under `content/`.
+  const target = (rel, needle) => ({ label: corpusPath(rel), absPath: resolve(rel), needle });
+
+  // Every needle carries the delimiters the corresponding `modifyXxx()`
+  // actually writes. `registrationTargetStatus()` does a plain substring
+  // lookup, so a bare id matches inside every LONGER id that starts with it:
+  // with `frontalieri-imposta-2026-ticino` in the corpus, a lock for
+  // `frontalieri-imposta-2026` would read as present in the slug map, the
+  // registry and the SEO file while absent from its own body files — a SPLIT
+  // reported over a registration that never wrote anything, which stops every
+  // later generation until a human clears the marker.
   const targets = [
-    { label: section.slugDataFile, absPath: resolve(section.slugDataFile), needle: id },
-    { label: section.registryFile, absPath: resolve(section.registryFile), needle: id },
-    { label: section.seoFile, absPath: resolve(section.seoFile), needle: id },
+    // `modifyRouterTs`: `'<id>': { it: …`
+    target(section.slugDataFile, `'${id}':`),
+    // `modifyBlogArticlesTsx`: `id: '<id>',` (indent-independent)
+    target(section.registryFile, `id: '${id}',`),
+    // `modifySeoService`: `'blog-<id>': {`
+    target(section.seoFile, `'blog-${id}':`),
   ];
+  // `modifyRouterUnion` (frontaliere only) appends `| '<id>'` to the
+  // BlogArticleId union, and it is the FIRST write of the whole sequence — the
+  // widest window a kill can land in. Leaving it out of the targets meant a
+  // kill between it and the slug-map write scored `present.length === 0`,
+  // resolved as `nothing-written`, and cleared the lock over a union carrying
+  // an orphan id.
+  if (section.updateRouterUnion) {
+    targets.push(target(ROUTER_UNION_FILE, `'${id}'`));
+  }
   for (const locale of ['it', 'en', 'de', 'fr']) {
     const metaFile = `services/locales/${section.metaPrefix}-${locale}.ts`;
     const bodyFile = `services/locales/${section.bodyDir}/${locale}/${id}.ts`;
-    targets.push({ label: metaFile, absPath: resolve(metaFile), needle: `blog.article.${id}.` });
+    targets.push(target(metaFile, `blog.article.${id}.`));
     // The body file IS the registration: its mere existence is the entry, so
     // there is no needle to look for inside it.
-    targets.push({ label: bodyFile, absPath: resolve(bodyFile), needle: null });
+    targets.push(target(bodyFile, null));
   }
   return targets;
 }
@@ -12473,7 +12505,7 @@ function modifyRouterUnion(data) {
   // 3): it is appended on every publish, so it is corpus data, and writing it
   // here meant every run of the generator also wrote into the site. The router
   // re-exports it, so nothing downstream changed.
-  const routerFile = 'packages/articles/content/blogArticleIds.ts';
+  const routerFile = ROUTER_UNION_FILE;
   let routerSrc = read(routerFile);
 
   // Append to the LAST _BlogIdN alias before its terminating semicolon. We
@@ -13014,7 +13046,7 @@ function gitAddAll(data) {
   // breadcrumb) + sitemap-news.xml + sitemap.xml are staged for both. router.ts
   // is staged only when the section maintains the BlogArticleId union.
   const files = [
-    ...(SECTION.updateRouterUnion ? ['packages/articles/content/blogArticleIds.ts'] : []),
+    ...(SECTION.updateRouterUnion ? [ROUTER_UNION_FILE] : []),
     SECTION.slugDataFile,
     SECTION.registryFile,
     `services/locales/${SECTION.metaPrefix}-it.ts`,
@@ -16106,6 +16138,14 @@ export async function registerArticleFiles(data, opts = {}) {
   if (!data || !data.id || !data.content?.it?.title) {
     throw new Error('registerArticleFiles: data.id and data.content.it.title are required');
   }
+  // PRIMA del guard append-only, non dopo: dopo un kill a meta' registrazione
+  // l'id e' gia' nel registro, quindi `checkArticleIdExists()` scatterebbe per
+  // primo e chiuderebbe il run con «already exists (registration is
+  // append-only)» — un messaggio che manda a cercare un duplicato al posto
+  // della diagnosi SPLIT, che invece nomina i file registrati e quelli
+  // mancanti. Il run si ferma in entrambi i casi; solo uno dei due dice dove
+  // guardare.
+  resolveRegisterLockAtStartup();
   if (checkArticleIdExists(data.id)) {
     throw new Error(
       `registerArticleFiles: article "${data.id}" already exists (registration is append-only). ` +
@@ -16128,14 +16168,13 @@ export async function registerArticleFiles(data, opts = {}) {
   assertTranslationsPassFactualityGates(data);
   clampSeoDescriptions(data);
   const slugs = deriveAndSanitizeArticleSlugs(data);
-  // Sul percorso di scrittura CONDIVISO, per la stessa ragione argomentata
-  // sopra: generate-daily-brief-article.mjs, generate-events-digest-article.mjs,
-  // generate-border-wait-ranking-article.mjs e publish-journalist-article.mjs
-  // importano registerArticleFiles() direttamente e non hanno il `main()` di
-  // questo file, quindi non passano mai dal controllo d'avvio. Senza questa
-  // riga un marker orfano li farebbe morire su `beginRegisterLock()` con un
-  // errore duro anche quando il corpus e' perfettamente coerente.
-  resolveRegisterLockAtStartup();
+  // Il lock e' gia' stato risolto in cima a questa funzione (sul percorso di
+  // scrittura CONDIVISO: generate-daily-brief-article.mjs,
+  // generate-events-digest-article.mjs, generate-border-wait-ranking-article.mjs
+  // e publish-journalist-article.mjs importano registerArticleFiles()
+  // direttamente e non hanno il `main()` di questo file, quindi non passano mai
+  // dal controllo d'avvio — senza quella chiamata un marker orfano li farebbe
+  // morire su `beginRegisterLock()` anche con un corpus coerente).
   beginRegisterLock(data.id);
   modifyRouterTs(data);
   modifyBlogArticlesTsx(data);

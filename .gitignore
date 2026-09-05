@@ -30,3 +30,4 @@ CLAUDE.md
 # sarebbe silenziosamente morta col pattern piu' semplice.
 public/images/events/*
 !public/images/events/catalog/
+generator/data/register-in-progress.json.*.tmp

@@ -20,7 +20,7 @@
  * directly testable (`generator/tests/register-lock.test.mjs`) without
  * touching the rest of create-article.mjs.
  */
-import { readFileSync, writeFileSync, mkdirSync, existsSync, unlinkSync } from 'node:fs';
+import { readFileSync, writeFileSync, mkdirSync, existsSync, unlinkSync, renameSync } from 'node:fs';
 import path from 'node:path';
 
 // Deliberately NOT under `.tmp/`, which is gitignored. A run killed mid-write
@@ -69,11 +69,30 @@ export function beginRegisterLock(projectRoot, id, section) {
     );
   }
   mkdirSync(path.dirname(lockPath), { recursive: true });
+  // Temp + rename, for the same reason every corpus write is atomic (#561),
+  // but with a sharper failure mode: a SIGKILL landing between `mkdirSync` and
+  // a plain `writeFileSync` leaves a TRUNCATED lock, and an unreadable lock is
+  // by design a hard stop on every later run until a human deletes the file —
+  // i.e. exactly the permanent brick this module exists to avoid, on a corpus
+  // that was never touched. `rename()` is atomic within a filesystem, so the
+  // only states an interrupted run can leave behind are "no lock" and "valid
+  // lock", both of which self-heal.
+  //
+  // The temp name carries the pid and is gitignored: the lock itself is
+  // deliberately tracked (see above), but a leftover temp file is not evidence
+  // of anything and must not be swept into a commit by `git add -A`.
+  const tmpPath = `${lockPath}.${process.pid}.tmp`;
   writeFileSync(
-    lockPath,
+    tmpPath,
     JSON.stringify({ id, section, pid: process.pid, startedAt: new Date().toISOString() }, null, 2),
     'utf-8',
   );
+  try {
+    renameSync(tmpPath, lockPath);
+  } catch (err) {
+    try { unlinkSync(tmpPath); } catch { /* best effort */ }
+    throw err;
+  }
 }
 
 /**
@@ -112,6 +131,16 @@ export function readRegisterLock(projectRoot) {
  * the ones that don't. `needle === null` means "the file's mere existence is
  * the registration" (the per-article body files), everything else is a
  * substring lookup in the file that was appended to.
+ *
+ * The lookup being a plain substring is what makes the needle's SHAPE part of
+ * the contract: a bare id is a substring of every longer id that starts with
+ * it, so `frontalieri-imposta-2026` would read as "registered" in the slug
+ * map, the registry and the SEO file the moment `frontalieri-imposta-2026-ticino`
+ * exists — present in some targets, absent from the per-id body files, i.e. a
+ * SPLIT diagnosed over a registration that wrote nothing, and a hard stop on
+ * every generation until a human intervenes. Callers MUST therefore hand over
+ * a needle carrying the delimiters the writer actually emits (`'<id>':`,
+ * `id: '<id>'`, `'blog-<id>':`, `blog.article.<id>.`), never the naked id.
  */
 export function registrationTargetStatus(targets) {
   const present = [];
