@@ -1,5 +1,4 @@
 {
-  "https://www.rsi.ch/s/3943950": "caldo-prezzi-inflazione-climatica",
   "https://www.tio.ch/svizzera/economia/1943270/svizzera-croce-ige-swiss-marchio-made-valgono": "come-usare-la-croce-svizzera-sui-prodotti-esteri",
   "https://www.laregione.ch/svizzera/svizzera/1943349/ubs-fumata-lex-red-ats": "portale-informazione-svizzera-italiana",
   "https://www.tio.ch/svizzera/politica/1943297/bilaterali-tutele-iii-commissione-consiglio": "no-tutele-sindacalisti-bilaterali-iii",
@@ -1813,6 +1812,11 @@
   "https://www.swissinfo.ch/ita/zh%3a-processo-junge-tat%3b-procura-chiede-condanna%2c-difesa-assoluzione/92008105": {
     "articleId": "processo-junge-tat-zurigo",
     "ts": "2026-09-05T10:54:48.947Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/s/4061616": {
+    "articleId": "mezzo-miliardo-contadini-mercosur",
+    "ts": "2026-09-05T11:11:32.077Z",
     "keyForm": 2
   }
 }
