@@ -1022,7 +1022,16 @@ async function fillLocaleGaps(byLocale, cache, { fieldType, locales, delayMs, tr
     }
     // Una traduzione `"null"` non deve ne' entrare in cache ne' sovrascrivere
     // il gap: il locale resta scoperto e cade sul testo della sorgente.
+    //
+    // Lo spread di `byLocale` qui sopra conserva pero' il valore in INGRESSO,
+    // e il caso di #868 item 5 e' proprio quello in cui la chiave c'e' gia' e
+    // vale `NULL` dal feed: senza il `delete`, una traduzione fallita — esito
+    // ordinario della cascata gratuita (rate-limit, motore giu', quota) —
+    // lascerebbe il marker del feed a farsi pubblicare come titolo/descrizione
+    // del locale. L'invariante «meglio un locale assente che un `NULL`
+    // pubblicato» vale in ingresso come in uscita.
     if (hasUsableContentText(translated)) updated[target] = translated;
+    else if (!hasUsableContentText(updated[target])) delete updated[target];
   }
   return updated;
 }

@@ -15729,8 +15729,14 @@ export function deriveAndSanitizeArticleSlugs(data) {
       data.slugs[locale] = check.slug || data.slugs.it;
       continue;
     }
-    const title = String(data.content?.[locale]?.title || '');
-    const fromTitle = title ? slugifySlugPart(title) : '';
+    // Quarta derivazione di uno slug da un titolo LOCALIZZATO, e per la stessa
+    // ragione delle altre tre passa dal classificatore condiviso (#868 item 1):
+    // con `data.slugs.de` segnaposto puro e `content.de.title === 'Null'`,
+    // `check.slug` e' vuoto e `slugifySlugPart()` nudo scriveva
+    // `data.slugs.de = 'null'` — che `relocalizeSlugsAfterTranslation()` non
+    // ripara, perche' `needsWork` e' falso su uno slug diverso dall'italiano.
+    const localizedTitle = String(data.content?.[locale]?.title || '').trim();
+    const fromTitle = localizedTitle ? inspectSlugForPromptPlaceholder(localizedTitle).slug : '';
     const replacement = check.slug || fromTitle || data.slugs.it;
     const source = check.slug ? 'resto del segnaposto' : fromTitle ? `titolo ${locale}` : 'slug IT';
     console.error(

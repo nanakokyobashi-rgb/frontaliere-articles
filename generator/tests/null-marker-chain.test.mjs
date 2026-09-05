@@ -159,28 +159,60 @@ describe('events-utils — il feed dell’organizzatore non parla tedesco', () =
     assert.equal(t.en, 'titolo-en');
     assert.equal(t.it, 'Sagra della castagna');
   });
+
+  test('#868 item 5 — la chiave gia’ avvelenata dal feed sparisce anche se la traduzione fallisce', async () => {
+    // Il caso che lo spread di `{ ...byLocale }` conservava: la chiave `de`
+    // ESISTE e vale `NULL` dal feed, e la cascata gratuita fallisce (rate-limit,
+    // motore giu', quota). Senza il `delete`, il marker del feed si pubblicava
+    // come titolo `de`.
+    const events = [{ id: 'e1', titleByLocale: { it: 'Sagra della castagna', de: 'NULL', fr: 'Null' } }];
+    const out = await enrichEventsWithLocaleFallbackTranslations(events, {}, {
+      delayMs: 0,
+      translateFn: async ({ targetLang }) => (targetLang === 'en' ? 'titolo-en' : ''),
+    });
+    const t = out[0].titleByLocale;
+    assert.equal('de' in t, false, 'meglio un locale assente che il `NULL` del feed pubblicato');
+    assert.equal('fr' in t, false, 'vale per tutte le grafie del marker');
+    assert.equal(t.en, 'titolo-en');
+    assert.equal(t.it, 'Sagra della castagna');
+  });
 });
 
 // ── #868 item 1 — lo slug: la sola parte che non si corregge dopo ──────────
 
 describe('slug: un titolo `Null` non produce /de/blog/null', () => {
   test('il cablaggio passa dal classificatore condiviso, non da slugifySlugPart nudo', () => {
-    // Le due derivazioni di uno slug da un titolo LOCALIZZATO. Il test e' sul
-    // testo perche' e' l'unico modo di provare che nessuna delle due sia
-    // tornata a `slugifySlugPart(localizedTitle)` — la forma che produceva
+    // Le quattro derivazioni di uno slug da un titolo LOCALIZZATO. Il test e'
+    // sul testo perche' e' l'unico modo di provare che nessuna delle quattro
+    // sia tornata a `slugifySlugPart(localizedTitle)` — la forma che produceva
     // `data.slugs.de = 'null'` senza un warning.
+    //
+    // Il vincolo e' sul VALORE letto, non sul nome della variabile: il ramo di
+    // recupero del segnaposto in `deriveAndSanitizeArticleSlugs()` chiamava
+    // `slugifySlugPart(title)` e restava verde finche' l'assertion era legata
+    // al solo identificatore `localizedTitle`. Tutti e quattro i rami leggono
+    // ora `data.content?.[locale]?.title` nella stessa variabile.
     const occorrenze = CREATE_ARTICLE.match(
-      /inspectSlugForPromptPlaceholder\(localizedTitle\)\.slug/g,
+      /inspectSlugForPromptPlaceholder\(\s*localizedTitle\s*\)\.slug/g,
     ) || [];
     assert.equal(
       occorrenze.length,
-      3,
-      'attese tre derivazioni: validate(), deriveAndSanitizeArticleSlugs() e relocalizeSlugsAfterTranslation()',
+      4,
+      'attese quattro derivazioni: validate(), deriveAndSanitizeArticleSlugs() (assegnazione e recupero del segnaposto) e relocalizeSlugsAfterTranslation()',
     );
+    const codice = CREATE_ARTICLE.replace(/^\s*(?:\/\/|\*).*$/gm, '');
+    const nude = codice.match(/slugifySlugPart\(\s*(?:localizedTitle|title)\s*\)/g) || [];
     assert.equal(
-      /slugifySlugPart\(localizedTitle\)/.test(CREATE_ARTICLE),
-      false,
-      'nessuna derivazione da titolo localizzato puo’ saltare il classificatore',
+      nude.length,
+      1,
+      'nessuna derivazione da titolo localizzato puo’ saltare il classificatore: '
+        + 'l’unica derivazione nuda ammessa e’ quella del ramo `for (const locale of [\'it\'])` '
+        + 'di validate(), dove il titolo e’ la sorgente e non una traduzione',
+    );
+    assert.match(
+      codice.slice(0, codice.indexOf(nude[0])).split('\n').slice(-14).join('\n'),
+      /for \(const locale of \['it'\]\)/,
+      'la sola `slugifySlugPart()` nuda rimasta deve stare nel ramo IT-only',
     );
   });
 
