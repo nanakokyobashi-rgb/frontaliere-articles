@@ -516,3 +516,46 @@ test('ma il tentativo non dichiarato SEGUITO da un articolo resta verde', () => 
   assert.equal(r.status, 0);
   assert.match(r.outputs, /article=true/);
 });
+
+test('il ramo LORDO del guardrail non si autodisattiva su un breakdown incoerente (#832)', () => {
+  // `transient` (20) piu' grande di `total` (10): una forma che il produttore
+  // odierno non emette, ma che un `err` serializzato o corrotto puo' avere. Il
+  // ramo lordo del guardrail legge i due campi GREZZI, quindi lo share usciva
+  // 2,0 — sopra qualunque soglia — e la CONFERMA che il guardrail pretende
+  // arrivava sempre, lasciando decidere la sola sottrazione. Al netto qui
+  // restano 1 riga su 1 (share 1,0), quindi il differimento passava: exit 0,
+  // nessun articolo e nessun alert, su prove che contraddicono se stesse.
+  const incoerente = {
+    code: 'ALL_MODELS_EXHAUSTED',
+    exhaustionBreakdown: {
+      transient: 20,
+      persistent: 0,
+      total: 10,
+      providerCooldownSkips: { total: 9, transient: 9, persistent: 0 },
+    },
+  };
+  const t = quotaDeferralShare(incoerente);
+  assert.ok(t.providerCooldownSkips > t.total,
+    `la premessa: il guardrail deve entrare (echi ${t.providerCooldownSkips} vs netto ${t.total})`);
+  assert.equal(isLegitimateQuotaDeferral(incoerente), false,
+    'un campione lordo che si contraddice non e\' una conferma');
+});
+
+test('...e un breakdown COERENTE continua a confermare il differimento (#832)', () => {
+  // Il controllo di coerenza non deve costare il caso legittimo: stessa forma,
+  // ma con `total` che regge i due secchi. Il lordo 20/30 = 0,67 conferma, e il
+  // netto decide come prima.
+  const coerente = {
+    code: 'ALL_MODELS_EXHAUSTED',
+    exhaustionBreakdown: {
+      transient: 20,
+      persistent: 0,
+      total: 30,
+      providerCooldownSkips: { total: 29, transient: 19, persistent: 0 },
+    },
+  };
+  const t = quotaDeferralShare(coerente);
+  assert.ok(t.providerCooldownSkips > t.total, 'la premessa: il guardrail entra anche qui');
+  assert.equal(isLegitimateQuotaDeferral(coerente), true,
+    'il lordo 20/30 conferma: la coerenza non deve inventare un rosso');
+});
