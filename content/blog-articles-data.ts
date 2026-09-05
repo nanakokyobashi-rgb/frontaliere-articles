@@ -28984,15 +28984,6 @@ const RAW_ARTICLES = [
  authorName: 'Redazione Frontaliere Ticino',
  },
  {
- id: 'vivere-tovo-lavorare-grigioni',
- category: 'fiscale',
- date: '2026-08-11T09:05:24.219Z',
- image: '/images/blog/vivere-tovo-lavorare-grigioni.webp',
- hasCalculator: true,
- authorSlug: 'marco-ferrari',
- authorName: 'Marco Ferrari',
- },
- {
  id: 'vivere-saint-rhemy-en-bosses-lavorare-vallese-da-frontaliere',
  category: 'pratico',
  date: '2026-08-11T09:38:00.689Z',
