@@ -226,7 +226,7 @@ export function selectCrawlerGenerationReconciliations({ now, candidates }) {
  * scendono `siteCodeCommit`/`corpusCodeCommit` del candidato e quindi l'intero
  * `expected` con cui il report viene validato.
  */
-function validateSentinelDocument(sentinel, generationToken) {
+export function validateSentinelDocument(sentinel, generationToken) {
   if (!sentinel || sentinel.schemaVersion !== 1
       || !isCrawlerGenerationToken(sentinel.generationToken)
       || sentinel.generationToken !== generationToken
