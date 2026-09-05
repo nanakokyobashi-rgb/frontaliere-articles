@@ -249,9 +249,9 @@
       "path": "scripts/ci/pr-autorebase.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "464127cd97e0964f",
-        "corpus": "464127cd97e0964f",
-        "alignedAt": "2026-09-01"
+        "site": "b8f4e7d0b8b18912",
+        "corpus": "b8f4e7d0b8b18912",
+        "alignedAt": "2026-09-05"
       }
     },
     {
@@ -304,9 +304,9 @@
       "path": "scripts/ci/lib/vitestCheck.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "67edc765777475b4",
-        "corpus": "67edc765777475b4",
-        "alignedAt": "2026-08-14"
+        "site": "e08c2fb34506658c",
+        "corpus": "e08c2fb34506658c",
+        "alignedAt": "2026-09-05"
       }
     },
     {
@@ -579,18 +579,18 @@
       "mode": "identical",
       "reason": "Precondizione + circuit breaker del close+reopen di pr-autorebase (valerielinc-ops/frontaliere-si-o-no#5914). Registrata contestualmente allo script che la importa: e' una dipendenza NUOVA introdotta da quella PR e non censita qui, quindi una discesa drift-repair del solo pr-autorebase.mjs — che il manifest sorveglia file per file — avrebbe portato l'import senza il modulo e rotto l'autorebase con ERR_MODULE_NOT_FOUND. E' la stessa forma del punto cieco di loop-scripts-closure.test.mjs. Nessuna stringa e' cablata: il nome del check arriva da lib/constants.mjs, che qui e' adapted, cosi' il file resta identical e il messaggio resta corretto su entrambi i repo.",
       "baseline": {
-        "site": "fdd988244a6fb980",
-        "corpus": "fdd988244a6fb980",
-        "alignedAt": "2026-08-15"
+        "site": "3e9607e06d32673c",
+        "corpus": "3e9607e06d32673c",
+        "alignedAt": "2026-09-05"
       }
     },
     {
       "path": "scripts/ci/mark-claude-terminal-outcome.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "24a642499c138e83",
-        "corpus": "24a642499c138e83",
-        "alignedAt": "2026-08-14"
+        "site": "e605a5b7b6996af5",
+        "corpus": "e605a5b7b6996af5",
+        "alignedAt": "2026-09-05"
       }
     },
     {
