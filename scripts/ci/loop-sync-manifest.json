@@ -1327,6 +1327,16 @@
       }
     },
     {
+      "path": "scripts/lib/corpus-floors.mjs",
+      "mode": "corpus-only",
+      "reason": "La sorgente unica dei pavimenti anti-troncamento, condivisa fra verify-api-floors.mjs e build-blog-index.mjs. Corpus-only per lo stesso motivo: i pavimenti sono derivati dai file sorgente degli articoli, che esistono solo in questo repo.",
+      "baseline": {
+        "site": null,
+        "corpus": "c267355a8a44d5f3",
+        "alignedAt": "2026-09-05"
+      }
+    },
+    {
       "path": "scripts/lib/git-push-with-retry.sh",
       "mode": "identical",
       "reason": "Push con retry usato dai job che scrivono sugli shard. RIALLINEATO il 2026-08-24 (stranded-twin, 5.2gg): il sito aveva aggiunto il flag opt-in `--soft-fail-exhausted` (warn+exit 0 invece di exit 1 su MAX_ATTEMPTS esaurito, per un caller la cui data e' una recomputation a finestra scorrevole che si riprende da sola al giro dopo — vedi issue del sito #5568). Nessun caller di questo repo lo passa ancora, quindi la copia e' comportamentalmente no-op qui finche' non viene adottato. Il file cita esplicitamente issue del SITO (#2988, #4190, #4557, #3809, #4183, #5568): e' un gemello, non un omonimo. Le registrazioni dei merge driver (`known-slugs-shard`, `orphan-enriched-shard`, `ai-cache`, `compat-shard`) puntano a `scripts/ci/merge-*.mjs` che qui non esistono — innocuo: ogni `git config` finisce in `|| true` e nessun `.gitattributes` locale marca quei path, quindi il driver non viene mai invocato. Se un giorno un `.gitattributes` di questo repo marcasse uno di quei path, il driver mancante diventerebbe un guasto: e' l'unica condizione da tenere d'occhio.",
@@ -2577,6 +2587,16 @@
         "site": "51efd41847424ad0",
         "corpus": "51efd41847424ad0",
         "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "scripts/ci/verify-api-floors.mjs",
+      "mode": "corpus-only",
+      "reason": "Il gate di magnitudine di publish-api.yml: confronta manifest.counts, i feed e le immagini contro il CORPUS sorgente su disco. Non ha gemello sul sito, e non deve averlo: il corpus e la superficie dati vivono qui, e il sito li consuma come JSON su HTTP.",
+      "baseline": {
+        "site": null,
+        "corpus": "c20461c76346d1c9",
+        "alignedAt": "2026-09-05"
       }
     },
     {

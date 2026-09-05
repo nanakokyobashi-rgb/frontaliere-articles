@@ -393,12 +393,17 @@ jobs:
       - name: Verify artifact
         run: |
           set -euo pipefail
-          count=$(node -p "require('./dist/api/manifest.json').counts.articles")
-          echo "articles in manifest: $count"
-          if [ "$count" -lt 100 ]; then
-            echo "::error::manifest reports only $count articles — refusing to publish"
-            exit 1
-          fi
+          # I PAVIMENTI di magnitudine stanno tutti in un solo posto, e sono
+          # DERIVATI dal corpus sorgente su disco — non scritti a mano qui.
+          # Qui c'era `counts.articles -lt 100` contro 3782 articoli reali
+          # (2,6% del valore atteso: una perdita del 97% del corpus passava e
+          # andava live, e il sito non ribuilda), e `counts.swissArticles` non
+          # aveva pavimento affatto. Una costante assoluta in uno step di shell
+          # non e' testabile, quindi il suo decadimento non poteva essere visto
+          # da nessun test mentre il corpus cresceva di due ordini di
+          # grandezza: e' quella la root cause, non il numero.
+          node scripts/ci/verify-api-floors.mjs
+
           for f in articles.json slugs.json manifest.json; do
             test -s "dist/api/$f" || { echo "::error::dist/api/$f missing or empty"; exit 1; }
           done
@@ -410,13 +415,11 @@ jobs:
           for f in rss.xml rss-it.xml rss-en.xml rss-de.xml rss-fr.xml \
                    rss-svizzera.xml rss-svizzera-it.xml rss-svizzera-en.xml \
                    rss-svizzera-de.xml rss-svizzera-fr.xml; do
+            # Presenza e non-vuoto qui; il numero di <item> lo confronta
+            # verify-api-floors.mjs contro min(RSS_MAX_ITEMS, corpus della
+            # sezione), che e' il solo modo di distinguere un feed corto
+            # legittimo da uno troncato.
             test -s "dist/api/$f" || { echo "::error::dist/api/$f missing or empty"; exit 1; }
-            items=$(grep -c '<item>' "dist/api/$f" || true)
-            echo "$f: $items items"
-            if [ "$items" -lt 1 ]; then
-              echo "::error::dist/api/$f has no <item> entries — refusing to publish"
-              exit 1
-            fi
           done
 
           ticker=$(node -p "require('./dist/api/news-ticker-live.json').articles.length")
@@ -461,12 +464,10 @@ jobs:
           # because the consumer refuses one listing zero. So its absence is valid
           # and only its CONTENT is gated here.
           if [ -f dist/api/images-manifest.json ]; then
-            imgs=$(node -p "require('./dist/api/images-manifest.json').images.length")
-            echo "images in manifest: $imgs"
-            if [ "$imgs" -lt 1 ]; then
-              echo "::error::images-manifest.json was emitted but lists zero images — refusing"
-              exit 1
-            fi
+            # Il pavimento sul NUMERO di immagini e' in verify-api-floors.mjs,
+            # contro le .webp presenti in public/images/blog: `-lt 1` fermava
+            # solo il manifest completamente vuoto, mentre 1990 immagini
+            # ridotte a 3 passavano.
             # Every listed path must have actually been copied into the artifact,
             # or the site fetches a 404 and fails the whole sync.
             node -e "
