@@ -217,9 +217,19 @@ export function selectCrawlerGenerationReconciliations({ now, candidates }) {
   }));
 }
 
-function validateSentinelDocument(sentinel) {
+/**
+ * Stessa classe del `barrier` non legato in `crawler-generation-observer-report.mjs`:
+ * il sentinel e' un sotto-documento digestato, e il suo digest prova solo che e'
+ * coerente con SE STESSO. `generationToken` va confrontato col token della run
+ * che lo pubblica — altrimenti un sentinel legittimo della generazione X, esposto
+ * da una run della generazione Y, faceva adottare a Y i commit di X: da li'
+ * scendono `siteCodeCommit`/`corpusCodeCommit` del candidato e quindi l'intero
+ * `expected` con cui il report viene validato.
+ */
+function validateSentinelDocument(sentinel, generationToken) {
   if (!sentinel || sentinel.schemaVersion !== 1
       || !isCrawlerGenerationToken(sentinel.generationToken)
+      || sentinel.generationToken !== generationToken
       || !COMMIT_RE.test(sentinel.siteCodeCommit ?? '')
       || !COMMIT_RE.test(sentinel.corpusCodeCommit ?? '')
       || sentinel.callerRepository !== CALLER_REPOSITORY
@@ -354,7 +364,7 @@ export async function discoverCrawlerGenerationReconciliations({ client, now, ru
       maxBytes: MAX_SENTINEL_BYTES,
       root: downloads,
     });
-    if (!validateSentinelDocument(sentinel)
+    if (!validateSentinelDocument(sentinel, token)
         || !validateSentinelOwnerRun(run, {
           runId,
           generationToken: token,

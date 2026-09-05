@@ -35,6 +35,35 @@ const REASON_SET = new Set([
   'source_history_rewritten', 'source_snapshot_failed', 'source_tree_invalid',
   'terminal_manifest_set_invalid', 'waiting',
 ]);
+/**
+ * Il documento `barrier` prodotto da `evaluateCrawlerGenerationBarrier()` sul
+ * sito. Qui viaggia come sotto-documento del report, ed e' l'unico dei tre
+ * documenti digestati della catena (sentinel, report, barrier) che nessuno
+ * ri-verificava: `barrier` era accettato per il solo fatto di non essere
+ * `null`. Il suo `digest` si auto-certifica e il suo `cycleId` E' il
+ * `generationToken` (il sito lo costruisce con `cycleId: sentinel.generationToken`),
+ * quindi il legame col token esisteva gia' in produzione — mancava solo la
+ * verifica in lettura, che e' il lato che conta: il report arriva da un
+ * artifact scaricato, non da questa memoria.
+ */
+const BARRIER_KEYS = [
+  'schemaVersion', 'cycleId', 'expectedGroups', 'groups', 'barrier', 'translation', 'digest',
+];
+const BARRIER_GROUP_KEYS = [
+  'state', 'callerRepository', 'callerRunId', 'status', 'conclusion',
+  'manifestDigest', 'remoteCommit', 'reasons',
+];
+// Gli stati non-`ready` che il sito puo' assegnare alla barriera. Il produttore
+// li travasa tali e quali in `observer.reasons`, quindi sono anche un
+// sottoinsieme di `REASON_SET`: il legame non e' importabile fra i due repo ed
+// e' coperto da un test (AGENTS.md #6).
+const BARRIER_BLOCKING_STATUS_SET = new Set([
+  'blocked_dispatch_missing', 'blocked_group_cancelled', 'blocked_group_failed',
+  'blocked_group_timed_out', 'blocked_manifest_invalid', 'blocked_manifest_missing',
+  'blocked_timeout', 'waiting',
+]);
+const BARRIER_STATUS_SET = new Set(['ready', ...BARRIER_BLOCKING_STATUS_SET]);
+
 const REPORT_KEYS = [
   'schemaVersion',
   'evaluatedAt',
@@ -77,6 +106,55 @@ function validDispatchDiagnostics(value) {
     if (NULL_DISPATCH_RUN_ID_STATUS_SET.has(diagnostic.status)) return diagnostic.runId === null;
     return true;
   });
+}
+
+/**
+ * Verifica che la barriera sia un documento valido E che appartenga a QUESTA
+ * generazione. Senza il confronto `cycleId` ↔ `generationToken` una barriera
+ * legittima di un'altra generazione passava: il digest del report copre la
+ * barriera, ma prova solo che il report e' coerente con se stesso, non che la
+ * barriera sia quella giusta.
+ */
+function validBarrierDocument(barrier, report) {
+  if (!exactKeys(barrier, BARRIER_KEYS)
+      || barrier.schemaVersion !== 1
+      || barrier.expectedGroups !== GROUP_IDS.length
+      || barrier.cycleId !== report.generationToken
+      || !exactKeys(barrier.groups, GROUP_IDS)) return false;
+  const groupsBound = GROUP_IDS.every((group) => {
+    const entry = barrier.groups[group];
+    return exactKeys(entry, BARRIER_GROUP_KEYS)
+      && BARRIER_STATUS_SET.has(entry.state)
+      && Array.isArray(entry.reasons);
+  });
+  if (!groupsBound) return false;
+  const inner = barrier.barrier;
+  if (!exactKeys(inner, ['status', 'readyAt', 'sourceCommit'])
+      || !BARRIER_STATUS_SET.has(inner.status)) return false;
+  const ready = inner.status === 'ready';
+  // `ready` implica una fonte valida: sul sito `accepted && !sourceCommitValid`
+  // degrada il gruppo, quindi una barriera `ready` senza `sourceCommit` non e'
+  // producibile e va rifiutata.
+  if (ready
+    ? (!Number.isFinite(Date.parse(inner.readyAt ?? '')) || !COMMIT_RE.test(inner.sourceCommit ?? ''))
+    : inner.readyAt !== null) return false;
+  if (inner.sourceCommit !== null && !COMMIT_RE.test(inner.sourceCommit ?? '')) return false;
+  // La `translation` di primo livello e' COPIATA dalla barriera al momento
+  // della creazione e poi non piu' riletta: un report puo' quindi dichiarare
+  // `wouldDispatch` diverso da quello che la barriera giustifica.
+  if (!exactKeys(barrier.translation, ['mode', 'wouldDispatch', 'dispatched'])
+      || barrier.translation.mode !== 'shadow'
+      || barrier.translation.dispatched !== false
+      || barrier.translation.wouldDispatch !== ready
+      || barrier.translation.wouldDispatch !== report.translation?.wouldDispatch) return false;
+  return HASH_RE.test(barrier.digest ?? '')
+    && barrier.digest === digestDocument(withoutDigest(barrier));
+}
+
+/** Lo stato che il sito deriva dalla barriera, da confrontare con quello dichiarato. */
+function observerStatusForBarrier(status) {
+  if (status === 'ready') return 'ready';
+  return status === 'waiting' ? 'waiting' : 'blocked';
 }
 
 export function createSentinelSetBinding(sentinels) {
@@ -189,6 +267,19 @@ export function validateCrawlerGenerationObserverReport(report, expected = null)
   }
   if (report.observer?.status !== 'ready' && report.translation?.wouldDispatch !== false) {
     errors.push('invalid_nonready_report');
+  }
+  if (report.barrier !== null) {
+    if (!validBarrierDocument(report.barrier, report)) {
+      errors.push('invalid_barrier');
+    } else {
+      if (report.observer?.status !== observerStatusForBarrier(report.barrier.barrier.status)) {
+        errors.push('barrier_status_mismatch');
+      }
+      if (report.barrier.barrier.status !== 'ready'
+          && !report.observer?.reasons?.includes(report.barrier.barrier.status)) {
+        errors.push('barrier_reason_missing');
+      }
+    }
   }
   if (!HASH_RE.test(report.digest ?? '') || report.digest !== digestDocument(withoutDigest(report))) {
     errors.push('invalid_report_digest');
