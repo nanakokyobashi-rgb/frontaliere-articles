@@ -168,6 +168,21 @@ jobs:
           git add -- scripts/ci/loop-sync-manifest.json
           echo "Staged:"; git diff --cached --name-only
           git commit -m "chore(loop): porta ${PORTED} gemelli identical dal sito"
+          # La baseline che `--apply` ha scritto e' l'hash dei byte SCARICATI,
+          # calcolato prima che il commit esistesse (issue #852). Qui il commit
+          # c'e', quindi i byte committati sono finalmente leggibili: se
+          # differiscono (line ending normalizzati, filtro `clean`, uno staging
+          # incompleto) la baseline viene riportata su di loro PRIMA del push,
+          # con `--amend` per non lasciare due commit sullo stesso atto. Se un
+          # path trasportato non e' leggibile dal commit lo step esce rosso:
+          # sarebbe una baseline registrata su byte che nessuno ha committato,
+          # e il giorno dopo il drift check leggerebbe `corpus-ahead` su un file
+          # che nessuno ha toccato.
+          node scripts/ci/transport-identical-twins.mjs --realign=/tmp/transport-paths.txt
+          if ! git diff --quiet -- scripts/ci/loop-sync-manifest.json; then
+            git add -- scripts/ci/loop-sync-manifest.json
+            git commit --amend --no-edit
+          fi
           git push -u origin "$BRANCH"
           gh pr create --base main --head "$BRANCH" \
             --title "chore(loop): trasporto di ${PORTED} gemelli \`identical\` dal sito" \
