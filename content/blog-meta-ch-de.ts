@@ -5593,6 +5593,21 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.ridurre-traffico-trasporti-pubblici.title': 'Verkehr eindämmen: Günstige Tickets reichen nicht aus',
     'blog.article.ridurre-traffico-trasporti-pubblici.excerpt': 'Eine HSLU-Studie zeigt, dass Praktikabilität, sicheres Parken und Gepäcktransport wichtiger sind als der Preis, um den öffentlichen Verkehr zu fördern.',
     'blog.article.ridurre-traffico-trasporti-pubblici.imageAlt': 'Moderne Schweizer Bahnhofstation mit Zügen und Fahrgästen, Symbol für Mobilität im öffentlichen Nahverkehr',
+    'blog.article.come-trovare-tirocinio-grigioni.title': 'So finden Sie ein Praktikum im Kanton Graubünden',
+    'blog.article.come-trovare-tirocinio-grigioni.excerpt': 'Leitfaden zur Berufsbildung in Graubünden: Lehrverträge, Lehrlingsentgelt, Sozialbeiträge und Berufsmaturität im Schweizer System.',
+    'blog.article.come-trovare-tirocinio-grigioni.imageAlt': 'Junger Lehrling beim Erlernen eines Handwerks in einer Schweizer Alpenwerkstatt',
+    'blog.article.asilo-nido-custodia-bambini-canton-soletta-costi.title': 'Kindertagesstätte und Kinderbetreuung im Kanton Solothurn: Kosten und Tarife',
+    'blog.article.asilo-nido-custodia-bambini-canton-soletta-costi.excerpt': 'Informieren Sie sich über die Kosten und Tarife für die Kinderbetreuung im Kanton Solothurn inklusive Kindergärten, Tagesfamilien und Kindergarten.',
+    'blog.article.asilo-nido-custodia-bambini-canton-soletta-costi.imageAlt': 'Eine Kinderbetreuungseinrichtung im Kanton Solothurn, Schweiz',
+    'blog.article.pride-belgrado-25-anni.title': 'Belgrad: Pride feiert 25 Jahre',
+    'blog.article.pride-belgrado-25-anni.excerpt': 'Die Veranstaltung hebt Errungenschaften und offene Kämpfe für LGBTQ+ -Rechte hervor.',
+    'blog.article.pride-belgrado-25-anni.imageAlt': 'Pride-Parade in Belgrad, Serbien, mit diversen Teilnehmern und bunten Bannern.',
+    'blog.article.volo-easyjet-valencia-ginevra.title': 'EasyJet-Flug Valencia-Genf wegen schlechtem Wetter nach Nizza umgeleitet',
+    'blog.article.volo-easyjet-valencia-ginevra.excerpt': 'Drei Passagiere berichten von beängstigenden Momenten bei der Landung. 31 Flüge verspätet und drei wegen heftiger Stürme umgeleitet.',
+    'blog.article.volo-easyjet-valencia-ginevra.imageAlt': 'Luftaufnahme der Stadt Lugano und des Sees, Schweiz',
+    'blog.article.permesso-dimora-b-canton-vallese-requisiti-rinnovo.title': 'Aufenthaltsbewilligung B im Wallis: Voraussetzungen, Dokumente und Verlängerung',
+    'blog.article.permesso-dimora-b-canton-vallese-requisiti-rinnovo.excerpt': 'Informieren Sie sich über die Voraussetzungen, die erforderlichen Unterlagen und das Verfahren zur Verlängerung der Aufenthaltsbewilligung B im Kanton Wallis.',
+    'blog.article.permesso-dimora-b-canton-vallese-requisiti-rinnovo.imageAlt': 'Panoramablick auf den Luganersee mit dem Monte San Salvatore',
 };
 
 export default blogMetaChDe;

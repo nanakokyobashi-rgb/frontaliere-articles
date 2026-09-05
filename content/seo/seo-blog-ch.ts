@@ -72599,6 +72599,201 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-come-trovare-tirocinio-grigioni': {
+    title: 'Come trovare un tirocinio nel Cantone Grigioni',
+    description: 'Guida alla formazione professionale nel Grigioni: contratti di tirocinio, retribuzione dell\'apprendista, contributi sociali e maturità professionale',
+    keywords: 'frontalieri, ticino, svizzera, italia, trovare, tirocinio, cantone, grigioni',
+    ogTitle: 'Come trovare un tirocinio nel Cantone Grigioni',
+    ogDescription: 'Scopri come trovare un tirocinio nel Cantone Grigioni, quali sono i diritti dell\'apprendista, come funzionano i contratti, la retribuzione, i contributi sociali e la Berufsmaturità nel sistema formativo svizzero.',
+    canonicalPath: '/articoli-svizzera/come-trovare-tirocinio-grigioni/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Come trovare un tirocinio nel Cantone Grigioni",
+      "description": "Guida alla formazione professionale nel Grigioni: contratti di tirocinio, retribuzione dell'apprendista, contributi sociali e maturità professionale",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/come-trovare-tirocinio-grigioni.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Giovane apprendista impara un mestiere in laboratorio alpino svizzero durante il tirocinio"
+      },
+      "datePublished": "2026-09-05T18:43:57+00:00",
+      "dateModified": "2026-09-05T18:43:57+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/come-trovare-tirocinio-grigioni/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-asilo-nido-custodia-bambini-canton-soletta-costi': {
+    title: 'Asilo nido e custodia bambini nel Canton Soletta: costi e tariffe',
+    description: 'Scopri i costi e le tariffe per la custodia dei bambini nel Canton Soletta, inclusi asili nido, famiglie diurne e doposcuola. Dati aggiornati 2026',
+    keywords: 'frontalieri, ticino, svizzera, italia, asilo, nido, custodia, bambini',
+    ogTitle: 'Asilo nido e custodia bambini nel Canton Soletta: costi e tariffe',
+    ogDescription: 'Scopri i costi e le tariffe per la custodia dei bambini nel Canton Soletta, inclusi asili nido, famiglie diurne e doposcuola. Con una varietà di opzioni disponibili e tariffe calcolate in base al reddito, le famiglie possono trovare l\'assistenza',
+    canonicalPath: '/articoli-svizzera/asilo-nido-custodia-bambini-canton-soletta-costi/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Asilo nido e custodia bambini nel Canton Soletta: costi e tariffe",
+      "description": "Scopri i costi e le tariffe per la custodia dei bambini nel Canton Soletta, inclusi asili nido, famiglie diurne e doposcuola. Dati aggiornati 2026",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/asilo-nido-custodia-bambini-canton-soletta-costi.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Un asilo nido nel Canton Soletta, Svizzera"
+      },
+      "datePublished": "2026-09-05T19:02:52+00:00",
+      "dateModified": "2026-09-05T19:02:52+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/asilo-nido-custodia-bambini-canton-soletta-costi/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-pride-belgrado-25-anni': {
+    title: 'A Belgrado il Pride celebra 25 anni, e ritorna alle origini',
+    description: 'Il Pride a Belgrado celebra 25 anni, evidenziando conquiste e richieste ancora senza risposta per i diritti Lgbtq+. Dati aggiornati 2026 per frontalieri',
+    keywords: 'frontalieri, ticino, svizzera, italia, belgrado, pride, celebra, anni',
+    ogTitle: 'Pride a Belgrado: 25 anni di celebrazioni e battaglie aperte',
+    ogDescription: 'La manifestazione del Pride a Belgrado celebra 25 anni, mettendo in luce conquiste e battaglie ancora aperte per i diritti della comunità Lgbtq+.',
+    canonicalPath: '/articoli-svizzera/pride-belgrado-25-anni/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "A Belgrado il Pride celebra 25 anni, e ritorna alle origini",
+      "description": "Il Pride a Belgrado celebra 25 anni, evidenziando conquiste e richieste ancora senza risposta per i diritti Lgbtq+. Dati aggiornati 2026 per frontalieri",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/pride-belgrado-25-anni.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Parata del Pride a Belgrado, Serbia, con partecipanti diversi e striscioni colorati."
+      },
+      "datePublished": "2026-09-05T19:13:22+00:00",
+      "dateModified": "2026-09-05T19:13:22+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/pride-belgrado-25-anni/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-volo-easyjet-valencia-ginevra': {
+    title: 'Volo easyJet Valencia-Ginevra deviato a Nizza per maltempo',
+    description: 'Tre passeggeri raccontano attimi di paura durante l\'atterraggio. 31 voli ritardati e tre dirottati a causa di forti temporali. Dati aggiornati 2026',
+    keywords: 'frontalieri, ticino, svizzera, italia, volo, easyjet, valencia-ginevra, deviato',
+    ogTitle: 'Volo easyJet Valencia-Ginevra deviato a Nizza per maltempo',
+    ogDescription: 'Tre passeggeri raccontano attimi di paura durante l\'atterraggio. 31 voli ritardati e tre dirottati a causa di forti temporali. Scopri di più su Frontaliere Ticino.',
+    canonicalPath: '/articoli-svizzera/volo-easyjet-valencia-ginevra/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Volo easyJet Valencia-Ginevra deviato a Nizza per maltempo",
+      "description": "Tre passeggeri raccontano attimi di paura durante l'atterraggio. 31 voli ritardati e tre dirottati a causa di forti temporali. Dati aggiornati 2026",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/volo-easyjet-valencia-ginevra.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista aerea di Lugano e del suo lago, Svizzera"
+      },
+      "datePublished": "2026-09-05T20:47:35+00:00",
+      "dateModified": "2026-09-05T20:47:35+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/volo-easyjet-valencia-ginevra/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-permesso-dimora-b-canton-vallese-requisiti-rinnovo': {
+    title: 'Permesso di dimora B nel Canton Vallese: requisiti, documenti e rinnovo',
+    description: 'Scopri i requisiti, i documenti necessari e la procedura di rinnovo del permesso di dimora B nel Canton Vallese. Informazioni pratiche e consigli utili.',
+    keywords: 'frontalieri, ticino, svizzera, italia, permesso, dimora, canton, vallese',
+    ogTitle: 'Permesso di dimora B nel Canton Vallese: requisiti, documenti e rinnovo',
+    ogDescription: 'Scopri i requisiti, i documenti necessari e la procedura di rinnovo del permesso di dimora B nel Canton Vallese. Informazioni pratiche e consigli utili per garantire un rinnovo senza problemi.',
+    canonicalPath: '/articoli-svizzera/permesso-dimora-b-canton-vallese-requisiti-rinnovo/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Permesso di dimora B nel Canton Vallese: requisiti, documenti e rinnovo",
+      "description": "Scopri i requisiti, i documenti necessari e la procedura di rinnovo del permesso di dimora B nel Canton Vallese. Informazioni pratiche e consigli utili.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/permesso-dimora-b-canton-vallese-requisiti-rinnovo.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista panoramica del Lago di Lugano con il Monte San Salvatore"
+      },
+      "datePublished": "2026-09-05T20:58:25+00:00",
+      "dateModified": "2026-09-05T20:58:25+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/permesso-dimora-b-canton-vallese-requisiti-rinnovo/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

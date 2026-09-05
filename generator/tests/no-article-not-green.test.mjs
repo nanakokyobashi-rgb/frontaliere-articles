@@ -49,6 +49,7 @@ import {
   EXIT_ROSTER_CANNOT_SERVE_PROMPT,
   EXIT_NO_ARTICLE_DECLARED,
   isLegitimateQuotaDeferral,
+  isTransientMajority,
   quotaDeferralShare,
   QUOTA_DEFERRAL_MIN_TRANSIENT_SHARE,
 } from '../scripts/lib/exhaustion-disposition.mjs';
@@ -74,7 +75,9 @@ function run31823202761({ transient = 53, persistent = 52, total = 106 } = {}) {
   const err = new Error('All AI models failed. Chain: [...]. Errors: ...');
   err.code = 'ALL_MODELS_EXHAUSTED';
   err.exhaustionBreakdown = { transient, persistent, total };
-  err.transientExhaustion = transient > 0 && transient >= persistent;
+  // Vedi la nota gemella in `roster-exhaustion-red.test.mjs`: il flag esce
+  // dall'helper di produzione, non dalla formula LORDA che #879 ha rimosso.
+  err.transientExhaustion = isTransientMajority(err.exhaustionBreakdown, { tie: 'transient' });
   err.inputCapReport = null;
   return err;
 }

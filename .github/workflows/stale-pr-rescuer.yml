@@ -15,6 +15,12 @@ name: Stale PR rescuer (self-healing signal)
 #      c'è `<!-- REDFLAG_FIX_ROUND:` il 🔴 è già chiuso proceduralmente dal
 #      fixer (nessun commit): si RILANCIA il run di `tests` sull'head. Senza quel
 #      marker il 🔴 è ancora aperto e resta il consiglio di un commit nuovo.
+#      Vale anche per `<!-- REDFLAG_FIX_REFUNDED:`, che il fixer lascia quando un
+#      429 gli ha impedito di leggere la PR (skip di quota, o round rimborsato da
+#      `scripts/ci/refund-fix-round.mjs` — che CANCELLA il marker di round, cioè
+#      proprio il segnale letto qui). Lì il 🔴 non è chiuso ma il rimedio è lo
+#      stesso e più urgente: nessuno ha ancora guardato la PR, e il rerun di
+#      `tests` è l'unico evento che rimette in moto il fixer col budget intero.
 #   C) test non-`success` sull'head e nessun run in volo. È la classe che
 #      cadeva in un `else` MUTO: una PR con i test rossi non ha — e non può
 #      acquisire — nessuno dei due segnali richiesti da A e B, perché il
@@ -91,7 +97,7 @@ permissions:
   checks: read # commits/{sha}/check-runs sull'head reale della PR
   pull-requests: write
   issues: write
-  actions: write # rerun del run di tests.yml (classe B + REDFLAG_FIX_ROUND)
+  actions: write # rerun del run di tests.yml (classe B + REDFLAG_FIX_ROUND/_REFUNDED)
 
 concurrency:
   group: stale-pr-rescuer
@@ -275,9 +281,17 @@ jobs:
             # generica, non dopo.
             DISPATCH_MARKER="<!-- stale-pr-rescuer rerun=tests head=${HEAD:0:7} -->"
             NEEDS_DISPATCH=false
+            #
+            # `REDFLAG_FIX_REFUNDED` accanto a `REDFLAG_FIX_ROUND`: su un 429 il
+            # fixer o salta prima di postare il round, o lo rimborsa cancellando
+            # il marker (`refund-fix-round.mjs`). In entrambi i casi il segnale
+            # letto qui sparirebbe e la PR resterebbe ferma — con il budget
+            # intero e nessun evento a spenderlo. L'handle di rimborso non conta
+            # come round (`_FIX_REFUNDED` non matcha il grep `_FIX_ROUND: [0-9]+`
+            # dei fixer), quindi ri-arma il rerun senza ri-armare l'anti-loop.
             if [ "$CLASS" = "B" ]; then
               case "$POSTED_BODIES" in
-                *'<!-- REDFLAG_FIX_ROUND:'*)
+                *'<!-- REDFLAG_FIX_ROUND:'*|*'<!-- REDFLAG_FIX_REFUNDED:'*)
                   case "$POSTED_BODIES" in
                     *"$DISPATCH_MARKER"*) ;; # già dispatchato su questo head
                     *) NEEDS_DISPATCH=true ;;
@@ -313,9 +327,14 @@ jobs:
                 --limit 30 --json databaseId,headSha,status \
                 --jq "[.[] | select(.headSha==\"$HEAD\" and .status==\"completed\")] | first | .databaseId // empty" 2>/dev/null || true)
               if [ -n "$RERUN_ID" ]; then
-                RESCUE="\`gh run rerun $RERUN_ID --repo $REPO\` — rilanciato da questo run: il 🔴 è chiuso proceduralmente dal redflag-fixer (nessun commit nuovo), e un commit vuoto non è la cura."
+                WHY="il 🔴 è chiuso proceduralmente dal redflag-fixer (nessun commit nuovo), e un commit vuoto non è la cura"
+                case "$POSTED_BODIES" in
+                  *'<!-- REDFLAG_FIX_ROUND:'*) ;;
+                  *) WHY="il redflag-fixer non ha mai letto la PR (429 di quota: round rimborsato o skip pre-flight), quindi serve un evento che lo faccia ripartire — non un commit" ;;
+                esac
+                RESCUE="\`gh run rerun $RERUN_ID --repo $REPO\` — rilanciato da questo run: $WHY."
                 gh run rerun "$RERUN_ID" --repo "$REPO" \
-                  && { echo "PR #$N: review riaperta rilanciando il run tests $RERUN_ID (classe B, marker REDFLAG_FIX_ROUND)"; EXTRA_MARKER="$DISPATCH_MARKER"; } \
+                  && { echo "PR #$N: review riaperta rilanciando il run tests $RERUN_ID (classe B, marker REDFLAG_FIX_ROUND/_REFUNDED)"; EXTRA_MARKER="$DISPATCH_MARKER"; } \
                   || echo "::warning::rerun del run tests $RERUN_ID fallito su PR #$N"
               else
                 echo "::warning::PR #$N: nessun run completato di tests.yml su ${HEAD:0:7} da rilanciare."

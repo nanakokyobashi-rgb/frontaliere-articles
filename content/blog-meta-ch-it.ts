@@ -5593,6 +5593,21 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.ridurre-traffico-trasporti-pubblici.title': 'Ridurre il traffico: biglietti economici non bastano',
     'blog.article.ridurre-traffico-trasporti-pubblici.excerpt': 'Uno studio HSLU rivela che praticità, parcheggi certi e trasporto bagagli sono più importanti del prezzo per incentivare i trasporti pubblici.',
     'blog.article.ridurre-traffico-trasporti-pubblici.imageAlt': 'Stazione ferroviaria svizzera moderna con treni e passeggeri, simbolo della mobilità su trasporti pubblici',
+    'blog.article.come-trovare-tirocinio-grigioni.title': 'Come trovare un tirocinio nel Cantone Grigioni',
+    'blog.article.come-trovare-tirocinio-grigioni.excerpt': 'Guida alla formazione professionale nel Grigioni: contratti di tirocinio, retribuzione dell\'apprendista, contributi sociali e maturità professionale nel sistema svizzero.',
+    'blog.article.come-trovare-tirocinio-grigioni.imageAlt': 'Giovane apprendista impara un mestiere in laboratorio alpino svizzero durante il tirocinio',
+    'blog.article.asilo-nido-custodia-bambini-canton-soletta-costi.title': 'Asilo nido e custodia bambini nel Canton Soletta: costi e tariffe',
+    'blog.article.asilo-nido-custodia-bambini-canton-soletta-costi.excerpt': 'Scopri i costi e le tariffe per la custodia dei bambini nel Canton Soletta, inclusi asili nido, famiglie diurne e doposcuola.',
+    'blog.article.asilo-nido-custodia-bambini-canton-soletta-costi.imageAlt': 'Un asilo nido nel Canton Soletta, Svizzera',
+    'blog.article.pride-belgrado-25-anni.title': 'A Belgrado il Pride celebra 25 anni, e ritorna alle origini',
+    'blog.article.pride-belgrado-25-anni.excerpt': 'La manifestazione evidenzia conquiste e battaglie aperte per i diritti Lgbtq+.',
+    'blog.article.pride-belgrado-25-anni.imageAlt': 'Parata del Pride a Belgrado, Serbia, con partecipanti diversi e striscioni colorati.',
+    'blog.article.volo-easyjet-valencia-ginevra.title': 'Volo easyJet Valencia-Ginevra deviato a Nizza per maltempo',
+    'blog.article.volo-easyjet-valencia-ginevra.excerpt': 'Tre passeggeri raccontano attimi di paura durante l\'atterraggio. 31 voli ritardati e tre dirottati a causa di forti temporali.',
+    'blog.article.volo-easyjet-valencia-ginevra.imageAlt': 'Vista aerea di Lugano e del suo lago, Svizzera',
+    'blog.article.permesso-dimora-b-canton-vallese-requisiti-rinnovo.title': 'Permesso di dimora B nel Canton Vallese: requisiti, documenti e rinnovo',
+    'blog.article.permesso-dimora-b-canton-vallese-requisiti-rinnovo.excerpt': 'Scopri i requisiti, i documenti necessari e la procedura di rinnovo del permesso di dimora B nel Canton Vallese.',
+    'blog.article.permesso-dimora-b-canton-vallese-requisiti-rinnovo.imageAlt': 'Vista panoramica del Lago di Lugano con il Monte San Salvatore',
 };
 
 export default blogMetaChIt;
