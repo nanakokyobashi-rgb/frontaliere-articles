@@ -464,8 +464,23 @@ const MAX_TEXT_BYTES = 2 * 1024 * 1024;
  * check): sono descrittori dell'insieme, non consumatori. È la stessa
  * degenerazione che teneva la scansione confinata alla directory — riconosciuta
  * per quello che è, invece di essere evitata rinunciando a guardare altrove.
+ *
+ * L'insieme è ENUMERATO, non dedotto dal testo. «Nomina il path del manifest»
+ * era il criterio precedente, ed è un sovrainsieme che inghiotte consumer veri:
+ * un test che importa davvero il fixture e cita il manifest solo di passaggio
+ * sparisce dalla scansione, e il fixture torna a risultare «senza
+ * accoppiamenti» — esattamente il falso silenzio che l'issue #853 chiude. I
+ * descrittori sono quattro e cambiano quando cambia il ciclo, non quando
+ * cambia il testo di un file terzo: elencarli costa una riga e non ha
+ * sovrainsieme.
  */
 const SET_MANIFEST_REL = 'scripts/ci/loop-sync-manifest.json';
+export const SET_DESCRIPTORS = new Set([
+  SET_MANIFEST_REL,
+  'scripts/ci/transport-identical-twins.mjs',
+  'generator/tests/transport-identical-twins.test.mjs',
+  'scripts/ci/loop-drift-check.mjs',
+]);
 
 /**
  * Un file locale letto come TESTO, con lo stato esplicito.
@@ -557,7 +572,9 @@ function walkSubtree(root, acc = [], blind = new Map()) {
  *
  * Chi lo cita si cerca in tutto il PACCHETTO (vedi `couplingScanRoot`), non
  * nella sola directory del fixture, saltando i descrittori del set (vedi
- * `SET_MANIFEST_REL`) che citerebbero ogni path per costruzione.
+ * `SET_DESCRIPTORS`) che citerebbero ogni path per costruzione. L'elenco è
+ * chiuso: «nomina il manifest» escludeva anche i consumer veri che lo citano
+ * di passaggio.
  *
  * Un file del sottoalbero che ESISTE ma non è stato letto non è «non ti cita»:
  * entra fra gli accoppiamenti con `mode: 'illeggibile'`, quindi blocca. Il
@@ -577,13 +594,15 @@ export function localCouplings(rel, modeOf) {
   for (const [d, reason] of scan.blind) unreadable.set(d, reason);
   for (const other of scan.files) {
     if (other === rel) continue;
+    // Un descrittore del set non è un consumatore, quindi non è nemmeno un
+    // buio: che sia leggibile o no non cambia se il fixture ha accoppiamenti.
+    if (SET_DESCRIPTORS.has(other)) continue;
     const read = readLocal(other);
     if (read.state === 'unreadable') {
       unreadable.set(other, read.reason);
       continue;
     }
     if (read.state !== 'text') continue;
-    if (other === SET_MANIFEST_REL || read.text.includes(SET_MANIFEST_REL)) continue;
     if (read.text.includes(base)) found.add(other);
   }
 

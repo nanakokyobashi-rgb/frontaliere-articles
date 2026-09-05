@@ -49,6 +49,7 @@ import {
   permanentBlock,
   realignFromCommitted,
   couplingScanRoot,
+  SET_DESCRIPTORS,
   unreadableCouplings,
   transportVerdict,
   unsafeTarget,
@@ -312,6 +313,29 @@ test('allargare la scansione non la rende degenere: i descrittori del set non co
   );
   // E il rilevamento vero regge ancora: il contratto che il fixture legge c'è.
   assert.ok(couplings.includes('generator/data/crawler-cross-repo-contract.json'));
+});
+
+test('il descrittore del set è un ELENCO chiuso, non «nomina il manifest»', () => {
+  const manifest = JSON.parse(fs.readFileSync(path.join(ROOT, 'scripts/ci/loop-sync-manifest.json'), 'utf8'));
+  const modeOf = new Map(manifest.files.map((e) => [e.path, e.mode]));
+  // Sul repo reale: un consumer che importa DAVVERO il fixture e nomina il
+  // manifest solo di passaggio. Col criterio a sottostringa spariva dalla
+  // scansione, e il fixture tornava «senza accoppiamenti» — cioè il falso
+  // silenzio che questa PR esiste per togliere.
+  const rel = 'generator/tests/lib/expect-shim.mjs';
+  const citer = 'generator/tests/telelavoro-frontalieri-normative-citations.test.mjs';
+  const citerText = fs.readFileSync(path.join(ROOT, citer), 'utf8');
+  assert.ok(citerText.includes(`import { expect } from './lib/expect-shim.mjs'`), 'il consumer legge davvero il fixture');
+  assert.ok(citerText.includes('scripts/ci/loop-sync-manifest.json'), 'e nomina il manifest: è il caso che il sovrainsieme inghiottiva');
+
+  const couplings = localCouplings(rel, modeOf).map((c) => c.path);
+  assert.ok(couplings.includes(citer), 'un consumer vero non sparisce perché cita il manifest');
+  // I quattro descrittori restano fuori: l'elenco chiuso non allarga il buco.
+  assert.deepEqual(
+    couplings.filter((c) => SET_DESCRIPTORS.has(c)),
+    [],
+    'i descrittori del set non sono consumatori',
+  );
 });
 
 // ---------------------------------------------------------------------------
