@@ -234,7 +234,16 @@ test('i punti di iniezione usano il selettore di sezione, non il brief nudo', ()
   // il commento di QUELLA chiamata («the fidelity gate does not apply to
   // them») a dire cosa il codice intendeva fare. Delle due chiamate, una sola
   // implementava l'intento; #96 e' l'altra.
-  const gateCall = src.indexOf('runFactualityGates({');
+  // Ancorata al call-site della generazione ITALIANA (`gateResult`, Step
+  // 3a.0b-bis), non alla prima occorrenza nel file. `indexOf` sulla stringa
+  // nuda ha smesso di indicare questo punto quando #5661 ha aggiunto un terzo
+  // call-site — `assertTranslationsPassFactualityGates`, definito ~10.000
+  // righe piu' su — che di `sourceText` non ne passa affatto: sulle traduzioni
+  // il gate di fedelta' alla fonte non gira (e' dentro il ramo `locale ===
+  // 'it'` di runFactualityGates). Il guard leggeva quindi la finestra
+  // sbagliata e falliva su un codice corretto. L'ancora specifica tiene il
+  // bersaglio fermo su questa chiamata anche se altre se ne aggiungono.
+  const gateCall = src.indexOf('const gateResult = runFactualityGates({');
   assert.ok(gateCall !== -1, 'chiamata a runFactualityGates non trovata — aggiornare questo guard');
   // Finestra ampia: il blocco porta un commento lungo che spiega perche' il
   // ramo evergreen e' esentato, e con 1200 char `sourceText:` ci cadeva fuori
