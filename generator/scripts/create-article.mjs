@@ -148,7 +148,7 @@ import { JSON_QUOTE_SAFETY_RULE_IT, describeJsonParseError, describeRawForDiagno
 // modulo puro perche' le gate del generatore girano `node --test` senza `npm ci`
 // e non possono importare QUESTO file: cosi' il test esegue lo stesso oggetto
 // codice della produzione invece di una copia. Vedi l'intestazione del modulo.
-import { REQUIRED_IT_BODY_FIELDS, BODY_ONLY_FIELDS, META_ONLY_FIELDS, normalizeItalianContentFromPayload, classifyBody2Payload, isTopicGateAbortVerdict, findUnreadableContentEvidence, resolveBody2Validation, recoverMisplacedFaq, hasUsableContentText } from './lib/body2-payload-verdict.mjs';
+import { REQUIRED_IT_BODY_FIELDS, BODY_ONLY_FIELDS, META_ONLY_FIELDS, normalizeItalianContentFromPayload, classifyBody2Payload, isTopicGateAbortVerdict, findUnreadableContentEvidence, resolveBody2Validation, recoverMisplacedFaq, hasUsableContentText, hasUsableTranslatedText } from './lib/body2-payload-verdict.mjs';
 import { describePayloadRejection } from './lib/llm-payload-diagnostics.mjs';
 import {
   factCheckFingerprint,
@@ -9490,7 +9490,7 @@ async function translateArticle(data) {
   // prompt when it's short, and both need the same chunking safety net once
   // it isn't, since a single oversized prompt can hit the model's per-call
   // output cap and come back truncated regardless of how many retries wrap it.
-  async function translateInChunks(bodyText, fieldKey, makeChunkPrompt, labelPrefix) {
+  async function translateInChunks(bodyText, fieldKey, makeChunkPrompt, labelPrefix, targetLang) {
     const chunks = splitIntoTranslationChunks(bodyText);
     const translated = await Promise.all(
       chunks.map((chunk, i) =>
@@ -9501,7 +9501,7 @@ async function translateArticle(data) {
         ),
       ),
     );
-    return joinTranslatedChunks(translated, fieldKey);
+    return joinTranslatedChunks(translated, fieldKey, targetLang);
   }
 
   async function translateContent(sourceLang, targetLang, targetLabel, sourceContent) {
@@ -9575,7 +9575,7 @@ ${terminologyByLang[targetLang] || ''}`;
         // downstream, which stringifies to the literal "[object Object]" and
         // ships as prose. Drop the key instead so the per-field missing-
         // translation retry (and then the IT fallback) can recover it.
-        const text = translatedStringOrNull(result?.[bodyKey]);
+        const text = translatedStringOrNull(result?.[bodyKey], lang);
         if (text === null) {
           console.error(`  ⚠️  ${lang}:${bodyKey} non è una stringa (${typeof result?.[bodyKey]}) — campo scartato, recupero per-campo downstream`);
           return {};
@@ -9598,6 +9598,7 @@ ${terminologyByLang[targetLang] || ''}`;
           `{"${bodyKey}": "..."}`,
         ),
         `${lang}:${bodyKey.replace('body', 'b')}`,
+        lang,
       );
       if (joined === null) {
         console.error(`  ⚠️  ${lang}:${bodyKey} — almeno un chunk non è una stringa, campo scartato: recupero per-campo downstream`);
@@ -9713,7 +9714,15 @@ ${terminologyByLang[targetLang] || ''}`;
       // paragrafo il cui testo e' `null`. Qui, a differenza del percorso IT,
       // non c'e' nessun `normalizeItalianContentFromPayload` a valle:
       // `validateItalianPayload` gira solo su `content.it`.
-      if (hasUsableContentText(data.content[locale][field])) continue;
+      //
+      // `hasUsableTranslatedText` e non `hasUsableContentText`, e con il
+      // LOCALE: su `de` `Null` con la maiuscola e' la parola per «zero», non
+      // una serializzazione, e col predicato della sorgente un title/excerpt
+      // DE legittimo si leggeva come MANCANTE e cadeva sul fallback IT,
+      // pubblicando testo italiano sotto `/de/` (#831). Su en/fr la deroga
+      // NON vale: li' `Null`/`NULL` come testo intero non e' prosa, quindi
+      // resta un campo mancante e il retry mirato lo ripara come prima.
+      if (hasUsableTranslatedText(data.content[locale][field], locale)) continue;
       const itValue = itContent[field];
       // `itValue` composto di solo whitespace (es. ' ') è truthy: senza
       // `.trim()` bypassa questo guard e viene comunque assegnato sotto come
@@ -9734,7 +9743,7 @@ ${terminologyByLang[targetLang] || ''}`;
         // `String(retried)` on an object yields "[object Object]" — truthy and
         // different from the IT value, so the old check ASSIGNED it. Require a
         // real string so a non-string retry falls through to the IT fallback.
-        const retried = translatedStringOrNull(parsed?.[field]);
+        const retried = translatedStringOrNull(parsed?.[field], locale);
         if (retried && String(retried).trim() !== String(itValue).trim()) {
           data.content[locale][field] = retried;
           console.error(`  ✅ Campo ${field} (${locale}) ritradotto con successo dopo missing-field retry`);
@@ -9801,6 +9810,7 @@ ${terminologyByLang[targetLang] || ''}`;
             field,
             buildRetryPrompt,
             `${locale}:${field}-truncation-retry`,
+            locale,
           );
         } else {
           const parsed = await callWithRetry(
@@ -9808,7 +9818,7 @@ ${terminologyByLang[targetLang] || ''}`;
             Math.max(5000, Math.ceil(countWords(itValue || '') * 5)),
             `${locale}:${field}-truncation-retry`,
           );
-          retried = translatedStringOrNull(parsed?.[field]);
+          retried = translatedStringOrNull(parsed?.[field], locale);
         }
         if (retried && detectTruncation(retried, { label: `${locale}/${field}` }).length === 0) {
           data.content[locale][field] = sanitizeBodyText(retried);
@@ -9869,7 +9879,7 @@ ${terminologyByLang[targetLang] || ''}`;
             1000,
             `${locale}:${field}-retry`,
           );
-          if (hasUsableContentText(retryResult?.[field]) && retryResult[field].trim() !== itVal) {
+          if (hasUsableTranslatedText(retryResult?.[field], locale) && retryResult[field].trim() !== itVal) {
             data.content[locale][field] = retryResult[field];
             console.error(`  ✅ [translation-check] ${locale.toUpperCase()}.${field} ritradotto con successo`);
           } else {
