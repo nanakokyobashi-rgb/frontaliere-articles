@@ -252,7 +252,34 @@ function saveProgress(progress) {
 let _lastCommitStep = 0;
 const COMMIT_EVERY = 25;
 
+/**
+ * ── LA FINESTRA DI TRONCAMENTO, MISURATA INVECE CHE STIMATA (issue #625) ────
+ *
+ * #625 e' rimasta ferma un mese su un numero che non poteva arrivare: «la vera
+ * grace window SIGTERM→SIGKILL che GitHub Actions concede al job». Non e'
+ * documentata, non e' derivabile staticamente, e — l'osservazione che chiude la
+ * questione — NON SERVE. Lo sweep del 2026-09-04 lo ha gia' detto sul merito:
+ * il rimedio e' una deadline COMPLESSIVA sulla catena, che stringe la finestra
+ * di troncamento qualunque sia la grace window, senza accorciare il singolo
+ * timeout di rete (che era l'unica ragione per cui il taglio cieco era stato
+ * scartato: un push legittimo sotto rete lenta che fallisce).
+ *
+ * Il numero che serve per SCEGLIERE quella deadline e' un altro, ed e' quello
+ * che nessuno emetteva: quanto dura la catena DAVVERO. I 210s del body sono il
+ * caso peggiore aritmetico (30+60+30+60+30), non una misura — e una deadline
+ * scelta sul caso peggiore aritmetico e' esattamente il taglio cieco.
+ *
+ * Questa riga e' la misura, e a differenza della grace window si produce da
+ * sola: la catena gira a ogni checkpoint (uno ogni COMMIT_EVERY articoli), non
+ * e' un evento raro, quindi il log del workflow basta e non serve un artifact.
+ * Costo: una riga per checkpoint, due `Date.now()`.
+ *
+ * Formato stabile, greppabile:
+ *   [git-push-chain] label=<l> ms=<n> outcome=<pushed|rebased|failed|commit-failed>
+ */
 function gitCommitAndPush(label) {
+  const chainStartedAt = Date.now();
+  let outcome = 'commit-failed';
   try {
     const bodyDirGitPath = resolveGitAddPath(ROOT, `services/locales/${SECTION_BODY_DIR}/`);
     execSync(
@@ -263,14 +290,17 @@ function gitCommitAndPush(label) {
     // Push using default GITHUB_TOKEN (permissions: contents: write)
     try {
       execSync('git push origin main', { cwd: ROOT, stdio: 'pipe', timeout: 60000 });
+      outcome = 'pushed';
       console.error(`💾 Checkpoint pushed: ${label}`);
     } catch (pushErr) {
       // Rebase and retry once (handles concurrent pushes)
       try {
         execSync('git pull --rebase origin main', { cwd: ROOT, stdio: 'pipe', timeout: 30000 });
         execSync('git push origin main', { cwd: ROOT, stdio: 'pipe', timeout: 60000 });
+        outcome = 'rebased';
         console.error(`💾 Checkpoint pushed (after rebase): ${label}`);
       } catch {
+        outcome = 'failed';
         // A conflicting rebase leaves an in-progress rebase state that wedges every
         // subsequent run on the same runner; abort it so the loop can't stay stuck
         // (mirrors the `git rebase --abort` recovery added to the bash loops in #2721).
@@ -280,6 +310,10 @@ function gitCommitAndPush(label) {
     }
   } catch (err) {
     console.error(`⚠️  Checkpoint failed: ${err.message?.slice(0, 100)}`);
+  } finally {
+    // Nel `finally` e non in coda al `try`: la misura serve SOPRATTUTTO sul
+    // ramo che fallisce, che e' quello in cui la catena e' lunga.
+    console.error(`[git-push-chain] label=${label} ms=${Date.now() - chainStartedAt} outcome=${outcome}`);
   }
 }
 
