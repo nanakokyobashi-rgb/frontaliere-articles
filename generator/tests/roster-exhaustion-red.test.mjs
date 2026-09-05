@@ -85,6 +85,13 @@ test('la run 31817957722 (pareggio 53/53, 38 rifiuti su taglia) NON e\' un diffe
     persistent: 53,
     providerCooldownSkips: 0,
     echoDominated: false,
+    // Chi ha deciso, e sui numeri di chi (#857 → #888). Qui il pareggio al
+    // persistente basta da solo: nessun eco da nascondere nei secchi, quindi
+    // margine zero e il voto si chiude sul confronto netto.
+    decidedBy: 'net',
+    netEvidence: 106,
+    echoHiddenInBuckets: 0,
+    votedTransient: 53,
   });
 });
 
@@ -143,6 +150,47 @@ test('la run 31823202761 (53 vs 52 LORDI, 11 echi transitori) e\' un veto al net
   assert.equal(s.persistent, 52);
   assert.equal(s.providerCooldownSkips, 11, 'quante righe sono state tolte, cosi\' il lordo resta ricostruibile');
   assert.equal(s.echoDominated, false);
+});
+
+test('la diagnostica dice CHI ha deciso, non solo i due secchi netti (#857 → #888)', () => {
+  // Il caso che ha motivato l'item: i due secchi netti dicono «maggioranza
+  // transitoria» (53 vs 52) ACCANTO a un veto. Senza `decidedBy` la riga
+  // spiegherebbe un verdetto diverso da quello preso — e una diagnostica che
+  // contraddice l'exit code smette di essere letta.
+  const margin = echoingExhaustionError({ echo: { total: 11, transient: 0, persistent: 0 } });
+  assert.equal(isInputCapDeferralVeto(margin), true);
+  const m = inputCapVetoSummary(margin);
+  assert.equal(m.transient > m.persistent, true, 'la premessa: i due secchi netti sembrano dare ragione al transitorio');
+  assert.equal(m.decidedBy, 'margin', 'ha deciso il margine sugli echi non attribuiti, non i due secchi');
+  assert.equal(m.echoHiddenInBuckets, 10, 'dieci degli undici echi stanno nei secchi: la massa ambigua ne ospita uno');
+  assert.equal(m.votedTransient, 43, 'il numero a sinistra del confronto che ha chiuso il voto');
+  assert.equal(m.netEvidence, 105);
+
+  // Il pavimento: cinque fratelli saltati dallo stesso host, nessuna riga
+  // indipendente. I due secchi riportati sono 0 e 0, che da soli non
+  // distinguono «pareggio vuoto» da «pareggio vero».
+  const floor = echoingExhaustionError({
+    transient: 5,
+    persistent: 0,
+    total: 5,
+    echo: { total: 5, transient: 5, persistent: 0 },
+  });
+  assert.equal(isInputCapDeferralVeto(floor), true);
+  const f = inputCapVetoSummary(floor);
+  assert.equal(f.decidedBy, 'floor');
+  assert.equal(f.netEvidence, 0, 'zero prove indipendenti: e\' il pavimento, non un pareggio');
+
+  // E il guardrail: l'unico caso in cui i due secchi stampati NON sono quelli
+  // che hanno deciso, gia' segnalato da `echoDominated` e ora anche nominato.
+  const gross = echoingExhaustionError({
+    transient: 13,
+    persistent: 93,
+    total: 106,
+    echo: { total: 81, transient: 0, persistent: 81 },
+  });
+  const g = inputCapVetoSummary(gross);
+  assert.equal(g.decidedBy, 'gross');
+  assert.equal(g.echoDominated, true, 'le due affermazioni restano coerenti fra loro');
 });
 
 test('la polarita\' resta invariata sul campione netto: pareggio al persistente', () => {

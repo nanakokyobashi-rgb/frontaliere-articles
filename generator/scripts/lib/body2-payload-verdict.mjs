@@ -131,9 +131,26 @@ const SERIALIZED_NULL_STRING_RE = /^null$/;
  */
 const LOCALES_WITH_NULL_AS_WORD = new Set(['de']);
 
+/**
+ * Il tag di lingua, ridotto alla sola LINGUA: trim, minuscolo, subtag di
+ * regione/script tagliato (`de-CH`, `de_DE`, `DE-ch` → `de`).
+ *
+ * E' l'unico normalizzatore di locale di questo modulo, e sta qui perche' il
+ * difetto che copre e' SILENZIOSO: senza il taglio del subtag,
+ * `localeHasNullAsWord('de-CH')` risponde `false`, il predicato ricade su
+ * quello severo e un `Null` tedesco legittimo torna a essere letto come campo
+ * mancante — cioe' #831 si riapre come testo ITALIANO pubblicato sotto `/de/`,
+ * senza che nessun gate lo veda. Oggi tutti i chiamanti passano il letterale
+ * nudo; questa funzione fa si' che il giorno in cui uno passa `de-CH` non
+ * cambi niente.
+ */
+export function normalizeLocaleTag(locale) {
+  return String(locale ?? '').trim().toLowerCase().split(/[-_]/)[0];
+}
+
 /** `true` se in `locale` il `null` maiuscolo e' una parola, non una serializzazione. */
 export function localeHasNullAsWord(locale) {
-  return LOCALES_WITH_NULL_AS_WORD.has(String(locale ?? '').trim().toLowerCase());
+  return LOCALES_WITH_NULL_AS_WORD.has(normalizeLocaleTag(locale));
 }
 
 /** Toglie al piu' una coppia wrapping di `'` o `"` dopo il trim. */
@@ -188,11 +205,40 @@ export function hasUsableContentText(value) {
 }
 
 /**
- * Testo UTILIZZABILE di un campo TRADOTTO (`content.de/en/fr`,
- * `titleByLocale`, l'uscita della cascata free-MT). Stessa regola di
- * `hasUsableContentText` tranne una, e SOLO nei locali in cui `null` e' una
- * parola della lingua (`LOCALES_WITH_NULL_AS_WORD`, oggi il solo `de`): li' il
- * `null` letterale conta solo nella forma SERIALIZZATA, minuscola.
+ * ── QUALE DEI DUE PREDICATI, E PERCHE' LA DISCRIMINANTE E' LA PROVENIENZA ───
+ *
+ * `hasUsableContentText` e `hasUsableTranslatedText` non sono «severo» e
+ * «permissivo» da scegliere a gusto: sono la stessa regola applicata a due
+ * PROVENIENZE del valore, e la provenienza e' l'unica cosa che dice se
+ * `Null`/`NULL` possa essere una parola o sia soltanto un marker.
+ *
+ *   PROSA DI UN MODELLO che ha letto la sorgente e scrive nella lingua target
+ *   (`content.de.title` dopo `translateArticle`, il retry per-campo)
+ *      → `hasUsableTranslatedText(value, locale)`.
+ *      Li' `Null` PUO' essere la parola tedesca per «zero», e scartarla
+ *      pubblica il testo italiano sotto `/de/` (#831).
+ *
+ *   USCITA DI UNA MACCHINA con un sentinella di fallimento documentato — un
+ *   motore della cascata free-MT, un export CSV/DB del feed eventi dove la
+ *   colonna vuota si scrive `NULL`
+ *      → `hasUsableContentText(value)`, TUTTE le grafie.
+ *      Li' `Null`/`NULL` non e' una parola scelta da qualcuno che sapeva cosa
+ *      stava traducendo: e' cio' che la macchina emette quando NON ha una
+ *      risposta. Accettarlo pubblica il marker verbatim — come titolo, come
+ *      slug `/de/blog/null`, nel meta e nel feed (#868, item 3/4/5).
+ *
+ * L'asimmetria del costo e' quella che decide, e va nello stesso verso in
+ * entrambi i rami: sul ramo «prosa» il falso negativo (scartare una parola
+ * vera) pubblica la lingua sbagliata e nessun gate lo vede; sul ramo
+ * «macchina» il falso positivo (accettare il sentinella) pubblica il marker e
+ * nessun gate lo vede, mentre il falso negativo costa al piu' una recovery
+ * per-campo — un retry, non una pubblicazione sbagliata.
+ *
+ * Testo UTILIZZABILE di un campo TRADOTTO da un modello (`content.de/en/fr`).
+ * Stessa regola di `hasUsableContentText` tranne una, e SOLO nei locali in cui
+ * `null` e' una parola della lingua (`LOCALES_WITH_NULL_AS_WORD`, oggi il solo
+ * `de`): li' il `null` letterale conta solo nella forma SERIALIZZATA,
+ * minuscola.
  *
  * `locale` va quindi passato da ogni chiamante. Senza — o su un locale non
  * elencato, en/fr compresi — il predicato e' identico a `hasUsableContentText`:
@@ -376,7 +422,16 @@ export function normalizeItalianContentFromPayload(payload, locale = 'it', field
     for (const candidate of candidates) {
       if (!candidate || typeof candidate !== 'object') continue;
       let raw = typeof candidate[field] === 'string' ? candidate[field].trim() : '';
-      if (isLiteralNullString(raw)) raw = '';
+      // `isNullStringForLocale` e non `isLiteralNullString`: questo campo e'
+      // prosa di un modello che sta scrivendo in `locale`, cioe' il ramo
+      // «prosa» della regola di provenienza scritta piu' sopra — e il
+      // normalizzatore deve obbedire alla regola come ogni altro call-site,
+      // non farne eccezione. Finche' il gate di valle passava sempre `'it'`
+      // il difetto era irraggiungibile; da quando riceve `primaryLocale`, un
+      // `content.de.title` che vale `Null` — la parola tedesca — si sarebbe
+      // letto come campo assente e il payload sarebbe potuto diventare un
+      // abort. Su `'it'` i due predicati coincidono: byte-identico oggi.
+      if (isNullStringForLocale(raw, locale)) raw = '';
       if (raw) { value = raw; break; }
     }
     if (value) hasAnyField = true;
@@ -507,8 +562,8 @@ export function isTopicGateAbortPayload(parsed) {
  *
  * ## Dove si guarda, e perche' NON ovunque
  *
- * Dentro `content.*` lo schema impone `null` per contratto: qualunque chiave
- * che porti TESTO li' dentro contraddice l'abort, tranne i campi META
+ * Dentro `content.*` lo schema impone `null` per contratto: una chiave che
+ * porti TESTO LUNGO QUANTO UN ARTICOLO li' dentro contraddice l'abort, tranne i campi META
  * (`title`/`excerpt`, «un rifiuto puo' intitolarsi`), `faq` e `reason`.
  *
  * Alla RADICE no: li' vivono `reason`, `id`, `category`, `imagePrompt` — un
@@ -516,7 +571,8 @@ export function isTopicGateAbortPayload(parsed) {
  * rifiuto, cioe' rimetterebbe le cinque rigenerazioni che #807 ha tolto. Alla
  * radice contano solo le chiavi di FORMA corpo, e una stringa vi conta solo
  * se e' grande quanto un articolo: la spiegazione di un rifiuto sta in
- * `reason` e non arriva a `ROOT_BODYISH_TEXT_MIN_CHARS`.
+ * `reason` e non arriva a `BODYISH_TEXT_MIN_CHARS` — soglia che dal 2026-09-05
+ * vale anche DENTRO `content.*`, per lo stesso motivo (#869 item 2).
  *
  * ## Perche' solo il TESTO conta come sostanza
  *
@@ -533,25 +589,74 @@ const BODYISH_KEY_RE = /^(?:body|text|testo|content|article|articolo|paragraf[oi
 const ABORT_COMPATIBLE_CONTENT_KEYS = [...META_ONLY_FIELDS, 'faq', 'reason', 'abort_topical_relevance'];
 
 /**
- * Soglia della sola radice: sotto questa lunghezza una stringa su chiave di
- * forma corpo non e' un articolo, ed e' piu' probabile che sia l'eco del
- * rifiuto.
+ * Soglia UNICA, radice e `content.*`. Sotto questa lunghezza il testo trovato
+ * non e' un articolo: e' piu' probabile che sia l'eco del rifiuto.
+ *
+ * Fino a #869 la soglia esisteva SOLO alla radice, e solo per una stringa
+ * diretta. Dentro `content.*` non c'era niente, quindi un abort conforme che
+ * parcheggia la spiegazione del proprio rifiuto su una chiave non dichiarata
+ * (`content.it.body = "Nessun contenuto: fonte non pertinente"`, 38 caratteri;
+ * `content.it.note = "fuori tema"`) produceva evidenza e diventava `reject`:
+ * le cinque rigenerazioni contro un modello che ha obbedito, cioe' esattamente
+ * il costo che #807 aveva tolto, rimesso sulla classe che questo predicato
+ * prometteva di non toccare. Il razionale della soglia — «la spiegazione di un
+ * rifiuto non arriva a 200 caratteri, un articolo si' » — vale identico nei due
+ * posti, quindi la soglia e' una sola.
  */
-const ROOT_BODYISH_TEXT_MIN_CHARS = 200;
-
-/** Profondita' massima della discesa: oltre, la forma non e' piu' un corpo. */
-const SUBSTANCE_MAX_DEPTH = 4;
+const BODYISH_TEXT_MIN_CHARS = 200;
 
 /**
- * Il valore porta TESTO usabile, a qualunque profondita'? Numeri, booleani,
- * stringhe vuote e `"null"` non contano — vedi il blocco sopra.
+ * Profondita' massima della discesa.
+ *
+ * Era 4, e 4 lasciava TERMINALE proprio il caso per cui il predicato esiste:
+ * `content.it.article.sections[0].paragraphs[0].text` — un corpo vero, scritto
+ * in una forma che il normalizzatore non legge — sta a cinque livelli dal
+ * candidato `content.it` e non produceva nessuna evidenza, quindi la sezione
+ * si chiudeva senza articolo e senza rigenerare (#869 item 4).
+ *
+ * Il limite resta, e resta una scelta: oltre l'ottavo livello si continua a
+ * cadere nel ramo terminale. Ma il confine ora e' ESERCITATO nei due versi dal
+ * test gemello, invece di essere un numero che nessuno prova — ed e' sicuro
+ * scendere piu' in basso solo perche' `BODYISH_TEXT_MIN_CHARS` si applica
+ * adesso anche qui: senza la soglia, scendere di piu' avrebbe solo aumentato
+ * le probabilita' di raccogliere l'eco di un rifiuto.
  */
-function hasTextSubstance(value, depth = 0) {
-  if (typeof value === 'string') return hasUsableContentText(value);
-  if (value == null || typeof value !== 'object') return false;
-  if (depth >= SUBSTANCE_MAX_DEPTH) return false;
-  return Object.values(value).some((v) => hasTextSubstance(v, depth + 1));
+const SUBSTANCE_MAX_DEPTH = 8;
+
+/**
+ * Caratteri di TESTO usabile che il valore porta, sommati su tutta la
+ * discesa. Numeri, booleani, stringhe vuote e `"null"` non contano — vedi il
+ * blocco sopra.
+ *
+ * La somma, e non il massimo per stringa: un corpo emesso come array di frasi
+ * (`body1: ['Prima frase.', 'Seconda frase.', …]`) e' un articolo anche se
+ * nessun elemento da solo arriva alla soglia, e leggerlo elemento per elemento
+ * lo butterebbe via come se il modello avesse rifiutato.
+ */
+function textSubstanceChars(value, depth = 0) {
+  if (typeof value === 'string') return hasUsableContentText(value) ? value.trim().length : 0;
+  if (value == null || typeof value !== 'object') return 0;
+  if (depth >= SUBSTANCE_MAX_DEPTH) return 0;
+  let total = 0;
+  for (const v of Object.values(value)) {
+    total += textSubstanceChars(v, depth + 1);
+    if (total >= BODYISH_TEXT_MIN_CHARS) return total; // corto circuito: la soglia e' gia' passata
+  }
+  return total;
 }
+
+/** Il valore porta abbastanza testo da essere un CORPO, e non l'eco di un rifiuto? */
+function hasTextSubstance(value) {
+  return textSubstanceChars(value) >= BODYISH_TEXT_MIN_CHARS;
+}
+
+/**
+ * La chiave, sotto `content`, e' un TAG DI LINGUA e non un campo?
+ * `content.en` accanto a `content.it` e' un secondo locale, non un corpo: va
+ * guardato con lo stesso carve-out per-campo di `content.it`, non percorso
+ * intero (vedi `findUnreadableContentEvidence`).
+ */
+const LOCALE_KEY_RE = /^[a-z]{2}(?:[-_][a-z0-9]{2,4})?$/i;
 
 /**
  * Torna la chiave che porta contenuto NON leggibile dal normalizzatore, o
@@ -564,9 +669,25 @@ export function findUnreadableContentEvidence(payload, locale = 'it') {
 
   const content = payload.content;
   const contentCandidates = [];
+  const localeKeys = new Set();
   if (content && typeof content === 'object') {
-    if (content[locale] && typeof content[locale] === 'object') {
-      contentCandidates.push([`content.${locale}`, content[locale]]);
+    // OGNI locale presente e' un candidato a se', col carve-out per-campo —
+    // non solo `content[locale]`. Lo schema (`buildArticleJsonSchema`) rende
+    // `required` il solo locale primario ma non VIETA al modello di emetterne
+    // un secondo, e finche' `content.en` veniva percorso intero il `title` di
+    // un rifiuto INTITOLATO in inglese («Refusal: source not relevant») non
+    // era piu' escluso: un abort perfettamente conforme usciva `reject` anche
+    // con `locale === 'it'` (#869 item 3).
+    for (const [key, value] of Object.entries(content)) {
+      if (!value || typeof value !== 'object' || Array.isArray(value)) continue;
+      if (!LOCALE_KEY_RE.test(key)) continue;
+      localeKeys.add(key);
+    }
+    // Il locale primario per primo: e' quello che vogliamo NOMINATO nel log
+    // quando l'evidenza sta li'.
+    if (localeKeys.has(locale)) contentCandidates.push([`content.${locale}`, content[locale]]);
+    for (const key of localeKeys) {
+      if (key !== locale) contentCandidates.push([`content.${key}`, content[key]]);
     }
     contentCandidates.push(['content', content]);
   }
@@ -577,9 +698,10 @@ export function findUnreadableContentEvidence(payload, locale = 'it') {
       // Una stringa su un campo DICHIARATO la legge gia' il normalizzatore:
       // se e' arrivata qui e' vuota o `"null"`, e non e' evidenza di niente.
       if (typeof value === 'string' && REQUIRED_IT_BODY_FIELDS.includes(key)) continue;
-      // `content.it` e' una chiave del candidato `content`: non lo si conta
-      // come contenuto di se stesso, e' gia' stato guardato campo per campo.
-      if (where === 'content' && value && typeof value === 'object' && key === locale) continue;
+      // I sotto-oggetti di locale sono chiavi del candidato `content`: non li
+      // si conta come contenuto di se stessi, sono gia' stati guardati campo
+      // per campo sopra.
+      if (where === 'content' && localeKeys.has(key)) continue;
       if (hasTextSubstance(value)) return `${where}.${key}`;
     }
   }
@@ -587,7 +709,7 @@ export function findUnreadableContentEvidence(payload, locale = 'it') {
   for (const [key, value] of Object.entries(payload)) {
     if (!BODYISH_KEY_RE.test(key) && !BODY_ONLY_FIELDS.includes(key)) continue;
     if (typeof value === 'string') {
-      if (hasUsableContentText(value) && value.trim().length >= ROOT_BODYISH_TEXT_MIN_CHARS) return key;
+      if (hasTextSubstance(value)) return key;
       continue;
     }
     // `content` come oggetto e' gia' stato guardato campo per campo sopra.

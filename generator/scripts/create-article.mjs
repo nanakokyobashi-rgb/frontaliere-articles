@@ -660,7 +660,14 @@ const _preSpendGateCache = new Map();
 // guardia `if (cacheKey)` in scrittura testi esattamente la stessa emptiness
 // che testa quella in lettura: una chiave " " verrebbe scritta e mai riletta.
 function preSpendGateCacheKey(headline, sourceUrl) {
-  return `${String(headline || '').toLowerCase().trim()} ${classifierSourceHint(sourceUrl).toLowerCase()}`.trim();
+  // `\u0000` e non il byte NUL LETTERALE: il separatore vale identico a
+  // runtime, ma un NUL nel sorgente rende l'INTERO file binario per grep e
+  // rg (`binary file matches`, zero righe), cioe' 922 KB di codice di
+  // produzione invisibili a ogni audit cross-file che non passi `-a`. Ha
+  // gia' prodotto un «non c'e' alcun call site da aggiornare» falso su
+  // un'altra PR di questo giro. Il separatore RESTA: toglierlo farebbe
+  // collidere le chiavi (`ab`+`c` e `a`+`bc` diventerebbero la stessa memo).
+  return `${String(headline || '').toLowerCase().trim()}\u0000${classifierSourceHint(sourceUrl).toLowerCase()}`.trim();
 }
 
 // Esegue `fn` su `items` con al massimo `limit` chiamate in volo, preservando
@@ -8989,9 +8996,25 @@ Rispondi SOLO con JSON valido, senza markdown.` },
   // titolo, non puo' avere l'articolo. `isTopicGateAbortVerdict` guarda i
   // campi di CORPO, cosi' un abort che si intitola alla radice non finisce
   // qui sotto come «contract violation» con content.it vuoto.
-  const _abortSenzaCorpo = isTopicGateAbortVerdict(itData);
+  // `primaryLocale` va passato a TUTTI e quattro i lettori di payload di
+  // questo gate, non solo a quello che la follow-up nomina: sono la stessa
+  // domanda («cosa c'e' dentro `content.<primario>`?») fatta quattro volte, e
+  // il default `'it'` la rende cieca insieme. Con `primaryLocale !== 'it'` il
+  // normalizzatore non trova `content.it`, scende sul candidato `content` e
+  // vede `content.<altro>` come una chiave qualunque: il carve-out per-campo
+  // (`title`/`excerpt`/`faq`/`reason`) non si applica piu', quindi un rifiuto
+  // INTITOLATO produce evidenza e diventa `reject` — cinque rigenerazioni
+  // contro un modello che ha obbedito, piu' un `topicGateAborts` non contato
+  // (#869 item 1). Il gate a monte dello split lo passa gia'
+  // (`findUnreadableContentEvidence(bodyData, primaryLocale)`), e
+  // `recoverMisplacedFaq(itData, primaryLocale)` lo passa quaranta righe piu'
+  // sotto: erano queste quattro righe a non farlo.
+  //
+  // Latente oggi — `_primaryLocale` vale `'it'` su tutte le run di produzione
+  // — quindi su `'it'` il comportamento e' byte-identico a prima.
+  const _abortSenzaCorpo = isTopicGateAbortVerdict(itData, { locale: primaryLocale });
   const itContentPreAbortCheck = itData?.abort_topical_relevance === true && !_abortSenzaCorpo
-    ? normalizeItalianContentFromPayload(itData)
+    ? normalizeItalianContentFromPayload(itData, primaryLocale)
     : null;
   if (itData?.abort_topical_relevance === true && _abortSenzaCorpo) {
     const reason = String(itData.reason || '').slice(0, 500) || '(no reason)';
@@ -9012,14 +9035,14 @@ Rispondi SOLO con JSON valido, senza markdown.` },
     }
   }
 
-  const itContent = itContentPreAbortCheck || normalizeItalianContentFromPayload(itData);
+  const itContent = itContentPreAbortCheck || normalizeItalianContentFromPayload(itData, primaryLocale);
   if (!itContent) {
     // Il flag c'e' ma il gate sopra non ha abortito: il corpo e' in una forma
     // che il normalizzatore non legge (`body1` array/oggetto, `content.it.body`,
     // `text`). E' un rigetto RIGENERABILE, non un rifiuto — e va NOMINATO, o la
     // classe resta invisibile dietro «non può essere normalizzata».
     const _evidenzaNonLetta = itData?.abort_topical_relevance === true
-      ? findUnreadableContentEvidence(itData)
+      ? findUnreadableContentEvidence(itData, primaryLocale)
       : null;
     if (_evidenzaNonLetta) {
       console.error(
@@ -10262,7 +10285,11 @@ function validate(data, opts = {}) {
   for (const locale of ['en', 'de', 'fr']) {
     if (!data.slugs[locale]) {
       const localizedTitle = String(data.content[locale]?.title || '').trim();
-      const fromLocalizedTitle = localizedTitle ? slugifySlugPart(localizedTitle) : '';
+      // Stesso classificatore condiviso di `relocalizeSlugsAfterTranslation()`
+      // — vedi il commento la' per la causa (#868 item 1). Un candidato
+      // riservato (`null`, `undefined`, `slug-de`…) qui cade sul provvisorio
+      // italiano, che la rilocalizzazione post-traduzione rifara'.
+      const fromLocalizedTitle = localizedTitle ? inspectSlugForPromptPlaceholder(localizedTitle).slug : '';
       if (fromLocalizedTitle) {
         data.slugs[locale] = fromLocalizedTitle;
         RUN_REPORT.slugs.localizedFromTitle += 1;
@@ -15548,7 +15575,19 @@ export function relocalizeSlugsAfterTranslation(data, opts = {}) {
     if (!needsWork) continue;
 
     const localizedTitle = String(data.content?.[locale]?.title || '').trim();
-    const candidate = localizedTitle ? slugifySlugPart(localizedTitle) : '';
+    // `inspectSlugForPromptPlaceholder` e non `slugifySlugPart` nudo: e' il
+    // classificatore CONDIVISO — lo stesso che `deriveAndSanitizeArticleSlugs`
+    // gia' applica al percorso di scrittura — e il suo `NON_SLUG_REMAINDER_RX`
+    // elenca gia' `null` e `undefined` fra i segmenti riservati. Qui non lo si
+    // attraversava, quindi un titolo `de` che vale `Null` («zero», e da #860
+    // un valore che SOPRAVVIVE invece di cadere sul fallback italiano) veniva
+    // slugificato in `null` e usciva senza un warning come `data.slugs.de`,
+    // cioe' in `slugs.json` (mappa diretta E inversa), nel canonical e nella
+    // sitemap blog come segmento `/de/blog/null` (#868 item 1). Uno slug e' la
+    // sola parte di un articolo che non si corregge dopo: qui il candidato
+    // vuoto ricade sul ramo «titolo tradotto non slugificabile» qui sotto, che
+    // tiene lo slug italiano e NOMINA la causa.
+    const candidate = localizedTitle ? inspectSlugForPromptPlaceholder(localizedTitle).slug : '';
 
     if (candidate && candidate !== itSlug && !isTaken(locale, candidate)) {
       data.slugs[locale] = candidate;
@@ -15679,7 +15718,10 @@ export function deriveAndSanitizeArticleSlugs(data) {
       // non c'e', si segna il provvisorio e decide `relocalizeSlugsAfterTranslation()`
       // in fondo a questa funzione.
       const localizedTitle = String(data.content?.[locale]?.title || '').trim();
-      const fromLocalizedTitle = localizedTitle ? slugifySlugPart(localizedTitle) : '';
+      // Stesso classificatore condiviso degli altri due punti che derivano uno
+      // slug da un titolo localizzato (#868 item 1): un titolo che vale
+      // `Null` non diventa il segmento `null` di un URL pubblicato.
+      const fromLocalizedTitle = localizedTitle ? inspectSlugForPromptPlaceholder(localizedTitle).slug : '';
       if (fromLocalizedTitle) {
         data.slugs[locale] = fromLocalizedTitle;
         continue;
@@ -15694,8 +15736,14 @@ export function deriveAndSanitizeArticleSlugs(data) {
       data.slugs[locale] = check.slug || data.slugs.it;
       continue;
     }
-    const title = String(data.content?.[locale]?.title || '');
-    const fromTitle = title ? slugifySlugPart(title) : '';
+    // Quarta derivazione di uno slug da un titolo LOCALIZZATO, e per la stessa
+    // ragione delle altre tre passa dal classificatore condiviso (#868 item 1):
+    // con `data.slugs.de` segnaposto puro e `content.de.title === 'Null'`,
+    // `check.slug` e' vuoto e `slugifySlugPart()` nudo scriveva
+    // `data.slugs.de = 'null'` — che `relocalizeSlugsAfterTranslation()` non
+    // ripara, perche' `needsWork` e' falso su uno slug diverso dall'italiano.
+    const localizedTitle = String(data.content?.[locale]?.title || '').trim();
+    const fromTitle = localizedTitle ? inspectSlugForPromptPlaceholder(localizedTitle).slug : '';
     const replacement = check.slug || fromTitle || data.slugs.it;
     const source = check.slug ? 'resto del segnaposto' : fromTitle ? `titolo ${locale}` : 'slug IT';
     console.error(

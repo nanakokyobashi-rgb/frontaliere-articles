@@ -133,6 +133,7 @@ import path from 'node:path';
 import crypto from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 import { createGithubIssue } from '../lib/github-issue-creator.mjs';
+import { parsePositiveNum } from '../lib/parse-positive-num.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const MANIFEST_PATH = path.join(ROOT, 'scripts/ci/loop-sync-manifest.json');
@@ -150,11 +151,27 @@ const CORPUS_REF = process.env.GITHUB_SHA || 'main';
 // registra (poche righe, pochi autori) è più che sufficiente; se la storia è
 // più lunga del cap, un mancato match resta "non verificato", MAI "ghost" —
 // vedi `ghostVerdict`.
-const PROVENANCE_HISTORY_CAP = Number(process.env.PROVENANCE_HISTORY_CAP || 100);
+const PROVENANCE_HISTORY_CAP = parsePositiveNum(process.env.PROVENANCE_HISTORY_CAP, 100, {
+  label: 'PROVENANCE_HISTORY_CAP',
+  tool: 'loop-drift-check',
+  integer: true,
+});
 // Giorni dopo i quali un gemello `identical` fermo in `site-ahead` smette di
 // essere latenza e diventa un `stranded-twin` (issue #303). Vedi
 // `strandedVerdict` per la calibrazione del default.
-const STRANDED_AFTER_DAYS = Number(process.env.STRANDED_AFTER_DAYS || 3);
+//
+// Letto con `parsePositiveNum` e non con `Number(env || 3)` perche' un
+// `STRANDED_AFTER_DAYS=tre` dava `NaN`, e `ageDays >= NaN` e' sempre falso:
+// la classe `stranded-twin` smetteva di essere emessa, in silenzio e col
+// report VERDE (issue #871 item 1). E' l'unico canale che intercetta un
+// gemello `identical` fermo che nessun trasporto porterà — un blocco
+// `permanent` di `transport-identical-twins.mjs` non alza niente da solo —
+// quindi spegnerlo per un refuso in una variabile di repository è il modo
+// piu' economico di perdere l'intera sorveglianza.
+const STRANDED_AFTER_DAYS = parsePositiveNum(process.env.STRANDED_AFTER_DAYS, 3, {
+  label: 'STRANDED_AFTER_DAYS',
+  tool: 'loop-drift-check',
+});
 
 const ARGS = new Set(process.argv.slice(2));
 const AS_JSON = ARGS.has('--json');
