@@ -48,6 +48,7 @@ import {
   discoverFreeModels,
   getStats,
   recordModelContentFailure,
+  recordModelContentSuccess,
   recordModelSuccess,
   resetState,
   DEFAULT_CHAIN,
@@ -672,5 +673,147 @@ describe('propagazione di recordScore dal call site di produzione', () => {
       /recordScore:\s*opts\.recordScore/,
       `il call site non propaga il flag — l'opt-out del ledger resta irraggiungibile: ${calls[0]}`,
     );
+  });
+});
+
+/**
+ * ── #887 — IL FLAG SI FERMA AL LEDGER, E DOVE NON ARRIVA LO DICE ───────────
+ *
+ * Due meta' della stessa decisione, entrambe misurate qui.
+ *
+ * 1. `recordModelContentSuccess()` NON prende il flag come gate. Non propone
+ *    niente al ledger: cancella una voce di `_consecutiveContentFailures`, che
+ *    e' stato in-processo. Gatarlo sarebbe attivamente peggio che lasciarlo
+ *    fuori, perche' il gemello `recordModelContentFailure` incrementa lo streak
+ *    ANCHE in opt-out (misurato sopra, #845/#846): un reset che ubbidisse al
+ *    flag lascerebbe il chiamante diagnostico capace solo di spingere il
+ *    breaker di contenuto VERSO il ban, mai di riportarlo a zero. L'opt-out
+ *    promette neutralita', non una direzione.
+ *
+ * 2. Non-gatato non vuol dire silenzioso: un `recordScore` falsy ESPLICITO
+ *    ottiene un warning warn-once, gemello di quello del prune di discovery
+ *    (#844). Chi condivide il processo con un diagnostico non ha nessun altro
+ *    modo di sapere che lo streak accumulato dalla produzione e' stato azzerato.
+ *
+ * E il source-guard sui call site interni di `callLLM`: dopo #846 il gate sta
+ * sul PARAMETRO, mai attorno alla chiamata. Attorno alla chiamata si perde con
+ * essa il TALLY DI RUN — che non e' un dato di ledger, muore col processo, ed e'
+ * cio' che `printRunSummary` legge — e una run diagnostica si stampa `0ok/0ko`
+ * su modelli che ha chiamato davvero.
+ */
+describe('#887 — recordModelContentSuccess: reset in-processo, flag fuori ma nominato', () => {
+  const MODEL = 'openai/gpt-4o-mini-content-887';
+
+  beforeEach(() => { resetState(); });
+  afterEach(() => { resetState(); });
+
+  for (const optOut of [false, 'false', 0, null, '']) {
+    it(`recordScore: ${JSON.stringify(optOut)} non sopprime il reset dello streak`, () => {
+      recordModelContentFailure(MODEL, { recordScore: optOut });
+      recordModelContentSuccess(MODEL, { recordScore: optOut });
+      // Se il reset fosse stato gatato, questo secondo fallimento sarebbe il
+      // SECONDO consecutivo e farebbe scattare il ban di contenuto.
+      recordModelContentFailure(MODEL, { recordScore: optOut });
+
+      assert.ok(
+        !getStats().exhaustedModels.includes(MODEL),
+        'il reset dello streak deve valere anche in opt-out: gatarlo lascia il chiamante diagnostico capace solo di far salire il breaker',
+      );
+    });
+  }
+
+  it('due fallimenti consecutivi SENZA reset bannano — confine che rende la misura vera', () => {
+    recordModelContentFailure(MODEL, { recordScore: false });
+    recordModelContentFailure(MODEL, { recordScore: false });
+    assert.ok(
+      getStats().exhaustedModels.includes(MODEL),
+      'senza reset lo streak deve arrivare al ban, altrimenti il caso sopra passerebbe per la ragione sbagliata',
+    );
+  });
+
+  it('un opt-out esplicito non e\' silenzioso, ed e\' una-tantum', () => {
+    const seen = [];
+    const orig = console.warn;
+    console.warn = (...a) => seen.push(a.join(' '));
+    try {
+      recordModelContentSuccess(MODEL, { recordScore: false });
+      recordModelContentSuccess(MODEL, { recordScore: false });
+      recordModelContentSuccess('altro/modello-887', { recordScore: false });
+    } finally {
+      console.warn = orig;
+    }
+
+    const hits = seen.filter((l) => l.includes('recordModelContentSuccess'));
+    assert.equal(
+      hits.length,
+      1,
+      `atteso un solo avviso per ciclo di vita dello stato, visti: ${JSON.stringify(hits)}`,
+    );
+    assert.match(hits[0], /recordScore:false ignorato/);
+  });
+
+  it('col default (e col flag vero) non dice niente: e\' il confine che tiene il segnale utile', () => {
+    const seen = [];
+    const orig = console.warn;
+    console.warn = (...a) => seen.push(a.join(' '));
+    try {
+      recordModelContentSuccess(MODEL);
+      recordModelContentSuccess(MODEL, {});
+      recordModelContentSuccess(MODEL, { recordScore: true });
+    } finally {
+      console.warn = orig;
+    }
+    assert.deepEqual(
+      seen.filter((l) => l.includes('recordModelContentSuccess')),
+      [],
+      'un warning sul percorso normale e\' rumore, e insegna a ignorare quello che conta',
+    );
+  });
+
+  it('resetState() azzera il latch, come per i suoi fratelli (#843)', () => {
+    const seen = [];
+    const orig = console.warn;
+    console.warn = (...a) => seen.push(a.join(' '));
+    try {
+      recordModelContentSuccess(MODEL, { recordScore: false });
+      resetState();
+      recordModelContentSuccess(MODEL, { recordScore: false });
+    } finally {
+      console.warn = orig;
+    }
+    assert.equal(
+      seen.filter((l) => l.includes('recordModelContentSuccess')).length,
+      2,
+      'sopravvivere al reset significa che dopo la prima run nessuno rivede piu\' la riga',
+    );
+  });
+});
+
+/**
+ * ── #846/#887 — I CALL SITE INTERNI STANNO SUL PARAMETRO ───────────────────
+ *
+ * Misurato sul sorgente perche' la differenza non e' osservabile dal ledger:
+ * entrambe le forme lo lasciano intatto in opt-out. Cio' che cambia e' il tally
+ * di run, e un test che lo leggesse direttamente misurerebbe una sola delle
+ * chiamate; il source-guard copre l'intera classe in una riga.
+ */
+describe('#887 — nessun gate `recordScore` attorno alla chiamata', () => {
+  const SRC = readFileSync(
+    path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../scripts/lib/ai-models.mjs'),
+    'utf-8',
+  );
+
+  it('i writer di esito sono chiamati sempre, col flag sul parametro', () => {
+    const guards = [...SRC.matchAll(/if\s*\(\s*(?:_shouldRecordScore|coerceRecordScore)\([^)]*\)\s*\)\s*\{?\s*\n?\s*record(?:Model)?(?:Content)?(?:Success|Failure)/g)];
+    assert.deepEqual(
+      guards.map((m) => m[0]),
+      [],
+      'un gate attorno alla chiamata salta anche il tally di run: la run diagnostica si stampa 0ok/0ko sui modelli che ha chiamato',
+    );
+
+    for (const fn of ['recordModelSuccess', 'recordModelFailure']) {
+      const calls = [...SRC.matchAll(new RegExp(`\\n\\s+${fn}\\(model[,)]`, 'g'))];
+      assert.ok(calls.length > 0, `atteso almeno un call site interno di ${fn}`);
+    }
   });
 });
