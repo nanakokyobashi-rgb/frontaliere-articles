@@ -72794,6 +72794,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-pacifismo-neutralita-buzzi': {
+    title: 'Pacifismo vs neutralità: il no di Buzzi all\'UDC',
+    description: 'Matteo Buzzi critica l\'iniziativa UDC sulla neutralità armata in Costituzione. Il deputato Verdi propone difesa civile nonviolenta e chiede voto NO.',
+    keywords: 'frontalieri, ticino, svizzera, italia, pacifismo, neutralità, buzzi, matteo',
+    ogTitle: 'Pacifismo vs neutralità armata: il no dei Verdi',
+    ogDescription: 'Matteo Buzzi e i Verdi criticano l\'iniziativa UDC sulla neutralità armata in Costituzione. Propongono difesa civile nonviolenta e chiedono il voto NO. Una scelta ideologica tra due visioni diverse della sicurezza nazionale svizzera.',
+    canonicalPath: '/articoli-svizzera/pacifismo-neutralita-buzzi/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Pacifismo vs neutralità: il no di Buzzi all'UDC",
+      "description": "Matteo Buzzi critica l'iniziativa UDC sulla neutralità armata in Costituzione. Il deputato Verdi propone difesa civile nonviolenta e chiede voto NO.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/pacifismo-neutralita-buzzi.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Veduta di Locarno in Ticino, città d'origine del deputato Verdi Matteo Buzzi"
+      },
+      "datePublished": "2026-09-05T21:16:12+00:00",
+      "dateModified": "2026-09-05T21:16:12+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/pacifismo-neutralita-buzzi/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;
