@@ -162,19 +162,31 @@ test('isLiteralNullString/hasUsableContentText: "null" in ogni forma non e\' con
   }
 });
 
-// Il predicato dei campi TRADOTTI e' piu' stretto di proposito: sulla lingua
-// SORGENTE (italiano) nessuna grafia di `null` e' una parola, quindi
-// rifiutarle tutte non puo' cancellare contenuto; su un campo tradotto `Null`
-// e' la parola tedesca per «zero», e rifiutarla fa pubblicare il testo IT
-// sotto `/de/` (#831). Solo la grafia SERIALIZZATA — minuscola, l'unica che
-// `String(null)`/`JSON.stringify(null)` producono — resta scartata ovunque.
-test('hasUsableTranslatedText: scarta solo la grafia serializzata, non il «Null» tedesco (#831)', () => {
+// Il predicato dei campi TRADOTTI deroga di proposito, ma SOLO dove `null` e'
+// una parola della lingua. Sulla sorgente (italiano) nessuna grafia di `null`
+// e' una parola, quindi rifiutarle tutte non puo' cancellare contenuto; su un
+// campo `de` `Null` e' la parola per «zero», e rifiutarla fa pubblicare il
+// testo IT sotto `/de/` (#831). Su en/fr — e senza locale — la deroga NON
+// vale: `Null`/`NULL` come testo intero non e' prosa, e lasciarlo passare
+// toglierebbe la recovery che #822 ha messo li'.
+test('hasUsableTranslatedText: la deroga al «Null» vale solo per de (#831)', () => {
   for (const v of ['null', ' null ', '"null"', "'null'", '" null "']) {
-    assert.equal(hasUsableTranslatedText(v), false, `${JSON.stringify(v)} e\' una serializzazione di null`);
+    for (const loc of ['de', 'en', 'fr', undefined]) {
+      assert.equal(hasUsableTranslatedText(v, loc), false, `${JSON.stringify(v)} e\' una serializzazione di null (${loc})`);
+    }
     assert.equal(hasUsableContentText(v), false, `${JSON.stringify(v)} non e\' contenuto nemmeno sulla sorgente`);
   }
-  for (const v of ['Null', 'NULL', '"Null"', 'Null Grad Celsius']) {
-    assert.equal(hasUsableTranslatedText(v), true, `${JSON.stringify(v)} e\' testo tradotto legittimo`);
+  for (const v of ['Null', 'NULL', '"Null"']) {
+    assert.equal(hasUsableTranslatedText(v, 'de'), true, `${JSON.stringify(v)} e\' testo tedesco legittimo`);
+    assert.equal(hasUsableTranslatedText(v, 'DE'), true, `il locale e\' case-insensitive: ${JSON.stringify(v)}`);
+    for (const loc of ['en', 'fr', 'it', undefined]) {
+      assert.equal(hasUsableTranslatedText(v, loc), false, `${JSON.stringify(v)} non e\' prosa in ${loc}: resta un campo mancante`);
+    }
+  }
+  // Il `Null` DENTRO una frase non e' il caso limite di nessuno dei due
+  // predicati: passa in ogni locale, perche' non e' il testo INTERO.
+  for (const loc of ['de', 'en', 'fr', undefined]) {
+    assert.equal(hasUsableTranslatedText('Null Grad Celsius', loc), true, `testo reale in ${loc}`);
   }
   // Sulla sorgente il predicato NON si e' allentato: `Null`/`NULL` restano
   // scartati li', altrimenti #822 si riaprirebbe dal lato del payload IT.
@@ -182,7 +194,7 @@ test('hasUsableTranslatedText: scarta solo la grafia serializzata, non il «Null
     assert.equal(hasUsableContentText(v), false, `${JSON.stringify(v)} deve restare scartato sul payload sorgente`);
   }
   for (const v of ['', '   ', null, undefined, 42, {}]) {
-    assert.equal(hasUsableTranslatedText(v), false, `${JSON.stringify(v)} non e\' una stringa non vuota`);
+    assert.equal(hasUsableTranslatedText(v, 'de'), false, `${JSON.stringify(v)} non e\' una stringa non vuota`);
   }
 });
 

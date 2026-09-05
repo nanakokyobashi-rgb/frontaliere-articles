@@ -47,17 +47,20 @@ const NAV_SENTINEL_RE = /0NAV(\d+)0/g;
  * e nei feed RSS. Fallendo CHIUSI qui il campo si legge come mancante e la
  * recovery per-campo (retry mirato -> fallback IT) lo recupera.
  *
- * Il predicato e' quello dei campi TRADOTTI: solo la forma serializzata
- * (`null` minuscolo) e' scartata, perche' `Null` maiuscolo e' la parola
- * tedesca per «zero» e scartarla farebbe pubblicare il testo IT sotto `/de/`
- * (#831).
+ * Il predicato e' quello dei campi TRADOTTI, ed e' PER LOCALE: su `de` solo la
+ * forma serializzata (`null` minuscolo) e' scartata, perche' `Null` maiuscolo
+ * e' la parola tedesca per «zero» e scartarla farebbe pubblicare il testo IT
+ * sotto `/de/` (#831). Su en/fr — e quando il chiamante non passa il locale —
+ * vale la regola severa: `Null`/`NULL` non e' prosa, resta un campo mancante e
+ * la recovery per-campo lo ripara.
  *
  * @param {unknown} value raw field value as parsed from the model's JSON
+ * @param {string} [targetLang] locale del campo tradotto ('en' | 'de' | 'fr')
  * @returns {string|null} the string, or null when it is anything else / blank
  *          / the literal serialization of `null`
  */
-export function translatedStringOrNull(value) {
-  return hasUsableTranslatedText(value) ? value : null;
+export function translatedStringOrNull(value, targetLang) {
+  return hasUsableTranslatedText(value, targetLang) ? value : null;
 }
 
 /**
@@ -70,13 +73,14 @@ export function translatedStringOrNull(value) {
  *
  * @param {unknown[]} results  per-chunk parsed JSON objects
  * @param {string} bodyKey     'body1' | 'body2' | 'body3'
+ * @param {string} [targetLang] locale dei chunk tradotti ('en' | 'de' | 'fr')
  * @returns {string|null}
  */
-export function joinTranslatedChunks(results, bodyKey) {
+export function joinTranslatedChunks(results, bodyKey, targetLang) {
   if (!Array.isArray(results) || results.length === 0) return null;
   const parts = [];
   for (const r of results) {
-    const part = translatedStringOrNull(r?.[bodyKey]);
+    const part = translatedStringOrNull(r?.[bodyKey], targetLang);
     if (part === null) return null;
     parts.push(part);
   }
@@ -165,9 +169,9 @@ export async function translateFieldFreeMt({
   // Stesso predicato del percorso LLM sui campi tradotti: un motore MT che
   // restituisce la stringa serializzata `"null"` (o un non-stringa) deve
   // leggersi come "nessuna traduzione" e cedere alla recovery per-campo, non
-  // essere pubblicato. `Null` maiuscolo, invece, e' una traduzione DE valida
-  // («zero») e resta (#831).
-  if (!hasUsableTranslatedText(out)) return '';
+  // essere pubblicato. `Null` maiuscolo resta solo dove e' una parola, cioe'
+  // su `targetLang === 'de'` («zero»); su en/fr e' scartato come prima (#831).
+  if (!hasUsableTranslatedText(out, targetLang)) return '';
   let restored = String(out);
   if (expected > 0) {
     const r = restore(restored);
