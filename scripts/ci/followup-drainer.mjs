@@ -433,6 +433,14 @@ export const ZERO_WORK = new Set(['rate-limited']);
 // successivo o trova l'item seguente (altra PR, altro `pr-created`) o non
 // trova più niente da fare ed emette `already-fixed`/`no-root-cause`, che sono
 // `NON_RETRYABLE` → park. Il bound è il verdetto del fixer, non il contatore.
+//
+// ATTENZIONE: questo insieme NON basta da solo a riconoscere la consegna. Sia
+// il marker sia «nessuna PR aperta» sono stati PERSISTENTI della issue —
+// il primo sopravvive a ogni run successiva, il secondo non distingue il merge
+// dalla chiusura senza merge. Il ramo va sempre qualificato con
+// `isDeliveredThisRun`, che lo scopa alla run corrente (promozione → marker →
+// merge) e restituisce il caso alla strada a tentativo consumato quando una
+// delle tre condizioni manca.
 export const DELIVERED = new Set(['pr-created']);
 
 const FIX_OUTCOME_RE = /<!--\s*FIX_OUTCOME:\s*([a-z0-9-]+)\s*-->/i;
@@ -443,12 +451,19 @@ const FIX_OUTCOME_RE = /<!--\s*FIX_OUTCOME:\s*([a-z0-9-]+)\s*-->/i;
 const BACKSTOP_MARKER = 'post-step deterministico';
 
 /**
- * Codice dell'ULTIMO marker FIX_OUTCOME (commento più recente) di una lista di
- * commenti, o null. Pura (niente gh) → testabile. Ignora i fallback del
- * backstop così solo i verdetti autentici del fixer contano.
+ * ULTIMO marker FIX_OUTCOME (commento più recente) di una lista di commenti,
+ * con il suo timestamp: `{ outcome, at }`, entrambi `null` se non c'è.
+ * Pura (niente gh) → testabile. Ignora i fallback del backstop così solo i
+ * verdetti autentici del fixer contano.
+ *
+ * Il timestamp serve a scopare il verdetto alla RUN CORRENTE: il marker è uno
+ * stato PERSISTENTE della issue e sopravvive a tutte le run successive, quindi
+ * senza `at` un `pr-created` vecchio resta «l'ultimo verdetto» anche dopo una
+ * run crashata che un verdetto non l'ha mai emesso (vedi `isDeliveredThisRun`).
  * @param {Array<{body?: string, createdAt?: string}>} comments
+ * @returns {{outcome: string|null, at: number|null}}
  */
-export function latestFixOutcomeFromComments(comments) {
+export function latestFixOutcomeEntryFromComments(comments) {
   let latest = null;
   let latestAt = -Infinity;
   for (const c of comments || []) {
@@ -469,7 +484,70 @@ export function latestFixOutcomeFromComments(comments) {
     // in ordine di lista (i commenti gh sono cronologici).
     if (!Number.isNaN(at) && at >= latestAt) { latestAt = at; latest = m[1].toLowerCase(); }
   }
+  return { outcome: latest, at: latest === null ? null : latestAt };
+}
+
+/** Solo il CODICE dell'ultimo marker (la forma che usano i chiamanti a cui il
+ * timestamp non serve). Wrapper di `latestFixOutcomeEntryFromComments`. */
+export function latestFixOutcomeFromComments(comments) {
+  return latestFixOutcomeEntryFromComments(comments).outcome;
+}
+
+/** Timestamp (epoch ms) dell'ULTIMA aggiunta di `label` nella timeline eventi
+ * di una issue, o null se non compare. Pura → testabile.
+ * `event === 'labeled'` (REST `issues/N/events`); i `created_at` illeggibili
+ * vengono ignorati, non azzerati.
+ * @param {Array<{event?: string, label?: {name?: string}, created_at?: string, createdAt?: string}>} events
+ */
+export function lastLabelEventAt(events, label) {
+  let latest = null;
+  for (const e of events || []) {
+    if (e?.event !== 'labeled') continue;
+    if (String(e?.label?.name || '') !== label) continue;
+    const at = Date.parse(e?.created_at ?? e?.createdAt);
+    if (Number.isNaN(at)) continue;
+    if (latest === null || at >= latest) latest = at;
+  }
   return latest;
+}
+
+/**
+ * Il ramo DELIVERED vale per la run CORRENTE? Pura → testabile.
+ *
+ * `DELIVERED` non può leggersi su `outcome` + «nessuna PR aperta» soli: sono
+ * entrambi stati PERSISTENTI della issue. Il marker sopravvive a ogni run
+ * successiva, e `hasFixPR` interroga `--state open`, quindi «nessuna PR aperta»
+ * copre allo stesso modo il MERGE e la chiusura SENZA merge. Presi così,
+ * dopo la prima consegna ogni run morta su quella issue diventerebbe gratuita:
+ * `fu-attempt` non salirebbe mai più e `park-attempts` — l'UNICA uscita dei
+ * crawler, che non passano né dal parked-retry né dall'age-out — non si
+ * raggiungerebbe mai. Tre condizioni, tutte necessarie:
+ *
+ *  1. `promotedAt` leggibile — è l'evento label `agent:fix` che apre la run
+ *     corrente. Illeggibile (glitch gh) → NIENTE gratuità: si ricade sul ramo
+ *     a tentativo consumato, che è il comportamento bounded pre-esistente.
+ *  2. marker DELIVERED emesso DOPO quella promozione — un `pr-created` del
+ *     ciclo precedente non è un verdetto di questa run. È esattamente la
+ *     classe di run (crashata / cancellata in coda / mai partita) che un
+ *     verdetto non lo emette per definizione: deve restare a tentativo
+ *     consumato, o non ha più nessun bound di terminazione.
+ *  3. una PR fix MERGIATA dopo la promozione — «nessuna PR aperta» da sola
+ *     include la PR chiusa senza merge (rifiutata, superata, chiusa a mano),
+ *     dove non è atterrato NIENTE: la premessa del ramo («la run ha
+ *     consegnato, quindi il ciclo successivo è progresso») lì è falsa.
+ *
+ * Con le tre condizioni il bound dichiarato è vero: ogni re-queue gratuito
+ * costa al ciclo successivo una NUOVA promozione, un NUOVO marker e un NUOVO
+ * merge. Il bound è il verdetto del fixer, non il contatore.
+ *
+ * @param {{outcome: string|null, outcomeAt: number|null, mergedAt: number|null, promotedAt: number|null}} args
+ */
+export function isDeliveredThisRun({ outcome, outcomeAt, mergedAt, promotedAt } = {}) {
+  if (!outcome || !DELIVERED.has(outcome)) return false;
+  if (!Number.isFinite(promotedAt)) return false;
+  if (!Number.isFinite(outcomeAt) || outcomeAt < promotedAt) return false;
+  if (!Number.isFinite(mergedAt) || mergedAt < promotedAt) return false;
+  return true;
 }
 
 // --- WORKFLOW-SCOPE PRE-FLIGHT (escalation #1724) ---------------------------
@@ -1770,6 +1848,10 @@ export const CRAWLER_MAX_ATTEMPTS = Number(process.env.FOLLOWUP_CRAWLER_MAX_ATTE
  *     è la prova che la run è TERMINATA (il fixer lo posta in chiusura), quindi
  *     qui la guardia d'età non serve e agire subito preserva il timing del park
  *     `max-turns` che c'era prima di questo blocco.
+ *  4-bis. DELIVERED (`pr-created`) scopato alla RUN CORRENTE via
+ *     `isDeliveredThisRun`: promozione + marker + merge di questo ciclo → ri-arma
+ *     senza consumare il tentativo. Se una delle tre condizioni manca il caso
+ *     scende ai rami sotto, che il tentativo lo consumano.
  *  5. settling: solo con `outcome === null` per costruzione (vedi
  *     `isSettlingPromotion`) — promozione fresca, run non ancora visibile in
  *     `gh run list`: rinvia il drain di un tick, non toccare la issue.
@@ -1779,6 +1861,7 @@ export const CRAWLER_MAX_ATTEMPTS = Number(process.env.FOLLOWUP_CRAWLER_MAX_ATTE
  *     partita → ri-arma con tentativo consumato, park al tetto.
  *
  * @param {{outcome: string|null, ageMin: number, attempt?: number, hasPR?: boolean,
+ *          outcomeAt?: number|null, mergedAt?: number|null, promotedAt?: number|null,
  *          quotaBackoffActive?: boolean, settleMin?: number, orphanMinAgeMin?: number,
  *          maxAttempts?: number}} args
  * @returns {{action: 'skip'|'settling'|'hold-quota'|'requeue'|'requeue-zero-work'|'requeue-delivered'|'park-max-turns'|'park-verdict'|'park-attempts', nextAttempt: number, reason: string}}
@@ -1788,6 +1871,9 @@ export function crawlerFixDecision({
   ageMin,
   attempt = 0,
   hasPR = false,
+  outcomeAt = null,
+  mergedAt = null,
+  promotedAt = null,
   quotaBackoffActive = false,
   settleMin = SETTLE_MIN,
   orphanMinAgeMin = ORPHAN_MIN_AGE_MIN,
@@ -1808,8 +1894,14 @@ export function crawlerFixDecision({
   // Gemello del ramo DELIVERED del rescue queue-managed: `hasPR` sopra guarda
   // solo le PR APERTE, quindi al merge una run riuscita ricadeva nel ramo
   // finale «nessun verdetto (run cancellata-in-coda / crashata / mai partita)»
-  // e consumava un tentativo. Ri-arma senza consumarlo.
-  if (outcome && DELIVERED.has(outcome)) return keep('requeue-delivered', `${outcome}, PR non più aperta (tentativo NON consumato)`);
+  // e consumava un tentativo. Ri-arma senza consumarlo — ma SOLO se marker e
+  // merge appartengono alla run corrente (`isDeliveredThisRun`). Qui è
+  // critico: i crawler non passano né dal parked-retry né dall'age-out, quindi
+  // `park-attempts` sotto è la loro UNICA uscita, e un `pr-created` stantio che
+  // rendesse gratuita ogni run morta successiva gliela toglierebbe del tutto.
+  if (isDeliveredThisRun({ outcome, outcomeAt, mergedAt, promotedAt })) {
+    return keep('requeue-delivered', `${outcome}, PR fix mergiata in questo ciclo (tentativo NON consumato)`);
+  }
   if (isSettlingPromotion({ outcome: outcome ?? null, ageMin, settleMin })) return keep('settling', 'promozione fresca, run non ancora visibile');
   if (ageMin < orphanMinAgeMin) return keep('skip', `senza verdetto ma giovane (${Math.round(ageMin)}min < ${orphanMinAgeMin}min)`);
   const nextAttempt = attempt + 1;
@@ -1855,6 +1947,49 @@ function issueCommentsRest(num) {
  * gh/parse → fail-open al rescue normale (mai park per un glitch API). */
 function latestFixOutcome(num) {
   return latestFixOutcomeFromComments(issueComments(num) || []);
+}
+
+/** Ultimo verdetto FIX_OUTCOME della issue CON il suo timestamp
+ * (`{outcome, at}`). Stessa sorgente di `latestFixOutcome`, forma che serve a
+ * `isDeliveredThisRun` per scopare il marker alla run corrente. */
+function latestFixOutcomeEntry(num) {
+  return latestFixOutcomeEntryFromComments(issueComments(num) || []);
+}
+
+/** Epoch ms dell'ultima promozione (`agent:fix` aggiunta) di questa issue, o
+ * null su errore gh / evento assente. Il null è fail-CLOSED per il ramo
+ * DELIVERED: senza sapere quando è iniziata la run corrente non si può
+ * dichiarare che il marker appartiene a lei, e regalare il re-queue su un
+ * glitch API toglierebbe l'unico bound di terminazione. `--paginate` perché la
+ * timeline eventi di una issue lavorata dal ciclo supera facilmente le 30
+ * voci di default e la promozione più recente è in fondo. */
+function fixPromotedAt(num) {
+  try {
+    const events = gh(['api', `repos/${REPO}/issues/${num}/events?per_page=100`, '--paginate']);
+    return lastLabelEventAt(Array.isArray(events) ? events : [], LBL_FIX);
+  } catch {
+    return null;
+  }
+}
+
+/** Epoch ms del merge più recente di una PR fix (`fix/issue-N`), o null se
+ * nessuna è mai stata MERGIATA (o su errore gh). `--state merged` e non
+ * l'assenza di PR aperte: una PR chiusa SENZA merge non ha fatto atterrare
+ * niente, e `hasFixPR` (`--state open`) non le distingue. Fail-safe a null =
+ * nessuna gratuità, cioè il ramo bounded pre-esistente. */
+function mergedFixPrAt(num) {
+  try {
+    const prs = gh(['pr', 'list', '--repo', REPO, '--head', `fix/issue-${num}`, '--state', 'merged', '--json', 'mergedAt', '--limit', '20']);
+    let latest = null;
+    for (const pr of Array.isArray(prs) ? prs : []) {
+      const at = Date.parse(pr?.mergedAt);
+      if (Number.isNaN(at)) continue;
+      if (latest === null || at > latest) latest = at;
+    }
+    return latest;
+  } catch {
+    return null;
+  }
 }
 
 /** Beacon di quota sulla issue (epoch di reset), o null. Best-effort. */
@@ -2485,7 +2620,8 @@ export function runDrain() {
     // rinviava l'intero drain di un tick a vuoto (bug osservato 2026-07-05:
     // #3578 max-turns con commento a 16:35:59 → il drain di 16:36 lo conta come
     // settling e rinvia la promozione del prossimo candidato in coda).
-    const outcome = latestFixOutcome(iss.number);
+    const outcomeEntry = latestFixOutcomeEntry(iss.number);
+    const outcome = outcomeEntry.outcome;
     if (isSettlingPromotion({ outcome, ageMin, settleMin: SETTLE_MIN })) { settlingPromotions++; continue; } // registrazione run
     if (ageMin < ORPHAN_MIN_AGE_MIN) continue; // fix finito senza PR ma non ancora orfano → non bloccare il drain
     // vecchio + nessuna PR → orfano. Ma «nessuna PR» ha due cause diverse:
@@ -2533,16 +2669,32 @@ export function runDrain() {
       continue;
     }
     if (outcome && DELIVERED.has(outcome)) {
-      // Run conclusa CON una PR, e la PR non è più aperta (`hasPR` sopra è
-      // false → mergiata o chiusa). La issue è ancora aperta perché la PR ha
-      // usato `Refs` e non `Closes`: aggregata (un item per ciclo) o
-      // `awaiting-production-proof`. Il ciclo successivo è legittimo — è il
-      // modo in cui un'aggregata converge — ma NON deve costare un tentativo:
-      // `fu-attempt` conta i fallimenti, e tre consegne riuscite parcheggiavano
-      // la issue (#733, due merge e `fu-attempt:2`).
-      console.log(`RE-QUEUE #${iss.number} (${outcome}, PR non più aperta) → tentativo NON consumato (la run ha consegnato)`);
-      edit(iss.number, { add: [LBL_QUEUED], remove: [LBL_FIX] });
-      continue;
+      // Run conclusa CON una PR, e quella PR è stata MERGIATA in questo ciclo.
+      // La issue è ancora aperta perché la PR ha usato `Refs` e non `Closes`:
+      // aggregata (un item per ciclo) o `awaiting-production-proof`. Il ciclo
+      // successivo è legittimo — è il modo in cui un'aggregata converge — ma
+      // NON deve costare un tentativo: `fu-attempt` conta i fallimenti, e tre
+      // consegne riuscite parcheggiavano la issue (#733, due merge e
+      // `fu-attempt:2`).
+      //
+      // Le tre condizioni di `isDeliveredThisRun` sono ciò che tiene il ramo
+      // legato alla run corrente invece che allo stato persistente della
+      // issue: senza, un `pr-created` del ciclo precedente renderebbe gratuita
+      // ogni run morta successiva (il contatore non salirebbe mai più) e una
+      // PR chiusa SENZA merge otterrebbe il re-queue di una consegna che non
+      // c'è stata. Se manca anche solo una, si prosegue verso i rami sotto,
+      // che il tentativo lo consumano — cioè il comportamento bounded di prima.
+      if (isDeliveredThisRun({
+        outcome,
+        outcomeAt: outcomeEntry.at,
+        mergedAt: mergedFixPrAt(iss.number),
+        promotedAt: fixPromotedAt(iss.number),
+      })) {
+        console.log(`RE-QUEUE #${iss.number} (${outcome}, PR fix mergiata in questo ciclo) → tentativo NON consumato (la run ha consegnato)`);
+        edit(iss.number, { add: [LBL_QUEUED], remove: [LBL_FIX] });
+        continue;
+      }
+      console.log(`#${iss.number}: marker ${outcome} NON scopato alla run corrente (marker stantio o nessun merge di questo ciclo) → rescue normale, tentativo consumato`);
     }
     // error_max_turns = turn-budget esaurito in modo DETERMINISTICO: ri-tentare
     // lo stesso item lo riproduce a parità di turni. Con il circuit-breaker
@@ -2604,11 +2756,19 @@ export function runDrain() {
   //    dove la sesta run cancellata alle 09:02 NON era un crawler.
   for (const iss of crawlerFix) {
     const hasPR = hasFixPR(iss.number);
-    const outcome = hasPR ? null : latestFixOutcome(iss.number);
+    const entry = hasPR ? { outcome: null, at: null } : latestFixOutcomeEntry(iss.number);
+    const outcome = entry.outcome;
     const attempt = attemptOf(iss);
     const prevAttemptLabel = attempt ? `fu-attempt:${attempt}` : null;
+    // Le due letture extra servono SOLO a qualificare il ramo DELIVERED, che è
+    // raro: calcolarle solo lì tiene il costo gh del pass invariato su tutti
+    // gli altri esiti.
+    const delivered = outcome !== null && DELIVERED.has(outcome);
     const d = crawlerFixDecision({
       outcome,
+      outcomeAt: entry.at,
+      mergedAt: delivered ? mergedFixPrAt(iss.number) : null,
+      promotedAt: delivered ? fixPromotedAt(iss.number) : null,
       ageMin: minutesSince(iss.updatedAt),
       attempt,
       hasPR,
