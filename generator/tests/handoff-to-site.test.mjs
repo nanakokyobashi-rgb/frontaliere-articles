@@ -81,6 +81,16 @@ test('no-root-cause con un path `identical` è il caso mirror, e si spedisce', (
   assert.match(d.reason, /mirror/);
 });
 
+test('si spediscono i soli path BLOCCATI, non tutti quelli citati', () => {
+  // `NRC_MIRROR_BODY` cita anche `scripts/ci/loop-sync-manifest.json`, che il
+  // fixer nomina come PROVA e non come file da cambiare. Elencarlo di là sotto
+  // «path del sito» manderebbe il ciclo del sito a toccare un file che il
+  // mirror non condivide — rumore in una consegna che esiste per essere precisa.
+  const d = handoffDecision({ verdict: 'no-root-cause', body: NRC_MIRROR_BODY, lockedPaths: LOCKED });
+  assert.deepEqual(d.paths, ['scripts/ci/followup-drainer.mjs']);
+  assert.ok(extractSitePaths(NRC_MIRROR_BODY).includes('scripts/ci/loop-sync-manifest.json'));
+});
+
 test('no-root-cause SENZA path bloccati dal mirror resta un vicolo cieco', () => {
   // Il falso positivo misurato il 2026-09-04: #694 cita path `adapted` e
   // corpus-only, cioè lavoro NOSTRO. Spedirlo aprirebbe una issue inutile sul

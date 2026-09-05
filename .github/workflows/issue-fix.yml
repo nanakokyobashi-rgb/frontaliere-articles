@@ -525,6 +525,19 @@ jobs:
       # + il nome del repo del sito + almeno un path citato), ed e' la congiunzione
       # a selezionare 4 casi su 4 senza falsi: i due `blocked-workflows-scope`
       # locali (#529, #547) NON vengono spediti.
+      #
+      # Dal 2026-09-05 (#316) il verdetto instradabile non e' piu' solo un
+      # `blocked-*`: `no-root-cause` puo' portare la stessa forma. Su #316 il
+      # fixer lo ha emesso DIECI volte fra il 2026-08-14 e il 2026-09-03 con la
+      # causa trovata e riconfermata ogni volta — `isQueueManaged` in
+      # `scripts/ci/followup-drainer.mjs` — fermandosi perche' quel file e'
+      # `mode: identical` nel manifest. Non un vicolo cieco: il mirror.
+      # `no-root-cause` resta pero' ambiguo dove i `blocked-*` non lo sono,
+      # perche' copre ANCHE il vicolo cieco vero, quindi per lui la terza
+      # condizione e' il MANIFEST (almeno un path citato con `mode: identical`)
+      # al posto del nome del repo in prosa. La regola vive per intero in
+      # `handoffDecision`, non qui: questo commento la descrive e non la
+      # duplica, ed e' `generator/tests/handoff-to-site.test.mjs` a inchiodarla.
       - name: Consegna al sito la diagnosi che vive di la' (zero-Claude)
         if: always() && steps.quota.outputs.quota_blocked != 'true' && steps.claim.outputs.in_flight != 'true'
         continue-on-error: true

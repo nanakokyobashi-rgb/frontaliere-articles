@@ -208,9 +208,15 @@ export function handoffDecision({ verdict, body, lockedPaths } = {}) {
         reason: 'no-root-cause senza path `identical` nel manifest: vicolo cieco, non lato sbagliato del mirror',
       };
     }
+    // Si spediscono i SOLI path bloccati, non tutti quelli citati. Una diagnosi
+    // di questa forma nomina anche i file NOSTRI che ha esaminato per escluderli
+    // (`classify-issue.mjs` e' `adapted`, `loop-sync-manifest.json` e' la prova):
+    // elencarli di la' sotto «path del sito» direbbe al ciclo del sito di
+    // cambiare file che il mirror non condivide. Il corpo integrale della
+    // diagnosi viaggia comunque sotto, quindi il contesto non si perde.
     return {
       handoff: true,
-      paths,
+      paths: blocked,
       reason: `diagnosi bloccata dal mirror su ${blocked.join(', ')}`,
     };
   }
