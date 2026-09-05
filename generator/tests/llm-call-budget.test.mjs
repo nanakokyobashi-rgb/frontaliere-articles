@@ -344,8 +344,22 @@ test('③ la memo del classifier e sicura rispetto alla concorrenza: memoizza la
   // La chiave deve restare la stessa di prima, separatore NUL compreso:
   // cambiarla svuoterebbe la memo senza che nulla lo dica.
   assert.match(CODE, /function preSpendGateCacheKey\(headline, sourceUrl\) \{/);
-  assert.ok(
-    CODE.includes('.toLowerCase().trim()} ${classifierSourceHint('),
+  // Il separatore si verifica per CODEPOINT, non per grafia. Prima questa
+  // assertion portava il byte NUL LETTERALE nel proprio sorgente, quindi
+  // rendeva binario per grep anche questo file di test oltre a pretendere
+  // quella singola grafia in `create-article.mjs` — dove lo stesso byte
+  // nascondeva 922 KB di codice di produzione a ogni audit basato su grep.
+  // La regex accetta il byte crudo e le due forme escapate; il valore
+  // e' poi risolto e confrontato con U+0000, cosi' un `\\u0001` scritto per
+  // sbaglio resta rosso.
+  const sep = CODE.match(
+    /\.toLowerCase\(\)\.trim\(\)\}(\\u0000|\\x00|[\s\S])\$\{classifierSourceHint\(/,
+  );
+  assert.ok(sep, 'la chiave di memo non ha piu\' la forma attesa');
+  const risolto = sep[1].startsWith('\\') ? String.fromCharCode(parseInt(sep[1].slice(2), 16)) : sep[1];
+  assert.equal(
+    risolto.codePointAt(0),
+    0,
     'il separatore NUL della chiave di memo e cambiato',
   );
 });

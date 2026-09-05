@@ -422,7 +422,16 @@ export function normalizeItalianContentFromPayload(payload, locale = 'it', field
     for (const candidate of candidates) {
       if (!candidate || typeof candidate !== 'object') continue;
       let raw = typeof candidate[field] === 'string' ? candidate[field].trim() : '';
-      if (isLiteralNullString(raw)) raw = '';
+      // `isNullStringForLocale` e non `isLiteralNullString`: questo campo e'
+      // prosa di un modello che sta scrivendo in `locale`, cioe' il ramo
+      // «prosa» della regola di provenienza scritta piu' sopra — e il
+      // normalizzatore deve obbedire alla regola come ogni altro call-site,
+      // non farne eccezione. Finche' il gate di valle passava sempre `'it'`
+      // il difetto era irraggiungibile; da quando riceve `primaryLocale`, un
+      // `content.de.title` che vale `Null` — la parola tedesca — si sarebbe
+      // letto come campo assente e il payload sarebbe potuto diventare un
+      // abort. Su `'it'` i due predicati coincidono: byte-identico oggi.
+      if (isNullStringForLocale(raw, locale)) raw = '';
       if (raw) { value = raw; break; }
     }
     if (value) hasAnyField = true;

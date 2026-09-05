@@ -660,7 +660,14 @@ const _preSpendGateCache = new Map();
 // guardia `if (cacheKey)` in scrittura testi esattamente la stessa emptiness
 // che testa quella in lettura: una chiave " " verrebbe scritta e mai riletta.
 function preSpendGateCacheKey(headline, sourceUrl) {
-  return `${String(headline || '').toLowerCase().trim()} ${classifierSourceHint(sourceUrl).toLowerCase()}`.trim();
+  // `\u0000` e non il byte NUL LETTERALE: il separatore vale identico a
+  // runtime, ma un NUL nel sorgente rende l'INTERO file binario per grep e
+  // rg (`binary file matches`, zero righe), cioe' 922 KB di codice di
+  // produzione invisibili a ogni audit cross-file che non passi `-a`. Ha
+  // gia' prodotto un «non c'e' alcun call site da aggiornare» falso su
+  // un'altra PR di questo giro. Il separatore RESTA: toglierlo farebbe
+  // collidere le chiavi (`ab`+`c` e `a`+`bc` diventerebbero la stessa memo).
+  return `${String(headline || '').toLowerCase().trim()}\u0000${classifierSourceHint(sourceUrl).toLowerCase()}`.trim();
 }
 
 // Esegue `fn` su `items` con al massimo `limit` chiamate in volo, preservando
