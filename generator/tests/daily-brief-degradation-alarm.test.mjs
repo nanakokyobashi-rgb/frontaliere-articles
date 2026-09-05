@@ -28,10 +28,18 @@ import { fileURLToPath } from 'node:url';
 import {
   reportDegradationAlarms,
   readPreviousSnapshot,
+  readDegradationState,
+  writeDegradationState,
   DEGRADATION_CROSSED_OUTPUT,
   DEGRADATION_BLOCKS_OUTPUT,
+  DEGRADATION_STATE_PATH,
 } from '../scripts/refresh-daily-brief-data.mjs';
-import { MAX_CONSECUTIVE_DEGRADED_EDITIONS } from '../scripts/lib/daily-brief-data.mjs';
+import {
+  MAX_CONSECUTIVE_DEGRADED_EDITIONS,
+  buildDailyBrief,
+  degradationAlarms,
+  degradationState,
+} from '../scripts/lib/daily-brief-data.mjs';
 
 const REPO_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
 const WORKFLOW_PATH = path.join(REPO_ROOT, '.github', 'workflows', 'generate-daily-brief.yml');
@@ -257,4 +265,110 @@ test('an unreadable previous snapshot restarts the count instead of stopping the
   const good = path.join(dir, 'good.json');
   writeFileSync(good, JSON.stringify(briefWithStreak(2)));
   assert.equal(readPreviousSnapshot(good).blocks.jobs.degradedEditions, 2);
+});
+
+
+// ── The streak ledger, `data/daily-brief-degradation.json` (issue #885) ──────
+//
+// The streak used to live ONLY inside the snapshot, and the 0/4-blocks branch
+// deliberately does not write the snapshot: yesterday's copy stays on disk so
+// nothing downstream reads a fabricated empty day. So a total blackout re-read
+// the same `previous` every morning, recomputed the same streak of 1, and the
+// threshold was never reached — the one outage shape the alarm exists for was
+// the one it could not see. The streaks now ride in a sidecar that IS written
+// on that branch.
+
+/** A blackout day: every source down, so 0/4 blocks. */
+function blackout(todayIso, previous) {
+  return buildDailyBrief({
+    todayIso,
+    nowMs: Date.parse(`${todayIso}T05:05:00Z`),
+    borderWaitDocs: null,
+    fuelMetadata: null,
+    exchangeDoc: null,
+    jobsStats: null,
+    previous,
+  });
+}
+
+test('a total blackout advances the streak day after day and reaches the threshold', () => {
+  // The regression itself. Only the LEDGER survives each day (the snapshot is
+  // not written), so the loop feeds back exactly what production would read.
+  let state = null;
+  const streaks = [];
+  for (const day of ['2026-09-05', '2026-09-06', '2026-09-07', '2026-09-08']) {
+    const brief = blackout(day, state);
+    assert.equal(brief.counts.availableBlocks, 0, `${day} must be a 0/4 day`);
+    streaks.push(brief.blocks.jobs.degradedEditions);
+    state = degradationState(brief);
+  }
+  assert.deepEqual(streaks, [1, 2, 3, 4], 'the count must move, not stick at 1 forever');
+});
+
+test('the blackout crossing is a verdict exactly once, on the day it crosses', () => {
+  let state = null;
+  const crossings = [];
+  for (const day of ['2026-09-05', '2026-09-06', '2026-09-07', '2026-09-08']) {
+    const brief = blackout(day, state);
+    const alarms = degradationAlarms(brief, state);
+    crossings.push(alarms.filter((a) => a.crossed).length);
+    state = degradationState(brief);
+  }
+  assert.deepEqual(
+    crossings,
+    [0, 0, 4, 0],
+    'silence, silence, all four blocks cross together, then the alarm keeps talking without re-arming the red',
+  );
+});
+
+test('a same-day rerun of a blackout inherits the streak instead of adding to it', () => {
+  // The ledger carries `dateIso` for exactly this: a workflow_dispatch rerun is
+  // not another edition, and without the date it would double-count.
+  const first = blackout('2026-09-05', { dateIso: '2026-09-04', blocks: { jobs: { degradedEditions: 2 } } });
+  assert.equal(first.blocks.jobs.degradedEditions, 3);
+  const rerun = blackout('2026-09-05', degradationState(first));
+  assert.equal(rerun.blocks.jobs.degradedEditions, 3, 'a rerun of the same day must not count twice');
+});
+
+test('the ledger carries only what the readers read, for every block', () => {
+  const state = degradationState(blackout('2026-09-05', null));
+  assert.equal(state.dateIso, '2026-09-05');
+  assert.deepEqual(Object.keys(state.blocks).sort(), ['borderWait', 'exchange', 'fuel', 'jobs']);
+  for (const [name, b] of Object.entries(state.blocks)) {
+    assert.deepEqual(b, { degradedEditions: 1 }, `${name} must carry its streak and nothing else`);
+  }
+});
+
+test('the ledger wins over the snapshot, and an absent or corrupt one falls back to it', () => {
+  const dir = mkdtempSync(path.join(tmpdir(), 'daily-brief-state-'));
+  const snapshot = path.join(dir, 'daily-brief.json');
+  const ledger = path.join(dir, 'degradation.json');
+  writeFileSync(snapshot, JSON.stringify(briefWithStreak(2)));
+
+  // No ledger yet — the first run after this landed must inherit the snapshot's
+  // count rather than restart every streak from zero.
+  assert.equal(readDegradationState(ledger, snapshot).blocks.jobs.degradedEditions, 2);
+
+  writeFileSync(ledger, '{ not json');
+  assert.equal(readDegradationState(ledger, snapshot).blocks.jobs.degradedEditions, 2, 'a corrupt ledger falls back, it does not stop the refresh');
+
+  writeDegradationState(briefWithStreak(5), ledger);
+  assert.equal(readDegradationState(ledger, snapshot).blocks.jobs.degradedEditions, 5, 'the ledger is the source once it exists');
+  assert.equal(readDegradationState(ledger, path.join(dir, 'absent.json')).blocks.jobs.degradedEditions, 5);
+  assert.equal(readDegradationState(path.join(dir, 'absent.json'), path.join(dir, 'absent.json')), null);
+});
+
+test('the workflow commits the ledger, or the streak dies on the runner', () => {
+  // Non-negotiable #6 again: the path lives in the script and is staged in
+  // YAML, which cannot import it. Without this `git add` the 0/4 branch writes
+  // the ledger to a runner that is thrown away, and the fix is a no-op.
+  const yml = readFileSync(WORKFLOW_PATH, 'utf-8');
+  const rel = path.relative(REPO_ROOT, DEGRADATION_STATE_PATH).split(path.sep).join('/');
+  assert.equal(rel, 'data/daily-brief-degradation.json');
+  const commitStep = yml.slice(yml.indexOf('- name: Commit and push'));
+  assert.ok(commitStep.includes(`git add public/data/daily-brief.json`), 'the snapshot is still staged');
+  assert.ok(
+    commitStep.slice(0, commitStep.indexOf('git diff --cached')).includes(rel),
+    'the streak ledger must be staged by the commit step',
+  );
 });
