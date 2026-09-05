@@ -74,7 +74,18 @@ test('la run 31817957722 (pareggio 53/53, 38 rifiuti su taglia) NON e\' un diffe
   assert.equal(err.transientExhaustion, true, 'la premessa del difetto: il voto dice transitorio');
   assert.equal(isInputCapDeferralVeto(err), true, 'il veto deve vincere sul voto');
   const s = inputCapVetoSummary(err);
-  assert.deepEqual(s, { estimatedRequestTokens: 9740, maxSkippedReqLimit: 8000, over: 1740, refusals: 38 });
+  assert.deepEqual(s, {
+    estimatedRequestTokens: 9740,
+    maxSkippedReqLimit: 8000,
+    over: 1740,
+    refusals: 38,
+    // I secchi su cui il veto ha DAVVERO deciso (#856): senza echi di cooldown
+    // nel breakdown il netto e' il lordo, byte per byte.
+    transient: 53,
+    persistent: 53,
+    providerCooldownSkips: 0,
+    echoDominated: false,
+  });
 });
 
 test('senza rifiuti su taglia il pareggio continua a differire (comportamento invariato)', () => {
@@ -97,6 +108,149 @@ test('il transitorio che domina STRETTAMENTE differisce anche con rifiuti su tag
   assert.equal(isInputCapDeferralVeto(productionExhaustionError({ transient: 54, persistent: 53 })), false);
   // ...e un solo voto in meno lo riporta al rosso: e' la soglia, non un'euristica.
   assert.equal(isInputCapDeferralVeto(productionExhaustionError({ transient: 53, persistent: 53 })), true);
+});
+
+// ── 1bis. GLI ECHI DI COOLDOWN NON VOTANO (issue #856) ─────────────────────
+
+/**
+ * La forma della run 31823202761 con la ripartizione degli echi che
+ * `classifyExhaustionCause` popola da #805: 11 delle 53 righe transitorie sono
+ * lo stesso guasto di provider, ripetuto una volta per id fratello.
+ */
+function echoingExhaustionError({
+  transient = 53,
+  persistent = 52,
+  total = 106,
+  echo = { total: 11, transient: 11, persistent: 0 },
+  capCount = 38,
+} = {}) {
+  const err = new Error('All AI models failed. Chain: [...]. Errors: ...');
+  err.code = 'ALL_MODELS_EXHAUSTED';
+  err.exhaustionBreakdown = { transient, persistent, total, providerCooldownSkips: echo };
+  err.inputCapReport = { count: capCount, maxSkippedReqLimit: 8000, minSkippedReqLimit: 3000, estimatedRequestTokens: 9740 };
+  return err;
+}
+
+test('la run 31823202761 (53 vs 52 LORDI, 11 echi transitori) e\' un veto al netto', () => {
+  const err = echoingExhaustionError();
+  // La premessa del difetto: sui secchi lordi la maggioranza transitoria esiste
+  // — per UN voto — e concedeva il differimento su una cascata in cui 38 righe
+  // sono rifiuti su taglia, che nessuna finestra di quota rimpicciolisce.
+  assert.equal(err.exhaustionBreakdown.transient > err.exhaustionBreakdown.persistent, true);
+  assert.equal(isInputCapDeferralVeto(err), true, 'gli echi di un solo guasto non devono comprare un differimento');
+  const s = inputCapVetoSummary(err);
+  assert.equal(s.transient, 42, 'la diagnostica deve riportare il secchio NETTO su cui si e\' deciso');
+  assert.equal(s.persistent, 52);
+  assert.equal(s.providerCooldownSkips, 11, 'quante righe sono state tolte, cosi\' il lordo resta ricostruibile');
+  assert.equal(s.echoDominated, false);
+});
+
+test('la polarita\' resta invariata sul campione netto: pareggio al persistente', () => {
+  // 53 vs 53 al netto (64 - 11): pareggio → veto, come senza echi.
+  assert.equal(
+    isInputCapDeferralVeto(echoingExhaustionError({ transient: 64, persistent: 53, total: 117 })),
+    true,
+    'il pareggio continua a passare al PERSISTENTE',
+  );
+  // 54 vs 53 al netto (65 - 11): maggioranza STRETTA → nessun veto.
+  assert.equal(
+    isInputCapDeferralVeto(echoingExhaustionError({ transient: 65, persistent: 53, total: 118 })),
+    false,
+    'il transitorio che domina strettamente al netto differisce ancora',
+  );
+});
+
+test('un breakdown senza `providerCooldownSkips` vota come prima (retro-compatibilita\' #805)', () => {
+  // Un errore serializzato prima di #805, o un mock che non popola il campo,
+  // deve ottenere il verdetto di oggi byte per byte: 53 > 52 → nessun veto.
+  const legacy = echoingExhaustionError({ echo: undefined });
+  delete legacy.exhaustionBreakdown.providerCooldownSkips;
+  assert.equal(isInputCapDeferralVeto(legacy), false);
+});
+
+test('il voto non passa per `total`: un totale incoerente non toglie il veto', () => {
+  // `deferralTally` clampa il persistente a `netTotal - netTransient` perche'
+  // fa un quoziente; quel clamp toglie righe al SOLO secchio che il veto
+  // difende. Qui `total: 60` contraddice 50 + 60: sul tally il persistente
+  // scenderebbe a 10 → maggioranza transitoria → nessun veto, dove i due
+  // secchi dicono 50 vs 60 → veto. Il confronto si fa sui due secchi.
+  const inconsistent = echoingExhaustionError({
+    transient: 50,
+    persistent: 60,
+    total: 60,
+    echo: { total: 0, transient: 0, persistent: 0 },
+  });
+  assert.equal(isInputCapDeferralVeto(inconsistent), true, 'un `total` incoerente non puo\' comprare un differimento');
+  const s = inputCapVetoSummary(inconsistent);
+  assert.equal(s.transient, 50);
+  assert.equal(s.persistent, 60, 'il secchio persistente non viene sgonfiato dal totale');
+});
+
+test('un breakdown SENZA `total` vota sui due secchi, non su zero', () => {
+  // Serializzato prima che `total` esistesse, o un mock parziale: `netTotal` e'
+  // 0 e azzererebbe entrambi i secchi, cioe' un pareggio 0-0 → veto, dove
+  // 53 > 52 dice differimento. La retro-compatibilita' vale anche qui.
+  const noTotal = echoingExhaustionError();
+  delete noTotal.exhaustionBreakdown.total;
+  delete noTotal.exhaustionBreakdown.providerCooldownSkips;
+  assert.equal(isInputCapDeferralVeto(noTotal), false, '53 > 52 resta una maggioranza transitoria');
+  // ...e con gli echi ripartiti la sottrazione funziona lo stesso, senza
+  // denominatore: 42 vs 52 → veto.
+  const noTotalEchoes = echoingExhaustionError();
+  delete noTotalEchoes.exhaustionBreakdown.total;
+  assert.equal(isInputCapDeferralVeto(noTotalEchoes), true, 'gli echi si tolgono per secchio, non per totale');
+  assert.equal(inputCapVetoSummary(noTotalEchoes).echoDominated, false);
+});
+
+test('quando gli echi sono la MAGGIORANZA la sottrazione non toglie il veto da sola', () => {
+  // 12 host irraggiungibili veri + 81 echi persistenti + 13 timeout su 106
+  // righe: al netto sarebbe 13 vs 12 → maggioranza transitoria → nessun veto,
+  // dove il lordo 13 vs 93 dice veto. Dodici host che rifiutano la connessione
+  // non si curano a mezzanotte, e 38 rifiuti su taglia nemmeno.
+  const echoDominant = echoingExhaustionError({
+    transient: 13,
+    persistent: 93,
+    total: 106,
+    echo: { total: 81, transient: 0, persistent: 81 },
+  });
+  assert.equal(isInputCapDeferralVeto(echoDominant), true, 'la sottrazione puo\' confermare un verdetto, non ribaltarlo');
+  assert.equal(inputCapVetoSummary(echoDominant).echoDominated, true, 'la diagnostica deve dire che ha deciso il lordo');
+});
+
+test('gli echi AMBIGUI contano nel guardrail: la sottrazione non toglie il veto da sola', () => {
+  // 120 righe di skip da cooldown dichiarate, di cui 30 sole attribuite al
+  // persistente: le altre 90 sono echi che ne' `transientRe` ne' `persistentRe`
+  // hanno collocato — righe vere dello stesso guasto. Contando i soli echi
+  // attribuiti il guardrail non entra (30 > 80 e' falso) e il netto 50 vs 30
+  // toglie DA SOLO il veto che il lordo 50 vs 60 metteva, cioe' il differimento
+  // su una cascata con rifiuti su taglia: il ciclo infinito di #313.
+  const ambiguousEchoes = echoingExhaustionError({
+    transient: 50,
+    persistent: 60,
+    total: 200,
+    echo: { total: 120, transient: 0, persistent: 30 },
+  });
+  assert.equal(
+    isInputCapDeferralVeto(ambiguousEchoes),
+    true,
+    'gli echi dichiarati sono la maggioranza delle prove: decide il lordo, 50 vs 60 → veto',
+  );
+  const s = inputCapVetoSummary(ambiguousEchoes);
+  assert.equal(s.echoDominated, true, 'la diagnostica usa la STESSA condizione del guardrail');
+  assert.equal(
+    s.transient + s.persistent + s.providerCooldownSkips,
+    50 + 60,
+    'i due secchi lordi restano ricostruibili: gli ambigui non sono usciti da nessuno dei due',
+  );
+  // ...e il guardrail CONFERMA quando il lordo e il netto concordano: qui 90 vs
+  // 60 al lordo e 60 vs 30 al netto dicono entrambi maggioranza transitoria.
+  const echoesAgree = echoingExhaustionError({
+    transient: 90,
+    persistent: 60,
+    total: 200,
+    echo: { total: 120, transient: 30, persistent: 30 },
+  });
+  assert.equal(isInputCapDeferralVeto(echoesAgree), false, 'il guardrail non inventa un veto che nessuno dei due campioni mette');
 });
 
 test('un errore che non e\' una cascata svuotata non viene mai vetato', () => {

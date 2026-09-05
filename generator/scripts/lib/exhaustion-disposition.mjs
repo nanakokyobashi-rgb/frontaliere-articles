@@ -72,6 +72,22 @@ export const EXIT_ROSTER_CANNOT_SERVE_PROMPT = 3;
  * finche' nessuno lo accorcia la condizione e' stabile per costruzione. Il
  * falso rosso costa una issue; il falso verde e' costato dieci ore di silenzio.
  *
+ * SU QUALI NUMERI SI VOTA (issue #856). Sui secchi al NETTO degli echi di
+ * cooldown, non su quelli lordi. Un solo guasto di provider — un 429, o un host
+ * che smette di rispondere — lascia una riga di skip per ogni id fratello
+ * servito da quell'host, ~11-12 su un roster da ~106: non sono fallimenti
+ * indipendenti, sono lo stesso guasto contato dodici volte, e votavano qui
+ * dentro una maggioranza che si decide per uno o due voti. Sulla run
+ * 31823202761 (transient 53, persistent 52, di cui 11 echi TRANSITORI) il lordo
+ * dava 53 > 52 → nessun veto → differimento concesso su una cascata che il
+ * netto legge 42 contro 52. Lo stesso errore veniva misurato su due campioni
+ * diversi: `isLegitimateQuotaDeferral` al netto (#805), questo al lordo.
+ *
+ * La POLARITA' non cambia: pareggio al persistente, deciso da #357/#767. Cambia
+ * solo il campione — ed e' esattamente ciò che `isTransientMajority` esprime,
+ * col `tie` a parametro e la sottrazione presa da `deferralTally`, una sorgente
+ * sola invece di una copia dell'aritmetica clampata (AGENTS.md #6).
+ *
  * @param {unknown} err l'errore risalito fino al catch di primo livello
  * @returns {boolean} true → uscire con EXIT_ROSTER_CANNOT_SERVE_PROMPT
  */
@@ -81,28 +97,48 @@ export function isInputCapDeferralVeto(err) {
   const cap = err.inputCapReport;
   if (!cap || typeof cap !== 'object') return false;
   if (!(Number(cap.count) > 0)) return false;
-  const breakdown = err.exhaustionBreakdown || {};
-  const transient = Number(breakdown.transient) || 0;
-  const persistent = Number(breakdown.persistent) || 0;
-  // Il pareggio passa al PERSISTENTE: `>` e non `>=` — esattamente il confronto
-  // di classifyExhaustionCause, invertito sul solo caso di parita'.
-  return !(transient > persistent);
+  return !isTransientMajority(err.exhaustionBreakdown, { tie: 'persistent' });
 }
 
 /**
  * La riga che dice al chiamante DI QUANTO tagliare. Separata dal predicato
  * perche' il numero e' l'unica cosa azionabile e non deve dipendere dal fatto
  * che qualcuno legga il messaggio lungo.
+ *
+ * Riporta anche i DUE SECCHI SU CUI IL VETO HA DAVVERO DECISO — quelli netti —
+ * e quante righe sono state tolte, per la stessa ragione per cui lo fa
+ * `quotaDeferralShare`: una diagnostica che spiega un verdetto diverso da
+ * quello preso smette di essere letta. Sono i DUE SECCHI del voto — quelli di
+ * `echoBuckets`, senza i clamp sul totale che `deferralTally` mette sopra per
+ * il suo quoziente — quindi `transient + persistent + providerCooldownSkips`
+ * ricostruisce esattamente i due secchi lordi.
  */
 export function inputCapVetoSummary(err) {
   const cap = (err && err.inputCapReport) || {};
   const est = Number(cap.estimatedRequestTokens) || 0;
   const best = Number(cap.maxSkippedReqLimit) || 0;
+  const buckets = echoBuckets(err && err.exhaustionBreakdown);
+  const removed = buckets.echoTransient + buckets.echoPersistent;
   return {
     estimatedRequestTokens: est,
     maxSkippedReqLimit: best,
     over: est - best,
     refusals: Number(cap.count) || 0,
+    transient: buckets.netTransient,
+    persistent: buckets.netPersistent,
+    // Le righe tolte AI DUE SECCHI, cosi' che `transient + persistent +
+    // providerCooldownSkips` ricostruisca i due secchi lordi. Gli echi ambigui
+    // non sono usciti da qui — non erano in nessuno dei due — ma contano per il
+    // flag sotto, che e' un'altra domanda.
+    providerCooldownSkips: removed,
+    // Quando gli echi sono la maggioranza il voto ricade sui numeri LORDI (vedi
+    // isTransientMajority): senza questo flag la riga potrebbe mostrare due
+    // secchi netti che non sono quelli che hanno deciso. La condizione e' la
+    // STESSA del guardrail, massa di echi DICHIARATA compresa: una diagnostica
+    // che ricopia una versione indebolita del predicato dichiara «sottrazione
+    // affidabile» proprio sulle run in cui non lo era.
+    echoDominated: Math.max(removed, buckets.echoTotalReported)
+      > buckets.netTransient + buckets.netPersistent,
   };
 }
 
@@ -221,7 +257,30 @@ export const QUOTA_DEFERRAL_MIN_TRANSIENT_SHARE = 0.5;
  * @param {unknown} breakdown `err.exhaustionBreakdown`
  * @returns {{transient:number,persistent:number,ambiguous:number,total:number,providerCooldownSkips:number}}
  */
-function deferralTally(breakdown) {
+/**
+ * ── I DUE SECCHI DEL VOTO, SENZA IL TOTALE DI MEZZO ─────────────────────────
+ *
+ * La sottrazione degli echi PER SECCHIO, e nient'altro: la sorgente unica sia
+ * del quoziente (`deferralTally`, che ci mette sopra i suoi clamp sul totale)
+ * sia del confronto di maggioranza (`isTransientMajority`, che NON deve
+ * vederli).
+ *
+ * PERCHE' SEPARATI. `deferralTally` clampa `netPersistent` a
+ * `netTotal - netTransient`, e deve: fa un quoziente, e un `total` incoerente
+ * col resto non puo' comprare sconti sul denominatore. Ma quel clamp toglie
+ * righe al SOLO persistente, cioe' esattamente nella direzione che TOGLIE il
+ * veto — e il veto non ha un denominatore da difendere. Con
+ * `{transient: 50, persistent: 60, total: 60}` il tally da' 50 vs 10 →
+ * maggioranza transitoria → nessun veto, dove i due secchi dicono 50 vs 60 →
+ * veto → exit 3. Speculare e nella direzione opposta: senza `total`, `netTotal`
+ * e' 0 e AZZERA entrambi i secchi, cioe' `{transient: 53, persistent: 52}`
+ * (breakdown serializzato prima di #805, o un mock) passerebbe da «nessun veto»
+ * a «veto». Un confronto fra due secchi si fa sui due secchi.
+ *
+ * @param {unknown} breakdown `err.exhaustionBreakdown`
+ * @returns {{transient:number,persistent:number,total:number,echoTransient:number,echoPersistent:number,netTransient:number,netPersistent:number}}
+ */
+function echoBuckets(breakdown) {
   const b = (breakdown && typeof breakdown === 'object') ? breakdown : {};
   const transient = Math.max(0, Number(b.transient) || 0);
   const persistent = Math.max(0, Number(b.persistent) || 0);
@@ -229,8 +288,35 @@ function deferralTally(breakdown) {
   const echo = (b.providerCooldownSkips && typeof b.providerCooldownSkips === 'object')
     ? b.providerCooldownSkips
     : {};
+  // Clampati al proprio secchio: un `echo.transient` piu' grande del secchio
+  // che dice di descrivere e' un campo rotto, e non puo' togliere righe che
+  // non ci sono.
   const echoTransient = Math.min(Math.max(0, Number(echo.transient) || 0), transient);
   const echoPersistent = Math.min(Math.max(0, Number(echo.persistent) || 0), persistent);
+  return {
+    transient,
+    persistent,
+    total,
+    echoTransient,
+    echoPersistent,
+    // La massa di echi DICHIARATA, non quella attribuita: `classifyExhaustionCause`
+    // incrementa `total` per ogni riga di skip e i due secchi solo quando la
+    // `skipPhrase` matcha, quindi la differenza sono gli echi AMBIGUI — righe
+    // vere, dello stesso guasto, che nessuna delle due regex ha collocato. Chi
+    // deve decidere «gli echi sono la maggioranza delle prove» le conta; chi
+    // sottrae dai secchi no, perche' non sa da quale sottrarle.
+    echoTotalReported: Math.max(0, Number(echo.total) || 0),
+    netTransient: transient - echoTransient,
+    netPersistent: persistent - echoPersistent,
+  };
+}
+
+function deferralTally(breakdown) {
+  const b = (breakdown && typeof breakdown === 'object') ? breakdown : {};
+  const { transient, persistent, total, echoTransient, echoPersistent } = echoBuckets(breakdown);
+  const echo = (b.providerCooldownSkips && typeof b.providerCooldownSkips === 'object')
+    ? b.providerCooldownSkips
+    : {};
   // La parte di `echo.total` NON ripartita fra i due secchi e' fatta di echi
   // AMBIGUI, e deve stare nella massa ambigua — non nel totale. Clamparla al
   // totale la lascia uscire dal solo DENOMINATORE, che e' l'unico modo di
@@ -263,6 +349,69 @@ function deferralTally(breakdown) {
     total: netTotal,
     providerCooldownSkips: echoTotal,
   };
+}
+
+/**
+ * ── IL VOTO DI MAGGIORANZA AL NETTO, CON LA POLARITA' A PARAMETRO (#855) ────
+ *
+ * L'unica sorgente del confronto «transitorio contro persistente» per chi deve
+ * votare sui secchi al netto degli echi di cooldown. Esiste perche' la
+ * sottrazione di `deferralTally` — clamp per secchio, echi non attribuiti,
+ * guardrail di maggioranza — e' aritmetica delicata, e riscriverla in ogni
+ * consumatore significa un clamp giusto qui e sbagliato la', su un errore che
+ * decide l'exit code di produzione (AGENTS.md #6).
+ *
+ * `tie` NON e' una manopola: e' la polarita' gia' decisa altrove, resa
+ * esplicita. `'transient'` e' il `>=` di `classifyExhaustionCause`;
+ * `'persistent'` e' l'inversione sul solo pareggio che #357 ha introdotto per
+ * `isInputCapDeferralVeto`, dove una cascata con ≥1 rifiuto su taglia non puo'
+ * differire in parita'. Chi chiama sceglie la sua, nessuno la cambia.
+ *
+ * IL GUARDRAIL HA LA STESSA RAGIONE DI QUELLO DI `isLegitimateQuotaDeferral` —
+ * quando le righe tolte sono piu' di quelle rimaste, la sottrazione decide su
+ * un campione che e' in maggioranza il guasto che sta rimuovendo, quindi puo'
+ * CONFERMARE il verdetto lordo ma non ribaltarlo da sola — e la stessa massa di
+ * echi al numeratore: quella DICHIARATA da `providerCooldownSkips.total`,
+ * ambigui compresi.
+ *
+ * MA NON LO STESSO DENOMINATORE, ed e' deliberato. La' e' `> total`, perche' un
+ * quoziente ha un denominatore da difendere e gli ambigui ci vivono dentro; qui
+ * e' `> netTransient + netPersistent`, perche' un confronto fra due secchi non
+ * ha totale, e usarlo renderebbe il guardrail INERTE su un breakdown senza
+ * `total` (serializzato prima di #805, o un mock parziale) — cioe' proprio dove
+ * il campione e' meno affidabile. La divergenza sta tutta li': stessa nozione
+ * di «gli echi sono la maggioranza delle prove», misurata contro le prove che
+ * ciascuno dei due predicati usa davvero.
+ *
+ * @param {unknown} breakdown `err.exhaustionBreakdown`
+ * @param {{tie?: 'transient'|'persistent'}} [options] a chi va il pareggio
+ * @returns {boolean} true → il transitorio e' la maggioranza al netto
+ */
+export function isTransientMajority(breakdown, options = {}) {
+  const tie = (options && options.tie === 'persistent') ? 'persistent' : 'transient';
+  const wins = (transient, persistent) => (
+    tie === 'persistent' ? transient > persistent : transient >= persistent
+  );
+  const buckets = echoBuckets(breakdown);
+  if (!wins(buckets.netTransient, buckets.netPersistent)) return false;
+  // Il guardrail conta le righe DI QUESTO voto: gli echi DICHIARATI contro
+  // quelli rimasti nei due secchi. Il denominatore sono i due secchi netti —
+  // non `providerCooldownSkips > total` del tally, che porterebbe dentro il
+  // totale dalla porta di servizio ed e' inerte su un breakdown senza `total`,
+  // cioe' proprio dove il campione e' meno affidabile. Il numeratore invece e'
+  // la massa PIENA, ambigui compresi: contare i soli echi attribuiti renderebbe
+  // il guardrail cieco esattamente dove serve. Con `{transient: 50,
+  // persistent: 60, total: 200, providerCooldownSkips: {total: 120,
+  // persistent: 30}}` le righe di eco sono 120 contro 80 rimaste — il campione
+  // e' in maggioranza il guasto che sta rimuovendo — ma i soli 30 attribuiti
+  // direbbero «sottrazione affidabile» e il netto 50 vs 30 toglierebbe DA SOLO
+  // il veto che il lordo 50 vs 60 metteva: il differimento su `cap.count > 0`,
+  // cioe' il ciclo infinito di #313.
+  const removed = Math.max(buckets.echoTransient + buckets.echoPersistent, buckets.echoTotalReported);
+  if (removed > buckets.netTransient + buckets.netPersistent) {
+    return wins(buckets.transient, buckets.persistent);
+  }
+  return true;
 }
 
 function passesShare(transient, total) {
