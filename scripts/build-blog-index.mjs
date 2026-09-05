@@ -72,6 +72,14 @@ const SECTIONS = [
  *
  * Ora e' derivato dal corpus su disco a ogni run (`scripts/lib/corpus-floors.mjs`),
  * quindi scala da solo e non ha una taratura che scade.
+ *
+ * LANCIA quando il corpus sorgente della sezione non c'e', e il chiamante lo
+ * tratta come un rifiuto: un derivato a 0 e' un gate che sparisce, e registro
+ * (`content/blog-articles-data.ts`) e corpi (`content/blog-body/it`) stanno
+ * entrambi sotto `content/`, quindi un solo `content/` non materializzato li
+ * azzera INSIEME. `readRegistry` in quel caso ritorna `[]` senza lanciare, e
+ * `0 < 0` e' falso: senza questa eccezione lo script scriverebbe e
+ * pubblicherebbe un indice VUOTO sopra quello live.
  */
 function sectionEntryFloor(section) {
   return sectionFloor(ROOT, section);
@@ -197,7 +205,14 @@ let failed = false;
 
 for (const section of SECTIONS) {
   const registry = readRegistry(section.registry);
-  const registryFloor = sectionEntryFloor(section.name);
+  let registryFloor;
+  try {
+    registryFloor = sectionEntryFloor(section.name);
+  } catch (err) {
+    console.error(`[blog-index] ${section.name}: ${err.message} — refusing to publish`);
+    failed = true;
+    continue;
+  }
   if (registry.length < registryFloor) {
     console.error(`[blog-index] ${section.name}: registry parsed to ${registry.length} entries (< ${registryFloor}, derived from the corpus on disk) — refusing to publish a truncated index`);
     failed = true;

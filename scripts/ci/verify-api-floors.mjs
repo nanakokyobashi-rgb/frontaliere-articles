@@ -29,7 +29,14 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
-import { floorFrom, countSourceArticles, countSourceImages } from '../lib/corpus-floors.mjs';
+import {
+  floorFrom,
+  countSourceArticles,
+  countSourceImages,
+  missingCorpusMessage,
+  SECTION_BODY_DIRS,
+  IMAGE_SOURCE_DIR,
+} from '../lib/corpus-floors.mjs';
 
 export const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
 
@@ -66,7 +73,16 @@ export function floorViolations(measured, expected, retention = undefined) {
 
   for (const [section, counter] of Object.entries(SECTION_COUNTERS)) {
     const source = expected.sourceArticles[section] ?? 0;
-    if (source === 0) continue; // sezione assente in sorgente: non e' un troncamento
+    // Corpus della sezione a zero: NON e' «niente da confrontare», e' il
+    // riferimento che manca. Saltare qui azzererebbe insieme questo pavimento,
+    // i dieci dei feed e quello delle immagini, e il verificatore uscirebbe 0
+    // con un messaggio affermativo su un artefatto arbitrariamente troncato —
+    // un livello sopra, esattamente la classe che questa PR chiude. Pubblicare
+    // `dist/api` da un checkout senza corpus non e' mai legittimo.
+    if (source === 0) {
+      violations.push(missingCorpusMessage(`manifest.counts.${counter}`, SECTION_BODY_DIRS[section]));
+      continue;
+    }
     const declared = measured.articleCounts[counter];
     if (typeof declared !== 'number') {
       violations.push(`manifest.counts.${counter} assente: il corpus sorgente ne tiene ${source}`);
@@ -86,7 +102,7 @@ export function floorViolations(measured, expected, retention = undefined) {
   for (const feed of measured.feeds) {
     const section = feedSection(feed.name);
     const source = expected.sourceArticles[section] ?? 0;
-    if (source === 0) continue;
+    if (source === 0) continue; // riferimento mancante: gia' segnalato una volta sopra
     const min = floor(Math.min(expected.rssMaxItems, source));
     if (feed.items < min) {
       violations.push(`${feed.name}: ${feed.items} <item> contro ${min} attesi — feed troncato`);
@@ -96,12 +112,19 @@ export function floorViolations(measured, expected, retention = undefined) {
   // `images-manifest.json` viene emesso SOLO se questo repo tiene immagini:
   // `null` significa non emesso, che e' valido (lo stesso ramo che lo YAML
   // gestisce con `-f`). Emesso, deve descrivere le immagini che ci sono.
-  if (measured.images !== null && expected.sourceImages > 0) {
-    const min = floor(expected.sourceImages);
-    if (measured.images < min) {
-      violations.push(
-        `images-manifest.json: ${measured.images} immagini contro ${expected.sourceImages} in public/images/blog (pavimento ${min})`,
-      );
+  if (measured.images !== null) {
+    // Emesso ma senza sorgente: stesso fail-open degli articoli. Il ramo
+    // `null` (manifest non emesso) resta valido — e' l'unico caso in cui non
+    // c'e' niente da confrontare.
+    if (expected.sourceImages === 0) {
+      violations.push(missingCorpusMessage('images-manifest.json', IMAGE_SOURCE_DIR));
+    } else {
+      const min = floor(expected.sourceImages);
+      if (measured.images < min) {
+        violations.push(
+          `images-manifest.json: ${measured.images} immagini contro ${expected.sourceImages} in ${IMAGE_SOURCE_DIR} (pavimento ${min})`,
+        );
+      }
     }
   }
 

@@ -34,7 +34,12 @@ import os from 'node:os';
 import { fileURLToPath } from 'node:url';
 import { dirname, join, resolve } from 'node:path';
 
-import { FLOOR_RETENTION, floorFrom, countSourceArticles } from '../../scripts/lib/corpus-floors.mjs';
+import {
+  FLOOR_RETENTION,
+  floorFrom,
+  countSourceArticles,
+  sectionFloor,
+} from '../../scripts/lib/corpus-floors.mjs';
 import {
   SECTION_COUNTERS,
   feedSection,
@@ -123,6 +128,70 @@ test('un feed troncato viene visto, e un feed corto per corpus corto no', () => 
     expected: { sourceArticles: { frontaliere: 10, svizzera: 10 }, sourceImages: 0, rssMaxItems: 50 },
   };
   assert.deepEqual(floorViolations(tiny.measured, tiny.expected), []);
+});
+
+/*
+ * IL SECONDO MODO DI FALLIRE, che il pavimento assoluto non aveva: il derivato
+ * e' corretto finche' il suo riferimento esiste, e diventa un no-op silenzioso
+ * quando non esiste. `floorFrom(0)` e' 0, e `x < 0` e' falso per qualunque `x`.
+ * Un solo `content/` non materializzato — checkout parziale, symlink del corpus
+ * non risolto — azzera insieme sorgente e artefatto, e il gate uscirebbe verde
+ * su un artefatto arbitrariamente troncato. `MIN_ENTRIES = 50` e `-lt 100`
+ * erano sbagliati ma INCONDIZIONATI: non potevano svuotarsi.
+ */
+test("corpus sorgente assente = violazione, non un pass silenzioso", () => {
+  const { measured } = healthy();
+  const noCorpus = { sourceArticles: { frontaliere: 0, svizzera: 0 }, sourceImages: 0, rssMaxItems: 50 };
+  // Artefatto arbitrariamente troncato: un articolo per sezione, feed a un item.
+  const truncated = {
+    articleCounts: { articles: 1, swissArticles: 1 },
+    feeds: [{ name: 'rss.xml', items: 1 }],
+    images: 1,
+  };
+  for (const m of [measured, truncated]) {
+    const violations = floorViolations(m, noCorpus);
+    assert.ok(violations.length >= 2, `un corpus assente non puo' uscire pulito: ${JSON.stringify(violations)}`);
+    assert.match(violations.join('\n'), /content[\\/]blog-body[\\/]it/);
+    assert.match(violations.join('\n'), /content[\\/]blog-body-ch[\\/]it/);
+  }
+});
+
+test("una sola sezione senza corpus e' segnalata una volta, e non spegne l'altra", () => {
+  const { measured, expected } = healthy();
+  const violations = floorViolations(measured, { ...expected, sourceArticles: { frontaliere: 3785, svizzera: 0 } });
+  assert.equal(violations.length, 1, 'il feed svizzera non deve aggiungere una seconda riga sullo stesso riferimento');
+  assert.match(violations[0], /manifest\.counts\.swissArticles/);
+  // I feed frontaliere restano gatati contro il loro corpus, che c'e'.
+  const alsoTruncated = { ...measured, feeds: [...measured.feeds, { name: 'rss-fr.xml', items: 2 }] };
+  assert.equal(
+    floorViolations(alsoTruncated, { ...expected, sourceArticles: { frontaliere: 3785, svizzera: 0 } }).length,
+    2,
+  );
+});
+
+test("images-manifest emesso senza public/images/blog e' una violazione", () => {
+  const { measured, expected } = healthy();
+  const violations = floorViolations(measured, { ...expected, sourceImages: 0 });
+  assert.equal(violations.length, 1);
+  assert.match(violations[0], /public[\\/]images[\\/]blog/);
+});
+
+test('sectionFloor lancia sul corpus assente invece di restituire un pavimento a zero', () => {
+  const root = fs.mkdtempSync(join(os.tmpdir(), 'corpus-floors-'));
+  assert.throws(() => sectionFloor(root, 'frontaliere'), /riferimento del pavimento assente/);
+
+  fs.mkdirSync(join(root, 'content/blog-body/it'), { recursive: true });
+  for (let i = 0; i < 10; i += 1) fs.writeFileSync(join(root, `content/blog-body/it/a${i}.ts`), 'export const body = "";');
+  assert.equal(sectionFloor(root, 'frontaliere'), floorFrom(10));
+  fs.rmSync(root, { recursive: true, force: true });
+});
+
+test('build-blog-index tratta il corpus assente come un rifiuto, non come un indice vuoto', () => {
+  assert.match(
+    BLOG_INDEX,
+    /catch \(err\)[\s\S]{0,200}failed = true/,
+    'sectionEntryFloor lancia: il chiamante deve fallire, non pubblicare',
+  );
 });
 
 test("images: manifest non emesso e' valido, manifest svuotato no", () => {
