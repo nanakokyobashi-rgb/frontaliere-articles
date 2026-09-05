@@ -45,6 +45,10 @@ import {
   formatRunLine,
   KNOWN_REASONS,
   PERSISTED_REASONS,
+  parseAggregateErrors,
+  pickDecidingSample,
+  deferralVerdicts,
+  formatVerdictLine,
 } from '../../scripts/ci/exhaustion-reason-report.mjs';
 
 const NOW = Date.parse('2026-08-13T14:30:00Z');
@@ -167,4 +171,162 @@ test('il sommario di un run pulito non riporta motivi', () => {
   assert.equal(s.distinctReasons, 0);
   assert.deepEqual(s.persistedModels, []);
   assert.match(formatRunLine(123, s), /run 123/);
+});
+
+
+// ── I DUE VOTI DI DEFERRAL, LORDO CONTRO NETTO (issue #854 / #821) ──────────
+//
+// Il resto di questo file copre le marcature di `markModelExhausted`. I due
+// predicati che decidono l'exit code di produzione leggono un ALTRO campione:
+// l'array `errors` del messaggio aggregato di `callLLM`. Il modo
+// `--deferral-verdicts` esiste per misurare quello, e questi casi sono
+// l'osservatore che impedisce alla misura di degradare in silenzio: se il
+// parser smette di leggere il messaggio aggregato, `flip: 0/40` è
+// indistinguibile da «nessun verdetto cambia» — la risposta sbagliata alla
+// domanda del punto 1 di #821, e per giunta rassicurante.
+
+/**
+ * La run 31823202761 (2026-08-14T17:45Z), ricomposta riga per riga nelle
+ * proporzioni misurate e citate in `exhaustion-disposition.mjs`:
+ *
+ *   transient  = 53   (di cui 11 echi di un solo cooldown di provider)
+ *   persistent = 52   (38 rifiuti su input cap, 12 «no API key», 2 × HTTP 404)
+ *   ambiguo    =  1
+ *   total      = 106
+ *
+ * Le righe sono quelle vere che `callLLM` mette in `errors`, non parafrasi: gli
+ * echi passano da `providerCooldownSkipLine`, quindi il test fallisce anche se
+ * a cambiare è la FORMA della riga invece del parser.
+ */
+function run31823202761Message() {
+  const errors = [];
+  for (let i = 0; i < 42; i++) errors.push(`github/model-${i}: 429 daily limit reached for this model`);
+  for (let i = 0; i < 11; i++) errors.push(`github/sibling-${i}: skipped — provider github cooling down (rate-limited)`);
+  for (let i = 0; i < 38; i++) errors.push(`or/model-${i}: request exceeds 8000 input cap (~9740 tokens estimated)`);
+  for (let i = 0; i < 12; i++) errors.push(`cerebras/model-${i}: no API key configured`);
+  errors.push('mistral/small: HTTP 404 model not found');
+  errors.push('together/qwen: HTTP 404 model not found');
+  errors.push('local/llama: empty response body');
+  return 'All AI models failed. Chain: [a → b]. Errors: ' + errors.join(' | ')
+    + ' | Prompt budget: 38 model(s) refused a ~9740-token request;'
+    + ' the most permissive cap among them is 8000 tokens (over by ~1740).'
+    + ' A retry must rebuild the prompt under 8000 tokens — resending the same messages cannot succeed.';
+}
+
+/** Il log come lo restituisce `gh run view --log`: righe prefissate da job/step/timestamp. */
+function asRunLog(message) {
+  return [
+    'generate\tGenerate the article\t2026-08-14T17:44:58.1234567Z 🚫 Model github/gpt-4o marked as exhausted (quota) — will be skipped for rest of run',
+    `generate\tGenerate the article\t2026-08-14T17:45:01.7654321Z ⚠️  Differito: tutti i modelli AI gratuiti sono temporaneamente esauriti (quota giornaliera). ${message}`,
+    'generate\tGenerate the article\t2026-08-14T17:45:02.0000000Z Post job cleanup.',
+  ].join('\n');
+}
+
+test('#854 — il campione del voto è il messaggio aggregato, e viene letto per intero', () => {
+  const samples = parseAggregateErrors(asRunLog(run31823202761Message()));
+  assert.equal(samples.length, 1, 'un solo messaggio aggregato in questo log');
+  const [s] = samples;
+  assert.equal(s.errors.length, 106, 'i 106 errori del tally, né uno in più né uno in meno');
+  assert.equal(s.capRefusals, 38, 'il gate che arma il veto è `inputCapReport.count`');
+  // Il report di budget NON deve entrare nella lista: è appeso con la stessa
+  // ' | ' che separa gli errori, e come 107° riga gonfierebbe il denominatore.
+  assert.ok(
+    s.errors.every((e) => !e.includes('Prompt budget')),
+    'la coda del report di budget non è un errore della cascata',
+  );
+});
+
+test('#854 — sulla run 31823202761 ENTRAMBI i verdetti cambiano fra lordo e netto', () => {
+  const v = deferralVerdicts(pickDecidingSample(asRunLog(run31823202761Message())));
+
+  // I secchi ricontati con le regex IMPORTATE da ai-models.mjs: se una delle
+  // due riformula, questi numeri si muovono qui invece che in produzione.
+  assert.equal(v.transient, 53);
+  assert.equal(v.persistent, 52);
+  assert.equal(v.ambiguous, 1);
+  assert.equal(v.total, 106);
+  assert.equal(v.echoTotal, 11, 'gli 11 fratelli saltati sono UN solo guasto di provider');
+  assert.equal(v.echoTransient, 11, 'e in una notte di quota vera votano TRANSITORIO');
+  assert.equal(v.netTransient, 42);
+  assert.equal(v.netPersistent, 52);
+  assert.equal(v.echoDominated, false, '11 echi su 94 righe rimaste non sono la maggioranza delle prove');
+
+  // 53 >= 52 → differimento concesso. UN VOTO, e undici di quei voti sono lo
+  // stesso guasto contato dodici volte.
+  assert.equal(v.grossTransientExhaustion, true);
+  // 42 >= 52 → falso. È il verdetto che cambia.
+  assert.equal(v.netTransientExhaustion, false);
+
+  // Il veto di #313: `!(transient > persistent)` con ≥1 rifiuto su taglia.
+  assert.equal(v.grossInputCapVeto, false, '53 > 52 al lordo → nessun veto → exit 0');
+  assert.equal(v.netInputCapVeto, true, '42 > 52 è falso al netto → veto → exit 3');
+
+  assert.equal(v.flipped, true);
+  const line = formatVerdictLine(31823202761, v);
+  assert.match(line, /FLIP/);
+  // `agg=` distingue «cascata svuotata su un errore solo» da «parser che ne ha
+  // letto uno su sette»: senza, un `tot=1` non è interpretabile.
+  assert.match(line, /agg=1\b/);
+  assert.match(line, /transientExhaustion L=si N=no/);
+  assert.match(line, /inputCapVeto L=no N=si/);
+});
+
+test('#854 — senza echi i due verdetti coincidono: il modo non inventa flip', () => {
+  const errors = [];
+  for (let i = 0; i < 60; i++) errors.push(`p/model-${i}: 429 daily limit reached`);
+  for (let i = 0; i < 40; i++) errors.push(`p/dead-${i}: no API key configured`);
+  const msg = `All AI models failed. Chain: [a]. Errors: ${errors.join(' | ')}`;
+  const v = deferralVerdicts(pickDecidingSample(asRunLog(msg)));
+  assert.equal(v.echoTotal, 0);
+  assert.equal(v.grossTransientExhaustion, v.netTransientExhaustion);
+  assert.equal(v.grossInputCapVeto, v.netInputCapVeto);
+  assert.equal(v.flipped, false, 'un flip su una cascata senza echi sarebbe la misura che misura sé stessa');
+  assert.doesNotMatch(formatVerdictLine('x', v), /FLIP/);
+});
+
+test('#854 — senza rifiuti su taglia il veto non è armato, da nessuna delle due parti', () => {
+  // Stesse proporzioni della run misurata, ma zero `Prompt budget:` → il gate
+  // `cap.count > 0` di isInputCapDeferralVeto non scatta. Riportare la sola
+  // maggioranza direbbe «il verdetto cambia» dove la produzione non cambia
+  // niente, ed è il modo in cui una misura diventa un allarme che nessuno legge.
+  const errors = [];
+  for (let i = 0; i < 42; i++) errors.push(`p/model-${i}: 429 daily limit reached`);
+  for (let i = 0; i < 11; i++) errors.push(`p/sib-${i}: skipped — provider github cooling down (rate-limited)`);
+  for (let i = 0; i < 52; i++) errors.push(`p/dead-${i}: no API key configured`);
+  const v = deferralVerdicts(pickDecidingSample(asRunLog(`All AI models failed. Chain: [a]. Errors: ${errors.join(' | ')}`)));
+  assert.equal(v.capRefusals, 0);
+  assert.equal(v.grossInputCapVeto, false);
+  assert.equal(v.netInputCapVeto, false);
+  // Ma il primo voto cambia lo stesso, e va visto.
+  assert.equal(v.grossTransientExhaustion, true);
+  assert.equal(v.netTransientExhaustion, false);
+  assert.equal(v.flipped, true);
+});
+
+test('#854 — il campione è l\'ULTIMO messaggio aggregato, quello risalito al catch', () => {
+  const first = 'All AI models failed. Chain: [a]. Errors: p/x: no API key configured';
+  const last = 'All AI models failed. Chain: [b]. Errors: p/y: 429 daily limit reached';
+  const log = `${asRunLog(first)}\n${asRunLog(last)}`;
+  assert.equal(parseAggregateErrors(log).length, 2);
+  assert.deepEqual(pickDecidingSample(log).errors, ['p/y: 429 daily limit reached']);
+});
+
+test('#854 — una run che non ha svuotato la cascata non ha un verdetto (e non è uno zero)', () => {
+  // `null` e non un campione vuoto: un campione vuoto entrerebbe nel
+  // denominatore di `flip: N/M` come «nessun cambiamento», che è esattamente
+  // la risposta rassicurante e falsa che questo modo esiste per evitare.
+  assert.equal(pickDecidingSample('generate\tstep\t2026-08-14T17:45:00Z Generated: true'), null);
+  assert.equal(pickDecidingSample(''), null);
+  assert.deepEqual(parseAggregateErrors(''), []);
+});
+
+test('#854 — `agg=` conta i messaggi aggregati della run, non solo quello che decide', () => {
+  const first = 'All AI models failed. Chain: [a]. Errors: p/x: 429 daily limit reached | p/y: no API key configured';
+  const last = 'All AI models failed. Chain: [b]. Errors: p/z: skipped — wall-clock deadline exceeded (timeout), aborted remaining chain (99 models left)';
+  const sample = pickDecidingSample(`${asRunLog(first)}\n${asRunLog(last)}`);
+  assert.equal(sample.aggregateCount, 2);
+  const v = deferralVerdicts(sample);
+  assert.equal(v.total, 1, 'il campione che decide è l\'ultimo, ed è povero');
+  assert.equal(v.aggregateCount, 2, 'ma la riga deve dire che povero non vuol dire unico');
+  assert.match(formatVerdictLine('x', v), /agg=2\b/);
 });

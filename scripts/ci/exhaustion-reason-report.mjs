@@ -69,6 +69,39 @@
  * persistenza senza scadenza nota è indistinguibile da un ban permanente su
  * prove nulle — il difetto che #203 descrive.
  *
+ * ## Il secondo campione, e cosa ha detto (issue #854, punto 1 di #821)
+ *
+ * Tutto quanto sopra aggrega le marcature di `markModelExhausted`. I due voti
+ * di maggioranza che decidono l'exit code di produzione leggono un ALTRO
+ * campione — l'array `errors` del messaggio aggregato di `callLLM` — e su
+ * quello questo report era cieco. `--deferral-verdicts` lo riconta con
+ * `classifyExhaustionCause` IMPORTATA, e stampa i due verdetti LORDO contro
+ * NETTO di `transientExhaustion` (il `>=` di ai-models.mjs) e di
+ * `isInputCapDeferralVeto` (il `!(>)` di exhaustion-disposition.mjs).
+ *
+ * MISURATO il 2026-09-05 su `generate-article.yml`, finestra post-#767 (merge
+ * 2026-09-04T09:47Z) — 60 run, di cui UNA sola con un messaggio aggregato:
+ *
+ *   run 33881660151   t=1 p=0 amb=0 tot=1  echi=0  →  flip: 0/1
+ *
+ * Allargando a 200 run (2026-09-03 → 09-05, a cavallo di #767) i confrontabili
+ * salgono a 2 e il flip resta 0/2: la seconda, 33833039330, è pre-#767 e ha la
+ * stessa forma degenere (una cascata da un solo modello, zero echi).
+ *
+ * LA LETTURA, che non è «il netto non cambia niente». È che la POPOLAZIONE su
+ * cui la domanda si può porre è ~1% delle run: la cascata quasi non si svuota
+ * più, e quando si svuota lo fa su una catena da un modello, dove echi di
+ * cooldown non ce ne sono per costruzione. Un `flip: 0/2` con quel denominatore
+ * non è una smentita del netto — è l'assenza di prove in un verso e nell'altro,
+ * e vale come tale nel punto 2 di #821. L'unica cascata piena mai misurata
+ * resta la 31823202761 (53/52/106, 11 echi), i cui log sono scaduti da tempo e
+ * che vive ora come fixture in
+ * `generator/tests/exhaustion-reason-report.test.mjs`: lì il flip è 1/1, ed è
+ * su ENTRAMBI i verdetti.
+ *
+ * Il modo va rigirato quando una notte di quota vera torna a svuotare il
+ * roster: è allora che il denominatore diventa informativo.
+ *
  * Zero rete, zero Claude, zero quota: legge testo di log già prodotto.
  *
  * Uso:
@@ -343,6 +376,7 @@ function transientExhaustionVerdict(breakdown) {
 export function deferralVerdicts(sample) {
   const errors = Array.isArray(sample && sample.errors) ? sample.errors : [];
   const capRefusals = Math.max(0, Number(sample && sample.capRefusals) || 0);
+  const aggregateCount = Math.max(1, Number(sample && sample.aggregateCount) || 1);
   const net = classifyExhaustionCause(errors);
   const gross = grossOf(net);
   const inputCapReport = capRefusals > 0 ? { count: capRefusals } : null;
@@ -366,6 +400,7 @@ export function deferralVerdicts(sample) {
     netPersistent: buckets.persistent,
     echoDominated: buckets.echoDominated,
     capRefusals,
+    aggregateCount,
     ...verdicts,
     flipped: verdicts.grossTransientExhaustion !== verdicts.netTransientExhaustion
       || verdicts.grossInputCapVeto !== verdicts.netInputCapVeto,
@@ -378,7 +413,7 @@ const si = (b) => (b ? 'si' : 'no');
 export function formatVerdictLine(runId, v) {
   return `run ${runId}  t=${v.transient} p=${v.persistent} amb=${v.ambiguous} tot=${v.total}`
     + `  echi=${v.echoTotal}(t${v.echoTransient}/p${v.echoPersistent})`
-    + `  netto=${v.netTransient}/${v.netPersistent}  cap=${v.capRefusals}`
+    + `  netto=${v.netTransient}/${v.netPersistent}  cap=${v.capRefusals}  agg=${v.aggregateCount}`
     + `  transientExhaustion L=${si(v.grossTransientExhaustion)} N=${si(v.netTransientExhaustion)}`
     + `  inputCapVeto L=${si(v.grossInputCapVeto)} N=${si(v.netInputCapVeto)}`
     + (v.echoDominated ? '  [echi-dominanti]' : '')
@@ -393,12 +428,20 @@ export function formatVerdictLine(runId, v) {
  * `null` quando la run non ne contiene nessuno — non è un difetto, è una run
  * che non ha svuotato la cascata, e va tenuta fuori dal denominatore.
  *
+ * `aggregateCount` viaggia col campione e finisce nella riga di report perché
+ * senza di esso un `tot=1` è ambiguo fra «la cascata si è svuotata su un solo
+ * errore» e «il parser ne ha letto uno su sette». Sulle run misurate il 2026-09-05
+ * è la prima: `agg=7 tot=1` dice che le sei cascate precedenti sono state
+ * riprese e che l'ultima si è chiusa sull'abort di wall-clock, non su un roster
+ * drenato — la differenza fra un campione povero e uno mancante.
+ *
  * Pura → testabile.
  * @param {string} text
  */
 export function pickDecidingSample(text) {
   const samples = parseAggregateErrors(text);
-  return samples.length ? samples[samples.length - 1] : null;
+  if (!samples.length) return null;
+  return { ...samples[samples.length - 1], aggregateCount: samples.length };
 }
 
 // ── CLI (sola lettura) ───────────────────────────────────────────────────────
