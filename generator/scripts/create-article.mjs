@@ -2786,6 +2786,15 @@ const PROJECT_ROOT = new URL('../..', import.meta.url).pathname.replace(/\/$/, '
 // (`services/locales/…` → `content/…`) instead of ~30 edited literals. See
 // lib/corpus-paths.mjs for why the mapping is an explicit table.
 function resolve(rel) {
+  // Un path GIA' assoluto esce invariato. `corpusPath()` restituisce
+  // inalterato cio' che non ha una regola, quindi senza questa riga il
+  // prefisso veniva concatenato comunque e un path assoluto atterrava in
+  // `<repo>/home/runner/…` — dentro il workspace che lo step di generazione
+  // porta in commit con `git add -A`, e in silenzio. La card ha aggirato il
+  // problema con `writeRunCard()`, ma il choke point resta condiviso:
+  // `CREATE_ARTICLE_REPORT_FILE` e' anch'essa una destinazione presa
+  // dall'ambiente e passa ancora di qui.
+  if (path.isAbsolute(rel)) return rel;
   return `${PROJECT_ROOT}/${corpusPath(rel)}`;
 }
 

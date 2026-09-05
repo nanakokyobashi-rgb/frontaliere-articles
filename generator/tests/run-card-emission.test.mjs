@@ -162,6 +162,22 @@ test('writeRunCard scrive esattamente al path assoluto ricevuto', () => {
 
 // ── 3. Il cablaggio: la card esce dal runner ────────────────────────────────
 
+test('un path assoluto non viene riscritto sotto il repo (CREATE_ARTICLE_REPORT_FILE)', () => {
+  // La card passa da `writeRunCard()` e non tocca piu' questo choke point, ma
+  // `resolve()` resta condiviso con l'altra destinazione presa dall'ambiente,
+  // `CREATE_ARTICLE_REPORT_FILE`: `${PROJECT_ROOT}/${corpusPath(rel)}` su un
+  // path assoluto produce `<repo>/home/runner/…`, che `git add -A` dello step
+  // di generazione porterebbe su main.
+  const src = read('generator/scripts/create-article.mjs');
+  const fn = src.match(/function resolve\(rel\) \{[\s\S]*?\n\}/);
+  assert.ok(fn, 'create-article.mjs deve avere il choke point resolve()');
+  assert.match(
+    fn[0],
+    /if \(path\.isAbsolute\(rel\)\) return rel;/,
+    'resolve() deve restituire invariato un path gia assoluto',
+  );
+});
+
 test('il reporter filtra per NOME dell artifact, non per file interno', () => {
   // `gh run download -p` matcha i nomi degli artifact. Un pattern sui file
   // (`run-card-*.json`) non matcha nulla, `gh` esce non-zero e ogni run finisce
