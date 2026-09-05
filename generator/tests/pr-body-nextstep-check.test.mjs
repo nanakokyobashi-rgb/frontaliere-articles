@@ -165,6 +165,29 @@ test('un `#N` di contesto non vale come stato, uno di tracciamento sì', () => {
   assert.equal(bulletState('fatto in questa PR').id, 'in-questa-pr');
 });
 
+test('«non in questa PR» è la negazione, non lo stato (#862)', () => {
+  // La voce che ha prodotto il 🔴 sulla PR #862: dichiarava lavoro ancora
+  // dovuto e il gate la leggeva come «già fatta», cioè restava verde proprio
+  // sul caso che esiste per prendere.
+  assert.equal(bulletState('Stato: non in questa PR'), null);
+  assert.equal(bulletState("Stato: non e' in questa PR"), null);
+  assert.equal(bulletState('Stato: non ancora in questa PR'), null);
+  // L'affermazione resta uno stato.
+  assert.equal(bulletState('Stato: in questa PR').id, 'in-questa-pr');
+  assert.equal(bulletState('già fatto in questa PR').id, 'in-questa-pr');
+});
+
+test('la voce che nega «in questa PR» non passa il gate (#862)', () => {
+  const res = checkNextStepStates(
+    withSection(['- Lavoro ancora dovuto, descritto per esteso. Stato: non in questa PR.']),
+  );
+  assert.equal(res.ok, true, 'senza scappatoia resta un avviso, non un blocco');
+  assert.equal(res.violations.length, 0);
+  assert.equal(res.advisories.length, 1);
+  assert.equal(res.advisories[0].type, 'no-literal-state');
+  assert.match(suggestedSection(withSection(['- Voce. Stato: non in questa PR.'])), /\*\*Stato:\*\*/);
+});
+
 test('`blocked` senza causa non è uno stato', () => {
   assert.equal(bulletState('il lavoro è blocked'), null);
   assert.equal(bulletState('Stato: blocked — quota Anthropic esaurita').id, 'blocked');

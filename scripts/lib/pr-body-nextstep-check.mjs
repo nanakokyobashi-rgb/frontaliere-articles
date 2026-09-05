@@ -82,8 +82,18 @@ const NON_IMPL_ANY_RE = /^[ \t]{0,3}#{2,3}[ \t]+Non[ \t]+implementato\b/im;
  * rileggere REVIEW.md, che e' il giro che questo gate esiste per evitare.
  */
 export const STATE_FORMS = [
-  // REVIEW.md, forma 1 — il lavoro e' gia' in questa PR.
-  { id: 'in-questa-pr', label: '`in questa PR`', re: /\bin questa PR\b/i },
+  // REVIEW.md, forma 1 — il lavoro e' gia' in questa PR. Il lookbehind scarta
+  // la NEGAZIONE: «Stato: non in questa PR» dichiara l'esatto contrario dello
+  // stato che questa forma ammette, e senza il lookbehind il gate la leggeva
+  // come «fatto», cioe' restava verde proprio sulla voce che esiste per
+  // prendere. La finestra di tre parole copre le forme reali della negazione
+  // («non in», «non e' in», «non ancora in questa PR») senza arrivare a
+  // catturare un `non` di una frase precedente.
+  {
+    id: 'in-questa-pr',
+    label: '`in questa PR`',
+    re: /(?<!\bnon\s(?:[\w'’]+\s+){0,3})\bin questa PR\b/i,
+  },
   // REVIEW.md, forma 2 — c'e' una PR/issue che lo prende in carico. Il
   // sostantivo di tracciamento DEVE stare accanto al ref: e' cio' che
   // distingue un piano da una citazione di contesto.
