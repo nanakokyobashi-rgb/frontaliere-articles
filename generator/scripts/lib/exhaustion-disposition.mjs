@@ -383,6 +383,56 @@ function deferralTally(breakdown) {
  * di «gli echi sono la maggioranza delle prove», misurata contro le prove che
  * ciascuno dei due predicati usa davvero.
  *
+ * ── DUE CONTROLLI CHE STANNO QUI DENTRO E NON NEI CHIAMANTI (#873) ─────────
+ *
+ * 1. IL PAVIMENTO DELLE PROVE NETTE. Con `netTransient + netPersistent == 0`
+ *    non e' rimasta UNA riga indipendente: ogni fallimento nei due secchi era
+ *    l'eco di un solo guasto. `{transient: 5, persistent: 0,
+ *    providerCooldownSkips: {transient: 5, total: 5}}` — cinque fratelli
+ *    saltati dallo stesso host — dava `wins(0, 0)` vero col pareggio al
+ *    transitorio, poi il guardrail (5 > 0) tornava al lordo 5 vs 0 e
+ *    CONFERMAVA: «maggioranza transitoria» su un campione netto VUOTO, cioe' il
+ *    differimento silenzioso di #313. Il pavimento e' la stessa affermazione
+ *    che `isLegitimateQuotaDeferral` fa con `total <= 0` («un guasto solo,
+ *    ripetuto, non e' la prova che aspettare aiuti») e assorbe la clausola
+ *    `transient > 0` del vecchio calcolo LORDO di `err.transientExhaustion`:
+ *    con entrambi i secchi netti a zero non c'e' maggioranza da dichiarare,
+ *    qualunque sia `tie`. Su `tie: 'persistent'` non cambia nulla — `wins(0, 0)`
+ *    era gia' falso col `>` stretto — quindi la polarita' di #357/#767 resta
+ *    intatta e il pavimento e' visibile solo al call site di #857.
+ *
+ * 2. LA COERENZA DI `echoTotalReported`: GLI ECHI CHE NON CI STANNO SONO
+ *    DENTRO I SECCHI. `classifyExhaustionCause` incrementa
+ *    `providerCooldownSkips.total` per OGNI riga di skip da cooldown, e i due
+ *    secchi solo quando la `skipPhrase` matcha una delle due regex. La
+ *    differenza — `echoTotalReported - echoTransient - echoPersistent` — sono
+ *    echi che il breakdown DICHIARA e non colloca, e la loro casa naturale e'
+ *    la massa ambigua (`total - transient - persistent`). Quando non ci
+ *    stanno, l'eccedenza non e' rumore: e' la prova aritmetica che quelle
+ *    righe sono finite DENTRO i due secchi senza che nessuno dicesse in quale.
+ *    Sono la sottrazione che #805 credeva di aver fatto e non ha fatto.
+ *
+ *    La run 31823202761 e' esattamente questo caso: `{transient: 53,
+ *    persistent: 52, total: 106, providerCooldownSkips: {total: 11}}` — massa
+ *    ambigua UNO, echi non attribuiti UNDICI. Dieci echi stanno nei secchi. La
+ *    sottrazione non toccava niente (53 vs 52, margine UNO) e il guardrail non
+ *    entrava (11 < 105): l'helper tornava `true`, cioe' riportava in silenzio
+ *    il verdetto PRE-#805 che #856 esiste per correggere — e reggeva solo
+ *    perche' `transientRe` colloca `cooling down` PER COSTRUZIONE, «una
+ *    riformulazione di distanza». Ora l'eccedenza gioca sul margine:
+ *    `wins(53 - 10, 52)` e' falso in entrambe le polarita' → `false`.
+ *
+ *    L'eccedenza si toglie al VINCITORE e non all'altro secchio perche' e'
+ *    l'unica direzione dimostrabile: un voto che regge anche assegnando ogni
+ *    riga dubbia contro di se' e' un voto sulle prove, non sulla fortuna della
+ *    classificazione. Il clamp alla massa ambigua e' la STESSA coerenza che
+ *    `deferralTally` applica al proprio denominatore — un `echo.total` gonfio
+ *    non compra sconti — e senza di esso il controllo conterebbe due volte
+ *    righe che nei secchi non sono mai entrate: `{transient: 90, persistent:
+ *    60, total: 200, echo: {total: 120, transient: 30, persistent: 30}}` ha 50
+ *    ambigui che ospitano 50 dei 60 echi non attribuiti, e li' lordo (90 vs
+ *    60) e netto (60 vs 30) concordano — nessun veto da inventare.
+ *
  * @param {unknown} breakdown `err.exhaustionBreakdown`
  * @param {{tie?: 'transient'|'persistent'}} [options] a chi va il pareggio
  * @returns {boolean} true → il transitorio e' la maggioranza al netto
@@ -393,7 +443,18 @@ export function isTransientMajority(breakdown, options = {}) {
     tie === 'persistent' ? transient > persistent : transient >= persistent
   );
   const buckets = echoBuckets(breakdown);
+  // Pavimento: niente prove indipendenti, niente maggioranza (vedi 1 sopra).
+  if (buckets.netTransient + buckets.netPersistent <= 0) return false;
   if (!wins(buckets.netTransient, buckets.netPersistent)) return false;
+  // Margine contro gli echi dichiarati che nella massa ambigua non ci stanno,
+  // e che quindi sono nei due secchi senza etichetta (vedi 2 sopra).
+  const echoUnattributed = Math.max(
+    0,
+    buckets.echoTotalReported - buckets.echoTransient - buckets.echoPersistent,
+  );
+  const ambiguousMass = Math.max(0, buckets.total - buckets.transient - buckets.persistent);
+  const echoHiddenInBuckets = Math.max(0, echoUnattributed - ambiguousMass);
+  if (!wins(buckets.netTransient - echoHiddenInBuckets, buckets.netPersistent)) return false;
   // Il guardrail conta le righe DI QUESTO voto: gli echi DICHIARATI contro
   // quelli rimasti nei due secchi. Il denominatore sono i due secchi netti —
   // non `providerCooldownSkips > total` del tally, che porterebbe dentro il
@@ -445,8 +506,26 @@ export function isLegitimateQuotaDeferral(err) {
   // da sola quando e' lei la maggioranza delle prove.
   if (providerCooldownSkips > total) {
     const b = err.exhaustionBreakdown || {};
-    const grossTransient = Math.max(0, Number(b.transient) || 0);
     const grossTotal = Math.max(0, Number(b.total) || 0);
+    const grossTransient = Math.max(0, Number(b.transient) || 0);
+    // ── UN CAMPIONE LORDO INCOERENTE NON CONFERMA NIENTE (#832, item 1) ────
+    //
+    // Questi due sono letti GREZZI, senza i clamp che `deferralTally` applica
+    // dieci righe sopra. Con `transient > total` lo share lordo esce > 1, il
+    // ramo passa SEMPRE e il guardrail si autodisattiva in silenzio: il
+    // verdetto torna a dipendere dalla sola sottrazione, che e' esattamente il
+    // caso che il guardrail esiste per vietare. Il produttore odierno non puo'
+    // emettere quella forma; un `err` serializzato o corrotto, e un chiamante
+    // futuro, si'.
+    //
+    // Il clamp a `grossTotal` che la issue propone NON basta e va detto: porta
+    // il rapporto a 1,0 esatto, che supera comodamente una soglia di 0,5 — il
+    // ramo continuerebbe a passare sempre, solo con un numero piu' presentabile.
+    // Serve rifiutare, e la direzione e' quella che il resto del modulo tiene:
+    // il guardrail chiede una CONFERMA sui numeri lordi, e un campione che
+    // contraddice se stesso non e' una conferma. Vale «rosso», come ogni altra
+    // affermazione non dimostrata qui dentro.
+    if (grossTransient > grossTotal) return false;
     if (!passesShare(grossTransient, grossTotal)) return false;
   }
   return passesShare(transient, total);

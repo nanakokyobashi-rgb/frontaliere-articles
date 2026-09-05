@@ -7585,10 +7585,34 @@ export async function callLLM(messages, opts = {}) {
   // the alert. The report doesn't reclassify the failure — it hands the caller
   // the number it needs to fix the prompt and try again deliberately.
   err.exhaustionBreakdown = classifyExhaustionCause(errors);
-  err.transientExhaustion = err.exhaustionBreakdown.transient > 0
-    && err.exhaustionBreakdown.transient >= err.exhaustionBreakdown.persistent;
+  // ── IL VOTO PASSA DALL'UNICA SORGENTE (#855/#857) ────────────────────────
+  //
+  // Era `transient > 0 && transient >= persistent` sui secchi LORDI, appena
+  // prodotti qui sopra — cioe' echi di cooldown compresi. Ma questa stessa
+  // funzione, da #805, SA quali righe non sono guasti indipendenti: le conta in
+  // `providerCooldownSkips`. Un solo provider morto lascia ~11-12 righe fra id
+  // fratelli su un roster da ~106, e votavano una maggioranza che sulla run
+  // 31823202761 si e' decisa per UN voto. Da qui discende `isQuotaExhaustedError`
+  // e quindi l'exit 0 di produzione.
+  //
+  // Il calcolo NON e' riscritto qui: la sottrazione clampata, il pavimento delle
+  // prove nette, il margine contro gli echi non attribuiti e il guardrail di
+  // maggioranza stanno tutti in `isTransientMajority` (AGENTS.md #6 — un clamp
+  // giusto qui e sbagliato la' su un errore che decide l'exit code e' il difetto
+  // che #855 esiste per impedire). `tie: 'transient'` e' il `>=` di sempre,
+  // polarita' INVARIATA: il pareggio va al transitorio, l'inversione di #357
+  // vive solo in `isInputCapDeferralVeto`.
+  err.transientExhaustion = isTransientMajority(err.exhaustionBreakdown, { tie: 'transient' });
   throw err;
 }
+
+// Import statico e non `await import()` come il resto del file: il consumo e'
+// dentro un `throw` sincrono. E' sicuro perche' `exhaustion-disposition.mjs`
+// non importa nulla e non ha effetti al load — e' aritmetica pura sui secchi —
+// quindi nessun ciclo e nessun costo di avvio. Sta qui, adiacente al suo unico
+// call site, invece che in cima a un file di 7600 righe che non ha altri
+// import statici.
+import { isTransientMajority } from './exhaustion-disposition.mjs';
 
 /**
  * Tally per-model failure reasons collected by callLLM into transient vs
