@@ -48,6 +48,10 @@ import {
   parseRatio,
   permanentBlock,
   realignFromCommitted,
+  couplingScanRoot,
+  importSpecifierRe,
+  SET_DESCRIPTORS,
+  unreadableCouplings,
   transportVerdict,
   unsafeTarget,
 } from '../../scripts/ci/transport-identical-twins.mjs';
@@ -220,6 +224,163 @@ test("nell'albero di oggi il golden del contratto NON è trasportabile", () => {
   const entry = manifest.files.find((e) => e.path === rel);
   const v = transportVerdict(entry, { site: 'bbbb', corpus: entry.baseline.corpus }, entry.baseline, { couplings });
   assert.equal(v.transport, false);
+});
+
+// ---------------------------------------------------------------------------
+// «Chiuso» dichiarato senza aver guardato (issue #853, follow-up di #819 Item 6)
+//
+// Due modi in cui `localCouplings()` diceva «nessun accoppiamento» senza avere
+// quella risposta: la scansione ferma alla directory del fixture (un consumer
+// in una directory sorella non produceva match) e `localText()` che tornava
+// `null` sopra il tetto di lettura e su OGNI errore di I/O, in modo
+// indistinguibile da «non lo cita». Il risultato è lo stesso in entrambi i
+// casi: una metà copiata da sola, cioè la PR di trasporto rossa che spegne il
+// canale.
+// ---------------------------------------------------------------------------
+
+test("un import TypeScript non scrive l\u2019estensione: il citer va trovato lo stesso", () => {
+  // `text.includes(base)` cerca il basename INTERO. Un import TS non nomina mai
+  // l\u2019estensione — `host/siteShellBootstrap.ts:63` fa
+  // `import { truncateCodeUnits } from './shared/safeTruncate'` — quindi il
+  // consumatore c\u2019era e il match no: la voce usciva a ZERO accoppiamenti,
+  // cioe\u2019 copiabile da sola. Misurate 9 voci `identical` con importer reali
+  // in quello stato, tutte sulla meta\u2019 `host/` del contratto col sito.
+  const re = importSpecifierRe('safeTruncate.ts');
+  assert.ok(re.test("import { truncateCodeUnits } from './shared/safeTruncate';"));
+  assert.ok(re.test('from "../../host/shared/safeTruncate"'));
+  assert.ok(re.test("from '@/shared/safeTruncate'"), 'anche gli alias di path finiscono con /stem');
+
+  // E NON deve accoppiare tutto a tutto: senza estensione un basename e\u2019 una
+  // parola comune, e un `includes()` nudo su `authors` o `constants` avrebbe
+  // reso ogni file accoppiato a ogni altro — il verso conservativo che diventa
+  // un no permanente su tutto, cioe\u2019 il canale spento dall\u2019altra parte.
+  assert.ok(!re.test("il file safeTruncate serve a troncare"), 'la prosa non e\u2019 un import');
+  assert.ok(!re.test("from 'safeTruncate'"), 'senza separatore e\u2019 un pacchetto, non questo file');
+
+  // Un basename senza estensione di codice non ha niente da allargare.
+  assert.equal(importSpecifierRe('git-push-with-retry.sh'), null);
+  assert.equal(importSpecifierRe('loop-sync-manifest.json'), null);
+});
+
+test("nell\u2019albero di oggi i nove gemelli `host/` NON sono piu\u2019 senza accoppiamenti", () => {
+  // Guard sul repo reale, offline: e\u2019 la meta\u2019 che dice se la regola sopra
+  // morde davvero. Se un giorno tornassero a zero, la copia isolata di una di
+  // loro tornerebbe autorizzata.
+  const manifest = JSON.parse(fs.readFileSync(path.join(ROOT, 'scripts/ci/loop-sync-manifest.json'), 'utf8'));
+  const modeOf = new Map(manifest.files.map((e) => [e.path, e.mode]));
+  const nove = [
+    'host/shared/safeTruncate.ts', 'host/authors.ts', 'host/contentHash.ts',
+    'host/seo/organizationLd.ts', 'host/seo/imageObjectLd.ts', 'host/shared/buildDayStamp.ts',
+    'host/shared/inlineJsonScript.ts', 'host/shared/railGutters.ts', 'host/shared/stripLiteralMarkdown.ts',
+  ];
+  for (const rel of nove) {
+    if (!fs.existsSync(path.join(ROOT, rel))) continue;
+    assert.ok(
+      localCouplings(rel, modeOf).length > 0,
+      `${rel}: torna a zero accoppiamenti, quindi torna copiabile da sola senza la sua meta\u2019`,
+    );
+  }
+});
+
+test('il sottoalbero di scansione è il pacchetto, non la directory del fixture', () => {
+  assert.equal(couplingScanRoot('host/tests/shell-contract-functions.golden.json'), 'host');
+  assert.equal(couplingScanRoot('generator/tests/crawler-cross-repo-artifacts.test.mjs'), 'generator');
+  assert.equal(couplingScanRoot('scripts/ci/x.golden.json'), 'scripts');
+});
+
+test('un accoppiamento non letto blocca, e con la ragione GIUSTA', () => {
+  const blind = [{ path: 'host/tests/huge.json', mode: 'illeggibile', unreadable: '9000000 byte, oltre il tetto di lettura' }];
+  assert.deepEqual(unreadableCouplings(blind), [{ path: 'host/tests/huge.json', reason: '9000000 byte, oltre il tetto di lettura' }]);
+  // Bloccante anche per la via generica: `mode` non è `identical`.
+  assert.deepEqual(couplingBlockers(blind), ['host/tests/huge.json']);
+
+  const reason = permanentBlock(twin({ path: 'host/tests/x.golden.json' }), { couplings: blind });
+  assert.ok(reason, 'un fixture con un accoppiamento cieco non è copiabile');
+  assert.match(reason, /non leggibili/, 'la ragione dice che il rilevamento è cieco, non che esiste una dipendenza non `identical`');
+  assert.ok(!/accoppiato a 1 path/.test(reason), 'la ragione generica manderebbe a cercare una dipendenza che non si sa se esiste');
+});
+
+test('il buio si legge PRIMA degli accoppiamenti noti: la ragione non si perde', () => {
+  const reason = permanentBlock(twin({ path: 'host/tests/x.golden.json' }), {
+    couplings: [
+      { path: 'host/x.test.mjs', mode: 'corpus-only' },
+      { path: 'host/tests/huge.json', mode: 'illeggibile', unreadable: 'lettura fallita (EACCES)' },
+    ],
+  });
+  assert.match(reason, /non leggibili/);
+});
+
+test('un accoppiamento leggibile e `identical` non è cieco', () => {
+  assert.deepEqual(unreadableCouplings([{ path: 'host/x.ts', mode: 'identical' }]), []);
+  assert.equal(permanentBlock(twin({ path: 'host/tests/x.golden.json' }), { couplings: [{ path: 'host/x.ts', mode: 'identical' }] }), null);
+});
+
+test('sul repo reale: un citer in una directory SORELLA viene visto, un file non letto blocca', () => {
+  const manifest = JSON.parse(fs.readFileSync(path.join(ROOT, 'scripts/ci/loop-sync-manifest.json'), 'utf8'));
+  const modeOf = new Map(manifest.files.map((e) => [e.path, e.mode]));
+  const rel = 'host/tests/shell-contract-functions.golden.json';
+  const base = rel.split('/').pop();
+  // Fuori da `host/tests/`, cioè invisibile alla scansione della sola directory.
+  const sibling = 'host/seo/issue-853-sibling-citer.tmp.mjs';
+  const oversize = 'host/tests/issue-853-oversize.tmp.json';
+  try {
+    fs.writeFileSync(path.join(ROOT, sibling), `// finto consumer: legge ${base}\n`);
+    const couplings = localCouplings(rel, modeOf);
+    assert.ok(
+      couplings.some((c) => c.path === sibling),
+      'un consumer in una directory sorella dev\'essere un accoppiamento, non un silenzio',
+    );
+    assert.equal(couplings.find((c) => c.path === sibling).mode, 'non registrato');
+
+    fs.writeFileSync(path.join(ROOT, oversize), 'x'.repeat(2 * 1024 * 1024 + 1));
+    const blind = unreadableCouplings(localCouplings(rel, modeOf));
+    assert.ok(
+      blind.some((c) => c.path === oversize),
+      'un file oltre il tetto di lettura è «non lo so», e «non lo so» non è «non lo cita»',
+    );
+  } finally {
+    fs.rmSync(path.join(ROOT, sibling), { force: true });
+    fs.rmSync(path.join(ROOT, oversize), { force: true });
+  }
+});
+
+test('allargare la scansione non la rende degenere: i descrittori del set non contano', () => {
+  const manifest = JSON.parse(fs.readFileSync(path.join(ROOT, 'scripts/ci/loop-sync-manifest.json'), 'utf8'));
+  const modeOf = new Map(manifest.files.map((e) => [e.path, e.mode]));
+  const rel = 'generator/tests/crawler-cross-repo-artifacts.test.mjs';
+  const couplings = localCouplings(rel, modeOf).map((c) => c.path);
+  // Questo file stesso nomina il path del fixture come DATO di un caso, e cita
+  // il manifest: parla del set, non legge il fixture. Contarlo lo bloccherebbe
+  // per sempre — è la degenerazione per cui la scansione era rimasta confinata.
+  assert.ok(
+    !couplings.includes('generator/tests/transport-identical-twins.test.mjs'),
+    'un descrittore del set non è un consumer del fixture',
+  );
+  // E il rilevamento vero regge ancora: il contratto che il fixture legge c'è.
+  assert.ok(couplings.includes('generator/data/crawler-cross-repo-contract.json'));
+});
+
+test('il descrittore del set è un ELENCO chiuso, non «nomina il manifest»', () => {
+  const manifest = JSON.parse(fs.readFileSync(path.join(ROOT, 'scripts/ci/loop-sync-manifest.json'), 'utf8'));
+  const modeOf = new Map(manifest.files.map((e) => [e.path, e.mode]));
+  // Sul repo reale: un consumer che importa DAVVERO il fixture e nomina il
+  // manifest solo di passaggio. Col criterio a sottostringa spariva dalla
+  // scansione, e il fixture tornava «senza accoppiamenti» — cioè il falso
+  // silenzio che questa PR esiste per togliere.
+  const rel = 'generator/tests/lib/expect-shim.mjs';
+  const citer = 'generator/tests/telelavoro-frontalieri-normative-citations.test.mjs';
+  const citerText = fs.readFileSync(path.join(ROOT, citer), 'utf8');
+  assert.ok(citerText.includes(`import { expect } from './lib/expect-shim.mjs'`), 'il consumer legge davvero il fixture');
+  assert.ok(citerText.includes('scripts/ci/loop-sync-manifest.json'), 'e nomina il manifest: è il caso che il sovrainsieme inghiottiva');
+
+  const couplings = localCouplings(rel, modeOf).map((c) => c.path);
+  assert.ok(couplings.includes(citer), 'un consumer vero non sparisce perché cita il manifest');
+  // I quattro descrittori restano fuori: l'elenco chiuso non allarga il buco.
+  assert.deepEqual(
+    couplings.filter((c) => SET_DESCRIPTORS.has(c)),
+    [],
+    'i descrittori del set non sono consumatori',
+  );
 });
 
 // ---------------------------------------------------------------------------
