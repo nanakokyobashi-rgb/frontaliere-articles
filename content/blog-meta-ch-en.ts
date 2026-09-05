@@ -5602,6 +5602,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.pride-belgrado-25-anni.title': 'In Belgrade, Pride celebrates 25 years, and goes back to its origins',
     'blog.article.pride-belgrado-25-anni.excerpt': 'The event highlights achievements and open battles for LGBTQ+ rights.',
     'blog.article.pride-belgrado-25-anni.imageAlt': 'Pride parade in Belgrade, Serbia, with diverse participants and colorful banners.',
+    'blog.article.volo-easyjet-valencia-ginevra.title': 'EasyJet Valencia-Geneva flight diverted to Nice due to bad weather',
+    'blog.article.volo-easyjet-valencia-ginevra.excerpt': 'Three passengers recount moments of fear during landing. 31 flights delayed and three hijacked due to severe storms.',
+    'blog.article.volo-easyjet-valencia-ginevra.imageAlt': 'Aerial view of Lugano city and lake, Switzerland',
 };
 
 export default blogMetaChEn;

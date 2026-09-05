@@ -1893,6 +1893,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'come-trovare-tirocinio-grigioni': { it: 'come-trovare-tirocinio-grigioni', en: 'how-to-find-apprenticeship-graubunden', de: 'lehrstelle-graubuenden-finden', fr: 'comment-trouver-apprentissage-grisons' },
  'asilo-nido-custodia-bambini-canton-soletta-costi': { it: 'asilo-nido-custodia-bambini-canton-soletta-costi', en: 'childcare-costs-canton-solothurn', de: 'kinderbetreuungskosten-kanton-solothurn', fr: 'couts-de-garde-d-enfants-canton-de-soleure' },
  'pride-belgrado-25-anni': { it: 'pride-belgrado-25-anni', en: 'belgrade-pride-25-years', de: 'belgrad-pride-25-jahre', fr: 'pride-belgrade-25-ans' },
+ 'volo-easyjet-valencia-ginevra': { it: 'volo-easyjet-valencia-ginevra', en: 'easyjet-flight-valencia-geneva', de: 'easyjet-flug-valencia-genf', fr: 'vol-easyjet-valence-geneve' },
 };
 
 export const REVERSE_SWISS: Record<ArticleLocale, Record<string, string>> = (() => {

@@ -5602,6 +5602,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.pride-belgrado-25-anni.title': 'A Belgrado il Pride celebra 25 anni, e ritorna alle origini',
     'blog.article.pride-belgrado-25-anni.excerpt': 'La manifestazione evidenzia conquiste e battaglie aperte per i diritti Lgbtq+.',
     'blog.article.pride-belgrado-25-anni.imageAlt': 'Parata del Pride a Belgrado, Serbia, con partecipanti diversi e striscioni colorati.',
+    'blog.article.volo-easyjet-valencia-ginevra.title': 'Volo easyJet Valencia-Ginevra deviato a Nizza per maltempo',
+    'blog.article.volo-easyjet-valencia-ginevra.excerpt': 'Tre passeggeri raccontano attimi di paura durante l\'atterraggio. 31 voli ritardati e tre dirottati a causa di forti temporali.',
+    'blog.article.volo-easyjet-valencia-ginevra.imageAlt': 'Vista aerea di Lugano e del suo lago, Svizzera',
 };
 
 export default blogMetaChIt;
