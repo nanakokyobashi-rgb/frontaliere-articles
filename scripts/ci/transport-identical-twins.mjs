@@ -225,6 +225,21 @@ export function couplingBlockers(couplings = []) {
 }
 
 /**
+ * Gli accoppiamenti che non ho POTUTO valutare: il file esiste nel sottoalbero
+ * del fixture ma non è stato letto (I/O, o oltre il tetto di lettura), quindi
+ * «non lo cita» non è una risposta che ho.
+ *
+ * Sono già bloccanti via `couplingBlockers` — il loro `mode` non è `identical`
+ * — ma vanno separati nel REPORT: «accoppiato a un path non identical» manda a
+ * cercare una dipendenza che magari non esiste, mentre la ragione vera è che il
+ * rilevamento è cieco su quel file. Una ragione sbagliata è peggio di una
+ * generica: fa fare il lavoro sbagliato (issue #853).
+ */
+export function unreadableCouplings(couplings = []) {
+  return couplings.filter((c) => c.unreadable).map((c) => ({ path: c.path, reason: c.unreadable })).sort((a, b) => a.path.localeCompare(b.path));
+}
+
+/**
  * Decide se UNA voce va copiata giù dal sito. Pura: prende gli hash già
  * calcolati, come `classify()` — è questo a renderla testabile offline, senza
  * rete e senza scrivere niente.
@@ -272,6 +287,13 @@ export function permanentBlock(entry, { outOfScopePrefixes = [], couplings = [] 
   // il canale. Vale a prescindere dallo stato, così la ragione è leggibile
   // anche quando il fixture e' ancora `stable`.
   if (isFixture(entry.path)) {
+    // Il buio PRIMA dell'accoppiamento: se non ho letto un file del sottoalbero
+    // non so se cita il fixture, e «non lo so» non è «non lo cita».
+    const blind = unreadableCouplings(couplings);
+    if (blind.length) {
+      const detail = blind.slice(0, 3).map((b) => `${b.path}: ${b.reason}`).join('; ');
+      return `${blind.length} file del sottoalbero non leggibili (${detail}): non so se citano il fixture, e «non ho potuto leggere» non è «non lo cita»`;
+    }
     const blockers = couplingBlockers(couplings);
     if (blockers.length) {
       return `fixture accoppiato a ${blockers.length} path non \`identical\` (${blockers.slice(0, 3).join(', ')}): una copia isolata mette rossa la PR di trasporto`;
@@ -428,16 +450,87 @@ export function fetchFailureVerdict(attempted, failed, { maxRatio = 0.25, minFai
   return { red: false, reason: null };
 }
 
-/** Il testo di un file locale, o `null` se assente o non leggibile come testo. */
-function localText(rel) {
+const MAX_TEXT_BYTES = 2 * 1024 * 1024;
+/**
+ * Il manifest ENUMERA ogni path registrato: un match lì non dice che quel file
+ * legge il fixture, dice solo che il fixture è nel set. Vale per il manifest e
+ * per chiunque parli DEL set citandolo (questo script, il suo test, il drift
+ * check): sono descrittori dell'insieme, non consumatori. È la stessa
+ * degenerazione che teneva la scansione confinata alla directory — riconosciuta
+ * per quello che è, invece di essere evitata rinunciando a guardare altrove.
+ */
+const SET_MANIFEST_REL = 'scripts/ci/loop-sync-manifest.json';
+
+/**
+ * Un file locale letto come TESTO, con lo stato esplicito.
+ *
+ * `null` non basta: «non esiste», «non è testo» e «non ho potuto leggerlo»
+ * sono tre risposte diverse, e collassarle fa dire a chi chiama «non ti cita»
+ * anche quando la verità è «non lo so». Sul rilevamento degli accoppiamenti
+ * quel «non lo so» diventa via libera a una copia isolata (issue #853).
+ *
+ *   `absent`     non c'è (o non è un file): non può citare nessuno.
+ *   `binary`     contiene byte NUL: non è sorgente, non cita per basename.
+ *   `unreadable` esiste, ma non l'ho letto — errore di I/O o oltre il tetto.
+ *   `text`       letto.
+ */
+function readLocal(rel) {
   const abs = path.join(ROOT, rel);
+  let stat;
   try {
-    const stat = fs.statSync(abs);
-    if (!stat.isFile() || stat.size > 2 * 1024 * 1024) return null;
-    return fs.readFileSync(abs, 'utf8');
-  } catch {
-    return null;
+    stat = fs.statSync(abs);
+  } catch (e) {
+    if (e && e.code === 'ENOENT') return { state: 'absent', text: null, reason: null };
+    return { state: 'unreadable', text: null, reason: `stat fallita (${e && e.code ? e.code : e})` };
   }
+  if (!stat.isFile()) return { state: 'absent', text: null, reason: null };
+  if (stat.size > MAX_TEXT_BYTES) {
+    return { state: 'unreadable', text: null, reason: `${stat.size} byte, oltre il tetto di lettura di ${MAX_TEXT_BYTES}` };
+  }
+  let buf;
+  try {
+    buf = fs.readFileSync(abs);
+  } catch (e) {
+    return { state: 'unreadable', text: null, reason: `lettura fallita (${e && e.code ? e.code : e})` };
+  }
+  // Un NUL è la firma del binario, e un binario non cita un basename come
+  // sorgente: è un `absent` di fatto, non un buio. Deciderlo dai byte e non
+  // dall'estensione evita sia il falso blocco su un .webp sia il falso via
+  // libera su un'estensione fuori da un'allowlist.
+  if (buf.includes(0)) return { state: 'binary', text: null, reason: null };
+  return { state: 'text', text: buf.toString('utf8'), reason: null };
+}
+
+/**
+ * Il sottoalbero in cui cercare chi cita il fixture: il PACCHETTO, cioè il
+ * primo segmento del path (`host/`, `generator/`, `scripts/`, `.github/`).
+ *
+ * La directory del fixture da sola non basta — un consumer in una directory
+ * sorella non produceva match e il fixture risultava senza accoppiamenti,
+ * quindi copiabile da solo (issue #853). Tutto l'albero sarebbe l'altro
+ * eccesso: il pacchetto è il confine entro cui un test e il suo golden vivono
+ * per convenzione, e fuori dal quale un riferimento è quasi sempre prosa.
+ */
+export function couplingScanRoot(rel) {
+  return String(rel || '').split('/')[0] || '';
+}
+
+const SCAN_SKIP_DIRS = new Set(['node_modules', '.git', 'dist', 'coverage', 'content', 'public']);
+
+function walkSubtree(root, acc = []) {
+  let entries;
+  try {
+    entries = fs.readdirSync(path.join(ROOT, root), { withFileTypes: true });
+  } catch {
+    return acc;
+  }
+  for (const e of entries) {
+    if (SCAN_SKIP_DIRS.has(e.name)) continue;
+    const rel = path.posix.join(root, e.name);
+    if (e.isDirectory()) walkSubtree(rel, acc);
+    else if (e.isFile()) acc.push(rel);
+  }
+  return acc;
 }
 
 /**
@@ -447,40 +540,52 @@ function localText(rel) {
  *     per il golden delle funzioni del contratto);
  *   - chi cita — i path che il fixture stesso nomina, quando e' codice.
  *
- * Chi lo cita si cerca nella sola directory del fixture: un golden e il test
- * che lo legge stanno accanto, e il test lo nomina per basename. Allargare la
- * scansione a tutto il manifest sarebbe degenere — il manifest ELENCA ogni
- * path, quindi ogni fixture risulterebbe accoppiato al manifest e bloccato per
- * la ragione sbagliata.
+ * Chi lo cita si cerca in tutto il PACCHETTO (vedi `couplingScanRoot`), non
+ * nella sola directory del fixture, saltando i descrittori del set (vedi
+ * `SET_MANIFEST_REL`) che citerebbero ogni path per costruzione.
+ *
+ * Un file del sottoalbero che ESISTE ma non è stato letto non è «non ti cita»:
+ * entra fra gli accoppiamenti con `mode: 'illeggibile'`, quindi blocca. Il
+ * verso conservativo è voluto — un accoppiamento mancato manda rossa la PR di
+ * trasporto e SPEGNE il canale, un blocco di troppo costa una copia a mano
+ * nominata nel report.
  *
  * Legge solo l'albero LOCALE: niente rete, quindi un test la può chiamare.
  */
 export function localCouplings(rel, modeOf) {
   const base = rel.split('/').pop();
   const dir = path.dirname(rel);
-  const neighbours = fs.existsSync(path.join(ROOT, dir))
-    ? fs.readdirSync(path.join(ROOT, dir)).map((n) => path.posix.join(dir, n))
-    : [];
   const found = new Set();
+  const unreadable = new Map();
 
-  for (const other of neighbours) {
+  for (const other of walkSubtree(couplingScanRoot(rel))) {
     if (other === rel) continue;
-    const text = localText(other);
-    if (text && text.includes(base)) found.add(other);
+    const read = readLocal(other);
+    if (read.state === 'unreadable') {
+      unreadable.set(other, read.reason);
+      continue;
+    }
+    if (read.state !== 'text') continue;
+    if (other === SET_MANIFEST_REL || read.text.includes(SET_MANIFEST_REL)) continue;
+    if (read.text.includes(base)) found.add(other);
   }
 
-  const own = localText(rel);
-  if (own) {
+  const own = readLocal(rel);
+  // Il fixture illeggibile è il caso peggiore dei due: non so nemmeno cosa
+  // cita, quindi non posso dichiararlo chiuso.
+  if (own.state === 'unreadable') unreadable.set(rel, own.reason);
+  if (own.state === 'text') {
+    const ownText = own.text;
     // Specificatori relativi (`../../scripts/ci/close-recovered-failure-issues.mjs`) e path repo-relative
     // citati come stringa (`'scripts/ci/loop-sync-manifest.json'`). Solo quelli
     // che esistono davvero qui diventano un accoppiamento: il resto è prosa.
-    for (const m of own.matchAll(/\.{1,2}\/[\w./-]+/g)) {
+    for (const m of ownText.matchAll(/\.{1,2}\/[\w./-]+/g)) {
       const abs = path.resolve(ROOT, dir, m[0]);
       if (abs.startsWith(ROOT + path.sep) && fs.existsSync(abs) && fs.statSync(abs).isFile()) {
         found.add(path.relative(ROOT, abs).split(path.sep).join('/'));
       }
     }
-    for (const m of own.matchAll(/['"`]([\w.-]+(?:\/[\w.-]+)+)['"`]/g)) {
+    for (const m of ownText.matchAll(/['"`]([\w.-]+(?:\/[\w.-]+)+)['"`]/g)) {
       const cand = m[1];
       if (cand.startsWith('.') && !cand.startsWith('.github')) continue;
       const abs = path.join(ROOT, cand);
@@ -488,8 +593,13 @@ export function localCouplings(rel, modeOf) {
     }
   }
   found.delete(rel);
-  return [...found].sort().map((c) => ({ path: c, mode: modeOf.get(c) || 'non registrato' }));
+  const couplings = [...found].sort().map((c) => ({ path: c, mode: modeOf.get(c) || 'non registrato' }));
+  for (const p of [...unreadable.keys()].sort()) {
+    couplings.push({ path: p, mode: 'illeggibile', unreadable: unreadable.get(p) });
+  }
+  return couplings;
 }
+
 
 /** Hash del file locale, o null se non esiste. */
 function localHash(rel) {
