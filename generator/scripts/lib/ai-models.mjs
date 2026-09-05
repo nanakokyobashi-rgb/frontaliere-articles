@@ -4570,6 +4570,41 @@ function _formatLastResortTier(name, t, isCompeting) {
   return `${name} ${parts.join('/')}${isCompeting ? ' [competing]' : ''}`;
 }
 
+/**
+ * La riga del riepilogo che porta la misura di #848 item 3 fuori dal processo.
+ *
+ * Il numero c'era gia' — `getStats().resolverFlapResets`, con una `console.warn`
+ * per evento — ma NON compariva nel riepilogo di fine run, cioe' nell'unico
+ * blocco che ogni log di generazione contiene e che si greppa uguale su tutte
+ * le run. Harvestarlo voleva dire scaricare il log intero di ogni run e cercare
+ * le righe per evento: su quindici run reali del 2026-09-05 il conto e' uscito
+ * zero, e uno zero raccolto cosi' non distingue «nessun reset» da «log troncato»
+ * o «codice vecchio». L'item resta bloccato in attesa di un numero che nessuno
+ * puo' raccogliere a costo ragionevole.
+ *
+ * Per questo la riga si stampa SEMPRE, anche a zero: la forma «none this run»
+ * e' il DENOMINATORE — dice che la run e' stata misurata — e senza di lei le
+ * run senza occorrenze non entrano nel conto. Stesso motivo per cui la riga
+ * `last-resort:` dichiara `not reached this run` invece di sparire.
+ *
+ * Prefisso fisso `resolver flaps:` perche' una run = una riga, greppabile.
+ */
+function _formatResolverFlapLine(s) {
+  const open = Object.entries(s.resolverFlaps)
+    .map(([p, n]) => `${p}=${n}/${RESOLVER_FLAP_ESCALATION}`)
+    .join(', ');
+  const resets = Object.entries(s.resolverFlapResets)
+    .map(([p, r]) => `${p} silent=${r.silent} resolved=${r.resolved} success=${r.success} (${r.streaksDiscarded} discarded)`)
+    .join(' · ');
+  if (!open && !resets) return '   resolver flaps: none this run';
+  const parts = [];
+  if (open) parts.push(`open [${open}]`);
+  // `silent` e' il numero che decide l'item: quante volte una striscia viva e'
+  // stata buttata via da un fallimento che non prova niente sul resolver.
+  parts.push(resets ? `resets ${resets}` : 'no streak discarded');
+  return `   resolver flaps: ${parts.join(' · ')}`;
+}
+
 // Max models named on the `models:` line. A run touches a handful (the run
 // 32134269129 touched 2); the cap exists so a pathological cascade can't emit a
 // 270-entry line into logs that are already large.
@@ -4632,6 +4667,7 @@ export function printRunSummary() {
     ? `   last-resort: ${lrTiers.map((t) => _formatLastResortTier(t, lr[t], competing.includes(t))).join(' · ')}`
     : `   last-resort: ${lrTiers.join('/')} not reached this run`);
   lines.push(_formatRunOutcomesLine(s));
+  lines.push(_formatResolverFlapLine(s));
   if (s.errors.length > 0) {
     lines.push(`   Errors: ${s.errors.length}`);
   }
