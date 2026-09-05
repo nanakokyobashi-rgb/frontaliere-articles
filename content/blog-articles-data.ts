@@ -33987,6 +33987,24 @@ const RAW_ARTICLES = [
  authorSlug: 'laura-bianchi',
  authorName: 'Laura Bianchi',
  },
+ {
+ id: 'bollettino-frontaliere-2026-09-05',
+ category: 'novita',
+ date: '2026-09-05T08:53:56.543Z',
+ image: '/images/blog/bollettino-frontaliere-2026-09-05.webp',
+ hasCalculator: false,
+ authorSlug: 'laura-bianchi',
+ authorName: 'Laura Bianchi',
+ },
+ {
+ id: 'cambio-datore-lavoro-frontaliere-2024-single',
+ category: 'pratico',
+ date: '2026-09-05T09:15:08.085Z',
+ image: '/images/blog/cambio-datore-lavoro-frontaliere-2024-single.webp',
+ hasCalculator: true,
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)
