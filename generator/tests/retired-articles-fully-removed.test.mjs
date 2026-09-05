@@ -50,6 +50,11 @@ import assert from 'node:assert/strict';
 import { readFileSync, existsSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+// L'id nudo con `includes()` combacia dentro ogni id piu' lungo che comincia
+// con lui: `<id>-ticino` nel corpus renderebbe questo test rosso su un ritiro
+// invece completato. Stesso matcher di scripts/retire-article.mjs, una sola
+// sorgente (AGENTS.md #6).
+import { containsQuotedId } from '../scripts/lib/quoted-id.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 
@@ -137,7 +142,7 @@ test('ogni articolo ritirato è sparito da TUTTE le superfici', () => {
 
     // Le superfici testuali: registro, mappa slug, meta per locale, ledger URL→id.
     for (const rel of [s.registry, s.slugs, ...s.meta, s.ledger]) {
-      if (readSurface(rel).includes(id)) leftovers.push(`${rel}: contiene ancora '${id}'`);
+      if (containsQuotedId(readSurface(rel), id)) leftovers.push(`${rel}: contiene ancora '${id}'`);
     }
 
     // I corpi e il sidecar sono file interi: deve mancare il file, non il contenuto.

@@ -3297,6 +3297,16 @@
       }
     },
     {
+      "path": "generator/scripts/lib/quoted-id.mjs",
+      "mode": "corpus-only",
+      "reason": "Il matcher \"questo file cita ancora <id>?\" delimitato dalle virgolette, estratto dal gemello duplicato fra `scripts/retire-article.mjs` e `generator/tests/retired-articles-fully-removed.test.mjs` (issue #785). Nasce qui e resta qui per la stessa premessa gia' argomentata su `register-lock.mjs`: entrambi i chiamanti sono strumenti di manutenzione del CORPUS, e dopo il cutover del 2026-08-02 il sito non registra ne' ritira articoli, quindi non ha un gemello da tenere allineato e NON e' `corpus-only-pending` (non c'e' lavoro da tracciare la', e una issue aprirebbe una PR del fixer su un percorso morto). Solo builtin, nessun import: resta copiabile senza adattamenti se un giorno il sito tornasse a generare.",
+      "baseline": {
+        "site": null,
+        "corpus": "7c2306361a7c9b48",
+        "alignedAt": "2026-09-05"
+      }
+    },
+    {
       "path": "generator/scripts/lib/register-lock.mjs",
       "mode": "corpus-only",
       "reason": "Il lock di transazione delle 9 scritture di `registerArticleFiles()` (issue #562). Nasce qui e resta qui per due ragioni indipendenti. (1) Il difetto e' operativo SOLO su questo repo: dopo il cutover del 2026-08-02 il gemello del sito `scripts/create-article.mjs` non produce piu' articoli, quindi la' non esiste una registrazione multi-file che un kill possa spezzare a meta' — stessa premessa gia' argomentata per `source-url-ledger.mjs`, e per la stessa ragione NON e' `corpus-only-pending`: non c'e' un lavoro da tracciare sul sito, e una issue li' aprirebbe una PR del fixer su un percorso morto. (2) I bersagli che il lock confronta sono i path del CORPUS (`SECTION.slugDataFile`, `SECTION.registryFile`, `services/locales/...` riscritti da `corpusPath()`): sul sito quei path sono il repo stesso. Il modulo e' tenuto puro — solo builtin `node:fs`/`node:path`, nessun import da create-article.mjs — quindi resta copiabile senza adattamenti se un giorno il sito tornasse a generare. La meta' che vive dentro `create-article.mjs` (`registerLockTargets`/`resolveRegisterLockAtStartup`) e' li' perche' dipende da `SECTION`, e quel file e' gia' `adapted`.",

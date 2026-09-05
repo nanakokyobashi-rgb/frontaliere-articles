@@ -257,3 +257,75 @@ test('un lock senza sezione non viene risolto a indovinare', () => {
   fs.rmSync(lockPath);
   assert.throws(() => beginRegisterLock(root, ARTICLE_ID), /requires the article section/);
 });
+
+test('un id che e\' PREFISSO di un altro non produce uno SPLIT falso (#785)', () => {
+  // I needle reali non sono l'id nudo ma la forma che ogni `modifyXxx()`
+  // scrive davvero, ed e' questo a impedire il falso positivo: con
+  // `registrazione-2026-ticino` gia' nel corpus, un lock su `registrazione-2026`
+  // veniva letto come «presente» in mappa slug, registro e SEO (semplice
+  // `includes()` dell'id nudo) e «assente» dai suoi corpi per-id — cioe' uno
+  // SPLIT su una registrazione che non aveva scritto nulla, e un arresto duro
+  // di ogni generazione successiva.
+  const root = sandbox();
+  const shortId = 'registrazione-2026';
+  const longId = 'registrazione-2026-ticino';
+
+  const cfg = SECTION_FILES[SECTION];
+  const anchored = (id, section = SECTION) => {
+    const c = SECTION_FILES[section];
+    const rel = [
+      [c.slug, `'${id}':`],
+      [c.registry, `id: '${id}',`],
+      [c.seo, `'blog-${id}':`],
+    ];
+    for (const locale of ['it', 'en', 'de', 'fr']) {
+      rel.push([`services/locales/${c.metaPrefix}-${locale}.ts`, `blog.article.${id}.`]);
+      rel.push([`services/locales/${c.bodyDir}/${locale}/${id}.ts`, null]);
+    }
+    return rel.map(([r, needle]) => ({ label: r, absPath: path.join(root, r), needle }));
+  };
+
+  // Il corpus contiene SOLO l'articolo lungo, scritto nella forma reale.
+  for (const [rel, line] of [
+    [cfg.slug, `  '${longId}': { it: 'a', en: 'b', de: 'c', fr: 'd' },\n`],
+    [cfg.registry, `  id: '${longId}',\n`],
+    [cfg.seo, `  'blog-${longId}': {},\n`],
+  ]) {
+    const abs = path.join(root, rel);
+    fs.mkdirSync(path.dirname(abs), { recursive: true });
+    fs.writeFileSync(abs, line, 'utf-8');
+  }
+
+  // Il lock e' quello dell'id CORTO, che non e' mai stato scritto.
+  beginRegisterLock(root, shortId, SECTION);
+  const status = registrationTargetStatus(anchored(shortId));
+  assert.deepEqual(status.present, [], 'nessun bersaglio cita davvero l\'id corto');
+  assert.deepEqual(
+    resolveRegisterLock(root, anchored),
+    { state: 'nothing-written', id: shortId, section: SECTION },
+  );
+
+  // Con l'id nudo — il difetto — lo stesso corpus sarebbe apparso spezzato.
+  const naked = registrationTargetStatus(makeTargets(root)(shortId));
+  assert.ok(naked.present.length > 0 && naked.absent.length > 0, 'il needle nudo produce lo SPLIT falso che il fix rimuove');
+});
+
+test('il marker e\' scritto in modo atomico: nessun lock troncato osservabile (#785)', () => {
+  // Un JSON troncato fra `mkdirSync` e `writeFileSync` e' per design un
+  // arresto duro su OGNI run successiva finche' qualcuno non cancella il file
+  // — cioe' il brick permanente che questo modulo esiste per evitare, su un
+  // corpus mai toccato. Con temp+rename le sole forme osservabili restano
+  // «nessun lock» e «lock valido».
+  const root = sandbox();
+  beginRegisterLock(root, ARTICLE_ID, SECTION);
+  const lockPath = registerLockPath(root);
+
+  // Il file finale e' JSON completo, e nella cartella non resta nessun temp
+  // che `git add -A` possa spazzare dentro un commit.
+  assert.deepEqual(
+    JSON.parse(fs.readFileSync(lockPath, 'utf-8')).id,
+    ARTICLE_ID,
+  );
+  const residui = fs.readdirSync(path.dirname(lockPath)).filter((f) => f.endsWith('.tmp'));
+  assert.deepEqual(residui, [], 'nessun file temporaneo lasciato indietro');
+});

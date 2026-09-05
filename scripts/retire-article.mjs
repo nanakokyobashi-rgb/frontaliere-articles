@@ -50,6 +50,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { ledgerArticleId } from '../generator/scripts/lib/source-url-ledger.mjs';
+import { containsQuotedId } from '../generator/scripts/lib/quoted-id.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 
@@ -443,7 +444,12 @@ function main() {
     cfg.sourceLedger, IMAGES_LEDGER,
     ...(cfg.idUnionFile ? [cfg.idUnionFile] : []),
   ].filter((f) => existsSync(rel(f)));
-  const leftovers = surfaces.filter((f) => read(f).includes(id));
+  // `containsQuotedId` e non `includes(id)`: l'id nudo è una sottostringa di
+  // ogni id più lungo che comincia con lui, quindi con
+  // `<id>-ticino` nel corpus questo passo dichiarerebbe «rimozione parziale» ed
+  // uscirebbe 1 su un ritiro invece completato — un arresto duro su un corpus
+  // sano, proprio nel punto che deve distinguere il corpus sano da quello rotto.
+  const leftovers = surfaces.filter((f) => containsQuotedId(read(f), id));
   if (leftovers.length > 0) {
     console.error(`\nRIMOZIONE PARZIALE — '${id}' compare ancora in:\n${leftovers.map((f) => `   ${f}`).join('\n')}`);
     process.exit(1);
