@@ -168,6 +168,28 @@ jobs:
           git add -- scripts/ci/loop-sync-manifest.json
           echo "Staged:"; git diff --cached --name-only
           git commit -m "chore(loop): porta ${PORTED} gemelli identical dal sito"
+          # La baseline che `--apply` ha scritto e' l'hash dei byte SCARICATI,
+          # calcolato prima che il commit esistesse (issue #852). Qui il commit
+          # c'e', quindi i byte committati sono finalmente leggibili e la
+          # baseline si verifica contro di loro PRIMA del push, con `--amend`
+          # dove va corretta per non lasciare due commit sullo stesso atto.
+          #
+          # Lo step esce ROSSO in due casi, entrambi «la baseline descriverebbe
+          # byte che nessuno ha». Un path trasportato non leggibile dal commit:
+          # la baseline lo dichiarerebbe allineato e nel commit non c'e'.
+          # Oppure byte committati diversi da quelli del sito (line ending
+          # normalizzati, filtro `clean`, staging incompleto): quella voce non
+          # e' un gemello byte-identico, e registrarla darebbe al drift check
+          # un `undeclared-drift` permanente e al trasporto una voce che non si
+          # copia piu'. In entrambi i casi la PR non viene aperta e il
+          # fallimento del workflow apre la sua issue: la decisione (correggere
+          # la copia, o degradare la voce ad `adapted`) vuole il contesto che
+          # questo step non ha.
+          node scripts/ci/transport-identical-twins.mjs --realign=/tmp/transport-paths.txt
+          if ! git diff --quiet -- scripts/ci/loop-sync-manifest.json; then
+            git add -- scripts/ci/loop-sync-manifest.json
+            git commit --amend --no-edit
+          fi
           git push -u origin "$BRANCH"
           gh pr create --base main --head "$BRANCH" \
             --title "chore(loop): trasporto di ${PORTED} gemelli \`identical\` dal sito" \
