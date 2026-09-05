@@ -168,6 +168,40 @@ test('un breakdown senza `providerCooldownSkips` vota come prima (retro-compatib
   assert.equal(isInputCapDeferralVeto(legacy), false);
 });
 
+test('il voto non passa per `total`: un totale incoerente non toglie il veto', () => {
+  // `deferralTally` clampa il persistente a `netTotal - netTransient` perche'
+  // fa un quoziente; quel clamp toglie righe al SOLO secchio che il veto
+  // difende. Qui `total: 60` contraddice 50 + 60: sul tally il persistente
+  // scenderebbe a 10 → maggioranza transitoria → nessun veto, dove i due
+  // secchi dicono 50 vs 60 → veto. Il confronto si fa sui due secchi.
+  const inconsistent = echoingExhaustionError({
+    transient: 50,
+    persistent: 60,
+    total: 60,
+    echo: { total: 0, transient: 0, persistent: 0 },
+  });
+  assert.equal(isInputCapDeferralVeto(inconsistent), true, 'un `total` incoerente non puo\' comprare un differimento');
+  const s = inputCapVetoSummary(inconsistent);
+  assert.equal(s.transient, 50);
+  assert.equal(s.persistent, 60, 'il secchio persistente non viene sgonfiato dal totale');
+});
+
+test('un breakdown SENZA `total` vota sui due secchi, non su zero', () => {
+  // Serializzato prima che `total` esistesse, o un mock parziale: `netTotal` e'
+  // 0 e azzererebbe entrambi i secchi, cioe' un pareggio 0-0 → veto, dove
+  // 53 > 52 dice differimento. La retro-compatibilita' vale anche qui.
+  const noTotal = echoingExhaustionError();
+  delete noTotal.exhaustionBreakdown.total;
+  delete noTotal.exhaustionBreakdown.providerCooldownSkips;
+  assert.equal(isInputCapDeferralVeto(noTotal), false, '53 > 52 resta una maggioranza transitoria');
+  // ...e con gli echi ripartiti la sottrazione funziona lo stesso, senza
+  // denominatore: 42 vs 52 → veto.
+  const noTotalEchoes = echoingExhaustionError();
+  delete noTotalEchoes.exhaustionBreakdown.total;
+  assert.equal(isInputCapDeferralVeto(noTotalEchoes), true, 'gli echi si tolgono per secchio, non per totale');
+  assert.equal(inputCapVetoSummary(noTotalEchoes).echoDominated, false);
+});
+
 test('quando gli echi sono la MAGGIORANZA la sottrazione non toglie il veto da sola', () => {
   // 12 host irraggiungibili veri + 81 echi persistenti + 13 timeout su 106
   // righe: al netto sarebbe 13 vs 12 → maggioranza transitoria → nessun veto,

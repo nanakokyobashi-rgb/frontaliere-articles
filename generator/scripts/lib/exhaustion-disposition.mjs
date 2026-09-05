@@ -108,27 +108,29 @@ export function isInputCapDeferralVeto(err) {
  * Riporta anche i DUE SECCHI SU CUI IL VETO HA DAVVERO DECISO — quelli netti —
  * e quante righe sono state tolte, per la stessa ragione per cui lo fa
  * `quotaDeferralShare`: una diagnostica che spiega un verdetto diverso da
- * quello preso smette di essere letta, e col totale lordo ricostruibile
- * (`transient + persistent + providerCooldownSkips` non e' il lordo, ma
- * `providerCooldownSkips` dice esattamente quanto e' stato sottratto).
+ * quello preso smette di essere letta. Sono i DUE SECCHI del voto — quelli di
+ * `echoBuckets`, senza i clamp sul totale che `deferralTally` mette sopra per
+ * il suo quoziente — quindi `transient + persistent + providerCooldownSkips`
+ * ricostruisce esattamente i due secchi lordi.
  */
 export function inputCapVetoSummary(err) {
   const cap = (err && err.inputCapReport) || {};
   const est = Number(cap.estimatedRequestTokens) || 0;
   const best = Number(cap.maxSkippedReqLimit) || 0;
-  const tally = deferralTally(err && err.exhaustionBreakdown);
+  const buckets = echoBuckets(err && err.exhaustionBreakdown);
+  const removed = buckets.echoTransient + buckets.echoPersistent;
   return {
     estimatedRequestTokens: est,
     maxSkippedReqLimit: best,
     over: est - best,
     refusals: Number(cap.count) || 0,
-    transient: tally.transient,
-    persistent: tally.persistent,
-    providerCooldownSkips: tally.providerCooldownSkips,
+    transient: buckets.netTransient,
+    persistent: buckets.netPersistent,
+    providerCooldownSkips: removed,
     // Quando gli echi sono la maggioranza il voto ricade sui numeri LORDI (vedi
     // isTransientMajority): senza questo flag la riga potrebbe mostrare due
     // secchi netti che non sono quelli che hanno deciso.
-    echoDominated: tally.providerCooldownSkips > tally.total,
+    echoDominated: removed > buckets.netTransient + buckets.netPersistent,
   };
 }
 
@@ -247,7 +249,30 @@ export const QUOTA_DEFERRAL_MIN_TRANSIENT_SHARE = 0.5;
  * @param {unknown} breakdown `err.exhaustionBreakdown`
  * @returns {{transient:number,persistent:number,ambiguous:number,total:number,providerCooldownSkips:number}}
  */
-function deferralTally(breakdown) {
+/**
+ * ── I DUE SECCHI DEL VOTO, SENZA IL TOTALE DI MEZZO ─────────────────────────
+ *
+ * La sottrazione degli echi PER SECCHIO, e nient'altro: la sorgente unica sia
+ * del quoziente (`deferralTally`, che ci mette sopra i suoi clamp sul totale)
+ * sia del confronto di maggioranza (`isTransientMajority`, che NON deve
+ * vederli).
+ *
+ * PERCHE' SEPARATI. `deferralTally` clampa `netPersistent` a
+ * `netTotal - netTransient`, e deve: fa un quoziente, e un `total` incoerente
+ * col resto non puo' comprare sconti sul denominatore. Ma quel clamp toglie
+ * righe al SOLO persistente, cioe' esattamente nella direzione che TOGLIE il
+ * veto — e il veto non ha un denominatore da difendere. Con
+ * `{transient: 50, persistent: 60, total: 60}` il tally da' 50 vs 10 →
+ * maggioranza transitoria → nessun veto, dove i due secchi dicono 50 vs 60 →
+ * veto → exit 3. Speculare e nella direzione opposta: senza `total`, `netTotal`
+ * e' 0 e AZZERA entrambi i secchi, cioe' `{transient: 53, persistent: 52}`
+ * (breakdown serializzato prima di #805, o un mock) passerebbe da «nessun veto»
+ * a «veto». Un confronto fra due secchi si fa sui due secchi.
+ *
+ * @param {unknown} breakdown `err.exhaustionBreakdown`
+ * @returns {{transient:number,persistent:number,total:number,echoTransient:number,echoPersistent:number,netTransient:number,netPersistent:number}}
+ */
+function echoBuckets(breakdown) {
   const b = (breakdown && typeof breakdown === 'object') ? breakdown : {};
   const transient = Math.max(0, Number(b.transient) || 0);
   const persistent = Math.max(0, Number(b.persistent) || 0);
@@ -255,8 +280,28 @@ function deferralTally(breakdown) {
   const echo = (b.providerCooldownSkips && typeof b.providerCooldownSkips === 'object')
     ? b.providerCooldownSkips
     : {};
+  // Clampati al proprio secchio: un `echo.transient` piu' grande del secchio
+  // che dice di descrivere e' un campo rotto, e non puo' togliere righe che
+  // non ci sono.
   const echoTransient = Math.min(Math.max(0, Number(echo.transient) || 0), transient);
   const echoPersistent = Math.min(Math.max(0, Number(echo.persistent) || 0), persistent);
+  return {
+    transient,
+    persistent,
+    total,
+    echoTransient,
+    echoPersistent,
+    netTransient: transient - echoTransient,
+    netPersistent: persistent - echoPersistent,
+  };
+}
+
+function deferralTally(breakdown) {
+  const b = (breakdown && typeof breakdown === 'object') ? breakdown : {};
+  const { transient, persistent, total, echoTransient, echoPersistent } = echoBuckets(breakdown);
+  const echo = (b.providerCooldownSkips && typeof b.providerCooldownSkips === 'object')
+    ? b.providerCooldownSkips
+    : {};
   // La parte di `echo.total` NON ripartita fra i due secchi e' fatta di echi
   // AMBIGUI, e deve stare nella massa ambigua — non nel totale. Clamparla al
   // totale la lascia uscire dal solo DENOMINATORE, che e' l'unico modo di
@@ -322,11 +367,16 @@ export function isTransientMajority(breakdown, options = {}) {
   const wins = (transient, persistent) => (
     tie === 'persistent' ? transient > persistent : transient >= persistent
   );
-  const tally = deferralTally(breakdown);
-  if (!wins(tally.transient, tally.persistent)) return false;
-  if (tally.providerCooldownSkips > tally.total) {
-    const b = (breakdown && typeof breakdown === 'object') ? breakdown : {};
-    return wins(Math.max(0, Number(b.transient) || 0), Math.max(0, Number(b.persistent) || 0));
+  const buckets = echoBuckets(breakdown);
+  if (!wins(buckets.netTransient, buckets.netPersistent)) return false;
+  // Il guardrail conta le righe DI QUESTO voto: quelle tolte ai due secchi
+  // contro quelle rimaste nei due secchi. Non `providerCooldownSkips > total`
+  // del tally, che porterebbe dentro il denominatore dalla porta di servizio —
+  // e con un breakdown senza `total` sarebbe inerte proprio dove il campione e'
+  // meno affidabile.
+  const removed = buckets.echoTransient + buckets.echoPersistent;
+  if (removed > buckets.netTransient + buckets.netPersistent) {
+    return wins(buckets.transient, buckets.persistent);
   }
   return true;
 }
