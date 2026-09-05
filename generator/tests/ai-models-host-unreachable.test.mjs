@@ -1339,3 +1339,94 @@ describe('callLLM — il contatore dei flap del resolver (#818)', () => {
     assert.ok(stats.exhaustedModels.includes('gpt-4o'), `atteso il modello dell'escalation esaurito, visti: ${stats.exhaustedModels.join(', ')}`);
   });
 });
+
+/**
+ * ── #838: IL BREAKER ARMA, MA IL VERDETTO NON E' CONDIVISIBILE ─────────────
+ *
+ * Follow-up di #813. Con `LOCAL_LLM_URL`/`OMNIROUTE_URL` puntati a un gateway
+ * remoto morto, #781 ha ragione a far armare il breaker: quel connect e' una
+ * prova. Ma l'id sotto cui la prova viene scritta (`local/fallback`,
+ * `omniroute/auto`) sta in un documento CONDIVISO da tutte le macchine, mentre
+ * l'host che descrive e' configurazione di QUESTA. Un runner mal configurato
+ * affondava cosi' l'ultima riga della catena per tutti gli altri.
+ *
+ * Il taglio e' fra le due meta' del breaker, non fra i provider:
+ *
+ *   - in processo NON cambia niente: marchio di esaurimento e cooldown del
+ *     provider restano, cioe' resta la meta' che evita un connect morto per
+ *     ogni id fratello;
+ *   - verso il ledger non parte niente: nessuna penale di punteggio, che e'
+ *     l'unica meta' che ci finisce davvero (`exhaustedUntil` non viene scritto
+ *     per un ban `nonretryable`, vedi _persistScoresToFirestore).
+ *
+ * Il fallimento resta CONTATO — un modello che fallisce senza comparire fra i
+ * falliti rende invisibile il prossimo incidente.
+ */
+describe('#838 — endpoint per-macchina: ban di run si, ledger condiviso no', () => {
+  const ENV_KEYS = [
+    'AI_MODELS_FORCE_CHAIN', 'AI_MODELS_PREFER', 'GH_MODELS_PAT',
+    'OMNIROUTE_ENABLED', 'OMNIROUTE_URL',
+    'LOCAL_LLM_ENABLED', 'LOCAL_LLM_URL',
+  ];
+  let envBackup = {};
+  let realFetch;
+
+  beforeEach(() => {
+    envBackup = Object.fromEntries(ENV_KEYS.map((k) => [k, process.env[k]]));
+    for (const k of ENV_KEYS) delete process.env[k];
+    realFetch = globalThis.fetch;
+    globalThis.fetch = async () => { throw undiciFetchFailed('ECONNREFUSED'); };
+    resetState();
+  });
+
+  afterEach(() => {
+    globalThis.fetch = realFetch;
+    for (const k of ENV_KEYS) {
+      if (envBackup[k] === undefined) delete process.env[k];
+      else process.env[k] = envBackup[k];
+    }
+    resetState();
+  });
+
+  const scoreOf = (stats, model) => stats.scoreBoard.find((e) => e.model === model)?.score ?? 0;
+  const failuresOf = (stats, model) => stats.runOutcomes.find((e) => e.model === model)?.failures ?? 0;
+
+  for (const [label, env, urlKey, model, provider] of [
+    ['omniroute', { OMNIROUTE_ENABLED: '1' }, 'OMNIROUTE_URL', 'omniroute/auto', 'omniroute'],
+    ['local',     { LOCAL_LLM_ENABLED: '1' }, 'LOCAL_LLM_URL', 'local/fallback', 'local'],
+  ]) {
+    it(`${label} verso un gateway remoto morto: esaurito e in cooldown, ma score invariato`, async () => {
+      Object.assign(process.env, env);
+      process.env.AI_MODELS_FORCE_CHAIN = model;
+      process.env[urlKey] = 'https://gateway.example.invalid/v1/chat/completions';
+
+      await assert.rejects(
+        () => callLLM([{ role: 'user', content: 'x' }], { maxRetriesPerModel: 1, backoffMs: 1, timeout: 5000 }),
+      );
+
+      const stats = getStats();
+      // La meta' in processo resta intera (e' cio' che #781 ha guadagnato).
+      assert.ok(stats.exhaustedModels.includes(model), `il ban di run resta, visti: ${stats.exhaustedModels.join(', ')}`);
+      assert.ok(stats.activeCooldowns[provider] > 0, `il cooldown resta: ${JSON.stringify(stats.activeCooldowns)}`);
+      // La meta' condivisa no.
+      assert.equal(scoreOf(stats, model), 0, `nessuna penale nel ledger condiviso per un endpoint per-macchina: ${JSON.stringify(stats.scoreBoard)}`);
+      assert.equal(failuresOf(stats, model), 1, `il fallimento va comunque contato: ${JSON.stringify(stats.runOutcomes)}`);
+    });
+  }
+
+  // Il contrappunto che tiene onesta la regola: su un provider il cui endpoint
+  // e' una costante del modulo, un host morto E' un fatto condivisibile e la
+  // penale continua a essere scritta esattamente come prima.
+  it('su un provider a endpoint fisso la penale resta', async () => {
+    process.env.GH_MODELS_PAT = 'test-pat';
+    process.env.AI_MODELS_FORCE_CHAIN = 'gpt-4o-mini';
+
+    await assert.rejects(
+      () => callLLM([{ role: 'user', content: 'x' }], { maxRetriesPerModel: 1, backoffMs: 1, timeout: 5000 }),
+    );
+
+    const stats = getStats();
+    assert.ok(stats.exhaustedModels.includes('gpt-4o-mini'), `atteso il ban, visti: ${stats.exhaustedModels.join(', ')}`);
+    assert.ok(scoreOf(stats, 'gpt-4o-mini') < 0, `atteso il punteggio penalizzato: ${JSON.stringify(stats.scoreBoard)}`);
+  });
+});
