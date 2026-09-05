@@ -111,6 +111,18 @@ test('senza resetsAt il beacon viene omesso, non scritto vuoto', () => {
   assert.ok(!/QUOTA_RESETS_AT/.test(body));
 });
 
+test('il rimborso posta l`handle PRIMA di cancellare il marker', () => {
+  const src = fs.readFileSync(path.join(ROOT, 'scripts/ci/refund-fix-round.mjs'), 'utf-8');
+  const post = src.indexOf("gh(['pr', 'comment'");
+  const del = src.indexOf("'-X', 'DELETE'");
+  assert.ok(post > 0 && del > 0, 'post del commento e DELETE del marker devono esistere entrambi');
+  // `gh()` inghiotte i fallimenti: se la DELETE riesce e il post no, il round e`
+  // rimborsato e l'handle non esiste — marker sparito, classe B disarmata, PR
+  // ferma col budget intero. L'ordine inverso fallisce verso lo stato ante-PR.
+  assert.ok(post < del,
+    'DELETE del marker prima del commento di rimborso: sul fallimento del post la PR resta senza handle');
+});
+
 for (const { file, marker } of FIXERS) {
   test(`${path.basename(file)}: guard con pre-flight di quota e rimborso cablato su ${marker}`, () => {
     const yaml = fs.readFileSync(path.join(ROOT, file), 'utf-8');

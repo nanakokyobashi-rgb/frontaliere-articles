@@ -199,8 +199,14 @@ function main() {
     console.log(body);
     return;
   }
-  gh(['api', '-X', 'DELETE', `repos/${repo}/issues/comments/${id}`]);
+  // Ordine non commutativo: prima il commento di rimborso, poi la DELETE del
+  // marker. `gh()` inghiotte i fallimenti, quindi va scelto quale metà può
+  // restare orfana. Post-poi-delete lascia, nel caso peggiore, marker + handle:
+  // il round non è rimborsato, cioè lo stato ante-PR, dichiarato accettabile
+  // sopra. L'ordine inverso lascerebbe il round rimborsato SENZA handle —
+  // marker sparito, classe B del rescuer disarmata, PR ferma col budget intero.
   gh(['pr', 'comment', String(PR), ...repoArgs, '--body', body]);
+  gh(['api', '-X', 'DELETE', `repos/${repo}/issues/comments/${id}`]);
 }
 
 main();
