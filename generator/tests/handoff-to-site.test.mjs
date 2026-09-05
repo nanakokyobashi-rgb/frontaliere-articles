@@ -17,6 +17,8 @@ import {
   handoffTitle,
   lastVerdictComment,
   HANDOFF_VERDICTS,
+  MIRROR_LOCKED_MODES,
+  mirrorLockedPaths,
   SITE_REPO,
 } from '../../scripts/ci/handoff-to-site.mjs';
 
@@ -34,7 +36,7 @@ test('serve la CONGIUNZIONE: due condizioni su tre non bastano', () => {
   // È la congiunzione a selezionare 4 casi su 4 senza falsi. Allentarla a una
   // disgiunzione spedirebbe al sito ogni `blocked-admin-settings`, incluse le
   // impostazioni di repo che sono davvero tali.
-  assert.equal(handoffDecision({ verdict: 'no-root-cause', body: MIRROR_BODY }).handoff, false);
+  assert.equal(handoffDecision({ verdict: 'already-fixed', body: MIRROR_BODY }).handoff, false);
   assert.equal(handoffDecision({
     verdict: 'blocked-admin-settings',
     body: 'serve branch protection su `main`, niente a che vedere con l\'altro repo',
@@ -50,12 +52,146 @@ test('senza verdetto → non instradata, e il default è non spedire', () => {
   assert.equal(handoffDecision({ verdict: null, body: MIRROR_BODY }).handoff, false);
 });
 
-test('i due verdetti instradabili sono solo quelli osservati', () => {
+test('i verdetti instradabili sono solo quelli osservati', () => {
   assert.ok(HANDOFF_VERDICTS.has('blocked-admin-settings'));
   assert.ok(HANDOFF_VERDICTS.has('blocked-workflows-scope'));
-  for (const v of ['already-fixed', 'no-root-cause', 'max-turns', 'pr-created']) {
+  // #316: `no-root-cause` è entrato perché su quella issue NON significava
+  // «causa non trovata» — la causa era scritta e riconfermata 10 volte, ed era
+  // il mirror a bloccare. Resta però ambiguo, quindi porta la quarta condizione.
+  assert.ok(HANDOFF_VERDICTS.has('no-root-cause'));
+  for (const v of ['already-fixed', 'max-turns', 'pr-created', 'overlap-skip']) {
     assert.equal(HANDOFF_VERDICTS.has(v), false, v);
   }
+});
+
+// --- #316: il discriminante di `no-root-cause` è il manifest, non il verdetto ---
+
+const LOCKED = new Set(['scripts/ci/followup-drainer.mjs']);
+
+// La forma esatta dei 10 verdetti di #316: causa trovata, file `identical`.
+const NRC_MIRROR_BODY = 'Root cause: `isQueueManaged` in `scripts/ci/followup-drainer.mjs` '
+  + 'esclude le issue `route:\'none\'` dall\'age-out. Il file è `mode: identical` '
+  + 'col sito (`valerielinc-ops/frontaliere-si-o-no`): scriverlo qui produrrebbe '
+  + 'corpus-ahead, vietato da AGENTS.md #6. Vedi `scripts/ci/loop-sync-manifest.json`.';
+
+test('no-root-cause con un path `identical` è il caso mirror, e si spedisce', () => {
+  const d = handoffDecision({ verdict: 'no-root-cause', body: NRC_MIRROR_BODY, lockedPaths: LOCKED });
+  assert.equal(d.handoff, true);
+  assert.ok(d.paths.includes('scripts/ci/followup-drainer.mjs'));
+  assert.match(d.reason, /mirror/);
+});
+
+test('si spediscono i soli path BLOCCATI, non tutti quelli citati', () => {
+  // `NRC_MIRROR_BODY` cita anche `scripts/ci/loop-sync-manifest.json`, che il
+  // fixer nomina come PROVA e non come file da cambiare. Elencarlo di là sotto
+  // «path del sito» manderebbe il ciclo del sito a toccare un file che il
+  // mirror non condivide — rumore in una consegna che esiste per essere precisa.
+  const d = handoffDecision({ verdict: 'no-root-cause', body: NRC_MIRROR_BODY, lockedPaths: LOCKED });
+  assert.deepEqual(d.paths, ['scripts/ci/followup-drainer.mjs']);
+  assert.ok(extractSitePaths(NRC_MIRROR_BODY).includes('scripts/ci/loop-sync-manifest.json'));
+});
+
+test('no-root-cause SENZA path bloccati dal mirror resta un vicolo cieco', () => {
+  // Il falso positivo misurato il 2026-09-04: #694 cita path `adapted` e
+  // corpus-only, cioè lavoro NOSTRO. Spedirlo aprirebbe una issue inutile sul
+  // sito e chiuderebbe qui una issue legittima — peggio del parcheggio.
+  const d = handoffDecision({
+    verdict: 'no-root-cause',
+    body: 'Il gemello su `valerielinc-ops/frontaliere-si-o-no` è allineato; qui manca '
+      + 'la pipeline in `scripts/offload-generated-images-cdn.mjs`.',
+    lockedPaths: LOCKED,
+  });
+  assert.equal(d.handoff, false);
+  assert.match(d.reason, /vicolo cieco/);
+});
+
+test('per no-root-cause il manifest SOSTITUISCE il nome del repo in prosa', () => {
+  // 4 dei 14 verdetti di #316 non scrivono lo slug `frontaliere-si-o-no` pur
+  // diagnosticando lo stesso file `identical`. Legare la consegna alla prosa
+  // dell'agente la renderebbe un terno al lotto; `mode: identical` è
+  // l'affermazione formale che quel file è condiviso col sito.
+  const senzaSlug = 'Root cause: `isQueueManaged` in `scripts/ci/followup-drainer.mjs`. '
+    + 'Il file è byte-identico al gemello: scriverlo qui verrebbe sovrascritto al mirror.';
+  assert.equal(senzaSlug.includes('frontaliere-si-o-no'), false);
+  assert.equal(handoffDecision({ verdict: 'no-root-cause', body: senzaSlug, lockedPaths: LOCKED }).handoff, true);
+});
+
+test('la condizione sul manifest vale SOLO per no-root-cause', () => {
+  // I `blocked-*` sono già disambigui: hanno selezionato 4 casi su 4 senza
+  // falsi con la sola congiunzione a tre. Estendere il vincolo a loro
+  // smetterebbe di spedire proprio i casi per cui lo script è nato.
+  const d = handoffDecision({ verdict: 'blocked-admin-settings', body: MIRROR_BODY, lockedPaths: new Set() });
+  assert.equal(d.handoff, true);
+});
+
+test('mirrorLockedPaths legge il manifest reale, non un elenco ricopiato', () => {
+  assert.deepEqual([...MIRROR_LOCKED_MODES], ['identical']);
+  const locked = mirrorLockedPaths();
+  assert.ok(locked.size > 0, 'il manifest dichiara dei file identical');
+  assert.ok(locked.has('scripts/ci/followup-drainer.mjs'), 'il file di #316 è fra quelli bloccati');
+  // Un `adapted` è nostro da modificare: non deve mai finire qui dentro.
+  assert.equal(locked.has('scripts/lib/classify-issue.mjs'), false);
+});
+
+// --- i due lati non hanno lo stesso path ---
+
+test('mirrorLockedPaths mappa sul `sitePath`, che nella maggior parte dei casi DIFFERISCE', () => {
+  // 112 dei 157 entry `identical` portano un `sitePath` diverso dal path del
+  // corpus. Spedire il path del corpus manderebbe il fixer di là a cercare un
+  // file che nel suo repo non esiste — e la consegna esiste per essere precisa.
+  const locked = mirrorLockedPaths();
+  assert.equal(locked.get('host/shared/clauseTail.mjs'), 'build-plugins/shared/clauseTail.mjs');
+  // Quando `sitePath` manca, i due lati coincidono: identità, non `undefined`.
+  assert.equal(locked.get('scripts/ci/followup-drainer.mjs'), 'scripts/ci/followup-drainer.mjs');
+  for (const [corpusPath, sitePath] of locked) assert.ok(sitePath, `sitePath vuoto per ${corpusPath}`);
+});
+
+test('si matcha sul path del CORPUS e si spedisce quello del SITO', () => {
+  // Il fixer scrive la diagnosi coi path di QUESTO repo (è qui che gira), quindi
+  // il match resta sul path del corpus; ma la issue di là li presenta come
+  // «path del sito», e lì deve leggere la forma che di là esiste.
+  const d = handoffDecision({
+    verdict: 'no-root-cause',
+    body: 'Root cause: la stopword manca in `host/shared/clauseTail.mjs`, `mode: identical` col sito.',
+    lockedPaths: new Map([['host/shared/clauseTail.mjs', 'build-plugins/shared/clauseTail.mjs']]),
+  });
+  assert.equal(d.handoff, true);
+  assert.deepEqual(d.paths, ['build-plugins/shared/clauseTail.mjs']);
+});
+
+// --- la consegna non è la risoluzione: il residuo decide la chiusura ---
+
+test('i path citati che il mirror NON porta tornano come `residual`', () => {
+  // #316 è aggregata: l'item 2 vive su `scripts/lib/classify-issue.mjs`, che è
+  // `adapted` — nostro, e nessun mirror lo consegnerà. Chiudere la issue
+  // `completed` dopo la consegna dichiarerebbe risolto anche quello e ne farebbe
+  // evaporare l'unico portatore. `residual` è ciò che fa parcheggiare invece di
+  // chiudere (vedi `main`).
+  const d = handoffDecision({
+    verdict: 'no-root-cause',
+    body: 'Item 1: `isQueueManaged` in `scripts/ci/followup-drainer.mjs` (identical). '
+      + 'Item 2: il mislabel silenzioso in `scripts/lib/classify-issue.mjs`.',
+    lockedPaths: LOCKED,
+  });
+  assert.equal(d.handoff, true);
+  assert.deepEqual(d.paths, ['scripts/ci/followup-drainer.mjs']);
+  assert.deepEqual(d.residual, ['scripts/lib/classify-issue.mjs']);
+});
+
+test('nessun residuo quando tutto ciò che è citato scende col mirror', () => {
+  const solo = 'Root cause: `isQueueManaged` in `scripts/ci/followup-drainer.mjs`, `mode: identical`.';
+  assert.deepEqual(handoffDecision({ verdict: 'no-root-cause', body: solo, lockedPaths: LOCKED }).residual, []);
+  // I `blocked-*` non cambiano: la forma misurata 4 su 4 è «un solo file, e vive
+  // sul sito», quindi niente residuo e la chiusura resta quella di sempre.
+  assert.deepEqual(handoffDecision({ verdict: 'blocked-admin-settings', body: MIRROR_BODY }).residual, []);
+});
+
+test('manifest illeggibile → non si spedisce niente (fallimento sicuro)', () => {
+  assert.equal(mirrorLockedPaths('/nonexistent/loop-sync-manifest.json').size, 0);
+  assert.equal(
+    handoffDecision({ verdict: 'no-root-cause', body: NRC_MIRROR_BODY, lockedPaths: new Set() }).handoff,
+    false,
+  );
 });
 
 test('extractSitePaths prende solo i path in backtick, che è la forma prescritta', () => {

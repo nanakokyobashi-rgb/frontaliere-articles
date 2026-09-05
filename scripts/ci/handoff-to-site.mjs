@@ -16,6 +16,20 @@
  * avere ragione: l'informazione che serve al sito esiste, in un commento che il
  * sito non legge.
  *
+ * ## La stessa forma sotto un altro verdetto (#316)
+ *
+ * `blocked-admin-settings` non è l'unico travestimento. Su #316 il fixer ha
+ * emesso `no-root-cause` DIECI volte fra il 2026-08-14 e il 2026-09-03 con la
+ * causa trovata e riconfermata ogni volta (`isQueueManaged` in
+ * `scripts/ci/followup-drainer.mjs`): non era un vicolo cieco, era il mirror —
+ * quel file è `mode: identical` nel manifest, quindi scriverlo da qui verrebbe
+ * sovrascritto. Stessa forma, stesso parcheggio, dieci run ri-pagati.
+ *
+ * `no-root-cause` è però ambiguo dove i `blocked-*` non lo sono, perché copre
+ * ANCHE il vicolo cieco vero. Il discriminante non può quindi essere il
+ * verdetto: è il manifest (`MIRROR_LOCKED_MODES`), che dice per costruzione
+ * quali path una fix scritta qui non sopravviverebbe.
+ *
  * ## Perché si può fare, e non si faceva
  *
  * Il canale esisteva già e non era usato: `GITHUB_PAT` è di `valerielinc-ops`
@@ -39,6 +53,8 @@
  *      `GH_TOKEN` (per leggere e commentare qui).
  */
 import { execFileSync } from 'node:child_process';
+import { readFileSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
 // Il marker di verdetto ha UNA definizione condivisa: era scritto identico qui e
 // in `close-recovered-failure-issues.mjs`, che gia' lo esporta. Due copie della
 // stessa regex sono due posti dove il contratto puo' divergere in silenzio.
@@ -50,7 +66,64 @@ const ISSUE = process.env.ISSUE_NUMBER || '';
 const DRY = process.argv.includes('--dry-run');
 
 /** I verdetti che possono nascondere un «lato sbagliato del mirror». */
-export const HANDOFF_VERDICTS = new Set(['blocked-admin-settings', 'blocked-workflows-scope']);
+export const HANDOFF_VERDICTS = new Set([
+  'blocked-admin-settings',
+  'blocked-workflows-scope',
+  // `no-root-cause` NON significa sempre «non ho trovato la causa». Misurato su
+  // #316 (10 run fra il 2026-08-14 e il 2026-09-03): la causa era trovata,
+  // scritta e riconfermata ogni volta — `isQueueManaged` in
+  // `scripts/ci/followup-drainer.mjs` — e il fixer si fermava perche' quel file
+  // e' `mode: identical` nel manifest, quindi scriverlo da qui verrebbe
+  // sovrascritto al mirror successivo (AGENTS.md non-negoziabile #6). E'
+  // esattamente il «lato sbagliato del mirror» che questo script esiste per
+  // consegnare, ma il verdetto emesso non era instradabile: la diagnosi restava
+  // in un commento che il sito non legge, e la issue ha ri-pagato 10 run
+  // identici. Il verdetto da solo NON basta a distinguerlo da un vicolo cieco
+  // vero: vedi `MIRROR_LOCKED_MODES` per la condizione che lo fa.
+  'no-root-cause',
+]);
+
+/**
+ * I `mode` del manifest per cui una fix scritta QUI viene sovrascritta al mirror
+ * successivo — cioe' la definizione operativa di «lato sbagliato del mirror».
+ *
+ * Solo `identical`: un file `adapted` e' dichiarato diverso per costruzione ed e'
+ * **nostro** da modificare, quindi un `no-root-cause` che lo cita non e' un caso
+ * di mirror. `corpus-only` non esiste nemmeno la'.
+ */
+export const MIRROR_LOCKED_MODES = new Set(['identical']);
+
+const MANIFEST_PATH = fileURLToPath(new URL('./loop-sync-manifest.json', import.meta.url));
+
+/**
+ * I path che il manifest dichiara bloccati dal mirror, come mappa
+ * **path del corpus → path del sito**. Letti dalla SORGENTE UNICA
+ * (`scripts/ci/loop-sync-manifest.json`), non da un elenco ricopiato qui: se un
+ * file cambia `mode`, questa decisione cambia con lui, gratis.
+ *
+ * I due lati NON hanno lo stesso path: 112 dei 157 entry `identical` portano un
+ * `sitePath` diverso (`host/shared/clauseTail.mjs` →
+ * `build-plugins/shared/clauseTail.mjs`). La chiave resta il path del corpus,
+ * perche' e' la forma in cui il fixer scrive la diagnosi; il valore e' quello da
+ * spedire, perche' e' l'unico che di la' esiste. Stessa risoluzione
+ * (`sitePath || path`) di `transport-identical-twins.mjs` e `loop-drift-check.mjs`,
+ * gli altri due lettori del manifest che parlano al repo del sito.
+ */
+export function mirrorLockedPaths(manifestPath = MANIFEST_PATH) {
+  try {
+    const man = JSON.parse(readFileSync(manifestPath, 'utf8'));
+    const out = new Map();
+    for (const f of man?.files || []) {
+      if (!MIRROR_LOCKED_MODES.has(f?.mode) || !f?.path) continue;
+      out.set(f.path, f.sitePath || f.path);
+    }
+    return out;
+  } catch {
+    // Manifest illeggibile → mappa vuota: nessun `no-root-cause` viene
+    // spedito. Il fallimento sicuro e' non consegnare, non consegnare a caso.
+    return new Map();
+  }
+}
 
 /**
  * Ultimo verdetto + il corpo che lo porta. Pura.
@@ -103,25 +176,83 @@ export function extractSitePaths(body) {
  *
  * `handoff: false` è il default e non un errore: la maggior parte dei
  * `blocked-admin-settings` di un repo normale è davvero un'impostazione di repo,
- * e spedirla al sito sarebbe rumore. Servono TUTTE E TRE le condizioni — il
+ * e spedirla al sito sarebbe rumore. Servono TUTTE E TRE le condizioni base — il
  * verdetto giusto, il nome del repo del sito, e almeno un path — perché è la
  * congiunzione che ha selezionato 4 casi su 4 senza falsi.
  *
- * @returns {{handoff: boolean, paths: string[], reason: string}}
+ * `no-root-cause` usa invece verdetto + path + **manifest**, e SOSTITUISCE la
+ * condizione sul nome del repo invece di aggiungersi ad essa. Due misure del
+ * 2026-09-04 sulle 26 issue aperte con un verdetto:
+ *
+ * - La congiunzione a tre non basta a disambiguare questo verdetto, che copre
+ *   sia il vicolo cieco vero sia il mirror: avrebbe spedito anche #694, i cui
+ *   path sono `adapted` e corpus-only — lavoro NOSTRO — chiudendo qui una issue
+ *   legittima. Peggio del parcheggio che il hand-off esiste per togliere.
+ * - Il nome del repo in prosa e' un falso negativo: dei 14 verdetti di #316,
+ *   4 non scrivono lo slug `frontaliere-si-o-no` pur diagnosticando lo stesso
+ *   file `identical`. Legare la consegna alla prosa dell'agente la rende un
+ *   terno al lotto, mentre `mode: identical` nel manifest **e'** l'affermazione
+ *   che quel file e' condiviso col sito: e' evidenza piu' forte, non piu' debole.
+ *
+ * Con questa regola la selezione e' 1 su 26, ed e' #316 — l'unica che il mirror
+ * blocca davvero.
+ *
+ * `paths` sono i path **come esistono sul sito** (`sitePath` del manifest quando
+ * differisce): il match resta sul path del corpus, che e' la forma in cui il
+ * fixer scrive la diagnosi, ma spedire quella forma manderebbe il fixer di la' a
+ * cercare un file che nel suo repo non c'e'.
+ *
+ * `residual` sono i path citati che il mirror NON porta — lavoro che resta qui.
+ * Non e' un dettaglio di reporting: e' cio' che decide se la issue di origine si
+ * puo' chiudere `completed` (vedi `main`), perche' una issue aggregata come #316
+ * porta anche item su file `adapted` che nessun mirror consegnera'.
+ *
+ * @returns {{handoff: boolean, paths: string[], residual: string[], reason: string}}
  */
-export function handoffDecision({ verdict, body } = {}) {
+export function handoffDecision({ verdict, body, lockedPaths } = {}) {
   if (!verdict || !HANDOFF_VERDICTS.has(verdict)) {
-    return { handoff: false, paths: [], reason: `verdetto non instradabile: ${verdict ?? 'nessuno'}` };
-  }
-  const siteName = SITE_REPO.split('/')[1];
-  if (!String(body || '').includes(siteName)) {
-    return { handoff: false, paths: [], reason: 'la diagnosi non nomina il repo del sito' };
+    return { handoff: false, paths: [], residual: [], reason: `verdetto non instradabile: ${verdict ?? 'nessuno'}` };
   }
   const paths = extractSitePaths(body);
   if (!paths.length) {
-    return { handoff: false, paths: [], reason: 'nessun path citato: la diagnosi non è azionabile così com\'è' };
+    return { handoff: false, paths: [], residual: [], reason: 'nessun path citato: la diagnosi non è azionabile così com\'è' };
   }
-  return { handoff: true, paths, reason: `diagnosi con ${paths.length} path del sito` };
+  if (verdict === 'no-root-cause') {
+    const locked = lockedPaths ?? mirrorLockedPaths();
+    // Il manifest e' una mappa corpus→sito; una `Set` iniettata resta accettata e
+    // vale come identita' (il path del sito e' lo stesso del corpus).
+    const siteOf = (p) => (typeof locked.get === 'function' ? locked.get(p) : null) || p;
+    const blocked = paths.filter((p) => locked.has(p));
+    if (!blocked.length) {
+      return {
+        handoff: false,
+        paths: [],
+        residual: [],
+        reason: 'no-root-cause senza path `identical` nel manifest: vicolo cieco, non lato sbagliato del mirror',
+      };
+    }
+    // Si spediscono i SOLI path bloccati, non tutti quelli citati. Una diagnosi
+    // di questa forma nomina anche i file NOSTRI che ha esaminato per escluderli
+    // (`classify-issue.mjs` e' `adapted`, `loop-sync-manifest.json` e' la prova):
+    // elencarli di la' sotto «path del sito» direbbe al ciclo del sito di
+    // cambiare file che il mirror non condivide. Il corpo integrale della
+    // diagnosi viaggia comunque sotto, quindi il contesto non si perde.
+    const sitePaths = [...new Set(blocked.map(siteOf))];
+    return {
+      handoff: true,
+      paths: sitePaths,
+      residual: paths.filter((p) => !locked.has(p)),
+      reason: `diagnosi bloccata dal mirror su ${sitePaths.join(', ')}`,
+    };
+  }
+  const siteName = SITE_REPO.split('/')[1];
+  if (!String(body || '').includes(siteName)) {
+    return { handoff: false, paths: [], residual: [], reason: 'la diagnosi non nomina il repo del sito' };
+  }
+  // I `blocked-*` scrivono gia' i path COME LI VEDE IL SITO (il fixer li ha letti
+  // di la'): niente traduzione, e niente residuo — la forma misurata 4 su 4 e'
+  // «un solo file, e vive sul sito».
+  return { handoff: true, paths, residual: [], reason: `diagnosi con ${paths.length} path del sito` };
 }
 
 /** Titolo della issue sul sito. Pura — e il discriminante sta PRIMO. */
@@ -171,7 +302,9 @@ function main() {
   const body = [
     `Consegnata dal ciclo di \`${REPO}\` (post-step deterministico di \`issue-fix\`, zero-Claude).`,
     '',
-    `Il fixer di là ha diagnosticato al turno 1 che il file da cambiare vive **in questo repo**, e si è fermato — non ha i permessi per pushare qui. La diagnosi è completa e già pagata: è riportata sotto integralmente, così non va rifatta.`,
+    `Il fixer di là ha diagnosticato che il file da cambiare vive **in questo repo**, e si è fermato — o non ha i permessi per pushare qui, o il file è \`mode: identical\` nel manifest e una fix scritta di là verrebbe sovrascritta al mirror successivo. La diagnosi è completa e già pagata: è riportata sotto integralmente, così non va rifatta.`,
+    '',
+    `**Motivo dell'instradamento:** ${d.reason}`,
     '',
     `**Path del sito citati:** ${d.paths.map((p) => `\`${p}\``).join(', ')}`,
     '',
@@ -203,12 +336,36 @@ function main() {
 
   // Solo DOPO che la issue esiste di là si tocca questa: se l'apertura fallisce,
   // qui non resta traccia da ripulire e il prossimo giro riprova da zero.
+  //
+  // La chiusura NON è automatica. «Consegnata» e «risolta» coincidono solo
+  // quando TUTTO ciò che la diagnosi nomina scende col mirror. Una issue
+  // aggregata non è così: #316 porta anche un item su `scripts/lib/classify-issue.mjs`,
+  // che è `adapted` — lavoro NOSTRO — e vive nel body della issue, mentre di là
+  // viaggiano titolo + ultimo commento di verdetto. Chiuderla `completed`
+  // dichiarerebbe risolto anche quell'item e ne farebbe evaporare l'unico
+  // portatore, in silenzio e per effetto della consegna stessa.
+  //
+  // Quando resta un path citato che il mirror non porta si consegna e si
+  // PARCHEGGIA: `needs-human` + via le label di routing è l'esclusione che il
+  // drainer già usa (`followup-drainer.mjs`, i filtri di promozione), quindi la
+  // issue non ri-paga le run che questo script esiste per togliere, e
+  // `needs-human-sweep.yml` è la porta di rientro nel ciclo.
+  const residual = d.residual || [];
+  const tail = residual.length
+    ? `**Non la chiudo**: la diagnosi cita anche ${residual.map((p) => `\`${p}\``).join(', ')}, che il manifest NON dichiara \`identical\` — è lavoro di questo repo, il mirror non lo porterà, e questa issue ne resta l'unico portatore. La parcheggio in \`needs-human\` togliendo le label di routing, così non ri-paga run mentre aspetta.`
+    : 'Chiudo qui: quando la fix scenderà col mirror, la condizione che ha aperto questa issue non ci sarà più.';
   try {
     gh(['issue', 'comment', ISSUE, '--repo', REPO, '--body',
-      `📤 **Consegnata al sito**: ${url}\n\nIl fix vive in \`${SITE_REPO}\` e il ciclo di là ora ce l'ha, con la diagnosi di questo run riportata integralmente. Chiudo qui: quando la fix scenderà col mirror, la condizione che ha aperto questa issue non ci sarà più.`], { json: false });
-    gh(['issue', 'close', ISSUE, '--repo', REPO, '--reason', 'completed'], { json: false });
+      `📤 **Consegnata al sito**: ${url}\n\nIl fix vive in \`${SITE_REPO}\` e il ciclo di là ora ce l'ha, con la diagnosi di questo run riportata integralmente. ${tail}`], { json: false });
+    if (residual.length) {
+      gh(['issue', 'edit', ISSUE, '--repo', REPO,
+        '--add-label', 'needs-human', '--remove-label', 'agent:fix', '--remove-label', 'agent:fix-queued'], { json: false });
+    } else {
+      gh(['issue', 'close', ISSUE, '--repo', REPO, '--reason', 'completed'], { json: false });
+    }
   } catch (e) {
-    console.log(`::warning::handoff-to-site: #${ISSUE} consegnata ma non chiusa (${String(e).slice(0, 100)}). La issue del sito esiste: nessun lavoro perso.`);
+    const what = residual.length ? 'non parcheggiata' : 'non chiusa';
+    console.log(`::warning::handoff-to-site: #${ISSUE} consegnata ma ${what} (${String(e).slice(0, 100)}). La issue del sito esiste: nessun lavoro perso.`);
   }
 }
 
