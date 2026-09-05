@@ -924,6 +924,24 @@ console.log(`[build-api] wrote ${Object.keys(written).length} files to dist/api`
       mismatches.push(`${key}: declared ${declared[key]}, on disk ${actual}`);
     }
   }
+  // `slugs.json` non ha un contatore proprio in `counts`, ma indicizza lo
+  // stesso set di `articles.json`, e il consumer lo verifica gia' contro il
+  // manifest: `validateAnnouncedSurface()` in scripts/reconcile-article-shards.mjs
+  // rifiuta la superficie se `slugs.blog` e `counts.articles` non combaciano.
+  // Senza la stessa asserzione qui, questo repo puo' PUBBLICARE una superficie
+  // che il consumer rifiutera' a valle — e il sito non ribuilda, quindi il
+  // rifiuto arriva in produzione invece che alla build che l'ha prodotta.
+  if (exists('slugs.json')) {
+    const slugs = jsonOut('slugs.json');
+    const indexed = { blog: 'articles', swiss: 'swissArticles' };
+    for (const [section, counter] of Object.entries(indexed)) {
+      const keys = Object.keys(slugs?.[section] ?? {}).length;
+      if (keys !== declared[counter]) {
+        mismatches.push(`slugs.${section}: ${keys} ids, manifest.counts.${counter} declares ${declared[counter]}`);
+      }
+    }
+  }
+
   // Le immagini sono l'unico artefatto che il consumer non puo' ri-derivare,
   // quindi il file trasferito conta quanto la voce che lo indicizza: una
   // copia interrotta a meta' lascia l'indice pieno e la cartella corta.

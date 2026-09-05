@@ -80,6 +80,17 @@ test('la cartella delle immagini e’ confrontata con l’indice che la dichiara
   assert.match(SRC, /images\/blog holds/);
 });
 
+test('slugs.json e’ confrontato col manifest dal lato che pubblica, non solo da chi legge', () => {
+  // `validateAnnouncedSurface()` (scripts/reconcile-article-shards.mjs) rifiuta
+  // gia' la superficie se `slugs.blog` non combacia con `counts.articles`. Senza
+  // la stessa asserzione nel producer, questo repo puo' PUBBLICARE un set che il
+  // consumer rifiutera' a valle — e il sito non ribuilda, quindi il rifiuto
+  // arriva in produzione invece che alla build che l'ha prodotto.
+  assert.match(SRC, /slugs\.\$\{section\}: \$\{keys\} ids/);
+  const consumer = readFileSync(resolve(ROOT, 'scripts/reconcile-article-shards.mjs'), 'utf-8');
+  assert.match(consumer, /slugs\.blog ha \$\{blogKeys\} id ma il manifest ne annuncia/);
+});
+
 test('sul set pubblicato ogni contatore combacia con gli artefatti', { skip: !existsSync(join(ROOT, 'dist/api/manifest.json')) && 'dist/api non costruito in questo job' }, () => {
   // `dist/` e' gitignored, quindi questo controllo gira solo dopo una build
   // reale (in CI: lo step `build-api` di publish-api.yml). Quando gira e'
@@ -103,4 +114,8 @@ test('sul set pubblicato ogni contatore combacia con gli artefatti', { skip: !ex
     .filter((xml) => xml.includes('<rss'));
   assert.equal(counts.rssFeeds, feeds.length);
   assert.equal(counts.rssItems, feeds.reduce((n, xml) => n + occurrences(xml, '<item>'), 0));
+
+  const slugs = jsonOut('slugs.json');
+  assert.equal(Object.keys(slugs.blog).length, counts.articles);
+  assert.equal(Object.keys(slugs.swiss).length, counts.swissArticles);
 });
