@@ -8586,9 +8586,15 @@ Rispondi SOLO con JSON valido, senza markdown.` },
     if (_abortDichiarato && !_evidenzaNonLetta) {
       // Stessa riga del valle, stesso verdetto, stesso contatore. Il contatore
       // serve QUI e non basta quello del valle: il payload che uscira' dalla
-      // 2/2 (`merged`) nasce da `metaData`, la cui meta' non ha
-      // `abort_topical_relevance`, quindi la contraddizione non arriva mai al
-      // gate di valle e sparirebbe dal run report.
+      // 2/2 (`merged`) e' costruito senza `abort_topical_relevance`/`reason`
+      // — il merge li toglie apposta (vedi `META_ROOT_KEYS_ESCLUSE` piu'
+      // sotto) — quindi la contraddizione non arriva mai al gate di valle e
+      // sparirebbe dal run report se non la contassimo qui.
+      //
+      // E' anche il motivo per cui il merge deve toglierli: finche' li
+      // propagava, la STESSA meta' 1/2 veniva contata due volte — qui e poi
+      // di nuovo a valle, dove `isTopicGateAbortVerdict(itData)` e' falso
+      // perche' il corpo (che viene dalla 1/2) c'e'. Vedi #829.
       console.error(
         `  ⚠️  [prompt-split] chiamata 1/2 ha dichiarato abort_topical_relevance=true MA ha `
         + `anche reso ${articolo.length}ch di corpo — contract violation, trusting content `
@@ -8659,6 +8665,31 @@ Rispondi SOLO con JSON valido, senza markdown.` },
     // solo modo in cui sopravvive: non e' in META_ONLY_FIELDS ne' in
     // BODY_ONLY_FIELDS), tutto il resto no.
     const META_CONTENT_KEYS = [...META_ONLY_FIELDS, 'faq'];
+    // Alla RADICE vale la stessa regola, e per una ragione in piu'.
+    // `abort_topical_relevance`/`reason` sono chiavi della meta' BODY
+    // (`ROOT_KEYS_BODY`), non di questa: lo schema `article_metadata_only` non
+    // le dichiara, e il prompt della 2/2 non nomina nemmeno REGOLA #0
+    // (`${_isMeta ? '' : topicalRelevanceGate}`). Ma la forma che i provider
+    // ricevono e' PERMISSIVA (`sanitizeSchemaForGemini` toglie
+    // `additionalProperties: false`), quindi il modello puo' emetterle lo
+    // stesso — e con `...metaData` finivano dritte nel payload unificato.
+    //
+    // Cosa costava lasciarle passare: a valle il gate rilegge il flag su
+    // `merged`, dove il corpo C'E' (viene dalla 1/2), quindi
+    // `isTopicGateAbortVerdict` e' falso e il ramo preso e' quello di
+    // auto-contraddizione — «contract violation, trusting content over the
+    // flag» piu' `RUN_REPORT.topicGateSelfContradictions++` — per una meta'
+    // che il flag non doveva nemmeno emettere. Il contatore delle
+    // auto-contraddizioni contava cosi' anche dei NON-CASI, e in piu' li
+    // contava DUE volte quando l'auto-contraddizione vera era della 1/2 (il
+    // ramo ~90 righe sopra l'ha gia' contata). Un contatore che conta non-casi
+    // non e' una metrica rumorosa: e' una metrica che non si puo' leggere.
+    //
+    // Un abort VERO non passa mai di qui: quando la 1/2 aborta davvero, la
+    // funzione torna `JSON.stringify(bodyData)` senza fare la 2/2. Quindi
+    // togliere le due chiavi non puo' nascondere un rifiuto — puo' solo
+    // smettere di inventarne uno.
+    const META_ROOT_KEYS_ESCLUSE = ['abort_topical_relevance', 'reason'];
     const recoveredFaq = recoverMisplacedFaq(metaData, primaryLocale) ?? recoverMisplacedFaq(bodyContent, primaryLocale) ?? recoverMisplacedFaq(bodyData, primaryLocale);
     // I campi della 1/2 restano RAW (niente trim: il corpo deve sopravvivere
     // byte per byte), ma SOLO `BODY_ONLY_FIELDS` e SOLO se stringhe: un
@@ -8666,7 +8697,12 @@ Rispondi SOLO con JSON valido, senza markdown.` },
     // spedirebbe quel valore grezzo nel content pubblicato senza questo
     // controllo (issue #578).
     const merged = {
-      ...metaData,
+      // Radice della 2/2 SENZA `abort_topical_relevance`/`reason` (#829):
+      // sono chiavi della meta' BODY, e propagarle faceva scattare a valle
+      // l'auto-contraddizione su un corpo che veniva dalla 1/2.
+      ...Object.fromEntries(
+        Object.entries(metaData || {}).filter(([k]) => !META_ROOT_KEYS_ESCLUSE.includes(k)),
+      ),
       content: {
         ...(metaData?.content || {}),
         [primaryLocale]: {
