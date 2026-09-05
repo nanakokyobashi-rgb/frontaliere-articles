@@ -991,23 +991,54 @@ export function localesNeedingTranslation(byLocale, locales = ['it', 'en', 'de',
 }
 
 /**
+ * Drop from a `titleByLocale`/`descriptionByLocale` map ogni chiave il cui
+ * valore non e' testo pubblicabile — il `NULL` maiuscolo con cui l'export
+ * CSV/DB di un organizzatore scrive la colonna vuota, per primo.
+ *
+ * E' il punto UNICO in cui l'invariante «meglio un locale assente che un
+ * `NULL` pubblicato» vale sulla mappa in INGRESSO: il `delete` dentro il loop
+ * di `fillLocaleGaps` copriva i soli locali che il loop attraversa, mentre i
+ * due early-return (`needing.length === 0`, `present.length === 0`) e il
+ * pass-through di `deadline` restituivano la mappa verbatim. Con
+ * `{ it: 'NULL', de: 'NULL', en: 'NULL', fr: 'NULL' }` — la colonna vuota di
+ * un feed, cioe' esattamente la provenienza per cui il predicato severo
+ * esiste — nessun locale e' «presente», il loop non parte, e il marker si
+ * pubblicava come titolo e come descrizione dell'evento. Un `NULL` del feed
+ * non e' un gap ritentato alla run dopo: e' un valore pubblicato ora.
+ *
+ * Ritorna la STESSA reference quando non c'e' niente da togliere, cosi' il
+ * contratto «mai mutare l'input» resta e le mappe sane non vengono copiate.
+ */
+function stripUnusableLocaleValues(byLocale) {
+  if (!byLocale || typeof byLocale !== 'object') return byLocale;
+  const poisoned = Object.keys(byLocale).filter((l) => !hasUsableContentText(byLocale[l]));
+  if (poisoned.length === 0) return byLocale;
+  const cleaned = { ...byLocale };
+  for (const l of poisoned) delete cleaned[l];
+  return cleaned;
+}
+
+/**
  * Fill in missing/duplicate locales of ONE `titleByLocale`/
  * `descriptionByLocale` map via the free translation cascade, memoized on
  * disk in `cache` (caller loads/saves once per run, same convention as
  * `loadEventTitleTranslationCache`). Returns a NEW map — never mutates
- * `byLocale` — or the SAME reference when nothing needs translating.
+ * `byLocale` — or the SAME reference when nothing needs translating and
+ * nothing was poisoned in input.
  */
 async function fillLocaleGaps(byLocale, cache, { fieldType, locales, delayMs, translateFn }) {
-  const needing = localesNeedingTranslation(byLocale, locales);
-  if (needing.length === 0) return byLocale;
+  // Prima di ogni ramo, compresi i due che non entrano nel loop.
+  const clean = stripUnusableLocaleValues(byLocale);
+  const needing = localesNeedingTranslation(clean, locales);
+  if (needing.length === 0) return clean;
 
-  const present = locales.filter((l) => hasUsableContentText(byLocale?.[l]));
-  if (present.length === 0) return byLocale;
+  const present = locales.filter((l) => hasUsableContentText(clean?.[l]));
+  if (present.length === 0) return clean;
   const sourceLocale = present.find((l) => !needing.includes(l)) || present[0];
-  const sourceText = byLocale[sourceLocale];
+  const sourceText = clean[sourceLocale];
   const normalizedSource = normalizeText(sourceText).replace(/\s+/g, ' ');
 
-  const updated = { ...byLocale };
+  const updated = { ...clean };
   for (const target of needing) {
     if (target === sourceLocale) continue;
     const cacheKey = `${fieldType}::${sourceLocale}::${normalizedSource}`;
@@ -1021,17 +1052,12 @@ async function fillLocaleGaps(byLocale, cache, { fieldType, locales, delayMs, tr
       }
     }
     // Una traduzione `"null"` non deve ne' entrare in cache ne' sovrascrivere
-    // il gap: il locale resta scoperto e cade sul testo della sorgente.
-    //
-    // Lo spread di `byLocale` qui sopra conserva pero' il valore in INGRESSO,
-    // e il caso di #868 item 5 e' proprio quello in cui la chiave c'e' gia' e
-    // vale `NULL` dal feed: senza il `delete`, una traduzione fallita — esito
-    // ordinario della cascata gratuita (rate-limit, motore giu', quota) —
-    // lascerebbe il marker del feed a farsi pubblicare come titolo/descrizione
-    // del locale. L'invariante «meglio un locale assente che un `NULL`
-    // pubblicato» vale in ingresso come in uscita.
+    // il gap: il locale resta scoperto e cade sul testo della sorgente. La
+    // chiave gia' avvelenata in ingresso (#868 item 5) e' gia' caduta con
+    // `stripUnusableLocaleValues`, quindi qui basta non riscriverla: una
+    // traduzione fallita — esito ordinario della cascata gratuita
+    // (rate-limit, motore giu', quota) — lascia il locale assente.
     if (hasUsableContentText(translated)) updated[target] = translated;
-    else if (!hasUsableContentText(updated[target])) delete updated[target];
   }
   return updated;
 }
@@ -1075,6 +1101,12 @@ export async function enrichEventsWithLocaleFallbackTranslations(events, cache, 
   let skipped = 0;
   for (const event of events) {
     const next = { ...event };
+    // Le chiavi avvelenate cadono PRIMA del pass-through di `deadline`: un
+    // evento spedito non tradotto tiene il testo della sorgente, ma un `NULL`
+    // del feed non e' testo della sorgente — e' il modo in cui quel feed dice
+    // «colonna vuota», e senza questo verrebbe pubblicato ora.
+    if (next.titleByLocale) next.titleByLocale = stripUnusableLocaleValues(next.titleByLocale);
+    if (next.descriptionByLocale) next.descriptionByLocale = stripUnusableLocaleValues(next.descriptionByLocale);
     if (deadline !== null && Date.now() >= deadline) {
       // Shallow-copied like every other element, so the "new array, never
       // mutated in place" contract holds on the timed-out tail too.
@@ -1082,11 +1114,11 @@ export async function enrichEventsWithLocaleFallbackTranslations(events, cache, 
       skipped += 1;
       continue;
     }
-    if (event.titleByLocale) {
-      next.titleByLocale = await fillLocaleGaps(event.titleByLocale, cache, { fieldType: 'title', locales, delayMs, translateFn });
+    if (next.titleByLocale) {
+      next.titleByLocale = await fillLocaleGaps(next.titleByLocale, cache, { fieldType: 'title', locales, delayMs, translateFn });
     }
-    if (event.descriptionByLocale) {
-      next.descriptionByLocale = await fillLocaleGaps(event.descriptionByLocale, cache, {
+    if (next.descriptionByLocale) {
+      next.descriptionByLocale = await fillLocaleGaps(next.descriptionByLocale, cache, {
         fieldType: 'description',
         locales,
         delayMs,

@@ -176,6 +176,63 @@ describe('events-utils — il feed dell’organizzatore non parla tedesco', () =
     assert.equal(t.en, 'titolo-en');
     assert.equal(t.it, 'Sagra della castagna');
   });
+
+  test('la mappa TUTTA avvelenata non torna verbatim: nessun locale «presente», nessun loop', async () => {
+    // La colonna vuota di un export CSV/DB dell'organizzatore: `NULL` su tutti
+    // e quattro i locali. `present.length === 0`, quindi il loop non parte e i
+    // due early-return di `fillLocaleGaps` restituivano la mappa in INGRESSO
+    // verbatim — il marker pubblicato come titolo E come descrizione.
+    const events = [{
+      id: 'e1',
+      titleByLocale: { it: 'NULL', de: 'NULL', en: 'NULL', fr: 'NULL' },
+      descriptionByLocale: { it: 'NULL', de: 'Null', en: 'null', fr: '  NULL  ' },
+    }];
+    let chiamate = 0;
+    const out = await enrichEventsWithLocaleFallbackTranslations(events, {}, {
+      delayMs: 0,
+      translateFn: async () => { chiamate += 1; return 'x'; },
+    });
+    assert.equal(chiamate, 0, 'senza una sorgente utilizzabile non c’e’ niente da tradurre');
+    assert.deepEqual(out[0].titleByLocale, {}, 'nessun `NULL` sopravvive come titolo');
+    assert.deepEqual(out[0].descriptionByLocale, {}, 'ne’ come descrizione, in nessuna grafia');
+  });
+
+  test('nessun gap da riempire ma una chiave fuori dai locali avvelenata: non torna verbatim', async () => {
+    // L'altro early-return: `needing.length === 0` — ogni locale richiesto e'
+    // testo vero — mentre una chiave in piu' portata dal feed vale `NULL`.
+    const events = [{
+      id: 'e1',
+      titleByLocale: { it: 'Sagra', en: 'Fair', de: 'Fest', fr: 'Fete', rm: 'NULL' },
+    }];
+    const out = await enrichEventsWithLocaleFallbackTranslations(events, {}, {
+      delayMs: 0,
+      translateFn: async () => { throw new Error('non deve essere chiamata'); },
+    });
+    assert.equal('rm' in out[0].titleByLocale, false, 'il marker cade anche sul ramo senza gap');
+    assert.equal(out[0].titleByLocale.de, 'Fest');
+  });
+
+  test('il pass-through di `deadline` spedisce l’evento senza il marker del feed', async () => {
+    // Oltre il budget l'evento passa non tradotto: tiene il testo della
+    // sorgente, che pero' non e' il `NULL` del feed. Quello va pubblicato ora,
+    // non «ritentato alla run dopo».
+    const events = [{
+      id: 'e1',
+      titleByLocale: { it: 'Sagra della castagna', de: 'NULL' },
+      descriptionByLocale: { it: 'Castagne e vin brule', fr: 'Null' },
+    }];
+    const out = await enrichEventsWithLocaleFallbackTranslations(events, {}, {
+      delayMs: 0,
+      deadline: Date.now() - 1,
+      translateFn: async () => { throw new Error('oltre il deadline non si traduce'); },
+    });
+    assert.equal('de' in out[0].titleByLocale, false, 'il marker non si pubblica sul tail scaduto');
+    assert.equal('fr' in out[0].descriptionByLocale, false);
+    assert.equal(out[0].titleByLocale.it, 'Sagra della castagna', 'il testo vero resta');
+    assert.equal(out[0].descriptionByLocale.it, 'Castagne e vin brule');
+    assert.notEqual(out[0], events[0], 'il contratto «mai mutare in place» tiene');
+    assert.equal(events[0].titleByLocale.de, 'NULL', 'l’input non e’ toccato');
+  });
 });
 
 // ── #868 item 1 — lo slug: la sola parte che non si corregge dopo ──────────
@@ -201,18 +258,45 @@ describe('slug: un titolo `Null` non produce /de/blog/null', () => {
       'attese quattro derivazioni: validate(), deriveAndSanitizeArticleSlugs() (assegnazione e recupero del segnaposto) e relocalizeSlugsAfterTranslation()',
     );
     const codice = CREATE_ARTICLE.replace(/^\s*(?:\/\/|\*).*$/gm, '');
-    const nude = codice.match(/slugifySlugPart\(\s*(?:localizedTitle|title)\s*\)/g) || [];
+    // Il vincolo NON e' sul nome dell'argomento: una regressione che scrive
+    // `slugifySlugPart(data.content[locale].title)` o `slugifySlugPart(t)`
+    // resterebbe verde su un'assertion legata a un elenco di identificatori,
+    // ed e' la stessa forma di difetto che aveva lasciato passare il ramo di
+    // recupero del segnaposto. Si conta ogni CALL-SITE, comunque si chiami
+    // l'argomento: la definizione a parte, oggi sono tre e sono nominati.
+    const tutte = [...codice.matchAll(/(function\s+)?\bslugifySlugPart\s*\(/g)];
+    assert.equal(tutte.filter((m) => m[1]).length, 1, 'una sola definizione di slugifySlugPart');
+    const nude = tutte.filter((m) => !m[1]);
     assert.equal(
       nude.length,
-      1,
+      3,
       'nessuna derivazione da titolo localizzato puo’ saltare il classificatore: '
-        + 'l’unica derivazione nuda ammessa e’ quella del ramo `for (const locale of [\'it\'])` '
-        + 'di validate(), dove il titolo e’ la sorgente e non una traduzione',
+        + 'le sole `slugifySlugPart()` nude ammesse sono la sintesi dell’`id` dal titolo IT '
+        + 'e il ramo `for (const locale of [\'it\'])` di validate() — dove il titolo e’ la '
+        + 'sorgente e non una traduzione — piu’ la normalizzazione interna a '
+        + 'inspectSlugForPromptPlaceholder(), che E’ il classificatore',
     );
-    assert.match(
-      codice.slice(0, codice.indexOf(nude[0])).split('\n').slice(-14).join('\n'),
-      /for \(const locale of \['it'\]\)/,
-      'la sola `slugifySlugPart()` nuda rimasta deve stare nel ramo IT-only',
+    // Ancorate alla funzione che le contiene, non a una finestra di righe: due
+    // righe aggiunte nel mezzo non devono far fallire il test.
+    const funzioneChiudente = (idx) => {
+      const m = [...codice.slice(0, idx).matchAll(/^(?:export\s+)?(?:async\s+)?function\s+([A-Za-z0-9_$]+)/gm)].pop();
+      return m ? m[1] : null;
+    };
+    assert.deepEqual(
+      nude.map((m) => funzioneChiudente(m.index)).sort(),
+      ['inspectSlugForPromptPlaceholder', 'validate', 'validate'],
+      'una `slugifySlugPart()` nuda fuori da validate()/inspectSlugForPromptPlaceholder() e’ una nuova derivazione',
+    );
+    // E una sola delle due in validate() sta dentro il loop IT-only: l'altra
+    // sintetizza l'`id` dal titolo italiano, che e' la sorgente.
+    const loopPiuVicino = (idx) => {
+      const m = [...codice.slice(0, idx).matchAll(/for\s*\(\s*const\s+locale\s+of\s+(\[[^\]]*\])\s*\)/g)].pop();
+      return m ? m[1].replace(/\s+/g, '') : null;
+    };
+    assert.equal(
+      nude.filter((m) => loopPiuVicino(m.index) === "['it']").length,
+      1,
+      'la sola derivazione nuda da un titolo di `data.content` deve stare nel ramo IT-only',
     );
   });
 
