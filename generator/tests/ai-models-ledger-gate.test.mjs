@@ -292,6 +292,26 @@ describe('#845 — recordModelContentFailure accetta l\'opt-out invece di scrive
     recordModelContentFailure('gpt-4o-mini');
     assert.ok(getStats().dirtyModels > 0, 'senza questo caso, un opt-out che spegnesse TUTTO passerebbe il test sopra');
   });
+
+  // Un id falsy entrava in `_runOutcomes` come CHIAVE, e `getRunOutcomes()`
+  // esplodeva nel comparatore (`a.model.localeCompare`) appena c'erano due
+  // voci. Il punto dolente non e' la chiamata sbagliata, e' dove il TypeError
+  // atterra: dentro `getStats()`, quindi dentro il riepilogo di fine run —
+  // porta via la diagnostica proprio del giro andato male. `recordModelContentFailure`
+  // aveva gia' la guardia; i suoi due gemelli no.
+  it('un id falsy non fa esplodere il riepilogo di fine run', () => {
+    recordModelFailure('gpt-4o-mini');
+    recordModelFailure(undefined);
+    recordModelFailure('');
+    recordModelSuccess(null);
+
+    const stats = getStats();
+    assert.deepEqual(
+      stats.runOutcomes.map((o) => o.model),
+      ['gpt-4o-mini'],
+      `nessun id falsy deve entrare nel tally di run: ${JSON.stringify(stats.runOutcomes)}`,
+    );
+  });
 });
 
 describe('#875 — resetState() lascia uno stato coerente', () => {

@@ -5610,7 +5610,7 @@ async function callLLM(messages, opts = {}) {
         // time pressure, not by model output quality; scoring it as a failure would
         // bias Firestore ai_model_scores against a model that may be perfectly fine.
         if (!wallBudgetExceeded()) {
-          recordModelContentFailure(modelUsedRef.model);
+          recordModelContentFailure(modelUsedRef.model, { recordScore: opts.recordScore });
         }
         // Bail out of this retry budget the moment the run-wide wall-clock
         // deadline is gone, instead of blindly looping to maxBody2Retries.

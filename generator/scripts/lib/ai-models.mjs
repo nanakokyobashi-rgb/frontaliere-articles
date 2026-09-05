@@ -3833,6 +3833,7 @@ function _registerExitHooks() {
 
 /** Record a model success — boosts its rank and persists to Firestore */
 export function recordModelSuccess(modelId, { recordScore = true } = {}) {
+  if (!modelId) return;
   _modelScores.set(modelId, (_modelScores.get(modelId) || 0) + SCORE_SUCCESS);
   const d = _modelDetails.get(modelId) || { successes: 0, failures: 0 };
   d.successes++;
@@ -3936,6 +3937,13 @@ export function recordModelContentFailure(modelId, { recordScore = true } = {}) 
  * rendere invisibile il prossimo incidente.
  */
 export function recordModelFailure(modelId, { nonRetryable = false, exhausted = false, transportOnly = false, recordScore = true } = {}) {
+  // Stessa guardia che `recordModelContentFailure` ha sempre avuto, e per una
+  // ragione misurabile: senza, un id falsy entra in `_runOutcomes` come chiave
+  // e `getRunOutcomes()` esplode nel comparatore (`a.model.localeCompare`) —
+  // dentro `getStats()`, cioe' dentro il riepilogo di fine run, dove un
+  // TypeError si porta via la diagnostica proprio del giro andato male.
+  // Riproducibile su `main` con due `recordModelFailure`, uno dei quali senza id.
+  if (!modelId) return;
   const penalty = transportOnly ? 0
                 : exhausted ? SCORE_EXHAUSTED
                 : nonRetryable ? SCORE_NON_RETRYABLE
