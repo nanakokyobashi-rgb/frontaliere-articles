@@ -118,6 +118,11 @@ export function inputCapVetoSummary(err) {
   const est = Number(cap.estimatedRequestTokens) || 0;
   const best = Number(cap.maxSkippedReqLimit) || 0;
   const buckets = echoBuckets(err && err.exhaustionBreakdown);
+  // La POLARITA' del call site, non una qualsiasi: questa riga spiega il veto
+  // di `isInputCapDeferralVeto`, che vota col pareggio al persistente (#357).
+  // Con l'altra polarita' la diagnostica descriverebbe un voto che nessuno ha
+  // fatto — che e' il difetto che sta correggendo, un giro piu' in basso.
+  const vote = transientMajorityVerdict(err && err.exhaustionBreakdown, { tie: 'persistent' });
   const removed = buckets.echoTransient + buckets.echoPersistent;
   return {
     estimatedRequestTokens: est,
@@ -134,11 +139,32 @@ export function inputCapVetoSummary(err) {
     // Quando gli echi sono la maggioranza il voto ricade sui numeri LORDI (vedi
     // isTransientMajority): senza questo flag la riga potrebbe mostrare due
     // secchi netti che non sono quelli che hanno deciso. La condizione e' la
-    // STESSA del guardrail, massa di echi DICHIARATA compresa: una diagnostica
-    // che ricopia una versione indebolita del predicato dichiara «sottrazione
-    // affidabile» proprio sulle run in cui non lo era.
-    echoDominated: Math.max(removed, buckets.echoTotalReported)
-      > buckets.netTransient + buckets.netPersistent,
+    // STESSA del guardrail, massa di echi DICHIARATA compresa — e ora e' LA
+    // stessa, letta dal voto invece che ricopiata: una diagnostica che ricopia
+    // una versione indebolita del predicato dichiara «sottrazione affidabile»
+    // proprio sulle run in cui non lo era.
+    echoDominated: vote.echoDominated,
+    // ── I QUATTRO CAMPI SU CUI IL VOTO HA DAVVERO DECISO (#857 → #888) ─────
+    //
+    // I due controlli aggiunti da #873 — pavimento delle prove nette e margine
+    // sugli echi non attribuiti — possono produrre un veto che i due secchi
+    // netti sopra NON spiegano: `{transient: 53, persistent: 52, total: 106,
+    // providerCooldownSkips: {total: 11}}` mostra 53 contro 52, cioe' una
+    // maggioranza transitoria, accanto a un veto deciso dal margine. Una riga
+    // diagnostica che spiega un verdetto diverso da quello preso smette di
+    // essere letta (e' la ragione per cui `quotaDeferralShare` porta
+    // `echoDominated`), quindi il verdetto porta con se' anche la sua ragione.
+    //
+    // Nessuno di questi e' ricalcolato qui: vengono dallo stesso voto che ha
+    // deciso l'exit code, che e' l'unico modo di garantire che descrivano
+    // quello e non un suo sosia (AGENTS.md #6).
+    decidedBy: vote.decidedBy,
+    netEvidence: vote.netEvidence,
+    echoHiddenInBuckets: vote.echoHiddenInBuckets,
+    // Il numero a SINISTRA del confronto che ha chiuso il voto, dopo il
+    // margine. Riportato grezzo, anche quando e' negativo, perche' e'
+    // letteralmente cio' che `wins()` ha visto.
+    votedTransient: vote.votedTransient,
   };
 }
 
@@ -438,14 +464,47 @@ function deferralTally(breakdown) {
  * @returns {boolean} true → il transitorio e' la maggioranza al netto
  */
 export function isTransientMajority(breakdown, options = {}) {
+  return transientMajorityVerdict(breakdown, options).verdict;
+}
+
+/**
+ * ── LO STESSO VOTO, CON LA RAGIONE DEL VERDETTO ────────────────────────────
+ *
+ * `isTransientMajority` risponde si'/no; questa risponde ANCHE «chi ha
+ * deciso», ed e' l'unica sorgente di entrambe le risposte. Esiste perche' una
+ * diagnostica che vuole spiegare il verdetto ha due sole strade: ricopiare
+ * l'aritmetica (pavimento, margine, guardrail) accanto al predicato — cioe'
+ * AGENTS.md #6 al contrario, su un calcolo che decide l'exit code di
+ * produzione — oppure leggerla da qui. `inputCapVetoSummary` legge da qui.
+ *
+ * `decidedBy` nomina il controllo che ha prodotto il verdetto:
+ *
+ *   `floor`  → nessuna riga indipendente nei due secchi netti (controllo 1).
+ *   `net`    → hanno deciso i due secchi netti, in un verso o nell'altro. E'
+ *              anche il caso del `true` finale, quando margine e guardrail
+ *              hanno lasciato passare il confronto netto.
+ *   `margin` → il netto diceva «transitorio», ma gli echi dichiarati che nella
+ *              massa ambigua non ci stanno lo ribaltano (controllo 2).
+ *   `gross`  → gli echi tolti erano la maggioranza delle prove rimaste, quindi
+ *              il netto non poteva ribaltare da solo e il verdetto e' quello
+ *              LORDO (guardrail). L'unico caso in cui i due secchi riportati
+ *              qui NON sono quelli che hanno deciso.
+ *
+ * Il guardrail si raggiunge solo dopo che pavimento, netto e margine hanno
+ * detto «transitorio»: `echoDominated` puo' quindi essere vero accanto a un
+ * `decidedBy` diverso da `gross`, ed e' voluto — dice «la sottrazione era
+ * inaffidabile», non «ha deciso il lordo».
+ *
+ * @param {unknown} breakdown `err.exhaustionBreakdown`
+ * @param {{tie?: 'transient'|'persistent'}} [options] a chi va il pareggio
+ * @returns {{verdict:boolean,decidedBy:'floor'|'net'|'margin'|'gross',netTransient:number,netPersistent:number,netEvidence:number,echoHiddenInBuckets:number,votedTransient:number,echoRemoved:number,echoDominated:boolean}}
+ */
+function transientMajorityVerdict(breakdown, options = {}) {
   const tie = (options && options.tie === 'persistent') ? 'persistent' : 'transient';
   const wins = (transient, persistent) => (
     tie === 'persistent' ? transient > persistent : transient >= persistent
   );
   const buckets = echoBuckets(breakdown);
-  // Pavimento: niente prove indipendenti, niente maggioranza (vedi 1 sopra).
-  if (buckets.netTransient + buckets.netPersistent <= 0) return false;
-  if (!wins(buckets.netTransient, buckets.netPersistent)) return false;
   // Margine contro gli echi dichiarati che nella massa ambigua non ci stanno,
   // e che quindi sono nei due secchi senza etichetta (vedi 2 sopra).
   const echoUnattributed = Math.max(
@@ -454,7 +513,6 @@ export function isTransientMajority(breakdown, options = {}) {
   );
   const ambiguousMass = Math.max(0, buckets.total - buckets.transient - buckets.persistent);
   const echoHiddenInBuckets = Math.max(0, echoUnattributed - ambiguousMass);
-  if (!wins(buckets.netTransient - echoHiddenInBuckets, buckets.netPersistent)) return false;
   // Il guardrail conta le righe DI QUESTO voto: gli echi DICHIARATI contro
   // quelli rimasti nei due secchi. Il denominatore sono i due secchi netti —
   // non `providerCooldownSkips > total` del tally, che porterebbe dentro il
@@ -468,11 +526,35 @@ export function isTransientMajority(breakdown, options = {}) {
   // direbbero «sottrazione affidabile» e il netto 50 vs 30 toglierebbe DA SOLO
   // il veto che il lordo 50 vs 60 metteva: il differimento su `cap.count > 0`,
   // cioe' il ciclo infinito di #313.
-  const removed = Math.max(buckets.echoTransient + buckets.echoPersistent, buckets.echoTotalReported);
-  if (removed > buckets.netTransient + buckets.netPersistent) {
-    return wins(buckets.transient, buckets.persistent);
+  const echoRemoved = Math.max(
+    buckets.echoTransient + buckets.echoPersistent,
+    buckets.echoTotalReported,
+  );
+  const netEvidence = buckets.netTransient + buckets.netPersistent;
+  const votedTransient = buckets.netTransient - echoHiddenInBuckets;
+  const base = {
+    netTransient: buckets.netTransient,
+    netPersistent: buckets.netPersistent,
+    netEvidence,
+    echoHiddenInBuckets,
+    votedTransient,
+    echoRemoved,
+    // Calcolato SEMPRE, anche quando il guardrail non viene raggiunto: e'
+    // l'affidabilita' della sottrazione, non il ramo percorso.
+    echoDominated: echoRemoved > netEvidence,
+  };
+  // Pavimento: niente prove indipendenti, niente maggioranza (vedi 1 sopra).
+  if (netEvidence <= 0) return { ...base, verdict: false, decidedBy: 'floor' };
+  if (!wins(buckets.netTransient, buckets.netPersistent)) {
+    return { ...base, verdict: false, decidedBy: 'net' };
   }
-  return true;
+  if (!wins(votedTransient, buckets.netPersistent)) {
+    return { ...base, verdict: false, decidedBy: 'margin' };
+  }
+  if (base.echoDominated) {
+    return { ...base, verdict: wins(buckets.transient, buckets.persistent), decidedBy: 'gross' };
+  }
+  return { ...base, verdict: true, decidedBy: 'net' };
 }
 
 function passesShare(transient, total) {
