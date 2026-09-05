@@ -23,11 +23,12 @@
  *   TODAY_ISO=2026-08-08 …   # pin "today" (tests/CI)
  */
 import path from 'node:path';
-import { readFileSync } from 'node:fs';
+import { readFileSync, appendFileSync } from 'node:fs';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { getServiceAccountAccessToken } from './lib/google-service-account-token.mjs';
 import { writeJsonAtomic } from './lib/atomic-write-json.mjs';
-import { decodeFields, buildDailyBrief } from './lib/daily-brief-data.mjs';
+import { decodeFields, buildDailyBrief, degradationAlarms, MAX_CONSECUTIVE_DEGRADED_EDITIONS } from './lib/daily-brief-data.mjs';
+import { MIN_AVAILABLE_BLOCKS } from './lib/daily-brief-content.mjs';
 import { isRetryableRcFetchStatus, rcFetchBackoffMs, RC_FETCH_ATTEMPTS, extractGoogleErrorReason } from './load-rc-env.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -120,7 +121,21 @@ async function tryFetch(label, fn) {
   }
 }
 
-export async function collectDailyBrief({ todayIso, nowMs = Date.now() } = {}) {
+/**
+ * Yesterday's snapshot, or `null` when there is none to read. The only durable
+ * state this pipeline has: it carries the per-block degradation streaks that
+ * `degradationAlarms` reads. Unreadable is the same as absent — a snapshot that
+ * cannot be parsed must not stop today's refresh, it just restarts the count.
+ */
+export function readPreviousSnapshot(snapshotPath = OUTPUT_PATH) {
+  try {
+    return JSON.parse(readFileSync(snapshotPath, 'utf-8'));
+  } catch {
+    return null;
+  }
+}
+
+export async function collectDailyBrief({ todayIso, nowMs = Date.now(), previous = readPreviousSnapshot() } = {}) {
   const creds = loadServiceAccountCreds();
   const token = await getServiceAccountAccessToken(creds, FIRESTORE_SCOPE);
   const [borderWaitDocs, fuelMetadata, exchangeDoc, jobsStats] = await Promise.all([
@@ -129,7 +144,14 @@ export async function collectDailyBrief({ todayIso, nowMs = Date.now() } = {}) {
     tryFetch('exchangeHistory/chf-eur-1m', () => getDoc(token, 'exchangeHistory/chf-eur-1m')),
     tryFetch('jobs-stats', () => fetchJson(JOBS_STATS_URL)),
   ]);
-  return buildDailyBrief({ todayIso, nowMs, borderWaitDocs, fuelMetadata, exchangeDoc, jobsStats });
+  return buildDailyBrief({ todayIso, nowMs, borderWaitDocs, fuelMetadata, exchangeDoc, jobsStats, previous });
+}
+
+/** `DEGRADED (3rd edition in a row) — reason`: the streak belongs in the log. */
+function degradedLine(block) {
+  const n = block.degradedEditions;
+  const streak = Number.isFinite(n) && n > 1 ? ` (${n} editions in a row)` : '';
+  return `DEGRADED${streak} — ${block.reason}`;
 }
 
 function printPlan(brief) {
@@ -138,39 +160,155 @@ function printPlan(brief) {
   const b = blocks.borderWait;
   console.log(b.available
     ? `  🛃 borderWait: ${b.count} crossings, worst ${b.worst.name} ${b.worst.waitMinutes}min, ${b.zeroWaitCount} at zero`
-    : `  🛃 borderWait: DEGRADED — ${b.reason}`);
+    : `  🛃 borderWait: ${degradedLine(b)}`);
   const f = blocks.fuel;
   console.log(f.available
-    ? `  ⛽ fuel: ${f.municipalityCount} municipalities, cheapest IT ${f.cheapestItaly[0]?.municipality ?? 'n/a'} ${f.cheapestItaly[0]?.minPriceEur ?? ''}€/L, CH cheaper in ${f.cheaperSwissCount}`
-    : `  ⛽ fuel: DEGRADED — ${f.reason}`);
+    ? `  ⛽ fuel: ${f.municipalityCount ?? '?'} municipalities, cheapest IT ${f.cheapestItaly[0]?.municipality ?? 'n/a'} ${f.cheapestItaly[0]?.minPriceEur ?? ''}€/L, CH cheaper in ${f.cheaperSwissCount ?? '?'}`
+    : `  ⛽ fuel: ${degradedLine(f)}`);
   const e = blocks.exchange;
   console.log(e.available
     ? `  💱 exchange: 1 CHF = ${e.rate}€ (${e.lastDate}), Δ1d ${e.delta1d}, Δ7d ${e.delta7d}`
-    : `  💱 exchange: DEGRADED — ${e.reason}`);
+    : `  💱 exchange: ${degradedLine(e)}`);
   const j = blocks.jobs;
   console.log(j.available
     ? `  💼 jobs: ${j.activeJobs} active, +${j.yesterdayAdded ?? '?'} yesterday, +${j.last7dAdded ?? '?'} in 7d`
-    : `  💼 jobs: DEGRADED — ${j.reason}`);
+    : `  💼 jobs: ${degradedLine(j)}`);
+  // The edition that will not exist is worth one explicit line. Without it the
+  // only trace of a day with no bulletin is `3/4 blocks` above and a commit
+  // step that finds nothing staged, both of which look like a normal run.
+  if (counts.availableBlocks < MIN_AVAILABLE_BLOCKS) {
+    console.warn(`⚠️  NO EDITION TODAY: ${counts.availableBlocks} available blocks, ${MIN_AVAILABLE_BLOCKS} needed — the generator will refuse this snapshot and nothing will be committed.`);
+  }
+}
+
+/**
+ * A block degraded for three editions running is a contract that changed
+ * upstream, not a source having a bad morning, and the pipeline has no other
+ * way to say so: the snapshot is written, the edition is one section shorter,
+ * the run is green, and that repeats until somebody happens to read a bulletin.
+ * So the crossing is announced — loudly, on the run and in its summary — and
+ * the count that produced it is committed with the snapshot.
+ *
+ * NOT with the exit code, and the reason is structural. This script is the
+ * FIRST step of `generate-daily-brief.yml`, and generation, guard, RC and
+ * `Commit and push` all sit behind its implicit `if: success()`. A non-zero
+ * exit here does not merely skip today's edition: it skips the COMMIT, so the
+ * snapshot `writeJsonAtomic` just wrote never leaves the runner. Tomorrow's
+ * checkout restores the D-1 snapshot, the streak recomputes to the same value,
+ * the crossing reads as new again, and the red repeats every morning forever —
+ * exactly the permanent outage the crossing logic was added to avoid, with the
+ * bulletin gone as well. A `workflow_dispatch` cannot break the loop either: it
+ * checks out the COMMITTED file, not the one the failed run left behind.
+ *
+ * So the alarm's job is to be impossible to miss, not to be fatal HERE: an
+ * `::error::` annotation on the run plus a block in `$GITHUB_STEP_SUMMARY`,
+ * while the streak keeps advancing inside a snapshot that actually gets
+ * committed. The red itself is spent by a verdict step placed AFTER
+ * `Commit and push` in `generate-daily-brief.yml`, which reads the crossing off
+ * `DEGRADATION_CROSSED_OUTPUT`: today's edition is pushed first, the streak
+ * reaches `main`, tomorrow reads `previous >= threshold` and is green again —
+ * the red is spent once, on the crossing edition, without costing a bulletin.
+ *
+ * A crossing this run will NOT record (`persisted: false`: the dry self-test,
+ * and the 0/4-blocks branch that deliberately keeps yesterday's snapshot) is
+ * announced and never turned into a verdict: nothing would remember it, so it
+ * would fail again tomorrow for the same crossing, forever.
+ */
+
+/**
+ * The step-output keys the workflow reads. One source: the gate step in
+ * `generate-daily-brief.yml` names them, and the binding between the two ends —
+ * which nothing can import across — is pinned by
+ * `daily-brief-degradation-alarm.test.mjs`.
+ */
+export const DEGRADATION_CROSSED_OUTPUT = 'degradation_crossed';
+export const DEGRADATION_BLOCKS_OUTPUT = 'degradation_blocks';
+
+/** Append `key=value` to `$GITHUB_OUTPUT`; a no-op outside Actions. */
+function publishStepOutput(key, value) {
+  const file = process.env.GITHUB_OUTPUT;
+  if (!file) return;
+  try {
+    appendFileSync(file, `${key}=${value}\n`);
+  } catch (err) {
+    // The crossing is already an ::error:: annotation and a summary block:
+    // losing the channel to the gate step must not also lose today's edition.
+    console.warn(`⚠️  could not write ${key} to GITHUB_OUTPUT: ${err.message}`);
+  }
+}
+
+function appendStepSummary(text) {
+  const file = process.env.GITHUB_STEP_SUMMARY;
+  if (!file) return;
+  try {
+    appendFileSync(file, `${text}\n`);
+  } catch (err) {
+    // A summary that cannot be written must not take the refresh down with it.
+    console.warn(`⚠️  could not write the step summary: ${err.message}`);
+  }
+}
+
+/** Announce every block whose degradation has outlived the threshold. */
+export function reportDegradationAlarms(brief, { dryRun, previous = null, persisted = !dryRun }) {
+  const alarms = degradationAlarms(brief, previous);
+  if (alarms.length === 0) return;
+  for (const a of alarms) {
+    const line = `daily-brief: the ${a.block} block has been degraded for ${a.editions} consecutive editions — ${a.reason}`;
+    // In dry mode (the on-push self-test) the alarm is real but it belongs to
+    // production, not to the change being tested: reporting it as an error
+    // would paint an unrelated push red.
+    console.warn(dryRun ? `⚠️  ${line}` : `::error::${line}`);
+  }
+  if (dryRun) return;
+  const crossed = alarms.filter((a) => a.crossed);
+  const headline = crossed.length > 0
+    ? `${crossed.map((a) => a.block).join(', ')} just reached ${MAX_CONSECUTIVE_DEGRADED_EDITIONS} degraded editions in a row`
+    : `${alarms.map((a) => a.block).join(', ')} still degraded past ${MAX_CONSECUTIVE_DEGRADED_EDITIONS} editions`;
+  console.error(`❌ ${headline}. That is an upstream shape/contract change, not an outage — the bulletin has been publishing without those sections and nothing was failing.`);
+  appendStepSummary([
+    `### ⚠️ Bollettino: degradazione persistente — ${headline}`,
+    '',
+    ...alarms.map((a) => `- \`${a.block}\`: ${a.editions} edizioni consecutive — ${a.reason}`),
+    '',
+    "Non e' un'interruzione della fonte: a questo punto e' un contratto cambiato a monte. Il contatore vive in `public/data/daily-brief.json` (`blocks.<nome>.degradedEditions`) e continua a salire finche' qualcuno non ripara la fonte o il guard.",
+  ].join('\n'));
+  if (crossed.length === 0) return;
+  if (!persisted) {
+    console.warn(`⚠️  this run writes no snapshot, so the crossing is not recorded — announced only, never a verdict: it would repeat identically tomorrow.`);
+    return;
+  }
+  publishStepOutput(DEGRADATION_CROSSED_OUTPUT, 'true');
+  publishStepOutput(DEGRADATION_BLOCKS_OUTPUT, crossed.map((a) => a.block).join(', '));
 }
 
 async function main() {
   const dryRun = process.env.DRY_RUN === '1' || process.env.DRY_RUN === 'true';
   const todayIso = process.env.TODAY_ISO || new Date().toISOString().slice(0, 10);
-  const brief = await collectDailyBrief({ todayIso });
+  // Read once and hand the same snapshot to both: it carries the streaks the
+  // brief counts forward AND the streaks the alarm compares against to tell
+  // the edition that crosses the threshold from the ones after it.
+  const previous = readPreviousSnapshot();
+  const brief = await collectDailyBrief({ todayIso, previous });
   printPlan(brief);
 
   if (dryRun) {
     console.log('DRY_RUN — no files written.');
+    reportDegradationAlarms(brief, { dryRun, previous });
     return;
   }
   if (brief.counts.availableBlocks === 0) {
     // All four sources down: leave yesterday's snapshot in place. The article
     // generator refuses it via dateIso, the cron commits nothing, stays green.
     console.warn('⚠️  0/4 blocks available — NOT writing daily-brief.json (previous snapshot left untouched).');
+    reportDegradationAlarms(brief, { dryRun, previous, persisted: false });
     return;
   }
   writeJsonAtomic(OUTPUT_PATH, brief);
   console.log(`✅ wrote ${path.relative(REPO_ROOT, OUTPUT_PATH)} (${brief.counts.availableBlocks}/4 blocks).`);
+  // After the write, never before: the alarm sets a non-zero exit code, and the
+  // snapshot must still land so the streak advances and the edition remains
+  // renderable from it.
+  reportDegradationAlarms(brief, { dryRun, previous });
 }
 
 const invokedDirectly = (() => {
