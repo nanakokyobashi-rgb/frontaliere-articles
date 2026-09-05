@@ -39,12 +39,17 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import {
+  closeTransportSet,
   couplingBlockers,
+  fetchFailureVerdict,
   isFixture,
   localCouplings,
+  parseRatio,
+  permanentBlock,
   transportVerdict,
   unsafeTarget,
 } from '../../scripts/ci/transport-identical-twins.mjs';
+import { parsePositiveNum } from '../../scripts/ci/scan-failed-runs.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 
@@ -212,4 +217,224 @@ test("nell'albero di oggi il golden del contratto NON è trasportabile", () => {
   const entry = manifest.files.find((e) => e.path === rel);
   const v = transportVerdict(entry, { site: 'bbbb', corpus: entry.baseline.corpus }, entry.baseline, { couplings });
   assert.equal(v.transport, false);
+});
+
+// ---------------------------------------------------------------------------
+// Il tetto per passata, e il BUIO che restava verde (issue #819, follow-up #766)
+//
+// Tre modi in cui una passata "riuscita" non era una passata: il tetto che
+// separa una metà dall'altra (in ENTRAMBI i versi), un accoppiamento escluso
+// prima ancora del tetto, e un fallimento di massa delle fetch che stampava
+// «0 da portare» ed usciva 0.
+// ---------------------------------------------------------------------------
+
+const cand = (rel, couplings = []) => ({ path: rel, couplings });
+
+test('il tetto non separa un fixture dal file che pinna (verso fixture → codice)', () => {
+  const candidates = [
+    cand('host/tests/x.golden.json', [{ path: 'host/x.ts', mode: 'identical' }]),
+    cand('host/x.ts'),
+  ];
+  const { chosen, capped } = closeTransportSet(candidates, { maxFiles: 1 });
+  assert.deepEqual(chosen.map((c) => c.path), [], 'il golden da solo mette rossa la PR di trasporto');
+  assert.equal(capped, 2, 'un conteggio solo: i candidati non copiati oggi');
+});
+
+test('il tetto non separa il file dal fixture che lo pinna (verso inverso)', () => {
+  // Il verso che il guard non copriva: se cade il FIXTURE e resta il codice, il
+  // golden LOCALE descrive codice appena cambiato — stessa PR rossa, stesso
+  // canale spento dal guard «una PR alla volta».
+  const candidates = [
+    cand('host/x.ts'),
+    cand('host/tests/x.golden.json', [{ path: 'host/x.ts', mode: 'identical' }]),
+  ];
+  const { chosen } = closeTransportSet(candidates, { maxFiles: 1 });
+  assert.deepEqual(chosen.map((c) => c.path), []);
+});
+
+test('la mappa inversa arriva anche da un fixture che non è candidato', () => {
+  // Il candidato non fixture ha `couplings: []` e da solo non sa di essere
+  // pinnato: l'arco arriva dal `couplingGraph`, raccolto per OGNI fixture.
+  const candidates = [cand('host/x.ts')];
+  const graph = [{ path: 'host/tests/x.golden.json', couplings: [{ path: 'host/x.ts', mode: 'identical' }] }];
+  const { chosen } = closeTransportSet(candidates, { maxFiles: 25, couplingGraph: graph });
+  assert.deepEqual(chosen.map((c) => c.path), [], 'il fixture è rimasto indietro: copiare il codice da solo lo rompe');
+});
+
+test('un accoppiamento VERIFICATO allineato non blocca', () => {
+  // `stable` = i due lati sono lo stesso byte: non c'è nessuna metà indietro.
+  const candidates = [cand('host/x.ts')];
+  const graph = [{ path: 'host/tests/x.golden.json', couplings: [{ path: 'host/x.ts', mode: 'identical' }] }];
+  const { chosen } = closeTransportSet(candidates, {
+    maxFiles: 25,
+    couplingGraph: graph,
+    alignedPaths: new Set(['host/tests/x.golden.json']),
+  });
+  assert.deepEqual(chosen.map((c) => c.path), ['host/x.ts']);
+});
+
+test('sotto il tetto e con entrambe le metà presenti si copia tutto', () => {
+  const candidates = [
+    cand('host/tests/x.golden.json', [{ path: 'host/x.ts', mode: 'identical' }]),
+    cand('host/x.ts'),
+  ];
+  const { chosen, capped } = closeTransportSet(candidates, { maxFiles: 25 });
+  assert.deepEqual(chosen.map((c) => c.path), ['host/tests/x.golden.json', 'host/x.ts']);
+  assert.equal(capped, 0);
+});
+
+test('un accoppiamento non `identical` non diventa un arco: sarebbe un no permanente', () => {
+  // Quel caso blocca già in `transportVerdict`; come arco renderebbe il suo
+  // vicino non copiabile per sempre, travestito da tetto.
+  const candidates = [cand('host/x.ts', [{ path: 'scripts/ci/auto-merge-eval.mjs', mode: 'adapted' }])];
+  const { chosen } = closeTransportSet(candidates, { maxFiles: 25 });
+  assert.deepEqual(chosen.map((c) => c.path), ['host/x.ts']);
+});
+
+test('la chiusura è un punto fisso: scartare A può separare B da A', () => {
+  const candidates = [
+    cand('a.golden.json', [{ path: 'b.golden.json', mode: 'identical' }]),
+    cand('b.golden.json', [{ path: 'c.ts', mode: 'identical' }]),
+    cand('c.ts'),
+  ];
+  const { chosen } = closeTransportSet(candidates, { maxFiles: 2 });
+  assert.deepEqual(chosen.map((c) => c.path), [], 'c cade fuori dal tetto, quindi cade b, quindi cade a');
+});
+
+test('un fallimento di massa delle fetch è ROSSO, non «0 da portare»', () => {
+  // Il canale al buio: 429/5xx su tutti i path stampava «0 da portare, 159 non
+  // verificati» e usciva verde — il trasporto si spegneva come il mirror
+  // disabilitato per tre settimane, col log giornaliero come unica traccia.
+  assert.equal(fetchFailureVerdict(159, 159).red, true);
+  assert.equal(fetchFailureVerdict(159, 100).red, true);
+  assert.equal(fetchFailureVerdict(2, 2).red, true, 'tutte fallite è buio anche su pochi path');
+});
+
+test('un transiente isolato resta verde: la soglia non è «una qualsiasi»', () => {
+  assert.equal(fetchFailureVerdict(159, 1).red, false);
+  assert.equal(fetchFailureVerdict(159, 2).red, false);
+  assert.equal(fetchFailureVerdict(159, 39).red, false, 'sotto il 25%: la passata ha verificato tutto il resto');
+  assert.equal(fetchFailureVerdict(159, 0).red, false);
+  assert.equal(fetchFailureVerdict(0, 0).red, false, 'manifest senza `identical`: niente da verificare, non un buio');
+});
+
+test('TRANSPORT_MAX_FILES malformato non fa SPARIRE il tetto', () => {
+  // `Number('venticinque')` è `NaN`, e `length >= NaN` è sempre falso: il tetto
+  // si disattivava invece di fallire (stessa classe degli override di #797/#811).
+  const warn = () => {};
+  assert.equal(parsePositiveNum('venticinque', 25, { label: 'TRANSPORT_MAX_FILES', warn }), 25);
+  assert.equal(parsePositiveNum('0', 25, { label: 'TRANSPORT_MAX_FILES', warn }), 25);
+  assert.equal(parsePositiveNum('-5', 25, { label: 'TRANSPORT_MAX_FILES', warn }), 25);
+  assert.equal(parsePositiveNum('3', 25, { label: 'TRANSPORT_MAX_FILES', warn }), 3);
+
+  let msg = '';
+  parsePositiveNum('venticinque', 25, {
+    label: 'TRANSPORT_MAX_FILES',
+    tool: 'transport-identical-twins',
+    warn: (m) => { msg = m; },
+  });
+  assert.match(msg, /\[transport-identical-twins\]/, 'il warning deve nominare chi ha ignorato l\'override');
+});
+
+// ---------------------------------------------------------------------------
+// Il rinvio che non scade. Il tetto rimanda l'altra metà «al giro in cui ci
+// stanno insieme»: vero per un vicino che domani torna candidato, FALSO per uno
+// che `permanentBlock` esclude sempre — e lì il rinvio diventa un no
+// permanente, con la passata verde e nessuno che lo legge.
+// ---------------------------------------------------------------------------
+
+test('permanentBlock separa il no che scade da quello che non scade', () => {
+  const fixture = {
+    path: 'generator/tests/crawler-cross-repo-artifacts.test.mjs',
+    mode: 'identical',
+    baseline: { site: 'aaaa', corpus: 'aaaa' },
+  };
+  // Accoppiato a una voce `corpus-only`, che non diventerà mai `identical`.
+  const couplings = [{ path: 'scripts/ci/loop-sync-manifest.json', mode: 'corpus-only' }];
+  assert.match(permanentBlock(fixture, { couplings }) || '', /non `identical`/);
+  assert.equal(permanentBlock(fixture, { couplings: [] }), null, 'senza bloccanti il no non è permanente');
+  assert.match(permanentBlock(twin({ mode: 'adapted' })) || '', /mode `adapted`/);
+  assert.match(permanentBlock(twin({ path: '../fuori.mjs' })) || '', /non scrivibile/);
+  assert.match(permanentBlock(twin({ path: '.github/workflows/tests.yml' })) || '', /workflows/);
+  // Lo STATO invece scade: non è mai una ragione permanente.
+  const v = transportVerdict(twin(), { site: 'aaaa', corpus: 'cccc' }, { site: 'aaaa', corpus: 'aaaa' });
+  assert.equal(v.transport, false);
+  assert.equal(v.permanent, false, '`corpus-ahead` oggi può essere `site-ahead` domani');
+});
+
+test('un vicino bloccato per SEMPRE non è «aspetta il prossimo giro»', () => {
+  // Caso reale del manifest: il fixture è bloccato per costruzione dai suoi
+  // `couplingBlockers`, ma i suoi archi `identical` pinnano due file che senza
+  // questa distinzione verrebbero scartati a ogni giro, in silenzio.
+  const candidates = [cand('scripts/ci/close-recovered-failure-issues.mjs')];
+  const graph = [{
+    path: 'generator/tests/crawler-cross-repo-artifacts.test.mjs',
+    couplings: [{ path: 'scripts/ci/close-recovered-failure-issues.mjs', mode: 'identical' }],
+  }];
+  const { chosen, dropped } = closeTransportSet(candidates, {
+    maxFiles: 25,
+    couplingGraph: graph,
+    blockedForever: new Set(['generator/tests/crawler-cross-repo-artifacts.test.mjs']),
+  });
+  assert.deepEqual(chosen.map((c) => c.path), [], 'copiare una metà sola mette comunque rossa la PR');
+  assert.equal(dropped[0].permanent, true);
+  assert.match(dropped[0].reason, /copia a mano/, 'la ragione deve nominare l\'unica azione che sblocca');
+  assert.doesNotMatch(dropped[0].reason, /aspetta il giro/, 'quel giro non arriva mai');
+});
+
+test('un vicino bloccato SOLO dal tetto resta un rinvio', () => {
+  const candidates = [
+    cand('host/tests/x.golden.json', [{ path: 'host/x.ts', mode: 'identical' }]),
+    cand('host/x.ts'),
+  ];
+  const { dropped } = closeTransportSet(candidates, { maxFiles: 1 });
+  assert.equal(dropped.every((d) => d.permanent === false), true);
+  assert.match(dropped[0].reason, /aspetta il giro/);
+});
+
+test('la permanenza si propaga lungo la catena', () => {
+  const candidates = [
+    cand('a.golden.json', [{ path: 'b.golden.json', mode: 'identical' }]),
+    cand('b.golden.json', [{ path: 'c.ts', mode: 'identical' }]),
+  ];
+  const { chosen, dropped } = closeTransportSet(candidates, {
+    maxFiles: 25,
+    blockedForever: new Set(['c.ts']),
+  });
+  assert.deepEqual(chosen.map((c) => c.path), []);
+  assert.equal(dropped.every((d) => d.permanent), true, 'chi cade per colpa di un caduto-per-sempre cade per sempre');
+});
+
+test('un 404 di massa è BUIO, non 158 rimozioni simultanee', () => {
+  // Il modo più probabile di perdere il canale: `SITE_REF` rinominato o repo
+  // reso privato → `raw.githubusercontent` risponde 404, `siteFile` ritorna
+  // `null` senza lanciare, `failed` resta 0 e la passata usciva VERDE con
+  // «0 da portare, 0 non verificati».
+  assert.equal(fetchFailureVerdict(158, 0, { missing: 158 }).red, true);
+  assert.match(fetchFailureVerdict(158, 0, { missing: 158 }).reason, /ref/);
+  assert.equal(fetchFailureVerdict(158, 0, { missing: 100 }).red, true);
+  assert.equal(fetchFailureVerdict(158, 40, { missing: 40 }).red, true, 'le due metà del buio si sommano');
+});
+
+test('una rimozione vera resta verde: la soglia non è «una qualsiasi»', () => {
+  assert.equal(fetchFailureVerdict(158, 0, { missing: 1 }).red, false);
+  assert.equal(fetchFailureVerdict(158, 0, { missing: 2 }).red, false);
+  assert.equal(fetchFailureVerdict(158, 1, { missing: 1 }).red, false);
+  assert.equal(fetchFailureVerdict(158, 0, { missing: 39 }).red, false, 'sotto il 25%: il resto è verificato');
+  assert.equal(fetchFailureVerdict(158, 0).red, false);
+});
+
+test('TRANSPORT_MAX_FAILURE_RATIO è una frazione, non una percentuale', () => {
+  // `25` (chi pensa in percentuale) rendeva `ratio > maxRatio` sempre falso: la
+  // difesa dal buio SPARIVA invece di fallire — la stessa classe del tetto.
+  const warn = () => {};
+  assert.equal(parseRatio('25', 0.25, { label: 'TRANSPORT_MAX_FAILURE_RATIO', warn }), 0.25);
+  assert.equal(parseRatio('1.5', 0.25, { label: 'TRANSPORT_MAX_FAILURE_RATIO', warn }), 0.25);
+  assert.equal(parseRatio('venticinque', 0.25, { label: 'TRANSPORT_MAX_FAILURE_RATIO', warn }), 0.25);
+  assert.equal(parseRatio('0.5', 0.25, { label: 'TRANSPORT_MAX_FAILURE_RATIO', warn }), 0.5);
+  assert.equal(parseRatio('1', 0.25, { label: 'TRANSPORT_MAX_FAILURE_RATIO', warn }), 1, '«tutte fallite» è un limite legittimo');
+
+  let msg = '';
+  parseRatio('25', 0.25, { label: 'TRANSPORT_MAX_FAILURE_RATIO', warn: (m) => { msg = m; } });
+  assert.match(msg, /\[transport-identical-twins\] TRANSPORT_MAX_FAILURE_RATIO=25/);
 });

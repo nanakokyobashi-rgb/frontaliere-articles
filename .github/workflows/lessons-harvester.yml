@@ -49,12 +49,19 @@ jobs:
 
       # One pending proposal at a time: if a harvest PR is already open and
       # awaiting human review, don't pile up a duplicate every day.
+      #
+      # Counted on `headRefName`, not via `--search head:`: the real branches
+      # are `lessons/auto-harvest-<RUN_ID>`, so the search form only worked if
+      # `head:` did a prefix match. On an exact match it would count 0 forever
+      # and the schedule would stack one PR a day, green every time — a guard
+      # that can't tell it is guarding nothing. `startswith` has no such
+      # semantics to guess at.
       - name: Guard — existing open proposal
         id: guard
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          OPEN=$(gh pr list --state open --search 'head:lessons/auto-harvest' --json number --jq 'length')
+          OPEN=$(gh pr list --state open --limit 100 --json headRefName --jq '[.[] | select(.headRefName | startswith("lessons/auto-harvest"))] | length')
           echo "open_proposals=$OPEN" >> "$GITHUB_OUTPUT"
           if [ "$OPEN" != "0" ]; then
             echo "A harvest proposal PR is already open — skipping today's run."
