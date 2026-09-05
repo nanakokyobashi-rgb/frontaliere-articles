@@ -2237,6 +2237,16 @@
       }
     },
     {
+      "path": "generator/scripts/lib/run-card.mjs",
+      "mode": "corpus-only",
+      "reason": "La proiezione minima del report di run che `create-article.mjs` finalizza (PR #902, issue #621/#625/#804/#832/#787). Corpus-only perche' descrive l'artefatto di UN workflow di questo repo: la card esce in `$RUNNER_TEMP/generate-diagnostics` di `generate-article.yml`, che vive solo qui, e i campi che porta (`rebracket`, `quotaDeferral`) sono i contatori dei rami che `create-article.mjs` esercita in QUESTO repo — la generazione non gira piu' sul sito. Il produttore, `generator/scripts/create-article.mjs`, e' `adapted`: una dipendenza corpus-only e' uno dei modi legittimi in cui una voce `adapted` differisce (vedi il guard di classe di #892 in loop-drift-check.mjs, che si applica solo a `identical`). Non e' `corpus-only-pending`: il sito non ha un workflow che produca queste card, quindi non c'e' un gemello che debba atterrare.",
+      "baseline": {
+        "site": null,
+        "corpus": "bcccb36d85aea762",
+        "alignedAt": "2026-09-05"
+      }
+    },
+    {
       "path": "host/authors.ts",
       "sitePath": "data/authors.ts",
       "mode": "identical",
@@ -2675,6 +2685,16 @@
         "site": null,
         "corpus": "4b0e705cc5ae5a91",
         "alignedAt": "2026-08-13"
+      }
+    },
+    {
+      "path": "scripts/ci/run-card-report.mjs",
+      "mode": "corpus-only",
+      "reason": "Il lettore delle card di run (PR #902). Sta accanto a `exhaustion-reason-report.mjs` e per la stessa ragione — misura i workflow di QUESTO repo — ma dall'altro capo: quello legge i log di `generate-article.yml` (569-875 KB per run, misurati), questo legge l'artifact di diagnostica (195-479 byte per card). La differenza non e' di efficienza ma di correttezza del campione: su un evento raro la lettura a posteriori dei log rende zeri che non distinguono «non e' successo» da «non l'ho visto» — il flip 0/28 del 2026-09-05 su #832 erano 28 cascate con `providerCooldownSkips = 0`. Corpus-only perche' i run id, il nome dell'artifact e il vocabolario della card appartengono ai workflow di questo repo.",
+      "baseline": {
+        "site": null,
+        "corpus": "1ad52a19c8784cbd",
+        "alignedAt": "2026-09-05"
       }
     },
     {
