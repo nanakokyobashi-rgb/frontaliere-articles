@@ -3000,6 +3000,11 @@ export const DISCOVERY_PROVIDERS = Object.freeze([
 ]);
 
 let _discoveryDone = false;
+// Modalita' `recordScore` con cui la discovery di questo processo e' stata
+// fatta. Non serve a decidere se rifarla (l'idempotenza resta), ma a distinguere
+// «gia' fatta» da «gia' fatta CON LO STESSO contratto»: senza, un chiamante che
+// arriva secondo con un flag diverso riceve l'esito dell'altro senza un segnale.
+let _discoveryRecordScore = true;
 const _dynamicModels = [];
 // modelId → provider name, for ids pruned from DEFAULT_CHAIN because the provider stopped
 // offering them (see the markStale block in _discoverProvider). Diagnostics + re-entry
@@ -3200,15 +3205,39 @@ export async function _discoverProvider(cfg, { recordScore = true } = {}) {
  * ATTENZIONE all'idempotenza: la prima invocazione vince per tutto il processo.
  * `initScoreStore()` chiama la discovery col default (`true`), quindi un
  * chiamante diagnostico deve o non inizializzare lo store, o fare la discovery
- * in opt-out PRIMA — non dopo, quando sarebbe un no-op silenzioso.
+ * in opt-out PRIMA — non dopo, quando sarebbe un no-op.
+ *
+ * Un no-op, pero', NOMINATO (#843). Il `recordScore` di chi arriva secondo non
+ * ha nessun effetto — l'esito e' quello congelato dal primo — e il difetto e'
+ * il silenzio, non l'idempotenza: chi chiede l'opt-out dopo una discovery di
+ * produzione crede di non aver toccato `ai_model_scores/_all`, e chi arriva in
+ * produzione dopo una discovery diagnostica eredita una catena potata su un
+ * listing raccolto con chiavi e timing diagnostici. Il warning e' l'unico
+ * segnale possibile: la funzione non puo' ne' rifare il giro (scriverebbe il
+ * ledger che il flag vieta) ne' fallire (non deve mai lanciare).
+ *
+ * Il latch e' azzerato da `resetState()`, quindi «per processo» significa in
+ * realta' «per ciclo di vita dello stato», ed e' quello che rende la discovery
+ * ri-eseguibile dopo un reset invece che congelata fino alla fine del processo.
  */
 export async function discoverFreeModels({ recordScore = true } = {}) {
-  if (_discoveryDone) return _dynamicModels;
+  const wantsRecord = coerceRecordScore(recordScore);
+  if (_discoveryDone) {
+    if (wantsRecord !== _discoveryRecordScore) {
+      console.warn(
+        `⚠️  [Discovery] recordScore:${wantsRecord} ignorato — la discovery di questo processo e' gia' stata fatta con recordScore:${_discoveryRecordScore} `
+        + 'e non viene rifatta: ricevi quell\'esito. L\'opt-out va richiesto PRIMA della prima discovery (initScoreStore() la fa col default), '
+        + 'oppure dopo un resetState().',
+      );
+    }
+    return _dynamicModels;
+  }
   _discoveryDone = true;
+  _discoveryRecordScore = wantsRecord;
 
   await Promise.all(DISCOVERY_PROVIDERS.map(async (cfg) => {
     try {
-      await _discoverProvider(cfg, { recordScore });
+      await _discoverProvider(cfg, { recordScore: wantsRecord });
     } catch (e) {
       const msg = e?.name === 'AbortError' ? 'timeout' : (e?.message || String(e));
       console.warn(`⚠️  [Discovery:${cfg.name}] Failed (${msg}) — using static list`);
@@ -4377,6 +4406,15 @@ export function resetState() {
   _ghExhaustedPats.clear();
   _exhaustReason.clear();
   _prunedStale.clear();
+  // La discovery era l'unico latch di processo che sopravviveva al reset: dopo
+  // questa funzione la catena non porta piu' ne' i marchi ne' le potature della
+  // sweep precedente, quindi lasciare il latch della discovery a `true` avrebbe reso
+  // permanente l'esito di cui si e' appena buttata via la meta' in-processo, e
+  // il `recordScore` di ogni chiamante successivo sarebbe restato senza effetto.
+  // `_dynamicModels`/`DEFAULT_CHAIN` NON si azzerano: sono la catena viva che i
+  // chiamanti hanno gia' in mano, e l'add loop salta cio' che e' gia' presente.
+  _discoveryDone = false;
+  _discoveryRecordScore = true;
   _exhaustedLogged.clear();
   _preflightSkipLogged.clear();
   _providerCooldown.clear();
@@ -4409,6 +4447,10 @@ export function resetState() {
   _recordScoreWarned.clear();
   _claudeCliCallsThisRun = 0;
   _claudeCliMaxCallsWarned = false;
+  // Stesso latch warn-once dei suoi fratelli qui sopra (#843): sopravvivere al
+  // reset significa che dopo la prima run nessuno rivede piu' la riga che
+  // distingue «cap disattivato di proposito» da «pensavo di averlo spento».
+  _claudeCliUnlimitedWarned = false;
   _responseCache.clear();
   _claudeCliBinaryMissing = false;
   _claudeCliConsecutiveTimeouts = 0;
