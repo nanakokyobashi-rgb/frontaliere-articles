@@ -3387,7 +3387,8 @@ export async function discoverFreeModels({ recordScore = true } = {}) {
       console.warn(
         `⚠️  [Discovery] recordScore:${wantsRecord} ignorato — la discovery di questo processo e' gia' stata fatta con recordScore:${_discoveryRecordScore} `
         + 'e non viene rifatta: ricevi quell\'esito. L\'opt-out va richiesto PRIMA della prima discovery (initScoreStore() la fa col default), '
-        + 'oppure dopo un resetState() — che ricarica anche i punteggi, quindi la sweep successiva non riscrive il ledger a zero.',
+        + 'oppure dopo un resetState() — che AZZERA i punteggi: la sweep successiva non riscrive comunque il ledger a zero, '
+        + 'perche\' il flush OMETTE `score` per un modello di cui questo processo non ne ha uno.',
       );
     }
     // Il latch e' la PROMESSA, non un booleano (#875 item 2). Alzando un flag
@@ -5306,7 +5307,7 @@ function _parseRequestTokenLimit(bodyText = '') {
  * to reject every prompt this codebase generates (~8-9k tokens), so a parsed
  * value this small is almost certainly a misparse, not a real limit.
  */
-function _learnRequestTokenLimit(modelForTracking, bodyText) {
+function _learnRequestTokenLimit(modelForTracking, bodyText, { recordScore = true } = {}) {
   const limit = _parseRequestTokenLimit(bodyText);
   if (!limit || limit < 500) return;
   if (_learnedRequestTokenLimits.get(modelForTracking) === limit) return;
@@ -5315,7 +5316,7 @@ function _learnRequestTokenLimit(modelForTracking, bodyText) {
   // ogni id fratello); verso il ledger passa dalla porta, che lo rifiuta se
   // l'endpoint e' per-macchina — un Ollama servito a 8k su questo runner non
   // deve insegnare quel tetto a tutte le altre macchine (#864).
-  _proposeLedgerWrite(modelForTracking);
+  _proposeLedgerWrite(modelForTracking, recordScore);
 }
 
 /**
@@ -5336,11 +5337,11 @@ const _learnedSchemaIncompatible = new Set();
  * shouldUseSchemaMode() stops requesting it for this model going forward
  * (in-run immediately, cross-run via Firestore). No-op if already known.
  */
-function _learnSchemaIncompatible(modelForTracking) {
+function _learnSchemaIncompatible(modelForTracking, { recordScore = true } = {}) {
   if (_learnedSchemaIncompatible.has(modelForTracking)) return;
   _learnedSchemaIncompatible.add(modelForTracking);
   // Stessa divisione di _learnRequestTokenLimit qui sopra (#864).
-  _proposeLedgerWrite(modelForTracking);
+  _proposeLedgerWrite(modelForTracking, recordScore);
 }
 
 /**
@@ -5599,15 +5600,19 @@ async function _callOpenAICompatible(apiModel, messages, opts, { endpoint, apiKe
           // after the fact from logs. Gated like markModelExhausted below —
           // diagnostic-only callers (see DEFAULT_OPTS.recordScore) must not
           // teach the shared cascade a runtime-learned cap either.
-          if (_shouldRecordScore(opts)) {
-            _learnRequestTokenLimit(modelForTracking, raw);
-            // Same reasoning: a 400 with this exact shape only happens when we
-            // requested schema mode (responseFormat.type === 'json_schema') and
-            // the model rejected it — remember it so future cascade passes stop
-            // paying the round-trip for a request shape this model never accepts.
-            if (nrc.reason === 'schema_unsupported' && responseFormat?.type === 'json_schema') {
-              _learnSchemaIncompatible(modelForTracking);
-            }
+          // Gate sul PARAMETRO, non attorno alla chiamata (#846/#864): il cap
+          // appreso ha due meta' e solo una e' di ledger. In processo serve
+          // SEMPRE — e' cio' che evita di ripagare il 400 «Request too large»
+          // per ogni id fratello — e proprio il chiamante diagnostico e' quello
+          // che la catena la percorre tutta. Attorno alla chiamata il flag
+          // spegneva anche quella meta'.
+          _learnRequestTokenLimit(modelForTracking, raw, { recordScore: _shouldRecordScore(opts) });
+          // Same reasoning: a 400 with this exact shape only happens when we
+          // requested schema mode (responseFormat.type === 'json_schema') and
+          // the model rejected it — remember it so future cascade passes stop
+          // paying the round-trip for a request shape this model never accepts.
+          if (nrc.reason === 'schema_unsupported' && responseFormat?.type === 'json_schema') {
+            _learnSchemaIncompatible(modelForTracking, { recordScore: _shouldRecordScore(opts) });
           }
           if (nrc.markExhausted && !_isLastResortProvider(modelForTracking)) {
             // Gate sul parametro, non sul call site (#846).
@@ -6773,11 +6778,10 @@ async function _callGeminiRaw(model, messages, opts) {
           // markModelExhausted below — diagnostic-only callers (see
           // DEFAULT_OPTS.recordScore) must not teach the shared cascade a
           // runtime-learned cap either.
-          if (_shouldRecordScore(opts)) {
-            _learnRequestTokenLimit(model, raw);
-            if (nrc.reason === 'schema_unsupported' && useGeminiSchema) {
-              _learnSchemaIncompatible(model);
-            }
+          // Gemello del ramo OpenAI-compatibile: gate sul parametro (#846/#864).
+          _learnRequestTokenLimit(model, raw, { recordScore: _shouldRecordScore(opts) });
+          if (nrc.reason === 'schema_unsupported' && useGeminiSchema) {
+            _learnSchemaIncompatible(model, { recordScore: _shouldRecordScore(opts) });
           }
           if (nrc.markExhausted) {
             // 'nonretryable', NOT the default 'quota': this is the Gemini twin
@@ -7645,12 +7649,24 @@ export async function callLLM(messages, opts = {}) {
         // solo parametro (#846) — l'opt-out del chiamante e, dal 2026-09-05,
         // l'endpoint per-macchina, che ora vive dentro `_proposeLedgerWrite` e
         // non ha piu' bisogno di essere ripetuto qui (#874).
-        markModelExhausted(model, 'nonretryable', e.hostUnreachable, {
-          recordScore: _shouldRecordScore(o),
-        });
         if (!markedExhausted) {
+          markModelExhausted(model, 'nonretryable', e.hostUnreachable, {
+            recordScore: _shouldRecordScore(o),
+          });
           _stats.exhausted++;
           markedExhausted = true;
+        } else {
+          // Il ramo timeout ha gia' bannato: qui si corregge la sola CAUSA, non
+          // si riemette il ban. Ri-chiamare `markModelExhausted` avrebbe fatto
+          // il lavoro giusto sulla causa e tre di troppo: una seconda proposta
+          // al ledger, un secondo `_mutationCount`, e soprattutto una SECONDA
+          // riga `🚫 Model … marked as exhausted`, che
+          // `scripts/ci/exhaustion-reason-report.mjs` conta con una regex
+          // globale (`EXHAUSTION_LINE_RE`) — un guasto solo sarebbe pesato due
+          // volte, e con due cause opposte, nel giudizio sulla salute della
+          // generazione.
+          _exhaustReason.set(model, 'nonretryable');
+          if (e.hostUnreachable) _exhaustDetail.set(model, e.hostUnreachable);
         }
         // Nessuna guardia `if (!isProviderCoolingDown(provider))` qui (#787): un
         // provider gia' in cooldown per un 429 che poi si scopre irraggiungibile

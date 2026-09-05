@@ -29,6 +29,7 @@ import {
   callLLM,
   discoverFreeModels,
   flushScores,
+  getDeclaredRequestTokenLimit,
   getStats,
   markModelExhausted,
   prunedStaleModels,
@@ -131,8 +132,14 @@ describe('#874/#864/#845 — una sola porta di scrittura verso ai_model_scores/_
     // commento chiedeva di allungare la lista a mano il giorno in cui un
     // provider a endpoint fisso avesse preso un override da env: una promessa
     // affidata alla memoria. Questo assert e' cio' che la sostituisce.
+    // Non solo `*_URL`: un override per-macchina battezzato `*_ENDPOINT`,
+    // `*_HOST` o `*_BASE` sarebbe lo STESSO fatto — l'indirizzo viene
+    // dall'ambiente di questa macchina — e cercare il solo suffisso `_URL`
+    // avrebbe lasciato la tabella corta col verde addosso, cioe' il modo di
+    // fallire che questo assert esiste per chiudere. Oggi i quattro suffissi
+    // rendono lo stesso insieme; e' quando smetteranno di renderlo che serve.
     const nelSorgente = new Set(
-      [...SRC_CODE.matchAll(/process\.env\.([A-Z0-9_]*URL)\b/g)].map((m) => m[1]),
+      [...SRC_CODE.matchAll(/process\.env\.([A-Z0-9_]*(?:URL|ENDPOINT|HOST|BASE))\b/g)].map((m) => m[1]),
     );
     const dichiarati = new Set(_perMachineEndpointEnvVars());
 
@@ -261,7 +268,7 @@ describe('#864 — i cap appresi da un endpoint per-macchina restano in processo
     resetState();
   });
 
-  it('un 400 «Limit 4096» su omniroute non pubblica quel tetto per tutte le macchine', async () => {
+  it('un 413 «Limit 4096» su omniroute non pubblica quel tetto per tutte le macchine', async () => {
     // Il danno: un runner con un Ollama servito a 8k pubblica quel cap sotto
     // l'id condiviso, e le altre macchine — il cui server accetterebbe il
     // prompt — iniziano a saltarlo come «troppo grande» via il pre-flight
@@ -271,10 +278,13 @@ describe('#864 — i cap appresi da un endpoint per-macchina restano in processo
     process.env.AI_MODELS_FORCE_CHAIN = 'omniroute/auto';
     globalThis.fetch = async () => ({
       ok: false,
-      status: 400,
+      // 413 e non 400: `classifyNonRetryableError(400, ...)` rende
+      // `nonRetryable: false`, quindi il ramo che IMPARA il cap non viene
+      // nemmeno raggiunto e il caso non misurerebbe #864.
+      status: 413,
       headers: new Map(),
-      text: async () => JSON.stringify({ error: { message: 'Request too large. Limit 4096 tokens' } }),
-      json: async () => ({ error: { message: 'Request too large. Limit 4096 tokens' } }),
+      text: async () => JSON.stringify({ error: { message: 'tokens_limit_reached. Limit 4096 tokens' } }),
+      json: async () => ({ error: { message: 'tokens_limit_reached. Limit 4096 tokens' } }),
     });
 
     await assert.rejects(() => callLLM([{ role: 'user', content: 'x' }], { maxRetriesPerModel: 1, backoffMs: 1, timeout: 5000 }));
@@ -283,6 +293,38 @@ describe('#864 — i cap appresi da un endpoint per-macchina restano in processo
       getStats().dirtyModels,
       0,
       'il cap appreso da un endpoint per-macchina non deve essere proposto al documento condiviso (#864)',
+    );
+  });
+
+  // La meta' che il gate NON deve spegnere. Con `recordScore:false` gatato
+  // attorno alla chiamata, il cap non veniva appreso nemmeno in processo:
+  // una run diagnostica ripagava il 400 «Request too large» per OGNI id
+  // fratello, cioe' proprio il chiamante che la catena la percorre tutta.
+  it('in opt-out il cap si impara lo stesso: e\' il ledger a essere spento, non la memoria di processo', async () => {
+    process.env.GH_MODELS_PAT = 'test-pat';
+    process.env.AI_MODELS_FORCE_CHAIN = 'gpt-4o-mini';
+    globalThis.fetch = async () => ({
+      ok: false,
+      status: 413,
+      headers: new Map(),
+      text: async () => JSON.stringify({ error: { message: 'tokens_limit_reached. Limit 2048 tokens' } }),
+      json: async () => ({ error: { message: 'tokens_limit_reached. Limit 2048 tokens' } }),
+    });
+
+    // 2048 e non 4096: `getDeclaredRequestTokenLimit` rende il MINIMO fra il cap
+    // dichiarato staticamente per il modello (4000 per gpt-4o-mini) e quello
+    // appreso, quindi un valore piu' alto del dichiarato resterebbe invisibile e
+    // il caso non misurerebbe niente.
+    const prima = getDeclaredRequestTokenLimit('gpt-4o-mini');
+    await assert.rejects(() => callLLM([{ role: 'user', content: 'x' }], {
+      maxRetriesPerModel: 1, backoffMs: 1, timeout: 5000, recordScore: false,
+    }));
+
+    assert.equal(getStats().dirtyModels, 0, 'in opt-out il ledger non si tocca');
+    assert.equal(
+      getDeclaredRequestTokenLimit('gpt-4o-mini'),
+      2048,
+      `il cap deve essere noto IN PROCESSO anche in opt-out (era ${prima}), altrimenti ogni id fratello ripaga lo stesso 400 (#864)`,
     );
   });
 });
