@@ -198,10 +198,16 @@ test('il gate non importa esbuild staticamente', () => {
   // transformers. La risoluzione a runtime e' quello che tiene le due cose
   // insieme, e trasformarla in un import statico romperebbe l'altro guard —
   // con un messaggio che non spiega perche'. Questo lo spiega.
+  // Sul sorgente intero e non riga per riga: un `import {\n  build,\n} from
+  // 'esbuild'` e' proprio la forma che lo `split('\n')` non puo' vedere, e
+  // lascerebbe l'assertion VERDE sulla regressione che esiste per prendere —
+  // la stessa cecita' chiusa in `import-closure.test.mjs`. `[^'";]*?` (senza
+  // `\n` nella classe negata) attraversa lo statement multi-riga; `^[ \t]*` e
+  // non `\s*`, che mangia i newline e riparte a meta' di un commento.
   const src = fs.readFileSync(GATE, 'utf8');
-  const statico = src
-    .split('\n')
-    .filter((l) => /^\s*import\s+(?:.*?\s+from\s+)?['"]esbuild['"]/.test(l));
+  const statico = [
+    ...src.matchAll(/^[ \t]*import\s+(?:[^'";]*?\sfrom\s+)?(['"])esbuild\1/gm),
+  ].map((m) => m[0]);
   assert.deepEqual(
     statico,
     [],

@@ -116,6 +116,22 @@ async function serve(body, { status = 200, contentType = 'application/json' } = 
   return { url, close: () => new Promise((resolve) => server.close(resolve)) };
 }
 
+// Clausola `[^'";]*?` e non `[^\n]*?`: senza il newline nella classe negata un
+// import BRACED SU PIU' RIGHE e' invisibile all'estrattore — la stessa cecita'
+// chiusa in `import-closure.test.mjs` e `loop-scripts-closure.test.mjs`. Qui
+// costa due volte: `copyRefreshTree` non copierebbe la dipendenza relativa
+// (la copia in temp dir smetterebbe di essere lo script vero) e il guard sui
+// pacchetti resterebbe VERDE proprio sulla regressione che esiste per prendere.
+// `^[ \t]*` e non `\s*`: `\s` mangia i newline e fa ripartire l'ancora a meta'
+// di una riga di commento che cita un import. Vietare `'`, `"` e `;` impedisce
+// al match non greedy di attraversare la fine dello statement.
+// Gruppo 2 = specificatore.
+const SPECIFIER =
+  /^[ \t]*(?:import\s+(?:[^'";]*?\sfrom\s+)?|export\s+[^'";]*?\sfrom\s+)(['"])([^'"]+)\1/gm;
+
+/** Specificatori importati da `src`, import braced su piu' righe inclusi. */
+const specifiersOf = (src) => [...src.matchAll(SPECIFIER)].map((m) => m[2]);
+
 /**
  * Copia uno script di refresh e i suoi import relativi, stessa profondita'.
  * Senza questo, `from './lib/rewire-fetch.mjs'` nella copia in temp dir
@@ -127,8 +143,9 @@ function copyRefreshTree(root, rel) {
   fs.mkdirSync(path.dirname(dest), { recursive: true });
   fs.copyFileSync(src, dest);
   const text = fs.readFileSync(src, 'utf8');
-  for (const m of text.matchAll(/^\s*import\s[^\n]*?from\s+['"](\.[^'"]+)['"]/gm)) {
-    const childRel = path.normalize(path.join(path.dirname(rel), m[1]));
+  for (const spec of specifiersOf(text)) {
+    if (!spec.startsWith('.')) continue;
+    const childRel = path.normalize(path.join(path.dirname(rel), spec));
     copyRefreshTree(root, childRel);
   }
   return dest;
@@ -196,8 +213,7 @@ test('i tre refresh importano solo builtin Node o path relativi — la copia in 
   const offenders = [];
   for (const c of REWIRE_CONTRACTS) {
     const src = read(c.consumer.refresh);
-    for (const m of src.matchAll(/^\s*import\s[^\n]*?from\s+['"]([^'"]+)['"]/gm)) {
-      const spec = m[1];
+    for (const spec of specifiersOf(src)) {
       if (spec.startsWith('node:') || spec.startsWith('.')) continue;
       offenders.push(`${c.consumer.refresh} → ${spec}`);
     }
