@@ -62,6 +62,16 @@ const SECTIONS = {
   frontaliere: {
     registryFile: 'content/blog-articles-data.ts',
     slugDataFile: 'content/routerBlogData.ts',
+    // `ALL_BLOG_ARTICLE_IDS` è un array letterale indipendente, non derivato
+    // da `BLOG_SLUGS`: rimuovere la riga slug non lo tocca. `routerSwissData.ts`
+    // non ha bisogno del suo equivalente qui perché lì è
+    // `Object.keys(SWISS_SLUGS)`, quindi resta coerente da solo.
+    idListVar: 'ALL_BLOG_ARTICLE_IDS',
+    // Stessa classe: `create-article.mjs` appende l'id anche alla union di
+    // literal `BlogArticleId` (`modifyRouterUnion`, solo per questa sezione),
+    // che è un file a sé e non deriva da nulla. Senza ripulirla il tipo
+    // continua ad ammettere un id che non esiste più su nessuna superficie.
+    idUnionFile: 'content/blogArticleIds.ts',
     metaFiles: ['it', 'en', 'de', 'fr'].map((l) => `content/blog-meta-${l}.ts`),
     bodyDir: 'content/blog-body',
     seoFiles: null, // scoperti a runtime: content/seo/seo-blog-*.ts
@@ -72,6 +82,10 @@ const SECTIONS = {
   svizzera: {
     registryFile: 'content/swiss-articles-data.ts',
     slugDataFile: 'content/routerSwissData.ts',
+    idListVar: null,
+    // `create-article.mjs`: la sezione svizzera NON mantiene la union
+    // (`updateRouterUnion` falso), gli id sono stringhe libere.
+    idUnionFile: null,
     metaFiles: ['it', 'en', 'de', 'fr'].map((l) => `content/blog-meta-ch-${l}.ts`),
     bodyDir: 'content/blog-body-ch',
     seoFiles: ['content/seo/seo-blog-ch.ts'],
@@ -154,6 +168,61 @@ function removeSlugRow(file, id) {
     if (!slugs[loc]) throw new Error(`${file}: la riga di ${id} non ha lo slug ${loc}`);
   }
   return { changed: true, src: src.replace(rx, ''), slugs };
+}
+
+/**
+ * Rimuove `'<id>'` da un array letterale piatto (`export const <varName> = [...]`).
+ * Opera solo sul corpo fra la sua `[` di apertura e il `];` che lo chiude, per
+ * non rischiare di toccare un'altra occorrenza dell'id altrove nel file.
+ */
+function removeFromIdListLiteral(src, varName, id) {
+  const declRx = new RegExp(`\\b${varName}\\b[^=]*=\\s*\\[`, 'm');
+  const m = declRx.exec(src);
+  if (!m) return { changed: false, src };
+  const openIdx = m.index + m[0].length - 1;
+  const closeIdx = src.indexOf('];', openIdx);
+  if (closeIdx === -1) throw new Error(`array ${varName}: nessun '];' di chiusura`);
+  const before = src.slice(0, openIdx + 1);
+  const body = src.slice(openIdx + 1, closeIdx);
+  const after = src.slice(closeIdx);
+  const escaped = id.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  let newBody;
+  if (new RegExp(`'${escaped}',\\s*`).test(body)) {
+    newBody = body.replace(new RegExp(`'${escaped}',\\s*`), '');
+  } else if (new RegExp(`,\\s*'${escaped}'`).test(body)) {
+    newBody = body.replace(new RegExp(`,\\s*'${escaped}'`), '');
+  } else if (new RegExp(`^\\s*'${escaped}'\\s*$`).test(body)) {
+    newBody = '';
+  } else {
+    return { changed: false, src };
+  }
+  return { changed: true, src: before + newBody + after };
+}
+
+/**
+ * Rimuove `'<id>'` da una union di literal spezzata in alias
+ * (`type _BlogIdN = 'a' | 'b' | …;`), come `content/blogArticleIds.ts`.
+ * Opera alias per alias, così il membro viene tolto insieme alla `|` che lo
+ * lega ai vicini e un alias che resta vuoto è un errore, non un tipo rotto.
+ */
+function removeFromIdUnion(src, id) {
+  const escaped = id.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const member = new RegExp(`'${escaped}'`);
+  let changed = false;
+  const out = src.replace(/type (_\w+)\s*=\s*([^;]+);/g, (whole, name, body) => {
+    if (!member.test(body)) return whole;
+    let next = body;
+    if (new RegExp(`\\|\\s*'${escaped}'`).test(next)) {
+      next = next.replace(new RegExp(`\\s*\\|\\s*'${escaped}'`), '');
+    } else {
+      next = next.replace(new RegExp(`'${escaped}'\\s*\\|\\s*`), '');
+    }
+    if (member.test(next)) throw new Error(`union ${name}: '${id}' compare più volte`);
+    if (!next.trim()) throw new Error(`union ${name}: rimuovere '${id}' la lascerebbe vuota`);
+    changed = true;
+    return `type ${name} = ${next};`;
+  });
+  return { changed, src: out };
 }
 
 /** Rimuove ogni riga `'blog.article.<id>.<campo>': …` da un file di meta. */
@@ -263,8 +332,29 @@ function main() {
   //    sono ancora leggibili, e servono al ledger dei ritirati.
   const slugRow = removeSlugRow(cfg.slugDataFile, id);
   if (!slugRow.changed) throw new Error(`${cfg.slugDataFile}: nessuna riga per '${id}' — mappa slug già incoerente col registro`);
-  writes.push([cfg.slugDataFile, slugRow.src]);
+  let slugDataSrc = slugRow.src;
   planned.push({ file: cfg.slugDataFile, what: `riga slug (${LOCALES.map((l) => slugRow.slugs[l]).join(', ')})` });
+
+  // 1b. array letterale piatto degli id (es. `ALL_BLOG_ARTICLE_IDS`), se la
+  //     sezione ne ha uno indipendente dalla mappa slug appena ripulita.
+  if (cfg.idListVar) {
+    const idList = removeFromIdListLiteral(slugDataSrc, cfg.idListVar, id);
+    if (idList.changed) {
+      slugDataSrc = idList.src;
+      planned.push({ file: cfg.slugDataFile, what: `elenco flat ${cfg.idListVar}` });
+    }
+  }
+  writes.push([cfg.slugDataFile, slugDataSrc]);
+
+  // 1c. union di literal degli id (`BlogArticleId`), che vive in un file
+  //     separato dalla mappa slug e che solo questa sezione mantiene.
+  if (cfg.idUnionFile && existsSync(rel(cfg.idUnionFile))) {
+    const union = removeFromIdUnion(read(cfg.idUnionFile), id);
+    if (union.changed) {
+      writes.push([cfg.idUnionFile, union.src]);
+      planned.push({ file: cfg.idUnionFile, what: 'membro della union BlogArticleId' });
+    }
+  }
 
   // 2. registro di sezione
   const reg = removeRegistryEntry(cfg.registryFile, id);
@@ -351,6 +441,7 @@ function main() {
   const surfaces = [
     cfg.registryFile, cfg.slugDataFile, ...cfg.metaFiles, ...seoFilesFor(section),
     cfg.sourceLedger, IMAGES_LEDGER,
+    ...(cfg.idUnionFile ? [cfg.idUnionFile] : []),
   ].filter((f) => existsSync(rel(f)));
   const leftovers = surfaces.filter((f) => read(f).includes(id));
   if (leftovers.length > 0) {
