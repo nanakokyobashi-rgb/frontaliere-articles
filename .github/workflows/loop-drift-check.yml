@@ -87,3 +87,28 @@ jobs:
             ARGS="--issue"
           fi
           node scripts/ci/loop-drift-check.mjs $ARGS
+
+      # I 24 artifact cross-repo hanno tre famiglie di digest e finora solo una
+      # era confrontata con qualcosa (issue #916): `generatorSha256` e i 24
+      # `sourceSha256` puntano a file che in questo checkout NON esistono,
+      # quindi l'unico posto dove verificarli è qui, dove c'è la rete.
+      # `if: always()` perché il passo sopra può uscire non-zero con `--strict`
+      # su un drift che non riguarda questa domanda.
+      - name: Verifica la provenienza del contratto cross-repo
+        if: always()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SITE_REPO: valerielinc-ops/frontaliere-si-o-no
+          SITE_REF: main
+        run: |
+          # Stessa regola del passo sopra: sulle PR il report resta nel log. Un
+          # generatore mosso sul sito non è un difetto della PR in corso, e
+          # bloccarne l'auto-merge sposterebbe il costo sulla persona
+          # sbagliata. Sullo schedule invece si esce rossi, e il fallimento del
+          # workflow apre la issue per il canale già esistente
+          # (workflow-failure-issues → issue-triage → issue-fix).
+          ARGS=""
+          if [ "${{ github.event_name }}" != "pull_request" ]; then
+            ARGS="--strict"
+          fi
+          node scripts/ci/verify-crawler-contract-provenance.mjs $ARGS
