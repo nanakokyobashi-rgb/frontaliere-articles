@@ -217,6 +217,42 @@ test('quando gli echi sono la MAGGIORANZA la sottrazione non toglie il veto da s
   assert.equal(inputCapVetoSummary(echoDominant).echoDominated, true, 'la diagnostica deve dire che ha deciso il lordo');
 });
 
+test('gli echi AMBIGUI contano nel guardrail: la sottrazione non toglie il veto da sola', () => {
+  // 120 righe di skip da cooldown dichiarate, di cui 30 sole attribuite al
+  // persistente: le altre 90 sono echi che ne' `transientRe` ne' `persistentRe`
+  // hanno collocato — righe vere dello stesso guasto. Contando i soli echi
+  // attribuiti il guardrail non entra (30 > 80 e' falso) e il netto 50 vs 30
+  // toglie DA SOLO il veto che il lordo 50 vs 60 metteva, cioe' il differimento
+  // su una cascata con rifiuti su taglia: il ciclo infinito di #313.
+  const ambiguousEchoes = echoingExhaustionError({
+    transient: 50,
+    persistent: 60,
+    total: 200,
+    echo: { total: 120, transient: 0, persistent: 30 },
+  });
+  assert.equal(
+    isInputCapDeferralVeto(ambiguousEchoes),
+    true,
+    'gli echi dichiarati sono la maggioranza delle prove: decide il lordo, 50 vs 60 → veto',
+  );
+  const s = inputCapVetoSummary(ambiguousEchoes);
+  assert.equal(s.echoDominated, true, 'la diagnostica usa la STESSA condizione del guardrail');
+  assert.equal(
+    s.transient + s.persistent + s.providerCooldownSkips,
+    50 + 60,
+    'i due secchi lordi restano ricostruibili: gli ambigui non sono usciti da nessuno dei due',
+  );
+  // ...e il guardrail CONFERMA quando il lordo e il netto concordano: qui 90 vs
+  // 60 al lordo e 60 vs 30 al netto dicono entrambi maggioranza transitoria.
+  const echoesAgree = echoingExhaustionError({
+    transient: 90,
+    persistent: 60,
+    total: 200,
+    echo: { total: 120, transient: 30, persistent: 30 },
+  });
+  assert.equal(isInputCapDeferralVeto(echoesAgree), false, 'il guardrail non inventa un veto che nessuno dei due campioni mette');
+});
+
 test('un errore che non e\' una cascata svuotata non viene mai vetato', () => {
   assert.equal(isInputCapDeferralVeto(null), false);
   assert.equal(isInputCapDeferralVeto(new Error('boom')), false);
