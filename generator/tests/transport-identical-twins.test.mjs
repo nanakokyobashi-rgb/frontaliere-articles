@@ -49,6 +49,7 @@ import {
   permanentBlock,
   realignFromCommitted,
   couplingScanRoot,
+  importSpecifierRe,
   SET_DESCRIPTORS,
   unreadableCouplings,
   transportVerdict,
@@ -236,6 +237,50 @@ test("nell'albero di oggi il golden del contratto NON è trasportabile", () => {
 // casi: una metà copiata da sola, cioè la PR di trasporto rossa che spegne il
 // canale.
 // ---------------------------------------------------------------------------
+
+test("un import TypeScript non scrive l\u2019estensione: il citer va trovato lo stesso", () => {
+  // `text.includes(base)` cerca il basename INTERO. Un import TS non nomina mai
+  // l\u2019estensione — `host/siteShellBootstrap.ts:63` fa
+  // `import { truncateCodeUnits } from './shared/safeTruncate'` — quindi il
+  // consumatore c\u2019era e il match no: la voce usciva a ZERO accoppiamenti,
+  // cioe\u2019 copiabile da sola. Misurate 9 voci `identical` con importer reali
+  // in quello stato, tutte sulla meta\u2019 `host/` del contratto col sito.
+  const re = importSpecifierRe('safeTruncate.ts');
+  assert.ok(re.test("import { truncateCodeUnits } from './shared/safeTruncate';"));
+  assert.ok(re.test('from "../../host/shared/safeTruncate"'));
+  assert.ok(re.test("from '@/shared/safeTruncate'"), 'anche gli alias di path finiscono con /stem');
+
+  // E NON deve accoppiare tutto a tutto: senza estensione un basename e\u2019 una
+  // parola comune, e un `includes()` nudo su `authors` o `constants` avrebbe
+  // reso ogni file accoppiato a ogni altro — il verso conservativo che diventa
+  // un no permanente su tutto, cioe\u2019 il canale spento dall\u2019altra parte.
+  assert.ok(!re.test("il file safeTruncate serve a troncare"), 'la prosa non e\u2019 un import');
+  assert.ok(!re.test("from 'safeTruncate'"), 'senza separatore e\u2019 un pacchetto, non questo file');
+
+  // Un basename senza estensione di codice non ha niente da allargare.
+  assert.equal(importSpecifierRe('git-push-with-retry.sh'), null);
+  assert.equal(importSpecifierRe('loop-sync-manifest.json'), null);
+});
+
+test("nell\u2019albero di oggi i nove gemelli `host/` NON sono piu\u2019 senza accoppiamenti", () => {
+  // Guard sul repo reale, offline: e\u2019 la meta\u2019 che dice se la regola sopra
+  // morde davvero. Se un giorno tornassero a zero, la copia isolata di una di
+  // loro tornerebbe autorizzata.
+  const manifest = JSON.parse(fs.readFileSync(path.join(ROOT, 'scripts/ci/loop-sync-manifest.json'), 'utf8'));
+  const modeOf = new Map(manifest.files.map((e) => [e.path, e.mode]));
+  const nove = [
+    'host/shared/safeTruncate.ts', 'host/authors.ts', 'host/contentHash.ts',
+    'host/seo/organizationLd.ts', 'host/seo/imageObjectLd.ts', 'host/shared/buildDayStamp.ts',
+    'host/shared/inlineJsonScript.ts', 'host/shared/railGutters.ts', 'host/shared/stripLiteralMarkdown.ts',
+  ];
+  for (const rel of nove) {
+    if (!fs.existsSync(path.join(ROOT, rel))) continue;
+    assert.ok(
+      localCouplings(rel, modeOf).length > 0,
+      `${rel}: torna a zero accoppiamenti, quindi torna copiabile da sola senza la sua meta\u2019`,
+    );
+  }
+});
 
 test('il sottoalbero di scansione è il pacchetto, non la directory del fixture', () => {
   assert.equal(couplingScanRoot('host/tests/shell-contract-functions.golden.json'), 'host');

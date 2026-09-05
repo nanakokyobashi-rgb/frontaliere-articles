@@ -584,8 +584,54 @@ function walkSubtree(root, acc = [], blind = new Map()) {
  *
  * Legge solo l'albero LOCALE: niente rete, quindi un test la può chiamare.
  */
+/**
+ * Il consumatore che cita il file SENZA nominarlo.
+ *
+ * Il match sui citer e' `text.includes(base)` col basename INTERO, estensione
+ * compresa. Un import TypeScript non scrive mai l'estensione:
+ * `host/siteShellBootstrap.ts:63` fa
+ *
+ *     import { truncateCodeUnits } from './shared/safeTruncate';
+ *
+ * e quella riga non contiene la stringa `safeTruncate.ts` da nessuna parte. Il
+ * consumatore c'e', il match no, e `localCouplings()` torna `[]` — «nessun
+ * accoppiamento», cioe' copiabile da solo. E' lo STESSO falso silenzio che
+ * questa funzione esiste per chiudere, sulla meta' `host/` del contratto col
+ * sito: spedire una di queste voci senza la sua meta' e' la classe «engine
+ * senza `host/`, TypeError a render time dietro una CI verde».
+ *
+ * Misurato su `main` prima della correzione: 9 voci `identical` con importer
+ * reali verificati uscivano a zero accoppiamenti — `host/shared/safeTruncate.ts`,
+ * `host/authors.ts`, `host/contentHash.ts`, `host/seo/organizationLd.ts`,
+ * `host/seo/imageObjectLd.ts`, `host/shared/buildDayStamp.ts`,
+ * `host/shared/inlineJsonScript.ts`, `host/shared/railGutters.ts`,
+ * `host/shared/stripLiteralMarkdown.ts`.
+ *
+ * ## Perche' uno specificatore e non `includes(stem)` nudo
+ *
+ * Senza estensione, un basename e' una parola comune: `authors`, `constants`,
+ * `index` compaiono in prosa, in JSON e nei commenti di mezzo albero, e un
+ * `includes()` su di loro accoppierebbe ogni file a ogni altro — il verso
+ * conservativo di questa funzione diventerebbe un no permanente su tutto, cioe'
+ * il canale spento dall'altra parte. La forma cercata e' quindi lo stem come
+ * CODA di un path fra apici: `'./shared/safeTruncate'`,
+ * `'../../host/authors'`, `"@/seo/organizationLd"`. Un `import x from
+ * 'safeTruncate'` senza separatore non matcha, ed e' giusto: quello e' un
+ * pacchetto, non questo file.
+ *
+ * Ritorna `null` per un basename senza estensione di codice: li' il match
+ * intero e' gia' esatto e non c'e' niente da allargare.
+ */
+export function importSpecifierRe(base) {
+  const stem = base.replace(/\.(?:ts|tsx|mts|cts|mjs|cjs|js|jsx)$/, '');
+  if (stem === base) return null;
+  const esc = stem.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  return new RegExp(`['"\`][^'"\`]*[./]${esc}['"\`]`);
+}
+
 export function localCouplings(rel, modeOf) {
   const base = rel.split('/').pop();
+  const specifier = importSpecifierRe(base);
   const dir = path.dirname(rel);
   const found = new Set();
   const unreadable = new Map();
@@ -603,7 +649,7 @@ export function localCouplings(rel, modeOf) {
       continue;
     }
     if (read.state !== 'text') continue;
-    if (read.text.includes(base)) found.add(other);
+    if (read.text.includes(base) || (specifier && specifier.test(read.text))) found.add(other);
   }
 
   const own = readLocal(rel);
