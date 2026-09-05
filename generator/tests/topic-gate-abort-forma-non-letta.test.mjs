@@ -170,7 +170,9 @@ test('abort dichiarato + corpo leggibile ⇒ NON abort, e nessuna evidenza di fo
   const payload = {
     abort_topical_relevance: true,
     reason: 'incoerente',
-    content: { it: { title: 'T', excerpt: 'E', body1: CORPO, body2: CORPO, body3: CORPO } },
+    // Meta PLAUSIBILI e non `'T'`/`'E'`: dal floor di #798 un placeholder di una
+    // lettera esce `reject` sul suo conto, e mascherebbe cio' che questo test misura.
+    content: { it: { title: 'Imposta alla fonte, cosa cambia nel 2026', excerpt: 'Il punto sulle nuove aliquote per i frontalieri.', body1: CORPO, body2: CORPO, body3: CORPO } },
   };
   assert.equal(findUnreadableContentEvidence(payload), null);
   assert.equal(isTopicGateAbortVerdict(payload), false);

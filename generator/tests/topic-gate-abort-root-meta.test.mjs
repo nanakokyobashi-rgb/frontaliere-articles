@@ -75,7 +75,7 @@ test('abort + corpo pieno ⇒ NON abort: vince il contenuto (guardia 2026-07-06)
   const parsed = {
     abort_topical_relevance: true,
     reason: 'testo che afferma comunque la rilevanza frontaliera',
-    content: { it: { title: 'Imposta alla fonte, cosa cambia', excerpt: 'Il punto in due righe.', body1: BLOCCO, body2: BLOCCO, body3: BLOCCO } },
+    content: { it: { title: 'Imposta alla fonte, cosa cambia', excerpt: 'Il punto sulle nuove aliquote per i frontalieri.', body1: BLOCCO, body2: BLOCCO, body3: BLOCCO } },
   };
   const { verdict, itContent } = classifyBody2Payload({ parsed });
   assert.equal(verdict, 'ok', 'il flag ha scavalcato un articolo valido e in tema: e\' il difetto della run 28802314827');
@@ -107,7 +107,7 @@ test('meta\' META dello split: il corpo manca PER COSTRUZIONE, quindi il contenu
   const parsed = {
     abort_topical_relevance: true,
     reason: 'flag che questa meta\' non doveva nemmeno emettere',
-    content: { it: { title: 'Imposta alla fonte, cosa cambia', excerpt: 'Il punto in due righe.' } },
+    content: { it: { title: 'Imposta alla fonte, cosa cambia', excerpt: 'Il punto sulle nuove aliquote per i frontalieri.' } },
   };
   assert.equal(isTopicGateAbortVerdict(parsed, { expectedFields: META_ONLY_FIELDS }), false);
   assert.equal(classifyBody2Payload({ parsed, expectedFields: META_ONLY_FIELDS }).verdict, 'ok');
