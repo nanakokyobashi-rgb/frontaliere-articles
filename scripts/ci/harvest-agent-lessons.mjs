@@ -237,9 +237,53 @@ export function isGenuineSiblingClassViolation(text) {
   return true;
 }
 
+// ---- NEGATED-IMPACT recap clauses (DETERMINISTIC, cross-bucket) ------------
+// REVIEW.md fa della «correttezza della superficie pubblicata» la priorita' 1 e
+// chiede di promuovere a 🔴 qualunque ❓ che, se vero, impatterebbe `dist/api/`,
+// gli slug, le sitemap o i feed. La conseguenza e' che quasi ogni review chiude
+// il proprio verdetto con una frase di RICOGNIZIONE NEGATA — «nessun impatto su
+// `dist/api/`, sulle sitemap o sui feed», «nessuno tocca gli slug, le sitemap, i
+// canonical» — che dice l'esatto contrario di un difetto: la superficie NON e'
+// toccata.
+//
+// Quella frase vive sulla stessa riga del verdetto, che porta il glifo di
+// severita', quindi `detectSeverity` la conta come finding confermato e la
+// taxonomy la butta nel bucket il cui vocabolario compare nell'ELENCO DELLE COSE
+// NON TOCCATE. Su questo repo l'elenco nomina sempre sitemap/canonical, quindi il
+// bucket `canonical-sitemap` si gonfia a ogni PR pulita e ri-escala per sempre:
+// issue #901, 10 hit su 14gg di cui 4 dei 5 esempi (#896, #882, #881, #879) sono
+// esattamente questa ricognizione — solo #878 era un difetto vero (`/de/blog/null`
+// nel canonical e nella sitemap).
+//
+// Stessa classe di falso positivo gia' chiusa altrove, ogni volta su un bucket
+// solo: `auto-ads` a livello di regex (#2114, «non SEO/AdSense»), `i18n-naming`
+// restringendo la regex (#2122), `pr-body-contract` (#3332) e `sibling-class-fix`
+// (#3325) con un guard di affermazione, `NEGATED_SEVERITY_RE` a livello di
+// severita' (#4342). Qui il rimedio e' UNO e vale per TUTTI i bucket topic: la
+// clausola negata viene tolta dal testo PRIMA di scegliere il bucket, quindi il
+// vocabolario che compare solo li' dentro non fa piu' punteggio.
+//
+// Deliberatamente stretto sui verbi. Solo verbi di IMPATTO/PORTATA (impattare,
+// toccare, raggiungere, coinvolgere, ricadere) piu' i loro equivalenti inglesi:
+// sono quelli della ricognizione. Verbi di COMPORTAMENTO («non aggiorna la
+// sitemap», «non emette il canonical») restano fuori, perche' li' la negazione E'
+// il difetto. La clausola si chiude al primo confine di frase (`.`/`;`/`—`/a
+// capo), cosi' non mangia il resto della riga.
+const NEGATED_IMPACT_CLAUSE_RE =
+  /\b(?:nessun\w*|niente|zero|senza|non|no)\b(?:\s+\S+){0,3}?\s+(?:impatt\w*|impact\b|ricadut\w*|tocca\w*|toccano|toccat\w*|touch\w*|raggiung\w*|reach\w*|coinvolg\w*|affect\w*)[^.;—\n]*/giu;
+export function stripNegatedImpactClauses(text) {
+  return String(text ?? '').replace(NEGATED_IMPACT_CLAUSE_RE, ' ');
+}
+
 export function bucketFinding(text) {
+  // I bucket si scelgono sul testo SENZA le ricognizioni negate: una sitemap
+  // nominata solo per dire che non e' stata toccata non e' un finding su di lei.
+  // I guard per-bucket sotto ricevono invece il testo INTERO, perche' la loro
+  // discriminante e' la frase completa (affermazioni, location label, falsi
+  // positivi dichiarati), non il solo vocabolario del topic.
+  const scannable = stripNegatedImpactClauses(text);
   for (const t of TAXONOMY) {
-    if (!t.re.test(text)) continue;
+    if (!t.re.test(scannable)) continue;
     // pr-body-contract: drop affirmations / location-label false positives so the
     // bucket counts only genuine contract violations (the deterministic gate
     // pr-body-contract.yml already blocks missing sections). Falls through to the
@@ -252,7 +296,7 @@ export function bucketFinding(text) {
     if (t.key === 'sibling-class-fix' && !isGenuineSiblingClassViolation(text)) continue;
     return t.key;
   }
-  return fingerprintFinding(text); // unbucketed → fingerprint safety net (or null)
+  return fingerprintFinding(scannable); // unbucketed → fingerprint safety net (or null)
 }
 
 // Severities that count as a CONFIRMED recurring mistake. `❓` is an
