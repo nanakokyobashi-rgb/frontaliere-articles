@@ -1,10 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/economia/1943310/ubs-sessione-proposta-lex-fondi": "lex-ubs-proposta-compromesso",
-  "https://www.laregione.ch/svizzera/svizzera/1943313/credito-commissione-cps-n-munizioni-propone-difesa": "commissione-propone-500-milioni-munizioni",
-  "https://www.swissinfo.ch/ita/settore-agricolo-segnala-danni-per-oltre-19-milioni/91881144": "settore-agricolo-danni-19-milioni",
-  "https://www.rsi.ch/s/3946014": "viaggi-e-consumi-senza-rinunce",
-  "https://www.swissinfo.ch/ita/on%3a-trimestre-record-con-forte-crescita-in-asia%2c-ma-gi%c3%b9-in-borsa/91880689": "on-trimestre-record",
-  "https://www.rsi.ch/s/3943950": "caldo-prezzi-inflazione-climatica",
   "https://www.tio.ch/svizzera/economia/1943270/svizzera-croce-ige-swiss-marchio-made-valgono": "come-usare-la-croce-svizzera-sui-prodotti-esteri",
   "https://www.laregione.ch/svizzera/svizzera/1943349/ubs-fumata-lex-red-ats": "portale-informazione-svizzera-italiana",
   "https://www.tio.ch/svizzera/politica/1943297/bilaterali-tutele-iii-commissione-consiglio": "no-tutele-sindacalisti-bilaterali-iii",
@@ -1793,6 +1787,36 @@
   "https://www.tio.ch/newsblog/valute-e-frontiere/1947998/franco-euro-cosa-dicono-i-dati-e-quali-prospettive-si-aprono-per-i-prossimi-mesi": {
     "articleId": "franco-euro-analisi-cambio-dati",
     "ts": "2026-09-05T06:06:30.843Z",
+    "keyForm": 2
+  },
+  "https://www.admin.ch/it/newnsb/t5pmx9db2vpc": {
+    "articleId": "osce-conferenza-berna",
+    "ts": "2026-09-05T10:04:57.884Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/cronaca/1948070/dispositivo-din-manifestazione-contenimento-dipartimento-g7-anti-g7-lecito": {
+    "articleId": "manifestazione-anti-g7-dispositivo-lecito",
+    "ts": "2026-09-05T10:26:36.163Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/cronaca/1947977/ubriachi-fradici-accatastano-oggetti-sui-binari-e-arriva-il-treno": {
+    "articleId": "svizzera-treno-oggetti-binari",
+    "ts": "2026-09-05T10:36:22.656Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/cronaca/1948195/polizia-intervento-goldach-entita-scuola-concluso-sg": {
+    "articleId": "intervento-polizia-goldach-scuola",
+    "ts": "2026-09-05T10:47:04.665Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/zh%3a-processo-junge-tat%3b-procura-chiede-condanna%2c-difesa-assoluzione/92008105": {
+    "articleId": "processo-junge-tat-zurigo",
+    "ts": "2026-09-05T10:54:48.947Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/s/4061616": {
+    "articleId": "mezzo-miliardo-contadini-mercosur",
+    "ts": "2026-09-05T11:11:32.077Z",
     "keyForm": 2
   }
 }

@@ -71702,6 +71702,318 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-imposta-successione-donazione-vaud': {
+    title: 'Imposta successione e donazione nel Cantone di Vaud',
+    description: 'Scopri come funziona l\'imposta di successione e donazione nel Cantone di Vaud. Guida su aliquote, esenzioni per parenti stretti e obblighi dichiarativi.',
+    keywords: 'frontalieri, ticino, svizzera, italia, imposta, successione, donazione, cantone',
+    ogTitle: 'Imposta di successione e donazione nel Cantone di Vaud',
+    ogDescription: 'Analisi delle norme vodesi sulle successioni e donazioni: scopri le aliquote, le esenzioni per i familiari e come gestire correttamente la dichiarazione fiscale.',
+    canonicalPath: '/articoli-svizzera/imposta-successione-donazione-vaud/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Imposta successione e donazione nel Cantone di Vaud",
+      "description": "Scopri come funziona l'imposta di successione e donazione nel Cantone di Vaud. Guida su aliquote, esenzioni per parenti stretti e obblighi dichiarativi.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/imposta-successione-donazione-vaud.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Documenti fiscali e pianificazione patrimoniale in Svizzera"
+      },
+      "datePublished": "2026-09-05T09:40:27+00:00",
+      "dateModified": "2026-09-05T09:40:27+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/imposta-successione-donazione-vaud/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-imposte-cantonali-vallese-aliquote-deduzioni': {
+    title: 'Imposte cantonali nel Vallese: aliquote e deduzioni',
+    description: 'Scopri le aliquote e le deduzioni fiscali nel Cantone Vallese, con dettagli su scadenze e portale online dell\'amministrazione fiscale. Dati aggiornati 2026',
+    keywords: 'frontalieri, ticino, svizzera, italia, imposte, cantonali, vallese, aliquote',
+    ogTitle: 'Imposte cantonali nel Vallese: aliquote e deduzioni',
+    ogDescription: 'Esplora le aliquote e le deduzioni fiscali nel Cantone Vallese, con informazioni su scadenze e portale online dell\'amministrazione fiscale.',
+    canonicalPath: '/articoli-svizzera/imposte-cantonali-vallese-aliquote-deduzioni/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Imposte cantonali nel Vallese: aliquote e deduzioni",
+      "description": "Scopri le aliquote e le deduzioni fiscali nel Cantone Vallese, con dettagli su scadenze e portale online dell'amministrazione fiscale. Dati aggiornati 2026",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/imposte-cantonali-vallese-aliquote-deduzioni.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista panoramica del Lago Maggiore con le montagne svizzere sullo sfondo"
+      },
+      "datePublished": "2026-09-05T09:53:45+00:00",
+      "dateModified": "2026-09-05T09:53:45+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/imposte-cantonali-vallese-aliquote-deduzioni/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-osce-conferenza-berna': {
+    title: 'OSCE conferenza a Berna: da Ginevra a helsinki',
+    description: 'Il Consigliere federale Ignazio Cassis ha parlato a Berna il 3 settembre 2026 sulla capacità di cooperazione diplomatica nonostante i disaccordi.',
+    keywords: 'frontalieri, ticino, svizzera, italia, osce, conferenza, berna, ginevra',
+    ogTitle: 'OSCE Conferenza a Berna: Da Ginevra a Helsinki: processo di fondazione e scopo principale dell’OSCE',
+    ogDescription: 'Il Consigliere federale Ignazio Cassis ha parlato a Berna il 3 settembre 2026 sulla capacità di cooperazione diplomatica nonostante i disaccordi. Tutti i 57 stati hanno approvato il bilancio 2026 dopo anni di stallo.',
+    canonicalPath: '/articoli-svizzera/osce-conferenza-berna/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "OSCE conferenza a Berna: da Ginevra a helsinki",
+      "description": "Il Consigliere federale Ignazio Cassis ha parlato a Berna il 3 settembre 2026 sulla capacità di cooperazione diplomatica nonostante i disaccordi.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/osce-conferenza-berna.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista aerea di Berna, Svizzera, con il Palazzo Federale e il fiume Aare."
+      },
+      "datePublished": "2026-09-05T10:04:57+00:00",
+      "dateModified": "2026-09-05T10:04:57+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/osce-conferenza-berna/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-manifestazione-anti-g7-dispositivo-lecito': {
+    title: 'Manifestazione anti-G7, il dispositivo di contenimento era lecito',
+    description: 'Il Dipartimento cantonale delle istituzioni e del digitale ha confermato la liceità del dispositivo di contenimento durante la manifestazione No G7 a Ginevra.',
+    keywords: 'frontalieri, ticino, svizzera, italia, manifestazione, anti-g7, dispositivo, contenimento',
+    ogTitle: 'Manifestazione anti-G7, il dispositivo di contenimento era lecito',
+    ogDescription: 'Il Dipartimento cantonale delle istituzioni e del digitale ha confermato la liceità del dispositivo di contenimento durante la manifestazione No G7 a Ginevra. Scopri di più su Frontaliere Ticino.',
+    canonicalPath: '/articoli-svizzera/manifestazione-anti-g7-dispositivo-lecito/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Manifestazione anti-G7, il dispositivo di contenimento era lecito",
+      "description": "Il Dipartimento cantonale delle istituzioni e del digitale ha confermato la liceità del dispositivo di contenimento durante la manifestazione No G7 a Ginevra.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/manifestazione-anti-g7-dispositivo-lecito.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Manifestazione anti-G7 a Ginevra con la polizia che controlla la situazione."
+      },
+      "datePublished": "2026-09-05T10:26:36+00:00",
+      "dateModified": "2026-09-05T10:26:36+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/manifestazione-anti-g7-dispositivo-lecito/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-svizzera-treno-oggetti-binari': {
+    title: '«Ubriachi fradici» accatastano oggetti sui binari e arriva il treno',
+    description: 'Adolescenti accatastano oggetti sui binari, deragliamento di un Interregio a 110 km/h, danni per 141.369 franchi. Dati aggiornati 2026 per frontalieri',
+    keywords: 'frontalieri, ticino, svizzera, italia, ubriachi, fradici, accatastano, oggetti',
+    ogTitle: '«Ubriachi fradici» accatastano oggetti sui binari e arriva il treno',
+    ogDescription: 'Adolescenti accatastano oggetti sui binari, deragliamento di un Interregio a 110 km/h, danni per 141.369 franchi. Scopri di più su questo incidente ferroviario in Svizzera.',
+    canonicalPath: '/articoli-svizzera/svizzera-treno-oggetti-binari/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "«Ubriachi fradici» accatastano oggetti sui binari e arriva il treno",
+      "description": "Adolescenti accatastano oggetti sui binari, deragliamento di un Interregio a 110 km/h, danni per 141.369 franchi. Dati aggiornati 2026 per frontalieri",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/svizzera-treno-oggetti-binari.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Treno deragliato a causa di oggetti sui binari in Svizzera"
+      },
+      "datePublished": "2026-09-05T10:36:22+00:00",
+      "dateModified": "2026-09-05T10:36:22+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/svizzera-treno-oggetti-binari/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-intervento-polizia-goldach-scuola': {
+    title: 'Intervento polizia a Goldach: nessun colpo d\'arma da fuoco',
+    description: 'Chiuso l\'intervento della polizia a Goldach: 300 persone evacuate durante una festa scolastica a causa di rumori pirotecnici scambiati per spari.',
+    keywords: 'frontalieri, ticino, svizzera, italia, intervento, polizia, goldach, nessun',
+    ogTitle: 'Intervento polizia a Goldach: nessun colpo d\'arma da fuoco',
+    ogDescription: 'Nella notte tra il 4 e il 5 settembre, 300 persone sono state evacuate presso il centro scolastico di Goldach. La polizia ha confermato: nessun colpo d\'arma da fuoco, solo rumori pirotecnici.',
+    canonicalPath: '/articoli-svizzera/intervento-polizia-goldach-scuola/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Intervento polizia a Goldach: nessun colpo d'arma da fuoco",
+      "description": "Chiuso l'intervento della polizia a Goldach: 300 persone evacuate durante una festa scolastica a causa di rumori pirotecnici scambiati per spari.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/intervento-polizia-goldach-scuola.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Auto della polizia svizzera davanti a una scuola di notte"
+      },
+      "datePublished": "2026-09-05T10:47:04+00:00",
+      "dateModified": "2026-09-05T10:47:04+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/intervento-polizia-goldach-scuola/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-processo-junge-tat-zurigo': {
+    title: 'Processo Junge Tat: Procura chiede condanna, difesa assoluzione',
+    description: 'Sei membri del gruppo di estrema destra \'Junge Tat\' sono comparsi davanti alla giustizia zurighese con l\'accusa di discriminazione e incitamento all\'odio.',
+    keywords: 'frontalieri, ticino, svizzera, italia, processo, junge, procura, chiede',
+    ogTitle: 'Processo Junge Tat: Procura chiede condanna, difesa assoluzione',
+    ogDescription: 'Sei membri del gruppo di estrema destra \'Junge Tat\' sono comparsi davanti alla giustizia zurighese con l\'accusa di discriminazione e incitamento all\'odio. La procura ha chiesto pene detentive per i principali imputati, mentre la difesa ha invocato',
+    canonicalPath: '/articoli-svizzera/processo-junge-tat-zurigo/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Processo Junge Tat: Procura chiede condanna, difesa assoluzione",
+      "description": "Sei membri del gruppo di estrema destra 'Junge Tat' sono comparsi davanti alla giustizia zurighese con l'accusa di discriminazione e incitamento all'odio.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/processo-junge-tat-zurigo.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Aula di tribunale affollata con giornalisti e manifestanti antifascisti all'esterno."
+      },
+      "datePublished": "2026-09-05T10:54:48+00:00",
+      "dateModified": "2026-09-05T10:54:48+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/processo-junge-tat-zurigo/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-mezzo-miliardo-contadini-mercosur': {
+    title: 'Mezzo miliardo ai contadini per salvare l’intesa con il Mercosur',
+    description: 'La Commissione della politica estera del Consiglio degli Stati propone 517 milioni di franchi per i contadini svizzeri. Dati aggiornati 2026 per frontalieri',
+    keywords: 'frontalieri, ticino, svizzera, italia, mezzo, miliardo, contadini, salvare',
+    ogTitle: 'Mezzo miliardo ai contadini per salvare l’intesa con il Mercosur',
+    ogDescription: 'La Commissione della politica estera del Consiglio degli Stati propone 517 milioni di franchi per i contadini svizzeri, con l\'obiettivo di salvare l\'accordo di libero scambio con il Mercosur.',
+    canonicalPath: '/articoli-svizzera/mezzo-miliardo-contadini-mercosur/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Mezzo miliardo ai contadini per salvare l’intesa con il Mercosur",
+      "description": "La Commissione della politica estera del Consiglio degli Stati propone 517 milioni di franchi per i contadini svizzeri. Dati aggiornati 2026 per frontalieri",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/mezzo-miliardo-contadini-mercosur.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Agricoltori svizzeri in una riunione di discussione su un accordo di libero scambio."
+      },
+      "datePublished": "2026-09-05T11:11:31+00:00",
+      "dateModified": "2026-09-05T11:11:31+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/mezzo-miliardo-contadini-mercosur/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;
