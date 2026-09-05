@@ -109,7 +109,12 @@ jobs:
           printf '%s' "$FIREBASE_SERVICE_ACCOUNT_JSON" > "$RUNNER_TEMP/sa.json"
           echo "GOOGLE_APPLICATION_CREDENTIALS=$RUNNER_TEMP/sa.json" >> "$GITHUB_ENV"
 
+      # A block degraded for three editions in a row is an upstream contract
+      # change, not an outage, and this step DETECTS it — it does not fail on
+      # it. The red is spent by the gate step after `Commit and push` below:
+      # see the header of `reportDegradationAlarms`.
       - name: Refresh the day's data snapshot
+        id: refresh
         env:
           DRY_RUN: ${{ steps.mode.outputs.dry == 'true' && '1' || '0' }}
         run: node generator/scripts/refresh-daily-brief-data.mjs
@@ -241,6 +246,39 @@ jobs:
             git pull --rebase "$REMOTE" "$TARGET" || { git rebase --abort 2>/dev/null || true; }
           done
           echo "::error::push failed after 3 attempts (git output above)"
+          exit 1
+
+      # ── L'allarme di degradazione permanente, DOPO il commit (#882) ───────
+      #
+      # Deve stare qui e non sullo step di refresh. Lo streak per blocco vive
+      # solo dentro `public/data/daily-brief.json`, e l'unico punto che lo rende
+      # durevole e' il `git add` dello step sopra. Un exit code non-zero sul
+      # refresh salta commit e push: lo streak avanzato muore sul runner, il
+      # checkout del giorno dopo rilegge lo snapshot di D-1 e la STESSA edizione
+      # riattraversa la soglia — rosso ogni mattina e bollettino mai pubblicato,
+      # cioe' la regressione che l'allarme esiste per chiudere. Con il verdetto
+      # qui, l'edizione di oggi e' committata e spinta PRIMA che la run diventi
+      # rossa, la prossima legge lo streak oltre soglia e torna verde.
+      #
+      # `steps.commit` puo' non aver pushato (niente in stage): lo snapshot con
+      # lo streak nuovo e' comunque committato quando c'e' un'edizione, e il
+      # verdetto vale lo stesso — l'attraversamento va detto anche in un giorno
+      # senza edizione.
+      - name: Degradation alarm — un blocco degradato da tre edizioni di fila
+        if: steps.mode.outputs.dry != 'true' && steps.refresh.outputs.degradation_crossed == 'true'
+        run: |
+          set -euo pipefail
+          BLOCKS='${{ steps.refresh.outputs.degradation_blocks }}'
+          {
+            echo "### ✖ Bollettino: degradazione permanente — \`$BLOCKS\`"
+            echo
+            echo "Questi blocchi degradano da tre edizioni consecutive. Non e' un'interruzione della fonte: e' un cambio di forma o di contratto a monte, e il Bollettino esce da giorni senza quelle sezioni **con la run verde**."
+            echo
+            echo "L'edizione di oggi **e' stata generata e committata** (questo step viene dopo il push): la run e' rossa per farsi leggere, non per fermare il giornale."
+            echo
+            echo "Le annotazioni \`::error::\` nello step \`Refresh the day's data snapshot\` nominano blocco, streak e ragione. Ripara la fonte o la guardia; dall'edizione successiva la run torna verde da sola."
+          } >> "$GITHUB_STEP_SUMMARY"
+          echo "::error::daily-brief: $BLOCKS degradati da tre edizioni consecutive — vedi il summary di questa run"
           exit 1
 
       # Best-effort CDN warm (upload-cdn-file.sh always exits 0 by design):

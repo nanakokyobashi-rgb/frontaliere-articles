@@ -654,6 +654,11 @@ test('buildDailyBrief: counts available blocks, keeps degraded ones as notes', (
 
 test('buildDailyBrief: refuses a malformed todayIso outright', () => {
   assert.throws(() => buildDailyBrief({ todayIso: 'oggi' }), /YYYY-MM-DD/);
+  // A day that has the right SHAPE and does not exist got past the old regex
+  // guard: every reader below then rejected it, and the run still wrote and
+  // committed a snapshot whose `dateIso` is a day nobody can have.
+  assert.throws(() => buildDailyBrief({ todayIso: '2026-02-31' }), /YYYY-MM-DD/);
+  assert.throws(() => buildDailyBrief({ todayIso: '2026-13-40' }), /YYYY-MM-DD/);
 });
 
 test('a block degraded edition after edition raises an alarm instead of degrading forever', () => {

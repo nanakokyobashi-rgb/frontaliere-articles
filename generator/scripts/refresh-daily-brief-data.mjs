@@ -200,13 +200,43 @@ function printPlan(brief) {
  * bulletin gone as well. A `workflow_dispatch` cannot break the loop either: it
  * checks out the COMMITTED file, not the one the failed run left behind.
  *
- * So the alarm's job is to be impossible to miss, not to be fatal: an
+ * So the alarm's job is to be impossible to miss, not to be fatal HERE: an
  * `::error::` annotation on the run plus a block in `$GITHUB_STEP_SUMMARY`,
  * while the streak keeps advancing inside a snapshot that actually gets
- * committed. Making the run itself red needs a verdict step AFTER
- * `Commit and push`, and the workflow is outside the scope of this change —
- * see `## Non implementato (ancora)` on the PR.
+ * committed. The red itself is spent by a verdict step placed AFTER
+ * `Commit and push` in `generate-daily-brief.yml`, which reads the crossing off
+ * `DEGRADATION_CROSSED_OUTPUT`: today's edition is pushed first, the streak
+ * reaches `main`, tomorrow reads `previous >= threshold` and is green again —
+ * the red is spent once, on the crossing edition, without costing a bulletin.
+ *
+ * A crossing this run will NOT record (`persisted: false`: the dry self-test,
+ * and the 0/4-blocks branch that deliberately keeps yesterday's snapshot) is
+ * announced and never turned into a verdict: nothing would remember it, so it
+ * would fail again tomorrow for the same crossing, forever.
  */
+
+/**
+ * The step-output keys the workflow reads. One source: the gate step in
+ * `generate-daily-brief.yml` names them, and the binding between the two ends —
+ * which nothing can import across — is pinned by
+ * `daily-brief-degradation-alarm.test.mjs`.
+ */
+export const DEGRADATION_CROSSED_OUTPUT = 'degradation_crossed';
+export const DEGRADATION_BLOCKS_OUTPUT = 'degradation_blocks';
+
+/** Append `key=value` to `$GITHUB_OUTPUT`; a no-op outside Actions. */
+function publishStepOutput(key, value) {
+  const file = process.env.GITHUB_OUTPUT;
+  if (!file) return;
+  try {
+    appendFileSync(file, `${key}=${value}\n`);
+  } catch (err) {
+    // The crossing is already an ::error:: annotation and a summary block:
+    // losing the channel to the gate step must not also lose today's edition.
+    console.warn(`⚠️  could not write ${key} to GITHUB_OUTPUT: ${err.message}`);
+  }
+}
+
 function appendStepSummary(text) {
   const file = process.env.GITHUB_STEP_SUMMARY;
   if (!file) return;
@@ -219,7 +249,7 @@ function appendStepSummary(text) {
 }
 
 /** Announce every block whose degradation has outlived the threshold. */
-export function reportDegradationAlarms(brief, { dryRun, previous = null }) {
+export function reportDegradationAlarms(brief, { dryRun, previous = null, persisted = !dryRun }) {
   const alarms = degradationAlarms(brief, previous);
   if (alarms.length === 0) return;
   for (const a of alarms) {
@@ -242,6 +272,13 @@ export function reportDegradationAlarms(brief, { dryRun, previous = null }) {
     '',
     "Non e' un'interruzione della fonte: a questo punto e' un contratto cambiato a monte. Il contatore vive in `public/data/daily-brief.json` (`blocks.<nome>.degradedEditions`) e continua a salire finche' qualcuno non ripara la fonte o il guard.",
   ].join('\n'));
+  if (crossed.length === 0) return;
+  if (!persisted) {
+    console.warn(`⚠️  this run writes no snapshot, so the crossing is not recorded — announced only, never a verdict: it would repeat identically tomorrow.`);
+    return;
+  }
+  publishStepOutput(DEGRADATION_CROSSED_OUTPUT, 'true');
+  publishStepOutput(DEGRADATION_BLOCKS_OUTPUT, crossed.map((a) => a.block).join(', '));
 }
 
 async function main() {
@@ -263,7 +300,7 @@ async function main() {
     // All four sources down: leave yesterday's snapshot in place. The article
     // generator refuses it via dateIso, the cron commits nothing, stays green.
     console.warn('⚠️  0/4 blocks available — NOT writing daily-brief.json (previous snapshot left untouched).');
-    reportDegradationAlarms(brief, { dryRun, previous });
+    reportDegradationAlarms(brief, { dryRun, previous, persisted: false });
     return;
   }
   writeJsonAtomic(OUTPUT_PATH, brief);

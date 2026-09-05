@@ -10,6 +10,12 @@
 // that the refresh script actually ACTS on the decision — a red run — because
 // an alarm nobody is made to read is the same silence with extra JSON.
 //
+// WHERE the red is spent is the other half: never from this step, which owns
+// the commit, but from a gate step in `generate-daily-brief.yml` that runs
+// AFTER it and reads the crossing off `$GITHUB_OUTPUT`. The streak only becomes
+// durable once the snapshot is committed, so a red before the commit would
+// re-cross the threshold every morning — bulletin gone, forever.
+//
 // Importing the script is safe: it runs `main()` only when it is argv[1].
 
 import test from 'node:test';
@@ -17,9 +23,18 @@ import assert from 'node:assert/strict';
 import { mkdtempSync, writeFileSync, readFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 
-import { reportDegradationAlarms, readPreviousSnapshot } from '../scripts/refresh-daily-brief-data.mjs';
+import {
+  reportDegradationAlarms,
+  readPreviousSnapshot,
+  DEGRADATION_CROSSED_OUTPUT,
+  DEGRADATION_BLOCKS_OUTPUT,
+} from '../scripts/refresh-daily-brief-data.mjs';
 import { MAX_CONSECUTIVE_DEGRADED_EDITIONS } from '../scripts/lib/daily-brief-data.mjs';
+
+const REPO_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
+const WORKFLOW_PATH = path.join(REPO_ROOT, '.github', 'workflows', 'generate-daily-brief.yml');
 
 /** A snapshot whose jobs block has been degraded for `editions` runs. */
 function briefWithStreak(editions, before = null) {
@@ -35,18 +50,24 @@ function briefWithStreak(editions, before = null) {
   };
 }
 
-/** Run `fn` with console.error/warn captured, env patched, exitCode restored. */
+/**
+ * Run `fn` with console.error/warn captured, env patched, exitCode restored,
+ * and a scratch `$GITHUB_OUTPUT` — the verdict the workflow gate reads lands
+ * there, so it is asserted the same way the run would see it.
+ */
 function capture(fn, env = {}) {
   const lines = [];
   const { error, warn } = console;
   const before = process.exitCode;
-  const restore = Object.entries(env).map(([k, v]) => [k, process.env[k], v]);
+  const outputFile = path.join(mkdtempSync(path.join(tmpdir(), 'daily-brief-out-')), 'output.txt');
+  writeFileSync(outputFile, '');
+  const restore = Object.entries({ GITHUB_OUTPUT: outputFile, ...env }).map(([k, v]) => [k, process.env[k], v]);
   for (const [k, , v] of restore) process.env[k] = v;
   console.error = (...a) => lines.push(a.join(' '));
   console.warn = (...a) => lines.push(a.join(' '));
   try {
     fn();
-    return { lines, exitCode: process.exitCode };
+    return { lines, exitCode: process.exitCode, outputs: parseOutputs(readFileSync(outputFile, 'utf-8')) };
   } finally {
     console.error = error;
     console.warn = warn;
@@ -56,6 +77,14 @@ function capture(fn, env = {}) {
       else process.env[k] = old;
     }
   }
+}
+
+/** `key=value` lines, the shape Actions reads back as `steps.<id>.outputs.*`. */
+function parseOutputs(text) {
+  return Object.fromEntries(text.split('\n').filter(Boolean).map((l) => {
+    const i = l.indexOf('=');
+    return [l.slice(0, i), l.slice(i + 1)];
+  }));
 }
 
 test('the alarm names the block, the streak and the reason, and reaches the step summary', () => {
@@ -112,6 +141,58 @@ test('the crossing edition and the ones after it read differently', () => {
     { dryRun: false, previous: briefWithStreak(MAX_CONSECUTIVE_DEGRADED_EDITIONS) },
   ));
   assert.ok(after.lines.some((l) => l.includes('still degraded past')), after.lines.join('\n'));
+});
+
+test('the verdict for the workflow gate is published once, on the crossing edition', () => {
+  // The gate step after `Commit and push` reads exactly this. It is what makes
+  // the run red without costing the edition: the snapshot with the advanced
+  // streak is committed first, so tomorrow reads `previous >= threshold`, does
+  // not cross, and the cron is green again.
+  const crossing = capture(() => reportDegradationAlarms(
+    briefWithStreak(MAX_CONSECUTIVE_DEGRADED_EDITIONS),
+    { dryRun: false, previous: briefWithStreak(MAX_CONSECUTIVE_DEGRADED_EDITIONS - 1) },
+  ));
+  assert.equal(crossing.outputs[DEGRADATION_CROSSED_OUTPUT], 'true');
+  assert.equal(crossing.outputs[DEGRADATION_BLOCKS_OUTPUT], 'jobs', 'the gate names the blocks in its summary');
+
+  for (const [editions, before] of [
+    [MAX_CONSECUTIVE_DEGRADED_EDITIONS + 1, MAX_CONSECUTIVE_DEGRADED_EDITIONS],
+    [MAX_CONSECUTIVE_DEGRADED_EDITIONS, MAX_CONSECUTIVE_DEGRADED_EDITIONS],
+  ]) {
+    const later = capture(() => reportDegradationAlarms(
+      briefWithStreak(editions),
+      { dryRun: false, previous: briefWithStreak(before) },
+    ));
+    assert.equal(later.outputs[DEGRADATION_CROSSED_OUTPUT], undefined, `streak ${editions} over ${before} must not re-arm the gate`);
+    assert.ok(later.lines.some((l) => l.startsWith('::error::')), 'the announcement still goes out');
+  }
+});
+
+test('a crossing on a run that writes no snapshot is announced, never a verdict', () => {
+  // The 0/4-blocks branch deliberately leaves yesterday's snapshot in place and
+  // the dry self-test writes nothing at all: today's streak is not recorded, so
+  // a verdict would fire again tomorrow on the same crossing, forever.
+  const { lines, outputs } = capture(() => reportDegradationAlarms(
+    briefWithStreak(MAX_CONSECUTIVE_DEGRADED_EDITIONS),
+    { dryRun: false, previous: briefWithStreak(MAX_CONSECUTIVE_DEGRADED_EDITIONS - 1), persisted: false },
+  ));
+  assert.equal(outputs[DEGRADATION_CROSSED_OUTPUT], undefined);
+  assert.ok(lines.some((l) => l.startsWith('::error::') && l.includes('jobs')), lines.join('\n'));
+  assert.ok(lines.some((l) => l.includes('not recorded')), lines.join('\n'));
+});
+
+test('the workflow spends the red on that verdict, after the commit step', () => {
+  // Non-negotiable #6: the key lives in the script and is read in YAML, which
+  // cannot import it. This is the test that keeps the two ends tied — including
+  // the ORDER, which is the whole fix: a gate before the commit would skip it.
+  const yml = readFileSync(WORKFLOW_PATH, 'utf-8');
+  assert.ok(yml.includes(`steps.refresh.outputs.${DEGRADATION_CROSSED_OUTPUT}`), 'the gate must read the verdict this script publishes');
+  assert.ok(yml.includes(`steps.refresh.outputs.${DEGRADATION_BLOCKS_OUTPUT}`), 'the summary names the blocks from the same source');
+  assert.match(yml, /^\s+id: refresh$/m, 'the refresh step must keep the id the gate refers to');
+
+  const commitAt = yml.indexOf('name: Commit and push');
+  const gateAt = yml.indexOf(`steps.refresh.outputs.${DEGRADATION_CROSSED_OUTPUT}`);
+  assert.ok(commitAt > 0 && gateAt > commitAt, 'the degradation gate must run AFTER the commit, or the streak dies on the runner');
 });
 
 test('a streak that round-tripped to a string does not re-arm the alarm every day', () => {

@@ -600,7 +600,10 @@ function degradedEditions(block, previousStreak, { sameDay }) {
  * Three editions is the threshold: a source outage that lasts a morning or two
  * must stay a note in the log, and anything that survives three consecutive
  * runs is not an outage. The caller decides what "made to look at" means —
- * `refresh-daily-brief-data.mjs` fails the run.
+ * `refresh-daily-brief-data.mjs` announces it and hands the crossing to
+ * `generate-daily-brief.yml`, which fails the run on a gate step placed AFTER
+ * the commit (a red before it would skip the commit, so the streak would never
+ * become durable and the same edition would cross again every morning).
  *
  * `crossed` is the edition on which the streak REACHES the threshold, read off
  * the previous snapshot: it is the only one that may be made fatal. A streak
