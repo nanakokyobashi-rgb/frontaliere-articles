@@ -248,7 +248,7 @@ import {
 // parte perche' i test non possono importare QUESTO file (761 KB, e la prima
 // cosa che fa e' rete), che e' la stessa ragione per cui ci vive
 // `exhaustion-disposition.mjs`.
-import { buildRunCard } from './lib/run-card.mjs';
+import { writeRunCard } from './lib/run-card.mjs';
 // Il guard sui segnaposto del prompt. Copre OGNI campo di testo pubblicato —
 // corpo, FAQ, excerpt, imageAlt, title, seo — con un criterio solo, derivato
 // dai letterali dello schema JSON che il prompt piu' sotto mostra al modello.
@@ -2193,11 +2193,16 @@ function finalizeRunReport(status, extra = {}) {
   // step di generazione la punta dentro `$RUNNER_TEMP/generate-diagnostics`,
   // che l'upload `if: always()` gia' esistente porta fuori senza uno step
   // nuovo — quindi senza un passo in piu' da sbagliare nell'ordine.
+  // `writeRunCard()` e NON il `write()`/`resolve()` di questo file: quelli
+  // passano da `corpusPath()` e presuppongono un path RELATIVO al repo, mentre
+  // `RUN_CARD_FILE` e' assoluto (`$RUNNER_TEMP/...`). Vedi il commento della
+  // funzione in lib/run-card.mjs per i due danni muti che la confusione
+  // produce — card fuori dall'artifact, e un albero `home/` che `git add -A`
+  // porterebbe su main.
   const cardFile = process.env.RUN_CARD_FILE;
   if (cardFile) {
     try {
-      mkdirSync(path.dirname(resolve(cardFile)), { recursive: true });
-      write(cardFile, `${JSON.stringify(buildRunCard(RUN_REPORT))}\n`);
+      writeRunCard(cardFile, RUN_REPORT);
     } catch (e) {
       console.error(`  ⚠️  Impossibile scrivere la run card ${cardFile}: ${e.message}`);
     }

@@ -40,6 +40,8 @@
  * Zero dipendenze npm: `create-article.mjs` la importa a caldo e i workflow che
  * la leggono girano anche PRIMA di `npm ci`.
  */
+import { mkdirSync, writeFileSync } from 'node:fs';
+import path from 'node:path';
 
 /** Versione dello schema. Un lettore che non la riconosce deve dirlo, non indovinare. */
 export const RUN_CARD_SCHEMA = 'run-card/1';
@@ -71,6 +73,39 @@ export function buildRunCard(report) {
       ? rare.quotaDeferral
       : null,
   };
+}
+
+/**
+ * ── LA SCRITTURA STA QUI, E NON NEL CHIAMANTE ───────────────────────────────
+ *
+ * `create-article.mjs` ha un proprio `write()`/`resolve()` che passano da
+ * `corpusPath()`: sono il choke point che traduce `services/locales/…` in
+ * `content/…`, e presuppongono un path RELATIVO al repo. Con un path assoluto
+ * — che e' esattamente cio' che `$RUNNER_TEMP/generate-diagnostics/…` e' —
+ * `resolve()` produce `${PROJECT_ROOT}/` + il path assoluto, cioe' fa atterrare
+ * la card in `<repo>/home/runner/…`. Due danni, entrambi muti: `$diag_dir`
+ * resta vuota (`if-no-files-found: ignore` fa sparire l'artifact e l'intera
+ * strumentazione diventa un no-op che non fa fallire niente), e l'albero
+ * `home/` creato sotto il workspace finisce su `main` col `git add -A` dello
+ * step di commit.
+ *
+ * La scrittura vive quindi accanto alla costruzione, con `path.resolve` e
+ * `writeFileSync` di Node: un path assoluto resta assoluto, uno relativo si
+ * risolve sul cwd, e nessun sanitize corpus tocca un file che corpus non e'.
+ * Vive qui anche perche' sia TESTABILE: `create-article.mjs` non e'
+ * importabile, quindi finche' la scrittura stava li' dentro nessun test poteva
+ * accorgersi che la card atterrava altrove — ed e' precisamente cio' che e'
+ * successo.
+ *
+ * @param {string} file path della card (assoluto o relativo al cwd)
+ * @param {any} report il `RUN_REPORT`
+ * @returns {string} il path assoluto scritto
+ */
+export function writeRunCard(file, report) {
+  const target = path.resolve(file);
+  mkdirSync(path.dirname(target), { recursive: true });
+  writeFileSync(target, `${JSON.stringify(buildRunCard(report))}\n`);
+  return target;
 }
 
 /**

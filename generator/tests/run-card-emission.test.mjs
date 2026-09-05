@@ -33,8 +33,8 @@ import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { buildRunCard, summariseRunCards, RUN_CARD_SCHEMA } from '../scripts/lib/run-card.mjs';
-import { readCards } from '../../scripts/ci/run-card-report.mjs';
+import { buildRunCard, summariseRunCards, writeRunCard, RUN_CARD_SCHEMA } from '../scripts/lib/run-card.mjs';
+import { readCards, ARTIFACT_GLOB } from '../../scripts/ci/run-card-report.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const read = (rel) => fs.readFileSync(path.join(ROOT, rel), 'utf8');
@@ -138,7 +138,42 @@ test('readCards legge le card da una cartella di artifact scaricati', () => {
   assert.equal(unreadable, 1);
 });
 
+// ── 2bis. La card atterra DOVE le si dice, non altrove ──────────────────────
+
+test('writeRunCard scrive esattamente al path assoluto ricevuto', () => {
+  // IL CASO CHE E' SFUGGITO ALLA PRIMA STESURA. La card usava il `write()` di
+  // `create-article.mjs`, che passa da `corpusPath()` e presuppone un path
+  // RELATIVO al repo: con `$RUNNER_TEMP/...` (assoluto) il file atterrava in
+  // `<repo>/home/runner/...`. Muto due volte — `$diag_dir` vuota, quindi
+  // artifact assente e strumentazione no-op, piu' un albero `home/` sotto il
+  // workspace che il `git add -A` dello step di commit avrebbe portato su main.
+  const base = fs.mkdtempSync(path.join(os.tmpdir(), 'run-card-abs-'));
+  const target = path.join(base, 'generate-diagnostics', 'run-card-frontaliere.json');
+  const written = writeRunCard(target, {
+    runId: '99', section: 'frontaliere', status: 'generated', endedAt: null,
+    rareEvents: { rebracket: { calls: 1, viaFallbackUnsat: 1 }, quotaDeferral: null },
+  });
+  assert.equal(written, target, 'il path scritto deve essere quello ricevuto, non uno riscritto');
+  assert.ok(fs.existsSync(target), 'la card non esiste al path richiesto');
+  assert.equal(JSON.parse(fs.readFileSync(target, 'utf8')).rebracket.viaFallbackUnsat, 1);
+  // E in nessun altro posto: nessun albero parassita sotto la radice del repo.
+  assert.ok(!fs.existsSync(path.join(ROOT, target)), 'la card e finita anche sotto il repo');
+});
+
 // ── 3. Il cablaggio: la card esce dal runner ────────────────────────────────
+
+test('il reporter filtra per NOME dell artifact, non per file interno', () => {
+  // `gh run download -p` matcha i nomi degli artifact. Un pattern sui file
+  // (`run-card-*.json`) non matcha nulla, `gh` esce non-zero e ogni run finisce
+  // in `missing`: il report direbbe per sempre «card lette: 0» — un altro zero
+  // che non distingue «non e successo» da «non l ho visto».
+  assert.match(ARTIFACT_GLOB, /^generate-article-diagnostics-/);
+  const uploadName = GA_RAW.match(/name:\s*(generate-article-diagnostics-[^\n]*)/);
+  assert.ok(uploadName, 'lo step di upload deve nominare l artifact');
+  // Il glob deve davvero coprire il nome che il workflow produce.
+  const literal = ARTIFACT_GLOB.replace('*', '');
+  assert.ok(uploadName[1].startsWith(literal), `il glob "${ARTIFACT_GLOB}" non copre "${uploadName[1]}"`);
+});
 
 const activeLines = (src) => src.split('\n').filter((l) => !l.trim().startsWith('#'));
 const GA_RAW = read('.github/workflows/generate-article.yml');
@@ -147,7 +182,13 @@ const GA = activeLines(GA_RAW).join('\n');
 test('create-article.mjs emette la card solo se RUN_CARD_FILE e definita', () => {
   const src = read('generator/scripts/create-article.mjs');
   assert.ok(src.includes('process.env.RUN_CARD_FILE'), 'la card deve leggere RUN_CARD_FILE');
-  assert.ok(src.includes('buildRunCard(RUN_REPORT)'), 'la card deve essere la proiezione del report gia esistente');
+  assert.ok(src.includes('writeRunCard(cardFile, RUN_REPORT)'), 'la card deve essere la proiezione del report gia esistente');
+  // Mai il `write()` corpus-relative di questo file su un path assoluto: vedi
+  // il commento di `writeRunCard` in lib/run-card.mjs.
+  assert.ok(
+    !/\bwrite\(cardFile\b/.test(src),
+    'la card non deve passare dal write()/resolve() corpus-relative di create-article.mjs',
+  );
   // Nessun default: in locale e nei test il comportamento resta identico a
   // prima della strumentazione.
   assert.ok(

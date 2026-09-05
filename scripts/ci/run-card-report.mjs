@@ -40,8 +40,25 @@ import { summariseRunCards } from '../../generator/scripts/lib/run-card.mjs';
 /** Esplicito e non dedotto dal cwd: questo script si lancia anche da un worktree. */
 export const DEFAULT_REPO = process.env.RUN_CARD_REPO || 'nanakokyobashi-rgb/frontaliere-articles';
 
-/** Il pattern che `gh run download -p` usa per tirare giu' SOLO le card. */
-export const CARD_GLOB = 'run-card-*.json';
+/**
+ * Il pattern di `gh run download -p`, e la trappola che ci sta sotto.
+ *
+ * `-p` filtra i NOMI DEGLI ARTIFACT, non i file al loro interno («Download
+ * artifacts that match a glob pattern»). Un pattern sui file — `run-card-*.json`
+ * — non matcha nessun artifact, `gh` esce non-zero e OGNI run risulta senza
+ * artifact: il report stamperebbe per sempre `card lette: 0`, cioe' un altro
+ * zero che non distingue «non e' successo» da «non l'ho visto», che e'
+ * letteralmente il difetto che questo strumento esiste per chiudere.
+ *
+ * Quindi si filtra per NOME dell'artifact e si seleziona il file DOPO, con
+ * `collectCardFiles()`, che gia' fa quel lavoro. Conseguenza dichiarata: si
+ * scarica l'artifact intero, card piu' eventuali diagnostiche di wedge. Sulla
+ * stragrande maggioranza delle run quelle sono assenti per costruzione (il log
+ * del tentativo viene rimosso quando l'articolo c'e'), quindi in pratica
+ * l'artifact e' la card; ma quando una run ha lasciato uno stack o un report di
+ * Node, quel peso si paga.
+ */
+export const ARTIFACT_GLOB = 'generate-article-diagnostics-*';
 
 function gh(args, opts = {}) {
   return execFileSync('gh', args, { encoding: 'utf8', maxBuffer: 64 * 1024 * 1024, ...opts });
@@ -110,7 +127,12 @@ async function main() {
 
   if (dIdx >= 0) {
     dir = argv[dIdx + 1];
-    if (!dir || !statSync(dir, { throwIfNoEntry: false })) {
+    // `.isDirectory()` e non la sola esistenza: con un FILE il guard passerebbe,
+    // `collectCardFiles()` fallirebbe il `readdirSync` e il report direbbe
+    // «0 card» invece di «argomento sbagliato» — la stessa classe di zero muto
+    // che questo strumento esiste per togliere.
+    const st = dir ? statSync(dir, { throwIfNoEntry: false }) : null;
+    if (!st || !st.isDirectory()) {
       console.error(`--dir richiede una cartella esistente (ricevuto: ${dir || '(niente)'})`);
       process.exit(2);
     }
@@ -125,9 +147,9 @@ async function main() {
     runs = ids.length;
     for (const id of ids) {
       try {
-        // `-p` scarica SOLO le card: il resto dell'artifact (report di Node,
-        // log del tentativo) puo' pesare megabyte e qui non serve.
-        gh(['run', 'download', String(id), '--repo', repo, '-p', CARD_GLOB, '-D', path.join(dir, String(id))], { stdio: 'pipe' });
+        // Pattern sul NOME dell'artifact — vedi ARTIFACT_GLOB. La selezione
+        // delle card avviene dopo, su disco, con collectCardFiles().
+        gh(['run', 'download', String(id), '--repo', repo, '-p', ARTIFACT_GLOB, '-D', path.join(dir, String(id))], { stdio: 'pipe' });
       } catch {
         // Nessun artifact, o nessuna card dentro: e' un dato, non un errore.
         // Le run precedenti al merge della strumentazione stanno tutte qui.
