@@ -4522,6 +4522,9 @@ export function getStats() {
     exhaustedModels: [..._exhaustedModels],
     consecutive429s: Object.fromEntries(_consecutive429),  // FRO-325
     resolverFlaps: Object.fromEntries(_resolverFlaps),     // #770
+    // Da quale classe di prova sono arrivati i reset che hanno chiuso una
+    // striscia gia' iniziata (#848 item 3). `silent` e' il numero che decide.
+    resolverFlapResets: Object.fromEntries([..._resolverFlapResets].map(([p, r]) => [p, { ...r }])),
     // Secondi residui; `Infinity` = ban di run (host irraggiungibile, #803).
     activeCooldowns: Object.fromEntries([..._providerCooldown].map(([p, t]) => [p, Math.max(0, Math.ceil((t - Date.now()) / 1000))])),
     scoreBoard: getScoreBoard(),
@@ -4668,6 +4671,7 @@ export function resetState() {
   _runOutcomes.clear();
   _consecutive429.clear();
   _resolverFlaps.clear();
+  _resolverFlapResets.clear();
   _callLatency.clear();
   _clampedTimeouts.clear();
   _consecutiveContentFailures.clear();
@@ -4905,6 +4909,95 @@ export function classifyTransientResolver(err) {
   return _walkErrorChain(err, (e) => (
     typeof e.code === 'string' && TRANSIENT_RESOLVER_CODES.has(e.code) ? e.code : null
   ));
+}
+
+/**
+ * Codici syscall che si possono ricevere SOLO dopo che il nome e' stato
+ * risolto: per prendere un RST, un reset a meta' stream o una rotta assente
+ * bisogna gia' avere un indirizzo in mano. `ENOTFOUND` sta qui per la stessa
+ * ragione letta dall'altro verso — e' una risposta AUTORITATIVA del resolver
+ * («questo nome non esiste»), quindi il resolver ha funzionato. L'unico codice
+ * che NON prova niente e' `EAI_AGAIN`, ed e' il flap stesso: non arriva mai a
+ * questa domanda.
+ */
+const RESOLVER_PROVEN_CODES = new Set([
+  ...HOST_UNREACHABLE_CODES,
+  'ECONNRESET',
+  'ECONNABORTED',
+  'ETIMEDOUT',
+  'EPIPE',
+  'EPROTO',
+]);
+
+/** Una risposta HTTP ricevuta: `[model] HTTP 503: ...` e' la forma che questo modulo alza. */
+const HTTP_RESPONSE_RE = /\bHTTP \d{3}\b/;
+
+/**
+ * La striscia dei flap si chiude su QUALUNQUE altra classe di fallimento
+ * (vedi il reset in `callLLM`), e #848 item 3 chiede se non debba invece
+ * chiudersi solo sulle classi che PROVANO che il resolver funziona. La
+ * domanda non si decide a occhio — 429 e fallimento DNS nascono a due livelli
+ * diversi, e scegliere senza il numero significa scambiare un falso negativo
+ * per un falso positivo. Questa funzione e' il METRO: classifica la prova che
+ * il fallimento porta sul resolver, e `callLLM` conta le due classi ogni volta
+ * che un reset butta via una striscia VIVA — cioe' esattamente gli eventi che
+ * possono impedire l'escalation.
+ *
+ * Pura e idempotente come le due `classify*` sopra: nessun effetto, quindi
+ * chiamarla non cambia nulla di cio' che misura.
+ *
+ * @param {unknown} err
+ * @returns {'resolved'|'silent'} `resolved` = il nome e' stato risolto (una
+ *   risposta HTTP e' arrivata, o il codice/indirizzo dice che c'era gia' un
+ *   peer); `silent` = l'errore non dice niente sul resolver (abort e timeout
+ *   senza risposta, `spawn ENOENT`, un payload malformato alzato come Error).
+ */
+export function classifyResolverResetEvidence(err) {
+  const proven = _walkErrorChain(err, (e) => {
+    if (typeof e.code === 'string' && RESOLVER_PROVEN_CODES.has(e.code)) return true;
+    // L'indirizzo del peer c'e' solo se il DNS lo ha prodotto.
+    if (typeof e.address === 'string' && e.address) return true;
+    if (typeof e.message === 'string' && HTTP_RESPONSE_RE.test(e.message)) return true;
+    return null;
+  });
+  return proven === true ? 'resolved' : 'silent';
+}
+
+/**
+ * @type {Map<string, {success: number, resolved: number, silent: number, streaksDiscarded: number}>}
+ * provider → da quale classe sono arrivati i reset che hanno buttato via una
+ * striscia di flap gia' iniziata. Solo quelli: un reset su contatore a zero
+ * non e' un evento, e contarlo annegherebbe il numero che serve sotto il
+ * traffico normale.
+ */
+const _resolverFlapResets = new Map();
+
+const _freshResolverFlapResets = () => ({ success: 0, resolved: 0, silent: 0, streaksDiscarded: 0 });
+
+/**
+ * L'UNICO punto in cui la striscia si chiude senza che l'escalation l'abbia
+ * spesa (AGENTS.md #6): i due call site — il successo e il fallimento di altra
+ * classe — devono contare con lo stesso metro, o il numero che #848 item 3
+ * aspetta descriverebbe meta' degli eventi.
+ *
+ * @param {string} provider
+ * @param {'success'|'resolved'|'silent'} evidence
+ */
+function _recordResolverFlapReset(provider, evidence) {
+  const streak = _resolverFlaps.get(provider) || 0;
+  _resolverFlaps.delete(provider);
+  if (!streak) return;
+  const row = _resolverFlapResets.get(provider) || _freshResolverFlapResets();
+  row[evidence]++;
+  row.streaksDiscarded++;
+  _resolverFlapResets.set(provider, row);
+  // Una riga per evento, non una per provider: la domanda e' QUANTE volte
+  // succede in una run reale, e un log silenziato dopo il primo la
+  // risponderebbe con «almeno una».
+  const what = evidence === 'silent'
+    ? 'un fallimento che non prova niente sul resolver'
+    : evidence === 'success' ? 'un successo' : 'un fallimento con risposta ricevuta';
+  console.warn(`🧮 [${provider}] striscia di flap del resolver (${streak}/${RESOLVER_FLAP_ESCALATION}) chiusa da ${what} (#848)`);
 }
 
 /**
@@ -7367,7 +7460,7 @@ export async function callLLM(messages, opts = {}) {
       recordModelSuccess(model, { recordScore: _shouldRecordScore(o) });
       _consecutive429.delete(model); // FRO-325: reset 429 counter on success
       _clampedTimeouts.delete(model); // an answer clears the adaptive-ceiling doubt
-      _resolverFlaps.delete(provider); // the name resolved: the flap streak is over (#770)
+      _recordResolverFlapReset(provider, 'success'); // the name resolved: the flap streak is over (#770)
       _recordLastResortOutcome(model, 'served');
       if (provider === PROVIDER.CLAUDE_CLI) _claudeCliConsecutiveTimeouts = 0;
       if (provider === PROVIDER.OMNIROUTE) _omniRouteConsecutiveFailures = 0;
@@ -7452,7 +7545,14 @@ export async function callLLM(messages, opts = {}) {
       // qualsiasi nella run» invece di «il resolver e' rotto adesso».
       const flapCode = e.hostUnreachable ? null : classifyTransientResolver(e);
       if (!flapCode) {
-        _resolverFlaps.delete(provider);
+        // Il comportamento non cambia — la striscia si chiude come prima —, ma
+        // ora si sa CON CHE COSA: `_recordResolverFlapReset` conta la classe
+        // della prova solo quando c'era davvero una striscia da buttare via.
+        // E' la misura che #848 item 3 chiede prima di decidere se restringere
+        // il reset alle sole classi che provano che il resolver funziona: sotto
+        // una certa frequenza di reset `silent` l'item e' teorico, sopra e' il
+        // difetto che impedisce all'escalation di scattare.
+        _recordResolverFlapReset(provider, classifyResolverResetEvidence(e));
       } else {
         const flaps = (_resolverFlaps.get(provider) || 0) + 1;
         _resolverFlaps.set(provider, flaps);
