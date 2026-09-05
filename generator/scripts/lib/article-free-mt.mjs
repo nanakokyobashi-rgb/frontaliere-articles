@@ -12,7 +12,7 @@
  * runs `main()` on import, so its internals can't be imported directly.
  */
 
-import { hasUsableTranslatedText } from './body2-payload-verdict.mjs';
+import { hasUsableTranslatedText, hasUsableContentText } from './body2-payload-verdict.mjs';
 
 const NAV_LINK_RE = /\[[^\]]+\]\(nav:[^)]+\)/g;
 const NAV_SENTINEL_RE = /0NAV(\d+)0/g;
@@ -166,12 +166,17 @@ export async function translateFieldFreeMt({
     onWarn(`free-MT ${targetLang}:${fieldType} failed (${err?.message || err})`);
     return '';
   }
-  // Stesso predicato del percorso LLM sui campi tradotti: un motore MT che
-  // restituisce la stringa serializzata `"null"` (o un non-stringa) deve
-  // leggersi come "nessuna traduzione" e cedere alla recovery per-campo, non
-  // essere pubblicato. `Null` maiuscolo resta solo dove e' una parola, cioe'
-  // su `targetLang === 'de'` («zero»); su en/fr e' scartato come prima (#831).
-  if (!hasUsableTranslatedText(out, targetLang)) return '';
+  // L'uscita di un MOTORE, non la prosa di un modello: qui vale il predicato
+  // severo, TUTTE le grafie di `null` (vedi il blocco «QUALE DEI DUE
+  // PREDICATI» in body2-payload-verdict.mjs). `Null`/`NULL` e' cio' che un
+  // motore della cascata gratuita emette quando NON ha una traduzione — un
+  // marker di fallimento, non la parola tedesca per «zero» scelta da qualcuno
+  // che sapeva cosa stava traducendo. Accettarlo su `targetLang === 'de'`
+  // pubblicava il marker verbatim in `content/`, in `meta-de.json`, nel feed
+  // RSS `de` e come segmento di slug `/de/blog/null` (#868 item 4).
+  // Scartarlo costa al piu' una recovery per-campo (retry mirato → fallback
+  // IT): un retry, non una pubblicazione sbagliata.
+  if (!hasUsableContentText(out)) return '';
   let restored = String(out);
   if (expected > 0) {
     const r = restore(restored);
