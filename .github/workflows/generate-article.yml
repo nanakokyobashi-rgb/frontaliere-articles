@@ -1220,6 +1220,22 @@ jobs:
             # al secondo esatto in cui il kill duro arriva.
             export CREATE_ARTICLE_MAX_WALL_MS=$(( (cap - 60) * 1000 ))
 
+            # ── LA CARD DI RUN, E PERCHE' NON SERVE UNO STEP NUOVO ───────
+            # `finalizeRunReport` scrive gia' un report su ogni percorso
+            # terminale, ma dentro `.tmp/` del workspace: nessuno lo legge e
+            # muore col runner. Qui la sua proiezione minima (~0,5 KB, schema
+            # fisso) esce in `$diag_dir`, che lo step «Upload wedge
+            # diagnostics» — `if: always()`, gia' esistente — porta fuori
+            # senza un passo in piu'. Un verdetto emesso da uno step NUOVO
+            # prima del commit non segnalerebbe: cancellerebbe lo stato, ed e'
+            # l'errore che questo giro evita non aggiungendo lo step.
+            #
+            # Il nome porta la SEZIONE: il loop gira fino a due volte nella
+            # stessa run e un nome fisso lascerebbe leggere solo l'ultimo
+            # tentativo — cioe' perderebbe silenziosamente meta' del campione,
+            # che e' il difetto che la card esiste per chiudere.
+            export RUN_CARD_FILE="$diag_dir/run-card-$sec.json"
+
             # Il tentativo gira in background con l'output duplicato su
             # `$stall_log`: e' quel file a crescere (o a non crescere) che il
             # watchdog campiona. `$!` e' il pid di `timeout`, quindi `wait` piu'
@@ -1404,6 +1420,21 @@ jobs:
       # delle run la cartella e' vuota per costruzione (il log del tentativo
       # viene rimosso quando l'articolo c'e'), e un warning per run insegna solo
       # a ignorare i warning.
+      #
+      # DAL 2026-09-05 LA CARTELLA NON E' PIU' VUOTA, ED E' DELIBERATO. Lo step
+      # di generazione esporta `RUN_CARD_FILE` qui dentro, quindi ogni run
+      # carica almeno la card (~0,5 KB per sezione). E' il prezzo dichiarato di
+      # #621/#804/#832/#787: contare un evento raro dai log costa 300-500 KB per
+      # run scaricati a mano e produce zeri che non distinguono «non e'
+      # successo» da «non l'ho visto». Misurato sulle run del 2026-09-05: questo
+      # step durava 0-1s producendo ZERO artifact; con un artifact piccolo da
+      # caricare gli step gemelli di questo repo (`crawler-generation-observer`,
+      # 557 B; `translation-observability`, 2,4 KB) durano 1s. Il delta e' <=1s
+      # su una run `success` da 254s mediani.
+      #
+      # `retention-days: 14` resta invariato di proposito: a ~100 run/giorno la
+      # finestra della card e' ~1.400 run, cioe' 3,5x il campione da 400 run che
+      # il 2026-09-05 e' uscito vuoto sui log.
       #
       # Il path e' sotto `runner.temp` e NON sotto il workspace: `git add -A`
       # nello step sopra porterebbe un report diagnostico dritto dentro il

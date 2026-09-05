@@ -243,6 +243,12 @@ import {
   isPromptFloorIrreducible,
   promptFloorSummary,
 } from './lib/exhaustion-disposition.mjs';
+// La proiezione del report di run che sopravvive al runner — vedi il commento
+// su `rareEvents` piu' sotto per il difetto che chiude. Sta in un modulo a
+// parte perche' i test non possono importare QUESTO file (761 KB, e la prima
+// cosa che fa e' rete), che e' la stessa ragione per cui ci vive
+// `exhaustion-disposition.mjs`.
+import { buildRunCard } from './lib/run-card.mjs';
 // Il guard sui segnaposto del prompt. Copre OGNI campo di testo pubblicato —
 // corpo, FAQ, excerpt, imageAlt, title, seo — con un criterio solo, derivato
 // dai letterali dello schema JSON che il prompt piu' sotto mostra al modello.
@@ -1973,6 +1979,54 @@ const RUN_REPORT = {
      */
     factCheckRejectionsByCategory: {},
   },
+  /**
+   * ── GLI EVENTI RARI, CONTATI QUANDO ACCADONO (#621 #625 #804 #832 #787) ───
+   *
+   * Cinque issue del backlog erano ferme sulla stessa forma di attesa: «serve
+   * un numero da run reali». Nessuna e' ferma su un dubbio di codice — sono
+   * ferme perche' il numero non lascia traccia leggibile. Il metodo usato
+   * finora e' `gh run view <id> --log | grep`, e su un evento raro non
+   * funziona per tre ragioni che si sommano: il log di una run pesa 300-500 KB
+   * (leggerne 400 e' mezzo giga), la finestra di retention lo cancella prima
+   * che il campione si accumuli, e un evento che accade una volta su mille run
+   * non capita mai dentro la finestra. La misura di #832 lo ha mostrato in
+   * chiaro: «28 cascate confrontabili, flip 0/28», dove lo zero non diceva
+   * «nessun flip» ma «tutte e 28 avevano echi=0», cioe' il fenomeno non era nel
+   * campione.
+   *
+   * Il rimedio non e' una sonda per issue: e' emettere il numero NEL MOMENTO in
+   * cui l'evento accade, dentro il report di run che questo file gia'
+   * finalizza su ogni percorso terminale. Da qui esce una CARD — piccola,
+   * a schema fisso — che l'artifact di diagnostica gia' esistente porta fuori
+   * dal runner, e che `scripts/ci/run-card-report.mjs` aggrega su N run senza
+   * scaricare un solo byte di log.
+   *
+   * Perche' un blocco separato e non campi sparsi nel report: la card e' una
+   * PROIEZIONE di questo blocco e di nient'altro, quindi la sua dimensione non
+   * dipende da quanto cresce il resto del report (che ha liste campionate e
+   * note, e non ha un tetto). Il costo dell'artifact resta dichiarabile.
+   */
+  rareEvents: {
+    /**
+     * #621. `_eseguiRibracket` emette gia' `[prompt-rebracket] …
+     * viaFallbackUnsat=<0|1>`; qui lo stesso fatto diventa un contatore che
+     * sopravvive alla retention del log. `calls` e' il DENOMINATORE, ed e'
+     * la meta' che al grep mancava: «0 hit» non distingue «il ramo non si e'
+     * mai acceso» da «il marker non viene piu' stampato».
+     */
+    rebracket: { calls: 0, viaFallbackUnsat: 0 },
+    /**
+     * #804 / #832 / #787. Il breakdown GREZZO su cui `isLegitimateQuotaDeferral`
+     * ha deciso, piu' lo share e il verdetto presi davvero. Si registra il
+     * grezzo — non solo i numeri derivati — perche' ogni ricalibrazione futura
+     * (la soglia `QUOTA_DEFERRAL_MIN_TRANSIENT_SHARE`, il `>` contro `>=` del
+     * guardrail di maggioranza) si rigioca offline sulle stesse funzioni
+     * esportate da `lib/exhaustion-disposition.mjs`, senza dover strumentare
+     * una seconda volta e senza aspettare un'altra finestra di run.
+     * Resta `null` sulle run che non finiscono in cascata di esaurimento.
+     */
+    quotaDeferral: null,
+  },
   notes: [],
 };
 
@@ -2122,6 +2176,31 @@ function finalizeRunReport(status, extra = {}) {
     write(CREATE_ARTICLE_REPORT_FILE, `${JSON.stringify(RUN_REPORT, null, 2)}\n`);
   } catch (e) {
     console.error(`  ⚠️  Impossibile scrivere ${CREATE_ARTICLE_REPORT_FILE}: ${e.message}`);
+  }
+
+  // ── LA CARD, E PERCHE' NON E' IL REPORT INTERO ──────────────────────────
+  //
+  // `CREATE_ARTICLE_REPORT_FILE` esiste da sempre e viene scritto su ogni
+  // percorso terminale, ma finisce in `.tmp/` dentro il workspace: nessuno lo
+  // legge e muore col runner. La card e' la sua proiezione minima —
+  // `buildRunCard()` — e va in un file SEPARATO perche' il report intero non
+  // ha un tetto (liste campionate, note) mentre l'artifact deve avere un costo
+  // dichiarabile. Card misurata: ~500 B contro i 1.951 B del solo scheletro
+  // del report.
+  //
+  // `RUN_CARD_FILE` non ha default: senza la variabile non si scrive nulla.
+  // In locale e nei test il comportamento resta identico a prima; in CI lo
+  // step di generazione la punta dentro `$RUNNER_TEMP/generate-diagnostics`,
+  // che l'upload `if: always()` gia' esistente porta fuori senza uno step
+  // nuovo — quindi senza un passo in piu' da sbagliare nell'ordine.
+  const cardFile = process.env.RUN_CARD_FILE;
+  if (cardFile) {
+    try {
+      mkdirSync(path.dirname(resolve(cardFile)), { recursive: true });
+      write(cardFile, `${JSON.stringify(buildRunCard(RUN_REPORT))}\n`);
+    } catch (e) {
+      console.error(`  ⚠️  Impossibile scrivere la run card ${cardFile}: ${e.message}`);
+    }
   }
 }
 
@@ -8819,6 +8898,14 @@ Rispondi SOLO con JSON valido, senza markdown.` },
     // — e quindi il punto di ripartenza del retry per JSON malformato piu'
     // sotto. Stesso principio del `unsat=1` sul marker `[prompt-budget]`.
     const viaFallbackUnsat = rb.msgs ? 0 : 1;
+    // #621: lo stesso fatto del marker, ma contato. Il marker vive nel log e
+    // muore con la retention; questo finisce nella card di run, che l'artifact
+    // porta fuori. `?.` e non un `if`: un contatore diagnostico non puo' essere
+    // il motivo per cui un ri-bracketing non parte.
+    if (RUN_REPORT?.rareEvents?.rebracket) {
+      RUN_REPORT.rareEvents.rebracket.calls += 1;
+      RUN_REPORT.rareEvents.rebracket.viaFallbackUnsat += viaFallbackUnsat;
+    }
     console.error(
       `  ♻️ [prompt-rebracket] section=${SECTION_NAME} attempt=${generationAttempt} `
       + `budget=${rb.target} da=${_promptEstTokens} a=${scelta.est} `
@@ -16135,6 +16222,18 @@ if (invokedDirectly) {
   if (isQuotaExhaustedError(e)) {
     const share = quotaDeferralShare(e);
     const pct = (share.share * 100).toFixed(1);
+    // #804 / #832 / #787 — il campione, preso qui e non dedotto dal log.
+    // `breakdown` e' il GREZZO su cui il predicato ha appena deciso: da esso
+    // ogni ricalibrazione futura si rigioca offline con le funzioni esportate
+    // di lib/exhaustion-disposition.mjs. `verdict` e' quello che la run ha
+    // davvero applicato, cosi' un flip si conta senza doverlo indovinare.
+    if (RUN_REPORT?.rareEvents) {
+      RUN_REPORT.rareEvents.quotaDeferral = {
+        breakdown: (e && typeof e.exhaustionBreakdown === 'object' && e.exhaustionBreakdown) || null,
+        share,
+        verdict: isLegitimateQuotaDeferral(e),
+      };
+    }
     if (isLegitimateQuotaDeferral(e)) {
       finalizeRunReport('deferred', { notes: [...RUN_REPORT.notes, `Deferred (all free models exhausted): ${e.message}`] });
       console.error(`\n⚠️  Differito: tutti i modelli AI gratuiti sono temporaneamente esauriti (quota giornaliera, ${share.transient}/${share.total} = ${pct}%). Riprovo al prossimo run. ${e.message}`);
