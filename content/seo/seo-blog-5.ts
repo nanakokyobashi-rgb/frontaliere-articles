@@ -86613,6 +86613,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-vivere-griante-lavorare-ticino-frontaliere': {
+    title: 'Vivere a Griante e lavorare in Ticino da frontaliere',
+    description: 'Guida completa: vivere a Griante da frontaliere, lavoro in Ticino. Normativa 2024, permesso G, tassazione, AVS, LPP, LAMal, checklist e procedure',
+    keywords: 'frontalieri, ticino, svizzera, italia, vivere, griante, lavorare, vantaggi',
+    ogTitle: 'Vivere a Griante e lavorare in Ticino da frontaliere',
+    ogDescription: 'Scopri come vivere a Griante lavorando nel Canton Ticino: normativa frontalieri 2024, tassazione, contributi AVS/LPP, assicurazione LAMal, permesso G, checklist pre-trasloco e contatti amministrativi essenziali.',
+    canonicalPath: '/articoli-frontaliere/vivere-griante-lavorare-ticino-frontaliere',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Vivere a Griante e lavorare in Ticino da frontaliere",
+      "description": "Guida completa: vivere a Griante da frontaliere, lavoro in Ticino. Normativa 2024, permesso G, tassazione, AVS, LPP, LAMal, checklist e procedure",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/vivere-griante-lavorare-ticino-frontaliere.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista del lago di Como a Griante con edifici residenziali e paesaggio montano"
+      },
+      "datePublished": "2026-09-05T18:52:04+00:00",
+      "dateModified": "2026-09-05T18:52:04+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/vivere-griante-lavorare-ticino-frontaliere/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

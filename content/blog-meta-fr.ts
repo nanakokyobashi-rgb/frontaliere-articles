@@ -11430,6 +11430,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.vivere-bellagio-lavorare-ticino-frontaliere.title': 'Vivre à Bellagio, travailler au Tessin : guide frontalier',
     'blog.article.vivere-bellagio-lavorare-ticino-frontaliere.excerpt': 'Déménager à Bellagio et travailler au Tessin en tant que frontalier : découvrez le régime fiscal, les cotisations AVS, la LAMal et comment planifier le transfert.',
     'blog.article.vivere-bellagio-lavorare-ticino-frontaliere.imageAlt': 'Vue panoramique de Lugano et son lac avec montagnes, zone de travail tessinoise pour frontaliers',
+    'blog.article.vivere-griante-lavorare-ticino-frontaliere.title': 'Vivre à Griante et travailler au Tessin en tant que frontalier',
+    'blog.article.vivere-griante-lavorare-ticino-frontaliere.excerpt': 'Avantages, procédures, coûts et réglementation pour ceux qui choisissent de vivre à Griante en travaillant dans le canton du Tessin en tant que frontalier',
+    'blog.article.vivere-griante-lavorare-ticino-frontaliere.imageAlt': 'Vue du lac de Côme à Griante avec immeubles résidentiels et paysage montagneux',
 };
 
 export default blogMetaFr;

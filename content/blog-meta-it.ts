@@ -11429,6 +11429,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.vivere-bellagio-lavorare-ticino-frontaliere.title': 'Vivere a Bellagio, lavorare in Ticino: guida frontaliere',
     'blog.article.vivere-bellagio-lavorare-ticino-frontaliere.excerpt': 'Trasferirsi a Bellagio e lavorare in Ticino come frontaliere: scopri il regime fiscale, i contributi AVS, la LAMal e come pianificare il trasferimento.',
     'blog.article.vivere-bellagio-lavorare-ticino-frontaliere.imageAlt': 'Veduta di Lugano e il suo lago, con montagne, area di lavoro ticinese per frontalieri',
+    'blog.article.vivere-griante-lavorare-ticino-frontaliere.title': 'Vivere a Griante e lavorare in Ticino da frontaliere',
+    'blog.article.vivere-griante-lavorare-ticino-frontaliere.excerpt': 'Vantaggi, procedure, costi e normativa per chi sceglie di vivere a Griante lavorando nel Canton Ticino come frontaliere',
+    'blog.article.vivere-griante-lavorare-ticino-frontaliere.imageAlt': 'Vista del lago di Como a Griante con edifici residenziali e paesaggio montano',
 };
 
 export default blogMetaIt;
