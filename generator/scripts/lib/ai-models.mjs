@@ -3697,13 +3697,31 @@ function _registerExitHooks() {
 
 // ── Score mutation (with Firestore persistence) ──────────────
 
-/** Record a model success — boosts its rank and persists to Firestore */
-export function recordModelSuccess(modelId) {
-  _modelScores.set(modelId, (_modelScores.get(modelId) || 0) + SCORE_SUCCESS);
-  const d = _modelDetails.get(modelId) || { successes: 0, failures: 0 };
-  d.successes++;
-  _modelDetails.set(modelId, d);
-  _bumpOutcome(modelId, 'successes');
+/**
+ * Record a model success — boosts its rank and persists to Firestore.
+ *
+ * `recordScore: false` e' l'opt-out del chiamante diagnostico, identico a
+ * quello di `callLLM`/`markModelExhausted` e normalizzato dallo stesso
+ * `coerceRecordScore()` (#783): niente punteggio, niente delta di contatore,
+ * niente proposta a `ai_model_scores/_all`. Resta il tally di run, che e'
+ * memoria di processo. Default `true`: ogni chiamante di produzione scrive
+ * come prima.
+ */
+export function recordModelSuccess(modelId, { recordScore = true } = {}) {
+  const wantsRecord = coerceRecordScore(recordScore);
+  // Il punteggio e i dettagli sono la META' LEDGER anche quando sembrano solo
+  // memoria: `_persistScoresToFirestore` scrive `score` come valore ASSOLUTO
+  // letto da `_modelScores`, quindi un punto guadagnato in opt-out finirebbe
+  // comunque nel documento condiviso appena un altro writer sporca lo stesso
+  // modello. Sotto opt-out resta quindi il solo tally di run.
+  if (wantsRecord) {
+    _modelScores.set(modelId, (_modelScores.get(modelId) || 0) + SCORE_SUCCESS);
+    const d = _modelDetails.get(modelId) || { successes: 0, failures: 0 };
+    d.successes++;
+    _modelDetails.set(modelId, d);
+  }
+  _bumpOutcome(modelId, 'successes', wantsRecord);
+  if (!wantsRecord) return;
   _dirtyModels.add(modelId);
   _schedulePersist();
 }
@@ -3714,10 +3732,19 @@ export function recordModelSuccess(modelId) {
  * empties on every successful write, the run tally never does (printRunSummary
  * reads it at the very end).
  */
-function _bumpOutcome(modelId, field) {
-  const pending = _pendingCounterDeltas.get(modelId) || { successes: 0, failures: 0 };
-  pending[field]++;
-  _pendingCounterDeltas.set(modelId, pending);
+function _bumpOutcome(modelId, field, recordScore = true) {
+  // Sotto opt-out il delta NON si accumula: e' la meta' destinata al documento
+  // condiviso, e restare in coda non e' innocuo — al primo momento in cui un
+  // altro writer sporca lo stesso modello, `_persistScoresToFirestore` lo
+  // troverebbe li' e lo scriverebbe come incremento atomico. Il tally di run
+  // sotto invece resta sempre: e' in memoria, lo legge printRunSummary, e un
+  // chiamante diagnostico e' proprio quello che ha bisogno di vedere i propri
+  // esiti a fine run.
+  if (coerceRecordScore(recordScore)) {
+    const pending = _pendingCounterDeltas.get(modelId) || { successes: 0, failures: 0 };
+    pending[field]++;
+    _pendingCounterDeltas.set(modelId, pending);
+  }
   const run = _runOutcomes.get(modelId) || { successes: 0, failures: 0 };
   run[field]++;
   _runOutcomes.set(modelId, run);
@@ -3755,15 +3782,30 @@ export function recordModelContentSuccess(modelId) {
  * fail (every model already exhausted). deadlineMs (RUN_WALL_BUDGET_MS)
  * already bounds total retry time, so removing the ban here doesn't risk an
  * unbounded loop.
+ *
+ * `recordScore: false` (#845). Questa funzione e' ESPORTATA e viene invocata
+ * dai validatori di contenuto FUORI da `callLLM` (`body2-payload-verdict.mjs`,
+ * `itLanguageCheck.mjs` la citano come il meccanismo di rotazione del modello):
+ * senza il parametro, un flusso diagnostico che passi dalla validazione di
+ * contenuto scriveva `ai_model_scores/_all` mentre `recordScore: false` era
+ * attivo su ogni altra superficie. Il flag scende su entrambi i writer che
+ * questa funzione chiama, `recordModelFailure` e `markModelExhausted`; il
+ * contatore consecutivo e il ban di run restano in ogni caso, perche' sono
+ * memoria di processo (#846).
  */
-export function recordModelContentFailure(modelId) {
+export function recordModelContentFailure(modelId, { recordScore = true } = {}) {
   if (!modelId) return;
-  recordModelFailure(modelId);
+  const wantsRecord = coerceRecordScore(recordScore);
+  recordModelFailure(modelId, { recordScore: wantsRecord });
   const count = (_consecutiveContentFailures.get(modelId) || 0) + 1;
   _consecutiveContentFailures.set(modelId, count);
   if (_isLastResortProvider(modelId)) return;
   if (count >= MAX_CONSECUTIVE_CONTENT_FAILURES) {
-    markModelExhausted(modelId, 'content');
+    // Il flag passa sul PARAMETRO di markModelExhausted, mai sul call site
+    // (#846): il ban di run deve valere anche in opt-out — un modello che
+    // sforna JSON malformato va saltato dal resto del processo comunque — ed
+    // e' solo la proposta al ledger condiviso a non partire.
+    markModelExhausted(modelId, 'content', '', { recordScore: wantsRecord });
     _stats.exhausted++;
     console.warn(`🚫 [${modelId}] Exhausted after ${count} consecutive content-quality failures`);
   }
@@ -3778,19 +3820,32 @@ export function recordModelContentFailure(modelId) {
  * il CONTEGGIO farebbe apparire nel ledger un modello che non fallisce mai
  * (`Nok/0ko`) proprio mentre sta fallendo, che e' il modo piu' rapido per
  * rendere invisibile il prossimo incidente.
+ *
+ * `recordScore: false`: stesso opt-out di `recordModelSuccess` sopra, e stessa
+ * ragione per cui spegne anche la penale IN MEMORIA invece del solo
+ * `_dirtyModels` — `_persistScoresToFirestore` scrive `score` come assoluto
+ * letto da `_modelScores`, quindi una penale accumulata in opt-out raggiunge
+ * comunque il documento condiviso al primo writer di produzione che sporca lo
+ * stesso modello. E' la differenza rispetto a `markModelExhausted`, dove la
+ * meta' in-processo (`_exhaustedModels`) non e' un ingresso della scrittura e
+ * puo' quindi restare.
  */
-export function recordModelFailure(modelId, { nonRetryable = false, exhausted = false, transportOnly = false } = {}) {
+export function recordModelFailure(modelId, { nonRetryable = false, exhausted = false, transportOnly = false, recordScore = true } = {}) {
+  const wantsRecord = coerceRecordScore(recordScore);
   const penalty = transportOnly ? 0
                 : exhausted ? SCORE_EXHAUSTED
                 : nonRetryable ? SCORE_NON_RETRYABLE
                 : SCORE_RETRYABLE_FAIL;
   // Solo se c'e' davvero una penale: un `+ 0` creerebbe una voce a punteggio 0
   // per un modello mai visto, spostandolo nell'ordinamento della cascata.
-  if (penalty !== 0) _modelScores.set(modelId, (_modelScores.get(modelId) || 0) + penalty);
-  const d = _modelDetails.get(modelId) || { successes: 0, failures: 0 };
-  d.failures++;
-  _modelDetails.set(modelId, d);
-  _bumpOutcome(modelId, 'failures');
+  if (wantsRecord && penalty !== 0) _modelScores.set(modelId, (_modelScores.get(modelId) || 0) + penalty);
+  if (wantsRecord) {
+    const d = _modelDetails.get(modelId) || { successes: 0, failures: 0 };
+    d.failures++;
+    _modelDetails.set(modelId, d);
+  }
+  _bumpOutcome(modelId, 'failures', wantsRecord);
+  if (!wantsRecord) return;
   _dirtyModels.add(modelId);
   _schedulePersist();
 }
