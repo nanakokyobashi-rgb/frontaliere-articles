@@ -449,16 +449,41 @@ test('il processo riceve il cap effettivo, non il default RUN_WALL_BUDGET_MS (#4
   // create-article.mjs ragionava sul suo default (1800s) perche' nessuno gli
   // passava CREATE_ARTICLE_MAX_WALL_MS — sovrastima di 616s sul residuo
   // dichiarato. Qui il cap e' lo stesso ordine di grandezza della misura reale.
+  //
+  // DA QUALE RAMO ARRIVA IL 1184, E PERCHE' ORA E' `hard_kill` E NON `budget`.
+  // Lo step calcola `cap = min(hard_kill_s, budget_s − SECONDS)` (workflow,
+  // step «Generate the article»: `remaining=$(( budget_s - SECONDS ))`, poi
+  // `cap="$hard_kill_s"; [ "$remaining" -lt "$cap" ] && cap="$remaining"`).
+  // Con budget=1184 e hard_kill=2400 il cap veniva dal ramo `remaining`, cioe'
+  // da un orologio VERO: bastava che la shell impiegasse un secondo ad
+  // arrivare al loop perche' il cap fosse 1183 e questa uguaglianza esatta
+  // cadesse. Non e' un'ipotesi: run 33946159610, actual 1123000 contro
+  // expected 1124000 — esattamente un secondo, su una PR che non tocca ne' il
+  // workflow ne' questo file. Margine di un secondo = test che misura il
+  // runner, ed e' la stessa classe di flake gia' chiusa in #521 iniettando
+  // l'orologio.
+  //
+  // Qui l'orologio non si puo' iniettare (il valore atteso e' un'uguaglianza
+  // esatta, e `SECONDS` avanza comunque da qualunque offset), quindi il 1184
+  // arriva dall'altro ramo del `min`: hard_kill=1184 con un budget largo. Il
+  // cap resta 1184 finche' `budget − SECONDS > 1184`, cioe' con ~1800s di
+  // margine invece di uno. L'asserzione non e' toccata: stessa uguaglianza
+  // stretta, stesso valore, e il default interno da 1800s (→ 1800000) resta
+  // distinto dal valore atteso, che e' cio' che #462 deve saper distinguere.
+  // Il ramo `budget − SECONDS` resta coperto dal test del cap qui sopra, che
+  // ha l'orologio iniettato apposta.
+  const CAP = 1184;
   const r = runGenerateStep({
     section: 'frontaliere',
     plan: ['0 1'],
-    budget: 1184,
-    hardKill: 2400,
+    budget: 3000,
+    hardKill: CAP,
   });
+  assert.deepEqual(r.caps, [`${CAP}s`], 'il cap concesso deve essere quello di sezione, non il residuo del wall-clock');
   assert.equal(r.wallMs.length, 1);
   assert.equal(
     Number(r.wallMs[0]),
-    (1184 - 60) * 1000,
+    (CAP - 60) * 1000,
     'CREATE_ARTICLE_MAX_WALL_MS deve riflettere il cap di sezione (meno la grazia di 60s di `timeout --kill-after`), non il default interno del processo',
   );
 });

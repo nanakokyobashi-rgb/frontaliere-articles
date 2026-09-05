@@ -332,13 +332,84 @@ describe('#783 — discovery: opt-out dal ledger, prune invariato', () => {
     assert.ok(!DEFAULT_CHAIN.includes(DEAD), 'il prune della catena non dipende dal ledger');
   });
 
+  it('il prune in opt-out non e\' piu\' silenzioso (#844)', async () => {
+    // Il prune resta — l'asserzione qui sopra e' invariata — ma smette di essere
+    // invisibile: senza segnale, un processo condiviso fra diagnostica e
+    // generazione consegna alla seconda una catena potata dalla prima, su un
+    // listing raccolto con chiavi e timing diagnostici. Misurato prima del fix:
+    // chainBefore=102 chainAfter=79 segnali=0.
+    const realWarn = console.warn;
+    const warnings = [];
+    console.warn = (...a) => { warnings.push(a.join(' ')); };
+    let stale;
+    try {
+      ({ stale } = await _discoverProvider(cfg, { recordScore: false }));
+    } finally {
+      console.warn = realWarn;
+    }
+
+    assert.ok(stale > 0, 'il ramo markStale non e\' scattato: il test misurerebbe il nulla');
+    assert.ok(!DEFAULT_CHAIN.includes(DEAD), 'il segnale non deve sostituire il prune: la catena va comunque potata');
+    const segnali = warnings.filter((w) => /opt-out|recordScore|diagnost/i.test(w));
+    assert.equal(
+      segnali.length,
+      1,
+      `il prune sotto recordScore falsy deve emettere un segnale e uno solo, visti ${segnali.length}: ${JSON.stringify(warnings)}`,
+    );
+    assert.match(
+      segnali[0],
+      /DEFAULT_CHAIN/,
+      'il segnale deve nominare la conseguenza (la catena accorciata), non solo il flag',
+    );
+  });
+
+  it('il segnale del prune in opt-out e\' una-tantum, non per provider', async () => {
+    // Dodici provider che potano darebbero dodici righe identiche: il fatto da
+    // segnalare e' uno solo, e ripeterlo lo trasforma in rumore.
+    const realWarn = console.warn;
+    const warnings = [];
+    console.warn = (...a) => { warnings.push(a.join(' ')); };
+    try {
+      await _discoverProvider(cfg, { recordScore: false });
+      DEFAULT_CHAIN.push(`${PREFIX}zz-decommissioned-844-bis:free`);
+      await _discoverProvider(cfg, { recordScore: false });
+    } finally {
+      console.warn = realWarn;
+    }
+
+    assert.ok(
+      !DEFAULT_CHAIN.includes(`${PREFIX}zz-decommissioned-844-bis:free`),
+      'la seconda discovery deve aver potato davvero, o il latch non e\' sotto misura',
+    );
+    assert.equal(
+      warnings.filter((w) => /opt-out|recordScore|diagnost/i.test(w)).length,
+      1,
+      `il warning doveva restare uno solo: ${JSON.stringify(warnings)}`,
+    );
+  });
+
   it('col default la discovery continua a scrivere', async () => {
-    const { stale } = await _discoverProvider(cfg);
+    const realWarn = console.warn;
+    const warnings = [];
+    console.warn = (...a) => { warnings.push(a.join(' ')); };
+    let stale;
+    try {
+      ({ stale } = await _discoverProvider(cfg));
+    } finally {
+      console.warn = realWarn;
+    }
 
     assert.ok(stale > 0, 'il ramo markStale non e\' scattato: il test misurerebbe il nulla');
     assert.ok(
       getStats().dirtyModels > 0,
       'la produzione deve continuare a persistere gli id decommissionati: spegnere anche questo non sarebbe un opt-out',
+    );
+    // Il segnale di #844 descrive una catena potata da un DIAGNOSTICO: emetterlo
+    // anche in produzione lo renderebbe una riga che non distingue piu' niente.
+    assert.deepEqual(
+      warnings.filter((w) => /opt-out|recordScore|diagnost/i.test(w)),
+      [],
+      'la discovery di produzione non deve emettere il segnale di opt-out',
     );
   });
 });

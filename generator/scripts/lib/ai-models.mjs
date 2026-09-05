@@ -3014,6 +3014,12 @@ let _discoveryDone = false;
 // «gia' fatta» da «gia' fatta CON LO STESSO contratto»: senza, un chiamante che
 // arriva secondo con un flag diverso riceve l'esito dell'altro senza un segnale.
 let _discoveryRecordScore = true;
+// Warn-once: una discovery in opt-out ha accorciato `DEFAULT_CHAIN`. Il latch e'
+// per ciclo di vita dello stato (azzerato da `resetState()`) e non per provider,
+// perche' il fatto da segnalare e' uno solo — «la catena di questo processo viene
+// da una discovery diagnostica» — e ripeterlo per ognuno dei dodici provider lo
+// renderebbe rumore invece che segnale.
+let _optOutPruneWarned = false;
 const _dynamicModels = [];
 // modelId → provider name, for ids pruned from DEFAULT_CHAIN because the provider stopped
 // offering them (see the markStale block in _discoverProvider). Diagnostics + re-entry
@@ -3162,6 +3168,19 @@ export async function _discoverProvider(cfg, { recordScore = true } = {}) {
   // the next discovery. `markModelExhausted` is kept alongside the prune so anything
   // holding a pre-prune copy of the chain (callLLM snapshots it with `[...DEFAULT_CHAIN]`)
   // still skips the id for this run instead of paying its 404.
+  //
+  // INVARIANTE — DIAGNOSTICA E PRODUZIONE NON CONDIVIDONO IL PROCESSO (#844).
+  // Il prune resta FUORI dal gate `recordScore` di proposito: e' in memoria, muore
+  // col processo e non ha niente a che vedere col ledger condiviso. Ma «muore col
+  // processo» e' una garanzia solo finche' quel processo e' di un chiamante solo.
+  // Se lo condividono, la catena e' quella del PRIMO: una discovery diagnostica in
+  // opt-out pota su un listing raccolto con chiavi e timing diagnostici, e la
+  // generazione che arriva dopo eredita una cascata piu' corta di quella che
+  // avrebbe costruito — nessun errore, solo meno fallback. Misurato: 102 → 79 id.
+  // Non e' il gate a doversi allargare (spegnere anche il prune lascerebbe il
+  // chiamante diagnostico a ripagare ogni id decommissionato), e' l'effetto a
+  // dover essere VISIBILE: sotto `recordScore` falsy il prune emette il warning
+  // una-tantum qui sotto, che nomina la conseguenza.
   let stale = 0;
   if (cfg.markStale && offeredIds.size > 0) {
     const staleIds = DEFAULT_CHAIN.filter(
@@ -3184,6 +3203,19 @@ export async function _discoverProvider(cfg, { recordScore = true } = {}) {
       }
       for (let i = _dynamicModels.length - 1; i >= 0; i--) {
         if (drop.has(_dynamicModels[i])) _dynamicModels.splice(i, 1);
+      }
+      // Il prune e' voluto anche in opt-out (vedi l'invariante sopra), ma non deve
+      // essere silenzioso: chi condivide il processo con un diagnostico non ha
+      // nessun altro modo di sapere che la catena su cui gira non e' la sua.
+      if (!coerceRecordScore(recordScore) && !_optOutPruneWarned) {
+        _optOutPruneWarned = true;
+        console.warn(
+          `\u26a0\ufe0f  [Discovery:${cfg.name}] recordScore:false — il ledger non e' stato scritto, ma il prune della catena si': `
+          + `${staleIds.length} id tolti da DEFAULT_CHAIN (ora ${DEFAULT_CHAIN.length}). `
+          + 'La catena di questo processo viene quindi da una discovery diagnostica, su un listing raccolto con chiavi e timing diagnostici: '
+          + 'chi generera\' dopo, in questo stesso processo, avra\' una cascata piu\' corta di quella che avrebbe costruito. '
+          + 'Il prune e\' in memoria e muore col processo — separa i due processi, o fai la discovery di produzione PRIMA.',
+        );
       }
     }
   }
@@ -3209,7 +3241,10 @@ export async function _discoverProvider(cfg, { recordScore = true } = {}) {
  * chiamata — cioe' proprio cio' che il flag esiste per impedire.
  *
  * Il prune della catena resta in ogni caso: e' in memoria, muore col processo e
- * non ha niente a che vedere col ledger.
+ * non ha niente a che vedere col ledger. Ma «muore col processo» vale solo se
+ * quel processo e' di un chiamante solo: il ramo markStale emette percio' un
+ * warning una-tantum quando pota in opt-out (#844), perche' chi generera' dopo
+ * nello stesso processo eredita quella catena senza altro modo di saperlo.
  *
  * ATTENZIONE all'idempotenza: la prima invocazione vince per tutto il processo.
  * `initScoreStore()` chiama la discovery col default (`true`), quindi un
@@ -4450,6 +4485,7 @@ export function resetState() {
   _stats.cacheHits = 0;
   _stats.errors = [];
   _stats.lastResort = _freshLastResortStats();
+  _optOutPruneWarned = false;
   _lastResortOrderWarned = false;
   _competingTiersWarned = false;
   _preferredModelsWarned = false;
