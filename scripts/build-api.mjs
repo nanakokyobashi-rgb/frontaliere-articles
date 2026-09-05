@@ -80,6 +80,10 @@ import { SITE, xmlEsc, SECTION_PATHS, buildSitemap } from './lib/build-sitemap.m
 // Detection (not filtering — see its header) for issue #166: surfaces a
 // same-day canonical-override landing on a still-in-window ticker article.
 import { findShadowedTickerArticles } from './lib/ticker-shadow-check.mjs';
+// I pavimenti anti-troncamento hanno UNA sorgente, e sono DERIVATI: la stessa
+// che `verify-api-floors.mjs` e `build-blog-index.mjs` usano gia'. Qui servono
+// per le sitemap, che di pavimento derivato non ne avevano (vedi sotto).
+import { listedFloor, sectionFloor } from './lib/corpus-floors.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const OUT = path.join(ROOT, 'dist', 'api');
@@ -252,8 +256,38 @@ const sitemapCounts = {
     buildSitemap(SWISS_ARTICLES, 'svizzera', swissSlugs.SWISS_SLUGS, metaChIt, shadowedSwissSlugs),
   ),
 };
-if (sitemapCounts.blog < 100) {
-  throw new Error(`sitemap-blog.xml has only ${sitemapCounts.blog} urls — refusing to publish`);
+// ── I pavimenti delle due sitemap, DERIVATI e non scritti a mano ─────────
+//
+// Qui c'era `sitemapCounts.blog < 100` contro 3779 url reali — il 2,6% del
+// valore atteso, cioe' la stessa costante assoluta gia' rimossa da
+// `counts.articles -lt 100` in `publish-api.yml` e da `MIN_ENTRIES = 50` in
+// `build-blog-index.mjs`, lasciata indietro un livello piu' in basso. E
+// `sitemapCounts.blogCh` (1855 url) non aveva pavimento AFFATTO, come
+// `counts.swissArticles` prima di #910: una sitemap svizzera svuotata usciva
+// da qui senza che nulla la guardasse.
+//
+// Il riferimento e' il REGISTRO da cui la sitemap e' costruita, meno le voci
+// che la sitemap esclude di proposito: fra i due sta il join con la mappa
+// degli slug e la meta, ed e' li' che l'elenco si svuota senza che un solo
+// file di corpus si muova. Il pavimento scala quindi da solo col corpus e non
+// ha una taratura che scade.
+//
+// Perche' un pavimento e non l'uguaglianza esatta: buildSitemap salta una voce
+// senza slug o senza meta, che e' una perdita di UN articolo, non un
+// troncamento — la tolleranza di `FLOOR_RETENTION` e' cio' che distingue i due
+// casi (vedi scripts/lib/corpus-floors.mjs).
+for (const [key, file, registry, shadowed] of [
+  ['blog', 'sitemap-blog.xml', ARTICLES, frontaliereSitemapShadow],
+  ['blogCh', 'sitemap-blog-ch.xml', SWISS_ARTICLES, shadowedSwissSlugs],
+]) {
+  const min = listedFloor(registry.length, shadowed.size);
+  if (sitemapCounts[key] < min) {
+    throw new Error(
+      `${file} has only ${sitemapCounts[key]} urls against ${registry.length} registry entries ` +
+        `(${shadowed.size} de-listed on purpose, floor ${min}) — refusing to publish a truncated sitemap`,
+    );
+  }
+  console.log(`[build-api] ${file}: ${sitemapCounts[key]} urls (floor ${min}, derived from the registry)`);
 }
 
 // ── Archive pages (issue #4974) ───────────────────────────────────────────
@@ -325,13 +359,30 @@ function buildArchiveSitemap() {
 
 sitemapCounts.archive = writeXml('sitemap-articles-archive.xml', buildArchiveSitemap());
 // Two sections x four locales, so the count is 4 x (frontalierePages +
-// svizzeraPages) — under 8 means a section resolved to a single empty page,
-// which is the shape a broken registry parse takes.
-if (sitemapCounts.archive < 8) {
+// svizzeraPages). Il pavimento era `< 8`, cioe' «una pagina per sezione per
+// locale»: contro le 228 url reali stava al 3,5%, e una sezione ridotta a un
+// decimo delle sue pagine passava intatta. Stessa classe delle due sitemap
+// sopra, e la si chiude qui insieme a loro.
+//
+// Il riferimento e' il corpus SU DISCO (`sectionFloor`), non l'unione che
+// questa funzione pagina: derivare il pavimento dalla stessa lettura che deve
+// sorvegliare lo renderebbe una tautologia, verde anche quando l'unione si
+// legge a meta'.
+const archiveFloor =
+  LOCALES.length *
+  ['frontaliere', 'svizzera'].reduce(
+    (pages, section) => pages + Math.max(1, Math.ceil(sectionFloor(ROOT, section) / ARCHIVE_PAGE_SIZE)),
+    0,
+  );
+if (sitemapCounts.archive < archiveFloor) {
   throw new Error(
-    `sitemap-articles-archive.xml has only ${sitemapCounts.archive} urls — refusing to publish`,
+    `sitemap-articles-archive.xml has only ${sitemapCounts.archive} urls (floor ${archiveFloor}, ` +
+      `derived from the corpus on disk) — refusing to publish`,
   );
 }
+console.log(
+  `[build-api] sitemap-articles-archive.xml: ${sitemapCounts.archive} urls (floor ${archiveFloor}, derived from the corpus)`,
+);
 
 // ── RSS feeds ─────────────────────────────────────────────────────
 //

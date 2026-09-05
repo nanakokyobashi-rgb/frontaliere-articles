@@ -47,6 +47,20 @@ export const SECTION_COUNTERS = {
 };
 
 /**
+ * La sitemap degli articoli di ciascuna sezione.
+ *
+ * `manifest.counts` dichiara `sitemapBlogUrls`/`sitemapBlogChUrls` ma nessun
+ * pavimento li guardava da qui: il gate dell'artefatto copriva articoli, feed e
+ * immagini, e le due sitemap — cioe' l'unica superficie che parla ai CRAWLER —
+ * restavano fuori. Una sitemap svuotata usciva quindi con un manifest coerente
+ * con se stesso, e il sito non ribuilda: va live subito.
+ */
+export const SECTION_SITEMAPS = {
+  frontaliere: 'sitemap-blog.xml',
+  svizzera: 'sitemap-blog-ch.xml',
+};
+
+/**
  * A quale sezione appartiene un feed, dal nome del file.
  *
  * `rss-svizzera*.xml` e' la sezione svizzera, tutto il resto e' frontaliere —
@@ -92,6 +106,25 @@ export function floorViolations(measured, expected, retention = undefined) {
     if (declared < min) {
       violations.push(
         `manifest.counts.${counter}: ${declared} contro ${source} articoli sorgente (pavimento ${min}) — set troncato`,
+      );
+    }
+  }
+
+  // Le due sitemap degli articoli, contro lo stesso corpus sorgente dei
+  // contatori sopra. Una sezione senza corpus e' gia' stata segnalata una
+  // volta nel ciclo precedente, quindi qui si salta invece di ripetersi.
+  for (const [section, file] of Object.entries(SECTION_SITEMAPS)) {
+    const source = expected.sourceArticles[section] ?? 0;
+    if (source === 0) continue;
+    const declared = measured.sitemaps?.[file];
+    if (typeof declared !== 'number') {
+      violations.push(`${file} assente dall'artefatto: il corpus sorgente tiene ${source} articoli`);
+      continue;
+    }
+    const min = floor(source);
+    if (declared < min) {
+      violations.push(
+        `${file}: ${declared} url contro ${source} articoli sorgente (pavimento ${min}) — sitemap troncata`,
       );
     }
   }
@@ -146,12 +179,19 @@ export function measureDist(distDir) {
     .filter(({ xml }) => xml.includes('<rss'))
     .map(({ name, xml }) => ({ name, items: occurrences(xml, '<item>') }));
 
+  // `<url>` e' l'elemento che il manifest stesso conta (`sitemapUrls` in
+  // build-api.mjs): stessa unita' di misura da entrambi i lati del confronto.
+  const sitemaps = {};
+  for (const file of Object.values(SECTION_SITEMAPS)) {
+    if (fs.existsSync(path.join(distDir, file))) sitemaps[file] = occurrences(readOut(file), '<url>');
+  }
+
   const imageManifest = path.join(distDir, 'images-manifest.json');
   const images = fs.existsSync(imageManifest)
     ? JSON.parse(fs.readFileSync(imageManifest, 'utf-8')).images.length
     : null;
 
-  return { articleCounts: manifest.counts ?? {}, feeds, images };
+  return { articleCounts: manifest.counts ?? {}, feeds, images, sitemaps };
 }
 
 /** Riconta il corpus sorgente, che e' il riferimento esterno all'artefatto. */
@@ -186,12 +226,18 @@ async function main() {
       `swissArticles=${measured.articleCounts.swissArticles}, ` +
       `feeds=${measured.feeds.length}, images=${measured.images ?? 'non emesso'}`,
   );
+  console.log(
+    `[api-floors] sitemap: ` +
+      Object.values(SECTION_SITEMAPS)
+        .map((f) => `${f}=${measured.sitemaps?.[f] ?? 'assente'}`)
+        .join(', '),
+  );
 
   if (violations.length) {
     for (const v of violations) console.error(`::error::${v}`);
     process.exit(1);
   }
-  console.log(`[api-floors] pavimenti derivati dal corpus: tutti retti (${measured.feeds.length} feed inclusi)`);
+  console.log(`[api-floors] pavimenti derivati dal corpus: tutti retti (${measured.feeds.length} feed e ${Object.keys(SECTION_SITEMAPS).length} sitemap inclusi)`);
 }
 
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {

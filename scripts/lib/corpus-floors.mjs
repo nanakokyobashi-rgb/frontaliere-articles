@@ -130,3 +130,27 @@ export function sectionFloor(root, section, retention = FLOOR_RETENTION) {
   }
   return floorFrom(source, retention);
 }
+
+/**
+ * Il pavimento di un ELENCO DERIVATO dal registro (le sitemap degli articoli).
+ *
+ * Perche' non `sectionFloor`: una sitemap non si misura contro i file di corpo
+ * su disco ma contro il REGISTRO da cui e' costruita, perche' fra i due sta il
+ * join con la mappa degli slug e la meta — ed e' li' che un elenco si svuota
+ * senza che il corpus si muova di un file. Il registro vuoto e' gia' rifiutato
+ * a monte (`ARTICLES is empty`), quindi qui il riferimento c'e' per costruzione;
+ * `registryCount <= 0` resta comunque un ERRORE e non un pavimento a zero, per
+ * la stessa ragione documentata su `floorFrom`.
+ *
+ * `shadowed` sono le voci che la sitemap esclude LEGITTIMAMENTE (edizioni
+ * ritirate, duplicati canonical-shadowed): entrano nell'atteso, non nella
+ * tolleranza, altrimenti una giornata con molti ritiri consumerebbe il margine
+ * del 10% che serve a distinguere un troncamento.
+ */
+export function listedFloor(registryCount, shadowed = 0, retention = FLOOR_RETENTION) {
+  if (!Number.isFinite(registryCount) || registryCount <= 0) {
+    throw new Error(missingCorpusMessage('un elenco derivato dal registro', 'il registro degli articoli'));
+  }
+  const expected = Math.max(0, registryCount - Math.max(0, shadowed));
+  return floorFrom(expected, retention);
+}
