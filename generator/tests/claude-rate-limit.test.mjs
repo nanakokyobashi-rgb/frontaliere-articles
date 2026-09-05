@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import { describe, it } from 'node:test';
 
 import { detectClaudeRateLimit } from '../../scripts/ci/claude-rate-limit.mjs';
+import { formatDeliveredDespiteMaxTurnsComment } from '../../scripts/ci/mark-claude-terminal-outcome.mjs';
 
 describe('detectClaudeRateLimit', () => {
   it('non confonde overage rifiutato con quota primaria esaurita quando status è allowed', () => {
@@ -53,5 +54,25 @@ describe('detectClaudeRateLimit', () => {
       resetsAt: resetSeconds,
       rateLimitType: 'five_hour',
     });
+  });
+});
+
+// Morte al cap DOPO la consegna: il verdetto segue il lavoro, non l'exit della CLI.
+// Su 124 issue con marker `max-turns` in 5 giorni (sito, 2026-09-05) 74 avevano una PR
+// e tutte e 74 erano MERGED. Il marker sbagliato non e' cosmetico: `max-turns` sta in
+// `PREPASS_VERDICT_BEATS_FAMILY` del drainer e manda la issue in `needs-human`.
+describe('marker della consegna nonostante error_max_turns', () => {
+  it('e\' `pr-created` e porta il numero della PR', () => {
+    const body = formatDeliveredDespiteMaxTurnsComment(7441);
+    assert.ok(body.includes('<!-- FIX_OUTCOME: pr-created -->'));
+    assert.ok(body.includes('#7441'));
+    assert.ok(!body.includes('<!-- FIX_OUTCOME: max-turns -->'));
+  });
+
+  it('non contiene BACKSTOP_MARKER, altrimenti il drainer lo scarta', () => {
+    // `latestFixOutcomeFromComments` salta i commenti con 'post-step deterministico':
+    // un marker che la contenesse sarebbe invisibile e la issue tornerebbe
+    // «run morta, ri-tentabile».
+    assert.ok(!formatDeliveredDespiteMaxTurnsComment(1).includes('post-step deterministico'));
   });
 });

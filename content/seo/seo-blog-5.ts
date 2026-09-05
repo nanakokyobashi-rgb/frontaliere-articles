@@ -86027,6 +86027,357 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-autonomia-differenziata-lombardia-2026': {
+    title: 'Autonomia Lombardia: ok su salute e professioni',
+    description: 'La Commissione congiunta ha approvato la Risoluzione sull\'autonomia differenziata per la Lombardia, con implicazioni significative per i frontalieri.',
+    keywords: 'frontalieri, ticino, svizzera, italia, autonomia, lombardia, salute, professioni',
+    ogTitle: 'Autonomia differenziata Lombardia: ok della Commissione congiunta alla Risoluzione su salute, protezione civile, professioni e previdenza',
+    ogDescription: 'La Commissione congiunta ha approvato la Risoluzione sull\'autonomia differenziata per la Lombardia, con implicazioni significative per i frontalieri. La maggiore autonomia regionale potrebbe portare a cambiamenti nelle politiche sanitarie',
+    canonicalPath: '/articoli-frontaliere/autonomia-differenziata-lombardia-2026',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Autonomia Lombardia: ok su salute e professioni",
+      "description": "La Commissione congiunta ha approvato la Risoluzione sull'autonomia differenziata per la Lombardia, con implicazioni significative per i frontalieri.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/autonomia-differenziata-lombardia-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista aerea di Bellinzona, Ticino, Svizzera, con le montagne circostanti e i castelli storici della città."
+      },
+      "datePublished": "2026-09-05T09:33:22+00:00",
+      "dateModified": "2026-09-05T09:33:22+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/laura-bianchi/#person",
+        "name": "Laura Bianchi",
+        "url": "https://frontaliereticino.ch/autori/laura-bianchi/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/autonomia-differenziata-lombardia-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-mezzo-in-fiamme-vergiate-besnate': {
+    title: 'Mezzo in fiamme sull\'autostrada tra Vergiate e Besnate',
+    description: 'Un mezzo in fiamme ha bloccato il traffico autostradale tra Vergiate e Besnate, causando gravi disagi alla circolazione. Dati aggiornati 2026 per frontalieri',
+    keywords: 'frontalieri, ticino, svizzera, italia, mezzo, fiamme, sull, autostrada',
+    ogTitle: 'Mezzo in fiamme sull\'autostrada tra Vergiate e Besnate',
+    ogDescription: 'Un mezzo in fiamme ha bloccato il traffico autostradale tra Vergiate e Besnate, causando gravi disagi alla circolazione. La colonna di fumo nero ha reso la situazione ancora più critica, con il traffico bloccato e code in aumento.',
+    canonicalPath: '/articoli-frontaliere/mezzo-in-fiamme-vergiate-besnate',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Mezzo in fiamme sull'autostrada tra Vergiate e Besnate",
+      "description": "Un mezzo in fiamme ha bloccato il traffico autostradale tra Vergiate e Besnate, causando gravi disagi alla circolazione. Dati aggiornati 2026 per frontalieri",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/mezzo-in-fiamme-vergiate-besnate.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Veicolo in fiamme sull'autostrada tra Vergiate e Besnate"
+      },
+      "datePublished": "2026-09-05T09:46:47+00:00",
+      "dateModified": "2026-09-05T09:46:47+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/mezzo-in-fiamme-vergiate-besnate/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-treno-dei-bambini-gallarate-piombino': {
+    title: 'Quando il "treno dei bambini" portò a Gallarate i figli degli operai in sciopero',
+    description: 'Nell\'estate del 1911, i figli degli operai in sciopero a Piombino furono accolti a Gallarate come forma di solidarietà. Scopri la storia di Ines Oddone Bittelli',
+    keywords: 'frontalieri, ticino, svizzera, italia, quando, treno, bambini, portò',
+    ogTitle: 'Quando il “treno dei bambini” portò a Gallarate i figli degli operai in sciopero a Piombino',
+    ogDescription: 'Nell\'estate del 1911, i figli degli operai in sciopero a Piombino furono accolti a Gallarate come forma di solidarietà. Scopri la storia di Ines Oddone Bittelli e dell\'affido di massa dei bambini.',
+    canonicalPath: '/articoli-frontaliere/treno-dei-bambini-gallarate-piombino',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Quando il \"treno dei bambini\" portò a Gallarate i figli degli operai in sciopero",
+      "description": "Nell'estate del 1911, i figli degli operai in sciopero a Piombino furono accolti a Gallarate come forma di solidarietà. Scopri la storia di Ines Oddone Bittelli",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/treno-dei-bambini-gallarate-piombino.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Stazione di Gallarate con l'arrivo del treno dei bambini"
+      },
+      "datePublished": "2026-09-05T09:59:38+00:00",
+      "dateModified": "2026-09-05T09:59:38+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/treno-dei-bambini-gallarate-piombino/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-vivere-ponte-lambro-lavorare-ticino-frontaliere': {
+    title: 'Vivere a Ponte Lambro e lavorare in Ticino da frontaliere',
+    description: 'Scopri i collegamenti, i tempi di percorrenza, il costo della vita e i vantaggi di vivere a Ponte Lambro e lavorare in Ticino. Dati aggiornati 2026',
+    keywords: 'frontalieri, ticino, svizzera, italia, vivere, ponte, lambro, lavorare',
+    ogTitle: 'Vivere a Ponte Lambro e lavorare in Ticino da frontaliere',
+    ogDescription: 'Scopri i collegamenti, i tempi di percorrenza, il costo della vita e i vantaggi di vivere a Ponte Lambro e lavorare in Ticino. Informati sulle normative fiscali e i servizi di trasporto disponibili.',
+    canonicalPath: '/articoli-frontaliere/vivere-ponte-lambro-lavorare-ticino-frontaliere',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Vivere a Ponte Lambro e lavorare in Ticino da frontaliere",
+      "description": "Scopri i collegamenti, i tempi di percorrenza, il costo della vita e i vantaggi di vivere a Ponte Lambro e lavorare in Ticino. Dati aggiornati 2026",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/vivere-ponte-lambro-lavorare-ticino-frontaliere.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista panoramica del Lago di Lugano con le montagne circostanti"
+      },
+      "datePublished": "2026-09-05T10:23:15+00:00",
+      "dateModified": "2026-09-05T10:23:15+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/vivere-ponte-lambro-lavorare-ticino-frontaliere/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-export-varese-record-2026': {
+    title: 'Export Varese: record lombardo nel primo trimestre 2026',
+    description: 'Crescita del 23% per l\'export varesino nel Q1 2026. Analisi UIL su Svizzera, manifattura e aumento della cassa integrazione straordinaria. Dati aggiornati 2026',
+    keywords: 'frontalieri, ticino, svizzera, italia, export, varese, record, lombardo',
+    ogTitle: 'Export Varese: record lombardo nel primo trimestre 2026',
+    ogDescription: 'L\'export varesino segna un +23% nel Q1 2026. Analisi dei dati UIL sulle direttrici commerciali verso la Svizzera e l\'impatto occupazionale della CIGS.',
+    canonicalPath: '/articoli-frontaliere/export-varese-record-2026',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Export Varese: record lombardo nel primo trimestre 2026",
+      "description": "Crescita del 23% per l'export varesino nel Q1 2026. Analisi UIL su Svizzera, manifattura e aumento della cassa integrazione straordinaria. Dati aggiornati 2026",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/export-varese-record-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Analisi economica e dati export nel contesto varesino."
+      },
+      "datePublished": "2026-09-05T10:32:56+00:00",
+      "dateModified": "2026-09-05T10:32:56+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/export-varese-record-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-fiera-varese-schiranna-2026': {
+    title: 'Fiera di Varese 2026: 150 espositori alla Schiranna',
+    description: 'Dall\'11 al 20 settembre 2026, la 48esima edizione della Fiera di Varese alla Schiranna: 150 espositori e 40 appuntamenti tra sport e imprese. Dati aggiornati',
+    keywords: 'frontalieri, ticino, svizzera, italia, fiera, varese, espositori, alla',
+    ogTitle: 'Fiera di Varese 2026: 150 espositori alla Schiranna',
+    ogDescription: 'Scopri la 48esima edizione della Fiera di Varese, in programma dall\'11 al 20 settembre 2026 alla Schiranna: un hub di confronto tra imprese, cultura e sport per il territorio varesino.',
+    canonicalPath: '/articoli-frontaliere/fiera-varese-schiranna-2026',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Fiera di Varese 2026: 150 espositori alla Schiranna",
+      "description": "Dall'11 al 20 settembre 2026, la 48esima edizione della Fiera di Varese alla Schiranna: 150 espositori e 40 appuntamenti tra sport e imprese. Dati aggiornati",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/fiera-varese-schiranna-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Area espositiva della Fiera di Varese alla Schiranna"
+      },
+      "datePublished": "2026-09-05T10:42:21+00:00",
+      "dateModified": "2026-09-05T10:42:21+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/fiera-varese-schiranna-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-cristina-zanini-grande-consiglio-azienda-elettrica-ticinese': {
+    title: 'Cristina zanini passa dal gran consiglio al cda aet',
+    description: 'La deputata socialista ed ex municipale di Lugano, Cristina Zanini, ha deciso di lasciare il Gran Consiglio per entrare nel consiglio di amministrazione di Aet',
+    keywords: 'frontalieri, ticino, svizzera, italia, cristina, zanini, passa, gran',
+    ogTitle: 'Cristina Zanini lascia il Gran Consiglio per entrare nel Cda dell\'Azienda elettrica ticinese',
+    ogDescription: 'La deputata socialista ed ex municipale di Lugano, Cristina Zanini, ha deciso di lasciare il Gran Consiglio per entrare nel consiglio di amministrazione di Aet, l\'Azienda elettrica ticinese. Nicola Corti la sostituirà.',
+    canonicalPath: '/articoli-frontaliere/cristina-zanini-grande-consiglio-azienda-elettrica-ticinese',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Cristina zanini passa dal gran consiglio al cda aet",
+      "description": "La deputata socialista ed ex municipale di Lugano, Cristina Zanini, ha deciso di lasciare il Gran Consiglio per entrare nel consiglio di amministrazione di Aet",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/cristina-zanini-grande-consiglio-azienda-elettrica-ticinese.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Cristina Zanini lascia il Gran Consiglio per entrare nel Cda dell'Azienda elettrica ticinese"
+      },
+      "datePublished": "2026-09-05T10:51:04+00:00",
+      "dateModified": "2026-09-05T10:51:04+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/cristina-zanini-grande-consiglio-azienda-elettrica-ticinese/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-via-industria-caslano-iniziativa-popolare': {
+    title: 'Via Industria a Caslano, riuscita l\'iniziativa popolare',
+    description: 'L\'iniziativa popolare per non allargare Via Industria a Caslano ha raccolto 530 firme, di cui 458 certificate dalla Cancelleria. Dati aggiornati 2026',
+    keywords: 'frontalieri, ticino, svizzera, italia, industria, caslano, riuscita, iniziativa',
+    ogTitle: 'Via Industria a Caslano, riuscita l\'iniziativa popolare',
+    ogDescription: 'L\'iniziativa popolare per non allargare Via Industria a Caslano ha raccolto 530 firme, di cui 458 certificate dalla Cancelleria. Scopri di più su Frontaliere Ticino.',
+    canonicalPath: '/articoli-frontaliere/via-industria-caslano-iniziativa-popolare',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Via Industria a Caslano, riuscita l'iniziativa popolare",
+      "description": "L'iniziativa popolare per non allargare Via Industria a Caslano ha raccolto 530 firme, di cui 458 certificate dalla Cancelleria. Dati aggiornati 2026",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/via-industria-caslano-iniziativa-popolare.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Via Industria a Caslano vista dall'alto"
+      },
+      "datePublished": "2026-09-05T11:01:29+00:00",
+      "dateModified": "2026-09-05T11:01:29+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/via-industria-caslano-iniziativa-popolare/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-assemblea-centro-iva-avs': {
+    title: 'Assemblea Centro approva finanziamento AVS con IVA',
+    description: 'Il Centro sostiene il finanziamento della 13esima rendita AVS mediante aumento IVA dello 0,4%. Voto il 29 novembre. Cosa cambia per i frontalieri?',
+    keywords: 'frontalieri, ticino, svizzera, italia, assemblea, centro, approva, finanziamento',
+    ogTitle: 'Assemblea Centro approva finanziamento AVS con IVA',
+    ogDescription: 'Il Centro sostiene il finanziamento della 13esima rendita AVS mediante aumento IVA dello 0,4%. Voto il 29 novembre. Cosa cambia per i frontalieri?',
+    canonicalPath: '/articoli-frontaliere/assemblea-centro-iva-avs',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Assemblea Centro approva finanziamento AVS con IVA",
+      "description": "Il Centro sostiene il finanziamento della 13esima rendita AVS mediante aumento IVA dello 0,4%. Voto il 29 novembre. Cosa cambia per i frontalieri?",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/assemblea-centro-iva-avs.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Panorama di Lugano, cuore del Ticino e meta dei frontalieri svizzeri"
+      },
+      "datePublished": "2026-09-05T11:17:38+00:00",
+      "dateModified": "2026-09-05T11:17:38+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/laura-bianchi/#person",
+        "name": "Laura Bianchi",
+        "url": "https://frontaliereticino.ch/autori/laura-bianchi/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/assemblea-centro-iva-avs/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

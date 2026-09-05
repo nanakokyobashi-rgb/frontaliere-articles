@@ -1867,6 +1867,14 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'aprire-attivita-vaud-registro-costi': { it: 'aprire-attivita-vaud-registro-costi', en: 'open-business-vaud-registry-costs', de: 'geschaft-offnen-waadt-registrierung-kosten', fr: 'ouvrir-activite-vaud-registre-couts' },
  'patente-estero-vaud-conversione': { it: 'patente-estero-vaud-conversione', en: 'foreign-license-vaud-conversion', de: 'auslaendische-patente-waadt-umwandlung', fr: 'permis-etranger-vaud-conversion' },
  'patente-guida-canton-vaud-conversione-esami': { it: 'patente-guida-canton-vaud-conversione-esami', en: 'driving-license-canton-vaud-conversion-exams', de: 'fuhrerschein-kanton-waadt-umwandlung-pruefungen', fr: 'permis-de-conduire-canton-de-vaud-conversion-examens' },
+ 'imposta-successione-donazione-vaud': { it: 'imposta-successione-donazione-vaud', en: 'inheritance-gift-tax-vaud-canton', de: 'erbschaft-schenkungssteuer-kanton-waadt', fr: 'impot-succession-donation-canton-vaud' },
+ 'imposte-cantonali-vallese-aliquote-deduzioni': { it: 'imposte-cantonali-vallese-aliquote-deduzioni', en: 'cantonal-taxes-valais-tax-rates-deductions', de: 'kantonale-steuern-wallis-steuersatze-abzuge', fr: 'impots-cantonaux-valais-taux-dedeductions' },
+ 'osce-conferenza-berna': { it: 'osce-conferenza-berna', en: 'osce-conference-berne', de: 'osce-konferenz-berne', fr: 'conference-osce-berne' },
+ 'manifestazione-anti-g7-dispositivo-lecito': { it: 'manifestazione-anti-g7-dispositivo-lecito', en: 'anti-g7-demonstration-containment-measure-legal', de: 'anti-g7-demonstration-einsatzmassnahme-rechtmaessig', fr: 'manifestation-anti-g7-mesure-de-confinement-legale' },
+ 'svizzera-treno-oggetti-binari': { it: 'svizzera-treno-oggetti-binari', en: 'switzerland-train-objects-on-tracks', de: 'schweiz-zug-gegenstaende-auf-gleisen', fr: 'suisse-train-objets-sur-les-rails' },
+ 'intervento-polizia-goldach-scuola': { it: 'intervento-polizia-goldach-scuola', en: 'police-intervention-goldach-school', de: 'polizeieinsatz-goldach-schule', fr: 'intervention-police-goldach-ecole' },
+ 'processo-junge-tat-zurigo': { it: 'processo-junge-tat-zurigo', en: 'junge-tat-trial-zurich', de: 'junge-tat-prozess-zurich', fr: 'proces-junge-tat-zurich' },
+ 'mezzo-miliardo-contadini-mercosur': { it: 'mezzo-miliardo-contadini-mercosur', en: 'half-billion-for-farmers-mercosur', de: 'halb-milliarden-fuer-bauern-mercosur', fr: 'un-milliard-pour-les-agriculteurs-mercosur' },
 };
 
 export const REVERSE_SWISS: Record<ArticleLocale, Record<string, string>> = (() => {
