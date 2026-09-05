@@ -107,8 +107,20 @@ const written = {};
 // control character into `\u0008`, which is valid JSON and therefore survives
 // any scan of the emitted bytes — while every consumer that parses the file
 // gets the control character back. The only place to catch it is before the
-// stringify. `written[name]` records the sanitised length, so manifest.json
-// keeps describing the bytes actually served.
+// stringify. `written[name]` records the sanitised text, so manifest.json
+// keeps describing what is actually served.
+//
+// ── Bytes, non code unit ──────────────────────────────────────────────────
+//
+// `manifest.files` e' documentato come «per-file byte sizes», ed e' cio' che
+// permette a un consumer di rifiutare un payload troncato confrontandolo con il
+// `Content-Length` servito. `String.length` conta code unit UTF-16, non byte:
+// su un corpus italiano/tedesco ogni accento, ogni virgoletta tipografica e
+// ogni emoji fa divergere i due numeri. Misurato il 2026-09-05 sul corpus
+// reale: 24 delle 29 voci sbagliate, fino a +16.941 su `meta-de.json`. Il
+// confronto quindi non falliva su un file troncato — falliva SEMPRE, il che e'
+// il modo piu' sicuro per far disattivare il controllo a chi lo consuma.
+const byteSize = (text) => Buffer.byteLength(text, 'utf-8');
 const write = (name, value) => {
   const file = path.join(OUT, name);
   const cleanValue = sanitizeDeep(value);
@@ -117,8 +129,8 @@ const write = (name, value) => {
   reportStrippedControlCharsDeep(file, value, cleanValue);
   const json = JSON.stringify(cleanValue);
   fs.writeFileSync(file, json);
-  written[name] = json.length;
-  console.log(`[build-api] ${name}: ${json.length} bytes`);
+  written[name] = byteSize(json);
+  console.log(`[build-api] ${name}: ${byteSize(json)} bytes`);
   return value;
 };
 
@@ -187,8 +199,8 @@ const writeXml = (name, { xml, count }) => {
   reportStrippedControlChars(path.join(OUT, name), xml, clean);
   assertNoControlChars(clean, name);
   fs.writeFileSync(path.join(OUT, name), clean);
-  written[name] = clean.length;
-  console.log(`[build-api] ${name}: ${count} urls, ${(clean.match(/xhtml:link/g) ?? []).length} alternates, ${clean.length} bytes`);
+  written[name] = byteSize(clean);
+  console.log(`[build-api] ${name}: ${count} urls, ${(clean.match(/xhtml:link/g) ?? []).length} alternates, ${byteSize(clean)} bytes`);
   return count;
 };
 
@@ -402,10 +414,10 @@ for (const section of rssSections) {
     reportStrippedControlChars(path.join(OUT, name), xml, clean);
     assertNoControlChars(clean, name);
     fs.writeFileSync(path.join(OUT, name), clean);
-    written[name] = clean.length;
+    written[name] = byteSize(clean);
     rssFeedCount++;
     rssItemTotal += items;
-    console.log(`[build-api] ${name}: ${items} items, ${clean.length} bytes`);
+    console.log(`[build-api] ${name}: ${items} items, ${byteSize(clean)} bytes`);
   }
 }
 
@@ -644,11 +656,11 @@ write('news-ticker-live.json', { schema: 1, articles: tickerArticles });
   assertNoControlChars(candidatesXml, NEWS_CANDIDATES);
 
   fs.writeFileSync(path.join(OUT, NEWS_CANDIDATES), candidatesXml);
-  written[NEWS_CANDIDATES] = candidatesXml.length;
+  written[NEWS_CANDIDATES] = byteSize(candidatesXml);
   newsCandidateCount = candidateBlocks.length;
   console.log(
     `[build-api] ${NEWS_CANDIDATES}: ${candidateBlocks.length} candidates from ` +
-      `${considered} dated articles (${NEWS_SITEMAP_WINDOW_HOURS}h window), ${candidatesXml.length} bytes`,
+      `${considered} dated articles (${NEWS_SITEMAP_WINDOW_HOURS}h window), ${byteSize(candidatesXml)} bytes`,
   );
 }
 
@@ -727,9 +739,9 @@ write('news-ticker-live.json', { schema: 1, articles: tickerArticles });
     const clean = sanitizeJsonText(raw);
     reportStrippedControlChars(path.join(OUT, BORDER_RANKING), raw, clean);
     fs.writeFileSync(path.join(OUT, BORDER_RANKING), clean);
-    written[BORDER_RANKING] = clean.length;
+    written[BORDER_RANKING] = byteSize(clean);
     borderRankingEntries = entries.length;
-    console.log(`[build-api] ${BORDER_RANKING}: ${entries.length} crossings, ${clean.length} bytes`);
+    console.log(`[build-api] ${BORDER_RANKING}: ${entries.length} crossings, ${byteSize(clean)} bytes`);
   } else {
     console.log(
       `[build-api] ${BORDER_RANKING}: not emitted — the ranking producer has not run here yet`,
@@ -760,9 +772,9 @@ write('news-ticker-live.json', { schema: 1, articles: tickerArticles });
     const clean = sanitizeJsonText(raw);
     reportStrippedControlChars(path.join(OUT, DAILY_BRIEF), raw, clean);
     fs.writeFileSync(path.join(OUT, DAILY_BRIEF), clean);
-    written[DAILY_BRIEF] = clean.length;
+    written[DAILY_BRIEF] = byteSize(clean);
     dailyBriefBlocks = available;
-    console.log(`[build-api] ${DAILY_BRIEF}: ${available}/4 blocks (${parsed?.dateIso}), ${clean.length} bytes`);
+    console.log(`[build-api] ${DAILY_BRIEF}: ${available}/4 blocks (${parsed?.dateIso}), ${byteSize(clean)} bytes`);
   } else {
     console.log(
       `[build-api] ${DAILY_BRIEF}: not emitted — the daily-brief producer has not run here yet`,
@@ -812,4 +824,26 @@ console.log(`[build-api] wrote ${Object.keys(written).length} files to dist/api`
     assertNoControlChars(fs.readFileSync(path.join(OUT, f), 'utf-8'), `dist/api/${f}`);
   }
   console.log(`[build-api] control-character gate: ${textFiles.length} text artifacts clean`);
+}
+
+// ── Final gate: manifest.files descrive i byte davvero serviti ────────────
+//
+// Deliberatamente tautologico rispetto ai writer qui sopra, come il gate sui
+// control character: serve al writer che ancora non esiste, e a quello che
+// ricomincia a contare code unit invece che byte. `manifest.files` e' il solo
+// modo che un consumer ha di rifiutare un payload troncato *prima* di usarlo —
+// e un contatore sbagliato non e' un dettaglio cosmetico: rende il confronto
+// sempre falso, quindi inutile, quindi disattivato. Il set troncato e' il caso
+// peggiore proprio perche' non fallisce da solo (AGENTS.md).
+{
+  const declared = JSON.parse(fs.readFileSync(path.join(OUT, 'manifest.json'), 'utf-8')).files;
+  const mismatches = [];
+  for (const [name, size] of Object.entries(declared)) {
+    const actual = fs.statSync(path.join(OUT, name)).size;
+    if (actual !== size) mismatches.push(`${name}: declared ${size}, on disk ${actual}`);
+  }
+  if (mismatches.length) {
+    throw new Error(`manifest.files does not describe the bytes served:\n  ${mismatches.join('\n  ')}`);
+  }
+  console.log(`[build-api] manifest byte-size gate: ${Object.keys(declared).length} artifacts match on disk`);
 }
