@@ -37,6 +37,7 @@
 import { strict as assert } from 'node:assert';
 import { describe, it, beforeEach, afterEach, mock } from 'node:test';
 import { networkInterfaces } from 'node:os';
+import { readFileSync } from 'node:fs';
 
 import {
   classifyHostUnreachable,
@@ -1600,6 +1601,35 @@ describe('callLLM — il reset della striscia si conta per classe (#848 item 3)'
   it('una run senza reset stampa comunque la riga — e\' il denominatore', () => {
     const line = flapLineOf(summaryOf());
     assert.equal(line, '   resolver flaps: none this run', `riga vista: ${line}`);
+  });
+
+  // La riga corretta non serve a niente se la stampa solo il ramo che pubblica
+  // un articolo: le run in cui una striscia di flap ha svuotato la catena
+  // finiscono `deferred`/`error`, escono da `exitAfterFlush()` e sarebbero
+  // proprio quelle assenti dal campione. Il denominatore vive nel WIRING, e
+  // `create-article.mjs` non e' importabile qui (la sua closure tira dentro
+  // sharp/undici/…, e in CI non c'e' `node_modules`): si pinna sul sorgente,
+  // come fa gia' pre-spend-gate-telemetry.test.mjs per `PRESPEND_GATE_OUTCOME`.
+  it('il riepilogo esce da `finalizeRunReport()`, cioe\' da ogni percorso terminale', () => {
+    const src = readFileSync(
+      new URL('../scripts/create-article.mjs', import.meta.url),
+      'utf-8',
+    );
+    const start = src.indexOf('function finalizeRunReport(status, extra = {}) {');
+    assert.notEqual(start, -1, 'delimitatore di finalizeRunReport da aggiornare');
+    const endRel = src.slice(start).search(/\n\}\n/);
+    assert.notEqual(endRel, -1, 'chiusura di finalizeRunReport non trovata');
+    const finalize = src.slice(start, start + endRel + 2);
+
+    assert.match(finalize, /\bprintRunSummary\(\)/, 'il riepilogo deve essere emesso da finalizeRunReport');
+    // Un secondo call site rimetterebbe la riga sul solo ramo felice — e la
+    // conterebbe due volte li', che e' l'altra meta' del denominatore rotto.
+    const callSites = src.match(/^\s*printRunSummary\(\);/gm) || [];
+    assert.equal(
+      callSites.length,
+      1,
+      `atteso un solo call site di printRunSummary() in create-article.mjs, visti ${callSites.length}`,
+    );
   });
 
   it('`resetState()` azzera anche il conteggio dei reset', async () => {

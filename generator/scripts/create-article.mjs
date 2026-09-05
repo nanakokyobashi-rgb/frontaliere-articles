@@ -2170,6 +2170,28 @@ function finalizeRunReport(status, extra = {}) {
     );
   }
 
+  // ── Riepilogo AI, da OGNI percorso terminale ────────────────────────────
+  // Stessa ragione delle due righe sopra, e stesso posto. La riga
+  // `resolver flaps:` del riepilogo e' il denominatore di #848 item 3, e un
+  // denominatore stampato dal solo ramo `generated` campiona le run RIUSCITE
+  // — cioe' esattamente quelle in cui una striscia di flap NON ha svuotato la
+  // catena. I percorsi `deferred` («all free models exhausted»), `error` e
+  // `skipped` escono via `exitAfterFlush()`, e prima di questa riga uscivano
+  // senza stampare nulla: le run con `silent` diverso da zero erano proprio
+  // quelle assenti dal campione, lo stesso «zero indistinguibile da nessuna
+  // misura» che il riepilogo doveva togliere di mezzo.
+  //
+  // Unico call site del file: `REPORT_FINALIZED` fa da latch, quindi una run
+  // = un riepilogo = una riga `resolver flaps:`, greppabile senza doppioni.
+  // Il try/catch e' perche' finalizzare non deve mai dipendere dal riepilogo:
+  // un throw qui salterebbe la scrittura del report e il flush del ledger sul
+  // percorso d'errore, che e' quello in cui serve di piu'.
+  try {
+    printRunSummary();
+  } catch (e) {
+    console.error(`  ⚠️  Riepilogo AI non stampato: ${e.message}`);
+  }
+
   try {
     const dir = path.dirname(resolve(CREATE_ARTICLE_REPORT_FILE));
     mkdirSync(dir, { recursive: true });
@@ -15430,10 +15452,10 @@ async function generateAndValidateArticle(url, sourceContext = null) {
     );
   }
   // FRO-325: full run summary (cache hits, exhausted models, cooldowns,
-  // 429 streaks, error count) — superset of the calls/successes/retries
-  // line above, not tracked anywhere else in this script (#3091).
-  printRunSummary();
-
+  // 429 streaks, error count) — superset of the calls/successes/retries line
+  // above, not tracked anywhere else in this script (#3091). Stampato da
+  // `finalizeRunReport()`, non da qui: questo ramo e' il solo che pubblica un
+  // articolo, e un riepilogo emesso solo da lui non e' un denominatore.
   finalizeRunReport('generated');
 }
 
