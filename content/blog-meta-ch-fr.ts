@@ -5587,6 +5587,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.locazione-friburgo-guida-inquilini.title': 'Location Fribourg : guide du droit du locataire',
     'blog.article.locazione-friburgo-guida-inquilini.excerpt': 'Dépôt maximum 3 mois loyer, résiliation sur formulaire cantonal, contestation dans les 30 jours. Les règles fédérales du Code des obligations garantissent une protection uniforme en Suisse.',
     'blog.article.locazione-friburgo-guida-inquilini.imageAlt': 'Immeuble résidentiel du canton de Fribourg avec unités de logements et campagne environnante',
+    'blog.article.tirocinio-retribuzione-maturita-grigioni.title': 'Apprentissage dans le canton des Grisons : apprentissage et maturité',
+    'blog.article.tirocinio-retribuzione-maturita-grigioni.excerpt': 'Guide complet de l\'apprentissage dans les Grisons : comment trouver un poste d\'apprentissage, rémunération avec cotisations de sécurité sociale, vacances minimales garanties et maturité professionnelle fédérale.',
+    'blog.article.tirocinio-retribuzione-maturita-grigioni.imageAlt': 'Jeune apprenti dans un atelier suisse pendant une leçon de formation pratique',
 };
 
 export default blogMetaChFr;

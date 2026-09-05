@@ -1888,6 +1888,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'premi-lamal-vallese-riduzione': { it: 'premi-lamal-vallese-riduzione', en: 'valais-lamal-premiums-reduction', de: 'vallese-lamal-praemien-reduktion', fr: 'valais-lamal-cotisazioni-riduzione' },
  'permesso-vallese-b-procedure': { it: 'permesso-vallese-b-procedure', en: 'valais-residence-permit-b-procedures', de: 'walliser-aufenthaltsbewilligung-b-verfahren', fr: 'permis-sejour-b-valais-procedures' },
  'locazione-friburgo-guida-inquilini': { it: 'locazione-friburgo-guida-inquilini', en: 'fribourg-rental-tenants-guide', de: 'mietrecht-freiburg-mieterleitfaden', fr: 'location-fribourg-guide-locataires' },
+ 'tirocinio-retribuzione-maturita-grigioni': { it: 'tirocinio-retribuzione-maturita-grigioni', en: 'vocational-apprenticeship-graubunden', de: 'lehre-lohn-berufsmaturaet-graubuenden', fr: 'apprentissage-salaire-maturite-grisons' },
 };
 
 export const REVERSE_SWISS: Record<ArticleLocale, Record<string, string>> = (() => {

@@ -5587,6 +5587,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.locazione-friburgo-guida-inquilini.title': 'Lease Freiburg: Tenant\'s Right Guide',
     'blog.article.locazione-friburgo-guida-inquilini.excerpt': 'Maximum deposit 3 months rent, cancellation on cantonal form, dispute within 30 days. The federal rules of the Bonds Code guarantee uniform protection in Switzerland.',
     'blog.article.locazione-friburgo-guida-inquilini.imageAlt': 'Residential building in Fribourg Canton with apartment units and surrounding countryside',
+    'blog.article.tirocinio-retribuzione-maturita-grigioni.title': 'Apprenticeship in the Canton of Graubünden: internship and maturity',
+    'blog.article.tirocinio-retribuzione-maturita-grigioni.excerpt': 'Complete guide to apprenticeship in Graubünden: how to find an internship, salary with social security contributions, guaranteed minimum holidays and federal professional maturity.',
+    'blog.article.tirocinio-retribuzione-maturita-grigioni.imageAlt': 'Young apprentice in Swiss vocational workshop during practical training session',
 };
 
 export default blogMetaChEn;
