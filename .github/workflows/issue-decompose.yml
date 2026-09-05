@@ -25,8 +25,21 @@ on:
   issues:
     types: [labeled]
 
+# Chiave PER-ISSUE. `concurrency` e' valutata a livello di WORKFLOW, cioe' PRIMA
+# dell'`if:` del job: con un `group:` costante OGNI evento issue del repo entra
+# in questa coda — anche quelli che l'`if:` scarta come `skipped` — e ogni nuova
+# pending SFRATTA (`cancelled`) la precedente, perche' `cancel-in-progress: false`
+# protegge la run in corso e non le pending. La profondita' e' 1, non N. E
+# poiche' `on: issues:[labeled]` e' one-shot, l'evento della run sfrattata e'
+# consumato: la label resta sulla issue e NIENTE la ri-arma.
+#
+# Misurato su QUESTO repo il 2026-09-05, prima della fix:
+#   09-04: 290 run create, 67 `cancelled`, 6 `success`; 09-01: 104 create, 5
+#   `cancelled`, 6 `success`. E' il peggio messo dei tre: undici run distrutte
+#   per ogni decomposizione riuscita, e il drainer ne promuove UNA per tick —
+#   a sfrattare erano interamente gli eventi delle altre issue.
 concurrency:
-  group: issue-decompose
+  group: issue-decompose-${{ github.event.issue.number || github.run_id }}
   cancel-in-progress: false
 
 permissions:
