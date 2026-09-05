@@ -5590,6 +5590,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.tirocinio-retribuzione-maturita-grigioni.title': 'Lehre im Kanton Graubünden: Lehre und Matura',
     'blog.article.tirocinio-retribuzione-maturita-grigioni.excerpt': 'Vollständiger Leitfaden für die Lehre in Graubünden: Wie finde ich eine Lehrstelle, Vergütung mit Vorsorgebeiträgen, garantierte Mindestferien und eidgenössische Berufsmaturität?',
     'blog.article.tirocinio-retribuzione-maturita-grigioni.imageAlt': 'Junger Lehrling in einer Schweizer Werkstatt während einer praktischen Ausbildungslektion',
+    'blog.article.ridurre-traffico-trasporti-pubblici.title': 'Verkehr eindämmen: Günstige Tickets reichen nicht aus',
+    'blog.article.ridurre-traffico-trasporti-pubblici.excerpt': 'Eine HSLU-Studie zeigt, dass Praktikabilität, sicheres Parken und Gepäcktransport wichtiger sind als der Preis, um den öffentlichen Verkehr zu fördern.',
+    'blog.article.ridurre-traffico-trasporti-pubblici.imageAlt': 'Moderne Schweizer Bahnhofstation mit Zügen und Fahrgästen, Symbol für Mobilität im öffentlichen Nahverkehr',
 };
 
 export default blogMetaChDe;

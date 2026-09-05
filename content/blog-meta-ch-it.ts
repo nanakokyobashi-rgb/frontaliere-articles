@@ -5590,6 +5590,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.tirocinio-retribuzione-maturita-grigioni.title': 'Apprendistato nel Canton Grigioni: tirocinio e maturità',
     'blog.article.tirocinio-retribuzione-maturita-grigioni.excerpt': 'Guida completa all\'apprendistato in Grigioni: come trovare un posto di tirocinio, retribuzione con contributi previdenziali, vacanze minime garantite e maturità professionale federale.',
     'blog.article.tirocinio-retribuzione-maturita-grigioni.imageAlt': 'Giovane apprendista in officina svizzera durante lezione pratica di formazione professionale',
+    'blog.article.ridurre-traffico-trasporti-pubblici.title': 'Ridurre il traffico: biglietti economici non bastano',
+    'blog.article.ridurre-traffico-trasporti-pubblici.excerpt': 'Uno studio HSLU rivela che praticità, parcheggi certi e trasporto bagagli sono più importanti del prezzo per incentivare i trasporti pubblici.',
+    'blog.article.ridurre-traffico-trasporti-pubblici.imageAlt': 'Stazione ferroviaria svizzera moderna con treni e passeggeri, simbolo della mobilità su trasporti pubblici',
 };
 
 export default blogMetaChIt;
