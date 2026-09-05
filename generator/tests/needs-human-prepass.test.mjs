@@ -16,6 +16,14 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {
   prepassDecision,
+  parseVisionRegistry,
+  matchRegistry,
+  registryRowState,
+  registryRowScope,
+  citedRefs,
+  blockedRefs,
+  prepassNote,
+  noteMarker,
   latestVerdict,
   MONITOR_TITLE_PATTERNS,
   OWNER_ONLY_TITLE_PATTERNS,
@@ -510,4 +518,218 @@ test('#815: una manopola non numerica torna al default invece di mutare la guard
   // E i valori vivi restano numeri utilizzabili.
   assert.ok(Number.isFinite(VERDICT_MAX_AGE_DAYS) && VERDICT_MAX_AGE_DAYS > 0);
   assert.ok(Number.isFinite(EXPIRY_REQUEUE_MAX_CYCLES) && EXPIRY_REQUEUE_MAX_CYCLES > 0);
+});
+
+/**
+ * ## Il riconoscimento del registro di VISION.md (#7280 sul sito)
+ *
+ * ADATTAMENTO — qui la fixture e' VERBATIM e non un file letto, ed e' l'unica
+ * differenza di sostanza rispetto al gemello del sito, dove gli stessi casi
+ * girano sul `VISION.md` reale del repo.
+ *
+ * La ragione e' la stessa che rende `needs-human-sweep.yml` `adapted`:
+ * `VISION.md` NON esiste in questo repo, e' sorgente unica sul sito, e a
+ * runtime si recupera via `gh api`. Un test `node --test` non fa rete e non
+ * deve farla — un gate che dipende dalla disponibilita' di un'API di un altro
+ * repo e' un gate che diventa rosso per motivi che non c'entrano col codice.
+ *
+ * Il prezzo e' che questa fixture puo' invecchiare rispetto al registro vero.
+ * Per questo le righe qui sotto sono COPIATE ALLA LETTERA dal registro del
+ * 2026-09-05 invece di essere riscritte in forma comoda: se un domani il
+ * proprietario riscrive la riga di #5995, questa copia resta la prova di cosa
+ * il criterio ha promesso di leggere il giorno in cui e' stato scritto.
+ */
+const REGISTRY_FIXTURE = `## Decisioni del proprietario già prese
+
+| Data | Decisione | Fonte |
+|---|---|---|
+| 2026-08-12 | Re-permission consensi: NON si fa, per ora | #5681 (commento 12-08) |
+| 2026-08-24 | #6280 (candidatura assistita 0,99€, A/B 60/40): **SÌ, procedi** | istruzione diretta, sessione 24-08 |
+| 2026-08-24 | #4854 (verticale aste targhe cantonali): **SÌ, procedi** | istruzione diretta, sessione 24-08 |
+| 2026-08-24 | #5926 (CMP unificata ads+comunicazioni): **SÌ**, con vincolo esplicito: l'implementazione deve preservare la compatibilità della frase di consenso col parser publisher-blast (vedi issue → rischio di azzerare l'audience) e mantenere la prova di consenso per la CMP. Requisito tecnico, non approvazione preventiva | istruzione diretta, sessione 24-08 |
+| 2026-08-24 | #5995 (repo weight): leve **1** (batch commit bot), **3** (cache derivate fuori git), **4** (file append-only partizionati per shard) autorizzate. Leve **2** (snapshot fuori git) e **5** (immagini→CDN, tentativo precedente ritirato) restano BACKLOG, non autorizzate: non aprire lavoro su quelle finché non arriva una decisione dedicata | istruzione diretta, sessione 24-08 |
+| 2026-08-25 | #5983 (text-html-ratio + max-bfs-depth, entrambi migliorati): **NO, non stringere la baseline** — i due file restano com'erano (6912/26398). Lettura iniziale errata ("migliorato → rebaseline in autonomia"), corretta lo stesso giorno: "rendiamo le baseline più ampie" significava lasciarle larghe/permissive, non ottimizzarle verso il basso. La stessa logica vale per OGNI futuro gate SEO "nice-to-have": bloccare publish/validate per un warning che Google non richiede non ha senso, quindi il gate diventa advisory (issue #6462) — non si stringe la soglia — vedi driver **D9** | istruzione diretta, sessione 25-08, issue #6458 (corretta stessa sessione) |
+
+## Manutenzione di questo documento
+`;
+
+const REGISTRY = parseVisionRegistry(REGISTRY_FIXTURE);
+
+/** L'esito del pre-pass su un corpo che cita `#n` del SITO, senza altri segnali. */
+function verdictFor(n) {
+  // Qualificato: sul corpus un `#N` nudo e' un numero DI QUESTO repo, non del
+  // registro del sito. E' precisamente la collisione che `homeScope` chiude.
+  const g = matchRegistry(
+    `Scheda\n\nContesto: vedi valerielinc-ops/frontaliere-si-o-no#${n}.`,
+    REGISTRY,
+    { homeScope: 'corpus' },
+  );
+  if (!g.unconditional.length && !g.conditional.length) return 'nessuna-riga';
+  return g.unconditional.length && !g.conditional.length ? 'sblocca' : 'annota';
+}
+
+test('la fixture del registro si parsa: sei righe, tutte con almeno un riferimento', () => {
+  assert.equal(REGISTRY.length, 6);
+  for (const r of REGISTRY) assert.ok(r.refs.length > 0, `riga senza riferimenti: ${r.decision}`);
+});
+
+test('#6280 «SÌ, procedi» e un si pieno -> SBLOCCA', () => {
+  assert.equal(verdictFor(6280), 'sblocca');
+});
+
+test('#4854 «SÌ, procedi» -> SBLOCCA', () => {
+  assert.equal(verdictFor(4854), 'sblocca');
+});
+
+test('#5995: leve 2 e 5 «non autorizzate» -> NON sblocca da solo', () => {
+  // E' la trappola centrale. Una regola «cita una riga registrata -> requeue»
+  // riaprirebbe qui lavoro che il proprietario ha esplicitamente NEGATO, che e'
+  // un danno peggiore del non-riconoscimento che questo meccanismo ripara.
+  assert.equal(verdictFor(5995), 'annota');
+  const row = REGISTRY.find((r) => r.refs.includes(5995));
+  assert.equal(row.state, 'conditional');
+  assert.ok(/NON è autorizzata|BACKLOG/.test(row.why.join(' ')), row.why.join(' '));
+});
+
+test('#5983 e un NO -> NON sblocca', () => {
+  assert.equal(verdictFor(5983), 'annota');
+  assert.ok(REGISTRY.find((r) => r.refs.includes(5983)).why.includes('decisione negativa'));
+});
+
+test('#5681 «NON si fa, per ora» -> NON sblocca', () => {
+  assert.equal(verdictFor(5681), 'annota');
+});
+
+test('#5926 «SÌ, con vincolo esplicito» -> NON sblocca', () => {
+  assert.equal(verdictFor(5926), 'annota');
+});
+
+test('una issue che non cita nessuna riga non aggancia niente', () => {
+  assert.equal(verdictFor(999999), 'nessuna-riga');
+});
+
+test('il silenzio non e un si: senza marcatore affermativo la riga e condizionata', () => {
+  const r = registryRowState('Publisher doppio sulla stessa coda: spento lo schedule del sito');
+  assert.equal(r.state, 'conditional');
+  assert.match(r.why[0], /nessun marcatore affermativo/);
+});
+
+test('`si` pronome NON e un si: ogni riga negativa lo contiene', () => {
+  // Un `/\\bsi\\b/i` leggerebbe come affermative esattamente le righe che negano.
+  assert.equal(registryRowState('NON si fa, per ora').state, 'conditional');
+  assert.equal(registryRowState('Le issue della famiglia job-alert si lasciano stare').state, 'conditional');
+});
+
+test('«non solo per questa issue» resta un si pieno', () => {
+  // Un qualificatore su `\\bnon\\b` spegnerebbe il riconoscimento proprio sulle
+  // righe piu larghe, che sono quelle che vale di piu riconoscere.
+  assert.equal(
+    registryRowState('**SÌ, e i futuri deploy sono autonomi da ora** — non solo per questa issue').state,
+    'unconditional',
+  );
+});
+
+test('sul corpus un #N NUDO non aggancia una riga del sito', () => {
+  // La collisione di numerazione: `#5995` nudo qui significa
+  // nanakokyobashi-rgb/frontaliere-articles#5995, che non esiste. Leggerlo come
+  // la riga del registro del sito sarebbe un riconoscimento inventato.
+  const g = matchRegistry('vedi #6280 per il contesto', REGISTRY, { homeScope: 'corpus' });
+  assert.deepEqual(g.refs, []);
+});
+
+test('una riga che parla del corpus decide sui numeri NUDI di questo repo', () => {
+  assert.equal(registryRowScope('Cinque issue del corpus (#621, #625, #787)'), 'corpus');
+  assert.equal(registryRowScope('#6280 (candidatura assistita): **SÌ, procedi**'), 'site');
+  const corpusRow = {
+    date: '2026-09-05', decision: 'x', source: '', refs: [832],
+    scope: 'corpus', state: 'unconditional', why: [],
+  };
+  assert.deepEqual(matchRegistry('vedi #832', [corpusRow], { homeScope: 'corpus' }).refs, [832]);
+  assert.deepEqual(matchRegistry('vedi #832', [corpusRow], { homeScope: 'site' }).refs, []);
+});
+
+test('`AGENTS.md #1` non e la issue #1', () => {
+  assert.deepEqual([...citedRefs('vedi AGENTS.md #1 per il dettaglio')], []);
+  assert.deepEqual([...citedRefs('vedi la issue #1 per il dettaglio')], [1]);
+});
+
+test('il registro non scavalca `max-turns`', () => {
+  const body = 'vedi valerielinc-ops/frontaliere-si-o-no#6280';
+  assert.equal(prepassDecision({ title: 'lavoro', body, registry: REGISTRY }).action, 'requeue');
+  assert.notEqual(
+    prepassDecision({ title: 'lavoro', body, registry: REGISTRY, verdict: 'max-turns' }).action,
+    'requeue',
+  );
+});
+
+test('una riga condizionata basta a fermare lo sblocco, anche accanto a un si pieno', () => {
+  const d = prepassDecision({
+    title: 'lavoro misto',
+    body: 'tocca valerielinc-ops/frontaliere-si-o-no#6280 e valerielinc-ops/frontaliere-si-o-no#5995',
+    registry: REGISTRY,
+  });
+  assert.equal(d.action, 'keep');
+  assert.match(d.note, /condizionata o negativa/);
+});
+
+test('la riga condizionata viene ALLEGATA, col marker di idempotenza', () => {
+  const d = prepassDecision({
+    title: 'repo weight', body: 'leva 2 di valerielinc-ops/frontaliere-si-o-no#5995', registry: REGISTRY,
+  });
+  assert.equal(d.action, 'keep');
+  assert.match(d.note, /Registro di `VISION.md`/);
+  assert.equal(d.marker, '<!-- PREPASS_NOTE: r=5995 -->');
+});
+
+test('il tracker permanente non si annota', () => {
+  const d = prepassDecision({
+    title: 'digest', body: 'vedi valerielinc-ops/frontaliere-si-o-no#5995',
+    labels: ['agent:no-age-out'], registry: REGISTRY,
+  });
+  assert.equal(d.note, undefined);
+});
+
+/**
+ * ## Blocchi scaduti — la forma reale di #471
+ *
+ * #471 era `blocked` su `valerielinc-ops#6023`, MERGIATA il 2026-08-18:
+ * diciotto giorni oltre la fine del suo blocco, e nessuno se n'era accorto.
+ */
+const BODY_471 = [
+  'Scope residuo dal body di PR #433 (mergiata, merge commit ce67d8c).',
+  '',
+  '## 1. Gemello sito non ancora portato — blocked su PR esterna aperta',
+  '',
+  'Stato dichiarato nel body: `PR concatenata valerielinc-ops/frontaliere-si-o-no#6023`, non ancora mergiata.',
+  '',
+  '## 2. Ledger diagnostico — nessun blocco dichiarato qui',
+  '',
+  'Si fa nello stesso giro, vedi #999.',
+].join('\n');
+
+test('il riferimento sta tre paragrafi sotto la parola `blocked`: la riga non basta, la sezione si', () => {
+  const refs = blockedRefs(BODY_471, { homeScope: 'corpus' });
+  assert.deepEqual(refs.map((r) => r.key), ['valerielinc-ops/frontaliere-si-o-no#6023']);
+});
+
+test('una sezione senza `blocked` non contribuisce riferimenti', () => {
+  assert.ok(!blockedRefs(BODY_471, { homeScope: 'corpus' }).some((r) => r.number === 999));
+});
+
+test('un corpo che non nomina mai `blocked` costa zero letture', () => {
+  assert.deepEqual(blockedRefs('nessun blocco qui, solo #123', { homeScope: 'corpus' }), []);
+});
+
+test('la nota dice stato e data, e il blocco scaduto da solo NON instrada', () => {
+  const stale = [{ key: 'a#1', link: 'valerielinc-ops/frontaliere-si-o-no#6023', state: 'MERGED', at: '2026-08-18' }];
+  const d = prepassDecision({ title: 'gemello sito ai-models.mjs non portato', staleBlocks: stale });
+  assert.equal(d.action, 'keep');
+  assert.match(d.note, /MERGED/);
+  assert.match(d.note, /2026-08-18/);
+  assert.equal(noteMarker({ refs: [] }, stale), '<!-- PREPASS_NOTE: b=a#1 -->');
+});
+
+test('senza righe e senza blocchi non si scrive niente (nessun commento a vuoto)', () => {
+  assert.equal(prepassNote({ unconditional: [], conditional: [], refs: [] }, []), null);
+  assert.equal(noteMarker({ refs: [] }, []), null);
 });

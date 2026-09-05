@@ -38,6 +38,11 @@ name: Needs-human sweep (Claude, weekly)
 #    `GITHUB_TOKEN` del run basta a leggerlo: nessun PAT per la lettura
 #    cross-repo. Una copia locale divergerebbe in silenzio — è esattamente il
 #    modo di rompersi che `loop-drift-check` esiste per intercettare.
+#    Dal 2026-09-05 lo stesso recupero lo fa anche il PRE-PASS, non solo il run
+#    Claude: `readVisionRegistry()` in `scripts/ci/needs-human-prepass.mjs`
+#    legge il registro delle decisioni gia' prese con lo stesso `gh api` e con
+#    lo stesso `GITHUB_TOKEN`, ed e' fail-open — se il recupero non riesce il
+#    pre-pass torna al comportamento precedente invece di morire.
 # 2. **Identità: `GITHUB_PAT_NANAKO`** (niente GitHub App qui), caricato dal
 #    ponte Remote Config `generator/scripts/load-rc-env.mjs` — come
 #    `issue-decompose.yml`. È un requisito del solo run Claude, che crea/aggiorna
