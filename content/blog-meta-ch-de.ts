@@ -5587,6 +5587,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.locazione-friburgo-guida-inquilini.title': 'Vermietung Freiburg: Leitfaden zum Mieterrecht',
     'blog.article.locazione-friburgo-guida-inquilini.excerpt': 'Kaution max. 3 Monate Miete, Kündigung auf kantonalem Formular, Beanstandung innerhalb von 30 Tagen. Die eidgenössischen Regeln des Obligationenrechts gewährleisten einen einheitlichen Schutz in der Schweiz.',
     'blog.article.locazione-friburgo-guida-inquilini.imageAlt': 'Wohngebäude im Kanton Freiburg mit Wohneinheiten und umliegender Landschaft',
+    'blog.article.tirocinio-retribuzione-maturita-grigioni.title': 'Lehre im Kanton Graubünden: Lehre und Matura',
+    'blog.article.tirocinio-retribuzione-maturita-grigioni.excerpt': 'Vollständiger Leitfaden für die Lehre in Graubünden: Wie finde ich eine Lehrstelle, Vergütung mit Vorsorgebeiträgen, garantierte Mindestferien und eidgenössische Berufsmaturität?',
+    'blog.article.tirocinio-retribuzione-maturita-grigioni.imageAlt': 'Junger Lehrling in einer Schweizer Werkstatt während einer praktischen Ausbildungslektion',
 };
 
 export default blogMetaChDe;

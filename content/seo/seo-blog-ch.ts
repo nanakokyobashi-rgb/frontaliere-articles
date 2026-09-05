@@ -72521,6 +72521,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-tirocinio-retribuzione-maturita-grigioni': {
+    title: 'Apprendistato nel Canton Grigioni: tirocinio e maturità',
+    description: 'Guida all\'apprendistato in Grigioni: come trovare un tirocinio, retribuzione con contributi previdenziali, vacanze minime e maturità professionale federale.',
+    keywords: 'frontalieri, ticino, svizzera, italia, apprendistato, canton, grigioni, tirocinio',
+    ogTitle: 'Apprendistato nel Canton Grigioni: tirocinio e maturità',
+    ogDescription: 'Scopri come funziona l\'apprendistato nel Canton Grigioni: procedura per trovare un posto di tirocinio, retribuzione con contributi AVS/AI obbligatori, vacanze garantite e diploma di maturità professionale federale.',
+    canonicalPath: '/articoli-svizzera/tirocinio-retribuzione-maturita-grigioni/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Apprendistato nel Canton Grigioni: tirocinio e maturità",
+      "description": "Guida all'apprendistato in Grigioni: come trovare un tirocinio, retribuzione con contributi previdenziali, vacanze minime e maturità professionale federale.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/tirocinio-retribuzione-maturita-grigioni.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Giovane apprendista in officina svizzera durante lezione pratica di formazione professionale"
+      },
+      "datePublished": "2026-09-05T18:13:25+00:00",
+      "dateModified": "2026-09-05T18:13:25+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/tirocinio-retribuzione-maturita-grigioni/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

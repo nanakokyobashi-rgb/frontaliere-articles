@@ -5587,6 +5587,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.locazione-friburgo-guida-inquilini.title': 'Locazione Friburgo: guida al diritto dell\'inquilino',
     'blog.article.locazione-friburgo-guida-inquilini.excerpt': 'Deposito max 3 mesi pigione, disdetta su modulo cantonale, contestazione entro 30 giorni. Le regole federali del Codice Obbligazioni garantiscono protezione uniforme in Svizzera.',
     'blog.article.locazione-friburgo-guida-inquilini.imageAlt': 'Edificio residenziale nel Canton Friburgo con dettagli di unità abitative e campagna circostante',
+    'blog.article.tirocinio-retribuzione-maturita-grigioni.title': 'Apprendistato nel Canton Grigioni: tirocinio e maturità',
+    'blog.article.tirocinio-retribuzione-maturita-grigioni.excerpt': 'Guida completa all\'apprendistato in Grigioni: come trovare un posto di tirocinio, retribuzione con contributi previdenziali, vacanze minime garantite e maturità professionale federale.',
+    'blog.article.tirocinio-retribuzione-maturita-grigioni.imageAlt': 'Giovane apprendista in officina svizzera durante lezione pratica di formazione professionale',
 };
 
 export default blogMetaChIt;
