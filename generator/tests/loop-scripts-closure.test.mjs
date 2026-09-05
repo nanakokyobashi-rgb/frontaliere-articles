@@ -56,8 +56,12 @@ const DIRS = ['scripts/ci', 'scripts/ci/lib', 'scripts/lib'];
 //     una clausola di import contiene solo identificatori, virgole, graffe,
 //     `as` e spazi, mai un apice o un punto e virgola.
 // Il `from` è opzionale, così anche un side-effect import (`import './x.mjs'`)
-// resta coperto.
-const IMPORT_RE = /^[ \t]*import\s+(?:[^'";]*?\sfrom\s+)?(['"])([^'"]+)\1/gm;
+// resta coperto — ma solo per `import`: `export ... from` è una dipendenza
+// quanto un import (`scripts/ci/scan-failed-runs.mjs` ri-esporta
+// `../lib/parse-positive-num.mjs`, e senza il ramo era invisibile qui),
+// mentre un `export` SENZA `from` non lo è, e pretendere il `from` evita che
+// `export default './x'` venga contato come specificatore.
+const IMPORT_RE = /^[ \t]*(?:import\s+(?:[^'";]*?\sfrom\s+)?|export\s+[^'";]*?\sfrom\s+)(['"])([^'"]+)\1/gm;
 
 /** Tutti gli specificatori importati da `src`, nell'ordine in cui compaiono. */
 function importSpecifiers(src) {
