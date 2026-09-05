@@ -269,10 +269,24 @@ export function isGenuineSiblingClassViolation(text) {
 // sitemap», «non emette il canonical») restano fuori, perche' li' la negazione E'
 // il difetto. La clausola si chiude al primo confine di frase (`.`/`;`/`—`/a
 // capo), cosi' non mangia il resto della riga.
+const IMPACT_VERB = String.raw`impatt\w*|impact\b|ricadut\w*|tocca\w*|toccano|toccat\w*|toccare|touch\w*|raggiung\w*|reach\w*|coinvolg\w*|affect\w*`;
+// (A) negazione PRIMA del verbo: «nessun impatto su …», «nulla tocca …»,
+//     «nessun articolo nuovo raggiunge …», «no impact on …».
 const NEGATED_IMPACT_CLAUSE_RE =
-  /\b(?:nessun\w*|niente|zero|senza|non|no)\b(?:\s+\S+){0,3}?\s+(?:impatt\w*|impact\b|ricadut\w*|tocca\w*|toccano|toccat\w*|touch\w*|raggiung\w*|reach\w*|coinvolg\w*|affect\w*)[^.;—\n]*/giu;
+  new RegExp(String.raw`\b(?:nessun\w*|nulla|niente|zero|senza|non|no)\b(?:\s+\S+){0,3}?\s+(?:${IMPACT_VERB})[^.;—\n]*`, 'giu');
+// (B) negazione DOPO il verbo, in forma contrastiva: «il ramo tocca l'automazione
+//     delle issue di CI, non `dist/api/`, le sitemap, i feed o gli slug». Qui il
+//     vocabolario del bucket sta nella coda negata, quindi si toglie SOLO quella
+//     (lookbehind a lunghezza variabile: cio' che precede la virgola resta
+//     scansionabile e un finding vero non viene mangiato). La virgola e la
+//     contrastivita' sono obbligatorie: sono cio' che distingue questa coda da un
+//     «non» qualsiasi piu' avanti nella frase.
+const CONTRASTIVE_NEGATED_TAIL_RE =
+  new RegExp(String.raw`(?<=\b(?:${IMPACT_VERB})\b[^.;—\n]{0,120}),\s*(?:e\s+|ma\s+)?non\b[^.;—\n]*`, 'giu');
 export function stripNegatedImpactClauses(text) {
-  return String(text ?? '').replace(NEGATED_IMPACT_CLAUSE_RE, ' ');
+  return String(text ?? '')
+    .replace(NEGATED_IMPACT_CLAUSE_RE, ' ')
+    .replace(CONTRASTIVE_NEGATED_TAIL_RE, ' ');
 }
 
 export function bucketFinding(text) {
