@@ -5608,6 +5608,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.permesso-dimora-b-canton-vallese-requisiti-rinnovo.title': 'Permis B Valais : exigences, documents et renouvellement',
     'blog.article.permesso-dimora-b-canton-vallese-requisiti-rinnovo.excerpt': 'Découvrez les exigences, les documents nécessaires et la procédure de renouvellement du permis de séjour B dans le canton du Valais.',
     'blog.article.permesso-dimora-b-canton-vallese-requisiti-rinnovo.imageAlt': 'Vue panoramique du Lac de Lugano avec le Monte San Salvatore',
+    'blog.article.pacifismo-neutralita-buzzi.title': 'Pacifisme vs neutralité : le non de Buzzi à l\'UDC',
+    'blog.article.pacifismo-neutralita-buzzi.excerpt': 'Matteo Buzzi, député Verdi, critique l\'initiative UDC sur la neutralité armée. Propose la défense civile non violente au lieu du réarmement.',
+    'blog.article.pacifismo-neutralita-buzzi.imageAlt': 'Vue de Locarno au Tessin, ville d\'origine du député Vert Matteo Buzzi',
 };
 
 export default blogMetaChFr;

@@ -259,6 +259,13 @@ jobs:
           # issue dalla propria lista. Duplicarlo fra i due usi le farebbe
           # divergere in silenzio, e la seconda tornerebbe a auto-elencarsi.
           DEDUP_TITLE: 'needs-human: PR bloccate in attesa di revisione umana'
+          # Tracker permanente. Stessa discriminante che followup-drainer.mjs
+          # (`isPermanentTracker`, :1113) e needs-human-prepass.mjs (:792) usano
+          # gia' per non accodare ne' chiudere questi oggetti: la LABEL, mai il
+          # titolo. Il legame fra questo valore e quelli degli script — che non
+          # possono importarsi da uno YAML — e' coperto da
+          # generator/tests/needs-human-digest-self-listing.test.mjs (AGENTS.md #6).
+          LBL_PERMANENT_TRACKER: 'agent:no-age-out'
         run: |
           set -uo pipefail
           PRS=$(gh pr list --repo "$GH_REPO" --state open --label needs-human \
@@ -274,9 +281,21 @@ jobs:
           # irraggiungibile, perche' la lista issue contiene sempre almeno se
           # stessa. L'esclusione va fatta QUI, sulla chiave di dedup, non
           # sperando che la label resti quella di partenza.
+          #
+          # SECONDA esclusione, stessa forma e stesso difetto un passo piu' in
+          # la': i TRACKER PERMANENTI. `needs-human-sweep.yml` (:215) crea il
+          # digest `🧭 Decisioni del proprietario` con
+          # `needs-human,automation,agent:no-age-out` e vieta esplicitamente allo
+          # sweep di togliergli quella label; l'issue esiste per restare aperta e
+          # non ha una causa singola da riparare. Finche' compare qui, `ISSUES`
+          # non e' MAI vuoto e la chiusura promessa nel corpo resta
+          # irraggiungibile — esattamente l'assorbente di #733, tranne che il
+          # residuo permanente e' un'altra issue invece di questa. Elencarla come
+          # «oggetto che aspetta occhi umani» e' anche falso: il digest E' il
+          # canale umano, non un item da sbloccare.
           ISSUES=$(gh issue list --repo "$GH_REPO" --state open --label needs-human \
-            --limit 200 --json number,title,updatedAt \
-            --jq '.[] | select(.title != env.DEDUP_TITLE) | "- #\(.number) \(.title) (ultimo update \(.updatedAt))"')
+            --limit 200 --json number,title,updatedAt,labels \
+            --jq '.[] | select(.title != env.DEDUP_TITLE) | select([.labels[].name] | index(env.LBL_PERMANENT_TRACKER) | not) | "- #\(.number) \(.title) (ultimo update \(.updatedAt))"')
           if [ -z "$PRS" ] && [ -z "$ISSUES" ]; then
             # Liste vuote = la condizione di chiusura che il corpo promette.
             # Uscire e basta la lasciava non mantenuta: l'issue dedup restava
@@ -303,7 +322,7 @@ jobs:
           echo "needs-human aperti: $PR_COUNT PR, $ISSUE_COUNT issue"
           [ -n "$PRS" ] || PRS='_(nessuna)_'
           [ -n "$ISSUES" ] || ISSUES='_(nessuna)_'
-          DESC=$(printf 'Nessun processo automatico sblocchera questi oggetti, e su `needs-human` la label e un filtro di ESCLUSIONE dalle code del drainer, non una segnalazione. Servono occhi umani.\n\n**PR** (%s) — il fixer dei red-flag ha raggiunto il round-cap e si e fermato (anti-loop), oppure sono draft parcheggiate, che ogni strato del ciclo salta by-design:\n\n%s\n\n**Issue** (%s) — escalate dal followup-drainer (too-large) o dal gate cronico di close-recovered-failure-issues.mjs (un guasto che ricorre oltre soglia). Restano fuori dal pool dei retry parcheggiati e dal rescue agent:fix dei crawler finche portano la label:\n\n%s\n\n_Issue dedup giornaliera da recycle-stale-prs.yml (zero-Claude); si aggiorna con un commento di recurrence finche esiste qualcosa di needs-human, e si richiude da sola al primo run in cui entrambe le liste sono vuote._' "$PR_COUNT" "$PRS" "$ISSUE_COUNT" "$ISSUES")
+          DESC=$(printf 'Nessun processo automatico sblocchera questi oggetti, e su `needs-human` la label e un filtro di ESCLUSIONE dalle code del drainer, non una segnalazione. Servono occhi umani.\n\n**PR** (%s) — il fixer dei red-flag ha raggiunto il round-cap e si e fermato (anti-loop), oppure sono draft parcheggiate, che ogni strato del ciclo salta by-design:\n\n%s\n\n**Issue** (%s) — escalate dal followup-drainer (too-large) o dal gate cronico di close-recovered-failure-issues.mjs (un guasto che ricorre oltre soglia). Restano fuori dal pool dei retry parcheggiati e dal rescue agent:fix dei crawler finche portano la label. Esclusi i tracker permanenti (`agent:no-age-out`), che sono aperti per costruzione e non sono item da sbloccare:\n\n%s\n\n_Issue dedup giornaliera da recycle-stale-prs.yml (zero-Claude); si aggiorna con un commento di recurrence finche esiste qualcosa di needs-human, e si richiude da sola al primo run in cui entrambe le liste sono vuote (i tracker permanenti non contano come residuo)._' "$PR_COUNT" "$PRS" "$ISSUE_COUNT" "$ISSUES")
           node scripts/lib/github-issue-creator.mjs \
             --title "$DEDUP_TITLE" \
             --description "$DESC" \

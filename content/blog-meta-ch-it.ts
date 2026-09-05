@@ -5608,6 +5608,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.permesso-dimora-b-canton-vallese-requisiti-rinnovo.title': 'Permesso di dimora B nel Canton Vallese: requisiti, documenti e rinnovo',
     'blog.article.permesso-dimora-b-canton-vallese-requisiti-rinnovo.excerpt': 'Scopri i requisiti, i documenti necessari e la procedura di rinnovo del permesso di dimora B nel Canton Vallese.',
     'blog.article.permesso-dimora-b-canton-vallese-requisiti-rinnovo.imageAlt': 'Vista panoramica del Lago di Lugano con il Monte San Salvatore',
+    'blog.article.pacifismo-neutralita-buzzi.title': 'Pacifismo vs neutralità: il no di Buzzi all\'UDC',
+    'blog.article.pacifismo-neutralita-buzzi.excerpt': 'Matteo Buzzi, deputato Verdi, critica l\'iniziativa UDC sulla neutralità armata. Propone difesa civile nonviolenta anziché riarmo.',
+    'blog.article.pacifismo-neutralita-buzzi.imageAlt': 'Veduta di Locarno in Ticino, città d\'origine del deputato Verdi Matteo Buzzi',
 };
 
 export default blogMetaChIt;

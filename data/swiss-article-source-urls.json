@@ -1,5 +1,4 @@
 {
-  "https://www.rsi.ch/info/svizzera/perch%c3%a9-il-caldo-fa-salire-i-prezzi--3943950.html": "inflazione-climatica-prezzi-svizzera",
   "https://www.tio.ch/svizzera/politica/1943470/miliardi-iva-aumento-consiglio-punti": "sicurezza-a-caro-prezzo-proposto-un-aumento-dell-iva-di-0-5-punti-per-centuali",
   "https://www.tio.ch/svizzera/politica/1943484/referendum-accordi-commissione-svizzera-ue-svizzera-essere": "accordi-svizzera-ue-consiglio-federale",
   "https://www.rsi.ch/s/3949164": "aumento-iva-per-la-difesa",
@@ -1853,6 +1852,11 @@
   "https://www.tio.ch/svizzera/attualita/1948225/ho-visto-la-pista-dal-finestrino-pensavo-ci-schiantassimo": {
     "articleId": "volo-easyjet-valencia-ginevra",
     "ts": "2026-09-05T20:47:35.725Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/rubriche/ospite/1948265/39-neutralita-pacifista-matteo-buzzi": {
+    "articleId": "pacifismo-neutralita-buzzi",
+    "ts": "2026-09-05T21:16:12.813Z",
     "keyForm": 2
   }
 }
