@@ -37,7 +37,7 @@ const REPO_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..
 const WORKFLOW_PATH = path.join(REPO_ROOT, '.github', 'workflows', 'generate-daily-brief.yml');
 
 /** A snapshot whose jobs block has been degraded for `editions` runs. */
-function briefWithStreak(editions, before = null) {
+function briefWithStreak(editions) {
   return {
     dateIso: '2026-09-05',
     counts: { availableBlocks: 3 },
@@ -181,18 +181,38 @@ test('a crossing on a run that writes no snapshot is announced, never a verdict'
   assert.ok(lines.some((l) => l.includes('not recorded')), lines.join('\n'));
 });
 
-test('the workflow spends the red on that verdict, after the commit step', () => {
+test('the workflow spends the red on that verdict, and only as the LAST step', () => {
   // Non-negotiable #6: the key lives in the script and is read in YAML, which
   // cannot import it. This is the test that keeps the two ends tied — including
-  // the ORDER, which is the whole fix: a gate before the commit would skip it.
+  // the POSITION, which is the whole fix and has been wrong twice.
   const yml = readFileSync(WORKFLOW_PATH, 'utf-8');
   assert.ok(yml.includes(`steps.refresh.outputs.${DEGRADATION_CROSSED_OUTPUT}`), 'the gate must read the verdict this script publishes');
   assert.ok(yml.includes(`steps.refresh.outputs.${DEGRADATION_BLOCKS_OUTPUT}`), 'the summary names the blocks from the same source');
   assert.match(yml, /^\s+id: refresh$/m, 'the refresh step must keep the id the gate refers to');
 
-  const commitAt = yml.indexOf('name: Commit and push');
+  const steps = [...yml.matchAll(/^ {6}- name: (.+)$/gm)].map((m) => ({ name: m[1].trim(), at: m.index }));
   const gateAt = yml.indexOf(`steps.refresh.outputs.${DEGRADATION_CROSSED_OUTPUT}`);
-  assert.ok(commitAt > 0 && gateAt > commitAt, 'the degradation gate must run AFTER the commit, or the streak dies on the runner');
+  const gate = [...steps].reverse().find((step) => step.at < gateAt);
+  assert.ok(gate, 'the gate must live inside a named step');
+
+  // AFTER the commit: the streak is durable only once `git add` has run, so a
+  // gate before it would kill the very snapshot that proves the alarm.
+  const commit = steps.find((step) => step.name.startsWith('Commit and push'));
+  assert.ok(commit && gate.at > commit.at, 'the gate must run AFTER the commit, or the streak dies on the runner');
+
+  // And LAST, full stop. `exit 1` skips every later step whose `if:` carries no
+  // status function — which is every step here. That already cost the CDN warm
+  // in `Push hero + thumbnail to the CDN`: the hero is the og:image Discover
+  // fetches, and skipping it leaves a 404 at the edge that no later run repairs,
+  // because that step only ever handles the current day's id. Asserting "last"
+  // rather than "after the commit" is the form that survives the next step
+  // somebody drops into the middle of this job.
+  const last = steps[steps.length - 1];
+  assert.equal(
+    gate.name,
+    last.name,
+    `the degradation gate must be the LAST step of the job; "${last.name}" comes after it and its exit 1 would skip it`,
+  );
 });
 
 test('a streak that round-tripped to a string does not re-arm the alarm every day', () => {
