@@ -67,19 +67,31 @@ function sliceBlock(startNeedle, fnNeedle) {
 
 function loadSlugSandbox() {
   const slugify = sliceBlock('const SLUG_MAX_LENGTH = 80;', 'function slugifySlugPart(input) {');
+  // Il classificatore di segnaposto entra in sandbox perche'
+  // `relocalizeSlugsAfterTranslation` lo attraversa: e' cio' che tiene fuori
+  // `null` dallo slug di un titolo `de` che vale `Null` (#868 item 1).
+  const placeholderGuard = sliceBlock(
+    'const PROMPT_SLUG_PREFIX_RX = /^(?:slug|kebab[-_]?case)[-_]+/i;',
+    'export function inspectSlugForPromptPlaceholder(input) {',
+  );
   const relocalize = sliceBlock(
     "export const PROVISIONAL_IT_SLUG_FIELD = '_slugsProvisionalFromIt';",
     'export function relocalizeSlugsAfterTranslation(data, opts = {}) {',
   );
-  const code = `${slugify}\n${relocalize}`.replace(/^export /gm, '');
+  const code = `${slugify}\n${placeholderGuard}\n${relocalize}`.replace(/^export /gm, '');
   return new Function(
     'truncateSlugAtWordBoundary',
-    `${code}\nreturn { slugifySlugPart, relocalizeSlugsAfterTranslation, markProvisionalItSlug, PROVISIONAL_IT_SLUG_FIELD };`,
+    `${code}\nreturn { slugifySlugPart, inspectSlugForPromptPlaceholder, relocalizeSlugsAfterTranslation, markProvisionalItSlug, PROVISIONAL_IT_SLUG_FIELD };`,
   )(truncateSlugAtWordBoundary);
 }
 
-const { slugifySlugPart, relocalizeSlugsAfterTranslation, markProvisionalItSlug, PROVISIONAL_IT_SLUG_FIELD } =
-  loadSlugSandbox();
+const {
+  slugifySlugPart,
+  inspectSlugForPromptPlaceholder,
+  relocalizeSlugsAfterTranslation,
+  markProvisionalItSlug,
+  PROVISIONAL_IT_SLUG_FIELD,
+} = loadSlugSandbox();
 
 const LOCALIZED_TITLES = {
   it: 'Ristorni frontalieri: Berna deplora lo stop del Cantone',
