@@ -17,8 +17,8 @@
  * Fino al #568 tutti e tre leggevano SOLO il titolo: un conteggio esplicito
  * ("N items deferred", N>=2) o le parole `sweep|batch|bulk`. I follow-up
  * multi-item generati senza conteggio nel titolo — item enumerati nel CORPO
- * come sezioni numerate (#374, #505) o come bullet in grassetto (#466) — non
- * venivano riconosciuti.
+ * come sezioni numerate (#374, #505), come lista ordinata con lead in grassetto
+ * (#831, #832) o come bullet in grassetto (#466) — non venivano riconosciuti.
  *
  * Questo file e' anche la copertura che AGENTS.md #6 chiede quando una logica
  * condivisa NON puo' essere estratta in un modulo: i tre file sono
@@ -67,6 +67,23 @@ const BODIES = Object.freeze({
       '- [ ] **Verifica: output-token cap non controllato.** Altro testo.',
     ].join('\n'),
   },
+  // #832 — 2 item come lista ordinata con lead in grassetto, nessun conteggio.
+  orderedBoldItems: {
+    aggregate: true,
+    title: 'follow-up(#830): ramo lordo del guardrail che si autodisattiva + soglia stretta',
+    body: [
+      'Da `## Non implementato (ancora)` di #830.',
+      '',
+      '1. **Il ramo lordo del guardrail si autodisattiva.** Testo.',
+      '2. **Soglia del guardrail `>` stretta.** Altro testo.',
+    ].join('\n'),
+  },
+  // Una procedura numerata SENZA lead in grassetto non enumera item: sono passi.
+  numberedSteps: {
+    aggregate: false,
+    title: 'follow-up(#9): una cosa sola, con una procedura',
+    body: '## Come riprodurre\n\n1. Lancia il workflow.\n2. Guarda il log.\n3. Nota il conteggio.',
+  },
   // Il caso a UN item: e' il bersaglio vero dei gate e non deve sparire.
   singleItem: {
     aggregate: false,
@@ -110,10 +127,11 @@ test('le tre copie di hasEnumeratedItems non sono divergenti (AGENTS.md #6)', ()
     'la copia di harvest-agent-lessons.mjs non e\' piu\' identica a quella della pre-flight');
 });
 
-test('isAggregate non corto-circuita un multi-item enumerato nel corpo (#374, #466)', () => {
-  const { numberedSections: a, boldLeadBullets: b, singleItem: s } = BODIES;
+test('isAggregate non corto-circuita un multi-item enumerato nel corpo (#374, #466, #832)', () => {
+  const { numberedSections: a, boldLeadBullets: b, orderedBoldItems: o, singleItem: s } = BODIES;
   assert.equal(isAggregate(a.title, a.body), true, 'sezioni numerate: 5 item, nessun conteggio nel titolo');
   assert.equal(isAggregate(b.title, b.body), true, 'bullet in grassetto: 3 item, nessun conteggio nel titolo');
+  assert.equal(isAggregate(o.title, o.body), true, 'lista ordinata in grassetto: 2 item, nessun conteggio nel titolo');
   assert.equal(isAggregate(s.title, s.body), false, 'un follow-up a un solo item resta corto-circuitabile');
 });
 
@@ -136,7 +154,7 @@ test('reconcile non auto-chiude un aggregato enumerato nel corpo (#568)', () => 
 
 test('l\'harvester non conta come burn evitabile un aggregato enumerato nel corpo (#560)', () => {
   const FU = ['follow-up'];
-  for (const c of [BODIES.numberedSections, BODIES.boldLeadBullets]) {
+  for (const c of [BODIES.numberedSections, BODIES.boldLeadBullets, BODIES.orderedBoldItems]) {
     assert.equal(isAvoidableAlreadyFixed(c.title, FU, c.body), false,
       'un aggregato e\' la conferma attesa della pre-flight, non burn prevenibile');
     assert.equal(isAvoidableMaxTurns(c.title, [], false, c.body), false,

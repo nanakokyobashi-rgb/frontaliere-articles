@@ -139,8 +139,9 @@ const io = {
 };
 
 /**
- * Item enumerati STRUTTURALMENTE nel body: `## 1.` / `## 2.` (>=2 sezioni numerate) oppure
- * `- **Titolo**` / `- [ ] **Titolo**` (>=2 bullet top-level con lead in grassetto).
+ * Item enumerati STRUTTURALMENTE nel body: `## 1.` / `## 2.` (>=2 sezioni numerate),
+ * `1. **Titolo.**` / `2. **Titolo.**` (>=2 item di lista ordinata con lead in grassetto)
+ * oppure `- **Titolo**` / `- [ ] **Titolo**` (>=2 bullet top-level con lead in grassetto).
  *
  * Perche' esiste (#568): i rilevatori di aggregati leggevano SOLO il titolo — un conteggio
  * esplicito ("N items deferred", N>=2) o le parole `sweep|batch|bulk`. I follow-up
@@ -171,6 +172,10 @@ export function hasEnumeratedItems(body) {
   const b = String(body || '');
   const numberedSections = (b.match(/^#{2,4}[ \t]*\d+[.)](?=[ \t]|$)/gm) || []).length;
   if (numberedSections >= 2) return true;
+  // Lista ordinata con lead in grassetto: `1. **Titolo.**` / `2. **Titolo.**` (#831, #832).
+  // Il grassetto e' cio' che distingue l'item enumerato dai passi di una procedura numerata.
+  const orderedBoldItems = (b.match(/^[ \t]*\d+[.)][ \t]+\*\*/gm) || []).length;
+  if (orderedBoldItems >= 2) return true;
   const boldLeadBullets = (b.match(/^[-*][ \t]+(?:\[[ xX]\][ \t]*)?\*\*/gm) || []).length;
   return boldLeadBullets >= 2;
 }
