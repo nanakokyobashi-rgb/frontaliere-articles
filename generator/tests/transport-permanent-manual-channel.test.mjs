@@ -95,9 +95,74 @@ test('il workflow non lascia che il no permanente fermi la copia', () => {
     'ogni codice diverso da 0 e 2 deve restare bloccante: il buio delle fetch non deve aprire una PR',
   );
 
-  // Meta` 3 — e il rosso arriva comunque, dopo che la PR e` stata aperta.
-  const applyStep = yml.slice(yml.indexOf('Copia e apri la PR'));
-  const lastExit = applyStep.lastIndexOf('exit "$rc"');
-  const lastCreate = applyStep.lastIndexOf('gh pr create');
-  assert.ok(lastCreate !== -1 && lastExit > lastCreate, 'il rosso va alzato DOPO `gh pr create`, non prima');
+  // Meta` 3 — il codice messo da parte sopravvive al ramo che non ha girato.
+  assert.match(
+    yml,
+    /echo "\$rc" > "\$RUNNER_TEMP\/transport-rc"[\s\S]*?\[ "\$rc" = "2" \] && rc=0/,
+    'il dry-run deve SALVARE l`rc prima di degradarlo, altrimenti il 2 sparisce con lui',
+  );
+});
+
+/**
+ * Il rosso non puo` vivere dentro lo step di apply.
+ *
+ * Quello step e` gatato su `env.GITHUB_PAT_NANAKO != ''`, e il passo che popola
+ * il PAT (`Load secrets from Remote Config`) e` `continue-on-error: true`: se
+ * Remote Config non risponde, l'apply viene SALTATO. Un rosso che vivesse solo
+ * li` sparirebbe con lo step, e la passata schedulata uscirebbe VERDE coi
+ * gemelli bloccati per sempre dentro `manual` — lo stesso guasto che l'item 4
+ * chiude, un livello piu` in la`.
+ */
+test('il verdetto finale gira con `always()`, non dentro il ramo col PAT', () => {
+  const yml = read(WORKFLOW);
+
+  // Il passo che carica il PAT e` davvero fail-open: e` la premessa del difetto.
+  assert.match(
+    yml,
+    /Load secrets from Remote Config[\s\S]{0,200}?continue-on-error: true/,
+    'se questo step diventasse bloccante il ragionamento qui sotto andrebbe rifatto',
+  );
+
+  const at = yml.lastIndexOf('- name: No permanenti');
+  assert.notEqual(at, -1, 'manca lo step finale che possiede il verdetto');
+  const finalStep = yml.slice(at);
+  assert.match(finalStep, /if: always\(\)/, 'senza `always()` il verdetto salta insieme al ramo che ha fallito');
+  assert.doesNotMatch(finalStep, /GITHUB_PAT_NANAKO/, 'il verdetto non deve dipendere dal PAT: e` il gate che lo rendeva vacuo');
+  assert.match(finalStep, /transport-rc/, 'deve rileggere il codice messo da parte');
+  assert.match(finalStep, /exit 1/, 'e uscire rosso');
+
+  // E lo step di apply non deve piu` alzarlo da solo: due rossi per una causa
+  // sola, e uno dei due assente proprio quando serve.
+  const apply = yml.slice(yml.indexOf('Copia e apri la PR'), at);
+  const create = apply.indexOf('gh pr create');
+  assert.notEqual(create, -1, 'lo step di apply deve ancora aprire la PR');
+  assert.doesNotMatch(
+    apply.slice(create),
+    /exit "\$rc"/,
+    'dopo `gh pr create` lo step di apply non deve alzare il rosso: e` il ramo che puo` non girare',
+  );
+});
+
+test('i guard contano solo le PR di QUESTO repo, non quelle da un fork', () => {
+  // Su una PR da un fork `head.ref` non e` qualificato: chiunque puo` aprire un
+  // branch chiamato come il nostro e far contare 1 al guard, che da quel
+  // momento si spegne da solo per sempre. Un prefisso e` un nome, non un
+  // permesso.
+  for (const wf of [WORKFLOW, '.github/workflows/lessons-harvester.yml']) {
+    assert.match(
+      read(wf),
+      /select\(\.head\.repo\.full_name == env\.REPO\)/,
+      `${wf}: il guard deve qualificare il branch col repo, non fidarsi del solo nome`,
+    );
+  }
+});
+
+test('il quinto call-site della classe passa dall`helper', () => {
+  // `CF_PURGE_SETTLE_MS=-5` faceva partire `setTimeout` subito: l'attesa di
+  // propagazione del purge CDN saltava, e il chiamante andava a sondare
+  // un'edge che serviva ancora la variante vecchia. Nessun errore, da nessuna
+  // parte.
+  const src = read('scripts/cf-purge-cache.mjs');
+  assert.match(src, /parsePositiveNum\(process\.env\.CF_PURGE_SETTLE_MS/);
+  assert.doesNotMatch(src, /Number\(process\.env\.CF_PURGE_SETTLE_MS\)/);
 });

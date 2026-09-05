@@ -91,7 +91,11 @@ jobs:
           # contare 0 e aprire una copia in piu'. Un guard che non ha potuto
           # guardare non e' un guard verde.
           set -euo pipefail
-          gh api --paginate "repos/$REPO/pulls?state=open&per_page=100" --jq '.[].head.ref' > /tmp/open-prs.txt
+          # `head.repo.full_name == env.REPO`: su una PR da un FORK `head.ref` non
+          # e' qualificato, quindi chiunque puo' aprire un branch chiamato come
+          # il nostro e far contare 1 a questo guard — che poi si spegnerebbe
+          # da solo per sempre. Il prefisso e' un nome, non un permesso.
+          gh api --paginate "repos/$REPO/pulls?state=open&per_page=100" --jq '.[] | select(.head.repo.full_name == env.REPO) | .head.ref' > /tmp/open-prs.txt
           OPEN=$(grep -c '^transport/identical-twins' /tmp/open-prs.txt || true)
           echo "open_transports=$OPEN" >> "$GITHUB_OUTPUT"
           if [ "$OPEN" != "0" ]; then
@@ -134,7 +138,17 @@ jobs:
           # far fallire il dry-run salterebbe lo step di apply (l'`if:` ha un
           # `success()` implicito), cioe' un gemello bloccato per sempre
           # fermerebbe il trasporto di TUTTI finche' una persona non copia a
-          # mano. Il rosso lo alza lo step di apply, DOPO aver aperto la PR.
+          # mano.
+          #
+          # Il 2 non muore pero' qui: viene messo da parte su file e ripreso
+          # dall'ULTIMO step, che gira con `always()`. Degradarlo e basta
+          # avrebbe lasciato il rosso a carico del solo step di apply, che e'
+          # gatato su `env.GITHUB_PAT_NANAKO != ''` — e il passo che popola quel
+          # PAT e' `continue-on-error: true`. Con Remote Config muto l'apply
+          # viene SALTATO e la passata sarebbe uscita verde coi blocchi
+          # permanenti dentro `manual`: lo stesso guasto che l'item 4 chiude,
+          # rientrato dalla porta accanto.
+          echo "$rc" > "$RUNNER_TEMP/transport-rc"
           [ "$rc" = "2" ] && rc=0
           exit "$rc"
 
@@ -158,11 +172,12 @@ jobs:
           # e' stata aperta lo stesso. Ogni altro codice resta bloccante.
           rc=0
           node scripts/ci/transport-identical-twins.mjs --apply --json > /tmp/transport.json || rc=$?
+          echo "$rc" > "$RUNNER_TEMP/transport-rc"
           if [ "$rc" != "0" ] && [ "$rc" != "2" ]; then exit "$rc"; fi
           PORTED=$(node -e 'console.log(require("/tmp/transport.json").transported.length)')
           if [ "$PORTED" = "0" ]; then
             echo "Nessun gemello da portare: niente PR."
-            exit "$rc"
+            exit 0
           fi
           # Il corpo si scrive da Node su file: un heredoc dentro un blocco
           # `run:` indentato porterebbe la sua indentazione DENTRO il markdown,
@@ -229,5 +244,23 @@ jobs:
           gh pr create --base main --head "$BRANCH" \
             --title "chore(loop): trasporto di ${PORTED} gemelli \`identical\` dal sito" \
             --body-file /tmp/pr-body.md
-          # ULTIMA riga: il no permanente diventa rosso solo ora, a PR aperta.
-          exit "$rc"
+
+      # Il rosso dei blocchi permanenti vive QUI e non dentro uno dei due rami.
+      #
+      # Lo step di apply e' gatato su `env.GITHUB_PAT_NANAKO != ''`, e il passo
+      # che popola quel PAT (`Load secrets from Remote Config`) e'
+      # `continue-on-error: true`: se Remote Config non risponde, l'apply viene
+      # SALTATO. Un rosso che vivesse solo li' sparirebbe insieme allo step, e
+      # la passata schedulata uscirebbe VERDE coi gemelli bloccati per sempre
+      # dentro `manual` — cioe' esattamente il difetto che l'item 4 di #871
+      # chiude, un livello piu' in la'. Con `always()` il verdetto non dipende
+      # da quale ramo ha girato: il codice messo da parte dal dry-run vale anche
+      # quando l'apply non e' mai partito.
+      - name: No permanenti — serve una copia a mano
+        if: always() && steps.guard.outputs.open_transports == '0'
+        run: |
+          set -uo pipefail
+          rc="$(cat "$RUNNER_TEMP/transport-rc" 2>/dev/null || echo 0)"
+          [ "$rc" = "2" ] || exit 0
+          echo "::error::Gemelli \`identical\` in \`site-ahead\` bloccati per SEMPRE: nessun giro di questo canale li portera', serve una copia a mano. Le righe \`⛔\` del dry-run qui sopra dicono quali e perche'."
+          exit 1

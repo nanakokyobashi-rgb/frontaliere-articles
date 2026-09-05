@@ -75,7 +75,11 @@ jobs:
           # and opening one more duplicate. A guard that could not look is not
           # a green guard.
           set -euo pipefail
-          gh api --paginate "repos/$REPO/pulls?state=open&per_page=100" --jq '.[].head.ref' > /tmp/open-prs.txt
+          # `head.repo.full_name == env.REPO`: su una PR da un FORK `head.ref` non
+          # e' qualificato, quindi chiunque puo' aprire un branch chiamato come
+          # il nostro e far contare 1 a questo guard — che poi si spegnerebbe
+          # da solo per sempre. Il prefisso e' un nome, non un permesso.
+          gh api --paginate "repos/$REPO/pulls?state=open&per_page=100" --jq '.[] | select(.head.repo.full_name == env.REPO) | .head.ref' > /tmp/open-prs.txt
           OPEN=$(grep -c '^lessons/auto-harvest' /tmp/open-prs.txt || true)
           echo "open_proposals=$OPEN" >> "$GITHUB_OUTPUT"
           if [ "$OPEN" != "0" ]; then
