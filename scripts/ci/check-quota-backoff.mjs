@@ -54,6 +54,13 @@
  *                             ONORATO (mai scritto). Impostato solo su questo
  *                             repo → precedenza a senso unico verso il sito.
  *                             Vedi il blocco su PEER_REPO piu' sotto.
+ *   QUOTA_SLOT_MUTEX          "1" → compone anche il gate di MUTUA ESCLUSIONE
+ *                             fra issue (`check-fixer-slot.mjs`). Opt-in: dei
+ *                             sei chiamanti di questo file solo gli stadi con
+ *                             una coda serializzata (`issue-fix.yml`,
+ *                             `issue-decompose.yml`) hanno uno slot da
+ *                             difendere; uno sweep o un fixer di PR non ne
+ *                             hanno uno, e bloccarli sarebbe un'invenzione.
  *   DRY_RUN                   "1" → nessuna scrittura, output comunque emesso.
  *   GITHUB_OUTPUT             file di output dello step Actions.
  */
@@ -63,6 +70,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { isBackoffActive, maxQuotaResetsAt } from './claude-rate-limit.mjs';
+import { evaluateFixerSlot } from './check-fixer-slot.mjs';
 
 const DRY_RUN = process.env.DRY_RUN === '1';
 const ISSUE = process.env.ISSUE_NUMBER;
@@ -208,6 +216,30 @@ function activeBeaconIn(scope, nowMs, nowSec) {
 function main() {
   const nowMs = Date.now();
   const nowSec = Math.floor(nowMs / 1000);
+
+  // ── Mutua esclusione FRA issue (#974) ───────────────────────────────────
+  // Prima del beacon perché costa meno (2 `gh run list` contro 4 list + N
+  // view + il peer) ed è altrettanto decisivo: se un fixer più vecchio è già
+  // in volo, questa run non deve spendere la quota condivisa comunque, e
+  // sapere fra quanto la quota si resetta non cambierebbe la decisione.
+  //
+  // Riusa `quota_blocked` invece di un output proprio: è la stessa remediation
+  // (ri-accoda senza consumare un tentativo, salta ogni step Claude) e le
+  // sedici catene `if:` di `issue-fix.yml` sono già condizionate su di esso.
+  // Il razionale completo sta in `check-fixer-slot.mjs`.
+  if (process.env.QUOTA_SLOT_MUTEX === '1') {
+    const slot = evaluateFixerSlot({
+      issue: ISSUE,
+      dryRun: DRY_RUN,
+      repoArgs,
+      lblActive: LBL_ACTIVE,
+      lblRequeue: LBL_REQUEUE,
+    });
+    if (slot.busy) {
+      setOutput(true, '');
+      return;
+    }
+  }
 
   // Prima il beacon locale: se è già attivo la decisione è presa e interrogare
   // il peer sarebbe lavoro sprecato.

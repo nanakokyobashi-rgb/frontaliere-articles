@@ -403,7 +403,14 @@ export function verdictExitDecision(outcome, { hasPR = false, noAutoclose = fals
 //
 // Questo è lo stato assorbente lato fixer, gemello di quello del grafo di
 // recupero PR fixato in #5099: un verdetto che nessun predicato copriva.
-export const ZERO_WORK = new Set(['rate-limited']);
+// `slot-busy` (#974) è lo stesso stato per un'altra causa: il pre-flight
+// `check-fixer-slot.mjs` ha visto un fixer più vecchio già in volo sulla stessa
+// quota condivisa e ha ri-accodato PRIMA di chiamare Claude. Zero turni, zero
+// dollari, issue intatta — se finisse fuori da questo insieme, la label
+// `agent:fix` orfana ricadrebbe nel rescue «run morta» e consumerebbe un
+// tentativo per una run che non ha mai letto la issue: esattamente la catena
+// assorbente che il ramo `rate-limited` esiste per rompere.
+export const ZERO_WORK = new Set(['rate-limited', 'slot-busy']);
 
 // Esiti DELIVERED: la run è arrivata IN FONDO e ha consegnato una PR. È il
 // percorso di SUCCESSO del fixer, e fino a qui nessun predicato lo copriva.

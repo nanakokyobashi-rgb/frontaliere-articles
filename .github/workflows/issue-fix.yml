@@ -75,6 +75,10 @@ permissions:
   pull-requests: write
   issues: write
   id-token: write
+  # `gh run list` per il pre-flight di mutua esclusione fra issue (#974). Senza
+  # questo scope la chiamata dà 403 e il gate, che è PROCEED-SAFE, resta inerte
+  # in silenzio: il permesso è parte del fix, non contorno.
+  actions: read
 
 jobs:
   fix:
@@ -141,6 +145,13 @@ jobs:
           # Precedenza a senso unico: cediamo alla quota del sito, il sito non
           # cede mai alla nostra.
           QUOTA_BEACON_PEER_REPO: valerielinc-ops/frontaliere-si-o-no
+          # Mutua esclusione FRA issue diverse (#974). Da #908 la chiave di
+          # `concurrency` è per-issue — giusto, sfrattava le pending — ma con
+          # essa è sparito l'unico vincolo che teneva UN fixer alla volta sulla
+          # quota Claude condivisa col sito, e su quel vincolo poggiano la coda
+          # `agent:fix-queued` e la logica di backoff qui sopra. Il gate cede
+          # solo alle run più VECCHIE, quindi la più vecchia lavora sempre.
+          QUOTA_SLOT_MUTEX: '1'
         run: node scripts/ci/check-quota-backoff.mjs
 
       # ── Pre-flight 2: già risolta ─────────────────────────────────────────
