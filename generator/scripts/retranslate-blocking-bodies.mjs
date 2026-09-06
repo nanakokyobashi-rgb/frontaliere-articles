@@ -270,16 +270,35 @@ export const LANG_CHECK_MIN_CHARS = 50;
  */
 export function translationSanityIssue({ oldSections, newSections, italianSections, locale }) {
   for (const [f, text] of Object.entries(newSections)) {
+    // DUE confronti, non uno scelto fra i due. Il pavimento contro la
+    // pubblicata non puo' vedere un troncamento che vecchio e nuovo
+    // CONDIVIDONO, ed e' il caso piu' probabile di questo lotto, non un angolo:
+    // il body pubblicato viene gia' dal tier che taglia la sorgente a 2000
+    // caratteri, la ri-traduzione riparte dalla stessa sorgente italiana e —
+    // finche' i due tier alti sono indisponibili — ricade sullo stesso tier e
+    // esce troncata uguale. `VS_OLD` la trova della stessa lunghezza e la
+    // lascerebbe passare: si scriverebbe un body ancora mutilato dichiarandolo
+    // riparato. 322 delle 459 coppie bloccanti sono troncamento.
+    //
+    // L'italiano e' l'unico riferimento che il taglio non ha accorciato, quindi
+    // si guarda SEMPRE quando c'e'; la pubblicata resta il confronto stretto
+    // (stessa lingua, stessa sorgente) che vale solo quando esiste.
+    const itText = italianSections?.[f] || '';
+    if (itText.length >= LENGTH_FLOOR_MIN_CHARS) {
+      const ratio = text.length / itText.length;
+      if (ratio < LENGTH_FLOOR.VS_IT) {
+        return `troncata: ${f} ${text.length}/${itText.length} car. `
+          + `(${ratio.toFixed(2)} < ${LENGTH_FLOOR.VS_IT} vs italiano)`;
+      }
+    }
     const ref = oldSections?.[f] || null;
-    const refText = ref || italianSections?.[f] || '';
     // `if` e non `continue`: un campo troppo corto per il pavimento di lunghezza
     // deve comunque passare dal controllo di lingua qui sotto.
-    if (refText.length >= LENGTH_FLOOR_MIN_CHARS) {
-      const floor = ref ? LENGTH_FLOOR.VS_OLD : LENGTH_FLOOR.VS_IT;
-      const ratio = text.length / refText.length;
-      if (ratio < floor) {
-        return `troncata: ${f} ${text.length}/${refText.length} car. `
-          + `(${ratio.toFixed(2)} < ${floor} vs ${ref ? 'pubblicata' : 'italiano'})`;
+    if (ref && ref.length >= LENGTH_FLOOR_MIN_CHARS) {
+      const ratio = text.length / ref.length;
+      if (ratio < LENGTH_FLOOR.VS_OLD) {
+        return `troncata: ${f} ${text.length}/${ref.length} car. `
+          + `(${ratio.toFixed(2)} < ${LENGTH_FLOOR.VS_OLD} vs pubblicata)`;
       }
     }
     // PER CAMPO, come il pavimento di lunghezza accanto, e non sui tre campi

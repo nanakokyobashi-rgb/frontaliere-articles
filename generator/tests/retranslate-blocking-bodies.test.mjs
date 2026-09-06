@@ -36,6 +36,8 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
+import fs from 'node:fs';
+import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import {
   shouldWrite,
@@ -323,4 +325,64 @@ test('wrongLocalePair salta le coppie sotto la soglia di segnale', () => {
   // Stessa soglia di 50 caratteri di `isWrongLocale()`: sotto, il rilevatore
   // non ha segnale e un rifiuto sarebbe rumore.
   assert.equal(wrongLocalePair([{ q: 'Quando?', a: 'Nel 2026.' }], 'en'), null);
+});
+
+test('translationSanityIssue rifiuta il troncamento CONDIVISO fra vecchio e nuovo', () => {
+  // Il caso piu' probabile di questo lotto, e quello che il solo `VS_OLD` non
+  // poteva vedere: il body pubblicato viene gia' dal tier che taglia la
+  // sorgente a 2000 caratteri, la ri-traduzione riparte dalla stessa sorgente
+  // italiana, ricade sullo stesso tier e esce troncata UGUALE. Rapporto
+  // nuovo/pubblicata ~1,0: con `VS_OLD` da solo passerebbe, e si scriverebbe un
+  // body ancora mutilato dichiarandolo riparato.
+  const IT_HUGE = IT_LONG.repeat(4);              // sorgente intera
+  const CUT = EN_LONG.slice(0, Math.floor(IT_HUGE.length * 0.25)); // ~1/4: entrambe tagliate
+  const r = translationSanityIssue({
+    oldSections: { body1: CUT },
+    newSections: { body1: CUT },
+    italianSections: { body1: IT_HUGE },
+    locale: 'en',
+  });
+  assert.ok(r, 'un troncamento condiviso deve essere rifiutato');
+  assert.match(r, /^troncata: body1 .* vs italiano\)$/);
+
+  // Falsificazione: la stessa coppia con la ri-traduzione INTERA passa, quindi
+  // il confronto con l'italiano non sta semplicemente rifiutando tutto.
+  assert.equal(translationSanityIssue({
+    oldSections: { body1: CUT },
+    newSections: { body1: EN_LONG.repeat(4) },
+    italianSections: { body1: IT_HUGE },
+    locale: 'en',
+  }), null);
+});
+
+test('il rilevatore di locale FAQ e per coppia in ENTRAMBI i punti che decidono', () => {
+  // By-construction, come corpus-write-atomic: il difetto non era il predicato,
+  // era il CALL-SITE. Un `wrongLocalePair` perfetto non serve a niente se chi
+  // sceglie cosa riparare, o chi scrive, guarda ancora il testo concatenato.
+  const root = path.resolve(import.meta.dirname, '..', '..');
+  for (const rel of ['generator/scripts/fix-faq-locales.mjs',
+    'generator/scripts/batch-add-faq-to-articles.mjs']) {
+    const src = fs.readFileSync(path.join(root, rel), 'utf-8');
+    // La forma del difetto: un predicato che concatena le coppie e poi rileva.
+    assert.doesNotMatch(
+      src,
+      /function isWrongLocale\s*\(/,
+      `${rel}: la versione sul testo concatenato e' tornata. Diluisce la coppia `
+      + 'sbagliata nella media delle altre: usa wrongLocalePair().',
+    );
+    assert.match(src, /wrongLocalePair\(/, `${rel}: deve usare il predicato per coppia`);
+  }
+  // E la guardia del batch sta nella funzione CONDIVISA, non su un call-site.
+  // `insertFaqIntoBodyFile(localePath, ...)` compare a quattro punti diversi
+  // (generazione, top-up, traduzione): gattarne uno lascia gli altri tre a
+  // pubblicare l'italiano. `translateFaq()` e' l'unico punto da cui esce una
+  // FAQ tradotta, quindi il rifiuto vale per tutti e tre i chiamanti.
+  const batch = fs.readFileSync(path.join(root, 'generator/scripts/batch-add-faq-to-articles.mjs'), 'utf-8');
+  const fn = batch.slice(batch.indexOf('async function translateFaq('),
+    batch.indexOf('function validateFaq('));
+  assert.ok(fn.length > 0, 'translateFaq non trovata');
+  assert.match(fn, /wrongLocalePair\(results, targetLang\)/,
+    'translateFaq deve rifiutare un array che contiene una coppia nella lingua sbagliata');
+  assert.match(fn, /return null;/,
+    'il rifiuto deve rendere `null`, che i tre chiamanti gia\' sanno gestire');
 });

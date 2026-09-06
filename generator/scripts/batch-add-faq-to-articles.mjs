@@ -34,7 +34,7 @@ import { reportStrippedControlChars } from './lib/control-char-write-report.mjs'
 import { callLLM, callSingleModel, AI_MODELS, initScoreStore, getStats, flushScores, resetExhaustedModel, printRunSummary } from './lib/ai-models.mjs';
 import { freeTranslateWithRetry, logCascadeSummary } from './lib/free-translate.mjs';
 import { stripCodeFences, findMatchingClose, fixJsonStringBody, JSON_QUOTE_SAFETY_RULE_IT, describeJsonParseError, describeRawForDiagnostics } from './lib/llm-json-repair.mjs';
-import { detectLanguage } from './lib/detect-language.mjs';
+import { wrongLocalePair } from './fix-faq-locales.mjs';
 import { unescapeTsString } from './lib/unescape-ts-string.mjs';
 
 // ── CLI argument parsing ─────────────────────────────────────
@@ -482,13 +482,16 @@ export function extractBodyContent(fileContent, articleId) {
   return bodies.join('\n\n');
 }
 
-/** Check if FAQ text is in the wrong locale (same logic as job crawlers) */
-function isWrongLocale(faqArray, expectedLocale) {
-  const allText = faqArray.map(p => `${p.q} ${p.a}`).join(' ');
-  if (allText.length < 50) return false;
-  const detected = detectLanguage(allText, expectedLocale);
-  return detected !== expectedLocale;
-}
+// La copia privata di `isWrongLocale()` — sul testo CONCATENATO — e' stata
+// tolta, non lasciata accanto: era il difetto, non un doppione innocuo.
+// `translateFaqArray()` traduce una coppia alla volta e sul fallimento del
+// motore rimette dentro quella ITALIANA come fallback (`results.push(pair)`),
+// quindi il fallimento tipico e' PARZIALE. Sulla concatenazione una coppia
+// italiana su otto e' un ottavo del campione: il rilevatore vede il resto in
+// inglese, risponde `en`, e l'italiano finisce pubblicato sulla pagina /en/
+// dentro il JSON-LD della FAQ. Il predicato per coppia vive in
+// `fix-faq-locales.mjs`, che ha la guardia su `main()` ed e' quindi importabile
+// senza eseguire nulla.
 
 /**
  * Il LETTORE simmetrico allo scrittore di questo file (issue #394).
@@ -628,7 +631,7 @@ function discoverArticles() {
         missingLocales.push(locale);
       } else {
         const localeFaq = extractFaqFromContent(locContent, articleId);
-        if (localeFaq && isWrongLocale(localeFaq, locale)) {
+        if (localeFaq && wrongLocalePair(localeFaq, locale)) {
           missingLocales.push(locale);
         }
       }
@@ -905,7 +908,25 @@ async function translateFaq(faqArray, targetLang) {
       results.push(pair); // Keep Italian pair as fallback
     }
   }
-  return results.length > 0 ? results : null;
+  if (!results.length) return null;
+  // Il fallback qui sopra e' per COPPIA, quindi questo array puo' uscire
+  // mezzo tradotto e mezzo italiano — e ognuno dei tre chiamanti lo scrive
+  // (`processGeneration`, `processTopUp`, `processTranslation`). La guardia sta
+  // qui e non ai tre call-site perche' e' l'unico punto da cui esce una FAQ
+  // tradotta: gattarne uno solo lascerebbe gli altri due a pubblicare
+  // l'italiano dentro il JSON-LD di una pagina /en/, ed e' un ramo che gira
+  // ogni giorno (`batch-faq-articles.yml`, `cron: '30 0 * * *'`).
+  //
+  // `null` e' gia' il valore che i tre chiamanti sanno gestire: registrano il
+  // fallimento e ricadono sul loro comportamento dichiarato. Restituire mezzo
+  // italiano spacciandolo per una traduzione, invece, non lo sapeva nessuno.
+  const wrong = wrongLocalePair(results, targetLang);
+  if (wrong) {
+    console.error(`   ⚠️  translateFaq ${targetLang}: coppia ${wrong.index} rilevata come `
+      + `${wrong.detected} (fallback italiano per-coppia) — scarto l'intera traduzione`);
+    return null;
+  }
+  return results;
 }
 
 /** Validate FAQ array: min 1 pair, q>10 chars, a>20 chars */
@@ -1234,6 +1255,10 @@ async function processTranslation(articleId, file, itFaq, missingLocales) {
     try {
       const translated = await translateFaq(itFaq, locale);
       if (translated) {
+        // Nessun controllo di lingua qui: `translateFaq()` non restituisce piu'
+        // un array con dentro una coppia italiana — rende `null`, che il ramo
+        // `else` qui sotto registra. La guardia sta nella funzione condivisa
+        // perche' i chiamanti che scrivono FAQ tradotte sono tre.
         insertFaqIntoBodyFile(localePath, articleId, translated);
         console.error(`${label} ✅ ${locale.toUpperCase()} (${translated.length} pairs)`);
         fixed++;

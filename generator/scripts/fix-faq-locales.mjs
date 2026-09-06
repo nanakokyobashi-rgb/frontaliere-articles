@@ -247,12 +247,10 @@ function insertFaqKey(filePath, articleId, faqArray) {
 
 // ── Language detection (same as job crawlers) ───────────────
 
-function isWrongLocale(faqArray, expectedLocale) {
-  const allText = faqArray.map(p => `${p.q} ${p.a}`).join(' ');
-  if (allText.length < 50) return false; // too short to detect
-  const detected = detectLanguage(allText, expectedLocale);
-  return detected !== expectedLocale;
-}
+// `isWrongLocale()` — la versione sul testo CONCATENATO — e' stata tolta invece
+// che lasciata accanto inutilizzata. Non e' pulizia: era il difetto. Diluiva la
+// coppia sbagliata nella media delle altre, e finche' restava qui il prossimo
+// call-site l'avrebbe ripresa perche' ha il nome piu' ovvio dei due.
 
 /**
  * La stessa domanda, ma per COPPIA — ed e' quella che serve prima di scrivere.
@@ -385,7 +383,12 @@ async function main() {
         issues.push({ articleId, file, locale, reason: 'missing', itFaq });
       } else {
         const localeFaq = extractFaqFromFile(localePath);
-        if (localeFaq && isWrongLocale(localeFaq, locale)) {
+        // Per COPPIA anche qui, e non solo nel gate di scrittura: questo e' il
+        // punto che decide COSA riparare. Col testo concatenato un articolo
+        // /en/ con una coppia italiana su otto non veniva nemmeno SELEZIONATO —
+        // il rilevatore vedeva il resto in inglese e rispondeva `en` — quindi
+        // il gate di scrittura, per stretto che fosse, non lo vedeva mai.
+        if (localeFaq && wrongLocalePair(localeFaq, locale)) {
           issues.push({ articleId, file, locale, reason: 'wrong_locale', itFaq });
         }
       }
