@@ -207,13 +207,22 @@ const diskIo = {
   },
 };
 
+/**
+ * Ha già il marker del flag? `null` = «non lo so» (lettura fallita), MAI `false`.
+ *
+ * Stessa classe dell'item 1 di #923 sul pre-pass: una lettura dei commenti che
+ * fallisce non è «mai commentata». Letta così, il flag di tier-1 si ri-posta a
+ * ogni giro in cui l'API inciampa (il `close` di tier-2 chiede `hasPriorFlag`,
+ * quindi si allontana di un giro) — e il duplicato è indistinguibile da una
+ * prima segnalazione. Chi chiama tratta `null` come «non agire».
+ */
 function alreadyCommented(number) {
   const out = gh(['issue', 'view', String(number), ...repoArgs, '--json', 'comments'], { allowFail: true });
-  if (!out) return false;
+  if (!out) return null;
   try {
     return JSON.parse(out).comments.some((c) => (c.body || '').includes(MARKER));
   } catch {
-    return false;
+    return null;
   }
 }
 
@@ -268,6 +277,10 @@ function main() {
     const blocked = labelNames.some((n) => KEEP_OPEN_LABELS.has(n));
     const isAggregate = isAggregateTitle(iss.title, iss.body || '');
     const hasPriorFlag = alreadyCommented(iss.number);
+    if (hasPriorFlag === null) {
+      console.log(`::warning::reconcile-followups: #${iss.number} commenti non leggibili → saltata, nessuna azione su un input mancante (un giro di ritardo, non un commento duplicato).`);
+      continue;
+    }
     const strongEvidence = isStrongAutoCloseEvidence(evidence.map((e) => e.tok));
     const action = decideReconcileAction({
       resolved, hasMaybeResolved, hasPriorFlag, isAggregate, blocked, noAutoclose: NO_AUTOCLOSE, strongEvidence,
