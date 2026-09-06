@@ -355,3 +355,74 @@ describe('roster — nessun modello ritirato, nessun buco', () => {
     assert.deepEqual(dup, [], `DEFAULT_CHAIN ha duplicati: ${JSON.stringify(dup)}`);
   });
 });
+
+/**
+ * ── UNA VOCE SOLA CHE PARLA DUE VOCABOLARI (#976 item 1) ───────────────────
+ *
+ * La riga a testo libero di `errors` e' `${model}: ${msg}` — il messaggio del
+ * provider ripassato tale e quale — e quel messaggio porta con se' la propria
+ * coda. Da quando le voci spezzate da un ` | ` interno vengono ricucite (#969),
+ * `m: 401 Unauthorized | upstream temporarily unavailable` non e' piu' UN
+ * frammento persistente piu' UN frammento transitorio: e' UNA voce che matcha
+ * entrambe le regex. Chi vinceva era l'ordine dei due `test()`, non il testo.
+ *
+ * La direzione che questi casi misurano e' quella che costa: un 401 — chiave
+ * stale, non si ripara da solo — che esce «transitorio» vota per il differimento
+ * verde, cioe' la run senza articolo e senza allarme di #313.
+ */
+describe('classifyExhaustionCause — quando una voce contiene DUE cause (#976)', () => {
+  it('un 401 con coda transitoria del provider resta persistente', () => {
+    const b = classifyExhaustionCause(['gh/gpt-4o: 401 Unauthorized | upstream temporarily unavailable']);
+    assert.equal(b.total, 1, 'una voce ricucita e\' una voce, non due');
+    assert.equal(b.persistent, 1, 'la causa primaria e\' il 401, la coda e\' chiacchiera del provider');
+    assert.equal(b.transient, 0);
+  });
+
+  it('ma la polarita\' NON e\' stata invertita: un 429 con coda persistente resta transitorio', () => {
+    // La forma letterale di OpenAI: `insufficient_quota` matcha `insufficient`
+    // in persistentRe. Dare il secchio al persistente «per sicurezza» avrebbe
+    // ribaltato ogni notte di quota vera in un Workflow Failure.
+    const b = classifyExhaustionCause([
+      'oa/gpt-4o-mini: 429 Too Many Requests: insufficient_quota — check your plan and billing',
+    ]);
+    assert.equal(b.transient, 1, 'il 429 viene prima: e\' quella la causa');
+    assert.equal(b.persistent, 0);
+  });
+
+  it('vince la causa che compare prima, non un secchio prestabilito', () => {
+    const primaPersistente = classifyExhaustionCause(['m: no API key for provider x | 503 from edge']);
+    assert.equal(primaPersistente.persistent, 1);
+    const primaTransitoria = classifyExhaustionCause(['m: 503 Service Unavailable | model deprecated']);
+    assert.equal(primaTransitoria.transient, 1);
+  });
+
+  it('lo stesso ordine decide il secchio dell\'eco di cooldown', () => {
+    // `providerCooldownSkips` si ripartisce con la STESSA coppia di predicati:
+    // se la voce e' persistente, l'eco va tolto dal solo denominatore. Una
+    // ripartizione discorde da `transient`/`persistent` produce share > 1.
+    const b = classifyExhaustionCause([
+      'gh/m1: skipped — provider github unreachable (ECONNREFUSED), non-retryable | edge says 503',
+    ]);
+    assert.equal(b.persistent, 1);
+    assert.deepEqual(b.providerCooldownSkips, { total: 1, transient: 0, persistent: 1 });
+  });
+
+  it('la ricucitura non sposta piu\' il verdetto di una cascata reale', () => {
+    // Tre chiavi stale su un provider che aggiunge la sua coda («temporarily
+    // unavailable»), due esaurimenti di quota veri. Col transitorio a vittoria
+    // incondizionata erano 5 voti transitori su 5 → differimento verde; con la
+    // causa primaria sono 2 contro 3 → la maggioranza e' persistente e l'allarme
+    // resta acceso.
+    const stale = Array.from({ length: 3 }, (_, i) =>
+      `gh/m${i}: 401 Unauthorized | upstream temporarily unavailable, retry later`);
+    const quota = Array.from({ length: 2 }, (_, i) =>
+      `q${i}: skipped — exhausted (daily limit / consecutive 429s)`);
+    const b = classifyExhaustionCause([...stale, ...quota]);
+    assert.equal(b.transient, 2, `secchi: ${JSON.stringify(b)}`);
+    assert.equal(b.persistent, 3, `secchi: ${JSON.stringify(b)}`);
+    assert.equal(
+      isTransientMajority(b, { tie: 'transient' }), false,
+      'la cascata non deve piu\' differire su tre chiavi stale',
+    );
+  });
+});

@@ -320,3 +320,89 @@ test('un log senza cascate non produce voci (lo zero e\' vero, non vacuo)', () =
   assert.deepEqual(parseAggregateExhaustion('run pulita, nessun esaurimento'), []);
   assert.deepEqual(parseAggregateExhaustion(undefined), []);
 });
+
+test('un id di catena citato nel CORPO di un errore non diventa una voce fantasma (#976 item 2)', () => {
+  // I router rimandano l'id del modello dentro il messaggio: `omniroute/a`
+  // fallisce e la sua spiegazione nomina `openrouter/x`, che e' davvero in
+  // catena. Con la sola ancora «comincia con un modello della catena» quel
+  // frammento apriva una voce nuova — un `total` gonfio dentro la misura, cioe'
+  // il difetto che il parser esiste per evitare. L'ordine lo esclude:
+  // `openrouter/x` ha gia' avuto la sua voce, non puo' averne una seconda.
+  const msg = 'All AI models failed. Chain: [openrouter/x → omniroute/a]. Errors: '
+    + 'openrouter/x: 429 rate limit reached'
+    + ' | omniroute/a: routing failed | openrouter/x: unavailable';
+  const [c] = parseAggregateExhaustion(msg);
+  assert.equal(c.errors.length, 2, 'due modelli in catena, due voci: non tre');
+  assert.equal(c.errors[1], 'omniroute/a: routing failed | openrouter/x: unavailable',
+    'la citazione resta dentro la voce che l\'ha prodotta');
+  assert.equal(deferralVerdicts(c).breakdown.total, 2, 'il totale non e\' gonfio');
+});
+
+test('RESIDUO DICHIARATO: un id citato che viene DOPO in catena resta indistinguibile (#976 item 2)', () => {
+  // Cio' che l'ancoraggio NON chiude, misurato invece che lasciato implicito.
+  // Se il corpo cita un modello che la catena non ha ancora raggiunto, il testo
+  // e' identico a quello di una voce vera e nessuna regola locale puo'
+  // separarli. Chiuderlo richiederebbe di assumere che le voci coprano la
+  // catena senza buchi: vero oggi, ma un `continue` futuro senza push
+  // collasserebbe voci VERE — un guasto peggiore del fantasma.
+  const [c] = parseAggregateExhaustion(
+    'All AI models failed. Chain: [omniroute/a → openrouter/x]. Errors: '
+    + 'omniroute/a: routing failed | openrouter/x: unavailable',
+  );
+  assert.equal(c.errors.length, 2, 'il fantasma sopravvive in questa direzione: e\' il residuo noto');
+});
+
+test('la ricucitura non dipende dalla contiguita\' della catena', () => {
+  // Un modello puo' non lasciare voce (oggi non succede, ma il parser non deve
+  // esigerlo): la voce successiva va comunque riconosciuta, e la sua coda
+  // ricucita.
+  const [c] = parseAggregateExhaustion(
+    'All AI models failed. Chain: [a → b → c]. Errors: '
+    + 'a: 429 | c: boom | dettagli: x',
+  );
+  assert.deepEqual(c.errors, ['a: 429', 'c: boom | dettagli: x']);
+});
+
+/**
+ * ── IL TAGLIO A 200 CARATTERI NON PUO' CADERE DENTRO IL SEPARATORE (#976 item 3)
+ *
+ * Chiude il giro: il messaggio lo produce `callLLM` davvero, non una fixture.
+ * Il messaggio del provider contiene un ` | ` esattamente a cavallo del
+ * 200esimo carattere, cioe' la forma degenere che nessuna fixture aveva mai
+ * esercitato — la voce finiva con una pipe orfana, il join produceva ` | | ` e
+ * quel carattere restava dentro la stringa che `classifyExhaustionCause`
+ * classifica.
+ */
+test('una voce troncata non lascia un separatore degenere nel messaggio aggregato (#976 item 3)', async () => {
+  const { callLLM, resetState } = await import('../scripts/lib/ai-models.mjs');
+  const ENV_KEYS = ['AI_MODELS_FORCE_CHAIN', 'GH_MODELS_PAT', 'AI_MODELS_PREFER'];
+  const envBackup = Object.fromEntries(ENV_KEYS.map((k) => [k, process.env[k]]));
+  const realFetch = globalThis.fetch;
+  // 198 caratteri, poi ` | `: il taglio a 200 cade fra lo spazio e la pipe.
+  const provider = `${'A'.repeat(198)} | coda che il taglio non vedra' mai`;
+  try {
+    for (const k of ENV_KEYS) delete process.env[k];
+    process.env.GH_MODELS_PAT = 'test-pat';
+    process.env.AI_MODELS_FORCE_CHAIN = 'gpt-4o-mini,gpt-4.1-mini';
+    globalThis.fetch = async () => { throw new Error(provider); };
+    resetState();
+
+    const err = await callLLM([{ role: 'user', content: 'x' }], { maxRetriesPerModel: 1, backoffMs: 1, timeout: 5000 })
+      .then(() => null, (e) => e);
+    assert.ok(err, 'la catena deve fallire');
+    assert.doesNotMatch(err.message, / \| \| | \|  \| /,
+      `separatore degenere nel messaggio: ${err.message}`);
+
+    // E il conto regge: due modelli in catena, due voci — non tre.
+    const [c] = parseAggregateExhaustion(`All AI models failed. ${err.message.split('All AI models failed. ')[1]}`);
+    assert.equal(c.errors.length, 2, `voci ricostruite: ${JSON.stringify(c.errors)}`);
+    assert.equal(deferralVerdicts(c).breakdown.total, 2);
+  } finally {
+    globalThis.fetch = realFetch;
+    for (const k of ENV_KEYS) {
+      if (envBackup[k] === undefined) delete process.env[k];
+      else process.env[k] = envBackup[k];
+    }
+    resetState();
+  }
+});
