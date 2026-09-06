@@ -873,3 +873,22 @@ test('#923: la famiglia owner-only ha una nota, quindi ha un marker da verificar
   assert.ok(d.marker, 'la nota owner-only porta un marker');
   assert.equal(noteGate({ marker: d.marker, comments: [], commentsRead: false }).post, false);
 });
+
+test('#972 (gemello): l\'instradamento passa prima della nota, un effetto per chiamata', async () => {
+  // Stessa classe di `handoff-to-site.mjs`: la nota — cosmetica — viaggiava
+  // prima della transizione di label, e le tre label stavano in UN solo
+  // `gh issue edit`. Una label non risolvibile faceva cadere anche
+  // l'instradamento, lasciando la nota pubblicata e la issue ancora
+  // `needs-human`: al giro dopo veniva ri-selezionata e ri-notata, e il marker
+  // in coda alla nota conta le OSCILLAZIONI — un fallimento di scrittura si
+  // travestiva da issue che oscilla.
+  const fs = await import('node:fs');
+  const src = fs.readFileSync(new URL('../../scripts/ci/needs-human-prepass.mjs', import.meta.url), 'utf8');
+  const block = src.slice(src.indexOf('const steps = ['), src.indexOf('const steps = [') + 900);
+  assert.ok(block.indexOf("'--add-label'") < block.indexOf("'issue', 'comment'"),
+    'la label che toglie la issue dal parcheggio e\' l\'effetto che conta: va per prima');
+  for (const argv of src.match(/\[[^[\]]*'--(?:add|remove)-label'[^[\]]*\]/g) || []) {
+    const flags = argv.match(/'--(?:add|remove)-label'/g) || [];
+    assert.equal(flags.length, 1, `un solo effetto per chiamata, non ${flags.join('+')} in ${argv}`);
+  }
+});
