@@ -177,21 +177,34 @@ export function parseReopenBudget(body) {
  *   che salta di nuovo sullo stesso fingerprint del contributo, e il gate
  *   fallisce identico. Qui serve solo a scrivere all'operatore la cosa vera —
  *   che il close+reopen non ri-esegue la review.
+ *   `reviewAborted` — su quel rosso la review è PARTITA ed è MORTA senza
+ *   postare (max_turns, `outcome=failure`, 5xx): il gate è rosso come
+ *   conseguenza, non per un verdetto negativo. Il chiamante lo passa
+ *   (`reviewAbortedWithoutVerdict` in vitestCheck). Il one-shot si concede —
+ *   il re-trigger è la cura — ma l'operatore va mandato a leggere la review
+ *   morta, non a cercare un `🔴 Important` che non è mai stato scritto.
  * @returns {{action:'skip-failing-check'|'skip-breaker'|'reopen',
  *            count:number, reason:string, cause:string}}
  *   'skip-failing-check' = un check richiesto è FAILURE: il reopen non può
  *                          ripararlo → non si tocca la PR.
  *   'skip-breaker'       = budget esaurito sullo STESSO stato → si smette.
  *   'reopen'             = riciclo legittimo; `count` è il tentativo in corso.
- *   `cause` ∈ `'tests'|'review-gate'|'review-gate-skipped'|''` — di chi è il
- *   rosso, per il messaggio. `review-gate-skipped` è il review gate su cui la
- *   review non è nemmeno girata (guard), e vuole un'istruzione diversa.
+ *   `cause` ∈ `'tests'|'review-gate'|'review-gate-skipped'|'review-gate-aborted'|''`
+ *   — di chi è il rosso, per il messaggio. `review-gate-skipped` è il review
+ *   gate su cui la review non è nemmeno girata (guard) e
+ *   `review-gate-aborted` quello su cui è girata ed è morta a metà: tre rossi
+ *   che si chiamano uguali e vogliono tre istruzioni diverse.
  */
 export function decideReopen({
   vitestConclusion, fingerprint, prior, max = DEFAULT_MAX_REOPENS,
   failureNotAttributable = '', reviewGateFailure = false,
-  reviewSkippedByGuard = false,
+  reviewSkippedByGuard = false, reviewAborted = false,
 }) {
+  // Un solo posto in cui i tre rossi omonimi diventano un'etichetta: se questa
+  // scelta si duplicasse fra i rami, un ramo resterebbe indietro in silenzio.
+  const gateCause = reviewSkippedByGuard
+    ? 'review-gate-skipped'
+    : reviewAborted ? 'review-gate-aborted' : 'review-gate';
   const carried = prior && prior.fingerprint === fingerprint ? prior.count : 0;
 
   // (1) PRECONDIZIONE — prima di tutto il resto, e senza consumare budget: una
@@ -216,9 +229,7 @@ export function decideReopen({
     return {
       action: 'skip-failing-check',
       count: carried,
-      cause: reviewGateFailure
-        ? (reviewSkippedByGuard ? 'review-gate-skipped' : 'review-gate')
-        : 'tests',
+      cause: reviewGateFailure ? gateCause : 'tests',
       reason: reviewGateFailure && reviewSkippedByGuard
         ? `il check richiesto \`${VITEST_CHECK_NAME}\` è FAILURE sul solo step del `
           + `review gate, ma su quella run la review NON è girata: l'ha saltata il `
@@ -226,6 +237,12 @@ export function decideReopen({
           + `gate è fallito sui verdetti già postati. Un re-trigger ri-esegue il `
           + `guard, che salta di nuovo sullo stesso contributo, e il gate fallisce `
           + `identico: il one-shot non si spende qui.`
+        : reviewGateFailure && reviewAborted
+        ? `il check richiesto \`${VITEST_CHECK_NAME}\` è FAILURE sul review gate, ma i `
+          + `test sono verdi: su quella run la review è PARTITA ed è MORTA senza postare `
+          + `(budget di turni esaurito, action fallita o 5xx), quindi il gate non ha `
+          + `trovato nessun \`## LGTM\` da leggere. Il re-trigger one-shot è già stato `
+          + `speso su questo stato: serve una review nuova — a mano, o dopo un commit.`
         : reviewGateFailure
         ? `il check richiesto \`${VITEST_CHECK_NAME}\` è FAILURE, ma i test sono `
           + `verdi: a fallire è lo step del review gate — sulla HEAD manca un `
@@ -246,9 +263,7 @@ export function decideReopen({
     return {
       action: 'skip-breaker',
       count: carried,
-      cause: reviewGateFailure
-        ? (reviewSkippedByGuard ? 'review-gate-skipped' : 'review-gate')
-        : '',
+      cause: reviewGateFailure ? gateCause : '',
       reason: `${carried} riaperture su uno stato identico (impronta \`${fingerprint}\`) `
         + `non hanno cambiato nulla: il re-trigger non è la cura. Breaker aperto.`,
     };
@@ -258,11 +273,16 @@ export function decideReopen({
     return {
       action: 'reopen',
       count: carried + 1,
-      cause: 'review-gate',
-      reason: `riciclo legittimo (tentativo ${carried + 1}/${max}): il rosso di `
-        + `\`${VITEST_CHECK_NAME}\` è il review gate, non i test — la review è già `
-        + `girata e il verdetto manca o è negativo, quindi il re-trigger è proprio `
-        + `ciò che ne produce uno nuovo.`,
+      cause: gateCause,
+      reason: reviewAborted
+        ? `riciclo legittimo (tentativo ${carried + 1}/${max}): il rosso di `
+          + `\`${VITEST_CHECK_NAME}\` è il review gate, non i test — la review è morta `
+          + `senza postare un verdetto, e il re-trigger è l'unica cosa che gliene fa `
+          + `produrre uno.`
+        : `riciclo legittimo (tentativo ${carried + 1}/${max}): il rosso di `
+          + `\`${VITEST_CHECK_NAME}\` è il review gate, non i test — la review è già `
+          + `girata e il verdetto manca o è negativo, quindi il re-trigger è proprio `
+          + `ciò che ne produce uno nuovo.`,
     };
   }
   return {
@@ -359,7 +379,12 @@ export function renderReopenBudget({
         // close+reopen manuale NON ri-triggera la review, il guard la salta di
         // nuovo sullo stesso contributo. Promettere quell'effetto manderebbe
         // l'operatore a rifare un no-op.
-        ? cause === 'review-gate-skipped'
+        ? cause === 'review-gate-aborted'
+          ? `Cosa serve per sbloccarla: **una review Claude che arrivi in fondo** — le `
+            + `ultime sono morte prima di postare (turni esauriti, action fallita o 5xx), `
+            + `quindi non c'è nessun \`🔴 Important\` da chiudere. Rilancia il run di `
+            + `\`tests\` più recente; se la morte per turni si ripete, splitta la PR.`
+        : cause === 'review-gate-skipped'
           ? `Cosa serve per sbloccarla: **un commit che cambi il codice del contributo** — `
             + `è l'unica cosa che rimette in moto la review. Un close+reopen manuale non `
             + `basta: il \`Re-review guard\` salta Claude finché il contributo è invariato `
@@ -386,6 +411,13 @@ export function renderReopenBudget({
             + `già postati — un \`🔴 Important\` ancora aperto, o nessun \`## LGTM\`. `
             + `Un close+reopen **non** ri-esegue la review: il \`Re-review guard\` salta Claude `
             + `finché il contributo è invariato dall'ultima \`## LGTM\`.`
+        : cause === 'review-gate-aborted'
+          ? `Cosa serve per sbloccarla: **una review Claude che arrivi in fondo**. `
+            + `I test sono verdi: il rosso di \`${VITEST_CHECK_NAME}\` è il review gate, `
+            + `che non ha trovato nessun \`## LGTM\` perché la review è morta prima di `
+            + `postare (turni esauriti, action fallita o 5xx). Non c'è nessun `
+            + `\`🔴 Important\` da chiudere: rilancia il run di \`tests\` più recente, `
+            + `o — se la morte per turni si ripete — splitta la PR.`
         : cause === 'review-gate'
           ? `Cosa serve per sbloccarla: **una review Claude approvante sulla HEAD** — `
             + `\`## LGTM\` senza finding 🔴 Important. I test sono verdi: il rosso di `
