@@ -16366,6 +16366,45 @@ if (invokedDirectly) {
     console.error(`::error::no-article-undeclared-exit: status=${RUN_REPORT?.status ?? 'unfinalized'}`);
     await exitAfterFlush(1);
   }).catch(async (e) => {
+  // ── IL CAMPIONE SI PRENDE PRIMA DEI RAMI, NON DENTRO UNO DI ESSI (#924) ────
+  //
+  // #804 / #832 / #787 — il campione, preso qui e non dedotto dal log.
+  // `breakdown` e' il GREZZO su cui i predicati decidono qui sotto: da esso ogni
+  // ricalibrazione futura si rigioca offline con le funzioni esportate di
+  // lib/exhaustion-disposition.mjs, senza una seconda strumentazione.
+  //
+  // PERCHE' STA SOPRA I RAMI E NON DENTRO QUELLO DI DIFFERIMENTO. Registrarlo
+  // dentro `if (isQuotaExhaustedError(e))`, cioe' SOTTO il veto, lo rendeva
+  // cieco esattamente sulla popolazione per cui la card esiste:
+  // `isInputCapDeferralVeto` esce con `exitAfterFlush(EXIT_ROSTER_CANNOT_SERVE_PROMPT)`
+  // e si accende quando il netto NON e' in maggioranza transitoria — cioe' sul
+  // PAREGGIO, che e' il campione su cui la soglia `>` contro `>=` di #832
+  // item 2 decide qualcosa (53/53, le dieci ore di verde). Il riepilogo
+  // rispondeva «zero cascate con echi» su finestre che quei campioni li
+  // contenevano: lo zero muto che la card esiste per togliere, spostato di un
+  // livello.
+  //
+  // I due verdetti si registrano SEPARATI perche' sono due domande diverse:
+  // `verdict` e' il voto del predicato di differimento, `inputCapVeto` dice se
+  // un ramo piu' in alto ha applicato un esito diverso da quel voto. Senza il
+  // secondo, una cascata vetata comparirebbe nel campione con un `verdict` che
+  // la run non ha mai applicato.
+  //
+  // Il try/catch e' la stessa regola di `writeRunCard`: una sonda diagnostica
+  // non puo' diventare la causa di un esito perso, e questo e' il percorso
+  // d'errore.
+  if (isQuotaExhaustedError(e) && RUN_REPORT?.rareEvents) {
+    try {
+      RUN_REPORT.rareEvents.quotaDeferral = {
+        breakdown: (e && typeof e.exhaustionBreakdown === 'object' && e.exhaustionBreakdown) || null,
+        share: quotaDeferralShare(e),
+        verdict: isLegitimateQuotaDeferral(e),
+        inputCapVeto: isInputCapDeferralVeto(e),
+      };
+    } catch (probeErr) {
+      console.error(`  ⚠️  Campione di deferral non registrato: ${probeErr.message}`);
+    }
+  }
   // Transient free-model pool exhaustion (every model in the fallback chain hit
   // its daily quota / rate limit) is NOT a code bug — free-tier daily limits
   // reset at 00:00 UTC, so the next scheduled run normally succeeds. Treat it as
@@ -16442,18 +16481,9 @@ if (invokedDirectly) {
   if (isQuotaExhaustedError(e)) {
     const share = quotaDeferralShare(e);
     const pct = (share.share * 100).toFixed(1);
-    // #804 / #832 / #787 — il campione, preso qui e non dedotto dal log.
-    // `breakdown` e' il GREZZO su cui il predicato ha appena deciso: da esso
-    // ogni ricalibrazione futura si rigioca offline con le funzioni esportate
-    // di lib/exhaustion-disposition.mjs. `verdict` e' quello che la run ha
-    // davvero applicato, cosi' un flip si conta senza doverlo indovinare.
-    if (RUN_REPORT?.rareEvents) {
-      RUN_REPORT.rareEvents.quotaDeferral = {
-        breakdown: (e && typeof e.exhaustionBreakdown === 'object' && e.exhaustionBreakdown) || null,
-        share,
-        verdict: isLegitimateQuotaDeferral(e),
-      };
-    }
+    // Il campione della cascata e' gia' stato registrato in testa al catch,
+    // sopra il veto — vedi il commento li': dentro questo ramo sarebbe cieco
+    // proprio sui pareggi (#924).
     if (isLegitimateQuotaDeferral(e)) {
       finalizeRunReport('deferred', { notes: [...RUN_REPORT.notes, `Deferred (all free models exhausted): ${e.message}`] });
       console.error(`\n⚠️  Differito: tutti i modelli AI gratuiti sono temporaneamente esauriti (quota giornaliera, ${share.transient}/${share.total} = ${pct}%). Riprovo al prossimo run. ${e.message}`);
