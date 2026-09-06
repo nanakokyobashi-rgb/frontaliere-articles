@@ -21,7 +21,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 
-import { isTransientMajority } from '../scripts/lib/exhaustion-disposition.mjs';
+import { isTransientMajority, quotaDeferralShare } from '../scripts/lib/exhaustion-disposition.mjs';
 
 /** Il verdetto nelle due polarita', per asserirle insieme. */
 const bothTies = (breakdown) => ({
@@ -136,4 +136,36 @@ test('una notte di quota VERA con un host morto resta un differimento (niente ro
   };
   assert.deepEqual(bothTies(notteDiQuota), { transient: true, persistent: true },
     'il fix non deve costare un rosso su una notte di quota genuina');
+});
+
+test('le due politiche sul MEDESIMO `echoUnattributed` sono opposte, e devono restarlo (#888, item 3)', () => {
+  // Il commento di `isTransientMajority` dichiarava questo clamp «la STESSA
+  // coerenza» di quello di `deferralTally`. Non lo e': sullo stesso numero —
+  // gli echi dichiarati che nella massa ambigua non ci stanno — il tally
+  // scarta TUTTO O NIENTE, il voto di maggioranza toglie la sola ECCEDENZA al
+  // secchio vincente. Nessuna delle due va dedotta dall'altra, quindi la
+  // divergenza vive qui e non solo in prosa.
+  const run31823202761 = {
+    transient: 53,
+    persistent: 52,
+    total: 106,
+    providerCooldownSkips: { total: 11 },
+  };
+  // Tally: 11 echi non attribuiti contro UNA riga di massa ambigua. Non ci
+  // stanno ⇒ non se ne toglie NESSUNO, nemmeno quell'uno che ci starebbe: il
+  // denominatore resta il lordo 106 e lo share e' 0,5 esatto, sotto soglia.
+  const tally = quotaDeferralShare({
+    code: 'ALL_MODELS_EXHAUSTED',
+    exhaustionBreakdown: run31823202761,
+  });
+  assert.deepEqual(
+    { transient: tally.transient, total: tally.total, providerCooldownSkips: tally.providerCooldownSkips },
+    { transient: 53, total: 106, providerCooldownSkips: 0 },
+    'tally: un `echo.total` che non ci sta non compra sconti sul denominatore, per intero',
+  );
+  // Voto: la stessa forma toglie DIECI righe (11 - 1) al vincitore, non zero e
+  // non undici. Se qui si applicasse la regola tutto-o-niente del tally,
+  // l'eccedenza sarebbe 0 e 53 vs 52 tornerebbe `true` in tie transitorio.
+  assert.deepEqual(bothTies(run31823202761), { transient: false, persistent: false },
+    'voto: la sola eccedenza si addebita al vincitore, e ribalta un margine di UNO');
 });
