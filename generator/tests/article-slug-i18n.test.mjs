@@ -46,6 +46,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { truncateSlugAtWordBoundary } from '../scripts/lib/slug-truncate.mjs';
+import { metaFieldPlausibilityMiss } from '../scripts/lib/body2-payload-verdict.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
 const CREATE_ARTICLE = path.join(ROOT, 'generator', 'scripts', 'create-article.mjs');
@@ -79,15 +80,21 @@ function loadSlugSandbox() {
     'export function relocalizeSlugsAfterTranslation(data, opts = {}) {',
   );
   const code = `${slugify}\n${placeholderGuard}\n${relocalize}`.replace(/^export /gm, '');
+  // `metaFieldPlausibilityMiss` entra in sandbox IMPORTATO dal suo modulo, non
+  // ricopiato (AGENTS.md #6): `localizedTitleSlugCandidate` lo attraversa, ed
+  // e' cio' che tiene un titolo tradotto troppo corto per essere un titolo
+  // fuori dallo slug pubblicato (#798).
   return new Function(
     'truncateSlugAtWordBoundary',
-    `${code}\nreturn { slugifySlugPart, inspectSlugForPromptPlaceholder, relocalizeSlugsAfterTranslation, markProvisionalItSlug, PROVISIONAL_IT_SLUG_FIELD };`,
-  )(truncateSlugAtWordBoundary);
+    'metaFieldPlausibilityMiss',
+    `${code}\nreturn { slugifySlugPart, inspectSlugForPromptPlaceholder, localizedTitleSlugCandidate, relocalizeSlugsAfterTranslation, markProvisionalItSlug, PROVISIONAL_IT_SLUG_FIELD };`,
+  )(truncateSlugAtWordBoundary, metaFieldPlausibilityMiss);
 }
 
 const {
   slugifySlugPart,
   inspectSlugForPromptPlaceholder,
+  localizedTitleSlugCandidate,
   relocalizeSlugsAfterTranslation,
   markProvisionalItSlug,
   PROVISIONAL_IT_SLUG_FIELD,
@@ -186,7 +193,13 @@ describe('relocalizeSlugsAfterTranslation — lo slug di un locale non e’ l’
     // e' la causa del difetto, non il difetto.
     const cases = [
       { mutate: (d) => { d.content.en = {}; }, reason: 'titolo tradotto assente' },
-      { mutate: (d) => { d.content.en = { title: '— — —' }; }, reason: 'titolo tradotto non slugificabile' },
+      // Sopra il floor di plausibilita' (13 char / 7 parole) di proposito: la
+      // causa in prova qui e' «non slugificabile», e con un titolo piu' corto
+      // scatterebbe prima il floor, che e' una causa diversa.
+      { mutate: (d) => { d.content.en = { title: '— — — — — — —' }; }, reason: 'titolo tradotto non slugificabile' },
+      // #798: il non-vuoto non basta. `Titel` e' slugificabile e non e' un
+      // segnaposto — diventerebbe `/en/<hub>/titel/` senza questo ramo.
+      { mutate: (d) => { d.content.en = { title: 'Titel' }; }, reason: 'titolo tradotto sotto il floor di plausibilita\' (title<12)' },
       // Il titolo tradotto che slugifica esattamente sull'italiano: succede con
       // i titoli fatti di soli nomi propri ("Gaggiolo", "Chiasso").
       { mutate: (d) => { d.content.en = { title: d.slugs.it.replace(/-/g, ' ') }; }, reason: 'titolo tradotto identico all\'italiano' },
@@ -306,34 +319,70 @@ describe('corpus pubblicato — ratchet sugli slug non localizzati', () => {
   // e' lavoro separato e coordinato, che la issue stessa chiede di NON fare
   // senza il bridge. Cio' che questo numero difende e' la DERIVATA: la fix di
   // #191 vale se non ne nascono di nuovi.
+  //
+  // Le tre restano il NUMERO MISURATO sul corpus (5.679 voci: 217 / 169 / 55),
+  // non il tetto: il margine del floor sta nelle costanti qui sotto, sommato
+  // una volta sola. Portarlo dentro la baseline lo renderebbe invisibile e —
+  // sommato al margine esplicito — doppio.
   const IT_URL_ACROSS_LOCALES_BASELINE = 217;
   const ALL_THREE_IDENTICAL_BASELINE = 169;
   const LONG_SLUG_BASELINE = 55;
 
-  it(`gli articoli che servono l'URL italiano su en/de/fr non superano ${IT_URL_ACROSS_LOCALES_BASELINE}`, () => {
+  // Margine DICHIARATO, non allargamento del gate (#798). Il floor di
+  // plausibilita' del titolo aggiunge una causa NUOVA di ripiego sull'URL
+  // italiano — `titolo tradotto sotto il floor di plausibilita'` in
+  // `relocalizeSlugsAfterTranslation()` — e le tre baseline qui sotto sono
+  // misurate a margine ZERO su questo checkout (5.679 voci: 217 / 169 / 55).
+  // Senza margine il PRIMO articolo che ci cade fa fallire questo file, che
+  // gira come Preflight in publish-api.yml e generate-article.yml: non «un URL
+  // italiano in piu'», ma la pubblicazione ferma per l'intera superficie dati.
+  // Dimensionato sul costo misurato del floor — 3 `title` su 22.631 meta
+  // tradotti pubblicati — cioe' 3 ARTICOLI. Non e' un permesso a crescere: se
+  // il consumo si avvicina al margine, la causa da leggere e'
+  // `RUN_REPORT.slugs.itFallbackDetail` (le voci `…:titolo tradotto sotto il
+  // floor…`), e la risposta e' riparare la traduzione del titolo, non alzare
+  // ancora questo numero.
+  const FLOOR_IT_FALLBACK_HEADROOM = 3;
+  // Un solo ripiego copia lo STESSO slug italiano su fino a tre locali, e il
+  // ratchet degli slug lunghi conta per locale, non per articolo.
+  const FLOOR_LONG_SLUG_HEADROOM = FLOOR_IT_FALLBACK_HEADROOM * 3;
+
+  const IT_URL_ACROSS_LOCALES_CAP = IT_URL_ACROSS_LOCALES_BASELINE + FLOOR_IT_FALLBACK_HEADROOM;
+  const ALL_THREE_IDENTICAL_CAP = ALL_THREE_IDENTICAL_BASELINE + FLOOR_IT_FALLBACK_HEADROOM;
+  const LONG_SLUG_CAP = LONG_SLUG_BASELINE + FLOOR_LONG_SLUG_HEADROOM;
+
+  it(`gli articoli che servono l'URL italiano su en/de/fr non superano ${IT_URL_ACROSS_LOCALES_CAP}`, () => {
     const offenders = entries.filter((e) => e.en === e.it || e.de === e.it || e.fr === e.it);
     assert.ok(
-      offenders.length <= IT_URL_ACROSS_LOCALES_BASELINE,
-      `${offenders.length} articoli servono l'URL italiano in almeno un locale (baseline ${IT_URL_ACROSS_LOCALES_BASELINE}).\n` +
+      offenders.length <= IT_URL_ACROSS_LOCALES_CAP,
+      `${offenders.length} articoli servono l'URL italiano in almeno un locale ` +
+        `(baseline ${IT_URL_ACROSS_LOCALES_BASELINE} + ${FLOOR_IT_FALLBACK_HEADROOM} di margine per il floor del titolo).\n` +
         `Nuovi rispetto alla baseline: ${offenders.length - IT_URL_ACROSS_LOCALES_BASELINE}.\n` +
         `Primi dieci: ${offenders.slice(0, 10).map((e) => e.id).join(', ')}\n` +
-        'Se la fix di #191 e’ in piedi questo numero non puo’ salire: un articolo nuovo ricava lo slug dal titolo tradotto.',
+        'Se la fix di #191 e’ in piedi questo numero non puo’ salire: un articolo nuovo ricava lo slug dal titolo tradotto.\n' +
+        'L’unica crescita prevista e’ il ripiego «titolo tradotto sotto il floor di plausibilita’» (#798): ' +
+        'verificalo in `RUN_REPORT.slugs.itFallbackDetail`. Se la causa e’ quella, il difetto e’ la traduzione del titolo.',
     );
   });
 
-  it(`gli articoli con TUTTI E TRE i locali sull'URL italiano non superano ${ALL_THREE_IDENTICAL_BASELINE}`, () => {
+  it(`gli articoli con TUTTI E TRE i locali sull'URL italiano non superano ${ALL_THREE_IDENTICAL_CAP}`, () => {
     // E' il numero della issue (169 su 4.114, blog 126 + swiss 43): un articolo
     // che serve lo stesso indirizzo in quattro lingue non ha localizzazione
-    // affatto, ed e' il caso peggiore della famiglia.
+    // affatto, ed e' il caso peggiore della famiglia. Il margine e' lo stesso
+    // di sopra: un titolo tradotto sotto il floor in tutti e tre i locali cade
+    // qui, non solo nel conteggio largo.
     const offenders = entries.filter((e) => e.en === e.it && e.de === e.it && e.fr === e.it);
     assert.ok(
-      offenders.length <= ALL_THREE_IDENTICAL_BASELINE,
-      `${offenders.length} articoli servono l'URL italiano su en, de E fr (baseline ${ALL_THREE_IDENTICAL_BASELINE}).\n` +
+      offenders.length <= ALL_THREE_IDENTICAL_CAP,
+      `${offenders.length} articoli servono l'URL italiano su en, de E fr ` +
+        `(baseline ${ALL_THREE_IDENTICAL_BASELINE} + ${FLOOR_IT_FALLBACK_HEADROOM} di margine per il floor del titolo).\n` +
         `Primi dieci: ${offenders.slice(0, 10).map((e) => e.id).join(', ')}`,
     );
   });
 
-  it(`gli slug lunghi >= 80 caratteri non superano ${LONG_SLUG_BASELINE}`, () => {
+  it(`gli slug lunghi >= 80 caratteri non superano ${LONG_SLUG_CAP}`, () => {
+    // Anche questo e' a margine zero e il ripiego lo tocca: lo slug italiano
+    // copiato su en/de/fr conta tre volte se e' lungo.
     const long = [];
     for (const e of entries) {
       for (const locale of ['it', 'en', 'de', 'fr']) {
@@ -341,8 +390,10 @@ describe('corpus pubblicato — ratchet sugli slug non localizzati', () => {
       }
     }
     assert.ok(
-      long.length <= LONG_SLUG_BASELINE,
-      `${long.length} slug >= 80 caratteri (baseline ${LONG_SLUG_BASELINE}): ${long.slice(0, 10).join(', ')}`,
+      long.length <= LONG_SLUG_CAP,
+      `${long.length} slug >= 80 caratteri ` +
+        `(baseline ${LONG_SLUG_BASELINE} + ${FLOOR_LONG_SLUG_HEADROOM} di margine per il floor del titolo): ` +
+        `${long.slice(0, 10).join(', ')}`,
     );
   });
 });
