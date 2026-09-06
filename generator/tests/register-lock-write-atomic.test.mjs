@@ -23,7 +23,7 @@ import {
   beginRegisterLock,
   readRegisterLock,
   registerLockPath,
-  REGISTER_LOCK_FILE,
+  registerLockFile,
 } from '../scripts/lib/register-lock.mjs';
 
 const ARTICLE_ID = 'permesso-g-frontalieri-2026';
@@ -33,18 +33,18 @@ function sandbox() {
   return fs.mkdtempSync(path.join(os.tmpdir(), 'register-lock-atomic-'));
 }
 
-const lockDir = (root) => path.dirname(registerLockPath(root));
+const lockDir = (root) => path.dirname(registerLockPath(root, SECTION));
 
 test('dopo beginRegisterLock() il marker su disco e\' JSON parsabile e completo', () => {
   const root = sandbox();
   beginRegisterLock(root, ARTICLE_ID, SECTION);
 
-  const raw = fs.readFileSync(registerLockPath(root), 'utf-8');
+  const raw = fs.readFileSync(registerLockPath(root, SECTION), 'utf-8');
   const parsed = JSON.parse(raw); // niente troncamento: JSON.parse non deve lanciare
   assert.equal(parsed.id, ARTICLE_ID);
   assert.equal(parsed.section, SECTION);
 
-  const lock = readRegisterLock(root);
+  const lock = readRegisterLock(root, SECTION);
   assert.equal(lock.unreadable, undefined,
     'il lock appena scritto non deve mai presentarsi come illeggibile');
   assert.equal(lock.id, ARTICLE_ID);
@@ -59,7 +59,7 @@ test('beginRegisterLock() non lascia file temporanei residui accanto al marker',
   // temp residuo verrebbe raccolto dal `git add -A` di generate-article.yml e
   // committato per sempre.
   const leftovers = fs.readdirSync(lockDir(root))
-    .filter((f) => f !== path.basename(REGISTER_LOCK_FILE));
+    .filter((f) => f !== path.basename(registerLockFile(SECTION)));
   assert.deepEqual(leftovers, [],
     `il rename deve consumare il temp: residui trovati [${leftovers.join(', ')}]`);
 });
@@ -67,14 +67,14 @@ test('beginRegisterLock() non lascia file temporanei residui accanto al marker',
 test('un lock preesistente non viene mai osservato in stato parziale', () => {
   const root = sandbox();
   beginRegisterLock(root, ARTICLE_ID, SECTION);
-  const before = fs.readFileSync(registerLockPath(root), 'utf-8');
+  const before = fs.readFileSync(registerLockPath(root, SECTION), 'utf-8');
 
   // Il secondo begin rifiuta di partire, e non tocca il marker del primo:
   // nessuna finestra in cui il file esiste ma e' a meta'.
   assert.throws(() => beginRegisterLock(root, 'altro-articolo', SECTION),
     /registration lock still present/);
-  assert.equal(fs.readFileSync(registerLockPath(root), 'utf-8'), before);
-  assert.equal(readRegisterLock(root).id, ARTICLE_ID);
+  assert.equal(fs.readFileSync(registerLockPath(root, SECTION), 'utf-8'), before);
+  assert.equal(readRegisterLock(root, SECTION).id, ARTICLE_ID);
 });
 
 // Drift guard sulla FORMA, come create-article-write-atomic.test.mjs: la prova
