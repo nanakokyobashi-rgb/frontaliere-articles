@@ -232,7 +232,31 @@ jobs:
             echo "pushed=false" >> "$GITHUB_OUTPUT"
             exit 0
           fi
+          # Un giorno senza edizione ma con lo streak che si muove (0/4 blocchi,
+          # #885) mette in stage SOLO il registro, e prima che esistesse quel
+          # `git add` questo ramo non veniva mai raggiunto: usciva verde sopra.
+          # Ora ci arriva, e con lui arrivano i due `exit 1` qui sotto — cioe'
+          # un rosso ogni mattina finche' il blackout dura, che e' esattamente
+          # il loop dichiarato inaccettabile in #882.
+          #
+          # Il registro non e' l'edizione: `data/**` non e' nei `paths:` di
+          # `publish-api.yml`, quindi perderlo non lascia il sito su una
+          # superficie vecchia. Perderlo costa un allarme in ritardo — lo
+          # stesso prezzo che si pagava prima di #885 — mentre il rosso in loop
+          # costa una mattina rossa per sempre. Quindi: se in stage c'e' SOLO
+          # il registro, un push impossibile e' un warning e la run resta
+          # verde; se c'e' un'edizione, il rosso resta rosso.
+          if [ "$(git diff --cached --name-only)" = "data/daily-brief-degradation.json" ]; then
+            LEDGER_ONLY=true
+          else
+            LEDGER_ONLY=false
+          fi
           if [ -z "${GITHUB_PAT:-}" ]; then
+            if [ "$LEDGER_ONLY" = true ]; then
+              echo "::warning::GITHUB_PAT missing — solo il registro di degrado era in stage: muore sul runner, lo streak riparte dal valore su main (allarme in ritardo, nessun bollettino perso)"
+              echo "pushed=ledger-lost" >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
             echo "::error::GITHUB_PAT missing — a GITHUB_TOKEN push would not fire publish-api.yml and the edition would never go live"
             exit 1
           fi
@@ -254,6 +278,11 @@ jobs:
             sleep $((attempt * 3))
             git pull --rebase "$REMOTE" "$TARGET" || { git rebase --abort 2>/dev/null || true; }
           done
+          if [ "$LEDGER_ONLY" = true ]; then
+            echo "::warning::push fallito dopo 3 tentativi, ma in stage c'era solo il registro di degrado: muore sul runner (allarme in ritardo, nessun bollettino perso) invece di rendere rossa ogni mattina del blackout"
+            echo "pushed=ledger-lost" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
           echo "::error::push failed after 3 attempts (git output above)"
           exit 1
 
@@ -319,8 +348,14 @@ jobs:
       # `data/daily-brief-degradation.json` sempre, anche a 0/4 blocchi (#885)
       # — e il verdetto vale lo stesso: l'attraversamento va detto anche in un
       # giorno senza edizione.
+      #
+      # L'unica eccezione e' `pushed == 'ledger-lost'`: lo streak nuovo viveva
+      # solo nel registro e il registro non ha raggiunto `main`. Domani si
+      # rilegge il valore vecchio, si riattraversa la stessa soglia e il rosso
+      # si ripete ogni mattina — il verdetto va speso su un attraversamento
+      # durevole, o non va speso.
       - name: Degradation alarm — un blocco degradato da tre edizioni di fila
-        if: steps.mode.outputs.dry != 'true' && steps.refresh.outputs.degradation_crossed == 'true'
+        if: steps.mode.outputs.dry != 'true' && steps.refresh.outputs.degradation_crossed == 'true' && steps.commit.outputs.pushed != 'ledger-lost'
         run: |
           set -euo pipefail
           BLOCKS='${{ steps.refresh.outputs.degradation_blocks }}'

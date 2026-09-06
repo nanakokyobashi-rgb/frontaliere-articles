@@ -29,7 +29,7 @@ import { readFileSync, appendFileSync } from 'node:fs';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { getServiceAccountAccessToken } from './lib/google-service-account-token.mjs';
 import { writeJsonAtomic } from './lib/atomic-write-json.mjs';
-import { decodeFields, buildDailyBrief, degradationAlarms, degradationState, MAX_CONSECUTIVE_DEGRADED_EDITIONS } from './lib/daily-brief-data.mjs';
+import { decodeFields, buildDailyBrief, degradationAlarms, degradationState, isDegradationCarrier, MAX_CONSECUTIVE_DEGRADED_EDITIONS } from './lib/daily-brief-data.mjs';
 import { MIN_AVAILABLE_BLOCKS } from './lib/daily-brief-content.mjs';
 import { isRetryableRcFetchStatus, rcFetchBackoffMs, RC_FETCH_ATTEMPTS, extractGoogleErrorReason } from './load-rc-env.mjs';
 
@@ -139,11 +139,20 @@ async function tryFetch(label, fn) {
  * refresh, it just restarts the count.
  */
 export function readPreviousSnapshot(snapshotPath = OUTPUT_PATH) {
+  let parsed;
   try {
-    return JSON.parse(readFileSync(snapshotPath, 'utf-8'));
+    parsed = JSON.parse(readFileSync(snapshotPath, 'utf-8'));
   } catch {
     return null;
   }
+  // Valid JSON of the wrong shape is worse than no JSON: every streak reader
+  // is forgiving by design, so a `[]` or a truncated hand edit reads as "all
+  // counts are 0" and restarts them without a word. Same guard as the ledger.
+  if (!isDegradationCarrier(parsed)) {
+    console.warn(`\u26a0\ufe0f  ${path.relative(REPO_ROOT, snapshotPath)} is not a usable degradation carrier (wrong shape) — the streaks it should carry are being ignored`);
+    return null;
+  }
+  return parsed;
 }
 
 /**
@@ -158,16 +167,47 @@ export function readPreviousSnapshot(snapshotPath = OUTPUT_PATH) {
  * `degradationAlarms` ever read from `previous`.
  */
 export function readDegradationState(statePath = DEGRADATION_STATE_PATH, snapshotPath = OUTPUT_PATH) {
+  let state;
   try {
-    const state = JSON.parse(readFileSync(statePath, 'utf-8'));
-    if (state && typeof state === 'object') return state;
+    state = JSON.parse(readFileSync(statePath, 'utf-8'));
   } catch { /* absent or corrupt — fall through to the snapshot */ }
+  if (state !== undefined) {
+    // `typeof state === 'object'` was the whole check and it accepts `[]` and
+    // `{"blocks": 5}` — both of which the readers below then quietly count as
+    // zero for EVERY block, restarting all the streaks and making a permanent
+    // degradation unable to cross the threshold ever again. Parsing is not
+    // validating: a carrier that does not hold streaks is not a ledger with
+    // holes, it is a different document, and the snapshot fallback (the same
+    // path taken by an absent or unparseable file) is the honest answer.
+    if (isDegradationCarrier(state)) return state;
+    console.warn(`\u26a0\ufe0f  ${path.relative(REPO_ROOT, statePath)} parsed but is not a degradation ledger (wrong shape) — falling back to the snapshot instead of restarting every streak at zero`);
+  }
   return readPreviousSnapshot(snapshotPath);
 }
 
-/** Persist today's streaks. Written on EVERY non-dry run, 0/4 blocks included. */
+/**
+ * Persist today's streaks. Written on EVERY non-dry run, 0/4 blocks included —
+ * but only when the content actually differs from what is already on disk.
+ *
+ * The ledger is the one path the commit step stages unconditionally, so a file
+ * that differs on every run is a commit and a push to `main` on every run: a
+ * same-day `workflow_dispatch` rerun, a blackout morning where no streak moved,
+ * every cron tick. That churn used to be guaranteed by a `generatedAt`
+ * timestamp in the payload (now removed: nothing ever read it, and it made two
+ * identical ledgers compare as different). Comparing the serialized bytes is
+ * what keeps the guarantee instead of merely making it likely.
+ *
+ * @returns {boolean} whether the file was rewritten.
+ */
 export function writeDegradationState(brief, statePath = DEGRADATION_STATE_PATH) {
-  writeJsonAtomic(statePath, degradationState(brief));
+  const next = degradationState(brief);
+  let current;
+  try {
+    current = JSON.parse(readFileSync(statePath, 'utf-8'));
+  } catch { /* absent or corrupt — write it */ }
+  if (current !== undefined && JSON.stringify(current) === JSON.stringify(next)) return false;
+  writeJsonAtomic(statePath, next);
+  return true;
 }
 
 export async function collectDailyBrief({ todayIso, nowMs = Date.now(), previous = readPreviousSnapshot() } = {}) {
