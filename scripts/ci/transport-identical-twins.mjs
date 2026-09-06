@@ -536,6 +536,12 @@ const NAMING_CALLS = new Set([
   'if', 'for', 'while', 'switch', 'catch', 'return', 'typeof',
 ]);
 
+/** Le parole dopo le quali una `/` apre una regex e non è una divisione. */
+const REGEX_PREFIX_KEYWORDS = new Set([
+  'return', 'typeof', 'case', 'in', 'of', 'do', 'else', 'yield', 'await',
+  'new', 'delete', 'void', 'instanceof', 'throw',
+]);
+
 /** Indice appena dopo il literal aperto a `i`, escape inclusi. */
 function endOfStringLiteral(src, i) {
   const quote = src[i];
@@ -548,7 +554,61 @@ function endOfStringLiteral(src, i) {
     // che viene dopo — di nuovo il verso sbagliato.
     if (quote !== '`' && c === '\n') return j;
   }
+  // Stesso verso per il backtick, che però in codice apre davvero literal
+  // multi-riga: non si può bailare alla prima riga sempre, ma un backtick MAI
+  // chiuso (un `…` di prosa spaiato, un fence markdown aperto e non richiuso —
+  // e i fixture in scope includono `generator/tests/fixtures/pr-bodies/*.md`)
+  // inghiottirebbe il resto del file e renderebbe invisibile ogni lettura
+  // successiva. Non chiuso ⇒ vale fino a fine della riga in cui si apre.
+  if (quote === '`') {
+    const nl = src.indexOf('\n', i + 1);
+    return nl === -1 ? src.length : nl;
+  }
   return src.length;
+}
+
+/** `/` in una posizione in cui la grammatica ammette un literal regex? */
+function regexAllowedAt(src, i) {
+  let j = i - 1;
+  while (j >= 0 && /\s/.test(src[j])) j--;
+  if (j < 0) return true;
+  const c = src[j];
+  if ('(,=:[!&|?{};+-*%^~<>'.includes(c)) return true;
+  if (!/[\w$]/.test(c)) return false;
+  let k = j;
+  while (k >= 0 && /[\w$]/.test(src[k])) k--;
+  return REGEX_PREFIX_KEYWORDS.has(src.slice(k + 1, j + 1));
+}
+
+/**
+ * Indice appena dopo il literal regex aperto a `i` (flag inclusi), o `-1` se a
+ * `i` non ne comincia uno.
+ *
+ * Un literal regex va saltato come si salta una stringa, e per le stesse due
+ * ragioni: la coda `\//` di `s.replace(/\//g, '-')` apre altrimenti un finto
+ * commento di riga che cancella il CODICE che segue — la lettura sparisce, il
+ * manifest esce dall'insieme e l'insieme viene dichiarato chiuso quando non lo
+ * è — e le parentesi di un `/\)/g` sbilanciano lo stack di
+ * `callSites`, accorciando la catena di chiamate di un literal più sotto fino a
+ * farlo sembrare nominato. Stesso lexer, stesso verso sbagliato (issue #930).
+ */
+function endOfRegexLiteral(src, i) {
+  if (src[i] !== '/' || !regexAllowedAt(src, i)) return -1;
+  let inClass = false;
+  for (let j = i + 1; j < src.length; j++) {
+    const c = src[j];
+    if (c === '\\') { j++; continue; }
+    // Una regex non attraversa la riga: senza chiusura non era una regex.
+    if (c === '\n') return -1;
+    if (inClass) { if (c === ']') inClass = false; continue; }
+    if (c === '[') { inClass = true; continue; }
+    if (c === '/') {
+      let k = j + 1;
+      while (k < src.length && /[a-z]/.test(src[k])) k++;
+      return k;
+    }
+  }
+  return -1;
 }
 
 /**
@@ -585,6 +645,10 @@ function stripComments(src) {
       for (let k = j; k < Math.min(j + 2, src.length); k++) out[k] = ' ';
       i = j + 2;
       continue;
+    }
+    if (c === '/') {
+      const end = endOfRegexLiteral(src, i);
+      if (end !== -1) { i = end; continue; }
     }
     i++;
   }
@@ -624,6 +688,12 @@ function callSites(src) {
       callee = name;
       i = j;
       continue;
+    }
+    // Le parentesi dentro un literal regex non sono chiamate: contarle
+    // accorcerebbe la catena dei literal che vengono dopo.
+    if (c === '/') {
+      const end = endOfRegexLiteral(src, i);
+      if (end !== -1) { callee = null; i = end; continue; }
     }
     if (c === '(') { stack.push(callee); callee = null; i++; continue; }
     if (c === ')') { stack.pop(); callee = null; i++; continue; }

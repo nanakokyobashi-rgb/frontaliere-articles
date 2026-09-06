@@ -486,6 +486,34 @@ test('il verso incerto e\u2019 «legge»: la lettura non riconosciuta non fa usc
     readsContentOf(rel, "// il registro:\nconst raw = readFileSync('scripts/ci/loop-sync-manifest.json', 'utf8');"),
     true,
   );
+
+  // 4. Il lexer non deve inventarsi commenti ne' stringhe: la coda `\//` di una
+  // regex non apre un commento di riga, e un backtick spaiato non inghiotte il
+  // resto del file. Entrambi cancellerebbero la lettura che viene DOPO, cioe'
+  // di nuovo il verso che dichiara chiuso un insieme che non lo e'.
+  assert.equal(
+    readsContentOf(rel, "const x = s.replace(/\\//g, '-'); const raw = readFileSync('scripts/ci/loop-sync-manifest.json','utf8');"),
+    true,
+  );
+  assert.equal(
+    readsContentOf(rel, "Nota: usa ` per citare.\nconst raw = readFileSync('scripts/ci/loop-sync-manifest.json','utf8');"),
+    true,
+  );
+  assert.equal(
+    readsContentOf(rel, "```\nconst raw = readFileSync('scripts/ci/loop-sync-manifest.json','utf8');"),
+    true,
+  );
+  // Le parentesi dentro una regex non sono chiamate: contarle accorcerebbe la
+  // catena del literal che segue fino a farlo sembrare nominato.
+  assert.equal(
+    readsContentOf(rel, "const y = s.match(/\\)/g); const raw = readFileSync('scripts/ci/loop-sync-manifest.json','utf8');"),
+    true,
+  );
+  // E il template literal multi-riga, che invece e' un literal vero, resta tale.
+  assert.equal(
+    readsContentOf(rel, "const t = `riga uno\nriga due`;\nassert.ok(list.includes('scripts/ci/loop-sync-manifest.json'));"),
+    false,
+  );
 });
 
 test('l\u2019eccezione e\u2019 il solo manifest, e solo da nominato: gli altri descrittori restano accoppiamenti', () => {
