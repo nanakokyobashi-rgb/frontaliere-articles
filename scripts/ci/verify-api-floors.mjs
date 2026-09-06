@@ -37,6 +37,10 @@ import {
   SECTION_BODY_DIRS,
   IMAGE_SOURCE_DIR,
 } from '../lib/corpus-floors.mjs';
+// Stessa funzione del writer e del gate manifest.counts in build-api.mjs: un
+// `<item>` citato dentro un CDATA non e' un elemento del feed, e contarlo qui
+// alzerebbe la misura sopra il pavimento mascherando un feed troncato.
+import { countXmlTags } from '../lib/count-xml-tags.mjs';
 
 export const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
 
@@ -55,8 +59,6 @@ export const SECTION_COUNTERS = {
 export function feedSection(fileName) {
   return /^rss-svizzera/.test(fileName) ? 'svizzera' : 'frontaliere';
 }
-
-const occurrences = (text, needle) => text.split(needle).length - 1;
 
 /**
  * Il nucleo puro: date le misure, quali pavimenti sono sfondati.
@@ -144,7 +146,7 @@ export function measureDist(distDir) {
     .filter((f) => f.endsWith('.xml'))
     .map((name) => ({ name, xml: readOut(name) }))
     .filter(({ xml }) => xml.includes('<rss'))
-    .map(({ name, xml }) => ({ name, items: occurrences(xml, '<item>') }));
+    .map(({ name, xml }) => ({ name, items: countXmlTags(xml, 'item') }));
 
   const imageManifest = path.join(distDir, 'images-manifest.json');
   const images = fs.existsSync(imageManifest)
