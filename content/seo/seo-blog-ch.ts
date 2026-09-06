@@ -74120,6 +74120,357 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-deposito-cauzione-argovia': {
+    title: 'Affitti Argovia: canoni e diritto di locazione',
+    description: 'Guida completa al diritto di locazione in Argovia: deposito max 3 mesi, disdetta e procedure di contestazione secondo il Codice delle obbligazioni.',
+    keywords: 'frontalieri, ticino, svizzera, italia, affitti, argovia, canoni, diritto',
+    ogTitle: 'Affitti Argovia: canoni e diritto di locazione',
+    ogDescription: 'Scopri come funziona il diritto di locazione in Argovia: regole sul deposito cauzionale, procedure di contestazione e disdetta secondo il Codice delle obbligazioni federale. Guida pratica per inquilini e locatori.',
+    canonicalPath: '/articoli-svizzera/deposito-cauzione-argovia/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Affitti Argovia: canoni e diritto di locazione",
+      "description": "Guida completa al diritto di locazione in Argovia: deposito max 3 mesi, disdetta e procedure di contestazione secondo il Codice delle obbligazioni.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/deposito-cauzione-argovia.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Edificio residenziale svizzero con annuncio di affitto, architettura moderna, luce naturale pomeridiana."
+      },
+      "datePublished": "2026-09-06T10:35:27+00:00",
+      "dateModified": "2026-09-06T10:35:27+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/deposito-cauzione-argovia/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-mercato-affitti-canton-argovia': {
+    title: 'Mercato degli affitti nel Cantone di Argovia: canoni medi e diritto di locazione',
+    description: 'Scopri i canoni medi degli affitti nel Cantone di Argovia, le normative sul deposito di garanzia e i diritti degli inquilini. Dati aggiornati 2026',
+    keywords: 'frontalieri, ticino, svizzera, italia, mercato, affitti, cantone, argovia',
+    ogTitle: 'Mercato degli affitti nel Cantone di Argovia: canoni medi e diritto di locazione',
+    ogDescription: 'Esplora i canoni medi degli affitti nel Cantone di Argovia e le normative sul deposito di garanzia. Scopri i diritti degli inquilini e come contestare il canone iniziale.',
+    canonicalPath: '/articoli-svizzera/mercato-affitti-canton-argovia/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Mercato degli affitti nel Cantone di Argovia: canoni medi e diritto di locazione",
+      "description": "Scopri i canoni medi degli affitti nel Cantone di Argovia, le normative sul deposito di garanzia e i diritti degli inquilini. Dati aggiornati 2026",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/mercato-affitti-canton-argovia.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista panoramica del Cantone di Argovia con edifici residenziali"
+      },
+      "datePublished": "2026-09-06T10:41:46+00:00",
+      "dateModified": "2026-09-06T10:41:46+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/mercato-affitti-canton-argovia/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-eruzione-vulcano-aeroporti-indonesia': {
+    title: 'Erutta un vulcano, sei aeroporti bloccati in Indonesia',
+    description: 'L\'eruzione del vulcano Anak Krakatoa ha causato la sospensione delle attività aeroportuali in Indonesia, con oltre 20\'000 passeggeri coinvolti. Dati aggiornati',
+    keywords: 'frontalieri, ticino, svizzera, italia, erutta, vulcano, aeroporti, bloccati',
+    ogTitle: 'Erutta un vulcano, sei aeroporti bloccati in Indonesia',
+    ogDescription: 'L\'eruzione del vulcano Anak Krakatoa ha portato alla chiusura di sei aeroporti in Indonesia, con oltre 20\'000 passeggeri colpiti. Scopri di più su Frontaliere Ticino.',
+    canonicalPath: '/articoli-svizzera/eruzione-vulcano-aeroporti-indonesia/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Erutta un vulcano, sei aeroporti bloccati in Indonesia",
+      "description": "L'eruzione del vulcano Anak Krakatoa ha causato la sospensione delle attività aeroportuali in Indonesia, con oltre 20'000 passeggeri coinvolti. Dati aggiornati",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/eruzione-vulcano-aeroporti-indonesia.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista aerea di un aeroporto svizzero con un'eruzione vulcanica in lontananza"
+      },
+      "datePublished": "2026-09-06T10:56:39+00:00",
+      "dateModified": "2026-09-06T10:56:39+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/eruzione-vulcano-aeroporti-indonesia/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-esercitazione-salvataggio-monte-ceneri': {
+    title: 'Esercitazione di salvataggio nella galleria del Monte Ceneri',
+    description: 'Simulato incendio in un treno Giruno durante un\'esercitazione di salvataggio nella galleria del Monte Ceneri. Dati aggiornati 2026 per frontalieri in Ticino.',
+    keywords: 'frontalieri, ticino, svizzera, italia, esercitazione, salvataggio, nella, galleria',
+    ogTitle: 'Esercitazione di salvataggio nella galleria del Monte Ceneri',
+    ogDescription: 'Simulato incendio in un treno Giruno durante un\'esercitazione di salvataggio nella galleria del Monte Ceneri. Partecipanti: 50 comparse e 100 soccorritori.',
+    canonicalPath: '/articoli-svizzera/esercitazione-salvataggio-monte-ceneri/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Esercitazione di salvataggio nella galleria del Monte Ceneri",
+      "description": "Simulato incendio in un treno Giruno durante un'esercitazione di salvataggio nella galleria del Monte Ceneri. Dati aggiornati 2026 per frontalieri in Ticino.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/esercitazione-salvataggio-monte-ceneri.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista aerea della galleria del Monte Ceneri durante un'esercitazione di sicurezza, con veicoli di emergenza e personale in azione."
+      },
+      "datePublished": "2026-09-06T11:06:06+00:00",
+      "dateModified": "2026-09-06T11:06:06+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/esercitazione-salvataggio-monte-ceneri/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-naturalizzazione-canton-argovia-requisiti-e-procedura': {
+    title: 'Naturalizzazione nel Canton Argovia: requisiti e procedura',
+    description: 'Scopri i requisiti e la procedura per ottenere la naturalizzazione nel Canton Argovia, inclusi anni di residenza, test di integrazione e tasse. Dati aggiornati',
+    keywords: 'frontalieri, ticino, svizzera, italia, naturalizzazione, canton, argovia, requisiti',
+    ogTitle: 'Naturalizzazione nel Canton Argovia: requisiti e procedura',
+    ogDescription: 'Scopri i requisiti e la procedura per ottenere la naturalizzazione nel Canton Argovia, inclusi anni di residenza, test di integrazione e tasse. Informati su come prepararti e seguire la procedura step-by-step.',
+    canonicalPath: '/articoli-svizzera/naturalizzazione-canton-argovia-requisiti-e-procedura/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Naturalizzazione nel Canton Argovia: requisiti e procedura",
+      "description": "Scopri i requisiti e la procedura per ottenere la naturalizzazione nel Canton Argovia, inclusi anni di residenza, test di integrazione e tasse. Dati aggiornati",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/naturalizzazione-canton-argovia-requisiti-e-procedura.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Panoramica della città di Aarau, capitale del Canton Argovia, Svizzera"
+      },
+      "datePublished": "2026-09-06T11:16:03+00:00",
+      "dateModified": "2026-09-06T11:16:03+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/naturalizzazione-canton-argovia-requisiti-e-procedura/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-avs-prestazioni-complementari-canton-vallese': {
+    title: 'AVS e prestazioni complementari nel Canton Vallese: guida pratica',
+    description: 'Scopri come funziona l\'AVS e le prestazioni complementari nel Canton Vallese, con focus sulla cassa di compensazione cantonale e il calcolo della rendita.',
+    keywords: 'frontalieri, ticino, svizzera, italia, prestazioni, complementari, canton, vallese',
+    ogTitle: 'AVS e prestazioni complementari nel Canton Vallese',
+    ogDescription: 'Guida pratica sull\'AVS e le prestazioni complementari nel Canton Vallese, con informazioni sulla cassa di compensazione cantonale e il calcolo della rendita.',
+    canonicalPath: '/articoli-svizzera/avs-prestazioni-complementari-canton-vallese/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "AVS e prestazioni complementari nel Canton Vallese: guida pratica",
+      "description": "Scopri come funziona l'AVS e le prestazioni complementari nel Canton Vallese, con focus sulla cassa di compensazione cantonale e il calcolo della rendita.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/avs-prestazioni-complementari-canton-vallese.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista panoramica del Lago di Lugano con il Monte San Salvatore"
+      },
+      "datePublished": "2026-09-06T11:27:45+00:00",
+      "dateModified": "2026-09-06T11:27:45+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/laura-bianchi/#person",
+        "name": "Laura Bianchi",
+        "url": "https://frontaliereticino.ch/autori/laura-bianchi/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/avs-prestazioni-complementari-canton-vallese/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-attacco-hacker-schweizerhof': {
+    title: 'Attacco hacker all\'hotel, allertati circa 10\'000 clienti',
+    description: 'L\'Hotel Schweizerhof di Lenzerheide è stato vittima di un attacco hacker. Circa 10\'000 clienti sono stati allertati. Dati aggiornati 2026 per frontalieri',
+    keywords: 'frontalieri, ticino, svizzera, italia, attacco, hacker, hotel, allertati',
+    ogTitle: 'Attacco hacker all\'hotel, allertati circa 10\'000 clienti',
+    ogDescription: 'L\'Hotel Schweizerhof di Lenzerheide è stato vittima di un attacco hacker. Circa 10\'000 clienti sono stati allertati. I truffatori chiedono dati personali e numeri di carte di credito via WhatsApp.',
+    canonicalPath: '/articoli-svizzera/attacco-hacker-schweizerhof/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Attacco hacker all'hotel, allertati circa 10'000 clienti",
+      "description": "L'Hotel Schweizerhof di Lenzerheide è stato vittima di un attacco hacker. Circa 10'000 clienti sono stati allertati. Dati aggiornati 2026 per frontalieri",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/attacco-hacker-schweizerhof.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine di un hotel svizzero con un computer hackerato in primo piano"
+      },
+      "datePublished": "2026-09-06T11:37:02+00:00",
+      "dateModified": "2026-09-06T11:37:02+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/attacco-hacker-schweizerhof/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-trasporti-pubblici-vallese-guida': {
+    title: 'Trasporti pubblici in Vallese: zone, tariffe e abbonamenti',
+    description: 'Guida pratica al sistema di mobilità vallesano: come funzionano zone e abbonamenti per pendolari e residenti nel rispetto delle direttive federali.',
+    keywords: 'frontalieri, ticino, svizzera, italia, trasporti, pubblici, vallese, zone',
+    ogTitle: 'Trasporti pubblici in Vallese: zone, tariffe e abbonamenti',
+    ogDescription: 'Scopri come funziona il sistema di trasporto pubblico nel Cantone di Vallese, dalla gestione delle zone alla scelta dell\'abbonamento ideale per pendolari e residenti.',
+    canonicalPath: '/articoli-svizzera/trasporti-pubblici-vallese-guida/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Trasporti pubblici in Vallese: zone, tariffe e abbonamenti",
+      "description": "Guida pratica al sistema di mobilità vallesano: come funzionano zone e abbonamenti per pendolari e residenti nel rispetto delle direttive federali.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/trasporti-pubblici-vallese-guida.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Treno regionale che attraversa il paesaggio montano del Vallese."
+      },
+      "datePublished": "2026-09-06T11:54:06+00:00",
+      "dateModified": "2026-09-06T11:54:06+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/trasporti-pubblici-vallese-guida/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-avviare-attivita-vallese-registro-commercio': {
+    title: 'Aprire attività Vallese: guida al registro commercio',
+    description: 'Guida completa per avviare un\'attività nel canton Vallese: scelta della forma giuridica, iscrizione al registro di commercio, tassazione',
+    keywords: 'frontalieri, ticino, svizzera, italia, aprire, attività, vallese, registro',
+    ogTitle: 'Aprire attività Vallese: guida al registro commercio',
+    ogDescription: 'Scopri come avviare legalmente un\'attività nel canton Vallese: procedure di registrazione, forme giuridiche (ditta individuale, SA, Sàrl), costi di iscrizione, tassazione a 3 livelli (federale, cantonale, comunale) e obblighi verso dipendenti',
+    canonicalPath: '/articoli-svizzera/avviare-attivita-vallese-registro-commercio/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Aprire attività Vallese: guida al registro commercio",
+      "description": "Guida completa per avviare un'attività nel canton Vallese: scelta della forma giuridica, iscrizione al registro di commercio, tassazione",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/avviare-attivita-vallese-registro-commercio.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Ufficio amministrativo cantone Vallese a Sionne con persone che compilano moduli di iscrizione al registro di commercio"
+      },
+      "datePublished": "2026-09-06T12:07:35+00:00",
+      "dateModified": "2026-09-06T12:07:35+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/avviare-attivita-vallese-registro-commercio/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

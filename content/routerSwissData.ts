@@ -1929,6 +1929,15 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'assegni-familiari-argovia': { it: 'assegni-familiari-argovia', en: 'family-allowances-aargau', de: 'familienleistungen-aargau', fr: 'allocations-familiales-argovie' },
  'borse-studio-canton-argovia': { it: 'borse-studio-canton-argovia', en: 'scholarships-canton-aargau-requirements-amounts', de: 'stipendien-kanton-aargau-voraussetzungen-betrag', fr: 'bourses-canton-argovie-conditions-montants' },
  'comprare-casa-argovia-procedura': { it: 'comprare-casa-argovia-procedura', en: 'buy-house-canton-aargau-procedure', de: 'haus-kaufen-kanton-aargau-verfahren', fr: 'acheter-maison-canton-argovie' },
+ 'deposito-cauzione-argovia': { it: 'deposito-cauzione-argovia', en: 'deposit-guarantee-aargau', de: 'kaution-argovia-mietrecht', fr: 'depot-garantie-argovia-location' },
+ 'mercato-affitti-canton-argovia': { it: 'mercato-affitti-canton-argovia', en: 'rent-market-canton-aargau', de: 'mietmarkt-kanton-aargau', fr: 'marche-locatif-canton-argovie' },
+ 'eruzione-vulcano-aeroporti-indonesia': { it: 'eruzione-vulcano-aeroporti-indonesia', en: 'volcano-eruption-indonesian-airports', de: 'vulkanausbruch-indonesische-flughaefen', fr: 'eruption-volcan-aeroports-indonesie' },
+ 'esercitazione-salvataggio-monte-ceneri': { it: 'esercitazione-salvataggio-monte-ceneri', en: 'monte-ceneri-rescue-drill', de: 'monte-ceneri-rettungsuebung', fr: 'exercice-de-sauvetage-monte-ceneri' },
+ 'naturalizzazione-canton-argovia-requisiti-e-procedura': { it: 'naturalizzazione-canton-argovia-requisiti-e-procedura', en: 'naturalization-canton-aargau-requirements-and-procedure', de: 'einbuergerung-kanton-aargau-voraussetzungen-und-verfahren', fr: 'naturalisation-canton-argovie-conditions-et-procedure' },
+ 'avs-prestazioni-complementari-canton-vallese': { it: 'avs-prestazioni-complementari-canton-vallese', en: 'avs-complementary-benefits-canton-valais', de: 'avs-zusatzleistungen-kanton-wallis', fr: 'avs-prestations-complementaires-canton-valais' },
+ 'attacco-hacker-schweizerhof': { it: 'attacco-hacker-schweizerhof', en: 'swiss-hotel-hacked', de: 'schweizer-hotel-gehaekt', fr: 'hotel-suisse-pirate' },
+ 'trasporti-pubblici-vallese-guida': { it: 'trasporti-pubblici-vallese-guida', en: 'public-transport-valais-guide', de: 'oeffentlicher-verkehr-wallis-leitfaden', fr: 'transports-publics-valais-guide' },
+ 'avviare-attivita-vallese-registro-commercio': { it: 'avviare-attivita-vallese-registro-commercio', en: 'start-business-canton-valais-commerce-registry', de: 'betrieb-eroffnen-wallis-handelsregister', fr: 'demarrer-activite-canton-valais-registre-commerce' },
 };
 
 export const REVERSE_SWISS: Record<ArticleLocale, Record<string, string>> = (() => {

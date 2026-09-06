@@ -86809,6 +86809,279 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-investimento-busto-arsizio-28enne-ospedale': {
+    title: 'Investimento a Busto Arsizio: 28enne trasportato in ospedale',
+    description: 'Un incidente stradale a Busto Arsizio ha coinvolto un ragazzo di 28 anni, trasportato in ospedale in codice giallo. Dati aggiornati 2026 per frontalieri',
+    keywords: 'frontalieri, ticino, svizzera, italia, investimento, busto, arsizio, 28enne',
+    ogTitle: 'Investimento a Busto Arsizio: 28enne trasportato in ospedale',
+    ogDescription: 'Un incidente stradale a Busto Arsizio ha coinvolto un ragazzo di 28 anni, trasportato in ospedale in codice giallo. L\'evento ha richiesto l\'intervento di ambulanza, automedica e Polizia locale.',
+    canonicalPath: '/articoli-frontaliere/investimento-busto-arsizio-28enne-ospedale',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Investimento a Busto Arsizio: 28enne trasportato in ospedale",
+      "description": "Un incidente stradale a Busto Arsizio ha coinvolto un ragazzo di 28 anni, trasportato in ospedale in codice giallo. Dati aggiornati 2026 per frontalieri",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/investimento-busto-arsizio-28enne-ospedale.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Ambulanza e polizia a Busto Arsizio"
+      },
+      "datePublished": "2026-09-06T10:47:49+00:00",
+      "dateModified": "2026-09-06T10:47:49+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/investimento-busto-arsizio-28enne-ospedale/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-bando-mobilita-prefettura-varese': {
+    title: 'Prefettura Varese: bando di mobilità per 6 posti',
+    description: 'Il Ministero dell\'Interno indice un bando di mobilità volontaria per la Prefettura di Varese: 6 posti disponibili. Candidature su inPA entro il 30 settembre',
+    keywords: 'frontalieri, ticino, svizzera, italia, prefettura, varese, bando, mobilità',
+    ogTitle: 'Prefettura Varese: bando di mobilità per 6 posti',
+    ogDescription: 'Sei posti disponibili per personale di ruolo presso la Prefettura di Varese tramite procedura di mobilità volontaria. Scadenza domande 30 settembre 2026.',
+    canonicalPath: '/articoli-frontaliere/bando-mobilita-prefettura-varese',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Prefettura Varese: bando di mobilità per 6 posti",
+      "description": "Il Ministero dell'Interno indice un bando di mobilità volontaria per la Prefettura di Varese: 6 posti disponibili. Candidature su inPA entro il 30 settembre",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/bando-mobilita-prefettura-varese.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Uffici della Prefettura di Varese"
+      },
+      "datePublished": "2026-09-06T11:02:29+00:00",
+      "dateModified": "2026-09-06T11:02:29+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/bando-mobilita-prefettura-varese/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-adolescente-travolto-treno-berna': {
+    title: 'Adolescente travolto mortalmente da un treno a Berna',
+    description: 'Sabato sera di sangue a Berna: un adolescente è stato investito da un treno presso la stazione di Europaplatz. Dati aggiornati 2026 per frontalieri in Ticino.',
+    keywords: 'frontalieri, ticino, svizzera, italia, adolescente, travolto, mortalmente, treno',
+    ogTitle: 'Adolescente travolto mortalmente da un treno a Berna',
+    ogDescription: 'Un adolescente è stato travolto mortalmente da un treno presso la stazione di Europaplatz a Berna sabato sera. L\'incidente ha causato la chiusura della linea ferroviaria per quasi due ore e mezza.',
+    canonicalPath: '/articoli-frontaliere/adolescente-travolto-treno-berna',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Adolescente travolto mortalmente da un treno a Berna",
+      "description": "Sabato sera di sangue a Berna: un adolescente è stato investito da un treno presso la stazione di Europaplatz. Dati aggiornati 2026 per frontalieri in Ticino.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/adolescente-travolto-treno-berna.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Un adolescente travolto da un treno a Berna"
+      },
+      "datePublished": "2026-09-06T11:11:23+00:00",
+      "dateModified": "2026-09-06T11:11:23+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/adolescente-travolto-treno-berna/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-tagli-organici-scuola-lombardia': {
+    title: 'Tagli al personale ATA: 205 collaboratori in meno in Lombardia',
+    description: 'Tagli agli organici ATA 2026/2027 in Lombardia: 205 posti in meno. Sindacati in allarme per sicurezza e servizi scolastici. Leggi i dettagli. Dati aggiornati',
+    keywords: 'frontalieri, ticino, svizzera, italia, tagli, personale, collaboratori, meno',
+    ogTitle: 'Tagli al personale ATA: 205 collaboratori in meno in Lombardia',
+    ogDescription: 'L\'anno scolastico 2026/2027 si apre con meno collaboratori scolastici. In Lombardia 205 posti in meno: i sindacati denunciano rischi per la sicurezza e la pulizia degli istituti.',
+    canonicalPath: '/articoli-frontaliere/tagli-organici-scuola-lombardia',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Tagli al personale ATA: 205 collaboratori in meno in Lombardia",
+      "description": "Tagli agli organici ATA 2026/2027 in Lombardia: 205 posti in meno. Sindacati in allarme per sicurezza e servizi scolastici. Leggi i dettagli. Dati aggiornati",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/tagli-organici-scuola-lombardia.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Edificio scolastico in Lombardia"
+      },
+      "datePublished": "2026-09-06T11:22:05+00:00",
+      "dateModified": "2026-09-06T11:22:05+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/tagli-organici-scuola-lombardia/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-amazon-malpensa-trasferimento': {
+    title: 'Amazon lascia Malpensa: la Cub denuncia dieci anni di lavoro precario',
+    description: 'Amazon sposta le attività logistiche dal Terminal 2 di Malpensa a Brescia Montichiari, dopo dieci anni di presenza. La Cub denuncia l\'uso massiccio di contratti',
+    keywords: 'frontalieri, ticino, svizzera, italia, amazon, lascia, malpensa, denuncia',
+    ogTitle: 'Amazon lascia Malpensa: la Cub denuncia dieci anni di lavoro precario al Terminal 2',
+    ogDescription: 'Amazon sposta le attività logistiche dal Terminal 2 di Malpensa a Brescia Montichiari, dopo dieci anni di presenza. La Cub denuncia l\'uso massiccio di contratti precari.',
+    canonicalPath: '/articoli-frontaliere/amazon-malpensa-trasferimento',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Amazon lascia Malpensa: la Cub denuncia dieci anni di lavoro precario",
+      "description": "Amazon sposta le attività logistiche dal Terminal 2 di Malpensa a Brescia Montichiari, dopo dieci anni di presenza. La Cub denuncia l'uso massiccio di contratti",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/amazon-malpensa-trasferimento.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista aerea dell'aeroporto di Malpensa con aerei cargo Amazon sulla pista"
+      },
+      "datePublished": "2026-09-06T11:33:13+00:00",
+      "dateModified": "2026-09-06T11:33:13+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/amazon-malpensa-trasferimento/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-angera-corso-musei-demenza': {
+    title: 'Angera: corso gratuito sui musei e demenza il 12 settembre',
+    description: 'Corso gratuito ad Angera il 12 settembre su musei e demenza. Formazione per professionisti del settore culturale e socio-sanitario. Iscrizioni entro il 6/9.',
+    keywords: 'frontalieri, ticino, svizzera, italia, angera, corso, gratuito, musei',
+    ogTitle: 'Corso gratuito sui musei e demenza ad Angera',
+    ogDescription: 'Il 12 settembre il Museo Archeologico di Angera ospita un corso di formazione gratuito per professionisti sull\'accessibilità museale per persone con demenza.',
+    canonicalPath: '/articoli-frontaliere/angera-corso-musei-demenza',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Angera: corso gratuito sui musei e demenza il 12 settembre",
+      "description": "Corso gratuito ad Angera il 12 settembre su musei e demenza. Formazione per professionisti del settore culturale e socio-sanitario. Iscrizioni entro il 6/9.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/angera-corso-musei-demenza.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Civico Museo Archeologico di Angera"
+      },
+      "datePublished": "2026-09-06T11:43:37+00:00",
+      "dateModified": "2026-09-06T11:43:37+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/angera-corso-musei-demenza/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-colacem-sostenibilita-2025': {
+    title: 'Colacem: 46 milioni in investimenti ambientali',
+    description: 'Nel triennio 2023-2025, Colacem ha investito oltre 46 milioni di euro in ambiente, con un focus su materiali riciclati e combustibili alternativi.',
+    keywords: 'frontalieri, ticino, svizzera, italia, colacem, milioni, investimenti, ambientali',
+    ogTitle: 'Colacem, il 19° Rapporto di Sostenibilità: 46 milioni di investimenti ambientali in tre anni',
+    ogDescription: 'Nel triennio 2023-2025, Colacem ha investito oltre 46 milioni di euro in ambiente, con un focus su materiali riciclati e combustibili alternativi. Scopri di più sugli obiettivi di decarbonizzazione e le iniziative sociali dell\'azienda.',
+    canonicalPath: '/articoli-frontaliere/colacem-sostenibilita-2025',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Colacem: 46 milioni in investimenti ambientali",
+      "description": "Nel triennio 2023-2025, Colacem ha investito oltre 46 milioni di euro in ambiente, con un focus su materiali riciclati e combustibili alternativi.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/colacem-sostenibilita-2025.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista aerea dello stabilimento Colacem di Caravate, Varese, Italia, che mostra il suo paesaggio industriale e le iniziative ambientali."
+      },
+      "datePublished": "2026-09-06T11:58:59+00:00",
+      "dateModified": "2026-09-06T11:58:59+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/colacem-sostenibilita-2025/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;
