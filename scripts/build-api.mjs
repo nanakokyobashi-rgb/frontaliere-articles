@@ -820,12 +820,25 @@ console.log(`[build-api] wrote ${Object.keys(written).length} files to dist/api`
 // text artifact, which is why it can only ever be the last word: JSON hides a
 // control character behind an escape, so this catches the XML spelling and
 // `sanitizeDeep` (at `write`) catches the JSON one.
+//
+// RICORSIVO, e non e' un dettaglio: `readdirSync(OUT)` senza discesa vede solo
+// il livello superiore, quindi un artefatto scritto in una sottocartella di
+// `dist/api/` non veniva scandito affatto. E' esattamente cio' che succede a
+// `data/blog-index-*.json`, gli shard da cui il sito rende le liste — che hanno
+// il proprio gate nel loro produttore, ma un `readdir` piatto qui e' una rete
+// che si ferma alla prima cartella, non alla prima cosa non coperta.
 {
-  const textFiles = fs
-    .readdirSync(OUT)
-    .filter((f) => f.endsWith('.xml') || f.endsWith('.json'));
-  for (const f of textFiles) {
-    assertNoControlChars(fs.readFileSync(path.join(OUT, f), 'utf-8'), `dist/api/${f}`);
+  const textFiles = [];
+  const walk = (dir) => {
+    for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
+      const abs = path.join(dir, e.name);
+      if (e.isDirectory()) walk(abs);
+      else if (e.name.endsWith('.xml') || e.name.endsWith('.json')) textFiles.push(abs);
+    }
+  };
+  walk(OUT);
+  for (const abs of textFiles) {
+    assertNoControlChars(fs.readFileSync(abs, 'utf-8'), `dist/api/${path.relative(OUT, abs)}`);
   }
   console.log(`[build-api] control-character gate: ${textFiles.length} text artifacts clean`);
 }
