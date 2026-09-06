@@ -301,6 +301,16 @@ jobs:
         uses: ./.github/actions/setup-headroom
 
       - name: Run Claude fix
+        # Tetto sullo step (classe #7310 del sito, portata qui riconciliando il
+        # `both-moved` di #956). Il cap del job e' 360min e non lega mai: il
+        # vincolo che morde e' `--max-turns`. Misurato su questo repo il
+        # 2026-09-06, 10 esecuzioni reali dello step: 275s min, 733s max. 120min
+        # stanno ~10x sopra il massimo osservato — nessun fix reale li tocca —
+        # e tolgono il caso «run appesa che brucia 6h di runner e muore
+        # `cancelled`», dove il salvataggio del WIP e i tre step di telemetria
+        # qui sotto perdono la coda per girare: un run cancellato non lascia
+        # ne' branch ne' marker `FIX_OUTCOME`, e il drainer lo ri-accoda a vuoto.
+        timeout-minutes: 120
         id: claude_fix
         if: steps.quota.outputs.quota_blocked != 'true' && steps.preflight.outputs.already_resolved != 'true' && steps.stale.outputs.stale_dispatch != 'true' && steps.scope_guard.outputs.workflows_blocked != 'true' && steps.claim.outputs.in_flight != 'true'
         continue-on-error: true

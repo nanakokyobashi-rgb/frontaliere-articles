@@ -516,6 +516,16 @@ jobs:
           ls -la "$CTX_DIR"
 
       - name: Run Claude review
+        # Tetto sullo step (stessa classe del tetto su `Run Claude fix` in
+        # issue-fix.yml). Qui il cap del job e' 360min ed e' CONDIVISO con la
+        # suite `node --test`: un reviewer appeso se lo mangia tutto e il job
+        # muore `cancelled` — che nessun `if: failure()` vede e che lascia il
+        # check-run richiesto dal ruleset senza conclusione, fermando il merge
+        # di PR sane. Misurato su questo repo il 2026-09-06, 17 review reali:
+        # 188s min, 373s max. 45min sono ~7x il massimo, quindi non toccano
+        # nessuna review vera; col `continue-on-error` qui sotto lo scadere non
+        # tinge il job di rosso, lo lascia classificare al guard.
+        timeout-minutes: 45
         id: claude_review
         if: steps.resolve.outputs.should_review == 'true' && steps.guard.outputs.skip != 'true'
         # Un fallimento dell'action non deve abortire il job prima che il guard
