@@ -3375,6 +3375,16 @@
         "corpus": "fa051a94fac7eb5d",
         "alignedAt": "2026-09-04"
       }
+    },
+    {
+      "path": "scripts/lib/mentions-id.mjs",
+      "mode": "corpus-only",
+      "reason": "La regola «l'id compare ancora COME id, e non solo come sottostringa di un id piu' lungo?», estratta da `scripts/retire-article.mjs` (passo 12) perche' serve identica al gate di PR `generator/tests/retired-articles-fully-removed.test.mjs`: due copie della stessa regola divergono, ed e' il difetto vietato da AGENTS.md #6. Resta `corpus-only` per la stessa ragione del suo unico chiamante di produzione: il ritiro di un articolo e' un'operazione sul CORPUS, e sul sito `scripts/retire-article.mjs` non esiste — dopo il cutover del 2026-08-02 la' non si registrano ne' si ritirano articoli. Non e' `corpus-only-pending`: non c'e' un lavoro da tracciare sul sito, portarlo aprirebbe una PR su un percorso morto. Modulo puro (nessun import), quindi copiabile senz'altro se un giorno il sito tornasse a generare.",
+      "baseline": {
+        "site": null,
+        "corpus": "4acdc6d8860661a5",
+        "alignedAt": "2026-09-06"
+      }
     }
   ]
 }

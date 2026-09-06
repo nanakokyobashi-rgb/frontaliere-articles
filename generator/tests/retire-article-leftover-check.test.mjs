@@ -18,12 +18,15 @@
  * (`generator/tests/register-lock.test.mjs`), con l'esito opposto: là il falso
  * `present` nasconde uno split, qui il falso leftover ne inventa uno.
  *
- * ## Perché la funzione si estrae dal sorgente
+ * ## Perché la funzione sta in un modulo a parte
  *
  * `retire-article.mjs` chiama `main()` a fine file: importarlo lo eseguirebbe.
- * Come in `register-lock.test.mjs`, il corpo si estrae dal sorgente e si
- * istanzia con `new Function`, così ciò che il test esegue è la funzione VERA
- * e non una sua copia destinata a divergere.
+ * Ma la stessa regola serve a un secondo chiamante — il gate di PR
+ * `retired-articles-fully-removed.test.mjs`, che rilegge le stesse superfici —
+ * e una seconda copia è il modo garantito per farle divergere. Quindi la
+ * funzione vive in `scripts/lib/mentions-id.mjs`, questo file la importa da lì
+ * (nessuna estrazione, nessuna copia) e l'ultimo caso verifica che i due
+ * chiamanti non se la siano ri-scritta in casa.
  *
  * Lancia con:
  *   node --test generator/tests/retire-article-leftover-check.test.mjs
@@ -33,25 +36,20 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { mentionsId } from '../../scripts/lib/mentions-id.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
-const SRC = readFileSync(path.join(ROOT, 'scripts/retire-article.mjs'), 'utf-8');
 
-function loadMentionsId() {
-  const header = 'function mentionsId(text, id) {';
-  const start = SRC.indexOf(header);
-  assert.notEqual(start, -1, 'mentionsId non trovata in scripts/retire-article.mjs: aggiornare questo test');
-  const rest = SRC.slice(start);
-  const endRel = rest.search(/\n\}\n/);
-  assert.notEqual(endRel, -1, 'chiusura di mentionsId non trovata');
-  return new Function(`${rest.slice(0, endRel + 2)}\nreturn mentionsId;`)();
-}
+/** I chiamanti della regola: devono usarla, non ri-scriverla. */
+const CALLERS = [
+  'scripts/retire-article.mjs',
+  'generator/tests/retired-articles-fully-removed.test.mjs',
+];
 
 const ID = 'disoccupazione-svizzera-2026';
 const LONGER = `frontalieri-${ID}`;
 
 test('la verifica finale non scambia un id piu\' lungo per un residuo', () => {
-  const mentionsId = loadMentionsId();
   // Le forme reali con cui l'id LUNGO vive sulle superfici: riga slug,
   // proprieta' del registro, chiave SEO, chiave i18n, membro della union,
   // chiave/valore dei ledger JSON. Nessuna di queste e' un residuo dell'id
@@ -70,7 +68,6 @@ test('la verifica finale non scambia un id piu\' lungo per un residuo', () => {
 });
 
 test('la verifica finale vede ancora il residuo VERO, in ogni forma scritta', () => {
-  const mentionsId = loadMentionsId();
   // L'altra meta': un needle che non matcha mai passerebbe il test qui sopra
   // e trasformerebbe il gate in decorazione. Ognuna di queste e' una rimozione
   // lasciata a meta', e deve continuare a uscire 1.
@@ -87,5 +84,31 @@ test('la verifica finale vede ancora il residuo VERO, in ogni forma scritta', ()
     `  '${LONGER}': { it: 'x' },\n  '${ID}': { it: 'x' },\n`,
   ]) {
     assert.equal(mentionsId(text, ID), true, `residuo non visto in: ${text.trim()}`);
+  }
+});
+
+test('la regola ha una sorgente sola: nessun chiamante se la ri-scrive', () => {
+  // Il difetto che questo caso ferma non è un falso residuo, è la DERIVA: la
+  // verifica finale dello script e il gate di PR guardano le stesse superfici,
+  // e finché la regola è una sola i due casi qui sopra parlano per entrambi.
+  // Una copia locale in uno dei due li scollegherebbe in silenzio.
+  for (const rel of CALLERS) {
+    const src = readFileSync(path.join(ROOT, rel), 'utf-8');
+    assert.match(
+      src,
+      /import \{ mentionsId \} from '[^']*lib\/mentions-id\.mjs'/,
+      `${rel}: non importa mentionsId da scripts/lib/mentions-id.mjs`,
+    );
+    assert.doesNotMatch(
+      src,
+      /function mentionsId\s*\(/,
+      `${rel}: ri-definisce mentionsId invece di importarla — due copie della `
+      + 'stessa regola divergono, ed è esattamente il difetto per cui il modulo esiste.',
+    );
+    assert.doesNotMatch(
+      src,
+      /readSurface\([^)]*\)\.includes\(id\)|\bread\(f\)\.includes\(id\)/,
+      `${rel}: includes(id) nudo su una superficie — un id annidato inventa un residuo.`,
+    );
   }
 });
