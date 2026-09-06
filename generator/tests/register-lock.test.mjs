@@ -688,3 +688,128 @@ test('il label di ogni bersaglio nomina il file che esiste QUI, non la path pre-
     }
   }
 });
+
+// ── L'ordine dei guard: risoluzione del lock PRIMA della decisione sull'id ──
+//
+// Issue #964. Il lock esiste per una sola cosa: dire, dopo un kill a meta'
+// delle 9 scritture, QUALI file portano l'id e quali no (il messaggio di
+// SPLIT). Ma su un corpus spezzato l'id e' gia' nel registro, quindi ogni
+// controllo di presenza risponde `true` prima ancora che il marker venga
+// guardato — e chi decide su quel `true` chiude il discorso col messaggio
+// sbagliato: `registerArticleFiles()` usciva con «already exists
+// (registration is append-only). Refresh the body files instead», che manda a
+// rinfrescare i body di un corpus che va invece riparato; i tre produttori
+// evergreen imboccavano il ramo di refresh in silenzio; publish-journalist
+// marcava il doc `failed` per «id already registered». In tutti i casi il run
+// si ferma o svia, e la diagnosi che dice dove guardare non viene mai emessa.
+//
+// La proprieta' osservata e' l'ORDINE nel sorgente, non un comportamento:
+// nessuno di questi file e' importabile sotto `node --test` (create-article.mjs
+// importa jsdom a module scope, e i produttori importano lui), quindi il pin
+// va fatto sul testo. Vale per tutta la classe, non per il solo
+// registerArticleFiles(): un fix mono-file lascerebbe tre produttori che non
+// arrivano nemmeno a chiamarlo.
+const GUARD_ORDER_SITES = [
+  {
+    file: 'create-article.mjs',
+    scope: 'export async function registerArticleFiles',
+    why: 'il guard append-only parlerebbe prima che il marker sia risolto',
+  },
+  {
+    file: 'generate-daily-brief-article.mjs',
+    scope: 'async function main() {',
+    why: 'il ramo di refresh partirebbe sopra un corpus spezzato',
+  },
+  {
+    file: 'generate-events-digest-article.mjs',
+    scope: 'async function main() {',
+    why: 'il ramo di refresh partirebbe sopra un corpus spezzato',
+  },
+  {
+    file: 'generate-border-wait-ranking-article.mjs',
+    scope: 'async function main() {',
+    why: 'il ramo di refresh partirebbe sopra un corpus spezzato',
+  },
+  {
+    // L'unico senza assert d'ordine testuale, e non e' un allentamento: qui la
+    // chiamata sta in `main()` mentre il `checkArticleIdExists()` sta in
+    // `processDoc()`, che nel sorgente viene PRIMA. L'ordine a runtime resta
+    // quello giusto (main() gira prima del ciclo sui doc) ma non e' leggibile
+    // dall'ordine delle righe. Metterla dentro processDoc() soddisferebbe
+    // l'ordine testuale e sarebbe SBAGLIATO: il try/catch che avvolge il corpo
+    // degraderebbe lo SPLIT nell'ennesimo doc `failed` e il ciclo proseguirebbe
+    // sopra il corpus spezzato. E' il test dedicato qui sotto a pinnarlo.
+    file: 'publish-journalist-article.mjs',
+    scope: 'async function main() {',
+    sourceOrder: false,
+    why: 'i doc verrebbero marcati failed uno a uno sopra un corpus spezzato',
+  },
+];
+
+test('la risoluzione del lock precede ogni decisione sulla presenza dell\'id', () => {
+  for (const site of GUARD_ORDER_SITES) {
+    const src = fs.readFileSync(new URL(`../scripts/${site.file}`, import.meta.url), 'utf-8');
+    let body = src;
+    if (site.scope) {
+      const start = src.indexOf(site.scope);
+      assert.notEqual(start, -1, `${site.file}: "${site.scope}" non trovato — aggiornare questo test`);
+      body = src.slice(start);
+    }
+    const resolveAt = body.search(/^\s*resolveRegisterLockAtStartup\(\);/m);
+    assert.notEqual(
+      resolveAt,
+      -1,
+      `${site.file}: nessuna chiamata a resolveRegisterLockAtStartup() — ${site.why}`,
+    );
+    if (site.sourceOrder === false) continue;
+    const checkAt = body.search(/^\s*(?:if \(|const \w+ = )checkArticleIdExists\(/m);
+    assert.notEqual(checkAt, -1, `${site.file}: nessun uso di checkArticleIdExists() — aggiornare questo test`);
+    assert.ok(
+      resolveAt < checkAt,
+      `${site.file}: checkArticleIdExists() decide PRIMA che il lock sia risolto — ${site.why}, ` +
+        'e la diagnosi di SPLIT non viene mai emessa',
+    );
+  }
+});
+
+test('publish-journalist risolve il lock fuori dal try che marca i doc failed', () => {
+  // Controprova del caso speciale sopra: dentro `processDoc()` la chiamata
+  // sarebbe testualmente "prima" del guard e passerebbe l'assert precedente,
+  // ma lo SPLIT finirebbe nel `catch` che scrive `status: 'failed'` sul doc, e
+  // il ciclo continuerebbe con i doc successivi sopra lo stesso corpus rotto.
+  const src = fs.readFileSync(new URL('../scripts/publish-journalist-article.mjs', import.meta.url), 'utf-8');
+  const procStart = src.indexOf('async function processDoc(');
+  const mainStart = src.indexOf('async function main() {');
+  assert.notEqual(procStart, -1);
+  assert.notEqual(mainStart, -1);
+  assert.ok(procStart < mainStart, 'layout del file cambiato — aggiornare questo test');
+  const inProcessDoc = src.slice(procStart, mainStart);
+  assert.equal(
+    /^\s*resolveRegisterLockAtStartup\(\);/m.test(inProcessDoc),
+    false,
+    'resolveRegisterLockAtStartup() sta dentro processDoc(): il suo try/catch degraderebbe lo SPLIT ' +
+      'a un doc `failed` e il ciclo proseguirebbe sopra il corpus spezzato',
+  );
+  assert.ok(
+    /^\s*resolveRegisterLockAtStartup\(\);/m.test(src.slice(mainStart)),
+    'main() non risolve il lock prima del ciclo sui doc',
+  );
+});
+
+test('resolveRegisterLockAtStartup e\' esportata: i produttori la importano davvero', () => {
+  // Senza l'export i quattro produttori fallirebbero all'import, non a
+  // runtime — ma `node --test` non li carica (jsdom), quindi il legame va
+  // osservato sul sorgente, come gli altri qui sopra (AGENTS.md #6).
+  assert.ok(
+    /^export function resolveRegisterLockAtStartup\(\) \{/m.test(CREATE_ARTICLE_SRC),
+    'resolveRegisterLockAtStartup() non e\' esportata da create-article.mjs',
+  );
+  for (const site of GUARD_ORDER_SITES.filter((s) => s.file !== 'create-article.mjs')) {
+    const src = fs.readFileSync(new URL(`../scripts/${site.file}`, import.meta.url), 'utf-8');
+    const importBlock = src.slice(0, src.indexOf("from './create-article.mjs'"));
+    assert.ok(
+      importBlock.includes('resolveRegisterLockAtStartup'),
+      `${site.file}: usa resolveRegisterLockAtStartup() senza importarla da create-article.mjs`,
+    );
+  }
+});

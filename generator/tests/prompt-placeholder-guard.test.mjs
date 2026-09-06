@@ -735,6 +735,20 @@ describe('LOCK — se il template acquisisce un segnaposto, questo test diventa 
 // 3. WIRING — il guard e' invocato, e nel posto giusto
 // ═══════════════════════════════════════════════════════════════════════════
 
+// Il corpo INTERO di registerArticleFiles(), non una finestra di N caratteri
+// dal suo inizio: una finestra fissa e' un assert che scade da solo. Un
+// commento aggiunto in cima alla funzione (issue #964) ha spinto
+// `clampSeoDescriptions(data)` oltre il taglio, `indexOf` ha risposto -1, e
+// l'ordine "guard prima del clamp" e' diventato rosso pur essendo intatto —
+// nell'altro verso lo stesso taglio avrebbe reso l'assert vacuo in silenzio.
+function registerArticleFilesBody() {
+  const i = createArticleSrc.indexOf('export async function registerArticleFiles');
+  assert.ok(i > 0, 'registerArticleFiles non trovata');
+  const endRel = createArticleSrc.slice(i).search(/\n\}\n/);
+  assert.ok(endRel > 0, 'chiusura di registerArticleFiles non trovata');
+  return createArticleSrc.slice(i, i + endRel + 2);
+}
+
 describe('wiring — il guard e\' cablato sul percorso di scrittura CONDIVISO', () => {
   it('create-article.mjs importa il modulo', () => {
     assert.match(createArticleSrc, /from '\.\/lib\/prompt-placeholder-guard\.mjs'/);
@@ -744,9 +758,7 @@ describe('wiring — il guard e\' cablato sul percorso di scrittura CONDIVISO', 
     // Non in validate(): validate() e' UN produttore, e i quattro generatori
     // che importano registerArticleFiles direttamente non ci passano mai —
     // la forma esatta dell'incidente del 2026-08-09 sulla meta description.
-    const i = createArticleSrc.indexOf('export async function registerArticleFiles');
-    assert.ok(i > 0, 'registerArticleFiles non trovata');
-    const corpo = createArticleSrc.slice(i, i + 2000);
+    const corpo = registerArticleFilesBody();
     assert.ok(corpo.includes('sanitizePromptPlaceholders(data)'), 'guard non invocato in registerArticleFiles');
   });
 
@@ -777,8 +789,11 @@ describe('wiring — il guard e\' cablato sul percorso di scrittura CONDIVISO', 
     // Troncare a 160 caratteri un campo che E' il segnaposto lo renderebbe
     // solo un segnaposto piu' corto — e sotto il taglio la regola di forma
     // ancorata non lo vedrebbe piu'.
-    const i = createArticleSrc.indexOf('export async function registerArticleFiles');
-    const corpo = createArticleSrc.slice(i, i + 2000);
+    const corpo = registerArticleFilesBody();
+    // Entrambe presenti: senza questo, un `indexOf` a -1 renderebbe il
+    // confronto vero (o falso) per assenza invece che per ordine.
+    assert.ok(corpo.includes('sanitizePromptPlaceholders(data)'), 'guard non invocato in registerArticleFiles');
+    assert.ok(corpo.includes('clampSeoDescriptions(data)'), 'clampSeoDescriptions non invocato in registerArticleFiles');
     assert.ok(
       corpo.indexOf('sanitizePromptPlaceholders(data)') < corpo.indexOf('clampSeoDescriptions(data)'),
       'il guard deve precedere il clamp',
