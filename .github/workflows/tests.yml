@@ -258,7 +258,7 @@ jobs:
         run: |
           set -euo pipefail
           last=$(gh api "repos/$REPO/pulls/$PR_NUMBER/reviews" --paginate \
-            --jq '[.[] | select(.user.type=="Bot" and (.user.login|test("claude";"i")) and (.body|contains("## LGTM")))] | last | .commit_id // empty' 2>/dev/null || true)
+            --jq '[.[] | select(.user.type=="Bot" and (.user.login|test("^(claude|frontaliere-automation)";"i")) and (.body|contains("## LGTM")))] | last | .commit_id // empty' 2>/dev/null || true)
           if [ -z "$last" ]; then
             echo "skip=false" >> "$GITHUB_OUTPUT"; echo "Nessuna review LGTM precedente → review piena."; exit 0
           fi
@@ -362,7 +362,7 @@ jobs:
           # Re-review incrementale: se esiste gia' una review Claude su un commit
           # precedente, si valuta SOLO il delta, non l'intera PR.
           lastRev=$(gh api "repos/$REPO/pulls/$PR_NUMBER/reviews" --paginate \
-            --jq '[.[] | select(.user.type=="Bot" and (.user.login|test("claude";"i")))] | last | .commit_id // empty' 2>/dev/null || true)
+            --jq '[.[] | select(.user.type=="Bot" and (.user.login|test("^(claude|frontaliere-automation)";"i")))] | last | .commit_id // empty' 2>/dev/null || true)
           if [ -n "$lastRev" ] && [ "$lastRev" != "$HEAD_SHA" ]; then
             delta_code=$(gh api "repos/$REPO/compare/$lastRev...$HEAD_SHA" --jq '.files[].filename' 2>/dev/null \
               | grep -Fxf <(echo "$code_files") || true)
