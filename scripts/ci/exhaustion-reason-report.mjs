@@ -371,13 +371,31 @@ export function formatRunLine(runId, summary) {
 
 const repoArgs = process.env.GH_REPO ? ['--repo', process.env.GH_REPO] : [];
 
+/**
+ * Quante chiamate a `gh` sono fallite. E' un CONTATORE e non solo una riga su
+ * stderr per la stessa ragione di `run-card-report.mjs` (#924 item 3): un log
+ * che non si e' riusciti a scaricare si parserizza come «nessuna cascata», cioe'
+ * un guasto dello strumento diventa indistinguibile dall'assenza del fenomeno —
+ * ed e' esattamente il difetto che questo report esiste per misurare. Il numero
+ * viaggia quindi accanto ai totali, dove chi legge il denominatore lo vede.
+ */
+let ghFailures = 0;
+
 function gh(args) {
   try {
     return execFileSync('gh', args, { encoding: 'utf-8', maxBuffer: 128 * 1024 * 1024 });
   } catch (e) {
+    ghFailures += 1;
     process.stderr.write(`gh fallita: ${e && e.message ? e.message : e}\n`);
     return '';
   }
+}
+
+/** La riga che impedisce di leggere uno zero come un verdetto. */
+function ghFailureNote() {
+  if (!ghFailures) return null;
+  return `⚠️  ${ghFailures} chiamate a \`gh\` fallite: i log non letti si contano come «nessuna cascata»,`
+    + ' quindi i numeri qui sopra sono un LIMITE INFERIORE, non una misura.';
 }
 
 async function readStdin() {
@@ -432,6 +450,8 @@ async function main() {
     // renderla illeggibile.
     console.log(`\ncascate confrontabili: ${cascades} su ${runsConCascata}/${runs.length} run lette`);
     console.log(`flip: ${flips}/${cascades} cascate`);
+    const note = ghFailureNote();
+    if (note) console.log(note);
     return;
   }
 
@@ -451,6 +471,8 @@ async function main() {
   const totLine = Object.entries(totals).sort((a, b) => b[1] - a[1]).map(([r, n]) => `${r}=${n}`).join(' ') || '—';
   console.log(`\nTOTALE su ${runs.length} run — motivi distinti: ${Object.keys(totals).length} · ${totLine}`);
   console.log(`difetti rilevati: ${findings}`);
+  const note = ghFailureNote();
+  if (note) console.log(note);
 }
 
 if (process.argv[1] && process.argv[1].endsWith('exhaustion-reason-report.mjs')) main();
