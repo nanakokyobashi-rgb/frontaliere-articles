@@ -115,8 +115,19 @@ jobs:
           # l'unico che cancella branch su questo repo (`--delete-branch` sotto),
           # quindi e' qui che la label deve avere effetto — altrimenti resta un
           # segnale che nessuno legge, applicato proprio quando serve di piu'.
-          prs=$(gh pr list --repo "$REPO" --state open --label stale-review --limit 50 \
-            --json number,title,body,createdAt,author,labels)
+          #
+          # `gh api --paginate` e non `gh pr list --limit 50`: quel
+          # sottocomando non ha `--paginate`, il suo `--limit` TRONCA in
+          # silenzio e ordina per creazione DISCENDENTE — cioe' taglia via
+          # proprio le PR piu' VECCHIE, che sono per costruzione le uniche che
+          # questo scan puo' riciclare (gate 1: aperte da >MAXAGE). Sopra il
+          # cap lo scan resterebbe verde riciclando le PR sbagliate e lasciando
+          # ferme per sempre quelle che deve riciclare. L'endpoint `issues` e'
+          # l'unico che filtra per label; `.pull_request` seleziona le PR e il
+          # rimappaggio riporta i campi alla forma che i gate sotto leggono.
+          prs=$(gh api --paginate "repos/$REPO/issues?state=open&labels=stale-review&per_page=100" \
+            --jq '.[] | select(.pull_request) | {number, title, body, createdAt: .created_at, labels: [.labels[] | {name}]}' \
+            | jq -s '.')
           COUNT=$(printf '%s' "$prs" | jq 'length')
           echo "stale-review PRs aperte: $COUNT"
 
@@ -281,9 +292,28 @@ jobs:
           # subordinano la chiusura a `steps.detect.outcome == 'success'` prima
           # ancora di guardare il conteggio; qui produttore e consumatore
           # stanno nello stesso step, e l'equivalente e' catturare `$?`.
-          PRS=$(gh pr list --repo "$GH_REPO" --state open --label needs-human \
-            --json number,title,updatedAt \
-            --jq '.[] | "- #\(.number) \(.title) (ultimo update \(.updatedAt))"')
+          #
+          # E il PERIMETRO delle due query, non solo il loro esito: girano su
+          # `gh api --paginate` e non su `gh pr list` / `gh issue list --limit
+          # N`. Quei sottocomandi non hanno `--paginate` e il loro `--limit`
+          # TRONCA IN SILENZIO: la lista PR qui non ne aveva nemmeno uno,
+          # quindi si fermava al default di 30, e la lista issue si fermava a
+          # 200 con i filtri applicati DOPO il taglio. Sopra il cap la lista
+          # pubblicata e i due conteggi sotto-riportano senza errore — l'unico
+          # canale che gli umani leggono direbbe «30 PR» con 90 aperte, che e'
+          # la stessa bugia silenziosa della query fallita un passo piu' in
+          # la'. `transport-identical-twins.yml`, `auto-merge-enroll-sweep.yml`
+          # e `stale-pr-rescuer.yml` hanno gia' preso questa via.
+          #
+          # PR e issue vengono dallo STESSO endpoint `issues`, che le elenca
+          # entrambe: e' l'unico che accetta il filtro per label
+          # (`repos/.../pulls` non ce l'ha), e la presenza di `.pull_request`
+          # e' la discriminante fra i due tipi. Restano due query separate, con
+          # due esiti separati, perche' il guard sotto distingue quale delle
+          # due non ha potuto guardare.
+          NEEDS_HUMAN_API="repos/$GH_REPO/issues?state=open&labels=needs-human&per_page=100"
+          PRS=$(gh api --paginate "$NEEDS_HUMAN_API" \
+            --jq '.[] | select(.pull_request) | "- #\(.number) \(.title) (ultimo update \(.updated_at))"')
           PRS_RC=$?
           # L'issue dedup di questo stesso step nasce con `automation` e NON
           # con `needs-human` — ma niente le impedisce di riceverla dopo: il
@@ -307,9 +337,8 @@ jobs:
           # residuo permanente e' un'altra issue invece di questa. Elencarla come
           # «oggetto che aspetta occhi umani» e' anche falso: il digest E' il
           # canale umano, non un item da sbloccare.
-          ISSUES=$(gh issue list --repo "$GH_REPO" --state open --label needs-human \
-            --limit 200 --json number,title,updatedAt,labels \
-            --jq '.[] | select(.title != env.DEDUP_TITLE) | select([.labels[].name] | index(env.LBL_PERMANENT_TRACKER) | not) | "- #\(.number) \(.title) (ultimo update \(.updatedAt))"')
+          ISSUES=$(gh api --paginate "$NEEDS_HUMAN_API" \
+            --jq '.[] | select(.pull_request | not) | select(.title != env.DEDUP_TITLE) | select([.labels[].name] | index(env.LBL_PERMANENT_TRACKER) | not) | "- #\(.number) \(.title) (ultimo update \(.updated_at))"')
           ISSUES_RC=$?
           if [ "$PRS_RC" -ne 0 ] || [ "$ISSUES_RC" -ne 0 ]; then
             # Query fallita: lo stato del backlog e' SCONOSCIUTO, non vuoto.
@@ -317,7 +346,7 @@ jobs:
             # troncata da un errore direbbe il falso): si fallisce lo step —
             # `continue-on-error: true` tiene comunque verde il job, ma il
             # rosso resta visibile e il prossimo run ricalcola da zero.
-            echo "::error::Query needs-human fallita (gh pr list rc=$PRS_RC, gh issue list rc=$ISSUES_RC): non tocco l'issue dedup. Liste vuote per un errore non sono «nessun residuo»."
+            echo "::error::Query needs-human fallita (PR rc=$PRS_RC, issue rc=$ISSUES_RC): non tocco l'issue dedup. Liste vuote per un errore non sono «nessun residuo»."
             exit 1
           fi
           if [ -z "$PRS" ] && [ -z "$ISSUES" ]; then
