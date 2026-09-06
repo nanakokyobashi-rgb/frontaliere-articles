@@ -1555,7 +1555,7 @@ const prioRank = (iss) => (has(iss, 'fu-prio:high') ? 0 : 1); // high prima
 // il motivo per cui la rotazione è BOUNDED alla testa della coda (gli altri non
 // sarebbero comunque promossi in questo tick) e alla sola classe di priorità
 // della testa (una `fu-prio:low` non deve mai scavalcare una `high`).
-const SLOT_FAIRNESS_SCAN_MAX = Number(process.env.FOLLOWUP_SLOT_FAIRNESS_SCAN_MAX || 5);
+export const SLOT_FAIRNESS_SCAN_MAX = Number(process.env.FOLLOWUP_SLOT_FAIRNESS_SCAN_MAX || 5);
 
 /** I candidati su cui vale la pena misurare `promotedAt`: il prefisso della coda
  * già ordinata che condivide la classe di priorità della testa, capped a
