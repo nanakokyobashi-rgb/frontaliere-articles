@@ -3387,6 +3387,16 @@
       }
     },
     {
+      "path": "scripts/lib/ts-literals.mjs",
+      "mode": "corpus-only",
+      "reason": "La localizzazione di un letterale dentro un sorgente TS — lo span di `<const> NOME … = [ … ]` e la parentesi che chiude davvero quella di apertura, saltando stringhe e commenti — estratta perche' serve identica ai DUE chiamanti che riscrivono lo stesso array `ALL_BLOG_ARTICLE_IDS` di `content/routerBlogData.ts`: `generator/scripts/create-article.mjs` lo rigenera, `scripts/retire-article.mjs` ne toglie un id. Entrambi lo localizzavano con due euristiche di testo sbagliate agli stessi due estremi (ancora per NOME che attraversa i newline; fine sul primo `];` letterale), che e' il difetto misurato su `BORDER_WAIT_CROSSINGS` in `generator/tests/rewire-json-contracts.test.mjs` — li' su una lettura, qui su una SCRITTURA (issue #971, item 4 e 5). Sorgente unica per AGENTS.md #6. `corpus-only` per la stessa ragione e con lo stesso destino di `scripts/lib/article-surfaces.mjs` e `scripts/lib/mentions-id.mjs`: registrazione e ritiro degli articoli sono operazioni sul CORPUS, e dopo il cutover del 2026-08-02 sul sito non si fanno piu'. Non `corpus-only-pending`: non c'e' lavoro da tracciare la', portarlo aprirebbe una PR su un percorso morto.",
+      "baseline": {
+        "site": null,
+        "corpus": "f3524e6d7e6ebd56",
+        "alignedAt": "2026-09-06"
+      }
+    },
+    {
       "path": "scripts/lib/mentions-id.mjs",
       "mode": "corpus-only",
       "reason": "La regola «l'id compare ancora COME id, e non solo come sottostringa di un id piu' lungo?», estratta da `scripts/retire-article.mjs` (passo 12) perche' serve identica al gate di PR `generator/tests/retired-articles-fully-removed.test.mjs`: due copie della stessa regola divergono, ed e' il difetto vietato da AGENTS.md #6. Resta `corpus-only` per la stessa ragione del suo unico chiamante di produzione: il ritiro di un articolo e' un'operazione sul CORPUS, e sul sito `scripts/retire-article.mjs` non esiste — dopo il cutover del 2026-08-02 la' non si registrano ne' si ritirano articoli. Non e' `corpus-only-pending`: non c'e' un lavoro da tracciare sul sito, portarlo aprirebbe una PR su un percorso morto. Modulo puro (nessun import), quindi copiabile senz'altro se un giorno il sito tornasse a generare.",
