@@ -241,9 +241,9 @@
       "path": "scripts/ci/followup-resolution-match.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "e7deb440849ecc8b",
-        "corpus": "e7deb440849ecc8b",
-        "alignedAt": "2026-09-01"
+        "site": "2913a3b426726667",
+        "corpus": "2913a3b426726667",
+        "alignedAt": "2026-09-06"
       }
     },
     {
@@ -606,9 +606,9 @@
       "path": "scripts/ci/triage-sweep.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "b938c12407740dae",
-        "corpus": "b938c12407740dae",
-        "alignedAt": "2026-08-14"
+        "site": "96b65da7be89b73f",
+        "corpus": "96b65da7be89b73f",
+        "alignedAt": "2026-09-06"
       }
     },
     {
@@ -1436,9 +1436,9 @@
       "path": "scripts/lib/upload-cdn-file.sh",
       "mode": "identical",
       "baseline": {
-        "site": "b77a196ac412dc13",
-        "corpus": "b77a196ac412dc13",
-        "alignedAt": "2026-08-09"
+        "site": "070de13a96329c71",
+        "corpus": "070de13a96329c71",
+        "alignedAt": "2026-09-06"
       }
     },
     {
@@ -1508,9 +1508,9 @@
       "sitePath": "scripts/lib/article-locale-lexicon.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "f372a9c4926035ee",
-        "corpus": "f372a9c4926035ee",
-        "alignedAt": "2026-08-09"
+        "site": "fb1b88c29102b100",
+        "corpus": "fb1b88c29102b100",
+        "alignedAt": "2026-09-06"
       }
     },
     {
@@ -1762,9 +1762,9 @@
       "sitePath": "scripts/lib/discovery/sources/orphanQuerySource.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "a7bf06d3eb603f12",
-        "corpus": "8d53a04fd4ef2dde",
-        "alignedAt": "2026-08-26"
+        "site": "7e128ec7373134b8",
+        "corpus": "7e128ec7373134b8",
+        "alignedAt": "2026-09-06"
       }
     },
     {
