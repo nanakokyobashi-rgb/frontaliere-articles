@@ -91,7 +91,14 @@ function lineHasMultiCloseViolation(line) {
 // The ONLY tokens GitHub acts on. Note what is absent: the gerunds. `Closing
 // #12` / `Fixing #12` read as closure to a human and do nothing at all.
 const EFFECTIVE_KW = '(?:close[sd]?|fix(?:e[sd])?|resolve[sd]?)';
-const EFFECTIVE_RE = new RegExp(`\\b${EFFECTIVE_KW}\\b[\\s:]*[*_\`[]*(${REF})`, 'gi');
+// `[\s:*_\`[]*` and not `[\s:]*[*_\`[]*`: the two classes interleave in real
+// bodies (`**Closes** #12`, `*Chiude* #12`), where a space sits BETWEEN the
+// closing emphasis and the ref. GitHub renders the emphasis away and honors the
+// keyword, so a detector that stops there reads a closing body as not closing —
+// and for INTENT_RE below it is a missed report, the expensive direction. None
+// of the added characters is a letter, so no prose can bridge verb and ref.
+const MD_GAP = '[\\s:*_`[]*';
+const EFFECTIVE_RE = new RegExp(`\\b${EFFECTIVE_KW}\\b${MD_GAP}(${REF})`, 'gi');
 
 // Tokens that state closure but are NOT GitHub keywords. Italian verbs (the
 // measured recurrence) plus the English near-misses that share the failure
@@ -123,10 +130,34 @@ const PAST_REPORT_RE = /\b(?:gi[àa]'?|already|was|were|sono\s+stat[ei]|[èe]'?\
 // open with its fix already on `main`).
 const CONCESSIVE =
   '(?:solo|soltanto|solamente|unicamente|esclusivamente|only|just|merely|simply)';
+// `n(?:[éè]|e['’])` and not `n[éè]`: `ne'` is how `né` is typed on a keyboard
+// without the accent, exactly as `PAST_REPORT_RE` already admits `gi[àa]'?` for
+// `già`. The apostrophe is REQUIRED for the unaccented form — a bare `ne` is the
+// Italian pronoun ("ne chiude tre"), and swallowing it would cost a missed
+// closure, which is the expensive direction.
 const NEG_REPORT_RE = new RegExp(
-  `\\b(?:non|n[éè]|not|never|mai|senza|without)(?!\\s+${CONCESSIVE}\\b)(?:\\s+[\\p{L}\\p{N}_'’]+){0,2}\\s*$`,
+  `\\b(?:non|n(?:[éè]|e['’])|not|never|mai|senza|without)(?!\\s+${CONCESSIVE}\\b)(?:\\s+[\\p{L}\\p{N}_'’]+){0,2}\\s*$`,
   'iu',
 );
+// Markdown emphasis is not a word, and to a guard anchored to `\s*$` it looks
+// like one: `**non** chiude #849` puts `**` between the negation and the verb,
+// the chain breaks at the asterisks, and the false positive the guard exists to
+// prevent comes back — in the exact form the bodies of this repo are written in.
+// So both report guards read the prefix with the emphasis markers taken out.
+// A run BETWEEN two word characters is deleted rather than spaced: it is an
+// intra-word underscore (`skip_total`), and turning it into a space would split
+// one word into two and eat the ≤2-word budget, which flips the guard off. A run
+// anywhere else becomes a space, so `qualcosa**non** chiude #12` keeps the word
+// boundary the `\b` needs.
+const EMPHASIS_RUN_RE = /[*_`]+/g;
+const WORD_CHAR_RE = /[\p{L}\p{N}]/u;
+function stripEmphasis(s) {
+  return s.replace(EMPHASIS_RUN_RE, (run, at, whole) => {
+    const prev = whole[at - 1];
+    const next = whole[at + run.length];
+    return prev && next && WORD_CHAR_RE.test(prev) && WORD_CHAR_RE.test(next) ? '' : ' ';
+  });
+}
 // Filler tolerated between the verb and the ref: `Chiusa da #12`, `Risolve
 // definitivamente #12`, `Closing the #12`. Bounded to a known word list so a
 // sentence boundary or real prose can never bridge verb and ref.
@@ -141,7 +172,7 @@ const INTENT_FILLER = "(?:\\s+(?:da|by|the|la|il|lo|le|gli|l'|anche|definitivame
 // which is the expensive direction (a missed report leaves an issue open with
 // its fix on `main`). It stays, and the negation guard below is what keeps it
 // honest.
-const INTENT_RE = new RegExp(`\\b(${INTENT_KW})\\b${INTENT_FILLER}[\\s:]*[*_\`[]*(${REF})`, 'gi');
+const INTENT_RE = new RegExp(`\\b(${INTENT_KW})\\b${INTENT_FILLER}${MD_GAP}(${REF})`, 'gi');
 
 /** Every ref a real GitHub keyword governs → the ones that will actually close. */
 function effectiveRefs(body) {
@@ -170,15 +201,26 @@ function effectiveRefs(body) {
  * word bound plus the letters-only class means any punctuation, list marker or
  * blank line between the negation and the verb still breaks the chain.
  *
+ * The INTENT is matched on the masked line, the two guards read the UNMASKED
+ * one (`raw`/`rawPrev`, same string when the caller has nothing better). The
+ * asymmetry is the point: masking answers "is this claimed or merely quoted?",
+ * which only the claim needs, while the guards answer "what does the sentence
+ * around the claim say?" — and a word in an inline code span is still part of
+ * that sentence. Without this ``​`non` chiuse #849`` reached the guard as
+ * `      chiuse #849`, negation blanked out, and was reported: marking the
+ * negated word as code deleted the negation. `maskQuoted` is length-preserving
+ * character by character, so `m.index` addresses the same column in both.
+ *
  * @returns {Array<{ keyword: string, ref: string }>}
  */
-function lineIntentRefs(line, prev = '') {
+function lineIntentRefs(line, prev = '', raw = line, rawPrev = prev) {
   const s = String(line || '');
-  const carry = String(prev || '').trim();
+  const src = String(raw ?? '');
+  const carry = String(rawPrev ?? '').trim();
   INTENT_RE.lastIndex = 0;
   return [...s.matchAll(INTENT_RE)]
     .filter((m) => {
-      const before = (carry ? `${carry} ` : '') + s.slice(0, m.index);
+      const before = stripEmphasis((carry ? `${carry} ` : '') + src.slice(0, m.index));
       return !PAST_REPORT_RE.test(before) && !NEG_REPORT_RE.test(before);
     })
     .map((m) => ({ keyword: m[1], ref: m[2] }));
@@ -236,7 +278,12 @@ export function checkClosesLines(body = '') {
           refs.map((r) => `\`Closes #${r}\``).join(' / ') + '.',
       });
     }
-    for (const { keyword, ref } of lineIntentRefs(lines[i], lines[i - 1])) {
+    for (const { keyword, ref } of lineIntentRefs(
+      lines[i],
+      lines[i - 1],
+      rawLines[i] ?? lines[i],
+      rawLines[i - 1] ?? lines[i - 1],
+    )) {
       if (willClose.has(ref.toLowerCase())) continue; // già chiusa da una keyword vera altrove
       if (reported.has(ref.toLowerCase())) continue;
       reported.add(ref.toLowerCase());
