@@ -388,11 +388,11 @@
     {
       "path": "scripts/ci/lib/constants.mjs",
       "mode": "adapted",
-      "reason": "Il check-run atteso dall'auto-merge qui si chiama `tests (node --test)`, non `vitest (unit + integration)`: questo repo non usa vitest. Differisce UNA riga; il nome dell'export resta `VITEST_CHECK_NAME` proprio per non far divergere i tre consumer (auto-merge-eval, pr-autorebase, vitestCheck), che restano identici e copiabili. Il valore e' sovrascrivibile via env CI_CHECK_NAME: il giorno in cui il sito adotta la stessa riga, i due file tornano identici e questa voce diventa `identical`.",
+      "reason": "Il check-run atteso dall'auto-merge qui si chiama `tests (node --test)`, non `vitest (unit + integration)`: questo repo non usa vitest. Il nome dell'export resta `VITEST_CHECK_NAME` proprio per non far divergere i tre consumer (auto-merge-eval, pr-autorebase, vitestCheck), che restano identici e copiabili. Il valore e' sovrascrivibile via env CI_CHECK_NAME. RICONCILIATO 2026-09-06 (#977 item 3) da `both-moved`: il sito si e' mosso una volta sola dalla baseline del 2026-09-03, con valerielinc-ops/frontaliere-si-o-no#7600, che porta la PRIMA forma posizionale di `REDFLAG_IMPORTANT_RE` (lead a classe negata semplice + lookbehind `(?<!`) ` di un carattere); qui quella forma e' arrivata prima (#959) ed e' gia' stata superata da #1106, che ne chiude i due residui (il lookbehind di un carattere spegneva il gate su una label incollata al marker; due finding sulla stessa riga diventavano verdi). Non c'e' quindi niente da riportare in giu': il contenuto del sito e' un sottoinsieme di questo, e la baseline registra la lettura di entrambi i lati. DEBITO VERSO IL SITO, non chiudibile da qui: `main` del sito gira ancora la regex pre-#977, quindi quei due buchi sono aperti la'; la risalita deve nascere sul sito (il mirror va in una direzione sola e questo repo non ha una credenziale cross-repo in scrittura). Le altre differenze del file — `GENERATOR_CI_JOB_NAME`, `GENERATOR_CI_TRIGGER_PATHS`, `REVIEWER_BOT_LOGIN_RE`/`_JQ` come prefisso, la lista `REVIEW_WORKFLOW_DRIFT_FILES` puntata a `tests.yml` — sono adattamenti gia' in essere alla baseline, non movimento del sito: il file NON differisce piu' di una riga sola, e dirlo qui evita che il prossimo lettore legga il resto come drift da riparare.",
       "baseline": {
-        "site": "8780f8f6a78a118e",
-        "corpus": "32ca44d6b7bce619",
-        "alignedAt": "2026-09-03"
+        "site": "fd6260735824d5e6",
+        "corpus": "a013e26bc6e1a713",
+        "alignedAt": "2026-09-06"
       }
     },
     {
@@ -832,11 +832,11 @@
     {
       "path": ".github/workflows/pr-redflag-fixer.yml",
       "mode": "adapted",
-      "reason": "Niente npm ci, ponte RC del corpus, identita' GITHUB_PAT_NANAKO. Il gate sul reviewer (startsWith 'claude') e' gia' repo-agnostico. RIALLINEATO 2026-08-09 senza portare nulla: il sito ha cambiato una riga sola, `HAS_PAT: ${{ env.APP_TOKEN != '' || env.GITHUB_PAT != '' }}` -> `${{ env.APP_TOKEN_WORKFLOWS == 'true' || env.GITHUB_PAT != '' }}`. Qui la riga 212 e' gia' `HAS_PAT: ${{ env.GITHUB_PAT_NANAKO != '' }}`: la modifica cade dentro la zona adattata al 100%, e questo repo non ha una GitHub App da cui leggere APP_TOKEN_WORKFLOWS. RESIDUO NOTO, non chiuso qui: il commento sopra HAS_PAT (righe 195-204) afferma ancora che «HAS_PAT accetta ORA anche APP_TOKEN», falso su questo repo, e lo step di push (riga 279) si gata su `env.APP_TOKEN != '' || env.GITHUB_PAT != ''` mentre PUSH_TOKEN e' GITHUB_PAT_NANAKO (riga 281) — variabili disallineate. Il gate passa comunque perche' GITHUB_PAT e' mappato in load-rc-env.mjs, quindi l'effetto pratico non e' stato verificato.",
+      "reason": "Niente npm ci, ponte RC del corpus, identita' GITHUB_PAT_NANAKO, e lo scope-check «PR autonoma» sta nell'`if:` di job invece che nel preflight. RIALLINEATO 2026-08-09 senza portare nulla: il sito aveva cambiato una riga sola, `HAS_PAT: ${{ env.APP_TOKEN != '' || env.GITHUB_PAT != '' }}` -> `${{ env.APP_TOKEN_WORKFLOWS == 'true' || env.GITHUB_PAT != '' }}`. Qui la riga 212 e' gia' `HAS_PAT: ${{ env.GITHUB_PAT_NANAKO != '' }}`: la modifica cade dentro la zona adattata al 100%, e questo repo non ha una GitHub App da cui leggere APP_TOKEN_WORKFLOWS. RICONCILIATO 2026-09-06 (#977 item 3) da `both-moved`: dalla baseline del 2026-09-03 il sito si e' mosso due volte — #7600 (il `grep -qP` allineato alla PRIMA forma posizionale di `REDFLAG_IMPORTANT_RE`) e #7651 (il set dei reviewer bot accetta anche l'App bot, nell'`if:` e nel `--jq` del bundle). Entrambe sono gia' qui in forma piu' forte: il grep e' quello di #1106 (pinnato verbatim dal guard `mirror bash` di generator/tests/redflag-important-marker.test.mjs) e il set reviewer e' `startsWith(..., 'frontaliere-automation')` + `REVIEWER_BOT_LOGIN_JQ` da #970, che copre anche il login GraphQL senza `[bot]`. Niente da riportare in giu'. RESIDUO NOTO, non chiuso qui: il commento sopra HAS_PAT (righe 195-204) afferma ancora che «HAS_PAT accetta ORA anche APP_TOKEN», falso su questo repo, e lo step di push (riga 279) si gata su `env.APP_TOKEN != '' || env.GITHUB_PAT != ''` mentre PUSH_TOKEN e' GITHUB_PAT_NANAKO (riga 281) — variabili disallineate. Il gate passa comunque perche' GITHUB_PAT e' mappato in load-rc-env.mjs, quindi l'effetto pratico non e' stato verificato.",
       "baseline": {
-        "site": "170ff67e67b6397d",
-        "corpus": "fb0598f183e27b60",
-        "alignedAt": "2026-09-03"
+        "site": "99dd0bb1b3d86d95",
+        "corpus": "18391f42974c24a3",
+        "alignedAt": "2026-09-06"
       }
     },
     {
