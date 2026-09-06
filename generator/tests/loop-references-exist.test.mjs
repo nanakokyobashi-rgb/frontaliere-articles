@@ -297,6 +297,15 @@ const DECLARED_ABSENT = {
       'mode «assenti dal sito»: l\'affermazione e\' vera PROPRIO perche\' il file qui non c\'e\'. ' +
       'Niente a runtime dipende dalla sua esistenza qui — il codice legge il manifest, non il file.',
   },
+  'scripts/ci/handoff-to-site.mjs :: mirror-articles-engine.yml': {
+    kind: 'site-only',
+    reason:
+      'Citazione CONTRASTIVA, come nei gemelli `loop-drift-check.mjs` e ' +
+      '`transport-identical-twins.mjs`: `descentBlock` enumera i DUE canali di discesa per ' +
+      'dire quali gemelli `identical` non ne hanno nessuno, e uno dei due vive sul sito. ' +
+      'Niente qui dipende dalla sua esistenza — il codice legge il manifest e il trasporto ' +
+      'locale, mai quel workflow; se comparisse in questo repo la frase diventerebbe falsa.',
+  },
   'scripts/ci/transport-identical-twins.mjs :: mirror-articles-engine.yml': {
     kind: 'site-only',
     reason:
