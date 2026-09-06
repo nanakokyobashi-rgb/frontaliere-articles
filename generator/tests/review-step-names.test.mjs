@@ -1,10 +1,10 @@
 /**
- * review-step-names.test.mjs — i due nomi di step su cui pr-autorebase decide.
+ * review-step-names.test.mjs — i nomi di step su cui pr-autorebase decide.
  *
  * ## Perche' esiste
  *
  * `pr-autorebase.mjs` non legge il log del job: legge la lista degli step dalla
- * jobs API e decide su DUE nomi, che vivono in due posti che non possono
+ * jobs API e decide su TRE nomi, che vivono in due posti che non possono
  * importarsi a vicenda — const JS in `scripts/ci/lib/vitestCheck.mjs` e `name:`
  * di uno step in `.github/workflows/tests.yml` (AGENTS.md #6).
  *
@@ -12,6 +12,12 @@
  *     il review gate e non i test (`vitestFailureIsReviewGate`).
  *   · `CLAUDE_REVIEW_STEP_NAME` — se e' `skipped`, su quella run la review NON
  *     e' girata: l'ha saltata il `Re-review guard` (`reviewSkippedByGuard`).
+ *   · `REVIEW_ABORT_STEP_NAME` — se e' `failure`, la review e' girata ed e'
+ *     morta senza postare: il rosso del gate e' la sua CONSEGUENZA, non un
+ *     verdetto negativo (`reviewAbortedWithoutVerdict`). E' anche l'unico
+ *     secondo step rosso che `vitestFailureIsReviewGate` tollera: con il nome
+ *     sbagliato torna a contare come «test rotti sotto» e nega il one-shot
+ *     proprio dove il re-trigger e' la cura (#975).
  *
  * Un rename di uno step e' esattamente il tipo di modifica che sembra innocua.
  * Se si separano non esplode niente: `vitestFailureIsReviewGate` smette di
@@ -47,7 +53,11 @@ function stepNames(src) {
 /** Il blocco di uno step, dal suo `- name:` al `- name:` successivo. */
 function stepBlock(src, name) {
   const lines = src.split('\n');
-  const at = lines.findIndex((l) => new RegExp(`^\\s*-\\s+name:\\s*['"]?${name}['"]?\\s*$`).test(l));
+  // `name` va escapato: i nomi di step contengono parentesi (`Fail on transient
+  // API error (no review posted)`, `Generator CI gate (solo ...)`) che, non
+  // escapate, diventano gruppi di cattura e non matchano piu' il letterale.
+  const lit = name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const at = lines.findIndex((l) => new RegExp(`^\\s*-\\s+name:\\s*['"]?${lit}['"]?\\s*$`).test(l));
   assert.notEqual(at, -1, `tests.yml non ha uno step \`${name}\``);
   const out = [];
   for (let i = at + 1; i < lines.length; i++) {
@@ -57,14 +67,15 @@ function stepBlock(src, name) {
   return out.join('\n');
 }
 
-test('REVIEW_GATE_STEP_NAME e CLAUDE_REVIEW_STEP_NAME combaciano con tests.yml', async () => {
-  const { REVIEW_GATE_STEP_NAME, CLAUDE_REVIEW_STEP_NAME } = await import(
+test('i nomi di step su cui pr-autorebase decide combaciano con tests.yml', async () => {
+  const { REVIEW_GATE_STEP_NAME, CLAUDE_REVIEW_STEP_NAME, REVIEW_ABORT_STEP_NAME } = await import(
     '../../scripts/ci/lib/vitestCheck.mjs'
   );
   const names = stepNames(yaml);
   for (const [constName, value] of [
     ['REVIEW_GATE_STEP_NAME', REVIEW_GATE_STEP_NAME],
     ['CLAUDE_REVIEW_STEP_NAME', CLAUDE_REVIEW_STEP_NAME],
+    ['REVIEW_ABORT_STEP_NAME', REVIEW_ABORT_STEP_NAME],
   ]) {
     assert.ok(
       names.includes(value),
@@ -104,5 +115,27 @@ test('il review gate gira anche a review saltata, altrimenti il segnale non esis
     /steps\.guard\.outputs\.skip/,
     'il review gate ora si salta insieme alla review: lo stato «gate rosso su verdetti ' +
       'gia\' postati» sparisce, e con esso il caso che `reviewSkippedByGuard` distingue.',
+  );
+});
+
+test('lo step di abort gira anche quando la review muore, e sta PRIMA del gate', async () => {
+  const { REVIEW_ABORT_STEP_NAME, REVIEW_GATE_STEP_NAME } = await import(
+    '../../scripts/ci/lib/vitestCheck.mjs'
+  );
+  const block = stepBlock(yaml, REVIEW_ABORT_STEP_NAME);
+  const cond = block.match(/^\s*if:\s*(.+)$/m);
+  assert.ok(cond, `lo step \`${REVIEW_ABORT_STEP_NAME}\` non ha un \`if:\``);
+  // Senza `always()` lo step non girerebbe dopo una `Run Claude review` rossa,
+  // che e' esattamente il caso che deve classificare.
+  assert.match(cond[1], /always\(\)/, "lo step di abort non gira piu' con `always()`");
+  // L'ordine e' sostanziale: la co-occorrenza «abort rosso + gate rosso» esiste
+  // solo se l'abort NON aborta il job prima che il gate giri. Il gate ha
+  // `always()` (pinnato sopra), quindi basta che l'abort lo preceda.
+  const names = stepNames(yaml);
+  assert.ok(
+    names.indexOf(REVIEW_ABORT_STEP_NAME) < names.indexOf(REVIEW_GATE_STEP_NAME),
+    `\`${REVIEW_ABORT_STEP_NAME}\` deve precedere \`${REVIEW_GATE_STEP_NAME}\`: `
+      + 'e\' quell\'ordine a produrre i DUE step rossi che `vitestFailureIsReviewGate` '
+      + 'deve saper leggere come un rosso solo.',
   );
 });

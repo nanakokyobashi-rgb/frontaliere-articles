@@ -337,7 +337,14 @@ export const REVIEW_ABORT_STEP_NAME = 'Fail on transient API error (no review po
  * significa negarlo proprio dove il re-trigger È la cura, e far dire allo
  * sticky «serve far passare i test» a una PR coi test verdi.
  *
- * ── PERCHÉ UNA WHITELIST DI UN NOME E NON UN ALLENTAMENTO ──────────────────
+ * Nella whitelist c'è anche `CLAUDE_REVIEW_STEP_NAME`. Oggi non dovrebbe mai
+ * comparire rosso — lo step ha `continue-on-error: true`, e la `conclusion` che
+ * la jobs API riporta è quella DOPO l'applicazione del flag — ma la ragione per
+ * tollerarlo è identica e non dipende da quel dettaglio: se lo step della
+ * review è rosso, a essere morta è la review, non i test della PR. Farne
+ * dipendere il discriminante sarebbe fragile per niente.
+ *
+ * ── PERCHÉ UNA WHITELIST DI DUE NOMI E NON UN ALLENTAMENTO ─────────────────
  * Misura sulle ultime 60 run `tests` fallite (2026-09-06): 43 hanno il review
  * gate rosso e in ZERO di esse un secondo step è fallito. `Generator CI gate`
  * è fallito 2 volte, entrambe insieme a `Unit + closure gates` — cioè su
@@ -345,7 +352,8 @@ export const REVIEW_ABORT_STEP_NAME = 'Fail on transient API error (no review po
  * ripara `generator-ci`. La co-occorrenza è quindi l'eccezione, non la norma,
  * e non giustifica un discriminante generico. L'unico caso in cui è
  * STRUTTURALE è la morte della review, e si nomina per identità. Tutto il
- * resto resta fail-CLOSED com'era.
+ * resto — `Generator CI gate`, i gate unit, il contratto del body — resta
+ * fail-CLOSED com'era.
  *
  * Pura: nessuna I/O. Il chiamante fetcha gli step e rende l'azione one-shot.
  *
@@ -361,7 +369,7 @@ export function vitestFailureIsReviewGate(steps) {
     if (s.name === REVIEW_GATE_STEP_NAME) gateFailed = true;
     // La morte della review NON è un secondo rosso indipendente: è la CAUSA
     // del rosso del gate. Vedi «L'ECCEZIONE» sopra.
-    else if (s.name !== REVIEW_ABORT_STEP_NAME) return false;
+    else if (!REVIEW_DEATH_STEP_NAMES.has(s.name)) return false;
   }
   return gateFailed;
 }
@@ -514,3 +522,14 @@ export function reviewSkippedByGuard(steps) {
   const review = steps.find((s) => s && s.name === CLAUDE_REVIEW_STEP_NAME);
   return Boolean(review && review.conclusion === 'skipped');
 }
+
+/**
+ * Gli step il cui rosso dice «la review è morta», non «i test sono rotti»:
+ * l'unica eccezione al fail-CLOSED di `vitestFailureIsReviewGate` (#975).
+ * Deliberatamente una whitelist di NOMI e non una categoria — la misura dice
+ * che ogni altra co-occorrenza osservata era codice davvero rotto.
+ */
+export const REVIEW_DEATH_STEP_NAMES = new Set([
+  CLAUDE_REVIEW_STEP_NAME,
+  REVIEW_ABORT_STEP_NAME,
+]);

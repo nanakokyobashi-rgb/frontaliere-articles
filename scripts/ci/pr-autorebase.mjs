@@ -425,8 +425,9 @@ function guardedReopen(num, head, { stuckRedReason = '' } = {}) {
   // Rosso da review gate: causa del messaggio SEMPRE (anche a one-shot già
   // speso, altrimenti il commento tornerebbe a dire «far passare i test» a una
   // PR i cui test sono verdi), ma esenzione dalla precondizione una volta sola.
-  // Una sola lettura degli step del job: le due domande — «di chi è il rosso»
-  // e «la review è girata su quella run» — si rispondono sulla STESSA lista.
+  // Una sola lettura degli step del job: le tre domande — «di chi è il rosso»,
+  // «la review è girata su quella run» e «è arrivata in fondo» — si rispondono
+  // sulla STESSA lista.
   const steps = vitestConclusion === 'failure' ? vitestJobSteps(head) : [];
   const reviewGateRed = vitestFailureIsReviewGate(steps);
   // Review saltata dal `Re-review guard`: il gate è rosso sui verdetti già
