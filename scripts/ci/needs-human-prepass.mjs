@@ -311,12 +311,27 @@ export function registryRowState(text = '') {
  * esiste — leggerlo come la riga del registro sarebbe una collisione di
  * numerazione, non un riconoscimento. Da lì `requireRepo`.
  *
+ * `repos` (plurale) è per il chiamante che NON sta filtrando su un repo solo:
+ * `parseVisionRegistry` legge una tabella che decide sui due repo del ciclo, e
+ * una sua riga può qualificare il riferimento (`owner/name#N`) proprio per
+ * disambiguarli — che è la forma che il registro stesso raccomanda. Prima esisteva
+ * il solo `repo`, e chiamare senza argomenti dava `owner === undefined`: ogni
+ * riferimento QUALIFICATO cadeva sul ramo «terzo repo», la riga restava con
+ * `refs: []` e `parseVisionRegistry` la scartava **in silenzio**. Cioè: scrivere
+ * la riga meglio la rendeva invisibile al parser.
+ *
+ * Il default resta il vecchio (nessun repo dichiarato ⇒ nessun riferimento
+ * qualificato accettato): la lista va passata da chi sa quali repo valgono, non
+ * dedotta dal silenzio.
+ *
  * @param {string} text
- * @param {{repo?: string, requireRepo?: boolean}} opts repo = `owner/name` del sito
+ * @param {{repo?: string, repos?: string[], requireRepo?: boolean}} opts
+ *   `repo`/`repos` = slug `owner/name` accettati per i riferimenti qualificati
  * @returns {Set<number>}
  */
-export function citedRefs(text, { repo = '', requireRepo = false } = {}) {
-  const [owner, name] = String(repo || '').split('/');
+export function citedRefs(text, { repo = '', repos = null, requireRepo = false } = {}) {
+  const allowed = (Array.isArray(repos) && repos.length ? repos : (repo ? [repo] : []))
+    .map((r) => String(r || '').split('/'));
   const out = new Set();
   // Il `(?<!\.md\s{0,3})` non e' un dettaglio: il registro cita le proprie
   // regole come `AGENTS.md #1` e `AGENTS.md #7`, e senza quel lookbehind la
@@ -326,7 +341,8 @@ export function citedRefs(text, { repo = '', requireRepo = false } = {}) {
     const o = m[1] || null;
     const n = m[2] || null;
     if (o) {
-      if (o !== owner || (n && n !== name)) continue; // riferimento a un terzo repo
+      // riferimento a un terzo repo, oppure nessuno slug dichiarato dal chiamante
+      if (!allowed.some(([owner, name]) => o === owner && (!n || n === name))) continue;
     } else if (requireRepo) {
       continue; // numero nudo su un repo diverso da quello del registro
     }
@@ -365,7 +381,11 @@ export function parseVisionRegistry(md = '') {
     if (/^[-:\s]+$/.test(date) || date === 'Data') continue; // separatore / intestazione
     const source = restCells.join(' | ');
     const body = `${decision} | ${source}`;
-    const refs = [...citedRefs(body)];
+    // I DUE slug del ciclo, esplicitamente: il registro decide su entrambi i
+    // repo e le sue righe qualificano il riferimento proprio per disambiguarli.
+    // Senza la lista, `owner/name#N` finiva sul ramo «terzo repo» e la riga
+    // spariva dal registro senza un warning (vedi `citedRefs`).
+    const refs = [...citedRefs(body, { repos: Object.values(REPO_SLUGS) })];
     if (!refs.length) continue; // una riga che non nomina nessuna issue non è agganciabile
     rows.push({ date, decision, source, refs, scope: registryRowScope(body), ...registryRowState(body) });
   }
@@ -483,6 +503,51 @@ export function noteMarker(reg, staleBlocks = []) {
   if (reg && reg.refs.length) parts.push(`r=${reg.refs.join(',')}`);
   if (staleBlocks.length) parts.push(`b=${staleBlocks.map((s) => s.key).join(',')}`);
   return parts.length ? `<!-- PREPASS_NOTE: ${parts.join(' ')} -->` : null;
+}
+
+/**
+ * Il marker si può usare come prova di idempotenza? Pura (#923, item 1).
+ *
+ * `already = comments.some(...)` era una prova solo quando `comments` conteneva
+ * davvero i commenti della issue. Ma `comments` resta `[]` anche in due casi che
+ * non sono «nessun commento»:
+ *
+ *  - la famiglia owner-only, per cui `needsVerdictLookup` è falso e la lettura
+ *    non viene mai fatta (è il risparmio voluto: la decisione non guarda il
+ *    verdetto). La NOTA però sì, perché `prepassDecision` la calcola per tutte
+ *    le issue tranne quelle con `agent:no-age-out`;
+ *  - la lettura dei commenti FALLITA (rate-limit, API down), dove
+ *    `verdictLookupFailed` è già la dichiarazione che l'input manca.
+ *
+ * In entrambi `already` è falso per costruzione, quindi la stessa nota veniva
+ * ri-postata **a ogni run giornaliero, per sempre**, proprio su `Agent loop
+ * down: GITHUB_PAT` e `GH_PAT expiry warning:` — le issue che nessuno vuole più
+ * rumorose. È la stessa classe dell'`ageMs == null` di #815: assenza di prova
+ * letta come prova dell'assenza.
+ *
+ * La riparazione è in due pezzi. Qui: senza i commenti in mano l'idempotenza non
+ * è DIMOSTRABILE, quindi non si posta — un giro di ritardo costa zero, una nota
+ * quotidiana no. In `main()`: i commenti si leggono anche quando il verdetto non
+ * serve, ma SOLO se c'è un marker da verificare, così il risparmio di lettura
+ * resta dov'era (nessuna nota ⇒ nessuna chiamata in più).
+ *
+ * `code` e non il solo testo: il chiamante deve distinguere il salto NORMALE
+ * («gia' annotata», il regime a regime) da quello che e' una misura mancata
+ * («commenti non letti»), e confrontare frasi in prosa e' il modo in cui i bug
+ * di questa classe si riaprono.
+ *
+ * @param {{marker?: string|null, comments?: Array<{body?: string}>, commentsRead?: boolean}} o
+ * @returns {{post: boolean, code: 'ok'|'no-marker'|'unread'|'already', why: string}}
+ */
+export function noteGate({ marker = null, comments = [], commentsRead = false } = {}) {
+  if (!marker) return { post: false, code: 'no-marker', why: 'nessun marker' };
+  if (!commentsRead) {
+    return { post: false, code: 'unread', why: 'commenti non letti: idempotenza non dimostrabile' };
+  }
+  if ((comments || []).some((c) => String(c?.body || '').includes(marker))) {
+    return { post: false, code: 'already', why: 'già annotata' };
+  }
+  return { post: true, code: 'ok', why: '' };
 }
 
 /**
@@ -662,8 +727,40 @@ export const EXPIRY_REQUEUE_MAX_CYCLES = posNum(process.env.PREPASS_EXPIRY_REQUE
  * @returns {number}
  */
 export function countExpiryRequeues(comments) {
+  return countMarker(comments, PREPASS_EXPIRY_MARKER);
+}
+
+/**
+ * Il marker del ri-accodo deciso dal REGISTRO, gemello di
+ * `PREPASS_EXPIRY_MARKER` e per la stessa ragione (#923, item 2).
+ *
+ * Il ramo registro era l'unico `requeue` di questo stadio SENZA contatore: se
+ * il fixer fallisce e un monitor rimette `needs-human` con un verdetto fuori da
+ * `PREPASS_VERDICT_BEATS_FAMILY` (o senza verdetto), il giorno dopo il ramo si
+ * ripete identico — un'oscillazione GIORNALIERA, cioè trenta volte più stretta
+ * di quella che #815 ha chiuso sul ramo scadenza, e ogni giro consuma uno slot
+ * di `MAX_PER_RUN` sulla quota condivisa. Che il ri-accodo sia autorizzato dal
+ * proprietario non lo rende un'ipotesi NUOVA: la riga del registro non cambia
+ * fra un giro e l'altro, quindi al terzo giro la scommessa persa è la stessa.
+ *
+ * Marker separato e non riuso di quello della scadenza: sono due oscillazioni
+ * diverse, con cause diverse, e contarle insieme farebbe scattare il tetto
+ * dell'una per i giri dell'altra.
+ */
+export const PREPASS_REGISTRY_MARKER = '<!-- PREPASS_REGISTRY_REQUEUE -->';
+
+/** Quanti cicli registro→requeue prima di tornare al giudizio dello sweep. */
+export const REGISTRY_REQUEUE_MAX_CYCLES = posNum(process.env.PREPASS_REGISTRY_REQUEUE_MAX_CYCLES, 3);
+
+/** Quante volte il ramo registro ha gia' ri-accodato la issue. Pura. */
+export function countRegistryRequeues(comments) {
+  return countMarker(comments, PREPASS_REGISTRY_MARKER);
+}
+
+/** Occorrenze di un marker nei commenti. Pura, e una sola per tutti i marker. */
+function countMarker(comments, marker) {
   let n = 0;
-  for (const c of comments || []) if (String(c?.body || '').includes(PREPASS_EXPIRY_MARKER)) n++;
+  for (const c of comments || []) if (String(c?.body || '').includes(marker)) n++;
   return n;
 }
 
@@ -762,18 +859,22 @@ export function needsVerdictLookup(title = '') {
  *
  * @param {{title?: string, body?: string, labels?: string[], verdict?: string|null,
  *          verdictAt?: number|null, verdictLookupFailed?: boolean,
- *          expiryRequeues?: number, now?: number,
+ *          expiryRequeues?: number, registryRequeues?: number, now?: number,
  *          registry?: Array<object>, staleBlocks?: Array<object>, homeScope?: string}} iss
  * @returns {{action: 'requeue'|'decompose'|'keep', reason: string,
- *            expiryRequeue?: boolean, note?: string, marker?: string}}
+ *            expiryRequeue?: boolean, registryRequeue?: boolean,
+ *            note?: string, marker?: string}}
  */
 export function prepassDecision({
   title = '', body = '', labels = [], verdict = null, verdictAt = null,
-  verdictLookupFailed = false, expiryRequeues = 0, now = Date.now(),
+  verdictLookupFailed = false, expiryRequeues = 0, registryRequeues = 0, now = Date.now(),
   registry = [], staleBlocks = [], homeScope = HOME_SCOPE,
 } = {}) {
   const reg = matchRegistry(`${title}\n${body}`, registry, { homeScope });
-  const d = decideAction({ title, labels, verdict, verdictAt, verdictLookupFailed, expiryRequeues, now, reg });
+  const d = decideAction({
+    title, labels, verdict, verdictAt, verdictLookupFailed,
+    expiryRequeues, registryRequeues, now, reg,
+  });
   // Un tracker permanente non si annota: il solo che porta `agent:no-age-out` è
   // il digest dello sweep, il cui CORPO viene riscritto ogni settimana con
   // l'elenco delle domande aperte. I riferimenti citati cambierebbero ogni
@@ -786,7 +887,8 @@ export function prepassDecision({
 /** Il ramo che sceglie l'azione. Separato dal wrapper solo per tenerlo puro. */
 function decideAction({
   title = '', labels = [], verdict = null, verdictAt = null,
-  verdictLookupFailed = false, expiryRequeues = 0, now = Date.now(), reg,
+  verdictLookupFailed = false, expiryRequeues = 0, registryRequeues = 0,
+  now = Date.now(), reg,
 } = {}) {
   // Un tracker permanente è aperto per scelta: non si accoda e non si scorpora.
   if (labels.includes('agent:no-age-out')) return { action: 'keep', reason: 'tracker permanente' };
@@ -829,13 +931,26 @@ function decideAction({
   // `PREPASS_VERDICT_BEATS_FAMILY` — `max-turns`/`no-root-cause` dicono che
   // l'ultima run è morta per una ragione che il ri-accodo non cambia, e una
   // decisione del proprietario non rende quella run più corta.
+  //
+  // …e con lo stesso tetto del ramo scadenza (#923, item 2): la riga del
+  // registro non cambia fra un giro e l'altro, quindi se la issue torna qui è
+  // perché a valle è fallito qualcosa che il ri-accodo non tocca. Senza tetto e
+  // senza marker l'oscillazione è GIORNALIERA e indistinguibile, nel riepilogo,
+  // da un riconoscimento legittimo. Vedi `PREPASS_REGISTRY_MARKER`.
   if (reg && reg.unconditional.length && !reg.conditional.length
       && !(verdict && PREPASS_VERDICT_BEATS_FAMILY.has(verdict))) {
     const r = reg.unconditional[0];
     const cited = reg.refs.map((n) => `#${n}`).join(' ');
+    if (registryRequeues >= REGISTRY_REQUEUE_MAX_CYCLES) {
+      return {
+        action: 'keep',
+        reason: `oscillazione registro→requeue: ${registryRequeues} giri già fatti (tetto ${REGISTRY_REQUEUE_MAX_CYCLES}) sulla stessa riga del ${r.date} (${cited}) — la decisione del proprietario non è cambiata e il ri-accodo non è più un'ipotesi nuova, serve il giudizio dello sweep`,
+      };
+    }
     return {
       action: 'requeue',
-      reason: `il registro di \`VISION.md\` (${SITE_REPO}) ha già deciso il ${r.date} sui riferimenti citati nel corpo (${cited}), con una riga incondizionata (nessun qualificatore): non è più una domanda per il proprietario`,
+      registryRequeue: true,
+      reason: `il registro di \`VISION.md\` (${SITE_REPO}) ha già deciso il ${r.date} sui riferimenti citati nel corpo (${cited}), con una riga incondizionata (nessun qualificatore): non è più una domanda per il proprietario — giro ${registryRequeues + 1}/${REGISTRY_REQUEUE_MAX_CYCLES}`,
     };
   }
 
@@ -970,10 +1085,24 @@ function gh(args, { json = true } = {}) {
  */
 function makeRefResolver() {
   const cache = new Map();
+  let capLogged = false;
   return (repo, number) => {
     const key = `${repo}#${number}`;
     if (cache.has(key)) return cache.get(key);
-    if (cache.size >= MAX_REF_LOOKUPS) return null;
+    if (cache.size >= MAX_REF_LOOKUPS) {
+      // Gli altri due cap di questo file stampano entrambi «no silent cap»;
+      // questo no, ed era l'unico che spegne una MISURA invece di rimandare
+      // un'azione (#923, item 5). Da qui in poi «nessun blocco scaduto» non
+      // significa piu' «misurato e non scaduto» ma «non misurato», e il
+      // riepilogo mostrerebbe `note=` basso senza dire perche'. La cache conta
+      // anche i `null`, quindi bastano 40 riferimenti APERTI in cima all'elenco
+      // per spegnere il rilevamento su tutte le issue successive del run.
+      if (!capLogged) {
+        capLogged = true;
+        console.log(`::warning::needs-human-prepass: budget lookup riferimenti esaurito (${MAX_REF_LOOKUPS}/run) → i riferimenti successivi NON sono misurati: da qui in poi «nessun blocco scaduto» vuol dire «non guardato» (no silent cap).`);
+      }
+      return null;
+    }
     let v = null;
     try {
       const o = gh(['api', `repos/${repo}/issues/${number}`]);
@@ -1028,16 +1157,26 @@ function main() {
     let verdictAt = null;
     let verdictLookupFailed = false;
     let expiryRequeues = 0;
+    let registryRequeues = 0;
     let comments = [];
+    // `commentsRead` non e' `comments.length`: una issue senza commenti e una
+    // issue di cui non abbiamo letto i commenti danno lo stesso array vuoto, e
+    // confonderle e' esattamente il difetto dell'item 1 di #923.
+    let commentsRead = false;
+    const readComments = () => {
+      const cs = gh(['api', `repos/${REPO}/issues/${iss.number}/comments?per_page=100`, '--paginate']);
+      comments = Array.isArray(cs) ? cs : [];
+      commentsRead = true;
+    };
     if (needsVerdictLookup(iss.title)) {
       lookupAttempted++;
       try {
-        const cs = gh(['api', `repos/${REPO}/issues/${iss.number}/comments?per_page=100`, '--paginate']);
-        comments = Array.isArray(cs) ? cs : [];
+        readComments();
         ({ outcome: verdict, at: verdictAt } = latestVerdictEntry(comments));
         // Stessa lettura, nessuna chiamata in piu': i giri di questo stadio
         // stanno nei commenti che abbiamo gia' in mano.
         expiryRequeues = countExpiryRequeues(comments);
+        registryRequeues = countRegistryRequeues(comments);
       } catch (e) {
         // Un fallimento di lettura NON è «nessun verdetto»: va dichiarato, o su
         // rate-limit l'intera run degrada al comportamento pre-#778 in silenzio.
@@ -1056,17 +1195,39 @@ function main() {
 
     const d = prepassDecision({
       title: iss.title, body, labels, verdict, verdictAt, verdictLookupFailed,
-      expiryRequeues, registry, staleBlocks, homeScope: HOME_SCOPE,
+      expiryRequeues, registryRequeues, registry, staleBlocks, homeScope: HOME_SCOPE,
     });
     counts[d.action]++;
 
-    const already = d.marker && comments.some((c) => String(c?.body || '').includes(d.marker));
+    // La nota si posta solo se l'idempotenza e' DIMOSTRABILE. Per la famiglia
+    // owner-only i commenti non sono stati letti (la decisione non guarda il
+    // verdetto), quindi si leggono qui — e solo se c'e' davvero un marker da
+    // verificare: nessuna nota, nessuna chiamata in piu', il risparmio resta
+    // dov'era. Se invece la lettura e' gia' fallita non si ritenta: quel
+    // fallimento e' gia' contato come `keep` conservativo.
+    if (d.marker && !commentsRead && !verdictLookupFailed) {
+      try {
+        readComments();
+      } catch (e) {
+        console.log(`::warning::needs-human-prepass: #${iss.number} commenti non leggibili (${String(e).slice(0, 100)}) → nota rimandata al prossimo giro, non ri-postata alla cieca.`);
+      }
+    }
+    const gate = noteGate({ marker: d.marker, comments, commentsRead });
 
     if (d.action === 'keep') {
       // La nota non consuma `MAX_PER_RUN`: non instrada niente, non tocca le
       // label e non mette pressione sulla coda del fixer, che e' cio' che quel
       // cap protegge. Ha il suo, dichiarato — vedi `MAX_NOTES_PER_RUN`.
-      if (!d.note || already) continue;
+      if (!d.note) continue;
+      if (!gate.post) {
+        // Un salto per «gia' annotata» e' il regime normale e non si stampa; uno
+        // per «idempotenza non dimostrabile» e' una misura mancata, e questo
+        // stadio non salta niente in silenzio.
+        if (gate.code !== 'already') {
+          console.log(`needs-human-prepass: #${iss.number} nota NON allegata (${gate.why}) → riprovata al prossimo giro.`);
+        }
+        continue;
+      }
       if (noted >= MAX_NOTES_PER_RUN) {
         if (!noteCapLogged) {
           console.log(`needs-human-prepass: cap note ${MAX_NOTES_PER_RUN}/run raggiunto → il resto al prossimo giro (no silent cap).`);
@@ -1095,7 +1256,12 @@ function main() {
     // Il marker va SOLO sui ri-accodi per scadenza: e' il contatore dell'item 3,
     // e includerlo nei requeue di famiglia normali lo farebbe contare giri che
     // non sono oscillazioni.
-    const mark = d.expiryRequeue ? `\n\n${PREPASS_EXPIRY_MARKER}` : '';
+    // Un marker per ciascuna delle due oscillazioni che questo stadio sa
+    // produrre; i requeue di famiglia normali non ne portano nessuno, o
+    // conterebbero giri che non sono oscillazioni.
+    let mark = '';
+    if (d.expiryRequeue) mark = `\n\n${PREPASS_EXPIRY_MARKER}`;
+    else if (d.registryRequeue) mark = `\n\n${PREPASS_REGISTRY_MARKER}`;
     // La riga che questa PR ripara: prima era `Questa issue non contiene una
     // decisione del proprietario`, affermato SENZA aver letto il registro — che
     // da qui non era mai stato aperto. Ora e' un esito verificato in questo run,
@@ -1106,8 +1272,8 @@ function main() {
     const note = [
       `🔁 **Pre-pass deterministico dello sweep (zero-Claude)**: ${d.reason}. Questa issue torna nel ciclo autonomo invece di occupare un'azione del cap del run Claude settimanale.`,
       registryVerdict,
-      already ? '' : d.note,
-      already ? '' : d.marker,
+      gate.post ? d.note : '',
+      gate.post ? d.marker : '',
     ].filter(Boolean).join('\n\n') + mark;
     try {
       gh(['issue', 'comment', String(iss.number), '--repo', REPO, '--body', note], { json: false });
