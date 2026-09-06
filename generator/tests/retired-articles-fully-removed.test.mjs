@@ -51,39 +51,31 @@ import { readFileSync, existsSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { mentionsId } from '../../scripts/lib/mentions-id.mjs';
+// Le superfici NON sono riscritte qui: le enumera lo stesso modulo che usa
+// `scripts/retire-article.mjs`. Un secondo elenco a mano è già divergito una
+// volta — mancavano `content/blogArticleIds.ts`, i file SEO e il ledger delle
+// immagini, quindi un id ritirato sopravvissuto lì passava verde proprio nel
+// test che esiste per accorgersene.
+import { SECTIONS, leftoverSurfacesFor } from '../../scripts/lib/article-surfaces.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 
 const RETIRED_FILE = 'data/retired-articles.json';
 const LOCALES = ['it', 'en', 'de', 'fr'];
 
-/**
- * Le superfici per sezione, nello stesso ordine in cui `create-article.mjs` le
- * scrive. `body` è una directory: il file è `<bodyDir>/<locale>/<id>.ts`.
- */
-const SURFACES = {
-  frontaliere: {
-    registry: 'content/blog-articles-data.ts',
-    slugs: 'content/routerBlogData.ts',
-    meta: LOCALES.map((l) => `content/blog-meta-${l}.ts`),
-    bodyDir: 'content/blog-body',
-    ledger: 'data/article-source-urls.json',
-    sidecarDir: 'data/blog-articles',
-  },
-  svizzera: {
-    registry: 'content/swiss-articles-data.ts',
-    slugs: 'content/routerSwissData.ts',
-    meta: LOCALES.map((l) => `content/blog-meta-ch-${l}.ts`),
-    bodyDir: 'content/blog-body-ch',
-    ledger: 'data/swiss-article-source-urls.json',
-    sidecarDir: 'data/swiss-articles',
-  },
-};
-
 /** Il pavimento sotto cui una superficie letta è rotta, non pulita. */
 const MIN_SURFACE_BYTES = 1000;
 
+/**
+ * Le superfici lette una sola volta: i file SEO stanno fra i 150 kB e i 5,7 MB
+ * e vengono riletti per OGNI voce ritirata e per ogni vincitore.
+ * @type {Map<string, string>}
+ */
+const surfaceCache = new Map();
+
 function readSurface(rel) {
+  const cached = surfaceCache.get(rel);
+  if (cached !== undefined) return cached;
   const abs = path.join(ROOT, rel);
   assert.ok(existsSync(abs), `${rel}: superficie assente — il test non può dire nulla`);
   const src = readFileSync(abs, 'utf-8');
@@ -92,6 +84,7 @@ function readSurface(rel) {
     `${rel}: ${src.length} byte (< ${MIN_SURFACE_BYTES}). Una superficie che si legge vuota fa passare `
     + 'ogni asserzione di assenza: è il parser a essere rotto, non il corpus a essere pulito.',
   );
+  surfaceCache.set(rel, src);
   return src;
 }
 
@@ -136,8 +129,9 @@ test('ogni articolo ritirato è sparito da TUTTE le superfici', () => {
     const s = SURFACES[entry.section];
     const { id } = entry;
 
-    // Le superfici testuali: registro, mappa slug, meta per locale, ledger URL→id.
-    for (const rel of [s.registry, s.slugs, ...s.meta, s.ledger]) {
+    // Le superfici testuali: registro, mappa slug, meta per locale, file SEO,
+    // ledger URL→id, ledger immagini, union degli id.
+    for (const rel of leftoverSurfacesFor(entry.section)) {
       // `mentionsId` e non `includes(id)` nudo: gli id si annidano
       // (`frontalieri-disoccupazione-svizzera-2026` contiene
       // `disoccupazione-svizzera-2026`, ed è già così nel corpus) e i ledger
@@ -179,8 +173,8 @@ test('il vincitore di ogni ritiro è ancora pubblicato', () => {
     // Il vincitore può stare nell'ALTRA sezione — è il caso normale qui, visto
     // che questi ritiri nascono da duplicati cross-sezione.
     const found = Object.entries(SURFACES).some(([, s]) =>
-      readSurface(s.registry).includes(`id: '${entry.winnerId}',`)
-      && readSurface(s.slugs).includes(`'${entry.winnerId}':`));
+      readSurface(s.registryFile).includes(`id: '${entry.winnerId}',`)
+      && readSurface(s.slugDataFile).includes(`'${entry.winnerId}':`));
     if (!found) missing.push(`${entry.id} → vincitore '${entry.winnerId}' non è in nessun registro`);
   }
 
