@@ -4824,13 +4824,48 @@ const FABRICATED_ACRONYMS = [
 ];
 
 /**
+ * Le sezioni di corpo REALMENTE presenti in un `content[locale]`, in ordine
+ * numerico: `{ body1, body2, ... }`.
+ *
+ * Esiste perche' enumerare `body1, body2, body3` a mano e' una premessa falsa
+ * sul percorso CONDIVISO. Il flusso AI primario produce esattamente tre corpi
+ * (lo schema JSON li richiede tutti e tre e nessun altro), ma i produttori
+ * secondari entrano da `registerArticleFiles()` con la forma che vogliono: il
+ * Bollettino giornaliero ne scrive QUATTRO
+ * (`content/blog-body/it/bollettino-frontaliere-2026-09-05.ts`). Con la lista
+ * cablata, `body4` non veniva letto da nessun giudizio — in tutte e quattro le
+ * lingue, e in silenzio: nessun errore, solo una sezione mai guardata proprio
+ * dai gate che esistono per guardarla.
+ *
+ * Derivare le chiavi invece di elencarle rende il numero di corpi un dettaglio
+ * del produttore e non un invariante nascosto nei giudici. Su un articolo a tre
+ * corpi il risultato e' identico a prima (le chiavi assenti valevano `''` e non
+ * contribuivano nulla), quindi il cambiamento e' un'estensione, non uno
+ * spostamento di soglia.
+ */
+function collectBodySections(content) {
+  const sections = {};
+  if (!content || typeof content !== 'object') return sections;
+  const keys = Object.keys(content)
+    .filter((k) => /^body\d+$/.test(k) && typeof content[k] === 'string')
+    .sort((a, b) => Number(a.slice(4)) - Number(b.slice(4)));
+  for (const k of keys) sections[k] = content[k];
+  return sections;
+}
+
+/** Il testo di tutte le sezioni di corpo presenti, unite da `sep`. */
+function joinBodySections(content, sep = ' ') {
+  return Object.values(collectBodySections(content)).join(sep);
+}
+
+/**
  * BLOCKING — Detect fabricated legal references, fake institutions, and hallucinated laws.
  * Throws if the article contains references to non-existent laws or institutions.
  */
 function assertNoFabricatedReferences(contentIt) {
   const articleText = [
     contentIt?.title || '',
-    contentIt?.body1 || '', contentIt?.body2 || '', contentIt?.body3 || '',
+    joinBodySections(contentIt),
   ].join(' ');
   const articleLower = articleText.toLowerCase();
   const issues = [];
@@ -4933,7 +4968,7 @@ function assertNoFabricatedLaborOfficeCrossLocale(data) {
   for (const locale of ['en', 'de', 'fr']) {
     const content = data?.content?.[locale];
     if (!content) continue;
-    const text = [content.title || '', content.body1 || '', content.body2 || '', content.body3 || ''].join(' ');
+    const text = [content.title || '', joinBodySections(content)].join(' ');
     const namePattern = FABRICATED_LABOR_OFFICE_BY_LOCALE[locale];
     if (namePattern && namePattern.test(text)) {
       issues.push(`[${locale}] istituzione inventata "${namePattern.source}" (reale: SECO)`);
@@ -5012,7 +5047,10 @@ function assertTranslationsPassFactualityGates(data) {
   if (String(process.env.ARTICLE_TRANSLATION_GATE ?? '1') === '0') return;
   const it = data?.content?.it;
   if (!it) return;
-  const italianSections = { body1: it.body1 || '', body2: it.body2 || '', body3: it.body3 || '' };
+  // Derivate dalle chiavi `bodyN` presenti, non elencate: sul percorso
+  // condiviso passa anche il Bollettino, che ha quattro corpi (vedi
+  // `collectBodySections`).
+  const italianSections = collectBodySections(it);
   // Senza italiano di riferimento i controlli di fedelta' non girano e il gate
   // emette `translation-unadjudicated`: non c'e' nulla contro cui giudicare.
   if (!Object.values(italianSections).some((s) => s.trim())) return;
@@ -5021,7 +5059,7 @@ function assertTranslationsPassFactualityGates(data) {
   for (const locale of ['en', 'de', 'fr']) {
     const content = data?.content?.[locale];
     if (!content) continue;
-    const sections = { body1: content.body1 || '', body2: content.body2 || '', body3: content.body3 || '' };
+    const sections = collectBodySections(content);
     if (!Object.values(sections).some((s) => s.trim())) continue;
     const result = runFactualityGates({ sections, locale, italianSections });
     if (result.issues.length > 0) {
