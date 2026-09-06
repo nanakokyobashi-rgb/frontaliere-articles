@@ -1,20 +1,5 @@
 {
   "keywords": [
-    "vivere a Magreglio e lavorare in Ticino da frontaliere",
-    "vivere a Rovello Porro e lavorare in Ticino da frontaliere",
-    "vivere a Brunello e lavorare in Ticino da frontaliere",
-    "vivere a Cairate e lavorare in Ticino da frontaliere",
-    "premi cassa malati canton Basilea Campagna e riduzione premi",
-    "permesso di domicilio C canton Basilea Campagna requisiti e domanda",
-    "permesso L di breve durata canton Basilea Campagna validità e proroga",
-    "sistema scolastico canton Basilea Campagna iscrizione e cicli",
-    "apprendistato e formazione professionale canton Basilea Campagna",
-    "borse di studio canton Basilea Campagna requisiti e importi",
-    "salari e mercato del lavoro canton Grigioni settori e livelli",
-    "patente di guida canton Grigioni conversione ed esami",
-    "imposta di successione e donazione canton Grigioni aliquote",
-    "vivere a Tradate e lavorare in Ticino da frontaliere",
-    "vivere a Toceno e lavorare in Ticino da frontaliere",
     "comprare casa canton Basilea Campagna prezzi e mutuo ipotecario",
     "mercato degli affitti canton Basilea Campagna canoni medi e diritto di locazione",
     "vivere a Cabiate e lavorare in Ticino da frontaliere",
@@ -499,7 +484,22 @@
     "salari e mercato del lavoro canton Basilea Città settori e livelli",
     "naturalizzazione canton Grigioni requisiti e procedura",
     "avs e prestazioni complementari canton Grigioni cassa di compensazione",
-    "abbonamenti trasporti pubblici canton Grigioni zone e tariffe"
+    "abbonamenti trasporti pubblici canton Grigioni zone e tariffe",
+    "vivere a Caronno Varesino e lavorare in Ticino da frontaliere",
+    "vivere a Lentate sul Seveso e lavorare in Ticino da frontaliere",
+    "vivere a Rovello Porro e lavorare in Ticino da frontaliere",
+    "vivere a Brunello e lavorare in Ticino da frontaliere",
+    "vivere a Cairate e lavorare in Ticino da frontaliere",
+    "premi cassa malati canton Basilea Campagna e riduzione premi",
+    "permesso di domicilio C canton Basilea Campagna requisiti e domanda",
+    "permesso L di breve durata canton Basilea Campagna validità e proroga",
+    "sistema scolastico canton Basilea Campagna iscrizione e cicli",
+    "apprendistato e formazione professionale canton Basilea Campagna",
+    "borse di studio canton Basilea Campagna requisiti e importi",
+    "aprire un'attività canton Grigioni registro di commercio e costi",
+    "salari e mercato del lavoro canton Grigioni settori e livelli",
+    "patente di guida canton Grigioni conversione ed esami",
+    "imposta di successione e donazione canton Grigioni aliquote"
   ],
   "strikes": {
     "frontaliere farmacista ticino stipendio requisiti": 3,
@@ -760,6 +760,7 @@
     "frontaliere cambio datore lavoro procedura permesso 2026 oltre 20 km": 1,
     "frontaliere formazione professionale riqualifica corsi 2026 simulazione pratica": 1,
     "vivere a Brenna e lavorare in Ticino da frontaliere": 1,
-    "premi cassa malati canton Basilea Città e riduzione premi": 1
+    "premi cassa malati canton Basilea Città e riduzione premi": 1,
+    "vivere a Magreglio e lavorare in Ticino da frontaliere": 1
   }
 }
