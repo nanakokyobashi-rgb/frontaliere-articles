@@ -31,13 +31,17 @@
  * ## Il drift-fallback
  *
  * `claude-code-action` pretende che il workflow in esecuzione sia byte-identico
- * alla versione su `main`, altrimenti risponde `401 Workflow validation failed`.
- * Da quando la review vive dentro `tests.yml`, una PR che MODIFICA `tests.yml`
- * non puo' quindi avere una review — e senza un'uscita resterebbe ferma per
- * sempre. Il fallback deterministico (autore fidato + completeness contract del
- * body) e' quello gia' scritto e testato in `auto-merge-eval.mjs`: qui si
- * riusa, non si duplica. Copre esattamente quello che copriva il merge manuale
- * di quelle PR, che pure non aveva una review Claude.
+ * alla versione su `main`, altrimenti risponde `401 Workflow validation failed`
+ * e esce 0 SENZA postare (execution_file vuoto). Da quando la review vive
+ * dentro `tests.yml`, una PR che MODIFICA `tests.yml` non puo' quindi avere
+ * una review nuova. Il fallback deterministico (autore fidato + completeness
+ * contract del body) e' quello gia' scritto e testato in `auto-merge-eval.mjs`.
+ *
+ * Si apre in due casi, entrambi «il reviewer non ha potuto parlare DELLA HEAD»:
+ * nessuna review del bot, oppure l'ultima review NON si applica piu' (SHA
+ * diverso E fingerprint del contributo cambiato). Un 🔴 sulla HEAD, o su un
+ * commit precedente col contributo invariato, resta bloccante: quello e' un
+ * verdetto ancora vivo, non un 401.
  *
  * Uso:  node scripts/ci/review-gate.mjs
  * Env:  GH_TOKEN, GITHUB_REPOSITORY, PR_NUMBER, HEAD_SHA, RUN_URL (opzionale)
@@ -71,8 +75,8 @@ function fingerprint(sha) {
 
 /**
  * Ultima review del reviewer bot, qualunque sia il suo esito. Serve sia per il
- * verdetto sia per distinguere «review negativa» da «review mai postata»: solo
- * il secondo caso puo' aprire il drift-fallback.
+ * verdetto sia per distinguere «review che si applica alla head» da «review
+ * mai postata / review stantia». Il drift-fallback si apre solo nel secondo.
  */
 function lastBotReview() {
   let reviews;
@@ -94,9 +98,9 @@ function lastBotReview() {
 }
 
 /**
- * Drift-fallback: la PR modifica `tests.yml`, quindi la review non ha potuto
- * girare. Gate deterministici al posto del `## LGTM`. Vale SOLO quando nessuna
- * review del bot esiste: una review negativa gia' postata resta bloccante.
+ * Drift-fallback: la PR modifica `tests.yml`, quindi Claude non puo' postare
+ * sulla head (401 workflow-validation, skip con exit 0). Gate deterministici
+ * al posto del `## LGTM`. Un 🔴 che SI APPLICA alla head resta bloccante.
  */
 function driftFallbackApproves() {
   let files;
@@ -167,6 +171,14 @@ function commentOnce(body) {
   }
 }
 
+/** True se l'ultima review descrive ancora il contributo della head. */
+function reviewAppliesToHead(last) {
+  if (last.commit_id === HEAD_SHA) return true;
+  const headFp = fingerprint(HEAD_SHA);
+  const revFp = fingerprint(last.commit_id);
+  return Boolean(headFp && revFp && headFp === revFp);
+}
+
 function main() {
   if (!REPO || !PR || !HEAD_SHA) {
     console.log('::error::review-gate: GITHUB_REPOSITORY, PR_NUMBER e HEAD_SHA sono obbligatori.');
@@ -177,30 +189,37 @@ function main() {
   if (last) {
     const body = last.body || '';
     const approving = body.includes('## LGTM') && !REDFLAG_IMPORTANT_RE.test(body);
-    if (approving) {
+    const applies = reviewAppliesToHead(last);
+    if (approving && applies) {
       if (last.commit_id === HEAD_SHA) {
         console.log(`review-gate: review approvante sulla head ${HEAD_SHA}.`);
-        process.exit(0);
-      }
-      const headFp = fingerprint(HEAD_SHA);
-      const revFp = fingerprint(last.commit_id);
-      if (headFp && headFp === revFp) {
+      } else {
         console.log(
-          `review-gate: carry-forward — contributo invariato fra ${last.commit_id} e ${HEAD_SHA} (fingerprint ${headFp}).`,
+          `review-gate: carry-forward — contributo invariato fra ${last.commit_id} e ${HEAD_SHA} (fingerprint ${fingerprint(HEAD_SHA)}).`,
         );
-        process.exit(0);
       }
-      console.log(
-        `review-gate: la review approvante e' su ${last.commit_id}, non sulla head ${HEAD_SHA}, e il contributo e' cambiato (head=${headFp} review=${revFp}).`,
-      );
-    } else {
+      process.exit(0);
+    }
+    if (!approving) {
       console.log(
         `review-gate: l'ultima review del bot (${last.commit_id}) non e' approvante — manca '## LGTM' oppure contiene un 🔴 Important.`,
       );
+    } else {
+      const headFp = fingerprint(HEAD_SHA);
+      const revFp = fingerprint(last.commit_id);
+      console.log(
+        `review-gate: la review approvante e' su ${last.commit_id}, non sulla head ${HEAD_SHA}, e il contributo e' cambiato (head=${headFp} review=${revFp}).`,
+      );
+    }
+    if (!applies) {
+      // Review stantia: Claude non puo' sostituirla se tests.yml e' nel diff
+      // (401 workflow-validation). Il fallback copre quel buco; un 🔴 vivo no.
+      console.log(
+        `review-gate: la review non si applica alla head ${HEAD_SHA} — tento il drift-fallback.`,
+      );
+      if (driftFallbackApproves()) process.exit(0);
     }
   } else if (last === null) {
-    // Nessuna review del bot: e' l'unico caso in cui il drift puo' essere la
-    // causa. Con una review gia' postata il fallback non si apre mai.
     console.log("review-gate: nessuna review del bot reviewer su questa PR.");
     if (driftFallbackApproves()) process.exit(0);
   }
