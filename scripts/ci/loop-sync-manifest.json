@@ -1326,6 +1326,16 @@
       }
     },
     {
+      "path": "scripts/lib/api-manifest.mjs",
+      "mode": "corpus-only",
+      "reason": "Dichiara in manifest.files gli artefatti scritti DOPO build-api.mjs (gli shard blog-index-*.json) e rivalida il manifest contro il disco. Corpus-only perche' manifest.json e' la superficie che QUESTO repo pubblica: il sito lo consuma, non lo produce.",
+      "baseline": {
+        "site": null,
+        "corpus": "e48f6486f9dc17ee",
+        "alignedAt": "2026-09-06"
+      }
+    },
+    {
       "path": "scripts/lib/corpus-floors.mjs",
       "mode": "corpus-only",
       "reason": "La sorgente unica dei pavimenti anti-troncamento, condivisa fra verify-api-floors.mjs e build-blog-index.mjs. Corpus-only per lo stesso motivo: i pavimenti sono derivati dai file sorgente degli articoli, che esistono solo in questo repo.",
