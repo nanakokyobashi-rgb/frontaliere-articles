@@ -23,7 +23,8 @@
  */
 import { test, describe } from 'node:test';
 import assert from 'node:assert/strict';
-import { readFileSync } from 'node:fs';
+import { readFileSync, writeFileSync, unlinkSync } from 'node:fs';
+import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -41,6 +42,8 @@ import { translateFieldFreeMt } from '../scripts/lib/article-free-mt.mjs';
 import {
   localesNeedingTranslation,
   enrichEventsWithLocaleFallbackTranslations,
+  sanitizeDatasetEvents,
+  loadEventsDataset,
   STRICT_NULL_DROP_WARNING,
 } from '../scripts/lib/events-utils.mjs';
 
@@ -597,5 +600,101 @@ describe('events: il warning nominato sullo scarto ambiguo', () => {
     });
     assert.equal('de' in out[0].titleByLocale, false);
     assert.equal(righe.filter((r) => r.includes(STRICT_NULL_DROP_WARNING)).length, 1);
+  });
+});
+
+// ── #939 item 1 — l'invariante vale al punto in cui il dataset ENTRA ───────
+//
+// `enrich` in questo repo non ha chiamanti di produzione: `data/events.json`
+// arriva gia' materializzato dall'altro repo via `refresh-events-dataset.mjs`.
+// Se la regola vive solo dentro `enrich`, il 100% dei record che il digest
+// pubblica non l'ha mai attraversata.
+
+describe('events: la lettura del dataset applica il predicato severo', () => {
+  const cattura = (fn) => {
+    const originale = console.warn;
+    const righe = [];
+    console.warn = (...args) => righe.push(args.join(' '));
+    try { return { valore: fn(), righe }; } finally { console.warn = originale; }
+  };
+
+  test('le chiavi per-locale avvelenate cadono anche senza passare da `enrich`', () => {
+    const { events } = sanitizeDatasetEvents([
+      {
+        id: 'e1',
+        title: 'Sagra della castagna',
+        titleByLocale: { it: 'Sagra della castagna', de: 'NULL', fr: 'null' },
+        descriptionByLocale: { it: 'Castagne', en: 'NULL' },
+      },
+    ]);
+    assert.equal('de' in events[0].titleByLocale, false, 'il marker del feed non si pubblica');
+    assert.equal('fr' in events[0].titleByLocale, false);
+    assert.equal('en' in events[0].descriptionByLocale, false);
+    assert.equal(events[0].titleByLocale.it, 'Sagra della castagna', 'il testo vero resta');
+  });
+
+  test('un `title` piatto avvelenato si recupera dalla prima chiave per-locale sana', () => {
+    const { events, dropped } = sanitizeDatasetEvents([
+      { id: 'e1', title: 'NULL', titleByLocale: { it: 'Sagra della castagna', de: 'NULL' } },
+    ]);
+    assert.equal(dropped, 0);
+    assert.equal(events[0].title, 'Sagra della castagna', 'il bullet del digest non stampa `NULL`');
+  });
+
+  test('un evento senza NESSUN titolo pubblicabile cade: meglio assente che una card muta', () => {
+    const { events, dropped } = sanitizeDatasetEvents([
+      { id: 'e1', title: 'NULL', titleByLocale: { it: 'NULL', de: 'NULL', en: 'null', fr: '  ' } },
+      { id: 'e2', title: 'Concerto al LAC' },
+    ]);
+    assert.equal(dropped, 1);
+    assert.deepEqual(events.map((e) => e.id), ['e2']);
+  });
+
+  test('la descrizione piatta avvelenata sparisce, ma l’evento resta pubblicabile', () => {
+    const { events, dropped } = sanitizeDatasetEvents([
+      { id: 'e1', title: 'Sagra', description: 'NULL' },
+    ]);
+    assert.equal(dropped, 0);
+    assert.equal('description' in events[0], false);
+  });
+
+  test('non muta l’input e non copia i record sani inutilmente', () => {
+    const input = [{ id: 'e1', title: 'Sagra', titleByLocale: { it: 'Sagra', de: 'NULL' } }];
+    const { events } = sanitizeDatasetEvents(input);
+    assert.equal(input[0].titleByLocale.de, 'NULL', 'l’input non e’ toccato');
+    assert.equal(events[0].titleByLocale.it, 'Sagra');
+  });
+
+  test('lo scarto ambiguo resta dichiarato anche su questo percorso', () => {
+    const { righe } = cattura(() =>
+      sanitizeDatasetEvents([{ id: 'e1', title: 'Sagra', titleByLocale: { it: 'Sagra', de: 'Null' } }]),
+    );
+    const nominate = righe.filter((r) => r.includes(STRICT_NULL_DROP_WARNING));
+    assert.equal(nominate.length, 1);
+    assert.match(nominate[0], /titleByLocale\.de/);
+  });
+
+  test('`loadEventsDataset` e’ il punto unico: legge, sanifica, e conta gli scarti', (t) => {
+    const file = path.join(os.tmpdir(), `events-${process.pid}-${Date.now()}.json`);
+    writeFileSync(file, JSON.stringify({
+      schemaVersion: 1,
+      generatedAt: '2026-09-06T00:00:00.000Z',
+      events: [
+        { id: 'e1', title: 'NULL', titleByLocale: { it: 'NULL' } },
+        { id: 'e2', title: 'Concerto al LAC', titleByLocale: { it: 'Concerto al LAC', de: 'NULL' } },
+      ],
+    }));
+    t.after(() => { try { unlinkSync(file); } catch { /* best-effort */ } });
+
+    const { valore, righe } = cattura(() => loadEventsDataset(file));
+    assert.deepEqual(valore.events.map((e) => e.id), ['e2'], 'l’evento irrendibile non arriva al digest');
+    assert.equal('de' in valore.events[0].titleByLocale, false);
+    assert.equal(valore.schemaVersion, 1, 'il resto del payload passa invariato');
+    assert.equal(valore.generatedAt, '2026-09-06T00:00:00.000Z');
+    assert.equal(righe.filter((r) => r.includes(STRICT_NULL_DROP_WARNING)).length, 2, 'chiave + evento');
+  });
+
+  test('file mancante o malformato resta zero eventi, senza lanciare', () => {
+    assert.deepEqual(loadEventsDataset(path.join(os.tmpdir(), 'non-esiste-939.json')).events, []);
   });
 });
