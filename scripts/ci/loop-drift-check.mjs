@@ -144,7 +144,11 @@ import { parsePositiveNum } from '../lib/parse-positive-num.mjs';
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const MANIFEST_PATH = path.join(ROOT, 'scripts/ci/loop-sync-manifest.json');
 const SITE_REPO = process.env.SITE_REPO || 'valerielinc-ops/frontaliere-si-o-no';
-const SITE_REF = process.env.SITE_REF || 'main';
+// Il ref CANONICO del sito: l'unico su cui un hash e' la verita' del giorno.
+// UNA sorgente sola (AGENTS.md #6) perche' `initAttestVerdict` deve poter dire
+// «questa baseline non viene da `main`» senza duplicare la stringa.
+const SITE_DEFAULT_REF = 'main';
+const SITE_REF = process.env.SITE_REF || SITE_DEFAULT_REF;
 // Il repo di QUESTO checkout — serve a verificare la provenienza di
 // `baseline.corpus` con la stessa API usata per il sito, perché il checkout
 // del workflow è `fetch-depth: 1` (vedi loop-drift-check.yml): `git log` in
@@ -195,7 +199,9 @@ const FORCE = ARGS.has('--force');
 // Opt-out per iterazione locale: la verifica di provenienza (issue #148) fa
 // fino a `PROVENANCE_HISTORY_CAP` fetch aggiuntivi PER LATO PER FILE quando un
 // hash e' cambiato dalla baseline. Di routine resta accesa: e' l'unica cosa
-// che questo script fa per non ripetere la #148.
+// che questo script fa per non ripetere la #148. Su `--init` spegne anche
+// l'attestazione della baseline che si sta SCRIVENDO (`initAttestVerdict`):
+// e' l'unico modo di registrare senza rete, e lo dice chi lancia.
 const NO_PROVENANCE = ARGS.has('--no-provenance');
 
 /**
@@ -368,6 +374,99 @@ function initWriteVerdict(entry, now, base, state) {
 }
 
 /**
+ * La baseline che `--init` sta per SCRIVERE e' attestata dal sito, o e' solo
+ * quello che una GET ha risposto? (issue #978)
+ *
+ * ## Il buco
+ *
+ * `checkBaselineProvenance()` vive sul percorso NON-init: il ramo `--init`
+ * scrive e fa `continue` prima di arrivarci. E anche se ci arrivasse sarebbe
+ * un no-op per costruzione — appena scritta, `baseline === now`, quindi
+ * `ghostVerdict` chiude su `matchedAt: 'current'` senza guardare niente. La
+ * verifica di provenienza sa dire se una baseline VECCHIA e' mai esistita; non
+ * sa dire niente su una baseline che nasce in questo istante.
+ *
+ * Quindi qualunque cosa `siteFile()` abbia risposto diventa «la verita' del
+ * giorno»: un `SITE_REF` puntato a un branch o a un fork, una raw servita dalla
+ * CDN da una revisione vecchia, un ref che si muove a meta' passata. Il valore
+ * e' un hash valido di byte reali — semplicemente non e' l'hash del file che il
+ * sito ha su `main`, ed e' esattamente la forma del `ghost-baseline` di #148,
+ * fabbricata da un comando invece che a mano. `--only` restringe il danno a una
+ * voce, non lo esclude.
+ *
+ * ## L'attestazione
+ *
+ * L'inventario dell'albero (`git/trees?recursive=1`, UNA richiesta) porta il
+ * git blob SHA di ogni path: e' una seconda sorgente, l'API invece della CDN.
+ * Se i byte scaricati sono davvero il blob che l'albero dichiara a quel path,
+ * la baseline e' attestata. Se non lo sono, quei byte non stanno su
+ * `SITE_REPO@SITE_REF` — e registrarli e' precisamente la fabbricazione.
+ *
+ * ## Perche' NON e' sbloccabile con `--force`
+ *
+ * `--force` significa «questo drift lo sto chiudendo io»: e' un'affermazione
+ * sul lavoro fatto, che chi lancia puo' fare. «Questo hash e' quello vero del
+ * sito» non lo puo' affermare nessuno guardando il terminale, quindi darglielo
+ * da confermare sarebbe solo un modo di far sparire il rifiuto. L'unica uscita
+ * e' `--no-provenance`, che non finge di verificare: dice che non si verifica.
+ *
+ * PURA: prende i fatti gia' raccolti e non fa rete, come `ghostVerdict` e
+ * `corpusOnlyTwinVerdict`. E' questo a renderla testabile offline.
+ *
+ * @param {object} a
+ * @param {string|null} a.siteBaseline  l'hash che si sta per scrivere in
+ *   `baseline.site`; null (`corpus-only`, `corpus-only-pending`, file assente
+ *   dal sito) → non c'e' niente da attestare.
+ * @param {string} a.sitePath           il path atteso sul sito.
+ * @param {string} a.siteRef            `SITE_REF` di questa passata.
+ * @param {string} a.defaultRef         il ref canonico (`SITE_DEFAULT_REF`).
+ * @param {string[]|null} a.inventoryPaths  i path che nell'albero del sito
+ *   portano il blob dei byte scaricati; `[]` = nessuno, `null` = inventario non
+ *   disponibile (rete giu', albero troncato).
+ * @param {boolean} a.checked           false con `--no-provenance`.
+ * @returns {{blocked: boolean, why: string}}
+ */
+function initAttestVerdict({ siteBaseline, sitePath, siteRef, defaultRef, inventoryPaths, checked }) {
+  if (!checked) return { blocked: false, why: '' };
+  if (siteBaseline == null) return { blocked: false, why: '' };
+
+  if (siteRef !== defaultRef) {
+    return {
+      blocked: true,
+      why:
+        `\`SITE_REF\` e' \`${siteRef}\`, non \`${defaultRef}\`: l'hash registrato sarebbe quello di un ref ` +
+        'che il drift check non guarda mai, cioe\' una baseline mai esistita sul lato che conta. ' +
+        `Rilancia senza \`SITE_REF\` (o con \`${defaultRef}\`).`,
+    };
+  }
+
+  if (inventoryPaths === null) {
+    return {
+      blocked: true,
+      why:
+        "l'inventario dell'albero del sito non e' disponibile (rete, rate-limit anonimo, o albero " +
+        'troncato): i byte scaricati non sono confrontabili con nessuna seconda sorgente, e ' +
+        'registrarli sarebbe credere alla CDN sulla parola. Riprova con `GH_TOKEN`, oppure ' +
+        'registra senza verificare dicendolo: `--no-provenance`.',
+    };
+  }
+
+  if (!inventoryPaths.includes(sitePath)) {
+    const where = inventoryPaths.length ? ` (l'albero porta quel blob solo in ${inventoryPaths.map((p) => `\`${p}\``).join(', ')})` : '';
+    return {
+      blocked: true,
+      why:
+        `i byte serviti da raw.githubusercontent per \`${sitePath}\` non sono il blob che l'albero del sito ` +
+        `dichiara a quel path${where}: e' una raw dalla cache, o il ref si e' mosso a meta' passata. ` +
+        'Registrarli fabbricherebbe la `ghost-baseline` che il check di provenienza esiste per trovare ' +
+        '(issue #148). Riprova; se e\' voluto, `--no-provenance`.',
+    };
+  }
+
+  return { blocked: false, why: '' };
+}
+
+/**
  * L'errore d'uso di `--force`, o null se l'uso e' legittimo (issue #978).
  *
  * `--force` non e' «ignora i guard», e' «QUESTE voci le sto chiudendo io».
@@ -461,11 +560,6 @@ async function siteFile(rel) {
   if (res.status === 404) return null;
   if (!res.ok) throw new Error(`GET ${rel} → HTTP ${res.status}`);
   return Buffer.from(await res.arrayBuffer());
-}
-
-async function siteHash(rel) {
-  const file = await siteFile(rel);
-  return file === null ? null : sha256(file);
 }
 
 function scalarFingerprintVerdict(entry, { site, corpus }) {
@@ -1069,6 +1163,22 @@ async function main() {
   // chi lancia. Le altre voci si scrivono comunque: vedi `initPassOutcome()`.
   const initBlocked = [];
   const initWritten = [];
+  // Inventario dell'albero del sito, chiesto UNA volta sola e solo se una voce
+  // ha davvero un lato sito da attestare: `--init --only` su una `corpus-only`
+  // non deve pagare una richiesta. `undefined` = mai chiesto, `null` = chiesto
+  // e non disponibile (che per `initAttestVerdict` e' un rifiuto, non un
+  // fail-open: e' una baseline che si sta SCRIVENDO).
+  let initInventory;
+  const initSiteBlobIndex = async () => {
+    if (initInventory === undefined) {
+      try {
+        initInventory = await siteBlobIndex();
+      } catch {
+        initInventory = null;
+      }
+    }
+    return initInventory;
+  };
 
   for (const entry of manifest.files) {
     const rel = entry.path;
@@ -1081,9 +1191,13 @@ async function main() {
     if (INIT && initTargets && !initTargets.has(rel)) continue;
 
     let now;
+    // I BYTE, non solo l'hash: su `--init` servono per attestare la baseline
+    // contro l'inventario dell'albero del sito (`initAttestVerdict`).
+    let siteBytes = null;
     try {
+      siteBytes = entry.mode === 'corpus-only' ? null : await siteFile(sitePath);
       now = {
-        site: entry.mode === 'corpus-only' ? null : await siteHash(sitePath),
+        site: siteBytes === null ? null : sha256(siteBytes),
         corpus: localHash(rel),
       };
     } catch (e) {
@@ -1099,7 +1213,7 @@ async function main() {
       // il modo in cui un drift aperto spariva.
       const guard = initWriteVerdict(entry, now, base, classify(entry, now, base).state);
       if (guard.blocked) {
-        initBlocked.push({ path: rel, why: guard.why });
+        initBlocked.push({ path: rel, why: guard.why, forceable: true });
         // Con `--force` si scrive lo stesso, ma il blocco resta stampato: la
         // conferma esplicita non deve rendere l'atto silenzioso. Senza, si
         // salta QUESTA voce e basta: la sua baseline resta quella di prima e
@@ -1114,6 +1228,33 @@ async function main() {
       // richiede esplicitamente. La promozione resta un atto cosciente: cambia
       // il `mode` a mano, POI `--init` registra la baseline vera.
       const siteBaseline = (entry.mode === 'corpus-only' || entry.mode === 'corpus-only-pending') ? null : now.site;
+
+      // La baseline che sta per essere scritta e' attestata dall'albero del
+      // sito, o e' solo cio' che una GET ha risposto? Il controllo di
+      // provenienza non puo' rispondere (vedi `initAttestVerdict`), e questo e'
+      // il solo punto del programma in cui la domanda ha ancora senso: dopo la
+      // scrittura, la risposta e' la baseline.
+      let inventoryPaths = null;
+      if (!NO_PROVENANCE && siteBaseline !== null && siteBytes !== null) {
+        const index = await initSiteBlobIndex();
+        inventoryPaths = index ? index.get(gitBlobSha(siteBytes)) || [] : null;
+      }
+      const attest = initAttestVerdict({
+        siteBaseline,
+        sitePath,
+        siteRef: SITE_REF,
+        defaultRef: SITE_DEFAULT_REF,
+        inventoryPaths,
+        checked: !NO_PROVENANCE,
+      });
+      if (attest.blocked) {
+        // Non sbloccabile con `--force`: nessuno puo' CONFERMARE che un hash e'
+        // quello vero del sito guardando il terminale. L'uscita e'
+        // `--no-provenance`, che dichiara di non verificare.
+        initBlocked.push({ path: rel, why: attest.why, forceable: false });
+        continue;
+      }
+
       entry.baseline = {
         site: siteBaseline,
         corpus: now.corpus,
@@ -1217,10 +1358,14 @@ async function main() {
     for (const { path: rel, why } of initBlocked) console.error(`  ⚠ ${rel}: ${why}`);
     // Con `--force` le bloccate sono state riscritte lo stesso: non restano
     // «intatte», quindi non contano come rifiuto (ma il blocco resta stampato).
-    const skipped = FORCE ? 0 : initBlocked.length;
+    // `--force` copre i blocchi FORCEABILI (il drift che chi lancia dichiara di
+    // star chiudendo), non l'attestazione della baseline: quella resta un
+    // rifiuto anche con `--force`, quindi continua a contare come non scritta.
+    const forced = FORCE ? initBlocked.filter((b) => b.forceable).length : 0;
+    const skipped = initBlocked.length - forced;
     const outcome = initPassOutcome({ written: initWritten.length, blocked: skipped, targeted: Boolean(initTargets) });
-    if (FORCE && initBlocked.length) {
-      console.error(`--init --force: ${initBlocked.length} voce/i riscritte NONOSTANTE il blocco qui sopra.`);
+    if (forced) {
+      console.error(`--init --force: ${forced} voce/i riscritte NONOSTANTE il blocco qui sopra.`);
     }
     if (outcome.bumpAlignedAt) manifest.alignedAt = new Date().toISOString().slice(0, 10);
     if (outcome.write) {
@@ -1237,7 +1382,8 @@ async function main() {
       console.error(
         `--init: ${skipped} voce/i NON riscritte (baseline lasciata intatta); ` +
           `${initWritten.length} registrate, \`manifest.alignedAt\` non bumpato. ` +
-          'Riconcilia i due lati, oppure rilancia `--init --only <path> --force` sulle SOLE voci di cui stai chiudendo tu il drift.',
+          'Riconcilia i due lati, oppure rilancia `--init --only <path> --force` sulle SOLE voci di cui stai chiudendo tu il drift. ' +
+          "I rifiuti di ATTESTAZIONE (baseline non confermata dall'albero del sito) `--force` non li copre: si risolvono con `GH_TOKEN`/un ritentativo, oppure si dichiarano con `--no-provenance`.",
       );
     }
     return outcome.exitCode;
@@ -1389,4 +1535,4 @@ if (process.argv[1] && process.argv[1].endsWith('loop-drift-check.mjs')) {
 // baseline con LA STESSA regola con cui la pesa il cron, altrimenti una voce
 // accettata in PR verrebbe dichiarata fantasma il mattino dopo — o peggio, il
 // contrario. Una seconda copia della regola lo renderebbe inevitabile.
-export { classify, parseOnly, onlyArgError, forceArgError, resolveInitTargets, initWriteVerdict, initPassOutcome, ghostVerdict, strandedVerdict, corpusOnlyTwinVerdict, unmirrorableDepsVerdict, resolvedLocalImports, gitBlobSha, scalarFingerprintVerdict, siteFile, sha256, repoHistoryMatch };
+export { classify, parseOnly, onlyArgError, forceArgError, resolveInitTargets, initWriteVerdict, initAttestVerdict, initPassOutcome, ghostVerdict, strandedVerdict, corpusOnlyTwinVerdict, unmirrorableDepsVerdict, resolvedLocalImports, gitBlobSha, scalarFingerprintVerdict, siteFile, sha256, repoHistoryMatch };
