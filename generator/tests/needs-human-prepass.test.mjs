@@ -34,6 +34,11 @@ import {
   countExpiryRequeues,
   PREPASS_EXPIRY_MARKER,
   EXPIRY_REQUEUE_MAX_CYCLES,
+  countRegistryRequeues,
+  PREPASS_REGISTRY_MARKER,
+  REGISTRY_REQUEUE_MAX_CYCLES,
+  noteGate,
+  REPO_SLUGS,
   isLookupDegraded,
   LOOKUP_FAILURE_MIN_COUNT,
   posNum,
@@ -732,4 +737,139 @@ test('la nota dice stato e data, e il blocco scaduto da solo NON instrada', () =
 test('senza righe e senza blocchi non si scrive niente (nessun commento a vuoto)', () => {
   assert.equal(prepassNote({ unconditional: [], conditional: [], refs: [] }, []), null);
   assert.equal(noteMarker({ refs: [] }, []), null);
+});
+
+
+// ── #923 item 3: la forma QUALIFICATA non e' invisibile al registro ────────
+//
+// Il body del registro raccomanda `owner/name#N` proprio per disambiguare i due
+// repo del ciclo. Prima di questa fix `parseVisionRegistry` chiamava
+// `citedRefs(body)` senza repo: `owner` restava `undefined`, ogni riferimento
+// qualificato cadeva sul ramo «terzo repo», la riga usciva con `refs: []` e
+// veniva SCARTATA in silenzio — nessuna nota, nessun aggancio, nessun warning.
+// Cioe': scrivere la riga meglio la rendeva invisibile al parser.
+const REGISTRY_QUALIFIED = parseVisionRegistry(`## Decisioni del proprietario già prese
+
+| Data | Decisione | Fonte |
+|---|---|---|
+| 2026-09-05 | nanakokyobashi-rgb/frontaliere-articles#832 (corpus): **SÌ, procedi** | sessione 05-09 |
+| 2026-09-05 | valerielinc-ops/frontaliere-si-o-no#6280 senza slash: nanakokyobashi-rgb#911 | sessione 05-09 |
+| 2026-09-05 | terzo repo, non del ciclo: altrotizio/altrorepo#77 | sessione 05-09 |
+
+## Manutenzione di questo documento
+`);
+
+test('#923: una riga che QUALIFICA il riferimento resta nel registro', () => {
+  assert.deepEqual(REGISTRY_QUALIFIED.map((r) => r.refs), [[832], [6280, 911]]);
+  // La riga del terzo repo non ha piu' riferimenti agganciabili e cade come
+  // prima: il fix allarga agli slug DEL CICLO, non a chiunque.
+  assert.equal(REGISTRY_QUALIFIED.length, 2);
+  // `registryRowScope` legge lo slug come leggeva la parola: `nanako` ⇒ corpus.
+  assert.equal(REGISTRY_QUALIFIED[0].scope, 'corpus');
+  assert.equal(REGISTRY_QUALIFIED[0].state, 'unconditional');
+});
+
+test('#923: la riga qualificata aggancia davvero la issue che la cita', () => {
+  const d = prepassDecision({
+    title: 'lavoro sul corpus', body: 'vedi #832', registry: REGISTRY_QUALIFIED, homeScope: 'corpus',
+  });
+  assert.equal(d.action, 'requeue');
+  assert.match(d.reason, /#832/);
+});
+
+test('#923: `citedRefs` senza slug dichiarati non inventa un repo', () => {
+  // Il default resta il vecchio: nessun repo dichiarato ⇒ nessun riferimento
+  // qualificato accettato. La lista la passa chi sa quali repo valgono.
+  assert.deepEqual([...citedRefs('vedi valerielinc-ops/frontaliere-si-o-no#6280')], []);
+  assert.deepEqual([...citedRefs('vedi valerielinc-ops/frontaliere-si-o-no#6280',
+    { repos: Object.values(REPO_SLUGS) })], [6280]);
+  assert.deepEqual([...citedRefs('vedi altrotizio/altrorepo#77',
+    { repos: Object.values(REPO_SLUGS) })], []);
+  // Uno slug col nome SBAGLIATO non passa per il solo owner giusto.
+  assert.deepEqual([...citedRefs('vedi valerielinc-ops/altro-repo#5',
+    { repos: Object.values(REPO_SLUGS) })], []);
+});
+
+// ── #923 item 2: anche il ramo registro conta i propri giri ────────────────
+//
+// Era l'unico `requeue` di questo stadio senza tetto ne' marker: se il fixer
+// fallisce e un monitor rimette `needs-human`, il giorno dopo il ramo si ripete
+// IDENTICO — un'oscillazione giornaliera (trenta volte piu' stretta di quella
+// che #815 ha chiuso sul ramo scadenza), che consuma uno slot di `MAX_PER_RUN`
+// sulla quota condivisa e nel riepilogo somiglia a un riconoscimento legittimo.
+const REGISTRY_REQUEUE_BASE = {
+  title: 'lavoro normale',
+  body: 'tocca valerielinc-ops/frontaliere-si-o-no#6280',
+  registry: REGISTRY,
+  homeScope: 'corpus',
+};
+
+test('#923: sotto il tetto il ri-accodo da registro resta, ma marcato', () => {
+  for (let n = 0; n < REGISTRY_REQUEUE_MAX_CYCLES; n++) {
+    const d = prepassDecision({ ...REGISTRY_REQUEUE_BASE, registryRequeues: n });
+    assert.equal(d.action, 'requeue', `giro ${n}`);
+    assert.equal(d.registryRequeue, true, `giro ${n}`);
+    assert.match(d.reason, new RegExp(`giro ${n + 1}/${REGISTRY_REQUEUE_MAX_CYCLES}`));
+  }
+});
+
+test('#923: al tetto il ramo registro torna al giudizio dello sweep', () => {
+  const d = prepassDecision({ ...REGISTRY_REQUEUE_BASE, registryRequeues: REGISTRY_REQUEUE_MAX_CYCLES });
+  assert.equal(d.action, 'keep');
+  assert.match(d.reason, /oscillazione registro/i);
+  assert.equal(d.registryRequeue, undefined);
+  // La riga resta comunque ALLEGATA: si smette di ri-accodare, non di misurare.
+  assert.match(d.note, /Registro di `VISION.md`/);
+});
+
+test('#923: i due contatori non si contano a vicenda', () => {
+  const comments = [
+    { body: `nota\n\n${PREPASS_EXPIRY_MARKER}` },
+    { body: `nota\n\n${PREPASS_REGISTRY_MARKER}` },
+    { body: `altra\n\n${PREPASS_REGISTRY_MARKER}` },
+  ];
+  assert.equal(countExpiryRequeues(comments), 1);
+  assert.equal(countRegistryRequeues(comments), 2);
+  assert.equal(countRegistryRequeues(null), 0);
+  assert.notEqual(PREPASS_REGISTRY_MARKER, PREPASS_EXPIRY_MARKER);
+  // Il tetto del registro non tocca il requeue di famiglia (nessuna riga
+  // agganciata), o diventerebbe un nuovo stato assorbente.
+  const fam = prepassDecision({
+    title: 'Crawler Failure: Run zurich', registryRequeues: REGISTRY_REQUEUE_MAX_CYCLES + 5,
+  });
+  assert.equal(fam.action, 'requeue');
+});
+
+// ── #923 item 1: senza i commenti in mano l'idempotenza non e' dimostrabile ──
+//
+// `already` cercava il marker in un array che resta `[]` anche quando i commenti
+// NON sono stati letti: famiglia owner-only (`needsVerdictLookup` falso) e
+// lettura fallita. Su quelle la stessa nota veniva ri-postata a ogni run
+// giornaliero, per sempre, proprio su `Agent loop down: GITHUB_PAT` e
+// `GH_PAT expiry warning:`. Stessa classe dell'`ageMs == null` di #815: assenza
+// di prova letta come prova dell'assenza.
+test('#923: la nota non si posta se i commenti non sono stati letti', () => {
+  const marker = '<!-- PREPASS_NOTE: r=5995 -->';
+  assert.equal(noteGate({ marker, comments: [], commentsRead: false }).post, false);
+  assert.equal(noteGate({ marker, comments: [], commentsRead: false }).code, 'unread');
+  // Letti e vuoti: quella si che e' una prova che la nota non c'e'.
+  assert.equal(noteGate({ marker, comments: [], commentsRead: true }).post, true);
+  assert.equal(noteGate({ marker, comments: [{ body: `x ${marker}` }], commentsRead: true }).post, false);
+  assert.equal(noteGate({ marker, comments: [{ body: `x ${marker}` }], commentsRead: true }).code, 'already');
+  assert.equal(noteGate({ marker: null, commentsRead: true }).post, false);
+  assert.equal(noteGate().post, false);
+});
+
+test('#923: la famiglia owner-only ha una nota, quindi ha un marker da verificare', () => {
+  // E' il caso reale: `prepassDecision` calcola la nota per tutte le issue
+  // tranne `agent:no-age-out`, quindi la famiglia che esce `keep` sul titolo la
+  // riceve — ed e' esattamente quella per cui i commenti non venivano letti.
+  const d = prepassDecision({
+    title: 'Agent loop down: GITHUB_PAT non utilizzabile',
+    body: 'contesto: valerielinc-ops/frontaliere-si-o-no#5995',
+    registry: REGISTRY, homeScope: 'corpus',
+  });
+  assert.equal(d.action, 'keep');
+  assert.ok(d.marker, 'la nota owner-only porta un marker');
+  assert.equal(noteGate({ marker: d.marker, comments: [], commentsRead: false }).post, false);
 });
