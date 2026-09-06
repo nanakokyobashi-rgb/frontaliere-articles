@@ -55,8 +55,13 @@ jobs:
             echo "PR #$OPEN aperta su $HEAD_REF — push non orfano."
             exit 0
           fi
+          # `sort_by(.createdAt) | last`, non `.[0]`: un branch riusato accumula N PR
+          # MERGED sulla stessa head, e l'ordine di `gh pr list` non e' documentato.
+          # Il warning citerebbe una PR vecchia a caso invece di quella su cui il push
+          # e' appena atterrato. Stesso predicato di `deliveredPrNumber()` in
+          # `scripts/ci/mark-claude-terminal-outcome.mjs`.
           MERGED=$(gh pr list --repo "$REPO" --head "$HEAD_REF" --state merged \
-            --json number --jq '.[0].number // empty' 2>/dev/null || true)
+            --json number,createdAt --jq 'sort_by(.createdAt) | last | .number // empty' 2>/dev/null || true)
           if [ -z "${MERGED:-}" ]; then
             echo "Nessuna PR MERGED associata a $HEAD_REF — niente da segnalare."
             exit 0

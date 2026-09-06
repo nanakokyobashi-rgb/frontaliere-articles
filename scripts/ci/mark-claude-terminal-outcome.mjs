@@ -53,6 +53,11 @@ import {
   formatRateLimitComment,
   parseExecutionMessages,
 } from './claude-rate-limit.mjs';
+// Il predicato «qual e' il verdetto vigente» e' quello del drainer, importato e non
+// riscritto (AGENTS.md #6): last-wins su `createdAt`, fallback dei backstop esclusi.
+// Un secondo lettore con regole proprie e' esattamente il drift che rende il dedup
+// qui sotto incoerente con chi il verdetto lo legge davvero.
+import { latestFixOutcomeEntryFromComments } from './followup-drainer.mjs';
 
 const DRY_RUN = process.env.DRY_RUN === '1';
 const ISSUE = process.env.ISSUE;
@@ -150,11 +155,112 @@ export function recoverableBranchWork(issue) {
  * @param {string|number} issue
  */
 export function deliveredPrNumber(issue) {
+  // `sort_by(.createdAt) | last`, non `.[0]`: su un branch `fix/issue-<N>` RIUSATO
+  // dopo un merge — il caso normale su una issue ri-accodata — la lista contiene la
+  // PR vecchia insieme alla nuova, in un ordine che `gh` non documenta. Il marker
+  // resterebbe giusto, ma il numero che l'umano legge nel commento punterebbe al
+  // lavoro sbagliato. La più recente è l'unica che questo run può aver consegnato.
   const raw = gh(['pr', 'list', '--head', `fix/issue-${issue}`, '--state', 'all', ...repoArgs,
-    '--json', 'number,state',
-    '--jq', '[.[] | select(.state=="OPEN" or .state=="MERGED")] | .[0].number // empty']).trim();
+    '--json', 'number,state,createdAt',
+    '--jq', '[.[] | select(.state=="OPEN" or .state=="MERGED")] | sort_by(.createdAt) | last | .number // empty']).trim();
   const n = Number(raw);
   return Number.isFinite(n) && n > 0 ? n : null;
+}
+
+// --- Idempotenza del commento di consegna -----------------------------------
+// Il drainer ri-accoda la stessa issue fino a tre volte, e ogni run che rientra in
+// questo ramo posterebbe un `pr-created` identico al precedente. Non sarebbe solo
+// rumore: un commento di bot alza `updatedAt`, e su questo repo è proprio quello che
+// affama le uscite della coda — il cooldown del parked-retry e l'age-out chiedono
+// quiete, e le issue più sorvegliate non la raggiungono mai (misurato il 2026-08-24:
+// 30 candidate nel pool, 2 oltre il cooldown). È la stessa ragione per cui
+// `orphan-max-turns-work.mjs` ha `ORPHAN_NOTE_MARKER`.
+//
+// Il dedup è sul marker di QUESTO step, come `ORPHAN_NOTE_MARKER`, ma con una
+// condizione in più che `ORPHAN_NOTE_MARKER` non ha bisogno di avere: la nota deve
+// essere ancora il VERDETTO VIGENTE (vedi `capHitNoteIsCurrentVerdict`). La nota
+// orfana è un'annotazione informativa e ripeterla non aggiunge nulla; questa nota
+// invece PORTA un `FIX_OUTCOME`, quindi un marker più recente può averla scavalcata —
+// e in quel caso ripeterla è tutto il suo mestiere. Non è dedupata contro il
+// `pr-created` che l'agente posta da sé, perché quel commento non dice «sono morto al
+// cap dopo aver consegnato» — è proprio il dato che si perderebbe.
+// Gli altri due rami NON sono dedupati, di proposito: il commento `rate-limited` È il
+// beacon di quota, e `check-quota-backoff.mjs` cerca il più RECENTE per leggerne
+// `QUOTA_RESETS_AT` — deduparlo lo congelerebbe su una finestra scaduta; il marker
+// `max-turns` porta lo stamp del branch recuperabile, che cresce fra un tentativo e
+// l'altro.
+
+/**
+ * Marker informativo del fenomeno «morte al cap DOPO la consegna». Non è un
+ * `FIX_OUTCOME` — il verdetto resta `pr-created` — ma senza di lui il fenomeno
+ * smette di essere contabile: prima del ramo di consegna queste run finivano nel
+ * bucket `max-turns`, e chi ne misura la quota vedrebbe il calo per costruzione,
+ * non perché il fenomeno sia cambiato.
+ */
+export const CAP_HIT_AFTER_DELIVERY_MARKER = '<!-- CAP_HIT_AFTER_DELIVERY -->';
+
+/**
+ * Vero se la nota di questo step è già sulla issue. Pura → testabile.
+ * @param {Array<string|{body?: string}>} comments corpi dei commenti, o oggetti `{body}`
+ */
+export function hasCapHitAfterDeliveryNote(comments) {
+  return (comments || []).some((c) => (typeof c === 'string' ? c : String((c && c.body) || ''))
+    .includes(CAP_HIT_AFTER_DELIVERY_MARKER));
+}
+
+/**
+ * Vero se la nota di questo step è sulla issue **ed è ancora il verdetto vigente**,
+ * cioè nessun `FIX_OUTCOME` più recente l'ha scavalcata. Pura → testabile.
+ *
+ * La sola PRESENZA del marker non basta, ed è il punto: il marker è uno stato
+ * PERSISTENTE della issue, mentre il verdetto che il drainer legge è l'ULTIMO
+ * `FIX_OUTCOME` (`latestFixOutcomeEntryFromComments`, last-wins). Sulla stessa issue
+ * ri-accodata fino a tre volte le due cose divergono:
+ *
+ *   run1  consegna e muore al cap → `pr-created` + questo marker
+ *   run2  muore al cap ma `deliveredPrNumber()` rende null (gh in errore, fail-safe)
+ *         → `max-turns`, che ORA è il verdetto vigente
+ *   run3  consegna di nuovo → con un dedup sulla sola presenza non commenterebbe
+ *
+ * A quel punto il verdetto vigente resta `max-turns`, che sta in
+ * `PREPASS_VERDICT_BEATS_FAMILY` del drainer: la issue viene parcheggiata
+ * `needs-human` benché consegnata — esattamente la regressione silenziosa che il ramo
+ * di consegna esiste per eliminare, e senza che nulla fallisca. Il dedup deve mordere
+ * solo finché la correzione è ancora in vigore.
+ *
+ * Serve `createdAt` accanto a `body`: senza timestamp leggibile il confronto non è
+ * dimostrabile → false, cioè si posta (fail-safe nella direzione benigna).
+ * @param {Array<{body?: string, createdAt?: string, created_at?: string}>} comments
+ */
+export function capHitNoteIsCurrentVerdict(comments) {
+  const { at: latestAt } = latestFixOutcomeEntryFromComments(comments || []);
+  if (latestAt === null) return false;
+  let mineAt = -Infinity;
+  for (const c of comments || []) {
+    const body = String((c && c.body) || '');
+    if (!body.includes(CAP_HIT_AFTER_DELIVERY_MARKER)) continue;
+    const at = Date.parse(c?.createdAt ?? c?.created_at);
+    if (!Number.isNaN(at) && at > mineAt) mineAt = at;
+  }
+  return mineAt >= latestAt;
+}
+
+/**
+ * Vero se la issue porta già la nota di questo step E quella nota è ancora il
+ * verdetto vigente. Impura (gh) e FAIL-SAFE: qualunque errore → false, cioè il
+ * comportamento di prima (posta comunque).
+ * @param {string|number} issue
+ */
+export function capHitNoteIsStillCurrentVerdict(issue) {
+  const raw = gh(['issue', 'view', String(issue), ...repoArgs, '--json', 'comments',
+    '--jq', '[.comments[] | {body, createdAt}]']).trim();
+  if (!raw) return false;
+  try {
+    const comments = JSON.parse(raw);
+    return Array.isArray(comments) && capHitNoteIsCurrentVerdict(comments);
+  } catch {
+    return false;
+  }
 }
 
 /**
@@ -164,6 +270,7 @@ export function deliveredPrNumber(issue) {
  */
 export function formatDeliveredDespiteMaxTurnsComment(prNumber) {
   return '<!-- FIX_OUTCOME: pr-created -->\n' +
+    `${CAP_HIT_AFTER_DELIVERY_MARKER}\n` +
     `_La CLI è uscita \`error_max_turns\`, ma la PR #${prNumber} per questa issue esiste (open/merged): il lavoro è stato consegnato._\n` +
     '_Il verdetto segue il lavoro, non l\'exit della CLI — stessa regola dello step «Classify outcome» di `issue-fix.yml`. ' +
     'Senza questa riga il drainer leggerebbe `max-turns` e parcheggerebbe in `needs-human` una issue già risolta._';
@@ -188,6 +295,10 @@ function main() {
     const deliveredPr = deliveredPrNumber(ISSUE);
     if (deliveredPr) {
       console.log(`Terminal outcome: error_max_turns MA la PR #${deliveredPr} esiste (open/merged) → marker \`pr-created\`, non \`max-turns\`.`);
+      if (capHitNoteIsStillCurrentVerdict(ISSUE)) {
+        console.log('Nota già presente E ancora verdetto vigente → skip (dedup: un commento in più alza `updatedAt` e affama il cooldown del parked-retry).');
+        return;
+      }
       if (DRY_RUN) return;
       gh(['issue', 'comment', ISSUE, ...repoArgs, '--body',
         formatDeliveredDespiteMaxTurnsComment(deliveredPr)]);

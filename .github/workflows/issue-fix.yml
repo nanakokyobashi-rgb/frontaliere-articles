@@ -599,8 +599,8 @@ jobs:
             echo "Marker FIX_OUTCOME gia' presente (postato dall'agente) — nessun backstop necessario."
             exit 0
           fi
-          PR=$(gh pr list --repo "$REPO" --head "fix/issue-$ISSUE" --state open --json number \
-            --jq '.[0].number // empty' 2>/dev/null || true)
+          PR=$(gh pr list --repo "$REPO" --head "fix/issue-$ISSUE" --state open --json number,createdAt \
+            --jq 'sort_by(.createdAt) | last | .number // empty' 2>/dev/null || true)
           if [ -n "${PR:-}" ]; then OUT=pr-created; else OUT=no-pr-unspecified; fi
           echo "FIX_OUTCOME issue=$ISSUE outcome=$OUT (backstop deterministico)"
           gh issue comment "$ISSUE" --repo "$REPO" --body "$(printf '<!-- FIX_OUTCOME: %s -->\n_Outcome rilevato dal post-step deterministico (telemetria lessons-harvester)._' "$OUT")" || true
@@ -626,8 +626,13 @@ jobs:
           CLAUDE_OUTCOME: ${{ steps.claude_fix.outcome }}
         run: |
           set -uo pipefail
-          PR_STATE=$(gh pr list --repo "$REPO" --head "fix/issue-$ISSUE" --state all --json number,state \
-            --jq '[.[] | select(.state=="OPEN" or .state=="MERGED")] | .[0].number // empty' 2>/dev/null || true)
+          # `sort_by(.createdAt) | last`, non `.[0]`: con un branch `fix/issue-<N>`
+          # riusato dopo un merge la lista tiene la PR vecchia insieme alla nuova, in
+          # un ordine che `gh` non documenta, e il numero stampato qui sotto punterebbe
+          # al lavoro sbagliato. Stesso predicato di `deliveredPrNumber()` in
+          # `scripts/ci/mark-claude-terminal-outcome.mjs` (AGENTS.md #6).
+          PR_STATE=$(gh pr list --repo "$REPO" --head "fix/issue-$ISSUE" --state all --json number,state,createdAt \
+            --jq '[.[] | select(.state=="OPEN" or .state=="MERGED")] | sort_by(.createdAt) | last | .number // empty' 2>/dev/null || true)
           echo "issue=$ISSUE pr(head fix/issue-$ISSUE, open|merged)=${PR_STATE:-<none>} claude=$CLAUDE_OUTCOME"
           if [ -n "${PR_STATE:-}" ]; then
             echo "PR #$PR_STATE esiste (open/merged) per la issue -> run SUCCESS. Job verde anche se la CLI e' uscita '$CLAUDE_OUTCOME' (falso-fallimento: lavoro consegnato)."
