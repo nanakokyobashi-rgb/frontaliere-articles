@@ -223,6 +223,10 @@ test('il ramo DELIVERED del rescue queue-managed è qualificato da isDeliveredTh
   const branch = /if \(outcome && DELIVERED\.has\(outcome\)\) \{([\s\S]*?)\n {4}\}/.exec(stuck);
   assert.ok(branch, 'il rescue queue-managed deve avere il ramo DELIVERED');
   assert.match(branch[1], /isDeliveredThisRun\(\{/, 'il re-queue gratuito passa dal gate sulla run corrente');
-  assert.match(branch[1], /mergedAt: mergedFixPrAt\(/, 'gate sul merge reale, non sull assenza di PR aperte');
-  assert.match(branch[1], /promotedAt: fixPromotedAt\(/, 'gate sulla promozione della run corrente');
+  // Le due letture restano quelle, comunque siano legate al gate (dal #973
+  // passano da una const, perché servono anche al warning sul writer
+  // concorrente di `agent:fix`): a contare è la SORGENTE, non la forma.
+  assert.match(branch[1], /mergedAt = mergedFixPrAt\(/, 'gate sul merge reale, non sull assenza di PR aperte');
+  assert.match(branch[1], /promotion = fixPromotion\(/, 'gate sulla promozione della run corrente');
+  assert.match(branch[1], /promotedAt: promotion\.at/, 'la promozione entra nel gate');
 });
