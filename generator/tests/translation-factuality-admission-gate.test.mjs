@@ -41,6 +41,8 @@
  *   M3 il kill switch non disarma                            → #3
  *   M4 la chiamata sparisce da uno dei due percorsi di
  *      scrittura (il difetto originale di #5661)             → #4
+ *   M5 le sezioni tornano cablate a body1..body3, e il
+ *      quarto corpo del Bollettino resta non giudicato (#980) → #5, #6, #7
  */
 
 import { test } from 'node:test';
@@ -71,10 +73,15 @@ function cutFunction(nome, sentinelle) {
 
 const GATE_SRC = cutFunction('assertTranslationsPassFactualityGates', [
   'runFactualityGates',
-  'italianSections',
+  'collectBodySections',
   'qualityReject',
   'ARTICLE_TRANSLATION_GATE',
 ]);
+
+// Il gate deriva le sezioni dalle chiavi `bodyN` presenti invece di elencarne
+// tre (#980): il ritaglio va quindi accompagnato dal suo helper, altrimenti
+// `new Function` istanzia un gate che non risolve `collectBodySections`.
+const SECTIONS_SRC = cutFunction('collectBodySections', ['body\\d+', 'sections']);
 
 /** Istanzia la funzione vera con le sue dipendenze di chiusura iniettate. */
 function makeGate() {
@@ -82,7 +89,7 @@ function makeGate() {
     'runFactualityGates',
     'formatIssues',
     'console',
-    `${GATE_SRC}\nreturn assertTranslationsPassFactualityGates;`,
+    `${SECTIONS_SRC}\n${GATE_SRC}\nreturn assertTranslationsPassFactualityGates;`,
   );
   // console silenziata: il gate stampa i rilievi, non deve sporcare l'output.
   return factory(runFactualityGates, formatIssues, { error: () => {} });
@@ -94,16 +101,18 @@ function makeGate() {
  * non ancorato che #5661 riporta letteralmente, ed e' `critical` e NON in
  * ITALIAN_ADJUDICATED_CODES, quindi non viene degradato a `major`.
  */
-function articolo({ enBody1 }) {
+function articolo({ enBody1, itExtra = {}, enExtra = {} }) {
   return {
     content: {
       it: {
+        ...itExtra,
         body1: 'I frontalieri che lavorano in Ticino pagano l\'imposta alla fonte. '
           + 'I frontalieri residenti nella fascia di 20 km hanno un regime dedicato.',
         body2: 'Il salario mediano dei frontalieri e\' di 5.000 franchi al mese.',
         body3: 'Per i frontalieri l\'accordo prevede una franchigia.',
       },
       en: {
+        ...enExtra,
         body1: enBody1,
         body2: 'The median salary of cross-border commuters is 5.000 francs per month.',
         body3: 'For cross-border commuters the agreement provides an exemption.',
@@ -146,6 +155,44 @@ test('#3 ARTICLE_TRANSLATION_GATE=0 disarma il gate', () => {
     if (prev === undefined) delete process.env.ARTICLE_TRANSLATION_GATE;
     else process.env.ARTICLE_TRANSLATION_GATE = prev;
   }
+});
+
+test('#5 giudica anche `body4` — il quarto corpo del Bollettino non e\' esente', () => {
+  const gate = makeGate();
+  // Tre corpi puliti, il rilievo sta SOLO nel quarto: con le sezioni cablate a
+  // body1..body3 questo articolo passava, in tutte e quattro le lingue.
+  let thrown = null;
+  try {
+    gate(articolo({
+      enBody1: EN_PULITO,
+      itExtra: { body4: 'I frontalieri trovano in fondo il riepilogo dei valichi.' },
+      enExtra: { body4: EN_NON_ANCORATO },
+    }));
+  } catch (e) {
+    thrown = e;
+  }
+  assert.ok(thrown, 'il gate non ha guardato body4 — la sezione resta non giudicata (#980)');
+  assert.equal(thrown.qualityReject, true);
+});
+
+test('#6 un articolo a quattro corpi pulito passa (nessun falso positivo sul nuovo corpo)', () => {
+  const gate = makeGate();
+  assert.doesNotThrow(() => gate(articolo({
+    enBody1: EN_PULITO,
+    itExtra: { body4: 'I frontalieri trovano in fondo il riepilogo dei valichi.' },
+    enExtra: { body4: 'Cross-border commuters find the border-crossing summary at the end.' },
+  })));
+});
+
+test('#7 le sezioni sono derivate dalle chiavi, non elencate', () => {
+  const sections = new Function(`${SECTIONS_SRC}\nreturn collectBodySections;`)();
+  assert.deepEqual(
+    Object.keys(sections({ title: 't', body1: 'a', body10: 'j', body2: 'b', excerpt: 'e' })),
+    ['body1', 'body2', 'body10'],
+    'solo le chiavi bodyN, in ordine NUMERICO (body10 dopo body2, non prima)',
+  );
+  assert.deepEqual(sections(null), {});
+  assert.deepEqual(sections({ body1: null, body2: 'b' }), { body2: 'b' }, 'i non-stringa non entrano');
 });
 
 test('#4 il gate e\' collegato a ENTRAMBI i percorsi di scrittura', () => {
