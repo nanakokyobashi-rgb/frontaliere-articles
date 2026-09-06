@@ -68,6 +68,7 @@ import {
   assertNoFabricatedReferences,
   assertNoFabricatedLaborOfficeCrossLocale,
 } from './create-article.mjs';
+import { isRegisterLockError } from './lib/register-lock.mjs';
 import { assertNoFabricatedNormAcronyms } from './lib/article-factuality-gates.mjs';
 import { generateFaqIT } from './batch-add-faq-to-articles.mjs';
 import { appendCatalogEntry } from './generate-journalist-image-catalog.mjs';
@@ -387,6 +388,21 @@ async function processDoc(db, FieldValue, docSnap) {
 
     return { ok: true, id: data.id };
   } catch (err) {
+    // Un errore del lock di registrazione NON e' un difetto di questo
+    // documento (issue #964): dice che i 9 file condivisi sono SPEZZATI, o che
+    // un marker e' rimasto su disco. Il `resolveRegisterLockAtStartup()` di
+    // `main()` copre solo il marker di un run PRECEDENTE; se e'
+    // `registerArticleFiles()` a lanciare a meta' delle 9 scritture DENTRO
+    // questo run, degradarlo a `status: 'failed'` marcherebbe l'articolo di un
+    // giornalista come fallito per un danno che non e' suo, il ciclo
+    // proseguirebbe pagando derivazione + traduzione sopra un corpus rotto, e
+    // `main()` uscirebbe comunque 0 — job verde, corpus spezzato. Rilanciare
+    // ferma il ciclo e fa uscire 1 (il `main().catch` in fondo al file); il doc
+    // resta `queued` e viene ridrenato dal run successivo, dopo la riparazione.
+    if (isRegisterLockError(err)) {
+      console.error(`  🛑 ${docId}: errore del lock di registrazione — fatale, il ciclo si ferma qui (il documento resta queued)`);
+      throw err;
+    }
     const message = err instanceof Error ? err.message : String(err);
     console.error(`  ❌ ${docId} failed: ${message}`);
     try {
