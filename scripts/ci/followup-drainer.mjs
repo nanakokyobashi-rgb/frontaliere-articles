@@ -1533,6 +1533,71 @@ const attemptOf = (iss) => {
 };
 const prioRank = (iss) => (has(iss, 'fu-prio:high') ? 0 : 1); // high prima
 
+// --- EQUITÀ DELLO SLOT `issue-fix` (#973 item 3) -----------------------------
+// Il re-queue gratuito di una consegna (ramo DELIVERED) è un bound di
+// TERMINAZIONE, non di equità: dice che una issue che consegna non consuma
+// tentativi, non che le altre avanzano. Con l'ordinamento `prio || createdAt`
+// una aggregata che consegna a ogni ciclo torna in coda con il SUO `createdAt`
+// — sempre il più vecchio della sua classe — quindi si ri-prende l'unico slot
+// serializzato `issue-fix` al tick successivo, e al successivo ancora. Nessuna
+// altra issue della stessa priorità avanza finché l'aggregata non finisce i
+// suoi item: è starvation, e non lascia traccia (ogni singolo tick è corretto).
+//
+// Il bound è un round-robin sull'ULTIMA volta che la issue ha tenuto lo slot
+// (`promotedAt` = ultima aggiunta di `agent:fix`, la stessa misura che il ramo
+// DELIVERED usa già): chi lo ha tenuto più di recente passa dietro a chi lo ha
+// tenuto prima, e chi non lo ha mai tenuto passa davanti a tutti. Non è un cap
+// e non parcheggia niente — l'aggregata riprende lo slot appena gli altri
+// candidati della sua classe hanno avuto il loro giro, quindi converge come
+// prima, solo interlacciata.
+//
+// Costo: una `gh api .../events --paginate` per candidato nella finestra, che è
+// il motivo per cui la rotazione è BOUNDED alla testa della coda (gli altri non
+// sarebbero comunque promossi in questo tick) e alla sola classe di priorità
+// della testa (una `fu-prio:low` non deve mai scavalcare una `high`).
+const SLOT_FAIRNESS_SCAN_MAX = Number(process.env.FOLLOWUP_SLOT_FAIRNESS_SCAN_MAX || 5);
+
+/** I candidati su cui vale la pena misurare `promotedAt`: il prefisso della coda
+ * già ordinata che condivide la classe di priorità della testa, capped a
+ * `scanMax`. Puro → testabile. */
+export function slotFairnessWindow(queued, { scanMax = SLOT_FAIRNESS_SCAN_MAX, prioOf = prioRank } = {}) {
+  const list = Array.isArray(queued) ? queued : [];
+  if (list.length < 2 || scanMax < 2) return [];
+  const headPrio = prioOf(list[0]);
+  const win = [];
+  for (const iss of list) {
+    if (prioOf(iss) !== headPrio) break;
+    win.push(iss);
+    if (win.length >= scanMax) break;
+  }
+  return win.length > 1 ? win : [];
+}
+
+/** La coda riordinata dal round-robin: la finestra di testa ri-ordinata per
+ * `promotedAt` crescente (mai promossa = 0 → prima di tutte), il resto intatto.
+ * `sort` è stabile, quindi a parità di `promotedAt` l'ordine `createdAt`
+ * pre-esistente sopravvive. Puro → testabile.
+ *
+ * `promotedAtBy` è una mappa numero → epoch ms; un valore assente o non finito
+ * (glitch `gh`, issue senza eventi) vale «mai promossa». Fail-safe voluto: al
+ * peggio una issue ottiene lo slot un giro fuori turno, mai una starvation —
+ * che è esattamente il fallimento che questo bound esiste per escludere.
+ *
+ * @param {Array<object>} queued coda già ordinata per `prio || createdAt`
+ * @param {Map<number, number|null>|object} promotedAtBy
+ */
+export function slotFairnessOrder(queued, promotedAtBy, { scanMax = SLOT_FAIRNESS_SCAN_MAX, prioOf = prioRank } = {}) {
+  const list = Array.isArray(queued) ? queued.slice() : [];
+  const win = slotFairnessWindow(list, { scanMax, prioOf });
+  if (!win.length) return list;
+  const get = (n) => {
+    const v = promotedAtBy instanceof Map ? promotedAtBy.get(n) : promotedAtBy?.[n];
+    return Number.isFinite(v) ? v : 0;
+  };
+  const rotated = win.slice().sort((a, b) => get(a.number) - get(b.number));
+  return [...rotated, ...list.slice(win.length)];
+}
+
 // --- PARKED-RETRY: ri-accoda i parked ritentabili (convergenza backlog) -------
 // Un follow-up va `fu-parked` dopo MAX_ATTEMPTS fix falliti. Molti fallirono per
 // cause ORA risolte (cap turni #1919/#1952, aggregate-sweep #1979, drift #2007):
@@ -3029,10 +3094,38 @@ export function runDrain() {
     edit(iss.number, { add: [LBL_PARKED], remove: [LBL_QUEUED, LBL_FIX] });
   }
 
-  const queued = pool
+  let queued = pool
     .filter(isDrainPromotable)
     .sort((a, b) => prioRank(a) - prioRank(b) || Date.parse(a.createdAt) - Date.parse(b.createdAt));
   if (!queued.length) { console.log('coda vuota → niente da promuovere.'); return; }
+
+  // Equità dello slot (#973 item 3): round-robin sull'ultima volta che ciascun
+  // candidato di testa ha tenuto `issue-fix`. Solo lettura (nessuna edit),
+  // quindi gira anche in DRY. Se il budget non copre l'INTERA finestra la
+  // rotazione si salta del tutto: misurarne metà ordinerebbe candidati letti
+  // contro candidati sconosciuti, cioè una rotazione arbitraria al posto di
+  // nessuna.
+  const fairWindow = slotFairnessWindow(queued);
+  if (fairWindow.length) {
+    if (budget.canAfford(fairWindow.length * COMMENT_SCAN_COST_MS)) {
+      const promotedAtBy = new Map();
+      for (const iss of fairWindow) {
+        budget.take(`#${iss.number} (slot-fairness)`, COMMENT_SCAN_COST_MS);
+        promotedAtBy.set(iss.number, fixPromotion(iss.number).at);
+      }
+      const rotated = slotFairnessOrder(queued, promotedAtBy);
+      if (rotated[0]?.number !== queued[0]?.number) {
+        const ago = (n) => {
+          const at = promotedAtBy.get(n);
+          return Number.isFinite(at) ? `${Math.round((Date.now() - at) / 3_600_000)}h fa` : 'mai';
+        };
+        console.log(`equità slot: ruoto la testa della coda — #${queued[0].number} (slot ${ago(queued[0].number)}) passa dietro a #${rotated[0].number} (slot ${ago(rotated[0].number)}). Finestra: ${fairWindow.map((i) => `#${i.number}`).join(' ')}.`);
+      }
+      queued = rotated;
+    } else {
+      console.log(`equità slot: budget insufficiente per misurare la finestra (${fairWindow.length} candidati) → nessuna rotazione in questo tick (no silent cap).`);
+    }
+  }
 
   let overlapSkipped = 0;
   let prFilesMap = null; // lazy: caricato al primo candidato con path estratti, poi cached
