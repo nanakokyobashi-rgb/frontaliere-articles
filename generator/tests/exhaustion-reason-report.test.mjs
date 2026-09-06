@@ -48,6 +48,7 @@ import {
   parseAggregateExhaustion,
   deferralVerdicts,
   formatVerdictLine,
+  splitErrorEntries,
 } from '../../scripts/ci/exhaustion-reason-report.mjs';
 
 const NOW = Date.parse('2026-08-13T14:30:00Z');
@@ -201,8 +202,12 @@ const cascataConEchiGithub = (() => {
   // PROVIDER_COOLDOWN_SKIP_RE riconosce, e la `skipPhrase` che matcha
   // `transientRe`. Dodici id fratelli, UN solo 429.
   for (let i = 0; i < 12; i++) errors.push(`gh-${i}: skipped — provider github cooling down after 429`);
+  // La catena elenca gli STESSI id che prefissano le righe di `errors`: e' cio'
+  // che `callLLM` emette (ogni `errors.push` usa `chain[i]`), ed e' l'ancora su
+  // cui il parser ricuce le righe spezzate da un ` | ` interno.
+  const chain = errors.map((e) => e.slice(0, e.indexOf(':')));
   return '2026-08-14T04:08:01Z   ⚠️  Tentativo 1 fallito: All AI models failed. '
-    + `Chain: [a → b]. Errors: ${errors.join(' | ')}`;
+    + `Chain: [${chain.join(' → ')}]. Errors: ${errors.join(' | ')}`;
 })();
 
 test('il parser ricostruisce l\'array `errors` dal messaggio aggregato (#854)', () => {
@@ -237,7 +242,7 @@ test('la coda `Prompt budget:` non e\' una riga di errore, ma e\' la premessa de
   // separatore ` | `. Contarlo aggiungerebbe una riga fantasma a ogni cascata
   // con rifiuti su taglia; ignorarlo del tutto perderebbe `inputCapReport`,
   // cioe' la premessa senza la quale `isInputCapDeferralVeto` non si applica.
-  const msg = 'All AI models failed. Chain: [a]. Errors: '
+  const msg = 'All AI models failed. Chain: [x → y]. Errors: '
     + 'x: skipped — exhausted (daily limit) | y: skipped — no API key'
     + ' | Prompt budget: 3 model(s) refused a ~9000-token request;'
     + ' the most permissive cap among them is 4000 tokens (over by ~5000).';
@@ -256,12 +261,59 @@ test('senza `inputCapReport` il veto non si applica e non entra nel confronto', 
   // come `veto=false` gonfierebbe il denominatore del flip con cascate su cui
   // il predicato non ha nemmeno guardato i secchi.
   const [c] = parseAggregateExhaustion(
-    'All AI models failed. Chain: [a]. Errors: x: skipped — no API key',
+    'All AI models failed. Chain: [x]. Errors: x: skipped — no API key',
   );
   const v = deferralVerdicts(c);
   assert.equal(v.grossVeto, false);
   assert.equal(v.netVeto, false);
   assert.equal(v.flip, false, 'nessun verdetto da confrontare, nessun flip');
+});
+
+test('un ` | ` DENTRO il messaggio di un provider non diventa una riga in piu\' (#888 item 4)', () => {
+  // La sola riga a testo libero di `errors` e' `${model}: ${msg.slice(0, 200)}`
+  // (ai-models.mjs): il messaggio e' testo di provider ripassato tale e quale,
+  // e puo' contenere il separatore con cui `callLLM` unisce l'array. Con uno
+  // `split(' | ')` nudo quella singola riga ne diventava due, gonfiando `total`
+  // E il secchio — cioe' proprio i numeri su cui il verdetto viene calibrato.
+  const msg = 'All AI models failed. Chain: [gh/a → gh/b]. Errors: '
+    + 'gh/a: 429 Too Many Requests | rate limit reached | retry-after: 30'
+    + ' | gh/b: skipped — no API key configured';
+  const [c] = parseAggregateExhaustion(msg);
+  assert.equal(c.errors.length, 2, 'due modelli in catena, due righe: non quattro');
+  assert.equal(c.errors[0],
+    'gh/a: 429 Too Many Requests | rate limit reached | retry-after: 30',
+    'la riga si ricuce integralmente, separatori interni compresi');
+
+  // E il conteggio non e' gonfio: un solo 429, non tre frammenti di 429.
+  const v = deferralVerdicts(c);
+  assert.equal(v.breakdown.total, 2, 'il totale sono i modelli falliti, non i frammenti');
+  assert.equal(v.breakdown.transient, 1, 'un solo esaurimento transitorio');
+});
+
+test('senza catena leggibile il parser degrada allo split nudo, non ricuce tutto', () => {
+  // Senza ancore, ricucire ogni frammento nella riga precedente collasserebbe
+  // la cascata in UNA voce — un conteggio a ZERO informazione, peggio di quello
+  // gonfio che si vuole evitare. Meglio il comportamento storico.
+  const [c] = parseAggregateExhaustion(
+    'All AI models failed. Chain: []. Errors: a: 429 | b: no API key',
+  );
+  assert.equal(c.errors.length, 2, 'due frammenti, due righe');
+  assert.deepEqual(splitErrorEntries('a: 429 | b: no key', []), ['a: 429', 'b: no key']);
+  assert.deepEqual(splitErrorEntries('a: 429 | b: no key', null), ['a: 429', 'b: no key']);
+});
+
+test('la coda `Prompt budget:` resta un\'ancora anche quando la precede un ` | ` interno', () => {
+  // Il report di taglia non e' prefissato da un modello della catena: se non
+  // fosse riconosciuto come inizio-voce verrebbe ricucito nell'ultima riga di
+  // errore, e `capCount` — la premessa di `isInputCapDeferralVeto` — tornerebbe
+  // a 0 su ogni cascata con rifiuti su taglia.
+  const [c] = parseAggregateExhaustion(
+    'All AI models failed. Chain: [m/1]. Errors: '
+    + 'm/1: HTTP 400 | body: {"error":"too long"}'
+    + ' | Prompt budget: 4 model(s) refused a ~9000-token request;',
+  );
+  assert.equal(c.errors.length, 1, 'una sola riga di errore, ricucita');
+  assert.equal(c.capCount, 4, 'e il report di taglia resta separato e leggibile');
 });
 
 test('un log senza cascate non produce voci (lo zero e\' vero, non vacuo)', () => {

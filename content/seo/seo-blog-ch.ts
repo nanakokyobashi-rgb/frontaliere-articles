@@ -72872,6 +72872,825 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-reddito-risparmio-svizzeri-record': {
+    title: 'Svizzeri non hanno mai guadagnato e risparmiato come oggi',
+    description: 'Per la prima volta il reddito disponibile supera i 65mila franchi e il tasso di risparmio volontario il 19,3%. I dati dell\'UST confermano il record storico.',
+    keywords: 'frontalieri, ticino, svizzera, italia, svizzeri, hanno, guadagnato, risparmiato',
+    ogTitle: 'Svizzeri non hanno mai guadagnato e risparmiato come oggi',
+    ogDescription: 'Per la prima volta il reddito disponibile supera i 65mila franchi e il tasso di risparmio volontario il 19,3%. I dati dell\'UST confermano il record storico.',
+    canonicalPath: '/articoli-svizzera/reddito-risparmio-svizzeri-record/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Svizzeri non hanno mai guadagnato e risparmiato come oggi",
+      "description": "Per la prima volta il reddito disponibile supera i 65mila franchi e il tasso di risparmio volontario il 19,3%. I dati dell'UST confermano il record storico.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/reddito-risparmio-svizzeri-record.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Famiglia svizzera esamina documenti finanziari e grafici di investimento su laptop in salotto luminoso"
+      },
+      "datePublished": "2026-09-05T23:02:52+00:00",
+      "dateModified": "2026-09-05T23:02:52+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/reddito-risparmio-svizzeri-record/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-naturalizzazione-canton-soletta-requisiti-procedura': {
+    title: 'Naturalizzazione nel canton Soletta: requisiti e procedura',
+    description: 'Scopri i requisiti e la procedura per la naturalizzazione ordinaria nel Canton Soletta, inclusi anni di residenza, test di integrazione e tasse. Dati aggiornati',
+    keywords: 'frontalieri, ticino, svizzera, italia, naturalizzazione, canton, soletta, requisiti',
+    ogTitle: 'Naturalizzazione nel Canton Soletta: Requisiti e Procedura',
+    ogDescription: 'Scopri i requisiti e la procedura per la naturalizzazione ordinaria nel Canton Soletta, inclusi anni di residenza, test di integrazione e tasse. Ottieni informazioni dettagliate e guida pratica per navigare con successo il processo',
+    canonicalPath: '/articoli-svizzera/naturalizzazione-canton-soletta-requisiti-procedura/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Naturalizzazione nel canton Soletta: requisiti e procedura",
+      "description": "Scopri i requisiti e la procedura per la naturalizzazione ordinaria nel Canton Soletta, inclusi anni di residenza, test di integrazione e tasse. Dati aggiornati",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/naturalizzazione-canton-soletta-requisiti-procedura.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista panoramica di Bellinzona, Svizzera, con il castello in primo piano."
+      },
+      "datePublished": "2026-09-05T23:13:49+00:00",
+      "dateModified": "2026-09-05T23:13:49+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/naturalizzazione-canton-soletta-requisiti-procedura/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-permesso-domicilio-c-canton-vallese-requisiti-domanda': {
+    title: 'Permesso di domicilio C nel Canton Vallese: requisiti e domanda',
+    description: 'Scopri i requisiti e la procedura per ottenere il permesso di domicilio C nel Canton Vallese, inclusi anni richiesti, criteri di integrazione e conoscenze',
+    keywords: 'frontalieri, ticino, svizzera, italia, permesso, domicilio, canton, vallese',
+    ogTitle: 'Permesso di domicilio C nel Canton Vallese: requisiti e domanda',
+    ogDescription: 'Scopri i requisiti e la procedura per ottenere il permesso di domicilio C nel Canton Vallese, inclusi anni richiesti, criteri di integrazione e conoscenze linguistiche. Questo permesso permette di risiedere in Svizzera senza limiti di tempo',
+    canonicalPath: '/articoli-svizzera/permesso-domicilio-c-canton-vallese-requisiti-domanda/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Permesso di domicilio C nel Canton Vallese: requisiti e domanda",
+      "description": "Scopri i requisiti e la procedura per ottenere il permesso di domicilio C nel Canton Vallese, inclusi anni richiesti, criteri di integrazione e conoscenze",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/permesso-domicilio-c-canton-vallese-requisiti-domanda.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista panoramica del Lago di Lugano con le montagne svizzere sullo sfondo."
+      },
+      "datePublished": "2026-09-06T00:58:20+00:00",
+      "dateModified": "2026-09-06T00:58:20+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/permesso-domicilio-c-canton-vallese-requisiti-domanda/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-conferenza-osce-berna-2026': {
+    title: 'Conferenza OSCE a Berna: riflessioni sulla sicurezza europea',
+    description: 'La Presidenza svizzera dell\'OSCE ha organizzato a Berna una conferenza per discutere delle origini della CSCE e dell\'importanza dei suoi principi fondanti',
+    keywords: 'frontalieri, ticino, svizzera, italia, conferenza, osce, berna, riflessioni',
+    ogTitle: 'Conferenza OSCE a Berna: riflessioni sulla sicurezza europea',
+    ogDescription: 'La Presidenza svizzera dell\'OSCE ha organizzato a Berna una conferenza per discutere delle origini della CSCE e dell\'importanza dei suoi principi fondanti per la sicurezza europea. Tra i partecipanti figurano Ignazio Cassis e Feridun H. Sinirlioğlu.',
+    canonicalPath: '/articoli-svizzera/conferenza-osce-berna-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Conferenza OSCE a Berna: riflessioni sulla sicurezza europea",
+      "description": "La Presidenza svizzera dell'OSCE ha organizzato a Berna una conferenza per discutere delle origini della CSCE e dell'importanza dei suoi principi fondanti",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/conferenza-osce-berna-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista aerea di Berna, Svizzera, con la bandiera svizzera che sventola, simbolo della conferenza dell'OSCE."
+      },
+      "datePublished": "2026-09-06T01:22:17+00:00",
+      "dateModified": "2026-09-06T01:22:17+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/conferenza-osce-berna-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-polizia-operazione-goldach': {
+    title: 'Allarme a una festa scolastica: maxi operazione di polizia',
+    description: 'Le forze dell’ordine hanno ricevuto segnalazioni di «presunti spari» a scuola e lavorano per evacuare le circa 300 persone presenti. Dati aggiornati 2026',
+    keywords: 'frontalieri, ticino, svizzera, italia, allarme, festa, scolastica, maxi',
+    ogTitle: 'Allarme a una festa scolastica: maxi operazione di polizia',
+    ogDescription: 'Le forze dell’ordine hanno ricevuto segnalazioni di «presunti spari» a scuola e lavorano per evacuare le circa 300 persone presenti. Ulteriori aggiornamenti saranno forniti non appena saranno disponibili nuove informazioni.',
+    canonicalPath: '/articoli-svizzera/polizia-operazione-goldach/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Allarme a una festa scolastica: maxi operazione di polizia",
+      "description": "Le forze dell’ordine hanno ricevuto segnalazioni di «presunti spari» a scuola e lavorano per evacuare le circa 300 persone presenti. Dati aggiornati 2026",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/polizia-operazione-goldach.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Polizia presente a una festa scolastica a Goldach"
+      },
+      "datePublished": "2026-09-06T01:27:55+00:00",
+      "dateModified": "2026-09-06T01:27:55+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/polizia-operazione-goldach/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-permesso-l-breve-durata-canton-vallese': {
+    title: 'Permesso L di breve durata nel Canton Vallese: validità e proroga',
+    description: 'Scopri la validità e le condizioni di proroga del permesso L di breve durata nel Cantone di Vallese. Informazioni utili per lavoratori stranieri e datori',
+    keywords: 'frontalieri, ticino, svizzera, italia, permesso, breve, durata, canton',
+    ogTitle: 'Permesso L di breve durata nel Canton Vallese: validità e proroga',
+    ogDescription: 'Il permesso L di breve durata nel Cantone di Vallese ha una validità massima di 1 anno e può essere prorogato solo in casi specifici. Scopri di più sulle condizioni e le implicazioni pratiche.',
+    canonicalPath: '/articoli-svizzera/permesso-l-breve-durata-canton-vallese/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Permesso L di breve durata nel Canton Vallese: validità e proroga",
+      "description": "Scopri la validità e le condizioni di proroga del permesso L di breve durata nel Cantone di Vallese. Informazioni utili per lavoratori stranieri e datori",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/permesso-l-breve-durata-canton-vallese.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista aerea della città di Sion nel canton Vallese, Svizzera"
+      },
+      "datePublished": "2026-09-06T01:34:18+00:00",
+      "dateModified": "2026-09-06T01:34:18+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/permesso-l-breve-durata-canton-vallese/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-assegni-familiari-canton-vallese': {
+    title: 'Assegni familiari nel Cantone di Vallese: importi e domanda',
+    description: 'Scopri gli importi mensili per figlio, le condizioni di diritto e la procedura di domanda per gli assegni familiari nel Cantone di Vallese. Dati aggiornati 2026',
+    keywords: 'frontalieri, ticino, svizzera, italia, assegni, familiari, cantone, vallese',
+    ogTitle: 'Assegni familiari nel Cantone di Vallese: importi e domanda',
+    ogDescription: 'Scopri gli importi mensili per figlio, le condizioni di diritto e la procedura di domanda per gli assegni familiari nel Cantone di Vallese. Informazioni dettagliate e guida pratica per le famiglie.',
+    canonicalPath: '/articoli-svizzera/assegni-familiari-canton-vallese/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Assegni familiari nel Cantone di Vallese: importi e domanda",
+      "description": "Scopri gli importi mensili per figlio, le condizioni di diritto e la procedura di domanda per gli assegni familiari nel Cantone di Vallese. Dati aggiornati 2026",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/assegni-familiari-canton-vallese.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Famiglia svizzera con bambini che riceve assegni familiari"
+      },
+      "datePublished": "2026-09-06T01:40:15+00:00",
+      "dateModified": "2026-09-06T01:40:15+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/assegni-familiari-canton-vallese/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-assegni-familiari-vallese-importi': {
+    title: 'Assegni familiari Vallese: importi e procedura di domanda',
+    description: 'Scopri gli importi degli assegni familiari e di formazione nel Canton Vallese: 300 CHF per figlio e 440 CHF per la formazione. Guida alla domanda.',
+    keywords: 'frontalieri, ticino, svizzera, italia, assegni, familiari, vallese, importi',
+    ogTitle: 'Assegni familiari Canton Vallese: guida e importi',
+    ogDescription: 'Il sistema vallesano di sostegno alle famiglie: assegni da 300 CHF per figlio e 440 CHF per la formazione. Scopri come presentare la domanda tramite la cassa di compensazione.',
+    canonicalPath: '/articoli-svizzera/assegni-familiari-vallese-importi/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Assegni familiari Vallese: importi e procedura di domanda",
+      "description": "Scopri gli importi degli assegni familiari e di formazione nel Canton Vallese: 300 CHF per figlio e 440 CHF per la formazione. Guida alla domanda.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/assegni-familiari-vallese-importi.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Documenti relativi alle prestazioni sociali e assegni familiari nel Canton Vallese."
+      },
+      "datePublished": "2026-09-06T01:48:07+00:00",
+      "dateModified": "2026-09-06T01:48:07+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/assegni-familiari-vallese-importi/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-istruzione-obbligatoria-canton-vallese': {
+    title: 'Sistema scolastico Cantone Vallese: guida a cicli e iscrizioni',
+    description: 'Informazioni sull\'ordinamento scolastico nel Vallese: cicli di studio, procedure di iscrizione per le famiglie e requisiti per le scuole medie superiori.',
+    keywords: 'frontalieri, ticino, svizzera, italia, sistema, scolastico, cantone, vallese',
+    ogTitle: 'Sistema scolastico Cantone Vallese: guida a cicli e iscrizioni',
+    ogDescription: 'Guida pratica all\'istruzione obbligatoria nel Cantone Vallese: scopri la struttura dei cicli, le procedure di iscrizione e i requisiti per il passaggio ai livelli superiori.',
+    canonicalPath: '/articoli-svizzera/istruzione-obbligatoria-canton-vallese/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Sistema scolastico Cantone Vallese: guida a cicli e iscrizioni",
+      "description": "Informazioni sull'ordinamento scolastico nel Vallese: cicli di studio, procedure di iscrizione per le famiglie e requisiti per le scuole medie superiori.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/istruzione-obbligatoria-canton-vallese.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Edificio scolastico moderno nel Cantone Vallese"
+      },
+      "datePublished": "2026-09-06T01:55:16+00:00",
+      "dateModified": "2026-09-06T01:55:16+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/istruzione-obbligatoria-canton-vallese/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-avs-prestazioni-complementari-soletta': {
+    title: 'AVS e prestazioni complementari nel Cantone di Soletta',
+    description: 'Scopri come la cassa di compensazione cantonale di Soletta gestisce il primo pilastro AVS e garantisce il minimo vitale con rendite e prestazioni complementari.',
+    keywords: 'frontalieri, ticino, svizzera, italia, prestazioni, complementari, cantone, soletta',
+    ogTitle: 'AVS e prestazioni complementari nel Cantone di Soletta',
+    ogDescription: 'La cassa di compensazione cantonale di Soletta gestisce il primo pilastro AVS, calcolando rendite e prestazioni complementari per garantire il minimo vitale.',
+    canonicalPath: '/articoli-svizzera/avs-prestazioni-complementari-soletta/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "AVS e prestazioni complementari nel Cantone di Soletta",
+      "description": "Scopri come la cassa di compensazione cantonale di Soletta gestisce il primo pilastro AVS e garantisce il minimo vitale con rendite e prestazioni complementari.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/avs-prestazioni-complementari-soletta.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista della città di Bellinzona con i suoi castelli medievali."
+      },
+      "datePublished": "2026-09-06T02:10:52+00:00",
+      "dateModified": "2026-09-06T02:10:52+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/laura-bianchi/#person",
+        "name": "Laura Bianchi",
+        "url": "https://frontaliereticino.ch/autori/laura-bianchi/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/avs-prestazioni-complementari-soletta/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-avs-soletta-cassa-compensazione': {
+    title: 'AVS e prestazioni complementari nel Soletta | Frontaliere Ticino',
+    description: 'Cassa di compensazione, calcolo rendita AVS e prestazioni complementari nel Cantone Soletta: come funziona il sistema previdenziale locale. Dati aggiornati 2026',
+    keywords: 'frontalieri, ticino, svizzera, italia, prestazioni, complementari, soletta, cassa',
+    ogTitle: 'AVS e prestazioni complementari nel Soletta',
+    ogDescription: 'Scopri come funziona la cassa di compensazione cantonale del Soletta, il calcolo della rendita AVS, l\'impatto delle lacune contributive e l\'accesso alle prestazioni complementari per il minimo vitale di sussistenza.',
+    canonicalPath: '/articoli-svizzera/avs-soletta-cassa-compensazione/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "AVS e prestazioni complementari nel Soletta",
+      "description": "Cassa di compensazione, calcolo rendita AVS e prestazioni complementari nel Cantone Soletta: come funziona il sistema previdenziale locale. Dati aggiornati 2026",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/avs-soletta-cassa-compensazione.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Ufficio amministrativo cantonale svizzero con cittadini anziani che discutono documentazione pensionistica."
+      },
+      "datePublished": "2026-09-06T02:19:35+00:00",
+      "dateModified": "2026-09-06T02:19:35+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/laura-bianchi/#person",
+        "name": "Laura Bianchi",
+        "url": "https://frontaliereticino.ch/autori/laura-bianchi/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/avs-soletta-cassa-compensazione/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-aprire-attivita-canton-soletta-registro-di-commercio-e-costi': {
+    title: 'Aprire un\'attività nel Cantone di Soletta: Registro di Commercio e Costi',
+    description: 'Scopri i passaggi burocratici e finanziari per avviare un\'attività nel Cantone di Soletta, inclusi costi di iscrizione e obblighi assicurativi. Dati aggiornati',
+    keywords: 'frontalieri, ticino, svizzera, italia, aprire, attività, cantone, soletta',
+    ogTitle: 'Aprire un\'attività nel Cantone di Soletta: Registro di Commercio e Costi',
+    ogDescription: 'Scopri i passaggi burocratici e finanziari per avviare un\'attività nel Cantone di Soletta, inclusi costi di iscrizione e obblighi assicurativi. Questo articolo fornisce una guida dettagliata per gli imprenditori che desiderano avviare un\'attività',
+    canonicalPath: '/articoli-svizzera/aprire-attivita-canton-soletta-registro-di-commercio-e-costi/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Aprire un'attività nel Cantone di Soletta: Registro di Commercio e Costi",
+      "description": "Scopri i passaggi burocratici e finanziari per avviare un'attività nel Cantone di Soletta, inclusi costi di iscrizione e obblighi assicurativi. Dati aggiornati",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/aprire-attivita-canton-soletta-registro-di-commercio-e-costi.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Ufficio di registrazione commerciale nel Cantone di Soletta"
+      },
+      "datePublished": "2026-09-06T02:35:48+00:00",
+      "dateModified": "2026-09-06T02:35:48+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/aprire-attivita-canton-soletta-registro-di-commercio-e-costi/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-aprire-attivita-soletta-costi-procedure': {
+    title: 'Aprire un\'attività a Soletta: costi e procedure',
+    description: 'Guida completa: forme giuridiche, registrazione al registro di commercio federale, capitale minimo, sistema fiscale, obblighi assicurativi e step-by-step',
+    keywords: 'frontalieri, ticino, svizzera, italia, aprire, attività, soletta, costi',
+    ogTitle: 'Aprire un\'attività a Soletta: costi e procedure',
+    ogDescription: 'Scopri come avviare attività nel Cantone di Soletta: scegli la forma giuridica giusta (ditta individuale, SARL, SA, cooperativa), registrati al registro di commercio federale, affronta i costi di iscrizione, e rispetta gli obblighi assicurativi',
+    canonicalPath: '/articoli-svizzera/aprire-attivita-soletta-costi-procedure/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Aprire un'attività a Soletta: costi e procedure",
+      "description": "Guida completa: forme giuridiche, registrazione al registro di commercio federale, capitale minimo, sistema fiscale, obblighi assicurativi e step-by-step",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/aprire-attivita-soletta-costi-procedure.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Uno spazio ufficio moderno svizzero con scrivania, computer e documenti commerciali."
+      },
+      "datePublished": "2026-09-06T02:46:15+00:00",
+      "dateModified": "2026-09-06T02:46:15+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/aprire-attivita-soletta-costi-procedure/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-aprire-attivita-soletta-commercio-costi': {
+    title: 'Aprire un\'attività canton Soletta: guida registro e costi',
+    description: 'Guida completa: forme giuridiche, iscrizione registro di commercio, imposta federale-cantonale-comunale e obblighi previdenziali (AVS, LPP, LAMal, SUVA)',
+    keywords: 'frontalieri, ticino, svizzera, italia, aprire, attività, canton, soletta',
+    ogTitle: 'Aprire attività nel canton Soletta: guida e costi',
+    ogDescription: 'Scopri le forme giuridiche (DI, SA, SARL), l\'iscrizione al registro commerciale, la fiscalità a 3 livelli federale-cantonale-comunale e gli obblighi assicurativi per avviare un\'attività nel canton Soletta.',
+    canonicalPath: '/articoli-svizzera/aprire-attivita-soletta-commercio-costi/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Aprire un'attività canton Soletta: guida registro e costi",
+      "description": "Guida completa: forme giuridiche, iscrizione registro di commercio, imposta federale-cantonale-comunale e obblighi previdenziali (AVS, LPP, LAMal, SUVA)",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/aprire-attivita-soletta-commercio-costi.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Ufficio del registro di commercio svizzero con banco accoglienza moderno e linee architettoniche contemporanee"
+      },
+      "datePublished": "2026-09-06T02:54:21+00:00",
+      "dateModified": "2026-09-06T02:54:21+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/aprire-attivita-soletta-commercio-costi/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-avviare-attivita-soletta-guida-completa': {
+    title: 'Aprire attività in Soletta: forme giuridiche, costi e procedure',
+    description: 'Guida pratica all\'avviamento di un\'impresa nel Cantone di Soletta: scelta della forma giuridica, iscrizione al Registro di commercio, imposte e obblighi',
+    keywords: 'frontalieri, ticino, svizzera, italia, aprire, attività, soletta, forme',
+    ogTitle: 'Aprire attività in Soletta: forme giuridiche, costi',
+    ogDescription: 'Guida pratica all\'avviamento di un\'impresa nel Cantone di Soletta: scelta della forma giuridica, iscrizione al Registro di commercio, imposte e obblighi assicurativi.',
+    canonicalPath: '/articoli-svizzera/avviare-attivita-soletta-guida-completa/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Aprire attività in Soletta: forme giuridiche, costi e procedure",
+      "description": "Guida pratica all'avviamento di un'impresa nel Cantone di Soletta: scelta della forma giuridica, iscrizione al Registro di commercio, imposte e obblighi",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/avviare-attivita-soletta-guida-completa.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Veduta di un ufficio amministrativo svizzero, simbolo di procedura di avvio d'impresa e registro di commercio"
+      },
+      "datePublished": "2026-09-06T03:03:29+00:00",
+      "dateModified": "2026-09-06T03:03:29+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/avviare-attivita-soletta-guida-completa/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-creare-attivita-soletta-checklist': {
+    title: 'Avviare attività a Soletta: costi e procedura | Frontaliere Ticino',
+    description: 'Registrazione al registro commercio, scelta forma giuridica, tasse cantonali e obblighi previdenziali: guida completa per aprire attività nel canton Soletta.',
+    keywords: 'frontalieri, ticino, svizzera, italia, avviare, attività, soletta, costi',
+    ogTitle: 'Aprire attività a Soletta: guida completa',
+    ogDescription: 'Come registrare una nuova attività nel canton Soletta: procedure federali e cantonali, registrazione al registro commercio, obblighi fiscali, AVS, LPP e assicurazioni. Checklist pratica per imprenditori che avviano attività.',
+    canonicalPath: '/articoli-svizzera/creare-attivita-soletta-checklist/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Avviare attività a Soletta: costi e procedura",
+      "description": "Registrazione al registro commercio, scelta forma giuridica, tasse cantonali e obblighi previdenziali: guida completa per aprire attività nel canton Soletta.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/creare-attivita-soletta-checklist.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Imprenditore che esamina documenti di registrazione commerciale durante l'avvio di attività nel canton Soletta."
+      },
+      "datePublished": "2026-09-06T03:14:02+00:00",
+      "dateModified": "2026-09-06T03:14:02+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/creare-attivita-soletta-checklist/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-nuova-impresa-soletta-tassazione-costi': {
+    title: 'Aprire un\'attività a Soletta: registrazione e costi',
+    description: 'Guida a come aprire un\'attività nel canton Soletta: forme giuridiche, registrazione commerciale, tassazione federale/cantonale e obblighi assicurativi.',
+    keywords: 'frontalieri, ticino, svizzera, italia, aprire, attività, soletta, registrazione',
+    ogTitle: 'Aprire un\'attività a Soletta: registrazione e costi',
+    ogDescription: 'Guida pratica: come aprire un\'attività nel canton Soletta. Scopri le forme giuridiche, i costi di registrazione, la tassazione federale/cantonale/comunale e gli obblighi assicurativi (AVS, SUVA, LAMal). Procedura step-by-step e link ai servizi.',
+    canonicalPath: '/articoli-svizzera/nuova-impresa-soletta-tassazione-costi/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Aprire un'attività a Soletta: registrazione e costi",
+      "description": "Guida a come aprire un'attività nel canton Soletta: forme giuridiche, registrazione commerciale, tassazione federale/cantonale e obblighi assicurativi.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/nuova-impresa-soletta-tassazione-costi.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Ufficio di registrazione commerciale del cantone svizzero, con documenti ufficiali e scrivania in legno."
+      },
+      "datePublished": "2026-09-06T03:23:16+00:00",
+      "dateModified": "2026-09-06T03:23:16+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/nuova-impresa-soletta-tassazione-costi/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-grigioni-immobili-guida-mutuo': {
+    title: 'Comprare casa a Grigioni: prezzi, fondi propri e mutui',
+    description: 'Come comprare casa nel Canton Grigioni: procedura, costi d\'acquisto, imposta sui trapassi, spese notarili, mutui ipotecari e criteri bancari di sostenibilità',
+    keywords: 'frontalieri, ticino, svizzera, italia, comprare, casa, grigioni, prezzi',
+    ogTitle: 'Comprare casa a Grigioni: prezzi, fondi propri e mutui',
+    ogDescription: 'Guida completa all\'acquisto di immobili nel Canton Grigioni: procedura, costi accessori, imposte sui trapassi, spese notarili, mutui ipotecari e sostenibilità finanziaria con la regola del 33%',
+    canonicalPath: '/articoli-svizzera/grigioni-immobili-guida-mutuo/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Comprare casa a Grigioni: prezzi, fondi propri e mutui",
+      "description": "Come comprare casa nel Canton Grigioni: procedura, costi d'acquisto, imposta sui trapassi, spese notarili, mutui ipotecari e criteri bancari di sostenibilità",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/grigioni-immobili-guida-mutuo.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Casa moderna su un pendio montagnoso nelle Alpi svizzere con vista su vette innevate"
+      },
+      "datePublished": "2026-09-06T03:38:10+00:00",
+      "dateModified": "2026-09-06T03:38:10+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/grigioni-immobili-guida-mutuo/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-comprare-casa-grigioni-mutuo-imposte': {
+    title: 'Comprare casa Grigioni: mutuo e imposte | Frontaliere Ticino',
+    description: 'Acquistare nel Grigioni: fondi propri 20-30%, mutuo ipotecario, imposta trasporto per comune, spese notarili. Guida pratica a costi e procedura. Dati aggiornati',
+    keywords: 'frontalieri, ticino, svizzera, italia, comprare, casa, grigioni, mutuo',
+    ogTitle: 'Comprare casa Grigioni: mutuo e imposte',
+    ogDescription: 'Guida all\'acquisto immobiliare nel Grigioni: come finanziare, fondi propri 20-30%, imposte di trasporto per comune, spese notarili, procedura step-by-step, tassi ipotecari, sostenibilità del mutuo. Tutto quello che serve sapere per comprare casa',
+    canonicalPath: '/articoli-svizzera/comprare-casa-grigioni-mutuo-imposte/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Comprare casa Grigioni: mutuo e imposte",
+      "description": "Acquistare nel Grigioni: fondi propri 20-30%, mutuo ipotecario, imposta trasporto per comune, spese notarili. Guida pratica a costi e procedura. Dati aggiornati",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/comprare-casa-grigioni-mutuo-imposte.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Casa tradizionale in legno del Grigioni circondata da montagne e paesaggio alpino"
+      },
+      "datePublished": "2026-09-06T03:48:30+00:00",
+      "dateModified": "2026-09-06T03:48:30+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/comprare-casa-grigioni-mutuo-imposte/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-apprendistato-formazione-canton-vallese': {
+    title: 'Apprendistato e formazione professionale nel Canton Vallese',
+    description: 'Scopri come trovare un posto di tirocinio, i dettagli del contratto e la retribuzione degli apprendisti nel Canton Vallese. Dati aggiornati 2026 per frontalieri',
+    keywords: 'frontalieri, ticino, svizzera, italia, apprendistato, formazione, professionale, canton',
+    ogTitle: 'Apprendistato e formazione professionale nel Canton Vallese',
+    ogDescription: 'Scopri come trovare un posto di tirocinio, i dettagli del contratto e la retribuzione degli apprendisti nel Canton Vallese. La maturità professionale offre diverse opportunità di carriera e può essere un punto di partenza per ulteriori studi',
+    canonicalPath: '/articoli-svizzera/apprendistato-formazione-canton-vallese/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Apprendistato e formazione professionale nel Canton Vallese",
+      "description": "Scopri come trovare un posto di tirocinio, i dettagli del contratto e la retribuzione degli apprendisti nel Canton Vallese. Dati aggiornati 2026 per frontalieri",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/apprendistato-formazione-canton-vallese.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Un apprendista in un laboratorio nel Canton Vallese, Svizzera."
+      },
+      "datePublished": "2026-09-06T04:05:18+00:00",
+      "dateModified": "2026-09-06T04:05:18+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/apprendistato-formazione-canton-vallese/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-grigioni-deposito-garanzia-locazione': {
+    title: 'Affitti Grigioni: canoni medi e diritto locazione',
+    description: 'Guida completa al diritto di locazione in Grigioni: canoni, deposito cauzionale, disdetta e contestazione secondo le norme federali svizzere. Dati aggiornati',
+    keywords: 'frontalieri, ticino, svizzera, italia, affitti, grigioni, canoni, medi',
+    ogTitle: 'Affitti Grigioni: canoni e diritto di locazione',
+    ogDescription: 'Scopri come funziona il diritto di locazione in Grigioni: deposito cauzionale fino a 3 mesi, procedure di contestazione, disdetta e protezione dell\'inquilino secondo la legge federale svizzera.',
+    canonicalPath: '/articoli-svizzera/grigioni-deposito-garanzia-locazione/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Affitti Grigioni: canoni medi e diritto locazione",
+      "description": "Guida completa al diritto di locazione in Grigioni: canoni, deposito cauzionale, disdetta e contestazione secondo le norme federali svizzere. Dati aggiornati",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/grigioni-deposito-garanzia-locazione.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Via residenziale in una città alpina svizzera con edifici di appartamenti moderni e tipica architettura elvetica."
+      },
+      "datePublished": "2026-09-06T04:30:19+00:00",
+      "dateModified": "2026-09-06T04:30:19+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/grigioni-deposito-garanzia-locazione/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

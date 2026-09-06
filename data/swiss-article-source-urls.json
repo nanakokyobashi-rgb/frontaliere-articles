@@ -1,6 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/politica/1943470/miliardi-iva-aumento-consiglio-punti": "sicurezza-a-caro-prezzo-proposto-un-aumento-dell-iva-di-0-5-punti-per-centuali",
-  "https://www.tio.ch/svizzera/politica/1943484/referendum-accordi-commissione-svizzera-ue-svizzera-essere": "accordi-svizzera-ue-consiglio-federale",
   "https://www.rsi.ch/s/3949164": "aumento-iva-per-la-difesa",
   "https://www.tio.ch/svizzera/economia/1943473/banche-federale-crisi-consiglio-bonus": "banche-sotto-la-lente-bern-stringe-sui-bonus",
   "https://www.swissinfo.ch/ita/%22frutta-e-verdura-pi%c3%b9-care-da-produrre%2c-ma-prezzi-non-salgono%22/91887338": "frutta-ve-25-per-cento-piu-costi-3-sconto-migros",
@@ -880,8 +878,8 @@
     "keyForm": 2
   },
   "https://www.tvsvizzera.it/tvs/lavoro-ed-economia/gli-svizzeri-non-hanno-mai-guadagnato-e-risparmiato-come-oggi/91955878": {
-    "articleId": "svizzeri-risparmiano-piu-che-mai",
-    "ts": "2026-08-31T21:13:26.175Z",
+    "articleId": "reddito-risparmio-svizzeri-record",
+    "ts": "2026-09-05T23:02:52.833Z",
     "keyForm": 2
   },
   "https://www.tio.ch/svizzera/economia/1946190/rail-primo-borsa-semestre-stadler": {
@@ -1857,6 +1855,16 @@
   "https://www.tio.ch/rubriche/ospite/1948265/39-neutralita-pacifista-matteo-buzzi": {
     "articleId": "pacifismo-neutralita-buzzi",
     "ts": "2026-09-05T21:16:12.813Z",
+    "keyForm": 2
+  },
+  "https://www.admin.ch/it/newnsb/xkqqxunqnkgo": {
+    "articleId": "conferenza-osce-berna-2026",
+    "ts": "2026-09-06T01:22:17.571Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/cronaca/1948156/polizia-operazione-goldach-gallo-segnalazioni": {
+    "articleId": "polizia-operazione-goldach",
+    "ts": "2026-09-06T01:27:55.662Z",
     "keyForm": 2
   }
 }

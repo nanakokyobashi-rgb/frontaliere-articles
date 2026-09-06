@@ -1,16 +1,5 @@
 {
   "keywords": [
-    "avs e prestazioni complementari canton Soletta cassa di compensazione",
-    "aprire un'attività canton Soletta registro di commercio e costi",
-    "patente di guida canton Soletta conversione ed esami",
-    "imposta di successione e donazione canton Soletta aliquote",
-    "comprare casa canton Grigioni prezzi e mutuo ipotecario",
-    "vivere a Castelseprio e lavorare in Ticino da frontaliere",
-    "vivere a Sangiano e lavorare in Ticino da frontaliere",
-    "vivere a Craveggia e lavorare in Ticino da frontaliere",
-    "vivere a Miazzina e lavorare in Ticino da frontaliere",
-    "premi cassa malati canton Basilea Città e riduzione premi",
-    "mercato degli affitti canton Grigioni canoni medi e diritto di locazione",
     "vivere a Mandello del Lario e lavorare in Ticino da frontaliere",
     "vivere a Arosio e lavorare in Ticino da frontaliere",
     "vivere a Carugo e lavorare in Ticino da frontaliere",
@@ -499,7 +488,18 @@
     "apprendistato e formazione professionale canton Grigioni",
     "vivere a Merone e lavorare in Ticino da frontaliere",
     "vivere a Plesio e lavorare in Ticino da frontaliere",
-    "mercato degli affitti canton Soletta canoni medi e diritto di locazione"
+    "mercato degli affitti canton Soletta canoni medi e diritto di locazione",
+    "assegni familiari canton Vallese importi e domanda",
+    "avs e prestazioni complementari canton Soletta cassa di compensazione",
+    "aprire un'attività canton Soletta registro di commercio e costi",
+    "patente di guida canton Soletta conversione ed esami",
+    "imposta di successione e donazione canton Soletta aliquote",
+    "comprare casa canton Grigioni prezzi e mutuo ipotecario",
+    "sistema scolastico canton Vallese iscrizione e cicli",
+    "vivere a Castelseprio e lavorare in Ticino da frontaliere",
+    "vivere a Sangiano e lavorare in Ticino da frontaliere",
+    "vivere a Craveggia e lavorare in Ticino da frontaliere",
+    "vivere a Miazzina e lavorare in Ticino da frontaliere"
   ],
   "strikes": {
     "frontaliere farmacista ticino stipendio requisiti": 3,
@@ -759,6 +759,7 @@
     "premi cassa malati canton Appenzello Interno e riduzione premi": 1,
     "frontaliere cambio datore lavoro procedura permesso 2026 oltre 20 km": 1,
     "frontaliere formazione professionale riqualifica corsi 2026 simulazione pratica": 1,
-    "vivere a Brenna e lavorare in Ticino da frontaliere": 1
+    "vivere a Brenna e lavorare in Ticino da frontaliere": 1,
+    "premi cassa malati canton Basilea Città e riduzione premi": 1
   }
 }

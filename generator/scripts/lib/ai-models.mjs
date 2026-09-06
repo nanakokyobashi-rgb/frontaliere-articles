@@ -1778,6 +1778,13 @@ const DEFAULT_OPTS = {
    * cio' che evita al chiamante diagnostico — proprio quello che percorre la
    * catena intera — di ripagare lo stesso errore a ogni giro.
    *
+   * LIMITE ESPLICITO — i writer puramente in-processo non prendono il flag
+   * (#887). `recordModelContentSuccess()` azzera lo streak del breaker di
+   * contenuto e non propone niente al ledger: gatare il reset mentre il bump del
+   * gemello resta lascerebbe il chiamante diagnostico capace solo di spingere il
+   * breaker verso il ban. Un opt-out esplicito la' non e' comunque silenzioso —
+   * vedi il blocco su quella funzione.
+   *
    * LIMITE ESPLICITO — la discovery non e' coperta da questo flag. E' per
    * processo, non per chiamata: `discoverFreeModels()` marca `stale` i modelli
    * che un provider non offre piu' e quel marchio va nel ledger. Un chiamante
@@ -3120,6 +3127,10 @@ let _discoveryRecordScore = true;
 // da una discovery diagnostica» — e ripeterlo per ognuno dei dodici provider lo
 // renderebbe rumore invece che segnale.
 let _optOutPruneWarned = false;
+// Warn-once gemello del precedente, per l'altra meta' in-processo che il flag
+// `recordScore` non copre: il reset dello streak di contenuto (#887). Stesso
+// ciclo di vita, stessa ragione — il fatto da segnalare e' uno solo.
+let _optOutContentResetWarned = false;
 const _dynamicModels = [];
 // modelId → provider name, for ids pruned from DEFAULT_CHAIN because the provider stopped
 // offering them (see the markStale block in _discoverProvider). Diagnostics + re-entry
@@ -3894,9 +3905,39 @@ function _bumpOutcome(modelId, field, { ledger = true } = {}) {
  * Clear downstream content-quality failures after a caller has parsed and
  * validated the HTTP-200 payload. Plain transport success is not enough: weak
  * models can return malformed JSON forever unless validation owns this reset.
+ *
+ * ── `recordScore` (#887) ──────────────────────────────────────
+ *
+ * Il flag RESTA FUORI, ed e' una decisione, non una dimenticanza: questa
+ * funzione non propone niente al ledger — cancella una voce di
+ * `_consecutiveContentFailures`, che e' stato in-processo e muore col processo.
+ * E' la stessa divisione degli altri tre writer (#846): `recordScore` spegne la
+ * proposta al documento condiviso, mai il marchio in-processo.
+ *
+ * La ragione per cui gatarlo sarebbe attivamente PEGGIO sta nel gemello:
+ * `recordModelContentFailure` incrementa lo streak e marca `content` in-processo
+ * ANCHE in opt-out. Se il reset ubbidisse al flag e il bump no, un chiamante
+ * diagnostico potrebbe solo far salire lo streak del breaker di contenuto e mai
+ * riportarlo a zero — sposterebbe il breaker verso il ban invece di lasciarlo
+ * neutro, che e' l'opposto di cio' che l'opt-out promette.
+ *
+ * Resta vero che il reset tocca uno streak accumulato dalla produzione sullo
+ * stesso modello nello stesso processo. Non e' sopprimibile per chiamata, per
+ * quanto sopra, ma non deve essere silenzioso: un `recordScore` falsy esplicito
+ * ottiene il warning warn-once qui sotto, gemello di quello del prune di
+ * discovery (#844). La separazione vera e' fra processi, non fra chiamate.
  */
-export function recordModelContentSuccess(modelId) {
+export function recordModelContentSuccess(modelId, { recordScore } = {}) {
   if (!modelId) return;
+  if (recordScore !== undefined && !coerceRecordScore(recordScore) && !_optOutContentResetWarned) {
+    _optOutContentResetWarned = true;
+    console.warn(
+      '\u26a0\ufe0f  [recordModelContentSuccess] recordScore:false ignorato — il reset dello streak di contenuto e\' in-processo, '
+      + 'non una proposta al ledger, e il suo gemello `recordModelContentFailure` incrementa lo streak anche in opt-out: '
+      + 'gatare solo il reset lascerebbe il breaker a salire e mai a scendere. '
+      + 'Lo streak di `_consecutiveContentFailures` e\' condiviso con chi genera in questo stesso processo — separa i due processi.',
+    );
+  }
   _consecutiveContentFailures.delete(modelId);
 }
 
@@ -4724,6 +4765,7 @@ export function resetState() {
   _stats.errors = [];
   _stats.lastResort = _freshLastResortStats();
   _optOutPruneWarned = false;
+  _optOutContentResetWarned = false;
   _lastResortOrderWarned = false;
   _competingTiersWarned = false;
   _preferredModelsWarned = false;
