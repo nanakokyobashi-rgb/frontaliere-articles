@@ -45,7 +45,7 @@
  * scrivere le voci edge dall'altro lato.
  */
 
-import { readFileSync, writeFileSync, existsSync, unlinkSync, readdirSync } from 'node:fs';
+import { readFileSync, writeFileSync, existsSync, unlinkSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -54,6 +54,10 @@ import { ledgerArticleId } from '../generator/scripts/lib/source-url-ledger.mjs'
 // anche il gate di PR `generator/tests/retired-articles-fully-removed.test.mjs`
 // sulle stesse superfici, e due copie divergono (vedi il file per il perché).
 import { mentionsId } from './lib/mentions-id.mjs';
+import {
+  SECTIONS, LOCALES, IMAGES_LEDGER, IMAGE_CATALOG, RETIRED_LEDGER,
+  seoFilesFor, leftoverSurfacesFor,
+} from './lib/article-surfaces.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 
@@ -61,48 +65,9 @@ const rel = (p) => path.join(ROOT, p);
 const read = (p) => readFileSync(rel(p), 'utf-8');
 const write = (p, s) => writeFileSync(rel(p), s, 'utf-8');
 
-/** Descrittori per sezione: le superfici su cui `create-article.mjs` scrive. */
-const SECTIONS = {
-  frontaliere: {
-    registryFile: 'content/blog-articles-data.ts',
-    slugDataFile: 'content/routerBlogData.ts',
-    // `ALL_BLOG_ARTICLE_IDS` è un array letterale indipendente, non derivato
-    // da `BLOG_SLUGS`: rimuovere la riga slug non lo tocca. `routerSwissData.ts`
-    // non ha bisogno del suo equivalente qui perché lì è
-    // `Object.keys(SWISS_SLUGS)`, quindi resta coerente da solo.
-    idListVar: 'ALL_BLOG_ARTICLE_IDS',
-    // Stessa classe: `create-article.mjs` appende l'id anche alla union di
-    // literal `BlogArticleId` (`modifyRouterUnion`, solo per questa sezione),
-    // che è un file a sé e non deriva da nulla. Senza ripulirla il tipo
-    // continua ad ammettere un id che non esiste più su nessuna superficie.
-    idUnionFile: 'content/blogArticleIds.ts',
-    metaFiles: ['it', 'en', 'de', 'fr'].map((l) => `content/blog-meta-${l}.ts`),
-    bodyDir: 'content/blog-body',
-    seoFiles: null, // scoperti a runtime: content/seo/seo-blog-*.ts
-    seoGlobPrefix: 'content/seo/seo-blog-',
-    sourceLedger: 'data/article-source-urls.json',
-    sidecarDir: 'data/blog-articles',
-  },
-  svizzera: {
-    registryFile: 'content/swiss-articles-data.ts',
-    slugDataFile: 'content/routerSwissData.ts',
-    idListVar: null,
-    // `create-article.mjs`: la sezione svizzera NON mantiene la union
-    // (`updateRouterUnion` falso), gli id sono stringhe libere.
-    idUnionFile: null,
-    metaFiles: ['it', 'en', 'de', 'fr'].map((l) => `content/blog-meta-ch-${l}.ts`),
-    bodyDir: 'content/blog-body-ch',
-    seoFiles: ['content/seo/seo-blog-ch.ts'],
-    seoGlobPrefix: null,
-    sourceLedger: 'data/swiss-article-source-urls.json',
-    sidecarDir: 'data/swiss-articles',
-  },
-};
-
-const LOCALES = ['it', 'en', 'de', 'fr'];
-const IMAGES_LEDGER = 'data/blog-images-used.json';
-const IMAGE_CATALOG = 'public/data/journalist-image-catalog.json';
-const RETIRED_LEDGER = 'data/retired-articles.json';
+// Descrittori di sezione, costanti e l'elenco delle superfici: sorgente unica,
+// condivisa col gate di PR `generator/tests/retired-articles-fully-removed.test.mjs`
+// (vedi il modulo per il perché).
 
 /**
  * Trova la `}` che chiude la `{` a `openIdx`, ignorando le graffe dentro le
@@ -287,15 +252,6 @@ function removeFromImageCatalog(file, id) {
   return { changed: true, text: `${JSON.stringify(kept)}\n` };
 }
 
-function seoFilesFor(section) {
-  const cfg = SECTIONS[section];
-  if (cfg.seoFiles) return cfg.seoFiles.filter((f) => existsSync(rel(f)));
-  const dir = rel('content/seo');
-  if (!existsSync(dir)) return [];
-  return readdirSync(dir)
-    .filter((f) => f.startsWith('seo-blog-') && f.endsWith('.ts'))
-    .map((f) => `content/seo/${f}`);
-}
 
 
 /** In quale sezione vive l'id? Deciso dal registro che lo contiene. */
@@ -443,12 +399,7 @@ function main() {
   // 12. verifica finale: l'id non deve più comparire da nessuna parte.
   //     Senza questo passo una rimozione parziale esce 0 e ferma il publish
   //     del corpus intero al prossimo push di contenuto.
-  const surfaces = [
-    cfg.registryFile, cfg.slugDataFile, ...cfg.metaFiles, ...seoFilesFor(section),
-    cfg.sourceLedger, IMAGES_LEDGER,
-    ...(cfg.idUnionFile ? [cfg.idUnionFile] : []),
-  ].filter((f) => existsSync(rel(f)));
-  const leftovers = surfaces.filter((f) => mentionsId(read(f), id));
+  const leftovers = leftoverSurfacesFor(section).filter((f) => mentionsId(read(f), id));
   if (leftovers.length > 0) {
     console.error(`\nRIMOZIONE PARZIALE — '${id}' compare ancora in:\n${leftovers.map((f) => `   ${f}`).join('\n')}`);
     process.exit(1);

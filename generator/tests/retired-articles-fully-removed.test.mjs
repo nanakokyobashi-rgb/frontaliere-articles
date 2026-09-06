@@ -51,39 +51,31 @@ import { readFileSync, existsSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { mentionsId } from '../../scripts/lib/mentions-id.mjs';
+// Le superfici NON sono riscritte qui: le enumera lo stesso modulo che usa
+// `scripts/retire-article.mjs`. Un secondo elenco a mano è già divergito una
+// volta — mancavano `content/blogArticleIds.ts`, i file SEO e il ledger delle
+// immagini, quindi un id ritirato sopravvissuto lì passava verde proprio nel
+// test che esiste per accorgersene.
+import { SECTIONS, leftoverSurfacesFor, seoFilesFor } from '../../scripts/lib/article-surfaces.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 
 const RETIRED_FILE = 'data/retired-articles.json';
 const LOCALES = ['it', 'en', 'de', 'fr'];
 
-/**
- * Le superfici per sezione, nello stesso ordine in cui `create-article.mjs` le
- * scrive. `body` è una directory: il file è `<bodyDir>/<locale>/<id>.ts`.
- */
-const SURFACES = {
-  frontaliere: {
-    registry: 'content/blog-articles-data.ts',
-    slugs: 'content/routerBlogData.ts',
-    meta: LOCALES.map((l) => `content/blog-meta-${l}.ts`),
-    bodyDir: 'content/blog-body',
-    ledger: 'data/article-source-urls.json',
-    sidecarDir: 'data/blog-articles',
-  },
-  svizzera: {
-    registry: 'content/swiss-articles-data.ts',
-    slugs: 'content/routerSwissData.ts',
-    meta: LOCALES.map((l) => `content/blog-meta-ch-${l}.ts`),
-    bodyDir: 'content/blog-body-ch',
-    ledger: 'data/swiss-article-source-urls.json',
-    sidecarDir: 'data/swiss-articles',
-  },
-};
-
 /** Il pavimento sotto cui una superficie letta è rotta, non pulita. */
 const MIN_SURFACE_BYTES = 1000;
 
+/**
+ * Le superfici lette una sola volta: i file SEO stanno fra i 150 kB e i 5,7 MB
+ * e vengono riletti per OGNI voce ritirata e per ogni vincitore.
+ * @type {Map<string, string>}
+ */
+const surfaceCache = new Map();
+
 function readSurface(rel) {
+  const cached = surfaceCache.get(rel);
+  if (cached !== undefined) return cached;
   const abs = path.join(ROOT, rel);
   assert.ok(existsSync(abs), `${rel}: superficie assente — il test non può dire nulla`);
   const src = readFileSync(abs, 'utf-8');
@@ -92,6 +84,7 @@ function readSurface(rel) {
     `${rel}: ${src.length} byte (< ${MIN_SURFACE_BYTES}). Una superficie che si legge vuota fa passare `
     + 'ogni asserzione di assenza: è il parser a essere rotto, non il corpus a essere pulito.',
   );
+  surfaceCache.set(rel, src);
   return src;
 }
 
@@ -113,7 +106,7 @@ test('l\'elenco dei ritiri non è vuoto e ogni voce è completa', () => {
   );
   for (const entry of retired) {
     assert.ok(entry.id, `${RETIRED_FILE}: una voce senza "id"`);
-    assert.ok(SURFACES[entry.section], `${entry.id}: sezione sconosciuta "${entry.section}"`);
+    assert.ok(SECTIONS[entry.section], `${entry.id}: sezione sconosciuta "${entry.section}"`);
     assert.ok(entry.winnerId, `${entry.id}: senza "winnerId" — un ritiro senza vincitore è una cancellazione`);
     assert.notEqual(entry.winnerId, entry.id, `${entry.id}: dichiarato vincitore di se stesso`);
     for (const loc of LOCALES) {
@@ -133,11 +126,12 @@ test('ogni articolo ritirato è sparito da TUTTE le superfici', () => {
   const leftovers = [];
 
   for (const entry of retired) {
-    const s = SURFACES[entry.section];
+    const s = SECTIONS[entry.section];
     const { id } = entry;
 
-    // Le superfici testuali: registro, mappa slug, meta per locale, ledger URL→id.
-    for (const rel of [s.registry, s.slugs, ...s.meta, s.ledger]) {
+    // Le superfici testuali: registro, mappa slug, meta per locale, file SEO,
+    // ledger URL→id, ledger immagini, union degli id.
+    for (const rel of leftoverSurfacesFor(entry.section)) {
       // `mentionsId` e non `includes(id)` nudo: gli id si annidano
       // (`frontalieri-disoccupazione-svizzera-2026` contiene
       // `disoccupazione-svizzera-2026`, ed è già così nel corpus) e i ledger
@@ -178,9 +172,9 @@ test('il vincitore di ogni ritiro è ancora pubblicato', () => {
   for (const entry of retired) {
     // Il vincitore può stare nell'ALTRA sezione — è il caso normale qui, visto
     // che questi ritiri nascono da duplicati cross-sezione.
-    const found = Object.entries(SURFACES).some(([, s]) =>
-      readSurface(s.registry).includes(`id: '${entry.winnerId}',`)
-      && readSurface(s.slugs).includes(`'${entry.winnerId}':`));
+    const found = Object.entries(SECTIONS).some(([, s]) =>
+      readSurface(s.registryFile).includes(`id: '${entry.winnerId}',`)
+      && readSurface(s.slugDataFile).includes(`'${entry.winnerId}':`));
     if (!found) missing.push(`${entry.id} → vincitore '${entry.winnerId}' non è in nessun registro`);
   }
 
@@ -191,5 +185,42 @@ test('il vincitore di ogni ritiro è ancora pubblicato', () => {
     + 'La voce EDGE_RETIRED_PATHS che verrà scritta dall\'altro lato diventerebbe un 301 verso un '
     + '404 — peggio del duplicato che stava riparando.\n'
     + missing.map((l) => `   ${l}`).join('\n'),
+  );
+});
+
+test('l\'elenco delle superfici copre tutto ciò da cui si rimuove una riga', () => {
+  // Il gate leggeva quattro superfici su nove: un id ritirato che sopravviveva
+  // nella union, in un file SEO o nel ledger immagini passava verde. Ora
+  // l'elenco è quello di `scripts/retire-article.mjs`, ma un elenco condiviso
+  // resta sbagliabile in un colpo solo — queste asserzioni nominano le tre
+  // superfici che mancavano, così togliendone una il test lo dice.
+  const frontaliere = leftoverSurfacesFor('frontaliere');
+  for (const rel of [
+    SECTIONS.frontaliere.registryFile,
+    SECTIONS.frontaliere.slugDataFile,
+    SECTIONS.frontaliere.idUnionFile,
+    SECTIONS.frontaliere.sourceLedger,
+    'data/blog-images-used.json',
+    'content/seo/seo-blog.ts',
+  ]) {
+    assert.ok(frontaliere.includes(rel), `superficie non sorvegliata: ${rel}`);
+  }
+
+  const svizzera = leftoverSurfacesFor('svizzera');
+  for (const rel of [
+    SECTIONS.svizzera.registryFile,
+    SECTIONS.svizzera.slugDataFile,
+    SECTIONS.svizzera.sourceLedger,
+    'content/seo/seo-blog-ch.ts',
+    'data/blog-images-used.json',
+  ]) {
+    assert.ok(svizzera.includes(rel), `superficie non sorvegliata: ${rel}`);
+  }
+
+  // `seo-blog.ts` non ha il trattino: col glob `seo-blog-*.ts` restava fuori
+  // sia dalla rimozione sia dalla verifica, e contiene ancora ~1.000 voci.
+  assert.ok(
+    seoFilesFor('frontaliere').includes('content/seo/seo-blog.ts'),
+    'il chunk SEO originale è fuori dal glob: un ritiro vecchio ci lascia dentro il blocco',
   );
 });
