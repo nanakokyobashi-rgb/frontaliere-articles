@@ -25,6 +25,7 @@ import fs from 'node:fs';
 import { createGithubIssue } from '../lib/github-issue-creator.mjs';
 import { FIX_OUTCOME_RE } from './close-recovered-failure-issues.mjs';
 import { FALSE_POSITIVE_DECLARATION_RE } from './lib/false-positive-declaration.mjs';
+import { REVIEWER_BOT_LOGIN_RE } from './lib/constants.mjs';
 
 const WINDOW_DAYS = Number(process.env.WINDOW_DAYS || 14);
 const THRESHOLD = Number(process.env.THRESHOLD || 3);
@@ -379,7 +380,7 @@ export function tallyFindings(prs, { bucketOf = bucketFinding } = {}) {
   for (const { number, reviews, mergedAt } of prs || []) {
     const seenBuckets = new Set(); // per-PR dedup across all its reviews
     for (const r of reviews || []) {
-      if (r.author?.login !== 'claude') continue;
+      if (!REVIEWER_BOT_LOGIN_RE.test(r.author?.login || '')) continue;
       for (const line of String(r.body || '').split('\n')) {
         const sev = detectSeverity(line);
         if (!sev || !COUNTABLE_SEVERITIES.has(sev)) continue;

@@ -190,3 +190,33 @@ export const GENERATOR_CI_TRIGGER_PATHS = [
   'package.json',
   'package-lock.json',
 ];
+
+/**
+ * Login dei bot le cui review valgono come VERDETTO del reviewer.
+ *
+ * Prefisso, non uguaglianza: la stessa App si presenta come
+ * `frontaliere-automation[bot]` sui webhook/REST e come
+ * `frontaliere-automation` in GraphQL (vedi `followup-drainer.mjs`,
+ * `BOT_COMMENT_LOGINS`), e `claude` arriva sia nudo sia come `claude[bot]`.
+ * Un match ancorato in coda leggerebbe zero review su uno dei due canali —
+ * cioè un gate che decide su un insieme VUOTO senza dirlo.
+ *
+ * Perché due login e non uno: dal momento in cui il trigger di
+ * `pr-redflag-fixer.yml` accetta una review dell'App bot, ogni CONSUMER della
+ * stessa review deve accettarla, o le due direzioni sbagliano in silenzio:
+ * un `🔴 Important` dell'App bot invisibile ad `auto-merge-eval.mjs` →
+ * merge con un 🔴 aperto; il suo `## LGTM` invisibile a `review-gate.mjs` →
+ * check richiesto mai verde, PR ferma per sempre senza errore. Stessa classe
+ * per `pr-autorebase.mjs` (nessuna review vista → close+reopen a vuoto) e per
+ * il bundle del 🔴-fixer (findings di un round già chiuso).
+ *
+ * Sorgente UNICA anche per il lato bash: uno `run:` YAML non può importare
+ * questa regex, quindi i `--jq` dei workflow usano `REVIEWER_BOT_LOGIN_JQ`,
+ * derivato da questa `.source`, e il guard
+ * `generator/tests/reviewer-bot-login.test.mjs` lo pretende verbatim nei
+ * workflow che filtrano le review.
+ */
+export const REVIEWER_BOT_LOGIN_RE = /^(claude|frontaliere-automation)/i;
+
+/** Il filtro sopra come predicato jq, per i `--jq` dei workflow. */
+export const REVIEWER_BOT_LOGIN_JQ = `test("${REVIEWER_BOT_LOGIN_RE.source}";"i")`;

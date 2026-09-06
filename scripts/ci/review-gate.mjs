@@ -51,16 +51,13 @@ import {
   isTrustedDriftAuthor,
   prBodyContractOk,
 } from './auto-merge-eval.mjs';
-import { REDFLAG_IMPORTANT_RE } from './lib/constants.mjs';
+import { REDFLAG_IMPORTANT_RE, REVIEWER_BOT_LOGIN_RE } from './lib/constants.mjs';
 
 const REPO = process.env.GITHUB_REPOSITORY || '';
 const PR = process.env.PR_NUMBER || '';
 const HEAD_SHA = process.env.HEAD_SHA || '';
 const RUN_URL = process.env.RUN_URL || '';
 const MARKER = '<!-- REVIEW_GATE_NO_LGTM -->';
-
-/** Login dei bot che possono emettere il verdetto. Deliberatamente stretto. */
-const REVIEWER_LOGIN_RE = /^(?:claude(?:\[bot\])?|frontaliere-automation\[bot\])$/i;
 
 function gh(args, { json = true } = {}) {
   const out = execFileSync('gh', args, { encoding: 'utf8', maxBuffer: 64 * 1024 * 1024 });
@@ -91,7 +88,7 @@ function lastBotReview() {
     return undefined; // undefined = incertezza, diverso da null = nessuna review
   }
   const bots = reviews.filter(
-    (r) => r.user?.type === 'Bot' && REVIEWER_LOGIN_RE.test(r.user?.login || ''),
+    (r) => r.user?.type === 'Bot' && REVIEWER_BOT_LOGIN_RE.test(r.user?.login || ''),
   );
   return bots.length ? bots[bots.length - 1] : null;
 }

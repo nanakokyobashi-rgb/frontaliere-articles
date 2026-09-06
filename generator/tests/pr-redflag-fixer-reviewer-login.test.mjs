@@ -19,7 +19,7 @@ const src = fs.readFileSync(path.join(ROOT, '.github/workflows/pr-redflag-fixer.
 test('a frontaliere-automation[bot] review with 🔴 would pass the job-level trigger', () => {
   assert.match(src, /github\.event\.review\.user\.type == 'Bot'/);
   assert.match(src, /contains\(github\.event\.review\.body, '🔴'\)/);
-  assert.match(src, /github\.event\.review\.user\.login == 'frontaliere-automation\[bot\]'/);
+  assert.match(src, /startsWith\(github\.event\.review\.user\.login, 'frontaliere-automation'\)/);
   assert.match(src, /startsWith\(github\.event\.review\.user\.login, 'claude'\) \|\|/);
 });
 
@@ -31,11 +31,11 @@ test('no longer requires login to start with claude as the only reviewer match',
 });
 
 test('collect-review jq, review-gate and auto-merge-eval use the same bot set', () => {
+  // I consumer `.mjs` non contengono piu' il login in chiaro: importano
+  // `REVIEWER_BOT_LOGIN_RE` da `scripts/ci/lib/constants.mjs`, ed e'
+  // `generator/tests/reviewer-bot-login.test.mjs` a pinnare quel legame per
+  // tutti e sei i consumer (qui resterebbe una copia della stessa regola).
   assert.match(src, /select\(\.user\.login\|test\("\^\(claude\|frontaliere-automation\)";"i"\)\)/);
-  const gate = fs.readFileSync(path.join(ROOT, 'scripts/ci/review-gate.mjs'), 'utf8');
-  assert.match(gate, /frontaliere-automation\\?\[bot\\?\]/);
-  const evalSrc = fs.readFileSync(path.join(ROOT, 'scripts/ci/auto-merge-eval.mjs'), 'utf8');
-  assert.match(evalSrc, /frontaliere-automation\\?\[bot\\?\]/);
   const testsYml = fs.readFileSync(path.join(ROOT, '.github/workflows/tests.yml'), 'utf8');
   assert.match(testsYml, /test\("\^\(claude\|frontaliere-automation\)";"i"\)/);
   assert.doesNotMatch(testsYml, /test\("claude";"i"\)/);

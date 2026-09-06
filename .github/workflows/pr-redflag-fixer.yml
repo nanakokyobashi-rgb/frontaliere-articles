@@ -47,15 +47,19 @@ jobs:
     # nega) lo fa il preflight sotto, con una regex tollerante al bold/spaziatura MA
     # che richiede un delimitatore dopo "Important" — impossibile in un'espressione
     # `if:` YAML.
-    # Reviewer set = the same bots tests.yml already treats as the review
-    # oracle (`claude*` + `frontaliere-automation[bot]`). A job-level
+    # Reviewer set = `claude*` + `frontaliere-automation*` (prefisso: la
+    # stessa App si presenta senza il suffisso `[bot]` in GraphQL). A job-level
     # `startsWith(..., 'claude')` alone skipped App-bot 🔴 on the site
     # (PRs #7610/#7609); this workflow is `adapted`, so the same login
-    # hole is closed here, not by waiting for an identical twin.
+    # hole is closed here, not by waiting for an identical twin. Lo STESSO set
+    # vale per i consumer della review — bundle sotto, `auto-merge-eval.mjs`,
+    # `review-gate.mjs`, `pr-autorebase.mjs`, `stale-pr-rescuer.yml` — via
+    # `REVIEWER_BOT_LOGIN_RE`/`_JQ` in `scripts/ci/lib/constants.mjs`, e per i
+    # due `--jq` di `tests.yml` (skip-guard `## LGTM` e base incrementale).
     if: |
       github.event.review.user.type == 'Bot' &&
       (startsWith(github.event.review.user.login, 'claude') ||
-       github.event.review.user.login == 'frontaliere-automation[bot]') &&
+       startsWith(github.event.review.user.login, 'frontaliere-automation')) &&
       contains(github.event.review.body, '🔴') &&
       github.event.pull_request.draft == false &&
       (github.event.pull_request.user.type == 'Bot' ||
@@ -362,6 +366,13 @@ jobs:
           # quella soglia — stessa trappola nota sul sito).
           gh api "repos/$REPO/pulls/$PR_NUMBER/files" --paginate --jq '.[].filename' \
             > "$OUT/files.txt" 2>/dev/null || : > "$OUT/files.txt"
+          # STESSO set di login del `if:` job-level sopra (single source:
+          # REVIEWER_BOT_LOGIN_JQ in scripts/ci/lib/constants.mjs, pinnato da
+          # generator/tests/reviewer-bot-login.test.mjs). Con il solo `claude`
+          # una review dell'App bot dava un bundle con la sezione findings
+          # VUOTA — o, peggio, l'ultima review `claude` PRECEDENTE, cioe' i 🔴
+          # di un round gia' chiuso: l'agent non fallisce, fixa il round
+          # sbagliato, e il marker di round e' gia' stato postato.
           gh api "repos/$REPO/pulls/$PR_NUMBER/reviews" \
             --jq '[.[] | select(.user.login|test("^(claude|frontaliere-automation)";"i"))] | last | .body // empty' \
             > "$OUT/latest-review.md" 2>/dev/null || : > "$OUT/latest-review.md"
