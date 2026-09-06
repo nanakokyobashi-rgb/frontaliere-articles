@@ -69,7 +69,10 @@ for (const entry of iterateBodies()) {
     byKind[hit.kind] += 1;
     articlesByKind[hit.kind].add(entry.id);
     if (LIST) {
-      console.log(`${hit.kind}\t${entry.rel}\t${entry.id}.${entry.field}\t${hit.text.slice(0, 120)}`);
+      // Una riga per hit: il testo puo' contenere a capo, e un `\n` qui
+      // spezzerebbe la riga in due e falserebbe ogni conteggio a valle.
+      const flat = hit.text.replace(/\s+/g, ' ').slice(0, 120);
+      console.log(`${hit.kind}\t${entry.rel}\t${entry.id}.${entry.field}\t${flat}`);
     }
   }
 }

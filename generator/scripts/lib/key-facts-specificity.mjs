@@ -77,7 +77,7 @@ export const VACUOUS_PHRASES = Object.freeze([
   'not (?:yet )?(?:specified|stated|indicated|disclosed|available|provided)',
   'to be (?:defined|confirmed|announced)',
   // de
-  'nicht (?:naeher |näher )?(?:angegeben|spezifiziert|genannt|bekannt|verfuegbar|verfügbar)',
+  '(?:noch |derzeit |bislang |bisher )?nicht (?:naeher |näher )?(?:angegeben|spezifiziert|genannt|bekannt|verfuegbar|verfügbar)',
   'keine angaben?',
   // fr
   'non (?:encore )?(?:specifie|spécifié|precise|précisé|indique|indiqué|communique|communiqué|disponible)e?',
@@ -93,7 +93,7 @@ export const VACUOUS_PHRASES = Object.freeze([
 export const VACUOUS_TOKENS = Object.freeze([
   'non applicabile',
   'sconosciut[oa]',
-  'n\\.?d\\.?',
+  'n\\s*[./]?\\s*d\\.?',
   'unspecified',
   'unknown',
   'tbd',
@@ -163,11 +163,20 @@ function splitBullets(sectionBody) {
     start = m.index === 0 ? 0 : m.index + (m[0].length - m[0].trimStart().length);
   }
   if (start !== -1) out.push({ start, end: sectionBody.length });
-  return out.map(({ start, end }) => ({
-    start,
-    end,
-    raw: sectionBody.slice(start, end),
-  }));
+  // ── IL BULLET FINISCE ALLA RIGA VUOTA, e non e' un dettaglio ────────────
+  //
+  // La sezione arriva fino alla prossima intestazione, ma dopo l'ultimo bullet
+  // c'e' il LEAD giornalistico, che nessuna intestazione precede. Senza questo
+  // taglio l'ultimo bullet inghiottiva il lead: la misura leggeva come
+  // «non-valore annegato nella prosa» un bullet vuoto seguito dall'articolo, e
+  // — molto peggio — `stripVacuousFacts` avrebbe cancellato il lead insieme al
+  // bullet.
+  return out.map(({ start, end }) => {
+    const span = sectionBody.slice(start, end);
+    const blank = span.search(/\n[ \t]*\n/);
+    const stop = blank === -1 ? end : start + blank;
+    return { start, end: stop, raw: sectionBody.slice(start, stop) };
+  });
 }
 
 /**
@@ -265,9 +274,14 @@ export function stripVacuousFacts(body) {
     if (!bad.length) continue;
     const survivors = section.bullets.length - bad.length;
     if (survivors < MIN_FACTS_PER_SECTION) {
+      // Il taglio arriva alla fine dell'ULTIMO BULLET, non a `section.end`.
+      // La sezione si estende fino alla prossima intestazione, ma fra l'ultimo
+      // bullet e quell'intestazione c'e' il lead giornalistico: tagliare fino a
+      // `section.end` toglierebbe l'articolo insieme all'elenco vuoto.
+      const lastBulletEnd = Math.max(...section.bullets.map((b) => b.end));
       sectionsRemoved.push(section.heading);
       dropped.push(...section.bullets.map((b) => b.raw.trim()));
-      cuts.push({ start: section.headingStart, end: section.end });
+      cuts.push({ start: section.headingStart, end: lastBulletEnd });
     } else {
       dropped.push(...bad.map((b) => b.raw.trim()));
       cuts.push(...bad.map((b) => ({ start: b.start, end: b.end })));
