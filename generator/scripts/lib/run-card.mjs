@@ -40,8 +40,28 @@
  * Zero dipendenze npm: `create-article.mjs` la importa a caldo e i workflow che
  * la leggono girano anche PRIMA di `npm ci`.
  */
-import { mkdirSync, writeFileSync } from 'node:fs';
+import { mkdirSync, realpathSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
+
+/**
+ * La radice del workspace, dedotta dalla posizione di questo modulo
+ * (`generator/scripts/lib/` -> repo). In CI coincide con `$GITHUB_WORKSPACE`,
+ * cioe' con l'albero su cui lo step di generazione fa `git add -A`.
+ */
+const WORKSPACE_ROOT = path.resolve(import.meta.dirname, '..', '..', '..');
+
+/** La stessa radice dopo i symlink, per non mancare un target gia' realpathato. */
+const WORKSPACE_ROOT_REAL = (() => {
+  try { return realpathSync(WORKSPACE_ROOT); } catch { return WORKSPACE_ROOT; }
+})();
+
+/**
+ * `true` se `target` (assoluto) sta sotto `root`. Il confronto e' per SEGMENTI:
+ * `<repo>-diagnostics/x` non e' dentro `<repo>`, ma lo sarebbe per prefisso.
+ */
+function isInside(root, target) {
+  return target === root || target.startsWith(root.endsWith(path.sep) ? root : root + path.sep);
+}
 
 /** Versione dello schema. Un lettore che non la riconosce deve dirlo, non indovinare. */
 export const RUN_CARD_SCHEMA = 'run-card/1';
@@ -104,17 +124,38 @@ export function buildRunCard(report) {
  * ma anche in quella dei suoi import. Il difetto non stava nella prosa: stava
  * nel criterio, che guardava anche i commenti, e li' e' stato riparato
  * (`codeOnly()`). Vale comunque saperlo: questo modulo non scrive niente sotto
- * una radice pubblicata — il suo unico target e' `RUN_CARD_FILE`, che il
- * workflow punta in `$RUNNER_TEMP`, fuori dal workspace di proposito — e se un
- * giorno lo facesse davvero, il posto dove dirlo e' una delle liste di quel
- * test, non un commento riscritto per non farsi vedere.
+ * una radice pubblicata, e da #922 non e' piu' una promessa della prosa ma un
+ * `throw` — il body della funzione rifiuta qualunque target dentro il
+ * workspace. Se un giorno dovesse scriverci davvero, il posto dove dirlo e'
+ * una delle liste di quel test, non un commento riscritto per non farsi
+ * vedere.
  *
  * @param {string} file path della card (assoluto o relativo al cwd)
  * @param {any} report il `RUN_REPORT`
  * @returns {string} il path assoluto scritto
+ * @throws se il target risolve dentro il workspace del repo
  */
 export function writeRunCard(file, report) {
   const target = path.resolve(file);
+  // L'INVARIANTE STA QUI, NON NEL COMMENTO SOPRA. Fino a #922 il «non scrive
+  // niente sotto una radice pubblicata» si fondava sul fatto che il workflow
+  // punti la card in `$RUNNER_TEMP`: una prosa vera oggi e falsificabile da
+  // chiunque cambi `RUN_CARD_FILE`, o passi un path relativo (che `resolve()`
+  // aggancia al cwd, cioe' al workspace in CI). Il danno sarebbe muto due
+  // volte — artifact assente per `if-no-files-found: ignore`, e il file
+  // portato su `main` dal `git add -A` dello step di commit, ora senza
+  // nemmeno il falso positivo del censimento a far rumore.
+  //
+  // Il chiamante (`create-article.mjs`) avvolge questa chiamata in try/catch e
+  // logga: un target sbagliato diventa un avviso rumoroso e la run prosegue,
+  // che e' esattamente il baratto giusto per uno strumento diagnostico.
+  if (isInside(WORKSPACE_ROOT, target) || isInside(WORKSPACE_ROOT_REAL, target)) {
+    throw new Error(
+      `run card: target dentro il workspace (${target}). La card deve stare fuori`
+      + " dall'albero del repo — in CI $RUNNER_TEMP/generate-diagnostics — o il"
+      + ' `git add -A` dello step di commit la porta su main.',
+    );
+  }
   mkdirSync(path.dirname(target), { recursive: true });
   writeFileSync(target, `${JSON.stringify(buildRunCard(report))}\n`);
   return target;
