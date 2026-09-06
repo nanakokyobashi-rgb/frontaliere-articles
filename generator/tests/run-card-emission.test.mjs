@@ -160,6 +160,60 @@ test('writeRunCard scrive esattamente al path assoluto ricevuto', () => {
   assert.ok(!fs.existsSync(path.join(ROOT, target)), 'la card e finita anche sotto il repo');
 });
 
+test('writeRunCard RIFIUTA un target dentro il workspace (#922)', () => {
+  // Prima di #922 l'invariante «la card non atterra sotto una radice
+  // pubblicata» viveva in un commento di `run-card.mjs`, e si appoggiava al
+  // fatto che il workflow punti `RUN_CARD_FILE` in `$RUNNER_TEMP`. Un commento
+  // non ferma niente: `path.resolve()` accetta qualunque cosa riceva, e una run
+  // futura che punti la card dentro il workspace la fa portare su `main` dal
+  // `git add -A` dello step di commit — muta, perche' il censimento di
+  // `corpus-write-atomic.test.mjs` non ha piu' nemmeno un falso positivo su
+  // questo file a far rumore. Qui si verifica il `throw`, cioe' l'invariante
+  // nel CODICE.
+  const inside = path.join(ROOT, '.tmp', 'run-card-frontaliere.json');
+  assert.throws(
+    () => writeRunCard(inside, { runId: '1' }),
+    /dentro il workspace/,
+    'un target sotto la radice del repo deve essere rifiutato',
+  );
+  assert.ok(!fs.existsSync(inside), 'il rifiuto non deve comunque scrivere il file');
+
+  // Il caso REALE che ha prodotto il difetto: un path RELATIVO, che
+  // `path.resolve()` aggancia al cwd — in CI il workspace.
+  assert.throws(() => writeRunCard('run-card.json', { runId: '1' }), /dentro il workspace/);
+
+  // E la radice stessa non e' un varco: `<repo>` esatto va rifiutato come il
+  // suo interno.
+  assert.throws(() => writeRunCard(ROOT, { runId: '1' }), /dentro il workspace/);
+
+  // Contro-prova: un fratello che CONDIVIDE il prefisso testuale della radice
+  // ma non e' dentro l'albero deve passare, o il guard bloccherebbe anche
+  // `$RUNNER_TEMP` su un runner che lo colloca accanto al workspace.
+  const sibling = `${ROOT}-diagnostics-${process.pid}`;
+  try {
+    const written = writeRunCard(path.join(sibling, 'run-card-x.json'), { runId: '2' });
+    assert.ok(fs.existsSync(written), 'un target fuori dal workspace deve essere scritto');
+  } finally {
+    fs.rmSync(sibling, { recursive: true, force: true });
+  }
+});
+
+test('il commento di writeRunCard non e piu la sola sede dell invariante (#922)', () => {
+  // Il rischio di regressione qui non e' che qualcuno cancelli il `throw`: e'
+  // che lo sostituisca con un warning, «per non far fallire uno strumento
+  // diagnostico». Ma il chiamante avvolge gia' la chiamata in try/catch e
+  // logga, quindi il `throw` NON fa fallire la run: toglierlo non compra
+  // resilienza, compra solo il ritorno del difetto muto.
+  const src = read('generator/scripts/lib/run-card.mjs');
+  assert.match(src, /throw new Error\(/, 'writeRunCard deve rifiutare, non solo documentare');
+  const caller = read('generator/scripts/create-article.mjs');
+  assert.match(
+    caller,
+    /try\s*\{[^}]*writeRunCard\(cardFile, RUN_REPORT\)[\s\S]{0,200}?catch/,
+    'il chiamante deve assorbire il rifiuto: la card e diagnostica, non puo uccidere la run',
+  );
+});
+
 // ── 3. Il cablaggio: la card esce dal runner ────────────────────────────────
 
 test('il reporter filtra per NOME dell artifact, non per file interno', () => {

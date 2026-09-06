@@ -192,6 +192,29 @@ const TOKEN_EXAMPLE_SOURCES = [
   ['.github/workflows/post-merge-followup.yml', WORKFLOW],
 ];
 
+/**
+ * I CONTROesempi sono l'altra meta' della rete, e servono per una ragione
+ * asimmetrica: il test sugli esempi verifica che cio' che il prompt offre
+ * qualifichi, ma non impedisce al prompt di INDURRE forme che non qualificano.
+ * `isDistinctiveToken()` rifiuta per tre ragioni — bare path, bare identifier e
+ * `s.length < 6` — e la terza e' invisibile a occhio: `run()`, `sha()`, `f()` e
+ * `a.b` hanno tutti la forma giusta e valgono `false`. Fra i corti passa solo
+ * `n >= 1`, che nessuno scrive spontaneamente. Un token DERIVATO — proprio quelli
+ * che la clausola DERIVALO chiede di costruire — di forma corretta ma breve
+ * conia un `no-valid-item`.
+ *
+ * Un controesempio che smette di essere tale (perche' qualcuno lo "corregge"
+ * in una forma valida) svuota l'avvertimento senza che nessuno se ne accorga:
+ * per questo anche i controesempi vengono ESEGUITI, e devono fallire.
+ */
+function declaredTokenCounterExamples(text) {
+  const out = [];
+  for (const m of text.matchAll(/token-controesempio:((?:\s*`[^`]+`\s*,?)+)/g)) {
+    for (const t of m[1].matchAll(/`([^`]+)`/g)) out.push(t[1]);
+  }
+  return out;
+}
+
 function declaredTokenExamples(text) {
   const out = [];
   // La lista finisce dove finisce la FORMA di una lista: span fra backtick
@@ -245,4 +268,29 @@ test('`Suggested action` resta l\'ULTIMO campo di ogni item del template', () =>
         'Ordine dei campi: ' + fields.join(' → '),
     );
   }
+});
+
+test('ogni token-controesempio dichiarato viene davvero RIFIUTATO dall\'oracolo', () => {
+  let total = 0;
+  for (const [label, text] of TOKEN_EXAMPLE_SOURCES) {
+    const counter = declaredTokenCounterExamples(text);
+    assert.ok(
+      counter.length >= 3,
+      `${label}: attesi almeno 3 \`token-controesempio:\` (bare path, bare identifier, ` +
+        `token corto), trovati ${counter.length}. La terza ragione di rifiuto ` +
+        '(`s.length < 6`) e\' quella che un lettore non vede, e senza il suo ' +
+        'controesempio il prompt torna a indurre `run()` al posto di `nomeFunzione()`.',
+    );
+    for (const ex of counter) {
+      assert.equal(
+        isDistinctiveToken(ex),
+        false,
+        `${label}: il controesempio \`${ex}\` in realta' PASSA isDistinctiveToken(). ` +
+          'Un controesempio valido non avverte di niente: o e\' sbagliato, o la ' +
+          'soglia dell\'oracolo e\' cambiata e il testo va riscritto.',
+      );
+      total++;
+    }
+  }
+  assert.ok(total >= 6, `attesi almeno 6 controesempi dichiarati, trovati ${total}`);
 });
