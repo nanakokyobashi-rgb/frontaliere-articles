@@ -67,7 +67,7 @@
  * verdetto in comportamento.
  */
 
-import { isNonItalianScript, nonItalianScriptRatio } from './itLanguageCheck.mjs';
+import { isNonItalianScript, nonItalianScriptRatio, detectWrongLatinLanguage } from './itLanguageCheck.mjs';
 
 /**
  * I campi di testo che una generazione IT completa DEVE portare.
@@ -429,6 +429,74 @@ export function resolveBody2Validation({ jsonMode = false, expectedFields = null
 }
 
 /**
+ * I tre posti dove i modelli scrivono davvero il contenuto, nell'ordine di
+ * priorita' con cui vanno letti: `content[locale]` (la forma chiesta),
+ * `content` senza locale, la radice del payload.
+ *
+ * `isLocale` distingue il PRIMO dagli altri due, e non e' un dettaglio
+ * cosmetico: solo il primo candidato dichiara in che lingua e' scritto.
+ *
+ * @param {object} payload
+ * @param {string} [locale]
+ * @returns {Array<{ obj: unknown, source: string, isLocale: boolean }>}
+ */
+export function contentCandidates(payload, locale = 'it') {
+  const content = payload?.content;
+  const candidates = [];
+
+  if (content && typeof content === 'object') {
+    if (content[locale] && typeof content[locale] === 'object') {
+      candidates.push({ obj: content[locale], source: `content.${locale}`, isLocale: true });
+    }
+    candidates.push({ obj: content, source: 'content', isLocale: false });
+  }
+  candidates.push({ obj: payload, source: 'root', isLocale: false });
+
+  return candidates;
+}
+
+/**
+ * Da QUALE candidato viene ciascun campo — la stessa passata di
+ * `normalizeItalianContentFromPayload`, con la provenienza al posto del
+ * valore. `null` per i campi che nessun candidato ha valorizzato.
+ *
+ * Serve perche' «adottato da `content[locale]`» e «adottato dalla radice» sono
+ * due fatti diversi: il primo e' il modello che risponde nella lingua che gli
+ * e' stata chiesta, il secondo e' un campo condiviso di cui nessuno ha
+ * dichiarato la lingua. Vedi `wrongLanguageAdoptions`.
+ *
+ * @param {object}   payload
+ * @param {string}   [locale]
+ * @param {string[]} [fields]
+ * @returns {Record<string, { value: string, source: string, isLocale: boolean }|null>}
+ */
+export function resolveContentFieldSources(payload, locale = 'it', fields = REQUIRED_IT_BODY_FIELDS) {
+  const candidates = contentCandidates(payload, locale);
+  const sources = {};
+
+  for (const field of fields) {
+    sources[field] = null;
+    for (const { obj, source, isLocale } of candidates) {
+      if (!obj || typeof obj !== 'object') continue;
+      let raw = typeof obj[field] === 'string' ? obj[field].trim() : '';
+      // `isNullStringForLocale` e non `isLiteralNullString`: questo campo e'
+      // prosa di un modello che sta scrivendo in `locale`, cioe' il ramo
+      // «prosa» della regola di provenienza scritta piu' sopra — e il
+      // normalizzatore deve obbedire alla regola come ogni altro call-site,
+      // non farne eccezione. Finche' il gate di valle passava sempre `'it'`
+      // il difetto era irraggiungibile; da quando riceve `primaryLocale`, un
+      // `content.de.title` che vale `Null` — la parola tedesca — si sarebbe
+      // letto come campo assente e il payload sarebbe potuto diventare un
+      // abort. Su `'it'` i due predicati coincidono: byte-identico oggi.
+      if (isNullStringForLocale(raw, locale)) raw = '';
+      if (raw) { sources[field] = { value: raw, source, isLocale }; break; }
+    }
+  }
+
+  return sources;
+}
+
+/**
  * Estrae il blocco di contenuto nella lingua primaria da un payload di
  * generazione, tollerando le tre forme che i modelli producono davvero:
  * `content.it.*`, `content.*` (locale saltato), o i campi alla radice — E la
@@ -457,35 +525,17 @@ export function resolveBody2Validation({ jsonMode = false, expectedFields = null
  * — vedono esattamente cio' che vedevano prima.
  */
 export function normalizeItalianContentFromPayload(payload, locale = 'it', fields = REQUIRED_IT_BODY_FIELDS) {
-  const content = payload?.content;
-  const candidates = [];
-
-  if (content && typeof content === 'object') {
-    if (content[locale] && typeof content[locale] === 'object') candidates.push(content[locale]);
-    candidates.push(content);
-  }
-  candidates.push(payload);
+  // Una sola passata sui candidati, condivisa con `resolveContentFieldSources`
+  // (AGENTS.md #6): due copie della stessa priorita' divergerebbero, e la
+  // guardia di lingua giudicherebbe una provenienza che il normalizzatore non
+  // ha usato — cioe' il campo sbagliato.
+  const sources = resolveContentFieldSources(payload, locale, fields);
 
   const block = {};
   let hasAnyField = false;
 
   for (const field of fields) {
-    let value = '';
-    for (const candidate of candidates) {
-      if (!candidate || typeof candidate !== 'object') continue;
-      let raw = typeof candidate[field] === 'string' ? candidate[field].trim() : '';
-      // `isNullStringForLocale` e non `isLiteralNullString`: questo campo e'
-      // prosa di un modello che sta scrivendo in `locale`, cioe' il ramo
-      // «prosa» della regola di provenienza scritta piu' sopra — e il
-      // normalizzatore deve obbedire alla regola come ogni altro call-site,
-      // non farne eccezione. Finche' il gate di valle passava sempre `'it'`
-      // il difetto era irraggiungibile; da quando riceve `primaryLocale`, un
-      // `content.de.title` che vale `Null` — la parola tedesca — si sarebbe
-      // letto come campo assente e il payload sarebbe potuto diventare un
-      // abort. Su `'it'` i due predicati coincidono: byte-identico oggi.
-      if (isNullStringForLocale(raw, locale)) raw = '';
-      if (raw) { value = raw; break; }
-    }
+    const value = sources[field]?.value || '';
     if (value) hasAnyField = true;
     block[field] = value;
   }
@@ -793,6 +843,56 @@ export function isTopicGateAbortVerdict(parsed, { locale = 'it', expectedFields 
 }
 
 /**
+ * ── LA LINGUA DEI CAMPI ADOTTATI DA UN CANDIDATO NON-LOCALE ───────────────
+ *
+ * `normalizeItalianContentFromPayload` cerca ogni campo attraverso i tre
+ * candidati indipendentemente, e da #768 il `content` SENZA locale ha
+ * priorita' sulla radice. Su `content: { it: { title: "" }, title: "…" }` quel
+ * `title` locale-less e' quasi sempre quello condiviso/inglese, e riempie il
+ * `title` vuoto di `content.it` senza che nulla dichiari in che lingua sia.
+ *
+ * L'unico controllo di lingua che il verdetto aveva — `isNonItalianScript` —
+ * guarda la SCRITTURA. Un titolo EN/DE/FR ha ratio 0, quindi usciva
+ * `verdict:"ok"`, diventava slug e canonical e finiva live senza rebuild del
+ * sito (issue #800).
+ *
+ * Il controllo si applica SOLO ai campi adottati da un candidato non-locale:
+ * un `content[locale].title` e' il modello che risponde nella lingua chiesta,
+ * ed e' gia' coperto dal resto del gate — rigiudicarlo qui aggiungerebbe
+ * rischio di falso positivo senza aggiungere copertura.
+ *
+ * E solo ai campi META (`title`, `excerpt`): sono quelli che diventano URL, e
+ * sono quelli su cui la soglia del rilevatore e' stata MISURATA (5.682 titoli
+ * IT pubblicati, zero falsi positivi). Un body1..3 e' prosa lunga, dove una
+ * citazione estesa in lingua straniera dentro un articolo italiano e'
+ * legittima: applicarci lo stesso criterio significherebbe tararlo su un
+ * corpus che non e' stato misurato. Vedi `## Non implementato` della PR.
+ *
+ * @param {object}   parsed
+ * @param {string}   [locale]
+ * @param {string[]} [expectedFields]
+ * @returns {string[]} motivi, gia' nella forma che `missing` usa.
+ */
+export function wrongLanguageAdoptions(parsed, locale = 'it', expectedFields = REQUIRED_IT_BODY_FIELDS) {
+  const campi = expectedFields.filter((f) => META_ONLY_FIELDS.includes(f));
+  if (campi.length === 0) return [];
+
+  const sources = resolveContentFieldSources(parsed, locale, campi);
+  const motivi = [];
+
+  for (const field of campi) {
+    const origine = sources[field];
+    if (!origine || origine.isLocale) continue;
+    const sbagliata = detectWrongLatinLanguage(origine.value, locale);
+    if (sbagliata) {
+      motivi.push(`${field} lingua ${sbagliata.lang} adottata da ${origine.source} (${sbagliata.reason})`);
+    }
+  }
+
+  return motivi;
+}
+
+/**
  * Classifica una risposta di generazione IT gia' riparata e parsata.
  *
  * @param {object}  args
@@ -887,6 +987,9 @@ export function classifyBody2Payload({
       missing.push(`${field} non-IT script (${ratio}% non-Latin)`);
     }
   }
+  // ...e la meta' latina dello stesso controllo, che il ramo qui sopra non
+  // vede per costruzione: un titolo inglese ha ratio 0.
+  missing.push(...wrongLanguageAdoptions(parsed, locale, expectedFields));
 
   return { verdict: missing.length > 0 ? 'reject' : 'ok', itContent, missing };
 }
