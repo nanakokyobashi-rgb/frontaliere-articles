@@ -24,6 +24,20 @@ const root = path.resolve(import.meta.dirname, '..', '..');
 
 // Ogni file che scrive un `content/**` GIA' ESISTENTE da un processo che un
 // workflow con `timeout-minutes` puo' uccidere con SIGKILL.
+//
+// `retranslate-blocking-bodies.mjs` sta qui pur non avendo (ancora) un
+// workflow, e la scelta e' deliberata. La lista comoda sarebbe
+// NOT_WORKFLOW_DRIVEN — anche lui e' un riparatore che si lancia a mano — ma
+// quella nota dice che il censimento lo rimette in gioco «solo se lo si toglie
+// da qui, deliberatamente»: cioe' il giorno in cui la bonifica prendesse un
+// workflow, NIENTE diventerebbe rosso. Sarebbe un silenzio armato in anticipo,
+// ed e' il piano dichiarato nel body della PR che lo introduce («una volta
+// deciso dove farlo girare»). Il costo di tenerlo qui e' zero, perche' e' gia'
+// atomico e le due prove di forma passano senza toccarne una riga; il costo di
+// tenerlo fra le eccezioni si paga una volta sola, in silenzio. Vale anche
+// senza workflow: la run dura circa un'ora su rete e riscrive centinaia di
+// body in place, quindi un'interruzione a meta' scrittura non ha bisogno di
+// `timeout-minutes` per esistere.
 const CHOKE_POINTS = [
   ['generator/scripts/lib/article-meta-refresh.mjs', 'generate-daily-brief.yml'],
   ['generator/scripts/lib/evergreen-article-refresh.mjs', 'refresh-events-digest.yml'],
@@ -33,6 +47,7 @@ const CHOKE_POINTS = [
   ['generator/scripts/generate-border-wait-ranking-article.mjs', 'generate-border-wait-ranking-weekly.yml'],
   ['generator/scripts/batch-add-faq-to-articles.mjs', 'batch-faq-articles.yml'],
   ['generator/scripts/generate-journalist-image-catalog.mjs', 'generate-article.yml'],
+  ['generator/scripts/retranslate-blocking-bodies.mjs', 'nessun workflow: bonifica lanciata a mano'],
 ];
 
 // `create-article.mjs` e' nella classe ed e' gia' atomico dal round 1, ma la
