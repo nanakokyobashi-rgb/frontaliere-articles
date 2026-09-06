@@ -115,9 +115,18 @@ const PAST_REPORT_RE = /\b(?:gi[àa]'?|already|was|were|sono\s+stat[ei]|[èe]'?\
 // `\p{L}` with the `u` flag, NOT `\w`: `\w` is ASCII, so `non è chiusa #849` —
 // the commonest negated form in Italian — broke the chain at the accent and the
 // guard never reached `\s*$`. The lookahead keeps `Non solo chiude #12`
-// reportable: "non solo" concedes the closure, it does not deny it.
-const NEG_REPORT_RE =
-  /\b(?:non|n[éè]|not|never|mai|senza|without)(?!\s+(?:solo|soltanto|only)\b)(?:\s+[\p{L}\p{N}_'’]+){0,2}\s*$/iu;
+// reportable: "non solo" concedes the closure, it does not deny it — and it has
+// to list every synonym of that concession, not three of them: `Non solamente
+// chiude #12, ma anche X` and `Not just closing #12` state the SAME concession
+// and were silently swallowed, i.e. a missed closure, which is the expensive
+// direction (a false positive gets discussed, a missed closure leaves an issue
+// open with its fix already on `main`).
+const CONCESSIVE =
+  '(?:solo|soltanto|solamente|unicamente|esclusivamente|only|just|merely|simply)';
+const NEG_REPORT_RE = new RegExp(
+  `\\b(?:non|n[éè]|not|never|mai|senza|without)(?!\\s+${CONCESSIVE}\\b)(?:\\s+[\\p{L}\\p{N}_'’]+){0,2}\\s*$`,
+  'iu',
+);
 // Filler tolerated between the verb and the ref: `Chiusa da #12`, `Risolve
 // definitivamente #12`, `Closing the #12`. Bounded to a known word list so a
 // sentence boundary or real prose can never bridge verb and ref.
@@ -134,14 +143,32 @@ function effectiveRefs(body) {
 
 /**
  * Refs a line claims to close with a token GitHub ignores.
+ *
+ * The two report guards read the WHOLE prefix, not a fixed window: both are
+ * anchored to `\s*$` and bounded to ≤2 intervening words, so a longer prefix
+ * cannot widen what they match — it can only stop truncating them. The old
+ * 24-character slice was narrower than the two-word bound it was supposed to
+ * serve, and Italian words are long enough to overflow it: `Il bug non ancora
+ * completamente chiuso #849` was reported (`non ancora completamente ` = 25
+ * chars, so `non` fell outside the slice) while `non ancora bene chiuso #849`
+ * was not. Same sentence, opposite verdict, decided by spelling.
+ *
+ * `prev` is the previous body line, prepended because the guards are scoped to
+ * a SENTENCE and a body is hard-wrapped by lines: `Il bug non è\nchiuso: #849
+ * resta aperta.` is the same false positive the guard exists to prevent, split
+ * across a soft wrap. Only one line back, and only joined by a space: the ≤2
+ * word bound plus the letters-only class means any punctuation, list marker or
+ * blank line between the negation and the verb still breaks the chain.
+ *
  * @returns {Array<{ keyword: string, ref: string }>}
  */
-function lineIntentRefs(line) {
+function lineIntentRefs(line, prev = '') {
   const s = String(line || '');
+  const carry = String(prev || '').trim();
   INTENT_RE.lastIndex = 0;
   return [...s.matchAll(INTENT_RE)]
     .filter((m) => {
-      const before = s.slice(Math.max(0, m.index - 24), m.index);
+      const before = (carry ? `${carry} ` : '') + s.slice(0, m.index);
       return !PAST_REPORT_RE.test(before) && !NEG_REPORT_RE.test(before);
     })
     .map((m) => ({ keyword: m[1], ref: m[2] }));
@@ -199,7 +226,7 @@ export function checkClosesLines(body = '') {
           refs.map((r) => `\`Closes #${r}\``).join(' / ') + '.',
       });
     }
-    for (const { keyword, ref } of lineIntentRefs(lines[i])) {
+    for (const { keyword, ref } of lineIntentRefs(lines[i], lines[i - 1])) {
       if (willClose.has(ref.toLowerCase())) continue; // già chiusa da una keyword vera altrove
       if (reported.has(ref.toLowerCase())) continue;
       reported.add(ref.toLowerCase());
