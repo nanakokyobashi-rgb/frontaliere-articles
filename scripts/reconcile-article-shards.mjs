@@ -117,6 +117,28 @@ export function validateAnnouncedSurface({ manifest, slugs, articles, swissArtic
       `swiss-articles.json ha ${Array.isArray(swissArticles) ? swissArticles.length : '?'} voci, attese ${counts.swissArticles}`,
     );
   }
+  // Le tre cardinalità sopra sono d'accordo anche quando l'insieme è un ALTRO:
+  // un articolo rimosso e uno nuovo nello stesso giro lasciano il conto
+  // identico con un id sostituito, e slugs.json è la sorgente dei canonical.
+  // Il confronto per insieme costa quanto quello per numero (stessa asserzione
+  // del producer, nel gate manifest.counts di scripts/build-api.mjs).
+  for (const [key, registry, label] of [
+    ['blog', articles, 'articles.json'],
+    ['swiss', swissArticles, 'swiss-articles.json'],
+  ]) {
+    if (!Array.isArray(registry)) continue;
+    const indexed = new Set(Object.keys((slugs && slugs[key]) || {}));
+    const known = new Set(registry.map((a) => a && a.id));
+    const missing = [...known].filter((id) => !indexed.has(id));
+    const extra = [...indexed].filter((id) => !known.has(id));
+    if (missing.length || extra.length) {
+      errors.push(
+        `slugs.${key} indicizza un insieme diverso da ${label}: ` +
+          `${missing.length} id senza slug (${missing.slice(0, 5).join(', ') || '—'}), ` +
+          `${extra.length} slug senza articolo (${extra.slice(0, 5).join(', ') || '—'})`,
+      );
+    }
+  }
   return errors;
 }
 
