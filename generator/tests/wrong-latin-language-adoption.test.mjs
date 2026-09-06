@@ -191,6 +191,9 @@ const META_IT = ['content/blog-meta-it.ts', 'content/blog-meta-ch-it.ts'];
 const MIN_TITOLI_IT = 4000;
 // Gli unici flagged sui 5.682: titoli DAVVERO in lingua sbagliata, gia' live.
 // Sono la prova che il difetto esisteva, non un difetto del rilevatore.
+// La bonifica del corpus e' #985: quella PR ritraduce i campi IT dello slug
+// `sbb-controllers-bonuses-fines-ticino-2026` e SVUOTA questa lista. Finche'
+// e' popolata, una regressione su quel titolo resta invisibile a questo test.
 const OFFENDER_GENUINI = [
   'SBB controllers getting bonuses for fines? What frontalieri need to know',
 ];
