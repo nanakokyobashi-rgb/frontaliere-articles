@@ -451,13 +451,29 @@ function deferralTally(breakdown) {
  *    L'eccedenza si toglie al VINCITORE e non all'altro secchio perche' e'
  *    l'unica direzione dimostrabile: un voto che regge anche assegnando ogni
  *    riga dubbia contro di se' e' un voto sulle prove, non sulla fortuna della
- *    classificazione. Il clamp alla massa ambigua e' la STESSA coerenza che
- *    `deferralTally` applica al proprio denominatore — un `echo.total` gonfio
- *    non compra sconti — e senza di esso il controllo conterebbe due volte
- *    righe che nei secchi non sono mai entrate: `{transient: 90, persistent:
- *    60, total: 200, echo: {total: 120, transient: 30, persistent: 30}}` ha 50
- *    ambigui che ospitano 50 dei 60 echi non attribuiti, e li' lordo (90 vs
- *    60) e netto (60 vs 30) concordano — nessun veto da inventare.
+ *    classificazione. Il clamp alla massa ambigua serve a non contare due
+ *    volte righe che nei secchi non sono mai entrate: `{transient: 90,
+ *    persistent: 60, total: 200, echo: {total: 120, transient: 30, persistent:
+ *    30}}` ha 50 ambigui che ospitano 50 dei 60 echi non attribuiti, e li'
+ *    lordo (90 vs 60) e netto (60 vs 30) concordano — nessun veto da inventare.
+ *
+ *    NON E' LA POLITICA DI `deferralTally` SULLO STESSO NUMERO, e dedurre
+ *    l'una dall'altra porta fuori strada. Su `echoUnattributed` che nella
+ *    massa ambigua non ci sta, le due funzioni fanno cose OPPOSTE:
+ *      - `deferralTally` scarta TUTTO O NIENTE (`echoUnattributed <=
+ *        ambiguousMass ? echoUnattributed : 0`): un `echo.total` che non ci sta
+ *        CONTRADDICE il breakdown, e un campo contraddittorio non compra
+ *        sconti sul denominatore — quindi non se ne toglie NEMMENO la parte
+ *        che ci starebbe;
+ *      - qui la parte che ci sta si ignora (vive gia' fuori dai due secchi) e
+ *        si addebita al vincitore la sola ECCEDENZA.
+ *    Scarto integrale contro scarto della sola eccedenza. Oggi non divergono
+ *    su nessun verdetto solo perche' pendono entrambe verso il rosso —
+ *    denominatore piu' grande la', secchio vincente piu' piccolo qui — non
+ *    perche' siano la stessa regola. Chi tocca una delle due non ha licenza di
+ *    allineare l'altra «per coerenza»: sono giustificate separatamente, e la
+ *    divergenza e' fissata da `exhaustion-transient-majority.test.mjs` perche'
+ *    su questo predicato il commento non sia l'unica specifica.
  *
  * @param {unknown} breakdown `err.exhaustionBreakdown`
  * @param {{tie?: 'transient'|'persistent'}} [options] a chi va il pareggio
