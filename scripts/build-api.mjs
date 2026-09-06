@@ -880,19 +880,59 @@ console.log(`[build-api] wrote ${Object.keys(written).length} files to dist/api`
 //
 // La rilettura e' dal DISCO, non dalle variabili: un gate che ricontrolla la
 // stessa memoria che ha scritto il numero verifica se stesso e non puo' mai
-// fallire. Un artefatto opzionale assente vale 0, che e' il valore che i
-// rami `not emitted` qui sopra lasciano nel contatore.
+// fallire.
+//
+// E per la stessa ragione l'ASSENZA di un artefatto non e' una risposta. Se
+// `border-wait-ranking.json`, `daily-brief.json` o `images-manifest.json`
+// smettono silenziosamente di essere emessi, la ri-derivazione da' 0 e
+// `counts` dichiara 0 per la stessa identica ragione — i rami `not emitted`
+// qui sopra lasciano il contatore a 0 — quindi le due meta' del gate
+// concordano e il gate resta VERDE: dimostra la coerenza interna del
+// manifest, non che l'artefatto dovesse esserci. E' il troncamento-a-zero che
+// AGENTS.md chiede a `counts` di rifiutare, su una superficie che il sito
+// serve senza ribuildare.
+//
+// La legittimita' dell'assenza si decide quindi da una sorgente TERZA — che
+// non e' ne' il manifest ne' il contatore: per un artefatto sempre emesso,
+// l'assenza e' un errore e basta; per uno opzionale, l'INPUT del produttore
+// su disco, cioe' esattamente la condizione che i writer qui sopra usano per
+// decidere se emettere.
 {
   const outPath = (name) => path.join(OUT, name);
   const exists = (name) => fs.existsSync(outPath(name));
   const readOut = (name) => fs.readFileSync(outPath(name), 'utf-8');
   const jsonOut = (name) => JSON.parse(readOut(name));
-  const derivedIfPresent = (name, derive) => (exists(name) ? derive() : 0);
+
+  const absent = [];
+  // Artefatto scritto incondizionatamente: assente = troncamento, sempre.
+  // `null` (non 0) esce dal confronto per valore, che qui non ha piu' niente
+  // da dire — la voce e' gia' nella lista degli assenti.
+  const derivedAlways = (name, derive) => {
+    if (exists(name)) return derive();
+    absent.push(`${name}: assente da dist/api — questo artefatto e' sempre emesso`);
+    return null;
+  };
+  // Artefatto opzionale: `producerInput()` restituisce la descrizione
+  // dell'input trovato su disco, o `null` se il produttore non ha davvero
+  // girato qui. L'assenza vale 0 SOLO nel secondo caso.
+  const derivedOptional = (name, producerInput, derive) => {
+    if (exists(name)) return derive();
+    const input = producerInput();
+    if (input) {
+      absent.push(
+        `${name}: assente da dist/api mentre il suo input esiste (${input}) — ` +
+          `counts dichiara 0 per la stessa ragione, quindi il confronto per valore non lo vedrebbe`,
+      );
+    }
+    return 0;
+  };
+  const fileInput = (...parts) => () => (fs.existsSync(path.join(ROOT, ...parts)) ? path.join(...parts) : null);
+
   // `countXmlTags` conta i tag del DOCUMENTO: e' la stessa funzione che usa il
   // writer sopra, e ignora CDATA e commenti. Contare col needle testuale
   // rendeva il gate incapace di fallire proprio dove serve — un `<item>` citato
   // in una description gonfia dichiarato e ri-derivato allo stesso modo.
-  const sitemapUrls = (name) => derivedIfPresent(name, () => countXmlTags(readOut(name), 'url'));
+  const sitemapUrls = (name) => derivedAlways(name, () => countXmlTags(readOut(name), 'url'));
 
   // I feed si riconoscono dal documento, non dal nome: una convenzione di
   // naming e' proprio cio' che un writer nuovo puo' non rispettare, e le
@@ -904,16 +944,33 @@ console.log(`[build-api] wrote ${Object.keys(written).length} files to dist/api`
     .filter((xml) => xml.includes('<rss'));
 
   const derived = {
-    articles: derivedIfPresent('articles.json', () => jsonOut('articles.json').length),
-    swissArticles: derivedIfPresent('swiss-articles.json', () => jsonOut('swiss-articles.json').length),
+    articles: derivedAlways('articles.json', () => jsonOut('articles.json').length),
+    swissArticles: derivedAlways('swiss-articles.json', () => jsonOut('swiss-articles.json').length),
     sitemapBlogUrls: sitemapUrls('sitemap-blog.xml'),
     sitemapBlogChUrls: sitemapUrls('sitemap-blog-ch.xml'),
     rssFeeds: feeds.length,
     rssItems: feeds.reduce((total, xml) => total + countXmlTags(xml, 'item'), 0),
-    tickerArticles: derivedIfPresent('news-ticker-live.json', () => jsonOut('news-ticker-live.json').articles.length),
+    tickerArticles: derivedAlways('news-ticker-live.json', () => jsonOut('news-ticker-live.json').articles.length),
     newsCandidates: sitemapUrls(NEWS_CANDIDATES),
-    images: derivedIfPresent(IMAGE_MANIFEST, () => jsonOut(IMAGE_MANIFEST).images.length),
-    borderRankingEntries: derivedIfPresent(BORDER_RANKING, () => jsonOut(BORDER_RANKING).ranking.length),
+    // L'input e' la cartella sorgente, non `dist/api/images/blog`: quella la
+    // popola lo stesso ramo che scrive il manifest, quindi sarebbe di nuovo
+    // una meta' del gate a testimoniare per l'altra.
+    images: derivedOptional(
+      IMAGE_MANIFEST,
+      () => {
+        const srcDir = path.join(ROOT, 'public', 'images', 'blog');
+        const webp = fs.existsSync(srcDir)
+          ? fs.readdirSync(srcDir).filter((f) => f.endsWith('.webp')).length
+          : 0;
+        return webp ? `${webp} .webp in public/images/blog` : null;
+      },
+      () => jsonOut(IMAGE_MANIFEST).images.length,
+    ),
+    borderRankingEntries: derivedOptional(
+      BORDER_RANKING,
+      fileInput('public', 'data', 'border-wait-ranking.json'),
+      () => jsonOut(BORDER_RANKING).ranking.length,
+    ),
     // Il payload servito porta anche il proprio `counts.availableBlocks`, ed e'
     // quello che il consumer legge — ma ri-derivare DA LI' e' lo stesso «gate
     // che ricontrolla chi ha scritto il numero» che l'header rifiuta, spostato
@@ -923,8 +980,9 @@ console.log(`[build-api] wrote ${Object.keys(written).length} files to dist/api`
     // il numero DICHIARATO nel manifest (che viene da `counts.availableBlocks`)
     // contro i blocchi effettivamente presenti nel payload su disco. Un blocco
     // perso fra il calcolo e la serializzazione qui non passa piu'.
-    dailyBriefBlocks: derivedIfPresent(
+    dailyBriefBlocks: derivedOptional(
       DAILY_BRIEF,
+      fileInput('public', 'data', 'daily-brief.json'),
       () => Object.values(jsonOut(DAILY_BRIEF).blocks ?? {}).filter((b) => b?.available).length,
     ),
   };
@@ -946,8 +1004,9 @@ console.log(`[build-api] wrote ${Object.keys(written).length} files to dist/api`
     );
   }
 
-  const mismatches = [];
+  const mismatches = [...absent];
   for (const [key, actual] of Object.entries(derived)) {
+    if (actual === null) continue; // artefatto assente: gia' segnalato sopra
     if (declared[key] !== actual) {
       mismatches.push(`${key}: declared ${declared[key]}, on disk ${actual}`);
     }
@@ -966,7 +1025,13 @@ console.log(`[build-api] wrote ${Object.keys(written).length} files to dist/api`
   // identico con un id SOSTITUITO — la cardinalita' pareggia da entrambi i
   // lati e va live un canonical sbagliato per quell'articolo, che e' il caso
   // peggiore di AGENTS.md: non fallisce, e il sito non ribuilda.
-  if (exists('slugs.json')) {
+  //
+  // `slugs.json` e i due registri sono scritti incondizionatamente: la loro
+  // assenza NON e' un caso da saltare — saltarla e' lo stesso «l'assente vale
+  // 0» dell'header, che qui varrebbe «l'assente e' d'accordo».
+  if (!exists('slugs.json')) {
+    mismatches.push('slugs.json: assente da dist/api — la sorgente dei canonical e\' sempre emessa');
+  } else {
     const slugs = jsonOut('slugs.json');
     const indexed = { blog: ['articles.json', 'articles'], swiss: ['swiss-articles.json', 'swissArticles'] };
     for (const [section, [registry, counter]] of Object.entries(indexed)) {
@@ -974,7 +1039,7 @@ console.log(`[build-api] wrote ${Object.keys(written).length} files to dist/api`
       if (keys.length !== declared[counter]) {
         mismatches.push(`slugs.${section}: ${keys.length} ids, manifest.counts.${counter} declares ${declared[counter]}`);
       }
-      if (!exists(registry)) continue;
+      if (!exists(registry)) continue; // assenza gia' in `absent`, con la sua diagnosi
       const registryIds = new Set(jsonOut(registry).map((a) => a?.id));
       const indexedIds = new Set(keys);
       const missing = [...registryIds].filter((id) => !indexedIds.has(id));
