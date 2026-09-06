@@ -2929,6 +2929,14 @@ function registerLockTargets(id, sectionName = SECTION_NAME) {
         `rimuovi ${registerLockFile(sectionName)}.`,
     );
   }
+  // Ogni `label` passa da `corpusPath()`, come gia' fa `absPath` attraverso
+  // `resolve()` (issue #962). I letterali di questa funzione sono scritti nel
+  // layout di main (`data/…`, `services/locales/…`) e l'unico consumatore dei
+  // label e' il messaggio di SPLIT di `resolveRegisterLock()`, la cui sola
+  // funzione e' guidare la riparazione a mano di un corpus bloccato: stampare
+  // il path pre-mappatura manda chi ripara su file che in questo checkout non
+  // esistono. `corpusPath()` e' idempotente, quindi il wrap resta corretto
+  // anche se un domani il letterale fosse gia' nel layout di qui.
   const targets = [
     // First write of the sequence, and the only target whose path is NOT in
     // the section config (`modifyRouterUnion` hard-codes it). The needle is
@@ -2936,7 +2944,7 @@ function registerLockTargets(id, sectionName = SECTION_NAME) {
     // quotes, `| 'id';` — not the bare id: the file holds nothing else.
     ...(section.updateRouterUnion
       ? [{
-          label: 'packages/articles/content/blogArticleIds.ts',
+          label: corpusPath('packages/articles/content/blogArticleIds.ts'),
           absPath: resolve('packages/articles/content/blogArticleIds.ts'),
           needle: `'${id}'`,
         }]
@@ -2952,17 +2960,17 @@ function registerLockTargets(id, sectionName = SECTION_NAME) {
     // Three targets reading a false `present` is what turns a genuine SPLIT
     // into `committed` — the marker cleared over a half-registered corpus,
     // which is the exact failure this lock exists to catch.
-    { label: section.slugDataFile, absPath: resolve(section.slugDataFile), needle: `'${id}':` },
-    { label: section.registryFile, absPath: resolve(section.registryFile), needle: `id: '${id}'` },
-    { label: section.seoFile, absPath: resolve(section.seoFile), needle: `'blog-${id}':` },
+    { label: corpusPath(section.slugDataFile), absPath: resolve(section.slugDataFile), needle: `'${id}':` },
+    { label: corpusPath(section.registryFile), absPath: resolve(section.registryFile), needle: `id: '${id}'` },
+    { label: corpusPath(section.seoFile), absPath: resolve(section.seoFile), needle: `'blog-${id}':` },
   ];
   for (const locale of ['it', 'en', 'de', 'fr']) {
     const metaFile = `services/locales/${section.metaPrefix}-${locale}.ts`;
     const bodyFile = `services/locales/${section.bodyDir}/${locale}/${id}.ts`;
-    targets.push({ label: metaFile, absPath: resolve(metaFile), needle: `blog.article.${id}.` });
+    targets.push({ label: corpusPath(metaFile), absPath: resolve(metaFile), needle: `blog.article.${id}.` });
     // The body file IS the registration: its mere existence is the entry, so
     // there is no needle to look for inside it.
-    targets.push({ label: bodyFile, absPath: resolve(bodyFile), needle: null });
+    targets.push({ label: corpusPath(bodyFile), absPath: resolve(bodyFile), needle: null });
   }
   return targets;
 }
@@ -12468,7 +12476,7 @@ function validateBodyFileSyntax(filePath, content) {
     const line = lines[i];
     // Detect the specific truncation pattern: '}]', followed by raw text
     if (/\}]',\s*[a-zA-Z]/.test(line)) {
-      throw new Error(`Body file ${filePath} line ${i + 1}: FAQ string appears truncated — raw text found after closing ']'. The AI likely produced malformed FAQ JSON.`);
+      throw new Error(`Body file ${corpusPath(filePath)} line ${i + 1}: FAQ string appears truncated — raw text found after closing ']'. The AI likely produced malformed FAQ JSON.`);
     }
   }
   // Try to evaluate the TS as JS to catch syntax errors
@@ -12510,7 +12518,7 @@ function getLastArticleId(src) {
   const ids = getSectionExistingIds(src);
   const lastId = ids[ids.length - 1];
   if (!lastId) {
-    throw new Error(`No existing articles found in ${SECTION.slugDataFile}`);
+    throw new Error(`No existing articles found in ${corpusPath(SECTION.slugDataFile)}`);
   }
   return lastId;
 }
@@ -12573,7 +12581,7 @@ function modifyRouterTs(data) {
   }
 
   write(blogDataFile, blogSrc);
-  console.error(`  ✅ ${blogDataFile}`);
+  console.error(`  ✅ ${corpusPath(blogDataFile)}`);
 }
 
 /** frontaliere-only: append the new id to the BlogArticleId union in router.ts. */
@@ -12607,7 +12615,7 @@ function modifyRouterUnion(data) {
     throw new Error(`modifyRouterUnion: BlogArticleId union append failed (anchor=${routerLastId}, newId=${data.id})`);
   }
   write(routerFile, routerSrc);
-  console.error(`  ✅ ${routerFile}`);
+  console.error(`  ✅ ${corpusPath(routerFile)}`);
 }
 
 function modifyBlogArticlesTsx(data) {
@@ -12661,11 +12669,11 @@ function modifyBlogArticlesTsx(data) {
     );
   }
   if (src === before) {
-    throw new Error(`modifyBlogArticlesTsx: regex did not match — cannot insert article entry in ${file}`);
+    throw new Error(`modifyBlogArticlesTsx: regex did not match — cannot insert article entry in ${corpusPath(file)}`);
   }
 
   write(file, src);
-  console.error(`  ✅ ${file}`);
+  console.error(`  ✅ ${corpusPath(file)}`);
 }
 
 // buildMetaBlock ora vive in scripts/lib/article-meta-block.mjs. Emette
@@ -12763,12 +12771,12 @@ function writeSectionLocale(data, locale) {
     // Empty meta object (first article) — insert after the `= {` opener.
     const openRe = /(:\s*Record<string,\s*string>\s*=\s*\{)(\s*\n)/;
     if (!openRe.test(metaSrc)) {
-      throw new Error(`Cannot find blog article anchor (or empty-object opener) in ${metaFile}`);
+      throw new Error(`Cannot find blog article anchor (or empty-object opener) in ${corpusPath(metaFile)}`);
     }
     metaSrc = replaceCaptureSafe(metaSrc, openRe, (_m, g1, g2) => `${g1}\n${metaBlock}${g2}`);
   }
   write(metaFile, metaSrc);
-  console.error(`  ✅ ${metaFile}`);
+  console.error(`  ✅ ${corpusPath(metaFile)}`);
 
   // 2. Create per-article body file under the section's body dir.
   const bodyDir = `services/locales/${SECTION.bodyDir}/${locale}`;
@@ -12777,7 +12785,7 @@ function writeSectionLocale(data, locale) {
   const bodyContent = buildBodyFile(data, locale);
   validateBodyFileSyntax(bodyFile, bodyContent);
   write(bodyFile, bodyContent);
-  console.error(`  ✅ ${bodyFile}`);
+  console.error(`  ✅ ${corpusPath(bodyFile)}`);
 }
 
 function modifyI18nTs(data) {
@@ -12892,12 +12900,12 @@ function modifySeoService(data) {
     // Empty metadata object (first article) — anchor to the `= {` opener.
     const emptyOpenRe = new RegExp(`(const ${escapeRegex(seoConst)}[^=]*=\\s*\\{)(\\s*\\n)(\\};)`);
     if (!emptyOpenRe.test(blogSrc)) {
-      throw new Error(`Cannot find end (or empty-object opener) of ${seoConst} in ${blogSeoFile}`);
+      throw new Error(`Cannot find end (or empty-object opener) of ${seoConst} in ${corpusPath(blogSeoFile)}`);
     }
     blogSrc = replaceCaptureSafe(blogSrc, emptyOpenRe, (_m, g1, g2, g3) => `${g1}\n${seoEntry}\n${g3}`);
   }
   write(blogSeoFile, blogSrc);
-  console.error(`  ✅ ${blogSeoFile}`);
+  console.error(`  ✅ ${corpusPath(blogSeoFile)}`);
 
   // 2. Breadcrumb entry → REMOVED (issue #4974 item 3).
   //
