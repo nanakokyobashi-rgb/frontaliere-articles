@@ -140,6 +140,10 @@ function _preferisceModelloSenzaCap(prefer) {
 import { freeTranslateWithRetry, balanceMarkdownMarkers } from './lib/free-translate.mjs';
 import { translateFieldFreeMt, translatedStringOrNull, joinTranslatedChunks } from './lib/article-free-mt.mjs';
 import { AI_SEARCH_PROMPT_BLOCK_IT } from './lib/ai-search-template.mjs';
+// `process.exit()` non aspetta le write su stdout/stderr: su una pipe (il log
+// di Actions) sono asincrone, e la telemetria di fine run e' l'ultima cosa
+// stampata prima dell'uscita. Vedi lib/drain-stdio.mjs.
+import { drainStdio, exitAfterDrain } from './lib/drain-stdio.mjs';
 import { tokenizeIt, jaccardSim, containmentSim, normalizeItWord, STOP_WORDS_IT } from './lib/it-text-similarity.mjs';
 import { fixMicrocopy } from './lib/it-microcopy-guard.mjs';
 import { DOMAIN_DUP_STOPLIST, filterDistinctive } from './lib/dup-stoplist.mjs';
@@ -13363,9 +13367,15 @@ function requestCooperativeStop(signal) {
   // `.unref()`: il timer non deve tenere vivo l'event loop. Se la fermata
   // cooperativa riesce e il processo finisce prima, esce per conto suo e questo
   // timer non si vede nemmeno.
+  //
+  // `drainStdio()` prima dell'uscita per la stessa ragione di `exitAfterFlush`
+  // (issue #983): la `::warning::` qui sopra e' l'ULTIMA cosa che questo ramo
+  // stampa, e senza drain `process.exit()` la butta via insieme a tutto cio'
+  // che era ancora nel buffer del log — l'annotazione che spiega PERCHE' la run
+  // e' morta a 143 sparirebbe proprio dalle run in cui e' l'unica spiegazione.
   setTimeout(() => {
     console.warn(`::warning::create-article.mjs: la fermata cooperativa non e' rientrata entro ${COOPERATIVE_STOP_GRACE_MS / 1000}s dal ${signal} — uscita forzata 143 prima del SIGKILL esterno.`);
-    process.exit(143);
+    exitAfterDrain(143);
   }, COOPERATIVE_STOP_GRACE_MS).unref();
 }
 
@@ -13541,6 +13551,14 @@ function isDuplicateError(e) {
  *
  * Il flush e' limitato nel tempo e non lancia (vedi `flushScoresBeforeExit`):
  * un ledger non deve poter appendere o far fallire un'uscita.
+ *
+ * E il drain di stdout/stderr per ULTIMO, dopo il flush, perche' anche il flush
+ * puo' stampare (issue #983). Senza, `process.exit()` butta via quello che e'
+ * ancora nel buffer del flusso: su una pipe — il log di Actions — le write di
+ * `console.log`/`console.error` sono asincrone. Il riepilogo AI di
+ * `finalizeRunReport()` e' l'ultima cosa stampata prima di arrivare qui, quindi
+ * e' la prima a sparire, e le run che passano di qui sono `deferred`/`error`/
+ * `skipped`: proprio quelle che la riga `resolver flaps:` esiste per campionare.
  */
 async function exitAfterFlush(code) {
   try {
@@ -13549,6 +13567,13 @@ async function exitAfterFlush(code) {
     // flushScoresBeforeExit non lancia; il catch e' qui perche' l'uscita non
     // dipenda mai dal ledger, nemmeno se un domani cambiasse contratto.
   }
+  // `exitCode` prima del drain, non dopo: il tetto del drain e' un timer
+  // `unref()`ato, quindi se il flusso restasse bloccato senza altro lavoro in
+  // coda il processo uscirebbe da solo — e uscirebbe 0, cioe' una run
+  // `deferred` riportata come riuscita. Con `exitCode` gia' impostato l'uscita
+  // naturale porta comunque il codice giusto.
+  process.exitCode = code;
+  await drainStdio();
   process.exit(code);
 }
 

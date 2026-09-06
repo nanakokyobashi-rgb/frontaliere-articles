@@ -3959,8 +3959,14 @@ function _registerExitHooks() {
   // generate-article.yml is SIGKILL, measured 42 times out of 42 with zero
   // SIGTERM, and SIGKILL runs no handler at all. What this fixes is the
   // cooperative stop (a cancelled workflow, a local Ctrl-C).
-  process.on('SIGINT', async () => { await flushScoresBeforeExit(); process.exit(130); });
-  process.on('SIGTERM', async () => { await flushScoresBeforeExit(); process.exit(143); });
+  //
+  // E `exitAfterDrain` invece di `process.exit` diretto (issue #983): il flush
+  // qui sopra stampa la sua `::warning::` quando fallisce, e su una pipe — il
+  // log di Actions — quella write e' asincrona. `process.exit()` la butterebbe
+  // via, lasciando un flush fallito indistinguibile da uno riuscito proprio nel
+  // percorso in cui il ledger rischia di piu'.
+  process.on('SIGINT', async () => { await flushScoresBeforeExit(); await exitAfterDrain(130); });
+  process.on('SIGTERM', async () => { await flushScoresBeforeExit(); await exitAfterDrain(143); });
 }
 
 // ── Score mutation (with Firestore persistence) ──────────────
@@ -8296,6 +8302,9 @@ export async function callLLM(messages, opts = {}) {
 // call site, invece che in cima a un file di 7600 righe che non ha altri
 // import statici.
 import { isTransientMajority } from './exhaustion-disposition.mjs';
+// Stessa ragione dell'import qui sopra: `drain-stdio.mjs` non importa nulla e
+// non ha effetti al load. Consumato dai signal handler di `_registerExitHooks`.
+import { exitAfterDrain } from './drain-stdio.mjs';
 
 /**
  * Tally per-model failure reasons collected by callLLM into transient vs

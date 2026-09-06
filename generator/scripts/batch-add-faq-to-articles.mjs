@@ -32,6 +32,7 @@ import { corpusPath, resolveGitAddPath } from './lib/corpus-paths.mjs';
 import { sanitizeText } from '../../scripts/lib/sanitize-control-chars.mjs';
 import { reportStrippedControlChars } from './lib/control-char-write-report.mjs';
 import { callLLM, callSingleModel, AI_MODELS, initScoreStore, getStats, flushScores, resetExhaustedModel, printRunSummary } from './lib/ai-models.mjs';
+import { exitAfterDrain } from './lib/drain-stdio.mjs';
 import { freeTranslateWithRetry, logCascadeSummary } from './lib/free-translate.mjs';
 import { stripCodeFences, findMatchingClose, fixJsonStringBody, JSON_QUOTE_SAFETY_RULE_IT, describeJsonParseError, describeRawForDiagnostics } from './lib/llm-json-repair.mjs';
 import { wrongLocalePair } from './fix-faq-locales.mjs';
@@ -1494,9 +1495,13 @@ async function main() {
 // otherwise trigger the entire batch scan as an import side effect.
 if (import.meta.url === `file://${process.argv[1]}`) {
   installSigtermCheckpoint();
-  main().catch(err => {
+  main().catch(async err => {
     console.error(`\n💥 Fatal error: ${err.message}`);
     console.error(err.stack);
-    process.exit(1);
+    // `exitAfterDrain` e non `process.exit` (issue #983): su una pipe le write
+    // di `console.error` sono asincrone, e `process.exit()` scarta quello che e'
+    // ancora nel buffer. Qui a sparire per primo sarebbe lo stack trace appena
+    // stampato — l'unica cosa che dice PERCHE' la run e' morta.
+    await exitAfterDrain(1);
   });
 }
