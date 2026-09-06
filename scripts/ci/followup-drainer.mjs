@@ -689,7 +689,13 @@ export function workflowFilesOf(files) {
     const p = String(raw || '').trim();
     if (!p) continue;
     const m = p.match(WORKFLOW_PATH_RE);
-    if (m && m[0] === p) out.push(p);
+    if (!m || m[0] !== p) continue;
+    // GitHub esegue solo i file al primo livello di `.github/workflows/`: un
+    // `.yml` in una sotto-cartella non produce MAI una run, quindi prenderlo
+    // come sorgente della prova garantirebbe un timeout invece del verdetto
+    // giusto («prova non definibile per questa PR»).
+    if (p.slice('.github/workflows/'.length).includes('/')) continue;
+    out.push(p);
   }
   return out;
 }
