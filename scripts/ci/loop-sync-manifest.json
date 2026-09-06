@@ -320,9 +320,8 @@
     },
     {
       "path": "scripts/lib/parse-positive-num.mjs",
-      "mode": "corpus-only-pending",
-      "reason": "La lettura validata di un override numerico da env o argv, estratta qui da `scripts/ci/scan-failed-runs.mjs` (#871). Non e' `corpus-only`: il sito ha la STESSA classe di difetto e nessun equivalente. Misurato il 2026-09-05 su `main` del sito: 449 occorrenze di `Number(process.env.X || N)` in 308 file sotto `scripts/**`, e zero risultati per `parsePositiveNum|parsePositiveInt|readPositiveEnv|envPositive`. Il gemello dovrebbe scendere di la', quindi la voce resta `pending` finche' non atterra — poi si promuove a `identical` a mano e si toglie `trackingIssue`.",
-      "trackingIssue": "https://github.com/nanakokyobashi-rgb/frontaliere-articles/issues/884",
+      "mode": "corpus-only",
+      "reason": "La lettura validata di un override numerico da env o argv, estratta qui da `scripts/ci/scan-failed-runs.mjs` (#871). E' `corpus-only` e non `corpus-only-pending` dal 2026-09-06: il gemello NON scendera' sul sito, e non deve. Il sito copre la stessa classe con `scripts/lib/int-from-env.mjs` — `intFromEnv` (issue #7344 del sito: assente/vuota → default in silenzio, illeggibile → default + `::warning::`, mai un `NaN` propagato) piu' `positiveIntFromEnv`, che rifiuta anche lo zero e i negativi, atterrato con valerielinc-ops/frontaliere-si-o-no#7610 (mergiata il 2026-09-06) sui 12 call site dove il valore finisce in uno `slice`, in un indice o nel passo di un `for`. Copiarci sopra `parse-positive-num.mjs` creerebbe DUE sorgenti per la stessa validazione, che e' il difetto vietato da AGENTS.md #6. La misura originale della issue #884 (449 occorrenze in 308 file, zero equivalenti) cercava quattro nomi — `parsePositiveNum|parsePositiveInt|readPositiveEnv|envPositive` — e mancava l'equivalente del sito perche' si chiama diversamente.",
       "baseline": {
         "site": null,
         "corpus": "4342dbe439942728",

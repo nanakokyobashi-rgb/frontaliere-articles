@@ -336,6 +336,17 @@ const DECLARED_ABSENT = {
     kind: 'example',
     reason: 'Placeholder in un docstring che mostra la forma della bullet-list «File di partenza».',
   },
+  'scripts/lib/parse-positive-num.mjs :: scripts/lib/int-from-env.mjs': {
+    kind: 'site-only',
+    reason:
+      "Citazione CONTRASTIVA di un file che vive sul SITO: il docstring lo nomina per dire " +
+      "perche' `parse-positive-num.mjs` NON scendera' di la' (`intFromEnv` + " +
+      "`positiveIntFromEnv` coprono gia' la stessa classe, e due sorgenti per la stessa " +
+      "validazione sono il difetto vietato da AGENTS.md #6). E' la ragione per cui la voce di " +
+      "manifest e' `corpus-only` e non `corpus-only-pending`, issue #884. Niente qui dipende " +
+      "dalla sua esistenza LOCALE: se comparisse in questo repo la frase diventerebbe falsa, " +
+      "non vera.",
+  },
   'scripts/lib/workflow-scope-detect.mjs :: scripts/create-article.mjs': {
     kind: 'renamed-here',
     insteadOf: 'generator/scripts/create-article.mjs',
