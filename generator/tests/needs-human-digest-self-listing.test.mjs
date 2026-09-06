@@ -61,8 +61,8 @@ test('il titolo di dedup ha una sola sorgente nello step', () => {
 
 test('la lista issue esclude l issue dedup stessa', () => {
   const step = surfaceStep();
-  const issueQuery = /ISSUES=\$\(gh issue list[\s\S]*?--jq '([^']+)'\)/.exec(step);
-  assert.ok(issueQuery, 'query `gh issue list` dello step non trovata');
+  const issueQuery = /ISSUES=\$\(gh api --paginate[\s\S]*?--jq '([^']+)'\)/.exec(step);
+  assert.ok(issueQuery, 'query della lista issue dello step non trovata');
   assert.match(
     issueQuery[1],
     /select\(\s*\.title\s*!=\s*env\.DEDUP_TITLE\s*\)/,
@@ -102,13 +102,13 @@ test('l esito delle due query e catturato, non solo il loro output', () => {
   );
   assert.match(
     step,
-    /PRS=\$\(gh pr list[\s\S]*?\n\s+PRS_RC=\$\?/,
-    'l exit status di `gh pr list` va catturato subito dopo l assegnazione',
+    /PRS=\$\(gh api --paginate[\s\S]*?\n\s+PRS_RC=\$\?/,
+    'l exit status della query PR va catturato subito dopo l assegnazione',
   );
   assert.match(
     step,
-    /ISSUES=\$\(gh issue list[\s\S]*?\n\s+ISSUES_RC=\$\?/,
-    'l exit status di `gh issue list` va catturato subito dopo l assegnazione',
+    /ISSUES=\$\(gh api --paginate[\s\S]*?\n\s+ISSUES_RC=\$\?/,
+    'l exit status della query issue va catturato subito dopo l assegnazione',
   );
 });
 
@@ -162,12 +162,12 @@ test('a liste vuote lo step richiude l issue dedup, non si limita a uscire', () 
  */
 test('la lista issue esclude i tracker permanenti', () => {
   const step = surfaceStep();
-  const issueQuery = /ISSUES=\$\(gh issue list([\s\S]*?)--jq '([^']+)'\)/.exec(step);
-  assert.ok(issueQuery, 'query `gh issue list` dello step non trovata');
+  const issueQuery = /ISSUES=\$\(gh api --paginate([\s\S]*?)--jq '([^']+)'\)/.exec(step);
+  assert.ok(issueQuery, 'query della lista issue dello step non trovata');
   assert.match(
-    issueQuery[1],
-    /--json [\w,]*\blabels\b/,
-    'senza `labels` nel --json il filtro sulla label non ha su cosa lavorare',
+    step,
+    /NEEDS_HUMAN_API="repos\/\$GH_REPO\/issues\?[^"]*labels=needs-human/,
+    'la lista viene dall endpoint `issues`, che filtra per label e restituisce `labels`: senza, il filtro non ha su cosa lavorare',
   );
   assert.match(
     issueQuery[2],
@@ -209,4 +209,82 @@ test('la label del tracker permanente ha la stessa sorgente degli script del cic
     sweep.includes(label),
     'needs-human-sweep.yml non crea piu il digest con la label di tracker permanente',
   );
+});
+
+/**
+ * Quarto modo di far dire il falso al digest, e il piu' silenzioso di tutti:
+ * la lista e' TRONCATA. `gh pr list` / `gh issue list` non hanno `--paginate`
+ * e il loro `--limit` taglia senza dirlo — la lista PR qui non ne aveva
+ * nemmeno uno (default 30), quella issue si fermava a 200 con i filtri
+ * applicati DOPO il taglio. Sopra il cap la lista pubblicata e `ISSUE_COUNT`
+ * sotto-riportano restando verdi: l'unico canale che gli umani leggono
+ * direbbe «30 PR» con 90 aperte. E' la stessa bugia del ramo di chiusura su
+ * una query fallita, spostata dal ramo che chiude a quello che pubblica.
+ */
+test('nessuna delle due liste del digest puo essere troncata in silenzio', () => {
+  const step = surfaceStep();
+  assert.doesNotMatch(
+    step,
+    /\$\(gh (?:pr|issue) list/,
+    'i sottocomandi `list` troncano al `--limit`: il digest deve leggere da `gh api --paginate`',
+  );
+  const paginated = [...step.matchAll(/\$\(gh api --paginate "\$NEEDS_HUMAN_API"/g)];
+  assert.equal(paginated.length, 2, 'entrambe le liste (PR e issue) devono venire da `gh api --paginate`');
+  // Una sola sorgente per l'endpoint (AGENTS.md #6): due URL divergerebbero, e
+  // le due liste finirebbero per descrivere backlog diversi.
+  assert.equal(
+    [...step.matchAll(/\n\s+NEEDS_HUMAN_API=/g)].length,
+    1,
+    'NEEDS_HUMAN_API definita piu di una volta: due perimetri divergono in silenzio',
+  );
+  assert.match(step, /NEEDS_HUMAN_API="[^"]*per_page=100/, 'senza `per_page` la paginazione costa il triplo delle chiamate');
+  // Le PR arrivano dallo stesso endpoint `issues` (l'unico che filtra per
+  // label): `.pull_request` e' la discriminante fra i due tipi, e senza le due
+  // liste conterrebbero gli stessi oggetti.
+  assert.match(
+    step,
+    /--jq '\.\[\] \| select\(\.pull_request\) \|/,
+    'la lista PR deve selezionare gli oggetti con `.pull_request`',
+  );
+  assert.match(
+    step,
+    /--jq '\.\[\] \| select\(\.pull_request \| not\) \|/,
+    'la lista issue deve escludere gli oggetti con `.pull_request`, o elenca anche le PR',
+  );
+  // I campi dell'API REST sono snake_case: `updatedAt` (forma `gh ... list`)
+  // renderebbe ogni riga «ultimo update null» senza fallire.
+  assert.doesNotMatch(step, /\\\(\.updatedAt\)/, 'l API REST espone `updated_at`, non `updatedAt`');
+  assert.match(step, /ultimo update \\\(\.updated_at\)/, 'ogni riga deve riportare `updated_at`');
+});
+
+/**
+ * Stesso taglio, stesso file, un passo prima: lo scan che RICICLA le PR
+ * `stale-review`. `gh pr list` ordina per creazione DISCENDENTE, quindi un
+ * `--limit` taglia via le PR piu' VECCHIE — per costruzione le uniche che lo
+ * scan puo' riciclare (gate 1: aperte da piu' di MAX_AGE_HOURS). Sopra il cap
+ * resterebbe verde lasciando ferme per sempre proprio quelle. E' la stessa
+ * classe del digest, e la stessa gia' imparata da transport-identical-twins,
+ * auto-merge-enroll-sweep e stale-pr-rescuer.
+ */
+test('nemmeno lo scan stale-review legge una lista troncata', () => {
+  assert.doesNotMatch(
+    text,
+    /\$\(gh (?:pr|issue) list/,
+    'in recycle-stale-prs.yml nessuna lista che alimenta una decisione deve venire da un `list` con `--limit`',
+  );
+  assert.match(
+    text,
+    /prs=\$\(gh api --paginate "repos\/\$REPO\/issues\?[^"]*labels=stale-review[^"]*per_page=100"/,
+    'lo scan stale-review deve leggere da `gh api --paginate`',
+  );
+  // Il rimappaggio deve restituire la forma che i gate sotto leggono: i campi
+  // REST sono snake_case, e `.createdAt` diventerebbe null — con `date -d ""`
+  // che fallisce e il fallback `$NOW` che rende OGNI PR «non abbastanza
+  // vecchia», cioe' uno scan che non ricicla piu' niente, in silenzio.
+  assert.match(
+    text,
+    /createdAt: \.created_at/,
+    'il rimappaggio deve riportare `created_at` su `.createdAt`, che e il campo letto dal gate 1',
+  );
+  assert.match(text, /labels: \[\.labels\[\] \| \{name\}\]/, 'i gate leggono `.labels[].name`: la forma va preservata');
 });
