@@ -3213,7 +3213,7 @@
       "reason": "Contratto deterministico corpus-only della recovery manuale: copre 201 cancellazioni profonde senza consumare il target-only budget, capability live v0, fixture attestata dedupe effectively-once/successor guard v1, race post-status e post-final-liveness a zero write senza guard, CAS, failure ambiguity e singolo endpoint mutante.",
       "baseline": {
         "site": null,
-        "corpus": "bdcc6c58d4009ef8",
+        "corpus": "b437a1be48cb6bfc",
         "alignedAt": "2026-09-01"
       }
     },
