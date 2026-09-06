@@ -1,5 +1,4 @@
 {
-  "https://www.swissinfo.ch/ita/bns-e-finma%3a-s%c3%ac-a-nuove-misure-del-consiglio-federale-sulle-banche/91887839": "scherzi-nuove-misure-del-consiglio-federale",
   "https://www.rsi.ch/info/svizzera/verso-un-aumento-dell%e2%80%99iva-per-la-difesa--3949164.html": "iva-aumento-governo-difesa-2026",
   "https://www.laregione.ch/svizzera/svizzera/1943478/livigno-idea-progetto-s-chanf-grigioni-canton-collegamento": "livigno-idea-progetto-s-chanf",
   "https://www.rsi.ch/s/3949146": "maggiori-responsabilita-peri-vertici-bancari",
@@ -1877,6 +1876,11 @@
   "https://www.tio.ch/svizzera/attualita/1948281/fondazione-vittime-franchi-crans-montana-istituita-richieste-azione-ricevuto-settantina": {
     "articleId": "beloved-aiuto-vittime-crans-montana",
     "ts": "2026-09-06T07:55:34.365Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/dal-mondo/cronaca/1948293/aeroporti-indonesia-vulcano-voli-passeggeri": {
+    "articleId": "eruzione-vulcano-aeroporti-indonesia",
+    "ts": "2026-09-06T10:56:39.482Z",
     "keyForm": 2
   }
 }
