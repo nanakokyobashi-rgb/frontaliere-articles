@@ -4663,7 +4663,7 @@ function _formatResolverFlapLine(s) {
     .map(([p, n]) => `${p}=${n}/${RESOLVER_FLAP_ESCALATION}`)
     .join(', ');
   const resets = Object.entries(s.resolverFlapResets)
-    .map(([p, r]) => `${p} silent=${r.silent} resolved=${r.resolved} success=${r.success} escalated=${r.escalated} (${r.streaksDiscarded} discarded)`)
+    .map(([p, r]) => `${p} silent=${r.silent} resolved=${r.resolved} noResolver=${r.noResolver} success=${r.success} escalated=${r.escalated} (${r.streaksDiscarded} discarded)`)
     .join(' · ');
   if (!open && !resets) return '   resolver flaps: none this run';
   const parts = [];
@@ -5043,8 +5043,62 @@ const RESOLVER_PROVEN_CODES = new Set([
   'EPROTO',
 ]);
 
-/** Una risposta HTTP ricevuta: `[model] HTTP 503: ...` e' la forma che questo modulo alza. */
+/**
+ * Una risposta HTTP ricevuta, letta dal TESTO del messaggio. Resta come
+ * ripiego per gli errori che nascono fuori dai due caller fetch di questo
+ * modulo; il canale primario e' `e.responseReceived`, posato alla sorgente
+ * (#928 item 1). La regex da sola contava `silent` ogni eccezione alzata DOPO
+ * che `res` esisteva ma senza la forma `HTTP \d{3}` nel messaggio — quota
+ * giornaliera, risposta vuota, contenuto non-stringa — cioe' proprio le classi
+ * che su `github` chiudono una striscia piu' spesso di un `ECONNRESET`.
+ */
 const HTTP_RESPONSE_RE = /\bHTTP \d{3}\b/;
+
+/**
+ * L'hostname di un endpoint, o `null` se l'URL non e' parsabile. Le parentesi
+ * quadre di un IPv6 letterale (`http://[::1]:8080`) le toglie `URL.hostname`?
+ * No: le mantiene, quindi si spogliano qui — il confronto a valle e' su un
+ * indirizzo, non su una forma URL.
+ */
+function _endpointHostname(url) {
+  try {
+    const h = new URL(String(url)).hostname;
+    return h.startsWith('[') && h.endsWith(']') ? h.slice(1, -1) : h;
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * Un host scritto come indirizzo, non come nome: `127.0.0.1`, `::1`,
+ * `192.168.1.9`. `net.isIP` e' la stessa domanda che si pone undici prima di
+ * decidere se chiamare `getaddrinfo`, quindi e' il predicato giusto e non una
+ * regex parallela (AGENTS.md #6).
+ */
+const _isIpLiteralHost = (host) => typeof host === 'string' && isIP(host) !== 0;
+
+// Import statico, adiacente al suo unico call site come quello di
+// `exhaustion-disposition.mjs` in fondo al file: `node:net` e' un builtin,
+// nessun ciclo e nessun costo di avvio.
+import { isIP } from 'node:net';
+
+/**
+ * Posa sull'errore le due prove che solo il call site conosce, e che a valle
+ * non sono piu' ricostruibili dal messaggio (#928 items 1 e 2):
+ * `responseReceived` (una risposta HTTP e' arrivata prima del fallimento) e
+ * `endpointHost` (verso CHI si stava chiamando — se e' un IP letterale il
+ * resolver non e' stato interrogato affatto).
+ *
+ * Idempotente e non distruttiva: un errore gia' taggato da un tentativo
+ * precedente non perde il tag, perche' `responseReceived` e' un fatto che una
+ * volta vero resta vero.
+ */
+function _tagResolverEvidence(err, { responseReceived, endpointHost }) {
+  if (!err || typeof err !== 'object') return err;
+  if (responseReceived) err.responseReceived = true;
+  if (endpointHost && !err.endpointHost) err.endpointHost = endpointHost;
+  return err;
+}
 
 /**
  * La striscia dei flap si chiude su QUALUNQUE altra classe di fallimento
@@ -5060,14 +5114,43 @@ const HTTP_RESPONSE_RE = /\bHTTP \d{3}\b/;
  * Pura e idempotente come le due `classify*` sopra: nessun effetto, quindi
  * chiamarla non cambia nulla di cio' che misura.
  *
+ * `noResolver` e' la terza classe, ed e' entrata con #928: ci sono fallimenti
+ * che non sono ne' una prova ne' un silenzio, perche' il resolver non e' MAI
+ * stato interrogato. Due sorgenti, entrambe reali qui:
+ *   - un endpoint su IP letterale (`LOCAL_LLM_URL`/`OMNIROUTE_URL` a
+ *     `http://127.0.0.1:…`, #838): `getaddrinfo` non viene chiamato, quindi un
+ *     `ECONNREFUSED` li' non dice «il resolver ha funzionato» — dice solo che
+ *     nessuno ascolta su quella porta. Contarlo `resolved` gonfiava la classe
+ *     opposta a `silent`, e proprio sui provider di ultima riga che falliscono
+ *     piu' spesso;
+ *   - `PROVIDER.CLAUDE_CLI`, che nel NOSTRO processo non risolve nessun nome:
+ *     `spawn ENOENT`, timeout del processo e `claude CLI error: …` finivano
+ *     tutti in `silent`, cioe' nel numero che decide l'item 3 di #848, per un
+ *     provider che con il DNS non c'entra.
+ * Non e' uno scarto: la classe si conta come le altre, cosi' il metro puo'
+ * escluderla senza perderla.
+ *
  * @param {unknown} err
- * @returns {'resolved'|'silent'} `resolved` = il nome e' stato risolto (una
- *   risposta HTTP e' arrivata, o il codice/indirizzo dice che c'era gia' un
- *   peer); `silent` = l'errore non dice niente sul resolver (abort e timeout
- *   senza risposta, `spawn ENOENT`, un payload malformato alzato come Error).
+ * @param {string} [provider] il provider su cui la striscia era aperta. Serve
+ *   solo a riconoscere chi non passa dal resolver; omesso, la domanda si
+ *   decide sul solo errore.
+ * @returns {'resolved'|'silent'|'noResolver'} `resolved` = il nome e' stato
+ *   risolto (una risposta HTTP e' arrivata, o il codice/indirizzo dice che
+ *   c'era gia' un peer); `silent` = l'errore non dice niente sul resolver
+ *   (abort e timeout senza risposta, un payload malformato alzato come Error);
+ *   `noResolver` = il resolver non e' stato interrogato affatto.
  */
-export function classifyResolverResetEvidence(err) {
+export function classifyResolverResetEvidence(err, provider = undefined) {
+  if (provider !== undefined && !_providerUsesResolver(provider)) return 'noResolver';
+  // L'host si legge PRIMA della prova: su un IP letterale nemmeno un
+  // `ECONNRESET` parla del resolver, quindi la domanda «e' stato risolto?»
+  // non si pone.
+  const host = _walkErrorChain(err, (e) => (typeof e.endpointHost === 'string' && e.endpointHost ? e.endpointHost : null));
+  if (_isIpLiteralHost(host)) return 'noResolver';
   const proven = _walkErrorChain(err, (e) => {
+    // Posato alla sorgente, subito dopo che `fetch` ha restituito: e' il
+    // canale primario, e non dipende da come e' scritto il messaggio (#928).
+    if (e.responseReceived === true) return true;
     if (typeof e.code === 'string' && RESOLVER_PROVEN_CODES.has(e.code)) return true;
     // L'indirizzo del peer c'e' solo se il DNS lo ha prodotto.
     if (typeof e.address === 'string' && e.address) return true;
@@ -5075,6 +5158,15 @@ export function classifyResolverResetEvidence(err) {
     return null;
   });
   return proven === true ? 'resolved' : 'silent';
+}
+
+/**
+ * I provider che nel nostro processo interrogano davvero il resolver: tutti
+ * quelli HTTP. `claude-cli` no — parla con un processo figlio, e il DNS lo fa
+ * lui, altrove (#928 item 3).
+ */
+function _providerUsesResolver(provider) {
+  return _normalizeProviderKey(provider) !== _normalizeProviderKey(PROVIDER.CLAUDE_CLI);
 }
 
 /**
@@ -5086,7 +5178,7 @@ export function classifyResolverResetEvidence(err) {
  */
 const _resolverFlapResets = new Map();
 
-const _freshResolverFlapResets = () => ({ success: 0, resolved: 0, silent: 0, escalated: 0, streaksDiscarded: 0 });
+const _freshResolverFlapResets = () => ({ success: 0, resolved: 0, silent: 0, noResolver: 0, escalated: 0, streaksDiscarded: 0 });
 
 /**
  * L'UNICO punto in cui una striscia di flap si chiude (AGENTS.md #6): i tre
@@ -5105,7 +5197,7 @@ const _freshResolverFlapResets = () => ({ success: 0, resolved: 0, silent: 0, es
  * non viene chiusa affatto, resta aperta e visibile in `open [...]`.
  *
  * @param {string} provider
- * @param {'success'|'resolved'|'silent'|'escalated'} evidence
+ * @param {'success'|'resolved'|'silent'|'noResolver'|'escalated'} evidence
  */
 function _recordResolverFlapReset(provider, evidence) {
   const streak = _resolverFlaps.get(provider) || 0;
@@ -5122,7 +5214,8 @@ function _recordResolverFlapReset(provider, evidence) {
     ? 'un fallimento che non prova niente sul resolver'
     : evidence === 'success' ? 'un successo'
       : evidence === 'escalated' ? 'l\'escalation (ban + cooldown)'
-        : 'un fallimento con risposta ricevuta';
+        : evidence === 'noResolver' ? 'un fallimento su un canale che il resolver non tocca'
+          : 'un fallimento con risposta ricevuta';
   console.warn(`🧮 [${provider}] striscia di flap del resolver (${streak}/${RESOLVER_FLAP_ESCALATION}) chiusa da ${what} (#848)`);
 }
 
@@ -5794,8 +5887,16 @@ async function _callOpenAICompatible(apiModel, messages, opts, { endpoint, apiKe
     ...(extraBody || {}),
   };
 
+  // L'host cui questa chiamata punta, per il metro di #848 item 3: se e' un IP
+  // letterale il resolver non viene MAI interrogato, quindi nessun fallimento
+  // di questa chiamata dice niente su di lui (#928 item 2).
+  const endpointHost = _endpointHostname(endpoint);
+
   for (let attempt = 1; attempt <= opts.maxRetriesPerModel; attempt++) {
     _stats.calls++;
+    // «Una risposta e' arrivata»: si sa QUI, non si deduce dal testo del
+    // messaggio a valle (#928 item 1). Per tentativo, non per chiamata.
+    let responseReceived = false;
     try {
       const res = await fetch(endpoint, {
         method: 'POST',
@@ -5811,6 +5912,10 @@ async function _callOpenAICompatible(apiModel, messages, opts, { endpoint, apiKe
         // a slow local model dies as `fetch failed` long before the AbortSignal.
         ...(dispatcher ? { dispatcher } : {}),
       });
+      // Da qui in poi il nome E' stato risolto: `fetch` ha restituito una
+      // risposta. Tutto cio' che fallisce sotto — quota, payload malformato,
+      // risposta vuota — prova il resolver quanto un `HTTP 503` (#928 item 1).
+      responseReceived = true;
 
       // OmniRoute's "auto" combo resolves to one specific underlying provider
       // per call and reports it back via response headers — otherwise
@@ -5953,6 +6058,10 @@ async function _callOpenAICompatible(apiModel, messages, opts, { endpoint, apiKe
       _stats.successes++;
       return text;
     } catch (e) {
+      // La prova sul resolver si posa PRIMA di ogni re-throw (#928): i rami
+      // qui sotto escono per primi proprio sulle classi post-risposta (quota,
+      // non-retryable), che sono quelle che il metro contava come `silent`.
+      _tagResolverEvidence(e, { responseReceived, endpointHost });
       // Re-throw daily limit errors (already marked)
       if (e.message?.includes('Daily request limit')) throw e;
       // Re-throw non-retryable errors immediately (unknown model, context limit)
@@ -7008,9 +7117,11 @@ async function _callGeminiRaw(model, messages, opts) {
   };
 
   const endpoint = `${GEMINI_API_BASE}/${model}:generateContent?key=${apiKey}`;
+  const endpointHost = _endpointHostname(endpoint);
 
   for (let attempt = 1; attempt <= opts.maxRetriesPerModel; attempt++) {
     _stats.calls++;
+    let responseReceived = false;
     try {
       const res = await fetch(endpoint, {
         method: 'POST',
@@ -7018,6 +7129,7 @@ async function _callGeminiRaw(model, messages, opts) {
         body: JSON.stringify(body),
         signal: AbortSignal.timeout(opts.timeout),
       });
+      responseReceived = true;
 
       const raw = await res.text().catch(() => '');
 
@@ -7095,6 +7207,9 @@ async function _callGeminiRaw(model, messages, opts) {
       _stats.successes++;
       return text;
     } catch (e) {
+      // Gemello della riga in _callOpenAICompatible (#928): `Daily quota` e il
+      // ramo non-retryable escono di qui, e sono errori post-risposta.
+      _tagResolverEvidence(e, { responseReceived, endpointHost });
       if (e.message?.includes('Daily quota')) throw e;
       if (e.nonRetryable) throw e;
       // Tag prima del `throw` dell'ultimo tentativo — gemello della riga in
@@ -7718,7 +7833,7 @@ export async function callLLM(messages, opts = {}) {
         // il reset alle sole classi che provano che il resolver funziona: sotto
         // una certa frequenza di reset `silent` l'item e' teorico, sopra e' il
         // difetto che impedisce all'escalation di scattare.
-        _recordResolverFlapReset(provider, classifyResolverResetEvidence(e));
+        _recordResolverFlapReset(provider, classifyResolverResetEvidence(e, provider));
       } else {
         const flaps = (_resolverFlaps.get(provider) || 0) + 1;
         _resolverFlaps.set(provider, flaps);
