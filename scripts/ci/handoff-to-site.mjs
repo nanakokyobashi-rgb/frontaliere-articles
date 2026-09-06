@@ -59,6 +59,13 @@ import { fileURLToPath } from 'node:url';
 // in `close-recovered-failure-issues.mjs`, che gia' lo esporta. Due copie della
 // stessa regex sono due posti dove il contratto puo' divergere in silenzio.
 import { FIX_OUTCOME_RE } from './close-recovered-failure-issues.mjs';
+// La domanda «questa fix, scritta di la', scende poi QUI?» ha gia' una risposta
+// eseguibile: e' il trasporto stesso a dire quali gemelli `identical` non
+// portera' mai. Importarla invece di ricopiarne la regola e' AGENTS.md #6 — due
+// copie divergono in silenzio, e qui divergere significa chiudere una issue che
+// nessun canale risolvera'. Entrambi i moduli hanno la guardia `argv` sul
+// proprio `main`, quindi importarli non fa ne' rete ne' scritture.
+import { permanentBlock, isFixture } from './transport-identical-twins.mjs';
 
 export const SITE_REPO = process.env.SITE_REPO || 'valerielinc-ops/frontaliere-si-o-no';
 const REPO = process.env.GH_REPO || process.env.GITHUB_REPOSITORY || '';
@@ -167,6 +174,70 @@ export function mirrorLockedPaths(manifestPath = MANIFEST_PATH) {
     // Manifest illeggibile → mappa vuota: nessun `no-root-cause` viene
     // spedito. Il fallimento sicuro e' non consegnare, non consegnare a caso.
     return new Map();
+  }
+}
+
+/**
+ * Perche' una voce `identical` NON scendera' qui da sola, o `null` se scende.
+ * Pura.
+ *
+ * `mode: identical` dice che il file e' condiviso col sito — cioe' che una fix
+ * scritta QUI verrebbe sovrascritta. **Non** dice che una fix scritta DI LA'
+ * arrivera' qui: sono due affermazioni diverse, e il codice le usava come una
+ * sola. La seconda dipende dai canali di discesa, che sono due e coprono insiemi
+ * disgiunti:
+ *
+ *   - `mirror-articles-engine.yml`, che gira sul sito e porta `engine/` (+ i due
+ *     file della sua allowlist). Sono `outOfScope` nel manifest **proprio
+ *     perche'** un trasporto ce l'hanno: qui contano come «scende», non come
+ *     bloccati — per questo `outOfScopePrefixes` resta vuoto;
+ *   - `transport-identical-twins.mjs`, che gira qui e tira giu' gli `identical`
+ *     del manifest — tranne quelli che `permanentBlock` esclude **per sempre**.
+ *
+ * I 25 gemelli `identical` sotto `.github/workflows/` cadono nel secondo caso
+ * (il token del ciclo non ha lo scope `workflows`: «restano una copia a mano»),
+ * ed e' esattamente cio' che un verdetto `blocked-workflows-scope` nomina.
+ *
+ * Un fixture e' incerto e non «no»: il trasporto lo copia solo se i suoi
+ * accoppiamenti locali sono a loro volta `identical`, e quella domanda vuole
+ * l'albero del repo, non il manifest. Qui vale come non-discendente perche' il
+ * lato sicuro dell'errore e' parcheggiare invece di chiudere: un parcheggio
+ * sbagliato ha una porta di rientro (`needs-human-sweep.yml`), una chiusura
+ * sbagliata no.
+ */
+export function descentBlock(entry) {
+  const forever = permanentBlock(entry, { outOfScopePrefixes: [] });
+  if (forever) return forever;
+  if (isFixture(entry?.path)) {
+    return 'fixture: il trasporto lo copia solo se i suoi accoppiamenti locali sono `identical`, e qui non e\' verificabile';
+  }
+  return null;
+}
+
+/**
+ * I path `identical` che nessun canale porta giu': `identical` **senza**
+ * «trasportato» (#972 item 4). Sorgente unica, come `mirrorLockedPaths()`.
+ *
+ * Serve a una decisione sola: una consegna che nomina uno di questi non
+ * autorizza a chiudere qui. La chiusura dei `blocked-*` poggia sulla frase «la
+ * fix scendera' col mirror, e la condizione che ha aperto questa issue non ci
+ * sara' piu'»; per un gemello che il trasporto rifiuta per sempre quella frase
+ * e' falsa, e la issue chiusa era l'unico portatore della diagnosi.
+ *
+ * Manifest illeggibile → insieme vuoto, cioe' nessun blocco alla chiusura: il
+ * fallimento sicuro qui e' il comportamento di prima.
+ */
+export function strandedTwinPaths(manifestPath = MANIFEST_PATH) {
+  try {
+    const man = JSON.parse(readFileSync(manifestPath, 'utf8'));
+    const out = new Set();
+    for (const f of man?.files || []) {
+      if (!MIRROR_LOCKED_MODES.has(f?.mode) || !f?.path) continue;
+      if (descentBlock(f)) out.add(f.path);
+    }
+    return out;
+  } catch {
+    return new Set();
   }
 }
 
@@ -340,7 +411,7 @@ export function citedAsMirrorBlocked(body, path) {
  *
  * @returns {{handoff: boolean, paths: string[], residual: string[], close: boolean, reason: string}}
  */
-export function handoffDecision({ verdict, body, lockedPaths, siteAbsent, siteNames } = {}) {
+export function handoffDecision({ verdict, body, lockedPaths, siteAbsent, siteNames, stranded } = {}) {
   if (!verdict || !HANDOFF_VERDICTS.has(verdict)) {
     return { handoff: false, paths: [], residual: [], close: false, reason: `verdetto non instradabile: ${verdict ?? 'nessuno'}` };
   }
@@ -351,6 +422,11 @@ export function handoffDecision({ verdict, body, lockedPaths, siteAbsent, siteNa
   const absent = siteAbsent ?? siteAbsentPaths();
   const locked = lockedPaths ?? mirrorLockedPaths();
   const names = siteNames ?? sitePathMap();
+  // `identical` non implica «trasportato» (#972 item 4): questi sono i gemelli
+  // che nessun canale porta giu'. Non cambiano l'instradamento — la diagnosi va
+  // consegnata comunque, e' di la' che si scrive la fix — ma tolgono alla
+  // consegna la facolta' di chiudere qui.
+  const stuckSet = stranded ?? strandedTwinPaths();
   // UN solo idioma di traduzione per i due rami: «come si chiama di la'» e' una
   // domanda sola, e la risposta viene dal manifest INTERO (`sitePathMap`), non
   // dai soli `identical`. `locked` resta consultata per prima perche' i test
@@ -387,7 +463,12 @@ export function handoffDecision({ verdict, body, lockedPaths, siteAbsent, siteNa
       // mirror porta sia quelli che il manifest dichiara inesistenti sul sito:
       // questi ultimi sono evidenza (#972 item 2), e contarli parcheggiava la
       // issue per una citazione invece che per lavoro aperto.
-      residual: paths.filter((p) => !locked.has(p) && !absent.has(p)),
+      //
+      // Un gemello `identical` che il trasporto rifiuta per sempre RESTA invece
+      // lavoro qui, anche se il manifest lo dichiara condiviso: la fix si scrive
+      // di la' ma la discesa e' una copia a mano, e nessuno la fara' se il solo
+      // posto che lo dice e' una issue chiusa (#972 item 4).
+      residual: paths.filter((p) => (!locked.has(p) || stuckSet.has(p)) && !absent.has(p)),
       // Consegna sì, chiusura no: vedi il blocco su `close` sopra.
       close: false,
       reason: `diagnosi bloccata dal mirror su ${sitePaths.join(', ')}`,
@@ -414,6 +495,26 @@ export function handoffDecision({ verdict, body, lockedPaths, siteAbsent, siteNa
       residual: [],
       close: false,
       reason: 'i soli path citati sono dichiarati inesistenti sul sito dal manifest: evidenza, non lavoro instradabile',
+    };
+  }
+  // `identical` non implica «trasportato» (#972 item 4). La chiusura dei
+  // `blocked-*` dice, nel commento che lascia: «quando la fix scendera' col
+  // mirror, la condizione che ha aperto questa issue non ci sara' piu'». Per un
+  // gemello che `transport-identical-twins.mjs` rifiuta per SEMPRE quella frase
+  // e' falsa — i 25 workflow `identical` sono il caso canonico, ed e'
+  // precisamente quello che un `blocked-workflows-scope` nomina: il fix di la'
+  // non scendera' mai da solo, la discesa e' una copia a mano, e chiudere qui
+  // fa evaporare l'unico posto in cui quella copia e' ancora richiesta. Si
+  // consegna lo stesso (la fix si scrive comunque di la') e si parcheggia,
+  // elencando i gemelli fermi come residuo: e' lavoro che resta qui.
+  const stuck = shippable.filter((p) => stuckSet.has(p));
+  if (stuck.length) {
+    return {
+      handoff: true,
+      paths: sitePaths,
+      residual: stuck,
+      close: false,
+      reason: `diagnosi con ${sitePaths.length} path del sito, di cui ${stuck.length} gemelli che nessun trasporto porta giu' (${stuck.join(', ')}): la discesa e' una copia a mano`,
     };
   }
   return { handoff: true, paths: sitePaths, residual: [], close: true, reason: `diagnosi con ${sitePaths.length} path del sito` };
@@ -591,7 +692,7 @@ function main() {
   const tail = d.close
     ? 'Chiudo qui: quando la fix scenderà col mirror, la condizione che ha aperto questa issue non ci sarà più.'
     : residual.length
-      ? `**Non la chiudo**: la diagnosi cita anche ${residual.map((p) => `\`${p}\``).join(', ')}, che il manifest NON dichiara \`identical\` — è lavoro di questo repo, il mirror non lo porterà, e questa issue ne resta l'unico portatore. La parcheggio in \`needs-human\` togliendo le label di routing, così non ri-paga run mentre aspetta.`
+      ? `**Non la chiudo**: la diagnosi cita anche ${residual.map((p) => `\`${p}\``).join(', ')}, che nessun canale di discesa porta giù — o non è \`identical\` (lavoro di questo repo), o è un gemello che \`transport-identical-twins.mjs\` rifiuta per sempre e la cui discesa è una copia a mano. In entrambi i casi questa issue ne resta l'unico portatore. La parcheggio in \`needs-human\` togliendo le label di routing, così non ri-paga run mentre aspetta.`
       : `**Non la chiudo**: il verdetto è \`no-root-cause\`, che copre anche il vicolo cieco vero — «consegnata» non implica «risolta», e una chiusura sbagliata farebbe evaporare l'unico portatore della diagnosi. La parcheggio in \`needs-human\` togliendo le label di routing: non ri-paga run, e \`needs-human-sweep.yml\` è la porta di rientro.`;
   runOriginSteps(originWriteSteps({
     issue: ISSUE,
