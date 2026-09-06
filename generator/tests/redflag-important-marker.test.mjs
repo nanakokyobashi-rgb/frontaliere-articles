@@ -120,6 +120,30 @@ test('un secondo finding sulla stessa riga resta ROSSO (#977)', () => {
   assert.equal(REDFLAG_IMPORTANT_RE.test('- `a.mjs:L1`: 🟡 Nit: il pattern `🔴 Important:` va documentato.'), false);
 });
 
+// --- il glifo-ancora non puo' stare dentro una citazione (#1106) ------------
+// La clausola 1-bis apriva la citazione al glifo: con un `.*` davanti, l'ancora
+// poteva essere un 🟡 CITATO, e da li' il controllo di apri-citazione non vedeva
+// piu' il backtick (o l'`«`) che aveva aperto la citazione. Il body qui sotto e'
+// la forma verbatim che ha respinto la review di questa stessa PR — `Important: 0`,
+// `## LGTM`, e nessun marker vero.
+test('un 🔴 dentro un code span che porta ANCHE il glifo non e\' un marker (#1106)', () => {
+  const line =
+    "- `scripts/ci/lib/constants.mjs:L147`: 🟡 Nit: verificato eseguendo la regex vecchia e la nuova: `Due 🟡 nit non-funnel, nessun 🔴 Important — merge libero.` era `false`, ora e' `true`.";
+  assert.equal(REDFLAG_IMPORTANT_RE.test(line), false);
+  assert.equal(REDFLAG_IMPORTANT_RE.test(`## Findings (Important: 0, Nit: 1)\n\n${line}\n\n## LGTM`), false);
+});
+
+test("il sibling con «»: glifo e 🔴 dentro la STESSA citazione (#1106)", () => {
+  // Stessa classe, altra forma di citazione: senza il prefisso attraversante,
+  // l'ancora finiva sul 🟡 interno alle «» e il gate diventava rosso.
+  assert.equal(REDFLAG_IMPORTANT_RE.test('- `a.mjs:L1`: 🟡 Nit: la review diceva «🟡 nit e 🔴 Important: y».'), false);
+});
+
+test('la narrow di #1106 non spegne il secondo finding VERO sulla riga (#977)', () => {
+  assert.equal(REDFLAG_IMPORTANT_RE.test('- `a.mjs:L1`: 🟡 Nit: x. 🔴 Important: y'), true);
+  assert.equal(REDFLAG_IMPORTANT_RE.test('- `a.mjs:L1`: 🟡 Nit: rinomina `x`. 🔴 Important: la sitemap perde gli slug'), true);
+});
+
 // --- coerenza col conteggio dichiarato, nelle due direzioni -----------------
 const declared = (body) => {
   const header = body.match(/^#{1,4}\s*Findings\b[^\n]*/m);

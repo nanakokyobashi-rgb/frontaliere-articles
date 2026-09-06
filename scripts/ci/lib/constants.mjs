@@ -95,7 +95,8 @@ export const VITEST_SHARD_NAME_RE = /^vitest shard \d+\/\d+$/;
  *      e' testo riportato, non il verdetto della riga. `🔴` NON e' escluso, di
  *      proposito: un 🔴 decorativo prima del marker non deve poterlo nascondere —
  *      dove la regola e' incerta si sbaglia in direzione ROSSA.
- *   1-bis. `|.*[🟡🟢❓](?:[^\n`«]|`[^\n`]*`)*` — la clausola 1 da sola era l'UNICA
+ *   1-bis. `|(?:[^\n`«]|`[^\n`]*`)*[🟡🟢❓](?:[^\n`«]|`[^\n`]*`)*` — la clausola 1 da
+ *      sola era l'UNICA
  *      direzione in cui questa regex poteva SPEGNERE il gate, contro il principio
  *      appena dichiarato (#977): `… 🟡 Nit: x. 🔴 Important: y` — due finding sulla
  *      STESSA riga — diventava verde, e con un `## LGTM` la PR si mergiava con un
@@ -108,6 +109,21 @@ export const VITEST_SHARD_NAME_RE = /^vitest shard \d+\/\d+$/;
  *      tale (`🟡 Nit: la review diceva 🔴 Important: x`, senza «» ne' backtick)
  *      torna ROSSA: e' il verso giusto in cui sbagliare, ed e' la forma che
  *      REVIEW.md non produce.
+ *
+ *      Il prefisso PRIMA del glifo e' lo stesso attraversamento di quello dopo, e
+ *      non un `.*` (#1106). Con `.*` il glifo-ancora poteva stare DENTRO una
+ *      citazione, e da li' il controllo di apri-citazione non vedeva piu' il
+ *      backtick (o l'`«`) che l'aveva aperta: una riga come
+ *      `🟡 Nit: verificato che ``Due 🟡 nit, nessun 🔴 Important — merge libero.`` era
+ *      false` tornava ROSSA pur non avendo nessun marker. Misurato sulla review di
+ *      questa stessa PR, che portava `## Findings (Important: 0, Nit: 3)` e
+ *      `## LGTM` e veniva comunque respinta da `review-gate.mjs`. Il prefisso
+ *      attraversa i code span CHIUSI come unita' e si ferma su un `«` o su uno
+ *      span APERTO, quindi un glifo citato non puo' piu' fare da ancora — in
+ *      entrambe le forme di citazione. Il ramo resta cio' che intendeva ammettere:
+ *      un secondo finding VERO sulla stessa riga. Effetto collaterale voluto:
+ *      l'alternanza e' disgiunta sul primo carattere (backtick vs non-backtick),
+ *      quindi il lead torna lineare dove `.*[🟡🟢❓]` backtrackava.
  *   2. `(?<!\s\`)(?<!^\`)` — il marker incollato a un backtick sta dentro un code
  *      span solo se quel backtick APRE lo span, cioe' e' a inizio riga o preceduto
  *      da spazio: `` `🔴 Important: x` `` e' una fixture citata. Il backtick che
@@ -137,14 +153,14 @@ export const VITEST_SHARD_NAME_RE = /^vitest shard \d+\/\d+$/;
  * `stale-pr-rescuer.yml` grepano la STESSA forma in bash — un `if:`/`run:` YAML non
  * puo' importare questa regex. `grep` e' gia' orientato alla riga, quindi il pattern
  * bash e' questa `.source` senza i `\n` delle classi negate:
- * `grep -qP '^(?:[^🟡🟢❓]*|.*[🟡🟢❓](?:[^`«]|`[^`]*`)*)(?<!\s\`)(?<!^\`)🔴\s*\*{0,2}\s*Important\s*\*{0,2}\s*[:—-]'`.
+ * `grep -qP '^(?:[^🟡🟢❓]*|(?:[^`«]|`[^`]*`)*[🟡🟢❓](?:[^`«]|`[^`]*`)*)(?<!\s\`)(?<!^\`)🔴\s*\*{0,2}\s*Important\s*\*{0,2}\s*[:—-]'`.
  * I due lookbehind sono a lunghezza fissa, quindi PCRE1 (`grep -P`) li accetta —
  * uno solo, `(?<!(?:^|\s)\`)`, sarebbe a lunghezza variabile e li' non compila.
  * Le tre copie non possono piu' divergere in silenzio: il guard `mirror bash` di
  * `generator/tests/redflag-important-marker.test.mjs` deriva il pattern atteso da
  * questa `.source` e lo pretende, verbatim, in entrambi i workflow.
  */
-export const REDFLAG_IMPORTANT_RE = /^(?:[^\n🟡🟢❓]*|.*[🟡🟢❓](?:[^\n`«]|`[^\n`]*`)*)(?<!\s`)(?<!^`)🔴\s*\*{0,2}\s*Important\s*\*{0,2}\s*[:—-]/mu;
+export const REDFLAG_IMPORTANT_RE = /^(?:[^\n🟡🟢❓]*|(?:[^\n`«]|`[^\n`]*`)*[🟡🟢❓](?:[^\n`«]|`[^\n`]*`)*)(?<!\s`)(?<!^`)🔴\s*\*{0,2}\s*Important\s*\*{0,2}\s*[:—-]/mu;
 
 /**
  * File la cui modifica impedisce STRUTTURALMENTE al reviewer Claude di girare

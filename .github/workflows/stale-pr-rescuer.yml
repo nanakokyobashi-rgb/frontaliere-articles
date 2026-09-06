@@ -220,7 +220,7 @@ jobs:
             # orientato alla riga, quindi il pattern e' REDFLAG_IMPORTANT_RE.source senza i
             # `\n` delle classi negate; il guard `mirror bash` di
             # generator/tests/redflag-important-marker.test.mjs lo pretende verbatim.
-            elif echo "$LAST_BODY" | grep -qP '^(?:[^🟡🟢❓]*|.*[🟡🟢❓](?:[^`«]|`[^`]*`)*)(?<!\s`)(?<!^`)🔴\s*\*{0,2}\s*Important\s*\*{0,2}\s*[:—-]' && [ "$LAST_CID" = "$HEAD" ]; then
+            elif echo "$LAST_BODY" | grep -qP '^(?:[^🟡🟢❓]*|(?:[^`«]|`[^`]*`)*[🟡🟢❓](?:[^`«]|`[^`]*`)*)(?<!\s`)(?<!^`)🔴\s*\*{0,2}\s*Important\s*\*{0,2}\s*[:—-]' && [ "$LAST_CID" = "$HEAD" ]; then
               CLASS="B"
               # Regex allineata a REDFLAG_IMPORTANT_RE: un `grep -q "🔴"` nudo
               # scatterebbe anche sulla prosa di NEGAZIONE del reviewer ("zero
