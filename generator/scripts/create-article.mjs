@@ -2980,7 +2980,7 @@ function registerLockTargets(id, sectionName = SECTION_NAME) {
 // consistently present (transaction committed) or consistently absent (nothing
 // written yet) is cleared and the run proceeds — otherwise one interrupted run
 // would brick every later run on a corpus that is in fact fine.
-function resolveRegisterLockAtStartup() {
+export function resolveRegisterLockAtStartup() {
   const outcome = resolveRegisterLockImpl(PROJECT_ROOT, registerLockTargets, SECTION_NAME);
   for (const r of outcome.resolved) {
     console.error(`  ♻️  ${r.file}: marker di registrazione lasciato da un run interrotto`);
@@ -16268,6 +16268,20 @@ export async function registerArticleFiles(data, opts = {}) {
   if (!data || !data.id || !data.content?.it?.title) {
     throw new Error('registerArticleFiles: data.id and data.content.it.title are required');
   }
+  // PRIMA del guard append-only, non dopo (issue #964). Sul percorso di
+  // scrittura CONDIVISO perche' generate-daily-brief-article.mjs,
+  // generate-events-digest-article.mjs, generate-border-wait-ranking-article.mjs
+  // e publish-journalist-article.mjs importano registerArticleFiles()
+  // direttamente e non hanno il `main()` di questo file: senza questa riga un
+  // marker orfano li farebbe morire su `beginRegisterLock()` con un errore duro
+  // anche quando il corpus e' perfettamente coerente.
+  // E prima del guard perche' dopo un kill a meta' registrazione l'id E' gia'
+  // nella registry: il guard vedrebbe `already exists` e uscirebbe con un
+  // messaggio che manda a rinfrescare i body di un corpus SPEZZATO, mentre la
+  // diagnosi di SPLIT — l'unica che nomina i file scritti e quelli mancanti, ed
+  // e' l'intera ragione d'essere del lock — non verrebbe mai emessa. Entrambi
+  // fermano il run; solo uno dice dove guardare.
+  resolveRegisterLockAtStartup();
   if (checkArticleIdExists(data.id)) {
     throw new Error(
       `registerArticleFiles: article "${data.id}" already exists (registration is append-only). ` +
@@ -16290,14 +16304,6 @@ export async function registerArticleFiles(data, opts = {}) {
   assertTranslationsPassFactualityGates(data);
   clampSeoDescriptions(data);
   const slugs = deriveAndSanitizeArticleSlugs(data);
-  // Sul percorso di scrittura CONDIVISO, per la stessa ragione argomentata
-  // sopra: generate-daily-brief-article.mjs, generate-events-digest-article.mjs,
-  // generate-border-wait-ranking-article.mjs e publish-journalist-article.mjs
-  // importano registerArticleFiles() direttamente e non hanno il `main()` di
-  // questo file, quindi non passano mai dal controllo d'avvio. Senza questa
-  // riga un marker orfano li farebbe morire su `beginRegisterLock()` con un
-  // errore duro anche quando il corpus e' perfettamente coerente.
-  resolveRegisterLockAtStartup();
   beginRegisterLock(data.id);
   modifyRouterTs(data);
   modifyBlogArticlesTsx(data);

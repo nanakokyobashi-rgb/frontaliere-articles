@@ -49,6 +49,7 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 import {
   registerArticleFiles,
   checkArticleIdExists,
+  resolveRegisterLockAtStartup,
   translateArticle,
   enforceStrongInternalLinks,
   findBestFallbackImage,
@@ -398,6 +399,18 @@ async function processDoc(db, FieldValue, docSnap) {
 }
 
 async function main() {
+  // Il marker di un run interrotto va risolto PRIMA di decidere sulla presenza
+  // di un id (issue #964): dopo un kill a meta' registrazione l'id e' gia' nella
+  // registry, quindi il `checkArticleIdExists()` di processDoc() risponde `true`
+  // sopra un corpus SPEZZATO e il doc verrebbe marcato `failed` per «id already
+  // registered», senza che la diagnosi di SPLIT — l'unica che nomina i file
+  // scritti e quelli mancanti — venga mai emessa. Qui, e non dentro processDoc():
+  // li' il try/catch la trasformerebbe nell'ennesimo doc fallito e il ciclo
+  // continuerebbe a lavorare sopra il corpus spezzato. Serve perche' questo
+  // produttore importa registerArticleFiles() direttamente e non passa mai dal
+  // `main()` di create-article.mjs.
+  resolveRegisterLockAtStartup();
+
   const { db, FieldValue } = await initDb();
 
   const snap = await db.collection('journalist_articles').where('status', '==', 'queued').get();
