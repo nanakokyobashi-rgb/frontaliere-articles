@@ -34,11 +34,14 @@ import {
   hasUsableTranslatedText,
   findUnreadableContentEvidence,
   isTopicGateAbortVerdict,
+  resolveContentFieldSources,
+  normalizeItalianContentFromPayload,
 } from '../scripts/lib/body2-payload-verdict.mjs';
 import { translateFieldFreeMt } from '../scripts/lib/article-free-mt.mjs';
 import {
   localesNeedingTranslation,
   enrichEventsWithLocaleFallbackTranslations,
+  STRICT_NULL_DROP_WARNING,
 } from '../scripts/lib/events-utils.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -457,8 +460,26 @@ describe('quale predicato, dove', () => {
 
   test('events-utils e la cascata free-MT usano il predicato SEVERO', () => {
     const events = leggi('events-utils.mjs');
-    assert.equal(/hasUsableTranslatedText\s*\(/.test(events), false, 'events-utils non giudica prosa di un modello');
     assert.ok(/hasUsableContentText\s*\(/.test(events));
+    // Il vincolo non e' «la stringa non compare»: dal #939 item 3
+    // `warnStrictPredicateDrops()` usa il predicato per-locale per NOMINARE
+    // gli scarti ambigui — e' diagnostica, non un giudizio. Il vincolo vero e'
+    // che nessun ALTRO punto del file lo consulti: li' deciderebbe se un
+    // valore si tiene, ed e' esattamente cio' che il ramo «macchina» vieta.
+    const corpo = events.replace(/^\s*(?:\/\/|\*).*$/gm, '');
+    const dentroWarn = corpo.slice(
+      corpo.indexOf('function warnStrictPredicateDrops('),
+      corpo.indexOf('function warnStrictPredicateDrops(') === -1
+        ? 0
+        : corpo.indexOf('\n}', corpo.indexOf('function warnStrictPredicateDrops(')),
+    );
+    const totali = (corpo.match(/hasUsableTranslatedText\s*\(/g) || []).length;
+    const nelWarn = (dentroWarn.match(/hasUsableTranslatedText\s*\(/g) || []).length;
+    assert.equal(
+      totali - nelWarn,
+      0,
+      'events-utils non giudica prosa di un modello: il predicato per-locale vive solo nel warning',
+    );
 
     const freeMt = leggi('article-free-mt.mjs');
     assert.ok(
@@ -474,5 +495,107 @@ describe('quale predicato, dove', () => {
     assert.ok(/return hasUsableTranslatedText\(value, targetLang\) \? value : null;/.test(freeMt));
     assert.equal(hasUsableContentText('Null'), false, 'il predicato severo scarta ogni grafia');
     assert.equal(hasUsableTranslatedText('Null', 'de'), true, 'quello per-locale no, su de');
+  });
+});
+
+// ── #939 item 2 — la deroga per-locale vale solo sul candidato ETICHETTATO ──
+
+describe('normalizzatore: la provenienza e’ il candidato, non la richiesta', () => {
+  test('con primaryLocale `de` un `Null` sotto `content.de` e’ prosa e si tiene', () => {
+    const payload = { content: { de: { title: 'Null', excerpt: 'Ausstellung', body1: 'x', body2: 'y', body3: 'z' } } };
+    const sources = resolveContentFieldSources(payload, 'de');
+    assert.equal(sources.title?.value, 'Null', 'il modello DICHIARA di scrivere in de: `Null` e’ «zero»');
+    assert.equal(sources.title?.isLocale, true);
+  });
+
+  test('con primaryLocale `de` un `Null` in `content` NUDO resta un marker', () => {
+    // Il contenitore non dichiara nessuna lingua: ramo «macchina», tutte le
+    // grafie. Con la deroga applicata a tutti i candidati sarebbe diventato un
+    // titolo vero, e da li’ lo slug e il canonical.
+    const payload = { content: { title: 'Null', excerpt: 'Ausstellung' } };
+    const sources = resolveContentFieldSources(payload, 'de');
+    assert.equal(sources.title, null, 'un contenitore non etichettato non merita la deroga');
+    assert.equal(sources.excerpt?.value, 'Ausstellung', 'gli altri campi dello stesso candidato non sono toccati');
+  });
+
+  test('con primaryLocale `de` un `Null` alla RADICE resta un marker', () => {
+    const payload = { title: 'NULL', excerpt: 'Ausstellung' };
+    assert.equal(resolveContentFieldSources(payload, 'de').title, null);
+    assert.equal(normalizeItalianContentFromPayload(payload, 'de').title, '');
+  });
+
+  test('il candidato etichettato non copre quello nudo: il campo scende, non si eredita la deroga', () => {
+    // `content.de.title` assente → si scende su `content` nudo, che vale
+    // `Null`: il fallback NON deve portarsi dietro la deroga del primo.
+    const payload = { content: { de: { excerpt: 'Ausstellung' }, title: 'Null' } };
+    assert.equal(resolveContentFieldSources(payload, 'de').title, null);
+  });
+
+  test('su `it` i due predicati coincidono: nessun cambio di comportamento', () => {
+    for (const grafia of ['null', 'Null', 'NULL', '"null"']) {
+      const payload = { content: { it: { title: grafia } }, excerpt: 'testo' };
+      assert.equal(resolveContentFieldSources(payload, 'it').title, null, grafia);
+    }
+  });
+});
+
+// ── #939 item 3 — la sostituzione silenziosa diventa misurabile ────────────
+
+describe('events: il warning nominato sullo scarto ambiguo', () => {
+  const cattura = async (fn) => {
+    const originale = console.warn;
+    const righe = [];
+    console.warn = (...args) => righe.push(args.join(' '));
+    try { await fn(); } finally { console.warn = originale; }
+    return righe;
+  };
+
+  test('un titolo `de` che vale «Null» viene scartato E dichiarato', async () => {
+    const events = [{ id: 'e1', titleByLocale: { it: 'Sagra della castagna', de: 'Null' } }];
+    const righe = await cattura(() => enrichEventsWithLocaleFallbackTranslations(events, {}, {
+      delayMs: 0,
+      translateFn: async ({ targetLang }) => `titolo-${targetLang}`,
+    }));
+    const nominate = righe.filter((r) => r.includes(STRICT_NULL_DROP_WARNING));
+    assert.equal(nominate.length, 1, 'lo scarto ambiguo deve lasciare una traccia grepp-abile');
+    assert.match(nominate[0], /titleByLocale\.de/);
+    assert.match(nominate[0], /"Null"/);
+  });
+
+  test('gli scarti NON ambigui restano muti: il volume del feed non annega il caso', async () => {
+    // `null` serializzato su `de`, e ogni grafia su it/en/fr: gap ordinari.
+    const events = [{
+      id: 'e1',
+      titleByLocale: { it: 'Sagra', de: 'null', en: 'NULL', fr: 'Null' },
+      descriptionByLocale: { it: 'Castagne' },
+    }];
+    const righe = await cattura(() => enrichEventsWithLocaleFallbackTranslations(events, {}, {
+      delayMs: 0,
+      translateFn: async () => '',
+    }));
+    assert.deepEqual(righe.filter((r) => r.includes(STRICT_NULL_DROP_WARNING)), []);
+  });
+
+  test('il warning non cambia il verdetto: la chiave cade comunque', async () => {
+    const events = [{ id: 'e1', descriptionByLocale: { it: 'Castagne e vin brule', de: 'NULL' } }];
+    const out = await cattura(() => enrichEventsWithLocaleFallbackTranslations(events, {}, {
+      delayMs: 0,
+      translateFn: async () => '',
+    }));
+    assert.ok(out.some((r) => r.includes('descriptionByLocale.de')));
+  });
+
+  test('e vale anche sul pass-through di `deadline`, dove nessuna traduzione gira', async () => {
+    const events = [{ id: 'e1', titleByLocale: { it: 'Sagra', de: 'NULL' } }];
+    let out;
+    const righe = await cattura(async () => {
+      out = await enrichEventsWithLocaleFallbackTranslations(events, {}, {
+        delayMs: 0,
+        deadline: Date.now() - 1,
+        translateFn: async () => { throw new Error('oltre il deadline non si traduce'); },
+      });
+    });
+    assert.equal('de' in out[0].titleByLocale, false);
+    assert.equal(righe.filter((r) => r.includes(STRICT_NULL_DROP_WARNING)).length, 1);
   });
 });

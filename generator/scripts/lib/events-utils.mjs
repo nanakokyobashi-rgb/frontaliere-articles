@@ -21,7 +21,7 @@ import { truncateSlugAtWordBoundary } from './slug-truncate.mjs';
 import CANTON_URL_SLUGS from '../../data/canton-url-slugs.json' with { type: 'json' };
 import { MUNICIPALITIES } from '../../data/municipalities.ts';
 import { freeTranslateWithRetry } from './free-translate.mjs';
-import { hasUsableContentText } from './body2-payload-verdict.mjs';
+import { hasUsableContentText, hasUsableTranslatedText } from './body2-payload-verdict.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 // `../../..`: same one-level-deeper correction as evergreen-article-refresh.mjs
@@ -1008,14 +1008,55 @@ export function localesNeedingTranslation(byLocale, locales = ['it', 'en', 'de',
  *
  * Ritorna la STESSA reference quando non c'e' niente da togliere, cosi' il
  * contratto «mai mutare l'input» resta e le mappe sane non vengono copiate.
+ *
+ * `label` nomina il campo nel warning di sotto; e' solo diagnostica.
  */
-function stripUnusableLocaleValues(byLocale) {
+function stripUnusableLocaleValues(byLocale, label = 'byLocale') {
   if (!byLocale || typeof byLocale !== 'object') return byLocale;
   const poisoned = Object.keys(byLocale).filter((l) => !hasUsableContentText(byLocale[l]));
   if (poisoned.length === 0) return byLocale;
+  warnStrictPredicateDrops(poisoned, byLocale, label);
   const cleaned = { ...byLocale };
   for (const l of poisoned) delete cleaned[l];
   return cleaned;
+}
+
+/**
+ * Il prefisso del warning di sotto. Costante esportata perche' chi misura la
+ * frequenza sul feed vero grepp[i] UNA stringa invece di riscriverla (AGENTS.md
+ * #6): il test la importa, e chi legge i log dei crawler cerca questa.
+ */
+export const STRICT_NULL_DROP_WARNING = '[events] null-marker: predicato severo';
+
+/**
+ * Dichiara le chiavi che il ramo «macchina» scarta e che il ramo «prosa»
+ * avrebbe TENUTO — cioe' i soli `Null`/`NULL` maiuscoli su un locale in cui
+ * `null` e' una parola della lingua (oggi il solo `de`).
+ *
+ * Perche' esiste. Su quelle chiavi la scelta di `hasUsableContentText` non e'
+ * neutra: se il titolo tedesco vale DAVVERO `Null` — e ne esistono, come nome
+ * proprio di mostre e concerti — il valore e' giusto, viene cancellato lo
+ * stesso, e `fillLocaleGaps` lo riempie dal `sourceLocale` italiano. E' il
+ * modo di rottura di #831 (testo italiano sotto `/de/`), qui scelto di
+ * PROPOSITO perche' su questo ramo il falso positivo pubblica il marker
+ * mentre il falso negativo costa un retry. La scelta regge; quello che
+ * mancava e' che si VEDA: nessun gate a valle distingue questa sostituzione
+ * da una traduzione riuscita, quindi senza questa riga la frequenza sul feed
+ * vero resta un'ipotesi invece di una misura (#939 item 3).
+ *
+ * Volutamente NON si avvisa sugli altri scarti: una colonna vuota, un `null`
+ * serializzato, un `NULL` su `it`/`en`/`fr` sono gap ordinari del feed, e
+ * annegare il caso ambiguo nel loro volume equivarrebbe a non emetterlo.
+ */
+function warnStrictPredicateDrops(poisoned, byLocale, label) {
+  const ambigui = poisoned.filter((l) => hasUsableTranslatedText(byLocale[l], l));
+  if (ambigui.length === 0) return;
+  for (const l of ambigui) {
+    console.warn(
+      `${STRICT_NULL_DROP_WARNING}: ${label}.${l} = ${JSON.stringify(byLocale[l])} scartato come marker; `
+        + `se e' la parola della lingua, il locale cadra' sul testo della sorgente`,
+    );
+  }
 }
 
 /**
@@ -1028,7 +1069,7 @@ function stripUnusableLocaleValues(byLocale) {
  */
 async function fillLocaleGaps(byLocale, cache, { fieldType, locales, delayMs, translateFn }) {
   // Prima di ogni ramo, compresi i due che non entrano nel loop.
-  const clean = stripUnusableLocaleValues(byLocale);
+  const clean = stripUnusableLocaleValues(byLocale, `${fieldType}ByLocale`);
   const needing = localesNeedingTranslation(clean, locales);
   if (needing.length === 0) return clean;
 
@@ -1105,8 +1146,10 @@ export async function enrichEventsWithLocaleFallbackTranslations(events, cache, 
     // evento spedito non tradotto tiene il testo della sorgente, ma un `NULL`
     // del feed non e' testo della sorgente — e' il modo in cui quel feed dice
     // «colonna vuota», e senza questo verrebbe pubblicato ora.
-    if (next.titleByLocale) next.titleByLocale = stripUnusableLocaleValues(next.titleByLocale);
-    if (next.descriptionByLocale) next.descriptionByLocale = stripUnusableLocaleValues(next.descriptionByLocale);
+    if (next.titleByLocale) next.titleByLocale = stripUnusableLocaleValues(next.titleByLocale, 'titleByLocale');
+    if (next.descriptionByLocale) {
+      next.descriptionByLocale = stripUnusableLocaleValues(next.descriptionByLocale, 'descriptionByLocale');
+    }
     if (deadline !== null && Date.now() >= deadline) {
       // Shallow-copied like every other element, so the "new array, never
       // mutated in place" contract holds on the timed-out tail too.
