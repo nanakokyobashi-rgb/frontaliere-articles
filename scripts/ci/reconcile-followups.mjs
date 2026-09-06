@@ -94,7 +94,7 @@ export function hasEnumeratedItems(body) {
   if (numberedSections >= 2) return true;
   // Lista ordinata con lead in grassetto: `1. **Titolo.**` / `2. **Titolo.**` (#831, #832).
   // Il grassetto e' cio' che distingue l'item enumerato dai passi di una procedura numerata,
-  // ma solo se e' un TITOLO e non un'enfasi in mezzo alla riga (`isBoldTitleLead`, #926).
+  // ma solo se apre a inizio riga e chiude sulla stessa riga (`isBoldTitleLead`, #926).
   const lines = b.split('\n');
   const orderedBoldItems = lines.filter((l) => {
     const m = /^[ \t]*\d+[.)][ \t]+(.*)$/.exec(l);
@@ -138,23 +138,32 @@ function stripFencedBlocks(text) {
 }
 
 /**
- * Il resto di una riga di lista inizia con un TITOLO in grassetto? (#926)
+ * Il resto di una riga di lista inizia con un lead in grassetto? (#926)
  *
- * `1. **Titolo.** Testo` e `- **Titolo**: testo` sono item enumerati;
- * `2. **nota** finale che non e' un item` e' enfasi in mezzo alla prosa, e la
- * vecchia regex (che chiedeva solo che la riga *iniziasse* con `**`) non le
- * distingueva. Criterio: il grassetto chiude sulla stessa riga e o porta dentro
- * la punteggiatura di chiusura, o e' seguito da fine riga o da un separatore.
+ * Criterio deliberatamente minimo: il grassetto apre a inizio riga e CHIUDE
+ * sulla stessa riga. Niente requisiti su punteggiatura o su cosa segue.
+ *
+ * La versione precedente chiedeva anche che il grassetto portasse dentro la
+ * punteggiatura (`**Titolo.**`) o fosse seguito da fine riga o da un separatore
+ * (`**Titolo**:`, `**Titolo** —`), per escludere l'enfasi in mezzo alla prosa
+ * (`2. **nota** finale che non e' un item`). Ma quel caso non e' separabile
+ * lessicalmente dal lead-titolo piu' comune di questo repo — grassetto che
+ * finisce con inline-code e continua con testo qualsiasi, nella forma
+ * "- **<inline-code>** (alimenta …)" (#551, #549). Misurato sulle issue
+ * `follow-up` vive, il criterio stretto trasformava aggregati reali in
+ * single-item, cioe' rendeva `closeEligible` una
+ * issue i cui item sono per davvero due: auto-chiusura sulla prova di UN solo
+ * item, il drop silenzioso che #568 esiste per impedire.
+ *
+ * Il falso positivo che resta (un grassetto d'enfasi conta come item, e la issue
+ * non si auto-chiude) fa crescere la coda; il falso negativo evitato e'
+ * irreversibile. La direzione dell'errore e' scelta, non subita.
  *
  * @param {string} rest testo della riga dopo il marcatore di lista
  * @returns {boolean}
  */
 function isBoldTitleLead(rest) {
-  const m = /^\*\*(?![ \t])((?:[^*\n]|\*(?!\*))+)\*\*(.*)$/.exec(rest);
-  if (!m) return false;
-  if (/[.:!?]$/.test(m[1].trim())) return true;
-  const tail = m[2].trim();
-  return tail === '' || /^[:.;—–-]/.test(tail);
+  return /^\*\*(?![ \t])(?:[^*\n]|\*(?!\*))+\*\*/.test(rest);
 }
 
 /**
