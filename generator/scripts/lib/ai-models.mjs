@@ -2520,6 +2520,18 @@ function providerCooldownSkipLine(model, provider, skipPhrase) {
 }
 const PROVIDER_COOLDOWN_SKIP_RE = /:\s*skipped\s+\u2014\s+provider\s+\S+\s/i;
 
+// ── IL TAGLIO NON DEVE CADERE DENTRO IL SEPARATORE (#976 item 3) ────────────
+//
+// L'unica voce a testo libero di `errors` e' `${model}: ${msg.slice(0, 200)}`,
+// e l'array viene poi unito con ` | `. Se il messaggio del provider contiene
+// quel separatore proprio a cavallo del 200esimo carattere, il taglio lascia
+// in coda uno spazio o una pipe orfana e il join produce ` |  | ` / ` | | `:
+// una forma degenere che nessun lettore — ne' `splitErrorEntries`, ne' un
+// umano — puo' distinguere da un separatore vero, e che resta comunque dentro
+// la stringa che `classifyExhaustionCause` classifica. Si tronca la coda:
+// spazi e pipe orfane non portano informazione, il contenuto non si tocca.
+const ENTRY_TAIL_SEPARATOR_RE = /[\s|]+$/;
+
 // Single source of truth for what counts a "last-resort" model and its
 // prefix (AGENTS.md #6 — do not re-declare 'local/'/'omniroute/'/'claude-cli/'
 // yet again below). Declared here, ahead of _freshLastResortStats, because
@@ -7797,7 +7809,7 @@ export async function callLLM(messages, opts = {}) {
       // interamente da flap dava `transient: 0` → `transientExhaustion: false`
       // → nessun differimento e un Bug «Workflow Failure» aperto per un guasto
       // che questo stesso modulo definisce transitorio per costruzione.
-      const errorRow = errors.push(`${model}: ${msg.slice(0, 200)}`) - 1;
+      const errorRow = errors.push(`${model}: ${msg.slice(0, 200).replace(ENTRY_TAIL_SEPARATOR_RE, '')}`) - 1;
       _recordLastResortOutcome(model, 'failed');
 
       // claude CLI binary missing (spawn ENOENT — install step failed/was
@@ -8326,9 +8338,36 @@ export function classifyExhaustionCause(errors) {
   // exhaustion-disposition.mjs, che degrada al comportamento odierno quando il
   // campo manca.
   const providerCooldownSkips = { total: 0, transient: 0, persistent: 0 };
+  // ── UNA VOCE CHE PARLA DUE VOCABOLARI (#976 item 1) ──────────────────────
+  //
+  // Era `if (transientRe.test) ... else if (persistentRe.test)`: il transitorio
+  // vinceva sempre, ovunque le due frasi cadessero nella stringa. Finche' una
+  // voce conteneva UNA causa sola l'ordine non si vedeva; ma la voce a testo
+  // libero e' `${model}: ${msg}`, cioe' il messaggio del provider ripassato tale
+  // e quale, e quel messaggio porta con se' la propria coda — dopo il
+  // recupero delle voci spezzate da un ` | ` interno (#969), `m: 401
+  // Unauthorized | upstream temporarily unavailable` e' UNA voce che matcha
+  // entrambe le regex. Con la vittoria incondizionata del transitorio, un 401
+  // — guasto che non si ripara da solo — usciva «transitorio» e votava per il
+  // differimento verde: esattamente l'esito senza-articolo-e-senza-allarme che
+  // questo tally esiste per impedire.
+  //
+  // Vince la causa che compare PRIMA. Non e' una preferenza fra i due secchi
+  // (invertire la polarita' a tavolino avrebbe ribaltato i 429 di OpenAI, che
+  // dicono `insufficient_quota` e matchano `insufficient`): e' la struttura
+  // della voce. Il primo pezzo dopo `${model}: ` e' la causa primaria, cio' che
+  // segue e' coda del provider o continuazione ricucita. A parita' di indice —
+  // possibile solo se le due regex matchano nello STESSO punto — resta il
+  // transitorio, polarita' invariata rispetto a prima.
+  const causeIndex = (re, reason) => {
+    const m = String(reason == null ? '' : reason).match(re);
+    return m ? m.index : -1;
+  };
   for (const reason of errors) {
-    const isTransient = transientRe.test(reason);
-    const isPersistent = persistentRe.test(reason);
+    const transientAt = causeIndex(transientRe, reason);
+    const persistentAt = causeIndex(persistentRe, reason);
+    const isTransient = transientAt >= 0 && (persistentAt < 0 || transientAt <= persistentAt);
+    const isPersistent = !isTransient && persistentAt >= 0;
     if (isTransient) transient += 1;
     else if (isPersistent) persistent += 1;
     // neither → ambiguous, left out of the tally
