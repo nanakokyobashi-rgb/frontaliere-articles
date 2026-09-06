@@ -115,9 +115,10 @@
  *   node scripts/ci/loop-drift-check.mjs --init      # (ri)registra le baseline correnti (TUTTE le voci)
  *   node scripts/ci/loop-drift-check.mjs --init --only <path>[,<path>]
  *                                                    # ...solo quelle voci (issue #653)
- *   node scripts/ci/loop-drift-check.mjs --init --force
- *                                                    # ...anche sulle voci con un drift
- *                                                    #    APERTO, che di default rifiuta (issue #978)
+ *   node scripts/ci/loop-drift-check.mjs --init --only <path> --force
+ *                                                    # ...anche su quelle voci se hanno un drift
+ *                                                    #    APERTO, che di default vengono SALTATE
+ *                                                    #    (le altre si registrano, exit 1; issue #978)
  *   node scripts/ci/loop-drift-check.mjs --no-provenance  # salta la verifica di provenienza (iterazione locale)
  *
  * Env:
@@ -364,6 +365,72 @@ function initWriteVerdict(entry, now, base, state) {
   }
 
   return { blocked: false, why: '' };
+}
+
+/**
+ * L'errore d'uso di `--force`, o null se l'uso e' legittimo (issue #978).
+ *
+ * `--force` non e' «ignora i guard», e' «QUESTE voci le sto chiudendo io».
+ * Senza `--only` riscriverebbe tutte e trecento le voci del manifest, comprese
+ * quelle parcheggiate in `both-moved` in attesa di una riconciliazione che
+ * nessuno ha fatto — cioe' esattamente la sepoltura di massa che il guard
+ * esiste per impedire, ottenuta con la flag che dovrebbe renderla cosciente.
+ * Nominare i path e' il costo che rende l'atto cosciente davvero.
+ *
+ * PURA, come `onlyArgError`.
+ *
+ * @param {boolean} force
+ * @param {boolean} init
+ * @param {string[]|null} only  l'esito di `parseOnly`.
+ * @returns {string|null}
+ */
+function forceArgError(force, init, only) {
+  if (!force) return null;
+  // Stessa regola di `--only`: una flag che non ha effetto sul percorso scelto
+  // e' un malinteso su cosa sta per succedere, non un no-op innocuo.
+  if (!init) return '`--force` ha senso solo con `--init`: senza, non c\'e\' niente da riscrivere.';
+  if (only === null || !only.length) {
+    return '`--force` va nominato: serve `--init --only <path>[,<path>] --force`. Senza `--only` riscriverebbe TUTTE le voci del manifest, comprese quelle con un drift aperto che nessuno ha riconciliato.';
+  }
+  return null;
+}
+
+/**
+ * Cosa fa la passata `--init` a livello di MANIFEST, dati i conti delle voci
+ * riscritte e di quelle che il guard ha bloccato (issue #978).
+ *
+ * ## Perche' NON e' un rifiuto atomico
+ *
+ * Il primo taglio rifiutava tutto: una sola voce bloccata e il manifest non
+ * veniva scritto affatto. Ma il manifest ha voci parcheggiate di proposito in
+ * `both-moved` — `generator/scripts/lib/ai-models.mjs` aspetta #787 — quindi
+ * `--init` globale, che e' il comando documentato nell'header, non sarebbe
+ * potuto riuscire MAI PIU', e l'unico sblocco (`--force`) avrebbe riscritto
+ * anche quelle: l'unico modo di usare il comando sarebbe stato la sepoltura
+ * che il guard esiste per impedire.
+ *
+ * Quindi: si scrivono le voci passate, si lasciano INTATTE le bloccate, e il
+ * rifiuto resta visibile dove conta — `manifest.alignedAt` NON viene bumpato
+ * (l'allineamento non e' stato integrale, dirlo sarebbe la stessa bugia della
+ * sepoltura) e l'exit e' 1, quindi nessun wrapper legge la passata come pulita.
+ *
+ * PURA: nessun disco.
+ *
+ * @param {{written: number, blocked: number, targeted: boolean}} counts
+ *   `blocked` sono le voci LASCIATE INTATTE (con `--force` non ce ne sono:
+ *   sono state riscritte), `targeted` se c'era un `--only`.
+ * @returns {{write: boolean, bumpAlignedAt: boolean, exitCode: number}}
+ */
+function initPassOutcome({ written, blocked, targeted }) {
+  return {
+    // Zero voci scritte → niente da salvare: riscrivere il file identico
+    // produrrebbe un commit vuoto che sembra un `--init` andato a buon fine.
+    write: written > 0,
+    // `manifest.alignedAt` e' la data dell'ultimo allineamento INTEGRALE: con
+    // `--only` non c'e' stato, e con una voce bloccata nemmeno.
+    bumpAlignedAt: !targeted && blocked === 0 && written > 0,
+    exitCode: blocked > 0 ? 1 : 0,
+  };
 }
 
 const ONLY = parseOnly(RAW_ARGS);
@@ -980,10 +1047,9 @@ async function main() {
     console.error(onlyError);
     return 1;
   }
-  if (FORCE && !INIT) {
-    // Stessa regola di `--only`: una flag che non ha effetto sul percorso
-    // scelto e' un malinteso su cosa sta per succedere, non un no-op innocuo.
-    console.error('`--force` ha senso solo con `--init`: senza, non c\'e\' niente da riscrivere.');
+  const forceError = forceArgError(FORCE, INIT, ONLY);
+  if (forceError) {
+    console.error(forceError);
     return 1;
   }
   const manifest = readManifest();
@@ -999,8 +1065,10 @@ async function main() {
   // Le voci che `--init` si rifiuta di riscrivere: o hanno un drift APERTO che
   // la riscrittura seppellirebbe, o diventerebbero un `identical` divergente.
   // Prima erano, rispettivamente, niente e un warning dentro un comando verde
-  // (issue #978). `--force` le sblocca, ma allora lo dice chi lancia.
+  // (issue #978). `--force --only` le sblocca a una a una, ma allora lo dice
+  // chi lancia. Le altre voci si scrivono comunque: vedi `initPassOutcome()`.
   const initBlocked = [];
+  const initWritten = [];
 
   for (const entry of manifest.files) {
     const rel = entry.path;
@@ -1033,7 +1101,9 @@ async function main() {
       if (guard.blocked) {
         initBlocked.push({ path: rel, why: guard.why });
         // Con `--force` si scrive lo stesso, ma il blocco resta stampato: la
-        // conferma esplicita non deve rendere l'atto silenzioso.
+        // conferma esplicita non deve rendere l'atto silenzioso. Senza, si
+        // salta QUESTA voce e basta: la sua baseline resta quella di prima e
+        // le altre vengono registrate lo stesso.
         if (!FORCE) continue;
       }
 
@@ -1047,11 +1117,14 @@ async function main() {
       entry.baseline = {
         site: siteBaseline,
         corpus: now.corpus,
-        // Con `--only` l'allineamento e' di OGGI e riguarda solo questa voce:
-        // ereditare `manifest.alignedAt` le darebbe la data dell'ultimo
-        // `--init` globale, che per questa voce non e' mai avvenuto.
-        alignedAt: initTargets ? new Date().toISOString().slice(0, 10) : (manifest.alignedAt || null),
+        // L'allineamento di QUESTA voce e' di OGGI: e' oggi che ne stiamo
+        // scrivendo l'hash. Ereditare `manifest.alignedAt` le darebbe la data
+        // dell'ultimo `--init` INTEGRALE, che con `--only` per questa voce non
+        // e' mai avvenuto e che in una passata parziale (issue #978) non viene
+        // nemmeno bumpato: la baseline sarebbe di oggi con la data di ieri.
+        alignedAt: new Date().toISOString().slice(0, 10),
       };
+      initWritten.push(rel);
       continue;
     }
 
@@ -1141,32 +1214,33 @@ async function main() {
   }
 
   if (INIT) {
-    if (initBlocked.length) {
-      for (const { path: rel, why } of initBlocked) console.error(`  ⚠ ${rel}: ${why}`);
-      if (!FORCE) {
-        // Rifiuto ATOMICO: il manifest non viene scritto affatto. Scrivere le
-        // voci passate e saltare le bloccate lascerebbe un `alignedAt` bumpato
-        // e un commit a meta', che e' il modo piu' facile di far passare il
-        // rifiuto per un successo parziale.
-        console.error(
-          `--init: ${initBlocked.length} voce/i non riscritte e NIENTE scritto sul manifest. ` +
-            'Riconcilia i due lati, oppure rilancia con `--force` se stai chiudendo tu quei drift.',
-        );
-        return 1;
-      }
+    for (const { path: rel, why } of initBlocked) console.error(`  ⚠ ${rel}: ${why}`);
+    // Con `--force` le bloccate sono state riscritte lo stesso: non restano
+    // «intatte», quindi non contano come rifiuto (ma il blocco resta stampato).
+    const skipped = FORCE ? 0 : initBlocked.length;
+    const outcome = initPassOutcome({ written: initWritten.length, blocked: skipped, targeted: Boolean(initTargets) });
+    if (FORCE && initBlocked.length) {
       console.error(`--init --force: ${initBlocked.length} voce/i riscritte NONOSTANTE il blocco qui sopra.`);
     }
-    // `manifest.alignedAt` e' la data dell'ultimo allineamento INTEGRALE: con
-    // `--only` non c'e' stato, e bumparlo direbbe che trecento voci sono state
-    // rilette oggi quando non le ha guardate nessuno.
-    if (!initTargets) manifest.alignedAt = new Date().toISOString().slice(0, 10);
-    fs.writeFileSync(MANIFEST_PATH, `${JSON.stringify(manifest, null, 2)}\n`);
-    console.log(
-      initTargets
-        ? `Baseline registrate per ${initTargets.size} file: ${[...initTargets].join(', ')}.`
-        : `Baseline registrate per ${manifest.files.length} file (alignedAt=${manifest.alignedAt}).`,
-    );
-    return 0;
+    if (outcome.bumpAlignedAt) manifest.alignedAt = new Date().toISOString().slice(0, 10);
+    if (outcome.write) {
+      fs.writeFileSync(MANIFEST_PATH, `${JSON.stringify(manifest, null, 2)}\n`);
+      console.log(`Baseline registrate per ${initWritten.length} file: ${initWritten.join(', ')}.`);
+    }
+    if (skipped) {
+      // Le voci bloccate restano com'erano — nessun `alignedAt` bumpato,
+      // nessun verdetto sepolto — ma la passata non e' pulita e non deve
+      // sembrarlo: exit 1, cosi' un wrapper che guarda solo l'exit code lo
+      // vede. Il resto del manifest e' scritto, altrimenti UNA voce
+      // parcheggiata in `both-moved` renderebbe `--init` globale impossibile
+      // per sempre e l'unica via d'uscita sarebbe la sepoltura di massa.
+      console.error(
+        `--init: ${skipped} voce/i NON riscritte (baseline lasciata intatta); ` +
+          `${initWritten.length} registrate, \`manifest.alignedAt\` non bumpato. ` +
+          'Riconcilia i due lati, oppure rilancia `--init --only <path> --force` sulle SOLE voci di cui stai chiudendo tu il drift.',
+      );
+    }
+    return outcome.exitCode;
   }
 
   // Passata a parte, DOPO il ciclo principale: le voci `corpus-only` escono da
@@ -1315,4 +1389,4 @@ if (process.argv[1] && process.argv[1].endsWith('loop-drift-check.mjs')) {
 // baseline con LA STESSA regola con cui la pesa il cron, altrimenti una voce
 // accettata in PR verrebbe dichiarata fantasma il mattino dopo — o peggio, il
 // contrario. Una seconda copia della regola lo renderebbe inevitabile.
-export { classify, parseOnly, onlyArgError, resolveInitTargets, initWriteVerdict, ghostVerdict, strandedVerdict, corpusOnlyTwinVerdict, unmirrorableDepsVerdict, resolvedLocalImports, gitBlobSha, scalarFingerprintVerdict, siteFile, sha256, repoHistoryMatch };
+export { classify, parseOnly, onlyArgError, forceArgError, resolveInitTargets, initWriteVerdict, initPassOutcome, ghostVerdict, strandedVerdict, corpusOnlyTwinVerdict, unmirrorableDepsVerdict, resolvedLocalImports, gitBlobSha, scalarFingerprintVerdict, siteFile, sha256, repoHistoryMatch };

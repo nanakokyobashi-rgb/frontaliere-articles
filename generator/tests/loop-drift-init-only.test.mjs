@@ -25,7 +25,7 @@
  */
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { parseOnly, onlyArgError, resolveInitTargets, initWriteVerdict } from '../../scripts/ci/loop-drift-check.mjs';
+import { parseOnly, onlyArgError, forceArgError, resolveInitTargets, initWriteVerdict, initPassOutcome } from '../../scripts/ci/loop-drift-check.mjs';
 
 test('parseOnly: senza --only non filtra niente', () => {
   assert.equal(parseOnly(['--init']), null);
@@ -187,4 +187,63 @@ test('initWriteVerdict: gli stati non-drift di una voce registrata non bloccano'
     const v = initWriteVerdict({ mode: 'adapted' }, { site: H.a, corpus: H.b }, { site: H.a, corpus: H.c }, state);
     assert.equal(v.blocked, false, state);
   }
+});
+
+// --- granularita' del rifiuto (issue #978) -----------------------------------
+//
+// Il primo taglio del guard rifiutava ATOMICAMENTE: una voce bloccata e il
+// manifest non veniva scritto affatto. Ma il manifest ha voci parcheggiate di
+// proposito in `both-moved` — `generator/scripts/lib/ai-models.mjs` aspetta
+// #787 — quindi `--init` globale, il comando documentato nell'header, non
+// sarebbe potuto riuscire MAI PIU', e l'unico sblocco (`--force`) avrebbe
+// riscritto anche quella: l'unico uso possibile del comando sarebbe stato
+// esattamente la sepoltura che il guard esiste per impedire.
+
+test('forceArgError: `--force` senza `--init` e\' un errore d\'uso', () => {
+  assert.match(forceArgError(true, false, null), /solo con `--init`/);
+});
+
+test('forceArgError: `--force` va NOMINATO — senza `--only` non sblocca niente', () => {
+  // E' il punto: la sepoltura di massa non deve essere raggiungibile con una
+  // sola flag. Chi chiude un drift dice QUALE.
+  assert.match(forceArgError(true, true, null), /--only/);
+  assert.match(forceArgError(true, true, []), /--only/);
+  assert.equal(forceArgError(true, true, ['scripts/ci/a.mjs']), null);
+});
+
+test('forceArgError: senza `--force` non c\'e\' niente da validare', () => {
+  assert.equal(forceArgError(false, true, null), null);
+  assert.equal(forceArgError(false, false, null), null);
+});
+
+test('initPassOutcome: una voce bloccata NON impedisce di registrare le altre', () => {
+  const o = initPassOutcome({ written: 328, blocked: 1, targeted: false });
+  assert.equal(o.write, true, 'le 328 passate si scrivono');
+  assert.equal(o.exitCode, 1, 'ma la passata non e\' pulita');
+  assert.equal(o.bumpAlignedAt, false, 'l\'allineamento non e\' stato integrale');
+});
+
+test('initPassOutcome: passata globale pulita → scrive e bumpa `alignedAt`', () => {
+  assert.deepEqual(initPassOutcome({ written: 329, blocked: 0, targeted: false }), {
+    write: true,
+    bumpAlignedAt: true,
+    exitCode: 0,
+  });
+});
+
+test('initPassOutcome: con `--only` `alignedAt` globale non si bumpa mai', () => {
+  // Bumparlo direbbe che trecento voci sono state rilette oggi quando non le
+  // ha guardate nessuno.
+  assert.equal(initPassOutcome({ written: 1, blocked: 0, targeted: true }).bumpAlignedAt, false);
+  assert.equal(initPassOutcome({ written: 1, blocked: 0, targeted: true }).exitCode, 0);
+});
+
+test('initPassOutcome: se TUTTE le voci sono bloccate non si scrive niente', () => {
+  // Riscrivere il manifest identico produrrebbe un commit vuoto che sembra un
+  // `--init` andato a buon fine.
+  assert.deepEqual(initPassOutcome({ written: 0, blocked: 2, targeted: true }), {
+    write: false,
+    bumpAlignedAt: false,
+    exitCode: 1,
+  });
 });
