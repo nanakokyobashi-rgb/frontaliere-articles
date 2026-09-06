@@ -139,8 +139,9 @@ export function inputCapVetoSummary(err) {
     // Quando gli echi sono la maggioranza il voto ricade sui numeri LORDI (vedi
     // isTransientMajority): senza questo flag la riga potrebbe mostrare due
     // secchi netti che non sono quelli che hanno deciso. La condizione e' la
-    // STESSA del guardrail, massa di echi DICHIARATA compresa — e ora e' LA
-    // stessa, letta dal voto invece che ricopiata: una diagnostica che ricopia
+    // STESSA del guardrail, massa di echi dichiarata compresa (limitata alle
+    // righe che il breakdown sostiene, #932) — e ora e' LA stessa, letta dal
+    // voto invece che ricopiata: una diagnostica che ricopia
     // una versione indebolita del predicato dichiara «sottrazione affidabile»
     // proprio sulle run in cui non lo era.
     echoDominated: vote.echoDominated,
@@ -304,7 +305,7 @@ export const QUOTA_DEFERRAL_MIN_TRANSIENT_SHARE = 0.5;
  * a «veto». Un confronto fra due secchi si fa sui due secchi.
  *
  * @param {unknown} breakdown `err.exhaustionBreakdown`
- * @returns {{transient:number,persistent:number,total:number,echoTransient:number,echoPersistent:number,echoTotalDeclared:number,echoTotalReported:number,netTransient:number,netPersistent:number}}
+ * @returns {{transient:number,persistent:number,total:number,echoTransient:number,echoPersistent:number,netTransient:number,netPersistent:number}}
  */
 function echoBuckets(breakdown) {
   const b = (breakdown && typeof breakdown === 'object') ? breakdown : {};
@@ -319,19 +320,12 @@ function echoBuckets(breakdown) {
   // non ci sono.
   const echoTransient = Math.min(Math.max(0, Number(echo.transient) || 0), transient);
   const echoPersistent = Math.min(Math.max(0, Number(echo.persistent) || 0), persistent);
-  const echoTotalDeclared = Math.max(0, Number(echo.total) || 0);
   return {
     transient,
     persistent,
     total,
     echoTransient,
     echoPersistent,
-    // Il campo GREZZO, come il breakdown lo dichiara. Esiste per un solo
-    // consumatore — `deferralTally`, che sull'eccedenza fa la politica opposta
-    // (vedi sotto) e ha bisogno di vederla — e sta qui invece che in una
-    // seconda lettura di `echo.total` la' dentro perche' un valore condiviso ha
-    // UNA sorgente (AGENTS.md #6).
-    echoTotalDeclared,
     // La massa di echi DICHIARATA, non quella attribuita: `classifyExhaustionCause`
     // incrementa `total` per ogni riga di skip e i due secchi solo quando la
     // `skipPhrase` matcha, quindi la differenza sono gli echi AMBIGUI — righe
@@ -339,50 +333,18 @@ function echoBuckets(breakdown) {
     // deve decidere «gli echi sono la maggioranza delle prove» le conta; chi
     // sottrae dai secchi no, perche' non sa da quale sottrarle.
     //
-    // ── CLAMPATA ALLA POPOLAZIONE, NON AI SECCHI (#932) ────────────────────
-    //
-    // `echoTransient` e `echoPersistent` si clampano ciascuno al proprio
-    // secchio; questa NON puo', perche' gli echi ambigui vivono legittimamente
-    // fuori da entrambi. Ma un pavimento ce l'ha lo stesso, ed e' lo stesso
-    // invariante del produttore: in `classifyExhaustionCause` ogni incremento
-    // di `providerCooldownSkips.total` avviene DENTRO il ciclo su `errors`, il
-    // cui `length` e' `total`. Una riga di skip e' una riga: `echo.total` non
-    // puo' superare `total` senza CONTRADDIRE il breakdown, esattamente come un
-    // `echo.transient` sopra il proprio secchio.
-    //
-    // Senza il clamp, `providerCooldownSkips: {total: 999}` su un 53/52 rendeva
-    // `echoDominated` vero per costruzione (`echoRemoved` non ha altro
-    // pavimento) e, con abbastanza massa ambigua a far passare il margine,
-    // instradava il voto sul ramo `gross` — che poi PUBBLICA `decidedBy:
-    // 'gross'` come spiegazione del verdetto. Una diagnostica che spiega con
-    // sicurezza un verdetto costruito su un numero non validato e' peggio di
-    // una riga assente. Col clamp, `echoRemoved <= total` sempre: il flag puo'
-    // affermare al massimo «tutte le righe erano echi», che e' il piu' che il
-    // breakdown possa sostenere.
-    //
-    // IL PAVIMENTO E' `total` E NON IL BOUND STRETTO. Il produttore soddisfa
-    // anche `echo.total <= echoT + echoP + (total - transient - persistent)`
-    // (una riga di skip ambigua e' una riga ambigua), ma clampare LI'
-    // azzererebbe per costruzione `echoHiddenInBuckets`, cioe' il controllo 2
-    // di `transientMajorityVerdict`, che su quell'eccedenza e' interamente
-    // fondato: e' cosi' che si legge la run 31823202761, dove gli 11 echi
-    // dichiarati su massa ambigua 1 dimostrano che dieci stanno nei secchi
-    // senza etichetta. Il bound stretto e' la prova, non il limite.
-    //
-    // E CLAMPA, non scarta come `deferralTally` fa sull'eccedenza non
-    // attribuita: la polarita' e' la stessa — nessuna delle due lascia che un
-    // campo rotto INVENTI un differimento — ma l'aritmetica e' opposta, perche'
-    // qui la massa di echi non e' un denominatore da difendere ma il numeratore
-    // del guardrail. Tenerla alta fa ricadere il voto sul lordo, che puo'
-    // confermare e non ribaltare; scartarla la porterebbe a `echoT + echoP` e
-    // renderebbe il guardrail cieco proprio dove il campo dice che il campione
-    // e' inaffidabile.
-    //
-    // Con `total` assente o zero non c'e' popolazione contro cui validare —
-    // breakdown serializzato prima di #805, o un mock parziale — e il valore
-    // passa intatto, per la stessa ragione per cui il guardrail li' non usa il
-    // totale: e' dove il campione e' meno affidabile, non dove va disarmato.
-    echoTotalReported: total > 0 ? Math.min(echoTotalDeclared, total) : echoTotalDeclared,
+    // RESTA GREZZA, e non e' una dimenticanza (#932). I due consumatori la
+    // vogliono con polarita' OPPOSTE: il margine di `transientMajorityVerdict`
+    // addebita l'eccedenza al vincitore e `deferralTally` la scarta per intero
+    // — entrambi verso il rosso — mentre chi la usa come NUMERATORE del
+    // guardrail la vuole limitata alle righe che esistono. Clampare qui
+    // servirebbe il secondo indebolendo i primi due: verificato in
+    // `exhaustion-transient-majority.test.mjs`, un clamp alla sorgente ribalta
+    // `{transient: 1, total: 1, providerCooldownSkips: {total: 2}}` da veto a
+    // differimento, cioe' un campo che CONTRADDICE il breakdown che compra il
+    // differimento che #313 e' costato. Il limite vive al solo call site che ne
+    // ha bisogno.
+    echoTotalReported: Math.max(0, Number(echo.total) || 0),
     netTransient: transient - echoTransient,
     netPersistent: persistent - echoPersistent,
   };
@@ -390,7 +352,7 @@ function echoBuckets(breakdown) {
 
 function deferralTally(breakdown) {
   const {
-    transient, persistent, total, echoTransient, echoPersistent, echoTotalDeclared,
+    transient, persistent, total, echoTransient, echoPersistent, echoTotalReported,
   } = echoBuckets(breakdown);
   // La parte di `echo.total` NON ripartita fra i due secchi e' fatta di echi
   // AMBIGUI, e deve stare nella massa ambigua — non nel totale. Clamparla al
@@ -402,11 +364,7 @@ function deferralTally(breakdown) {
   // non matchi ne' `transientRe` ne' `persistentRe` — oggi le due frasi
   // matchano per costruzione, cioe' «una riformulazione di distanza», la
   // stessa trappola che `classifyExhaustionCause` si nomina addosso.
-  // Il valore DICHIARATO e non `echoTotalReported`: il clamp alla popolazione
-  // (#932) e' il pavimento che serve al guardrail di `transientMajorityVerdict`,
-  // mentre qui l'eccedenza sopra la massa ambigua va VISTA per poterla scartare
-  // tutta. Clamparla prima la farebbe rientrare nel dubbio invece che fuori.
-  const echoUnattributed = Math.max(0, echoTotalDeclared - echoTransient - echoPersistent);
+  const echoUnattributed = Math.max(0, echoTotalReported - echoTransient - echoPersistent);
   const ambiguousMass = Math.max(0, total - transient - persistent);
   // ...e se non ci sta, il campo CONTRADDICE il breakdown: non e' una misura,
   // e la parte non collocabile non compra sconti sul denominatore. Clamparla
@@ -491,11 +449,11 @@ function deferralTally(breakdown) {
  *    righe sono finite DENTRO i due secchi senza che nessuno dicesse in quale.
  *    Sono la sottrazione che #805 credeva di aver fatto e non ha fatto.
  *
- *    Il campo e' letto CLAMPATO alla popolazione (`echoBuckets`, #932): sopra
- *    `total` non e' piu' un'eccedenza da interpretare ma un numero che
- *    contraddice il breakdown, e da li' in giu' l'unica cosa che comprava era
- *    `echoDominated`, cioe' il ramo `gross`. Il clamp e' alla popolazione e non
- *    al bound stretto proprio per lasciare in vita questo controllo.
+ *    Qui il campo si legge GREZZO, e il guardrail piu' sotto lo legge limitato
+ *    alle righe che esistono (#932): l'eccedenza e' la PROVA su cui questo
+ *    controllo e' costruito — limitarla lo spegnerebbe, e con esso la lettura
+ *    della run 31823202761 — mentre un numeratore che conta piu' righe di
+ *    quante il breakdown ne dichiari non e' una misura di niente.
  *
  *    La run 31823202761 e' esattamente questo caso: `{transient: 53,
  *    persistent: 52, total: 106, providerCooldownSkips: {total: 11}}` — massa
@@ -601,13 +559,35 @@ function transientMajorityVerdict(breakdown, options = {}) {
   // direbbero «sottrazione affidabile» e il netto 50 vs 30 toglierebbe DA SOLO
   // il veto che il lordo 50 vs 60 metteva: il differimento su `cap.count > 0`,
   // cioe' il ciclo infinito di #313.
-  // `echoTotalReported` e non il campo grezzo: clampato alla popolazione da
-  // `echoBuckets` (#932), cosi' `echoRemoved <= total` e un `{total: 999}` non
-  // puo' comprare `echoDominated` — e con esso il ramo `gross` che la
-  // diagnostica poi pubblica come ragione del verdetto.
+  // ...ma non piu' grande della POPOLAZIONE (#932). `echoTotalReported` non
+  // aveva alcun pavimento superiore, quindi un `providerCooldownSkips: {total:
+  // 999}` rendeva `echoDominated` vero per costruzione — e quel flag non e' piu'
+  // solo interno: da #890 `inputCapVetoSummary` lo PUBBLICA accanto a
+  // `decidedBy`, cioe' afferma «la sottrazione era inaffidabile» su un numero
+  // che contraddice il breakdown che sta spiegando. In
+  // `classifyExhaustionCause` ogni incremento di `providerCooldownSkips.total`
+  // avviene dentro il ciclo su `errors`: una riga di skip e' una riga, e sopra
+  // le righe esistenti il campo non e' una misura.
+  //
+  // Le righe esistenti sono `max(total, transient + persistent)` e non `total`
+  // secco: su un breakdown gia' incoerente per conto suo (`{transient: 2,
+  // persistent: 2, total: 1}`) prendere `total` alla lettera farebbe cadere il
+  // guardrail e INVENTEREBBE un differimento — un secondo campo rotto non puo'
+  // fare da metro al primo. Con `total` assente (serializzato prima di #805, o
+  // un mock) i due secchi restano comunque un pavimento, e se anche quelli sono
+  // zero non c'e' popolazione contro cui validare: il valore passa intatto,
+  // perche' li' il campione e' meno affidabile, non piu'.
+  //
+  // Il limite e' DIAGNOSTICO e non sposta un exit code: su 624.260 combinazioni
+  // di breakdown il verdetto e il ramo `decidedBy` sono identici a prima, e
+  // cambia solo `echoDominated` (test in `exhaustion-transient-majority.test.mjs`).
+  const evidenceRows = Math.max(buckets.total, buckets.transient + buckets.persistent);
+  const echoDeclared = evidenceRows > 0
+    ? Math.min(buckets.echoTotalReported, evidenceRows)
+    : buckets.echoTotalReported;
   const echoRemoved = Math.max(
     buckets.echoTransient + buckets.echoPersistent,
-    buckets.echoTotalReported,
+    echoDeclared,
   );
   const netEvidence = buckets.netTransient + buckets.netPersistent;
   const votedTransient = buckets.netTransient - echoHiddenInBuckets;
