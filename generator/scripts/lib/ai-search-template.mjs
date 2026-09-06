@@ -21,6 +21,8 @@
  * key — no change needed.
  */
 
+import { matchesVacuousValue } from './key-facts-specificity.mjs';
+
 // ── Markdown markers (used to detect existing AI-search optimization) ──
 export const TLDR_HEADING_MARKER = '## In breve';
 export const KEY_FACTS_HEADING_MARKER = '## Fatti chiave';
@@ -38,6 +40,17 @@ const KEY_FACTS_MARKERS_BY_LOCALE = {
   de: '## Wichtige Fakten',
   fr: '## Faits clés',
 };
+
+/**
+ * Tutte le intestazioni di sezione AI-search, nelle quattro locali. UNA sola
+ * sorgente: `key-facts-specificity.mjs` deve riconoscere le stesse sezioni che
+ * questo modulo emette, e ricopiarle di la' le farebbe divergere al primo
+ * locale aggiunto.
+ */
+export const AI_SEARCH_SECTION_HEADINGS = Object.freeze([
+  ...Object.values(TLDR_MARKERS_BY_LOCALE),
+  ...Object.values(KEY_FACTS_MARKERS_BY_LOCALE),
+]);
 
 /**
  * Returns the localized heading used to mark the TL;DR section.
@@ -133,6 +146,12 @@ OGNI articolo DEVE includere all'inizio di body1, PRIMA del lead giornalistico:
    - **Chi**: <ente o soggetto>
    - **Importo**: <cifra o percentuale, se presente nella fonte>
 
+   OMETTI la riga se la fonte non porta quel dato. Una coppia il cui valore e'
+   "non specificato" / "non disponibile" / "da definire" NON e' un fatto
+   chiave: e' la domanda ricopiata al posto della risposta, e viene scartata.
+   Meglio 5 righe piene che 8 di cui tre vuote — il minimo e' 3 righe piene.
+   Vale identico per i bullet del TL;DR.
+
 DOPO queste due sezioni, prosegui con il lead giornalistico normale di body1.
 Le sezioni TL;DR + Fatti chiave NON contano verso il minimo parole di body1.
 NON ripetere TL;DR/Fatti chiave in body2 o body3.
@@ -161,6 +180,9 @@ Dato il seguente articolo, estrai:
 
 REGOLE:
 - Ogni fatto DEVE essere presente nel testo dell'articolo. NON inventare nulla.
+- OMETTI la coppia se il valore non e' nell'articolo. Mai "non specificato",
+  "non disponibile", "da definire" o simili come valore: quelle coppie vengono
+  scartate, quindi restituirle equivale a restituirne meno.
 - Bullet TL;DR: brevi, autoconclusivi, leggibili da soli.
 - "term" max 25 caratteri; "value" max 120 caratteri.
 - NON includere markdown nei valori (no **bold**, no link).
@@ -192,23 +214,39 @@ export function validateBackfillPayload(payload) {
     throw new Error('validateBackfillPayload: payload is not an object');
   }
   const obj = /** @type {Record<string, unknown>} */ (payload);
-  const tldr = obj.tldr;
-  const keyFacts = obj.keyFacts;
   // Truncate runaway AI output rather than fail the whole article. Dense
   // factual pieces routinely generate 13-27 keyFacts and verbose 7-bullet
   // tldrs; capping here recovers ~30 articles per backfill run.
   if (Array.isArray(obj.tldr) && obj.tldr.length > 6) obj.tldr.length = 6;
   if (Array.isArray(obj.keyFacts) && obj.keyFacts.length > 12) obj.keyFacts.length = 12;
-  if (!Array.isArray(tldr) || tldr.length < 2) {
-    throw new Error(`validateBackfillPayload: tldr must be an array of 2-6 strings, got ${Array.isArray(tldr) ? tldr.length : typeof tldr}`);
+  // ── I NON-VALORI si tolgono PRIMA delle soglie, non dopo ─────────────────
+  //
+  // Il modello che non trova il dato nella fonte non salta la coppia: la
+  // riempie con «non specificato» (vedi `key-facts-specificity.mjs`). Filtrare
+  // qui, e non a valle, e' cio' che fa cadere sulle soglie sotto un payload
+  // fatto di soli non-valori: un backfill che non ha estratto niente deve
+  // FALLIRE, non pubblicare una sezione «Fatti chiave» finta. Il conteggio
+  // pieno passerebbe la soglia e nasconderebbe il vuoto.
+  if (Array.isArray(obj.tldr)) {
+    obj.tldr = obj.tldr.filter((b) => typeof b !== 'string' || !matchesVacuousValue(b));
   }
-  if (!tldr.every((b) => typeof b === 'string' && b.length > 0 && b.length <= 200)) {
+  if (Array.isArray(obj.keyFacts)) {
+    obj.keyFacts = obj.keyFacts.filter(
+      (kf) => !kf || typeof kf !== 'object' || !matchesVacuousValue(String(/** @type {any} */ (kf).value ?? '')),
+    );
+  }
+  const tldrChecked = obj.tldr;
+  const keyFactsChecked = obj.keyFacts;
+  if (!Array.isArray(tldrChecked) || tldrChecked.length < 2) {
+    throw new Error(`validateBackfillPayload: tldr must be an array of 2-6 strings, got ${Array.isArray(tldrChecked) ? tldrChecked.length : typeof tldrChecked}`);
+  }
+  if (!tldrChecked.every((b) => typeof b === 'string' && b.length > 0 && b.length <= 200)) {
     throw new Error('validateBackfillPayload: every tldr bullet must be a non-empty string ≤200 chars');
   }
-  if (!Array.isArray(keyFacts) || keyFacts.length < 3) {
-    throw new Error(`validateBackfillPayload: keyFacts must be an array of 3-12 entries, got ${Array.isArray(keyFacts) ? keyFacts.length : typeof keyFacts}`);
+  if (!Array.isArray(keyFactsChecked) || keyFactsChecked.length < 3) {
+    throw new Error(`validateBackfillPayload: keyFacts must be an array of 3-12 entries, got ${Array.isArray(keyFactsChecked) ? keyFactsChecked.length : typeof keyFactsChecked}`);
   }
-  for (const kf of keyFacts) {
+  for (const kf of keyFactsChecked) {
     if (!kf || typeof kf !== 'object') {
       throw new Error('validateBackfillPayload: every keyFacts entry must be an object');
     }

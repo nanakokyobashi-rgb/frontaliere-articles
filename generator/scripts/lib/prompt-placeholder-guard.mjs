@@ -115,6 +115,12 @@
 // I letterali dello schema JSON del prompt
 // ─────────────────────────────────────────────────────────────────────────────
 
+// L'unico import di questo modulo. I fatti chiave vuoti sono una classe
+// diversa dai segnaposto dello schema (vedi `key-facts-specificity.mjs`), ma
+// condividono il punto di applicazione: `sanitizePromptPlaceholders()`, che
+// gira sul percorso di scrittura CONDIVISO da tutti i produttori.
+import { stripVacuousFacts } from './key-facts-specificity.mjs';
+
 /**
  * I valori di esempio che il prompt mostra al modello, verbatim.
  *
@@ -1209,6 +1215,30 @@ export function sanitizePromptPlaceholders(data) {
         'Se ricorre, e\' il prompt a dover cambiare, non questa rete di sicurezza.',
     );
   }
+
+  // ── I FATTI CHIAVE VUOTI, sullo STESSO percorso di scrittura ─────────────
+  //
+  // Non e' un segnaposto dello schema — il testo «non specificato» non era nel
+  // prompt — ma e' la stessa classe di difetto e ha bisogno dello stesso punto
+  // di applicazione: `registerArticleFiles()`, non `validate()`, perche' i
+  // quattro produttori che non passano da `validate()` scrivono comunque da
+  // qui. Vedi `key-facts-specificity.mjs` per la regola e per il perche' la
+  // sottrazione basta.
+  for (const entry of iterateTextFields(data)) {
+    if (!/^body\d+$/.test(entry.field)) continue;
+    const stripped = stripVacuousFacts(entry.value);
+    if (!stripped.changed) continue;
+    setTextField(data, entry, stripped.value);
+    const detail =
+      `${stripped.dropped.length} coppie vuote rimosse` +
+      (stripped.sectionsRemoved.length ? `, sezioni rimosse: ${stripped.sectionsRemoved.join(', ')}` : '');
+    fixes.push({ path: entry.path, action: 'vacuous-facts-pruned', detail });
+    console.error(
+      ` ⚠️ [key-facts] ${entry.path}: ${detail}. ` +
+        'Una coppia il cui valore e\' «non specificato» e\' la domanda ricopiata al posto della risposta.',
+    );
+  }
+
   return fixes;
 }
 
