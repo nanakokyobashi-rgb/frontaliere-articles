@@ -319,8 +319,13 @@ describe('corpus pubblicato — ratchet sugli slug non localizzati', () => {
   // e' lavoro separato e coordinato, che la issue stessa chiede di NON fare
   // senza il bridge. Cio' che questo numero difende e' la DERIVATA: la fix di
   // #191 vale se non ne nascono di nuovi.
-  const IT_URL_ACROSS_LOCALES_BASELINE = 217;
-  const ALL_THREE_IDENTICAL_BASELINE = 169;
+  //
+  // 2026-09-06 (#966 / #798): `floorMiss` su un title tradotto ripiega sullo
+  // slug IT (`data.slugs[locale] = itSlug`). Tre title DE pubblicati (`...`)
+  // cadono sul floor; senza margine il primo articolo nuovo congela
+  // publish-api (preflight). Margine dichiarato: +3 su entrambe le baseline.
+  const IT_URL_ACROSS_LOCALES_BASELINE = 220;
+  const ALL_THREE_IDENTICAL_BASELINE = 172;
   const LONG_SLUG_BASELINE = 55;
 
   it(`gli articoli che servono l'URL italiano su en/de/fr non superano ${IT_URL_ACROSS_LOCALES_BASELINE}`, () => {
