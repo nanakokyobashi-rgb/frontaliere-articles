@@ -5,6 +5,7 @@
  * login `if:` is owned here. A `startsWith(..., 'claude')` only filter
  * skips `frontaliere-automation[bot]` reviews (site PRs #7610/#7609).
  * Reads the shipped workflow; does not reimplement the GitHub `if:` evaluator.
+ * Head bump: force a new tests+review run after the consumer sweep.
  */
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
