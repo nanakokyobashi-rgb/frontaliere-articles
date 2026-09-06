@@ -71,9 +71,10 @@ const KEEP_OPEN_LABELS = new Set(['pinned', 'keep-open', 'revenue', 'tracker', '
  * cioe' contati come burn "evitabile" dal gate dell'harvester pur essendo aggregati la cui
  * risoluzione e' scaglionata su piu' PR, gonfiando proprio il bucket che ha innescato #560.
  *
- * La direzione dell'errore resta sicura in tutti i chiamanti: un falso positivo fa
- * PROCEDERE il fixer (nessun corto-circuito), NON auto-chiudere un aggregato parziale e
- * NON contare un burn — mai il contrario. Il conteggio esplicito nel titolo resta
+ * La direzione dell'errore e' sicura per la PRE-FLIGHT (un falso positivo fa PROCEDERE il
+ * fixer) ma NON per reconcile: li' un aggregato inventato toglie l'auto-chiusura e lascia
+ * la issue in coda a tempo indefinito, cioe' fa CRESCERE la coda (#926). Per questo il
+ * conteggio salta i blocchi recintati e chiede un lead-TITOLO in grassetto, non un'enfasi. Il conteggio esplicito nel titolo resta
  * autoritativo e continua a corto-circuitare PRIMA di qui (#3378).
  *
  * DUPLICATA di proposito in `check-issue-already-resolved.mjs`, `harvest-agent-lessons.mjs`
@@ -88,15 +89,81 @@ const KEEP_OPEN_LABELS = new Set(['pinned', 'keep-open', 'revenue', 'tracker', '
  * @returns {boolean} true se il corpo enumera >=2 item
  */
 export function hasEnumeratedItems(body) {
-  const b = String(body || '');
+  const b = stripFencedBlocks(String(body || ''));
   const numberedSections = (b.match(/^#{2,4}[ \t]*\d+[.)](?=[ \t]|$)/gm) || []).length;
   if (numberedSections >= 2) return true;
   // Lista ordinata con lead in grassetto: `1. **Titolo.**` / `2. **Titolo.**` (#831, #832).
-  // Il grassetto e' cio' che distingue l'item enumerato dai passi di una procedura numerata.
-  const orderedBoldItems = (b.match(/^[ \t]*\d+[.)][ \t]+\*\*/gm) || []).length;
+  // Il grassetto e' cio' che distingue l'item enumerato dai passi di una procedura numerata,
+  // ma solo se apre a inizio riga e chiude sulla stessa riga (`isBoldTitleLead`, #926).
+  const lines = b.split('\n');
+  const orderedBoldItems = lines.filter((l) => {
+    const m = /^[ \t]*\d+[.)][ \t]+(.*)$/.exec(l);
+    return m ? isBoldTitleLead(m[1]) : false;
+  }).length;
   if (orderedBoldItems >= 2) return true;
-  const boldLeadBullets = (b.match(/^[-*][ \t]+(?:\[[ xX]\][ \t]*)?\*\*/gm) || []).length;
+  const boldLeadBullets = lines.filter((l) => {
+    const m = /^[-*][ \t]+(?:\[[ xX]\][ \t]*)?(.*)$/.exec(l);
+    return m ? isBoldTitleLead(m[1]) : false;
+  }).length;
   return boldLeadBullets >= 2;
+}
+
+/**
+ * Righe dentro un blocco recintato (\`\`\` o ~~~) rimosse prima del conteggio (#926).
+ *
+ * Un follow-up a UN SOLO item il cui corpo incolla uno snippet markdown — forma
+ * comune quando la scheda cita il diff o il template — enumerava item che non
+ * esistono: `hasEnumeratedItems` tornava true e `reconcile-followups.mjs`
+ * (`closeEligible = ... && !isAggregate`) smetteva di auto-chiuderlo per sempre,
+ * lasciandolo in coda a tempo indefinito. Un aggregato INVENTATO non e' il lato
+ * sicuro dell'errore: fa crescere la coda invece di far bruciare un tentativo.
+ *
+ * @param {string} text
+ * @returns {string} lo stesso testo senza le righe recintate (fence inclusi)
+ */
+function stripFencedBlocks(text) {
+  const out = [];
+  let fence = '';
+  for (const line of text.split('\n')) {
+    const m = /^[ \t]{0,3}(`{3,}|~{3,})/.exec(line);
+    if (fence) {
+      // Chiude solo un fence dello stesso carattere e lungo almeno quanto l'apertura.
+      if (m && m[1][0] === fence[0] && m[1].length >= fence.length) fence = '';
+      continue;
+    }
+    if (m) { fence = m[1]; continue; }
+    out.push(line);
+  }
+  return out.join('\n');
+}
+
+/**
+ * Il resto di una riga di lista inizia con un lead in grassetto? (#926)
+ *
+ * Criterio deliberatamente minimo: il grassetto apre a inizio riga e CHIUDE
+ * sulla stessa riga. Niente requisiti su punteggiatura o su cosa segue.
+ *
+ * La versione precedente chiedeva anche che il grassetto portasse dentro la
+ * punteggiatura (`**Titolo.**`) o fosse seguito da fine riga o da un separatore
+ * (`**Titolo**:`, `**Titolo** —`), per escludere l'enfasi in mezzo alla prosa
+ * (`2. **nota** finale che non e' un item`). Ma quel caso non e' separabile
+ * lessicalmente dal lead-titolo piu' comune di questo repo — grassetto che
+ * finisce con inline-code e continua con testo qualsiasi, nella forma
+ * "- **<inline-code>** (alimenta …)" (#551, #549). Misurato sulle issue
+ * `follow-up` vive, il criterio stretto trasformava aggregati reali in
+ * single-item, cioe' rendeva `closeEligible` una
+ * issue i cui item sono per davvero due: auto-chiusura sulla prova di UN solo
+ * item, il drop silenzioso che #568 esiste per impedire.
+ *
+ * Il falso positivo che resta (un grassetto d'enfasi conta come item, e la issue
+ * non si auto-chiude) fa crescere la coda; il falso negativo evitato e'
+ * irreversibile. La direzione dell'errore e' scelta, non subita.
+ *
+ * @param {string} rest testo della riga dopo il marcatore di lista
+ * @returns {boolean}
+ */
+function isBoldTitleLead(rest) {
+  return /^\*\*(?![ \t])(?:[^*\n]|\*(?!\*))+\*\*/.test(rest);
 }
 
 /**
