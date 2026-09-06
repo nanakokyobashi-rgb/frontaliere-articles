@@ -85,7 +85,7 @@ export function seoFilesFor(section) {
   const dir = path.join(ROOT, 'content/seo');
   if (!existsSync(dir)) return [];
   return readdirSync(dir)
-    .filter((f) => f.startsWith('seo-blog-') && f.endsWith('.ts'))
+    .filter((f) => /^seo-blog.*\.ts$/.test(f))
     .map((f) => `content/seo/${f}`);
 }
 

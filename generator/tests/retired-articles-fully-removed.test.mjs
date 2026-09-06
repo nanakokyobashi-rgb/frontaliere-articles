@@ -56,7 +56,7 @@ import { mentionsId } from '../../scripts/lib/mentions-id.mjs';
 // volta — mancavano `content/blogArticleIds.ts`, i file SEO e il ledger delle
 // immagini, quindi un id ritirato sopravvissuto lì passava verde proprio nel
 // test che esiste per accorgersene.
-import { SECTIONS, leftoverSurfacesFor } from '../../scripts/lib/article-surfaces.mjs';
+import { SECTIONS, leftoverSurfacesFor, seoFilesFor } from '../../scripts/lib/article-surfaces.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 
@@ -106,7 +106,7 @@ test('l\'elenco dei ritiri non è vuoto e ogni voce è completa', () => {
   );
   for (const entry of retired) {
     assert.ok(entry.id, `${RETIRED_FILE}: una voce senza "id"`);
-    assert.ok(SURFACES[entry.section], `${entry.id}: sezione sconosciuta "${entry.section}"`);
+    assert.ok(SECTIONS[entry.section], `${entry.id}: sezione sconosciuta "${entry.section}"`);
     assert.ok(entry.winnerId, `${entry.id}: senza "winnerId" — un ritiro senza vincitore è una cancellazione`);
     assert.notEqual(entry.winnerId, entry.id, `${entry.id}: dichiarato vincitore di se stesso`);
     for (const loc of LOCALES) {
@@ -126,7 +126,7 @@ test('ogni articolo ritirato è sparito da TUTTE le superfici', () => {
   const leftovers = [];
 
   for (const entry of retired) {
-    const s = SURFACES[entry.section];
+    const s = SECTIONS[entry.section];
     const { id } = entry;
 
     // Le superfici testuali: registro, mappa slug, meta per locale, file SEO,
@@ -172,7 +172,7 @@ test('il vincitore di ogni ritiro è ancora pubblicato', () => {
   for (const entry of retired) {
     // Il vincitore può stare nell'ALTRA sezione — è il caso normale qui, visto
     // che questi ritiri nascono da duplicati cross-sezione.
-    const found = Object.entries(SURFACES).some(([, s]) =>
+    const found = Object.entries(SECTIONS).some(([, s]) =>
       readSurface(s.registryFile).includes(`id: '${entry.winnerId}',`)
       && readSurface(s.slugDataFile).includes(`'${entry.winnerId}':`));
     if (!found) missing.push(`${entry.id} → vincitore '${entry.winnerId}' non è in nessun registro`);
@@ -185,5 +185,42 @@ test('il vincitore di ogni ritiro è ancora pubblicato', () => {
     + 'La voce EDGE_RETIRED_PATHS che verrà scritta dall\'altro lato diventerebbe un 301 verso un '
     + '404 — peggio del duplicato che stava riparando.\n'
     + missing.map((l) => `   ${l}`).join('\n'),
+  );
+});
+
+test('l\'elenco delle superfici copre tutto ciò da cui si rimuove una riga', () => {
+  // Il gate leggeva quattro superfici su nove: un id ritirato che sopravviveva
+  // nella union, in un file SEO o nel ledger immagini passava verde. Ora
+  // l'elenco è quello di `scripts/retire-article.mjs`, ma un elenco condiviso
+  // resta sbagliabile in un colpo solo — queste asserzioni nominano le tre
+  // superfici che mancavano, così togliendone una il test lo dice.
+  const frontaliere = leftoverSurfacesFor('frontaliere');
+  for (const rel of [
+    SECTIONS.frontaliere.registryFile,
+    SECTIONS.frontaliere.slugDataFile,
+    SECTIONS.frontaliere.idUnionFile,
+    SECTIONS.frontaliere.sourceLedger,
+    'data/blog-images-used.json',
+    'content/seo/seo-blog.ts',
+  ]) {
+    assert.ok(frontaliere.includes(rel), `superficie non sorvegliata: ${rel}`);
+  }
+
+  const svizzera = leftoverSurfacesFor('svizzera');
+  for (const rel of [
+    SECTIONS.svizzera.registryFile,
+    SECTIONS.svizzera.slugDataFile,
+    SECTIONS.svizzera.sourceLedger,
+    'content/seo/seo-blog-ch.ts',
+    'data/blog-images-used.json',
+  ]) {
+    assert.ok(svizzera.includes(rel), `superficie non sorvegliata: ${rel}`);
+  }
+
+  // `seo-blog.ts` non ha il trattino: col glob `seo-blog-*.ts` restava fuori
+  // sia dalla rimozione sia dalla verifica, e contiene ancora ~1.000 voci.
+  assert.ok(
+    seoFilesFor('frontaliere').includes('content/seo/seo-blog.ts'),
+    'il chunk SEO originale è fuori dal glob: un ritiro vecchio ci lascia dentro il blocco',
   );
 });
