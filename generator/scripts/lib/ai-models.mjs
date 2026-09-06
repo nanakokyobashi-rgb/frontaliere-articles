@@ -3544,8 +3544,9 @@ export async function initScoreStore() {
         if (resetTime > now) {
           _exhaustedModels.add(modelId);
           // Persisted exhaustedUntil is the daily-limit (quota) path → eligible
-          // for the GitHub multi-PAT skip-exemption.
-          _exhaustReason.set(modelId, 'quota');
+          // for the GitHub multi-PAT skip-exemption. Dalla stessa porta degli
+          // altri writer della causa (#895 item 2).
+          _setExhaustReason(modelId, 'quota');
           exhaustedRestored++;
           console.warn(`🚫 [ScoreStore] ${modelId} still exhausted until ${resetTime.toISOString().slice(0, 16)}`);
         }
@@ -3557,6 +3558,10 @@ export async function initScoreStore() {
       // local/fallback.
       if (typeof data.maxRequestTokens === 'number' && data.maxRequestTokens > 0) {
         _learnedRequestTokenLimits.set(modelId, data.maxRequestTokens);
+        // Arriva DAL documento condiviso: e' gia' proposto per definizione, e
+        // segnarlo evita che il primo re-learn dello stesso valore sporchi il
+        // modello per riscrivere cio' che c'e' gia' (#895 item 1).
+        _ledgerProposedRequestTokenLimits.set(modelId, data.maxRequestTokens);
         learnedLimitsRestored++;
       }
 
@@ -3564,6 +3569,7 @@ export async function initScoreStore() {
       // — same unconditional-restore reasoning as maxRequestTokens above.
       if (data.schemaIncompatible === true) {
         _learnedSchemaIncompatible.add(modelId);
+        _ledgerProposedSchemaIncompatible.add(modelId);   // vedi sopra (#895 item 1)
         schemaIncompatibleRestored++;
       }
     }
@@ -4409,6 +4415,29 @@ export function getDeclaredRequestTokenLimit(model) {
  * It will be skipped for the remainder of this process
  * and persisted to Firestore so other workflows also skip it.
  */
+/**
+ * Unica porta sulla CAUSA di un esaurimento: la coppia
+ * `_exhaustReason`/`_exhaustDetail` che `_exhaustSkipCause` traduce in parole e
+ * che `classifyExhaustionCause` conta come transitoria o persistente.
+ *
+ * Stessa forma di `_proposeLedgerWrite` per `_dirtyModels`, e per la stessa
+ * ragione (#881, #895 item 2): finche' la coppia si scriveva a mano in piu'
+ * punti — `markModelExhausted` e il ramo `else` del breaker host-unreachable in
+ * `callLLM`, che corregge la causa SENZA riemettere il ban per non far pesare
+ * due volte lo stesso guasto a `scripts/ci/exhaustion-reason-report.mjs` — un
+ * campo aggiunto qui domani non sarebbe sceso di la', e nessun test lo avrebbe
+ * notato. La porta e' una sola, quindi un writer nuovo eredita la forma senza
+ * doversene ricordare.
+ *
+ * `detail` si scrive solo se c'e': un dettaglio vuoto non deve cancellare
+ * quello gia' noto (e' il comportamento che `markModelExhausted` aveva prima e
+ * su cui il ramo `else` conta, dove `e.hostUnreachable` puo' mancare).
+ */
+function _setExhaustReason(modelId, reason, detail = '') {
+  _exhaustReason.set(modelId, reason);
+  if (detail) _exhaustDetail.set(modelId, detail);
+}
+
 // `reason` records WHY a model was exhausted so the GitHub multi-PAT exemption
 // only resurrects quota/daily-limit exhaustion (account-specific → rotation to a
 // fresh PAT can fix it), NOT timeout / content-failure / stale / non-retryable
@@ -4422,8 +4451,7 @@ export function getDeclaredRequestTokenLimit(model) {
 // callLLM: in-processo si', documento condiviso no.
 export function markModelExhausted(modelId, reason = 'quota', detail = '', { recordScore = true } = {}) {
   _exhaustedModels.add(modelId);
-  _exhaustReason.set(modelId, reason);
-  if (detail) _exhaustDetail.set(modelId, detail);
+  _setExhaustReason(modelId, reason, detail);
   _proposeLedgerWrite(modelId, recordScore);
   console.warn(`🚫 Model ${modelId} marked as exhausted (${reason}) — will be skipped for rest of run`);
 }
@@ -4720,6 +4748,12 @@ export function resetState() {
   _exhaustedModels.clear();
   _ghExhaustedPats.clear();
   _exhaustReason.clear();
+  // `_exhaustDetail` e' l'altra meta' della coppia scritta da
+  // `_setExhaustReason`: lasciarla in piedi faceva sopravvivere al reset il
+  // dettaglio ('HTTP 402', 'ECONNREFUSED') di un esaurimento la cui causa e'
+  // appena stata buttata via, e `_exhaustSkipCause` lo avrebbe riattaccato al
+  // marchio successivo, di causa diversa.
+  _exhaustDetail.clear();
   // `_prunedStale` NON si azzera (#875 item 3). Il reset butta via i MARCHI di
   // esaurimento, ma non le potature: lo splice su `DEFAULT_CHAIN` e' definitivo
   // e la catena resta accorciata (vedi il commento su `_prunedStale`, e la riga
@@ -4754,6 +4788,8 @@ export function resetState() {
   _consecutiveContentFailures.clear();
   _learnedRequestTokenLimits.clear();
   _learnedSchemaIncompatible.clear();
+  _ledgerProposedRequestTokenLimits.clear();
+  _ledgerProposedSchemaIncompatible.clear();
   _mutationCount = 0;
   if (_persistTimer) { clearTimeout(_persistTimer); _persistTimer = null; }
   _stats.calls = 0;
@@ -5437,6 +5473,27 @@ const DEFAULT_REQUEST_TOKENS_BY_PROVIDER = {
 const _learnedRequestTokenLimits = new Map();
 
 /**
+ * Sottoinsieme di `_learnedRequestTokenLimits` che e' gia' stato PROPOSTO al
+ * documento condiviso (proposta accettata da `_proposeLedgerWrite`, o valore
+ * arrivato di la' al load). Stesso keyspace, valore = il limite proposto.
+ *
+ * Esiste perche' «lo so gia'?» e «l'ho gia' proposto?» sono due domande diverse
+ * e prima rispondeva a entrambe la stessa mappa (#895 item 1). Da #864 il cap
+ * viene imparato IN PROCESSO anche sotto `recordScore:false` — corretto, e' il
+ * circuit breaker — ma il memo restava scritto anche quando la porta del ledger
+ * aveva rifiutato: una SECONDA chiamata con `recordScore:true` e lo stesso
+ * limite usciva dalla guardia di idempotenza e non proponeva piu' niente, cosi'
+ * il cap restava noto solo a questo processo per sempre. Non e' teorico:
+ * `smoke-test-ai-models.mjs` percorre la catena in opt-out, e una generazione
+ * che gira dopo nello stesso processo eredita il memo senza la proposta.
+ *
+ * Il rifiuto per endpoint per-macchina resta invece permanente per costruzione
+ * — li' `_proposeLedgerWrite` dice no a ogni giro, quindi la ri-proposta e' un
+ * no-op, non una scrittura.
+ */
+const _ledgerProposedRequestTokenLimits = new Map();
+
+/**
  * Pull a concrete numeric token ceiling out of a 413/400 error body, when the
  * provider states one explicitly. Two known shapes so far:
  *   - Context-length caps (NVIDIA, OpenAI-style):
@@ -5493,13 +5550,20 @@ function _parseRequestTokenLimit(bodyText = '') {
 function _learnRequestTokenLimit(modelForTracking, bodyText, { recordScore = true } = {}) {
   const limit = _parseRequestTokenLimit(bodyText);
   if (!limit || limit < 500) return;
-  if (_learnedRequestTokenLimits.get(modelForTracking) === limit) return;
+  // Due domande, due memo (#895 item 1): si esce solo se il cap e' gia' noto in
+  // processo E gia' proposto al ledger. Se il memo c'e' ma la proposta manca —
+  // il caso di una chiamata precedente in opt-out — si ripassa dalla porta.
+  const known = _learnedRequestTokenLimits.get(modelForTracking) === limit;
+  const proposed = _ledgerProposedRequestTokenLimits.get(modelForTracking) === limit;
+  if (known && proposed) return;
   _learnedRequestTokenLimits.set(modelForTracking, limit);
   // Il cap resta valido IN PROCESSO (e' cio' che evita di ripagare un 400 per
   // ogni id fratello); verso il ledger passa dalla porta, che lo rifiuta se
   // l'endpoint e' per-macchina — un Ollama servito a 8k su questo runner non
   // deve insegnare quel tetto a tutte le altre macchine (#864).
-  _proposeLedgerWrite(modelForTracking, recordScore);
+  if (_proposeLedgerWrite(modelForTracking, recordScore)) {
+    _ledgerProposedRequestTokenLimits.set(modelForTracking, limit);
+  }
 }
 
 /**
@@ -5516,15 +5580,27 @@ function _learnRequestTokenLimit(modelForTracking, bodyText, { recordScore = tru
 const _learnedSchemaIncompatible = new Set();
 
 /**
+ * Sottoinsieme di `_learnedSchemaIncompatible` gia' proposto al documento
+ * condiviso. Stessa divisione di `_ledgerProposedRequestTokenLimits` qui sopra
+ * e stessa ragione (#895 item 1): il marchio in-processo di una chiamata in
+ * opt-out non deve far saltare la proposta della chiamata successiva.
+ */
+const _ledgerProposedSchemaIncompatible = new Set();
+
+/**
  * Remember that `modelForTracking` rejected strict JSON-schema mode, so
  * shouldUseSchemaMode() stops requesting it for this model going forward
  * (in-run immediately, cross-run via Firestore). No-op if already known.
  */
 function _learnSchemaIncompatible(modelForTracking, { recordScore = true } = {}) {
-  if (_learnedSchemaIncompatible.has(modelForTracking)) return;
+  // «Lo so gia'» non implica «l'ho gia' proposto» (#895 item 1).
+  if (_learnedSchemaIncompatible.has(modelForTracking)
+    && _ledgerProposedSchemaIncompatible.has(modelForTracking)) return;
   _learnedSchemaIncompatible.add(modelForTracking);
   // Stessa divisione di _learnRequestTokenLimit qui sopra (#864).
-  _proposeLedgerWrite(modelForTracking, recordScore);
+  if (_proposeLedgerWrite(modelForTracking, recordScore)) {
+    _ledgerProposedSchemaIncompatible.add(modelForTracking);
+  }
 }
 
 /**
@@ -7859,8 +7935,10 @@ export async function callLLM(messages, opts = {}) {
           // globale (`EXHAUSTION_LINE_RE`) — un guasto solo sarebbe pesato due
           // volte, e con due cause opposte, nel giudizio sulla salute della
           // generazione.
-          _exhaustReason.set(model, 'nonretryable');
-          if (e.hostUnreachable) _exhaustDetail.set(model, e.hostUnreachable);
+          // Stessa porta che usa `markModelExhausted` (#895 item 2): qui si
+          // riscrive la sola causa, ma la FORMA della scrittura e' condivisa,
+          // quindi un campo aggiunto alla causa domani scende anche qui.
+          _setExhaustReason(model, 'nonretryable', e.hostUnreachable);
         }
         // Nessuna guardia `if (!isProviderCoolingDown(provider))` qui (#787): un
         // provider gia' in cooldown per un 429 che poi si scopre irraggiungibile
