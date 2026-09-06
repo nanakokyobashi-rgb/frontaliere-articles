@@ -21,8 +21,12 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { relativeImportSpecifiers, resolveSpecifier } from '../../scripts/ci/lib/import-specifiers.mjs';
 
 const GENERATOR_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+
+/** `existsSync` accetta anche le directory; un import no. */
+const isFile = (p) => fs.existsSync(p) && fs.statSync(p).isFile();
 
 /** Source files whose imports are checked. */
 function sourceFiles(dir, acc = []) {
@@ -35,34 +39,31 @@ function sourceFiles(dir, acc = []) {
   return acc;
 }
 
-// Clausola `[^'";]*?` e non `[^'"\n]*?`: senza `\n` nella classe negata un
-// import BRACED SU PIÙ RIGHE viene visto. Con il newline escluso questa riga
-// era cieca su 102 specificatori relativi reali sotto generator/ (fra cui
-// `create-article.mjs` → `./lib/fact-check-consensus.mjs`), cioè proprio la
-// classe che il guard esiste per chiudere: un modulo rimosso o rinominato e
-// importato in quella forma lasciava il guard verde, e saltava fuori come
-// `ERR_MODULE_NOT_FOUND` a generazione — corpus e superficie fermi, CI verde.
-// Vietare `'`, `"` e `;` impedisce al match non greedy di attraversare la fine
-// dello statement e agganciare la stringa dell'import successivo.
-// `^[ \t]*` e non `\s*` dopo il newline: `\s` mangia i newline e farebbe
-// ripartire l'ancora a metà di una riga di commento che cita un import.
-// Il `from` è opzionale solo per `import`, così il side-effect import
-// (`import './x.mjs'`) resta coperto senza che `export default './x'` — che
-// non è una dipendenza — venga contato.
-const SPECIFIER =
-  /^[ \t]*(?:import\s+(?:[^'";]*?\sfrom\s+)?|export\s+[^'";]*?\sfrom\s+)(['"])([^'"]+)\1/gm;
+// L'estrattore vive in `scripts/ci/lib/import-specifiers.mjs`, una sorgente
+// sola per i cinque guard che facevano la stessa domanda con cinque copie
+// della stessa regex (issue #929 item 5). Da li' arrivano anche i due lati che
+// questo guard non vedeva: l'`import()` DINAMICO — `article-topic-selector.mjs`
+// carica cosi' `./ai-models.mjs` e `load-rc-env.mjs` cosi'
+// `./lib/google-service-account-token.mjs`, quindi rinominarne uno lasciava il
+// guard verde e produceva `ERR_MODULE_NOT_FOUND` a generazione (item 1) — e la
+// forma senza spazi `import x from'./y.mjs'` (item 2).
 
 test('every relative import under generator/ resolves to a file that exists', () => {
   const missing = [];
   for (const file of sourceFiles(GENERATOR_ROOT)) {
     const src = fs.readFileSync(file, 'utf-8');
-    for (const m of src.matchAll(SPECIFIER)) {
-      const spec = m[2];
-      if (!spec.startsWith('.')) continue;
-      const abs = path.resolve(path.dirname(file), spec);
-      if (!fs.existsSync(abs)) {
+    for (const spec of relativeImportSpecifiers(src)) {
+      const base = path.resolve(path.dirname(file), spec);
+      // Fallback di estensione (issue #929 item 3): `sourceFiles()` include i
+      // `.ts` sotto generator/, e in TypeScript l'import relativo si scrive
+      // SENZA estensione. Con `existsSync(abs)` nudo il primo `from './foo'`
+      // aggiunto in un `.ts` corretto avrebbe reso rosso il gate.
+      // `isFile` e non `existsSync`: una DIRECTORY che esiste non risolve un
+      // import, e accettarla renderebbe il guard cieco proprio sul caso in cui
+      // manca l'`index.mjs`.
+      if (!resolveSpecifier(base, isFile)) {
         missing.push(
-          `${path.relative(GENERATOR_ROOT, file)} → ${spec} (${path.relative(GENERATOR_ROOT, abs)})`,
+          `${path.relative(GENERATOR_ROOT, file)} → ${spec} (${path.relative(GENERATOR_ROOT, base)})`,
         );
       }
     }
