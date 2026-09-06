@@ -2891,13 +2891,26 @@ function endRegisterLock() {
 // The files a completed registration must ALL carry the id in, used to tell a
 // benign leftover lock from a genuinely split corpus (see
 // `resolveRegisterLock`). Derived from the same section config the
-// `modifyXxx()` functions read, so the two cannot drift apart: the slug data
-// file (`modifyRouterTs`), the article registry (`modifyBlogArticlesTsx`), the
-// four meta files and the four per-locale body files (`modifyI18nTs` +
-// `modifyLocaleFile`), and the SEO file (`modifySeoService`). `modifySitemap`
-// and `modifySitemapNews` are deliberately absent: both are no-ops here (the
-// sitemaps are derived from the whole corpus by scripts/build-api.mjs), so
-// they have no per-id state that could be half-written.
+// `modifyXxx()` functions read, so the two cannot drift apart: the
+// `BlogArticleId` union, the slug data file (both `modifyRouterTs`), the
+// article registry (`modifyBlogArticlesTsx`), the four meta files and the four
+// per-locale body files (`modifyI18nTs` + `modifyLocaleFile`), and the SEO file
+// (`modifySeoService`). `modifySitemap` and `modifySitemapNews` are
+// deliberately absent: both are no-ops here (the sitemaps are derived from the
+// whole corpus by scripts/build-api.mjs), so they have no per-id state that
+// could be half-written.
+//
+// The union file is the FIRST write of the whole sequence (`modifyRouterTs`
+// calls `modifyRouterUnion` before touching the slug map), so leaving it out
+// left the widest kill window of all uncompared: a kill between the union and
+// the slug map put the id in the ONLY file nobody looked at, every compared
+// target came back absent, and `resolveRegisterLock()` classified the split
+// corpus as `nothing-written` — clearing the marker over an orphan union
+// member. Its path is hard-coded in `modifyRouterUnion()` rather than living
+// in `ARTICLE_SECTION_CONFIGS`, which is exactly how it escaped a list that
+// claims to be derived from the section config; `section.updateRouterUnion` is
+// the same flag that gates the write, so svizzera (loose string ids, no union)
+// keeps its 11 targets.
 //
 // `sectionName` is the section RECORDED IN THE LOCK, not SECTION_NAME: the two
 // differ whenever `generate-article.yml` alternates sections in the same
@@ -2917,6 +2930,17 @@ function registerLockTargets(id, sectionName = SECTION_NAME) {
     );
   }
   const targets = [
+    // First write of the sequence, and the only target whose path is NOT in
+    // the section config (`modifyRouterUnion` hard-codes it). The needle is
+    // the form actually written into the union — the id between single
+    // quotes, `| 'id';` — not the bare id: the file holds nothing else.
+    ...(section.updateRouterUnion
+      ? [{
+          label: 'packages/articles/content/blogArticleIds.ts',
+          absPath: resolve('packages/articles/content/blogArticleIds.ts'),
+          needle: `'${id}'`,
+        }]
+      : []),
     { label: section.slugDataFile, absPath: resolve(section.slugDataFile), needle: id },
     { label: section.registryFile, absPath: resolve(section.registryFile), needle: id },
     { label: section.seoFile, absPath: resolve(section.seoFile), needle: id },
