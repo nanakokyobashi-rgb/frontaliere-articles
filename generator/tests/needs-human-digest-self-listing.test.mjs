@@ -104,6 +104,91 @@ test('a liste vuote lo step richiude l issue dedup, non si limita a uscire', () 
 });
 
 /**
+ * #920 — la chiusura deve mirare alla STESSA issue che la lista esclude.
+ *
+ * La lista esclude se stessa per UGUAGLIANZA (`select(.title != env.DEDUP_TITLE)`),
+ * il resolve chiudeva per PREFISSO (60 char, `searchSafePrefix`). Una issue
+ * aperta il cui titolo comincia per `DEDUP_TITLE` e prosegue non viene esclusa
+ * dalla lista — quindi non impedisce nemmeno la condizione «liste vuote» — ma
+ * al ramo vuoto verrebbe chiusa AL POSTO del digest, e chiudere la issue
+ * sbagliata riesce: nessun errore, nessuna traccia. Apertura, esclusione e
+ * chiusura devono usare una sola forma della chiave.
+ */
+test('a liste vuote il resolve chiude per uguaglianza, come la lista esclude', () => {
+  const step = surfaceStep();
+  const emptyBranch = /if \[ -z "\$PRS" \] && \[ -z "\$ISSUES" \]; then([\s\S]*?)\n\s+fi\n/.exec(step);
+  assert.ok(emptyBranch, 'ramo "liste vuote" non trovato');
+  assert.match(
+    emptyBranch[1],
+    /--exact-title/,
+    'senza --exact-title il resolve chiude «la prima aperta che comincia per», non il digest',
+  );
+  // Il flag deve esistere davvero dall'altra parte: uno YAML non importa da un
+  // modulo, e un flag sconosciuto verrebbe ignorato in silenzio (AGENTS.md #6).
+  const creator = readFileSync(path.join(ROOT, 'scripts/lib/github-issue-creator.mjs'), 'utf8');
+  assert.match(
+    creator,
+    /args\.includes\('--exact-title'\)/,
+    'la CLI del creator non legge --exact-title: il flag sarebbe ignorato in silenzio',
+  );
+});
+
+/**
+ * #920 — un close respinto non puo' lasciare la run verde.
+ *
+ * `set -uo pipefail` (niente `-e`), `continue-on-error: true` e un `gh`
+ * best-effort facevano sparire un close rifiutato (permessi, rate-limit, 5xx)
+ * dietro una riga di log. Il digest restava aperto con un elenco falso fino al
+ * prossimo giorno a liste vuote, che puo' non arrivare presto: e' la classe
+ * «non si rompe, non fa».
+ */
+test('il fallimento del close emerge invece di essere assorbito', () => {
+  const step = surfaceStep();
+  const emptyBranch = /if \[ -z "\$PRS" \] && \[ -z "\$ISSUES" \]; then([\s\S]*?)\n\s+fi\n/.exec(step);
+  assert.ok(emptyBranch, 'ramo "liste vuote" non trovato');
+  assert.match(
+    emptyBranch[1],
+    /if node scripts\/lib\/github-issue-creator\.mjs/,
+    'l esito del resolve va ispezionato: senza `if`, con `set -uo pipefail` e senza `-e`, sparisce',
+  );
+  assert.match(emptyBranch[1], /::error::/, 'un close respinto deve lasciare un annotazione');
+  assert.match(emptyBranch[1], /\n\s+exit 1\n/, 'lo step deve uscire non-zero quando il close e respinto');
+
+  // L'altra meta': la CLI deve davvero uscire non-zero, o l `if` qui sopra e
+  // sempre vero e il ramo rosso e' morto.
+  const creator = readFileSync(path.join(ROOT, 'scripts/lib/github-issue-creator.mjs'), 'utf8');
+  assert.match(
+    creator,
+    /process\.exit\(res && res\.resolved === false \? 1 : 0\)/,
+    'la CLI --resolve non distingue piu il close respinto dal no-op «niente da chiudere»',
+  );
+});
+
+/**
+ * #920 — il corpo del digest e' un ELENCO, non un evento.
+ *
+ * Sul dedup (issue gia' aperta) e sulla RIAPERTURA della gemella chiusa entro
+ * la finestra, `createGithubIssue` posta un commento di ricorrenza e lascia il
+ * corpo della prima occorrenza: il lettore trova nel corpo le liste di ieri e
+ * quelle vere solo nell'ultimo commento. E' lo stesso «elenco falso» che il
+ * chiuditore elimina sull'issue aperta, ricomparso un percorso piu' in la'.
+ */
+test('la creazione del digest riscrive il corpo, invece di lasciare l elenco vecchio', () => {
+  const step = surfaceStep();
+  assert.match(
+    step,
+    /--refresh-body/,
+    'senza --refresh-body il digest riaperto mostra le liste pre-chiusura',
+  );
+  const creator = readFileSync(path.join(ROOT, 'scripts/lib/github-issue-creator.mjs'), 'utf8');
+  assert.match(
+    creator,
+    /args\.includes\('--refresh-body'\)/,
+    'la CLI del creator non legge --refresh-body: il flag sarebbe ignorato in silenzio',
+  );
+});
+
+/**
  * Secondo residuo permanente, stessa forma del primo: il digest dello sweep
  * (`🧭 Decisioni del proprietario`) nasce in `needs-human-sweep.yml` con
  * `needs-human,automation,agent:no-age-out` e lo sweep ha il divieto esplicito di
