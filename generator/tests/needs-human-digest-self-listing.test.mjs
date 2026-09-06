@@ -80,6 +80,55 @@ test('la condizione di chiusura promessa nel corpo resta raggiungibile', () => {
   assert.match(emptyBranch[1], /\n\s+exit 0/, 'a liste vuote lo step non deve ricreare il digest');
 });
 
+/**
+ * Terzo modo di rendere irraggiungibile — o peggio, FALSA — la condizione di
+ * chiusura: la query che la calcola fallisce. Lo step gira sotto
+ * `set -uo pipefail` senza `set -e`, quindi un `gh` non-zero (jq su una forma
+ * inattesa, rate-limit, token scaduto) lascia la variabile vuota e
+ * indistinguibile da «nessun residuo»; con entrambe le query rotte dalla
+ * stessa causa, il ramo di chiusura richiude il digest mentre il backlog
+ * needs-human e' pieno, senza fallire e sotto `continue-on-error: true`.
+ * I gemelli con `--resolve` (reconcile-article-shards.yml,
+ * republish-dirty-content.yml) subordinano gia' la chiusura a
+ * `steps.detect.outcome == 'success'`; qui produttore e consumatore stanno
+ * nello stesso step, quindi l'equivalente e' catturare l'exit status.
+ */
+test('l esito delle due query e catturato, non solo il loro output', () => {
+  const step = surfaceStep();
+  assert.doesNotMatch(
+    step,
+    /\n\s+set -e[a-z]*uo pipefail/,
+    'se lo step passasse a `set -e` questo test andrebbe ripensato, non cancellato',
+  );
+  assert.match(
+    step,
+    /PRS=\$\(gh pr list[\s\S]*?\n\s+PRS_RC=\$\?/,
+    'l exit status di `gh pr list` va catturato subito dopo l assegnazione',
+  );
+  assert.match(
+    step,
+    /ISSUES=\$\(gh issue list[\s\S]*?\n\s+ISSUES_RC=\$\?/,
+    'l exit status di `gh issue list` va catturato subito dopo l assegnazione',
+  );
+});
+
+test('una query fallita non arriva mai al ramo di chiusura', () => {
+  const step = surfaceStep();
+  const guard = /if \[ "\$PRS_RC" -ne 0 \] \|\| \[ "\$ISSUES_RC" -ne 0 \]; then([\s\S]*?)\n\s+fi\n/.exec(step);
+  assert.ok(guard, 'manca il guard sull esito delle query');
+  assert.match(guard[1], /\n\s+exit 1/, 'una query fallita deve far fallire lo step, non passare oltre');
+  assert.doesNotMatch(
+    guard[1],
+    /--resolve/,
+    'il ramo di errore non deve chiudere niente: lo stato del backlog e sconosciuto, non vuoto',
+  );
+  // E deve stare PRIMA del ramo «liste vuote», o non lo protegge.
+  const guardAt = step.indexOf('"$PRS_RC" -ne 0');
+  const emptyAt = step.indexOf('if [ -z "$PRS" ] && [ -z "$ISSUES" ]; then');
+  assert.notEqual(emptyAt, -1, 'ramo "liste vuote" non trovato');
+  assert.ok(guardAt !== -1 && guardAt < emptyAt, 'il guard deve precedere il ramo di chiusura');
+});
+
 test('a liste vuote lo step richiude l issue dedup, non si limita a uscire', () => {
   // Raggiungere la condizione di chiusura non basta: nessun altro processo
   // chiude questo titolo — close-recovered-failure-issues.mjs copre le
