@@ -98,6 +98,14 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { createRequire } from 'node:module';
 import { fileURLToPath } from 'node:url';
+// I pavimenti non sono piu' costanti: si derivano dal corpus su disco, stessa
+// sorgente unica del gate di pubblicazione (scripts/ci/verify-api-floors.mjs).
+import {
+  CORPUS_LOCALES,
+  floorFrom,
+  mirrorExpectation,
+  missingCorpusMessage,
+} from '../lib/corpus-floors.mjs';
 
 export const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 
@@ -106,27 +114,35 @@ export const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '
  * `blog-body-ch`: e' cosi' che l'apostrofo del 2026-07-29 e' passato. Qui le
  * due radici sono `content/blog-body` e `content/blog-body-ch` (il sito le ha
  * sotto `services/locales/`).
+ *
+ * Nessun `minFiles` accanto al path, e non e' un dettaglio: erano `3000` e
+ * `1000`, tarati una volta contro il corpus di quel giorno contro i ~15k file
+ * che `content/blog-body` tiene oggi. Un pavimento assoluto non si rompe, si
+ * SVUOTA restando verde — e' la classe che #910 ha chiuso altrove, e questi due
+ * (piu' `MIN_FILES_TOTAL`) ne erano i superstiti. L'atteso ora si ricava dalla
+ * radice stessa a ogni run: vedi `countByLocale` e `floorViolations`.
  */
-export const BLOG_BODY_ROOTS = [
-  { rel: 'content/blog-body', minFiles: 3000 },
-  { rel: 'content/blog-body-ch', minFiles: 1000 },
-];
+export const BLOG_BODY_ROOTS = [{ rel: 'content/blog-body' }, { rel: 'content/blog-body-ch' }];
 
 /**
- * Pavimento TOTALE, in aggiunta ai pavimenti per radice.
+ * Quanti file di ciascun locale la radice ha raccolto.
  *
- * I due pavimenti non sono ridondanti, coprono due modi di fallire diversi:
- *  - il TOTALE prende il caso «il gate ha scandito quasi niente» — in un
- *    worktree sparse `content/` non esiste affatto, e un gate che passa su zero
- *    file e' il falso verde piu' facile da produrre su questo repo;
- *  - il PER-RADICE prende il caso che il totale NON vede, ed e' il piu'
- *    insidioso: `blog-body` da solo fa 12.544 file, quindi una soglia sul totale
- *    resta soddisfatta anche se `blog-body-ch` risolve a zero (cartella
- *    rinominata, symlink orfano). Sarebbe il buco del 2026-07-29 riaperto dal
- *    guard che esiste per chiuderlo. Ogni corpus deve dimostrare di essere stato
- *    guardato.
+ * Pura, e sui file GIA' raccolti invece che con una seconda `readdir`: la
+ * popolazione su cui si misura il pavimento deve essere la stessa che il gate
+ * scandisce, altrimenti le due possono divergere in silenzio — che e' la forma
+ * esatta del difetto che il pavimento dei feed aveva (issue #917 item 2).
+ *
+ * Il locale e' il primo segmento sotto la radice; un file fuori dai locali noti
+ * non finisce in nessun secchio e quindi non gonfia l'atteso.
  */
-export const MIN_FILES_TOTAL = 3000;
+export function countByLocale(files, rootDir, locales = CORPUS_LOCALES) {
+  const byLocale = Object.fromEntries(locales.map((l) => [l, 0]));
+  for (const file of files) {
+    const [locale] = path.relative(rootDir, file).split(path.sep);
+    if (locale in byLocale) byLocale[locale] += 1;
+  }
+  return byLocale;
+}
 
 /** Raccoglie ricorsivamente i `.ts` sotto `dir`. Directory assente -> []. */
 export function collectTypeScriptFiles(dir) {
@@ -151,25 +167,56 @@ export function collectTypeScriptFiles(dir) {
 
 /**
  * Applica i pavimenti. Ritorna la lista dei messaggi di violazione (vuota = ok).
- * Pura e senza I/O sulle soglie: e' la meta' che il test in `generator/tests/`
- * puo' esercitare senza esbuild e senza `content/`.
+ * Pura e senza I/O: e' la meta' che il test in `generator/tests/` puo'
+ * esercitare senza esbuild e senza `content/`.
+ *
+ * Ogni radice porta il proprio `byLocale`, da cui `mirrorExpectation` ricava
+ * l'atteso — un corpus di corpi e' mirrorato sui quattro locali, quindi il
+ * locale piu' popolato e' la verita' di terra per gli altri tre.
+ *
+ * I due pavimenti non sono ridondanti, coprono due modi di fallire diversi:
+ *  - il TOTALE prende il caso «il gate ha scandito quasi niente» — in un
+ *    worktree sparse `content/` non esiste affatto, e un gate che passa su zero
+ *    file e' il falso verde piu' facile da produrre su questo repo;
+ *  - il PER-RADICE prende il caso che il totale NON vede, ed e' il piu'
+ *    insidioso: `blog-body` da solo fa ~15k file, quindi una soglia sul totale
+ *    resta soddisfatta anche se `blog-body-ch` risolve a zero (cartella
+ *    rinominata, symlink orfano). Sarebbe il buco del 2026-07-29 riaperto dal
+ *    guard che esiste per chiuderlo. Ogni corpus deve dimostrare di essere
+ *    stato guardato.
+ *
+ * Un atteso a ZERO non e' un pavimento a zero: `count < 0` e' falso per
+ * qualunque `count`, quindi il gate sparirebbe invece di scattare. E' l'assenza
+ * del riferimento, e vale una violazione — la stessa regola, e lo stesso
+ * messaggio, del gate di pubblicazione.
  */
-export function floorViolations(perRoot, { minTotal = MIN_FILES_TOTAL } = {}) {
+export function floorViolations(perRoot, { retention = undefined } = {}) {
   const violations = [];
   let total = 0;
-  for (const { rel, minFiles, count } of perRoot) {
+  let expectedTotal = 0;
+  for (const { rel, count, byLocale } of perRoot) {
     total += count;
-    if (count <= minFiles) {
+    const expected = mirrorExpectation(byLocale ?? {});
+    expectedTotal += expected;
+    if (expected === 0) {
+      violations.push(missingCorpusMessage(rel, rel));
+      continue;
+    }
+    const minFiles = floorFrom(expected, retention);
+    if (count < minFiles) {
       violations.push(
-        `${rel}: ${count} file scanditi, soglia > ${minFiles}. ` +
-          `La radice non e' stata guardata (checkout sparse? cartella rinominata?) — ` +
+        `${rel}: ${count} file scanditi contro ${expected} attesi (pavimento ${minFiles}, ` +
+          `derivato dal locale piu' popolato x ${CORPUS_LOCALES.length} locali). ` +
+          `La radice non e' stata guardata per intero (checkout sparse? un locale rinominato?) — ` +
           `un gate che passa senza guardare e' peggio di nessun gate.`,
       );
     }
   }
-  if (total <= minTotal) {
+  if (expectedTotal === 0) return violations; // gia' segnalato per radice: niente riferimento, niente totale
+  const minTotal = floorFrom(expectedTotal, retention);
+  if (total < minTotal) {
     violations.push(
-      `TOTALE: ${total} file scanditi, soglia > ${minTotal}. ` +
+      `TOTALE: ${total} file scanditi contro ${expectedTotal} attesi (pavimento ${minTotal}). ` +
         `In un checkout sparse content/ non esiste affatto: questo e' il falso verde da non produrre.`,
     );
   }
@@ -262,11 +309,15 @@ const BATCH = 500;
 
 export async function run({ log = console.log, error = console.error, env = process.env } = {}) {
   const perRoot = BLOG_BODY_ROOTS.map((r) => {
-    const files = collectTypeScriptFiles(path.join(ROOT, r.rel));
-    return { ...r, count: files.length, files };
+    const rootDir = path.join(ROOT, r.rel);
+    const files = collectTypeScriptFiles(rootDir);
+    return { ...r, count: files.length, files, byLocale: countByLocale(files, rootDir) };
   });
 
-  for (const r of perRoot) log(`${r.rel}: ${r.count} file`);
+  for (const r of perRoot) {
+    const perLocale = CORPUS_LOCALES.map((l) => `${l}=${r.byLocale[l]}`).join(' ');
+    log(`${r.rel}: ${r.count} file (${perLocale}), atteso ${mirrorExpectation(r.byLocale)}`);
+  }
 
   // I pavimenti restano sull'intero corpus (perRoot sopra), a prescindere
   // dallo scan mode: e' l'anti-falso-verde e non deve dipendere da un diff.

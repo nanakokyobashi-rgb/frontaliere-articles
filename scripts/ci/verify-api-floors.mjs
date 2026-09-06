@@ -31,12 +31,18 @@ import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import {
   floorFrom,
+  countSeoEntries,
   countSourceArticles,
   countSourceImages,
   missingCorpusMessage,
+  withinWarnBand,
   SECTION_BODY_DIRS,
+  SEO_DIR,
   IMAGE_SOURCE_DIR,
 } from '../lib/corpus-floors.mjs';
+// I `<item>` si contano sulla STRUTTURA del documento, non sul suo testo: il
+// corpo integrale dell'articolo viaggia dentro <content:encoded><![CDATA[…]]>.
+import { countTags } from '../lib/xml-counts.mjs';
 
 export const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
 
@@ -56,15 +62,15 @@ export function feedSection(fileName) {
   return /^rss-svizzera/.test(fileName) ? 'svizzera' : 'frontaliere';
 }
 
-const occurrences = (text, needle) => text.split(needle).length - 1;
-
 /**
  * Il nucleo puro: date le misure, quali pavimenti sono sfondati.
  *
  * @param {{articleCounts: Record<string, number>, feeds: {name: string, items: number}[],
  *          images: number|null}} measured  cio' che l'artefatto dichiara
- * @param {{sourceArticles: Record<string, number>, sourceImages: number,
- *          rssMaxItems: number}} expected   cio' che il corpus sorgente promette
+ * @param {{sourceArticles: Record<string, number>, seoEntries: Record<string, number>,
+ *          sourceImages: number, rssMaxItems: number}} expected   cio' che il corpus
+ *          sorgente promette: i corpi per i contatori del manifest, le voci SEO per i
+ *          feed (sono due popolazioni diverse, e ciascun pavimento va sulla propria)
  * @returns {string[]} una riga per violazione, vuoto se tutto regge
  */
 export function floorViolations(measured, expected, retention = undefined) {
@@ -97,15 +103,32 @@ export function floorViolations(measured, expected, retention = undefined) {
   }
 
   // Un feed e' tagliato a RSS_MAX_ITEMS, quindi il suo atteso e' il minimo fra
-  // il tetto e il corpus della sua sezione: su una sezione piccola un feed
-  // corto e' corretto, su una grande e' un troncamento.
+  // il tetto e la popolazione che lo genera.
+  //
+  // E quella popolazione sono le VOCI SEO, non i file di corpo della sezione:
+  // `buildSectionFeeds` costruisce gli <item> da `parseSeoBlogs(section.seoFiles)`
+  // (`engine/rssFeeds.mjs`), e i corpi non entrano nel conteggio. Tarare il
+  // pavimento sui corpi legava il gate a una popolazione DIVERSA da quella
+  // misurata: due insiemi che possono divergere senza che nulla li colleghi —
+  // e' gia' successo, il feed fermo tre mesi perche' i chunk letti erano due su
+  // sette. Peggio ancora, la divergenza andava nella direzione che blocca: un
+  // chunk uscito dalla lista, o una sezione con meno di 45 voci datate, non
+  // faceva segnalare un feed vecchio, faceva fallire l'INTERA pubblicazione per
+  // un feed legittimamente corto.
   for (const feed of measured.feeds) {
     const section = feedSection(feed.name);
-    const source = expected.sourceArticles[section] ?? 0;
-    if (source === 0) continue; // riferimento mancante: gia' segnalato una volta sopra
-    const min = floor(Math.min(expected.rssMaxItems, source));
+    const source = expected.seoEntries[section] ?? 0;
+    if (source === 0) {
+      violations.push(missingCorpusMessage(`${feed.name} (voci SEO di ${section})`, SEO_DIR));
+      continue;
+    }
+    const cap = Math.min(expected.rssMaxItems, source);
+    const min = floor(cap);
     if (feed.items < min) {
-      violations.push(`${feed.name}: ${feed.items} <item> contro ${min} attesi — feed troncato`);
+      violations.push(
+        `${feed.name}: ${feed.items} <item> contro ${cap} attesi (pavimento ${min}, ` +
+          `da ${source} voci SEO nella sezione ${section}) — feed troncato`,
+      );
     }
   }
 
@@ -131,6 +154,40 @@ export function floorViolations(measured, expected, retention = undefined) {
   return violations;
 }
 
+/**
+ * Gli avvisi di AVVICINAMENTO al pavimento — nessuna decisione di pass/fail.
+ *
+ * `FLOOR_RETENTION` e' misurato su un rapporto che NON e' stazionario: da un
+ * lato i file di corpo `it`, dall'altro le voci del registro, e i due restano
+ * allineati (3786/3789, 1856/1856) solo perche' `scripts/retire-article.mjs`
+ * cancella corpo e voce insieme. Qualunque flusso che lasci un corpo senza voce
+ * — orfani, ritiri a meta', import parziali — abbassa il rapporto in modo
+ * MONOTONO, e al -10% questo gate comincia a rifiutare una pubblicazione sana
+ * con un messaggio che parla di «set troncato». Oggi nessuno misura quel
+ * rapporto nel tempo.
+ *
+ * Una deriva monotona attraversa pero' una banda prima del muro: `WARN_MARGIN`.
+ * Emettere l'avviso qui lo mette nel log della run che pubblica — cioe' nel
+ * posto dove il rapporto viene gia' calcolato — e lo rende visibile PRIMA che
+ * diventi un blocco, senza allargare di un millimetro il pavimento.
+ */
+export function retentionWarnings(measured, expected) {
+  const warnings = [];
+  for (const [section, counter] of Object.entries(SECTION_COUNTERS)) {
+    const source = expected.sourceArticles[section] ?? 0;
+    const declared = measured.articleCounts[counter];
+    if (!withinWarnBand(declared, source)) continue;
+    warnings.push(
+      `manifest.counts.${counter}: ${declared}/${source} corpi sorgente ` +
+        `(${(100 * (declared / source)).toFixed(1)}%) — sopra il pavimento ma dentro la banda di ` +
+        `margine. I due lati contano cose diverse e il rapporto deriva in modo monotono: ` +
+        `un corpo senza voce di registro (orfano, ritiro a meta', import parziale) lo abbassa ` +
+        `e basta. Riconcilia corpi e registro prima che il gate blocchi una pubblicazione sana.`,
+    );
+  }
+  return warnings;
+}
+
 /** Legge dall'artefatto su disco le misure che il nucleo puro confronta. */
 export function measureDist(distDir) {
   const readOut = (name) => fs.readFileSync(path.join(distDir, name), 'utf-8');
@@ -144,7 +201,7 @@ export function measureDist(distDir) {
     .filter((f) => f.endsWith('.xml'))
     .map((name) => ({ name, xml: readOut(name) }))
     .filter(({ xml }) => xml.includes('<rss'))
-    .map(({ name, xml }) => ({ name, items: occurrences(xml, '<item>') }));
+    .map(({ name, xml }) => ({ name, items: countTags(xml, 'item') }));
 
   const imageManifest = path.join(distDir, 'images-manifest.json');
   const images = fs.existsSync(imageManifest)
@@ -158,12 +215,20 @@ export function measureDist(distDir) {
 export async function expectFromCorpus(root) {
   // Importato, non ricopiato: `RSS_MAX_ITEMS` ha una sorgente sola, ed e'
   // quella che genera davvero i feed.
-  const { RSS_MAX_ITEMS } = await import(pathToFileURL(path.join(root, 'engine', 'rssFeeds.mjs')).href);
+  // `RSS_SECTIONS` porta con se' i propri `seoFiles`: la lista dei chunk NON
+  // viene ricopiata qui, o il pavimento tornerebbe a misurare una popolazione
+  // che nessuno garantisce sia quella letta dal generatore dei feed.
+  const { RSS_MAX_ITEMS, RSS_SECTIONS } = await import(
+    pathToFileURL(path.join(root, 'engine', 'rssFeeds.mjs')).href
+  );
+  const seoEntries = {};
+  for (const section of RSS_SECTIONS) seoEntries[section.id] = countSeoEntries(root, section.seoFiles);
   return {
     sourceArticles: {
       frontaliere: countSourceArticles(root, 'frontaliere'),
       svizzera: countSourceArticles(root, 'svizzera'),
     },
+    seoEntries,
     sourceImages: countSourceImages(root),
     rssMaxItems: RSS_MAX_ITEMS,
   };
@@ -179,7 +244,8 @@ async function main() {
 
   console.log(
     `[api-floors] corpus sorgente: ${expected.sourceArticles.frontaliere} frontaliere, ` +
-      `${expected.sourceArticles.svizzera} svizzera, ${expected.sourceImages} immagini`,
+      `${expected.sourceArticles.svizzera} svizzera, ${expected.sourceImages} immagini, ` +
+      `voci SEO ${expected.seoEntries.frontaliere}/${expected.seoEntries.svizzera}`,
   );
   console.log(
     `[api-floors] manifest: articles=${measured.articleCounts.articles}, ` +
@@ -191,6 +257,7 @@ async function main() {
     for (const v of violations) console.error(`::error::${v}`);
     process.exit(1);
   }
+  for (const w of retentionWarnings(measured, expected)) console.log(`::warning::${w}`);
   console.log(`[api-floors] pavimenti derivati dal corpus: tutti retti (${measured.feeds.length} feed inclusi)`);
 }
 

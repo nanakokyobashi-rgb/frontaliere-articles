@@ -34,8 +34,8 @@ import { fileURLToPath } from 'node:url';
 
 import {
   BLOG_BODY_ROOTS,
-  MIN_FILES_TOTAL,
   collectTypeScriptFiles,
+  countByLocale,
   filesToScan,
   floorViolations,
   formatOffender,
@@ -50,54 +50,114 @@ const WORKFLOW = path.join(ROOT, '.github/workflows/publish-api.yml');
 
 // ── I pavimenti ─────────────────────────────────────────────────────────────
 
+/** Una radice sana: quattro locali mirrorati, `n` corpi ciascuno. */
+const mirrored = (rel, n) => ({
+  rel,
+  count: n * 4,
+  byLocale: { it: n, en: n, de: n, fr: n },
+});
+
 test('conteggi realistici non producono violazioni', () => {
-  // I numeri misurati su origin/main il 2026-08-09.
-  const perRoot = [
-    { rel: 'content/blog-body', minFiles: 3000, count: 12548 },
-    { rel: 'content/blog-body-ch', minFiles: 1000, count: 2596 },
-  ];
+  // I numeri misurati su questo checkout il 2026-09-06.
+  const perRoot = [mirrored('content/blog-body', 3792), mirrored('content/blog-body-ch', 1894)];
   assert.deepEqual(floorViolations(perRoot), []);
 });
 
 test('un checkout sparse (zero file ovunque) fa fallire il gate', () => {
   // In un worktree sparse `content/` non esiste affatto. E' il falso verde piu'
   // facile da produrre su questo repo, e il gate deve rifiutarsi di dirsi verde.
-  const perRoot = BLOG_BODY_ROOTS.map((r) => ({ ...r, count: 0 }));
+  //
+  // Con un pavimento DERIVATO questo caso e' il piu' delicato: l'atteso di una
+  // radice vuota e' 0, e `count < 0` e' falso per qualunque count — cioe' il
+  // gate sparirebbe invece di scattare. Deve essere una violazione esplicita.
+  const perRoot = BLOG_BODY_ROOTS.map((r) => ({ ...r, count: 0, byLocale: {} }));
   const v = floorViolations(perRoot);
-  assert.equal(v.length, 3, 'due radici a zero + il totale a zero');
-  assert.ok(v.some((m) => m.startsWith('TOTALE:')), 'il pavimento totale deve scattare');
+  assert.equal(v.length, 2, 'una violazione per radice: il riferimento manca, non e\' un pavimento a zero');
+  assert.ok(
+    v.every((m) => /riferimento del pavimento assente/.test(m)),
+    `un corpus assente non e\' un pavimento a zero: ${JSON.stringify(v)}`,
+  );
 });
 
 test('UNA sola radice a zero fa fallire, anche se il totale abbonda', () => {
   // È l'asserzione che il pavimento sul totale NON puo' fare, ed e' esattamente
-  // il buco del 2026-07-29: blog-body da solo fa 12.5k file, quindi qualunque
+  // il buco del 2026-07-29: blog-body da solo fa ~15k file, quindi qualunque
   // soglia sul totale resta soddisfatta anche se blog-body-ch risolve a zero —
   // cartella rinominata, symlink orfano — e la sezione svizzera tornerebbe
   // scoperta con la CI verde.
   const perRoot = [
-    { rel: 'content/blog-body', minFiles: 3000, count: 12548 },
-    { rel: 'content/blog-body-ch', minFiles: 1000, count: 0 },
+    mirrored('content/blog-body', 3792),
+    { rel: 'content/blog-body-ch', count: 0, byLocale: {} },
   ];
   const v = floorViolations(perRoot);
   assert.equal(v.length, 1);
-  assert.match(v[0], /^content\/blog-body-ch: 0 file scanditi/);
+  assert.match(v[0], /content\/blog-body-ch/);
   assert.ok(
     !v.some((m) => m.startsWith('TOTALE:')),
     'il totale qui e\' soddisfatto: e\' proprio il motivo per cui il pavimento per radice esiste',
   );
 });
 
-test('il pavimento totale e\' almeno 3000 e ogni radice ne ha uno', () => {
-  assert.ok(MIN_FILES_TOTAL >= 3000, `pavimento totale ${MIN_FILES_TOTAL}: troppo basso`);
-  assert.ok(BLOG_BODY_ROOTS.length >= 2, 'entrambe le radici devono essere sorvegliate');
-  for (const r of BLOG_BODY_ROOTS) {
-    assert.ok(r.minFiles > 0, `${r.rel}: un pavimento a 0 non e\' un pavimento`);
-  }
+/*
+ * LA RAGIONE DELLA FIX (#917 item 1). `minFiles: 3000` / `1000` e
+ * `MIN_FILES_TOTAL = 3000` erano soglie ASSOLUTE, tarate una volta contro il
+ * corpus di quel giorno. Il corpus e' cresciuto a ~22.700 file su due radici, e
+ * una soglia ferma a 3000 non si rompe: si svuota restando verde. I due casi
+ * qui sotto sono quelli che il pavimento derivato vede e quello assoluto no.
+ */
+test('un locale non materializzato viene visto, mentre 3000/1000 lo accettavano', () => {
+  // `fr` sparito da blog-body (cartella rinominata, checkout su tre lingue):
+  // 11.376 file restano, cioe' quattro volte il vecchio `minFiles: 3000`.
+  const perRoot = [
+    { rel: 'content/blog-body', count: 3792 * 3, byLocale: { it: 3792, en: 3792, de: 3792, fr: 0 } },
+    mirrored('content/blog-body-ch', 1894),
+  ];
+  const v = floorViolations(perRoot);
+  assert.ok(3792 * 3 > 3000, 'la vecchia soglia assoluta avrebbe accettato questa radice');
+  assert.match(v[0], /^content\/blog-body: 11376 file scanditi contro 15168 attesi/);
+});
+
+test("il pavimento scala col corpus invece di restare fermo dov'era", () => {
+  const small = floorViolations([mirrored('content/blog-body', 800), mirrored('content/blog-body-ch', 800)]);
+  assert.deepEqual(small, [], 'un corpus piccolo ma integro passa: il pavimento e\' relativo, non assoluto');
+
+  // Lo stesso conteggio che passava sopra e' un troncamento su un corpus
+  // grande — ed e' l'unica cosa che una costante non puo' esprimere.
+  const truncated = floorViolations([
+    { rel: 'content/blog-body', count: 3200, byLocale: { it: 3792, en: 0, de: 0, fr: 0 } },
+    mirrored('content/blog-body-ch', 1894),
+  ]);
+  assert.match(truncated[0], /content\/blog-body: 3200 file scanditi contro 15168 attesi/);
+});
+
+test("nessuna soglia assoluta e' sopravvissuta nel sorgente del gate", () => {
+  const src = fs.readFileSync(GATE, 'utf8');
+  assert.doesNotMatch(src, /^export const MIN_FILES_TOTAL\b/m, 'la costante assoluta e\' tornata');
+  assert.doesNotMatch(
+    src,
+    /minFiles:\s*\d+/,
+    'un `minFiles: <numero>` accanto al path e\' la soglia che invecchia col corpus',
+  );
+  assert.ok(
+    src.includes("from '../lib/corpus-floors.mjs'"),
+    'il pavimento deve venire dalla stessa sorgente unica del gate di pubblicazione',
+  );
   assert.deepEqual(
     BLOG_BODY_ROOTS.map((r) => r.rel).sort(),
     ['content/blog-body', 'content/blog-body-ch'],
     'le due radici dei corpi di questo repo',
   );
+});
+
+test('countByLocale bucketizza sul primo segmento e ignora cio\' che sta fuori dai locali', () => {
+  const rootDir = path.join(ROOT, 'content/blog-body');
+  const files = [
+    path.join(rootDir, 'it', 'a.ts'),
+    path.join(rootDir, 'it', 'b.ts'),
+    path.join(rootDir, 'fr', 'nested', 'c.ts'),
+    path.join(rootDir, 'zz', 'd.ts'),
+  ];
+  assert.deepEqual(countByLocale(files, rootDir), { it: 2, en: 0, de: 0, fr: 1 });
 });
 
 // ── La raccolta dei file ────────────────────────────────────────────────────
@@ -314,7 +374,17 @@ test('scansione reale dei corpi (solo se PREFLIGHT_ESBUILD_DIR e\' impostata)', 
   }
   const esbuild = loadEsbuild();
   const files = BLOG_BODY_ROOTS.flatMap((r) => collectTypeScriptFiles(path.join(ROOT, r.rel)));
-  assert.ok(files.length > MIN_FILES_TOTAL, `solo ${files.length} corpi trovati`);
+  assert.deepEqual(
+    floorViolations(
+      BLOG_BODY_ROOTS.map((r) => {
+        const rootDir = path.join(ROOT, r.rel);
+        const rootFiles = collectTypeScriptFiles(rootDir);
+        return { ...r, count: rootFiles.length, byLocale: countByLocale(rootFiles, rootDir) };
+      }),
+    ),
+    [],
+    'il corpus di questo checkout deve reggere i propri pavimenti derivati',
+  );
 
   const failures = [];
   for (let i = 0; i < files.length; i += 500) {

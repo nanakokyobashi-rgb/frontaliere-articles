@@ -33,6 +33,10 @@ import assert from 'node:assert/strict';
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join, resolve } from 'node:path';
+// La stessa funzione che il build usa per contare: un conteggio testuale qui
+// riaprirebbe da solo il difetto (`<item>` dentro un CDATA) che l'asserzione
+// dovrebbe sorvegliare.
+import { countTags } from '../../scripts/lib/xml-counts.mjs';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
 const SRC = readFileSync(resolve(ROOT, 'scripts/build-api.mjs'), 'utf-8');
@@ -99,13 +103,12 @@ test('sul set pubblicato ogni contatore combacia con gli artefatti', { skip: !ex
   const OUT = join(ROOT, 'dist/api');
   const readOut = (name) => readFileSync(join(OUT, name), 'utf-8');
   const jsonOut = (name) => JSON.parse(readOut(name));
-  const occurrences = (text, needle) => text.split(needle).length - 1;
   const { counts } = jsonOut('manifest.json');
 
   assert.equal(counts.articles, jsonOut('articles.json').length);
   assert.equal(counts.swissArticles, jsonOut('swiss-articles.json').length);
-  assert.equal(counts.sitemapBlogUrls, occurrences(readOut('sitemap-blog.xml'), '<url>'));
-  assert.equal(counts.sitemapBlogChUrls, occurrences(readOut('sitemap-blog-ch.xml'), '<url>'));
+  assert.equal(counts.sitemapBlogUrls, countTags(readOut('sitemap-blog.xml'), 'url'));
+  assert.equal(counts.sitemapBlogChUrls, countTags(readOut('sitemap-blog-ch.xml'), 'url'));
   assert.equal(counts.tickerArticles, jsonOut('news-ticker-live.json').articles.length);
 
   const feeds = readdirSync(OUT)
@@ -113,7 +116,7 @@ test('sul set pubblicato ogni contatore combacia con gli artefatti', { skip: !ex
     .map((f) => readOut(f))
     .filter((xml) => xml.includes('<rss'));
   assert.equal(counts.rssFeeds, feeds.length);
-  assert.equal(counts.rssItems, feeds.reduce((n, xml) => n + occurrences(xml, '<item>'), 0));
+  assert.equal(counts.rssItems, feeds.reduce((n, xml) => n + countTags(xml, 'item'), 0));
 
   const slugs = jsonOut('slugs.json');
   assert.equal(Object.keys(slugs.blog).length, counts.articles);

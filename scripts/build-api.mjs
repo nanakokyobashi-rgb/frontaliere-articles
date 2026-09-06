@@ -77,6 +77,11 @@ import {
 // generator/tests/frontaliere-sitemap-shadow.test.mjs exercise it directly
 // under plain `node --test`, without a tsx subprocess.
 import { SITE, xmlEsc, SECTION_PATHS, buildSitemap } from './lib/build-sitemap.mjs';
+// I tag si contano sulla STRUTTURA del documento: renderFeed incorpora il corpo
+// integrale dell'articolo in <content:encoded><![CDATA[…]]>, e un `<item>`
+// letterale dentro un corpo gonfierebbe il conteggio nella direzione che
+// MASCHERA un troncamento (il pavimento e' un `<`).
+import { countTags } from './lib/xml-counts.mjs';
 // Detection (not filtering — see its header) for issue #166: surfaces a
 // same-day canonical-override landing on a still-in-window ticker article.
 import { findShadowedTickerArticles } from './lib/ticker-shadow-check.mjs';
@@ -404,7 +409,7 @@ for (const section of rssSections) {
     );
   }
   for (const [name, xml] of section.feeds) {
-    const items = (xml.match(/<item>/g) ?? []).length;
+    const items = countTags(xml, 'item');
     if (items === 0) throw new Error(`rss: ${name} has no <item> entries — refusing to publish`);
     // The feeds come out of engine/rssFeeds.mjs, which arrives by mirror and is
     // not ours to edit here (a change would be overwritten on the next mirror
@@ -871,9 +876,10 @@ console.log(`[build-api] wrote ${Object.keys(written).length} files to dist/api`
   const readOut = (name) => fs.readFileSync(outPath(name), 'utf-8');
   const jsonOut = (name) => JSON.parse(readOut(name));
   const derivedIfPresent = (name, derive) => (exists(name) ? derive() : 0);
-  const occurrences = (text, needle) => text.split(needle).length - 1;
-  // `<url>` con la parentesi chiusa non collide con `<urlset>`.
-  const sitemapUrls = (name) => derivedIfPresent(name, () => occurrences(readOut(name), '<url>'));
+  // `countTags` e non una `split` testuale: `<urlset>` non collide (il confine
+  // del nome e' esplicito) e il testo dei documenti — CDATA e commenti — resta
+  // fuori dal conteggio, che e' l'invariante che il gate dei feed richiede.
+  const sitemapUrls = (name) => derivedIfPresent(name, () => countTags(readOut(name), 'url'));
 
   // I feed si riconoscono dal documento, non dal nome: una convenzione di
   // naming e' proprio cio' che un writer nuovo puo' non rispettare, e le
@@ -890,7 +896,7 @@ console.log(`[build-api] wrote ${Object.keys(written).length} files to dist/api`
     sitemapBlogUrls: sitemapUrls('sitemap-blog.xml'),
     sitemapBlogChUrls: sitemapUrls('sitemap-blog-ch.xml'),
     rssFeeds: feeds.length,
-    rssItems: feeds.reduce((total, xml) => total + occurrences(xml, '<item>'), 0),
+    rssItems: feeds.reduce((total, xml) => total + countTags(xml, 'item'), 0),
     tickerArticles: derivedIfPresent('news-ticker-live.json', () => jsonOut('news-ticker-live.json').articles.length),
     newsCandidates: sitemapUrls(NEWS_CANDIDATES),
     images: derivedIfPresent(IMAGE_MANIFEST, () => jsonOut(IMAGE_MANIFEST).images.length),

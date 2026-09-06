@@ -147,31 +147,6 @@ export function sectionFloor(root, section, retention = FLOOR_RETENTION) {
  */
 export const CORPUS_LOCALES = ['it', 'en', 'de', 'fr'];
 
-/** Conta ricorsivamente i file con estensione `ext` sotto `dir`. Assente -> 0. */
-function countFilesDeep(dir, ext) {
-  let entries;
-  try {
-    entries = fs.readdirSync(dir, { withFileTypes: true });
-  } catch (err) {
-    if (err.code === 'ENOENT') return 0;
-    throw err;
-  }
-  let n = 0;
-  for (const entry of entries) {
-    const full = path.join(dir, entry.name);
-    if (entry.isDirectory()) n += countFilesDeep(full, ext);
-    else if (entry.isFile() && full.endsWith(ext)) n += 1;
-  }
-  return n;
-}
-
-/** Quanti corpi tiene ciascun locale di una radice. `{ it: n, en: n, … }`. */
-export function countBodiesByLocale(root, rel, locales = CORPUS_LOCALES) {
-  const out = {};
-  for (const locale of locales) out[locale] = countFilesDeep(path.join(root, rel, locale), '.ts');
-  return out;
-}
-
 /**
  * Quanti file una radice di corpi DEVE tenere, derivato dalla radice stessa.
  *

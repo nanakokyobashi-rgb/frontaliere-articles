@@ -200,7 +200,21 @@ function readMeta(metaPrefix, locale) {
   return out;
 }
 
-fs.mkdirSync(OUT, { recursive: true });
+/**
+ * Le scritture, TRATTENUTE fino a validazione completa.
+ *
+ * Prima erano immediate, e con `content/blog-body-ch/it` vuota (il resto del
+ * checkout intero) lo script scriveva comunque gli otto file della sezione
+ * `frontaliere` e solo POI usciva 1 — il ramo di rifiuto fa `continue`, non un
+ * abort. Nella run normale l'upload sta a valle e viene saltato, quindi oggi e'
+ * innocuo; ma un retry manuale del solo step di push, o un riuso della workdir,
+ * raccoglierebbe una directory a meta' e la pubblicherebbe sopra quella live.
+ * Un artefatto parziale che nessuno ha dichiarato tale e' esattamente il «set
+ * troncato» da cui `manifest.json` esiste per difendere.
+ *
+ * Quindi: si valida tutto, poi si scrive tutto, o non si scrive niente.
+ */
+const pendingWrites = [];
 let failed = false;
 
 for (const section of SECTIONS) {
@@ -291,9 +305,11 @@ for (const section of SECTIONS) {
     };
     const cleanPayload = sanitizeDeep(payload);
     reportStrippedControlCharsDeep(file, payload, cleanPayload);
-    fs.writeFileSync(file, JSON.stringify(cleanPayload) + '\n');
-    const kb = Math.round(fs.statSync(file).size / 1024);
-    console.log(`[blog-index] ${path.basename(file)} — ${capped.length}/${entries.length} articles, ${kb} KB, newest ${capped[0].date}`);
+    pendingWrites.push({
+      file,
+      body: JSON.stringify(cleanPayload) + '\n',
+      describe: (kb) => `${path.basename(file)} — ${capped.length}/${entries.length} articles, ${kb} KB, newest ${capped[0].date}`,
+    });
 
     const fullFile = path.join(OUT, `blog-index-${section.name}-${locale}-full.json`);
     const fullPayload = {
@@ -303,10 +319,28 @@ for (const section of SECTIONS) {
     };
     const cleanFullPayload = sanitizeDeep(fullPayload);
     reportStrippedControlCharsDeep(fullFile, fullPayload, cleanFullPayload);
-    fs.writeFileSync(fullFile, JSON.stringify(cleanFullPayload) + '\n');
-    const fullKb = Math.round(fs.statSync(fullFile).size / 1024);
-    console.log(`[blog-index] ${path.basename(fullFile)} — ${entries.length} articles, ${fullKb} KB`);
+    pendingWrites.push({
+      file: fullFile,
+      body: JSON.stringify(cleanFullPayload) + '\n',
+      describe: (kb) => `${path.basename(fullFile)} — ${entries.length} articles, ${kb} KB`,
+    });
   }
+}
+
+// ── L'abort, PRIMA della prima scrittura ──────────────────────────────────
+if (failed) {
+  console.error(
+    `[blog-index] rifiuto: nessuno dei ${pendingWrites.length} file e' stato scritto. ` +
+      `Una sezione valida non compensa una rotta — mezza directory pubblicata sopra ` +
+      `quella live e' il set troncato che nessun consumer puo' riconoscere.`,
+  );
+  process.exit(1);
+}
+
+fs.mkdirSync(OUT, { recursive: true });
+for (const { file, body, describe } of pendingWrites) {
+  fs.writeFileSync(file, body);
+  console.log(`[blog-index] ${describe(Math.round(fs.statSync(file).size / 1024))}`);
 }
 
 // ── Final gate: no control character leaves this script either ────────────
@@ -323,4 +357,3 @@ for (const section of SECTIONS) {
   console.log(`[blog-index] control-character gate: ${emitted.length} files clean`);
 }
 
-if (failed) process.exit(1);
