@@ -95,29 +95,29 @@ test('una riga citante non spegne il marker vero che sta su UN ALTRA riga', () =
 test('la location label incollata al marker NON lo spegne (#977)', () => {
   // Il backtick che CHIUDE la label e' preceduto da un non-spazio: non apre un code
   // span. Il `(?<!`)` originale guardava un carattere solo e non li distingueva.
-  assert.equal(REDFLAG_IMPORTANT_RE.test('`a.mjs:L1`\u{1F534} Important: la sitemap perde gli slug `de`.'), true);
-  assert.equal(REDFLAG_IMPORTANT_RE.test('- `a.mjs:L1`\u{1F534} **Important \u2014** guard mancante'), true);
+  assert.equal(REDFLAG_IMPORTANT_RE.test('`a.mjs:L1`🔴 Important: la sitemap perde gli slug `de`.'), true);
+  assert.equal(REDFLAG_IMPORTANT_RE.test('- `a.mjs:L1`🔴 **Important —** guard mancante'), true);
 });
 
 test('il marker dentro un code span APERTO resta citazione (#977 non allarga il rosso)', () => {
   // Backtick preceduto da spazio o a inizio riga = span che si apre sul marker.
-  assert.equal(REDFLAG_IMPORTANT_RE.test('Il test pinna `\u{1F534} Important: x` come fixture.'), false);
-  assert.equal(REDFLAG_IMPORTANT_RE.test('`\u{1F534} Important: x` e\u2019 la fixture di questo test.'), false);
+  assert.equal(REDFLAG_IMPORTANT_RE.test('Il test pinna `🔴 Important: x` come fixture.'), false);
+  assert.equal(REDFLAG_IMPORTANT_RE.test('`🔴 Important: x` a inizio riga: fixture, non marker.'), false);
   // Il finding interamente dentro un code span (forma degli esempi di REVIEW.md)
   // non e' una citazione: li' il backtick non e' incollato al glifo.
-  assert.equal(REDFLAG_IMPORTANT_RE.test('- `a.mjs:L1: \u{1F534} Important: canonical rotto.`'), true);
+  assert.equal(REDFLAG_IMPORTANT_RE.test('- `a.mjs:L1: 🔴 Important: canonical rotto.`'), true);
 });
 
 test('un secondo finding sulla stessa riga resta ROSSO (#977)', () => {
-  // Viola «una riga per finding» (REVIEW.md \u2192 Output format), ma un \u{1F534} vero non puo'
+  // Viola «una riga per finding» (REVIEW.md → Output format), ma un 🔴 vero non puo'
   // sparire per una violazione di forma: era l'unica direzione in cui la fix di #959
   // spegneva il gate.
-  assert.equal(REDFLAG_IMPORTANT_RE.test('- `a.mjs:L1`: \u{1F7E1} Nit: x. \u{1F534} Important: y'), true);
+  assert.equal(REDFLAG_IMPORTANT_RE.test('- `a.mjs:L1`: 🟡 Nit: x. 🔴 Important: y'), true);
   // Anche con un code span CHIUSO nel mezzo: e' prosa normale, non una citazione.
-  assert.equal(REDFLAG_IMPORTANT_RE.test('- `a.mjs:L1`: \u{1F7E1} Nit: rinomina `x`. \u{1F534} Important: la sitemap perde gli slug'), true);
+  assert.equal(REDFLAG_IMPORTANT_RE.test('- `a.mjs:L1`: 🟡 Nit: rinomina `x`. 🔴 Important: la sitemap perde gli slug'), true);
   // ...ma la citazione marcata come tale resta verde: e' il caso #909.
-  assert.equal(REDFLAG_IMPORTANT_RE.test('- `a.mjs:L1`: \u{1F7E1} Nit: la review diceva \u00AB\u{1F534} Important: y\u00BB.'), false);
-  assert.equal(REDFLAG_IMPORTANT_RE.test('- `a.mjs:L1`: \u{1F7E1} Nit: il pattern `\u{1F534} Important:` va documentato.'), false);
+  assert.equal(REDFLAG_IMPORTANT_RE.test('- `a.mjs:L1`: 🟡 Nit: la review diceva «🔴 Important: y».'), false);
+  assert.equal(REDFLAG_IMPORTANT_RE.test('- `a.mjs:L1`: 🟡 Nit: il pattern `🔴 Important:` va documentato.'), false);
 });
 
 // --- coerenza col conteggio dichiarato, nelle due direzioni -----------------
