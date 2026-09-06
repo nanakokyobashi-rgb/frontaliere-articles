@@ -143,9 +143,10 @@ non chiudibile. Prima formula l'azione, poi giudica quella.
 **Non è una scusa per perdere lavoro azionabile:** se l'item ha un punto
 d'intervento ma la frase non lo cita, **derivalo** invece di scartare — ma in una
 forma che l'oracolo riconosce, cioe' con punteggiatura di codice
-(token-esempio: `funzione()`, `oggetto.campo`, `campo >= 1`). Un path nudo o un
-identificatore nudo NON qualificano: `percorso/file.mjs` e `nomeCampo` valgono
-zero token. Lo scarto è per i rischi che un punto d'intervento
+(token-esempio: `funzione()`, `oggetto.campo`, `campo >= 1`). Le forme che NON
+qualificano sono tre (token-controesempio: `percorso/file.mjs`, `nomeCampo`,
+`run()`): il path nudo, l'identificatore nudo e il token troppo corto — anche
+con la forma giusta. Usa il nome per esteso: `nomeFunzione()`, non `run()`. Lo scarto è per i rischi che un punto d'intervento
 non ce l'hanno. Ciò che viene scartato va nel commento di summary della PR,
 come per la verifica live.
 
@@ -204,7 +205,7 @@ Body:
   > ...
 - Funnel impact: ...
 - Rationale: ...
-- Suggested action: <... con almeno un token fra backtick, es. `coerceRecordScore()`>
+- Suggested action: <... con almeno un token fra backtick (token-esempio: `coerceRecordScore()`)>
 ````
 
 `Stato dichiarato nella PR` è **obbligatorio su ogni item, anche quando vale
