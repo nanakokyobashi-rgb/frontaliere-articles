@@ -1,13 +1,5 @@
 {
   "keywords": [
-    "vivere a Suello e lavorare in Ticino da frontaliere",
-    "vivere a Meda e lavorare in Ticino da frontaliere",
-    "vivere a Travedona-Monate e lavorare in Ticino da frontaliere",
-    "premi cassa malati canton Zurigo e riduzione premi",
-    "permesso di dimora B canton Zurigo requisiti e rinnovo",
-    "permesso di domicilio C canton Zurigo requisiti e domanda",
-    "vivere a Garzeno e lavorare in Ticino da frontaliere",
-    "vivere a Pianello del Lario e lavorare in Ticino da frontaliere",
     "vivere a Cavaria con Premezzo e lavorare in Ticino da frontaliere",
     "vivere a Gorla Minore e lavorare in Ticino da frontaliere",
     "permesso L di breve durata canton Zurigo validità e proroga",
@@ -499,7 +491,15 @@
     "vivere a Crosio della Valle e lavorare in Ticino da frontaliere",
     "vivere a Gorla Maggiore e lavorare in Ticino da frontaliere",
     "vivere a Oggiona con Santo Stefano e lavorare in Ticino da frontaliere",
-    "patente di guida canton Vallese conversione ed esami"
+    "patente di guida canton Vallese conversione ed esami",
+    "vivere a San Bernardino Verbano e lavorare in Ticino da frontaliere",
+    "vivere a Bulciago e lavorare in Ticino da frontaliere",
+    "vivere a Molteno e lavorare in Ticino da frontaliere",
+    "vivere a Suello e lavorare in Ticino da frontaliere",
+    "vivere a Meda e lavorare in Ticino da frontaliere",
+    "vivere a Travedona-Monate e lavorare in Ticino da frontaliere",
+    "permesso di dimora B canton Zurigo requisiti e rinnovo",
+    "permesso di domicilio C canton Zurigo requisiti e domanda"
   ],
   "strikes": {
     "frontaliere farmacista ticino stipendio requisiti": 3,
@@ -621,7 +621,7 @@
     "vivere a Bianzone e lavorare in Grigioni da frontaliere": 1,
     "vivere a Villa di Tirano e lavorare in Grigioni da frontaliere": 1,
     "imposte cantonali canton Zurigo aliquote e deduzioni": 3,
-    "premi cassa malati canton Zurigo e riduzione premi": 1,
+    "premi cassa malati canton Zurigo e riduzione premi": 2,
     "trasferirsi a Morbegno da frontaliere pro e contro": 1,
     "indennità di disoccupazione canton Zurigo iscrizione URC": 1,
     "vivere a Valpelline e lavorare in Vallese da frontaliere": 1,
