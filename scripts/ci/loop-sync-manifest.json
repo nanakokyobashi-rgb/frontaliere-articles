@@ -436,6 +436,16 @@
       }
     },
     {
+      "path": "scripts/ci/loop-baseline-pr-gate.mjs",
+      "mode": "corpus-only",
+      "reason": "Gate in PR sulle baseline di QUESTO manifest (issue #956, follow-up della #954): verifica le sole voci il cui `baseline` e' cambiato nella PR contro il contenuto del suo head, e rifiuta cio' che non e' verificabile. Non esiste sul sito e non deve: il manifest e' meta' di `loop-drift-check.mjs`, che e' gia' `corpus-only` per la stessa ragione — il sito e' la sorgente del ciclo e non sorveglia se stesso.",
+      "baseline": {
+        "site": null,
+        "corpus": "5a3a17921db0f1f2",
+        "alignedAt": "2026-09-06"
+      }
+    },
+    {
       "path": "scripts/ci/loop-drift-check.mjs",
       "mode": "corpus-only",
       "reason": "Il rilevatore di divergenza stesso. Vive qui perche' e' questo il lato che riceve il ciclo; il sito e' la sorgente e non ha bisogno di sorvegliare se stesso.",

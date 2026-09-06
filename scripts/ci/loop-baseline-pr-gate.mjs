@@ -283,7 +283,7 @@ async function main() {
       console.log(
         '\nUna baseline si registra dal contenuto REALE, mai a mano:\n' +
           `  node scripts/ci/loop-drift-check.mjs --init --only ${rejected.map((r) => r.path).join(',')}\n` +
-          'che scrive `now` per le sole voci indicate (issue #653). Se il valore giusto NON e' `now` — una\n' +
+          'che scrive `now` per le sole voci indicate (issue #653). Se il valore giusto NON e\' `now` — una\n' +
           'baseline riparata col blob a cui quel lato era davvero allineato ad `alignedAt` — deve comunque\n' +
           'esistere nella storia di quel lato: se non ci compare, non e\' mai esistito.',
       );
