@@ -67,6 +67,25 @@ function isInside(root, target) {
 export const RUN_CARD_SCHEMA = 'run-card/1';
 
 /**
+ * ── QUANDO LA STRUMENTAZIONE E' ATTERRATA (#924 item 4) ────────────────────
+ *
+ * Istante di merge di #902 su `main` (`36f3f65`, 2026-09-05T11:35:14Z): prima
+ * di questo, NESSUNA run poteva scrivere una card, per quanto sia finita bene.
+ * Dopo, una run senza card non e' «non ancora strumentata» ma un fatto diverso
+ * e molto piu' interessante — il processo e' morto prima di
+ * `finalizeRunReport()`, tipicamente sotto il `--kill-after` del `timeout` in
+ * `generate-article.yml`, cioe' esattamente la popolazione che #625 vuole
+ * misurare. Senza questa data i due casi si sommano in un unico numero e la
+ * card ricrea, un livello piu' su, lo zero che esiste per togliere.
+ *
+ * Vive QUI, accanto al produttore, e non nel reporter: e' un fatto sulla
+ * scrittura della card, e un valore condiviso ha una sorgente sola (AGENTS.md
+ * #6). Il reporter la importa; `RUN_CARD_SINCE` la sovrascrive per campionare
+ * una finestra diversa (o un fork che ha strumentato in un altro momento).
+ */
+export const RUN_CARD_INSTRUMENTED_SINCE = '2026-09-05T11:35:14Z';
+
+/**
  * La proiezione. Tutto opzionale e tutto difensivo: la card viene costruita nel
  * percorso di finalizzazione, che gira anche quando la run sta gia' morendo, e
  * un `TypeError` qui trasformerebbe uno strumento diagnostico nella causa di un
