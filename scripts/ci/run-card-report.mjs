@@ -16,10 +16,18 @@
  * Questo lettore parte dall'altro capo: `create-article.mjs` scrive una card
  * (`generator/scripts/lib/run-card.mjs`) nel momento in cui l'evento accade, e
  * l'artifact di diagnostica — `if: always()`, gia' esistente — la porta fuori.
- * Qui si scaricano le card, non i log: ~0,5 KB per sezione contro i 300-500 KB
- * di un log di `generate-article.yml`, cioe' tre ordini di grandezza. E il
- * riepilogo porta sempre `runsWithEchoes` accanto ai flip, cosi' «non e'
- * successo» e «non l'ho visto» restano due numeri diversi.
+ * Qui si scaricano gli artifact di diagnostica invece dei log. La CARD pesa
+ * ~0,5 KB per sezione contro i 300-500 KB di un log di `generate-article.yml`,
+ * ma il preventivo onesto e' quello dell'ARTIFACT: `gh run download -p` filtra
+ * i nomi degli artifact, non i file, e su una run patologica la stessa cartella
+ * porta stack del CDP, `resources.log` e i diagnostic report di Node (#924
+ * item 6). Percio' il totale scaricato si MISURA e si stampa, c'e' un tetto
+ * (`DEFAULT_MAX_BYTES`) e ogni run viene cancellata appena letta.
+ *
+ * E il riepilogo porta sempre `runsWithEchoes` accanto ai flip, e la
+ * scomposizione delle run senza card accanto al totale, cosi' «non e'
+ * successo», «non l'ho visto» e «e' morta prima di scriverlo» restano tre
+ * numeri diversi.
  *
  * Zero rete verso i provider, zero Claude, zero quota: solo `gh` e file JSON.
  * Nessuna dipendenza npm — gira anche prima di `npm ci`.
@@ -56,7 +64,8 @@ export const DEFAULT_REPO = process.env.RUN_CARD_REPO || 'nanakokyobashi-rgb/fro
  * stragrande maggioranza delle run quelle sono assenti per costruzione (il log
  * del tentativo viene rimosso quando l'articolo c'e'), quindi in pratica
  * l'artifact e' la card; ma quando una run ha lasciato uno stack o un report di
- * Node, quel peso si paga.
+ * Node, quel peso si paga — misurato, con un tetto e senza accumulo su disco,
+ * vedi `DEFAULT_MAX_BYTES`.
  */
 export const ARTIFACT_GLOB = 'generate-article-diagnostics-*';
 
@@ -215,7 +224,13 @@ export function readCards(dir) {
   return { cards, unreadable };
 }
 
-function formatSummary(s, meta) {
+/**
+ * Il riepilogo leggibile. Esportata per essere PINNATA: la scomposizione delle
+ * run senza card e l'avviso sul campione condizionato sono l'esito di #924
+ * item 4, e un riepilogo che smette di stamparli tornerebbe a essere un
+ * numero solo senza far fallire niente.
+ */
+export function formatSummary(s, meta) {
   const lines = [];
   const cardless = meta.cardless || {};
   lines.push(
