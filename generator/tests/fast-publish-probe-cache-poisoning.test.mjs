@@ -63,6 +63,7 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, resolve } from 'node:path';
+import { workflowSteps } from './lib/workflow-steps.mjs';
 
 const here = dirname(fileURLToPath(import.meta.url));
 const WF = readFileSync(resolve(here, '../../.github/workflows/fast-publish-article.yml'), 'utf8');
@@ -75,22 +76,13 @@ const soloAttive = (s) =>
     .join('\n');
 
 /**
- * Gli step del job, spezzati sul `- name:` a sei spazi. Testo grezzo e non YAML
- * parsato: `node --test` gira senza dipendenze su questo repo, e ciò che va
- * asserito è shell dentro un blocco `run:`, non struttura YAML.
+ * Gli step del job. Testo grezzo e non YAML parsato: `node --test` gira senza
+ * dipendenze su questo repo, e ciò che va asserito è shell dentro un blocco
+ * `run:`, non struttura YAML. L'enumerazione contava solo i `- name:`, quindi
+ * uno step senza nome infilato fra due sonde spariva dall'ordine e finiva
+ * assorbito nel testo del precedente (#935 item 1).
  */
-function steps() {
-  const out = [];
-  const re = /^ {6}- name: (.+)$/gm;
-  const marks = [...WF.matchAll(re)];
-  return marks.reduce((acc, m, i) => {
-    const end = i + 1 < marks.length ? marks[i + 1].index : WF.length;
-    acc.push({ name: m[1].trim(), text: WF.slice(m.index, end) });
-    return acc;
-  }, out);
-}
-
-const STEPS = steps();
+const STEPS = workflowSteps(WF);
 const indexOfStep = (name) => STEPS.findIndex((s) => s.name === name);
 const stepText = (name) => {
   const s = STEPS.find((x) => x.name === name);

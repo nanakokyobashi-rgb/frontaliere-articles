@@ -42,6 +42,7 @@ import {
   degradationState,
   isDegradationCarrier,
 } from '../scripts/lib/daily-brief-data.mjs';
+import { workflowSteps } from './lib/workflow-steps.mjs';
 
 const REPO_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
 const WORKFLOW_PATH = path.join(REPO_ROOT, '.github', 'workflows', 'generate-daily-brief.yml');
@@ -239,7 +240,11 @@ test('the workflow spends the red on that verdict, and only as the LAST step', (
   assert.ok(yml.includes(`steps.refresh.outputs.${DEGRADATION_BLOCKS_OUTPUT}`), 'the summary names the blocks from the same source');
   assert.match(yml, /^\s+id: refresh$/m, 'the refresh step must keep the id the gate refers to');
 
-  const steps = [...yml.matchAll(/^ {6}- name: (.+)$/gm)].map((m) => ({ name: m[1].trim(), at: m.index }));
+  // Ogni step, non solo quelli con `name:`: uno step aggiunto dopo il gate nella
+  // forma `      - uses: actions/upload-artifact@v4` non entrava in questa lista,
+  // `last` restava il gate, e il test passava sulla regressione che esiste per
+  // fermare (#935 item 1).
+  const steps = workflowSteps(yml);
   const gateAt = yml.indexOf(`steps.refresh.outputs.${DEGRADATION_CROSSED_OUTPUT}`);
   const gate = [...steps].reverse().find((step) => step.at < gateAt);
   assert.ok(gate, 'the gate must live inside a named step');

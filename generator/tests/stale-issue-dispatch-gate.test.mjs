@@ -40,6 +40,7 @@ import {
   OUTCOME_MARKER,
   GATE_MARKER,
 } from '../../scripts/ci/check-stale-issue-dispatch.mjs';
+import { workflowSteps } from './lib/workflow-steps.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 
@@ -176,17 +177,16 @@ test('idempotenza su TUTTA la lista, non sull\'ultimo commento', () => {
   assert.equal(gateCommentBlocked(null, 'fix'), null);
 });
 
-/** Il blocco di uno step: dal suo `- name:` al `- name:` successivo. */
-function steps(src) {
-  return src.split(/\n(?=      - name: )/).slice(1);
-}
-
+// Gli step si enumeravano spezzando sul solo `- name:`, quindi uno step Claude
+// nella forma senza nome (`      - uses: anthropics/claude-code-action@...`)
+// non compariva nell'elenco e la copertura del gate lo mancava in silenzio
+// (#935 item 1).
 for (const wf of ['issue-fix.yml', 'issue-decompose.yml']) {
   test(`${wf}: il gate e' cablato e ogni step che costa lo consulta`, () => {
     const src = fs.readFileSync(path.join(ROOT, '.github/workflows', wf), 'utf8');
-    const all = steps(src);
+    const all = workflowSteps(src);
 
-    const gate = all.find((s) => /id: stale\b/.test(s));
+    const gate = all.find((s) => /id: stale\b/.test(s.text))?.text;
     assert.ok(gate, `${wf}: nessuno step con \`id: stale\` — il pre-flight non esiste.`);
     assert.match(gate, /run: node scripts\/ci\/check-stale-issue-dispatch\.mjs/);
     assert.match(gate, /DISPATCH_LABEL: \$\{\{ github\.event\.label\.name \}\}/,
@@ -197,14 +197,13 @@ for (const wf of ['issue-fix.yml', 'issue-decompose.yml']) {
 
     // Il cablaggio: ogni step che invoca Claude deve saltare sul corto-circuito.
     // Senza, il gate gira, stampa, e la run costosa parte lo stesso.
-    const claudeSteps = all.filter((s) => /anthropics\/claude-code-action/.test(s));
+    const claudeSteps = all.filter((s) => /anthropics\/claude-code-action/.test(s.text));
     assert.ok(claudeSteps.length > 0, `${wf}: nessuno step Claude trovato — il parser degli step e' andato fuori sincrono.`);
     for (const s of claudeSteps) {
-      const name = (s.match(/- name: (.+)/) || [])[1];
       assert.match(
-        s,
+        s.text,
         /steps\.stale\.outputs\.stale_dispatch != 'true'/,
-        `${wf} → «${name}»: lo step Claude non e' gated sul dispatch stantio. Il gate diventa arredamento\n` +
+        `${wf} → «${s.name}»: lo step Claude non e' gated sul dispatch stantio. Il gate diventa arredamento\n` +
           'e la seconda run spende la quota condivisa per rifare lavoro gia' + "' consegnato.",
       );
     }
