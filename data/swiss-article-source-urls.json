@@ -1,5 +1,4 @@
 {
-  "https://www.rsi.ch/s/3949146": "maggiori-responsabilita-peri-vertici-bancari",
   "https://www.tio.ch/ticino/attualita/1943520/la-siccita-sale-al-grado-2-a-breggia-ecco-cosa-non-potete-fare": "la-siccita-sale-al-grado-2-a-breggia",
   "https://www.laregione.ch/svizzera/svizzera/1943512/misure-siccita-urgenza-ora-cf": "cf-urgenza-siccita",
   "https://www.tio.ch/svizzera/economia/1943548/passeggeri-luglio-aeroporto-zurigo-fatturato": "aeroporto-zurigo-luglio-2026",
@@ -1889,6 +1888,11 @@
   "https://www.tio.ch/svizzera/cronaca/1948311/attacco-schweizerhof-credito-destinatari-dati": {
     "articleId": "attacco-hacker-schweizerhof",
     "ts": "2026-09-06T11:37:02.159Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/economia/1948335/svizzera-budliger-artieda-direttrice-seco-multipolare-mondo": {
+    "articleId": "svizzera-mondo-multipolare",
+    "ts": "2026-09-06T15:10:22.740Z",
     "keyForm": 2
   }
 }
