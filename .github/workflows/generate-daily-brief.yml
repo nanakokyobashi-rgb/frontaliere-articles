@@ -236,7 +236,7 @@ jobs:
           # Un giorno senza edizione ma con lo streak che si muove (0/4 blocchi,
           # #885) mette in stage SOLO il registro, e prima che esistesse quel
           # `git add` questo ramo non veniva mai raggiunto: usciva verde sopra.
-          # Ora ci arriva, e con lui arrivano i due `exit 1` qui sotto — cioe'
+          # Ora ci arriva, e con lui arriva l'`exit 1` del push fallito — cioe'
           # un rosso ogni mattina finche' il blackout dura, che e' esattamente
           # il loop dichiarato inaccettabile in #882.
           #
@@ -245,20 +245,24 @@ jobs:
           # superficie vecchia. Perderlo costa un allarme in ritardo — lo
           # stesso prezzo che si pagava prima di #885 — mentre il rosso in loop
           # costa una mattina rossa per sempre. Quindi: se in stage c'e' SOLO
-          # il registro, un push impossibile e' un warning e la run resta
-          # verde; se c'e' un'edizione, il rosso resta rosso.
+          # il registro, un push fallito e' un warning e la run resta verde;
+          # se c'e' un'edizione, il rosso resta rosso.
+          #
+          # Il ramo degradato vale SOLO per il push fallito dopo tre tentativi,
+          # che e' una condizione transitoria: domani la stessa soglia viene
+          # riattraversata e l'allarme scatta con un giorno di ritardo. Un PAT
+          # assente NON e' transitorio — si ripete identico ogni mattina, lo
+          # streak nuovo non raggiungerebbe mai `main`, resterebbe fissato a
+          # `k+1` per sempre e sotto la soglia l'allarme non scatterebbe mai:
+          # il buco di memoria di #885 riaperto sotto una run verde. Un secret
+          # mancante e' una config rotta e deve restare rossa.
           if [ "$(git diff --cached --name-only)" = "data/daily-brief-degradation.json" ]; then
             LEDGER_ONLY=true
           else
             LEDGER_ONLY=false
           fi
           if [ -z "${GITHUB_PAT:-}" ]; then
-            if [ "$LEDGER_ONLY" = true ]; then
-              echo "::warning::GITHUB_PAT missing — solo il registro di degrado era in stage: muore sul runner, lo streak riparte dal valore su main (allarme in ritardo, nessun bollettino perso)"
-              echo "pushed=ledger-lost" >> "$GITHUB_OUTPUT"
-              exit 0
-            fi
-            echo "::error::GITHUB_PAT missing — a GITHUB_TOKEN push would not fire publish-api.yml and the edition would never go live"
+            echo "::error::GITHUB_PAT missing — a GITHUB_TOKEN push would not fire publish-api.yml and the edition would never go live; on a ledger-only day the streak would never reach main and the alarm would never fire (#885)"
             exit 1
           fi
 

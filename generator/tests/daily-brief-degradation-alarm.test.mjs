@@ -457,10 +457,12 @@ test('the ledger carries no per-run timestamp and is not rewritten when nothing 
 // ── Il rosso del giorno di blackout (#927) ──────────────────────────────────
 
 test('a day that stages only the ledger cannot turn a lost push into a permanent red', () => {
-  // Con il registro in stage, la giornata 0/4 raggiunge per la prima volta i
-  // due `exit 1` dello step di commit: senza PAT o con tre push falliti,
-  // l'attraversamento resta sul runner e lo STESSO giorno rifa' rosso ogni
-  // mattina — il loop che #882 dichiara inaccettabile.
+  // Con il registro in stage, la giornata 0/4 raggiunge per la prima volta
+  // l'`exit 1` del push fallito: l'attraversamento resta sul runner e lo
+  // STESSO giorno rifa' rosso ogni mattina — il loop che #882 dichiara
+  // inaccettabile. Vale solo per quel percorso, che e' transitorio: un PAT
+  // mancante si ripete identico e degradarlo terrebbe lo streak fisso sotto
+  // la soglia per sempre (#885 riaperto sotto una run verde).
   const yml = readFileSync(WORKFLOW_PATH, 'utf-8');
   const rel = path.relative(REPO_ROOT, DEGRADATION_STATE_PATH).split(path.sep).join('/');
   const commitStep = yml.slice(yml.indexOf('- name: Commit and push'), yml.indexOf('- name: Push hero'));
@@ -472,13 +474,19 @@ test('a day that stages only the ledger cannot turn a lost push into a permanent
     'the ledger-only case must be recognised by comparing the staged set to the ledger path itself',
   );
   const branches = commitStep.split('LEDGER_ONLY" = true');
-  assert.equal(branches.length, 3, 'both fatal exits — PAT missing and push failed — must have the degraded branch');
-  for (const branch of branches.slice(1)) {
-    const head = branch.slice(0, branch.indexOf('fi'));
-    assert.match(head, /::warning::/, 'the degraded branch warns');
-    assert.match(head, /pushed=ledger-lost/, 'and says so on the step output');
-    assert.match(head, /exit 0/, 'and stays green');
-  }
+  assert.equal(branches.length, 2, 'only the retry-exhausted exit — a transient cause — may be degraded');
+  const head = branches[1].slice(0, branches[1].indexOf('fi'));
+  assert.match(head, /::warning::/, 'the degraded branch warns');
+  assert.match(head, /pushed=ledger-lost/, 'and says so on the step output');
+  assert.match(head, /exit 0/, 'and stays green');
+
+  // Il PAT mancante e' una config rotta che si ripete identica ogni mattina:
+  // degradarla renderebbe l'allarme muto per sempre, non "in ritardo".
+  const patGuard = commitStep.slice(commitStep.indexOf('if [ -z "${GITHUB_PAT:-}" ]; then'));
+  const patBranch = patGuard.slice(0, patGuard.indexOf('\n          fi'));
+  assert.doesNotMatch(patBranch, /LEDGER_ONLY/, 'a missing PAT must be fatal even on a ledger-only day');
+  assert.match(patBranch, /exit 1/, 'and it must be red');
+
   // L'edizione, invece, resta rossa: i due `exit 1` non sono spariti.
   assert.equal(commitStep.match(/^ *exit 1$/gm)?.length, 2, 'a lost EDITION must still be red');
 });
