@@ -175,6 +175,38 @@ jobs:
           STAGE: fix
         run: node scripts/ci/check-stale-issue-dispatch.mjs
 
+      # ── Pre-flight 2d: diagnosi gia' consegnata al sito ───────────────────
+      # Il POST-step qui sotto («Consegna al sito…») consegna e, se la consegna
+      # non chiude, parcheggia in `needs-human`. Da li' la issue RIENTRA: il
+      # pre-pass di `needs-human-sweep` la ri-accoda quando il verdetto scade, e
+      # lo sweep settimanale puo' rimetterla in coda. Il giro successivo pagava
+      # una run Claude INTERA sulla quota condivisa col sito per ri-diagnosticare
+      # lo stesso file bloccato dal mirror e riemettere lo stesso verdetto —
+      # dopodiche' il post-step scopriva che la issue di la' esiste gia' e non
+      # consegnava niente (#972 item 5).
+      #
+      # E' la stessa classe del gate stale-dispatch: una condizione
+      # deterministica, leggibile PRIMA del run con una `gh issue list`, che
+      # veniva consultata dopo averlo pagato.
+      #
+      # Il corto-circuito vuole la CONGIUNZIONE «gia' consegnata» + «nessun
+      # residuo qui»: con un residuo la diagnosi nomina anche file che nessun
+      # canale di discesa porta giu' — lavoro di QUESTO repo — ed e' esattamente
+      # la ragione per cui la issue e' stata parcheggiata invece che chiusa;
+      # saltarla la trasformerebbe in uno stato assorbente. La regola vive in
+      # `redeliveryDecision`, non qui, e la inchioda
+      # `generator/tests/handoff-to-site.test.mjs`.
+      - name: Pre-flight - diagnosi gia' consegnata al sito (zero-Claude)
+        id: handoff_pre
+        if: steps.quota.outputs.quota_blocked != 'true' && steps.preflight.outputs.already_resolved != 'true' && steps.stale.outputs.stale_dispatch != 'true'
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          SITE_TOKEN: ${{ env.GITHUB_PAT }}
+        run: node scripts/ci/handoff-to-site.mjs --preflight
+
       # ── Pre-flight 3: capability sui workflow ─────────────────────────────
       # Solo quando NON c'è il PAT: col PAT il push su `.github/workflows/**`
       # passa, e girare il guard toglierebbe una capacità che il run possiede.
@@ -189,7 +221,7 @@ jobs:
       # anche all'action, quindi saltare il guard riflette una capacità reale.
       - name: Pre-flight — workflows-scope capability guard (zero-Claude)
         id: scope_guard
-        if: env.GITHUB_PAT_NANAKO == '' && steps.quota.outputs.quota_blocked != 'true' && steps.preflight.outputs.already_resolved != 'true' && steps.stale.outputs.stale_dispatch != 'true'
+        if: env.GITHUB_PAT_NANAKO == '' && steps.quota.outputs.quota_blocked != 'true' && steps.preflight.outputs.already_resolved != 'true' && steps.stale.outputs.stale_dispatch != 'true' && steps.handoff_pre.outputs.handoff_delivered != 'true'
         continue-on-error: true
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -200,7 +232,7 @@ jobs:
       # ── Pre-flight 4: mutua esclusione ────────────────────────────────────
       - name: Pre-flight — in-progress claim gate (zero-Claude, mutex)
         id: claim
-        if: steps.quota.outputs.quota_blocked != 'true' && steps.preflight.outputs.already_resolved != 'true' && steps.stale.outputs.stale_dispatch != 'true' && steps.scope_guard.outputs.workflows_blocked != 'true'
+        if: steps.quota.outputs.quota_blocked != 'true' && steps.preflight.outputs.already_resolved != 'true' && steps.stale.outputs.stale_dispatch != 'true' && steps.scope_guard.outputs.workflows_blocked != 'true' && steps.handoff_pre.outputs.handoff_delivered != 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_REPO: ${{ github.repository }}
@@ -209,7 +241,7 @@ jobs:
 
       - name: Determine fix tier
         id: tier
-        if: steps.quota.outputs.quota_blocked != 'true' && steps.preflight.outputs.already_resolved != 'true' && steps.stale.outputs.stale_dispatch != 'true' && steps.scope_guard.outputs.workflows_blocked != 'true' && steps.claim.outputs.in_flight != 'true'
+        if: steps.quota.outputs.quota_blocked != 'true' && steps.preflight.outputs.already_resolved != 'true' && steps.stale.outputs.stale_dispatch != 'true' && steps.scope_guard.outputs.workflows_blocked != 'true' && steps.claim.outputs.in_flight != 'true' && steps.handoff_pre.outputs.handoff_delivered != 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REPO: ${{ github.repository }}
@@ -246,7 +278,7 @@ jobs:
       # da zero butterebbe lavoro già fatto e già pagato.
       - name: Check for resumable WIP branch (zero-Claude)
         id: resume
-        if: steps.quota.outputs.quota_blocked != 'true' && steps.preflight.outputs.already_resolved != 'true' && steps.stale.outputs.stale_dispatch != 'true' && steps.scope_guard.outputs.workflows_blocked != 'true' && steps.claim.outputs.in_flight != 'true'
+        if: steps.quota.outputs.quota_blocked != 'true' && steps.preflight.outputs.already_resolved != 'true' && steps.stale.outputs.stale_dispatch != 'true' && steps.scope_guard.outputs.workflows_blocked != 'true' && steps.claim.outputs.in_flight != 'true' && steps.handoff_pre.outputs.handoff_delivered != 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REPO: ${{ github.repository }}
@@ -261,7 +293,7 @@ jobs:
           fi
 
       - name: Configure git identity
-        if: steps.quota.outputs.quota_blocked != 'true' && steps.preflight.outputs.already_resolved != 'true' && steps.stale.outputs.stale_dispatch != 'true' && steps.scope_guard.outputs.workflows_blocked != 'true' && steps.claim.outputs.in_flight != 'true'
+        if: steps.quota.outputs.quota_blocked != 'true' && steps.preflight.outputs.already_resolved != 'true' && steps.stale.outputs.stale_dispatch != 'true' && steps.scope_guard.outputs.workflows_blocked != 'true' && steps.claim.outputs.in_flight != 'true' && steps.handoff_pre.outputs.handoff_delivered != 'true'
         env:
           REPO: ${{ github.repository }}
         run: |
@@ -297,7 +329,7 @@ jobs:
           fi
 
       - name: Setup Headroom compression proxy
-        if: steps.quota.outputs.quota_blocked != 'true' && steps.preflight.outputs.already_resolved != 'true' && steps.stale.outputs.stale_dispatch != 'true' && steps.scope_guard.outputs.workflows_blocked != 'true' && steps.claim.outputs.in_flight != 'true'
+        if: steps.quota.outputs.quota_blocked != 'true' && steps.preflight.outputs.already_resolved != 'true' && steps.stale.outputs.stale_dispatch != 'true' && steps.scope_guard.outputs.workflows_blocked != 'true' && steps.claim.outputs.in_flight != 'true' && steps.handoff_pre.outputs.handoff_delivered != 'true'
         uses: ./.github/actions/setup-headroom
 
       - name: Run Claude fix
@@ -312,7 +344,7 @@ jobs:
         # ne' branch ne' marker `FIX_OUTCOME`, e il drainer lo ri-accoda a vuoto.
         timeout-minutes: 120
         id: claude_fix
-        if: steps.quota.outputs.quota_blocked != 'true' && steps.preflight.outputs.already_resolved != 'true' && steps.stale.outputs.stale_dispatch != 'true' && steps.scope_guard.outputs.workflows_blocked != 'true' && steps.claim.outputs.in_flight != 'true'
+        if: steps.quota.outputs.quota_blocked != 'true' && steps.preflight.outputs.already_resolved != 'true' && steps.stale.outputs.stale_dispatch != 'true' && steps.scope_guard.outputs.workflows_blocked != 'true' && steps.claim.outputs.in_flight != 'true' && steps.handoff_pre.outputs.handoff_delivered != 'true'
         continue-on-error: true
         uses: anthropics/claude-code-action@v1
         env:
@@ -421,7 +453,7 @@ jobs:
         # c'era lavoro da salvare). Best-effort in senso stretto: qualunque
         # fallimento e' un warning, mai un job rosso — un salvataggio mancato non
         # deve trasformare un run terminato in un run fallito.
-        if: always() && steps.quota.outputs.quota_blocked != 'true' && steps.preflight.outputs.already_resolved != 'true' && steps.stale.outputs.stale_dispatch != 'true' && steps.scope_guard.outputs.workflows_blocked != 'true' && steps.claim.outputs.in_flight != 'true'
+        if: always() && steps.quota.outputs.quota_blocked != 'true' && steps.preflight.outputs.already_resolved != 'true' && steps.stale.outputs.stale_dispatch != 'true' && steps.scope_guard.outputs.workflows_blocked != 'true' && steps.claim.outputs.in_flight != 'true' && steps.handoff_pre.outputs.handoff_delivered != 'true'
         continue-on-error: true
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -498,7 +530,7 @@ jobs:
           fi
 
       - name: Claude usage metrics
-        if: always() && steps.quota.outputs.quota_blocked != 'true' && steps.preflight.outputs.already_resolved != 'true' && steps.stale.outputs.stale_dispatch != 'true' && steps.scope_guard.outputs.workflows_blocked != 'true' && steps.claim.outputs.in_flight != 'true'
+        if: always() && steps.quota.outputs.quota_blocked != 'true' && steps.preflight.outputs.already_resolved != 'true' && steps.stale.outputs.stale_dispatch != 'true' && steps.scope_guard.outputs.workflows_blocked != 'true' && steps.claim.outputs.in_flight != 'true' && steps.handoff_pre.outputs.handoff_delivered != 'true'
         continue-on-error: true
         run: node scripts/ci/claude-usage-summary.mjs "${{ steps.claude_fix.outputs.execution_file }}" "issue-fix"
 
@@ -508,7 +540,7 @@ jobs:
       # esaurisce i tentativi e viene parcheggiata — poi chiusa in automatico
       # senza che nessun agent l'abbia mai letta.
       - name: Mark Claude terminal outcome (granular telemetry)
-        if: always() && steps.quota.outputs.quota_blocked != 'true' && steps.preflight.outputs.already_resolved != 'true' && steps.stale.outputs.stale_dispatch != 'true' && steps.scope_guard.outputs.workflows_blocked != 'true' && steps.claim.outputs.in_flight != 'true'
+        if: always() && steps.quota.outputs.quota_blocked != 'true' && steps.preflight.outputs.already_resolved != 'true' && steps.stale.outputs.stale_dispatch != 'true' && steps.scope_guard.outputs.workflows_blocked != 'true' && steps.claim.outputs.in_flight != 'true' && steps.handoff_pre.outputs.handoff_delivered != 'true'
         continue-on-error: true
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -577,7 +609,7 @@ jobs:
       # questo commento la descrive e non la duplica, ed e'
       # `generator/tests/handoff-to-site.test.mjs` a inchiodarla.
       - name: Consegna al sito la diagnosi che vive di la' (zero-Claude)
-        if: always() && steps.quota.outputs.quota_blocked != 'true' && steps.claim.outputs.in_flight != 'true' && steps.stale.outputs.stale_dispatch != 'true'
+        if: always() && steps.quota.outputs.quota_blocked != 'true' && steps.claim.outputs.in_flight != 'true' && steps.stale.outputs.stale_dispatch != 'true' && steps.handoff_pre.outputs.handoff_delivered != 'true'
         continue-on-error: true
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -601,7 +633,7 @@ jobs:
         # hanno gia' postato il proprio marker specifico — senza quel salto
         # questo step ci scriverebbe sopra `no-pr-unspecified` e avvelenerebbe
         # il segnale invece di completarlo. Best-effort: non fallisce mai.
-        if: always() && steps.quota.outputs.quota_blocked != 'true' && steps.preflight.outputs.already_resolved != 'true' && steps.stale.outputs.stale_dispatch != 'true' && steps.scope_guard.outputs.workflows_blocked != 'true' && steps.claim.outputs.in_flight != 'true'
+        if: always() && steps.quota.outputs.quota_blocked != 'true' && steps.preflight.outputs.already_resolved != 'true' && steps.stale.outputs.stale_dispatch != 'true' && steps.scope_guard.outputs.workflows_blocked != 'true' && steps.claim.outputs.in_flight != 'true' && steps.handoff_pre.outputs.handoff_delivered != 'true'
         continue-on-error: true
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -634,7 +666,7 @@ jobs:
       # quegli step non hanno `continue-on-error`. Nessun gate abbassato — la PR
       # passa comunque dal reviewer; qui si disambigua «intenzionale» da «crash».
       - name: Classify outcome (work-done, not CLI exit)
-        if: always() && steps.quota.outputs.quota_blocked != 'true' && steps.preflight.outputs.already_resolved != 'true' && steps.stale.outputs.stale_dispatch != 'true' && steps.scope_guard.outputs.workflows_blocked != 'true' && steps.claim.outputs.in_flight != 'true'
+        if: always() && steps.quota.outputs.quota_blocked != 'true' && steps.preflight.outputs.already_resolved != 'true' && steps.stale.outputs.stale_dispatch != 'true' && steps.scope_guard.outputs.workflows_blocked != 'true' && steps.claim.outputs.in_flight != 'true' && steps.handoff_pre.outputs.handoff_delivered != 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REPO: ${{ github.repository }}
