@@ -710,10 +710,42 @@ export function buildDailyBrief({ todayIso, nowMs = Date.now(), borderWaitDocs, 
 export function degradationState(brief) {
   return {
     schemaVersion: 1,
-    generatedAt: brief.generatedAt,
     dateIso: brief.dateIso,
     blocks: Object.fromEntries(
       Object.entries(brief?.blocks || {}).map(([name, b]) => [name, { degradedEditions: blockDegradedEditions(b) }]),
     ),
   };
+}
+
+/**
+ * Whether `value` can be trusted as a carrier of the per-block streaks —
+ * the sidecar ledger or, as its fallback, the previous snapshot.
+ *
+ * Parsing is not validating, and here the difference is silent. Every reader
+ * of the streaks (`previousDegradedEditions` → `blockDegradedEditions`) is
+ * deliberately forgiving: anything it cannot read counts as 0. That
+ * forgiveness is right for ONE missing block and catastrophic for a whole
+ * carrier of the wrong shape — a `[]`, a `{"blocks": 5}`, a half-written
+ * hand edit all read as "every streak is 0", so every count restarts, a
+ * permanent degradation never crosses the threshold again, and nothing says a
+ * word. That is #885 with a different file, which is why the shape is checked
+ * once, here, instead of at each read site.
+ *
+ * The requirements are exactly what `degradationState` writes and the readers
+ * need: a real `dateIso` (a same-day rerun must be recognisable, or it
+ * double-counts) and a non-empty `blocks` map of per-block objects. Anything
+ * else is not "a ledger with holes", it is a different document, and the
+ * caller must fall back rather than believe it.
+ */
+export function isDegradationCarrier(value) {
+  if (!isPlainObject(value)) return false;
+  if (!Number.isFinite(isoDayMs(value.dateIso))) return false;
+  if (!isPlainObject(value.blocks)) return false;
+  const entries = Object.entries(value.blocks);
+  return entries.length > 0 && entries.every(([, block]) => isPlainObject(block));
+}
+
+/** A JSON object, not an array and not null — `typeof x === 'object'` is both. */
+function isPlainObject(value) {
+  return typeof value === 'object' && value !== null && !Array.isArray(value);
 }

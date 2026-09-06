@@ -209,8 +209,9 @@ jobs:
           # ONE path that must be staged even on a day with no edition: the
           # 0/4-blocks branch skips the snapshot on purpose, and without this
           # add the count would die on the runner and a permanent blackout
-          # would never reach the threshold (#885). The refresh step writes it
-          # on every non-dry run, so it exists here whenever this step runs.
+          # would never reach the threshold (#885). Il file e' versionato e il
+          # refresh lo riscrive quando il contenuto cambia davvero (#927), quindi
+          # esiste sempre qui e finisce in stage solo se lo streak si e' mosso.
           git add public/data/daily-brief.json \
                   data/daily-brief-degradation.json \
                   content/blogArticleIds.ts \
@@ -232,8 +233,36 @@ jobs:
             echo "pushed=false" >> "$GITHUB_OUTPUT"
             exit 0
           fi
+          # Un giorno senza edizione ma con lo streak che si muove (0/4 blocchi,
+          # #885) mette in stage SOLO il registro, e prima che esistesse quel
+          # `git add` questo ramo non veniva mai raggiunto: usciva verde sopra.
+          # Ora ci arriva, e con lui arriva l'`exit 1` del push fallito — cioe'
+          # un rosso ogni mattina finche' il blackout dura, che e' esattamente
+          # il loop dichiarato inaccettabile in #882.
+          #
+          # Il registro non e' l'edizione: `data/**` non e' nei `paths:` di
+          # `publish-api.yml`, quindi perderlo non lascia il sito su una
+          # superficie vecchia. Perderlo costa un allarme in ritardo — lo
+          # stesso prezzo che si pagava prima di #885 — mentre il rosso in loop
+          # costa una mattina rossa per sempre. Quindi: se in stage c'e' SOLO
+          # il registro, un push fallito e' un warning e la run resta verde;
+          # se c'e' un'edizione, il rosso resta rosso.
+          #
+          # Il ramo degradato vale SOLO per il push fallito dopo tre tentativi,
+          # che e' una condizione transitoria: domani la stessa soglia viene
+          # riattraversata e l'allarme scatta con un giorno di ritardo. Un PAT
+          # assente NON e' transitorio — si ripete identico ogni mattina, lo
+          # streak nuovo non raggiungerebbe mai `main`, resterebbe fissato a
+          # `k+1` per sempre e sotto la soglia l'allarme non scatterebbe mai:
+          # il buco di memoria di #885 riaperto sotto una run verde. Un secret
+          # mancante e' una config rotta e deve restare rossa.
+          if [ "$(git diff --cached --name-only)" = "data/daily-brief-degradation.json" ]; then
+            LEDGER_ONLY=true
+          else
+            LEDGER_ONLY=false
+          fi
           if [ -z "${GITHUB_PAT:-}" ]; then
-            echo "::error::GITHUB_PAT missing — a GITHUB_TOKEN push would not fire publish-api.yml and the edition would never go live"
+            echo "::error::GITHUB_PAT missing — a GITHUB_TOKEN push would not fire publish-api.yml and the edition would never go live; on a ledger-only day the streak would never reach main and the alarm would never fire (#885)"
             exit 1
           fi
 
@@ -241,8 +270,9 @@ jobs:
 
           TARGET="${{ github.ref_name }}"
           REMOTE="https://x-access-token:${GITHUB_PAT}@github.com/${{ github.repository }}.git"
+          PUSH_LOG="$(mktemp)"
           for attempt in 1 2 3; do
-            if git push "$REMOTE" "HEAD:$TARGET"; then
+            if git push "$REMOTE" "HEAD:$TARGET" 2>&1 | tee "$PUSH_LOG"; then
               echo "pushed to $TARGET"
               echo "pushed=true" >> "$GITHUB_OUTPUT"
               exit 0
@@ -254,6 +284,31 @@ jobs:
             sleep $((attempt * 3))
             git pull --rebase "$REMOTE" "$TARGET" || { git rebase --abort 2>/dev/null || true; }
           done
+          # Il ramo degradato qui sotto classifica per FORMA del fallimento
+          # (retry esauriti), non per causa — e le due cose non coincidono. Un
+          # PAT scaduto o revocato NON e' assente: passa il `-z` sopra, arriva
+          # al push e prende un rifiuto identico ogni mattina. Degradarlo
+          # riaprirebbe esattamente il buco appena chiuso per il PAT assente:
+          # lo streak nuovo non raggiunge mai `main`, domani si rilegge lo
+          # stesso `k`, la soglia non viene mai attraversata e per tutta la
+          # durata del blackout — quando non c'e' nessun giorno-edizione a
+          # rimettere il rosso — l'allarme non scatta MAI (#885).
+          # Quindi: un rifiuto permanente (credenziale non valida, ref
+          # protetto, repo non raggiungibile, ruleset GH013) resta rosso
+          # anche nel giorno di soli-registro; solo un fallimento senza
+          # segno di rifiuto (rete, race `! [rejected] ...(fetch first)`) e'
+          # transitorio e puo' morire sul runner. `403` e' ancorato al
+          # messaggio (`HTTP 403`, `error: 403`, `remote:.*403`), non al
+          # progresso git (`403 bytes`). `remote rejected` non e' `rejected`.
+          if grep -qiE 'denied|HTTP 403|error: 403|remote:.*403|forbidden|protected branch|not found|authentication failed|invalid username or password|could not read username|support for password authentication|remote rejected|declined|rule violations|GH0[0-9]{2}' "$PUSH_LOG"; then
+            echo "::error::push rifiutato in modo permanente (credenziale scaduta/revocata, ref protetto, ruleset o repo non raggiungibile — vedi output sopra): non e' una causa transitoria, si ripeterebbe identica ogni mattina e su un giorno di soli-registro terrebbe lo streak sotto la soglia con l'allarme muto per sempre (#885)"
+            exit 1
+          fi
+          if [ "$LEDGER_ONLY" = true ]; then
+            echo "::warning::push fallito dopo 3 tentativi, ma in stage c'era solo il registro di degrado: muore sul runner (allarme in ritardo, nessun bollettino perso) invece di rendere rossa ogni mattina del blackout"
+            echo "pushed=ledger-lost" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
           echo "::error::push failed after 3 attempts (git output above)"
           exit 1
 
@@ -319,8 +374,14 @@ jobs:
       # `data/daily-brief-degradation.json` sempre, anche a 0/4 blocchi (#885)
       # — e il verdetto vale lo stesso: l'attraversamento va detto anche in un
       # giorno senza edizione.
+      #
+      # L'unica eccezione e' `pushed == 'ledger-lost'`: lo streak nuovo viveva
+      # solo nel registro e il registro non ha raggiunto `main`. Domani si
+      # rilegge il valore vecchio, si riattraversa la stessa soglia e il rosso
+      # si ripete ogni mattina — il verdetto va speso su un attraversamento
+      # durevole, o non va speso.
       - name: Degradation alarm — un blocco degradato da tre edizioni di fila
-        if: steps.mode.outputs.dry != 'true' && steps.refresh.outputs.degradation_crossed == 'true'
+        if: steps.mode.outputs.dry != 'true' && steps.refresh.outputs.degradation_crossed == 'true' && steps.commit.outputs.pushed != 'ledger-lost'
         run: |
           set -euo pipefail
           BLOCKS='${{ steps.refresh.outputs.degradation_blocks }}'
