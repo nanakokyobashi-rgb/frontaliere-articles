@@ -133,6 +133,36 @@ describe('freeTranslate — guardia «uscita == sorgente»', () => {
     assert.equal(snapshot().passthroughs - before.passthroughs, 1);
   });
 
+  test('conta il passthrough anche sul ramo a CHUNK, che e\' quello dei body lunghi', async () => {
+    // MyMemory passa al ramo a chunk sopra i 5000 caratteri. E' il ramo dei
+    // body — cioe' esattamente dei passthrough misurati sul corpus — e la copia
+    // locale del confronto che stava li' li consumava prima di `tryTier`: il
+    // bucket non li avrebbe visti mai, e la riga `Tier passthrough` sarebbe
+    // stata cieca sul caso per cui e' stata scritta.
+    //
+    // Sorgente su UNA riga di proposito: quel ramo riassembla con
+    // `parts.join(' ')`, quindi su un testo a piu' paragrafi l'uscita non e' mai
+    // byte-uguale all'ingresso nemmeno quando il motore l'ha ricopiata — limite
+    // dichiarato, non qualcosa che questo caso possa pinnare fingendo il
+    // contrario.
+    const frase = 'I frontalieri residenti entro venti chilometri dal confine restano nel vecchio regime fiscale e la soglia dei quarantacinque giorni di telelavoro vale dal primo gennaio. ';
+    const lungo = frase.repeat(40).trim();
+    assert.ok(lungo.length > 5000);
+    globalThis.fetch = async (url) => {
+      if (!String(url).includes('api.mymemory.translated.net')) throw new Error('offline nel test');
+      const q = new URL(String(url)).searchParams.get('q');
+      return { ok: true, json: async () => ({ responseData: { translatedText: q, match: 1 } }) };
+    };
+    const before = snapshot();
+
+    const out = await freeTranslate({ text: lungo, sourceLang: 'it', targetLang: 'en', fieldType: 'description' });
+    const after = snapshot();
+
+    assert.equal(out, '');
+    assert.equal(after.passthroughs - before.passthroughs, 1);
+    assert.equal(after.hits - before.hits, 0);
+  });
+
   test('nomina il passthrough nel sommario della cascata', async () => {
     stubCascade(IT);
     await freeTranslate({ text: IT, sourceLang: 'it', targetLang: 'fr', fieldType: 'description' });

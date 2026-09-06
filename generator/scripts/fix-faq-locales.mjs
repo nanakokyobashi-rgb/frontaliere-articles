@@ -252,6 +252,15 @@ function insertFaqKey(filePath, articleId, faqArray) {
 // coppia sbagliata nella media delle altre, e finche' restava qui il prossimo
 // call-site l'avrebbe ripresa perche' ha il nome piu' ovvio dei due.
 
+const normPairText = (s) => String(s ?? '').replace(/\s+/g, ' ').trim().toLowerCase();
+
+/** Due coppie FAQ sono la stessa coppia (confronto normalizzato, non `===`). */
+function samePair(a, b) {
+  return !!a && !!b
+    && normPairText(a.q) === normPairText(b.q)
+    && normPairText(a.a) === normPairText(b.a);
+}
+
 /**
  * La stessa domanda, ma per COPPIA — ed e' quella che serve prima di scrivere.
  *
@@ -264,14 +273,64 @@ function insertFaqKey(filePath, articleId, faqArray) {
  * scrittura guarda quindi ogni coppia da sola, con la stessa soglia di 50
  * caratteri sotto cui il rilevatore non ha segnale.
  *
- * Ritorna la coppia colpevole (indice + lingua rilevata) o `null`.
+ * ── COSA RIFIUTA, E PERCHE' NON PIU' «DIVERSO DALL'ATTESO» ─────────────────
+ *
+ * Il difetto da intercettare e' il PASSTHROUGH: il testo e' rimasto nella
+ * lingua SORGENTE e verrebbe pubblicato come traduzione. Il predicato invece
+ * rifiutava su `detected !== expectedLocale`, cioe' su qualunque scarto — e su
+ * coppie FAQ, che stanno fra 57 e 89 caratteri, il rilevatore e' incerto
+ * proprio fra `en`, `de` e `fr`. Un `de` rilevato su una traduzione inglese non
+ * e' un passthrough italiano: e' rumore, e costava caro perche' UNA coppia mal
+ * rilevata scarta la traduzione INTERA dell'articolo, che resta senza FAQ.
+ *
+ * Misurato su una run reale del workflow FAQ (40 articoli, 2026-09-06): 31
+ * coppie rifiutate, di cui **solo 8 rilevate `it`** — le altre 23 erano
+ * mismatch fra lingue non-sorgente, e hanno buttato 8 traduzioni complete.
+ *
+ * Misurato sulle FAQ GIA' PUBBLICATE (16'885 articoli×locale del corpus, con
+ * verita' di riferimento indipendente dal rilevatore: una coppia identica
+ * verbatim all'italiana e' un passthrough, una che differisce e' tradotta):
+ *
+ *   predicato               falsi positivi        passthrough intercettati
+ *   `!== expectedLocale`    421 / 16'885 (2,5%)   9 / 9 (100%)
+ *   `=== sourceLang`        132 / 16'885 (0,8%)   7 / 9  (78%)
+ *   questo (i due insieme)  132 / 16'885 (0,8%)   9 / 9 (100%)
+ *
+ * Da cui la forma: DUE segnali, non uno scelto fra i due. L'uguaglianza con la
+ * coppia sorgente e' il riferimento che non mente e non ha bisogno di soglie;
+ * il rilevatore di lingua copre il passthrough che il motore ha ritoccato
+ * quanto basta a non essere piu' byte-uguale. Da soli, il primo non vede un
+ * passthrough riscritto e il secondo perde 2 casi su 9.
+ *
+ * Nei falsi positivi del vecchio predicato la lingua rilevata era `fr` 165,
+ * `it` 128, `de` 66, `en` 62: **il 70% non riguardava affatto l'italiano**.
+ *
+ * La soglia di 50 caratteri resta, e vale solo per il ramo che usa il
+ * rilevatore: misurata, con 50 da' zero falsi positivi su 8 traduzioni buone e
+ * coglie 3 italiane su 4; a 80 controllerebbe 2 coppie su 8 e ne coglierebbe 0,
+ * cioe' si spegnerebbe. Il ramo dell'uguaglianza non ha soglia perche' non e'
+ * una stima.
+ *
+ * @param {{q: string, a: string}[]} faqArray  le coppie da giudicare
+ * @param {string} expectedLocale
+ * @param {{q: string, a: string}[]|null} [sourceFaq] le coppie SORGENTE, quando
+ *   il chiamante ce l'ha. Senza, resta il solo controllo di lingua e si perde
+ *   il ramo che nella misura sopra vale 2 dei 9 casi.
+ * @param {string} [sourceLang='it']
+ * @returns {{index: number, detected: string, via: 'verbatim'|'lingua'}|null}
  */
-export function wrongLocalePair(faqArray, expectedLocale) {
+export function wrongLocalePair(faqArray, expectedLocale, sourceFaq = null, sourceLang = 'it') {
+  // Su `expectedLocale === sourceLang` non c'e' traduzione da giudicare: la
+  // sorgente italiana sotto `/it/` e' l'esito giusto, non un passthrough.
+  if (expectedLocale === sourceLang) return null;
   for (let i = 0; i < faqArray.length; i++) {
+    if (samePair(faqArray[i], sourceFaq?.[i])) {
+      return { index: i, detected: sourceLang, via: 'verbatim' };
+    }
     const text = `${faqArray[i].q} ${faqArray[i].a}`;
     if (text.length < 50) continue; // too short to detect
     const detected = detectLanguage(text, expectedLocale);
-    if (detected !== expectedLocale) return { index: i, detected };
+    if (detected === sourceLang) return { index: i, detected, via: 'lingua' };
   }
   return null;
 }
@@ -388,7 +447,7 @@ async function main() {
         // /en/ con una coppia italiana su otto non veniva nemmeno SELEZIONATO —
         // il rilevatore vedeva il resto in inglese e rispondeva `en` — quindi
         // il gate di scrittura, per stretto che fosse, non lo vedeva mai.
-        if (localeFaq && wrongLocalePair(localeFaq, locale)) {
+        if (localeFaq && wrongLocalePair(localeFaq, locale, itFaq)) {
           issues.push({ articleId, file, locale, reason: 'wrong_locale', itFaq });
         }
       }
@@ -429,10 +488,11 @@ async function main() {
 
       // Verify the translation is actually in the right locale — per coppia,
       // perche' il fallback italiano di `translateFaqArray()` e' per coppia.
-      const wrong = wrongLocalePair(translated, issue.locale);
+      const wrong = wrongLocalePair(translated, issue.locale, issue.itFaq);
       if (wrong) {
-        console.error(`${label} ❌ Translation still detected as wrong locale `
-          + `(coppia ${wrong.index + 1}/${translated.length}: ${wrong.detected})`);
+        console.error(`${label} ❌ Translation still in the source language `
+          + `(coppia ${wrong.index + 1}/${translated.length}: ${wrong.detected}, `
+          + `rilevata per ${wrong.via})`);
         failed++;
         continue;
       }

@@ -164,6 +164,7 @@ test('stratify non inventa coppie quando ce ne sono meno del limite', () => {
 
 const IT_LONG = 'Il frontaliere che lavora in Ticino deve dichiarare il reddito in Italia. '.repeat(12);
 const EN_LONG = 'The cross-border worker employed in Ticino must declare the income in Italy. '.repeat(12);
+const DE_LONG = 'Der Grenzgaenger der im Tessin arbeitet muss das Einkommen in Italien angeben. '.repeat(12);
 
 test('translationSanityIssue accetta una ri-traduzione di lunghezza normale', () => {
   assert.equal(translationSanityIssue({
@@ -307,18 +308,58 @@ const IT_PAIR = { q: 'Dove paga le imposte il frontaliere?', a: IT_LONG };
 test('wrongLocalePair vede la singola coppia italiana rimasta dal fallback', () => {
   // Falsificazione nell'altra direzione per prima: tre coppie tradotte davvero
   // non devono essere rifiutate.
-  assert.equal(wrongLocalePair([EN_PAIR, EN_PAIR, EN_PAIR], 'en'), null);
+  assert.equal(wrongLocalePair([EN_PAIR, EN_PAIR, EN_PAIR], 'en', [IT_PAIR, IT_PAIR, IT_PAIR]), null);
 
-  const wrong = wrongLocalePair([EN_PAIR, IT_PAIR, EN_PAIR], 'en');
+  // La forma REALE del difetto: `translateFaqArray()` rimette dentro la coppia
+  // ITALIANA quando il motore fallisce, quindi quella coppia e' byte-identica
+  // alla sorgente. E' il ramo dell'uguaglianza a coglierla.
+  const source = [IT_PAIR, IT_PAIR, IT_PAIR];
+  const wrong = wrongLocalePair([EN_PAIR, IT_PAIR, EN_PAIR], 'en', source);
   assert.ok(wrong, 'una coppia italiana su tre deve produrre un rifiuto');
   assert.equal(wrong.index, 1);
-  assert.notEqual(wrong.detected, 'en');
+  assert.equal(wrong.via, 'verbatim');
+  assert.equal(wrong.detected, 'it');
 
   // E sul concatenato — cioe' col controllo di prima — non verrebbe rifiutata.
   assert.equal(
     detectLanguage([EN_PAIR, IT_PAIR, EN_PAIR].map((p) => `${p.q} ${p.a}`).join(' '), 'en'),
     'en',
   );
+});
+
+test('il ramo di LINGUA da solo non basta: su questo testo italiano il rilevatore dice `de`', () => {
+  // Misura, non opinione. Su `IT_PAIR` il rilevatore risponde `de` con
+  // confidenza 0,09 (punteggi it=1428, de=1573): un testo italiano che NON
+  // viene riconosciuto come italiano.
+  //
+  // Il vecchio predicato (`detected !== expectedLocale`) lo rifiutava lo
+  // stesso, ma per la ragione sbagliata — bastava che il rilevato non fosse
+  // `en` — ed e' esattamente il meccanismo che su 16'885 articoli×locale
+  // pubblicati produceva 421 falsi positivi (2,5%), di cui il 70% con lingua
+  // rilevata diversa da `it`. Su una run reale del workflow FAQ ha buttato 8
+  // traduzioni complete su 31 coppie rifiutate, e solo 8 di quelle 31 erano
+  // davvero `it`.
+  //
+  // Da cui i DUE rami: senza l'uguaglianza con la sorgente, questo caso
+  // sfuggirebbe.
+  const detected = detectLanguage(`${IT_PAIR.q} ${IT_PAIR.a}`, 'en');
+  assert.notEqual(detected, 'it', 'se un giorno il rilevatore dicesse `it`, questo test va riscritto');
+  assert.equal(wrongLocalePair([IT_PAIR], 'en'), null,
+    'senza la sorgente il solo ramo di lingua non coglie questa coppia');
+  assert.ok(wrongLocalePair([IT_PAIR], 'en', [IT_PAIR]),
+    'con la sorgente il ramo dell\'uguaglianza la coglie');
+});
+
+test('wrongLocalePair non rifiuta piu\' uno scarto fra lingue NON sorgente', () => {
+  // Il difetto che questa modifica chiude: `de` rilevato su una traduzione
+  // inglese non e' un passthrough italiano, e' incertezza del rilevatore su
+  // testo corto — e costava una traduzione intera, perche' UNA coppia scarta
+  // l'articolo.
+  const DE_PAIR = { q: 'Wo zahlt der Grenzgaenger seine Steuern?', a: DE_LONG };
+  assert.notEqual(detectLanguage(`${DE_PAIR.q} ${DE_PAIR.a}`, 'en'), 'en',
+    'il fixture deve essere riconosciuto come NON inglese, altrimenti non prova niente');
+  assert.equal(wrongLocalePair([DE_PAIR], 'en', [IT_PAIR]), null,
+    'uno scarto fra due lingue non-sorgente non e\' un passthrough e non va rifiutato');
 });
 
 test('wrongLocalePair salta le coppie sotto la soglia di segnale', () => {
@@ -381,7 +422,7 @@ test('il rilevatore di locale FAQ e per coppia in ENTRAMBI i punti che decidono'
   const fn = batch.slice(batch.indexOf('async function translateFaq('),
     batch.indexOf('function validateFaq('));
   assert.ok(fn.length > 0, 'translateFaq non trovata');
-  assert.match(fn, /wrongLocalePair\(results, targetLang\)/,
+  assert.match(fn, /wrongLocalePair\(results, targetLang, faqArray\)/,
     'translateFaq deve rifiutare un array che contiene una coppia nella lingua sbagliata');
   // NON `null`: i tre chiamanti non trattano `null` allo stesso modo — due su
   // tre lo gestiscono scrivendo la FAQ italiana intera. Il rifiuto di lingua
