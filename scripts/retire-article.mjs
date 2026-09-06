@@ -58,6 +58,11 @@ import {
   SECTIONS, LOCALES, IMAGES_LEDGER, IMAGE_CATALOG, RETIRED_LEDGER,
   seoFilesFor, leftoverSurfacesFor,
 } from './lib/article-surfaces.mjs';
+// La localizzazione dei letterali TS (span dell'array piatto degli id, e la
+// parentesi che chiude davvero quella di apertura) vive in un modulo condiviso:
+// la usa anche `generator/scripts/create-article.mjs`, che lo STESSO array lo
+// rigenera (vedi il file per il perché delle due euristiche cadute).
+import { matchingDelimiter, removeFromIdListLiteral } from './lib/ts-literals.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 
@@ -69,41 +74,6 @@ const write = (p, s) => writeFileSync(rel(p), s, 'utf-8');
 // condivisa col gate di PR `generator/tests/retired-articles-fully-removed.test.mjs`
 // (vedi il modulo per il perché).
 
-/**
- * Trova la `}` che chiude la `{` a `openIdx`, ignorando le graffe dentro le
- * stringhe.
- *
- * Deve seguire TUTTI E TRE i delimitatori — `'`, `"` e il backtick — e non solo
- * l'apice singolo con cui sono scritte le chiavi. I blocchi `structuredData`
- * dei file SEO sono JSON con le chiavi fra doppi apici, e i loro valori
- * contengono apostrofi italiani (`"description": "…un'autostrada…"`). Seguendo
- * il solo apice singolo, quell'apostrofo apre una stringa che non si chiude
- * più, tutte le graffe successive vengono ignorate e la funzione restituisce
- * una `}` interna: il blocco viene troncato a metà e il file resta con una
- * `},` orfana. Non è ipotetico — è successo al primo giro su
- * `content/seo/seo-blog-ch.ts`, e `tsx` lo ha rifiutato con
- * «Expected identifier» sulla chiave successiva.
- */
-function matchingBrace(src, openIdx) {
-  let depth = 0;
-  let quote = null;
-  for (let i = openIdx; i < src.length; i += 1) {
-    const ch = src[i];
-    if (quote !== null) {
-      if (ch === '\\') { i += 1; continue; }
-      if (ch === quote) quote = null;
-      continue;
-    }
-    if (ch === "'" || ch === '"' || ch === '`') { quote = ch; continue; }
-    if (ch === '{') depth += 1;
-    else if (ch === '}') {
-      depth -= 1;
-      if (depth === 0) return i;
-    }
-  }
-  return -1;
-}
-
 /** Rimuove il blocco `{ … id: '<id>', … },` dal registro di sezione. */
 function removeRegistryEntry(file, id) {
   const src = read(file);
@@ -112,7 +82,7 @@ function removeRegistryEntry(file, id) {
   if (at === -1) return { changed: false, src };
   const open = src.lastIndexOf('{', at);
   if (open === -1) throw new Error(`${file}: nessuna '{' prima di ${needle}`);
-  const close = matchingBrace(src, open);
+  const close = matchingDelimiter(src, open);
   if (close === -1) throw new Error(`${file}: graffe sbilanciate attorno a ${id}`);
   // Inghiotti la virgola e la riga vuota che seguono, e il rientro che precede.
   let start = open;
@@ -137,35 +107,6 @@ function removeSlugRow(file, id) {
     if (!slugs[loc]) throw new Error(`${file}: la riga di ${id} non ha lo slug ${loc}`);
   }
   return { changed: true, src: src.replace(rx, ''), slugs };
-}
-
-/**
- * Rimuove `'<id>'` da un array letterale piatto (`export const <varName> = [...]`).
- * Opera solo sul corpo fra la sua `[` di apertura e il `];` che lo chiude, per
- * non rischiare di toccare un'altra occorrenza dell'id altrove nel file.
- */
-function removeFromIdListLiteral(src, varName, id) {
-  const declRx = new RegExp(`\\b${varName}\\b[^=]*=\\s*\\[`, 'm');
-  const m = declRx.exec(src);
-  if (!m) return { changed: false, src };
-  const openIdx = m.index + m[0].length - 1;
-  const closeIdx = src.indexOf('];', openIdx);
-  if (closeIdx === -1) throw new Error(`array ${varName}: nessun '];' di chiusura`);
-  const before = src.slice(0, openIdx + 1);
-  const body = src.slice(openIdx + 1, closeIdx);
-  const after = src.slice(closeIdx);
-  const escaped = id.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-  let newBody;
-  if (new RegExp(`'${escaped}',\\s*`).test(body)) {
-    newBody = body.replace(new RegExp(`'${escaped}',\\s*`), '');
-  } else if (new RegExp(`,\\s*'${escaped}'`).test(body)) {
-    newBody = body.replace(new RegExp(`,\\s*'${escaped}'`), '');
-  } else if (new RegExp(`^\\s*'${escaped}'\\s*$`).test(body)) {
-    newBody = '';
-  } else {
-    return { changed: false, src };
-  }
-  return { changed: true, src: before + newBody + after };
 }
 
 /**
@@ -209,7 +150,7 @@ function removeSeoEntry(file, id) {
   const at = src.indexOf(needle);
   if (at === -1) return { changed: false, src };
   const open = src.indexOf('{', at);
-  const close = matchingBrace(src, open);
+  const close = matchingDelimiter(src, open);
   if (close === -1) throw new Error(`${file}: graffe sbilanciate attorno a blog-${id}`);
   let start = at;
   while (start > 0 && (src[start - 1] === ' ' || src[start - 1] === '\t')) start -= 1;

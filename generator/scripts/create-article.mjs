@@ -284,6 +284,7 @@ import {
   META_SEO_FIELDS,
 } from './lib/article-meta-block.mjs';
 import { sanitizeText } from '../../scripts/lib/sanitize-control-chars.mjs';
+import { findIdListLiteralSpan } from '../../scripts/lib/ts-literals.mjs';
 import { reportStrippedControlChars } from './lib/control-char-write-report.mjs';
 import {
   beginRegisterLock as beginRegisterLockImpl,
@@ -12564,20 +12565,26 @@ function modifyRouterTs(data) {
 
   // Regenerate the literal ALL_*_ARTICLE_IDS array ONLY when the file declares
   // it as a literal (`= [...]`). The svizzera section derives it via
-  // `Object.keys(SWISS_SLUGS)`, so no array edit is needed there.
-  const literalArrayRe = new RegExp(
-    `export const ${SECTION.allIdsConstName}:[^=]*=\\s*\\[[^\\]]*\\];`,
-  );
-  if (literalArrayRe.test(blogSrc)) {
+  // `Object.keys(SWISS_SLUGS)`, so no array edit is needed there — and that is
+  // exactly what a `null` span means here.
+  //
+  // The span comes from the shared locator, not from a `= \[[^\]]*\];` regex:
+  // that regex anchored the END on a literal `];`, so an array closed
+  // `] as const;` (or with the bracket on its own indented line) simply did not
+  // match — and this block SILENTLY skipped, leaving the new id out of
+  // ALL_BLOG_ARTICLE_IDS while everything else got written. Same defect class,
+  // opposite half, as the one `scripts/retire-article.mjs` had on removal.
+  const idListSpan = findIdListLiteralSpan(blogSrc, SECTION.allIdsConstName);
+  if (idListSpan) {
     const allIds = getSectionExistingIds(blogSrc).map((id) => `'${id}'`);
     if (allIds.length === 0) {
       throw new Error(`modifyRouterTs: regenerated 0 IDs for ${SECTION.allIdsConstName} (regex anchor changed?)`);
     }
-    const allIdsType = SECTION.updateRouterUnion ? 'BlogArticleId[]' : 'string[]';
-    blogSrc = blogSrc.replace(
-      literalArrayRe,
-      `export const ${SECTION.allIdsConstName}: ${allIdsType} = [${allIds.join(', ')}];`,
-    );
+    // Only the BODY is rewritten: declaration, type annotation and whatever
+    // closes the array (`;`, ` as const;`) are preserved byte-for-byte.
+    blogSrc = blogSrc.slice(0, idListSpan.openIdx + 1)
+      + allIds.join(', ')
+      + blogSrc.slice(idListSpan.closeIdx);
   }
 
   write(blogDataFile, blogSrc);
