@@ -387,8 +387,13 @@ test('il marker porta l\'identita\' del RUN, non solo il pid', () => {
   // E l'identita' esce nell'errore che un umano legge mentre ripara a mano:
   // e' li' che serve, non nel file.
   const build = makeTargets(root);
-  fs.mkdirSync(path.dirname(build(ARTICLE_ID)[0].absPath), { recursive: true });
-  fs.writeFileSync(build(ARTICLE_ID)[0].absPath, `entry ${ARTICLE_ID}\n`, 'utf-8');
+  // Il primo bersaglio va scritto nella forma che il writer appende davvero —
+  // il needle — come in ogni altro caso di questo file: l'id nudo non e'
+  // `present` da nessuna parte, quindi non ci sarebbe nessuno SPLIT da
+  // diagnosticare e l'identita' del run non arriverebbe mai a un umano.
+  const primo = build(ARTICLE_ID)[0];
+  fs.mkdirSync(path.dirname(primo.absPath), { recursive: true });
+  fs.writeFileSync(primo.absPath, `entry ${primo.needle}\n`, 'utf-8');
   assert.throws(
     () => resolveRegisterLock(root, build, SECTION),
     (err) => /SPLIT/.test(err.message) && err.message.includes('run 1234567890') && err.message.includes('attempt 2'),
@@ -480,13 +485,17 @@ function loadRegisterLockTargets(resolveRel = (r) => `/root/${r}`) {
       updateRouterUnion: flags[name],
     }]),
   );
+  // I simboli liberi del body estratto sono esattamente questi quattro: da
+  // #965 il messaggio di sezione sconosciuta nomina `registerLockFile(sectionName)`
+  // (create-article.mjs, `rimuovi ${registerLockFile(sectionName)}`) al posto
+  // della vecchia costante REGISTER_LOCK_FILE, che non esiste piu'.
   return new Function(
     'ARTICLE_SECTION_CONFIGS',
     'SECTION_NAME',
-    'REGISTER_LOCK_FILE',
+    'registerLockFile',
     'resolve',
     `${body}\nreturn registerLockTargets;`,
-  )(configs, SECTION, REGISTER_LOCK_FILE, resolveRel);
+  )(configs, SECTION, registerLockFile, resolveRel);
 }
 
 test('la union BlogArticleId e\' fra i bersagli di frontaliere, e assente da svizzera', () => {
