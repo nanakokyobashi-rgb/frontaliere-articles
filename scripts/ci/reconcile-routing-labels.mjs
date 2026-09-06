@@ -48,8 +48,8 @@
  *
  * ## Il guard di eta', e perche' non e' una precauzione generica
  *
- * Ogni scrittore legittimo passa da `gh issue edit --add-label X
- * --remove-label Y`, che sull'API sono DUE chiamate: c'e' un istante in cui
+ * Ogni scrittore legittimo passa da `gh issue edit --add-label <attiva>
+ * --remove-label <coda>`, che sull'API sono DUE chiamate: c'e' un istante in cui
  * entrambe le label esistono (promozione del drainer, ri-accodamento per quota
  * in `check-quota-backoff.mjs`). Riconciliare li' dentro disferebbe l'edit a
  * meta'. Si agisce solo su un conflitto FERMO da `MIN_AGE_SEC` (default 120s),

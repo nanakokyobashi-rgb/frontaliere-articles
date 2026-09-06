@@ -3276,6 +3276,16 @@
       }
     },
     {
+      "path": "scripts/ci/reconcile-routing-labels.mjs",
+      "mode": "corpus-only",
+      "reason": "Riconciliatore zero-Claude del doppio instradamento (#918, item 2 del follow-up di #908): una issue con `agent:fix` E `agent:fix-queued` insieme e' gia' in lavorazione ma rientra fra i candidati del drainer, che la promuove una seconda volta. Il conflitto nasce dalla chiave di concorrenza per-issue del triage, che ha smesso di serializzare lo sweep schedulato con la run event-driven. Non esiste sul sito e non deve stare li' in questa forma: la chiusura naturale sarebbe dentro `triage-sweep.mjs` (clamp `crawlerToQueue`), che qui e' `identical` — la strada del sito e' quella, questo file e' il gemello locale che sta ACCANTO allo script mirrorato, come `check-stale-issue-dispatch.mjs` per l'item 3.",
+      "baseline": {
+        "site": null,
+        "corpus": "04744c4966316597",
+        "alignedAt": "2026-09-06"
+      }
+    },
+    {
       "path": ".github/workflows/followup-reconcile.yml",
       "mode": "adapted",
       "reason": "Gemello del workflow del sito. Cambia SOLO il profilo di checkout e la cadenza: l'albero da escludere qui e' content/ (14.888 file di corpus), dist/ (la superficie pubblicata), public/ e data/. L'esclusione e' sicura nella direzione che conta: se una follow-up citasse un file escluso, citedFiles() non lo vedrebbe e la issue NON sarebbe rilevata come risolta — il costo di sbagliare e' una chiusura MANCATA, mai una chiusura sbagliata. Cron sfasato (06:25 invece di 06:00) come gli altri workflow di questo repo.",
