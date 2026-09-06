@@ -1,5 +1,4 @@
 {
-  "https://www.laregione.ch/svizzera/svizzera/1943512/misure-siccita-urgenza-ora-cf": "cf-urgenza-siccita",
   "https://www.tio.ch/svizzera/economia/1943548/passeggeri-luglio-aeroporto-zurigo-fatturato": "aeroporto-zurigo-luglio-2026",
   "https://www.laregione.ch/economia/economia/1943395/dollari-titolo-federer-miliardario-roger": "federer-patrimonio-on-borsa-calo",
   "https://www.laregione.ch/economia/economia/1941096/ue-russia-europa-anni-gr-bel-ucraina-cs-ubs-ceo-mette": "grubel-ubb-intromettersi-in-ucraina",
@@ -1897,6 +1896,11 @@
   "https://www.tio.ch/rubriche/ospite/1948356/svizzera-neutralita-biaggio-scelta-liberta-elio": {
     "articleId": "riflessione-neutralita-svizzera-delbiaggio",
     "ts": "2026-09-06T17:57:04.956Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/gr%3a-hotel-di-lenzerheide-vittima-di-attacco-hacker-avvisa-clienti/92012381": {
+    "articleId": "hotel-lenzerheide-hacker-avviso",
+    "ts": "2026-09-06T18:04:40.285Z",
     "keyForm": 2
   }
 }
