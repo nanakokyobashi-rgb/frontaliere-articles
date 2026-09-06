@@ -1778,6 +1778,16 @@
       }
     },
     {
+      "path": "generator/scripts/lib/drain-stdio.mjs",
+      "mode": "corpus-only",
+      "reason": "`drainStdio()`/`exitAfterDrain()`: aspetta che stdout/stderr siano usciti prima di `process.exit()`. Su POSIX le write su una pipe — il log di Actions — sono asincrone, e `process.exit()` scarta quello che e' ancora nel buffer (misurato: 200.013 byte stampati, 65.536 arrivati). Nato dalla issue #983 per la telemetria di fine run del generatore, che e' l'ultima cosa stampata prima dell'uscita e vive SOLO qui: dopo il cutover del 2026-08-02 il gemello del sito `scripts/create-article.mjs` non genera piu' articoli, quindi la' non esistono ne' `finalizeRunReport()` ne' la riga `resolver flaps:` che il drain protegge. `corpus-only` e non `corpus-only-pending`: il residuo sul sito e' nei signal handler di `scripts/lib/ai-models.mjs`, che pero' e' `adapted` e DIVERGENTE dal 2026-08-18 in entrambe le direzioni — il fix non e' copiabile cosi' com'e', e questo giro non ha aperto una issue sul sito, che e' cio' che `corpus-only-pending` pretende (#125).",
+      "baseline": {
+        "site": null,
+        "corpus": "e0664b74f6670ba3",
+        "alignedAt": "2026-09-06"
+      }
+    },
+    {
       "path": "generator/scripts/lib/dup-stoplist.mjs",
       "sitePath": "scripts/lib/dup-stoplist.mjs",
       "mode": "identical",

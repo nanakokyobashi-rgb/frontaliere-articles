@@ -99,7 +99,11 @@ test('#525: esiste un\'uscita forzata bounded, o l\'handler ALLUNGA la vita del 
   // cioe' la finestra cooperativa avrebbe peggiorato la cosa che doveva
   // migliorare.
   assert.match(ATTIVO, /COOPERATIVE_STOP_GRACE_MS/);
-  assert.match(ATTIVO, /process\.exit\(143\)/,
+  // `exitAfterDrain(143)` dal 2026-09-06 (#983): il codice pinnato resta 143, ma
+  // l'uscita passa dal drain di stdout/stderr, o la `::warning::` che DICHIARA
+  // la fermata verrebbe scartata da `process.exit()` insieme al resto del buffer
+  // — e una fermata non dichiarata e' meta' del difetto di #525.
+  assert.match(ATTIVO, /(?:process\.exit|exitAfterDrain)\(143\)/,
     '143 = 128 + SIGTERM: il codice che il chiamante gia\' si aspetta da un kill per segnale');
   assert.match(ATTIVO, /\.unref\(\)/,
     'senza unref il timer terrebbe vivo l\'event loop e una run sana finirebbe per aspettarlo');
