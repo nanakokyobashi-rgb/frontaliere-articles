@@ -255,6 +255,28 @@ jobs:
           if [ "$INPUT_DRY_RUN" = "true" ]; then ARGS+=(--dry-run); fi
           node scripts/ci/triage-sweep.mjs "${ARGS[@]}"
 
+      # Doppio instradamento (#918, item 2). Da quando la chiave di concorrenza
+      # e' per-issue (#908), questa run schedulata e la run event-driven non si
+      # serializzano piu': lo sweep puo' leggere una issue proprio fra
+      # `agent:triaged` e la sua label di routing, e instradarla una seconda
+      # volta. Le due strade classificano lo stesso input, quindi di norma la
+      # seconda label e' idempotente — tranne quando il clamp del budget diretto
+      # dello sweep accoda cio' che l'event-driven ha mandato a fix diretto:
+      # la issue resta con `agent:fix` E `agent:fix-queued`, e il drainer la
+      # promuove una seconda volta.
+      #
+      # La riconciliazione sta QUI e non in `triage-sweep.mjs` perche' quello e'
+      # `mode: identical` nel manifest: una modifica li' viene sovrascritta al
+      # mirror successivo. GITHUB_TOKEN di proposito — si rimuove una label, e
+      # nessun workflow ascolta `unlabeled`.
+      - name: Reconcile double routing (deterministic, no Claude)
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+          DRY_RUN: ${{ github.event.inputs.dry_run == 'true' && '1' || '' }}
+        run: node scripts/ci/reconcile-routing-labels.mjs
+
       # Lock `agent:in-progress` appesi. Sta QUI e non in `recycle-stale-prs.yml`
       # perche' questo e' il janitor schedulato del lato ISSUE: lo sweep sopra
       # recupera le issue che il triage non ha mai instradato, questo recupera
