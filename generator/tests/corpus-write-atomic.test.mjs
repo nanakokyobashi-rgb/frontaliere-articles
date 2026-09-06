@@ -19,6 +19,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
+import { codeOnly, RELATIVE_IMPORT_SPEC } from './lib/code-only.mjs';
 
 const root = path.resolve(import.meta.dirname, '..', '..');
 
@@ -73,6 +74,24 @@ const COVERED_ELSEWHERE = ['generator/scripts/create-article.mjs'];
 // censimento lo ritrova dal codice.
 const REGENERABLE_STATE = [
   'generator/scripts/lib/article-topic-selector.mjs',
+];
+
+// #922 item 5: allargare il predicato d'ingresso da `writeFileSync(` al NOME
+// della primitiva ha fatto entrare nel censimento due file che scrivono con
+// `appendFileSync`. Nessuno dei due tocca un artefatto pubblicato: il target e'
+// `$GITHUB_OUTPUT` / `$GITHUB_STEP_SUMMARY`, cioe' un file FUORI dal workspace,
+// aperto in append e mai riscritto in place. Un SIGKILL a meta' vi lascia una
+// riga tronca in un canale che il repo non pubblica, non un `content/**`
+// dimezzato — e non c'e' niente da rendere atomico, perche' l'append e' gia' il
+// contrario del troncamento. Entrano nel censimento solo perche' il criterio
+// gira sul FILE: la radice pubblicata che matcha sta altrove nella loro
+// sorgente raggiungibile.
+// Se uno dei due iniziasse a scrivere davvero un artefatto, la voce resta
+// muta — e' il limite noto del ragionamento per file, gia' pagato una volta in
+// `generate-border-wait-ranking-article.mjs` e coperto li' da un test dedicato.
+const APPEND_ONLY_CHANNEL = [
+  'generator/scripts/publish-journalist-article.mjs',
+  'generator/scripts/refresh-daily-brief-data.mjs',
 ];
 
 const NOT_WORKFLOW_DRIVEN = [
@@ -171,35 +190,19 @@ test("l'elenco dei choke-point copre ogni scrittura di un artefatto pubblicato",
   // sono substring nude. Quindi la riparazione sta qui, nel criterio.
   //
   // `codeOnly()` toglie SOLO i commenti che occupano la riga intera (`//` a
-  // inizio riga e blocchi `/* … */` aperti a inizio riga). Deliberatamente
-  // conservativo: un commento in coda a una riga di codice resta dentro, e con
-  // lui il falso positivo, perche' il costo dei due errori non e' simmetrico —
-  // togliere troppo perde un choke-point vero in silenzio, togliere troppo poco
-  // lascia solo il rumore che c'era prima. L'assertion in fondo pinna la
-  // direzione pericolosa: se lo stripping mangiasse codice, i choke-point noti
-  // smetterebbero di matchare e la suite diventa rossa.
-  const codeOnly = (src) => {
-    const out = [];
-    let inBlock = false;
-    for (const line of src.split('\n')) {
-      const t = line.trim();
-      if (inBlock) {
-        const end = line.indexOf('*/');
-        if (end === -1) { out.push(''); continue; }
-        inBlock = false;
-        out.push(line.slice(end + 2));
-        continue;
-      }
-      if (t.startsWith('//')) { out.push(''); continue; }
-      if (t.startsWith('/*')) {
-        if (!t.includes('*/')) inBlock = true;
-        out.push('');
-        continue;
-      }
-      out.push(line);
-    }
-    return out.join('\n');
-  };
+  // inizio riga e blocchi `/* … */` aperti a inizio riga), e mai dentro un
+  // template literal. Deliberatamente conservativo: un commento in coda a una
+  // riga di codice resta dentro, e con lui il falso positivo, perche' il costo
+  // dei due errori non e' simmetrico — togliere troppo perde un choke-point
+  // vero in silenzio, togliere troppo poco lascia solo il rumore che c'era
+  // prima. L'assertion in fondo pinna la direzione pericolosa: se lo stripping
+  // mangiasse codice, i choke-point noti smetterebbero di matchare e la suite
+  // diventa rossa.
+  //
+  // Sta in `lib/code-only.mjs` con i suoi test diretti
+  // (`censimento-code-only.test.mjs`): quell'assertion campiona nove file
+  // gia' noti, quindi non copre il file NUOVO — che e' il caso per cui il
+  // censimento esiste.
 
   const PUBLISHED = /blog-body|blog-articles-data|corpusPath\(|'public',\s*'data'|public\/data|dist\/api/;
   const dir = path.join(root, 'generator', 'scripts');
@@ -223,21 +226,47 @@ test("l'elenco dei choke-point copre ogni scrittura di un artefatto pubblicato",
   // "visitato" dal primo ramo e tornerebbe '' anche se la cache aveva gia' il
   // valore giusto, e quel '' verrebbe cacheato per il choke-point del secondo
   // ramo — perdendo silenziosamente il contenuto di D per lui.
-  const reachableSource = (file, ancestors = new Set()) => {
-    if (importSourceCache.has(file)) return importSourceCache.get(file);
-    if (ancestors.has(file)) return ''; // ciclo genuino nel ramo corrente: non cacheare
+  //
+  // #922 item 2: il ramo ciclico non cacheava il proprio `''`, ma il chiamante
+  // cacheava il COMBINATO che quel `''` aveva troncato. Con A→B→A, la chiamata
+  // su B produce `srcB + ''` e quella voce finiva in cache per B, riusata da
+  // ogni altro root che passa da B: un letterale pubblicato definito in A
+  // restava invisibile a TUTTI gli importatori di B, senza rumore. Ora il
+  // taglio si propaga come `cyclic` lungo lo stack e chi lo riceve non si
+  // cachea. Costa una ri-visita sui grafi ciclici; non costa niente sugli
+  // altri, che sono la totalita' di quelli visti finora.
+  const walkSource = (file, ancestors) => {
+    if (importSourceCache.has(file)) return { text: importSourceCache.get(file), cyclic: false };
+    if (ancestors.has(file)) return { text: '', cyclic: true }; // ciclo genuino nel ramo corrente
     ancestors.add(file);
     let src;
-    try { src = codeOnly(fs.readFileSync(file, 'utf-8')); } catch { ancestors.delete(file); return ''; }
+    try { src = codeOnly(fs.readFileSync(file, 'utf-8')); } catch { ancestors.delete(file); return { text: '', cyclic: false }; }
     let combined = src;
-    for (const m of src.matchAll(/\bfrom\s+'(\.[^']+)'/g)) {
+    let cyclic = false;
+    for (const m of src.matchAll(RELATIVE_IMPORT_SPEC)) {
       const resolved = resolveRelativeImport(file, m[1]);
-      if (resolved) combined += `\n${reachableSource(resolved, ancestors)}`;
+      if (!resolved) continue;
+      const child = walkSource(resolved, ancestors);
+      combined += `\n${child.text}`;
+      cyclic = cyclic || child.cyclic;
     }
     ancestors.delete(file);
-    importSourceCache.set(file, combined);
-    return combined;
+    if (!cyclic) importSourceCache.set(file, combined);
+    return { text: combined, cyclic };
   };
+  const reachableSource = (file) => walkSource(file, new Set()).text;
+
+  // #922 item 5: il predicato d'ingresso era il letterale `writeFileSync(`, e
+  // quindi un choke-point che scrivesse con un alias (`const w =
+  // fs.writeFileSync`), con `fs.promises.writeFile` o con uno stream non
+  // entrava nemmeno nel censimento — la sorgente raggiungibile non poteva
+  // recuperarlo, perche' il filtro gira sul FILE, non sulla closure. Il buco
+  // era teorico (l'audit non ha trovato nessuna di quelle forme sotto
+  // `generator/scripts`), ma un predicato che vale solo finche' nessuno cambia
+  // stile e' esattamente il tipo di cecita' silenziosa che questo censimento
+  // deve escludere. Ora il match e' sul NOME della primitiva senza pretendere
+  // la parentesi, cosi' l'alias entra come la chiamata diretta.
+  const WRITER = /\b(?:writeFileSync|writeFile|appendFileSync|appendFile|createWriteStream|copyFileSync|cpSync)\b/;
 
   const found = [];
   const walk = (d) => {
@@ -246,7 +275,7 @@ test("l'elenco dei choke-point copre ogni scrittura di un artefatto pubblicato",
       if (e.isDirectory()) { walk(p); continue; }
       if (!e.name.endsWith('.mjs')) continue;
       const src = codeOnly(fs.readFileSync(p, 'utf-8'));
-      if (/writeFileSync\(/.test(src) && PUBLISHED.test(reachableSource(p))) {
+      if (WRITER.test(src) && PUBLISHED.test(reachableSource(p))) {
         found.push(path.relative(root, p));
       }
     }
@@ -258,6 +287,7 @@ test("l'elenco dei choke-point copre ogni scrittura di un artefatto pubblicato",
     ...COVERED_ELSEWHERE,
     ...REGENERABLE_STATE,
     ...NOT_WORKFLOW_DRIVEN,
+    ...APPEND_ONLY_CHANNEL,
   ]);
   // La contro-prova dello stripping, nella direzione che fa danno in silenzio:
   // se `codeOnly()` mangiasse codice — un template literal le cui righe
@@ -272,6 +302,22 @@ test("l'elenco dei choke-point copre ogni scrittura di un artefatto pubblicato",
     + `${blind.join(', ')}. Se non li hai appena tolti dalla lista, e' `
     + "`codeOnly()` che sta togliendo codice invece di soli commenti: il "
     + 'censimento sarebbe verde perche\' cieco.');
+
+  // #922 item 3: `blind` copre CHOKE_POINTS + COVERED_ELSEWHERE, cioe' le due
+  // liste dei file che DEVONO essere visti. Le altre due sono scuse — dicono
+  // «questo write l'abbiamo guardato e va bene cosi'» — e nessuno verificava
+  // che corrispondessero ancora a un match. Una voce morta li' e' peggio che
+  // inutile: scusa in anticipo un write futuro nello stesso file, senza che
+  // nessuna assertion lo dica. E' il caso di `refresh-events-dataset.mjs`,
+  // trovato a mano al round 2; da qui in avanti lo trova la suite.
+  const excuses = [...REGENERABLE_STATE, ...NOT_WORKFLOW_DRIVEN, ...APPEND_ONLY_CHANNEL];
+  const dead = excuses.filter((rel) => !found.includes(rel));
+  assert.deepEqual(dead, [],
+    'queste voci non corrispondono piu\' a nessun write censito: '
+    + `${dead.join(', ')}. Una scusa senza il write che scusa non protegge `
+    + 'niente e assolve in anticipo il prossimo write nello stesso file: '
+    + 'togli la voce, oppure spiega nel commento perche\' il criterio non la '
+    + 'vede piu\'.');
 
   const missing = found.filter((f) => !listed.has(f));
   assert.deepEqual(missing, [],
