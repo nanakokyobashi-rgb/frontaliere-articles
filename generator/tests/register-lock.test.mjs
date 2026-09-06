@@ -53,17 +53,19 @@ function sandbox() {
 
 /**
  * Gli stessi bersagli che `registerLockTargets()` costruisce dalla config di
- * sezione in create-article.mjs: le 9 chiamate `modifyXxx()` scrivono 11 file,
- * perche' `modifyI18nTs`/`modifyLocaleFile` ne toccano due per locale (meta +
- * body) e `modifySitemap`/`modifySitemapNews` sono no-op in questo repo.
+ * sezione in create-article.mjs: le 9 chiamate `modifyXxx()` scrivono 12 file
+ * per frontaliere (11 per svizzera), perche' `modifyI18nTs`/`modifyLocaleFile`
+ * ne toccano due per locale (meta + body), `modifyRouterTs` ne tocca due per
+ * la sola frontaliere (union + mappa slug) e `modifySitemap`/`modifySitemapNews`
+ * sono no-op in questo repo.
  *
  * I path sono scopati alla SEZIONE, come nel codice reale: le due sezioni non
  * condividono nemmeno un bersaglio, ed e' questo che rende fatale confrontare
  * un id contro i file dell'altra sezione.
  */
 const SECTION_FILES = {
-  frontaliere: { slug: 'data/routerBlogData.ts', registry: 'data/blog-articles-data.ts', seo: 'services/seo/seo-blog-5.ts', metaPrefix: 'blog-meta', bodyDir: 'blog-body' },
-  svizzera: { slug: 'data/routerSwissData.ts', registry: 'data/swiss-articles-data.ts', seo: 'services/seo/seo-blog-ch.ts', metaPrefix: 'blog-meta-ch', bodyDir: 'blog-body-ch' },
+  frontaliere: { union: 'packages/articles/content/blogArticleIds.ts', slug: 'data/routerBlogData.ts', registry: 'data/blog-articles-data.ts', seo: 'services/seo/seo-blog-5.ts', metaPrefix: 'blog-meta', bodyDir: 'blog-body' },
+  svizzera: { union: null, slug: 'data/routerSwissData.ts', registry: 'data/swiss-articles-data.ts', seo: 'services/seo/seo-blog-ch.ts', metaPrefix: 'blog-meta-ch', bodyDir: 'blog-body-ch' },
 };
 
 function makeTargets(root) {
@@ -71,6 +73,9 @@ function makeTargets(root) {
     const cfg = SECTION_FILES[section];
     if (!cfg) throw new Error(`sezione sconosciuta nel lock: "${section}"`);
     const rel = [
+      // La union e' la PRIMA scrittura della sequenza, e il needle e' la forma
+      // che ci finisce davvero: l'id fra apici singoli.
+      ...(cfg.union ? [[cfg.union, `'${id}'`]] : []),
       [cfg.slug, id],
       [cfg.registry, id],
       [cfg.seo, id],
@@ -87,7 +92,7 @@ test('il marker sopravvive a un crash a meta\' della sequenza di 9 scritture', (
   const root = sandbox();
   const build = makeTargets(root);
   const steps = build(ARTICLE_ID);
-  assert.equal(steps.length, 11, 'i bersagli coprono slug + registry + seo + 4 meta + 4 body');
+  assert.equal(steps.length, 12, 'i bersagli coprono union + slug + registry + seo + 4 meta + 4 body');
 
   // Il kill atterra a meta': i primi passi hanno scritto, gli altri no.
   const failAt = 4;
@@ -256,4 +261,123 @@ test('un lock senza sezione non viene risolto a indovinare', () => {
   // E aprire un lock senza sezione e' impedito alla fonte.
   fs.rmSync(lockPath);
   assert.throws(() => beginRegisterLock(root, ARTICLE_ID), /requires the article section/);
+});
+
+// ── L'osservatore sulla lista reale (issue #960) ─────────────────────────
+//
+// I bersagli qui sopra sono uno SPECCHIO scritto a mano di
+// `registerLockTargets()`: se la funzione vera ne perde uno, lo specchio resta
+// verde e la finestra cieca si allarga in silenzio. E' esattamente com'e'
+// sfuggita per mesi la union `BlogArticleId`, che `modifyRouterUnion()` scrive
+// per PRIMA e la cui path non e' in `ARTICLE_SECTION_CONFIGS` ma cablata dentro
+// quella funzione: un kill fra la union e la mappa slug lasciava l'id nel solo
+// file non confrontato, `registrationTargetStatus()` tornava `present: []` e
+// `resolveRegisterLock()` cancellava il marker come `nothing-written` sopra una
+// union con un membro orfano.
+//
+// La funzione vera si esegue estraendone il sorgente e istanziandola con
+// `new Function` (stessa tecnica di article-slug-i18n.test.mjs): importare
+// create-article.mjs non e' possibile, importa `jsdom` staticamente e
+// `node --test` gira senza node_modules.
+const CREATE_ARTICLE_SRC = fs.readFileSync(
+  new URL('../scripts/create-article.mjs', import.meta.url),
+  'utf-8',
+);
+
+/** Il valore reale di `updateRouterUnion` per sezione, letto dalla config. */
+function updateRouterUnionFlags() {
+  const configStart = CREATE_ARTICLE_SRC.indexOf('export const ARTICLE_SECTION_CONFIGS = {');
+  assert.notEqual(configStart, -1, 'ARTICLE_SECTION_CONFIGS non trovata in create-article.mjs');
+  const flags = {};
+  for (const name of ['frontaliere', 'svizzera']) {
+    const from = CREATE_ARTICLE_SRC.indexOf(`\n  ${name}: {`, configStart);
+    assert.notEqual(from, -1, `sezione ${name} non trovata in ARTICLE_SECTION_CONFIGS`);
+    const to = CREATE_ARTICLE_SRC.indexOf('\n  },', from);
+    const m = /updateRouterUnion:\s*(true|false)/.exec(CREATE_ARTICLE_SRC.slice(from, to));
+    assert.ok(m, `updateRouterUnion assente dalla sezione ${name}`);
+    flags[name] = m[1] === 'true';
+  }
+  return flags;
+}
+
+/** `registerLockTargets()` vera, con le sue dipendenze iniettate. */
+function loadRegisterLockTargets() {
+  const needle = 'function registerLockTargets(id, sectionName = SECTION_NAME) {';
+  const start = CREATE_ARTICLE_SRC.indexOf(needle);
+  assert.notEqual(start, -1, 'registerLockTargets non trovata in create-article.mjs: aggiornare questo test');
+  const endRel = CREATE_ARTICLE_SRC.slice(start).search(/\n\}\n/);
+  assert.notEqual(endRel, -1, 'chiusura di registerLockTargets non trovata');
+  const body = CREATE_ARTICLE_SRC.slice(start, start + endRel + 2);
+
+  const flags = updateRouterUnionFlags();
+  const configs = Object.fromEntries(
+    Object.entries(SECTION_FILES).map(([name, cfg]) => [name, {
+      slugDataFile: cfg.slug,
+      registryFile: cfg.registry,
+      seoFile: cfg.seo,
+      metaPrefix: cfg.metaPrefix,
+      bodyDir: cfg.bodyDir,
+      updateRouterUnion: flags[name],
+    }]),
+  );
+  return new Function(
+    'ARTICLE_SECTION_CONFIGS',
+    'SECTION_NAME',
+    'REGISTER_LOCK_FILE',
+    'resolve',
+    `${body}\nreturn registerLockTargets;`,
+  )(configs, SECTION, REGISTER_LOCK_FILE, (r) => `/root/${r}`);
+}
+
+test('la union BlogArticleId e\' fra i bersagli di frontaliere, e assente da svizzera', () => {
+  const registerLockTargets = loadRegisterLockTargets();
+  const UNION = 'packages/articles/content/blogArticleIds.ts';
+
+  const fro = registerLockTargets(ARTICLE_ID, 'frontaliere');
+  const froLabels = fro.map((t) => t.label);
+  assert.ok(
+    froLabels.includes(UNION),
+    `la finestra di kill piu' larga resta non confrontata: ${UNION} non e' fra i bersagli (${froLabels.join(', ')})`,
+  );
+  // E' la PRIMA scrittura della sequenza: se il confronto la mettesse in coda
+  // l'ordine non cambierebbe l'esito, ma la lista smetterebbe di raccontare
+  // la sequenza che sorveglia.
+  assert.equal(froLabels[0], UNION, 'la union e\' il primo bersaglio, come e\' la prima scrittura');
+  // Il needle e' la forma realmente scritta da `modifyRouterUnion()`: l'id fra
+  // apici singoli. Cercare l'id nudo darebbe un falso positivo su qualunque
+  // sottostringa (un id e' prefisso di un altro piu' lungo appena si aggiunge
+  // un suffisso di anno).
+  assert.equal(fro.find((t) => t.label === UNION).needle, `'${ARTICLE_ID}'`);
+  assert.equal(froLabels.length, 12, 'union + slug + registry + seo + 4 meta + 4 body');
+
+  // svizzera non mantiene la union (`updateRouterUnion: false`): pretenderla
+  // la' renderebbe `absent` un file che nessuno scrive mai, cioe' uno SPLIT
+  // permanente su ogni lock svizzero.
+  const svi = registerLockTargets(ARTICLE_ID, 'svizzera');
+  const sviLabels = svi.map((t) => t.label);
+  assert.equal(sviLabels.includes(UNION), false, 'svizzera non scrive la union: non va confrontata');
+  assert.equal(sviLabels.length, 11, 'slug + registry + seo + 4 meta + 4 body');
+
+  // Lo specchio scritto a mano di questo file deve restare allineato: e' cio'
+  // che rende significativi gli altri test del lock.
+  assert.deepEqual(froLabels, makeTargets('/root')(ARTICLE_ID, 'frontaliere').map((t) => t.label));
+  assert.deepEqual(sviLabels, makeTargets('/root')(ARTICLE_ID, 'svizzera').map((t) => t.label));
+});
+
+test('la path della union e\' la stessa in scrittura, in staging e nel lock', () => {
+  // Tre siti la nominano come letterale (`modifyRouterUnion`, `gitAddAll`,
+  // `registerLockTargets`) e non possono importarsi a vicenda: il legame va
+  // coperto da un test (AGENTS.md #6). Se uno dei tre cambia path da solo, il
+  // lock torna a confrontare un file che nessuno scrive.
+  const UNION = 'packages/articles/content/blogArticleIds.ts';
+  const occorrenze = CREATE_ARTICLE_SRC.split(`'${UNION}'`).length - 1;
+  assert.ok(
+    occorrenze >= 3,
+    `atteso il letterale ${UNION} in modifyRouterUnion + gitAddAll + registerLockTargets, trovate ${occorrenze} occorrenze`,
+  );
+  const writeBlock = CREATE_ARTICLE_SRC.slice(CREATE_ARTICLE_SRC.indexOf('function modifyRouterUnion(data) {'));
+  assert.ok(
+    writeBlock.slice(0, writeBlock.search(/\n\}\n/)).includes(`const routerFile = '${UNION}';`),
+    'modifyRouterUnion non scrive piu\' su questa path: aggiornare anche registerLockTargets',
+  );
 });
