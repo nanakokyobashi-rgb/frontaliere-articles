@@ -5758,6 +5758,18 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.affitti-sciaffusa-deposito-contestazione.title': 'Diritto locazione Sciaffusa: deposito e contestazione',
     'blog.article.affitti-sciaffusa-deposito-contestazione.excerpt': 'Deposito max 3 mesi, conto vincolato, disdetta su modulo ufficiale: guida al diritto federale di locazione nel Canton Sciaffusa con procedure e scadenze.',
     'blog.article.affitti-sciaffusa-deposito-contestazione.imageAlt': 'Ingresso di un edificio residenziale svizzero con porta e cassetta postale',
+    'blog.article.comprare-casa-zurigo-prezzi-mutuo-ipotecario.title': 'Comprare casa nel Cantone di Zurigo: prezzi e mutuo ipotecario',
+    'blog.article.comprare-casa-zurigo-prezzi-mutuo-ipotecario.excerpt': 'Scopri i prezzi medi delle abitazioni e i requisiti per i fondi propri nel Cantone di Zurigo. Pianifica il tuo acquisto con consigli pratici.',
+    'blog.article.comprare-casa-zurigo-prezzi-mutuo-ipotecario.imageAlt': 'Vista aerea di un\'area residenziale moderna a Zurigo, Svizzera',
+    'blog.article.affitti-sciaffusa-canoni-deposito.title': 'Affitti Sciaffusa: canoni, deposito e diritto di locazione',
+    'blog.article.affitti-sciaffusa-canoni-deposito.excerpt': 'Guida pratica ai diritti di locazione in Sciaffusa: deposito cauzionale, contestazione canoni, disdetta e procedure presso l\'autorità di conciliazione.',
+    'blog.article.affitti-sciaffusa-canoni-deposito.imageAlt': 'Contratto di locazione svizzero e chiave su scrivania con documenti legali immobiliari',
+    'blog.article.riflessione-neutralita-svizzera-delbiaggio.title': 'Neutralità svizzera: il pensiero di Elio Del Biaggio',
+    'blog.article.riflessione-neutralita-svizzera-delbiaggio.excerpt': 'Elio Del Biaggio analizza il ruolo della neutralità come pilastro di stabilità, indipendenza e identità nazionale nel contesto geopolitico attuale.',
+    'blog.article.riflessione-neutralita-svizzera-delbiaggio.imageAlt': 'Bandiera svizzera che sventola sopra le Alpi svizzere.',
+    'blog.article.hotel-lenzerheide-hacker-avviso.title': 'Attacco hacker Hotel Schweizerhof: 10.000 clienti avvisati',
+    'blog.article.hotel-lenzerheide-hacker-avviso.excerpt': 'L\'Hotel Schweizerhof di Lenzerheide vittima di attacco hacker. Circa 10.000 clienti avvisati di possibili tentativi di frode con offerta fittizia di 250 franchi.',
+    'blog.article.hotel-lenzerheide-hacker-avviso.imageAlt': 'Hotel di lusso svizzero con sfondo montagne in luce dorata alpina',
 };
 
 export default blogMetaChIt;

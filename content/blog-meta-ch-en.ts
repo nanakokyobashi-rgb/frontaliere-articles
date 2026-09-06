@@ -5758,6 +5758,18 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.affitti-sciaffusa-deposito-contestazione.title': 'Schaffhausen lease right: filing and dispute',
     'blog.article.affitti-sciaffusa-deposito-contestazione.excerpt': 'Maximum deposit 3 months, escrow account, cancellation on official form: guide to the federal lease law in the Canton of Schaffhausen with procedures and deadlines.',
     'blog.article.affitti-sciaffusa-deposito-contestazione.imageAlt': 'Entrance of a Swiss residential building with door and mailbox',
+    'blog.article.comprare-casa-zurigo-prezzi-mutuo-ipotecario.title': 'Buying a house in the Canton of Zurich: prices and mortgage',
+    'blog.article.comprare-casa-zurigo-prezzi-mutuo-ipotecario.excerpt': 'Find out about average house prices and own funds requirements in the Canton of Zurich. Plan your purchase with practical tips.',
+    'blog.article.comprare-casa-zurigo-prezzi-mutuo-ipotecario.imageAlt': 'Aerial view of a modern residential area in Zurich, Switzerland',
+    'blog.article.affitti-sciaffusa-canoni-deposito.title': 'Schaffhausen rentals: fees, deposit and rental rights',
+    'blog.article.affitti-sciaffusa-canoni-deposito.excerpt': 'Practical guide to lease rights in Schaffhausen: security deposit, dispute fees, cancellation and procedures with the conciliation authority.',
+    'blog.article.affitti-sciaffusa-canoni-deposito.imageAlt': 'Swiss rental contract and key on desk with legal real estate documentation',
+    'blog.article.riflessione-neutralita-svizzera-delbiaggio.title': 'Swiss neutrality: the thought of Elio Del Biaggio',
+    'blog.article.riflessione-neutralita-svizzera-delbiaggio.excerpt': 'Elio Del Biaggio analyses the role of neutrality as a pillar of stability, independence and national identity in the current geopolitical context.',
+    'blog.article.riflessione-neutralita-svizzera-delbiaggio.imageAlt': 'Swiss flag waving over the Swiss Alps.',
+    'blog.article.hotel-lenzerheide-hacker-avviso.title': 'Hotel Schweizerhof hacker attack: 10,000 customers alerted',
+    'blog.article.hotel-lenzerheide-hacker-avviso.excerpt': 'The Hotel Schweizerhof in Lenzerheide was the victim of a hacker attack. Approximately 10,000 customers were alerted to possible fraud attempts with a fictitious offer of CHF 250.',
+    'blog.article.hotel-lenzerheide-hacker-avviso.imageAlt': 'Swiss luxury hotel with mountain backdrop in alpine golden light',
 };
 
 export default blogMetaChEn;

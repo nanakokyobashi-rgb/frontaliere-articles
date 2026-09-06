@@ -74744,6 +74744,162 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-comprare-casa-zurigo-prezzi-mutuo-ipotecario': {
+    title: 'Comprare casa nel Cantone di Zurigo: prezzi e mutuo ipotecario',
+    description: 'Scopri i prezzi medi delle abitazioni e i requisiti per i fondi propri nel Cantone di Zurigo. Pianifica il tuo acquisto con consigli pratici. Dati aggiornati',
+    keywords: 'frontalieri, ticino, svizzera, italia, comprare, casa, cantone, zurigo',
+    ogTitle: 'Comprare casa nel Cantone di Zurigo: prezzi e mutuo ipotecario',
+    ogDescription: 'Scopri i prezzi medi delle abitazioni e i requisiti per i fondi propri nel Cantone di Zurigo. Pianifica il tuo acquisto con consigli pratici e garantisci una decisione informata e finanziariamente sostenibile.',
+    canonicalPath: '/articoli-svizzera/comprare-casa-zurigo-prezzi-mutuo-ipotecario/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Comprare casa nel Cantone di Zurigo: prezzi e mutuo ipotecario",
+      "description": "Scopri i prezzi medi delle abitazioni e i requisiti per i fondi propri nel Cantone di Zurigo. Pianifica il tuo acquisto con consigli pratici. Dati aggiornati",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/comprare-casa-zurigo-prezzi-mutuo-ipotecario.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista aerea di un'area residenziale moderna a Zurigo, Svizzera"
+      },
+      "datePublished": "2026-09-06T17:36:23+00:00",
+      "dateModified": "2026-09-06T17:36:23+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/comprare-casa-zurigo-prezzi-mutuo-ipotecario/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-affitti-sciaffusa-canoni-deposito': {
+    title: 'Affitti Sciaffusa: canoni, deposito e diritto di locazione',
+    description: 'Guida pratica ai diritti di locazione in Sciaffusa: deposito cauzionale, contestazione canoni, disdetta e procedure presso l\'autorità di conciliazione.',
+    keywords: 'frontalieri, ticino, svizzera, italia, affitti, sciaffusa, canoni, deposito',
+    ogTitle: 'Affitti Sciaffusa: canoni, deposito e diritto di locazione',
+    ogDescription: 'Scopri come funziona il mercato dei lettini a Sciaffusa, i tuoi diritti come inquilino, come contestare il canone iniziale e il ruolo dell\'autorità di conciliazione secondo il diritto di locazione federale svizzero.',
+    canonicalPath: '/articoli-svizzera/affitti-sciaffusa-canoni-deposito/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Affitti Sciaffusa: canoni, deposito e diritto di locazione",
+      "description": "Guida pratica ai diritti di locazione in Sciaffusa: deposito cauzionale, contestazione canoni, disdetta e procedure presso l'autorità di conciliazione.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/affitti-sciaffusa-canoni-deposito.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Contratto di locazione svizzero e chiave su scrivania con documenti legali immobiliari"
+      },
+      "datePublished": "2026-09-06T17:46:08+00:00",
+      "dateModified": "2026-09-06T17:46:08+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/affitti-sciaffusa-canoni-deposito/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-riflessione-neutralita-svizzera-delbiaggio': {
+    title: 'Neutralità svizzera: il pensiero di Elio Del Biaggio',
+    description: 'Elio Del Biaggio riflette sul valore della neutralità svizzera come pilastro di indipendenza e stabilità nella complessa geopolitica odierna. Dati aggiornati',
+    keywords: 'frontalieri, ticino, svizzera, italia, neutralità, pensiero, elio, biaggio',
+    ogTitle: 'Neutralità svizzera: il pensiero di Elio Del Biaggio',
+    ogDescription: 'Il dibattito sulla neutralità svizzera analizzato da Elio Del Biaggio: perché la sovranità e l\'indipendenza restano risorse strategiche per il futuro del Paese.',
+    canonicalPath: '/articoli-svizzera/riflessione-neutralita-svizzera-delbiaggio/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Neutralità svizzera: il pensiero di Elio Del Biaggio",
+      "description": "Elio Del Biaggio riflette sul valore della neutralità svizzera come pilastro di indipendenza e stabilità nella complessa geopolitica odierna. Dati aggiornati",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/riflessione-neutralita-svizzera-delbiaggio.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Bandiera svizzera che sventola sopra le Alpi svizzere."
+      },
+      "datePublished": "2026-09-06T17:57:04+00:00",
+      "dateModified": "2026-09-06T17:57:04+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/riflessione-neutralita-svizzera-delbiaggio/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-hotel-lenzerheide-hacker-avviso': {
+    title: 'Attacco hacker Hotel Schweizerhof: 10.000 clienti avvisati',
+    description: 'L\'Hotel Schweizerhof di Lenzerheide avverte 10.000 clienti di un attacco hacker ai sistemi di prenotazione. Scopri come proteggerti dai tentativi di frode',
+    keywords: 'frontalieri, ticino, svizzera, italia, attacco, hacker, hotel, schweizerhof',
+    ogTitle: 'Attacco hacker Hotel Schweizerhof: 10.000 clienti avvisati',
+    ogDescription: 'L\'Hotel Schweizerhof di Lenzerheide notifica circa 10.000 clienti di un attacco ai sistemi di prenotazione. I truffatori cercano dati personali con offerta fittizia di credito da 250 franchi. Ecco come proteggerti.',
+    canonicalPath: '/articoli-svizzera/hotel-lenzerheide-hacker-avviso/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Attacco hacker Hotel Schweizerhof: 10.000 clienti avvisati",
+      "description": "L'Hotel Schweizerhof di Lenzerheide avverte 10.000 clienti di un attacco hacker ai sistemi di prenotazione. Scopri come proteggerti dai tentativi di frode",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/hotel-lenzerheide-hacker-avviso.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Hotel di lusso svizzero con sfondo montagne in luce dorata alpina"
+      },
+      "datePublished": "2026-09-06T18:04:40+00:00",
+      "dateModified": "2026-09-06T18:04:40+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/hotel-lenzerheide-hacker-avviso/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

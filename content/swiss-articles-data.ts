@@ -17272,6 +17272,42 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'comprare-casa-zurigo-prezzi-mutuo-ipotecario',
+    category: 'pratico',
+    date: '2026-09-06T17:36:23.828Z',
+    image: '/images/blog/comprare-casa-zurigo-prezzi-mutuo-ipotecario.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
+   {
+    id: 'affitti-sciaffusa-canoni-deposito',
+    category: 'pratico',
+    date: '2026-09-06T17:46:08.247Z',
+    image: '/images/blog/affitti-sciaffusa-canoni-deposito.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
+   {
+    id: 'riflessione-neutralita-svizzera-delbiaggio',
+    category: 'novita',
+    date: '2026-09-06T17:57:04.800Z',
+    image: '/images/blog/riflessione-neutralita-svizzera-delbiaggio.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
+   {
+    id: 'hotel-lenzerheide-hacker-avviso',
+    category: 'novita',
+    date: '2026-09-06T18:04:40.118Z',
+    image: '/images/blog/hotel-lenzerheide-hacker-avviso.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the
