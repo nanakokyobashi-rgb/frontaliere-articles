@@ -127,3 +127,64 @@ alla volta, e frammentare moltiplica le run senza aggiungere informazione.
 
 Nel commento di chiusura sulla PR: cosa è diventato un item, cosa è stato
 droppato **e perché**, e la checklist delle verifiche live.
+
+## Formato del corpo della issue
+
+Questa struttura **non è cosmetica: è l'unico appiglio che ha la chiusura.**
+`scripts/ci/reconcile-followups.mjs` — voce `identical` nel
+`loop-sync-manifest.json`, quindi la sua evoluzione sul sito scende qui — spezza
+il corpo sugli heading `### <n>.` e per ogni item chiede una *condizione di
+accettazione falsificabile*: la regione `Suggested action` deve esistere **e**
+citare fra backtick almeno un token che porti punteggiatura di codice
+(`markStale()`, `job.previousSlugs`, `mergedCount >= 1`). Un item che non la
+porta non è lavoro verificabile ma un rischio in prosa: non si può provare né
+fatto né da fare, e resta in coda per costruzione.
+
+Misurato il 2026-09-06 sulle 227 follow-up di questo repo (ogni stato): 201 corpi
+senza `### <n>.`, 26 con la struttura ma zero item validi, **0 corpi contenenti
+la stringa `Suggested action`**. Il divario non era teorico: era totale, e a
+partire dal primo mirror avrebbe reso non auto-chiudibile ogni singola aggregata
+del corpus. Il formato qui sotto ha gli stessi nomi di campo del sito
+**alla lettera** — è il vincolo che li tiene leggibili dallo stesso oracolo.
+
+````markdown
+Title: follow-up(#<PR>): <N> item deferiti — <titolo breve della PR>
+Body:
+
+## Origine
+
+- PR: #<PR_NUMBER> — <PR_TITLE> (mergiata <mergedAt>)
+- URL: <PR url>
+
+## Item
+
+### 1. <l'item in una riga>
+- Source: <PR body Non implementato | reviewer 🟡 nit | reviewer ❓ q | adversarial check>
+- Stato dichiarato nella PR: <lo stato letterale verbatim, es. `blocked: <causa>` | nessuno>
+- Original text:
+  > <verbatim>
+- Funnel impact: <ciclo di pubblicazione | contratto col sito | superficie pubblicata | none>
+- Rationale: <perché passa il filtro di scopo>
+- Suggested action: <il passo concreto, che DEVE citare fra backtick almeno un token di codice — `discoverFreeModels()`, `staleIds.length`, `recordScore: false`. Se il passo non è ovvio, cita comunque il simbolo o il file su cui indagare.>
+
+### 2. <l'item in una riga>
+- Source: ...
+- Stato dichiarato nella PR: ...
+- Original text:
+  > ...
+- Funnel impact: ...
+- Rationale: ...
+- Suggested action: <... con almeno un token fra backtick, es. `coerceRecordScore()`>
+````
+
+`Stato dichiarato nella PR` è **obbligatorio su ogni item, anche quando vale
+`nessuno`**: è il campo che distingue a macchina un residuo che aspetta una
+decisione umana da uno che potrebbe chiudersi subito, senza rileggere a mano la
+PR d'origine.
+
+Anche con **un solo** item la issue mantiene la forma aggregata (una sola
+sezione `### 1.`): un corpo senza struttura a item il reconciler lo legge
+`aggregate-unparsed`, cioè «non so leggerlo», e non lo chiude mai.
+
+Il campo `Suggested action` è il nome esatto atteso: `Prossimo passo:`,
+`Next step:` o la stessa cosa detta in prosa **non** vengono viste.
