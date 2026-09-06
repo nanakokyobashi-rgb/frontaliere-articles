@@ -191,8 +191,8 @@ jobs:
             # default, e qui si legge l'ULTIMA — cioè proprio quella che una
             # risposta troncata non contiene. Sequenza di ARRAY: `.[][]?`.
             reviews=$(gh api --paginate "repos/$REPO/pulls/$N/reviews?per_page=100" 2>/dev/null || echo '[]')
-            LAST_BODY=$(echo "$reviews" | jq -rs '[.[][]? | select(.user.login|test("claude";"i"))] | last | .body // ""')
-            LAST_CID=$(echo "$reviews" | jq -rs '[.[][]? | select(.user.login|test("claude";"i"))] | last | .commit_id // ""')
+            LAST_BODY=$(echo "$reviews" | jq -rs '[.[][]? | select(.user.login|test("^(claude|frontaliere-automation)";"i"))] | last | .body // ""')
+            LAST_CID=$(echo "$reviews" | jq -rs '[.[][]? | select(.user.login|test("^(claude|frontaliere-automation)";"i"))] | last | .commit_id // ""')
 
             # `case` e non `grep`: `echo "$X" | grep -q` chiude la pipe al primo
             # match, e sotto `pipefail` un EPIPE sul lato scrivente farebbe

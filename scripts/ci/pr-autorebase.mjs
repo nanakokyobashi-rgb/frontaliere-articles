@@ -62,7 +62,7 @@
  */
 import { execFileSync, spawnSync } from 'node:child_process';
 import { readFileSync, writeFileSync } from 'node:fs';
-import { VITEST_CHECK_NAME } from './lib/constants.mjs';
+import { VITEST_CHECK_NAME, REVIEWER_BOT_LOGIN_RE } from './lib/constants.mjs';
 import {
   latestCompletedVitestConclusion,
   latestCompletedVitestRun,
@@ -283,7 +283,7 @@ function hasLgtmReview(num) {
   const reviews = gh(['api', `repos/${REPO}/pulls/${num}/reviews`, '--paginate'], { allowFail: true });
   if (!Array.isArray(reviews)) return false;
   return reviews.some(
-    (r) => r.user && r.user.type === 'Bot' && /^claude/i.test(r.user.login || '') &&
+    (r) => r.user && r.user.type === 'Bot' && REVIEWER_BOT_LOGIN_RE.test(r.user.login || '') &&
       (r.body || '').includes('## LGTM')
   );
 }
@@ -296,7 +296,7 @@ function hasAnyClaudeReview(num) {
   const reviews = gh(['api', `repos/${REPO}/pulls/${num}/reviews`, '--paginate'], { allowFail: true });
   if (!Array.isArray(reviews)) return true; // fail-safe: su errore API assumi review esistente (no reopen)
   return reviews.some(
-    (r) => r.user && r.user.type === 'Bot' && /^claude/i.test(r.user.login || '')
+    (r) => r.user && r.user.type === 'Bot' && REVIEWER_BOT_LOGIN_RE.test(r.user.login || '')
   );
 }
 

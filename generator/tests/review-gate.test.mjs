@@ -176,8 +176,9 @@ test('drift-fallback: body non conforme → resta ROSSO', () => {
 });
 
 test('drift-fallback: NON si apre se una review negativa esiste gia\'', () => {
-  // Il fallback vale solo quando il reviewer non ha POTUTO parlare. Se ha
-  // parlato e ha detto 🔴, toccare `tests.yml` non deve cancellare il verdetto.
+  // Il fallback vale solo quando il reviewer non ha POTUTO parlare DELLA HEAD.
+  // Se ha parlato sulla head e ha detto 🔴, toccare `tests.yml` non cancella
+  // quel verdetto.
   const r = runGate({
     reviews: [botReview(HEAD, '🔴 Important: il gate non copre il caso X')],
     files: ['.github/workflows/tests.yml'],
@@ -185,6 +186,69 @@ test('drift-fallback: NON si apre se una review negativa esiste gia\'', () => {
   });
   assert.equal(r.status, 1, `Una review negativa gia' postata deve battere il fallback.\n${r.stdout}`);
   assert.doesNotMatch(r.stdout, /drift-fallback/, r.stdout);
+});
+
+const COMPARE_CHANGED = {
+  mergeBase: 'c'.repeat(40),
+  byRange: {
+    [`${'c'.repeat(40)}...${HEAD}`]: { files: [{ filename: 'engine/x.ts', status: 'modified', patch: '@@\n+due' }] },
+    [`${'c'.repeat(40)}...${OLD}`]: { files: [{ filename: 'engine/x.ts', status: 'modified', patch: '@@\n+uno' }] },
+  },
+};
+
+const COMPARE_SAME = {
+  mergeBase: 'c'.repeat(40),
+  byRange: {
+    [`${'c'.repeat(40)}...${HEAD}`]: { files: [{ filename: 'engine/x.ts', status: 'modified', patch: '@@\n+uno' }] },
+    [`${'c'.repeat(40)}...${OLD}`]: { files: [{ filename: 'engine/x.ts', status: 'modified', patch: '@@\n+uno' }] },
+  },
+};
+
+const DRIFT_META = {
+  assoc: 'OWNER',
+  login: 'valerielinc-ops',
+  type: 'User',
+  body: GOOD_BODY,
+};
+
+test('drift-fallback: 🔴 stantio (SHA vecchio, contributo cambiato) + tests.yml → verde', () => {
+  // #970: Claude posta 🔴 sulla prima HEAD, i commit dopo sistemano e toccano
+  // tests.yml, claude-code-action skippa 401 senza postare. Senza questo ramo
+  // il 🔴 vecchio tiene il check rosso per sempre.
+  const r = runGate({
+    reviews: [botReview(OLD, '🔴 Important: collect jq ancora claude-only\n\n## LGTM')],
+    files: ['.github/workflows/tests.yml', 'scripts/ci/review-gate.mjs'],
+    meta: DRIFT_META,
+    compare: COMPARE_CHANGED,
+  });
+  assert.equal(r.status, 0, `Un 🔴 che non si applica piu' alla head non deve bloccare il fallback.\n${r.stdout}`);
+  assert.match(r.stdout, /drift-fallback: APPROVATO/, r.stdout);
+});
+
+test('drift-fallback: 🔴 su SHA vecchio ma contributo INVARIATO + tests.yml → ROSSO', () => {
+  // Il codice e' lo stesso: il 🔴 e' ancora il verdetto vivo. tests.yml nel
+  // diff della PR (file list) non basta a cancellarlo.
+  const r = runGate({
+    reviews: [botReview(OLD, '🔴 Important: il gate non copre il caso X')],
+    files: ['.github/workflows/tests.yml'],
+    meta: DRIFT_META,
+    compare: COMPARE_SAME,
+  });
+  assert.equal(r.status, 1, `Un 🔴 sul contributo invariato deve restare bloccante.\n${r.stdout}`);
+  assert.doesNotMatch(r.stdout, /drift-fallback: APPROVATO/, r.stdout);
+});
+
+test('drift-fallback: LGTM stantia (contributo cambiato) + tests.yml → verde', () => {
+  // Stesso 401: Claude non puo' ri-revieware il delta. Senza fallback la LGTM
+  // vecchia non carry-forwarda e il check resta rosso.
+  const r = runGate({
+    reviews: [botReview(OLD, '## LGTM')],
+    files: ['.github/workflows/tests.yml'],
+    meta: DRIFT_META,
+    compare: COMPARE_CHANGED,
+  });
+  assert.equal(r.status, 0, `Una LGTM che non si applica piu' deve cedere al fallback, non al rosso.\n${r.stdout}`);
+  assert.match(r.stdout, /drift-fallback: APPROVATO/, r.stdout);
 });
 
 test('carry-forward: LGTM su un commit precedente con contributo invariato → verde', () => {

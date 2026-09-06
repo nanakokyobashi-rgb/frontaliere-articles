@@ -33,6 +33,9 @@ import assert from 'node:assert/strict';
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join, resolve } from 'node:path';
+// La stessa funzione del gate: se questo test contasse col needle testuale
+// verificherebbe una formula diversa da quella spedita.
+import { countXmlTags } from '../../scripts/lib/count-xml-tags.mjs';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
 const SRC = readFileSync(resolve(ROOT, 'scripts/build-api.mjs'), 'utf-8');
@@ -86,9 +89,44 @@ test('slugs.json e’ confrontato col manifest dal lato che pubblica, non solo d
   // la stessa asserzione nel producer, questo repo puo' PUBBLICARE un set che il
   // consumer rifiutera' a valle — e il sito non ribuilda, quindi il rifiuto
   // arriva in produzione invece che alla build che l'ha prodotto.
-  assert.match(SRC, /slugs\.\$\{section\}: \$\{keys\} ids/);
+  assert.match(SRC, /slugs\.\$\{section\}: \$\{keys\.length\} ids/);
   const consumer = readFileSync(resolve(ROOT, 'scripts/reconcile-article-shards.mjs'), 'utf-8');
   assert.match(consumer, /slugs\.blog ha \$\{blogKeys\} id ma il manifest ne annuncia/);
+});
+
+test('slugs.json e’ confrontato per INSIEME, non per cardinalita’, da entrambi i lati', () => {
+  // La cardinalita' da sola non vede l'id SOSTITUITO: un articolo rimosso e uno
+  // nuovo nello stesso giro lasciano il conto identico da entrambi i lati, e
+  // slugs.json e' la sorgente dei canonical — va live un canonical sbagliato
+  // per quell'articolo senza che niente fallisca.
+  for (const [file, src] of [
+    ['scripts/build-api.mjs', SRC],
+    ['scripts/reconcile-article-shards.mjs', readFileSync(resolve(ROOT, 'scripts/reconcile-article-shards.mjs'), 'utf-8')],
+  ]) {
+    assert.match(src, /indi[cx]/i);
+    assert.ok(
+      /slug senza articolo/.test(src) && /(id|ids) senza slug/.test(src),
+      `${file} deve segnalare le due direzioni della differenza fra insiemi`,
+    );
+  }
+});
+
+test('dailyBriefBlocks e’ ri-derivato dai blocchi serviti, non dal numero che il payload dichiara', () => {
+  // Era l'unico contatore confrontato contro `counts.availableBlocks` DEL
+  // PAYLOAD: lo stesso «gate che ricontrolla chi ha scritto il numero» che
+  // l'header del gate rifiuta, spostato di un livello. La formula e' quella del
+  // produttore (generator/scripts/lib/daily-brief-data.mjs).
+  const gate = SRC.slice(SRC.indexOf('const derived = {'));
+  const derived = /dailyBriefBlocks: derivedIfPresent\(([\s\S]*?)\n    \),/.exec(gate);
+  assert.ok(derived, 'dailyBriefBlocks deve restare cablato nel gate');
+  assert.match(derived[1], /\.blocks/);
+  assert.match(derived[1], /filter\(\(b\) => b\?\.available\)/);
+  assert.ok(
+    !/dailyBriefBlocks[\s\S]{0,200}counts\.availableBlocks/.test(gate),
+    'ri-derivare da counts.availableBlocks significa richiedere al payload di confermare se stesso',
+  );
+  const producer = readFileSync(resolve(ROOT, 'generator/scripts/lib/daily-brief-data.mjs'), 'utf-8');
+  assert.match(producer, /Object\.values\(blocks\)\.filter\(\(b\) => b\.available\)\.length/);
 });
 
 test('sul set pubblicato ogni contatore combacia con gli artefatti', { skip: !existsSync(join(ROOT, 'dist/api/manifest.json')) && 'dist/api non costruito in questo job' }, () => {
@@ -99,13 +137,12 @@ test('sul set pubblicato ogni contatore combacia con gli artefatti', { skip: !ex
   const OUT = join(ROOT, 'dist/api');
   const readOut = (name) => readFileSync(join(OUT, name), 'utf-8');
   const jsonOut = (name) => JSON.parse(readOut(name));
-  const occurrences = (text, needle) => text.split(needle).length - 1;
   const { counts } = jsonOut('manifest.json');
 
   assert.equal(counts.articles, jsonOut('articles.json').length);
   assert.equal(counts.swissArticles, jsonOut('swiss-articles.json').length);
-  assert.equal(counts.sitemapBlogUrls, occurrences(readOut('sitemap-blog.xml'), '<url>'));
-  assert.equal(counts.sitemapBlogChUrls, occurrences(readOut('sitemap-blog-ch.xml'), '<url>'));
+  assert.equal(counts.sitemapBlogUrls, countXmlTags(readOut('sitemap-blog.xml'), 'url'));
+  assert.equal(counts.sitemapBlogChUrls, countXmlTags(readOut('sitemap-blog-ch.xml'), 'url'));
   assert.equal(counts.tickerArticles, jsonOut('news-ticker-live.json').articles.length);
 
   const feeds = readdirSync(OUT)
@@ -113,9 +150,25 @@ test('sul set pubblicato ogni contatore combacia con gli artefatti', { skip: !ex
     .map((f) => readOut(f))
     .filter((xml) => xml.includes('<rss'));
   assert.equal(counts.rssFeeds, feeds.length);
-  assert.equal(counts.rssItems, feeds.reduce((n, xml) => n + occurrences(xml, '<item>'), 0));
+  assert.equal(counts.rssItems, feeds.reduce((n, xml) => n + countXmlTags(xml, 'item'), 0));
 
   const slugs = jsonOut('slugs.json');
   assert.equal(Object.keys(slugs.blog).length, counts.articles);
   assert.equal(Object.keys(slugs.swiss).length, counts.swissArticles);
+  assert.deepEqual(
+    Object.keys(slugs.blog).sort(),
+    jsonOut('articles.json').map((a) => a.id).sort(),
+  );
+  assert.deepEqual(
+    Object.keys(slugs.swiss).sort(),
+    jsonOut('swiss-articles.json').map((a) => a.id).sort(),
+  );
+
+  const brief = 'daily-brief.json';
+  if (existsSync(join(OUT, brief))) {
+    assert.equal(
+      counts.dailyBriefBlocks,
+      Object.values(jsonOut(brief).blocks ?? {}).filter((b) => b?.available).length,
+    );
+  }
 });

@@ -80,6 +80,10 @@ import { SITE, xmlEsc, SECTION_PATHS, buildSitemap } from './lib/build-sitemap.m
 // Detection (not filtering — see its header) for issue #166: surfaces a
 // same-day canonical-override landing on a still-in-window ticker article.
 import { findShadowedTickerArticles } from './lib/ticker-shadow-check.mjs';
+// Writer e gate contano i tag con LA STESSA funzione, e quella funzione conta
+// il markup, non il testo: una description RSS in CDATA che cita `<item>`
+// gonfiava identicamente il dichiarato e il ri-derivato (vedi il suo header).
+import { countXmlTags } from './lib/count-xml-tags.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const OUT = path.join(ROOT, 'dist', 'api');
@@ -404,7 +408,7 @@ for (const section of rssSections) {
     );
   }
   for (const [name, xml] of section.feeds) {
-    const items = (xml.match(/<item>/g) ?? []).length;
+    const items = countXmlTags(xml, 'item');
     if (items === 0) throw new Error(`rss: ${name} has no <item> entries — refusing to publish`);
     // The feeds come out of engine/rssFeeds.mjs, which arrives by mirror and is
     // not ours to edit here (a change would be overwritten on the next mirror
@@ -871,9 +875,11 @@ console.log(`[build-api] wrote ${Object.keys(written).length} files to dist/api`
   const readOut = (name) => fs.readFileSync(outPath(name), 'utf-8');
   const jsonOut = (name) => JSON.parse(readOut(name));
   const derivedIfPresent = (name, derive) => (exists(name) ? derive() : 0);
-  const occurrences = (text, needle) => text.split(needle).length - 1;
-  // `<url>` con la parentesi chiusa non collide con `<urlset>`.
-  const sitemapUrls = (name) => derivedIfPresent(name, () => occurrences(readOut(name), '<url>'));
+  // `countXmlTags` conta i tag del DOCUMENTO: e' la stessa funzione che usa il
+  // writer sopra, e ignora CDATA e commenti. Contare col needle testuale
+  // rendeva il gate incapace di fallire proprio dove serve — un `<item>` citato
+  // in una description gonfia dichiarato e ri-derivato allo stesso modo.
+  const sitemapUrls = (name) => derivedIfPresent(name, () => countXmlTags(readOut(name), 'url'));
 
   // I feed si riconoscono dal documento, non dal nome: una convenzione di
   // naming e' proprio cio' che un writer nuovo puo' non rispettare, e le
@@ -890,15 +896,24 @@ console.log(`[build-api] wrote ${Object.keys(written).length} files to dist/api`
     sitemapBlogUrls: sitemapUrls('sitemap-blog.xml'),
     sitemapBlogChUrls: sitemapUrls('sitemap-blog-ch.xml'),
     rssFeeds: feeds.length,
-    rssItems: feeds.reduce((total, xml) => total + occurrences(xml, '<item>'), 0),
+    rssItems: feeds.reduce((total, xml) => total + countXmlTags(xml, 'item'), 0),
     tickerArticles: derivedIfPresent('news-ticker-live.json', () => jsonOut('news-ticker-live.json').articles.length),
     newsCandidates: sitemapUrls(NEWS_CANDIDATES),
     images: derivedIfPresent(IMAGE_MANIFEST, () => jsonOut(IMAGE_MANIFEST).images.length),
     borderRankingEntries: derivedIfPresent(BORDER_RANKING, () => jsonOut(BORDER_RANKING).ranking.length),
-    // Il payload servito porta il proprio `counts.availableBlocks`: e' quello
-    // che il consumer legge, quindi e' quella la sorgente su disco da
-    // confrontare — non il `parsed` del file sorgente in `public/data/`.
-    dailyBriefBlocks: derivedIfPresent(DAILY_BRIEF, () => Number(jsonOut(DAILY_BRIEF).counts.availableBlocks)),
+    // Il payload servito porta anche il proprio `counts.availableBlocks`, ed e'
+    // quello che il consumer legge — ma ri-derivare DA LI' e' lo stesso «gate
+    // che ricontrolla chi ha scritto il numero» che l'header rifiuta, spostato
+    // di un livello: e' il produttore stesso ad averlo autodichiarato. La
+    // cardinalita' vera sta nei `blocks` serviti, con la formula del produttore
+    // (`generator/scripts/lib/daily-brief-data.mjs`), quindi il gate confronta
+    // il numero DICHIARATO nel manifest (che viene da `counts.availableBlocks`)
+    // contro i blocchi effettivamente presenti nel payload su disco. Un blocco
+    // perso fra il calcolo e la serializzazione qui non passa piu'.
+    dailyBriefBlocks: derivedIfPresent(
+      DAILY_BRIEF,
+      () => Object.values(jsonOut(DAILY_BRIEF).blocks ?? {}).filter((b) => b?.available).length,
+    ),
   };
 
   // `tickerArticlesShadowed` conta cio' che e' stato ESCLUSO dal ticker:
@@ -931,13 +946,32 @@ console.log(`[build-api] wrote ${Object.keys(written).length} files to dist/api`
   // Senza la stessa asserzione qui, questo repo puo' PUBBLICARE una superficie
   // che il consumer rifiutera' a valle — e il sito non ribuilda, quindi il
   // rifiuto arriva in produzione invece che alla build che l'ha prodotta.
+  //
+  // Il confronto e' per INSIEME, non per cardinalita': `slugs.json` mappa
+  // id -> slug per locale, cioe' e' la sorgente dei canonical. Un giro che
+  // rimuove un articolo e ne aggiunge un altro lascia il numero di chiavi
+  // identico con un id SOSTITUITO — la cardinalita' pareggia da entrambi i
+  // lati e va live un canonical sbagliato per quell'articolo, che e' il caso
+  // peggiore di AGENTS.md: non fallisce, e il sito non ribuilda.
   if (exists('slugs.json')) {
     const slugs = jsonOut('slugs.json');
-    const indexed = { blog: 'articles', swiss: 'swissArticles' };
-    for (const [section, counter] of Object.entries(indexed)) {
-      const keys = Object.keys(slugs?.[section] ?? {}).length;
-      if (keys !== declared[counter]) {
-        mismatches.push(`slugs.${section}: ${keys} ids, manifest.counts.${counter} declares ${declared[counter]}`);
+    const indexed = { blog: ['articles.json', 'articles'], swiss: ['swiss-articles.json', 'swissArticles'] };
+    for (const [section, [registry, counter]] of Object.entries(indexed)) {
+      const keys = Object.keys(slugs?.[section] ?? {});
+      if (keys.length !== declared[counter]) {
+        mismatches.push(`slugs.${section}: ${keys.length} ids, manifest.counts.${counter} declares ${declared[counter]}`);
+      }
+      if (!exists(registry)) continue;
+      const registryIds = new Set(jsonOut(registry).map((a) => a?.id));
+      const indexedIds = new Set(keys);
+      const missing = [...registryIds].filter((id) => !indexedIds.has(id));
+      const extra = keys.filter((id) => !registryIds.has(id));
+      if (missing.length || extra.length) {
+        mismatches.push(
+          `slugs.${section} indexes a different set than ${registry}: ` +
+            `${missing.length} ids senza slug (${missing.slice(0, 5).join(', ') || '—'}), ` +
+            `${extra.length} slug senza articolo (${extra.slice(0, 5).join(', ') || '—'})`,
+        );
       }
     }
   }
