@@ -188,22 +188,59 @@ const AS_ISSUE = ARGS.has('--issue');
 const NO_PROVENANCE = ARGS.has('--no-provenance');
 
 /**
- * I path elencati in `--only` (`--only=a,b`, oppure `--only a b`), o null se la
- * flag non c'e'. PURA: legge argv, non tocca disco ne' rete.
+ * I path elencati in `--only` (`--only=a,b`, oppure `--only a b`).
+ *
+ * Tre esiti DISTINTI, e la distinzione e' il punto (issue #978):
+ * - flag assente        → `null`, cioe' «nessun filtro» = il `--init` storico;
+ * - flag con path       → l'array dei path;
+ * - flag SENZA path     → `[]`, cioe' «filtro chiesto e risolto vuoto».
+ *
+ * Prima `[]` e `null` collassavano su `null`: `--init --only` in coda,
+ * `--only=`, o `--only "$VAR"` con la variabile non settata chiedevano di
+ * toccare UNA voce e ne riscrivevano TRECENTO, bumpando `manifest.alignedAt`.
+ * Scrivere la flag otteneva l'atto tutto-o-niente che la flag esiste per
+ * evitare — un fail-open, e per giunta invisibile: il comando usciva 0.
+ * `[]` non e' `null`, quindi `onlyArgError` puo' fermarlo.
+ *
+ * PURA: legge argv, non tocca disco ne' rete.
  */
 function parseOnly(argv) {
+  let present = false;
   const out = [];
   for (let i = 0; i < argv.length; i += 1) {
     const a = argv[i];
     if (a === '--only') {
+      present = true;
       // Forma separata: consuma i token finche' non ricomincia una flag.
       while (i + 1 < argv.length && !argv[i + 1].startsWith('--')) out.push(argv[(i += 1)]);
     } else if (a.startsWith('--only=')) {
+      present = true;
       out.push(a.slice('--only='.length));
     }
   }
-  if (!out.length) return null;
+  if (!present) return null;
   return out.flatMap((v) => v.split(',')).map((v) => v.trim()).filter(Boolean);
+}
+
+/**
+ * L'errore d'uso di `--only`, o null se l'uso e' legittimo. PURA, e separata
+ * da `main()` per la stessa ragione di `parseOnly`: `main()` fa rete e
+ * riscrive il manifest versionato, quindi non e' eseguibile in un test.
+ *
+ * @param {string[]|null} only  l'esito di `parseOnly`.
+ * @param {boolean} init        se `--init` e' presente.
+ * @returns {string|null}
+ */
+function onlyArgError(only, init) {
+  if (only === null) return null;
+  if (!only.length) {
+    // Fail-CLOSED: chi ha scritto `--only` voleva restringere. Trattare la
+    // risoluzione vuota come «nessun filtro» esegue l'atto piu' ampio
+    // possibile proprio quando l'intenzione dichiarata era il contrario.
+    return '`--only` non ha risolto nessun path (`--only` senza valori, `--only=`, o una variabile non settata): serve almeno un path, o si toglie la flag.';
+  }
+  if (!init) return '`--only` ha senso solo con `--init`: senza, il report va letto per intero.';
+  return null;
 }
 
 /**
@@ -230,13 +267,18 @@ function parseOnly(argv) {
  * PURA e senza rete, come `ghostVerdict` e `classify`: e' questo a renderla
  * testabile offline.
  *
- * @param {string[]|null} only          i path chiesti (null → nessun filtro).
+ * @param {string[]|null} only          i path chiesti (null → nessun filtro,
+ *   `[]` → filtro chiesto e vuoto, che non tocca NIENTE).
  * @param {string[]} manifestPaths      i `path` dichiarati nel manifest.
  * @returns {{targets: Set<string>|null, unknown: string[]}} `targets` null
  *   significa «tutte», cioe' il comportamento storico di `--init`.
  */
 function resolveInitTargets(only, manifestPaths) {
-  if (!only) return { targets: null, unknown: [] };
+  // `only === null` e non `!only`: un array VUOTO significa «filtro chiesto e
+  // risolto vuoto» e deve dare un target set vuoto (nessuna voce toccata), non
+  // il tutto-o-niente. `onlyArgError` lo ferma prima, ma la funzione pura non
+  // deve dipendere da quel chiamante per non fail-open (issue #978).
+  if (only === null) return { targets: null, unknown: [] };
   const declared = new Set(manifestPaths);
   return { targets: new Set(only), unknown: only.filter((p) => !declared.has(p)) };
 }
@@ -850,12 +892,13 @@ function classify(entry, now, base, deps = manifestDepsOf(entry)) {
 }
 
 async function main() {
-  const manifest = readManifest();
-  const { targets: initTargets, unknown: initUnknown } = resolveInitTargets(ONLY, manifest.files.map((f) => f.path));
-  if (ONLY && !INIT) {
-    console.error('`--only` ha senso solo con `--init`: senza, il report va letto per intero.');
+  const onlyError = onlyArgError(ONLY, INIT);
+  if (onlyError) {
+    console.error(onlyError);
     return 1;
   }
+  const manifest = readManifest();
+  const { targets: initTargets, unknown: initUnknown } = resolveInitTargets(ONLY, manifest.files.map((f) => f.path));
   if (initUnknown.length) {
     // Un path non dichiarato e' quasi sempre un refuso, e proseguire
     // scriverebbe un manifest che NON contiene la voce che si voleva
@@ -1169,4 +1212,4 @@ if (process.argv[1] && process.argv[1].endsWith('loop-drift-check.mjs')) {
 // baseline con LA STESSA regola con cui la pesa il cron, altrimenti una voce
 // accettata in PR verrebbe dichiarata fantasma il mattino dopo — o peggio, il
 // contrario. Una seconda copia della regola lo renderebbe inevitabile.
-export { classify, parseOnly, resolveInitTargets, ghostVerdict, strandedVerdict, corpusOnlyTwinVerdict, unmirrorableDepsVerdict, resolvedLocalImports, gitBlobSha, scalarFingerprintVerdict, siteFile, sha256, repoHistoryMatch };
+export { classify, parseOnly, onlyArgError, resolveInitTargets, ghostVerdict, strandedVerdict, corpusOnlyTwinVerdict, unmirrorableDepsVerdict, resolvedLocalImports, gitBlobSha, scalarFingerprintVerdict, siteFile, sha256, repoHistoryMatch };
