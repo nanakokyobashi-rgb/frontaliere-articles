@@ -284,6 +284,26 @@ export function parseAggregateExhaustion(text) {
  * senza ancore, ricucire tutto in una voce sola sarebbe un errore piu' grande
  * di quello che si vuole evitare.
  *
+ * ── L'ANCORA NON E' SOLO «UN MODELLO IN CATENA» (#976 item 2) ──────────────
+ *
+ * I router (`omniroute/`, `openrouter/`) rimandano l'id del modello DENTRO il
+ * corpo dell'errore: un `msg` che contiene ` | openrouter/x: unavailable`, con
+ * `openrouter/x` davvero in catena, supererebbe un `models.some(...)` nudo e
+ * resterebbe una voce fantasma — cioe' un `total` gonfio dentro la misura.
+ *
+ * Il vincolo in piu' e' l'ORDINE: `callLLM` cammina la catena con un solo
+ * `errors.push` per iterazione, quindi le voci escono in ordine di catena non
+ * decrescente. Un frammento prefissato da un modello che viene PRIMA di quello
+ * della voce gia' aperta non puo' essere una voce nuova: e' coda.
+ *
+ * Residuo dichiarato: se l'id citato nel corpo viene DOPO nella catena, i due
+ * casi restano indistinguibili dal solo testo e il fantasma sopravvive. Chiude
+ * circa meta' della superficie, non tutta; chiuderla del tutto richiederebbe di
+ * assumere che le voci coprano la catena senza buchi — vero oggi (ogni
+ * `continue` del ciclo e' preceduto da un push) ma un invariante che un
+ * `continue` silenzioso futuro romperebbe collassando le voci, cioe' un guasto
+ * peggiore di quello evitato.
+ *
  * Pura → testabile.
  *
  * @param {string} payload il testo dopo `Errors: `
@@ -294,12 +314,27 @@ export function splitErrorEntries(payload, chainModels) {
   const fragments = String(payload == null ? '' : payload).split(ERRORS_SEPARATOR);
   const models = Array.isArray(chainModels) ? chainModels.filter(Boolean) : [];
   if (!models.length) return fragments;
-  const startsEntry = (f) => f.startsWith('Prompt budget:')
-    || models.some((model) => f.startsWith(`${model}: `));
+  // Indice in catena del modello che apre il frammento, cercato solo DOPO
+  // l'ultima voce aperta (`cursor`). `Prompt budget:` e' la coda finale del
+  // messaggio: dopo di lei nessun id puo' piu' aprire una voce, quindi il
+  // cursore va oltre la fine della catena.
+  const opensEntry = (f, cursor) => {
+    if (f.startsWith('Prompt budget:')) return models.length;
+    for (let i = cursor + 1; i < models.length; i++) {
+      if (f.startsWith(`${models[i]}: `)) return i;
+    }
+    return -1;
+  };
   const entries = [];
+  let cursor = -1;
   for (const f of fragments) {
-    if (entries.length && !startsEntry(f)) entries[entries.length - 1] += ERRORS_SEPARATOR + f;
-    else entries.push(f);
+    const at = opensEntry(f, cursor);
+    if (entries.length && at < 0) {
+      entries[entries.length - 1] += ERRORS_SEPARATOR + f;
+    } else {
+      entries.push(f);
+      if (at >= 0) cursor = at;
+    }
   }
   return entries;
 }

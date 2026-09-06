@@ -88,15 +88,16 @@ jobs:
           # da "Important<delimitatore>" (decorativo o prosa, es. "nessun 🔴") →
           # no-op, niente round speso. Stessa regex in scripts/ci/lib/constants.mjs
           # (REDFLAG_IMPORTANT_RE) — YAML `if:` non può importarla, tenerle allineate.
-          # `^[^🟡🟢❓]*` e `(?<!\`)` chiudono la terza variante della classe sulla
-          # POSIZIONE invece che sul vocabolario (misurata sulla PR #909): un
-          # 🔴 Important CITATO dentro la riga di un altro finding, o dentro un code
-          # span, non e' il marker di quella riga — e portava i due punti come quello
-          # vero, quindi il rimedio precedente non lo vedeva. grep e' gia' orientato
-          # alla riga, quindi il pattern e' REDFLAG_IMPORTANT_RE.source senza il `\n`
-          # nella classe negata; il guard `mirror bash` di
+          # il lead a due rami e i due lookbehind chiudono la terza variante della classe
+          # sulla POSIZIONE invece che sul vocabolario (misurata sulla PR #909): un
+          # 🔴 Important CITATO — dentro «» o dentro un code span APERTO — non e' il
+          # marker di quella riga, e portava i due punti come quello vero. Ma un marker
+          # vero non sparisce ne' per una label incollata (`` `a.mjs:L1`🔴 ``) ne' per un
+          # secondo finding sulla stessa riga (#977): entrambi restano rossi. grep e' gia'
+          # orientato alla riga, quindi il pattern e' REDFLAG_IMPORTANT_RE.source senza i
+          # `\n` delle classi negate; il guard `mirror bash` di
           # generator/tests/redflag-important-marker.test.mjs lo pretende verbatim.
-          if ! printf '%s' "$REVIEW_BODY" | grep -qP '^[^🟡🟢❓]*(?<!`)🔴\s*\*{0,2}\s*Important\s*\*{0,2}\s*[:—-]'; then
+          if ! printf '%s' "$REVIEW_BODY" | grep -qP '^(?:[^🟡🟢❓]*|(?:[^`«]|`[^`]*`|«[^»]*»|`(?![^`]*`))*[🟡🟢❓](?:[^`«]|`[^`]*`|«[^»]*»|`(?![^`]*`))*)(?<!\s`)(?<!^`)🔴\s*\*{0,2}\s*Important\s*\*{0,2}\s*[:—-]'; then
             echo "Review contiene 🔴 ma nessun finding '🔴 Important' (decorativo) → skip 🔴-fix (no-op)."
             echo "actionable=false" >> "$GITHUB_OUTPUT"; exit 0
           fi

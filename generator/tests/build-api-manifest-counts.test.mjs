@@ -21,6 +21,16 @@
  * quanto il confronto: un contatore aggiunto a `counts` e non cablato nel gate
  * fa fallire la build invece di scivolare dentro non verificato.
  *
+ * IL RAMO CHE MANCAVA (#974). Il gate confrontava dichiarato e ri-derivato, e
+ * mappava l'artefatto ASSENTE su 0. Ma `counts` vale 0 per la stessa ragione —
+ * i rami `not emitted` del writer lasciano il contatore a 0 — quindi su un
+ * `border-wait-ranking.json`, `daily-brief.json` o `images-manifest.json` che
+ * smette silenziosamente di essere emesso le due meta' concordano su 0 e il
+ * gate resta VERDE: dimostra la coerenza interna del manifest, non che
+ * l'artefatto dovesse esserci. La legittimita' dell'assenza si decide ora da
+ * una sorgente TERZA — l'input del produttore su disco per gli artefatti
+ * condizionali, niente affatto per quelli sempre emessi.
+ *
  * PERCHE' UN TEST E NON SOLO LA FIX. Il gate e' silenzioso quando tutto e'
  * sano — cioe' sempre, finche' non serve. Un gate che si ricontrolla addosso
  * (rileggendo le variabili in memoria invece del disco) sarebbe altrettanto
@@ -40,6 +50,16 @@ import { countXmlTags } from '../../scripts/lib/count-xml-tags.mjs';
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
 const SRC = readFileSync(resolve(ROOT, 'scripts/build-api.mjs'), 'utf-8');
 
+// Ritagliare da `indexOf` senza controllarne il valore e' la stessa forma di
+// leak che questo file va a caccia nel gate: con l'ancora sparita `indexOf` da'
+// -1, `slice(-1)` restituisce UN carattere, e ogni «il gate non contiene X»
+// passa proprio nel caso che deve prendere. L'ancora e' parte dell'asserzione.
+const sliceFrom = (src, anchor) => {
+  const at = src.indexOf(anchor);
+  assert.ok(at >= 0, `ancora sparita dal sorgente, l'asserzione sarebbe vuota: ${anchor}`);
+  return src.slice(at);
+};
+
 test('il gate finale ricontrolla manifest.counts contro gli artefatti su disco', () => {
   assert.match(SRC, /manifest counts gate/);
   assert.match(SRC, /manifest\.counts does not describe the set served/);
@@ -49,8 +69,7 @@ test('il confronto legge il manifest EMESSO, non l’oggetto counts in memoria',
   // Un gate che rilegge le stesse variabili che hanno scritto il numero
   // verifica se stesso: e' verde per costruzione e non puo' mai fallire.
   assert.match(SRC, /const declared = jsonOut\('manifest\.json'\)\.counts;/);
-  const gate = SRC.slice(SRC.indexOf('manifest.counts descrive il set davvero servito'));
-  assert.ok(gate.length > 0, 'il gate deve esistere');
+  const gate = sliceFrom(SRC, 'manifest.counts descrive il set davvero servito');
   for (const inMemory of ['ARTICLES.length', 'rssItemTotal', 'imageCount', 'sitemapCounts.']) {
     assert.ok(
       !gate.includes(inMemory),
@@ -68,7 +87,7 @@ test('ogni contatore di manifest.counts e’ ri-derivato o dichiarato non ri-der
   assert.ok(counts, 'scripts/build-api.mjs deve costruire manifest.counts');
   const keys = [...counts[1].matchAll(/^\s{4}(\w+)[,:]/gm)].map((m) => m[1]);
   assert.ok(keys.length >= 12, `attesi almeno 12 contatori, trovati ${keys.length}`);
-  const gate = SRC.slice(SRC.indexOf('const derived = {'));
+  const gate = sliceFrom(SRC, 'const derived = {');
   for (const key of keys) {
     assert.ok(
       new RegExp(`\\b${key}\\b`).test(gate),
@@ -116,8 +135,8 @@ test('dailyBriefBlocks e’ ri-derivato dai blocchi serviti, non dal numero che 
   // PAYLOAD: lo stesso «gate che ricontrolla chi ha scritto il numero» che
   // l'header del gate rifiuta, spostato di un livello. La formula e' quella del
   // produttore (generator/scripts/lib/daily-brief-data.mjs).
-  const gate = SRC.slice(SRC.indexOf('const derived = {'));
-  const derived = /dailyBriefBlocks: derivedIfPresent\(([\s\S]*?)\n    \),/.exec(gate);
+  const gate = sliceFrom(SRC, 'const derived = {');
+  const derived = /dailyBriefBlocks: derivedOptional\(([\s\S]*?)\n    \),/.exec(gate);
   assert.ok(derived, 'dailyBriefBlocks deve restare cablato nel gate');
   assert.match(derived[1], /\.blocks/);
   assert.match(derived[1], /filter\(\(b\) => b\?\.available\)/);
@@ -127,6 +146,113 @@ test('dailyBriefBlocks e’ ri-derivato dai blocchi serviti, non dal numero che 
   );
   const producer = readFileSync(resolve(ROOT, 'generator/scripts/lib/daily-brief-data.mjs'), 'utf-8');
   assert.match(producer, /Object\.values\(blocks\)\.filter\(\(b\) => b\.available\)\.length/);
+});
+
+test('nessun contatore mappa l’ARTEFATTO ASSENTE su 0 in accordo col manifest', () => {
+  // Il ramo che il gate non copriva. `derivedIfPresent` dava 0 su un artefatto
+  // assente, e `counts` vale 0 per la stessa ragione (i rami `not emitted` del
+  // writer lasciano il contatore a 0): le due meta' concordano su 0 e il gate
+  // resta VERDE. Dimostra la coerenza interna del manifest, non che
+  // l'artefatto dovesse esserci — cioe' esattamente il troncamento-a-zero che
+  // AGENTS.md chiede a `counts` di rifiutare, su `dist/api/`.
+  assert.ok(
+    !SRC.includes('derivedIfPresent'),
+    'derivedIfPresent mappa l’assenza su 0 senza chiedersi se l’artefatto dovesse esserci',
+  );
+  const gate = sliceFrom(SRC, 'const derived = {');
+  const body = gate.slice(0, gate.indexOf('\n  };'));
+  // Ogni voce di `derived` passa da uno dei due costruttori (o non legge un
+  // artefatto per nome: `rssFeeds`/`rssItems` scandiscono la cartella, e una
+  // cartella vuota non e' un file assente).
+  const wired = ['derivedAlways', 'derivedOptional', 'sitemapUrls', 'feeds'];
+  const entries = [...body.matchAll(/^    (\w+): ([\s\S]*?)(?=\n    \w+:|$)/gm)];
+  // Guardia di vacuita': se il ritaglio smette di agganciare, il ciclo sotto
+  // gira a vuoto e questo test diventa verde per assenza di casi.
+  assert.ok(entries.length >= 11, `attese almeno 11 voci in \`derived\`, trovate ${entries.length}`);
+  for (const [, key, rhs] of entries) {
+    assert.ok(
+      wired.some((fn) => rhs.includes(fn)),
+      `il contatore '${key}' non dichiara come tratta l’artefatto assente: usa derivedAlways o derivedOptional`,
+    );
+  }
+  // E la lista degli assenti deve confluire nel verdetto, o il gate li vede e
+  // non li dice.
+  assert.match(SRC, /const mismatches = \[\.\.\.absent\];/);
+});
+
+test('l’assenza legittima e’ decisa dall’INPUT del produttore, non dall’accordo fra le due meta’', () => {
+  // La sorgente terza. Un artefatto opzionale puo' mancare solo se il suo
+  // produttore non ha girato qui — condizione che sta su disco, fuori dal
+  // manifest e fuori dal contatore.
+  const gate = sliceFrom(SRC, 'const derived = {');
+  for (const [counter, srcConst] of [
+    ['images', 'IMAGE_SRC_DIR'],
+    ['borderRankingEntries', 'BORDER_RANKING_SRC'],
+    ['dailyBriefBlocks', 'DAILY_BRIEF_SRC'],
+  ]) {
+    const call = new RegExp(`${counter}: derivedOptional\\(([\\s\\S]*?)\\n    \\),`).exec(gate);
+    assert.ok(call, `${counter} deve restare un artefatto opzionale cablato nel gate`);
+    assert.ok(
+      call[1].includes(srcConst),
+      `${counter} deve decidere l’assenza da ${srcConst}, l’input del suo produttore`,
+    );
+  }
+});
+
+test('l’input del produttore ha UNA sorgente: writer e gate leggono la stessa costante', () => {
+  // Se il ramo che decide di NON emettere e il gate che giudica l'assenza si
+  // sfasano, il gate torna cieco proprio dove serve (AGENTS.md #6).
+  for (const [srcConst, literal] of [
+    ['IMAGE_SRC_DIR', "['public', 'images', 'blog']"],
+    ['BORDER_RANKING_SRC', "['public', 'data', 'border-wait-ranking.json']"],
+    ['DAILY_BRIEF_SRC', "['public', 'data', 'daily-brief.json']"],
+  ]) {
+    assert.ok(SRC.includes(`const ${srcConst} = ${literal};`), `${srcConst} deve dichiarare ${literal}`);
+    // Due letture: il writer e il gate. Nessun path ri-scritto a mano accanto.
+    const uses = [...SRC.matchAll(new RegExp(`\\b${srcConst}\\b`, 'g'))].length;
+    assert.ok(uses >= 3, `${srcConst}: attese la dichiarazione + writer + gate, trovati ${uses} usi`);
+  }
+  const paths = ["'public', 'data', 'border-wait-ranking.json'", "'public', 'data', 'daily-brief.json'"];
+  for (const p of paths) {
+    assert.ok(
+      !SRC.includes(`path.join(ROOT, ${p})`),
+      `il path ${p} e’ ri-scritto a mano invece di passare dalla costante condivisa`,
+    );
+  }
+});
+
+test('slugs.json assente non e’ un caso da saltare', () => {
+  // Stessa classe, stesso blocco: `if (exists('slugs.json'))` saltava in
+  // silenzio l'intero confronto per insieme sulla sorgente dei canonical, che
+  // e' scritta incondizionatamente. «Assente» non e' «d'accordo».
+  const gate = sliceFrom(SRC, 'const derived = {');
+  assert.ok(
+    !/if \(exists\('slugs\.json'\)\) \{/.test(gate),
+    'l’assenza di slugs.json non deve saltare il confronto: deve essere un mismatch',
+  );
+  assert.match(gate, /slugs\.json: assente da dist\/api/);
+});
+
+test('sul set pubblicato un artefatto opzionale manca solo se manca il suo input', { skip: !existsSync(join(ROOT, 'dist/api/manifest.json')) && 'dist/api non costruito in questo job' }, () => {
+  // La meta' end-to-end delle asserzioni sul sorgente qui sopra: quando una
+  // build reale c'e', l'artefatto assente viene confrontato con l'input che
+  // avrebbe dovuto produrlo.
+  const OUT = join(ROOT, 'dist/api');
+  for (const [artifact, input] of [
+    ['border-wait-ranking.json', 'public/data/border-wait-ranking.json'],
+    ['daily-brief.json', 'public/data/daily-brief.json'],
+  ]) {
+    if (!existsSync(join(ROOT, input))) continue;
+    assert.ok(
+      existsSync(join(OUT, artifact)),
+      `${input} esiste ma dist/api/${artifact} no: counts dichiara 0 e la ri-derivazione da’ 0, quindi il confronto per valore non lo vedrebbe`,
+    );
+  }
+  const webpDir = join(ROOT, 'public/images/blog');
+  const webp = existsSync(webpDir) ? readdirSync(webpDir).filter((f) => f.endsWith('.webp')).length : 0;
+  if (webp > 0) {
+    assert.ok(existsSync(join(OUT, 'images-manifest.json')), `${webp} .webp in public/images/blog ma nessun images-manifest.json`);
+  }
 });
 
 test('sul set pubblicato ogni contatore combacia con gli artefatti', { skip: !existsSync(join(ROOT, 'dist/api/manifest.json')) && 'dist/api non costruito in questo job' }, () => {

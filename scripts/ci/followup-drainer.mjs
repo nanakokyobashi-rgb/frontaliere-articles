@@ -511,6 +511,81 @@ export function lastLabelEventAt(events, label) {
   return latest;
 }
 
+/** Finestra entro cui `labeled agent:fix` e `unlabeled agent:fix-queued` si
+ * leggono come UNA sola `gh issue edit` — quella con cui il DRAIN promuove
+ * (`edit(cand, { add: [LBL_FIX], remove: [LBL_QUEUED] })`). GitHub scrive i due
+ * eventi con lo stesso secondo, ma i `created_at` hanno granularità al secondo
+ * e l'ordine fra i due non è garantito: 120s è largo abbastanza da non perdere
+ * mai una promozione del drainer, e stretto abbastanza da non catturare un
+ * re-queue precedente (il giro minimo del drainer è il suo cron). */
+export const PROMOTION_PAIR_WINDOW_SEC = Number(process.env.FOLLOWUP_PROMOTION_PAIR_WINDOW_SEC || 120);
+
+/**
+ * ULTIMA promozione `agent:fix` di una issue, CON l'attribuzione del writer:
+ * `{ at, byDrainer }`. Pura → testabile.
+ *
+ * `agent:fix` non ha un solo writer. Oltre al DRAIN la scrivono
+ * `scripts/ci/triage-sweep.mjs` (route diretta dei crawler) e
+ * `.github/workflows/recycle-stale-prs.yml` (remove + add per riciclare una PR
+ * ferma). Una loro scrittura sposta `promotedAt` DOPO il marker e il merge
+ * della consegna appena avvenuta, quindi `isDeliveredThisRun` legge falso e la
+ * consegna riuscita consuma un tentativo: è il sintomo di #733 che si riapre.
+ * Il comportamento è fail-closed — bounded, mai un loop gratuito — ma è anche
+ * SILENZIOSO, e un bug già pagato una volta non deve poter tornare senza
+ * lasciare traccia nei log.
+ *
+ * L'attribuzione non può passare dall'attore (tutti e tre scrivono col PAT del
+ * progetto, quindi il login è lo stesso): passa dalla FORMA della scrittura. Il
+ * DRAIN promuove con una sola `gh issue edit` che aggiunge `agent:fix` e toglie
+ * `agent:fix-queued`; gli altri due writer non hanno mai `agent:fix-queued` da
+ * togliere. La coppia di eventi ravvicinati è quindi la firma del drainer, e
+ * la sua assenza dice «questa promozione l'ha scritta qualcun altro».
+ *
+ * Solo osservabilità: `at` resta l'ultimo evento `labeled`, identico a prima,
+ * perché una promozione concorrente FA partire una run vera e quel fail-closed
+ * è il comportamento corretto. Ciò che cambia è che ora si vede.
+ *
+ * @param {Array<{event?: string, label?: {name?: string}, created_at?: string, createdAt?: string}>} events
+ * @param {{windowSec?: number}} [opts]
+ * @returns {{at: number|null, byDrainer: boolean}}
+ */
+export function lastFixPromotion(events, { windowSec = PROMOTION_PAIR_WINDOW_SEC } = {}) {
+  const at = lastLabelEventAt(events, LBL_FIX);
+  if (at === null) return { at: null, byDrainer: false };
+  for (const e of events || []) {
+    if (e?.event !== 'unlabeled') continue;
+    if (String(e?.label?.name || '') !== LBL_QUEUED) continue;
+    const t = Date.parse(e?.created_at ?? e?.createdAt);
+    if (Number.isNaN(t)) continue;
+    if (Math.abs(t - at) <= windowSec * 1000) return { at, byDrainer: true };
+  }
+  return { at, byDrainer: false };
+}
+
+/**
+ * Una consegna reale sta per essere letta come run morta a causa di una
+ * ri-etichettatura CONCORRENTE di `agent:fix`? Pura → testabile.
+ *
+ * Vera solo quando tutte e quattro valgono: c'è un marker DELIVERED, c'è un
+ * merge, entrambi PRECEDONO la promozione (quindi `isDeliveredThisRun` è
+ * falso), e la promozione NON porta la firma del drainer. Le prime tre da sole
+ * descrivono anche il caso NORMALE — ciclo precedente consegnato, drainer
+ * ri-accodato, run successiva morta senza verdetto — che un tentativo lo deve
+ * consumare davvero e non va segnalato come anomalia: è `byDrainer` a
+ * separarli.
+ *
+ * @param {{outcome: string|null, outcomeAt: number|null, mergedAt: number|null, promotion: {at: number|null, byDrainer: boolean}}} args
+ */
+export function isConcurrentRepromotion({ outcome, outcomeAt, mergedAt, promotion } = {}) {
+  const at = promotion?.at ?? null;
+  if (!outcome || !DELIVERED.has(outcome)) return false;
+  if (!Number.isFinite(at)) return false;
+  if (promotion?.byDrainer) return false;
+  if (!Number.isFinite(outcomeAt) || outcomeAt >= at) return false;
+  if (!Number.isFinite(mergedAt) || mergedAt >= at) return false;
+  return true;
+}
+
 /**
  * Il ramo DELIVERED vale per la run CORRENTE? Pura → testabile.
  *
@@ -1458,6 +1533,71 @@ const attemptOf = (iss) => {
 };
 const prioRank = (iss) => (has(iss, 'fu-prio:high') ? 0 : 1); // high prima
 
+// --- EQUITÀ DELLO SLOT `issue-fix` (#973 item 3) -----------------------------
+// Il re-queue gratuito di una consegna (ramo DELIVERED) è un bound di
+// TERMINAZIONE, non di equità: dice che una issue che consegna non consuma
+// tentativi, non che le altre avanzano. Con l'ordinamento `prio || createdAt`
+// una aggregata che consegna a ogni ciclo torna in coda con il SUO `createdAt`
+// — sempre il più vecchio della sua classe — quindi si ri-prende l'unico slot
+// serializzato `issue-fix` al tick successivo, e al successivo ancora. Nessuna
+// altra issue della stessa priorità avanza finché l'aggregata non finisce i
+// suoi item: è starvation, e non lascia traccia (ogni singolo tick è corretto).
+//
+// Il bound è un round-robin sull'ULTIMA volta che la issue ha tenuto lo slot
+// (`promotedAt` = ultima aggiunta di `agent:fix`, la stessa misura che il ramo
+// DELIVERED usa già): chi lo ha tenuto più di recente passa dietro a chi lo ha
+// tenuto prima, e chi non lo ha mai tenuto passa davanti a tutti. Non è un cap
+// e non parcheggia niente — l'aggregata riprende lo slot appena gli altri
+// candidati della sua classe hanno avuto il loro giro, quindi converge come
+// prima, solo interlacciata.
+//
+// Costo: una `gh api .../events --paginate` per candidato nella finestra, che è
+// il motivo per cui la rotazione è BOUNDED alla testa della coda (gli altri non
+// sarebbero comunque promossi in questo tick) e alla sola classe di priorità
+// della testa (una `fu-prio:low` non deve mai scavalcare una `high`).
+export const SLOT_FAIRNESS_SCAN_MAX = Number(process.env.FOLLOWUP_SLOT_FAIRNESS_SCAN_MAX || 5);
+
+/** I candidati su cui vale la pena misurare `promotedAt`: il prefisso della coda
+ * già ordinata che condivide la classe di priorità della testa, capped a
+ * `scanMax`. Puro → testabile. */
+export function slotFairnessWindow(queued, { scanMax = SLOT_FAIRNESS_SCAN_MAX, prioOf = prioRank } = {}) {
+  const list = Array.isArray(queued) ? queued : [];
+  if (list.length < 2 || scanMax < 2) return [];
+  const headPrio = prioOf(list[0]);
+  const win = [];
+  for (const iss of list) {
+    if (prioOf(iss) !== headPrio) break;
+    win.push(iss);
+    if (win.length >= scanMax) break;
+  }
+  return win.length > 1 ? win : [];
+}
+
+/** La coda riordinata dal round-robin: la finestra di testa ri-ordinata per
+ * `promotedAt` crescente (mai promossa = 0 → prima di tutte), il resto intatto.
+ * `sort` è stabile, quindi a parità di `promotedAt` l'ordine `createdAt`
+ * pre-esistente sopravvive. Puro → testabile.
+ *
+ * `promotedAtBy` è una mappa numero → epoch ms; un valore assente o non finito
+ * (glitch `gh`, issue senza eventi) vale «mai promossa». Fail-safe voluto: al
+ * peggio una issue ottiene lo slot un giro fuori turno, mai una starvation —
+ * che è esattamente il fallimento che questo bound esiste per escludere.
+ *
+ * @param {Array<object>} queued coda già ordinata per `prio || createdAt`
+ * @param {Map<number, number|null>|object} promotedAtBy
+ */
+export function slotFairnessOrder(queued, promotedAtBy, { scanMax = SLOT_FAIRNESS_SCAN_MAX, prioOf = prioRank } = {}) {
+  const list = Array.isArray(queued) ? queued.slice() : [];
+  const win = slotFairnessWindow(list, { scanMax, prioOf });
+  if (!win.length) return list;
+  const get = (n) => {
+    const v = promotedAtBy instanceof Map ? promotedAtBy.get(n) : promotedAtBy?.[n];
+    return Number.isFinite(v) ? v : 0;
+  };
+  const rotated = win.slice().sort((a, b) => get(a.number) - get(b.number));
+  return [...rotated, ...list.slice(win.length)];
+}
+
 // --- PARKED-RETRY: ri-accoda i parked ritentabili (convergenza backlog) -------
 // Un follow-up va `fu-parked` dopo MAX_ATTEMPTS fix falliti. Molti fallirono per
 // cause ORA risolte (cap turni #1919/#1952, aggregate-sweep #1979, drift #2007):
@@ -1956,19 +2096,20 @@ function latestFixOutcomeEntry(num) {
   return latestFixOutcomeEntryFromComments(issueComments(num) || []);
 }
 
-/** Epoch ms dell'ultima promozione (`agent:fix` aggiunta) di questa issue, o
- * null su errore gh / evento assente. Il null è fail-CLOSED per il ramo
- * DELIVERED: senza sapere quando è iniziata la run corrente non si può
- * dichiarare che il marker appartiene a lei, e regalare il re-queue su un
- * glitch API toglierebbe l'unico bound di terminazione. `--paginate` perché la
- * timeline eventi di una issue lavorata dal ciclo supera facilmente le 30
- * voci di default e la promozione più recente è in fondo. */
-function fixPromotedAt(num) {
+/** ULTIMA promozione (`agent:fix` aggiunta) di questa issue con la sua
+ * attribuzione (`{at, byDrainer}`), `{at: null}` su errore gh / evento assente.
+ * `at` null è fail-CLOSED per il ramo DELIVERED: senza sapere quando è iniziata
+ * la run corrente non si può dichiarare che il marker appartiene a lei, e
+ * regalare il re-queue su un glitch API toglierebbe l'unico bound di
+ * terminazione. `byDrainer` è solo osservabilità (vedi `lastFixPromotion`).
+ * `--paginate` perché la timeline eventi di una issue lavorata dal ciclo supera
+ * facilmente le 30 voci di default e la promozione più recente è in fondo. */
+function fixPromotion(num) {
   try {
     const events = gh(['api', `repos/${REPO}/issues/${num}/events?per_page=100`, '--paginate']);
-    return lastLabelEventAt(Array.isArray(events) ? events : [], LBL_FIX);
+    return lastFixPromotion(Array.isArray(events) ? events : []);
   } catch {
-    return null;
+    return { at: null, byDrainer: false };
   }
 }
 
@@ -2684,15 +2825,25 @@ export function runDrain() {
       // PR chiusa SENZA merge otterrebbe il re-queue di una consegna che non
       // c'è stata. Se manca anche solo una, si prosegue verso i rami sotto,
       // che il tentativo lo consumano — cioè il comportamento bounded di prima.
+      const mergedAt = mergedFixPrAt(iss.number);
+      const promotion = fixPromotion(iss.number);
       if (isDeliveredThisRun({
         outcome,
         outcomeAt: outcomeEntry.at,
-        mergedAt: mergedFixPrAt(iss.number),
-        promotedAt: fixPromotedAt(iss.number),
+        mergedAt,
+        promotedAt: promotion.at,
       })) {
         console.log(`RE-QUEUE #${iss.number} (${outcome}, PR fix mergiata in questo ciclo) → tentativo NON consumato (la run ha consegnato)`);
         edit(iss.number, { add: [LBL_QUEUED], remove: [LBL_FIX] });
         continue;
+      }
+      // Il fail-closed qui sotto è corretto, ma quando a spostare `promotedAt`
+      // dopo la consegna è stato un writer CONCORRENTE di `agent:fix`
+      // (triage-sweep, recycle-stale-prs) il sintomo di #733 rientra senza che
+      // nessuno se ne accorga: un warning è ciò che lo rende misurabile invece
+      // che silenzioso.
+      if (isConcurrentRepromotion({ outcome, outcomeAt: outcomeEntry.at, mergedAt, promotion })) {
+        console.log(`::warning::#${iss.number}: consegna reale (${outcome} + merge) letta come run morta — \`${LBL_FIX}\` ri-applicata da un writer concorrente (triage-sweep / recycle-stale-prs) DOPO il merge → tentativo consumato (fail-closed, #973)`);
       }
       console.log(`#${iss.number}: marker ${outcome} NON scopato alla run corrente (marker stantio o nessun merge di questo ciclo) → rescue normale, tentativo consumato`);
     }
@@ -2764,11 +2915,19 @@ export function runDrain() {
     // raro: calcolarle solo lì tiene il costo gh del pass invariato su tutti
     // gli altri esiti.
     const delivered = outcome !== null && DELIVERED.has(outcome);
+    const mergedAt = delivered ? mergedFixPrAt(iss.number) : null;
+    const promotion = delivered ? fixPromotion(iss.number) : { at: null, byDrainer: false };
+    // Gemello del warning del rescue queue-managed: stessa causa (writer
+    // concorrente di `agent:fix`), stesso fail-closed, stesso bisogno di non
+    // essere silenzioso.
+    if (isConcurrentRepromotion({ outcome, outcomeAt: entry.at, mergedAt, promotion })) {
+      console.log(`::warning::#${iss.number}: consegna reale (${outcome} + merge) letta come run morta — \`${LBL_FIX}\` ri-applicata da un writer concorrente (triage-sweep / recycle-stale-prs) DOPO il merge → tentativo consumato (fail-closed, #973)`);
+    }
     const d = crawlerFixDecision({
       outcome,
       outcomeAt: entry.at,
-      mergedAt: delivered ? mergedFixPrAt(iss.number) : null,
-      promotedAt: delivered ? fixPromotedAt(iss.number) : null,
+      mergedAt,
+      promotedAt: promotion.at,
       ageMin: minutesSince(iss.updatedAt),
       attempt,
       hasPR,
@@ -2935,10 +3094,38 @@ export function runDrain() {
     edit(iss.number, { add: [LBL_PARKED], remove: [LBL_QUEUED, LBL_FIX] });
   }
 
-  const queued = pool
+  let queued = pool
     .filter(isDrainPromotable)
     .sort((a, b) => prioRank(a) - prioRank(b) || Date.parse(a.createdAt) - Date.parse(b.createdAt));
   if (!queued.length) { console.log('coda vuota → niente da promuovere.'); return; }
+
+  // Equità dello slot (#973 item 3): round-robin sull'ultima volta che ciascun
+  // candidato di testa ha tenuto `issue-fix`. Solo lettura (nessuna edit),
+  // quindi gira anche in DRY. Se il budget non copre l'INTERA finestra la
+  // rotazione si salta del tutto: misurarne metà ordinerebbe candidati letti
+  // contro candidati sconosciuti, cioè una rotazione arbitraria al posto di
+  // nessuna.
+  const fairWindow = slotFairnessWindow(queued);
+  if (fairWindow.length) {
+    if (budget.canAfford(fairWindow.length * COMMENT_SCAN_COST_MS)) {
+      const promotedAtBy = new Map();
+      for (const iss of fairWindow) {
+        budget.take(`#${iss.number} (slot-fairness)`, COMMENT_SCAN_COST_MS);
+        promotedAtBy.set(iss.number, fixPromotion(iss.number).at);
+      }
+      const rotated = slotFairnessOrder(queued, promotedAtBy);
+      if (rotated[0]?.number !== queued[0]?.number) {
+        const ago = (n) => {
+          const at = promotedAtBy.get(n);
+          return Number.isFinite(at) ? `${Math.round((Date.now() - at) / 3_600_000)}h fa` : 'mai';
+        };
+        console.log(`equità slot: ruoto la testa della coda — #${queued[0].number} (slot ${ago(queued[0].number)}) passa dietro a #${rotated[0].number} (slot ${ago(rotated[0].number)}). Finestra: ${fairWindow.map((i) => `#${i.number}`).join(' ')}.`);
+      }
+      queued = rotated;
+    } else {
+      console.log(`equità slot: budget insufficiente per misurare la finestra (${fairWindow.length} candidati) → nessuna rotazione in questo tick (no silent cap).`);
+    }
+  }
 
   let overlapSkipped = 0;
   let prFilesMap = null; // lazy: caricato al primo candidato con path estratti, poi cached

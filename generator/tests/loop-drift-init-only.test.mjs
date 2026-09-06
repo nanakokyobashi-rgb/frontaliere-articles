@@ -25,7 +25,7 @@
  */
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { parseOnly, resolveInitTargets } from '../../scripts/ci/loop-drift-check.mjs';
+import { parseOnly, onlyArgError, resolveInitTargets } from '../../scripts/ci/loop-drift-check.mjs';
 
 test('parseOnly: senza --only non filtra niente', () => {
   assert.equal(parseOnly(['--init']), null);
@@ -43,8 +43,39 @@ test('parseOnly: forma separata `--only a b`, e si ferma alla flag successiva', 
   assert.deepEqual(parseOnly(['--init', '--only', 'a.mjs', 'b.mjs', '--json']), ['a.mjs', 'b.mjs']);
 });
 
-test('parseOnly: `--only` senza valori vale come assente', () => {
-  assert.equal(parseOnly(['--init', '--only', '--json']), null);
+// --- `--only` che risolve vuoto (issue #978) ---------------------------------
+//
+// `[]` e `null` erano la stessa cosa, e `null` significa «nessun filtro»:
+// `--init --only` in coda, `--only=`, o `--only "$VAR"` con la variabile non
+// settata riscrivevano TUTTE le voci del manifest e bumpavano `alignedAt`.
+// Scrivere la flag otteneva l'atto tutto-o-niente che la flag esiste per
+// evitare, con exit 0. Ora la flag presente torna sempre un array, e un array
+// vuoto e' un errore d'uso.
+
+test('parseOnly: `--only` senza valori NON vale come assente', () => {
+  assert.deepEqual(parseOnly(['--init', '--only', '--json']), []);
+  assert.deepEqual(parseOnly(['--init', '--only']), []);
+});
+
+test('parseOnly: `--only=` vuoto o di soli separatori risolve a []', () => {
+  assert.deepEqual(parseOnly(['--init', '--only=']), []);
+  assert.deepEqual(parseOnly(['--init', '--only=,']), []);
+  assert.deepEqual(parseOnly(['--init', '--only', '  ']), []);
+});
+
+test('onlyArgError: la flag assente non e\' un errore', () => {
+  assert.equal(onlyArgError(null, true), null);
+  assert.equal(onlyArgError(null, false), null);
+});
+
+test('onlyArgError: `--only` risolto vuoto e\' un errore, con o senza --init', () => {
+  assert.match(onlyArgError([], true), /non ha risolto nessun path/);
+  assert.match(onlyArgError([], false), /non ha risolto nessun path/);
+});
+
+test('onlyArgError: `--only` senza `--init` resta un errore d\'uso', () => {
+  assert.match(onlyArgError(['a.mjs'], false), /ha senso solo con `--init`/);
+  assert.equal(onlyArgError(['a.mjs'], true), null);
 });
 
 test('resolveInitTargets: nessun filtro → tutte le voci, come `--init` storico', () => {
@@ -58,6 +89,15 @@ test('resolveInitTargets: filtra alle sole voci chieste', () => {
   assert.deepEqual([...targets], ['b.mjs']);
   assert.deepEqual(unknown, []);
   assert.equal(targets.has('a.mjs'), false);
+});
+
+test('resolveInitTargets: `[]` non degrada a «tutte» — non tocca NIENTE', () => {
+  // La difesa in profondita' dietro `onlyArgError`: la funzione pura non deve
+  // fail-open da sola se un chiamante futuro dimentica il guard.
+  const { targets, unknown } = resolveInitTargets([], ['a.mjs', 'b.mjs']);
+  assert.notEqual(targets, null);
+  assert.equal(targets.size, 0);
+  assert.deepEqual(unknown, []);
 });
 
 test('resolveInitTargets: un path non dichiarato viene riportato, non ignorato', () => {

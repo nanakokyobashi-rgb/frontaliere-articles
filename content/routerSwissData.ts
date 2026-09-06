@@ -1944,6 +1944,15 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'imposta-successione-vallese-dichiarazione': { it: 'imposta-successione-vallese-dichiarazione', en: 'succession-tax-valais-declaration', de: 'erbschaftssteuer-wallis-erklaerung', fr: 'impot-succession-valais-declaration' },
  'svizzera-mondo-multipolare': { it: 'svizzera-mondo-multipolare', en: 'switzerland-multipolar-world', de: 'schweiz-multipolare-welt', fr: 'suisse-monde-multipolaire' },
  'successione-donazione-vallese-guida': { it: 'successione-donazione-vallese-guida', en: 'succession-donation-valais-guide', de: 'erbschaft-schenkung-wallis-anleitung', fr: 'succession-donation-valais-guide' },
+ 'affitti-sciaffusa-deposito-contestazione': { it: 'affitti-sciaffusa-deposito-contestazione', en: 'shaffhausen-rental-deposit-dispute', de: 'mietrecht-schaffhausen-kaution-einspruch', fr: 'location-schaffhouse-depot-litige' },
+ 'comprare-casa-zurigo-prezzi-mutuo-ipotecario': { it: 'comprare-casa-zurigo-prezzi-mutuo-ipotecario', en: 'buying-house-zurich-prices-mortgage', de: 'hauskauf-zurich-preise-hypothek', fr: 'achat-maison-zurich-prix-hypotheque' },
+ 'affitti-sciaffusa-canoni-deposito': { it: 'affitti-sciaffusa-canoni-deposito', en: 'schaffhausen-rental-deposits-canons', de: 'schaffhausen-mietkaution-nebenkosten', fr: 'schaffhouse-loyers-depot-garantie' },
+ 'riflessione-neutralita-svizzera-delbiaggio': { it: 'riflessione-neutralita-svizzera-delbiaggio', en: 'swiss-neutrality-reflection-delbiaggio', de: 'schweizer-neutralitaet-reflexion-delbiaggio', fr: 'reflexion-neutralite-suisse-delbiaggio' },
+ 'hotel-lenzerheide-hacker-avviso': { it: 'hotel-lenzerheide-hacker-avviso', en: 'hotel-lenzerheide-hacker-warning', de: 'hotel-lenzerheide-hacker-warnung', fr: 'hotel-lenzerheide-hacker-avertissement' },
+ 'sciaffusa-canone-locazione-deposito-guida': { it: 'sciaffusa-canone-locazione-deposito-guida', en: 'schaffhausen-rental-lease-guide', de: 'schaffhausen-mietrecht-kaution', fr: 'schaffhouse-loyer-locaction-guide' },
+ 'beloved-richieste-settantina': { it: 'beloved-richieste-settantina', en: 'beloved-requests-seventy', de: 'beloved-anfragen-siebzig', fr: 'beloved-soixante-dix-demandes' },
+ 'borse-studio-neuchatel': { it: 'borse-studio-neuchatel', en: 'neuchatel-scholarships-requirements-amounts', de: 'neuchatel-stipendien-voraussetzungen-betrage', fr: 'neuchatel-bourses-etude-conditions-montants' },
+ 'salari-svizzera-settori-formazione-contratti': { it: 'salari-svizzera-settori-formazione-contratti', en: 'salaries-switzerland-sectors-education-contracts', de: 'lohne-schweiz-sektoren-bildung-kollektivvertraege', fr: 'salaires-suisse-secteurs-formation-conventions' },
 };
 
 export const REVERSE_SWISS: Record<ArticleLocale, Record<string, string>> = (() => {

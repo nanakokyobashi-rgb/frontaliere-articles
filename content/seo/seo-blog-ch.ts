@@ -74705,6 +74705,357 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-affitti-sciaffusa-deposito-contestazione': {
+    title: 'Diritto locazione Sciaffusa: deposito e contestazione',
+    description: 'Deposito max 3 mesi, disdetta su modulo ufficiale, contestazione in 30 giorni: tutto il diritto federale di locazione nel Canton Sciaffusa con procedure',
+    keywords: 'frontalieri, ticino, svizzera, italia, diritto, locazione, sciaffusa, deposito',
+    ogTitle: 'Diritto di locazione nel Canton Sciaffusa: guida pratica',
+    ogDescription: 'Deposito cauzionale massimo 3 mesi, disdetta solo su modulo ufficiale, contestazione entro 30 giorni: le regole federali di locazione nel Canton Sciaffusa spiegate.',
+    canonicalPath: '/articoli-svizzera/affitti-sciaffusa-deposito-contestazione/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Diritto locazione Sciaffusa: deposito e contestazione",
+      "description": "Deposito max 3 mesi, disdetta su modulo ufficiale, contestazione in 30 giorni: tutto il diritto federale di locazione nel Canton Sciaffusa con procedure",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/affitti-sciaffusa-deposito-contestazione.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Ingresso di un edificio residenziale svizzero con porta e cassetta postale"
+      },
+      "datePublished": "2026-09-06T17:23:58+00:00",
+      "dateModified": "2026-09-06T17:23:58+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/affitti-sciaffusa-deposito-contestazione/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-comprare-casa-zurigo-prezzi-mutuo-ipotecario': {
+    title: 'Comprare casa nel Cantone di Zurigo: prezzi e mutuo ipotecario',
+    description: 'Scopri i prezzi medi delle abitazioni e i requisiti per i fondi propri nel Cantone di Zurigo. Pianifica il tuo acquisto con consigli pratici. Dati aggiornati',
+    keywords: 'frontalieri, ticino, svizzera, italia, comprare, casa, cantone, zurigo',
+    ogTitle: 'Comprare casa nel Cantone di Zurigo: prezzi e mutuo ipotecario',
+    ogDescription: 'Scopri i prezzi medi delle abitazioni e i requisiti per i fondi propri nel Cantone di Zurigo. Pianifica il tuo acquisto con consigli pratici e garantisci una decisione informata e finanziariamente sostenibile.',
+    canonicalPath: '/articoli-svizzera/comprare-casa-zurigo-prezzi-mutuo-ipotecario/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Comprare casa nel Cantone di Zurigo: prezzi e mutuo ipotecario",
+      "description": "Scopri i prezzi medi delle abitazioni e i requisiti per i fondi propri nel Cantone di Zurigo. Pianifica il tuo acquisto con consigli pratici. Dati aggiornati",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/comprare-casa-zurigo-prezzi-mutuo-ipotecario.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista aerea di un'area residenziale moderna a Zurigo, Svizzera"
+      },
+      "datePublished": "2026-09-06T17:36:23+00:00",
+      "dateModified": "2026-09-06T17:36:23+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/comprare-casa-zurigo-prezzi-mutuo-ipotecario/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-affitti-sciaffusa-canoni-deposito': {
+    title: 'Affitti Sciaffusa: canoni, deposito e diritto di locazione',
+    description: 'Guida pratica ai diritti di locazione in Sciaffusa: deposito cauzionale, contestazione canoni, disdetta e procedure presso l\'autorità di conciliazione.',
+    keywords: 'frontalieri, ticino, svizzera, italia, affitti, sciaffusa, canoni, deposito',
+    ogTitle: 'Affitti Sciaffusa: canoni, deposito e diritto di locazione',
+    ogDescription: 'Scopri come funziona il mercato dei lettini a Sciaffusa, i tuoi diritti come inquilino, come contestare il canone iniziale e il ruolo dell\'autorità di conciliazione secondo il diritto di locazione federale svizzero.',
+    canonicalPath: '/articoli-svizzera/affitti-sciaffusa-canoni-deposito/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Affitti Sciaffusa: canoni, deposito e diritto di locazione",
+      "description": "Guida pratica ai diritti di locazione in Sciaffusa: deposito cauzionale, contestazione canoni, disdetta e procedure presso l'autorità di conciliazione.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/affitti-sciaffusa-canoni-deposito.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Contratto di locazione svizzero e chiave su scrivania con documenti legali immobiliari"
+      },
+      "datePublished": "2026-09-06T17:46:08+00:00",
+      "dateModified": "2026-09-06T17:46:08+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/affitti-sciaffusa-canoni-deposito/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-riflessione-neutralita-svizzera-delbiaggio': {
+    title: 'Neutralità svizzera: il pensiero di Elio Del Biaggio',
+    description: 'Elio Del Biaggio riflette sul valore della neutralità svizzera come pilastro di indipendenza e stabilità nella complessa geopolitica odierna. Dati aggiornati',
+    keywords: 'frontalieri, ticino, svizzera, italia, neutralità, pensiero, elio, biaggio',
+    ogTitle: 'Neutralità svizzera: il pensiero di Elio Del Biaggio',
+    ogDescription: 'Il dibattito sulla neutralità svizzera analizzato da Elio Del Biaggio: perché la sovranità e l\'indipendenza restano risorse strategiche per il futuro del Paese.',
+    canonicalPath: '/articoli-svizzera/riflessione-neutralita-svizzera-delbiaggio/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Neutralità svizzera: il pensiero di Elio Del Biaggio",
+      "description": "Elio Del Biaggio riflette sul valore della neutralità svizzera come pilastro di indipendenza e stabilità nella complessa geopolitica odierna. Dati aggiornati",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/riflessione-neutralita-svizzera-delbiaggio.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Bandiera svizzera che sventola sopra le Alpi svizzere."
+      },
+      "datePublished": "2026-09-06T17:57:04+00:00",
+      "dateModified": "2026-09-06T17:57:04+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/riflessione-neutralita-svizzera-delbiaggio/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-hotel-lenzerheide-hacker-avviso': {
+    title: 'Attacco hacker Hotel Schweizerhof: 10.000 clienti avvisati',
+    description: 'L\'Hotel Schweizerhof di Lenzerheide avverte 10.000 clienti di un attacco hacker ai sistemi di prenotazione. Scopri come proteggerti dai tentativi di frode',
+    keywords: 'frontalieri, ticino, svizzera, italia, attacco, hacker, hotel, schweizerhof',
+    ogTitle: 'Attacco hacker Hotel Schweizerhof: 10.000 clienti avvisati',
+    ogDescription: 'L\'Hotel Schweizerhof di Lenzerheide notifica circa 10.000 clienti di un attacco ai sistemi di prenotazione. I truffatori cercano dati personali con offerta fittizia di credito da 250 franchi. Ecco come proteggerti.',
+    canonicalPath: '/articoli-svizzera/hotel-lenzerheide-hacker-avviso/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Attacco hacker Hotel Schweizerhof: 10.000 clienti avvisati",
+      "description": "L'Hotel Schweizerhof di Lenzerheide avverte 10.000 clienti di un attacco hacker ai sistemi di prenotazione. Scopri come proteggerti dai tentativi di frode",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/hotel-lenzerheide-hacker-avviso.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Hotel di lusso svizzero con sfondo montagne in luce dorata alpina"
+      },
+      "datePublished": "2026-09-06T18:04:40+00:00",
+      "dateModified": "2026-09-06T18:04:40+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/hotel-lenzerheide-hacker-avviso/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-sciaffusa-canone-locazione-deposito-guida': {
+    title: 'Affitti Sciaffusa: canoni medi e diritto di locazione',
+    description: 'Guida completa al mercato della locazione nel Canton Sciaffusa. Regole su canone, deposito, disdetta e autorità di conciliazione per affitti e inquilini.',
+    keywords: 'frontalieri, ticino, svizzera, italia, affitti, sciaffusa, canoni, medi',
+    ogTitle: 'Affitti Sciaffusa: canoni e diritto di locazione',
+    ogDescription: 'Nel Canton Sciaffusa gli affitti seguono il diritto federale svizzero. Scopri i diritti dell\'inquilino, come contestare il canone e le procedure di conciliazione.',
+    canonicalPath: '/articoli-svizzera/sciaffusa-canone-locazione-deposito-guida/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Affitti Sciaffusa: canoni medi e diritto di locazione",
+      "description": "Guida completa al mercato della locazione nel Canton Sciaffusa. Regole su canone, deposito, disdetta e autorità di conciliazione per affitti e inquilini.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/sciaffusa-canone-locazione-deposito-guida.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Edificio residenziale in una città svizzera con citofoni e cassette postali"
+      },
+      "datePublished": "2026-09-06T18:12:37+00:00",
+      "dateModified": "2026-09-06T18:12:37+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/sciaffusa-canone-locazione-deposito-guida/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-beloved-richieste-settantina': {
+    title: 'Fondazione Beloved: settantina di richieste ricevute',
+    description: 'La fondazione Beloved ha ricevuto 70 richieste dalle vittime dell\'incendio di Crans-Montana. Fornisce supporto psicologico, finanziario e riabilitativo.',
+    keywords: 'frontalieri, ticino, svizzera, italia, fondazione, beloved, settantina, richieste',
+    ogTitle: 'Fondazione Beloved: 70 richieste per vittime Crans-Montana',
+    ogDescription: 'La fondazione Beloved ha ricevuto 70 richieste da vittime dell\'incendio di Crans-Montana (41 morti, 115 feriti). Istituita il 27 marzo, dispone di CHF 24 milioni da Vallese, Vaud e donatori privati.',
+    canonicalPath: '/articoli-svizzera/beloved-richieste-settantina/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Fondazione Beloved: settantina di richieste ricevute",
+      "description": "La fondazione Beloved ha ricevuto 70 richieste dalle vittime dell'incendio di Crans-Montana. Fornisce supporto psicologico, finanziario e riabilitativo.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/beloved-richieste-settantina.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Veduta panoramica di Crans-Montana in Vallese con le Alpi innevate sullo sfondo"
+      },
+      "datePublished": "2026-09-06T19:10:58+00:00",
+      "dateModified": "2026-09-06T19:10:58+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/beloved-richieste-settantina/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-borse-studio-neuchatel': {
+    title: 'Borse di studio Neuchâtel: requisiti e importi',
+    description: 'Guida alle borse di studio nel Cantone di Neuchâtel: criteri di assegnazione, requisiti di residenza e merito, importi massimi, procedura di candidatura e bandi',
+    keywords: 'frontalieri, ticino, svizzera, italia, borse, studio, neuch, requisiti',
+    ogTitle: 'Borse di studio Neuchâtel: requisiti e importi',
+    ogDescription: 'Accedi alle borse di studio nel Cantone di Neuchâtel. Scopri i criteri di valutazione, i requisiti di residenza e merito accademico, gli importi disponibili, la procedura di candidatura e le scadenze annuali. Guida completa con link alle informazioni',
+    canonicalPath: '/articoli-svizzera/borse-studio-neuchatel/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Borse di studio Neuchâtel: requisiti e importi",
+      "description": "Guida alle borse di studio nel Cantone di Neuchâtel: criteri di assegnazione, requisiti di residenza e merito, importi massimi, procedura di candidatura e bandi",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/borse-studio-neuchatel.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Biblioteca universitaria moderna con studenti che studiano, rappresenta l'accesso alla formazione superiore in Svizzera."
+      },
+      "datePublished": "2026-09-06T19:39:00+00:00",
+      "dateModified": "2026-09-06T19:39:00+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/borse-studio-neuchatel/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-salari-svizzera-settori-formazione-contratti': {
+    title: 'Salari e mercato del lavoro: formazione, settori e livelli',
+    description: 'Scopri come si compone uno stipendio svizzero: lordo, deduzioni AVS/LPP/LAMal, netto. Salari per formazione e settore, contratti collettivi e come leggere',
+    keywords: 'frontalieri, ticino, svizzera, italia, salari, mercato, lavoro, formazione',
+    ogTitle: 'Salari e mercato del lavoro in Svizzera: settori e formazione',
+    ogDescription: 'Come variano i salari svizzeri per grado di formazione e settore? Scopri la composizione di uno stipendio lordo/netto, deduzioni AVS/LPP/LAMal, contratti collettivi e come verificare il tuo stipendio con i dati SECO e UST.',
+    canonicalPath: '/articoli-svizzera/salari-svizzera-settori-formazione-contratti/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Salari e mercato del lavoro: formazione, settori e livelli",
+      "description": "Scopri come si compone uno stipendio svizzero: lordo, deduzioni AVS/LPP/LAMal, netto. Salari per formazione e settore, contratti collettivi e come leggere",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/salari-svizzera-settori-formazione-contratti.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Colloquio professionale in ufficio svizzero: discussione su stipendio e contratto di lavoro tra colleghi."
+      },
+      "datePublished": "2026-09-06T20:02:14+00:00",
+      "dateModified": "2026-09-06T20:02:14+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/salari-svizzera-settori-formazione-contratti/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

@@ -46,6 +46,14 @@ prodotto il 60% di run follow-up cancellate e una ventina di issue bloccate.
 Il drainer promuove **una alla volta, solo a slot libero**: la run promossa è
 l'unica pending, quindi non può essere cancellata.
 
+A slot libero la testa della coda viene ruotata per **equità** (#973): a parità
+di `fu-prio`, chi ha tenuto lo slot più di recente passa dietro a chi lo ha
+tenuto prima, e chi non lo ha mai tenuto passa davanti. Serve perché il
+re-queue gratuito di una consegna è un bound di *terminazione*, non di equità:
+un'aggregata che consegna a ogni ciclo rientrava con il suo `createdAt` — il più
+vecchio — e si ri-prendeva lo slot indefinitamente, senza che nessun singolo
+tick fosse sbagliato.
+
 ## Fix flow
 
 1. **Branch isolato, resume-aware.** Se esiste già `fix/issue-<n>` su origin, un
