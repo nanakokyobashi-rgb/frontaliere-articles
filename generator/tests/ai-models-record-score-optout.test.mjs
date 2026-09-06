@@ -52,8 +52,24 @@ import {
   recordModelSuccess,
   resetState,
   DEFAULT_CHAIN,
+  DISCOVERY_OPTOUT_IGNORED_WARNING,
+  DISCOVERY_OPTOUT_PRUNE_WARNING,
+  RECORD_SCORE_COERCION_WARNING,
   _discoverProvider,
 } from '../scripts/lib/ai-models.mjs';
+
+/**
+ * Il segnale si riconosce dal TESTO che il modulo emette, non da tre parole
+ * generiche (#941). `/opt-out|recordScore|diagnost/i` contava anche il warning
+ * di `coerceRecordScore()` — quello che scatta per ogni valore stringa non
+ * ancora visto, cioe' per la forma con cui un flag arriva da `process.env` —
+ * quindi il conteggio «un segnale e uno solo» diventava 2 senza che il segnale
+ * fosse stato emesso due volte. Le costanti sono le stesse che costruiscono il
+ * messaggio: una sorgente sola, e il predicato non puo' scollarsi dal testo.
+ */
+const isPruneSignal = (w) => w.includes(DISCOVERY_OPTOUT_PRUNE_WARNING);
+const isIgnoredSignal = (w) => w.includes(DISCOVERY_OPTOUT_IGNORED_WARNING);
+const isCoercionWarning = (w) => w.includes(RECORD_SCORE_COERCION_WARNING);
 
 // La forma REALE che undici produce per un host che non accetta connessioni:
 // il codice syscall vive due livelli sotto (vedi ai-models-host-unreachable).
@@ -356,7 +372,7 @@ describe('#783 — discovery: opt-out dal ledger, prune invariato', () => {
 
     assert.ok(stale > 0, 'il ramo markStale non e\' scattato: il test misurerebbe il nulla');
     assert.ok(!DEFAULT_CHAIN.includes(DEAD), 'il segnale non deve sostituire il prune: la catena va comunque potata');
-    const segnali = warnings.filter((w) => /opt-out|recordScore|diagnost/i.test(w));
+    const segnali = warnings.filter(isPruneSignal);
     assert.equal(
       segnali.length,
       1,
@@ -388,9 +404,76 @@ describe('#783 — discovery: opt-out dal ledger, prune invariato', () => {
       'la seconda discovery deve aver potato davvero, o il latch non e\' sotto misura',
     );
     assert.equal(
-      warnings.filter((w) => /opt-out|recordScore|diagnost/i.test(w)).length,
+      warnings.filter(isPruneSignal).length,
       1,
       `il warning doveva restare uno solo: ${JSON.stringify(warnings)}`,
+    );
+  });
+
+  it('la forma env-derived (`recordScore: \'false\'`) e\' un opt-out, e il segnale resta uno', async () => {
+    // La forma con cui il flag arriva DAVVERO e' una stringa: `process.env.X` non
+    // produce booleani, e il chiamante piu' esposto e' proprio quello diagnostico.
+    // Lungo questo percorso non era mai stata esercitata — i tre casi qui sopra
+    // passano booleani — quindi il predicato dei test non aveva mai incontrato il
+    // warning di coercizione, che contiene anch'esso la parola `recordScore` (#941).
+    const realWarn = console.warn;
+    const warnings = [];
+    console.warn = (...a) => { warnings.push(a.join(' ')); };
+    let stale;
+    try {
+      ({ stale } = await _discoverProvider(cfg, { recordScore: 'false' }));
+    } finally {
+      console.warn = realWarn;
+    }
+
+    assert.ok(stale > 0, 'il ramo markStale non e\' scattato: il test misurerebbe il nulla');
+    assert.equal(
+      getStats().dirtyModels,
+      0,
+      'la stringa \'false\' deve essere un opt-out vero: e\' la forma in cui il flag arriva da process.env',
+    );
+    assert.ok(!DEFAULT_CHAIN.includes(DEAD), 'il prune della catena non dipende dal ledger');
+    assert.equal(
+      warnings.filter(isPruneSignal).length,
+      1,
+      `il segnale del prune deve restare uno solo anche con il flag in forma stringa: ${JSON.stringify(warnings)}`,
+    );
+    // ...e la coercizione e' una riga SUA, che il predicato non deve contare come
+    // segnale: e' il difetto che #941 nomina. Con /opt-out|recordScore|diagnost/
+    // questa asserzione e quella sopra erano incompatibili.
+    const coercizioni = warnings.filter(isCoercionWarning);
+    assert.equal(coercizioni.length, 1, `attesa una riga di coercizione: ${JSON.stringify(warnings)}`);
+    assert.ok(
+      !isPruneSignal(coercizioni[0]),
+      'la riga di coercizione non e\' il segnale del prune: due fatti diversi, due predicati diversi',
+    );
+  });
+
+  it('una stringa VERA (`\'true\'`) non e\' un opt-out: il confine della forma env-derived', async () => {
+    // Il gemello del caso sopra: se la coercizione sbagliasse verso, un flag
+    // diagnostico spento diventerebbe una scrittura in produzione — e viceversa
+    // un `'true'` letto come falsy perderebbe punteggi senza dirlo.
+    const realWarn = console.warn;
+    const warnings = [];
+    console.warn = (...a) => { warnings.push(a.join(' ')); };
+    let stale;
+    try {
+      ({ stale } = await _discoverProvider(cfg, { recordScore: 'true' }));
+    } finally {
+      console.warn = realWarn;
+    }
+
+    assert.ok(stale > 0, 'il ramo markStale non e\' scattato: il test misurerebbe il nulla');
+    assert.ok(getStats().dirtyModels > 0, '\'true\' e\' una richiesta di registrare, non un opt-out');
+    assert.deepEqual(
+      warnings.filter(isPruneSignal),
+      [],
+      'nessun opt-out, nessun segnale di prune diagnostico',
+    );
+    assert.equal(
+      warnings.filter(isCoercionWarning).length,
+      1,
+      `la stringa va comunque segnalata una volta: ${JSON.stringify(warnings)}`,
     );
   });
 
@@ -413,7 +496,7 @@ describe('#783 — discovery: opt-out dal ledger, prune invariato', () => {
     // Il segnale di #844 descrive una catena potata da un DIAGNOSTICO: emetterlo
     // anche in produzione lo renderebbe una riga che non distingue piu' niente.
     assert.deepEqual(
-      warnings.filter((w) => /opt-out|recordScore|diagnost/i.test(w)),
+      warnings.filter(isPruneSignal),
       [],
       'la discovery di produzione non deve emettere il segnale di opt-out',
     );
@@ -531,7 +614,7 @@ describe('#843 — discoverFreeModels(): il latch di processo muore con resetSta
     await discoverFreeModels({ recordScore: false });
 
     assert.ok(
-      warnings.some((w) => w.includes('[Discovery]') && w.includes('recordScore')),
+      warnings.some(isIgnoredSignal),
       `un opt-out ignorato deve lasciare un segnale, warning visti: ${JSON.stringify(warnings)}`,
     );
     // L'idempotenza resta: la seconda chiamata non rifa' il giro, quindi non
@@ -546,7 +629,7 @@ describe('#843 — discoverFreeModels(): il latch di processo muore con resetSta
     await discoverFreeModels({ recordScore: 'false' });
 
     assert.deepEqual(
-      warnings.filter((w) => w.includes('[Discovery]')),
+      warnings.filter(isIgnoredSignal),
       [],
       `stessa modalita' (\'false\' e false coincidono dopo coerceRecordScore): nessun warning atteso, visti: ${JSON.stringify(warnings)}`,
     );

@@ -1802,6 +1802,15 @@ const DEFAULT_OPTS = {
 const _recordScoreWarned = new Set();
 
 /**
+ * Prefisso della riga che `coerceRecordScore()` emette per un valore non
+ * booleano. Esportato per la stessa ragione dei due marker della discovery
+ * (#941): e' la riga che si CONFONDE con quei segnali — parla di `recordScore`
+ * ma dice un altro fatto, «hai passato una stringa», e chi filtra i log deve
+ * poterla distinguere per testo invece che per parola.
+ */
+export const RECORD_SCORE_COERCION_WARNING = '[recordScore] valore';
+
+/**
  * Normalizza `recordScore` a un booleano vero.
  *
  * ── Perche' non basta `!== false` ─────────────────────────────────────────
@@ -1834,7 +1843,7 @@ export function coerceRecordScore(value) {
     const norm = value.trim().toLowerCase();
     if (!_recordScoreWarned.has(norm)) {
       _recordScoreWarned.add(norm);
-      console.warn(`\u26a0\ufe0f  [recordScore] valore stringa "${value}" normalizzato a ${!_RECORD_SCORE_FALSE_STRINGS.has(norm)} — passa un booleano`);
+      console.warn(`\u26a0\ufe0f  ${RECORD_SCORE_COERCION_WARNING} stringa "${value}" normalizzato a ${!_RECORD_SCORE_FALSE_STRINGS.has(norm)} — passa un booleano`);
     }
     return !_RECORD_SCORE_FALSE_STRINGS.has(norm);
   }
@@ -1842,7 +1851,7 @@ export function coerceRecordScore(value) {
   const key = `${typeof value}:${String(value)}`;
   if (!_recordScoreWarned.has(key)) {
     _recordScoreWarned.add(key);
-    console.warn(`\u26a0\ufe0f  [recordScore] valore non booleano ${key} normalizzato a ${coerced} — passa un booleano`);
+    console.warn(`\u26a0\ufe0f  ${RECORD_SCORE_COERCION_WARNING} non booleano ${key} normalizzato a ${coerced} — passa un booleano`);
   }
   return coerced;
 }
