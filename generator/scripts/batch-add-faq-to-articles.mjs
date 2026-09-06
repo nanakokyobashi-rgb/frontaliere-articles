@@ -908,25 +908,39 @@ async function translateFaq(faqArray, targetLang) {
       results.push(pair); // Keep Italian pair as fallback
     }
   }
-  if (!results.length) return null;
-  // Il fallback qui sopra e' per COPPIA, quindi questo array puo' uscire
-  // mezzo tradotto e mezzo italiano — e ognuno dei tre chiamanti lo scrive
-  // (`processGeneration`, `processTopUp`, `processTranslation`). La guardia sta
-  // qui e non ai tre call-site perche' e' l'unico punto da cui esce una FAQ
-  // tradotta: gattarne uno solo lascerebbe gli altri due a pubblicare
-  // l'italiano dentro il JSON-LD di una pagina /en/, ed e' un ramo che gira
-  // ogni giorno (`batch-faq-articles.yml`, `cron: '30 0 * * *'`).
+  if (!results.length) return { faq: null, rejected: false };
+  // Il fallback qui sopra e' per COPPIA, quindi questo array puo' uscire mezzo
+  // tradotto e mezzo italiano, e ognuno dei tre chiamanti lo scriverebbe.
   //
-  // `null` e' gia' il valore che i tre chiamanti sanno gestire: registrano il
-  // fallimento e ricadono sul loro comportamento dichiarato. Restituire mezzo
-  // italiano spacciandolo per una traduzione, invece, non lo sapeva nessuno.
+  // ── PERCHE' DUE ESITI DI FALLIMENTO E NON UN `null` SOLO ─────────────────
+  //
+  // I tre chiamanti NON trattano `null` allo stesso modo, e crederlo ha
+  // prodotto un difetto peggiore di quello che chiudeva. Su `null`:
+  //   · `processTranslation` non scrive niente — corretto;
+  //   · `processGeneration` scrive `faqForLocale = validFaq`, cioe' la FAQ
+  //     ITALIANA INTERA sul body `/en/`;
+  //   · `processTopUp` scrive `validMerged`, di nuovo l'italiano intero.
+  // Rifiutare con `null` una traduzione per lingua sbagliata trasformava
+  // quindi UNA coppia italiana su otto in OTTO su otto, su un ramo che gira
+  // ogni giorno: il rimedio pubblicava piu' italiano della malattia.
+  //
+  // Quindi il rifiuto di LINGUA e il fallimento del MOTORE sono due esiti
+  // distinti. Sul primo i chiamanti saltano la scrittura: una FAQ assente si
+  // recupera al giro dopo, una FAQ italiana su `/en/` e' contenuto sbagliato
+  // gia' pubblicato. Sul secondo resta il fallback italiano dichiarato, che e'
+  // una scelta di prodotto preesistente e non la tocco qui.
+  //
+  // La soglia di 50 caratteri di `wrongLocalePair` resta: misurata su coppie
+  // FAQ reali (57-89 caratteri) da' 0 falsi positivi su 8 traduzioni buone e
+  // ne coglie 3 su 4 italiane; alzarla a 80 controllerebbe 2 coppie su 8 e ne
+  // coglierebbe 0 su 4, cioe' spegnerebbe il controllo.
   const wrong = wrongLocalePair(results, targetLang);
   if (wrong) {
     console.error(`   ⚠️  translateFaq ${targetLang}: coppia ${wrong.index} rilevata come `
-      + `${wrong.detected} (fallback italiano per-coppia) — scarto l'intera traduzione`);
-    return null;
+      + `${wrong.detected} (fallback italiano per-coppia) — scarto la traduzione, NON scrivo`);
+    return { faq: null, rejected: true };
   }
-  return results;
+  return { faq: results, rejected: false };
 }
 
 /** Validate FAQ array: min 1 pair, q>10 chars, a>20 chars */
@@ -1142,9 +1156,18 @@ async function processArticle(articleId, file, itBodyContent) {
         continue;
       }
 
+      const res = translations[i].status === 'fulfilled' ? translations[i].value : null;
+      // Lingua sbagliata: si SALTA la scrittura. Il fallback italiano qui sotto
+      // pubblicherebbe la FAQ italiana intera sul body di questo locale, cioe'
+      // esattamente cio' che il rifiuto voleva evitare, e in dose piena.
+      if (res?.rejected) {
+        console.error(`${label} ⚠️  ${locale.toUpperCase()} traduzione rifiutata (lingua sbagliata): `
+          + 'non scrivo la FAQ per questo locale, si recupera al giro dopo');
+        continue;
+      }
       let faqForLocale;
-      if (translations[i].status === 'fulfilled' && translations[i].value) {
-        faqForLocale = translations[i].value;
+      if (res?.faq) {
+        faqForLocale = res.faq;
         console.error(`${label} ✅ ${locale.toUpperCase()} translated (${faqForLocale.length} pairs)`);
       } else {
         const reason = translations[i].status === 'rejected' ? translations[i].reason?.message : 'null result';
@@ -1224,10 +1247,15 @@ async function processTopUp(articleId, file, itContent, existingFaq) {
       if (!existsSync(resolve(localePath))) continue;
 
       try {
-        const translated = await translateFaq(validMerged, locale);
-        if (translated) {
-          insertFaqIntoBodyFile(localePath, articleId, translated);
-          console.error(`${label} ✅ ${locale.toUpperCase()} translated (${translated.length} pairs)`);
+        const res = await translateFaq(validMerged, locale);
+        if (res.faq) {
+          insertFaqIntoBodyFile(localePath, articleId, res.faq);
+          console.error(`${label} ✅ ${locale.toUpperCase()} translated (${res.faq.length} pairs)`);
+        } else if (res.rejected) {
+          // Stesso motivo di processGeneration: scrivere `validMerged` qui
+          // significa pubblicare l'italiano intero sul locale, in dose piena.
+          console.error(`${label} ⚠️  ${locale.toUpperCase()} traduzione rifiutata (lingua sbagliata): `
+            + 'non scrivo, si recupera al giro dopo');
         } else {
           insertFaqIntoBodyFile(localePath, articleId, validMerged);
           console.error(`${label} ⚠️  ${locale.toUpperCase()} translation failed, using Italian`);
@@ -1253,17 +1281,18 @@ async function processTranslation(articleId, file, itFaq, missingLocales) {
     if (!existsSync(resolve(localePath))) continue;
 
     try {
-      const translated = await translateFaq(itFaq, locale);
-      if (translated) {
-        // Nessun controllo di lingua qui: `translateFaq()` non restituisce piu'
-        // un array con dentro una coppia italiana — rende `null`, che il ramo
-        // `else` qui sotto registra. La guardia sta nella funzione condivisa
-        // perche' i chiamanti che scrivono FAQ tradotte sono tre.
-        insertFaqIntoBodyFile(localePath, articleId, translated);
-        console.error(`${label} ✅ ${locale.toUpperCase()} (${translated.length} pairs)`);
+      const res = await translateFaq(itFaq, locale);
+      if (res.faq) {
+        // Nessun controllo di lingua qui: la guardia sta in `translateFaq()`,
+        // l'unico punto da cui esce una FAQ tradotta.
+        insertFaqIntoBodyFile(localePath, articleId, res.faq);
+        console.error(`${label} ✅ ${locale.toUpperCase()} (${res.faq.length} pairs)`);
         fixed++;
       } else {
-        console.error(`${label} ⚠️  ${locale.toUpperCase()} translation null`);
+        // Questo ramo non scriveva niente nemmeno prima: e' l'unico dei tre
+        // che gia' si comportava bene su un fallimento.
+        console.error(`${label} ⚠️  ${locale.toUpperCase()} `
+          + (res.rejected ? 'traduzione rifiutata (lingua sbagliata)' : 'translation null'));
       }
     } catch (err) {
       console.error(`${label} ❌ ${locale.toUpperCase()}: ${err.message}`);

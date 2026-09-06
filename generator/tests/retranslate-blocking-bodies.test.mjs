@@ -383,6 +383,55 @@ test('il rilevatore di locale FAQ e per coppia in ENTRAMBI i punti che decidono'
   assert.ok(fn.length > 0, 'translateFaq non trovata');
   assert.match(fn, /wrongLocalePair\(results, targetLang\)/,
     'translateFaq deve rifiutare un array che contiene una coppia nella lingua sbagliata');
-  assert.match(fn, /return null;/,
-    'il rifiuto deve rendere `null`, che i tre chiamanti gia\' sanno gestire');
+  // NON `null`: i tre chiamanti non trattano `null` allo stesso modo — due su
+  // tre lo gestiscono scrivendo la FAQ italiana intera. Il rifiuto di lingua
+  // deve essere distinguibile dal fallimento del motore, altrimenti il rimedio
+  // pubblica piu' italiano della malattia.
+  assert.match(fn, /rejected: true/,
+    'il rifiuto di lingua deve essere un esito distinto dal fallimento del motore');
+});
+
+// ── Cosa viene SCRITTO quando la traduzione FAQ e' rifiutata ───────────────
+//
+// La differenza fra i tre chiamanti e' il punto: non basta che `translateFaq()`
+// rifiuti. Su un fallimento, `processArticle` e `processTopUp` scrivono la FAQ
+// ITALIANA INTERA sul body del locale, mentre `processTranslation` non scrive
+// niente. Un rifiuto di lingua reso come semplice fallimento trasformava quindi
+// UNA coppia italiana su otto in OTTO su otto, ogni giorno. Questi casi
+// asseriscono il comportamento per chiamante, che il test sul solo valore di
+// ritorno non puo' vedere.
+test('il rifiuto di lingua non scrive, il fallimento del motore tiene il fallback', () => {
+  const root = path.resolve(import.meta.dirname, '..', '..');
+  const src = fs.readFileSync(path.join(root, 'generator/scripts/batch-add-faq-to-articles.mjs'), 'utf-8');
+  const slice = (from, to) => src.slice(src.indexOf(from), src.indexOf(to));
+
+  const bodies = {
+    processArticle: slice('async function processArticle(', 'async function processTopUp('),
+    processTopUp: slice('async function processTopUp(', 'async function processTranslation('),
+    processTranslation: slice('async function processTranslation(', '// ── Concurrency control'),
+  };
+
+  for (const [name, body] of Object.entries(bodies)) {
+    assert.ok(body.length > 0, `${name}: corpo non trovato`);
+    // Ogni chiamante deve distinguere i due esiti.
+    assert.match(body, /\.rejected/,
+      `${name}: non distingue il rifiuto di lingua dal fallimento del motore. `
+      + "Senza la distinzione il rifiuto ricade sul fallback italiano e PUBBLICA piu' italiano.");
+    // E il ramo del rifiuto non deve scrivere.
+    const rejIdx = body.indexOf('.rejected');
+    const nextWrite = body.indexOf('insertFaqIntoBodyFile', rejIdx);
+    const branchEnd = body.indexOf('} else', rejIdx);
+    assert.ok(nextWrite === -1 || (branchEnd !== -1 && nextWrite > branchEnd),
+      `${name}: il ramo \`rejected\` scrive nel file. Deve saltare: una FAQ assente si `
+      + "recupera al giro dopo, una FAQ italiana su /en/ e' contenuto sbagliato pubblicato.");
+  }
+
+  // Falsificazione nell'altro verso: il fallback italiano sul FALLIMENTO DEL
+  // MOTORE e' ancora li' nei due chiamanti che l'avevano. E' una scelta di
+  // prodotto preesistente, e questa PR non doveva toccarla — se sparisse, il
+  // test direbbe che ho cambiato in silenzio piu' di quanto dichiarato.
+  assert.match(bodies.processArticle, /faqForLocale = validFaq;/,
+    'processArticle: il fallback italiano sul fallimento del motore non va rimosso qui');
+  assert.match(bodies.processTopUp, /insertFaqIntoBodyFile\(localePath, articleId, validMerged\)/,
+    'processTopUp: il fallback italiano sul fallimento del motore non va rimosso qui');
 });
