@@ -155,3 +155,54 @@ test('lo sweep incompleto NON e\' una ricognizione: la negazione li\' e\' il dif
   assert.equal(stripNegatedImpactClauses(equivalente), equivalente);
   assert.ok(bucketFinding(equivalente), 'non deve sparire nel nulla');
 });
+
+// --- Round 3: il guard di sweep e' per-FRASE, non per riga (#974) ------------
+// Una riga puo' portare le due forme insieme: l'affermazione di sweep incompleto
+// E la ricognizione negata di chiusura. Col guard applicato alla riga intera lo
+// strip saltava per intero e il vocabolario che compare SOLO nella ricognizione
+// tornava a fare punteggio — cioe' il falso positivo che lo strip chiude.
+
+test('sweep incompleto + ricognizione negata sulla stessa riga: si toglie solo la ricognizione', () => {
+  const line = "🔴 Important: lo stesso anti-pattern in `build-rss.mjs` non e' toccato. Nessun impatto su `dist/api/`, sulle sitemap o sui feed.";
+  const stripped = stripNegatedImpactClauses(line);
+  assert.match(stripped, /stesso anti-pattern/, 'la frase di sweep resta intera');
+  assert.match(stripped, /non e' toccato/, "la negazione della frase di sweep e' il difetto, non si tocca");
+  assert.doesNotMatch(stripped, /sitemap/, 'la ricognizione negata sparisce');
+  assert.equal(bucketFinding(line), 'sibling-class-fix');
+});
+
+test('ordine inverso: la ricognizione in testa non salva se stessa perche\' lo sweep viene dopo', () => {
+  const line = "🔴 Important: nessun impatto su `dist/api/`, sulle sitemap o sui feed. Il file gemello `build-rss.mjs` non e' toccato.";
+  const stripped = stripNegatedImpactClauses(line);
+  assert.doesNotMatch(stripped, /sulle sitemap o sui feed/, 'la ricognizione negata sparisce');
+  assert.match(stripped, /file gemello/);
+  assert.equal(bucketFinding(line), 'sibling-class-fix');
+});
+
+test('la coda contrastiva segue la stessa regola per-frase', () => {
+  const line = "🟡 Nit: il fix tocca `create-article.mjs`, non le sitemap o i feed. Lo stesso costrutto in `build-rss.mjs` resta.";
+  const stripped = stripNegatedImpactClauses(line);
+  assert.doesNotMatch(stripped, /le sitemap o i feed/, 'la coda negata sparisce anche se la riga porta un tell di sweep altrove');
+  assert.match(stripped, /stesso costrutto/);
+});
+
+test('tell di sweep e ricognizione nella STESSA frase: il guard resta conservativo', () => {
+  const line = "🟡 Nit: il file gemello `build-rss.mjs` e' gia' allineato, nessun impatto su `dist/api/` o sulle sitemap.";
+  assert.equal(stripNegatedImpactClauses(line), line, 'una frase sola: non si sa separarle, si tiene tutto');
+});
+
+test('end-to-end: le righe miste non aprono un bucket canonical-sitemap', () => {
+  const misti = [
+    "🔴 Important: lo stesso anti-pattern in `build-rss.mjs` non e' toccato. Nessun impatto su `dist/api/`, sulle sitemap o sui feed.",
+    "🔴 Important: il file gemello `build-rss.mjs` non e' toccato; nessun impatto su slug, sitemap o canonical.",
+    "🟡 Nit: this refactor does not touch `dist/api/`, sitemaps or feeds. The sibling `build-rss.mjs` still carries it.",
+  ];
+  const prs = misti.map((line, i) => ({
+    number: 940 + i,
+    mergedAt: '2026-09-01T00:00:00Z',
+    reviews: [{ author: { login: 'claude' }, body: `## Findings\n${line}\n` }],
+  }));
+  const { counts } = tallyFindings(prs);
+  assert.equal(counts['canonical-sitemap'] ?? 0, 0, `bucket ${JSON.stringify(counts)}`);
+  assert.equal(counts['sibling-class-fix'] ?? 0, 3, `bucket ${JSON.stringify(counts)}`);
+});
