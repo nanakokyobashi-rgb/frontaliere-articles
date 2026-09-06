@@ -169,15 +169,72 @@ const io = {
  * @returns {boolean} true se il corpo enumera >=2 item
  */
 export function hasEnumeratedItems(body) {
-  const b = String(body || '');
+  const b = stripFencedBlocks(String(body || ''));
   const numberedSections = (b.match(/^#{2,4}[ \t]*\d+[.)](?=[ \t]|$)/gm) || []).length;
   if (numberedSections >= 2) return true;
   // Lista ordinata con lead in grassetto: `1. **Titolo.**` / `2. **Titolo.**` (#831, #832).
-  // Il grassetto e' cio' che distingue l'item enumerato dai passi di una procedura numerata.
-  const orderedBoldItems = (b.match(/^[ \t]*\d+[.)][ \t]+\*\*/gm) || []).length;
+  // Il grassetto e' cio' che distingue l'item enumerato dai passi di una procedura numerata,
+  // ma solo se e' un TITOLO e non un'enfasi in mezzo alla riga (`isBoldTitleLead`, #926).
+  const lines = b.split('\n');
+  const orderedBoldItems = lines.filter((l) => {
+    const m = /^[ \t]*\d+[.)][ \t]+(.*)$/.exec(l);
+    return m ? isBoldTitleLead(m[1]) : false;
+  }).length;
   if (orderedBoldItems >= 2) return true;
-  const boldLeadBullets = (b.match(/^[-*][ \t]+(?:\[[ xX]\][ \t]*)?\*\*/gm) || []).length;
+  const boldLeadBullets = lines.filter((l) => {
+    const m = /^[-*][ \t]+(?:\[[ xX]\][ \t]*)?(.*)$/.exec(l);
+    return m ? isBoldTitleLead(m[1]) : false;
+  }).length;
   return boldLeadBullets >= 2;
+}
+
+/**
+ * Righe dentro un blocco recintato (\`\`\` o ~~~) rimosse prima del conteggio (#926).
+ *
+ * Un follow-up a UN SOLO item il cui corpo incolla uno snippet markdown — forma
+ * comune quando la scheda cita il diff o il template — enumerava item che non
+ * esistono: `hasEnumeratedItems` tornava true e `reconcile-followups.mjs`
+ * (`closeEligible = ... && !isAggregate`) smetteva di auto-chiuderlo per sempre,
+ * lasciandolo in coda a tempo indefinito. Un aggregato INVENTATO non e' il lato
+ * sicuro dell'errore: fa crescere la coda invece di far bruciare un tentativo.
+ *
+ * @param {string} text
+ * @returns {string} lo stesso testo senza le righe recintate (fence inclusi)
+ */
+function stripFencedBlocks(text) {
+  const out = [];
+  let fence = '';
+  for (const line of text.split('\n')) {
+    const m = /^[ \t]{0,3}(`{3,}|~{3,})/.exec(line);
+    if (fence) {
+      // Chiude solo un fence dello stesso carattere e lungo almeno quanto l'apertura.
+      if (m && m[1][0] === fence[0] && m[1].length >= fence.length) fence = '';
+      continue;
+    }
+    if (m) { fence = m[1]; continue; }
+    out.push(line);
+  }
+  return out.join('\n');
+}
+
+/**
+ * Il resto di una riga di lista inizia con un TITOLO in grassetto? (#926)
+ *
+ * `1. **Titolo.** Testo` e `- **Titolo**: testo` sono item enumerati;
+ * `2. **nota** finale che non e' un item` e' enfasi in mezzo alla prosa, e la
+ * vecchia regex (che chiedeva solo che la riga *iniziasse* con `**`) non le
+ * distingueva. Criterio: il grassetto chiude sulla stessa riga e o porta dentro
+ * la punteggiatura di chiusura, o e' seguito da fine riga o da un separatore.
+ *
+ * @param {string} rest testo della riga dopo il marcatore di lista
+ * @returns {boolean}
+ */
+function isBoldTitleLead(rest) {
+  const m = /^\*\*(?![ \t])((?:[^*\n]|\*(?!\*))+)\*\*(.*)$/.exec(rest);
+  if (!m) return false;
+  if (/[.:!?]$/.test(m[1].trim())) return true;
+  const tail = m[2].trim();
+  return tail === '' || /^[:.;—–-]/.test(tail);
 }
 
 /**
@@ -196,7 +253,14 @@ export function hasEnumeratedItems(body) {
  */
 export function isAggregate(title, body) {
   const text = `${title}\n${body}`;
-  const m = text.match(/(\d+)\s+items?\s+deferred/i);
+  // Il conteggio si legge sul solo TITOLO (#926). Letto su titolo+corpo, un corpo che
+  // CITA il `## Non implementato` del parent con «1 item deferred» — la forma che la
+  // scheda del fixer produce per costruzione — corto-circuitava a false un'issue i cui
+  // item sono comunque enumerati sotto, sopprimendo l'aggregazione. E' la direzione
+  // pericolosa dell'errore: il fixer chiude al PRIMO item risolto e lascia cadere gli
+  // altri. I due gemelli (`reconcile-followups.mjs`, `harvest-agent-lessons.mjs`) leggono
+  // gia' la regex numerica sul solo titolo: qui era l'unica copia disallineata.
+  const m = String(title || '').match(/(\d+)\s+items?\s+deferred/i);
   // An explicit count is authoritative once stated - trust it fully rather
   // than falling through to the heuristics below, which exist ONLY for
   // aggregates that never state a count (e.g. "Sweep: ~30 crawlers").
