@@ -119,6 +119,24 @@ jobs:
           PUSH_TOKEN: ${{ env.GITHUB_PAT_NANAKO }}
         run: node scripts/ci/probe-workflow-scope.mjs
 
+      # Prima di promuovere: collassa il doppio instradamento (#918, item 2).
+      # Una issue con `agent:fix` E `agent:fix-queued` insieme e' gia' in
+      # lavorazione, ma rientra fra i candidati di questo drainer (`listIssues(
+      # LBL_QUEUED)`) e verrebbe promossa una SECONDA volta — una run del fixer
+      # in piu' sulla quota condivisa col sito, sopra lavoro gia' in corso.
+      # E' lo stato che la chiave di concorrenza per-issue (#908) ha reso
+      # possibile fra lo sweep del triage e la run event-driven.
+      #
+      # Sta qui e non in `followup-drainer.mjs` perche' quello e' `mode:
+      # identical` nel manifest. Non bloccante e con GITHUB_TOKEN: rimuove una
+      # label, e nessun workflow ascolta `unlabeled`.
+      - name: Reconcile double routing (deterministic, no Claude)
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+        run: node scripts/ci/reconcile-routing-labels.mjs
+
       - name: Drain follow-up queue (deterministic, no Claude)
         env:
           # Il PAT è obbligatorio, non preferito: il `labeled` che promuove a
