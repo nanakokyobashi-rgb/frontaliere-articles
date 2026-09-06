@@ -888,7 +888,7 @@
     {
       "path": "FOLLOWUP.md",
       "mode": "adapted",
-      "reason": "Stessa struttura del contratto del sito (gate anti-nipote, parse rules, i tre hard-exclude) con il filtro di scopo di questo repo.",
+      "reason": "Stessa struttura del contratto del sito (gate anti-nipote, parse rules, i quattro hard-exclude) con il filtro di scopo di questo repo, e il formato del corpo della issue aggregata che la chiusura (`reconcile-followups.mjs`, `identical`) deve poter parsare.",
       "baseline": {
         "site": "ba86d79cae8e91ab",
         "corpus": "22688b9eada13b5c",

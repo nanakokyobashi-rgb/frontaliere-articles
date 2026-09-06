@@ -131,4 +131,41 @@ test('il prompt non ammette item sotto una barra piu\' bassa di quella che li ch
       'punto della regola: conio e chiusura devono usare LO STESSO oracolo, non ' +
       'una sua parafrasi in prosa.',
   );
+  // Il quarto hard-exclude deve avere la sua sezione come gli altri tre: il
+  // prompt la cita per nome, e un rimando che punta al vuoto e' come non averlo
+  // (era lo stato di `## Output` prima di #993).
+  assert.match(
+    FOLLOWUP,
+    /^### Hard-exclude: rischio senza condizione di accettazione$/m,
+    'FOLLOWUP.md: manca la sezione del quarto hard-exclude, che il prompt cita per nome',
+  );
+});
+
+test('la regola misura la Suggested action, non il bullet grezzo', () => {
+  // Il divario che questa clausola chiude, dimostrato con le funzioni vere:
+  // su un testo senza la regione `Suggested action` l'oracolo ricade
+  // sull'INTERO testo, quindi un token che finira' in `Original text` — che la
+  // chiusura esclude per costruzione — ammetterebbe un item gia' non
+  // chiudibile. Ammettere piu' largo di quanto si libera e' la costruzione che
+  // genera la coda immortale, cioe' proprio cio' che la regola combatte.
+  const bulletGrezzo = 'Nessun controllo impedisce che `manifest.counts` resti stale.';
+  const itemConiato = [
+    '- Original text:',
+    '  > Nessun controllo impedisce che `manifest.counts` resti stale.',
+    '- Suggested action: aggiungere un controllo esplicito, da decidere dove',
+  ].join('\n');
+  assert.ok(citedTokens(bulletGrezzo).length > 0, 'premessa: il bullet grezzo sembra citare un token');
+  assert.equal(
+    citedTokens(itemConiato).length,
+    0,
+    'premessa: una volta coniato quel token vale zero, perche\' vive in `Original text`',
+  );
+  assert.match(
+    WORKFLOW,
+    /`Suggested action` CHE STAI PER SCRIVERE/,
+    'post-merge-followup.yml: sparita la clausola che ancora il metro alla ' +
+      '`Suggested action` invece che al bullet grezzo. Senza, il conio torna a ' +
+      'misurare col fallback whole-body e ammette item che la chiusura leggera\' ' +
+      '`no-valid-item`.',
+  );
 });

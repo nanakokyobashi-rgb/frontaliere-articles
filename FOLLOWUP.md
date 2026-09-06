@@ -119,6 +119,33 @@ promemoria** nel commento di chiusura, senza issue e senza fixer.
 **Eccezione:** un item che mescola la verifica con un'edit concreta → solleva la
 parte editabile, normalmente.
 
+### Hard-exclude: rischio senza condizione di accettazione
+
+Droppato **sempre** (ragione: `no-acceptance-condition`), prima del filtro di
+scopo e da qualunque fonte arrivi — in particolare dai bullet di
+`## Adversarial check`, che ne sono la fonte dominante.
+
+Un item entra in coda solo se porta con sé qualcosa che, girando, può provare
+che è stato affrontato: la sua `Suggested action` deve citare fra backtick
+almeno un token con punteggiatura di codice. Un rischio che resta in prosa
+(«nessun gate impedisce un drift futuro») non si può mai provare affrontato —
+nessuna evidenza lo chiuderà — quindi entra e non esce più. Il metro è lo
+stesso della chiusura, `citedTokens()` in
+`scripts/ci/followup-resolution-match.mjs`: ammettere sotto una barra più bassa
+di quella che libera è ciò che produce una coda che non si esaurisce.
+
+**Il metro si applica alla `Suggested action` che stai per scrivere, non al
+bullet grezzo.** Su un testo privo di quella regione l'oracolo ricade
+sull'intero testo, quindi un backtick che finirà in `Original text` — regione
+che la chiusura esclude per costruzione — basterebbe ad ammettere un item già
+non chiudibile. Prima formula l'azione, poi giudica quella.
+
+**Non è una scusa per perdere lavoro azionabile:** se l'item ha un punto
+d'intervento ma la frase non lo cita, **derivalo** (nomina file, simbolo o
+campo) invece di scartare. Lo scarto è per i rischi che un punto d'intervento
+non ce l'hanno. Ciò che viene scartato va nel commento di summary della PR,
+come per la verifica live.
+
 ## Output
 
 Una **sola** issue aggregata per PR, titolo `follow-up(#<PR>): <sintesi>`, con
