@@ -23,6 +23,8 @@ import {
   citedAsMirrorBlocked,
   siteAbsentPaths,
   sitePathMap,
+  strandedTwinPaths,
+  descentBlock,
   SITE_ABSENT_MODES,
   SITE_REPO,
 } from '../../scripts/ci/handoff-to-site.mjs';
@@ -505,4 +507,72 @@ test('#972: il dedup ripara lo stato invece di uscire', async () => {
     const flags = argv.match(/'--(?:add|remove)-label'/g) || [];
     assert.equal(flags.length, 1, `un solo effetto per chiamata, non ${flags.join('+')} in ${argv}`);
   }
+});
+
+// --- #972 item 4: `identical` non implica «trasportato» ---------------------
+
+test('#972: i gemelli che nessun trasporto porta giù sono quelli che il trasporto stesso rifiuta', () => {
+  const stuck = strandedTwinPaths();
+  // I 25 workflow `identical`: `unsafeTarget` li esclude PER SEMPRE dal
+  // trasporto — «il token del ciclo non ha lo scope `workflows`, quei gemelli
+  // restano una copia a mano» — ed è precisamente ciò che un verdetto
+  // `blocked-workflows-scope` nomina.
+  assert.ok(stuck.has('.github/workflows/translate-pending.yml'));
+  // Un gemello `identical` normale scende da solo: non è nell'insieme, e la
+  // chiusura dei `blocked-*` resta quella di sempre.
+  assert.equal(stuck.has('scripts/ci/followup-drainer.mjs'), false);
+  // `engine/` non è qui, e non perché sia trasportabile da questo canale: è
+  // `outOfScope` PROPRIO perché ha il suo (`mirror-articles-engine.yml`).
+  // Trattare `outOfScope` come un blocco direbbe «non scende» dell'unica
+  // famiglia che scende da sempre.
+  for (const p of stuck) assert.ok(!p.startsWith('engine/'), p);
+});
+
+test('#972: descentBlock separa «condiviso» da «scende», e il fixture è un no prudente', () => {
+  assert.equal(descentBlock({ path: 'scripts/ci/followup-drainer.mjs', mode: 'identical' }), null);
+  assert.match(descentBlock({ path: '.github/workflows/translate-pending.yml', mode: 'identical' }), /workflows/);
+  // Un fixture è INCERTO, non trasportabile: il trasporto lo copia solo se i
+  // suoi accoppiamenti locali sono `identical`, e quella domanda vuole l'albero
+  // del repo. Si sbaglia verso il parcheggio, che ha una porta di rientro.
+  assert.match(descentBlock({ path: 'host/tests/shell-contract-functions.golden.json', mode: 'identical' }), /fixture/);
+});
+
+test('#972: un `blocked-*` su un gemello che non scenderà mai consegna ma NON chiude', () => {
+  // Il difetto: la chiusura dei `blocked-*` promette, nel commento che lascia,
+  // «quando la fix scenderà col mirror la condizione non ci sarà più». Per un
+  // workflow `identical` quella frase è falsa — la discesa è una copia a mano —
+  // e la issue chiusa era l'unico posto in cui quella copia risultava dovuta.
+  const body = 'Blocked: il fix va scritto in `.github/workflows/translate-pending.yml` '
+    + 'su valerielinc-ops/frontaliere-si-o-no, gemello `identical` di questo.';
+  const d = handoffDecision({ verdict: 'blocked-workflows-scope', body });
+  assert.equal(d.handoff, true, 'la diagnosi va comunque consegnata: la fix si scrive di là');
+  assert.equal(d.close, false);
+  assert.deepEqual(d.residual, ['.github/workflows/translate-pending.yml']);
+  assert.match(d.reason, /copia a mano/);
+});
+
+test('#972: un `blocked-*` su un gemello che scende chiude come prima', () => {
+  // Nessuna regressione sui 4 casi su 4 misurati: il blocco è mirato ai soli
+  // path che il trasporto rifiuta per sempre, non a tutti gli `identical`.
+  const d = handoffDecision({ verdict: 'blocked-admin-settings', body: MIRROR_BODY });
+  assert.equal(d.close, true);
+  assert.deepEqual(d.residual, []);
+});
+
+test('#972: un `no-root-cause` su un gemello fermo lascia il residuo, non lo assorbe', () => {
+  // Il residuo toglieva TUTTI i path `identical` perché «li porta il mirror».
+  // Per un gemello che nessun canale porta giù il lavoro resta qui (una copia a
+  // mano), e senza residuo il commento di parcheggio non lo nomina.
+  const body = 'Root cause: il concurrency group in `.github/workflows/translate-pending.yml`, '
+    + '`mode: identical`: scriverlo qui verrebbe sovrascritto al mirror successivo.';
+  const d = handoffDecision({ verdict: 'no-root-cause', body });
+  assert.equal(d.handoff, true);
+  assert.equal(d.close, false);
+  assert.deepEqual(d.residual, ['.github/workflows/translate-pending.yml']);
+});
+
+test('#972: manifest illeggibile → nessun blocco alla chiusura, cioè il comportamento di prima', () => {
+  assert.equal(strandedTwinPaths('/dev/null/manifest-che-non-esiste.json').size, 0);
+  const d = handoffDecision({ verdict: 'blocked-admin-settings', body: MIRROR_BODY, stranded: new Set() });
+  assert.equal(d.close, true);
 });
