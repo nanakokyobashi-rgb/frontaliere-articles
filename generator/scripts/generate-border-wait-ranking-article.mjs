@@ -44,6 +44,7 @@ import { corpusPath } from './lib/corpus-paths.mjs';
 import { sanitizeText } from '../../scripts/lib/sanitize-control-chars.mjs';
 import { reportStrippedControlChars } from './lib/control-char-write-report.mjs';
 import { sanitizePromptPlaceholders } from './lib/prompt-placeholder-guard.mjs';
+import { assertTranslationsPassFactualityGates } from './lib/translation-factuality-gate.mjs';
 
 // Scrittura ATOMICA del corpus: temp accanto al target + renameSync.
 // Questi file riscrivono un `content/*.ts` GIA' ESISTENTE (rerun idempotente
@@ -171,6 +172,17 @@ export function refreshBodyFiles(data, repoRoot = REPO_ROOT, log = console.log) 
   // registrazione, e questo `writeFileSync` a ogni refresh successivo. Il guard
   // copriva solo il primo. Fail-closed: ripara il riparabile, lancia sul resto.
   sanitizePromptPlaceholders(data);
+  // Stessa ragione, stesso percorso di scrittura (#980, item 2): il gate
+  // deterministico sui body TRADOTTI gira dentro `registerArticleFiles()`, cioe'
+  // solo alla PRIMA registrazione. Questo rerun riscrive gli stessi quattro body
+  // senza passare di la', quindi senza questa chiamata il testo en/de/fr che
+  // resta su disco a fine giornata e' proprio quello che nessun giudizio ha
+  // visto — e lo step «Guard» del workflow esegue solo article-fabrication-guard
+  // e prompt-placeholder-guard, che sono un'altra famiglia di controlli.
+  // Prima di qualunque scrittura: sul rilievo bloccante lancia, e i body
+  // registrati restano quelli dell'edizione precedente, che un verdetto lo
+  // aveva avuto.
+  assertTranslationsPassFactualityGates(data);
   for (const locale of LOCALES) {
     const dir = path.join(repoRoot, corpusPath('services/locales/blog-body'), locale);
     mkdirSync(dir, { recursive: true });
