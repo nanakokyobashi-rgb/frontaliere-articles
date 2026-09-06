@@ -70,6 +70,7 @@ import {
   vitestFailureIsNotAttributableToPr,
   vitestFailureIsReviewGate,
   reviewSkippedByGuard,
+  reviewAbortedWithoutVerdict,
   jobRefFromCheckRun,
   currentAttemptJobSteps,
 } from './lib/vitestCheck.mjs';
@@ -432,6 +433,11 @@ function guardedReopen(num, head, { stuckRedReason = '' } = {}) {
   // postati e un re-trigger ri-esegue il guard, che salta di nuovo → il
   // one-shot andrebbe speso per un no-op. Non si concede (e lo sticky lo dice).
   const reviewSkipped = reviewGateRed && reviewSkippedByGuard(steps);
+  // Review PARTITA e morta senza postare: il gate è rosso di conseguenza, non
+  // per un verdetto negativo. Il one-shot si concede (il re-trigger è la cura),
+  // ma il messaggio deve mandare a rilanciare la review, non a chiudere un
+  // `🔴 Important` che non è mai stato scritto.
+  const reviewAborted = reviewGateRed && reviewAbortedWithoutVerdict(steps);
   const reviewGateReason = reviewGateRed && !reviewSkipped && !(prior && prior.reviewGateUsed)
     ? 'review-gate' : '';
   const reviewGateUsed = Boolean((prior && prior.reviewGateUsed) || reviewGateReason);
@@ -440,6 +446,7 @@ function guardedReopen(num, head, { stuckRedReason = '' } = {}) {
     failureNotAttributable: stuckRedReason || reviewGateReason,
     reviewGateFailure: reviewGateRed,
     reviewSkippedByGuard: reviewSkipped,
+    reviewAborted,
   });
 
   if (d.action !== 'reopen') {

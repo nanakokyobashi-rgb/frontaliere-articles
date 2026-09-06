@@ -291,6 +291,17 @@ export function vitestFailureIsNotAttributableToPr({
 export const REVIEW_GATE_STEP_NAME = 'Require approving Claude review';
 
 /**
+ * Nome dello step di `tests.yml` che fallisce quando `claude-code-action` è
+ * morta senza postare una review (max_turns, `outcome=failure`, 5xx). Vive qui
+ * accanto agli altri due nomi perché è il terzo pezzo dello stesso
+ * discriminante: dice che il rosso del gate è la CONSEGUENZA di una review mai
+ * conclusa, non un verdetto negativo — vedi `vitestFailureIsReviewGate` e
+ * `reviewAbortedWithoutVerdict`. Pinnato contro il workflow da
+ * `generator/tests/review-step-names.test.mjs`.
+ */
+export const REVIEW_ABORT_STEP_NAME = 'Fail on transient API error (no review posted)';
+
+/**
  * Il rosso del check `vitest (unit + integration)` è il REVIEW GATE e non i
  * test?
  *
@@ -312,6 +323,30 @@ export const REVIEW_GATE_STEP_NAME = 'Require approving Claude review';
  * precondizione normale. Meglio non riciclare una PR riciclabile che riciclare
  * all'infinito una PR coi test rossi (#5896/#5906).
  *
+ * ── L'ECCEZIONE: LA MORTE DELLA REVIEW (#975) ──────────────────────────────
+ * «Un altro step rosso» valeva come prova di «test rotti sotto» finché ogni
+ * altro step del job giudicava il CODICE. Uno non lo fa:
+ * `REVIEW_ABORT_STEP_NAME` fallisce quando `claude-code-action` è morta —
+ * `terminal_reason=max_turns`, `outcome=failure`, 5xx transiente — SENZA
+ * postare un verdetto. In quello stato la co-occorrenza col gate non è un
+ * indizio, è una CONSEGUENZA: nessuna review postata ⇒ nessun `## LGTM` sulla
+ * HEAD ⇒ `Require approving Claude review` fallisce per costruzione. I test
+ * sono verdi (la catena è fail-fast: col rosso dei test `Resolve PR` non gira
+ * e il gate resta `skipped`, non `failure`), e lo step morto scrive lui stesso
+ * sulla PR «rilancia il run di `tests` più recente». Negare lì il one-shot
+ * significa negarlo proprio dove il re-trigger È la cura, e far dire allo
+ * sticky «serve far passare i test» a una PR coi test verdi.
+ *
+ * ── PERCHÉ UNA WHITELIST DI UN NOME E NON UN ALLENTAMENTO ──────────────────
+ * Misura sulle ultime 60 run `tests` fallite (2026-09-06): 43 hanno il review
+ * gate rosso e in ZERO di esse un secondo step è fallito. `Generator CI gate`
+ * è fallito 2 volte, entrambe insieme a `Unit + closure gates` — cioè su
+ * codice davvero rotto, dove negare il one-shot è giusto: un re-trigger non
+ * ripara `generator-ci`. La co-occorrenza è quindi l'eccezione, non la norma,
+ * e non giustifica un discriminante generico. L'unico caso in cui è
+ * STRUTTURALE è la morte della review, e si nomina per identità. Tutto il
+ * resto resta fail-CLOSED com'era.
+ *
  * Pura: nessuna I/O. Il chiamante fetcha gli step e rende l'azione one-shot.
  *
  * @param {Array<{name?: string, conclusion?: string}>} steps `.steps` di
@@ -324,9 +359,39 @@ export function vitestFailureIsReviewGate(steps) {
   for (const s of steps) {
     if (!s || s.conclusion !== 'failure') continue;
     if (s.name === REVIEW_GATE_STEP_NAME) gateFailed = true;
-    else return false; // un altro step rosso: non è (solo) il gate.
+    // La morte della review NON è un secondo rosso indipendente: è la CAUSA
+    // del rosso del gate. Vedi «L'ECCEZIONE» sopra.
+    else if (s.name !== REVIEW_ABORT_STEP_NAME) return false;
   }
   return gateFailed;
+}
+
+/**
+ * Il rosso del review gate viene da una review MORTA senza postare, non da un
+ * verdetto negativo?
+ *
+ * Stessa lista di step delle altre due domande, terzo discriminante: lo step
+ * `REVIEW_ABORT_STEP_NAME` è `failure`. È il complemento di
+ * `reviewSkippedByGuard` — lì la review non è partita e il re-trigger è un
+ * no-op; qui è partita, è morta, e il re-trigger è esattamente ciò che le dà
+ * un'altra possibilità. Serve al chiamante per NOMINARE la causa vera
+ * all'operatore: «manca un `## LGTM`» e «la review è morta a metà» chiedono
+ * due azioni diverse.
+ *
+ * Fail-CLOSED come le altre: senza un `REVIEW_GATE_STEP_NAME` in `failure`
+ * risponde `false`.
+ *
+ * Pura: nessuna I/O.
+ *
+ * @param {Array<{name?: string, conclusion?: string}>} steps
+ * @returns {boolean}
+ */
+export function reviewAbortedWithoutVerdict(steps) {
+  if (!Array.isArray(steps) || steps.length === 0) return false;
+  const gate = steps.find((s) => s && s.name === REVIEW_GATE_STEP_NAME);
+  if (!gate || gate.conclusion !== 'failure') return false;
+  const abort = steps.find((s) => s && s.name === REVIEW_ABORT_STEP_NAME);
+  return Boolean(abort && abort.conclusion === 'failure');
 }
 
 /**
