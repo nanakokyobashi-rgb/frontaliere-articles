@@ -16374,7 +16374,7 @@ if (invokedDirectly) {
   // lib/exhaustion-disposition.mjs, senza una seconda strumentazione.
   //
   // PERCHE' STA SOPRA I RAMI E NON DENTRO QUELLO DI DIFFERIMENTO. Registrarlo
-  // dentro `if (isQuotaExhaustedError(e))`, cioe' SOTTO il veto, lo rendeva
+  // dentro il ramo di differimento, cioe' SOTTO il veto, lo rendeva
   // cieco esattamente sulla popolazione per cui la card esiste:
   // `isInputCapDeferralVeto` esce con `exitAfterFlush(EXIT_ROSTER_CANNOT_SERVE_PROMPT)`
   // e si accende quando il netto NON e' in maggioranza transitoria — cioe' sul

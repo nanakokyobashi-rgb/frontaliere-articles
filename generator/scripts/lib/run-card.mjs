@@ -165,13 +165,46 @@ export function writeRunCard(file, report) {
  * L'aggregato su N card. Vive qui e non nel reporter perche' e' la parte
  * testabile: il reporter fa rete (scarica gli artifact), questa funzione no.
  *
- * `runsWithEchoes` e' il campo per cui #832 esisteva. La soglia `>` contro `>=`
- * del guardrail di maggioranza si taglia sulle cascate in cui gli echi tolti si
- * AVVICINANO alle righe rimaste; una finestra in cui `providerCooldownSkips` e'
- * sempre 0 non contiene nemmeno un campione utile, e senza questo campo lo si
- * scambia per «la soglia non cambierebbe niente» (esattamente il flip 0/28 del
- * 2026-09-05). `nearParity` conta i campioni in cui la parita' e' davvero in
- * gioco: e' il numeratore che sblocca la decisione, non lo share medio.
+ * ── I DUE NUMERI CHE NON SONO LO STESSO NUMERO (#924 item 2) ───────────────
+ *
+ * `runsWithEchoes` e' il campo per cui #832 esisteva: quante cascate avessero
+ * DAVVERO degli echi di cooldown, perche' una finestra in cui
+ * `providerCooldownSkips` e' sempre 0 non contiene nemmeno un campione utile e
+ * senza questo campo la si scambia per «la soglia non cambierebbe niente»
+ * (esattamente il flip 0/28 del 2026-09-05). Resta contato sugli echi
+ * DICHIARATI dal breakdown, perche' quella e' la domanda che risponde: il
+ * fenomeno c'e' o non c'e'.
+ *
+ * Ma non e' il numero su cui le soglie si tagliano, e la prima stesura le
+ * confondeva: calcolava `remaining = grossTotal - echiDichiarati`, una
+ * sottrazione LINEARE che `deferralTally` non fa. Li' gli echi si clampano al
+ * proprio secchio, la parte non attribuita entra solo se ci sta nella massa
+ * ambigua (altrimenti vale zero), e il totale netto e' cio' che resta dopo quei
+ * clamp. Conseguenza misurata: `{transient: 53, persistent: 53, total: 106,
+ * providerCooldownSkips: {total: 53}}` sembrava «la parita' esatta» mentre il
+ * predicato sottrae ZERO righe — e viceversa una cascata dove la sottrazione
+ * morde davvero poteva restare fuori dal conteggio. Il numero su cui si sarebbe
+ * deciso di spostare un exit code di produzione da `>` a `>=` non era il numero
+ * su cui l'exit code si decide.
+ *
+ * Ora i tre campi di parita' leggono `qd.share`, cioe' l'output di
+ * `quotaDeferralShare` — gli STESSI numeri su cui i predicati hanno votato,
+ * gia' dentro la card. Nessuna aritmetica riscritta qui (AGENTS.md #6):
+ *
+ *   `echoesSubtracted`   quante cascate hanno righe DAVVERO sottratte
+ *                        (`share.providerCooldownSkips > 0`). E' la
+ *                        popolazione su cui una soglia puo' tagliare: le altre
+ *                        dichiarano echi che il tally non colloca.
+ *   `nearParity`         |echi netti - totale netto| <= 1, cioe' il guardrail
+ *                        `providerCooldownSkips > total` di
+ *                        `isLegitimateQuotaDeferral`.
+ *   `nearMajorityTie`    |transitorio netto - persistente netto| <= 1, cioe'
+ *                        il `wins()` di `isTransientMajority`, il `>` che
+ *                        #357/#767 hanno invertito sul solo pareggio.
+ *
+ * Una card senza `share` numerica non viene fatta sparire in silenzio: si conta
+ * in `cascadesWithoutTally`, per la stessa ragione per cui `readCards` conta le
+ * card illeggibili.
  *
  * @param {Array<any>} cards
  */
@@ -186,12 +219,21 @@ export function summariseRunCards(cards) {
     // #804 / #787 — lo share transitorio su run reali.
     deferralCascades: 0,
     deferralAccepted: 0,
+    // #924 item 1 — le cascate uscite dal veto input-cap, cioe' quelle in cui
+    // `verdict` NON e' l'esito che la run ha applicato. Prima erano assenti
+    // dalla card per costruzione: il veto esce sopra il punto in cui la card
+    // veniva scritta.
+    inputCapVetoed: 0,
     shares: [],
-    // #832 item 2 — i soli campioni su cui la parita' decide qualcosa.
+    // #832 item 2 — «il fenomeno c'e'?» e «su quante la soglia taglia?».
     runsWithEchoes: 0,
+    echoesSubtracted: 0,
     nearParity: 0,
+    nearMajorityTie: 0,
+    cascadesWithoutTally: 0,
     samples: [],
   };
+  const num = (v) => (Number.isFinite(Number(v)) ? Number(v) : null);
   for (const c of list) {
     if (!c || typeof c !== 'object') continue;
     if (c.schema !== RUN_CARD_SCHEMA) { out.unknownSchema += 1; continue; }
@@ -202,30 +244,50 @@ export function summariseRunCards(cards) {
     if (!qd || typeof qd !== 'object') continue;
     out.deferralCascades += 1;
     if (qd.verdict === true) out.deferralAccepted += 1;
+    if (qd.inputCapVeto === true) out.inputCapVetoed += 1;
     const share = qd.share && typeof qd.share === 'object' ? qd.share : {};
     if (Number.isFinite(Number(share.share))) out.shares.push(Number(share.share));
-    // Gli echi DICHIARATI dal produttore, non quelli ricostruiti: e' il numero
-    // che `deferralTally` sottrae, ed e' quello su cui la parita' si misura.
+    // Gli echi DICHIARATI dal produttore: rispondono a «il fenomeno c'e'».
     const b = qd.breakdown && typeof qd.breakdown === 'object' ? qd.breakdown : {};
     const echoDecl = (b.providerCooldownSkips && typeof b.providerCooldownSkips === 'object')
       ? Math.max(0, Number(b.providerCooldownSkips.total) || 0)
       : 0;
     const grossTotal = Math.max(0, Number(b.total) || 0);
-    const remaining = Math.max(0, grossTotal - echoDecl);
-    if (echoDecl > 0) {
-      out.runsWithEchoes += 1;
-      // «Vicino alla parita'» = la sottrazione lascia in piedi un campione della
-      // stessa taglia degli echi tolti, cioe' il caso in cui un voto ribalta il
-      // verdetto. Tolleranza 1 e non 0: la parita' esatta e' un punto e non si
-      // aspetta un punto.
-      if (Math.abs(echoDecl - remaining) <= 1) out.nearParity += 1;
+    if (echoDecl > 0) out.runsWithEchoes += 1;
+    // ...e i numeri del PREDICATO: quelli su cui le due soglie decidono.
+    const netEchoes = num(share.providerCooldownSkips);
+    const netTotal = num(share.total);
+    const netTransient = num(share.transient);
+    const netPersistent = num(share.persistent);
+    if (netEchoes === null || netTotal === null || netTransient === null || netPersistent === null) {
+      out.cascadesWithoutTally += 1;
+      continue;
+    }
+    if (netEchoes > 0) {
+      out.echoesSubtracted += 1;
+      // «Vicino alla parita'» = un voto sposta il verdetto. Tolleranza 1 e non
+      // 0: la parita' esatta e' un punto e non si aspetta un punto.
+      if (Math.abs(netEchoes - netTotal) <= 1) out.nearParity += 1;
+    }
+    // Solo dove il voto esiste: con entrambi i secchi netti a zero non e'
+    // rimasta una riga indipendente, e `transientMajorityVerdict` esce dal
+    // pavimento senza mai arrivare al confronto — contarla come «pareggio»
+    // gonfierebbe il numeratore con le cascate su cui la soglia non decide.
+    if (netTransient + netPersistent > 0 && Math.abs(netTransient - netPersistent) <= 1) {
+      out.nearMajorityTie += 1;
+    }
+    if (echoDecl > 0 || netEchoes > 0) {
       out.samples.push({
         runId: c.runId,
         section: c.section,
         echoes: echoDecl,
-        remaining,
+        netEchoes,
+        remaining: netTotal,
+        netTransient,
+        netPersistent,
         grossTotal,
         verdict: qd.verdict === true,
+        inputCapVeto: qd.inputCapVeto === true,
       });
     }
   }

@@ -34,7 +34,8 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { buildRunCard, summariseRunCards, writeRunCard, RUN_CARD_SCHEMA } from '../scripts/lib/run-card.mjs';
-import { readCards, ARTIFACT_GLOB } from '../../scripts/ci/run-card-report.mjs';
+import { readCards, ARTIFACT_GLOB, classifyDownloadFailure } from '../../scripts/ci/run-card-report.mjs';
+import { isLegitimateQuotaDeferral, quotaDeferralShare } from '../scripts/lib/exhaustion-disposition.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const read = (rel) => fs.readFileSync(path.join(ROOT, rel), 'utf8');
@@ -71,53 +72,130 @@ test('buildRunCard non esplode su un report degenere', () => {
 
 // ── 2. L'aggregato tiene separati «non e' successo» e «non l'ho visto» ──────
 
-const cardWith = (echoTotal, total, transient, verdict) => ({
-  schema: RUN_CARD_SCHEMA,
-  runId: `r${echoTotal}-${total}`,
-  section: 'frontaliere',
-  status: 'error',
-  endedAt: null,
-  rebracket: { calls: 0, viaFallbackUnsat: 0 },
-  quotaDeferral: {
-    breakdown: { transient, persistent: total - transient, total, providerCooldownSkips: { total: echoTotal } },
-    share: { transient, total, share: total > 0 ? transient / total : 0, required: 0.5 },
-    verdict,
-  },
-});
+/**
+ * La card COME LA SCRIVE `create-article.mjs`: `share` non e' un letterale
+ * scritto a mano ma l'output di `quotaDeferralShare`, e `verdict` quello di
+ * `isLegitimateQuotaDeferral`. E' il punto di #924 item 2: la parita' si misura
+ * sui numeri del PREDICATO, e un fixture che se li inventa lascia passare
+ * proprio l'errore da cui la issue nasce — `deferralTally` clampa gli echi al
+ * proprio secchio e scarta quelli non attribuiti che nella massa ambigua non ci
+ * stanno, quindi «echi dichiarati» e «echi sottratti» divergono.
+ */
+const cardWith = (echoTotal, total, transient, echoSplit = {}) => {
+  const breakdown = {
+    transient,
+    persistent: total - transient,
+    total,
+    providerCooldownSkips: { total: echoTotal, ...echoSplit },
+  };
+  const err = { code: 'ALL_MODELS_EXHAUSTED', exhaustionBreakdown: breakdown };
+  return {
+    schema: RUN_CARD_SCHEMA,
+    runId: `r${echoTotal}-${total}`,
+    section: 'frontaliere',
+    status: 'error',
+    endedAt: null,
+    rebracket: { calls: 0, viaFallbackUnsat: 0 },
+    quotaDeferral: {
+      breakdown,
+      share: quotaDeferralShare(err),
+      verdict: isLegitimateQuotaDeferral(err),
+      inputCapVeto: false,
+    },
+  };
+};
 
 test('summariseRunCards conta le cascate CON echi, non solo i flip (#832)', () => {
   // La finestra del 2026-09-05: 3 cascate confrontabili, tutte con echi=0.
-  const senzaFenomeno = [cardWith(0, 106, 53, false), cardWith(0, 40, 30, true), cardWith(0, 12, 2, false)];
+  const senzaFenomeno = [cardWith(0, 106, 53), cardWith(0, 40, 30), cardWith(0, 12, 2)];
   const s = summariseRunCards(senzaFenomeno);
   assert.equal(s.deferralCascades, 3);
   // IL PUNTO. Le tre cascate non dicono niente sulla soglia `>` contro `>=`:
   // nessuna ha echi da togliere. Un riepilogo che mostrasse solo `deferralCascades`
   // farebbe leggere «3 campioni, nessun flip» dove i campioni utili sono ZERO.
   assert.equal(s.runsWithEchoes, 0);
+  assert.equal(s.echoesSubtracted, 0);
   assert.equal(s.nearParity, 0);
   assert.deepEqual(s.samples, []);
 });
 
 test('summariseRunCards isola i campioni in cui la parita decide (#832 item 2)', () => {
+  // 53 echi DICHIARATI su un breakdown con massa ambigua zero: nessuno di essi
+  // e' attribuibile a un secchio, quindi `deferralTally` non ne toglie NEMMENO
+  // UNO. La prima stesura calcolava `remaining = 106 - 53` e leggeva «53 contro
+  // 53, la parita' esatta» su una cascata in cui la sottrazione non morde: il
+  // numero su cui si sarebbe deciso `>` contro `>=` non era quello su cui
+  // l'exit code si decide (#924 item 2).
+  const dichiaratiMaNonSottratti = cardWith(53, 106, 53);
+  assert.equal(dichiaratiMaNonSottratti.quotaDeferral.share.providerCooldownSkips, 0);
+
+  // Qui invece gli echi sono ATTRIBUITI ai due secchi, quindi il tally li
+  // toglie davvero: 20 tolti, 20 rimasti — la parita' del guardrail
+  // `providerCooldownSkips > total`, dove `>` contro `>=` cambia il verdetto.
+  const sottrattiInParita = cardWith(20, 40, 20, { transient: 10, persistent: 10 });
+  const qd = sottrattiInParita.quotaDeferral.share;
+  assert.equal(qd.providerCooldownSkips, 20);
+  assert.equal(qd.total, 20);
+
   const cards = [
-    cardWith(0, 106, 53, false),   // niente echi: inutile per la soglia
-    cardWith(53, 106, 53, true),   // 53 tolti contro 53 rimaste: LA parita' esatta
-    cardWith(54, 107, 53, true),   // 54 contro 53: dentro la tolleranza di uno
-    cardWith(11, 106, 53, false),  // 11 contro 95: echi presenti ma lontani
+    cardWith(0, 106, 53),          // niente echi: inutile per la soglia
+    dichiaratiMaNonSottratti,      // echi dichiarati, zero sottratti
+    sottrattiInParita,             // LA parita' del guardrail
+    cardWith(12, 106, 53, { transient: 6, persistent: 6 }), // echi presenti ma lontani
   ];
   const s = summariseRunCards(cards);
   assert.equal(s.deferralCascades, 4);
+  // «Il fenomeno c'e'» resta contato sugli echi dichiarati: e' la domanda a cui
+  // `runsWithEchoes` risponde, ed e' quella che il flip 0/28 non poteva porre.
   assert.equal(s.runsWithEchoes, 3);
-  assert.equal(s.nearParity, 2);
-  assert.equal(s.samples.length, 3);
-  assert.deepEqual(
-    s.samples.map((x) => [x.echoes, x.remaining]),
-    [[53, 53], [54, 53], [11, 95]],
-  );
+  // Ma la soglia si taglia solo dove la sottrazione avviene davvero.
+  assert.equal(s.echoesSubtracted, 2);
+  assert.equal(s.nearParity, 1, 'solo la cascata con 20 echi sottratti su 20 righe nette e in parita');
+  // E il pareggio del VOTO e' un'altra popolazione ancora — i due secchi netti,
+  // non gli echi contro il totale. Qui sono tutte e quattro (53/53, 53/53,
+  // 10/10, 47/47): una cascata puo' essere lontanissima dalla parita' del
+  // guardrail e stare esattamente sul pareggio del voto, ed e' il motivo per
+  // cui i due numeri non possono essere lo stesso campo.
+  assert.equal(s.nearMajorityTie, 4);
+});
+
+test('summariseRunCards non conta come pareggio una cascata senza prove nette', () => {
+  // Cinque fratelli saltati dallo stesso host: entrambi i secchi netti a zero,
+  // cioe' il PAVIMENTO di `transientMajorityVerdict`, che esce prima di
+  // arrivare al confronto. `|0 - 0| <= 1` e' vero e non significa niente:
+  // contarlo gonfierebbe il numeratore con le cascate su cui nessuna soglia
+  // decide.
+  const s = summariseRunCards([cardWith(5, 5, 5, { transient: 5 })]);
+  assert.equal(s.deferralCascades, 1);
+  assert.equal(s.nearMajorityTie, 0);
+});
+
+test('summariseRunCards conta le card senza tally invece di farle sparire', () => {
+  // Una card scritta da un produttore precedente non ha `share` numerica: non
+  // puo' entrare nei conteggi di parita', e non puo' nemmeno uscirne in
+  // silenzio — sarebbe di nuovo un denominatore che non dice cosa non ha visto.
+  const vecchia = cardWith(4, 10, 5, { transient: 2, persistent: 2 });
+  vecchia.quotaDeferral.share = { required: 0.5 };
+  const s = summariseRunCards([vecchia]);
+  assert.equal(s.deferralCascades, 1);
+  assert.equal(s.cascadesWithoutTally, 1);
+  assert.equal(s.nearParity, 0);
+  assert.equal(s.nearMajorityTie, 0);
+});
+
+test('summariseRunCards conta le cascate VETATE su input cap (#924 item 1)', () => {
+  // Il veto esce sopra il ramo di differimento: `verdict` (il voto di
+  // `isLegitimateQuotaDeferral`) NON e' l'esito che la run ha applicato, e
+  // senza questo campo un campione vetato si leggerebbe come un differimento.
+  const vetata = cardWith(12, 106, 53, { transient: 6, persistent: 6 });
+  vetata.quotaDeferral.inputCapVeto = true;
+  const s = summariseRunCards([vetata, cardWith(0, 40, 30)]);
+  assert.equal(s.inputCapVetoed, 1);
+  assert.equal(s.samples[0].inputCapVeto, true);
 });
 
 test('summariseRunCards non fa sparire una card di schema ignoto', () => {
-  const s = summariseRunCards([{ schema: 'run-card/99', rebracket: { calls: 3 } }, cardWith(0, 10, 5, true)]);
+  const s = summariseRunCards([{ schema: 'run-card/99', rebracket: { calls: 3 } }, cardWith(0, 10, 5)]);
   assert.equal(s.unknownSchema, 1);
   // Non contata fra le buone: un produttore piu' nuovo del lettore deve
   // comparire come tale, non come uno zero.
@@ -128,7 +206,7 @@ test('summariseRunCards non fa sparire una card di schema ignoto', () => {
 test('readCards legge le card da una cartella di artifact scaricati', () => {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'run-card-test-'));
   fs.mkdirSync(path.join(dir, '123'), { recursive: true });
-  fs.writeFileSync(path.join(dir, '123', 'run-card-frontaliere.json'), JSON.stringify(cardWith(2, 10, 5, true)));
+  fs.writeFileSync(path.join(dir, '123', 'run-card-frontaliere.json'), JSON.stringify(cardWith(2, 10, 5)));
   fs.writeFileSync(path.join(dir, '123', 'run-card-svizzera.json'), '{ rotta');
   fs.writeFileSync(path.join(dir, '123', 'attempt.log'), 'non e una card');
   const { cards, unreadable } = readCards(dir);
@@ -136,6 +214,31 @@ test('readCards legge le card da una cartella di artifact scaricati', () => {
   // Una card corrotta si CONTA: farla sparire ricrea lo stesso difetto, un
   // denominatore che non dice cosa non ha visto.
   assert.equal(unreadable, 1);
+});
+
+test('classifyDownloadFailure separa «nessun artifact» da un guasto di gh (#924 item 3)', () => {
+  // IL DIFETTO. Il `catch` del downloader contava come `missing` qualunque
+  // uscita non-zero di `gh`: token scaduto, 403, rate-limit, rete. Con un token
+  // scaduto il report stampava «run senza artifact: 40 · card lette: 0» seguito
+  // da «non e' "la soglia non cambierebbe niente": e' "il fenomeno non c'e'"» —
+  // lo zero muto che questo strumento esiste per togliere, con sopra la sua
+  // interpretazione sbagliata.
+  assert.equal(
+    classifyDownloadFailure({ stderr: 'no artifact matches any of the names or zip globs' }).kind,
+    'no-artifact',
+  );
+  assert.equal(classifyDownloadFailure({ stderr: 'no valid artifacts found to download' }).kind, 'no-artifact');
+  for (const err of [
+    { stderr: 'HTTP 403: Resource not accessible by integration' },
+    { stderr: 'API rate limit exceeded for user ID 1' },
+    { stderr: 'error connecting to api.github.com' },
+    { code: 'ENOENT', message: 'spawnSync gh ENOENT' },
+    {},
+  ]) {
+    const c = classifyDownloadFailure(err);
+    assert.equal(c.kind, 'error', `${JSON.stringify(err)} non e un artifact assente`);
+    assert.ok(c.reason.length > 0, 'un errore senza causa leggibile e di nuovo uno zero muto');
+  }
 });
 
 // ── 2bis. La card atterra DOVE le si dice, non altrove ──────────────────────
@@ -249,6 +352,38 @@ test('create-article.mjs emette la card solo se RUN_CARD_FILE e definita', () =>
     !/RUN_CARD_FILE\s*\|\|\s*['"]/.test(src),
     'RUN_CARD_FILE non deve avere un default: scriverebbe file nel workspace, che lo step di generazione porta in commit con `git add -A`',
   );
+});
+
+test('il campione di deferral viene registrato SOPRA il veto input-cap (#924 item 1)', () => {
+  // Il veto esce con `exitAfterFlush(EXIT_ROSTER_CANNOT_SERVE_PROMPT)` e si
+  // accende quando il netto NON e' in maggioranza transitoria — cioe' sul
+  // PAREGGIO, che e' esattamente il campione su cui la soglia `>` contro `>=`
+  // di #832 item 2 decide qualcosa. Finche' `rareEvents.quotaDeferral` veniva
+  // assegnato DOPO quel ramo, la card era cieca proprio sulla popolazione per
+  // cui esiste, e il riepilogo rispondeva «zero cascate con echi» su finestre
+  // che quei campioni li contenevano.
+  //
+  // Il vincolo e' sull'ORDINE nella sorgente perche' `create-article.mjs` non
+  // e' importabile (761 KB, rete alla prima riga): e' lo stesso metodo con cui
+  // gli altri test di questo file osservano il cablaggio.
+  // Sulla sorgente SENZA commenti: un ordine dedotto anche dalla prosa si
+  // rompe alla prima riga di commento che nomina un ramo — e' successo mentre
+  // si scriveva questo fix, ed e' la stessa trappola che `run-card.mjs`
+  // documenta a proposito del censimento di `corpus-write-atomic.test.mjs`.
+  const src = read('generator/scripts/create-article.mjs')
+    .split('\n').filter((l) => !l.trim().startsWith('//')).join('\n');
+  const record = src.indexOf('RUN_REPORT.rareEvents.quotaDeferral = {');
+  const veto = src.indexOf('if (isInputCapDeferralVeto(e)) {');
+  const floor = src.indexOf('if (isPromptFloorIrreducible(e)) {');
+  assert.ok(record > 0, 'la cascata di esaurimento deve essere registrata nella card');
+  assert.ok(veto > 0 && floor > 0, 'i due rami che escono prima del differimento devono esistere');
+  assert.ok(record < veto, 'il campione registrato sotto il veto e cieco proprio sui pareggi');
+  assert.ok(record < floor, 'anche il ramo del pavimento esce senza passare dal differimento');
+  // E il campione deve dire QUALE ramo ha applicato l'esito: senza
+  // `inputCapVeto`, `verdict` (il voto di `isLegitimateQuotaDeferral`) verrebbe
+  // letto come l'esito della run anche sulle cascate vetate, che quel voto non
+  // lo applicano mai.
+  assert.match(src.slice(record, record + 400), /inputCapVeto: isInputCapDeferralVeto\(e\)/);
 });
 
 test('la card viene scritta dentro la cartella che l upload porta fuori', () => {

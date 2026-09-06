@@ -60,6 +60,39 @@ export const DEFAULT_REPO = process.env.RUN_CARD_REPO || 'nanakokyobashi-rgb/fro
  */
 export const ARTIFACT_GLOB = 'generate-article-diagnostics-*';
 
+/**
+ * ── «NESSUN ARTIFACT» NON E' «NON SONO RIUSCITO A GUARDARE» (#924 item 3) ───
+ *
+ * `gh run download` esce non-zero per cause che non hanno niente in comune:
+ * la run non ha quell'artifact (un DATO: le run precedenti al merge della
+ * strumentazione stanno tutte qui), oppure la retention e' scaduta, il token e'
+ * scaduto, il rate-limit ha morso, la rete e' caduta (un GUASTO DELLO
+ * STRUMENTO). Contarle insieme come `missing` produce la frase piu' pericolosa
+ * che questo report possa stampare: «run senza artifact: 40 · card lette: 0»
+ * seguita da «non e' "la soglia non cambierebbe niente": e' "il fenomeno non
+ * c'e'"» — cioe' lo zero muto che lo strumento esiste per togliere, spostato di
+ * un livello e per giunta accompagnato dalla sua interpretazione sbagliata.
+ *
+ * La classificazione e' sul TESTO di `gh`, e la direzione del dubbio e' quella
+ * del resto del ciclo: solo un messaggio che dice esplicitamente «non ci sono
+ * artifact» vale `missing`; tutto il resto e' un errore dello strumento, che va
+ * contato a parte e mostrato con la sua causa.
+ *
+ * @param {any} err l'errore di `execFileSync`
+ * @returns {{kind:'no-artifact'|'error',reason:string}}
+ */
+export function classifyDownloadFailure(err) {
+  const text = [
+    err && err.stderr, err && err.stdout, err && err.message,
+  ].map((x) => (x == null ? '' : String(x))).join('\n');
+  if (/no artifact|no valid artifacts|no artifacts found|artifact not found/i.test(text)) {
+    return { kind: 'no-artifact', reason: 'nessun artifact corrispondente' };
+  }
+  if (err && err.code === 'ENOENT') return { kind: 'error', reason: '`gh` non installato (ENOENT)' };
+  const firstLine = text.split('\n').map((l) => l.trim()).filter(Boolean)[0] || 'causa non riportata da gh';
+  return { kind: 'error', reason: firstLine.slice(0, 160) };
+}
+
 function gh(args, opts = {}) {
   return execFileSync('gh', args, { encoding: 'utf8', maxBuffer: 64 * 1024 * 1024, ...opts });
 }
@@ -93,23 +126,56 @@ export function readCards(dir) {
 
 function formatSummary(s, meta) {
   const lines = [];
-  lines.push(`run esaminate: ${meta.runs}  ·  card lette: ${s.cards}  ·  run senza artifact: ${meta.missing}  ·  card illeggibili: ${meta.unreadable}`);
+  lines.push(
+    `run esaminate: ${meta.runs}  ·  card lette: ${s.cards}  ·  run senza artifact: ${meta.missing}`
+    + `  ·  download falliti: ${meta.downloadErrors || 0}  ·  card illeggibili: ${meta.unreadable}`,
+  );
+  // I download falliti NON sono «run senza card»: sono run che nessuno ha
+  // guardato. Vanno stampati PRIMA dei numeri, perche' ogni zero qui sotto si
+  // legge solo con questo accanto (#924 item 3).
+  if (meta.downloadErrors) {
+    lines.push(`⚠️  ${meta.downloadErrors} run NON esaminate: \`gh\` e' fallito per una causa diversa da «nessun artifact».`);
+    for (const [reason, n] of Object.entries(meta.downloadErrorReasons || {})) {
+      lines.push(`      ${n}×  ${reason}`);
+    }
+    lines.push('      Finche\' questo numero non e\' zero, ogni conteggio sotto e\' un LIMITE INFERIORE, non una misura.');
+  }
   if (s.unknownSchema) lines.push(`⚠️  card con schema sconosciuto: ${s.unknownSchema} — un produttore piu' nuovo di questo lettore.`);
   lines.push('');
   lines.push(`#621  [prompt-rebracket]: ${s.rebracketViaFallbackUnsat} viaFallbackUnsat su ${s.rebracketCalls} ri-bracketing eseguiti`);
-  lines.push(`#804  cascate di esaurimento con breakdown: ${s.deferralCascades}  ·  differimenti accettati: ${s.deferralAccepted}`);
+  lines.push(`#804  cascate di esaurimento con breakdown: ${s.deferralCascades}  ·  differimenti accettati: ${s.deferralAccepted}  ·  vetate su input cap: ${s.inputCapVetoed}`);
   if (s.shares.length) {
     const sorted = [...s.shares].sort((a, b) => a - b);
     const med = sorted[Math.floor(sorted.length / 2)];
     lines.push(`      share transitorio — min ${(sorted[0] * 100).toFixed(1)}%  mediana ${(med * 100).toFixed(1)}%  max ${(sorted[sorted.length - 1] * 100).toFixed(1)}%  (soglia 50,0%)`);
   }
-  lines.push(`#832  cascate CON echi di cooldown: ${s.runsWithEchoes}  ·  di cui vicine alla parita' (|echi - rimaste| <= 1): ${s.nearParity}`);
-  if (!s.runsWithEchoes) {
-    lines.push('      → zero campioni utili: la soglia `>` contro `>=` NON e\' misurabile su questa finestra.');
-    lines.push('        Non e\' «la soglia non cambierebbe niente»: e\' «il fenomeno non c\'e\'». Allargare --runs o riprovare dopo una notte di quota vera con un provider in cooldown.');
+  lines.push(`#832  cascate CON echi dichiarati: ${s.runsWithEchoes}  ·  con echi DAVVERO sottratti dal tally: ${s.echoesSubtracted}`);
+  // Le due soglie `>` contro `>=` sono due, e si tagliano su popolazioni
+  // diverse: il guardrail di eco-dominanza (`providerCooldownSkips > total`) e
+  // il voto di maggioranza (`wins(netTransient, netPersistent)`). Un numero
+  // solo ne descriverebbe una e verrebbe letto per l'altra.
+  lines.push(`      vicine alla parita' del guardrail (|echi netti - totale netto| <= 1): ${s.nearParity}`);
+  lines.push(`      vicine al pareggio del voto (|transitorio netto - persistente netto| <= 1): ${s.nearMajorityTie}`);
+  if (s.cascadesWithoutTally) {
+    lines.push(`      ⚠️  ${s.cascadesWithoutTally} cascate senza \`share\` numerica: card di un produttore precedente, escluse dai due conteggi sopra.`);
+  }
+  if (!s.echoesSubtracted) {
+    if (meta.downloadErrors || s.cards === 0) {
+      // Qui lo zero NON e' un'affermazione sul fenomeno: e' l'assenza di
+      // osservazione. Dirlo e' l'intero motivo per cui questo strumento esiste.
+      lines.push('      → zero campioni utili E lo strumento non ha guardato tutto: questa finestra non dice NIENTE sulla soglia.');
+      lines.push('        Riparare prima i download falliti (token, retention, rate-limit), poi rileggere.');
+    } else {
+      lines.push('      → zero campioni utili: la soglia `>` contro `>=` NON e\' misurabile su questa finestra.');
+      lines.push('        Non e\' «la soglia non cambierebbe niente»: e\' «il fenomeno non c\'e\'». Allargare --runs o riprovare dopo una notte di quota vera con un provider in cooldown.');
+    }
   }
   for (const x of s.samples.slice(0, 10)) {
-    lines.push(`      campione run ${x.runId} (${x.section || '?'}): echi ${x.echoes} vs rimaste ${x.remaining} su ${x.grossTotal} lorde — verdetto ${x.verdict ? 'differito' : 'rosso'}`);
+    lines.push(
+      `      campione run ${x.runId} (${x.section || '?'}): echi dichiarati ${x.echoes} · sottratti ${x.netEchoes}`
+      + ` · netto ${x.netTransient} vs ${x.netPersistent} su ${x.remaining} (lorde ${x.grossTotal})`
+      + ` — verdetto ${x.verdict ? 'differito' : 'rosso'}${x.inputCapVeto ? ', VETATO su input cap' : ''}`,
+    );
   }
   return lines.join('\n');
 }
@@ -124,6 +190,8 @@ async function main() {
   let dir;
   let runs = 0;
   let missing = 0;
+  let downloadErrors = 0;
+  const downloadErrorReasons = new Map();
 
   if (dIdx >= 0) {
     dir = argv[dIdx + 1];
@@ -150,19 +218,38 @@ async function main() {
         // Pattern sul NOME dell'artifact — vedi ARTIFACT_GLOB. La selezione
         // delle card avviene dopo, su disco, con collectCardFiles().
         gh(['run', 'download', String(id), '--repo', repo, '-p', ARTIFACT_GLOB, '-D', path.join(dir, String(id))], { stdio: 'pipe' });
-      } catch {
-        // Nessun artifact, o nessuna card dentro: e' un dato, non un errore.
-        // Le run precedenti al merge della strumentazione stanno tutte qui.
-        missing += 1;
+      } catch (e) {
+        // Vedi classifyDownloadFailure: «questa run non ha l'artifact» e' un
+        // dato (le run precedenti al merge della strumentazione stanno tutte
+        // li'), un 403/rate-limit/rete e' un guasto dello strumento e non puo'
+        // finire nello stesso numero.
+        const { kind, reason } = classifyDownloadFailure(e);
+        if (kind === 'no-artifact') missing += 1;
+        else {
+          downloadErrors += 1;
+          downloadErrorReasons.set(reason, (downloadErrorReasons.get(reason) || 0) + 1);
+        }
       }
     }
   }
 
   const { cards, unreadable } = readCards(dir);
   const summary = summariseRunCards(cards);
-  const meta = { runs: runs < 0 ? cards.length : runs, missing, unreadable, dir };
+  const meta = {
+    runs: runs < 0 ? cards.length : runs,
+    missing,
+    downloadErrors,
+    downloadErrorReasons: Object.fromEntries(downloadErrorReasons),
+    unreadable,
+    dir,
+  };
   if (asJson) console.log(JSON.stringify({ meta, summary }, null, 2));
   else console.log(formatSummary(summary, meta));
+  // Uscire 0 dopo aver letto zero card perche' `gh` non ha funzionato e'
+  // l'ultima forma dello stesso difetto: un verde che significa «non ho
+  // guardato». Con almeno una card lette il report e' parziale ma dice quanto,
+  // e non deve rompere chi lo invoca.
+  if (meta.downloadErrors && cards.length === 0) process.exitCode = 1;
 }
 
 if (process.argv[1] && process.argv[1].endsWith('run-card-report.mjs')) main();
