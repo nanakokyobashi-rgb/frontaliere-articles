@@ -33,8 +33,12 @@ import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { buildRunCard, summariseRunCards, writeRunCard, RUN_CARD_SCHEMA } from '../scripts/lib/run-card.mjs';
-import { readCards, ARTIFACT_GLOB, classifyDownloadFailure } from '../../scripts/ci/run-card-report.mjs';
+import {
+  buildRunCard, summariseRunCards, writeRunCard, RUN_CARD_SCHEMA, RUN_CARD_INSTRUMENTED_SINCE,
+} from '../scripts/lib/run-card.mjs';
+import {
+  readCards, ARTIFACT_GLOB, classifyDownloadFailure, classifyCardlessRun, dirBytes, humanBytes, formatSummary,
+} from '../../scripts/ci/run-card-report.mjs';
 import { isLegitimateQuotaDeferral, quotaDeferralShare } from '../scripts/lib/exhaustion-disposition.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
@@ -239,6 +243,90 @@ test('classifyDownloadFailure separa «nessun artifact» da un guasto di gh (#92
     assert.equal(c.kind, 'error', `${JSON.stringify(err)} non e un artifact assente`);
     assert.ok(c.reason.length > 0, 'un errore senza causa leggibile e di nuovo uno zero muto');
   }
+});
+
+test('classifyCardlessRun separa «uccisa prima del finalize» da «non ancora strumentata» (#924 item 4)', () => {
+  // IL DIFETTO. Il downloader aveva un solo secchio, `missing`, e ci finivano
+  // insieme le run nate prima del merge della strumentazione (che una card non
+  // potevano scriverla) e le run uccise dal `--kill-after` del `timeout` prima
+  // di `finalizeRunReport()` — cioe' proprio la popolazione che #625 vuole
+  // misurare. «Uccisa» e «non ancora strumentata» erano lo stesso numero, e
+  // quel numero si leggeva come se fosse solo storia.
+  const since = RUN_CARD_INSTRUMENTED_SINCE;
+  assert.ok(Number.isFinite(Date.parse(since)), 'la data di strumentazione deve essere parsabile');
+
+  assert.equal(
+    classifyCardlessRun({ createdAt: '2026-09-01T00:00:00Z', status: 'completed' }, { since }).kind,
+    'pre-instrumentation',
+  );
+  // La run e' finita, e' nata dopo il merge, e non ha scritto niente: e' il
+  // caso interessante, e deve avere un nome tutto suo.
+  assert.equal(
+    classifyCardlessRun({ createdAt: '2026-09-06T00:00:00Z', status: 'completed' }, { since }).kind,
+    'silent',
+  );
+  // Non ancora completata: l'artifact si carica a fine job. Contarla come muta
+  // sarebbe un allarme fabbricato dalla latenza.
+  assert.equal(
+    classifyCardlessRun({ createdAt: '2026-09-06T00:00:00Z', status: 'in_progress' }, { since }).kind,
+    'pending',
+  );
+  // Uno stato sconosciuto non e' «completata»: nel dubbio non si inventa un
+  // muto.
+  assert.equal(
+    classifyCardlessRun({ createdAt: '2026-09-06T00:00:00Z', status: 'waiting' }, { since }).kind,
+    'pending',
+  );
+  // Data illeggibile: si sceglie la lettura che NON gonfia il numero
+  // allarmante, ed e' una scelta dichiarata, non un caso non gestito.
+  assert.equal(
+    classifyCardlessRun({ createdAt: 'boh', status: 'completed' }, { since }).kind,
+    'pre-instrumentation',
+  );
+  for (const r of [{}, { status: 'completed' }]) {
+    assert.ok(classifyCardlessRun(r, { since }).reason.length > 0, 'ogni classificazione porta la sua causa');
+  }
+});
+
+test('dirBytes misura l\'artifact intero, non la sola card (#924 item 6)', () => {
+  // Il preventivo «~0,5 KB» vale la CARD; `gh run download -p` filtra i nomi
+  // degli artifact, quindi scarica anche stack e diagnostic report — ordini di
+  // grandezza sopra, e proprio sulle run patologiche che il campionatore cerca.
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'run-card-bytes-'));
+  fs.mkdirSync(path.join(dir, '77'), { recursive: true });
+  fs.writeFileSync(path.join(dir, '77', 'run-card-frontaliere.json'), 'x'.repeat(500));
+  fs.writeFileSync(path.join(dir, '77', 'stack-frontaliere-1.txt'), 'y'.repeat(200_000));
+  assert.equal(dirBytes(dir), 200_500);
+  assert.equal(dirBytes(path.join(dir, 'non-esiste')), 0, 'una cartella assente vale 0, non un throw');
+  assert.match(humanBytes(200_500), /KB$/);
+  assert.equal(humanBytes(512), '512 B');
+});
+
+test('il riepilogo stampa le run mute e dichiara il campione condizionato (#924 item 4)', () => {
+  const s = summariseRunCards([cardWith(0, 40, 30)]);
+  const out = formatSummary(s, {
+    runs: 40,
+    missing: 30,
+    cardless: { 'pre-instrumentation': 20, pending: 3, silent: 7 },
+    downloadErrors: 0,
+    downloadErrorReasons: {},
+    budgetSkipped: 2,
+    maxBytes: 1024 * 1024,
+    bytes: 3 * 1024 * 1024,
+    unreadable: 0,
+    dir: '/tmp/x',
+  });
+  assert.match(out, /pre-strumentazione: 20/);
+  assert.match(out, /non ancora completate: 3/);
+  assert.match(out, /STRUMENTATE MA MUTE: 7/);
+  // Il campione delle card e' condizionato ad arrivare al finalize: 1 card su
+  // 8 run strumentate e completate. Il numero va accanto ai conteggi, o i
+  // conteggi si leggono come se il denominatore fosse tutta la popolazione.
+  assert.match(out, /12\.5%/);
+  // Un tetto che tronca in silenzio e' indistinguibile da «il fenomeno non
+  // c'e'»: le run non scaricate si stampano.
+  assert.match(out, /2 run NON scaricate/);
+  assert.match(out, /scaricati 3\.0 MB/);
 });
 
 // ── 2bis. La card atterra DOVE le si dice, non altrove ──────────────────────
