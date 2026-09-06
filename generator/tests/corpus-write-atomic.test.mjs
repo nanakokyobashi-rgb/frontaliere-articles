@@ -19,7 +19,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
-import { codeOnly, RELATIVE_IMPORT_SPEC } from './lib/code-only.mjs';
+import { codeOnly, createReachableSource } from './lib/reachable-source.mjs';
 
 const root = path.resolve(import.meta.dirname, '..', '..');
 
@@ -199,62 +199,20 @@ test("l'elenco dei choke-point copre ogni scrittura di un artefatto pubblicato",
   // mangiasse codice, i choke-point noti smetterebbero di matchare e la suite
   // diventa rossa.
   //
-  // Sta in `lib/code-only.mjs` con i suoi test diretti
-  // (`censimento-code-only.test.mjs`): quell'assertion campiona nove file
-  // gia' noti, quindi non copre il file NUOVO — che e' il caso per cui il
+  // Sta in `lib/reachable-source.mjs` con i suoi test diretti
+  // (`censimento-source.test.mjs`): quell'assertion campiona nove file gia'
+  // noti, quindi non copre il file NUOVO — che e' il caso per cui il
   // censimento esiste.
 
   const PUBLISHED = /blog-body|blog-articles-data|corpusPath\(|'public',\s*'data'|public\/data|dist\/api/;
   const dir = path.join(root, 'generator', 'scripts');
 
-  const importSourceCache = new Map();
-  const resolveRelativeImport = (fromFile, spec) => {
-    const base = path.resolve(path.dirname(fromFile), spec);
-    for (const candidate of [base, `${base}.mjs`, `${base}.js`, path.join(base, 'index.mjs'), path.join(base, 'index.js')]) {
-      if (fs.existsSync(candidate) && fs.statSync(candidate).isFile()) return candidate;
-    }
-    return null;
-  };
-  // Sorgente raggiungibile da `file` seguendo solo import relativi ('./', '../'),
-  // cosi' i pacchetti npm e i builtin di Node restano fuori. `ancestors` e' lo
-  // STACK del ramo di ricorsione corrente (rimosso al backtrack): evita di
-  // rientrare in un ciclo import senza inquinare la cache, che invece e'
-  // globale e vive tra choke-point diversi. Se `ancestors` fosse un set che
-  // cresce solo (o venisse controllato prima della cache), un modulo condiviso
-  // raggiunto da due rami fratelli (A importa B e C, entrambi importano D)
-  // risulterebbe troncato sul secondo ramo: la ricorsione su D vedrebbe D gia'
-  // "visitato" dal primo ramo e tornerebbe '' anche se la cache aveva gia' il
-  // valore giusto, e quel '' verrebbe cacheato per il choke-point del secondo
-  // ramo — perdendo silenziosamente il contenuto di D per lui.
-  //
-  // #922 item 2: il ramo ciclico non cacheava il proprio `''`, ma il chiamante
-  // cacheava il COMBINATO che quel `''` aveva troncato. Con A→B→A, la chiamata
-  // su B produce `srcB + ''` e quella voce finiva in cache per B, riusata da
-  // ogni altro root che passa da B: un letterale pubblicato definito in A
-  // restava invisibile a TUTTI gli importatori di B, senza rumore. Ora il
-  // taglio si propaga come `cyclic` lungo lo stack e chi lo riceve non si
-  // cachea. Costa una ri-visita sui grafi ciclici; non costa niente sugli
-  // altri, che sono la totalita' di quelli visti finora.
-  const walkSource = (file, ancestors) => {
-    if (importSourceCache.has(file)) return { text: importSourceCache.get(file), cyclic: false };
-    if (ancestors.has(file)) return { text: '', cyclic: true }; // ciclo genuino nel ramo corrente
-    ancestors.add(file);
-    let src;
-    try { src = codeOnly(fs.readFileSync(file, 'utf-8')); } catch { ancestors.delete(file); return { text: '', cyclic: false }; }
-    let combined = src;
-    let cyclic = false;
-    for (const m of src.matchAll(RELATIVE_IMPORT_SPEC)) {
-      const resolved = resolveRelativeImport(file, m[1]);
-      if (!resolved) continue;
-      const child = walkSource(resolved, ancestors);
-      combined += `\n${child.text}`;
-      cyclic = cyclic || child.cyclic;
-    }
-    ancestors.delete(file);
-    if (!cyclic) importSourceCache.set(file, combined);
-    return { text: combined, cyclic };
-  };
-  const reachableSource = (file) => walkSource(file, new Set()).text;
+  // La sorgente raggiungibile via import relativi (statici E dinamici) e il
+  // suo caching cycle-safe stanno in `lib/reachable-source.mjs`, con i test
+  // diretti in `censimento-source.test.mjs`: sono le due parti che possono
+  // rendere il censimento cieco restando verde, e finche' erano closure qui
+  // dentro l'unica prova che avevano era il campione dei file gia' pinnati.
+  const reachableSource = createReachableSource();
 
   // #922 item 5: il predicato d'ingresso era il letterale `writeFileSync(`, e
   // quindi un choke-point che scrivesse con un alias (`const w =
