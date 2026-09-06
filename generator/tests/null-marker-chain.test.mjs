@@ -249,13 +249,25 @@ describe('slug: un titolo `Null` non produce /de/blog/null', () => {
     // `slugifySlugPart(title)` e restava verde finche' l'assertion era legata
     // al solo identificatore `localizedTitle`. Tutti e quattro i rami leggono
     // ora `data.content?.[locale]?.title` nella stessa variabile.
+    //
+    // Dal #798 il classificatore non e' piu' chiamato in linea dai quattro
+    // rami: sta dentro `localizedTitleSlugCandidate()`, l'unico helper che
+    // deriva uno slug da un titolo localizzato, che gli somma il floor di
+    // plausibilita' del titolo. Il pin resta quindi doppio — i quattro rami
+    // passano tutti dall'helper, e l'helper attraversa il classificatore — ed
+    // e' altrettanto stretto: una regressione che salta l'uno o l'altro cade.
     const occorrenze = CREATE_ARTICLE.match(
-      /inspectSlugForPromptPlaceholder\(\s*localizedTitle\s*\)\.slug/g,
+      /= localizedTitleSlugCandidate\(\s*localizedTitle\s*\);/g,
     ) || [];
     assert.equal(
       occorrenze.length,
       4,
       'attese quattro derivazioni: validate(), deriveAndSanitizeArticleSlugs() (assegnazione e recupero del segnaposto) e relocalizeSlugsAfterTranslation()',
+    );
+    assert.match(
+      CREATE_ARTICLE.slice(CREATE_ARTICLE.indexOf('function localizedTitleSlugCandidate(localizedTitle) {')),
+      /^function localizedTitleSlugCandidate[\s\S]{0,400}?inspectSlugForPromptPlaceholder\(testo\)\.slug/,
+      'l\u2019helper condiviso non attraversa piu\u2019 il classificatore: un titolo `Null` tornerebbe lo slug `null`',
     );
     const codice = CREATE_ARTICLE.replace(/^\s*(?:\/\/|\*).*$/gm, '');
     // Il vincolo NON e' sul nome dell'argomento: una regressione che scrive
