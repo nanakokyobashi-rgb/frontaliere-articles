@@ -11763,7 +11763,7 @@ function checkTranslatedSlugCollisions(data) {
     // coincidences don't false-trip while genuine same-locale collisions are caught.
     const slugPattern = new RegExp(`\\b${locale}:\\s*(['"])${escapeRegex(newSlug)}\\1`, 'g');
     if (slugPattern.test(sectionSlugSrc)) {
-      throw new Error(`❌ DUPLICATO: Lo slug ${locale} "${newSlug}" esiste già in ${SECTION_SLUG_DATA_FILE}!`);
+      throw new Error(`❌ DUPLICATO: Lo slug ${locale} "${newSlug}" esiste già in ${corpusPath(SECTION_SLUG_DATA_FILE)}!`);
     }
   }
 }
@@ -12487,7 +12487,7 @@ function validateBodyFileSyntax(filePath, content) {
       .replace(/^export default .*/m, '');
     new Function(jsContent);
   } catch (e) {
-    throw new Error(`Body file ${filePath} has syntax error: ${e.message}`);
+    throw new Error(`Body file ${corpusPath(filePath)} has syntax error: ${e.message}`);
   }
 }
 
@@ -12549,7 +12549,7 @@ function modifyRouterTs(data) {
       `(export const ${SECTION.slugsConstName}\\s*:[^=]*=\\s*\\{)(\\s*\\n)`,
     );
     if (!openRe.test(blogSrc)) {
-      throw new Error(`modifyRouterTs: cannot find empty ${SECTION.slugsConstName} map opener in ${blogDataFile}`);
+      throw new Error(`modifyRouterTs: cannot find empty ${SECTION.slugsConstName} map opener in ${corpusPath(blogDataFile)}`);
     }
     blogSrc = replaceCaptureSafe(blogSrc, openRe, (_m, g1, g2) => `${g1}\n${newSlugEntry}${g2}`);
   } else {
@@ -12557,7 +12557,7 @@ function modifyRouterTs(data) {
     const lastId = existingIds[existingIds.length - 1];
     const lastEntryRe = new RegExp(`('${escapeRegex(lastId)}':\\s*\\{[^}]+\\},)`);
     if (!lastEntryRe.test(blogSrc)) {
-      throw new Error(`modifyRouterTs: cannot find last ${SECTION.slugsConstName} entry (anchor=${lastId}) in ${blogDataFile}`);
+      throw new Error(`modifyRouterTs: cannot find last ${SECTION.slugsConstName} entry (anchor=${lastId}) in ${corpusPath(blogDataFile)}`);
     }
     blogSrc = replaceCaptureSafe(blogSrc, lastEntryRe, (_m, g1) => `${g1}\n${newSlugEntry}`);
   }
@@ -12598,7 +12598,7 @@ function modifyRouterUnion(data) {
   // drift: TS2590 splits may reorder, hand-edits may append to either list.
   const lastAliasMatch = routerSrc.match(/type (_BlogId\d+)\s*=\s*([^;]+);/g);
   if (!lastAliasMatch || lastAliasMatch.length === 0) {
-    throw new Error(`modifyRouterUnion: could not find any _BlogIdN alias in ${routerFile}`);
+    throw new Error(`modifyRouterUnion: could not find any _BlogIdN alias in ${corpusPath(routerFile)}`);
   }
   const lastAlias = lastAliasMatch[lastAliasMatch.length - 1];
   const aliasIds = lastAlias.match(/'([^']+)'/g)?.map(s => s.slice(1, -1)) || [];
@@ -12957,7 +12957,7 @@ function validateStructuredData(data) {
 
   // 1. Verify the entry exists
   if (!src.includes(entryKey)) {
-    throw new Error(`[validate-ld] SEO entry ${entryKey} not found in ${seoFile}`);
+    throw new Error(`[validate-ld] SEO entry ${entryKey} not found in ${corpusPath(seoFile)}`);
   }
 
   // 2. Extract using the same regex ogPagesPlugin uses
