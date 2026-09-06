@@ -101,13 +101,33 @@ jobs:
           QUOTA_LBL_REQUEUE: agent:decompose-queued
         run: node scripts/ci/check-quota-backoff.mjs
 
-      - name: Setup Headroom compression proxy
+      # ── Pre-flight 2: dispatch stantio ────────────────────────────────────
+      # Gemello del gate di `issue-fix.yml` (#918): con la chiave di concorrenza
+      # per-issue (#908) un secondo `labeled` sulla stessa issue non muore piu'
+      # sfrattato — aspetta il primo e poi ESEGUE, sul payload catturato prima.
+      # Qui il danno e' peggiore che nel fixer: ri-decomporre non ri-fa lavoro,
+      # ne CREA di nuovo — un secondo set di sub-issue duplicate che nessuno
+      # stadio a valle sa riconciliare. Segnali: la label di dispatch consumata
+      # dalla run precedente, oppure `decomposed:1` gia' sulla issue (ultimo
+      # passo della prima run). Bias a PROCEDERE su qualunque dubbio.
+      - name: Pre-flight — stale-dispatch gate (zero-Claude)
+        id: stale
         if: steps.quota.outputs.quota_blocked != 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          DISPATCH_LABEL: ${{ github.event.label.name }}
+          STAGE: decompose
+        run: node scripts/ci/check-stale-issue-dispatch.mjs
+
+      - name: Setup Headroom compression proxy
+        if: steps.quota.outputs.quota_blocked != 'true' && steps.stale.outputs.stale_dispatch != 'true'
         uses: ./.github/actions/setup-headroom
 
       - name: Run Claude decompose
         id: claude_decompose
-        if: steps.quota.outputs.quota_blocked != 'true'
+        if: steps.quota.outputs.quota_blocked != 'true' && steps.stale.outputs.stale_dispatch != 'true'
         continue-on-error: true
         uses: anthropics/claude-code-action@v1
         env:
@@ -165,11 +185,11 @@ jobs:
             - L'ULTIMO commento sul padre porta SEMPRE `<!-- DECOMPOSE_OUTCOME: <code> -->` con `<code>` ∈ `decomposed-K` · `atomic-requeue` · `needs-human-decision` · `already-resolved`.
 
       - name: Claude usage metrics
-        if: always() && steps.quota.outputs.quota_blocked != 'true'
+        if: always() && steps.quota.outputs.quota_blocked != 'true' && steps.stale.outputs.stale_dispatch != 'true'
         run: node scripts/ci/claude-usage-summary.mjs "${{ steps.claude_decompose.outputs.execution_file }}" "issue-decompose"
 
       - name: Mark Claude terminal outcome (granular telemetry)
-        if: always() && steps.quota.outputs.quota_blocked != 'true' && steps.claude_decompose.outcome == 'failure'
+        if: always() && steps.quota.outputs.quota_blocked != 'true' && steps.stale.outputs.stale_dispatch != 'true' && steps.claude_decompose.outcome == 'failure'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_REPO: ${{ github.repository }}
@@ -180,7 +200,7 @@ jobs:
         run: node scripts/ci/mark-claude-terminal-outcome.mjs
 
       - name: Emit DECOMPOSE_OUTCOME telemetry (deterministic backstop)
-        if: always() && steps.quota.outputs.quota_blocked != 'true'
+        if: always() && steps.quota.outputs.quota_blocked != 'true' && steps.stale.outputs.stale_dispatch != 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ISSUE: ${{ github.event.issue.number }}
@@ -194,7 +214,7 @@ jobs:
           gh issue comment "$ISSUE" --body "$(printf '<!-- DECOMPOSE_OUTCOME: no-outcome -->\n_Outcome rilevato dal post-step deterministico (run morta senza verdetto): il rescue del drainer ri-armerà o parcheggerà._')" || true
 
       - name: Classify outcome (work-done, not CLI exit)
-        if: always() && steps.quota.outputs.quota_blocked != 'true'
+        if: always() && steps.quota.outputs.quota_blocked != 'true' && steps.stale.outputs.stale_dispatch != 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ISSUE: ${{ github.event.issue.number }}
