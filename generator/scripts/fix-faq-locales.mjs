@@ -20,7 +20,7 @@ import { resolve, basename } from 'path';
 import { fileURLToPath, pathToFileURL } from 'url';
 import { dirname } from 'path';
 import { freeTranslateWithRetry, logCascadeSummary } from './lib/free-translate.mjs';
-import { detectLanguage } from './lib/detect-language.mjs';
+import { detectLanguageWithConfidence } from './lib/detect-language.mjs';
 import { corpusPath } from './lib/corpus-paths.mjs';
 import { sanitizeText } from '../../scripts/lib/sanitize-control-chars.mjs';
 import { reportStrippedControlChars } from './lib/control-char-write-report.mjs';
@@ -252,6 +252,20 @@ function insertFaqKey(filePath, articleId, faqArray) {
 // coppia sbagliata nella media delle altre, e finche' restava qui il prossimo
 // call-site l'avrebbe ripresa perche' ha il nome piu' ovvio dei due.
 
+const normPairText = (s) => String(s ?? '').replace(/\s+/g, ' ').trim().toLowerCase();
+
+// Segnale minimo per rifiutare una TERZA lingua (ne' l'attesa ne' la sorgente).
+// Tarati sulle FAQ pubblicate — la misura sta nel commento di `wrongLocalePair`.
+const THIRD_LANG_MIN_CONFIDENCE = 0.6; // affidabilita' dichiarata dal rilevatore
+const THIRD_LANG_MIN_SCORE = 500;      // evidenza assoluta, non solo margine
+
+/** Due coppie FAQ sono la stessa coppia (confronto normalizzato, non `===`). */
+function samePair(a, b) {
+  return !!a && !!b
+    && normPairText(a.q) === normPairText(b.q)
+    && normPairText(a.a) === normPairText(b.a);
+}
+
 /**
  * La stessa domanda, ma per COPPIA — ed e' quella che serve prima di scrivere.
  *
@@ -264,14 +278,113 @@ function insertFaqKey(filePath, articleId, faqArray) {
  * scrittura guarda quindi ogni coppia da sola, con la stessa soglia di 50
  * caratteri sotto cui il rilevatore non ha segnale.
  *
- * Ritorna la coppia colpevole (indice + lingua rilevata) o `null`.
+ * ── COSA RIFIUTA, E PERCHE' NON PIU' «DIVERSO DALL'ATTESO» ─────────────────
+ *
+ * Il difetto da intercettare e' il PASSTHROUGH: il testo e' rimasto nella
+ * lingua SORGENTE e verrebbe pubblicato come traduzione. Il predicato invece
+ * rifiutava su `detected !== expectedLocale`, cioe' su qualunque scarto — e su
+ * coppie FAQ, che stanno fra 57 e 89 caratteri, il rilevatore e' incerto
+ * proprio fra `en`, `de` e `fr`. Un `de` rilevato su una traduzione inglese non
+ * e' un passthrough italiano: e' rumore, e costava caro perche' UNA coppia mal
+ * rilevata scarta la traduzione INTERA dell'articolo, che resta senza FAQ.
+ *
+ * Misurato su una run reale del workflow FAQ (40 articoli, 2026-09-06): 31
+ * coppie rifiutate, di cui **solo 8 rilevate `it`** — le altre 23 erano
+ * mismatch fra lingue non-sorgente, e hanno buttato 8 traduzioni complete.
+ *
+ * Misurato sulle FAQ GIA' PUBBLICATE (16'968 articoli×locale del corpus a
+ * questo commit, con verita' di riferimento indipendente dal rilevatore: una
+ * coppia identica verbatim all'italiana e' un passthrough, una che differisce
+ * e' tradotta). E' UNA sola estrazione, e i quattro predicati sono valutati
+ * sulla stessa:
+ *
+ *   predicato                falsi positivi        passthrough intercettati
+ *   `!== expectedLocale`     344 / 16'968 (2,0%)   7 / 7 (100%)
+ *   `=== sourceLang`         113 / 16'968 (0,7%)   7 / 7 (100%)
+ *   + ramo verbatim          113 / 16'968 (0,7%)   7 / 7 (100%)
+ *   + ramo terza lingua      113 / 16'968 (0,7%)   7 / 7 (100%)
+ *
+ * Le ultime tre righe hanno lo STESSO numero di falsi positivi, e non e' una
+ * svista: con questa verita' di riferimento il ramo verbatim rifiuta solo
+ * coppie identiche all'italiana, che sono passthrough per definizione, quindi
+ * non puo' aggiungerne; e il ramo di terza lingua, tarato come sotto, non ne
+ * aggiunge nessuno su questa popolazione. Il predicato e' l'OR dei tre rami:
+ * i suoi falsi positivi non potrebbero comunque essere MENO di quelli del
+ * singolo ramo di lingua.
+ *
+ * Da cui la forma: piu' segnali, non uno scelto fra i tanti. L'uguaglianza con
+ * la coppia sorgente e' il riferimento che non mente e non ha bisogno di
+ * soglie; il rilevatore di lingua copre il passthrough che il motore ha
+ * ritoccato quanto basta a non essere piu' byte-uguale. Il valore del ramo
+ * verbatim NON e' visibile in questa tabella (il suo recall e' 7/7 per
+ * costruzione della verita' di riferimento): e' che sul percorso di SCRITTURA
+ * il fallback di `translateFaqArray()` produce esattamente una coppia
+ * byte-identica alla sorgente, cioe' il caso che il solo rilevatore perde
+ * quando risponde `de` su testo italiano (vedi il test omonimo).
+ *
+ * Nei falsi positivi del vecchio predicato la lingua rilevata era `fr` 126,
+ * `it` 110, `de` 58, `en` 50: **il 68% non riguardava affatto l'italiano**.
+ *
+ * ── E LA TERZA LINGUA: PERCHE' `=== sourceLang` DA SOLO SAREBBE FAIL-OPEN ──
+ *
+ * `detected === sourceLang` accetta tutto cio' che non e' italiano, quindi una
+ * coppia chiesta in `fr` e resa in inglese verrebbe scritta sotto `/fr/` come
+ * traduzione — la classe che il vecchio predicato fermava per caso, insieme al
+ * rumore. Qui non si ribalta il difetto da un lato all'altro: il terzo ramo
+ * rifiuta la terza lingua solo quando il rilevatore ha DAVVERO segnale.
+ *
+ * «Davvero segnale» sono due condizioni, e la seconda e' quella che conta:
+ * confidenza >= 0,60 (la soglia di affidabilita' dichiarata da
+ * `detectLanguageWithConfidence`) **e** punteggio assoluto >= 500. La
+ * confidenza da sola non basta perche' e' un margine relativo
+ * (`(primo - secondo) / primo`): su testo corto e povero di trigrammi i
+ * punteggi crollano e il margine SALE. Misurato: le 11 coppie pubblicate che
+ * un rilevatore diverso dall'atteso segnala con confidenza >= 0,60 hanno tutte
+ * punteggio <= 322 (la peggiore e' un testo inglese di 100 caratteri su
+ * Thusis, dato `de` con confidenza 0,92 e punteggio 145), mentre sulle 60'492
+ * coppie riconosciute nella loro lingua il punteggio mediano e' 1436 e il 5°
+ * percentile 455. Un pavimento a 500 azzera i falsi positivi su tutta la
+ * popolazione (0 / 16'968) e lascia passare il caso reale della classe: un
+ * testo tedesco lungo sotto `/en/` sta a 4227.
+ *
+ * Il costo dichiarato: sotto quel pavimento il ramo e' inerte, quindi una
+ * uscita in terza lingua corta e poco caratterizzata resta accettata. E' il
+ * lato su cui si sbaglia per scelta — il ramo esiste per fermare la terza
+ * lingua CONCLAMATA, non per indovinarla.
+ *
+ * La soglia di 50 caratteri resta, e vale solo per i rami che usano il
+ * rilevatore: misurata, con 50 da' zero falsi positivi su 8 traduzioni buone e
+ * coglie 3 italiane su 4; a 80 controllerebbe 2 coppie su 8 e ne coglierebbe 0,
+ * cioe' si spegnerebbe. Il ramo dell'uguaglianza non ha soglia perche' non e'
+ * una stima.
+ *
+ * @param {{q: string, a: string}[]} faqArray  le coppie da giudicare
+ * @param {string} expectedLocale
+ * @param {{q: string, a: string}[]|null} [sourceFaq] le coppie SORGENTE, quando
+ *   il chiamante ce l'ha. Senza, resta il solo controllo di lingua e si perde
+ *   il ramo che coglie il fallback per-coppia di `translateFaqArray()`.
+ * @param {string} [sourceLang='it']
+ * @returns {{index: number, detected: string, via: 'verbatim'|'lingua'|'terza-lingua'}|null}
  */
-export function wrongLocalePair(faqArray, expectedLocale) {
+export function wrongLocalePair(faqArray, expectedLocale, sourceFaq = null, sourceLang = 'it') {
+  // Su `expectedLocale === sourceLang` non c'e' traduzione da giudicare: la
+  // sorgente italiana sotto `/it/` e' l'esito giusto, non un passthrough.
+  if (expectedLocale === sourceLang) return null;
   for (let i = 0; i < faqArray.length; i++) {
+    if (samePair(faqArray[i], sourceFaq?.[i])) {
+      return { index: i, detected: sourceLang, via: 'verbatim' };
+    }
     const text = `${faqArray[i].q} ${faqArray[i].a}`;
     if (text.length < 50) continue; // too short to detect
-    const detected = detectLanguage(text, expectedLocale);
-    if (detected !== expectedLocale) return { index: i, detected };
+    const { lang: detected, confidence, scores } = detectLanguageWithConfidence(text, expectedLocale);
+    if (detected === sourceLang) return { index: i, detected, via: 'lingua' };
+    // Terza lingua: rifiuta solo col segnale forte (vedi sopra), altrimenti il
+    // ramo si riprende i falsi positivi che questo predicato serve a togliere.
+    if (detected !== expectedLocale
+      && confidence >= THIRD_LANG_MIN_CONFIDENCE
+      && (scores?.[detected] ?? 0) >= THIRD_LANG_MIN_SCORE) {
+      return { index: i, detected, via: 'terza-lingua' };
+    }
   }
   return null;
 }
@@ -388,7 +501,7 @@ async function main() {
         // /en/ con una coppia italiana su otto non veniva nemmeno SELEZIONATO —
         // il rilevatore vedeva il resto in inglese e rispondeva `en` — quindi
         // il gate di scrittura, per stretto che fosse, non lo vedeva mai.
-        if (localeFaq && wrongLocalePair(localeFaq, locale)) {
+        if (localeFaq && wrongLocalePair(localeFaq, locale, itFaq)) {
           issues.push({ articleId, file, locale, reason: 'wrong_locale', itFaq });
         }
       }
@@ -429,10 +542,11 @@ async function main() {
 
       // Verify the translation is actually in the right locale — per coppia,
       // perche' il fallback italiano di `translateFaqArray()` e' per coppia.
-      const wrong = wrongLocalePair(translated, issue.locale);
+      const wrong = wrongLocalePair(translated, issue.locale, issue.itFaq);
       if (wrong) {
-        console.error(`${label} ❌ Translation still detected as wrong locale `
-          + `(coppia ${wrong.index + 1}/${translated.length}: ${wrong.detected})`);
+        console.error(`${label} ❌ Translation not in ${issue.locale} `
+          + `(coppia ${wrong.index + 1}/${translated.length}: ${wrong.detected}, `
+          + `rilevata per ${wrong.via})`);
         failed++;
         continue;
       }
