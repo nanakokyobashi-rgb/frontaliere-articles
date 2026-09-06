@@ -29,6 +29,7 @@ import {
   TARGET_WORKFLOW_ID,
   TARGET_WORKFLOW_PATH,
 } from '../../scripts/ci/translate-queue-recovery.mjs';
+import { workflowSteps } from './lib/workflow-steps.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const WORKFLOW_PATH = path.join(ROOT, '.github/workflows/translate-queue-recovery.yml');
@@ -851,7 +852,10 @@ test('workflow limita trigger, permission, concurrency e runtime per costruzione
   assert.match(executorJob, /actions: write/);
   assert.match(executorJob, /contents: read/);
   assert.match(executorJob, /RECOVERY_WORKFLOW_RUN_ATTEMPT: \$\{\{ github\.run_attempt \}\}/);
-  assert.equal((executorJob.match(/^      - name:/gm) ?? []).length, 1);
+  // Contati tutti gli step, non i soli `- name:`: uno step senza nome nel job
+  // executor sfuggiva al conteggio e il vincolo «un solo step» era aggirabile
+  // in silenzio (#935 item 1).
+  assert.equal(workflowSteps(executorJob).length, 1);
 
   assert.doesNotMatch(
     WORKFLOW,

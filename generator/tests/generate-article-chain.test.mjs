@@ -42,6 +42,7 @@ import { readFileSync, writeFileSync, mkdtempSync, mkdirSync, rmSync, chmodSync,
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { workflowStep, workflowSteps } from './lib/workflow-steps.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const WF_PATH = path.resolve(HERE, '../../.github/workflows/generate-article.yml');
@@ -268,7 +269,7 @@ test('il titolo del commit e il summary leggono lo STESSO output', () => {
   );
   // Il summary riceve il valore via `env:`, quindi l'asserzione sta sul blocco
   // dello step, non sul solo `run:`.
-  const summaryBlock = WF.slice(WF.indexOf('      - name: Summary'));
+  const summaryBlock = workflowStep(WF, 'Summary').text;
   assert.match(summaryBlock, /ARTICLE: \$\{\{ steps\.generate\.outputs\.article \}\}/);
   assert.match(summaryBlock, /\$ARTICLE/);
 });
@@ -649,8 +650,11 @@ test('lo stallo si valuta PRIMA del kill duro: escono entrambi 137', () => {
 });
 
 test('le diagnostiche del wedge si caricano sempre, e da fuori il workspace', () => {
-  const step = WF.slice(WF.indexOf('      - name: Upload wedge diagnostics'), WF.indexOf('      - name: Guard'));
-  assert.ok(step, 'lo step che carica le diagnostiche e\' sparito');
+  // Il blocco arrivava fino al prossimo `- name:`: con uno step senza nome in
+  // mezzo, l'`upload-artifact` dell'intruso passava per suo (#935 item 1).
+  const found = workflowSteps(WF).find((s) => s.name.startsWith('Upload wedge diagnostics'));
+  assert.ok(found, 'lo step che carica le diagnostiche e\' sparito');
+  const step = found.text;
   assert.match(step, /if: always\(\)/, 'lo step sopra e\' ROSSO proprio quando l\'artifact serve');
   assert.match(step, /uses: actions\/upload-artifact@v4/);
   assert.match(
