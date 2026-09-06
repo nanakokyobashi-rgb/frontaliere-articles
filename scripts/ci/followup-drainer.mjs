@@ -511,6 +511,81 @@ export function lastLabelEventAt(events, label) {
   return latest;
 }
 
+/** Finestra entro cui `labeled agent:fix` e `unlabeled agent:fix-queued` si
+ * leggono come UNA sola `gh issue edit` — quella con cui il DRAIN promuove
+ * (`edit(cand, { add: [LBL_FIX], remove: [LBL_QUEUED] })`). GitHub scrive i due
+ * eventi con lo stesso secondo, ma i `created_at` hanno granularità al secondo
+ * e l'ordine fra i due non è garantito: 120s è largo abbastanza da non perdere
+ * mai una promozione del drainer, e stretto abbastanza da non catturare un
+ * re-queue precedente (il giro minimo del drainer è il suo cron). */
+export const PROMOTION_PAIR_WINDOW_SEC = Number(process.env.FOLLOWUP_PROMOTION_PAIR_WINDOW_SEC || 120);
+
+/**
+ * ULTIMA promozione `agent:fix` di una issue, CON l'attribuzione del writer:
+ * `{ at, byDrainer }`. Pura → testabile.
+ *
+ * `agent:fix` non ha un solo writer. Oltre al DRAIN la scrivono
+ * `scripts/ci/triage-sweep.mjs` (route diretta dei crawler) e
+ * `.github/workflows/recycle-stale-prs.yml` (remove + add per riciclare una PR
+ * ferma). Una loro scrittura sposta `promotedAt` DOPO il marker e il merge
+ * della consegna appena avvenuta, quindi `isDeliveredThisRun` legge falso e la
+ * consegna riuscita consuma un tentativo: è il sintomo di #733 che si riapre.
+ * Il comportamento è fail-closed — bounded, mai un loop gratuito — ma è anche
+ * SILENZIOSO, e un bug già pagato una volta non deve poter tornare senza
+ * lasciare traccia nei log.
+ *
+ * L'attribuzione non può passare dall'attore (tutti e tre scrivono col PAT del
+ * progetto, quindi il login è lo stesso): passa dalla FORMA della scrittura. Il
+ * DRAIN promuove con una sola `gh issue edit` che aggiunge `agent:fix` e toglie
+ * `agent:fix-queued`; gli altri due writer non hanno mai `agent:fix-queued` da
+ * togliere. La coppia di eventi ravvicinati è quindi la firma del drainer, e
+ * la sua assenza dice «questa promozione l'ha scritta qualcun altro».
+ *
+ * Solo osservabilità: `at` resta l'ultimo evento `labeled`, identico a prima,
+ * perché una promozione concorrente FA partire una run vera e quel fail-closed
+ * è il comportamento corretto. Ciò che cambia è che ora si vede.
+ *
+ * @param {Array<{event?: string, label?: {name?: string}, created_at?: string, createdAt?: string}>} events
+ * @param {{windowSec?: number}} [opts]
+ * @returns {{at: number|null, byDrainer: boolean}}
+ */
+export function lastFixPromotion(events, { windowSec = PROMOTION_PAIR_WINDOW_SEC } = {}) {
+  const at = lastLabelEventAt(events, LBL_FIX);
+  if (at === null) return { at: null, byDrainer: false };
+  for (const e of events || []) {
+    if (e?.event !== 'unlabeled') continue;
+    if (String(e?.label?.name || '') !== LBL_QUEUED) continue;
+    const t = Date.parse(e?.created_at ?? e?.createdAt);
+    if (Number.isNaN(t)) continue;
+    if (Math.abs(t - at) <= windowSec * 1000) return { at, byDrainer: true };
+  }
+  return { at, byDrainer: false };
+}
+
+/**
+ * Una consegna reale sta per essere letta come run morta a causa di una
+ * ri-etichettatura CONCORRENTE di `agent:fix`? Pura → testabile.
+ *
+ * Vera solo quando tutte e quattro valgono: c'è un marker DELIVERED, c'è un
+ * merge, entrambi PRECEDONO la promozione (quindi `isDeliveredThisRun` è
+ * falso), e la promozione NON porta la firma del drainer. Le prime tre da sole
+ * descrivono anche il caso NORMALE — ciclo precedente consegnato, drainer
+ * ri-accodato, run successiva morta senza verdetto — che un tentativo lo deve
+ * consumare davvero e non va segnalato come anomalia: è `byDrainer` a
+ * separarli.
+ *
+ * @param {{outcome: string|null, outcomeAt: number|null, mergedAt: number|null, promotion: {at: number|null, byDrainer: boolean}}} args
+ */
+export function isConcurrentRepromotion({ outcome, outcomeAt, mergedAt, promotion } = {}) {
+  const at = promotion?.at ?? null;
+  if (!outcome || !DELIVERED.has(outcome)) return false;
+  if (!Number.isFinite(at)) return false;
+  if (promotion?.byDrainer) return false;
+  if (!Number.isFinite(outcomeAt) || outcomeAt >= at) return false;
+  if (!Number.isFinite(mergedAt) || mergedAt >= at) return false;
+  return true;
+}
+
 /**
  * Il ramo DELIVERED vale per la run CORRENTE? Pura → testabile.
  *
@@ -1956,19 +2031,20 @@ function latestFixOutcomeEntry(num) {
   return latestFixOutcomeEntryFromComments(issueComments(num) || []);
 }
 
-/** Epoch ms dell'ultima promozione (`agent:fix` aggiunta) di questa issue, o
- * null su errore gh / evento assente. Il null è fail-CLOSED per il ramo
- * DELIVERED: senza sapere quando è iniziata la run corrente non si può
- * dichiarare che il marker appartiene a lei, e regalare il re-queue su un
- * glitch API toglierebbe l'unico bound di terminazione. `--paginate` perché la
- * timeline eventi di una issue lavorata dal ciclo supera facilmente le 30
- * voci di default e la promozione più recente è in fondo. */
-function fixPromotedAt(num) {
+/** ULTIMA promozione (`agent:fix` aggiunta) di questa issue con la sua
+ * attribuzione (`{at, byDrainer}`), `{at: null}` su errore gh / evento assente.
+ * `at` null è fail-CLOSED per il ramo DELIVERED: senza sapere quando è iniziata
+ * la run corrente non si può dichiarare che il marker appartiene a lei, e
+ * regalare il re-queue su un glitch API toglierebbe l'unico bound di
+ * terminazione. `byDrainer` è solo osservabilità (vedi `lastFixPromotion`).
+ * `--paginate` perché la timeline eventi di una issue lavorata dal ciclo supera
+ * facilmente le 30 voci di default e la promozione più recente è in fondo. */
+function fixPromotion(num) {
   try {
     const events = gh(['api', `repos/${REPO}/issues/${num}/events?per_page=100`, '--paginate']);
-    return lastLabelEventAt(Array.isArray(events) ? events : [], LBL_FIX);
+    return lastFixPromotion(Array.isArray(events) ? events : []);
   } catch {
-    return null;
+    return { at: null, byDrainer: false };
   }
 }
 
@@ -2684,15 +2760,25 @@ export function runDrain() {
       // PR chiusa SENZA merge otterrebbe il re-queue di una consegna che non
       // c'è stata. Se manca anche solo una, si prosegue verso i rami sotto,
       // che il tentativo lo consumano — cioè il comportamento bounded di prima.
+      const mergedAt = mergedFixPrAt(iss.number);
+      const promotion = fixPromotion(iss.number);
       if (isDeliveredThisRun({
         outcome,
         outcomeAt: outcomeEntry.at,
-        mergedAt: mergedFixPrAt(iss.number),
-        promotedAt: fixPromotedAt(iss.number),
+        mergedAt,
+        promotedAt: promotion.at,
       })) {
         console.log(`RE-QUEUE #${iss.number} (${outcome}, PR fix mergiata in questo ciclo) → tentativo NON consumato (la run ha consegnato)`);
         edit(iss.number, { add: [LBL_QUEUED], remove: [LBL_FIX] });
         continue;
+      }
+      // Il fail-closed qui sotto è corretto, ma quando a spostare `promotedAt`
+      // dopo la consegna è stato un writer CONCORRENTE di `agent:fix`
+      // (triage-sweep, recycle-stale-prs) il sintomo di #733 rientra senza che
+      // nessuno se ne accorga: un warning è ciò che lo rende misurabile invece
+      // che silenzioso.
+      if (isConcurrentRepromotion({ outcome, outcomeAt: outcomeEntry.at, mergedAt, promotion })) {
+        console.log(`::warning::#${iss.number}: consegna reale (${outcome} + merge) letta come run morta — \`${LBL_FIX}\` ri-applicata da un writer concorrente (triage-sweep / recycle-stale-prs) DOPO il merge → tentativo consumato (fail-closed, #973)`);
       }
       console.log(`#${iss.number}: marker ${outcome} NON scopato alla run corrente (marker stantio o nessun merge di questo ciclo) → rescue normale, tentativo consumato`);
     }
@@ -2764,11 +2850,19 @@ export function runDrain() {
     // raro: calcolarle solo lì tiene il costo gh del pass invariato su tutti
     // gli altri esiti.
     const delivered = outcome !== null && DELIVERED.has(outcome);
+    const mergedAt = delivered ? mergedFixPrAt(iss.number) : null;
+    const promotion = delivered ? fixPromotion(iss.number) : { at: null, byDrainer: false };
+    // Gemello del warning del rescue queue-managed: stessa causa (writer
+    // concorrente di `agent:fix`), stesso fail-closed, stesso bisogno di non
+    // essere silenzioso.
+    if (isConcurrentRepromotion({ outcome, outcomeAt: entry.at, mergedAt, promotion })) {
+      console.log(`::warning::#${iss.number}: consegna reale (${outcome} + merge) letta come run morta — \`${LBL_FIX}\` ri-applicata da un writer concorrente (triage-sweep / recycle-stale-prs) DOPO il merge → tentativo consumato (fail-closed, #973)`);
+    }
     const d = crawlerFixDecision({
       outcome,
       outcomeAt: entry.at,
-      mergedAt: delivered ? mergedFixPrAt(iss.number) : null,
-      promotedAt: delivered ? fixPromotedAt(iss.number) : null,
+      mergedAt,
+      promotedAt: promotion.at,
       ageMin: minutesSince(iss.updatedAt),
       attempt,
       hasPR,
