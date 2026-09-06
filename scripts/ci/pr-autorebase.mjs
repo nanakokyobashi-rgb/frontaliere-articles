@@ -69,6 +69,8 @@ import {
   vitestVerdictIsTransientCancellation,
   vitestFailureIsNotAttributableToPr,
   vitestFailureIsReviewGate,
+  jobRefFromCheckRun,
+  currentAttemptJobSteps,
 } from './lib/vitestCheck.mjs';
 import { hasCommentMarker as hasCommentMarkerShared, upsertStickyComment } from './lib/prComments.mjs';
 import { runBudgetFromEnv, rotateForFairness } from './lib/run-budget.mjs';
@@ -568,16 +570,24 @@ function mainTestsRuns() {
 /** Gli step del job che ha prodotto l'ultimo check-run vitest COMPLETATO
  * sull'head. Il job id si ricava dal `details_url` del check-run
  * (`.../runs/<run_id>/job/<job_id>`), che è l'unico riferimento che la
- * check-runs API dà al job di Actions. `[]` se il link non è parsabile o la
- * chiamata fallisce → `vitestFailureIsReviewGate` risponde `false` e vale la
- * precondizione normale (fail-CLOSED: nel dubbio non si ricicla). */
+ * check-runs API dà al job di Actions — ma quel puntatore NON garantisce
+ * l'attempt corrente: dopo un «Re-run failed jobs» descrive l'attempt
+ * precedente, e la lista di step sarebbe stantia. Si chiedono quindi i job
+ * dell'attempt corrente del run (`filter=latest`) e si accettano gli step solo
+ * se quel job è ancora fra loro e descrive lo stesso verdetto del check-run
+ * (`currentAttemptJobSteps`). `[]` se il link non è parsabile, la chiamata
+ * fallisce o il job è di un attempt superato → `vitestFailureIsReviewGate`
+ * risponde `false` e vale la precondizione normale (fail-CLOSED: nel dubbio
+ * non si ricicla). */
 function vitestJobSteps(head) {
   const last = latestCompletedVitestRun(checkRunsOf(head));
-  const m = /\/job\/(\d+)/.exec((last && last.details_url) || '');
-  if (!m) return [];
-  const out = gh(['api', `repos/${REPO}/actions/jobs/${m[1]}`, '--jq', '.steps'],
+  const ref = jobRefFromCheckRun(last);
+  if (!ref) return [];
+  const out = gh(
+    ['api', `repos/${REPO}/actions/runs/${ref.runId}/jobs?filter=latest&per_page=100`,
+      '--jq', '.jobs'],
     { json: true, allowFail: true });
-  return Array.isArray(out) ? out : [];
+  return currentAttemptJobSteps({ checkRun: last, jobId: ref.jobId, jobs: out });
 }
 
 /** Il rosso del check vitest sull'head è lo step del REVIEW GATE (LGTM mancante
