@@ -206,11 +206,14 @@ jobs:
           # Una issue aggregata (più item distinti) non entra in un solo run:
           # tentarli tutti sfora il budget e non consegna NESSUNA PR. Il
           # circuit-breaker nel prompt fixa UN item e deferisce il resto.
+          #
+          # La decisione la prende `isAggregate()`, la STESSA dei tre rilevatori
+          # fratelli in Node (#868 item 7): la soglia inline che stava qui —
+          # bullet top-level >= 4 — dichiarava non-aggregata un'aggregata da 2-3
+          # item, il fixer scriveva `Closes #N` invece di `Refs #N`, e al merge
+          # GitHub chiudeva il tracker con dentro gli item appena deferiti.
           body=$(gh issue view "$ISSUE_NUMBER" --repo "$REPO" --json body --jq '.body // ""')
-          agg_count=$(printf '%s' "$body" | grep -cE '^[[:space:]]*[-*][[:space:]]+' || true)
-          if [ "${agg_count:-0}" -ge 4 ]; then is_agg=true; else is_agg=false; fi
-          echo "is_aggregate=$is_agg" >> "$GITHUB_OUTPUT"
-          echo "agg_count=${agg_count:-0}" >> "$GITHUB_OUTPUT"
+          ISSUE_BODY="$body" node scripts/ci/detect-aggregate.mjs
 
           case "$cat" in
             publish|engine) echo "tier=high"   >> "$GITHUB_OUTPUT"; echo "max_turns=60" >> "$GITHUB_OUTPUT" ;;
