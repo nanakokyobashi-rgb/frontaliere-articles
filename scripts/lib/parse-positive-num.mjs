@@ -45,6 +45,21 @@
  * uno per leva: un `-1` accettato ovunque riaprirebbe il buco su
  * `--lookback-min`, dove non significa niente.
  *
+ * ## Il gemello del sito: non esiste, e non deve
+ *
+ * La voce di `scripts/ci/loop-sync-manifest.json` e' `corpus-only`, non
+ * `corpus-only-pending`: il sito copre la STESSA classe con
+ * `scripts/lib/int-from-env.mjs` — `intFromEnv` (assente/vuota → default in
+ * silenzio, illeggibile → default + `::warning::`) e `positiveIntFromEnv`, che
+ * rifiuta anche lo zero e i negativi (valerielinc-ops/frontaliere-si-o-no#7610,
+ * mergiata il 2026-09-06, sui call site che finiscono in uno `slice` o nel passo
+ * di un `for`). Portare QUESTO file di la' darebbe due sorgenti per la stessa
+ * validazione, che e' il difetto vietato da AGENTS.md #6. La misura della issue
+ * #884 («zero equivalenti sul sito») cercava solo
+ * `parsePositiveNum|parsePositiveInt|readPositiveEnv|envPositive`, e l'helper
+ * del sito si chiama diversamente: prima di riaprire il debito, cerca la
+ * FUNZIONE, non il nome.
+ *
  * @param {unknown} raw valore grezzo (argv o env)
  * @param {number} fallback default da usare se `raw` è assente o illeggibile
  * @param {{label: string, warn?: (msg: string) => void, sentinels?: number[], tool?: string, integer?: boolean}} opts

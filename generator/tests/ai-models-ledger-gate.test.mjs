@@ -658,3 +658,138 @@ describe('#848/#849 — un guasto, un voto', () => {
     }
   });
 });
+
+/**
+ * ── #895 — LO STESSO MEMO NON PUO' RISPONDERE A DUE DOMANDE ────────────────
+ *
+ * Follow-up di #881. Le porte chiuse la' erano sul ledger; qui si chiude cio'
+ * che restava della stessa forma: un memo che PRECEDE la porta (item 1) e una
+ * coppia di stato con due writer (item 2).
+ *
+ * Onesta' sulla portata dell'item 1. Oggi ogni chiamata che impara un cap
+ * passa subito dopo da `recordModelFailure` con lo STESSO `recordScore`,
+ * quindi il modello diventa sporco per il fallimento e il cap — che il flush
+ * legge da `_learnedRequestTokenLimits` per qualunque modello sporco — esce
+ * comunque. La perdita descritta nella issue e' percio' mascherata da una
+ * coincidenza fra due percorsi, non da un invariante: basta che il ramo del
+ * fallimento venga gatato diversamente perche' il cap resti in processo per
+ * sempre. Il caso qui sotto e' quindi un PIN sulla post-condizione («un cap
+ * imparato in opt-out raggiunge il ledger alla prima chiamata che registra»),
+ * non la riproduzione di un rosso: era rosso solo attraverso un percorso che
+ * non e' quello di cui parla l'item.
+ */
+describe('#895 — il memo del cap appreso e la porta del ledger sono due cose diverse', () => {
+  let envBackup = {};
+  let realFetch;
+
+  beforeEach(() => {
+    envBackup = Object.fromEntries(ENV_KEYS.map((k) => [k, process.env[k]]));
+    for (const k of ENV_KEYS) delete process.env[k];
+    realFetch = globalThis.fetch;
+    resetState();
+  });
+
+  afterEach(() => {
+    globalThis.fetch = realFetch;
+    for (const k of ENV_KEYS) {
+      if (envBackup[k] === undefined) delete process.env[k];
+      else process.env[k] = envBackup[k];
+    }
+    resetState();
+  });
+
+  it('un cap imparato in opt-out arriva al ledger alla prima chiamata che registra', async () => {
+    process.env.GH_MODELS_PAT = 'test-pat';
+    process.env.AI_MODELS_FORCE_CHAIN = 'gpt-4o-mini';
+    // 413 e non 401/402: `classifyNonRetryableError` rende `markExhausted:false`,
+    // quindi il modello resta eleggibile e la SECONDA chiamata ripercorre il
+    // ramo che impara — cioe' esattamente il punto che l'item descrive.
+    globalThis.fetch = async () => ({
+      ok: false,
+      status: 413,
+      headers: new Map(),
+      text: async () => JSON.stringify({ error: { message: 'tokens_limit_reached. Limit 2048 tokens' } }),
+      json: async () => ({ error: { message: 'tokens_limit_reached. Limit 2048 tokens' } }),
+    });
+    const opts = { maxRetriesPerModel: 1, backoffMs: 1, timeout: 5000 };
+    const store = makeStore();
+    __installScoreStoreForTests(store.db, null);
+
+    await assert.rejects(() => callLLM([{ role: 'user', content: 'x' }], { ...opts, recordScore: false }));
+    await flushScores();
+    assert.equal(
+      store.last()?.models?.['gpt-4o-mini'],
+      undefined,
+      `in opt-out non deve uscire niente verso l'aggregato (#864): ${JSON.stringify(store.last())}`,
+    );
+    // 2048 e non 4096: `getDeclaredRequestTokenLimit` rende il MINIMO fra il cap
+    // dichiarato staticamente (4000 per gpt-4o-mini) e quello appreso.
+    assert.equal(getDeclaredRequestTokenLimit('gpt-4o-mini'), 2048, 'il cap deve essere noto IN PROCESSO anche in opt-out (#864)');
+
+    // Stesso modello, STESSO limite, questa volta un chiamante di produzione:
+    // e' la chiamata su cui la guardia di idempotenza del memo si chiudeva.
+    await assert.rejects(() => callLLM([{ role: 'user', content: 'x' }], opts));
+    await flushScores();
+    assert.equal(
+      store.last()?.models?.['gpt-4o-mini']?.maxRequestTokens,
+      2048,
+      `il cap doveva atterrare nel documento condiviso: ${JSON.stringify(store.last())}`,
+    );
+  });
+
+  // Item 2. Gemello strutturale del pin su `_dirtyModels.add(` in cima al file,
+  // sull'ALTRA coppia di stato che aveva due writer: `_exhaustReason` /
+  // `_exhaustDetail`. Il ramo `else` del breaker host-unreachable ne ricopiava
+  // a mano gli interni — deliberatamente, per non emettere una seconda riga
+  // `🚫 Model … marked as exhausted` che `exhaustion-reason-report.mjs` conta
+  // con una regex globale — ma un campo aggiunto domani a `markModelExhausted`
+  // non sarebbe sceso di la', e nessun test lo avrebbe notato.
+  it('nel sorgente la CAUSA dell\'esaurimento si scrive solo dentro _setExhaustReason', () => {
+    const linee = SRC_CODE.split('\n');
+    const righe = linee
+      .map((riga, i) => ({ n: i + 1, riga }))
+      .filter(({ riga }) => /(?<![\w.])_exhaust(Reason|Detail)\.set\(/.test(riga));
+
+    const funzioneDi = (n) => {
+      const prima = linee.slice(0, n);
+      for (let i = prima.length - 1; i >= 0; i--) {
+        const m = prima[i].match(/^(?:export\s+)?(?:async\s+)?function (\w+)\s*\(/);
+        if (m) return m[1];
+      }
+      return '(top-level)';
+    };
+
+    const fuori = righe.filter(({ n }) => funzioneDi(n) !== '_setExhaustReason');
+    assert.deepEqual(
+      fuori.map(({ n, riga }) => `${n}: ${riga.trim()} [in ${funzioneDi(n)}]`),
+      [],
+      'la causa di un esaurimento si scrive da piu\' di una porta: e\' la forma che #881 ha chiuso per '
+      + '_dirtyModels (#895 item 2). Usa _setExhaustReason(modelId, reason, detail).',
+    );
+    assert.equal(righe.length, 2, `dentro la porta devono restare le due scritture, trovate ${righe.length}`);
+  });
+
+  it('resetState() non lascia in piedi il DETTAGLIO di una causa appena buttata via', async () => {
+    // `_exhaustDetail` e' l'altra meta' della coppia scritta dalla porta:
+    // sopravviveva al reset e si riattaccava al marchio successivo. La riga di
+    // skip che ne esce finisce in `errors`, cioe' nel messaggio su cui
+    // `classifyExhaustionCause` decide fra differimento e Workflow Failure.
+    process.env.GH_MODELS_PAT = 'test-pat';
+    process.env.AI_MODELS_FORCE_CHAIN = 'gpt-4o-mini';
+
+    markModelExhausted('gpt-4o-mini', 'nonretryable', 'HTTP 402');
+    resetState();
+    markModelExhausted('gpt-4o-mini', 'nonretryable');
+
+    await assert.rejects(
+      () => callLLM([{ role: 'user', content: 'x' }], { maxRetriesPerModel: 1, backoffMs: 1, timeout: 5000 }),
+      (e) => {
+        assert.ok(
+          !String(e.message).includes('HTTP 402'),
+          `dettaglio sopravvissuto al reset e riattaccato a un marchio nuovo: ${e.message}`,
+        );
+        return true;
+      },
+    );
+  });
+});
