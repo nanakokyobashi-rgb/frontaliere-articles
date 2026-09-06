@@ -9,6 +9,7 @@ import { fileURLToPath } from 'node:url';
 import { FIX_OUTCOME_RE } from '../../scripts/ci/close-recovered-failure-issues.mjs';
 import {
   CAP_HIT_AFTER_DELIVERY_MARKER,
+  capHitNoteIsCurrentVerdict,
   formatDeliveredDespiteMaxTurnsComment,
   hasCapHitAfterDeliveryNote,
 } from '../../scripts/ci/mark-claude-terminal-outcome.mjs';
@@ -125,6 +126,52 @@ describe('dedup della nota di consegna', () => {
     assert.equal(hasCapHitAfterDeliveryNote(['<!-- FIX_OUTCOME: pr-created -->\nPR aperta.']), false);
     assert.equal(hasCapHitAfterDeliveryNote([]), false);
     assert.equal(hasCapHitAfterDeliveryNote(null), false);
+  });
+});
+
+// #925 (giro 2): il dedup non puo' essere sulla sola PRESENZA del marker. Il marker e'
+// uno stato PERSISTENTE della issue, il verdetto che il drainer legge e' l'ULTIMO
+// `FIX_OUTCOME`: se un `max-turns` posteriore ha scavalcato la nota, ripeterla e' tutto
+// il suo mestiere — altrimenti la issue resta parcheggiata `needs-human` benche'
+// consegnata, senza che nulla fallisca.
+describe('il dedup morde solo finche\' la nota e\' il verdetto vigente', () => {
+  const note = (at) => ({ body: formatDeliveredDespiteMaxTurnsComment(7441), createdAt: at });
+  const maxTurns = (at) => ({ body: '<!-- FIX_OUTCOME: max-turns -->\n_Run terminata error_max_turns._', createdAt: at });
+
+  it('nota ultima → e\' ancora il verdetto vigente, si skippa', () => {
+    assert.equal(capHitNoteIsCurrentVerdict([maxTurns('2026-09-01T10:00:00Z'), note('2026-09-01T11:00:00Z')]), true);
+    assert.equal(capHitNoteIsCurrentVerdict([note('2026-09-01T11:00:00Z')]), true);
+  });
+
+  it('un `max-turns` posteriore la scavalca → si ri-posta la correzione', () => {
+    // run1 consegna e muore al cap; run2 muore al cap con `deliveredPrNumber()` a null
+    // (gh in errore, fail-safe); run3 consegna di nuovo: senza questo, il verdetto
+    // vigente resterebbe `max-turns`, che sta in `PREPASS_VERDICT_BEATS_FAMILY`.
+    assert.equal(capHitNoteIsCurrentVerdict([
+      note('2026-09-01T10:00:00Z'),
+      maxTurns('2026-09-01T11:00:00Z'),
+    ]), false);
+  });
+
+  it('nessuna nota, o nessun verdetto leggibile → false (fail-safe: si posta)', () => {
+    assert.equal(capHitNoteIsCurrentVerdict([maxTurns('2026-09-01T10:00:00Z')]), false);
+    assert.equal(capHitNoteIsCurrentVerdict([]), false);
+    assert.equal(capHitNoteIsCurrentVerdict(null), false);
+    // senza `createdAt` il confronto non e' dimostrabile: si posta, non si skippa.
+    assert.equal(capHitNoteIsCurrentVerdict([{ body: formatDeliveredDespiteMaxTurnsComment(7441) }]), false);
+  });
+
+  it('accetta la forma REST (`created_at`) oltre a quella GraphQL', () => {
+    assert.equal(capHitNoteIsCurrentVerdict([
+      { body: formatDeliveredDespiteMaxTurnsComment(7441), created_at: '2026-09-01T11:00:00Z' },
+      { body: '<!-- FIX_OUTCOME: max-turns -->', created_at: '2026-09-01T10:00:00Z' },
+    ]), true);
+  });
+
+  it('lo step legge `createdAt` insieme ai body, non i soli body', () => {
+    const src = readRoot('scripts/ci/mark-claude-terminal-outcome.mjs');
+    assert.ok(src.includes('[.comments[] | {body, createdAt}]'));
+    assert.ok(!src.includes('[.comments[].body]'));
   });
 });
 
