@@ -1465,6 +1465,50 @@ describe('classifyResolverResetEvidence — la prova che il fallimento porta sul
     assert.equal(classifyResolverResetEvidence(undiciFetchFailed('ENOTFOUND')), 'resolved');
   });
 
+  it('un\'eccezione alzata DOPO la risposta prova la risoluzione anche senza `HTTP \\d{3}` nel messaggio (#928 item 1)', () => {
+    // Quota, risposta vuota e contenuto non-stringa nascono tutti dopo che
+    // `fetch` ha restituito: il nome era stato risolto. Il canale e' la
+    // property posata alla sorgente, non la forma del messaggio — che qui
+    // NON contiene `HTTP 429` proprio come in produzione.
+    const post = (msg) => Object.assign(new Error(msg), { responseReceived: true });
+    assert.equal(classifyResolverResetEvidence(post('[gpt-4o] Daily request limit reached')), 'resolved');
+    assert.equal(classifyResolverResetEvidence(post('[gemini-2.0-flash] Daily quota reached')), 'resolved');
+    assert.equal(classifyResolverResetEvidence(post('[gpt-4o] Empty response after 3 attempts')), 'resolved');
+    assert.equal(classifyResolverResetEvidence(post('[gpt-4o] non-string content: object')), 'resolved');
+    // Anche sotto incapsulamento: la camminata e' la stessa delle altre prove.
+    assert.equal(
+      classifyResolverResetEvidence(Object.assign(new Error('wrapped'), { cause: post('[gpt-4o] Daily quota reached') })),
+      'resolved',
+    );
+  });
+
+  it('un endpoint su IP letterale non interroga il resolver: non e\' ne\' prova ne\' silenzio (#928 item 2)', () => {
+    // `LOCAL_LLM_URL`/`OMNIROUTE_URL` a `http://127.0.0.1:…` (#838): li'
+    // `getaddrinfo` non viene chiamato affatto, quindi un connect rifiutato
+    // non dice «il resolver ha funzionato».
+    const onIp = (host, code) => Object.assign(undiciFetchFailed(code), { endpointHost: host });
+    assert.equal(classifyResolverResetEvidence(onIp('127.0.0.1', 'ECONNREFUSED')), 'noResolver');
+    assert.equal(classifyResolverResetEvidence(onIp('192.168.1.9', 'ECONNRESET')), 'noResolver');
+    assert.equal(classifyResolverResetEvidence(onIp('::1', 'ECONNREFUSED')), 'noResolver');
+    // Un NOME sullo stesso errore resta una prova: e' l'indirizzo letterale a
+    // togliere il resolver di mezzo, non il fatto di avere un host.
+    assert.equal(classifyResolverResetEvidence(onIp('models.github.ai', 'ECONNREFUSED')), 'resolved');
+  });
+
+  it('claude-cli non risolve nessun nome in questo processo, quindi non versa in `silent` (#928 item 3)', () => {
+    const enoent = Object.assign(new Error('spawn claude ENOENT'), { code: 'ENOENT' });
+    assert.equal(classifyResolverResetEvidence(enoent, 'claude-cli'), 'noResolver');
+    assert.equal(classifyResolverResetEvidence(new Error('[claude-cli/sonnet] claude CLI error: boom'), 'claude-cli'), 'noResolver');
+    assert.equal(
+      classifyResolverResetEvidence(Object.assign(new Error('claude CLI timed out after 120000ms'), { name: 'TimeoutError' }), 'claude-cli'),
+      'noResolver',
+    );
+    // Lo STESSO errore su un provider HTTP resta quello che era: e' il canale
+    // a non toccare il resolver, non l'errore.
+    assert.equal(classifyResolverResetEvidence(enoent, 'github'), 'silent');
+    assert.equal(classifyResolverResetEvidence(enoent), 'silent');
+  });
+
   it('un abort o un timeout senza risposta non prova niente', () => {
     assert.equal(classifyResolverResetEvidence(Object.assign(new Error('aborted'), { name: 'AbortError' })), 'silent');
     // `code: 23` e' il codice DOMException — un NUMERO, non un codice syscall
@@ -1477,7 +1521,7 @@ describe('classifyResolverResetEvidence — la prova che il fallimento porta sul
 });
 
 describe('callLLM — il reset della striscia si conta per classe (#848 item 3)', () => {
-  const ENV_KEYS = ['AI_MODELS_FORCE_CHAIN', 'GH_MODELS_PAT', 'AI_MODELS_PREFER'];
+  const ENV_KEYS = ['AI_MODELS_FORCE_CHAIN', 'GH_MODELS_PAT', 'AI_MODELS_PREFER', 'LOCAL_LLM_ENABLED', 'LOCAL_LLM_URL'];
   let envBackup = {};
   let realFetch;
 
@@ -1539,6 +1583,44 @@ describe('callLLM — il reset della striscia si conta per classe (#848 item 3)'
     assert.equal(getStats().resolverFlaps.github, 2, `attesi 2 flap consecutivi: ${JSON.stringify(getStats().resolverFlaps)}`);
   });
 
+  it('una quota o una risposta vuota chiudono la striscia come `resolved`, non come `silent` (#928 item 1)', async () => {
+    // Il messaggio che ne esce e' `[gpt-4.1-mini] Empty response after 1
+    // attempts`: nessun `HTTP \\d{3}`, quindi il metro lo contava `silent`.
+    // Ma `fetch` aveva restituito — il nome ERA stato risolto.
+    process.env.AI_MODELS_FORCE_CHAIN = 'gpt-4o-mini,gpt-4.1-mini,gpt-4o,gpt-4.1';
+    const script = ['EAI_AGAIN', 'empty', 'EAI_AGAIN', 'EAI_AGAIN'];
+    let i = 0;
+    globalThis.fetch = async () => {
+      const step = script[Math.min(i++, script.length - 1)];
+      if (step === 'empty') {
+        return { ok: true, status: 200, headers: { get: () => null }, text: async () => JSON.stringify({ choices: [{ message: { content: '' } }] }) };
+      }
+      throw undiciFetchFailed('EAI_AGAIN');
+    };
+
+    assert.ok(await run(), 'la catena deve fallire');
+    const row = getStats().resolverFlapResets.github;
+    assert.ok(row, `atteso un reset contato: ${JSON.stringify(getStats().resolverFlapResets)}`);
+    assert.equal(row.resolved, 1, `la risposta vuota prova il resolver: ${JSON.stringify(row)}`);
+    assert.equal(row.silent, 0, `nessun reset cieco atteso: ${JSON.stringify(row)}`);
+  });
+
+  it('un endpoint locale su IP letterale non finisce ne\' in `resolved` ne\' in `silent` (#928 item 2)', async () => {
+    process.env.LOCAL_LLM_ENABLED = '1';
+    process.env.LOCAL_LLM_URL = 'http://127.0.0.1:8080/v1/chat/completions';
+    process.env.AI_MODELS_FORCE_CHAIN = 'local/fallback,local/second';
+    const script = ['EAI_AGAIN', 'ECONNREFUSED'];
+    let i = 0;
+    globalThis.fetch = async () => { throw undiciFetchFailed(script[Math.min(i++, script.length - 1)]); };
+
+    assert.ok(await run(), 'la catena deve fallire');
+    const row = getStats().resolverFlapResets.local;
+    assert.ok(row, `atteso un reset contato: ${JSON.stringify(getStats().resolverFlapResets)}`);
+    assert.equal(row.noResolver, 1, `su 127.0.0.1 il resolver non e' stato interrogato: ${JSON.stringify(row)}`);
+    assert.equal(row.resolved, 0, `nessuna prova sul resolver: ${JSON.stringify(row)}`);
+    assert.equal(row.silent, 0, `e nemmeno un silenzio: ${JSON.stringify(row)}`);
+  });
+
   it('un reset a contatore gia\' vuoto non e\' un evento e non si conta', async () => {
     process.env.AI_MODELS_FORCE_CHAIN = 'gpt-4o-mini,gpt-4.1-mini';
     globalThis.fetch = async () => { throw new Error('HTTP 503: upstream hiccup'); };
@@ -1592,7 +1674,7 @@ describe('callLLM — il reset della striscia si conta per classe (#848 item 3)'
     assert.ok(await run(), 'la catena deve fallire');
     const line = flapLineOf(summaryOf());
     assert.ok(line, 'il riepilogo deve portare la riga dei flap');
-    assert.match(line, /resets github silent=1 resolved=0 success=0 escalated=0 \(1 discarded\)/, line);
+    assert.match(line, /resets github silent=1 resolved=0 noResolver=0 success=0 escalated=0 \(1 discarded\)/, line);
     // La striscia ancora viva a fine run e' l'altra meta' del fatto: dice
     // quanto mancava alla soglia quando il reset l'ha buttata via.
     assert.match(line, /open \[github=2\/3\]/, line);
