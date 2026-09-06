@@ -209,8 +209,9 @@ jobs:
           # ONE path that must be staged even on a day with no edition: the
           # 0/4-blocks branch skips the snapshot on purpose, and without this
           # add the count would die on the runner and a permanent blackout
-          # would never reach the threshold (#885). The refresh step writes it
-          # on every non-dry run, so it exists here whenever this step runs.
+          # would never reach the threshold (#885). Il file e' versionato e il
+          # refresh lo riscrive quando il contenuto cambia davvero (#927), quindi
+          # esiste sempre qui e finisce in stage solo se lo streak si e' mosso.
           git add public/data/daily-brief.json \
                   data/daily-brief-degradation.json \
                   content/blogArticleIds.ts \

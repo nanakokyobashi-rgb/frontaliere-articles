@@ -20,7 +20,7 @@
 
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdtempSync, writeFileSync, readFileSync } from 'node:fs';
+import { mkdtempSync, writeFileSync, readFileSync, statSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -39,6 +39,7 @@ import {
   buildDailyBrief,
   degradationAlarms,
   degradationState,
+  isDegradationCarrier,
 } from '../scripts/lib/daily-brief-data.mjs';
 
 const REPO_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
@@ -371,4 +372,124 @@ test('the workflow commits the ledger, or the streak dies on the runner', () => 
     commitStep.slice(0, commitStep.indexOf('git diff --cached')).includes(rel),
     'the streak ledger must be staged by the commit step',
   );
+});
+
+
+// ── Un registro con JSON valido ma di forma sbagliata (#927) ─────────────────
+//
+// Il fallback allo snapshot copriva "assente" e "illeggibile". Non copriva il
+// caso peggiore: un file che si parsa e non e' un registro. Tutti i lettori
+// dello streak sono indulgenti per costruzione (quello che non capiscono vale
+// 0), quindi un `[]` o un `{"blocks": 5}` non falliscono: azzerano OGNI
+// conteggio in silenzio, e una degradazione permanente non riattraversa mai
+// piu' la soglia. E' #885 con un altro file.
+
+test('a ledger that parses but is not a ledger falls back to the snapshot instead of zeroing every streak', () => {
+  const dir = mkdtempSync(path.join(tmpdir(), 'daily-brief-shape-'));
+  const snapshot = path.join(dir, 'daily-brief.json');
+  const ledger = path.join(dir, 'degradation.json');
+  writeFileSync(snapshot, JSON.stringify(briefWithStreak(2)));
+
+  const wrongShapes = {
+    'an array': [],
+    'a scalar blocks': { schemaVersion: 1, dateIso: '2026-09-05', blocks: 5 },
+    'a blocks array': { schemaVersion: 1, dateIso: '2026-09-05', blocks: [] },
+    'an empty blocks map': { schemaVersion: 1, dateIso: '2026-09-05', blocks: {} },
+    'a block that is not an object': { schemaVersion: 1, dateIso: '2026-09-05', blocks: { jobs: 3 } },
+    'no dateIso at all': { schemaVersion: 1, blocks: { jobs: { degradedEditions: 4 } } },
+    'a dateIso that is not a day': { schemaVersion: 1, dateIso: '2026-02-31', blocks: { jobs: { degradedEditions: 4 } } },
+  };
+  for (const [label, value] of Object.entries(wrongShapes)) {
+    writeFileSync(ledger, JSON.stringify(value));
+    assert.equal(isDegradationCarrier(value), false, `${label} must not pass as a carrier`);
+    const { lines } = capture(() => {
+      assert.equal(
+        readDegradationState(ledger, snapshot).blocks.jobs.degradedEditions,
+        2,
+        `${label}: the snapshot's streak must survive it`,
+      );
+    });
+    assert.ok(lines.some((l) => l.includes('wrong shape')), `${label} must not be silent: ${lines.join('\n')}`);
+  }
+});
+
+test('a wrong-shaped snapshot is not a carrier either, on both read paths', () => {
+  // The fallback is the same forgiving reader: if it accepted the wrong shape,
+  // the guard on the ledger would just move the silent zeroing one file down.
+  const dir = mkdtempSync(path.join(tmpdir(), 'daily-brief-shape-snap-'));
+  const snapshot = path.join(dir, 'daily-brief.json');
+  const ledger = path.join(dir, 'degradation.json');
+  writeFileSync(snapshot, JSON.stringify([{ blocks: { jobs: { degradedEditions: 9 } } }]));
+  writeFileSync(ledger, '{ not json');
+  capture(() => {
+    assert.equal(readPreviousSnapshot(snapshot), null, 'an array is not a snapshot');
+    assert.equal(readDegradationState(ledger, snapshot), null, 'no usable carrier anywhere → null, never a fake zero one');
+  });
+  // And what a real ledger writes still passes, or the guard would be a wall.
+  writeDegradationState(blackout('2026-09-05', null), ledger);
+  assert.equal(readDegradationState(ledger, snapshot).blocks.jobs.degradedEditions, 1);
+});
+
+// ── Il registro non cambia se non cambia niente (#927) ───────────────────────
+
+test('the ledger carries no per-run timestamp and is not rewritten when nothing moved', () => {
+  const dir = mkdtempSync(path.join(tmpdir(), 'daily-brief-churn-'));
+  const ledger = path.join(dir, 'degradation.json');
+  const brief = blackout('2026-09-05', null);
+
+  assert.equal(Object.hasOwn(degradationState(brief), 'generatedAt'), false, 'a per-run clock makes every run a commit');
+  assert.equal(writeDegradationState(brief, ledger), true, 'the first write lands');
+  const first = readFileSync(ledger, 'utf-8');
+  const mtime = statSync(ledger).mtimeMs;
+
+  // A `workflow_dispatch` rerun of the same day: same streaks, same date.
+  const rerun = blackout('2026-09-05', readDegradationState(ledger, path.join(dir, 'absent.json')));
+  assert.equal(writeDegradationState(rerun, ledger), false, 'an identical ledger must not be rewritten');
+  assert.equal(readFileSync(ledger, 'utf-8'), first);
+  assert.equal(statSync(ledger).mtimeMs, mtime, 'not even the mtime moves, or the commit step stages it');
+
+  // The next day the streak does move, and then it must be written.
+  const tomorrow = blackout('2026-09-06', readDegradationState(ledger, path.join(dir, 'absent.json')));
+  assert.equal(writeDegradationState(tomorrow, ledger), true);
+  assert.equal(readDegradationState(ledger, path.join(dir, 'absent.json')).blocks.jobs.degradedEditions, 2);
+});
+
+// ── Il rosso del giorno di blackout (#927) ──────────────────────────────────
+
+test('a day that stages only the ledger cannot turn a lost push into a permanent red', () => {
+  // Con il registro in stage, la giornata 0/4 raggiunge per la prima volta i
+  // due `exit 1` dello step di commit: senza PAT o con tre push falliti,
+  // l'attraversamento resta sul runner e lo STESSO giorno rifa' rosso ogni
+  // mattina — il loop che #882 dichiara inaccettabile.
+  const yml = readFileSync(WORKFLOW_PATH, 'utf-8');
+  const rel = path.relative(REPO_ROOT, DEGRADATION_STATE_PATH).split(path.sep).join('/');
+  const commitStep = yml.slice(yml.indexOf('- name: Commit and push'), yml.indexOf('- name: Push hero'));
+
+  // Il path e' scritto due volte nello YAML (add e confronto) e una volta nello
+  // script: nessuno dei tre puo' importare gli altri (non-negoziabile #6).
+  assert.ok(
+    commitStep.includes(`git diff --cached --name-only)" = "${rel}"`),
+    'the ledger-only case must be recognised by comparing the staged set to the ledger path itself',
+  );
+  const branches = commitStep.split('LEDGER_ONLY" = true');
+  assert.equal(branches.length, 3, 'both fatal exits — PAT missing and push failed — must have the degraded branch');
+  for (const branch of branches.slice(1)) {
+    const head = branch.slice(0, branch.indexOf('fi'));
+    assert.match(head, /::warning::/, 'the degraded branch warns');
+    assert.match(head, /pushed=ledger-lost/, 'and says so on the step output');
+    assert.match(head, /exit 0/, 'and stays green');
+  }
+  // L'edizione, invece, resta rossa: i due `exit 1` non sono spariti.
+  assert.equal(commitStep.match(/^ *exit 1$/gm)?.length, 2, 'a lost EDITION must still be red');
+});
+
+test('the crossing verdict is not spent on a run whose ledger never reached main', () => {
+  // Il rosso del verdetto vale una volta sola perche' domani rilegge lo streak
+  // committato. Se il registro e' morto sul runner, domani rilegge il valore
+  // vecchio e riattraversa la stessa soglia: rosso ogni mattina.
+  const yml = readFileSync(WORKFLOW_PATH, 'utf-8');
+  const verdict = yml.slice(yml.indexOf('- name: Degradation alarm'));
+  const cond = verdict.slice(verdict.indexOf('if:'), verdict.indexOf('run:'));
+  assert.match(cond, /steps\.refresh\.outputs\.degradation_crossed == 'true'/);
+  assert.match(cond, /steps\.commit\.outputs\.pushed != 'ledger-lost'/);
 });
