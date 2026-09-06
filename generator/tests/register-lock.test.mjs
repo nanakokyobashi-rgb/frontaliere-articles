@@ -46,6 +46,7 @@ import {
   resolveRegisterLock,
   RegisterLockError,
   isRegisterLockError,
+  isRegisterLockHeld,
 } from '../scripts/lib/register-lock.mjs';
 // Il layout di QUESTO repo (`content/…`) contro quello in cui il generatore e'
 // scritto (`data/…`, `services/locales/…`): la stessa mappatura che
@@ -864,11 +865,44 @@ test('ogni errore del lock e\' riconoscibile per tipo, non per messaggio', () =>
   assert.equal(isRegisterLockError(undefined), false);
 });
 
+// Il tipo dell'errore non basta: fra `beginRegisterLock()` e
+// `endRegisterLock()` a lanciare sono i nove `modifyXxx()` di
+// create-article.mjs, con `Error` normali. Chi cattura deve poter chiedere se
+// il lock era TENUTO — e' l'unico segnale che copre anche quei throw.
+test('isRegisterLockHeld() dice se le 9 scritture sono state interrotte', () => {
+  const root = sandbox();
+
+  assert.equal(isRegisterLockHeld(root, SECTION), false, 'nessun marker: registrazione non iniziata');
+
+  beginRegisterLock(root, ARTICLE_ID, SECTION);
+  assert.equal(isRegisterLockHeld(root, SECTION), true, 'marker su disco: le 9 scritture sono aperte');
+  // L'ALTRA sezione non e' affar nostro (issue #965): il marker e' per sezione.
+  assert.equal(isRegisterLockHeld(root, 'svizzera'), false);
+
+  endRegisterLock(root, SECTION);
+  assert.equal(isRegisterLockHeld(root, SECTION), false, 'registrazione chiusa: nessun marker');
+
+  // Sezione malformata: non lancia da dentro un catch-guard, altrimenti
+  // sostituirebbe la diagnosi originale con la propria.
+  assert.equal(isRegisterLockHeld(root, 'non/valida'), false);
+});
+
 test('publish-journalist rilancia l\'errore del lock invece di marcare il doc failed', () => {
   const src = fs.readFileSync(new URL('../scripts/publish-journalist-article.mjs', import.meta.url), 'utf-8');
+  // Il SIMBOLO nell'import, non la forma della riga: aggiungerne un secondo
+  // (o mandare a capo il blocco) non e' una regressione.
+  const lockImport = /import \{([^}]*)\} from '\.\/lib\/register-lock\.mjs';/.exec(src);
+  assert.ok(lockImport, "publish-journalist-article.mjs non importa da './lib/register-lock.mjs'");
   assert.ok(
-    /import \{ isRegisterLockError \} from '\.\/lib\/register-lock\.mjs';/.test(src),
+    /\bisRegisterLockError\b/.test(lockImport[1]),
     'publish-journalist-article.mjs non importa isRegisterLockError()',
+  );
+  // `isRegisterLockHeld()` viene da create-article.mjs, che e' l'unico posto in
+  // cui PROJECT_ROOT e SECTION_NAME sono noti.
+  const createImport = src.slice(0, src.indexOf("from './create-article.mjs'"));
+  assert.ok(
+    createImport.includes('isRegisterLockHeld'),
+    'publish-journalist-article.mjs non importa isRegisterLockHeld() da create-article.mjs',
   );
   const procStart = src.indexOf('async function processDoc(');
   const mainStart = src.indexOf('async function main() {');
@@ -878,10 +912,17 @@ test('publish-journalist rilancia l\'errore del lock invece di marcare il doc fa
   const catchStart = src.indexOf('} catch (err) {', procStart);
   assert.ok(catchStart !== -1 && catchStart < mainStart, 'catch di processDoc() non trovato — aggiornare questo test');
   const processDocBody = src.slice(catchStart, mainStart);
-  const guardAt = processDocBody.search(/^\s*if \(isRegisterLockError\(err\)\) \{/m);
+  // I DUE discriminanti insieme: il tipo copre cio' che lancia
+  // lib/register-lock.mjs, il marker tenuto copre i nove `modifyXxx()` fra
+  // begin/endRegisterLock, che lanciano `Error` normali — da soli, quei throw
+  // diventavano un doc `failed` e (ultimo doc della coda) un exit 0 sopra un
+  // corpus SPEZZATO.
+  const guardAt = processDocBody.search(
+    /^\s*if \(isRegisterLockError\(err\) \|\| isRegisterLockHeld\(\)\) \{/m,
+  );
   // La chiamata, non la parola: il commento del guard cita `status: 'failed'`.
   const failedAt = processDocBody.search(/ref\.update\(\{ status: 'failed'/);
-  assert.notEqual(guardAt, -1, 'il catch di processDoc() non distingue l\'errore del lock: uno SPLIT diventerebbe un doc `failed` e il ciclo proseguirebbe sopra il corpus spezzato');
+  assert.notEqual(guardAt, -1, 'il catch di processDoc() non distingue una registrazione interrotta (tipo dell\'errore O marker tenuto): uno SPLIT diventerebbe un doc `failed` e il ciclo proseguirebbe sopra il corpus spezzato');
   assert.notEqual(failedAt, -1, 'nessuno stamp `status: failed` nel catch di processDoc() — aggiornare questo test');
   assert.ok(guardAt < failedAt, 'il guard sull\'errore del lock deve precedere lo stamp `status: failed`');
   assert.ok(
@@ -900,8 +941,8 @@ test('create-article non degrada un errore del lock a differimento pulito', () =
     assert.notEqual(start, -1, `${fn} non trovata — aggiornare questo test`);
     const body = CREATE_ARTICLE_SRC.slice(start, CREATE_ARTICLE_SRC.indexOf('\n}\n', start));
     assert.ok(
-      /^\s*if \(isRegisterLockError\(e\)\) return false;/m.test(body),
-      `${fn} non esclude gli errori del lock: uno SPLIT uscirebbe come differimento pulito invece che rosso`,
+      /^\s*if \(isRegisterLockError\(e\) \|\| isRegisterLockHeld\(\)\) return false;/m.test(body),
+      `${fn} non esclude una registrazione interrotta (tipo dell'errore O marker tenuto): uno SPLIT uscirebbe come differimento pulito invece che rosso`,
     );
   }
 });

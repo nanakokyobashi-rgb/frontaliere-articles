@@ -50,6 +50,7 @@ import {
   registerArticleFiles,
   checkArticleIdExists,
   resolveRegisterLockAtStartup,
+  isRegisterLockHeld,
   translateArticle,
   enforceStrongInternalLinks,
   findBestFallbackImage,
@@ -399,8 +400,20 @@ async function processDoc(db, FieldValue, docSnap) {
     // `main()` uscirebbe comunque 0 — job verde, corpus spezzato. Rilanciare
     // ferma il ciclo e fa uscire 1 (il `main().catch` in fondo al file); il doc
     // resta `queued` e viene ridrenato dal run successivo, dopo la riparazione.
-    if (isRegisterLockError(err)) {
-      console.error(`  🛑 ${docId}: errore del lock di registrazione — fatale, il ciclo si ferma qui (il documento resta queued)`);
+    //
+    // Il discriminante NON e' solo il tipo dell'errore: quello copre cio' che
+    // lancia `lib/register-lock.mjs`, ma fra `beginRegisterLock()` e
+    // `endRegisterLock()` a lanciare sono i nove `modifyXxx()`, con `Error`
+    // normali («modifyRouterTs: cannot find last ... entry»,
+    // «modifyBlogArticlesTsx: regex did not match») — cioe' proprio il caso in
+    // cui il corpus resta SPEZZATO. Il fatto che conta e' che il lock fosse
+    // TENUTO quando l'errore e' passato di qui: se il marker e' su disco, le 9
+    // scritture sono state interrotte, qualunque sia l'errore. Senza questa
+    // meta' della condizione il doc veniva stampato `failed` e — se e'
+    // l'ultimo (o l'unico) della coda — `main()` usciva 0: job verde, corpus
+    // spezzato.
+    if (isRegisterLockError(err) || isRegisterLockHeld()) {
+      console.error(`  🛑 ${docId}: registrazione interrotta / lock di registrazione — fatale, il ciclo si ferma qui (il documento resta queued)`);
       throw err;
     }
     const message = err instanceof Error ? err.message : String(err);

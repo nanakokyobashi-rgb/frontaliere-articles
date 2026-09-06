@@ -126,6 +126,35 @@ export function registerLockPath(projectRoot, section) {
 }
 
 /**
+ * True se il marker di `section` e' su disco IN QUESTO ISTANTE: le 9 scritture
+ * della registrazione sono state iniziate e non ancora chiuse da
+ * `endRegisterLock()`.
+ *
+ * E' il discriminante giusto per chi cattura attorno a `registerArticleFiles()`
+ * (issue #964). Il TIPO dell'errore copre solo cio' che lancia questo modulo,
+ * ma fra `beginRegisterLock()` e `endRegisterLock()` sono i nove `modifyXxx()`
+ * a scrivere, e i loro throw sono `Error` normali («modifyRouterTs: cannot find
+ * last ... entry», «modifyBlogArticlesTsx: regex did not match»): il tipo dice
+ * `false` proprio nel caso in cui il corpus e' SPEZZATO. Il fatto che conta non
+ * e' chi ha lanciato, e' che il lock fosse TENUTO quando l'errore e' passato.
+ *
+ * Non e' una race con un altro processo: la registrazione e' sincrona e
+ * `create-article.mjs` gira un id per volta (i produttori ciclano in serie
+ * proprio per non correre sugli stessi file).
+ */
+export function isRegisterLockHeld(projectRoot, section) {
+  try {
+    return existsSync(registerLockPath(projectRoot, section));
+  } catch {
+    // Sezione malformata: `beginRegisterLock()` avrebbe gia' lanciato un
+    // `RegisterLockError`, che il chiamante riconosce per tipo. Qui non
+    // esiste marker da leggere, e lanciare da dentro un catch-guard
+    // sostituirebbe la diagnosi originale con questa.
+    return false;
+  }
+}
+
+/**
  * Human-readable origin of a marker, for the two error messages a human reads
  * while repairing the corpus by hand. `pid` is kept but demoted: it is only
  * meaningful to a process still alive on the same machine.

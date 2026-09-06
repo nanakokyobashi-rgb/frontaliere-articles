@@ -292,6 +292,7 @@ import {
   registerLockFile,
   RegisterLockError,
   isRegisterLockError,
+  isRegisterLockHeld as isRegisterLockHeldImpl,
 } from './lib/register-lock.mjs';
 // Il protocollo di riferimento del prompt di selezione headline (issue #188).
 // Le due liste del prompt — candidate e articoli gia' pubblicati — avevano la
@@ -2888,6 +2889,17 @@ function beginRegisterLock(id) {
 
 function endRegisterLock() {
   return endRegisterLockImpl(PROJECT_ROOT, SECTION_NAME);
+}
+
+// Il marker della NOSTRA sezione e' su disco adesso, cioe' le 9 scritture sono
+// state iniziate e non chiuse (issue #964). Esportata perche' il discriminante
+// e' condiviso con chi cattura attorno a `registerArticleFiles()` senza passare
+// dal `main()` di questo file — `publish-journalist-article.mjs` cicla sulla
+// coda — e `PROJECT_ROOT`/`SECTION_NAME` vivono qui: ricostruire la sezione dal
+// lato del chiamante ne farebbe una seconda sorgente (AGENTS.md #6), e sarebbe
+// la sezione sbagliata non appena `generate-article.yml` le alterna.
+export function isRegisterLockHeld() {
+  return isRegisterLockHeldImpl(PROJECT_ROOT, SECTION_NAME);
 }
 
 // The files a completed registration must ALL carry the id in, used to tell a
@@ -13385,7 +13397,12 @@ function isQualityRejectError(e) {
   // rosso, nessuno ripara, e il run dopo riprova sullo stesso danno. Il tipo,
   // non il testo: i messaggi del lock sono scritti per un umano e possono
   // cambiare parole senza che un test se ne accorga.
-  if (isRegisterLockError(e)) return false;
+  // E il TIPO non basta: fra `beginRegisterLock()` e `endRegisterLock()` a
+  // lanciare sono i nove `modifyXxx()`, con `Error` normali. Il fatto che
+  // conta e' che il lock fosse TENUTO — se il marker e' su disco, la
+  // registrazione e' stata interrotta a meta' e nessun errore di questo run
+  // e' piu' un differimento pulito.
+  if (isRegisterLockError(e) || isRegisterLockHeld()) return false;
   if (e.qualityReject === true || e.topicGateAbort === true) return true;
   // `troppo corto` covers the whole thin-content class (too-short IT body
   // after the retry+expand ladder, too-short char count, too-short locale
@@ -13415,8 +13432,9 @@ function isQualityRejectError(e) {
  */
 function isDuplicateError(e) {
   if (!e) return false;
-  // Vedi `isQualityRejectError()`: il lock non e' un differimento pulito.
-  if (isRegisterLockError(e)) return false;
+  // Vedi `isQualityRejectError()`: il lock non e' un differimento pulito, e il
+  // marker tenuto conta quanto il tipo dell'errore.
+  if (isRegisterLockError(e) || isRegisterLockHeld()) return false;
   return /DUPLICATO/i.test(String(e.message || ''));
 }
 
