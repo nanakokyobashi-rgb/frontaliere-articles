@@ -610,7 +610,7 @@ function callSites(src) {
     const c = src[i];
     if (c === "'" || c === '"' || c === '`') {
       const end = endOfStringLiteral(src, i);
-      strings.push({ value: src.slice(i + 1, Math.max(i + 1, end - 1)), index: i, calls: stack.filter(Boolean) });
+      strings.push({ value: src.slice(i + 1, Math.max(i + 1, end - 1)), quote: c, index: i, calls: stack.filter(Boolean) });
       callee = null;
       i = end;
       continue;
@@ -666,7 +666,11 @@ export function readsContentOf(rel, text) {
   const src = stripComments(typeof text === 'string' ? text : '');
   const esc = String(rel).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
   const exact = new RegExp(`^(?:\\.{1,2}/)*${esc}$`);
-  const lit = `['"\`](?:\\.{1,2}/)*${esc}['"\`]`;
+  // Il backtick NON è un delimitatore di path qui: è quello con cui la prosa di
+  // questo repo cita i path, e ammetterlo faceva contare una citazione come
+  // lettura. Un literal fra backtick torna in gioco solo dentro una catena di
+  // chiamate che non nomina soltanto (sotto): lì è codice, non prosa.
+  const lit = `['"](?:\\.{1,2}/)*${esc}['"]`;
 
   // L'`import`/`export … from` statico non è una chiamata e non ha parentesi
   // da guardare; un modulo importato è contenuto quanto un JSON parsato.
@@ -685,6 +689,9 @@ export function readsContentOf(rel, text) {
       if (!isNamingChain(m.calls)) return true;
       continue;
     }
+    // Fuori da ogni chiamata un literal fra backtick è prosa (un frammento di
+    // commento, una riga di Markdown): non c'è niente che lo legga.
+    if (m.quote === '`') continue;
     // Fuori da ogni chiamata il literal è un valore: lo si sa nominare solo se
     // finisce in una costante, e allora la domanda si sposta sulla costante.
     if (!decls.some((d) => m.index >= d.start && m.index < d.end)) return true;

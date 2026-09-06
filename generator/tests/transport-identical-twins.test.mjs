@@ -444,6 +444,50 @@ test('readsContentOf distingue il literal letto — annidato o via alias — dal
   assert.equal(readsContentOf(rel, "readFileSync(CONTRACT_PATH, 'utf8');\n// vedi `scripts/ci/loop-sync-manifest.json`"), false);
 });
 
+test('il verso incerto e\u2019 «legge»: la lettura non riconosciuta non fa uscire il manifest dall\u2019insieme (#930)', () => {
+  const rel = 'scripts/ci/loop-sync-manifest.json';
+
+  // 1. Il prefisso relativo. `cite()` normalizza da ROOT, ma nel testo del
+  // fixture il path e' uno specificatore relativo: i due call-site fanno la
+  // stessa domanda e devono avere la stessa risposta.
+  assert.equal(
+    readsContentOf(rel, "const raw = readFileSync(path.join(__dirname, '../../scripts/ci/loop-sync-manifest.json'), 'utf8');"),
+    true,
+  );
+  assert.equal(readsContentOf(rel, "import m from './scripts/ci/loop-sync-manifest.json' with { type: 'json' };"), true);
+
+  // 2. Le letture per indirezione: nessuna di queste e' in un elenco di
+  // chiamate note, e proprio per questo devono cadere dalla parte «legge».
+  assert.equal(
+    readsContentOf(rel, "const U = new URL('../../scripts/ci/loop-sync-manifest.json', import.meta.url);\nconst raw = await readFile(U, 'utf8');"),
+    true,
+  );
+  assert.equal(readsContentOf(rel, "const m = loadJson('scripts/ci/loop-sync-manifest.json');"), true);
+  assert.equal(readsContentOf(rel, "const m = readFixture('scripts/ci/loop-sync-manifest.json');"), true);
+  // Anche fuori da qualsiasi chiamata: un valore che qualcuno consumera' in
+  // una forma che questo scanner non vede resta un accoppiamento.
+  assert.equal(readsContentOf(rel, "export const SOURCES = { manifest: 'scripts/ci/loop-sync-manifest.json' };"), true);
+
+  // 3. Il verso opposto, quello che blocca per sempre: un commento dentro la
+  // lista argomenti di una lettura non e' una lettura del manifest, e i
+  // backtick sono il delimitatore con cui la prosa di questo repo cita i path.
+  assert.equal(
+    readsContentOf(rel, "readFileSync(\n  // cfr. `scripts/ci/loop-sync-manifest.json`\n  CONTRACT_PATH, 'utf8');"),
+    false,
+  );
+  assert.equal(
+    readsContentOf(rel, "readFileSync(\n  /* cfr. 'scripts/ci/loop-sync-manifest.json' */\n  CONTRACT_PATH, 'utf8');"),
+    false,
+  );
+  assert.equal(readsContentOf(rel, 'Il registro vive in `scripts/ci/loop-sync-manifest.json` e nessuno lo apre qui.'), false);
+  // E il codice DOPO un commento resta codice: cancellare il commento non deve
+  // ingoiare la riga sotto.
+  assert.equal(
+    readsContentOf(rel, "// il registro:\nconst raw = readFileSync('scripts/ci/loop-sync-manifest.json', 'utf8');"),
+    true,
+  );
+});
+
 test('l\u2019eccezione e\u2019 il solo manifest, e solo da nominato: gli altri descrittori restano accoppiamenti', () => {
   // L'asimmetria fra i due versi, resa un test perché è l'errore facile:
   // riusare `SET_DESCRIPTORS` anche qui rimetterebbe il falso silenzio di #853
