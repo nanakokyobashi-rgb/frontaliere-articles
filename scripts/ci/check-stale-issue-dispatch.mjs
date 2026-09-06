@@ -52,8 +52,10 @@
  * stato che l'agent produceva a mano con «PR gia' in volo: skip», quindi il
  * rescue del drainer continua a vederlo come lo vedeva prima (`pr-already-open`
  * e' gia' classificato transiente-ritentabile in `followup-drainer.mjs`: la PR
- * bloccante puo' mergiare). Il commento e' idempotente: se l'ultimo commento
- * porta gia' il marker di questo gate, non se ne aggiunge un altro.
+ * bloccante puo' mergiare). Il commento non si posta due volte, e non si posta
+ * MAI sopra un verdetto gia' presente: sarebbe il piu' recente, e un verdetto
+ * terminale (`blocked-workflows-scope`) diventerebbe ri-tentabile — vedi
+ * `gateCommentBlocked`.
  *
  * Env:
  *   GH_TOKEN        richiesto per le letture/scritture `gh`.
@@ -76,16 +78,73 @@ import { fileURLToPath } from 'node:url';
 export const GATE_MARKER = '<!-- stale-dispatch-gate -->';
 
 /**
- * Telemetria per fase. `fix` parla il vocabolario `FIX_OUTCOME` del drainer, e
- * `pr-already-open` e' esattamente il codice che l'agent avrebbe scritto a mano
- * in questo caso (ISSUES.md → «Telemetria degli esiti»). `decompose` parla
- * quello di `issue-decompose.yml`, dove `already-resolved` e' gia' fra i
- * verdetti che lo step «Classify outcome» conta come lavoro fatto → job verde.
+ * Telemetria per fase E PER RAGIONE, mai solo per fase: il marker e' letto come
+ * un verdetto, quindi deve descrivere cio' che il gate ha davvero osservato.
+ *  - `fix` parla il vocabolario `FIX_OUTCOME` del drainer (ISSUES.md →
+ *    «Telemetria degli esiti»). `pr-already-open` e' esattamente il codice che
+ *    l'agent avrebbe scritto a mano davanti alla PR in volo; sul ramo
+ *    `dispatch-label-gone` invece nessuna PR e' stata nemmeno cercata, e il
+ *    fatto osservato — «un altro run aveva questo dispatch» — e' gia'
+ *    `overlap-skip`, lo stesso codice che `claim-issue-in-flight.mjs` emette
+ *    per il proprio mutex. Entrambi sono esclusi apposta da `NON_RETRYABLE`.
+ *  - `decompose` parla il vocabolario chiuso di `issue-decompose.yml`
+ *    (`decomposed-K` · `atomic-requeue` · `needs-human-decision` ·
+ *    `already-resolved`). `already-decomposed` E' `already-resolved`: le
+ *    sub-issue esistono. Il ramo `dispatch-label-gone` non ha un codice
+ *    corrispondente e non ne inventa uno: la label consumata non prova che la
+ *    decomposizione sia avvenuta, quindi il commento si posta SENZA verdetto e
+ *    il padre resta senza marker — che e' lo stato vero, e quello su cui il
+ *    rescue del drainer sa gia' lavorare.
  */
-export const STAGE_TELEMETRY = {
-  fix: '<!-- FIX_OUTCOME: pr-already-open -->',
-  decompose: '<!-- DECOMPOSE_OUTCOME: already-resolved -->',
+export const OUTCOME_MARKER = {
+  fix: {
+    'pr-in-flight': '<!-- FIX_OUTCOME: pr-already-open -->',
+    'dispatch-label-gone': '<!-- FIX_OUTCOME: overlap-skip -->',
+  },
+  decompose: {
+    'already-decomposed': '<!-- DECOMPOSE_OUTCOME: already-resolved -->',
+  },
 };
+
+/** La forma canonica del marker di verdetto che ogni fase NON deve sovrascrivere. */
+export const OUTCOME_MARKER_RE = {
+  fix: /<!--\s*FIX_OUTCOME:\s*[a-z0-9-]+\s*-->/i,
+  decompose: /<!--\s*DECOMPOSE_OUTCOME:\s*[a-z0-9-]+\s*-->/i,
+};
+
+/**
+ * Perche' il commento del gate NON va postato, o `null` se va postato.
+ *
+ * Due guardie, entrambe su TUTTA la lista dei commenti (non sull'ultimo: fra
+ * due eventi stantii ci si infila qualunque altro commento — la nota di
+ * ri-arma del drainer, un umano — e l'idempotenza sull'ultimo si perderebbe):
+ *
+ *  1. `gate-already-commented` — questo gate ha gia' parlato. Una raffica di
+ *     eventi stantii non deve diventare una raffica di commenti, che bumpa
+ *     `updatedAt` e sposta il rescue del drainer.
+ *  2. `verdict-already-present` — sulla issue c'e' gia' un marker di verdetto
+ *     della fase, e il nostro diventerebbe il PIU' RECENTE: e' la stessa
+ *     guardia che il backstop di `issue-fix.yml` si da' da solo («se ce n'e'
+ *     gia' uno, esce ... altrimenti avvelenerebbe il segnale invece di
+ *     completarlo»). Il caso concreto: run A muore sul guard di scope, che
+ *     posta `blocked-workflows-scope` (NON_RETRYABLE) e RIMUOVE `agent:fix`;
+ *     il secondo evento in coda esegue, vede la label consumata e — senza
+ *     questa guardia — scriverebbe sopra un verdetto TERMINALE un codice
+ *     ri-tentabile, ri-accodando una run da ~1M token contro lo stesso muro.
+ *
+ * @param {Array<{body?: string}>|null} comments
+ * @param {'fix'|'decompose'} stage
+ * @returns {'gate-already-commented'|'verdict-already-present'|null}
+ */
+export function gateCommentBlocked(comments, stage) {
+  const re = OUTCOME_MARKER_RE[stage];
+  for (const c of comments || []) {
+    const body = String((c && c.body) || '');
+    if (body.includes(GATE_MARKER)) return 'gate-already-commented';
+    if (re && re.test(body)) return 'verdict-already-present';
+  }
+  return null;
+}
 
 /**
  * Il giudizio, puro e testabile: questo dispatch descrive uno stato superato?
@@ -191,16 +250,16 @@ function main() {
 
   console.log(`Issue #${ISSUE}: dispatch STANTIO (${reason.code}) — ${reason.detail} → corto-circuito, zero Claude.`);
 
-  // Idempotenza: se l'ULTIMO commento e' gia' di questo gate, non se ne aggiunge
-  // un altro (una raffica di eventi stantii non deve diventare una raffica di
-  // commenti, che bumperebbe `updatedAt` e sposterebbe il rescue del drainer).
+  // Il corto-circuito e' gia' deciso: quel che segue riguarda solo se lasciare
+  // un commento. Non postare non cambia il gate, postare sopra un verdetto si'.
   const comments = iss && Array.isArray(iss.comments) ? iss.comments : [];
-  const last = comments.length ? String(comments[comments.length - 1].body || '') : '';
-  if (!DRY_RUN && !last.includes(GATE_MARKER)) {
+  const blocked = gateCommentBlocked(comments, STAGE);
+  if (blocked) {
+    console.log(`Nessun commento (${blocked}): il segnale sulla issue resta quello che c'e' gia'.`);
+  } else if (!DRY_RUN) {
+    const marker = (OUTCOME_MARKER[STAGE] || {})[reason.code] || '';
     const body = `${GATE_MARKER}
-⏭️ **Pre-flight (auto, zero-Claude)**: questa run e' partita da un evento ormai **stantio** — ${reason.detail}. Con la chiave di concorrenza per-issue (#908) il secondo evento sulla stessa issue non muore piu' sfrattato: aspetta il primo e poi **esegue**, con il payload catturato prima. Salto il run Claude per non ri-fare (o disfare) lavoro gia' consegnato sulla quota condivisa.
-
-${STAGE_TELEMETRY[STAGE]}`;
+⏭️ **Pre-flight (auto, zero-Claude)**: questa run e' partita da un evento ormai **stantio** — ${reason.detail}. Con la chiave di concorrenza per-issue (#908) il secondo evento sulla stessa issue non muore piu' sfrattato: aspetta il primo e poi **esegue**, con il payload catturato prima. Salto il run Claude per non ri-fare (o disfare) lavoro gia' consegnato sulla quota condivisa.${marker ? `\n\n${marker}` : ''}`;
     gh(['issue', 'comment', ISSUE, ...repoArgs, '--body', body]);
   }
 

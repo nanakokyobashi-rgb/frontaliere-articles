@@ -34,7 +34,12 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { staleDispatchReason, STAGE_TELEMETRY } from '../../scripts/ci/check-stale-issue-dispatch.mjs';
+import {
+  staleDispatchReason,
+  gateCommentBlocked,
+  OUTCOME_MARKER,
+  GATE_MARKER,
+} from '../../scripts/ci/check-stale-issue-dispatch.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 
@@ -115,13 +120,60 @@ test('bias a PROCEDERE: dubbio, stato illeggibile o fase ignota non corto-circui
   );
 });
 
-test('la telemetria parla il vocabolario di chi la legge', () => {
+test('la telemetria parla il vocabolario di chi la legge, e per RAGIONE non per fase', () => {
   // `pr-already-open` e' gia' classificato transiente-ritentabile in
   // followup-drainer.mjs (NON_RETRYABLE lo esclude apposta: la PR bloccante puo'
   // mergiare), e `already-resolved` e' fra i verdetti che lo step «Classify
   // outcome» di issue-decompose.yml conta come lavoro fatto → job verde.
-  assert.match(STAGE_TELEMETRY.fix, /<!-- FIX_OUTCOME: pr-already-open -->/);
-  assert.match(STAGE_TELEMETRY.decompose, /<!-- DECOMPOSE_OUTCOME: already-resolved -->/);
+  assert.match(OUTCOME_MARKER.fix['pr-in-flight'], /<!-- FIX_OUTCOME: pr-already-open -->/);
+  assert.match(OUTCOME_MARKER.decompose['already-decomposed'], /<!-- DECOMPOSE_OUTCOME: already-resolved -->/);
+
+  // Sul ramo label-consumata nessuna PR e' stata cercata: dichiararne una
+  // farebbe registrare a drainer e lessons-harvester una PR bloccante che non
+  // esiste. Il fatto osservato e' l'overlap, ed e' il codice del mutex.
+  assert.match(OUTCOME_MARKER.fix['dispatch-label-gone'], /<!-- FIX_OUTCOME: overlap-skip -->/);
+
+  // Il vocabolario di decompose e' CHIUSO (issue-decompose.yml, «Classify
+  // outcome»): la label consumata non prova che la decomposizione sia avvenuta
+  // e nessuno dei quattro codici lo dice → nessun verdetto inventato.
+  assert.equal(OUTCOME_MARKER.decompose['dispatch-label-gone'], undefined);
+  for (const code of Object.values(OUTCOME_MARKER.decompose)) {
+    assert.match(code, /<!-- DECOMPOSE_OUTCOME: (decomposed-[0-9]+|atomic-requeue|needs-human-decision|already-resolved) -->/);
+  }
+});
+
+test('il gate non scrive MAI sopra un verdetto gia\' presente', () => {
+  // Lo scenario che il gate esiste per intercettare: run A muore sul guard di
+  // scope, che posta un verdetto TERMINALE (NON_RETRYABLE) e RIMUOVE
+  // `agent:fix`; il secondo evento in coda esegue e vede la label consumata.
+  // Se qui commentasse, il suo codice ri-tentabile diventerebbe l'ULTIMO
+  // marker e il drainer ri-accoderebbe una run da ~1M token contro lo stesso
+  // muro. E' la guardia che il backstop di issue-fix.yml si da' gia' da solo.
+  const comments = [
+    { body: '🚫 scope: workflows\n\n<!-- FIX_OUTCOME: blocked-workflows-scope -->' },
+    { body: 'nota qualsiasi del drainer' },
+  ];
+  assert.equal(gateCommentBlocked(comments, 'fix'), 'verdict-already-present');
+  // Il verdetto di UN\'ALTRA fase non blocca: i due vocabolari sono separati.
+  assert.equal(gateCommentBlocked(comments, 'decompose'), null);
+  assert.equal(
+    gateCommentBlocked([{ body: '<!-- DECOMPOSE_OUTCOME: decomposed-3 -->' }], 'decompose'),
+    'verdict-already-present',
+  );
+});
+
+test('idempotenza su TUTTA la lista, non sull\'ultimo commento', () => {
+  // Fra due eventi stantii si infila qualunque altro commento (la nota di
+  // ri-arma del drainer, un umano): guardare solo `comments.at(-1)` farebbe
+  // ripostare il gate, bumpando `updatedAt` e spostando il rescue del drainer.
+  const comments = [
+    { body: `${GATE_MARKER}\n⏭️ pre-flight` },
+    { body: 'commento umano arrivato dopo' },
+  ];
+  assert.equal(gateCommentBlocked(comments, 'fix'), 'gate-already-commented');
+  assert.equal(gateCommentBlocked([{ body: 'solo rumore' }], 'fix'), null);
+  assert.equal(gateCommentBlocked([], 'fix'), null);
+  assert.equal(gateCommentBlocked(null, 'fix'), null);
 });
 
 /** Il blocco di uno step: dal suo `- name:` al `- name:` successivo. */
