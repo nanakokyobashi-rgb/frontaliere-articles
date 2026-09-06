@@ -1041,3 +1041,57 @@ describe('assertComuneTitleMatchesSlug — copre i verbi di intento oltre vivere
     expect(() => assertComuneTitleMatchesSlug(data)).toThrow();
   });
 });
+
+/**
+ * #971 (follow-up di #915) — il gate vive nel generatore, quindi difende solo
+ * gli articoli NUOVI: gli articoli entrati nel corpus prima di #527 non sono
+ * mai stati ricontrollati, e il loro titolo continua a fluire in
+ * `meta-<locale>.json`, nel `<title>` degli RSS e nel news-ticker. Al
+ * 2026-09-06 erano 5 su 5.721: quattro con un titolo che non nominava alcun
+ * comune (fra cui il survivor di #915, che annunciava «Frontalieri Ticino:
+ * cosa cambia con il Nuovo Accordo 2024» su un articolo di Tovo di
+ * Sant'Agata/Grigioni) e uno di natura opposta, sotto.
+ *
+ * Questa è la METÀ MANCANTE del gate: la stessa funzione, applicata al corpus
+ * pubblicato invece che al candidato in generazione. Senza, un titolo rotto
+ * resta live per sempre — nessuna run lo rilegge mai.
+ */
+describe('#971 — nessun titolo scollegato dallo slug nel corpus PUBBLICATO', () => {
+  // Difetto di SLUG, non di titolo: `trasferirsi-villa-chiavenna-frontaliere`
+  // perde il «di» e il gate legge nello slug il comune *Chiavenna*, mentre
+  // titolo e corpo parlano — correttamente — di *Villa di Chiavenna*. Qui il
+  // titolo è quello giusto: riscriverlo lo renderebbe FALSO per allineare una
+  // URL già pubblicata. Lo slug lo si ritira solo con un 301, che vive in
+  // `EDGE_RETIRED_PATHS` nel repo del SITO (vedi scripts/retire-article.mjs).
+  const SLUG_SIDE = new Set(['trasferirsi-villa-chiavenna-frontaliere']);
+
+  const seriesArticles = () => CORPUS.filter((a) => /^(vivere|trasferirsi|abitare|risiedere)-/.test(a.id));
+
+  const broken = () => seriesArticles().flatMap((a) => {
+    try {
+      assertComuneTitleMatchesSlug({ id: a.id, content: { it: { title: a.title } } });
+      return [];
+    } catch (err) {
+      return [{ id: a.id, title: a.title, message: err.message }];
+    }
+  });
+
+  it('il campione si carica — senza articoli della serie il test sotto è vacuo', () => {
+    expect(seriesArticles().length).toBeGreaterThan(100);
+  });
+
+  it('ogni articolo della serie ha un titolo che nomina il comune del suo slug', () => {
+    const rotti = broken().filter((b) => !SLUG_SIDE.has(b.id));
+    expect(rotti.map((b) => `${b.id} → "${b.title}"`)).toEqual([]);
+  });
+
+  it('la deroga di Villa di Chiavenna è ancora necessaria — se non lo è, va tolta', () => {
+    // Un carve-out che nessuno rimisura diventa un buco permanente: qui è il
+    // test stesso a fallire quando la deroga smette di servire (301 emesso,
+    // slug ritirato) invece di lasciarla marcire nel file.
+    const idsRotti = new Set(broken().map((b) => b.id));
+    for (const id of SLUG_SIDE) {
+      expect(CORPUS.some((a) => a.id === id) ? idsRotti.has(id) : true).toBe(true);
+    }
+  });
+});
