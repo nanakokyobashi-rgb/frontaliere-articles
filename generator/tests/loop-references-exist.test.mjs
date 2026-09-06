@@ -287,6 +287,16 @@ const DECLARED_ABSENT = {
       'correzione andrebbe fatta sul sito per non creare un corpus-ahead su un file ' +
       'dichiarato uguale.',
   },
+  'scripts/ci/handoff-to-site.mjs :: scripts/lib/control-char-publish-gate.mjs': {
+    kind: 'site-only',
+    reason:
+      'E\' l\'unico entry `not-ported` del manifest, cioe\' per definizione un file che il SITO ' +
+      'ha e questo repo deliberatamente no (qui strippare i control character e\' la politica ' +
+      'giusta, rifiutare no: `sitemap-blog.xml` e\' un documento solo). Il commento di ' +
+      '`SITE_ABSENT_MODES` lo nomina come esempio del perche\' `not-ported` non vada fra i ' +
+      'mode «assenti dal sito»: l\'affermazione e\' vera PROPRIO perche\' il file qui non c\'e\'. ' +
+      'Niente a runtime dipende dalla sua esistenza qui — il codice legge il manifest, non il file.',
+  },
   'scripts/ci/transport-identical-twins.mjs :: mirror-articles-engine.yml': {
     kind: 'site-only',
     reason:
