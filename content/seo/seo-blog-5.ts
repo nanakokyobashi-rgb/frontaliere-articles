@@ -64657,7 +64657,7 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
   },
 
   'blog-vivere-valpelline-lavorare-vallese': {
-    title: 'Vivere a Valpelline e lavorare in Vallese: regole e fiscalità | Frontaliere Ticino',
+    title: 'Vivere a Valpelline e lavorare in Vallese: regole e fiscalità',
     description: 'Scopri le regole fiscali, le trattenute previdenziali e le novità del nuovo accordo per i frontalieri che lavorano in Svizzera nel Vallese. Dati aggiornati 2026',
     keywords: 'frontalieri, ticino, svizzera, italia, vallese, regole, fiscalità, operativa',
     ogTitle: 'Frontaliere in Vallese: guida fiscale e regole 2024',

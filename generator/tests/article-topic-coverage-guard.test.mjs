@@ -1094,4 +1094,79 @@ describe('#971 — nessun titolo scollegato dallo slug nel corpus PUBBLICATO', (
       expect(CORPUS.some((a) => a.id === id) ? idsRotti.has(id) : true).toBe(true);
     }
   });
+
+  // ── La stessa metà mancante, sugli altri tre locali ──────────────────────
+  //
+  // `assertComuneTitleMatchesSlug` legge `content.it.title` per costruzione:
+  // è il gate del CANDIDATO, e in generazione il titolo non-IT non esiste
+  // ancora. Ma il titolo `en`/`de`/`fr` è superficie pubblicata quanto quello
+  // IT — fluisce in `meta-<locale>.json`, nel `<title>` dei feed del suo
+  // locale e nel news-ticker — e lì la classe era viva: 34 articoli su 243
+  // con un titolo che non nominava il comune del proprio slug, perché la
+  // pipeline di traduzione trattava il nome proprio come nome comune
+  // («Colonno» → «Column», «Martello» → «Hammer», «Incudine» → «Amboss»)
+  // oppure lo perdeva del tutto (il DE di Porlezza diceva «Frontaliere
+  // Ticino: Was sich ändert und was zu tun ist»).
+  //
+  // Il criterio qui è più debole di quello IT, e di proposito: un nome di
+  // comune è un nome proprio, quindi si pretende solo che le sue parole
+  // compaiano NEL titolo tradotto — non che `comuneTopicKey` ci veda la
+  // stessa chiave, che dipenderebbe dalla morfologia della lingua ospite.
+  const EXONYMS = {
+    // Esonimi legittimi: il titolo nomina il comune con il nome che quella
+    // lingua usa davvero. Non è uno skip — l'esonimo deve comparire, quindi
+    // un titolo che perde ANCHE quello fallisce comunque.
+    'vivere-como-lavorare-ticino-frontaliere': { fr: 'come' },        // Como → Côme
+    'vivere-aosta-lavorare-vallese': { fr: 'aoste' },                 // Aosta → Aoste
+    'vivere-piuro-lavorare-grigioni-front': { de: 'plurs' },          // Piuro → Plurs
+    'vivere-tubre-lavorare-grigioni-frontaliere': { de: 'taufers' },  // Tubre → Taufers
+    'vivere-malles-venosta-lavorare-grigioni': { de: 'mals' },        // Malles Venosta → Mals
+  };
+
+  const OTHER_LOCALES = ['en', 'de', 'fr'];
+  const LOCALE_TITLES = Object.fromEntries(OTHER_LOCALES.map((loc) => [
+    loc,
+    new Map([...loadMetaTitles(`blog-meta-${loc}.ts`), ...loadMetaTitles(`blog-meta-ch-${loc}.ts`)]),
+  ]));
+
+  /** Il titolo contiene la sequenza completa di parole `words`? */
+  const namesTokens = (title, words) => {
+    const tokens = normalizeText(title).split(' ');
+    for (let i = 0; i + words.length <= tokens.length; i += 1) {
+      if (words.every((w, n) => tokens[i + n] === w)) return true;
+    }
+    return false;
+  };
+
+  const brokenIn = (loc) => seriesArticles().flatMap((a) => {
+    const slugComune = comuneTopicKey(a.id.replace(/-/g, ' '));
+    if (!slugComune) return [];
+    const title = LOCALE_TITLES[loc].get(a.id);
+    if (title === undefined) return [{ id: a.id, title: '(titolo assente)' }];
+    const exonym = EXONYMS[a.id]?.[loc];
+    if (namesTokens(title, slugComune.split('-'))) return [];
+    if (exonym && namesTokens(title, exonym.split(' '))) return [];
+    return [{ id: a.id, title }];
+  });
+
+  for (const loc of OTHER_LOCALES) {
+    it(`il campione ${loc} si carica — senza titoli tradotti il test sotto è vacuo`, () => {
+      // Stessa guardia del lato IT: un regex che smette di agganciare
+      // renderebbe VERDE per vacuità l'asserzione seguente.
+      const coperti = seriesArticles().filter((a) => LOCALE_TITLES[loc].has(a.id));
+      expect(coperti.length).toBeGreaterThan(250);
+    });
+
+    it(`ogni articolo della serie nomina il comune del suo slug anche nel titolo ${loc}`, () => {
+      expect(brokenIn(loc).map((b) => `${b.id} → "${b.title}"`)).toEqual([]);
+    });
+  }
+
+  it('ogni esonimo dell\'allow-list punta a un articolo che esiste ancora', () => {
+    // Un allow-list che sopravvive all'articolo che giustificava la voce
+    // diventa un permesso senza soggetto: qui il test lo fa cadere.
+    for (const id of Object.keys(EXONYMS)) {
+      expect(CORPUS.some((a) => a.id === id), `esonimo orfano: ${id}`).toBe(true);
+    }
+  });
 });
