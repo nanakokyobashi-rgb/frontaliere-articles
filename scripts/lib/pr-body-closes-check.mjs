@@ -149,14 +149,23 @@ const NEG_REPORT_RE = new RegExp(
 // one word into two and eat the ≤2-word budget, which flips the guard off. A run
 // anywhere else becomes a space, so `qualcosa**non** chiude #12` keeps the word
 // boundary the `\b` needs.
+// Exported because `pr-body-nextstep-check.mjs` has the same guard blinded the
+// same way (`**non** in questa PR` read as a done state), and a normalizer
+// duplicated between two gates of the same contract drifts (AGENTS.md #6).
 const EMPHASIS_RUN_RE = /[*_`]+/g;
 const WORD_CHAR_RE = /[\p{L}\p{N}]/u;
-function stripEmphasis(s) {
+export function stripEmphasis(s) {
   return s.replace(EMPHASIS_RUN_RE, (run, at, whole) => {
     const prev = whole[at - 1];
     const next = whole[at + run.length];
     return prev && next && WORD_CHAR_RE.test(prev) && WORD_CHAR_RE.test(next) ? '' : ' ';
-  });
+  })
+    // I marker diventati spazi lasciano corse di spazi dove il testo ne aveva
+    // uno solo (`per **scelta**` -> `per  scelta `), e ogni regex che cerca una
+    // LOCUZIONE (`\bper scelta\b`, `\bfuori scope\b`) smetterebbe di
+    // agganciarla: la normalizzazione romperebbe cio' che deve preservare. Solo
+    // spazio orizzontale — un a capo resta un confine per chi legge righe.
+    .replace(/[^\S\n]+/g, ' ');
 }
 // Filler tolerated between the verb and the ref: `Chiusa da #12`, `Risolve
 // definitivamente #12`, `Closing the #12`. Bounded to a known word list so a
