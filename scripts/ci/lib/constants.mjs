@@ -95,9 +95,28 @@ export const VITEST_SHARD_NAME_RE = /^vitest shard \d+\/\d+$/;
  *      e' testo riportato, non il verdetto della riga. `🔴` NON e' escluso, di
  *      proposito: un 🔴 decorativo prima del marker non deve poterlo nascondere —
  *      dove la regola e' incerta si sbaglia in direzione ROSSA.
- *   2. `(?<!\`)` — un marker incollato a un backtick sta dentro un code span,
- *      cioe' e' testo citato. Le location label reali chiudono con `` `: `` o `: `,
- *      mai con un backtick attaccato al glifo.
+ *   1-bis. `|.*[🟡🟢❓](?:[^\n`«]|`[^\n`]*`)*` — la clausola 1 da sola era l'UNICA
+ *      direzione in cui questa regex poteva SPEGNERE il gate, contro il principio
+ *      appena dichiarato (#977): `… 🟡 Nit: x. 🔴 Important: y` — due finding sulla
+ *      STESSA riga — diventava verde, e con un `## LGTM` la PR si mergiava con un
+ *      🔴 aperto. Il reviewer viola «una riga per finding» (REVIEW.md → Output
+ *      format), ma un marker vero non puo' sparire per una violazione di FORMA. Il
+ *      ramo lo riammette quando fra il glifo precedente e il 🔴 non c'e' nessun
+ *      apri-citazione: ne' un `«` ne' un code span APERTO (uno CHIUSO — `` `x` `` —
+ *      e' prosa normale e viene attraversato). Nel caso #909 la citazione ha
+ *      entrambi, quindi resta verde. Sotto quel ramo la citazione non marcata come
+ *      tale (`🟡 Nit: la review diceva 🔴 Important: x`, senza «» ne' backtick)
+ *      torna ROSSA: e' il verso giusto in cui sbagliare, ed e' la forma che
+ *      REVIEW.md non produce.
+ *   2. `(?<!\s\`)(?<!^\`)` — il marker incollato a un backtick sta dentro un code
+ *      span solo se quel backtick APRE lo span, cioe' e' a inizio riga o preceduto
+ *      da spazio: `` `🔴 Important: x` `` e' una fixture citata. Il backtick che
+ *      CHIUDE una location label — `` `a.mjs:L1`🔴 Important: y ``, label incollata
+ *      al glifo — e' preceduto da un non-spazio, ed e' un marker VERO: il
+ *      `(?<!\`)` di prima, che guardava un solo carattere senza distinguere apri
+ *      da chiudi, lo spegneva in silenzio (#977). Il finding interamente dentro un
+ *      code span (`` `file:L1: 🔴 Important: …` ``, la forma degli esempi di
+ *      REVIEW.md) resta rosso: li' il backtick non e' incollato al glifo.
  *
  * Il conteggio dichiarato `## Findings (Important: N)` NON e' un ingresso del gate,
  * di proposito: su 172 review bot reali dei due repo c'e' su 170/172, e soprattutto
@@ -107,19 +126,25 @@ export const VITEST_SHARD_NAME_RE = /^vitest shard \d+\/\d+$/;
  *
  * Misura: sulle stesse 172 review il verdetto cambia su UNA sola, la #909; gli
  * altri 54 corpi con un marker vero restano rossi e nessuno passa da verde a rosso.
+ * Le due aggiunte del 2026-09-06 non toccano quella misura per costruzione: la 2
+ * si applica solo a un marker INCOLLATO a un backtick e la 1-bis solo a una riga
+ * che ha gia' aperto un altro finding — due forme che in quel campione non
+ * compaiono — ed entrambe muovono il verdetto da verde a ROSSO, mai al contrario.
  * Gemello del sito: `scripts/ci/lib/constants.mjs` in valerielinc-ops/frontaliere-si-o-no
  * (`mode: adapted` nel manifest, quindi la modifica si fa qui e non scende dal mirror).
  *
  * NB: il preflight di `pr-redflag-fixer.yml` e la Classe B di
  * `stale-pr-rescuer.yml` grepano la STESSA forma in bash — un `if:`/`run:` YAML non
  * puo' importare questa regex. `grep` e' gia' orientato alla riga, quindi il pattern
- * bash e' questa `.source` senza il `\n` nella classe negata:
- * `grep -qP '^[^🟡🟢❓]*(?<!\`)🔴\s*\*{0,2}\s*Important\s*\*{0,2}\s*[:—-]'`.
+ * bash e' questa `.source` senza i `\n` delle classi negate:
+ * `grep -qP '^(?:[^🟡🟢❓]*|.*[🟡🟢❓](?:[^`«]|`[^`]*`)*)(?<!\s\`)(?<!^\`)🔴\s*\*{0,2}\s*Important\s*\*{0,2}\s*[:—-]'`.
+ * I due lookbehind sono a lunghezza fissa, quindi PCRE1 (`grep -P`) li accetta —
+ * uno solo, `(?<!(?:^|\s)\`)`, sarebbe a lunghezza variabile e li' non compila.
  * Le tre copie non possono piu' divergere in silenzio: il guard `mirror bash` di
  * `generator/tests/redflag-important-marker.test.mjs` deriva il pattern atteso da
  * questa `.source` e lo pretende, verbatim, in entrambi i workflow.
  */
-export const REDFLAG_IMPORTANT_RE = /^[^\n🟡🟢❓]*(?<!`)🔴\s*\*{0,2}\s*Important\s*\*{0,2}\s*[:—-]/mu;
+export const REDFLAG_IMPORTANT_RE = /^(?:[^\n🟡🟢❓]*|.*[🟡🟢❓](?:[^\n`«]|`[^\n`]*`)*)(?<!\s`)(?<!^`)🔴\s*\*{0,2}\s*Important\s*\*{0,2}\s*[:—-]/mu;
 
 /**
  * File la cui modifica impedisce STRUTTURALMENTE al reviewer Claude di girare

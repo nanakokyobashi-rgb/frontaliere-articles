@@ -88,6 +88,38 @@ test('una riga citante non spegne il marker vero che sta su UN ALTRA riga', () =
   assert.equal(REDFLAG_IMPORTANT_RE.test(body), true);
 });
 
+// --- residui di #959 chiusi da #977 ----------------------------------------
+// Le due direzioni in cui la clausola POSIZIONE spegneva il gate in SILENZIO: uno
+// skip del fixer, non un errore. Entrambe le forme sono marker VERI e devono
+// restare rosse.
+test('la location label incollata al marker NON lo spegne (#977)', () => {
+  // Il backtick che CHIUDE la label e' preceduto da un non-spazio: non apre un code
+  // span. Il `(?<!`)` originale guardava un carattere solo e non li distingueva.
+  assert.equal(REDFLAG_IMPORTANT_RE.test('`a.mjs:L1`\u{1F534} Important: la sitemap perde gli slug `de`.'), true);
+  assert.equal(REDFLAG_IMPORTANT_RE.test('- `a.mjs:L1`\u{1F534} **Important \u2014** guard mancante'), true);
+});
+
+test('il marker dentro un code span APERTO resta citazione (#977 non allarga il rosso)', () => {
+  // Backtick preceduto da spazio o a inizio riga = span che si apre sul marker.
+  assert.equal(REDFLAG_IMPORTANT_RE.test('Il test pinna `\u{1F534} Important: x` come fixture.'), false);
+  assert.equal(REDFLAG_IMPORTANT_RE.test('`\u{1F534} Important: x` e\u2019 la fixture di questo test.'), false);
+  // Il finding interamente dentro un code span (forma degli esempi di REVIEW.md)
+  // non e' una citazione: li' il backtick non e' incollato al glifo.
+  assert.equal(REDFLAG_IMPORTANT_RE.test('- `a.mjs:L1: \u{1F534} Important: canonical rotto.`'), true);
+});
+
+test('un secondo finding sulla stessa riga resta ROSSO (#977)', () => {
+  // Viola «una riga per finding» (REVIEW.md \u2192 Output format), ma un \u{1F534} vero non puo'
+  // sparire per una violazione di forma: era l'unica direzione in cui la fix di #959
+  // spegneva il gate.
+  assert.equal(REDFLAG_IMPORTANT_RE.test('- `a.mjs:L1`: \u{1F7E1} Nit: x. \u{1F534} Important: y'), true);
+  // Anche con un code span CHIUSO nel mezzo: e' prosa normale, non una citazione.
+  assert.equal(REDFLAG_IMPORTANT_RE.test('- `a.mjs:L1`: \u{1F7E1} Nit: rinomina `x`. \u{1F534} Important: la sitemap perde gli slug'), true);
+  // ...ma la citazione marcata come tale resta verde: e' il caso #909.
+  assert.equal(REDFLAG_IMPORTANT_RE.test('- `a.mjs:L1`: \u{1F7E1} Nit: la review diceva \u00AB\u{1F534} Important: y\u00BB.'), false);
+  assert.equal(REDFLAG_IMPORTANT_RE.test('- `a.mjs:L1`: \u{1F7E1} Nit: il pattern `\u{1F534} Important:` va documentato.'), false);
+});
+
 // --- coerenza col conteggio dichiarato, nelle due direzioni -----------------
 const declared = (body) => {
   const header = body.match(/^#{1,4}\s*Findings\b[^\n]*/m);
@@ -114,12 +146,15 @@ for (const [name, body] of [
 // modulo JS). Il guard deriva il pattern atteso dalla `.source` — grep e' gia'
 // orientato alla riga, quindi l'unica differenza legittima e' il `\n` nella classe
 // negata — e lo pretende verbatim in entrambi i workflow.
-const bashPattern = REDFLAG_IMPORTANT_RE.source.replace('[^\\n', '[^');
+const bashPattern = REDFLAG_IMPORTANT_RE.source.replaceAll('[^\\n', '[^');
 
-test("la sola differenza fra la source JS e il pattern bash e' il `\\n` della classe negata", () => {
+test("la sola differenza fra la source JS e il pattern bash sono i `\\n` delle classi negate", () => {
   assert.ok(REDFLAG_IMPORTANT_RE.source.includes('[^\\n'));
   assert.ok(!bashPattern.includes('\\n'));
-  assert.equal(bashPattern, REDFLAG_IMPORTANT_RE.source.replace('\\n', ''));
+  // `replaceAll`, non `replace`: le classi negate sono piu' di una da #977, e con la
+  // sostituzione della sola PRIMA il pattern derivato porterebbe ancora un `\n` —
+  // il guard sarebbe verde qui e i due grep non matcherebbero mai in produzione.
+  assert.equal(bashPattern, REDFLAG_IMPORTANT_RE.source.replaceAll('\\n', ''));
 });
 
 for (const wf of ['pr-redflag-fixer.yml', 'stale-pr-rescuer.yml']) {
