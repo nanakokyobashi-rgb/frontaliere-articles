@@ -136,6 +136,7 @@ jobs:
             --title "Articoli fantasma: annunciati senza pagina sugli shard" \
             --workflow "reconcile-article-shards" \
             --run-url "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" \
+            --exact-title \
             --resolve
 
       # Il dispatch è consentito solo quando l'innesco non era a sua volta un

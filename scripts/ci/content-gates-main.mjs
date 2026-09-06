@@ -458,7 +458,7 @@ export async function main() {
 
   if (res.status === 0) {
     console.log(`[content-gates-main] ${CONTENT_GATES.length} gate verdi — richiudo un eventuale alert aperto.`);
-    if (!dryRun) resolveGithubIssue(TITLE, { workflow: 'content-gates-main', runUrl });
+    if (!dryRun) resolveGithubIssue(TITLE, { workflow: 'content-gates-main', runUrl, exactTitle: true });
     return 0;
   }
 

@@ -1679,8 +1679,12 @@ export async function reconcile(verdicts, io) {
         log(`[generation-health] (dry-run) chiuderei, se aperta: "${v.title}"`);
       } else {
         // Idempotente: no-op quando non esiste una issue aperta con quel titolo.
+        // Niente `exactTitle`: questi titoli PORTANO il conteggio, che cambia
+        // a ogni passata — la chiusura deve ritrovare la issue aperta con lo
+        // stesso prefisso, non un titolo identico che spesso non esiste.
         const res = io.resolveIssue(v.title, { workflow: 'Generation health watchdog' });
-        if (res) closed++;
+        // `resolved: false` = close respinto: NON e' una chiusura da contare.
+        if (res?.resolved) closed++;
       }
       continue;
     }

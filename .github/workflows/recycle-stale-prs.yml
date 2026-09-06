@@ -310,12 +310,32 @@ jobs:
             # lockstep-stall-watch.mjs) e cerca l'issue con LA STESSA
             # ricerca per titolo con cui la creerebbe: aprire e richiudere
             # restano simmetrici sulla chiave di dedup.
+            #
+            # `--exact-title`: il resolve deve chiudere la STESSA issue che la
+            # lista qui sopra esclude, e la lista esclude per UGUAGLIANZA
+            # (`.title != env.DEDUP_TITLE`). Senza il flag chiudeva per
+            # PREFISSO (60 char): una issue aperta il cui titolo comincia per
+            # `DEDUP_TITLE` ma prosegue non viene esclusa dalla lista — quindi
+            # le liste non sarebbero vuote — ma qui verrebbe chiusa AL POSTO
+            # del digest. Apertura, esclusione e chiusura: una sola forma
+            # della chiave.
+            #
+            # E il fallimento del close non va assorbito: `continue-on-error`
+            # + `gh` best-effort lasciavano la run verde con una riga di log, e
+            # il digest aperto con un elenco falso fino al prossimo giorno a
+            # liste vuote — che puo' non arrivare presto. La CLI ritenta e poi
+            # esce non-zero; qui quel non-zero diventa un'annotazione e uno
+            # step rosso (il job prosegue, `continue-on-error` resta).
             echo "Niente needs-human aperto (ne PR ne issue): richiudo l'issue dedup, se aperta."
-            node scripts/lib/github-issue-creator.mjs \
+            if node scripts/lib/github-issue-creator.mjs \
               --resolve \
+              --exact-title \
               --title "$DEDUP_TITLE" \
-              --workflow "Recycle stale PRs"
-            exit 0
+              --workflow "Recycle stale PRs"; then
+              exit 0
+            fi
+            echo "::error::Il close dell'issue dedup needs-human e' stato respinto: resta aperta con un elenco ormai falso."
+            exit 1
           fi
           PR_COUNT=0; [ -n "$PRS" ] && PR_COUNT=$(printf '%s\n' "$PRS" | wc -l | tr -d ' ')
           ISSUE_COUNT=0; [ -n "$ISSUES" ] && ISSUE_COUNT=$(printf '%s\n' "$ISSUES" | wc -l | tr -d ' ')
@@ -323,9 +343,16 @@ jobs:
           [ -n "$PRS" ] || PRS='_(nessuna)_'
           [ -n "$ISSUES" ] || ISSUES='_(nessuna)_'
           DESC=$(printf 'Nessun processo automatico sblocchera questi oggetti, e su `needs-human` la label e un filtro di ESCLUSIONE dalle code del drainer, non una segnalazione. Servono occhi umani.\n\n**PR** (%s) — il fixer dei red-flag ha raggiunto il round-cap e si e fermato (anti-loop), oppure sono draft parcheggiate, che ogni strato del ciclo salta by-design:\n\n%s\n\n**Issue** (%s) — escalate dal followup-drainer (too-large) o dal gate cronico di close-recovered-failure-issues.mjs (un guasto che ricorre oltre soglia). Restano fuori dal pool dei retry parcheggiati e dal rescue agent:fix dei crawler finche portano la label. Esclusi i tracker permanenti (`agent:no-age-out`), che sono aperti per costruzione e non sono item da sbloccare:\n\n%s\n\n_Issue dedup giornaliera da recycle-stale-prs.yml (zero-Claude); si aggiorna con un commento di recurrence finche esiste qualcosa di needs-human, e si richiude da sola al primo run in cui entrambe le liste sono vuote (i tracker permanenti non contano come residuo)._' "$PR_COUNT" "$PRS" "$ISSUE_COUNT" "$ISSUES")
+          # `--refresh-body`: il corpo di questo digest e' un ELENCO, non un
+          # evento. Sul dedup (issue gia' aperta) e sulla RIAPERTURA della
+          # gemella chiusa entro la finestra, il creator postava solo un
+          # commento di ricorrenza e lasciava il corpo della prima occorrenza:
+          # il lettore umano — la riapertura porta `needs-human` — trovava nel
+          # corpo le liste di ieri e quelle vere solo nell'ultimo commento.
           node scripts/lib/github-issue-creator.mjs \
             --title "$DEDUP_TITLE" \
             --description "$DESC" \
             --priority 2 \
             --label automation \
+            --refresh-body \
             --workflow "Recycle stale PRs"

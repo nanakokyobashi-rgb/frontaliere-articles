@@ -131,6 +131,11 @@ const CLOSING_REFERENCE_WINDOW_MS = 5 * 60 * 1000;
 // gets a fresh issue with a fresh discussion.
 const DEFAULT_REOPEN_WITHIN_HOURS = 30 * 24; // 720h
 
+// Quanti tentativi di `gh issue close` fa `resolveGithubIssue` prima di
+// dichiarare il fallimento, e la base del backoff lineare fra uno e l'altro.
+const RESOLVE_CLOSE_ATTEMPTS = 3;
+const RESOLVE_CLOSE_RETRY_DELAY_MS = 1000;
+
 /**
  * Run `gh` with explicit args. Returns trimmed stdout, or null on failure.
  * stderr is forwarded for visibility (workflow logs will show the actual error).
@@ -162,6 +167,47 @@ function appendStepSummary(line) {
   try {
     fs.appendFileSync(file, `${line}\n`);
   } catch { /* best-effort: a summary write must never break a reporter */ }
+}
+
+/**
+ * Emit a GitHub Actions ERROR annotation (also visible outside the folded log,
+ * on the run summary page). `appendStepSummary` writes to the job summary, which
+ * only exists when a step chooses to render it; an annotation is attached to the
+ * run itself. Reserved for the case a best-effort path FAILED — i.e. exactly the
+ * «non si rompe, non fa» that a silent `allowFailure` produces. No-op outside CI
+ * is not needed: the line is harmless on a terminal and useful in a plain log.
+ */
+function annotateError(line) {
+  const oneLine = String(line).replace(/\r?\n/g, ' ');
+  console.log(`::error::${oneLine}`);
+}
+
+/**
+ * Rewrite the body of an existing issue (see `refreshBody`). Best-effort: se
+ * l'edit non passa, il commento di ricorrenza appena postato resta comunque la
+ * misura corrente — ma lo diciamo, invece di lasciare un corpo vecchio che si
+ * legge come attuale.
+ */
+function refreshIssueBody(issueNumber, body) {
+  const out = gh(
+    ['issue', 'edit', String(issueNumber), '--body', body, ...repoFlag()],
+    { allowFailure: true },
+  );
+  if (out === null) {
+    console.error(
+      `[github-issue-creator] Could not refresh the body of #${issueNumber}; `
+      + 'il corpo resta quello precedente, la misura corrente e\' nell\'ultimo commento.',
+    );
+    return false;
+  }
+  console.log(`[github-issue-creator] Refreshed the body of #${issueNumber} with the current measurement.`);
+  return true;
+}
+
+/** Blocking sleep — this module is synchronous end to end (execFileSync). */
+function sleepSync(ms) {
+  if (!(ms > 0)) return;
+  Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, ms);
 }
 
 function repoFlag() {
@@ -306,7 +352,28 @@ function searchIssuesByTitlePrefix(fullTitle, state, searchLimit = 10) {
 }
 
 function findOpenIssueByTitlePrefix(fullTitle) {
-  return searchIssuesByTitlePrefix(fullTitle, 'open')[0] || null;
+  const candidates = searchIssuesByTitlePrefix(fullTitle, 'open');
+  // Preferisci SEMPRE la corrispondenza esatta, quando c'e'. Il prefisso e' un
+  // taglio a 60 caratteri: una issue aperta il cui titolo COMINCIA con la
+  // chiave ma prosegue e' un candidato legittimo per il match di prefisso, e
+  // finiva prima nell'ordine di `gh issue list` senza che nessuno preferisse
+  // la gemella dal titolo identico. Nessun caso perde: senza esatta il
+  // comportamento resta il primo candidato di prefisso, come prima.
+  return candidates.find((i) => i.title === fullTitle) || candidates[0] || null;
+}
+
+/**
+ * L'issue aperta il cui titolo e' ESATTAMENTE `fullTitle`, o null.
+ *
+ * Il rovescio di `findOpenIssueByTitlePrefix` per chi apre e chiude sulla
+ * STESSA chiave letterale (i digest e gli allarmi a titolo costante). Lì il
+ * prefisso non e' una comodita' ma un rischio: chiude «la prima issue aperta
+ * che comincia per», che puo' essere un'altra issue — e il chiuditore non ha
+ * modo di accorgersene, perche' chiudere la issue sbagliata riesce.
+ */
+function findOpenIssueByExactTitle(fullTitle) {
+  return searchIssuesByTitlePrefix(fullTitle, 'open')
+    .find((i) => i.title === fullTitle) || null;
 }
 
 /**
@@ -716,14 +783,26 @@ function setIssuePriorityLabel(issueNumber, targetPriorityLabel, extraAdd = []) 
  * REOPEN the canonical issue on red, so a green run must CLOSE it again —
  * otherwise the issue stays open while the state is already OK (stale-issue
  * churn). Idempotent: a no-op when no matching OPEN issue exists, so it's safe
- * to run on every green pass. Best-effort — never throws; returns the closed
- * issue ref or null.
+ * to run on every green pass. Never throws.
  *
- * @param {string} titlePrefix  Stable title (first DEDUP_TITLE_PREFIX_LEN chars
- *                              are matched, exactly as createGithubIssue dedups).
- * @param {{ workflow?: string, runUrl?: string }} [ctx]
+ * TRE esiti distinti, e la distinzione conta:
+ *   - `null`                      → niente da chiudere (il no-op idempotente);
+ *   - `{ …, resolved: true }`     → chiusa;
+ *   - `{ …, resolved: false }`    → c'era una issue da chiudere e il close e'
+ *     stato respinto anche dopo i ritentativi. Prima aveva la stessa forma del
+ *     no-op (`null`), quindi un guasto era indistinguibile dal caso normale:
+ *     run verde, una riga di log, issue aperta per sempre.
+ *
+ * @param {string} titlePrefix  Stable title. Di default i primi
+ *                              DEDUP_TITLE_PREFIX_LEN caratteri fanno match,
+ *                              esattamente come dedupa createGithubIssue.
+ * @param {{ workflow?: string, runUrl?: string, exactTitle?: boolean }} [ctx]
+ *   `exactTitle: true` chiude SOLO la issue dal titolo identico a `titlePrefix`.
+ *   Da usare ovunque apertura e chiusura condividano una chiave letterale: il
+ *   match di prefisso chiuderebbe «la prima issue aperta che comincia per», che
+ *   e' un bersaglio diverso da quello che il chiamante crede di nominare.
  */
-export function resolveGithubIssue(titlePrefix, { workflow, runUrl } = {}) {
+export function resolveGithubIssue(titlePrefix, { workflow, runUrl, exactTitle = false } = {}) {
   if (process.env.ENABLE_FAILURE_REPORT === 'false') {
     console.log('[github-issue-creator] ENABLE_FAILURE_REPORT=false, skipping resolve');
     return null;
@@ -734,10 +813,13 @@ export function resolveGithubIssue(titlePrefix, { workflow, runUrl } = {}) {
   }
   // Pass the FULL title — searchSafePrefix slices + sanitizes internally and
   // needs the un-sliced title to detect a mid-word cut.
-  const existing = findOpenIssueByTitlePrefix(titlePrefix);
+  const existing = exactTitle
+    ? findOpenIssueByExactTitle(titlePrefix)
+    : findOpenIssueByTitlePrefix(titlePrefix);
   if (!existing) {
     const prefix = titlePrefix.slice(0, DEDUP_TITLE_PREFIX_LEN);
-    console.log(`[github-issue-creator] resolve: no open issue matching "${prefix}" — nothing to close`);
+    const how = exactTitle ? 'con titolo esattamente' : 'matching';
+    console.log(`[github-issue-creator] resolve: no open issue ${how} "${prefix}" — nothing to close`);
     return null;
   }
   const note = [
@@ -746,16 +828,45 @@ export function resolveGithubIssue(titlePrefix, { workflow, runUrl } = {}) {
     '\nClosed automatically; it will reopen if the same failure recurs.',
   ].join('');
   gh(['issue', 'comment', String(existing.number), '--body', note, ...repoFlag()], { allowFailure: true });
-  const closed = gh(
-    ['issue', 'close', String(existing.number), '--reason', 'completed', ...repoFlag()],
-    { allowFailure: true },
-  );
+  // RITENTATIVO. Un close respinto e' quasi sempre transitorio (rate-limit
+  // secondario, 5xx), e chi chiama non torna: `--resolve` gira solo quando la
+  // condizione e' verde, e la prossima occasione puo' essere fra giorni. Senza
+  // ritentativo l'issue resta aperta con un contenuto ormai falso — la classe
+  // «non si rompe, non fa». Tre tentativi con backoff lineare costano al
+  // massimo 3s su un percorso che gira una volta per run.
+  let closed = null;
+  for (let attempt = 1; attempt <= RESOLVE_CLOSE_ATTEMPTS; attempt++) {
+    closed = gh(
+      ['issue', 'close', String(existing.number), '--reason', 'completed', ...repoFlag()],
+      { allowFailure: true },
+    );
+    if (closed !== null) break;
+    if (attempt < RESOLVE_CLOSE_ATTEMPTS) {
+      console.error(
+        `[github-issue-creator] resolve: close of #${existing.number} rejected `
+        + `(tentativo ${attempt}/${RESOLVE_CLOSE_ATTEMPTS}), ritento.`,
+      );
+      sleepSync(attempt * RESOLVE_CLOSE_RETRY_DELAY_MS);
+    }
+  }
   if (closed !== null) {
     console.log(`[github-issue-creator] resolve: closed #${existing.number} — ${existing.title}`);
-    return { number: existing.number, title: existing.title, url: existing.url };
+    return { number: existing.number, title: existing.title, url: existing.url, resolved: true };
   }
-  console.error(`[github-issue-creator] resolve: could not close #${existing.number} (best-effort)`);
-  return null;
+  // Esaurito il ritentativo: il fallimento deve USCIRE. Assorbirlo lascia la run
+  // verde e una sola riga in un log ripiegato, cioe' un guasto invisibile su un
+  // percorso che nessuno ripasserà presto. Annotazione + summary + `resolved:
+  // false`, che la CLI traduce in exit non-zero.
+  const msg = `[github-issue-creator] resolve: close di #${existing.number} respinto dopo `
+    + `${RESOLVE_CLOSE_ATTEMPTS} tentativi — "${existing.title}" resta APERTA`
+    + (workflow ? ` (${workflow})` : '') + '.';
+  console.error(msg);
+  annotateError(msg);
+  appendStepSummary(
+    `❌ **Close respinto** — #${existing.number} doveva essere richiusa `
+    + `(${workflow || 'resolve'}) e resta aperta dopo ${RESOLVE_CLOSE_ATTEMPTS} tentativi.`,
+  );
+  return { number: existing.number, title: existing.title, url: existing.url, resolved: false };
 }
 
 /**
@@ -859,6 +970,14 @@ export async function createGithubIssue({
   // for the unchanged free-form `description` behaviour every existing caller
   // already has.
   signals = null,
+  // Riscrive il CORPO della issue canonica quando questa passata la ritrova
+  // (dedup su una aperta) o la riapre, invece di lasciarci quello della prima
+  // occorrenza. Opt-in, perche' per i reporter di guasto il corpo E' la prima
+  // occorrenza e la storia sta nei commenti. Serve ai DIGEST, il cui corpo non
+  // e' un evento ma un ELENCO: la' un corpo mai riscritto e' un elenco falso —
+  // e sul percorso di riapertura arriva con `needs-human` addosso, cioe' letto
+  // da un umano. CLI: --refresh-body.
+  refreshBody = false,
   // `project` accepted for backward compatibility but not used (GH issues
   // don't have a free-form project field; the workflow name is preserved
   // in the body for grouping instead).
@@ -992,6 +1111,7 @@ export async function createGithubIssue({
         ], { allowFailure: true });
         console.log(`[github-issue-creator] Escalated #${existing.number} → ${targetLabel}`);
       }
+      if (refreshBody) refreshIssueBody(existing.number, body);
       console.log(`[github-issue-creator] Commented on existing #${existing.number} — ${existing.title}`);
       return {
         number: existing.number,
@@ -1092,6 +1212,11 @@ export async function createGithubIssue({
             persisted: false,
           };
         }
+        // La riapertura resuscita il corpo PRE-CHIUSURA. Per un digest quello
+        // e' l'elenco del giorno prima della chiusura, con quello vero solo
+        // nell'ultimo commento: la stessa cosa falsa che il chiuditore
+        // eliminava sull'issue aperta, un percorso piu' in la'.
+        if (refreshBody) refreshIssueBody(recentlyClosed.number, body);
         appendStepSummary(
           `${RECURRENCE_MARKER} **Riaperta #${recentlyClosed.number}** — ricorrenza della stessa `
           + 'condizione, nessuna issue nuova aperta.',
@@ -1159,7 +1284,7 @@ if (process.argv[1]?.endsWith('github-issue-creator.mjs')) {
 
   const title = get('--title');
   if (!title) {
-    console.error('Usage: node github-issue-creator.mjs --title "..." [--description "..."] [--priority N] [--label Bug] [--workflow "Update Coop"] [--reopen-within-hours N | --no-reopen] [--build-sha SHA] [--consecutive-gate N] [--gate-window-hours H] [--signal-cosa "..."] [--signal-osservato V] [--signal-atteso V] [--signal-comando "..."] [--signal-evidenza "..."]* [--resolve]');
+    console.error('Usage: node github-issue-creator.mjs --title "..." [--description "..."] [--priority N] [--label Bug] [--workflow "Update Coop"] [--reopen-within-hours N | --no-reopen] [--build-sha SHA] [--consecutive-gate N] [--gate-window-hours H] [--signal-cosa "..."] [--signal-osservato V] [--signal-atteso V] [--signal-comando "..."] [--signal-evidenza "..."]* [--refresh-body] [--resolve [--exact-title]]');
     process.exit(1);
   }
 
@@ -1185,8 +1310,18 @@ if (process.argv[1]?.endsWith('github-issue-creator.mjs')) {
   // Mirror of the failure reporter; runs from `if: success()` steps so a recovered
   // gate doesn't leave a stale open issue. Best-effort, always exits 0.
   if (args.includes('--resolve')) {
-    resolveGithubIssue(title, { workflow: get('--workflow'), runUrl: get('--run-url') });
-    process.exit(0);
+    const res = resolveGithubIssue(title, {
+      workflow: get('--workflow'),
+      runUrl: get('--run-url'),
+      // --exact-title: chiudi SOLO il titolo identico. Per chi apre e chiude
+      // sulla stessa chiave letterale e' l'unica forma corretta — vedi il
+      // docblock di resolveGithubIssue.
+      exactTitle: args.includes('--exact-title'),
+    });
+    // Exit non-zero SOLO quando c'era una issue da chiudere e il close e' stato
+    // respinto (ritentativi inclusi). «Niente da chiudere» resta il no-op verde
+    // che ogni chiamante `if: success()` si aspetta.
+    process.exit(res && res.resolved === false ? 1 : 0);
   }
 
   // --consecutive-gate: N>0 forces the gate (escalate on the Nth failure);
@@ -1226,6 +1361,7 @@ if (process.argv[1]?.endsWith('github-issue-creator.mjs')) {
     // it never supplied.
     buildSha: get('--build-sha') || null,
     consecutiveGate: Number.isFinite(consecutiveGate) ? consecutiveGate : 0,
+    refreshBody: args.includes('--refresh-body'),
     gateWindowHours: Number(get('--gate-window-hours') || DEFAULT_CRAWLER_GATE_WINDOW_HOURS),
     signals,
   }).then(() => {

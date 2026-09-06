@@ -1319,7 +1319,10 @@ function main() {
         if (decision.code && STRUCTURAL_OUTCOMES.includes(decision.code)) {
           commentOnGithubIssue(it.number, ttlReleaseNote({ code: decision.code, maxDays, ageDays: decision.ageDays }));
         }
-        resolveGithubIssue(it.title, { workflow: it.workflow, runUrl });
+        // `exactTitle`: qui il bersaglio e' la issue #it.number, gia' decisa. Il
+        // match di prefisso puo' chiudere «la prima aperta che comincia per»,
+        // cioe' un'altra issue, mentre il log qui sotto dice comunque CLOSED.
+        resolveGithubIssue(it.title, { workflow: it.workflow, runUrl, exactTitle: true });
         console.log(`  #${it.number} CLOSED — recovered via run ${run.databaseId}; ${recurrence.reason}; ${decision.reason}`);
       }
       closed++;

@@ -135,6 +135,7 @@ jobs:
             --title "Articoli con control character C0: ripubblicazione incompleta" \
             --workflow "republish-dirty-content" \
             --run-url "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" \
+            --exact-title \
             --resolve
 
       - name: Resolve backfill mode

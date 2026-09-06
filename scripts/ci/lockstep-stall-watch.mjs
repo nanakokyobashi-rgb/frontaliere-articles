@@ -258,7 +258,7 @@ async function main() {
       console.log('[lockstep-stall-watch] dry-run: richiuderei l\'allarme, se aperto.');
       return;
     }
-    resolveGithubIssue(STALL_ISSUE_TITLE, { workflow: 'lockstep-stall-watchdog', runUrl });
+    resolveGithubIssue(STALL_ISSUE_TITLE, { workflow: 'lockstep-stall-watchdog', runUrl, exactTitle: true });
     return;
   }
 

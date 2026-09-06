@@ -129,7 +129,7 @@ async function main() {
 
   if (!verdict.firing) {
     console.log(`[ticker-shadow-alert] 0${verdict.total !== null ? `/${verdict.total}` : ''} shadowed — richiudo un eventuale alert aperto.`);
-    if (!dryRun) resolveGithubIssue(TITLE, { workflow: 'publish-api' });
+    if (!dryRun) resolveGithubIssue(TITLE, { workflow: 'publish-api', exactTitle: true });
     return 0;
   }
 
