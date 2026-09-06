@@ -45,7 +45,7 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 
-import { citedTokens } from '../../scripts/ci/followup-resolution-match.mjs';
+import { citedTokens, isDistinctiveToken } from '../../scripts/ci/followup-resolution-match.mjs';
 
 const ROOT = fileURLToPath(new URL('../../', import.meta.url));
 const FOLLOWUP = readFileSync(`${ROOT}FOLLOWUP.md`, 'utf8');
@@ -168,4 +168,81 @@ test('la regola misura la Suggested action, non il bullet grezzo', () => {
       'misurare col fallback whole-body e ammette item che la chiusura leggera\' ' +
       '`no-valid-item`.',
   );
+});
+
+/**
+ * Ogni esempio di token che la documentazione o il prompt offrono deve passare
+ * l'oracolo VERO. Sembra pedanteria e non lo e': gli esempi sono la cosa che un
+ * modello copia letteralmente, quindi un esempio che non qualifica conia item
+ * che la chiusura leggera' `no-valid-item` — cioe' riapre l'asimmetria
+ * ammissione/chiusura proprio nella riga che la dichiara chiusa.
+ *
+ * E' successo due volte in questa stessa PR, in entrambi i casi su regole «non
+ * ovvie» che a occhio sembrano giuste: `percorso/file.mjs` e `nomeCampo`
+ * (rifiutati come bare path e bare identifier) nel prompt, e `recordScore:
+ * false` nel template — quest'ultimo era passato inosservato anche alla review,
+ * perche' `:` seguito da spazio non e' `:\d`. Il controllo a occhio non regge:
+ * qui l'esempio viene ESEGUITO.
+ *
+ * Contratto: gli esempi si dichiarano dopo il marcatore letterale
+ * `token-esempio:` e valgono fino alla fine della parentesi o della riga.
+ */
+const TOKEN_EXAMPLE_SOURCES = [
+  ['FOLLOWUP.md', FOLLOWUP],
+  ['.github/workflows/post-merge-followup.yml', WORKFLOW],
+];
+
+function declaredTokenExamples(text) {
+  const out = [];
+  // La lista finisce dove finisce la FORMA di una lista: span fra backtick
+  // separati solo da virgole/spazi. Delimitarla su `)` non funziona — la prima
+  // parentesi chiusa e' quella di `funzione()`, dentro il primo esempio.
+  for (const m of text.matchAll(/token-esempio:((?:\s*`[^`]+`\s*,?)+)/g)) {
+    for (const t of m[1].matchAll(/`([^`]+)`/g)) out.push(t[1]);
+  }
+  return out;
+}
+
+test('ogni token-esempio dichiarato passa davvero isDistinctiveToken()', () => {
+  let total = 0;
+  for (const [label, text] of TOKEN_EXAMPLE_SOURCES) {
+    const examples = declaredTokenExamples(text);
+    assert.ok(
+      examples.length > 0,
+      `${label}: nessun \`token-esempio:\` dichiarato — se gli esempi esistono ma non ` +
+        'portano il marcatore, questo test non li vede e la rete si apre in silenzio',
+    );
+    for (const ex of examples) {
+      assert.ok(
+        isDistinctiveToken(ex),
+        `${label}: l'esempio \`${ex}\` NON passa isDistinctiveToken(). Un item coniato ` +
+          'copiandolo nascerebbe `no-valid-item`. Qualificano solo le forme con ' +
+          'punteggiatura di codice: chiamata `f()`, dot-member `a.b`, confronto `n >= 1`.',
+      );
+      total++;
+    }
+  }
+  assert.ok(total >= 6, `attesi almeno 6 esempi dichiarati, trovati ${total}`);
+});
+
+test('`Suggested action` resta l\'ULTIMO campo di ogni item del template', () => {
+  // Adversarial check della review su 3d42bc271: `suggestedActionText()` chiude
+  // la regione solo su `#{2,3}\s`, `- Source:`, `- Original text:` e
+  // `- Funnel impact:`. `- Rationale:` e `- Stato dichiarato nella PR:` NON
+  // sono terminatori, quindi se un giro futuro riordinasse i campi la regione
+  // assorbirebbe quelli che seguono e la CHIUSURA conterebbe token che
+  // l'ammissione non ha giudicato: di nuovo due barre diverse, stavolta con la
+  // chiusura piu' larga. Finche' `Suggested action` e' ultimo il rischio non
+  // esiste — e questo test e' l'ancoraggio che finora mancava.
+  const m = FOLLOWUP.match(/^````markdown\n([\s\S]*?)^````$/m);
+  assert.ok(m, 'FOLLOWUP.md: manca il blocco del template');
+  for (const [i, item] of m[1].split(/^### \d+\./m).slice(1).entries()) {
+    const fields = [...item.matchAll(/^\s*- ([A-Z][^:\n]*):/gm)].map((x) => x[1]);
+    assert.equal(
+      fields.at(-1),
+      'Suggested action',
+      `item ${i + 1}: l'ultimo campo e' \`${fields.at(-1)}\`, non \`Suggested action\`. ` +
+        'Ordine dei campi: ' + fields.join(' → '),
+    );
+  }
 });

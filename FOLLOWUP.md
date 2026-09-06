@@ -58,7 +58,7 @@ completamento di un task ancora aperto.**
 - **Ogni altra voce di scope dovuto → candidato.** Il task non è chiuso finché
   non è fatta. `out of scope` e `posposto` **non** sono scappatoie valide.
 
-Restano fuori solo le tre categorie hard-exclude qui sotto, che non sono
+Restano fuori solo le quattro categorie hard-exclude qui sotto, che non sono
 scope-feature.
 
 ### Dalle review del bot
@@ -141,8 +141,11 @@ che la chiusura esclude per costruzione — basterebbe ad ammettere un item già
 non chiudibile. Prima formula l'azione, poi giudica quella.
 
 **Non è una scusa per perdere lavoro azionabile:** se l'item ha un punto
-d'intervento ma la frase non lo cita, **derivalo** (nomina file, simbolo o
-campo) invece di scartare. Lo scarto è per i rischi che un punto d'intervento
+d'intervento ma la frase non lo cita, **derivalo** invece di scartare — ma in una
+forma che l'oracolo riconosce, cioe' con punteggiatura di codice
+(token-esempio: `funzione()`, `oggetto.campo`, `campo >= 1`). Un path nudo o un
+identificatore nudo NON qualificano: `percorso/file.mjs` e `nomeCampo` valgono
+zero token. Lo scarto è per i rischi che un punto d'intervento
 non ce l'hanno. Ciò che viene scartato va nel commento di summary della PR,
 come per la verifica live.
 
@@ -163,7 +166,7 @@ Questa struttura **non è cosmetica: è l'unico appiglio che ha la chiusura.**
 il corpo sugli heading `### <n>.` e per ogni item chiede una *condizione di
 accettazione falsificabile*: la regione `Suggested action` deve esistere **e**
 citare fra backtick almeno un token che porti punteggiatura di codice
-(`nomeFunzione()`, `oggetto.campo`, `contatore >= 1`). Un item che non la
+(token-esempio: `nomeFunzione()`, `oggetto.campo`, `contatore >= 1`). Un item che non la
 porta non è lavoro verificabile ma un rischio in prosa: non si può provare né
 fatto né da fare, e resta in coda per costruzione.
 
@@ -192,7 +195,7 @@ Body:
   > <verbatim>
 - Funnel impact: <ciclo di pubblicazione | contratto col sito | superficie pubblicata | none>
 - Rationale: <perché passa il filtro di scopo>
-- Suggested action: <il passo concreto, che DEVE citare fra backtick almeno un token di codice — `discoverFreeModels()`, `staleIds.length`, `recordScore: false`. Se il passo non è ovvio, cita comunque il simbolo o il file su cui indagare.>
+- Suggested action: <il passo concreto, che DEVE citare fra backtick almeno un token di codice (token-esempio: `discoverFreeModels()`, `staleIds.length`, `coerceRecordScore()`). Se il passo non è ovvio, cita comunque il simbolo su cui indagare — nella forma `simbolo()` o `oggetto.campo`, non il nome del file nudo, che vale zero token.>
 
 ### 2. <l'item in una riga>
 - Source: ...
