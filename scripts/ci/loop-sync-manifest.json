@@ -644,11 +644,11 @@
     {
       "path": ".github/workflows/issue-fix.yml",
       "mode": "adapted",
-      "reason": "Gate sender esteso agli account del progetto (la label di routing la applica il PAT di questo repo, di un altro account); identita' di push GITHUB_PAT_NANAKO invece del token GitHub App; gate test `node --test` invece di vitest; niente npm ci; il pre-flight di quota passa QUOTA_BEACON_PEER_REPO per cedere al sito. Prompt riscritto sul dominio di questo repo (superficie dist/api, contratto engine/host, content/ come dati). RIALLINEATO 2026-08-09 da `both-moved`, con le due modifiche verificate DISGIUNTE. Il sito ha sostituito `env.APP_TOKEN == ''` con `env.APP_TOKEN_WORKFLOWS != 'true'` nel gate del capability guard (riga 185 la'): qui quella stessa espressione era gia' `env.GITHUB_PAT_NANAKO == ''` (riga 136), cioe' il sito ha cambiato esattamente cio' che questo fork aveva gia' rimpiazzato. Il corpus si e' mosso per conto suo con #93 (rimozione dell'http.<host>.extraheader che rendeva inerte il set-url col PAT, e l'`ISSUE:` mancante per mark-claude-terminal-outcome.mjs). Nessuna delle due tocca cio' che l'altra ha toccato. Dal 2026-09-03 porta anche i tre step deterministici post-Claude del sito: il checkpoint WIP che salva su `fix/issue-N` il diff di un run morto ai turni, il backstop `FIX_OUTCOME` che garantisce un marker al drainer anche quando l'agente non lo posta, e il classificatore che colora il job sul LAVORO consegnato invece che sull'exit della CLI. Adattati all'identita' di push di questo repo (GITHUB_PAT_NANAKO invece del token di App) e al fatto che ogni `gh` qui vuole `--repo`.",
+      "reason": "Gate sender esteso agli account del progetto (la label di routing la applica il PAT di questo repo, di un altro account); identita' di push GITHUB_PAT_NANAKO invece del token GitHub App; gate test `node --test` invece di vitest; niente npm ci; il pre-flight di quota passa QUOTA_BEACON_PEER_REPO per cedere al sito. Prompt riscritto sul dominio di questo repo (superficie dist/api, contratto engine/host, content/ come dati). RIALLINEATO 2026-08-09 da `both-moved`, con le due modifiche verificate DISGIUNTE. Il sito ha sostituito `env.APP_TOKEN == ''` con `env.APP_TOKEN_WORKFLOWS != 'true'` nel gate del capability guard (riga 185 la'): qui quella stessa espressione era gia' `env.GITHUB_PAT_NANAKO == ''` (riga 136), cioe' il sito ha cambiato esattamente cio' che questo fork aveva gia' rimpiazzato. Il corpus si e' mosso per conto suo con #93 (rimozione dell'http.<host>.extraheader che rendeva inerte il set-url col PAT, e l'`ISSUE:` mancante per mark-claude-terminal-outcome.mjs). Nessuna delle due tocca cio' che l'altra ha toccato. Dal 2026-09-03 porta anche i tre step deterministici post-Claude del sito: il checkpoint WIP che salva su `fix/issue-N` il diff di un run morto ai turni, il backstop `FIX_OUTCOME` che garantisce un marker al drainer anche quando l'agente non lo posta, e il classificatore che colora il job sul LAVORO consegnato invece che sull'exit della CLI. Adattati all'identita' di push di questo repo (GITHUB_PAT_NANAKO invece del token di App) e al fatto che ogni `gh` qui vuole `--repo`. RICONCILIATO 2026-09-06 da `both-moved` (#956, item 1). Le due mosse dalla baseline precedente sono di nuovo DISGIUNTE. Lato sito: il tetto di step `timeout-minutes` su `Run Claude fix` (classe #7310), PORTATO qui con il numero ri-misurato su questo repo invece che copiato; il resto del suo diff e' la chiave di concorrenza per-issue (che qui era gia' arrivata con #908) e un commento sul default di FOLLOWUP_MAX_INFLIGHT_FIX, che nel nostro file non compare. Lato corpus: il pre-flight di dispatch stantio (#918), la terza condizione `no-root-cause`+manifest per la consegna al sito (#316), il `sort_by(.createdAt) | last` sulle due letture `gh pr list` (#925) e l'eccezione «issue aggregata» nel prompt — tutte modifiche che il sito non ha, quindi `corpus-ahead` da far risalire di la', non drift da correggere qui. Nota sul perche' il `both-moved` era in parte artificiale: l'allineamento del 2026-09-03 aveva aggiornato `baseline.corpus` e `alignedAt` lasciando `baseline.site` a quello del 2026-08-09, quindi il lato sito risultava mosso anche per i tre giri gia' letti allora.",
       "baseline": {
-        "site": "082c8cfe1e649be2",
-        "corpus": "85634ab2f1fe93c8",
-        "alignedAt": "2026-09-03"
+        "site": "528d65247c678beb",
+        "corpus": "bf596d2a7eb43c43",
+        "alignedAt": "2026-09-06"
       }
     },
     {
@@ -3374,6 +3374,16 @@
         "site": null,
         "corpus": "fa051a94fac7eb5d",
         "alignedAt": "2026-09-04"
+      }
+    },
+    {
+      "path": "scripts/lib/mentions-id.mjs",
+      "mode": "corpus-only",
+      "reason": "La regola «l'id compare ancora COME id, e non solo come sottostringa di un id piu' lungo?», estratta da `scripts/retire-article.mjs` (passo 12) perche' serve identica al gate di PR `generator/tests/retired-articles-fully-removed.test.mjs`: due copie della stessa regola divergono, ed e' il difetto vietato da AGENTS.md #6. Resta `corpus-only` per la stessa ragione del suo unico chiamante di produzione: il ritiro di un articolo e' un'operazione sul CORPUS, e sul sito `scripts/retire-article.mjs` non esiste — dopo il cutover del 2026-08-02 la' non si registrano ne' si ritirano articoli. Non e' `corpus-only-pending`: non c'e' un lavoro da tracciare sul sito, portarlo aprirebbe una PR su un percorso morto. Modulo puro (nessun import), quindi copiabile senz'altro se un giorno il sito tornasse a generare.",
+      "baseline": {
+        "site": null,
+        "corpus": "4acdc6d8860661a5",
+        "alignedAt": "2026-09-06"
       }
     }
   ]

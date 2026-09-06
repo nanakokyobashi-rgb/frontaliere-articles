@@ -50,6 +50,10 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { ledgerArticleId } from '../generator/scripts/lib/source-url-ledger.mjs';
+// La regola «l'id compare ancora COME id?» vive in un modulo condiviso: la usa
+// anche il gate di PR `generator/tests/retired-articles-fully-removed.test.mjs`
+// sulle stesse superfici, e due copie divergono (vedi il file per il perché).
+import { mentionsId } from './lib/mentions-id.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 
@@ -293,6 +297,7 @@ function seoFilesFor(section) {
     .map((f) => `content/seo/${f}`);
 }
 
+
 /** In quale sezione vive l'id? Deciso dal registro che lo contiene. */
 function findSection(id) {
   const found = Object.entries(SECTIONS).filter(([, cfg]) => read(cfg.registryFile).includes(`id: '${id}',`));
@@ -443,7 +448,7 @@ function main() {
     cfg.sourceLedger, IMAGES_LEDGER,
     ...(cfg.idUnionFile ? [cfg.idUnionFile] : []),
   ].filter((f) => existsSync(rel(f)));
-  const leftovers = surfaces.filter((f) => read(f).includes(id));
+  const leftovers = surfaces.filter((f) => mentionsId(read(f), id));
   if (leftovers.length > 0) {
     console.error(`\nRIMOZIONE PARZIALE — '${id}' compare ancora in:\n${leftovers.map((f) => `   ${f}`).join('\n')}`);
     process.exit(1);

@@ -2891,13 +2891,26 @@ function endRegisterLock() {
 // The files a completed registration must ALL carry the id in, used to tell a
 // benign leftover lock from a genuinely split corpus (see
 // `resolveRegisterLock`). Derived from the same section config the
-// `modifyXxx()` functions read, so the two cannot drift apart: the slug data
-// file (`modifyRouterTs`), the article registry (`modifyBlogArticlesTsx`), the
-// four meta files and the four per-locale body files (`modifyI18nTs` +
-// `modifyLocaleFile`), and the SEO file (`modifySeoService`). `modifySitemap`
-// and `modifySitemapNews` are deliberately absent: both are no-ops here (the
-// sitemaps are derived from the whole corpus by scripts/build-api.mjs), so
-// they have no per-id state that could be half-written.
+// `modifyXxx()` functions read, so the two cannot drift apart: the
+// `BlogArticleId` union, the slug data file (both `modifyRouterTs`), the
+// article registry (`modifyBlogArticlesTsx`), the four meta files and the four
+// per-locale body files (`modifyI18nTs` + `modifyLocaleFile`), and the SEO file
+// (`modifySeoService`). `modifySitemap` and `modifySitemapNews` are
+// deliberately absent: both are no-ops here (the sitemaps are derived from the
+// whole corpus by scripts/build-api.mjs), so they have no per-id state that
+// could be half-written.
+//
+// The union file is the FIRST write of the whole sequence (`modifyRouterTs`
+// calls `modifyRouterUnion` before touching the slug map), so leaving it out
+// left the widest kill window of all uncompared: a kill between the union and
+// the slug map put the id in the ONLY file nobody looked at, every compared
+// target came back absent, and `resolveRegisterLock()` classified the split
+// corpus as `nothing-written` — clearing the marker over an orphan union
+// member. Its path is hard-coded in `modifyRouterUnion()` rather than living
+// in `ARTICLE_SECTION_CONFIGS`, which is exactly how it escaped a list that
+// claims to be derived from the section config; `section.updateRouterUnion` is
+// the same flag that gates the write, so svizzera (loose string ids, no union)
+// keeps its 11 targets.
 //
 // `sectionName` is the section RECORDED IN THE LOCK, not SECTION_NAME: the two
 // differ whenever `generate-article.yml` alternates sections in the same
@@ -2917,9 +2930,31 @@ function registerLockTargets(id, sectionName = SECTION_NAME) {
     );
   }
   const targets = [
-    { label: section.slugDataFile, absPath: resolve(section.slugDataFile), needle: id },
-    { label: section.registryFile, absPath: resolve(section.registryFile), needle: id },
-    { label: section.seoFile, absPath: resolve(section.seoFile), needle: id },
+    // First write of the sequence, and the only target whose path is NOT in
+    // the section config (`modifyRouterUnion` hard-codes it). The needle is
+    // the form actually written into the union — the id between single
+    // quotes, `| 'id';` — not the bare id: the file holds nothing else.
+    ...(section.updateRouterUnion
+      ? [{
+          label: 'packages/articles/content/blogArticleIds.ts',
+          absPath: resolve('packages/articles/content/blogArticleIds.ts'),
+          needle: `'${id}'`,
+        }]
+      : []),
+    // Every needle is the form the writer actually appends, NOT the bare id.
+    // `registrationTargetStatus()` does a plain `includes()` over the whole
+    // file, so a bare id reads `present` on any file that merely CONTAINS it
+    // as a substring — and ids nest: adding a year suffix or a qualifier makes
+    // one id a substring of another. Not hypothetical, it is already true in
+    // the corpus: `'blog-frontalieri-disoccupazione-svizzera-2026'` in
+    // seo-blog-*.ts contains `disoccupazione-svizzera-2026`, so registering
+    // the latter would read `present` on an SEO file it was never written to.
+    // Three targets reading a false `present` is what turns a genuine SPLIT
+    // into `committed` — the marker cleared over a half-registered corpus,
+    // which is the exact failure this lock exists to catch.
+    { label: section.slugDataFile, absPath: resolve(section.slugDataFile), needle: `'${id}':` },
+    { label: section.registryFile, absPath: resolve(section.registryFile), needle: `id: '${id}'` },
+    { label: section.seoFile, absPath: resolve(section.seoFile), needle: `'blog-${id}':` },
   ];
   for (const locale of ['it', 'en', 'de', 'fr']) {
     const metaFile = `services/locales/${section.metaPrefix}-${locale}.ts`;
