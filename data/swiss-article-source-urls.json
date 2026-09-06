@@ -1,5 +1,4 @@
 {
-  "https://www.laregione.ch/svizzera/svizzera/1943478/livigno-idea-progetto-s-chanf-grigioni-canton-collegamento": "livigno-idea-progetto-s-chanf",
   "https://www.rsi.ch/s/3949146": "maggiori-responsabilita-peri-vertici-bancari",
   "https://www.tio.ch/ticino/attualita/1943520/la-siccita-sale-al-grado-2-a-breggia-ecco-cosa-non-potete-fare": "la-siccita-sale-al-grado-2-a-breggia",
   "https://www.laregione.ch/svizzera/svizzera/1943512/misure-siccita-urgenza-ora-cf": "cf-urgenza-siccita",
@@ -1885,6 +1884,11 @@
   "https://www.tio.ch/ticino/attualita/1948269/volo-swiss-zurigo-viaggio-emergenza": {
     "articleId": "esercitazione-salvataggio-monte-ceneri",
     "ts": "2026-09-06T11:06:06.916Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/cronaca/1948311/attacco-schweizerhof-credito-destinatari-dati": {
+    "articleId": "attacco-hacker-schweizerhof",
+    "ts": "2026-09-06T11:37:02.159Z",
     "keyForm": 2
   }
 }
