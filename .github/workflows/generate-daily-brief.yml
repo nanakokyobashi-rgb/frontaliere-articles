@@ -294,11 +294,14 @@ jobs:
           # durata del blackout — quando non c'e' nessun giorno-edizione a
           # rimettere il rosso — l'allarme non scatta MAI (#885).
           # Quindi: un rifiuto permanente (credenziale non valida, ref
-          # protetto, repo non raggiungibile) resta rosso anche nel giorno di
-          # soli-registro; solo un fallimento senza segno di rifiuto (rete,
-          # race sul ref) e' transitorio e puo' morire sul runner.
-          if grep -qiE 'denied|403|forbidden|protected branch|not found|authentication failed|invalid username or password|could not read username|support for password authentication' "$PUSH_LOG"; then
-            echo "::error::push rifiutato in modo permanente (credenziale scaduta/revocata, ref protetto o repo non raggiungibile — vedi output sopra): non e' una causa transitoria, si ripeterebbe identica ogni mattina e su un giorno di soli-registro terrebbe lo streak sotto la soglia con l'allarme muto per sempre (#885)"
+          # protetto, repo non raggiungibile, ruleset GH013) resta rosso
+          # anche nel giorno di soli-registro; solo un fallimento senza
+          # segno di rifiuto (rete, race `! [rejected] ...(fetch first)`) e'
+          # transitorio e puo' morire sul runner. `403` e' ancorato al
+          # messaggio (`HTTP 403`, `error: 403`, `remote:.*403`), non al
+          # progresso git (`403 bytes`). `remote rejected` non e' `rejected`.
+          if grep -qiE 'denied|HTTP 403|error: 403|remote:.*403|forbidden|protected branch|not found|authentication failed|invalid username or password|could not read username|support for password authentication|remote rejected|declined|rule violations|GH0[0-9]{2}' "$PUSH_LOG"; then
+            echo "::error::push rifiutato in modo permanente (credenziale scaduta/revocata, ref protetto, ruleset o repo non raggiungibile — vedi output sopra): non e' una causa transitoria, si ripeterebbe identica ogni mattina e su un giorno di soli-registro terrebbe lo streak sotto la soglia con l'allarme muto per sempre (#885)"
             exit 1
           fi
           if [ "$LEDGER_ONLY" = true ]; then

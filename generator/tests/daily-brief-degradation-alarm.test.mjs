@@ -20,6 +20,7 @@
 
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import { execFileSync } from 'node:child_process';
 import { mkdtempSync, writeFileSync, readFileSync, statSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
@@ -44,6 +45,45 @@ import {
 
 const REPO_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
 const WORKFLOW_PATH = path.join(REPO_ROOT, '.github', 'workflows', 'generate-daily-brief.yml');
+
+/** Alternatives the commit-step grep must treat as a permanent push rejection. */
+const PERMANENT_REJECTION_SIGNS = [
+  'denied',
+  'HTTP 403',
+  'error: 403',
+  'remote:.*403',
+  'forbidden',
+  'protected branch',
+  'not found',
+  'authentication failed',
+  'invalid username or password',
+  'could not read username',
+  'support for password authentication',
+  'remote rejected',
+  'declined',
+  'rule violations',
+  'GH0[0-9]{2}',
+];
+
+function permanentRejectionGrepPattern(yml = readFileSync(WORKFLOW_PATH, 'utf-8')) {
+  const commitStep = yml.slice(yml.indexOf('- name: Commit and push'), yml.indexOf('- name: Push hero'));
+  const permanent = commitStep.slice(commitStep.indexOf('\n          done'), commitStep.indexOf('if [ "$LEDGER_ONLY" = true ]'));
+  const grepHit = permanent.match(/grep -qiE '([^']+)' "\$PUSH_LOG"/);
+  assert.ok(grepHit, 'commit step must classify the push log');
+  return { commitStep, permanent, pattern: grepHit[1] };
+}
+
+function pushLogMatchesPermanent(pattern, text) {
+  const file = path.join(mkdtempSync(path.join(tmpdir(), 'push-log-')), 'push.log');
+  writeFileSync(file, text);
+  try {
+    execFileSync('grep', ['-qiE', pattern, file], { stdio: 'pipe' });
+    return true;
+  } catch (err) {
+    if (err.status === 1) return false;
+    throw err;
+  }
+}
 
 /** A snapshot whose jobs block has been degraded for `editions` runs. */
 function briefWithStreak(editions) {
@@ -488,14 +528,19 @@ test('a day that stages only the ledger cannot turn a lost push into a permanent
   assert.match(patBranch, /exit 1/, 'and it must be red');
 
   // Un rifiuto permanente (PAT scaduto/revocato, ref protetto, repo non
-  // raggiungibile) supera il `-z` del guard, arriva al push e si ripete
-  // identico ogni mattina: degradarlo terrebbe lo streak sotto la soglia per
-  // sempre, come il PAT assente. Deve restare rosso PRIMA del ramo degradato,
-  // e per farlo il push deve catturare il proprio output.
+  // raggiungibile, ruleset GH013) supera il `-z` del guard, arriva al push
+  // e si ripete identico ogni mattina: degradarlo terrebbe lo streak sotto
+  // la soglia per sempre, come il PAT assente. Deve restare rosso PRIMA del
+  // ramo degradato, e per farlo il push deve catturare il proprio output.
   assert.match(commitStep, /git push "\$REMOTE" "HEAD:\$TARGET" 2>&1 \| tee "\$PUSH_LOG"/,
     'the push must capture its output, or the cause of the failure cannot be classified');
-  const permanent = commitStep.slice(commitStep.indexOf('\n          done'), commitStep.indexOf('if [ "$LEDGER_ONLY" = true ]'));
-  assert.match(permanent, /grep -qiE '[^']*denied[^']*' "\$PUSH_LOG"/, 'a permanent rejection is recognised on the push output');
+  const { permanent, pattern } = permanentRejectionGrepPattern(yml);
+  const signs = pattern.split('|');
+  for (const sign of PERMANENT_REJECTION_SIGNS) {
+    assert.ok(signs.includes(sign), `permanent-rejection grep must include ${JSON.stringify(sign)}`);
+  }
+  assert.equal(signs.includes('403'), false, 'naked 403 matches git progress "403 bytes" and would reopen loop #882');
+  assert.equal(signs.includes('rejected'), false, 'bare rejected swallows ! [rejected] ...(fetch first) races');
   assert.match(permanent, /::error::/, 'and it is an error');
   assert.match(permanent, /exit 1/, 'and it is red');
   assert.doesNotMatch(permanent, /LEDGER_ONLY/, 'a permanent rejection is fatal even on a ledger-only day');
@@ -506,6 +551,47 @@ test('a day that stages only the ledger cannot turn a lost push into a permanent
   const tail = branches[1].slice(branches[1].indexOf('fi') + 2);
   assert.match(tail, /::error::push failed after 3 attempts/, 'a lost EDITION must still be red');
   assert.match(tail, /exit 1/, 'and it must exit non-zero');
+});
+
+test('the permanent-rejection grep fires on ruleset/HTTP 403 and not on progress or a fetch-first race', () => {
+  const { pattern } = permanentRejectionGrepPattern();
+  assert.equal(
+    pushLogMatchesPermanent(pattern, [
+      'Enumerating objects: 3, done.',
+      'Counting objects: 100% (3/3), done.',
+      'Writing objects: 100% (3/3), 403 bytes | 403.00 KiB/s, done.',
+      'Total 3 (delta 0), reused 0 (delta 0), pack-reused 0',
+      "error: failed to push some refs to 'https://github.com/nanakokyobashi-rgb/frontaliere-articles.git'",
+    ].join('\n')),
+    false,
+    'git progress "403 bytes" on a network-failed ledger-only push must stay ledger-lost',
+  );
+  assert.equal(
+    pushLogMatchesPermanent(pattern, [
+      '! [rejected] HEAD -> main (fetch first)',
+      "error: failed to push some refs to 'https://github.com/nanakokyobashi-rgb/frontaliere-articles.git'",
+      'hint: Updates were rejected because the remote contains work that you do',
+    ].join('\n')),
+    false,
+    'a non-fast-forward race is transient and must stay ledger-lost',
+  );
+  assert.equal(
+    pushLogMatchesPermanent(pattern, [
+      'remote: error: GH013: Repository rule violations found for refs/heads/main',
+      '! [remote rejected] HEAD -> main (push declined due to repository rule violations)',
+      "error: failed to push some refs to 'https://github.com/nanakokyobashi-rgb/frontaliere-articles.git'",
+    ].join('\n')),
+    true,
+    'a ruleset rejection has no denied/403 and must still stay red',
+  );
+  assert.equal(
+    pushLogMatchesPermanent(pattern, [
+      'remote: Permission to nanakokyobashi-rgb/frontaliere-articles.git denied to user.',
+      "fatal: unable to access 'https://github.com/nanakokyobashi-rgb/frontaliere-articles.git/': The requested URL returned error: 403",
+    ].join('\n')),
+    true,
+    'an anchored HTTP 403 is a permanent rejection',
+  );
 });
 
 test('the crossing verdict is not spent on a run whose ledger never reached main', () => {
