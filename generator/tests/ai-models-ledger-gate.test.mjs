@@ -90,40 +90,204 @@ function makeStore() {
   return { db, written, last: () => written[written.length - 1] };
 }
 
-describe('#874/#864/#845 — una sola porta di scrittura verso ai_model_scores/_all', () => {
-  it('nel sorgente esiste UN solo `_dirtyModels.add(`, ed e\' dentro _proposeLedgerWrite', () => {
-    const righe = SRC_CODE.split('\n')
-      .map((riga, i) => ({ n: i + 1, riga }))
-      .filter(({ riga }) => /(?<![\w.])_dirtyModels\.add\(/.test(riga));
+// ── Le due porte, provate per ENUMERAZIONE e non per assenza di una stringa ──
+//
+// #936 item 2: entrambi i pin misuravano il TESTO del modulo cercando una forma
+// sola, quindi provavano «quella stringa non c'e'», non l'invariante. Un writer
+// che raggiungesse `_dirtyModels` per un alias, un `bind` o un `Set` passato a
+// una helper restava invisibile; un endpoint per-macchina letto per
+// destrutturazione (`const { OMNIROUTE_URL } = process.env`) o per chiave
+// dinamica (`process.env[cfg.urlEnv]`) lasciava la tabella corta col verde
+// addosso — cioe' proprio il modo di fallire che gli assert esistono per
+// chiudere, entrato dall'altra porta.
+//
+// La correzione e' la stessa per i due: invece di cercare la forma VIETATA, si
+// enumerano TUTTE le occorrenze del nome e si pretende che ognuna sia in una
+// forma dichiarata qui sotto. Una forma nuova — qualunque essa sia — non e'
+// dichiarata, quindi e' rossa: il default passa da «permesso» a «vietato», ed
+// e' quello a rendere il gate una prova invece di un campione.
 
-    // La riga della porta piu' quella del RECUPERO dentro
-    // `_persistScoresToFirestore`, che rimette in coda i modelli di una
-    // scrittura fallita: quella non e' una proposta nuova, e' la stessa gia'
-    // accettata dalla porta che torna indietro perche' la rete l'ha respinta.
-    // Filtrarla per NOME della funzione e non per numero di riga, cosi' resta
-    // vera quando il file si muove.
-    const attese = new Set(['_proposeLedgerWrite', '_persistScoresToFirestore']);
-    const funzioneDi = (n) => {
-      const prima = SRC_CODE.split('\n').slice(0, n);
-      for (let i = prima.length - 1; i >= 0; i--) {
-        // `export function` e i metodi contano quanto una `function` nuda: senza
-        // `export` nel pattern, un `_dirtyModels.add(` dentro una funzione
-        // ESPORTATA veniva attribuito alla dichiarazione precedente — e se
-        // quella era la porta, il pin restava verde su una violazione vera.
-        const m = prima[i].match(/^(?:export\s+)?(?:async\s+)?function (\w+)\s*\(/);
-        if (m) return m[1];
+/**
+ * Chi puo' toccare `_dirtyModels`, e con quale operazione. Ogni altra
+ * occorrenza del nome e' una violazione, compresa una che non scrive: un alias
+ * (`const s = _dirtyModels`), un `bind`, o il Set passato a una helper sono
+ * esattamente i modi in cui un secondo ingresso reale sarebbe rimasto sotto il
+ * pin testuale.
+ */
+const ACCESSI_A_DIRTY_MODELS = new Map([
+  // La porta.
+  ['_proposeLedgerWrite', new Set(['add'])],
+  // Il RECUPERO di una scrittura respinta dalla rete: non e' una proposta
+  // nuova, e' la stessa gia' accettata dalla porta che torna indietro. Legge la
+  // taglia, svuota e ri-aggiunge.
+  ['_persistScoresToFirestore', new Set(['add', 'clear', 'size'])],
+  // Sole letture.
+  ['flushScoresBeforeExit', new Set(['size'])],
+  ['getStats', new Set(['size'])],
+  // Il reset di processo.
+  ['resetState', new Set(['clear'])],
+]);
+
+/** Le funzioni in cui uno spread `[..._dirtyModels]` (copia in sola lettura) e' lecito. */
+const SPREAD_DIRTY_MODELS = new Set(['_persistScoresToFirestore']);
+
+/**
+ * Le letture di `process.env` che NON sono enumerabili leggendo il sorgente,
+ * con il motivo per cui non possono nascondere un endpoint per-macchina.
+ * Una funzione che non compare qui e legge l'ambiente per chiave dinamica rende
+ * rosso il test: e' la richiesta di dichiarare perche' e' sicura, non un
+ * divieto assoluto.
+ */
+const LETTORI_ENV_DINAMICI = new Map([
+  // Nome composto da un PREFISSO FISSO piu' un indice: la famiglia
+  // `GH_MODELS_PAT_<n>` non puo' produrre un nome con suffisso di endpoint, e
+  // l'assert sui pezzi statici del template qui sotto lo verifica.
+  ['getGhModelsPats', 'famiglia a prefisso fisso GH_MODELS_PAT_<n>'],
+  // Lettori generici: la chiave arriva dai call-site, che questo file enumera
+  // e pretende letterali — quindi il loro insieme di nomi E' leggibile.
+  ['_envProxyMayIntercept', 'helper `pick(n)`, chiamata solo con nomi letterali'],
+  ['_envInt', 'lettore di interi, chiamato solo con nomi letterali'],
+]);
+
+/**
+ * I lettori i cui call-site devono passare un nome LETTERALE, e da cui si
+ * raccolgono i nomi: nome → funzione che ne contiene le chiamate (`null` =
+ * ovunque nel modulo). Lo SCOPE non e' un dettaglio: `pick` e' un'arrow locale
+ * di `_envProxyMayIntercept`, e cercarla in tutto il file la confonderebbe con
+ * gli altri `pick(` del modulo, che non leggono l'ambiente.
+ */
+const LETTORI_ENV_ENUMERABILI = new Map([
+  ['_envInt', null],
+  ['pick', '_envProxyMayIntercept'],
+]);
+
+/**
+ * Chi puo' riferirsi all'INTERO `process.env` (senza `.NOME` ne' `[...]`).
+ * Una destrutturazione (`const { OMNIROUTE_URL } = process.env`) cade qui, ed
+ * e' il punto: era la prima delle due porte lasciate aperte da #936 item 2.
+ */
+const RIFERIMENTI_ENV_INTERO = new Map([
+  ['claudeCliChildEnv', 'passa l\'ambiente al processo figlio: non legge un endpoint, lo inoltra'],
+]);
+
+const SUFFISSI_ENDPOINT = /(?:URL|ENDPOINT|HOST|BASE)$/;
+
+const RIGHE_CODE = SRC_CODE.split('\n');
+/** La funzione che contiene la riga `n` (1-based). */
+function funzioneAllaRiga(n) {
+  for (let i = n - 1; i >= 0; i--) {
+    // `export function` e i metodi contano quanto una `function` nuda: senza
+    // `export` nel pattern, un riferimento dentro una funzione ESPORTATA veniva
+    // attribuito alla dichiarazione precedente — e se quella era la porta, il
+    // pin restava verde su una violazione vera.
+    const m = RIGHE_CODE[i].match(/^(?:export\s+)?(?:async\s+)?function (\w+)\s*\(/);
+    if (m) return m[1];
+  }
+  return '(top-level)';
+}
+
+describe('#874/#864/#845/#936 — una sola porta di scrittura verso ai_model_scores/_all', () => {
+  it('OGNI riferimento a `_dirtyModels` e\' in una forma dichiarata, non solo gli `.add(` (#936 item 2)', () => {
+    const violazioni = [];
+    let riferimenti = 0;
+    let porte = 0;
+
+    RIGHE_CODE.forEach((riga, i) => {
+      const n = i + 1;
+      // La dichiarazione: unica occorrenza lecita fuori da una funzione.
+      if (/^\s*const _dirtyModels\s*=\s*new Set\(\);\s*$/.test(riga)) {
+        riferimenti++;
+        return;
       }
-      return '(top-level)';
-    };
+      for (const m of riga.matchAll(/(\.{3})?\b_dirtyModels\b\s*(?:\.\s*(\w+))?/g)) {
+        riferimenti++;
+        const [, spread, membro] = m;
+        const fn = funzioneAllaRiga(n);
+        const dove = `${n}: ${riga.trim()} [in ${fn}]`;
 
-    const fuori = righe.filter(({ n }) => !attese.has(funzioneDi(n)));
+        if (spread) {
+          if (!SPREAD_DIRTY_MODELS.has(fn)) violazioni.push(`${dove} — spread non dichiarato`);
+          continue;
+        }
+        if (!membro) {
+          // Nessun `.` dopo il nome: il Set stesso viaggia come VALORE — alias,
+          // argomento di una helper, `bind`. E' il buco che il pin testuale non
+          // vedeva, perche' un writer cosi' non scrive mai `_dirtyModels.add(`.
+          violazioni.push(`${dove} — il Set viaggia come valore (alias/argomento): un writer raggiungibile per alias e' invisibile al pin`);
+          continue;
+        }
+        const ammessi = ACCESSI_A_DIRTY_MODELS.get(fn);
+        if (!ammessi) violazioni.push(`${dove} — funzione non dichiarata in ACCESSI_A_DIRTY_MODELS`);
+        else if (!ammessi.has(membro)) violazioni.push(`${dove} — operazione \`.${membro}\` non dichiarata per ${fn}`);
+        else if (membro === 'add') porte++;
+      }
+    });
+
     assert.deepEqual(
-      fuori.map(({ n, riga }) => `${n}: ${riga.trim()} [in ${funzioneDi(n)}]`),
+      violazioni,
       [],
-      'un writer scrive il ledger senza passare da _proposeLedgerWrite: e\' la forma di #838/#845/#864/#874, '
-      + 'dove ogni difesa copriva un percorso solo. Usa _proposeLedgerWrite(modelId, recordScore).',
+      'un writer raggiunge _dirtyModels fuori dalle forme dichiarate: e\' la forma di #838/#845/#864/#874. '
+      + 'Usa _proposeLedgerWrite(modelId, recordScore), oppure dichiara qui l\'accesso e il suo motivo.',
     );
-    assert.ok(righe.length >= 2, `il grep non trova piu' nemmeno la porta: ${righe.length} occorrenze`);
+    // Un refactor che rinomina il Set renderebbe l'enumerazione vuota, e un
+    // elenco vuoto di violazioni sembrerebbe una prova.
+    assert.ok(riferimenti >= 8, `il grep non trova piu' nemmeno la dichiarazione: ${riferimenti} riferimenti`);
+    assert.equal(porte, 2, `attesi 2 \`.add(\` (la porta piu' il recupero), trovati ${porte}`);
+  });
+
+  it('nessuna lettura di `process.env` sfugge all\'enumerazione (#936 item 2)', () => {
+    const violazioni = [];
+
+    RIGHE_CODE.forEach((riga, i) => {
+      const n = i + 1;
+      for (const m of riga.matchAll(/process\.env\s*(\.\s*[A-Za-z_$][\w$]*|\[)?/g)) {
+        const forma = (m[1] || '').trim();
+        const fn = funzioneAllaRiga(n);
+        const dove = `${n}: ${riga.trim()} [in ${fn}]`;
+        if (forma.startsWith('.')) continue;            // lettura letterale: enumerabile
+        if (forma === '[') {
+          if (!LETTORI_ENV_DINAMICI.has(fn)) {
+            violazioni.push(`${dove} — chiave dinamica in una funzione non dichiarata: un endpoint letto cosi' lascia PER_MACHINE_ENDPOINT_ENV corto col test verde`);
+          }
+          continue;
+        }
+        // Nessun `.NOME` e nessun `[`: e' l'INTERO oggetto — destrutturazione,
+        // `Object.keys`, o l'ambiente passato altrove.
+        if (!RIFERIMENTI_ENV_INTERO.has(fn)) {
+          violazioni.push(`${dove} — riferimento all'intero process.env: una destrutturazione (\`const { OMNIROUTE_URL } = process.env\`) nasconde il nome all'assert della tabella`);
+        }
+      }
+    });
+
+    // I pezzi STATICI di una chiave costruita con un template non devono poter
+    // nominare un endpoint: `GH_MODELS_PAT_${i}` va bene, `PROVIDER_${x}_URL` no.
+    for (const m of SRC_CODE.matchAll(/process\.env\s*\[\s*`([^`]*)`/g)) {
+      const statico = m[1].replace(/\$\{[^}]*\}/g, '');
+      if (SUFFISSI_ENDPOINT.test(statico) || /(?:URL|ENDPOINT|HOST|BASE)/.test(statico)) {
+        violazioni.push(`chiave template che nomina un endpoint: \`${m[1]}\``);
+      }
+    }
+
+    // I lettori enumerabili devono restare tali: un call-site con un nome
+    // calcolato li rende ciechi quanto un `process.env[...]` nudo.
+    for (const [nome, scope] of LETTORI_ENV_ENUMERABILI) {
+      const re = new RegExp(`(?<![\\w.])${nome}\\(\\s*([^)]*)`, 'g');
+      RIGHE_CODE.forEach((riga, i) => {
+        const n = i + 1;
+        const fn = funzioneAllaRiga(n);
+        if (scope && fn !== scope) return;
+        // La DICHIARAZIONE del lettore non e' un call-site.
+        if (new RegExp(`(?:function|const|let|var)\\s+${nome}\\b`).test(riga)) return;
+        for (const m of riga.matchAll(re)) {
+          const primo = m[1].split(',')[0].trim();
+          if (!/^['"`][A-Z0-9_]+['"`]$/.test(primo)) {
+            violazioni.push(`${n}: call-site non letterale di ${nome}() [in ${fn}]: ${riga.trim().slice(0, 90)}`);
+          }
+        }
+      });
+    }
+
+    assert.deepEqual(violazioni, [], violazioni.join('\n'));
   });
 
   it('la tabella degli endpoint per-macchina copre ogni URL che il modulo legge da env (#874 item 3)', () => {
@@ -138,9 +302,22 @@ describe('#874/#864/#845 — una sola porta di scrittura verso ai_model_scores/_
     // avrebbe lasciato la tabella corta col verde addosso, cioe' il modo di
     // fallire che questo assert esiste per chiudere. Oggi i quattro suffissi
     // rendono lo stesso insieme; e' quando smetteranno di renderlo che serve.
+    //
+    // Le letture NON letterali non sfuggono piu' (#936 item 2): l'assert qui
+    // sopra dimostra che le sole forme esistenti sono `process.env.<NOME>` e i
+    // lettori enumerabili, e i nomi passati a QUELLI si raccolgono qui sotto.
     const nelSorgente = new Set(
       [...SRC_CODE.matchAll(/process\.env\.([A-Z0-9_]*(?:URL|ENDPOINT|HOST|BASE))\b/g)].map((m) => m[1]),
     );
+    for (const [nome, scope] of LETTORI_ENV_ENUMERABILI) {
+      const re = new RegExp(`(?<![\\w.])${nome}\\(\\s*['"\`]([A-Z0-9_]+)['"\`]`, 'g');
+      RIGHE_CODE.forEach((riga, i) => {
+        if (scope && funzioneAllaRiga(i + 1) !== scope) return;
+        for (const m of riga.matchAll(re)) {
+          if (SUFFISSI_ENDPOINT.test(m[1])) nelSorgente.add(m[1]);
+        }
+      });
+    }
     const dichiarati = new Set(_perMachineEndpointEnvVars());
 
     const scoperti = [...nelSorgente].filter((v) => !dichiarati.has(v));

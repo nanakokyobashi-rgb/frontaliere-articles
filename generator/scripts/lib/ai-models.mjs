@@ -2692,6 +2692,39 @@ const EXHAUSTED_UNTIL_MAX_AHEAD_MS = 30 * 60 * 60 * 1000; // 24h di contratto + 
  */
 const _exhaustionToClear = new Set();
 
+/**
+ * Il verdetto su un `exhaustedUntil` letto dal documento condiviso. Pura
+ * apposta — niente clock, niente mappe: e' la meta' del ban che si puo'
+ * verificare in isolamento, e il caso «datato troppo avanti» non era esercitato
+ * proprio perche' viveva dentro `initScoreStore()`, che senza credenziale esce
+ * prima di arrivarci.
+ *
+ * @param {any} raw il valore persistito: Firestore Timestamp o stringa ISO
+ * @param {Date} now
+ * @returns {{resetTime: Date|null, verdict: 'invalid'|'expired'|'honour'|'out-of-contract'}}
+ */
+export function _classifyPersistedExhaustion(raw, now) {
+  if (!raw) return { resetTime: null, verdict: 'invalid' };
+  const resetTime = raw.toDate
+    ? raw.toDate()                 // Firestore Timestamp
+    : new Date(raw);               // ISO string fallback
+  if (Number.isNaN(resetTime.getTime())) return { resetTime: null, verdict: 'invalid' };
+  if (resetTime.getTime() - now.getTime() > EXHAUSTED_UNTIL_MAX_AHEAD_MS) {
+    return { resetTime, verdict: 'out-of-contract' };
+  }
+  return { resetTime, verdict: resetTime > now ? 'honour' : 'expired' };
+}
+
+/**
+ * Seam di test per il ramo di cancellazione di `_persistScoresToFirestore`: la
+ * coda si riempie solo dentro `initScoreStore()`, che senza credenziale non
+ * gira. Stessa ragione — e stessa forma — di `__installScoreStoreForTests`.
+ */
+export function __queueExhaustionClearForTests(modelId) {
+  _exhaustionToClear.add(modelId);
+  _proposeLedgerWrite(modelId, true, { persist: false });
+}
+
 // Firestore field names cannot contain `/`. The original modelId may include
 // slashes (e.g. `openrouter/meta-llama/llama-3.3-70b:free`) so we encode them
 // with the same `__` substitution the legacy per-doc layout used.
@@ -3572,22 +3605,22 @@ export async function initScoreStore() {
       // Skip restoring any persisted ban for it so it's always eligible as
       // last resort every run. See markModelExhausted / _persistScoresToFirestore.
       if (data.exhaustedUntil && !_isLastResortProvider(modelId)) {
-        const resetTime = data.exhaustedUntil.toDate
-          ? data.exhaustedUntil.toDate()   // Firestore Timestamp
-          : new Date(data.exhaustedUntil); // ISO string fallback
+        const { resetTime, verdict } = _classifyPersistedExhaustion(data.exhaustedUntil, now);
         // Fuori contratto → non e' un ban, e' un timestamp rotto (#936 item 3).
         // Non viene onorato E viene messo in coda per la cancellazione: senza
         // il secondo pezzo ogni macchina lo ignorerebbe per conto suo mentre il
-        // documento condiviso resta sporco per sempre, e la prima versione
-        // senza questo tetto tornerebbe a saltare il modello.
-        if (resetTime.getTime() - now.getTime() > EXHAUSTED_UNTIL_MAX_AHEAD_MS) {
+        // documento condiviso resta sporco per sempre, e bastera' una macchina
+        // ferma a una versione senza questo tetto per far sparire il modello di
+        // nuovo. La cancellazione e' sicura proprio perche' il valore e' oltre
+        // cio' che l'unico writer sa scrivere: non e' il ban di nessuno.
+        if (verdict === 'out-of-contract') {
           console.warn(
             `⚠️  [ScoreStore] ${modelId}: exhaustedUntil ${resetTime.toISOString().slice(0, 16)} oltre il tetto `
             + `di ${EXHAUSTED_UNTIL_MAX_AHEAD_MS / 3600000}h — fuori contratto, ignorato e messo in coda per la cancellazione`,
           );
           _exhaustionToClear.add(modelId);
           _proposeLedgerWrite(modelId, true, { persist: false });
-        } else if (resetTime > now) {
+        } else if (verdict === 'honour') {
           _exhaustedModels.add(modelId);
           // Persisted exhaustedUntil is the daily-limit (quota) path → eligible
           // for the GitHub multi-PAT skip-exemption. Dalla stessa porta degli
