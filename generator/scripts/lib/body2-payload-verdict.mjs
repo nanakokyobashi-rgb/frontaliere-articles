@@ -479,16 +479,28 @@ export function resolveContentFieldSources(payload, locale = 'it', fields = REQU
     for (const { obj, source, isLocale } of candidates) {
       if (!obj || typeof obj !== 'object') continue;
       let raw = typeof obj[field] === 'string' ? obj[field].trim() : '';
-      // `isNullStringForLocale` e non `isLiteralNullString`: questo campo e'
-      // prosa di un modello che sta scrivendo in `locale`, cioe' il ramo
-      // «prosa» della regola di provenienza scritta piu' sopra — e il
-      // normalizzatore deve obbedire alla regola come ogni altro call-site,
-      // non farne eccezione. Finche' il gate di valle passava sempre `'it'`
-      // il difetto era irraggiungibile; da quando riceve `primaryLocale`, un
-      // `content.de.title` che vale `Null` — la parola tedesca — si sarebbe
-      // letto come campo assente e il payload sarebbe potuto diventare un
-      // abort. Su `'it'` i due predicati coincidono: byte-identico oggi.
-      if (isNullStringForLocale(raw, locale)) raw = '';
+      // La deroga per-locale vale SOLO sul candidato ETICHETTATO, ed e' la
+      // stessa discriminante di provenienza scritta piu' sopra applicata qui:
+      //
+      //   `content[locale]`  → il modello DICHIARA di scrivere in `locale`.
+      //     Ramo «prosa»: `isNullStringForLocale`. Finche' il gate di valle
+      //     passava sempre `'it'` non cambiava nulla; da quando riceve
+      //     `primaryLocale`, un `content.de.title` che vale `Null` — la parola
+      //     tedesca — si leggerebbe come campo assente e il payload potrebbe
+      //     diventare un abort.
+      //
+      //   `content` nudo e la radice → NESSUNO ha dichiarato la lingua. Sono
+      //     contenitori non etichettati, cioe' il ramo «macchina»:
+      //     `isLiteralNullString`, tutte le grafie. Con `primaryLocale ===
+      //     'de'` la deroga li avrebbe coperti anche loro, e un `title: 'Null'`
+      //     alla radice sarebbe diventato un campo vero — da li' il titolo, lo
+      //     slug e il canonical, cioe' la superficie che non si corregge dopo.
+      //     Concedere la deroga a un contenitore che non dice in che lingua e'
+      //     scritto significa dedurre la lingua dalla RICHIESTA invece che dal
+      //     dato: la richiesta non e' una provenienza.
+      //
+      // Su `'it'` i due predicati coincidono, quindi oggi e' byte-identico.
+      if (isLocale ? isNullStringForLocale(raw, locale) : isLiteralNullString(raw)) raw = '';
       if (raw) { sources[field] = { value: raw, source, isLocale }; break; }
     }
   }
