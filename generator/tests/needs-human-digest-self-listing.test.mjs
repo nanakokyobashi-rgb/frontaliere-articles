@@ -23,18 +23,21 @@ import { readFileSync } from 'node:fs';
 import path from 'node:path';
 import test from 'node:test';
 import { fileURLToPath } from 'node:url';
+import { workflowSteps } from './lib/workflow-steps.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const WORKFLOW = path.join(ROOT, '.github/workflows/recycle-stale-prs.yml');
 const text = readFileSync(WORKFLOW, 'utf8');
 
-/** Il blocco dello step che pubblica il digest needs-human. */
+/**
+ * Il blocco dello step che pubblica il digest needs-human. Il confine era «fino
+ * al prossimo `- name:`»: uno step senza nome dopo di questo ci finiva dentro
+ * (#935 item 1).
+ */
 function surfaceStep() {
-  const start = text.indexOf('- name: Surface needs-human PRs and issues');
-  assert.notEqual(start, -1, 'step "Surface needs-human PRs and issues" non trovato');
-  const rest = text.slice(start + 1);
-  const next = rest.indexOf('\n      - name: ');
-  return next === -1 ? rest : rest.slice(0, next);
+  const step = workflowSteps(text).find((s) => s.name.startsWith('Surface needs-human PRs and issues'));
+  assert.ok(step, 'step "Surface needs-human PRs and issues" non trovato');
+  return step.text;
 }
 
 test('il titolo di dedup ha una sola sorgente nello step', () => {

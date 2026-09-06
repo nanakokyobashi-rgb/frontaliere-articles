@@ -23,18 +23,15 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { workflowStep } from './lib/workflow-steps.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const SRC = fs.readFileSync(path.join(ROOT, '.github/workflows/issue-fix.yml'), 'utf8');
 
-/** Il blocco di uno step: dal suo `- name:` al `- name:` successivo. */
-function step(name) {
-  const start = SRC.indexOf(`      - name: ${name}`);
-  if (start === -1) return null;
-  const rest = SRC.slice(start + 1);
-  const next = rest.indexOf('\n      - name: ');
-  return next === -1 ? rest : rest.slice(0, next);
-}
+// Il blocco di uno step. Il confine era «fino al prossimo `- name:`», quindi
+// uno step senza nome infilato dopo finiva assorbito qui dentro e le assert lo
+// leggevano come se fosse suo (#935 item 1).
+const step = (name) => workflowStep(SRC, name)?.text ?? null;
 
 const WIP = 'Salva il lavoro parziale (WIP checkpoint deterministico, zero-Claude)';
 const BACKSTOP = 'Emit FIX_OUTCOME telemetry (deterministic backstop)';

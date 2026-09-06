@@ -24,6 +24,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { workflowSteps } from './lib/workflow-steps.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const read = (rel) => fs.readFileSync(path.join(ROOT, rel), 'utf8');
@@ -37,18 +38,17 @@ const active = (src) =>
 const GA_RAW = read('.github/workflows/generate-article.yml');
 const GA = active(GA_RAW);
 
-/** Lo step chiamante che invoca la composite action, fino allo step successivo. */
+/**
+ * Lo step chiamante che invoca la composite action. I confini si cercavano sul
+ * `- name:` precedente e successivo: con uno step senza nome davanti, il blocco
+ * partiva troppo indietro e il `continue-on-error` di un ALTRO step passava per
+ * suo (#935 item 1).
+ */
 function callerStepBlock(src) {
-  const idx = src.indexOf('uses: ./.github/actions/setup-claude-haiku-fallback');
-  assert.ok(idx !== -1, 'lo step che invoca setup-claude-haiku-fallback non è stato trovato');
-  // Risali all'inizio dello step (la riga `- name:`), poi scendi fino al
-  // prossimo step a pari livello di indentazione (`\n      - name:`).
-  const before = src.slice(0, idx);
-  const stepStart = before.lastIndexOf('\n      - name:');
-  assert.ok(stepStart !== -1, 'inizio dello step chiamante non trovato');
-  const rest = src.slice(stepStart + 1);
-  const next = rest.indexOf('\n      - name:', 1);
-  return next === -1 ? rest : rest.slice(0, next);
+  const step = workflowSteps(src)
+    .find((s) => s.text.includes('uses: ./.github/actions/setup-claude-haiku-fallback'));
+  assert.ok(step, 'lo step che invoca setup-claude-haiku-fallback non è stato trovato');
+  return step.text;
 }
 
 test('generate-article: lo step che invoca setup-claude-haiku-fallback ha continue-on-error', () => {
@@ -69,11 +69,9 @@ test('generate-article: lo step che invoca setup-claude-haiku-fallback ha contin
 });
 
 test('generate-article: "Generate the article" non dipende dall\'esito dello step Haiku', () => {
-  const idx = GA.indexOf('- name: Generate the article');
-  assert.ok(idx !== -1, 'step "Generate the article" non trovato');
-  const rest = GA.slice(idx);
-  const next = rest.indexOf('\n      - name:', 1);
-  const genStep = next === -1 ? rest : rest.slice(0, next);
+  const step = workflowSteps(GA).find((s) => s.name === 'Generate the article');
+  assert.ok(step, 'step "Generate the article" non trovato');
+  const genStep = step.text;
   assert.ok(
     !/steps\.[\w-]*haiku[\w-]*\.(outcome|conclusion)/i.test(genStep),
     '"Generate the article" ha iniziato a leggere l\'outcome dello step Haiku: se lo fa, il ' +

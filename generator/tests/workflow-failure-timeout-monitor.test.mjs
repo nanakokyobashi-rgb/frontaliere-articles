@@ -11,6 +11,7 @@ import {
 } from '../../scripts/ci/scan-failed-runs.mjs';
 import { scopedTitle } from '../../scripts/ci/scan-job-timeouts.mjs';
 import { searchSafePrefix } from '../../scripts/lib/github-issue-creator.mjs';
+import { workflowSteps as steps } from './lib/workflow-steps.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
 const WORKFLOW_PATH = path.join(ROOT, '.github', 'workflows', 'workflow-failure-issues.yml');
@@ -22,12 +23,13 @@ const FAILED_RUNS_SCANNER = readFileSync(
   'utf8',
 );
 
+// Il confine dello step era «fino al prossimo `- name:`»: uno step senza nome
+// dopo di questo ci finiva dentro, e una assert lo leggeva come se fosse suo
+// (#935 item 1).
 function workflowStep(name) {
-  const marker = `      - name: ${name}`;
-  const start = WORKFLOW.indexOf(marker);
-  assert.notEqual(start, -1, `step mancante: ${name}`);
-  const next = WORKFLOW.indexOf('\n      - name:', start + marker.length);
-  return WORKFLOW.slice(start, next === -1 ? undefined : next);
+  const step = steps(WORKFLOW).find((s) => s.name === name);
+  assert.ok(step, `step mancante: ${name}`);
+  return step.text;
 }
 
 const hostKilledJob = {
