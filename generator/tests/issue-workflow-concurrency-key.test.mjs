@@ -1,6 +1,7 @@
 /**
- * issue-workflow-concurrency-key.test.mjs — nessun workflow innescato da eventi
- * issue puo' serializzare su una chiave di concorrenza COSTANTE.
+ * issue-workflow-concurrency-key.test.mjs — ogni workflow innescato da eventi
+ * issue deve serializzare su una chiave PER-ISSUE, cioe' che interpola
+ * `github.event.issue.number`.
  *
  * ## Il modo silenzioso in cui questo si rompe
  *
@@ -28,6 +29,17 @@
  * Il rename o lo spostamento di un `group:` e' esattamente il tipo di modifica
  * che sembra innocua: questo test e' l'unica cosa che lega quei tre file alla
  * regola.
+ *
+ * ## Perche' la condizione e' "interpola l'issue" e non "interpola qualcosa"
+ *
+ * La prima versione del gate (#908) chiedeva solo che il `group:` contenesse
+ * `${{`. Ma su un evento `issues:` quasi tutto il contesto e' costante: per
+ * `issues:` `github.ref` e' SEMPRE il default branch, e `github.workflow` /
+ * `github.repository` non cambiano mai. `issue-fix-${{ github.ref }}` sfratta
+ * dunque esattamente come la costante letterale che il gate esiste per vietare,
+ * e passava il controllo: la stessa regressione sarebbe tornata VERDE. Da qui
+ * (#918) l'unica cosa che conta e' `github.event.issue.number`, e la regola sta
+ * in `isPerIssueKey`, testata anche sui suoi controesempi.
  */
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
@@ -37,6 +49,23 @@ import { fileURLToPath } from 'node:url';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const WORKFLOW_DIR = path.join(ROOT, '.github/workflows');
+
+/**
+ * L'UNICA espressione che rende la chiave davvero per-issue. Tenuta in una
+ * costante sola perche' e' la stessa regola che il caso sul fallback del triage
+ * applica: due regex separate divergerebbero al primo ritocco.
+ */
+const PER_ISSUE_KEY = /github\.event\.issue\.number/;
+
+/**
+ * La chiave varia per issue? Estratta dal ciclo perche' e' LA regola del gate, e
+ * una regola che nessun test esercita direttamente puo' allentarsi senza che
+ * niente diventi rosso — che e' precisamente com'e' passato `${{ github.ref }}`.
+ * @param {string} group valore di `concurrency.group`
+ */
+function isPerIssueKey(group) {
+  return PER_ISSUE_KEY.test(group);
+}
 
 /**
  * Legge il `group:` del blocco `concurrency:` di un workflow.
@@ -75,24 +104,32 @@ function triggersOnIssues(yaml) {
   return false;
 }
 
-test('nessun workflow su eventi issue serializza su una chiave costante', () => {
+test('ogni workflow su eventi issue serializza su una chiave per-issue', () => {
   const offenders = [];
   for (const file of fs.readdirSync(WORKFLOW_DIR).filter((f) => f.endsWith('.yml'))) {
     const yaml = fs.readFileSync(path.join(WORKFLOW_DIR, file), 'utf8');
     if (!triggersOnIssues(yaml)) continue;
     const group = concurrencyGroup(yaml);
     if (group === null) continue; // nessuna coda: niente da sfrattare
-    if (!group.includes('${{')) offenders.push(`${file} → group: ${group}`);
+    // La condizione non e' "interpola qualcosa" ma "interpola L'ISSUE": su un
+    // evento `issues:` la maggior parte delle espressioni di contesto e'
+    // COSTANTE. `${{ github.ref }}` e' sempre il default branch, `github.workflow`
+    // e `github.repository` non cambiano mai — chiavi che sfrattano esattamente
+    // come la costante letterale che questo gate esiste per vietare, ma che un
+    // controllo su `${{` lascia passare (follow-up #918).
+    if (!isPerIssueKey(group)) offenders.push(`${file} → group: ${group}`);
   }
   assert.deepEqual(
     offenders,
     [],
-    `Chiave di concorrenza COSTANTE su un workflow innescato da eventi issue.\n${offenders.join('\n')}\n`
-      + 'Con un gruppo costante ogni evento issue del repo entra nella stessa coda profonda 1 e '
-      + 'sfratta la pending, anche quelli che l\'`if:` del job scarterebbe. Usa una chiave per-issue '
-      + '(`${{ github.event.issue.number || ... }}`); il fallback dipende dai trigger di QUEL file — '
-      + '`github.run_id` se l\'unico trigger e\' `issues`, una costante condivisa se ci sono anche '
-      + '`schedule`/`workflow_dispatch`, che altrimenti girerebbero in parallelo con se stessi.',
+    `Chiave di concorrenza non per-issue su un workflow innescato da eventi issue.\n${offenders.join('\n')}\n`
+      + 'Il gruppo deve interpolare `github.event.issue.number`: qualunque altra chiave — costante '
+      + 'letterale, ma anche `${{ github.ref }}` / `${{ github.workflow }}` / `${{ github.repository }}`, '
+      + 'che su un evento `issues:` valgono sempre lo stesso — fa entrare ogni evento issue del repo '
+      + 'nella stessa coda profonda 1, sfrattando la pending anche quando l\'`if:` del job la '
+      + 'scarterebbe. Usa `${{ github.event.issue.number || ... }}`; il fallback dipende dai trigger '
+      + 'di QUEL file — `github.run_id` se l\'unico trigger e\' `issues`, una costante condivisa se ci '
+      + 'sono anche `schedule`/`workflow_dispatch`, che altrimenti girerebbero in parallelo con se stessi.',
   );
 });
 
@@ -116,6 +153,29 @@ test('il fallback del triage e\' una costante condivisa, non run_id', () => {
   // e' la differenza che non va persa in un copia-incolla dagli altri due file.
   const yaml = fs.readFileSync(path.join(WORKFLOW_DIR, 'issue-triage.yml'), 'utf8');
   const group = concurrencyGroup(yaml);
-  assert.match(group, /github\.event\.issue\.number/, 'la chiave del triage deve essere per-issue sugli eventi issue');
+  assert.match(group, PER_ISSUE_KEY, 'la chiave del triage deve essere per-issue sugli eventi issue');
   assert.doesNotMatch(group, /github\.run_id/, 'con run_id due sweep potrebbero girare insieme');
+});
+
+test('il gate rifiuta le espressioni COSTANTI per un evento issue, non solo le costanti letterali', () => {
+  // I controesempi sono quelli che la versione `includes('${{')` del gate
+  // lasciava passare: sintatticamente interpolati, semanticamente fissi su un
+  // evento `issues:`. Senza questo caso il gate resterebbe verde se qualcuno
+  // riportasse la condizione debole, ed e' proprio il gate a essere l'unica
+  // cosa che tiene i tre workflow sulla regola.
+  for (const group of [
+    'issue-fix',                              // costante letterale (la regressione originale)
+    'issue-fix-${{ github.ref }}',            // per `issues:` e' sempre il default branch
+    'issue-fix-${{ github.workflow }}',
+    'issue-fix-${{ github.repository }}',
+    'issue-fix-${{ github.event_name }}',
+  ]) {
+    assert.equal(isPerIssueKey(group), false, `il gate accetta una chiave che sfratta: ${group}`);
+  }
+  for (const group of [
+    'issue-fix-${{ github.event.issue.number || github.run_id }}',
+    "issue-triage-${{ github.event.issue.number || 'sweep' }}",
+  ]) {
+    assert.equal(isPerIssueKey(group), true, `il gate rifiuta una chiave per-issue valida: ${group}`);
+  }
 });
