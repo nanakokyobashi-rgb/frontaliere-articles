@@ -1,5 +1,4 @@
 {
-  "https://www.rsi.ch/info/svizzera/verso-un-aumento-dell%e2%80%99iva-per-la-difesa--3949164.html": "iva-aumento-governo-difesa-2026",
   "https://www.laregione.ch/svizzera/svizzera/1943478/livigno-idea-progetto-s-chanf-grigioni-canton-collegamento": "livigno-idea-progetto-s-chanf",
   "https://www.rsi.ch/s/3949146": "maggiori-responsabilita-peri-vertici-bancari",
   "https://www.tio.ch/ticino/attualita/1943520/la-siccita-sale-al-grado-2-a-breggia-ecco-cosa-non-potete-fare": "la-siccita-sale-al-grado-2-a-breggia",
@@ -1881,6 +1880,11 @@
   "https://www.tio.ch/dal-mondo/cronaca/1948293/aeroporti-indonesia-vulcano-voli-passeggeri": {
     "articleId": "eruzione-vulcano-aeroporti-indonesia",
     "ts": "2026-09-06T10:56:39.482Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/ticino/attualita/1948269/volo-swiss-zurigo-viaggio-emergenza": {
+    "articleId": "esercitazione-salvataggio-monte-ceneri",
+    "ts": "2026-09-06T11:06:06.916Z",
     "keyForm": 2
   }
 }
