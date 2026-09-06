@@ -3152,6 +3152,72 @@ export const DISCOVERY_OPTOUT_IGNORED_WARNING =
 // `recordScore` non copre: il reset dello streak di contenuto (#887). Stesso
 // ciclo di vita, stessa ragione — il fatto da segnalare e' uno solo.
 let _optOutContentResetWarned = false;
+
+/**
+ * ── I SEGNALI DI OPT-OUT HANNO ANCHE UNA FORMA LEGGIBILE DA UN PROGRAMMA (#941 item 1)
+ *
+ * I tre warning qui sopra esistevano SOLO come righe di testo su stderr, e il
+ * chiamante che li motiva non legge stderr. Il chiamante ha un nome:
+ * `scripts/smoke-test-ai-models.mjs` del gemello del sito
+ * (`valerielinc-ops/frontaliere-si-o-no`), lanciato da
+ * `.github/workflows/smoke-test-ai-models.yml` (cron 06:17 UTC + dispatch).
+ * Verificato il 2026-09-06 leggendo i due file:
+ *
+ *   - lo script rimappa `console.log` su `console.error`, quindi la riga
+ *     ARRIVA su stderr — ma il workflow la redirige in `.tmp/smoke.log`, che
+ *     viene solo caricato come artifact (retention 30gg). Nessuno step la
+ *     legge: lo `$GITHUB_STEP_SUMMARY` e' costruito parsando `.tmp/smoke.json`,
+ *     cioe' il contratto JSON su stdout. Il segnale sarebbe emesso e mai letto —
+ *     la stessa classe di guasto che #844/#870 esistono per chiudere, rientrata
+ *     un livello piu' in la';
+ *   - e in piu' quello script chiama `discoverFreeModels()` col DEFAULT (la sua
+ *     copia della libreria non accetta nemmeno `{ recordScore }`: l'opt-out
+ *     della meta' discovery, la' , e' `setScoreStoreReadOnly()`), quindi il ramo
+ *     del prune in opt-out non lo percorre nessuno neanche da quel lato.
+ *
+ * Il canale che quel chiamante LEGGE e' un oggetto, non un log. Quindi ogni
+ * segnale di opt-out viene anche registrato qui in forma strutturata ed esce da
+ * `getStats().optOutSignals`, che un diagnostico puo' mettere nel proprio
+ * payload; `printRunSummary()` ne stampa la riga `opt-out:` per chi invece il
+ * log lo legge. E' lo stesso rimedio gia' applicato a `resolverFlapResets`
+ * (#848 item 3): il fatto c'era, mancava il canale.
+ *
+ * I conteggi NON vengono congelati qui: `getOptOutSignals()` li rilegge al
+ * momento della lettura. Il numero nella riga di testo del prune e' parziale per
+ * costruzione — i provider potano dentro un `Promise.all`, quindi `staleIds` e'
+ * lo slice del primo che arriva e `DEFAULT_CHAIN.length` e' letto a sweep in
+ * corso (l'operatore leggeva «3 id tolti (ora 99)» dove la misura vera era
+ * 102 -> 79). Letto a valle, il registro `_prunedStale` e' completo.
+ */
+export const OPT_OUT_SIGNAL_KINDS = Object.freeze({
+  /** Una discovery in opt-out ha accorciato `DEFAULT_CHAIN`. */
+  DISCOVERY_PRUNE: 'discovery-prune',
+  /** Un opt-out chiesto dopo che la discovery era gia' stata fatta: no-op. */
+  DISCOVERY_IGNORED: 'discovery-ignored',
+  /** `recordScore` falsy su un reset di streak in-processo: ignorato (#887). */
+  CONTENT_RESET_IGNORED: 'content-reset-ignored',
+});
+
+/** @type {{ kind: string, [k: string]: unknown }[]} */
+const _optOutSignals = [];
+
+function _noteOptOutSignal(kind, detail = {}) {
+  _optOutSignals.push({ kind, ...detail });
+}
+
+/**
+ * I segnali di opt-out di questo ciclo di vita dello stato, in ordine di
+ * emissione. Un array vuoto e' il DENOMINATORE — «misurato, nessun segnale» —
+ * e va distinto da «non guardato».
+ */
+export function getOptOutSignals() {
+  return _optOutSignals.map((sig) => (
+    sig.kind === OPT_OUT_SIGNAL_KINDS.DISCOVERY_PRUNE
+      // Conteggi al momento della lettura, non a quello del warning: vedi sopra.
+      ? { ...sig, prunedStale: _prunedStale.size, chainLength: DEFAULT_CHAIN.length }
+      : { ...sig }
+  ));
+}
 const _dynamicModels = [];
 // modelId → provider name, for ids pruned from DEFAULT_CHAIN because the provider stopped
 // offering them (see the markStale block in _discoverProvider). Diagnostics + re-entry
@@ -3357,6 +3423,7 @@ export async function _discoverProvider(cfg, { recordScore = true } = {}) {
       // nessun altro modo di sapere che la catena su cui gira non e' la sua.
       if (!coerceRecordScore(recordScore) && !_optOutPruneWarned) {
         _optOutPruneWarned = true;
+        _noteOptOutSignal(OPT_OUT_SIGNAL_KINDS.DISCOVERY_PRUNE, { provider: cfg.name });
         console.warn(
           `\u26a0\ufe0f  [Discovery:${cfg.name}] ${DISCOVERY_OPTOUT_PRUNE_WARNING} `
           + `${staleIds.length} id tolti da DEFAULT_CHAIN (ora ${DEFAULT_CHAIN.length}). `
@@ -3416,6 +3483,10 @@ export async function discoverFreeModels({ recordScore = true } = {}) {
   const wantsRecord = coerceRecordScore(recordScore);
   if (_discoveryDone) {
     if (wantsRecord !== _discoveryRecordScore) {
+      _noteOptOutSignal(OPT_OUT_SIGNAL_KINDS.DISCOVERY_IGNORED, {
+        requested: wantsRecord,
+        effective: _discoveryRecordScore,
+      });
       console.warn(
         `⚠️  [Discovery] recordScore:${wantsRecord} ${DISCOVERY_OPTOUT_IGNORED_WARNING}${_discoveryRecordScore} `
         + 'e non viene rifatta: ricevi quell\'esito. L\'opt-out va richiesto PRIMA della prima discovery (initScoreStore() la fa col default), '
@@ -3958,6 +4029,7 @@ export function recordModelContentSuccess(modelId, { recordScore } = {}) {
   if (!modelId) return;
   if (recordScore !== undefined && !coerceRecordScore(recordScore) && !_optOutContentResetWarned) {
     _optOutContentResetWarned = true;
+    _noteOptOutSignal(OPT_OUT_SIGNAL_KINDS.CONTENT_RESET_IGNORED, { model: modelId });
     console.warn(
       '\u26a0\ufe0f  [recordModelContentSuccess] recordScore:false ignorato — il reset dello streak di contenuto e\' in-processo, '
       + 'non una proposta al ledger, e il suo gemello `recordModelContentFailure` incrementa lo streak anche in opt-out: '
@@ -4621,6 +4693,9 @@ export function getStats() {
     runOutcomes: getRunOutcomes(),
     storeBackend: _firestoreDb ? 'firestore' : 'memory',
     dirtyModels: _dirtyModels.size,
+    // Forma strutturata dei tre segnali di opt-out (#941 item 1): il chiamante
+    // diagnostico legge un oggetto, non il log in cui la riga viene emessa.
+    optOutSignals: getOptOutSignals(),
   };
 }
 
@@ -4695,6 +4770,35 @@ function _formatResolverFlapLine(s) {
   return `   resolver flaps: ${parts.join(' · ')}`;
 }
 
+/**
+ * La riga che porta i segnali di opt-out fuori dal processo (#941 item 1).
+ *
+ * Stessa forma di `resolver flaps:` e per la stessa ragione: prefisso fisso e
+ * greppabile, e la riga si stampa SEMPRE — «none this run» e' il denominatore
+ * che distingue «nessun opt-out» da «log troncato» o «codice vecchio». Il
+ * contenuto e' quello di `getStats().optOutSignals`, cioe' i conteggi riletti a
+ * fine run e non lo slice parziale che la `console.warn` del prune stampa
+ * mentre la sweep e' ancora in volo.
+ */
+function _formatOptOutSignal(sig) {
+  switch (sig.kind) {
+    case OPT_OUT_SIGNAL_KINDS.DISCOVERY_PRUNE:
+      return `${sig.kind}[${sig.provider}] pruned=${sig.prunedStale} chain=${sig.chainLength}`;
+    case OPT_OUT_SIGNAL_KINDS.DISCOVERY_IGNORED:
+      return `${sig.kind} requested=${sig.requested} effective=${sig.effective}`;
+    case OPT_OUT_SIGNAL_KINDS.CONTENT_RESET_IGNORED:
+      return `${sig.kind}[${sig.model}]`;
+    default:
+      return String(sig.kind);
+  }
+}
+
+function _formatOptOutSignalsLine(s) {
+  const signals = s.optOutSignals || [];
+  if (signals.length === 0) return '   opt-out: none this run';
+  return `   opt-out: ${signals.map(_formatOptOutSignal).join(' \u00b7 ')}`;
+}
+
 // Max models named on the `models:` line. A run touches a handful (the run
 // 32134269129 touched 2); the cap exists so a pathological cascade can't emit a
 // 270-entry line into logs that are already large.
@@ -4758,6 +4862,7 @@ export function printRunSummary() {
     : `   last-resort: ${lrTiers.join('/')} not reached this run`);
   lines.push(_formatRunOutcomesLine(s));
   lines.push(_formatResolverFlapLine(s));
+  lines.push(_formatOptOutSignalsLine(s));
   if (s.errors.length > 0) {
     lines.push(`   Errors: ${s.errors.length}`);
   }
@@ -4823,6 +4928,10 @@ export function resetState() {
   _stats.lastResort = _freshLastResortStats();
   _optOutPruneWarned = false;
   _optOutContentResetWarned = false;
+  // Il registro segue i LATCH che lo alimentano, non `_prunedStale`: dopo il
+  // reset i warn-once possono riscattare, quindi tenere le voci vecchie
+  // conterebbe due volte lo stesso fatto.
+  _optOutSignals.length = 0;
   _lastResortOrderWarned = false;
   _competingTiersWarned = false;
   _preferredModelsWarned = false;

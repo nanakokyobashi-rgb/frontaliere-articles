@@ -55,6 +55,10 @@ import {
   DISCOVERY_OPTOUT_IGNORED_WARNING,
   DISCOVERY_OPTOUT_PRUNE_WARNING,
   RECORD_SCORE_COERCION_WARNING,
+  OPT_OUT_SIGNAL_KINDS,
+  getOptOutSignals,
+  prunedStaleModels,
+  printRunSummary,
   _discoverProvider,
 } from '../scripts/lib/ai-models.mjs';
 
@@ -898,5 +902,149 @@ describe('#887 — nessun gate `recordScore` attorno alla chiamata', () => {
       const calls = [...SRC.matchAll(new RegExp(`\\n\\s+${fn}\\(model[,)]`, 'g'))];
       assert.ok(calls.length > 0, `atteso almeno un call site interno di ${fn}`);
     }
+  });
+});
+
+/**
+ * ── #941 item 1: IL SEGNALE DEVE ARRIVARE A CHI LO GUARDA ──────────────────
+ *
+ * Il chiamante che motiva i tre warning ha un nome —
+ * `scripts/smoke-test-ai-models.mjs` del gemello del sito, lanciato da
+ * `.github/workflows/smoke-test-ai-models.yml` — e il suo canale letto NON e'
+ * stderr: lo script rimappa `console.log` su `console.error`, il workflow
+ * redirige stderr in `.tmp/smoke.log` e lo carica solo come artifact, mentre lo
+ * step summary lo costruisce parsando il contratto JSON su stdout. Una riga di
+ * testo, li', e' emessa e mai letta: la classe di guasto che #844 esiste per
+ * chiudere, rientrata un livello piu' in la'.
+ *
+ * Questi casi misurano l'altra forma del segnale — quella che un programma puo'
+ * mettere nel proprio payload — e il fatto che i conteggi che porta siano quelli
+ * di fine sweep, non lo slice parziale della riga di testo.
+ */
+describe('#941 item 1 — i segnali di opt-out escono anche in forma strutturata', () => {
+  const PREFIX = 'openrouter/';
+  const DEAD = `${PREFIX}zz-decommissioned-941:free`;
+  let chainBackup;
+  let realFetch;
+
+  const cfg = {
+    name: 'TestProv941',
+    prefix: PREFIX,
+    getKey: () => 'test-key',
+    url: 'https://example.invalid/models',
+    markStale: true,
+    pick: (m) => m?.id || null,
+  };
+
+  beforeEach(() => {
+    chainBackup = [...DEFAULT_CHAIN];
+    DEFAULT_CHAIN.push(DEAD);
+    realFetch = globalThis.fetch;
+    globalThis.fetch = async () => ({
+      ok: true,
+      status: 200,
+      json: async () => ({ data: [{ id: 'zz-alive-941:free' }] }),
+    });
+    resetState();
+  });
+
+  afterEach(() => {
+    globalThis.fetch = realFetch;
+    DEFAULT_CHAIN.length = 0;
+    DEFAULT_CHAIN.push(...chainBackup);
+    resetState();
+  });
+
+  const silenced = async (fn) => {
+    const realWarn = console.warn;
+    console.warn = () => {};
+    try { return await fn(); } finally { console.warn = realWarn; }
+  };
+
+  it('il prune in opt-out compare in getStats(), non solo su stderr', async () => {
+    const { stale } = await silenced(() => _discoverProvider(cfg, { recordScore: false }));
+    assert.ok(stale > 0, 'il ramo markStale non e\' scattato: il test misurerebbe il nulla');
+
+    const signals = getStats().optOutSignals;
+    assert.deepEqual(
+      signals.map((sig) => sig.kind),
+      [OPT_OUT_SIGNAL_KINDS.DISCOVERY_PRUNE],
+      `atteso il solo segnale del prune, visto ${JSON.stringify(signals)}`,
+    );
+    assert.equal(signals[0].provider, cfg.name, 'il segnale deve nominare il provider che ha potato');
+    assert.equal(
+      signals[0].prunedStale,
+      prunedStaleModels().length,
+      'il conteggio strutturato deve essere il registro completo delle potature, non lo slice del primo provider',
+    );
+    assert.equal(signals[0].chainLength, DEFAULT_CHAIN.length, 'la lunghezza della catena va letta a sweep finita');
+  });
+
+  it('la forma env-derived non aggiunge un secondo segnale strutturato', async () => {
+    // Il gemello del predicato di testo (#941 item 2): il warning di coercizione
+    // NON e' un segnale di opt-out, e nel canale strutturato non deve comparire.
+    await silenced(() => _discoverProvider(cfg, { recordScore: 'false' }));
+
+    assert.deepEqual(
+      getOptOutSignals().map((sig) => sig.kind),
+      [OPT_OUT_SIGNAL_KINDS.DISCOVERY_PRUNE],
+      'la stringa `\'false\'` e\' lo stesso opt-out del booleano: un fatto, un segnale',
+    );
+  });
+
+  it('l\'opt-out chiesto dopo la discovery e il reset di streak entrano nello stesso canale', async () => {
+    await silenced(() => discoverFreeModels());
+    await silenced(() => discoverFreeModels({ recordScore: false }));
+    await silenced(() => recordModelContentSuccess(DEAD, { recordScore: false }));
+
+    const signals = getOptOutSignals();
+    assert.deepEqual(
+      signals.map((sig) => sig.kind),
+      [OPT_OUT_SIGNAL_KINDS.DISCOVERY_IGNORED, OPT_OUT_SIGNAL_KINDS.CONTENT_RESET_IGNORED],
+      `i tre segnali condividono il canale: ${JSON.stringify(signals)}`,
+    );
+    assert.deepEqual(
+      { requested: signals[0].requested, effective: signals[0].effective },
+      { requested: false, effective: true },
+      'il no-op va nominato con i due contratti, o non si sa quale dei due si e\' ricevuto',
+    );
+    assert.equal(signals[1].model, DEAD, 'il reset ignorato deve nominare il modello');
+  });
+
+  it('resetState() azzera il registro insieme ai latch che lo alimentano', async () => {
+    await silenced(() => _discoverProvider(cfg, { recordScore: false }));
+    assert.equal(getOptOutSignals().length, 1, 'precondizione: un segnale registrato');
+
+    resetState();
+    assert.deepEqual(getOptOutSignals(), [], 'dopo il reset i warn-once possono riscattare: le voci vecchie conterebbero due volte');
+  });
+
+  it('printRunSummary() stampa la riga anche a zero — e\' il denominatore', () => {
+    const realLog = console.log;
+    const lines = [];
+    console.log = (...a) => { lines.push(a.join(' ')); };
+    try { printRunSummary(); } finally { console.log = realLog; }
+
+    const summary = lines.join('\n');
+    assert.match(
+      summary,
+      /^ {3}opt-out: none this run$/m,
+      `senza la riga a zero una run senza opt-out non entra nel conto: ${summary}`,
+    );
+  });
+
+  it('e con un segnale la riga porta i conteggi di fine sweep', async () => {
+    await silenced(() => _discoverProvider(cfg, { recordScore: false }));
+
+    const realLog = console.log;
+    const lines = [];
+    console.log = (...a) => { lines.push(a.join(' ')); };
+    try { printRunSummary(); } finally { console.log = realLog; }
+
+    const line = lines.join('\n').split('\n').find((l) => l.startsWith('   opt-out:'));
+    assert.ok(line, `riga opt-out assente dal riepilogo: ${lines.join('\n')}`);
+    assert.match(line, new RegExp(`${OPT_OUT_SIGNAL_KINDS.DISCOVERY_PRUNE}\\[${cfg.name}\\]`), line);
+    assert.match(line, new RegExp(`pruned=${prunedStaleModels().length}\\b`), line);
+    assert.match(line, new RegExp(`chain=${DEFAULT_CHAIN.length}\\b`), line);
   });
 });
