@@ -1973,6 +1973,17 @@
       "reason": "La riga unica che rende attribuibile il rigetto di `callLLM()` quando `normalizeItalianContentFromPayload()` torna `null`: famiglia (`troncato` / `forma-sbagliata`), modello che ha DAVVERO risposto, `rawChars`/`repairedChars`/`kept%`, chiavi del payload, stato per campo, verdetto di troncamento. Nasce qui perche' il tempo misurato sta qui (2026-08-18: 905 s su 1189 nella run 32134269129, 76% dello step; la run senza rigenerazioni e' anche la piu' corta, 312 s), ma NON e' `corpus-only`: il gemello del sito `scripts/create-article.mjs` ha lo stesso ramo con la stessa guardia `if (parseErr)`, e `publish-journalist-article` lo importa ogni 15 minuti, quindi li' il punto cieco e' aperto uguale. Non e' arrivato nello stesso giro perche' `create-article.mjs` e' `adapted` (si porta a mano, non si copia) e la suite del sito e' vitest, non `node --test`: il gate va riscritto. Quando atterra la' questa voce diventa `identical`."
     },
     {
+      "path": "generator/scripts/lib/sanitize-body-braces.mjs",
+      "mode": "corpus-only-pending",
+      "trackingIssue": "https://github.com/valerielinc-ops/frontaliere-si-o-no/issues/7704",
+      "baseline": {
+        "site": null,
+        "corpus": "8d6092cf3deadf15",
+        "alignedAt": "2026-09-06"
+      },
+      "reason": "`sanitizeBodyText`: toglie le `}` spaiate che LLM e cascata MT producono chiudendo male una virgoletta bassa tedesca („ \"), prima che il testo venga serializzato in un `.ts` di `content/`. Nessun gate le intercetta — le graffe non sono nel vocabolario di `runFactualityGates`, che sul ramo non italiano fa solo aggiudicazione numerica, coerenza dei numeri e falsi amici — quindi una graffa spaiata finisce verbatim in una pagina pubblicata senza un errore. Estratta qui, e non lasciata privata in `create-article.mjs`, perche' il corpus ha DUE scrittori di body: `create-article.mjs` e `retranslate-blocking-bodies.mjs`, che riscrive body gia' pubblicati con l'uscita della stessa cascata MT (nanako#994). NON e' in `lib/article-sanitizers.mjs`, il vicinato naturale: quel file e' `identical`, la sua sorgente e' il sito, e il sito non ha `sanitizeBodyText` nella propria copia — ce l'ha ancora privata dentro il proprio `create-article.mjs` (~`:8868`) — quindi esportarla da qui renderebbe quel file `corpus-ahead`. NON e' `corpus-only`: il sito ha un consumatore con lo stesso buco aperto, `scripts/repair-object-object-bodies.mjs`, che riscrive body-locale gia' pubblicati con l'uscita di `freeTranslateWithRetry` (`:152`) e li scrive (`:254`) applicando solo `balanceMarkdownMarkers` e `applyTermFixes`, che bilanciano i marker markdown e non le graffe; `grep -c sanitizeBodyText` su quel file rende 0. La voce diventa `identical` il giorno in cui il sito estrae la sua copia privata in `scripts/lib/` e la importa dai due chiamanti — vedi il trackingIssue, che elenca anche l'alternativa minima (applicarla solo nel riparatore). Da non confondere con valerielinc-ops#7699, che e' il troncamento della sorgente a 2000 caratteri nel tier HuggingFace di `free-translate.mjs`: quello accorcia il testo, questo ci lascia dentro una graffa."
+    },
+    {
       "path": "generator/scripts/lib/local-opus-mt.mjs",
       "sitePath": "scripts/lib/local-opus-mt.mjs",
       "mode": "identical",
