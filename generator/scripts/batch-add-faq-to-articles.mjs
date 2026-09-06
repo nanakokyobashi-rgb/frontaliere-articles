@@ -631,7 +631,7 @@ function discoverArticles() {
         missingLocales.push(locale);
       } else {
         const localeFaq = extractFaqFromContent(locContent, articleId);
-        if (localeFaq && wrongLocalePair(localeFaq, locale)) {
+        if (localeFaq && wrongLocalePair(localeFaq, locale, itFaq)) {
           missingLocales.push(locale);
         }
       }
@@ -934,10 +934,22 @@ async function translateFaq(faqArray, targetLang) {
   // FAQ reali (57-89 caratteri) da' 0 falsi positivi su 8 traduzioni buone e
   // ne coglie 3 su 4 italiane; alzarla a 80 controllerebbe 2 coppie su 8 e ne
   // coglierebbe 0 su 4, cioe' spegnerebbe il controllo.
-  const wrong = wrongLocalePair(results, targetLang);
+  //
+  // `faqArray` come terzo argomento: e' la sorgente italiana di queste stesse
+  // coppie, e passargliela aggiunge il ramo dell'uguaglianza verbatim. Senza,
+  // il predicato ha il solo rilevatore di lingua — cioe' perde proprio la
+  // coppia che il fallback di `translateFaqArray()` rimette dentro in italiano
+  // quando il rilevatore su quel testo non dice `it` (misura in
+  // `wrongLocalePair`, e il test omonimo ne pinna un caso reale).
+  const wrong = wrongLocalePair(results, targetLang, faqArray);
   if (wrong) {
-    console.error(`   ⚠️  translateFaq ${targetLang}: coppia ${wrong.index} rilevata come `
-      + `${wrong.detected} (fallback italiano per-coppia) — scarto la traduzione, NON scrivo`);
+    // Il messaggio dice la lingua RILEVATA e come e' stata riconosciuta, e non
+    // la chiama piu' «fallback italiano per-coppia»: quella frase era scritta
+    // anche quando il rilevato non era `it`, cioe' proprio nei casi in cui il
+    // rifiuto era rumore, e il log mentiva sulla causa mentre buttava una
+    // traduzione buona.
+    console.error(`   ⚠️  translateFaq ${targetLang}: coppia ${wrong.index} non e' in ${targetLang} `
+      + `ma in ${wrong.detected} (riconosciuta per ${wrong.via}) — scarto la traduzione, NON scrivo`);
     return { faq: null, rejected: true };
   }
   return { faq: results, rejected: false };

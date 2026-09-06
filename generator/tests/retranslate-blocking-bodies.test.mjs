@@ -58,7 +58,7 @@ import { sanitizeBodyText } from '../scripts/lib/sanitize-body-braces.mjs';
 // classe, stesso rimedio — la verifica guarda l'unita' tradotta, non il testo
 // concatenato.
 import { wrongLocalePair } from '../scripts/fix-faq-locales.mjs';
-import { detectLanguage } from '../scripts/lib/detect-language.mjs';
+import { detectLanguage, detectLanguageWithConfidence } from '../scripts/lib/detect-language.mjs';
 
 const fileFor = (id, fields) => `const b: Record<string, string> = {\n`
   + Object.entries(fields).map(([k, v]) => `  'blog.article.${id}.${k}': '${escapeForSingleQuoteTS(v)}',`).join('\n')
@@ -164,6 +164,7 @@ test('stratify non inventa coppie quando ce ne sono meno del limite', () => {
 
 const IT_LONG = 'Il frontaliere che lavora in Ticino deve dichiarare il reddito in Italia. '.repeat(12);
 const EN_LONG = 'The cross-border worker employed in Ticino must declare the income in Italy. '.repeat(12);
+const DE_LONG = 'Der Grenzgaenger der im Tessin arbeitet muss das Einkommen in Italien angeben. '.repeat(12);
 
 test('translationSanityIssue accetta una ri-traduzione di lunghezza normale', () => {
   assert.equal(translationSanityIssue({
@@ -307,18 +308,88 @@ const IT_PAIR = { q: 'Dove paga le imposte il frontaliere?', a: IT_LONG };
 test('wrongLocalePair vede la singola coppia italiana rimasta dal fallback', () => {
   // Falsificazione nell'altra direzione per prima: tre coppie tradotte davvero
   // non devono essere rifiutate.
-  assert.equal(wrongLocalePair([EN_PAIR, EN_PAIR, EN_PAIR], 'en'), null);
+  assert.equal(wrongLocalePair([EN_PAIR, EN_PAIR, EN_PAIR], 'en', [IT_PAIR, IT_PAIR, IT_PAIR]), null);
 
-  const wrong = wrongLocalePair([EN_PAIR, IT_PAIR, EN_PAIR], 'en');
+  // La forma REALE del difetto: `translateFaqArray()` rimette dentro la coppia
+  // ITALIANA quando il motore fallisce, quindi quella coppia e' byte-identica
+  // alla sorgente. E' il ramo dell'uguaglianza a coglierla.
+  const source = [IT_PAIR, IT_PAIR, IT_PAIR];
+  const wrong = wrongLocalePair([EN_PAIR, IT_PAIR, EN_PAIR], 'en', source);
   assert.ok(wrong, 'una coppia italiana su tre deve produrre un rifiuto');
   assert.equal(wrong.index, 1);
-  assert.notEqual(wrong.detected, 'en');
+  assert.equal(wrong.via, 'verbatim');
+  assert.equal(wrong.detected, 'it');
 
   // E sul concatenato — cioe' col controllo di prima — non verrebbe rifiutata.
   assert.equal(
     detectLanguage([EN_PAIR, IT_PAIR, EN_PAIR].map((p) => `${p.q} ${p.a}`).join(' '), 'en'),
     'en',
   );
+});
+
+test('il ramo di LINGUA da solo non basta: su questo testo italiano il rilevatore dice `de`', () => {
+  // Misura, non opinione. Su `IT_PAIR` il rilevatore risponde `de` con
+  // confidenza 0,09 (punteggi it=1428, de=1573): un testo italiano che NON
+  // viene riconosciuto come italiano.
+  //
+  // Il vecchio predicato (`detected !== expectedLocale`) lo rifiutava lo
+  // stesso, ma per la ragione sbagliata — bastava che il rilevato non fosse
+  // `en` — ed e' esattamente il meccanismo che su 16'885 articoli×locale
+  // pubblicati produceva 421 falsi positivi (2,5%), di cui il 70% con lingua
+  // rilevata diversa da `it`. Su una run reale del workflow FAQ ha buttato 8
+  // traduzioni complete su 31 coppie rifiutate, e solo 8 di quelle 31 erano
+  // davvero `it`.
+  //
+  // Da cui i DUE rami: senza l'uguaglianza con la sorgente, questo caso
+  // sfuggirebbe.
+  const detected = detectLanguage(`${IT_PAIR.q} ${IT_PAIR.a}`, 'en');
+  assert.notEqual(detected, 'it', 'se un giorno il rilevatore dicesse `it`, questo test va riscritto');
+  assert.equal(wrongLocalePair([IT_PAIR], 'en'), null,
+    'senza la sorgente il solo ramo di lingua non coglie questa coppia');
+  assert.ok(wrongLocalePair([IT_PAIR], 'en', [IT_PAIR]),
+    'con la sorgente il ramo dell\'uguaglianza la coglie');
+});
+
+test('wrongLocalePair non rifiuta piu\' uno scarto INCERTO fra lingue NON sorgente', () => {
+  // Il difetto che questa modifica chiude, con una coppia PRESA DAL CORPUS
+  // pubblicato (`blog-body-ch/en/cifre-nere-grigioni.ts`, coppia 2): testo
+  // inglese di 100 caratteri che il rilevatore da' `de` con confidenza 0,92 e
+  // punteggio 145. Non e' un passthrough italiano, e' incertezza su testo
+  // corto — e costava una traduzione intera, perche' UNA coppia scarta
+  // l'articolo.
+  const NOISY_EN_PAIR = {
+    q: 'Which gray municipality has recorded a deficit?',
+    a: 'Thusis recorded a deficit of just under CHF 310,000.',
+  };
+  const noisy = detectLanguageWithConfidence(`${NOISY_EN_PAIR.q} ${NOISY_EN_PAIR.a}`, 'en');
+  assert.notEqual(noisy.lang, 'en',
+    'il fixture deve essere mal rilevato, altrimenti non prova niente');
+  assert.ok(noisy.confidence >= 0.6,
+    'e mal rilevato con confidenza ALTA: e\' il motivo per cui la sola confidenza non basta');
+  assert.ok((noisy.scores?.[noisy.lang] ?? 0) < 500,
+    'cio\' che lo distingue e\' il punteggio assoluto, non il margine');
+  assert.equal(wrongLocalePair([NOISY_EN_PAIR], 'en', [IT_PAIR]), null,
+    'uno scarto INCERTO fra due lingue non-sorgente non e\' un passthrough e non va rifiutato');
+});
+
+test('wrongLocalePair rifiuta la terza lingua CONCLAMATA: `=== sourceLang` da solo e\' fail-open', () => {
+  // Il rovescio del caso sopra, ed e' la classe che `detected === sourceLang`
+  // da solo lascerebbe passare: una coppia chiesta in `en` e resa in tedesco
+  // non e' un passthrough italiano, ma scritta sotto `/en/` e' contenuto nella
+  // lingua sbagliata gia' pubblicato — e qui il sito non ribuilda.
+  const DE_PAIR = { q: 'Wo zahlt der Grenzgaenger seine Steuern?', a: DE_LONG };
+  const d = detectLanguageWithConfidence(`${DE_PAIR.q} ${DE_PAIR.a}`, 'en');
+  assert.equal(d.lang, 'de');
+  assert.ok(d.confidence >= 0.6 && d.scores.de >= 500,
+    'il fixture deve avere il segnale FORTE, altrimenti prova il caso sbagliato');
+
+  const wrong = wrongLocalePair([DE_PAIR], 'en', [IT_PAIR]);
+  assert.ok(wrong, 'una terza lingua conclamata va rifiutata, non scritta sotto /en/');
+  assert.equal(wrong.via, 'terza-lingua');
+  assert.equal(wrong.detected, 'de');
+
+  // Falsificazione: non e' il ramo dell'italiano travestito.
+  assert.notEqual(wrong.detected, 'it');
 });
 
 test('wrongLocalePair salta le coppie sotto la soglia di segnale', () => {
@@ -381,7 +452,7 @@ test('il rilevatore di locale FAQ e per coppia in ENTRAMBI i punti che decidono'
   const fn = batch.slice(batch.indexOf('async function translateFaq('),
     batch.indexOf('function validateFaq('));
   assert.ok(fn.length > 0, 'translateFaq non trovata');
-  assert.match(fn, /wrongLocalePair\(results, targetLang\)/,
+  assert.match(fn, /wrongLocalePair\(results, targetLang, faqArray\)/,
     'translateFaq deve rifiutare un array che contiene una coppia nella lingua sbagliata');
   // NON `null`: i tre chiamanti non trattano `null` allo stesso modo — due su
   // tre lo gestiscono scrivendo la FAQ italiana intera. Il rifiuto di lingua
