@@ -50,10 +50,23 @@ import { parsePositiveNum } from './lib/parse-positive-num.mjs';
 // Il pavimento anti-troncamento, derivato dal corpus invece che scritto a mano:
 // stessa sorgente unica che usa il gate di pubblicazione (scripts/ci/verify-api-floors.mjs).
 import { floorFrom, sectionFloor } from './lib/corpus-floors.mjs';
+// Gli shard qui sotto sono la superficie da cui il sito rende le LISTE, e
+// vengono scritti dopo che `build-api.mjs` ha gia' chiuso `manifest.json`:
+// senza questa dichiarazione resterebbero l'unica parte di `dist/api/` che
+// nessun consumer puo' verificare prima di usarla.
+import { declareApiArtifacts, byteSize } from './lib/api-manifest.mjs';
 
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..');
 const outIdx = process.argv.indexOf('--out');
-const OUT = outIdx >= 0 ? path.resolve(process.argv[outIdx + 1]) : path.join(ROOT, 'dist', 'api', 'data');
+const DEFAULT_OUT = path.join(ROOT, 'dist', 'api', 'data');
+const OUT = outIdx >= 0 ? path.resolve(process.argv[outIdx + 1]) : DEFAULT_OUT;
+// La dichiarazione nel manifest vale solo quando si scrive DAVVERO nella
+// superficie pubblicata: un `--out` di comodo (o un test) non ha un
+// `manifest.json` accanto da arricchire, e non ne va inventato uno.
+const PUBLISHES_TO_API = OUT === DEFAULT_OUT;
+const API_ROOT = path.dirname(OUT);
+/** `{ <path relativo a dist/api>: byte UTF-8 }`, per `manifest.files`. */
+const writtenShards = {};
 
 const LOCALES = ['it', 'en', 'de', 'fr'];
 const SECTIONS = [
@@ -291,7 +304,9 @@ for (const section of SECTIONS) {
     };
     const cleanPayload = sanitizeDeep(payload);
     reportStrippedControlCharsDeep(file, payload, cleanPayload);
-    fs.writeFileSync(file, JSON.stringify(cleanPayload) + '\n');
+    const text = JSON.stringify(cleanPayload) + '\n';
+    fs.writeFileSync(file, text);
+    writtenShards[path.relative(API_ROOT, file)] = byteSize(text);
     const kb = Math.round(fs.statSync(file).size / 1024);
     console.log(`[blog-index] ${path.basename(file)} — ${capped.length}/${entries.length} articles, ${kb} KB, newest ${capped[0].date}`);
 
@@ -303,7 +318,9 @@ for (const section of SECTIONS) {
     };
     const cleanFullPayload = sanitizeDeep(fullPayload);
     reportStrippedControlCharsDeep(fullFile, fullPayload, cleanFullPayload);
-    fs.writeFileSync(fullFile, JSON.stringify(cleanFullPayload) + '\n');
+    const fullText = JSON.stringify(cleanFullPayload) + '\n';
+    fs.writeFileSync(fullFile, fullText);
+    writtenShards[path.relative(API_ROOT, fullFile)] = byteSize(fullText);
     const fullKb = Math.round(fs.statSync(fullFile).size / 1024);
     console.log(`[blog-index] ${path.basename(fullFile)} — ${entries.length} articles, ${fullKb} KB`);
   }
@@ -321,6 +338,30 @@ for (const section of SECTIONS) {
     assertNoControlChars(fs.readFileSync(path.join(OUT, f), 'utf-8'), `${OUT}/${f}`);
   }
   console.log(`[blog-index] control-character gate: ${emitted.length} files clean`);
+}
+
+// ── Final gate: gli shard sono dichiarati in manifest.files ───────────────
+//
+// `manifest.json` e' il primo file che il sito legge, ed e' il solo modo che ha
+// di rifiutare un payload troncato PRIMA di renderlo. Copriva pero' solo cio'
+// che `build-api.mjs` scrive: questi shard, che sono la superficie delle liste,
+// ne restavano fuori. Dichiararli qui — e rivalidare subito l'intero manifest
+// contro il disco — li porta sotto la stessa rete degli altri 29 artefatti.
+//
+// Prima il conteggio, che e' la meta' `counts` dello stesso argomento: il set
+// e' un prodotto cartesiano chiuso (sezioni x locali x {capped, full}), quindi
+// una sola voce mancante e' un set troncato, e va rifiutata qui invece di
+// essere pubblicata come "indice piu' corto".
+if (!failed && PUBLISHES_TO_API) {
+  const expected = SECTIONS.length * LOCALES.length * 2;
+  const actual = Object.keys(writtenShards).length;
+  if (actual !== expected) {
+    console.error(`[blog-index] wrote ${actual} shards, expected ${expected} — refusing to publish a partial index set`);
+    failed = true;
+  } else {
+    const total = declareApiArtifacts(API_ROOT, writtenShards);
+    console.log(`[blog-index] manifest.files: ${actual} shards declared, ${total} artifacts match on disk`);
+  }
 }
 
 if (failed) process.exit(1);

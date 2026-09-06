@@ -5692,6 +5692,12 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.neutralita-svizzera-prospeta.title': 'Neutralità fa rima con prosperità',
     'blog.article.neutralita-svizzera-prospeta.excerpt': 'Lorenzo Quadri discute l\'importanza della neutralità svizzera e le sue implicazioni economiche e politiche.',
     'blog.article.neutralita-svizzera-prospeta.imageAlt': 'Vista aerea di Mendrisio, Svizzera, con focus sull\'architettura e gli ambienti naturali.',
+    'blog.article.avs-prestazioni-complementari-basilea-campagna.title': 'Gestione del primo pilastro AVS nel Cantone di Basilea Campagna',
+    'blog.article.avs-prestazioni-complementari-basilea-campagna.excerpt': 'Il Cantone di Basilea Campagna gestisce il primo pilastro AVS con una cassa di compensazione cantonale, garantendo il minimo vitale.',
+    'blog.article.avs-prestazioni-complementari-basilea-campagna.imageAlt': 'Paesaggio svizzero con focus sul sistema AVS e prestazioni complementari',
+    'blog.article.beloved-aiuto-vittime-crans-montana.title': 'Aiuto alle vittime: 70 richieste alla Fondazione Beloved',
+    'blog.article.beloved-aiuto-vittime-crans-montana.excerpt': 'La Fondazione Beloved, istituita dal Canton Vallese, ha gestito 70 richieste di aiuto. Finora nessun rifiuto, versate decine di migliaia di franchi.',
+    'blog.article.beloved-aiuto-vittime-crans-montana.imageAlt': 'Ufficio di fondazione con personale che offre supporto psicologico e finanziario a vittime in Svizzera',
 };
 
 export default blogMetaChIt;

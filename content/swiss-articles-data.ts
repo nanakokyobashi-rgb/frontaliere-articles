@@ -17074,6 +17074,24 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'avs-prestazioni-complementari-basilea-campagna',
+    category: 'pensione',
+    date: '2026-09-06T07:48:25.232Z',
+    image: '/images/blog/avs-prestazioni-complementari-basilea-campagna.webp',
+    hasCalculator: true,
+    authorSlug: 'laura-bianchi',
+    authorName: 'Laura Bianchi',
+   },
+   {
+    id: 'beloved-aiuto-vittime-crans-montana',
+    category: 'pratico',
+    date: '2026-09-06T07:55:34.256Z',
+    image: '/images/blog/beloved-aiuto-vittime-crans-montana.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

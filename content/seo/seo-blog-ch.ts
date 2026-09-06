@@ -73886,6 +73886,84 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-avs-prestazioni-complementari-basilea-campagna': {
+    title: 'Gestione del primo pilastro AVS nel Cantone di Basilea Campagna',
+    description: 'Scopri come il Cantone di Basilea Campagna gestisce il primo pilastro AVS e le prestazioni complementari per garantire il minimo vitale. Dati aggiornati 2026',
+    keywords: 'frontalieri, ticino, svizzera, italia, gestione, primo, pilastro, cantone',
+    ogTitle: 'Gestione del primo pilastro AVS nel Cantone di Basilea Campagna',
+    ogDescription: 'Il Cantone di Basilea Campagna gestisce il primo pilastro AVS attraverso una cassa di compensazione cantonale, garantendo il minimo vitale ai cittadini.',
+    canonicalPath: '/articoli-svizzera/avs-prestazioni-complementari-basilea-campagna/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Gestione del primo pilastro AVS nel Cantone di Basilea Campagna",
+      "description": "Scopri come il Cantone di Basilea Campagna gestisce il primo pilastro AVS e le prestazioni complementari per garantire il minimo vitale. Dati aggiornati 2026",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/avs-prestazioni-complementari-basilea-campagna.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Paesaggio svizzero con focus sul sistema AVS e prestazioni complementari"
+      },
+      "datePublished": "2026-09-06T07:48:25+00:00",
+      "dateModified": "2026-09-06T07:48:25+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/laura-bianchi/#person",
+        "name": "Laura Bianchi",
+        "url": "https://frontaliereticino.ch/autori/laura-bianchi/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/avs-prestazioni-complementari-basilea-campagna/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-beloved-aiuto-vittime-crans-montana': {
+    title: 'Aiuto alle vittime: 70 richieste alla Fondazione Beloved',
+    description: 'La Fondazione Beloved, istituita dal Canton Vallese, ha gestito 70 richieste di aiuto alle vittime di Crans-Montana. Nessun rifiuto finora, versate decine',
+    keywords: 'frontalieri, ticino, svizzera, italia, aiuto, alle, vittime, richieste',
+    ogTitle: 'Fondazione Beloved: aiuto alle vittime di Crans-Montana',
+    ogDescription: 'Una settantina di richieste di aiuto ricevute dalla Fondazione Beloved. Versate diverse decine di migliaia di franchi per supporto psicologico, educativo e finanziario. Budget totale di 24 milioni CHF dal Canton Vallese, Vaud, Crans-Montana',
+    canonicalPath: '/articoli-svizzera/beloved-aiuto-vittime-crans-montana/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Aiuto alle vittime: 70 richieste alla Fondazione Beloved",
+      "description": "La Fondazione Beloved, istituita dal Canton Vallese, ha gestito 70 richieste di aiuto alle vittime di Crans-Montana. Nessun rifiuto finora, versate decine",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/beloved-aiuto-vittime-crans-montana.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Ufficio di fondazione con personale che offre supporto psicologico e finanziario a vittime in Svizzera"
+      },
+      "datePublished": "2026-09-06T07:55:34+00:00",
+      "dateModified": "2026-09-06T07:55:34+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/beloved-aiuto-vittime-crans-montana/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;
