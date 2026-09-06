@@ -2,7 +2,19 @@ import assert from 'node:assert/strict';
 import { describe, it } from 'node:test';
 
 import { detectClaudeRateLimit } from '../../scripts/ci/claude-rate-limit.mjs';
-import { formatDeliveredDespiteMaxTurnsComment } from '../../scripts/ci/mark-claude-terminal-outcome.mjs';
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+import { FIX_OUTCOME_RE } from '../../scripts/ci/close-recovered-failure-issues.mjs';
+import {
+  CAP_HIT_AFTER_DELIVERY_MARKER,
+  formatDeliveredDespiteMaxTurnsComment,
+  hasCapHitAfterDeliveryNote,
+} from '../../scripts/ci/mark-claude-terminal-outcome.mjs';
+
+const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
+const readRoot = (rel) => fs.readFileSync(path.join(ROOT, rel), 'utf8');
 
 describe('detectClaudeRateLimit', () => {
   it('non confonde overage rifiutato con quota primaria esaurita quando status è allowed', () => {
@@ -74,5 +86,66 @@ describe('marker della consegna nonostante error_max_turns', () => {
     // un marker che la contenesse sarebbe invisibile e la issue tornerebbe
     // «run morta, ri-tentabile».
     assert.ok(!formatDeliveredDespiteMaxTurnsComment(1).includes('post-step deterministico'));
+  });
+});
+
+// #925: senza marker il fenomeno «morte al cap DOPO la consegna» smette di essere
+// contabile. Prima del ramo di consegna queste run finivano nel bucket `max-turns`,
+// quindi chi ne misura la quota vedrebbe il calo per costruzione — non perche' il
+// fenomeno sia cambiato — e proprio la misura post-merge che il body di #899 rimanda
+// resterebbe senza strumento.
+describe('CAP_HIT_AFTER_DELIVERY: il fenomeno resta osservabile', () => {
+  it('il commento porta il marker informativo accanto al verdetto', () => {
+    const body = formatDeliveredDespiteMaxTurnsComment(7441);
+    assert.ok(body.includes(CAP_HIT_AFTER_DELIVERY_MARKER));
+  });
+
+  it('il marker NON e\' un FIX_OUTCOME: il verdetto letto dal drainer resta `pr-created`', () => {
+    // Se fosse un FIX_OUTCOME entrerebbe in `PREPASS_VERDICT_BEATS_FAMILY` come
+    // codice sconosciuto e cambierebbe l'instradamento invece di annotarlo.
+    assert.ok(!/FIX_OUTCOME/i.test(CAP_HIT_AFTER_DELIVERY_MARKER));
+    const m = FIX_OUTCOME_RE.exec(formatDeliveredDespiteMaxTurnsComment(7441));
+    assert.equal(m && m[1], 'pr-created');
+  });
+});
+
+// #925: il drainer ri-accoda fino a tre volte, e un commento di bot ripetuto alza
+// `updatedAt` — che e' esattamente cio' che affama il cooldown del parked-retry.
+// Stessa ragione di `ORPHAN_NOTE_MARKER` in `orphan-max-turns-work.mjs`.
+describe('dedup della nota di consegna', () => {
+  it('riconosce la nota gia\' presente, come stringa o come commento', () => {
+    const body = formatDeliveredDespiteMaxTurnsComment(7441);
+    assert.equal(hasCapHitAfterDeliveryNote([body]), true);
+    assert.equal(hasCapHitAfterDeliveryNote([{ body }]), true);
+  });
+
+  it('non confonde un `pr-created` qualsiasi con la nota di questo step', () => {
+    // Il `pr-created` postato dall'agente non dice «sono morto al cap dopo aver
+    // consegnato»: deduparci sopra perderebbe proprio il dato da misurare.
+    assert.equal(hasCapHitAfterDeliveryNote(['<!-- FIX_OUTCOME: pr-created -->\nPR aperta.']), false);
+    assert.equal(hasCapHitAfterDeliveryNote([]), false);
+    assert.equal(hasCapHitAfterDeliveryNote(null), false);
+  });
+});
+
+// #925: `.[0]` su una lista di PR che mescola OPEN e MERGED prende un elemento in un
+// ordine che `gh` non documenta. Con un branch `fix/issue-<N>` riusato dopo un merge —
+// il caso normale su una issue ri-accodata — il numero mostrato all'umano e' quello
+// della PR vecchia. Il predicato vive in due posti (script + YAML) e non possono
+// importarsi: il legame va tenuto da un test (AGENTS.md #6).
+describe('selezione della PR consegnata: la piu\' recente, non la prima', () => {
+  const SORTED = 'sort_by(.createdAt) | last | .number // empty';
+
+  it('lo script ordina per createdAt e non usa piu\' `.[0].number`', () => {
+    const src = readRoot('scripts/ci/mark-claude-terminal-outcome.mjs');
+    assert.ok(src.includes(SORTED));
+    assert.ok(!src.includes('.[0].number'));
+  });
+
+  it('issue-fix.yml usa lo stesso predicato del gemello in JS', () => {
+    const yml = readRoot('.github/workflows/issue-fix.yml');
+    assert.ok(yml.includes(SORTED));
+    assert.ok(!yml.includes('fix/issue-$ISSUE" --state all --json number,state \\'));
+    assert.ok(!/fix\/issue-\$ISSUE[\s\S]{0,200}?\.\[0\]\.number/.test(yml));
   });
 });
