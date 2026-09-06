@@ -289,7 +289,7 @@ import {
   beginRegisterLock as beginRegisterLockImpl,
   endRegisterLock as endRegisterLockImpl,
   resolveRegisterLock as resolveRegisterLockImpl,
-  REGISTER_LOCK_FILE,
+  registerLockFile,
 } from './lib/register-lock.mjs';
 // Il protocollo di riferimento del prompt di selezione headline (issue #188).
 // Le due liste del prompt — candidate e articoli gia' pubblicati — avevano la
@@ -2885,7 +2885,7 @@ function beginRegisterLock(id) {
 }
 
 function endRegisterLock() {
-  return endRegisterLockImpl(PROJECT_ROOT);
+  return endRegisterLockImpl(PROJECT_ROOT, SECTION_NAME);
 }
 
 // The files a completed registration must ALL carry the id in, used to tell a
@@ -2913,7 +2913,7 @@ function registerLockTargets(id, sectionName = SECTION_NAME) {
       `Il lock di registrazione cita la sezione sconosciuta "${sectionName}": impossibile ` +
         `determinare i file di registrazione da confrontare (valide: ` +
         `${Object.keys(ARTICLE_SECTION_CONFIGS).join(', ')}). Ispeziona il corpus a mano e ` +
-        `rimuovi ${REGISTER_LOCK_FILE}.`,
+        `rimuovi ${registerLockFile(sectionName)}.`,
     );
   }
   const targets = [
@@ -2938,14 +2938,21 @@ function registerLockTargets(id, sectionName = SECTION_NAME) {
 // written yet) is cleared and the run proceeds — otherwise one interrupted run
 // would brick every later run on a corpus that is in fact fine.
 function resolveRegisterLockAtStartup() {
-  const outcome = resolveRegisterLockImpl(PROJECT_ROOT, registerLockTargets);
-  if (outcome.state !== 'clean') {
-    console.error(`  ♻️  ${REGISTER_LOCK_FILE}: marker di registrazione lasciato da un run interrotto`);
+  const outcome = resolveRegisterLockImpl(PROJECT_ROOT, registerLockTargets, SECTION_NAME);
+  for (const r of outcome.resolved) {
+    console.error(`  ♻️  ${r.file}: marker di registrazione lasciato da un run interrotto`);
+    const perche = r.state === 'committed'
+      ? 'i file di registrazione sono coerenti (transazione completata)'
+      : 'nessun file di registrazione lo cita (nessuna scrittura avvenuta)';
+    console.error(`  ♻️  Lock di registrazione orfano per "${r.id}" (sezione ${r.section}, run ${r.runId ?? 'non identificato'}): ${perche}, lock rimosso`);
   }
-  if (outcome.state === 'committed') {
-    console.error(`  ♻️  Lock di registrazione orfano per "${outcome.id}" (sezione ${outcome.section}): i file di registrazione sono coerenti (transazione completata), lock rimosso`);
-  } else if (outcome.state === 'nothing-written') {
-    console.error(`  ♻️  Lock di registrazione orfano per "${outcome.id}" (sezione ${outcome.section}): nessun file di registrazione lo cita (nessuna scrittura avvenuta), lock rimosso`);
+  // Un marker dell'ALTRA sezione non e' affar nostro (issue #965): i suoi 11
+  // bersagli sono disgiunti dai nostri, quindi non possiamo ne' peggiorarlo ne'
+  // ripararlo, e la sezione che lo possiede ci inciampa al proprio run
+  // successivo. Lo si dice ad alta voce lo stesso: il silenzio si leggerebbe
+  // come «nessun marker».
+  for (const d of outcome.deferred) {
+    console.error(`  ⏭️  ${d.file}: marker di registrazione della sezione "${d.section}" (id "${d.id}", ${d.origin}) — lasciato intatto, lo risolve un run di quella sezione`);
   }
 }
 
