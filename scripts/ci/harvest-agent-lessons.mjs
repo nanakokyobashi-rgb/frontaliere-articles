@@ -290,6 +290,15 @@ const CLAUSE_BODY = String.raw`(?:[^.;—\n]|\.(?!\s|$))`;
 //     «negazione + participio» sono findings di sweep veri (#880 e #822 su tutte).
 //     I tell sono quelli della TAXONOMY meno la negazione, cosi' le due
 //     definizioni di «riga di sweep» non possono divergere.
+//
+//     Il guard vale per la FRASE che porta il tell, non per la riga intera: una
+//     riga che afferma uno sweep incompleto E chiude con la ricognizione negata
+//     («lo stesso anti-pattern in `build-rss.mjs` non e' toccato. Nessun impatto
+//     su `dist/api/`, sulle sitemap o sui feed.») saltava lo strip per intero e
+//     ri-alimentava `canonical-sitemap` col vocabolario che compare SOLO nella
+//     ricognizione — cioe' il falso positivo che questo blocco chiude. La misura
+//     delle 3.618 righe conta i totali per bucket, non la co-occorrenza delle due
+//     forme sulla stessa riga, quindi non copriva questo caso.
 const SWEEP_ASSERTION_RE = /stesso anti-?pattern|file gemello|stesso costrutto|sibling|class-complete|ramo (?:equivalente|gemello)/iu;
 // (A) negazione PRIMA del verbo: «nessun impatto su …», «nulla tocca …»,
 //     «nessun articolo nuovo raggiunge …», «no impact on …».
@@ -304,12 +313,34 @@ const NEGATED_IMPACT_CLAUSE_RE =
 //     «non» qualsiasi piu' avanti nella frase.
 const CONTRASTIVE_NEGATED_TAIL_RE =
   new RegExp(String.raw`(?<=\b(?:${IMPACT_VERB})\b${CLAUSE_BODY}{0,120}),\s*(?:e\s+|ma\s+)?(?:non|not)\b${CLAUSE_BODY}*`, 'giu');
+// Confine di frase, nella STESSA accezione di `CLAUSE_BODY`: `;`, `—`, a capo, e
+// il punto solo se seguito da spazio o fine riga (dentro un code span non lo e').
+// Tenerne una definizione sola e' cio' che impedisce al guard di sweep e allo
+// strip di disaccordarsi su dove finisce una frase.
+const SENTENCE_BOUNDARY_RE = /[;—\n]|\.(?=\s|$)/gu;
+// La frase che contiene lo span `[start, end)`: dal confine precedente al primo
+// confine successivo. I confini interni allo span non esistono per costruzione
+// (`CLAUSE_BODY` li esclude), ma vengono comunque saltati invece di troncare.
+function sentenceAround(text, start, end) {
+  let from = 0;
+  SENTENCE_BOUNDARY_RE.lastIndex = 0;
+  for (let m = SENTENCE_BOUNDARY_RE.exec(text); m; m = SENTENCE_BOUNDARY_RE.exec(text)) {
+    if (m.index < start) from = m.index + m[0].length;
+    else if (m.index >= end) return text.slice(from, m.index);
+  }
+  return text.slice(from);
+}
+
 export function stripNegatedImpactClauses(text) {
   const s = String(text ?? '');
-  if (SWEEP_ASSERTION_RE.test(s)) return s;
+  // Il guard (C) e' per-frase: la clausola resta solo se il tell di sweep sta
+  // nella SUA frase. Entrambe le regex sono capture-free, quindi il replacer
+  // riceve `(match, offset, whole)`.
+  const stripUnlessSweep = (match, offset, whole) =>
+    (SWEEP_ASSERTION_RE.test(sentenceAround(whole, offset, offset + match.length)) ? match : ' ');
   return s
-    .replace(NEGATED_IMPACT_CLAUSE_RE, ' ')
-    .replace(CONTRASTIVE_NEGATED_TAIL_RE, ' ');
+    .replace(NEGATED_IMPACT_CLAUSE_RE, stripUnlessSweep)
+    .replace(CONTRASTIVE_NEGATED_TAIL_RE, stripUnlessSweep);
 }
 
 export function bucketFinding(text) {
