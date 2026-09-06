@@ -139,6 +139,35 @@ test("il sibling con «»: glifo e 🔴 dentro la STESSA citazione (#1106)", () 
   assert.equal(REDFLAG_IMPORTANT_RE.test('- `a.mjs:L1`: 🟡 Nit: la review diceva «🟡 nit e 🔴 Important: y».'), false);
 });
 
+// --- la narrow non puo' perdere il glifo-ancora (#1106, round 2) -----------
+// Il prefisso attraversante si fermava su TUTTO cio' che apre una citazione, anche
+// quando quella citazione era chiusa o non era una citazione affatto: l'ancora
+// spariva e un marker VERO tornava verde — la direzione che il gate non puo'
+// prendere. Le due forme misurate, entrambe ROSSE prima di #1106.
+test('una citazione CHIUSA prima del marker non spegne il gate (#1106)', () => {
+  assert.equal(REDFLAG_IMPORTANT_RE.test('- 🟢 ok. Il body dice «x». 🟡 Nit: a. 🔴 Important: b'), true);
+  // Stessa classe nella coda dopo il glifo (era 🟣 pre-esistente da #977).
+  assert.equal(
+    REDFLAG_IMPORTANT_RE.test('- `a.mjs:L1`: 🟡 Nit: il sito dice «vecchio». 🔴 Important: la sitemap perde gli slug'),
+    true,
+  );
+  // ...ma la citazione APERTA continua a spegnere: e' li' che il 🔴 e' riportato.
+  assert.equal(REDFLAG_IMPORTANT_RE.test('- `a.mjs:L1`: 🟡 Nit: la review diceva «🔴 Important: y».'), false);
+});
+
+test('la location label mai chiusa non e\' uno span aperto (#1106)', () => {
+  // `` `a.mjs:L1: `` e' la forma idiomatica di REVIEW.md: il backtick non ha un
+  // compagno sulla riga, quindi non apre niente e non puo' nascondere l'ancora.
+  assert.equal(REDFLAG_IMPORTANT_RE.test('- `a.mjs:L1: 🟡 Nit: a. 🔴 Important: b'), true);
+  assert.equal(REDFLAG_IMPORTANT_RE.test('`a.mjs:L1: 🟡 Nit: rinomina x. 🔴 **Important —** guard mancante'), true);
+  // Un backtick che il compagno ce l'ha resta un apri-span: il falso rosso di
+  // #1106 non si riapre.
+  assert.equal(
+    REDFLAG_IMPORTANT_RE.test('- `a.mjs:L1`: 🟡 Nit: `Due 🟡 nit, nessun 🔴 Important — merge libero.` era false'),
+    false,
+  );
+});
+
 test('la narrow di #1106 non spegne il secondo finding VERO sulla riga (#977)', () => {
   assert.equal(REDFLAG_IMPORTANT_RE.test('- `a.mjs:L1`: 🟡 Nit: x. 🔴 Important: y'), true);
   assert.equal(REDFLAG_IMPORTANT_RE.test('- `a.mjs:L1`: 🟡 Nit: rinomina `x`. 🔴 Important: la sitemap perde gli slug'), true);

@@ -118,12 +118,25 @@ export const VITEST_SHARD_NAME_RE = /^vitest shard \d+\/\d+$/;
  *      false` tornava ROSSA pur non avendo nessun marker. Misurato sulla review di
  *      questa stessa PR, che portava `## Findings (Important: 0, Nit: 3)` e
  *      `## LGTM` e veniva comunque respinta da `review-gate.mjs`. Il prefisso
- *      attraversa i code span CHIUSI come unita' e si ferma su un `«` o su uno
- *      span APERTO, quindi un glifo citato non puo' piu' fare da ancora — in
- *      entrambe le forme di citazione. Il ramo resta cio' che intendeva ammettere:
- *      un secondo finding VERO sulla stessa riga. Effetto collaterale voluto:
- *      l'alternanza e' disgiunta sul primo carattere (backtick vs non-backtick),
- *      quindi il lead torna lineare dove `.*[🟡🟢❓]` backtrackava.
+ *      attraversa come UNITA' cio' che e' gia' chiuso — code span `` `x` `` e
+ *      citazioni `«x»` — e si ferma solo su una citazione APERTA, quindi un glifo
+ *      citato non puo' piu' fare da ancora, in entrambe le forme di citazione.
+ *
+ *      Le due eccezioni sono cio' che tiene il ramo dalla parte del rosso (#1106,
+ *      round 2). (a) Una citazione CHIUSA si attraversa invece di fermare
+ *      l'attraversamento: fermarsi li' perdeva il glifo-ancora e un marker VERO
+ *      dopo la citazione tornava verde — `- 🟢 ok. Il body dice «x». 🟡 Nit: a.
+ *      🔴 Important: b`. (b) Un backtick che sulla riga non ha un compagno
+ *      (`` `(?![^\n`]*`) ``) non apre nulla: e' la location label idiomatica di
+ *      REVIEW.md, `` `a.mjs:L1: `` mai chiusa, e fermarcisi spegneva il gate su
+ *      `` - `a.mjs:L1: 🟡 Nit: a. 🔴 Important: b ``. Un backtick che il compagno
+ *      ce l'ha resta un apri-span e continua a bloccare: e' quello che tiene
+ *      verde il falso rosso di #1106 (`` `Due 🟡 nit, nessun 🔴 Important` ``).
+ *      Il ramo resta cio' che intendeva ammettere: un secondo finding VERO sulla
+ *      stessa riga. L'alternanza resta senza punti di scelta — le alternative
+ *      sono disgiunte sul primo carattere, e le due che aprono con un backtick si
+ *      escludono a vicenda sul lookahead — quindi il lead non backtracka come
+ *      faceva `.*[🟡🟢❓]`.
  *   2. `(?<!\s\`)(?<!^\`)` — il marker incollato a un backtick sta dentro un code
  *      span solo se quel backtick APRE lo span, cioe' e' a inizio riga o preceduto
  *      da spazio: `` `🔴 Important: x` `` e' una fixture citata. Il backtick che
@@ -153,14 +166,14 @@ export const VITEST_SHARD_NAME_RE = /^vitest shard \d+\/\d+$/;
  * `stale-pr-rescuer.yml` grepano la STESSA forma in bash — un `if:`/`run:` YAML non
  * puo' importare questa regex. `grep` e' gia' orientato alla riga, quindi il pattern
  * bash e' questa `.source` senza i `\n` delle classi negate:
- * `grep -qP '^(?:[^🟡🟢❓]*|(?:[^`«]|`[^`]*`)*[🟡🟢❓](?:[^`«]|`[^`]*`)*)(?<!\s\`)(?<!^\`)🔴\s*\*{0,2}\s*Important\s*\*{0,2}\s*[:—-]'`.
+ * `grep -qP '^(?:[^🟡🟢❓]*|(?:[^`«]|`[^`]*`|«[^»]*»|`(?![^`]*`))*[🟡🟢❓](?:[^`«]|`[^`]*`|«[^»]*»|`(?![^`]*`))*)(?<!\s\`)(?<!^\`)🔴\s*\*{0,2}\s*Important\s*\*{0,2}\s*[:—-]'`.
  * I due lookbehind sono a lunghezza fissa, quindi PCRE1 (`grep -P`) li accetta —
  * uno solo, `(?<!(?:^|\s)\`)`, sarebbe a lunghezza variabile e li' non compila.
  * Le tre copie non possono piu' divergere in silenzio: il guard `mirror bash` di
  * `generator/tests/redflag-important-marker.test.mjs` deriva il pattern atteso da
  * questa `.source` e lo pretende, verbatim, in entrambi i workflow.
  */
-export const REDFLAG_IMPORTANT_RE = /^(?:[^\n🟡🟢❓]*|(?:[^\n`«]|`[^\n`]*`)*[🟡🟢❓](?:[^\n`«]|`[^\n`]*`)*)(?<!\s`)(?<!^`)🔴\s*\*{0,2}\s*Important\s*\*{0,2}\s*[:—-]/mu;
+export const REDFLAG_IMPORTANT_RE = /^(?:[^\n🟡🟢❓]*|(?:[^\n`«]|`[^\n`]*`|«[^\n»]*»|`(?![^\n`]*`))*[🟡🟢❓](?:[^\n`«]|`[^\n`]*`|«[^\n»]*»|`(?![^\n`]*`))*)(?<!\s`)(?<!^`)🔴\s*\*{0,2}\s*Important\s*\*{0,2}\s*[:—-]/mu;
 
 /**
  * File la cui modifica impedisce STRUTTURALMENTE al reviewer Claude di girare
