@@ -46,6 +46,7 @@ import { fileURLToPath } from 'node:url';
 import {
   matchingDelimiter, findIdListLiteralSpan, removeFromIdListLiteral,
 } from '../../scripts/lib/ts-literals.mjs';
+import { SECTIONS } from '../../scripts/lib/article-surfaces.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const read = (p) => readFileSync(path.join(ROOT, p), 'utf-8');
@@ -208,4 +209,34 @@ test('i chiamanti importano la regola invece di ri-scriverla', () => {
     assert.equal(/indexOf\('\];'\)/.test(src), false, `${caller}: cerca ancora la chiusura come primo '];'`);
     assert.equal(/\[\^=\]\*=\\s\*\\\[/.test(src), false, `${caller}: ancora l'ancora per NOME che attraversa i newline`);
   }
+});
+
+test('la RIGENERAZIONE grida quando la sezione dichiara il letterale e lo span e\' null', () => {
+  // Metà speculare del caso qui sopra, sul lato scrittura-nuovo-articolo: se
+  // la forma cambia (p.es. l'annotazione avvolta su due righe, che l'ancora
+  // confinata alla riga non matcha), saltare il blocco in silenzio lascia il
+  // nuovo id fuori da ALL_BLOG_ARTICLE_IDS con tutto il resto gia' scritto —
+  // corpus incoerente, exit 0, e il sito legge un elenco senza l'id nuovo.
+  const src = read('generator/scripts/create-article.mjs');
+  const call = src.indexOf('findIdListLiteralSpan(blogSrc');
+  assert.ok(call > 0, 'create-article.mjs non localizza piu\' lo span dell\'elenco id');
+  const block = src.slice(call, call + 2000);
+  assert.match(
+    block,
+    /if\s*\(!idListSpan\s*&&\s*declaresIdListLiteral\)\s*\{\s*\n\s*throw new Error\(/,
+    'lo span `null` non e\' piu\' un errore dove la sezione dichiara il letterale',
+  );
+});
+
+test('quale sezione ha il letterale lo dice UN posto solo', () => {
+  // `create-article.mjs` decide se gridare leggendo `idListVar` da
+  // article-surfaces.mjs, cioe' la stessa risposta che usa retire-article.mjs.
+  // Se i due nomi divergessero, la creazione riscriverebbe un array e il
+  // ritiro ne ripulirebbe un altro.
+  const src = read('generator/scripts/create-article.mjs');
+  assert.match(src, /import \{ SECTIONS as ARTICLE_SURFACES \} from '\.\.\/\.\.\/scripts\/lib\/article-surfaces\.mjs'/);
+  const namesInConfig = [...src.matchAll(/allIdsConstName:\s*'([A-Z_]+)'/g)].map((m) => m[1]);
+  assert.deepEqual(namesInConfig, ['ALL_BLOG_ARTICLE_IDS', 'ALL_SWISS_ARTICLE_IDS']);
+  assert.equal(SECTIONS.frontaliere.idListVar, 'ALL_BLOG_ARTICLE_IDS');
+  assert.equal(SECTIONS.svizzera.idListVar, null, 'la svizzera deriva il suo elenco: nessun letterale da riscrivere');
 });

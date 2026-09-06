@@ -285,6 +285,10 @@ import {
 } from './lib/article-meta-block.mjs';
 import { sanitizeText } from '../../scripts/lib/sanitize-control-chars.mjs';
 import { findIdListLiteralSpan } from '../../scripts/lib/ts-literals.mjs';
+// Solo per sapere QUALI sezioni dichiarano l'elenco id come letterale
+// (`idListVar`): è la stessa risposta che usa `scripts/retire-article.mjs`, e
+// va data da un posto solo (AGENTS.md #6).
+import { SECTIONS as ARTICLE_SURFACES } from '../../scripts/lib/article-surfaces.mjs';
 import { reportStrippedControlChars } from './lib/control-char-write-report.mjs';
 import {
   beginRegisterLock as beginRegisterLockImpl,
@@ -12575,6 +12579,26 @@ function modifyRouterTs(data) {
   // ALL_BLOG_ARTICLE_IDS while everything else got written. Same defect class,
   // opposite half, as the one `scripts/retire-article.mjs` had on removal.
   const idListSpan = findIdListLiteralSpan(blogSrc, SECTION.allIdsConstName);
+  // Uno span `null` è legittimo SOLO dove la sezione dichiara di non avere un
+  // elenco letterale (`idListVar: null`: la svizzera lo deriva da
+  // `Object.keys(SWISS_SLUGS)`). Dove invece l'elenco c'è, `null` vuol dire
+  // «la forma è cambiata» — p.es. un `prettier` che avvolge l'annotazione su
+  // due righe, che l'ancora (confinata alla riga della dichiarazione) non
+  // matcha. Saltare in silenzio lì lascerebbe il nuovo id FUORI da
+  // `ALL_BLOG_ARTICLE_IDS` con slug, registro, meta, SEO e sidecar già
+  // scritti: corpus incoerente, zero errori, e il sito legge un elenco senza
+  // l'id nuovo. Stessa regola della metà opposta (`removeFromIdListLiteral`,
+  // `scripts/lib/ts-literals.mjs`): quando la sezione dice di avere il
+  // letterale e lo span non c'è, si grida.
+  const declaresIdListLiteral = Boolean(ARTICLE_SURFACES[SECTION.section]?.idListVar);
+  if (!idListSpan && declaresIdListLiteral) {
+    throw new Error(
+      `modifyRouterTs: la sezione ${SECTION.section} dichiara l'elenco letterale ` +
+      `${SECTION.allIdsConstName}, ma in ${corpusPath(blogDataFile)} non c'è una ` +
+      `dichiarazione '<const> ${SECTION.allIdsConstName} … = [' — la forma è cambiata, ` +
+      `va riscritta l'ancora (non allentata).`,
+    );
+  }
   if (idListSpan) {
     const allIds = getSectionExistingIds(blogSrc).map((id) => `'${id}'`);
     if (allIds.length === 0) {
