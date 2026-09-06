@@ -1,5 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/politica/1943484/referendum-accordi-commissione-svizzera-ue-svizzera-essere": "accordi-svizzera-ue-consiglio-federale",
   "https://www.rsi.ch/s/3949164": "aumento-iva-per-la-difesa",
   "https://www.tio.ch/svizzera/economia/1943473/banche-federale-crisi-consiglio-bonus": "banche-sotto-la-lente-bern-stringe-sui-bonus",
   "https://www.swissinfo.ch/ita/%22frutta-e-verdura-pi%c3%b9-care-da-produrre%2c-ma-prezzi-non-salgono%22/91887338": "frutta-ve-25-per-cento-piu-costi-3-sconto-migros",
@@ -1861,6 +1860,11 @@
   "https://www.admin.ch/it/newnsb/xkqqxunqnkgo": {
     "articleId": "conferenza-osce-berna-2026",
     "ts": "2026-09-06T01:22:17.571Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/cronaca/1948156/polizia-operazione-goldach-gallo-segnalazioni": {
+    "articleId": "polizia-operazione-goldach",
+    "ts": "2026-09-06T01:27:55.662Z",
     "keyForm": 2
   }
 }
