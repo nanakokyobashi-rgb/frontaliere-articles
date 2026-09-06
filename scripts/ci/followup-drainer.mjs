@@ -54,6 +54,14 @@ import {
 } from '../lib/secrets-scope-detect.mjs';
 import { isBackoffActive, maxQuotaResetsAt } from './claude-rate-limit.mjs';
 import { runBudgetFromEnv } from './lib/run-budget.mjs';
+// Lo slot del fixer si conta in un posto solo (AGENTS.md #6): il pre-flight
+// `check-fixer-slot.mjs` e questi due contatori devono contare la STESSA cosa,
+// o la coda e il gate si raccontano due storie diverse sullo stesso slot.
+import {
+  IN_FLIGHT_STATUSES,
+  FIX_WORKFLOW_FILE,
+  DECOMPOSE_WORKFLOW_FILE,
+} from '../lib/fixer-slot.mjs';
 
 export {
   detectWorkflowScoped,
@@ -1449,10 +1457,10 @@ function gh(args, { json = true } = {}) {
 /** Quante run issue-fix sono in volo (queued|in_progress). 0 = slot libero. */
 function inFlightFixCount() {
   let n = 0;
-  for (const status of ['queued', 'in_progress']) {
+  for (const status of IN_FLIGHT_STATUSES) {
     try {
       const runs = gh([
-        'run', 'list', '--workflow', 'issue-fix.yml',
+        'run', 'list', '--workflow', FIX_WORKFLOW_FILE,
         '--status', status, '--json', 'databaseId', '--limit', '20',
       ]);
       n += Array.isArray(runs) ? runs.length : 0;
@@ -1506,10 +1514,10 @@ function listIssues(label) {
  * decine di minuti, ben oltre ORPHAN_MIN_AGE_MIN). Conservativo su errore. */
 function inFlightDecomposeCount() {
   let n = 0;
-  for (const status of ['queued', 'in_progress']) {
+  for (const status of IN_FLIGHT_STATUSES) {
     try {
       const runs = gh([
-        'run', 'list', '--workflow', 'issue-decompose.yml',
+        'run', 'list', '--workflow', DECOMPOSE_WORKFLOW_FILE,
         '--status', status, '--json', 'databaseId', '--limit', '20',
       ]);
       n += Array.isArray(runs) ? runs.length : 0;
