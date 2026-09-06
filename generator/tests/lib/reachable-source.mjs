@@ -32,10 +32,17 @@ import path from 'node:path';
 // resto del file. Su `create-article.mjs` succedeva davvero, e l'effetto era
 // che un centinaio di righe di commento veniva letto come testo emesso.
 //
-// Non c'e' riconoscimento dei literal regex, e la scelta e' deliberata: un
-// backtick dentro una regex apre un template fantasma, e l'effetto e' che si
-// smette di togliere commenti — la direzione innocua. Il contrario (perdere
-// codice) non e' raggiungibile da qui.
+// Non c'e' riconoscimento dei literal regex: un backtick dentro una regex apre
+// un template fantasma, e da li' in poi la parita' e' invertita. NON e' una
+// direzione innocua per costruzione — il PROSSIMO backtick, quello di un
+// template VERO, chiude il fantasma, quindi il corpo del template vero viene
+// letto come CODICE e le sue righe emesse che iniziano con `//` o `/*` vengono
+// azzerate: perdere codice E' raggiungibile da qui. Il meccanismo e' gia' vivo
+// nel repo (`generator/scripts/lib/llm-payload-diagnostics.mjs:87`, `/```+\s*$/`).
+// Quello che rende sicura la direzione non e' il riconoscimento delle regex —
+// che richiederebbe l'euristica sul token precedente, e sbaglia nella direzione
+// pericolosa — ma il fail-safe di fine file in `codeOnly()`: se lo scan finisce
+// desincronizzato, quel file non viene strippato affatto.
 const scanLine = (line, state) => {
   const stack = state.stack.slice();
   let inBlock = state.inBlock;
@@ -43,11 +50,15 @@ const scanLine = (line, state) => {
   const top = () => stack[stack.length - 1];
   for (let i = 0; i < line.length; i++) {
     const c = line[i];
-    if (c === '\\') { i++; continue; }
+    // L'escape si valuta DOPO il blocco: dentro `/* … */` il backslash non
+    // e' un escape, e trattarlo come tale fa mancare la chiusura di un blocco
+    // che finisce con `\*/` — da li' `codeOnly()` azzera tutto il resto del
+    // file, cioe' la direzione che fa danno in silenzio.
     if (inBlock) {
       if (c === '*' && line[i + 1] === '/') { inBlock = false; i++; }
       continue;
     }
+    if (c === '\\') { i++; continue; }
     if (quote) {
       if (c === quote) quote = null;
       continue;
@@ -108,6 +119,14 @@ export const codeOnly = (src) => {
     state = scanLine(line, state);
     out.push(line);
   }
+  // Fail-safe: a fine file la pila dei contesti deve essere vuota e nessun
+  // blocco puo' restare aperto — un sorgente JS valido non finisce dentro un
+  // template o dentro `/* …`. Se succede, lo scan e' desincronizzato (tipico:
+  // un backtick dentro un literal regex, che questo scanner non riconosce) e
+  // ogni decisione presa da li' in poi vale zero. In quel caso si restituisce
+  // il sorgente NON strippato: piu' rumore nel censimento, mai un file letto
+  // a meta'. Sbagliare per rumore e' recuperabile, sbagliare per cecita' no.
+  if (state.stack.length > 0 || state.inBlock) return src;
   return out.join('\n');
 };
 
@@ -120,8 +139,16 @@ export const codeOnly = (src) => {
 // pubblicato usciva dal censimento in silenzio: e' meta' del buco che #571
 // voleva chiudere. Stessa storia per l'import di solo effetto
 // (`import './setup.mjs'`), che non ha nemmeno un `from` da agganciare.
-export const RELATIVE_IMPORT_SPEC =
-  /(?:\bfrom\s*|\bimport\s*\(\s*|\bimport\s+|\brequire\s*\(\s*)['"](\.[^'"]+)['"]/g;
+//
+// Esportato come SORGENTE, non come literal `/g` condiviso: `matchAll` copia
+// `lastIndex` dalla regex sorgente, quindi una sola `.test()` o `.exec()` da
+// parte di chiunque farebbe partire ogni scansione successiva a meta' file —
+// import persi in silenzio, cioe' di nuovo censimento cieco. Ogni consumatore
+// istanzia la sua.
+export const RELATIVE_IMPORT_SPEC_SOURCE =
+  "(?:\\bfrom\\s*|\\bimport\\s*\\(\\s*|\\bimport\\s+|\\brequire\\s*\\(\\s*)['\"](\\.[^'\"]+)['\"]";
+
+export const relativeImportSpec = () => new RegExp(RELATIVE_IMPORT_SPEC_SOURCE, 'g');
 
 const resolveRelativeImport = (fromFile, spec) => {
   const base = path.resolve(path.dirname(fromFile), spec);
@@ -170,7 +197,7 @@ export const createReachableSource = () => {
     }
     let combined = src;
     let cyclic = false;
-    for (const m of src.matchAll(RELATIVE_IMPORT_SPEC)) {
+    for (const m of src.matchAll(relativeImportSpec())) {
       const resolved = resolveRelativeImport(file, m[1]);
       if (!resolved) continue;
       const child = walk(resolved, ancestors);

@@ -12,7 +12,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
-import { codeOnly, RELATIVE_IMPORT_SPEC, createReachableSource } from './lib/reachable-source.mjs';
+import { codeOnly, relativeImportSpec, createReachableSource } from './lib/reachable-source.mjs';
 
 const BT = '`';
 
@@ -134,7 +134,7 @@ test('codeOnly lascia intatta una riga di codice con un URL o un commento in cod
   assert.match(out, /nota in coda/, 'il commento in coda resta: e\' la scelta conservativa');
 });
 
-test('RELATIVE_IMPORT_SPEC aggancia import statici, dinamici, di solo effetto e require relativi', () => {
+test('relativeImportSpec() aggancia import statici, dinamici, di solo effetto e require relativi', () => {
   const src = [
     "import { a } from './lib/uno.mjs';",
     "export { b } from '../due.mjs';",
@@ -147,7 +147,7 @@ test('RELATIVE_IMPORT_SPEC aggancia import statici, dinamici, di solo effetto e 
     "import { z } from 'zod';",
     'const dyn = await import(specifierVariabile);',
   ].join('\n');
-  const specs = [...src.matchAll(RELATIVE_IMPORT_SPEC)].map((m) => m[1]);
+  const specs = [...src.matchAll(relativeImportSpec())].map((m) => m[1]);
   assert.deepEqual(specs, [
     './lib/uno.mjs',
     '../due.mjs',
@@ -157,6 +157,51 @@ test('RELATIVE_IMPORT_SPEC aggancia import statici, dinamici, di solo effetto e 
     './sei.mjs',
   ], 'i builtin, i pacchetti npm e gli specificatori calcolati restano fuori; '
     + 'gli import dinamici NO — erano meta\' delle forme in circolazione');
+});
+
+test('codeOnly ricade sul sorgente non strippato quando lo scan finisce desincronizzato', () => {
+  // Il fail-safe. Un backtick dentro un literal regex (`llm-payload-diagnostics.mjs:87`
+  // ne ha uno vero) apre un template fantasma che il PROSSIMO backtick — quello
+  // di un template vero — chiude: da li' la parita' e' invertita, il corpo del
+  // template vero viene letto come CODICE e le sue righe emesse che iniziano
+  // con `//` vengono azzerate. Non e' rumore, e' cecita': il letterale
+  // pubblicato sparisce dalla sorgente su cui gira il censimento.
+  const src = [
+    'const re = /[#>*' + BT + '_~-]+/g;',
+    'const body = ' + BT + ';',
+    '// path: content/services/locales/blog-body/it/x.ts',
+    BT + ';',
+  ].join('\n');
+  const out = codeOnly(src);
+  assert.match(out, /blog-body/,
+    'con lo scan desincronizzato si restituisce il sorgente intero: piu\' '
+    + 'rumore nel censimento, mai un file letto a meta\'');
+  assert.equal(out, src, 'nessuna riga viene toccata quando lo scan non e\' affidabile');
+});
+
+test('codeOnly chiude un blocco che finisce con un backslash prima di */', () => {
+  // Il backslash NON e' un escape dentro `/* … */`: se lo scanner lo tratta
+  // come tale la chiusura viene mancata e tutto il resto del file viene
+  // azzerato — la direzione che fa danno in silenzio.
+  const src = [
+    'const p = 1; /* nota \\*/',
+    "const q = 'content/services/locales/blog-body/it/x.ts';",
+  ].join('\n');
+  const out = codeOnly(src);
+  assert.match(out, /blog-body/,
+    'il blocco si chiude su `\\*/`, quindi la riga dopo resta codice');
+});
+
+test('la sorgente raggiungibile non perde import dopo un uso della regex condivisa', () => {
+  // `matchAll` copia `lastIndex` dalla regex sorgente: un literal `/g`
+  // esportato e condiviso perderebbe gli import iniziali di ogni file
+  // scansionato dopo un `.test()` di chiunque — in silenzio.
+  const re = relativeImportSpec();
+  re.test("import a from './uno.mjs'");
+  const src = "import a from './uno.mjs'\nimport b from './due.mjs'";
+  assert.deepEqual([...src.matchAll(relativeImportSpec())].map((m) => m[1]),
+    ['./uno.mjs', './due.mjs'],
+    'ogni consumatore istanzia la sua regex, quindi nessuna scansione parte a meta\' file');
 });
 
 const mkTree = (files) => {
