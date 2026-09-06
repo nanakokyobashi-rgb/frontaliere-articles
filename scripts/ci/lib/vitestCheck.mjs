@@ -395,3 +395,57 @@ export function currentAttemptJobSteps({ checkRun, jobId, jobs }) {
   if (checkRun.head_sha && job.head_sha && job.head_sha !== checkRun.head_sha) return [];
   return Array.isArray(job.steps) ? job.steps : [];
 }
+
+/**
+ * Nome dello step di `tests.yml` che invoca `claude-code-action` per la review.
+ * Vive qui accanto a `REVIEW_GATE_STEP_NAME` perché è l'altra metà dello stesso
+ * discriminante: il gate dice CHE il verdetto manca, questo step dice se un
+ * verdetto NUOVO era possibile su quella run — vedi `reviewSkippedByGuard`.
+ * Pinnato contro il workflow da `generator/tests/review-step-names.test.mjs`.
+ */
+export const CLAUDE_REVIEW_STEP_NAME = 'Run Claude review';
+
+/**
+ * Il rosso del review gate è arrivato SENZA che la review girasse, perché il
+ * `Re-review guard` l'ha saltata?
+ *
+ * ── PERCHÉ SERVE ───────────────────────────────────────────────────────────
+ * Il one-shot del review gate (`decideReopen` → `failureNotAttributable ===
+ * 'review-gate'`) si regge su una premessa: «la review è già girata e il
+ * re-trigger ne produce una nuova». Quella premessa cade quando lo step
+ * `Re-review guard` di `tests.yml` ha saltato Claude — delta dall'ultima
+ * `## LGTM` di soli file non-code, oppure fingerprint del contributo invariato
+ * — e lo step `Require approving Claude review` è fallito lo stesso sui
+ * verdetti GIÀ postati (tipicamente un 🔴 Important ancora aperto).
+ *
+ * In quello stato il close+reopen è un no-op per costruzione: `tests.yml`
+ * riparte, il guard rivaluta lo stesso fingerprint del contributo — che il
+ * merge di `main` pushato da pr-autorebase non altera, è calcolato 3-dot
+ * contro la merge-base — salta di nuovo, e il gate fallisce identico. Si
+ * brucia il one-shot e una `tests` intera per tornare esattamente dov'era, e
+ * lo sticky promette all'operatore un effetto che su quella PR non si verifica.
+ *
+ * ── IL SEGNALE ─────────────────────────────────────────────────────────────
+ * `Run Claude review` ha `if: ... && steps.guard.outputs.skip != 'true'`,
+ * quindi la jobs API lo riporta `skipped` esattamente quando il guard ha
+ * saltato. L'altro motivo di skip (`should_review != 'true'`) è escluso dalla
+ * premessa stessa: quella condizione è nell'`if` del gate, che allora sarebbe
+ * `skipped` e non `failure`.
+ *
+ * Fail-CLOSED: senza uno step `Require approving Claude review` in `failure`,
+ * o senza lo step della review nella lista (lista stantia, vuota, o workflow
+ * rinominato), risponde `false` — cioè non toglie il one-shot a nessuno sulla
+ * base di un dubbio.
+ *
+ * Pura: nessuna I/O. Stessa lista di step di `vitestFailureIsReviewGate`.
+ *
+ * @param {Array<{name?: string, conclusion?: string}>} steps
+ * @returns {boolean}
+ */
+export function reviewSkippedByGuard(steps) {
+  if (!Array.isArray(steps) || steps.length === 0) return false;
+  const gate = steps.find((s) => s && s.name === REVIEW_GATE_STEP_NAME);
+  if (!gate || gate.conclusion !== 'failure') return false;
+  const review = steps.find((s) => s && s.name === CLAUDE_REVIEW_STEP_NAME);
+  return Boolean(review && review.conclusion === 'skipped');
+}

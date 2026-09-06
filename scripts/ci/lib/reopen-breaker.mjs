@@ -170,17 +170,27 @@ export function parseReopenBudget(body) {
  *   finding 🔴), non i test. Indipendente da `failureNotAttributable`: resta
  *   `true` anche quando il re-trigger one-shot è già stato speso, perché serve
  *   comunque a nominare la causa vera nel messaggio.
+ *   `reviewSkippedByGuard` — su quel rosso la review NON è girata: l'ha saltata
+ *   il `Re-review guard` di `tests.yml` e il gate è fallito sui verdetti già
+ *   postati. Il chiamante lo passa (`reviewSkippedByGuard` in vitestCheck) e
+ *   NON concede il one-shot in questo caso: il re-trigger ri-esegue il guard,
+ *   che salta di nuovo sullo stesso fingerprint del contributo, e il gate
+ *   fallisce identico. Qui serve solo a scrivere all'operatore la cosa vera —
+ *   che il close+reopen non ri-esegue la review.
  * @returns {{action:'skip-failing-check'|'skip-breaker'|'reopen',
  *            count:number, reason:string, cause:string}}
  *   'skip-failing-check' = un check richiesto è FAILURE: il reopen non può
  *                          ripararlo → non si tocca la PR.
  *   'skip-breaker'       = budget esaurito sullo STESSO stato → si smette.
  *   'reopen'             = riciclo legittimo; `count` è il tentativo in corso.
- *   `cause` ∈ `'tests'|'review-gate'|''` — di chi è il rosso, per il messaggio.
+ *   `cause` ∈ `'tests'|'review-gate'|'review-gate-skipped'|''` — di chi è il
+ *   rosso, per il messaggio. `review-gate-skipped` è il review gate su cui la
+ *   review non è nemmeno girata (guard), e vuole un'istruzione diversa.
  */
 export function decideReopen({
   vitestConclusion, fingerprint, prior, max = DEFAULT_MAX_REOPENS,
   failureNotAttributable = '', reviewGateFailure = false,
+  reviewSkippedByGuard = false,
 }) {
   const carried = prior && prior.fingerprint === fingerprint ? prior.count : 0;
 
@@ -206,8 +216,17 @@ export function decideReopen({
     return {
       action: 'skip-failing-check',
       count: carried,
-      cause: reviewGateFailure ? 'review-gate' : 'tests',
-      reason: reviewGateFailure
+      cause: reviewGateFailure
+        ? (reviewSkippedByGuard ? 'review-gate-skipped' : 'review-gate')
+        : 'tests',
+      reason: reviewGateFailure && reviewSkippedByGuard
+        ? `il check richiesto \`${VITEST_CHECK_NAME}\` è FAILURE sul solo step del `
+          + `review gate, ma su quella run la review NON è girata: l'ha saltata il `
+          + `\`Re-review guard\` (nessun code cambiato dall'ultima \`## LGTM\`) e il `
+          + `gate è fallito sui verdetti già postati. Un re-trigger ri-esegue il `
+          + `guard, che salta di nuovo sullo stesso contributo, e il gate fallisce `
+          + `identico: il one-shot non si spende qui.`
+        : reviewGateFailure
         ? `il check richiesto \`${VITEST_CHECK_NAME}\` è FAILURE, ma i test sono `
           + `verdi: a fallire è lo step del review gate — sulla HEAD manca un `
           + `\`## LGTM\` approvante, oppure c'è un finding 🔴 Important. Il `
@@ -227,7 +246,9 @@ export function decideReopen({
     return {
       action: 'skip-breaker',
       count: carried,
-      cause: reviewGateFailure ? 'review-gate' : '',
+      cause: reviewGateFailure
+        ? (reviewSkippedByGuard ? 'review-gate-skipped' : 'review-gate')
+        : '',
       reason: `${carried} riaperture su uno stato identico (impronta \`${fingerprint}\`) `
         + `non hanno cambiato nulla: il re-trigger non è la cura. Breaker aperto.`,
     };
@@ -334,14 +355,37 @@ export function renderReopenBudget({
         // Il breaker scatta tipicamente su PR VERDI (le rosse le ferma la
         // precondizione, prima e senza consumare budget): dire «far passare i
         // test» qui indicherebbe all'umano un'azione già soddisfatta.
-        ? `Cosa serve per sbloccarla: **un commit nuovo, o una review che arrivi** — il vitest `
-          + `di solito qui è già verde, non è lui il blocco. Appena l'impronta cambia il `
-          + `contatore si azzera da solo e il ciclo la riprende; in alternativa un close+reopen `
-          + `manuale ri-triggera review+tests subito.`
+        // Con la review saltata dal guard cade però anche la seconda metà: un
+        // close+reopen manuale NON ri-triggera la review, il guard la salta di
+        // nuovo sullo stesso contributo. Promettere quell'effetto manderebbe
+        // l'operatore a rifare un no-op.
+        ? cause === 'review-gate-skipped'
+          ? `Cosa serve per sbloccarla: **un commit che cambi il codice del contributo** — `
+            + `è l'unica cosa che rimette in moto la review. Un close+reopen manuale non `
+            + `basta: il \`Re-review guard\` salta Claude finché il contributo è invariato `
+            + `dall'ultima \`## LGTM\`, quindi il gate tornerebbe rosso identico. In `
+            + `alternativa, una review approvante postata a mano sulla HEAD.`
+          : `Cosa serve per sbloccarla: **un commit nuovo, o una review che arrivi** — il vitest `
+            + `di solito qui è già verde, non è lui il blocco. Appena l'impronta cambia il `
+            + `contatore si azzera da solo e il ciclo la riprende; in alternativa un close+reopen `
+            + `manuale ri-triggera review+tests subito.`
         // Il rosso del check ha DUE cause che si chiamano uguali: i test rotti
         // e il review gate (LGTM mancante o 🔴 aperto), che dall'unificazione
         // tests+review del 2026-08-26 vive nello stesso job. Dire «far passare
         // i test» al secondo manda a cercare un `FAIL ` che nel log non c'è.
+        // Terza variante dello stesso rosso: il gate è fallito ma la review non
+        // è nemmeno girata, perché il `Re-review guard` l'ha saltata. Dire «un
+        // close+reopen ri-esegue la review» qui è FALSO — il re-trigger
+        // ri-esegue il guard, che salta di nuovo sullo stesso fingerprint del
+        // contributo (il merge di `main` non lo cambia), e il gate fallisce
+        // identico. L'unica leva vera è cambiare il codice del contributo.
+        : cause === 'review-gate-skipped'
+          ? `Cosa serve per sbloccarla: **un commit che cambi il codice del contributo**, `
+            + `o una review approvante postata a mano sulla HEAD. I test sono verdi: il rosso `
+            + `di \`${VITEST_CHECK_NAME}\` è lo step del review gate, che ha letto i verdetti `
+            + `già postati — un \`🔴 Important\` ancora aperto, o nessun \`## LGTM\`. `
+            + `Un close+reopen **non** ri-esegue la review: il \`Re-review guard\` salta Claude `
+            + `finché il contributo è invariato dall'ultima \`## LGTM\`.`
         : cause === 'review-gate'
           ? `Cosa serve per sbloccarla: **una review Claude approvante sulla HEAD** — `
             + `\`## LGTM\` senza finding 🔴 Important. I test sono verdi: il rosso di `
