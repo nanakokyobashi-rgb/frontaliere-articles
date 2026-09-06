@@ -268,9 +268,23 @@ jobs:
           LBL_PERMANENT_TRACKER: 'agent:no-age-out'
         run: |
           set -uo pipefail
+          # L'ESITO delle due query, non solo il loro output. `set -e` non e'
+          # attivo (i rami sotto decidono da soli), quindi un `gh` non-zero —
+          # jq su una forma inattesa, rate-limit, token scaduto — lascia la
+          # variabile VUOTA e indistinguibile da «nessun residuo». Se capita a
+          # entrambe (stessa causa: e' la stessa API con lo stesso token), il
+          # ramo sotto chiude il digest con `--resolve` mentre il backlog
+          # needs-human e' pieno: senza fallire, e sotto `continue-on-error:
+          # true`, l'unico canale che gli umani leggono sparirebbe in silenzio.
+          # I due gemelli che chiudono con `--resolve` in questo repo
+          # (reconcile-article-shards.yml, republish-dirty-content.yml) gia'
+          # subordinano la chiusura a `steps.detect.outcome == 'success'` prima
+          # ancora di guardare il conteggio; qui produttore e consumatore
+          # stanno nello stesso step, e l'equivalente e' catturare `$?`.
           PRS=$(gh pr list --repo "$GH_REPO" --state open --label needs-human \
             --json number,title,updatedAt \
             --jq '.[] | "- #\(.number) \(.title) (ultimo update \(.updatedAt))"')
+          PRS_RC=$?
           # L'issue dedup di questo stesso step nasce con `automation` e NON
           # con `needs-human` — ma niente le impedisce di riceverla dopo: il
           # followup-drainer gliel'ha messa il 2026-09-02T13:39:50Z (issue
@@ -296,6 +310,16 @@ jobs:
           ISSUES=$(gh issue list --repo "$GH_REPO" --state open --label needs-human \
             --limit 200 --json number,title,updatedAt,labels \
             --jq '.[] | select(.title != env.DEDUP_TITLE) | select([.labels[].name] | index(env.LBL_PERMANENT_TRACKER) | not) | "- #\(.number) \(.title) (ultimo update \(.updatedAt))"')
+          ISSUES_RC=$?
+          if [ "$PRS_RC" -ne 0 ] || [ "$ISSUES_RC" -ne 0 ]; then
+            # Query fallita: lo stato del backlog e' SCONOSCIUTO, non vuoto.
+            # Non si chiude e non si ripubblica il corpo (che con una lista
+            # troncata da un errore direbbe il falso): si fallisce lo step —
+            # `continue-on-error: true` tiene comunque verde il job, ma il
+            # rosso resta visibile e il prossimo run ricalcola da zero.
+            echo "::error::Query needs-human fallita (gh pr list rc=$PRS_RC, gh issue list rc=$ISSUES_RC): non tocco l'issue dedup. Liste vuote per un errore non sono «nessun residuo»."
+            exit 1
+          fi
           if [ -z "$PRS" ] && [ -z "$ISSUES" ]; then
             # Liste vuote = la condizione di chiusura che il corpo promette.
             # Uscire e basta la lasciava non mantenuta: l'issue dedup restava
