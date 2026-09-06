@@ -69,6 +69,7 @@
  */
 
 import { extractSection, stripNonContent } from './pr-body-sections-check.mjs';
+import { stripEmphasis } from './pr-body-closes-check.mjs';
 
 // Gli stessi header di `pr-body-sections-check.mjs`. Il corpus usa la variante
 // `(ancora)`, il sito quella senza: il modulo accetta entrambe cosi' resta
@@ -92,7 +93,12 @@ export const STATE_FORMS = [
   {
     id: 'in-questa-pr',
     label: '`in questa PR`',
-    re: /(?<!\bnon\s(?:[\w'’]+\s+){0,3})\bin questa PR\b/i,
+    // `\p{L}` con la `u` e non `[\w…]`: `\w` e' ASCII, quindi `non e' in questa
+    // PR` passava ma `non è in questa PR` no — la catena si spezzava
+    // sull'accento e il gate leggeva come «fatto» la voce che dice il
+    // contrario. `\s+` e non `\s`: dopo `stripEmphasis` fra la negazione e la
+    // parola dopo restano piu' spazi (`**non** in` -> `  non   in`).
+    re: /(?<!\bnon\s+(?:[\p{L}\p{N}_'’]+\s+){0,3})\bin questa PR\b/iu,
   },
   // REVIEW.md, forma 2 — c'e' una PR/issue che lo prende in carico. Il
   // sostantivo di tracciamento DEVE stare accanto al ref: e' cio' che
@@ -211,7 +217,14 @@ export function sectionIsNessuno(sectionText) {
  * @returns {{ id: string, label: string } | null}
  */
 export function bulletState(text) {
-  const s = String(text ?? '');
+  // `stripEmphasis` prima del match: l'enfasi markdown non e' una parola, ma
+  // per un lookbehind lo e'. `- Stato: **non** in questa PR` e `- Stato: `non`
+  // in questa PR` spezzavano la negazione sugli asterischi e sui backtick, e il
+  // gate dichiarava «fatto» proprio la voce che dice che il lavoro NON e' in
+  // questa PR — il verso costoso (verde su cio' che il gate esiste per
+  // prendere). Stessa classe della guardia di `pr-body-closes-check.mjs`, da
+  // cui il normalizzatore arriva: una sola sorgente.
+  const s = stripEmphasis(String(text ?? ''));
   for (const f of STATE_FORMS) if (f.re.test(s)) return { id: f.id, label: f.label };
   return null;
 }
@@ -223,7 +236,11 @@ export function bulletState(text) {
  * @returns {string | null}
  */
 export function escapeHatchIn(text) {
-  const s = String(text ?? '');
+  // Stessa normalizzazione di `bulletState`, e per lo stesso verso: le
+  // scappatoie sono LOCUZIONI, e l'enfasi cade in mezzo (`fuori **scope**`,
+  // `una PR **separata**`). Senza, marcare in grassetto meta' della locuzione
+  // rendeva la scappatoia invisibile al gate che esiste per prenderla.
+  const s = stripEmphasis(String(text ?? ''));
   for (const h of ESCAPE_HATCHES) if (h.re.test(s)) return h.quote;
   return null;
 }
@@ -263,7 +280,11 @@ export function checkNextStepStates(body = '') {
   for (const b of topLevelBullets(section)) {
     if (bulletState(b.text)) continue;
     const hatch = escapeHatchIn(b.text);
-    const decided = DECISION_RE.test(b.text);
+    // Normalizzata come la scappatoia, non a caso: se `escapeHatchIn` vede
+    // `fuori **scope**` e l'esenzione non vede `per **scelta**` nella stessa
+    // voce, il gate segnala una decisione motivata come rinvio. I due lati
+    // della stessa condizione devono leggere lo stesso testo.
+    const decided = DECISION_RE.test(stripEmphasis(b.text));
     if (hatch && !decided) {
       violations.push({
         type: 'escape-hatch-instead-of-state',

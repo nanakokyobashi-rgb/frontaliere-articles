@@ -288,3 +288,44 @@ test('escapeHatchIn è puro e riconosce le forme osservate', () => {
   assert.equal(escapeHatchIn('da valutare in seguito'), 'in seguito');
   assert.equal(escapeHatchIn('con uno stato concreto e nessun rinvio'), null);
 });
+
+// ---------------------------------------------------------------------------
+// #933 (gemello) — la stessa classe della guardia di `pr-body-closes-check`:
+// l'enfasi markdown non è una parola, ma per un lookbehind e per una locuzione
+// lo è. Qui il verso costoso è il verde: `**non** in questa PR` dichiara che il
+// lavoro NON c'è, e il gate lo leggeva come stato «fatto».
+// ---------------------------------------------------------------------------
+
+test('«non in questa PR» resta una negazione anche in grassetto, in codice o con l’accento', () => {
+  for (const t of [
+    '- Stato: non in questa PR',
+    '- Stato: **non** in questa PR',
+    '- Stato: `non` in questa PR',
+    "- Stato: non e' ancora in questa PR",
+    '- Stato: non è in questa PR',
+    '- Stato: **non è** in questa PR',
+  ]) {
+    assert.equal(bulletState(t), null, t);
+  }
+  // Lo stato affermativo continua a valere, in chiaro e in grassetto.
+  assert.equal(bulletState('- Stato: in questa PR')?.id, 'in-questa-pr');
+  assert.equal(bulletState('- Stato: **in questa PR**')?.id, 'in-questa-pr');
+  assert.equal(bulletState('- Stato: **blocked:** quota')?.id, 'blocked');
+});
+
+test('una scappatoia a metà in grassetto resta una scappatoia', () => {
+  assert.equal(escapeHatchIn('- Il resto è fuori **scope**'), 'fuori scope');
+  assert.equal(escapeHatchIn('- Vale un giro **dedicato**'), 'un giro dedicato');
+  assert.equal(escapeHatchIn('- Tutto coperto qui'), null);
+});
+
+test('l’esenzione «decisione motivata» legge il testo normalizzato come la scappatoia', () => {
+  // Se solo uno dei due lati vedesse l'enfasi, una decisione motivata verrebbe
+  // segnalata come rinvio: i due lati della stessa condizione devono leggere lo
+  // stesso testo.
+  const res = checkNextStepStates(
+    withSection(['- Il backfill è **posposto**, per **scelta**: vale meno del rischio.']),
+  );
+  assert.deepEqual(res.violations, []);
+  assert.equal(res.advisories[0]?.type, 'hatch-exempted-by-decision');
+});

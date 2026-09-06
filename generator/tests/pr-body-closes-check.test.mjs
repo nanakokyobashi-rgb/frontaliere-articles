@@ -88,3 +88,55 @@ test('la catena di ref su una keyword sola resta una violazione a parte', () => 
   assert.deepEqual(v[0].refs, ['12', '34', '56']);
   assert.deepEqual(checkClosesLines('Closes #12\nCloses #34').violations, []);
 });
+
+// ---------------------------------------------------------------------------
+// #933 — la guardia non deve essere aggirabile per MARKDOWN. È lo stesso verso
+// del blocco sopra (una negazione letta come intento di chiusura), ma qui a
+// cancellare la negazione non è la larghezza della finestra: è il grassetto e
+// il code span, cioè il modo in cui i body di questo repo sono scritti davvero.
+// ---------------------------------------------------------------------------
+
+test('l’enfasi markdown fra la negazione e il verbo non rompe la guardia', () => {
+  assert.deepEqual(refs('**non** chiude #849 resta aperta'), []);
+  assert.deepEqual(refs('_non_ chiude #849'), []);
+  assert.deepEqual(refs('Il bug **non è** chiuso: #849'), []);
+  assert.deepEqual(refs('Il bug **non è**\nchiuso: #849 resta aperta.'), []);
+  assert.deepEqual(refs('La issue è **già** chiusa da #66'), []);
+  // La normalizzazione toglie i marker, non le parole: la concessione resta
+  // concessione e il bound di due parole resta due parole.
+  assert.deepEqual(refs('**Non solo** chiude #12, ma anche X'), ['#12']);
+  assert.deepEqual(refs('Il bug **non** ancora del tutto completamente chiuso #849'), ['#849']);
+  // Un underscore DENTRO una parola non la spezza in due: se lo facesse,
+  // mangerebbe il budget di due parole e la guardia cadrebbe.
+  assert.deepEqual(refs('Il bug non skip_total chiuso #849'), []);
+});
+
+test('marcare in codice la parola negata non cancella la negazione', () => {
+  // `maskQuoted` azzera gli inline code span: la guardia legge la riga NON
+  // mascherata, perché una parola dentro un code span è comunque parte della
+  // frase attorno all’intento.
+  assert.deepEqual(refs('`non` chiuse #849'), []);
+  assert.deepEqual(refs('Il flag `non è` ancora chiuso: #849'), []);
+  // L’intento, invece, continua a leggersi sulla riga mascherata: ciò che è
+  // quotato non è dichiarato.
+  assert.deepEqual(refs('Non scrivere `chiude #133`, scrivi `Closes #133`'), []);
+  assert.deepEqual(refs('`chiude #133`'), []);
+});
+
+test('«né» si scrive anche con l’apostrofo ASCII, «ne» da solo è un pronome', () => {
+  assert.deepEqual(refs("Il fix ne' chiude #849 ne' risolve #850"), []);
+  assert.deepEqual(refs('Il fix né chiude #849'), []);
+  assert.deepEqual(refs('Il fix ne’ chiude #849'), []);
+  // Senza apostrofo è il pronome, non la negazione: un intento reale, e
+  // ingoiarlo sarebbe una chiusura mancata.
+  assert.deepEqual(refs('Il fix ne chiude #849'), ['#849']);
+});
+
+test('una keyword in grassetto è comunque una keyword, nei due versi', () => {
+  // GitHub rende via l’enfasi e onora `**Closes** #12`: il detector deve
+  // vederla, o legge come «non chiude» un body che chiude.
+  assert.deepEqual(refs('**Chiude** #133'), ['#133']);
+  assert.deepEqual(refs('*Risolve* #133'), ['#133']);
+  assert.deepEqual(refs('**Closes** #133\nchiude #133'), []);
+  assert.deepEqual(refs('Closes #133'), []);
+});
