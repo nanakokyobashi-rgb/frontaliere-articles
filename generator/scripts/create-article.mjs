@@ -10584,7 +10584,11 @@ function validate(data, opts = {}) {
       // — vedi il commento la' per la causa (#868 item 1). Un candidato
       // riservato (`null`, `undefined`, `slug-de`…) qui cade sul provvisorio
       // italiano, che la rilocalizzazione post-traduzione rifara'.
-      const fromLocalizedTitle = localizedTitle ? inspectSlugForPromptPlaceholder(localizedTitle).slug : '';
+      // `localizedTitleSlugCandidate` e non `inspectSlugForPromptPlaceholder`
+      // nudo: aggiunge il floor di plausibilita' del titolo (#798) al
+      // classificatore dei segnaposto, ed e' lo stesso helper che usano gli
+      // altri tre punti che derivano uno slug da un titolo localizzato.
+      const fromLocalizedTitle = localizedTitleSlugCandidate(localizedTitle);
       if (fromLocalizedTitle) {
         data.slugs[locale] = fromLocalizedTitle;
         RUN_REPORT.slugs.localizedFromTitle += 1;
@@ -15842,6 +15846,43 @@ function clearProvisionalItSlug(data, locale) {
 }
 
 /**
+ * Il candidato-slug ricavato da un titolo localizzato, o `''` se quel titolo
+ * non e' un titolo.
+ *
+ * Quattro punti di questo file derivano uno slug en/de/fr dal titolo tradotto,
+ * e tutti e quattro chiedevano una cosa sola: che il titolo fosse
+ * slugificabile. Il non-vuoto non basta (#798). Il titolo tradotto e' l'output
+ * di una chiamata SEPARATA (`translateArticle`, o il percorso free-MT di
+ * `lib/article-free-mt.mjs`): la degenerazione puo' NASCERE in traduzione, e da
+ * qui diventa `data.slugs[locale]`, cioe' URL e canonical di `/en/`, `/de/`,
+ * `/fr/` — live senza rebuild del sito e non correggibili a valle. Un `title`
+ * DE che vale `Titel` passa `inspectSlugForPromptPlaceholder` (non e' un
+ * segnaposto, non e' un segmento riservato) e pubblica `/de/<hub>/titel/`.
+ *
+ * Il floor e' quello dei meta, IMPORTATO e non ricopiato (AGENTS.md #6):
+ * `metaFieldPlausibilityMiss('title', …)`. Il retry mirato a monte prova a
+ * riparare il campo e, sul solo floor-miss, tiene comunque il valore TRADOTTO
+ * (mai italiano sotto `/de/`, #831) — ma quel valore non deve poi diventare
+ * l'URL. Qui la risposta e' diversa e puo' esserlo: sotto il floor il
+ * candidato e' vuoto, quindi il chiamante ricade sullo slug ITALIANO marcato
+ * provvisorio, che e' il ripiego gia' esistente per il titolo tradotto assente
+ * — un URL valido e distinto (cambiano prefisso di locale e segmento di hub),
+ * NOMINATO nel log e contato in `RUN_REPORT`. Il titolo pubblicato resta
+ * quello tradotto: cade lo slug, non la lingua.
+ *
+ * Costo misurato, non congetturato: sui 22.631 meta tradotti pubblicati il
+ * floor tocca 3 `title` (`Working DRY`, `Suisse-Italie`, `Hôtel Flaz`), che
+ * servirebbero l'indirizzo italiano invece del proprio. E' il ripiego che il
+ * repo gia' accetta per il titolo assente, ed e' loud.
+ */
+function localizedTitleSlugCandidate(localizedTitle) {
+  const testo = String(localizedTitle || '').trim();
+  if (!testo) return '';
+  if (metaFieldPlausibilityMiss('title', testo)) return '';
+  return inspectSlugForPromptPlaceholder(testo).slug;
+}
+
+/**
  * Promuove a slug localizzato ogni slug en/de/fr che sia ancora l'italiano —
  * marcato provvisorio da `validate()` **oppure** semplicemente byte-identico a
  * `data.slugs.it`, perche' i produttori che non passano da `validate()`
@@ -15889,7 +15930,13 @@ export function relocalizeSlugsAfterTranslation(data, opts = {}) {
     // sola parte di un articolo che non si corregge dopo: qui il candidato
     // vuoto ricade sul ramo «titolo tradotto non slugificabile» qui sotto, che
     // tiene lo slug italiano e NOMINA la causa.
-    const candidate = localizedTitle ? inspectSlugForPromptPlaceholder(localizedTitle).slug : '';
+    // Il floor di plausibilita' del titolo (#798) vive dentro
+    // `localizedTitleSlugCandidate` insieme al classificatore: un titolo
+    // tradotto troppo corto per essere un titolo non e' una sorgente di URL,
+    // e qui cade sul ramo «sotto il floor» qui sotto, che tiene lo slug
+    // italiano e NOMINA la causa.
+    const floorMiss = localizedTitle ? metaFieldPlausibilityMiss('title', localizedTitle) : null;
+    const candidate = localizedTitleSlugCandidate(localizedTitle);
 
     if (candidate && candidate !== itSlug && !isTaken(locale, candidate)) {
       data.slugs[locale] = candidate;
@@ -15905,11 +15952,13 @@ export function relocalizeSlugsAfterTranslation(data, opts = {}) {
     // traduttore, il titolo o una collisione.
     const reason = !localizedTitle
       ? 'titolo tradotto assente'
-      : !candidate
-        ? 'titolo tradotto non slugificabile'
-        : candidate === itSlug
-          ? 'titolo tradotto identico all\'italiano'
-          : 'slug localizzato gia\' occupato nella sezione';
+      : floorMiss
+        ? `titolo tradotto sotto il floor di plausibilita' (${floorMiss})`
+        : !candidate
+          ? 'titolo tradotto non slugificabile'
+          : candidate === itSlug
+            ? 'titolo tradotto identico all\'italiano'
+            : 'slug localizzato gia\' occupato nella sezione';
     data.slugs[locale] = current || itSlug;
     out.stillItalian.push({ locale, slug: data.slugs[locale], reason });
     onEvent({ kind: 'it-fallback', locale, slug: data.slugs[locale], reason });
@@ -16023,7 +16072,7 @@ export function deriveAndSanitizeArticleSlugs(data) {
       // Stesso classificatore condiviso degli altri due punti che derivano uno
       // slug da un titolo localizzato (#868 item 1): un titolo che vale
       // `Null` non diventa il segmento `null` di un URL pubblicato.
-      const fromLocalizedTitle = localizedTitle ? inspectSlugForPromptPlaceholder(localizedTitle).slug : '';
+      const fromLocalizedTitle = localizedTitleSlugCandidate(localizedTitle);
       if (fromLocalizedTitle) {
         data.slugs[locale] = fromLocalizedTitle;
         continue;
@@ -16045,7 +16094,7 @@ export function deriveAndSanitizeArticleSlugs(data) {
     // `data.slugs.de = 'null'` — che `relocalizeSlugsAfterTranslation()` non
     // ripara, perche' `needsWork` e' falso su uno slug diverso dall'italiano.
     const localizedTitle = String(data.content?.[locale]?.title || '').trim();
-    const fromTitle = localizedTitle ? inspectSlugForPromptPlaceholder(localizedTitle).slug : '';
+    const fromTitle = localizedTitleSlugCandidate(localizedTitle);
     const replacement = check.slug || fromTitle || data.slugs.it;
     const source = check.slug ? 'resto del segnaposto' : fromTitle ? `titolo ${locale}` : 'slug IT';
     console.error(
