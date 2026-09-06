@@ -34,6 +34,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { PAT_DOWN_TITLE } from '../../scripts/ci/alert-pat-down.mjs';
+import { sliceFrom } from './lib/anchored-slice.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const MONITOR = '.github/workflows/gh-pat-expiry-monitor.yml';
@@ -88,7 +89,7 @@ test('il monitor non fallisce il run sul load-failure (evita la issue doppia)', 
   // urgente appena aperto: due issue per un fatto solo, esattamente il rumore
   // che questo monitor esiste per ridurre. Il sito può permetterselo, qui no.
   const src = fs.readFileSync(path.join(ROOT, MONITOR), 'utf8');
-  const afterAlert = src.slice(src.indexOf('--workflow "GH_PAT Expiry Monitor"'));
+  const afterAlert = sliceFrom(src, '--workflow "GH_PAT Expiry Monitor"');
   assert.ok(
     !/^\s*exit 1\s*$/m.test(afterAlert),
     'Il ramo di load-failure non deve uscire con 1: il failure-scanner aprirebbe una ' +

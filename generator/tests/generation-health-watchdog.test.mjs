@@ -64,6 +64,7 @@ import {
   reconcile,
   summarizeRuns,
 } from '../../scripts/ci/scan-generation-health.mjs';
+import { sliceBetween } from './lib/anchored-slice.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
 const H = 3_600_000;
@@ -1726,7 +1727,7 @@ describe('roster-erosion: la condizione, e le tre trappole di #380', () => {
     const s = summarizeRuns([syntheticRun(60, 8), syntheticRun(60, 8)]);
     assert.equal(s.roster.probingRuns, 2);
     const source = fs.readFileSync(path.join(ROOT, 'scripts', 'ci', 'scan-generation-health.mjs'), 'utf-8');
-    const body = source.slice(source.indexOf('export function summarizeRuns'), source.indexOf('export function pairKeyOf'));
+    const body = sliceBetween(source, 'export function summarizeRuns', 'export function pairKeyOf');
     assert.ok(!/conclusion/.test(body.replace(/\/\/[^\n]*/g, '')), 'summarizeRuns non deve conoscere la conclusion delle run');
   });
 

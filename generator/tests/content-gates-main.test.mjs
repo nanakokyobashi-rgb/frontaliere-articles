@@ -47,6 +47,7 @@ import {
   preflight,
 } from '../../scripts/ci/content-gates-main.mjs';
 import { VITEST_CHECK_NAME } from '../../scripts/ci/lib/constants.mjs';
+import { sliceBetween } from './lib/anchored-slice.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const read = (rel) => fs.readFileSync(path.join(ROOT, rel), 'utf8');
@@ -67,7 +68,7 @@ const TESTS_WF = active(read('.github/workflows/tests.yml'));
 describe('content-gates-main: il workflow', () => {
   test('esiste ed è cablato su push a main limitato a content/**', () => {
     assert.ok(fs.existsSync(path.join(ROOT, WF_REL)), `${WF_REL} non esiste`);
-    const onBlock = WF.slice(WF.indexOf('\non:'), WF.indexOf('\npermissions:'));
+    const onBlock = sliceBetween(WF, '\non:', '\npermissions:');
     assert.match(
       onBlock,
       /push:\s*\n\s+branches: \[main\]/,
@@ -314,7 +315,7 @@ describe('content-gates-main: la diagnosi finisce nella issue', () => {
  */
 describe('tests.yml: il verdetto su main che il rescue stuck-red legge', () => {
   test('`push` non esclude più `main`', () => {
-    const onBlock = TESTS_WF.slice(TESTS_WF.indexOf('\non:'), TESTS_WF.indexOf('\npermissions:'));
+    const onBlock = sliceBetween(TESTS_WF, '\non:', '\npermissions:');
     assert.ok(
       !/branches-ignore:\s*\[.*main.*\]/.test(onBlock),
       'Torna `branches-ignore: [main]`: `mainTestsRuns()` tornerebbe di nuovo a zero e il ' +
