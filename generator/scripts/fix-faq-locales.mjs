@@ -254,6 +254,30 @@ function isWrongLocale(faqArray, expectedLocale) {
   return detected !== expectedLocale;
 }
 
+/**
+ * La stessa domanda, ma per COPPIA — ed e' quella che serve prima di scrivere.
+ *
+ * `translateFaqArray()` traduce una coppia alla volta e, quando il motore
+ * fallisce, rimette dentro la coppia ITALIANA come fallback
+ * (`results.push(pair)`): il fallimento tipico non e' totale, e' parziale. Sul
+ * testo concatenato una coppia italiana su otto resta un ottavo del campione,
+ * il rilevatore vede il resto in inglese, dice `en`, e l'italiano finisce
+ * pubblicato sulla pagina `/en/` dentro il JSON-LD della FAQ. Il gate di
+ * scrittura guarda quindi ogni coppia da sola, con la stessa soglia di 50
+ * caratteri sotto cui il rilevatore non ha segnale.
+ *
+ * Ritorna la coppia colpevole (indice + lingua rilevata) o `null`.
+ */
+export function wrongLocalePair(faqArray, expectedLocale) {
+  for (let i = 0; i < faqArray.length; i++) {
+    const text = `${faqArray[i].q} ${faqArray[i].a}`;
+    if (text.length < 50) continue; // too short to detect
+    const detected = detectLanguage(text, expectedLocale);
+    if (detected !== expectedLocale) return { index: i, detected };
+  }
+  return null;
+}
+
 // ── Translation (same cascade as job crawlers) ──────────────
 
 async function translateFaqArray(faqArray, targetLang) {
@@ -400,9 +424,12 @@ async function main() {
         continue;
       }
 
-      // Verify the translation is actually in the right locale
-      if (isWrongLocale(translated, issue.locale)) {
-        console.error(`${label} ❌ Translation still detected as wrong locale`);
+      // Verify the translation is actually in the right locale — per coppia,
+      // perche' il fallback italiano di `translateFaqArray()` e' per coppia.
+      const wrong = wrongLocalePair(translated, issue.locale);
+      if (wrong) {
+        console.error(`${label} ❌ Translation still detected as wrong locale `
+          + `(coppia ${wrong.index + 1}/${translated.length}: ${wrong.detected})`);
         failed++;
         continue;
       }

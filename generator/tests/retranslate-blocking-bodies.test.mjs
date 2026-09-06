@@ -52,6 +52,11 @@ import {
 // `identical` nel manifest del ciclo e un export aggiunto dal corpus lo
 // renderebbe `corpus-ahead`. Questo import pinna anche la collocazione.
 import { sanitizeBodyText } from '../scripts/lib/sanitize-body-braces.mjs';
+// L'ALTRO scrittore per-locale che gatta la scrittura sulla lingua: stessa
+// classe, stesso rimedio — la verifica guarda l'unita' tradotta, non il testo
+// concatenato.
+import { wrongLocalePair } from '../scripts/fix-faq-locales.mjs';
+import { detectLanguage } from '../scripts/lib/detect-language.mjs';
 
 const fileFor = (id, fields) => `const b: Record<string, string> = {\n`
   + Object.entries(fields).map(([k, v]) => `  'blog.article.${id}.${k}': '${escapeForSingleQuoteTS(v)}',`).join('\n')
@@ -284,4 +289,38 @@ test('--limit negativo esce con errore invece di selezionare tutto meno uno', ()
   // Falsificazione: un limite valido non viene rifiutato PER QUESTO motivo.
   // (Si ferma piu' avanti, sull'albero dei body assente, che e' un'altra uscita.)
   assert.doesNotMatch(String(run('--limit', '5').stderr), /negativo/);
+});
+
+// ── La stessa classe sull'altro scrittore per-locale ───────────────────────
+//
+// `fix-faq-locales.mjs` verificava il locale sul testo CONCATENATO delle
+// coppie, mentre `translateFaqArray()` traduce una coppia alla volta e sul
+// fallimento del motore rimette dentro la coppia ITALIANA
+// (`results.push(pair)`): li' il fallimento parziale non e' un'ipotesi, e' il
+// fallback scritto nel codice.
+
+const EN_PAIR = { q: 'Where does the cross-border worker pay tax?', a: EN_LONG };
+const IT_PAIR = { q: 'Dove paga le imposte il frontaliere?', a: IT_LONG };
+
+test('wrongLocalePair vede la singola coppia italiana rimasta dal fallback', () => {
+  // Falsificazione nell'altra direzione per prima: tre coppie tradotte davvero
+  // non devono essere rifiutate.
+  assert.equal(wrongLocalePair([EN_PAIR, EN_PAIR, EN_PAIR], 'en'), null);
+
+  const wrong = wrongLocalePair([EN_PAIR, IT_PAIR, EN_PAIR], 'en');
+  assert.ok(wrong, 'una coppia italiana su tre deve produrre un rifiuto');
+  assert.equal(wrong.index, 1);
+  assert.notEqual(wrong.detected, 'en');
+
+  // E sul concatenato — cioe' col controllo di prima — non verrebbe rifiutata.
+  assert.equal(
+    detectLanguage([EN_PAIR, IT_PAIR, EN_PAIR].map((p) => `${p.q} ${p.a}`).join(' '), 'en'),
+    'en',
+  );
+});
+
+test('wrongLocalePair salta le coppie sotto la soglia di segnale', () => {
+  // Stessa soglia di 50 caratteri di `isWrongLocale()`: sotto, il rilevatore
+  // non ha segnale e un rifiuto sarebbe rumore.
+  assert.equal(wrongLocalePair([{ q: 'Quando?', a: 'Nel 2026.' }], 'en'), null);
 });
