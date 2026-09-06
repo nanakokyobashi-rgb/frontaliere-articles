@@ -101,6 +101,16 @@ const BORDER_RANKING = 'border-wait-ranking.json';
 /** Daily-brief snapshot (Bollettino del Frontaliere) — same republish contract. */
 const DAILY_BRIEF = 'daily-brief.json';
 
+// Gli INPUT dei tre artefatti condizionali, in una sorgente sola perche' due
+// posti li leggono e devono leggere lo stesso: il ramo che decide se emettere,
+// e il gate `manifest.counts` che decide se un artefatto assente lo e'
+// legittimamente. Se i due si sfasano il gate torna cieco proprio dove serve —
+// l'assenza tornerebbe a valere 0 in accordo con un `counts` che vale 0 per la
+// stessa ragione (AGENTS.md #6: un valore condiviso ha UNA sorgente).
+const IMAGE_SRC_DIR = ['public', 'images', 'blog'];
+const BORDER_RANKING_SRC = ['public', 'data', 'border-wait-ranking.json'];
+const DAILY_BRIEF_SRC = ['public', 'data', 'daily-brief.json'];
+
 let newsCandidateCount = 0;
 let imageCount = 0;
 let borderRankingEntries = 0;
@@ -682,7 +692,7 @@ write('news-ticker-live.json', { schema: 1, articles: tickerArticles });
 // turn every sync red. Absence is the correct signal until the generator cuts
 // over and starts writing public/images/blog/ here.
 {
-  const srcDir = path.join(ROOT, 'public', 'images', 'blog');
+  const srcDir = path.join(ROOT, ...IMAGE_SRC_DIR);
   const files = fs.existsSync(srcDir)
     ? fs.readdirSync(srcDir).filter((f) => f.endsWith('.webp')).sort()
     : [];
@@ -723,7 +733,7 @@ write('news-ticker-live.json', { schema: 1, articles: tickerArticles });
 // is why this is emitted conditionally rather than gated — the site's pull treats
 // it exactly like the image manifest, absence meaning "not produced yet".
 {
-  const src = path.join(ROOT, 'public', 'data', 'border-wait-ranking.json');
+  const src = path.join(ROOT, ...BORDER_RANKING_SRC);
   if (fs.existsSync(src)) {
     const raw = fs.readFileSync(src, 'utf-8');
     let parsed;
@@ -760,7 +770,7 @@ write('news-ticker-live.json', { schema: 1, articles: tickerArticles });
 // `counts.availableBlocks` and `dateIso`, so the only thing worth refusing at
 // build time is a payload that carries no blocks at all.
 {
-  const src = path.join(ROOT, 'public', 'data', 'daily-brief.json');
+  const src = path.join(ROOT, ...DAILY_BRIEF_SRC);
   if (fs.existsSync(src)) {
     const raw = fs.readFileSync(src, 'utf-8');
     let parsed;
@@ -958,17 +968,17 @@ console.log(`[build-api] wrote ${Object.keys(written).length} files to dist/api`
     images: derivedOptional(
       IMAGE_MANIFEST,
       () => {
-        const srcDir = path.join(ROOT, 'public', 'images', 'blog');
+        const srcDir = path.join(ROOT, ...IMAGE_SRC_DIR);
         const webp = fs.existsSync(srcDir)
           ? fs.readdirSync(srcDir).filter((f) => f.endsWith('.webp')).length
           : 0;
-        return webp ? `${webp} .webp in public/images/blog` : null;
+        return webp ? `${webp} .webp in ${IMAGE_SRC_DIR.join('/')}` : null;
       },
       () => jsonOut(IMAGE_MANIFEST).images.length,
     ),
     borderRankingEntries: derivedOptional(
       BORDER_RANKING,
-      fileInput('public', 'data', 'border-wait-ranking.json'),
+      fileInput(...BORDER_RANKING_SRC),
       () => jsonOut(BORDER_RANKING).ranking.length,
     ),
     // Il payload servito porta anche il proprio `counts.availableBlocks`, ed e'
@@ -982,7 +992,7 @@ console.log(`[build-api] wrote ${Object.keys(written).length} files to dist/api`
     // perso fra il calcolo e la serializzazione qui non passa piu'.
     dailyBriefBlocks: derivedOptional(
       DAILY_BRIEF,
-      fileInput('public', 'data', 'daily-brief.json'),
+      fileInput(...DAILY_BRIEF_SRC),
       () => Object.values(jsonOut(DAILY_BRIEF).blocks ?? {}).filter((b) => b?.available).length,
     ),
   };
