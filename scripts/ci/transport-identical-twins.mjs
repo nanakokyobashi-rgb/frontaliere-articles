@@ -504,38 +504,301 @@ export const SET_DESCRIPTORS = new Set([
 ]);
 
 /**
- * Le chiamate con cui un fixture non NOMINA un path, lo LEGGE. `import` e
- * `require` ci stanno perché un modulo importato è contenuto quanto un JSON
- * parsato: cambia sotto, e l'aspettativa del test cambia con lui.
+ * Le forme in cui un path fra gli argomenti di una chiamata resta una
+ * CITAZIONE: asserzioni (il path è il valore ATTESO, non un input),
+ * appartenenza a una collezione, composizione di path, domande sull'esistenza,
+ * diagnostica, sintassi.
+ *
+ * L'elenco è quello dei NON-lettori, ed è la correzione del verso (issue #930).
+ * Finché il criterio era l'elenco delle letture riconosciute, ogni forma non
+ * prevista — `new URL(rel, import.meta.url)` passato a una lettura, un helper
+ * condiviso di `generator/tests/`, un `loadJson('…')` — rispondeva «non
+ * legge», il manifest usciva dall'insieme, e l'insieme veniva dichiarato
+ * CHIUSO quando non lo era. Enumerare invece i nominatori fa cadere l'ignoto
+ * dalla parte conservativa: un accoppiamento di troppo costa una copia a mano
+ * nominata nel report, un accoppiamento mancato costa la PR di trasporto rossa
+ * che resta aperta e spegne il canale.
  */
-const READ_CALLS = 'readFileSync|readFile|createReadStream|openSync|require|import';
+const NAMING_CALLS = new Set([
+  // asserzioni e harness
+  'ok', 'equal', 'notEqual', 'strictEqual', 'notStrictEqual', 'deepEqual', 'deepStrictEqual',
+  'notDeepEqual', 'match', 'doesNotMatch', 'throws', 'rejects', 'fail', 'expect',
+  'test', 'describe', 'it', 'todo', 'skip',
+  // appartenenza e manipolazione di stringhe/collezioni
+  'includes', 'indexOf', 'lastIndexOf', 'has', 'add', 'set', 'get', 'push', 'unshift',
+  'concat', 'startsWith', 'endsWith', 'split', 'replace', 'replaceAll', 'trim',
+  'filter', 'find', 'findIndex', 'some', 'every', 'map', 'sort', 'delete',
+  // composizione di path e domande sull'ESISTENZA: non toccano il contenuto
+  'join', 'resolve', 'relative', 'dirname', 'basename', 'extname', 'normalize',
+  'existsSync', 'exists', 'statSync', 'lstatSync', 'stat',
+  // costruzione di pattern, diagnostica, sintassi
+  'RegExp', 'String', 'Set', 'Array', 'Error', 'log', 'warn', 'error', 'info', 'debug',
+  'if', 'for', 'while', 'switch', 'catch', 'return', 'typeof',
+]);
+
+/** Le parole dopo le quali una `/` apre una regex e non è una divisione. */
+const REGEX_PREFIX_KEYWORDS = new Set([
+  'return', 'typeof', 'case', 'in', 'of', 'do', 'else', 'yield', 'await',
+  'new', 'delete', 'void', 'instanceof', 'throw',
+]);
+
+/**
+ * Il backtick aperto a `i` è un template literal vero, cioè può valere
+ * multi-riga?
+ *
+ * Il criterio è POSITIVO, e questo è il punto: far dipendere il multi-riga
+ * dall'ASSENZA di una chiusura più avanti nel file non chiude niente, perché
+ * un backtick spaiato di prosa — o un fence markdown aperto — si appaia con il
+ * primo code-span inline che incontra, ovunque sia, e il testo in mezzo (una
+ * lettura del manifest compresa) torna invisibile. In un `.md` reale, e i
+ * fixture in scope includono `generator/tests/fixtures/pr-bodies/*.md`, altri
+ * backtick dopo ce ne sono quasi sempre. Il default è quindi quello di `'` e
+ * `"`: vale fino a fine riga. Multi-riga solo su un segnale di literal vero —
+ * l'apertura in posizione di espressione, o un'interpolazione prima della fine
+ * della riga.
+ */
+function isTemplateLiteralAt(src, i) {
+  if (regexAllowedAt(src, i)) return true;
+  const nl = src.indexOf('\n', i + 1);
+  return src.slice(i + 1, nl === -1 ? src.length : nl).includes('${');
+}
+
+/** Indice appena dopo il literal aperto a `i`, escape inclusi. */
+function endOfStringLiteral(src, i) {
+  const quote = src[i];
+  const multiline = quote === '`' && isTemplateLiteralAt(src, i);
+  for (let j = i + 1; j < src.length; j++) {
+    const c = src[j];
+    if (c === '\\') { j++; continue; }
+    if (c === quote) return j + 1;
+    // Un apice non chiuso a fine riga è un apostrofo di prosa, non un literal:
+    // trascinare il resto del file dentro una stringa nasconderebbe il codice
+    // che viene dopo — di nuovo il verso sbagliato.
+    if (!multiline && c === '\n') return j;
+  }
+  // Nemmeno un literal vero trascina il resto del file se non chiude mai.
+  if (multiline) {
+    const nl = src.indexOf('\n', i + 1);
+    return nl === -1 ? src.length : nl;
+  }
+  return src.length;
+}
+
+/**
+ * `/` (o backtick) in una posizione in cui la grammatica ammette un literal
+ * regex, cioè in posizione di espressione?
+ *
+ * `src` può essere una stringa o un array di caratteri: `stripComments` gli
+ * passa il proprio output PARZIALE, dove i commenti già visti sono spazi.
+ * Guardare all'indietro dentro il TESTO di un commento faceva mancare la
+ * regex che apre un'espressione subito dopo un commento di riga, e con essa il
+ * `//` nella sua coda apriva il finto commento che il salto doveva togliere.
+ */
+function regexAllowedAt(src, i) {
+  let j = i - 1;
+  while (j >= 0 && /\s/.test(src[j])) j--;
+  if (j < 0) return true;
+  const c = src[j];
+  if ('(,=:[!&|?{};+-*%^~<>'.includes(c)) return true;
+  if (!/[\w$]/.test(c)) return false;
+  let word = '';
+  for (let k = j; k >= 0 && /[\w$]/.test(src[k]); k--) word = src[k] + word;
+  return REGEX_PREFIX_KEYWORDS.has(word);
+}
+
+/**
+ * Indice appena dopo il literal regex aperto a `i` (flag inclusi), o `-1` se a
+ * `i` non ne comincia uno.
+ *
+ * Un literal regex va saltato come si salta una stringa, e per le stesse due
+ * ragioni: la coda `\//` di `s.replace(/\//g, '-')` apre altrimenti un finto
+ * commento di riga che cancella il CODICE che segue — la lettura sparisce, il
+ * manifest esce dall'insieme e l'insieme viene dichiarato chiuso quando non lo
+ * è — e le parentesi di un `/\)/g` sbilanciano lo stack di
+ * `callSites`, accorciando la catena di chiamate di un literal più sotto fino a
+ * farlo sembrare nominato. Stesso lexer, stesso verso sbagliato (issue #930).
+ */
+function endOfRegexLiteral(src, i, lookback = src) {
+  if (src[i] !== '/' || !regexAllowedAt(lookback, i)) return -1;
+  let inClass = false;
+  for (let j = i + 1; j < src.length; j++) {
+    const c = src[j];
+    if (c === '\\') { j++; continue; }
+    // Una regex non attraversa la riga: senza chiusura non era una regex.
+    if (c === '\n') return -1;
+    if (inClass) { if (c === ']') inClass = false; continue; }
+    if (c === '[') { inClass = true; continue; }
+    if (c === '/') {
+      let k = j + 1;
+      while (k < src.length && /[a-z]/.test(src[k])) k++;
+      return k;
+    }
+  }
+  return -1;
+}
+
+/**
+ * Il sorgente col testo dei commenti sostituito da spazi (gli indici non si
+ * spostano, i newline restano).
+ *
+ * Serve perché il criterio precedente leggeva anche i commenti, e nei due
+ * versi sbagliava entrambe le volte: `[^)]*` si ferma alla prima `)` ma
+ * ATTRAVERSA i newline, quindi un commento dentro la lista argomenti di una
+ * lettura — `readFileSync(\n  // cfr. \`scripts/ci/loop-sync-manifest.json\`\n
+ * P, 'utf8')` — contava come lettura, e il delimitatore accettato includeva il
+ * backtick, cioè proprio quello con cui la prosa di questo repo cita i path.
+ * Il risultato non era un errore ma un fixture `identical` bloccato PER SEMPRE
+ * su una dipendenza che non esiste (issue #930).
+ */
+function stripComments(src) {
+  const out = src.split('');
+  let i = 0;
+  while (i < src.length) {
+    const c = src[i];
+    if (c === "'" || c === '"' || c === '`') { i = endOfStringLiteral(src, i); continue; }
+    if (c === '/' && src[i + 1] === '/') {
+      let j = i;
+      while (j < src.length && src[j] !== '\n') out[j++] = ' ';
+      i = j;
+      continue;
+    }
+    if (c === '/' && src[i + 1] === '*') {
+      let j = i;
+      while (j < src.length && !(src[j] === '*' && src[j + 1] === '/')) {
+        if (src[j] !== '\n') out[j] = ' ';
+        j++;
+      }
+      for (let k = j; k < Math.min(j + 2, src.length); k++) out[k] = ' ';
+      i = j + 2;
+      continue;
+    }
+    if (c === '/') {
+      // `out` e non `src`: i commenti già visti sono spazi, e la scansione
+      // all'indietro di `regexAllowedAt` non deve leggerne il testo.
+      const end = endOfRegexLiteral(src, i, out);
+      if (end !== -1) { i = end; continue; }
+    }
+    i++;
+  }
+  return out.join('');
+}
+
+/**
+ * I literal e gli identificatori del sorgente, ognuno con la catena delle
+ * chiamate che lo racchiude (`['join', 'readFileSync']` per un literal dentro
+ * `readFileSync(path.join(ROOT, '…'))`).
+ *
+ * È una scansione a token, non una regex: la domanda «dentro quale chiamata
+ * sta questo literal» ha una risposta esatta contando le parentesi, e le
+ * regex che la approssimavano sbagliavano in entrambi i versi.
+ */
+function callSites(src) {
+  const strings = [];
+  const idents = [];
+  const stack = [];
+  let callee = null;
+  let i = 0;
+  while (i < src.length) {
+    const c = src[i];
+    if (c === "'" || c === '"' || c === '`') {
+      const end = endOfStringLiteral(src, i);
+      strings.push({ value: src.slice(i + 1, Math.max(i + 1, end - 1)), quote: c, index: i, calls: stack.filter(Boolean) });
+      callee = null;
+      i = end;
+      continue;
+    }
+    if (/[A-Za-z_$]/.test(c)) {
+      let j = i + 1;
+      while (j < src.length && /[\w$]/.test(src[j])) j++;
+      const name = src.slice(i, j);
+      idents.push({ name, index: i, calls: stack.filter(Boolean) });
+      // La catena `a.b.c(` lascia `c`: il segmento finale è ciò che chiama.
+      callee = name;
+      i = j;
+      continue;
+    }
+    // Le parentesi dentro un literal regex non sono chiamate: contarle
+    // accorcerebbe la catena dei literal che vengono dopo.
+    if (c === '/') {
+      const end = endOfRegexLiteral(src, i);
+      if (end !== -1) { callee = null; i = end; continue; }
+    }
+    if (c === '(') { stack.push(callee); callee = null; i++; continue; }
+    if (c === ')') { stack.pop(); callee = null; i++; continue; }
+    if (c === '.' || c === ' ' || c === '\t' || c === '\r' || c === '\n') { i++; continue; }
+    callee = null;
+    i++;
+  }
+  return { strings, idents };
+}
+
+const isNamingChain = (calls) => calls.every((c) => NAMING_CALLS.has(c));
 
 /**
  * Il fixture LEGGE quel path, o si limita a nominarlo?
  *
- * Due forme, perché il literal quasi mai è l'argomento diretto:
+ * La risposta è «legge» per difetto, e diventa «nomina» solo per le forme che
+ * si sanno riconoscere come citazioni:
  *
- *   - la chiamata di lettura col literal fra i suoi argomenti, anche annidato
- *     in un `path.join(ROOT, ...)`. `[^)]*` si ferma alla PRIMA parentesi
- *     chiusa, quindi il match non scavalca la chiamata e non prende il literal
- *     di una riga successiva;
- *   - l'`import`/`export ... from` statico, che non è una chiamata e quindi
- *     non ha parentesi da guardare;
- *   - l'alias: il path legato a una costante (`const P = path.join(ROOT, '…')`)
- *     e la costante passata alla lettura più sotto.
+ *   - il path che compare SOLO nei commenti — la prosa di questo repo cita i
+ *     path fra backtick, e un commento non apre niente;
+ *   - il literal fra gli argomenti di chiamate tutte in `NAMING_CALLS`
+ *     (`assert.ok(list.includes('…'))`, `path.join(ROOT, '…')` di cui nessuno
+ *     poi legge il risultato);
+ *   - il literal legato a una costante (`const P = path.join(ROOT, '…')`) di
+ *     cui ogni uso è a sua volta una forma che nomina.
  *
- * Il verso incerto è VOLUTAMENTE «legge»: un match di troppo tiene un
- * accoppiamento che forse non c'è — costa una copia a mano nominata nel report
- * — mentre un match mancato dichiara chiuso un insieme che non lo è, cioè la PR
- * di trasporto rossa che spegne il canale.
+ * Tutto il resto — una lettura diretta, una indiretta, un wrapper, una forma
+ * che non avevamo previsto — è «legge». È l'inverso del criterio precedente, e
+ * il verso è quello: un match di troppo tiene un accoppiamento che forse non
+ * c'è e costa una copia a mano nominata nel report, mentre un match mancato
+ * dichiara chiuso un insieme che non lo è, cioè la PR di trasporto rossa che
+ * spegne il canale.
+ *
+ * Il literal ammette il prefisso relativo (`'../../scripts/ci/…'`): i due
+ * call-site di `cite()` passano lo stesso path normalizzato da ROOT, ma nel
+ * testo del fixture uno dei due compare come specificatore relativo, e la
+ * stessa domanda deve avere la stessa risposta (issue #930).
  */
 export function readsContentOf(rel, text) {
-  const src = typeof text === 'string' ? text : '';
-  const lit = `['"\`]${String(rel).replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}['"\`]`;
-  if (new RegExp(`\\b(?:${READ_CALLS})\\s*\\([^)]*${lit}`).test(src)) return true;
+  const src = stripComments(typeof text === 'string' ? text : '');
+  const esc = String(rel).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const exact = new RegExp(`^(?:\\.{1,2}/)*${esc}$`);
+  // Il backtick NON è un delimitatore di path qui: è quello con cui la prosa di
+  // questo repo cita i path, e ammetterlo faceva contare una citazione come
+  // lettura. Un literal fra backtick torna in gioco solo dentro una catena di
+  // chiamate che non nomina soltanto (sotto): lì è codice, non prosa.
+  const lit = `['"](?:\\.{1,2}/)*${esc}['"]`;
+
+  // L'`import`/`export … from` statico non è una chiamata e non ha parentesi
+  // da guardare; un modulo importato è contenuto quanto un JSON parsato.
   if (new RegExp(`(?:^|[\\n;])\\s*(?:import|export)\\b[^;]*${lit}`).test(src)) return true;
+
+  const { strings, idents } = callSites(src);
+  const mentions = strings.filter((s) => exact.test(s.value));
+  if (!mentions.length) return false;
+
+  const decls = [];
   for (const m of src.matchAll(new RegExp(`(?:const|let|var)\\s+([A-Za-z_$][\\w$]*)\\s*=[^;]*${lit}`, 'g'))) {
-    if (new RegExp(`\\b(?:${READ_CALLS})\\s*\\([^)]*\\b${m[1]}\\b`).test(src)) return true;
+    decls.push({ name: m[1], start: m.index, end: m.index + m[0].length });
+  }
+  for (const m of mentions) {
+    if (m.calls.length) {
+      if (!isNamingChain(m.calls)) return true;
+      continue;
+    }
+    // Fuori da ogni chiamata un literal fra backtick è prosa (un frammento di
+    // commento, una riga di Markdown): non c'è niente che lo legga.
+    if (m.quote === '`') continue;
+    // Fuori da ogni chiamata il literal è un valore: lo si sa nominare solo se
+    // finisce in una costante, e allora la domanda si sposta sulla costante.
+    if (!decls.some((d) => m.index >= d.start && m.index < d.end)) return true;
+  }
+
+  const aliases = new Set(decls.map((d) => d.name));
+  for (const id of idents) {
+    if (!aliases.has(id.name) || !id.calls.length) continue;
+    if (!isNamingChain(id.calls)) return true;
   }
   return false;
 }
