@@ -45,6 +45,13 @@ import {
   registrationTargetStatus,
   resolveRegisterLock,
 } from '../scripts/lib/register-lock.mjs';
+// Il layout di QUESTO repo (`content/…`) contro quello in cui il generatore e'
+// scritto (`data/…`, `services/locales/…`): la stessa mappatura che
+// `resolve()` applica in create-article.mjs, e da #962 anche i `label`.
+import { corpusPath } from '../scripts/lib/corpus-paths.mjs';
+// La stessa sorgente da cui create-article.mjs prende i path di sezione: lo
+// specchio qui sotto va confrontato con lei, non riscritto a mano (AGENTS.md #6).
+import { ARTICLE_SECTION_CORE } from '../../engine/shared/articleSectionCore.mjs';
 
 const ARTICLE_ID = 'permesso-g-frontalieri-2026';
 const SECTION = 'frontaliere';
@@ -70,9 +77,23 @@ function sandbox() {
  * un id contro i file dell'altra sezione.
  */
 const SECTION_FILES = {
-  frontaliere: { union: 'packages/articles/content/blogArticleIds.ts', slug: 'data/routerBlogData.ts', registry: 'data/blog-articles-data.ts', seo: 'services/seo/seo-blog-5.ts', metaPrefix: 'blog-meta', bodyDir: 'blog-body' },
-  svizzera: { union: null, slug: 'data/routerSwissData.ts', registry: 'data/swiss-articles-data.ts', seo: 'services/seo/seo-blog-ch.ts', metaPrefix: 'blog-meta-ch', bodyDir: 'blog-body-ch' },
+  frontaliere: { union: 'packages/articles/content/blogArticleIds.ts', slug: 'services/routerBlogData.ts', registry: 'data/blog-articles-data.ts', seo: 'services/seo/seo-blog-5.ts', metaPrefix: 'blog-meta', bodyDir: 'blog-body' },
+  svizzera: { union: null, slug: 'services/routerSwissData.ts', registry: 'data/swiss-articles-data.ts', seo: 'services/seo/seo-blog-ch.ts', metaPrefix: 'blog-meta-ch', bodyDir: 'blog-body-ch' },
 };
+
+// `slug` e `registry` non sono letterali di questo banco: create-article.mjs li
+// prende da `ARTICLE_SECTION_CORE`, e questo specchio alimenta la funzione vera
+// (`loadRegisterLockTargets` costruisce `ARTICLE_SECTION_CONFIGS` da qui). Uno
+// specchio che scivola fa girare il lock su file che nessuno scrive, in
+// silenzio: `slug` diceva `data/routerBlogData.ts` mentre la config dice
+// `services/routerBlogData.ts` — invisibile finche' i label erano il letterale
+// stesso, cioe' finche' nessuno confrontava la path col file davvero letto.
+for (const [name, cfg] of Object.entries(SECTION_FILES)) {
+  assert.equal(cfg.slug, ARTICLE_SECTION_CORE[name].slugDataFile, `SECTION_FILES.${name}.slug scollato da ARTICLE_SECTION_CORE`);
+  assert.equal(cfg.registry, ARTICLE_SECTION_CORE[name].registryFile, `SECTION_FILES.${name}.registry scollato da ARTICLE_SECTION_CORE`);
+  assert.equal(cfg.metaPrefix, ARTICLE_SECTION_CORE[name].metaPrefix, `SECTION_FILES.${name}.metaPrefix scollato da ARTICLE_SECTION_CORE`);
+  assert.equal(cfg.bodyDir, ARTICLE_SECTION_CORE[name].bodyDir, `SECTION_FILES.${name}.bodyDir scollato da ARTICLE_SECTION_CORE`);
+}
 
 function makeTargets(root) {
   return (id, section = SECTION) => {
@@ -93,7 +114,10 @@ function makeTargets(root) {
       rel.push([`services/locales/${cfg.metaPrefix}-${locale}.ts`, `blog.article.${id}.`]);
       rel.push([`services/locales/${cfg.bodyDir}/${locale}/${id}.ts`, null]);
     }
-    return rel.map(([r, needle]) => ({ label: r, absPath: path.join(root, r), needle }));
+    // Come la funzione vera: il `label` e' il path di QUESTO repo (e' l'unica
+    // cosa che il messaggio di SPLIT stampa a chi ripara a mano), l'`absPath`
+    // e' lo stesso path sotto la root.
+    return rel.map(([r, needle]) => ({ label: corpusPath(r), absPath: path.join(root, corpusPath(r)), needle }));
   };
 }
 
@@ -146,7 +170,10 @@ test('il run successivo RIFIUTA di procedere su un corpus spezzato', () => {
     () => resolveRegisterLock(root, build, SECTION),
     (err) => /SPLIT/.test(err.message)
       && err.message.includes(ARTICLE_ID)
-      && err.message.includes('data/routerBlogData.ts')
+      // Il path di QUESTO repo (#962): il messaggio esiste solo per dire a un
+      // umano quali file aprire, e `content/routerBlogData.ts` e' quello che
+      // esiste davvero qui.
+      && err.message.includes('content/routerBlogData.ts')
       && err.message.includes(registerLockFile(SECTION)),
     'l\'errore deve nominare l\'id, i bersagli e il file di lock da rimuovere',
   );
@@ -266,7 +293,7 @@ test('il lock resta risolto sulla SEZIONE registrata, non su quella del run succ
     (err) => /SPLIT/.test(err.message)
       && err.message.includes(swissId)
       && err.message.includes('svizzera')
-      && err.message.includes('data/routerSwissData.ts')
+      && err.message.includes('content/routerSwissData.ts')
       && err.message.includes(registerLockFile('svizzera')),
     'lo split svizzero deve fermare il run svizzero',
   );
@@ -466,7 +493,7 @@ function updateRouterUnionFlags() {
 }
 
 /** `registerLockTargets()` vera, con le sue dipendenze iniettate. */
-function loadRegisterLockTargets(resolveRel = (r) => `/root/${r}`) {
+function loadRegisterLockTargets(resolveRel = (r) => `/root/${corpusPath(r)}`) {
   const needle = 'function registerLockTargets(id, sectionName = SECTION_NAME) {';
   const start = CREATE_ARTICLE_SRC.indexOf(needle);
   assert.notEqual(start, -1, 'registerLockTargets non trovata in create-article.mjs: aggiornare questo test');
@@ -485,38 +512,44 @@ function loadRegisterLockTargets(resolveRel = (r) => `/root/${r}`) {
       updateRouterUnion: flags[name],
     }]),
   );
-  // I simboli liberi del body estratto sono esattamente questi quattro: da
+  // I simboli liberi del body estratto sono esattamente questi cinque: da
   // #965 il messaggio di sezione sconosciuta nomina `registerLockFile(sectionName)`
   // (create-article.mjs, `rimuovi ${registerLockFile(sectionName)}`) al posto
-  // della vecchia costante REGISTER_LOCK_FILE, che non esiste piu'.
+  // della vecchia costante REGISTER_LOCK_FILE, che non esiste piu'. Da #962
+  // i `label` passano da `corpusPath()`, che va quindi iniettato anche lui —
+  // quello VERO, non uno stub: e' il punto che questo banco deve osservare.
   return new Function(
     'ARTICLE_SECTION_CONFIGS',
     'SECTION_NAME',
     'registerLockFile',
     'resolve',
+    'corpusPath',
     `${body}\nreturn registerLockTargets;`,
-  )(configs, SECTION, registerLockFile, resolveRel);
+  )(configs, SECTION, registerLockFile, resolveRel, corpusPath);
 }
 
 test('la union BlogArticleId e\' fra i bersagli di frontaliere, e assente da svizzera', () => {
   const registerLockTargets = loadRegisterLockTargets();
+  // Il letterale come e' scritto nel sorgente (layout di main) e la forma
+  // mappata con cui compare nei `label` e nei messaggi (#962).
   const UNION = 'packages/articles/content/blogArticleIds.ts';
+  const UNION_LABEL = corpusPath(UNION);
 
   const fro = registerLockTargets(ARTICLE_ID, 'frontaliere');
   const froLabels = fro.map((t) => t.label);
   assert.ok(
-    froLabels.includes(UNION),
-    `la finestra di kill piu' larga resta non confrontata: ${UNION} non e' fra i bersagli (${froLabels.join(', ')})`,
+    froLabels.includes(UNION_LABEL),
+    `la finestra di kill piu' larga resta non confrontata: ${UNION_LABEL} non e' fra i bersagli (${froLabels.join(', ')})`,
   );
   // E' la PRIMA scrittura della sequenza: se il confronto la mettesse in coda
   // l'ordine non cambierebbe l'esito, ma la lista smetterebbe di raccontare
   // la sequenza che sorveglia.
-  assert.equal(froLabels[0], UNION, 'la union e\' il primo bersaglio, come e\' la prima scrittura');
+  assert.equal(froLabels[0], UNION_LABEL, 'la union e\' il primo bersaglio, come e\' la prima scrittura');
   // Il needle e' la forma realmente scritta da `modifyRouterUnion()`: l'id fra
   // apici singoli. Cercare l'id nudo darebbe un falso positivo su qualunque
   // sottostringa (un id e' prefisso di un altro piu' lungo appena si aggiunge
   // un suffisso di anno).
-  assert.equal(fro.find((t) => t.label === UNION).needle, `'${ARTICLE_ID}'`);
+  assert.equal(fro.find((t) => t.label === UNION_LABEL).needle, `'${ARTICLE_ID}'`);
   assert.equal(froLabels.length, 12, 'union + slug + registry + seo + 4 meta + 4 body');
 
   // svizzera non mantiene la union (`updateRouterUnion: false`): pretenderla
@@ -524,7 +557,7 @@ test('la union BlogArticleId e\' fra i bersagli di frontaliere, e assente da svi
   // permanente su ogni lock svizzero.
   const svi = registerLockTargets(ARTICLE_ID, 'svizzera');
   const sviLabels = svi.map((t) => t.label);
-  assert.equal(sviLabels.includes(UNION), false, 'svizzera non scrive la union: non va confrontata');
+  assert.equal(sviLabels.includes(UNION_LABEL), false, 'svizzera non scrive la union: non va confrontata');
   assert.equal(sviLabels.length, 11, 'slug + registry + seo + 4 meta + 4 body');
 
   // Lo specchio scritto a mano di questo file deve restare allineato: e' cio'
@@ -579,15 +612,17 @@ test('un id CONTENUTO in un id piu\' lungo non fa leggere `present` un bersaglio
   // `present` bastano a far classificare `committed` uno split reale, cioe' a
   // cancellare il marker sopra un corpus mezzo registrato.
   const root = sandbox();
-  const registerLockTargets = loadRegisterLockTargets((r) => path.join(root, r));
+  const registerLockTargets = loadRegisterLockTargets((r) => path.join(root, corpusPath(r)));
   const id = 'disoccupazione-svizzera-2026';
   const targets = registerLockTargets(id, 'frontaliere');
 
   // Nessuna scrittura per `id`: sul disco c'e' solo l'id PIU' LUNGO, nella
   // forma reale che ogni superficie usa.
   const longer = `frontalieri-${id}`;
-  const write = (label, text) => {
-    const abs = targets.find((t) => t.label === label).absPath;
+  // I bersagli sono indicizzati per `label`, che da #962 e' il path di questo
+  // repo: la lookup passa dalla stessa mappatura, o non trova niente.
+  const write = (rel, text) => {
+    const abs = targets.find((t) => t.label === corpusPath(rel)).absPath;
     fs.mkdirSync(path.dirname(abs), { recursive: true });
     fs.writeFileSync(abs, text, 'utf-8');
   };
@@ -611,7 +646,45 @@ test('un id CONTENUTO in un id piu\' lungo non fa leggere `present` un bersaglio
   write(files.registry, `    id: '${longer}',\n    id: '${id}',\n`);
   write(files.seo, `  'blog-${longer}': {\n  'blog-${id}': {\n`);
   const after = registrationTargetStatus(targets);
-  for (const label of [files.slug, files.registry, files.seo]) {
+  for (const rel of [files.slug, files.registry, files.seo]) {
+    const label = corpusPath(rel);
     assert.ok(after.present.includes(label), `${label} deve leggere present sulla forma realmente scritta`);
+  }
+});
+
+test('il label di ogni bersaglio nomina il file che esiste QUI, non la path pre-mappatura', () => {
+  // I letterali di `registerLockTargets()` sono nel layout di main
+  // (`data/…`, `services/locales/…`, `packages/articles/content/…`), mentre
+  // `absPath` passa da `resolve()` → `corpusPath()` e atterra sotto
+  // `content/`. Finche' il `label` restava il letterale, l'UNICO consumatore
+  // dei label — il messaggio di SPLIT di `resolveRegisterLock()` — elencava
+  // file inesistenti in questo checkout, e quel messaggio non ha altra
+  // funzione che dire a un umano quali file riparare a mano su un corpus
+  // bloccato: sbagliarli lo rende peggio che inutile.
+  //
+  // La proprieta' osservata e' la sola che regge nel tempo: per OGNI
+  // bersaglio, il `label` risolto dalla root e' lo stesso file di `absPath`.
+  // Un letterale nuovo aggiunto domani senza mappatura la viola da solo.
+  const root = sandbox();
+  const registerLockTargets = loadRegisterLockTargets((r) => path.join(root, corpusPath(r)));
+  for (const section of ['frontaliere', 'svizzera']) {
+    const targets = registerLockTargets(ARTICLE_ID, section);
+    assert.ok(targets.length > 0);
+    for (const t of targets) {
+      assert.equal(
+        path.join(root, t.label),
+        t.absPath,
+        `${section}: il label "${t.label}" non e' il file confrontato (${t.absPath}) — ` +
+          'il messaggio di SPLIT nominerebbe una path che qui non esiste',
+      );
+      // Controprova sul verso della mappatura: nessun label puo' restare nel
+      // layout di main, o l'uguaglianza qui sopra sarebbe soddisfatta anche
+      // da un `resolve()` che avesse smesso di mappare.
+      assert.equal(
+        /^(data|services|packages)\//.test(t.label),
+        false,
+        `${section}: il label "${t.label}" e' ancora la path pre-mappatura`,
+      );
+    }
   }
 });
