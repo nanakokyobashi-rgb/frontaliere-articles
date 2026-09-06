@@ -42,6 +42,7 @@ import { readFileSync, writeFileSync, mkdtempSync, mkdirSync, rmSync, chmodSync,
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { sliceBetween } from './lib/anchored-slice.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const WF_PATH = path.resolve(HERE, '../../.github/workflows/generate-article.yml');
@@ -631,7 +632,7 @@ test('il watchdog non sopravvive allo step, e non lo fa fallire da solo', () => 
   assert.match(gen, /kill_tree KILL "\$watch_pid"/, 'il watchdog va ucciso con il tentativo, con tutto il suo albero');
   // Il verdetto sull'esito resta dove stava: il watchdog alza un flag, non esce
   // mai per conto proprio.
-  const watchdogBody = gen.slice(gen.indexOf('stall_watchdog() {'), gen.indexOf('watch_pid=""'));
+  const watchdogBody = sliceBetween(gen, 'stall_watchdog() {', 'watch_pid=""');
   assert.ok(!/\bexit [0-9]/.test(watchdogBody), 'il watchdog non deve poter terminare lo step da solo');
 });
 
@@ -649,7 +650,7 @@ test('lo stallo si valuta PRIMA del kill duro: escono entrambi 137', () => {
 });
 
 test('le diagnostiche del wedge si caricano sempre, e da fuori il workspace', () => {
-  const step = WF.slice(WF.indexOf('      - name: Upload wedge diagnostics'), WF.indexOf('      - name: Guard'));
+  const step = sliceBetween(WF, '      - name: Upload wedge diagnostics', '      - name: Guard');
   assert.ok(step, 'lo step che carica le diagnostiche e\' sparito');
   assert.match(step, /if: always\(\)/, 'lo step sopra e\' ROSSO proprio quando l\'artifact serve');
   assert.match(step, /uses: actions\/upload-artifact@v4/);
@@ -771,9 +772,10 @@ test('la guardia gira PRIMA del commit, non dopo', () => {
 });
 
 test('la guardia non e\' advisory: un fallimento ferma davvero il push', () => {
-  const block = WF.slice(
-    WF.indexOf('      - name: Guard — l\'articolo generato non raggiunge main'),
-    WF.indexOf('      - name: Generate responsive image thumbnail'),
+  const block = sliceBetween(
+    WF,
+    '      - name: Guard — l\'articolo generato non raggiunge main',
+    '      - name: Generate responsive image thumbnail',
   );
   assert.ok(
     !/continue-on-error/.test(block),
@@ -784,7 +786,7 @@ test('la guardia non e\' advisory: un fallimento ferma davvero il push', () => {
   // quella proprieta' — non un `if: failure()` scritto a mano — a impedire il
   // commit, quindi va pinnata la sua PRECONDIZIONE: nessuno dei due deve
   // acquisire un `always()`.
-  const after = WF.slice(WF.indexOf('      - name: Generate responsive image thumbnail'), WF.indexOf('      - name: Summary'));
+  const after = sliceBetween(WF, '      - name: Generate responsive image thumbnail', '      - name: Summary');
   assert.ok(
     !/if: always\(\)/.test(after),
     'un always() su thumbnail o commit rimetterebbe l\'articolo bocciato sulla strada di main',
@@ -792,9 +794,10 @@ test('la guardia non e\' advisory: un fallimento ferma davvero il push', () => {
 });
 
 test('la guardia legge lo stesso output degli altri, senza inventarsi un secondo probe', () => {
-  const block = WF.slice(
-    WF.indexOf('      - name: Guard — l\'articolo generato non raggiunge main'),
-    WF.indexOf('      - name: Generate responsive image thumbnail'),
+  const block = sliceBetween(
+    WF,
+    '      - name: Guard — l\'articolo generato non raggiunge main',
+    '      - name: Generate responsive image thumbnail',
   );
   assert.match(
     block,

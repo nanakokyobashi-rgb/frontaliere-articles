@@ -34,6 +34,7 @@ import { backstop, findDuplicates, mergeSource } from '../../scripts/lib/merge-c
 // sui registri dichiarati una guardia e non un elenco che invecchia da solo.
 import { corpusPath } from '../scripts/lib/corpus-paths.mjs';
 import { ARTICLE_SECTION_CORE } from '../../engine/shared/articleSectionCore.mjs';
+import { sliceBetween } from './lib/anchored-slice.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const SCRIPT = path.resolve(HERE, '../../scripts/lib/rebase-onto-remote.sh');
@@ -721,7 +722,7 @@ test('il confine del conflitto cade a META\' ENTRY, e il merge non fonde i due r
   // non c'e' una graffa di apertura, quindi nessun lato contiene un record
   // intero. Se un giorno git allineasse diversamente, questo assert lo dice
   // invece di lasciar passare un test che non prova piu' la stessa cosa.
-  const between = conflicted.slice(conflicted.indexOf('<<<<<<<'), conflicted.indexOf('>>>>>>>'));
+  const between = sliceBetween(conflicted, '<<<<<<<', '>>>>>>>');
   assert.doesNotMatch(between, /\{/, `il fixture non replica piu' il boundary a meta' entry:\n${between}`);
 
   const result = mergeSource(conflicted);

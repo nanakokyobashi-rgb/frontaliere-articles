@@ -26,6 +26,7 @@ import { tmpdir } from 'node:os';
 import { join, resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { declareApiArtifacts, byteSize } from '../../scripts/lib/api-manifest.mjs';
+import { sliceFrom, sliceUntil } from './lib/anchored-slice.mjs';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
 
@@ -131,9 +132,9 @@ test('build-blog-index dichiara i suoi shard e rifiuta un set parziale', () => {
 
 test('il gate control-character di build-api scende nelle sottocartelle', () => {
   const src = readFileSync(resolve(ROOT, 'scripts/build-api.mjs'), 'utf-8');
-  const gate = src.slice(src.indexOf('control-character gate') - 2000);
+  const gate = sliceFrom(src, 'control-character gate', { offset: -2000 });
   assert.doesNotMatch(
-    gate.slice(0, gate.indexOf('control-character gate:')),
+    sliceUntil(gate, 'control-character gate:'),
     /fs\s*\.?\s*readdirSync\(OUT\)\s*\.filter/,
     'un readdir piatto su OUT non vede data/blog-index-*.json',
   );

@@ -42,6 +42,7 @@ import {
   degradationState,
   isDegradationCarrier,
 } from '../scripts/lib/daily-brief-data.mjs';
+import { sliceBetween, sliceFrom, sliceUntil } from './lib/anchored-slice.mjs';
 
 const REPO_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
 const WORKFLOW_PATH = path.join(REPO_ROOT, '.github', 'workflows', 'generate-daily-brief.yml');
@@ -66,8 +67,8 @@ const PERMANENT_REJECTION_SIGNS = [
 ];
 
 function permanentRejectionGrepPattern(yml = readFileSync(WORKFLOW_PATH, 'utf-8')) {
-  const commitStep = yml.slice(yml.indexOf('- name: Commit and push'), yml.indexOf('- name: Push hero'));
-  const permanent = commitStep.slice(commitStep.indexOf('\n          done'), commitStep.indexOf('if [ "$LEDGER_ONLY" = true ]'));
+  const commitStep = sliceBetween(yml, '- name: Commit and push', '- name: Push hero');
+  const permanent = sliceBetween(commitStep, '\n          done', 'if [ "$LEDGER_ONLY" = true ]');
   const grepHit = permanent.match(/grep -qiE '([^']+)' "\$PUSH_LOG"/);
   assert.ok(grepHit, 'commit step must classify the push log');
   return { commitStep, permanent, pattern: grepHit[1] };
@@ -505,7 +506,7 @@ test('a day that stages only the ledger cannot turn a lost push into a permanent
   // la soglia per sempre (#885 riaperto sotto una run verde).
   const yml = readFileSync(WORKFLOW_PATH, 'utf-8');
   const rel = path.relative(REPO_ROOT, DEGRADATION_STATE_PATH).split(path.sep).join('/');
-  const commitStep = yml.slice(yml.indexOf('- name: Commit and push'), yml.indexOf('- name: Push hero'));
+  const commitStep = sliceBetween(yml, '- name: Commit and push', '- name: Push hero');
 
   // Il path e' scritto due volte nello YAML (add e confronto) e una volta nello
   // script: nessuno dei tre puo' importare gli altri (non-negoziabile #6).
@@ -522,8 +523,8 @@ test('a day that stages only the ledger cannot turn a lost push into a permanent
 
   // Il PAT mancante e' una config rotta che si ripete identica ogni mattina:
   // degradarla renderebbe l'allarme muto per sempre, non "in ritardo".
-  const patGuard = commitStep.slice(commitStep.indexOf('if [ -z "${GITHUB_PAT:-}" ]; then'));
-  const patBranch = patGuard.slice(0, patGuard.indexOf('\n          fi'));
+  const patGuard = sliceFrom(commitStep, 'if [ -z "${GITHUB_PAT:-}" ]; then');
+  const patBranch = sliceUntil(patGuard, '\n          fi');
   assert.doesNotMatch(patBranch, /LEDGER_ONLY/, 'a missing PAT must be fatal even on a ledger-only day');
   assert.match(patBranch, /exit 1/, 'and it must be red');
 

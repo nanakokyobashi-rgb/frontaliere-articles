@@ -18,6 +18,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { isRetryableRcFetchStatus, extractGoogleErrorReason, rcFetchBackoffMs, RC_FETCH_TIMEOUT_MS } from '../scripts/load-rc-env.mjs';
 import { TOKEN_EXCHANGE_TIMEOUT_MS, extractOAuthErrorReason, isRetryableTokenExchangeStatus } from '../scripts/lib/google-service-account-token.mjs';
+import { sliceBetween, sliceFrom } from './lib/anchored-slice.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 
@@ -61,7 +62,7 @@ test('RC_FETCH_TIMEOUT_MS e TOKEN_EXCHANGE_TIMEOUT_MS sono cap finiti e ragionev
 
 test('fetchTemplateViaRest passa RC_FETCH_TIMEOUT_MS come AbortSignal al fetch', () => {
   const src = fs.readFileSync(path.join(ROOT, 'scripts/load-rc-env.mjs'), 'utf8');
-  const fnBody = src.slice(src.indexOf('async function fetchTemplateViaRest'));
+  const fnBody = sliceFrom(src, 'async function fetchTemplateViaRest');
   assert.match(
     fnBody,
     /signal:\s*AbortSignal\.timeout\(RC_FETCH_TIMEOUT_MS\)/,
@@ -71,7 +72,7 @@ test('fetchTemplateViaRest passa RC_FETCH_TIMEOUT_MS come AbortSignal al fetch',
 
 test('exchangeAssertionForToken passa TOKEN_EXCHANGE_TIMEOUT_MS come AbortSignal al fetch', () => {
   const src = fs.readFileSync(path.join(ROOT, 'scripts/lib/google-service-account-token.mjs'), 'utf8');
-  const fnBody = src.slice(src.indexOf('export async function exchangeAssertionForToken'));
+  const fnBody = sliceFrom(src, 'export async function exchangeAssertionForToken');
   assert.match(
     fnBody,
     /signal:\s*AbortSignal\.timeout\(TOKEN_EXCHANGE_TIMEOUT_MS\)/,
@@ -89,10 +90,7 @@ test('exchangeAssertionForToken passa TOKEN_EXCHANGE_TIMEOUT_MS come AbortSignal
 // nome dell'errore.
 test('fetchTemplateViaRest non ri-lancia subito su un fetch() rifiutato senza Abort/TimeoutError', () => {
   const src = fs.readFileSync(path.join(ROOT, 'scripts/load-rc-env.mjs'), 'utf8');
-  const fnBody = src.slice(
-    src.indexOf('async function fetchTemplateViaRest'),
-    src.indexOf('// ─── Main'),
-  );
+  const fnBody = sliceBetween(src, 'async function fetchTemplateViaRest', '// ─── Main');
   assert.doesNotMatch(
     fnBody,
     /if\s*\(err\?\.name\s*!==\s*'AbortError'\s*&&\s*err\?\.name\s*!==\s*'TimeoutError'\)\s*throw err;/,
@@ -102,7 +100,7 @@ test('fetchTemplateViaRest non ri-lancia subito su un fetch() rifiutato senza Ab
 
 test('exchangeAssertionForToken non ri-lancia subito su un fetch() rifiutato senza Abort/TimeoutError', () => {
   const src = fs.readFileSync(path.join(ROOT, 'scripts/lib/google-service-account-token.mjs'), 'utf8');
-  const fnBody = src.slice(src.indexOf('export async function exchangeAssertionForToken'));
+  const fnBody = sliceFrom(src, 'export async function exchangeAssertionForToken');
   assert.doesNotMatch(
     fnBody,
     /if\s*\(err\?\.name\s*!==\s*'AbortError'\s*&&\s*err\?\.name\s*!==\s*'TimeoutError'\)\s*throw err;/,
@@ -144,10 +142,7 @@ test('extractGoogleErrorReason legge sia la forma legacy (errors[].reason) sia q
 
 test('fetchTemplateViaRest legge il body e passa la reason al classificatore prima di ri-lanciare', () => {
   const src = fs.readFileSync(path.join(ROOT, 'scripts/load-rc-env.mjs'), 'utf8');
-  const fnBody = src.slice(
-    src.indexOf('async function fetchTemplateViaRest'),
-    src.indexOf('// ─── Main'),
-  );
+  const fnBody = sliceBetween(src, 'async function fetchTemplateViaRest', '// ─── Main');
   assert.match(fnBody, /extractGoogleErrorReason\(bodyText\)/, 'un 403 deve leggere il body per estrarre la reason, non fermarsi allo status');
   assert.match(fnBody, /isRetryableRcFetchStatus\(rcRes\.status,\s*reason\)/, 'la reason estratta deve raggiungere il classificatore');
 });
@@ -220,7 +215,7 @@ test('extractOAuthErrorReason legge la forma piatta RFC 6749 ({error, error_desc
 
 test('exchangeAssertionForToken legge il body e passa la reason OAuth al proprio classificatore prima di ri-lanciare', () => {
   const src = fs.readFileSync(path.join(ROOT, 'scripts/lib/google-service-account-token.mjs'), 'utf8');
-  const fnBody = src.slice(src.indexOf('export async function exchangeAssertionForToken'));
+  const fnBody = sliceFrom(src, 'export async function exchangeAssertionForToken');
   assert.match(fnBody, /extractOAuthErrorReason\(text\)/, 'un 403 deve leggere il body per estrarre il codice errore OAuth, non fermarsi allo status');
   assert.match(fnBody, /isRetryableTokenExchangeStatus\(res\.status,\s*reason\)/, 'la reason estratta deve raggiungere il classificatore dedicato al token exchange');
 });

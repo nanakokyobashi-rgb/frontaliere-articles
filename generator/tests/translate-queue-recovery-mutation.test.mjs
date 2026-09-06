@@ -29,6 +29,7 @@ import {
   TARGET_WORKFLOW_ID,
   TARGET_WORKFLOW_PATH,
 } from '../../scripts/ci/translate-queue-recovery.mjs';
+import { sliceBetween, sliceFrom } from './lib/anchored-slice.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const WORKFLOW_PATH = path.join(ROOT, '.github/workflows/translate-queue-recovery.yml');
@@ -753,7 +754,7 @@ test('executor non accetta un commit SHA dichiarato dal chiamante', async (t) =>
     });
   }
   assert.doesNotMatch(EXECUTOR_RUNTIME, /claimCommitSha|CLAIM_COMMIT_SHA/);
-  assert.doesNotMatch(WORKFLOW.slice(WORKFLOW.indexOf('  executor:')), /CLAIM_COMMIT_SHA/);
+  assert.doesNotMatch(sliceFrom(WORKFLOW, '  executor:'), /CLAIM_COMMIT_SHA/);
 });
 
 test('post-claim state change consuma il claim senza POST', async (t) => {
@@ -843,8 +844,8 @@ test('workflow limita trigger, permission, concurrency e runtime per costruzione
   assert.equal((WORKFLOW.match(/queue: max/g) ?? []).length, 2);
   assert.equal((WORKFLOW.match(/cancel-in-progress: false/g) ?? []).length, 2);
 
-  const claimJob = WORKFLOW.slice(WORKFLOW.indexOf('  claim:'), WORKFLOW.indexOf('  executor:'));
-  const executorJob = WORKFLOW.slice(WORKFLOW.indexOf('  executor:'));
+  const claimJob = sliceBetween(WORKFLOW, '  claim:', '  executor:');
+  const executorJob = sliceFrom(WORKFLOW, '  executor:');
   assert.match(claimJob, /actions: read/);
   assert.match(claimJob, /contents: write/);
   assert.doesNotMatch(claimJob, /actions: write/);
