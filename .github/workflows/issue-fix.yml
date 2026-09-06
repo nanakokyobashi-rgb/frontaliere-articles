@@ -567,9 +567,15 @@ jobs:
       # `no-root-cause` resta pero' ambiguo dove i `blocked-*` non lo sono,
       # perche' copre ANCHE il vicolo cieco vero, quindi per lui la terza
       # condizione e' il MANIFEST (almeno un path citato con `mode: identical`)
-      # al posto del nome del repo in prosa. La regola vive per intero in
-      # `handoffDecision`, non qui: questo commento la descrive e non la
-      # duplica, ed e' `generator/tests/handoff-to-site.test.mjs` a inchiodarla.
+      # al posto del nome del repo in prosa. Dal 2026-09-06 (#972) l'appartenenza
+      # al manifest non basta piu' DA SOLA: dei 53 commenti di verdetto che
+      # citano un path `identical`, 27 lo nominano di passaggio o per escluderlo,
+      # e 47 dei 157 entry `identical` sono i file del ciclo stesso. Serve quindi
+      # anche un'affermazione di mirror nella stessa frase — in congiunzione col
+      # manifest, mai al suo posto — e `no-root-cause` consegna ma non CHIUDE
+      # mai: parcheggia. La regola vive per intero in `handoffDecision`, non qui:
+      # questo commento la descrive e non la duplica, ed e'
+      # `generator/tests/handoff-to-site.test.mjs` a inchiodarla.
       - name: Consegna al sito la diagnosi che vive di la' (zero-Claude)
         if: always() && steps.quota.outputs.quota_blocked != 'true' && steps.claim.outputs.in_flight != 'true' && steps.stale.outputs.stale_dispatch != 'true'
         continue-on-error: true
