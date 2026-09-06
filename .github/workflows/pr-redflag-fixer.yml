@@ -47,9 +47,15 @@ jobs:
     # nega) lo fa il preflight sotto, con una regex tollerante al bold/spaziatura MA
     # che richiede un delimitatore dopo "Important" — impossibile in un'espressione
     # `if:` YAML.
+    # Reviewer set = the same bots tests.yml already treats as the review
+    # oracle (`claude*` + `frontaliere-automation[bot]`). A job-level
+    # `startsWith(..., 'claude')` alone skipped App-bot 🔴 on the site
+    # (PRs #7610/#7609); this workflow is `adapted`, so the same login
+    # hole is closed here, not by waiting for an identical twin.
     if: |
       github.event.review.user.type == 'Bot' &&
-      startsWith(github.event.review.user.login, 'claude') &&
+      (startsWith(github.event.review.user.login, 'claude') ||
+       github.event.review.user.login == 'frontaliere-automation[bot]') &&
       contains(github.event.review.body, '🔴') &&
       github.event.pull_request.draft == false &&
       (github.event.pull_request.user.type == 'Bot' ||
