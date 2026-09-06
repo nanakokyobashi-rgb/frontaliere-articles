@@ -1,33 +1,26 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-05T08:53:54.723Z",
-  "dateIso": "2026-09-05",
+  "generatedAt": "2026-09-06T09:13:43.380Z",
+  "dateIso": "2026-09-06",
   "counts": {
     "availableBlocks": 4,
     "crossings": 141,
     "fuelMunicipalities": 518,
     "exchangePoints": 32,
-    "jobsActive": 25605
+    "jobsActive": 25075
   },
   "blocks": {
     "borderWait": {
       "available": true,
-      "updatedAt": "2026-09-05T07:29:28.642Z",
+      "updatedAt": "2026-09-06T07:41:26.446Z",
       "count": 141,
-      "zeroWaitCount": 112,
+      "zeroWaitCount": 124,
       "worst": {
-        "slug": "ponte-tresa",
-        "name": "Ponte Tresa",
-        "waitMinutes": 40
+        "slug": "chiasso-centro",
+        "name": "Chiasso Centro (Ponte Chiasso)",
+        "waitMinutes": 8
       },
       "crossings": [
-        {
-          "slug": "ponte-tresa",
-          "name": "Ponte Tresa",
-          "waitMinutes": 40,
-          "status": "red",
-          "direction": "IT → CH"
-        },
         {
           "slug": "chiasso-centro",
           "name": "Chiasso Centro (Ponte Chiasso)",
@@ -43,43 +36,36 @@
           "direction": "IT → CH"
         },
         {
-          "slug": "basel-weil-am-rhein-autostrada-a2-a5",
-          "name": "Basel – Weil am Rhein, Autostrada A2/A5",
-          "waitMinutes": 5,
+          "slug": "gaggiolo",
+          "name": "Gaggiolo (Cantello-Stabio)",
+          "waitMinutes": 8,
+          "status": "yellow",
+          "direction": "IT → CH"
+        },
+        {
+          "slug": "san-pietro",
+          "name": "San Pietro (Clivio-Stabio)",
+          "waitMinutes": 8,
           "status": "yellow",
           "direction": "IT → CH"
         },
         {
           "slug": "porto-ceresio-brusino",
           "name": "Porto Ceresio-Brusino",
-          "waitMinutes": 5,
-          "status": "yellow",
-          "direction": "IT → CH"
-        },
-        {
-          "slug": "konstanz-tagerwilen-gottlieber-strasse",
-          "name": "Konstanz – Tägerwilen, Gottlieber Strasse",
-          "waitMinutes": 2,
+          "waitMinutes": 4,
           "status": "green",
           "direction": "IT → CH"
         },
         {
-          "slug": "bad-sackingen-stein-ag",
-          "name": "Bad Säckingen – Stein AG",
+          "slug": "anieres",
+          "name": "Anières",
           "waitMinutes": 1,
           "status": "green",
           "direction": "IT → CH"
         },
         {
-          "slug": "basel-weil-am-rhein-freiburgerstrasse",
-          "name": "Basel – Weil am Rhein, Freiburgerstrasse",
-          "waitMinutes": 1,
-          "status": "green",
-          "direction": "IT → CH"
-        },
-        {
-          "slug": "basel-weil-am-rhein-hiltalingerstrasse",
-          "name": "Basel – Weil am Rhein, Hiltalingerstrasse",
+          "slug": "campocologno-tirano",
+          "name": "Campocologno-Tirano",
           "waitMinutes": 1,
           "status": "green",
           "direction": "IT → CH"
@@ -99,20 +85,6 @@
           "direction": "IT → CH"
         },
         {
-          "slug": "forcola-di-livigno",
-          "name": "Forcola di Livigno",
-          "waitMinutes": 1,
-          "status": "green",
-          "direction": "IT → CH"
-        },
-        {
-          "slug": "gaggiolo",
-          "name": "Gaggiolo (Cantello-Stabio)",
-          "waitMinutes": 1,
-          "status": "green",
-          "direction": "IT → CH"
-        },
-        {
           "slug": "gottmadingen-ramsen-hofenacker",
           "name": "Gottmadingen – Ramsen-Hofenacker",
           "waitMinutes": 1,
@@ -120,22 +92,8 @@
           "direction": "IT → CH"
         },
         {
-          "slug": "inzlingen-riehen",
-          "name": "Inzlingen – Riehen",
-          "waitMinutes": 1,
-          "status": "green",
-          "direction": "IT → CH"
-        },
-        {
-          "slug": "konstanz-kreuzlingen",
-          "name": "Konstanz – Kreuzlingen",
-          "waitMinutes": 1,
-          "status": "green",
-          "direction": "IT → CH"
-        },
-        {
-          "slug": "konstanz-tagerwilen-autostrada-b33n-a7",
-          "name": "Konstanz – Tägerwilen, Autostrada B33n/A7",
+          "slug": "konstanz-tagerwilen-gottlieber-strasse",
+          "name": "Konstanz – Tägerwilen, Gottlieber Strasse",
           "waitMinutes": 1,
           "status": "green",
           "direction": "IT → CH"
@@ -143,13 +101,6 @@
         {
           "slug": "lanzo-d-intelvi-arogno",
           "name": "Lanzo d'Intelvi-Arogno",
-          "waitMinutes": 1,
-          "status": "green",
-          "direction": "IT → CH"
-        },
-        {
-          "slug": "laufenburg-laufenburg-ag",
-          "name": "Laufenburg (Baden) – Laufenburg AG",
           "waitMinutes": 1,
           "status": "green",
           "direction": "IT → CH"
@@ -169,29 +120,8 @@
           "direction": "IT → CH"
         },
         {
-          "slug": "rheinfelden-rheinfelden-ag-alte-rheinbrucke",
-          "name": "Rheinfelden (Baden) – Rheinfelden AG, Alte Rheinbrücke",
-          "waitMinutes": 1,
-          "status": "green",
-          "direction": "IT → CH"
-        },
-        {
-          "slug": "rheinfelden-rheinfelden-ag-autostrada-a861-a3",
-          "name": "Rheinfelden (Baden) – Rheinfelden AG, Autostrada A861/A3",
-          "waitMinutes": 1,
-          "status": "green",
-          "direction": "IT → CH"
-        },
-        {
-          "slug": "riehen-lorrach-stetten",
-          "name": "Riehen – Lörrach-Stetten",
-          "waitMinutes": 1,
-          "status": "green",
-          "direction": "IT → CH"
-        },
-        {
-          "slug": "riehen-weil-am-rhein",
-          "name": "Riehen – Weil am Rhein",
+          "slug": "ponte-tresa",
+          "name": "Ponte Tresa",
           "waitMinutes": 1,
           "status": "green",
           "direction": "IT → CH"
@@ -204,36 +134,22 @@
           "direction": "IT → CH"
         },
         {
-          "slug": "st-margrethen-hochst",
-          "name": "St. Margrethen-Höchst",
+          "slug": "traforo-del-gran-san-bernardo",
+          "name": "Traforo del Gran San Bernardo",
           "waitMinutes": 1,
-          "status": "green",
-          "direction": "IT → CH"
-        },
-        {
-          "slug": "thonex-vallard",
-          "name": "Thônex-Vallard (Autoroute Blanche)",
-          "waitMinutes": 1,
-          "status": "green",
-          "direction": "IT → CH"
-        },
-        {
-          "slug": "waldshut-tiengen-koblenz-ag",
-          "name": "Waldshut-Tiengen – Koblenz AG",
-          "waitMinutes": 1,
-          "status": "green",
-          "direction": "IT → CH"
-        },
-        {
-          "slug": "anieres",
-          "name": "Anières",
-          "waitMinutes": 0,
           "status": "green",
           "direction": "IT → CH"
         },
         {
           "slug": "au-lustenau",
           "name": "Au-Lustenau",
+          "waitMinutes": 0,
+          "status": "green",
+          "direction": "IT → CH"
+        },
+        {
+          "slug": "bad-sackingen-stein-ag",
+          "name": "Bad Säckingen – Stein AG",
           "waitMinutes": 0,
           "status": "green",
           "direction": "IT → CH"
@@ -248,6 +164,27 @@
         {
           "slug": "bargen-sh-tengen",
           "name": "Bargen SH – Tengen",
+          "waitMinutes": 0,
+          "status": "green",
+          "direction": "IT → CH"
+        },
+        {
+          "slug": "basel-weil-am-rhein-autostrada-a2-a5",
+          "name": "Basel – Weil am Rhein, Autostrada A2/A5",
+          "waitMinutes": 0,
+          "status": "green",
+          "direction": "IT → CH"
+        },
+        {
+          "slug": "basel-weil-am-rhein-freiburgerstrasse",
+          "name": "Basel – Weil am Rhein, Freiburgerstrasse",
+          "waitMinutes": 0,
+          "status": "green",
+          "direction": "IT → CH"
+        },
+        {
+          "slug": "basel-weil-am-rhein-hiltalingerstrasse",
+          "name": "Basel – Weil am Rhein, Hiltalingerstrasse",
           "waitMinutes": 0,
           "status": "green",
           "direction": "IT → CH"
@@ -379,13 +316,6 @@
           "direction": "IT → CH"
         },
         {
-          "slug": "campocologno-tirano",
-          "name": "Campocologno-Tirano",
-          "waitMinutes": 0,
-          "status": "green",
-          "direction": "IT → CH"
-        },
-        {
           "slug": "chavannes-de-bogis-divonne",
           "name": "Chavannes-de-Bogis-Divonne",
           "waitMinutes": 0,
@@ -505,6 +435,13 @@
           "direction": "IT → CH"
         },
         {
+          "slug": "forcola-di-livigno",
+          "name": "Forcola di Livigno",
+          "waitMinutes": 0,
+          "status": "green",
+          "direction": "IT → CH"
+        },
+        {
           "slug": "gailingen-am-hochrhein-dorflingen",
           "name": "Gailingen am Hochrhein – Dörflingen",
           "waitMinutes": 0,
@@ -610,6 +547,13 @@
           "direction": "IT → CH"
         },
         {
+          "slug": "inzlingen-riehen",
+          "name": "Inzlingen – Riehen",
+          "waitMinutes": 0,
+          "status": "green",
+          "direction": "IT → CH"
+        },
+        {
           "slug": "jestetten-laufen-uhwiesen-dorfstrasse",
           "name": "Jestetten – Laufen-Uhwiesen, Dorfstrasse",
           "waitMinutes": 0,
@@ -673,6 +617,20 @@
           "direction": "IT → CH"
         },
         {
+          "slug": "konstanz-kreuzlingen",
+          "name": "Konstanz – Kreuzlingen",
+          "waitMinutes": 0,
+          "status": "green",
+          "direction": "IT → CH"
+        },
+        {
+          "slug": "konstanz-tagerwilen-autostrada-b33n-a7",
+          "name": "Konstanz – Tägerwilen, Autostrada B33n/A7",
+          "waitMinutes": 0,
+          "status": "green",
+          "direction": "IT → CH"
+        },
+        {
           "slug": "kriessern-mader",
           "name": "Kriessern-Mäder",
           "waitMinutes": 0,
@@ -703,6 +661,13 @@
         {
           "slug": "landecy",
           "name": "Landecy",
+          "waitMinutes": 0,
+          "status": "green",
+          "direction": "IT → CH"
+        },
+        {
+          "slug": "laufenburg-laufenburg-ag",
+          "name": "Laufenburg (Baden) – Laufenburg AG",
           "waitMinutes": 0,
           "status": "green",
           "direction": "IT → CH"
@@ -855,6 +820,34 @@
           "direction": "IT → CH"
         },
         {
+          "slug": "rheinfelden-rheinfelden-ag-alte-rheinbrucke",
+          "name": "Rheinfelden (Baden) – Rheinfelden AG, Alte Rheinbrücke",
+          "waitMinutes": 0,
+          "status": "green",
+          "direction": "IT → CH"
+        },
+        {
+          "slug": "rheinfelden-rheinfelden-ag-autostrada-a861-a3",
+          "name": "Rheinfelden (Baden) – Rheinfelden AG, Autostrada A861/A3",
+          "waitMinutes": 0,
+          "status": "green",
+          "direction": "IT → CH"
+        },
+        {
+          "slug": "riehen-lorrach-stetten",
+          "name": "Riehen – Lörrach-Stetten",
+          "waitMinutes": 0,
+          "status": "green",
+          "direction": "IT → CH"
+        },
+        {
+          "slug": "riehen-weil-am-rhein",
+          "name": "Riehen – Weil am Rhein",
+          "waitMinutes": 0,
+          "status": "green",
+          "direction": "IT → CH"
+        },
+        {
           "slug": "ronago-novazzano",
           "name": "Ronago-Novazzano",
           "waitMinutes": 0,
@@ -897,13 +890,6 @@
           "direction": "IT → CH"
         },
         {
-          "slug": "san-pietro",
-          "name": "San Pietro (Clivio-Stabio)",
-          "waitMinutes": 0,
-          "status": "green",
-          "direction": "IT → CH"
-        },
-        {
           "slug": "sauverny",
           "name": "Sauverny",
           "waitMinutes": 0,
@@ -927,6 +913,13 @@
         {
           "slug": "st-luzisteig",
           "name": "St. Luzisteig (Fläsch-Balzers)",
+          "waitMinutes": 0,
+          "status": "green",
+          "direction": "IT → CH"
+        },
+        {
+          "slug": "st-margrethen-hochst",
+          "name": "St. Margrethen-Höchst",
           "waitMinutes": 0,
           "status": "green",
           "direction": "IT → CH"
@@ -960,8 +953,8 @@
           "direction": "IT → CH"
         },
         {
-          "slug": "traforo-del-gran-san-bernardo",
-          "name": "Traforo del Gran San Bernardo",
+          "slug": "thonex-vallard",
+          "name": "Thônex-Vallard (Autoroute Blanche)",
           "waitMinutes": 0,
           "status": "green",
           "direction": "IT → CH"
@@ -983,6 +976,13 @@
         {
           "slug": "vallorbe-jougne",
           "name": "Vallorbe-Jougne (La Ferrière)",
+          "waitMinutes": 0,
+          "status": "green",
+          "direction": "IT → CH"
+        },
+        {
+          "slug": "waldshut-tiengen-koblenz-ag",
+          "name": "Waldshut-Tiengen – Koblenz AG",
           "waitMinutes": 0,
           "status": "green",
           "direction": "IT → CH"
@@ -1013,10 +1013,10 @@
     },
     "fuel": {
       "available": true,
-      "generatedAt": "2026-09-05T06:19:47.578Z",
+      "generatedAt": "2026-09-06T06:30:39.879Z",
       "municipalityCount": 518,
-      "cheaperItalyCount": 47,
-      "cheaperSwissCount": 90,
+      "cheaperItalyCount": 45,
+      "cheaperSwissCount": 92,
       "tieCount": 11,
       "cheapestItaly": [
         {
@@ -1061,15 +1061,6 @@
           "saving50LEur": 26.25
         },
         {
-          "municipality": "Campodolcino",
-          "province": "SO",
-          "cheaperCountry": "CH",
-          "italyPriceEur": 2.195,
-          "swissPriceEur": 1.797,
-          "swissPriceChf": 1.69,
-          "saving50LEur": 19.9
-        },
-        {
           "municipality": "Caravate",
           "province": "VA",
           "cheaperCountry": "CH",
@@ -1077,6 +1068,15 @@
           "swissPriceEur": 1.893,
           "swissPriceChf": 1.78,
           "saving50LEur": 10.3
+        },
+        {
+          "municipality": "Marchirolo",
+          "province": "VA",
+          "cheaperCountry": "CH",
+          "italyPriceEur": 2.079,
+          "swissPriceEur": 1.893,
+          "swissPriceChf": 1.78,
+          "saving50LEur": 9.3
         }
       ],
       "cheapestSwissStation": {
@@ -1089,25 +1089,25 @@
     },
     "exchange": {
       "available": true,
-      "rate": 1.0631,
-      "lastDate": "2026-09-04",
-      "prevRate": 1.0622,
-      "prevDate": "2026-09-03",
-      "delta1d": 0.0009,
-      "rate7dAgo": 1.0662,
-      "delta7d": -0.0031,
+      "rate": 1.0632,
+      "lastDate": "2026-09-05",
+      "prevRate": 1.0633,
+      "prevDate": "2026-09-04",
+      "delta1d": -0.0001,
+      "rate7dAgo": 1.0664,
+      "delta7d": -0.0032,
       "source": "frankfurter",
       "pointCount": 32,
       "degradedEditions": 0
     },
     "jobs": {
       "available": true,
-      "generatedAt": "2026-09-05T04:41:08.971Z",
-      "activeJobs": 25605,
-      "activeCompanies": 843,
-      "todayAdded": 281,
-      "yesterdayAdded": 1091,
-      "last7dAdded": 9551,
+      "generatedAt": "2026-09-06T06:56:35.222Z",
+      "activeJobs": 25075,
+      "activeCompanies": 838,
+      "todayAdded": 117,
+      "yesterdayAdded": 362,
+      "last7dAdded": 9716,
       "degradedEditions": 0
     }
   }
