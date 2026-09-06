@@ -1802,6 +1802,15 @@ const DEFAULT_OPTS = {
 const _recordScoreWarned = new Set();
 
 /**
+ * Prefisso della riga che `coerceRecordScore()` emette per un valore non
+ * booleano. Esportato per la stessa ragione dei due marker della discovery
+ * (#941): e' la riga che si CONFONDE con quei segnali — parla di `recordScore`
+ * ma dice un altro fatto, «hai passato una stringa», e chi filtra i log deve
+ * poterla distinguere per testo invece che per parola.
+ */
+export const RECORD_SCORE_COERCION_WARNING = '[recordScore] valore';
+
+/**
  * Normalizza `recordScore` a un booleano vero.
  *
  * ── Perche' non basta `!== false` ─────────────────────────────────────────
@@ -1834,7 +1843,7 @@ export function coerceRecordScore(value) {
     const norm = value.trim().toLowerCase();
     if (!_recordScoreWarned.has(norm)) {
       _recordScoreWarned.add(norm);
-      console.warn(`\u26a0\ufe0f  [recordScore] valore stringa "${value}" normalizzato a ${!_RECORD_SCORE_FALSE_STRINGS.has(norm)} — passa un booleano`);
+      console.warn(`\u26a0\ufe0f  ${RECORD_SCORE_COERCION_WARNING} stringa "${value}" normalizzato a ${!_RECORD_SCORE_FALSE_STRINGS.has(norm)} — passa un booleano`);
     }
     return !_RECORD_SCORE_FALSE_STRINGS.has(norm);
   }
@@ -1842,7 +1851,7 @@ export function coerceRecordScore(value) {
   const key = `${typeof value}:${String(value)}`;
   if (!_recordScoreWarned.has(key)) {
     _recordScoreWarned.add(key);
-    console.warn(`\u26a0\ufe0f  [recordScore] valore non booleano ${key} normalizzato a ${coerced} — passa un booleano`);
+    console.warn(`\u26a0\ufe0f  ${RECORD_SCORE_COERCION_WARNING} non booleano ${key} normalizzato a ${coerced} — passa un booleano`);
   }
   return coerced;
 }
@@ -3127,6 +3136,18 @@ let _discoveryRecordScore = true;
 // da una discovery diagnostica» — e ripeterlo per ognuno dei dodici provider lo
 // renderebbe rumore invece che segnale.
 let _optOutPruneWarned = false;
+// Marker dei due segnali di opt-out della discovery, esportati perche' chi li
+// cerca (test, o un chiamante che filtra i propri log) li riconosca dal TESTO e
+// non da parole generiche (#941). `coerceRecordScore()` emette a sua volta una
+// riga che contiene «recordScore» per ogni stringa non ancora vista — cioe' per
+// la forma tipica di un flag che arriva da `process.env` — quindi un predicato
+// come /opt-out|recordScore|diagnost/ non distingue il segnale dalla coercizione:
+// conta due righe dove il fatto segnalato e' uno solo. Un valore condiviso ha una
+// sorgente (AGENTS.md #6): la costante e' usata per COSTRUIRE il messaggio.
+export const DISCOVERY_OPTOUT_PRUNE_WARNING =
+  'recordScore:false — il ledger non e\' stato scritto, ma il prune della catena si\':';
+export const DISCOVERY_OPTOUT_IGNORED_WARNING =
+  'ignorato — la discovery di questo processo e\' gia\' stata fatta con recordScore:';
 // Warn-once gemello del precedente, per l'altra meta' in-processo che il flag
 // `recordScore` non copre: il reset dello streak di contenuto (#887). Stesso
 // ciclo di vita, stessa ragione — il fatto da segnalare e' uno solo.
@@ -3337,7 +3358,7 @@ export async function _discoverProvider(cfg, { recordScore = true } = {}) {
       if (!coerceRecordScore(recordScore) && !_optOutPruneWarned) {
         _optOutPruneWarned = true;
         console.warn(
-          `\u26a0\ufe0f  [Discovery:${cfg.name}] recordScore:false — il ledger non e' stato scritto, ma il prune della catena si': `
+          `\u26a0\ufe0f  [Discovery:${cfg.name}] ${DISCOVERY_OPTOUT_PRUNE_WARNING} `
           + `${staleIds.length} id tolti da DEFAULT_CHAIN (ora ${DEFAULT_CHAIN.length}). `
           + 'La catena di questo processo viene quindi da una discovery diagnostica, su un listing raccolto con chiavi e timing diagnostici: '
           + 'chi generera\' dopo, in questo stesso processo, avra\' una cascata piu\' corta di quella che avrebbe costruito. '
@@ -3396,7 +3417,7 @@ export async function discoverFreeModels({ recordScore = true } = {}) {
   if (_discoveryDone) {
     if (wantsRecord !== _discoveryRecordScore) {
       console.warn(
-        `⚠️  [Discovery] recordScore:${wantsRecord} ignorato — la discovery di questo processo e' gia' stata fatta con recordScore:${_discoveryRecordScore} `
+        `⚠️  [Discovery] recordScore:${wantsRecord} ${DISCOVERY_OPTOUT_IGNORED_WARNING}${_discoveryRecordScore} `
         + 'e non viene rifatta: ricevi quell\'esito. L\'opt-out va richiesto PRIMA della prima discovery (initScoreStore() la fa col default), '
         + 'oppure dopo un resetState() — che AZZERA i punteggi: la sweep successiva non riscrive comunque il ledger a zero, '
         + 'perche\' il flush OMETTE `score` per un modello di cui questo processo non ne ha uno.',
