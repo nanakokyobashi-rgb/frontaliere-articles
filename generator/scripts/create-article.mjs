@@ -163,6 +163,13 @@ import {
   sanitizeNavLinkSemantics,
   stripFabricatedExamples,
 } from './lib/article-sanitizers.mjs';
+// NON da `article-sanitizers.mjs`, che sarebbe il vicinato naturale: quel file
+// e' `identical` in `scripts/ci/loop-sync-manifest.json`, la sua sorgente e' il
+// SITO, e un export aggiunto qui lo renderebbe `corpus-ahead` (il sito non ha
+// `sanitizeBodyText` nella sua copia: ce l'ha ancora privata dentro il proprio
+// `create-article.mjs`). Il modulo nuovo e' assente dal manifest, quindi non ha
+// vincolo di mirror, ed e' condiviso dai due scrittori di body del corpus.
+import { sanitizeBodyText } from './lib/sanitize-body-braces.mjs';
 import { decodeHtmlEntities } from './lib/decode-html-entities.mjs';
 import {
   PERFORMANCE_PATH as ARTICLE_PERF_PATH,
@@ -12401,63 +12408,6 @@ async function generateArticleImage(data) {
 }
 
 // ── Step 4: Modify source files ─────────────────────────────
-
-/**
- * Sanitize AI-generated body text before it's serialized into TypeScript.
- *
- * The LLM occasionally produces stray `}` characters — typically at the end of
- * a sentence where a German low quote („ ") was mis-closed with `}`. Blog
- * body content is plain markdown and should never contain unbalanced braces;
- * when they slip through they (a) break string-unaware parsers like the old
- * i18n-completeness test and (b) look broken in the rendered article.
- *
- * This is defense in depth: the test parser is now string-aware, but we still
- * refuse to write corrupted output to source files. Strategy:
- *   - Walk the text, tracking `{` depth
- *   - Drop any `}` that appears while depth is already 0
- *   - Leave balanced `{...}` pairs intact (in case of anchors, placeholders)
- */
-function sanitizeBodyText(s) {
-  if (typeof s !== 'string' || s.length === 0) return s;
-  const out = [];
-  let depth = 0;
-  let droppedCount = 0;
-  for (let i = 0; i < s.length; i++) {
-    const ch = s[i];
-    if (ch === '{') {
-      depth++;
-      out.push(ch);
-    } else if (ch === '}') {
-      if (depth === 0) {
-        droppedCount++;
-        continue; // stray — skip
-      }
-      depth--;
-      out.push(ch);
-    } else {
-      out.push(ch);
-    }
-  }
-  // If braces are still unbalanced (more `{` than `}`), strip the trailing
-  // unmatched opens as well — they'd otherwise leave an open brace in the
-  // serialized TS string that could hide downstream issues.
-  if (depth > 0) {
-    let i = out.length - 1;
-    let toStrip = depth;
-    while (i >= 0 && toStrip > 0) {
-      if (out[i] === '{') {
-        out[i] = '';
-        toStrip--;
-      }
-      i--;
-    }
-    droppedCount += depth;
-  }
-  if (droppedCount > 0) {
-    console.error(`    ⚠️  sanitizeBodyText: removed ${droppedCount} stray brace char(s)`);
-  }
-  return out.join('');
-}
 
 // escapeForSingleQuoteTS ora vive in scripts/lib/article-meta-block.mjs, accanto
 // all'emettitore che lo usa per primo: un campo nuovo emesso senza il suo escape
