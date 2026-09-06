@@ -163,6 +163,10 @@ describe('WIRING: la decisione vera legge davvero il segnale', () => {
   test('una sola lettura degli step del job per entrambe le domande', () => {
     // Due fetch della stessa lista costerebbero due chiamate API e, peggio,
     // potrebbero descrivere due attempt diversi (la classe dell'item 2).
-    assert.equal((script.match(/vitestJobSteps\(head\)/g) || []).length, 1);
+    // La DICHIARAZIONE (`function vitestJobSteps(head)`) non e' una lettura:
+    // contarla renderebbe il test rosso su un call-site solo, cioe' proprio
+    // sulla forma corretta.
+    const calls = (script.match(/(?<!function\s)vitestJobSteps\(head\)/g) || []).length;
+    assert.equal(calls, 1);
   });
 });
