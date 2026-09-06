@@ -150,11 +150,70 @@ export function recoverableBranchWork(issue) {
  * @param {string|number} issue
  */
 export function deliveredPrNumber(issue) {
+  // `sort_by(.createdAt) | last`, non `.[0]`: su un branch `fix/issue-<N>` RIUSATO
+  // dopo un merge — il caso normale su una issue ri-accodata — la lista contiene la
+  // PR vecchia insieme alla nuova, in un ordine che `gh` non documenta. Il marker
+  // resterebbe giusto, ma il numero che l'umano legge nel commento punterebbe al
+  // lavoro sbagliato. La più recente è l'unica che questo run può aver consegnato.
   const raw = gh(['pr', 'list', '--head', `fix/issue-${issue}`, '--state', 'all', ...repoArgs,
-    '--json', 'number,state',
-    '--jq', '[.[] | select(.state=="OPEN" or .state=="MERGED")] | .[0].number // empty']).trim();
+    '--json', 'number,state,createdAt',
+    '--jq', '[.[] | select(.state=="OPEN" or .state=="MERGED")] | sort_by(.createdAt) | last | .number // empty']).trim();
   const n = Number(raw);
   return Number.isFinite(n) && n > 0 ? n : null;
+}
+
+// --- Idempotenza del commento di consegna -----------------------------------
+// Il drainer ri-accoda la stessa issue fino a tre volte, e ogni run che rientra in
+// questo ramo posterebbe un `pr-created` identico al precedente. Non sarebbe solo
+// rumore: un commento di bot alza `updatedAt`, e su questo repo è proprio quello che
+// affama le uscite della coda — il cooldown del parked-retry e l'age-out chiedono
+// quiete, e le issue più sorvegliate non la raggiungono mai (misurato il 2026-08-24:
+// 30 candidate nel pool, 2 oltre il cooldown). È la stessa ragione per cui
+// `orphan-max-turns-work.mjs` ha `ORPHAN_NOTE_MARKER`.
+//
+// Il dedup è sul marker di QUESTO step, come `ORPHAN_NOTE_MARKER`: una volta che il
+// fenomeno è registrato sulla issue, ripeterlo non aggiunge informazione. Non è
+// dedupato contro il `pr-created` che l'agente posta da sé, perché quel commento non
+// dice «sono morto al cap dopo aver consegnato» — è proprio il dato che si perderebbe.
+// Gli altri due rami NON sono dedupati, di proposito: il commento `rate-limited` È il
+// beacon di quota, e `check-quota-backoff.mjs` cerca il più RECENTE per leggerne
+// `QUOTA_RESETS_AT` — deduparlo lo congelerebbe su una finestra scaduta; il marker
+// `max-turns` porta lo stamp del branch recuperabile, che cresce fra un tentativo e
+// l'altro.
+
+/**
+ * Marker informativo del fenomeno «morte al cap DOPO la consegna». Non è un
+ * `FIX_OUTCOME` — il verdetto resta `pr-created` — ma senza di lui il fenomeno
+ * smette di essere contabile: prima del ramo di consegna queste run finivano nel
+ * bucket `max-turns`, e chi ne misura la quota vedrebbe il calo per costruzione,
+ * non perché il fenomeno sia cambiato.
+ */
+export const CAP_HIT_AFTER_DELIVERY_MARKER = '<!-- CAP_HIT_AFTER_DELIVERY -->';
+
+/**
+ * Vero se la nota di questo step è già sulla issue. Pura → testabile.
+ * @param {Array<string|{body?: string}>} comments corpi dei commenti, o oggetti `{body}`
+ */
+export function hasCapHitAfterDeliveryNote(comments) {
+  return (comments || []).some((c) => (typeof c === 'string' ? c : String((c && c.body) || ''))
+    .includes(CAP_HIT_AFTER_DELIVERY_MARKER));
+}
+
+/**
+ * Vero se la issue porta già la nota di questo step. Impura (gh) e FAIL-SAFE:
+ * qualunque errore → false, cioè il comportamento di prima (posta comunque).
+ * @param {string|number} issue
+ */
+export function capHitNoteAlreadyPosted(issue) {
+  const raw = gh(['issue', 'view', String(issue), ...repoArgs, '--json', 'comments',
+    '--jq', '[.comments[].body]']).trim();
+  if (!raw) return false;
+  try {
+    const bodies = JSON.parse(raw);
+    return Array.isArray(bodies) && hasCapHitAfterDeliveryNote(bodies);
+  } catch {
+    return false;
+  }
 }
 
 /**
@@ -164,6 +223,7 @@ export function deliveredPrNumber(issue) {
  */
 export function formatDeliveredDespiteMaxTurnsComment(prNumber) {
   return '<!-- FIX_OUTCOME: pr-created -->\n' +
+    `${CAP_HIT_AFTER_DELIVERY_MARKER}\n` +
     `_La CLI è uscita \`error_max_turns\`, ma la PR #${prNumber} per questa issue esiste (open/merged): il lavoro è stato consegnato._\n` +
     '_Il verdetto segue il lavoro, non l\'exit della CLI — stessa regola dello step «Classify outcome» di `issue-fix.yml`. ' +
     'Senza questa riga il drainer leggerebbe `max-turns` e parcheggerebbe in `needs-human` una issue già risolta._';
@@ -188,6 +248,10 @@ function main() {
     const deliveredPr = deliveredPrNumber(ISSUE);
     if (deliveredPr) {
       console.log(`Terminal outcome: error_max_turns MA la PR #${deliveredPr} esiste (open/merged) → marker \`pr-created\`, non \`max-turns\`.`);
+      if (capHitNoteAlreadyPosted(ISSUE)) {
+        console.log('Nota già presente sulla issue → skip (dedup: un commento in più alza `updatedAt` e affama il cooldown del parked-retry).');
+        return;
+      }
       if (DRY_RUN) return;
       gh(['issue', 'comment', ISSUE, ...repoArgs, '--body',
         formatDeliveredDespiteMaxTurnsComment(deliveredPr)]);

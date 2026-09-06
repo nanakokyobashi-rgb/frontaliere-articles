@@ -30,3 +30,8 @@ CLAUDE.md
 # sarebbe silenziosamente morta col pattern piu' semplice.
 public/images/events/*
 !public/images/events/catalog/
+
+# Messaggio di commit di lavoro degli agent: si scrive in root per passarlo a
+# `git commit -F`, non e' un artefatto del repo. Committato una volta (#899),
+# rimosso e ignorato qui.
+.git-commit-msg.txt
