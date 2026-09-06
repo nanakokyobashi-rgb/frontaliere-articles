@@ -514,6 +514,31 @@ test('il verso incerto e\u2019 «legge»: la lettura non riconosciuta non fa usc
     readsContentOf(rel, "const t = `riga uno\nriga due`;\nassert.ok(list.includes('scripts/ci/loop-sync-manifest.json'));"),
     false,
   );
+  // Anche quando il segnale di literal vero e' l'interpolazione e non la
+  // posizione: `${` prima di fine riga.
+  assert.equal(
+    readsContentOf(rel, "tag`riga ${x} uno\nriga due`;\nassert.ok(list.includes('scripts/ci/loop-sync-manifest.json'));"),
+    false,
+  );
+
+  // 5. Il backtick spaiato non deve appaiarsi con un backtick QUALUNQUE piu'
+  // avanti nel file: in un `.md` reale ce n'e' quasi sempre un altro dopo, e
+  // farne dipendere il bail cancellerebbe di nuovo la lettura in mezzo.
+  assert.equal(
+    readsContentOf(rel, "Nota: usa ` per citare.\nconst raw = readFileSync('scripts/ci/loop-sync-manifest.json','utf8');\nAltra prosa con `codice` inline."),
+    true,
+  );
+  assert.equal(
+    readsContentOf(rel, "```\nconst raw = readFileSync('scripts/ci/loop-sync-manifest.json','utf8');\n```\ntesto `x` fine."),
+    true,
+  );
+  // E una regex che apre un'espressione subito dopo un commento di riga resta
+  // una regex: la scansione all'indietro non deve leggere il testo del
+  // commento, o il `//` nella coda riapre il finto commento.
+  assert.equal(
+    readsContentOf(rel, "const p = // path\n  /\\//.test(s) ? readFileSync('scripts/ci/loop-sync-manifest.json','utf8') : null;"),
+    true,
+  );
 });
 
 test('l\u2019eccezione e\u2019 il solo manifest, e solo da nominato: gli altri descrittori restano accoppiamenti', () => {

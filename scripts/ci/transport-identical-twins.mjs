@@ -542,9 +542,31 @@ const REGEX_PREFIX_KEYWORDS = new Set([
   'new', 'delete', 'void', 'instanceof', 'throw',
 ]);
 
+/**
+ * Il backtick aperto a `i` è un template literal vero, cioè può valere
+ * multi-riga?
+ *
+ * Il criterio è POSITIVO, e questo è il punto: far dipendere il multi-riga
+ * dall'ASSENZA di una chiusura più avanti nel file non chiude niente, perché
+ * un backtick spaiato di prosa — o un fence markdown aperto — si appaia con il
+ * primo code-span inline che incontra, ovunque sia, e il testo in mezzo (una
+ * lettura del manifest compresa) torna invisibile. In un `.md` reale, e i
+ * fixture in scope includono `generator/tests/fixtures/pr-bodies/*.md`, altri
+ * backtick dopo ce ne sono quasi sempre. Il default è quindi quello di `'` e
+ * `"`: vale fino a fine riga. Multi-riga solo su un segnale di literal vero —
+ * l'apertura in posizione di espressione, o un'interpolazione prima della fine
+ * della riga.
+ */
+function isTemplateLiteralAt(src, i) {
+  if (regexAllowedAt(src, i)) return true;
+  const nl = src.indexOf('\n', i + 1);
+  return src.slice(i + 1, nl === -1 ? src.length : nl).includes('${');
+}
+
 /** Indice appena dopo il literal aperto a `i`, escape inclusi. */
 function endOfStringLiteral(src, i) {
   const quote = src[i];
+  const multiline = quote === '`' && isTemplateLiteralAt(src, i);
   for (let j = i + 1; j < src.length; j++) {
     const c = src[j];
     if (c === '\\') { j++; continue; }
@@ -552,22 +574,26 @@ function endOfStringLiteral(src, i) {
     // Un apice non chiuso a fine riga è un apostrofo di prosa, non un literal:
     // trascinare il resto del file dentro una stringa nasconderebbe il codice
     // che viene dopo — di nuovo il verso sbagliato.
-    if (quote !== '`' && c === '\n') return j;
+    if (!multiline && c === '\n') return j;
   }
-  // Stesso verso per il backtick, che però in codice apre davvero literal
-  // multi-riga: non si può bailare alla prima riga sempre, ma un backtick MAI
-  // chiuso (un `…` di prosa spaiato, un fence markdown aperto e non richiuso —
-  // e i fixture in scope includono `generator/tests/fixtures/pr-bodies/*.md`)
-  // inghiottirebbe il resto del file e renderebbe invisibile ogni lettura
-  // successiva. Non chiuso ⇒ vale fino a fine della riga in cui si apre.
-  if (quote === '`') {
+  // Nemmeno un literal vero trascina il resto del file se non chiude mai.
+  if (multiline) {
     const nl = src.indexOf('\n', i + 1);
     return nl === -1 ? src.length : nl;
   }
   return src.length;
 }
 
-/** `/` in una posizione in cui la grammatica ammette un literal regex? */
+/**
+ * `/` (o backtick) in una posizione in cui la grammatica ammette un literal
+ * regex, cioè in posizione di espressione?
+ *
+ * `src` può essere una stringa o un array di caratteri: `stripComments` gli
+ * passa il proprio output PARZIALE, dove i commenti già visti sono spazi.
+ * Guardare all'indietro dentro il TESTO di un commento faceva mancare la
+ * regex che apre un'espressione subito dopo un commento di riga, e con essa il
+ * `//` nella sua coda apriva il finto commento che il salto doveva togliere.
+ */
 function regexAllowedAt(src, i) {
   let j = i - 1;
   while (j >= 0 && /\s/.test(src[j])) j--;
@@ -575,9 +601,9 @@ function regexAllowedAt(src, i) {
   const c = src[j];
   if ('(,=:[!&|?{};+-*%^~<>'.includes(c)) return true;
   if (!/[\w$]/.test(c)) return false;
-  let k = j;
-  while (k >= 0 && /[\w$]/.test(src[k])) k--;
-  return REGEX_PREFIX_KEYWORDS.has(src.slice(k + 1, j + 1));
+  let word = '';
+  for (let k = j; k >= 0 && /[\w$]/.test(src[k]); k--) word = src[k] + word;
+  return REGEX_PREFIX_KEYWORDS.has(word);
 }
 
 /**
@@ -592,8 +618,8 @@ function regexAllowedAt(src, i) {
  * `callSites`, accorciando la catena di chiamate di un literal più sotto fino a
  * farlo sembrare nominato. Stesso lexer, stesso verso sbagliato (issue #930).
  */
-function endOfRegexLiteral(src, i) {
-  if (src[i] !== '/' || !regexAllowedAt(src, i)) return -1;
+function endOfRegexLiteral(src, i, lookback = src) {
+  if (src[i] !== '/' || !regexAllowedAt(lookback, i)) return -1;
   let inClass = false;
   for (let j = i + 1; j < src.length; j++) {
     const c = src[j];
@@ -647,7 +673,9 @@ function stripComments(src) {
       continue;
     }
     if (c === '/') {
-      const end = endOfRegexLiteral(src, i);
+      // `out` e non `src`: i commenti già visti sono spazi, e la scansione
+      // all'indietro di `regexAllowedAt` non deve leggerne il testo.
+      const end = endOfRegexLiteral(src, i, out);
       if (end !== -1) { i = end; continue; }
     }
     i++;
