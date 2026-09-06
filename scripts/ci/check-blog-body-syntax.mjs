@@ -170,9 +170,12 @@ export function collectTypeScriptFiles(dir) {
  * Pura e senza I/O: e' la meta' che il test in `generator/tests/` puo'
  * esercitare senza esbuild e senza `content/`.
  *
- * Ogni radice porta il proprio `byLocale`, da cui `mirrorExpectation` ricava
- * l'atteso — un corpus di corpi e' mirrorato sui quattro locali, quindi il
- * locale piu' popolato e' la verita' di terra per gli altri tre.
+ * Una radice puo' arrivare in due forme, e la differenza e' la ragione della
+ * fix. Con `byLocale` (i due corpora dei corpi) l'atteso viene DERIVATO da
+ * `mirrorExpectation`: un corpus di corpi e' mirrorato sui quattro locali,
+ * quindi il locale piu' popolato e' la verita' di terra per gli altri tre, e il
+ * pavimento scala col corpus senza taratura. Con `minFiles` il pavimento e'
+ * strutturale e vale solo dove il conteggio NON cresce col corpus.
  *
  * I due pavimenti non sono ridondanti, coprono due modi di fallire diversi:
  *  - il TOTALE prende il caso «il gate ha scandito quasi niente» — in un
@@ -194,25 +197,65 @@ export function floorViolations(perRoot, { retention = undefined } = {}) {
   const violations = [];
   let total = 0;
   let expectedTotal = 0;
-  for (const { rel, count, byLocale } of perRoot) {
-    total += count;
-    const expected = mirrorExpectation(byLocale ?? {});
-    expectedTotal += expected;
-    if (expected === 0) {
-      violations.push(missingCorpusMessage(rel, rel));
+  let derivedRoots = 0;
+
+  for (const { rel, count, byLocale, minFiles } of perRoot) {
+    // Radice MIRRORATA sui locali (i due corpora dei corpi): l'atteso si deriva
+    // dalla radice stessa e scala col corpus per sempre.
+    if (byLocale) {
+      derivedRoots += 1;
+      total += count;
+      const expected = mirrorExpectation(byLocale);
+      expectedTotal += expected;
+      if (expected === 0) {
+        violations.push(missingCorpusMessage(rel, rel));
+        continue;
+      }
+      const min = floorFrom(expected, retention);
+      if (count < min) {
+        violations.push(
+          `${rel}: ${count} file scanditi contro ${expected} attesi (pavimento ${min}, ` +
+            `derivato dal locale piu' popolato x ${CORPUS_LOCALES.length} locali). ` +
+            `La radice non e' stata guardata per intero (checkout sparse? un locale rinominato?) — ` +
+            `un gate che passa senza guardare e' peggio di nessun gate.`,
+        );
+      }
       continue;
     }
-    const minFiles = floorFrom(expected, retention);
-    if (count < minFiles) {
-      violations.push(
-        `${rel}: ${count} file scanditi contro ${expected} attesi (pavimento ${minFiles}, ` +
-          `derivato dal locale piu' popolato x ${CORPUS_LOCALES.length} locali). ` +
-          `La radice non e' stata guardata per intero (checkout sparse? un locale rinominato?) — ` +
-          `un gate che passa senza guardare e' peggio di nessun gate.`,
-      );
+
+    // Radice NON mirrorata, con un pavimento STRUTTURALE — oggi solo
+    // `content/seo` (`SEO_ROOT` in `content-gates-main.mjs`). Una costante qui
+    // non e' l'antipattern che questa fix chiude: i chunk SEO non crescono col
+    // corpus, crescono di DIMENSIONE, quindi il loro numero descrive la forma
+    // della directory e non ha una data di scadenza. Resta fuori dai totali
+    // proprio perche' la sua unita' di misura e' un'altra.
+    if (typeof minFiles === 'number') {
+      if (count <= minFiles) {
+        violations.push(
+          `${rel}: ${count} file, soglia > ${minFiles}. ` +
+            `La radice non e' stata guardata (checkout sparse? cartella rinominata?) — ` +
+            `un gate che passa senza guardare e' peggio di nessun gate.`,
+        );
+      }
+      continue;
     }
+
+    violations.push(`${rel}: nessun riferimento per il pavimento (ne' byLocale ne' minFiles)`);
   }
-  if (expectedTotal === 0) return violations; // gia' segnalato per radice: niente riferimento, niente totale
+
+  if (derivedRoots === 0) return violations;
+
+  // Nessun atteso su NESSUNA radice mirrorata: `content/` non e' materializzato
+  // affatto, ed e' il falso verde piu' facile da produrre su questo repo.
+  if (expectedTotal === 0) {
+    violations.push(
+      `TOTALE: 0 file attesi su ${derivedRoots} radici mirrorate — content/ non e' ` +
+        `materializzato affatto. Un atteso a zero non e' un pavimento a zero: e' l'assenza ` +
+        `del riferimento, e in un checkout sparse e' esattamente il verde da non produrre.`,
+    );
+    return violations;
+  }
+
   const minTotal = floorFrom(expectedTotal, retention);
   if (total < minTotal) {
     violations.push(

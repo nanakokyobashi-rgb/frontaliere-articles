@@ -72,11 +72,13 @@ test('un checkout sparse (zero file ovunque) fa fallire il gate', () => {
   // gate sparirebbe invece di scattare. Deve essere una violazione esplicita.
   const perRoot = BLOG_BODY_ROOTS.map((r) => ({ ...r, count: 0, byLocale: {} }));
   const v = floorViolations(perRoot);
-  assert.equal(v.length, 2, 'una violazione per radice: il riferimento manca, non e\' un pavimento a zero');
-  assert.ok(
-    v.every((m) => /riferimento del pavimento assente/.test(m)),
+  assert.equal(v.length, 3, 'due radici senza riferimento + il totale');
+  assert.equal(
+    v.filter((m) => /riferimento del pavimento assente/.test(m)).length,
+    2,
     `un corpus assente non e\' un pavimento a zero: ${JSON.stringify(v)}`,
   );
+  assert.ok(v.some((m) => m.startsWith('TOTALE:')), 'il pavimento totale deve scattare');
 });
 
 test('UNA sola radice a zero fa fallire, anche se il totale abbonda', () => {
