@@ -1248,15 +1248,87 @@ export const EVENTS_DATASET_PATH = path.join(REPO_ROOT, 'data', 'events.json');
 export const EVENTS_SLICE_DIR = path.join(REPO_ROOT, 'data', 'events', 'by-source');
 
 /**
+ * Applica l'invariante «meglio un campo assente che un `NULL` pubblicato» a un
+ * dataset gia' MATERIALIZZATO, cioe' al punto in cui questo repo lo legge.
+ *
+ * Perche' non basta averla dentro `enrichEventsWithLocaleFallbackTranslations`
+ * (#939 item 1). Quello e' uno stadio dei crawler, e i crawler stanno
+ * nell'altro repo: qui `enrich` non ha NESSUN chiamante di produzione. Il
+ * `data/events.json` che il digest consuma arriva intero da
+ * `refresh-events-dataset.mjs`, che lo scarica gia' assemblato dal sito —
+ * quindi il 100% dei record che questo repo pubblica non e' mai passato dal
+ * predicato severo. Ogni ramo che scrive quel file di la' (merge del cursore,
+ * backfill, slice gia' materializzata) bypassa l'invariante per costruzione, e
+ * il `NULL` del feed finiva nel digest dei quattro locali senza far fallire
+ * niente: `renderComuneBlocks` stampa `String(ev.title || '')`, che di un
+ * `'NULL'` fa la stringa `NULL`.
+ *
+ * Non e' una seconda sorgente della regola: e' lo STESSO
+ * `stripUnusableLocaleValues`, e quindi lo stesso `STRICT_NULL_DROP_WARNING`,
+ * spostato dove i dati entrano davvero — che e' anche cio' che rende
+ * misurabile quel warning, prima irraggiungibile da questo lato.
+ *
+ * Due esiti, non uno:
+ *  - i campi per-locale perdono le chiavi avvelenate (locale assente, il
+ *    consumer ricade sull'`it` come per un gap di traduzione qualunque);
+ *  - il `title` PIATTO avvelenato viene recuperato dalla prima chiave
+ *    per-locale sana; se non ce n'e', l'evento e' irrendibile e cade. Tenerlo
+ *    stamperebbe un bullet senza testo — la «card senza testo» che non
+ *    fallisce e non si vede, cioe' il modo di rottura peggiore dei due.
+ *
+ * Puro: non muta ne' `events` ne' i record. Ritorna `{ events, dropped }`.
+ */
+export function sanitizeDatasetEvents(events, locales = ['it', 'en', 'de', 'fr']) {
+  if (!Array.isArray(events)) return { events: [], dropped: 0 };
+  const out = [];
+  let dropped = 0;
+  for (const event of events) {
+    if (!event || typeof event !== 'object') {
+      dropped += 1;
+      continue;
+    }
+    const next = { ...event };
+    if (next.titleByLocale) next.titleByLocale = stripUnusableLocaleValues(next.titleByLocale, 'titleByLocale');
+    if (next.descriptionByLocale) {
+      next.descriptionByLocale = stripUnusableLocaleValues(next.descriptionByLocale, 'descriptionByLocale');
+    }
+    // La descrizione piatta avvelenata sparisce e basta: un evento senza
+    // descrizione resta pubblicabile, uno senza titolo no.
+    if ('description' in next && !hasUsableContentText(next.description)) delete next.description;
+    if (!hasUsableContentText(next.title)) {
+      const recovered = locales.find((l) => hasUsableContentText(next.titleByLocale?.[l]));
+      if (!recovered) {
+        dropped += 1;
+        continue;
+      }
+      next.title = next.titleByLocale[recovered];
+    }
+    out.push(next);
+  }
+  return { events: out, dropped };
+}
+
+/**
  * Read the assembled events dataset. Returns `{ schemaVersion, generatedAt,
  * events: [] }` on missing/malformed file — never throws.
+ *
+ * I record passano da `sanitizeDatasetEvents`: il file arriva dall'altro repo
+ * senza essere passato da `enrich`, e questo e' il punto unico in cui questo
+ * repo lo legge (#939 item 1).
  */
 export function loadEventsDataset(file = EVENTS_DATASET_PATH) {
   try {
     if (!existsSync(file)) return { schemaVersion: 1, generatedAt: null, events: [] };
     const raw = JSON.parse(readFileSync(file, 'utf-8'));
     if (!raw || !Array.isArray(raw.events)) return { schemaVersion: 1, generatedAt: null, events: [] };
-    return raw;
+    const { events, dropped } = sanitizeDatasetEvents(raw.events);
+    if (dropped) {
+      console.warn(
+        `${STRICT_NULL_DROP_WARNING}: ${dropped}/${raw.events.length} evento/i senza titolo pubblicabile ` +
+          `scartati alla lettura del dataset`,
+      );
+    }
+    return { ...raw, events };
   } catch {
     return { schemaVersion: 1, generatedAt: null, events: [] };
   }
