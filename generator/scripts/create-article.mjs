@@ -2941,9 +2941,20 @@ function registerLockTargets(id, sectionName = SECTION_NAME) {
           needle: `'${id}'`,
         }]
       : []),
-    { label: section.slugDataFile, absPath: resolve(section.slugDataFile), needle: id },
-    { label: section.registryFile, absPath: resolve(section.registryFile), needle: id },
-    { label: section.seoFile, absPath: resolve(section.seoFile), needle: id },
+    // Every needle is the form the writer actually appends, NOT the bare id.
+    // `registrationTargetStatus()` does a plain `includes()` over the whole
+    // file, so a bare id reads `present` on any file that merely CONTAINS it
+    // as a substring — and ids nest: adding a year suffix or a qualifier makes
+    // one id a substring of another. Not hypothetical, it is already true in
+    // the corpus: `'blog-frontalieri-disoccupazione-svizzera-2026'` in
+    // seo-blog-*.ts contains `disoccupazione-svizzera-2026`, so registering
+    // the latter would read `present` on an SEO file it was never written to.
+    // Three targets reading a false `present` is what turns a genuine SPLIT
+    // into `committed` — the marker cleared over a half-registered corpus,
+    // which is the exact failure this lock exists to catch.
+    { label: section.slugDataFile, absPath: resolve(section.slugDataFile), needle: `'${id}':` },
+    { label: section.registryFile, absPath: resolve(section.registryFile), needle: `id: '${id}'` },
+    { label: section.seoFile, absPath: resolve(section.seoFile), needle: `'blog-${id}':` },
   ];
   for (const locale of ['it', 'en', 'de', 'fr']) {
     const metaFile = `services/locales/${section.metaPrefix}-${locale}.ts`;

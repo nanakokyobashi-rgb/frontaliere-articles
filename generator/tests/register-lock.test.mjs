@@ -76,9 +76,12 @@ function makeTargets(root) {
       // La union e' la PRIMA scrittura della sequenza, e il needle e' la forma
       // che ci finisce davvero: l'id fra apici singoli.
       ...(cfg.union ? [[cfg.union, `'${id}'`]] : []),
-      [cfg.slug, id],
-      [cfg.registry, id],
-      [cfg.seo, id],
+      // Gli altri needle sono anch'essi la forma SCRITTA, non l'id nudo: la
+      // chiave della riga slug, la proprieta' `id:` del registro, la chiave
+      // `blog-<id>` della voce SEO. Vedi il test sulle sottostringhe in fondo.
+      [cfg.slug, `'${id}':`],
+      [cfg.registry, `id: '${id}'`],
+      [cfg.seo, `'blog-${id}':`],
     ];
     for (const locale of ['it', 'en', 'de', 'fr']) {
       rel.push([`services/locales/${cfg.metaPrefix}-${locale}.ts`, `blog.article.${id}.`]);
@@ -301,7 +304,7 @@ function updateRouterUnionFlags() {
 }
 
 /** `registerLockTargets()` vera, con le sue dipendenze iniettate. */
-function loadRegisterLockTargets() {
+function loadRegisterLockTargets(resolveRel = (r) => `/root/${r}`) {
   const needle = 'function registerLockTargets(id, sectionName = SECTION_NAME) {';
   const start = CREATE_ARTICLE_SRC.indexOf(needle);
   assert.notEqual(start, -1, 'registerLockTargets non trovata in create-article.mjs: aggiornare questo test');
@@ -326,7 +329,7 @@ function loadRegisterLockTargets() {
     'REGISTER_LOCK_FILE',
     'resolve',
     `${body}\nreturn registerLockTargets;`,
-  )(configs, SECTION, REGISTER_LOCK_FILE, (r) => `/root/${r}`);
+  )(configs, SECTION, REGISTER_LOCK_FILE, resolveRel);
 }
 
 test('la union BlogArticleId e\' fra i bersagli di frontaliere, e assente da svizzera', () => {
@@ -360,8 +363,9 @@ test('la union BlogArticleId e\' fra i bersagli di frontaliere, e assente da svi
 
   // Lo specchio scritto a mano di questo file deve restare allineato: e' cio'
   // che rende significativi gli altri test del lock.
-  assert.deepEqual(froLabels, makeTargets('/root')(ARTICLE_ID, 'frontaliere').map((t) => t.label));
-  assert.deepEqual(sviLabels, makeTargets('/root')(ARTICLE_ID, 'svizzera').map((t) => t.label));
+  const strip = (ts) => ts.map(({ label, needle }) => ({ label, needle }));
+  assert.deepEqual(strip(fro), strip(makeTargets('/root')(ARTICLE_ID, 'frontaliere')));
+  assert.deepEqual(strip(svi), strip(makeTargets('/root')(ARTICLE_ID, 'svizzera')));
 });
 
 test('la path della union e\' la stessa in scrittura, in staging e nel lock', () => {
@@ -370,14 +374,78 @@ test('la path della union e\' la stessa in scrittura, in staging e nel lock', ()
   // coperto da un test (AGENTS.md #6). Se uno dei tre cambia path da solo, il
   // lock torna a confrontare un file che nessuno scrive.
   const UNION = 'packages/articles/content/blogArticleIds.ts';
+  // `registerLockTargets` lo nomina DUE volte (label + absPath), quindi le
+  // occorrenze attese sono 4: contarne >= 3 lascerebbe verde la rimozione del
+  // letterale da `gitAddAll` — la union non verrebbe piu' staged, l'append non
+  // entrerebbe nel commit, e proprio il sito piu' silenzioso resterebbe
+  // scoperto. Per questo ogni sito ha anche il suo assert dedicato.
   const occorrenze = CREATE_ARTICLE_SRC.split(`'${UNION}'`).length - 1;
   assert.ok(
-    occorrenze >= 3,
-    `atteso il letterale ${UNION} in modifyRouterUnion + gitAddAll + registerLockTargets, trovate ${occorrenze} occorrenze`,
+    occorrenze >= 4,
+    `atteso il letterale ${UNION} in modifyRouterUnion + gitAddAll + registerLockTargets (label e absPath), trovate ${occorrenze} occorrenze`,
   );
-  const writeBlock = CREATE_ARTICLE_SRC.slice(CREATE_ARTICLE_SRC.indexOf('function modifyRouterUnion(data) {'));
+  const blockOf = (header) => {
+    const from = CREATE_ARTICLE_SRC.indexOf(header);
+    assert.notEqual(from, -1, `${header} non trovata in create-article.mjs: aggiornare questo test`);
+    const rest = CREATE_ARTICLE_SRC.slice(from);
+    return rest.slice(0, rest.search(/\n\}\n/));
+  };
   assert.ok(
-    writeBlock.slice(0, writeBlock.search(/\n\}\n/)).includes(`const routerFile = '${UNION}';`),
+    blockOf('function modifyRouterUnion(data) {').includes(`const routerFile = '${UNION}';`),
     'modifyRouterUnion non scrive piu\' su questa path: aggiornare anche registerLockTargets',
   );
+  assert.ok(
+    blockOf('function gitAddAll(data) {').includes(`'${UNION}'`),
+    'gitAddAll non stagia piu\' la union: l\'append resterebbe fuori dal commit',
+  );
+  assert.ok(
+    blockOf('function registerLockTargets(id, sectionName = SECTION_NAME) {').includes(`'${UNION}'`),
+    'registerLockTargets non confronta piu\' la union',
+  );
+});
+
+test('un id CONTENUTO in un id piu\' lungo non fa leggere `present` un bersaglio mai scritto', () => {
+  // Il difetto che questo caso sorveglia non e' teorico: nel corpus
+  // `content/seo/seo-blog-*.ts` c'e' gia' `'blog-frontalieri-disoccupazione-svizzera-2026'`,
+  // che CONTIENE l'id `disoccupazione-svizzera-2026`. Con il needle nudo,
+  // registrare quest'ultimo faceva leggere `present` a slug map, registro e
+  // SEO senza che nessuno dei tre lo avesse mai ricevuto — e tre falsi
+  // `present` bastano a far classificare `committed` uno split reale, cioe' a
+  // cancellare il marker sopra un corpus mezzo registrato.
+  const root = sandbox();
+  const registerLockTargets = loadRegisterLockTargets((r) => path.join(root, r));
+  const id = 'disoccupazione-svizzera-2026';
+  const targets = registerLockTargets(id, 'frontaliere');
+
+  // Nessuna scrittura per `id`: sul disco c'e' solo l'id PIU' LUNGO, nella
+  // forma reale che ogni superficie usa.
+  const longer = `frontalieri-${id}`;
+  const write = (label, text) => {
+    const abs = targets.find((t) => t.label === label).absPath;
+    fs.mkdirSync(path.dirname(abs), { recursive: true });
+    fs.writeFileSync(abs, text, 'utf-8');
+  };
+  const files = SECTION_FILES.frontaliere;
+  write(files.union, `type _BlogId1 = | '${longer}';\n`);
+  write(files.slug, `  '${longer}': { it: 'x', en: 'x', de: 'x', fr: 'x' },\n`);
+  write(files.registry, `    id: '${longer}',\n`);
+  write(files.seo, `  'blog-${longer}': {\n`);
+  for (const locale of ['it', 'en', 'de', 'fr']) {
+    write(`services/locales/${files.metaPrefix}-${locale}.ts`, `'blog.article.${longer}.title': 'x',\n`);
+  }
+
+  const { present, absent } = registrationTargetStatus(targets);
+  assert.deepEqual(present, [], `nessun bersaglio cita "${id}": presenti ${present.join(', ')}`);
+  assert.equal(absent.length, targets.length);
+
+  // Controprova: con la forma DAVVERO scritta per `id`, gli stessi bersagli
+  // diventano `present`. Senza questa meta', un needle impossibile da
+  // soddisfare passerebbe l'assert qui sopra.
+  write(files.slug, `  '${longer}': { it: 'x' },\n  '${id}': { it: 'x' },\n`);
+  write(files.registry, `    id: '${longer}',\n    id: '${id}',\n`);
+  write(files.seo, `  'blog-${longer}': {\n  'blog-${id}': {\n`);
+  const after = registrationTargetStatus(targets);
+  for (const label of [files.slug, files.registry, files.seo]) {
+    assert.ok(after.present.includes(label), `${label} deve leggere present sulla forma realmente scritta`);
+  }
 });

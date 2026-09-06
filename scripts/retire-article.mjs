@@ -293,6 +293,36 @@ function seoFilesFor(section) {
     .map((f) => `content/seo/${f}`);
 }
 
+/**
+ * L'id compare ancora nel testo COME id, e non solo come sottostringa di un id
+ * più lungo?
+ *
+ * Gli id si annidano: basta un suffisso d'anno o una qualificazione perché uno
+ * diventi prefisso — o infisso — di un altro. Nel corpus è già così
+ * (`frontalieri-disoccupazione-svizzera-2026` contiene
+ * `disoccupazione-svizzera-2026`), quindi un `includes(id)` nudo sulla verifica
+ * finale grida `RIMOZIONE PARZIALE` su una rimozione in realtà completa, esce
+ * 1 dopo aver già scritto tutto, e apre una issue di workflow su un corpus
+ * sano. Stessa classe del needle nudo di `registerLockTargets()` in
+ * `generator/scripts/create-article.mjs`, con l'esito opposto: là il falso
+ * `present` NASCONDE uno split, qui il falso leftover ne inventa uno.
+ *
+ * La verifica resta larga di proposito — scandisce ogni superficie e non solo
+ * la forma che lo script ha rimosso — perché a servire è proprio il residuo
+ * che non ci si aspetta. Ciò che scarta è solo l'occorrenza che NON è l'id:
+ * si prende la sequenza kebab massimale attorno a ogni occorrenza e la si
+ * accetta se è esattamente l'id, o `blog-<id>` (la chiave delle voci SEO).
+ * Ogni altra forma su queste superfici — `'<id>'`, `"<id>"`,
+ * `blog.article.<id>.…` — è già delimitata da un carattere non-kebab e passa.
+ */
+function mentionsId(text, id) {
+  const re = new RegExp(`[a-z0-9-]*${id.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}[a-z0-9-]*`, 'g');
+  for (const m of text.matchAll(re)) {
+    if (m[0] === id || m[0] === `blog-${id}`) return true;
+  }
+  return false;
+}
+
 /** In quale sezione vive l'id? Deciso dal registro che lo contiene. */
 function findSection(id) {
   const found = Object.entries(SECTIONS).filter(([, cfg]) => read(cfg.registryFile).includes(`id: '${id}',`));
@@ -443,7 +473,7 @@ function main() {
     cfg.sourceLedger, IMAGES_LEDGER,
     ...(cfg.idUnionFile ? [cfg.idUnionFile] : []),
   ].filter((f) => existsSync(rel(f)));
-  const leftovers = surfaces.filter((f) => read(f).includes(id));
+  const leftovers = surfaces.filter((f) => mentionsId(read(f), id));
   if (leftovers.length > 0) {
     console.error(`\nRIMOZIONE PARZIALE — '${id}' compare ancora in:\n${leftovers.map((f) => `   ${f}`).join('\n')}`);
     process.exit(1);
