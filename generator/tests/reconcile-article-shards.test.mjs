@@ -324,6 +324,28 @@ test('slugs troncato rispetto al manifest viene rifiutato', () => {
   assert.ok(errors.some((e) => e.includes('slugs.blog')), errors.join('; '));
 });
 
+test('un id SOSTITUITO in slugs.blog viene rifiutato, non solo un id perso', () => {
+  // Articolo rimosso + articolo nuovo nello stesso giro: le cardinalita'
+  // pareggiano tutte e tre (slugs, manifest, articles.json) e la superficie
+  // passerebbe con un canonical sbagliato per quell'articolo. Il sito non
+  // ribuilda, quindi va live cosi'.
+  const s = goodSurface();
+  delete s.slugs.blog.id0;
+  s.slugs.blog.id0bis = { it: 's0bis' };
+  const errors = validateAnnouncedSurface(s);
+  assert.ok(
+    errors.some((e) => e.includes('slugs.blog') && e.includes('id0')),
+    errors.join('; '),
+  );
+});
+
+test('lo stesso vale per la sezione svizzera', () => {
+  const s = goodSurface();
+  s.slugs.swiss = { altro: { it: 'altro' } };
+  const errors = validateAnnouncedSurface(s);
+  assert.ok(errors.some((e) => e.includes('slugs.swiss')), errors.join('; '));
+});
+
 test('un registro sotto il floor dei 100 articoli viene rifiutato', () => {
   const s = goodSurface();
   s.manifest.counts.articles = 42;

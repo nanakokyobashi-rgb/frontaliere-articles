@@ -2647,6 +2647,16 @@
       }
     },
     {
+      "path": "scripts/lib/count-xml-tags.mjs",
+      "mode": "corpus-only",
+      "reason": "Conteggio dei tag XML a livello di documento (CDATA e commenti esclusi), estratto da scripts/build-api.mjs per la issue #919 item 3: writer, gate manifest.counts e pavimenti di verify-api-floors devono contare con UNA formula sola (AGENTS.md #6), altrimenti il gate confronta due needle sbagliati allo stesso modo e non puo' fallire. Il sito non ha un omonimo: non scrive ne' i feed ne' le sitemap degli articoli, li consuma gia' costruiti da questo repo.",
+      "baseline": {
+        "site": null,
+        "corpus": "95452f716476b90d",
+        "alignedAt": "2026-09-06"
+      }
+    },
+    {
       "path": "scripts/ci/lockstep-stall-watch.mjs",
       "mode": "corpus-only",
       "reason": "Il guardiano sull'incaglio della lockstep engine (issue #217). Non ha ne' puo' avere un gemello: sorveglia la PR `engine-lockstep-auto` che il mirror del SITO apre QUI, quindi il lato che puo' osservarla e' solo questo. Il manifest tiene `engine/` in scope.outOfScope appoggiandosi a quel canale e dichiarando che il segnale giusto e' un allarme sul mirror: questo file e' quell'allarme, che fino al 2026-08-13 non esisteva.",
