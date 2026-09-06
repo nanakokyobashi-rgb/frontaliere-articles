@@ -1275,14 +1275,31 @@ function main() {
       gate.post ? d.note : '',
       gate.post ? d.marker : '',
     ].filter(Boolean).join('\n\n') + mark;
-    try {
-      gh(['issue', 'comment', String(iss.number), '--repo', REPO, '--body', note], { json: false });
-      gh(['issue', 'edit', String(iss.number), '--repo', REPO,
-        '--add-label', add, '--remove-label', 'needs-human', '--remove-label', 'fu-parked'], { json: false });
-      console.log(`PREPASS #${iss.number} → ${add} (${d.reason})`);
-    } catch (e) {
-      console.log(`::warning::needs-human-prepass: #${iss.number} non instradata (${String(e).slice(0, 100)}).`);
+    // GEMELLO di `handoff-to-site.mjs` (#972 item 3), stessa classe e stesso
+    // fix: la transizione di stato passa PRIMA del commento, e i tre effetti
+    // della label sono tre chiamate indipendenti invece di un `gh issue edit`
+    // atomico. Con l'ordine vecchio, una sola label non risolvibile faceva
+    // cadere anche l'instradamento, la nota restava pubblicata e la issue
+    // tornava selezionabile al giro dopo — che ri-postava la nota e, con essa,
+    // il marker che conta le oscillazioni: un fallimento di scrittura si
+    // travestiva da oscillazione della issue.
+    const steps = [
+      { what: `label ${add}`, args: ['issue', 'edit', String(iss.number), '--repo', REPO, '--add-label', add] },
+      { what: 'rimozione needs-human', args: ['issue', 'edit', String(iss.number), '--repo', REPO, '--remove-label', 'needs-human'] },
+      { what: 'rimozione fu-parked', args: ['issue', 'edit', String(iss.number), '--repo', REPO, '--remove-label', 'fu-parked'] },
+      { what: 'nota di instradamento', args: ['issue', 'comment', String(iss.number), '--repo', REPO, '--body', note] },
+    ];
+    let stepFailed = 0;
+    for (const s of steps) {
+      try {
+        gh(s.args, { json: false });
+      } catch (e) {
+        stepFailed++;
+        console.log(`::warning::needs-human-prepass: #${iss.number} «${s.what}» non applicata (${String(e).slice(0, 100)}).`);
+      }
     }
+    if (stepFailed) console.log(`::warning::needs-human-prepass: #${iss.number} instradata parzialmente (${stepFailed}/${steps.length} passi falliti).`);
+    else console.log(`PREPASS #${iss.number} → ${add} (${d.reason})`);
   }
   console.log(`needs-human-prepass: requeue=${counts.requeue} decompose=${counts.decompose} keep=${counts.keep} note=${noted} (azioni eseguite: ${acted}, cap ${MAX_PER_RUN}; note cap ${MAX_NOTES_PER_RUN}).`);
   if (lookupFailed) {

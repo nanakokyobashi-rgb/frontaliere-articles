@@ -426,11 +426,77 @@ export function handoffTitle(issueNumber, corpusTitle) {
   return `corpus#${issueNumber}: ${String(corpusTitle || '').slice(0, 90)}`;
 }
 
+/**
+ * Le scritture sulla issue di ORIGINE, in ordine e **una per effetto**. Pura.
+ *
+ * Due difetti misurati (#972 item 3), che sono lo stesso difetto visto due
+ * volte: la transizione di stato viaggiava in coda al commento e in UNA sola
+ * chiamata `gh issue edit` con tre effetti dentro.
+ *
+ * - **Ordine.** Il commento è la parte cosmetica, la label è ciò che toglie la
+ *   issue dalla coda: farlo per secondo significa che l'unico effetto che conta
+ *   è anche il solo che può non avvenire. Ora lo stato passa per primo, e se a
+ *   fallire è il commento la issue è comunque parcheggiata (o chiusa).
+ * - **Indipendenza.** `--add-label needs-human --remove-label agent:fix
+ *   --remove-label agent:fix-queued` è atomico per `gh`: se una sola delle tre
+ *   label non è risolvibile (non esiste nel repo, permessi, 404) cade tutta la
+ *   transizione, `needs-human` compreso. Una chiamata per effetto rende il
+ *   fallimento parziale davvero parziale.
+ *
+ * Perché non basta «riprova al giro dopo»: il giro dopo corto-circuita sul
+ * dedup — la issue del sito ORA esiste, quindi `main` esce prima di arrivare
+ * qui. Senza queste due proprietà la riparazione non ha nessun percorso, ed è
+ * per questo che la issue restava con le label di routing e ri-pagava run.
+ *
+ * `kind: 'state'` marca i passi idempotenti, i soli che il ramo di dedup
+ * ri-applica: ripetere il commento a ogni giro sarebbe rumore, ri-mettere una
+ * label che c'è già non è niente.
+ *
+ * @returns {Array<{kind: 'state'|'comment', what: string, args: string[]}>}
+ */
+export function originWriteSteps({ issue, repo, close, comment } = {}) {
+  const num = String(issue);
+  const repoArgs = repo ? ['--repo', repo] : [];
+  const steps = close
+    ? [{ kind: 'state', what: 'chiusura', args: ['issue', 'close', num, ...repoArgs, '--reason', 'completed'] }]
+    : [
+      // L'aggiunta sta PRIMA delle rimozioni: se il run muore in mezzo, la
+      // issue è in `needs-human` senza routing (parcheggiata due volte) e non
+      // senza nessuna label (invisibile a entrambi i cicli).
+      { kind: 'state', what: 'label needs-human', args: ['issue', 'edit', num, ...repoArgs, '--add-label', 'needs-human'] },
+      { kind: 'state', what: 'rimozione agent:fix', args: ['issue', 'edit', num, ...repoArgs, '--remove-label', 'agent:fix'] },
+      { kind: 'state', what: 'rimozione agent:fix-queued', args: ['issue', 'edit', num, ...repoArgs, '--remove-label', 'agent:fix-queued'] },
+    ];
+  if (comment) {
+    steps.push({ kind: 'comment', what: 'commento di consegna', args: ['issue', 'comment', num, ...repoArgs, '--body', comment] });
+  }
+  return steps;
+}
+
 function gh(args, { token, json = true } = {}) {
   const env = { ...process.env };
   if (token) { env.GH_TOKEN = token; env.GITHUB_TOKEN = token; }
   const out = execFileSync('gh', args, { encoding: 'utf8', maxBuffer: 64 * 1024 * 1024, env });
   return json ? JSON.parse(out) : out;
+}
+
+/**
+ * Esegue i passi di `originWriteSteps` in modo INDIPENDENTE: il fallimento di
+ * uno non impedisce i successivi. Un `try` unico intorno al gruppo è ciò che
+ * rendeva terminale il primo errore, e la issue del sito a quel punto esiste
+ * già — quindi non c'è nessun giro successivo che ripassi di qui.
+ */
+function runOriginSteps(steps) {
+  let failed = 0;
+  for (const s of steps) {
+    try {
+      gh(s.args, { json: false });
+    } catch (e) {
+      failed++;
+      console.log(`::warning::handoff-to-site: #${ISSUE} consegnata ma «${s.what}» non applicata (${String(e).slice(0, 100)}). La issue del sito esiste: nessun lavoro perso.`);
+    }
+  }
+  return failed;
 }
 
 function main() {
@@ -458,6 +524,13 @@ function main() {
         '--search', `"${origin}" in:body`, '--json', 'number,url', '--limit', '5'], { token });
       if (Array.isArray(existing) && existing.length) {
         console.log(`handoff-to-site: #${ISSUE} già consegnata → ${existing[0].url}. Niente doppioni.`);
+        // Ma lo STATO sì: se siamo di nuovo qui, il drainer ha ri-promosso la
+        // issue, cioè le label di routing ci sono ancora — la transizione del
+        // giro che ha consegnato non è andata a fondo. Questo è il solo punto
+        // in cui quel mezzo-stato è osservabile, e prima ci si usciva con un
+        // `return` che lo rendeva definitivo. I passi `state` sono idempotenti;
+        // il commento no, e infatti non viene ripetuto.
+        runOriginSteps(originWriteSteps({ issue: ISSUE, repo: REPO, close: d.close }));
         return;
       }
     } catch { /* ricerca non disponibile → si prosegue: il rischio è un doppione, non una perdita */ }
@@ -520,19 +593,12 @@ function main() {
     : residual.length
       ? `**Non la chiudo**: la diagnosi cita anche ${residual.map((p) => `\`${p}\``).join(', ')}, che il manifest NON dichiara \`identical\` — è lavoro di questo repo, il mirror non lo porterà, e questa issue ne resta l'unico portatore. La parcheggio in \`needs-human\` togliendo le label di routing, così non ri-paga run mentre aspetta.`
       : `**Non la chiudo**: il verdetto è \`no-root-cause\`, che copre anche il vicolo cieco vero — «consegnata» non implica «risolta», e una chiusura sbagliata farebbe evaporare l'unico portatore della diagnosi. La parcheggio in \`needs-human\` togliendo le label di routing: non ri-paga run, e \`needs-human-sweep.yml\` è la porta di rientro.`;
-  try {
-    gh(['issue', 'comment', ISSUE, '--repo', REPO, '--body',
-      `📤 **Consegnata al sito**: ${url}\n\nIl fix vive in \`${SITE_REPO}\` e il ciclo di là ora ce l'ha, con la diagnosi di questo run riportata integralmente. ${tail}`], { json: false });
-    if (!d.close) {
-      gh(['issue', 'edit', ISSUE, '--repo', REPO,
-        '--add-label', 'needs-human', '--remove-label', 'agent:fix', '--remove-label', 'agent:fix-queued'], { json: false });
-    } else {
-      gh(['issue', 'close', ISSUE, '--repo', REPO, '--reason', 'completed'], { json: false });
-    }
-  } catch (e) {
-    const what = d.close ? 'non chiusa' : 'non parcheggiata';
-    console.log(`::warning::handoff-to-site: #${ISSUE} consegnata ma ${what} (${String(e).slice(0, 100)}). La issue del sito esiste: nessun lavoro perso.`);
-  }
+  runOriginSteps(originWriteSteps({
+    issue: ISSUE,
+    repo: REPO,
+    close: d.close,
+    comment: `📤 **Consegnata al sito**: ${url}\n\nIl fix vive in \`${SITE_REPO}\` e il ciclo di là ora ce l'ha, con la diagnosi di questo run riportata integralmente. ${tail}`,
+  }));
 }
 
 if (process.argv[1] && process.argv[1].endsWith('handoff-to-site.mjs')) main();

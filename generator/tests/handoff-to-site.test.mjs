@@ -15,6 +15,7 @@ import {
   handoffDecision,
   extractSitePaths,
   handoffTitle,
+  originWriteSteps,
   lastVerdictComment,
   HANDOFF_VERDICTS,
   MIRROR_LOCKED_MODES,
@@ -433,4 +434,75 @@ test('lo script è CITATO da issue-fix.yml: non è codice scollegato', async () 
   const wf = fs.readFileSync(new URL('../../.github/workflows/issue-fix.yml', import.meta.url), 'utf8');
   assert.match(wf, /handoff-to-site\.mjs/);
   assert.match(wf, /SITE_TOKEN:/);
+});
+
+// ── #972 item 3: le scritture sulla issue di origine ────────────────────────
+//
+// Il difetto: la transizione di stato («parcheggia» o «chiudi») viaggiava in
+// coda al commento e dentro UN solo `gh issue edit` con tre effetti. Il primo
+// errore era terminale per tutto il resto, e il giro successivo non riparava
+// niente perche' corto-circuita sul dedup — la issue del sito ORA esiste. La
+// issue restava con le label di routing, cioe' ri-pagava run: esattamente il
+// costo che questo script esiste per togliere.
+
+const stepsOf = (o) => originWriteSteps(o).map((s) => `${s.kind}:${s.args.join(' ')}`);
+
+test('#972: lo STATO passa prima del commento', () => {
+  const park = originWriteSteps({ issue: '316', repo: 'o/r', close: false, comment: 'consegnata' });
+  const close = originWriteSteps({ issue: '548', repo: 'o/r', close: true, comment: 'consegnata' });
+  for (const steps of [park, close]) {
+    assert.equal(steps.at(-1).kind, 'comment', 'il commento e\' cosmetico: se cade, lo stato dev\'essere gia\' passato');
+    assert.ok(steps.slice(0, -1).every((s) => s.kind === 'state'));
+    assert.ok(steps.length > 1);
+  }
+});
+
+test('#972: un effetto per chiamata — le tre label non sono piu\' atomiche', () => {
+  const steps = originWriteSteps({ issue: '316', repo: 'o/r', close: false, comment: 'consegnata' });
+  const labelSteps = steps.filter((s) => s.args[0] === 'issue' && s.args[1] === 'edit');
+  assert.equal(labelSteps.length, 3, 'add + due remove = tre chiamate indipendenti');
+  for (const s of labelSteps) {
+    const flags = s.args.filter((a) => a === '--add-label' || a === '--remove-label');
+    assert.equal(flags.length, 1, `un solo effetto per chiamata, non ${flags.join('+')}: `
+      + 'con `--add-label needs-human --remove-label agent:fix --remove-label agent:fix-queued` '
+      + 'una sola label non risolvibile faceva cadere anche il parcheggio');
+  }
+  // L'aggiunta prima delle rimozioni: un run che muore in mezzo lascia la issue
+  // parcheggiata due volte, mai senza nessuna label.
+  assert.deepEqual(steps.map((s) => s.args.at(-1)),
+    ['needs-human', 'agent:fix', 'agent:fix-queued', 'consegnata']);
+});
+
+test('#972: il ramo close chiude e NON tocca le label di routing', () => {
+  assert.deepEqual(stepsOf({ issue: '548', repo: 'o/r', close: true, comment: 'x' }), [
+    'state:issue close 548 --repo o/r --reason completed',
+    'comment:issue comment 548 --repo o/r --body x',
+  ]);
+});
+
+test('#972: senza commento restano i soli passi idempotenti (ramo dedup)', () => {
+  // E' cio' che il dedup ri-applica: ri-mettere una label che c\'e\' gia\' non e\'
+  // niente, ri-postare il commento a ogni giro sarebbe rumore.
+  const steps = originWriteSteps({ issue: '316', repo: 'o/r', close: false });
+  assert.ok(steps.every((s) => s.kind === 'state'));
+  assert.equal(steps.length, 3);
+});
+
+test('#972: il dedup ripara lo stato invece di uscire', async () => {
+  const fs = await import('node:fs');
+  const src = fs.readFileSync(new URL('../../scripts/ci/handoff-to-site.mjs', import.meta.url), 'utf8');
+  const dedup = src.slice(src.indexOf('già consegnata'), src.indexOf('già consegnata') + 700);
+  assert.match(dedup, /runOriginSteps\(originWriteSteps\(/,
+    'il ramo di dedup e\' il solo punto in cui il mezzo-stato del giro precedente e\' osservabile: '
+    + 'uscirne con un `return` secco lo rende definitivo');
+  // E nessuno chiama piu' `gh issue edit` con piu' di un effetto dentro.
+  // Il guard si applica a un argv PER VOLTA — ogni array letterale che porta un
+  // flag di label — non al file intero: i flag compaiono anche in prosa nel
+  // JSDoc che spiega il difetto, e due step vicini ma distinti hanno add e
+  // remove a poca distanza pur essendo due chiamate separate. Confondere le due
+  // cose renderebbe il guard rosso proprio per il fix che documenta.
+  for (const argv of src.match(/\[[^[\]]*'--(?:add|remove)-label'[^[\]]*\]/g) || []) {
+    const flags = argv.match(/'--(?:add|remove)-label'/g) || [];
+    assert.equal(flags.length, 1, `un solo effetto per chiamata, non ${flags.join('+')} in ${argv}`);
+  }
 });
