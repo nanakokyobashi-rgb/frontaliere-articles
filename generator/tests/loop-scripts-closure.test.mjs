@@ -32,41 +32,21 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { importSpecifiers as allImportSpecifiers, resolveSpecifier } from '../../scripts/ci/lib/import-specifiers.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const DIRS = ['scripts/ci', 'scripts/ci/lib', 'scripts/lib'];
 
-// Solo import a inizio riga: così una riga di PROSA dentro un commento che
-// cita un import (`// #2057: import {FX} from './comparatorHref'`) non viene
-// scambiata per una dipendenza reale — un falso positivo che il porting ha
-// prodotto davvero. `^[ \t]` e non `^\s`: `\s` mangia i newline e farebbe
-// ripartire l'ancora a metà di un commento.
-//
-// La clausola fra `import` e `from` è `[^'";]*?`, non `.*?`, per DUE ragioni
-// che vanno insieme:
-//   - niente `\n` nella classe negata ⇒ un import BRACED SU PIÙ RIGHE viene
-//     visto. Con `.*?` (che non attraversa i newline) non lo era, e questa
-//     riga è stata cieca su 6 specificatori reali in 5 file — fra cui
-//     `./lib/reopen-breaker.mjs` e `./lib/vitestCheck.mjs` di pr-autorebase,
-//     cioè esattamente la classe che questo test esiste per chiudere: uno
-//     script copiato dal sito senza una sua dipendenza. Il guard era verde
-//     mentre il buco era aperto.
-//   - vietare `'`, `"` e `;` impedisce al match non greedy di attraversare la
-//     fine dello statement e agganciare la stringa di un import successivo:
-//     una clausola di import contiene solo identificatori, virgole, graffe,
-//     `as` e spazi, mai un apice o un punto e virgola.
-// Il `from` è opzionale, così anche un side-effect import (`import './x.mjs'`)
-// resta coperto — ma solo per `import`: `export ... from` è una dipendenza
-// quanto un import (`scripts/ci/scan-failed-runs.mjs` ri-esporta
-// `../lib/parse-positive-num.mjs`, e senza il ramo era invisibile qui),
-// mentre un `export` SENZA `from` non lo è, e pretendere il `from` evita che
-// `export default './x'` venga contato come specificatore.
-const IMPORT_RE = /^[ \t]*(?:import\s+(?:[^'";]*?\sfrom\s+)?|export\s+[^'";]*?\sfrom\s+)(['"])([^'"]+)\1/gm;
+// L'estrattore e' UNO SOLO, in `scripts/ci/lib/import-specifiers.mjs`: la
+// stessa clausola viveva in cinque copie e ogni indurimento andava applicato
+// cinque volte (issue #929 item 5). Da li' arriva anche il ramo dell'`import()`
+// DINAMICO, che qui mancava contraddicendo l'intestazione di questo file:
+// `lib/mergePreviewCheck.mjs` carica `./duplicateDeclarations.mjs` con
+// `await import()`, cioe' uno dei tre giri citati sopra come «albero da
+// chiudere» era fuori dall'albero chiuso (item 1).
 
 /** Tutti gli specificatori importati da `src`, nell'ordine in cui compaiono. */
-function importSpecifiers(src) {
-  return [...src.matchAll(IMPORT_RE)].map((m) => m[2]);
-}
+const importSpecifiers = (src) => allImportSpecifiers(src);
 
 function entryPoints() {
   const out = [];
@@ -91,10 +71,16 @@ test('ogni import relativo degli script del ciclo risolve a un file esistente', 
     const src = fs.readFileSync(abs, 'utf8');
     for (const spec of importSpecifiers(src)) {
       if (!spec.startsWith('.')) continue;
-      let target = path.normalize(path.join(path.dirname(rel), spec));
-      if (!path.extname(target)) target += '.mjs';
-      if (!fs.existsSync(path.join(ROOT, target))) {
-        broken.push(`${rel} → ${spec} (atteso: ${target})`);
+      const base = path.normalize(path.join(path.dirname(rel), spec));
+      // Stessa cascata di candidati degli altri guard della classe: `.mjs`,
+      // `.js`, `.ts`, `index.*`. `isFile` e non `existsSync` — una directory
+      // che esiste non risolve un import.
+      const target = resolveSpecifier(base, (c) => {
+        const abs = path.join(ROOT, c);
+        return fs.existsSync(abs) && fs.statSync(abs).isFile();
+      });
+      if (!target) {
+        broken.push(`${rel} → ${spec} (atteso: ${base}.mjs)`);
         continue;
       }
       walk(target);
@@ -128,8 +114,9 @@ test('gli script del ciclo non introducono dipendenze npm non dichiarate', () =>
   for (const rel of entryPoints()) {
     const src = fs.readFileSync(path.join(ROOT, rel), 'utf8');
     // Stesso estrattore del test sopra: la cecità sugli import braced su più
-    // righe valeva anche qui, e su questo lato un pacchetto non dichiarato
-    // sfuggito rompe il ciclo in CI, dove non c'è `npm ci` a rimediare.
+    // righe — e poi sull'`import()` dinamico — valeva anche qui, e su questo
+    // lato un pacchetto non dichiarato sfuggito rompe il ciclo in CI, dove non
+    // c'è `npm ci` a rimediare.
     for (const pkg of importSpecifiers(src)) {
       if (pkg.startsWith('.') || pkg.startsWith('node:')) continue;
       const base = pkg.startsWith('@') ? pkg.split('/').slice(0, 2).join('/') : pkg.split('/')[0];

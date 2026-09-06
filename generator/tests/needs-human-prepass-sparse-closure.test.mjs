@@ -40,13 +40,17 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { relativeImportSpecifiers } from '../../scripts/ci/lib/import-specifiers.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const WORKFLOW = '.github/workflows/needs-human-sweep.yml';
 const ENTRY = 'scripts/ci/needs-human-prepass.mjs';
 
-/** Ogni specificatore relativo `from '...'`, import ed export riesportante. */
-const REL_IMPORT_RE = /(?:^|\n)\s*(?:import|export)[^'";]*from\s*['"](\.[^'"]+)['"]/g;
+// Estrattore condiviso (issue #929 item 5): stesso `import`/`export ... from`
+// di prima, piu' l'`import()` dinamico e la forma senza spazi, e senza contare
+// come dipendenza il codice dentro una stringa o un commento. Qui la
+// differenza e' materiale: un file mancante dalla sparse-checkout e' un
+// `ERR_MODULE_NOT_FOUND` nel job, non un test rosso.
 
 /**
  * La chiusura transitiva degli import RELATIVI a partire da `entry`, in path
@@ -68,8 +72,8 @@ export function importClosure(entry, { root = ROOT } = {}) {
       missing.push(rel);
       continue;
     }
-    for (const m of src.matchAll(REL_IMPORT_RE)) {
-      stack.push(path.normalize(path.join(path.dirname(rel), m[1])));
+    for (const spec of relativeImportSpecifiers(src)) {
+      stack.push(path.normalize(path.join(path.dirname(rel), spec)));
     }
   }
   return { files: [...seen].sort(), missing };

@@ -136,6 +136,7 @@ import crypto from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 import { createGithubIssue } from '../lib/github-issue-creator.mjs';
 import { parsePositiveNum } from '../lib/parse-positive-num.mjs';
+import { relativeImportSpecifiers, resolveSpecifier } from './lib/import-specifiers.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const MANIFEST_PATH = path.join(ROOT, 'scripts/ci/loop-sync-manifest.json');
@@ -587,11 +588,11 @@ const ABSENT_ON_SITE_MODES = new Set(['corpus-only', 'corpus-only-pending']);
  * Import RELATIVI di un modulo, risolti a path repo-relative e filtrati su
  * cio' che il manifest conosce. PURA: prende il testo, non legge il disco.
  *
- * La regex e' quella di `loop-scripts-closure.test.mjs`, con `export ... from`
- * in piu': solo import a inizio riga (una riga di PROSA che cita un import in
- * un commento non e' una dipendenza), e clausola `[^'";]*?` invece di `.*?`
- * perche' senza `\n` nella classe negata un import BRACED SU PIU' RIGHE viene
- * visto — e' la forma con cui quel guard era cieco su 6 specificatori reali.
+ * L'estrattore e' `lib/import-specifiers.mjs`, condiviso con i guard di
+ * chiusura di `generator/tests/` (issue #929 item 5): copre l'import braced su
+ * piu' righe, la forma senza spazi e l'`import()` DINAMICO, e non conta come
+ * dipendenza il codice dentro una stringa o un commento — che qui produrrebbe
+ * un `identical-unmirrorable` FALSO, cioe' un rosso di CI su un manifest sano.
  *
  * @param {string} rel     path del file importatore, relativo alla radice
  * @param {string} source  testo del file
@@ -599,17 +600,14 @@ const ABSENT_ON_SITE_MODES = new Set(['corpus-only', 'corpus-only-pending']);
  * @returns {string[]} path repo-relative dei moduli importati e riconosciuti
  */
 function resolvedLocalImports(rel, source, known) {
-  const re = /^[ \t]*(?:import|export)\s+(?:[^'";]*?\sfrom\s+)?(['"])([^'"]+)\1/gm;
   const dir = path.posix.dirname(rel);
   const out = [];
-  let m;
-  while ((m = re.exec(source))) {
-    const spec = m[2];
-    if (!spec.startsWith('.')) continue; // i pacchetti non hanno un gemello da dichiarare
+  for (const spec of relativeImportSpecifiers(source)) {
     const base = path.posix.normalize(path.posix.join(dir, spec));
     // Gli specificatori del ciclo portano l'estensione, ma engine/ e host/
-    // usano la forma senza: si prova la stessa risoluzione di Node.
-    const hit = [base, `${base}.mjs`, `${base}.js`, `${base}/index.mjs`, `${base}/index.js`].find(known);
+    // usano la forma senza: si prova la stessa risoluzione di Node, dalla
+    // cascata condivisa (`.ts` compreso — engine/ e host/ sono TypeScript).
+    const hit = resolveSpecifier(base, known, path.posix.join);
     if (hit && !out.includes(hit)) out.push(hit);
   }
   return out;
