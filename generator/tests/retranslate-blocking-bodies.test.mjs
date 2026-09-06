@@ -35,6 +35,8 @@
  */
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
+import { spawnSync } from 'node:child_process';
+import { fileURLToPath } from 'node:url';
 import {
   shouldWrite,
   translationSanityIssue,
@@ -238,4 +240,48 @@ test('sanitizeBodyText toglie le graffe spaiate e lascia le coppie', () => {
   assert.equal(sanitizeBodyText('vedi {link} qui', () => {}), 'vedi {link} qui');
   // Una `{` mai chiusa viene tolta: lascerebbe una graffa aperta nel .ts.
   assert.equal(sanitizeBodyText('resta {aperta', () => {}), 'resta aperta');
+});
+
+test('translationSanityIssue rifiuta UN campo su tre lasciato in italiano', () => {
+  // Il caso che la concatenazione lasciava passare, ed e' il piu' probabile:
+  // la cascata traduce un campo alla volta e `translateFieldFreeMt` non ha
+  // nessuna guardia "uscita == sorgente", quindi il fallimento tipico e'
+  // PARZIALE. Su `body1+body2+body3` uniti il campo italiano e' un terzo del
+  // testo, il rilevatore vede due terzi di inglese e risponde `en`: nessun
+  // rifiuto, e la pagina /en/ pubblicata si prende un paragrafo italiano.
+  const r = translationSanityIssue({
+    oldSections: { body1: EN_LONG, body2: EN_LONG, body3: EN_LONG },
+    newSections: { body1: EN_LONG, body2: IT_LONG, body3: EN_LONG },
+    italianSections: { body1: IT_LONG, body2: IT_LONG, body3: IT_LONG },
+    locale: 'en',
+  });
+  assert.ok(r, 'un campo in italiano su tre deve produrre un rifiuto');
+  assert.match(r, /^lingua-sbagliata: body2 /);
+
+  // Falsificazione nell'altra direzione: gli stessi tre campi tradotti davvero
+  // non devono essere rifiutati, altrimenti il controllo rifiuterebbe tutto.
+  assert.equal(translationSanityIssue({
+    oldSections: { body1: EN_LONG, body2: EN_LONG, body3: EN_LONG },
+    newSections: { body1: EN_LONG, body2: EN_LONG, body3: EN_LONG },
+    italianSections: { body1: IT_LONG, body2: IT_LONG, body3: IT_LONG },
+    locale: 'en',
+  }), null);
+});
+
+test('--limit negativo esce con errore invece di selezionare tutto meno uno', () => {
+  // `Number('-1')` e' finito, quindi supera il controllo "e' un numero", e
+  // `pairs.slice(0, -1)` NON prende una coppia: prende tutte meno l'ultima.
+  // `--apply --limit -1` — la scrittura naturale di "nessun limite" per chi non
+  // sa che il default e' gia' Infinity — avrebbe fatto la bonifica completa.
+  const script = fileURLToPath(new URL('../scripts/retranslate-blocking-bodies.mjs', import.meta.url));
+  const run = (...args) => spawnSync(process.execPath, [script, '--audit', '/dev/null', ...args], { encoding: 'utf8' });
+
+  const neg = run('--limit', '-1');
+  assert.equal(neg.status, 2, 'un --limit negativo deve uscire 2');
+  assert.match(neg.stderr, /negativo/);
+  assert.doesNotMatch(String(neg.stdout), /coppie trattate/, 'non deve selezionare né trattare nulla');
+
+  // Falsificazione: un limite valido non viene rifiutato PER QUESTO motivo.
+  // (Si ferma piu' avanti, sull'albero dei body assente, che e' un'altra uscita.)
+  assert.doesNotMatch(String(run('--limit', '5').stderr), /negativo/);
 });

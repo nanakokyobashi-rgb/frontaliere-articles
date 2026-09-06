@@ -272,20 +272,31 @@ export function translationSanityIssue({ oldSections, newSections, italianSectio
   for (const [f, text] of Object.entries(newSections)) {
     const ref = oldSections?.[f] || null;
     const refText = ref || italianSections?.[f] || '';
-    if (refText.length < LENGTH_FLOOR_MIN_CHARS) continue;
-    const floor = ref ? LENGTH_FLOOR.VS_OLD : LENGTH_FLOOR.VS_IT;
-    const ratio = text.length / refText.length;
-    if (ratio < floor) {
-      return `troncata: ${f} ${text.length}/${refText.length} car. `
-        + `(${ratio.toFixed(2)} < ${floor} vs ${ref ? 'pubblicata' : 'italiano'})`;
+    // `if` e non `continue`: un campo troppo corto per il pavimento di lunghezza
+    // deve comunque passare dal controllo di lingua qui sotto.
+    if (refText.length >= LENGTH_FLOOR_MIN_CHARS) {
+      const floor = ref ? LENGTH_FLOOR.VS_OLD : LENGTH_FLOOR.VS_IT;
+      const ratio = text.length / refText.length;
+      if (ratio < floor) {
+        return `troncata: ${f} ${text.length}/${refText.length} car. `
+          + `(${ratio.toFixed(2)} < ${floor} vs ${ref ? 'pubblicata' : 'italiano'})`;
+      }
     }
-  }
-  const allText = Object.values(newSections).join(' ');
-  if (allText.length >= LANG_CHECK_MIN_CHARS) {
-    // `locale` come fallback: un testo su cui il rilevatore non ha segnale non
-    // deve diventare un rifiuto. Stessa forma di `isWrongLocale()`.
-    const detected = detectLanguage(allText, locale);
-    if (detected !== locale) return `lingua-sbagliata: ${detected} invece di ${locale}`;
+    // PER CAMPO, come il pavimento di lunghezza accanto, e non sui tre campi
+    // concatenati. La cascata traduce un campo alla volta e
+    // `translateFieldFreeMt` non ha nessuna guardia "uscita == sorgente": scarta
+    // il vuoto, il marker `null` e la sentinella nav mangled, non un passthrough.
+    // Quindi il fallimento PIU' PROBABILE non e' totale, e' parziale — un solo
+    // `body2` che torna verbatim in italiano. Sul testo concatenato quel campo e'
+    // un terzo del totale: il rilevatore vede due terzi di inglese, risponde
+    // `en`, e la pagina /en/ pubblicata si prende un paragrafo italiano. Il
+    // controllo che doveva fermarlo sopravviveva solo al caso meno probabile.
+    if (text.length >= LANG_CHECK_MIN_CHARS) {
+      // `locale` come fallback: un testo su cui il rilevatore non ha segnale non
+      // deve diventare un rifiuto. Stessa forma di `isWrongLocale()`.
+      const detected = detectLanguage(text, locale);
+      if (detected !== locale) return `lingua-sbagliata: ${f} ${detected} invece di ${locale}`;
+    }
   }
   return null;
 }
@@ -349,6 +360,16 @@ async function main() {
   // `|| Infinity` sarebbe sbagliato: `--limit 0` e' zero, non "nessun limite".
   const rawLimit = flag('limit');
   const LIMIT = rawLimit === null ? Infinity : Number(rawLimit);
+  // Il negativo va rifiutato ESPLICITAMENTE, e non e' pedanteria: `Number('-1')`
+  // e' finito, quindi passerebbe il controllo qui sotto, e `pairs.slice(0, -1)`
+  // non seleziona una coppia — le seleziona TUTTE MENO L'ULTIMA. `--apply
+  // --limit -1`, che e' il modo naturale di scrivere "nessun limite" per chi non
+  // sa che il default e' gia' `Infinity`, trasformerebbe un pilota nella
+  // bonifica completa delle 416 coppie.
+  if (Number.isFinite(LIMIT) && LIMIT < 0) {
+    console.error(`❌ --limit "${rawLimit}" è negativo. Ometti il flag per non avere limite.`);
+    process.exit(2);
+  }
   if (!Number.isFinite(LIMIT) && rawLimit !== null) {
     console.error(`❌ --limit "${rawLimit}" non è un numero.`);
     process.exit(2);
