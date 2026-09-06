@@ -487,8 +487,25 @@ test('a day that stages only the ledger cannot turn a lost push into a permanent
   assert.doesNotMatch(patBranch, /LEDGER_ONLY/, 'a missing PAT must be fatal even on a ledger-only day');
   assert.match(patBranch, /exit 1/, 'and it must be red');
 
-  // L'edizione, invece, resta rossa: i due `exit 1` non sono spariti.
-  assert.equal(commitStep.match(/^ *exit 1$/gm)?.length, 2, 'a lost EDITION must still be red');
+  // Un rifiuto permanente (PAT scaduto/revocato, ref protetto, repo non
+  // raggiungibile) supera il `-z` del guard, arriva al push e si ripete
+  // identico ogni mattina: degradarlo terrebbe lo streak sotto la soglia per
+  // sempre, come il PAT assente. Deve restare rosso PRIMA del ramo degradato,
+  // e per farlo il push deve catturare il proprio output.
+  assert.match(commitStep, /git push "\$REMOTE" "HEAD:\$TARGET" 2>&1 \| tee "\$PUSH_LOG"/,
+    'the push must capture its output, or the cause of the failure cannot be classified');
+  const permanent = commitStep.slice(commitStep.indexOf('\n          done'), commitStep.indexOf('if [ "$LEDGER_ONLY" = true ]'));
+  assert.match(permanent, /grep -qiE '[^']*denied[^']*' "\$PUSH_LOG"/, 'a permanent rejection is recognised on the push output');
+  assert.match(permanent, /::error::/, 'and it is an error');
+  assert.match(permanent, /exit 1/, 'and it is red');
+  assert.doesNotMatch(permanent, /LEDGER_ONLY/, 'a permanent rejection is fatal even on a ledger-only day');
+
+  // L'edizione, invece, resta rossa: dopo il `fi` del ramo degradato la coda
+  // dello step e' ancora l'errore del push perso. Contare gli `exit 1` non lo
+  // proverebbe: il totale resterebbe uguale se il rosso si spostasse altrove.
+  const tail = branches[1].slice(branches[1].indexOf('fi') + 2);
+  assert.match(tail, /::error::push failed after 3 attempts/, 'a lost EDITION must still be red');
+  assert.match(tail, /exit 1/, 'and it must exit non-zero');
 });
 
 test('the crossing verdict is not spent on a run whose ledger never reached main', () => {

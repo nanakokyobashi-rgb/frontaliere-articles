@@ -270,8 +270,9 @@ jobs:
 
           TARGET="${{ github.ref_name }}"
           REMOTE="https://x-access-token:${GITHUB_PAT}@github.com/${{ github.repository }}.git"
+          PUSH_LOG="$(mktemp)"
           for attempt in 1 2 3; do
-            if git push "$REMOTE" "HEAD:$TARGET"; then
+            if git push "$REMOTE" "HEAD:$TARGET" 2>&1 | tee "$PUSH_LOG"; then
               echo "pushed to $TARGET"
               echo "pushed=true" >> "$GITHUB_OUTPUT"
               exit 0
@@ -283,6 +284,23 @@ jobs:
             sleep $((attempt * 3))
             git pull --rebase "$REMOTE" "$TARGET" || { git rebase --abort 2>/dev/null || true; }
           done
+          # Il ramo degradato qui sotto classifica per FORMA del fallimento
+          # (retry esauriti), non per causa — e le due cose non coincidono. Un
+          # PAT scaduto o revocato NON e' assente: passa il `-z` sopra, arriva
+          # al push e prende un rifiuto identico ogni mattina. Degradarlo
+          # riaprirebbe esattamente il buco appena chiuso per il PAT assente:
+          # lo streak nuovo non raggiunge mai `main`, domani si rilegge lo
+          # stesso `k`, la soglia non viene mai attraversata e per tutta la
+          # durata del blackout — quando non c'e' nessun giorno-edizione a
+          # rimettere il rosso — l'allarme non scatta MAI (#885).
+          # Quindi: un rifiuto permanente (credenziale non valida, ref
+          # protetto, repo non raggiungibile) resta rosso anche nel giorno di
+          # soli-registro; solo un fallimento senza segno di rifiuto (rete,
+          # race sul ref) e' transitorio e puo' morire sul runner.
+          if grep -qiE 'denied|403|forbidden|protected branch|not found|authentication failed|invalid username or password|could not read username|support for password authentication' "$PUSH_LOG"; then
+            echo "::error::push rifiutato in modo permanente (credenziale scaduta/revocata, ref protetto o repo non raggiungibile — vedi output sopra): non e' una causa transitoria, si ripeterebbe identica ogni mattina e su un giorno di soli-registro terrebbe lo streak sotto la soglia con l'allarme muto per sempre (#885)"
+            exit 1
+          fi
           if [ "$LEDGER_ONLY" = true ]; then
             echo "::warning::push fallito dopo 3 tentativi, ma in stage c'era solo il registro di degrado: muore sul runner (allarme in ritardo, nessun bollettino perso) invece di rendere rossa ogni mattina del blackout"
             echo "pushed=ledger-lost" >> "$GITHUB_OUTPUT"
