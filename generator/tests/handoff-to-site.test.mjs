@@ -19,6 +19,9 @@ import {
   HANDOFF_VERDICTS,
   MIRROR_LOCKED_MODES,
   mirrorLockedPaths,
+  citedAsMirrorBlocked,
+  siteAbsentPaths,
+  SITE_ABSENT_MODES,
   SITE_REPO,
 } from '../../scripts/ci/handoff-to-site.mjs';
 
@@ -184,6 +187,140 @@ test('nessun residuo quando tutto ciò che è citato scende col mirror', () => {
   // I `blocked-*` non cambiano: la forma misurata 4 su 4 è «un solo file, e vive
   // sul sito», quindi niente residuo e la chiusura resta quella di sempre.
   assert.deepEqual(handoffDecision({ verdict: 'blocked-admin-settings', body: MIRROR_BODY }).residual, []);
+});
+
+// --- #972 item 1: `identical` da solo è troppo largo (funnel-critical) ---
+
+test('una MENZIONE incidentale di un file `identical` non instrada e non chiude', () => {
+  // Il difetto: il discriminante era «un qualunque path in backtick è
+  // `identical` nel manifest». Dei 157 entry `identical`, 47 stanno sotto
+  // `scripts/` e sono i file del ciclo agentico stesso — cioè quelli che OGNI
+  // diagnosi sul loop nomina di passaggio, spesso solo per escluderli. Misurato
+  // il 2026-09-06 su 400 issue: dei 53 commenti di verdetto che citano un path
+  // `identical`, 27 (51%) non affermano affatto un blocco del mirror. Con la
+  // sola appartenenza al manifest ognuno di quei 27 sarebbe stato instradato e,
+  // senza residuo, avrebbe CHIUSO qui la issue di origine.
+  const incidentale = 'Vicolo cieco: ho seguito la catena fino a `scripts/ci/followup-drainer.mjs`, '
+    + 'che però non tocca questo campo. Serve indagine umana.';
+  const d = handoffDecision({ verdict: 'no-root-cause', body: incidentale, lockedPaths: LOCKED });
+  assert.equal(d.handoff, false);
+  assert.equal(d.close, false);
+  assert.match(d.reason, /menzione incidentale/);
+});
+
+test('la corroborazione è in CONGIUNZIONE col manifest, non al suo posto', () => {
+  // Un'affermazione di mirror su un file che il manifest NON dichiara
+  // `identical` resta un vicolo cieco: la prosa non promuove nulla da sola.
+  const d = handoffDecision({
+    verdict: 'no-root-cause',
+    body: 'Il fix vive in `scripts/offload-generated-images-cdn.mjs`, che è identical col sito.',
+    lockedPaths: LOCKED,
+  });
+  assert.equal(d.handoff, false);
+  assert.match(d.reason, /vicolo cieco/);
+});
+
+test('citedAsMirrorBlocked riconosce le 11 forme reali di #316 e non la menzione nuda', () => {
+  // I verdetti reali di #316 scrivono l'affermazione col vocabolario del
+  // manifest: `mode: identical`, `site-ahead`, «sovrascritto al mirror»,
+  // `sitePath`, o lo slug del sito. Tutte e cinque devono valere: legarsi a UNA
+  // sola forma è ciò che rese il nome del repo in prosa un terno al lotto.
+  const p = 'scripts/ci/followup-drainer.mjs';
+  for (const claim of [
+    'è `mode: "identical"` nel manifest',
+    'ed è già `site-ahead`',
+    'scriverlo qui verrebbe sovrascritto al mirror successivo',
+    'il suo `sitePath` è lo stesso',
+    'il gemello vive in valerielinc-ops/frontaliere-si-o-no',
+  ]) {
+    assert.equal(citedAsMirrorBlocked(`Root cause in \`${p}\`, che ${claim}.`, p), true, claim);
+  }
+  assert.equal(citedAsMirrorBlocked(`Ho escluso \`${p}\`: non tocca questo campo.`, p), false);
+  assert.equal(citedAsMirrorBlocked('', p), false);
+});
+
+// --- #972 item 1: consegnare non autorizza a chiudere, su `no-root-cause` ---
+
+test('`no-root-cause` consegna ma NON chiude, nemmeno senza residuo', () => {
+  // È il verdetto ambiguo per costruzione: copre anche il vicolo cieco vero.
+  // Una chiusura sbagliata fa evaporare l'unico portatore della diagnosi e non
+  // ha porta di rientro, mentre il parcheggio ha `needs-human-sweep.yml`.
+  const solo = 'Root cause: `isQueueManaged` in `scripts/ci/followup-drainer.mjs`, `mode: identical`.';
+  const d = handoffDecision({ verdict: 'no-root-cause', body: solo, lockedPaths: LOCKED });
+  assert.equal(d.handoff, true);
+  assert.deepEqual(d.residual, []);
+  assert.equal(d.close, false, 'senza residuo la vecchia regola chiudeva: è la perdita che #972 item 1 nomina');
+});
+
+test('i `blocked-*` continuano a chiudere: la loro diagnosi è esplicita', () => {
+  const d = handoffDecision({ verdict: 'blocked-admin-settings', body: MIRROR_BODY });
+  assert.equal(d.handoff, true);
+  assert.equal(d.close, true);
+});
+
+test('nessun handoff → nessuna chiusura', () => {
+  for (const d of [handoffDecision({}), handoffDecision({ verdict: 'already-fixed', body: MIRROR_BODY })]) {
+    assert.equal(d.close, false);
+  }
+});
+
+// --- #972 item 2: i path di EVIDENZA non sono né spediti né residui ---
+
+test('siteAbsentPaths legge dal manifest i `mode` che dichiarano «di là non esiste»', () => {
+  assert.deepEqual([...SITE_ABSENT_MODES].sort(), ['corpus-only', 'corpus-only-pending', 'not-ported']);
+  const absent = siteAbsentPaths();
+  assert.ok(absent.has('scripts/ci/loop-sync-manifest.json'), 'il manifest stesso non esiste sul sito');
+  assert.equal(absent.has('scripts/ci/followup-drainer.mjs'), false, 'un `identical` non è mai assente');
+  // Manifest illeggibile → nessun filtro, cioè il comportamento di prima: qui il
+  // fallimento sicuro è non togliere niente, non togliere tutto.
+  assert.equal(siteAbsentPaths('/nonexistent/loop-sync-manifest.json').size, 0);
+});
+
+test('il manifest citato come PROVA non entra nel residuo, quindi non parcheggia da solo', () => {
+  // `NRC_MIRROR_BODY` cita `scripts/ci/loop-sync-manifest.json` per provare il
+  // `mode`. È `corpus-only`: non è lavoro che resta qui, è evidenza. Contarlo
+  // faceva parcheggiare la issue per una citazione.
+  const d = handoffDecision({ verdict: 'no-root-cause', body: NRC_MIRROR_BODY, lockedPaths: LOCKED });
+  assert.ok(extractSitePaths(NRC_MIRROR_BODY).includes('scripts/ci/loop-sync-manifest.json'));
+  assert.deepEqual(d.residual, []);
+});
+
+test('nemmeno i `blocked-*` spediscono un path che di là non esiste', () => {
+  // Stessa classe sull'altro ramo, e la misura del 2026-09-06 la mostra viva: 4
+  // delle 9 consegne reali elencavano `scripts/ci/loop-sync-manifest.json` fra i
+  // «path del sito». Un file `corpus-only` non è mai un bersaglio di là.
+  const body = 'Il fix vive in `valerielinc-ops/frontaliere-si-o-no`, in `scripts/lib/ai-models.mjs`. '
+    + 'Prova: `scripts/ci/loop-sync-manifest.json`.';
+  const d = handoffDecision({ verdict: 'blocked-admin-settings', body });
+  assert.equal(d.handoff, true);
+  assert.deepEqual(d.paths, ['scripts/lib/ai-models.mjs']);
+});
+
+test('anche i `blocked-*` spediscono la forma del SITO di un gemello `identical`', () => {
+  // Il 🔴 #1 di #914 era stato applicato al solo ramo `no-root-cause`; la misura
+  // mostra consegne reali (#472, #359) che spedivano la forma CORPUS di un
+  // gemello che sul sito vive altrove.
+  const d = handoffDecision({
+    verdict: 'blocked-admin-settings',
+    body: 'Il fix vive su `valerielinc-ops/frontaliere-si-o-no`: `host/shared/clauseTail.mjs`.',
+    lockedPaths: new Map([['host/shared/clauseTail.mjs', 'build-plugins/shared/clauseTail.mjs']]),
+  });
+  assert.deepEqual(d.paths, ['build-plugins/shared/clauseTail.mjs']);
+});
+
+test('un `blocked-*` che cita SOLO evidenza non è instradabile', () => {
+  // #472: l'unico path in backtick estratto era `generator/scripts/lib/source-url-ledger.mjs`,
+  // `corpus-only` — il bersaglio vero (`…:2129` con prefisso di repo) non è mai
+  // stato catturato. La vecchia regola apriva di là una issue su un file che di
+  // là non esiste, e chiudeva questa. Meglio non consegnare che consegnare a caso.
+  const d = handoffDecision({
+    verdict: 'blocked-admin-settings',
+    body: 'Il target vive su valerielinc-ops/frontaliere-si-o-no; qui il fix è già in '
+      + '`generator/scripts/lib/source-url-ledger.mjs`, che non ha equivalente da editare.',
+  });
+  assert.equal(d.handoff, false);
+  assert.equal(d.close, false);
+  assert.match(d.reason, /inesistenti sul sito/);
 });
 
 test('manifest illeggibile → non si spedisce niente (fallimento sicuro)', () => {

@@ -96,6 +96,43 @@ export const MIRROR_LOCKED_MODES = new Set(['identical']);
 const MANIFEST_PATH = fileURLToPath(new URL('./loop-sync-manifest.json', import.meta.url));
 
 /**
+ * I `mode` che dichiarano «questo file sul sito NON esiste». Un path citato con
+ * uno di questi non e' mai spedibile e non e' mai residuo: e' evidenza.
+ *
+ * `corpus-only-pending` e `not-ported` stanno qui con `corpus-only` perche' la
+ * domanda a cui questa lista risponde e' «esiste di la' OGGI», e per tutti e tre
+ * la risposta e' no; il grado dice se DOVREBBE esistere, che e' un'altra
+ * domanda (vedi l'intestazione del manifest, issue #125).
+ */
+export const SITE_ABSENT_MODES = new Set(['corpus-only', 'corpus-only-pending', 'not-ported']);
+
+/**
+ * I path che il manifest dichiara inesistenti sul sito. Sorgente unica, come
+ * `mirrorLockedPaths()`.
+ *
+ * Serve a togliere dai path CITATI quelli che la diagnosi porta come EVIDENZA e
+ * non come lavoro. Il caso tipico e' `scripts/ci/loop-sync-manifest.json`, cioe'
+ * il manifest stesso: ogni diagnosi di mirror lo cita per provare il `mode`, e
+ * misurato il 2026-09-06 sulle 280 issue con un verdetto compariva fra i «path
+ * del sito» spediti in 4 delle 9 consegne — un file che di la' non c'e'.
+ *
+ * Manifest illeggibile → insieme vuoto, cioe' nessun filtro: qui il fallimento
+ * sicuro e' il comportamento di prima, non una consegna vuota.
+ */
+export function siteAbsentPaths(manifestPath = MANIFEST_PATH) {
+  try {
+    const man = JSON.parse(readFileSync(manifestPath, 'utf8'));
+    const out = new Set();
+    for (const f of man?.files || []) {
+      if (SITE_ABSENT_MODES.has(f?.mode) && f?.path) out.add(f.path);
+    }
+    return out;
+  } catch {
+    return new Set();
+  }
+}
+
+/**
  * I path che il manifest dichiara bloccati dal mirror, come mappa
  * **path del corpus → path del sito**. Letti dalla SORGENTE UNICA
  * (`scripts/ci/loop-sync-manifest.json`), non da un elenco ricopiato qui: se un
@@ -264,7 +301,7 @@ export function citedAsMirrorBlocked(body, path) {
  *
  * @returns {{handoff: boolean, paths: string[], residual: string[], close: boolean, reason: string}}
  */
-export function handoffDecision({ verdict, body, lockedPaths } = {}) {
+export function handoffDecision({ verdict, body, lockedPaths, siteAbsent } = {}) {
   if (!verdict || !HANDOFF_VERDICTS.has(verdict)) {
     return { handoff: false, paths: [], residual: [], close: false, reason: `verdetto non instradabile: ${verdict ?? 'nessuno'}` };
   }
@@ -272,8 +309,9 @@ export function handoffDecision({ verdict, body, lockedPaths } = {}) {
   if (!paths.length) {
     return { handoff: false, paths: [], residual: [], close: false, reason: 'nessun path citato: la diagnosi non è azionabile così com\'è' };
   }
+  const absent = siteAbsent ?? siteAbsentPaths();
+  const locked = lockedPaths ?? mirrorLockedPaths();
   if (verdict === 'no-root-cause') {
-    const locked = lockedPaths ?? mirrorLockedPaths();
     // Il manifest e' una mappa corpus→sito; una `Set` iniettata resta accettata e
     // vale come identita' (il path del sito e' lo stesso del corpus).
     const siteOf = (p) => (typeof locked.get === 'function' ? locked.get(p) : null) || p;
@@ -303,7 +341,11 @@ export function handoffDecision({ verdict, body, lockedPaths } = {}) {
     return {
       handoff: true,
       paths: sitePaths,
-      residual: paths.filter((p) => !locked.has(p)),
+      // Il residuo e' LAVORO che resta qui, quindi ne escono sia i path che il
+      // mirror porta sia quelli che il manifest dichiara inesistenti sul sito:
+      // questi ultimi sono evidenza (#972 item 2), e contarli parcheggiava la
+      // issue per una citazione invece che per lavoro aperto.
+      residual: paths.filter((p) => !locked.has(p) && !absent.has(p)),
       // Consegna sì, chiusura no: vedi il blocco su `close` sopra.
       close: false,
       reason: `diagnosi bloccata dal mirror su ${sitePaths.join(', ')}`,
@@ -313,10 +355,26 @@ export function handoffDecision({ verdict, body, lockedPaths } = {}) {
   if (!String(body || '').includes(siteName)) {
     return { handoff: false, paths: [], residual: [], close: false, reason: 'la diagnosi non nomina il repo del sito' };
   }
-  // I `blocked-*` scrivono gia' i path COME LI VEDE IL SITO (il fixer li ha letti
-  // di la'): niente traduzione, e niente residuo — la forma misurata 4 su 4 e'
-  // «un solo file, e vive sul sito».
-  return { handoff: true, paths, residual: [], close: true, reason: `diagnosi con ${paths.length} path del sito` };
+  // STESSA CLASSE del ramo sopra, e la misura del 2026-09-06 sulle 280 issue con
+  // un verdetto la smentisce nei fatti: delle 9 consegne `blocked-*` reali solo
+  // 2 citano un path solo, e 4 spedivano `scripts/ci/loop-sync-manifest.json`
+  // — evidenza, `corpus-only`, di la' inesistente — mentre altre scrivevano la
+  // forma CORPUS (`generator/scripts/create-article.mjs`) di un gemello che sul
+  // sito vive altrove. La chiusura resta (qui la diagnosi e' esplicita: il file
+  // da cambiare vive di la'), ma l'elenco spedito passa dal manifest come
+  // nell'altro ramo: via l'evidenza, e forma del sito per i gemelli.
+  const shippable = paths.filter((p) => !absent.has(p));
+  const sitePaths = [...new Set(shippable.map((p) => (typeof locked?.get === 'function' ? locked.get(p) : null) || p))];
+  if (!sitePaths.length) {
+    return {
+      handoff: false,
+      paths: [],
+      residual: [],
+      close: false,
+      reason: 'i soli path citati sono dichiarati inesistenti sul sito dal manifest: evidenza, non lavoro instradabile',
+    };
+  }
+  return { handoff: true, paths: sitePaths, residual: [], close: true, reason: `diagnosi con ${sitePaths.length} path del sito` };
 }
 
 /** Titolo della issue sul sito. Pura — e il discriminante sta PRIMO. */
