@@ -111,3 +111,24 @@ test('il prompt di post-merge-followup.yml rimanda al formato invece di inventar
     'post-merge-followup.yml: il prompt non chiede piu\' la struttura `### <n>.`',
   );
 });
+
+test('il prompt non ammette item sotto una barra piu\' bassa di quella che li chiude', () => {
+  // Passo 2 di #953. Il conio e la chiusura devono misurare la stessa cosa:
+  // ammettere un item che nessun check potra' mai dichiarare fatto lo mette in
+  // coda per sempre. La regola vive SOLO nel prompt — `post-merge-followup.yml`
+  // e' `adapted`, quindi non scende col mirror e nessun drift check la porta.
+  assert.match(
+    WORKFLOW,
+    /no-acceptance-condition/,
+    'post-merge-followup.yml: sparito l\'hard-exclude `no-acceptance-condition`. ' +
+      'Senza, un rischio in sola prosa torna a diventare un item che nessuna ' +
+      'evidenza potra\' chiudere (issue #953).',
+  );
+  assert.match(
+    WORKFLOW,
+    /citedTokens\(\)/,
+    'post-merge-followup.yml: la regola non nomina piu\' `citedTokens()`. E\' il ' +
+      'punto della regola: conio e chiusura devono usare LO STESSO oracolo, non ' +
+      'una sua parafrasi in prosa.',
+  );
+});
