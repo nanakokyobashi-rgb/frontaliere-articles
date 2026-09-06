@@ -28,3 +28,14 @@ test('no longer requires login to start with claude as the only reviewer match',
     /startsWith\(github\.event\.review\.user\.login, 'claude'\) &&\s*\n\s*contains\(github\.event\.review\.body, '🔴'\)/,
   );
 });
+
+test('collect-review jq, review-gate and auto-merge-eval use the same bot set', () => {
+  assert.match(src, /select\(\.user\.login\|test\("\^\(claude\|frontaliere-automation\)";"i"\)\)/);
+  const gate = fs.readFileSync(path.join(ROOT, 'scripts/ci/review-gate.mjs'), 'utf8');
+  assert.match(gate, /frontaliere-automation\\?\[bot\\?\]/);
+  const evalSrc = fs.readFileSync(path.join(ROOT, 'scripts/ci/auto-merge-eval.mjs'), 'utf8');
+  assert.match(evalSrc, /frontaliere-automation\\?\[bot\\?\]/);
+  const testsYml = fs.readFileSync(path.join(ROOT, '.github/workflows/tests.yml'), 'utf8');
+  assert.match(testsYml, /test\("\^\(claude\|frontaliere-automation\)";"i"\)/);
+  assert.doesNotMatch(testsYml, /test\("claude";"i"\)/);
+});

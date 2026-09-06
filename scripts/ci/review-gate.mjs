@@ -18,7 +18,8 @@
  *
  * ## Cosa conta come «approvante»
  *
- * L'ULTIMA review di un bot reviewer (`claude`/`claude[bot]`), che contenga
+ * L'ULTIMA review di un bot reviewer (`claude`/`claude[bot]` o
+ * `frontaliere-automation[bot]`), che contenga
  * `## LGTM` e NESSUN finding `🔴 Important` (stessa `REDFLAG_IMPORTANT_RE` che
  * usa il redflag-fixer — una sola regex, nessun drift). Deve stare sulla head
  * corrente; se sta su un commit precedente vale il CARRY-FORWARD: se il
@@ -59,7 +60,7 @@ const RUN_URL = process.env.RUN_URL || '';
 const MARKER = '<!-- REVIEW_GATE_NO_LGTM -->';
 
 /** Login dei bot che possono emettere il verdetto. Deliberatamente stretto. */
-const REVIEWER_LOGIN_RE = /^claude(?:\[bot\])?$/i;
+const REVIEWER_LOGIN_RE = /^(?:claude(?:\[bot\])?|frontaliere-automation\[bot\])$/i;
 
 function gh(args, { json = true } = {}) {
   const out = execFileSync('gh', args, { encoding: 'utf8', maxBuffer: 64 * 1024 * 1024 });

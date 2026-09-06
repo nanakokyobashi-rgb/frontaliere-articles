@@ -402,7 +402,7 @@ function main() {
     return fail(`Impossibile leggere reviews PR #${PR}: ${String(e).slice(0, 160)} — skip.`);
   }
   const botReviews = (reviews || []).filter(
-    (r) => r.user && r.user.type === 'Bot' && /^claude/i.test(r.user.login || '')
+    (r) => r.user && r.user.type === 'Bot' && /^(?:claude(?:\[bot\])?|frontaliere-automation\[bot\])$/i.test(r.user.login || '')
   );
   const lastBot = botReviews.length ? botReviews[botReviews.length - 1] : null;
   const body = lastBot ? (lastBot.body || '') : '';
