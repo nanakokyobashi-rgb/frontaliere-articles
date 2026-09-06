@@ -18,6 +18,11 @@
  *      ancora, o cucita a meta' perche' un campo e' tornato vuoto dalla
  *      cascata. Sono i tre `return {write:false}`: senza di loro lo script
  *      pubblica esattamente il difetto che doveva togliere.
+ *   1-bis. `translationSanityIssue()` — i due modi in cui una ri-traduzione e'
+ *      inutilizzabile SENZA che la guardia lo veda: un taglio a 2000 caratteri
+ *      della sorgente (il tier HuggingFace) che lascia marker bilanciati e zero
+ *      `critical`, e un passthrough dell'italiano, che ha per costruzione gli
+ *      stessi numeri e nessun falso amico.
  *   2. `replaceBodyField()` — sostituire il campo giusto ma corrompere il
  *      resto del file. Il round-trip verifica che riscrivere un campo col
  *      proprio valore sia un no-op byte per byte, e che un valore con
@@ -32,6 +37,8 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import {
   shouldWrite,
+  translationSanityIssue,
+  LENGTH_FLOOR,
   replaceBodyField,
   readBodyField,
   escapeForSingleQuoteTS,
@@ -138,4 +145,81 @@ test('stratify copre piu codici invece di prendere i primi N dello stesso', () =
 test('stratify non inventa coppie quando ce ne sono meno del limite', () => {
   const picked = stratify([{ id: 'a', codes: ['x'] }], 10);
   assert.equal(picked.length, 1);
+});
+
+// ── I due difetti che la guardia non vede ──────────────────────────────────
+
+const IT_LONG = 'Il frontaliere che lavora in Ticino deve dichiarare il reddito in Italia. '.repeat(12);
+const EN_LONG = 'The cross-border worker employed in Ticino must declare the income in Italy. '.repeat(12);
+
+test('translationSanityIssue accetta una ri-traduzione di lunghezza normale', () => {
+  assert.equal(translationSanityIssue({
+    oldSections: { body1: EN_LONG },
+    newSections: { body1: EN_LONG.replace('must', 'has to') },
+    italianSections: { body1: IT_LONG },
+    locale: 'en',
+  }), null);
+});
+
+test('translationSanityIssue rifiuta la ri-traduzione tagliata rispetto alla pubblicata', () => {
+  // La forma del clip a 2000 caratteri: il testo finisce a fine frase, quindi
+  // i marker sono bilanciati e `detectTruncation` non ha niente da dire.
+  const r = translationSanityIssue({
+    oldSections: { body1: EN_LONG },
+    newSections: { body1: EN_LONG.slice(0, Math.floor(EN_LONG.length * 0.5)) },
+    italianSections: { body1: IT_LONG },
+    locale: 'en',
+  });
+  assert.match(r, /^troncata: body1 /);
+  assert.match(r, /vs pubblicata/);
+});
+
+test('translationSanityIssue usa l italiano quando il campo pubblicato manca', () => {
+  const r = translationSanityIssue({
+    oldSections: {},
+    newSections: { body1: EN_LONG.slice(0, Math.floor(IT_LONG.length * (LENGTH_FLOOR.VS_IT / 2))) },
+    italianSections: { body1: IT_LONG },
+    locale: 'en',
+  });
+  assert.match(r, /^troncata: body1 /);
+  assert.match(r, /vs italiano/);
+});
+
+test('translationSanityIssue non giudica la lunghezza di un campo cortissimo', () => {
+  // Sotto il pavimento la variazione naturale fra due traduzioni della stessa
+  // frase supera qualunque soglia: un rifiuto li' sarebbe rumore.
+  assert.equal(translationSanityIssue({
+    oldSections: { body1: 'Cross-border commuters pay taxes in Italy too.' },
+    newSections: { body1: 'Frontier workers also pay tax in Italy.' },
+    italianSections: { body1: 'I frontalieri pagano le imposte anche in Italia.' },
+    locale: 'en',
+  }), null);
+});
+
+test('translationSanityIssue rifiuta il passthrough dell italiano', () => {
+  // Stessi numeri e nessun falso amico: la guardia lo accetta con zero
+  // `critical`, ed e' esattamente il caso in cui si pubblicherebbe l'italiano
+  // sulla pagina inglese.
+  const r = translationSanityIssue({
+    oldSections: { body1: EN_LONG },
+    newSections: { body1: IT_LONG },
+    italianSections: { body1: IT_LONG },
+    locale: 'en',
+  });
+  // Il rilevatore dice 'de' su questo campione, non 'it': cio' che conta e' che
+  // NON dica 'en', cioe' che il passthrough non venga scritto sulla pagina
+  // inglese. Il verdetto e' un rifiuto in ogni caso.
+  assert.match(r, /^lingua-sbagliata: /);
+  assert.doesNotMatch(r, /^lingua-sbagliata: en /);
+});
+
+test('shouldWrite rifiuta quando la sanity check ha una ragione, anche con zero critical', () => {
+  const v = shouldWrite({
+    oldCodes: ['truncated-bold'],
+    newCodes: [],
+    missingField: null,
+    sanity: 'troncata: body1 900/3000 car. (0.30 < 0.7 vs pubblicata)',
+  });
+  assert.equal(v.write, false);
+  assert.match(v.reason, /^troncata: /);
 });

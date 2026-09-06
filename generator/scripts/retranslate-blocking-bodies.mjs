@@ -33,7 +33,19 @@
  *      `critical` — una ri-traduzione che ri-fallisce si scarta e la pagina
  *      pubblicata resta com'e';
  *   2. si scrive SOLO se la vecchia era bloccante — mai "migliorare" una
- *      pagina che la guardia gia' accetta.
+ *      pagina che la guardia gia' accetta;
+ *   3. si scrive SOLO se il testo nuovo supera i due controlli che la guardia
+ *      NON fa (`translationSanityIssue`): non e' drasticamente piu' corto del
+ *      body pubblicato — il tier HuggingFace tronca la SORGENTE a 2000
+ *      caratteri e il taglio esce con marker bilanciati e zero `critical` — e
+ *      non e' un passthrough dell'italiano, che per costruzione ha gli stessi
+ *      numeri e nessun falso amico.
+ *
+ * E dalla regola di forma: l'uscita della cascata passa da `sanitizeBodyText()`
+ * come nel percorso di produzione. Le graffe spaiate dell'MT (la chiusura mal
+ * fatta delle virgolette basse tedesche) non sono nel vocabolario di
+ * `runFactualityGates`: se il post-processing non fosse lo stesso, "stessa
+ * cascata degli articoli nuovi" non sarebbe "stesso percorso di scrittura".
  *
  * Se un campo torna vuoto dalla cascata (motore giu', sentinella nav-link
  * mangled, marker `Null` di fallimento) l'articolo si SALTA per intero: in
@@ -76,6 +88,9 @@ import { translateFieldFreeMt } from './lib/article-free-mt.mjs';
 import { freeTranslateWithRetry, balanceMarkdownMarkers } from './lib/free-translate.mjs';
 import { runFactualityGates } from './lib/article-factuality-gates.mjs';
 import { unescapeTsString } from './lib/unescape-ts-string.mjs';
+import { escapeForSingleQuoteTS } from './lib/article-meta-block.mjs';
+import { sanitizeBodyText } from './lib/article-sanitizers.mjs';
+import { detectLanguage } from './lib/detect-language.mjs';
 import { sanitizeText } from '../../scripts/lib/sanitize-control-chars.mjs';
 import { reportStrippedControlChars } from './lib/control-char-write-report.mjs';
 
@@ -131,10 +146,12 @@ export function readBodyField(src, id, field) {
     : unescapeTsString(raw, { '`': '`', $: '$', '\\': '\\' });
 }
 
-/** Stesso escaping di `buildBodyFile()` in create-article.mjs. */
-export function escapeForSingleQuoteTS(s) {
-  return String(s || '').replace(/\\/g, '\\\\').replace(/'/g, "\\'").replace(/\n/g, '\\n').replace(/\r/g, '');
-}
+// `escapeForSingleQuoteTS` NON si ridichiara qui: la copia canonica sta in
+// `lib/article-meta-block.mjs` accanto al suo inverso, perche' le copie private
+// dello scrittore e del lettore erano gia' divergute una volta. Ri-esportata
+// perche' il test la usa per costruire le fixture con lo stesso escape dello
+// scrittore vero.
+export { escapeForSingleQuoteTS };
 
 /**
  * Sostituisce UN campo body nel sorgente, lasciando intatto tutto il resto del
@@ -190,11 +207,87 @@ export function criticalCodes(gateResult) {
  * E' il cuore del vincolo "mai peggiorare, mai riscrivere a mano", isolato in
  * una funzione pura proprio per essere testabile senza toccare la rete.
  */
-export function shouldWrite({ oldCodes, newCodes, missingField }) {
+export function shouldWrite({ oldCodes, newCodes, missingField, sanity = null }) {
   if (missingField) return { write: false, reason: 'campo-vuoto-dalla-cascata' };
   if (oldCodes.length === 0) return { write: false, reason: 'vecchia-gia-pulita' };
   if (newCodes.length > 0) return { write: false, reason: `ri-fallita: ${newCodes.join(',')}` };
+  if (sanity) return { write: false, reason: sanity };
   return { write: true, reason: 'pulita' };
+}
+
+/**
+ * Il minimo di caratteri sotto cui il confronto di lunghezza non dice niente:
+ * su un campo cortissimo la variazione naturale fra due traduzioni della stessa
+ * frase supera qualunque soglia.
+ */
+export const LENGTH_FLOOR_MIN_CHARS = 400;
+
+/**
+ * Soglie del pavimento di lunghezza, come frazione del riferimento.
+ *
+ * `VS_OLD` confronta la ri-traduzione col body PUBBLICATO, cioe' con un testo
+ * nella STESSA lingua e dalla STESSA sorgente italiana: due traduzioni sane
+ * dello stesso originale stanno entro pochi punti percentuali, quindi 0,7 e'
+ * larghissimo e scatta solo su un taglio vero. E' il motivo per cui qui si puo'
+ * mettere un pavimento dove sulle traduzioni NUOVE non si poteva: li' il
+ * riferimento era l'italiano (rapporto mediano 0,54, code sovrapposte, 17,7% di
+ * falsi rifiuti misurati), qui c'e' il testo vecchio.
+ *
+ * `VS_IT` e' il ripiego per un campo che nel file di destinazione non esiste o
+ * non e' leggibile: senza il vecchio resta solo l'italiano, e fra lingue
+ * diverse il rapporto oscilla molto di piu' — 0,4 e' un taglio grossolano che
+ * intercetta il clip a 2000 caratteri del tier HuggingFace
+ * (`lib/free-translate.mjs`, `clean.slice(0, 2000)`) senza pretendere di
+ * misurare la fedelta'.
+ */
+export const LENGTH_FLOOR = { VS_OLD: 0.7, VS_IT: 0.4 };
+
+/**
+ * Lunghezza minima di testo sotto cui `detectLanguage` non ha segnale — stessa
+ * soglia di `isWrongLocale()` in `batch-add-faq-to-articles.mjs` e
+ * `fix-faq-locales.mjs`, che gattano la scrittura per-locale allo stesso modo.
+ */
+export const LANG_CHECK_MIN_CHARS = 50;
+
+/**
+ * I due modi in cui una ri-traduzione puo' essere INUTILIZZABILE senza che la
+ * guardia se ne accorga. Nessuno dei due e' nel vocabolario di
+ * `runFactualityGates`, che sul ramo non-italiano fa solo aggiudicazione
+ * numerica, coerenza dei numeri e falsi amici:
+ *
+ *   1. TRONCAMENTO. Il tier HuggingFace tronca la SORGENTE a 2000 caratteri
+ *      prima di tradurla, e il suo guard confronta l'output col testo intero,
+ *      quindi non somiglia mai e passa. `detectTruncation` vede solo il testo
+ *      tradotto: dopo un taglio a fine frase i marker restano bilanciati e i
+ *      `critical` sono zero. Risultato senza questo controllo: una pagina
+ *      pubblicata sostituita da una versione priva di tutto cio' che seguiva i
+ *      primi 2000 caratteri dell'italiano, senza un errore.
+ *   2. PASSTHROUGH DELL'ITALIANO. Un italiano ricopiato ha per costruzione gli
+ *      stessi numeri e nessun falso amico: zero `critical`, si scriverebbe.
+ *
+ * Ritorna `null` se il testo e' scrivibile, altrimenti la ragione del rifiuto
+ * (che il report conta come tale, invece di lasciarla nel secchio "altro").
+ */
+export function translationSanityIssue({ oldSections, newSections, italianSections, locale }) {
+  for (const [f, text] of Object.entries(newSections)) {
+    const ref = oldSections?.[f] || null;
+    const refText = ref || italianSections?.[f] || '';
+    if (refText.length < LENGTH_FLOOR_MIN_CHARS) continue;
+    const floor = ref ? LENGTH_FLOOR.VS_OLD : LENGTH_FLOOR.VS_IT;
+    const ratio = text.length / refText.length;
+    if (ratio < floor) {
+      return `troncata: ${f} ${text.length}/${refText.length} car. `
+        + `(${ratio.toFixed(2)} < ${floor} vs ${ref ? 'pubblicata' : 'italiano'})`;
+    }
+  }
+  const allText = Object.values(newSections).join(' ');
+  if (allText.length >= LANG_CHECK_MIN_CHARS) {
+    // `locale` come fallback: un testo su cui il rilevatore non ha segnale non
+    // deve diventare un rifiuto. Stessa forma di `isWrongLocale()`.
+    const detected = detectLanguage(allText, locale);
+    if (detected !== locale) return `lingua-sbagliata: ${detected} invece di ${locale}`;
+  }
+  return null;
 }
 
 /** Coppie bloccanti dall'audit, con i codici `critical` di ciascuna. */
@@ -342,14 +435,20 @@ async function processPair(pair, { CONTENT_ROOT, APPLY }) {
       balanceMarkdown: balanceMarkdownMarkers,
     });
     if (!out) { missingField = f; break; }
-    newSections[f] = out;
+    // Stesso post-processing del percorso di produzione (`create-article.mjs`
+    // lo applica alla stessa identica uscita di `translateFieldFreeMt`): la
+    // cascata e' la stessa, e da qui in poi lo e' anche cio' che le succede.
+    newSections[f] = sanitizeBodyText(out);
   }
 
   const newCodes = missingField
     ? []
     : criticalCodes(runFactualityGates({ sections: newSections, locale: pair.locale, italianSections }));
 
-  const verdict = shouldWrite({ oldCodes, newCodes, missingField });
+  const sanity = missingField
+    ? null
+    : translationSanityIssue({ oldSections, newSections, italianSections, locale: pair.locale });
+  const verdict = shouldWrite({ oldCodes, newCodes, missingField, sanity });
   const row = { ...base, oldCodes, newCodes, missingField, written: false, reason: verdict.reason };
   if (!verdict.write || !APPLY) return row;
 
@@ -376,12 +475,16 @@ function report(results, { APPLY, AS_JSON, total, OUT }) {
   const clean = results.filter((r) => r.reason === 'pulita').length;
   const refailed = results.filter((r) => r.reason.startsWith('ri-fallita')).length;
   const empty = results.filter((r) => r.reason === 'campo-vuoto-dalla-cascata').length;
+  const truncated = results.filter((r) => r.reason.startsWith('troncata')).length;
+  const wrongLang = results.filter((r) => r.reason.startsWith('lingua-sbagliata')).length;
 
   console.log(`\nmodalità: ${APPLY ? 'APPLY (scrive)' : 'DRY-RUN (non scrive)'} — coppie trattate: ${results.length}/${total}`);
   console.log(`  ri-traduzione pulita : ${clean}${APPLY ? ` (scritte ${written})` : ''}`);
   console.log(`  ri-fallita           : ${refailed}`);
   console.log(`  campo vuoto (skip)   : ${empty}`);
-  console.log(`  altro                : ${results.length - clean - refailed - empty}`);
+  console.log(`  troncata (skip)      : ${truncated}`);
+  console.log(`  lingua sbagliata     : ${wrongLang}`);
+  console.log(`  altro                : ${results.length - clean - refailed - empty - truncated - wrongLang}`);
 
   // Per-codice: e' la misura che decide se un codice va escluso dal lotto.
   const perCode = new Map();
