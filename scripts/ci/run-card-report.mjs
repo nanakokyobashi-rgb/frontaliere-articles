@@ -16,10 +16,18 @@
  * Questo lettore parte dall'altro capo: `create-article.mjs` scrive una card
  * (`generator/scripts/lib/run-card.mjs`) nel momento in cui l'evento accade, e
  * l'artifact di diagnostica — `if: always()`, gia' esistente — la porta fuori.
- * Qui si scaricano le card, non i log: ~0,5 KB per sezione contro i 300-500 KB
- * di un log di `generate-article.yml`, cioe' tre ordini di grandezza. E il
- * riepilogo porta sempre `runsWithEchoes` accanto ai flip, cosi' «non e'
- * successo» e «non l'ho visto» restano due numeri diversi.
+ * Qui si scaricano gli artifact di diagnostica invece dei log. La CARD pesa
+ * ~0,5 KB per sezione contro i 300-500 KB di un log di `generate-article.yml`,
+ * ma il preventivo onesto e' quello dell'ARTIFACT: `gh run download -p` filtra
+ * i nomi degli artifact, non i file, e su una run patologica la stessa cartella
+ * porta stack del CDP, `resources.log` e i diagnostic report di Node (#924
+ * item 6). Percio' il totale scaricato si MISURA e si stampa, c'e' un tetto
+ * (`DEFAULT_MAX_BYTES`) e ogni run viene cancellata appena letta.
+ *
+ * E il riepilogo porta sempre `runsWithEchoes` accanto ai flip, e la
+ * scomposizione delle run senza card accanto al totale, cosi' «non e'
+ * successo», «non l'ho visto» e «e' morta prima di scriverlo» restano tre
+ * numeri diversi.
  *
  * Zero rete verso i provider, zero Claude, zero quota: solo `gh` e file JSON.
  * Nessuna dipendenza npm — gira anche prima di `npm ci`.
@@ -31,11 +39,11 @@
  */
 
 import { execFileSync } from 'node:child_process';
-import { mkdtempSync, readdirSync, readFileSync, statSync } from 'node:fs';
+import { mkdtempSync, readdirSync, readFileSync, rmSync, statSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 
-import { summariseRunCards } from '../../generator/scripts/lib/run-card.mjs';
+import { RUN_CARD_INSTRUMENTED_SINCE, summariseRunCards } from '../../generator/scripts/lib/run-card.mjs';
 
 /** Esplicito e non dedotto dal cwd: questo script si lancia anche da un worktree. */
 export const DEFAULT_REPO = process.env.RUN_CARD_REPO || 'nanakokyobashi-rgb/frontaliere-articles';
@@ -56,7 +64,8 @@ export const DEFAULT_REPO = process.env.RUN_CARD_REPO || 'nanakokyobashi-rgb/fro
  * stragrande maggioranza delle run quelle sono assenti per costruzione (il log
  * del tentativo viene rimosso quando l'articolo c'e'), quindi in pratica
  * l'artifact e' la card; ma quando una run ha lasciato uno stack o un report di
- * Node, quel peso si paga.
+ * Node, quel peso si paga — misurato, con un tetto e senza accumulo su disco,
+ * vedi `DEFAULT_MAX_BYTES`.
  */
 export const ARTIFACT_GLOB = 'generate-article-diagnostics-*';
 
@@ -93,6 +102,97 @@ export function classifyDownloadFailure(err) {
   return { kind: 'error', reason: firstLine.slice(0, 160) };
 }
 
+/**
+ * ── «SENZA CARD» NON E' UN NUMERO SOLO (#924 item 4) ───────────────────────
+ *
+ * Una run puo' non avere card per tre ragioni che non hanno niente in comune,
+ * e sommarle rifa' — un livello piu' su — lo zero muto che la card esiste per
+ * togliere:
+ *
+ *   `pre-instrumentation`  e' nata prima del merge della strumentazione
+ *                          (`RUN_CARD_INSTRUMENTED_SINCE`). Non poteva
+ *                          scriverne una. E' storia, non un difetto.
+ *   `pending`              non e' ancora `completed`: l'artifact viene
+ *                          caricato a fine job, quindi qui non c'e' ancora
+ *                          niente da guardare. E' latenza, non un dato.
+ *   `silent`               strumentata, finita, e senza card. Il processo e'
+ *                          morto prima di `finalizeRunReport()` — tipicamente
+ *                          sotto il `--kill-after` del `timeout` in
+ *                          `generate-article.yml`. QUESTA e' la popolazione
+ *                          che #625 vuole misurare, ed e' anche la prova che
+ *                          il campione delle card e' condizionato all'arrivare
+ *                          in fondo: finche' questo numero non e' zero, ogni
+ *                          conteggio sulle card e' onesto su META' della
+ *                          popolazione, e va detto accanto ai numeri.
+ *
+ * @param {{createdAt?:string,status?:string}} run una riga di `gh run list`
+ * @param {{since?:string}} [opts]
+ * @returns {{kind:'pre-instrumentation'|'pending'|'silent',reason:string}}
+ */
+export function classifyCardlessRun(run, opts = {}) {
+  const since = opts.since || process.env.RUN_CARD_SINCE || RUN_CARD_INSTRUMENTED_SINCE;
+  const status = run && run.status ? String(run.status) : '';
+  // `completed` e' l'unico stato in cui l'artifact e' gia' stato caricato. Uno
+  // stato SCONOSCIUTO (un valore nuovo di GitHub) non viene trattato come
+  // completato: sarebbe un `silent` inventato, cioe' un allarme dove c'e' solo
+  // ignoranza.
+  if (status && status !== 'completed') return { kind: 'pending', reason: `run ${status}` };
+  const createdAt = run && run.createdAt ? Date.parse(run.createdAt) : NaN;
+  const sinceMs = Date.parse(since);
+  // Senza data leggibile non si puo' dire da che parte sta: la si conta come
+  // pre-strumentazione, che e' la lettura che NON gonfia il numero allarmante.
+  if (!Number.isFinite(createdAt) || !Number.isFinite(sinceMs)) {
+    return { kind: 'pre-instrumentation', reason: 'data della run non leggibile' };
+  }
+  if (createdAt < sinceMs) return { kind: 'pre-instrumentation', reason: `precedente a ${since}` };
+  return { kind: 'silent', reason: 'strumentata e completata, ma nessuna card scritta' };
+}
+
+/**
+ * ── IL TETTO SUL DOWNLOAD, E PERCHE' NON E' UN FILTRO (#924 item 6) ────────
+ *
+ * `gh run download -p` filtra i NOMI degli artifact, non i file: si scarica
+ * `generate-article-diagnostics-*` per intero, e su una run patologica quella
+ * cartella contiene anche gli stack del CDP, `resources.log` e i diagnostic
+ * report di Node — cioe' ordini di grandezza sopra i ~0,5 KB della card. Sono
+ * proprio le run che il campionatore va a cercare, quindi il preventivo «195-479
+ * byte» vale la card e non l'artifact.
+ *
+ * Due conseguenze, entrambe gestite qui e non a parole:
+ *   1. la cartella di ogni run viene LETTA E CANCELLATA subito (streaming),
+ *      quindi il picco su disco e' un artifact solo, non 400;
+ *   2. c'e' un tetto sul totale scaricato, e quando morde le run non esaminate
+ *      vengono CONTATE e stampate. Un tetto che tronca in silenzio sarebbe
+ *      indistinguibile da «il fenomeno non c'e'».
+ */
+export const DEFAULT_MAX_BYTES = 256 * 1024 * 1024;
+
+/** Byte occupati da `dir`, ricorsivamente. Usata per il preventivo REALE. */
+export function dirBytes(dir) {
+  let total = 0;
+  let entries;
+  try { entries = readdirSync(dir, { withFileTypes: true }); } catch { return 0; }
+  for (const e of entries) {
+    const p = path.join(dir, e.name);
+    if (e.isDirectory()) total += dirBytes(p);
+    else {
+      const st = statSync(p, { throwIfNoEntry: false });
+      if (st) total += st.size;
+    }
+  }
+  return total;
+}
+
+/** Byte in forma leggibile, per non stampare `48234567`. */
+export function humanBytes(n) {
+  if (!Number.isFinite(n)) return '?';
+  const u = ['B', 'KB', 'MB', 'GB'];
+  let v = n;
+  let i = 0;
+  while (v >= 1024 && i < u.length - 1) { v /= 1024; i += 1; }
+  return `${i === 0 ? v : v.toFixed(1)} ${u[i]}`;
+}
+
 function gh(args, opts = {}) {
   return execFileSync('gh', args, { encoding: 'utf8', maxBuffer: 64 * 1024 * 1024, ...opts });
 }
@@ -124,12 +224,49 @@ export function readCards(dir) {
   return { cards, unreadable };
 }
 
-function formatSummary(s, meta) {
+/**
+ * Il riepilogo leggibile. Esportata per essere PINNATA: la scomposizione delle
+ * run senza card e l'avviso sul campione condizionato sono l'esito di #924
+ * item 4, e un riepilogo che smette di stamparli tornerebbe a essere un
+ * numero solo senza far fallire niente.
+ */
+export function formatSummary(s, meta) {
   const lines = [];
+  const cardless = meta.cardless || {};
   lines.push(
-    `run esaminate: ${meta.runs}  ·  card lette: ${s.cards}  ·  run senza artifact: ${meta.missing}`
+    `run esaminate: ${meta.runs}  ·  card lette: ${s.cards}  ·  run senza card: ${meta.missing}`
     + `  ·  download falliti: ${meta.downloadErrors || 0}  ·  card illeggibili: ${meta.unreadable}`,
   );
+  // «Senza card» si scompone, o «uccisa dal timeout» e «nata prima della
+  // strumentazione» tornano a essere lo stesso numero (#924 item 4).
+  if (meta.missing) {
+    lines.push(
+      `      di cui  pre-strumentazione: ${cardless['pre-instrumentation'] || 0}`
+      + `  ·  run non ancora completate: ${cardless.pending || 0}`
+      + `  ·  STRUMENTATE MA MUTE: ${cardless.silent || 0}`,
+    );
+  }
+  if (cardless.silent) {
+    const denom = cardless.silent + s.cards;
+    const pct = denom ? ((s.cards / denom) * 100).toFixed(1) : '?';
+    lines.push(
+      `⚠️  ${cardless.silent} run completate DOPO il merge della strumentazione non hanno scritto nessuna card:`,
+    );
+    lines.push('      morte prima di `finalizeRunReport()` (kill duro del `timeout`, SIGKILL, crash del runner).');
+    lines.push(
+      `      Il campione delle card e' quindi condizionato ad arrivare in fondo: ${pct}% delle run strumentate e`
+      + " completate. Se le cascate finiscono male piu' spesso della media, i conteggi sotto le sottostimano.",
+    );
+  }
+  if (meta.budgetSkipped) {
+    lines.push(
+      `⚠️  ${meta.budgetSkipped} run NON scaricate: tetto di ${humanBytes(meta.maxBytes)} raggiunto`
+      + ' (`--max-bytes` per alzarlo). Anche questo rende i conteggi un LIMITE INFERIORE.',
+    );
+  }
+  if (meta.bytes != null) {
+    lines.push(`      scaricati ${humanBytes(meta.bytes)} in totale — artifact interi, non solo le card (vedi DEFAULT_MAX_BYTES).`);
+  }
   // I download falliti NON sono «run senza card»: sono run che nessuno ha
   // guardato. Vanno stampati PRIMA dei numeri, perche' ogni zero qui sotto si
   // legge solo con questo accanto (#924 item 3).
@@ -160,11 +297,11 @@ function formatSummary(s, meta) {
     lines.push(`      ⚠️  ${s.cascadesWithoutTally} cascate senza \`share\` numerica: card di un produttore precedente, escluse dai due conteggi sopra.`);
   }
   if (!s.echoesSubtracted) {
-    if (meta.downloadErrors || s.cards === 0) {
+    if (meta.downloadErrors || meta.budgetSkipped || (meta.cardless && meta.cardless.silent) || s.cards === 0) {
       // Qui lo zero NON e' un'affermazione sul fenomeno: e' l'assenza di
       // osservazione. Dirlo e' l'intero motivo per cui questo strumento esiste.
       lines.push('      → zero campioni utili E lo strumento non ha guardato tutto: questa finestra non dice NIENTE sulla soglia.');
-      lines.push('        Riparare prima i download falliti (token, retention, rate-limit), poi rileggere.');
+      lines.push('        Riparare prima cio\' che ha impedito di guardare (download falliti, tetto sui byte, run mute), poi rileggere.');
     } else {
       lines.push('      → zero campioni utili: la soglia `>` contro `>=` NON e\' misurabile su questa finestra.');
       lines.push('        Non e\' «la soglia non cambierebbe niente»: e\' «il fenomeno non c\'e\'». Allargare --runs o riprovare dopo una notte di quota vera con un provider in cooldown.');
@@ -183,15 +320,23 @@ function formatSummary(s, meta) {
 async function main() {
   const argv = process.argv.slice(2);
   const asJson = argv.includes('--json');
+  const keep = argv.includes('--keep');
   const dIdx = argv.indexOf('--dir');
   const repoIdx = argv.indexOf('--repo');
+  const bIdx = argv.indexOf('--max-bytes');
   const repo = repoIdx >= 0 ? argv[repoIdx + 1] : DEFAULT_REPO;
+  const maxBytes = bIdx >= 0 ? Number(argv[bIdx + 1]) || DEFAULT_MAX_BYTES : DEFAULT_MAX_BYTES;
 
   let dir;
+  let scratch = null;
   let runs = 0;
-  let missing = 0;
   let downloadErrors = 0;
+  let budgetSkipped = 0;
+  let bytes = 0;
   const downloadErrorReasons = new Map();
+  const cardless = { 'pre-instrumentation': 0, pending: 0, silent: 0 };
+  const cards = [];
+  let unreadable = 0;
 
   if (dIdx >= 0) {
     dir = argv[dIdx + 1];
@@ -205,51 +350,92 @@ async function main() {
       process.exit(2);
     }
     runs = -1;
+    const read = readCards(dir);
+    cards.push(...read.cards);
+    unreadable = read.unreadable;
   } else {
     const rIdx = argv.indexOf('--runs');
     const limit = rIdx >= 0 ? Number(argv[rIdx + 1]) || 40 : 40;
     dir = mkdtempSync(path.join(tmpdir(), 'run-cards-'));
-    const ids = JSON.parse(
-      gh(['run', 'list', '--repo', repo, '-w', 'generate-article.yml', '-L', String(limit), '--json', 'databaseId']),
-    ).map((r) => r.databaseId);
-    runs = ids.length;
-    for (const id of ids) {
+    scratch = dir;
+    // `status` e `createdAt` accanto all'id: senza, una run senza card non e'
+    // classificabile e ricade nell'unico secchio indistinto che #924 item 4
+    // contesta. Costano zero chiamate in piu' — sono campi della stessa lista.
+    const listed = JSON.parse(
+      gh(['run', 'list', '--repo', repo, '-w', 'generate-article.yml', '-L', String(limit), '--json', 'databaseId,createdAt,status']),
+    );
+    runs = listed.length;
+    for (const run of listed) {
+      const id = String(run.databaseId);
+      const target = path.join(dir, id);
+      // Il tetto si controlla PRIMA di scaricare, e le run saltate si contano:
+      // troncare in silenzio darebbe un campione piu' piccolo del dichiarato.
+      if (bytes >= maxBytes) { budgetSkipped += 1; continue; }
+      let downloaded = true;
       try {
         // Pattern sul NOME dell'artifact — vedi ARTIFACT_GLOB. La selezione
         // delle card avviene dopo, su disco, con collectCardFiles().
-        gh(['run', 'download', String(id), '--repo', repo, '-p', ARTIFACT_GLOB, '-D', path.join(dir, String(id))], { stdio: 'pipe' });
+        gh(['run', 'download', id, '--repo', repo, '-p', ARTIFACT_GLOB, '-D', target], { stdio: 'pipe' });
       } catch (e) {
+        downloaded = false;
         // Vedi classifyDownloadFailure: «questa run non ha l'artifact» e' un
-        // dato (le run precedenti al merge della strumentazione stanno tutte
-        // li'), un 403/rate-limit/rete e' un guasto dello strumento e non puo'
+        // dato, un 403/rate-limit/rete e' un guasto dello strumento e non puo'
         // finire nello stesso numero.
         const { kind, reason } = classifyDownloadFailure(e);
-        if (kind === 'no-artifact') missing += 1;
-        else {
+        if (kind === 'no-artifact') {
+          const c = classifyCardlessRun(run);
+          cardless[c.kind] += 1;
+        } else {
           downloadErrors += 1;
           downloadErrorReasons.set(reason, (downloadErrorReasons.get(reason) || 0) + 1);
         }
       }
+      if (downloaded) {
+        bytes += dirBytes(target);
+        const read = readCards(target);
+        // L'ARTIFACT C'E' MA LA CARD NO — e prima questa run non finiva in
+        // NESSUN secchio: non fra le card, non fra le mancanti. Spariva dal
+        // denominatore senza lasciare traccia, che e' la forma peggiore dello
+        // zero muto (#924 item 4). Una run uccisa dal `--kill-after` del
+        // `timeout` carica l'artifact (`if: always()`) senza la card, quindi
+        // e' proprio la popolazione interessante a essere invisibile.
+        if (!read.cards.length) {
+          const c = classifyCardlessRun(run);
+          cardless[c.kind] += 1;
+        }
+        cards.push(...read.cards);
+        unreadable += read.unreadable;
+      }
+      // Letta e buttata: il picco su disco resta un artifact solo anche su
+      // `--runs 400` (#924 item 6).
+      if (!keep) rmSync(target, { recursive: true, force: true });
     }
   }
 
-  const { cards, unreadable } = readCards(dir);
   const summary = summariseRunCards(cards);
+  const missing = cardless['pre-instrumentation'] + cardless.pending + cardless.silent;
   const meta = {
     runs: runs < 0 ? cards.length : runs,
     missing,
+    cardless,
     downloadErrors,
     downloadErrorReasons: Object.fromEntries(downloadErrorReasons),
+    budgetSkipped,
+    maxBytes,
+    bytes: scratch ? bytes : null,
     unreadable,
     dir,
   };
   if (asJson) console.log(JSON.stringify({ meta, summary }, null, 2));
   else console.log(formatSummary(summary, meta));
+  // La cartella di scratch e' vuota (ogni run viene cancellata subito): resta
+  // da togliere il guscio, o `--runs 400` lascia 400 directory in `$TMPDIR`.
+  if (scratch && !keep) rmSync(scratch, { recursive: true, force: true });
   // Uscire 0 dopo aver letto zero card perche' `gh` non ha funzionato e'
   // l'ultima forma dello stesso difetto: un verde che significa «non ho
-  // guardato». Con almeno una card lette il report e' parziale ma dice quanto,
+  // guardato». Con almeno una card letta il report e' parziale ma dice quanto,
   // e non deve rompere chi lo invoca.
-  if (meta.downloadErrors && cards.length === 0) process.exitCode = 1;
+  if ((downloadErrors || budgetSkipped) && cards.length === 0) process.exitCode = 1;
 }
 
 if (process.argv[1] && process.argv[1].endsWith('run-card-report.mjs')) main();
