@@ -99,12 +99,20 @@ const MANIFEST_PATH = fileURLToPath(new URL('./loop-sync-manifest.json', import.
  * I `mode` che dichiarano «questo file sul sito NON esiste». Un path citato con
  * uno di questi non e' mai spedibile e non e' mai residuo: e' evidenza.
  *
- * `corpus-only-pending` e `not-ported` stanno qui con `corpus-only` perche' la
- * domanda a cui questa lista risponde e' «esiste di la' OGGI», e per tutti e tre
- * la risposta e' no; il grado dice se DOVREBBE esistere, che e' un'altra
- * domanda (vedi l'intestazione del manifest, issue #125).
+ * `corpus-only-pending` sta qui con `corpus-only` perche' la domanda a cui questa
+ * lista risponde e' «esiste di la' OGGI», e per entrambi la risposta e' no; il
+ * grado dice se DOVREBBE esistere, che e' un'altra domanda (vedi l'intestazione
+ * del manifest, issue #125).
+ *
+ * `not-ported` NON sta qui: il manifest lo definisce all'opposto — «il sito ce
+ * l'ha, qui deliberatamente no». Metterlo fra gli assenti filtrava via proprio il
+ * caso canonico di hand-off, e in silenzio: il solo entry `not-ported` e'
+ * `scripts/lib/control-char-publish-gate.mjs`, il gate dei control character che
+ * di la' esiste ed e' l'unico posto dove quella diagnosi si puo' applicare.
+ * Stessa lista, stessa ragione, di `ABSENT_ON_SITE_MODES` in
+ * `loop-drift-check.mjs`.
  */
-export const SITE_ABSENT_MODES = new Set(['corpus-only', 'corpus-only-pending', 'not-ported']);
+export const SITE_ABSENT_MODES = new Set(['corpus-only', 'corpus-only-pending']);
 
 /**
  * I path che il manifest dichiara inesistenti sul sito. Sorgente unica, come
@@ -158,6 +166,37 @@ export function mirrorLockedPaths(manifestPath = MANIFEST_PATH) {
   } catch {
     // Manifest illeggibile → mappa vuota: nessun `no-root-cause` viene
     // spedito. Il fallimento sicuro e' non consegnare, non consegnare a caso.
+    return new Map();
+  }
+}
+
+/**
+ * Come si chiama di la' un path citato in forma corpus: mappa
+ * **path del corpus → path del sito** per TUTTI gli entry che il manifest non
+ * dichiara assenti dal sito (`identical`, `adapted`, `not-ported`).
+ *
+ * E' una domanda DIVERSA da quella di `mirrorLockedPaths()`, che risponde a «il
+ * mirror sovrascriverebbe una fix scritta qui» e per costruzione conosce i soli
+ * `identical`. Usarla anche per tradurre i nomi perdeva i 69 gemelli `adapted`,
+ * 36 dei quali hanno un `sitePath` diverso: un path `adapted` citato in forma
+ * corpus veniva spedito cosi' com'e' — un file che di la' non c'e' — e sul ramo
+ * `blocked-*`, che chiude, la issue di origine spariva sopra una consegna che
+ * punta al vuoto. E' la stessa perdita di #472.
+ *
+ * Stessa risoluzione (`sitePath || path`) di `transport-identical-twins.mjs` e
+ * `loop-drift-check.mjs`. Manifest illeggibile → mappa vuota, cioe' nessuna
+ * traduzione: si spedisce la forma citata, che e' il comportamento di prima.
+ */
+export function sitePathMap(manifestPath = MANIFEST_PATH) {
+  try {
+    const man = JSON.parse(readFileSync(manifestPath, 'utf8'));
+    const out = new Map();
+    for (const f of man?.files || []) {
+      if (!f?.path || SITE_ABSENT_MODES.has(f?.mode)) continue;
+      out.set(f.path, f.sitePath || f.path);
+    }
+    return out;
+  } catch {
     return new Map();
   }
 }
@@ -301,7 +340,7 @@ export function citedAsMirrorBlocked(body, path) {
  *
  * @returns {{handoff: boolean, paths: string[], residual: string[], close: boolean, reason: string}}
  */
-export function handoffDecision({ verdict, body, lockedPaths, siteAbsent } = {}) {
+export function handoffDecision({ verdict, body, lockedPaths, siteAbsent, siteNames } = {}) {
   if (!verdict || !HANDOFF_VERDICTS.has(verdict)) {
     return { handoff: false, paths: [], residual: [], close: false, reason: `verdetto non instradabile: ${verdict ?? 'nessuno'}` };
   }
@@ -311,10 +350,13 @@ export function handoffDecision({ verdict, body, lockedPaths, siteAbsent } = {})
   }
   const absent = siteAbsent ?? siteAbsentPaths();
   const locked = lockedPaths ?? mirrorLockedPaths();
+  const names = siteNames ?? sitePathMap();
+  // UN solo idioma di traduzione per i due rami: «come si chiama di la'» e' una
+  // domanda sola, e la risposta viene dal manifest INTERO (`sitePathMap`), non
+  // dai soli `identical`. `locked` resta consultata per prima perche' i test
+  // possono iniettarla; una `Set` iniettata non ha `get` e vale come identita'.
+  const siteOf = (p) => (typeof locked?.get === 'function' ? locked.get(p) : null) || names.get(p) || p;
   if (verdict === 'no-root-cause') {
-    // Il manifest e' una mappa corpus→sito; una `Set` iniettata resta accettata e
-    // vale come identita' (il path del sito e' lo stesso del corpus).
-    const siteOf = (p) => (typeof locked.get === 'function' ? locked.get(p) : null) || p;
     // CONGIUNZIONE, non sola appartenenza: il manifest dice che il file e'
     // condiviso, la citazione dice che la diagnosi PARLA di quel file. Vedi
     // `citedAsMirrorBlocked` per il caso misurato.
@@ -364,7 +406,7 @@ export function handoffDecision({ verdict, body, lockedPaths, siteAbsent } = {})
   // da cambiare vive di la'), ma l'elenco spedito passa dal manifest come
   // nell'altro ramo: via l'evidenza, e forma del sito per i gemelli.
   const shippable = paths.filter((p) => !absent.has(p));
-  const sitePaths = [...new Set(shippable.map((p) => (typeof locked?.get === 'function' ? locked.get(p) : null) || p))];
+  const sitePaths = [...new Set(shippable.map(siteOf))];
   if (!sitePaths.length) {
     return {
       handoff: false,

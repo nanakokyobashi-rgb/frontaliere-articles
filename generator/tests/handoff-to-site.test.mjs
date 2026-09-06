@@ -21,6 +21,7 @@ import {
   mirrorLockedPaths,
   citedAsMirrorBlocked,
   siteAbsentPaths,
+  sitePathMap,
   SITE_ABSENT_MODES,
   SITE_REPO,
 } from '../../scripts/ci/handoff-to-site.mjs';
@@ -32,7 +33,12 @@ const MIRROR_BODY = 'Root cause nota: il JSDoc bugiardo vive in `scripts/create-
 test('instrada il caso mirror: verdetto + repo del sito + path', () => {
   const d = handoffDecision({ verdict: 'blocked-admin-settings', body: MIRROR_BODY });
   assert.equal(d.handoff, true);
-  assert.ok(d.paths.includes('scripts/create-article.mjs'));
+  // Uguaglianza, non `includes`: `MIRROR_BODY` cita anche la forma corpus
+  // `generator/scripts/create-article.mjs`, che il manifest dichiara `adapted`
+  // con `sitePath: scripts/create-article.mjs`. Sono lo STESSO file di là, e
+  // spedirlo due volte — una delle quali in una forma che sul sito non esiste —
+  // e' cio' che l'assertion su `includes` lasciava passare.
+  assert.deepEqual(d.paths, ['scripts/create-article.mjs']);
 });
 
 test('serve la CONGIUNZIONE: due condizioni su tre non bastano', () => {
@@ -267,13 +273,47 @@ test('nessun handoff → nessuna chiusura', () => {
 // --- #972 item 2: i path di EVIDENZA non sono né spediti né residui ---
 
 test('siteAbsentPaths legge dal manifest i `mode` che dichiarano «di là non esiste»', () => {
-  assert.deepEqual([...SITE_ABSENT_MODES].sort(), ['corpus-only', 'corpus-only-pending', 'not-ported']);
+  assert.deepEqual([...SITE_ABSENT_MODES].sort(), ['corpus-only', 'corpus-only-pending']);
   const absent = siteAbsentPaths();
   assert.ok(absent.has('scripts/ci/loop-sync-manifest.json'), 'il manifest stesso non esiste sul sito');
   assert.equal(absent.has('scripts/ci/followup-drainer.mjs'), false, 'un `identical` non è mai assente');
   // Manifest illeggibile → nessun filtro, cioè il comportamento di prima: qui il
   // fallimento sicuro è non togliere niente, non togliere tutto.
   assert.equal(siteAbsentPaths('/nonexistent/loop-sync-manifest.json').size, 0);
+});
+
+test('`not-ported` NON è assente: il manifest lo definisce all\'opposto', () => {
+  // «Il sito ce l'ha, qui deliberatamente no» (intestazione del manifest).
+  // Contarlo fra gli assenti filtrava via il caso canonico di hand-off, e il
+  // non-instradamento è silenzioso: la diagnosi non arriva mai di là e nessuno
+  // se ne accorge. L'unico entry è il gate dei control character.
+  assert.equal(SITE_ABSENT_MODES.has('not-ported'), false);
+  assert.equal(siteAbsentPaths().has('scripts/lib/control-char-publish-gate.mjs'), false);
+  const d = handoffDecision({
+    verdict: 'blocked-admin-settings',
+    body: 'Il fix vive su `valerielinc-ops/frontaliere-si-o-no`: il gate è '
+      + '`scripts/lib/control-char-publish-gate.mjs`.',
+  });
+  assert.equal(d.handoff, true);
+  assert.deepEqual(d.paths, ['scripts/lib/control-char-publish-gate.mjs']);
+});
+
+test('sitePathMap traduce anche i gemelli `adapted`, che `mirrorLockedPaths` non conosce', () => {
+  // Due domande diverse: `mirrorLockedPaths()` risponde a «il mirror
+  // sovrascriverebbe» (solo `identical`), `sitePathMap()` a «come si chiama di
+  // là». 36 dei 69 `adapted` hanno un `sitePath` diverso: tradurli con la prima
+  // spediva la forma corpus, cioè un file che di là non esiste.
+  const names = sitePathMap();
+  assert.equal(names.get('generator/scripts/create-article.mjs'), 'scripts/create-article.mjs');
+  assert.equal(mirrorLockedPaths().has('generator/scripts/create-article.mjs'), false);
+  // Gli `identical` restano tradotti come prima, e i `not-ported` ci sono.
+  assert.equal(names.get('host/shared/clauseTail.mjs'), 'build-plugins/shared/clauseTail.mjs');
+  assert.ok(names.has('scripts/lib/control-char-publish-gate.mjs'));
+  // Nessun path dichiarato assente dal sito entra nella traduzione.
+  for (const p of siteAbsentPaths()) assert.equal(names.has(p), false, `${p} è assente dal sito`);
+  // Manifest illeggibile → nessuna traduzione, cioè la forma citata: il
+  // fallimento sicuro qui è il comportamento di prima.
+  assert.equal(sitePathMap('/nonexistent/loop-sync-manifest.json').size, 0);
 });
 
 test('il manifest citato come PROVA non entra nel residuo, quindi non parcheggia da solo', () => {
