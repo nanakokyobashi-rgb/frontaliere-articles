@@ -46,6 +46,10 @@ import {
   blockingPairsFromAudit,
   criticalCodes,
 } from '../scripts/retranslate-blocking-bodies.mjs';
+// Dal modulo corpus-only, NON da `lib/article-sanitizers.mjs`: quello e'
+// `identical` nel manifest del ciclo e un export aggiunto dal corpus lo
+// renderebbe `corpus-ahead`. Questo import pinna anche la collocazione.
+import { sanitizeBodyText } from '../scripts/lib/sanitize-body-braces.mjs';
 
 const fileFor = (id, fields) => `const b: Record<string, string> = {\n`
   + Object.entries(fields).map(([k, v]) => `  'blog.article.${id}.${k}': '${escapeForSingleQuoteTS(v)}',`).join('\n')
@@ -222,4 +226,16 @@ test('shouldWrite rifiuta quando la sanity check ha una ragione, anche con zero 
   });
   assert.equal(v.write, false);
   assert.match(v.reason, /^troncata: /);
+});
+
+test('sanitizeBodyText toglie le graffe spaiate e lascia le coppie', () => {
+  // Il difetto reale che il percorso di generazione gia' sanificava e questo
+  // script no: „virgoletta bassa tedesca chiusa con `}`. Nessun `critical` la
+  // intercetta — le graffe non sono nel vocabolario di runFactualityGates.
+  assert.equal(sanitizeBodyText('Der Grenzgänger sagte „ja} und ging.', () => {}),
+    'Der Grenzgänger sagte „ja und ging.');
+  // Le coppie bilanciate restano intatte (ancore, placeholder).
+  assert.equal(sanitizeBodyText('vedi {link} qui', () => {}), 'vedi {link} qui');
+  // Una `{` mai chiusa viene tolta: lascerebbe una graffa aperta nel .ts.
+  assert.equal(sanitizeBodyText('resta {aperta', () => {}), 'resta aperta');
 });

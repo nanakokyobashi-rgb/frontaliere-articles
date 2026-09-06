@@ -162,8 +162,14 @@ import {
   stripCompetitorPromotion,
   sanitizeNavLinkSemantics,
   stripFabricatedExamples,
-  sanitizeBodyText,
 } from './lib/article-sanitizers.mjs';
+// NON da `article-sanitizers.mjs`, che sarebbe il vicinato naturale: quel file
+// e' `identical` in `scripts/ci/loop-sync-manifest.json`, la sua sorgente e' il
+// SITO, e un export aggiunto qui lo renderebbe `corpus-ahead` (il sito non ha
+// `sanitizeBodyText` nella sua copia: ce l'ha ancora privata dentro il proprio
+// `create-article.mjs`). Il modulo nuovo e' assente dal manifest, quindi non ha
+// vincolo di mirror, ed e' condiviso dai due scrittori di body del corpus.
+import { sanitizeBodyText } from './lib/sanitize-body-braces.mjs';
 import { decodeHtmlEntities } from './lib/decode-html-entities.mjs';
 import {
   PERFORMANCE_PATH as ARTICLE_PERF_PATH,

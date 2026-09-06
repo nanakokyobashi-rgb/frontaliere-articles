@@ -89,7 +89,7 @@ import { freeTranslateWithRetry, balanceMarkdownMarkers } from './lib/free-trans
 import { runFactualityGates } from './lib/article-factuality-gates.mjs';
 import { unescapeTsString } from './lib/unescape-ts-string.mjs';
 import { escapeForSingleQuoteTS } from './lib/article-meta-block.mjs';
-import { sanitizeBodyText } from './lib/article-sanitizers.mjs';
+import { sanitizeBodyText } from './lib/sanitize-body-braces.mjs';
 import { detectLanguage } from './lib/detect-language.mjs';
 import { sanitizeText } from '../../scripts/lib/sanitize-control-chars.mjs';
 import { reportStrippedControlChars } from './lib/control-char-write-report.mjs';
