@@ -937,8 +937,10 @@ async function translateFaq(faqArray, targetLang) {
   //
   // `faqArray` come terzo argomento: e' la sorgente italiana di queste stesse
   // coppie, e passargliela aggiunge il ramo dell'uguaglianza verbatim. Senza,
-  // il predicato ha il solo rilevatore di lingua e sui passthrough pubblicati
-  // ne coglie 7 su 9 invece di 9 su 9 (misura in `wrongLocalePair`).
+  // il predicato ha il solo rilevatore di lingua — cioe' perde proprio la
+  // coppia che il fallback di `translateFaqArray()` rimette dentro in italiano
+  // quando il rilevatore su quel testo non dice `it` (misura in
+  // `wrongLocalePair`, e il test omonimo ne pinna un caso reale).
   const wrong = wrongLocalePair(results, targetLang, faqArray);
   if (wrong) {
     // Il messaggio dice la lingua RILEVATA e come e' stata riconosciuta, e non
@@ -946,8 +948,8 @@ async function translateFaq(faqArray, targetLang) {
     // anche quando il rilevato non era `it`, cioe' proprio nei casi in cui il
     // rifiuto era rumore, e il log mentiva sulla causa mentre buttava una
     // traduzione buona.
-    console.error(`   ⚠️  translateFaq ${targetLang}: coppia ${wrong.index} e' rimasta in `
-      + `${wrong.detected} (riconosciuta per ${wrong.via}) — scarto la traduzione, NON scrivo`);
+    console.error(`   ⚠️  translateFaq ${targetLang}: coppia ${wrong.index} non e' in ${targetLang} `
+      + `ma in ${wrong.detected} (riconosciuta per ${wrong.via}) — scarto la traduzione, NON scrivo`);
     return { faq: null, rejected: true };
   }
   return { faq: results, rejected: false };

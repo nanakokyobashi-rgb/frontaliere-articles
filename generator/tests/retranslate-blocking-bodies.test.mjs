@@ -58,7 +58,7 @@ import { sanitizeBodyText } from '../scripts/lib/sanitize-body-braces.mjs';
 // classe, stesso rimedio — la verifica guarda l'unita' tradotta, non il testo
 // concatenato.
 import { wrongLocalePair } from '../scripts/fix-faq-locales.mjs';
-import { detectLanguage } from '../scripts/lib/detect-language.mjs';
+import { detectLanguage, detectLanguageWithConfidence } from '../scripts/lib/detect-language.mjs';
 
 const fileFor = (id, fields) => `const b: Record<string, string> = {\n`
   + Object.entries(fields).map(([k, v]) => `  'blog.article.${id}.${k}': '${escapeForSingleQuoteTS(v)}',`).join('\n')
@@ -350,16 +350,46 @@ test('il ramo di LINGUA da solo non basta: su questo testo italiano il rilevator
     'con la sorgente il ramo dell\'uguaglianza la coglie');
 });
 
-test('wrongLocalePair non rifiuta piu\' uno scarto fra lingue NON sorgente', () => {
-  // Il difetto che questa modifica chiude: `de` rilevato su una traduzione
-  // inglese non e' un passthrough italiano, e' incertezza del rilevatore su
-  // testo corto — e costava una traduzione intera, perche' UNA coppia scarta
+test('wrongLocalePair non rifiuta piu\' uno scarto INCERTO fra lingue NON sorgente', () => {
+  // Il difetto che questa modifica chiude, con una coppia PRESA DAL CORPUS
+  // pubblicato (`blog-body-ch/en/cifre-nere-grigioni.ts`, coppia 2): testo
+  // inglese di 100 caratteri che il rilevatore da' `de` con confidenza 0,92 e
+  // punteggio 145. Non e' un passthrough italiano, e' incertezza su testo
+  // corto — e costava una traduzione intera, perche' UNA coppia scarta
   // l'articolo.
+  const NOISY_EN_PAIR = {
+    q: 'Which gray municipality has recorded a deficit?',
+    a: 'Thusis recorded a deficit of just under CHF 310,000.',
+  };
+  const noisy = detectLanguageWithConfidence(`${NOISY_EN_PAIR.q} ${NOISY_EN_PAIR.a}`, 'en');
+  assert.notEqual(noisy.lang, 'en',
+    'il fixture deve essere mal rilevato, altrimenti non prova niente');
+  assert.ok(noisy.confidence >= 0.6,
+    'e mal rilevato con confidenza ALTA: e\' il motivo per cui la sola confidenza non basta');
+  assert.ok((noisy.scores?.[noisy.lang] ?? 0) < 500,
+    'cio\' che lo distingue e\' il punteggio assoluto, non il margine');
+  assert.equal(wrongLocalePair([NOISY_EN_PAIR], 'en', [IT_PAIR]), null,
+    'uno scarto INCERTO fra due lingue non-sorgente non e\' un passthrough e non va rifiutato');
+});
+
+test('wrongLocalePair rifiuta la terza lingua CONCLAMATA: `=== sourceLang` da solo e\' fail-open', () => {
+  // Il rovescio del caso sopra, ed e' la classe che `detected === sourceLang`
+  // da solo lascerebbe passare: una coppia chiesta in `en` e resa in tedesco
+  // non e' un passthrough italiano, ma scritta sotto `/en/` e' contenuto nella
+  // lingua sbagliata gia' pubblicato — e qui il sito non ribuilda.
   const DE_PAIR = { q: 'Wo zahlt der Grenzgaenger seine Steuern?', a: DE_LONG };
-  assert.notEqual(detectLanguage(`${DE_PAIR.q} ${DE_PAIR.a}`, 'en'), 'en',
-    'il fixture deve essere riconosciuto come NON inglese, altrimenti non prova niente');
-  assert.equal(wrongLocalePair([DE_PAIR], 'en', [IT_PAIR]), null,
-    'uno scarto fra due lingue non-sorgente non e\' un passthrough e non va rifiutato');
+  const d = detectLanguageWithConfidence(`${DE_PAIR.q} ${DE_PAIR.a}`, 'en');
+  assert.equal(d.lang, 'de');
+  assert.ok(d.confidence >= 0.6 && d.scores.de >= 500,
+    'il fixture deve avere il segnale FORTE, altrimenti prova il caso sbagliato');
+
+  const wrong = wrongLocalePair([DE_PAIR], 'en', [IT_PAIR]);
+  assert.ok(wrong, 'una terza lingua conclamata va rifiutata, non scritta sotto /en/');
+  assert.equal(wrong.via, 'terza-lingua');
+  assert.equal(wrong.detected, 'de');
+
+  // Falsificazione: non e' il ramo dell'italiano travestito.
+  assert.notEqual(wrong.detected, 'it');
 });
 
 test('wrongLocalePair salta le coppie sotto la soglia di segnale', () => {
