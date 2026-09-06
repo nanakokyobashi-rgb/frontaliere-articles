@@ -295,6 +295,9 @@ import {
   endRegisterLock as endRegisterLockImpl,
   resolveRegisterLock as resolveRegisterLockImpl,
   registerLockFile,
+  RegisterLockError,
+  isRegisterLockError,
+  isRegisterLockHeld as isRegisterLockHeldImpl,
 } from './lib/register-lock.mjs';
 // Il protocollo di riferimento del prompt di selezione headline (issue #188).
 // Le due liste del prompt — candidate e articoli gia' pubblicati — avevano la
@@ -2893,6 +2896,17 @@ function endRegisterLock() {
   return endRegisterLockImpl(PROJECT_ROOT, SECTION_NAME);
 }
 
+// Il marker della NOSTRA sezione e' su disco adesso, cioe' le 9 scritture sono
+// state iniziate e non chiuse (issue #964). Esportata perche' il discriminante
+// e' condiviso con chi cattura attorno a `registerArticleFiles()` senza passare
+// dal `main()` di questo file — `publish-journalist-article.mjs` cicla sulla
+// coda — e `PROJECT_ROOT`/`SECTION_NAME` vivono qui: ricostruire la sezione dal
+// lato del chiamante ne farebbe una seconda sorgente (AGENTS.md #6), e sarebbe
+// la sezione sbagliata non appena `generate-article.yml` le alterna.
+export function isRegisterLockHeld() {
+  return isRegisterLockHeldImpl(PROJECT_ROOT, SECTION_NAME);
+}
+
 // The files a completed registration must ALL carry the id in, used to tell a
 // benign leftover lock from a genuinely split corpus (see
 // `resolveRegisterLock`). Derived from the same section config the
@@ -2927,7 +2941,11 @@ function endRegisterLock() {
 function registerLockTargets(id, sectionName = SECTION_NAME) {
   const section = ARTICLE_SECTION_CONFIGS[sectionName];
   if (!section) {
-    throw new Error(
+    // `RegisterLockError` e non `Error`: questo throw esce da dentro
+    // `resolveRegisterLock()` (e' il suo `buildTargets`), quindi per chi lo
+    // cattura e' un errore del lock a tutti gli effetti — e chi cicla su piu'
+    // item deve trattarlo come fatale, non come «questo item e' rotto».
+    throw new RegisterLockError(
       `Il lock di registrazione cita la sezione sconosciuta "${sectionName}": impossibile ` +
         `determinare i file di registrazione da confrontare (valide: ` +
         `${Object.keys(ARTICLE_SECTION_CONFIGS).join(', ')}). Ispeziona il corpus a mano e ` +
@@ -2985,7 +3003,7 @@ function registerLockTargets(id, sectionName = SECTION_NAME) {
 // consistently present (transaction committed) or consistently absent (nothing
 // written yet) is cleared and the run proceeds — otherwise one interrupted run
 // would brick every later run on a corpus that is in fact fine.
-function resolveRegisterLockAtStartup() {
+export function resolveRegisterLockAtStartup() {
   const outcome = resolveRegisterLockImpl(PROJECT_ROOT, registerLockTargets, SECTION_NAME);
   for (const r of outcome.resolved) {
     console.error(`  ♻️  ${r.file}: marker di registrazione lasciato da un run interrotto`);
@@ -13402,6 +13420,20 @@ const MIN_VIABLE_ATTEMPT_MS = 2 * 60_000;
  */
 function isQualityRejectError(e) {
   if (!e) return false;
+  // Un errore del lock non e' mai un rigetto di qualita' ne' un duplicato
+  // (issue #964): entrambi i rami classificano SUL MESSAGGIO ed escono con
+  // EXIT_NO_ARTICLE_DECLARED, cioe' un differimento pulito che il self-trigger
+  // ritenta — sopra un corpus SPEZZATO sarebbe la stessa degradazione che
+  // publish-journalist-article.mjs fa con `status: 'failed'`: il run non e'
+  // rosso, nessuno ripara, e il run dopo riprova sullo stesso danno. Il tipo,
+  // non il testo: i messaggi del lock sono scritti per un umano e possono
+  // cambiare parole senza che un test se ne accorga.
+  // E il TIPO non basta: fra `beginRegisterLock()` e `endRegisterLock()` a
+  // lanciare sono i nove `modifyXxx()`, con `Error` normali. Il fatto che
+  // conta e' che il lock fosse TENUTO — se il marker e' su disco, la
+  // registrazione e' stata interrotta a meta' e nessun errore di questo run
+  // e' piu' un differimento pulito.
+  if (isRegisterLockError(e) || isRegisterLockHeld()) return false;
   if (e.qualityReject === true || e.topicGateAbort === true) return true;
   // `troppo corto` covers the whole thin-content class (too-short IT body
   // after the retry+expand ladder, too-short char count, too-short locale
@@ -13431,6 +13463,9 @@ function isQualityRejectError(e) {
  */
 function isDuplicateError(e) {
   if (!e) return false;
+  // Vedi `isQualityRejectError()`: il lock non e' un differimento pulito, e il
+  // marker tenuto conta quanto il tipo dell'errore.
+  if (isRegisterLockError(e) || isRegisterLockHeld()) return false;
   return /DUPLICATO/i.test(String(e.message || ''));
 }
 
@@ -16299,6 +16334,20 @@ export async function registerArticleFiles(data, opts = {}) {
   if (!data || !data.id || !data.content?.it?.title) {
     throw new Error('registerArticleFiles: data.id and data.content.it.title are required');
   }
+  // PRIMA del guard append-only, non dopo (issue #964). Sul percorso di
+  // scrittura CONDIVISO perche' generate-daily-brief-article.mjs,
+  // generate-events-digest-article.mjs, generate-border-wait-ranking-article.mjs
+  // e publish-journalist-article.mjs importano registerArticleFiles()
+  // direttamente e non hanno il `main()` di questo file: senza questa riga un
+  // marker orfano li farebbe morire su `beginRegisterLock()` con un errore duro
+  // anche quando il corpus e' perfettamente coerente.
+  // E prima del guard perche' dopo un kill a meta' registrazione l'id E' gia'
+  // nella registry: il guard vedrebbe `already exists` e uscirebbe con un
+  // messaggio che manda a rinfrescare i body di un corpus SPEZZATO, mentre la
+  // diagnosi di SPLIT — l'unica che nomina i file scritti e quelli mancanti, ed
+  // e' l'intera ragione d'essere del lock — non verrebbe mai emessa. Entrambi
+  // fermano il run; solo uno dice dove guardare.
+  resolveRegisterLockAtStartup();
   if (checkArticleIdExists(data.id)) {
     throw new Error(
       `registerArticleFiles: article "${data.id}" already exists (registration is append-only). ` +
@@ -16321,14 +16370,6 @@ export async function registerArticleFiles(data, opts = {}) {
   assertTranslationsPassFactualityGates(data);
   clampSeoDescriptions(data);
   const slugs = deriveAndSanitizeArticleSlugs(data);
-  // Sul percorso di scrittura CONDIVISO, per la stessa ragione argomentata
-  // sopra: generate-daily-brief-article.mjs, generate-events-digest-article.mjs,
-  // generate-border-wait-ranking-article.mjs e publish-journalist-article.mjs
-  // importano registerArticleFiles() direttamente e non hanno il `main()` di
-  // questo file, quindi non passano mai dal controllo d'avvio. Senza questa
-  // riga un marker orfano li farebbe morire su `beginRegisterLock()` con un
-  // errore duro anche quando il corpus e' perfettamente coerente.
-  resolveRegisterLockAtStartup();
   beginRegisterLock(data.id);
   modifyRouterTs(data);
   modifyBlogArticlesTsx(data);

@@ -78,9 +78,37 @@ export const LEGACY_REGISTER_LOCK_FILE = `${REGISTER_LOCK_DIR}/register-in-progr
 // `git add -A` would not sweep it into the commit that carries the damage.
 const SECTION_RE = /^[a-z0-9][a-z0-9-]*$/;
 
+/**
+ * Ogni errore che il lock lancia porta un tipo, non solo un messaggio (issue
+ * #964). Chi chiama `registerArticleFiles()` dentro un `try/catch` per-item —
+ * `publish-journalist-article.mjs` cicla sulla coda e marca il singolo doc
+ * `failed` — deve poter distinguere «questo documento e' malformato» da
+ * «il corpus e' SPEZZATO»: il primo riguarda un doc, il secondo riguarda i 9
+ * file condivisi e rende privo di senso ogni item successivo del ciclo.
+ * Riconoscerlo dal testo del messaggio non e' una sorgente unica (AGENTS.md
+ * #6): il messaggio e' scritto per un umano che ripara il corpus a mano e puo'
+ * cambiare senza che nessun test se ne accorga.
+ */
+export class RegisterLockError extends Error {
+  constructor(message) {
+    super(message);
+    this.name = 'RegisterLockError';
+    // Il flag e non solo `instanceof`: i produttori possono girare con due
+    // copie del modulo caricate (import relativo da directory diverse), e
+    // `instanceof` fallirebbe fra realm/istanze di modulo distinte proprio nel
+    // caso in cui la distinzione conta.
+    this.isRegisterLockError = true;
+  }
+}
+
+/** True se `err` viene dal lock di registrazione — vedi `RegisterLockError`. */
+export function isRegisterLockError(err) {
+  return err instanceof RegisterLockError || err?.isRegisterLockError === true;
+}
+
 function assertSection(section, caller) {
   if (typeof section !== 'string' || !SECTION_RE.test(section)) {
-    throw new Error(
+    throw new RegisterLockError(
       `${caller}() requires the article section (got ${JSON.stringify(section)}): the ` +
         'registration targets are section-scoped and cannot be cross-checked on a later run without it.',
     );
@@ -95,6 +123,35 @@ export function registerLockFile(section) {
 
 export function registerLockPath(projectRoot, section) {
   return path.join(projectRoot, registerLockFile(section));
+}
+
+/**
+ * True se il marker di `section` e' su disco IN QUESTO ISTANTE: le 9 scritture
+ * della registrazione sono state iniziate e non ancora chiuse da
+ * `endRegisterLock()`.
+ *
+ * E' il discriminante giusto per chi cattura attorno a `registerArticleFiles()`
+ * (issue #964). Il TIPO dell'errore copre solo cio' che lancia questo modulo,
+ * ma fra `beginRegisterLock()` e `endRegisterLock()` sono i nove `modifyXxx()`
+ * a scrivere, e i loro throw sono `Error` normali («modifyRouterTs: cannot find
+ * last ... entry», «modifyBlogArticlesTsx: regex did not match»): il tipo dice
+ * `false` proprio nel caso in cui il corpus e' SPEZZATO. Il fatto che conta non
+ * e' chi ha lanciato, e' che il lock fosse TENUTO quando l'errore e' passato.
+ *
+ * Non e' una race con un altro processo: la registrazione e' sincrona e
+ * `create-article.mjs` gira un id per volta (i produttori ciclano in serie
+ * proprio per non correre sugli stessi file).
+ */
+export function isRegisterLockHeld(projectRoot, section) {
+  try {
+    return existsSync(registerLockPath(projectRoot, section));
+  } catch {
+    // Sezione malformata: `beginRegisterLock()` avrebbe gia' lanciato un
+    // `RegisterLockError`, che il chiamante riconosce per tipo. Qui non
+    // esiste marker da leggere, e lanciare da dentro un catch-guard
+    // sostituirebbe la diagnosi originale con questa.
+    return false;
+  }
 }
 
 /**
@@ -133,7 +190,7 @@ export function beginRegisterLock(projectRoot, id, section) {
   if (existsSync(lockPath)) {
     let stale = lockPath;
     try { stale = readFileSync(lockPath, 'utf-8'); } catch { /* keep path */ }
-    throw new Error(
+    throw new RegisterLockError(
       `registration lock still present at ${registerLockFile(section)} — a previous registration ` +
         `was interrupted mid-write and the corpus may have an id registered in some of the 9 ` +
         `files but not others (${stale}). Refusing to start a new registration until the ` +
@@ -282,7 +339,7 @@ export function resolveRegisterLock(projectRoot, buildTargets, section) {
     // attribuibile a nessuna sezione: non si puo' nemmeno deferirlo, perche'
     // non si sa a chi. L'unica risposta sicura resta fermarsi.
     if (!lock.id || !lock.section) {
-      throw new Error(
+      throw new RegisterLockError(
         `registration lock at ${relPath} is unreadable or missing its ` +
           `${lock.id ? 'section' : 'id'}, so the interrupted registration cannot be located and the ` +
           `9 files cannot be cross-checked (${describeLockOrigin(lock)}). Inspect the corpus by ` +
@@ -291,7 +348,7 @@ export function resolveRegisterLock(projectRoot, buildTargets, section) {
     }
     const { present, absent } = registrationTargetStatus(buildTargets(lock.id, lock.section));
     if (present.length > 0 && absent.length > 0) {
-      throw new Error(
+      throw new RegisterLockError(
         `registration of "${lock.id}" (section "${lock.section}", ${describeLockOrigin(lock)}) was ` +
           `interrupted mid-write and left the corpus SPLIT across the ` +
           `registration files: registered in [${present.join(', ')}] but missing from ` +

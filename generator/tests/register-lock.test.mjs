@@ -44,6 +44,9 @@ import {
   readLegacyRegisterLock,
   registrationTargetStatus,
   resolveRegisterLock,
+  RegisterLockError,
+  isRegisterLockError,
+  isRegisterLockHeld,
 } from '../scripts/lib/register-lock.mjs';
 // Il layout di QUESTO repo (`content/…`) contro quello in cui il generatore e'
 // scritto (`data/…`, `services/locales/…`): la stessa mappatura che
@@ -686,5 +689,260 @@ test('il label di ogni bersaglio nomina il file che esiste QUI, non la path pre-
         `${section}: il label "${t.label}" e' ancora la path pre-mappatura`,
       );
     }
+  }
+});
+
+// ── L'ordine dei guard: risoluzione del lock PRIMA della decisione sull'id ──
+//
+// Issue #964. Il lock esiste per una sola cosa: dire, dopo un kill a meta'
+// delle 9 scritture, QUALI file portano l'id e quali no (il messaggio di
+// SPLIT). Ma su un corpus spezzato l'id e' gia' nel registro, quindi ogni
+// controllo di presenza risponde `true` prima ancora che il marker venga
+// guardato — e chi decide su quel `true` chiude il discorso col messaggio
+// sbagliato: `registerArticleFiles()` usciva con «already exists
+// (registration is append-only). Refresh the body files instead», che manda a
+// rinfrescare i body di un corpus che va invece riparato; i tre produttori
+// evergreen imboccavano il ramo di refresh in silenzio; publish-journalist
+// marcava il doc `failed` per «id already registered». In tutti i casi il run
+// si ferma o svia, e la diagnosi che dice dove guardare non viene mai emessa.
+//
+// La proprieta' osservata e' l'ORDINE nel sorgente, non un comportamento:
+// nessuno di questi file e' importabile sotto `node --test` (create-article.mjs
+// importa jsdom a module scope, e i produttori importano lui), quindi il pin
+// va fatto sul testo. Vale per tutta la classe, non per il solo
+// registerArticleFiles(): un fix mono-file lascerebbe tre produttori che non
+// arrivano nemmeno a chiamarlo.
+const GUARD_ORDER_SITES = [
+  {
+    file: 'create-article.mjs',
+    scope: 'export async function registerArticleFiles',
+    why: 'il guard append-only parlerebbe prima che il marker sia risolto',
+  },
+  {
+    file: 'generate-daily-brief-article.mjs',
+    scope: 'async function main() {',
+    why: 'il ramo di refresh partirebbe sopra un corpus spezzato',
+  },
+  {
+    file: 'generate-events-digest-article.mjs',
+    scope: 'async function main() {',
+    why: 'il ramo di refresh partirebbe sopra un corpus spezzato',
+  },
+  {
+    file: 'generate-border-wait-ranking-article.mjs',
+    scope: 'async function main() {',
+    why: 'il ramo di refresh partirebbe sopra un corpus spezzato',
+  },
+  {
+    // L'unico senza assert d'ordine testuale, e non e' un allentamento: qui la
+    // chiamata sta in `main()` mentre il `checkArticleIdExists()` sta in
+    // `processDoc()`, che nel sorgente viene PRIMA. L'ordine a runtime resta
+    // quello giusto (main() gira prima del ciclo sui doc) ma non e' leggibile
+    // dall'ordine delle righe. Metterla dentro processDoc() soddisferebbe
+    // l'ordine testuale e sarebbe SBAGLIATO: il try/catch che avvolge il corpo
+    // degraderebbe lo SPLIT nell'ennesimo doc `failed` e il ciclo proseguirebbe
+    // sopra il corpus spezzato. E' il test dedicato qui sotto a pinnarlo.
+    file: 'publish-journalist-article.mjs',
+    scope: 'async function main() {',
+    sourceOrder: false,
+    why: 'i doc verrebbero marcati failed uno a uno sopra un corpus spezzato',
+  },
+];
+
+test('la risoluzione del lock precede ogni decisione sulla presenza dell\'id', () => {
+  for (const site of GUARD_ORDER_SITES) {
+    const src = fs.readFileSync(new URL(`../scripts/${site.file}`, import.meta.url), 'utf-8');
+    let body = src;
+    if (site.scope) {
+      const start = src.indexOf(site.scope);
+      assert.notEqual(start, -1, `${site.file}: "${site.scope}" non trovato — aggiornare questo test`);
+      body = src.slice(start);
+    }
+    const resolveAt = body.search(/^\s*resolveRegisterLockAtStartup\(\);/m);
+    assert.notEqual(
+      resolveAt,
+      -1,
+      `${site.file}: nessuna chiamata a resolveRegisterLockAtStartup() — ${site.why}`,
+    );
+    if (site.sourceOrder === false) continue;
+    const checkAt = body.search(/^\s*(?:if \(|const \w+ = )checkArticleIdExists\(/m);
+    assert.notEqual(checkAt, -1, `${site.file}: nessun uso di checkArticleIdExists() — aggiornare questo test`);
+    assert.ok(
+      resolveAt < checkAt,
+      `${site.file}: checkArticleIdExists() decide PRIMA che il lock sia risolto — ${site.why}, ` +
+        'e la diagnosi di SPLIT non viene mai emessa',
+    );
+  }
+});
+
+test('publish-journalist risolve il lock fuori dal try che marca i doc failed', () => {
+  // Controprova del caso speciale sopra: dentro `processDoc()` la chiamata
+  // sarebbe testualmente "prima" del guard e passerebbe l'assert precedente,
+  // ma lo SPLIT finirebbe nel `catch` che scrive `status: 'failed'` sul doc, e
+  // il ciclo continuerebbe con i doc successivi sopra lo stesso corpus rotto.
+  const src = fs.readFileSync(new URL('../scripts/publish-journalist-article.mjs', import.meta.url), 'utf-8');
+  const procStart = src.indexOf('async function processDoc(');
+  const mainStart = src.indexOf('async function main() {');
+  assert.notEqual(procStart, -1);
+  assert.notEqual(mainStart, -1);
+  assert.ok(procStart < mainStart, 'layout del file cambiato — aggiornare questo test');
+  const inProcessDoc = src.slice(procStart, mainStart);
+  assert.equal(
+    /^\s*resolveRegisterLockAtStartup\(\);/m.test(inProcessDoc),
+    false,
+    'resolveRegisterLockAtStartup() sta dentro processDoc(): il suo try/catch degraderebbe lo SPLIT ' +
+      'a un doc `failed` e il ciclo proseguirebbe sopra il corpus spezzato',
+  );
+  assert.ok(
+    /^\s*resolveRegisterLockAtStartup\(\);/m.test(src.slice(mainStart)),
+    'main() non risolve il lock prima del ciclo sui doc',
+  );
+});
+
+test('resolveRegisterLockAtStartup e\' esportata: i produttori la importano davvero', () => {
+  // Senza l'export i quattro produttori fallirebbero all'import, non a
+  // runtime — ma `node --test` non li carica (jsdom), quindi il legame va
+  // osservato sul sorgente, come gli altri qui sopra (AGENTS.md #6).
+  assert.ok(
+    /^export function resolveRegisterLockAtStartup\(\) \{/m.test(CREATE_ARTICLE_SRC),
+    'resolveRegisterLockAtStartup() non e\' esportata da create-article.mjs',
+  );
+  for (const site of GUARD_ORDER_SITES.filter((s) => s.file !== 'create-article.mjs')) {
+    const src = fs.readFileSync(new URL(`../scripts/${site.file}`, import.meta.url), 'utf-8');
+    const importBlock = src.slice(0, src.indexOf("from './create-article.mjs'"));
+    assert.ok(
+      importBlock.includes('resolveRegisterLockAtStartup'),
+      `${site.file}: usa resolveRegisterLockAtStartup() senza importarla da create-article.mjs`,
+    );
+  }
+});
+
+// ── L'errore del lock e' FATALE anche per chi cicla su piu' item (issue #964) ──
+//
+// `publish-journalist-article.mjs` e' l'unico produttore che chiama
+// `registerArticleFiles()` dentro un try/catch PER-ITEM: cicla sulla coda dei
+// documenti e marca il singolo doc `status: 'failed'`. Il
+// `resolveRegisterLockAtStartup()` di `main()` copre il marker lasciato da un
+// run PRECEDENTE, ma non il caso in cui e' `registerArticleFiles()` a lanciare
+// a meta' delle 9 scritture DENTRO questo run: quel throw finiva nel catch,
+// diventava un doc `failed` (per un danno che non era suo), il ciclo proseguiva
+// pagando derivazione + traduzione sopra un corpus SPEZZATO, e `main()` usciva
+// comunque 0 — job verde, corpus rotto.
+//
+// Il discriminante e' il TIPO, non il testo: i messaggi del lock sono scritti
+// per un umano che ripara il corpus a mano e possono cambiare parole senza che
+// nessun test se ne accorga (AGENTS.md #6).
+test('ogni errore del lock e\' riconoscibile per tipo, non per messaggio', () => {
+  const root = sandbox();
+  const build = makeTargets(root);
+
+  // 1. marker gia' presente all'apertura di una nuova registrazione.
+  beginRegisterLock(root, ARTICLE_ID, SECTION);
+  assert.throws(
+    () => beginRegisterLock(root, ARTICLE_ID, SECTION),
+    (err) => isRegisterLockError(err) && err instanceof RegisterLockError && err.name === 'RegisterLockError',
+  );
+
+  // 2. corpus spezzato: e' l'errore che il lock esiste per produrre.
+  const steps = build(ARTICLE_ID);
+  steps.slice(0, 3).forEach((t) => {
+    fs.mkdirSync(path.dirname(t.absPath), { recursive: true });
+    fs.writeFileSync(t.absPath, t.needle == null ? 'body\n' : `entry ${t.needle}\n`, 'utf-8');
+  });
+  assert.throws(
+    () => resolveRegisterLock(root, build, SECTION),
+    (err) => /SPLIT/.test(err.message) && isRegisterLockError(err),
+  );
+
+  // 3. sezione non valida: stessa famiglia, stesso trattamento.
+  assert.throws(() => beginRegisterLock(root, ARTICLE_ID, 'non/valida'), isRegisterLockError);
+
+  // Un errore qualunque NON e' un errore del lock: se lo fosse, il catch
+  // per-item di publish-journalist smetterebbe di marcare `failed` i documenti
+  // che sono davvero malformati, e la coda non avanzerebbe piu'.
+  assert.equal(isRegisterLockError(new Error('SPLIT')), false);
+  assert.equal(isRegisterLockError(null), false);
+  assert.equal(isRegisterLockError(undefined), false);
+});
+
+// Il tipo dell'errore non basta: fra `beginRegisterLock()` e
+// `endRegisterLock()` a lanciare sono i nove `modifyXxx()` di
+// create-article.mjs, con `Error` normali. Chi cattura deve poter chiedere se
+// il lock era TENUTO — e' l'unico segnale che copre anche quei throw.
+test('isRegisterLockHeld() dice se le 9 scritture sono state interrotte', () => {
+  const root = sandbox();
+
+  assert.equal(isRegisterLockHeld(root, SECTION), false, 'nessun marker: registrazione non iniziata');
+
+  beginRegisterLock(root, ARTICLE_ID, SECTION);
+  assert.equal(isRegisterLockHeld(root, SECTION), true, 'marker su disco: le 9 scritture sono aperte');
+  // L'ALTRA sezione non e' affar nostro (issue #965): il marker e' per sezione.
+  assert.equal(isRegisterLockHeld(root, 'svizzera'), false);
+
+  endRegisterLock(root, SECTION);
+  assert.equal(isRegisterLockHeld(root, SECTION), false, 'registrazione chiusa: nessun marker');
+
+  // Sezione malformata: non lancia da dentro un catch-guard, altrimenti
+  // sostituirebbe la diagnosi originale con la propria.
+  assert.equal(isRegisterLockHeld(root, 'non/valida'), false);
+});
+
+test('publish-journalist rilancia l\'errore del lock invece di marcare il doc failed', () => {
+  const src = fs.readFileSync(new URL('../scripts/publish-journalist-article.mjs', import.meta.url), 'utf-8');
+  // Il SIMBOLO nell'import, non la forma della riga: aggiungerne un secondo
+  // (o mandare a capo il blocco) non e' una regressione.
+  const lockImport = /import \{([^}]*)\} from '\.\/lib\/register-lock\.mjs';/.exec(src);
+  assert.ok(lockImport, "publish-journalist-article.mjs non importa da './lib/register-lock.mjs'");
+  assert.ok(
+    /\bisRegisterLockError\b/.test(lockImport[1]),
+    'publish-journalist-article.mjs non importa isRegisterLockError()',
+  );
+  // `isRegisterLockHeld()` viene da create-article.mjs, che e' l'unico posto in
+  // cui PROJECT_ROOT e SECTION_NAME sono noti.
+  const createImport = src.slice(0, src.indexOf("from './create-article.mjs'"));
+  assert.ok(
+    createImport.includes('isRegisterLockHeld'),
+    'publish-journalist-article.mjs non importa isRegisterLockHeld() da create-article.mjs',
+  );
+  const procStart = src.indexOf('async function processDoc(');
+  const mainStart = src.indexOf('async function main() {');
+  assert.ok(procStart !== -1 && procStart < mainStart, 'layout del file cambiato — aggiornare questo test');
+  // Solo il CATCH: lo stamp `failed` per «id already registered» sta nel corpo
+  // del try e non c'entra con il lock.
+  const catchStart = src.indexOf('} catch (err) {', procStart);
+  assert.ok(catchStart !== -1 && catchStart < mainStart, 'catch di processDoc() non trovato — aggiornare questo test');
+  const processDocBody = src.slice(catchStart, mainStart);
+  // I DUE discriminanti insieme: il tipo copre cio' che lancia
+  // lib/register-lock.mjs, il marker tenuto copre i nove `modifyXxx()` fra
+  // begin/endRegisterLock, che lanciano `Error` normali — da soli, quei throw
+  // diventavano un doc `failed` e (ultimo doc della coda) un exit 0 sopra un
+  // corpus SPEZZATO.
+  const guardAt = processDocBody.search(
+    /^\s*if \(isRegisterLockError\(err\) \|\| isRegisterLockHeld\(\)\) \{/m,
+  );
+  // La chiamata, non la parola: il commento del guard cita `status: 'failed'`.
+  const failedAt = processDocBody.search(/ref\.update\(\{ status: 'failed'/);
+  assert.notEqual(guardAt, -1, 'il catch di processDoc() non distingue una registrazione interrotta (tipo dell\'errore O marker tenuto): uno SPLIT diventerebbe un doc `failed` e il ciclo proseguirebbe sopra il corpus spezzato');
+  assert.notEqual(failedAt, -1, 'nessuno stamp `status: failed` nel catch di processDoc() — aggiornare questo test');
+  assert.ok(guardAt < failedAt, 'il guard sull\'errore del lock deve precedere lo stamp `status: failed`');
+  assert.ok(
+    /^\s*throw err;/m.test(processDocBody.slice(guardAt)),
+    'il ramo dell\'errore del lock non rilancia: il ciclo continuerebbe e main() uscirebbe 0 su un corpus spezzato',
+  );
+});
+
+test('create-article non degrada un errore del lock a differimento pulito', () => {
+  // `isQualityRejectError()` e `isDuplicateError()` classificano SUL MESSAGGIO
+  // ed escono con EXIT_NO_ARTICLE_DECLARED, cioe' un differimento che il
+  // self-trigger ritenta: sopra un corpus spezzato sarebbe la stessa
+  // degradazione del `status: 'failed'` di publish-journalist.
+  for (const fn of ['function isQualityRejectError(e) {', 'function isDuplicateError(e) {']) {
+    const start = CREATE_ARTICLE_SRC.indexOf(fn);
+    assert.notEqual(start, -1, `${fn} non trovata — aggiornare questo test`);
+    const body = CREATE_ARTICLE_SRC.slice(start, CREATE_ARTICLE_SRC.indexOf('\n}\n', start));
+    assert.ok(
+      /^\s*if \(isRegisterLockError\(e\) \|\| isRegisterLockHeld\(\)\) return false;/m.test(body),
+      `${fn} non esclude una registrazione interrotta (tipo dell'errore O marker tenuto): uno SPLIT uscirebbe come differimento pulito invece che rosso`,
+    );
   }
 });

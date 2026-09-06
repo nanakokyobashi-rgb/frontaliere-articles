@@ -49,6 +49,8 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 import {
   registerArticleFiles,
   checkArticleIdExists,
+  resolveRegisterLockAtStartup,
+  isRegisterLockHeld,
   translateArticle,
   enforceStrongInternalLinks,
   findBestFallbackImage,
@@ -67,6 +69,7 @@ import {
   assertNoFabricatedReferences,
   assertNoFabricatedLaborOfficeCrossLocale,
 } from './create-article.mjs';
+import { isRegisterLockError } from './lib/register-lock.mjs';
 import { assertNoFabricatedNormAcronyms } from './lib/article-factuality-gates.mjs';
 import { generateFaqIT } from './batch-add-faq-to-articles.mjs';
 import { appendCatalogEntry } from './generate-journalist-image-catalog.mjs';
@@ -386,6 +389,33 @@ async function processDoc(db, FieldValue, docSnap) {
 
     return { ok: true, id: data.id };
   } catch (err) {
+    // Un errore del lock di registrazione NON e' un difetto di questo
+    // documento (issue #964): dice che i 9 file condivisi sono SPEZZATI, o che
+    // un marker e' rimasto su disco. Il `resolveRegisterLockAtStartup()` di
+    // `main()` copre solo il marker di un run PRECEDENTE; se e'
+    // `registerArticleFiles()` a lanciare a meta' delle 9 scritture DENTRO
+    // questo run, degradarlo a `status: 'failed'` marcherebbe l'articolo di un
+    // giornalista come fallito per un danno che non e' suo, il ciclo
+    // proseguirebbe pagando derivazione + traduzione sopra un corpus rotto, e
+    // `main()` uscirebbe comunque 0 — job verde, corpus spezzato. Rilanciare
+    // ferma il ciclo e fa uscire 1 (il `main().catch` in fondo al file); il doc
+    // resta `queued` e viene ridrenato dal run successivo, dopo la riparazione.
+    //
+    // Il discriminante NON e' solo il tipo dell'errore: quello copre cio' che
+    // lancia `lib/register-lock.mjs`, ma fra `beginRegisterLock()` e
+    // `endRegisterLock()` a lanciare sono i nove `modifyXxx()`, con `Error`
+    // normali («modifyRouterTs: cannot find last ... entry»,
+    // «modifyBlogArticlesTsx: regex did not match») — cioe' proprio il caso in
+    // cui il corpus resta SPEZZATO. Il fatto che conta e' che il lock fosse
+    // TENUTO quando l'errore e' passato di qui: se il marker e' su disco, le 9
+    // scritture sono state interrotte, qualunque sia l'errore. Senza questa
+    // meta' della condizione il doc veniva stampato `failed` e — se e'
+    // l'ultimo (o l'unico) della coda — `main()` usciva 0: job verde, corpus
+    // spezzato.
+    if (isRegisterLockError(err) || isRegisterLockHeld()) {
+      console.error(`  🛑 ${docId}: registrazione interrotta / lock di registrazione — fatale, il ciclo si ferma qui (il documento resta queued)`);
+      throw err;
+    }
     const message = err instanceof Error ? err.message : String(err);
     console.error(`  ❌ ${docId} failed: ${message}`);
     try {
@@ -398,6 +428,18 @@ async function processDoc(db, FieldValue, docSnap) {
 }
 
 async function main() {
+  // Il marker di un run interrotto va risolto PRIMA di decidere sulla presenza
+  // di un id (issue #964): dopo un kill a meta' registrazione l'id e' gia' nella
+  // registry, quindi il `checkArticleIdExists()` di processDoc() risponde `true`
+  // sopra un corpus SPEZZATO e il doc verrebbe marcato `failed` per «id already
+  // registered», senza che la diagnosi di SPLIT — l'unica che nomina i file
+  // scritti e quelli mancanti — venga mai emessa. Qui, e non dentro processDoc():
+  // li' il try/catch la trasformerebbe nell'ennesimo doc fallito e il ciclo
+  // continuerebbe a lavorare sopra il corpus spezzato. Serve perche' questo
+  // produttore importa registerArticleFiles() direttamente e non passa mai dal
+  // `main()` di create-article.mjs.
+  resolveRegisterLockAtStartup();
+
   const { db, FieldValue } = await initDb();
 
   const snap = await db.collection('journalist_articles').where('status', '==', 'queued').get();

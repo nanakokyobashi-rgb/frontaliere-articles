@@ -23,7 +23,12 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 import { writeFileSync, mkdirSync, renameSync, unlinkSync } from 'node:fs';
 import { loadEventsDataset, isoDay } from './lib/events-utils.mjs';
 import { buildWeekendDigestArticle } from './lib/events-digest-content.mjs';
-import { registerArticleFiles, checkArticleIdExists, buildBodyFile } from './create-article.mjs';
+import {
+  registerArticleFiles,
+  checkArticleIdExists,
+  resolveRegisterLockAtStartup,
+  buildBodyFile,
+} from './create-article.mjs';
 import { bumpUpdatedAt, bumpDateModified, bumpSitemapLastmod } from './lib/evergreen-article-refresh.mjs';
 import { corpusPath } from './lib/corpus-paths.mjs';
 import { sanitizeText } from '../../scripts/lib/sanitize-control-chars.mjs';
@@ -129,6 +134,14 @@ async function main() {
   const dryRun = process.env.DRY_RUN === '1' || process.env.DRY_RUN === 'true';
   const todayIso = process.env.TODAY_ISO || isoDay(new Date());
   const data = buildData(todayIso);
+  // Il marker di un run interrotto va risolto PRIMA di decidere sulla presenza
+  // dell'id (issue #964): dopo un kill a meta' registrazione l'id e' gia' nella
+  // registry, quindi `checkArticleIdExists()` risponde `true` sopra un corpus
+  // SPEZZATO e questo produttore imboccherebbe il ramo di refresh senza che la diagnosi di
+  // SPLIT — l'unica che nomina i file scritti e quelli mancanti — venga mai
+  // emessa. Qui e non nel `main()` di create-article.mjs: questi produttori
+  // importano registerArticleFiles() direttamente e non passano mai di la'.
+  resolveRegisterLockAtStartup();
   const exists = checkArticleIdExists(data.id);
 
   console.log(
