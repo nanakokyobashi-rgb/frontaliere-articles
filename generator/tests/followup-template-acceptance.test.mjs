@@ -91,7 +91,7 @@ test('ogni item del template porta una condizione di accettazione falsificabile'
       tokens.length > 0,
       `item ${n}: la \`Suggested action\` di esempio non cita nessun token di codice fra ` +
         'backtick. Un item cosi\' vale `no-valid-item`: e\' un rischio in prosa, non lavoro ' +
-        'verificabile. Serve un token con punteggiatura di codice, es. `markStale()`.',
+        'verificabile. Serve un token con punteggiatura di codice, es. `nomeFunzione()`.',
     );
   }
 });

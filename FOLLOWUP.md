@@ -136,7 +136,7 @@ Questa struttura **non è cosmetica: è l'unico appiglio che ha la chiusura.**
 il corpo sugli heading `### <n>.` e per ogni item chiede una *condizione di
 accettazione falsificabile*: la regione `Suggested action` deve esistere **e**
 citare fra backtick almeno un token che porti punteggiatura di codice
-(`markStale()`, `job.previousSlugs`, `mergedCount >= 1`). Un item che non la
+(`nomeFunzione()`, `oggetto.campo`, `contatore >= 1`). Un item che non la
 porta non è lavoro verificabile ma un rischio in prosa: non si può provare né
 fatto né da fare, e resta in coda per costruzione.
 
