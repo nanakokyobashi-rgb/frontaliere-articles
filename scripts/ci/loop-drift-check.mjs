@@ -115,6 +115,9 @@
  *   node scripts/ci/loop-drift-check.mjs --init      # (ri)registra le baseline correnti (TUTTE le voci)
  *   node scripts/ci/loop-drift-check.mjs --init --only <path>[,<path>]
  *                                                    # ...solo quelle voci (issue #653)
+ *   node scripts/ci/loop-drift-check.mjs --init --force
+ *                                                    # ...anche sulle voci con un drift
+ *                                                    #    APERTO, che di default rifiuta (issue #978)
  *   node scripts/ci/loop-drift-check.mjs --no-provenance  # salta la verifica di provenienza (iterazione locale)
  *
  * Env:
@@ -181,6 +184,13 @@ const AS_JSON = ARGS.has('--json');
 const STRICT = ARGS.has('--strict');
 const INIT = ARGS.has('--init');
 const AS_ISSUE = ARGS.has('--issue');
+// `--init` su una voce con un drift APERTO lo SEPPELLISCE: scrive `now` su
+// entrambi i lati e `alignedAt` di oggi senza che nessuno abbia portato il
+// file, e il verdetto sparisce dal report successivo (issue #978). Di default
+// quel caso e' rifiutato; `--force` e' il modo di dire ad alta voce «lo sto
+// chiudendo io», che e' proprio la distinzione che al codice mancava fra
+// «registro una voce nuova» e «chiudo un drift non riconciliato».
+const FORCE = ARGS.has('--force');
 // Opt-out per iterazione locale: la verifica di provenienza (issue #148) fa
 // fino a `PROVENANCE_HISTORY_CAP` fetch aggiuntivi PER LATO PER FILE quando un
 // hash e' cambiato dalla baseline. Di routine resta accesa: e' l'unica cosa
@@ -281,6 +291,79 @@ function resolveInitTargets(only, manifestPaths) {
   if (only === null) return { targets: null, unknown: [] };
   const declared = new Set(manifestPaths);
   return { targets: new Set(only), unknown: only.filter((p) => !declared.has(p)) };
+}
+
+/**
+ * Gli stati di `classify()` che descrivono un drift APERTO: i due lati sono
+ * divergenti e nessuno li ha riconciliati. Non ci sono `stable` mascherati qui
+ * dentro — sono esattamente i verdetti che chiedono a un umano di decidere.
+ */
+const OPEN_DRIFT_STATES = new Set(['site-ahead', 'both-moved', 'undeclared-drift']);
+
+/**
+ * Se `--init` puo' riscrivere QUESTA voce, o se riscriverla seppellirebbe un
+ * verdetto (issue #978).
+ *
+ * ## Il buco
+ *
+ * `--init` scrive `now` su entrambi i lati e `alignedAt` = oggi. Su una voce
+ * gia' allineata e' una registrazione; su una voce in `site-ahead` o
+ * `both-moved` e' la CHIUSURA di un drift che nessuno ha riconciliato: il file
+ * non e' stato portato, ma il giorno dopo il report lo dice `stable`. Niente
+ * nel codice distingueva i due atti, e `--only` — che esiste per abbassare la
+ * frizione della registrazione singola — abbassa esattamente allo stesso modo
+ * la frizione della sepoltura.
+ *
+ * Stessa forma per il caso simmetrico che oggi usciva come un warning dentro
+ * un comando verde: registrare `identical` con i due lati DIVERSI produce un
+ * `undeclared-drift` alla passata successiva, e `transportVerdict()` non copia
+ * un `undeclared-drift` — il gemello esce dal trasporto senza che niente
+ * fallisca. Sono lo stesso bug in due tempi, quindi hanno lo stesso guard.
+ *
+ * ## Perche' una voce SENZA baseline passa
+ *
+ * Una entry appena aggiunta ha `baseline` a null su entrambi i lati: non c'e'
+ * nessun verdetto da seppellire, perche' non ce n'e' mai stato uno. E' il caso
+ * d'uso primario di `--only` (issue #653) e deve restare a frizione zero,
+ * altrimenti la baseline torna a scriversi a mano — cioe' torna la classe
+ * `ghost-baseline`. Per la stessa ragione un `adapted` nuovo, che ha i due
+ * lati diversi PER COSTRUZIONE, non e' un caso bloccato.
+ *
+ * PURA: nessuna rete, nessun disco. E' cio' che la rende verificabile offline.
+ *
+ * @param {{mode: string}} entry
+ * @param {{site: string|null, corpus: string|null}} now
+ * @param {{site: string|null, corpus: string|null}|null} base
+ * @param {string} state  lo `state` di `classify()` PRIMA della riscrittura.
+ * @returns {{blocked: boolean, why: string}}
+ */
+function initWriteVerdict(entry, now, base, state) {
+  const baseSite = base && base.site != null ? base.site : null;
+  const baseCorpus = base && base.corpus != null ? base.corpus : null;
+  const registered = baseSite !== null || baseCorpus !== null;
+
+  if (registered && OPEN_DRIFT_STATES.has(state)) {
+    return {
+      blocked: true,
+      why:
+        `drift APERTO (\`${state}\`): riscrivere la baseline lo chiude senza che nessuno abbia ` +
+        'riconciliato i due lati, e il verdetto sparisce dal report successivo. Porta il file (o ' +
+        'riapplica la modifica sopra l\'adattamento), POI registra la baseline; se il drift lo stai ' +
+        'chiudendo davvero tu, dillo con `--force`.',
+    };
+  }
+
+  if (entry.mode === 'identical' && now.site !== null && now.corpus !== null && now.site !== now.corpus) {
+    return {
+      blocked: true,
+      why:
+        'registrerebbe `identical` con i due lati DIVERSI: la prossima passata lo leggera\' ' +
+        '`undeclared-drift` e il trasporto smettera\' di copiarlo. Riallinea il file, marcalo ' +
+        '`adapted` con la sua ragione, oppure conferma con `--force`.',
+    };
+  }
+
+  return { blocked: false, why: '' };
 }
 
 const ONLY = parseOnly(RAW_ARGS);
@@ -897,6 +980,12 @@ async function main() {
     console.error(onlyError);
     return 1;
   }
+  if (FORCE && !INIT) {
+    // Stessa regola di `--only`: una flag che non ha effetto sul percorso
+    // scelto e' un malinteso su cosa sta per succedere, non un no-op innocuo.
+    console.error('`--force` ha senso solo con `--init`: senza, non c\'e\' niente da riscrivere.');
+    return 1;
+  }
   const manifest = readManifest();
   const { targets: initTargets, unknown: initUnknown } = resolveInitTargets(ONLY, manifest.files.map((f) => f.path));
   if (initUnknown.length) {
@@ -907,9 +996,11 @@ async function main() {
     return 1;
   }
   const results = [];
-  // Le voci che `--init` registra come `identical` pur avendo i due lati
-  // diversi: vanno dette QUI, non lasciate al report del giorno dopo.
-  const divergentInit = [];
+  // Le voci che `--init` si rifiuta di riscrivere: o hanno un drift APERTO che
+  // la riscrittura seppellirebbe, o diventerebbero un `identical` divergente.
+  // Prima erano, rispettivamente, niente e un warning dentro un comando verde
+  // (issue #978). `--force` le sblocca, ma allora lo dice chi lancia.
+  const initBlocked = [];
 
   for (const entry of manifest.files) {
     const rel = entry.path;
@@ -935,6 +1026,17 @@ async function main() {
     }
 
     if (INIT) {
+      // Il verdetto va calcolato PRIMA della riscrittura: dopo, `now` e' anche
+      // la baseline e ogni voce e' `stable` per costruzione — che e' esattamente
+      // il modo in cui un drift aperto spariva.
+      const guard = initWriteVerdict(entry, now, base, classify(entry, now, base).state);
+      if (guard.blocked) {
+        initBlocked.push({ path: rel, why: guard.why });
+        // Con `--force` si scrive lo stesso, ma il blocco resta stampato: la
+        // conferma esplicita non deve rendere l'atto silenzioso.
+        if (!FORCE) continue;
+      }
+
       // `corpus-only` e `corpus-only-pending` non hanno un sito da tracciare:
       // per il secondo, `now.site` puo' essere non-null (il gemello e' appena
       // atterrato) ma scriverlo qui lo farebbe come effetto collaterale di un
@@ -950,17 +1052,6 @@ async function main() {
         // `--init` globale, che per questa voce non e' mai avvenuto.
         alignedAt: initTargets ? new Date().toISOString().slice(0, 10) : (manifest.alignedAt || null),
       };
-      // Stessa classe del riallineamento del trasporto (#852): una baseline
-      // `identical` con i due lati diversi e' `undeclared-drift` alla passata
-      // successiva — actionable per sempre, e la voce esce dal trasporto
-      // (`transportVerdict()` non copia un `undeclared-drift`). Qui non si
-      // rifiuta la scrittura, perche' `--init` e' un atto manuale e la
-      // registrazione dello stato attuale e' proprio cio' che gli si chiede:
-      // si dice ad alta voce cosa si sta registrando, invece di lasciarlo
-      // scoprire al report di domani.
-      if (entry.mode === 'identical' && now.site !== null && now.corpus !== null && now.site !== now.corpus) {
-        divergentInit.push(rel);
-      }
       continue;
     }
 
@@ -1050,6 +1141,21 @@ async function main() {
   }
 
   if (INIT) {
+    if (initBlocked.length) {
+      for (const { path: rel, why } of initBlocked) console.error(`  ⚠ ${rel}: ${why}`);
+      if (!FORCE) {
+        // Rifiuto ATOMICO: il manifest non viene scritto affatto. Scrivere le
+        // voci passate e saltare le bloccate lascerebbe un `alignedAt` bumpato
+        // e un commit a meta', che e' il modo piu' facile di far passare il
+        // rifiuto per un successo parziale.
+        console.error(
+          `--init: ${initBlocked.length} voce/i non riscritte e NIENTE scritto sul manifest. ` +
+            'Riconcilia i due lati, oppure rilancia con `--force` se stai chiudendo tu quei drift.',
+        );
+        return 1;
+      }
+      console.error(`--init --force: ${initBlocked.length} voce/i riscritte NONOSTANTE il blocco qui sopra.`);
+    }
     // `manifest.alignedAt` e' la data dell'ultimo allineamento INTEGRALE: con
     // `--only` non c'e' stato, e bumparlo direbbe che trecento voci sono state
     // rilette oggi quando non le ha guardate nessuno.
@@ -1060,9 +1166,6 @@ async function main() {
         ? `Baseline registrate per ${initTargets.size} file: ${[...initTargets].join(', ')}.`
         : `Baseline registrate per ${manifest.files.length} file (alignedAt=${manifest.alignedAt}).`,
     );
-    for (const rel of divergentInit) {
-      console.error(`  ⚠ ${rel}: registrato \`identical\` con i due lati DIVERSI — la prossima passata lo leggera' \`undeclared-drift\` e il trasporto smettera' di copiarlo. Riallinea il file, oppure marcalo \`adapted\` con la sua ragione.`);
-    }
     return 0;
   }
 
@@ -1212,4 +1315,4 @@ if (process.argv[1] && process.argv[1].endsWith('loop-drift-check.mjs')) {
 // baseline con LA STESSA regola con cui la pesa il cron, altrimenti una voce
 // accettata in PR verrebbe dichiarata fantasma il mattino dopo — o peggio, il
 // contrario. Una seconda copia della regola lo renderebbe inevitabile.
-export { classify, parseOnly, onlyArgError, resolveInitTargets, ghostVerdict, strandedVerdict, corpusOnlyTwinVerdict, unmirrorableDepsVerdict, resolvedLocalImports, gitBlobSha, scalarFingerprintVerdict, siteFile, sha256, repoHistoryMatch };
+export { classify, parseOnly, onlyArgError, resolveInitTargets, initWriteVerdict, ghostVerdict, strandedVerdict, corpusOnlyTwinVerdict, unmirrorableDepsVerdict, resolvedLocalImports, gitBlobSha, scalarFingerprintVerdict, siteFile, sha256, repoHistoryMatch };
