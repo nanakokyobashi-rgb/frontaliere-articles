@@ -131,6 +131,16 @@ const NEG_REPORT_RE = new RegExp(
 // definitivamente #12`, `Closing the #12`. Bounded to a known word list so a
 // sentence boundary or real prose can never bridge verb and ref.
 const INTENT_FILLER = "(?:\\s+(?:da|by|the|la|il|lo|le|gli|l'|anche|definitivamente|finalmente|completamente|parzialmente))*";
+// `[\s:]*` — the colon is TOLERATED between verb and ref, and that tolerance is
+// what makes `chiusi: #849` reachable, i.e. what put the false positive above
+// within reach at all. Measured before keeping it, over the 556 PR bodies of
+// the corpus repo (2026-09-06): `<intento>: #N` occurs ONCE — inside PR #886,
+// which is the body quoting that very false positive — and a real keyword with
+// a colon (`Closes: #12`) occurs ZERO times. So dropping the colon would buy
+// nothing measurable and would cost the detection of a genuine `Chiude: #12`,
+// which is the expensive direction (a missed report leaves an issue open with
+// its fix on `main`). It stays, and the negation guard below is what keeps it
+// honest.
 const INTENT_RE = new RegExp(`\\b(${INTENT_KW})\\b${INTENT_FILLER}[\\s:]*[*_\`[]*(${REF})`, 'gi');
 
 /** Every ref a real GitHub keyword governs → the ones that will actually close. */
