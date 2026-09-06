@@ -20,8 +20,9 @@
  * directly testable (`generator/tests/register-lock.test.mjs`) without
  * touching the rest of create-article.mjs.
  */
-import { readFileSync, writeFileSync, mkdirSync, existsSync, unlinkSync } from 'node:fs';
+import { readFileSync, existsSync, unlinkSync } from 'node:fs';
 import path from 'node:path';
+import { writeJsonAtomic } from './atomic-write-json.mjs';
 
 // Deliberately NOT under `.tmp/`, which is gitignored. A run killed mid-write
 // leaves its partial writes on disk, and `generate-article.yml` sweeps them
@@ -68,12 +69,17 @@ export function beginRegisterLock(projectRoot, id, section) {
         'partial write is inspected by hand and the lock file removed.',
     );
   }
-  mkdirSync(path.dirname(lockPath), { recursive: true });
-  writeFileSync(
-    lockPath,
-    JSON.stringify({ id, section, pid: process.pid, startedAt: new Date().toISOString() }, null, 2),
-    'utf-8',
-  );
+  // temp+rename, come ogni altra scrittura della catena di registrazione
+  // (`write()` di create-article.mjs, issue #561). Un SIGKILL a meta' di una
+  // `writeFileSync` diretta lascerebbe qui un JSON troncato, e un lock
+  // illeggibile e' un ARRESTO DURO permanente: `resolveRegisterLock()` lancia
+  // finche' qualcuno non cancella il file a mano, anche su un corpus intatto —
+  // il kill puo' essere atterrato PRIMA della prima delle 9 scritture, quindi
+  // senza nessuno split da riparare. Con il commit via `renameSync` le sole
+  // forme osservabili su disco sono «nessun lock» e «lock valido e completo»,
+  // e il ramo `unreadable` di `readRegisterLock()` diventa irraggiungibile per
+  // costruzione (resta li' come rete, non va rimosso).
+  writeJsonAtomic(lockPath, { id, section, pid: process.pid, startedAt: new Date().toISOString() });
 }
 
 /**
