@@ -42,6 +42,7 @@ import { execFileSync } from 'node:child_process';
 import { classifyIssue } from '../lib/classify-issue.mjs';
 import {
   CODE_PATH_RE,
+  WORKFLOW_PATH_RE,
   detectWorkflowScoped,
   extractWorkflowRefs,
   repoRelativeTail,
@@ -623,6 +624,114 @@ export function isDeliveredThisRun({ outcome, outcomeAt, mergedAt, promotedAt } 
   if (!Number.isFinite(outcomeAt) || outcomeAt < promotedAt) return false;
   if (!Number.isFinite(mergedAt) || mergedAt < promotedAt) return false;
   return true;
+}
+
+// --- PRODUCTION-PROOF: `awaiting-production-proof` letto e RIMOSSO (#973 item 4)
+// La label esiste dal 2026-08 (`ISSUES.md` → "Fix flow", REVIEW.md §8): quando la
+// PR chiude un bug osservabile SOLO a runtime (sandbox/bwrap, permessi,
+// rate-limit, dispatch) né il diff né i test possono dimostrare che il fix
+// funziona, quindi la PR usa `Refs #<n>` e la issue resta aperta con questa label
+// finché non arriva la misura di una run verde su `main` (#151: la PR #147 fu
+// mergiata e la issue #127 chiusa 8 minuti prima che la produzione smentisse la
+// diagnosi).
+//
+// Fino a qui NESSUNO stadio la leggeva. La conseguenza: la issue resta aperta,
+// il ramo DELIVERED la ri-accoda (giustamente, senza consumare tentativi) e il
+// DRAIN la promuove al primo slot libero — dove il fixer trova un fix già
+// mergiato e nessun modo di verificarlo, e brucia un run della quota condivisa
+// col sito per riscoprirlo. Il ciclo si ripete a ogni tick finché qualcuno non
+// interviene a mano.
+//
+// Perché non bastava «escludi chi ha la label dalla promozione» (il motivo per
+// cui il body di #973 dichiarava l'item `needs triage`): senza un rimuovitore
+// la label diventa uno STATO ASSORBENTE — la issue non viene più promossa, mai,
+// e nessun automatismo la rimette in circolo. Serve prima definire cos'È la
+// prova, e chi la constata. Le due metà stanno insieme o nessuna delle due è
+// corretta.
+//
+// **La prova, resa meccanica.** La PR che ha ricevuto la label tocca
+// `.github/workflows/**` (è la precondizione della regola in REVIEW.md §8).
+// Allora: una run **success** di uno di quei workflow, su `main`, **creata dopo
+// il merge**, è esattamente «una run verde su main col fix dentro» — misurabile
+// con `gh run list`, zero Claude. Il confronto è su `createdAt > mergedAt`
+// perché una run creata dopo il merge legge il file di workflow già mergiato.
+//
+// **Terminazione.** Ogni stato porta a una rimozione della label, quindi la
+// sospensione non può essere assorbente:
+//  • prova trovata               → commento con la misura + label rimossa;
+//  • merge non ancora avvenuto   → hold (la PR è ancora in volo), con lo stesso
+//                                  timeout sotto misurato dall'apposizione;
+//  • merge senza file di workflow → la prova non è definibile per questa PR
+//                                  (label applicata fuori dalla sua regola):
+//                                  rimossa, con la ragione agli atti;
+//  • nessuna prova entro         → timeout: label rimossa + warning. Una prova
+//    PROOF_MAX_HOLD_DAYS           che non arriva in una settimana non arriva da
+//                                  sola: il workflow non gira più su `main`,
+//                                  oppure gira e fallisce. In entrambi i casi
+//                                  sospendere ancora nasconde il fatto.
+// 7 giorni: il cron più lento di questo repo è giornaliero, quindi una settimana
+// contiene ≥7 occasioni di prova per qualunque workflow ancora vivo.
+const LBL_PROOF = 'awaiting-production-proof';
+export const PROOF_MAX_HOLD_DAYS = Number(process.env.FOLLOWUP_PROOF_MAX_HOLD_DAYS || 7);
+const PROOF_SCAN_MAX = Number(process.env.FOLLOWUP_PROOF_SCAN_MAX || 10);
+
+/**
+ * I soli path che sono FILE di workflow, da una lista di path modificati.
+ * Riusa `WORKFLOW_PATH_RE` (sorgente unica, `workflow-scope-detect.mjs`) invece
+ * di una seconda regex: `String.match` su una regex `/g` è senza stato, e il
+ * path è un file di workflow quando il match copre il path INTERO (`.github/
+ * workflows/x.yml/altro` non lo è). Pura → testabile.
+ * @param {string[]} files @returns {string[]}
+ */
+export function workflowFilesOf(files) {
+  const out = [];
+  for (const raw of files || []) {
+    const p = String(raw || '').trim();
+    if (!p) continue;
+    const m = p.match(WORKFLOW_PATH_RE);
+    if (!m || m[0] !== p) continue;
+    // GitHub esegue solo i file al primo livello di `.github/workflows/`: un
+    // `.yml` in una sotto-cartella non produce MAI una run, quindi prenderlo
+    // come sorgente della prova garantirebbe un timeout invece del verdetto
+    // giusto («prova non definibile per questa PR»).
+    if (p.slice('.github/workflows/'.length).includes('/')) continue;
+    out.push(p);
+  }
+  return out;
+}
+
+/**
+ * Cosa fare di una issue `awaiting-production-proof`. Pura (tutti gli I/O sono
+ * già risolti dal chiamante) → testabile.
+ *
+ * @param {{labeledAt: number|null, mergedAt: number|null,
+ *          workflows: string[], proofRun: {url?: string, createdAt?: string, workflow?: string}|null,
+ *          now?: number, maxHoldMs?: number}} args
+ * @returns {{action: 'proof'|'hold'|'timeout'|'undeterminable'|'skip', reason: string, run?: object}}
+ */
+export function productionProofDecision({
+  labeledAt, mergedAt, workflows, proofRun,
+  now = Date.now(), maxHoldMs = PROOF_MAX_HOLD_DAYS * 86_400_000,
+} = {}) {
+  const merged = Number.isFinite(mergedAt) ? mergedAt : null;
+  const labeled = Number.isFinite(labeledAt) ? labeledAt : null;
+  // Nessuno dei due timestamp leggibile = glitch `gh`, non uno stato: non si
+  // decide niente e si riprova al tick successivo (fail-open sul NON-agire).
+  if (merged === null && labeled === null) return { action: 'skip', reason: 'né merge né apposizione leggibili (glitch gh) → nessuna decisione' };
+  const since = merged ?? labeled;
+  const expired = now - since > maxHoldMs;
+  if (merged === null) {
+    return expired
+      ? { action: 'timeout', reason: `nessuna PR fix mergiata a ${Math.round((now - since) / 86_400_000)}gg dall'apposizione della label` }
+      : { action: 'hold', reason: 'la PR fix non è ancora mergiata: la prova non può esistere' };
+  }
+  if (!(workflows || []).length) {
+    return { action: 'undeterminable', reason: 'la PR mergiata non tocca `.github/workflows/**`: nessuna run di cui la prova sia la misura' };
+  }
+  if (proofRun) return { action: 'proof', reason: 'run verde su `main` dopo il merge', run: proofRun };
+  return expired
+    ? { action: 'timeout', reason: `nessuna run verde su \`main\` di ${workflows.join(', ')} nei ${Math.round((now - since) / 86_400_000)}gg dal merge` }
+    : { action: 'hold', reason: 'prova non ancora arrivata (nessuna run verde su `main` dopo il merge)' };
 }
 
 // --- WORKFLOW-SCOPE PRE-FLIGHT (escalation #1724) ---------------------------
@@ -2119,15 +2228,63 @@ function fixPromotion(num) {
  * niente, e `hasFixPR` (`--state open`) non le distingue. Fail-safe a null =
  * nessuna gratuità, cioè il ramo bounded pre-esistente. */
 function mergedFixPrAt(num) {
+  return mergedFixPr(num)?.mergedAt ?? null;
+}
+
+/** Ultima PR fix MERGIATA di questa issue: `{mergedAt, files}` (epoch ms + path
+ * modificati), o null se non ne esiste nessuna / errore gh. Sorgente unica del
+ * merge di una fix — `mergedFixPrAt` ne è la proiezione — così il ramo
+ * DELIVERED e il pass PRODUCTION-PROOF non possono divergere su "quale merge
+ * conta". `files` serve solo al secondo, e costa zero in più: `gh pr list` lo
+ * restituisce nella stessa chiamata. */
+function mergedFixPr(num) {
   try {
-    const prs = gh(['pr', 'list', '--repo', REPO, '--head', `fix/issue-${num}`, '--state', 'merged', '--json', 'mergedAt', '--limit', '20']);
-    let latest = null;
+    const prs = gh(['pr', 'list', '--repo', REPO, '--head', `fix/issue-${num}`, '--state', 'merged', '--json', 'mergedAt,files', '--limit', '20']);
+    let best = null;
     for (const pr of Array.isArray(prs) ? prs : []) {
       const at = Date.parse(pr?.mergedAt);
       if (Number.isNaN(at)) continue;
-      if (latest === null || at > latest) latest = at;
+      if (best === null || at > best.mergedAt) {
+        best = { mergedAt: at, files: (pr?.files || []).map((f) => String(f?.path || '')) };
+      }
     }
-    return latest;
+    return best;
+  } catch {
+    return null;
+  }
+}
+
+/** Epoch ms dell'ultima apposizione di `label` su questa issue, o null (errore
+ * gh / evento assente). `--paginate` per la stessa ragione di `fixPromotion`:
+ * la timeline di una issue lavorata dal ciclo supera le 30 voci di default. */
+function labelAddedAt(num, label) {
+  try {
+    const events = gh(['api', `repos/${REPO}/issues/${num}/events?per_page=100`, '--paginate']);
+    return lastLabelEventAt(Array.isArray(events) ? events : [], label);
+  } catch {
+    return null;
+  }
+}
+
+/** Prima run `success` su `main` del workflow `wf` (path o basename) creata
+ * DOPO `sinceMs`, o null. È la misura che `awaiting-production-proof` aspetta:
+ * una run creata dopo il merge esegue il file di workflow già mergiato, quindi
+ * il suo verde è verde COL fix dentro. `--limit 20` basta: si cercano le run
+ * più recenti, e `gh run list` le restituisce in ordine decrescente. */
+function successMainRunAfter(wf, sinceMs) {
+  const file = String(wf || '').split('/').pop();
+  if (!file) return null;
+  try {
+    const runs = gh([
+      'run', 'list', '--repo', REPO, '--workflow', file, '--branch', 'main',
+      '--status', 'success', '--json', 'createdAt,url,workflowName', '--limit', '20',
+    ]);
+    for (const r of Array.isArray(runs) ? runs : []) {
+      const at = Date.parse(r?.createdAt);
+      if (Number.isNaN(at) || at <= sinceMs) continue;
+      return { url: String(r?.url || ''), createdAt: String(r?.createdAt || ''), workflow: String(r?.workflowName || file) };
+    }
+    return null;
   } catch {
     return null;
   }
@@ -2300,6 +2457,54 @@ export function runDrain() {
       } catch (e) {
         console.log(`parent-close: #${p.number} fallita (${e.message}) — continuo col batch.`);
       }
+    }
+  }
+
+  // --- PRODUCTION-PROOF: constata la prova su `main` e TOGLIE la label --------
+  // Ortogonale allo slot (legge run e scrive una label, non tocca il fixer) →
+  // gira sempre, anche sotto backoff di quota: è zero-Claude. È la metà
+  // «rimuovitore» senza cui la sospensione del DRAIN qui sotto sarebbe uno
+  // stato assorbente (vedi il commento di `productionProofDecision`).
+  // Bounded: al più PROOF_SCAN_MAX issue per tick, il resto al prossimo (no
+  // silent cap).
+  {
+    const pending = listIssues(LBL_PROOF);
+    let examined = 0;
+    for (const iss of pending) {
+      if (examined >= PROOF_SCAN_MAX) {
+        console.log(`production-proof: cap ${PROOF_SCAN_MAX}/run raggiunto, ${pending.length - examined} issue rinviate al prossimo tick (no silent cap).`);
+        break;
+      }
+      if (!budget.take(`#${iss.number} (production-proof)`, ITEM_COST_MS)) break;
+      examined++;
+      const merged = mergedFixPr(iss.number);
+      const workflows = workflowFilesOf(merged?.files || []);
+      const proofRun = merged && workflows.length
+        ? workflows.map((wf) => successMainRunAfter(wf, merged.mergedAt)).find(Boolean) || null
+        : null;
+      const d = productionProofDecision({
+        labeledAt: labelAddedAt(iss.number, LBL_PROOF),
+        mergedAt: merged?.mergedAt ?? null,
+        workflows,
+        proofRun,
+      });
+      if (d.action === 'hold' || d.action === 'skip') {
+        console.log(`PROOF-HOLD #${iss.number} (${d.action}): ${d.reason} → \`${LBL_PROOF}\` resta, nessuna promozione`);
+        continue;
+      }
+      const note = d.action === 'proof'
+        ? `✅ **Prova in produzione constatata** (\`followup-drainer\`, PRODUCTION-PROOF, #973): la PR fix è mergiata (${new Date(merged.mergedAt).toISOString()}) e \`${d.run.workflow}\` ha una run **verde su \`main\` creata dopo il merge** — ${d.run.createdAt} · ${d.run.url}. È esattamente la misura che \`${LBL_PROOF}\` aspettava (REVIEW.md §8, #151: la prova la dà l'esecuzione, non il diff).\n\nTolgo \`${LBL_PROOF}\`: la issue torna nel ciclo normale.`
+        : d.action === 'undeterminable'
+          ? `↩️ **\`${LBL_PROOF}\` rimossa senza prova** (\`followup-drainer\`, PRODUCTION-PROOF, #973): ${d.reason}. La label vale per i fix la cui unica verità è una run reale (\`.github/workflows/**\` o config dell'action Claude, REVIEW.md §8); qui non c'è un workflow di cui la prova sarebbe la misura, quindi la sospensione non potrebbe mai risolversi da sola.\n\nLa tolgo invece di lasciarla appesa: una label che nessuno può togliere escluderebbe questa issue dal fixer **per sempre**.`
+          : `⚠️ **\`${LBL_PROOF}\` scaduta senza prova** (\`followup-drainer\`, PRODUCTION-PROOF, #973): ${d.reason} — oltre il tetto di **${PROOF_MAX_HOLD_DAYS} giorni**. Una prova che non arriva in una settimana non arriva da sola: o il workflow non gira più su \`main\`, o gira e **fallisce**.\n\nTolgo \`${LBL_PROOF}\` e restituisco la issue al ciclo normale — sospenderla ancora nasconderebbe il fatto invece di misurarlo. Verifica a mano se il fix ha davvero funzionato in produzione.`;
+      if (DRY) { console.log(`[dry] production-proof #${iss.number} → ${d.action} (${d.reason})`); continue; }
+      if (d.action === 'timeout') {
+        console.log(`::warning::#${iss.number}: \`${LBL_PROOF}\` scaduta a ${PROOF_MAX_HOLD_DAYS}gg senza una run verde su \`main\` — ${d.reason} (#973)`);
+      }
+      try { gh(['issue', 'comment', String(iss.number), '--repo', REPO, '--body', note], { json: false }); }
+      catch (e) { console.log(`::warning::comment #${iss.number} fallito: ${String(e).slice(0, 120)}`); }
+      edit(iss.number, { remove: [LBL_PROOF] });
+      console.log(`PROOF-${d.action.toUpperCase()} #${iss.number}: ${d.reason} → \`${LBL_PROOF}\` rimossa`);
     }
   }
 
@@ -3128,6 +3333,7 @@ export function runDrain() {
   }
 
   let overlapSkipped = 0;
+  let proofSkipped = 0;
   let prFilesMap = null; // lazy: caricato al primo candidato con path estratti, poi cached
 
   // Promuovi il primo candidato in coda, MA salta (parka) quelli il cui fix è
@@ -3136,6 +3342,19 @@ export function runDrain() {
   // Park preemptivo = stesso esito del NON_RETRYABLE post-hoc, senza il run. Il
   // body serve solo per i candidati realmente considerati → fetch lazy, 1 alla volta.
   for (const cand of queued) {
+    // Check: prova in produzione in sospeso (#973 item 4). Sta PRIMA di
+    // `budget.take` perché è l'unico check del ciclo che non costa una sola
+    // chiamata `gh`: le label sono già nel listing. Il fix di questa issue è
+    // mergiato e non verificabile dal diff — promuoverla manda il fixer a
+    // riscoprire che non c'è niente da fixare, a spese della quota condivisa
+    // col sito. NIENTE park: la sospensione dura quanto la label, e il pass
+    // PRODUCTION-PROOF qui sopra la toglie a prova arrivata, a prova non
+    // definibile o a timeout — quindi la coda non la perde.
+    if (has(cand, LBL_PROOF)) {
+      console.log(`PROOF-SKIP #${cand.number} (\`${LBL_PROOF}\`: fix mergiato in attesa della misura su \`main\`) → rinvio, resta in coda`);
+      proofSkipped++;
+      continue;
+    }
     // Valutare un candidato costa una `gh issue view` (body) e può finire in
     // comment+edit di park. Senza tempo per la coppia si esce: la coda resta
     // intatta e il tick successivo riparte dallo stesso primo candidato.
@@ -3346,8 +3565,11 @@ export function runDrain() {
     edit(cand.number, { add: [LBL_FIX], remove: [LBL_QUEUED] });
     return; // una sola promozione per run (slot issue-fix)
   }
-  const skipNote = overlapSkipped ? ` + ${overlapSkipped} overlap-file rinviati al prossimo tick` : '';
-  console.log(`coda esaurita (solo candidati parkati${skipNote}) → niente da promuovere.`);
+  const skipNote = [
+    overlapSkipped ? `${overlapSkipped} overlap-file` : '',
+    proofSkipped ? `${proofSkipped} in attesa di prova in produzione` : '',
+  ].filter(Boolean).join(' + ');
+  console.log(`coda esaurita (solo candidati parkati${skipNote ? ` + ${skipNote} rinviati al prossimo tick` : ''}) → niente da promuovere.`);
 }
 
 // Esegui solo come CLI (non quando importato dai test → evita di lanciare gh).

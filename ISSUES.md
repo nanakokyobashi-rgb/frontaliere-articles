@@ -104,11 +104,20 @@ tick fosse sbagliato.
    o lettura del diff può dimostrare che il fix funziona, solo una run reale
    — **non usare `Closes #<n>`**: usa `Refs #<n>` e, dopo l'apertura della PR,
    `gh issue edit <n> --add-label awaiting-production-proof`. La issue resta
-   aperta finché qualcuno non allega la misura di una run verde su `main`
+   aperta finché la misura di una run verde su `main` non arriva
    (vedi #151: la PR #147 è stata mergiata e la issue #127 chiusa 8 minuti
    prima che la misura in produzione smentisse la diagnosi). Il marker
    `FIX_OUTCOME: pr-created` resta comunque quello giusto — è la PR ad essere
    aperta, non il verdetto del fixer a mancare.
+
+   La misura non la allega più una mano umana: dal 2026-09-06 (#973) il pass
+   **PRODUCTION-PROOF** del drainer sospende la promozione finché la label c'è,
+   e la toglie da solo quando una run **success** su `main` di un workflow
+   toccato dalla PR risulta creata **dopo** il merge. Sospensione senza
+   rimuovitore = stato assorbente, quindi ogni altro esito toglie comunque la
+   label: prova non definibile (la PR non tocca `.github/workflows/**`) o
+   timeout a `FOLLOWUP_PROOF_MAX_HOLD_DAYS` (7) con un warning — una prova che
+   non arriva in una settimana non arriva da sola.
 10. La PR entra da sola nel ciclo di review e auto-merge. **Non mergiare a mano.**
 
 ## Issue aggregate: il circuit-breaker
