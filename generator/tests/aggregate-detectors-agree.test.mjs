@@ -35,6 +35,9 @@ import {
   isAvoidableAlreadyFixed, isAvoidableMaxTurns, hasEnumeratedItems as fromHarvest,
 } from '../../scripts/ci/harvest-agent-lessons.mjs';
 
+/** Le tre copie devono concordare: se divergono, il test dedicato sotto lo dice. */
+const hasEnumeratedItemsAll = (body) => fromPreflight(body);
+
 /**
  * Le forme reali osservate sulle issue di questo repo, non forme inventate.
  * `aggregate` e' la risposta attesa da `hasEnumeratedItems` sul solo corpo.
@@ -105,6 +108,30 @@ const BODIES = Object.freeze({
     title: 'follow-up(#9): una cosa sola',
     body: '## 1. La cosa\n\nTesto.',
   },
+  // #926 — un item solo, ma il corpo incolla uno snippet markdown: le righe dentro
+  // un blocco recintato non sono item della issue. Contarle INVENTA un aggregato,
+  // che reconcile non auto-chiude piu' e resta in coda a tempo indefinito.
+  fencedSnippet: {
+    aggregate: false,
+    title: 'follow-up(#9): una cosa sola, con uno snippet citato',
+    body: [
+      'Il reviewer ha sondato questa forma:',
+      '',
+      '```markdown',
+      '1. **A**',
+      '2. **B**',
+      '```',
+      '',
+      'Fine.',
+    ].join('\n'),
+  },
+  // #926 — un lead-titolo in grassetto e' un item; un grassetto d'ENFASI in mezzo
+  // alla prosa non lo e'. La vecchia regex chiedeva solo che la riga iniziasse con `**`.
+  emphasisNotItem: {
+    aggregate: false,
+    title: 'follow-up(#9): una cosa sola',
+    body: '1. **Solo un item.** e poi\n2. **nota** finale che non e\' un item',
+  },
 });
 
 test('hasEnumeratedItems riconosce le forme multi-item senza conteggio nel titolo (#568)', () => {
@@ -133,6 +160,42 @@ test('isAggregate non corto-circuita un multi-item enumerato nel corpo (#374, #4
   assert.equal(isAggregate(b.title, b.body), true, 'bullet in grassetto: 3 item, nessun conteggio nel titolo');
   assert.equal(isAggregate(o.title, o.body), true, 'lista ordinata in grassetto: 2 item, nessun conteggio nel titolo');
   assert.equal(isAggregate(s.title, s.body), false, 'un follow-up a un solo item resta corto-circuitabile');
+});
+
+test('un conteggio CITATO nel corpo non sopprime l\'aggregazione (#926)', () => {
+  // La scheda del fixer cita per costruzione il `## Non implementato` del parent.
+  // Letto su titolo+corpo, quel «1 item deferred» corto-circuitava a false una issue
+  // i cui item sono comunque enumerati sotto: il fixer si sarebbe fermato al primo.
+  const body = [
+    'Dal `## Non implementato (ancora)` del parent: 1 item deferred.',
+    '',
+    '## 1. Primo item',
+    '',
+    'Testo.',
+    '',
+    '## 2. Secondo item',
+    '',
+    'Altro testo.',
+  ].join('\n');
+  const title = 'follow-up(#898): due cose distinte';
+  assert.equal(isAggregate(title, body), true, 'il conteggio vale solo se sta nel TITOLO');
+  // I due gemelli leggevano gia' il conteggio sul solo titolo: ora concordano.
+  assert.equal(isAggregateTitle(title, body), true);
+  assert.equal(isAvoidableAlreadyFixed(title, ['follow-up'], body), false);
+});
+
+test('un fence o un grassetto d\'enfasi non inventano un aggregato (#926)', () => {
+  const { fencedSnippet: f, emphasisNotItem: e } = BODIES;
+  assert.equal(isAggregate(f.title, f.body), false, 'le righe recintate non sono item');
+  assert.equal(isAggregateTitle(f.title, f.body), false,
+    'un aggregato inventato non e\' piu\' auto-chiudibile e resta in coda per sempre');
+  assert.equal(isAggregate(e.title, e.body), false, 'un grassetto d\'enfasi non e\' un lead-titolo');
+  assert.equal(isAggregateTitle(e.title, e.body), false);
+  // Le forme di lead-titolo restano item: chiusura dentro il grassetto, riga intera,
+  // separatore dopo il grassetto.
+  assert.equal(hasEnumeratedItemsAll('1. **Titolo.** Testo.\n2. **Altro:** Testo.'), true);
+  assert.equal(hasEnumeratedItemsAll('- **Titolo**: testo\n- **Altro** — testo'), true);
+  assert.equal(hasEnumeratedItemsAll('1. **A**\n2. **B**'), true);
 });
 
 test('il conteggio esplicito nel titolo resta autoritativo sopra il corpo (#3378)', () => {

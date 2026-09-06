@@ -432,9 +432,10 @@ export function tallyFindings(prs, { bucketOf = bucketFinding } = {}) {
  * cioe' contati come burn "evitabile" dal gate dell'harvester pur essendo aggregati la cui
  * risoluzione e' scaglionata su piu' PR, gonfiando proprio il bucket che ha innescato #560.
  *
- * La direzione dell'errore resta sicura in tutti i chiamanti: un falso positivo fa
- * PROCEDERE il fixer (nessun corto-circuito), NON auto-chiudere un aggregato parziale e
- * NON contare un burn — mai il contrario. Il conteggio esplicito nel titolo resta
+ * La direzione dell'errore e' sicura per la PRE-FLIGHT (un falso positivo fa PROCEDERE il
+ * fixer) ma NON per reconcile: li' un aggregato inventato toglie l'auto-chiusura e lascia
+ * la issue in coda a tempo indefinito, cioe' fa CRESCERE la coda (#926). Per questo il
+ * conteggio salta i blocchi recintati e chiede un lead-TITOLO in grassetto, non un'enfasi. Il conteggio esplicito nel titolo resta
  * autoritativo e continua a corto-circuitare PRIMA di qui (#3378).
  *
  * DUPLICATA di proposito in `check-issue-already-resolved.mjs`, `harvest-agent-lessons.mjs`
