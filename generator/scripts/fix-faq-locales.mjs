@@ -247,11 +247,33 @@ function insertFaqKey(filePath, articleId, faqArray) {
 
 // ── Language detection (same as job crawlers) ───────────────
 
-function isWrongLocale(faqArray, expectedLocale) {
-  const allText = faqArray.map(p => `${p.q} ${p.a}`).join(' ');
-  if (allText.length < 50) return false; // too short to detect
-  const detected = detectLanguage(allText, expectedLocale);
-  return detected !== expectedLocale;
+// `isWrongLocale()` — la versione sul testo CONCATENATO — e' stata tolta invece
+// che lasciata accanto inutilizzata. Non e' pulizia: era il difetto. Diluiva la
+// coppia sbagliata nella media delle altre, e finche' restava qui il prossimo
+// call-site l'avrebbe ripresa perche' ha il nome piu' ovvio dei due.
+
+/**
+ * La stessa domanda, ma per COPPIA — ed e' quella che serve prima di scrivere.
+ *
+ * `translateFaqArray()` traduce una coppia alla volta e, quando il motore
+ * fallisce, rimette dentro la coppia ITALIANA come fallback
+ * (`results.push(pair)`): il fallimento tipico non e' totale, e' parziale. Sul
+ * testo concatenato una coppia italiana su otto resta un ottavo del campione,
+ * il rilevatore vede il resto in inglese, dice `en`, e l'italiano finisce
+ * pubblicato sulla pagina `/en/` dentro il JSON-LD della FAQ. Il gate di
+ * scrittura guarda quindi ogni coppia da sola, con la stessa soglia di 50
+ * caratteri sotto cui il rilevatore non ha segnale.
+ *
+ * Ritorna la coppia colpevole (indice + lingua rilevata) o `null`.
+ */
+export function wrongLocalePair(faqArray, expectedLocale) {
+  for (let i = 0; i < faqArray.length; i++) {
+    const text = `${faqArray[i].q} ${faqArray[i].a}`;
+    if (text.length < 50) continue; // too short to detect
+    const detected = detectLanguage(text, expectedLocale);
+    if (detected !== expectedLocale) return { index: i, detected };
+  }
+  return null;
 }
 
 // ── Translation (same cascade as job crawlers) ──────────────
@@ -361,7 +383,12 @@ async function main() {
         issues.push({ articleId, file, locale, reason: 'missing', itFaq });
       } else {
         const localeFaq = extractFaqFromFile(localePath);
-        if (localeFaq && isWrongLocale(localeFaq, locale)) {
+        // Per COPPIA anche qui, e non solo nel gate di scrittura: questo e' il
+        // punto che decide COSA riparare. Col testo concatenato un articolo
+        // /en/ con una coppia italiana su otto non veniva nemmeno SELEZIONATO —
+        // il rilevatore vedeva il resto in inglese e rispondeva `en` — quindi
+        // il gate di scrittura, per stretto che fosse, non lo vedeva mai.
+        if (localeFaq && wrongLocalePair(localeFaq, locale)) {
           issues.push({ articleId, file, locale, reason: 'wrong_locale', itFaq });
         }
       }
@@ -400,9 +427,12 @@ async function main() {
         continue;
       }
 
-      // Verify the translation is actually in the right locale
-      if (isWrongLocale(translated, issue.locale)) {
-        console.error(`${label} ❌ Translation still detected as wrong locale`);
+      // Verify the translation is actually in the right locale — per coppia,
+      // perche' il fallback italiano di `translateFaqArray()` e' per coppia.
+      const wrong = wrongLocalePair(translated, issue.locale);
+      if (wrong) {
+        console.error(`${label} ❌ Translation still detected as wrong locale `
+          + `(coppia ${wrong.index + 1}/${translated.length}: ${wrong.detected})`);
         failed++;
         continue;
       }

@@ -194,6 +194,7 @@ test('ogni choke point di scrittura passa da qui — per OGNI sanitizer, non sol
     'generator/scripts/generate-events-digest-article.mjs',
     'generator/scripts/lib/article-meta-refresh.mjs',
     'generator/scripts/lib/evergreen-article-refresh.mjs',
+    'generator/scripts/retranslate-blocking-bodies.mjs',
     'scripts/build-api.mjs',
     'scripts/build-blog-index.mjs',
     'scripts/publish-article-fast.mjs',
