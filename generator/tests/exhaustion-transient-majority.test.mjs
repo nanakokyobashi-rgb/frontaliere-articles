@@ -21,7 +21,12 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 
-import { isTransientMajority, quotaDeferralShare } from '../scripts/lib/exhaustion-disposition.mjs';
+import {
+  inputCapVetoSummary,
+  isInputCapDeferralVeto,
+  isTransientMajority,
+  quotaDeferralShare,
+} from '../scripts/lib/exhaustion-disposition.mjs';
 
 /** Il verdetto nelle due polarita', per asserirle insieme. */
 const bothTies = (breakdown) => ({
@@ -168,4 +173,109 @@ test('le due politiche sul MEDESIMO `echoUnattributed` sono opposte, e devono re
   // l'eccedenza sarebbe 0 e 53 vs 52 tornerebbe `true` in tie transitorio.
   assert.deepEqual(bothTies(run31823202761), { transient: false, persistent: false },
     'voto: la sola eccedenza si addebita al vincitore, e ribalta un margine di UNO');
+});
+
+/** La diagnostica del voto, con la polarita' del veto input-cap (#357). */
+const vote = (breakdown) => inputCapVetoSummary({ exhaustionBreakdown: breakdown });
+
+test('un `echo.total` sopra le righe che esistono non compra `echoDominated` (#932)', () => {
+  // `providerCooldownSkips.total` non aveva pavimento superiore: `echoRemoved`
+  // lo prendeva alla lettera e `echoDominated` diventava vero per costruzione.
+  // Da #890 quel flag non e' piu' interno — `inputCapVetoSummary` lo PUBBLICA
+  // accanto a `decidedBy` — quindi affermava «la sottrazione era inaffidabile»
+  // su un numero che contraddice il breakdown che sta spiegando.
+  const gonfiato = {
+    transient: 4,
+    persistent: 4,
+    total: 8,
+    providerCooldownSkips: { total: 999 },
+  };
+  const s = vote(gonfiato);
+  assert.equal(s.echoDominated, false,
+    'otto righe in tutto non possono ospitare piu\' di otto echi');
+  // ...e il limite si ferma al guardrail: il MARGINE continua a vedere il
+  // numero dichiarato per intero, perche' li' l'eccedenza e' la prova che gli
+  // echi stanno nei secchi senza etichetta (controllo 2), non un numeratore.
+  assert.equal(s.echoHiddenInBuckets, 999,
+    'il margine legge il campo grezzo: l\'eccedenza e\' la sua prova, non il suo limite');
+  // Il verdetto non si muove: il limite e' diagnostico.
+  assert.deepEqual(bothTies(gonfiato), { transient: false, persistent: false });
+  const veritiero = { ...gonfiato, providerCooldownSkips: { total: 8 } };
+  assert.equal(vote(veritiero).echoDominated, false);
+  assert.equal(vote(veritiero).decidedBy, s.decidedBy,
+    'un campo gonfiato non nomina un ramo diverso da quello veritiero');
+});
+
+test('il limite NON risale alla sorgente: l\'eccedenza resta addebitata al vincitore (#932)', () => {
+  // Clampare `echoTotalReported` dentro `echoBuckets` avrebbe servito il
+  // guardrail indebolendo gli altri due lettori. Questa forma e' il caso
+  // minimo: due echi dichiarati su UNA riga sola. Col campo grezzo il margine
+  // toglie l'eccedenza al vincitore e il transitorio non e' maggioranza →
+  // veto. Con un clamp alla sorgente `voted` tornerebbe 0 >= 0 e il veto
+  // sparirebbe: un campo che contraddice il breakdown comprerebbe il
+  // differimento silenzioso che #313 e' costato.
+  const contraddittorio = {
+    transient: 1,
+    persistent: 0,
+    total: 1,
+    providerCooldownSkips: { total: 2 },
+  };
+  assert.deepEqual(bothTies(contraddittorio), { transient: false, persistent: false });
+  assert.equal(vote(contraddittorio).decidedBy, 'margin');
+  assert.equal(isInputCapDeferralVeto({
+    code: 'ALL_MODELS_EXHAUSTED',
+    inputCapReport: { count: 1, estimatedRequestTokens: 9, maxSkippedReqLimit: 4 },
+    exhaustionBreakdown: contraddittorio,
+  }), true, 'il veto regge: l\'eccedenza si addebita al vincitore, come prima');
+});
+
+test('la popolazione e\' `max(total, secchi)`: un `total` incoerente non fa da metro (#932)', () => {
+  // Un breakdown gia' incoerente per conto suo — quattro righe nei due secchi,
+  // `total` UNO. Prendere `total` alla lettera come pavimento farebbe cadere il
+  // guardrail (2 echi contro 2 righe nette) e il netto 2 vs 0 toglierebbe DA
+  // SOLO il veto che il lordo 2 vs 2 mette col pareggio al persistente: un
+  // secondo campo rotto non puo' fare da metro al primo.
+  const totaleIncoerente = {
+    transient: 2,
+    persistent: 2,
+    total: 1,
+    providerCooldownSkips: { persistent: 2, total: 3 },
+  };
+  const s = vote(totaleIncoerente);
+  assert.equal(s.echoDominated, true);
+  assert.equal(s.decidedBy, 'gross', 'la sottrazione non e\' affidabile: decide il lordo');
+  assert.equal(isTransientMajority(totaleIncoerente, { tie: 'persistent' }), false,
+    'il lordo 2 vs 2 non e\' una maggioranza stretta → veto');
+});
+
+test('`echoDominated` non puo\' affermare piu\' righe di quante il breakdown ne dichiari (#932)', () => {
+  // L'invariante in forma osservabile, su una griglia invece che su un caso:
+  // se gli echi tolti sono la maggioranza delle prove rimaste, le prove rimaste
+  // devono essere MENO delle righe che esistono. Prima del limite bastava un
+  // `{total: 999}` a rendere il flag vero su qualunque forma, questa compresa.
+  const R = [0, 1, 2, 3, 5, 8];
+  let controllate = 0;
+  for (const transient of R) {
+    for (const persistent of R) {
+      for (const total of [0, 1, transient + persistent, transient + persistent + 3]) {
+        for (const echoTotal of [0, 1, 3, total + 1, 999]) {
+          const breakdown = {
+            transient,
+            persistent,
+            total,
+            providerCooldownSkips: { total: echoTotal },
+          };
+          const s = vote(breakdown);
+          controllate += 1;
+          if (!s.echoDominated) continue;
+          const popolazione = Math.max(total, transient + persistent);
+          const netEvidence = s.netEvidence;
+          assert.ok(popolazione === 0 || netEvidence < popolazione,
+            `echoDominated su ${JSON.stringify(breakdown)}: `
+            + `${netEvidence} righe nette contro ${popolazione} esistenti`);
+        }
+      }
+    }
+  }
+  assert.ok(controllate > 500, 'la griglia deve essere abbastanza larga da mordere');
 });
