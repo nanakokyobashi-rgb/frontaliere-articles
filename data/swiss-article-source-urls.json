@@ -1,5 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/politica/1943470/miliardi-iva-aumento-consiglio-punti": "sicurezza-a-caro-prezzo-proposto-un-aumento-dell-iva-di-0-5-punti-per-centuali",
   "https://www.tio.ch/svizzera/politica/1943484/referendum-accordi-commissione-svizzera-ue-svizzera-essere": "accordi-svizzera-ue-consiglio-federale",
   "https://www.rsi.ch/s/3949164": "aumento-iva-per-la-difesa",
   "https://www.tio.ch/svizzera/economia/1943473/banche-federale-crisi-consiglio-bonus": "banche-sotto-la-lente-bern-stringe-sui-bonus",
@@ -1857,6 +1856,11 @@
   "https://www.tio.ch/rubriche/ospite/1948265/39-neutralita-pacifista-matteo-buzzi": {
     "articleId": "pacifismo-neutralita-buzzi",
     "ts": "2026-09-05T21:16:12.813Z",
+    "keyForm": 2
+  },
+  "https://www.admin.ch/it/newnsb/xkqqxunqnkgo": {
+    "articleId": "conferenza-osce-berna-2026",
+    "ts": "2026-09-06T01:22:17.571Z",
     "keyForm": 2
   }
 }
