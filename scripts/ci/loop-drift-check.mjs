@@ -1164,4 +1164,9 @@ if (process.argv[1] && process.argv[1].endsWith('loop-drift-check.mjs')) {
 // `siteFile` e' esportata per `transport-identical-twins.mjs` (issue #331): il
 // trasporto deve leggere il sito con la STESSA sorgente di URL, ref e token del
 // checker, altrimenti i due potrebbero guardare due `main` diversi.
-export { classify, parseOnly, resolveInitTargets, ghostVerdict, strandedVerdict, corpusOnlyTwinVerdict, unmirrorableDepsVerdict, resolvedLocalImports, gitBlobSha, scalarFingerprintVerdict, siteFile };
+// `sha256` e `repoHistoryMatch` sono esportate per
+// `loop-baseline-pr-gate.mjs` (issue #956): il gate in PR deve pesare una
+// baseline con LA STESSA regola con cui la pesa il cron, altrimenti una voce
+// accettata in PR verrebbe dichiarata fantasma il mattino dopo — o peggio, il
+// contrario. Una seconda copia della regola lo renderebbe inevitabile.
+export { classify, parseOnly, resolveInitTargets, ghostVerdict, strandedVerdict, corpusOnlyTwinVerdict, unmirrorableDepsVerdict, resolvedLocalImports, gitBlobSha, scalarFingerprintVerdict, siteFile, sha256, repoHistoryMatch };

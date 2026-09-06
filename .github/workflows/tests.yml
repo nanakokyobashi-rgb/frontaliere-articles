@@ -186,11 +186,33 @@ jobs:
       # file, quindi si passano i path uno per uno.
       # ══════════════════════════════════════════════════════════════════════
       - name: Unit + closure gates (i gate sul contenuto girano altrove)
+        id: unit_gates
         if: ${{ !cancelled() }}
         run: |
           set -euo pipefail
           files=$(node scripts/ci/list-pr-gate-tests.mjs)
           node --test $files
+
+      # Baseline del manifest del ciclo: diff-scoped, non un `node --test`.
+      # `checkBaselineProvenance()` scopre le baseline fantasma al cron
+      # SUCCESSIVO, cioe' dopo il merge — e nel frattempo il verdetto a tre vie
+      # su quella voce e' privo di significato (misurate 13 voci sulla #954, 6
+      # delle quali dichiarate dopo l'apertura della issue che ne contava 7).
+      # Qui si guardano le SOLE voci il cui `baseline` e' cambiato nella PR:
+      # di norma zero, quindi zero rete. Vedi l'intestazione dello script per
+      # l'asimmetria fra i due lati.
+      # `steps.unit_gates.conclusion == 'success'` e non `!cancelled()` da solo:
+      # dentro una famiglia la catena resta fail-fast (col rosso dei test questo
+      # non gira), ma un rosso di un'ALTRA famiglia non deve saltarlo — che e'
+      # la proprieta' che i workflow separati avevano e che va conservata.
+      - name: Baseline verificabili nel manifest del ciclo (diff-scoped)
+        if: ${{ !cancelled() && steps.unit_gates.conclusion == 'success' }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        run: node scripts/ci/loop-baseline-pr-gate.mjs
 
       # ══════════════════════════════════════════════════════════════════════
       # FAMIGLIA 3/3 — Claude review + verdetto (ex workflow di review dedicato)
