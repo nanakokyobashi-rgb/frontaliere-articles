@@ -69,6 +69,7 @@ import {
   vitestVerdictIsTransientCancellation,
   vitestFailureIsNotAttributableToPr,
   vitestFailureIsReviewGate,
+  reviewSkippedByGuard,
   jobRefFromCheckRun,
   currentAttemptJobSteps,
 } from './lib/vitestCheck.mjs';
@@ -423,14 +424,22 @@ function guardedReopen(num, head, { stuckRedReason = '' } = {}) {
   // Rosso da review gate: causa del messaggio SEMPRE (anche a one-shot già
   // speso, altrimenti il commento tornerebbe a dire «far passare i test» a una
   // PR i cui test sono verdi), ma esenzione dalla precondizione una volta sola.
-  const reviewGateRed = vitestConclusion === 'failure' && vitestRedIsReviewGate(head);
-  const reviewGateReason = reviewGateRed && !(prior && prior.reviewGateUsed)
+  // Una sola lettura degli step del job: le due domande — «di chi è il rosso»
+  // e «la review è girata su quella run» — si rispondono sulla STESSA lista.
+  const steps = vitestConclusion === 'failure' ? vitestJobSteps(head) : [];
+  const reviewGateRed = vitestFailureIsReviewGate(steps);
+  // Review saltata dal `Re-review guard`: il gate è rosso sui verdetti già
+  // postati e un re-trigger ri-esegue il guard, che salta di nuovo → il
+  // one-shot andrebbe speso per un no-op. Non si concede (e lo sticky lo dice).
+  const reviewSkipped = reviewGateRed && reviewSkippedByGuard(steps);
+  const reviewGateReason = reviewGateRed && !reviewSkipped && !(prior && prior.reviewGateUsed)
     ? 'review-gate' : '';
   const reviewGateUsed = Boolean((prior && prior.reviewGateUsed) || reviewGateReason);
   const d = decideReopen({
     vitestConclusion, fingerprint, prior, max: MAX_REOPENS,
     failureNotAttributable: stuckRedReason || reviewGateReason,
     reviewGateFailure: reviewGateRed,
+    reviewSkippedByGuard: reviewSkipped,
   });
 
   if (d.action !== 'reopen') {
@@ -588,13 +597,6 @@ function vitestJobSteps(head) {
       '--jq', '.jobs'],
     { json: true, allowFail: true });
   return currentAttemptJobSteps({ checkRun: last, jobId: ref.jobId, jobs: out });
-}
-
-/** Il rosso del check vitest sull'head è lo step del REVIEW GATE (LGTM mancante
- * o finding 🔴) e non i test? Vedi `vitestFailureIsReviewGate` e il commento di
- * `REVIEW_GATE_MARKER`. Una sola chiamata API, e solo quando serve davvero. */
-function vitestRedIsReviewGate(head) {
-  return vitestFailureIsReviewGate(vitestJobSteps(head));
 }
 
 /** Il vitest rosso sull'head NON è attribuibile alla PR (main rosso al momento
