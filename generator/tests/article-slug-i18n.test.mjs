@@ -320,12 +320,12 @@ describe('corpus pubblicato — ratchet sugli slug non localizzati', () => {
   // senza il bridge. Cio' che questo numero difende e' la DERIVATA: la fix di
   // #191 vale se non ne nascono di nuovi.
   //
-  // 2026-09-06 (#966 / #798): `floorMiss` su un title tradotto ripiega sullo
-  // slug IT (`data.slugs[locale] = itSlug`). Tre title DE pubblicati (`...`)
-  // cadono sul floor; senza margine il primo articolo nuovo congela
-  // publish-api (preflight). Margine dichiarato: +3 su entrambe le baseline.
-  const IT_URL_ACROSS_LOCALES_BASELINE = 220;
-  const ALL_THREE_IDENTICAL_BASELINE = 172;
+  // Le tre restano il NUMERO MISURATO sul corpus (5.679 voci: 217 / 169 / 55),
+  // non il tetto: il margine del floor sta nelle costanti qui sotto, sommato
+  // una volta sola. Portarlo dentro la baseline lo renderebbe invisibile e —
+  // sommato al margine esplicito — doppio.
+  const IT_URL_ACROSS_LOCALES_BASELINE = 217;
+  const ALL_THREE_IDENTICAL_BASELINE = 169;
   const LONG_SLUG_BASELINE = 55;
 
   // Margine DICHIARATO, non allargamento del gate (#798). Il floor di
