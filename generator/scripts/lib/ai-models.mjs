@@ -2658,6 +2658,40 @@ const FIRESTORE_COLLECTION = 'ai_model_scores';
 // per-model docs.
 const FIRESTORE_AGGREGATE_DOC = '_all';
 
+/**
+ * ── IL TETTO SU `exhaustedUntil` ───────────────────────────────────────────
+ *
+ * L'UNICO writer di quel campo (`_persistScoresToFirestore`) scrive la
+ * mezzanotte UTC successiva, cioe' al massimo 24h avanti rispetto al proprio
+ * orologio. Un valore piu' lontano di cosi' non e' un ban legittimo: e' il
+ * clock skew di un runner, o una versione precedente che ha scritto male.
+ *
+ * Perche' serve un tetto e non basta ignorare l'assurdo (#936 item 3). Da
+ * quando il campo si OMETTE invece di azzerarsi (per non cancellare col
+ * `{merge: true}` il ban che un'altra macchina ha appena scritto), l'unico
+ * modo di ripulirlo e' un `counterDelta.successes` di questo processo. Ma un
+ * `exhaustedUntil` molto avanti nel futuro supera per sempre il
+ * `resetTime > now` del restore: il modello viene saltato in pre-flight su
+ * OGNI macchina dei due repo, quindi non produce mai il successo che lo
+ * cancellerebbe. Nessun writer resta capace di toglierlo, e il modello sparisce
+ * dalla cascata in silenzio — senza un errore, su un documento condiviso.
+ *
+ * Le 24h del contratto piu' un margine di skew: due orologi che divergono di
+ * qualche ora restano entrambi legittimi, e non vogliamo che un ban vero venga
+ * scartato per un minuto di deriva. Oltre il tetto il valore e' fuori
+ * contratto, quindi cancellarlo non puo' distruggere il ban di nessun altro —
+ * ed e' cio' che rende sicuro il `null` esplicito di `_clearStaleExhaustion`.
+ */
+const EXHAUSTED_UNTIL_MAX_AHEAD_MS = 30 * 60 * 60 * 1000; // 24h di contratto + 6h di skew
+
+/**
+ * @type {Set<string>} modelli il cui `exhaustedUntil` persistito e' fuori
+ * contratto e va CANCELLATO dal documento condiviso alla prossima scrittura.
+ * Vive separato da `_exhaustedModels` perche' e' il verso opposto: quello
+ * bandisce, questo sbandisce.
+ */
+const _exhaustionToClear = new Set();
+
 // Firestore field names cannot contain `/`. The original modelId may include
 // slashes (e.g. `openrouter/meta-llama/llama-3.3-70b:free`) so we encode them
 // with the same `__` substitution the legacy per-doc layout used.
@@ -3541,7 +3575,19 @@ export async function initScoreStore() {
         const resetTime = data.exhaustedUntil.toDate
           ? data.exhaustedUntil.toDate()   // Firestore Timestamp
           : new Date(data.exhaustedUntil); // ISO string fallback
-        if (resetTime > now) {
+        // Fuori contratto → non e' un ban, e' un timestamp rotto (#936 item 3).
+        // Non viene onorato E viene messo in coda per la cancellazione: senza
+        // il secondo pezzo ogni macchina lo ignorerebbe per conto suo mentre il
+        // documento condiviso resta sporco per sempre, e la prima versione
+        // senza questo tetto tornerebbe a saltare il modello.
+        if (resetTime.getTime() - now.getTime() > EXHAUSTED_UNTIL_MAX_AHEAD_MS) {
+          console.warn(
+            `⚠️  [ScoreStore] ${modelId}: exhaustedUntil ${resetTime.toISOString().slice(0, 16)} oltre il tetto `
+            + `di ${EXHAUSTED_UNTIL_MAX_AHEAD_MS / 3600000}h — fuori contratto, ignorato e messo in coda per la cancellazione`,
+          );
+          _exhaustionToClear.add(modelId);
+          _proposeLedgerWrite(modelId, true, { persist: false });
+        } else if (resetTime > now) {
           _exhaustedModels.add(modelId);
           // Persisted exhaustedUntil is the daily-limit (quota) path → eligible
           // for the GitHub multi-PAT skip-exemption. Dalla stessa porta degli
@@ -3717,10 +3763,18 @@ async function _persistScoresToFirestore() {
       tomorrow.setUTCDate(tomorrow.getUTCDate() + 1);
       tomorrow.setUTCHours(0, 0, 0, 0);
       entry.exhaustedUntil = tomorrow.toISOString();
-    } else if (counterDelta?.successes) {
-      // Il campo si AZZERA solo con una prova in mano: una risposta buona da
-      // questo modello in questo processo dice che l'account non e' a quota, e
-      // il ban persistito va tolto (e' il caso della rotazione multi-PAT).
+    } else if (counterDelta?.successes || _exhaustionToClear.has(modelId)) {
+      // Il campo si AZZERA solo con una prova in mano. Due prove distinte:
+      //
+      //  - un `counterDelta.successes`: una risposta buona da questo modello in
+      //    questo processo dice che l'account non e' a quota, e il ban
+      //    persistito va tolto (e' il caso della rotazione multi-PAT);
+      //  - `_exhaustionToClear`: il valore letto era oltre
+      //    `EXHAUSTED_UNTIL_MAX_AHEAD_MS`, cioe' piu' lontano di quanto questo
+      //    stesso writer sappia scrivere. Non e' il ban di nessuno, quindi lo
+      //    `null` non ne cancella uno vero — ed e' l'UNICA prova ottenibile per
+      //    un modello che, saltato in pre-flight ovunque, non puo' piu'
+      //    produrre il successo dell'altro ramo (#936 item 3).
       entry.exhaustedUntil = null;
     }
     // Altrimenti il campo e' OMESSO, per la stessa ragione di `score` e dei
@@ -3752,6 +3806,16 @@ async function _persistScoresToFirestore() {
       .collection(FIRESTORE_COLLECTION)
       .doc(FIRESTORE_AGGREGATE_DOC);
     await ref.set({ models: modelsDelta, updatedAt: now }, { merge: true });
+    // La coda di cancellazione si svuota solo a scrittura RIUSCITA, come i
+    // contatori: un `set` respinto dalla rete lascia il valore fuori contratto
+    // sul documento, e dimenticare qui la richiesta lo renderebbe di nuovo
+    // eterno — il modello e' saltato in pre-flight, quindi nessun altro
+    // percorso lo rimetterebbe in coda in questo processo.
+    for (const modelId of toPersist) {
+      if (modelsDelta[_encodeModelId(modelId)]?.exhaustedUntil !== undefined) {
+        _exhaustionToClear.delete(modelId);
+      }
+    }
   } catch (err) {
     console.warn(`⚠️  [ScoreStore] Persist failed: ${err?.message || err}`);
     // Re-add dirty models so next flush retries them — and give them back their
@@ -4754,6 +4818,10 @@ export function resetState() {
   // appena stata buttata via, e `_exhaustSkipCause` lo avrebbe riattaccato al
   // marchio successivo, di causa diversa.
   _exhaustDetail.clear();
+  // `_exhaustionToClear` segue i marchi: e' una richiesta di cancellazione
+  // nata dal restore di QUESTO caricamento del ledger, e un reset che butta via
+  // i marchi butta via anche il contesto che la giustificava (#936 item 3).
+  _exhaustionToClear.clear();
   // `_prunedStale` NON si azzera (#875 item 3). Il reset butta via i MARCHI di
   // esaurimento, ma non le potature: lo splice su `DEFAULT_CHAIN` e' definitivo
   // e la catena resta accorciata (vedi il commento su `_prunedStale`, e la riga
