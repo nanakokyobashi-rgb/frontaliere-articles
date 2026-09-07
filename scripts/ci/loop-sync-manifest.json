@@ -1996,9 +1996,9 @@
       "sitePath": "scripts/lib/llm-payload-diagnostics.mjs",
       "mode": "adapted",
       "baseline": {
-        "site": null,
+        "site": "f2b824a165d0aa28",
         "corpus": "007e5a5b07e0e7d2",
-        "alignedAt": "2026-08-18"
+        "alignedAt": "2026-09-07"
       },
       "reason": "Il gemello e' atterrato sul sito come `scripts/lib/llm-payload-diagnostics.mjs` (issue valerielinc-ops/frontaliere-si-o-no#6027, chiusa il 2026-08-19), ma la voce era rimasta `corpus-only-pending`: senza `sitePath` loop-drift-check cercava `generator/scripts/lib/...` DENTRO il sito, dove non esiste, quindi non l'ha mai vista `-landed` e il censimento opt-in la contava stale contro una trackingIssue chiusa (issue #988). `adapted` e non `identical` perche' i due lati non sono byte-identici, pur avendo lo stesso comportamento: stessa riga di diagnostica, stessi campi sempre presenti anche a zero, stesse soglie. Divergono su due punti, entrambi voluti: (a) la costante privata del cap sulle chiavi elencate, `MAX_DIAG_KEYS` sul sito e `MAX_KEYS` qui — un nome, non una semantica, e non e' esportata; (b) l'intestazione, che su ciascun lato dichiara l'altro come gemello e tiene le misure nella forma in cui sono state prese: qui i numeri di run (32134269129, 32140039370) e il dettaglio del desync di `findMatchingClose()`, sul sito la loro sintesi con il rimando al corpus. Nessuna delle due e' un fix di comportamento mancante a un lato, quindi non c'e' niente da portare; registrarla `identical` la farebbe leggere `undeclared-drift` alla prima passata e `transportVerdict()` smetterebbe di copiare il gemello senza che niente fallisca."
     },
