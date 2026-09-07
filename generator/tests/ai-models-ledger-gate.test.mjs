@@ -44,6 +44,8 @@ import {
   EXHAUST_RESTORE_MAX_AHEAD_MS,
 } from '../scripts/lib/ai-models.mjs';
 
+import { describeOpaqueRead, scanEnvReads, stripCommentLines } from './lib/env-reads.mjs';
+
 const SRC = readFileSync(new URL('../scripts/lib/ai-models.mjs', import.meta.url), 'utf8');
 
 // Il sorgente con le RIGHE di commento svuotate. Necessario perche' i commenti
@@ -66,14 +68,34 @@ const SRC = readFileSync(new URL('../scripts/lib/ai-models.mjs', import.meta.url
 // commento in coda a una riga di codice, che al peggio produce un falso
 // POSITIVO — il test si lamenta di troppo, non di troppo poco. Le righe sono
 // svuotate e non tolte, cosi' i numeri di riga restano quelli del file.
-const SRC_CODE = SRC.split('\n')
-  .map((riga) => (/^\s*(\/\/|\/\*|\*)/.test(riga) ? '' : riga))
-  .join('\n');
+const SRC_CODE = stripCommentLines(SRC);
 
 const ENV_KEYS = [
   'AI_MODELS_FORCE_CHAIN', 'AI_MODELS_PREFER', 'GH_MODELS_PAT',
   'OMNIROUTE_ENABLED', 'OMNIROUTE_URL', 'LOCAL_LLM_ENABLED', 'LOCAL_LLM_URL',
 ];
+
+/**
+ * Il nome di una variabile d'ambiente che porta un INDIRIZZO. Non il solo
+ * suffisso `_URL`: un override per-macchina battezzato `*_ENDPOINT`, `*_HOST` o
+ * `*_BASE` sarebbe lo STESSO fatto.
+ */
+const ENDPOINT_ENV_RE = /^[A-Z0-9_]*(?:URL|ENDPOINT|HOST|BASE)$/;
+
+/**
+ * Il verdetto del gate su un sorgente qualunque, cosi' che l'assert vero e i
+ * casi negativi qui sotto attraversino lo STESSO codice: un osservatore che
+ * misura una copia dell'assert non misura l'assert.
+ */
+function endpointGateViolations(code, dichiarati) {
+  const { names, opaque } = scanEnvReads(code);
+  const nelSorgente = [...names].filter((v) => ENDPOINT_ENV_RE.test(v));
+  return {
+    scoperti: nelSorgente.filter((v) => !dichiarati.has(v)),
+    fantasmi: [...dichiarati].filter((v) => !names.has(v)),
+    opachi: opaque,
+  };
+}
 
 const scoreOf = (stats, model) => stats.scoreBoard.find((e) => e.model === model)?.score ?? 0;
 const failuresOf = (stats, model) => stats.runOutcomes.find((e) => e.model === model)?.failures ?? 0;
@@ -140,12 +162,7 @@ describe('#874/#864/#845 — una sola porta di scrittura verso ai_model_scores/_
     // avrebbe lasciato la tabella corta col verde addosso, cioe' il modo di
     // fallire che questo assert esiste per chiudere. Oggi i quattro suffissi
     // rendono lo stesso insieme; e' quando smetteranno di renderlo che serve.
-    const nelSorgente = new Set(
-      [...SRC_CODE.matchAll(/process\.env\.([A-Z0-9_]*(?:URL|ENDPOINT|HOST|BASE))\b/g)].map((m) => m[1]),
-    );
-    const dichiarati = new Set(_perMachineEndpointEnvVars());
-
-    const scoperti = [...nelSorgente].filter((v) => !dichiarati.has(v));
+    const { scoperti, fantasmi } = endpointGateViolations(SRC_CODE, new Set(_perMachineEndpointEnvVars()));
     assert.deepEqual(
       scoperti,
       [],
@@ -153,8 +170,69 @@ describe('#874/#864/#845 — una sola porta di scrittura verso ai_model_scores/_
       + 'Un verdetto su di essi finirebbe nel documento condiviso descrivendo una macchina sola (#838). '
       + 'Aggiungili a PER_MACHINE_ENDPOINT_ENV, o togli l\'override di URL.',
     );
-    const fantasmi = [...dichiarati].filter((v) => !nelSorgente.has(v));
     assert.deepEqual(fantasmi, [], `PER_MACHINE_ENDPOINT_ENV nomina variabili che il modulo non legge piu': ${fantasmi.join(', ')}`);
+  });
+
+  // #1046. La meta' che mancava: la scansione non deve TACERE su una lettura
+  // che non sa risolvere. `process.env[cfg.urlEnv]` e' gia' una forma presente
+  // nel modulo, e con la vecchia regex passava senza lasciare traccia — cioe'
+  // la tabella poteva restare corta col test verde, dall'altra porta.
+  it('nessuna lettura di process.env resta non risolta e non dichiarata', () => {
+    const opachi = scanEnvReads(SRC_CODE).opaque;
+    assert.deepEqual(
+      opachi.map(describeOpaqueRead),
+      [],
+      'queste letture di process.env non sono risolvibili leggendo il sorgente, quindi la tabella '
+      + 'PER_MACHINE_ENDPOINT_ENV non puo\' essere dimostrata completa. Rendi la chiave letterale, '
+      + 'oppure annota la riga con `// env-scan: <motivo per cui non e\' un endpoint>`.',
+    );
+  });
+
+  // L'OSSERVATORE dell'assert qui sopra: un gate che passa su un input che DEVE
+  // far rosso non e' una prova. Queste tre forme erano tutte verdi prima di
+  // #1046, e sono le stesse che il modulo puo' assumere domani.
+  it('l\'assert vede la destrutturazione e la chiave letterale, e non tace sulla dinamica (#1046)', () => {
+    const tabella = new Set(['LOCAL_LLM_URL']);
+    const finto = (code) => endpointGateViolations(stripCommentLines(code), tabella);
+
+    assert.deepEqual(
+      finto('const { PIPPO_URL } = process.env;\nconst u = process.env.LOCAL_LLM_URL;\n').scoperti,
+      ['PIPPO_URL'],
+      'una destrutturazione di process.env lascia la tabella corta senza far rosso',
+    );
+    assert.deepEqual(
+      finto('const u = process.env[\'PIPPO_URL\'] || process.env.LOCAL_LLM_URL;\n').scoperti,
+      ['PIPPO_URL'],
+      'un accesso indicizzato con letterale lascia la tabella corta senza far rosso',
+    );
+    // Anche la forma su piu' righe, che e' quella che una destrutturazione
+    // lunga prende appena supera la larghezza della riga.
+    assert.deepEqual(
+      finto('const {\n  PIPPO_ENDPOINT,\n  ALTRO_HOST,\n} = process.env;\nprocess.env.LOCAL_LLM_URL;\n').scoperti,
+      ['PIPPO_ENDPOINT', 'ALTRO_HOST'],
+    );
+
+    const dinamica = finto('const u = process.env[cfg.urlEnv];\nprocess.env.LOCAL_LLM_URL;\n');
+    assert.equal(dinamica.opachi.length, 1, 'una chiave dinamica deve essere segnalata, non ignorata');
+    assert.match(dinamica.opachi[0].form, /dinamica/);
+
+    const alias = finto('const env = process.env;\nprocess.env.LOCAL_LLM_URL;\n');
+    assert.equal(alias.opachi.length, 1, 'un alias dell\'intero process.env sfugge all\'enumerazione');
+
+    // E l'esenzione esplicita spegne il rumore, ma solo con un motivo scritto.
+    assert.deepEqual(
+      finto('const u = process.env[cfg.urlEnv]; // env-scan: chiave da una tabella di provider\nprocess.env.LOCAL_LLM_URL;\n').opachi,
+      [],
+    );
+    assert.equal(
+      finto('const u = process.env[cfg.urlEnv]; // env-scan:\nprocess.env.LOCAL_LLM_URL;\n').opachi.length,
+      1,
+      'un\'esenzione senza motivo scritto non e\' un\'esenzione',
+    );
+
+    // E il verso opposto resta sorvegliato: una variabile dichiarata che il
+    // sorgente non legge piu' e' un fantasma.
+    assert.deepEqual(finto('const x = 1;\n').fantasmi, ['LOCAL_LLM_URL']);
   });
 });
 

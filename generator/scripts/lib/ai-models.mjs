@@ -1301,7 +1301,7 @@ export function getGhModelsPats() {
   const primary = (process.env.GH_MODELS_PAT || '').trim();
   if (primary) pats.push(primary);
   for (let i = 2; i <= 9; i++) {
-    const extra = (process.env[`GH_MODELS_PAT_${i}`] || '').trim();
+    const extra = (process.env[`GH_MODELS_PAT_${i}`] || '').trim();  // env-scan: prefisso fisso `GH_MODELS_PAT_`, mai un endpoint
     if (extra && !pats.includes(extra)) pats.push(extra);
   }
   return pats;
@@ -1603,7 +1603,7 @@ function _envProxyIsHonoured() {
  */
 function _envProxyMayIntercept() {
   if (!_envProxyIsHonoured()) return false;
-  const pick = (n) => (process.env[n] || process.env[n.toLowerCase()] || '').trim();
+  const pick = (n) => (process.env[n] || process.env[n.toLowerCase()] || '').trim();  // env-scan: `pick` e' chiamata solo con i tre letterali *_PROXY qui sotto
   if (!pick('ALL_PROXY') && !pick('HTTPS_PROXY')) return false;
   return pick('NO_PROXY') !== '*';
 }
@@ -2261,7 +2261,7 @@ const _clampedTimeouts = new Map();
 
 /** Read a positive integer override from the environment, else the default. */
 function _envInt(name, fallback) {
-  const v = parseInt((process.env[name] || '').trim(), 10);
+  const v = parseInt((process.env[name] || '').trim(), 10);  // env-scan: `_envInt` riceve solo nomi letterali di soglia, mai un endpoint
   return Number.isFinite(v) && v > 0 ? v : fallback;
 }
 
@@ -7082,7 +7082,7 @@ export function createClaudeCliStreamTrace({ now = Date.now } = {}) {
  * Esportata per il test: quale ambiente riceva il figlio non e' osservabile
  * dall'esterno senza spawnare un `claude` vero.
  */
-export function claudeCliChildEnv(base = process.env) {
+export function claudeCliChildEnv(base = process.env) {  // env-scan: l'ambiente viene INOLTRATO al figlio, non letto per nome
   if (CLAUDE_CLI_MAX_THINKING_TOKENS === null) return base;
   if (base.MAX_THINKING_TOKENS !== undefined && String(base.MAX_THINKING_TOKENS).trim() !== '') return base;
   return { ...base, MAX_THINKING_TOKENS: String(CLAUDE_CLI_MAX_THINKING_TOKENS) };
