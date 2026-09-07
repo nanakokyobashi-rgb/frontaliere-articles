@@ -60,6 +60,8 @@
  *
  * Env: SITE_REPO, SITE_REF, GH_TOKEN (opzionale) — gli stessi di
  * `loop-drift-check.mjs`, cosi' i due girano nello stesso workflow.
+ * SITE_LOGIC_DIR (opzionale) fissa la directory dei `*-logic.yml` sul sito
+ * quando la si SA: senza, viene risolta provando le candidate.
  */
 import fs from 'node:fs';
 import path from 'node:path';
