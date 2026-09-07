@@ -1,5 +1,4 @@
 {
-  "https://www.laregione.ch/svizzera/svizzera/1943590/controllo-finanze-ufsp-federale-cdf": "il-controllo-delle-finanze-critica-duramente-l-ufsp",
   "https://www.rsi.ch/s/3949140": "reno-siccita-logistica-svizzera",
   "https://www.rsi.ch/info/ambiente/mezzo-milione-di-giovani-polpi-contro-il-granchio-blu--3934308.html": "polpi-contro-granchio-blu",
   "https://www.rsi.ch/s/3947496": "governo-dice-no-iniziativa-alimentazione",
@@ -2017,6 +2016,11 @@
   "https://www.tio.ch/svizzera/politica/1948486/cassis-svizzera-intervista-ue-stati-uniti-neutralita-ogni-guerra-sanzionato": {
     "articleId": "svizzera-sanzioni-stati-uniti-ignazio-cassis",
     "ts": "2026-09-07T11:56:21.678Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/newsblog/target/1948495/l-intelligenza-artificiale-spiegata-alla-terza-eta": {
+    "articleId": "laboratorio-intelligenza-artificiale-terza-eta",
+    "ts": "2026-09-07T12:03:46.404Z",
     "keyForm": 2
   }
 }
