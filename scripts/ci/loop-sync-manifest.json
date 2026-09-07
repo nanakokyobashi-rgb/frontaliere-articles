@@ -1993,14 +1993,14 @@
     },
     {
       "path": "generator/scripts/lib/llm-payload-diagnostics.mjs",
-      "mode": "corpus-only-pending",
-      "trackingIssue": "https://github.com/valerielinc-ops/frontaliere-si-o-no/issues/6027",
+      "sitePath": "scripts/lib/llm-payload-diagnostics.mjs",
+      "mode": "adapted",
       "baseline": {
         "site": null,
         "corpus": "007e5a5b07e0e7d2",
         "alignedAt": "2026-08-18"
       },
-      "reason": "La riga unica che rende attribuibile il rigetto di `callLLM()` quando `normalizeItalianContentFromPayload()` torna `null`: famiglia (`troncato` / `forma-sbagliata`), modello che ha DAVVERO risposto, `rawChars`/`repairedChars`/`kept%`, chiavi del payload, stato per campo, verdetto di troncamento. Nasce qui perche' il tempo misurato sta qui (2026-08-18: 905 s su 1189 nella run 32134269129, 76% dello step; la run senza rigenerazioni e' anche la piu' corta, 312 s), ma NON e' `corpus-only`: il gemello del sito `scripts/create-article.mjs` ha lo stesso ramo con la stessa guardia `if (parseErr)`, e `publish-journalist-article` lo importa ogni 15 minuti, quindi li' il punto cieco e' aperto uguale. Non e' arrivato nello stesso giro perche' `create-article.mjs` e' `adapted` (si porta a mano, non si copia) e la suite del sito e' vitest, non `node --test`: il gate va riscritto. Quando atterra la' questa voce diventa `identical`."
+      "reason": "Il gemello e' atterrato sul sito come `scripts/lib/llm-payload-diagnostics.mjs` (issue valerielinc-ops/frontaliere-si-o-no#6027, chiusa il 2026-08-19), ma la voce era rimasta `corpus-only-pending`: senza `sitePath` loop-drift-check cercava `generator/scripts/lib/...` DENTRO il sito, dove non esiste, quindi non l'ha mai vista `-landed` e il censimento opt-in la contava stale contro una trackingIssue chiusa (issue #988). `adapted` e non `identical` perche' i due lati non sono byte-identici, pur avendo lo stesso comportamento: stessa riga di diagnostica, stessi campi sempre presenti anche a zero, stesse soglie. Divergono su due punti, entrambi voluti: (a) la costante privata del cap sulle chiavi elencate, `MAX_DIAG_KEYS` sul sito e `MAX_KEYS` qui — un nome, non una semantica, e non e' esportata; (b) l'intestazione, che su ciascun lato dichiara l'altro come gemello e tiene le misure nella forma in cui sono state prese: qui i numeri di run (32134269129, 32140039370) e il dettaglio del desync di `findMatchingClose()`, sul sito la loro sintesi con il rimando al corpus. Nessuna delle due e' un fix di comportamento mancante a un lato, quindi non c'e' niente da portare; registrarla `identical` la farebbe leggere `undeclared-drift` alla prima passata e `transportVerdict()` smetterebbe di copiare il gemello senza che niente fallisca."
     },
     {
       "path": "generator/scripts/lib/sanitize-body-braces.mjs",
