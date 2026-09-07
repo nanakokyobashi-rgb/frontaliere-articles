@@ -106,14 +106,21 @@ jobs:
           SITE_REPO: valerielinc-ops/frontaliere-si-o-no
           SITE_REF: main
         run: |
-          # Stessa regola del passo sopra: sulle PR il report resta nel log. Un
-          # generatore mosso sul sito non è un difetto della PR in corso, e
-          # bloccarne l'auto-merge sposterebbe il costo sulla persona
-          # sbagliata. Sullo schedule invece si esce rossi, e il fallimento del
-          # workflow apre la issue per il canale già esistente
-          # (workflow-failure-issues → issue-triage → issue-fix).
+          # Stessa regola del passo sopra, e la stessa CONDIZIONE: si escala
+          # sullo schedule, oppure su un dispatch che l'ha chiesto con
+          # `report_issue`. Sulle PR il report resta nel log — un generatore
+          # mosso sul sito non è un difetto della PR in corso, e bloccarne
+          # l'auto-merge sposterebbe il costo sulla persona sbagliata.
+          #
+          # `!= pull_request` non era la stessa regola: includeva anche il
+          # `workflow_dispatch` di sola ISPEZIONE, quindi guardare il report a
+          # mano faceva fallire il workflow e apriva una issue via
+          # `workflow-failure-issues` — cioè il gesto più innocuo del ciclo
+          # consumava un giro di fixer sulla quota condivisa col sito, per uno
+          # stato del sito che nessuno aveva ancora deciso di trattare.
+          # L'opt-in esiste già un passo sopra: qui va letto uguale (#982).
           ARGS=""
-          if [ "${{ github.event_name }}" != "pull_request" ]; then
+          if [ "${{ github.event_name }}" = "schedule" ] || [ "${{ github.event.inputs.report_issue }}" = "true" ]; then
             ARGS="--strict"
           fi
           node scripts/ci/verify-crawler-contract-provenance.mjs $ARGS
