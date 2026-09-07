@@ -75,10 +75,39 @@ const SITE_REF = process.env.SITE_REF || 'main';
 /**
  * Dove vivono i `*-logic.yml` sul sito. E' l'unica coordinata che il contratto
  * NON dichiara (porta il solo basename in `sourceLogic`), e non puo' essere
- * dedotta dal manifest perche' quei file non hanno un gemello qui. Se il sito
- * li sposta, il verdetto diventa `absent` — rumoroso e corretto, non silenzioso.
+ * dedotta dal manifest perche' quei file non hanno un gemello qui.
+ *
+ * ## Perche' non e' una costante sola (issue #982)
+ *
+ * Una directory INVENTATA da questo lato non e' un'osservazione: se il sito
+ * sposta i `*-logic.yml`, tutti e 24 i `sourceSha256` diventano `absent` e lo
+ * schedule esce rosso ogni notte per un difetto del verificatore, non del
+ * contratto — e il fixer viene mandato a rigenerare artifact che stanno
+ * benissimo. Il piano offline pinnava che il `sitePath` non fosse null, cosa
+ * che una coordinata sbagliata soddisfa comunque.
+ *
+ * Quindi la coordinata si RISOLVE invece di essere assunta: si prova ogni
+ * candidata e vince la prima che il sito serve davvero. `absent` torna a
+ * significare «quel file non esiste da nessuna parte», che e' l'unico caso in
+ * cui il rosso e' del contratto. Con `SITE_LOGIC_DIR` in ambiente la lista si
+ * riduce a quella sola directory: un override esplicito e' una dichiarazione,
+ * non una supposizione, e va creduto anche quando fallisce.
  */
 export const SITE_LOGIC_DIR = '.github/workflows';
+
+/**
+ * Le altre directory in cui il sito ha gia' tenuto file di questo ciclo: i 24
+ * artifact vivono sotto `.github/corpus-workflows/` (vedi i `sitePath` del
+ * manifest), quindi e' il primo posto plausibile se la logica li segue.
+ */
+export const SITE_LOGIC_DIR_FALLBACKS = ['.github/corpus-workflows'];
+
+/** Le candidate, nell'ordine in cui vanno provate. Override esplicito = lista di uno. */
+export function siteLogicDirs(env = process.env) {
+  const declared = env?.SITE_LOGIC_DIR?.trim();
+  const dirs = declared ? [declared] : [SITE_LOGIC_DIR, ...SITE_LOGIC_DIR_FALLBACKS];
+  return [...new Set(dirs.map((d) => d.replace(/\/+$/, '')))];
+}
 
 const sha256 = (buf) => crypto.createHash('sha256').update(buf).digest('hex');
 
@@ -106,23 +135,33 @@ export function siteGeneratorPath(contract) {
  * Puro: non tocca rete ne' filesystem. `sitePath` null significa che il
  * contratto non dice CONTRO COSA confrontare — gia' un difetto, e
  * `evaluateProvenance` lo rende rosso senza bisogno di un fetch.
+ *
+ * Ogni check porta anche `sitePathCandidates`: i path da provare in ordine.
+ * Per tutto cio' che il contratto o il manifest DICHIARANO e' un elenco di
+ * uno — non si tira a indovinare su una coordinata dichiarata. Solo i
+ * `sourceSha256`, la cui directory nessuno dichiara, ne hanno piu' di uno.
  */
-export function planProvenanceChecks(contract, manifest) {
+export function planProvenanceChecks(contract, manifest, logicDirs = siteLogicDirs()) {
   const bySitePath = new Map(
     (manifest?.files || []).map((entry) => [entry.path, entry.sitePath || null]),
   );
+  const declared = (sitePath) => ({ sitePath, sitePathCandidates: sitePath ? [sitePath] : [] });
   const checks = [
     {
       field: 'generatorSha256',
-      sitePath: siteGeneratorPath(contract),
+      ...declared(siteGeneratorPath(contract)),
       expected: contract.generatorSha256 || null,
     },
   ];
 
   for (const artifact of contract.artifacts || []) {
+    const candidates = artifact.sourceLogic
+      ? logicDirs.map((dir) => `${dir}/${artifact.sourceLogic}`)
+      : [];
     checks.push({
       field: `${artifact.file}#sourceSha256`,
-      sitePath: artifact.sourceLogic ? `${SITE_LOGIC_DIR}/${artifact.sourceLogic}` : null,
+      sitePath: candidates[0] || null,
+      sitePathCandidates: candidates,
       expected: artifact.sourceSha256 || null,
     });
     checks.push({
@@ -130,7 +169,7 @@ export function planProvenanceChecks(contract, manifest) {
       // Il lato sito del gemello lo dichiara gia' il manifest: leggerlo di la'
       // invece di ricostruirlo qui tiene una sola sorgente per quel path
       // (AGENTS.md #6), e un `sitePath` sbagliato esce rosso una volta sola.
-      sitePath: bySitePath.get(`.github/workflows/${artifact.file}`) || null,
+      ...declared(bySitePath.get(`.github/workflows/${artifact.file}`) || null),
       expected: artifact.artifactSha256 || null,
     });
   }
@@ -147,6 +186,9 @@ export function evaluateProvenance(checks, observed) {
   const results = [];
   for (const check of checks) {
     const seen = observed instanceof Map ? observed.get(check.field) : observed?.[check.field];
+    // Il path RISOLTO se l'osservatore ne ha provati piu' d'uno: il report deve
+    // nominare il file che ha davvero letto, non la prima candidata del piano.
+    const sitePath = seen?.sitePath || check.sitePath;
     let state;
     let detail = '';
     if (!check.expected || !check.sitePath) {
@@ -159,14 +201,16 @@ export function evaluateProvenance(checks, observed) {
       detail = seen?.error ? String(seen.error).slice(0, 120) : 'nessuna osservazione';
     } else if (seen.sha256 === null) {
       state = 'absent';
-      detail = `${check.sitePath} non esiste su ${SITE_REPO}@${SITE_REF}`;
+      const tried = seen.triedPaths?.length ? seen.triedPaths : [sitePath];
+      detail =
+        `${tried.join(', ')} non esiste${tried.length > 1 ? 'ono' : ''} su ${SITE_REPO}@${SITE_REF}`;
     } else if (seen.sha256 === check.expected) {
       state = 'verified';
     } else {
       state = 'drifted';
       detail = `dichiarato ${check.expected.slice(0, 16)}, il sito serve ${seen.sha256.slice(0, 16)}`;
     }
-    results.push({ ...check, state, detail });
+    results.push({ ...check, sitePath, state, detail });
   }
 
   const counts = {};
@@ -174,13 +218,34 @@ export function evaluateProvenance(checks, observed) {
   const broken = results.filter((r) => r.state === 'drifted' || r.state === 'absent' || r.state === 'undeclared');
   const unobserved = counts.unobserved || 0;
 
+  // Se spariscono TUTTI i `*-logic.yml` insieme, il sospettato non e' il
+  // contratto: sono 24 file che non si perdono uno per uno, e' la directory
+  // che questo lato inventa. Dirlo nel verdetto manda il fixer su
+  // `SITE_LOGIC_DIR` invece che a rigenerare artifact sani (issue #982).
+  const sources = results.filter((r) => r.field.endsWith('#sourceSha256'));
+  const movedLogicDir = sources.length > 1 && sources.every((r) => r.state === 'absent');
+
   let red = false;
   let reason = null;
   if (broken.length) {
     red = true;
-    reason =
-      `${broken.length}/${results.length} digest del contratto non corrispondono ai byte del sito: ` +
-      'i 24 artifact qui sono stantii finche\' non vengono rigenerati dal sorgente.';
+    if (movedLogicDir) {
+      const tried = [...new Set(
+        sources
+          .flatMap((r) => (r.sitePathCandidates?.length ? r.sitePathCandidates : [r.sitePath]))
+          .map((p) => p.split('/').slice(0, -1).join('/')),
+      )];
+      const others = broken.length - sources.length;
+      reason =
+        `nessuno dei ${sources.length} \`*-logic.yml\` esiste su ${SITE_REPO}@${SITE_REF} sotto ` +
+        `${tried.join(' o ')}: il sito li ha spostati e la coordinata di questo lato ` +
+        '(`SITE_LOGIC_DIR`) va aggiornata — gli artifact non c\'entrano.' +
+        (others > 0 ? ` A parte: altri ${others} digest non corrispondono.` : '');
+    } else {
+      reason =
+        `${broken.length}/${results.length} digest del contratto non corrispondono ai byte del sito: ` +
+        'i 24 artifact qui sono stantii finche\' non vengono rigenerati dal sorgente.';
+    }
   } else if (results.length > 0 && unobserved === results.length) {
     red = true;
     reason =
@@ -229,18 +294,51 @@ async function main() {
   // Un fetch per path DISTINTO: i 24 `sourceSha256` puntano a 24 file diversi,
   // ma un contratto malformato potrebbe ripetere lo stesso path.
   const cache = new Map();
-  const observed = new Map();
-  for (const check of checks) {
-    if (!check.sitePath) continue;
-    if (!cache.has(check.sitePath)) {
+  const observe = async (rel) => {
+    if (!cache.has(rel)) {
       try {
-        const bytes = await siteFile(check.sitePath);
-        cache.set(check.sitePath, { sha256: bytes === null ? null : sha256(bytes) });
+        const bytes = await siteFile(rel);
+        cache.set(rel, { sha256: bytes === null ? null : sha256(bytes) });
       } catch (e) {
-        cache.set(check.sitePath, { error: String(e.message || e) });
+        cache.set(rel, { error: String(e.message || e) });
       }
     }
-    observed.set(check.field, cache.get(check.sitePath));
+    return cache.get(rel);
+  };
+
+  // La directory che ha risposto per prima si appiccica: fatta la scoperta su
+  // un `*-logic.yml`, gli altri 23 partono da li' e il costo in rate-limit
+  // resta un fetch a file, non uno per candidata (i 60/ora anonimi sono il
+  // vincolo che tiene questo verificatore fuori da `node --test`).
+  let stickyDir = null;
+  const observed = new Map();
+  for (const check of checks) {
+    const candidates = check.sitePathCandidates?.length
+      ? check.sitePathCandidates
+      : (check.sitePath ? [check.sitePath] : []);
+    if (!candidates.length) continue;
+    const ordered = stickyDir
+      ? [...candidates].sort((a, b) => (b.startsWith(`${stickyDir}/`) ? 1 : 0) - (a.startsWith(`${stickyDir}/`) ? 1 : 0))
+      : candidates;
+
+    const tried = [];
+    let fallback = null;
+    let hit = null;
+    for (const rel of ordered) {
+      tried.push(rel);
+      const seen = await observe(rel);
+      if (seen.sha256) {
+        hit = { ...seen, sitePath: rel };
+        break;
+      }
+      // Un errore di rete su una candidata non prova che il file non c'e':
+      // resta il verdetto di riserva solo se nessun'altra risponde, cosi' il
+      // caso «al buio» non si traveste da `absent`.
+      if (seen.error && !fallback?.error) fallback = { ...seen, sitePath: rel };
+      else if (!fallback) fallback = { ...seen, sitePath: rel };
+    }
+    if (hit && candidates.length > 1) stickyDir = hit.sitePath.split('/').slice(0, -1).join('/');
+    observed.set(check.field, hit || { ...fallback, sitePath: fallback.sitePath, triedPaths: tried });
   }
 
   const verdict = evaluateProvenance(checks, observed);
