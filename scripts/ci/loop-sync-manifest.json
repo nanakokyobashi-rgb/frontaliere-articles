@@ -147,7 +147,7 @@
       "trackingIssue": "https://github.com/nanakokyobashi-rgb/frontaliere-articles/issues/986",
       "baseline": {
         "site": null,
-        "corpus": "e050eb68d2e960f1",
+        "corpus": "304f762f2aafcb73",
         "alignedAt": "2026-09-07"
       },
       "reason": "Il ponte fra `issue-fix.yml` e il rilevatore di aggregati condiviso (issue #986). Il workflow decideva `is_aggregate` con una QUARTA copia del rilevatore, in shell (`grep -cE '^[[:space:]]*[-*][[:space:]]+'` sul corpo, soglia 4), accanto alle tre copie Node tenute identiche da `generator/tests/aggregate-detectors-agree.test.mjs`. Sbagliava in entrambi i versi: falso negativo sulla forma `- **Titolo.**` x3 (#466, coperta da `hasEnumeratedItems` dal #568) — tre item, `3 < 4`, il fixer scrive `Closes` e al merge il tracker si chiude con dentro gli item appena deferiti; falso positivo su un solo item il cui corpo elenca quattro path. Il modulo non reimplementa niente: importa `isAggregate()` da `check-issue-already-resolved.mjs` (AGENTS.md #6). E' `corpus-only-pending` e non `corpus-only` perche' il difetto e' operativo anche sul sito, dove `.github/workflows/issue-fix.yml` ha ancora la sua copia in shell — una terza implementazione ancora (conteggio `N items? deferred` nel TITOLO piu' fallback `sweep|batch|bulk`), che non vede gli item enumerati nel CORPO. Il gemello va portato di la', ed e' il lavoro tracciato da #986: quando atterra, la voce si promuove a `identical` e `trackingIssue` si toglie."
