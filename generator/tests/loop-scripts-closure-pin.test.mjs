@@ -112,3 +112,38 @@ test('la prosa che CITA un import dinamico non è una dipendenza', () => {
   const src = "// Un `await import('./lib/…')` era invisibile — e la forma esiste già.\n";
   assert.deepEqual(specifiers(src), []);
 });
+
+test("la forma senza spazi (`import x from'./y.mjs'`) resta coperta", () => {
+  // #1031: il delta di #894 aveva stretto la clausola a `import\s+` e
+  // `\sfrom\s+`, e queste tre forme — JS valido — erano uscite dalla copertura
+  // di TUTTE le copie del guard. Occorrenze vive nell'albero: zero, perché
+  // prettier le riscrive; ma il primo file che entra senza passare da prettier
+  // (una copia dal sito, un paste minificato) perdeva la copertura in silenzio.
+  assert.deepEqual(specifiers("import x from'./y.mjs';\n"), ['./y.mjs']);
+  assert.deepEqual(specifiers("import{a}from'./y.mjs';\n"), ['./y.mjs']);
+  assert.deepEqual(specifiers("import*as n from'./y.mjs';\n"), ['./y.mjs']);
+  assert.deepEqual(specifiers("import'./y.mjs';\n"), ['./y.mjs']);
+  assert.deepEqual(specifiers("export{a}from'./y.mjs';\n"), ['./y.mjs']);
+  assert.deepEqual(specifiers("export*from'./y.mjs';\n"), ['./y.mjs']);
+});
+
+test('`export default` di una stringa non è uno specificatore', () => {
+  // Il falso positivo che il `\s+` di #894 stava proteggendo: riammettere la
+  // forma senza spazi non deve riaprirlo. `from` resta obbligatorio quando la
+  // clausola non è vuota, e dev'essere preceduto da spazio, `}` o `*` — così
+  // `default './x'` non ha niente da agganciare, e nemmeno un identificatore
+  // che finisce per `from`.
+  assert.deepEqual(specifiers("export default './x';\n"), []);
+  assert.deepEqual(specifiers('export default { a: 1 };\n'), []);
+  assert.deepEqual(specifiers("import xfrom'./y.mjs';\n"), []);
+});
+
+test('le due copie della clausola non divergono', () => {
+  // #894 ha stretto alcune copie e non altre, ed è così che questa classe di
+  // bug è nata. Finché l'estrattore condiviso di #1029 non atterra, il legame
+  // fra le copie è coperto da questo test (AGENTS.md #6).
+  const twin = fs.readFileSync(path.join(HERE, 'import-closure.test.mjs'), 'utf8');
+  const m = twin.match(/^const SPECIFIER =\n\s*(\/.*\/[a-z]*);$/m);
+  assert.ok(m, 'SPECIFIER non trovata in import-closure.test.mjs: se è stata rinominata, aggiorna questo pin');
+  assert.equal(m[1], guardImportRe().toString());
+});

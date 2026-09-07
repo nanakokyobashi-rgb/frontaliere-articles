@@ -127,7 +127,7 @@ function copyRefreshTree(root, rel) {
   fs.mkdirSync(path.dirname(dest), { recursive: true });
   fs.copyFileSync(src, dest);
   const text = fs.readFileSync(src, 'utf8');
-  for (const m of text.matchAll(/^\s*import\s[^\n]*?from\s+['"](\.[^'"]+)['"]/gm)) {
+  for (const m of text.matchAll(/^\s*import(?:\s|(?=[{*'"]))[^\n]*?[\s}*]from\s*['"](\.[^'"]+)['"]/gm)) {
     const childRel = path.normalize(path.join(path.dirname(rel), m[1]));
     copyRefreshTree(root, childRel);
   }
@@ -196,7 +196,7 @@ test('i tre refresh importano solo builtin Node o path relativi — la copia in 
   const offenders = [];
   for (const c of REWIRE_CONTRACTS) {
     const src = read(c.consumer.refresh);
-    for (const m of src.matchAll(/^\s*import\s[^\n]*?from\s+['"]([^'"]+)['"]/gm)) {
+    for (const m of src.matchAll(/^\s*import(?:\s|(?=[{*'"]))[^\n]*?[\s}*]from\s*['"]([^'"]+)['"]/gm)) {
       const spec = m[1];
       if (spec.startsWith('node:') || spec.startsWith('.')) continue;
       offenders.push(`${c.consumer.refresh} → ${spec}`);

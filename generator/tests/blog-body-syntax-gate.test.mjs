@@ -201,7 +201,7 @@ test('il gate non importa esbuild staticamente', () => {
   const src = fs.readFileSync(GATE, 'utf8');
   const statico = src
     .split('\n')
-    .filter((l) => /^\s*import\s+(?:.*?\s+from\s+)?['"]esbuild['"]/.test(l));
+    .filter((l) => /^\s*import(?:\s|(?=[{*'"]))[^\n]*?(?:[\s}*]from\s*)?['"]esbuild['"]/.test(l));
   assert.deepEqual(
     statico,
     [],

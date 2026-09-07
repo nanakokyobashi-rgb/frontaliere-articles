@@ -80,7 +80,7 @@ const DIRS = ['scripts/ci', 'scripts/ci/lib', 'scripts/lib'];
 //     `tests/lib/reachable-source.mjs`, che nominano la forma per parlarne.
 // Il costo è un falso NEGATIVO su un import dinamico preceduto da una stringa
 // sulla stessa riga: si perde una dipendenza, non si inventa un errore.
-const IMPORT_RE = /^(?:[ \t]*(?:import\s+(?:[^'";]*?\sfrom\s+)?|export\s+[^'";]*?\sfrom\s+)|(?![ \t]*(?:\/\/|\*|\/\*))(?:[^'"`\/\n]|\/(?!\/))*?\bimport\s*\(\s*)(['"])([^'"]+)\1/gm;
+const IMPORT_RE = /^(?:[ \t]*(?:import(?:\s+|(?=[{*'"]))(?:[^'";]*?[\s}*]from\s*)?|export(?:\s+|(?=[{*]))[^'";]*?[\s}*]from\s*)|(?![ \t]*(?:\/\/|\*|\/\*))(?:[^'"`\/\n]|\/(?!\/))*?\bimport\s*\(\s*)(['"])([^'"]+)\1/gm;
 
 /** Tutti gli specificatori importati da `src`, nell'ordine in cui compaiono. */
 function importSpecifiers(src) {
