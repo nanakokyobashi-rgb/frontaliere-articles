@@ -1,5 +1,4 @@
 {
-  "https://www.laregione.ch/economia/economia/1941096/ue-russia-europa-anni-gr-bel-ucraina-cs-ubs-ceo-mette": "grubel-ubb-intromettersi-in-ucraina",
   "https://www.laregione.ch/economia/economia/1941727/amazon-capitalizzazione-miliardi-rimborsi-risultati": "amazon-capitalizzazione-3000-miliardi",
   "https://www.laregione.ch/economia/economia/1940732/miliardi-apple-valore-nvidia-seconda": "apple-vola-a-5000-miliardi-di-valore",
   "https://www.tio.ch/svizzera/economia/1943476/bns": "bns-promuove-berna",
@@ -1909,6 +1908,11 @@
   "https://www.tio.ch/ticino/attualita/1946997/fabbrica-bitcoin-gli-chiudono-il-conto-e-nessuna-banca-lo-vuole": {
     "articleId": "startup-crypto-difficolta-bancarie",
     "ts": "2026-09-07T04:46:39.755Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/info/mondo/riassetto-vw-per-la-svizzera-l%e2%80%99impatto-%c3%a8-limitato--4060425.html": {
+    "articleId": "riassetto-vw-impatti-svizzera",
+    "ts": "2026-09-07T05:25:22.241Z",
     "keyForm": 2
   }
 }
