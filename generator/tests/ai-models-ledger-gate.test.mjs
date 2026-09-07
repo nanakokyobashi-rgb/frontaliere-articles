@@ -45,6 +45,7 @@ import {
 } from '../scripts/lib/ai-models.mjs';
 
 import { describeOpaqueRead, scanEnvReads, stripCommentLines } from './lib/env-reads.mjs';
+import { pinIdentifierToFunctions } from './lib/identifier-scope.mjs';
 
 const SRC = readFileSync(new URL('../scripts/lib/ai-models.mjs', import.meta.url), 'utf8');
 
@@ -115,39 +116,122 @@ function makeStore() {
 }
 
 describe('#874/#864/#845 — una sola porta di scrittura verso ai_model_scores/_all', () => {
-  it('nel sorgente esiste UN solo `_dirtyModels.add(`, ed e\' dentro _proposeLedgerWrite', () => {
-    const righe = SRC_CODE.split('\n')
-      .map((riga, i) => ({ n: i + 1, riga }))
-      .filter(({ riga }) => /(?<![\w.])_dirtyModels\.add\(/.test(riga));
+  // #1047. Il pin misurava la STRINGA `_dirtyModels.add(`, cioe' provava
+  // l'assenza di una forma testuale e non l'unicita' della porta. Un alias
+  // (`const d = _dirtyModels`), un `bind`, o il Set passato a una helper sono
+  // secondi ingressi REALI sul documento condiviso e non contengono quella
+  // stringa: il gate sarebbe rimasto verde su tutti e tre. L'unita' di misura
+  // e' ora ogni RIFERIMENTO all'identificatore, vincolato a un'allowlist —
+  // tutte e tre le forme devono nominarlo, quindi cadono tutte nella rete.
+  const PORTE_DIRTY_MODELS = {
+    functions: [
+      // La porta.
+      '_proposeLedgerWrite',
+      // Il RECUPERO di una scrittura fallita, piu' la lettura della coda: non
+      // e' una proposta nuova, e' la stessa gia' accettata dalla porta che
+      // torna indietro perche' la rete l'ha respinta.
+      '_persistScoresToFirestore',
+      // Sola lettura: quanto resta in coda prima di uscire dal processo.
+      'flushScoresBeforeExit',
+      // Sola lettura: il riepilogo diagnostico.
+      'getStats',
+      // Lo svuotamento del reset.
+      'resetState',
+    ],
+    // A livello di modulo l'unica riga ammessa e' la dichiarazione. Ammettere
+    // il top-level in blocco riaprirebbe la porta dal lato piu' comodo: un
+    // alias di modulo e' una riga sola e non sta dentro nessuna funzione.
+    declaration: /^const _dirtyModels = new Set\(\);$/,
+  };
 
-    // La riga della porta piu' quella del RECUPERO dentro
-    // `_persistScoresToFirestore`, che rimette in coda i modelli di una
-    // scrittura fallita: quella non e' una proposta nuova, e' la stessa gia'
-    // accettata dalla porta che torna indietro perche' la rete l'ha respinta.
-    // Filtrarla per NOME della funzione e non per numero di riga, cosi' resta
-    // vera quando il file si muove.
-    const attese = new Set(['_proposeLedgerWrite', '_persistScoresToFirestore']);
-    const funzioneDi = (n) => {
-      const prima = SRC_CODE.split('\n').slice(0, n);
-      for (let i = prima.length - 1; i >= 0; i--) {
-        // `export function` e i metodi contano quanto una `function` nuda: senza
-        // `export` nel pattern, un `_dirtyModels.add(` dentro una funzione
-        // ESPORTATA veniva attribuito alla dichiarazione precedente — e se
-        // quella era la porta, il pin restava verde su una violazione vera.
-        const m = prima[i].match(/^(?:export\s+)?(?:async\s+)?function (\w+)\s*\(/);
-        if (m) return m[1];
-      }
-      return '(top-level)';
-    };
+  it('ogni riferimento a `_dirtyModels` sta in una funzione dell\'allowlist (#1047)', () => {
+    const { scoperti, fantasmi, riferimenti } = pinIdentifierToFunctions(SRC, '_dirtyModels', PORTE_DIRTY_MODELS);
 
-    const fuori = righe.filter(({ n }) => !attese.has(funzioneDi(n)));
     assert.deepEqual(
-      fuori.map(({ n, riga }) => `${n}: ${riga.trim()} [in ${funzioneDi(n)}]`),
+      scoperti,
       [],
-      'un writer scrive il ledger senza passare da _proposeLedgerWrite: e\' la forma di #838/#845/#864/#874, '
-      + 'dove ogni difesa copriva un percorso solo. Usa _proposeLedgerWrite(modelId, recordScore).',
+      'qualcuno nomina _dirtyModels fuori dalla porta: e\' la forma di #838/#845/#864/#874, dove ogni difesa '
+      + 'copriva un percorso solo. Non basta evitare `.add(` — un alias, un bind o il Set passato a una helper '
+      + 'sono lo stesso secondo ingresso sul documento condiviso. Usa _proposeLedgerWrite(modelId, recordScore).',
     );
-    assert.ok(righe.length >= 2, `il grep non trova piu' nemmeno la porta: ${righe.length} occorrenze`);
+    // Un'allowlist che nomina funzioni sparite e' un pin che ha smesso di
+    // misurare senza dirlo: il verde verrebbe dall'assenza del codice, non
+    // dalla sua correttezza.
+    assert.deepEqual(fantasmi, [], `l'allowlist nomina funzioni che non toccano piu' _dirtyModels: ${fantasmi.join(', ')}`);
+    assert.ok(riferimenti.length >= 5, `il pin non trova piu' nemmeno la porta: ${riferimenti.length} riferimenti`);
+  });
+
+  // L'OSSERVATORE del pin qui sopra: un gate che nessuno ha mai visto dire di
+  // no non e' una prova. Le tre forme sono quelle che erano verdi prima di
+  // #1047, alimentate al pin come sorgente sintetico.
+  it('il pin vede alias, bind e il Set passato a una helper (#1047)', () => {
+    const pin = (code) => pinIdentifierToFunctions(code, '_dirtyModels', {
+      functions: ['_proposeLedgerWrite'],
+      declaration: /^const _dirtyModels = new Set\(\);$/,
+    });
+    const base = 'const _dirtyModels = new Set();\n'
+      + 'function _proposeLedgerWrite(id) {\n  _dirtyModels.add(id);\n}\n';
+
+    assert.equal(pin(base).scoperti.length, 0, 'il sorgente conforme deve passare');
+
+    assert.deepEqual(
+      pin(`${base}function scorciatoia(id) {\n  const d = _dirtyModels;\n  d.add(id);\n}\n`).scoperti,
+      ['6: const d = _dirtyModels; [in scorciatoia]'],
+      'un ALIAS del Set deve far rosso: `d.add(id)` scrive il documento condiviso quanto la porta',
+    );
+    assert.deepEqual(
+      pin(`${base}function scorciatoia() {\n  return _dirtyModels.add.bind(_dirtyModels);\n}\n`).scoperti,
+      ['6: return _dirtyModels.add.bind(_dirtyModels); [in scorciatoia]'],
+      'un metodo BINDATO fuori dalla porta deve far rosso',
+    );
+    assert.deepEqual(
+      pin(`${base}function scorciatoia(id) {\n  riempi([..._dirtyModels], id);\n}\n`).scoperti,
+      ['6: riempi([..._dirtyModels], id); [in scorciatoia]'],
+      'il Set passato a una helper deve far rosso: lo spread non e\' un accesso a proprieta\'',
+    );
+    assert.deepEqual(
+      pin(`${base}const aggiungi = (id) => _dirtyModels.add(id);\n`).scoperti,
+      ['5: const aggiungi = (id) => _dirtyModels.add(id); [in (top-level)]'],
+      'a livello di modulo passa solo la dichiarazione, non una seconda porta scritta come arrow',
+    );
+
+    // Il caso che l'euristica «risali alla function dichiarata piu' sopra»
+    // sbagliava: la riga sta DOPO la fine della porta, non dentro. Le veniva
+    // attribuito `_proposeLedgerWrite` e il pin restava verde.
+    assert.deepEqual(
+      pin(`${base}globalThis.scrivi = (id) => _dirtyModels.add(id);\n`).scoperti,
+      ['5: globalThis.scrivi = (id) => _dirtyModels.add(id); [in (top-level)]'],
+      'una riga fuori da ogni funzione non deve ereditare il nome della funzione chiusa sopra di lei',
+    );
+
+    assert.deepEqual(
+      pin('const _dirtyModels = new Set();\n').fantasmi,
+      ['_proposeLedgerWrite'],
+      'un\'allowlist che nomina una funzione sparita deve farsi notare, non passare per assenza di codice',
+    );
+  });
+
+  it('il pin non conta le menzioni in prosa, e non inventa uno scope su un sorgente sbilanciato', () => {
+    const conforme = 'const _dirtyModels = new Set();\n'
+      + '// `_dirtyModels.add(id)` e\' la porta.\n'
+      + '/**\n * Anche qui si parla di _dirtyModels.\n */\n'
+      + 'function _proposeLedgerWrite(id) {\n  _dirtyModels.add(id);\n}\n';
+    assert.deepEqual(
+      pinIdentifierToFunctions(conforme, '_dirtyModels', {
+        functions: ['_proposeLedgerWrite'],
+        declaration: /^const _dirtyModels = new Set\(\);$/,
+      }).scoperti,
+      [],
+      'una citazione in un commento non e\' un uso',
+    );
+
+    assert.throws(
+      () => pinIdentifierToFunctions('function f() {\n  _dirtyModels.add(1);\n', '_dirtyModels', {
+        functions: [], declaration: /^$/,
+      }),
+      /sbilanciata/,
+      'su un sorgente che il lettore non sa chiudere il pin deve lanciare, non rendere un\'attribuzione inventata',
+    );
   });
 
   it('la tabella degli endpoint per-macchina copre ogni URL che il modulo legge da env (#874 item 3)', () => {
