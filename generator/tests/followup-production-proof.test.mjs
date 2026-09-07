@@ -143,6 +143,81 @@ test('il DRAIN sospende la promozione, e il pass PRODUCTION-PROOF toglie la labe
   const skip = src.slice(src.indexOf('if (has(cand, LBL_PROOF)) {'), src.indexOf("budget.take(`#${cand.number} (drain)`"));
   assert.doesNotMatch(skip, /LBL_PARKED/, 'la sospensione non parcheggia: la coda non deve perdere la issue');
   const pass = src.slice(src.indexOf('// --- PRODUCTION-PROOF: constata la prova'));
-  assert.match(pass.slice(0, 4000), /edit\(iss\.number, \{ remove: \[LBL_PROOF\] \}\)/, 'il pass rimuove la label');
-  assert.match(pass.slice(0, 4000), /no silent cap/, 'il cap per run va dichiarato nel log');
+  assert.match(pass.slice(0, 6000), /edit\(iss\.number, \{ remove: \[LBL_PROOF\] \}\)/, 'il pass rimuove la label');
+  assert.match(pass.slice(0, 6000), /no silent cap/, 'il cap per run va dichiarato nel log');
+});
+
+// --- nit della review su PR #1111 (stessa issue, ciclo successivo) ----------
+
+test('lista dei file illeggibile ≠ «nessun workflow»: skip, non undeterminable', () => {
+  // `gh pr list --json files` risolve `files(first: 100)`: una PR con >100 file
+  // o un glitch sul campo dà una lista vuota o troncata. Leggerla come «la PR
+  // non tocca `.github/workflows/**`» toglierebbe la label SUBITO, con un
+  // commento che afferma una cosa falsa, e rimetterebbe la issue in promozione.
+  const d = productionProofDecision({
+    labeledAt: T0, mergedAt: T0, workflows: [], filesKnown: false, proofRun: null, now: T0 + DAY,
+  });
+  assert.equal(d.action, 'skip');
+  assert.match(d.reason, /files\(first: 100\)/);
+});
+
+test('lista dei file illeggibile oltre la finestra → timeout: nemmeno lo skip è assorbente', () => {
+  const d = productionProofDecision({
+    labeledAt: T0, mergedAt: T0, workflows: [], filesKnown: false, proofRun: null,
+    now: T0 + (PROOF_MAX_HOLD_DAYS + 1) * DAY,
+  });
+  assert.equal(d.action, 'timeout');
+});
+
+test('la prova è ancorata al SHA del merge, non al solo orologio', () => {
+  // `createdAt > mergedAt` non dimostra che la run CONTENESSE il fix: una run
+  // accodata prima del merge e creata dopo, un `workflow_dispatch` su un ref
+  // precedente o una re-run sono `success` su `main` senza il commit dentro —
+  // prova falsa, label rimossa, ed è la forma nuova di #151.
+  const src = fs.readFileSync(DRAINER, 'utf8');
+  const fn = src.slice(src.indexOf('function successMainRunAfter('), src.indexOf('// --- PRODUCTION-PROOF: constata la prova'));
+  assert.match(fn, /createdAt,url,workflowName,headSha/, 'la run va letta col suo headSha');
+  assert.match(fn, /runContainsCommit\(headSha, mergeSha\)/, 'il headSha va confrontato col commit di merge');
+  assert.match(fn, /if \(contains !== true\) continue;/, 'containment non decidibile ≠ prova');
+  assert.match(src, /compare\/\$\{base\}\.\.\.\$\{head\}/, 'il containment si misura con `compare`');
+  assert.match(src, /'mergedAt,files,mergeCommit'/, 'il SHA del merge viene dalla stessa `gh pr list`');
+});
+
+test('il pass esamina prima le issue più VECCHIE, quelle vicine al timeout', () => {
+  // `gh issue list` ordina dalle più recenti: sommato al cap per run, le più
+  // vecchie — cioè quelle per cui il `timeout` deve scattare — non verrebbero
+  // mai esaminate. Stessa classe già misurata su `ISSUE_LIST_LIMIT`.
+  const src = fs.readFileSync(DRAINER, 'utf8');
+  const pass = src.slice(src.indexOf('// --- PRODUCTION-PROOF: constata la prova'));
+  assert.match(pass.slice(0, 2000), /listIssues\(LBL_PROOF\)\s*\n\s*\.slice\(\)\s*\n\s*\.sort\(/, 'il pool va riordinato prima del cap');
+  assert.match(pass.slice(0, 2000), /Date\.parse\(a\?\.createdAt\) \|\| 0\) - \(Date\.parse\(b\?\.createdAt\)/, 'ordine ascendente per apertura');
+});
+
+test('il commento arriva solo se la label è stata davvero rimossa', () => {
+  // `edit` degrada l'errore a `::warning::`: commentando PRIMA, una `gh issue
+  // edit` fallita lascia la label appesa e il tick successivo ri-posta lo stesso
+  // commento — uno per tick, indefinitamente per gli esiti che non evolvono più.
+  const src = fs.readFileSync(DRAINER, 'utf8');
+  const pass = src.slice(src.indexOf('// --- PRODUCTION-PROOF: constata la prova'));
+  const iEdit = pass.indexOf('if (!edit(iss.number, { remove: [LBL_PROOF] }))');
+  const iComment = pass.indexOf("gh(['issue', 'comment', String(iss.number)");
+  assert.ok(iEdit > -1 && iComment > -1 && iEdit < iComment, 'la rimozione della label precede il commento');
+  assert.match(pass.slice(iEdit, iComment), /continue;/, 'rimozione fallita → nessun commento, si riprova al tick dopo');
+});
+
+test('`edit` è osservabile: ritorna l esito invece di inghiottirlo', () => {
+  const src = fs.readFileSync(DRAINER, 'utf8');
+  const fn = src.slice(src.indexOf('function edit(num, { add = [], remove = [] })'));
+  const body = fn.slice(0, fn.indexOf('\n}\n'));
+  assert.match(body, /try \{ gh\(args, \{ json: false \}\); return true; \}/);
+  assert.match(body, /catch \(e\) \{/);
+  assert.match(body, /return false; \}/, 'un edit fallito è visibile al chiamante');
+});
+
+test('una sola `gh run list` dopo la prima prova trovata (for/break, non map)', () => {
+  const src = fs.readFileSync(DRAINER, 'utf8');
+  const pass = src.slice(src.indexOf('// --- PRODUCTION-PROOF: constata la prova'));
+  assert.doesNotMatch(pass.slice(0, 3000), /workflows\.map\(/, '`map` non corto-circuita: valuta tutti i workflow');
+  assert.match(pass.slice(0, 3000), /if \(proofRun\) break;/);
+  assert.match(pass.slice(0, 3000), /merged \? null : labelAddedAt\(iss\.number, LBL_PROOF\)/, '`labeledAt` è letto solo dal ramo che lo usa');
 });

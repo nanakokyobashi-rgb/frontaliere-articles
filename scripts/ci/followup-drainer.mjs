@@ -734,7 +734,11 @@ export function productionProofDecision({
   // dato illeggibile si sceglie `skip`, come gia` fa il ramo dei timestamp qui
   // sopra: nessuna decisione, si riprova al tick successivo.
   if (!filesKnown) {
-    return { action: 'skip', reason: 'lista dei file della PR mergiata vuota o troncata (`gh` risolve `files(first: 100)`) → nessuna decisione' };
+    // Bounded come ogni altro ramo: un `skip` che si ripete per sempre sarebbe
+    // esso stesso uno stato assorbente, cioe` il bug che questa fix chiude.
+    return expired
+      ? { action: 'timeout', reason: `lista dei file della PR mergiata mai leggibile in ${Math.round((now - since) / 86_400_000)}gg dal merge: la prova non è constatabile` }
+      : { action: 'skip', reason: 'lista dei file della PR mergiata vuota o troncata (`gh` risolve `files(first: 100)`) → nessuna decisione' };
   }
   if (!(workflows || []).length) {
     return { action: 'undeterminable', reason: 'la PR mergiata non tocca `.github/workflows/**`: nessuna run di cui la prova sia la misura' };
@@ -2573,7 +2577,7 @@ export function runDrain() {
       }
       const d = productionProofDecision({
         // Lazy: `labeledAt` costa una `gh api .../events --paginate` e lo legge
-        // il solo ramo `merged === null`. Con un merge noto e` speso per niente.
+        // il solo ramo `merged === null`. Con un merge noto è speso per niente.
         labeledAt: merged ? null : labelAddedAt(iss.number, LBL_PROOF),
         mergedAt: merged?.mergedAt ?? null,
         workflows,

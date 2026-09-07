@@ -113,7 +113,9 @@ tick fosse sbagliato.
    La misura non la allega più una mano umana: dal 2026-09-06 (#973) il pass
    **PRODUCTION-PROOF** del drainer sospende la promozione finché la label c'è,
    e la toglie da solo quando una run **success** su `main` di un workflow
-   toccato dalla PR risulta creata **dopo** il merge. Sospensione senza
+   toccato dalla PR risulta creata **dopo** il merge e girata su un commit che
+   **discende** da quello di merge (l'orologio da solo non dice cosa c'era
+   dentro la run). Sospensione senza
    rimuovitore = stato assorbente, quindi ogni altro esito toglie comunque la
    label: prova non definibile (la PR non tocca `.github/workflows/**`) o
    timeout a `FOLLOWUP_PROOF_MAX_HOLD_DAYS` (7) con un warning — una prova che
