@@ -74,6 +74,10 @@ import { FIX_OUTCOME_RE } from './close-recovered-failure-issues.mjs';
 // nessun canale risolvera'. Entrambi i moduli hanno la guardia `argv` sul
 // proprio `main`, quindi importarli non fa ne' rete ne' scritture.
 import { permanentBlock, isFixture } from './transport-identical-twins.mjs';
+// Le issue che il manifest tiene APERTE (`corpus-only-pending` → `trackingIssue`).
+// Sorgente unica, come `mirrorLockedPaths()`: la lista viene dal manifest, non da
+// numeri ricopiati qui che divergerebbero al primo cambio di voce (AGENTS.md #6).
+import { pinnedBy } from './manifest-pinned-issues.mjs';
 
 export const SITE_REPO = process.env.SITE_REPO || 'valerielinc-ops/frontaliere-si-o-no';
 const REPO = process.env.GH_REPO || process.env.GITHUB_REPOSITORY || '';
@@ -420,7 +424,7 @@ export function citedAsMirrorBlocked(body, path) {
  *
  * @returns {{handoff: boolean, paths: string[], residual: string[], close: boolean, reason: string}}
  */
-export function handoffDecision({ verdict, body, lockedPaths, siteAbsent, siteNames, stranded } = {}) {
+export function handoffDecision({ verdict, body, lockedPaths, siteAbsent, siteNames, stranded, pinnedEntry } = {}) {
   if (!verdict || !HANDOFF_VERDICTS.has(verdict)) {
     return { handoff: false, paths: [], residual: [], close: false, reason: `verdetto non instradabile: ${verdict ?? 'nessuno'}` };
   }
@@ -524,6 +528,27 @@ export function handoffDecision({ verdict, body, lockedPaths, siteAbsent, siteNa
       residual: stuck,
       close: false,
       reason: `diagnosi con ${sitePaths.length} path del sito, di cui ${stuck.length} gemelli che nessun trasporto porta giu' (${stuck.join(', ')}): la discesa e' una copia a mano`,
+    };
+  }
+  // STESSA FORMA del ramo `stuck` qui sopra, per una ragione diversa: qui il
+  // gemello di la' non c'e' ANCORA, e la voce `corpus-only-pending` del manifest
+  // punta a QUESTA issue per dirlo. Chiuderla lascerebbe la voce a puntare una
+  // issue chiusa — «in lavorazione» per sempre su un lavoro che nessuno sta piu'
+  // facendo (#45), e il censimento di `loop-sync-manifest-scope.test.mjs` la
+  // segnala rossa. Misurato su #986: la consegna aveva `close: true` perche' cita
+  // `.github/workflows/issue-fix.yml` (`adapted`, spedibile), cioe' il solo canale
+  // che poteva far avanzare quella issue era anche quello che la distruggeva.
+  //
+  // Si consegna lo stesso — la fix si scrive di la' — e si parcheggia: la
+  // promozione della voce a `identical` quando il gemello atterra e' lavoro di
+  // QUESTO repo, quindi e' residuo per definizione.
+  if (pinnedEntry) {
+    return {
+      handoff: true,
+      paths: sitePaths,
+      residual: [pinnedEntry],
+      close: false,
+      reason: `diagnosi con ${sitePaths.length} path del sito, ma questa issue e' il \`trackingIssue\` della voce \`corpus-only-pending\` ${pinnedEntry}: resta aperta finche' il gemello non atterra`,
     };
   }
   return { handoff: true, paths: sitePaths, residual: [], close: true, reason: `diagnosi con ${sitePaths.length} path del sito` };
@@ -713,7 +738,7 @@ function readDecision() {
     return null;
   }
   const last = lastVerdictComment(data?.comments || []);
-  return { data, last, d: handoffDecision({ verdict: last?.verdict, body: last?.body }) };
+  return { data, last, d: handoffDecision({ verdict: last?.verdict, body: last?.body, pinnedEntry: pinnedBy(ISSUE, REPO) }) };
 }
 
 function setPreflightOutput(delivered) {
