@@ -130,3 +130,72 @@ export function sectionFloor(root, section, retention = FLOOR_RETENTION) {
   }
   return floorFrom(source, retention);
 }
+
+/**
+ * Dove vivono i chunk SEO in QUESTO repo. Il layout del sito e'
+ * `services/seo`; `build-api.mjs` passa `seoDir: 'content/seo'` a
+ * `buildAllRssFeeds`, ed e' quello il parametro che vale qui.
+ */
+export const SEO_CHUNK_DIR = path.join('content', 'seo');
+
+/**
+ * Le voci di un chunk SEO che diventano davvero `<item>`, aggiunte a `into`.
+ *
+ * PERCHE' UN CONTEGGIO A PARTE dai file di corpo. Gli `<item>` di un feed non
+ * nascono dai corpi: `buildSectionFeeds` li costruisce da `parseSeoBlogs` sui
+ * chunk elencati in `RSS_SECTIONS[].seoFiles`. Sono due popolazioni scollegate,
+ * e la divergenza e' misurabile oggi (frontaliere: 4728 voci nei chunk contro
+ * 3792 corpi). Un pavimento tarato sui corpi non e' «un po' impreciso»: nella
+ * direzione peggiore non segnala un feed vecchio e BLOCCA la pubblicazione per
+ * un feed legittimamente corto — e la lista dei chunk si e' gia' rivelata
+ * capace di muoversi da sola (due su sette letti, feed fermo tre mesi).
+ *
+ * I criteri ricalcano quelli di `parseSeoBlogs`, che e' il produttore: stesso
+ * regex di inizio voce, stessa finestra di 4000 caratteri, e lo stesso scarto
+ * di una voce senza `headline` o senza `datePublished` (`if (!headline ||
+ * !datePublished) continue`). L'insieme e' un Set di articleId perche' la',
+ * un livello sopra, le voci finiscono in una Map chiavata per articleId: due
+ * chunk che citano lo stesso id producono UN item, non due.
+ *
+ * Restano un parse in piu' — l'engine non esporta il suo — ma la LISTA dei
+ * chunk no: quella si importa da `RSS_SECTIONS` (AGENTS.md #6), ed e' la parte
+ * che e' gia' andata alla deriva una volta.
+ */
+export function collectSeoEntryIds(src, into = new Set()) {
+  const entryRe = /'blog-([^']+)':\s*\{/g;
+  const positions = [];
+  let match;
+  while ((match = entryRe.exec(src)) !== null) positions.push({ id: match[1], start: match.index });
+
+  for (let i = 0; i < positions.length; i += 1) {
+    const { id, start } = positions[i];
+    const end = i + 1 < positions.length ? positions[i + 1].start : start + 4000;
+    const block = src.slice(start, Math.min(end, start + 4000));
+    // Non-vuoti, come li vuole il produttore: `"headline": ""` e' falsy la', e
+    // contarlo qui alzerebbe il pavimento sopra cio' che il feed puo' emettere.
+    if (!/"headline":\s*"(?:[^"\\]|\\.)+"/.test(block)) continue;
+    if (!/"datePublished":\s*"[^"]+"/.test(block)) continue;
+    into.add(id);
+  }
+  return into;
+}
+
+/**
+ * Quante voci datate tengono i chunk SEO di una sezione: la popolazione che
+ * GENERA i suoi feed, e quindi il riferimento del loro pavimento.
+ *
+ * Un chunk assente viene saltato come lo salta `parseSeoBlogs` (`if
+ * (!fs.existsSync(filePath)) continue`) — la lista e' condivisa col sito, che
+ * puo' tenere chunk non mirrorati qui. Se pero' il totale della sezione e'
+ * zero, quello NON e' un pavimento a zero: e' l'assenza del riferimento, e il
+ * chiamante deve trattarlo come errore (vedi `missingCorpusMessage`).
+ */
+export function countSeoEntries(root, seoFiles, seoDir = SEO_CHUNK_DIR) {
+  const ids = new Set();
+  for (const file of seoFiles) {
+    const filePath = path.join(root, seoDir, file);
+    if (!fs.existsSync(filePath)) continue;
+    collectSeoEntryIds(fs.readFileSync(filePath, 'utf-8'), ids);
+  }
+  return ids.size;
+}

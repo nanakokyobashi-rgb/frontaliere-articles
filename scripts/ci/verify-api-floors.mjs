@@ -34,7 +34,9 @@ import {
   countSourceArticles,
   countSourceImages,
   missingCorpusMessage,
+  countSeoEntries,
   SECTION_BODY_DIRS,
+  SEO_CHUNK_DIR,
   IMAGE_SOURCE_DIR,
 } from '../lib/corpus-floors.mjs';
 // Stessa funzione del writer e del gate manifest.counts in build-api.mjs: un
@@ -65,8 +67,10 @@ export function feedSection(fileName) {
  *
  * @param {{articleCounts: Record<string, number>, feeds: {name: string, items: number}[],
  *          images: number|null}} measured  cio' che l'artefatto dichiara
- * @param {{sourceArticles: Record<string, number>, sourceImages: number,
- *          rssMaxItems: number}} expected   cio' che il corpus sorgente promette
+ * @param {{sourceArticles: Record<string, number>, feedSources: Record<string, number>,
+ *          sourceImages: number, rssMaxItems: number}} expected   cio' che il corpus
+ *          sorgente promette: `sourceArticles` sono i file di corpo (il riferimento di
+ *          `manifest.counts`), `feedSources` le voci dei chunk SEO (quello dei feed)
  * @returns {string[]} una riga per violazione, vuoto se tutto regge
  */
 export function floorViolations(measured, expected, retention = undefined) {
@@ -99,15 +103,40 @@ export function floorViolations(measured, expected, retention = undefined) {
   }
 
   // Un feed e' tagliato a RSS_MAX_ITEMS, quindi il suo atteso e' il minimo fra
-  // il tetto e il corpus della sua sezione: su una sezione piccola un feed
+  // il tetto e la popolazione che lo GENERA: su una sezione piccola un feed
   // corto e' corretto, su una grande e' un troncamento.
+  //
+  // E quella popolazione sono i chunk SEO, non i file di corpo. Gli `<item>`
+  // nascono da `parseSeoBlogs` sui `RSS_SECTIONS[].seoFiles`; i corpi sono un
+  // insieme scollegato, che oggi diverge gia' di quasi mille unita' (4728
+  // contro 3792 lato frontaliere). Tararci sopra il pavimento dei feed sbaglia
+  // in entrambe le direzioni, e la peggiore per il ciclo non e' il falso
+  // negativo: e' che una sezione con meno di `floor(RSS_MAX_ITEMS * retention)`
+  // voci datate BLOCCA l'intera pubblicazione per un feed corto ma completo.
+  const missingSeo = new Set();
   for (const feed of measured.feeds) {
     const section = feedSection(feed.name);
-    const source = expected.sourceArticles[section] ?? 0;
-    if (source === 0) continue; // riferimento mancante: gia' segnalato una volta sopra
+    const source = expected.feedSources?.[section] ?? 0;
+    // Stessa regola dei corpi, un riferimento diverso: zero voci nei chunk non
+    // e' «feed legittimamente vuoto», e' la lista dei chunk che non risolve —
+    // il modo esatto in cui un feed e' gia' rimasto fermo tre mesi. Una riga
+    // per sezione, non una per feed: i cinque feed di una sezione condividono
+    // il riferimento, e ripeterlo cinque volte non aggiunge niente.
+    if (source === 0) {
+      if (!missingSeo.has(section)) {
+        missingSeo.add(section);
+        violations.push(
+          missingCorpusMessage(`i feed di ${section}`, `${SEO_CHUNK_DIR} (chunk di ${section})`),
+        );
+      }
+      continue;
+    }
     const min = floor(Math.min(expected.rssMaxItems, source));
     if (feed.items < min) {
-      violations.push(`${feed.name}: ${feed.items} <item> contro ${min} attesi — feed troncato`);
+      violations.push(
+        `${feed.name}: ${feed.items} <item> contro ${min} attesi ` +
+          `(${source} voci nei chunk SEO di ${section}) — feed troncato`,
+      );
     }
   }
 
@@ -158,14 +187,23 @@ export function measureDist(distDir) {
 
 /** Riconta il corpus sorgente, che e' il riferimento esterno all'artefatto. */
 export async function expectFromCorpus(root) {
-  // Importato, non ricopiato: `RSS_MAX_ITEMS` ha una sorgente sola, ed e'
-  // quella che genera davvero i feed.
-  const { RSS_MAX_ITEMS } = await import(pathToFileURL(path.join(root, 'engine', 'rssFeeds.mjs')).href);
+  // Importati, non ricopiati: `RSS_MAX_ITEMS` e la lista dei chunk di ogni
+  // sezione hanno una sorgente sola, ed e' quella che genera davvero i feed.
+  // Una seconda lista qui sarebbe il difetto che ha congelato rss.xml per tre
+  // mesi, spostato di un file (AGENTS.md #6).
+  const { RSS_MAX_ITEMS, RSS_SECTIONS } = await import(
+    pathToFileURL(path.join(root, 'engine', 'rssFeeds.mjs')).href
+  );
+  const feedSources = {};
+  for (const section of RSS_SECTIONS) {
+    feedSources[section.id] = countSeoEntries(root, section.seoFiles);
+  }
   return {
     sourceArticles: {
       frontaliere: countSourceArticles(root, 'frontaliere'),
       svizzera: countSourceArticles(root, 'svizzera'),
     },
+    feedSources,
     sourceImages: countSourceImages(root),
     rssMaxItems: RSS_MAX_ITEMS,
   };
@@ -182,6 +220,10 @@ async function main() {
   console.log(
     `[api-floors] corpus sorgente: ${expected.sourceArticles.frontaliere} frontaliere, ` +
       `${expected.sourceArticles.svizzera} svizzera, ${expected.sourceImages} immagini`,
+  );
+  console.log(
+    `[api-floors] chunk SEO (la popolazione che genera i feed): ` +
+      `${expected.feedSources.frontaliere} frontaliere, ${expected.feedSources.svizzera} svizzera`,
   );
   console.log(
     `[api-floors] manifest: articles=${measured.articleCounts.articles}, ` +
