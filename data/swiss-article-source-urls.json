@@ -1,5 +1,4 @@
 {
-  "https://www.rsi.ch/info/ticino-grigioni-e-insubria/una-cinquantina-di-cicogne-bianche-avvistate-a-castione--3943815.html": "avvistamento-cicogne-bianche-castione",
   "https://www.rsi.ch/info/ticino-grigioni-e-insubria/alla-ricerca-della-materia-oscura-sotto-sedrun--3939471.html": "esperimento-materia-oscura-sotto-sedrun",
   "https://www.tio.ch/svizzera/cronaca/1943508/carcere-bois-mermet-popolazione-bois-evaso": "evaso-bois-mermet",
   "https://www.laregione.ch/svizzera/svizzera/1943471/miliardi-iva-aumento-punti-acquisti": "iva-aumento-sicurezza",
@@ -1977,6 +1976,11 @@
   "https://www.tio.ch/svizzera/economia/1948457/svizzera-action-negozio-20esimo-schattdorf": {
     "articleId": "action-negozio-20esimo-schattdorf",
     "ts": "2026-09-07T09:43:03.809Z",
+    "keyForm": 2
+  },
+  "https://www.laregione.ch/economia/speciale-economia/1948085/il-vicere-di-caracas-passato-da-lugano": {
+    "articleId": "vicere-caracas-indagine-lugano",
+    "ts": "2026-09-07T09:55:33.747Z",
     "keyForm": 2
   }
 }
