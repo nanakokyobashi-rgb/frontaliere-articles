@@ -35,7 +35,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
-import { execFileSync } from 'node:child_process';
+import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
@@ -77,7 +77,11 @@ function runInSandbox(gates = {}) {
   );
 
   const summary = path.join(dir, 'summary.md');
-  const stdout = execFileSync(process.execPath, [path.join(dir, 'collect-followup-batch.mjs')], {
+  // `spawnSync` e non `execFileSync`: da quando un gate ASSENTE e' fatale
+  // (decisione del proprietario, 2026-09-07) l'uscita non-zero e' un ESITO da
+  // osservare, non un errore da propagare. `execFileSync` lancerebbe, e il test
+  // che verifica il guasto morirebbe prima di poterlo leggere.
+  const run = spawnSync(process.execPath, [path.join(dir, 'collect-followup-batch.mjs')], {
     encoding: 'utf-8',
     env: {
       ...process.env,
@@ -89,7 +93,8 @@ function runInSandbox(gates = {}) {
       FOLLOWUP_ELIGIBLE_AUTHORS: 'valerielinc-ops',
     },
   });
-  return { stdout, summary: fs.existsSync(summary) ? fs.readFileSync(summary, 'utf-8') : '' };
+  const stdout = String(run.stdout || '');
+  return { stdout, status: run.status, summary: fs.existsSync(summary) ? fs.readFileSync(summary, 'utf-8') : '' };
 }
 
 test('gate ASSENTE: annotation ::error:: e sezione nel run summary', () => {
@@ -140,4 +145,38 @@ test('gate girato e INCONCLUSIVE: resta silenzioso (proceed-safe legittimo)', ()
   assert.equal(summary.includes('Gate del follow-up NON eseguiti'), false, 'Nessuna sezione guasti attesa.\n' + summary);
   assert.match(stdout, /grandchild gate inconclusive/, 'Resta il log proceed-safe di sempre.\n' + stdout);
   assert.match(stdout, /batch_prs=4242/, 'Proceed-safe invariato.\n' + stdout);
+});
+
+// ── FATALE SOLO SU «assente» — decisione del proprietario, 2026-09-07 ────────
+//
+// L'asimmetria e' il punto, e senza test si perde al primo refactor. Un gate
+// che MANCA e' una configurazione rotta: non si ripara da sola, e finche' dura
+// ogni run conia senza soppressione — 90 nipoti su 285 (31,6%) e' quanto e'
+// costato il silenzio. Un gate che c'e' ma non si CARICA puo' essere un rosso
+// transitorio (deploy a meta', dipendenza che arriva un minuto dopo), e fermare
+// il ciclo del corpus — che alimenta la generazione degli articoli — costerebbe
+// piu' di quanto salva.
+
+test('gate ASSENTE: la run FALLISCE (watermark fermo, finestra ri-coperta)', () => {
+  const { status, stdout } = runInSandbox();
+  assert.equal(status, 1, 'un gate assente deve rendere la run fallita');
+  assert.match(stdout, /::error title=Gate del follow-up assente::/);
+});
+
+test('gate NON CARICABILE: urla ma NON fa fallire la run', () => {
+  const { status, stdout } = runInSandbox({
+    'is-followup-fix-pr.mjs': "import { inesistente } from 'node:path';\nconsole.log('is_followup_fix=true');\n",
+    'followup-has-candidates.mjs': "console.log('has_candidates=true');\n",
+  });
+  assert.equal(status, 0, 'un modulo che non risolve puo\' essere transitorio: non ferma il ciclo');
+  assert.doesNotMatch(stdout, /::error title=Gate del follow-up assente::/);
+});
+
+test('il batch viene comunque emesso: il verdetto non cancella cio\' che lo spiega', () => {
+  // `process.exitCode` e non `process.exit()`. Se qualcuno lo cambiasse in un
+  // `exit()` immediato, `batch_prs` non verrebbe mai stampato e la run fallita
+  // sarebbe muta proprio dove deve spiegarsi.
+  const { stdout } = runInSandbox();
+  assert.match(stdout, /batch_prs=/);
+  assert.match(stdout, /batch_count=/);
 });

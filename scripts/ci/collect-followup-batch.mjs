@@ -299,7 +299,7 @@ function runGate(scriptName, prNumber, outputKey) {
  * emesse `recordGateFault` al momento del guasto; qui si aggiunge il conteggio,
  * che è l'informazione che dice se il gate è saltato una volta o sempre.
  *
- * ## PORTA APERTA: «fatale» non è deciso qui
+ * ## «Fatale» È stato deciso: sì per `assente`, no per `non-caricabile`
  *
  * Se il proprietario decide che un gate assente deve FERMARE il ciclo invece di
  * lasciarlo procedere urlando, la modifica è una riga in fondo a questa
@@ -327,6 +327,33 @@ function reportGateFaults() {
       'esito incerto. Il batch e\' stato costruito SENZA la loro soppressione, ' +
       'quindi puo\' contenere PR che avrebbero dovuto essere scartate.\n',
     );
+  }
+
+  // FATALE SOLO SU «assente» — decisione del proprietario, 2026-09-07.
+  //
+  // Un gate che MANCA e' una configurazione rotta: non si ripara da sola, e
+  // finche' dura ogni run conia senza soppressione. Un gate che c'e' ma non si
+  // CARICA puo' essere un rosso transitorio (un deploy a meta', una dipendenza
+  // che arriva un minuto dopo), e fermare il ciclo per quello costerebbe piu'
+  // di quanto salva. Da qui l'asimmetria: `assente` ferma, `non-caricabile`
+  // urla e basta.
+  //
+  // Il costo del ramo fatale, dichiarato: l'uscita non-zero rende FALLITA la
+  // run, quindi il watermark (che avanza solo su successo) non si muove e la
+  // finestra viene ri-coperta dalla run successiva. Nessuna follow-up persa,
+  // ma nessun triage finche' il guasto non e' riparato. E' il verso giusto per
+  // un invariante: meglio una coda che aspetta di una coda che si riempie di
+  // nipoti — 90 su 285 (31,6%) e' quanto e' costato il silenzio.
+  //
+  // `process.exitCode` e non `process.exit()`: il codice va posato e il
+  // processo lasciato finire, cosi' `emit()` scrive comunque `batch_prs` nel
+  // `$GITHUB_OUTPUT` e il summary resta leggibile. Un `exit()` qui
+  // cancellerebbe tutto cio' che segue, e il verdetto sarebbe illeggibile
+  // proprio nella run che deve spiegarlo.
+  const assenti = [...gateFaults.values()].filter((f) => f.kind === 'assente');
+  if (assenti.length) {
+    console.log(`::error title=Gate del follow-up assente::${assenti.length} gate non esistono: la run fallisce, il watermark non avanza, la finestra sara' ri-coperta.`);
+    process.exitCode = 1;
   }
 }
 
