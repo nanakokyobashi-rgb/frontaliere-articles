@@ -49,6 +49,7 @@ import { loadSnapshot, buildData } from './lib/daily-brief-content.mjs';
 import { buildDailyBriefSvg, renderDailyBriefImage } from './lib/daily-brief-image.mjs';
 import { refreshDescriptiveTexts } from './lib/article-meta-refresh.mjs';
 import { sanitizePromptPlaceholders } from './lib/prompt-placeholder-guard.mjs';
+import { assertTranslationsPassFactualityGates } from './lib/translation-factuality-gate.mjs';
 
 // Scrittura ATOMICA del corpus: temp accanto al target + renameSync.
 // Questi file riscrivono un `content/*.ts` GIA' ESISTENTE (rerun idempotente
@@ -80,6 +81,13 @@ export function refreshBodyFiles(data, repoRoot = REPO_ROOT, log = console.log) 
   // Fail-closed come nel registrar: `sanitizePromptPlaceholders` ripara cio'
   // che e' riparabile e LANCIA sul primo campo che non lo e'.
   sanitizePromptPlaceholders(data);
+  // E il gate di fattualita' sui body TRADOTTI, per la stessa ragione e nello
+  // stesso punto (issue #980). Il gate lo vedevano due percorsi — lo Step 3a.2
+  // del flusso AI e `registerArticleFiles()`; questo rerun in giornata e' il
+  // TERZO, e riscriveva i body col `writeFileSync` qui sotto senza passarci
+  // mai. Rigetta e non riscrive: un detector collegato a una riscrittura
+  // trasforma ogni falso positivo in un danno attivo.
+  assertTranslationsPassFactualityGates(data);
   for (const locale of LOCALES) {
     const dir = path.join(repoRoot, corpusPath('services/locales/blog-body'), locale);
     mkdirSync(dir, { recursive: true });
