@@ -14,11 +14,20 @@
  * ban protetto e il cap appreso no, l'errore con codice di rete protetto e il
  * gateway che RISPONDE no.
  *
- * La misura strutturale e' quindi il punto 1: nel sorgente esiste UN solo
- * `_dirtyModels.add(`, ed e' dentro `_proposeLedgerWrite`. Un writer nuovo non
- * puo' dimenticare la regola, perche' non ha un altro modo di scrivere. Il
- * resto del file misura le due decisioni che la porta prende — l'opt-out del
- * chiamante e l'endpoint per-macchina — sui percorsi che erano rimasti fuori.
+ * La misura strutturale e' quindi il punto 1: nel sorgente OGNI riferimento a
+ * `_dirtyModels` sta in una funzione dichiarata, e la sola che lo scriva e'
+ * `_proposeLedgerWrite`. Un writer nuovo non puo' dimenticare la regola, perche'
+ * non ha un altro modo di scrivere. Il resto del file misura le due decisioni
+ * che la porta prende — l'opt-out del chiamante e l'endpoint per-macchina — sui
+ * percorsi che erano rimasti fuori.
+ *
+ * Il pin cercava la STRINGA `_dirtyModels.add(` (#1047): provava l'assenza di
+ * una forma testuale, non l'unicita' della porta. Un alias, un `bind` o il Set
+ * passato a una helper sono secondi ingressi REALI sul documento condiviso e
+ * non contengono quella stringa — il gate restava verde su tutti e tre. L'unita'
+ * di misura e' ora il riferimento all'identificatore, vincolato a un'allowlist
+ * di funzioni; il meccanismo sta in `lib/identifier-scope.mjs`, dove puo' essere
+ * alimentato con un sorgente sintetico che DEVE far rosso.
  */
 
 import { strict as assert } from 'node:assert';
@@ -901,36 +910,68 @@ describe('#895 — il memo del cap appreso e la porta del ledger sono due cose d
     );
   });
 
-  // Item 2. Gemello strutturale del pin su `_dirtyModels.add(` in cima al file,
+  // Item 2. Gemello strutturale del pin su `_dirtyModels` in cima al file,
   // sull'ALTRA coppia di stato che aveva due writer: `_exhaustReason` /
-  // `_exhaustDetail`. Il ramo `else` del breaker host-unreachable ne ricopiava
-  // a mano gli interni — deliberatamente, per non emettere una seconda riga
+  // `_exhaustDetail`. Il ramo `else` del breaker host-unreachable ne ricopiava a
+  // mano gli interni — deliberatamente, per non emettere una seconda riga
   // `🚫 Model … marked as exhausted` che `exhaustion-reason-report.mjs` conta
   // con una regex globale — ma un campo aggiunto domani a `markModelExhausted`
   // non sarebbe sceso di la', e nessun test lo avrebbe notato.
+  //
+  // Anche qui (#1047) l'unita' di misura e' il RIFERIMENTO e non la stringa
+  // `.set(`: `const r = _exhaustReason; r.set(id, 'quota')` e' lo stesso
+  // secondo writer, e la vecchia forma non lo vedeva. L'allowlist include i
+  // lettori perche' e' l'unico modo di pinnare anche l'alias — chi aggiunge una
+  // lettura nuova allarga la lista, cioe' decide di guardare la coppia in
+  // faccia invece di ereditarne una copia.
+  //
+  // Le due meta' della coppia hanno lettori diversi, e l'allowlist e' per
+  // identificatore proprio per questo: una lista unica lascerebbe passare una
+  // lettura di `_exhaustDetail` in una funzione che oggi tocca solo la causa.
+  const PORTE_EXHAUST = {
+    _exhaustReason: {
+      functions: [
+        '_setExhaustReason',         // la porta di scrittura
+        '_persistScoresToFirestore', // legge la causa per decidere se persistere
+        '_exhaustSkipCause',         // traduce la causa in parole
+        '_shouldSkipExhausted',      // legge la causa per decidere la rotazione PAT
+        'resetState',
+      ],
+      declaration: /^const _exhaustReason = new Map\(\);$/,
+    },
+    _exhaustDetail: {
+      functions: ['_setExhaustReason', '_exhaustSkipCause', 'resetState'],
+      declaration: /^const _exhaustDetail = new Map\(\);$/,
+    },
+  };
+
   it('nel sorgente la CAUSA dell\'esaurimento si scrive solo dentro _setExhaustReason', () => {
-    const linee = SRC_CODE.split('\n');
-    const righe = linee
-      .map((riga, i) => ({ n: i + 1, riga }))
-      .filter(({ riga }) => /(?<![\w.])_exhaust(Reason|Detail)\.set\(/.test(riga));
+    for (const [nome, porte] of Object.entries(PORTE_EXHAUST)) {
+      const { scoperti, fantasmi, riferimenti } = pinIdentifierToFunctions(SRC, nome, porte);
+      assert.deepEqual(
+        scoperti,
+        [],
+        `la causa di un esaurimento passa da piu' di una porta (${nome}): e' la forma che #881 ha chiuso per `
+        + '_dirtyModels (#895 item 2) e che #1047 ha smesso di misurare per stringa. Usa '
+        + '_setExhaustReason(modelId, reason, detail).',
+      );
+      assert.deepEqual(fantasmi, [], `l'allowlist nomina funzioni che non toccano piu' ${nome}: ${fantasmi.join(', ')}`);
+      assert.ok(riferimenti.length >= 3, `il pin non trova piu' nemmeno la porta di ${nome}: ${riferimenti.length}`);
+    }
 
-    const funzioneDi = (n) => {
-      const prima = linee.slice(0, n);
-      for (let i = prima.length - 1; i >= 0; i--) {
-        const m = prima[i].match(/^(?:export\s+)?(?:async\s+)?function (\w+)\s*\(/);
-        if (m) return m[1];
-      }
-      return '(top-level)';
-    };
-
-    const fuori = righe.filter(({ n }) => funzioneDi(n) !== '_setExhaustReason');
+    // La scrittura vera e propria resta pinnata anche per FORMA: la porta e'
+    // una, e le due `.set(` che la compongono devono stare li' dentro.
+    const scritture = pinIdentifierToFunctions(SRC, '_exhaustReason', { functions: [], declaration: /^$/ })
+      .riferimenti.concat(
+        pinIdentifierToFunctions(SRC, '_exhaustDetail', { functions: [], declaration: /^$/ }).riferimenti,
+      )
+      .filter(({ text }) => /(?<![\w.])_exhaust(Reason|Detail)\.set\(/.test(text));
     assert.deepEqual(
-      fuori.map(({ n, riga }) => `${n}: ${riga.trim()} [in ${funzioneDi(n)}]`),
+      scritture.filter(({ fn }) => fn !== '_setExhaustReason').map(({ line, text, fn }) => `${line}: ${text} [in ${fn}]`),
       [],
-      'la causa di un esaurimento si scrive da piu\' di una porta: e\' la forma che #881 ha chiuso per '
-      + '_dirtyModels (#895 item 2). Usa _setExhaustReason(modelId, reason, detail).',
+      'una `.set(` sulla coppia della causa fuori da _setExhaustReason',
     );
-    assert.equal(righe.length, 2, `dentro la porta devono restare le due scritture, trovate ${righe.length}`);
+    assert.equal(scritture.length, 2, `dentro la porta devono restare le due scritture, trovate ${scritture.length}`);
   });
 
   it('resetState() non lascia in piedi il DETTAGLIO di una causa appena buttata via', async () => {
