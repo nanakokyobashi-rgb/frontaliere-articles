@@ -274,3 +274,21 @@ export const REVIEWER_BOT_LOGIN_RE = /^(claude|frontaliere-automation)/i;
 
 /** Il filtro sopra come predicato jq, per i `--jq` dei workflow. */
 export const REVIEWER_BOT_LOGIN_JQ = `test("${REVIEWER_BOT_LOGIN_RE.source}";"i")`;
+
+/**
+ * Predicato sul reviewer, gemello di quello del sito (`scripts/ci/lib/constants.mjs`
+ * :126 la'). Vive qui e non nel chiamante perche' `REVIEWER_BOT_LOGIN_RE` e'
+ * dichiarata sorgente unica del filtro, e un chiamante che rifacesse il test a
+ * mano diventerebbe una seconda definizione da tenere allineata.
+ *
+ * NON e' una copia byte-identica del sito, e non deve esserlo: `constants.mjs`
+ * e' voce `adapted` nel manifest, e le due `REVIEWER_BOT_LOGIN_RE` divergono per
+ * scelta (qui e' un prefisso, sul sito e' ancorata con `[bot]` esplicito). Il
+ * predicato e' identico, l'insieme che accetta segue la regex del proprio repo.
+ *
+ * La congiunzione con `type === 'Bot'` e' la parte che conta: la regex da sola
+ * accetterebbe un utente umano che si chiami `claude-qualcosa`.
+ */
+export function isReviewerBot(user) {
+  return user?.type === 'Bot' && REVIEWER_BOT_LOGIN_RE.test(user.login || '');
+}

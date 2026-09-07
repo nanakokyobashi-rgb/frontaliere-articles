@@ -278,6 +278,26 @@
       }
     },
     {
+      "path": "scripts/ci/is-followup-fix-pr.mjs",
+      "mode": "identical",
+      "reason": "Gate grandchild-suppression invocato per nome da collect-followup-batch.mjs. Mancava nel corpus dalla nascita di quel chiamante: runGate ne inghiottiva l'ENOENT e ricadeva su proceed-safe, quindi il gate era inconclusive SEMPRE (46 PR su 46 in tre run, zero soppressioni in assoluto). Elencato qui perche' un file invocato per nome, e non importato, e' invisibile al drift check finche' non e' nel manifest.",
+      "baseline": {
+        "site": "7d95a7a2d70ca0f3",
+        "corpus": "7d95a7a2d70ca0f3",
+        "alignedAt": "2026-09-07"
+      }
+    },
+    {
+      "path": "scripts/ci/followup-has-candidates.mjs",
+      "mode": "identical",
+      "reason": "Gate no-op invocato per nome da collect-followup-batch.mjs, stessa classe di is-followup-fix-pr.mjs: assente nel corpus e inghiottito da runGate. Importa bulletState da scripts/lib/pr-body-sections-check.mjs e isReviewerBot da scripts/ci/lib/constants.mjs, entrambi gia' presenti nel corpus.",
+      "baseline": {
+        "site": "32ad2255c449841a",
+        "corpus": "32ad2255c449841a",
+        "alignedAt": "2026-09-07"
+      }
+    },
+    {
       "path": "scripts/ci/mint-app-token.mjs",
       "mode": "identical",
       "baseline": {
