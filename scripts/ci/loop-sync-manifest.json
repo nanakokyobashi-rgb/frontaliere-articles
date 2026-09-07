@@ -3405,6 +3405,16 @@
         "corpus": "4acdc6d8860661a5",
         "alignedAt": "2026-09-06"
       }
+    },
+    {
+      "path": "scripts/lib/cross-repo-raw-fetch.mjs",
+      "mode": "corpus-only",
+      "reason": "Il client raw verso un repo di un ALTRO owner: se la richiesta autenticata torna 401/403/404 la parola definitiva passa al tentativo anonimo, e un token provato rifiutato non viene piu' mandato per il resto della passata. Estratto perche' serve identico ai due chiamanti cross-repo di questo lato (`scripts/ci/verify-crawler-contract-provenance.mjs` verso il repo del sito, `scripts/refresh-hub-landing.mjs` verso le shard), che mandavano il token di QUESTO repo e trattavano la risposta come un'osservazione anche quando era il token a parlare: sorgente unica per AGENTS.md #6 (issue #982). `corpus-only` per costruzione, non per scelta: e' la direzione della lettura a non avere gemello — questo repo osserva il sito, il sito non osserva noi, e la' non esiste un chiamante che possa averne bisogno. Non `corpus-only-pending`: non c'e' lavoro da tracciare sul sito.",
+      "baseline": {
+        "site": null,
+        "corpus": "b5024b0b4357d10f",
+        "alignedAt": "2026-09-07"
+      }
     }
   ]
 }
