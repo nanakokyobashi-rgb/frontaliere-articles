@@ -59,7 +59,7 @@
       "",
       "`prefix` si confronta con startsWith sul path relativo alla radice del repo."
     ],
-    "censusAt": "2026-08-09",
+    "censusAt": "2026-09-07",
     "roots": [
       {
         "path": "scripts/ci",
@@ -98,6 +98,26 @@
       {
         "prefix": "public/images/",
         "reason": "246 immagini byte-identiche a quelle del sito. Sono asset, non codice: non hanno ne' una fix che «scende» ne' una che «risale», e registrarle costerebbe 246 fetch HTTP per ogni giro di loop-drift-check per sorvegliare byte che nessuno modifica in place."
+      },
+      {
+        "prefix": "data/jobs/",
+        "reason": "177 slice di annunci byte-identiche al sito. Le scrivono i crawler-group-NN.yml, che fanno il checkout sparso del SITO e committano `data/jobs/by-crawler/*.json` e `data/jobs/expired/**` da li': e' output di pipeline, non codice condiviso. Non c'e' una fix che «scende» — la logica del crawler vive nel repo del sito, dove i workflow la vanno a prendere ad ogni run, e sorvegliarne il drift significherebbe sorvegliare il risultato di un crawl, che cambia per definizione ad ogni giro."
+      },
+      {
+        "prefix": "data/translation-cache/",
+        "reason": "22 cache di traduzione automatica per crawler, scritte dallo step «Auto-translate pending jobs» degli stessi crawler-group. Sono memoized output di un modello: byte-identiche al sito perche' e' la stessa run a produrle su entrambi i lati, non perche' qualcuno le tenga allineate."
+      },
+      {
+        "prefix": "data/jobs-crawler-adapters/",
+        "reason": "Descrittori di adapter committati dai crawler-group insieme alle slice (`git-commit-data.sh --slice-only ... data/jobs-crawler-adapters/`). Stessa natura di `data/jobs/`: li scrive la macchina eseguendo il codice del sito."
+      },
+      {
+        "prefix": "data/jobs-crawler-config.json",
+        "reason": "Registro dei crawler del SITO. Nessuno script di questo repo lo legge (i crawler-group leggono quello del checkout sparso del sito, non questa copia): registrarlo produrrebbe un site-ahead ad ogni crawler aggiunto la', su un file che qui non ha consumatori."
+      },
+      {
+        "prefix": "data/events-image-manifest.json",
+        "reason": "Manifest scritto dalla pipeline di mirroring immagini eventi portata con #775. E' output di quella pipeline (WebP via sharp), non la pipeline: il codice che lo genera e' sotto generator/scripts/, che e' gia' il posto dove una fix scende."
       }
     ]
   },
