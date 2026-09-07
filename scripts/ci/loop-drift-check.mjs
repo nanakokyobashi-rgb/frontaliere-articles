@@ -940,6 +940,171 @@ function unmirrorableDepsVerdict({ mode, deps = [] }) {
   return { blocked: blocked.length > 0, deps: blocked };
 }
 
+/**
+ * Il registro delle dichiarazioni appaiate al TESTO di un file sorvegliato.
+ *
+ * `DECLARED_ABSENT` di `loop-references-exist.test.mjs` e' indicizzato per
+ * `<file citante> :: <referente assente>`: ogni voce dice «QUESTO file nomina
+ * un path che non esiste qui, ed ecco perche' va bene». La chiave e' quindi
+ * appaiata alla PROSA del citante, non alla sua API.
+ */
+const DECLARED_ABSENT_REGISTRY_REL = 'generator/tests/loop-references-exist.test.mjs';
+
+/**
+ * Il registro non fa valere TUTTE le sue voci. `ACTIVE_DECLARED_ABSENT`
+ * (`loop-references-exist.test.mjs`) le filtra: quando il contract crawler
+ * cross-repo esiste, le 24 dichiarazioni sui workflow `crawler-group-NN.yml` e
+ * `translate-pending.yml` diventano DORMIENTI — nessun test le fa piu' valere,
+ * quindi una copia che ne rompe una non manda rosso niente e non c'e' niente
+ * da avvisare. Riderivarle qui produrrebbe un avviso che sbaglia su meta' dei
+ * suoi hit, e un avviso che sbaglia meta' delle volte smette di essere letto:
+ * cioe' il silenzio che questo modulo esiste per rompere.
+ *
+ * La regex e' duplicata dal registro e NON puo' essere importata: il registro
+ * e' un file di test, importarlo da uno script CI ne eseguirebbe la suite. Il
+ * legame e' quindi coperto da un test (AGENTS.md #6) —
+ * `loop-manifest-implicit-pinners.test.mjs` confronta questa sorgente con il
+ * testo del registro e diventa rosso se una delle due si muove.
+ */
+const CRAWLER_CONTRACT_REL = 'generator/data/crawler-cross-repo-contract.json';
+const DORMANT_WITH_CRAWLER_CONTRACT = /^\.github\/workflows\/(?:crawler-group-\d{2}|translate-pending)\.yml :: /;
+
+/**
+ * I file che hanno una dichiarazione appaiata nel registro, con i loro
+ * referenti. PURA: prende il testo del registro, non legge il disco.
+ *
+ * Il parse e' testuale — le chiavi sono literal in un oggetto letterale — e
+ * per questo e' pinnato da `loop-manifest-implicit-pinners.test.mjs` sul
+ * registro REALE: se la forma cambia, il test diventa rosso invece di lasciare
+ * il rilevatore silenziosamente a zero, che sarebbe un «nessuna dipendenza
+ * implicita» indistinguibile da «non ho saputo leggere».
+ *
+ * @param {string} source  il testo di `loop-references-exist.test.mjs`
+ * @param {object} [o]
+ * @param {boolean} [o.crawlerContract]  il contract crawler esiste? Se si', le
+ *   chiavi che `ACTIVE_DECLARED_ABSENT` spegne restano fuori dall'indice.
+ * @returns {Map<string,string[]>} file citante -> referenti dichiarati assenti
+ */
+function declaredAbsentCiters(source, { crawlerContract = false } = {}) {
+  const out = new Map();
+  for (const m of String(source || '').matchAll(/^\s*'([^']+?) :: ([^']+?)':/gm)) {
+    const citer = m[1];
+    // Una voce dormiente non e' fatta valere da nessun test: avvisarne sarebbe
+    // un falso positivo, non una cautela.
+    if (crawlerContract && DORMANT_WITH_CRAWLER_CONTRACT.test(`${citer} :: ${m[2]}`)) continue;
+    const at = out.get(citer);
+    if (at) at.push(m[2]);
+    else out.set(citer, [m[2]]);
+  }
+  return out;
+}
+
+/**
+ * La dipendenza IMPLICITA che il manifest non puo' vedere, perche' sorveglia i
+ * file uno per uno (issue #975, item 4 di #900).
+ *
+ * `unmirrorableDepsVerdict` copre la dipendenza ESPLICITA: un `import` e' una
+ * riga di codice, e la si legge. Ma un file trasportato ha anche accoppiamenti
+ * che non hanno la forma di un import — la classe «un legame che non ha la
+ * forma che il guard sa seguire», la stessa di `SiteShellContract`. Qui la
+ * forma e' una DICHIARAZIONE appaiata al testo: una voce di `DECLARED_ABSENT`
+ * esiste solo finche' il file continua a citare quel referente, e
+ * `loop-references-exist.test.mjs` ha DUE test che la fanno valere in tutti e
+ * due i versi — «nessuna dichiarazione morta» se la citazione sparisce, e il
+ * gate delle citazioni non dichiarate se ne compare una nuova.
+ *
+ * Portare giu' dal sito un gemello `identical` ne riscrive il testo. Se la
+ * versione del sito ha perso quella citazione, o ne ha aggiunta un'altra verso
+ * un path che qui non esiste, la copia isolata manda ROSSO un test che vive in
+ * un file `corpus-only` — cioe' fuori dall'insieme trasportabile per sempre.
+ * E' la PR di trasporto rossa che resta aperta e spegne il canale, la stessa
+ * di `permanentBlock`, con un accoppiamento che quel guard non guarda.
+ *
+ * ## Perche' un avviso sul `site-ahead` e non un blocco
+ *
+ * Misura del 2026-09-07 su `main`, contate le sole dichiarazioni ATTIVE (cioe'
+ * al netto di quelle che `ACTIVE_DECLARED_ABSENT` spegne col contract
+ * crawler): **20 delle 157 voci `identical`** hanno almeno una dichiarazione
+ * appaiata (71 chiavi attive su 143, 37 file citanti su 61). Il registro e'
+ * `corpus-only`, quindi non entrera' MAI nell'insieme trasportabile: trattare
+ * la coppia come bloccante spegnerebbe il 13% del canale in modo permanente — l'eccesso opposto, e peggiore, del silenzio di oggi. E il
+ * legame e' CONDIZIONALE: si rompe solo se la copia cambia proprio quelle
+ * righe, il che non si sa prima di averla fatta.
+ *
+ * Quindi non un nuovo stato ma un avviso agganciato al `site-ahead`, cioe'
+ * esattamente nella finestra in cui la copia sta per essere fatta: chi la fa
+ * sa che deve portarsi dietro la dichiarazione. Il verdetto NON cambia lo
+ * stato, e in particolare non tocca `transportVerdict`, che continua a vedere
+ * `site-ahead` e a lavorare come prima.
+ *
+ * PURA come `ghostVerdict`, `strandedVerdict` e `unmirrorableDepsVerdict`.
+ *
+ * @param {object} a
+ * @param {string} a.mode     il `mode` della voce di manifest
+ * @param {string} a.state    lo stato gia' calcolato dal confronto degli hash
+ * @param {string[]} [a.pinners]  i referenti dichiarati per questo file. Vuoto
+ *   = nessun verdetto (fail-open, come tutto il resto dello script).
+ * @returns {{pinned: boolean, pinners: string[]}}
+ */
+function implicitPinnersVerdict({ mode, state, pinners = [] }) {
+  // Solo un `identical` in `site-ahead`: e' l'unica combinazione in cui una
+  // copia sta davvero per riscrivere il testo. Su `adapted` la copia non
+  // avviene (va riapplicata a mano) e l'avviso sarebbe rumore.
+  if (mode !== 'identical' || state !== 'site-ahead') return { pinned: false, pinners: [] };
+  const found = [...new Set((pinners || []).filter(Boolean))].sort();
+  return { pinned: found.length > 0, pinners: found };
+}
+
+/** Il registro letto una volta sola: citante -> referenti dichiarati assenti. */
+let PINNER_INDEX = null;
+function pinnerIndex() {
+  if (!PINNER_INDEX) {
+    try {
+      PINNER_INDEX = declaredAbsentCiters(fs.readFileSync(path.join(ROOT, DECLARED_ABSENT_REGISTRY_REL), 'utf8'), {
+        crawlerContract: fs.existsSync(path.join(ROOT, CRAWLER_CONTRACT_REL)),
+      });
+    } catch {
+      // Fail-open: registro assente o illeggibile = nessun avviso, mai un rosso.
+      PINNER_INDEX = new Map();
+    }
+  }
+  return PINNER_INDEX;
+}
+
+/** Le dichiarazioni appaiate di UNA voce, lette dal registro. */
+function implicitPinnersOf(entry) {
+  if (!entry || entry.mode !== 'identical' || !entry.path) return [];
+  return pinnerIndex().get(entry.path) || [];
+}
+
+/**
+ * La coda che l'avviso aggiunge al `detail` del `site-ahead`. Stringa vuota
+ * quando non c'e' niente da dire, cosi' il testo di prima resta identico.
+ */
+function implicitPinnersDetail({ pinned, pinners }) {
+  if (!pinned) return '';
+  const names = pinners.map((r) => `\`${r}\``).join(', ');
+  return (
+    ` ATTENZIONE — dipendenza IMPLICITA: \`${DECLARED_ABSENT_REGISTRY_REL}\` porta ${pinners.length} ` +
+    `dichiarazione/i \`DECLARED_ABSENT\` appaiate al TESTO di questo file (${names}). Quel registro e' ` +
+    "`corpus-only`, quindi non scende mai insieme alla copia: se la versione del sito ha perso una di " +
+    'quelle citazioni la dichiarazione diventa morta, se ne ha aggiunta una nuova va dichiarata. ' +
+    'Aggiorna il registro NELLA STESSA PR della copia, o la PR di trasporto resta rossa.'
+  );
+}
+
+/**
+ * La coda dell'avviso per UNA voce che il chiamante sa essere in `site-ahead`.
+ * Esiste perche' il `detail` del `site-ahead` viene ricostruito da zero in DUE
+ * altri punti — il ramo `scalarFingerprint` e l'escalation `stranded-twin` —
+ * e li' la coda che `classify()` aggiunge verrebbe buttata via.
+ */
+function implicitPinnersTail(entry) {
+  return implicitPinnersDetail(
+    implicitPinnersVerdict({ mode: entry.mode, state: 'site-ahead', pinners: implicitPinnersOf(entry) }),
+  );
+}
+
 /** Indice `path -> mode` del manifest, letto una volta sola. */
 let MODE_INDEX = null;
 function modeIndex() {
@@ -975,7 +1140,7 @@ function manifestDepsOf(entry) {
  * `actionable` distingue ciò che richiede una decisione da ciò che è solo
  * cronaca: un report che segnala tutto non viene letto.
  */
-function classify(entry, now, base, deps = manifestDepsOf(entry)) {
+function classify(entry, now, base, deps = manifestDepsOf(entry), pinners = implicitPinnersOf(entry)) {
   const { path: rel, mode, reason } = entry;
 
   if (mode === 'corpus-only') {
@@ -1090,9 +1255,10 @@ function classify(entry, now, base, deps = manifestDepsOf(entry)) {
       actionable: true,
       headline: 'il sito e\' andato avanti, qui no',
       detail:
-        mode === 'adapted'
+        (mode === 'adapted'
           ? `Il sito ha modificato un file che qui e\' ADATTATO (${reason || 'ragione non dichiarata'}). Non e\' copiabile: la modifica va letta e riapplicata a mano sopra l'adattamento.`
-          : 'Il file e\' dichiarato identico al sito: la modifica del sito e\' copiabile qui cosi\' com\'e\'.',
+          : 'Il file e\' dichiarato identico al sito: la modifica del sito e\' copiabile qui cosi\' com\'e\'.') +
+        implicitPinnersDetail(implicitPinnersVerdict({ mode, state: 'site-ahead', pinners })),
     };
   }
 
@@ -1287,7 +1453,15 @@ async function main() {
       } else if (fingerprint.matches) {
         verdict = { state: 'stable', actionable: false, headline: 'allineato sul contratto scalare', detail: entry.reason || '' };
       } else {
-        verdict = { state: 'site-ahead', actionable: true, headline: 'il contratto scalare del sito e andato avanti, qui no', detail: fingerprint.detail };
+        // Il `detail` e' costruito da zero, quindi la coda dell'avviso va
+        // riappesa a mano: senza, un `identical` con dipendenze implicite
+        // perde l'avviso proprio dove la copia sta per essere fatta.
+        verdict = {
+          state: 'site-ahead',
+          actionable: true,
+          headline: 'il contratto scalare del sito e andato avanti, qui no',
+          detail: fingerprint.detail + implicitPinnersTail(entry),
+        };
       }
     }
 
@@ -1344,7 +1518,11 @@ async function main() {
             `Il sito ha lasciato la baseline il ${provenance.siteBaselineLastSeenAt} e qui non e' mai sceso niente ` +
             `(soglia: ${STRANDED_AFTER_DAYS} giorni, \`STRANDED_AFTER_DAYS\`). Nessun workflow porta questo path: ` +
             `\`mirror-articles-engine.yml\` si ferma a \`engine/\`, che il manifest tiene \`outOfScope\` proprio perche' ` +
-            "quello un trasporto ce l'ha. Copia la versione del sito (`sitePath`) e aggiorna a mano la baseline di QUESTA voce.",
+            "quello un trasporto ce l'ha. Copia la versione del sito (`sitePath`) e aggiorna a mano la baseline di QUESTA voce." +
+            // `stranded-twin` e' un `site-ahead` con l'eta' misurata, e il
+            // report lo mette in cima con 🚨: e' la riga che qualcuno copiera'
+            // a mano, quindi e' quella che ha PIU' bisogno dell'avviso.
+            implicitPinnersTail(entry),
           hashes: { ...now, baseline: base },
           ageDays: stranded.ageDays,
         });
@@ -1535,4 +1713,4 @@ if (process.argv[1] && process.argv[1].endsWith('loop-drift-check.mjs')) {
 // baseline con LA STESSA regola con cui la pesa il cron, altrimenti una voce
 // accettata in PR verrebbe dichiarata fantasma il mattino dopo — o peggio, il
 // contrario. Una seconda copia della regola lo renderebbe inevitabile.
-export { classify, parseOnly, onlyArgError, forceArgError, resolveInitTargets, initWriteVerdict, initAttestVerdict, initPassOutcome, ghostVerdict, strandedVerdict, corpusOnlyTwinVerdict, unmirrorableDepsVerdict, resolvedLocalImports, gitBlobSha, scalarFingerprintVerdict, siteFile, sha256, repoHistoryMatch };
+export { classify, parseOnly, onlyArgError, forceArgError, resolveInitTargets, initWriteVerdict, initAttestVerdict, initPassOutcome, ghostVerdict, strandedVerdict, corpusOnlyTwinVerdict, unmirrorableDepsVerdict, implicitPinnersVerdict, declaredAbsentCiters, DECLARED_ABSENT_REGISTRY_REL, CRAWLER_CONTRACT_REL, DORMANT_WITH_CRAWLER_CONTRACT, resolvedLocalImports, gitBlobSha, scalarFingerprintVerdict, siteFile, sha256, repoHistoryMatch };
