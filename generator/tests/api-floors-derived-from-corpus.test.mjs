@@ -34,8 +34,14 @@ import os from 'node:os';
 import { fileURLToPath } from 'node:url';
 import { dirname, join, resolve } from 'node:path';
 
+import { spawnSync } from 'node:child_process';
+
 import {
   FLOOR_RETENTION,
+  FLOOR_WARN_RETENTION,
+  retentionRatio,
+  retentionLine,
+  retentionWarning,
   floorFrom,
   countSourceArticles,
   countSeoEntries,
@@ -46,6 +52,9 @@ import {
   SECTION_COUNTERS,
   feedSection,
   floorViolations,
+  retentionReport,
+  retentionAdvisories,
+  retentionLines,
   measureDist,
   expectFromCorpus,
 } from '../../scripts/ci/verify-api-floors.mjs';
@@ -375,4 +384,155 @@ test("build-blog-index non porta piu' MIN_ENTRIES, ma il pavimento derivato", ()
   );
   assert.match(BLOG_INDEX, /registry\.length < registryFloor/);
   assert.match(BLOG_INDEX, /entries\.length < localeFloor/);
+});
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Il livello ADVISORY sopra il gate (#998).
+//
+// IL DIFETTO. `FLOOR_RETENTION` e' tarato sullo scarto osservato una volta
+// (0,9992 e 1,0000), ma i due lati del rapporto contano cose diverse: i file di
+// corpo da una parte, cio' che l'artefatto dichiara dall'altra. Ogni corpo
+// lasciato senza la sua voce sposta il rapporto verso il basso in modo
+// MONOTONO, e nulla lo misurava: la prima notizia del drift sarebbe stata la
+// pubblicazione BLOCCATA a -10%, su un corpus sano.
+//
+// Il livello aggiunto sta SOPRA il gate e non lo muove: 0,90 resta 0,90 e resta
+// l'unico a uscire 1.
+// ─────────────────────────────────────────────────────────────────────────────
+
+test('il preallarme sta stretto fra il gate e 1, o e\' irraggiungibile', () => {
+  assert.ok(
+    FLOOR_WARN_RETENTION > FLOOR_RETENTION,
+    `preallarme ${FLOOR_WARN_RETENTION} <= gate ${FLOOR_RETENTION}: invertirli rende il warning irraggiungibile, ` +
+      'cioe' + ' ricrea la cecita\' che questo livello chiude',
+  );
+  assert.ok(FLOOR_WARN_RETENTION < 1, 'un preallarme a 1 avviserebbe su ogni rapporto non perfetto');
+  // Il gate non si e' mosso: questa issue aggiunge un livello, non ne sposta uno.
+  assert.equal(FLOOR_RETENTION, 0.9, 'FLOOR_RETENTION e\' bloccante e resta 0,9 (AGENTS.md #1)');
+});
+
+test('rapporto fra preallarme e gate: warning, nessuna violazione', () => {
+  const { measured, expected } = healthy();
+  // 95%: sotto il preallarme, ben sopra il gate.
+  const eroded = { ...measured, articleCounts: { ...measured.articleCounts, articles: Math.round(3785 * 0.95) } };
+
+  assert.deepEqual(floorViolations(eroded, expected), [], 'il gate non deve scattare: 95% > 90%');
+
+  const advisories = retentionAdvisories(retentionReport(eroded, expected));
+  assert.equal(advisories.length, 1, `un solo preallarme, ricevuti: ${JSON.stringify(advisories)}`);
+  assert.match(advisories[0], /manifest\.counts\.articles/);
+  assert.match(advisories[0], /preallarme/);
+});
+
+test('rapporto sotto il gate: violazione, e nessun preallarme che la raddoppi', () => {
+  const { measured, expected } = healthy();
+  const truncated = { ...measured, articleCounts: { ...measured.articleCounts, articles: 500 } };
+
+  assert.equal(floorViolations(truncated, expected).length, 1, 'sotto 90% il gate deve scattare');
+  assert.deepEqual(
+    retentionAdvisories(retentionReport(truncated, expected)),
+    [],
+    'sotto il gate non e\' un preallarme ma una violazione: annunciarla due volte confonde il verdetto',
+  );
+});
+
+test('una superficie sana non produce nessun preallarme', () => {
+  const { measured, expected } = healthy();
+  assert.deepEqual(retentionAdvisories(retentionReport(measured, expected)), []);
+});
+
+test('il report copre ogni rapporto che un pavimento sorveglia, coi riferimenti del gate', () => {
+  const { measured, expected } = healthy();
+  const rows = retentionReport(measured, expected);
+
+  const byLabel = Object.fromEntries(rows.map((r) => [r.label, r]));
+  assert.equal(byLabel['manifest.counts.articles'].source, 3785, 'il riferimento dei corpi, non dei chunk SEO');
+  assert.equal(byLabel['manifest.counts.swissArticles'].source, 1850);
+  // Un feed e' tagliato a RSS_MAX_ITEMS: il suo 100% e' 50 item, non 3750,
+  // altrimenti ogni feed sano sembrerebbe eroso all'1%.
+  assert.equal(byLabel['rss.xml'].source, Math.min(expected.rssMaxItems, expected.feedSources.frontaliere));
+  assert.equal(byLabel['rss-svizzera.xml'].source, Math.min(expected.rssMaxItems, expected.feedSources.svizzera));
+  assert.equal(byLabel['images-manifest.json'].source, 1990);
+  assert.equal(rows.length, 2 + measured.feeds.length + 1);
+
+  // Un preallarme su un feed resta uno per feed: e' il report intero a
+  // produrli, non la riga rappresentativa che si stampa.
+  const shortFeeds = {
+    ...measured,
+    feeds: measured.feeds.map((f) => ({ ...f, items: 47 })),
+  };
+  assert.equal(retentionAdvisories(retentionReport(shortFeeds, expected)).length, measured.feeds.length);
+});
+
+test('il report tace dove il riferimento manca: quello e\' una violazione, non un rapporto', () => {
+  const { measured, expected } = healthy();
+  const noCorpus = { ...expected, sourceArticles: { frontaliere: 0, svizzera: 0 }, feedSources: { frontaliere: 0, svizzera: 0 }, sourceImages: 0 };
+
+  assert.deepEqual(retentionReport(measured, noCorpus), []);
+  assert.deepEqual(retentionAdvisories(retentionReport(measured, noCorpus)), []);
+  assert.ok(floorViolations(measured, noCorpus).length > 0, 'il riferimento assente resta bloccante');
+  assert.equal(retentionRatio(10, 0), null, 'sorgente a zero non e\' un rapporto zero: e\' assenza di riferimento');
+});
+
+test('le righe stampate: i due rapporti del manifest, le immagini, e il feed piu\' magro', () => {
+  const { measured, expected } = healthy();
+  const uneven = {
+    ...measured,
+    feeds: [
+      { name: 'rss.xml', items: 50 },
+      { name: 'rss-it.xml', items: 46 },
+      { name: 'rss-svizzera.xml', items: 50 },
+      { name: 'rss-svizzera-de.xml', items: 50 },
+    ],
+  };
+  const lines = retentionLines(retentionReport(uneven, expected));
+
+  assert.equal(lines.length, 4, `2 manifest + 1 feed rappresentativo + 1 immagini, ricevute: ${lines.join(' | ')}`);
+  assert.ok(lines.some((l) => l.startsWith('manifest.counts.articles:')));
+  assert.ok(lines.some((l) => l.startsWith('manifest.counts.swissArticles:')));
+  assert.ok(lines.some((l) => l.includes('rss-it.xml') && l.includes('piu\' magro')), 'il rappresentante e\' il minimo');
+  assert.ok(lines.some((l) => l.startsWith('images-manifest.json:')));
+  // Il margine e' in punti percentuali dal gate, che e' la grandezza che dice
+  // quanto manca al blocco.
+  assert.match(retentionLine('x', 3789, 3792), /3789\/3792 = 99\.92% \(margine 9\.9 pp dal gate 90%\)/);
+  assert.equal(retentionWarning('x', 3789, 3792), null, 'a 99,92% non c\'e\' niente da avvisare');
+});
+
+test('end-to-end: un rapporto eroso stampa ::warning:: ed esce 0', () => {
+  const dir = fs.mkdtempSync(join(os.tmpdir(), 'api-floors-warn-'));
+  const source = countSourceArticles(ROOT, 'frontaliere');
+  // Niente feed e niente images-manifest.json nel dist: qui si misura il
+  // livello advisory sul manifest, e i due rami assenti sono gia' coperti sopra.
+  fs.writeFileSync(
+    join(dir, 'manifest.json'),
+    JSON.stringify({
+      counts: {
+        articles: Math.round(source * 0.95),
+        swissArticles: countSourceArticles(ROOT, 'svizzera'),
+      },
+    }),
+  );
+
+  const run = spawnSync(process.execPath, [join(ROOT, 'scripts/ci/verify-api-floors.mjs'), '--dist', dir], {
+    encoding: 'utf-8',
+  });
+  fs.rmSync(dir, { recursive: true, force: true });
+
+  assert.equal(run.status, 0, `il preallarme non blocca la pubblicazione:\n${run.stdout}\n${run.stderr}`);
+  const out = `${run.stdout}${run.stderr}`;
+  assert.match(out, /::warning::\[api-floors\] manifest\.counts\.articles: rapporto 9[45]\.\d\d% sotto il preallarme/);
+  assert.match(out, /manifest\.counts\.swissArticles: \d+\/\d+ = 100\.00% \(margine 10\.0 pp/);
+});
+
+test('build-blog-index sorveglia i suoi pavimenti con lo stesso livello advisory', () => {
+  // Gemelli della stessa classe: `registryFloor` e `localeFloor` erano gate
+  // muti quanto quello di publish, e il loro primo sintomo sarebbe un indice
+  // che si rifiuta di pubblicarsi.
+  assert.ok(BLOG_INDEX.includes('retentionWarning'), 'il preallarme deve valere anche qui');
+  assert.ok(BLOG_INDEX.includes('retentionLine'), 'il rapporto registro/corpus va stampato a ogni run');
+  assert.doesNotMatch(
+    BLOG_INDEX,
+    /const\s+(FLOOR_WARN|WARN_RETENTION)/,
+    'la soglia di preallarme ha UNA sorgente: corpus-floors.mjs (AGENTS.md #6)',
+  );
 });

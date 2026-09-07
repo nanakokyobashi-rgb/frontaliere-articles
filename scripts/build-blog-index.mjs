@@ -49,7 +49,13 @@ import { unescapeTsValue } from '../generator/scripts/lib/meta-field-regex.mjs';
 import { parsePositiveNum } from './lib/parse-positive-num.mjs';
 // Il pavimento anti-troncamento, derivato dal corpus invece che scritto a mano:
 // stessa sorgente unica che usa il gate di pubblicazione (scripts/ci/verify-api-floors.mjs).
-import { floorFrom, sectionFloor } from './lib/corpus-floors.mjs';
+import {
+  floorFrom,
+  sectionFloor,
+  countSourceArticles,
+  retentionLine,
+  retentionWarning,
+} from './lib/corpus-floors.mjs';
 // Gli shard qui sotto sono la superficie da cui il sito rende le LISTE, e
 // vengono scritti dopo che `build-api.mjs` ha gia' chiuso `manifest.json`:
 // senza questa dichiarazione resterebbero l'unica parte di `dist/api/` che
@@ -231,6 +237,15 @@ for (const section of SECTIONS) {
     failed = true;
     continue;
   }
+  // Il pavimento regge, ma REGGERE non e' una misura: registro e corpi contano
+  // cose diverse, e ogni corpo lasciato senza voce (orfani, ritiri a meta',
+  // import parziali) erode il rapporto in modo monotono. Stesso livello
+  // advisory del gate di pubblicazione, stessa sorgente unica — qui il primo
+  // sintomo sarebbe un indice che si rifiuta di pubblicarsi.
+  const sourceBodies = countSourceArticles(ROOT, section.name);
+  console.log(`[blog-index] ${retentionLine(`${section.name} registry/corpus`, registry.length, sourceBodies)}`);
+  const registryWarning = retentionWarning(`${section.name} registry/corpus`, registry.length, sourceBodies);
+  if (registryWarning) console.warn(`::warning::[blog-index] ${registryWarning}`);
   // Second gate, on the values rather than the count: a surviving
   // `/images/blog/` path is a hero that 404s on the apex, and a card with a
   // broken image is the failure this index existed to prevent. Cheap enough to
@@ -274,6 +289,8 @@ for (const section of SECTIONS) {
       failed = true;
       continue;
     }
+    const localeWarning = retentionWarning(`${section.name}/${locale}`, entries.length, registry.length);
+    if (localeWarning) console.warn(`::warning::[blog-index] ${localeWarning}`);
     // Newest first: this index feeds LISTS, and a list is read from the top.
     entries.sort((a, b) => String(b.date).localeCompare(String(a.date)));
 
