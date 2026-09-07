@@ -1,5 +1,4 @@
 {
-  "https://www.rsi.ch/info/scienza-e-tecnologia/ia-che-si-comporta-da-hacker-come-%c3%a8-possibile--3944562.html": "ia-che-si-comporta-da-hacker",
   "https://www.laregione.ch/economia/economia/1941949/storico-regole-dieci-diventa-moore": "come-si-diventa-ricchi-lo-storico-americano-spiega-le-dieci-regole",
   "https://www.laregione.ch/economia/economia/1941304/ia-obblighi-modelli-trasparenza-commissione-agosto-vigilanza-ue-act": "ue-vigilanza-ai-act-2023",
   "https://www.swissinfo.ch/ita/terminata-l%27eclissi-solare-in-svizzera/91888180": "eclissi-solare-2026-ticino",
@@ -1957,6 +1956,11 @@
   "https://www.swissinfo.ch/ita/the-black-keys-annullano-il-concerto-a-berna-per-malattia/92015069": {
     "articleId": "black-keys-concerto-annullato-berna",
     "ts": "2026-09-07T08:58:43.894Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/attualita/1948445/ta-auto-mondo-impressione-colore": {
+    "articleId": "mondo-auto-grigio-impressione-colore",
+    "ts": "2026-09-07T09:05:48.308Z",
     "keyForm": 2
   }
 }
