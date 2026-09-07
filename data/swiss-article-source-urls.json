@@ -1,5 +1,4 @@
 {
-  "https://www.rsi.ch/info/ticino-grigioni-e-insubria/da-s-chanf-a-livigno-in-treno-coira-dice-s%c3%ac--3949356.html": "trenino-rossoschanf-livigno",
   "https://www.rsi.ch/info/salute/medicina-genetica-l%e2%80%99estate-delle-buone-notizie--3940095.html": "medicina-genetica-in-svizzera",
   "https://www.tio.ch/svizzera/attualita/1943435/servizio-caso-votazione-iniziativa-tre-ricorsi": "inizia-servizio-civico-ricorsi-irricevibili",
   "https://www.rsi.ch/info/svizzera/siccit%c3%a0-r%c3%b6sti-per-ora-nessuna-misura-urgente--3949530.html": "siccita-rosti-nessuna-misura-urgente-svizzera",
@@ -1933,6 +1932,11 @@
   "https://www.rsi.ch/info/scienza-e-tecnologia/cuore-e-intelligenza-artificiale-nuovi-strumenti-predittivi--4051665.html": {
     "articleId": "intelligenza-artificiale-cardiologia-2026",
     "ts": "2026-09-07T07:46:22.178Z",
+    "keyForm": 2
+  },
+  "https://www.tvsvizzera.it/tvs/lavoro-ed-economia/la-disparit%c3%a0-salariale-tra-i-tirocinanti-sta-distorcendo-il-mercato-del-lavoro-svizzero/91998918": {
+    "articleId": "disuguaglianze-salariali-stage-svizzera",
+    "ts": "2026-09-07T08:04:30.221Z",
     "keyForm": 2
   }
 }
