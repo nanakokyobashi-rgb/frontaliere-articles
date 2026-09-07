@@ -46,7 +46,7 @@ const WORKFLOW = '.github/workflows/needs-human-sweep.yml';
 const ENTRY = 'scripts/ci/needs-human-prepass.mjs';
 
 /** Ogni specificatore relativo `from '...'`, import ed export riesportante. */
-const REL_IMPORT_RE = /(?:^|\n)\s*(?:import|export)[^'";]*from\s*['"](\.[^'"]+)['"]/g;
+const REL_IMPORT_RE = /(?:^|\n)\s*(?:import|export)(?:\s|(?=[{*]))[^'";]*?[\s}*]from\s*['"](\.[^'"]+)['"]/g;
 
 /**
  * La chiusura transitiva degli import RELATIVI a partire da `entry`, in path

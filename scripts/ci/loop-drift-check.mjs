@@ -885,7 +885,7 @@ const ABSENT_ON_SITE_MODES = new Set(['corpus-only', 'corpus-only-pending']);
  * @returns {string[]} path repo-relative dei moduli importati e riconosciuti
  */
 function resolvedLocalImports(rel, source, known) {
-  const re = /^[ \t]*(?:import|export)\s+(?:[^'";]*?\sfrom\s+)?(['"])([^'"]+)\1/gm;
+  const re = /^[ \t]*(?:import|export)(?:\s+|(?=[{*'"]))(?:[^'";]*?[\s}*]from\s*)?(['"])([^'"]+)\1/gm;
   const dir = path.posix.dirname(rel);
   const out = [];
   let m;

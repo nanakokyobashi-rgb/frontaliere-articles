@@ -69,7 +69,7 @@ function sourceFiles(dir, acc = []) {
 // Il costo è un falso NEGATIVO su un import dinamico preceduto da una stringa
 // sulla stessa riga: si perde una dipendenza, non si inventa un errore.
 const SPECIFIER =
-  /^(?:[ \t]*(?:import\s+(?:[^'";]*?\sfrom\s+)?|export\s+[^'";]*?\sfrom\s+)|(?![ \t]*(?:\/\/|\*|\/\*))(?:[^'"`\/\n]|\/(?!\/))*?\bimport\s*\(\s*)(['"])([^'"]+)\1/gm;
+  /^(?:[ \t]*(?:import(?:\s+|(?=[{*'"]))(?:[^'";]*?[\s}*]from\s*)?|export(?:\s+|(?=[{*]))[^'";]*?[\s}*]from\s*)|(?![ \t]*(?:\/\/|\*|\/\*))(?:[^'"`\/\n]|\/(?!\/))*?\bimport\s*\(\s*)(['"])([^'"]+)\1/gm;
 
 test('every relative import under generator/ resolves to a file that exists', () => {
   const missing = [];
