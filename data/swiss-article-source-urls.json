@@ -1,5 +1,4 @@
 {
-  "https://www.rsi.ch/info/ticino-grigioni-e-insubria/alla-ricerca-della-materia-oscura-sotto-sedrun--3939471.html": "esperimento-materia-oscura-sotto-sedrun",
   "https://www.tio.ch/svizzera/cronaca/1943508/carcere-bois-mermet-popolazione-bois-evaso": "evaso-bois-mermet",
   "https://www.laregione.ch/svizzera/svizzera/1943471/miliardi-iva-aumento-punti-acquisti": "iva-aumento-sicurezza",
   "https://www.tio.ch/svizzera/cronaca/1943460/ciclista-incidente-e-bike-ospedale-berna": "incidente-e-bike-morte-ciclista",
@@ -1981,6 +1980,11 @@
   "https://www.laregione.ch/economia/speciale-economia/1948085/il-vicere-di-caracas-passato-da-lugano": {
     "articleId": "vicere-caracas-indagine-lugano",
     "ts": "2026-09-07T09:55:33.747Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/tragitto-casa-scuola%3a-per-41%25-genitori-%c3%a8-rischioso%2c-studio/92015568": {
+    "articleId": "tragitto-casa-scuola-rischioso",
+    "ts": "2026-09-07T10:21:29.053Z",
     "keyForm": 2
   }
 }
