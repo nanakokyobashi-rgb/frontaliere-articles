@@ -1,5 +1,4 @@
 {
-  "https://www.rsi.ch/info/ambiente/mezzo-milione-di-giovani-polpi-contro-il-granchio-blu--3934308.html": "polpi-contro-granchio-blu",
   "https://www.rsi.ch/s/3947496": "governo-dice-no-iniziativa-alimentazione",
   "https://www.rsi.ch/s/3946380": "autorita-argoviesi-sotto-indagine-per-il-caso-dell-ex-parlamentare-udc",
   "https://www.rsi.ch/s/3949320": "gianotti-delegata-geneva-ai-summit-2027",
@@ -2025,6 +2024,11 @@
   "https://www.swissinfo.ch/ita/impatto-ia-su-dipendenti-telecom%2c-syndicom-formula-rivendicazioni/92016507": {
     "articleId": "impatto-ia-dipendenti-telecom-syndicom-rivendicazioni",
     "ts": "2026-09-07T12:33:59.289Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/ticino/attualita/1948472/melide-igor": {
+    "articleId": "melide-riqualifica-centro",
+    "ts": "2026-09-07T12:45:00.187Z",
     "keyForm": 2
   }
 }
