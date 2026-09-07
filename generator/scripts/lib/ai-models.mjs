@@ -3550,6 +3550,55 @@ export async function discoverOpenRouterFreeModels(opts = {}) {
  *
  * Safe to call multiple times (idempotent).
  */
+/**
+ * TETTO alla distanza nel futuro di un `exhaustedUntil` RIPRISTINABILE.
+ *
+ * Il solo writer del campo (`_persistScoresToFirestore`) scrive sempre la
+ * mezzanotte UTC successiva, quindi un ban legittimo dista al massimo 24h dal
+ * momento in cui e' stato scritto; 26h coprono quel caso peggiore piu' il
+ * margine di clock skew fra i runner. Oltre quel tetto il valore non puo'
+ * venire da questo writer: e' skew grosso o un residuo scritto male da una
+ * versione precedente.
+ *
+ * Perche' serve un tetto e non basta `> now`: il campo si azzera in un solo
+ * punto (`entry.exhaustedUntil = null`) e SOLO dietro `counterDelta.successes`,
+ * cioe' un successo di QUEL modello in questo processo — che un modello saltato
+ * in pre-flight su ogni macchina non puo' produrre. Un valore datato avanti nel
+ * futuro e' quindi assorbente: nessun writer resta capace di toglierlo, e il
+ * modello sparisce dalla cascata su tutti i workflow dei due repo senza un
+ * errore. Ignorare il ban rimette il modello in gioco, e il primo successo
+ * ripulisce il campo dal documento condiviso per la porta normale.
+ *
+ * Stessa forma del tetto di `isBackoffActive` in `scripts/ci/claude-rate-limit.mjs`
+ * ("un `resetsAt` assurdamente lontano non deve bloccare il loop per settimane").
+ */
+export const EXHAUST_RESTORE_MAX_AHEAD_MS = 26 * 60 * 60 * 1000;
+
+/**
+ * Ramo puro del restore di `exhaustedUntil`, estratto per essere testabile:
+ * `initScoreStore()` senza credenziale esce PRIMA del restore e
+ * `__installScoreStoreForTests` installa il db a restore gia' saltato, quindi
+ * in-line questo ramo non e' esercitabile da nessun test.
+ *
+ * @param {any} raw valore persistito (Firestore Timestamp | stringa ISO | null)
+ * @param {Date} [now]
+ * @param {number} [maxAheadMs]
+ * @returns {{ until: Date|null, reason: 'absent'|'unparsable'|'expired'|'too-far-ahead'|'restore' }}
+ */
+export function _restorableExhaustUntil(raw, now = new Date(), maxAheadMs = EXHAUST_RESTORE_MAX_AHEAD_MS) {
+  if (!raw) return { until: null, reason: 'absent' };
+  const until = typeof raw.toDate === 'function'
+    ? raw.toDate()                  // Firestore Timestamp
+    : new Date(raw);                // ISO string fallback
+  if (!(until instanceof Date) || Number.isNaN(until.getTime())) {
+    return { until: null, reason: 'unparsable' };
+  }
+  const ahead = until.getTime() - now.getTime();
+  if (ahead <= 0) return { until, reason: 'expired' };
+  if (ahead > maxAheadMs) return { until, reason: 'too-far-ahead' };
+  return { until, reason: 'restore' };
+}
+
 export async function initScoreStore() {
   if (_storeInitialized) return;
   _storeInitialized = true;
@@ -3642,10 +3691,8 @@ export async function initScoreStore() {
       // Skip restoring any persisted ban for it so it's always eligible as
       // last resort every run. See markModelExhausted / _persistScoresToFirestore.
       if (data.exhaustedUntil && !_isLastResortProvider(modelId)) {
-        const resetTime = data.exhaustedUntil.toDate
-          ? data.exhaustedUntil.toDate()   // Firestore Timestamp
-          : new Date(data.exhaustedUntil); // ISO string fallback
-        if (resetTime > now) {
+        const { until: resetTime, reason } = _restorableExhaustUntil(data.exhaustedUntil, now);
+        if (reason === 'restore') {
           _exhaustedModels.add(modelId);
           // Persisted exhaustedUntil is the daily-limit (quota) path → eligible
           // for the GitHub multi-PAT skip-exemption. Dalla stessa porta degli
@@ -3653,6 +3700,17 @@ export async function initScoreStore() {
           _setExhaustReason(modelId, 'quota');
           exhaustedRestored++;
           console.warn(`🚫 [ScoreStore] ${modelId} still exhausted until ${resetTime.toISOString().slice(0, 16)}`);
+        } else if (reason === 'too-far-ahead' || reason === 'unparsable') {
+          // Ban NON ripristinato: vedi _restorableExhaustUntil. Nominato, perche'
+          // altrimenti l'unico sintomo resterebbe un modello assente dalla cascata.
+          const shown = reason === 'unparsable'
+            ? JSON.stringify(data.exhaustedUntil)
+            : resetTime.toISOString();
+          console.warn(
+            `⚠️  [ScoreStore] ${modelId}: exhaustedUntil ${shown} ${reason === 'unparsable'
+              ? 'illeggibile'
+              : `oltre il tetto di ${EXHAUST_RESTORE_MAX_AHEAD_MS / 3_600_000}h`} — ban IGNORATO, modello di nuovo eleggibile`
+          );
         }
       }
 
@@ -3835,7 +3893,8 @@ async function _persistScoresToFirestore() {
     // migrazione legacy, un fallimento di rete — e azzerare da li' rimanda ogni
     // altro workflow a ripagare i 429 fino a mezzanotte, in silenzio. Non serve
     // nemmeno a ripulire i ban scaduti: il restore di `initScoreStore()` ignora
-    // gia' un `exhaustedUntil` nel passato (`if (resetTime > now)`).
+    // gia' un `exhaustedUntil` nel passato — e anche uno datato oltre il tetto
+    // di `_restorableExhaustUntil`.
 
     // Runtime-learned request-token ceiling (see _learnRequestTokenLimit).
     // Not a daily quota — no local/fallback exemption needed.
