@@ -154,61 +154,103 @@ test('a liste vuote lo step richiude l issue dedup, non si limita a uscire', () 
 
 /**
  * Secondo residuo permanente, stessa forma del primo: il digest dello sweep
- * (`🧭 Decisioni del proprietario`) nasce in `needs-human-sweep.yml` con
- * `needs-human,automation,agent:no-age-out` e lo sweep ha il divieto esplicito di
- * togliergli quella label. Finche' veniva elencato qui, `ISSUES` non poteva
+ * (`🧭 Decisioni del proprietario — digest`) nasce in `needs-human-sweep.yml` ed
+ * esiste per restare aperto. Finche' veniva elencato qui, `ISSUES` non poteva
  * essere vuoto e la chiusura promessa nel corpo restava irraggiungibile — cioe'
  * l'assorbente di #733 con un'altra issue al posto di questa.
+ *
+ * La discriminante e' il TITOLO, non la label `agent:no-age-out` (#981 item
+ * 2/3). La label sbagliava nei due versi: sul digest la applica un prompt
+ * Claude, quindi un run che lo ricrea senza label riporta l'assorbente in
+ * silenzio; e su qualunque altra issue significa «non scade», non «non e' un
+ * item umano», quindi nascondeva dall'unico canale umano una issue davvero
+ * bloccata e lasciava per giunta auto-chiudere il digest mentre quel blocco era
+ * vivo. Non e' nemmeno una partizione della classe: il ledger transient (#25) e'
+ * un tracker e la label non ce l'ha.
  */
-test('la lista issue esclude i tracker permanenti', () => {
+test('la lista issue esclude i tracker permanenti per titolo, non per label', () => {
   const step = surfaceStep();
   const issueQuery = /ISSUES=\$\(gh api --paginate([\s\S]*?)--jq '([^']+)'\)/.exec(step);
   assert.ok(issueQuery, 'query della lista issue dello step non trovata');
   assert.match(
     step,
     /NEEDS_HUMAN_API="repos\/\$GH_REPO\/issues\?[^"]*labels=needs-human/,
-    'la lista viene dall endpoint `issues`, che filtra per label e restituisce `labels`: senza, il filtro non ha su cosa lavorare',
+    'la lista viene dall endpoint `issues`, che filtra per label e restituisce `title`: senza, il filtro non ha su cosa lavorare',
   );
   assert.match(
     issueQuery[2],
-    /select\(\s*\[\s*\.labels\[\]\.name\s*\]\s*\|\s*index\(\s*env\.LBL_PERMANENT_TRACKER\s*\)\s*\|\s*not\s*\)/,
-    'il jq deve escludere i tracker permanenti per LABEL, o la lista non si svuota mai',
+    /index\(\s*\$i\.title\s*\)\s*\|\s*not/,
+    'il jq deve escludere i tracker permanenti confrontando il TITOLO con PERMANENT_TRACKER_TITLES',
+  );
+  assert.match(
+    issueQuery[2],
+    /env\.PERMANENT_TRACKER_TITLES\s*\|\s*split\("\\n"\)/,
+    'i titoli vengono da PERMANENT_TRACKER_TITLES, una riga per tracker',
+  );
+  // Il difetto riparato: escludere per label toglieva dall unico canale umano
+  // anche le issue davvero bloccate a cui qualcuno ha messo `agent:no-age-out`.
+  assert.doesNotMatch(
+    issueQuery[2],
+    /\.labels\[\]\.name/,
+    'il filtro non deve tornare a guardare le label: `agent:no-age-out` vuol dire «non scade», non «non e un item umano»',
+  );
+  assert.doesNotMatch(step, /LBL_PERMANENT_TRACKER/, 'la env della vecchia esclusione per label non deve sopravvivere al fix');
+});
+
+/** I titoli esclusi. Uno per riga, nessuna riga vuota di mezzo. */
+function permanentTrackerTitles(step) {
+  const block = /\n\s+PERMANENT_TRACKER_TITLES: \|\n([\s\S]*?)\n\s+run: \|/.exec(step);
+  assert.ok(block, 'lo step deve definire PERMANENT_TRACKER_TITLES come env a blocco');
+  return block[1].split('\n').map((l) => l.trim()).filter(Boolean);
+}
+
+test('ogni titolo escluso ha la sua sorgente reale, e ce n e una sola', () => {
+  // Uno YAML non puo' importare da un modulo ne' da un altro YAML: il legame
+  // fra i titoli elencati qui e i processi che CREANO quegli oggetti e' questo
+  // test (AGENTS.md #6). Se divergono, il tracker torna nella lista e il digest
+  // non converge piu' — in silenzio, che e' il modo in cui #733 e' successa.
+  const step = surfaceStep();
+  assert.equal(
+    [...step.matchAll(/\n\s+PERMANENT_TRACKER_TITLES:\s/g)].length,
+    1,
+    'PERMANENT_TRACKER_TITLES definita piu di una volta: due liste divergono in silenzio',
+  );
+  const titles = permanentTrackerTitles(step);
+
+  const sweep = readFileSync(path.join(ROOT, '.github/workflows/needs-human-sweep.yml'), 'utf8');
+  const sweepTitle = /\n\s+DIGEST_TITLE:\s*'([^']+)'/.exec(sweep);
+  assert.ok(sweepTitle, 'needs-human-sweep.yml deve definire DIGEST_TITLE come env: e la sorgente del titolo del digest');
+  assert.ok(
+    titles.includes(sweepTitle[1]),
+    `il digest dello sweep («${sweepTitle[1]}») non e fra i titoli esclusi: tornerebbe a impedire la chiusura`,
+  );
+
+  const creator = readFileSync(path.join(ROOT, 'scripts/lib/github-issue-creator.mjs'), 'utf8');
+  const ledger = /const TRANSIENT_LEDGER_TITLE = '([^']+)';/.exec(creator);
+  assert.ok(ledger, 'TRANSIENT_LEDGER_TITLE non trovata in github-issue-creator.mjs');
+  assert.ok(
+    titles.includes(ledger[1]),
+    'il ledger transient e un tracker permanente e NON porta `agent:no-age-out`: va escluso per titolo',
   );
 });
 
-test('la label del tracker permanente ha la stessa sorgente degli script del ciclo', () => {
-  // Uno YAML non puo' importare da un modulo: il legame fra il valore qui e
-  // quello che followup-drainer/needs-human-prepass usano per riconoscere lo
-  // stesso oggetto e' questo test (AGENTS.md #6). Se divergono, il digest
-  // elenca un tracker che ogni altro stadio salta, e torna a non convergere.
-  const step = surfaceStep();
-  const assignment = /\n\s+LBL_PERMANENT_TRACKER:\s*'([^']+)'/.exec(step);
-  assert.ok(assignment, 'lo step deve definire LBL_PERMANENT_TRACKER come env');
-  assert.equal(
-    [...step.matchAll(/\n\s+LBL_PERMANENT_TRACKER:\s/g)].length,
-    1,
-    'LBL_PERMANENT_TRACKER definita piu di una volta',
-  );
-  const label = assignment[1];
-
-  const drainer = readFileSync(path.join(ROOT, 'scripts/ci/followup-drainer.mjs'), 'utf8');
-  const declared = /const LBL_NO_AGE_OUT = '([^']+)';/.exec(drainer);
-  assert.ok(declared, 'LBL_NO_AGE_OUT non trovata in followup-drainer.mjs');
-  assert.equal(label, declared[1], 'la label dello YAML e quella del drainer sono divergenti');
-
-  const prepass = readFileSync(path.join(ROOT, 'scripts/ci/needs-human-prepass.mjs'), 'utf8');
-  assert.ok(
-    prepass.includes(`'${label}'`),
-    'needs-human-prepass.mjs non riconosce piu questa label come tracker permanente',
-  );
-
-  // E la sorgente che la APPLICA: senza questa, il filtro escluderebbe una
-  // classe che nessuno popola piu.
+test('il titolo del digest ha una sola sorgente anche in needs-human-sweep.yml', () => {
+  // Tre usi (prompt, step "Classify outcome", e il filtro dell altro workflow)
+  // su un titolo che e' anche la chiave di ricerca dell oggetto: un letterale
+  // ripetuto qui basterebbe a farli divergere senza che nulla fallisca.
   const sweep = readFileSync(path.join(ROOT, '.github/workflows/needs-human-sweep.yml'), 'utf8');
-  assert.ok(
-    sweep.includes(label),
-    'needs-human-sweep.yml non crea piu il digest con la label di tracker permanente',
+  const declared = /\n\s+DIGEST_TITLE:\s*'([^']+)'/.exec(sweep);
+  assert.ok(declared, 'needs-human-sweep.yml deve definire DIGEST_TITLE');
+  assert.equal(
+    [...sweep.matchAll(/\n\s+DIGEST_TITLE:\s/g)].length,
+    1,
+    'DIGEST_TITLE definita piu di una volta in needs-human-sweep.yml',
   );
+  const title = declared[1];
+  const literals = [...sweep.matchAll(new RegExp(title.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g'))];
+  assert.equal(literals.length, 1, 'il titolo del digest compare fuori da DIGEST_TITLE: chi lo usa deve leggere la env');
+  assert.match(sweep, /titolo ESATTO `\$\{\{ env\.DIGEST_TITLE \}\}`/, 'il prompt deve interpolare DIGEST_TITLE');
+  assert.match(sweep, /--match title "\$DIGEST_TITLE"/, 'lo step "Classify outcome" deve cercare il digest con DIGEST_TITLE');
 });
 
 /**
