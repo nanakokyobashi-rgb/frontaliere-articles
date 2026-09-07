@@ -26594,17 +26594,17 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
   },
 
   'blog-sbb-controllers-bonuses-fines-ticino-2026': {
-    title: 'SBB controllers getting bonuses for fines? What frontalieri need to know',
-    description: 'SBB controllers may receive bonuses based on fines collected. Impact on Ticino cross-border workers and how to navigate the new system. Dati aggiornati 2026 per',
-    keywords: 'frontalieri, ticino, svizzera, italia, controllers, getting, bonuses, fines',
-    ogTitle: 'SBB controllers getting bonuses for fines? What frontalieri need to know',
-    ogDescription: 'SBB controllers may receive bonuses based on fines collected. Impact on Ticino cross-border workers and how to navigate the new system.',
+    title: 'Controllori SBB con bonus sulle multe? Cosa devono sapere i frontalieri',
+    description: 'I controllori SBB potrebbero ricevere bonus in base alle multe incassate. Impatto sui frontalieri del Ticino e come muoversi con il nuovo sistema.',
+    keywords: 'frontalieri, ticino, svizzera, italia, controllori, sbb, bonus, multe',
+    ogTitle: 'Controllori SBB con bonus sulle multe? Cosa devono sapere i frontalieri',
+    ogDescription: 'I controllori SBB potrebbero ricevere bonus in base alle multe incassate. Impatto sui frontalieri del Ticino e come muoversi con il nuovo sistema.',
     canonicalPath: '/articoli-frontaliere/sbb-controllers-bonuses-fines-ticino-2026/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
-      "headline": "SBB controllers getting bonuses for fines? What frontalieri need to know",
-      "description": "SBB controllers may receive bonuses based on fines collected. Impact on Ticino cross-border workers and how to navigate the new system. Dati aggiornati 2026 per",
+      "headline": "Controllori SBB con bonus sulle multe? Cosa devono sapere i frontalieri",
+      "description": "I controllori SBB potrebbero ricevere bonus in base alle multe incassate. Impatto sui frontalieri del Ticino e come muoversi con il nuovo sistema.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",

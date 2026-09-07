@@ -21,8 +21,8 @@
  * Su questa superficie un falso positivo non e' un fastidio: e' un articolo
  * buttato, perche' `reject` fa rigenerare. Il rilevatore va quindi misurato
  * contro il corpus VERO prima di fidarsene, ed e' esattamente cio' che fa il
- * terzo blocco: scansiona i `title` IT pubblicati e pretende zero offender
- * oltre a quelli genuini gia' noti.
+ * terzo blocco: scansiona i `title` e gli `excerpt` IT pubblicati e pretende
+ * zero offender — l'allowlist e' vuota da #985 e deve restarci.
  *
  * Il conteggio minimo non e' decorativo. Un checkout sparso senza `content/`
  * farebbe trovare zero titoli, zero offender, e il test passerebbe A VUOTO
@@ -185,50 +185,58 @@ test('#800 — un titolo italiano con un prestito straniero non basta a rigettar
 // ── 3. La misura anti-falso-positivo sul corpus pubblicato ────────────────
 
 const META_IT = ['content/blog-meta-it.ts', 'content/blog-meta-ch-it.ts'];
-// Il corpus pubblicato ne conta 5.682 al 2026-09-06. La soglia sta molto sotto
+// Il corpus pubblicato ne conta 5.682 (title) e 5.683 (excerpt) al 2026-09-06. La soglia sta molto sotto
 // per non rompersi a ogni pubblicazione, ma abbastanza sopra da rendere
 // impossibile un pass a vuoto su un checkout troncato.
-const MIN_TITOLI_IT = 4000;
-// Gli unici flagged sui 5.682: titoli DAVVERO in lingua sbagliata, gia' live.
-// Sono la prova che il difetto esisteva, non un difetto del rilevatore.
-// La bonifica del corpus e' #985: quella PR ritraduce i campi IT dello slug
-// `sbb-controllers-bonuses-fines-ticino-2026` e SVUOTA questa lista. Finche'
-// e' popolata, una regressione su quel titolo resta invisibile a questo test.
-const OFFENDER_GENUINI = [
-  'SBB controllers getting bonuses for fines? What frontalieri need to know',
-];
+const MIN_CAMPI_IT = 4000;
+// #985 ha bonificato l'unico offender genuino rimasto
+// (`sbb-controllers-bonuses-fines-ticino-2026`), quindi questa lista e' VUOTA
+// e deve restarci: ogni voce aggiunta qui e' un titolo in lingua sbagliata che
+// il gate smette di vedere. Una regressione si ritraduce, non si allowlista.
+const OFFENDER_GENUINI = [];
 
-function titoliPubblicati(file) {
+function campiPubblicati(file, campo) {
   const sorgente = readFileSync(path.join(ROOT, file), 'utf8');
-  const titoli = [];
-  // Mappa i18n piatta: `'blog.article.<slug>.title': 'Titolo',`
-  for (const m of sorgente.matchAll(/\.title':\s*'((?:[^'\\]|\\.)*)',/g)) {
-    titoli.push(m[1].replace(/\\'/g, "'"));
+  const valori = [];
+  // Mappa i18n piatta: `'blog.article.<slug>.<campo>': 'Valore',`
+  const re = new RegExp(`\\.${campo}':\\s*'((?:[^'\\\\]|\\\\.)*)',`, 'g');
+  for (const m of sorgente.matchAll(re)) {
+    valori.push(m[1].replace(/\\'/g, "'"));
   }
-  return titoli;
+  return valori;
 }
 
-test('#800 — zero falsi positivi sui title IT pubblicati', (t) => {
+function scanCorpusIt(t, campo) {
   const mancanti = META_IT.filter((f) => !existsSync(path.join(ROOT, f)));
   if (mancanti.length > 0) {
     t.skip(`corpus non presente in questo checkout: ${mancanti.join(', ')}`);
     return;
   }
 
-  const titoli = META_IT.flatMap(titoliPubblicati);
+  const valori = META_IT.flatMap((f) => campiPubblicati(f, campo));
   assert.ok(
-    titoli.length >= MIN_TITOLI_IT,
-    `letti solo ${titoli.length} title IT (minimo ${MIN_TITOLI_IT}): corpus troncato o `
+    valori.length >= MIN_CAMPI_IT,
+    `letti solo ${valori.length} ${campo} IT (minimo ${MIN_CAMPI_IT}): corpus troncato o `
     + 'regex di estrazione disallineata — questo test NON deve passare a vuoto',
   );
 
-  const offender = titoli
-    .map((titolo) => [titolo, detectWrongLatinLanguage(titolo, 'it')])
-    .filter(([titolo, esito]) => esito && !OFFENDER_GENUINI.includes(titolo));
+  const offender = valori
+    .map((valore) => [valore, detectWrongLatinLanguage(valore, 'it')])
+    .filter(([valore, esito]) => esito && !OFFENDER_GENUINI.includes(valore));
 
   assert.deepEqual(
-    offender.map(([titolo, esito]) => `${esito.lang}/${esito.reason} :: ${titolo}`),
+    offender.map(([valore, esito]) => `${esito.lang}/${esito.reason} :: ${valore}`),
     [],
-    `il rilevatore rigetta title italiani legittimi su ${titoli.length} misurati`,
+    `il rilevatore rigetta ${campo} italiani legittimi su ${valori.length} misurati`,
   );
+}
+
+test('#800 — zero falsi positivi sui title IT pubblicati', (t) => {
+  scanCorpusIt(t, 'title');
+});
+
+// L'excerpt e' pubblicato quanto il title — meta-<locale>.json, RSS, og:description
+// — e #985 ne ha bonificato uno inglese che nessuno stava misurando.
+test('#985 — zero falsi positivi sugli excerpt IT pubblicati', (t) => {
+  scanCorpusIt(t, 'excerpt');
 });
