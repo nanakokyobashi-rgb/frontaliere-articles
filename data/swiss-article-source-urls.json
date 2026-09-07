@@ -1,5 +1,4 @@
 {
-  "https://www.laregione.ch/rubriche/salute-sessuale": "salute-sessuale-ticino",
   "https://www.laregione.ch/svizzera/svizzera/1943573/eclissi-svizzera-terminata-ultima-coperto": "eclissi-solare-svizzera-conclusa",
   "https://www.laregione.ch/svizzera/svizzera/1943590/controllo-finanze-ufsp-federale-cdf": "il-controllo-delle-finanze-critica-duramente-l-ufsp",
   "https://www.rsi.ch/s/3949140": "reno-siccita-logistica-svizzera",
@@ -2009,6 +2008,11 @@
   "https://www.swissinfo.ch/ita/confederazione-vuole-mantenere-aree-thun-per-esercito-e-difesa/92016218": {
     "articleId": "confederazione-mantiene-aree-thun-difesa",
     "ts": "2026-09-07T11:45:17.889Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/economia/1948493/lavoro-mercato-anni-disoccupati-bastano": {
+    "articleId": "disoccupazione-giovani-svizzera-agosto-2023",
+    "ts": "2026-09-07T11:50:27.349Z",
     "keyForm": 2
   }
 }
