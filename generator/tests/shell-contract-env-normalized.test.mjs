@@ -24,6 +24,8 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
+import { describeOpaqueRead, scanEnvReads, stripCommentLines } from './lib/env-reads.mjs';
+
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const HOST_TESTS = path.join(ROOT, 'host/tests');
 
@@ -72,6 +74,7 @@ test('CONTRACT_ENV_KEYS copre ogni process.env letta da host/', async () => {
   const declared = new Set([...CONTRACT_ENV_KEYS, ...Object.keys(NOT_REACHING_CONTRACT)]);
 
   const read = new Set();
+  const opache = [];
   const walk = (dir) => {
     for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
       const fp = path.join(dir, e.name);
@@ -79,13 +82,27 @@ test('CONTRACT_ENV_KEYS copre ogni process.env letta da host/', async () => {
         if (e.name === 'tests') continue; // i test possono leggere l'ambiente che vogliono
         walk(fp);
       } else if (/\.(ts|mjs)$/.test(e.name)) {
-        const src = fs.readFileSync(fp, 'utf-8');
-        for (const m of src.matchAll(/process\.env\.([A-Z0-9_]+)/g)) read.add(m[1]);
-        for (const m of src.matchAll(/process\.env\[['"]([A-Z0-9_]+)['"]\]/g)) read.add(m[1]);
+        // Il gemello di #1046: cercare le sole letture `process.env.NOME` (piu'
+        // l'indicizzazione con letterale) lascia fuori la destrutturazione e
+        // l'alias dell'intero oggetto, e TACE sulla chiave dinamica. Qui la
+        // conseguenza e' la stessa di la': una variabile non classificata che
+        // il digest del contratto legge comunque.
+        const { names, opaque } = scanEnvReads(stripCommentLines(fs.readFileSync(fp, 'utf-8')));
+        for (const n of names) if (/^[A-Z0-9_]+$/.test(n)) read.add(n);
+        for (const o of opaque) opache.push(`${path.relative(ROOT, fp)}:${describeOpaqueRead(o)}`);
       }
     }
   };
   walk(path.join(ROOT, 'host'));
+
+  assert.deepEqual(
+    opache,
+    [],
+    `${opache.length} lettura/e di process.env sotto host/ non sono risolvibili leggendo il sorgente, ` +
+      'quindi CONTRACT_ENV_KEYS non puo\' essere dimostrata completa:\n  ' +
+      `${opache.join('\n  ')}\n` +
+      'Rendi la chiave letterale, oppure annota la riga con `// env-scan: <motivo>` (#1046).',
+  );
 
   const undeclared = [...read].filter((k) => !declared.has(k)).sort();
   assert.deepEqual(
