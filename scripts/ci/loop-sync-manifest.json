@@ -996,6 +996,16 @@
       }
     },
     {
+      "path": "scripts/ci/resolve-issue-verified.mjs",
+      "mode": "corpus-only",
+      "reason": "Wrapper che chiude un issue canonica per TITOLO e ne VERIFICA la post-condizione, invece di fidarsi dell exit code del chiuditore (issue #1005). `scripts/lib/github-issue-creator.mjs --resolve` e best-effort in tre strati — `gh issue close` con `allowFailure: true`, il ramo CLI che fa `process.exit(0)` sempre, e un `null` di ritorno che significa insieme «niente da chiudere» e «chiusura respinta» — quindi un close rifiutato lasciava la run VERDE, senza ritentativo e senza annotazione, con l issue aperta e un elenco ormai falso. Vive QUI e non nel creator perche quel file e `identical`: una fix li si fa sul SITO, ed e comunque legittimo che una libreria best-effort resti best-effort; e il CHIAMANTE a sapere se la chiusura era un obbligo o un no-op. Usato dai tre call-site con `--resolve` del repo (recycle-stale-prs.yml, reconcile-article-shards.yml, republish-dirty-content.yml). corpus-only perche i due workflow che lo usano di piu sono a loro volta corpus-only/adapted e il sito non ha un equivalente; e un MIGLIORAMENTO del meccanismo, candidato a risalire al sito dove `--resolve` ha lo stesso difetto. Coperto da generator/tests/resolve-issue-verified.test.mjs e generator/tests/needs-human-digest-self-listing.test.mjs.",
+      "baseline": {
+        "site": null,
+        "corpus": "159b93dd7d5fa4a7",
+        "alignedAt": "2026-09-07"
+      }
+    },
+    {
       "path": "scripts/ci/stale-claim-detector.mjs",
       "mode": "identical",
       "baseline": {

@@ -123,19 +123,28 @@ jobs:
       # Gemello del fix in reconcile-article-shards.yml (issue #590): l'issue
       # canonica qui sotto apre/aggiorna quando resta lavoro, ma niente la
       # richiudeva quando un run successivo (rilancio manuale) trova zero
-      # sporchi. `resolveGithubIssue` e' il no-op sicuro quando non c'e' niente
-      # da chiudere.
+      # sporchi. `resolve-issue-verified.mjs` e' il no-op sicuro quando non c'e'
+      # niente da chiudere, e l'unico che si accorge se la chiusura e' respinta.
       - name: Close dirty-content issue (coda drenata)
         if: steps.detect.outcome == 'success' && steps.detect.outputs.distinct == '0'
+        # `continue-on-error: true` insieme alla verifica (#1005): fino a ora
+        # questo step non poteva fallire in nessun caso — `--resolve` esce 0
+        # anche quando `gh issue close` viene respinto, quindi un close rifiutato
+        # lasciava la run verde e l'issue aperta senza ritentativo.
+        # `resolve-issue-verified.mjs` verifica la post-condizione, ritenta una
+        # volta e poi esce non-zero: il guasto diventa uno step ROSSO con
+        # annotazione. Il flag tiene l'esito del JOB identico a oggi, cosi' il
+        # segnale si aggiunge senza fabbricare una Workflow Failure per una
+        # condizione che il run successivo ritrova comunque.
+        continue-on-error: true
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
         run: |
-          node scripts/lib/github-issue-creator.mjs \
+          node scripts/ci/resolve-issue-verified.mjs \
             --title "Articoli con control character C0: ripubblicazione incompleta" \
             --workflow "republish-dirty-content" \
-            --run-url "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" \
-            --resolve
+            --run-url "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
 
       - name: Resolve backfill mode
         id: mode

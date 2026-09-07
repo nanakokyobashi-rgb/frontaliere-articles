@@ -124,19 +124,28 @@ jobs:
       # l'issue canonica apre/aggiorna quando resta lavoro, senza un rovescio
       # che la chiuda quando il run SUCCESSIVO trova zero fantasmi — misurato
       # su #590, backfillato 4 minuti dopo l'apertura ma rimasto aperto.
-      # `resolveGithubIssue` (già usata da `--resolve` altrove nel creator, mai
-      # cablata qui) è il no-op sicuro quando non c'è niente da chiudere.
+      # `resolve-issue-verified.mjs` e' il no-op sicuro quando non c'e' niente
+      # da chiudere, e l'unico che si accorge se la chiusura viene respinta.
       - name: Close ghost-articles issue (coda drenata)
         if: steps.detect.outcome == 'success' && steps.detect.outputs.missing == '0'
+        # `continue-on-error: true` insieme alla verifica (#1005): fino a ora
+        # questo step non poteva fallire in nessun caso — `--resolve` esce 0
+        # anche quando `gh issue close` viene respinto, quindi un close rifiutato
+        # lasciava la run verde e l'issue aperta senza ritentativo.
+        # `resolve-issue-verified.mjs` verifica la post-condizione, ritenta una
+        # volta e poi esce non-zero: il guasto diventa uno step ROSSO con
+        # annotazione. Il flag tiene l'esito del JOB identico a oggi, cosi' il
+        # segnale si aggiunge senza fabbricare una Workflow Failure per una
+        # condizione che il run successivo ritrova comunque.
+        continue-on-error: true
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
         run: |
-          node scripts/lib/github-issue-creator.mjs \
+          node scripts/ci/resolve-issue-verified.mjs \
             --title "Articoli fantasma: annunciati senza pagina sugli shard" \
             --workflow "reconcile-article-shards" \
-            --run-url "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" \
-            --resolve
+            --run-url "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
 
       # Il dispatch è consentito solo quando l'innesco non era a sua volta un
       # dispatch (anti-catena, vedi intestazione) e il run non è un dry run

@@ -389,11 +389,27 @@ jobs:
             # lockstep-stall-watch.mjs) e cerca l'issue con LA STESSA
             # ricerca per titolo con cui la creerebbe: aprire e richiudere
             # restano simmetrici sulla chiave di dedup.
+            #
+            # E la chiusura va VERIFICATA, non tentata (#1005). Sotto
+            # `--resolve` il chiuditore e' best-effort in tre strati:
+            # `gh issue close` gira con `allowFailure: true`, il ramo CLI fa
+            # `process.exit(0)` sempre, e il suo `null` significa insieme «non
+            # c'era niente da chiudere» e «la chiusura e' stata respinta». Un
+            # close respinto — permessi, rate-limit, 5xx — lasciava quindi la
+            # run VERDE con una riga su stderr, senza ritentativo, e l'issue
+            # dedup aperta con un elenco ormai falso fino al prossimo run a
+            # liste vuote, che puo' non arrivare presto. E' l'unico canale che
+            # gli umani leggono. `resolve-issue-verified.mjs` guarda invece la
+            # POST-CONDIZIONE (l'issue e' ancora aperta?), ritenta una volta e
+            # poi annota + esce non-zero: il fallimento diventa uno step rosso
+            # con annotazione, mentre `continue-on-error: true` continua a non
+            # far cadere il job.
             echo "Niente needs-human aperto (ne PR ne issue): richiudo l'issue dedup, se aperta."
-            node scripts/lib/github-issue-creator.mjs \
-              --resolve \
+            node scripts/ci/resolve-issue-verified.mjs \
               --title "$DEDUP_TITLE" \
-              --workflow "Recycle stale PRs"
+              --workflow "Recycle stale PRs" \
+              --run-url "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" \
+              || exit 1
             exit 0
           fi
           PR_COUNT=0; [ -n "$PRS" ] && PR_COUNT=$(printf '%s\n' "$PRS" | wc -l | tr -d ' ')
