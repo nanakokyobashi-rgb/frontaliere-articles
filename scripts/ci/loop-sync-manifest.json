@@ -3405,6 +3405,18 @@
         "corpus": "4acdc6d8860661a5",
         "alignedAt": "2026-09-06"
       }
+    },
+    {
+      "path": "scripts/lib/fixer-slot.mjs",
+      "mode": "corpus-only-pending",
+      "trackingIssue": "https://github.com/nanakokyobashi-rgb/frontaliere-articles/issues/974",
+      "reason": "UNA sorgente per «quante run del fixer sono in volo» (AGENTS.md #6): gli status di volo, i file di workflow dei due stadi Claude, e il tie-break `precedingRunIds` che rende deadlock-free la mutua esclusione fra issue diverse. Estratta perche' `check-fixer-slot.mjs` e i due contatori `inFlightFixCount`/`inFlightDecomposeCount` di `followup-drainer.mjs` devono contare la STESSA cosa: due copie della stessa regola divergono, e coda e gate finirebbero per raccontare due storie diverse sullo stesso slot. `corpus-only-pending` e non `corpus-only`: il sito ha fatto lo stesso spostamento della chiave di `concurrency` da costante a per-issue (valerielinc-ops/frontaliere-si-o-no#7497), quindi ha perso lo stesso invariante e ha bisogno dello stesso gemello — ma la fix e' nata qui e la promozione e' lavoro dal lato del sito. Non esiste ancora una issue aperta la', quindi il tracking punta alla issue di questo repo che ha prodotto il file (stesso precedente di `scripts/ci/refund-fix-round.mjs`)."
+    },
+    {
+      "path": "scripts/ci/check-fixer-slot.mjs",
+      "mode": "corpus-only-pending",
+      "trackingIssue": "https://github.com/nanakokyobashi-rgb/frontaliere-articles/issues/974",
+      "reason": "Pre-flight zero-Claude di MUTUA ESCLUSIONE fra issue diverse: il gemello mancante di `claim-issue-in-flight.mjs`, che copre solo due agenti sulla STESSA issue. Ripristina a livello di run — non di `concurrency` — l'invariante «un fixer alla volta sulla quota Claude condivisa col sito» che #908 ha rimosso spostando la chiave da costante a per-issue; spostamento comunque giusto, perche' la chiave costante sfrattava le pending e l'evento `issues: [labeled]` e' one-shot. E' composto da `check-quota-backoff.mjs` (`QUOTA_SLOT_MUTEX=1`) invece di aggiungere un sesto booleano alle sedici catene `if:` di `issue-fix.yml`, che sarebbero una fonte di divergenza silenziosa. Stesso stato del modulo che importa (`scripts/lib/fixer-slot.mjs`): il sito ha lo stesso difetto dopo valerielinc-ops/frontaliere-si-o-no#7497 e ha bisogno dello stesso gemello, ma la promozione e' lavoro dal lato del sito."
     }
   ]
 }

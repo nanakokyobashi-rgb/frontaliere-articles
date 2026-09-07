@@ -124,6 +124,14 @@ const HARVESTER_DECISION = Object.freeze({
   // Carve-out 2026-08-05: condizione ambientale (quota Max condivisa esaurita),
   // non una regola che un agent ha violato.
   'rate-limited': 'carved-out',
+  // Carve-out #974: gemello di `rate-limited` un gradino piu' a monte. Lo emette
+  // il pre-flight `check-fixer-slot.mjs` quando un fixer piu' vecchio e' gia' in
+  // volo — la run ri-accoda e muore prima di chiamare Claude. E' scheduling, non
+  // una regola violata: nessuna riga di doc impedisce che due label `agent:fix`
+  // arrivino insieme, ed e' il gate che FUNZIONA a produrre il marker. Farlo
+  // guidare un'escalation la renderebbe tanto piu' frequente quanto meglio il
+  // serializzatore lavora.
+  'slot-busy': 'carved-out',
   // Carve-out #5288, sceso col riallineamento #234. Mode 2 di
   // `check-workflows-scope.mjs` emetteva lo stesso marker di Mode 1
   // (`blocked-workflows-scope`), che pero' significa l'opposto: Mode 1 e' una

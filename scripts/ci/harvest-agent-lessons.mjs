@@ -814,11 +814,21 @@ export function isAvoidableOverlapSkip(title, labels, hasDeliveredPr = false) {
 // vedi `scripts/lib/workflow-scope-detect.mjs`), ed è quello il difetto che questi marker
 // stavano davvero registrando. I due codici restano CONTATI come volume/context nel
 // summary, esattamente come `rate-limited`: smettono solo di poter aprire una PR di regole.
+// `slot-busy` (#974): gemello esatto di `rate-limited`, un gradino piu' a monte.
+// Lo emette il pre-flight `check-fixer-slot.mjs` quando un fixer piu' vecchio e'
+// gia' in volo: la run ri-accoda la propria issue e muore PRIMA di chiamare
+// Claude (zero turni, zero dollari, issue intatta). E' scheduling, non una regola
+// che un agent ha violato — nessuna riga di doc puo' impedire che due label
+// `agent:fix` arrivino insieme, ed e' proprio il gate che funziona a produrre il
+// marker. Contarlo come driver rifarebbe scattare l'escalation tanto piu' spesso
+// quanto meglio il serializzatore lavora: lo stesso feedback-loop perverso gia'
+// visto con `skip-duplicate-diagnosis`. Resta CONTATO come volume/context.
 export function isEscalationDriver(source, key) {
   if (source === 'issue-class') return false;
   const bareKey = key.startsWith(`${source}:`) ? key.slice(source.length + 1) : key;
   if (source === 'fix-outcome' && bareKey === 'no-root-cause') return false;
   if (source === 'fix-outcome' && bareKey === 'rate-limited') return false;
+  if (source === 'fix-outcome' && bareKey === 'slot-busy') return false;
   if (source === 'fix-outcome' && bareKey === 'skip-duplicate-diagnosis') return false;
   if (source === 'fix-outcome' && bareKey === 'overlap-skip') return false;
   if (source === 'fix-outcome' && bareKey === 'pr-already-open') return false;
