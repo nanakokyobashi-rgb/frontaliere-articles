@@ -81,3 +81,34 @@ test('il side-effect import senza from resta coperto', () => {
   const src = "import './setup.mjs';\n";
   assert.deepEqual(specifiers(src), ['./setup.mjs']);
 });
+
+test("la regex del guard vede l'import DINAMICO, che non è mai a inizio riga", () => {
+  // #1030: `await import('./x.mjs')` sta a metà di un'espressione, quindi
+  // l'ancora `^[ \t]*` lo rendeva invisibile. Tre offender vivi lo usavano sul
+  // path caldo (`article-topic-selector.mjs` → `./ai-models.mjs`,
+  // `load-rc-env.mjs` → `./lib/google-service-account-token.mjs`,
+  // `mergePreviewCheck.mjs` → `./duplicateDeclarations.mjs`): rinominare uno di
+  // quei moduli lasciava il guard verde e rompeva la generazione a runtime.
+  const src = "const m = await import('./x.mjs');\n";
+  assert.deepEqual(specifiers(src), ['./x.mjs']);
+});
+
+test("l'import dinamico DENTRO una stringa non è una dipendenza", () => {
+  // La riga letterale di `scripts/ci/scan-generation-health.mjs:1094`: il
+  // `import("…")` vive dentro la stringa di un comando shell, e il path è
+  // relativo alla RADICE del repo, non allo script. Un ramo ingenuo lo
+  // risolverebbe come `scripts/ci/scripts/ci/…` e renderebbe il guard rosso su
+  // codice corretto — un falso rosso su un guard di chiusura si "ripara"
+  // spegnendolo, ed è così che si perde la copertura vera.
+  const src =
+    "    + 'node -e \\'const{findDuplicateTopicPairs,collectCorpus}=await import(\"./scripts/ci/scan-generation-health.mjs\");'\n";
+  assert.deepEqual(specifiers(src), []);
+});
+
+test('la prosa che CITA un import dinamico non è una dipendenza', () => {
+  // `generator/tests/lib/reachable-source.mjs` nomina la forma per spiegarla,
+  // con un path che non esiste (`./lib/…`). Il prefisso consentito prima di
+  // `import(` esclude sia la riga di commento sia il backtick che la cita.
+  const src = "// Un `await import('./lib/…')` era invisibile — e la forma esiste già.\n";
+  assert.deepEqual(specifiers(src), []);
+});
