@@ -1,5 +1,4 @@
 {
-  "https://www.rsi.ch/info/ticino-grigioni-e-insubria/eclissi-solare-duecento-persone-incantate-a-cardada--3950115.html": "eclissi-solare-cardada",
   "https://www.rsi.ch/info/scienza-e-tecnologia/eclissi-solare-del-12-agosto-come-e-dove-osservarla--3940986.html": "eclissi-solare-agosto-2026-svizzera",
   "https://www.rsi.ch/info/scienza-e-tecnologia/ia-che-si-comporta-da-hacker-come-%c3%a8-possibile--3944562.html": "ia-che-si-comporta-da-hacker",
   "https://www.laregione.ch/economia/economia/1941949/storico-regole-dieci-diventa-moore": "come-si-diventa-ricchi-lo-storico-americano-spiega-le-dieci-regole",
@@ -1949,6 +1948,11 @@
   "https://www.tio.ch/ticino/attualita/1948425/mario-padula-ha-assunto-la-direzione-dell-istituto-di-ricerche-economiche-dell-usi": {
     "articleId": "padula-direttore-ire-usi-2026",
     "ts": "2026-09-07T08:34:49.663Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/cannabis%3a-vendita-in-farmacia-riduce-rischi%2c-studio/92014893": {
+    "articleId": "cannabis-farmacia-vendita",
+    "ts": "2026-09-07T08:41:57.508Z",
     "keyForm": 2
   }
 }
