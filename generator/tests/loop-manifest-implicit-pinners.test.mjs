@@ -1,0 +1,125 @@
+/**
+ * loop-manifest-implicit-pinners.test.mjs — il manifest sorveglia i file uno
+ * per uno, e cosi' non vede le dipendenze IMPLICITE: le voci `DECLARED_ABSENT`
+ * di `loop-references-exist.test.mjs` sono appaiate al TESTO di un file
+ * sorvegliato, non alla sua API, quindi nessun `import` le rivela (issue #975,
+ * item 4 di #900).
+ *
+ * Run with `node --test generator/tests/loop-manifest-implicit-pinners.test.mjs`.
+ *
+ * ## Perche' un test sul parse, e non solo sul verdetto
+ *
+ * `declaredAbsentCiters()` legge le chiavi di un oggetto letterale che vive in
+ * UN ALTRO file di test. Se quella forma cambia — apici diversi, indentazione
+ * diversa, un separatore diverso — il parse torna una mappa vuota, e una mappa
+ * vuota e' indistinguibile da «nessun file ha dipendenze implicite»: il
+ * rilevatore si spegne in silenzio, che e' esattamente il modo di fallire che
+ * esiste per chiudere. Il test lo pinna quindi sul registro REALE: la forma non
+ * puo' cambiare senza diventare rossa qui.
+ */
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+import {
+  implicitPinnersVerdict,
+  declaredAbsentCiters,
+  DECLARED_ABSENT_REGISTRY_REL,
+  classify,
+} from '../../scripts/ci/loop-drift-check.mjs';
+
+const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
+const MANIFEST = JSON.parse(fs.readFileSync(path.join(ROOT, 'scripts/ci/loop-sync-manifest.json'), 'utf8'));
+const REGISTRY = fs.readFileSync(path.join(ROOT, DECLARED_ABSENT_REGISTRY_REL), 'utf8');
+
+test('il registro dichiarato esiste ed e\' proprio quello dei DECLARED_ABSENT', () => {
+  assert.equal(DECLARED_ABSENT_REGISTRY_REL, 'generator/tests/loop-references-exist.test.mjs');
+  assert.ok(REGISTRY.includes('const DECLARED_ABSENT = {'), 'il registro non contiene piu\' DECLARED_ABSENT');
+});
+
+test('il parse del registro non torna vuoto: una mappa vuota spegne il rilevatore in silenzio', () => {
+  const citers = declaredAbsentCiters(REGISTRY);
+  assert.ok(citers.size > 0, 'nessuna chiave `<file> :: <referente>` letta: la forma del registro e\' cambiata');
+  // Ogni chiave letta deve avere la forma di un path, non di una frase: e` il
+  // controllo che separa «ho letto le chiavi» da «ho matchato della prosa».
+  const bogus = [...citers.keys()].filter((k) => !/^[\w.@-]+(?:\/[\w.@-]+)+$/.test(k));
+  assert.deepEqual(bogus, [], `Chiavi che non sono path repo-relative:\n  ${bogus.join('\n  ')}`);
+});
+
+test('il registro e\' `corpus-only`: non scende mai insieme alla copia', () => {
+  const entry = MANIFEST.files.find((f) => f.path === DECLARED_ABSENT_REGISTRY_REL);
+  assert.ok(entry, 'il registro non e\' piu\' nel manifest');
+  assert.equal(
+    entry.mode,
+    'corpus-only',
+    'Se il registro diventasse `identical` scenderebbe insieme ai suoi citanti e l\'avviso perderebbe la sua ragione: rivedi `implicitPinnersVerdict`.',
+  );
+});
+
+test('almeno una voce `identical` del manifest ha una dichiarazione appaiata', () => {
+  // La misura del 2026-09-07 su `main` diceva 44 su 157. Il numero esatto si
+  // muove a ogni PR, ma ZERO vorrebbe dire che il rilevatore non trova piu`
+  // niente — cioe` il silenzio che questo modulo esiste per rompere.
+  const citers = declaredAbsentCiters(REGISTRY);
+  const paired = MANIFEST.files.filter((f) => f.mode === 'identical' && citers.has(f.path));
+  assert.ok(paired.length > 0, 'nessun gemello `identical` con dichiarazione appaiata: il rilevatore e\' cieco');
+});
+
+test('avvisa solo su `identical` in `site-ahead`', () => {
+  const pinners = ['mirror-articles-engine.yml'];
+  assert.equal(implicitPinnersVerdict({ mode: 'identical', state: 'site-ahead', pinners }).pinned, true);
+  for (const state of ['stable', 'corpus-ahead', 'both-moved', 'undeclared-drift', 'missing-here']) {
+    assert.equal(
+      implicitPinnersVerdict({ mode: 'identical', state, pinners }).pinned,
+      false,
+      `${state} non deve produrre l'avviso: nessuna copia sta per riscrivere il testo`,
+    );
+  }
+  for (const mode of ['adapted', 'corpus-only', 'corpus-only-pending', 'not-ported']) {
+    assert.equal(
+      implicitPinnersVerdict({ mode, state: 'site-ahead', pinners }).pinned,
+      false,
+      `${mode} non e' copiato cosi' com'e': l'avviso sarebbe rumore`,
+    );
+  }
+});
+
+test('fail-open: senza dichiarazioni non c\'e\' avviso', () => {
+  assert.equal(implicitPinnersVerdict({ mode: 'identical', state: 'site-ahead' }).pinned, false);
+  assert.equal(implicitPinnersVerdict({ mode: 'identical', state: 'site-ahead', pinners: [] }).pinned, false);
+  assert.equal(implicitPinnersVerdict({ mode: 'identical', state: 'site-ahead', pinners: [null, ''] }).pinned, false);
+});
+
+test('i referenti tornano deduplicati e ordinati', () => {
+  const v = implicitPinnersVerdict({ mode: 'identical', state: 'site-ahead', pinners: ['b.yml', 'a.yml', 'b.yml'] });
+  assert.deepEqual(v.pinners, ['a.yml', 'b.yml']);
+});
+
+test('lo STATO non cambia: `transportVerdict` continua a vedere `site-ahead`', () => {
+  // E` la meta` che rende l'avviso non distruttivo. Se `classify()` restituisse
+  // un nuovo stato, `transportVerdict()` — che pretende `site-ahead` — SPEGNEREBBE
+  // il trasporto sul 28% delle voci, cioe` il canale fermo per curare un rischio
+  // che si materializza solo qualche volta.
+  const entry = { path: 'scripts/ci/alert-pat-down.mjs', mode: 'identical' };
+  const base = { site: 'aaa', corpus: 'bbb' };
+  const now = { site: 'ccc', corpus: 'bbb' };
+  const withPin = classify(entry, now, base, [], ['scripts/load-rc-env.mjs']);
+  const withoutPin = classify(entry, now, base, [], []);
+  assert.equal(withPin.state, 'site-ahead');
+  assert.equal(withoutPin.state, 'site-ahead');
+  assert.equal(withPin.actionable, withoutPin.actionable);
+  assert.ok(withPin.detail.includes('dipendenza IMPLICITA'), 'l\'avviso non compare nel detail');
+  assert.ok(withPin.detail.includes('scripts/load-rc-env.mjs'), 'il referente non e\' nominato');
+  assert.ok(withPin.detail.startsWith(withoutPin.detail), 'il testo preesistente e\' stato riscritto invece che esteso');
+});
+
+test('senza dichiarazioni il `detail` resta byte-identico a prima', () => {
+  const entry = { path: 'scripts/ci/alert-pat-down.mjs', mode: 'identical' };
+  const v = classify(entry, { site: 'ccc', corpus: 'bbb' }, { site: 'aaa', corpus: 'bbb' }, [], []);
+  assert.equal(
+    v.detail,
+    'Il file e\' dichiarato identico al sito: la modifica del sito e\' copiabile qui cosi\' com\'e\'.',
+  );
+});
