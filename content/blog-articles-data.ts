@@ -34491,6 +34491,15 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'bollettino-frontaliere-2026-09-07',
+ category: 'novita',
+ date: '2026-09-07T10:02:12.831Z',
+ image: '/images/blog/bollettino-frontaliere-2026-09-07.webp',
+ hasCalculator: false,
+ authorSlug: 'marco-ferrari',
+ authorName: 'Marco Ferrari',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)
