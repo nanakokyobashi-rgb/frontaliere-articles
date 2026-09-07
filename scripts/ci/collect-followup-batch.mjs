@@ -188,27 +188,150 @@ export function maxTurnsFor(batchCount) {
 // ── I/O helpers ─────────────────────────────────────────────────────
 
 /**
+ * Guasti di CONFIGURAZIONE raccolti da `runGate` durante la run: un gate che non
+ * esiste, o che esiste ma non si carica. NON contiene gli inconclusive
+ * legittimi, che restano silenziosi per costruzione.
+ * Chiave: `<gate>|<kind>` — un gate rotto vale una riga sola, non una per PR.
+ * @type {Map<string, {gate:string, kind:string, detail:string, count:number}>}
+ */
+const gateFaults = new Map();
+
+/**
+ * Firma di un fallimento di CARICAMENTO del modulo, letta su stderr del figlio.
+ * Distingue «il gate non si carica» (guasto: import rotto, export inesistente,
+ * sintassi invalida) da «il gate è crashato mentre girava» (incertezza: rientra
+ * nel proceed-safe silenzioso).
+ * ponytail: match testuale su stderr, non un codice d'uscita dedicato — Node non
+ * ne espone uno che separi load-time da run-time. Se un giorno un errore di
+ * caricamento sfuggisse alla lista, il caso degrada nel ramo inconclusive, cioè
+ * nel comportamento di prima: mai peggio del precedente.
+ */
+const MODULE_LOAD_ERROR =
+  /ERR_MODULE_NOT_FOUND|ERR_UNSUPPORTED_DIR_IMPORT|ERR_UNKNOWN_FILE_EXTENSION|ERR_REQUIRE_ESM|SyntaxError|Cannot find (?:module|package)|does not provide an export named/;
+
+/**
+ * Registra un guasto e lo URLA subito nel log come annotation GitHub Actions
+ * (`::error::`), che compare nella pagina della run senza aprire i log. La
+ * deduplica è sulla coppia gate+tipo: la prima occorrenza annota, le successive
+ * incrementano solo il contatore che finisce nel run summary.
+ */
+function recordGateFault(gate, kind, detail) {
+  const key = `${gate}|${kind}`;
+  const seen = gateFaults.get(key);
+  if (seen) {
+    seen.count += 1;
+    return;
+  }
+  gateFaults.set(key, { gate, kind, detail, count: 1 });
+  console.log(
+    `::error title=Gate del follow-up ${kind}::${gate} — ${detail}. ` +
+    'Il gate NON ha girato: il triage procede senza di lui (proceed-safe), ' +
+    'ma questo è un guasto di configurazione, non un caso incerto.',
+  );
+}
+
+/**
  * Invoke an existing per-PR gate script as a subprocess and parse its
  * `key=value` stdout line. Reuses the gate logic byte-per-byte (no modification →
  * no risk to its tests / proceed-safe semantics). GITHUB_OUTPUT/STEP_SUMMARY are
  * blanked for the child so it only prints to stdout (no pollution of OUR outputs).
+ *
+ * ## Tre esiti, non due
+ *
+ * Il verso del proceed-safe non cambia: qualunque cosa vada storta, la funzione
+ * restituisce `null` e il chiamante TIENE la PR. Perdere una follow-up di una PR
+ * organica costa più che triagiarne una di troppo (FOLLOWUP.md). Quello che
+ * cambia è il SILENZIO, che fino a oggi copriva tre condizioni opposte:
+ *
+ *  1. **gate assente** — nessun file al path risolto. Guasto di configurazione:
+ *     il gate non è incerto, non esiste. Misurato il 2026-09-07: i due gate
+ *     mancavano da sempre in questo repo, quindi «inconclusive» non era raro,
+ *     era il 100% (46 PR su 46 in tre run, zero soppressioni in assoluto).
+ *     → RUMOROSO.
+ *  2. **gate presente ma non caricabile** — import che non risolve, export che
+ *     non esiste, sintassi invalida. Stesso guasto, altra forma. → RUMOROSO.
+ *  3. **gate girato e inconclusive** — ha risposto qualcosa che non si parsa, o
+ *     è crashato a metà. Questa è incertezza vera, ed è il proceed-safe
+ *     legittimo. → silenzioso, come prima.
+ *
+ * L'invariante di CI — «ogni gate invocato per nome esiste e si carica» — vive
+ * altrove, in `generator/tests/rungate-targets-exist.test.mjs`, ed è statico.
+ * Qui l'invariante è di RUNTIME: in produzione HERE può non essere il checkout
+ * che la CI ha controllato. Sono due invarianti diversi, deliberatamente non
+ * condivisi.
+ *
  * @returns {boolean|null} parsed boolean, or null when inconclusive (proceed-safe).
  */
 function runGate(scriptName, prNumber, outputKey) {
+  const gatePath = path.join(HERE, scriptName);
+
+  // Esito 1: il file non c'è. Controllato PRIMA dello spawn perché lanciamo
+  // `node <path>`, non il file: l'assenza non arriva come ENOENT dello spawn ma
+  // come uscita non-zero di node, indistinguibile da un crash del gate.
+  if (!fs.existsSync(gatePath)) {
+    recordGateFault(scriptName, 'assente', `nessun file in ${gatePath}`);
+    return null;
+  }
+
   try {
-    const out = execFileSync('node', [path.join(HERE, scriptName)], {
+    const out = execFileSync('node', [gatePath], {
       encoding: 'utf-8',
       maxBuffer: 32 * 1024 * 1024,
       env: { ...process.env, PR_NUMBER: String(prNumber), GITHUB_OUTPUT: '', GITHUB_STEP_SUMMARY: '' },
     });
     const m = new RegExp(`${outputKey}=(true|false)`).exec(out);
-    return m ? m[1] === 'true' : null;
-  } catch {
-    return null; // proceed-safe: gate crash → inconclusive → caller includes the PR.
+    return m ? m[1] === 'true' : null; // esito 3: girato, output non parsabile.
+  } catch (e) {
+    const stderr = String(e?.stderr || '');
+    // Esito 2: il modulo non si carica.
+    if (MODULE_LOAD_ERROR.test(stderr)) {
+      const line = stderr.split('\n').find((l) => MODULE_LOAD_ERROR.test(l)) || stderr;
+      recordGateFault(scriptName, 'non caricabile', line.trim().slice(0, 200));
+      return null;
+    }
+    return null; // esito 3: proceed-safe — gate crash → inconclusive → keep the PR.
+  }
+}
+
+/**
+ * Scrive i guasti raccolti nel `$GITHUB_STEP_SUMMARY`, cioè dove un umano che
+ * apre la run li vede senza scorrere i log. Le annotation `::error::` le ha già
+ * emesse `recordGateFault` al momento del guasto; qui si aggiunge il conteggio,
+ * che è l'informazione che dice se il gate è saltato una volta o sempre.
+ *
+ * ## PORTA APERTA: «fatale» non è deciso qui
+ *
+ * Se il proprietario decide che un gate assente deve FERMARE il ciclo invece di
+ * lasciarlo procedere urlando, la modifica è una riga in fondo a questa
+ * funzione: `process.exitCode = 1;` (eventualmente solo per
+ * `kind === 'assente'`). Non è stata presa perché il ciclo del corpus alimenta
+ * la generazione degli articoli e fermarlo ha un costo di prodotto che non
+ * spetta a questo script valutare. Nota che l'uscita non-zero renderebbe
+ * fallita la run, quindi il watermark non avanzerebbe e la finestra sarebbe
+ * ri-coperta dalla run successiva: nessuna follow-up persa, ma nessun triage
+ * finché il guasto non è riparato.
+ */
+function reportGateFaults() {
+  if (!gateFaults.size) return;
+  const rows = [...gateFaults.values()].map(
+    (f) => `- \`${f.gate}\` — **${f.kind}** — ${f.detail} (su ${f.count} PR)`,
+  );
+  console.log(`Gate NON eseguiti in questa run: ${gateFaults.size}.`);
+  for (const r of rows) console.log(r);
+  if (process.env.GITHUB_STEP_SUMMARY) {
+    fs.appendFileSync(
+      process.env.GITHUB_STEP_SUMMARY,
+      '## ⚠️ Gate del follow-up NON eseguiti\n\n' +
+      rows.join('\n') + '\n\n' +
+      'Questi gate non hanno girato: e\' un guasto di configurazione, non un ' +
+      'esito incerto. Il batch e\' stato costruito SENZA la loro soppressione, ' +
+      'quindi puo\' contenere PR che avrebbero dovuto essere scartate.\n',
+    );
   }
 }
 
 function emit(batch) {
+  reportGateFaults();
   const csv = batch.join(',');
   const count = batch.length;
   const maxTurns = maxTurnsFor(count);
