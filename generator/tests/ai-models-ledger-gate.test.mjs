@@ -39,7 +39,9 @@ import {
   resetState,
   _cooldownSeverityDurations,
   _perMachineEndpointEnvVars,
+  _restorableExhaustUntil,
   __installScoreStoreForTests,
+  EXHAUST_RESTORE_MAX_AHEAD_MS,
 } from '../scripts/lib/ai-models.mjs';
 
 const SRC = readFileSync(new URL('../scripts/lib/ai-models.mjs', import.meta.url), 'utf8');
@@ -790,6 +792,83 @@ describe('#895 — il memo del cap appreso e la porta del ledger sono due cose d
         );
         return true;
       },
+    );
+  });
+});
+
+/**
+ * ── UN BAN PERSISTITO NON PUO' ESSERE ASSORBENTE (#1045) ────────────────────
+ *
+ * `exhaustedUntil` vive nello stesso documento condiviso, e ha una asimmetria
+ * che il resto del file non copre: lo scrive chiunque, ma lo AZZERA un solo
+ * writer, e solo dietro un successo di QUEL modello in questo processo. Un
+ * valore datato avanti nel futuro (clock skew di un runner, residuo di una
+ * versione precedente) fa saltare il modello in pre-flight su ogni macchina
+ * dei due repo — quindi nessun successo, quindi nessuno che possa azzerarlo.
+ * Il tetto sul restore e' cio' che rompe il ciclo.
+ */
+describe('restore di exhaustedUntil: tetto sulla distanza nel futuro', () => {
+  const now = new Date('2026-03-05T09:00:00.000Z');
+
+  it('ripristina un ban a poche ore (mezzanotte UTC successiva: il caso legittimo)', () => {
+    const until = new Date('2026-03-06T00:00:00.000Z');
+    assert.deepEqual(_restorableExhaustUntil(until.toISOString(), now), {
+      until,
+      reason: 'restore',
+    });
+  });
+
+  it('IGNORA un ban a 10 anni invece di ripristinarlo', () => {
+    const until = new Date(now.getTime() + 10 * 365 * 24 * 3_600_000);
+    const { reason } = _restorableExhaustUntil(until.toISOString(), now);
+    assert.equal(
+      reason,
+      'too-far-ahead',
+      'un exhaustedUntil oltre il tetto e\' assorbente: nessun writer resta capace di toglierlo',
+    );
+  });
+
+  it('ignora un ban gia\' scaduto, come prima', () => {
+    const until = new Date(now.getTime() - 3_600_000);
+    assert.deepEqual(_restorableExhaustUntil(until.toISOString(), now), { until, reason: 'expired' });
+  });
+
+  it('il tetto sta appena sopra le 24h del writer, per il clock skew', () => {
+    assert.ok(
+      EXHAUST_RESTORE_MAX_AHEAD_MS > 24 * 3_600_000,
+      'il writer scrive la mezzanotte UTC successiva: un tetto <= 24h scarterebbe ban legittimi',
+    );
+    assert.ok(EXHAUST_RESTORE_MAX_AHEAD_MS <= 48 * 3_600_000, 'un tetto largo giorni non e\' un tetto');
+    // Al limite esatto si ripristina; un millisecondo oltre no.
+    assert.equal(
+      _restorableExhaustUntil(new Date(now.getTime() + EXHAUST_RESTORE_MAX_AHEAD_MS).toISOString(), now).reason,
+      'restore',
+    );
+    assert.equal(
+      _restorableExhaustUntil(new Date(now.getTime() + EXHAUST_RESTORE_MAX_AHEAD_MS + 1).toISOString(), now).reason,
+      'too-far-ahead',
+    );
+  });
+
+  it('accetta un Firestore Timestamp (toDate) come la stringa ISO', () => {
+    const until = new Date(now.getTime() + 3_600_000);
+    assert.equal(_restorableExhaustUntil({ toDate: () => until }, now).reason, 'restore');
+  });
+
+  it('un valore illeggibile o assente non ripristina niente', () => {
+    assert.equal(_restorableExhaustUntil('non-una-data', now).reason, 'unparsable');
+    assert.equal(_restorableExhaustUntil(null, now).reason, 'absent');
+  });
+
+  it('il restore di initScoreStore passa dall\'helper, non da un confronto in-line', () => {
+    assert.ok(
+      SRC_CODE.includes('_restorableExhaustUntil(data.exhaustedUntil, now)'),
+      'il ramo di restore deve chiamare l\'helper: in-line non e\' esercitabile da nessun test',
+    );
+    assert.equal(
+      (SRC_CODE.match(/resetTime > now/g) || []).length,
+      0,
+      'un confronto `resetTime > now` senza tetto e\' esattamente il difetto di #1045',
     );
   });
 });
