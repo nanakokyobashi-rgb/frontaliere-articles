@@ -895,7 +895,22 @@ function resolvedLocalImports(rel, source, known) {
     const base = path.posix.normalize(path.posix.join(dir, spec));
     // Gli specificatori del ciclo portano l'estensione, ma engine/ e host/
     // usano la forma senza: si prova la stessa risoluzione di Node.
-    const hit = [base, `${base}.mjs`, `${base}.js`, `${base}/index.mjs`, `${base}/index.js`].find(known);
+    // I rami `.ts` non sono decorativi: engine/ e host/ sono TypeScript (25
+    // voci `.ts` nel manifest), e in TypeScript l'import relativo si scrive
+    // senza estensione. Senza `${base}.ts` un modulo raggiunto in quella forma
+    // non veniva riconosciuto affatto, quindi la contraddizione che questo
+    // scanner esiste per vedere — una voce `identical` che importa un file
+    // dichiarato assente dal sito — restava invisibile proprio sull'albero in
+    // cui la forma senza estensione e' la norma (#1032).
+    const hit = [
+      base,
+      `${base}.mjs`,
+      `${base}.js`,
+      `${base}.ts`,
+      `${base}/index.mjs`,
+      `${base}/index.js`,
+      `${base}/index.ts`,
+    ].find(known);
     if (hit && !out.includes(hit)) out.push(hit);
   }
   return out;
