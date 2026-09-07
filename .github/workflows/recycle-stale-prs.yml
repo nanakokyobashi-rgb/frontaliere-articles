@@ -313,7 +313,7 @@ jobs:
           # jq su una forma inattesa, rate-limit, token scaduto — lascia la
           # variabile VUOTA e indistinguibile da «nessun residuo». Se capita a
           # entrambe (stessa causa: e' la stessa API con lo stesso token), il
-          # ramo sotto chiude il digest con `--resolve` mentre il backlog
+          # ramo sotto chiude il digest mentre il backlog
           # needs-human e' pieno: senza fallire, e sotto `continue-on-error:
           # true`, l'unico canale che gli umani leggono sparirebbe in silenzio.
           # I due gemelli che chiudono con `--resolve` in questo repo
@@ -350,7 +350,7 @@ jobs:
           # #733), e dal commento di recurrence successivo l'issue si elenca
           # fra i propri item. Un report che si auto-elenca non converge mai:
           # la condizione di chiusura che questo stesso step scrive nel body
-          # (liste entrambe vuote, richiusa sotto con `--resolve`) diventa
+          # (liste entrambe vuote, richiusa sotto per numero) diventa
           # irraggiungibile, perche' la lista issue contiene sempre almeno se
           # stessa. L'esclusione va fatta QUI, sulla chiave di dedup, non
           # sperando che la label resti quella di partenza.
@@ -384,16 +384,53 @@ jobs:
             # #733 ne e' l'osservazione: dopo il fix dell'auto-elencamento la
             # sua lista puo' finalmente svuotarsi, ma senza un chiuditore
             # sarebbe rimasta aperta lo stesso — un secondo assorbente dietro
-            # al primo. `--resolve` e' la stessa via che gia' richiude gli
-            # allarmi a titolo stabile (ticker-shadow-alert.mjs,
-            # lockstep-stall-watch.mjs) e cerca l'issue con LA STESSA
-            # ricerca per titolo con cui la creerebbe: aprire e richiudere
-            # restano simmetrici sulla chiave di dedup.
+            # al primo.
+            #
+            # La chiusura risolve il NUMERO dell'issue con la STESSA
+            # uguaglianza esatta con cui la lista qui sopra la esclude
+            # (`.title == env.DEDUP_TITLE`), e chiude quel numero. Passava da
+            # `github-issue-creator.mjs --resolve`, che cerca per PREFISSO
+            # SANITIZZATO a 60 char (`searchIssuesByTitlePrefix`,
+            # `startsWith`): il titolo di dedup ne ha 52, quindi il prefisso e'
+            # il titolo INTERO e qualunque issue aperta il cui titolo comincia
+            # con questa chiave e prosegue (`… — 2026-09`, un duplicato
+            # rinominato, una escalation che cita la chiave) sarebbe stata
+            # chiusa AL POSTO del digest. Quella issue, senza `needs-human`,
+            # non compare in nessuna delle due liste: le liste restano vuote a
+            # ogni run, il digest resta aperto con un elenco falso e a ogni
+            # giro si chiude un'altra issue estranea. Le due forme della chiave
+            # divergono, ed e' la divergenza il difetto — non il match per
+            # prefisso, che in `github-issue-creator.mjs` e' deliberato
+            # («Deliberately asymmetric», :296) e su cui contano tutti gli
+            # altri chiamanti. Qui apertura, esclusione e chiusura tornano a
+            # usare UNA sola forma della chiave.
+            #
+            # `gh api --paginate` e non `gh issue list --limit N` per la stessa
+            # ragione delle due query sopra: `--limit` tronca IN SILENZIO, e un
+            # digest oltre il cap non verrebbe trovato — che qui vuol dire «non
+            # chiudo» (innocuo) ma con un cap piu' basso della realta' e' la
+            # stessa bugia silenziosa. Con `--paginate` il `--jq` gira PER
+            # PAGINA, quindi `first(...)` puo' produrre una riga per pagina:
+            # `head -n 1` fuori dalla pipeline di `gh` (su una variabile gia'
+            # catturata, per non dare un SIGPIPE a `gh` sotto `pipefail`).
             echo "Niente needs-human aperto (ne PR ne issue): richiudo l'issue dedup, se aperta."
-            node scripts/lib/github-issue-creator.mjs \
-              --resolve \
-              --title "$DEDUP_TITLE" \
-              --workflow "Recycle stale PRs"
+            DEDUP_MATCHES=$(gh api --paginate "repos/$GH_REPO/issues?state=open&per_page=100" \
+              --jq 'first(.[] | select(.pull_request | not) | select(.title == env.DEDUP_TITLE) | .number)')
+            DEDUP_RC=$?
+            if [ "$DEDUP_RC" -ne 0 ]; then
+              # Stesso principio del guard sopra: query fallita non e' «nessun
+              # digest aperto». Non si chiude niente e lo step diventa rosso.
+              echo "::error::Query dell'issue dedup fallita (rc=$DEDUP_RC): non chiudo niente. Un risultato vuoto per un errore non e «issue gia chiusa»."
+              exit 1
+            fi
+            DEDUP_NUMBER=$(printf '%s\n' "$DEDUP_MATCHES" | head -n 1)
+            if [ -z "$DEDUP_NUMBER" ]; then
+              echo "Nessuna issue aperta con il titolo di dedup: niente da chiudere."
+              exit 0
+            fi
+            echo "Chiudo l'issue dedup #$DEDUP_NUMBER."
+            gh issue close "$DEDUP_NUMBER" \
+              --comment "Chiusa da \`Recycle stale PRs\`: nessun oggetto \`needs-human\` aperto (ne PR ne issue), la condizione di chiusura scritta nel corpo e soddisfatta. Il prossimo residuo riapre un'issue nuova con lo stesso titolo."
             exit 0
           fi
           PR_COUNT=0; [ -n "$PRS" ] && PR_COUNT=$(printf '%s\n' "$PRS" | wc -l | tr -d ' ')
