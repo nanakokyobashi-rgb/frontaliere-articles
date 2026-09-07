@@ -1,5 +1,4 @@
 {
-  "https://www.rsi.ch/s/3949320": "gianotti-delegata-geneva-ai-summit-2027",
   "https://www.rsi.ch/info/svizzera/sconti-sui-farmaci-la-vigilanza-%c3%a8-poco-efficace--3947373.html": "sconti-farmaci-vigilanza-poco-efficace",
   "https://www.rsi.ch/info/scienza-e-tecnologia/la-scienza-che-%e2%80%9csfrutta%e2%80%9d-l%e2%80%99eclissi-solare--3949668.html": "eclissi-solare-studi",
   "https://www.tio.ch/ticino/politica/1943609/tram-treno-aggiudicato-un-appalto-da-8-6-milioni": "tram-treno-aggiudicato-appalto",
@@ -2037,6 +2036,11 @@
   "https://www.cdt.ch/news/svizzera/nei-parchi-giochi-svizzeri-91-mozziconi-di-sigarette-438534": {
     "articleId": "salute-parchi-giochi-svizzeri-mozziconi-sigarette",
     "ts": "2026-09-07T13:16:04.335Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/dal-mondo/cronaca/1948503/vittime-morte-nepal-lutto-inondazione": {
+    "articleId": "nepal-inondazione-lutto-vittime",
+    "ts": "2026-09-07T13:46:52.537Z",
     "keyForm": 2
   }
 }
