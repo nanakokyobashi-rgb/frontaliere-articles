@@ -722,12 +722,34 @@ function walkSubtree(root, acc = [], blind = new Map()) {
  *
  * Ritorna `null` per un basename senza estensione di codice: li' il match
  * intero e' gia' esatto e non c'e' niente da allargare.
+ *
+ * ## Perche' la classe e' ancorata alla RIGA
+ *
+ * `[^'"\`]*` non e' ancorato e attraversa i newline. Mezzo albero ha commenti
+ * in italiano (`l'estensione`, `dell'engine`): l'apostrofo di prosa apre la
+ * classe di virgolette, e qualunque `/stem'` in una riga SUCCESSIVA la chiude.
+ * Il verso e' conservativo — un accoppiamento di troppo costa una copia a mano
+ * — ma su uno stem frequente trasforma una voce trasportabile in un blocco
+ * permanente con una ragione falsa nel report: il canale spento dal lato del
+ * no che non scade. Uno specificatore import sta su una riga sola, quindi
+ * `\n` nella classe negata non toglie nessun match vero. Misurato sull'albero
+ * di oggi: zero delle 157 voci `identical` cambia insieme di accoppiamenti.
+ *
+ * ## Perche' l'estensione compilata e' ammessa come coda
+ *
+ * Nello stile NodeNext un sorgente `.ts` si importa `from './x/safeTruncate.js'`:
+ * li' lo stem non e' seguito dalla virgoletta di chiusura e `includes('safeTruncate.ts')`
+ * e' falso, quindi la voce tornava a ZERO accoppiamenti — cioe' trasportabile
+ * da sola, che e' esattamente il buco di #853. L'albero non ha ancora import di
+ * quella forma, quindi il guard teneva per CONVENZIONE: il giorno in cui
+ * `host/` adotta gli specificatori `.js` il falso silenzio sarebbe rientrato
+ * senza che nulla diventasse rosso.
  */
 export function importSpecifierRe(base) {
   const stem = base.replace(/\.(?:ts|tsx|mts|cts|mjs|cjs|js|jsx)$/, '');
   if (stem === base) return null;
   const esc = stem.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-  return new RegExp(`['"\`][^'"\`]*[./]${esc}['"\`]`);
+  return new RegExp(`['"\`][^'"\`\n]*[./]${esc}(?:\\.(?:js|jsx|mjs|cjs))?['"\`]`);
 }
 
 export function localCouplings(rel, modeOf) {
