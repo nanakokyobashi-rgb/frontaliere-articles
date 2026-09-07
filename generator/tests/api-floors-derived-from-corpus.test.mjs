@@ -38,6 +38,8 @@ import {
   FLOOR_RETENTION,
   floorFrom,
   countSourceArticles,
+  countSeoEntries,
+  collectSeoEntryIds,
   sectionFloor,
 } from '../../scripts/lib/corpus-floors.mjs';
 import {
@@ -56,6 +58,9 @@ const BLOG_INDEX = fs.readFileSync(join(ROOT, 'scripts/build-blog-index.mjs'), '
 function healthy() {
   const expected = {
     sourceArticles: { frontaliere: 3785, svizzera: 1850 },
+    // La popolazione che GENERA i feed: le voci datate dei chunk SEO, non i
+    // file di corpo. Diverge dai corpi per costruzione — e' il punto.
+    feedSources: { frontaliere: 3750, svizzera: 1936 },
     sourceImages: 1990,
     rssMaxItems: 50,
   };
@@ -122,12 +127,77 @@ test('un feed troncato viene visto, e un feed corto per corpus corto no', () => 
   assert.match(violations[0], /rss-fr\.xml: 3 <item>/);
 
   // Sezione da 10 articoli: un feed da 10 e' completo, non troncato — e'
-  // il motivo per cui l'atteso e' min(RSS_MAX_ITEMS, corpus) e non il tetto.
+  // il motivo per cui l'atteso e' min(RSS_MAX_ITEMS, popolazione) e non il tetto.
   const tiny = {
     measured: { articleCounts: { articles: 10, swissArticles: 10 }, feeds: [{ name: 'rss.xml', items: 10 }], images: null },
-    expected: { sourceArticles: { frontaliere: 10, svizzera: 10 }, sourceImages: 0, rssMaxItems: 50 },
+    expected: {
+      sourceArticles: { frontaliere: 10, svizzera: 10 },
+      feedSources: { frontaliere: 10, svizzera: 10 },
+      sourceImages: 0,
+      rssMaxItems: 50,
+    },
   };
   assert.deepEqual(floorViolations(tiny.measured, tiny.expected), []);
+});
+
+/*
+ * IL PAVIMENTO DEI FEED SI DERIVA DALLA POPOLAZIONE CHE LI GENERA.
+ *
+ * Gli `<item>` non nascono dai file di corpo: `buildSectionFeeds` li costruisce
+ * da `parseSeoBlogs` sui chunk elencati in `RSS_SECTIONS[].seoFiles`. Le due
+ * popolazioni sono scollegate e divergono gia' oggi. Un pavimento tarato sui
+ * corpi sbaglia in entrambe le direzioni, e la peggiore per il ciclo non e' il
+ * falso negativo: una sezione con pochi chunk e un feed corto ma COMPLETO
+ * bloccherebbe l'intera pubblicazione.
+ */
+test('un feed corto ma completo non blocca la pubblicazione, anche con molti corpi', () => {
+  const measured = {
+    articleCounts: { articles: 3782, swissArticles: 1850 },
+    feeds: [{ name: 'rss.xml', items: 30 }, { name: 'rss-de.xml', items: 30 }],
+    images: null,
+  };
+  // 3785 corpi ma solo 30 voci nei chunk: il feed da 30 e' tutto cio' che i
+  // chunk possono produrre. Col vecchio riferimento il pavimento era
+  // floor(min(50, 3785) * 0,9) = 45, e questo set — corretto — sfondava.
+  const expected = {
+    sourceArticles: { frontaliere: 3785, svizzera: 1850 },
+    feedSources: { frontaliere: 30, svizzera: 1936 },
+    sourceImages: 0,
+    rssMaxItems: 50,
+  };
+  assert.equal(floorFrom(Math.min(50, 3785)), 45, 'il pavimento derivato dai corpi sarebbe stato 45');
+  assert.deepEqual(floorViolations(measured, expected), []);
+});
+
+test('chunk pieni e feed troncato restano una violazione, con la misura giusta', () => {
+  const measured = {
+    articleCounts: { articles: 3782, swissArticles: 1850 },
+    feeds: [{ name: 'rss.xml', items: 12 }],
+    images: null,
+  };
+  const expected = {
+    sourceArticles: { frontaliere: 3785, svizzera: 1850 },
+    feedSources: { frontaliere: 3750, svizzera: 1936 },
+    sourceImages: 0,
+    rssMaxItems: 50,
+  };
+  const violations = floorViolations(measured, expected);
+  assert.equal(violations.length, 1);
+  assert.match(violations[0], /rss\.xml: 12 <item> contro 45 attesi/);
+  assert.match(violations[0], /3750 voci nei chunk SEO di frontaliere/);
+});
+
+test("chunk SEO assenti = violazione, una per sezione e non una per feed", () => {
+  const { measured, expected } = healthy();
+  // Corpi intatti, chunk irraggiungibili: e' la lista dei chunk che non
+  // risolve — il modo esatto in cui rss.xml e' rimasto fermo tre mesi. Senza
+  // questa regola il pavimento dei feed sarebbe 0, cioe' nessun gate.
+  const noChunks = { ...expected, feedSources: { frontaliere: 0, svizzera: 0 } };
+  const violations = floorViolations(measured, noChunks);
+  assert.equal(violations.length, 2, `una riga per sezione: ${JSON.stringify(violations)}`);
+  assert.match(violations.join('\n'), /chunk di frontaliere/);
+  assert.match(violations.join('\n'), /chunk di svizzera/);
+  for (const v of violations) assert.match(v, /content[\\/]seo/);
 });
 
 /*
@@ -141,7 +211,12 @@ test('un feed troncato viene visto, e un feed corto per corpus corto no', () => 
  */
 test("corpus sorgente assente = violazione, non un pass silenzioso", () => {
   const { measured } = healthy();
-  const noCorpus = { sourceArticles: { frontaliere: 0, svizzera: 0 }, sourceImages: 0, rssMaxItems: 50 };
+  const noCorpus = {
+    sourceArticles: { frontaliere: 0, svizzera: 0 },
+    feedSources: { frontaliere: 0, svizzera: 0 },
+    sourceImages: 0,
+    rssMaxItems: 50,
+  };
   // Artefatto arbitrariamente troncato: un articolo per sezione, feed a un item.
   const truncated = {
     articleCounts: { articles: 1, swissArticles: 1 },
@@ -158,15 +233,15 @@ test("corpus sorgente assente = violazione, non un pass silenzioso", () => {
 
 test("una sola sezione senza corpus e' segnalata una volta, e non spegne l'altra", () => {
   const { measured, expected } = healthy();
-  const violations = floorViolations(measured, { ...expected, sourceArticles: { frontaliere: 3785, svizzera: 0 } });
+  // Solo i CORPI svizzera mancano: i chunk ci sono, quindi i feed svizzera
+  // restano gatati contro il loro riferimento invece di aggiungere una riga.
+  const noSwissBodies = { ...expected, sourceArticles: { frontaliere: 3785, svizzera: 0 } };
+  const violations = floorViolations(measured, noSwissBodies);
   assert.equal(violations.length, 1, 'il feed svizzera non deve aggiungere una seconda riga sullo stesso riferimento');
   assert.match(violations[0], /manifest\.counts\.swissArticles/);
-  // I feed frontaliere restano gatati contro il loro corpus, che c'e'.
+  // I feed frontaliere restano gatati contro i chunk, che ci sono.
   const alsoTruncated = { ...measured, feeds: [...measured.feeds, { name: 'rss-fr.xml', items: 2 }] };
-  assert.equal(
-    floorViolations(alsoTruncated, { ...expected, sourceArticles: { frontaliere: 3785, svizzera: 0 } }).length,
-    2,
-  );
+  assert.equal(floorViolations(alsoTruncated, noSwissBodies).length, 2);
 });
 
 test("images-manifest emesso senza public/images/blog e' una violazione", () => {
@@ -230,6 +305,44 @@ test("il corpus di questo checkout e' la verita' di terra, e regge i due contato
   assert.ok(expected.sourceArticles.svizzera > 500, `svizzera: ${expected.sourceArticles.svizzera}`);
   assert.equal(expected.rssMaxItems, 50, 'RSS_MAX_ITEMS arriva da engine/rssFeeds.mjs, non da una copia');
   assert.equal(expected.sourceArticles.frontaliere, countSourceArticles(ROOT, 'frontaliere'));
+});
+
+test('i feed di questo checkout sono gatati contro i chunk che li generano', async () => {
+  const { RSS_SECTIONS } = await import('../../engine/rssFeeds.mjs');
+  const expected = await expectFromCorpus(ROOT);
+  for (const section of RSS_SECTIONS) {
+    assert.equal(
+      expected.feedSources[section.id],
+      countSeoEntries(ROOT, section.seoFiles),
+      `${section.id}: la lista dei chunk arriva da RSS_SECTIONS, non da una seconda copia`,
+    );
+    assert.ok(expected.feedSources[section.id] > 500, `${section.id}: ${expected.feedSources[section.id]}`);
+  }
+  // Le due popolazioni divergono davvero: se coincidessero, questo fix non
+  // avrebbe oggetto e il test non starebbe misurando niente.
+  assert.notEqual(expected.feedSources.frontaliere, expected.sourceArticles.frontaliere);
+});
+
+test('countSeoEntries conta le voci come le conta parseSeoBlogs', () => {
+  const dir = fs.mkdtempSync(join(os.tmpdir(), 'seo-entries-'));
+  const seoDir = join(dir, 'content', 'seo');
+  fs.mkdirSync(seoDir, { recursive: true });
+  const entry = (id, extra = '"datePublished": "2026-01-01",') =>
+    `  'blog-${id}': {\n    "headline": "T ${id}",\n    ${extra}\n  },\n`;
+  fs.writeFileSync(
+    join(seoDir, 'seo-blog.ts'),
+    `export const SEO = {\n${entry('a')}${entry('b')}${entry('c', '')}` +
+      `  'blog-d': {\n    "headline": "",\n    "datePublished": "2026-01-01",\n  },\n};\n`,
+  );
+  // Lo stesso id in due chunk: un solo `<item>`, perche' parseSeoBlogs chiave
+  // una Map per articleId.
+  fs.writeFileSync(join(seoDir, 'seo-blog-2.ts'), `export const SEO = {\n${entry('a')}${entry('e')}};\n`);
+
+  assert.equal(countSeoEntries(dir, ['seo-blog.ts', 'seo-blog-2.ts']), 3, 'a, b, e — non c (senza data), non d (headline vuota), e a una volta sola');
+  // Un chunk assente viene saltato, come lo salta parseSeoBlogs.
+  assert.equal(countSeoEntries(dir, ['seo-blog.ts', 'mai-esistito.ts']), 2);
+  assert.equal(collectSeoEntryIds('nessuna voce qui').size, 0);
+  fs.rmSync(dir, { recursive: true, force: true });
 });
 
 test("publish-api.yml non porta piu' un pavimento assoluto scritto a mano", () => {
