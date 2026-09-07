@@ -1,5 +1,4 @@
 {
-  "https://www.rsi.ch/info/dialogo/le-tracce-dei-climatizzatori-ad-alta-quota--3935661.html": "climatizzatori-ad-alta-quota-i-ricercatori-rilevano-le-tracce-dei-refrigeranti",
   "https://www.rsi.ch/info/ticino-grigioni-e-insubria/da-s-chanf-a-livigno-in-treno-coira-dice-s%c3%ac--3949356.html": "trenino-rossoschanf-livigno",
   "https://www.rsi.ch/info/salute/medicina-genetica-l%e2%80%99estate-delle-buone-notizie--3940095.html": "medicina-genetica-in-svizzera",
   "https://www.tio.ch/svizzera/attualita/1943435/servizio-caso-votazione-iniziativa-tre-ricorsi": "inizia-servizio-civico-ricorsi-irricevibili",
@@ -1929,6 +1928,11 @@
   "https://www.admin.ch/it/newnsb/ofsdv0mm5gua": {
     "articleId": "mercato-lavoro-svizzera-agosto-2026",
     "ts": "2026-09-07T07:38:19.064Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/info/scienza-e-tecnologia/cuore-e-intelligenza-artificiale-nuovi-strumenti-predittivi--4051665.html": {
+    "articleId": "intelligenza-artificiale-cardiologia-2026",
+    "ts": "2026-09-07T07:46:22.178Z",
     "keyForm": 2
   }
 }
