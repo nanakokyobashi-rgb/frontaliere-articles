@@ -1,5 +1,4 @@
 {
-  "https://www.rsi.ch/s/3947496": "governo-dice-no-iniziativa-alimentazione",
   "https://www.rsi.ch/s/3946380": "autorita-argoviesi-sotto-indagine-per-il-caso-dell-ex-parlamentare-udc",
   "https://www.rsi.ch/s/3949320": "gianotti-delegata-geneva-ai-summit-2027",
   "https://www.rsi.ch/info/svizzera/sconti-sui-farmaci-la-vigilanza-%c3%a8-poco-efficace--3947373.html": "sconti-farmaci-vigilanza-poco-efficace",
@@ -2029,6 +2028,11 @@
   "https://www.tio.ch/ticino/attualita/1948472/melide-igor": {
     "articleId": "melide-riqualifica-centro",
     "ts": "2026-09-07T12:45:00.187Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/festival-zurigo%3a-alla-svizzera-luna-wedler-il-golden-eye-award/92016935": {
+    "articleId": "luna-wedler-golden-eye-award-zurigo",
+    "ts": "2026-09-07T13:05:52.037Z",
     "keyForm": 2
   }
 }
