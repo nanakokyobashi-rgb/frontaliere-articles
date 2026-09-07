@@ -64,7 +64,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v5
         with:
-          fetch-depth: 1
+          # `fetch-depth: 0` e non 1: la verifica delle baseline del manifest
+          # contro la storia dei path (passo in fondo) e' integrale o non e'.
+          # Con un checkout shallow lo script esce 1 invece di dichiarare
+          # verificato cio' che non ha potuto leggere, quindi la profondita' fa
+          # parte del contratto del job, non e' un dettaglio del runner.
+          fetch-depth: 0
 
       - name: Setup Node.js
         uses: actions/setup-node@v5
@@ -112,3 +117,22 @@ jobs:
             ARGS="--strict"
           fi
           node scripts/ci/verify-crawler-contract-provenance.mjs $ARGS
+
+      # Le baseline del manifest riconfrontate con la storia REALE dei path.
+      # Le altre due verifiche di provenienza hanno entrambe un buco che questa
+      # chiude: `checkBaselineProvenance()` (passo sopra) guarda tutte le voci
+      # ma via rete, con un cap sulla storia esaminata e solo DOPO il merge;
+      # `loop-baseline-pr-gate.mjs` guarda pre-merge ma solo le voci cambiate
+      # nella PR, quindi ogni baseline gia' presente quando quel gate e' nato
+      # non e' mai passata da nessuna verifica. Misurato sulla #978: una voce
+      # entrata sette ore prima del gate con un `baseline.corpus` che quel path
+      # non ha mai avuto.
+      #
+      # Qui il lato corpus e' QUESTO repo: offline, integrale, deterministico.
+      # Quindi si esce rossi anche sulle PR — a differenza dei due passi sopra,
+      # che dipendono dallo stato di un terzo repo: il rimedio
+      # (`--init --only <path>`) e' interamente nelle mani di chi ha aperto la
+      # PR, e non c'e' nessun falso rosso da cui proteggerla.
+      - name: Baseline del manifest verificate contro la storia dei path
+        if: always()
+        run: node scripts/ci/verify-manifest-baseline-history.mjs
