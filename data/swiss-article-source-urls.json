@@ -1,5 +1,4 @@
 {
-  "https://www.laregione.ch/economia/economia/1941727/amazon-capitalizzazione-miliardi-rimborsi-risultati": "amazon-capitalizzazione-3000-miliardi",
   "https://www.laregione.ch/economia/economia/1940732/miliardi-apple-valore-nvidia-seconda": "apple-vola-a-5000-miliardi-di-valore",
   "https://www.tio.ch/svizzera/economia/1943476/bns": "bns-promuove-berna",
   "https://www.rsi.ch/info/cultura-e-spettacoli": "cultura-e-spettacoli-ticino-2026",
@@ -1913,6 +1912,11 @@
   "https://www.rsi.ch/info/mondo/riassetto-vw-per-la-svizzera-l%e2%80%99impatto-%c3%a8-limitato--4060425.html": {
     "articleId": "riassetto-vw-impatti-svizzera",
     "ts": "2026-09-07T05:25:22.241Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/s/4063827": {
+    "articleId": "fondazione-beloved-primi-versamenti",
+    "ts": "2026-09-07T05:34:08.111Z",
     "keyForm": 2
   }
 }
