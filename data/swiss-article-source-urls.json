@@ -1,5 +1,4 @@
 {
-  "https://www.rsi.ch/info/salute/medicina-genetica-l%e2%80%99estate-delle-buone-notizie--3940095.html": "medicina-genetica-in-svizzera",
   "https://www.tio.ch/svizzera/attualita/1943435/servizio-caso-votazione-iniziativa-tre-ricorsi": "inizia-servizio-civico-ricorsi-irricevibili",
   "https://www.rsi.ch/info/svizzera/siccit%c3%a0-r%c3%b6sti-per-ora-nessuna-misura-urgente--3949530.html": "siccita-rosti-nessuna-misura-urgente-svizzera",
   "https://www.rsi.ch/info/ticino-grigioni-e-insubria/eclissi-solare-duecento-persone-incantate-a-cardada--3950115.html": "eclissi-solare-cardada",
@@ -1937,6 +1936,11 @@
   "https://www.tvsvizzera.it/tvs/lavoro-ed-economia/la-disparit%c3%a0-salariale-tra-i-tirocinanti-sta-distorcendo-il-mercato-del-lavoro-svizzero/91998918": {
     "articleId": "disuguaglianze-salariali-stage-svizzera",
     "ts": "2026-09-07T08:04:30.221Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/info/svizzera/stabile-il-tasso-di-disoccupazione--4064238.html": {
+    "articleId": "disoccupazione-stabile-svizzera-agosto-2024",
+    "ts": "2026-09-07T08:14:50.079Z",
     "keyForm": 2
   }
 }
