@@ -1,5 +1,4 @@
 {
-  "https://www.rsi.ch/info/svizzera/siccit%c3%a0-r%c3%b6sti-per-ora-nessuna-misura-urgente--3949530.html": "siccita-rosti-nessuna-misura-urgente-svizzera",
   "https://www.rsi.ch/info/ticino-grigioni-e-insubria/eclissi-solare-duecento-persone-incantate-a-cardada--3950115.html": "eclissi-solare-cardada",
   "https://www.rsi.ch/info/scienza-e-tecnologia/eclissi-solare-del-12-agosto-come-e-dove-osservarla--3940986.html": "eclissi-solare-agosto-2026-svizzera",
   "https://www.rsi.ch/info/scienza-e-tecnologia/ia-che-si-comporta-da-hacker-come-%c3%a8-possibile--3944562.html": "ia-che-si-comporta-da-hacker",
@@ -1945,6 +1944,11 @@
   "https://www.tio.ch/svizzera/attualita/1948440/pilota-berna-citta-cannabis-lucerna": {
     "articleId": "cannabis-farmacia-berna-bienne-lucerna",
     "ts": "2026-09-07T08:23:18.638Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/ticino/attualita/1948425/mario-padula-ha-assunto-la-direzione-dell-istituto-di-ricerche-economiche-dell-usi": {
+    "articleId": "padula-direttore-ire-usi-2026",
+    "ts": "2026-09-07T08:34:49.663Z",
     "keyForm": 2
   }
 }
