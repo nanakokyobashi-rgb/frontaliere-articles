@@ -49,8 +49,27 @@ function sourceFiles(dir, acc = []) {
 // Il `from` è opzionale solo per `import`, così il side-effect import
 // (`import './x.mjs'`) resta coperto senza che `export default './x'` — che
 // non è una dipendenza — venga contato.
+//
+// Il ramo `import(...)` è NON ancorato, perché un import dinamico sta sempre a
+// metà di un'espressione (`const m = await import('./x.mjs')`): pretendere
+// l'ancora lo rende invisibile, ed è la classe che #1030 chiude — rinominare
+// un modulo raggiunto solo così lasciava il guard verde e produceva
+// `ERR_MODULE_NOT_FOUND` a runtime.
+// Ciò che sostituisce l'ancora è il PREFISSO consentito prima di `import(`:
+// nessun apice, virgoletta o backtick, e nessun `//`, su una riga che non
+// comincia per `//`, `*` o `/*`. È quello a tenere fuori le due sorgenti di
+// falsi rossi che esistono davvero nell'albero:
+//   - `scripts/ci/scan-generation-health.mjs:1094` cita
+//     `await import("./scripts/ci/…")` DENTRO la stringa di un comando shell:
+//     un ramo ingenuo lo risolverebbe da `scripts/ci/` e chiederebbe
+//     `scripts/ci/scripts/ci/…` — guard rosso su codice corretto. La stringa
+//     è aperta da un apice che precede `import`, quindi il prefisso la esclude.
+//   - le fixture di `censimento-source.test.mjs` e la prosa di
+//     `tests/lib/reachable-source.mjs`, che nominano la forma per parlarne.
+// Il costo è un falso NEGATIVO su un import dinamico preceduto da una stringa
+// sulla stessa riga: si perde una dipendenza, non si inventa un errore.
 const SPECIFIER =
-  /^[ \t]*(?:import\s+(?:[^'";]*?\sfrom\s+)?|export\s+[^'";]*?\sfrom\s+)(['"])([^'"]+)\1/gm;
+  /^(?:[ \t]*(?:import\s+(?:[^'";]*?\sfrom\s+)?|export\s+[^'";]*?\sfrom\s+)|(?![ \t]*(?:\/\/|\*|\/\*))(?:[^'"`\/\n]|\/(?!\/))*?\bimport\s*\(\s*)(['"])([^'"]+)\1/gm;
 
 test('every relative import under generator/ resolves to a file that exists', () => {
   const missing = [];
