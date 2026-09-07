@@ -65,6 +65,7 @@ import path from 'node:path';
 // an article TITLE into markup — so the same output-boundary guard applies.
 // See scripts/lib/sanitize-control-chars.mjs for the incident.
 import { sanitizeHtmlDocument } from './lib/sanitize-control-chars.mjs';
+import { createRawFetcher } from './lib/cross-repo-raw-fetch.mjs';
 import { reportStrippedControlChars } from '../generator/scripts/lib/control-char-write-report.mjs';
 import { unescapeTsValue } from '../generator/scripts/lib/meta-field-regex.mjs';
 
@@ -228,12 +229,18 @@ function readMeta(metaPrefix, locale) {
   return out;
 }
 
+// Public repos, so the token is only about rate limits — absent is fine. And
+// since the shards belong to ANOTHER owner, this repo's token may be refused
+// there: raw answers 401/403, or worse a 404 that reads like a missing page.
+// The anonymous attempt is the one that speaks for a public repo (issue #982).
+const rawFetch = createRawFetcher({
+  userAgent: 'refresh-hub-landing',
+  token: process.env.GITHUB_PAT,
+});
+
 async function currentLandingHtml(owner, repo, relPath) {
   const url = `https://raw.githubusercontent.com/${owner}/${repo}/main/${relPath}`;
-  const headers = { 'User-Agent': 'refresh-hub-landing' };
-  // Public repos, so the token is only about rate limits — absent is fine.
-  if (process.env.GITHUB_PAT) headers.Authorization = `Bearer ${process.env.GITHUB_PAT}`;
-  const res = await fetch(url, { headers });
+  const res = await rawFetch(url);
   if (!res.ok) throw new Error(`GET ${relPath} → HTTP ${res.status}`);
   const html = await res.text();
 
