@@ -31,6 +31,11 @@ import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import {
   floorFrom,
+  retentionLine,
+  retentionWarning,
+  retentionRatio,
+  FLOOR_RETENTION,
+  FLOOR_WARN_RETENTION,
   countSourceArticles,
   countSourceImages,
   missingCorpusMessage,
@@ -162,6 +167,106 @@ export function floorViolations(measured, expected, retention = undefined) {
   return violations;
 }
 
+/**
+ * Ogni rapporto misurato/atteso che un pavimento sorveglia, come DATO.
+ *
+ * WHY. `floorViolations` risponde a una domanda binaria — sfondato o no — e
+ * quella risposta e' muta finche' non e' «sfondato». Ma il rapporto fra corpus
+ * e artefatto non e' stazionario: qualunque flusso che lasci un corpo senza la
+ * sua voce (orfani, ritiri a meta', import parziali) lo erode in modo
+ * MONOTONO, e con la sola risposta binaria la prima notizia dell'erosione e'
+ * la pubblicazione bloccata su un corpus sano. Questa funzione rende il
+ * rapporto osservabile PRIMA che diventi un fallimento.
+ *
+ * Le righe le produce lo stesso attraversamento di `floorViolations`, con gli
+ * stessi riferimenti — i corpi per `manifest.counts`, i chunk SEO (tagliati a
+ * `RSS_MAX_ITEMS`) per i feed, le hero per le immagini: un secondo criterio
+ * qui misurerebbe qualcosa che il gate non gata, che e' peggio di non misurare.
+ *
+ * Le righe SENZA riferimento non compaiono: sorgente a zero non e' un rapporto
+ * basso, e' l'assenza del riferimento, ed e' gia' una violazione bloccante.
+ *
+ * @returns {{kind: string, label: string, declared: number, source: number}[]}
+ */
+export function retentionReport(measured, expected) {
+  const rows = [];
+
+  for (const [section, counter] of Object.entries(SECTION_COUNTERS)) {
+    const source = expected.sourceArticles[section] ?? 0;
+    const declared = measured.articleCounts[counter];
+    if (source <= 0 || typeof declared !== 'number') continue;
+    rows.push({ kind: 'manifest', label: `manifest.counts.${counter}`, declared, source });
+  }
+
+  for (const feed of measured.feeds) {
+    const source = expected.feedSources?.[feedSection(feed.name)] ?? 0;
+    if (source <= 0) continue;
+    // Lo stesso atteso del pavimento: un feed e' tagliato a RSS_MAX_ITEMS,
+    // quindi su una sezione grande il 100% e' 50 item, non 3750.
+    rows.push({
+      kind: 'feed',
+      label: feed.name,
+      declared: feed.items,
+      source: Math.min(expected.rssMaxItems, source),
+    });
+  }
+
+  if (measured.images !== null && expected.sourceImages > 0) {
+    rows.push({
+      kind: 'images',
+      label: 'images-manifest.json',
+      declared: measured.images,
+      source: expected.sourceImages,
+    });
+  }
+
+  return rows;
+}
+
+/**
+ * I preallarmi del report: una riga per rapporto sceso sotto
+ * `FLOOR_WARN_RETENTION` ma ancora sopra il gate.
+ *
+ * Advisory per costruzione — il chiamante le emette come `::warning::` e ESCE
+ * COMUNQUE 0. Spostare il verdetto qui significherebbe aver alzato il gate da
+ * 0,90 a 0,97 di soppiatto (AGENTS.md #1), che e' l'opposto di cio' che questo
+ * livello serve a fare.
+ */
+export function retentionAdvisories(rows, retention = FLOOR_RETENTION, warn = FLOOR_WARN_RETENTION) {
+  return rows
+    .map((r) => retentionWarning(r.label, r.declared, r.source, retention, warn))
+    .filter((line) => line !== null);
+}
+
+/**
+ * Le righe da stampare a ogni run: i due rapporti del manifest, quello delle
+ * immagini, e — per i feed — il PIU' MAGRO della sezione.
+ *
+ * I dieci feed condividono il riferimento della loro sezione e stanno quasi
+ * sempre tutti al tetto: stamparli tutti annegherebbe le due righe che contano
+ * in otto identiche, e una telemetria che non si legge non e' telemetria. Il
+ * minimo e' il rappresentante giusto perche' e' quello che tocchera' per primo
+ * sia il preallarme sia il gate; i preallarmi veri restano comunque uno per
+ * feed, perche' li produce `retentionAdvisories` sul report INTERO.
+ */
+export function retentionLines(rows, retention = FLOOR_RETENTION) {
+  const worstFeed = rows
+    .filter((r) => r.kind === 'feed')
+    .reduce((worst, r) => (worst === null || retentionRatio(r.declared, r.source) < retentionRatio(worst.declared, worst.source) ? r : worst), null);
+  const feedCount = rows.filter((r) => r.kind === 'feed').length;
+
+  return rows
+    .filter((r) => r.kind !== 'feed' || r === worstFeed)
+    .map((r) =>
+      retentionLine(
+        r.kind === 'feed' ? `${r.label} (il piu' magro dei ${feedCount} feed)` : r.label,
+        r.declared,
+        r.source,
+        retention,
+      ),
+    );
+}
+
 /** Legge dall'artefatto su disco le misure che il nucleo puro confronta. */
 export function measureDist(distDir) {
   const readOut = (name) => fs.readFileSync(path.join(distDir, name), 'utf-8');
@@ -231,9 +336,27 @@ async function main() {
       `feeds=${measured.feeds.length}, images=${measured.images ?? 'non emesso'}`,
   );
 
+  // La telemetria del rapporto viene PRIMA del verdetto, e viene stampata anche
+  // quando il verdetto e' rosso: se il gate scatta, il margine di ogni altro
+  // rapporto e' la prima cosa che serve per capire quanto e' vicino il
+  // prossimo.
+  const rows = retentionReport(measured, expected);
+  for (const line of retentionLines(rows)) console.log(`[api-floors] ${line}`);
+
   if (violations.length) {
     for (const v of violations) console.error(`::error::${v}`);
     process.exit(1);
+  }
+
+  // Advisory: sotto il preallarme ma sopra il gate. Esce comunque 0 — il gate
+  // resta 0,90 e resta l'unico a bloccare.
+  const advisories = retentionAdvisories(rows);
+  for (const a of advisories) console.warn(`::warning::[api-floors] ${a}`);
+  if (advisories.length) {
+    console.log(
+      `[api-floors] ${advisories.length} rapporto/i sotto il preallarme ` +
+        `${(FLOOR_WARN_RETENTION * 100).toFixed(0)}%: la pubblicazione passa, l'erosione no`,
+    );
   }
   console.log(`[api-floors] pavimenti derivati dal corpus: tutti retti (${measured.feeds.length} feed inclusi)`);
 }

@@ -46,6 +46,84 @@ import path from 'node:path';
 export const FLOOR_RETENTION = 0.9;
 
 /**
+ * La soglia di PREALLARME: advisory, non un gate.
+ *
+ * PERCHE' ESISTE. `FLOOR_RETENTION` e' tarato sullo scarto osservato UNA volta
+ * (99,92% frontaliere, 100% svizzera), ma i due lati del rapporto contano cose
+ * diverse — i file di corpo da una parte, le voci dichiarate dall'artefatto
+ * dall'altra. Oggi `scripts/retire-article.mjs` li tiene allineati cancellando
+ * insieme corpo e voce, ma qualunque flusso che lasci un corpo senza voce
+ * (orfani, ritiri a meta', import parziali) sposta il rapporto verso il basso
+ * in modo MONOTONO. Nessuno misurava quel rapporto nel tempo: la prima notizia
+ * del drift sarebbe stata la pubblicazione BLOCCATA, cioe' il gate che scatta
+ * senza preavviso su un corpus sano.
+ *
+ * 0,97 da' ~7 punti percentuali di anticipo sul 0,90 — l'erosione si vede
+ * mentre e' ancora innocua, e chi la vede ha il tempo di capirla invece di
+ * scoprirla da una publish rossa.
+ *
+ * NON e' un gate e non ne sposta uno: `FLOOR_RETENTION` resta 0,9 e resta
+ * bloccante (AGENTS.md #1). Questo livello sta SOPRA, e chi lo sfonda esce
+ * comunque 0. L'invariante che lo rende raggiungibile — deve stare stretto fra
+ * il gate e 1 — e' asserito in
+ * `generator/tests/api-floors-derived-from-corpus.test.mjs`: invertirle
+ * renderebbe il preallarme irraggiungibile in silenzio, cioe' ricreerebbe
+ * esattamente la cecita' che chiude.
+ */
+export const FLOOR_WARN_RETENTION = 0.97;
+
+/**
+ * Il rapporto misurato/atteso, o `null` se non c'e' un riferimento.
+ *
+ * `null` e non 0 per la stessa ragione per cui `floorFrom(0)` merita un errore
+ * nei chiamanti: «il riferimento non c'e'» non e' «il rapporto e' zero», ed e'
+ * una condizione che va segnalata come assenza, non come erosione.
+ */
+export function retentionRatio(declared, source) {
+  if (!Number.isFinite(declared) || !Number.isFinite(source) || source <= 0) return null;
+  return declared / source;
+}
+
+/**
+ * La riga di telemetria di un rapporto: cosa vale e quanto margine resta prima
+ * del gate, in punti percentuali. Stampata a OGNI run, anche verde — e' il
+ * punto: un rapporto che nessuno stampa e' un rapporto che nessuno vede
+ * scendere.
+ */
+export function retentionLine(label, declared, source, retention = FLOOR_RETENTION) {
+  const ratio = retentionRatio(declared, source);
+  if (ratio === null) return `${label}: nessun riferimento (sorgente ${source})`;
+  const margin = (ratio - retention) * 100;
+  return (
+    `${label}: ${declared}/${source} = ${(ratio * 100).toFixed(2)}% ` +
+    `(margine ${margin.toFixed(1)} pp dal gate ${(retention * 100).toFixed(0)}%)`
+  );
+}
+
+/**
+ * Il preallarme di un rapporto, o `null` se non serve.
+ *
+ * Solo nella fascia `[retention, warn)`: sotto il gate non e' un preallarme ma
+ * una VIOLAZIONE, che il chiamante emette gia' come errore — raddoppiarla in
+ * warning confonderebbe il verdetto invece di anticiparlo.
+ */
+export function retentionWarning(
+  label,
+  declared,
+  source,
+  retention = FLOOR_RETENTION,
+  warn = FLOOR_WARN_RETENTION,
+) {
+  const ratio = retentionRatio(declared, source);
+  if (ratio === null || ratio >= warn || ratio < retention) return null;
+  return (
+    `${label}: rapporto ${(ratio * 100).toFixed(2)}% sotto il preallarme ` +
+    `${(warn * 100).toFixed(0)}% — restano ${((ratio - retention) * 100).toFixed(1)} pp ` +
+    `prima del gate ${(retention * 100).toFixed(0)}%, che bloccherebbe la pubblicazione`
+  );
+}
+
+/**
  * Il pavimento per un valore atteso. Mai negativo, e 0 atteso ⇒ 0.
  *
  * ATTENZIONE, ed e' il punto piu' delicato di questo modulo: `floorFrom(0)` e'
