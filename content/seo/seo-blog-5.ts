@@ -88096,6 +88096,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-tram-treno-lugano-lavori-inizio': {
+    title: 'Inizia la costruzione del tram-treno del Luganese',
+    description: 'I lavori preliminari per il tram-treno del Luganese inizieranno a fine ottobre 2026 sulla tratta Bioggio-Manno. Dati aggiornati 2026 per frontalieri in Ticino.',
+    keywords: 'frontalieri, ticino, svizzera, italia, inizia, costruzione, tram-treno, luganese',
+    ogTitle: 'Inizia la costruzione del tram-treno del Luganese',
+    ogDescription: 'I lavori preliminari per il tram-treno del Luganese inizieranno a fine ottobre 2026 sulla tratta Bioggio-Manno, con l\'obiettivo di mettere in esercizio la rete nel 2035.',
+    canonicalPath: '/articoli-frontaliere/tram-treno-lugano-lavori-inizio',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Inizia la costruzione del tram-treno del Luganese",
+      "description": "I lavori preliminari per il tram-treno del Luganese inizieranno a fine ottobre 2026 sulla tratta Bioggio-Manno. Dati aggiornati 2026 per frontalieri in Ticino.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/tram-treno-lugano-lavori-inizio.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista aerea di Lugano con i binari del tram-treno in costruzione"
+      },
+      "datePublished": "2026-09-07T10:00:13+00:00",
+      "dateModified": "2026-09-07T10:00:13+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/tram-treno-lugano-lavori-inizio/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

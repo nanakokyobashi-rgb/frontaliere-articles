@@ -11546,6 +11546,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.luganese-tram-treno-cantieri-2035.title': 'Lugano Tram-Train : premiers chantiers en octobre, opérationnel en 2035',
     'blog.article.luganese-tram-treno-cantieri-2035.excerpt': 'Les travaux préliminaires débuteront fin octobre 2026 sur la liaison Manno-Bioggio.',
     'blog.article.luganese-tram-treno-cantieri-2035.imageAlt': 'Vue aérienne de Lugano avec le nouveau réseau Tram-Train en construction',
+    'blog.article.tram-treno-lugano-lavori-inizio.title': 'Début de la construction du tram-train du Luganese',
+    'blog.article.tram-treno-lugano-lavori-inizio.excerpt': 'Les travaux préliminaires pour le tram-train du Luganese débuteront fin octobre 2026 sur le tronçon Bioggio-Manno.',
+    'blog.article.tram-treno-lugano-lavori-inizio.imageAlt': 'Vue aérienne de Lugano avec les rails du tram-train en construction',
 };
 
 export default blogMetaFr;
