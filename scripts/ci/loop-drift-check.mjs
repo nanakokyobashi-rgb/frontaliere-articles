@@ -951,6 +951,25 @@ function unmirrorableDepsVerdict({ mode, deps = [] }) {
 const DECLARED_ABSENT_REGISTRY_REL = 'generator/tests/loop-references-exist.test.mjs';
 
 /**
+ * Il registro non fa valere TUTTE le sue voci. `ACTIVE_DECLARED_ABSENT`
+ * (`loop-references-exist.test.mjs`) le filtra: quando il contract crawler
+ * cross-repo esiste, le 24 dichiarazioni sui workflow `crawler-group-NN.yml` e
+ * `translate-pending.yml` diventano DORMIENTI — nessun test le fa piu' valere,
+ * quindi una copia che ne rompe una non manda rosso niente e non c'e' niente
+ * da avvisare. Riderivarle qui produrrebbe un avviso che sbaglia su meta' dei
+ * suoi hit, e un avviso che sbaglia meta' delle volte smette di essere letto:
+ * cioe' il silenzio che questo modulo esiste per rompere.
+ *
+ * La regex e' duplicata dal registro e NON puo' essere importata: il registro
+ * e' un file di test, importarlo da uno script CI ne eseguirebbe la suite. Il
+ * legame e' quindi coperto da un test (AGENTS.md #6) —
+ * `loop-manifest-implicit-pinners.test.mjs` confronta questa sorgente con il
+ * testo del registro e diventa rosso se una delle due si muove.
+ */
+const CRAWLER_CONTRACT_REL = 'generator/data/crawler-cross-repo-contract.json';
+const DORMANT_WITH_CRAWLER_CONTRACT = /^\.github\/workflows\/(?:crawler-group-\d{2}|translate-pending)\.yml :: /;
+
+/**
  * I file che hanno una dichiarazione appaiata nel registro, con i loro
  * referenti. PURA: prende il testo del registro, non legge il disco.
  *
@@ -961,12 +980,18 @@ const DECLARED_ABSENT_REGISTRY_REL = 'generator/tests/loop-references-exist.test
  * implicita» indistinguibile da «non ho saputo leggere».
  *
  * @param {string} source  il testo di `loop-references-exist.test.mjs`
+ * @param {object} [o]
+ * @param {boolean} [o.crawlerContract]  il contract crawler esiste? Se si', le
+ *   chiavi che `ACTIVE_DECLARED_ABSENT` spegne restano fuori dall'indice.
  * @returns {Map<string,string[]>} file citante -> referenti dichiarati assenti
  */
-function declaredAbsentCiters(source) {
+function declaredAbsentCiters(source, { crawlerContract = false } = {}) {
   const out = new Map();
   for (const m of String(source || '').matchAll(/^\s*'([^']+?) :: ([^']+?)':/gm)) {
     const citer = m[1];
+    // Una voce dormiente non e' fatta valere da nessun test: avvisarne sarebbe
+    // un falso positivo, non una cautela.
+    if (crawlerContract && DORMANT_WITH_CRAWLER_CONTRACT.test(`${citer} :: ${m[2]}`)) continue;
     const at = out.get(citer);
     if (at) at.push(m[2]);
     else out.set(citer, [m[2]]);
@@ -997,11 +1022,12 @@ function declaredAbsentCiters(source) {
  *
  * ## Perche' un avviso sul `site-ahead` e non un blocco
  *
- * Misura del 2026-09-07 su `main`: **44 delle 157 voci `identical`** hanno
- * almeno una dichiarazione appaiata (143 chiavi, 61 file citanti). Il registro
- * e' `corpus-only`, quindi non entrera' MAI nell'insieme trasportabile:
- * trattare la coppia come bloccante spegnerebbe il 28% del canale in modo
- * permanente — l'eccesso opposto, e peggiore, del silenzio di oggi. E il
+ * Misura del 2026-09-07 su `main`, contate le sole dichiarazioni ATTIVE (cioe'
+ * al netto di quelle che `ACTIVE_DECLARED_ABSENT` spegne col contract
+ * crawler): **20 delle 157 voci `identical`** hanno almeno una dichiarazione
+ * appaiata (71 chiavi attive su 143, 37 file citanti su 61). Il registro e'
+ * `corpus-only`, quindi non entrera' MAI nell'insieme trasportabile: trattare
+ * la coppia come bloccante spegnerebbe il 13% del canale in modo permanente — l'eccesso opposto, e peggiore, del silenzio di oggi. E il
  * legame e' CONDIZIONALE: si rompe solo se la copia cambia proprio quelle
  * righe, il che non si sa prima di averla fatta.
  *
@@ -1034,7 +1060,9 @@ let PINNER_INDEX = null;
 function pinnerIndex() {
   if (!PINNER_INDEX) {
     try {
-      PINNER_INDEX = declaredAbsentCiters(fs.readFileSync(path.join(ROOT, DECLARED_ABSENT_REGISTRY_REL), 'utf8'));
+      PINNER_INDEX = declaredAbsentCiters(fs.readFileSync(path.join(ROOT, DECLARED_ABSENT_REGISTRY_REL), 'utf8'), {
+        crawlerContract: fs.existsSync(path.join(ROOT, CRAWLER_CONTRACT_REL)),
+      });
     } catch {
       // Fail-open: registro assente o illeggibile = nessun avviso, mai un rosso.
       PINNER_INDEX = new Map();
@@ -1062,6 +1090,18 @@ function implicitPinnersDetail({ pinned, pinners }) {
     "`corpus-only`, quindi non scende mai insieme alla copia: se la versione del sito ha perso una di " +
     'quelle citazioni la dichiarazione diventa morta, se ne ha aggiunta una nuova va dichiarata. ' +
     'Aggiorna il registro NELLA STESSA PR della copia, o la PR di trasporto resta rossa.'
+  );
+}
+
+/**
+ * La coda dell'avviso per UNA voce che il chiamante sa essere in `site-ahead`.
+ * Esiste perche' il `detail` del `site-ahead` viene ricostruito da zero in DUE
+ * altri punti — il ramo `scalarFingerprint` e l'escalation `stranded-twin` —
+ * e li' la coda che `classify()` aggiunge verrebbe buttata via.
+ */
+function implicitPinnersTail(entry) {
+  return implicitPinnersDetail(
+    implicitPinnersVerdict({ mode: entry.mode, state: 'site-ahead', pinners: implicitPinnersOf(entry) }),
   );
 }
 
@@ -1413,7 +1453,15 @@ async function main() {
       } else if (fingerprint.matches) {
         verdict = { state: 'stable', actionable: false, headline: 'allineato sul contratto scalare', detail: entry.reason || '' };
       } else {
-        verdict = { state: 'site-ahead', actionable: true, headline: 'il contratto scalare del sito e andato avanti, qui no', detail: fingerprint.detail };
+        // Il `detail` e' costruito da zero, quindi la coda dell'avviso va
+        // riappesa a mano: senza, un `identical` con dipendenze implicite
+        // perde l'avviso proprio dove la copia sta per essere fatta.
+        verdict = {
+          state: 'site-ahead',
+          actionable: true,
+          headline: 'il contratto scalare del sito e andato avanti, qui no',
+          detail: fingerprint.detail + implicitPinnersTail(entry),
+        };
       }
     }
 
@@ -1470,7 +1518,11 @@ async function main() {
             `Il sito ha lasciato la baseline il ${provenance.siteBaselineLastSeenAt} e qui non e' mai sceso niente ` +
             `(soglia: ${STRANDED_AFTER_DAYS} giorni, \`STRANDED_AFTER_DAYS\`). Nessun workflow porta questo path: ` +
             `\`mirror-articles-engine.yml\` si ferma a \`engine/\`, che il manifest tiene \`outOfScope\` proprio perche' ` +
-            "quello un trasporto ce l'ha. Copia la versione del sito (`sitePath`) e aggiorna a mano la baseline di QUESTA voce.",
+            "quello un trasporto ce l'ha. Copia la versione del sito (`sitePath`) e aggiorna a mano la baseline di QUESTA voce." +
+            // `stranded-twin` e' un `site-ahead` con l'eta' misurata, e il
+            // report lo mette in cima con 🚨: e' la riga che qualcuno copiera'
+            // a mano, quindi e' quella che ha PIU' bisogno dell'avviso.
+            implicitPinnersTail(entry),
           hashes: { ...now, baseline: base },
           ageDays: stranded.ageDays,
         });
@@ -1661,4 +1713,4 @@ if (process.argv[1] && process.argv[1].endsWith('loop-drift-check.mjs')) {
 // baseline con LA STESSA regola con cui la pesa il cron, altrimenti una voce
 // accettata in PR verrebbe dichiarata fantasma il mattino dopo — o peggio, il
 // contrario. Una seconda copia della regola lo renderebbe inevitabile.
-export { classify, parseOnly, onlyArgError, forceArgError, resolveInitTargets, initWriteVerdict, initAttestVerdict, initPassOutcome, ghostVerdict, strandedVerdict, corpusOnlyTwinVerdict, unmirrorableDepsVerdict, implicitPinnersVerdict, declaredAbsentCiters, DECLARED_ABSENT_REGISTRY_REL, resolvedLocalImports, gitBlobSha, scalarFingerprintVerdict, siteFile, sha256, repoHistoryMatch };
+export { classify, parseOnly, onlyArgError, forceArgError, resolveInitTargets, initWriteVerdict, initAttestVerdict, initPassOutcome, ghostVerdict, strandedVerdict, corpusOnlyTwinVerdict, unmirrorableDepsVerdict, implicitPinnersVerdict, declaredAbsentCiters, DECLARED_ABSENT_REGISTRY_REL, CRAWLER_CONTRACT_REL, DORMANT_WITH_CRAWLER_CONTRACT, resolvedLocalImports, gitBlobSha, scalarFingerprintVerdict, siteFile, sha256, repoHistoryMatch };

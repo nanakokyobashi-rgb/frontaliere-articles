@@ -27,12 +27,17 @@ import {
   implicitPinnersVerdict,
   declaredAbsentCiters,
   DECLARED_ABSENT_REGISTRY_REL,
+  CRAWLER_CONTRACT_REL,
+  DORMANT_WITH_CRAWLER_CONTRACT,
   classify,
 } from '../../scripts/ci/loop-drift-check.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const MANIFEST = JSON.parse(fs.readFileSync(path.join(ROOT, 'scripts/ci/loop-sync-manifest.json'), 'utf8'));
 const REGISTRY = fs.readFileSync(path.join(ROOT, DECLARED_ABSENT_REGISTRY_REL), 'utf8');
+const CRAWLER_CONTRACT = fs.existsSync(path.join(ROOT, CRAWLER_CONTRACT_REL));
+/** L'indice come lo costruisce lo script: solo le dichiarazioni ATTIVE. */
+const activeCiters = () => declaredAbsentCiters(REGISTRY, { crawlerContract: CRAWLER_CONTRACT });
 
 test('il registro dichiarato esiste ed e\' proprio quello dei DECLARED_ABSENT', () => {
   assert.equal(DECLARED_ABSENT_REGISTRY_REL, 'generator/tests/loop-references-exist.test.mjs');
@@ -40,7 +45,7 @@ test('il registro dichiarato esiste ed e\' proprio quello dei DECLARED_ABSENT', 
 });
 
 test('il parse del registro non torna vuoto: una mappa vuota spegne il rilevatore in silenzio', () => {
-  const citers = declaredAbsentCiters(REGISTRY);
+  const citers = activeCiters();
   assert.ok(citers.size > 0, 'nessuna chiave `<file> :: <referente>` letta: la forma del registro e\' cambiata');
   // Ogni chiave letta deve avere la forma di un path, non di una frase: e` il
   // controllo che separa «ho letto le chiavi» da «ho matchato della prosa».
@@ -59,10 +64,11 @@ test('il registro e\' `corpus-only`: non scende mai insieme alla copia', () => {
 });
 
 test('almeno una voce `identical` del manifest ha una dichiarazione appaiata', () => {
-  // La misura del 2026-09-07 su `main` diceva 44 su 157. Il numero esatto si
-  // muove a ogni PR, ma ZERO vorrebbe dire che il rilevatore non trova piu`
-  // niente — cioe` il silenzio che questo modulo esiste per rompere.
-  const citers = declaredAbsentCiters(REGISTRY);
+  // La misura del 2026-09-07 su `main` diceva 20 su 157 contando le sole
+  // dichiarazioni ATTIVE (44 contandole tutte). Il numero esatto si muove a
+  // ogni PR, ma ZERO vorrebbe dire che il rilevatore non trova piu` niente —
+  // cioe` il silenzio che questo modulo esiste per rompere.
+  const citers = activeCiters();
   const paired = MANIFEST.files.filter((f) => f.mode === 'identical' && citers.has(f.path));
   assert.ok(paired.length > 0, 'nessun gemello `identical` con dichiarazione appaiata: il rilevatore e\' cieco');
 });
@@ -100,7 +106,7 @@ test('i referenti tornano deduplicati e ordinati', () => {
 test('lo STATO non cambia: `transportVerdict` continua a vedere `site-ahead`', () => {
   // E` la meta` che rende l'avviso non distruttivo. Se `classify()` restituisse
   // un nuovo stato, `transportVerdict()` — che pretende `site-ahead` — SPEGNEREBBE
-  // il trasporto sul 28% delle voci, cioe` il canale fermo per curare un rischio
+  // il trasporto sul 13% delle voci, cioe` il canale fermo per curare un rischio
   // che si materializza solo qualche volta.
   const entry = { path: 'scripts/ci/alert-pat-down.mjs', mode: 'identical' };
   const base = { site: 'aaa', corpus: 'bbb' };
@@ -122,4 +128,38 @@ test('senza dichiarazioni il `detail` resta byte-identico a prima', () => {
     v.detail,
     'Il file e\' dichiarato identico al sito: la modifica del sito e\' copiabile qui cosi\' com\'e\'.',
   );
+});
+
+test('il filtro delle dichiarazioni DORMIENTI e\' lo stesso del registro', () => {
+  // AGENTS.md #6: il registro e' un file di test, importarlo da uno script CI
+  // ne eseguirebbe la suite, quindi la regex e' duplicata. Il legame lo copre
+  // questo test: se `ACTIVE_DECLARED_ABSENT` cambia forma, l'indice dello
+  // script tornerebbe ad avvisare su dichiarazioni che nessun test fa valere.
+  assert.ok(
+    REGISTRY.includes('const ACTIVE_DECLARED_ABSENT ='),
+    'il registro non filtra piu\' le dichiarazioni dormienti: rivedi `DORMANT_WITH_CRAWLER_CONTRACT`',
+  );
+  assert.ok(
+    REGISTRY.includes(DORMANT_WITH_CRAWLER_CONTRACT.source),
+    `la regex del registro non coincide piu\' con quella dello script:\n  ${DORMANT_WITH_CRAWLER_CONTRACT.source}`,
+  );
+  assert.ok(
+    REGISTRY.includes(CRAWLER_CONTRACT_REL),
+    'il registro non nomina piu\' il contract crawler: la condizione di dormienza e\' cambiata',
+  );
+});
+
+test('col contract presente le dichiarazioni dormienti restano fuori dall\'indice', () => {
+  const all = declaredAbsentCiters(REGISTRY, { crawlerContract: false });
+  const active = declaredAbsentCiters(REGISTRY, { crawlerContract: true });
+  const dormant = [...all.keys()].filter((k) => !active.has(k));
+  assert.ok(dormant.length > 0, 'nessuna chiave filtrata: il registro non ha piu\' voci dormienti?');
+  for (const citer of dormant) {
+    assert.ok(
+      DORMANT_WITH_CRAWLER_CONTRACT.test(`${citer} :: x`),
+      `${citer} e' stato filtrato senza essere dormiente`,
+    );
+  }
+  // Il verso opposto: nessuna voce attiva deve cadere.
+  for (const citer of active.keys()) assert.ok(all.has(citer), `${citer} sparito dall'indice completo`);
 });
