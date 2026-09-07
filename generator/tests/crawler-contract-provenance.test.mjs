@@ -32,9 +32,11 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import {
   SITE_LOGIC_DIR,
+  SITE_LOGIC_DIR_FALLBACKS,
   evaluateProvenance,
   planProvenanceChecks,
   siteGeneratorPath,
+  siteLogicDirs,
 } from '../../scripts/ci/verify-crawler-contract-provenance.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
@@ -185,4 +187,77 @@ test('il manifest registra il verificatore: `scripts/ci` è un root censito', ()
   );
   assert.ok(entry, 'verificatore non registrato in loop-sync-manifest.json');
   assert.equal(entry.mode, 'corpus-only');
+});
+
+/**
+ * ## La coordinata inventata (issue #982)
+ *
+ * `SITE_LOGIC_DIR` è l'unica coordinata che il contratto non dichiara: se il
+ * sito sposta i `*-logic.yml`, il verificatore usciva rosso ogni notte con 24
+ * `absent` e la diagnosi sbagliata («gli artifact sono stantii»). Le tre
+ * invarianti che lo impediscono: la directory si risolve invece di essere
+ * assunta, il report nomina il file davvero letto, e 24 assenze in blocco
+ * accusano la coordinata, non il contratto.
+ */
+test('la directory della logica si prova, e un override esplicito si crede', () => {
+  const dirs = siteLogicDirs({});
+  assert.deepEqual(dirs, [SITE_LOGIC_DIR, ...SITE_LOGIC_DIR_FALLBACKS]);
+  assert.ok(dirs.length > 1, 'una sola candidata è di nuovo una coordinata inventata');
+  // Un override è una dichiarazione: niente tentativi alle spalle di chi l'ha scritto.
+  assert.deepEqual(siteLogicDirs({ SITE_LOGIC_DIR: '.github/logic/' }), ['.github/logic']);
+});
+
+test('solo il `sourceSha256` ha candidate multiple: il dichiarato non si indovina', () => {
+  const checks = planProvenanceChecks(fixtureContract, fixtureManifest);
+  const source = checks.find((c) => c.field.endsWith('#sourceSha256'));
+  assert.deepEqual(
+    source.sitePathCandidates,
+    siteLogicDirs({}).map((d) => `${d}/crawler-group-01-logic.yml`),
+  );
+  for (const c of checks.filter((c) => !c.field.endsWith('#sourceSha256'))) {
+    assert.deepEqual(c.sitePathCandidates, [c.sitePath], c.field);
+  }
+});
+
+test('la logica trovata in una directory diversa è `verified`, e il report nomina il path letto', () => {
+  const checks = planProvenanceChecks(fixtureContract, fixtureManifest);
+  const elsewhere = '.github/corpus-workflows/crawler-group-01-logic.yml';
+  const verdict = evaluateProvenance(checks, new Map([
+    ['generatorSha256', { sha256: HASH }],
+    ['crawler-group-01.yml#sourceSha256', { sha256: HASH, sitePath: elsewhere }],
+    ['crawler-group-01.yml#artifactSha256', { sha256: HASH }],
+  ]));
+  assert.equal(verdict.red, false);
+  const source = verdict.results.find((r) => r.field.endsWith('#sourceSha256'));
+  assert.equal(source.state, 'verified');
+  assert.equal(source.sitePath, elsewhere, 'il report deve nominare il file davvero letto');
+});
+
+test('24 `*-logic.yml` assenti in blocco accusano la coordinata, non gli artifact', () => {
+  const checks = planProvenanceChecks(CONTRACT, MANIFEST);
+  const observed = new Map(checks.map((c) => [
+    c.field,
+    c.field.endsWith('#sourceSha256')
+      ? { sha256: null, triedPaths: c.sitePathCandidates }
+      : { sha256: c.expected },
+  ]));
+  const verdict = evaluateProvenance(checks, observed);
+  assert.equal(verdict.red, true);
+  assert.match(verdict.reason, /SITE_LOGIC_DIR/);
+  assert.match(verdict.reason, /gli artifact non c'entrano/);
+  assert.doesNotMatch(verdict.reason, /stantii/, 'la diagnosi sbagliata manda il fixer sul file sbagliato');
+  // E il dettaglio elenca tutto ciò che è stato provato, non solo la prima candidata.
+  const source = verdict.results.find((r) => r.field.endsWith('#sourceSha256'));
+  for (const cand of source.sitePathCandidates) assert.ok(source.detail.includes(cand), cand);
+});
+
+test('un solo `*-logic.yml` sparito resta un problema del contratto', () => {
+  const checks = planProvenanceChecks(CONTRACT, MANIFEST);
+  const observed = new Map(checks.map((c) => [c.field, { sha256: c.expected }]));
+  const victim = checks.find((c) => c.field.endsWith('#sourceSha256'));
+  observed.set(victim.field, { sha256: null, triedPaths: victim.sitePathCandidates });
+  const verdict = evaluateProvenance(checks, observed);
+  assert.equal(verdict.red, true);
+  assert.match(verdict.reason, /stantii/);
+  assert.doesNotMatch(verdict.reason, /SITE_LOGIC_DIR/);
 });
