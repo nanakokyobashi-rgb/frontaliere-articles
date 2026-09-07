@@ -202,8 +202,17 @@ test('la chiusura risolve l issue con la stessa uguaglianza esatta con cui la li
   const step = surfaceStep();
   const emptyBranch = emptyListsBranch(step);
 
-  const resolve = /DEDUP_MATCHES=\$\(gh api --paginate "([^"]+)"[\s\S]*?--jq '([^']+)'\)/.exec(emptyBranch);
-  assert.ok(resolve, 'il ramo a liste vuote deve risolvere il numero dell issue dedup da se');
+  // La risoluzione sta in `resolve_dedup_number`, definita una volta sola in
+  // cima allo step: la condivide con il riallineamento del corpo nel ramo non
+  // vuoto (#1004), perche' chiudere e riscrivere devono colpire LA STESSA
+  // issue. Le assunzioni sotto sono le stesse di quando era inline qui.
+  const resolve = /resolve_dedup_number\(\) \{[\s\S]*?gh api --paginate "([^"]+)"[\s\S]*?--jq '([^']+)'\)/.exec(step);
+  assert.ok(resolve, 'lo step deve risolvere il numero dell issue dedup da se');
+  assert.match(
+    emptyBranch,
+    /DEDUP_NUMBER=\$\(resolve_dedup_number\)/,
+    'il ramo a liste vuote deve passare dalla risoluzione condivisa, non da una copia della query',
+  );
   assert.match(
     resolve[2],
     /select\(\s*\.title\s*==\s*env\.DEDUP_TITLE\s*\)/,
@@ -239,7 +248,7 @@ test('la chiusura risolve l issue con la stessa uguaglianza esatta con cui la li
   // la variabile vuota e lo step uscirebbe verde senza chiudere niente.
   assert.match(
     emptyBranch,
-    /DEDUP_MATCHES=\$\(gh api --paginate[\s\S]*?\n\s+DEDUP_RC=\$\?/,
+    /DEDUP_NUMBER=\$\(resolve_dedup_number\)\n\s+DEDUP_RC=\$\?/,
     'l exit status della risoluzione va catturato subito dopo l assegnazione',
   );
   const rcGuard = /if \[ "\$DEDUP_RC" -ne 0 \]; then([\s\S]*?)\n\s+fi\n/.exec(emptyBranch);
@@ -432,4 +441,75 @@ test('nemmeno lo scan stale-review legge una lista troncata', () => {
     'il rimappaggio deve riportare `created_at` su `.createdAt`, che e il campo letto dal gate 1',
   );
   assert.match(text, /labels: \[\.labels\[\] \| \{name\}\]/, 'i gate leggono `.labels[].name`: la forma va preservata');
+});
+
+/**
+ * Il corpo del digest RIAPERTO diceva le liste di prima della chiusura.
+ *
+ * `createGithubIssue` scrive `--description` nel corpo solo quando l'issue
+ * nasce. Sul ramo di dedup — e su quello di riapertura della gemella chiusa,
+ * dentro `DEFAULT_REOPEN_WITHIN_HOURS` (720h) — posta un commento di
+ * recurrence e lascia il corpo com'era. Dopo una chiusura a liste vuote e una
+ * riapertura, il corpo torna quindi a dire le liste del run PRECEDENTE alla
+ * chiusura, mentre quelle vere stanno solo nell'ultimo commento: due sorgenti
+ * per lo stesso elenco, e quella che si legge per prima e' la falsa. E' lo
+ * stesso «elenco falso» che #906 ha eliminato sull'issue aperta, ricomparso
+ * sul percorso di riapertura, su un'issue letta da un umano (issue #1004).
+ *
+ * Il posto della riparazione e' QUI e non in
+ * `scripts/lib/github-issue-creator.mjs`, che e' `identical` nel manifest di
+ * loop-sync: una fix li' si fa sul SITO e scende da sola.
+ */
+test('a liste non vuote lo step riallinea il corpo, non si limita a creare/commentare', () => {
+  const step = withoutComments(surfaceStep());
+  const branchEnd = step.indexOf('PR_COUNT=0');
+  assert.notEqual(branchEnd, -1, 'ramo "liste non vuote" non trovato');
+  const tail = step.slice(branchEnd);
+
+  // Il corpo va riscritto con LO STESSO `$DESC` appena costruito: ricostruirlo
+  // una seconda volta sarebbe una seconda sorgente dello stesso elenco.
+  assert.match(
+    tail,
+    /gh issue edit "\$DEDUP_NUMBER" --body "\$DESC"/,
+    'lo step deve riallineare il corpo dell issue dedup con lo stesso $DESC passato a --description',
+  );
+  assert.equal(
+    [...tail.matchAll(/DESC=\$\(printf/g)].length,
+    1,
+    '$DESC costruito piu di una volta: due sorgenti per lo stesso elenco',
+  );
+
+  // E DOPO la create/reopen: prima non esiste ancora un corpo da riallineare,
+  // e alla prima creazione il numero non sarebbe risolvibile.
+  const createAt = tail.indexOf('node scripts/lib/github-issue-creator.mjs');
+  const editAt = tail.indexOf('gh issue edit');
+  assert.ok(createAt !== -1, 'la create/reopen del digest non e piu nel ramo non vuoto');
+  assert.ok(createAt < editAt, 'il riallineamento del corpo deve seguire la create/reopen, non precederla');
+});
+
+/**
+ * Chiudere e riscrivere devono colpire LA STESSA issue (AGENTS.md #6). I due
+ * rami risolvono il numero per uguaglianza esatta sul titolo: due copie della
+ * query divergerebbero in silenzio, ed e' esattamente la divergenza fra due
+ * forme della chiave (prefisso sanitizzato vs titolo esatto) il difetto che il
+ * ramo di chiusura ha gia' pagato una volta.
+ */
+test('la risoluzione del numero dell issue dedup ha una sola implementazione', () => {
+  const step = withoutComments(surfaceStep());
+  assert.equal(
+    [...step.matchAll(/^\s*resolve_dedup_number\(\) \{/gm)].length,
+    1,
+    'resolve_dedup_number deve essere definita una volta sola nello step',
+  );
+  assert.equal(
+    [...step.matchAll(/\$\(resolve_dedup_number\)/g)].length,
+    2,
+    'entrambi i rami (chiusura a liste vuote, riallineamento a liste non vuote) devono passare dalla stessa funzione',
+  );
+  // Nessuna seconda copia della query per titolo esatto fuori dalla funzione.
+  assert.equal(
+    [...step.matchAll(/select\(\.title == env\.DEDUP_TITLE\) \| \.number/g)].length,
+    1,
+    'la query che risolve il numero del digest e duplicata: le due copie divergeranno',
+  );
 });

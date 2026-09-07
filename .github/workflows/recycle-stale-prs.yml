@@ -308,6 +308,30 @@ jobs:
             Crawler transient failures (rolling ledger)
         run: |
           set -uo pipefail
+          # UNICA implementazione della risoluzione del numero dell'issue dedup
+          # (AGENTS.md #6). La usano ENTRAMBI i rami sotto: la chiusura a liste
+          # vuote e il riallineamento del corpo a liste non vuote. Devono
+          # guardare LA STESSA issue, con la STESSA uguaglianza esatta sul
+          # titolo con cui la lista qui sopra la esclude — due copie della
+          # query divergerebbero in silenzio, ed e' esattamente la divergenza
+          # fra due forme della chiave (prefisso vs titolo esatto) il difetto
+          # che il ramo di chiusura ha gia' pagato una volta.
+          #
+          # `gh api --paginate` e non `gh issue list --limit N`: `--limit`
+          # tronca IN SILENZIO, e un digest oltre il cap non verrebbe trovato.
+          # Con `--paginate` il `--jq` gira PER PAGINA, quindi `first(...)` puo'
+          # produrre una riga per pagina: `head -n 1` sta fuori dalla pipeline
+          # di `gh` (su una variabile gia' catturata, per non dargli un SIGPIPE
+          # sotto `pipefail`). E NON riusa `$NEEDS_HUMAN_API`: quello filtra per
+          # `labels=needs-human`, che l'issue dedup non ha per costruzione
+          # (nasce con `automation`). Il perimetro qui e' «tutte le issue
+          # aperte», la chiave e' il titolo.
+          resolve_dedup_number() {
+            local matches
+            matches=$(gh api --paginate "repos/$GH_REPO/issues?state=open&per_page=100" \
+              --jq 'first(.[] | select(.pull_request | not) | select(.title == env.DEDUP_TITLE) | .number)') || return 1
+            printf '%s\n' "$matches" | head -n 1
+          }
           # L'ESITO delle due query, non solo il loro output. `set -e` non e'
           # attivo (i rami sotto decidono da soli), quindi un `gh` non-zero —
           # jq su una forma inattesa, rate-limit, token scaduto — lascia la
@@ -405,23 +429,12 @@ jobs:
             # altri chiamanti. Qui apertura, esclusione e chiusura tornano a
             # usare UNA sola forma della chiave.
             #
-            # `gh api --paginate` e non `gh issue list --limit N` per la stessa
-            # ragione delle due query sopra: `--limit` tronca IN SILENZIO, e un
-            # digest oltre il cap non verrebbe trovato — che qui vuol dire «non
-            # chiudo» (innocuo) ma con un cap piu' basso della realta' e' la
-            # stessa bugia silenziosa. Con `--paginate` il `--jq` gira PER
-            # PAGINA, quindi `first(...)` puo' produrre una riga per pagina:
-            # `head -n 1` fuori dalla pipeline di `gh` (su una variabile gia'
-            # catturata, per non dare un SIGPIPE a `gh` sotto `pipefail`).
-            # E NON riusa `$NEEDS_HUMAN_API`: quello filtra per
-            # `labels=needs-human`, che l'issue dedup non ha per costruzione
-            # (nasce con `automation`) — cercarla li' la troverebbe solo nei
-            # run in cui qualcuno gliel'ha aggiunta, cioe' proprio il caso di
-            # #733. Il perimetro qui e' «tutte le issue aperte», la chiave e'
-            # il titolo.
+            # La query vera e' `resolve_dedup_number` in cima allo step: e'
+            # UNA sola (AGENTS.md #6), condivisa con il riallineamento del
+            # corpo nel ramo non-vuoto, perche' chiudere e riscrivere devono
+            # colpire la stessa issue.
             echo "Niente needs-human aperto (ne PR ne issue): richiudo l'issue dedup, se aperta."
-            DEDUP_MATCHES=$(gh api --paginate "repos/$GH_REPO/issues?state=open&per_page=100" \
-              --jq 'first(.[] | select(.pull_request | not) | select(.title == env.DEDUP_TITLE) | .number)')
+            DEDUP_NUMBER=$(resolve_dedup_number)
             DEDUP_RC=$?
             if [ "$DEDUP_RC" -ne 0 ]; then
               # Stesso principio del guard sopra: query fallita non e' «nessun
@@ -429,7 +442,6 @@ jobs:
               echo "::error::Query dell'issue dedup fallita (rc=$DEDUP_RC): non chiudo niente. Un risultato vuoto per un errore non e «issue gia chiusa»."
               exit 1
             fi
-            DEDUP_NUMBER=$(printf '%s\n' "$DEDUP_MATCHES" | head -n 1)
             if [ -z "$DEDUP_NUMBER" ]; then
               echo "Nessuna issue aperta con il titolo di dedup: niente da chiudere."
               exit 0
@@ -451,3 +463,38 @@ jobs:
             --priority 2 \
             --label automation \
             --workflow "Recycle stale PRs"
+          # `$DESC` finisce nel CORPO solo alla prima creazione. Sul ramo di
+          # dedup — e su quello di riapertura della gemella chiusa, dentro
+          # `DEFAULT_REOPEN_WITHIN_HOURS` (720h) — il creator posta un commento
+          # di recurrence e LASCIA IL CORPO com'era (#1004). Dopo una chiusura a
+          # liste vuote e una riapertura, il corpo torna quindi a dire le liste
+          # del run PRECEDENTE alla chiusura, mentre quelle vere stanno solo
+          # nell'ultimo commento: due sorgenti per lo stesso elenco, sull'unica
+          # issue che gli umani leggono davvero, e quella che si legge per prima
+          # e' la falsa. E' lo stesso «elenco falso» che #906 ha eliminato
+          # sull'issue aperta, ricomparso sul percorso di riapertura. Il corpo
+          # va quindi RIALLINEATO alle liste appena calcolate: elimina la doppia
+          # sorgente invece di documentarla.
+          #
+          # E il posto NON e' `scripts/lib/github-issue-creator.mjs`: e'
+          # `identical` nel manifest di loop-sync, dev'essere byte-identico coi
+          # due repo, quindi una modifica li' si fa sul SITO e scende da sola.
+          DEDUP_NUMBER=$(resolve_dedup_number)
+          DEDUP_RC=$?
+          if [ "$DEDUP_RC" -ne 0 ]; then
+            # Query fallita: non si sa QUALE issue riscrivere. Riscriverne una
+            # sbagliata e' peggio che lasciare il corpo vecchio, quindi si
+            # segnala e basta — `continue-on-error: true` tiene verde il job.
+            echo "::error::Query dell'issue dedup fallita (rc=$DEDUP_RC): il corpo puo' essere rimasto quello pre-chiusura."
+            exit 1
+          fi
+          if [ -z "$DEDUP_NUMBER" ]; then
+            # Nessuna issue aperta col titolo di dedup subito DOPO la
+            # create/reopen: o `ENABLE_FAILURE_REPORT=false` (il creator e' un
+            # no-op dichiarato), o la creazione e' fallita e l'ha gia' detto.
+            # In nessuno dei due casi c'e' un corpo da riallineare.
+            echo "::warning::Nessuna issue aperta con il titolo di dedup dopo la create/reopen: nessun corpo da riallineare."
+            exit 0
+          fi
+          echo "Riallineo il corpo dell'issue dedup #$DEDUP_NUMBER alle liste di questo run."
+          gh issue edit "$DEDUP_NUMBER" --body "$DESC"
