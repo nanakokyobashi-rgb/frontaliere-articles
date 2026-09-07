@@ -168,7 +168,7 @@
       "reason": "Pre-flight zero-Claude contro la SECONDA run sulla stessa issue (#918, follow-up di #908). Non esiste sul sito e non deve: nasce dalla chiave di concorrenza per-issue: finche' il `group:` era costante il secondo evento sulla stessa issue moriva `cancelled` prima di ogni step, quindi la finestra del payload stantio non era osservabile. Il gemello del sito ha la stessa chiave per-issue (valerielinc-ops/frontaliere-si-o-no#7497) ma il ramo SIGNAL 0 che gli servirebbe va aggiunto dentro `check-issue-already-resolved.mjs`, che qui e' `identical`: la strada del sito e' quella, non questo file.",
       "baseline": {
         "site": null,
-        "corpus": "0d449baad16a4280",
+        "corpus": "68c106a1623858c5",
         "alignedAt": "2026-09-06"
       }
     },
@@ -3355,6 +3355,16 @@
         "site": null,
         "corpus": "de1f694aaaa4d067",
         "alignedAt": "2026-09-05"
+      }
+    },
+    {
+      "path": "scripts/ci/verify-manifest-baseline-history.mjs",
+      "mode": "corpus-only",
+      "reason": "Verifica INTEGRALE delle `baseline.corpus` di questo manifest contro la storia locale dei path (issue #978, item 4 della #954). Non esiste sul sito e non deve: il manifest e' del lato che RICEVE il ciclo, come il drift check e il trasporto. E' il terzo sguardo sulla provenienza delle baseline, e nasce dai buchi degli altri due: `checkBaselineProvenance()` guarda tutte le voci ma via rete, con un cap sulla storia e solo al cron DOPO il merge; `loop-baseline-pr-gate.mjs` guarda pre-merge ma solo le voci cambiate nella PR, quindi ogni baseline gia' presente quando quel gate e' nato non passa da nessuna verifica. Misurato: una voce entrata sette ore prima del gate con un `baseline.corpus` mai esistito a quel path.",
+      "baseline": {
+        "site": null,
+        "corpus": "86974717d7da30e8",
+        "alignedAt": "2026-09-07"
       }
     },
     {
