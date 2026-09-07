@@ -67,6 +67,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
 import { fileURLToPath } from 'node:url';
+import { createRawFetcher } from '../lib/cross-repo-raw-fetch.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const CONTRACT_PATH = path.join(ROOT, 'generator/data/crawler-cross-repo-contract.json');
@@ -276,12 +277,23 @@ export function formatReport({ results, counts, red, reason }) {
   return lines.join('\n');
 }
 
+/**
+ * Il client verso il sito. `GH_TOKEN` qui e' il `GITHUB_TOKEN` di QUESTO repo,
+ * che su `valerielinc-ops/…` non ha alcun permesso: se raw lo rifiuta, la
+ * risposta autorevole e' quella anonima — il repo del sito e' pubblico. Senza
+ * questo fallback un 401 renderebbe `unobserved` tutte e 49 le voci, e un 404
+ * da mancato accesso si travestirebbe da `absent`. Vedi
+ * `scripts/lib/cross-repo-raw-fetch.mjs` (issue #982).
+ */
+const rawFetch = createRawFetcher({
+  userAgent: 'verify-crawler-contract-provenance',
+  token: process.env.GH_TOKEN,
+});
+
 /** Byte del file dal sito al ref dato; null su 404. */
 async function siteFile(rel) {
   const url = `https://raw.githubusercontent.com/${SITE_REPO}/${SITE_REF}/${rel}`;
-  const headers = { 'User-Agent': 'verify-crawler-contract-provenance' };
-  if (process.env.GH_TOKEN) headers.Authorization = `Bearer ${process.env.GH_TOKEN}`;
-  const res = await fetch(url, { headers });
+  const res = await rawFetch(url);
   if (res.status === 404) return null;
   if (!res.ok) throw new Error(`GET ${rel} → HTTP ${res.status}`);
   return Buffer.from(await res.arrayBuffer());
@@ -345,6 +357,15 @@ async function main() {
 
   const verdict = evaluateProvenance(checks, observed);
   console.log(args.has('--json') ? JSON.stringify(verdict, null, 2) : formatReport(verdict));
+  // Un token rifiutato non e' un guasto — le osservazioni sopra sono state
+  // rifatte in anonimo — ma va detto: e' la sola spia del fatto che il resto
+  // della passata ha viaggiato sui 60 fetch/ora anonimi per IP.
+  if (rawFetch.state.tokenRejected) {
+    console.log(
+      `\nℹ️ \`GH_TOKEN\` rifiutato da raw.githubusercontent per ${SITE_REPO}: ` +
+      'le letture sono proseguite in anonimo (repo pubblico).',
+    );
+  }
   if (verdict.red && args.has('--strict')) process.exitCode = 1;
 }
 
