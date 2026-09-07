@@ -215,6 +215,54 @@ test('files: sitePath e baseline coerenti col mode', () => {
 });
 
 /**
+ * Item 2 della #978: un `identical` con le due baseline DIVERSE e' una voce che
+ * si contraddice, e lo fa in silenzio.
+ *
+ * `identical` promette una cosa sola — i due lati erano allineati sullo STESSO
+ * contenuto ad `alignedAt` — e tutto il ciclo la legge cosi'. `classify()`
+ * confronta ogni lato con la SUA baseline: con i due lati fermi e le baseline
+ * diverse esce `undeclared-drift`, e `transportVerdict()` non copia un
+ * `undeclared-drift` (`transport-identical-twins.mjs`). Il gemello esce dal
+ * trasporto senza che niente fallisca — la voce resta nel manifest, il report
+ * la elenca una volta al giorno, e intanto una fix fatta sul sito non scende
+ * piu' qui.
+ *
+ * I due scrittori automatici quella scrittura la rifiutano gia': `--init` con
+ * `initWriteVerdict()` (#1133) e `--apply` del trasporto col controllo sui byte
+ * committati (#331). Restano la mano umana e `--force`, cioe' i due percorsi che
+ * nessuno dei due guard copre: un hex plausibile — o un blob VERO ma vecchio,
+ * che `loop-baseline-pr-gate.mjs` accetta perche' la provenienza e' genuina —
+ * scrive la contraddizione e la PR resta verde. Il controllo di forma qui sopra
+ * non la vedeva: pretendeva un `baseline.site` esistente, non
+ * `baseline.site === baseline.corpus`.
+ *
+ * L'invariante e' manifest-wide apposta. Lo stesso fatto e' gia' asserito in
+ * `loop-manifest-corpus-only-twin.test.mjs`, ma su DUE path nominati: e' una
+ * lista, non una classe, e la 158esima voce `identical` entrerebbe divergente
+ * senza incontrare nessun rosso.
+ *
+ * Non vale per `adapted`: li' due baseline UGUALI sono l'ultimo punto di
+ * allineamento di file oggi diversi per costruzione (`ai-models.mjs`,
+ * `article-free-mt.mjs`), che e' esattamente cio' che una baseline deve dire.
+ */
+test('files: nessun `identical` con le due baseline divergenti', () => {
+  for (const f of manifest.files) {
+    if (f.mode !== 'identical') continue;
+    assert.equal(
+      f.baseline.site,
+      f.baseline.corpus,
+      `${f.path}: \`identical\` con le due baseline diverse (site \`${f.baseline.site}\`, corpus ` +
+        `\`${f.baseline.corpus}\`). Al primo cron e' \`undeclared-drift\`, e un \`undeclared-drift\` il ` +
+        'trasporto non lo copia: il gemello esce dalla copia automatica senza che niente fallisca. ' +
+        'O i due lati sono davvero allineati e la baseline va riscritta dal contenuto reale ' +
+        '(`--init --only ' + f.path + '`), o non lo sono e la voce e\' un `adapted` con la sua ' +
+        '`reason`.',
+    );
+  }
+});
+
+
+/**
  * Il cuore della issue #125: `corpus-only` da solo non distingue "non serve"
  * da "serve e manca", e la differenza in prosa dentro `reason` non fa fallire
  * niente. `corpus-only-pending` esiste apposta — ma solo se porta un
