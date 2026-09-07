@@ -413,6 +413,12 @@ jobs:
             # PAGINA, quindi `first(...)` puo' produrre una riga per pagina:
             # `head -n 1` fuori dalla pipeline di `gh` (su una variabile gia'
             # catturata, per non dare un SIGPIPE a `gh` sotto `pipefail`).
+            # E NON riusa `$NEEDS_HUMAN_API`: quello filtra per
+            # `labels=needs-human`, che l'issue dedup non ha per costruzione
+            # (nasce con `automation`) — cercarla li' la troverebbe solo nei
+            # run in cui qualcuno gliel'ha aggiunta, cioe' proprio il caso di
+            # #733. Il perimetro qui e' «tutte le issue aperte», la chiave e'
+            # il titolo.
             echo "Niente needs-human aperto (ne PR ne issue): richiudo l'issue dedup, se aperta."
             DEDUP_MATCHES=$(gh api --paginate "repos/$GH_REPO/issues?state=open&per_page=100" \
               --jq 'first(.[] | select(.pull_request | not) | select(.title == env.DEDUP_TITLE) | .number)')

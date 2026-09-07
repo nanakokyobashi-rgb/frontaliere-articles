@@ -37,6 +37,36 @@ function surfaceStep() {
   return next === -1 ? rest : rest.slice(0, next);
 }
 
+/** Le sole righe eseguibili di un blocco: i commenti citano, non fanno. */
+function withoutComments(block) {
+  return block.split('\n').filter((line) => !/^\s*#/.test(line)).join('\n');
+}
+
+/**
+ * Il ramo «entrambe le liste vuote», dal test fino alla `fi` che lo chiude.
+ * Contiene `if` annidati (il guard sull esito della risoluzione, il no-op senza
+ * match), quindi va estratto contando i livelli e non con una regex
+ * non-greedy, che si fermerebbe alla prima `fi` interna.
+ */
+function emptyListsBranch(step) {
+  const head = 'if [ -z "$PRS" ] && [ -z "$ISSUES" ]; then';
+  const at = step.indexOf(head);
+  assert.notEqual(at, -1, 'ramo "liste vuote" non trovato: la promessa del corpo non e mantenuta');
+  const lines = step.slice(at + head.length).split('\n');
+  const body = [];
+  let depth = 1;
+  for (const line of lines) {
+    const bare = line.trim();
+    if (/^if [\s\S]*; then$/.test(bare)) depth += 1;
+    if (bare === 'fi') {
+      depth -= 1;
+      if (depth === 0) return body.join('\n');
+    }
+    body.push(line);
+  }
+  assert.fail('ramo "liste vuote" non chiuso da una `fi`');
+}
+
 test('il titolo di dedup ha una sola sorgente nello step', () => {
   const step = surfaceStep();
   const assignment = /\n\s+DEDUP_TITLE:\s*'([^']+)'/.exec(step);
@@ -75,9 +105,13 @@ test('la condizione di chiusura promessa nel corpo resta raggiungibile', () => {
   // Il corpo promette la chiusura a liste vuote; lo step non deve creare ne
   // aggiornare l'issue quando entrambe sono vuote.
   assert.match(step, /si richiude da sola al primo run in cui entrambe le liste sono vuote/);
-  const emptyBranch = /if \[ -z "\$PRS" \] && \[ -z "\$ISSUES" \]; then([\s\S]*?)\n\s+fi\n/.exec(step);
-  assert.ok(emptyBranch, 'ramo "liste vuote" non trovato: la promessa del corpo non e mantenuta');
-  assert.match(emptyBranch[1], /\n\s+exit 0/, 'a liste vuote lo step non deve ricreare il digest');
+  const emptyBranch = emptyListsBranch(step);
+  assert.match(emptyBranch, /\n\s+exit 0/, 'a liste vuote lo step non deve ricreare il digest');
+  assert.doesNotMatch(
+    emptyBranch,
+    /--description/,
+    'a liste vuote lo step non deve ricreare ne aggiornare il digest',
+  );
 });
 
 /**
@@ -132,23 +166,92 @@ test('una query fallita non arriva mai al ramo di chiusura', () => {
 test('a liste vuote lo step richiude l issue dedup, non si limita a uscire', () => {
   // Raggiungere la condizione di chiusura non basta: nessun altro processo
   // chiude questo titolo — close-recovered-failure-issues.mjs copre le
-  // famiglie `Workflow Failure:` / `Crawler Failure:`. Senza questa chiamata
+  // famiglie `Workflow Failure:` / `Crawler Failure:`. Senza questa chiusura
   // l'issue dedup resta aperta con un elenco falso, che e' il difetto di #733
   // un passo piu' in la'.
   const step = surfaceStep();
-  const emptyBranch = /if \[ -z "\$PRS" \] && \[ -z "\$ISSUES" \]; then([\s\S]*?)\n\s+fi\n/.exec(step);
-  assert.ok(emptyBranch, 'ramo "liste vuote" non trovato');
+  const emptyBranch = emptyListsBranch(step);
   assert.match(
-    emptyBranch[1],
-    /node scripts\/lib\/github-issue-creator\.mjs[\s\S]*?--resolve/,
-    'a liste vuote lo step deve richiudere l issue dedup con --resolve',
+    emptyBranch,
+    /\n\s+gh issue close "\$DEDUP_NUMBER"/,
+    'a liste vuote lo step deve chiudere l issue dedup, non limitarsi a uscire',
   );
-  // Stessa chiave di dedup dell'apertura (AGENTS.md #6): apertura e chiusura
-  // devono cercare la stessa issue, o si chiude qualcos'altro o niente.
+});
+
+/**
+ * La chiave di dedup ha UNA forma sola, in tutti e tre i suoi usi.
+ *
+ * La lista qui sopra si esclude per UGUAGLIANZA ESATTA
+ * (`.title != env.DEDUP_TITLE`), ma la chiusura passava da
+ * `github-issue-creator.mjs --resolve`, che chiude la prima issue aperta il cui
+ * titolo `startsWith` il prefisso sanitizzato a 60 char. `DEDUP_TITLE` ne ha
+ * 52: il prefisso e' il titolo INTERO, quindi qualunque issue aperta il cui
+ * titolo comincia con la chiave e prosegue (`… — 2026-09`, un duplicato
+ * rinominato) veniva chiusa AL POSTO del digest — e non portando
+ * `needs-human` non compariva in nessuna delle due liste, che restavano vuote a
+ * ogni run: il digest apertoconun elenco falso, e un'issue estranea chiusa a
+ * ogni giro.
+ *
+ * Il difetto e' la DIVERGENZA fra le due forme, non il match per prefisso:
+ * quello in `scripts/lib/github-issue-creator.mjs` e' deliberato
+ * («Deliberately asymmetric») e gli altri chiamanti ci contano. Il fix e' qui,
+ * dove la chiave si usa in tre punti, e questo test e' il legame fra loro
+ * (AGENTS.md #6).
+ */
+test('la chiusura risolve l issue con la stessa uguaglianza esatta con cui la lista la esclude', () => {
+  const step = surfaceStep();
+  const emptyBranch = emptyListsBranch(step);
+
+  const resolve = /DEDUP_MATCHES=\$\(gh api --paginate "([^"]+)"[\s\S]*?--jq '([^']+)'\)/.exec(emptyBranch);
+  assert.ok(resolve, 'il ramo a liste vuote deve risolvere il numero dell issue dedup da se');
   assert.match(
-    emptyBranch[1],
-    /--title "\$DEDUP_TITLE"/,
-    'il resolve deve usare la stessa DEDUP_TITLE con cui l issue viene creata',
+    resolve[2],
+    /select\(\s*\.title\s*==\s*env\.DEDUP_TITLE\s*\)/,
+    'la chiusura deve selezionare per titolo ESATTO: la stessa chiave con cui la lista si esclude',
+  );
+  assert.match(resolve[2], /\.number/, 'dalla risoluzione deve uscire il NUMERO, che e cio che si chiude');
+  assert.match(
+    resolve[2],
+    /select\(\.pull_request \| not\)/,
+    'l endpoint `issues` elenca anche le PR: senza il filtro si chiuderebbe una PR omonima',
+  );
+  // Il perimetro NON puo' essere quello delle due liste: l'issue dedup nasce
+  // con `automation`, non con `needs-human` — cercarla fra le sole
+  // `needs-human` la troverebbe solo nei run in cui qualcuno gliel'ha
+  // aggiunta, che e' esattamente l'accidente di #733.
+  assert.doesNotMatch(resolve[1], /labels=/, 'la ricerca dell issue dedup non deve filtrare per label: la chiave e il titolo');
+  assert.match(resolve[1], /state=open/, 'si chiude solo un issue aperta');
+  assert.match(resolve[1], /per_page=100/, 'senza `per_page` la paginazione costa il triplo delle chiamate');
+
+  // La chiusura passa per il NUMERO risolto, e il match per prefisso di
+  // `--resolve` sparisce da questo ramo.
+  assert.match(emptyBranch, /\n\s+gh issue close "\$DEDUP_NUMBER"/, 'si chiude il numero risolto');
+  // Sul CODICE, non sui commenti: il ramo spiega per esteso perche' `--resolve`
+  // non va bene qui, e citarlo non e' usarlo.
+  assert.doesNotMatch(
+    withoutComments(emptyBranch),
+    /--resolve/,
+    'il ramo di chiusura non deve tornare al match per prefisso di github-issue-creator.mjs',
+  );
+
+  // Stesso principio del guard sulle due liste: una risoluzione FALLITA non e
+  // «issue gia chiusa». Senza catturare l esito, un `gh` non-zero lascerebbe
+  // la variabile vuota e lo step uscirebbe verde senza chiudere niente.
+  assert.match(
+    emptyBranch,
+    /DEDUP_MATCHES=\$\(gh api --paginate[\s\S]*?\n\s+DEDUP_RC=\$\?/,
+    'l exit status della risoluzione va catturato subito dopo l assegnazione',
+  );
+  const rcGuard = /if \[ "\$DEDUP_RC" -ne 0 \]; then([\s\S]*?)\n\s+fi\n/.exec(emptyBranch);
+  assert.ok(rcGuard, 'manca il guard sull esito della risoluzione');
+  assert.match(rcGuard[1], /\n\s+exit 1/, 'una risoluzione fallita deve far fallire lo step, non chiudere a caso');
+  assert.doesNotMatch(rcGuard[1], /gh issue close/, 'il ramo di errore non deve chiudere niente');
+
+  // Nessun match = nessuna issue dedup aperta: e un no-op, non un errore.
+  assert.match(
+    emptyBranch,
+    /if \[ -z "\$DEDUP_NUMBER" \]; then[\s\S]*?exit 0/,
+    'senza issue dedup aperta lo step esce pulito senza chiudere niente',
   );
 });
 
