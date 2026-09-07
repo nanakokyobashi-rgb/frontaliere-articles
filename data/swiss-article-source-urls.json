@@ -1,5 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/economia/1943476/bns": "bns-promuove-berna",
   "https://www.rsi.ch/info/cultura-e-spettacoli": "cultura-e-spettacoli-ticino-2026",
   "https://www.rsi.ch/info/dialogo/le-tracce-dei-climatizzatori-ad-alta-quota--3935661.html": "climatizzatori-ad-alta-quota-i-ricercatori-rilevano-le-tracce-dei-refrigeranti",
   "https://www.rsi.ch/info/ticino-grigioni-e-insubria/da-s-chanf-a-livigno-in-treno-coira-dice-s%c3%ac--3949356.html": "trenino-rossoschanf-livigno",
@@ -1921,6 +1920,11 @@
   "https://www.admin.ch/it/newnsb/7nsivjh5sfhl": {
     "articleId": "ddps-thun-difesa-innovazione",
     "ts": "2026-09-07T07:16:24.359Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/info/scienza-e-tecnologia/%e2%80%9cognuno-dovrebbe-essere-un-hacker%e2%80%9d--4060386.html": {
+    "articleId": "cybersecurity-casa-data-center",
+    "ts": "2026-09-07T07:24:43.961Z",
     "keyForm": 2
   }
 }
