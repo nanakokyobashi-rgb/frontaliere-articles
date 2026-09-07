@@ -462,15 +462,6 @@ const DECLARED_ABSENT = {
       'resta promossa invece di essere parcheggiata. Il file esiste anche qui, sotto ' +
       '`generator/scripts/lib/` — stessa dislocazione di `load-rc-env.mjs` qui sopra.',
   },
-  'scripts/lib/pr-body-sections-check.mjs :: scripts/ci/followup-has-candidates.mjs': {
-    kind: 'site-only',
-    reason:
-      'Arrivata con la riconciliazione `identical` del 2026-08-15. Il docblock di `STATE_PATTERNS` ' +
-      'nomina il consumatore che importa la tassonomia degli stati per non riscriverla: sul sito e\' ' +
-      'quello, qui il ruolo lo copre `scripts/ci/followup-drainer.mjs`. Descrittiva — nessun ' +
-      'chiamante di qui dipende dalla sua esistenza, e `scripts/ci/pr-body-contract.mjs` legge solo ' +
-      '`violations`, non le nuove `warnings`.',
-  },
   'scripts/lib/pr-body-sections-check.mjs :: .github/workflows/prospector-loop.yml': {
     kind: 'site-only',
     reason:
