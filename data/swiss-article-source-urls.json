@@ -1,21 +1,4 @@
 {
-  "https://www.laregione.ch/economia/economia/1940732/miliardi-apple-valore-nvidia-seconda": "apple-vola-a-5000-miliardi-di-valore",
-  "https://www.tio.ch/svizzera/economia/1943476/bns": "bns-promuove-berna",
-  "https://www.rsi.ch/info/cultura-e-spettacoli": "cultura-e-spettacoli-ticino-2026",
-  "https://www.rsi.ch/info/dialogo/le-tracce-dei-climatizzatori-ad-alta-quota--3935661.html": "climatizzatori-ad-alta-quota-i-ricercatori-rilevano-le-tracce-dei-refrigeranti",
-  "https://www.rsi.ch/info/ticino-grigioni-e-insubria/da-s-chanf-a-livigno-in-treno-coira-dice-s%c3%ac--3949356.html": "trenino-rossoschanf-livigno",
-  "https://www.rsi.ch/info/salute/medicina-genetica-l%e2%80%99estate-delle-buone-notizie--3940095.html": "medicina-genetica-in-svizzera",
-  "https://www.tio.ch/svizzera/attualita/1943435/servizio-caso-votazione-iniziativa-tre-ricorsi": "inizia-servizio-civico-ricorsi-irricevibili",
-  "https://www.rsi.ch/info/svizzera/siccit%c3%a0-r%c3%b6sti-per-ora-nessuna-misura-urgente--3949530.html": "siccita-rosti-nessuna-misura-urgente-svizzera",
-  "https://www.rsi.ch/info/ticino-grigioni-e-insubria/eclissi-solare-duecento-persone-incantate-a-cardada--3950115.html": "eclissi-solare-cardada",
-  "https://www.rsi.ch/info/scienza-e-tecnologia/eclissi-solare-del-12-agosto-come-e-dove-osservarla--3940986.html": "eclissi-solare-agosto-2026-svizzera",
-  "https://www.rsi.ch/info/scienza-e-tecnologia/ia-che-si-comporta-da-hacker-come-%c3%a8-possibile--3944562.html": "ia-che-si-comporta-da-hacker",
-  "https://www.laregione.ch/economia/economia/1941949/storico-regole-dieci-diventa-moore": "come-si-diventa-ricchi-lo-storico-americano-spiega-le-dieci-regole",
-  "https://www.laregione.ch/economia/economia/1941304/ia-obblighi-modelli-trasparenza-commissione-agosto-vigilanza-ue-act": "ue-vigilanza-ai-act-2023",
-  "https://www.swissinfo.ch/ita/terminata-l%27eclissi-solare-in-svizzera/91888180": "eclissi-solare-2026-ticino",
-  "https://www.swissinfo.ch/ita/gr%3a-churer-fest%2c-fra-traffico-limitato-e-misure-di-sicurezza/91885637": "churer-fest-traffico-limitato-misure-sicurezza",
-  "https://www.rsi.ch/info/ticino-grigioni-e-insubria/una-cinquantina-di-cicogne-bianche-avvistate-a-castione--3943815.html": "avvistamento-cicogne-bianche-castione",
-  "https://www.rsi.ch/info/ticino-grigioni-e-insubria/alla-ricerca-della-materia-oscura-sotto-sedrun--3939471.html": "esperimento-materia-oscura-sotto-sedrun",
   "https://www.tio.ch/svizzera/cronaca/1943508/carcere-bois-mermet-popolazione-bois-evaso": "evaso-bois-mermet",
   "https://www.laregione.ch/svizzera/svizzera/1943471/miliardi-iva-aumento-punti-acquisti": "iva-aumento-sicurezza",
   "https://www.tio.ch/svizzera/cronaca/1943460/ciclista-incidente-e-bike-ospedale-berna": "incidente-e-bike-morte-ciclista",
@@ -1917,6 +1900,91 @@
   "https://www.rsi.ch/s/4063827": {
     "articleId": "fondazione-beloved-primi-versamenti",
     "ts": "2026-09-07T05:34:08.111Z",
+    "keyForm": 2
+  },
+  "https://www.admin.ch/it/newnsb/7nsivjh5sfhl": {
+    "articleId": "ddps-thun-difesa-innovazione",
+    "ts": "2026-09-07T07:16:24.359Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/info/scienza-e-tecnologia/%e2%80%9cognuno-dovrebbe-essere-un-hacker%e2%80%9d--4060386.html": {
+    "articleId": "cybersecurity-casa-data-center",
+    "ts": "2026-09-07T07:24:43.961Z",
+    "keyForm": 2
+  },
+  "https://www.admin.ch/it/newnsb/ofsdv0mm5gua": {
+    "articleId": "mercato-lavoro-svizzera-agosto-2026",
+    "ts": "2026-09-07T07:38:19.064Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/info/scienza-e-tecnologia/cuore-e-intelligenza-artificiale-nuovi-strumenti-predittivi--4051665.html": {
+    "articleId": "intelligenza-artificiale-cardiologia-2026",
+    "ts": "2026-09-07T07:46:22.178Z",
+    "keyForm": 2
+  },
+  "https://www.tvsvizzera.it/tvs/lavoro-ed-economia/la-disparit%c3%a0-salariale-tra-i-tirocinanti-sta-distorcendo-il-mercato-del-lavoro-svizzero/91998918": {
+    "articleId": "disuguaglianze-salariali-stage-svizzera",
+    "ts": "2026-09-07T08:04:30.221Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/info/svizzera/stabile-il-tasso-di-disoccupazione--4064238.html": {
+    "articleId": "disoccupazione-stabile-svizzera-agosto-2024",
+    "ts": "2026-09-07T08:14:50.079Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/attualita/1948440/pilota-berna-citta-cannabis-lucerna": {
+    "articleId": "cannabis-farmacia-berna-bienne-lucerna",
+    "ts": "2026-09-07T08:23:18.638Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/ticino/attualita/1948425/mario-padula-ha-assunto-la-direzione-dell-istituto-di-ricerche-economiche-dell-usi": {
+    "articleId": "padula-direttore-ire-usi-2026",
+    "ts": "2026-09-07T08:34:49.663Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/cannabis%3a-vendita-in-farmacia-riduce-rischi%2c-studio/92014893": {
+    "articleId": "cannabis-farmacia-vendita",
+    "ts": "2026-09-07T08:41:57.508Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/the-black-keys-annullano-il-concerto-a-berna-per-malattia/92015069": {
+    "articleId": "black-keys-concerto-annullato-berna",
+    "ts": "2026-09-07T08:58:43.894Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/attualita/1948445/ta-auto-mondo-impressione-colore": {
+    "articleId": "mondo-auto-grigio-impressione-colore",
+    "ts": "2026-09-07T09:05:48.308Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/rubriche/aziende-ticinesi-informano/1948443/jaipur-robotics-ticino-tecnopolo-boldbrain-rifiuti-crescita-societa-azienda-propria": {
+    "articleId": "jaipur-robotics-4-3-milioni-internazionale",
+    "ts": "2026-09-07T09:17:05.446Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/cronaca/1948271/volo-swiss-bordo-emergenza-zurigo-atlantico-boston": {
+    "articleId": "volo-swiss-emergenza-medica-zurigo-boston",
+    "ts": "2026-09-07T09:29:24.818Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/sport/hockey/1948451/z-rich-assicurazioni-sponsor-hcl-gold-rinnova": {
+    "articleId": "zurich-hcl-gold-sponsor-2030",
+    "ts": "2026-09-07T09:33:52.419Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/economia/1948457/svizzera-action-negozio-20esimo-schattdorf": {
+    "articleId": "action-negozio-20esimo-schattdorf",
+    "ts": "2026-09-07T09:43:03.809Z",
+    "keyForm": 2
+  },
+  "https://www.laregione.ch/economia/speciale-economia/1948085/il-vicere-di-caracas-passato-da-lugano": {
+    "articleId": "vicere-caracas-indagine-lugano",
+    "ts": "2026-09-07T09:55:33.747Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/tragitto-casa-scuola%3a-per-41%25-genitori-%c3%a8-rischioso%2c-studio/92015568": {
+    "articleId": "tragitto-casa-scuola-rischioso",
+    "ts": "2026-09-07T10:21:29.053Z",
     "keyForm": 2
   }
 }

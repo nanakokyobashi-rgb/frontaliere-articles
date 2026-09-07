@@ -87667,6 +87667,552 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-empatia-lavoro-immobiliare-ticino': {
+    title: 'Senza empatia non sai fare questo lavoro | Frontaliere Ticino',
+    description: 'L\'empatia è descritta come competenza imprescindibile nel lavoro immobiliare, con un episodio reale di subentro gestito senza ascolto umano. Dati aggiornati',
+    keywords: 'frontalieri, ticino, svizzera, italia, senza, empatia, fare, questo',
+    ogTitle: 'Senza empatia non sai fare questo lavoro',
+    ogDescription: 'Scopri perché l\'empatia è fondamentale nel lavoro immobiliare e come un episodio reale di subentro ha messo in luce l\'importanza di ascoltare le persone.',
+    canonicalPath: '/articoli-frontaliere/empatia-lavoro-immobiliare-ticino',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Senza empatia non sai fare questo lavoro",
+      "description": "L'empatia è descritta come competenza imprescindibile nel lavoro immobiliare, con un episodio reale di subentro gestito senza ascolto umano. Dati aggiornati",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/empatia-lavoro-immobiliare-ticino.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Un professionista del settore immobiliare ascolta empaticamente un cliente in un ufficio moderno in Ticino."
+      },
+      "datePublished": "2026-09-07T07:11:01+00:00",
+      "dateModified": "2026-09-07T07:11:01+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/empatia-lavoro-immobiliare-ticino/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-disoccupazione-stabile-ticino-2024': {
+    title: 'Disoccupazione: tasso al 3,0%, stabile su mese ma in aumento annuo',
+    description: 'Il tasso di disoccupazione in Svizzera è stabile al 3,0% su base mensile, ma è in aumento dello 0,2 punti su base annua. In Ticino, il tasso è al 2,9%.',
+    keywords: 'frontalieri, ticino, svizzera, italia, disoccupazione, tasso, stabile, mese',
+    ogTitle: 'Disoccupazione: tasso al 3,0%, stabile su mese ma in aumento annuo',
+    ogDescription: 'Il tasso di disoccupazione in Svizzera è stabile al 3,0% su base mensile, ma è in aumento dello 0,2 punti su base annua. In Ticino, il tasso è al 2,9%.',
+    canonicalPath: '/articoli-frontaliere/disoccupazione-stabile-ticino-2024',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Disoccupazione: tasso al 3,0%, stabile su mese ma in aumento annuo",
+      "description": "Il tasso di disoccupazione in Svizzera è stabile al 3,0% su base mensile, ma è in aumento dello 0,2 punti su base annua. In Ticino, il tasso è al 2,9%.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/disoccupazione-stabile-ticino-2024.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista aerea di Lugano con il Lago Lugano sullo sfondo"
+      },
+      "datePublished": "2026-09-07T07:20:24+00:00",
+      "dateModified": "2026-09-07T07:20:24+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/disoccupazione-stabile-ticino-2024/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-vivere-aymavilles-lavorare-vallese-frontaliere': {
+    title: 'Vivere a Aymavilles e lavorare in Vallese da frontaliere',
+    description: 'Scopri i collegamenti, i tempi di percorrenza, il costo della vita e i vantaggi e svantaggi di trasferirsi a Aymavilles per lavorare in Vallese. Dati aggiornati',
+    keywords: 'frontalieri, ticino, svizzera, italia, vivere, aymavilles, lavorare, vallese',
+    ogTitle: 'Vivere a Aymavilles e lavorare in Vallese da frontaliere',
+    ogDescription: 'Scopri i collegamenti, i tempi di percorrenza, il costo della vita e i vantaggi e svantaggi di trasferirsi a Aymavilles per lavorare in Vallese. Informazioni pratiche e consigli per i frontalieri.',
+    canonicalPath: '/articoli-frontaliere/vivere-aymavilles-lavorare-vallese-frontaliere',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Vivere a Aymavilles e lavorare in Vallese da frontaliere",
+      "description": "Scopri i collegamenti, i tempi di percorrenza, il costo della vita e i vantaggi e svantaggi di trasferirsi a Aymavilles per lavorare in Vallese. Dati aggiornati",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/vivere-aymavilles-lavorare-vallese-frontaliere.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Panoramica di Aymavilles con le Alpi svizzere sullo sfondo"
+      },
+      "datePublished": "2026-09-07T07:34:01+00:00",
+      "dateModified": "2026-09-07T07:34:01+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/vivere-aymavilles-lavorare-vallese-frontaliere/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-arredamento-uffici-ticino-ai': {
+    title: 'Le 5 aziende top per uffici in Ticino | Frontaliere Ticino',
+    description: 'Scopri quali aziende in Ticino sono le più indicate per arredare e progettare uffici secondo l’AI. Dati aggiornati 2026 per frontalieri in Ticino.',
+    keywords: 'frontalieri, ticino, svizzera, italia, aziende, uffici, scopri, quali',
+    ogTitle: 'Le 5 aziende per arredamento e progettazione di uffici più consigliate dall’AI in Ticino',
+    ogDescription: 'Scopri quali aziende in Ticino sono le più indicate per arredare e progettare uffici secondo l’AI. Baumgartner e Chiodoni Luigi SA sono tra le scelte consigliate.',
+    canonicalPath: '/articoli-frontaliere/arredamento-uffici-ticino-ai',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Le 5 aziende top per uffici in Ticino",
+      "description": "Scopri quali aziende in Ticino sono le più indicate per arredare e progettare uffici secondo l’AI. Dati aggiornati 2026 per frontalieri in Ticino.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/arredamento-uffici-ticino-ai.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Ufficio moderno in Ticino con arredamento su misura e tecnologia avanzata."
+      },
+      "datePublished": "2026-09-07T07:42:37+00:00",
+      "dateModified": "2026-09-07T07:42:37+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/arredamento-uffici-ticino-ai/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-vivere-introd-lavorare-vallese-frontaliere': {
+    title: 'Vivere a Introd e lavorare in Vallese da frontaliere',
+    description: 'Vivere a Introd e lavorare in Vallese da frontaliere: fiscalità, Permesso G, trattenute busta paga, LAMal e tempi di percorrenza verso il Vallese.',
+    keywords: 'frontalieri, ticino, svizzera, italia, vivere, introd, lavorare, vallese',
+    ogTitle: 'Vivere a Introd e lavorare in Vallese da frontaliere',
+    ogDescription: 'Guida per residenti a Introd che lavorano in Vallese: Permesso G, imposta alla fonte, Nuovo Accordo 2024, trattenute busta paga, LAMal e pendolarismo alpino.',
+    canonicalPath: '/articoli-frontaliere/vivere-introd-lavorare-vallese-frontaliere',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Vivere a Introd e lavorare in Vallese da frontaliere",
+      "description": "Vivere a Introd e lavorare in Vallese da frontaliere: fiscalità, Permesso G, trattenute busta paga, LAMal e tempi di percorrenza verso il Vallese.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/vivere-introd-lavorare-vallese-frontaliere.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista del villaggio alpino di Introd in Valle d'Aosta con montagne innevate sullo sfondo"
+      },
+      "datePublished": "2026-09-07T07:54:46+00:00",
+      "dateModified": "2026-09-07T07:54:46+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/vivere-introd-lavorare-vallese-frontaliere/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-vivere-saint-christophe-lavorare-vallese-frontaliere': {
+    title: 'Vivere a Saint-Christophe e lavorare in Vallese da frontaliere',
+    description: 'Scopri i collegamenti, i tempi di percorrenza, il costo della vita e i vantaggi di vivere a Saint-Christophe e lavorare in Vallese. Dati aggiornati 2026',
+    keywords: 'frontalieri, ticino, svizzera, italia, vivere, saint-christophe, lavorare, vallese',
+    ogTitle: 'Vivere a Saint-Christophe e lavorare in Vallese da frontaliere',
+    ogDescription: 'Scopri i collegamenti, i tempi di percorrenza, il costo della vita e i vantaggi di vivere a Saint-Christophe e lavorare in Vallese. Con una pianificazione adeguata, è possibile godere dei vantaggi offerti da questa scelta e migliorare la propria',
+    canonicalPath: '/articoli-frontaliere/vivere-saint-christophe-lavorare-vallese-frontaliere',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Vivere a Saint-Christophe e lavorare in Vallese da frontaliere",
+      "description": "Scopri i collegamenti, i tempi di percorrenza, il costo della vita e i vantaggi di vivere a Saint-Christophe e lavorare in Vallese. Dati aggiornati 2026",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/vivere-saint-christophe-lavorare-vallese-frontaliere.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista panoramica del Lago di Lugano con le montagne circostanti"
+      },
+      "datePublished": "2026-09-07T08:09:12+00:00",
+      "dateModified": "2026-09-07T08:09:12+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/vivere-saint-christophe-lavorare-vallese-frontaliere/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-disoccupazione-stabile-ticino-agosto-2024': {
+    title: 'Disoccupazione stabile in Svizzera e Ticino ad agosto 2024',
+    description: 'Il tasso di disoccupazione in Svizzera è rimasto stabile al 3% in agosto, con un aumento di 0,2 punti su base annua. In Ticino, il tasso è del 2,9%',
+    keywords: 'frontalieri, ticino, svizzera, italia, disoccupazione, stabile, agosto, tasso',
+    ogTitle: 'Disoccupazione stabile in Svizzera e Ticino ad agosto 2024',
+    ogDescription: 'Il tasso di disoccupazione in Svizzera è rimasto stabile al 3% in agosto, con un aumento di 0,2 punti su base annua. In Ticino, il tasso è del 2,9%, con un incremento di 0,1 punti su base mensile e di 0,3 punti su base annua. Scopri di più',
+    canonicalPath: '/articoli-frontaliere/disoccupazione-stabile-ticino-agosto-2024',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Disoccupazione stabile in Svizzera e Ticino ad agosto 2024",
+      "description": "Il tasso di disoccupazione in Svizzera è rimasto stabile al 3% in agosto, con un aumento di 0,2 punti su base annua. In Ticino, il tasso è del 2,9%",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/disoccupazione-stabile-ticino-agosto-2024.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista aerea di Lugano con montagne e lago"
+      },
+      "datePublished": "2026-09-07T08:19:50+00:00",
+      "dateModified": "2026-09-07T08:19:50+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/disoccupazione-stabile-ticino-agosto-2024/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-disoccupazione-stabile-agosto-2023': {
+    title: 'Disoccupazione stabile in Svizzera ad agosto | Frontaliere Ticino',
+    description: 'Il tasso di disoccupazione in Svizzera è rimasto stabile al 3,0% ad agosto, con il Ticino al 2,9%. Aumentano i disoccupati di lunga durata. Dati aggiornati 2026',
+    keywords: 'frontalieri, ticino, svizzera, italia, disoccupazione, stabile, agosto, tasso',
+    ogTitle: 'Disoccupazione stabile in Svizzera ad agosto',
+    ogDescription: 'Il tasso di disoccupazione in Svizzera è rimasto stabile al 3,0% ad agosto, con il Ticino al 2,9%. Aumentano i disoccupati di lunga durata. Scopri di più su Frontaliere Ticino.',
+    canonicalPath: '/articoli-frontaliere/disoccupazione-stabile-agosto-2023',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Disoccupazione stabile in Svizzera ad agosto",
+      "description": "Il tasso di disoccupazione in Svizzera è rimasto stabile al 3,0% ad agosto, con il Ticino al 2,9%. Aumentano i disoccupati di lunga durata. Dati aggiornati 2026",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/disoccupazione-stabile-agosto-2023.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista aerea di Lugano con le montagne sullo sfondo"
+      },
+      "datePublished": "2026-09-07T08:38:51+00:00",
+      "dateModified": "2026-09-07T08:38:51+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/disoccupazione-stabile-agosto-2023/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-emergenza-terra-trasformazione': {
+    title: 'Emergenza Terra racconta la grande trasformazione',
+    description: 'Ciclo di incontri sulla trasformazione ecologica e sociale dal 16 settembre al 9 dicembre al Campus SUPSI di Mendrisio. Dati aggiornati 2026 per frontalieri',
+    keywords: 'frontalieri, ticino, svizzera, italia, emergenza, terra, racconta, grande',
+    ogTitle: 'Emergenza Terra racconta la grande trasformazione',
+    ogDescription: 'Partecipa al ciclo di incontri Emergenza Terra dal 16 settembre al 9 dicembre al Campus SUPSI di Mendrisio per discutere la trasformazione ecologica e sociale.',
+    canonicalPath: '/articoli-frontaliere/emergenza-terra-trasformazione',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Emergenza Terra racconta la grande trasformazione",
+      "description": "Ciclo di incontri sulla trasformazione ecologica e sociale dal 16 settembre al 9 dicembre al Campus SUPSI di Mendrisio. Dati aggiornati 2026 per frontalieri",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/emergenza-terra-trasformazione.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista aerea del campus SUPSI di Mendrisio, Ticino, con persone che partecipano a un evento."
+      },
+      "datePublished": "2026-09-07T08:52:50+00:00",
+      "dateModified": "2026-09-07T08:52:50+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/emergenza-terra-trasformazione/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-sciopero-ferroviario-italia-ticino': {
+    title: 'Sciopero ferroviario: possibili ritardi in Ticino',
+    description: 'Uno sciopero nazionale delle Ferrovie dello Stato Italiane potrebbe causare disagi anche in Ticino. Scopri quali servizi saranno interessati e come pianificare',
+    keywords: 'frontalieri, ticino, svizzera, italia, sciopero, ferroviario, possibili, ritardi',
+    ogTitle: 'Sciopero ferroviario in Italia, possibili ritardi e cancellazioni anche in Ticino',
+    ogDescription: 'Uno sciopero nazionale delle Ferrovie dello Stato Italiane potrebbe causare disagi anche in Ticino. Scopri quali servizi saranno interessati e come pianificare i tuoi spostamenti.',
+    canonicalPath: '/articoli-frontaliere/sciopero-ferroviario-italia-ticino',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Sciopero ferroviario: possibili ritardi in Ticino",
+      "description": "Uno sciopero nazionale delle Ferrovie dello Stato Italiane potrebbe causare disagi anche in Ticino. Scopri quali servizi saranno interessati e come pianificare",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/sciopero-ferroviario-italia-ticino.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista panoramica di Lugano con il lago e le montagne"
+      },
+      "datePublished": "2026-09-07T09:02:17+00:00",
+      "dateModified": "2026-09-07T09:02:17+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/sciopero-ferroviario-italia-ticino/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-luganese-tram-treno-cantieri-2035': {
+    title: 'Luganese Tram-Treno: a ottobre i primi cantieri, la rete sarà operativa nel 2035',
+    description: 'I lavori preliminari prenderanno il via alla fine di ottobre 2026 sulla tratta tra Manno e Bioggio. La rete sarà operativa nel corso del 2035. Dati aggiornati',
+    keywords: 'frontalieri, ticino, svizzera, italia, luganese, tram-treno, ottobre, primi',
+    ogTitle: 'Luganese Tram-Treno: a ottobre i primi cantieri, la rete sarà operativa nel 2035',
+    ogDescription: 'Scopri quando inizieranno i lavori preliminari della Rete Tram-Treno del Luganese e quando sarà operativa la nuova rete. Informazioni dettagliate e aggiornate.',
+    canonicalPath: '/articoli-frontaliere/luganese-tram-treno-cantieri-2035',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Luganese Tram-Treno: a ottobre i primi cantieri, la rete sarà operativa nel 2035",
+      "description": "I lavori preliminari prenderanno il via alla fine di ottobre 2026 sulla tratta tra Manno e Bioggio. La rete sarà operativa nel corso del 2035. Dati aggiornati",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/luganese-tram-treno-cantieri-2035.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista aerea di Lugano con la nuova rete Tram-Treno in costruzione"
+      },
+      "datePublished": "2026-09-07T09:46:51+00:00",
+      "dateModified": "2026-09-07T09:46:51+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/luganese-tram-treno-cantieri-2035/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-tram-treno-lugano-lavori-inizio': {
+    title: 'Inizia la costruzione del tram-treno del Luganese',
+    description: 'I lavori preliminari per il tram-treno del Luganese inizieranno a fine ottobre 2026 sulla tratta Bioggio-Manno. Dati aggiornati 2026 per frontalieri in Ticino.',
+    keywords: 'frontalieri, ticino, svizzera, italia, inizia, costruzione, tram-treno, luganese',
+    ogTitle: 'Inizia la costruzione del tram-treno del Luganese',
+    ogDescription: 'I lavori preliminari per il tram-treno del Luganese inizieranno a fine ottobre 2026 sulla tratta Bioggio-Manno, con l\'obiettivo di mettere in esercizio la rete nel 2035.',
+    canonicalPath: '/articoli-frontaliere/tram-treno-lugano-lavori-inizio',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Inizia la costruzione del tram-treno del Luganese",
+      "description": "I lavori preliminari per il tram-treno del Luganese inizieranno a fine ottobre 2026 sulla tratta Bioggio-Manno. Dati aggiornati 2026 per frontalieri in Ticino.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/tram-treno-lugano-lavori-inizio.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista aerea di Lugano con i binari del tram-treno in costruzione"
+      },
+      "datePublished": "2026-09-07T10:00:13+00:00",
+      "dateModified": "2026-09-07T10:00:13+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/tram-treno-lugano-lavori-inizio/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-bollettino-frontaliere-2026-09-07': {
+    title: 'Bollettino del frontaliere – 7 settembre 2026: 118 nuovi annunci di lavoro ieri',
+    description: 'Bollettino frontalieri del 7 settembre 2026: code ai valichi stamattina, dove la benzina costa meno, cambio franco-euro e nuovi annunci di lavoro in Svizzera.',
+    keywords: 'bollettino frontaliere, dogana, attesa dogana, code valichi ticino, prezzi benzina confine, cambio franco euro, lavoro svizzera, frontalieri ticino',
+    ogTitle: 'Bollettino del frontaliere – 7 settembre 2026: 118 nuovi annunci di lavoro ieri',
+    ogDescription: 'I numeri del 7 settembre 2026 per i frontalieri: quanto si aspetta a ogni valico stamattina, in quali comuni conviene fare il pieno, quanto vale oggi il franco e quanti annunci di lavoro sono usciti in Svizzera.',
+    canonicalPath: '/articoli-frontaliere/bollettino-frontaliere-2026-09-07',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Bollettino del frontaliere – 7 settembre 2026: 118 nuovi annunci di lavoro ieri",
+      "description": "Bollettino frontalieri del 7 settembre 2026: code ai valichi stamattina, dove la benzina costa meno, cambio franco-euro e nuovi annunci di lavoro in Svizzera.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/bollettino-frontaliere-2026-09-07.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "I numeri del giorno per i frontalieri – 7 settembre 2026: attese ai valichi, prezzi benzina, cambio franco-euro e annunci di lavoro"
+      },
+      "datePublished": "2026-09-07T10:02:12+00:00",
+      "dateModified": "2026-09-07T10:02:12+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/bollettino-frontaliere-2026-09-07/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-padula-nomina-direttore-ire-usi': {
+    title: 'Mario Padula nominato direttore IRE USI dal 2026',
+    description: 'Mario Padula nominato direttore IRE dell\'USI dal 1° settembre 2026. Esperto di previdenza e finanza familiare, sarà anche Professore di Economia.',
+    keywords: 'frontalieri, ticino, svizzera, italia, mario, padula, nominato, direttore',
+    ogTitle: 'Padula nuovo direttore IRE USI dal 2026',
+    ogDescription: 'L\'economista Mario Padula, specializzato in previdenza e finanza familiare, guiderà l\'Istituto di ricerche economiche dell\'USI dal 1° settembre 2026, succedendo a Mario Jametti.',
+    canonicalPath: '/articoli-frontaliere/padula-nomina-direttore-ire-usi',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Mario Padula nominato direttore IRE USI dal 2026",
+      "description": "Mario Padula nominato direttore IRE dell'USI dal 1° settembre 2026. Esperto di previdenza e finanza familiare, sarà anche Professore di Economia.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/padula-nomina-direttore-ire-usi.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Campus USI a Lugano con vista sul lago"
+      },
+      "datePublished": "2026-09-07T10:18:12+00:00",
+      "dateModified": "2026-09-07T10:18:12+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/padula-nomina-direttore-ire-usi/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

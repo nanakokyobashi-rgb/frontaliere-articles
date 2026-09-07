@@ -76070,6 +76070,747 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-neuchatel-salari-livelli-formazione': {
+    title: 'Salari e lavoro in Neuchâtel: settori e livelli',
+    description: 'Scopri come funzionano i salari nel Canton Neuchâtel: retribuzione per settore e livello di formazione, contributi sociali, diritti e strumenti di valutazione.',
+    keywords: 'frontalieri, ticino, svizzera, italia, salari, lavoro, neuch, settori',
+    ogTitle: 'Salari in Neuchâtel: settori, livelli e diritti del lavoro',
+    ogDescription: 'Analisi completa del mercato del lavoro nel Canton Neuchâtel: retribuzione per settore e formazione, contributi sociali AVS/LPP/LAMal, normativa federale e come valutare il tuo stipendio con strumenti online.',
+    canonicalPath: '/articoli-svizzera/neuchatel-salari-livelli-formazione/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Salari e lavoro in Neuchâtel: settori e livelli",
+      "description": "Scopri come funzionano i salari nel Canton Neuchâtel: retribuzione per settore e livello di formazione, contributi sociali, diritti e strumenti di valutazione.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/neuchatel-salari-livelli-formazione.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Professionisti al lavoro in un moderno ufficio svizzero con vista sulle montagne."
+      },
+      "datePublished": "2026-09-07T07:04:14+00:00",
+      "dateModified": "2026-09-07T07:04:14+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/neuchatel-salari-livelli-formazione/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-ddps-thun-difesa-innovazione': {
+    title: 'Il DDPS rafforza la sede di Thun per la difesa e l’innovazione',
+    description: 'Il DDPS manterrà le aree di proprietà della Confederazione sulla piazza d’armi di Thun per scopi militari, rafforzando la sede come centro per la difesa',
+    keywords: 'frontalieri, ticino, svizzera, italia, ddps, rafforza, sede, thun',
+    ogTitle: 'Il DDPS rafforza la sede di Thun per la difesa e l’innovazione',
+    ogDescription: 'Il DDPS manterrà le aree di proprietà della Confederazione sulla piazza d’armi di Thun per scopi militari, rafforzando la sede come centro per la difesa e l’innovazione. Questo sviluppo coinvolgerà esercito, industria, ricerca e innovazione.',
+    canonicalPath: '/articoli-svizzera/ddps-thun-difesa-innovazione/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Il DDPS rafforza la sede di Thun per la difesa e l’innovazione",
+      "description": "Il DDPS manterrà le aree di proprietà della Confederazione sulla piazza d’armi di Thun per scopi militari, rafforzando la sede come centro per la difesa",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/ddps-thun-difesa-innovazione.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista aerea della piazza d’armi di Thun con strutture moderne per la difesa e l’innovazione."
+      },
+      "datePublished": "2026-09-07T07:16:24+00:00",
+      "dateModified": "2026-09-07T07:16:24+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/ddps-thun-difesa-innovazione/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-cybersecurity-casa-data-center': {
+    title: 'Ognuno dovrebbe essere un hacker: la nostra casa è un data center',
+    description: 'Keren Elazari, esperta di cybersicurezza, spiega come l\'intelligenza artificiale sta cambiando il mondo degli attacchi informatici e come possiamo proteggere',
+    keywords: 'frontalieri, ticino, svizzera, italia, ognuno, dovrebbe, essere, hacker',
+    ogTitle: 'Ognuno dovrebbe essere un hacker: la nostra casa è un data center',
+    ogDescription: 'Keren Elazari, esperta di cybersicurezza, spiega come l\'intelligenza artificiale sta cambiando il mondo degli attacchi informatici e come possiamo proteggere la nostra privacy. Scopri di più su Frontaliere Ticino.',
+    canonicalPath: '/articoli-svizzera/cybersecurity-casa-data-center/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Ognuno dovrebbe essere un hacker: la nostra casa è un data center",
+      "description": "Keren Elazari, esperta di cybersicurezza, spiega come l'intelligenza artificiale sta cambiando il mondo degli attacchi informatici e come possiamo proteggere",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/cybersecurity-casa-data-center.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Una moderna sala di soggiorno con dispositivi connessi, tra cui una smart TV, un laptop e elettrodomestici intelligenti, tutti collegati a un router Wi-Fi sicuro."
+      },
+      "datePublished": "2026-09-07T07:24:43+00:00",
+      "dateModified": "2026-09-07T07:24:43+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/cybersecurity-casa-data-center/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-mercato-lavoro-svizzera-agosto-2026': {
+    title: 'Aumento disoccupati agosto 2026: +1,6% mensile, +7,1% annuale',
+    description: 'La SECO ha pubblicato i dati sul mercato del lavoro in Svizzera per il mese di agosto 2026, mostrando un aumento del numero di disoccupati. Dati aggiornati 2026',
+    keywords: 'frontalieri, ticino, svizzera, italia, aumento, disoccupati, agosto, mensile',
+    ogTitle: 'Aumento disoccupati agosto 2026: +1,6% mensile, +7,1% annuale',
+    ogDescription: 'La SECO ha pubblicato i dati sul mercato del lavoro in Svizzera per il mese di agosto 2026, mostrando un aumento del numero di disoccupati. Il numero dei disoccupati è aumentato di 2’268 unità (+1,6%) rispetto al mese precedente e di 9’439 unità',
+    canonicalPath: '/articoli-svizzera/mercato-lavoro-svizzera-agosto-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Aumento disoccupati agosto 2026: +1,6% mensile, +7,1% annuale",
+      "description": "La SECO ha pubblicato i dati sul mercato del lavoro in Svizzera per il mese di agosto 2026, mostrando un aumento del numero di disoccupati. Dati aggiornati 2026",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/mercato-lavoro-svizzera-agosto-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista aerea del centro di Lugano con il Lago di Lugano sullo sfondo, che mostra l'attività economica nella regione."
+      },
+      "datePublished": "2026-09-07T07:38:18+00:00",
+      "dateModified": "2026-09-07T07:38:18+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/mercato-lavoro-svizzera-agosto-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-intelligenza-artificiale-cardiologia-2026': {
+    title: 'Cuore e intelligenza artificiale: nuovi strumenti predittivi',
+    description: 'Due ricerche dell’Inselspital e dell’Università di Berna indicano che l’IA migliora la prognosi delle malattie cardiache. Dati aggiornati 2026 per frontalieri',
+    keywords: 'frontalieri, ticino, svizzera, italia, cuore, intelligenza, artificiale, nuovi',
+    ogTitle: 'Cuore e intelligenza artificiale: nuovi strumenti predittivi',
+    ogDescription: 'Scopri come l’intelligenza artificiale sta rivoluzionando la prognosi delle malattie cardiache grazie a due importanti studi dell’Inselspital e dell’Università di Berna.',
+    canonicalPath: '/articoli-svizzera/intelligenza-artificiale-cardiologia-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Cuore e intelligenza artificiale: nuovi strumenti predittivi",
+      "description": "Due ricerche dell’Inselspital e dell’Università di Berna indicano che l’IA migliora la prognosi delle malattie cardiache. Dati aggiornati 2026 per frontalieri",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/intelligenza-artificiale-cardiologia-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Un medico analizza dati su un computer in un laboratorio di ricerca medica con l'Università di Berna in sfondo."
+      },
+      "datePublished": "2026-09-07T07:46:22+00:00",
+      "dateModified": "2026-09-07T07:46:22+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/intelligenza-artificiale-cardiologia-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-disuguaglianze-salariali-stage-svizzera': {
+    title: 'Da 3\'500 a zero: stage e disuguaglianze in Svizzera',
+    description: 'Le retribuzioni degli stage in Svizzera variano enormemente, da 3’500 franchi a zero, contribuendo a definire il rapporto dei giovani con il lavoro.',
+    keywords: 'frontalieri, ticino, svizzera, italia, zero, stage, disuguaglianze, retribuzioni',
+    ogTitle: 'Disuguaglianze salariali negli stage in Svizzera',
+    ogDescription: 'Le retribuzioni degli stage in Svizzera variano enormemente, da 3’500 franchi a zero, contribuendo a definire il rapporto dei giovani con il lavoro. Scopri di più sulle disparità salariali e le condizioni di lavoro per gli stagisti in Svizzera.',
+    canonicalPath: '/articoli-svizzera/disuguaglianze-salariali-stage-svizzera/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Da 3'500 a zero: stage e disuguaglianze in Svizzera",
+      "description": "Le retribuzioni degli stage in Svizzera variano enormemente, da 3’500 franchi a zero, contribuendo a definire il rapporto dei giovani con il lavoro.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/disuguaglianze-salariali-stage-svizzera.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Un giovane professionista che lavora in un ufficio moderno a Lugano"
+      },
+      "datePublished": "2026-09-07T08:04:30+00:00",
+      "dateModified": "2026-09-07T08:04:30+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/disuguaglianze-salariali-stage-svizzera/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-disoccupazione-stabile-svizzera-agosto-2024': {
+    title: 'Stabile il tasso di disoccupazione in Svizzera ad agosto',
+    description: 'Il tasso di disoccupazione in Svizzera è rimasto stabile al 3% ad agosto, con un lieve aumento dello 0,2% su base annua. Dati aggiornati 2026 per frontalieri',
+    keywords: 'frontalieri, ticino, svizzera, italia, stabile, tasso, disoccupazione, agosto',
+    ogTitle: 'Stabile il tasso di disoccupazione in Svizzera ad agosto',
+    ogDescription: 'Il tasso di disoccupazione in Svizzera è rimasto stabile al 3% ad agosto 2024, con un lieve aumento dello 0,2% su base annua. In Ticino, il tasso è del 2,9% con un aumento di 0,1 punti su base mensile e di 0,3 punti su base annua. Nei Grigioni',
+    canonicalPath: '/articoli-svizzera/disoccupazione-stabile-svizzera-agosto-2024/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Stabile il tasso di disoccupazione in Svizzera ad agosto",
+      "description": "Il tasso di disoccupazione in Svizzera è rimasto stabile al 3% ad agosto, con un lieve aumento dello 0,2% su base annua. Dati aggiornati 2026 per frontalieri",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/disoccupazione-stabile-svizzera-agosto-2024.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista aerea di Lugano con il Lago Lugano sullo sfondo, che mostra la stabilità economica della regione."
+      },
+      "datePublished": "2026-09-07T08:14:49+00:00",
+      "dateModified": "2026-09-07T08:14:49+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/disoccupazione-stabile-svizzera-agosto-2024/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-cannabis-farmacia-berna-bienne-lucerna': {
+    title: 'Cannabis in farmacia: meno rischi e più consapevolezza',
+    description: 'Il progetto pilota di vendita di cannabis nelle farmacie di Berna, Bienne e Lucerna sta dimostrando di favorire un consumo meno rischioso. Dati aggiornati 2026',
+    keywords: 'frontalieri, ticino, svizzera, italia, cannabis, farmacia, meno, rischi',
+    ogTitle: 'Cannabis in farmacia: meno rischi e più consapevolezza',
+    ogDescription: 'Il progetto pilota di vendita di cannabis nelle farmacie di Berna, Bienne e Lucerna sta dimostrando di favorire un consumo meno rischioso. Questo è quanto emerge da una valutazione scientifica intermedia presentata oggi a Berna dalle tre città',
+    canonicalPath: '/articoli-svizzera/cannabis-farmacia-berna-bienne-lucerna/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Cannabis in farmacia: meno rischi e più consapevolezza",
+      "description": "Il progetto pilota di vendita di cannabis nelle farmacie di Berna, Bienne e Lucerna sta dimostrando di favorire un consumo meno rischioso. Dati aggiornati 2026",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/cannabis-farmacia-berna-bienne-lucerna.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Una farmacia a Berna, Bienne o Lucerna con un cartello per la vendita di cannabis."
+      },
+      "datePublished": "2026-09-07T08:23:18+00:00",
+      "dateModified": "2026-09-07T08:23:18+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/cannabis-farmacia-berna-bienne-lucerna/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-padula-direttore-ire-usi-2026': {
+    title: 'Mario Padula nuovo direttore IRE dell\'USI dal 1° settembre',
+    description: 'Mario Padula assume la direzione dell\'IRE dell\'USI dal 1° settembre 2026, succedendo a Mario Jametti. Esperto di previdenza ed economia dell\'invecchiamento.',
+    keywords: 'frontalieri, ticino, svizzera, italia, mario, padula, nuovo, direttore',
+    ogTitle: 'Mario Padula nuovo direttore IRE dell\'USI',
+    ogDescription: 'L\'economista Mario Padula, già presidente della COVIP e membro del Board of Supervisors dell\'EIOPA dal 2016 al 2023, assumerà dal 1° settembre 2026 la direzione dell\'Istituto di ricerche economiche dell\'USI, succedendo a Mario Jametti. Laurea',
+    canonicalPath: '/articoli-svizzera/padula-direttore-ire-usi-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Mario Padula nuovo direttore IRE dell'USI dal 1° settembre",
+      "description": "Mario Padula assume la direzione dell'IRE dell'USI dal 1° settembre 2026, succedendo a Mario Jametti. Esperto di previdenza ed economia dell'invecchiamento.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/padula-direttore-ire-usi-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Campus USI a Lugano con la nuova direzione dell'IRE"
+      },
+      "datePublished": "2026-09-07T08:34:49+00:00",
+      "dateModified": "2026-09-07T08:34:49+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/padula-direttore-ire-usi-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-cannabis-farmacia-vendita': {
+    title: 'Cannabis: vendita in farmacia riduce rischi, studio',
+    description: 'La vendita di cannabis nelle farmacie di Berna, Bienne e Lucerna favorisce un consumo meno rischioso, secondo uno studio. Dati aggiornati 2026 per frontalieri',
+    keywords: 'frontalieri, ticino, svizzera, italia, cannabis, vendita, farmacia, riduce',
+    ogTitle: 'Cannabis: vendita in farmacia riduce rischi, studio',
+    ogDescription: 'La vendita di cannabis nelle farmacie di Berna, Bienne e Lucerna sta dimostrando di favorire un consumo meno rischioso, secondo uno studio delle Università di Berna e Lucerna.',
+    canonicalPath: '/articoli-svizzera/cannabis-farmacia-vendita/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Cannabis: vendita in farmacia riduce rischi, studio",
+      "description": "La vendita di cannabis nelle farmacie di Berna, Bienne e Lucerna favorisce un consumo meno rischioso, secondo uno studio. Dati aggiornati 2026 per frontalieri",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/cannabis-farmacia-vendita.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Farmacia in Svizzera con cartello vendita cannabis"
+      },
+      "datePublished": "2026-09-07T08:41:57+00:00",
+      "dateModified": "2026-09-07T08:41:57+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/cannabis-farmacia-vendita/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-black-keys-concerto-annullato-berna': {
+    title: 'The Black Keys annullano il concerto a Berna per malattia',
+    description: 'La band americana ha dovuto cancellare lo spettacolo alla Festhalle di Berna a causa di casi di malattia. Dati aggiornati 2026 per frontalieri in Ticino.',
+    keywords: 'frontalieri, ticino, svizzera, italia, black, keys, annullano, concerto',
+    ogTitle: 'The Black Keys annullano il concerto a Berna per malattia',
+    ogDescription: 'La band americana ha dovuto cancellare lo spettacolo alla Festhalle di Berna a causa di casi di malattia. I biglietti saranno rimborsati presso il punto vendita originale.',
+    canonicalPath: '/articoli-svizzera/black-keys-concerto-annullato-berna/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "The Black Keys annullano il concerto a Berna per malattia",
+      "description": "La band americana ha dovuto cancellare lo spettacolo alla Festhalle di Berna a causa di casi di malattia. Dati aggiornati 2026 per frontalieri in Ticino.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/black-keys-concerto-annullato-berna.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Concerto annullato alla Festhalle di Berna"
+      },
+      "datePublished": "2026-09-07T08:58:43+00:00",
+      "dateModified": "2026-09-07T08:58:43+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/black-keys-concerto-annullato-berna/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-mondo-auto-grigio-impressione-colore': {
+    title: 'Il mondo delle auto diventa sempre più grigio e non è solo un\'impressione',
+    description: 'Secondo un\'analisi dell\'Ufficio federale delle strade, il rosso era il colore più gettonato per le nuove immatricolazioni nel 1985, con quasi il 23%. Oggi',
+    keywords: 'frontalieri, ticino, svizzera, italia, mondo, auto, diventa, sempre',
+    ogTitle: 'Il mondo delle auto diventa sempre più grigio e non è solo un\'impressione',
+    ogDescription: 'Scopri perché il mondo delle auto è diventato sempre più grigio e quali sono le implicazioni pratiche per i consumatori svizzeri.',
+    canonicalPath: '/articoli-svizzera/mondo-auto-grigio-impressione-colore/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Il mondo delle auto diventa sempre più grigio e non è solo un'impressione",
+      "description": "Secondo un'analisi dell'Ufficio federale delle strade, il rosso era il colore più gettonato per le nuove immatricolazioni nel 1985, con quasi il 23%. Oggi",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/mondo-auto-grigio-impressione-colore.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Una strada svizzera con auto di vari colori, con un focus su auto grigie, nere e bianche."
+      },
+      "datePublished": "2026-09-07T09:05:48+00:00",
+      "dateModified": "2026-09-07T09:05:48+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/mondo-auto-grigio-impressione-colore/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-jaipur-robotics-4-3-milioni-internazionale': {
+    title: 'Jaipur Robotics raccoglie 4,3 milioni per l\'espansione internazionale',
+    description: 'La startup svizzera Jaipur Robotics ha annunciato la chiusura di un investimento da EUR 4,3 milioni per accelerare la propria espansione internazionale.',
+    keywords: 'frontalieri, ticino, svizzera, italia, jaipur, robotics, raccoglie, milioni',
+    ogTitle: 'Jaipur Robotics raccoglie 4,3 milioni per l\'espansione internazionale',
+    ogDescription: 'La startup svizzera Jaipur Robotics ha annunciato la chiusura di un investimento da EUR 4,3 milioni per accelerare la propria espansione internazionale e sviluppare ulteriormente la propria piattaforma tecnologica basata su intelligenza artificiale.',
+    canonicalPath: '/articoli-svizzera/jaipur-robotics-4-3-milioni-internazionale/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Jaipur Robotics raccoglie 4,3 milioni per l'espansione internazionale",
+      "description": "La startup svizzera Jaipur Robotics ha annunciato la chiusura di un investimento da EUR 4,3 milioni per accelerare la propria espansione internazionale.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/jaipur-robotics-4-3-milioni-internazionale.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista aerea del Tecnopolo Ticino a Manno, Svizzera, con edifici moderni e spazi verdi."
+      },
+      "datePublished": "2026-09-07T09:17:05+00:00",
+      "dateModified": "2026-09-07T09:17:05+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/jaipur-robotics-4-3-milioni-internazionale/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-volo-swiss-emergenza-medica-zurigo-boston': {
+    title: 'Emergenza medica: volo Swiss torna indietro sull\'Atlantico',
+    description: 'Sabato sera il volo Swiss LX54 partito da Zurigo alla volta di Boston ha dovuto invertire la rotta sopra l’Atlantico e tornare in Svizzera. Dati aggiornati 2026',
+    keywords: 'frontalieri, ticino, svizzera, italia, emergenza, medica, volo, swiss',
+    ogTitle: 'Emergenza medica a bordo: volo Swiss costretto a fare dietrofront sopra l’Atlantico',
+    ogDescription: 'Sabato sera il volo Swiss LX54 partito da Zurigo alla volta di Boston ha dovuto invertire la rotta sopra l’Atlantico e tornare in Svizzera. Le condizioni di salute della persona coinvolta si sono stabilizzate durante il volo di ritorno e ha ricevuto',
+    canonicalPath: '/articoli-svizzera/volo-swiss-emergenza-medica-zurigo-boston/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Emergenza medica: volo Swiss torna indietro sull'Atlantico",
+      "description": "Sabato sera il volo Swiss LX54 partito da Zurigo alla volta di Boston ha dovuto invertire la rotta sopra l’Atlantico e tornare in Svizzera. Dati aggiornati 2026",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/volo-swiss-emergenza-medica-zurigo-boston.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista aerea di un aereo svizzero sopra l'Atlantico"
+      },
+      "datePublished": "2026-09-07T09:29:24+00:00",
+      "dateModified": "2026-09-07T09:29:24+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/volo-swiss-emergenza-medica-zurigo-boston/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-zurich-hcl-gold-sponsor-2030': {
+    title: 'Zurich rinnova con l’HCL: Gold Sponsor fino al 2030',
+    description: 'Zurich Assicurazioni ha rinnovato la sua partnership con l’Hockey Club Lugano fino al 2030, confermandosi Gold Sponsor. Dati aggiornati 2026 per frontalieri',
+    keywords: 'frontalieri, ticino, svizzera, italia, zurich, rinnova, gold, sponsor',
+    ogTitle: 'Zurich rinnova con l’HCL: Gold Sponsor fino al 2030',
+    ogDescription: 'Zurich Assicurazioni ha rinnovato la sua partnership con l’Hockey Club Lugano fino al 2030, confermandosi Gold Sponsor. Scopri di più su questa importante collaborazione.',
+    canonicalPath: '/articoli-svizzera/zurich-hcl-gold-sponsor-2030/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Zurich rinnova con l’HCL: Gold Sponsor fino al 2030",
+      "description": "Zurich Assicurazioni ha rinnovato la sua partnership con l’Hockey Club Lugano fino al 2030, confermandosi Gold Sponsor. Dati aggiornati 2026 per frontalieri",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/zurich-hcl-gold-sponsor-2030.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista panoramica del Lago di Lugano con l'Hockey Club Lugano e Zurich Assicurazioni"
+      },
+      "datePublished": "2026-09-07T09:33:52+00:00",
+      "dateModified": "2026-09-07T09:33:52+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/zurich-hcl-gold-sponsor-2030/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-action-negozio-20esimo-schattdorf': {
+    title: 'Action accelera e apre il 20esimo negozio | Frontaliere Ticino',
+    description: 'Action inaugura il suo 20esimo negozio in Svizzera a Schattdorf, Uri, il 17 settembre, con 14 nuove assunzioni locali. Dati aggiornati 2026 per frontalieri',
+    keywords: 'frontalieri, ticino, svizzera, italia, action, accelera, apre, 20esimo',
+    ogTitle: 'Action accelera e apre il 20esimo negozio',
+    ogDescription: 'Action inaugura il suo 20esimo negozio in Svizzera a Schattdorf, Uri, il 17 settembre, con 14 nuove assunzioni locali. Scopri di più su questa espansione e le opportunità di lavoro create.',
+    canonicalPath: '/articoli-svizzera/action-negozio-20esimo-schattdorf/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Action accelera e apre il 20esimo negozio",
+      "description": "Action inaugura il suo 20esimo negozio in Svizzera a Schattdorf, Uri, il 17 settembre, con 14 nuove assunzioni locali. Dati aggiornati 2026 per frontalieri",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/action-negozio-20esimo-schattdorf.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista aerea del nuovo negozio Action a Schattdorf, Uri, Svizzera"
+      },
+      "datePublished": "2026-09-07T09:43:03+00:00",
+      "dateModified": "2026-09-07T09:43:03+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/action-negozio-20esimo-schattdorf/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-vicere-caracas-indagine-lugano': {
+    title: 'Il \'viceré di Caracas\' indagato a Zurigo: il passaggio da Lugano',
+    description: 'Alejandro Betancourt, \'uomo di Trump per il greggio venezuelano\', è indagato a Zurigo ed è stato azionista di una banca ticinese: i dettagli non specificati.',
+    keywords: 'frontalieri, ticino, svizzera, italia, viceré, caracas, indagato, zurigo',
+    ogTitle: 'Betancourt, il \'viceré di Caracas\' indagato a Zurigo e il passaggio da Lugano',
+    ogDescription: 'La fonte definisce Alejandro Betancourt \'l\'uomo di Trump per il greggio venezuelano\' e \'il viceré di Caracas\'. È indagato a Zurigo ed è stato azionista di una banca ticinese: il caso riaperto dalla stampa svizzera e i punti ancora non specificati.',
+    canonicalPath: '/articoli-svizzera/vicere-caracas-indagine-lugano/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Il 'viceré di Caracas' indagato a Zurigo: il passaggio da Lugano",
+      "description": "Alejandro Betancourt, 'uomo di Trump per il greggio venezuelano', è indagato a Zurigo ed è stato azionista di una banca ticinese: i dettagli non specificati.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/vicere-caracas-indagine-lugano.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Veduta aerea del distretto finanziario di Lugano sul lago al tramonto"
+      },
+      "datePublished": "2026-09-07T09:55:33+00:00",
+      "dateModified": "2026-09-07T09:55:33+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/vicere-caracas-indagine-lugano/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-asilo-nido-custodia-bambini-canton-appenzello-interno': {
+    title: 'Asilo nido e custodia bambini nel Canton Appenzello Interno: costi e tariffe',
+    description: 'Scopri le opzioni di custodia per bambini nel Canton Appenzello Interno, inclusi asili nido, famiglie diurne e doposcuola, con tariffe calcolate sul reddito',
+    keywords: 'frontalieri, ticino, svizzera, italia, asilo, nido, custodia, bambini',
+    ogTitle: 'Asilo nido e custodia bambini nel Canton Appenzello Interno',
+    ogDescription: 'Scopri le opzioni di custodia per bambini nel Canton Appenzello Interno, inclusi asili nido, famiglie diurne e doposcuola, con tariffe calcolate sul reddito e sussidi cantonali disponibili. Questo articolo fornisce informazioni dettagliate sulle',
+    canonicalPath: '/articoli-svizzera/asilo-nido-custodia-bambini-canton-appenzello-interno/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Asilo nido e custodia bambini nel Canton Appenzello Interno: costi e tariffe",
+      "description": "Scopri le opzioni di custodia per bambini nel Canton Appenzello Interno, inclusi asili nido, famiglie diurne e doposcuola, con tariffe calcolate sul reddito",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/asilo-nido-custodia-bambini-canton-appenzello-interno.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Asilo nido nel Canton Appenzello Interno"
+      },
+      "datePublished": "2026-09-07T10:09:56+00:00",
+      "dateModified": "2026-09-07T10:09:56+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/asilo-nido-custodia-bambini-canton-appenzello-interno/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-tragitto-casa-scuola-rischioso': {
+    title: 'Tragitto casa-scuola: per il 41% dei genitori è rischioso, studio',
+    description: 'Quattro genitori su dieci considerano pericoloso il tragitto casa-scuola per i loro figli, secondo uno studio commissionato dall\'ASSOCIAZIONE TRAFFICO',
+    keywords: 'frontalieri, ticino, svizzera, italia, tragitto, casa-scuola, genitori, rischioso',
+    ogTitle: 'Tragitto casa-scuola: per il 41% dei genitori è rischioso, studio',
+    ogDescription: 'Quattro genitori su dieci considerano pericoloso il tragitto casa-scuola per i loro figli, secondo uno studio commissionato dall\'ASSOCIAZIONE TRAFFICO E AMBIENTE (ATA) e dal FONDO DI SICUREZZA STRADALE (FSS).',
+    canonicalPath: '/articoli-svizzera/tragitto-casa-scuola-rischioso/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Tragitto casa-scuola: per il 41% dei genitori è rischioso, studio",
+      "description": "Quattro genitori su dieci considerano pericoloso il tragitto casa-scuola per i loro figli, secondo uno studio commissionato dall'ASSOCIAZIONE TRAFFICO",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/tragitto-casa-scuola-rischioso.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Un bambino che cammina verso la scuola in una città svizzera con un percorso pedonale sicuro"
+      },
+      "datePublished": "2026-09-07T10:21:28+00:00",
+      "dateModified": "2026-09-07T10:21:28+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/tragitto-casa-scuola-rischioso/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;
