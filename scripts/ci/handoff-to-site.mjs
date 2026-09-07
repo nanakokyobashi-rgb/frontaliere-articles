@@ -575,7 +575,7 @@ export function redeliveryDecision({ decision, deliveredUrl } = {}) {
   // per costruzione — riportarlo come «nessuna consegna precedente» nominerebbe
   // la conseguenza al posto della causa nel solo output che si legge dopo.
   if (!d.handoff) {
-    return { skip: false, close: false, reason: `il verdetto di oggi non è instradabile: ${d.reason || 'nessuna decisione'}` };
+    return { skip: false, close: false, reason: d.reason || 'nessuna decisione da instradare' };
   }
   if (!deliveredUrl) {
     return { skip: false, close: false, reason: 'nessuna consegna precedente per questa issue' };

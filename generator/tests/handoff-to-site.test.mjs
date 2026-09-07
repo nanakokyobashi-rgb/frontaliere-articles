@@ -667,7 +667,7 @@ test('#972: la direzione dell\'errore è «procedi» — mai un fix vero lasciat
   // la conseguenza spacciata per causa nell'unico output che poi si legge.
   assert.match(
     redeliveryDecision({ decision: handoffDecision({ verdict: 'pr-created', body: MIRROR_BODY }), deliveredUrl: '' }).reason,
-    /non è instradabile/,
+    /non instradabile/,
   );
 });
 
