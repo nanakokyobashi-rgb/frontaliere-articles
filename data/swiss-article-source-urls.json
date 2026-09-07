@@ -1,5 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/cronaca/1943460/ciclista-incidente-e-bike-ospedale-berna": "incidente-e-bike-morte-ciclista",
   "https://www.rsi.ch/info/cultura-e-spettacoli/eurovision-se-il-paese-vincitore-%c3%a8-in-guerra-non-ospiter%c3%a0-il-concorso--3949995.html": "regolamento-eurovision-sicurezza-2027",
   "https://jobs.rsi.ch/it/lavoro-e-carriera/jobs": "opportunita-lavoro-rsi-svizzera",
   "https://www.laregione.ch/rubriche/scienza-e-medicina": "scienza-medicina-attualita-svizzera",
@@ -1993,6 +1992,11 @@
   "https://www.rsi.ch/info/mondo/la-%e2%80%9crana-del-caff%c3%a8%e2%80%9d-scoperta-una-nuova-specie-in-costa-rica--3945972.html": {
     "articleId": "rana-caff-scoperta-costa-rica",
     "ts": "2026-09-07T10:44:59.994Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/rubriche/ospite/1948480/neutralita-il-27-settembre-scegliamo-la-svizzera": {
+    "articleId": "neutralita-svizzera-27-settembre",
+    "ts": "2026-09-07T11:10:20.424Z",
     "keyForm": 2
   }
 }
