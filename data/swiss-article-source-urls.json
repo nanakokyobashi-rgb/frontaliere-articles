@@ -1,5 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/cronaca/1943508/carcere-bois-mermet-popolazione-bois-evaso": "evaso-bois-mermet",
   "https://www.laregione.ch/svizzera/svizzera/1943471/miliardi-iva-aumento-punti-acquisti": "iva-aumento-sicurezza",
   "https://www.tio.ch/svizzera/cronaca/1943460/ciclista-incidente-e-bike-ospedale-berna": "incidente-e-bike-morte-ciclista",
   "https://www.rsi.ch/info/cultura-e-spettacoli/eurovision-se-il-paese-vincitore-%c3%a8-in-guerra-non-ospiter%c3%a0-il-concorso--3949995.html": "regolamento-eurovision-sicurezza-2027",
@@ -1985,6 +1984,11 @@
   "https://www.swissinfo.ch/ita/tragitto-casa-scuola%3a-per-41%25-genitori-%c3%a8-rischioso%2c-studio/92015568": {
     "articleId": "tragitto-casa-scuola-rischioso",
     "ts": "2026-09-07T10:21:29.053Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/ticino/attualita/1948469/settembre-e-il-mese-dell-ambiente": {
+    "articleId": "settembre-mese-ambiente-collina-doro",
+    "ts": "2026-09-07T10:35:33.405Z",
     "keyForm": 2
   }
 }
