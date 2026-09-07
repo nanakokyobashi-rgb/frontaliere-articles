@@ -1,5 +1,4 @@
 {
-  "https://www.laregione.ch/rubriche/scienza-e-medicina": "scienza-medicina-attualita-svizzera",
   "https://www.laregione.ch/rubriche/salute-sessuale": "salute-sessuale-ticino",
   "https://www.laregione.ch/svizzera/svizzera/1943573/eclissi-svizzera-terminata-ultima-coperto": "eclissi-solare-svizzera-conclusa",
   "https://www.laregione.ch/svizzera/svizzera/1943590/controllo-finanze-ufsp-federale-cdf": "il-controllo-delle-finanze-critica-duramente-l-ufsp",
@@ -2005,6 +2004,11 @@
   "https://www.rsi.ch/info/natura-e-animali/cibo-per-cani-e-gatti-i-cinque-errori-pi%c3%b9-comuni--4052856.html": {
     "articleId": "cibo-per-cani-gatti-errori-comuni",
     "ts": "2026-09-07T11:40:59.584Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/confederazione-vuole-mantenere-aree-thun-per-esercito-e-difesa/92016218": {
+    "articleId": "confederazione-mantiene-aree-thun-difesa",
+    "ts": "2026-09-07T11:45:17.889Z",
     "keyForm": 2
   }
 }
