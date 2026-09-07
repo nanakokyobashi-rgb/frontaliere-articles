@@ -87,6 +87,53 @@ function importSpecifiers(src) {
   return [...src.matchAll(IMPORT_RE)].map((m) => m[2]);
 }
 
+// I candidati provati per uno specificatore relativo, nell'ordine di Node, e
+// gli stessi di `import-closure.test.mjs` e di
+// `loop-drift-check.mjs:resolvedLocalImports()`.
+//
+// `.ts` prima dei gemelli `.mjs`/`.js`: i rami di fallback si attivano solo per
+// un importatore senza estensione, cioe' TypeScript, e li' `./foo` accanto a
+// `foo.ts` e `foo.mjs` risolve il `.ts`. Le quattro copie della lista devono
+// muoversi insieme (#1029 le unifichera'), ordine compreso.
+//
+// Prima qui c'era `if (!path.extname(target)) target += '.mjs'`: un unico
+// candidato, scelto da una euristica che sbaglia in due modi opposti. Un
+// `./foo` che sta accanto a un `foo.ts` o a un `foo/index.mjs` risultava
+// ROTTO su codice corretto (e' la classe della issue #1032, vista su
+// import-closure.test.mjs, che sotto generator/ ha davvero dei `.ts`); e un
+// `./lib/foo.config` — dove `.config` non e' un'estensione di modulo — non
+// riceveva nessun fallback. Provare i candidati invece di indovinarne uno
+// toglie l'euristica di mezzo.
+function resolutionCandidates(base) {
+  return [
+    base,
+    `${base}.ts`,
+    `${base}.mjs`,
+    `${base}.js`,
+    path.join(base, 'index.ts'),
+    path.join(base, 'index.mjs'),
+    path.join(base, 'index.js'),
+  ];
+}
+
+/**
+ * Il primo candidato che esiste ed e' un FILE (path repo-relative), o `null`.
+ *
+ * `isFile()` e non il solo `existsSync`: una directory omonima non e' un
+ * modulo, e contarla come risolta renderebbe il fallback fail-open — un guard
+ * che sbagliava in rosso diventerebbe uno che sbaglia in verde.
+ */
+function resolveRelative(base) {
+  for (const candidate of resolutionCandidates(base)) {
+    try {
+      if (fs.statSync(path.join(ROOT, candidate)).isFile()) return candidate;
+    } catch {
+      // ENOENT / ENOTDIR: il candidato non c'e', si prova il prossimo.
+    }
+  }
+  return null;
+}
+
 function entryPoints() {
   const out = [];
   for (const d of DIRS) {
@@ -110,10 +157,10 @@ test('ogni import relativo degli script del ciclo risolve a un file esistente', 
     const src = fs.readFileSync(abs, 'utf8');
     for (const spec of importSpecifiers(src)) {
       if (!spec.startsWith('.')) continue;
-      let target = path.normalize(path.join(path.dirname(rel), spec));
-      if (!path.extname(target)) target += '.mjs';
-      if (!fs.existsSync(path.join(ROOT, target))) {
-        broken.push(`${rel} → ${spec} (atteso: ${target})`);
+      const base = path.normalize(path.join(path.dirname(rel), spec));
+      const target = resolveRelative(base);
+      if (!target) {
+        broken.push(`${rel} → ${spec} (provati: ${resolutionCandidates(base).join(', ')})`);
         continue;
       }
       walk(target);
