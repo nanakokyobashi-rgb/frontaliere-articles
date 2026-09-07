@@ -902,14 +902,25 @@ function resolvedLocalImports(rel, source, known) {
     // scanner esiste per vedere — una voce `identical` che importa un file
     // dichiarato assente dal sito — restava invisibile proprio sull'albero in
     // cui la forma senza estensione e' la norma (#1032).
+    // `.ts` PRIMA di `.mjs`/`.js`: la collisione esiste gia' nell'albero
+    // (`host/shared/viteAssetHashRx.mjs` e `.ts` sono due voci di manifest
+    // distinte, e `host/shared/chunkFiles.ts` importa './viteAssetHashRx').
+    // Con i gemelli JS per primi `manifestDepsOf()` attribuiva la dipendenza
+    // al gemello SBAGLIATO: finche' entrambi sono `identical` il verdetto
+    // coincide per caso, ma appena uno passa a `corpus-only`
+    // `unmirrorableDepsVerdict()` (e `transportVerdict()`, che decide la
+    // DIREZIONE del mirror) leggerebbe il `mode` dell'altro file. I rami di
+    // fallback si attivano solo per un importatore senza estensione, cioe'
+    // TypeScript — un `.mjs` sotto Node non puo' scrivere quella forma —
+    // quindi far vincere `.ts` e' sicuro incondizionatamente.
     const hit = [
       base,
+      `${base}.ts`,
       `${base}.mjs`,
       `${base}.js`,
-      `${base}.ts`,
+      `${base}/index.ts`,
       `${base}/index.mjs`,
       `${base}/index.js`,
-      `${base}/index.ts`,
     ].find(known);
     if (hit && !out.includes(hit)) out.push(hit);
   }

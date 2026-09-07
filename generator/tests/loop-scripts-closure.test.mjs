@@ -91,6 +91,11 @@ function importSpecifiers(src) {
 // gli stessi di `import-closure.test.mjs` e di
 // `loop-drift-check.mjs:resolvedLocalImports()`.
 //
+// `.ts` prima dei gemelli `.mjs`/`.js`: i rami di fallback si attivano solo per
+// un importatore senza estensione, cioe' TypeScript, e li' `./foo` accanto a
+// `foo.ts` e `foo.mjs` risolve il `.ts`. Le quattro copie della lista devono
+// muoversi insieme (#1029 le unifichera'), ordine compreso.
+//
 // Prima qui c'era `if (!path.extname(target)) target += '.mjs'`: un unico
 // candidato, scelto da una euristica che sbaglia in due modi opposti. Un
 // `./foo` che sta accanto a un `foo.ts` o a un `foo/index.mjs` risultava
@@ -102,12 +107,12 @@ function importSpecifiers(src) {
 function resolutionCandidates(base) {
   return [
     base,
+    `${base}.ts`,
     `${base}.mjs`,
     `${base}.js`,
-    `${base}.ts`,
+    path.join(base, 'index.ts'),
     path.join(base, 'index.mjs'),
     path.join(base, 'index.js'),
-    path.join(base, 'index.ts'),
   ];
 }
 

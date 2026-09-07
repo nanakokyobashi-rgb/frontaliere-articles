@@ -150,9 +150,34 @@ export const RELATIVE_IMPORT_SPEC_SOURCE =
 
 export const relativeImportSpec = () => new RegExp(RELATIVE_IMPORT_SPEC_SOURCE, 'g');
 
+// I candidati provati per uno specificatore relativo, e gli stessi di
+// `import-closure.test.mjs`, `loop-scripts-closure.test.mjs` e
+// `loop-drift-check.mjs:resolvedLocalImports()`.
+//
+// `.ts` PRIMA di `.mjs`/`.js`: i rami di fallback si attivano solo per un
+// importatore senza estensione, cioe' TypeScript — un `.mjs` sotto Node non
+// puo' scrivere quella forma — e li' `./foo` accanto a `foo.ts` e `foo.mjs`
+// risolve il `.ts`. Provare prima i gemelli JS attribuirebbe la dipendenza al
+// file sbagliato.
+//
+// I rami `.ts` non sono decorativi qui: `generator/` ha 5 sorgenti `.ts`
+// (`services/`, `data/`, `build-plugins/`), e un choke-point che ne raggiunge
+// uno con la forma senza estensione perdeva quel sorgente dal testo
+// raggiungibile — il file usciva dal censimento in SILENZIO, con `missing`
+// vuoto per il motivo sbagliato (#1032).
+const resolutionCandidates = (base) => [
+  base,
+  `${base}.ts`,
+  `${base}.mjs`,
+  `${base}.js`,
+  path.join(base, 'index.ts'),
+  path.join(base, 'index.mjs'),
+  path.join(base, 'index.js'),
+];
+
 const resolveRelativeImport = (fromFile, spec) => {
   const base = path.resolve(path.dirname(fromFile), spec);
-  for (const candidate of [base, `${base}.mjs`, `${base}.js`, path.join(base, 'index.mjs'), path.join(base, 'index.js')]) {
+  for (const candidate of resolutionCandidates(base)) {
     if (fs.existsSync(candidate) && fs.statSync(candidate).isFile()) return candidate;
   }
   return null;

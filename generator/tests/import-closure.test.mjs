@@ -76,6 +76,11 @@ const SPECIFIER =
 // Stessa lista di `loop-drift-check.mjs:resolvedLocalImports()` e di
 // `loop-scripts-closure.test.mjs`, con in piu' i due rami `.ts`.
 //
+// `.ts` prima dei gemelli `.mjs`/`.js`: i rami di fallback si attivano solo per
+// un importatore senza estensione, cioe' TypeScript, e li' `./foo` accanto a
+// `foo.ts` e `foo.mjs` risolve il `.ts`. Le quattro copie della lista devono
+// muoversi insieme (#1029 le unifichera'), ordine compreso.
+//
 // Perche' non basta il path nudo: `sourceFiles()` include i file `.ts` sotto
 // generator/ (services/, data/, build-plugins/), e in TypeScript l'import
 // relativo si scrive SENZA estensione — e' la stessa convenzione per cui
@@ -87,12 +92,12 @@ const SPECIFIER =
 function resolutionCandidates(base) {
   return [
     base,
+    `${base}.ts`,
     `${base}.mjs`,
     `${base}.js`,
-    `${base}.ts`,
+    path.join(base, 'index.ts'),
     path.join(base, 'index.mjs'),
     path.join(base, 'index.js'),
-    path.join(base, 'index.ts'),
   ];
 }
 
