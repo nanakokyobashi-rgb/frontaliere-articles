@@ -11,6 +11,7 @@
  */
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import fs from 'node:fs';
 import {
   handoffDecision,
   extractSitePaths,
@@ -25,6 +26,7 @@ import {
   sitePathMap,
   strandedTwinPaths,
   descentBlock,
+  redeliveryDecision,
   SITE_ABSENT_MODES,
   SITE_REPO,
 } from '../../scripts/ci/handoff-to-site.mjs';
@@ -493,7 +495,13 @@ test('#972: senza commento restano i soli passi idempotenti (ramo dedup)', () =>
 test('#972: il dedup ripara lo stato invece di uscire', async () => {
   const fs = await import('node:fs');
   const src = fs.readFileSync(new URL('../../scripts/ci/handoff-to-site.mjs', import.meta.url), 'utf8');
-  const dedup = src.slice(src.indexOf('già consegnata'), src.indexOf('già consegnata') + 700);
+  // Ancora sulla riga di log del ramo di dedup, non sulla sola «gia' consegnata»:
+  // quella frase compare anche nel `reason` di `redeliveryDecision`, che sta
+  // PRIMA nel file — un'ancora ambigua faceva leggere a questo test un pezzo di
+  // sorgente che non e' il ramo che sta inchiodando (#972 item 5).
+  const at = src.indexOf('Niente doppioni.');
+  assert.ok(at > 0, 'il ramo di dedup del post-step non esiste piu\': aggiornare questo test');
+  const dedup = src.slice(at, at + 1400);
   assert.match(dedup, /runOriginSteps\(originWriteSteps\(/,
     'il ramo di dedup e\' il solo punto in cui il mezzo-stato del giro precedente e\' osservabile: '
     + 'uscirne con un `return` secco lo rende definitivo');
@@ -575,4 +583,124 @@ test('#972: manifest illeggibile → nessun blocco alla chiusura, cioè il compo
   assert.equal(strandedTwinPaths('/dev/null/manifest-che-non-esiste.json').size, 0);
   const d = handoffDecision({ verdict: 'blocked-admin-settings', body: MIRROR_BODY, stranded: new Set() });
   assert.equal(d.close, true);
+});
+
+// ── #972 item 5: il secondo giro dopo il parcheggio ─────────────────────────
+//
+// Misurato sul percorso reale: una consegna che non chiude parcheggia in
+// `needs-human`, e da lì la issue RIENTRA — `needs-human-prepass.mjs` la
+// ri-accoda quando il verdetto scade, lo sweep settimanale può rimetterla in
+// coda. Il giro successivo pagava una run Claude INTERA sulla quota condivisa
+// col sito per ri-diagnosticare lo stesso file bloccato dal mirror e riemettere
+// lo stesso verdetto; solo allora il post-step scopriva che la issue di là
+// esiste già e non consegnava niente. Dopo l'item 3 il giro almeno ri-parcheggia
+// — non è più uno stato che si perde — ma resta un run pagato per intero per un
+// fatto che si legge con una `gh issue list`.
+//
+// `redeliveryDecision` sposta quella lettura PRIMA di Claude. È la stessa
+// classe del gate di `check-stale-issue-dispatch.mjs`.
+
+const DELIVERED = 'https://github.com/valerielinc-ops/frontaliere-si-o-no/issues/4242';
+
+test('#972: consegnata e senza residuo → il secondo giro non paga Claude', () => {
+  const decision = handoffDecision({ verdict: 'blocked-admin-settings', body: MIRROR_BODY });
+  assert.equal(decision.handoff, true);
+  assert.deepEqual(decision.residual, [], 'precondizione: tutto ciò che la diagnosi nomina scende col mirror');
+
+  const r = redeliveryDecision({ decision, deliveredUrl: DELIVERED });
+  assert.equal(r.skip, true);
+  assert.match(r.reason, /già consegnata/);
+});
+
+test('#972: `close` viaggia con la decisione, il corto-circuito non lo inventa', () => {
+  // Una consegna autorizzata a chiudere che ci ritrova qui è una chiusura non
+  // andata a fondo: il passo giusto resta la chiusura, non il parcheggio. E un
+  // `no-root-cause` — che copre anche il vicolo cieco vero — non deve diventare
+  // una chiusura per il fatto di ripassare di qui.
+  const closes = handoffDecision({ verdict: 'blocked-admin-settings', body: MIRROR_BODY });
+  assert.equal(redeliveryDecision({ decision: closes, deliveredUrl: DELIVERED }).close, true);
+
+  const parks = handoffDecision({
+    verdict: 'no-root-cause',
+    body: 'Root cause nota: `scripts/ci/followup-drainer.mjs` è `mode: identical`, '
+      + 'scriverlo qui verrebbe sovrascritto al mirror successivo.',
+  });
+  assert.equal(parks.handoff, true);
+  assert.equal(parks.close, false);
+  const r = redeliveryDecision({ decision: parks, deliveredUrl: DELIVERED });
+  assert.equal(r.skip, true);
+  assert.equal(r.close, false, 'parcheggiata resta parcheggiata: il corto-circuito toglie la run, non decide di più');
+});
+
+test('#972: col residuo la run SERVE — il corto-circuito la trasformerebbe in uno stato assorbente', () => {
+  // È la congiunzione a rendere sicuro il corto-circuito: `residual` nomina i
+  // file che nessun canale di discesa porta giù, cioè lavoro di QUESTO repo, ed
+  // è esattamente la ragione per cui la issue è stata parcheggiata invece che
+  // chiusa. Saltare il run qui vorrebbe dire che nessuno lo farà mai.
+  const decision = handoffDecision({
+    verdict: 'no-root-cause',
+    body: 'Root cause: il concurrency group in `.github/workflows/translate-pending.yml`, '
+      + '`mode: identical`: scriverlo qui verrebbe sovrascritto al mirror successivo.',
+  });
+  assert.ok(decision.residual.length);
+  const r = redeliveryDecision({ decision, deliveredUrl: DELIVERED });
+  assert.equal(r.skip, false);
+  assert.match(r.reason, /resta lavoro qui/);
+});
+
+test('#972: la direzione dell\'errore è «procedi» — mai un fix vero lasciato cadere', () => {
+  // Un corto-circuito sbagliato costa un fix; una run in più costa quota. Le
+  // due non sono simmetriche, quindi ogni caso incerto gira come oggi.
+  const routable = handoffDecision({ verdict: 'blocked-admin-settings', body: MIRROR_BODY });
+  assert.equal(redeliveryDecision({ decision: routable, deliveredUrl: '' }).skip, false,
+    'nessuna consegna precedente (o ricerca non disponibile / token assente) → si procede');
+  assert.equal(redeliveryDecision({ decision: routable }).skip, false);
+  assert.equal(redeliveryDecision({}).skip, false);
+  assert.equal(redeliveryDecision().skip, false);
+  assert.equal(
+    redeliveryDecision({ decision: handoffDecision({ verdict: 'pr-created', body: MIRROR_BODY }), deliveredUrl: DELIVERED }).skip,
+    false,
+    'verdetto non instradabile: la issue di là può essere di un altro giro, la run di oggi ha un suo lavoro',
+  );
+  // E il `reason` nomina la CAUSA: col verdetto non instradabile il pre-flight
+  // non interroga nemmeno il sito, quindi «nessuna consegna precedente» sarebbe
+  // la conseguenza spacciata per causa nell'unico output che poi si legge.
+  assert.match(
+    redeliveryDecision({ decision: handoffDecision({ verdict: 'pr-created', body: MIRROR_BODY }), deliveredUrl: '' }).reason,
+    /non instradabile/,
+  );
+});
+
+test('#972: il pre-flight è cablato e OGNI step che costa lo consulta', () => {
+  const src = fs.readFileSync(new URL('../../.github/workflows/issue-fix.yml', import.meta.url), 'utf8');
+  // Il blocco di uno step: dal suo `- name:` al `- name:` successivo.
+  const all = src.split(/\n(?=      - name: )/).slice(1);
+
+  const gate = all.find((s) => /id: handoff_pre\b/.test(s));
+  assert.ok(gate, 'nessuno step con `id: handoff_pre` — il pre-flight non esiste, e lo script gira solo DOPO Claude.');
+  assert.match(gate, /run: node scripts\/ci\/handoff-to-site\.mjs --preflight/);
+  assert.match(gate, /SITE_TOKEN: \$\{\{ env\.GITHUB_PAT \}\}/,
+    'senza il token del sito la ricerca del dedup non è disponibile e il gate è inerte per costruzione');
+
+  // Il gate legge `env.GITHUB_PAT`, che esiste solo dopo Remote Config: uno
+  // step piazzato prima leggerebbe una stringa vuota e non corto-circuiterebbe
+  // MAI, senza che niente fallisca.
+  assert.ok(src.indexOf('Load secrets') < src.indexOf('id: handoff_pre'),
+    'il pre-flight deve stare DOPO il caricamento dei secret, o `SITE_TOKEN` è vuoto');
+
+  // Il cablaggio: ogni step che invoca Claude — e ogni step che ne legge
+  // l'esito — deve saltare sul corto-circuito. Senza, il gate gira, stampa, e
+  // la run costosa parte lo stesso.
+  const claudeSteps = all.filter((s) => /anthropics\/claude-code-action/.test(s));
+  assert.ok(claudeSteps.length, 'nessuno step Claude: aggiornare questo test');
+  for (const s of claudeSteps) {
+    assert.match(s, /steps\.handoff_pre\.outputs\.handoff_delivered != 'true'/,
+      `lo step Claude non consulta il pre-flight:\n${s.split('\n')[0]}`);
+  }
+
+  // E il post-step: se il pre-flight ha già consegnato lo stato, ripeterlo in
+  // coda è lavoro doppio sulle stesse label.
+  const post = all.find((s) => /run: node scripts\/ci\/handoff-to-site\.mjs$/m.test(s) && !/--preflight/.test(s));
+  assert.ok(post, 'il post-step di consegna non esiste più: aggiornare questo test');
+  assert.match(post, /steps\.handoff_pre\.outputs\.handoff_delivered != 'true'/);
 });

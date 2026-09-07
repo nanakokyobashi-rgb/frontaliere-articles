@@ -46,14 +46,22 @@
  * solo se gli restano turni, e che quindi non esegue proprio nei casi che
  * contano.
  *
+ * ## Due modi, la stessa decisione (#972 item 5)
+ *
+ * Come POST-step (default) consegna. Come PRE-flight (`--preflight`) risponde
+ * alla domanda opposta — «questo run ha ancora qualcosa da fare qui?» — e la
+ * risposta arriva PRIMA di pagare Claude, invece che dopo. Vedi
+ * `redeliveryDecision`.
+ *
  * Uso:
  *   ISSUE_NUMBER=548 node scripts/ci/handoff-to-site.mjs [--dry-run]
+ *   ISSUE_NUMBER=548 node scripts/ci/handoff-to-site.mjs --preflight
  *
  * Env: `GH_REPO` (questo repo), `SITE_TOKEN` (il PAT con accesso al sito),
  *      `GH_TOKEN` (per leggere e commentare qui).
  */
 import { execFileSync } from 'node:child_process';
-import { readFileSync } from 'node:fs';
+import { appendFileSync, readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 // Il marker di verdetto ha UNA definizione condivisa: era scritto identico qui e
 // in `close-recovered-failure-issues.mjs`, che gia' lo esporta. Due copie della
@@ -71,6 +79,7 @@ export const SITE_REPO = process.env.SITE_REPO || 'valerielinc-ops/frontaliere-s
 const REPO = process.env.GH_REPO || process.env.GITHUB_REPOSITORY || '';
 const ISSUE = process.env.ISSUE_NUMBER || '';
 const DRY = process.argv.includes('--dry-run');
+const PREFLIGHT = process.argv.includes('--preflight');
 
 /** I verdetti che possono nascondere un «lato sbagliato del mirror». */
 export const HANDOFF_VERDICTS = new Set([
@@ -520,6 +529,72 @@ export function handoffDecision({ verdict, body, lockedPaths, siteAbsent, siteNa
   return { handoff: true, paths: sitePaths, residual: [], close: true, reason: `diagnosi con ${sitePaths.length} path del sito` };
 }
 
+/**
+ * Il secondo giro su una issue GIÀ consegnata ha ancora qualcosa da fare qui?
+ * Pura (#972 item 5).
+ *
+ * ## Il ciclo a vuoto, misurato sul percorso reale
+ *
+ * Una consegna che non chiude parcheggia in `needs-human`, e da lì la issue
+ * rientra: `needs-human-prepass.mjs` la ri-accoda quando il verdetto scade
+ * (`VERDICT_MAX_AGE_DAYS`), lo sweep settimanale può rimetterla in coda. Il giro
+ * successivo paga una run Claude INTERA sulla quota condivisa col sito, l'agente
+ * ri-diagnostica lo stesso file bloccato dal mirror, riemette lo stesso verdetto
+ * — e solo allora, come post-step, il dedup scopre che la issue di là **esiste
+ * già** e non consegna niente. Dopo #972 item 3 il giro almeno ri-parcheggia,
+ * quindi non è più uno stato che si perde; resta però un run pagato per intero
+ * per scoprire un fatto che si legge con una `gh issue list`.
+ *
+ * È la stessa classe del gate di `check-stale-issue-dispatch.mjs`: una
+ * condizione deterministica, leggibile prima del run, consultata dopo.
+ *
+ * ## Perché «consegnata» non basta da sola
+ *
+ * La consegna toglie il lavoro di qui **solo quando non lascia residuo**. Con un
+ * `residual` non vuoto la diagnosi nomina anche file che nessun canale di
+ * discesa porta giù — lavoro di QUESTO repo — e un secondo giro può davvero
+ * farlo: quella è la ragione per cui la issue è stata parcheggiata invece che
+ * chiusa, e corto-circuitarla la trasformerebbe in uno stato assorbente. Quindi
+ * il corto-circuito vuole la CONGIUNZIONE: consegnata **e** senza residuo.
+ *
+ * `close` viaggia con la decisione perché una consegna `blocked-*` autorizzata a
+ * chiudere che ci ritrova qui è una chiusura non andata a fondo: il passo giusto
+ * resta la chiusura, non il parcheggio.
+ *
+ * Direzione dell'errore: `skip: false`. Nessuna consegna, decisione non
+ * instradabile, ricerca non disponibile → la run gira identica a oggi. Un
+ * corto-circuito sbagliato lascia cadere un fix vero; una run in più costa
+ * quota.
+ *
+ * @returns {{skip: boolean, close: boolean, reason: string}}
+ */
+export function redeliveryDecision({ decision, deliveredUrl } = {}) {
+  const d = decision || {};
+  // L'instradabilità PRIMA della consegna: quando il verdetto non è instradabile
+  // il pre-flight non interroga nemmeno il sito, quindi `deliveredUrl` è vuoto
+  // per costruzione — riportarlo come «nessuna consegna precedente» nominerebbe
+  // la conseguenza al posto della causa nel solo output che si legge dopo.
+  if (!d.handoff) {
+    return { skip: false, close: false, reason: d.reason || 'nessuna decisione da instradare' };
+  }
+  if (!deliveredUrl) {
+    return { skip: false, close: false, reason: 'nessuna consegna precedente per questa issue' };
+  }
+  const residual = d.residual || [];
+  if (residual.length) {
+    return {
+      skip: false,
+      close: false,
+      reason: `consegnata a ${deliveredUrl}, ma resta lavoro qui (${residual.join(', ')}): il parcheggio esiste per questo`,
+    };
+  }
+  return {
+    skip: true,
+    close: !!d.close,
+    reason: `già consegnata a ${deliveredUrl} e senza residuo qui: tutto ciò che la diagnosi nomina si scrive di là`,
+  };
+}
+
 /** Titolo della issue sul sito. Pura — e il discriminante sta PRIMO. */
 export function handoffTitle(issueNumber, corpusTitle) {
   // Il numero della issue di origine apre il titolo, perché il dedup di chi
@@ -600,41 +675,115 @@ function runOriginSteps(steps) {
   return failed;
 }
 
-function main() {
-  if (!REPO || !ISSUE) { console.log('handoff-to-site: REPO o ISSUE_NUMBER assenti → niente da fare.'); return; }
-  const token = process.env.SITE_TOKEN || '';
+/** Il link di origine: l'unica cosa che lega le due issue in modo verificabile. */
+function originUrl() {
+  return `https://github.com/${REPO}/issues/${ISSUE}`;
+}
 
+/**
+ * La consegna già fatta per questa issue, o `''`. La ricerca è sul link di
+ * origine nel BODY, non sul titolo: un titolo può essere riscritto, il link no.
+ *
+ * Sorgente unica per i due modi (post-step e pre-flight): la domanda «è già
+ * consegnata?» ne ammette una risposta sola, e due ricerche scritte a mano sono
+ * due posti dove il dedup può divergere (AGENTS.md #6).
+ *
+ * Ricerca non disponibile o token assente → `''`, cioè «non risulta consegnata».
+ * Per il post-step il rischio è un doppione, non una perdita; per il pre-flight
+ * è una run in più, che è il comportamento di oggi.
+ */
+function deliveredUrlFor(token) {
+  if (!token) return '';
+  try {
+    const existing = gh(['issue', 'list', '--repo', SITE_REPO, '--state', 'all',
+      '--search', `"${originUrl()}" in:body`, '--json', 'number,url', '--limit', '5'], { token });
+    return Array.isArray(existing) && existing.length ? String(existing[0].url || '') : '';
+  } catch {
+    return '';
+  }
+}
+
+/** L'ultimo verdetto della issue e la decisione che ne discende, o `null`. */
+function readDecision() {
   let data;
   try {
     data = gh(['issue', 'view', ISSUE, '--repo', REPO, '--json', 'title,comments']);
   } catch (e) {
     console.log(`handoff-to-site: issue #${ISSUE} non leggibile (${String(e).slice(0, 100)}) → niente da fare.`);
-    return;
+    return null;
   }
   const last = lastVerdictComment(data?.comments || []);
-  const d = handoffDecision({ verdict: last?.verdict, body: last?.body });
+  return { data, last, d: handoffDecision({ verdict: last?.verdict, body: last?.body }) };
+}
+
+function setPreflightOutput(delivered) {
+  if (process.env.GITHUB_OUTPUT) {
+    appendFileSync(process.env.GITHUB_OUTPUT, `handoff_delivered=${delivered ? 'true' : 'false'}\n`);
+  }
+}
+
+/**
+ * Pre-flight zero-Claude: corto-circuita il secondo giro su una issue già
+ * consegnata e senza residuo qui (#972 item 5). La regola sta in
+ * `redeliveryDecision`; questo esegue solo le letture e la transizione.
+ *
+ * Ri-applica i passi `state` — idempotenti — perché essere di nuovo qui SIGNIFICA
+ * che le label di routing ci sono ancora: il parcheggio del giro che ha
+ * consegnato non è andato a fondo, o qualcuno l'ha ri-accodata. Nessun commento:
+ * quello della consegna c'è già, e ripeterlo a ogni ri-accodo sarebbe rumore
+ * sopra un verdetto che il drainer legge.
+ */
+function preflight() {
+  if (!REPO || !ISSUE) { console.log('handoff-preflight: REPO o ISSUE_NUMBER assenti → procedo.'); return setPreflightOutput(false); }
+  const read = readDecision();
+  if (!read) return setPreflightOutput(false);
+  const { d } = read;
+  // Nessuna rete se la decisione non è instradabile: il caso normale è questo.
+  const delivered = d.handoff ? deliveredUrlFor(process.env.SITE_TOKEN || '') : '';
+  const r = redeliveryDecision({ decision: d, deliveredUrl: delivered });
+  if (!r.skip) {
+    console.log(`handoff-preflight: #${ISSUE} procede — ${r.reason}.`);
+    return setPreflightOutput(false);
+  }
+  console.log(`handoff-preflight: #${ISSUE} corto-circuitata — ${r.reason}. Zero Claude: la run non avrebbe consegnato niente.`);
+  if (!DRY) runOriginSteps(originWriteSteps({ issue: ISSUE, repo: REPO, close: r.close }));
+  if (process.env.GITHUB_STEP_SUMMARY) {
+    appendFileSync(
+      process.env.GITHUB_STEP_SUMMARY,
+      `## Pre-flight handoff: issue #${ISSUE} corto-circuitata\n- ${r.reason}\n- ${r.close ? 'chiusa' : 'parcheggiata in `needs-human`'} senza pagare la run Claude\n`,
+    );
+  }
+  return setPreflightOutput(true);
+}
+
+function main() {
+  if (!REPO || !ISSUE) { console.log('handoff-to-site: REPO o ISSUE_NUMBER assenti → niente da fare.'); return; }
+  const token = process.env.SITE_TOKEN || '';
+
+  const read = readDecision();
+  if (!read) return;
+  const { data, last, d } = read;
   if (!d.handoff) { console.log(`handoff-to-site: #${ISSUE} non instradata — ${d.reason}.`); return; }
 
-  const origin = `https://github.com/${REPO}/issues/${ISSUE}`;
-  // Dedup PRIMA di aprire: la ricerca è sul link di origine nel body, non sul
-  // titolo. Un titolo può essere riscritto; il link no, ed è l'unica cosa che
-  // lega le due issue in modo verificabile.
-  if (token) {
-    try {
-      const existing = gh(['issue', 'list', '--repo', SITE_REPO, '--state', 'all',
-        '--search', `"${origin}" in:body`, '--json', 'number,url', '--limit', '5'], { token });
-      if (Array.isArray(existing) && existing.length) {
-        console.log(`handoff-to-site: #${ISSUE} già consegnata → ${existing[0].url}. Niente doppioni.`);
-        // Ma lo STATO sì: se siamo di nuovo qui, il drainer ha ri-promosso la
-        // issue, cioè le label di routing ci sono ancora — la transizione del
-        // giro che ha consegnato non è andata a fondo. Questo è il solo punto
-        // in cui quel mezzo-stato è osservabile, e prima ci si usciva con un
-        // `return` che lo rendeva definitivo. I passi `state` sono idempotenti;
-        // il commento no, e infatti non viene ripetuto.
-        runOriginSteps(originWriteSteps({ issue: ISSUE, repo: REPO, close: d.close }));
-        return;
-      }
-    } catch { /* ricerca non disponibile → si prosegue: il rischio è un doppione, non una perdita */ }
+  const origin = originUrl();
+  // Dedup PRIMA di aprire.
+  const existingUrl = deliveredUrlFor(token);
+  if (existingUrl) {
+    console.log(`handoff-to-site: #${ISSUE} già consegnata → ${existingUrl}. Niente doppioni.`);
+    // Ma lo STATO sì: se siamo di nuovo qui, il drainer ha ri-promosso la
+    // issue, cioè le label di routing ci sono ancora — la transizione del
+    // giro che ha consegnato non è andata a fondo. Questo è il solo punto
+    // in cui quel mezzo-stato è osservabile, e prima ci si usciva con un
+    // `return` che lo rendeva definitivo. I passi `state` sono idempotenti;
+    // il commento no, e infatti non viene ripetuto.
+    //
+    // Dal #972 item 5 questo è il ramo di RIPIEGO, non più quello normale: il
+    // pre-flight lo raggiunge prima di Claude quando non resta lavoro qui. Ci
+    // si arriva ancora quando il residuo c'è (la run è servita) o quando il
+    // pre-flight non ha potuto leggere — e allora questo resta l'unico posto
+    // che chiude la transizione.
+    runOriginSteps(originWriteSteps({ issue: ISSUE, repo: REPO, close: d.close }));
+    return;
   }
 
   const body = [
@@ -702,4 +851,18 @@ function main() {
   }));
 }
 
-if (process.argv[1] && process.argv[1].endsWith('handoff-to-site.mjs')) main();
+if (process.argv[1] && process.argv[1].endsWith('handoff-to-site.mjs')) {
+  // Come gli altri pre-flight: un throw non deve MAI lasciare la issue
+  // etichettata-ma-non-dispacciata → si procede (comportamento di oggi) invece
+  // di fallire il job. Il post-step conserva il proprio comportamento.
+  if (PREFLIGHT) {
+    try {
+      preflight();
+    } catch (e) {
+      console.error('Pre-flight handoff error — procedo:', e && e.message ? e.message : e);
+      setPreflightOutput(false);
+    }
+  } else {
+    main();
+  }
+}
