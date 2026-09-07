@@ -140,8 +140,8 @@ test('a liste vuote lo step richiude l issue dedup, non si limita a uscire', () 
   assert.ok(emptyBranch, 'ramo "liste vuote" non trovato');
   assert.match(
     emptyBranch[1],
-    /node scripts\/lib\/github-issue-creator\.mjs[\s\S]*?--resolve/,
-    'a liste vuote lo step deve richiudere l issue dedup con --resolve',
+    /node scripts\/ci\/resolve-issue-verified\.mjs/,
+    'a liste vuote lo step deve richiudere l issue dedup',
   );
   // Stessa chiave di dedup dell'apertura (AGENTS.md #6): apertura e chiusura
   // devono cercare la stessa issue, o si chiude qualcos'altro o niente.
@@ -329,4 +329,73 @@ test('nemmeno lo scan stale-review legge una lista troncata', () => {
     'il rimappaggio deve riportare `created_at` su `.createdAt`, che e il campo letto dal gate 1',
   );
   assert.match(text, /labels: \[\.labels\[\] \| \{name\}\]/, 'i gate leggono `.labels[].name`: la forma va preservata');
+});
+
+/**
+ * Quinto modo, e il piu' silenzioso dopo la query fallita: la chiusura viene
+ * TENTATA e respinta. `--resolve` e' best-effort in tre strati sovrapposti —
+ * `gh issue close` con `allowFailure: true`, il ramo CLI che fa
+ * `process.exit(0)` sempre, e un `null` di ritorno che significa insieme
+ * «niente da chiudere» e «chiusura respinta». Un rifiuto (permessi,
+ * rate-limit, 5xx) lasciava quindi la run VERDE con una riga su stderr, senza
+ * ritentativo, e l'issue dedup aperta con un elenco ormai falso fino al
+ * prossimo run a liste vuote — che puo' non arrivare presto (issue #1005).
+ *
+ * La verifica non puo' essere l'exit code del chiuditore: dev'essere la
+ * POST-CONDIZIONE (l'issue e' ancora aperta?). Sta in
+ * `scripts/ci/resolve-issue-verified.mjs` e non in
+ * `scripts/lib/github-issue-creator.mjs`, che e' `identical` nel manifest —
+ * una fix li' si fa sul SITO.
+ */
+test('un close respinto non lascia la run verde: si verifica, si ritenta, si annota', () => {
+  const step = surfaceStep();
+  const emptyBranch = /if \[ -z "\$PRS" \] && \[ -z "\$ISSUES" \]; then([\s\S]*?)\n\s+fi\n/.exec(step);
+  assert.ok(emptyBranch, 'ramo "liste vuote" non trovato');
+
+  // Il chiuditore best-effort non va invocato direttamente: il suo exit code
+  // e' 0 qualunque cosa succeda, quindi `|| exit 1` su di lui non scatta mai.
+  assert.doesNotMatch(
+    emptyBranch[1],
+    /node scripts\/lib\/github-issue-creator\.mjs/,
+    'il ramo chiama il chiuditore best-effort direttamente: il suo `--resolve` esce 0 anche su un close respinto',
+  );
+
+  // Senza `set -e`, un chiuditore non-zero non fermerebbe da solo lo script:
+  // l'`exit 0` sotto lo seguirebbe comunque e la run resterebbe verde.
+  assert.match(
+    emptyBranch[1],
+    /resolve-issue-verified\.mjs[\s\S]*?\|\| exit 1/,
+    'lo step deve uscire non-zero quando la chiusura verificata fallisce: senza `set -e` l `exit 0` sotto la coprirebbe',
+  );
+  const closeAt = emptyBranch[1].indexOf('resolve-issue-verified.mjs');
+  const exitZeroAt = emptyBranch[1].search(/\n\s+exit 0/);
+  assert.ok(closeAt !== -1 && closeAt < exitZeroAt, 'l `exit 0` del ramo non deve precedere il tentativo di chiusura');
+});
+
+/**
+ * La CLASSE, non il singolo file (AGENTS.md #5). Il difetto non e' del digest:
+ * e' di `--resolve`, quindi di ogni suo chiamante. In questo repo sono tre —
+ * questo workflow, `reconcile-article-shards.yml` e `republish-dirty-content.yml`
+ * — e i due gemelli avevano lo stesso identico assorbente: il loro step "Close
+ * ... (coda drenata)" non poteva fallire in nessun caso.
+ */
+test('nessun workflow chiama --resolve senza verificarne la post-condizione', () => {
+  const twins = [
+    '.github/workflows/recycle-stale-prs.yml',
+    '.github/workflows/reconcile-article-shards.yml',
+    '.github/workflows/republish-dirty-content.yml',
+  ];
+  for (const rel of twins) {
+    const yml = readFileSync(path.join(ROOT, rel), 'utf8');
+    // Il letterale puo' comparire nei commenti (che spiegano il difetto): a
+    // fallire dev'essere la CHIAMATA, cioe' `node ...github-issue-creator.mjs`.
+    const calls = [...yml.matchAll(/^\s*node .*github-issue-creator\.mjs([\s\S]*?)(?=\n\s*(?:-|#|\w|$))/gm)];
+    for (const call of calls) {
+      assert.ok(
+        !/--resolve/.test(call[0]),
+        `${rel}: chiamata diretta a \`github-issue-creator.mjs --resolve\`. Esce 0 anche su un close respinto: ` +
+          'va passata da `scripts/ci/resolve-issue-verified.mjs`, che verifica la post-condizione.',
+      );
+    }
+  }
 });
