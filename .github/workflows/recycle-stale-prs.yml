@@ -270,13 +270,42 @@ jobs:
           # issue dalla propria lista. Duplicarlo fra i due usi le farebbe
           # divergere in silenzio, e la seconda tornerebbe a auto-elencarsi.
           DEDUP_TITLE: 'needs-human: PR bloccate in attesa di revisione umana'
-          # Tracker permanente. Stessa discriminante che followup-drainer.mjs
-          # (`isPermanentTracker`, :1113) e needs-human-prepass.mjs (:792) usano
-          # gia' per non accodare ne' chiudere questi oggetti: la LABEL, mai il
-          # titolo. Il legame fra questo valore e quelli degli script — che non
-          # possono importarsi da uno YAML — e' coperto da
-          # generator/tests/needs-human-digest-self-listing.test.mjs (AGENTS.md #6).
-          LBL_PERMANENT_TRACKER: 'agent:no-age-out'
+          # I TRACKER PERMANENTI, per TITOLO — uno per riga. Come DEDUP_TITLE
+          # qui sopra, e per la stessa ragione: il titolo e' la chiave con cui
+          # ognuno di questi oggetti viene ritrovato dal processo che lo
+          # mantiene, quindi non e' apponibile da terzi e non cambia senza che
+          # quel processo si accorga.
+          #
+          # Fino a #981 il filtro era la LABEL `agent:no-age-out`, e sbagliava
+          # nei due versi opposti:
+          #  - SOTTO-esclusione (item 2): sul digest dello sweep la label la
+          #    mette un prompt Claude (`needs-human-sweep.yml`). Un run che
+          #    ricrea il digest senza quella label lo rimette in questa lista, e
+          #    `ISSUES` torna a non poter essere mai vuoto — l'assorbente di
+          #    #733, ripristinato in silenzio e con la suite verde, perche' un
+          #    test puo' verificare che la stringa sia nel prompt, non che
+          #    l'oggetto reale l'abbia ricevuta. Il titolo invece e' ESATTO nel
+          #    prompt E la chiave con cui lo step «Classify outcome» dello sweep
+          #    ritrova il digest: sbagliarlo tinge di rosso quel run.
+          #  - SOPRA-esclusione (item 3): `agent:no-age-out` significa «non
+          #    scade», non «non e' un item umano». Un'issue genuinamente
+          #    bloccata a cui qualcuno l'ha messa per tenerla fuori dall'age-out
+          #    spariva dall'unica lista che gli umani leggono e, peggio,
+          #    permetteva a questo digest di auto-chiudersi mentre quel blocco
+          #    era vivo — il difetto opposto a quello riparato.
+          # E non e' nemmeno una partizione esatta della classe:
+          # `scripts/lib/github-issue-creator.mjs` documenta che il ledger
+          # transient (#25) e' un tracker e la label NON ce l'ha (per questo e'
+          # elencato qui sotto per titolo).
+          #
+          # Il legame fra questi titoli e le loro sorgenti — `DIGEST_TITLE` in
+          # needs-human-sweep.yml e `TRANSIENT_LEDGER_TITLE` in
+          # github-issue-creator.mjs, che uno YAML non puo' importare — e'
+          # coperto da generator/tests/needs-human-digest-self-listing.test.mjs
+          # (AGENTS.md #6).
+          PERMANENT_TRACKER_TITLES: |
+            🧭 Decisioni del proprietario — digest
+            Crawler transient failures (rolling ledger)
         run: |
           set -uo pipefail
           # L'ESITO delle due query, non solo il loro output. `set -e` non e'
@@ -326,19 +355,16 @@ jobs:
           # stessa. L'esclusione va fatta QUI, sulla chiave di dedup, non
           # sperando che la label resti quella di partenza.
           #
-          # SECONDA esclusione, stessa forma e stesso difetto un passo piu' in
-          # la': i TRACKER PERMANENTI. `needs-human-sweep.yml` (:215) crea il
-          # digest `🧭 Decisioni del proprietario` con
-          # `needs-human,automation,agent:no-age-out` e vieta esplicitamente allo
-          # sweep di togliergli quella label; l'issue esiste per restare aperta e
-          # non ha una causa singola da riparare. Finche' compare qui, `ISSUES`
-          # non e' MAI vuoto e la chiusura promessa nel corpo resta
-          # irraggiungibile — esattamente l'assorbente di #733, tranne che il
-          # residuo permanente e' un'altra issue invece di questa. Elencarla come
-          # «oggetto che aspetta occhi umani» e' anche falso: il digest E' il
-          # canale umano, non un item da sbloccare.
+          # SECONDA esclusione, stessa forma e stessa chiave (il TITOLO): i
+          # TRACKER PERMANENTI. Il digest dello sweep esiste per restare aperto
+          # e non ha una causa singola da riparare; finche' compare qui,
+          # `ISSUES` non e' MAI vuoto e la chiusura promessa nel corpo resta
+          # irraggiungibile — l'assorbente di #733 con un'altra issue al posto
+          # di questa. Elencarlo come «oggetto che aspetta occhi umani» e' anche
+          # falso: il digest E' il canale umano, non un item da sbloccare.
+          # Perche' per titolo e non per label: vedi PERMANENT_TRACKER_TITLES.
           ISSUES=$(gh api --paginate "$NEEDS_HUMAN_API" \
-            --jq '.[] | select(.pull_request | not) | select(.title != env.DEDUP_TITLE) | select([.labels[].name] | index(env.LBL_PERMANENT_TRACKER) | not) | "- #\(.number) \(.title) (ultimo update \(.updated_at))"')
+            --jq '.[] | select(.pull_request | not) | select(.title != env.DEDUP_TITLE) | select(. as $i | [env.PERMANENT_TRACKER_TITLES | split("\n")[] | select(length > 0)] | index($i.title) | not) | "- #\(.number) \(.title) (ultimo update \(.updated_at))"')
           ISSUES_RC=$?
           if [ "$PRS_RC" -ne 0 ] || [ "$ISSUES_RC" -ne 0 ]; then
             # Query fallita: lo stato del backlog e' SCONOSCIUTO, non vuoto.
@@ -375,7 +401,7 @@ jobs:
           echo "needs-human aperti: $PR_COUNT PR, $ISSUE_COUNT issue"
           [ -n "$PRS" ] || PRS='_(nessuna)_'
           [ -n "$ISSUES" ] || ISSUES='_(nessuna)_'
-          DESC=$(printf 'Nessun processo automatico sblocchera questi oggetti, e su `needs-human` la label e un filtro di ESCLUSIONE dalle code del drainer, non una segnalazione. Servono occhi umani.\n\n**PR** (%s) — il fixer dei red-flag ha raggiunto il round-cap e si e fermato (anti-loop), oppure sono draft parcheggiate, che ogni strato del ciclo salta by-design:\n\n%s\n\n**Issue** (%s) — escalate dal followup-drainer (too-large) o dal gate cronico di close-recovered-failure-issues.mjs (un guasto che ricorre oltre soglia). Restano fuori dal pool dei retry parcheggiati e dal rescue agent:fix dei crawler finche portano la label. Esclusi i tracker permanenti (`agent:no-age-out`), che sono aperti per costruzione e non sono item da sbloccare:\n\n%s\n\n_Issue dedup giornaliera da recycle-stale-prs.yml (zero-Claude); si aggiorna con un commento di recurrence finche esiste qualcosa di needs-human, e si richiude da sola al primo run in cui entrambe le liste sono vuote (i tracker permanenti non contano come residuo)._' "$PR_COUNT" "$PRS" "$ISSUE_COUNT" "$ISSUES")
+          DESC=$(printf 'Nessun processo automatico sblocchera questi oggetti, e su `needs-human` la label e un filtro di ESCLUSIONE dalle code del drainer, non una segnalazione. Servono occhi umani.\n\n**PR** (%s) — il fixer dei red-flag ha raggiunto il round-cap e si e fermato (anti-loop), oppure sono draft parcheggiate, che ogni strato del ciclo salta by-design:\n\n%s\n\n**Issue** (%s) — escalate dal followup-drainer (too-large) o dal gate cronico di close-recovered-failure-issues.mjs (un guasto che ricorre oltre soglia). Restano fuori dal pool dei retry parcheggiati e dal rescue agent:fix dei crawler finche portano la label. Esclusi i tracker permanenti, riconosciuti per TITOLO (il digest dello sweep, il ledger transient): sono aperti per costruzione e non sono item da sbloccare. Escludere per label non sarebbe la stessa cosa — `agent:no-age-out` vuol dire «non scade», e nasconderebbe da qui una issue davvero bloccata:\n\n%s\n\n_Issue dedup giornaliera da recycle-stale-prs.yml (zero-Claude); si aggiorna con un commento di recurrence finche esiste qualcosa di needs-human, e si richiude da sola al primo run in cui entrambe le liste sono vuote (i tracker permanenti non contano come residuo)._' "$PR_COUNT" "$PRS" "$ISSUE_COUNT" "$ISSUES")
           node scripts/lib/github-issue-creator.mjs \
             --title "$DEDUP_TITLE" \
             --description "$DESC" \

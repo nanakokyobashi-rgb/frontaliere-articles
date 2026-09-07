@@ -75,6 +75,16 @@ concurrency:
   group: needs-human-sweep
   cancel-in-progress: false
 
+# SORGENTE UNICA del titolo del digest (AGENTS.md #6). Il titolo e' la chiave
+# con cui lo sweep ritrova il digest, con cui lo step di classificazione qui
+# sotto lo cerca, e — da #981 item 2/3 — l'unica discriminante con cui il
+# digest needs-human di `recycle-stale-prs.yml` lo esclude dalla propria lista.
+# Tre usi, uno dei quali in un ALTRO file: duplicarlo qui dentro basterebbe a
+# farli divergere in silenzio. Il legame cross-file e' coperto da
+# `generator/tests/needs-human-digest-self-listing.test.mjs`.
+env:
+  DIGEST_TITLE: '🧭 Decisioni del proprietario — digest'
+
 permissions:
   contents: read
   issues: write
@@ -212,7 +222,7 @@ jobs:
                - **D — parcheggiata giusta**: `needs-human` corretto e già nel digest/registro. Non toccare nulla, non rimetterla nel digest se già presente. Ci rientra la famiglia delle CREDENZIALI (`Agent loop down: GITHUB_PAT…`, `GH_PAT expiry warning:`): la rotazione è stata DECLINATA dal proprietario il 2026-08-18 e il ciclo non può comunque agirci — non riproporla.
             3. VINCOLI: mai chiudere ciò che non hai misurato; mai rimuovere `agent:no-age-out`; un'issue con PR aperta collegata non si tocca; prima di instradare una fix verifica il `mode` in `scripts/ci/loop-sync-manifest.json` — una issue su un file `identical` si ripara SUL SITO, e ri-accodarla qui produrrebbe una PR che il mirror sovrascrive.
 
-            **Digest (ultima azione, sempre):** una sola issue col titolo ESATTO `🧭 Decisioni del proprietario — digest` (cerca fra le aperte con `gh search issues --repo $REPO`; se non esiste creala con label `needs-human,automation,agent:no-age-out`). Sostituisci/aggiorna il body con: l'elenco delle domande di classe A (numero, domanda decidibile, opzioni), le decisioni applicate in questo run (classe B/C, con issue e driver citato), e il conteggio residuo `needs-human`. Il body deve restare leggibile in 2 minuti: le domande sono POCHE e decidibili, o lo sweep ha fallito il suo compito.
+            **Digest (ultima azione, sempre):** una sola issue col titolo ESATTO `${{ env.DIGEST_TITLE }}` (cerca fra le aperte con `gh search issues --repo $REPO`; se non esiste creala con label `needs-human,automation,agent:no-age-out`). Sostituisci/aggiorna il body con: l'elenco delle domande di classe A (numero, domanda decidibile, opzioni), le decisioni applicate in questo run (classe B/C, con issue e driver citato), e il conteggio residuo `needs-human`. Il body deve restare leggibile in 2 minuti: le domande sono POCHE e decidibili, o lo sweep ha fallito il suo compito.
 
             **Telemetria:** chiudi postando sul digest un commento con l'ultimo marker su riga propria: `<!-- SWEEP_OUTCOME: a=<n> b=<n> c=<n> d=<n> -->`.
 
@@ -230,7 +240,7 @@ jobs:
           CLAUDE_OUTCOME: ${{ steps.claude_sweep.outcome }}
         run: |
           set -uo pipefail
-          N=$(gh search issues --repo "$GITHUB_REPOSITORY" --state open --match title "🧭 Decisioni del proprietario — digest" --json number --jq '.[0].number // empty' 2>/dev/null || true)
+          N=$(gh search issues --repo "$GITHUB_REPOSITORY" --state open --match title "$DIGEST_TITLE" --json number --jq '.[0].number // empty' 2>/dev/null || true)
           if [ -n "${N:-}" ]; then
             HAS=$(gh issue view "$N" --repo "$GITHUB_REPOSITORY" --json comments --jq '[.comments[].body | select(test("<!-- SWEEP_OUTCOME:"))] | length' 2>/dev/null || echo 0)
           else
