@@ -196,7 +196,7 @@ jobs:
       # saltarla la trasformerebbe in uno stato assorbente. La regola vive in
       # `redeliveryDecision`, non qui, e la inchioda
       # `generator/tests/handoff-to-site.test.mjs`.
-      - name: Pre-flight - diagnosi gia' consegnata al sito (zero-Claude)
+      - name: Pre-flight — diagnosi gia' consegnata al sito (zero-Claude)
         id: handoff_pre
         if: steps.quota.outputs.quota_blocked != 'true' && steps.preflight.outputs.already_resolved != 'true' && steps.stale.outputs.stale_dispatch != 'true'
         continue-on-error: true

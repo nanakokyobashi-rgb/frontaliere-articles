@@ -570,11 +570,15 @@ export function handoffDecision({ verdict, body, lockedPaths, siteAbsent, siteNa
  */
 export function redeliveryDecision({ decision, deliveredUrl } = {}) {
   const d = decision || {};
+  // L'instradabilità PRIMA della consegna: quando il verdetto non è instradabile
+  // il pre-flight non interroga nemmeno il sito, quindi `deliveredUrl` è vuoto
+  // per costruzione — riportarlo come «nessuna consegna precedente» nominerebbe
+  // la conseguenza al posto della causa nel solo output che si legge dopo.
+  if (!d.handoff) {
+    return { skip: false, close: false, reason: `il verdetto di oggi non è instradabile: ${d.reason || 'nessuna decisione'}` };
+  }
   if (!deliveredUrl) {
     return { skip: false, close: false, reason: 'nessuna consegna precedente per questa issue' };
-  }
-  if (!d.handoff) {
-    return { skip: false, close: false, reason: `consegnata a ${deliveredUrl}, ma il verdetto di oggi non è instradabile: ${d.reason || 'nessuna decisione'}` };
   }
   const residual = d.residual || [];
   if (residual.length) {
