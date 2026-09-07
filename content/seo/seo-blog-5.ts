@@ -66455,8 +66455,8 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     title: 'Amazon non si presenta in Prefettura: questione di policy aziendale',
     description: 'Il tavolo convocato a Varese sul trasferimento delle attività cargo da Malpensa a Montichiari si chiude senza l\'interlocutore principale. Dati aggiornati 2026',
     keywords: 'frontalieri, ticino, svizzera, italia, amazon, presenta, prefettura, questione',
-    ogTitle: 'Amazon absent from Prefettura meeting: company policy',
-    ogDescription: 'The meeting held in Prefettura in Varese on the transfer of cargo activities from Malpensa to Montichiari has ended without the main interlocutor.',
+    ogTitle: 'Amazon assente al tavolo in Prefettura a Varese: è questione di policy aziendale',
+    ogDescription: 'Il tavolo convocato in Prefettura a Varese sul trasferimento delle attività cargo da Malpensa a Montichiari si è chiuso senza l\'interlocutore principale.',
     canonicalPath: '/articoli-frontaliere/amazon-malpensa-montichiari-2026',
     structuredData: {
       "@context": "https://schema.org",
