@@ -2200,7 +2200,7 @@ function finalizeRunReport(status, extra = {}) {
     console.error(
       `FREE_MT_RECOVERY_OUTCOME unusable=${recovery.unusableOutputs}`
       + ` non_string=${recovery.nonStringOutputs}`
-      + ` by_locale=${JSON.stringify(recovery.unusableByLocale)}`
+      + ` unusable_by_locale=${JSON.stringify(recovery.unusableByLocale)}`
       + ` llm_fallbacks=${recovery.llmFallbacks}`
       // La ripartizione per locale e' il numero che dice se la quota ha fatto
       // il suo mestiere: `en=5` con `de`/`fr` a zero era la forma del difetto.

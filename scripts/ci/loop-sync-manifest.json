@@ -3503,7 +3503,7 @@
       "reason": "Contatori e cap della recovery LLM dopo un output free-MT non utilizzabile (#831 item 2). Il cap e' una QUOTA PER LOCALE, non un budget globale: il loop missing-field scorre en/de/fr in ordine e un contatore unico si esauriva tutto su `en`, lasciando `de` e `fr` al fallback italiano. Il generatore del corpus e' l'unico produttore dopo il cutover; il sito non ha un gemello del modulo e non deve ricevere questa dipendenza.",
       "baseline": {
         "site": null,
-        "corpus": "42d1a78fce005167",
+        "corpus": "4c849425d7930b44",
         "alignedAt": "2026-09-08"
       }
     }

@@ -75,8 +75,9 @@ export function recordFreeMtUnusableOutput(report, { reason, targetLang, field, 
   if (reason === 'non-string') {
     report.nonStringOutputs = (report.nonStringOutputs || 0) + 1;
   }
+  const countsTowardCap = reason === 'unusable-text' || reason === 'non-string';
   const fieldKey = field || fieldName;
-  if (targetLang && fieldKey) {
+  if (countsTowardCap && targetLang && fieldKey) {
     if (!report.unusableFields || typeof report.unusableFields !== 'object') report.unusableFields = {};
     const key = freeMtFieldKey(targetLang, fieldKey);
     report.unusableFields[key] = (report.unusableFields[key] || 0) + 1;

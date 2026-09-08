@@ -176,6 +176,16 @@ describe('free-MT recovery — il degrado e’ misurato e limitato per run', () 
     assert.equal(report.llmFallbacks, MAX_FREE_MT_LLM_FALLBACKS_PER_RUN, 'il cap per run resta il tetto complessivo');
     assert.deepEqual(report.llmFallbacksByLocale, spesi);
   });
+
+  test('errori di trasporto e sentinel markdown corrotti sono telemetria, non campi da addebitare', () => {
+    const report = createFreeMtRecoveryReport();
+    recordFreeMtUnusableOutput(report, { targetLang: 'de', fieldName: 'title', reason: 'error' });
+    recordFreeMtUnusableOutput(report, { targetLang: 'de', fieldName: 'excerpt', reason: 'mangled-nav-link' });
+
+    assert.equal(report.unusableOutputs, 2);
+    assert.deepEqual(report.unusableByLocale, { de: 2 });
+    assert.deepEqual(report.unusableFields, {}, 'solo output testualmente inutilizzabile o non-stringa paga il cap');
+  });
 });
 
 // ── #868 item 2/3/5 + #831 item 3 — la catena eventi ───────────────────────
