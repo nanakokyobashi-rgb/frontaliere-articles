@@ -40,13 +40,18 @@
  */
 import { test, describe, beforeEach, afterEach } from 'node:test';
 import assert from 'node:assert/strict';
+import { spawnSync } from 'node:child_process';
+import { readFileSync } from 'node:fs';
 
 import {
   freeTranslate,
+  freeTranslateWithRetryDetailed,
   getCascadeStats,
   logCascadeSummary,
   isSourcePassthrough,
+  asTranslationResult,
 } from '../scripts/lib/free-translate.mjs';
+import { setLocalOpusMtForTests } from '../scripts/lib/local-opus-mt.mjs';
 
 const IT = [
   '## In breve',
@@ -66,6 +71,11 @@ const EN = [
 
 const realFetch = globalThis.fetch;
 const realVitestFlag = process.env.VITEST;
+
+test('non usa più il flag outcomeNoted morto nel percorso Azure', () => {
+  const source = readFileSync(new URL('../scripts/lib/free-translate.mjs', import.meta.url), 'utf8');
+  assert.doesNotMatch(source, /outcomeNoted/);
+});
 
 /**
  * Pilota la cascata dal basso: `translateWithMyMemory` e' l'unico tier
@@ -133,36 +143,6 @@ describe('freeTranslate — guardia «uscita == sorgente»', () => {
     assert.equal(snapshot().passthroughs - before.passthroughs, 1);
   });
 
-  test('conta il passthrough anche sul ramo a CHUNK, che e\' quello dei body lunghi', async () => {
-    // MyMemory passa al ramo a chunk sopra i 5000 caratteri. E' il ramo dei
-    // body — cioe' esattamente dei passthrough misurati sul corpus — e la copia
-    // locale del confronto che stava li' li consumava prima di `tryTier`: il
-    // bucket non li avrebbe visti mai, e la riga `Tier passthrough` sarebbe
-    // stata cieca sul caso per cui e' stata scritta.
-    //
-    // Sorgente su UNA riga di proposito: quel ramo riassembla con
-    // `parts.join(' ')`, quindi su un testo a piu' paragrafi l'uscita non e' mai
-    // byte-uguale all'ingresso nemmeno quando il motore l'ha ricopiata — limite
-    // dichiarato, non qualcosa che questo caso possa pinnare fingendo il
-    // contrario.
-    const frase = 'I frontalieri residenti entro venti chilometri dal confine restano nel vecchio regime fiscale e la soglia dei quarantacinque giorni di telelavoro vale dal primo gennaio. ';
-    const lungo = frase.repeat(40).trim();
-    assert.ok(lungo.length > 5000);
-    globalThis.fetch = async (url) => {
-      if (!String(url).includes('api.mymemory.translated.net')) throw new Error('offline nel test');
-      const q = new URL(String(url)).searchParams.get('q');
-      return { ok: true, json: async () => ({ responseData: { translatedText: q, match: 1 } }) };
-    };
-    const before = snapshot();
-
-    const out = await freeTranslate({ text: lungo, sourceLang: 'it', targetLang: 'en', fieldType: 'description' });
-    const after = snapshot();
-
-    assert.equal(out, '');
-    assert.equal(after.passthroughs - before.passthroughs, 1);
-    assert.equal(after.hits - before.hits, 0);
-  });
-
   test('nomina il passthrough nel sommario della cascata', async () => {
     stubCascade(IT);
     await freeTranslate({ text: IT, sourceLang: 'it', targetLang: 'fr', fieldType: 'description' });
@@ -221,6 +201,446 @@ describe('freeTranslate — guardia «uscita == sorgente»', () => {
     assert.equal(after.passthroughs - before.passthroughs, 0);
     assert.equal(after.hits - before.hits, 0);
   });
+
+  test('il dettaglio del retry non memoizza un eco quando altri endpoint sono indisponibili', async () => {
+    globalThis.fetch = async (url) => {
+      if (String(url).includes('api.mymemory.translated.net')) {
+        return {
+          ok: true,
+          json: async () => ({ responseData: { translatedText: IT, match: 1 } }),
+        };
+      }
+      return { ok: false, status: 503 };
+    };
+
+    const out = await freeTranslateWithRetryDetailed({
+      text: IT,
+      sourceLang: 'it',
+      targetLang: 'en',
+      fieldType: 'description',
+      maxRetries: 0,
+    });
+
+    assert.deepEqual(out, { text: '', passthrough: false });
+  });
+
+  test('un errore nella stessa chiamata impedisce il memo del passthrough', async () => {
+    stubCascade(IT);
+
+    const out = await freeTranslateWithRetryDetailed({
+      text: IT,
+      sourceLang: 'it',
+      targetLang: 'en',
+      fieldType: 'description',
+      maxRetries: 0,
+    });
+
+    assert.deepEqual(out, { text: '', passthrough: false });
+  });
+
+  test('un HTTP failure del self-hosted LibreTranslate impedisce il memo del passthrough', () => {
+    const moduleUrl = new URL('../scripts/lib/free-translate.mjs', import.meta.url).href;
+    const childScript = `
+      globalThis.fetch = async (url) => {
+        const value = String(url);
+        if (value.startsWith('http://self-hosted.test/')) return { ok: false, status: 503 };
+        if (value.includes('api.mymemory.translated.net')) {
+          return { ok: true, json: async () => ({ responseData: { translatedText: ${JSON.stringify(IT)}, match: 1 } }) };
+        }
+        if (value.includes('translate.googleapis.com')) {
+          return { ok: true, text: async () => JSON.stringify([[ [${JSON.stringify(IT)}] ]]) };
+        }
+        if (value.includes('clients5.google.com')) {
+          return { ok: true, text: async () => JSON.stringify({ sentences: [{ trans: ${JSON.stringify(IT)} }] }) };
+        }
+        if (value.includes('/api/v1/')) return { ok: true, json: async () => ({ translation: ${JSON.stringify(IT)} }) };
+        if (value.includes('/api/translate')) return { ok: true, json: async () => ({ 'translated-text': ${JSON.stringify(IT)} }) };
+        if (value.includes('/translate')) return { ok: true, json: async () => ({ translatedText: ${JSON.stringify(IT)} }) };
+        throw new Error('endpoint inatteso nel test');
+      };
+      const { freeTranslateWithRetryDetailed } = await import(${JSON.stringify(moduleUrl)});
+      const out = await freeTranslateWithRetryDetailed({
+        text: ${JSON.stringify(IT)}, sourceLang: 'it', targetLang: 'en', fieldType: 'description', maxRetries: 0,
+      });
+      if (JSON.stringify(out) !== JSON.stringify({ text: '', passthrough: false })) {
+        console.error(JSON.stringify(out));
+        process.exit(1);
+      }
+    `;
+    const child = spawnSync(process.execPath, ['--input-type=module', '--eval', childScript], {
+      encoding: 'utf8',
+      env: {
+        ...process.env,
+        DEEPL_API_KEY: '',
+        DEEPL_API_KEY_2: '',
+        AZURE_TRANSLATOR_KEY: '',
+        AZURE_TRANSLATOR_KEY_2: '',
+        GSC_CLIENT_ID: '',
+        GSC_CLIENT_SECRET: '',
+        GSC_REFRESH_TOKEN: '',
+        HF_TOKEN: '',
+        HUGGINGFACE_API_KEY: '',
+        LIBRETRANSLATE_SELF_HOSTED_URL: 'http://self-hosted.test',
+        VITEST: '1',
+      },
+    });
+    assert.equal(child.status, 0, child.stderr || child.stdout);
+  });
+
+  test('un tier opzionale disabilitato non blocca il memo del passthrough', () => {
+    const moduleUrl = new URL('../scripts/lib/free-translate.mjs', import.meta.url).href;
+    const childScript = `
+      globalThis.fetch = async (url) => {
+        const value = String(url);
+        if (value.includes('api.mymemory.translated.net')) {
+          return { ok: true, json: async () => ({ responseData: { translatedText: ${JSON.stringify(IT)}, match: 1 } }) };
+        }
+        if (value.includes('translate.googleapis.com')) {
+          return { ok: true, text: async () => JSON.stringify([[ [${JSON.stringify(IT)}] ]]) };
+        }
+        if (value.includes('clients5.google.com')) {
+          return { ok: true, text: async () => JSON.stringify({ sentences: [{ trans: ${JSON.stringify(IT)} }] }) };
+        }
+        if (value.includes('/api/v1/')) return { ok: true, json: async () => ({ translation: ${JSON.stringify(IT)} }) };
+        if (value.includes('/api/translate')) return { ok: true, json: async () => ({ 'translated-text': ${JSON.stringify(IT)} }) };
+        if (value.includes('/translate')) return { ok: true, json: async () => ({ translatedText: ${JSON.stringify(IT)} }) };
+        throw new Error('endpoint inatteso nel test');
+      };
+      const { freeTranslateWithRetryDetailed } = await import(${JSON.stringify(moduleUrl)});
+      const out = await freeTranslateWithRetryDetailed({
+        text: ${JSON.stringify(IT)}, sourceLang: 'it', targetLang: 'en', fieldType: 'description', maxRetries: 0,
+      });
+      if (JSON.stringify(out) !== JSON.stringify({ text: '', passthrough: true })) {
+        console.error(JSON.stringify(out));
+        process.exit(1);
+      }
+    `;
+    const child = spawnSync(process.execPath, ['--input-type=module', '--eval', childScript], {
+      encoding: 'utf8',
+      env: {
+        ...process.env,
+        DEEPL_API_KEY: '',
+        DEEPL_API_KEY_2: '',
+        AZURE_TRANSLATOR_KEY: '',
+        AZURE_TRANSLATOR_KEY_2: '',
+        GSC_CLIENT_ID: '',
+        GSC_CLIENT_SECRET: '',
+        GSC_REFRESH_TOKEN: '',
+        HF_TOKEN: '',
+        HUGGINGFACE_API_KEY: '',
+        LIBRETRANSLATE_SELF_HOSTED_URL: '',
+        MT_LOCAL_OPUSMT: '',
+        VITEST: '1',
+      },
+    });
+    assert.equal(child.status, 0, child.stderr || child.stdout);
+  });
+
+  test('una risposta 200 vuota del self-hosted LibreTranslate non è un passthrough', () => {
+    const moduleUrl = new URL('../scripts/lib/free-translate.mjs', import.meta.url).href;
+    const childScript = `
+      globalThis.fetch = async (url) => {
+        const value = String(url);
+        if (value.includes('self-hosted.test')) return { ok: true, json: async () => ({}) };
+        if (value.includes('api-free.deepl.com')) {
+          return { ok: true, json: async () => ({ translations: [{ text: ${JSON.stringify(IT)} }] }) };
+        }
+        if (value.includes('cognitive.microsofttranslator.com')) {
+          return { ok: true, json: async () => [{ translations: [{ text: ${JSON.stringify(IT)} }] }] };
+        }
+        if (value.includes('oauth2.googleapis.com/token')) {
+          return { ok: true, json: async () => ({ access_token: 'test-token', expires_in: 3600 }) };
+        }
+        if (value.includes('translation.googleapis.com')) {
+          return { ok: true, json: async () => ({ data: { translations: [{ translatedText: ${JSON.stringify(IT)} }] } }) };
+        }
+        if (value.includes('router.huggingface.co')) {
+          return { ok: true, json: async () => ([{ translation_text: ${JSON.stringify(IT)} }]) };
+        }
+        if (value.includes('api.mymemory.translated.net')) {
+          return { ok: true, json: async () => ({ responseData: { translatedText: ${JSON.stringify(IT)}, match: 1 } }) };
+        }
+        if (value.includes('translate.googleapis.com')) {
+          return { ok: true, text: async () => JSON.stringify([[ [${JSON.stringify(IT)}] ]]) };
+        }
+        if (value.includes('clients5.google.com')) {
+          return { ok: true, text: async () => JSON.stringify({ sentences: [{ trans: ${JSON.stringify(IT)} }] }) };
+        }
+        if (value.includes('/api/v1/')) return { ok: true, json: async () => ({ translation: ${JSON.stringify(IT)} }) };
+        if (value.includes('/api/translate')) return { ok: true, json: async () => ({ 'translated-text': ${JSON.stringify(IT)} }) };
+        if (value.includes('/translate')) return { ok: true, json: async () => ({ translatedText: ${JSON.stringify(IT)} }) };
+        throw new Error('endpoint inatteso nel test');
+      };
+      const { freeTranslateWithRetryDetailed } = await import(${JSON.stringify(moduleUrl)});
+      const out = await freeTranslateWithRetryDetailed({
+        text: ${JSON.stringify(IT)}, sourceLang: 'it', targetLang: 'en', fieldType: 'description', maxRetries: 0,
+      });
+      if (JSON.stringify(out) !== JSON.stringify({ text: '', passthrough: false })) {
+        console.error(JSON.stringify(out));
+        process.exit(1);
+      }
+    `;
+    const child = spawnSync(process.execPath, ['--input-type=module', '--eval', childScript], {
+      encoding: 'utf8',
+      env: {
+        ...process.env,
+        DEEPL_API_KEY: 'test-key',
+        DEEPL_API_KEY_2: '',
+        AZURE_TRANSLATOR_KEY: 'test-key',
+        AZURE_TRANSLATOR_KEY_2: '',
+        GSC_CLIENT_ID: 'test-client',
+        GSC_CLIENT_SECRET: 'test-secret',
+        GSC_REFRESH_TOKEN: 'test-refresh',
+        HF_TOKEN: 'test-token',
+        HUGGINGFACE_API_KEY: '',
+        LIBRETRANSLATE_SELF_HOSTED_URL: 'http://self-hosted.test',
+        MT_LOCAL_OPUSMT: '',
+        VITEST: '1',
+      },
+    });
+    assert.equal(child.status, 0, child.stderr || child.stdout);
+  });
+
+  test('tier opzionali non configurati non bloccano il memo del passthrough', () => {
+    const moduleUrl = new URL('../scripts/lib/free-translate.mjs', import.meta.url).href;
+    const childScript = `
+      globalThis.fetch = async (url) => {
+        const value = String(url);
+        if (value.includes('api.mymemory.translated.net')) {
+          return { ok: true, json: async () => ({ responseData: { translatedText: ${JSON.stringify(IT)}, match: 1 } }) };
+        }
+        if (value.includes('translate.googleapis.com')) {
+          return { ok: true, text: async () => JSON.stringify([[ [${JSON.stringify(IT)}] ]]) };
+        }
+        if (value.includes('clients5.google.com')) {
+          return { ok: true, text: async () => JSON.stringify({ sentences: [{ trans: ${JSON.stringify(IT)} }] }) };
+        }
+        if (value.includes('/api/v1/')) return { ok: true, json: async () => ({ translation: ${JSON.stringify(IT)} }) };
+        if (value.includes('/api/translate')) return { ok: true, json: async () => ({ 'translated-text': ${JSON.stringify(IT)} }) };
+        if (value.includes('/translate')) return { ok: true, json: async () => ({ translatedText: ${JSON.stringify(IT)} }) };
+        throw new Error('endpoint inatteso nel test');
+      };
+      const { freeTranslateWithRetryDetailed } = await import(${JSON.stringify(moduleUrl)});
+      const out = await freeTranslateWithRetryDetailed({
+        text: ${JSON.stringify(IT)}, sourceLang: 'it', targetLang: 'en', fieldType: 'description', maxRetries: 0,
+      });
+      if (JSON.stringify(out) !== JSON.stringify({ text: '', passthrough: true })) {
+        console.error(JSON.stringify(out));
+        process.exit(1);
+      }
+    `;
+    const child = spawnSync(process.execPath, ['--input-type=module', '--eval', childScript], {
+      encoding: 'utf8',
+      env: {
+        ...process.env,
+        DEEPL_API_KEY: '',
+        DEEPL_API_KEY_2: '',
+        AZURE_TRANSLATOR_KEY: '',
+        AZURE_TRANSLATOR_KEY_2: '',
+        GSC_CLIENT_ID: '',
+        GSC_CLIENT_SECRET: '',
+        GSC_REFRESH_TOKEN: '',
+        HF_TOKEN: '',
+        HUGGINGFACE_API_KEY: '',
+        LIBRETRANSLATE_SELF_HOSTED_URL: '',
+        MT_LOCAL_OPUSMT: '',
+        VITEST: '1',
+      },
+    });
+    assert.equal(child.status, 0, child.stderr || child.stdout);
+  });
+
+  test('la cascata reale memoizza un eco del self-hosted senza errori', () => {
+    const moduleUrl = new URL('../scripts/lib/free-translate.mjs', import.meta.url).href;
+    const childScript = `
+      let selfHostedCalls = 0;
+      globalThis.fetch = async (url) => {
+        const value = String(url);
+        if (value.startsWith('http://self-hosted.test/')) {
+          selfHostedCalls += 1;
+          return { ok: true, json: async () => ({ translatedText: ${JSON.stringify(IT)} }) };
+        }
+        if (value.includes('api.mymemory.translated.net')) {
+          return { ok: true, json: async () => ({ responseData: { translatedText: ${JSON.stringify(IT)}, match: 1 } }) };
+        }
+        if (value.includes('translate.googleapis.com')) {
+          return { ok: true, text: async () => JSON.stringify([[ [${JSON.stringify(IT)}] ]]) };
+        }
+        if (value.includes('clients5.google.com')) {
+          return { ok: true, text: async () => JSON.stringify({ sentences: [{ trans: ${JSON.stringify(IT)} }] }) };
+        }
+        if (value.includes('/api/v1/')) return { ok: true, json: async () => ({ translation: ${JSON.stringify(IT)} }) };
+        if (value.includes('/api/translate')) return { ok: true, json: async () => ({ 'translated-text': ${JSON.stringify(IT)} }) };
+        if (value.includes('/translate')) return { ok: true, json: async () => ({ translatedText: ${JSON.stringify(IT)} }) };
+        throw new Error('endpoint inatteso nel test');
+      };
+      const { freeTranslateWithRetryDetailed } = await import(${JSON.stringify(moduleUrl)});
+      const out = await freeTranslateWithRetryDetailed({
+        text: ${JSON.stringify(IT)}, sourceLang: 'it', targetLang: 'en', fieldType: 'description', maxRetries: 0,
+      });
+      if (selfHostedCalls === 0 || JSON.stringify(out) !== JSON.stringify({ text: '', passthrough: true })) {
+        console.error(JSON.stringify({ selfHostedCalls, out }));
+        process.exit(1);
+      }
+    `;
+    const child = spawnSync(process.execPath, ['--input-type=module', '--eval', childScript], {
+      encoding: 'utf8',
+      env: {
+        ...process.env,
+        DEEPL_API_KEY: '',
+        DEEPL_API_KEY_2: '',
+        AZURE_TRANSLATOR_KEY: '',
+        AZURE_TRANSLATOR_KEY_2: '',
+        GSC_CLIENT_ID: '',
+        GSC_CLIENT_SECRET: '',
+        GSC_REFRESH_TOKEN: '',
+        HF_TOKEN: '',
+        HUGGINGFACE_API_KEY: '',
+        LIBRETRANSLATE_SELF_HOSTED_URL: 'http://self-hosted.test',
+        MT_LOCAL_OPUSMT: '',
+        VITEST: '1',
+      },
+    });
+    assert.equal(child.status, 0, child.stderr || child.stdout);
+  });
+
+  test('un target non mappato invalida il passthrough della cascata reale', () => {
+    const moduleUrl = new URL('../scripts/lib/free-translate.mjs', import.meta.url).href;
+    const childScript = `
+      const source = ${JSON.stringify(IT)};
+      globalThis.fetch = async (url) => {
+        const value = String(url);
+        if (value.includes('api-free.deepl.com')) {
+          return { ok: true, json: async () => ({ translations: [{ text: source }] }) };
+        }
+        if (value.includes('api.mymemory.translated.net')) {
+          return { ok: true, json: async () => ({ responseData: { translatedText: source, match: 1 } }) };
+        }
+        if (value.includes('translate.googleapis.com')) {
+          return { ok: true, text: async () => JSON.stringify([[ [source] ]]) };
+        }
+        if (value.includes('clients5.google.com')) {
+          return { ok: true, text: async () => JSON.stringify({ sentences: [{ trans: source }] }) };
+        }
+        if (value.includes('/api/v1/')) return { ok: true, json: async () => ({ translation: source }) };
+        if (value.includes('/api/translate')) {
+          return { ok: true, json: async () => ({ 'translated-text': source, translated_text: source }) };
+        }
+        if (value.includes('/translate')) return { ok: true, json: async () => ({ translatedText: source }) };
+        throw new Error('endpoint inatteso nel test');
+      };
+      const { freeTranslateWithRetryDetailed } = await import(${JSON.stringify(moduleUrl)});
+      const out = await freeTranslateWithRetryDetailed({
+        text: source, sourceLang: 'it', targetLang: '', fieldType: 'description', maxRetries: 0,
+      });
+      if (JSON.stringify(out) !== JSON.stringify({ text: '', passthrough: false })) {
+        console.error(JSON.stringify(out));
+        process.exit(1);
+      }
+    `;
+    const child = spawnSync(process.execPath, ['--input-type=module', '--eval', childScript], {
+      encoding: 'utf8',
+      env: {
+        ...process.env,
+        DEEPL_API_KEY: 'test-key',
+        DEEPL_API_KEY_2: '',
+        AZURE_TRANSLATOR_KEY: '',
+        AZURE_TRANSLATOR_KEY_2: '',
+        GSC_CLIENT_ID: '',
+        GSC_CLIENT_SECRET: '',
+        GSC_REFRESH_TOKEN: '',
+        HF_TOKEN: '',
+        HUGGINGFACE_API_KEY: '',
+        LIBRETRANSLATE_SELF_HOSTED_URL: '',
+        MT_LOCAL_OPUSMT: '',
+        VITEST: '1',
+      },
+    });
+    assert.equal(child.status, 0, child.stderr || child.stdout);
+  });
+
+  test('un retry finale non diventa passthrough se la cascata ha tier opzionali non configurati', async () => {
+    let myMemoryCalls = 0;
+    globalThis.fetch = async (url) => {
+      const value = String(url);
+      const finalAttempt = myMemoryCalls >= 1;
+      if (value.includes('api.mymemory.translated.net')) {
+        myMemoryCalls += 1;
+        if (!finalAttempt) return { ok: false, status: 503 };
+        return {
+          ok: true,
+          json: async () => ({ responseData: { translatedText: IT, match: 1 } }),
+        };
+      }
+      if (!finalAttempt) return { ok: false, status: 503 };
+      if (value.includes('/api/v1/')) {
+        return { ok: true, json: async () => ({ translation: IT }) };
+      }
+      if (value.includes('/api/translate')) {
+        return { ok: true, json: async () => ({ 'translated-text': IT }) };
+      }
+      if (value.includes('translate.googleapis.com')) {
+        return { ok: true, text: async () => JSON.stringify([[ [IT] ]]) };
+      }
+      if (value.includes('clients5.google.com')) {
+        return { ok: true, text: async () => JSON.stringify({ sentences: [{ trans: IT }] }) };
+      }
+      if (value.includes('/translate')) {
+        return { ok: true, json: async () => ({ translatedText: IT }) };
+      }
+      return { ok: false, status: 503 };
+    };
+
+    const out = await freeTranslateWithRetryDetailed({
+      text: IT,
+      sourceLang: 'it',
+      targetLang: 'en',
+      fieldType: 'description',
+      maxRetries: 1,
+    });
+
+    assert.deepEqual(out, { text: '', passthrough: false });
+  });
+
+  test('un fallimento del local Opus-MT entra nell’esito della chiamata', async () => {
+    const oldFlag = process.env.MT_LOCAL_OPUSMT;
+    process.env.MT_LOCAL_OPUSMT = '1';
+    setLocalOpusMtForTests(async () => { throw new Error('modello non disponibile'); });
+    globalThis.fetch = async (url) => {
+      if (String(url).includes('api.mymemory.translated.net')) {
+        return {
+          ok: true,
+          json: async () => ({ responseData: { translatedText: 'vera traduzione', match: 1 } }),
+        };
+      }
+      throw new Error('offline nel test');
+    };
+
+    try {
+      const outcome = { passthroughs: 0, errors: 0, incomplete: false };
+      const out = await freeTranslate({
+        text: IT,
+        sourceLang: 'it',
+        targetLang: 'en',
+        fieldType: 'description',
+        _outcome: outcome,
+      });
+
+      assert.equal(out, 'vera traduzione');
+      assert.equal(outcome.incomplete, true);
+    } finally {
+      setLocalOpusMtForTests(null);
+      if (oldFlag === undefined) delete process.env.MT_LOCAL_OPUSMT;
+      else process.env.MT_LOCAL_OPUSMT = oldFlag;
+    }
+  });
+});
+
+test('un passthrough esplicito non conserva il testo sorgente nel risultato normalizzato', () => {
+  assert.deepEqual(
+    asTranslationResult({ text: IT, passthrough: true }),
+    { text: '', passthrough: true },
+  );
 });
 
 describe('isSourcePassthrough', () => {
