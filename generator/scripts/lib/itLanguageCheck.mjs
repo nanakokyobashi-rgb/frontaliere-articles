@@ -250,7 +250,7 @@ export const RATE_TABLE_DEROGATION_FIELDS = ['excerpt', 'description', 'ogDescri
 
 /**
  * `true` se il testo e' una tabella compatta di aliquote e sigle italiana:
- * almeno due percentuali, almeno due acronimi E un ancoraggio italiano. La
+ * almeno due percentuali, almeno due acronimi E un'ancora lessicale italiana. La
  * morfologia, tarata sulla prosa, legge questa forma come non-italiana anche
  * quando e' italiana; l'ancoraggio impedisce che la sola forma «tabella»
  * apra la deroga a un testo di un'altra lingua.
@@ -262,9 +262,7 @@ export function isCompactItalianRateTable(value) {
   if (typeof value !== 'string') return false;
   const percentages = value.match(/\b\d+(?:[.,]\d+)?\s*%/g) ?? [];
   const acronyms = value.match(/\b[A-Z]{2,}(?:\/[A-Z]{2,})*\b/g) ?? [];
-  const markerHits = latinLanguageMarkerHits(value);
-  const hasItalianAnchor = markerHits.it >= 1
-    || /\b(?:aliquota|aliquote|contributo|contributi|percentuale|percentuali)\b/i.test(value);
+  const hasItalianAnchor = /\b(?:aliquota|aliquote|contributo|contributi|percentuale|percentuali)\b/i.test(value);
   return percentages.length >= 2 && acronyms.length >= 2 && hasItalianAnchor;
 }
 
