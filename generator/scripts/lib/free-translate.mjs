@@ -1262,6 +1262,12 @@ function noteIncompleteIfUntouched(state, before) {
   }
 }
 
+async function translateWithLocalOpusMtWithOutcome(text, sourceLang, targetLang, outcome) {
+  const translated = await translateWithLocalOpusMt(text, sourceLang, targetLang);
+  if (!translated) noteTranslationOutcome(outcome, 'incomplete');
+  return translated;
+}
+
 function mergeTranslationOutcome(target, source) {
   if (!target || !source) return;
   target.passthroughs += source.passthroughs || 0;
@@ -1360,7 +1366,10 @@ export async function freeTranslate({ text, sourceLang, targetLang, fieldType = 
   // so for IT it stays a post-MyMemory fallback (Tier 4a' below). Opt-in via
   // MT_LOCAL_OPUSMT; no-op (returns '') when disabled or the model can't load.
   if (targetLang !== 'it' && localOpusMtEnabled()) {
-    const t3a = await tryTier('localOpusMt', () => translateWithLocalOpusMt(clean, sourceLang, targetLang));
+    const t3a = await tryTier(
+      'localOpusMt',
+      () => translateWithLocalOpusMtWithOutcome(clean, sourceLang, targetLang, _outcome),
+    );
     if (t3a) return finalize(t3a);
   }
 
@@ -1412,6 +1421,9 @@ export async function freeTranslate({ text, sourceLang, targetLang, fieldType = 
         noteTranslationOutcome(_outcome, 'incomplete');
         return ''; // quota hit mid-chunk, abort
       }
+      if (rejectedAsPassthrough('myMemory', chunk, mm, _outcome)) {
+        return ''; // an echoed chunk invalidates the whole assembled result
+      }
       parts.push(mm);
     }
     // `return joined` e non un confronto locale: questo e' il ramo dei testi
@@ -1425,7 +1437,10 @@ export async function freeTranslate({ text, sourceLang, targetLang, fieldType = 
   // mirroring the self-hosted LT IT gate). Pivots through English for it↔de/fr.
   // Opt-in via MT_LOCAL_OPUSMT; no-op when disabled or the model can't load.
   if (targetLang === 'it' && localOpusMtEnabled()) {
-    const t3aFallback = await tryTier('localOpusMt', () => translateWithLocalOpusMt(clean, sourceLang, targetLang));
+    const t3aFallback = await tryTier(
+      'localOpusMt',
+      () => translateWithLocalOpusMtWithOutcome(clean, sourceLang, targetLang, _outcome),
+    );
     if (t3aFallback) return finalize(t3aFallback);
   }
 
@@ -1520,9 +1535,20 @@ export function asTranslationResult(value) {
 
 /** Return the retry result together with the reason for an empty translation. */
 export async function freeTranslateWithRetryDetailed({ text, sourceLang, targetLang, fieldType = 'title', maxRetries = 2 }) {
-  const outcome = { passthroughs: 0, errors: 0, incomplete: false };
-  const out = await freeTranslateWithRetry({ text, sourceLang, targetLang, fieldType, maxRetries, _outcome: outcome });
+  let outcome = { passthroughs: 0, errors: 0, incomplete: false };
+  let out = await freeTranslate({ text, sourceLang, targetLang, fieldType, _outcome: outcome });
   if (out) return { text: out, passthrough: false };
+
+  for (let i = 1; i <= maxRetries; i++) {
+    await delay(i * 1000);
+    outcome = { passthroughs: 0, errors: 0, incomplete: false };
+    out = await freeTranslate({ text, sourceLang, targetLang, fieldType, _outcome: outcome });
+    if (out) return { text: out, passthrough: false };
+  }
+
+  // Only the terminal cascade attempt decides whether the empty result is a
+  // stable passthrough. A transient incomplete/error on an earlier attempt
+  // must not poison a later attempt that consistently saw source echoes.
   const passthrough = outcome.passthroughs > 0 && outcome.errors === 0 && !outcome.incomplete;
   return { text: '', passthrough };
 }

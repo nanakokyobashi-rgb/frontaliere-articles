@@ -49,6 +49,7 @@ import {
   isSourcePassthrough,
   asTranslationResult,
 } from '../scripts/lib/free-translate.mjs';
+import { setLocalOpusMtForTests } from '../scripts/lib/local-opus-mt.mjs';
 
 const IT = [
   '## In breve',
@@ -258,6 +259,82 @@ describe('freeTranslate — guardia «uscita == sorgente»', () => {
     });
 
     assert.deepEqual(out, { text: '', passthrough: false });
+  });
+
+  test('il passthrough dell’ultimo retry non viene annullato da un incomplete precedente', async () => {
+    let myMemoryCalls = 0;
+    globalThis.fetch = async (url) => {
+      const value = String(url);
+      const finalAttempt = myMemoryCalls >= 1;
+      if (value.includes('api.mymemory.translated.net')) {
+        myMemoryCalls += 1;
+        if (!finalAttempt) return { ok: false, status: 503 };
+        return {
+          ok: true,
+          json: async () => ({ responseData: { translatedText: IT, match: 1 } }),
+        };
+      }
+      if (!finalAttempt) return { ok: false, status: 503 };
+      if (value.includes('/api/v1/')) {
+        return { ok: true, json: async () => ({ translation: IT }) };
+      }
+      if (value.includes('/api/translate')) {
+        return { ok: true, json: async () => ({ 'translated-text': IT }) };
+      }
+      if (value.includes('translate.googleapis.com')) {
+        return { ok: true, text: async () => JSON.stringify([[ [IT] ]]) };
+      }
+      if (value.includes('clients5.google.com')) {
+        return { ok: true, text: async () => JSON.stringify({ sentences: [{ trans: IT }] }) };
+      }
+      if (value.includes('/translate')) {
+        return { ok: true, json: async () => ({ translatedText: IT }) };
+      }
+      return { ok: false, status: 503 };
+    };
+
+    const out = await freeTranslateWithRetryDetailed({
+      text: IT,
+      sourceLang: 'it',
+      targetLang: 'en',
+      fieldType: 'description',
+      maxRetries: 1,
+    });
+
+    assert.deepEqual(out, { text: '', passthrough: true });
+  });
+
+  test('un fallimento del local Opus-MT entra nell’esito della chiamata', async () => {
+    const oldFlag = process.env.MT_LOCAL_OPUSMT;
+    process.env.MT_LOCAL_OPUSMT = '1';
+    setLocalOpusMtForTests(async () => { throw new Error('modello non disponibile'); });
+    globalThis.fetch = async (url) => {
+      if (String(url).includes('api.mymemory.translated.net')) {
+        return {
+          ok: true,
+          json: async () => ({ responseData: { translatedText: 'vera traduzione', match: 1 } }),
+        };
+      }
+      throw new Error('offline nel test');
+    };
+
+    try {
+      const outcome = { passthroughs: 0, errors: 0, incomplete: false };
+      const out = await freeTranslate({
+        text: IT,
+        sourceLang: 'it',
+        targetLang: 'en',
+        fieldType: 'description',
+        _outcome: outcome,
+      });
+
+      assert.equal(out, 'vera traduzione');
+      assert.equal(outcome.incomplete, true);
+    } finally {
+      setLocalOpusMtForTests(null);
+      if (oldFlag === undefined) delete process.env.MT_LOCAL_OPUSMT;
+      else process.env.MT_LOCAL_OPUSMT = oldFlag;
+    }
   });
 });
 

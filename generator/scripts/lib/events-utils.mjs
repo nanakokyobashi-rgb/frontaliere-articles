@@ -938,9 +938,9 @@ export function saveEventTitleTranslationCache(cache) {
 // machine-translated from the first present, non-colliding locale (in
 // `locales` priority order), or from the first present locale if ALL of them
 // collide. Shared here (not copy-pasted into both crawlers, AGENTS.md §6) and
-// reuses the SAME on-disk cache as `loadEventTitleTranslationCache` — a
-// compound key (`fieldType::sourceLocale::normalizedSourceText`) keeps new
-// entries collision-free against tio-agenda's own bare-title keys.
+// reuses the SAME on-disk cache as `loadEventTitleTranslationCache`. Entries
+// are keyed by field, source locale, and normalized source text: translation is
+// pure for that input, so duplicate event records share one result.
 const LOCALE_FALLBACK_DELAY_MS = 200;
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 const DEFAULT_TRANSLATE_FN = freeTranslateWithRetryDetailed;
@@ -1074,37 +1074,22 @@ function warnStrictPredicateDrops(poisoned, byLocale, label) {
  */
 const MAX_PASSTHROUGH_MEMO_WORDS = 32;
 
-function eventTranslationDiscriminator(event, index) {
-  for (const candidate of [event?.id, event?.stableId]) {
-    const value = String(candidate ?? '').trim();
-    if (value) return `id:${value}`;
-  }
-  const sourceKey = String(event?.sourceKey ?? '').trim();
-  const url = String(event?.url ?? event?.sourceUrl ?? '').trim();
-  if (sourceKey || url) return `source:${sourceKey}|url:${url}`;
-  return `batch-index:${index}`;
-}
-
-function eventTranslationCacheKey({ eventId, fieldType, sourceLocale, normalizedSource }) {
-  // The event id is deliberate: two real events can share a title, but their
-  // translations are not interchangeable cache entries.
-  return JSON.stringify([fieldType, eventId, sourceLocale, normalizedSource]);
-}
-
-function legacyEventTranslationCacheKey({ fieldType, sourceLocale, normalizedSource }) {
-  return `${fieldType}::${sourceLocale}::${normalizedSource}`;
+function eventTranslationCacheKey({ fieldType, sourceLocale, normalizedSource }) {
+  // Do not include an event id: identical source content has one translation,
+  // and an event-scoped key would make duplicate feed entries pay twice.
+  return JSON.stringify([fieldType, sourceLocale, normalizedSource]);
 }
 
 function wordCount(text) {
   return String(text ?? '').trim() ? String(text).trim().split(/\s+/).length : 0;
 }
 
-async function translateEventLocale({ translateFn, eventId, text, sourceLang, targetLang, fieldType }) {
-  const raw = await translateFn({ eventId, text, sourceLang, targetLang, fieldType, maxRetries: 1 });
+async function translateEventLocale({ translateFn, text, sourceLang, targetLang, fieldType }) {
+  const raw = await translateFn({ text, sourceLang, targetLang, fieldType, maxRetries: 1 });
   return asTranslationResult(raw);
 }
 
-async function fillLocaleGaps(byLocale, cache, { eventId, fieldType, locales, delayMs, translateFn }) {
+async function fillLocaleGaps(byLocale, cache, { fieldType, locales, delayMs, translateFn }) {
   // Prima di ogni ramo, compresi i due che non entrano nel loop.
   const clean = stripUnusableLocaleValues(byLocale, `${fieldType}ByLocale`);
   const needing = localesNeedingTranslation(clean, locales);
@@ -1119,10 +1104,8 @@ async function fillLocaleGaps(byLocale, cache, { eventId, fieldType, locales, de
   const updated = { ...clean };
   for (const target of needing) {
     if (target === sourceLocale) continue;
-    const cacheKey = eventTranslationCacheKey({ eventId, fieldType, sourceLocale, normalizedSource });
+    const cacheKey = eventTranslationCacheKey({ fieldType, sourceLocale, normalizedSource });
     const entry = cache[cacheKey] || {};
-    const legacyCacheKey = legacyEventTranslationCacheKey({ fieldType, sourceLocale, normalizedSource });
-    const legacyEntry = cache[legacyCacheKey];
     const targetAlreadyCarriesSource = hasUsableContentText(clean?.[target])
       && normalizeText(clean[target]).replace(/\s+/g, ' ') === normalizedSource;
     if (Object.prototype.hasOwnProperty.call(entry, target)) {
@@ -1140,7 +1123,6 @@ async function fillLocaleGaps(byLocale, cache, { eventId, fieldType, locales, de
 
     const { text: translated, passthrough } = await translateEventLocale({
       translateFn,
-      eventId,
       text: sourceText,
       sourceLang: sourceLocale,
       targetLang: target,
@@ -1148,19 +1130,6 @@ async function fillLocaleGaps(byLocale, cache, { eventId, fieldType, locales, de
     });
     if (hasUsableContentText(translated)) {
       cache[cacheKey] = { ...entry, [target]: translated };
-      // Old caches were keyed only by source text. Never read those values:
-      // doing so would merge distinct events with the same title. Clean up a
-      // stale marker there as a one-way migration, though, so existing cache
-      // files do not keep poisoned values forever and older callers/tests keep
-      // seeing the marker replaced. New reads remain event-scoped above.
-      if (
-        legacyEntry
-        && typeof legacyEntry === 'object'
-        && Object.prototype.hasOwnProperty.call(legacyEntry, target)
-        && !hasUsableContentText(legacyEntry[target])
-      ) {
-        cache[legacyCacheKey] = { ...legacyEntry, [target]: translated };
-      }
       updated[target] = translated;
       if (translateFn === DEFAULT_TRANSLATE_FN) {
         await sleep(delayMs);
@@ -1215,9 +1184,8 @@ export async function enrichEventsWithLocaleFallbackTranslations(events, cache, 
   } = options;
   const out = [];
   let skipped = 0;
-  for (const [index, event] of events.entries()) {
+  for (const event of events) {
     const next = { ...event };
-    const eventId = eventTranslationDiscriminator(event, index);
     // Le chiavi avvelenate cadono PRIMA del pass-through di `deadline`: un
     // evento spedito non tradotto tiene il testo della sorgente, ma un `NULL`
     // del feed non e' testo della sorgente — e' il modo in cui quel feed dice
@@ -1235,7 +1203,6 @@ export async function enrichEventsWithLocaleFallbackTranslations(events, cache, 
     }
     if (next.titleByLocale) {
       next.titleByLocale = await fillLocaleGaps(next.titleByLocale, cache, {
-        eventId,
         fieldType: 'title',
         locales,
         delayMs,
@@ -1244,7 +1211,6 @@ export async function enrichEventsWithLocaleFallbackTranslations(events, cache, 
     }
     if (next.descriptionByLocale) {
       next.descriptionByLocale = await fillLocaleGaps(next.descriptionByLocale, cache, {
-        eventId,
         fieldType: 'description',
         locales,
         delayMs,
