@@ -264,6 +264,9 @@ jobs:
           REPO: ${{ github.repository }}
           PR_NUMBER: ${{ needs.preflight.outputs.pr_number }}
           HAS_PAT: ${{ env.GITHUB_PAT_NANAKO != '' }}
+          # La quota è per-account: il fixer di PR deve onorare anche il beacon
+          # scritto dal ciclo del sito, non solo quello locale.
+          QUOTA_BEACON_PEER_REPO: valerielinc-ops/frontaliere-si-o-no
         run: |
           set -uo pipefail
           MAX_ROUNDS=2
@@ -273,7 +276,7 @@ jobs:
           # con la finestra 429 gia' aperta vuol dire spendere un round contro un
           # muro noto. `GITHUB_OUTPUT=` disarma la scrittura del gate: la
           # decisione la legge questo step da stdout, non i suoi output.
-          QUOTA=$(GITHUB_OUTPUT= node scripts/ci/check-quota-backoff.mjs 2>/dev/null \
+          QUOTA=$(GITHUB_OUTPUT='' node scripts/ci/check-quota-backoff.mjs 2>/dev/null \
             | grep -oE 'quota_blocked=(true|false)' | tail -1 | cut -d= -f2 || true)
           if [ "${QUOTA:-false}" = "true" ]; then
             echo "::warning::Finestra di rate-limit Claude aperta -> skip senza consumare un round (il prossimo trigger riparte col budget intero)."

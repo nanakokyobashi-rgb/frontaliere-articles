@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { describe, it } from 'node:test';
 
-import { detectClaudeRateLimit } from '../../scripts/ci/claude-rate-limit.mjs';
+import { detectClaudeRateLimit, shouldRefundRateLimitedRound } from '../../scripts/ci/claude-rate-limit.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -68,6 +68,49 @@ describe('detectClaudeRateLimit', () => {
       resetsAt: resetSeconds,
       rateLimitType: 'five_hour',
     });
+  });
+});
+
+describe('#984: rimborso solo per un 429 senza lavoro Claude', () => {
+  it('rimborsa il payload zero-turn/$0', () => {
+    const raw = JSON.stringify([
+      { type: 'rate_limit_event', rate_limit_info: { status: 'rejected', rateLimitType: 'five_hour' } },
+      { type: 'result', is_error: true, api_error_status: 429, num_turns: 1, total_cost_usd: 0 },
+    ]);
+    assert.equal(shouldRefundRateLimitedRound(raw), true);
+  });
+
+  it('non rimborsa un 429 arrivato dopo turni o costo', () => {
+    const raw = JSON.stringify([
+      { type: 'assistant', message: { content: [{ type: 'text', text: 'ho letto la PR' }] } },
+      { type: 'result', is_error: true, api_error_status: 429, num_turns: 4, total_cost_usd: 0.42 },
+    ]);
+    assert.equal(shouldRefundRateLimitedRound(raw), false);
+  });
+
+  it('non presume zero lavoro se il result non espone le metriche', () => {
+    const raw = JSON.stringify([
+      { type: 'assistant', message: { content: [{ type: 'text', text: 'lavoro già iniziato' }] } },
+      { type: 'result', is_error: true, api_error_status: 429 },
+    ]);
+    assert.equal(shouldRefundRateLimitedRound(raw), false);
+  });
+
+  it('usa le metriche del log quando execution_file manca, senza rimborsare lavoro avanzato', () => {
+    const zero = 'Claude api_error_status: 429 rate_limit num_turns: 1 total_cost_usd: 0';
+    const used = 'Claude api_error_status: 429 rate_limit num_turns: 3 total_cost_usd: 0.10';
+    assert.equal(shouldRefundRateLimitedRound(zero), true);
+    assert.equal(shouldRefundRateLimitedRound(used), false);
+  });
+
+  it('ignora un 429 di un altro step del log della run', () => {
+    const unrelated = 'dependency step api_error_status: 429 rate_limit num_turns: 1 total_cost_usd: 0';
+    assert.equal(shouldRefundRateLimitedRound(unrelated), false);
+  });
+
+  it('tratta `turns` come evidenza di lavoro nel fallback testuale', () => {
+    const used = 'Claude api_error_status: 429 rate_limit turns: 3';
+    assert.equal(shouldRefundRateLimitedRound(used), false);
   });
 });
 
