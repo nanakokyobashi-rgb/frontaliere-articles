@@ -3500,10 +3500,10 @@
     {
       "path": "generator/scripts/lib/free-mt-recovery.mjs",
       "mode": "corpus-only",
-      "reason": "Contatori e cap della recovery LLM dopo un output free-MT non utilizzabile (#831 item 2). Il generatore del corpus e' l'unico produttore dopo il cutover; il sito non ha un gemello del modulo e non deve ricevere questa dipendenza.",
+      "reason": "Contatori e cap della recovery LLM dopo un output free-MT non utilizzabile (#831 item 2). Il cap e' una QUOTA PER LOCALE, non un budget globale: il loop missing-field scorre en/de/fr in ordine e un contatore unico si esauriva tutto su `en`, lasciando `de` e `fr` al fallback italiano. Il generatore del corpus e' l'unico produttore dopo il cutover; il sito non ha un gemello del modulo e non deve ricevere questa dipendenza.",
       "baseline": {
         "site": null,
-        "corpus": "c8ed0fbdda801e83",
+        "corpus": "aa10b9f6d1b6b4fa",
         "alignedAt": "2026-09-08"
       }
     }

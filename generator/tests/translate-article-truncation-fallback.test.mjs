@@ -42,6 +42,7 @@ import {
   recordFreeMtUnusableOutput,
   wasFreeMtUnusable,
   MAX_FREE_MT_LLM_FALLBACKS_PER_RUN,
+  MAX_FREE_MT_LLM_FALLBACKS_PER_LOCALE,
 } from '../scripts/lib/free-mt-recovery.mjs';
 
 // Riempitivo dei campi meta nelle fixture. NON e' un dettaglio di stile: dal
@@ -112,13 +113,13 @@ async function runMissingFieldLoop({ data, itContent, callWithRetry, detectTrunc
   const RUN_REPORT = { translation: translationReport || createFreeMtRecoveryReport() };
   const fn = new Function(
     'data', 'itContent', 'callWithRetry', 'translatedStringOrNull', 'hasUsableTranslatedText', 'metaFieldPlausibilityMiss', 'detectTruncation', 'console',
-    'ARTICLE_TRANSLATE_FREE_MT', 'claimFreeMtLlmFallback', 'wasFreeMtUnusable', 'RUN_REPORT', 'MAX_FREE_MT_LLM_FALLBACKS_PER_RUN',
+    'ARTICLE_TRANSLATE_FREE_MT', 'claimFreeMtLlmFallback', 'wasFreeMtUnusable', 'RUN_REPORT', 'MAX_FREE_MT_LLM_FALLBACKS_PER_RUN', 'MAX_FREE_MT_LLM_FALLBACKS_PER_LOCALE',
     `return (async () => { ${MISSING_FIELD_LOOP_SRC} })();`,
   );
   // `metaFieldPlausibilityMiss` e' il floor VERO (#798), non un mock: il ramo
   // floor-miss del loop tiene il valore tradotto invece di cadere sul fallback
   // IT, e un mock qui non proverebbe quel comportamento.
-  await fn(data, itContent, callWithRetry, translatedStringOrNull, hasUsableTranslatedText, metaFieldPlausibilityMiss, detectTruncation || (() => []), capturingConsole, true, claimFreeMtLlmFallback, wasFreeMtUnusable, RUN_REPORT, MAX_FREE_MT_LLM_FALLBACKS_PER_RUN);
+  await fn(data, itContent, callWithRetry, translatedStringOrNull, hasUsableTranslatedText, metaFieldPlausibilityMiss, detectTruncation || (() => []), capturingConsole, true, claimFreeMtLlmFallback, wasFreeMtUnusable, RUN_REPORT, MAX_FREE_MT_LLM_FALLBACKS_PER_RUN, MAX_FREE_MT_LLM_FALLBACKS_PER_LOCALE);
 }
 
 /**
@@ -464,12 +465,17 @@ test('translatedStringOrNull: rifiuta la serializzazione letterale di null, non 
 // OGNI campo mancante salta il retry mirato e cade sul valore italiano: prosa
 // IT sotto `/en/`, `/de/`, `/fr/`, cioe' il difetto #831 che la catena
 // dovrebbe chiudere.
-function reportConCapEsaurito(coppieRifiutate = []) {
+function reportConCapEsaurito(coppieRifiutate = [], localiEsauriti = ['de']) {
   const report = createFreeMtRecoveryReport();
   for (const [targetLang, field] of coppieRifiutate) {
     recordFreeMtUnusableOutput(report, { reason: 'unusable-text', targetLang, field });
   }
-  for (let i = 0; i < MAX_FREE_MT_LLM_FALLBACKS_PER_RUN; i += 1) claimFreeMtLlmFallback(report);
+  // La quota e' PER LOCALE (#831: un budget globale si svuotava tutto su `en`
+  // e lasciava `de`/`fr` senza recovery), quindi va esaurita sul locale che il
+  // test esercita, non con N claim anonimi.
+  for (const locale of localiEsauriti) {
+    for (let i = 0; i < MAX_FREE_MT_LLM_FALLBACKS_PER_LOCALE; i += 1) claimFreeMtLlmFallback(report, locale);
+  }
   return report;
 }
 
@@ -486,6 +492,46 @@ test('ramo missing-field: cap esaurito ma campo NON rifiutato dal free-MT → il
 
   assert.deepEqual(calls, ['de:body1-missing-retry'], 'il campo estraneo al free-MT conserva il suo retry mirato');
   assert.equal(data.content.de.body1, 'B1 auf Deutsch', 'niente fallback italiano sotto /de/');
+});
+
+// #831 (round redflag): il budget era UNICO per run e il loop scorre `en`
+// prima di `de` e `fr`. In una run in cui il free-MT degrada su tutti i campi
+// — l'esatto scenario per cui il cap esiste — i 5 claim finivano tutti su
+// `en`, e da `de` in poi ogni campo saltava il retry mirato cadendo su
+// `itValue`: `/de/` e `/fr/` pubblicati con prosa ITALIANA. Con la quota per
+// locale `en` non puo' piu' affamare gli altri.
+test('ramo missing-field: `en` degradato non consuma il budget di `de` (#831)', async () => {
+  const vuoti = { title: '', excerpt: '', body1: '', body2: '', body3: '' };
+  const completo = { ...META_PLAUSIBILI, body1: 'B1', body2: 'B2', body3: 'B3' };
+  const data = { content: { en: { ...vuoti }, de: { ...completo, body1: '' }, fr: { ...completo } } };
+  const itContent = { ...META_PLAUSIBILI, body1: 'B1it', body2: 'B2it', body3: 'B3it' };
+  const calls = [];
+  const callWithRetry = async (_p, _t, label) => {
+    calls.push(label);
+    const field = label.split(':')[1].replace('-missing-retry', '');
+    return { [field]: `${field} tradotto in modo plausibile e abbastanza lungo` };
+  };
+
+  // Il free-MT ha rifiutato TUTTI i campi `en` piu' `de:body1`: ognuno di
+  // questi paga il cap, e senza quota per locale i cinque `en` lo esaurivano.
+  const rifiutati = ['title', 'excerpt', 'body1', 'body2', 'body3'].map((f) => ['en', f]);
+  const report = createFreeMtRecoveryReport();
+  for (const [targetLang, field] of [...rifiutati, ['de', 'body1']]) {
+    recordFreeMtUnusableOutput(report, { reason: 'unusable-text', targetLang, field });
+  }
+
+  await runMissingFieldLoop({ data, itContent, callWithRetry, translationReport: report });
+
+  assert.ok(
+    calls.includes('de:body1-missing-retry'),
+    `de deve conservare il suo retry mirato, chiamate: ${JSON.stringify(calls)}`,
+  );
+  assert.notEqual(data.content.de.body1, itContent.body1, 'niente fallback italiano sotto /de/');
+  assert.equal(
+    calls.filter((c) => c.startsWith('en:')).length,
+    MAX_FREE_MT_LLM_FALLBACKS_PER_LOCALE,
+    'en resta dentro la sua quota',
+  );
 });
 
 test('ramo missing-field: campo rifiutato dal free-MT con cap esaurito → niente retry, e il fallback IT troncato resta segnalato (#705)', async () => {
