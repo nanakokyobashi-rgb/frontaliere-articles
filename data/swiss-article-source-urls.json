@@ -1,5 +1,4 @@
 {
-  "https://www.tio.ch/dal-mondo/economia/1943783/svezia-lavoro-anni-sciopero-tesla": "dopo-3-anni-termina-lo-sciopero-tesla-in-svezia",
   "https://www.tio.ch/svizzera/cronaca/1943762/ustioni-milano-crans-montana-ricoverata-paziente": "dimissioni-pazienti-crans-montana",
   "https://www.tio.ch/svizzera/cronaca/1943682/sera-albula-linea-chiusa-ferrovia": "ferrovia-albula-chiusa",
   "https://www.tio.ch/svizzera/attualita/1943719/uzwil-acqua-siccita-piscina-svizzera": "chiusura-piscina-uzwil-siccita",
@@ -2149,6 +2148,11 @@
   "https://www.swissinfo.ch/ita/casse-pensioni%2c-buoni-rendimenti-grazie-alle-azioni/92023367": {
     "articleId": "casse-pensioni-rendimenti-2025",
     "ts": "2026-09-08T19:20:17.760Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/attualita/1948794/cure-professioni-condizioni-vpod-sistema-oss-professionisti": {
+    "articleId": "ospedali-svizzeri-infermieri-fuga-anno",
+    "ts": "2026-09-08T19:39:29.166Z",
     "keyForm": 2
   }
 }
