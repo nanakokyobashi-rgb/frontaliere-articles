@@ -1561,7 +1561,9 @@ async function main() {
   let initInventoryRefresh;
   const initSiteBlobIndex = async ({ refresh = false } = {}) => {
     if (!refresh && initInventory !== undefined) return initInventory;
-    if (refresh && initInventoryRefresh) return initInventoryRefresh;
+    if (refresh && initInventoryRefresh?.fromTreeSha === initInventory?.treeSha) {
+      return initInventoryRefresh.promise;
+    }
     const fetchInventory = (async () => {
       try {
         return await siteBlobIndex();
@@ -1570,14 +1572,19 @@ async function main() {
       }
     })();
     if (refresh) {
-      initInventoryRefresh = fetchInventory.then((fresh) => {
+      const fromTreeSha = initInventory?.treeSha || null;
+      let refreshRecord;
+      const promise = fetchInventory.then((fresh) => {
         // Un refresh fallito non deve cancellare l'inventario valido: il
         // verdetto corrente può ancora leggere il blob autorevole del tree
         // precedente, e le voci successive non devono ereditare un falso buio.
         if (fresh?.status === 'ok') initInventory = fresh;
+        else if (initInventoryRefresh === refreshRecord) initInventoryRefresh = null;
         return fresh;
       });
-      return initInventoryRefresh;
+      refreshRecord = { fromTreeSha, promise };
+      initInventoryRefresh = refreshRecord;
+      return promise;
     }
     initInventory = await fetchInventory;
     return initInventory;
