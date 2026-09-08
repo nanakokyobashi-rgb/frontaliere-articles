@@ -153,6 +153,27 @@ describe('#874/#864/#845 — una sola porta di scrittura verso ai_model_scores/_
     declaration: /^const _dirtyModels = new Set\(\);$/,
   };
 
+  // Lo scope dice chi puo' NOMINARE il Set; da solo non dice chi puo'
+  // SCRIVERLO. L'allowlist qui sopra contiene tre voci che sono sola lettura
+  // (`flushScoresBeforeExit`, `getStats`, `resetState` per la parte che legge):
+  // senza questo secondo vincolo un `_dirtyModels.add(id)` infilato in una di
+  // loro sarebbe verde, ed e' esattamente il secondo ingresso sul documento
+  // condiviso di #838/#845/#864/#874. Il pin PRE-#1047 lo faceva rosso perche'
+  // filtrava per stringa; allargare la rete agli alias non deve costare la
+  // forma. Stesso vincolo del gemello `_exhaust*` piu' sotto.
+  const SCRITTORI_DIRTY_MODELS = {
+    add: [
+      '_proposeLedgerWrite',        // la porta
+      '_persistScoresToFirestore',  // il RIMESSAGGIO in coda di una scrittura respinta dalla rete
+    ],
+    delete: [],
+    clear: [
+      '_persistScoresToFirestore',  // svuota la coda che sta per spedire
+      'resetState',
+    ],
+  };
+  const MUTAZIONI_DIRTY_MODELS = new RegExp(`(?<![\\w.])_dirtyModels\\.(${Object.keys(SCRITTORI_DIRTY_MODELS).join('|')})\\(`);
+
   it('ogni riferimento a `_dirtyModels` sta in una funzione dell\'allowlist (#1047)', () => {
     const { scoperti, fantasmi, riferimenti } = pinIdentifierToFunctions(SRC, '_dirtyModels', PORTE_DIRTY_MODELS);
 
@@ -168,6 +189,26 @@ describe('#874/#864/#845 — una sola porta di scrittura verso ai_model_scores/_
     // dalla sua correttezza.
     assert.deepEqual(fantasmi, [], `l'allowlist nomina funzioni che non toccano piu' _dirtyModels: ${fantasmi.join(', ')}`);
     assert.ok(riferimenti.length >= 5, `il pin non trova piu' nemmeno la porta: ${riferimenti.length} riferimenti`);
+
+    // La MUTAZIONE resta pinnata anche per FORMA: nominare il Set e scriverlo
+    // sono due diritti diversi, e i lettori dell'allowlist hanno solo il primo.
+    const scritture = riferimenti
+      .map((r) => ({ ...r, metodo: MUTAZIONI_DIRTY_MODELS.exec(r.text)?.[1] }))
+      .filter(({ metodo }) => metodo);
+    assert.deepEqual(
+      scritture
+        .filter(({ metodo, fn }) => !SCRITTORI_DIRTY_MODELS[metodo].includes(fn))
+        .map(({ line, text, fn }) => `${line}: ${text} [in ${fn}]`),
+      [],
+      'una mutazione di _dirtyModels fuori dai suoi scrittori: e\' un secondo ingresso sul documento condiviso '
+      + 'dai due repo, la forma di #838/#845/#864/#874. Usa _proposeLedgerWrite(modelId, recordScore).',
+    );
+    assert.equal(
+      scritture.length,
+      4,
+      `le mutazioni del Set devono restare quattro (add nella porta e nel rimessaggio, clear prima dello spedire e `
+      + `nel reset), trovate ${scritture.length}: ${scritture.map((s) => `${s.line} [in ${s.fn}]`).join(', ')}`,
+    );
   });
 
   // L'OSSERVATORE del pin qui sopra: un gate che nessuno ha mai visto dire di
