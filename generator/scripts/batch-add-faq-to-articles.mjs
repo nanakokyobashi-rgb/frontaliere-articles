@@ -34,7 +34,7 @@ import { reportStrippedControlChars } from './lib/control-char-write-report.mjs'
 import { callLLM, callSingleModel, AI_MODELS, initScoreStore, getStats, flushScores, resetExhaustedModel, printRunSummary } from './lib/ai-models.mjs';
 import { freeTranslateWithRetry, logCascadeSummary } from './lib/free-translate.mjs';
 import { stripCodeFences, findMatchingClose, fixJsonStringBody, JSON_QUOTE_SAFETY_RULE_IT, describeJsonParseError, describeRawForDiagnostics } from './lib/llm-json-repair.mjs';
-import { filterWrongLocalePairs, wrongLocalePair } from './fix-faq-locales.mjs';
+import { belowFaqFloor, filterWrongLocalePairs, MIN_FAQ_PAIRS, minPairsForWrite, wrongLocalePair } from './fix-faq-locales.mjs';
 import { unescapeTsString } from './lib/unescape-ts-string.mjs';
 
 // ── CLI argument parsing ─────────────────────────────────────
@@ -584,7 +584,9 @@ export function extractFaqFromContent(fileContent, articleId) {
   return parseFaqLiteral(matches[matches.length - 1][1]);
 }
 
-const MIN_FAQ_PAIRS = 3;
+// `MIN_FAQ_PAIRS` vive in `fix-faq-locales.mjs` accanto al pavimento di
+// scrittura che lo usa: due copie del minimo divergerebbero, e il gemello che
+// pota le coppie sbagliate sta li'.
 
 /**
  * Discover articles that need work:
@@ -949,7 +951,19 @@ async function translateFaq(faqArray, targetLang) {
     console.error(`   ⚠️  translateFaq ${targetLang}: ${wrong.length} coppia/e non in ${targetLang} `
       + `(${wrong.map((pair) => `${pair.index + 1}:${pair.detected}/${pair.via}`).join(', ')}): `
       + `${validFaq.length} coppia/e sane conservate`);
-    if (validFaq.length === 0) return { faq: null, rejected: true, rejectedPairs: wrong };
+    // Il residuo si scrive solo se raggiunge il pavimento (`minPairsForWrite`).
+    // Sotto, e' un rifiuto e non una scrittura magra: il ramo IT pretende
+    // `MIN_FAQ_PAIRS` sulla stessa pagina, e la potatura non e' recuperabile —
+    // `discoverArticles()` riaccoda un locale solo su chiave `.faq` assente o
+    // su una coppia ancora sbagliata, e dopo la scrittura parziale nessuna
+    // delle due condizioni vale piu'. Con `rejected: true` i tre chiamanti
+    // saltano la scrittura (nessun fallback italiano intero) e il commento
+    // «si recupera al giro dopo» torna vero anche su questo ramo.
+    if (belowFaqFloor(validFaq, faqArray)) {
+      console.error(`   ❌ translateFaq ${targetLang}: solo ${validFaq.length}/${minPairsForWrite(faqArray)} `
+        + 'coppie sane — non scrivo, si recupera al giro dopo');
+      return { faq: null, rejected: true, rejectedPairs: wrong };
+    }
     return { faq: validFaq, rejected: false, rejectedPairs: wrong };
   }
   return { faq: results, rejected: false };

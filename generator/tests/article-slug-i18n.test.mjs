@@ -342,11 +342,24 @@ describe('corpus pubblicato — ratchet sugli slug non localizzati', () => {
   // floor…`), e la risposta e' riparare la traduzione del titolo, non alzare
   // ancora questo numero.
   const FLOOR_IT_FALLBACK_HEADROOM = 3;
+  // Il margine vale su TUTTI E TRE i conteggi, e non e' una concessione: e' la
+  // stessa causa misurata, letta sui tre modi in cui si manifesta.
+  //
+  // Un articolo NUOVO i cui tre titoli tradotti cadono sotto il floor di
+  // plausibilita' ripiega sull'URL italiano in en, de E fr: e' un caso
+  // ALL_THREE nuovo di zecca, non uno storico. Portare quel cap a margine zero
+  // significa che il primo articolo cosi' non fa «un URL italiano in piu'», fa
+  // fallire il Preflight di publish-api.yml — la pubblicazione ferma per
+  // l'intera superficie dati, con la causa che sta in una traduzione di titolo.
+  //
+  // Lo stesso ripiego copia lo STESSO slug italiano su fino a tre locali, e il
+  // ratchet degli slug lunghi conta PER LOCALE: un solo ripiego su uno slug
+  // >= 80 caratteri ne aggiunge tre in un colpo. Da qui il fattore 3.
+  const FLOOR_LONG_SLUG_HEADROOM = FLOOR_IT_FALLBACK_HEADROOM * 3;
+
   const IT_URL_ACROSS_LOCALES_CAP = IT_URL_ACROSS_LOCALES_BASELINE + FLOOR_IT_FALLBACK_HEADROOM;
-  // Il margine del floor vale solo per il conteggio largo: non puo' ammettere
-  // crescita nel caso peggiore, ne' nuovi slug lunghi per locale.
-  const ALL_THREE_IDENTICAL_CAP = ALL_THREE_IDENTICAL_BASELINE;
-  const LONG_SLUG_CAP = LONG_SLUG_BASELINE;
+  const ALL_THREE_IDENTICAL_CAP = ALL_THREE_IDENTICAL_BASELINE + FLOOR_IT_FALLBACK_HEADROOM;
+  const LONG_SLUG_CAP = LONG_SLUG_BASELINE + FLOOR_LONG_SLUG_HEADROOM;
 
   it(`gli articoli che servono l'URL italiano su en/de/fr non superano ${IT_URL_ACROSS_LOCALES_CAP}`, () => {
     const offenders = entries.filter((e) => e.en === e.it || e.de === e.it || e.fr === e.it);
@@ -363,27 +376,29 @@ describe('corpus pubblicato — ratchet sugli slug non localizzati', () => {
   });
 
   it(`gli articoli con TUTTI E TRE i locali sull'URL italiano non superano ${ALL_THREE_IDENTICAL_CAP}`, () => {
-    assert.equal(ALL_THREE_IDENTICAL_CAP, ALL_THREE_IDENTICAL_BASELINE,
-      'il floor del titolo non ha margine nel caso ALL_THREE_IDENTICAL');
+    assert.ok(ALL_THREE_IDENTICAL_CAP > ALL_THREE_IDENTICAL_BASELINE,
+      'il cap ALL_THREE_IDENTICAL deve tenere almeno un margine sopra la baseline: '
+      + 'a margine zero il primo ripiego del floor ferma la pubblicazione');
     // E' il numero misurato oggi (169, blog 126 + swiss 43): un articolo
     // che serve lo stesso indirizzo in quattro lingue non ha localizzazione
     // affatto, ed e' il caso peggiore della famiglia. Il margine e' lo stesso
-    // di sopra non vale qui: un titolo tradotto sotto il floor in tutti e tre i
-    // locali non puo' introdurre un nuovo caso storico.
+    // di sopra: un titolo tradotto sotto il floor in tutti e tre i locali cade
+    // qui, non solo nel conteggio largo.
     const offenders = entries.filter((e) => e.en === e.it && e.de === e.it && e.fr === e.it);
     assert.ok(
       offenders.length <= ALL_THREE_IDENTICAL_CAP,
       `${offenders.length} articoli servono l'URL italiano su en, de E fr ` +
-        `(baseline ${ALL_THREE_IDENTICAL_BASELINE}, senza margine per il floor del titolo).\n` +
+        `(baseline ${ALL_THREE_IDENTICAL_BASELINE} + ${FLOOR_IT_FALLBACK_HEADROOM} di margine per il floor del titolo).\n` +
         `Primi dieci: ${offenders.slice(0, 10).map((e) => e.id).join(', ')}`,
     );
   });
 
   it(`gli slug lunghi >= 80 caratteri non superano ${LONG_SLUG_CAP}`, () => {
-    assert.equal(LONG_SLUG_CAP, LONG_SLUG_BASELINE,
-      'il floor del titolo non ha margine nel ratchet degli slug lunghi');
-    // Anche questo e' a margine zero e il ripiego lo tocca: lo slug italiano
-    // copiato su en/de/fr conta tre volte se e' lungo.
+    assert.ok(LONG_SLUG_CAP >= LONG_SLUG_BASELINE + 3,
+      'il ratchet degli slug lunghi conta per locale: il margine deve coprire '
+      + 'almeno un ripiego, che vale tre locali');
+    // Il ripiego lo tocca tre volte: lo slug italiano copiato su en/de/fr
+    // conta una volta per locale se e' lungo.
     const long = [];
     for (const e of entries) {
       for (const locale of ['it', 'en', 'de', 'fr']) {
@@ -393,7 +408,7 @@ describe('corpus pubblicato — ratchet sugli slug non localizzati', () => {
     assert.ok(
       long.length <= LONG_SLUG_CAP,
       `${long.length} slug >= 80 caratteri ` +
-        `(baseline ${LONG_SLUG_BASELINE}, senza margine per il floor del titolo): ` +
+        `(baseline ${LONG_SLUG_BASELINE} + ${FLOOR_LONG_SLUG_HEADROOM} di margine per il floor del titolo): ` +
         `${long.slice(0, 10).join(', ')}`,
     );
   });

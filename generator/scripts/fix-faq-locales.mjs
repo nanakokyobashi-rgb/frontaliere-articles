@@ -406,6 +406,37 @@ export function filterWrongLocalePairs(faqArray, wrong) {
   return faqArray.filter((_, index) => !rejected.has(index));
 }
 
+// Il minimo di coppie che una FAQ pubblicata deve avere. UNA sorgente per i due
+// scrittori (`batch-add-faq-to-articles.mjs` lo importa da qui): il ramo IT lo
+// impone gia' sulla generazione, e un locale scritto sotto questo numero
+// sarebbe una FAQ piu' povera dell'italiano sulla stessa pagina.
+export const MIN_FAQ_PAIRS = 3;
+
+/**
+ * Il pavimento di una scrittura potata, e insieme la condizione che il
+ * RILEVATORE usa per riaccodare il locale.
+ *
+ * Perche' esiste: conservare le coppie sane invece di buttare l'articolo e'
+ * giusto, ma senza pavimento la potatura e' PERMANENTE. Il rilevatore riaccoda
+ * un locale solo se manca la chiave `.faq` o se `wrongLocalePair` trova ancora
+ * una coppia sbagliata: dopo una scrittura parziale nessuna delle due vale
+ * piu', e la FAQ pubblicata resta sotto il minimo per sempre, senza un errore.
+ * Sotto il pavimento quindi NON si scrive: la FAQ vecchia resta, il rilevatore
+ * la rivede al giro dopo e la traduzione viene ritentata.
+ *
+ * `Math.min` con la sorgente: pretendere 3 coppie da una sorgente che ne ha 2
+ * sarebbe un pavimento irraggiungibile, cioe' un locale mai piu' scritto.
+ */
+export function minPairsForWrite(sourceFaq) {
+  const sourceLen = Array.isArray(sourceFaq) ? sourceFaq.length : 0;
+  return Math.min(sourceLen || MIN_FAQ_PAIRS, MIN_FAQ_PAIRS);
+}
+
+/** true quando l'array potato non raggiunge il pavimento e non va scritto. */
+export function belowFaqFloor(keptFaq, sourceFaq) {
+  return (keptFaq?.length ?? 0) < minPairsForWrite(sourceFaq);
+}
+
 // ── Translation (same cascade as job crawlers) ──────────────
 
 async function translateFaqArray(faqArray, targetLang) {
@@ -560,42 +591,39 @@ async function main() {
       // Verify the translation is actually in the right locale — per coppia,
       // perche' il fallback italiano di `translateFaqArray()` e' per coppia.
       const wrong = wrongLocalePair(translated, issue.locale, issue.itFaq);
+      let toWrite = translated;
       if (wrong) {
-        const validTranslated = filterWrongLocalePairs(translated, wrong);
+        toWrite = filterWrongLocalePairs(translated, wrong);
         console.error(`${label} ⚠️  ${wrong.length} coppia/e non in ${issue.locale} `
           + `(${wrong.map((pair) => `${pair.index + 1}:${pair.detected}/${pair.via}`).join(', ')}): `
-          + `${validTranslated.length} coppia/e sane conservate`);
-        if (validTranslated.length === 0) {
+          + `${toWrite.length} coppia/e sane conservate`);
+        // Sotto il pavimento non si scrive NIENTE. Qui il write e' un
+        // `replaceFaqInFile` su una FAQ gia' presente: scrivere il residuo
+        // potato sostituirebbe la FAQ del locale con una piu' povera, e il
+        // prossimo scan non la vedrebbe piu' come issue — `wrongLocalePair`
+        // sulle sole superstiti torna `null`. Il conteggio `fixed++` la
+        // dichiarerebbe pure riparata. Meglio lasciarla com'e' e ritentare.
+        if (belowFaqFloor(toWrite, issue.itFaq)) {
+          console.error(`${label} ❌ Solo ${toWrite.length}/${minPairsForWrite(issue.itFaq)} coppie sane: `
+            + 'non scrivo (una FAQ potata non verrebbe piu\' riaccodata), ritento al giro dopo');
           failed++;
           continue;
         }
-        const localePath = resolve(BODY_DIR, issue.locale, issue.file);
-        if (issue.reason === 'missing') {
-          if (!insertFaqKey(localePath, issue.articleId, validTranslated)) {
-            console.error(`${label} ❌ Could not insert FAQ key`);
-            failed++;
-            continue;
-          }
-        } else {
-          replaceFaqInFile(localePath, validTranslated);
-        }
-        console.log(`${label} ✅ Fixed (${validTranslated.length} pairs, ${wrong.length} skipped)`);
-        fixed++;
-        continue;
       }
 
       const localePath = resolve(BODY_DIR, issue.locale, issue.file);
       if (issue.reason === 'missing') {
-        if (!insertFaqKey(localePath, issue.articleId, translated)) {
+        if (!insertFaqKey(localePath, issue.articleId, toWrite)) {
           console.error(`${label} ❌ Could not insert FAQ key`);
           failed++;
           continue;
         }
       } else {
-        replaceFaqInFile(localePath, translated);
+        replaceFaqInFile(localePath, toWrite);
       }
 
-      console.log(`${label} ✅ Fixed (${translated.length} pairs)`);
+      console.log(`${label} ✅ Fixed (${toWrite.length} pairs`
+        + (wrong ? `, ${wrong.length} skipped)` : ')'));
       fixed++;
     } catch (err) {
       console.error(`${label} ❌ ${err.message}`);
