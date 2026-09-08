@@ -623,15 +623,25 @@ function readManifest() {
 
 /** Hash del file locale, o del blob committato durante `--init`. */
 function localHash(rel, { committed = false } = {}) {
-  if (committed) {
-    try {
-      const bytes = execFileSync('git', ['show', `HEAD:${rel}`], { cwd: ROOT, maxBuffer: 10 * 1024 * 1024 });
-      return sha256(bytes);
-    } catch {
-      return null;
-    }
-  }
   const p = path.join(ROOT, rel);
+  if (committed) {
+    let bytes;
+    try {
+      bytes = execFileSync('git', ['show', `HEAD:${rel}`], { cwd: ROOT, maxBuffer: 10 * 1024 * 1024 });
+    } catch {
+      if (!fs.existsSync(p)) return null;
+      throw new Error(`il file del corpus esiste nel working tree ma non in HEAD (${rel}): committalo prima di --init`);
+    }
+    if (!fs.existsSync(p)) {
+      throw new Error(`il file del corpus e' assente dal working tree ma presente in HEAD (${rel}): ripristinalo prima di --init`);
+    }
+    const workingHash = sha256(fs.readFileSync(p));
+    const committedHash = sha256(bytes);
+    if (workingHash !== committedHash) {
+      throw new Error(`il file del corpus e' diverso da HEAD (${rel}): committalo prima di --init`);
+    }
+    return committedHash;
+  }
   if (!fs.existsSync(p)) return null;
   return sha256(fs.readFileSync(p));
 }
@@ -972,14 +982,22 @@ async function siteBlobIndex() {
 }
 
 /** Rilegge il blob autorevole del tree, non la risposta raw/CDN. */
-async function siteGitBlob(blobSha) {
+async function siteGitBlob(blobSha, { sitePath, refSha } = {}) {
   const url = `https://api.github.com/repos/${SITE_REPO}/git/blobs/${blobSha}`;
   try {
     const res = await rawFetch(url, { Accept: 'application/vnd.github+json' });
     if (!res.ok) return null;
     const payload = await res.json();
-    if (payload?.encoding !== 'base64' || typeof payload.content !== 'string') return null;
-    return Buffer.from(payload.content, 'base64');
+    if (payload?.encoding === 'base64' && typeof payload.content === 'string') {
+      return Buffer.from(payload.content, 'base64');
+    }
+    // GitHub risponde `encoding: none` senza contenuto per blob grandi. Il ref
+    // della risposta tree è immutabile: il raw a quel ref è una seconda lettura
+    // autorevole, e il chiamante ricontrolla comunque il blob SHA-1.
+    if (payload?.encoding !== 'none' || !sitePath || !refSha) return null;
+    const immutable = await rawFetch(`https://raw.githubusercontent.com/${SITE_REPO}/${refSha}/${sitePath}`);
+    if (!immutable.ok) return null;
+    return Buffer.from(await immutable.arrayBuffer());
   } catch {
     return null;
   }
@@ -1011,7 +1029,7 @@ async function initInventoryVerdict({ siteBytes, sitePath, inventory, refresh })
     return { paths: null, status: 'ref-moved' };
   }
 
-  const authoritative = await siteGitBlob(treeSha);
+  const authoritative = await siteGitBlob(treeSha, { sitePath, refSha: inventory.treeSha });
   if (!authoritative || gitBlobSha(authoritative) !== treeSha) {
     return { paths: null, status: 'unavailable' };
   }
@@ -1540,14 +1558,28 @@ async function main() {
   // e non disponibile (che per `initAttestVerdict` e' un rifiuto, non un
   // fail-open: e' una baseline che si sta SCRIVENDO).
   let initInventory;
+  let initInventoryRefresh;
   const initSiteBlobIndex = async ({ refresh = false } = {}) => {
-    if (refresh || initInventory === undefined) {
+    if (!refresh && initInventory !== undefined) return initInventory;
+    if (refresh && initInventoryRefresh) return initInventoryRefresh;
+    const fetchInventory = (async () => {
       try {
-        initInventory = await siteBlobIndex();
+        return await siteBlobIndex();
       } catch {
-        initInventory = { status: 'unavailable', reason: 'errore di rete' };
+        return { status: 'unavailable', reason: 'errore di rete' };
       }
+    })();
+    if (refresh) {
+      initInventoryRefresh = fetchInventory.then((fresh) => {
+        // Un refresh fallito non deve cancellare l'inventario valido: il
+        // verdetto corrente può ancora leggere il blob autorevole del tree
+        // precedente, e le voci successive non devono ereditare un falso buio.
+        if (fresh?.status === 'ok') initInventory = fresh;
+        return fresh;
+      });
+      return initInventoryRefresh;
     }
+    initInventory = await fetchInventory;
     return initInventory;
   };
 

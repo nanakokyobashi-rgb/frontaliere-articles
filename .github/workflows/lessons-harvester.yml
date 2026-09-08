@@ -79,6 +79,9 @@ jobs:
           # e' qualificato, quindi chiunque puo' aprire un branch chiamato come
           # il nostro e far contare 1 a questo guard — che poi si spegnerebbe
           # da solo per sempre. Il prefisso e' un nome, non un permesso.
+          # Si serializza il repo head insieme al branch: jq `env.REPO` non è
+          # affidabile in questo contesto, mentre awk confronta il valore già
+          # uscito dall'API senza lasciare passare fork con lo stesso branch.
           gh api --paginate "repos/$REPO/pulls?state=open&per_page=100" --jq '.[] | [.head.repo.full_name, .head.ref] | @tsv' |
             awk -F '\t' -v repo="$REPO" '$1 == repo { print $2 }' > /tmp/open-prs.txt
           OPEN=$(grep -c '^lessons/auto-harvest' /tmp/open-prs.txt || true)

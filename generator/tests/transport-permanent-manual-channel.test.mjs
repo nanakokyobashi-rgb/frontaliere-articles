@@ -54,6 +54,7 @@ test('il codice di ritorno del trasporto non può diminuire fra dry-run e apply'
   const yml = read(WORKFLOW);
   assert.match(yml, /previous_rc=.*transport-rc/);
   assert.match(yml, /\[ "\$previous_rc" -gt "\$rc" \] && rc="\$previous_rc"/);
+  assert.match(yml, /case "\$previous_rc" in[\s\S]{0,120}0\|1\|2/);
 });
 
 test('il no permanente ha un codice suo, diverso da «non copiare»', () => {
