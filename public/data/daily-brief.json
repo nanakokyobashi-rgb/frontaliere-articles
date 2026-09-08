@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-07T10:02:10.620Z",
-  "dateIso": "2026-09-07",
+  "generatedAt": "2026-09-08T09:27:53.368Z",
+  "dateIso": "2026-09-08",
   "counts": {
     "availableBlocks": 4,
     "crossings": 141,
@@ -12,60 +12,32 @@
   "blocks": {
     "borderWait": {
       "available": true,
-      "updatedAt": "2026-09-07T08:48:40.577Z",
+      "updatedAt": "2026-09-08T08:29:38.339Z",
       "count": 141,
-      "zeroWaitCount": 112,
+      "zeroWaitCount": 111,
       "worst": {
-        "slug": "gaggiolo",
-        "name": "Gaggiolo (Cantello-Stabio)",
-        "waitMinutes": 4
+        "slug": "chiasso-strada",
+        "name": "Chiasso-Strada",
+        "waitMinutes": 34
       },
       "crossings": [
         {
-          "slug": "gaggiolo",
-          "name": "Gaggiolo (Cantello-Stabio)",
+          "slug": "chiasso-strada",
+          "name": "Chiasso-Strada",
+          "waitMinutes": 34,
+          "status": "red",
+          "direction": "Entrambi"
+        },
+        {
+          "slug": "porto-ceresio-brusino",
+          "name": "Porto Ceresio-Brusino",
           "waitMinutes": 4,
-          "status": "green",
-          "direction": "Entrambi"
-        },
-        {
-          "slug": "ferney-voltaire-grand-saconnex",
-          "name": "Ferney-Voltaire / Grand-Saconnex",
-          "waitMinutes": 2,
-          "status": "green",
-          "direction": "Entrambi"
-        },
-        {
-          "slug": "haag-bendern",
-          "name": "Haag-Bendern",
-          "waitMinutes": 2,
-          "status": "green",
-          "direction": "Entrambi"
-        },
-        {
-          "slug": "konstanz-tagerwilen-gottlieber-strasse",
-          "name": "Konstanz – Tägerwilen, Gottlieber Strasse",
-          "waitMinutes": 2,
           "status": "green",
           "direction": "Entrambi"
         },
         {
           "slug": "laufenburg-laufenburg-ag",
           "name": "Laufenburg (Baden) – Laufenburg AG",
-          "waitMinutes": 2,
-          "status": "green",
-          "direction": "Entrambi"
-        },
-        {
-          "slug": "passo-dello-spluga",
-          "name": "Passo dello Spluga (Montespluga)",
-          "waitMinutes": 2,
-          "status": "green",
-          "direction": "Entrambi"
-        },
-        {
-          "slug": "porto-ceresio-brusino",
-          "name": "Porto Ceresio-Brusino",
           "waitMinutes": 2,
           "status": "green",
           "direction": "Entrambi"
@@ -120,6 +92,27 @@
           "direction": "Entrambi"
         },
         {
+          "slug": "ferney-voltaire-grand-saconnex",
+          "name": "Ferney-Voltaire / Grand-Saconnex",
+          "waitMinutes": 1,
+          "status": "green",
+          "direction": "Entrambi"
+        },
+        {
+          "slug": "forcola-di-livigno",
+          "name": "Forcola di Livigno",
+          "waitMinutes": 1,
+          "status": "green",
+          "direction": "Entrambi"
+        },
+        {
+          "slug": "haag-bendern",
+          "name": "Haag-Bendern",
+          "waitMinutes": 1,
+          "status": "green",
+          "direction": "Entrambi"
+        },
+        {
           "slug": "inzlingen-riehen",
           "name": "Inzlingen – Riehen",
           "waitMinutes": 1,
@@ -141,6 +134,13 @@
           "direction": "Entrambi"
         },
         {
+          "slug": "konstanz-tagerwilen-gottlieber-strasse",
+          "name": "Konstanz – Tägerwilen, Gottlieber Strasse",
+          "waitMinutes": 1,
+          "status": "green",
+          "direction": "Entrambi"
+        },
+        {
           "slug": "lanzo-d-intelvi-arogno",
           "name": "Lanzo d'Intelvi-Arogno",
           "waitMinutes": 1,
@@ -150,6 +150,13 @@
         {
           "slug": "le-chatelard-vallorcine",
           "name": "Le Châtelard-Vallorcine",
+          "waitMinutes": 1,
+          "status": "green",
+          "direction": "Entrambi"
+        },
+        {
+          "slug": "maslianico-pizzamiglio",
+          "name": "Maslianico-Pizzamiglio",
           "waitMinutes": 1,
           "status": "green",
           "direction": "Entrambi"
@@ -400,13 +407,6 @@
           "direction": "Entrambi"
         },
         {
-          "slug": "chiasso-strada",
-          "name": "Chiasso-Strada",
-          "waitMinutes": 0,
-          "status": "green",
-          "direction": "Entrambi"
-        },
-        {
           "slug": "clivio-ligornetto",
           "name": "Clivio-Ligornetto",
           "waitMinutes": 0,
@@ -512,8 +512,8 @@
           "direction": "Entrambi"
         },
         {
-          "slug": "forcola-di-livigno",
-          "name": "Forcola di Livigno",
+          "slug": "gaggiolo",
+          "name": "Gaggiolo (Cantello-Stabio)",
           "waitMinutes": 0,
           "status": "green",
           "direction": "Entrambi"
@@ -778,13 +778,6 @@
           "direction": "Entrambi"
         },
         {
-          "slug": "maslianico-pizzamiglio",
-          "name": "Maslianico-Pizzamiglio",
-          "waitMinutes": 0,
-          "status": "green",
-          "direction": "Entrambi"
-        },
-        {
           "slug": "merishausen-tengen",
           "name": "Merishausen – Tengen",
           "waitMinutes": 0,
@@ -822,6 +815,13 @@
         {
           "slug": "opfertshofen-tengen",
           "name": "Opfertshofen – Tengen",
+          "waitMinutes": 0,
+          "status": "green",
+          "direction": "Entrambi"
+        },
+        {
+          "slug": "passo-dello-spluga",
+          "name": "Passo dello Spluga (Montespluga)",
           "waitMinutes": 0,
           "status": "green",
           "direction": "Entrambi"
@@ -1013,11 +1013,11 @@
     },
     "fuel": {
       "available": true,
-      "generatedAt": "2026-09-07T06:39:01.115Z",
+      "generatedAt": "2026-09-08T06:34:01.277Z",
       "municipalityCount": 518,
-      "cheaperItalyCount": 41,
-      "cheaperSwissCount": 94,
-      "tieCount": 13,
+      "cheaperItalyCount": 35,
+      "cheaperSwissCount": 110,
+      "tieCount": 3,
       "cheapestItaly": [
         {
           "municipality": "Livigno",
@@ -1044,10 +1044,10 @@
           "stationName": "DISTRIBUTORE ENI APRICA"
         },
         {
-          "municipality": "Cosio Valtellino",
+          "municipality": "Montagna in Valtellina",
           "province": "SO",
-          "minPriceEur": 1.949,
-          "stationName": "COLLI AREA "
+          "minPriceEur": 1.969,
+          "stationName": "MONTAGNA IN VALTELLINA"
         }
       ],
       "bestSavings": [
@@ -1061,22 +1061,22 @@
           "saving50LEur": 28.9
         },
         {
-          "municipality": "Aprica",
-          "province": "SO",
-          "cheaperCountry": "IT",
-          "italyPriceEur": 1.919,
-          "swissPriceEur": 2.105,
-          "swissPriceChf": 1.98,
-          "saving50LEur": 9.3
-        },
-        {
           "municipality": "Caravate",
           "province": "VA",
           "cheaperCountry": "CH",
           "italyPriceEur": 2.099,
-          "swissPriceEur": 1.925,
-          "swissPriceChf": 1.81,
-          "saving50LEur": 8.7
+          "swissPriceEur": 1.893,
+          "swissPriceChf": 1.78,
+          "saving50LEur": 10.3
+        },
+        {
+          "municipality": "Gemonio",
+          "province": "VA",
+          "cheaperCountry": "CH",
+          "italyPriceEur": 2.099,
+          "swissPriceEur": 1.893,
+          "swissPriceChf": 1.78,
+          "saving50LEur": 10.3
         }
       ],
       "cheapestSwissStation": {
@@ -1089,13 +1089,13 @@
     },
     "exchange": {
       "available": true,
-      "rate": 1.0632,
-      "lastDate": "2026-09-06",
-      "prevRate": 1.0632,
-      "prevDate": "2026-09-05",
-      "delta1d": 0,
-      "rate7dAgo": 1.0663,
-      "delta7d": -0.0031,
+      "rate": 1.0627,
+      "lastDate": "2026-09-07",
+      "prevRate": 1.063,
+      "prevDate": "2026-09-06",
+      "delta1d": -0.0003,
+      "rate7dAgo": 1.0666,
+      "delta7d": -0.0039,
       "source": "frankfurter",
       "pointCount": 32,
       "degradedEditions": 0
@@ -1106,7 +1106,7 @@
       "activeJobs": 25206,
       "activeCompanies": 837,
       "todayAdded": 423,
-      "yesterdayAdded": 118,
+      "yesterdayAdded": 423,
       "last7dAdded": 10025,
       "degradedEditions": 0
     }
