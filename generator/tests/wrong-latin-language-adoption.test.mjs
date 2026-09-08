@@ -374,6 +374,9 @@ const META_NON_IT = {
   de: ['content/blog-meta-de.ts', 'content/blog-meta-ch-de.ts'],
   fr: ['content/blog-meta-fr.ts', 'content/blog-meta-ch-fr.ts'],
 };
+// Misura corrente del parser: 3.845 campi sui file main e 2.022 sui CH per
+// ciascun locale. Il margine assorbe ritiri fisiologici senza permettere a un
+// file perso o troncato di far passare una sola superficie.
 const MIN_CAMPI_TRADOTTI_PER_FILE = {
   main: 3400,
   ch: 1800,
@@ -441,7 +444,7 @@ function seoCampo(blocco, campo) {
 }
 
 test('#1177 — la classe SEO IT resta coperta dalla scansione', (t) => {
-  if (SEO_FILES.length === 0) {
+  if (!existsSync(SEO_DIR)) {
     t.skip('directory SEO non presente in questo checkout');
     return;
   }
@@ -456,6 +459,8 @@ test('#1177 — la classe SEO IT resta coperta dalla scansione', (t) => {
     const source = readFileSync(path.join(ROOT, file), 'utf8');
     for (const entry of source.matchAll(SEO_ENTRY_RE)) {
       const blocco = entry[2];
+      // I chunk possono contenere più superfici; `/articoli-` è il contratto
+      // del canonical IT, quindi è il discriminante di lingua della scansione.
       const canonical = seoCampo(blocco, 'canonicalPath');
       if (!canonical?.startsWith('/articoli-')) continue;
       for (const campo of SEO_FIELDS) {
