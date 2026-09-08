@@ -905,8 +905,8 @@ export async function geocodeVenue(query, cache, fetchImpl = fetch) {
 // but the crawler rewrites its whole slice from scratch every run (no
 // historical merge — see crawl-tio-agenda.mjs main()), so without a disk
 // cache the SAME recurring event title would be re-translated every single
-// day forever. Cached here by event discriminator plus normalized Italian title
-// so only genuinely new event-local title entries cost a network call.
+// day forever. Cached here by field, source locale, and normalized source text
+// so identical content shares one translation regardless of event identity.
 const TRANSLATION_CACHE_PATH = path.join(REPO_ROOT, 'data', 'events-translation-cache.json');
 
 /** Load the on-disk title translation cache (`{ [eventCacheKey]: {en?,de?,fr?} }`). */
@@ -1100,19 +1100,19 @@ async function fillLocaleGaps(byLocale, cache, { fieldType, locales, delayMs, tr
   const sourceLocale = present.find((l) => !needing.includes(l)) || present[0];
   const sourceText = clean[sourceLocale];
   const normalizedSource = normalizeText(sourceText).replace(/\s+/g, ' ');
+  const cacheKey = eventTranslationCacheKey({ fieldType, sourceLocale, normalizedSource });
+  const entry = cache[cacheKey] || {};
 
   const updated = { ...clean };
   for (const target of needing) {
     if (target === sourceLocale) continue;
-    const cacheKey = eventTranslationCacheKey({ fieldType, sourceLocale, normalizedSource });
-    const entry = cache[cacheKey] || {};
     if (Object.prototype.hasOwnProperty.call(entry, target)) {
       const memo = entry[target];
       if (memo === null) continue; // stable passthrough memo, no network retry
       if (hasUsableContentText(memo)) {
-        // A positive memo is the translation of the duplicate source value
-        // that put this target in `needing`. Reuse it instead of publishing
-        // the source text again; a distinct feed value is never in `needing`.
+        // A positive memo fills a target that `localesNeedingTranslation`
+        // marked as missing or colliding with another locale. A unique feed
+        // value never enters `needing`, so it is never overwritten here.
         updated[target] = memo;
         continue;
       }
@@ -1126,7 +1126,8 @@ async function fillLocaleGaps(byLocale, cache, { fieldType, locales, delayMs, tr
       fieldType,
     });
     if (hasUsableContentText(translated)) {
-      cache[cacheKey] = { ...entry, [target]: translated };
+      entry[target] = translated;
+      cache[cacheKey] = entry;
       updated[target] = translated;
       if (translateFn === DEFAULT_TRANSLATE_FN) {
         await sleep(delayMs);
@@ -1138,7 +1139,8 @@ async function fillLocaleGaps(byLocale, cache, { fieldType, locales, delayMs, tr
     ) {
       // Keep the negative memo as null: writing sourceText into a missing target
       // locale would publish Italian under the requested locale.
-      cache[cacheKey] = { ...entry, [target]: null };
+      entry[target] = null;
+      cache[cacheKey] = entry;
     }
   }
   return updated;
