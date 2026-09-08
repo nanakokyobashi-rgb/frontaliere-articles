@@ -125,14 +125,14 @@ const sha256 = (buf) => crypto.createHash('sha256').update(buf).digest('hex');
 export function isLogicSource(bytes, sourceLogic) {
   if (!bytes || !sourceLogic) return false;
   const firstLine = Buffer.from(bytes).toString('utf8').split(/\r?\n/u, 1)[0];
-  const crawler = /^crawler-group-(\d{2})-logic\.yml$/u.exec(sourceLogic);
-  if (crawler) {
-    return firstLine === `# Crawler Group ${crawler[1]} logic — reusable workflow (on: workflow_call).`;
-  }
-  if (sourceLogic === 'translate-pending-logic.yml') {
-    return firstLine === '# Translate Pending Jobs — logic (reusable workflow, on: workflow_call).';
-  }
-  return false;
+  const label = sourceLogic
+    .replace(/-logic\.yml$/u, '')
+    .split('-')
+    .map((part) => part ? part[0].toUpperCase() + part.slice(1) : part)
+    .join(' ');
+  return firstLine.startsWith(`# ${label}`)
+    && firstLine.includes('reusable workflow')
+    && firstLine.includes('workflow_call');
 }
 
 /**
