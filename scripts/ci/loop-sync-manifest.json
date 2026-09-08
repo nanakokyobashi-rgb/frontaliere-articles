@@ -3486,6 +3486,26 @@
         "corpus": "b5024b0b4357d10f",
         "alignedAt": "2026-09-07"
       }
+    },
+    {
+      "path": "scripts/lib/published-slug-guard.mjs",
+      "mode": "corpus-only",
+      "reason": "Guardia unica del confine di pubblicazione: rifiuta i segmenti riservati `null`/`undefined` nei builder di sitemap, news-candidates, slugs API e URL canonicali. Il sito consuma queste mappe via HTTP e non ha un gemello del modulo; la validazione appartiene al publisher del corpus, quindi non e' `corpus-only-pending`.",
+      "baseline": {
+        "site": null,
+        "corpus": "3a0c8c2e14a2bfa0",
+        "alignedAt": "2026-09-08"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/free-mt-recovery.mjs",
+      "mode": "corpus-only",
+      "reason": "Contatori e cap della recovery LLM dopo un output free-MT non utilizzabile (#831 item 2). Il generatore del corpus e' l'unico produttore dopo il cutover; il sito non ha un gemello del modulo e non deve ricevere questa dipendenza.",
+      "baseline": {
+        "site": null,
+        "corpus": "17e9f097cb179683",
+        "alignedAt": "2026-09-08"
+      }
     }
   ]
 }

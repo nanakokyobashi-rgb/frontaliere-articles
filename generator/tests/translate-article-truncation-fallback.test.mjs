@@ -36,6 +36,7 @@ import { fileURLToPath } from 'node:url';
 // copia locale nel test divergerebbe in silenzio dal fix (AGENTS.md #6).
 import { translatedStringOrNull } from '../scripts/lib/article-free-mt.mjs';
 import { hasUsableContentText, hasUsableTranslatedText, metaFieldPlausibilityMiss } from '../scripts/lib/body2-payload-verdict.mjs';
+import { createFreeMtRecoveryReport, claimFreeMtLlmFallback, MAX_FREE_MT_LLM_FALLBACKS_PER_RUN } from '../scripts/lib/free-mt-recovery.mjs';
 
 // Riempitivo dei campi meta nelle fixture. NON e' un dettaglio di stile: dal
 // floor di plausibilita' (#798) il loop missing-field giudica anche `title` e
@@ -102,14 +103,16 @@ const MISSING_FIELD_LOOP_SRC = extractMissingFieldLoop();
  */
 async function runMissingFieldLoop({ data, itContent, callWithRetry, detectTruncation, warnings = [] }) {
   const capturingConsole = { error: () => {}, warn: (msg) => warnings.push(msg) };
+  const RUN_REPORT = { translation: createFreeMtRecoveryReport() };
   const fn = new Function(
     'data', 'itContent', 'callWithRetry', 'translatedStringOrNull', 'hasUsableTranslatedText', 'metaFieldPlausibilityMiss', 'detectTruncation', 'console',
+    'ARTICLE_TRANSLATE_FREE_MT', 'claimFreeMtLlmFallback', 'RUN_REPORT', 'MAX_FREE_MT_LLM_FALLBACKS_PER_RUN',
     `return (async () => { ${MISSING_FIELD_LOOP_SRC} })();`,
   );
   // `metaFieldPlausibilityMiss` e' il floor VERO (#798), non un mock: il ramo
   // floor-miss del loop tiene il valore tradotto invece di cadere sul fallback
   // IT, e un mock qui non proverebbe quel comportamento.
-  await fn(data, itContent, callWithRetry, translatedStringOrNull, hasUsableTranslatedText, metaFieldPlausibilityMiss, detectTruncation || (() => []), capturingConsole);
+  await fn(data, itContent, callWithRetry, translatedStringOrNull, hasUsableTranslatedText, metaFieldPlausibilityMiss, detectTruncation || (() => []), capturingConsole, true, claimFreeMtLlmFallback, RUN_REPORT, MAX_FREE_MT_LLM_FALLBACKS_PER_RUN);
 }
 
 /**

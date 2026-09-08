@@ -139,6 +139,13 @@ function _preferisceModelloSenzaCap(prefer) {
 // ~60% of per-article LLM calls for actual generation (the quota bottleneck).
 import { freeTranslateWithRetry, balanceMarkdownMarkers } from './lib/free-translate.mjs';
 import { translateFieldFreeMt, translatedStringOrNull, joinTranslatedChunks } from './lib/article-free-mt.mjs';
+import {
+  createFreeMtRecoveryReport,
+  recordFreeMtUnusableOutput,
+  claimFreeMtLlmFallback,
+  MAX_FREE_MT_LLM_FALLBACKS_PER_RUN,
+} from './lib/free-mt-recovery.mjs';
+import { isReservedPublishedSlug } from '../../scripts/lib/published-slug-guard.mjs';
 import { AI_SEARCH_PROMPT_BLOCK_IT } from './lib/ai-search-template.mjs';
 import { tokenizeIt, jaccardSim, containmentSim, normalizeItWord, STOP_WORDS_IT } from './lib/it-text-similarity.mjs';
 import { fixMicrocopy } from './lib/it-microcopy-guard.mjs';
@@ -1896,6 +1903,7 @@ const RUN_REPORT = {
     itFallback: 0,           // ripiego sull'italiano RIMASTO tale a fine pipeline
     itFallbackDetail: [],    // `${locale}:${causa}` per ciascuno
   },
+  translation: createFreeMtRecoveryReport(),
   selectionUsage: {
     attemptsTotal: 0,
     attemptsRecent: 0,
@@ -2182,6 +2190,16 @@ function finalizeRunReport(status, extra = {}) {
       `EVERGREEN_POOL_OUTCOME saturated=${p.saturated ? 1 : 0}`
       + ` stage=${p.stage || 'none'} pool=${p.size} checked=${p.checked}`
       + ` status=${RUN_REPORT.status} section=${RUN_REPORT.section}`,
+    );
+  }
+
+  const recovery = RUN_REPORT?.translation;
+  if (recovery) {
+    console.error(
+      `FREE_MT_RECOVERY_OUTCOME unusable=${recovery.unusableOutputs}`
+      + ` non_string=${recovery.nonStringOutputs}`
+      + ` llm_fallbacks=${recovery.llmFallbacks}`
+      + ` capped=${recovery.llmFallbackCapped ? 1 : 0}`,
     );
   }
 
@@ -9731,6 +9749,7 @@ function freeMtField(text, sourceLang, targetLang, fieldType) {
     translate: freeTranslateWithRetry,
     balanceMarkdown: balanceMarkdownMarkers,
     onWarn: (msg) => console.error(`  ⚠️  ${msg} — recupero per-campo`),
+    onUnusableOutput: (event) => recordFreeMtUnusableOutput(RUN_REPORT.translation, event),
   });
 }
 
@@ -10146,6 +10165,16 @@ ${terminologyByLang[targetLang] || ''}`;
           ? `  ⚠️  Campo ${field} nella traduzione ${locale} troppo corto per essere un ${field} (${floorMiss}) — retry traduzione mirata...`
           : `  ⚠️  Campo ${field} mancante nella traduzione ${locale} — retry traduzione mirata...`,
       );
+      if (ARTICLE_TRANSLATE_FREE_MT && !claimFreeMtLlmFallback(RUN_REPORT.translation)) {
+        console.error(
+          `  ⚠️  Recupero LLM per ${field} (${locale}) saltato: raggiunto il cap di `
+          + `${MAX_FREE_MT_LLM_FALLBACKS_PER_RUN} fallback free-MT per run — `
+          + `${ultimaRisorsa ? 'valore tradotto mantenuto' : 'fallback al valore italiano'}`,
+        );
+        if (ultimaRisorsa) continue;
+        data.content[locale][field] = itValue;
+        continue;
+      }
       try {
         // Reuse the in-scope callWithRetry (callLLM + JSON repair + truncation
         // back-off) for a focused single-field re-translation.
@@ -16238,7 +16267,7 @@ export function buildArticlePublishedUrls(data) {
   const hub = SECTION.hubSlug;
   const out = {};
   for (const locale of ['it', 'en', 'de', 'fr']) {
-    if (!data.slugs[locale]) continue;
+    if (!data.slugs[locale] || isReservedPublishedSlug(data.slugs[locale])) continue;
     const prefix = locale === 'it' ? '' : `/${locale}`;
     out[locale] = `${BASE_URL}${prefix}/${hub[locale]}/${data.slugs[locale]}/`;
   }

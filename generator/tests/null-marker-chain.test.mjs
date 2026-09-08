@@ -40,6 +40,14 @@ import {
 } from '../scripts/lib/body2-payload-verdict.mjs';
 import { translateFieldFreeMt } from '../scripts/lib/article-free-mt.mjs';
 import {
+  createFreeMtRecoveryReport,
+  recordFreeMtUnusableOutput,
+  claimFreeMtLlmFallback,
+  MAX_FREE_MT_LLM_FALLBACKS_PER_RUN,
+} from '../scripts/lib/free-mt-recovery.mjs';
+import { isReservedPublishedSlug } from '../../scripts/lib/published-slug-guard.mjs';
+import { buildSitemap } from '../../scripts/lib/build-sitemap.mjs';
+import {
   localesNeedingTranslation,
   enrichEventsWithLocaleFallbackTranslations,
   sanitizeDatasetEvents,
@@ -111,6 +119,36 @@ describe('translateFieldFreeMt — l’uscita di un motore non e’ prosa', () =
     // `Null` come PAROLA dentro una frase non e' il marker: si scarta solo il
     // valore INTERO, e questo e' cio' che tiene il filtro non distruttivo.
     assert.equal(await run('Null Grad in Airolo'), 'Null Grad in Airolo');
+  });
+
+  test('un output non-stringa emette un segnale distinto e non diventa testo', async () => {
+    const signals = [];
+    const out = await translateFieldFreeMt({
+      text: 'Un titolo italiano qualunque',
+      sourceLang: 'it',
+      targetLang: 'de',
+      fieldType: 'title',
+      translate: async () => ({ translated: 'Null' }),
+      onUnusableOutput: (event) => signals.push(event),
+    });
+    assert.equal(out, '');
+    assert.deepEqual(signals, [{ targetLang: 'de', fieldType: 'title', reason: 'non-string' }]);
+  });
+});
+
+describe('free-MT recovery — il degrado e’ misurato e limitato per run', () => {
+  test('il sesto fallback LLM viene bloccato, senza confondere l’assenza vera', () => {
+    const report = createFreeMtRecoveryReport();
+    for (let i = 0; i < MAX_FREE_MT_LLM_FALLBACKS_PER_RUN; i += 1) {
+      assert.equal(claimFreeMtLlmFallback(report), true, `fallback ${i + 1}`);
+    }
+    assert.equal(claimFreeMtLlmFallback(report), false);
+    assert.equal(report.llmFallbacks, MAX_FREE_MT_LLM_FALLBACKS_PER_RUN);
+    assert.equal(report.llmFallbackCapped, true);
+
+    recordFreeMtUnusableOutput(report, { reason: 'non-string' });
+    assert.equal(report.unusableOutputs, 1);
+    assert.equal(report.nonStringOutputs, 1);
   });
 });
 
@@ -244,6 +282,56 @@ describe('events-utils — il feed dell’organizzatore non parla tedesco', () =
 // ── #868 item 1 — lo slug: la sola parte che non si corregge dopo ──────────
 
 describe('slug: un titolo `Null` non produce /de/blog/null', () => {
+  test('la guardia di pubblicazione distingue la parola tedesca dal segmento riservato', () => {
+    assert.equal(isReservedPublishedSlug('null'), true);
+    assert.equal(isReservedPublishedSlug('Null'), true);
+    assert.equal(isReservedPublishedSlug('undefined'), true);
+    assert.equal(isReservedPublishedSlug('Null Grad in Airolo'), false);
+  });
+
+  test('la sitemap omette solo l’alternativa nulla, non l’articolo buono', () => {
+    const { xml, count } = buildSitemap(
+      [{ id: 'articolo-null-legittimo', date: '2026-09-08' }],
+      'frontaliere',
+      {
+        'articolo-null-legittimo': {
+          it: 'articolo-valido',
+          en: 'valid-article',
+          de: 'null',
+          fr: 'article-valide',
+        },
+      },
+      { 'blog.article.articolo-null-legittimo.title': 'Titolo' },
+    );
+    assert.equal(count, 1);
+    assert.match(xml, /\/articoli-frontaliere\/articolo-valido\//);
+    assert.match(xml, /hreflang="en"[^\n]+\/en\/cross-border-articles\/valid-article\//);
+    assert.doesNotMatch(xml, /\/de\/grenzgaenger-artikel\/null\//);
+  });
+
+  test('il builder dei canonical non costruisce un URL per lo slug riservato', () => {
+    const start = CREATE_ARTICLE.indexOf('export function buildArticlePublishedUrls(data) {');
+    assert.notEqual(start, -1, 'builder dei canonical non trovato');
+    const end = CREATE_ARTICLE.indexOf('\n}\n', start);
+    assert.notEqual(end, -1, 'chiusura del builder dei canonical non trovata');
+    const source = CREATE_ARTICLE.slice(start, end + 2).replace(/^export /, '');
+    const buildArticlePublishedUrls = new Function(
+      'SECTION',
+      'BASE_URL',
+      'isReservedPublishedSlug',
+      `${source}\nreturn buildArticlePublishedUrls;`,
+    )(
+      { hubSlug: { it: 'articoli-frontaliere', en: 'cross-border-articles', de: 'grenzgaenger-artikel', fr: 'articles-frontalier' } },
+      'https://frontaliereticino.ch',
+      isReservedPublishedSlug,
+    );
+    const urls = buildArticlePublishedUrls({
+      slugs: { it: 'articolo-valido', en: 'valid-article', de: 'null', fr: 'article-valide' },
+    });
+    assert.match(urls.en, /\/en\/cross-border-articles\/valid-article\/$/);
+    assert.equal(urls.de, undefined, 'un canonical /de/.../null non deve essere costruito');
+  });
+
   test('il cablaggio passa dal classificatore condiviso, non da slugifySlugPart nudo', () => {
     // Le quattro derivazioni di uno slug da un titolo LOCALIZZATO. Il test e'
     // sul testo perche' e' l'unico modo di provare che nessuna delle quattro
@@ -486,7 +574,7 @@ describe('quale predicato, dove', () => {
 
     const freeMt = leggi('article-free-mt.mjs');
     assert.ok(
-      /if \(!hasUsableContentText\(out\)\) return '';/.test(freeMt),
+      /if \(!hasUsableContentText\(out\)\) \{/.test(freeMt),
       'l’uscita del motore MT deve passare dal predicato severo',
     );
   });

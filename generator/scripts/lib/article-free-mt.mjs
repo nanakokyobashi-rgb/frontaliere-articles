@@ -145,6 +145,7 @@ export function maskNavLinks(text) {
  *        the MT call (freeTranslateWithRetry in prod, a stub in tests)
  * @param {(s: string) => string} [args.balanceMarkdown]  optional markdown repair
  * @param {(msg: string) => void} [args.onWarn]
+ * @param {(event: { targetLang: string, fieldType: string, reason: string }) => void} [args.onUnusableOutput]
  * @returns {Promise<string>}
  */
 export async function translateFieldFreeMt({
@@ -155,6 +156,7 @@ export async function translateFieldFreeMt({
   translate,
   balanceMarkdown = (s) => s,
   onWarn = () => {},
+  onUnusableOutput = () => {},
 }) {
   const src = String(text ?? '').trim();
   if (!src) return '';
@@ -176,7 +178,14 @@ export async function translateFieldFreeMt({
   // RSS `de` e come segmento di slug `/de/blog/null` (#868 item 4).
   // Scartarlo costa al piu' una recovery per-campo (retry mirato → fallback
   // IT): un retry, non una pubblicazione sbagliata.
-  if (!hasUsableContentText(out)) return '';
+  if (!hasUsableContentText(out)) {
+    onUnusableOutput({
+      targetLang,
+      fieldType,
+      reason: typeof out === 'string' ? 'unusable-text' : 'non-string',
+    });
+    return '';
+  }
   let restored = String(out);
   if (expected > 0) {
     const r = restore(restored);
