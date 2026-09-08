@@ -346,6 +346,7 @@ jobs:
             4. Il contesto per-PR del batch è già prefetchato (zero-Claude, token-lever) in `${{ runner.temp }}/followup-ctx/followup-bundle.md`: leggilo con `Read` — contiene, per ciascuna PR #N del batch, `gh pr view` (number/title/body/mergedAt/mergeCommit/url/author) + le review, e l'elenco delle PR aperte con i rispettivi file (per l'In-flight PR overlap sotto). Non ripetere queste chiamate per-PR a meno che la sezione della PR risulti vuota/incompleta nel bundle.
 
             **Per OGNI PR #N del batch (CSV sopra):**
+            - **Token derivato — prova obbligatoria:** se derivi un token per rendere azionabile un item, il token DEVE già esistere verbatim nel file citato dalla `Suggested action`; la chiusura lo verifica con `content.includes(tok)`. Non inventare un simbolo futuro: cita un token presente, così l'evidenza richiesta è eseguibile.
             - **Backfill check (SOLO se `EVENT_NAME=workflow_dispatch`):** ri-verifica che
               - `gh pr view N --json mergedAt --jq '.mergedAt'` sia non-null (PR mergiata)
               - `gh pr view N --json author --jq '.author.login'` ∈ {`nanakokyobashi-rgb`, `valerielinc-ops`, `claude[bot]`/`app/claude`, `github-actions[bot]`/`app/github-actions`} (gate same-owner / automazione interna di QUESTO repo)

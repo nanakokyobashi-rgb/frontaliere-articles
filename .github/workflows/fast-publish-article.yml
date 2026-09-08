@@ -499,6 +499,11 @@ jobs:
           echo "purging ${#urls[@]} URL(s)"
           printf '  %s\n' "${urls[@]}"
 
+          if [ "${#urls[@]}" -eq 0 ]; then
+            echo "::notice::no published URLs — skip targeted edge purge"
+            exit 0
+          fi
+
           # The SAME list is purged a second time after the verification step
           # (issue #114), so it is written down here instead of being rebuilt
           # there. A second construction is a second thing to keep in sync, and
@@ -836,6 +841,11 @@ jobs:
           mapfile -t urls < "$list"
           echo "re-purging ${#urls[@]} URL(s) after the verification"
           printf '  %s\n' "${urls[@]}"
+
+          if [ "${#urls[@]}" -eq 0 ]; then
+            echo "::notice::empty purge list — skip targeted edge re-purge"
+            exit 0
+          fi
 
           # If the list exists the first purge step ran, and that step exits 1
           # when CF_API_TOKEN is missing — so an absent token here means the env
