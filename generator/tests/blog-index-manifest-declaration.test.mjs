@@ -136,7 +136,8 @@ test('build-blog-index dichiara i suoi shard e rifiuta un set parziale', () => {
   assert.match(src, /writtenShards\[path\.relative\(API_ROOT, fullFile\)\] = byteSize\(fullText\)/);
   // Il set e' un prodotto cartesiano chiuso: una voce mancante e' un set
   // troncato, e va rifiutata prima della pubblicazione.
-  assert.match(src, /const expectedShards = new Set\(\)/);
+  assert.match(src, /const expectedShards = new Set\(\s*SECTIONS\.flatMap/);
+  assert.doesNotMatch(src, /expectedShards\.add\(/, 'il set atteso non deve essere popolato insieme alle scritture');
   assert.match(src, /expectedShards\.size/);
   assert.match(src, /refusing to publish a partial index set/);
   // Fuori da dist/api/ non c'e' un manifest da arricchire, e non se ne inventa uno.

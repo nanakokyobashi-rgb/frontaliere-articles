@@ -73,13 +73,18 @@ const PUBLISHES_TO_API = OUT === DEFAULT_OUT;
 const API_ROOT = path.dirname(OUT);
 /** `{ <path relativo a dist/api>: byte UTF-8 }`, per `manifest.files`. */
 const writtenShards = {};
-const expectedShards = new Set();
 
 const LOCALES = ['it', 'en', 'de', 'fr'];
 const SECTIONS = [
   { name: 'frontaliere', registry: 'content/blog-articles-data.ts', metaPrefix: 'blog-meta' },
   { name: 'svizzera', registry: 'content/swiss-articles-data.ts', metaPrefix: 'blog-meta-ch' },
 ];
+const expectedShards = new Set(
+  SECTIONS.flatMap((section) => LOCALES.flatMap((locale) => [
+    path.relative(API_ROOT, path.join(OUT, `blog-index-${section.name}-${locale}.json`)),
+    path.relative(API_ROOT, path.join(OUT, `blog-index-${section.name}-${locale}-full.json`)),
+  ])),
+);
 
 /**
  * Il pavimento sotto cui il parse del registro e' rotto, non vuoto.
@@ -312,7 +317,6 @@ for (const section of SECTIONS) {
     // window to fall through on the uncommon one.
     const capped = entries.slice(0, RECENT_LIMIT);
     const file = path.join(OUT, `blog-index-${section.name}-${locale}.json`);
-    expectedShards.add(path.relative(API_ROOT, file));
     const payload = {
       version: 1, section: section.name, locale,
       count: capped.length, total: entries.length, articles: capped,
@@ -330,7 +334,6 @@ for (const section of SECTIONS) {
     console.log(`[blog-index] ${path.basename(file)} — ${capped.length}/${entries.length} articles, ${kb} KB, newest ${capped[0].date}`);
 
     const fullFile = path.join(OUT, `blog-index-${section.name}-${locale}-full.json`);
-    expectedShards.add(path.relative(API_ROOT, fullFile));
     const fullPayload = {
       version: 1, section: section.name, locale,
       count: entries.length, total: entries.length, articles: entries,

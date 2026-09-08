@@ -4878,6 +4878,25 @@ function collectBodySections(content) {
   return sections;
 }
 
+/** The shared AI contract requires body1..body3; direct producers may add bodyN. */
+function bodyFieldNames(content) {
+  const discovered = content && typeof content === 'object'
+    ? Object.keys(content).filter((k) => /^body\d+$/.test(k))
+    : [];
+  return [...new Set([...BODY_ONLY_FIELDS, ...discovered])]
+    .sort((a, b) => Number(a.slice(4)) - Number(b.slice(4)));
+}
+
+/** Coerce model-shaped body values before any required-field set is derived. */
+function coerceBodyFields(content) {
+  for (const field of bodyFieldNames(content)) {
+    const value = content?.[field];
+    if (value != null && typeof value !== 'string') {
+      content[field] = typeof value === 'object' ? JSON.stringify(value) : String(value);
+    }
+  }
+}
+
 // I body deterministici dei produttori secondari hanno una forma diversa da
 // quella prodotta dall'LLM. Le euristiche di troncamento sono utili sul testo
 // LLM, ma su un bollettino strutturato (liste, tabelle, frammenti di dati)
@@ -10609,7 +10628,11 @@ function validate(data, opts = {}) {
     throw err;
   }
   const itContent = data.content.it || data.content;
-  const expectedBodyFields = Object.keys(collectBodySections(itContent));
+  // Coerce first: `collectBodySections()` intentionally ignores non-string
+  // values, but an array/object body must be repaired or rejected, never
+  // allowed to disappear from the required-field set (#980).
+  coerceBodyFields(itContent);
+  const expectedBodyFields = bodyFieldNames(itContent);
   if (!itContent || !itContent.title) {
     const err = new Error(`Campo mancante nella risposta AI: content.it.title`);
     err.qualityReject = true;
@@ -11221,7 +11244,7 @@ function validateAndEnforceCTA(data) {
 
     if (!hasCTA) {
       console.error(`  ⚠️  CTA mancante in body3 [${locale}] — aggiungo CTA (${data.category})`);
-      data.content[locale].body3 += cta[locale];
+      data.content[locale].body3 = (data.content[locale].body3 || '') + cta[locale];
     }
   }
 

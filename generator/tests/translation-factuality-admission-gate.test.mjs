@@ -82,6 +82,7 @@ const GATE_SRC = cutFunction('assertTranslationsPassFactualityGates', [
 // tre (#980): il ritaglio va quindi accompagnato dal suo helper, altrimenti
 // `new Function` istanzia un gate che non risolve `collectBodySections`.
 const SECTIONS_SRC = cutFunction('collectBodySections', ['body\\d+', 'sections']);
+const BODY_FIELDS_SRC = cutFunction('bodyFieldNames', ['body\\d+', 'BODY_ONLY_FIELDS']);
 const ADMISSION_SRC = cutFunction('runArticleFactualityGates', [
   'runFactualityGates',
   'DETERMINISTIC_BODY_HEURISTIC_CODES',
@@ -203,6 +204,23 @@ test('#7 le sezioni sono derivate dalle chiavi, non elencate', () => {
   );
   assert.deepEqual(sections(null), {});
   assert.deepEqual(sections({ body1: null, body2: 'b' }), { body2: 'b' }, 'i non-stringa non entrano');
+});
+
+test('#980 il contratto base body1..body3 resta obbligatorio anche con bodyN dinamici', () => {
+  const names = new Function('BODY_ONLY_FIELDS', `${BODY_FIELDS_SRC}\nreturn bodyFieldNames;`)(['body1', 'body2', 'body3']);
+  assert.deepEqual(names({ body1: 'a', body4: 'd' }), ['body1', 'body2', 'body3', 'body4']);
+  assert.deepEqual(names({ body1: 'a', body2: ['non', 'stringa'] }), ['body1', 'body2', 'body3']);
+});
+
+test('#980 i body non-stringa vengono coercizzati prima del set richiesto', () => {
+  const coerce = new Function(
+    'BODY_ONLY_FIELDS',
+    `${BODY_FIELDS_SRC}\n${cutFunction('coerceBodyFields', ['bodyFieldNames'])}\nreturn coerceBodyFields;`,
+  )(['body1', 'body2', 'body3']);
+  const content = { body1: 'a', body2: ['b', 'c'], body4: 42 };
+  coerce(content);
+  assert.equal(content.body2, '["b","c"]');
+  assert.equal(content.body4, '42');
 });
 
 test('#4 il gate e\' collegato a ENTRAMBI i percorsi di scrittura', () => {
