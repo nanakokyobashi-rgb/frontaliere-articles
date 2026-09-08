@@ -16,6 +16,8 @@ import { REDFLAG_IMPORTANT_RE } from './lib/constants.mjs';
 import { createGithubIssue } from '../lib/github-issue-creator.mjs';
 
 const FOLLOWUP_MARKER = 'OUT_OF_SCOPE_REVIEW_FOLLOWUP';
+// Stesso margine del writer condiviso (`MAX_BODY_LEN`): il tetto API e' 65536.
+const MAX_FOLLOWUP_BODY_LEN = 60000;
 const FILE_CITATION_RE = /(?:^|[\s([{"'`])((?:\.\.?\/)?(?:[A-Za-z0-9_.-]+\/)*[A-Za-z0-9_.-]+\.(?:cjs|css|html|js|json|md|mjs|sh|ts|tsx|txt|toml|yaml|yml|jsx))(?:[:#]L?\d+(?:[-–]\d+)?)?/giu;
 const IMPORTANT_MARKER_RE = /🔴\s*\*{0,2}\s*Important\s*\*{0,2}\s*[:—-]\s*/u;
 const ZERO_IMPORTANT_RE = /^(?:0|none|nessuno)(?:[.)\s]|$)/iu;
@@ -245,12 +247,12 @@ function suggestedAction(finding) {
   return `Applicare la correzione indicata dal reviewer in ${anchor} e verificare la riga citata.`;
 }
 
-export function followupIssueBody({ repo, pr, prUrl, findings }) {
-  const originUrl = prUrl || `https://github.com/${repo}/pull/${pr}`;
-  const items = findings.map((finding, index) => {
+/** Il testo di un item, senza l'intestazione `### N.` che lo numera. */
+function followupItemBodies(findings) {
+  return findings.map((finding) => {
     const path = finding.resolvedFiles[0];
     return [
-      `### ${index + 1}. Finding fuori dal diff: \`${path}\``,
+      `Finding fuori dal diff: \`${path}\``,
       '- Source: reviewer 🔴 Important fuori dal diff',
       '- Stato dichiarato nella PR: nessuno',
       '- Original text:',
@@ -260,7 +262,42 @@ export function followupIssueBody({ repo, pr, prUrl, findings }) {
       `- Suggested action: ${suggestedAction(finding)}`,
     ].join('\n');
   });
-  return [
+}
+
+/**
+ * Gli item gia' presenti nel corpo di una follow-up, senza la numerazione.
+ * Stessa spezzatura di `splitFollowupItems()` in followup-resolution-match.mjs:
+ * il drainer legge il CORPO, quindi il merge deve partire da cio' che il
+ * drainer vede, non da cio' che i commenti raccontano.
+ */
+export function followupItemsFromBody(body) {
+  return String(body || '')
+    .split(/^### \d+\.\s*/mu)
+    .slice(1)
+    .map((chunk) => chunk.trim())
+    .filter(Boolean);
+}
+
+function itemKey(item) {
+  return String(item).replace(/\s+/gu, ' ').trim().toLowerCase();
+}
+
+/** Unisce gli item vecchi e nuovi in ordine, senza duplicarli. */
+export function mergeFollowupItems(existingBody, freshItems) {
+  const merged = [];
+  const seen = new Set();
+  for (const item of [...followupItemsFromBody(existingBody), ...freshItems]) {
+    const key = itemKey(item);
+    if (!key || seen.has(key)) continue;
+    seen.add(key);
+    merged.push(item);
+  }
+  return merged;
+}
+
+function renderFollowupBody({ repo, pr, prUrl, items }) {
+  const originUrl = prUrl || `https://github.com/${repo}/pull/${pr}`;
+  const header = [
     `<!-- ${FOLLOWUP_MARKER}: ${repo}#${pr} -->`,
     '## Origine',
     '',
@@ -269,12 +306,63 @@ export function followupIssueBody({ repo, pr, prUrl, findings }) {
     '',
     '## Item',
     '',
-    items.join('\n\n'),
-    '',
   ].join('\n');
+  // Il corpo ha un tetto duro lato API: se l'aggregato lo supera si tengono gli
+  // item piu' RECENTI (in coda) e si dichiara quanti sono stati omessi, invece
+  // di far fallire l'edit e lasciare il corpo fermo al giro precedente.
+  const kept = [...items];
+  let omitted = 0;
+  let body = '';
+  for (;;) {
+    const numbered = kept.map((item, index) => `### ${index + 1}. ${item}`).join('\n\n');
+    const note = omitted
+      ? `\n\n_${omitted} item più vecchi omessi per il limite di lunghezza del corpo; restano nella cronologia dei commenti._`
+      : '';
+    body = `${header}${numbered}${note}\n`;
+    if (body.length <= MAX_FOLLOWUP_BODY_LEN || kept.length <= 1) break;
+    kept.shift();
+    omitted += 1;
+  }
+  return body;
 }
 
-async function mintFollowup({ repo, pr, body, findings }) {
+export function followupIssueBody({ repo, pr, prUrl, findings, existingBody = '' }) {
+  return renderFollowupBody({
+    repo,
+    pr,
+    prUrl,
+    items: mergeFollowupItems(existingBody, followupItemBodies(findings)),
+  });
+}
+
+/** Stessa risoluzione del target del writer condiviso: `GH_REPO` o la cwd. */
+function repoFlag() {
+  return process.env.GH_REPO ? ['--repo', process.env.GH_REPO] : [];
+}
+
+function readIssueBody(number) {
+  return gh(['issue', 'view', String(number), '--json', 'body', '--jq', '.body', ...repoFlag()], { json: false });
+}
+
+/**
+ * Riscrive il CORPO della follow-up con l'aggregato.
+ *
+ * Il writer condiviso, quando la issue e' gia' aperta, si limita a COMMENTARE
+ * (`github-issue-creator.mjs`): il corpo resterebbe quello del primo giro. Ma i
+ * consumer della follow-up leggono il corpo — `followup-has-candidates.mjs` e
+ * `splitFollowupItems()` in `followup-resolution-match.mjs` — e non i commenti,
+ * quindi dal secondo giro i finding declassati non atterrerebbero in nessuna
+ * superficie drenabile: il gate diventa verde e l'item sparisce senza errore.
+ */
+function syncFollowupBody({ repo, pr, prUrl, findings, number }) {
+  const current = readIssueBody(number);
+  const merged = followupIssueBody({ repo, pr, prUrl, findings, existingBody: current });
+  if (merged.trim() === String(current || '').trim()) return { bodySynced: true, bodyChanged: false };
+  gh(['issue', 'edit', String(number), '--body', merged, ...repoFlag()], { json: false });
+  return { bodySynced: true, bodyChanged: true };
+}
+
+async function mintFollowup({ repo, pr, prUrl, body, findings }) {
   // Usa il writer condiviso: cerca prima gli aperti, riapre una gemella chiusa
   // nella finestra prevista e aggiunge il nuovo item come commento invece di
   // sovrascrivere il corpo. Il titolo e' stabile per PR, non per il primo file,
@@ -291,11 +379,18 @@ async function mintFollowup({ repo, pr, body, findings }) {
   if (!result || result.persisted !== true) {
     throw new Error(`writer follow-up non ha confermato la persistenza per PR #${pr}`);
   }
+  if (result.number == null) {
+    throw new Error(`writer follow-up non ha restituito il numero della issue per PR #${pr}`);
+  }
+  // Il corpo e' l'unica superficie che il drainer legge: se non riusciamo a
+  // riscriverlo, il finding non e' tracciato e l'errore deve restare bloccante.
+  const synced = syncFollowupBody({ repo, pr, prUrl, findings, number: result.number });
   return {
     number: result.number,
     url: result.url,
     reopened: result.reopened === true,
     updated: result.reopened !== true && result.number != null,
+    ...synced,
   };
 }
 
@@ -312,7 +407,7 @@ export async function classifyAndMintReview(body, { repo, pr, prUrl, mutate = tr
     return { ...result, minted: false, changedFiles };
   }
   const issueBody = followupIssueBody({ repo, pr, prUrl, findings: result.outside });
-  const followup = await mintFollowup({ repo, pr, body: issueBody, findings: result.outside });
+  const followup = await mintFollowup({ repo, pr, prUrl, body: issueBody, findings: result.outside });
   return { ...result, minted: true, followup, changedFiles };
 }
 
