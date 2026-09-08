@@ -17,7 +17,9 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..')
 const src = fs.readFileSync(path.join(ROOT, '.github/workflows/pr-redflag-fixer.yml'), 'utf8');
 
 test('a frontaliere-automation[bot] review with 🔴 would pass the job-level trigger', () => {
-  assert.match(src, /github\.event\.review\.user\.type == 'Bot'/);
+  assert.match(src, /github\.event\.pull_request\.user\.type == 'Bot'/);
+  assert.doesNotMatch(src, /github\.event\.review\.user\.type == 'Bot'/,
+    'il job deve filtrare sull autore della PR, non sul reviewer');
   assert.match(src, /contains\(github\.event\.review\.body, '🔴'\)/);
   assert.match(src, /startsWith\(github\.event\.review\.user\.login, 'frontaliere-automation'\)/);
   assert.match(src, /startsWith\(github\.event\.review\.user\.login, 'claude'\) \|\|/);
