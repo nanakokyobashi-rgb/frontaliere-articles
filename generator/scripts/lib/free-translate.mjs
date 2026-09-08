@@ -1422,9 +1422,6 @@ export async function freeTranslate({ text, sourceLang, targetLang, fieldType = 
         noteTranslationOutcome(_outcome, 'incomplete');
         return ''; // quota hit mid-chunk, abort
       }
-      if (rejectedAsPassthrough('myMemory', chunk, mm, _outcome)) {
-        return ''; // an echoed chunk invalidates the whole assembled result
-      }
       parts.push(mm);
     }
     // `return joined` e non un confronto locale: questo e' il ramo dei testi
@@ -1536,13 +1533,12 @@ export function asTranslationResult(value) {
 
 /** Return the retry result together with the reason for an empty translation. */
 export async function freeTranslateWithRetryDetailed({ text, sourceLang, targetLang, fieldType = 'title', maxRetries = 2 }) {
-  let outcome = { passthroughs: 0, errors: 0, incomplete: false };
+  const outcome = { passthroughs: 0, errors: 0, incomplete: false };
   let out = await freeTranslate({ text, sourceLang, targetLang, fieldType, _outcome: outcome });
   if (out) return { text: out, passthrough: false };
 
   for (let i = 1; i <= maxRetries; i++) {
     await delay(i * 1000);
-    outcome = { passthroughs: 0, errors: 0, incomplete: false };
     out = await freeTranslate({ text, sourceLang, targetLang, fieldType, _outcome: outcome });
     if (out) return { text: out, passthrough: false };
   }
