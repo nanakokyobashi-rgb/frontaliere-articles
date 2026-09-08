@@ -1,5 +1,4 @@
 {
-  "https://www.admin.ch/it/newnsb/xqstovongrnmqrcgilbd1": "prezzi-produzione-importazione-luglio-2026",
   "https://www.tio.ch/svizzera/economia/1943668/reno-centesimi-svizzera-costi-basilea": "reno-ai-minimi-prezzi-svizzera",
   "https://www.tio.ch/dal-mondo/economia/1943678/carbone-produzione-lignite-elettricita-totale": "carbone-minimi-storici-elettricita",
   "https://apps.apple.com/ch/app/cdt-digital/id391355824": "cdt-epaper-ios-revista",
@@ -2069,6 +2068,11 @@
   "https://www.tio.ch/svizzera/attualita/1948606/deposito-scorie-rosti-compensazioni-sito": {
     "articleId": "rosti-deposito-scorie-compensazioni",
     "ts": "2026-09-08T05:29:01.240Z",
+    "keyForm": 2
+  },
+  "https://www.admin.ch/it/newnsb/vaihkpwvhud1": {
+    "articleId": "sanzioni-onu-sesam-aggiornamento",
+    "ts": "2026-09-08T05:41:38.148Z",
     "keyForm": 2
   }
 }
