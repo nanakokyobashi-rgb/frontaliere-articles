@@ -1,5 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/attualita/1943523/federale-consiglio-situazione-rosti-caldo-misure-essere-siccita": "caldo-e-siccita-senza-modalita-di-crisi",
   "https://www.tio.ch/svizzera/attualita/1943694/svizzera-caldo-scuola-rientro-qualita": "rientro-scuola-calor",
   "https://www.tio.ch/dal-mondo/economia/1943793/porsche-taycan-produzione-modello-punta": "porsche-arretra-elettrico-taycan",
   "https://www.swissinfo.ch/ita/vs%3a-mezzo-agricolo-esce-di-strada%2c-muore-bambino-di-nove-anni/91892452": "mezzo-agricolo-esce-di-strada-muore-bambino-di-nove-anni",
@@ -2169,6 +2168,11 @@
   "https://www.tio.ch/svizzera/attualita/1948824/svizzera-esercito-capo-obiettivo-mosca": {
     "articleId": "svizzera-obiettivo-mosca-esercito",
     "ts": "2026-09-08T21:40:21.849Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/abb-e-rolls-royce-smr-uniscono-forze-per-reattori-modulari-nucleari/92024969": {
+    "articleId": "abb-rolls-royce-smr-reattori",
+    "ts": "2026-09-08T21:57:31.783Z",
     "keyForm": 2
   }
 }
