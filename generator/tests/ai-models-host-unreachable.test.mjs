@@ -43,6 +43,7 @@ import {
   classifyHostUnreachable,
   classifyResolverResetEvidence,
   classifyTransientResolver,
+  classifyExhaustionCause,
   callLLM,
   isQuotaExhaustedError,
   getStats,
@@ -1355,6 +1356,36 @@ describe('callLLM — il contatore dei flap del resolver (#818)', () => {
     assert.equal(err.exhaustionBreakdown.transient, 0);
     assert.equal(err.exhaustionBreakdown.persistent, 1,
       `la causa oltre i 200 caratteri deve entrare nel voto: ${JSON.stringify(err.exhaustionBreakdown)}`);
+  });
+
+  it('non lascia votare il vocabolario transitorio sulla coda oltre la riga mostrata', () => {
+    // La finestra piena serve alla causa PERSISTENTE (test sopra). Se la
+    // togliesse anche a `transientRe`, il corpo di un errore di provider —
+    // `x-request-id: 503abc`, `aborted`, `temporarily` centinaia di caratteri
+    // dopo la causa vera — voterebbe transitorio da solo, spostando la
+    // maggioranza verso il differimento verde senza articolo.
+    const coda = `${'x'.repeat(400)} the request was aborted, retry later (HTTP 503)`;
+    const b = classifyExhaustionCause([
+      { reason: `gh/m1: ${coda}`, authoritative: null, transientWindow: 200 },
+    ]);
+    assert.equal(b.transient, 0, `la coda non deve votare: ${JSON.stringify(b)}`);
+    assert.equal(b.persistent, 0, `la coda non deve votare: ${JSON.stringify(b)}`);
+    assert.equal(b.total, 1);
+  });
+
+  it('non conta come eco di cooldown una frase che compare solo nella coda', () => {
+    // `PROVIDER_COOLDOWN_SKIP_RE` toglie le righe dal denominatore di
+    // `isLegitimateQuotaDeferral`: un messaggio di provider che cita la frase
+    // nel proprio corpo non e' un'eco e non va sottratto.
+    const b = classifyExhaustionCause([
+      {
+        reason: `gh/m1: 401 Unauthorized ${'x'.repeat(400)} : skipped \u2014 provider github cooling down `,
+        authoritative: null,
+        transientWindow: 200,
+      },
+    ]);
+    assert.equal(b.persistent, 1, `il 401 deve restare persistente: ${JSON.stringify(b)}`);
+    assert.deepEqual(b.providerCooldownSkips, { total: 0, transient: 0, persistent: 0 });
   });
 });
 

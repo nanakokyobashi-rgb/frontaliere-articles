@@ -7658,10 +7658,16 @@ export async function callLLM(messages, opts = {}) {
   const classificationErrors = [];
   const pushError = (display, classification = display) => {
     const errorRow = errors.push(display) - 1;
+    // `transientWindow` = quanto della ragione PIENA e' anche la riga mostrata.
+    // La ragione piena serve alla causa persistente (un 401 oltre il taglio
+    // deve votare lo stesso), ma il vocabolario transitorio non puo' votare
+    // sulla coda: vedi il blocco «LA CODA NON VOTA TRANSITORIO» in
+    // classifyExhaustionCause. Per le voci sintetiche (display === reason) la
+    // finestra e' l'intera stringa, quindi il comportamento non cambia.
     classificationErrors.push(
       classification && typeof classification === 'object'
-        ? classification
-        : { reason: classification, authoritative: null },
+        ? { transientWindow: display.length, ...classification }
+        : { reason: classification, authoritative: null, transientWindow: display.length },
     );
     return errorRow;
   };
@@ -8379,8 +8385,10 @@ import { isTransientMajority } from './exhaustion-disposition.mjs';
  * persistent buckets. Transient = quota/rate/cooldown/timeout/5xx/overloaded
  * (recovers on its own). Persistent = auth/credit/removed-model/payload/no-key
  * (needs intervention). Reasons matching neither are ignored in the tally.
- * Entries may be strings or `{ reason, authoritative }`; the latter lets a
- * resolver verdict override wording that appears earlier in the raw message.
+ * Entries may be strings or `{ reason, authoritative, transientWindow }`: the
+ * verdict lets a resolver override wording that appears earlier in the raw
+ * message, and the window caps how far into `reason` an UNCORROBORATED
+ * transient match may still vote (default: the whole string).
  */
 export function causeIndex(re, reason) {
   return String(reason == null ? '' : reason).search(re);
@@ -8455,8 +8463,31 @@ export function classifyExhaustionCause(errors, { authoritative } = {}) {
       ? entry.authoritative ?? authoritative
       : authoritative;
     const text = String(reason == null ? '' : reason);
+    // ── LA CODA NON VOTA TRANSITORIO (#1121 follow-up) ──────────────────────
+    //
+    // Il primo-indice-vince di #976 presuppone che il testo classificato sia
+    // «la causa primaria + la sua coda», e a rendere vera quella premessa era
+    // il taglio a 200 caratteri della riga mostrata. Passare la ragione PIENA
+    // al tally serve alla causa persistente (un 401 oltre il taglio deve
+    // votare), ma toglie la finestra anche a `transientRe`, che matcha
+    // `aborted`, `timeout`, `temporarily` e `\b5\d\d\b` — token che il corpo
+    // di un errore di provider porta di routine centinaia di caratteri dopo la
+    // causa vera (pagina HTML d'errore, stack trace, `x-request-id: 503abc`).
+    // Una voce che prima restava AMBIGUA voterebbe transitoria sulla coda, e
+    // il tally scivolerebbe verso `isTransientMajority` → differimento verde,
+    // zero articoli, nessun Bug aperto: proprio l'esito «verde-senza-articolo»
+    // che questo tally esiste per impedire.
+    //
+    // Quindi le due finestre sono asimmetriche di proposito: la persistente e'
+    // il testo intero, la transitoria resta quella mostrata. Un verdetto
+    // AUTOREVOLE (resolver flap / unreachable) non passa di qui: e' corroborato
+    // da `e.code`, non dal vocabolario.
+    const transientWindow = entry && typeof entry === 'object' && Number.isFinite(entry.transientWindow)
+      ? entry.transientWindow
+      : text.length;
+    const transientText = text.slice(0, transientWindow);
     const authoritativeBucket = authoritativeCauseBucket(entryAuthoritative);
-    const transientAt = causeIndex(transientRe, text);
+    const transientAt = causeIndex(transientRe, transientText);
     const persistentAt = causeIndex(persistentRe, text);
     const isTransient = authoritativeBucket === 'transient'
       || (authoritativeBucket === null && transientAt >= 0 && (persistentAt < 0 || transientAt <= persistentAt));
@@ -8465,7 +8496,12 @@ export function classifyExhaustionCause(errors, { authoritative } = {}) {
     if (isTransient) transient += 1;
     else if (isPersistent) persistent += 1;
     // neither → ambiguous, left out of the tally
-    if (PROVIDER_COOLDOWN_SKIP_RE.test(text)) {
+    // Stessa finestra, stessa ragione: l'eco di cooldown e' una riga che QUESTO
+    // modulo scrive (`providerCooldownSkipLine`), sempre dentro la parte
+    // mostrata. Cercarlo sul testo pieno farebbe passare per eco un messaggio
+    // di provider che contiene `: skipped \u2014 provider <x> ` nel proprio
+    // corpo, sottraendolo dal denominatore di `isLegitimateQuotaDeferral`.
+    if (PROVIDER_COOLDOWN_SKIP_RE.test(transientText)) {
       // Ripartito per secchio e non solo in totale: chi sottrae deve togliere
       // l'eco dal NUMERATORE quando l'eco votava transitorio (una notte di
       // quota vera: ogni provider 429, ogni fratello saltato) e solo dal
