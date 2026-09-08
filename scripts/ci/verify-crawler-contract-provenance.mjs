@@ -118,21 +118,16 @@ const sha256 = (buf) => crypto.createHash('sha256').update(buf).digest('hex');
 
 /**
  * True when bytes are a generated logic source, rather than an artifact or a
- * same-named residual file. The first line identifies the generated file and
- * the YAML shape proves it is a reusable workflow; the basename check prevents
- * one group's source from satisfying another group's coordinate.
+ * same-named residual file. The YAML shape is load-bearing: `on:
+ * workflow_call:` plus `jobs:` proves a reusable workflow, while the basename
+ * guard prevents a non-logic candidate from being treated as a source. A
+ * cosmetic comment change on the site cannot invalidate the observation.
  */
 export function isLogicSource(bytes, sourceLogic) {
-  if (!bytes || !sourceLogic) return false;
-  const firstLine = Buffer.from(bytes).toString('utf8').split(/\r?\n/u, 1)[0];
-  const label = sourceLogic
-    .replace(/-logic\.yml$/u, '')
-    .split('-')
-    .map((part) => part ? part[0].toUpperCase() + part.slice(1) : part)
-    .join(' ');
-  return firstLine.startsWith(`# ${label}`)
-    && firstLine.includes('reusable workflow')
-    && /^on:[ \t]*\r?\n[ \t]+workflow_call:[ \t]*$/mu.test(Buffer.from(bytes).toString('utf8'));
+  if (!bytes || !/^[a-z0-9][a-z0-9-]*-logic\.yml$/u.test(String(sourceLogic))) return false;
+  const text = Buffer.from(bytes).toString('utf8');
+  return /^on:[ \t]*\r?\n[ \t]+workflow_call:[ \t]*$/mu.test(text)
+    && /^jobs:[ \t]*$/mu.test(text);
 }
 
 /**

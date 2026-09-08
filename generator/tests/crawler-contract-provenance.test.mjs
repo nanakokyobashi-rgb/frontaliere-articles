@@ -240,15 +240,16 @@ test('il `sourceSha256` usa solo la directory osservata', () => {
   }
 });
 
-test('un source logic richiede il marker generato del proprio file', () => {
+test('un source logic richiede la firma strutturale di un reusable workflow', () => {
   const valid = Buffer.from(
-    '# Crawler Group 01 logic — reusable workflow (on: workflow_call).\n' +
-    'on:\n  workflow_call:\n',
+    '# Header cosmetico riscritto.\n' +
+    'on:\n  workflow_call:\n' +
+    'jobs:\n',
   );
   const residual = Buffer.from('# Crawler Group 01 logic — artifact residuale.\n');
   assert.equal(isLogicSource(valid, 'crawler-group-01-logic.yml'), true);
   assert.equal(isLogicSource(residual, 'crawler-group-01-logic.yml'), false);
-  assert.equal(isLogicSource(valid, 'crawler-group-02-logic.yml'), false);
+  assert.equal(isLogicSource(valid, 'crawler-group-02-logic.yml'), true);
   assert.equal(isLogicSource(valid, 'crawler-group-01.yml'), false);
 });
 
@@ -264,8 +265,9 @@ test('un residuo omonimo non diventa `drifted`', async () => {
   assert.deepEqual(resolved.triedPaths, ['.github/corpus-workflows/crawler-group-01-logic.yml']);
 
   const valid = Buffer.from(
-    '# Crawler Group 01 logic — reusable workflow (on: workflow_call).\n' +
-    'on:\n  workflow_call:\n',
+    '# Header cosmetico riscritto.\n' +
+    'on:\n  workflow_call:\n' +
+    'jobs:\n',
   );
   const alternateHit = await resolveSiteCandidate(
     ['.github/workflows/crawler-group-01-logic.yml', '.github/corpus-workflows/crawler-group-01-logic.yml'],
