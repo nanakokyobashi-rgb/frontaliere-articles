@@ -95,7 +95,8 @@ jobs:
           # e' qualificato, quindi chiunque puo' aprire un branch chiamato come
           # il nostro e far contare 1 a questo guard — che poi si spegnerebbe
           # da solo per sempre. Il prefisso e' un nome, non un permesso.
-          gh api --paginate "repos/$REPO/pulls?state=open&per_page=100" --jq '.[] | select(.head.repo.full_name == env.REPO) | .head.ref' > /tmp/open-prs.txt
+          gh api --paginate "repos/$REPO/pulls?state=open&per_page=100" --jq '.[] | [.head.repo.full_name, .head.ref] | @tsv' |
+            awk -F '\t' -v repo="$REPO" '$1 == repo { print $2 }' > /tmp/open-prs.txt
           OPEN=$(grep -c '^transport/identical-twins' /tmp/open-prs.txt || true)
           echo "open_transports=$OPEN" >> "$GITHUB_OUTPUT"
           if [ "$OPEN" != "0" ]; then
@@ -172,8 +173,17 @@ jobs:
           # e' stata aperta lo stesso. Ogni altro codice resta bloccante.
           rc=0
           node scripts/ci/transport-identical-twins.mjs --apply --json > /tmp/transport.json || rc=$?
+          previous_rc="$(cat "$RUNNER_TEMP/transport-rc" 2>/dev/null || echo 0)"
+          if [ "$rc" != "0" ] && [ "$rc" != "2" ]; then
+            if [ "$previous_rc" -gt "$rc" ]; then
+              echo "$previous_rc" > "$RUNNER_TEMP/transport-rc"
+            else
+              echo "$rc" > "$RUNNER_TEMP/transport-rc"
+            fi
+            exit "$rc"
+          fi
+          [ "$previous_rc" -gt "$rc" ] && rc="$previous_rc"
           echo "$rc" > "$RUNNER_TEMP/transport-rc"
-          if [ "$rc" != "0" ] && [ "$rc" != "2" ]; then exit "$rc"; fi
           PORTED=$(node -e 'console.log(require("/tmp/transport.json").transported.length)')
           if [ "$PORTED" = "0" ]; then
             echo "Nessun gemello da portare: niente PR."

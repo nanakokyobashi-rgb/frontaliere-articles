@@ -45,6 +45,7 @@ import {
   fetchFailureVerdict,
   isFixture,
   localCouplings,
+  manualTransportReason,
   namedIsCoupling,
   readsContentOf,
   parseRatio,
@@ -282,6 +283,27 @@ test("lo specificatore NodeNext con l\u2019estensione compilata resta visibile (
   assert.ok(!re.test("from './shared/safeTruncate.json'"), 'un\u2019estensione non compilata non e\u2019 questo file');
   assert.ok(!re.test("from './shared/safeTruncateOther.js'"), 'lo stem deve finire dove finisce lo specificatore');
   assert.ok(!re.test("from 'safeTruncate.js'"), 'senza separatore e\u2019 un pacchetto');
+});
+
+test('importSpecifierRe non accoppia un import senza estensione ai gemelli omonimi', () => {
+  const ts = importSpecifierRe('viteAssetHashRx.ts');
+  const mjs = importSpecifierRe('viteAssetHashRx.mjs');
+  assert.ok(ts.test("from './shared/viteAssetHashRx'"), 'la forma TypeScript senza estensione resta ammessa');
+  assert.ok(!mjs.test("from './shared/viteAssetHashRx'"), 'la forma senza estensione non può scegliere il gemello .mjs');
+  assert.ok(mjs.test("from './shared/viteAssetHashRx.mjs'"));
+
+  const manifest = JSON.parse(fs.readFileSync(path.join(ROOT, 'scripts/ci/loop-sync-manifest.json'), 'utf8'));
+  const modeOf = new Map(manifest.files.map((e) => [e.path, e.mode]));
+  const tsCouplings = localCouplings('host/shared/viteAssetHashRx.ts', modeOf);
+  const mjsCouplings = localCouplings('host/shared/viteAssetHashRx.mjs', modeOf);
+  assert.ok(
+    tsCouplings.some((c) => c.path === 'host/shared/chunkFiles.ts'),
+    'chunkFiles.ts importa il gemello TypeScript senza estensione',
+  );
+  assert.ok(
+    !mjsCouplings.some((c) => c.path === 'host/shared/chunkFiles.ts'),
+    'lo stesso import senza estensione non deve accoppiare anche il gemello .mjs',
+  );
 });
 
 test("l\u2019apostrofo italiano non apre piu\u2019 la classe di virgolette (#934 item 2)", () => {

@@ -112,6 +112,29 @@ test('il prompt di post-merge-followup.yml rimanda al formato invece di inventar
   );
 });
 
+test('il prompt rende verificabile il token derivato nel file citato', () => {
+  assert.match(
+    WORKFLOW,
+    /token derivato[\s\S]{0,180}verbatim[\s\S]{0,220}content\.includes\(tok\)/i,
+    'il prompt deve richiedere un token derivato già presente verbatim nel file citato, ' +
+      'così la chiusura ha una prova eseguibile',
+  );
+});
+
+test('il parser dei controesempi tollera una lista markdown su righe separate', () => {
+  assert.deepEqual(
+    declaredTokenCounterExamples([
+      'token-controesempio:',
+      '- `x`',
+      '- `nomeCampo`',
+      '- `run()`',
+      '',
+      'testo successivo',
+    ].join('\n')),
+    ['x', 'nomeCampo', 'run()'],
+  );
+});
+
 test('il prompt non ammette item sotto una barra piu\' bassa di quella che li chiude', () => {
   // Passo 2 di #953. Il conio e la chiusura devono misurare la stessa cosa:
   // ammettere un item che nessun check potra' mai dichiarare fatto lo mette in
@@ -209,8 +232,24 @@ const TOKEN_EXAMPLE_SOURCES = [
  */
 function declaredTokenCounterExamples(text) {
   const out = [];
-  for (const m of text.matchAll(/token-controesempio:((?:\s*`[^`]+`\s*,?)+)/g)) {
-    for (const t of m[1].matchAll(/`([^`]+)`/g)) out.push(t[1]);
+  const lines = text.split('\n');
+  for (let i = 0; i < lines.length; i++) {
+    const marker = lines[i].indexOf('token-controesempio:');
+    if (marker < 0) continue;
+    const inlineList = lines[i].slice(marker + 'token-controesempio:'.length).match(/^(?:\s*`[^`]+`\s*,?)+/);
+    for (const t of (inlineList?.[0] || '').matchAll(/`([^`]+)`/g)) out.push(t[1]);
+    for (let j = i + 1; j < lines.length; j++) {
+      const line = lines[j];
+      if (!line.trim()) break;
+      const inlineContinuation = line.match(/^\s*`([^`]+)`/);
+      if (inlineContinuation) {
+        out.push(inlineContinuation[1]);
+        continue;
+      }
+      if (!/^\s*(?:[-*]\s+)?`[^`]+`\s*,?\s*$/.test(line)) break;
+      const t = line.match(/`([^`]+)`/);
+      if (t) out.push(t[1]);
+    }
   }
   return out;
 }
@@ -274,6 +313,10 @@ test('ogni token-controesempio dichiarato viene davvero RIFIUTATO dall\'oracolo'
   let total = 0;
   for (const [label, text] of TOKEN_EXAMPLE_SOURCES) {
     const counter = declaredTokenCounterExamples(text);
+    assert.ok(
+      counter.some((ex) => ex.length < 6),
+      label + ': manca un controesempio corto, necessario per rendere verificabile la soglia s.length < 6',
+    );
     assert.ok(
       counter.length >= 3,
       `${label}: attesi almeno 3 \`token-controesempio:\` (bare path, bare identifier, ` +

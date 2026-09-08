@@ -33,7 +33,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { EXIT_MANUAL_NEEDED } from '../../scripts/ci/transport-identical-twins.mjs';
+import { EXIT_MANUAL_NEEDED, manualTransportReason } from '../../scripts/ci/transport-identical-twins.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const read = (rel) => fs.readFileSync(path.join(ROOT, rel), 'utf8');
@@ -41,10 +41,32 @@ const read = (rel) => fs.readFileSync(path.join(ROOT, rel), 'utf8');
 const SCRIPT = 'scripts/ci/transport-identical-twins.mjs';
 const WORKFLOW = '.github/workflows/transport-identical-twins.yml';
 
+test('--files= vuoto è un errore prima del no-op e non produce un falso successo', () => {
+  const src = read('scripts/cf-purge-cache.mjs');
+  const emptyGuard = src.indexOf('if (targetFiles && !targetFiles.length)');
+  const tokenGuard = src.indexOf('if (!token)');
+  assert.ok(emptyGuard >= 0, 'manca il rifiuto esplicito di --files= vuoto');
+  assert.ok(emptyGuard < tokenGuard, 'la validazione deve precedere il no-op del token assente');
+  assert.match(src.slice(emptyGuard, emptyGuard + 260), /process\.exit\(1\)/);
+});
+
+test('il codice di ritorno del trasporto non può diminuire fra dry-run e apply', () => {
+  const yml = read(WORKFLOW);
+  assert.match(yml, /previous_rc=.*transport-rc/);
+  assert.match(yml, /\[ "\$previous_rc" -gt "\$rc" \] && rc="\$previous_rc"/);
+});
+
 test('il no permanente ha un codice suo, diverso da «non copiare»', () => {
   assert.equal(EXIT_MANUAL_NEEDED, 2);
   assert.notEqual(EXIT_MANUAL_NEEDED, 1, '1 e` gia` il buio delle fetch: riusarlo confonde due decisioni opposte');
   assert.notEqual(EXIT_MANUAL_NEEDED, 0, 'verde ma bloccato non e` uno stato accettabile');
+});
+
+test('un buio di rete non cancella dal report il blocco manuale', () => {
+  const reason = manualTransportReason([{ path: 'host/shared/x.ts' }]);
+  assert.match(reason, /host\/shared\/x\.ts/);
+  assert.match(reason, /copia a mano/);
+  assert.equal(manualTransportReason([]), '');
 });
 
 test('`main()` lo restituisce sui blocchi permanenti, non un 0', () => {
@@ -91,7 +113,7 @@ test('il workflow non lascia che il no permanente fermi la copia', () => {
   // Meta` 2 — l'apply prosegue sul 2 e si ferma su ogni altro codice.
   assert.match(
     yml,
-    /if \[ "\$rc" != "0" \] && \[ "\$rc" != "2" \]; then exit "\$rc"; fi/,
+    /if \[ "\$rc" != "0" \] && \[ "\$rc" != "2" \]; then[\s\S]{0,300}?exit "\$rc"/,
     'ogni codice diverso da 0 e 2 deve restare bloccante: il buio delle fetch non deve aprire una PR',
   );
 
@@ -151,7 +173,7 @@ test('i guard contano solo le PR di QUESTO repo, non quelle da un fork', () => {
   for (const wf of [WORKFLOW, '.github/workflows/lessons-harvester.yml']) {
     assert.match(
       read(wf),
-      /select\(\.head\.repo\.full_name == env\.REPO\)/,
+      /--jq '\.\[\] \| \[\.head\.repo\.full_name, \.head\.ref\] \| @tsv'[\s\S]*awk -F '\\t' -v repo="\$REPO"/,
       `${wf}: il guard deve qualificare il branch col repo, non fidarsi del solo nome`,
     );
   }
