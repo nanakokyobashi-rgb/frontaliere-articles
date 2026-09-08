@@ -41,10 +41,11 @@ import {
   wrongLanguageAdoptions,
   resolveContentFieldSources,
   META_ONLY_FIELDS,
-  isCompactItalianRateTable,
 } from '../scripts/lib/body2-payload-verdict.mjs';
 import {
   detectWrongLatinLanguage,
+  detectWrongLatinLanguageInField,
+  isCompactItalianRateTable,
   latinLanguageMarkerHits,
   vowelFinalWordRatio,
 } from '../scripts/lib/itLanguageCheck.mjs';
@@ -179,6 +180,50 @@ test('#1177 — la deroga alle sigle non rende permissivo un excerpt generico', 
   assert.ok(verdetto.missing.some((m) => m.startsWith('excerpt lingua ')));
 });
 
+test('#1220 — la deroga vale sulle stesse stringhe anche per il corpus pubblicato', () => {
+  // Il gate di generazione e gli scan del corpus DEVONO dare lo stesso verdetto
+  // sullo stesso testo: se l'excerpt-tabella passa in generazione ma lo scan lo
+  // legge grezzo, il primo articolo accettato rende rosso il gate su OGNI PR
+  // successiva, per contenuto che il gate ha gia' dichiarato valido.
+  const tabella = 'Aliquote: AVS/AI/IPG 5,3%, AD/AC 1,1%, LAINF 0,7-1,5%';
+
+  assert.notEqual(detectWrongLatinLanguage(tabella, 'it'), null, 'il caso non e\' piu\' quello misurato');
+  assert.deepEqual(
+    wrongLanguageAdoptions(
+      { content: { it: { title: 'Titolo italiano abbastanza descrittivo', excerpt: '' }, excerpt: tabella } },
+      'it',
+      META_ONLY_FIELDS,
+    ),
+    [],
+  );
+  // I campi che gli scan del corpus misurano: l'excerpt e le sue due copie SEO,
+  // che `create-article.mjs` deriva da `it.excerpt`.
+  for (const campo of ['excerpt', 'description', 'ogDescription']) {
+    assert.equal(detectWrongLatinLanguageInField(tabella, 'it', campo), null, `deroga assente su ${campo}`);
+  }
+  // ...e nessun altro: il title resta giudicato dalla soglia misurata sui titoli.
+  for (const campo of ['title', 'ogTitle']) {
+    assert.notEqual(detectWrongLatinLanguageInField(tabella, 'it', campo), null, `deroga estesa a ${campo}`);
+  }
+});
+
+test('#1220 — la deroga non copre un excerpt non-IT con percentuali e sigle', () => {
+  // Il confine della deroga: la forma «tabella» da sola non basta a passare,
+  // ne' l'ancoraggio italiano ne' i marker di lingua si spengono.
+  const inglese = 'The AVS/AI and ALV rates are 5,3% and 1,1% for the workers with the new tax rules';
+
+  assert.equal(isCompactItalianRateTable(inglese), false);
+  assert.equal(detectWrongLatinLanguageInField(inglese, 'it', 'excerpt')?.lang, 'en');
+  assert.equal(
+    wrongLanguageAdoptions(
+      { content: { it: { title: 'Titolo italiano abbastanza descrittivo', excerpt: '' }, excerpt: inglese } },
+      'it',
+      META_ONLY_FIELDS,
+    ).length,
+    1,
+  );
+});
+
 test('#1153 — il rilevatore distingue un campo italiano su EN/DE/FR', () => {
   const casi = [
     ['en', 'Giovani nel Ticino: fuga e mancato rientro, la posizione politica'],
@@ -304,14 +349,8 @@ function scanCorpusIt(t, campo) {
   );
 
   const offender = valori
-    .map((valore) => [valore, detectWrongLatinLanguage(valore, 'it')])
-    .filter(([valore, esito]) => {
-      if (!esito || OFFENDER_GENUINI.includes(valore)) return false;
-      return !(campo === 'excerpt'
-        && esito.lang === 'non-it'
-        && esito.reason === 'morphology'
-        && isCompactItalianRateTable(valore));
-    });
+    .map((valore) => [valore, detectWrongLatinLanguageInField(valore, 'it', campo)])
+    .filter(([valore, esito]) => esito && !OFFENDER_GENUINI.includes(valore));
 
   assert.deepEqual(
     offender.map(([valore, esito]) => `${esito.lang}/${esito.reason} :: ${valore}`),
@@ -362,7 +401,7 @@ function scanCorpusLocale(t, locale, campo) {
   const valori = scansioni.flat();
 
   const offender = valori
-    .map((valore) => [valore, detectWrongLatinLanguage(valore, locale)])
+    .map((valore) => [valore, detectWrongLatinLanguageInField(valore, locale, campo)])
     .filter(([, esito]) => esito);
 
   assert.deepEqual(
@@ -422,7 +461,7 @@ test('#1177 — la classe SEO IT resta coperta dalla scansione', (t) => {
 
   assert.ok(campi.length >= MIN_SEO_CAMPI_IT, `letti solo ${campi.length} campi SEO IT: scansione troncata`);
   const offender = campi
-    .map(({ value, ...meta }) => ({ ...meta, value, esito: detectWrongLatinLanguage(value, 'it') }))
+    .map(({ value, campo, ...meta }) => ({ ...meta, campo, value, esito: detectWrongLatinLanguageInField(value, 'it', campo) }))
     .filter(({ esito }) => esito);
   assert.deepEqual(
     offender.map(({ file, id, campo, value, esito }) => `${file}:${id}.${campo} ${esito.lang}/${esito.reason} :: ${value}`),

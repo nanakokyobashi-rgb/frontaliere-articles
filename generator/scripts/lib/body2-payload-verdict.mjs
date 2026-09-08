@@ -70,8 +70,7 @@
 import {
   isNonItalianScript,
   nonItalianScriptRatio,
-  detectWrongLatinLanguage,
-  latinLanguageMarkerHits,
+  detectWrongLatinLanguageInField,
 } from './itLanguageCheck.mjs';
 
 /**
@@ -890,16 +889,6 @@ export function isTopicGateAbortVerdict(parsed, { locale = 'it', expectedFields 
  * @param {string[]} [expectedFields]
  * @returns {string[]} motivi, gia' nella forma che `missing` usa.
  */
-export function isCompactItalianRateTable(value) {
-  if (typeof value !== 'string') return false;
-  const percentages = value.match(/\b\d+(?:[.,]\d+)?\s*%/g) ?? [];
-  const acronyms = value.match(/\b[A-Z]{2,}(?:\/[A-Z]{2,})*\b/g) ?? [];
-  const markerHits = latinLanguageMarkerHits(value);
-  const hasItalianAnchor = markerHits.it >= 1
-    || /\b(?:aliquota|aliquote|contributo|contributi|percentuale|percentuali)\b/i.test(value);
-  return percentages.length >= 2 && acronyms.length >= 2 && hasItalianAnchor;
-}
-
 export function wrongLanguageAdoptions(parsed, locale = 'it', expectedFields = REQUIRED_IT_BODY_FIELDS) {
   const campi = expectedFields.filter((f) => META_ONLY_FIELDS.includes(f));
   if (campi.length === 0) return [];
@@ -910,14 +899,12 @@ export function wrongLanguageAdoptions(parsed, locale = 'it', expectedFields = R
   for (const field of campi) {
     const origine = sources[field];
     if (!origine || origine.isLocale) continue;
-    const sbagliata = detectWrongLatinLanguage(origine.value, locale);
-    // Gli excerpt IT possono essere tabelle compatte di aliquote e sigle:
-    // la morfologia, misurata sui titoli, li legge come testo non italiano
-    // anche quando il contenuto e' legittimo. I marker restano attivi, cosi'
-    // un excerpt adottato in una lingua diversa continua a essere rifiutato.
-    if (locale === 'it' && field === 'excerpt'
-      && sbagliata?.lang === 'non-it' && sbagliata.reason === 'morphology'
-      && isCompactItalianRateTable(origine.value)) continue;
+    // Gli excerpt IT possono essere tabelle compatte di aliquote e sigle: la
+    // morfologia, misurata sui titoli, li legge come testo non italiano anche
+    // quando il contenuto e' legittimo. La deroga vive in `itLanguageCheck` —
+    // sorgente unica condivisa con gli scan del corpus pubblicato, che
+    // altrimenti rigetterebbero cio' che questo gate ha accettato.
+    const sbagliata = detectWrongLatinLanguageInField(origine.value, locale, field);
     if (sbagliata) {
       motivi.push(`${field} lingua ${sbagliata.lang} adottata da ${origine.source} (${sbagliata.reason})`);
     }
