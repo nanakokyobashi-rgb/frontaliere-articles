@@ -1,5 +1,4 @@
 {
-  "https://www.tio.ch/dal-mondo/economia/1943678/carbone-produzione-lignite-elettricita-totale": "carbone-minimi-storici-elettricita",
   "https://apps.apple.com/ch/app/cdt-digital/id391355824": "cdt-epaper-ios-revista",
   "https://www.tio.ch/svizzera/economia/1943690/consumi-postfinance-crescita-luglio-indicatore": "svizzeri-piu-propensi-a-spendere",
   "https://www.tio.ch/svizzera/economia/1943676/aziende-societa-ricavi-registrato-awp": "sestimali-aziende-svizzere",
@@ -2077,6 +2076,11 @@
   "https://www.tio.ch/svizzera/economia/1948658/arresto-novartis-battuta-fallimento-multinazionale": {
     "articleId": "novartis-battuta-arresto-neuromuscolare",
     "ts": "2026-09-08T05:53:31.138Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/attualita/1948651/autorita-anni-asilo-ricongiungimento-bambini": {
+    "articleId": "ricongiungimento-familiare-burocrazia",
+    "ts": "2026-09-08T06:06:42.217Z",
     "keyForm": 2
   }
 }
