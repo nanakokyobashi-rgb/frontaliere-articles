@@ -258,7 +258,7 @@ describe('events-utils — il feed dell’organizzatore non parla tedesco', () =
     assert.deepEqual(chiamate.sort(), ['de', 'fr'], 'entrambe le entry avvelenate devono essere ritradotte');
     assert.equal(out[0].titleByLocale.de, 'titolo-de');
     assert.equal(out[0].titleByLocale.fr, 'titolo-fr');
-    assert.equal(cache['title::it::mercatino di natale'].de, 'titolo-de', 'la cache legacy va migrata');
+    assert.equal(cache['title::it::mercatino di natale'], undefined, 'la chiave legacy condivisa va rimossa dopo la migrazione');
   });
 
   test('#831 item 3 — una traduzione inutilizzabile non scrive la chiave: il locale resta scoperto', async () => {

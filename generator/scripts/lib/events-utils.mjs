@@ -1129,17 +1129,14 @@ async function fillLocaleGaps(byLocale, cache, { eventId, fieldType, locales, de
   for (const target of needing) {
     if (target === sourceLocale) continue;
     const entry = cacheKey ? (cache[cacheKey] || {}) : {};
-    const targetAlreadyCarriesSource = hasUsableContentText(clean?.[target])
-      && normalizeText(clean[target]).replace(/\s+/g, ' ') === normalizedSource;
     if (cacheKey && Object.prototype.hasOwnProperty.call(entry, target)) {
       const memo = entry[target];
       if (memo === null) continue; // stable passthrough memo, no network retry
       if (hasUsableContentText(memo)) {
-        // The feed is authoritative when it already carries the source text
-        // in this locale. Do not replace that current value with stale MT,
-        // but keep the positive memo available for a later run where the
-        // target is actually missing.
-        if (!targetAlreadyCarriesSource) updated[target] = memo;
+        // `target` is in `needing` because its value is absent or duplicates
+        // another locale. Reuse the positive memo as the authoritative
+        // translation instead of publishing the source text again.
+        updated[target] = memo;
         continue;
       }
     }
@@ -1159,7 +1156,10 @@ async function fillLocaleGaps(byLocale, cache, { eventId, fieldType, locales, de
       // the next run without resurrecting its old shared-cache semantics.
       const legacyEntry = cache[legacyKey];
       if (legacyEntry && !hasUsableContentText(legacyEntry[target])) {
-        cache[legacyKey] = { ...legacyEntry, [target]: translated };
+        const migratedLegacy = { ...legacyEntry };
+        delete migratedLegacy[target];
+        if (Object.keys(migratedLegacy).length === 0) delete cache[legacyKey];
+        else cache[legacyKey] = migratedLegacy;
       }
       updated[target] = translated;
       if (translateFn === DEFAULT_TRANSLATE_FN) {
