@@ -41,6 +41,7 @@
 import { test, describe, beforeEach, afterEach } from 'node:test';
 import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
+import { readFileSync } from 'node:fs';
 
 import {
   freeTranslate,
@@ -70,6 +71,11 @@ const EN = [
 
 const realFetch = globalThis.fetch;
 const realVitestFlag = process.env.VITEST;
+
+test('non usa più il flag outcomeNoted morto nel percorso Azure', () => {
+  const source = readFileSync(new URL('../scripts/lib/free-translate.mjs', import.meta.url), 'utf8');
+  assert.doesNotMatch(source, /outcomeNoted/);
+});
 
 /**
  * Pilota la cascata dal basso: `translateWithMyMemory` e' l'unico tier
@@ -491,6 +497,61 @@ describe('freeTranslate — guardia «uscita == sorgente»', () => {
         HF_TOKEN: '',
         HUGGINGFACE_API_KEY: '',
         LIBRETRANSLATE_SELF_HOSTED_URL: 'http://self-hosted.test',
+        MT_LOCAL_OPUSMT: '',
+        VITEST: '1',
+      },
+    });
+    assert.equal(child.status, 0, child.stderr || child.stdout);
+  });
+
+  test('un target non mappato invalida il passthrough della cascata reale', () => {
+    const moduleUrl = new URL('../scripts/lib/free-translate.mjs', import.meta.url).href;
+    const childScript = `
+      const source = ${JSON.stringify(IT)};
+      globalThis.fetch = async (url) => {
+        const value = String(url);
+        if (value.includes('api-free.deepl.com')) {
+          return { ok: true, json: async () => ({ translations: [{ text: source }] }) };
+        }
+        if (value.includes('api.mymemory.translated.net')) {
+          return { ok: true, json: async () => ({ responseData: { translatedText: source, match: 1 } }) };
+        }
+        if (value.includes('translate.googleapis.com')) {
+          return { ok: true, text: async () => JSON.stringify([[ [source] ]]) };
+        }
+        if (value.includes('clients5.google.com')) {
+          return { ok: true, text: async () => JSON.stringify({ sentences: [{ trans: source }] }) };
+        }
+        if (value.includes('/api/v1/')) return { ok: true, json: async () => ({ translation: source }) };
+        if (value.includes('/api/translate')) {
+          return { ok: true, json: async () => ({ 'translated-text': source, translated_text: source }) };
+        }
+        if (value.includes('/translate')) return { ok: true, json: async () => ({ translatedText: source }) };
+        throw new Error('endpoint inatteso nel test');
+      };
+      const { freeTranslateWithRetryDetailed } = await import(${JSON.stringify(moduleUrl)});
+      const out = await freeTranslateWithRetryDetailed({
+        text: source, sourceLang: 'it', targetLang: '', fieldType: 'description', maxRetries: 0,
+      });
+      if (JSON.stringify(out) !== JSON.stringify({ text: '', passthrough: false })) {
+        console.error(JSON.stringify(out));
+        process.exit(1);
+      }
+    `;
+    const child = spawnSync(process.execPath, ['--input-type=module', '--eval', childScript], {
+      encoding: 'utf8',
+      env: {
+        ...process.env,
+        DEEPL_API_KEY: 'test-key',
+        DEEPL_API_KEY_2: '',
+        AZURE_TRANSLATOR_KEY: '',
+        AZURE_TRANSLATOR_KEY_2: '',
+        GSC_CLIENT_ID: '',
+        GSC_CLIENT_SECRET: '',
+        GSC_REFRESH_TOKEN: '',
+        HF_TOKEN: '',
+        HUGGINGFACE_API_KEY: '',
+        LIBRETRANSLATE_SELF_HOSTED_URL: '',
         MT_LOCAL_OPUSMT: '',
         VITEST: '1',
       },
