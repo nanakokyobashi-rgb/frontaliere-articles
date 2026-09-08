@@ -3143,8 +3143,8 @@
       "sitePath": ".github/corpus-workflows/contract.json",
       "mode": "identical",
       "baseline": {
-        "site": "3b67264b3cc0d58b",
-        "corpus": "3b67264b3cc0d58b",
+        "site": "6031680b66ee8544",
+        "corpus": "6031680b66ee8544",
         "alignedAt": "2026-09-08"
       }
     },
