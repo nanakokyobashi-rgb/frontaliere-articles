@@ -103,9 +103,11 @@ export function retentionLine(label, declared, source, retention = FLOOR_RETENTI
 /**
  * Il preallarme di un rapporto, o `null` se non serve.
  *
- * Solo nella fascia `[retention, warn)`: sotto il gate non e' un preallarme ma
- * una VIOLAZIONE, che il chiamante emette gia' come errore — raddoppiarla in
- * warning confonderebbe il verdetto invece di anticiparlo.
+ * Solo sopra il pavimento intero del gate e sotto il preallarme: sotto quel
+ * pavimento non e' un preallarme ma una VIOLAZIONE, che il chiamante emette
+ * gia' come errore — raddoppiarla in warning confonderebbe il verdetto invece
+ * di anticiparlo. Sul bordo il rapporto grezzo puo' essere appena sotto
+ * `retention` per effetto dell'arrotondamento, ma il confronto intero passa.
  */
 export function retentionWarning(
   label,
@@ -115,11 +117,31 @@ export function retentionWarning(
   warn = FLOOR_WARN_RETENTION,
 ) {
   const ratio = retentionRatio(declared, source);
-  if (ratio === null || ratio >= warn || ratio < retention) return null;
+  if (ratio === null || ratio >= warn || declared < floorFrom(source, retention)) return null;
+  const margin = Math.max(0, (ratio - retention) * 100);
   return (
     `${label}: rapporto ${(ratio * 100).toFixed(2)}% sotto il preallarme ` +
-    `${(warn * 100).toFixed(0)}% — restano ${((ratio - retention) * 100).toFixed(1)} pp ` +
+    `${(warn * 100).toFixed(0)}% — restano ${margin.toFixed(1)} pp ` +
     `prima del gate ${(retention * 100).toFixed(0)}%, che bloccherebbe la pubblicazione`
+  );
+}
+
+/**
+ * Il preallarme sulla popolazione che genera un feed, senza spostare il gate.
+ *
+ * Un feed emette al massimo `RSS_MAX_ITEMS`, quindi il suo rapporto rispetto
+ * a quel cap non vede se i chunk SEO sono passati da migliaia a poche decine.
+ * Questa riga confronta invece i chunk con il corpus della sezione: e' solo
+ * diagnostica e deve restare visibile anche quando il rapporto e' gia' sotto
+ * il gate degli articoli.
+ */
+export function populationWarning(label, declared, source, warn = FLOOR_WARN_RETENTION) {
+  const ratio = retentionRatio(declared, source);
+  if (ratio === null || ratio >= warn) return null;
+  return (
+    `${label}: popolazione ${declared}/${source} = ${(ratio * 100).toFixed(2)}% ` +
+    `sotto il preallarme ${(warn * 100).toFixed(0)}% — i chunk SEO stanno erodendo il corpus ` +
+    `della sezione`
   );
 }
 
@@ -174,8 +196,10 @@ export const SECTION_BODY_DIRS = {
 export const IMAGE_SOURCE_DIR = path.join('public', 'images', 'blog');
 
 function countFiles(dir, ext) {
-  if (!fs.existsSync(dir)) return 0;
-  return fs.readdirSync(dir).filter((f) => f.endsWith(ext)).length;
+  const stat = fs.statSync(dir, { throwIfNoEntry: false });
+  if (!stat?.isDirectory()) return 0;
+  const files = fs.readdirSync(dir);
+  return files.filter((f) => f.endsWith(ext)).length;
 }
 
 /** Quanti articoli sorgente ha la sezione, contati sui file di corpo. */
