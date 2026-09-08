@@ -793,8 +793,10 @@ test('la risoluzione del lock precede ogni decisione sulla presenza dell\'id', (
       const start = src.indexOf(site.scope);
       assert.notEqual(start, -1, `${site.file}: "${site.scope}" non trovato — aggiornare questo test`);
       body = src.slice(start);
+      const nextFunction = body.search(/\n(?:export )?(?:async )?function\s+\w+\s*\(/);
+      if (nextFunction >= 0) body = body.slice(0, nextFunction);
     }
-    const resolveAt = body.search(/^\s*resolveRegisterLockAtStartup\(\);/m);
+    const resolveAt = body.search(/^\s*(?:if \(!dryRun\) )?resolveRegisterLockAtStartup\(\);/m);
     assert.notEqual(
       resolveAt,
       -1,
@@ -921,6 +923,17 @@ test('isRegisterLockHeld() dice se le 9 scritture sono state interrotte', () => 
   // Sezione malformata: non lancia da dentro un catch-guard, altrimenti
   // sostituirebbe la diagnosi originale con la propria.
   assert.equal(isRegisterLockHeld(root, 'non/valida'), false);
+});
+
+test('endRegisterLock propaga un errore di rimozione invece di mascherarlo', () => {
+  const root = sandbox();
+  const lockPath = registerLockPath(root, SECTION);
+  fs.mkdirSync(lockPath, { recursive: true });
+  assert.throws(
+    () => endRegisterLock(root, SECTION),
+    (err) => isRegisterLockError(err) && /could not remove registration lock/.test(err.message),
+  );
+  fs.rmSync(lockPath, { recursive: true });
 });
 
 test('publish-journalist rilancia l\'errore del lock invece di marcare il doc failed', () => {

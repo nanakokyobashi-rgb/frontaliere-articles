@@ -74,6 +74,12 @@ test('buildRunCard non esplode su un report degenere', () => {
   }
 });
 
+test('buildRunCard conserva il veto prompt-floor come campione distinto', () => {
+  const promptFloor = { budget: 4000, floor: 5850, short: 1850, irreducible: true };
+  const card = buildRunCard({ rareEvents: { promptFloor } });
+  assert.deepEqual(card.promptFloor, promptFloor);
+});
+
 // ── 2. L'aggregato tiene separati «non e' successo» e «non l'ho visto» ──────
 
 /**
@@ -198,6 +204,23 @@ test('summariseRunCards conta le cascate VETATE su input cap (#924 item 1)', () 
   assert.equal(s.samples[0].inputCapVeto, true);
 });
 
+test('summariseRunCards conta prompt-floor e verdetti decisi dal margine (#1072)', () => {
+  const floor = cardWith(0, 10, 5);
+  floor.promptFloor = { budget: 4000, floor: 5850, irreducible: true };
+  const margin = cardWith(12, 106, 53, { transient: 6, persistent: 6 });
+  margin.quotaDeferral.inputCapVeto = true;
+  margin.quotaDeferral.inputCapDecision = {
+    decidedBy: 'margin',
+    votedTransient: 46,
+    persistent: 47,
+  };
+  const s = summariseRunCards([floor, margin]);
+  assert.equal(s.promptFloorIrreducible, 1);
+  assert.equal(s.promptFloorSamples[0].promptFloor.budget, 4000);
+  assert.equal(s.marginDecided, 1);
+  assert.equal(s.samples.find((sample) => sample.decidedBy === 'margin').promptFloor, null);
+});
+
 test('summariseRunCards non fa sparire una card di schema ignoto', () => {
   const s = summariseRunCards([{ schema: 'run-card/99', rebracket: { calls: 3 } }, cardWith(0, 10, 5)]);
   assert.equal(s.unknownSchema, 1);
@@ -232,6 +255,11 @@ test('classifyDownloadFailure separa «nessun artifact» da un guasto di gh (#92
     'no-artifact',
   );
   assert.equal(classifyDownloadFailure({ stderr: 'no valid artifacts found to download' }).kind, 'no-artifact');
+  assert.equal(
+    classifyDownloadFailure({ stderr: 'artifact retention period has expired' }).kind,
+    'no-artifact',
+    'la retention scaduta rende il dato non disponibile, non è un guasto dello strumento',
+  );
   for (const err of [
     { stderr: 'HTTP 403: Resource not accessible by integration' },
     { stderr: 'API rate limit exceeded for user ID 1' },

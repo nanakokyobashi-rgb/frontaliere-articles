@@ -243,8 +243,8 @@ test('i punti di iniezione usano il selettore di sezione, non il brief nudo', ()
   // 'it'` di runFactualityGates). Il guard leggeva quindi la finestra
   // sbagliata e falliva su un codice corretto. L'ancora specifica tiene il
   // bersaglio fermo su questa chiamata anche se altre se ne aggiungono.
-  const gateCall = src.indexOf('const gateResult = runFactualityGates({');
-  assert.ok(gateCall !== -1, 'chiamata a runFactualityGates non trovata — aggiornare questo guard');
+  const gateCall = src.indexOf('const gateResult = runArticleFactualityGates({');
+  assert.ok(gateCall !== -1, 'chiamata a runArticleFactualityGates non trovata — aggiornare questo guard');
   // Finestra ampia: il blocco porta un commento lungo che spiega perche' il
   // ramo evergreen e' esentato, e con 1200 char `sourceText:` ci cadeva fuori
   // — il guard falliva sul codice CORRETTO, che e' il modo piu' rapido di far
