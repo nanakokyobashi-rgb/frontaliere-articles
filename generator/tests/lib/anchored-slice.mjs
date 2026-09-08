@@ -62,6 +62,25 @@ export function sliceFrom(src, from, { offset = 0, label = '' } = {}) {
  * esistere, e `to` deve venire dopo `from`.
  */
 export function sliceBetween(src, from, to, { label = '' } = {}) {
+  const occurrences = (needle) => {
+    let count = 0;
+    let at = 0;
+    while ((at = src.indexOf(needle, at)) >= 0) {
+      count += 1;
+      at += Math.max(1, needle.length);
+    }
+    return count;
+  };
+  for (const needle of [from, to]) {
+    const count = occurrences(needle);
+    if (count !== 1) {
+      throw new Error(
+        `ancora ${count ? 'ambigua' : 'assente'}${label ? ` (${label})` : ''}: `
+          + `${JSON.stringify(needle)} compare ${count} volte nel sorgente; `
+          + 'sliceBetween richiede ancore univoche.',
+      );
+    }
+  }
   const start = anchorIndex(src, from, { label });
   const end = anchorIndex(src, to, { from: start + from.length, label });
   return src.slice(start, end);

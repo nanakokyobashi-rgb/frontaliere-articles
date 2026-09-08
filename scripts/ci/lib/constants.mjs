@@ -173,7 +173,7 @@ export const VITEST_SHARD_NAME_RE = /^vitest shard \d+\/\d+$/;
  * `generator/tests/redflag-important-marker.test.mjs` deriva il pattern atteso da
  * questa `.source` e lo pretende, verbatim, in entrambi i workflow.
  */
-export const REDFLAG_IMPORTANT_RE = /^(?:[^\n🟡🟢❓]*|(?:[^\n`«]|`[^\n`]*`|«[^\n»]*»|`(?![^\n`]*`))*[🟡🟢❓](?:[^\n`«]|`[^\n`]*`|«[^\n»]*»|`(?![^\n`]*`))*)(?<!\s`)(?<!^`)🔴\s*\*{0,2}\s*Important\s*\*{0,2}\s*[:—-]/mu;
+export const REDFLAG_IMPORTANT_RE = /^(?:(?=(?:[^\n`]*`[^\n`]*`)*[^\n`]*`[^\n`]*$)(?:[^\n🟡🟢❓]*|(?:[^\n«]|«[^\n»]*»)*[🟡🟢❓](?:[^\n«]|«[^\n»]*»)*)|(?:[^\n🟡🟢❓]*|(?:[^\n`«]|`[^\n`]*`|«[^\n»]*»|`(?![^\n`]*`))*[🟡🟢❓](?:[^\n`«]|`[^\n`]*`|«[^\n»]*»|`(?![^\n`]*`))*)(?<!\s`)(?<!^`))🔴\s*\*{0,2}\s*Important\s*\*{0,2}\s*[:—-]/mu;
 
 /**
  * File la cui modifica impedisce STRUTTURALMENTE al reviewer Claude di girare
