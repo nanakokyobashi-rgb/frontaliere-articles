@@ -126,6 +126,35 @@ describe('translateFieldFreeMt — l’uscita di un motore non e’ prosa', () =
     assert.equal(await run('Null Grad in Airolo'), 'Null Grad in Airolo');
   });
 
+  test('rifiuta un output identico alla sorgente e lo classifica come passthrough', async () => {
+    const signals = [];
+    const source = 'Un titolo italiano qualunque';
+    const out = await translateFieldFreeMt({
+      text: source,
+      sourceLang: 'it',
+      targetLang: 'de',
+      fieldType: 'title',
+      translate: async () => `  ${source}  `,
+      onUnusableOutput: (event) => signals.push(event),
+    });
+    assert.equal(out, '');
+    assert.deepEqual(signals, [{ targetLang: 'de', fieldType: 'title', reason: 'passthrough' }]);
+  });
+
+  test('rifiuta un lone surrogate prodotto dal motore prima del write boundary', async () => {
+    const signals = [];
+    const out = await translateFieldFreeMt({
+      text: 'Titolo italiano',
+      sourceLang: 'it',
+      targetLang: 'de',
+      fieldType: 'title',
+      translate: async () => `Ein Titel \uD83D`,
+      onUnusableOutput: (event) => signals.push(event),
+    });
+    assert.equal(out, '');
+    assert.deepEqual(signals, [{ targetLang: 'de', fieldType: 'title', reason: 'lone-surrogate' }]);
+  });
+
   test('un output non-stringa emette un segnale distinto e non diventa testo', async () => {
     const signals = [];
     const out = await translateFieldFreeMt({

@@ -123,7 +123,7 @@ test('un duplicato successivo non clobbera il feed con MT stantia se il retry fa
   );
 
   assert.equal(second[0].titleByLocale.en, SAME_TITLE);
-  assert.equal(secondCalls, 1, 'il duplicato presente nel feed resta sul percorso normale');
+  assert.equal(secondCalls, 0, 'il memo positivo evita di ripagare la cascata quando il feed duplica la sorgente');
   assert.equal(Object.values(cache)[0].en, 'traduzione-en');
 });
 
