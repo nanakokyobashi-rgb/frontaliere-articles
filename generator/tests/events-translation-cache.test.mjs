@@ -97,6 +97,28 @@ test('non usa sourceKey o url come identità quando il testo è uguale', async (
   assert.deepEqual(cache, { '["title","it","locarno film festival"]': { en: 'traduzione-1' } });
 });
 
+test('mantiene il memo negativo per evento senza perdere il dedup positivo', async () => {
+  let calls = 0;
+  const cache = {};
+  const events = [
+    { sourceKey: 'guidle', url: 'https://events.test/one', titleByLocale: { it: SAME_TITLE } },
+    { sourceKey: 'guidle', url: 'https://events.test/two', titleByLocale: { it: SAME_TITLE } },
+  ];
+
+  const out = await enrichEventsWithLocaleFallbackTranslations(events, cache, {
+    locales: ['it', 'en'],
+    delayMs: 0,
+    translateFn: async () => { calls += 1; return { text: '', passthrough: true }; },
+  });
+
+  assert.deepEqual(out.map((event) => event.titleByLocale), [{ it: SAME_TITLE }, { it: SAME_TITLE }]);
+  assert.equal(calls, 2, 'un passthrough negativo descrive il singolo evento');
+  assert.deepEqual(Object.keys(cache).map((key) => JSON.parse(key)).sort((a, b) => a[1].localeCompare(b[1])), [
+    ['title', 'url:https://events.test/one', 'it', 'locarno film festival'],
+    ['title', 'url:https://events.test/two', 'it', 'locarno film festival'],
+  ]);
+});
+
 test('memoizza un passthrough esplicito senza pubblicare la sorgente nel target', async () => {
   const cache = {};
   const out = await enrichEventsWithLocaleFallbackTranslations(
@@ -260,5 +282,5 @@ test('non pubblica il testo sorgente quando il translator segnala passthrough es
   );
 
   assert.deepEqual(out[0].titleByLocale, { it: SAME_TITLE });
-  assert.equal(cache['["title","it","locarno film festival"]'].en, null);
+  assert.equal(cache['["title","id:guidle:explicit-source","it","locarno film festival"]'].en, null);
 });
