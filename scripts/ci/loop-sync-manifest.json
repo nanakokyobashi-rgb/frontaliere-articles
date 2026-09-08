@@ -3439,12 +3439,12 @@
     },
     {
       "path": "scripts/lib/cdn-asset-existence.mjs",
-      "mode": "corpus-only",
-      "reason": "Verifica di esistenza degli `/assets/` riscritti sul CDN dal fast-publish (issue #788). Solo qui: sul sito l'offload gira dentro il deploy che ha appena buildato e spinto `dist/assets`, quindi l'esistenza e' garantita dall'ordine; questo repo non builda nulla sotto `dist/assets` e riscrive riferimenti al bundle dell'ultimo deploy del sito.",
+      "mode": "adapted",
+      "reason": "Gemello adattato della verifica degli `/assets/` riscritti sul CDN dal fast-publish (issue #788). Il corpus verifica gli URL estratti con l'alfabeto condiviso `host/shared/cdnAssetOffloadRx.mjs`; il sito mantiene invece una guardia autonoma per i soft-404 HTML e per il percorso di publish del sito. Il contratto e' comune, ma le dipendenze e i gate dei due cicli sono diversi per costruzione.",
       "baseline": {
-        "site": null,
-        "corpus": "fa051a94fac7eb5d",
-        "alignedAt": "2026-09-04"
+        "site": "fc90732f0e8c3af3",
+        "corpus": "1db7f81712ca6755",
+        "alignedAt": "2026-09-08"
       }
     },
     {

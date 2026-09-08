@@ -849,7 +849,8 @@ function corpusOnlyTwinVerdict({ mode, path: corpusPath, blobSha, sitePath, trac
   // presenza del path dichiarato. Per `corpus-only` il path atteso e' quello
   // della voce; per un pending puo' essere il `sitePath` alternativo.
   const expectedPath = sitePath || corpusPath;
-  const pathMatch = expectedPath && [...siteBlobIndex.values()].some((paths) => paths.includes(expectedPath));
+  const pathIndex = siteBlobIndex.paths || new Set([...siteBlobIndex.values()].flat());
+  const pathMatch = expectedPath && pathIndex.has(expectedPath);
   if (pathMatch) sitePaths.add(expectedPath);
   if (!sitePaths.size) return { misclassified: false, sitePaths: [] };
   return { misclassified: true, sitePaths: [...sitePaths].sort(), contentPaths, pathMatch: Boolean(pathMatch) };
@@ -871,6 +872,8 @@ async function siteBlobIndex() {
   const index = new Map();
   for (const node of tree.tree) {
     if (node.type !== 'blob' || !node.sha) continue;
+    if (!index.paths) index.paths = new Set();
+    index.paths.add(node.path);
     const at = index.get(node.sha);
     if (at) at.push(node.path);
     else index.set(node.sha, [node.path]);
@@ -1673,7 +1676,9 @@ async function main() {
       // Il ciclo principale può avere già registrato lo stesso pending come
       // assente sul path dichiarato. Il backstop per contenuto/path lo
       // sostituisce con un solo verdetto, non aggiunge una riga contraddittoria.
-      const pendingIndex = results.findIndex((r) => r.path === entry.path && r.state === 'corpus-only-pending');
+      const pendingIndex = results.findIndex(
+        (r) => r.path === entry.path && (r.state === 'corpus-only' || r.state === 'corpus-only-pending'),
+      );
       if (pendingIndex >= 0) results.splice(pendingIndex, 1);
       results.push({
         path: entry.path,
