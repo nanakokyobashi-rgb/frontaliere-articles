@@ -147,7 +147,7 @@
       "reason": "Classificatore del verdetto `🔴 Important` rispetto al diff corrente della PR. E' usato dal review-gate e dal fixer del corpus per declassare in modo conservativo i finding fuori diff e coniare una sola issue follow-up; il sito ha un gate e un ciclo di review diversi e non possiede questo consumer del corpus, quindi non esiste un gemello da portare.",
       "baseline": {
         "site": null,
-        "corpus": "2a170bb4c782539b",
+        "corpus": "b4b4a8be4b322d19",
         "alignedAt": "2026-09-08"
       }
     },
