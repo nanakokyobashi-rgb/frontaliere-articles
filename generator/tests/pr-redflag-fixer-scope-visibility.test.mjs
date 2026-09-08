@@ -19,6 +19,7 @@ assert.ok(preflight, 'preflight job not found');
 test('a human PR with a red Important is not filtered at job level', () => {
   const jobIf = preflight.match(/\n    if: \|\n([\s\S]*?)\n    runs-on:/)?.[1] ?? '';
 
+  assert.ok(jobIf, 'job-level if: not found');
   assert.doesNotMatch(jobIf, /github\.event\.pull_request\.user\.type/);
   assert.doesNotMatch(jobIf, /github\.event\.pull_request\.head\.ref/);
   assert.match(preflight, /PR_AUTHOR_TYPE: \$\{\{ github\.event\.pull_request\.user\.type \}\}/);
@@ -28,4 +29,10 @@ test('a human PR with a red Important is not filtered at job level', () => {
   );
   assert.match(preflight, /REDFLAG_OUT_OF_SCOPE/);
   assert.match(preflight, /gh pr comment "\$PR_NUMBER"/);
+  assert.match(preflight, /comments\?per_page=100"\s+--paginate/);
+  assert.match(preflight, /::warning::REDFLAG_OUT_OF_SCOPE/);
+
+  const scopeAt = preflight.indexOf('REDFLAG_OUT_OF_SCOPE');
+  const branchGuardAt = preflight.indexOf('if ! gh api "repos/$REPO/branches/$HEAD_REF"');
+  assert.ok(scopeAt > branchGuardAt, 'scope verdict must follow closed-PR and branch guards');
 });
