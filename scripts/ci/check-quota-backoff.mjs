@@ -28,9 +28,11 @@
  *
  * La ricerca è bounded per costo: solo issue toccate nelle ultime
  * `QUOTA_BEACON_LOOKBACK_H` ore (un beacon è fresco per definizione), ordinate
- * dalla più recente, cap `QUOTA_BEACON_MAX_ISSUES` letture `gh issue view`. In
- * regime normale la coda tiene 1-2 issue con quelle label, quindi il gate costa
- * 2 list + ≤1 view.
+ * dalla più recente, cap `QUOTA_BEACON_MAX_ISSUES` letture dei commenti. Il
+ * gate guarda sia issue sia PR: il rimborso dei fixer di PR scrive il beacon
+ * sull'issue/PR GitHub della PR, che `gh issue list` non restituisce. In regime
+ * normale la coda tiene 1-2 issue/PR con quelle label, quindi il gate resta
+ * bounded.
  *
  * Output (GITHUB_OUTPUT): `quota_blocked=true|false`, `resets_at=<epoch|''>`.
  *   - true  → finestra aperta: la issue viene RI-ACCODATA (`agent:fix` →
@@ -178,12 +180,39 @@ function listIssues(label, scope = repoArgs) {
   }
 }
 
-function commentsOf(num, scope = repoArgs) {
-  const raw = gh(['issue', 'view', String(num), ...scope, '--json', 'comments']);
+function repoFromScope(scope) {
+  const i = Array.isArray(scope) ? scope.indexOf('--repo') : -1;
+  return i >= 0 ? scope[i + 1] : process.env.GH_REPO || process.env.GITHUB_REPOSITORY || '';
+}
+
+function listPullRequests(scope = repoArgs) {
+  const raw = gh([
+    'pr', 'list', ...scope, '--state', 'all',
+    '--json', 'number,updatedAt', '--limit', String(ISSUE_LIST_LIMIT),
+  ]);
   if (!raw) return [];
   try {
     const parsed = JSON.parse(raw);
-    return Array.isArray(parsed?.comments) ? parsed.comments : [];
+    const rows = Array.isArray(parsed) ? parsed : [];
+    if (rows.length >= ISSUE_LIST_LIMIT) {
+      console.log(`::warning::listing PR al tetto di ${ISSUE_LIST_LIMIT}: vista PARZIALE, taglia le PR piu' vecchie (no silent cap).`);
+    }
+    return rows;
+  } catch {
+    return [];
+  }
+}
+
+function commentsOf(num, scope = repoArgs) {
+  const repo = repoFromScope(scope);
+  if (!repo) return [];
+  const raw = gh(['api', '--paginate', '--slurp', `repos/${repo}/issues/${num}/comments?per_page=100`]);
+  if (!raw) return [];
+  try {
+    const parsed = JSON.parse(raw);
+    return Array.isArray(parsed)
+      ? parsed.flatMap((page) => Array.isArray(page) ? page : [])
+      : [];
   } catch {
     return [];
   }
@@ -194,10 +223,20 @@ function commentsOf(num, scope = repoArgs) {
  * @returns {{resetsAt:number, issue:number}|null}
  */
 function activeBeaconIn(scope, nowMs, nowSec) {
-  const candidates = beaconCandidates(
-    [listIssues(LBL_FIX, scope), listIssues(LBL_QUEUED, scope), listIssues(LBL_DECOMP, scope), listIssues(LBL_DECOMP_QUEUED, scope)],
-    { now: nowMs, lookbackH: LOOKBACK_H, max: MAX_ISSUES }
-  );
+  // Le issue con label di coda sono la fonte primaria: le PR vengono solo
+  // aggiunte nello spazio rimasto, altrimenti una raffica di PR aggiornate può
+  // occupare tutti i MAX_ISSUES e rendere cieco il pre-flight ai beacon reali.
+  const opts = { now: nowMs, lookbackH: LOOKBACK_H, max: MAX_ISSUES };
+  const issueCandidates = beaconCandidates([
+    listIssues(LBL_FIX, scope),
+    listIssues(LBL_QUEUED, scope),
+    listIssues(LBL_DECOMP, scope),
+    listIssues(LBL_DECOMP_QUEUED, scope),
+  ], opts);
+  const prCandidates = beaconCandidates([listPullRequests(scope)], opts);
+  const candidates = [...issueCandidates, ...prCandidates]
+    .filter((num, i, all) => all.indexOf(num) === i)
+    .slice(0, MAX_ISSUES);
   for (const num of candidates) {
     const r = maxQuotaResetsAt(commentsOf(num, scope));
     if (r !== null && isBackoffActive(r, nowSec)) return { resetsAt: r, issue: num };

@@ -163,7 +163,80 @@ export function detectClaudeRateLimit(raw) {
     if (m.error === 'rate_limit') rateLimited = true;
   }
 
+  // Se l'action muore prima di scrivere `execution_file`, `gh run view
+  // --log-failed` ci lascia solo il log testuale. Accetta esclusivamente un
+  // riferimento esplicito al 429/rate-limit: una qualunque occorrenza di
+  // "429" in un log di workflow potrebbe appartenere a un altro step.
+  if (!rateLimited && msgs.length === 0) {
+    const text = String(raw || '');
+    // `gh run view --log-failed` può includere più step della stessa run: un
+    // 429 di un'API estranea non è prova che Claude sia morto per quota.
+    const hasClaudeMarker = /\b(?:claude|anthropic)\b/i.test(text);
+    if (hasClaudeMarker && /(?:http\s*)?429\b/i.test(text) && /rate[ _-]?limit|too many requests|api_error_status/i.test(text)) {
+      rateLimited = true;
+    }
+    const reset = text.match(/(?:resetsAt|reset(?:s)?[_ -]?at)\s*["'=:\s]+(\d{9,13})/i);
+    if (reset) {
+      const r = Number(reset[1]);
+      if (Number.isFinite(r) && r > 0) resetsAt = r > 1e11 ? Math.round(r / 1000) : Math.round(r);
+    }
+    const kind = text.match(/rateLimitType\s*["'=:\s]+([a-z0-9_-]+)/i);
+    if (kind) rateLimitType = kind[1];
+  }
+
   return { rateLimited, resetsAt, rateLimitType };
+}
+
+/**
+ * Un 429 rimborsa il round solo se Claude non ha consumato lavoro.
+ *
+ * Un `rate_limit_event` può arrivare dopo che l'agente ha già letto la PR: in
+ * quel caso il round resta consumato. Il result dell'SDK è la prova primaria;
+ * in sua assenza un evento strutturato di rate-limit senza turni assistant è
+ * l'unica forma che l'action può lasciare prima di fallire.
+ *
+ * @param {string} raw execution file o log testuale della run
+ * @returns {boolean}
+ */
+export function shouldRefundRateLimitedRound(raw) {
+  const detected = detectClaudeRateLimit(raw);
+  if (!detected.rateLimited) return false;
+
+  const msgs = parseExecutionMessages(raw);
+  const results = msgs.filter((m) => m && m.type === 'result');
+  if (results.length) {
+    const hasTurns = results.some((m) => Number.isFinite(Number(m.num_turns)));
+    const hasCost = results.some((m) => Number.isFinite(Number(m.total_cost_usd)));
+    if (!hasTurns && !hasCost && msgs.some((m) => m && m.type === 'assistant')) return false;
+    const turns = results.reduce((max, m) => {
+      const n = Number(m.num_turns);
+      return Number.isFinite(n) ? Math.max(max, n) : max;
+    }, 0);
+    const cost = results.reduce((max, m) => {
+      const n = Number(m.total_cost_usd);
+      return Number.isFinite(n) ? Math.max(max, n) : max;
+    }, 0);
+    return (hasTurns || hasCost) && turns <= 1 && cost <= 0;
+  }
+
+  // Un log testuale può contenere le metriche del result senza essere JSON
+  // parsabile. Se sono presenti, prevalgono sull'assenza di messaggi strutturati:
+  // un 429 arrivato dopo lavoro non va rimborsato solo perché `gh run view`
+  // restituisce testo invece dell'execution file.
+  const text = String(raw || '');
+  const turnValues = [...text.matchAll(/"?(?:num_turns|num turns)"?\s*[:=]\s*([0-9]+)/gi)]
+    .map((m) => Number(m[1])).filter(Number.isFinite);
+  const costValues = [...text.matchAll(/"?total_cost_usd"?\s*[:=]\s*([0-9]+(?:\.[0-9]+)?)/gi)]
+    .map((m) => Number(m[1])).filter(Number.isFinite);
+  if (turnValues.length || costValues.length) {
+    return Math.max(0, ...turnValues) <= 1 && Math.max(0, ...costValues) <= 0;
+  }
+
+  // Un log testuale senza metriche non porta la prova di un turno. Se però
+  // nomina esplicitamente un assistant/tool call, il fail-safe è non rimborsare:
+  // il round potrebbe avere già consumato lavoro.
+  if (/(?:\b(?:assistant|tool_use|tool call|turns?)\b|num_turns)/i.test(text)) return false;
+  return msgs.length === 0 || !msgs.some((m) => m && m.type === 'assistant');
 }
 
 /**
