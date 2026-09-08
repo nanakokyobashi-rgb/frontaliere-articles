@@ -978,7 +978,31 @@ export function importSpecifierRe(base) {
   const stem = base.replace(/\.(?:ts|tsx|mts|cts|mjs|cjs|js|jsx)$/, '');
   if (stem === base) return null;
   const esc = stem.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-  return new RegExp(`['"\`][^'"\`\n]*[./]${esc}(?:\\.(?:js|jsx|mjs|cjs))?['"\`]`);
+  const extension = base.slice(stem.length);
+  // L'assenza di estensione è una convenzione TypeScript, non una proprietà
+  // del basename: per `.mjs`/`.js` accettiamo solo la forma esplicita, mentre
+  // per i sorgenti TS enumera la coda valida per ciascuna estensione più la
+  // forma senza estensione. Così `viteAssetHashRx.mjs` non cattura l'import
+  // `./viteAssetHashRx` che appartiene alla voce `.ts` omonima.
+  const suffixesByExtension = {
+    '.ts': ['', '.js'],
+    '.tsx': ['', '.js', '.jsx'],
+    '.mts': ['', '.mjs'],
+    '.cts': ['', '.cjs'],
+  };
+  const suffixes = suffixesByExtension[extension] || [extension];
+  const suffixPattern = suffixes
+    .map((suffix) => suffix.replace('.', '\\.'))
+    .join('|');
+  return new RegExp(`['"\`][^'"\`\n]*[./]${esc}(?:${suffixPattern})['"\`]`);
+}
+
+export function manualTransportReason(manual = []) {
+  if (!manual.length) return '';
+  return (
+    `transport-identical-twins: ${manual.length} gemelli \`identical\` sono \`site-ahead\` e bloccati per SEMPRE `
+    + `(${manual.map((m) => m.path).join(', ')}): nessun giro di questo canale li portera', serve una copia a mano.`
+  );
 }
 
 export function localCouplings(rel, modeOf) {
@@ -1324,6 +1348,10 @@ async function main() {
   }
 
   if (dark.red) {
+    // Un fallimento di rete arrivava prima del ramo `manual`: il codice 1 era
+    // corretto, ma il no permanente spariva dal report utile. Mantieni la
+    // diagnosi manuale anche quando il canale è buio.
+    if (manual.length) console.error(manualTransportReason(manual));
     console.error(`transport-identical-twins: ${dark.reason}`);
     return 1;
   }
@@ -1336,10 +1364,7 @@ async function main() {
   // Misurato il 2026-09-05 su `main`: 26 blocchi permanenti, TUTTI `stable`,
   // quindi questo insieme e' vuoto e la passata resta verde.
   if (manual.length) {
-    console.error(
-      `transport-identical-twins: ${manual.length} gemelli \`identical\` sono \`site-ahead\` e bloccati per SEMPRE `
-      + `(${manual.map((m) => m.path).join(', ')}): nessun giro di questo canale li portera\u2019, serve una copia a mano.`,
-    );
+    console.error(manualTransportReason(manual));
     return EXIT_MANUAL_NEEDED;
   }
   return 0;

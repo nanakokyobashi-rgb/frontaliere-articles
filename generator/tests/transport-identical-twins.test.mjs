@@ -45,6 +45,7 @@ import {
   fetchFailureVerdict,
   isFixture,
   localCouplings,
+  manualTransportReason,
   namedIsCoupling,
   readsContentOf,
   parseRatio,
@@ -273,15 +274,39 @@ test("lo specificatore NodeNext con l\u2019estensione compilata resta visibile (
   // CONVENZIONE, e il giorno dell\u2019adozione nulla sarebbe diventato rosso.
   const re = importSpecifierRe('safeTruncate.ts');
   assert.ok(re.test("import { truncateCodeUnits } from './shared/safeTruncate.js';"));
-  assert.ok(re.test('from "../../host/shared/safeTruncate.mjs"'));
-  assert.ok(re.test("from '@/shared/safeTruncate.jsx'"));
-  assert.ok(re.test("from './shared/safeTruncate.cjs'"));
+  assert.ok(!re.test('from "../../host/shared/safeTruncate.mjs"'), '.mjs appartiene al gemello ESM');
+  assert.ok(!re.test("from '@/shared/safeTruncate.jsx'"), '.jsx appartiene al gemello TSX');
+  assert.ok(!re.test("from './shared/safeTruncate.cjs'"), '.cjs appartiene al gemello CTS');
+  assert.ok(importSpecifierRe('safeTruncate.tsx').test("from './shared/safeTruncate.jsx'"));
+  assert.ok(importSpecifierRe('safeTruncate.mts').test("from './shared/safeTruncate.mjs'"));
+  assert.ok(importSpecifierRe('safeTruncate.cts').test("from './shared/safeTruncate.cjs'"));
 
   // La coda ammessa non e\u2019 un jolly: un file OMONIMO con un\u2019altra
   // estensione resta un altro file, e la prosa resta prosa.
   assert.ok(!re.test("from './shared/safeTruncate.json'"), 'un\u2019estensione non compilata non e\u2019 questo file');
   assert.ok(!re.test("from './shared/safeTruncateOther.js'"), 'lo stem deve finire dove finisce lo specificatore');
   assert.ok(!re.test("from 'safeTruncate.js'"), 'senza separatore e\u2019 un pacchetto');
+});
+
+test('importSpecifierRe non accoppia un import senza estensione ai gemelli omonimi', () => {
+  const ts = importSpecifierRe('viteAssetHashRx.ts');
+  const mjs = importSpecifierRe('viteAssetHashRx.mjs');
+  assert.ok(ts.test("from './shared/viteAssetHashRx'"), 'la forma TypeScript senza estensione resta ammessa');
+  assert.ok(!mjs.test("from './shared/viteAssetHashRx'"), 'la forma senza estensione non può scegliere il gemello .mjs');
+  assert.ok(mjs.test("from './shared/viteAssetHashRx.mjs'"));
+
+  const manifest = JSON.parse(fs.readFileSync(path.join(ROOT, 'scripts/ci/loop-sync-manifest.json'), 'utf8'));
+  const modeOf = new Map(manifest.files.map((e) => [e.path, e.mode]));
+  const tsCouplings = localCouplings('host/shared/viteAssetHashRx.ts', modeOf);
+  const mjsCouplings = localCouplings('host/shared/viteAssetHashRx.mjs', modeOf);
+  assert.ok(
+    tsCouplings.some((c) => c.path === 'host/shared/chunkFiles.ts'),
+    'chunkFiles.ts importa il gemello TypeScript senza estensione',
+  );
+  assert.ok(
+    !mjsCouplings.some((c) => c.path === 'host/shared/chunkFiles.ts'),
+    'lo stesso import senza estensione non deve accoppiare anche il gemello .mjs',
+  );
 });
 
 test("l\u2019apostrofo italiano non apre piu\u2019 la classe di virgolette (#934 item 2)", () => {

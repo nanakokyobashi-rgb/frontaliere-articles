@@ -94,7 +94,7 @@ const JSON_OUT = process.argv.includes('--json');
  * @param {{files?: Array<object>}} baseManifest  manifest al commit di base
  *   (null se il file non esisteva: tutto e' nuovo).
  * @param {{files?: Array<object>}} headManifest  manifest nel head della PR.
- * @returns {Array<{path: string, sitePath: string, side: 'site'|'corpus', hash: string, previous: string|null}>}
+ * @returns {Array<{path: string, sitePath: string, side: 'site'|'corpus', hash: string, previous: string|null, forcedAt?: string}>}
  */
 export function changedBaselines(baseManifest, headManifest) {
   const before = new Map();
@@ -107,13 +107,15 @@ export function changedBaselines(baseManifest, headManifest) {
       const hash = now[side];
       if (hash == null) continue;
       if (prev[side] === hash) continue;
-      out.push({
+      const change = {
         path: entry.path,
         sitePath: entry.sitePath || entry.path,
         side,
         hash,
         previous: prev[side] ?? null,
-      });
+      };
+      if (now.forcedAt) change.forcedAt = now.forcedAt;
+      out.push(change);
     }
   }
   return out;
@@ -136,15 +138,17 @@ export function changedBaselines(baseManifest, headManifest) {
  * @param {boolean|undefined} a.historyReadable   false se tutti i fetch storici
  *   hanno risposto 404, per esempio dopo una rinomina.
  * @param {boolean} [a.networkError]    il walk non e' stato possibile.
+ * @param {string} [a.forcedAt]         traccia di `--init --force`, se presente.
  * @returns {{status: 'ok'|'reject'|'warn', reason: string}}
  */
-export function gateVerdict({ side, baselineHash, currentHash, historyMatch, historyExhausted, historyReadable, networkError = false }) {
+export function gateVerdict({ side, baselineHash, currentHash, historyMatch, historyExhausted, historyReadable, networkError = false, forcedAt = null }) {
+  const trace = forcedAt ? ` (baseline registrata con --force; forcedAt=${forcedAt})` : '';
   const verdict = ghostVerdict({ baselineHash, currentHash, historyMatch, historyExhausted, historyReadable });
   if (verdict.ghost) {
-    return { status: 'reject', reason: 'fantasma: non trovata in TUTTA la storia disponibile di quel lato' };
+    return { status: 'reject', reason: `fantasma: non trovata in TUTTA la storia disponibile di quel lato${trace}` };
   }
-  if (verdict.matchedAt === 'current') return { status: 'ok', reason: 'combacia col contenuto attuale' };
-  if (verdict.matchedAt === 'history') return { status: 'ok', reason: 'trovata nella storia di quel lato' };
+  if (verdict.matchedAt === 'current') return { status: 'ok', reason: `combacia col contenuto attuale${trace}` };
+  if (verdict.matchedAt === 'history') return { status: 'ok', reason: `trovata nella storia di quel lato${trace}` };
   // Resta il non-verificato: storia non esaurita (`unresolved`) o walk non
   // eseguito (rete). Il cron passa oltre in entrambi i casi per non produrre
   // falsi rossi ricorrenti; in PR il lato corpus ha un rimedio deterministico,
@@ -152,7 +156,7 @@ export function gateVerdict({ side, baselineHash, currentHash, historyMatch, his
   const reason = networkError
     ? 'non verificabile: la storia di quel lato non e\' stata leggibile'
     : 'non verificabile: la storia esaminata non e\' tutta quella disponibile';
-  return { status: side === 'corpus' ? 'reject' : 'warn', reason };
+  return { status: side === 'corpus' ? 'reject' : 'warn', reason: `${reason}${trace}` };
 }
 
 /** Il manifest al commit di base: da git se c'e', altrimenti da raw. */
@@ -260,7 +264,7 @@ async function verifyOne(change) {
   return {
     ...change,
     filePath,
-    ...gateVerdict({ side: change.side, baselineHash: change.hash, currentHash, historyMatch, historyExhausted, historyReadable, networkError }),
+    ...gateVerdict({ side: change.side, baselineHash: change.hash, currentHash, historyMatch, historyExhausted, historyReadable, networkError, forcedAt: change.forcedAt }),
   };
 }
 
@@ -290,7 +294,9 @@ async function main() {
           `  node scripts/ci/loop-drift-check.mjs --init --only ${rejected.map((r) => r.path).join(',')}\n` +
           'che scrive `now` per le sole voci indicate (issue #653). Se il valore giusto NON e\' `now` — una\n' +
           'baseline riparata col blob a cui quel lato era davvero allineato ad `alignedAt` — deve comunque\n' +
-          'esistere nella storia di quel lato: se non ci compare, non e\' mai esistito.',
+          'esistere nella storia di quel lato: se non ci compare, non e\' mai esistito. Se il drift check\n' +
+          'segnala una `ghost-baseline` mentre il drift e\' il caso che stai chiudendo tu, usa `--force`\n' +
+          'solo insieme a `--only`: la baseline scritta conservera\' `forcedAt` come traccia dell\'atto.',
       );
     }
   }
