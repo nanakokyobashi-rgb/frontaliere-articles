@@ -607,9 +607,7 @@ export function redeliveryDecision({ decision, deliveredUrl, deliveredIssue } = 
   if (!url) {
     return { skip: false, close: false, reason: 'nessuna consegna precedente per questa issue' };
   }
-  const state = String(delivery?.state || '').toUpperCase();
-  const stateReason = String(delivery?.stateReason || '').toUpperCase().replace(/[\s-]+/g, '_');
-  if (state === 'CLOSED' && stateReason === 'NOT_PLANNED') {
+  if (isClosedNotPlanned(delivery)) {
     return {
       skip: false,
       close: false,
@@ -734,7 +732,20 @@ export function bodyCitesOrigin(body, origin) {
 }
 
 export function selectDeliveredIssue(entries, origin) {
-  return (Array.isArray(entries) ? entries : []).find((entry) => bodyCitesOrigin(entry?.body, origin)) || null;
+  const matches = (Array.isArray(entries) ? entries : [])
+    .filter((entry) => bodyCitesOrigin(entry?.body, origin));
+  // Se una consegna viva coesiste con un vecchio gemello `not planned`, la
+  // destinazione viva è quella che il dedup deve riconoscere.
+  return matches.find((entry) => String(entry?.state || '').toUpperCase() !== 'CLOSED')
+    || matches.find((entry) => !isClosedNotPlanned(entry))
+    || matches[0]
+    || null;
+}
+
+function isClosedNotPlanned(delivery) {
+  const state = String(delivery?.state || '').toUpperCase();
+  const stateReason = String(delivery?.stateReason || '').toUpperCase().replace(/[\s-]+/g, '_');
+  return state === 'CLOSED' && stateReason === 'NOT_PLANNED';
 }
 
 function deliveredUrlFor(token) {
@@ -743,14 +754,11 @@ function deliveredUrlFor(token) {
     const existing = gh(['issue', 'list', '--repo', SITE_REPO, '--state', 'all',
       '--search', `"${originUrl()}" in:body`, '--json', 'number,url,body,state,stateReason', '--limit', '5'], { token });
     const match = selectDeliveredIssue(existing, originUrl());
-    const state = String(match?.state || '').toUpperCase();
-    const stateReason = String(match?.stateReason || '').toUpperCase().replace(/[\s-]+/g, '_');
-    if (state === 'CLOSED' && stateReason === 'NOT_PLANNED') return null;
     return match ? {
       number: match.number,
       url: String(match.url || ''),
-      state,
-      stateReason,
+      state: String(match.state || ''),
+      stateReason: String(match.stateReason || ''),
     } : null;
   } catch {
     return null;
@@ -826,7 +834,7 @@ function main() {
   const origin = originUrl();
   // Dedup PRIMA di aprire.
   const existing = deliveredUrlFor(token);
-  if (existing?.url) {
+  if (existing?.url && !isClosedNotPlanned(existing)) {
     console.log(`handoff-to-site: #${ISSUE} già consegnata → ${existing.url}. Niente doppioni.`);
     // Ma lo STATO sì: se siamo di nuovo qui, il drainer ha ri-promosso la
     // issue, cioè le label di routing ci sono ancora — la transizione del

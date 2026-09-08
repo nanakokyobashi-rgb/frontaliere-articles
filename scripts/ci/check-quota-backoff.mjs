@@ -223,9 +223,9 @@ function commentsOf(num, scope = repoArgs) {
  * @returns {{resetsAt:number, issue:number}|null}
  */
 function activeBeaconIn(scope, nowMs, nowSec) {
-  // Le issue con label di coda sono la fonte primaria: le PR vengono solo
-  // aggiunte nello spazio rimasto, altrimenti una raffica di PR aggiornate può
-  // occupare tutti i MAX_ISSUES e rendere cieco il pre-flight ai beacon reali.
+  // Manteniamo un tetto separato per issue e PR: un pool unico può affamare le
+  // PR con una coda di issue, oppure le issue con una raffica di PR aggiornate.
+  // Entrambe le sorgenti sono quindi sempre sondate, ma in modo bounded.
   const opts = { now: nowMs, lookbackH: LOOKBACK_H, max: MAX_ISSUES };
   const issueCandidates = beaconCandidates([
     listIssues(LBL_FIX, scope),
@@ -235,8 +235,7 @@ function activeBeaconIn(scope, nowMs, nowSec) {
   ], opts);
   const prCandidates = beaconCandidates([listPullRequests(scope)], opts);
   const candidates = [...issueCandidates, ...prCandidates]
-    .filter((num, i, all) => all.indexOf(num) === i)
-    .slice(0, MAX_ISSUES);
+    .filter((num, i, all) => all.indexOf(num) === i);
   for (const num of candidates) {
     const r = maxQuotaResetsAt(commentsOf(num, scope));
     if (r !== null && isBackoffActive(r, nowSec)) return { resetsAt: r, issue: num };

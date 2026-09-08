@@ -147,6 +147,12 @@ test('il rimborso posta l`handle PRIMA di cancellare il marker', () => {
   assert.doesNotMatch(formatRefundAttemptComment({
     round: 1, workflow: 'pr-fixer', resetsAt: null, rateLimitType: null, runUrl: '', marker: 'REDCHECK_FIX_ROUND',
   }), /marker rimosso|rimborsato|REDCHECK_FIX_REFUNDED|QUOTA_RESETS_AT/);
+  assert.match(formatRefundAttemptComment({
+    round: 1, workflow: 'pr-fixer', resetsAt: 1788624000, rateLimitType: null, runUrl: '', marker: 'REDCHECK_FIX_ROUND',
+  }), /<!-- QUOTA_RESETS_AT: 1788624000 -->/);
+  assert.doesNotMatch(formatRefundAttemptComment({
+    round: 1, workflow: 'pr-fixer', resetsAt: 1788624000, rateLimitType: null, runUrl: '', marker: 'REDCHECK_FIX_ROUND',
+  }), /REDCHECK_FIX_REFUNDED/);
 });
 
 for (const { file, marker } of FIXERS) {

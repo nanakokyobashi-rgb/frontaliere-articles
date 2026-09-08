@@ -170,9 +170,11 @@ export function detectClaudeRateLimit(raw) {
   if (!rateLimited && msgs.length === 0) {
     const text = String(raw || '');
     // `gh run view --log-failed` può includere più step della stessa run: un
-    // 429 di un'API estranea non è prova che Claude sia morto per quota.
-    const hasClaudeMarker = /\b(?:claude|anthropic)\b/i.test(text);
-    if (hasClaudeMarker && /(?:http\s*)?429\b/i.test(text) && /rate[ _-]?limit|too many requests|api_error_status/i.test(text)) {
+    // 429 generico di un'API estranea non è prova che Claude sia morto per
+    // quota. I marker dell'action sono la firma verificabile disponibile anche
+    // quando il nome dello step non contiene la parola «Claude».
+    const hasActionMarker = /\b(?:api_error_status|rate_limit_event|rateLimitType)\b/i.test(text);
+    if (hasActionMarker && /(?:http\s*)?429\b/i.test(text) && /rate[ _-]?limit|too many requests|api_error_status/i.test(text)) {
       rateLimited = true;
     }
     const reset = text.match(/(?:resetsAt|reset(?:s)?[_ -]?at)\s*["'=:\s]+(\d{9,13})/i);

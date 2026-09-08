@@ -36,4 +36,6 @@ test('#984: le issue hanno priorità sulle PR nel tetto dei candidati', () => {
   assert.match(src, /const issueCandidates = beaconCandidates\(\[/);
   assert.match(src, /const prCandidates = beaconCandidates\(\[listPullRequests\(scope\)\], opts\)/);
   assert.match(src, /const candidates = \[\.\.\.issueCandidates, \.\.\.prCandidates\]/);
+  assert.doesNotMatch(src, /slice\(0, MAX_ISSUES\)/,
+    'un tetto unico dopo la concatenazione farebbe affamare la seconda sorgente');
 });

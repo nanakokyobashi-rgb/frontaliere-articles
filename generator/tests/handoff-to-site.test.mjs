@@ -522,12 +522,21 @@ test('#972: il dedup ripara lo stato invece di uscire', async () => {
 test('#1184: la consegna chiusa not planned non resta un dedup terminale', async () => {
   const fs = await import('node:fs');
   const src = fs.readFileSync(new URL('../../scripts/ci/handoff-to-site.mjs', import.meta.url), 'utf8');
-  const at = src.indexOf("const stateReason = String(match?.stateReason || '').toUpperCase()");
-  assert.ok(at > 0, 'deliveredUrlFor deve leggere lo stato della destinazione');
-  const delivered = src.slice(at, at + 400);
+  const at = src.indexOf('function isClosedNotPlanned(delivery)');
+  assert.ok(at > 0, 'il predicato di stato della destinazione deve essere condiviso');
+  const delivered = src.slice(at, at + 500);
   assert.match(delivered, /state === 'CLOSED'/);
   assert.match(delivered, /stateReason === 'NOT_PLANNED'/);
-  assert.match(delivered, /return null/);
+  assert.match(delivered, /return state === 'CLOSED' && stateReason === 'NOT_PLANNED'/);
+  assert.match(src, /if \(existing\?\.url && !isClosedNotPlanned\(existing\)\)/,
+    'il post-step non deve rideduplicare una destinazione chiusa not planned');
+});
+
+test('#1184: una consegna aperta precede un vecchio gemello not planned', () => {
+  const origin = 'https://github.com/o/r/issues/4';
+  const closed = { number: 40, state: 'CLOSED', stateReason: 'NOT_PLANNED', body: origin };
+  const open = { number: 41, state: 'OPEN', body: origin };
+  assert.equal(selectDeliveredIssue([closed, open], origin), open);
 });
 
 // --- #972 item 4: `identical` non implica «trasportato» ---------------------
