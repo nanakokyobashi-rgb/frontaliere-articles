@@ -40,6 +40,25 @@ test('separa nel keyspace due eventi distinti con lo stesso titolo e riusa ciasc
   assert.equal(second[1].titleByLocale.en, 'traduzione-2');
 });
 
+test('un marker nella vecchia cache non riunisce eventi omonimi durante la migrazione', async () => {
+  let calls = 0;
+  const cache = { 'title::it::locarno film festival': { en: 'Null' } };
+  const out = await enrichEventsWithLocaleFallbackTranslations(
+    [event('guidle:one'), event('guidle:two')],
+    cache,
+    {
+      locales: ['it', 'en'],
+      delayMs: 0,
+      translateFn: async () => `traduzione-migrata-${++calls}`,
+    },
+  );
+
+  assert.equal(calls, 2, 'il marker legacy non è una traduzione condivisibile');
+  assert.equal(out[0].titleByLocale.en, 'traduzione-migrata-1');
+  assert.equal(out[1].titleByLocale.en, 'traduzione-migrata-2');
+  assert.equal(cache['title::it::locarno film festival'].en, 'traduzione-migrata-1');
+});
+
 test('memoizza il passthrough legittimo del titolo e non ripaga la cascata al secondo giro', async () => {
   const cache = {};
   const first = await enrichEventsWithLocaleFallbackTranslations(

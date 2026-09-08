@@ -1086,6 +1086,10 @@ function eventTranslationCacheKey({ eventId, fieldType, sourceLocale, normalized
   return JSON.stringify([fieldType, eventId, sourceLocale, normalizedSource]);
 }
 
+function legacyEventTranslationCacheKey({ fieldType, sourceLocale, normalizedSource }) {
+  return `${fieldType}::${sourceLocale}::${normalizedSource}`;
+}
+
 function wordCount(text) {
   return String(text ?? '').trim() ? String(text).trim().split(/\s+/).length : 0;
 }
@@ -1145,6 +1149,8 @@ async function fillLocaleGaps(byLocale, cache, { eventId, fieldType, locales, de
     if (target === sourceLocale) continue;
     const cacheKey = eventTranslationCacheKey({ eventId, fieldType, sourceLocale, normalizedSource });
     const entry = cache[cacheKey] || {};
+    const legacyCacheKey = legacyEventTranslationCacheKey({ fieldType, sourceLocale, normalizedSource });
+    const legacyEntry = cache[legacyCacheKey];
     if (Object.prototype.hasOwnProperty.call(entry, target)) {
       const memo = entry[target];
       if (memo === null) continue; // stable passthrough memo, no network retry
@@ -1163,6 +1169,19 @@ async function fillLocaleGaps(byLocale, cache, { eventId, fieldType, locales, de
     });
     if (hasUsableContentText(translated)) {
       cache[cacheKey] = { ...entry, [target]: translated };
+      // Old caches were keyed only by source text. Never read those values:
+      // doing so would merge distinct events with the same title. Clean up a
+      // stale marker there as a one-way migration, though, so existing cache
+      // files do not keep poisoned values forever and older callers/tests keep
+      // seeing the marker replaced. New reads remain event-scoped above.
+      if (
+        legacyEntry
+        && typeof legacyEntry === 'object'
+        && Object.prototype.hasOwnProperty.call(legacyEntry, target)
+        && !hasUsableContentText(legacyEntry[target])
+      ) {
+        cache[legacyCacheKey] = { ...legacyEntry, [target]: translated };
+      }
       updated[target] = translated;
       if (translateFn === freeTranslateWithRetry) {
         await sleep(delayMs);
