@@ -274,9 +274,12 @@ test("lo specificatore NodeNext con l\u2019estensione compilata resta visibile (
   // CONVENZIONE, e il giorno dell\u2019adozione nulla sarebbe diventato rosso.
   const re = importSpecifierRe('safeTruncate.ts');
   assert.ok(re.test("import { truncateCodeUnits } from './shared/safeTruncate.js';"));
-  assert.ok(re.test('from "../../host/shared/safeTruncate.mjs"'));
-  assert.ok(re.test("from '@/shared/safeTruncate.jsx'"));
-  assert.ok(re.test("from './shared/safeTruncate.cjs'"));
+  assert.ok(!re.test('from "../../host/shared/safeTruncate.mjs"'), '.mjs appartiene al gemello ESM');
+  assert.ok(!re.test("from '@/shared/safeTruncate.jsx'"), '.jsx appartiene al gemello TSX');
+  assert.ok(!re.test("from './shared/safeTruncate.cjs'"), '.cjs appartiene al gemello CTS');
+  assert.ok(importSpecifierRe('safeTruncate.tsx').test("from './shared/safeTruncate.jsx'"));
+  assert.ok(importSpecifierRe('safeTruncate.mts').test("from './shared/safeTruncate.mjs'"));
+  assert.ok(importSpecifierRe('safeTruncate.cts').test("from './shared/safeTruncate.cjs'"));
 
   // La coda ammessa non e\u2019 un jolly: un file OMONIMO con un\u2019altra
   // estensione resta un altro file, e la prosa resta prosa.

@@ -981,11 +981,16 @@ export function importSpecifierRe(base) {
   const extension = base.slice(stem.length);
   // L'assenza di estensione è una convenzione TypeScript, non una proprietà
   // del basename: per `.mjs`/`.js` accettiamo solo la forma esplicita, mentre
-  // per i sorgenti TS enumera le quattro estensioni compilate ammesse più la
+  // per i sorgenti TS enumera la coda valida per ciascuna estensione più la
   // forma senza estensione. Così `viteAssetHashRx.mjs` non cattura l'import
   // `./viteAssetHashRx` che appartiene alla voce `.ts` omonima.
-  const typeScript = new Set(['.ts', '.tsx', '.mts', '.cts']).has(extension);
-  const suffixes = typeScript ? ['', '.js', '.jsx', '.mjs', '.cjs'] : [extension];
+  const suffixesByExtension = {
+    '.ts': ['', '.js'],
+    '.tsx': ['', '.js', '.jsx'],
+    '.mts': ['', '.mjs'],
+    '.cts': ['', '.cjs'],
+  };
+  const suffixes = suffixesByExtension[extension] || [extension];
   const suffixPattern = suffixes
     .map((suffix) => suffix.replace('.', '\\.'))
     .join('|');

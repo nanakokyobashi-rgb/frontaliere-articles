@@ -87,6 +87,18 @@ test('`main()` lo restituisce sui blocchi permanenti, non un 0', () => {
   );
 });
 
+test('fast-publish salta il purge mirato quando la lista URL è vuota', () => {
+  const yml = read('.github/workflows/fast-publish-article.yml');
+  const first = yml.indexOf('name: Purge the edge cache for what was published');
+  const second = yml.indexOf('WHY A SECOND PURGE');
+  assert.notEqual(first, -1);
+  assert.notEqual(second, -1);
+  const firstBlock = yml.slice(first, second);
+  const secondBlock = yml.slice(second);
+  assert.match(firstBlock, /if \[ "\$\{#urls\[@\]\}" -eq 0 \]/);
+  assert.match(secondBlock, /if \[ "\$\{#urls\[@\]\}" -eq 0 \]/);
+});
+
 test('un `stable` bloccato per sempre NON alza il rosso', () => {
   // I 25 gemelli sotto `.github/workflows/` sono bloccati per costruzione (il
   // token del ciclo non ha lo scope `workflows`) e non devono niente a nessuno.

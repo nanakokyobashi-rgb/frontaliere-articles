@@ -982,7 +982,29 @@ async function siteBlobIndex() {
 }
 
 /** Rilegge il blob autorevole del tree, non la risposta raw/CDN. */
-async function siteGitBlob(blobSha, { sitePath, refSha } = {}) {
+let siteCommitShaPromise;
+
+/** SHA del commit risolto dal ref, necessario per il fallback dei blob grandi. */
+async function siteRefCommitSha() {
+  if (!siteCommitShaPromise) {
+    siteCommitShaPromise = (async () => {
+      try {
+        const res = await rawFetch(
+          `https://api.github.com/repos/${SITE_REPO}/commits/${encodeURIComponent(SITE_REF)}`,
+          { Accept: 'application/vnd.github+json' },
+        );
+        if (!res.ok) return null;
+        const payload = await res.json();
+        return typeof payload?.sha === 'string' ? payload.sha : null;
+      } catch {
+        return null;
+      }
+    })();
+  }
+  return siteCommitShaPromise;
+}
+
+async function siteGitBlob(blobSha, { sitePath } = {}) {
   const url = `https://api.github.com/repos/${SITE_REPO}/git/blobs/${blobSha}`;
   try {
     const res = await rawFetch(url, { Accept: 'application/vnd.github+json' });
@@ -992,10 +1014,13 @@ async function siteGitBlob(blobSha, { sitePath, refSha } = {}) {
       return Buffer.from(payload.content, 'base64');
     }
     // GitHub risponde `encoding: none` senza contenuto per blob grandi. Il ref
-    // della risposta tree è immutabile: il raw a quel ref è una seconda lettura
-    // autorevole, e il chiamante ricontrolla comunque il blob SHA-1.
-    if (payload?.encoding !== 'none' || !sitePath || !refSha) return null;
-    const immutable = await rawFetch(`https://raw.githubusercontent.com/${SITE_REPO}/${refSha}/${sitePath}`);
+    // va prima risolto a un COMMIT SHA: il tree SHA dell'inventario non e' un
+    // commit-ish accettato da raw.githubusercontent. Il chiamante ricontrolla
+    // comunque il blob SHA-1 dei byte riletti.
+    if (payload?.encoding !== 'none' || !sitePath) return null;
+    const commitSha = await siteRefCommitSha();
+    if (!commitSha) return null;
+    const immutable = await rawFetch(`https://raw.githubusercontent.com/${SITE_REPO}/${commitSha}/${sitePath}`);
     if (!immutable.ok) return null;
     return Buffer.from(await immutable.arrayBuffer());
   } catch {
@@ -1029,7 +1054,7 @@ async function initInventoryVerdict({ siteBytes, sitePath, inventory, refresh })
     return { paths: null, status: 'ref-moved' };
   }
 
-  const authoritative = await siteGitBlob(treeSha, { sitePath, refSha: inventory.treeSha });
+  const authoritative = await siteGitBlob(treeSha, { sitePath });
   if (!authoritative || gitBlobSha(authoritative) !== treeSha) {
     return { paths: null, status: 'unavailable' };
   }

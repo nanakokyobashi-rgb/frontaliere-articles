@@ -59,6 +59,15 @@ test('changedBaselines: `sitePath` viaggia con la voce, per il walk sul lato sit
   assert.equal(changedBaselines(null, head)[0].sitePath, 'tests/a.test.ts');
 });
 
+test('changedBaselines e gateVerdict leggono la traccia `forcedAt`', () => {
+  const forcedAt = '2026-09-08T12:34:56.000Z';
+  const base = { files: [entry('a.mjs', { site: 'aaaa' })] };
+  const head = { files: [entry('a.mjs', { site: 'bbbb', forcedAt })] };
+  assert.equal(changedBaselines(base, head)[0].forcedAt, forcedAt);
+  const verdict = gateVerdict({ side: 'site', baselineHash: 'bbbb', currentHash: 'bbbb', forcedAt });
+  assert.ok(verdict.reason.includes(`forcedAt=${forcedAt}`));
+});
+
 test('gateVerdict: combacia col contenuto attuale → ok, senza rete', () => {
   for (const side of ['site', 'corpus']) {
     const v = gateVerdict({ side, baselineHash: 'aaaa', currentHash: 'aaaa' });
