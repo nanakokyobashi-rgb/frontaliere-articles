@@ -1,5 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/attualita/1943719/uzwil-acqua-siccita-piscina-svizzera": "chiusura-piscina-uzwil-siccita",
   "https://www.tio.ch/ticino/attualita/1943804/siccita-grado-acqua-limitazioni-claro": "siccita-claro-2026",
   "https://www.tio.ch/svizzera/attualita/1943523/federale-consiglio-situazione-rosti-caldo-misure-essere-siccita": "caldo-e-siccita-senza-modalita-di-crisi",
   "https://www.tio.ch/svizzera/attualita/1943694/svizzera-caldo-scuola-rientro-qualita": "rientro-scuola-calor",
@@ -2161,6 +2160,11 @@
   "https://www.tvsvizzera.it/tvs/qui-svizzera/novartis-crolla-del-10-in-borsa-pesano-studi-su-nuovi-preparati/92022806": {
     "articleId": "novartis-giornata-nera",
     "ts": "2026-09-08T20:53:48.139Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/politica/1948825/washington-f-35a-berna-concordato-prezzo": {
+    "articleId": "f35a-prezzo-fisso-non-concordato",
+    "ts": "2026-09-08T21:22:31.064Z",
     "keyForm": 2
   }
 }
