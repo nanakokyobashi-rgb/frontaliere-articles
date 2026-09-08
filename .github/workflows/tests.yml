@@ -302,7 +302,9 @@ jobs:
           # → niente drift.
           fpHead=$(node scripts/ci/pr-contribution-fingerprint.mjs "$HEAD_SHA" 2>/dev/null || echo NULL)
           fpLast=$(node scripts/ci/pr-contribution-fingerprint.mjs "$last" 2>/dev/null || echo NULL)
-          if [ -n "$fpHead" ] && [ "$fpHead" != "NULL" ] && [ "$fpHead" = "$fpLast" ]; then
+          if [ -n "$fpHead" ] && [ "$fpHead" != "NULL" ] \
+             && [ -n "$fpLast" ] && [ "$fpLast" != "NULL" ] \
+             && [ "$fpHead" = "$fpLast" ]; then
             echo "skip=true" >> "$GITHUB_OUTPUT"
             echo "Contributo CODE invariato dall'ultima LGTM (fingerprint $fpHead) → skip Claude."
           else

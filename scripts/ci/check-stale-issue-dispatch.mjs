@@ -74,8 +74,13 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-/** Marker di questo gate: rende il commento idempotente fra run ripetute. */
+/** Marker legacy: resta riconosciuto per non duplicare commenti gia' postati. */
 export const GATE_MARKER = '<!-- stale-dispatch-gate -->';
+export const GATE_MARKER_PREFIX = '<!-- stale-dispatch-gate';
+export const GATE_MARKER_FOR = {
+  fix: '<!-- stale-dispatch-gate:fix -->',
+  decompose: '<!-- stale-dispatch-gate:decompose -->',
+};
 
 /**
  * Telemetria per fase E PER RAGIONE, mai solo per fase: il marker e' letto come
@@ -89,12 +94,10 @@ export const GATE_MARKER = '<!-- stale-dispatch-gate -->';
  *    per il proprio mutex. Entrambi sono esclusi apposta da `NON_RETRYABLE`.
  *  - `decompose` parla il vocabolario chiuso di `issue-decompose.yml`
  *    (`decomposed-K` · `atomic-requeue` · `needs-human-decision` ·
- *    `already-resolved`). `already-decomposed` E' `already-resolved`: le
- *    sub-issue esistono. Il ramo `dispatch-label-gone` non ha un codice
- *    corrispondente e non ne inventa uno: la label consumata non prova che la
- *    decomposizione sia avvenuta, quindi il commento si posta SENZA verdetto e
- *    il padre resta senza marker — che e' lo stato vero, e quello su cui il
- *    rescue del drainer sa gia' lavorare.
+ *    `already-resolved` · `stale-dispatch`). `already-decomposed` E'
+ *    `already-resolved`: le sub-issue esistono. `stale-dispatch` dichiara
+ *    invece il solo fatto osservato dal gate: la label era gia' stata consumata,
+ *    ma non c'e' prova che la decomposizione sia arrivata al checkpoint.
  */
 export const OUTCOME_MARKER = {
   fix: {
@@ -103,6 +106,7 @@ export const OUTCOME_MARKER = {
   },
   decompose: {
     'already-decomposed': '<!-- DECOMPOSE_OUTCOME: already-resolved -->',
+    'dispatch-label-gone': '<!-- DECOMPOSE_OUTCOME: stale-dispatch -->',
   },
 };
 
@@ -111,6 +115,26 @@ export const OUTCOME_MARKER_RE = {
   fix: /<!--\s*FIX_OUTCOME:\s*[a-z0-9-]+\s*-->/i,
   decompose: /<!--\s*DECOMPOSE_OUTCOME:\s*[a-z0-9-]+\s*-->/i,
 };
+
+function stripOutcomeNoise(body) {
+  const lines = String(body || '').split(/\r?\n/);
+  let fenced = false;
+  const visible = [];
+  for (const line of lines) {
+    if (/^\s*(```|~~~)/.test(line)) {
+      fenced = !fenced;
+      continue;
+    }
+    if (fenced || /^\s*>/.test(line)) {
+      visible.push('');
+      continue;
+    }
+    visible.push(line
+      .replace(/`[^`\n]*`/g, '')
+      .replace(/«[^»\n]*»/g, ''));
+  }
+  return visible.join('\n');
+}
 
 /**
  * Perche' il commento del gate NON va postato, o `null` se va postato.
@@ -136,14 +160,41 @@ export const OUTCOME_MARKER_RE = {
  * @param {'fix'|'decompose'} stage
  * @returns {'gate-already-commented'|'verdict-already-present'|null}
  */
-export function gateCommentBlocked(comments, stage) {
+export function gateCommentBlocked(comments, stage, { lastLabelEventAt = null } = {}) {
   const re = OUTCOME_MARKER_RE[stage];
+  const cutoff = typeof lastLabelEventAt === 'number'
+    ? lastLabelEventAt
+    : Date.parse(String(lastLabelEventAt || ''));
+  const hasCutoff = Number.isFinite(cutoff);
   for (const c of comments || []) {
+    if (hasCutoff) {
+      const at = Date.parse(String(c?.createdAt || c?.created_at || ''));
+      // An unreadable timestamp is retained conservatively; a readable old
+      // comment belongs to the previous dispatch cycle and cannot block this
+      // one. The API normally supplies `createdAt` in the issue view.
+      if (Number.isFinite(at) && at < cutoff) continue;
+    }
     const body = String((c && c.body) || '');
-    if (body.includes(GATE_MARKER)) return 'gate-already-commented';
-    if (re && re.test(body)) return 'verdict-already-present';
+    if (body.includes(GATE_MARKER_FOR[stage])
+      || (body.includes(GATE_MARKER_PREFIX) && body.includes(GATE_MARKER))) {
+      return 'gate-already-commented';
+    }
+    if (re && re.test(stripOutcomeNoise(body))) return 'verdict-already-present';
   }
   return null;
+}
+
+/** Ultimo evento `labeled` per la label di dispatch, o null se illeggibile. */
+export function latestDispatchLabelEventAt(events, label) {
+  if (!Array.isArray(events) || !label) return null;
+  const flat = events.flatMap((page) => Array.isArray(page) ? page : [page]);
+  let latest = -Infinity;
+  for (const event of flat) {
+    if (event?.event !== 'labeled' || event?.label?.name !== label) continue;
+    const at = Date.parse(String(event.created_at || event.createdAt || ''));
+    if (Number.isFinite(at) && at > latest) latest = at;
+  }
+  return Number.isFinite(latest) ? new Date(latest).toISOString() : null;
 }
 
 /**
@@ -224,6 +275,17 @@ function main() {
   } catch { iss = null; }
   const labels = iss && Array.isArray(iss.labels) ? iss.labels.map((l) => l.name) : null;
 
+  let lastLabelEventAt = null;
+  if (process.env.DISPATCH_LABEL) {
+    try {
+      const events = JSON.parse(
+        gh(['api', `repos/${process.env.GH_REPO || ''}/issues/${ISSUE}/timeline`,
+          '--paginate', '--slurp']) || '[]',
+      );
+      lastLabelEventAt = latestDispatchLabelEventAt(events, process.env.DISPATCH_LABEL);
+    } catch { lastLabelEventAt = null; }
+  }
+
   let openPrs = null;
   if (STAGE === 'fix') {
     try {
@@ -253,12 +315,12 @@ function main() {
   // Il corto-circuito e' gia' deciso: quel che segue riguarda solo se lasciare
   // un commento. Non postare non cambia il gate, postare sopra un verdetto si'.
   const comments = iss && Array.isArray(iss.comments) ? iss.comments : [];
-  const blocked = gateCommentBlocked(comments, STAGE);
+  const blocked = gateCommentBlocked(comments, STAGE, { lastLabelEventAt });
   if (blocked) {
     console.log(`Nessun commento (${blocked}): il segnale sulla issue resta quello che c'e' gia'.`);
   } else if (!DRY_RUN) {
     const marker = (OUTCOME_MARKER[STAGE] || {})[reason.code] || '';
-    const body = `${GATE_MARKER}
+    const body = `${GATE_MARKER_FOR[STAGE] || GATE_MARKER}
 ⏭️ **Pre-flight (auto, zero-Claude)**: questa run e' partita da un evento ormai **stantio** — ${reason.detail}. Con la chiave di concorrenza per-issue (#908) il secondo evento sulla stessa issue non muore piu' sfrattato: aspetta il primo e poi **esegue**, con il payload catturato prima. Salto il run Claude per non ri-fare (o disfare) lavoro gia' consegnato sulla quota condivisa.${marker ? `\n\n${marker}` : ''}`;
     gh(['issue', 'comment', ISSUE, ...repoArgs, '--body', body]);
   }
