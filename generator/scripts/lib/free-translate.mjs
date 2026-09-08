@@ -1429,6 +1429,9 @@ export async function freeTranslate({ text, sourceLang, targetLang, fieldType = 
         noteTranslationOutcome(_outcome, 'incomplete');
         return ''; // quota hit mid-chunk, abort
       }
+      if (rejectedAsPassthrough('myMemory', chunk, mm, _outcome)) {
+        return ''; // an echoed chunk invalidates the whole assembled result
+      }
       parts.push(mm);
     }
     // `return joined` e non un confronto locale: questo e' il ramo dei testi

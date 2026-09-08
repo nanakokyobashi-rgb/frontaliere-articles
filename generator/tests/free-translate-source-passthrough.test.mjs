@@ -137,6 +137,34 @@ describe('freeTranslate — guardia «uscita == sorgente»', () => {
     assert.equal(snapshot().passthroughs - before.passthroughs, 1);
   });
 
+  test('rifiuta un eco anche nel ramo MyMemory a chunk, prima di assemblarlo', async () => {
+    const longSource = Array.from(
+      { length: 180 },
+      (_, index) => `Paragrafo ${index}: i frontalieri verificano il regime fiscale prima di attraversare il confine.`,
+    ).join('\n\n');
+    globalThis.fetch = async (url) => {
+      if (String(url).includes('api.mymemory.translated.net')) {
+        const chunk = new URL(String(url)).searchParams.get('q');
+        return {
+          ok: true,
+          json: async () => ({ responseData: { translatedText: chunk, match: 1 } }),
+        };
+      }
+      throw new Error('offline nel test');
+    };
+    const before = snapshot();
+
+    const out = await freeTranslate({
+      text: longSource,
+      sourceLang: 'it',
+      targetLang: 'en',
+      fieldType: 'description',
+    });
+
+    assert.equal(out, '');
+    assert.equal(snapshot().passthroughs - before.passthroughs, 1);
+  });
+
   test('nomina il passthrough nel sommario della cascata', async () => {
     stubCascade(IT);
     await freeTranslate({ text: IT, sourceLang: 'it', targetLang: 'fr', fieldType: 'description' });
