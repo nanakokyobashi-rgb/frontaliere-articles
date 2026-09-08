@@ -81,6 +81,15 @@ test('gateVerdict: storia troncata → il corpus rifiuta (ha un rimedio offline)
   assert.equal(gateVerdict({ ...args, side: 'site' }).status, 'warn');
 });
 
+test('gateVerdict: storia esaurita ma solo 404 → non rifiuta come baseline fantasma', () => {
+  const args = { baselineHash: 'aaaa', currentHash: 'zzzz', historyMatch: false, historyExhausted: true, historyReadable: false };
+  for (const side of ['corpus', 'site']) {
+    const v = gateVerdict({ ...args, side });
+    assert.doesNotMatch(v.reason, /fantasma/);
+    assert.equal(v.status, side === 'corpus' ? 'reject' : 'warn');
+  }
+});
+
 test('gateVerdict: errore di rete → il sito non blocca la coda di merge di questo repo', () => {
   const args = { baselineHash: 'aaaa', currentHash: null, networkError: true };
   assert.equal(gateVerdict({ ...args, side: 'site' }).status, 'warn');

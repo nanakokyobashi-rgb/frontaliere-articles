@@ -42,7 +42,7 @@
  * a chi non ha accesso, e senza controprova e' indistinguibile da un'assenza
  * vera.
  */
-export const TOKEN_SUSPECT_STATUSES = new Set([401, 403, 404]);
+export const TOKEN_SUSPECT_STATUSES = new Set([401, 403, 404, 429]);
 
 /** Vale la pena richiedere in anonimo? Solo se il token era in gioco. */
 export function needsAnonymousRetry(status, { authenticated } = {}) {
@@ -53,11 +53,50 @@ export function needsAnonymousRetry(status, { authenticated } = {}) {
  * Un fetcher per un repo PUBBLICO di un altro owner. Ritorna la `Response`
  * autorevole: quella anonima quando il token si e' rivelato un ostacolo.
  *
- * `fetchRaw.state` e' osservabile dai report — `tokenRejected` e' esattamente
- * la diagnosi che mancava quando un rosso arrivava dal client.
+ * `fetchRaw.state` e' osservabile dai report — `tokenRejected` e
+ * `tokenAccepted` sono indicizzati per owner/repo, perche' una shard privata
+ * non deve squalificare il token verso una shard diversa.
  */
+export class CrossRepoRateLimitError extends Error {
+  constructor(url, response) {
+    super(`GET ${url} → rate limit anonimo (HTTP ${response.status})`);
+    this.name = 'CrossRepoRateLimitError';
+    this.code = 'CROSS_REPO_RATE_LIMIT';
+    this.url = url;
+    this.status = response.status;
+    this.response = response;
+  }
+}
+
+function headerValue(response, name) {
+  if (typeof response?.headers?.get === 'function') return response.headers.get(name);
+  return response?.headers?.[name] ?? response?.headers?.[name.toLowerCase()] ?? null;
+}
+
+function isRateLimitResponse(response) {
+  return response?.status === 429 || (response?.status === 403 && headerValue(response, 'x-ratelimit-remaining') === '0');
+}
+
+function repositoryKey(url) {
+  let parsed;
+  try {
+    parsed = new URL(url);
+  } catch {
+    return String(url);
+  }
+  const parts = parsed.pathname.split('/').filter(Boolean);
+  if (parsed.hostname === 'raw.githubusercontent.com' && parts.length >= 2) return `${parts[0]}/${parts[1]}`.toLowerCase();
+  if (parsed.hostname === 'api.github.com' && parts[0] === 'repos' && parts.length >= 3) return `${parts[1]}/${parts[2]}`.toLowerCase();
+  return parsed.origin;
+}
+
 export function createRawFetcher({ userAgent, token, fetchImpl = fetch } = {}) {
-  const state = { authenticated: Boolean(token), tokenRejected: false, anonymousRetries: 0 };
+  const state = {
+    authenticated: Boolean(token),
+    tokenRejected: new Map(),
+    tokenAccepted: new Map(),
+    anonymousRetries: 0,
+  };
 
   const attempt = (url, authenticated, extraHeaders) => {
     const headers = { ...extraHeaders };
@@ -67,16 +106,23 @@ export function createRawFetcher({ userAgent, token, fetchImpl = fetch } = {}) {
   };
 
   const fetchRaw = async (url, extraHeaders) => {
-    const authenticated = state.authenticated && !state.tokenRejected;
+    const repo = repositoryKey(url);
+    const authenticated = state.authenticated && !state.tokenRejected.get(repo);
     const res = await attempt(url, authenticated, extraHeaders);
-    if (!needsAnonymousRetry(res.status, { authenticated })) return res;
+    if (authenticated && res.ok) {
+      state.tokenAccepted.set(repo, true);
+      return res;
+    }
+    if (!authenticated && isRateLimitResponse(res)) throw new CrossRepoRateLimitError(url, res);
+    if (state.tokenAccepted.get(repo) || !needsAnonymousRetry(res.status, { authenticated })) return res;
 
     state.anonymousRetries += 1;
     const anon = await attempt(url, false, extraHeaders);
+    if (isRateLimitResponse(anon)) throw new CrossRepoRateLimitError(url, anon);
     // Solo un anonimo che RIESCE dimostra che a rispondere era il token: un
     // 404 confermato e' un'assenza vera, e continuare a mandare il token tiene
     // il rate-limit alto per tutte le altre voci.
-    if (anon.ok) state.tokenRejected = true;
+    if (anon.ok) state.tokenRejected.set(repo, true);
     return anon;
   };
 

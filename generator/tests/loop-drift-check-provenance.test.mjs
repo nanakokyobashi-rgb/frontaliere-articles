@@ -62,6 +62,19 @@ test('mancato match ma storia NON esaurita (oltre il cap): non verificato, mai u
   assert.equal(v.unresolved, true);
 });
 
+test('storia esaurita ma tutte le revisioni hanno risposto 404: non è prova di ghost', () => {
+  const v = ghostVerdict({
+    baselineHash: 'abc123',
+    currentHash: 'def456',
+    historyMatch: false,
+    historyExhausted: true,
+    historyReadable: false,
+  });
+  assert.equal(v.ghost, false, 'un path rinominato non deve fabbricare un ghost');
+  assert.equal(v.unresolved, true);
+  assert.equal(v.historyUnreadable, true);
+});
+
 test('ricerca storica non eseguita (es. fetch fallito): non verificato, non un falso positivo di rete', () => {
   const v = ghostVerdict({ baselineHash: 'abc123', currentHash: 'def456', historyMatch: undefined, historyExhausted: undefined });
   assert.equal(v.checked, false);

@@ -508,7 +508,132 @@ export const SET_DESCRIPTORS = new Set([
  * `require` ci stanno perché un modulo importato è contenuto quanto un JSON
  * parsato: cambia sotto, e l'aspettativa del test cambia con lui.
  */
-const READ_CALLS = 'readFileSync|readFile|createReadStream|openSync|require|import';
+const READ_CALL_NAMES = new Set(['readFileSync', 'readFile', 'createReadStream', 'openSync', 'require', 'import']);
+const NON_READ_CALL_NAMES = new Set([
+  'assert', 'deepEqual', 'equal', 'ok', 'strictEqual', 'includes', 'has', 'test', 'match', 'replace',
+  'split', 'trim', 'join', 'resolve', 'basename', 'dirname', 'parse', 'URL', 'log', 'warn', 'error',
+  'map', 'filter', 'some', 'every', 'find', 'keys', 'values', 'String', 'Number', 'Boolean', 'Date',
+  'Set', 'Map', 'Promise', 'Error',
+]);
+
+/** Rimuove i commenti lasciando intatti gli indici dei literal. */
+function stripJsComments(src) {
+  let out = '';
+  let state = 'code';
+  for (let i = 0; i < src.length; i += 1) {
+    const ch = src[i];
+    const next = src[i + 1];
+    if (state === 'line-comment') {
+      if (ch === '\n') {
+        out += ch;
+        state = 'code';
+      } else out += ' ';
+      continue;
+    }
+    if (state === 'block-comment') {
+      if (ch === '*' && next === '/') {
+        out += '  ';
+        i += 1;
+      } else if (ch === '\n') out += '\n';
+      else out += ' ';
+      if (ch === '*' && next === '/') state = 'code';
+      continue;
+    }
+    if (state !== 'code') {
+      out += ch;
+      if (ch === '\\' && i + 1 < src.length) {
+        out += src[++i];
+      } else if (ch === state) state = 'code';
+      continue;
+    }
+    if (ch === '/' && next === '/') {
+      out += '  ';
+      i += 1;
+      state = 'line-comment';
+    } else if (ch === '/' && next === '*') {
+      out += '  ';
+      i += 1;
+      state = 'block-comment';
+    } else if (ch === "'" || ch === '"' || ch === '`') {
+      out += ch;
+      state = ch;
+    } else out += ch;
+  }
+  return out;
+}
+
+/** Maschera literal e commenti per cercare parentesi e chiamate nel codice. */
+function maskJsSyntax(src) {
+  let out = '';
+  let state = 'code';
+  for (let i = 0; i < src.length; i += 1) {
+    const ch = src[i];
+    const next = src[i + 1];
+    if (state === 'line-comment') {
+      if (ch === '\n') {
+        out += ch;
+        state = 'code';
+      } else out += ' ';
+      continue;
+    }
+    if (state === 'block-comment') {
+      if (ch === '*' && next === '/') {
+        out += '  ';
+        i += 1;
+      } else if (ch === '\n') out += '\n';
+      else out += ' ';
+      if (ch === '*' && next === '/') state = 'code';
+      continue;
+    }
+    if (state !== 'code') {
+      out += ch === '\n' ? '\n' : ' ';
+      if (ch === '\\' && i + 1 < src.length) {
+        out += src[++i] === '\n' ? '\n' : ' ';
+      } else if (ch === state) state = 'code';
+      continue;
+    }
+    if (ch === '/' && next === '/') {
+      out += '  ';
+      i += 1;
+      state = 'line-comment';
+    } else if (ch === '/' && next === '*') {
+      out += '  ';
+      i += 1;
+      state = 'block-comment';
+    } else if (ch === "'" || ch === '"' || ch === '`') {
+      out += ch === '\n' ? '\n' : ' ';
+      state = ch;
+    } else out += ch;
+  }
+  return out;
+}
+
+function callRanges(src) {
+  const masked = maskJsSyntax(src);
+  const ranges = [];
+  for (const m of masked.matchAll(/\b([A-Za-z_$][\w$]*)\s*\(/g)) {
+    const open = masked.indexOf('(', m.index);
+    let depth = 1;
+    let close = -1;
+    for (let i = open + 1; i < masked.length; i += 1) {
+      if (masked[i] === '(') depth += 1;
+      else if (masked[i] === ')' && --depth === 0) {
+        close = i;
+        break;
+      }
+    }
+    if (close >= 0) ranges.push({ name: m[1], open, close });
+  }
+  return ranges;
+}
+
+function isReadCall(name) {
+  if (READ_CALL_NAMES.has(name) || /^(?:read|load|fetch|open)[A-Z_$\w]*$/i.test(name)) return true;
+  // Un wrapper non riconosciuto resta un possibile lettore: il silenzio e'
+  // pericoloso. Le sole eccezioni sono chiamate note che trasformano o
+  // verificano valori, non che leggono contenuto.
+  return !NON_READ_CALL_NAMES.has(name);
+}
 
 /**
  * Il fixture LEGGE quel path, o si limita a nominarlo?
@@ -516,9 +641,9 @@ const READ_CALLS = 'readFileSync|readFile|createReadStream|openSync|require|impo
  * Due forme, perché il literal quasi mai è l'argomento diretto:
  *
  *   - la chiamata di lettura col literal fra i suoi argomenti, anche annidato
- *     in un `path.join(ROOT, ...)`. `[^)]*` si ferma alla PRIMA parentesi
- *     chiusa, quindi il match non scavalca la chiamata e non prende il literal
- *     di una riga successiva;
+ *     in `path.join(...)` o `new URL(...)`; le parentesi vengono bilanciate,
+ *     quindi il match non scavalca la chiamata e non prende il literal di una
+ *     riga successiva;
  *   - l'`import`/`export ... from` statico, che non è una chiamata e quindi
  *     non ha parentesi da guardare;
  *   - l'alias: il path legato a una costante (`const P = path.join(ROOT, '…')`)
@@ -530,12 +655,27 @@ const READ_CALLS = 'readFileSync|readFile|createReadStream|openSync|require|impo
  * di trasporto rossa che spegne il canale.
  */
 export function readsContentOf(rel, text) {
-  const src = typeof text === 'string' ? text : '';
-  const lit = `['"\`]${String(rel).replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}['"\`]`;
-  if (new RegExp(`\\b(?:${READ_CALLS})\\s*\\([^)]*${lit}`).test(src)) return true;
+  // Senza testo non sappiamo se il fixture legge davvero: il verso sicuro e'
+  // tenere l'accoppiamento, non dichiarare chiuso il canale.
+  if (typeof text !== 'string') return true;
+  const src = stripJsComments(text);
+  const escaped = String(rel).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  // Il path puo' essere passato dal fixture con uno o piu' prefissi relativi
+  // prima del path repo-relative (`../../scripts/...`).
+  const lit = `['"\`](?:\\.{1,2}/)*${escaped}['"\`]`;
+  const literalRe = new RegExp(lit, 'g');
+  const ranges = callRanges(src);
+
+  for (const m of src.matchAll(literalRe)) {
+    const at = m.index;
+    if (ranges.some((r) => at > r.open && at < r.close && isReadCall(r.name))) return true;
+  }
   if (new RegExp(`(?:^|[\\n;])\\s*(?:import|export)\\b[^;]*${lit}`).test(src)) return true;
+
   for (const m of src.matchAll(new RegExp(`(?:const|let|var)\\s+([A-Za-z_$][\\w$]*)\\s*=[^;]*${lit}`, 'g'))) {
-    if (new RegExp(`\\b(?:${READ_CALLS})\\s*\\([^)]*\\b${m[1]}\\b`).test(src)) return true;
+    if (ranges.some((r) => r.open < m.index && m.index < r.close && isReadCall(r.name))) continue;
+    const alias = new RegExp(`\\b${m[1]}\\b`);
+    if (ranges.some((r) => r.open < src.length && alias.test(src.slice(r.open + 1, r.close)) && isReadCall(r.name))) return true;
   }
   return false;
 }

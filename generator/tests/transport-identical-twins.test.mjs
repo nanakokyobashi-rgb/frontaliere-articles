@@ -487,6 +487,29 @@ test('readsContentOf distingue il literal letto — annidato o via alias — dal
   assert.equal(readsContentOf(rel, "readFileSync(CONTRACT_PATH, 'utf8');\n// vedi `scripts/ci/loop-sync-manifest.json`"), false);
 });
 
+test('readsContentOf resta fail-open su prefissi relativi e wrapper di lettura', () => {
+  const rel = 'scripts/ci/loop-sync-manifest.json';
+  assert.equal(
+    readsContentOf(rel, "readFileSync(new URL(import.meta.url, '../../scripts/ci/loop-sync-manifest.json'), 'utf8')"),
+    true,
+  );
+  assert.equal(readsContentOf(rel, "loadJson('../../scripts/ci/loop-sync-manifest.json')"), true);
+  assert.equal(readsContentOf(rel, "sharedContentReader('../../scripts/ci/loop-sync-manifest.json')"), true);
+  assert.equal(readsContentOf(rel, undefined), true, 'senza testo il verso sicuro è l\u2019accoppiamento');
+});
+
+test('readsContentOf non scambia commenti e citazioni con una lettura', () => {
+  const rel = 'scripts/ci/loop-sync-manifest.json';
+  assert.equal(
+    readsContentOf(
+      rel,
+      "readFileSync(\n  // cfr. `scripts/ci/loop-sync-manifest.json`\n  CONTRACT_PATH,\n  'utf8',\n)",
+    ),
+    false,
+  );
+  assert.equal(readsContentOf(rel, 'const note = `leggere ` + `scripts/ci/loop-sync-manifest.json`;'), false);
+});
+
 test('l\u2019eccezione e\u2019 il solo manifest, e solo da nominato: gli altri descrittori restano accoppiamenti', () => {
   // L'asimmetria fra i due versi, resa un test perché è l'errore facile:
   // riusare `SET_DESCRIPTORS` anche qui rimetterebbe il falso silenzio di #853

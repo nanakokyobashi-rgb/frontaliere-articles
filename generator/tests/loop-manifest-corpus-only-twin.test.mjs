@@ -111,6 +111,48 @@ test('solo `corpus-only`: nessun altro mode viene rivendicato', () => {
   }
 });
 
+test('un `corpus-only` con lo stesso path ma contenuto adattato non resta invisibile', () => {
+  const path = 'generator/scripts/lib/example.mjs';
+  const v = corpusOnlyTwinVerdict({
+    mode: 'corpus-only',
+    path,
+    blobSha: 'c'.repeat(40),
+    siteBlobIndex: new Map([['d'.repeat(40), [path]]]),
+  });
+  assert.equal(v.misclassified, true, 'la sola presenza del path segnala anche un gemello adattato');
+  assert.deepEqual(v.sitePaths, [path]);
+  assert.deepEqual(v.contentPaths, []);
+  assert.equal(v.pathMatch, true);
+});
+
+test('un pending con tracking chiuso e `sitePath` alternativo viene rilevato anche se adattato', () => {
+  const sitePath = 'scripts/lib/example.mjs';
+  const v = corpusOnlyTwinVerdict({
+    mode: 'corpus-only-pending',
+    path: 'generator/scripts/lib/example.mjs',
+    sitePath,
+    trackingIssueClosed: true,
+    blobSha: 'c'.repeat(40),
+    siteBlobIndex: new Map([['d'.repeat(40), [sitePath]]]),
+  });
+  assert.equal(v.misclassified, true);
+  assert.deepEqual(v.sitePaths, [sitePath]);
+  assert.deepEqual(v.contentPaths, []);
+  assert.equal(v.pathMatch, true);
+  assert.equal(
+    corpusOnlyTwinVerdict({
+      mode: 'corpus-only-pending',
+      path: 'generator/scripts/lib/example.mjs',
+      sitePath,
+      trackingIssueClosed: false,
+      blobSha: 'c'.repeat(40),
+      siteBlobIndex: new Map([['d'.repeat(40), [sitePath]]]),
+    }).misclassified,
+    false,
+    'una issue ancora aperta resta nel suo normale flusso pending',
+  );
+});
+
 test('inventario mancante o file illeggibile → mai un verdetto (fail-open)', () => {
   // `siteBlobIndex()` restituisce null su rete giù o albero `truncated`: un
   // inventario a metà darebbe falsi NEGATIVI, e un dato mancante non deve mai
@@ -182,4 +224,16 @@ test('nessuna voce `corpus-only` porta un `sitePath`: sarebbe una classificazion
     if (f.mode !== 'corpus-only') continue;
     assert.equal(f.sitePath, undefined, `${f.path}: \`corpus-only\` con \`sitePath\` \`${f.sitePath}\``);
   }
+});
+
+test('la reason di parse-positive-num restringe la copertura del gemello del sito', () => {
+  const entry = entryFor('scripts/lib/parse-positive-num.mjs');
+  assert.ok(entry);
+  assert.equal(entry.mode, 'corpus-only');
+  assert.match(entry.reason, /copre solo la variante da env/);
+  assert.match(entry.reason, /non copre la lettura da argv/);
+  for (const option of ['sentinels', 'integer', 'warn', 'tool']) {
+    assert.match(entry.reason, new RegExp(`non copre.*${option}`));
+  }
+  assert.equal(entry.trackingIssue, undefined);
 });
