@@ -69,9 +69,17 @@ const PERMANENT_REJECTION_SIGNS = [
 function permanentRejectionGrepPattern(yml = readFileSync(WORKFLOW_PATH, 'utf-8')) {
   const commitStep = sliceBetween(yml, '- name: Commit and push', '- name: Push hero');
   const permanent = sliceBetween(commitStep, '\n          done', 'if [ "$LEDGER_ONLY" = true ]');
-  const grepHit = permanent.match(/grep -qiE '([^']+)' "\$PUSH_LOG"/);
-  assert.ok(grepHit, 'commit step must classify the push log');
-  return { commitStep, permanent, pattern: grepHit[1] };
+  const rateHit = permanent.match(/! grep -E '([^']+)' "\$PUSH_LOG"\s*\|\s*grep -qiE '([^']+)'/);
+  const permanentHit = permanent.match(/&& grep -E '([^']+)' "\$PUSH_LOG"\s*\|\s*grep -qiE '([^']+)'/);
+  assert.ok(rateHit && permanentHit, 'commit step must classify outcome lines from the push log');
+  assert.equal(rateHit[1], permanentHit[1], 'rate-limit and permanent scans must share the outcome-line filter');
+  return {
+    commitStep,
+    permanent,
+    outcomePattern: permanentHit[1],
+    ratePattern: rateHit[2],
+    pattern: permanentHit[2],
+  };
 }
 
 function pushLogMatchesPermanent(pattern, text) {
@@ -533,8 +541,14 @@ test('a day that stages only the ledger cannot turn a lost push into a permanent
   // e si ripete identico ogni mattina: degradarlo terrebbe lo streak sotto
   // la soglia per sempre, come il PAT assente. Deve restare rosso PRIMA del
   // ramo degradato, e per farlo il push deve catturare il proprio output.
-  assert.match(commitStep, /git push "\$REMOTE" "HEAD:\$TARGET" 2>&1 \| tee "\$PUSH_LOG"/,
+  assert.match(commitStep, /git push "\$REMOTE" "HEAD:\$TARGET" 2>&1 \| tee -a "\$PUSH_LOG"/,
     'the push must capture its output, or the cause of the failure cannot be classified');
+  assert.match(commitStep, /: > "\$PUSH_LOG"/, 'the push log must be truncated once before retries');
+  assert.match(commitStep, /tee -a "\$PUSH_LOG"/, 'each retry must append to the same push log');
+  assert.match(commitStep, /push_status=\$\{PIPESTATUS\[0\]\}/,
+    'the push result must be read separately from tee under pipefail');
+  assert.match(commitStep, /if \[ "\$push_status" -eq 0 \]; then/,
+    'a successful git push must win even if tee fails');
   const { permanent, pattern } = permanentRejectionGrepPattern(yml);
   const signs = pattern.split('|');
   for (const sign of PERMANENT_REJECTION_SIGNS) {
@@ -593,6 +607,41 @@ test('the permanent-rejection grep fires on ruleset/HTTP 403 and not on progress
     true,
     'an anchored HTTP 403 is a permanent rejection',
   );
+});
+
+test('rate-limit and hint lines cannot turn a transient push into a permanent red', () => {
+  const { commitStep, outcomePattern, ratePattern, pattern } = permanentRejectionGrepPattern();
+  assert.match(commitStep, /secondary rate limit/);
+  assert.match(commitStep, /rate limit exceeded/);
+  assert.match(commitStep, /HTTP 429/);
+
+  const dir = mkdtempSync(path.join(tmpdir(), 'push-log-filter-'));
+  const log = path.join(dir, 'push.log');
+  const filtered = (text) => {
+    writeFileSync(log, text);
+    try {
+      return execFileSync('grep', ['-E', outcomePattern, log], { encoding: 'utf8' });
+    } catch (err) {
+      if (err.status === 1) return '';
+      throw err;
+    }
+  };
+  const hintRace = filtered([
+    '! [rejected] HEAD -> main (fetch first)',
+    "error: failed to push some refs to 'https://github.com/example/repo.git'",
+    'hint: the remote declined this race; try pulling before pushing',
+  ].join('\n'));
+  assert.equal(pushLogMatchesPermanent(pattern, hintRace), false,
+    'a hint is not an outcome and must not fire the permanent classifier');
+
+  const throttled = filtered([
+    'remote: secondary rate limit exceeded',
+    "fatal: unable to access 'https://github.com/example/repo.git/': The requested URL returned error: 403",
+  ].join('\n'));
+  assert.equal(pushLogMatchesPermanent(ratePattern, throttled), true,
+    'the causal rate-limit marker must be visible on the outcome lines');
+  assert.equal(pushLogMatchesPermanent(pattern, throttled), true,
+    'the permanent pattern may still match the 403; the workflow guard gives rate-limit precedence');
 });
 
 test('the crossing verdict is not spent on a run whose ledger never reached main', () => {
