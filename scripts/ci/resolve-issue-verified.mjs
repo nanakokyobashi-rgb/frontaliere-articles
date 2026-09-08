@@ -58,6 +58,7 @@
 import { spawnSync } from 'node:child_process';
 
 import { resolveGithubIssue, searchSafePrefix } from '../lib/github-issue-creator.mjs';
+import { pinnedBy } from './manifest-pinned-issues.mjs';
 
 const REPO = process.env.GH_REPO || process.env.GITHUB_REPOSITORY || '';
 
@@ -104,13 +105,29 @@ export function findOpenByPrefix(prefix, deps = {}) {
   return stdout.split('\n').map((l) => l.trim()).filter(Boolean).map(Number);
 }
 
+/**
+ * Le issue che il manifest tiene aperte APPOSTA: il `trackingIssue` di una
+ * voce `corpus-only-pending` e' il promemoria che il gemello sul sito non c'e'
+ * ancora, e chiuderlo cancellerebbe l'unica traccia di lavoro mancante. Un
+ * chiuditore corpus-owned deve consultarli (guard in
+ * generator/tests/manifest-pinned-issues.test.mjs); qui il pin non e' un
+ * guasto, e' un «non si chiude» — quindi non produce annotazione.
+ */
+function pinOf(number, deps) {
+  if (deps.pinnedBy) return deps.pinnedBy(number, REPO);
+  return pinnedBy(number, REPO);
+}
+
+/** Chiude un numero preciso. Usata sia dal ramo `--number` sia dal fallback. */
+function closeNumber(number, comment, deps) {
+  const args = ['issue', 'close', String(number), ...(comment ? ['--comment', comment] : []), ...repoArgs()];
+  const { ok, stderr } = runGh(args, deps);
+  if (!ok && stderr) console.error(stderr);
+}
+
 /** Il ramo `--number`: chiudi, poi rileggi lo stato di QUEL numero. */
 function numberMode({ number, comment }, deps) {
-  const attempt = () => {
-    const args = ['issue', 'close', String(number), ...(comment ? ['--comment', comment] : []), ...repoArgs()];
-    const { ok, stderr } = runGh(args, deps);
-    if (!ok && stderr) console.error(stderr);
-  };
+  const attempt = () => closeNumber(number, comment, deps);
   const verify = () => {
     const state = readIssueState(number, deps);
     // Non leggibile => trattata come aperta: il rosso su uno stato ignoto
@@ -123,19 +140,44 @@ function numberMode({ number, comment }, deps) {
 /** Il ramo `--title`: chiudi via `resolveGithubIssue`, poi rileggi la LISTA. */
 function titleMode({ title, workflow, runUrl }, deps) {
   const prefix = searchSafePrefix(title);
-  const attempt = () => { resolveGithubIssue(title, { workflow, runUrl }); };
+  // Il chiuditore e' iniettabile per lo stesso motivo di `run`: un test deve
+  // poter esercitare i rami «respinto» e «no-op» senza una rete.
+  const close = deps.resolve || resolveGithubIssue;
+  const attempt = () => {
+    // `resolveGithubIssue` sceglie da se' QUALE issue chiudere (primo match per
+    // prefisso) e non sa niente dei pin. Finche' nessun candidato e' pinnato la
+    // delega e' esatta e la semantica di ricerca resta quella di sempre; se un
+    // candidato e' pinnato si chiude per NUMERO, che e' l'unico modo di essere
+    // certi di non toccare proprio quello.
+    const open = findOpenByPrefix(prefix, deps) || [];
+    const pinned = open.filter((n) => pinOf(n, deps));
+    if (pinned.length === 0) { close(title, { workflow, runUrl }); return; }
+    for (const n of pinned) console.log(`[resolve-verified] #${n} e' pinnata dal manifest (${pinOf(n, deps)}): non la chiudo.`);
+    for (const n of open.filter((n) => !pinOf(n, deps))) closeNumber(n, undefined, deps);
+  };
   const verify = () => {
     const open = findOpenByPrefix(prefix, deps);
     if (open === null) return { done: false, detail: 'query di verifica non leggibile' };
+    // Una pinnata non e' un residuo: resta aperta per costruzione, e contarla
+    // come tale darebbe un rosso a ogni run — cioe' un'annotazione che si
+    // impara a ignorare.
+    const residual = open.filter((n) => !pinOf(n, deps));
     // Vuota = post-condizione soddisfatta, e copre ANCHE il no-op legittimo
     // («non c'era niente da chiudere»): il `null` ambiguo di resolveGithubIssue
     // qui e' gia' stato disambiguato dallo stato reale del repo.
-    return { done: open.length === 0, detail: `ancora aperte: ${open.map((n) => `#${n}`).join(', ')}` };
+    return { done: residual.length === 0, detail: `ancora aperte: ${residual.map((n) => `#${n}`).join(', ')}` };
   };
   return { attempt, verify, subject: `titolo "${prefix}"` };
 }
 
 export function resolveVerified(opts, deps = {}) {
+  if (opts.number) {
+    const pin = pinOf(opts.number, deps);
+    if (pin) {
+      console.log(`[resolve-verified] #${opts.number} e' pinnata dal manifest (${pin}): non la chiudo, e non e' un guasto.`);
+      return 0;
+    }
+  }
   const mode = opts.number ? numberMode(opts, deps) : titleMode(opts, deps);
   // Un solo ritentativo, non un ciclo: il guasto che questo wrapper deve
   // rendere visibile e' quello PERSISTENTE (permessi, token). Un ciclo lungo

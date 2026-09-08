@@ -171,9 +171,12 @@ test('a liste vuote lo step richiude l issue dedup, non si limita a uscire', () 
   // un passo piu' in la'.
   const step = surfaceStep();
   const emptyBranch = emptyListsBranch(step);
+  // La FORMA della chiusura e cambiata con #1005 (dal `gh issue close` nudo al
+  // wrapper che ne verifica la post-condizione), l INVARIANTE no: a liste vuote
+  // il numero risolto viene chiuso.
   assert.match(
     emptyBranch,
-    /\n\s+gh issue close "\$DEDUP_NUMBER"/,
+    /\n\s+node scripts\/ci\/resolve-issue-verified\.mjs[\s\S]*?--number "\$DEDUP_NUMBER"/,
     'a liste vuote lo step deve chiudere l issue dedup, non limitarsi a uscire',
   );
 });
@@ -225,7 +228,11 @@ test('la chiusura risolve l issue con la stessa uguaglianza esatta con cui la li
 
   // La chiusura passa per il NUMERO risolto, e il match per prefisso di
   // `--resolve` sparisce da questo ramo.
-  assert.match(emptyBranch, /\n\s+gh issue close "\$DEDUP_NUMBER"/, 'si chiude il numero risolto');
+  assert.match(
+    emptyBranch,
+    /\n\s+node scripts\/ci\/resolve-issue-verified\.mjs[\s\S]*?--number "\$DEDUP_NUMBER"/,
+    'si chiude il numero risolto',
+  );
   // Sul CODICE, non sui commenti: il ramo spiega per esteso perche' `--resolve`
   // non va bene qui, e citarlo non e' usarlo.
   assert.doesNotMatch(
@@ -434,4 +441,66 @@ test('nemmeno lo scan stale-review legge una lista troncata', () => {
     'il rimappaggio deve riportare `created_at` su `.createdAt`, che e il campo letto dal gate 1',
   );
   assert.match(text, /labels: \[\.labels\[\] \| \{name\}\]/, 'i gate leggono `.labels[].name`: la forma va preservata');
+});
+
+/**
+ * Quinto modo di lasciare il digest aperto con un elenco falso, e l'ultimo
+ * della catena: la chiusura viene RESPINTA. Lo step gira sotto
+ * `set -uo pipefail` senza `set -e` e chiudeva con un `exit 0` incondizionato
+ * subito dopo `gh issue close`, quindi un rifiuto — permessi, rate-limit, 5xx
+ * — lasciava la run VERDE con una riga su stderr e nessun ritentativo (issue
+ * #1005). Non e' «la condizione di chiusura e' irraggiungibile» come #733: e'
+ * «la condizione e' raggiunta, l'azione e' fallita, e nessuno lo sa». La cura
+ * e' la stessa asimmetria dei guard qui sopra, applicata alla POST-CONDIZIONE
+ * invece che alla query.
+ */
+test('a liste vuote la chiusura viene verificata, non data per riuscita', () => {
+  const branch = withoutComments(emptyListsBranch(surfaceStep()));
+  assert.match(
+    branch,
+    /node scripts\/ci\/resolve-issue-verified\.mjs/,
+    'la chiusura deve passare dal wrapper che rilegge lo stato: un `gh issue close` nudo esce 0 anche respinto',
+  );
+  assert.match(branch, /--number "\$DEDUP_NUMBER"/, 'il wrapper deve chiudere il numero gia risolto per uguaglianza esatta');
+  // L'esito del wrapper deve PROPAGARSI: un `exit 0` dopo la chiusura
+  // ributterebbe via l'unica cosa che questa fix aggiunge.
+  const afterClose = branch.slice(branch.indexOf('resolve-issue-verified.mjs'));
+  assert.doesNotMatch(afterClose, /exit 0/, 'un `exit 0` dopo la chiusura riseppellisce il rifiuto');
+  assert.match(afterClose, /exit \$\?/, 'lo step deve uscire con l esito della chiusura verificata');
+});
+
+/**
+ * E la CLASSE, non il solo digest (AGENTS.md #5). Gli altri due step che
+ * chiudono un'issue canonica quando la coda e' drenata passavano dal ramo CLI
+ * `--resolve`, che fa `process.exit(0)` SEMPRE: stesso identico antipattern,
+ * due file piu' in la'. Il `continue-on-error: true` e' parte del fix, non un
+ * ripensamento — senza, uno step che prima non poteva fallire fabbricherebbe
+ * una Workflow Failure per un no-op di pulizia.
+ */
+test('nessun chiuditore del repo si accontenta di un `--resolve` che esce 0', () => {
+  const twins = [
+    ['.github/workflows/reconcile-article-shards.yml', '- name: Close ghost-articles issue (coda drenata)'],
+    ['.github/workflows/republish-dirty-content.yml', '- name: Close dirty-content issue (coda drenata)'],
+  ];
+  for (const [rel, header] of twins) {
+    const wf = readFileSync(path.join(ROOT, rel), 'utf8');
+    const at = wf.indexOf(header);
+    assert.notEqual(at, -1, `step di chiusura non trovato in ${rel}`);
+    const rest = wf.slice(at + header.length);
+    const next = rest.indexOf('\n      - name: ');
+    const step = next === -1 ? rest : rest.slice(0, next);
+    const exec = withoutComments(step);
+    assert.doesNotMatch(
+      exec,
+      /--resolve/,
+      `${rel}: \`--resolve\` esce 0 anche quando il close e respinto — la chiusura va verificata`,
+    );
+    assert.match(exec, /node scripts\/ci\/resolve-issue-verified\.mjs/, `${rel}: la chiusura deve passare dal wrapper verificato`);
+    assert.match(exec, /--title "/, `${rel}: il wrapper va invocato in modalita titolo`);
+    assert.match(
+      exec,
+      /continue-on-error: true/,
+      `${rel}: senza \`continue-on-error\` un close respinto passerebbe da invisibile a Workflow Failure — il segnale va reso visibile, non promosso a guasto del job`,
+    );
+  }
 });
