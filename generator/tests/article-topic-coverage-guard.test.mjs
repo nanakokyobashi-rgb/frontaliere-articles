@@ -1065,7 +1065,64 @@ describe('#971 — nessun titolo scollegato dallo slug nel corpus PUBBLICATO', (
   // `EDGE_RETIRED_PATHS` nel repo del SITO (vedi scripts/retire-article.mjs).
   const SLUG_SIDE = new Set(['trasferirsi-villa-chiavenna-frontaliere']);
 
-  const seriesArticles = () => CORPUS.filter((a) => /^(vivere|trasferirsi|abitare|risiedere)-/.test(a.id));
+  const SERIES_ID_RE = /^(vivere|trasferirsi|abitare|risiedere)-/;
+  // La cardinalita' attesa viene dal registro EN indipendente dal corpus IT
+  // usato dalla sweep: se il parser IT perde meta' delle voci, il campione non
+  // puo' diventare verde adattandosi alla propria perdita.
+  const EXPECTED_SERIES_IDS = new Set(
+    [...loadMetaTitles('blog-meta-en.ts'), ...loadMetaTitles('blog-meta-ch-en.ts')]
+      .map(([id]) => id)
+      .filter((id) => SERIES_ID_RE.test(id)),
+  );
+  const ALLOWED_NULL_COMUNE_KEYS = new Set([
+    'vivere-svizzera-vs-italia-frontaliere',
+    'vivere-piu-lungo-ticino',
+    'vivere-valtellina-lavorare-grigioni-frontaliere',
+    'vivere-claino-osteno-lavorare-ticino',
+    'vivere-maccagno-lavorare-ticino',
+    'trasferirsi-maccagno-pino-veddasca',
+    'trasferirsi-maccagno-frontaliere-pro-contro',
+    'vivere-nel-cuore-di-bellinzona',
+    'trasferirsi-uggiatetrevano-da-frontaliere-pro-e-contro',
+    'vivere-altavalleintelvi-lavorare-ticino-da-frontaliere',
+    'trasferirsi-a-castello-dellacqua-da-frontaliere-pro-e-contro',
+    'vivere-brezzo-bedero-lavorare-ticino',
+    'vivere-oltiona-di-san-mamette-e-lavorare-in-ticino-da-frontaliere',
+    'vivere-albese-cassano-lavorare-ticino',
+    'trasferirsi-vertemate-minoprio-frontaliere',
+    'vivere-re-lavorare-ticino-frontaliere',
+    'vivere-anzano-parco-lavorare-ticino-frontaliere',
+    'vivere-erba-lavorare-ticino-frontaliere',
+    'vivere-bardello-lavorare-ticino-frontaliere',
+    'vivere-galliate-lavorare-ticino-frontaliere',
+    'vivere-jerago-orago-lavorare-ticino-da-frontaliere',
+    'vivere-cavaria-lavorare-ticino-frontaliere',
+    'vivere-peglione-lavorare-ticino-frontaliere',
+    'vivere-beregazzo-lavorare-ticino-frontalieri',
+    'vivere-casnate-bernate-frontaliere-ticino',
+    'vivere-cannobina-lavorare-ticino-frontaliere',
+    'vivere-caslino-erba-frontaliere',
+    'vivere-grandola-uniti-lavorare-ticino',
+    'vivere-longone-segrino-lavorare-ticino-frontaliere',
+    'vivere-veduggio-frontaliere-ticino',
+    'vivere-prato-allo-lavorare-grigioni',
+    'vivere-campione-italia-frontaliere-ticino',
+    'vivere-solbiate-cagno-frontaliere-ticino',
+    'vivere-lentate-lavorare-ticino-frontaliere',
+    'vivere-bardello-malegesso-bregano-lavorare-ticino',
+    'trasferirsi-berbenno-grigioni-frontaliere',
+    'vivere-vilminore-scalve-lavorare-grigioni-frontaliere',
+    'vivere-gravedona-uniti-lavorare-ticino',
+    'vivere-solbiate-frontaliere-pratica',
+    'trasferirsi-svizzera-italiano-guida-permessi',
+    'trasferirsi-non-frontaliere-guida',
+    'vivere-nus-lavorare-vallese-frontaliere',
+    'vivere-senza-big-tech',
+    'vivere-come-lavorare-ticino',
+    'vivere-oltre-monti-lavorare-grigioni',
+    'trasferirsi-svizzera-guida',
+  ]);
+  const seriesArticles = () => CORPUS.filter((a) => SERIES_ID_RE.test(a.id));
 
   const broken = () => seriesArticles().flatMap((a) => {
     try {
@@ -1077,7 +1134,15 @@ describe('#971 — nessun titolo scollegato dallo slug nel corpus PUBBLICATO', (
   });
 
   it('il campione si carica — senza articoli della serie il test sotto è vacuo', () => {
-    expect(seriesArticles().length).toBeGreaterThan(100);
+    expect(seriesArticles().length).toBe(EXPECTED_SERIES_IDS.size);
+  });
+
+  it('ogni serie senza chiave-comune è un eccezione esplicita, non un fail-open', () => {
+    const observed = seriesArticles()
+      .filter((a) => !comuneTopicKey(a.id.replace(/-/g, ' ')))
+      .map((a) => a.id)
+      .sort();
+    expect(observed).toEqual([...ALLOWED_NULL_COMUNE_KEYS].sort());
   });
 
   it('ogni articolo della serie ha un titolo che nomina il comune del suo slug', () => {
@@ -1123,6 +1188,7 @@ describe('#971 — nessun titolo scollegato dallo slug nel corpus PUBBLICATO', (
     'vivere-malles-venosta-lavorare-grigioni': { de: 'mals' },        // Malles Venosta → Mals
   };
 
+  const IT_TITLES = new Map([...loadMetaTitles('blog-meta-it.ts'), ...loadMetaTitles('blog-meta-ch-it.ts')]);
   const OTHER_LOCALES = ['en', 'de', 'fr'];
   const LOCALE_TITLES = Object.fromEntries(OTHER_LOCALES.map((loc) => [
     loc,
@@ -1132,17 +1198,22 @@ describe('#971 — nessun titolo scollegato dallo slug nel corpus PUBBLICATO', (
   /** Il titolo contiene la sequenza completa di parole `words`? */
   const namesTokens = (title, words) => {
     const tokens = normalizeText(title).split(' ');
-    for (let i = 0; i + words.length <= tokens.length; i += 1) {
-      if (words.every((w, n) => tokens[i + n] === w)) return true;
-    }
-    return false;
+    return words.every((word) => tokens.includes(word));
   };
 
   const brokenIn = (loc) => seriesArticles().flatMap((a) => {
     const slugComune = comuneTopicKey(a.id.replace(/-/g, ' '));
-    if (!slugComune) return [];
     const title = LOCALE_TITLES[loc].get(a.id);
     if (title === undefined) return [{ id: a.id, title: '(titolo assente)' }];
+    if (!slugComune) {
+      if (!ALLOWED_NULL_COMUNE_KEYS.has(a.id)) {
+        return [{ id: a.id, title, reason: 'comuneTopicKey nullo' }];
+      }
+      return [];
+    }
+    if (title === IT_TITLES.get(a.id)) {
+      return [{ id: a.id, title, reason: 'titolo non tradotto' }];
+    }
     const exonym = EXONYMS[a.id]?.[loc];
     if (namesTokens(title, slugComune.split('-'))) return [];
     if (exonym && namesTokens(title, exonym.split(' '))) return [];
@@ -1161,6 +1232,23 @@ describe('#971 — nessun titolo scollegato dallo slug nel corpus PUBBLICATO', (
       expect(brokenIn(loc).map((b) => `${b.id} → "${b.title}"`)).toEqual([]);
     });
   }
+
+  it('considera presenti i token del comune anche quando la traduzione inserisce parole', () => {
+    expect(namesTokens('Trasferirsi a Villa di Chiavenna da frontaliere', ['villa', 'chiavenna'])).toBe(true);
+    expect(namesTokens('Trasferirsi a Villa Chiavenna da frontaliere', ['villa', 'chiavenna'])).toBe(true);
+  });
+
+  it('rifiuta un titolo non-IT identico al titolo italiano', () => {
+    const article = seriesArticles().find((a) => comuneTopicKey(a.id.replace(/-/g, ' ')));
+    expect(article).not.toBe(undefined);
+    const previous = LOCALE_TITLES.en.get(article.id);
+    LOCALE_TITLES.en.set(article.id, IT_TITLES.get(article.id));
+    try {
+      expect(brokenIn('en').some((b) => b.id === article.id && b.reason === 'titolo non tradotto')).toBe(true);
+    } finally {
+      LOCALE_TITLES.en.set(article.id, previous);
+    }
+  });
 
   it('ogni esonimo dell\'allow-list punta a un articolo che esiste ancora', () => {
     // Un allow-list che sopravvive all'articolo che giustificava la voce

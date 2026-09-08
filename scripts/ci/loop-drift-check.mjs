@@ -1215,6 +1215,14 @@ const DECLARED_ABSENT_REGISTRY_REL = 'generator/tests/loop-references-exist.test
 const CRAWLER_CONTRACT_REL = 'generator/data/crawler-cross-repo-contract.json';
 const DORMANT_WITH_CRAWLER_CONTRACT = /^\.github\/workflows\/(?:crawler-group-\d{2}|translate-pending)\.yml :: /;
 
+function crawlerContractIsActive(source) {
+  try {
+    return Boolean(JSON.parse(String(source ?? '')));
+  } catch {
+    return false;
+  }
+}
+
 /**
  * I file che hanno una dichiarazione appaiata nel registro, con i loro
  * referenti. PURA: prende il testo del registro, non legge il disco.
@@ -1233,14 +1241,14 @@ const DORMANT_WITH_CRAWLER_CONTRACT = /^\.github\/workflows\/(?:crawler-group-\d
  */
 function declaredAbsentCiters(source, { crawlerContract = false } = {}) {
   const out = new Map();
-  for (const m of String(source || '').matchAll(/^\s*'([^']+?) :: ([^']+?)':/gm)) {
-    const citer = m[1];
+  for (const m of String(source || '').matchAll(/^\s*(['"`])((?:(?!\1)[^\n])+?) :: ((?:(?!\1)[^\n])+?)\1:/gm)) {
+    const citer = m[2];
     // Una voce dormiente non e' fatta valere da nessun test: avvisarne sarebbe
     // un falso positivo, non una cautela.
-    if (crawlerContract && DORMANT_WITH_CRAWLER_CONTRACT.test(`${citer} :: ${m[2]}`)) continue;
+    if (crawlerContract && DORMANT_WITH_CRAWLER_CONTRACT.test(citer + ' :: ' + m[3])) continue;
     const at = out.get(citer);
-    if (at) at.push(m[2]);
-    else out.set(citer, [m[2]]);
+    if (at) at.push(m[3]);
+    else out.set(citer, [m[3]]);
   }
   return out;
 }
@@ -1268,10 +1276,10 @@ function declaredAbsentCiters(source, { crawlerContract = false } = {}) {
  *
  * ## Perche' un avviso sul `site-ahead` e non un blocco
  *
- * Misura del 2026-09-07 su `main`, contate le sole dichiarazioni ATTIVE (cioe'
+ * Rimisura del 2026-09-08 su `main`, contate le sole dichiarazioni ATTIVE (cioe'
  * al netto di quelle che `ACTIVE_DECLARED_ABSENT` spegne col contract
- * crawler): **20 delle 157 voci `identical`** hanno almeno una dichiarazione
- * appaiata (71 chiavi attive su 143, 37 file citanti su 61). Il registro e'
+ * crawler): **20 delle 159 voci `identical`** hanno almeno una dichiarazione
+ * appaiata (70 dichiarazioni attive su 142, 37 file citanti su 61). Il registro e'
  * `corpus-only`, quindi non entrera' MAI nell'insieme trasportabile: trattare
  * la coppia come bloccante spegnerebbe il 13% del canale in modo permanente — l'eccesso opposto, e peggiore, del silenzio di oggi. E il
  * legame e' CONDIZIONALE: si rompe solo se la copia cambia proprio quelle
@@ -1301,20 +1309,37 @@ function implicitPinnersVerdict({ mode, state, pinners = [] }) {
   return { pinned: found.length > 0, pinners: found };
 }
 
-/** Il registro letto una volta sola: citante -> referenti dichiarati assenti. */
+/** Indice cache-ato: citante -> referenti dichiarati assenti, invalidato dal testo. */
 let PINNER_INDEX = null;
+let PINNER_INDEX_KEY = null;
 function pinnerIndex() {
-  if (!PINNER_INDEX) {
-    try {
-      PINNER_INDEX = declaredAbsentCiters(fs.readFileSync(path.join(ROOT, DECLARED_ABSENT_REGISTRY_REL), 'utf8'), {
-        crawlerContract: fs.existsSync(path.join(ROOT, CRAWLER_CONTRACT_REL)),
-      });
-    } catch {
-      // Fail-open: registro assente o illeggibile = nessun avviso, mai un rosso.
-      PINNER_INDEX = new Map();
-    }
+  let registrySource = null;
+  let contractSource = null;
+  try {
+    registrySource = fs.readFileSync(path.join(ROOT, DECLARED_ABSENT_REGISTRY_REL), 'utf8');
+  } catch {
+    // Fail-open: registro assente o illeggibile = nessun avviso, mai un rosso.
   }
+  try {
+    contractSource = fs.readFileSync(path.join(ROOT, CRAWLER_CONTRACT_REL), 'utf8');
+  } catch {
+    // File assente = contract inattivo; il valore viene comunque nella chiave.
+  }
+  const key = String(registrySource ?? '<missing>') + '\u0000' + String(contractSource ?? '<missing>');
+  if (PINNER_INDEX && PINNER_INDEX_KEY === key) return PINNER_INDEX;
+
+  PINNER_INDEX_KEY = key;
+  PINNER_INDEX = registrySource === null
+    ? new Map()
+    : declaredAbsentCiters(registrySource, {
+      crawlerContract: crawlerContractIsActive(contractSource),
+    });
   return PINNER_INDEX;
+}
+
+function resetPinnerIndex() {
+  PINNER_INDEX = null;
+  PINNER_INDEX_KEY = null;
 }
 
 /** Le dichiarazioni appaiate di UNA voce, lette dal registro. */
@@ -2042,4 +2067,4 @@ if (process.argv[1] && process.argv[1].endsWith('loop-drift-check.mjs')) {
 // baseline con LA STESSA regola con cui la pesa il cron, altrimenti una voce
 // accettata in PR verrebbe dichiarata fantasma il mattino dopo — o peggio, il
 // contrario. Una seconda copia della regola lo renderebbe inevitabile.
-export { classify, parseOnly, onlyArgError, forceArgError, resolveInitTargets, initWriteVerdict, initAttestVerdict, initPassOutcome, initBaseline, initOnlyManifestUnchanged, localHash, ghostVerdict, strandedVerdict, corpusOnlyTwinVerdict, unmirrorableDepsVerdict, implicitPinnersVerdict, declaredAbsentCiters, DECLARED_ABSENT_REGISTRY_REL, CRAWLER_CONTRACT_REL, DORMANT_WITH_CRAWLER_CONTRACT, resolvedLocalImports, gitBlobSha, scalarFingerprintVerdict, siteFile, sha256, repoHistoryMatch };
+export { classify, parseOnly, onlyArgError, forceArgError, resolveInitTargets, initWriteVerdict, initAttestVerdict, initPassOutcome, initBaseline, initOnlyManifestUnchanged, localHash, ghostVerdict, strandedVerdict, corpusOnlyTwinVerdict, unmirrorableDepsVerdict, implicitPinnersVerdict, declaredAbsentCiters, crawlerContractIsActive, resetPinnerIndex, DECLARED_ABSENT_REGISTRY_REL, CRAWLER_CONTRACT_REL, DORMANT_WITH_CRAWLER_CONTRACT, resolvedLocalImports, gitBlobSha, scalarFingerprintVerdict, siteFile, sha256, repoHistoryMatch };

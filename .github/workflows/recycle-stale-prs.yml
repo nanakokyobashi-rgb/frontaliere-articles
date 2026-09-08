@@ -128,6 +128,11 @@ jobs:
           prs=$(gh api --paginate "repos/$REPO/issues?state=open&labels=stale-review&per_page=100" \
             --jq '.[] | select(.pull_request) | {number, title, body, createdAt: .created_at, labels: [.labels[] | {name}]}' \
             | jq -s '.')
+          PRS_RC=$?
+          if [ "$PRS_RC" -ne 0 ]; then
+            echo "::error::Query stale-review fallita (rc=$PRS_RC): non riciclo PR con lista incompleta."
+            exit 1
+          fi
           COUNT=$(printf '%s' "$prs" | jq 'length')
           echo "stale-review PRs aperte: $COUNT"
 
@@ -175,6 +180,27 @@ jobs:
             echo "::notice::PR #$N RICICLABILE → chiudi + re-queue issue #$ISSUE"
             if [ "$DRY" = "true" ]; then echo "(dry-run) skip azione PR #$N"; continue; fi
 
+            # Re-queue PRIMA della chiusura: se il PAT manca o il re-label fallisce,
+            # la PR resta aperta e il lavoro resta recuperabile.
+            requeued=false
+            if [ -n "${PAT:-}" ]; then
+              GH_TOKEN="${PAT}" gh issue edit "${ISSUE}" --repo "${REPO}" --remove-label agent:fix 2>/dev/null || true
+              sleep 2
+              if GH_TOKEN="${PAT}" gh issue edit "${ISSUE}" --repo "${REPO}" --add-label agent:fix 2>/dev/null; then
+                echo "issue #${ISSUE} ri-accodata (agent:fix via PAT)"
+                requeued=true
+              else
+                echo "re-label fallito issue #${ISSUE}"
+              fi
+            else
+              echo "⚠️ PAT assente — issue #${ISSUE} NON ri-accodata automaticamente. Ri-applicare agent:fix a mano."
+              gh issue comment "${ISSUE}" --repo "${REPO}" --body "♻️ PR stale non chiusa: riapplicare agent:fix (serve PAT) per un fix fresco." 2>/dev/null || true
+            fi
+            if [ "${requeued}" != "true" ]; then
+              echo "PR #${N} resta aperta: issue #${ISSUE} non ri-accodata"
+              continue
+            fi
+
             # --delete-branch OBBLIGATORIO: issue-fix ricrea il branch con nome
             # DETERMINISTICO `fix/issue-N` e pusha con `git push -u` (no force). Se
             # il branch remoto della PR chiusa sopravvive, la storia diverge
@@ -184,20 +210,6 @@ jobs:
             gh pr close "$N" --repo "$REPO" --delete-branch --comment "$(printf '♻️ **recycle** (auto): PR ferma >%sh come \x60stale-review\x60 con branch indietro su un main mosso di molti commit. Chiusa (branch remoto cancellato) e issue sorgente #%s ri-accodata per un fix fresco contro main corrente (issue-fix aprirà un branch nuovo con lo stesso nome). Il lavoro non è perso: la issue resta aperta.' "${MAX_AGE_HOURS:-24}" "$ISSUE")" \
               2>/dev/null || echo "close fallito PR #$N"
 
-            # Re-queue: serve PAT (un agent:fix via GITHUB_TOKEN NON triggera
-            # issue-fix — anti-ricorsione; sender github-actions[bot] non passa il
-            # gate). Col PAT il sender è un account del progetto, che il gate di
-            # issue-fix accetta → trigger valido.
-            if [ -n "${PAT:-}" ]; then
-              GH_TOKEN="$PAT" gh issue edit "$ISSUE" --repo "$REPO" --remove-label agent:fix 2>/dev/null || true
-              sleep 2
-              GH_TOKEN="$PAT" gh issue edit "$ISSUE" --repo "$REPO" --add-label agent:fix 2>/dev/null \
-                && echo "issue #$ISSUE ri-accodata (agent:fix via PAT)" \
-                || echo "re-label fallito issue #$ISSUE"
-            else
-              echo "⚠️ PAT assente — issue #$ISSUE NON ri-accodata automaticamente. Ri-applicare agent:fix a mano."
-              gh issue comment "$ISSUE" --repo "$REPO" --body "♻️ PR sorgente chiusa come stale. Ri-applicare \`agent:fix\` (serve PAT) per un fix fresco." 2>/dev/null || true
-            fi
           done
           echo "Recycle scan completo."
 
@@ -337,13 +349,13 @@ jobs:
           # PR e issue vengono dallo STESSO endpoint `issues`, che le elenca
           # entrambe: e' l'unico che accetta il filtro per label
           # (`repos/.../pulls` non ce l'ha), e la presenza di `.pull_request`
-          # e' la discriminante fra i due tipi. Restano due query separate, con
-          # due esiti separati, perche' il guard sotto distingue quale delle
-          # due non ha potuto guardare.
+          # e' la discriminante fra i due tipi. Si pagina una volta sola e si
+          # partiziona il risultato in memoria: due query sullo stesso endpoint
+          # raddoppiavano il consumo di rate-limit e potevano osservare pagine
+          # diverse durante una mutazione del backlog.
           NEEDS_HUMAN_API="repos/$GH_REPO/issues?state=open&labels=needs-human&per_page=100"
-          PRS=$(gh api --paginate "$NEEDS_HUMAN_API" \
-            --jq '.[] | select(.pull_request) | "- #\(.number) \(.title) (ultimo update \(.updated_at))"')
-          PRS_RC=$?
+          NEEDS_HUMAN_ITEMS=$(gh api --paginate "$NEEDS_HUMAN_API" --jq '.[]' | jq -s '.')
+          NEEDS_HUMAN_RC=$?
           # L'issue dedup di questo stesso step nasce con `automation` e NON
           # con `needs-human` — ma niente le impedisce di riceverla dopo: il
           # followup-drainer gliel'ha messa il 2026-09-02T13:39:50Z (issue
@@ -363,16 +375,17 @@ jobs:
           # di questa. Elencarlo come «oggetto che aspetta occhi umani» e' anche
           # falso: il digest E' il canale umano, non un item da sbloccare.
           # Perche' per titolo e non per label: vedi PERMANENT_TRACKER_TITLES.
-          ISSUES=$(gh api --paginate "$NEEDS_HUMAN_API" \
-            --jq '.[] | select(.pull_request | not) | select(.title != env.DEDUP_TITLE) | select(. as $i | [env.PERMANENT_TRACKER_TITLES | split("\n")[] | select(length > 0)] | index($i.title) | not) | "- #\(.number) \(.title) (ultimo update \(.updated_at))"')
+          PRS=$(printf '%s\n' "$NEEDS_HUMAN_ITEMS" | jq -r '[.[] | select(.pull_request) | "- #\(.number) \(.title) (ultimo update \(.updated_at))"] | join("\n")')
+          PRS_RC=$?
+          ISSUES=$(printf '%s\n' "$NEEDS_HUMAN_ITEMS" | jq -r '[.[] | select(.pull_request | not) | select(.title != env.DEDUP_TITLE) | select(. as $i | [env.PERMANENT_TRACKER_TITLES | split("\n")[] | select(length > 0)] | index($i.title) | not) | "- #\(.number) \(.title) (ultimo update \(.updated_at))"] | join("\n")')
           ISSUES_RC=$?
-          if [ "$PRS_RC" -ne 0 ] || [ "$ISSUES_RC" -ne 0 ]; then
+          if [ "$NEEDS_HUMAN_RC" -ne 0 ] || [ "$PRS_RC" -ne 0 ] || [ "$ISSUES_RC" -ne 0 ]; then
             # Query fallita: lo stato del backlog e' SCONOSCIUTO, non vuoto.
             # Non si chiude e non si ripubblica il corpo (che con una lista
             # troncata da un errore direbbe il falso): si fallisce lo step —
             # `continue-on-error: true` tiene comunque verde il job, ma il
             # rosso resta visibile e il prossimo run ricalcola da zero.
-            echo "::error::Query needs-human fallita (PR rc=$PRS_RC, issue rc=$ISSUES_RC): non tocco l'issue dedup. Liste vuote per un errore non sono «nessun residuo»."
+            echo "::error::Query needs-human fallita (fetch rc=$NEEDS_HUMAN_RC, PR rc=$PRS_RC, issue rc=$ISSUES_RC): non tocco l'issue dedup. Liste vuote per un errore non sono «nessun residuo»."
             exit 1
           fi
           if [ -z "$PRS" ] && [ -z "$ISSUES" ]; then

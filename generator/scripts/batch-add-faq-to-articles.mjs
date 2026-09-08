@@ -34,7 +34,7 @@ import { reportStrippedControlChars } from './lib/control-char-write-report.mjs'
 import { callLLM, callSingleModel, AI_MODELS, initScoreStore, getStats, flushScores, resetExhaustedModel, printRunSummary } from './lib/ai-models.mjs';
 import { freeTranslateWithRetry, logCascadeSummary } from './lib/free-translate.mjs';
 import { stripCodeFences, findMatchingClose, fixJsonStringBody, JSON_QUOTE_SAFETY_RULE_IT, describeJsonParseError, describeRawForDiagnostics } from './lib/llm-json-repair.mjs';
-import { wrongLocalePair } from './fix-faq-locales.mjs';
+import { filterWrongLocalePairs, wrongLocalePair } from './fix-faq-locales.mjs';
 import { unescapeTsString } from './lib/unescape-ts-string.mjs';
 
 // ── CLI argument parsing ─────────────────────────────────────
@@ -943,14 +943,14 @@ async function translateFaq(faqArray, targetLang) {
   // `wrongLocalePair`, e il test omonimo ne pinna un caso reale).
   const wrong = wrongLocalePair(results, targetLang, faqArray);
   if (wrong) {
-    // Il messaggio dice la lingua RILEVATA e come e' stata riconosciuta, e non
-    // la chiama piu' «fallback italiano per-coppia»: quella frase era scritta
-    // anche quando il rilevato non era `it`, cioe' proprio nei casi in cui il
-    // rifiuto era rumore, e il log mentiva sulla causa mentre buttava una
-    // traduzione buona.
-    console.error(`   ⚠️  translateFaq ${targetLang}: coppia ${wrong.index} non e' in ${targetLang} `
-      + `ma in ${wrong.detected} (riconosciuta per ${wrong.via}) — scarto la traduzione, NON scrivo`);
-    return { faq: null, rejected: true };
+    // Una coppia sbagliata non deve buttare le traduzioni sane dell'articolo.
+    // Il rifiuto intero resta solo quando non c'e' piu' una coppia pubblicabile.
+    const validFaq = filterWrongLocalePairs(results, wrong);
+    console.error(`   ⚠️  translateFaq ${targetLang}: ${wrong.length} coppia/e non in ${targetLang} `
+      + `(${wrong.map((pair) => `${pair.index + 1}:${pair.detected}/${pair.via}`).join(', ')}): `
+      + `${validFaq.length} coppia/e sane conservate`);
+    if (validFaq.length === 0) return { faq: null, rejected: true, rejectedPairs: wrong };
+    return { faq: validFaq, rejected: false, rejectedPairs: wrong };
   }
   return { faq: results, rejected: false };
 }

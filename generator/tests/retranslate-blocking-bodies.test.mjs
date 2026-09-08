@@ -57,7 +57,7 @@ import { sanitizeBodyText } from '../scripts/lib/sanitize-body-braces.mjs';
 // L'ALTRO scrittore per-locale che gatta la scrittura sulla lingua: stessa
 // classe, stesso rimedio — la verifica guarda l'unita' tradotta, non il testo
 // concatenato.
-import { wrongLocalePair } from '../scripts/fix-faq-locales.mjs';
+import { filterWrongLocalePairs, wrongLocalePair } from '../scripts/fix-faq-locales.mjs';
 import { detectLanguage, detectLanguageWithConfidence } from '../scripts/lib/detect-language.mjs';
 
 const fileFor = (id, fields) => `const b: Record<string, string> = {\n`
@@ -316,15 +316,56 @@ test('wrongLocalePair vede la singola coppia italiana rimasta dal fallback', () 
   const source = [IT_PAIR, IT_PAIR, IT_PAIR];
   const wrong = wrongLocalePair([EN_PAIR, IT_PAIR, EN_PAIR], 'en', source);
   assert.ok(wrong, 'una coppia italiana su tre deve produrre un rifiuto');
-  assert.equal(wrong.index, 1);
-  assert.equal(wrong.via, 'verbatim');
-  assert.equal(wrong.detected, 'it');
+  assert.deepEqual(wrong, [{ index: 1, detected: 'it', via: 'verbatim' }]);
 
   // E sul concatenato — cioe' col controllo di prima — non verrebbe rifiutata.
   assert.equal(
     detectLanguage([EN_PAIR, IT_PAIR, EN_PAIR].map((p) => `${p.q} ${p.a}`).join(' '), 'en'),
     'en',
   );
+});
+
+test('wrongLocalePair confronta il contenuto anche quando le coppie sono riordinate e ne raccoglie piu di una', () => {
+  const IT_PAIR_2 = {
+    q: 'Quali documenti servono per il permesso G?',
+    a: 'Per la domanda servono il contratto di lavoro e i documenti personali. '.repeat(3),
+  };
+  const DE_PAIR = { q: 'Wo zahlt der Grenzgaenger seine Steuern?', a: DE_LONG };
+  const source = [IT_PAIR, IT_PAIR_2];
+  const translated = [IT_PAIR_2, IT_PAIR, DE_PAIR];
+  const wrong = wrongLocalePair(translated, 'en', source);
+
+  assert.deepEqual(
+    wrong,
+    [
+      { index: 0, detected: 'it', via: 'verbatim' },
+      { index: 1, detected: 'it', via: 'verbatim' },
+      { index: 2, detected: 'de', via: 'terza-lingua' },
+    ],
+    'il controllo deve usare il contenuto sorgente e non fermarsi alla prima coppia',
+  );
+  assert.deepEqual(filterWrongLocalePairs(translated, wrong), [], 'nessuna coppia sana in questo fixture');
+
+  const oneHealthy = [IT_PAIR_2, EN_PAIR];
+  const oneWrong = wrongLocalePair(oneHealthy, 'en', source);
+  assert.deepEqual(oneWrong, [{ index: 0, detected: 'it', via: 'verbatim' }]);
+  assert.deepEqual(filterWrongLocalePairs(oneHealthy, oneWrong), [EN_PAIR],
+    'una coppia guasta non deve costare la coppia sana');
+});
+
+test('wrongLocalePair attiva il ramo terza-lingua anche con scores vuoto del rilevatore corto', () => {
+  const shortGerman = {
+    q: 'Und wo sind die Aufgaben?',
+    a: 'Die Antwort steht im Merkblatt.',
+  };
+  const detected = detectLanguageWithConfidence(`${shortGerman.q} ${shortGerman.a}`, 'en');
+  assert.equal(detected.lang, 'de');
+  assert.equal(detected.confidence, 0.85);
+  assert.deepEqual(detected.scores, {});
+
+  const wrong = wrongLocalePair([shortGerman], 'en', [IT_PAIR]);
+  assert.deepEqual(wrong, [{ index: 0, detected: 'de', via: 'terza-lingua' }],
+    'scores vuoto non significa che il ramo strong-marker sia spento');
 });
 
 test('il ramo di LINGUA da solo non basta: su questo testo italiano il rilevatore dice `de`', () => {
@@ -385,11 +426,10 @@ test('wrongLocalePair rifiuta la terza lingua CONCLAMATA: `=== sourceLang` da so
 
   const wrong = wrongLocalePair([DE_PAIR], 'en', [IT_PAIR]);
   assert.ok(wrong, 'una terza lingua conclamata va rifiutata, non scritta sotto /en/');
-  assert.equal(wrong.via, 'terza-lingua');
-  assert.equal(wrong.detected, 'de');
+  assert.deepEqual(wrong, [{ index: 0, detected: 'de', via: 'terza-lingua' }]);
 
   // Falsificazione: non e' il ramo dell'italiano travestito.
-  assert.notEqual(wrong.detected, 'it');
+  assert.notEqual(wrong[0].detected, 'it');
 });
 
 test('wrongLocalePair salta le coppie sotto la soglia di segnale', () => {

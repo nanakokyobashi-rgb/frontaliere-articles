@@ -11,7 +11,7 @@
  * "localizzato" era quindi l'italiano, e a valle era indistinguibile da uno
  * slug scelto: nessun log, nessun contatore, nessun campo.
  *
- * Misurato il 2026-08-13 su 4.114 voci di registro: **169 articoli servono
+ * Rimisurato il 2026-09-08 su 5.876 voci di registro: **169 articoli servono
  * l'URL italiano in TUTTI E TRE** i locali tradotti (126 blog + 43 svizzera),
  * 217 in almeno uno. Erano 121 su 3.173 quando la issue e' stata aperta: il
  * difetto cresce in proporzione al corpus, ed e' per questo che il gate qui
@@ -313,14 +313,14 @@ describe('corpus pubblicato — ratchet sugli slug non localizzati', () => {
     assert.ok(entries.length > 3000, `solo ${entries.length} voci di slug lette dai due registri`);
   });
 
-  // Misurato il 2026-08-13 su 4.114 voci: 217 articoli con almeno un locale
+  // Rimisurato il 2026-09-08 su 5.876 voci: 217 articoli con almeno un locale
   // sull'URL italiano, 169 con tutti e tre. Gli storici RESTANO — rinominare
   // uno slug pubblicato richiede il redirect (data/article-redirects.json) ed
   // e' lavoro separato e coordinato, che la issue stessa chiede di NON fare
   // senza il bridge. Cio' che questo numero difende e' la DERIVATA: la fix di
   // #191 vale se non ne nascono di nuovi.
   //
-  // Le tre restano il NUMERO MISURATO sul corpus (5.679 voci: 217 / 169 / 55),
+  // Le tre restano il NUMERO MISURATO sul corpus (5.876 voci: 217 / 169 / 55),
   // non il tetto: il margine del floor sta nelle costanti qui sotto, sommato
   // una volta sola. Portarlo dentro la baseline lo renderebbe invisibile e —
   // sommato al margine esplicito — doppio.
@@ -332,24 +332,21 @@ describe('corpus pubblicato — ratchet sugli slug non localizzati', () => {
   // plausibilita' del titolo aggiunge una causa NUOVA di ripiego sull'URL
   // italiano — `titolo tradotto sotto il floor di plausibilita'` in
   // `relocalizeSlugsAfterTranslation()` — e le tre baseline qui sotto sono
-  // misurate a margine ZERO su questo checkout (5.679 voci: 217 / 169 / 55).
+  // misurate a margine ZERO su questo checkout (5.876 voci: 217 / 169 / 55).
   // Senza margine il PRIMO articolo che ci cade fa fallire questo file, che
   // gira come Preflight in publish-api.yml e generate-article.yml: non «un URL
   // italiano in piu'», ma la pubblicazione ferma per l'intera superficie dati.
-  // Dimensionato sul costo misurato del floor — 3 `title` su 22.631 meta
-  // tradotti pubblicati — cioe' 3 ARTICOLI. Non e' un permesso a crescere: se
-  // il consumo si avvicina al margine, la causa da leggere e'
+  // Dimensionato sul costo misurato del floor: 3 `title` di articoli. Non e'
+  // un permesso a crescere: se il consumo si avvicina al margine, la causa da leggere e'
   // `RUN_REPORT.slugs.itFallbackDetail` (le voci `…:titolo tradotto sotto il
   // floor…`), e la risposta e' riparare la traduzione del titolo, non alzare
   // ancora questo numero.
   const FLOOR_IT_FALLBACK_HEADROOM = 3;
-  // Un solo ripiego copia lo STESSO slug italiano su fino a tre locali, e il
-  // ratchet degli slug lunghi conta per locale, non per articolo.
-  const FLOOR_LONG_SLUG_HEADROOM = FLOOR_IT_FALLBACK_HEADROOM * 3;
-
   const IT_URL_ACROSS_LOCALES_CAP = IT_URL_ACROSS_LOCALES_BASELINE + FLOOR_IT_FALLBACK_HEADROOM;
-  const ALL_THREE_IDENTICAL_CAP = ALL_THREE_IDENTICAL_BASELINE + FLOOR_IT_FALLBACK_HEADROOM;
-  const LONG_SLUG_CAP = LONG_SLUG_BASELINE + FLOOR_LONG_SLUG_HEADROOM;
+  // Il margine del floor vale solo per il conteggio largo: non puo' ammettere
+  // crescita nel caso peggiore, ne' nuovi slug lunghi per locale.
+  const ALL_THREE_IDENTICAL_CAP = ALL_THREE_IDENTICAL_BASELINE;
+  const LONG_SLUG_CAP = LONG_SLUG_BASELINE;
 
   it(`gli articoli che servono l'URL italiano su en/de/fr non superano ${IT_URL_ACROSS_LOCALES_CAP}`, () => {
     const offenders = entries.filter((e) => e.en === e.it || e.de === e.it || e.fr === e.it);
@@ -366,21 +363,25 @@ describe('corpus pubblicato — ratchet sugli slug non localizzati', () => {
   });
 
   it(`gli articoli con TUTTI E TRE i locali sull'URL italiano non superano ${ALL_THREE_IDENTICAL_CAP}`, () => {
-    // E' il numero della issue (169 su 4.114, blog 126 + swiss 43): un articolo
+    assert.equal(ALL_THREE_IDENTICAL_CAP, ALL_THREE_IDENTICAL_BASELINE,
+      'il floor del titolo non ha margine nel caso ALL_THREE_IDENTICAL');
+    // E' il numero misurato oggi (169, blog 126 + swiss 43): un articolo
     // che serve lo stesso indirizzo in quattro lingue non ha localizzazione
     // affatto, ed e' il caso peggiore della famiglia. Il margine e' lo stesso
-    // di sopra: un titolo tradotto sotto il floor in tutti e tre i locali cade
-    // qui, non solo nel conteggio largo.
+    // di sopra non vale qui: un titolo tradotto sotto il floor in tutti e tre i
+    // locali non puo' introdurre un nuovo caso storico.
     const offenders = entries.filter((e) => e.en === e.it && e.de === e.it && e.fr === e.it);
     assert.ok(
       offenders.length <= ALL_THREE_IDENTICAL_CAP,
       `${offenders.length} articoli servono l'URL italiano su en, de E fr ` +
-        `(baseline ${ALL_THREE_IDENTICAL_BASELINE} + ${FLOOR_IT_FALLBACK_HEADROOM} di margine per il floor del titolo).\n` +
+        `(baseline ${ALL_THREE_IDENTICAL_BASELINE}, senza margine per il floor del titolo).\n` +
         `Primi dieci: ${offenders.slice(0, 10).map((e) => e.id).join(', ')}`,
     );
   });
 
   it(`gli slug lunghi >= 80 caratteri non superano ${LONG_SLUG_CAP}`, () => {
+    assert.equal(LONG_SLUG_CAP, LONG_SLUG_BASELINE,
+      'il floor del titolo non ha margine nel ratchet degli slug lunghi');
     // Anche questo e' a margine zero e il ripiego lo tocca: lo slug italiano
     // copiato su en/de/fr conta tre volte se e' lungo.
     const long = [];
@@ -392,7 +393,7 @@ describe('corpus pubblicato — ratchet sugli slug non localizzati', () => {
     assert.ok(
       long.length <= LONG_SLUG_CAP,
       `${long.length} slug >= 80 caratteri ` +
-        `(baseline ${LONG_SLUG_BASELINE} + ${FLOOR_LONG_SLUG_HEADROOM} di margine per il floor del titolo): ` +
+        `(baseline ${LONG_SLUG_BASELINE}, senza margine per il floor del titolo): ` +
         `${long.slice(0, 10).join(', ')}`,
     );
   });

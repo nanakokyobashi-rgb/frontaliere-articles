@@ -110,6 +110,11 @@ test('il prompt di post-merge-followup.yml rimanda al formato invece di inventar
     /### <n>\./,
     'post-merge-followup.yml: il prompt non chiede piu\' la struttura `### <n>.`',
   );
+  assert.match(
+    WORKFLOW,
+    /Ordine obbligatorio dei campi:[\s\S]{0,220}Suggested action[\s\S]{0,120}ultimo campo/i,
+    'post-merge-followup.yml: il prompt non vincola `Suggested action` all ultimo campo',
+  );
 });
 
 test('il prompt rende verificabile il token derivato nel file citato', () => {
@@ -259,11 +264,19 @@ function declaredTokenExamples(text) {
   // La lista finisce dove finisce la FORMA di una lista: span fra backtick
   // separati solo da virgole/spazi. Delimitarla su `)` non funziona — la prima
   // parentesi chiusa e' quella di `funzione()`, dentro il primo esempio.
-  for (const m of text.matchAll(/token-esempio:((?:\s*`[^`]+`\s*,?)+)/g)) {
+  for (const m of text.matchAll(/token-esempio:[ \t]*((?:`[^`\n]+`[ \t]*,?[ \t]*)+)/g)) {
     for (const t of m[1].matchAll(/`([^`]+)`/g)) out.push(t[1]);
   }
   return out;
 }
+
+test('token-esempio non assorbe un backtick iniziato sulla riga successiva', () => {
+  const text = [
+    'token-esempio: `primaFunzione()`',
+    '`secondo.campo`',
+  ].join('\n');
+  assert.deepEqual(declaredTokenExamples(text), ['primaFunzione()']);
+});
 
 test('ogni token-esempio dichiarato passa davvero isDistinctiveToken()', () => {
   let total = 0;
