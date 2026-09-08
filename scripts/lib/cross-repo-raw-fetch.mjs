@@ -113,6 +113,10 @@ export function createRawFetcher({ userAgent, token, fetchImpl = fetch } = {}) {
       state.tokenAccepted.set(repo, true);
       return res;
     }
+    // Dopo un 2xx il token è accettato, quindi non si ritenta in anonimo:
+    // un rate limit successivo resta però un limite reale, non un 404 da
+    // consegnare al chiamante come se il contenuto mancasse.
+    if (isRateLimitResponse(res) && state.tokenAccepted.get(repo)) throw new CrossRepoRateLimitError(url, res);
     if (!authenticated && isRateLimitResponse(res)) throw new CrossRepoRateLimitError(url, res);
     if (state.tokenAccepted.get(repo) || !needsAnonymousRetry(res.status, { authenticated })) return res;
 

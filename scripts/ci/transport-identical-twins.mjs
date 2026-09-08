@@ -559,7 +559,10 @@ function stripJsComments(src) {
       state = ch;
     } else out += ch;
   }
-  return out;
+  // Una regex con virgolette può sembrare una stringa a questo lexer minimo.
+  // In quel caso il testo mascherato non è affidabile: conserva il sorgente e
+  // lascia che `readsContentOf` scelga il verso fail-open.
+  return state === 'code' || state === 'line-comment' ? out : src;
 }
 
 /** Maschera literal e commenti per cercare parentesi e chiamate nel codice. */
@@ -605,11 +608,12 @@ function maskJsSyntax(src) {
       state = ch;
     } else out += ch;
   }
-  return out;
+  return state === 'code' || state === 'line-comment' ? out : null;
 }
 
 function callRanges(src) {
   const masked = maskJsSyntax(src);
+  if (masked === null) return null;
   const ranges = [];
   for (const m of masked.matchAll(/\b([A-Za-z_$][\w$]*)\s*\(/g)) {
     const open = masked.indexOf('(', m.index);
@@ -665,6 +669,7 @@ export function readsContentOf(rel, text) {
   const lit = `['"\`](?:\\.{1,2}/)*${escaped}['"\`]`;
   const literalRe = new RegExp(lit, 'g');
   const ranges = callRanges(src);
+  if (ranges === null) return true;
 
   for (const m of src.matchAll(literalRe)) {
     const at = m.index;

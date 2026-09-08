@@ -1670,6 +1670,11 @@ async function main() {
         siteBlobIndex: index,
       });
       if (!twin.misclassified) continue;
+      // Il ciclo principale può avere già registrato lo stesso pending come
+      // assente sul path dichiarato. Il backstop per contenuto/path lo
+      // sostituisce con un solo verdetto, non aggiunge una riga contraddittoria.
+      const pendingIndex = results.findIndex((r) => r.path === entry.path && r.state === 'corpus-only-pending');
+      if (pendingIndex >= 0) results.splice(pendingIndex, 1);
       results.push({
         path: entry.path,
         mode: entry.mode,
@@ -1731,7 +1736,7 @@ async function main() {
       '',
       section('ghost-baseline', '💀 Baseline fantasma — mai esistita nella storia esaminata'),
       section('stranded-twin', `🚨 Gemello \`identical\` fermo indietro da oltre ${STRANDED_AFTER_DAYS} giorni — nessun trasporto lo porta`),
-      section('corpus-only-twin', '🔴 Dichiarato `corpus-only`, ma il gemello esiste identico sul sito'),
+      section('corpus-only-twin', '🔴 Dichiarato `corpus-only`, ma il gemello esiste sul sito'),
       section('identical-unmirrorable', '🔴 Dichiarato `identical`, ma importa un modulo che il sito non ha'),
       section('undeclared-drift', '🔴 Divergenza non dichiarata'),
       section('both-moved', '🔴 Modificato su entrambi i lati'),

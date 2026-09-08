@@ -124,6 +124,18 @@ test('429 autenticato ritenta in anonimo come gli altri rifiuti del token', asyn
   assert.equal(fetchRaw.state.tokenRejected.get('other/repo'), true);
 });
 
+test('un rate limit dopo il latch del token è un errore tipizzato, non un 404', async () => {
+  const { impl, calls } = fakeFetch([{ status: 200 }, { status: 429 }]);
+  const fetchRaw = createRawFetcher({ token: 'tok', fetchImpl: impl });
+
+  await fetchRaw('https://raw.githubusercontent.com/other/repo/main/ok.yml');
+  await assert.rejects(
+    fetchRaw('https://raw.githubusercontent.com/other/repo/main/limited.yml'),
+    (error) => error instanceof CrossRepoRateLimitError && error.status === 429,
+  );
+  assert.deepEqual(calls.map((c) => c.authenticated), [true, true]);
+});
+
 test('rate limit anonimo: errore tipizzato, mai un\u2019assenza 404', async () => {
   const { impl } = fakeFetch([
     { status: 404 },

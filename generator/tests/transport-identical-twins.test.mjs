@@ -510,6 +510,14 @@ test('readsContentOf non scambia commenti e citazioni con una lettura', () => {
   assert.equal(readsContentOf(rel, 'const note = `leggere ` + `scripts/ci/loop-sync-manifest.json`;'), false);
 });
 
+test('readsContentOf resta fail-open se una regex con virgolette confonde il lexer', () => {
+  const text = String.raw`
+    const method = /method:\\s*['"](?:POST|PUT)['"]/;
+    const manifest = JSON.parse(readFileSync('scripts/ci/loop-sync-manifest.json', 'utf8'));
+  `;
+  assert.equal(readsContentOf('scripts/ci/loop-sync-manifest.json', text), true);
+});
+
 test('l\u2019eccezione e\u2019 il solo manifest, e solo da nominato: gli altri descrittori restano accoppiamenti', () => {
   // L'asimmetria fra i due versi, resa un test perché è l'errore facile:
   // riusare `SET_DESCRIPTORS` anche qui rimetterebbe il falso silenzio di #853
