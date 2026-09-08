@@ -6076,6 +6076,12 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.bollette-energia-calo-2027.title': 'Bollette energia giù del 4% nel 2027',
     'blog.article.bollette-energia-calo-2027.excerpt': 'ElCom annuncia il terzo anno consecutivo di calo. Una famiglia media risparmierà 53 franchi annui, pagando 1\'194 CHF per l\'energia.',
     'blog.article.bollette-energia-calo-2027.imageAlt': 'Contatore elettrico di una casa svizzera, simbolo del calo dei prezzi nel 2027',
+    'blog.article.bls-tagli-posti-trasporto-svizzera.title': 'BLS taglia 40 posti, chiude centri e riduce servizi',
+    'blog.article.bls-tagli-posti-trasporto-svizzera.excerpt': 'BLS annuncia 40 tagli di posti, chiusura di 5 centri viaggi e riduzione servizi. Risparmi target: 5 milioni CHF nel biennio 2027-2028.',
+    'blog.article.bls-tagli-posti-trasporto-svizzera.imageAlt': 'Veduta della Svizzera: paesaggio che rappresenta la mobilità nazionale e i trasporti pubblici',
+    'blog.article.studenti-svizzeri-lettura-pisa-2025.title': 'Studenti svizzeri leggono meno: risultati PISA 2025',
+    'blog.article.studenti-svizzeri-lettura-pisa-2025.excerpt': 'PISA 2025: quindicenni svizzeri eccellono in scienze, ma lettura e matematica calano. Il 28,8% non raggiunge competenze minime. L\'indagine rivela l\'influenza cruciale dell\'origine sociale.',
+    'blog.article.studenti-svizzeri-lettura-pisa-2025.imageAlt': 'Aula scolastica svizzera con studenti che risolvono esercizi di matematica e lettura',
 };
 
 export default blogMetaChIt;

@@ -50,13 +50,9 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { ledgerArticleId } from '../generator/scripts/lib/source-url-ledger.mjs';
-// La regola «l'id compare ancora COME id?» vive in un modulo condiviso: la usa
-// anche il gate di PR `generator/tests/retired-articles-fully-removed.test.mjs`
-// sulle stesse superfici, e due copie divergono (vedi il file per il perché).
-import { mentionsId } from './lib/mentions-id.mjs';
 import {
   SECTIONS, LOCALES, IMAGES_LEDGER, IMAGE_CATALOG, RETIRED_LEDGER,
-  seoFilesFor, leftoverSurfacesFor,
+  seoFilesFor, leftoverSurfacesFor, surfaceMentionsArticleId,
 } from './lib/article-surfaces.mjs';
 // La localizzazione dei letterali TS (span dell'array piatto degli id, e la
 // parentesi che chiude davvero quella di apertura) vive in un modulo condiviso:
@@ -340,7 +336,7 @@ function main() {
   // 12. verifica finale: l'id non deve più comparire da nessuna parte.
   //     Senza questo passo una rimozione parziale esce 0 e ferma il publish
   //     del corpus intero al prossimo push di contenuto.
-  const leftovers = leftoverSurfacesFor(section).filter((f) => mentionsId(read(f), id));
+  const leftovers = leftoverSurfacesFor(section).filter((f) => surfaceMentionsArticleId(f, read(f), id));
   if (leftovers.length > 0) {
     console.error(`\nRIMOZIONE PARZIALE — '${id}' compare ancora in:\n${leftovers.map((f) => `   ${f}`).join('\n')}`);
     process.exit(1);

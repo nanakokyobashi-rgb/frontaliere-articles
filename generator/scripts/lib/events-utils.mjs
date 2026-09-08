@@ -23,6 +23,8 @@ import { MUNICIPALITIES } from '../../data/municipalities.ts';
 import { asTranslationResult, freeTranslateWithRetryDetailed } from './free-translate.mjs';
 import { hasUsableContentText, hasUsableTranslatedText } from './body2-payload-verdict.mjs';
 
+export { hasUsableContentText };
+
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 // `../../..`: same one-level-deeper correction as evergreen-article-refresh.mjs
 // — this module moved from scripts/lib/ to generator/scripts/lib/, so the old
@@ -1028,6 +1030,8 @@ function stripUnusableLocaleValues(byLocale, label = 'byLocale') {
  * #6): il test la importa, e chi legge i log dei crawler cerca questa.
  */
 export const STRICT_NULL_DROP_WARNING = '[events] null-marker: predicato severo';
+export const DATASET_EVENT_DROP_WARNING = '[events] dataset: evento scartato senza titolo pubblicabile';
+export const DATASET_DROP_WARNING = '[events] dataset: eventi senza titolo pubblicabile';
 
 /**
  * Dichiara le chiavi che il ramo «macchina» scarta e che il ramo «prosa»
@@ -1367,6 +1371,10 @@ export function sanitizeDatasetEvents(events, locales = ['it', 'en', 'de', 'fr']
     if (!hasUsableContentText(next.title)) {
       const recovered = locales.find((l) => hasUsableContentText(next.titleByLocale?.[l]));
       if (!recovered) {
+        console.warn(
+          `${DATASET_EVENT_DROP_WARNING}: id=${JSON.stringify(next.id ?? null)} `
+            + `title=${JSON.stringify(next.title ?? null)}`,
+        );
         dropped += 1;
         continue;
       }
@@ -1393,7 +1401,7 @@ export function loadEventsDataset(file = EVENTS_DATASET_PATH) {
     const { events, dropped } = sanitizeDatasetEvents(raw.events);
     if (dropped) {
       console.warn(
-        `${STRICT_NULL_DROP_WARNING}: ${dropped}/${raw.events.length} evento/i senza titolo pubblicabile ` +
+        `${DATASET_DROP_WARNING}: ${dropped}/${raw.events.length} evento/i senza titolo pubblicabile ` +
           `scartati alla lettura del dataset`,
       );
     }

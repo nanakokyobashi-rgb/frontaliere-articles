@@ -279,7 +279,14 @@ export function registrationTargetStatus(targets) {
     if (existsSync(t.absPath)) {
       if (t.needle == null) has = true;
       else {
-        try { has = readFileSync(t.absPath, 'utf-8').includes(t.needle); } catch { has = false; }
+        try {
+          const source = readFileSync(t.absPath, 'utf-8');
+          has = source.includes(t.needle);
+          if (!has) {
+            const normalized = (value) => String(value).replace(/\s+/g, '').replace(/["']/g, "'");
+            has = normalized(source).includes(normalized(t.needle));
+          }
+        } catch { has = false; }
       }
     }
     (has ? present : absent).push(t.label);

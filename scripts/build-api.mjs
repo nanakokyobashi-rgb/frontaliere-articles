@@ -77,6 +77,7 @@ import {
 // generator/tests/frontaliere-sitemap-shadow.test.mjs exercise it directly
 // under plain `node --test`, without a tsx subprocess.
 import { SITE, xmlEsc, SECTION_PATHS, buildSitemap } from './lib/build-sitemap.mjs';
+import { isReservedPublishedSlug } from './lib/published-slug-guard.mjs';
 // Detection (not filtering — see its header) for issue #166: surfaces a
 // same-day canonical-override landing on a still-in-window ticker article.
 import { findShadowedTickerArticles } from './lib/ticker-shadow-check.mjs';
@@ -173,6 +174,30 @@ for (const loc of LOCALES) {
 
 const blogSlugs = await load('content/routerBlogData.ts');
 const swissSlugs = await load('content/routerSwissData.ts');
+const reservedSlugEntries = [];
+for (const [section, slugMap] of [
+  ['blog', blogSlugs.BLOG_SLUGS],
+  ['swiss', swissSlugs.SWISS_SLUGS],
+]) {
+  for (const [id, locales] of Object.entries(slugMap ?? {})) {
+    for (const [locale, slug] of Object.entries(locales ?? {})) {
+      if (isReservedPublishedSlug(slug)) reservedSlugEntries.push(`${section}.${id}.${locale}=${slug}`);
+    }
+  }
+}
+for (const [section, reverseMap] of [
+  ['blogReverse', blogSlugs.REVERSE_BLOG],
+  ['swissReverse', swissSlugs.REVERSE_SWISS],
+]) {
+  for (const [locale, slugs] of Object.entries(reverseMap ?? {})) {
+    for (const slug of Object.keys(slugs ?? {})) {
+      if (isReservedPublishedSlug(slug)) reservedSlugEntries.push(`${section}.${locale}.${slug}`);
+    }
+  }
+}
+if (reservedSlugEntries.length > 0) {
+  throw new Error(`reserved published slug(s) in source maps: ${reservedSlugEntries.join(', ')}`);
+}
 write('slugs.json', {
   blog: blogSlugs.BLOG_SLUGS,
   blogReverse: blogSlugs.REVERSE_BLOG,
@@ -579,7 +604,7 @@ write('news-ticker-live.json', { schema: 1, articles: tickerArticles });
     const paths = SECTION_PATHS[sectionId];
     for (const a of entries) {
       const slug = slugMap?.[a.id]?.it;
-      if (!slug) continue;
+      if (!slug || isReservedPublishedSlug(slug)) continue;
       // Same self-canonical gate sitemap-blog.xml enforces (buildSitemap in
       // scripts/lib/build-sitemap.mjs): a canonical-shadowed article's own page
       // points elsewhere, so listing its <loc> here is the same defect this PR
@@ -619,7 +644,7 @@ write('news-ticker-live.json', { schema: 1, articles: tickerArticles });
       const parts = [`  <url>`, `    <loc>${itLoc}</loc>`, `    <lastmod>${today}</lastmod>`];
       for (const loc of LOCALES) {
         const s2 = slugMap?.[a.id]?.[loc];
-        if (s2) {
+        if (s2 && !isReservedPublishedSlug(s2)) {
           parts.push(
             `    <xhtml:link rel="alternate" hreflang="${loc}" href="${SITE}${paths[loc]}${xmlEsc(s2)}/" />`,
           );
