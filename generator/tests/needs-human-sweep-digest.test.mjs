@@ -74,4 +74,11 @@ test('il valore del titolo digest è validato prima del prompt Claude e passato 
     /titolo ESATTO `\$\{\{ env\.DIGEST_TITLE \}\}`/,
     'il prompt non deve dipendere dalla risoluzione non verificata di env dentro with',
   );
+
+  const outcome = stepBlock('Classify outcome (work-done, not CLI exit)');
+  assert.match(outcome, /DIGEST_TITLE_VALIDATION: \$\{\{ steps\.digest_title\.outcome \}\}/, 'il verdetto finale deve conoscere l esito della validazione');
+  const validationGuard = /if \[ "\$DIGEST_TITLE_VALIDATION" != "success" \]; then([\s\S]*?)\n\s+fi/.exec(outcome);
+  assert.ok(validationGuard, 'il verdetto finale deve avere un guard sulla validazione del titolo');
+  assert.match(validationGuard[1], /exit 1/, 'una validazione fallita deve lasciare rosso anche il verdetto finale');
+  assert.ok(outcome.indexOf('DIGEST_TITLE_VALIDATION') < outcome.indexOf('DIGEST_MATCHES='), 'il verdetto deve verificare il titolo prima di interrogare GitHub');
 });

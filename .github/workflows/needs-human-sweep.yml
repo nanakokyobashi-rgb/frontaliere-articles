@@ -253,8 +253,13 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           CLAUDE_OUTCOME: ${{ steps.claude_sweep.outcome }}
+          DIGEST_TITLE_VALIDATION: ${{ steps.digest_title.outcome }}
         run: |
           set -uo pipefail
+          if [ "$DIGEST_TITLE_VALIDATION" != "success" ]; then
+            echo "::error::needs-human-sweep: validazione DIGEST_TITLE non riuscita (outcome=$DIGEST_TITLE_VALIDATION); il run non è consegnato."
+            exit 1
+          fi
           DIGEST_MATCHES=$(gh search issues --repo "$GITHUB_REPOSITORY" --state open --match title "$DIGEST_TITLE" --json number,title --jq '.[] | select(.title == env.DIGEST_TITLE) | .number' 2>/dev/null)
           DIGEST_SEARCH_RC=$?
           if [ "$DIGEST_SEARCH_RC" -ne 0 ]; then
