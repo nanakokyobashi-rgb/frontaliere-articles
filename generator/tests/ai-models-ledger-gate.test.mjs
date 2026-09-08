@@ -15,9 +15,12 @@
  * gateway che RISPONDE no.
  *
  * La misura strutturale e' quindi il punto 1: nel sorgente OGNI riferimento a
- * `_dirtyModels` sta in una funzione dichiarata, e la sola che lo scriva e'
- * `_proposeLedgerWrite`. Un writer nuovo non puo' dimenticare la regola, perche'
- * non ha un altro modo di scrivere. Il resto del file misura le due decisioni
+ * `_dirtyModels` sta in una funzione dichiarata, e la sola che lo PROPONGA e'
+ * `_proposeLedgerWrite` (`_persistScoresToFirestore` rimette in coda cio' che
+ * la rete ha respinto, e svuota la coda che sta per spedire: non e' una
+ * proposta nuova). Nominare il Set e mutarlo sono due diritti separati, e i
+ * lettori dell'allowlist hanno solo il primo — un writer nuovo non puo'
+ * dimenticare la regola, perche' non ha un altro modo di scrivere. Il resto del file misura le due decisioni
  * che la porta prende — l'opt-out del chiamante e l'endpoint per-macchina — sui
  * percorsi che erano rimasti fuori.
  *
