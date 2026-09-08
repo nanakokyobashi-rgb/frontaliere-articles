@@ -782,6 +782,7 @@ async function translateWithLibreTranslateSelfHosted(text, sourceLang, targetLan
       signal: AbortSignal.timeout(timeout),
     });
     if (!res.ok) {
+      noteTranslationOutcome(outcome, 'errors');
       console.warn(`⚠️  LibreTranslate self-hosted: HTTP ${res.status}`);
       return '';
     }
