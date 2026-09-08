@@ -639,7 +639,13 @@ async function raceInstances(instances, fetchFn, outcome = null) {
     const oldest = instances[0];
     if (oldest) {
       instanceHealth.delete(oldest);
-      return fetchFn(oldest);
+      const attemptOutcome = { passthroughs: 0, errors: 0, incomplete: false };
+      const result = await fetchFn(oldest, undefined, attemptOutcome);
+      mergeTranslationOutcome(outcome, attemptOutcome);
+      if (!result && attemptOutcome.passthroughs === 0 && attemptOutcome.errors === 0) {
+        noteTranslationOutcome(outcome, 'incomplete');
+      }
+      return result;
     }
     return '';
   }
@@ -649,16 +655,22 @@ async function raceInstances(instances, fetchFn, outcome = null) {
   const controller = new AbortController();
 
   const promises = batch.map(async (base) => {
+    const attemptOutcome = { passthroughs: 0, errors: 0, incomplete: false };
     try {
-      const result = await fetchFn(base, controller.signal);
+      const result = await fetchFn(base, controller.signal, attemptOutcome);
+      mergeTranslationOutcome(outcome, attemptOutcome);
       if (result) {
         controller.abort(); // cancel others
         markInstanceHealthy(base);
         return result;
       }
+      if (attemptOutcome.passthroughs === 0 && attemptOutcome.errors === 0) {
+        noteTranslationOutcome(outcome, 'incomplete');
+      }
       markInstanceFailed(base);
       return '';
     } catch {
+      mergeTranslationOutcome(outcome, attemptOutcome);
       noteTranslationOutcome(outcome, 'errors');
       markInstanceFailed(base);
       return '';
@@ -673,14 +685,20 @@ async function raceInstances(instances, fetchFn, outcome = null) {
 
   // Try remaining healthy instances sequentially
   for (const base of healthy.slice(3)) {
+    const attemptOutcome = { passthroughs: 0, errors: 0, incomplete: false };
     try {
-      const result = await fetchFn(base);
+      const result = await fetchFn(base, undefined, attemptOutcome);
+      mergeTranslationOutcome(outcome, attemptOutcome);
       if (result) {
         markInstanceHealthy(base);
         return result;
       }
+      if (attemptOutcome.passthroughs === 0 && attemptOutcome.errors === 0) {
+        noteTranslationOutcome(outcome, 'incomplete');
+      }
       markInstanceFailed(base);
     } catch {
+      mergeTranslationOutcome(outcome, attemptOutcome);
       noteTranslationOutcome(outcome, 'errors');
       markInstanceFailed(base);
     }
@@ -694,7 +712,7 @@ async function translateWithLingva(text, sourceLang, targetLang, outcome = null)
   if (!q || sourceLang === targetLang) return '';
   const encoded = encodeURIComponent(q);
 
-  return raceInstances(LINGVA_INSTANCES, async (base, signal) => {
+  return raceInstances(LINGVA_INSTANCES, async (base, signal, attemptOutcome) => {
     const res = await fetch(
       `${base}/api/v1/${sourceLang || 'auto'}/${targetLang}/${encoded}`,
       {
@@ -708,7 +726,7 @@ async function translateWithLingva(text, sourceLang, targetLang, outcome = null)
     // Dentro `raceInstances`: se questa istanza rende l'eco NON deve vincere la
     // gara, le altre stanno ancora provando. Percio' il rifiuto resta qui e non
     // sale in `tryTier` — ma passa dalla formula condivisa e viene contato.
-    if (translated && !rejectedAsPassthrough('lingva', q, translated, outcome)) return translated;
+    if (translated && !rejectedAsPassthrough('lingva', q, translated, attemptOutcome)) return translated;
     return '';
   }, outcome);
 }
@@ -718,7 +736,7 @@ async function translateWithSimplyTranslate(text, sourceLang, targetLang, outcom
   const q = normalizeBlock(text);
   if (!q || sourceLang === targetLang) return '';
 
-  return raceInstances(SIMPLYTRANSLATE_INSTANCES, async (base, signal) => {
+  return raceInstances(SIMPLYTRANSLATE_INSTANCES, async (base, signal, attemptOutcome) => {
     const params = new URLSearchParams({
       engine: 'google',
       from: sourceLang || 'auto',
@@ -732,7 +750,7 @@ async function translateWithSimplyTranslate(text, sourceLang, targetLang, outcom
     if (!res.ok) return '';
     const data = await res.json();
     const translated = normalizeBlock(data?.translated_text || '');
-    if (translated && !rejectedAsPassthrough('simplyTranslate', q, translated, outcome)) return translated;
+    if (translated && !rejectedAsPassthrough('simplyTranslate', q, translated, attemptOutcome)) return translated;
     return '';
   }, outcome);
 }
@@ -776,7 +794,7 @@ async function translateWithLibreTranslate(text, sourceLang, targetLang, outcome
   const q = normalizeBlock(text);
   if (!q || sourceLang === targetLang) return '';
 
-  return raceInstances(LIBRETRANSLATE_PUBLIC, async (base, signal) => {
+  return raceInstances(LIBRETRANSLATE_PUBLIC, async (base, signal, attemptOutcome) => {
     const res = await fetch(`${base}/translate`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -786,7 +804,7 @@ async function translateWithLibreTranslate(text, sourceLang, targetLang, outcome
     if (!res.ok) return '';
     const data = await res.json();
     const translated = normalizeBlock(data?.translatedText || '');
-    if (translated && !rejectedAsPassthrough('libreTranslate', q, translated, outcome)) return translated;
+    if (translated && !rejectedAsPassthrough('libreTranslate', q, translated, attemptOutcome)) return translated;
     return '';
   }, outcome);
 }
@@ -796,7 +814,7 @@ async function translateWithMozhiEngine(text, sourceLang, targetLang, engine = '
   const q = normalizeBlock(text);
   if (!q || sourceLang === targetLang) return '';
 
-  return raceInstances(MOZHI_INSTANCES, async (base, signal) => {
+  return raceInstances(MOZHI_INSTANCES, async (base, signal, attemptOutcome) => {
     const params = new URLSearchParams({
       engine,
       from: sourceLang || 'auto',
@@ -815,7 +833,7 @@ async function translateWithMozhiEngine(text, sourceLang, targetLang, engine = '
     // nomi diversi (`mozhiDdg`, `mozhiGoogle`, `mozhiYandex`, `mozhiDeepL`) e da
     // qui dentro non sono ricostruibili, quindi il bucket usa `mozhi:<engine>`
     // invece di inventare una corrispondenza che poi deriva.
-    if (translated && !rejectedAsPassthrough(`mozhi:${engine}`, q, translated, outcome)) return translated;
+    if (translated && !rejectedAsPassthrough(`mozhi:${engine}`, q, translated, attemptOutcome)) return translated;
     return '';
   }, outcome);
 }
@@ -871,14 +889,14 @@ async function translateWithAzure(text, sourceLang, targetLang, outcome = null) 
           _azureExhaustedKeys.add(key);
           _cascadeStats.tierErrors.azure = (_cascadeStats.tierErrors.azure || 0) + 1;
           noteTranslationOutcome(outcome, 'errors');
-          throw Object.assign(new Error('Azure auth'), { quotaExhausted: true });
+          throw Object.assign(new Error('Azure auth'), { quotaExhausted: true, outcomeNoted: true });
         }
         if (res.status === 429) {
           _azureExhaustedKeys.add(key);
           _cascadeStats.tierErrors.azure = (_cascadeStats.tierErrors.azure || 0) + 1;
           noteTranslationOutcome(outcome, 'errors');
           console.log(`🔑 Azure key #${idx + 1} quota exhausted — rotating`);
-          throw Object.assign(new Error('Azure quota'), { quotaExhausted: true });
+          throw Object.assign(new Error('Azure quota'), { quotaExhausted: true, outcomeNoted: true });
         }
         if (!res.ok) {
           // Other failure (e.g. 400 bad lang). Bump the tier error counter, then
@@ -1196,6 +1214,13 @@ function noteTranslationOutcome(state, outcome) {
   state[outcome] = (state[outcome] || 0) + 1;
 }
 
+function mergeTranslationOutcome(target, source) {
+  if (!target || !source) return;
+  target.passthroughs += source.passthroughs || 0;
+  target.errors += source.errors || 0;
+  target.incomplete = target.incomplete || source.incomplete === true;
+}
+
 export async function freeTranslate({ text, sourceLang, targetLang, fieldType = 'title', _outcome = null }) {
   const sourceClean = normalizeBlock(text);
   if (!sourceClean) return '';
@@ -1255,7 +1280,7 @@ export async function freeTranslate({ text, sourceLang, targetLang, fieldType = 
       }
     } catch (err) {
       _cascadeStats.tierErrors[tierName] = (_cascadeStats.tierErrors[tierName] || 0) + 1;
-      noteTranslationOutcome(_outcome, 'errors');
+      if (!err?.outcomeNoted) noteTranslationOutcome(_outcome, 'errors');
     }
     return '';
   }

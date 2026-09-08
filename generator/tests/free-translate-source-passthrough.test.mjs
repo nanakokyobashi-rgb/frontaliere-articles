@@ -223,7 +223,7 @@ describe('freeTranslate — guardia «uscita == sorgente»', () => {
     assert.equal(after.hits - before.hits, 0);
   });
 
-  test('il dettaglio del retry resta per-chiamata e non eredita errori globali', async () => {
+  test('il dettaglio del retry non memoizza un eco quando altri endpoint sono indisponibili', async () => {
     globalThis.fetch = async (url) => {
       if (String(url).includes('api.mymemory.translated.net')) {
         return {
@@ -242,7 +242,7 @@ describe('freeTranslate — guardia «uscita == sorgente»', () => {
       maxRetries: 0,
     });
 
-    assert.deepEqual(out, { text: '', passthrough: true });
+    assert.deepEqual(out, { text: '', passthrough: false });
   });
 
   test('un errore nella stessa chiamata impedisce il memo del passthrough', async () => {

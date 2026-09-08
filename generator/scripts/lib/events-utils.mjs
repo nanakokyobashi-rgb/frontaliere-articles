@@ -1165,7 +1165,11 @@ async function fillLocaleGaps(byLocale, cache, { eventId, fieldType, locales, de
       if (translateFn === DEFAULT_TRANSLATE_FN) {
         await sleep(delayMs);
       }
-    } else if (passthrough && wordCount(sourceText) <= MAX_PASSTHROUGH_MEMO_WORDS) {
+    } else if (
+      passthrough
+      && !hasUsableContentText(entry?.[target])
+      && wordCount(sourceText) <= MAX_PASSTHROUGH_MEMO_WORDS
+    ) {
       // Keep the negative memo as null: writing sourceText into a missing target
       // locale would publish Italian under the requested locale.
       cache[cacheKey] = { ...entry, [target]: null };

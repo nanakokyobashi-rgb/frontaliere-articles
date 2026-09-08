@@ -117,7 +117,7 @@ test('un duplicato successivo non clobbera il feed con MT stantia se il retry fa
       delayMs: 0,
       translateFn: async () => {
         secondCalls += 1;
-        return { text: '', passthrough: false };
+        return { text: '', passthrough: true };
       },
     },
   );
