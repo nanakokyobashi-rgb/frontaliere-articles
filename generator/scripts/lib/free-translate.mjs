@@ -1543,9 +1543,9 @@ export async function freeTranslateWithRetryDetailed({ text, sourceLang, targetL
     if (out) return { text: out, passthrough: false };
   }
 
-  // Only the terminal cascade attempt decides whether the empty result is a
-  // stable passthrough. A transient incomplete/error on an earlier attempt
-  // must not poison a later attempt that consistently saw source echoes.
+  // Aggregate all attempts: an error/incomplete result earlier in the retry
+  // window must not be hidden by a later source echo and turned into a durable
+  // passthrough memo.
   const passthrough = outcome.passthroughs > 0 && outcome.errors === 0 && !outcome.incomplete;
   return { text: '', passthrough };
 }
