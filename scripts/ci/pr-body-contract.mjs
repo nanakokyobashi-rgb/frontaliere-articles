@@ -9,8 +9,9 @@
  *   2. Nessun `Closes #a #b` sulla stessa riga (`pr-body-closes-check.mjs`,
  *      condiviso col sito): GitHub chiude SOLO la prima issue dopo la keyword,
  *      quindi le altre restano aperte in silenzio.
- *   3. Nessuna voce di `## Non implementato (ancora)` che rimandi il lavoro con
- *      una scappatoia al posto di uno stato (`pr-body-nextstep-check.mjs`).
+ *   3. Ogni voce di `## Non implementato (ancora)` dichiara uno stato concreto;
+ *      una scappatoia o una prosa senza stato fa fallire il gate
+ *      (`pr-body-nextstep-check.mjs`).
  *      E' il difetto dell'escalation #140: la sezione c'era, non era vuota, e
  *      il contratto restava disatteso lo stesso — perche' cio' che il gate
  *      misurava era la PRESENZA, e cio' che REVIEW.md §98 chiede e' un PIANO.
@@ -45,7 +46,11 @@
 import { execFileSync } from 'node:child_process';
 import { checkPrBodySections } from '../lib/pr-body-sections-check.mjs';
 import { checkClosesLines } from '../lib/pr-body-closes-check.mjs';
-import { checkNextStepStates, suggestedSection } from '../lib/pr-body-nextstep-check.mjs';
+import {
+  checkNextStepStates,
+  blockingNextStepFindings,
+  suggestedSection,
+} from '../lib/pr-body-nextstep-check.mjs';
 import { checkCitedFilePaths, extractCitedPaths } from '../lib/pr-body-filepath-check.mjs';
 
 const PR = process.argv[2];
@@ -84,6 +89,8 @@ function main() {
   const sections = checkPrBodySections(body);
   const closes = checkClosesLines(body);
   const nextStep = checkNextStepStates(body);
+  const nextStepProblems = blockingNextStepFindings(nextStep);
+  const nextStepAdvisories = nextStep.advisories.filter((a) => a.type !== 'no-literal-state');
 
   // I file toccati dalla PR contano come esistenti anche quando l'albero non li
   // ha. Il checkout di `pull_request` e' il MERGE REF, quindi cio' che la PR
@@ -114,13 +121,13 @@ function main() {
         ? `- Riga ${v.line}: ${v.message}`
         : `- Riga ${v.line}: \`${v.text}\` chiude **solo ${v.refs[0]}** — GitHub ignora i riferimenti successivi sulla stessa riga. Usa una keyword per issue, una per riga.`,
     ),
-    ...nextStep.violations.map((v) => `- ${v.message}`),
+    ...nextStepProblems.map((v) => `- ${v.message}`),
   ];
 
-  // Gli avvisi non fanno fallire: vedi la tabella di misura in
-  // `pr-body-nextstep-check.mjs`. Pretendere la forma letterale su OGNI voce
-  // boccerebbe 34 PR su 40 fra quelle che il reviewer ha approvato — un gate
-  // con quel tasso lo si spegne, non lo si rispetta.
+  // Le decisioni motivate restano avvisi perché la regex non può provarne la
+  // sostanza. `no-literal-state`, invece, è già stato promosso in
+  // `nextStepProblems`: la misura di #140 ha dimostrato che lasciarlo verde
+  // sposta il difetto al reviewer invece di impedirne la ricorrenza.
   //
   // Stessa politica, stessa ragione, per i path citati (#140, secondo giro): il
   // modulo trova le citazioni che non risolvono qui, ma su 45 PR mergiate ZERO
@@ -128,7 +135,7 @@ function main() {
   // profilo fermerebbe 6 PR su 45 senza un difetto vero. Vedi la misura completa
   // nel docblock di `pr-body-filepath-check.mjs`.
   const advisories = [
-    ...nextStep.advisories.map((a) => `- ${a.message}`),
+    ...nextStepAdvisories.map((a) => `- ${a.message}`),
     ...filePaths.violations.map((v) => `- ${v.message}`),
   ];
 
@@ -149,7 +156,7 @@ function main() {
   // addosso il lavoro di capire dove e come, e la regola era gia' scritta in
   // REVIEW.md — a ricorrere non era l'ignoranza della regola, era il costo di
   // applicarla. Qui la correzione si incolla.
-  const suggestion = suggestedSection(body);
+  const suggestion = suggestedSection(body, { strict: true });
 
   const comment = [
     MARKER,

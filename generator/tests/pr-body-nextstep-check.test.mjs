@@ -18,6 +18,7 @@ import assert from 'node:assert/strict';
 
 import {
   checkNextStepStates,
+  blockingNextStepFindings,
   suggestedSection,
   bulletState,
   escapeHatchIn,
@@ -208,6 +209,18 @@ test('la voce senza forma letterale ma senza scappatoia avvisa e NON blocca', ()
   assert.equal(res.violations.length, 0);
   assert.equal(res.advisories.length, 1);
   assert.equal(res.advisories[0].type, 'no-literal-state');
+});
+
+test('il gate promuove il no-literal-state a problema, senza cambiare il classificatore', () => {
+  const body = withSection([
+    '- `engine/rssFeeds.mjs` va riparato sul sito perché il parametro non viene ancora usato.',
+  ]);
+  const res = checkNextStepStates(body);
+  assert.equal(res.ok, true, 'il classificatore conserva la distinzione semantica');
+  const problems = blockingNextStepFindings(res);
+  assert.equal(problems.length, 1);
+  assert.equal(problems[0].type, 'no-literal-state');
+  assert.doesNotMatch(suggestedSection(body, { strict: true }), /opzionale/);
 });
 
 // ---------------------------------------------------------------------------
