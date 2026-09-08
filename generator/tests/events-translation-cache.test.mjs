@@ -9,7 +9,7 @@ function event(id, title = SAME_TITLE) {
   return { id, titleByLocale: { it: title } };
 }
 
-test('condivide il risultato per contenuto e riusa la cache nei giri successivi', async () => {
+test('separa eventi con lo stesso titolo e riusa la cache nel secondo giro', async () => {
   let calls = 0;
   const cache = {};
   const translateFn = async () => `traduzione-${++calls}`;
@@ -20,13 +20,16 @@ test('condivide il risultato per contenuto e riusa la cache nei giri successivi'
     { locales: ['it', 'en'], delayMs: 0, translateFn },
   );
 
-  assert.equal(calls, 1);
+  assert.equal(calls, 2, 'due eventi distinti non possono condividere una traduzione solo per il titolo');
   assert.equal(first[0].titleByLocale.en, 'traduzione-1');
-  assert.equal(first[1].titleByLocale.en, 'traduzione-1');
-  assert.equal(Object.keys(cache).length, 1);
+  assert.equal(first[1].titleByLocale.en, 'traduzione-2');
+  assert.equal(Object.keys(cache).length, 2);
   assert.deepEqual(
-    Object.keys(cache).map((key) => JSON.parse(key)).sort(),
-    [['title', 'it', 'locarno film festival']],
+    Object.keys(cache).map((key) => JSON.parse(key)).sort((a, b) => a[1].localeCompare(b[1])),
+    [
+      ['title', 'id:guidle:one', 'it', 'locarno film festival'],
+      ['title', 'id:guidle:two', 'it', 'locarno film festival'],
+    ],
   );
 
   const secondTranslateFn = async () => { throw new Error('il secondo giro deve usare la cache'); };
@@ -37,10 +40,10 @@ test('condivide il risultato per contenuto e riusa la cache nei giri successivi'
   );
 
   assert.equal(second[0].titleByLocale.en, 'traduzione-1');
-  assert.equal(second[1].titleByLocale.en, 'traduzione-1');
+  assert.equal(second[1].titleByLocale.en, 'traduzione-2');
 });
 
-test('ignora il marker legacy e condivide la nuova cache per contenuto', async () => {
+test('migra un marker legacy senza riusare la vecchia cache condivisa', async () => {
   let calls = 0;
   const cache = { 'title::it::locarno film festival': { en: 'Null' } };
   const out = await enrichEventsWithLocaleFallbackTranslations(
@@ -53,10 +56,30 @@ test('ignora il marker legacy e condivide la nuova cache per contenuto', async (
     },
   );
 
-  assert.equal(calls, 1, 'il marker legacy non è una traduzione condivisibile');
+  assert.equal(calls, 2, 'il marker legacy non rende condivisibili due eventi distinti');
   assert.equal(out[0].titleByLocale.en, 'traduzione-migrata-1');
-  assert.equal(out[1].titleByLocale.en, 'traduzione-migrata-1');
-  assert.equal(cache['title::it::locarno film festival'].en, 'Null');
+  assert.equal(out[1].titleByLocale.en, 'traduzione-migrata-2');
+  assert.equal(cache['title::it::locarno film festival'].en, 'traduzione-migrata-1');
+});
+
+test('senza discriminante stabile traduce ma non persiste una chiave condivisa', async () => {
+  let calls = 0;
+  const cache = {};
+  const events = [
+    { titleByLocale: { it: SAME_TITLE } },
+    { titleByLocale: { it: SAME_TITLE } },
+  ];
+
+  const out = await enrichEventsWithLocaleFallbackTranslations(events, cache, {
+    locales: ['it', 'en'],
+    delayMs: 0,
+    translateFn: async () => `traduzione-${++calls}`,
+  });
+
+  assert.equal(calls, 2);
+  assert.equal(out[0].titleByLocale.en, 'traduzione-1');
+  assert.equal(out[1].titleByLocale.en, 'traduzione-2');
+  assert.deepEqual(cache, {});
 });
 
 test('memoizza un passthrough esplicito senza pubblicare la sorgente nel target', async () => {
@@ -97,7 +120,7 @@ test('non congela un duplicato del feed copiato in tutti i locali', async () => 
   assert.match(out[0].titleByLocale.fr, /^traduzione-fr-/);
 });
 
-test('un duplicato successivo riusa il memo positivo invece di ripubblicare la sorgente', async () => {
+test('un duplicato successivo conserva il feed e non ripaga il memo positivo', async () => {
   const cache = {};
   const first = await enrichEventsWithLocaleFallbackTranslations(
     [event('guidle:stable')],
@@ -122,7 +145,7 @@ test('un duplicato successivo riusa il memo positivo invece di ripubblicare la s
     },
   );
 
-  assert.equal(second[0].titleByLocale.en, 'traduzione-en');
+  assert.equal(second[0].titleByLocale.en, SAME_TITLE);
   assert.equal(secondCalls, 0, 'il memo positivo evita di ripagare la cascata quando il feed duplica la sorgente');
   assert.equal(Object.values(cache)[0].en, 'traduzione-en');
 });
@@ -222,5 +245,5 @@ test('non pubblica il testo sorgente quando il translator segnala passthrough es
   );
 
   assert.deepEqual(out[0].titleByLocale, { it: SAME_TITLE });
-  assert.equal(cache['["title","it","locarno film festival"]'].en, null);
+  assert.equal(cache['["title","id:guidle:explicit-source","it","locarno film festival"]'].en, null);
 });

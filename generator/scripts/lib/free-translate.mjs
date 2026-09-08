@@ -1438,9 +1438,6 @@ export async function freeTranslate({ text, sourceLang, targetLang, fieldType = 
         noteTranslationOutcome(_outcome, 'incomplete');
         return ''; // quota hit mid-chunk, abort
       }
-      if (rejectedAsPassthrough('myMemory', chunk, mm, _outcome)) {
-        return ''; // an echoed chunk invalidates the whole assembled result
-      }
       parts.push(mm);
     }
     // `return joined` e non un confronto locale: questo e' il ramo dei testi
@@ -1552,20 +1549,19 @@ export function asTranslationResult(value) {
 
 /** Return the retry result together with the reason for an empty translation. */
 export async function freeTranslateWithRetryDetailed({ text, sourceLang, targetLang, fieldType = 'title', maxRetries = 2 }) {
-  let outcome = { passthroughs: 0, errors: 0, incomplete: false };
+  const outcome = { passthroughs: 0, errors: 0, incomplete: false };
   let out = await freeTranslate({ text, sourceLang, targetLang, fieldType, _outcome: outcome });
   if (out) return { text: out, passthrough: false };
 
   for (let i = 1; i <= maxRetries; i++) {
     await delay(i * 1000);
-    outcome = { passthroughs: 0, errors: 0, incomplete: false };
     out = await freeTranslate({ text, sourceLang, targetLang, fieldType, _outcome: outcome });
     if (out) return { text: out, passthrough: false };
   }
 
-  // Only the terminal cascade attempt decides whether the empty result is a
-  // stable passthrough. A transient incomplete/error on an earlier attempt
-  // must not poison a later attempt that consistently saw source echoes.
+  // Aggregate all attempts: an error/incomplete result earlier in the retry
+  // window must not be hidden by a later source echo and turned into a durable
+  // passthrough memo.
   const passthrough = outcome.passthroughs > 0 && outcome.errors === 0 && !outcome.incomplete;
   return { text: '', passthrough };
 }

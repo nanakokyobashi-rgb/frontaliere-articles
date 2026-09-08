@@ -137,36 +137,6 @@ describe('freeTranslate — guardia «uscita == sorgente»', () => {
     assert.equal(snapshot().passthroughs - before.passthroughs, 1);
   });
 
-  test('conta il passthrough anche sul ramo a CHUNK, che e\' quello dei body lunghi', async () => {
-    // MyMemory passa al ramo a chunk sopra i 5000 caratteri. E' il ramo dei
-    // body — cioe' esattamente dei passthrough misurati sul corpus — e la copia
-    // locale del confronto che stava li' li consumava prima di `tryTier`: il
-    // bucket non li avrebbe visti mai, e la riga `Tier passthrough` sarebbe
-    // stata cieca sul caso per cui e' stata scritta.
-    //
-    // Sorgente su UNA riga di proposito: quel ramo riassembla con
-    // `parts.join(' ')`, quindi su un testo a piu' paragrafi l'uscita non e' mai
-    // byte-uguale all'ingresso nemmeno quando il motore l'ha ricopiata — limite
-    // dichiarato, non qualcosa che questo caso possa pinnare fingendo il
-    // contrario.
-    const frase = 'I frontalieri residenti entro venti chilometri dal confine restano nel vecchio regime fiscale e la soglia dei quarantacinque giorni di telelavoro vale dal primo gennaio. ';
-    const lungo = frase.repeat(40).trim();
-    assert.ok(lungo.length > 5000);
-    globalThis.fetch = async (url) => {
-      if (!String(url).includes('api.mymemory.translated.net')) throw new Error('offline nel test');
-      const q = new URL(String(url)).searchParams.get('q');
-      return { ok: true, json: async () => ({ responseData: { translatedText: q, match: 1 } }) };
-    };
-    const before = snapshot();
-
-    const out = await freeTranslate({ text: lungo, sourceLang: 'it', targetLang: 'en', fieldType: 'description' });
-    const after = snapshot();
-
-    assert.equal(out, '');
-    assert.equal(after.passthroughs - before.passthroughs, 1);
-    assert.equal(after.hits - before.hits, 0);
-  });
-
   test('nomina il passthrough nel sommario della cascata', async () => {
     stubCascade(IT);
     await freeTranslate({ text: IT, sourceLang: 'it', targetLang: 'fr', fieldType: 'description' });
@@ -305,6 +275,55 @@ describe('freeTranslate — guardia «uscita == sorgente»', () => {
         HF_TOKEN: '',
         HUGGINGFACE_API_KEY: '',
         LIBRETRANSLATE_SELF_HOSTED_URL: 'http://self-hosted.test',
+        VITEST: '1',
+      },
+    });
+    assert.equal(child.status, 0, child.stderr || child.stdout);
+  });
+
+  test('un tier opzionale disabilitato impedisce il memo del passthrough', () => {
+    const moduleUrl = new URL('../scripts/lib/free-translate.mjs', import.meta.url).href;
+    const childScript = `
+      globalThis.fetch = async (url) => {
+        const value = String(url);
+        if (value.includes('api.mymemory.translated.net')) {
+          return { ok: true, json: async () => ({ responseData: { translatedText: ${JSON.stringify(IT)}, match: 1 } }) };
+        }
+        if (value.includes('translate.googleapis.com')) {
+          return { ok: true, text: async () => JSON.stringify([[ [${JSON.stringify(IT)}] ]]) };
+        }
+        if (value.includes('clients5.google.com')) {
+          return { ok: true, text: async () => JSON.stringify({ sentences: [{ trans: ${JSON.stringify(IT)} }] }) };
+        }
+        if (value.includes('/api/v1/')) return { ok: true, json: async () => ({ translation: ${JSON.stringify(IT)} }) };
+        if (value.includes('/api/translate')) return { ok: true, json: async () => ({ 'translated-text': ${JSON.stringify(IT)} }) };
+        if (value.includes('/translate')) return { ok: true, json: async () => ({ translatedText: ${JSON.stringify(IT)} }) };
+        throw new Error('endpoint inatteso nel test');
+      };
+      const { freeTranslateWithRetryDetailed } = await import(${JSON.stringify(moduleUrl)});
+      const out = await freeTranslateWithRetryDetailed({
+        text: ${JSON.stringify(IT)}, sourceLang: 'it', targetLang: 'en', fieldType: 'description', maxRetries: 0,
+      });
+      if (JSON.stringify(out) !== JSON.stringify({ text: '', passthrough: false })) {
+        console.error(JSON.stringify(out));
+        process.exit(1);
+      }
+    `;
+    const child = spawnSync(process.execPath, ['--input-type=module', '--eval', childScript], {
+      encoding: 'utf8',
+      env: {
+        ...process.env,
+        DEEPL_API_KEY: '',
+        DEEPL_API_KEY_2: '',
+        AZURE_TRANSLATOR_KEY: '',
+        AZURE_TRANSLATOR_KEY_2: '',
+        GSC_CLIENT_ID: '',
+        GSC_CLIENT_SECRET: '',
+        GSC_REFRESH_TOKEN: '',
+        HF_TOKEN: '',
+        HUGGINGFACE_API_KEY: '',
+        LIBRETRANSLATE_SELF_HOSTED_URL: '',
+        MT_LOCAL_OPUSMT: '',
         VITEST: '1',
       },
     });

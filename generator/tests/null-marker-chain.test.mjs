@@ -243,9 +243,10 @@ describe('events-utils — il feed dell’organizzatore non parla tedesco', () =
 
   test('#868 item 3 — una entry `Null` gia’ in cache non viene riusata: si ritraduce', async () => {
     const events = [{ id: 'e1', titleByLocale: { it: 'Mercatino di Natale', en: 'Christmas market' } }];
-    // La cache e' persistente fra le run: la chiave e' quella JSON che
-    // `fillLocaleGaps` compone (`fieldType, sourceLocale, testoNormalizzato`).
-    const cache = { '["title","it","mercatino di natale"]': { de: 'Null', fr: 'NULL' } };
+    // La cache legacy e' persistente fra le run: la chiave senza discriminante
+    // viene usata solo per migrare marker inutilizzabili, mai per condividere
+    // traduzioni fra eventi distinti.
+    const cache = { 'title::it::mercatino di natale': { de: 'Null', fr: 'NULL' } };
     const chiamate = [];
     const out = await enrichEventsWithLocaleFallbackTranslations(events, cache, {
       delayMs: 0,
@@ -257,7 +258,7 @@ describe('events-utils — il feed dell’organizzatore non parla tedesco', () =
     assert.deepEqual(chiamate.sort(), ['de', 'fr'], 'entrambe le entry avvelenate devono essere ritradotte');
     assert.equal(out[0].titleByLocale.de, 'titolo-de');
     assert.equal(out[0].titleByLocale.fr, 'titolo-fr');
-    assert.equal(cache['["title","it","mercatino di natale"]'].de, 'titolo-de', 'la cache va anche RISCRITTA');
+    assert.equal(cache['title::it::mercatino di natale'].de, 'titolo-de', 'la cache legacy va migrata');
   });
 
   test('#831 item 3 — una traduzione inutilizzabile non scrive la chiave: il locale resta scoperto', async () => {
