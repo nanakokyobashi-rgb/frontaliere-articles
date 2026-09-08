@@ -194,7 +194,7 @@ test('② le tre reti di sicurezza dell espansione restano tutte al loro posto',
   // loop (incidente 2026-07-21, swatch-crescita-2026 / novartis-superaspettative).
   assert.match(body, /AI loop rilevato dopo espansione/);
   // Il ri-passaggio dei gate deterministici.
-  assert.match(body, /const expandGateResult = runFactualityGates\(\{/);
+  assert.match(body, /const expandGateResult = run(?:Article)?FactualityGates\(\{/);
 });
 
 test('② l espansione ANTICIPATA ripassa il fact-check; quella di ultima spiaggia no', () => {

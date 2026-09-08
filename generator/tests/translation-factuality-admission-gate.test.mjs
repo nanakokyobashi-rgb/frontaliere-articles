@@ -72,7 +72,7 @@ function cutFunction(nome, sentinelle) {
 }
 
 const GATE_SRC = cutFunction('assertTranslationsPassFactualityGates', [
-  'runFactualityGates',
+  'runArticleFactualityGates',
   'collectBodySections',
   'qualityReject',
   'ARTICLE_TRANSLATION_GATE',
@@ -82,6 +82,10 @@ const GATE_SRC = cutFunction('assertTranslationsPassFactualityGates', [
 // tre (#980): il ritaglio va quindi accompagnato dal suo helper, altrimenti
 // `new Function` istanzia un gate che non risolve `collectBodySections`.
 const SECTIONS_SRC = cutFunction('collectBodySections', ['body\\d+', 'sections']);
+const ADMISSION_SRC = cutFunction('runArticleFactualityGates', [
+  'runFactualityGates',
+  'DETERMINISTIC_BODY_HEURISTIC_CODES',
+]);
 
 /** Istanzia la funzione vera con le sue dipendenze di chiusura iniettate. */
 function makeGate() {
@@ -89,10 +93,16 @@ function makeGate() {
     'runFactualityGates',
     'formatIssues',
     'console',
-    `${SECTIONS_SRC}\n${GATE_SRC}\nreturn assertTranslationsPassFactualityGates;`,
+    'DETERMINISTIC_BODY_HEURISTIC_CODES',
+    `${SECTIONS_SRC}\n${ADMISSION_SRC}\n${GATE_SRC}\nreturn assertTranslationsPassFactualityGates;`,
   );
   // console silenziata: il gate stampa i rilievi, non deve sporcare l'output.
-  return factory(runFactualityGates, formatIssues, { error: () => {} });
+  return factory(runFactualityGates, formatIssues, { error: () => {} }, new Set([
+    'unbalanced-parentheses',
+    'truncated-bold',
+    'incomplete-ending',
+    'leaked-prompt-scaffolding',
+  ]));
 }
 
 /**
@@ -196,7 +206,7 @@ test('#7 le sezioni sono derivate dalle chiavi, non elencate', () => {
 });
 
 test('#4 il gate e\' collegato a ENTRAMBI i percorsi di scrittura', () => {
-  const chiamate = src.match(/^\s*assertTranslationsPassFactualityGates\(data\);/gm) || [];
+  const chiamate = src.match(/^\s*assertArticlePassesFactualityGates\(data\);/gm) || [];
   assert.ok(
     chiamate.length >= 2,
     'il gate deve essere chiamato sia nel flusso AI primario (Step 3a.2) sia in '
@@ -210,8 +220,10 @@ test('#4 il gate e\' collegato a ENTRAMBI i percorsi di scrittura', () => {
   assert.notEqual(reg, -1, 'registerArticleFiles non trovata — aggiornare questo test');
   const corpo = src.slice(reg, reg + 4000);
   assert.ok(
-    corpo.includes('assertTranslationsPassFactualityGates(data);'),
+    corpo.includes('assertArticlePassesFactualityGates(data);'),
     'registerArticleFiles() non chiama il gate: daily-brief, events-digest, '
       + 'border-wait-ranking e journalist tornerebbero a scrivere body tradotti non giudicati',
   );
+  assert.match(src, /collectBodySections\(data\.content\.it\)/, 'il gate italiano deve derivare tutti i bodyN');
+  assert.match(src, /deterministicBodySections/, 'il gate deve distinguere il body deterministico dalle euristiche LLM');
 });

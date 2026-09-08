@@ -493,8 +493,9 @@ test('wiring: refreshMetaAndSeo mappa data.content/data.seo su refreshDescriptiv
   // pulito, quindi la guardia e' un no-op e la mappatura sotto test non cambia.
   const refreshMetaAndSeo = new Function(
     'LOCALES', 'refreshDescriptiveTexts', 'REPO_ROOT', 'sanitizePromptPlaceholders',
+    'assertArticlePassesFactualityGates',
     `${fnSrc}\n`,
-  )(['it', 'en', 'de', 'fr'], stubRefresh, FAKE_ROOT, sanitizePromptPlaceholders);
+  )(['it', 'en', 'de', 'fr'], stubRefresh, FAKE_ROOT, sanitizePromptPlaceholders, () => {});
 
   const data = {
     id: 'demo-id',

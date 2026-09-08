@@ -73,6 +73,7 @@ const PUBLISHES_TO_API = OUT === DEFAULT_OUT;
 const API_ROOT = path.dirname(OUT);
 /** `{ <path relativo a dist/api>: byte UTF-8 }`, per `manifest.files`. */
 const writtenShards = {};
+const expectedShards = new Set();
 
 const LOCALES = ['it', 'en', 'de', 'fr'];
 const SECTIONS = [
@@ -311,6 +312,7 @@ for (const section of SECTIONS) {
     // window to fall through on the uncommon one.
     const capped = entries.slice(0, RECENT_LIMIT);
     const file = path.join(OUT, `blog-index-${section.name}-${locale}.json`);
+    expectedShards.add(path.relative(API_ROOT, file));
     const payload = {
       version: 1, section: section.name, locale,
       count: capped.length, total: entries.length, articles: capped,
@@ -328,6 +330,7 @@ for (const section of SECTIONS) {
     console.log(`[blog-index] ${path.basename(file)} — ${capped.length}/${entries.length} articles, ${kb} KB, newest ${capped[0].date}`);
 
     const fullFile = path.join(OUT, `blog-index-${section.name}-${locale}-full.json`);
+    expectedShards.add(path.relative(API_ROOT, fullFile));
     const fullPayload = {
       version: 1, section: section.name, locale,
       count: entries.length, total: entries.length, articles: entries,
@@ -350,9 +353,17 @@ for (const section of SECTIONS) {
 // today this is silent. It exists for the third write — the one someone adds
 // later without noticing that this file has an output contract.
 {
-  const emitted = fs.existsSync(OUT) ? fs.readdirSync(OUT).filter((f) => f.endsWith('.json')) : [];
-  for (const f of emitted) {
-    assertNoControlChars(fs.readFileSync(path.join(OUT, f), 'utf-8'), `${OUT}/${f}`);
+  const emitted = [];
+  const walk = (dir) => {
+    for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+      const abs = path.join(dir, entry.name);
+      if (entry.isDirectory()) walk(abs);
+      else if (entry.name.endsWith('.json')) emitted.push(abs);
+    }
+  };
+  if (fs.existsSync(OUT)) walk(OUT);
+  for (const file of emitted) {
+    assertNoControlChars(fs.readFileSync(file, 'utf-8'), file);
   }
   console.log(`[blog-index] control-character gate: ${emitted.length} files clean`);
 }
@@ -370,13 +381,13 @@ for (const section of SECTIONS) {
 // una sola voce mancante e' un set troncato, e va rifiutata qui invece di
 // essere pubblicata come "indice piu' corto".
 if (!failed && PUBLISHES_TO_API) {
-  const expected = SECTIONS.length * LOCALES.length * 2;
   const actual = Object.keys(writtenShards).length;
-  if (actual !== expected) {
-    console.error(`[blog-index] wrote ${actual} shards, expected ${expected} — refusing to publish a partial index set`);
+  const missing = [...expectedShards].filter((rel) => !Object.hasOwn(writtenShards, rel));
+  if (actual !== expectedShards.size || missing.length > 0) {
+    console.error(`[blog-index] wrote ${actual} shards, expected ${expectedShards.size} — missing ${missing.join(', ') || 'unknown'} — refusing to publish a partial index set`);
     failed = true;
   } else {
-    const total = declareApiArtifacts(API_ROOT, writtenShards);
+    const total = declareApiArtifacts(API_ROOT, writtenShards, { blogIndexShards: actual });
     console.log(`[blog-index] manifest.files: ${actual} shards declared, ${total} artifacts match on disk`);
   }
 }
