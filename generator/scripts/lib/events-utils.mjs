@@ -939,8 +939,8 @@ export function saveEventTitleTranslationCache(cache) {
 // `locales` priority order), or from the first present locale if ALL of them
 // collide. Shared here (not copy-pasted into both crawlers, AGENTS.md §6) and
 // reuses the SAME on-disk cache as `loadEventTitleTranslationCache`. Entries
-// are keyed by field, source locale, and normalized source text: translation is
-// pure for that input, so duplicate event records share one result.
+// are keyed by the event discriminator, field, source locale, and normalized
+// source text: two legitimate events with the same title must not merge.
 const LOCALE_FALLBACK_DELAY_MS = 200;
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 const DEFAULT_TRANSLATE_FN = freeTranslateWithRetryDetailed;
@@ -1084,8 +1084,8 @@ function eventTranslationDiscriminator(event) {
   const candidates = [
     ['id', event?.id],
     ['stableId', event?.stableId],
-    ['sourceKey', event?.sourceKey],
     ['url', event?.url],
+    ['sourceKey', event?.sourceKey],
   ];
   for (const [label, value] of candidates) {
     if (typeof value === 'string' && value.trim()) return `${label}:${value.trim()}`;

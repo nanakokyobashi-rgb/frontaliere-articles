@@ -527,7 +527,10 @@ async function _callDeepLWithKey(apiKey, text, srcCode, tgtCode) {
 }
 
 async function translateWithDeepL(text, sourceLang, targetLang, outcome = null) {
-  if (DEEPL_API_KEYS.length === 0) return '';
+  if (DEEPL_API_KEYS.length === 0) {
+    noteTranslationOutcome(outcome, 'incomplete');
+    return '';
+  }
   const clean = normalizeBlock(text);
   if (!clean || sourceLang === targetLang) return '';
   const outcomeBefore = snapshotTranslationOutcome(outcome);
@@ -767,7 +770,10 @@ async function translateWithSimplyTranslate(text, sourceLang, targetLang, outcom
 
 // ── LibreTranslate self-hosted (CI service container) ──────────────────────
 async function translateWithLibreTranslateSelfHosted(text, sourceLang, targetLang, outcome = null) {
-  if (!LIBRETRANSLATE_SELF_HOSTED) return '';
+  if (!LIBRETRANSLATE_SELF_HOSTED) {
+    noteTranslationOutcome(outcome, 'incomplete');
+    return '';
+  }
   const q = normalizeBlock(text);
   if (!q || sourceLang === targetLang) return '';
 
@@ -852,7 +858,10 @@ async function translateWithMozhiEngine(text, sourceLang, targetLang, engine = '
 
 // ── Azure Translator (F0 Free — 2M chars/month, near-DeepL quality) ────────
 async function translateWithAzure(text, sourceLang, targetLang, outcome = null) {
-  if (AZURE_TRANSLATOR_KEYS.length === 0) return '';
+  if (AZURE_TRANSLATOR_KEYS.length === 0) {
+    noteTranslationOutcome(outcome, 'incomplete');
+    return '';
+  }
   const clean = normalizeBlock(text);
   if (!clean || sourceLang === targetLang) return '';
   const outcomeBefore = snapshotTranslationOutcome(outcome);
@@ -1007,7 +1016,10 @@ async function _getGoogleCloudAccessToken() {
 }
 
 async function translateWithGoogleCloud(text, sourceLang, targetLang, outcome = null) {
-  if (!_gcOAuthAvailable) return '';
+  if (!_gcOAuthAvailable) {
+    noteTranslationOutcome(outcome, 'incomplete');
+    return '';
+  }
   const clean = normalizeBlock(text);
   if (!clean || sourceLang === targetLang) return '';
   if (_googleCloudDailyChars + clean.length > GOOGLE_CLOUD_DAILY_LIMIT) {
@@ -1060,7 +1072,10 @@ async function translateWithGoogleCloud(text, sourceLang, targetLang, outcome = 
 
 // ── Hugging Face OPUS-MT (Helsinki-NLP open-source models) ─────────────────
 async function translateWithHuggingFace(text, sourceLang, targetLang, outcome = null) {
-  if (!HF_TOKEN) return '';
+  if (!HF_TOKEN) {
+    noteTranslationOutcome(outcome, 'incomplete');
+    return '';
+  }
   const clean = normalizeBlock(text);
   if (!clean || sourceLang === targetLang) return '';
 
@@ -1422,9 +1437,6 @@ export async function freeTranslate({ text, sourceLang, targetLang, fieldType = 
       if (!mm || mm.includes('MYMEMORY WARNING')) {
         noteTranslationOutcome(_outcome, 'incomplete');
         return ''; // quota hit mid-chunk, abort
-      }
-      if (rejectedAsPassthrough('myMemory', chunk, mm, _outcome)) {
-        return ''; // an echoed chunk invalidates the whole assembled result
       }
       parts.push(mm);
     }
