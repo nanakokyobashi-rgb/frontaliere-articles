@@ -1385,3 +1385,34 @@ export async function freeTranslateWithRetry({ text, sourceLang, targetLang, fie
 
   return '';
 }
+
+/**
+ * Normalizza l'esito di un traduttore in `{ text, passthrough }`.
+ *
+ * I chiamanti che memoizzano su disco hanno bisogno del motivo della stringa
+ * vuota, ma il seam iniettabile dei test rende una stringa. Questo adattatore
+ * accetta entrambe le forme: una stringa vale `{ text, passthrough: false }`,
+ * cioe' nessun memo negativo su un motore che potrebbe tornare su.
+ */
+export function asTranslationResult(value) {
+  if (typeof value === 'string') return { text: value, passthrough: false };
+  if (!value || typeof value !== 'object') return { text: '', passthrough: false };
+  return { text: typeof value.text === 'string' ? value.text : '', passthrough: value.passthrough === true };
+}
+
+function _tierTotal(bucket) {
+  let n = 0;
+  for (const value of Object.values(bucket)) n += value;
+  return n;
+}
+
+/** Return the retry result together with the reason for an empty translation. */
+export async function freeTranslateWithRetryDetailed({ text, sourceLang, targetLang, fieldType = 'title', maxRetries = 2 }) {
+  const passBefore = _tierTotal(_cascadeStats.tierPassthroughs);
+  const errBefore = _tierTotal(_cascadeStats.tierErrors);
+  const out = await freeTranslateWithRetry({ text, sourceLang, targetLang, fieldType, maxRetries });
+  if (out) return { text: out, passthrough: false };
+  const passthrough =
+    _tierTotal(_cascadeStats.tierPassthroughs) > passBefore && _tierTotal(_cascadeStats.tierErrors) === errBefore;
+  return { text: '', passthrough };
+}

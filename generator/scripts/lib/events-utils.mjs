@@ -20,7 +20,7 @@ import path from 'node:path';
 import { truncateSlugAtWordBoundary } from './slug-truncate.mjs';
 import CANTON_URL_SLUGS from '../../data/canton-url-slugs.json' with { type: 'json' };
 import { MUNICIPALITIES } from '../../data/municipalities.ts';
-import { freeTranslateWithRetry } from './free-translate.mjs';
+import { asTranslationResult, freeTranslateWithRetryDetailed } from './free-translate.mjs';
 import { hasUsableContentText, hasUsableTranslatedText } from './body2-payload-verdict.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -941,6 +941,7 @@ export function saveEventTitleTranslationCache(cache) {
 // entries collision-free against tio-agenda's own bare-title keys.
 const LOCALE_FALLBACK_DELAY_MS = 200;
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+const DEFAULT_TRANSLATE_FN = freeTranslateWithRetryDetailed;
 
 /**
  * Which locales in `byLocale` (a `titleByLocale`/`descriptionByLocale`-shaped
@@ -1094,20 +1095,6 @@ function wordCount(text) {
   return String(text ?? '').trim() ? String(text).trim().split(/\s+/).length : 0;
 }
 
-function asTranslationResult(value) {
-  const explicitStatus = value && typeof value === 'object' && Object.prototype.hasOwnProperty.call(value, 'passthrough');
-  const text = typeof value === 'string'
-    ? value
-    : value && typeof value === 'object' && typeof value.text === 'string'
-      ? value.text
-      : '';
-  // A bare string has no per-call provenance. Only an explicit status can
-  // produce a negative memo; a provider/error result must not be inferred from
-  // its text or from process-wide cascade counters.
-  const passthrough = explicitStatus && value.passthrough === true;
-  return passthrough ? { text: '', passthrough: true } : { text, passthrough: false };
-}
-
 async function translateEventLocale({ translateFn, eventId, text, sourceLang, targetLang, fieldType }) {
   const raw = await translateFn({ eventId, text, sourceLang, targetLang, fieldType, maxRetries: 1 });
   return asTranslationResult(raw);
@@ -1165,7 +1152,7 @@ async function fillLocaleGaps(byLocale, cache, { eventId, fieldType, locales, de
         cache[legacyCacheKey] = { ...legacyEntry, [target]: translated };
       }
       updated[target] = translated;
-      if (translateFn === freeTranslateWithRetry) {
+      if (translateFn === DEFAULT_TRANSLATE_FN) {
         await sleep(delayMs);
       }
     } else if (passthrough && wordCount(sourceText) <= MAX_PASSTHROUGH_MEMO_WORDS) {
@@ -1209,7 +1196,7 @@ export async function enrichEventsWithLocaleFallbackTranslations(events, cache, 
   const {
     locales = ['it', 'en', 'de', 'fr'],
     delayMs = LOCALE_FALLBACK_DELAY_MS,
-    translateFn = freeTranslateWithRetry,
+    translateFn = DEFAULT_TRANSLATE_FN,
     deadline = null,
   } = options;
   const out = [];
