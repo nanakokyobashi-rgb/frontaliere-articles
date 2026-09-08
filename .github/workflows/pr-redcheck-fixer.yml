@@ -394,7 +394,13 @@ jobs:
           # Baseline dei commenti PRE-Claude (dopo il marker del round): serve al
           # classify per distinguere «Claude ha lasciato una spiegazione» da
           # «Claude non ha fatto ne' detto nulla» quando esce pulito senza push.
-          n=$(gh api "repos/$REPO/issues/$PR_NUMBER/comments" --paginate --jq 'length' 2>/dev/null || echo 0)
+          # `--jq 'length'` NO: con `--paginate` il filtro gira PER PAGINA e le
+          # uscite si concatenano ("30\n30\n7"), cioe' un valore multilinea che
+          # qui finirebbe in $GITHUB_OUTPUT senza delimitatore. Si conta invece
+          # element-wise (una riga per commento, su tutte le pagine) e si conta
+          # con `grep -c .`. `per_page=100` riduce le pagine, non la correttezza.
+          n=$(gh api "repos/$REPO/issues/$PR_NUMBER/comments?per_page=100" --paginate \
+            --jq '.[].id' 2>/dev/null | grep -c . || true)
           echo "comments=${n:-0}" >> "$GITHUB_OUTPUT"
 
       # Contesto del rosso, deterministico e BOUNDED, prima di spendere un turno
@@ -654,7 +660,13 @@ jobs:
             echo "::error::❌-check-fix: nessun commit pushato e la run Claude e' fallita ('$CLAUDE_OUTCOME') → non-progresso reale. Job ROSSO (segnale preservato; il round-cap porta a needs-human a N>=2)."
             exit 1
           fi
-          NOW_COMMENTS=$(gh api "repos/$REPO/issues/$PR_NUMBER/comments" --paginate --jq 'length' 2>/dev/null || echo "${BASE_COMMENTS:-0}")
+          # Stesso conteggio paginate-safe dello step `base` (`--jq 'length'` per
+          # pagina darebbe un multilinea, e il `-le` sotto fallirebbe con
+          # "integer expression expected" → ramo verde su un non-progresso).
+          # Query fallita → 0, cioe' `-le BASE`: lo stesso ramo rosso del vecchio
+          # fallback a `$BASE_COMMENTS`, mai un verde su dati incompleti.
+          NOW_COMMENTS=$(gh api "repos/$REPO/issues/$PR_NUMBER/comments?per_page=100" --paginate \
+            --jq '.[].id' 2>/dev/null | grep -c . || true)
           if [ "${NOW_COMMENTS:-0}" -le "${BASE_COMMENTS:-0}" ]; then
             echo "::error::❌-check-fix: nessun commit pushato, CLI uscita '$CLAUDE_OUTCOME', e nessun commento nuovo a spiegare perche' (commenti $BASE_COMMENTS→$NOW_COMMENTS) → non-progresso SILENZIOSO, non un terminale legittimo. Job ROSSO."
             exit 1

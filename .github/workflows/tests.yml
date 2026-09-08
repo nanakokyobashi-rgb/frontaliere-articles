@@ -279,8 +279,13 @@ jobs:
           REPO: ${{ github.repository }}
         run: |
           set -euo pipefail
-          last=$(gh api "repos/$REPO/pulls/$PR_NUMBER/reviews" --paginate \
-            --jq '[.[] | select(.user.type=="Bot" and (.user.login|test("^(claude|frontaliere-automation)";"i")) and (.body|contains("## LGTM")))] | last | .commit_id // empty' 2>/dev/null || true)
+          # `[...] | last` NO: con `--paginate` il `--jq` gira PER PAGINA, quindi
+          # un aggregato produce una riga per pagina e `$last` diventa multilinea
+          # (URL di compare rotto → review piena "conservativa" a ogni run oltre
+          # i 30 review). Filtro element-wise + `tail -1` fuori da gh: l'ordine
+          # delle pagine è quello dell'API, quindi l'ultima riga è l'ultima review.
+          last=$(gh api "repos/$REPO/pulls/$PR_NUMBER/reviews?per_page=100" --paginate \
+            --jq '.[] | select(.user.type=="Bot" and (.user.login|test("^(claude|frontaliere-automation)";"i")) and (.body|contains("## LGTM"))) | .commit_id // empty' 2>/dev/null | tail -1 || true)
           if [ -z "$last" ]; then
             echo "skip=false" >> "$GITHUB_OUTPUT"; echo "Nessuna review LGTM precedente → review piena."; exit 0
           fi
@@ -385,8 +390,10 @@ jobs:
 
           # Re-review incrementale: se esiste gia' una review Claude su un commit
           # precedente, si valuta SOLO il delta, non l'intera PR.
-          lastRev=$(gh api "repos/$REPO/pulls/$PR_NUMBER/reviews" --paginate \
-            --jq '[.[] | select(.user.type=="Bot" and (.user.login|test("^(claude|frontaliere-automation)";"i")))] | last | .commit_id // empty' 2>/dev/null || true)
+          # Stesso idioma paginate-safe dello step di carry-forward: element-wise
+          # + `tail -1`, mai un aggregato sotto `--paginate`.
+          lastRev=$(gh api "repos/$REPO/pulls/$PR_NUMBER/reviews?per_page=100" --paginate \
+            --jq '.[] | select(.user.type=="Bot" and (.user.login|test("^(claude|frontaliere-automation)";"i"))) | .commit_id // empty' 2>/dev/null | tail -1 || true)
           if [ -n "$lastRev" ] && [ "$lastRev" != "$HEAD_SHA" ]; then
             delta_code=$(gh api "repos/$REPO/compare/$lastRev...$HEAD_SHA" --jq '.files[].filename' 2>/dev/null \
               | grep -Fxf <(echo "$code_files") || true)

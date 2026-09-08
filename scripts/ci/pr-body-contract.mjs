@@ -53,6 +53,7 @@ import {
   suggestedSection,
 } from '../lib/pr-body-nextstep-check.mjs';
 import { checkCitedFilePaths, extractCitedPaths } from '../lib/pr-body-filepath-check.mjs';
+import { countPaginatedLines } from './lib/prComments.mjs';
 
 const PR = process.argv[2];
 const REPO = process.env.GITHUB_REPOSITORY || '';
@@ -69,8 +70,12 @@ function gh(args, fallback = '') {
 
 /** Commento sticky: aggiorna quello esistente invece di accumularne uno per push. */
 function upsertComment(body) {
-  const raw = gh(['api', `repos/${REPO}/issues/${PR}/comments`, '--paginate', '--jq',
-    `[.[] | select(.body // "" | contains("${MARKER}"))] | last | .id // empty`]);
+  // Filtro ELEMENT-WISE, non `[...] | last`: sotto `--paginate` il `--jq` gira
+  // per pagina, quindi un aggregato darebbe un id per pagina e la PATCH
+  // finirebbe su un URL con dentro un newline. L'ultimo id è l'ultima riga.
+  const ids = gh(['api', `repos/${REPO}/issues/${PR}/comments?per_page=100`, '--paginate', '--jq',
+    `.[] | select(.body // "" | contains("${MARKER}")) | .id`]);
+  const raw = String(ids || '').split('\n').map((l) => l.trim()).filter((l) => /^\d+$/.test(l)).pop() || '';
   if (raw) {
     gh(['api', '-X', 'PATCH', `repos/${REPO}/issues/comments/${raw}`, '-f', `body=${body}`]);
     console.log(`[pr-body-contract] commento sticky aggiornato (id=${raw}).`);
@@ -145,9 +150,13 @@ function main() {
     console.log('[pr-body-contract] contratto del body rispettato ✔');
     // Se c'era una violazione ora risolta, il commento sticky resta ma dice il
     // vero: aggiornarlo evita di lasciare un allarme spento acceso.
-    const existing = gh(['api', `repos/${REPO}/issues/${PR}/comments`, '--paginate', '--jq',
-      `[.[] | select(.body // "" | contains("${MARKER}"))] | length`], '0');
-    if (existing !== '0') {
+    // Stesso motivo: `| length` sotto `--paginate` vale `"30\n1"` su una PR con
+    // più di una pagina di commenti, cioè `!== '0'` SEMPRE — il ramo sotto
+    // posterebbe un "contratto rispettato" anche senza nessun allarme da
+    // spegnere. Si conta lato JS sull'output element-wise completo.
+    const existing = gh(['api', `repos/${REPO}/issues/${PR}/comments?per_page=100`, '--paginate', '--jq',
+      `.[] | select(.body // "" | contains("${MARKER}")) | .id`], '');
+    if (countPaginatedLines(existing) > 0) {
       upsertComment(`${MARKER}\n✅ **Contratto del body rispettato.** Le sezioni richieste ci sono e hanno contenuto.`);
     }
     return 0;
