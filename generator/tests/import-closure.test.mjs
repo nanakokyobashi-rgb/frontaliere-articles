@@ -22,6 +22,7 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { importSpecifiers } from './lib/relative-import-specifiers.mjs';
 
 const GENERATOR_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 
@@ -69,9 +70,6 @@ function sourceFiles(dir, acc = []) {
 //     `tests/lib/reachable-source.mjs`, che nominano la forma per parlarne.
 // Il costo è un falso NEGATIVO su un import dinamico preceduto da una stringa
 // sulla stessa riga: si perde una dipendenza, non si inventa un errore.
-const SPECIFIER =
-  /^(?:[ \t]*(?:import(?:\s+|(?=[{*'"]))(?:[^'";]*?[\s}*]from\s*)?|export(?:\s+|(?=[{*]))[^'";]*?[\s}*]from\s*)|(?![ \t]*(?:\/\/|\*|\/\*))(?:[^'"`\/\n]|\/(?!\/))*?\bimport\s*\(\s*)(['"])([^'"]+)\1/gm;
-
 // I candidati provati per uno specificatore relativo, nell'ordine di Node.
 // Stessa lista di `loop-drift-check.mjs:resolvedLocalImports()` e di
 // `loop-scripts-closure.test.mjs`, con in piu' i due rami `.ts`.
@@ -124,8 +122,7 @@ test('every relative import under generator/ resolves to a file that exists', ()
   const missing = [];
   for (const file of sourceFiles(GENERATOR_ROOT)) {
     const src = fs.readFileSync(file, 'utf-8');
-    for (const m of src.matchAll(SPECIFIER)) {
-      const spec = m[2];
+    for (const spec of importSpecifiers(src)) {
       if (!spec.startsWith('.')) continue;
       const abs = path.resolve(path.dirname(file), spec);
       if (!resolveOnDisk(abs)) {

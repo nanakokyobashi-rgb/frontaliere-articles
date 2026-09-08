@@ -3143,8 +3143,8 @@
       "sitePath": ".github/corpus-workflows/contract.json",
       "mode": "identical",
       "baseline": {
-        "site": "3b67264b3cc0d58b",
-        "corpus": "3b67264b3cc0d58b",
+        "site": "6031680b66ee8544",
+        "corpus": "6031680b66ee8544",
         "alignedAt": "2026-09-08"
       }
     },
@@ -3346,6 +3346,16 @@
         "site": null,
         "corpus": "34fe944e62e07c25",
         "alignedAt": "2026-09-05"
+      }
+    },
+    {
+      "path": "scripts/ci/redflag-findings-fingerprint.mjs",
+      "mode": "corpus-only",
+      "reason": "Calcola l'impronta stabile dei finding `🔴 Important` che il `pr-redflag-fixer.yml` usa per non rispendere un round sullo stesso verdetto (#1093). Non esiste sul sito e non deve: il fixer corpus ha il confronto con i round gia' commentati e il relativo contratto locale, mentre il sito mantiene il proprio workflow adattato.",
+      "baseline": {
+        "site": null,
+        "corpus": "3f80cbaf972f7d14",
+        "alignedAt": "2026-09-08"
       }
     },
     {

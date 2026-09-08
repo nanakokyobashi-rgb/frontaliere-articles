@@ -32,6 +32,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { importSpecifiers } from './lib/relative-import-specifiers.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const DIRS = ['scripts/ci', 'scripts/ci/lib', 'scripts/lib'];
@@ -80,13 +81,6 @@ const DIRS = ['scripts/ci', 'scripts/ci/lib', 'scripts/lib'];
 //     `tests/lib/reachable-source.mjs`, che nominano la forma per parlarne.
 // Il costo è un falso NEGATIVO su un import dinamico preceduto da una stringa
 // sulla stessa riga: si perde una dipendenza, non si inventa un errore.
-const IMPORT_RE = /^(?:[ \t]*(?:import(?:\s+|(?=[{*'"]))(?:[^'";]*?[\s}*]from\s*)?|export(?:\s+|(?=[{*]))[^'";]*?[\s}*]from\s*)|(?![ \t]*(?:\/\/|\*|\/\*))(?:[^'"`\/\n]|\/(?!\/))*?\bimport\s*\(\s*)(['"])([^'"]+)\1/gm;
-
-/** Tutti gli specificatori importati da `src`, nell'ordine in cui compaiono. */
-function importSpecifiers(src) {
-  return [...src.matchAll(IMPORT_RE)].map((m) => m[2]);
-}
-
 // I candidati provati per uno specificatore relativo, nell'ordine di Node, e
 // gli stessi di `import-closure.test.mjs` e di
 // `loop-drift-check.mjs:resolvedLocalImports()`.

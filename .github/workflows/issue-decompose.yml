@@ -182,7 +182,7 @@ jobs:
             - Massimo 6 figlie nuove per run; mai una figlia-contenitore (eccetto l'unica residua del punto 1).
             - Riferimento al padre nelle figlie: `Parent: #N` — MAI `Closes`/`Fixes`/`Resolves` adiacente a `#N`.
             - Se non riesci a produrre NEMMENO una scheda valida: trattala come «decisione del proprietario» (commento con ciò che manca + `needs-human` + `<!-- DECOMPOSE_OUTCOME: needs-human-decision -->`).
-            - L'ULTIMO commento sul padre porta SEMPRE `<!-- DECOMPOSE_OUTCOME: <code> -->` con `<code>` ∈ `decomposed-K` · `atomic-requeue` · `needs-human-decision` · `already-resolved`.
+            - L'ULTIMO commento sul padre porta SEMPRE `<!-- DECOMPOSE_OUTCOME: <code> -->` con `<code>` ∈ `decomposed-K` · `atomic-requeue` · `needs-human-decision` · `already-resolved` · `stale-dispatch`.
 
       - name: Claude usage metrics
         if: always() && steps.quota.outputs.quota_blocked != 'true' && steps.stale.outputs.stale_dispatch != 'true'
@@ -221,7 +221,7 @@ jobs:
           CLAUDE_OUTCOME: ${{ steps.claude_decompose.outcome }}
         run: |
           set -uo pipefail
-          DONE=$(gh issue view "$ISSUE" --json comments --jq '[.comments[].body | select(test("<!-- DECOMPOSE_OUTCOME: (decomposed-[0-9]+|atomic-requeue|needs-human-decision|already-resolved) -->"))] | length' 2>/dev/null || echo 0)
+          DONE=$(gh issue view "$ISSUE" --json comments --jq '[.comments[].body | select(test("<!-- DECOMPOSE_OUTCOME: (decomposed-[0-9]+|atomic-requeue|needs-human-decision|already-resolved|stale-dispatch) -->"))] | length' 2>/dev/null || echo 0)
           echo "issue=$ISSUE outcome-markers=$DONE claude=$CLAUDE_OUTCOME"
           if [ "${DONE:-0}" != "0" ]; then
             echo "✓ verdetto di decomposizione presente → run SUCCESS."
