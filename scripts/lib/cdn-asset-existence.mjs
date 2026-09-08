@@ -63,6 +63,29 @@
  *     numero di URL distinti e un CDN che pende allunga la run senza far
  *     fallire niente. {@link verifyCdnAssetRefs} si ferma al tetto e LO DICE
  *     (`state: 'skipped'`) invece di scomparire dentro un totale piu' basso.
+ *
+ * ## IL BUDGET NON COPRIVA LE RICHIESTE IN VOLO (follow-up G31, issue #1219)
+ *
+ * Il tetto di tempo era controllato solo PRIMA di partire, e ogni richiesta
+ * riceveva `AbortSignal.timeout(timeoutMs)` INTERO. Due conseguenze, entrambe
+ * dentro il percorso di pubblicazione:
+ *
+ *   · un asset la cui HEAD risponde 405/501 costava **due** timeout pieni
+ *     (HEAD + fallback GET), quindi 16s su un tetto di 30s per UN solo URL;
+ *   · l'ultima richiesta ammessa partiva con il timeout pieno anche a budget
+ *     quasi esaurito, cioe' `budgetMs + 2 × timeoutMs` nel caso peggiore.
+ *
+ * Ora ogni richiesta parte con il **residuo**: `min(timeout dell'asset, budget
+ * residuo)`, dove il timeout dell'asset e' UNO solo per HEAD+GET (stessa
+ * disciplina di `scripts/ci/lib/github-actions-read-client.mjs`, che tiene
+ * l'hop del redirect sotto un unico deadline). Il costo peggiore torna a
+ * essere `budgetMs`, non un suo multiplo.
+ *
+ * E un troncamento da budget non si traveste da rumore di rete: se il tempo
+ * finisce mentre la richiesta e' in volo — o non ne resta per il fallback GET
+ * — l'esito e' `skipped` («non guardato»), non `unknown` («non verificabile»).
+ * La distinzione e' l'intero mestiere di questo modulo: un URL che nessuno ha
+ * guardato non deve leggersi come un URL guardato e risultato a posto.
  */
 
 import { ASSET_EXT_ALTERNATION, ASSETS_SAME_ORIGIN_RX } from '../../host/shared/cdnAssetOffloadRx.mjs';
@@ -113,10 +136,29 @@ export const CDN_ASSET_CHECK_MAX_URLS = 24;
 /**
  * Tetto sul TEMPO complessivo. Le HEAD sono in serie e ciascuna vale
  * `timeoutMs`: senza budget, N URL su un CDN che pende costano N × timeout
- * DENTRO il percorso di pubblicazione, in silenzio. Controllato PRIMA di ogni
- * richiesta, quindi il costo reale e' `budgetMs` + l'ultima richiesta in volo.
+ * DENTRO il percorso di pubblicazione, in silenzio. Ogni richiesta parte con
+ * il residuo di questo budget (issue #1219), quindi il costo reale e'
+ * `budgetMs`, non `budgetMs` piu' le richieste gia' partite.
  */
 export const CDN_ASSET_CHECK_BUDGET_MS = 30_000;
+
+/**
+ * Millisecondi concessi alla PROSSIMA richiesta, o 0 se non ne restano.
+ *
+ * Pura e esportata perche' e' l'invariante che la issue #1219 chiedeva: nessuna
+ * richiesta puo' durare piu' del budget residuo, e le due richieste di uno
+ * stesso asset (HEAD + fallback GET) si dividono UN timeout, non uno ciascuna.
+ *
+ * @param {object} a
+ * @param {number} a.budgetRemainingMs  quanto resta del tetto complessivo
+ * @param {number} a.urlRemainingMs     quanto resta del timeout di QUESTO asset
+ * @returns {number} ms >= 1, oppure 0 se il tempo e' finito
+ */
+export function nextRequestTimeoutMs({ budgetRemainingMs, urlRemainingMs }) {
+  const ms = Math.min(Number(budgetRemainingMs), Number(urlRemainingMs));
+  if (!Number.isFinite(ms) || ms <= 0) return 0;
+  return Math.max(1, Math.floor(ms));
+}
 
 /**
  * Verifica l'esistenza di ogni URL con una HEAD, entro un tetto complessivo.
@@ -124,14 +166,17 @@ export const CDN_ASSET_CHECK_BUDGET_MS = 30_000;
  * Gli URL oltre il tetto NON vengono silenziosamente omessi: escono con
  * `state: 'skipped'`, cosi' il report distingue «verificati e presenti» da
  * «non guardati» (la stessa distinzione che questo modulo esiste per fare).
+ * Vale anche per il troncamento da budget: cio' che il tempo ha tagliato e'
+ * `skipped`, non `unknown` — vedi l'intestazione del modulo.
  *
  * @param {object} a
  * @param {string[]} a.urls
  * @param {typeof fetch} [a.fetchImpl]  iniettabile per i test (default: fetch globale)
- * @param {number} [a.timeoutMs]        timeout per richiesta
+ * @param {number} [a.timeoutMs]        timeout per ASSET (condiviso da HEAD e fallback GET)
  * @param {number} [a.maxUrls]          tetto sul numero di URL verificati
  * @param {number} [a.budgetMs]         tetto sul tempo complessivo della verifica
  * @param {() => number} [a.now]        orologio iniettabile per i test
+ * @param {(ms: number) => AbortSignal} [a.makeSignal] fabbrica del signal, iniettabile per i test
  * @returns {Promise<Array<{url: string, state: 'present'|'missing'|'unknown'|'skipped', status: number|null, error: string|null}>>}
  */
 export async function verifyCdnAssetRefs({
@@ -141,9 +186,11 @@ export async function verifyCdnAssetRefs({
   maxUrls = CDN_ASSET_CHECK_MAX_URLS,
   budgetMs = CDN_ASSET_CHECK_BUDGET_MS,
   now = Date.now,
+  makeSignal = (ms) => AbortSignal.timeout(ms),
 }) {
   const results = [];
   const startedAt = now();
+  const budgetLeft = () => budgetMs - (now() - startedAt);
   let checked = 0;
   for (const url of urls) {
     if (checked >= maxUrls) {
@@ -156,13 +203,34 @@ export async function verifyCdnAssetRefs({
       continue;
     }
     checked += 1;
+    // UN timeout per asset, non uno per richiesta: il fallback GET eredita cio'
+    // che la HEAD non ha speso, e non puo' raddoppiare il costo dell'asset.
+    const urlStartedAt = now();
+    const nextTimeout = () =>
+      nextRequestTimeoutMs({
+        budgetRemainingMs: budgetLeft(),
+        urlRemainingMs: timeoutMs - (now() - urlStartedAt),
+      });
     try {
-      let res = await fetchImpl(url, { method: 'HEAD', redirect: 'follow', signal: AbortSignal.timeout(timeoutMs) });
+      let res = await fetchImpl(url, { method: 'HEAD', redirect: 'follow', signal: makeSignal(nextTimeout()) });
       // Alcune origin non implementano HEAD (405/501): la domanda è
       // sull'esistenza dell'oggetto, non sul metodo, quindi si ripiega su GET
       // invece di registrare un falso `missing`.
       if (res.status === 405 || res.status === 501) {
-        res = await fetchImpl(url, { method: 'GET', redirect: 'follow', signal: AbortSignal.timeout(timeoutMs) });
+        const getTimeout = nextTimeout();
+        if (getTimeout === 0) {
+          // Senza il GET l'esistenza resta indecisa: dirlo `unknown` la
+          // farebbe leggere come rumore di rete, ed e' invece tempo finito.
+          results.push({
+            url,
+            state: 'skipped',
+            status: res.status,
+            error: `HEAD ${res.status} e nessun tempo residuo per il fallback GET ` +
+              `(budget di ${budgetMs}ms, timeout di ${timeoutMs}ms per asset)`,
+          });
+          continue;
+        }
+        res = await fetchImpl(url, { method: 'GET', redirect: 'follow', signal: makeSignal(getTimeout) });
       }
       if (res.ok) {
         results.push({ url, state: 'present', status: res.status, error: null });
@@ -174,7 +242,20 @@ export async function verifyCdnAssetRefs({
         results.push({ url, state: 'unknown', status: res.status, error: null });
       }
     } catch (err) {
-      results.push({ url, state: 'unknown', status: null, error: String((err && err.message) || err) });
+      const detail = String((err && err.message) || err);
+      if (budgetLeft() <= 0) {
+        // Abortita DAL budget: e' la verifica che si e' fermata, non il CDN che
+        // non risponde. Contarla fra i «non verificabili» avrebbe nascosto un
+        // tetto sistematicamente esaurito dentro il rumore di rete.
+        results.push({
+          url,
+          state: 'skipped',
+          status: null,
+          error: `budget di ${budgetMs}ms esaurito durante la richiesta (${detail})`,
+        });
+      } else {
+        results.push({ url, state: 'unknown', status: null, error: detail });
+      }
     }
   }
   return results;
@@ -189,11 +270,24 @@ export async function verifyCdnAssetRefs({
  * CDN: è la verifica che si è fermata al tetto, e va detto perché il riepilogo
  * non si legga come «tutto verificato».
  *
+ * Il MARGINE del passo (issue #1219) si stampa quando il chiamante lo misura:
+ * un tetto che non si sa quanto avanza non e' un tetto misurato. Un elapsed
+ * oltre `budgetMs + timeoutMs` e' impossibile finche' ogni richiesta parte col
+ * residuo, quindi diventa un `::warning::`: e' la firma della regressione.
+ *
  * @param {Array<{url: string, state: string, status: number|null, error: string|null}>} results
  * @param {string} [prefix] etichetta del log
+ * @param {object} [budget] misura del passo
+ * @param {number|null} [budget.elapsedMs] durata reale della verifica
+ * @param {number} [budget.budgetMs] tetto complessivo applicato
+ * @param {number} [budget.timeoutMs] timeout per asset applicato
  * @returns {string[]}
  */
-export function formatCdnAssetReport(results, prefix = '[cdn-asset-check]') {
+export function formatCdnAssetReport(
+  results,
+  prefix = '[cdn-asset-check]',
+  { elapsedMs = null, budgetMs = CDN_ASSET_CHECK_BUDGET_MS, timeoutMs = 8000 } = {},
+) {
   const lines = [];
   const missing = results.filter((r) => r.state === 'missing');
   const unknown = results.filter((r) => r.state === 'unknown');
@@ -212,17 +306,35 @@ export function formatCdnAssetReport(results, prefix = '[cdn-asset-check]') {
   }
   const skipped = results.filter((r) => r.state === 'skipped');
   if (skipped.length) {
+    // Le ragioni sono piu' d'una (tetto di URL, budget prima della richiesta,
+    // budget durante, GET di fallback senza residuo): stamparne una sola
+    // avrebbe attribuito al tetto anche cio' che il tempo ha tagliato.
+    const reasons = [...new Set(skipped.map((r) => r.error))];
     lines.push(
-      `${prefix} verifica fermata al tetto: ${skipped.length} URL NON guardati ` +
-        `(${skipped[0].error}). Non sono «presenti»: sono ignoti.`,
+      `${prefix} verifica fermata prima della fine: ${skipped.length} URL NON guardati ` +
+        `(${reasons.join(' ; ')}). Non sono «presenti»: sono ignoti.`,
     );
   }
   lines.push(
     `${prefix} ${results.length - skipped.length} asset CDN distinti verificati ; ` +
       `${results.filter((r) => r.state === 'present').length} presenti ; ${missing.length} mancanti ; ` +
       `${unknown.length} non verificabili` +
-      (skipped.length ? ` ; ${skipped.length} non guardati (tetto)` : ''),
+      (skipped.length ? ` ; ${skipped.length} non guardati` : ''),
   );
+  if (Number.isFinite(elapsedMs)) {
+    const margin = budgetMs - elapsedMs;
+    lines.push(
+      `${prefix} passo di verifica in ${elapsedMs}ms su un tetto di ${budgetMs}ms ` +
+        `(margine ${margin}ms ; timeout per asset ${timeoutMs}ms)`,
+    );
+    if (elapsedMs > budgetMs + timeoutMs) {
+      lines.push(
+        `::warning::${prefix} la verifica ha superato il tetto di piu' di un timeout per asset ` +
+          `(${elapsedMs}ms > ${budgetMs}ms + ${timeoutMs}ms): una richiesta e' partita senza il ` +
+          'budget residuo, cioe\' il tetto non sta piu\' limitando il percorso di pubblicazione.',
+      );
+    }
+  }
   return lines;
 }
 

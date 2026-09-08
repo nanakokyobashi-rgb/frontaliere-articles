@@ -12,9 +12,11 @@
  * elsewhere (publish-api.yml). Keeping this module free of `.ts` imports is
  * what lets a real behavioural test of the sitemap output run in that gate.
  *
- * No behaviour change from the code this replaces — same shape, same
- * arguments, same output byte-for-byte.
+ * The builder keeps the existing shape and arguments, with one publish-boundary
+ * invariant: a reserved nullish slug is never emitted as a URL or alternate.
  */
+
+import { isReservedPublishedSlug } from './published-slug-guard.mjs';
 
 export const SITE = 'https://frontaliereticino.ch';
 
@@ -61,7 +63,7 @@ export function buildSitemap(entries, section, slugMap, meta, shadowed = new Set
   const urls = [];
   for (const a of entries) {
     const slug = slugMap?.[a.id]?.it;
-    if (!slug) continue;
+    if (!slug || isReservedPublishedSlug(slug)) continue;
     // A canonical-overridden ("shadowed") article points its canonical at a
     // different winner URL, so listing it here — as <loc> OR as an hreflang
     // alternate — contradicts the self-canonical gate the consumer enforces
@@ -81,7 +83,7 @@ export function buildSitemap(entries, section, slugMap, meta, shadowed = new Set
     }
     for (const loc of ['it', 'en', 'de', 'fr']) {
       const s2 = slugMap?.[a.id]?.[loc];
-      if (s2) {
+      if (s2 && !isReservedPublishedSlug(s2)) {
         parts.push(
           `    <xhtml:link rel="alternate" hreflang="${loc}" href="${SITE}${paths[loc]}${xmlEsc(s2)}/" />`,
         );

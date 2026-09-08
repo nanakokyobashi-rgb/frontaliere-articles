@@ -33,6 +33,7 @@ import {
   floorFrom,
   retentionLine,
   retentionWarning,
+  populationWarning,
   retentionRatio,
   FLOOR_RETENTION,
   FLOOR_WARN_RETENTION,
@@ -73,7 +74,7 @@ export function feedSection(fileName) {
  * @param {{articleCounts: Record<string, number>, feeds: {name: string, items: number}[],
  *          images: number|null}} measured  cio' che l'artefatto dichiara
  * @param {{sourceArticles: Record<string, number>, feedSources: Record<string, number>,
- *          sourceImages: number, rssMaxItems: number}} expected   cio' che il corpus
+ *          sourceImages: number|null, rssMaxItems: number}} expected   cio' che il corpus
  *          sorgente promette: `sourceArticles` sono i file di corpo (il riferimento di
  *          `manifest.counts`), `feedSources` le voci dei chunk SEO (quello dei feed)
  * @returns {string[]} una riga per violazione, vuoto se tutto regge
@@ -145,15 +146,17 @@ export function floorViolations(measured, expected, retention = undefined) {
     }
   }
 
-  // `images-manifest.json` viene emesso SOLO se questo repo tiene immagini:
-  // `null` significa non emesso, che e' valido (lo stesso ramo che lo YAML
-  // gestisce con `-f`). Emesso, deve descrivere le immagini che ci sono.
-  if (measured.images !== null) {
-    // Emesso ma senza sorgente: stesso fail-open degli articoli. Il ramo
-    // `null` (manifest non emesso) resta valido — e' l'unico caso in cui non
-    // c'e' niente da confrontare.
+  // `null` in `expected` e' riservato ai fixture senza superficie immagini.
+  // Nel checkout reale `countSourceImages` restituisce sempre un numero: zero
+  // significa directory assente/vuota e quindi riferimento mancante, mentre
+  // un manifest assente con immagini attese e' una violazione esplicita.
+  if (expected.sourceImages !== null) {
     if (expected.sourceImages === 0) {
       violations.push(missingCorpusMessage('images-manifest.json', IMAGE_SOURCE_DIR));
+    } else if (measured.images === null) {
+      violations.push(
+        `images-manifest.json assente: il corpus sorgente ne tiene ${expected.sourceImages} immagini in ${IMAGE_SOURCE_DIR}`,
+      );
     } else {
       const min = floor(expected.sourceImages);
       if (measured.images < min) {
@@ -198,6 +201,15 @@ export function retentionReport(measured, expected) {
     rows.push({ kind: 'manifest', label: `manifest.counts.${counter}`, declared, source });
   }
 
+  // Il feed e' capato a RSS_MAX_ITEMS, ma la sua popolazione sorgente non lo
+  // e'. Misurare i chunk contro i corpi rende visibile un'erosione da 3750 a
+  // 60 voci, che il rapporto del feed (50/50) non puo' osservare.
+  for (const [section, source] of Object.entries(expected.sourceArticles)) {
+    const declared = expected.feedSources?.[section] ?? 0;
+    if (source <= 0 || declared <= 0) continue;
+    rows.push({ kind: 'feed-population', label: `chunk SEO ${section}/corpus`, declared, source });
+  }
+
   for (const feed of measured.feeds) {
     const source = expected.feedSources?.[feedSection(feed.name)] ?? 0;
     if (source <= 0) continue;
@@ -225,7 +237,9 @@ export function retentionReport(measured, expected) {
 
 /**
  * I preallarmi del report: una riga per rapporto sceso sotto
- * `FLOOR_WARN_RETENTION` ma ancora sopra il gate.
+ * `FLOOR_WARN_RETENTION`. I rapporti agganciati a un pavimento restano
+ * limitati alla fascia sopra il gate; la popolazione dei chunk SEO e' invece
+ * diagnostica e puo' essere gia' sotto il gate senza cambiare il verdetto.
  *
  * Advisory per costruzione — il chiamante le emette come `::warning::` e ESCE
  * COMUNQUE 0. Spostare il verdetto qui significherebbe aver alzato il gate da
@@ -234,13 +248,18 @@ export function retentionReport(measured, expected) {
  */
 export function retentionAdvisories(rows, retention = FLOOR_RETENTION, warn = FLOOR_WARN_RETENTION) {
   return rows
-    .map((r) => retentionWarning(r.label, r.declared, r.source, retention, warn))
+    .map((r) =>
+      r.kind === 'feed-population'
+        ? populationWarning(r.label, r.declared, r.source, warn)
+        : retentionWarning(r.label, r.declared, r.source, retention, warn),
+    )
     .filter((line) => line !== null);
 }
 
 /**
- * Le righe da stampare a ogni run: i due rapporti del manifest, quello delle
- * immagini, e — per i feed — il PIU' MAGRO della sezione.
+ * Le righe da stampare a ogni run: i due rapporti del manifest, le popolazioni
+ * dei chunk SEO, quello delle immagini, e — per i feed — il PIU' MAGRO della
+ * sezione.
  *
  * I dieci feed condividono il riferimento della loro sezione e stanno quasi
  * sempre tutti al tetto: stamparli tutti annegherebbe le due righe che contano
@@ -343,20 +362,21 @@ async function main() {
   const rows = retentionReport(measured, expected);
   for (const line of retentionLines(rows)) console.log(`[api-floors] ${line}`);
 
-  if (violations.length) {
-    for (const v of violations) console.error(`::error::${v}`);
-    process.exit(1);
-  }
-
-  // Advisory: sotto il preallarme ma sopra il gate. Esce comunque 0 — il gate
-  // resta 0,90 e resta l'unico a bloccare.
+  // Anche gli advisory vengono emessi prima del verdetto: una violazione su un
+  // pavimento non deve cancellare il margine degli altri rapporti dalla run.
   const advisories = retentionAdvisories(rows);
   for (const a of advisories) console.warn(`::warning::[api-floors] ${a}`);
   if (advisories.length) {
     console.log(
       `[api-floors] ${advisories.length} rapporto/i sotto il preallarme ` +
-        `${(FLOOR_WARN_RETENTION * 100).toFixed(0)}%: la pubblicazione passa, l'erosione no`,
+        `${(FLOOR_WARN_RETENTION * 100).toFixed(0)}%: advisory diagnostici; il gate ` +
+        `${(FLOOR_RETENTION * 100).toFixed(0)}% resta separato`,
     );
+  }
+
+  if (violations.length) {
+    for (const v of violations) console.error(`::error::${v}`);
+    process.exit(1);
   }
   console.log(`[api-floors] pavimenti derivati dal corpus: tutti retti (${measured.feeds.length} feed inclusi)`);
 }

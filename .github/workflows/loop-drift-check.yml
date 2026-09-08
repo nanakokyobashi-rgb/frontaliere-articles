@@ -70,6 +70,11 @@ jobs:
           # verificato cio' che non ha potuto leggere, quindi la profondita' fa
           # parte del contratto del job, non e' un dettaglio del runner.
           fetch-depth: 0
+          # I 334 path con baseline.corpus sono tutti sotto 1 MiB (massimo
+          # misurato: 958951 byte): il verificatore li trova gia' nel checkout
+          # e non paga un lazy-fetch per ognuno. I blob piu' grandi restano
+          # filtrati, senza rendere la verifica delle baseline parziale.
+          filter: blob:limit=1m
 
       - name: Setup Node.js
         uses: actions/setup-node@v5
@@ -77,6 +82,10 @@ jobs:
           node-version: '22'
 
       - name: Confronta il ciclo col sito
+        id: drift_report
+        # Il comando strict ritorna non-zero anche dopo avere persistito il
+        # report: il run lo assorbe solo dopo aver riconosciuto quella prova,
+        # mentre un crash o un fallimento di scrittura resta rosso.
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
@@ -88,10 +97,26 @@ jobs:
           # fallire il check bloccherebbe l'auto-merge per una ragione che non
           # riguarda chi l'ha aperta. Sullo schedule invece si apre la issue.
           ARGS=""
-          if [ "${{ github.event_name }}" = "schedule" ] || [ "${{ github.event.inputs.report_issue }}" = "true" ]; then
-            ARGS="--issue"
+          if [ "${{ github.event_name }}" = "schedule" ] || [ "${{ github.event.inputs.report_issue }}" = "true" ] || [ "${{ github.event.inputs.report_issue }}" = "1" ] || [ "${{ github.event.inputs.report_issue }}" = "True" ]; then
+            ARGS="--issue --strict"
           fi
-          node scripts/ci/loop-drift-check.mjs $ARGS
+          REPORT_LOG="$(mktemp)"
+          set +e
+          node scripts/ci/loop-drift-check.mjs $ARGS >"$REPORT_LOG" 2>&1
+          DRIFT_STATUS=$?
+          set -e
+          cat "$REPORT_LOG"
+
+          ISSUE_REPORTED=false
+          if grep -Eq '\[github-issue-creator\] (Created:|Commented on existing|Recorded transient failure|Reopened #)' "$REPORT_LOG"; then
+            ISSUE_REPORTED=true
+          fi
+          echo "issue_reported=$ISSUE_REPORTED" >> "$GITHUB_OUTPUT"
+
+          if [ "$DRIFT_STATUS" -ne 0 ] && [ "$ISSUE_REPORTED" != "true" ]; then
+            echo "loop-drift: uscita $DRIFT_STATUS senza prova di report persistito" >&2
+            false
+          fi
 
       # I 24 artifact cross-repo hanno tre famiglie di digest e finora solo una
       # era confrontata con qualcosa (issue #916): `generatorSha256` e i 24
@@ -100,7 +125,12 @@ jobs:
       # `if: always()` perché il passo sopra può uscire non-zero con `--strict`
       # su un drift che non riguarda questa domanda.
       - name: Verifica la provenienza del contratto cross-repo
+        id: provenance_report
         if: always()
+        # Solo la prova emessa dal passo precedente abilita l'advisory: un
+        # crash, un errore di rete o una write fallita non diventano verdi e
+        # il job conserva il proprio rosso.
+        continue-on-error: ${{ steps.drift_report.outputs.issue_reported == 'true' }}
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SITE_REPO: valerielinc-ops/frontaliere-si-o-no
@@ -120,7 +150,7 @@ jobs:
           # stato del sito che nessuno aveva ancora deciso di trattare.
           # L'opt-in esiste già un passo sopra: qui va letto uguale (#982).
           ARGS=""
-          if [ "${{ github.event_name }}" = "schedule" ] || [ "${{ github.event.inputs.report_issue }}" = "true" ]; then
+          if [ "${{ github.event_name }}" = "schedule" ] || [ "${{ github.event.inputs.report_issue }}" = "true" ] || [ "${{ github.event.inputs.report_issue }}" = "1" ] || [ "${{ github.event.inputs.report_issue }}" = "True" ]; then
             ARGS="--strict"
           fi
           node scripts/ci/verify-crawler-contract-provenance.mjs $ARGS
@@ -143,3 +173,14 @@ jobs:
       - name: Baseline del manifest verificate contro la storia dei path
         if: always()
         run: node scripts/ci/verify-manifest-baseline-history.mjs
+
+      # Il guard di censimento usa la rete solo una volta al giorno: serve a
+      # scoprire file byte-identici fuori da `scope.roots`, `files` e
+      # `outOfScope`, non a rallentare ogni PR con la stessa domanda.
+      - name: Censimento opt-in dei gemelli
+        if: always() && github.event_name == 'schedule'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          SITE_REPO: valerielinc-ops/frontaliere-si-o-no
+        run: LOOP_TWIN_CENSUS=1 node --test generator/tests/loop-sync-manifest-scope.test.mjs
