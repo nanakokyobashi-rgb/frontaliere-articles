@@ -3349,6 +3349,16 @@
       }
     },
     {
+      "path": "scripts/ci/redflag-findings-fingerprint.mjs",
+      "mode": "corpus-only",
+      "reason": "Calcola l'impronta stabile dei finding `🔴 Important` che il `pr-redflag-fixer.yml` usa per non rispendere un round sullo stesso verdetto (#1093). Non esiste sul sito e non deve: il fixer corpus ha il confronto con i round gia' commentati e il relativo contratto locale, mentre il sito mantiene il proprio workflow adattato.",
+      "baseline": {
+        "site": null,
+        "corpus": "3f80cbaf972f7d14",
+        "alignedAt": "2026-09-08"
+      }
+    },
+    {
       "path": "scripts/ci/reconcile-followups.mjs",
       "mode": "identical",
       "baseline": {

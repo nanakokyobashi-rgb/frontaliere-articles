@@ -103,6 +103,9 @@ function makeWorld() {
 
   git(root, 'init', '-q', '--bare', 'up.git');
   git(root, 'init', '-q', 'work');
+  // Pin the fixture: diff3/zdiff3 adds a `|||||||` section and would make a
+  // source slice depend on the developer's global git configuration.
+  git(work, 'config', 'merge.conflictStyle', 'merge');
   write(work, BOOKKEEPING, '{"base":true}\n');
   write(work, 'README.md', 'base\n');
   commitAll(work, 'base');

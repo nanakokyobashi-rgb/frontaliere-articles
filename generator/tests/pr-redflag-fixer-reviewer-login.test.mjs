@@ -35,8 +35,17 @@ test('collect-review jq, review-gate and auto-merge-eval use the same bot set', 
   // `REVIEWER_BOT_LOGIN_RE` da `scripts/ci/lib/constants.mjs`, ed e'
   // `generator/tests/reviewer-bot-login.test.mjs` a pinnare quel legame per
   // tutti e sei i consumer (qui resterebbe una copia della stessa regola).
-  assert.match(src, /select\(\.user\.login\|test\("\^\(claude\|frontaliere-automation\)";"i"\)\)/);
+  assert.match(src, /select\(\(\.user\.login\|test\("\^\(claude\|frontaliere-automation\)";"i"\)\)/);
+  assert.match(src, /contains\("## Findings \("\)/);
   const testsYml = fs.readFileSync(path.join(ROOT, '.github/workflows/tests.yml'), 'utf8');
   assert.match(testsYml, /test\("\^\(claude\|frontaliere-automation\)";"i"\)/);
   assert.doesNotMatch(testsYml, /test\("claude";"i"\)/);
+});
+
+test('il push guard controlla il token che il push remote usa davvero', () => {
+  const at = src.indexOf('- name: Configure push remote');
+  const next = src.indexOf('\n      - name:', at + 1);
+  const block = src.slice(at, next < 0 ? src.length : next);
+  assert.match(block, /env\.APP_TOKEN != '' \|\| env\.GITHUB_PAT_NANAKO != ''/);
+  assert.doesNotMatch(block, /env\.GITHUB_PAT != ''/);
 });
