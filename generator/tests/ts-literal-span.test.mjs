@@ -130,6 +130,33 @@ test('rimuovere il primo, l\'ultimo e l\'unico id lascia un array valido', () =>
   assert.ok(removeFromIdListLiteral(one, 'IDS', 'solo').src.includes('[]'));
 });
 
+test('la rimozione accetta apici doppi e preserva l\'annotazione TypeScript', () => {
+  const src = 'export const IDS: BlogArticleId[] = ["uno", "due", "tre"];\n';
+  const out = removeFromIdListLiteral(src, 'IDS', 'due');
+  assert.equal(out.changed, true);
+  assert.match(out.src, /IDS: BlogArticleId\[\]/);
+  assert.ok(out.src.includes('["uno", "tre"]'));
+});
+
+test('matchingDelimiter distingue divisione e regex literal', () => {
+  const src = 'export const IDS: BlogArticleId[] = [foo / bar, /[\\]]+/.test(value), "due", "tre"];\n';
+  const span = findIdListLiteralSpan(src, 'IDS');
+  assert.ok(span);
+  assert.equal(src[span.closeIdx], ']');
+  const out = removeFromIdListLiteral(src, 'IDS', 'due');
+  assert.equal(out.changed, true);
+  assert.ok(out.src.includes('/[\\]]+/.test(value)'));
+});
+
+test('una dichiarazione duplicata del letterale viene rifiutata', () => {
+  const src = [
+    'export const IDS: string[] = [\'uno\'];',
+    'export const IDS: string[] = [\'due\'];',
+    '',
+  ].join('\n');
+  assert.throws(() => findIdListLiteralSpan(src, 'IDS'), /dichiarazione ambigua/);
+});
+
 test('un id che ne CONTIENE un altro non viene scambiato per lui', () => {
   // Stessa classe del needle nudo di `mentions-id.mjs`: gli id si annidano
   // davvero nel corpus, e gli apici sono cio' che li delimita.
@@ -139,11 +166,12 @@ test('un id che ne CONTIENE un altro non viene scambiato per lui', () => {
   assert.ok(out.src.includes("['frontalieri-disoccupazione-2026']"), out.src);
 });
 
-test('un id assente non cambia niente, e non e\' un errore', () => {
+test('un id assente fa fallire la rimozione, invece di lasciare una rimozione parziale', () => {
   const src = "export const IDS: string[] = ['uno'];\n";
-  const out = removeFromIdListLiteral(src, 'IDS', 'mai-esistito');
-  assert.equal(out.changed, false);
-  assert.equal(out.src, src);
+  assert.throws(
+    () => removeFromIdListLiteral(src, 'IDS', 'mai-esistito'),
+    /id atteso .*mai-esistito.*non trovato/,
+  );
 });
 
 test('un elenco DERIVATO non e\' un letterale: nessuna finestra, nessuna riscrittura', () => {

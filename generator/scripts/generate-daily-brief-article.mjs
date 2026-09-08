@@ -35,6 +35,7 @@ import { writeFileSync, mkdirSync, renameSync, unlinkSync } from 'node:fs';
 import {
   registerArticleFiles,
   checkArticleIdExists,
+  assertArticlePassesFactualityGates,
   resolveRegisterLockAtStartup,
   buildBodyFile,
 } from './create-article.mjs';
@@ -80,6 +81,7 @@ export function refreshBodyFiles(data, repoRoot = REPO_ROOT, log = console.log) 
   // Fail-closed come nel registrar: `sanitizePromptPlaceholders` ripara cio'
   // che e' riparabile e LANCIA sul primo campo che non lo e'.
   sanitizePromptPlaceholders(data);
+  assertArticlePassesFactualityGates(data);
   for (const locale of LOCALES) {
     const dir = path.join(repoRoot, corpusPath('services/locales/blog-body'), locale);
     mkdirSync(dir, { recursive: true });
@@ -122,6 +124,7 @@ export function refreshMetaAndSeo(data, repoRoot = REPO_ROOT) {
   // NON riparabili (lancia invece di ricostruire, per non propagare il leak).
   // Idempotente: su `data` gia' sanificato da `refreshBodyFiles` ritorna [].
   sanitizePromptPlaceholders(data);
+  assertArticlePassesFactualityGates(data);
   const localeTexts = {};
   for (const locale of LOCALES) {
     const c = data.content?.[locale];
@@ -174,7 +177,8 @@ async function main() {
   // SPLIT — l'unica che nomina i file scritti e quelli mancanti — venga mai
   // emessa. Qui e non nel `main()` di create-article.mjs: questi produttori
   // importano registerArticleFiles() direttamente e non passano mai di la'.
-  resolveRegisterLockAtStartup();
+  if (!dryRun) resolveRegisterLockAtStartup();
+  assertArticlePassesFactualityGates(data);
   const exists = checkArticleIdExists(data.id);
   const h = data._headline;
   console.log(

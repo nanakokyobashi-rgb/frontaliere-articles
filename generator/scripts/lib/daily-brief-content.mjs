@@ -684,6 +684,10 @@ export function buildData(brief) {
     slugs: article.slugs,
     imageAlt: article.imageAlt,
     content: article.content,
+    // body4 is a deterministic bulletin section, not LLM prose. The shared
+    // gate uses this marker to keep cross-section numeric checks while
+    // excluding only paragraph heuristics calibrated on LLM output (#1144).
+    _deterministicBodySections: ['body4'],
     _generatedImagePath: `/images/blog/${article.id}.webp`,
     _headline: article._headline,
   };

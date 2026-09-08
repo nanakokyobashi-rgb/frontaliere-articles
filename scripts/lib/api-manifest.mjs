@@ -23,9 +23,10 @@
  * COME
  * ────
  * Il produttore chiama `declareApiArtifacts()` dopo aver scritto i suoi file:
- * il manifest viene riletto dal disco, arricchito, riscritto, e SUBITO
- * rivalidato — tutte le voci, non solo quelle nuove, come fa il gate finale di
- * `build-api.mjs`. La rivalidazione e' dal disco per lo stesso motivo per cui
+ * il manifest viene riletto dal disco, arricchito e validato interamente
+ * contro il disco prima di essere scritto — tutte le voci, non solo quelle
+ * nuove, come fa il gate finale di `build-api.mjs`. La validazione e' dal disco
+ * per lo stesso motivo per cui
  * lo e' quella li': un gate che ricontrolla la variabile che ha appena scritto
  * verifica se stesso e non puo' fallire.
  *
@@ -50,7 +51,7 @@ export const byteSize = (text) => Buffer.byteLength(text, 'utf-8');
  * chiamante che gira legittimamente fuori da `dist/api/` (un `--out` di
  * comodo, un test) deve non chiamarla affatto.
  */
-export function declareApiArtifacts(apiRoot, entries) {
+export function declareApiArtifacts(apiRoot, entries, counts = {}) {
   const manifestPath = path.join(apiRoot, 'manifest.json');
   if (!fs.existsSync(manifestPath)) {
     throw new Error(
@@ -62,28 +63,42 @@ export function declareApiArtifacts(apiRoot, entries) {
   if (!manifest.files || typeof manifest.files !== 'object') {
     throw new Error(`${manifestPath} has no \`files\` map — refusing to publish an undescribed surface`);
   }
+  const declaredEntries = new Set(Object.keys(entries));
+  const candidate = {
+    ...manifest,
+    files: { ...manifest.files },
+    counts: { ...(manifest.counts || {}) },
+  };
   for (const [rel, size] of Object.entries(entries)) {
     if (!Number.isInteger(size) || size < 0) {
       throw new Error(`declareApiArtifacts: ${rel} declared as ${size}, which is not a byte count`);
     }
-    manifest.files[rel] = size;
+    candidate.files[rel] = size;
   }
-  // `manifest.json` non descrive se stesso — ne' prima ne' dopo questa
-  // riscrittura — quindi riscriverlo non invalida nessuna voce.
-  fs.writeFileSync(manifestPath, JSON.stringify(manifest));
+  for (const [name, value] of Object.entries(counts || {})) {
+    if (!Number.isInteger(value) || value < 0) {
+      throw new Error(`declareApiArtifacts: counts.${name} declared as ${value}, which is not a non-negative integer`);
+    }
+    candidate.counts[name] = value;
+  }
 
   const mismatches = [];
-  for (const [rel, size] of Object.entries(manifest.files)) {
+  for (const [rel, size] of Object.entries(candidate.files)) {
     const abs = path.join(apiRoot, rel);
     if (!fs.existsSync(abs)) {
-      mismatches.push(`${rel}: declared ${size}, missing on disk`);
+      mismatches.push(`${declaredEntries.has(rel) ? 'newly declared' : 'pre-existing'} ${rel}: declared ${size}, missing on disk`);
       continue;
     }
     const actual = fs.statSync(abs).size;
-    if (actual !== size) mismatches.push(`${rel}: declared ${size}, on disk ${actual}`);
+    if (actual !== size) {
+      mismatches.push(`${declaredEntries.has(rel) ? 'newly declared' : 'pre-existing'} ${rel}: declared ${size}, on disk ${actual}`);
+    }
   }
   if (mismatches.length) {
     throw new Error(`manifest.files does not describe the bytes served:\n  ${mismatches.join('\n  ')}`);
   }
-  return Object.keys(manifest.files).length;
+  // Validate the candidate before touching the manifest. A pre-existing
+  // mismatch must not be persisted together with the new declaration (#1081).
+  fs.writeFileSync(manifestPath, JSON.stringify(candidate));
+  return Object.keys(candidate.files).length;
 }
