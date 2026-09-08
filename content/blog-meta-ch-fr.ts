@@ -6067,6 +6067,12 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.carenza-benzina-gasolio-scorte.title': 'Pénurie d\'essence et de gazole : prélevez les stocks obligatoires',
     'blog.article.carenza-benzina-gasolio-scorte.excerpt': 'Raffinerie Cressier arrêtée pour panne, transports Rhin limités. Retraits autorisés de 30\'000 m³ d\'essence et de diesel entre le 8 et le 20 septembre des stocks obligatoires.',
     'blog.article.carenza-benzina-gasolio-scorte.imageAlt': 'Installation de stockage de carburant en Suisse avec réservoirs et infrastructure pétrolière',
+    'blog.article.volkswagen-tagli-amag-rassicura.title': 'Volkswagen taille 50 000, Amag rassure les clients',
+    'blog.article.volkswagen-tagli-amag-rassicura.excerpt': 'Volkswagen supprime 50 000 sièges. Amag rassure : pas d\'impact sur l\'emploi, des prix stables et un leadership dans la voiture électrique avec Skoda.',
+    'blog.article.volkswagen-tagli-amag-rassicura.imageAlt': 'Concessionnaire Volkswagen en Suisse avec des voitures modernes et un environnement commercial professionnel.',
+    'blog.article.tariffe-elettricita-2027-calo.title': 'Baisse des factures d\'électricité 2027 : -4% en Suisse',
+    'blog.article.tariffe-elettricita-2027-calo.excerpt': 'En 2027, les tarifs de l\'électricité baissent de 4 % selon Elcom. Une famille type économise 53 CHF par an, mais les variations régionales restent significatives.',
+    'blog.article.tariffe-elettricita-2027-calo.imageAlt': 'Compteur d\'électricité suisse sur immeuble résidentiel avec baisse des tarifs 2027',
 };
 
 export default blogMetaChFr;

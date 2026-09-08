@@ -6067,6 +6067,12 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.carenza-benzina-gasolio-scorte.title': 'Benzin- und Dieselmangel: Vorräte müssen entnommen werden',
     'blog.article.carenza-benzina-gasolio-scorte.excerpt': 'Raffinerie Cressier stoppt bei Ausfall, begrenzte Rheintransporte. Genehmigte Entnahmen von 30\'000 m³ Benzin und Diesel zwischen dem 8. und 20. September aus den Pflichtbeständen.',
     'blog.article.carenza-benzina-gasolio-scorte.imageAlt': 'Treibstofflageranlage in der Schweiz mit Tanks und Erdölinfrastruktur',
+    'blog.article.volkswagen-tagli-amag-rassicura.title': 'Volkswagen schneidet 50.000, Amag beruhigt Kunden',
+    'blog.article.volkswagen-tagli-amag-rassicura.excerpt': 'Volkswagen streicht 50.000 Stellen. Amag beruhigt: Keine Auswirkungen auf die Beschäftigung, stabile Preise und Marktführerschaft im Elektroauto mit Skoda.',
+    'blog.article.volkswagen-tagli-amag-rassicura.imageAlt': 'Volkswagen-Autohaus in der Schweiz mit modernen Fahrzeugen und professioneller Verkaufsumgebung.',
+    'blog.article.tariffe-elettricita-2027-calo.title': 'Stromrechnungsrückgang 2027: -4% in der Schweiz',
+    'blog.article.tariffe-elettricita-2027-calo.excerpt': 'Im Jahr 2027 sinken die Stromtarife laut Elcom um 4%. Eine typische Familie spart CHF 53 pro Jahr, aber die regionalen Unterschiede bleiben signifikant.',
+    'blog.article.tariffe-elettricita-2027-calo.imageAlt': 'Schweizer Stromzähler an Wohngebäude mit sinkenden Stromtarifen 2027',
 };
 
 export default blogMetaChDe;

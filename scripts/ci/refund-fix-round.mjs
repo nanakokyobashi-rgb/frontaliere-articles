@@ -70,7 +70,7 @@
 import { execFileSync } from 'node:child_process';
 import fs from 'node:fs';
 
-import { detectClaudeRateLimit } from './claude-rate-limit.mjs';
+import { detectClaudeRateLimit, shouldRefundRateLimitedRound } from './claude-rate-limit.mjs';
 
 const DRY_RUN = process.env.DRY_RUN === '1';
 const PR = process.env.PR;
@@ -88,6 +88,16 @@ function gh(args) {
   } catch (e) {
     console.log(`gh fallita (non bloccante): ${e && e.message ? e.message : e}`);
     return '';
+  }
+}
+
+function ghStatus(args) {
+  try {
+    execFileSync('gh', args, { encoding: 'utf-8', maxBuffer: 64 * 1024 * 1024 });
+    return true;
+  } catch (e) {
+    console.log(`gh fallita (non bloccante): ${e && e.message ? e.message : e}`);
+    return false;
   }
 }
 
@@ -114,9 +124,16 @@ export function roundMarkerRe(marker, round) {
 export function pickRoundCommentId(comments, marker, round) {
   if (!marker || !Number.isFinite(Number(round)) || Number(round) <= 0) return null;
   const re = roundMarkerRe(marker, round);
-  const hit = (Array.isArray(comments) ? comments : [])
+  const hits = (Array.isArray(comments) ? comments : [])
     .filter((c) => c && Number.isFinite(Number(c.id)) && re.test(String(c.body || '')))
-    .pop();
+    .sort((a, b) => {
+      const at = Date.parse(a.created_at || a.createdAt || '');
+      const bt = Date.parse(b.created_at || b.createdAt || '');
+      if (Number.isFinite(at) && Number.isFinite(bt) && at !== bt) return at - bt;
+      if (Number.isFinite(at) !== Number.isFinite(bt)) return Number.isFinite(at) ? 1 : -1;
+      return Number(a.id) - Number(b.id);
+    });
+  const hit = hits.at(-1);
   return hit ? Number(hit.id) : null;
 }
 
@@ -159,29 +176,64 @@ export function formatRefundComment({ round, workflow, resetsAt, rateLimitType, 
   ].filter((l) => l !== null).join('\n');
 }
 
+/**
+ * Commento provvisorio, scritto PRIMA della DELETE. Non afferma mai che il
+ * marker sia stato rimosso: se la DELETE fallisce, resta l'unico commento e
+ * descrive correttamente lo stato ancora consumato del round.
+ */
+export function formatRefundAttemptComment({ round, workflow, resetsAt, rateLimitType, runUrl, marker }) {
+  const when = Number.isFinite(Number(resetsAt)) && Number(resetsAt) > 0
+    ? new Date(Number(resetsAt) * 1000).toISOString().replace('T', ' ').slice(0, 16) + ' UTC'
+    : null;
+  return [
+    `⏳ **Quota Claude esaurita${rateLimitType ? ` (\`${rateLimitType}\`)` : ''}** — \`${workflow}\` ha rilevato HTTP 429:`,
+    'Questa è la traccia della procedura di rimborso; il marker viene rimosso solo dopo una DELETE verificata.',
+    when ? `La quota torna disponibile alle **${when}**.` : null,
+    runUrl ? `\nRun: ${runUrl}` : null,
+  ].filter((l) => l !== null).join('\n');
+}
+
+function executionRaw() {
+  if (EXEC_FILE && fs.existsSync(EXEC_FILE)) return fs.readFileSync(EXEC_FILE, 'utf-8');
+
+  // L'action può fallire prima di pubblicare `execution_file`. Il log del job è
+  // il fallback verificabile: senza un run id non inventiamo un rimborso.
+  const runId = process.env.RUN_ID || process.env.GITHUB_RUN_ID;
+  if (!runId) return '';
+  const log = gh(['run', 'view', String(runId), ...repoArgs, '--log-failed']);
+  if (log) console.log('execution_file assente → verifico il log della run per un 429 esplicito.');
+  return log;
+}
+
 function main() {
   if (!PR || !MARKER || !ROUND) {
     console.log('PR/MARKER/ROUND non impostati → niente da rimborsare.');
     return;
   }
-  if (!EXEC_FILE || !fs.existsSync(EXEC_FILE)) {
-    console.log('Nessun execution file → impossibile distinguere un 429 da un crash: nessun rimborso.');
+  const raw = executionRaw();
+  if (!raw) {
+    console.log('Nessun execution file né log verificabile → impossibile distinguere un 429 da un crash: nessun rimborso.');
     return;
   }
 
-  const { rateLimited, resetsAt, rateLimitType } = detectClaudeRateLimit(
-    fs.readFileSync(EXEC_FILE, 'utf-8')
-  );
+  const { rateLimited, resetsAt, rateLimitType } = detectClaudeRateLimit(raw);
   if (!rateLimited) {
     console.log('La run NON è morta di quota → il round resta consumato (anti-loop invariato).');
     return;
   }
+  if (!shouldRefundRateLimitedRound(raw)) {
+    console.log('429 rilevato DOPO consumo Claude (turni/costo > zero) → nessun rimborso del round.');
+    return;
+  }
 
   const repo = process.env.GH_REPO || '{owner}/{repo}';
-  const raw = gh(['api', `repos/${repo}/issues/${PR}/comments`, '--paginate']);
+  const commentsRaw = gh(['api', '--paginate', '--slurp', `repos/${repo}/issues/${PR}/comments?per_page=100`]);
   let comments = [];
   try {
-    comments = JSON.parse(raw || '[]');
+    const parsed = JSON.parse(commentsRaw || '[]');
+    comments = Array.isArray(parsed)
+      ? parsed.flatMap((page) => Array.isArray(page) ? page : [])
+      : [];
   } catch {
     comments = [];
   }
@@ -194,19 +246,29 @@ function main() {
   const body = formatRefundComment({
     round: ROUND, workflow: WORKFLOW, resetsAt, rateLimitType, runUrl: RUN_URL, marker: MARKER,
   });
+  const attempt = formatRefundAttemptComment({
+    round: ROUND, workflow: WORKFLOW, resetsAt, rateLimitType, runUrl: RUN_URL, marker: MARKER,
+  });
   console.log(`429 rilevato → rimborso del round ${ROUND} (commento ${id}) sulla PR #${PR}.`);
   if (DRY_RUN) {
     console.log(body);
     return;
   }
-  // Ordine non commutativo: prima il commento di rimborso, poi la DELETE del
-  // marker. `gh()` inghiotte i fallimenti, quindi va scelto quale metà può
-  // restare orfana. Post-poi-delete lascia, nel caso peggiore, marker + handle:
-  // il round non è rimborsato, cioè lo stato ante-PR, dichiarato accettabile
-  // sopra. L'ordine inverso lascerebbe il round rimborsato SENZA handle —
-  // marker sparito, classe B del rescuer disarmata, PR ferma col budget intero.
-  gh(['pr', 'comment', String(PR), ...repoArgs, '--body', body]);
-  gh(['api', '-X', 'DELETE', `repos/${repo}/issues/comments/${id}`]);
+  // Ordine non commutativo: prima il commento PROVVISORIO, poi la DELETE del
+  // marker, infine il commento conclusivo. Se la DELETE fallisce, il commento
+  // provvisorio resta vero e il marker resta contato: nessuna falsa
+  // affermazione di rimborso e nessun round cancellato a metà.
+  if (!ghStatus(['pr', 'comment', String(PR), ...repoArgs, '--body', attempt])) {
+    console.log('Commento provvisorio non postato → marker intatto, nessun rimborso dichiarato.');
+    return;
+  }
+  if (!ghStatus(['api', '-X', 'DELETE', `repos/${repo}/issues/comments/${id}`])) {
+    console.log('DELETE del marker fallita → round ancora consumato; il commento provvisorio non dichiara il contrario.');
+    return;
+  }
+  if (!ghStatus(['pr', 'comment', String(PR), ...repoArgs, '--body', body])) {
+    console.log('Commento finale non postato dopo DELETE riuscita → il marker è rimborsato, il handle provvisorio resta sul thread.');
+  }
 }
 
 main();

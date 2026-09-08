@@ -36,7 +36,14 @@ import { fileURLToPath } from 'node:url';
 // copia locale nel test divergerebbe in silenzio dal fix (AGENTS.md #6).
 import { translatedStringOrNull } from '../scripts/lib/article-free-mt.mjs';
 import { hasUsableContentText, hasUsableTranslatedText, metaFieldPlausibilityMiss } from '../scripts/lib/body2-payload-verdict.mjs';
-import { createFreeMtRecoveryReport, claimFreeMtLlmFallback, MAX_FREE_MT_LLM_FALLBACKS_PER_RUN } from '../scripts/lib/free-mt-recovery.mjs';
+import {
+  createFreeMtRecoveryReport,
+  claimFreeMtLlmFallback,
+  recordFreeMtUnusableOutput,
+  wasFreeMtUnusable,
+  MAX_FREE_MT_LLM_FALLBACKS_PER_RUN,
+  MAX_FREE_MT_LLM_FALLBACKS_PER_LOCALE,
+} from '../scripts/lib/free-mt-recovery.mjs';
 
 // Riempitivo dei campi meta nelle fixture. NON e' un dettaglio di stile: dal
 // floor di plausibilita' (#798) il loop missing-field giudica anche `title` e
@@ -101,20 +108,18 @@ const MISSING_FIELD_LOOP_SRC = extractMissingFieldLoop();
  * passano esplicitamente non esercitano il ramo warning IT-esso-stesso-troncato
  * (#705). `warnings` raccoglie i messaggi di `console.warn` per assert.
  */
-async function runMissingFieldLoop({ data, itContent, callWithRetry, detectTruncation, warnings = [], freeMtRejectedFields = [] }) {
+async function runMissingFieldLoop({ data, itContent, callWithRetry, detectTruncation, warnings = [], translationReport }) {
   const capturingConsole = { error: () => {}, warn: (msg) => warnings.push(msg) };
-  const RUN_REPORT = { translation: createFreeMtRecoveryReport() };
-  for (const key of freeMtRejectedFields) RUN_REPORT.translation.unusableFields[key] = 1;
+  const RUN_REPORT = { translation: translationReport || createFreeMtRecoveryReport() };
   const fn = new Function(
     'data', 'itContent', 'callWithRetry', 'translatedStringOrNull', 'hasUsableTranslatedText', 'metaFieldPlausibilityMiss', 'detectTruncation', 'console',
-    'ARTICLE_TRANSLATE_FREE_MT', 'claimFreeMtLlmFallback', 'RUN_REPORT', 'MAX_FREE_MT_LLM_FALLBACKS_PER_RUN',
+    'ARTICLE_TRANSLATE_FREE_MT', 'claimFreeMtLlmFallback', 'wasFreeMtUnusable', 'RUN_REPORT', 'MAX_FREE_MT_LLM_FALLBACKS_PER_RUN', 'MAX_FREE_MT_LLM_FALLBACKS_PER_LOCALE',
     `return (async () => { ${MISSING_FIELD_LOOP_SRC} })();`,
   );
   // `metaFieldPlausibilityMiss` e' il floor VERO (#798), non un mock: il ramo
   // floor-miss del loop tiene il valore tradotto invece di cadere sul fallback
   // IT, e un mock qui non proverebbe quel comportamento.
-  await fn(data, itContent, callWithRetry, translatedStringOrNull, hasUsableTranslatedText, metaFieldPlausibilityMiss, detectTruncation || (() => []), capturingConsole, true, claimFreeMtLlmFallback, RUN_REPORT, MAX_FREE_MT_LLM_FALLBACKS_PER_RUN);
-  return RUN_REPORT;
+  await fn(data, itContent, callWithRetry, translatedStringOrNull, hasUsableTranslatedText, metaFieldPlausibilityMiss, detectTruncation || (() => []), capturingConsole, true, claimFreeMtLlmFallback, wasFreeMtUnusable, RUN_REPORT, MAX_FREE_MT_LLM_FALLBACKS_PER_RUN, MAX_FREE_MT_LLM_FALLBACKS_PER_LOCALE);
 }
 
 /**
@@ -383,36 +388,6 @@ test('ramo missing-field: un campo DE che vale «Null» (zero, in tedesco) non c
   assert.equal(data.content.de.title, 'Null', 'il titolo DE non deve essere sostituito dal testo italiano');
 });
 
-test('ramo missing-field: il cap vale solo sui campi rifiutati dal free-MT e mantiene il controllo di troncamento', async () => {
-  const data = { content: { en: {}, de: {}, fr: {} } };
-  const itContent = { ...META_PLAUSIBILI, body1: 'B1it', body2: 'B2it', body3: 'B3it' };
-  const rejected = [
-    'en:title', 'en:excerpt', 'en:body1', 'en:body2', 'en:body3', 'de:title',
-  ];
-  const calls = [];
-  const truncationChecks = [];
-  const callWithRetry = async (_p, _t, label) => { calls.push(label); return {}; };
-  const report = await runMissingFieldLoop({
-    data,
-    itContent,
-    callWithRetry,
-    freeMtRejectedFields: rejected,
-    detectTruncation: (_text, { label }) => { truncationChecks.push(label); return []; },
-  });
-
-  assert.deepEqual(
-    calls.slice(0, 5),
-    ['en:title-missing-retry', 'en:excerpt-missing-retry', 'en:body1-missing-retry', 'en:body2-missing-retry', 'en:body3-missing-retry'],
-  );
-  assert.equal(calls.includes('de:title-missing-retry'), false, 'il sesto campo rifiutato dal free-MT non parte');
-  assert.equal(calls.length, 14, 'i campi mancanti per altre cause mantengono il retry normale');
-  assert.equal(report.translation.llmFallbacks, MAX_FREE_MT_LLM_FALLBACKS_PER_RUN);
-  assert.equal(report.translation.llmFallbackCapped, true);
-  assert.equal(truncationChecks.length, 15, 'il fallback capped passa comunque dal controllo di troncamento');
-  assert.ok(truncationChecks.includes('it/title'), 'anche il fallback dopo il cap passa dal controllo di troncamento');
-  assert.equal(data.content.de.title, itContent.title, 'il campo capped segue il fallback IT esistente');
-});
-
 test('ramo missing-field: il campo DE sotto il floor NON e\' mancante — il body gemello non fa scattare nulla (#831)', async () => {
   // Il rovescio senza il floor di mezzo: sui body il floor meta non esiste, e
   // `Null` tedesco resta contenuto a tutti gli effetti — zero retry, come prima.
@@ -481,4 +456,105 @@ test('translatedStringOrNull: rifiuta la serializzazione letterale di null, non 
   }
   // Il punto finale non e' la parola: `Null.` non e' `null` in nessun locale.
   assert.equal(translatedStringOrNull('Null.', 'en'), 'Null.');
+});
+
+// ── Il cap free-MT e' scopato ai campi che il free-MT ha rifiutato ─────────
+//
+// Il budget e' 5 per RUN, i campi candidati 15 per articolo. Addebitarlo a
+// ogni ingresso nel loop lo esaurisce con un articolo solo, e da li' in poi
+// OGNI campo mancante salta il retry mirato e cade sul valore italiano: prosa
+// IT sotto `/en/`, `/de/`, `/fr/`, cioe' il difetto #831 che la catena
+// dovrebbe chiudere.
+function reportConCapEsaurito(coppieRifiutate = [], localiEsauriti = ['de']) {
+  const report = createFreeMtRecoveryReport();
+  for (const [targetLang, field] of coppieRifiutate) {
+    recordFreeMtUnusableOutput(report, { reason: 'unusable-text', targetLang, field });
+  }
+  // La quota e' PER LOCALE (#831: un budget globale si svuotava tutto su `en`
+  // e lasciava `de`/`fr` senza recovery), quindi va esaurita sul locale che il
+  // test esercita, non con N claim anonimi.
+  for (const locale of localiEsauriti) {
+    for (let i = 0; i < MAX_FREE_MT_LLM_FALLBACKS_PER_LOCALE; i += 1) claimFreeMtLlmFallback(report, locale);
+  }
+  return report;
+}
+
+test('ramo missing-field: cap esaurito ma campo NON rifiutato dal free-MT → il retry mirato parte comunque (#831)', async () => {
+  const complete = { ...META_PLAUSIBILI, body1: 'B1', body2: 'B2', body3: 'B3' };
+  const data = { content: { en: { ...complete }, de: { ...complete, body1: '' }, fr: { ...complete } } };
+  const itContent = { ...META_PLAUSIBILI, body1: 'B1it', body2: 'B2it', body3: 'B3it' };
+  const calls = [];
+  const callWithRetry = async (_p, _t, label) => { calls.push(label); return { body1: 'B1 auf Deutsch' }; };
+
+  // Il cap e' esaurito da un ALTRO campo (`de:title`): questo body1 non e' mai
+  // stato rifiutato dal free-MT, quindi non deve pagarne il conto.
+  await runMissingFieldLoop({ data, itContent, callWithRetry, translationReport: reportConCapEsaurito([['de', 'title']]) });
+
+  assert.deepEqual(calls, ['de:body1-missing-retry'], 'il campo estraneo al free-MT conserva il suo retry mirato');
+  assert.equal(data.content.de.body1, 'B1 auf Deutsch', 'niente fallback italiano sotto /de/');
+});
+
+// #831 (round redflag): il budget era UNICO per run e il loop scorre `en`
+// prima di `de` e `fr`. In una run in cui il free-MT degrada su tutti i campi
+// — l'esatto scenario per cui il cap esiste — i 5 claim finivano tutti su
+// `en`, e da `de` in poi ogni campo saltava il retry mirato cadendo su
+// `itValue`: `/de/` e `/fr/` pubblicati con prosa ITALIANA. Con la quota per
+// locale `en` non puo' piu' affamare gli altri.
+test('ramo missing-field: `en` degradato non consuma il budget di `de` (#831)', async () => {
+  const vuoti = { title: '', excerpt: '', body1: '', body2: '', body3: '' };
+  const completo = { ...META_PLAUSIBILI, body1: 'B1', body2: 'B2', body3: 'B3' };
+  const data = { content: { en: { ...vuoti }, de: { ...completo, body1: '' }, fr: { ...completo } } };
+  const itContent = { ...META_PLAUSIBILI, body1: 'B1it', body2: 'B2it', body3: 'B3it' };
+  const calls = [];
+  const callWithRetry = async (_p, _t, label) => {
+    calls.push(label);
+    const field = label.split(':')[1].replace('-missing-retry', '');
+    return { [field]: `${field} tradotto in modo plausibile e abbastanza lungo` };
+  };
+
+  // Il free-MT ha rifiutato TUTTI i campi `en` piu' `de:body1`: ognuno di
+  // questi paga il cap, e senza quota per locale i cinque `en` lo esaurivano.
+  const rifiutati = ['title', 'excerpt', 'body1', 'body2', 'body3'].map((f) => ['en', f]);
+  const report = createFreeMtRecoveryReport();
+  for (const [targetLang, field] of [...rifiutati, ['de', 'body1']]) {
+    recordFreeMtUnusableOutput(report, { reason: 'unusable-text', targetLang, field });
+  }
+
+  await runMissingFieldLoop({ data, itContent, callWithRetry, translationReport: report });
+
+  assert.ok(
+    calls.includes('de:body1-missing-retry'),
+    `de deve conservare il suo retry mirato, chiamate: ${JSON.stringify(calls)}`,
+  );
+  assert.notEqual(data.content.de.body1, itContent.body1, 'niente fallback italiano sotto /de/');
+  assert.equal(
+    calls.filter((c) => c.startsWith('en:')).length,
+    MAX_FREE_MT_LLM_FALLBACKS_PER_LOCALE,
+    'en resta dentro la sua quota',
+  );
+});
+
+test('ramo missing-field: campo rifiutato dal free-MT con cap esaurito → niente retry, e il fallback IT troncato resta segnalato (#705)', async () => {
+  const complete = { ...META_PLAUSIBILI, body1: 'B1', body2: 'B2', body3: 'B3' };
+  const data = { content: { en: { ...complete }, de: { ...complete, body1: '' }, fr: { ...complete } } };
+  const itContent = { ...META_PLAUSIBILI, body1: 'Questa frase non finisce mai e', body2: 'B2it', body3: 'B3it' };
+  const calls = [];
+  const callWithRetry = async (_p, _t, label) => { calls.push(label); return { body1: 'B1 auf Deutsch' }; };
+  const warnings = [];
+
+  await runMissingFieldLoop({
+    data,
+    itContent,
+    callWithRetry,
+    detectTruncation: () => [{ type: 'incomplete-ending' }],
+    warnings,
+    translationReport: reportConCapEsaurito([['de', 'body1']]),
+  });
+
+  assert.deepEqual(calls, [], 'il campo davvero rifiutato dal free-MT paga il cap: nessun retry LLM');
+  assert.equal(data.content.de.body1, itContent.body1, 'fallback IT come ultima risorsa');
+  assert.ok(
+    warnings.some((w) => String(w).includes('ESSO STESSO troncato')),
+    'anche il ramo del cap deve passare per detectTruncation(itValue) e segnalare il fallback IT troncato',
+  );
 });

@@ -143,7 +143,9 @@ import {
   createFreeMtRecoveryReport,
   recordFreeMtUnusableOutput,
   claimFreeMtLlmFallback,
+  wasFreeMtUnusable,
   MAX_FREE_MT_LLM_FALLBACKS_PER_RUN,
+  MAX_FREE_MT_LLM_FALLBACKS_PER_LOCALE,
 } from './lib/free-mt-recovery.mjs';
 import { isReservedPublishedSlug } from '../../scripts/lib/published-slug-guard.mjs';
 import { AI_SEARCH_PROMPT_BLOCK_IT } from './lib/ai-search-template.mjs';
@@ -2200,6 +2202,9 @@ function finalizeRunReport(status, extra = {}) {
       + ` non_string=${recovery.nonStringOutputs}`
       + ` by_locale=${JSON.stringify(recovery.unusableByLocale)}`
       + ` llm_fallbacks=${recovery.llmFallbacks}`
+      // La ripartizione per locale e' il numero che dice se la quota ha fatto
+      // il suo mestiere: `en=5` con `de`/`fr` a zero era la forma del difetto.
+      + ` by_locale=${Object.entries(recovery.llmFallbacksByLocale || {}).map(([l, n]) => `${l}:${n}`).join(',') || 'none'}`
       + ` capped=${recovery.llmFallbackCapped ? 1 : 0}`,
     );
   }
@@ -9741,17 +9746,20 @@ const ARTICLE_TRANSLATE_FREE_MT = String(process.env.ARTICLE_TRANSLATE_FREE_MT ?
 // Thin in-script wrapper: bind the lib field-translator to the prod MT cascade,
 // markdown repair, and logger. Returns '' on any failure so the caller's
 // per-field recovery (LLM retry → IT fallback) takes over.
-function freeMtField(text, sourceLang, targetLang, fieldType, fieldName = fieldType) {
+// `field` e' il nome del campo di contenuto (`title`, `excerpt`, `body1`...),
+// distinto dal `fieldType` che il motore MT riceve (`title`/`description`): e'
+// la chiave con cui il loop missing-field piu' sotto chiede «questo campo l'ha
+// rifiutato il free-MT?» prima di addebitargli il cap.
+function freeMtField(text, sourceLang, targetLang, fieldType, field = fieldType) {
   return translateFieldFreeMt({
     text,
     sourceLang,
     targetLang,
     fieldType,
-    fieldName,
     translate: freeTranslateWithRetry,
     balanceMarkdown: balanceMarkdownMarkers,
     onWarn: (msg) => console.error(`  ⚠️  ${msg} — recupero per-campo`),
-    onUnusableOutput: (event) => recordFreeMtUnusableOutput(RUN_REPORT.translation, event),
+    onUnusableOutput: (event) => recordFreeMtUnusableOutput(RUN_REPORT.translation, { ...event, field }),
   });
 }
 
@@ -9773,8 +9781,8 @@ async function translateContentFreeMt(sourceLang, targetLang, targetLabel, sourc
   if (Array.isArray(sourceContent.faq) && sourceContent.faq.length > 0) {
     try {
       faq = await Promise.all(sourceContent.faq.map(async (item) => {
-        const q = await freeMtField(item?.q, sourceLang, targetLang, 'title', 'faq-q');
-        const a = await freeMtField(item?.a, sourceLang, targetLang, 'description', 'faq-a');
+        const q = await freeMtField(item?.q, sourceLang, targetLang, 'title', 'faq.q');
+        const a = await freeMtField(item?.a, sourceLang, targetLang, 'description', 'faq.a');
         return { q: q || item?.q || '', a: a || item?.a || '' };
       }));
     } catch (err) {
@@ -10167,14 +10175,38 @@ ${terminologyByLang[targetLang] || ''}`;
           ? `  ⚠️  Campo ${field} nella traduzione ${locale} troppo corto per essere un ${field} (${floorMiss}) — retry traduzione mirata...`
           : `  ⚠️  Campo ${field} mancante nella traduzione ${locale} — retry traduzione mirata...`,
       );
-      const freeMtRejected = ARTICLE_TRANSLATE_FREE_MT
-        && Boolean(RUN_REPORT.translation.unusableFields?.[`${locale}:${field}`]);
-      if (freeMtRejected && !claimFreeMtLlmFallback(RUN_REPORT.translation)) {
+      // IL CAP E' SCOPATO AI SOLI CAMPI CHE IL FREE-MT HA DAVVERO RIFIUTATO,
+      // ED E' UNA QUOTA PER LOCALE.
+      // Il budget e' 5 per RUN, i campi candidati 15 per articolo (3 locali x 5
+      // campi): addebitarlo a OGNI ingresso nel loop — un floor-miss, un campo
+      // vuoto per cause estranee al free-MT — lo esaurisce con un solo articolo
+      // e da li' in poi ogni campo salta il retry mirato e cade su `itValue`,
+      // cioe' pubblica prosa ITALIANA sotto `/en/`, `/de/`, `/fr/` in
+      // `content/`, in `meta-<locale>.json` e nei feed RSS: esattamente il
+      // difetto #831, live senza rebuild del sito. Il free-MT segnala la coppia
+      // (locale, campo) che ha rifiutato (`onUnusableOutput`), e solo quella
+      // paga il cap; per tutti gli altri campi il retry mirato resta intatto.
+      // Il claim e' per LOCALE: questo loop scorre `en` prima di `de` e `fr`, e
+      // un budget unico per run si esaurirebbe tutto su `en` proprio nella run
+      // in cui il free-MT degrada su tutti i campi — `/en/` recuperato, `/de/`
+      // e `/fr/` pubblicati in italiano, cioe' di nuovo #831. Vedi
+      // `MAX_FREE_MT_LLM_FALLBACKS_PER_LOCALE`.
+      const capBloccaIlRetry = ARTICLE_TRANSLATE_FREE_MT
+        && wasFreeMtUnusable(RUN_REPORT.translation, locale, field)
+        && !claimFreeMtLlmFallback(RUN_REPORT.translation, locale);
+      if (capBloccaIlRetry) {
         console.error(
-          `  ⚠️  Recupero LLM per ${field} (${locale}) saltato: raggiunto il cap di `
-          + `${MAX_FREE_MT_LLM_FALLBACKS_PER_RUN} fallback free-MT per run — `
+          `  ⚠️  Recupero LLM per ${field} (${locale}) saltato: raggiunta la quota di `
+          + `${MAX_FREE_MT_LLM_FALLBACKS_PER_LOCALE} fallback free-MT per locale `
+          + `(cap ${MAX_FREE_MT_LLM_FALLBACKS_PER_RUN} per run) — `
           + `${ultimaRisorsa ? 'valore tradotto mantenuto' : 'fallback al valore italiano'}`,
         );
+        if (ultimaRisorsa) continue;
+        // NIENTE `continue` qui: il ramo del cap cade sullo STESSO fallback IT
+        // in fondo al loop, quindi passa per `detectTruncation(itValue)` come
+        // il percorso normale. Assegnare `itValue` qui saltava quel check e
+        // pubblicava un fallback IT esso stesso troncato senza il `🔴 ...
+        // richiede verifica manuale` (#705).
       } else {
         try {
           // Reuse the in-scope callWithRetry (callLLM + JSON repair + truncation

@@ -44,6 +44,8 @@ import {
   recordFreeMtUnusableOutput,
   claimFreeMtLlmFallback,
   MAX_FREE_MT_LLM_FALLBACKS_PER_RUN,
+  MAX_FREE_MT_LLM_FALLBACKS_PER_LOCALE,
+  FREE_MT_LLM_FALLBACK_LOCALES,
 } from '../scripts/lib/free-mt-recovery.mjs';
 import { isReservedPublishedSlug } from '../../scripts/lib/published-slug-guard.mjs';
 import { buildSitemap } from '../../scripts/lib/build-sitemap.mjs';
@@ -137,13 +139,13 @@ describe('translateFieldFreeMt — l’uscita di un motore non e’ prosa', () =
 });
 
 describe('free-MT recovery — il degrado e’ misurato e limitato per run', () => {
-  test('il sesto fallback LLM viene bloccato, senza confondere l’assenza vera', () => {
+  test('la quota per locale si esaurisce, senza confondere l’assenza vera', () => {
     const report = createFreeMtRecoveryReport();
-    for (let i = 0; i < MAX_FREE_MT_LLM_FALLBACKS_PER_RUN; i += 1) {
-      assert.equal(claimFreeMtLlmFallback(report), true, `fallback ${i + 1}`);
+    for (let i = 0; i < MAX_FREE_MT_LLM_FALLBACKS_PER_LOCALE; i += 1) {
+      assert.equal(claimFreeMtLlmFallback(report, 'en'), true, `fallback en ${i + 1}`);
     }
-    assert.equal(claimFreeMtLlmFallback(report), false);
-    assert.equal(report.llmFallbacks, MAX_FREE_MT_LLM_FALLBACKS_PER_RUN);
+    assert.equal(claimFreeMtLlmFallback(report, 'en'), false, 'oltre la quota del locale');
+    assert.equal(report.llmFallbacks, MAX_FREE_MT_LLM_FALLBACKS_PER_LOCALE);
     assert.equal(report.llmFallbackCapped, true);
 
     recordFreeMtUnusableOutput(report, { targetLang: 'de', fieldName: 'title', reason: 'non-string' });
@@ -151,6 +153,28 @@ describe('free-MT recovery — il degrado e’ misurato e limitato per run', () 
     assert.equal(report.nonStringOutputs, 1);
     assert.deepEqual(report.unusableByLocale, { de: 1 });
     assert.deepEqual(report.unusableFields, { 'de:title': 1 });
+  });
+
+  // #831: con un budget UNICO per run consumato nell'ordine del loop
+  // (`en` → `de` → `fr`), una run in cui il free-MT degrada su ogni campo
+  // spendeva tutti e 5 i claim su `en`, e `de`/`fr` finivano pubblicati con
+  // prosa italiana. La quota per locale e' l'invariante che lo impedisce.
+  test('`en` non puo’ affamare `de`/`fr`: a ogni locale resta almeno un claim', () => {
+    const report = createFreeMtRecoveryReport();
+    const spesi = Object.fromEntries(FREE_MT_LLM_FALLBACK_LOCALES.map((l) => [l, 0]));
+    // Stesso ordine del loop missing-field di create-article.mjs, e 5 campi
+    // per locale: la forma esatta della run degradata.
+    for (const locale of FREE_MT_LLM_FALLBACK_LOCALES) {
+      for (let i = 0; i < 5; i += 1) {
+        if (claimFreeMtLlmFallback(report, locale)) spesi[locale] += 1;
+      }
+    }
+    for (const locale of FREE_MT_LLM_FALLBACK_LOCALES) {
+      assert.ok(spesi[locale] >= 1, `${locale} deve conservare almeno un retry mirato, ne ha ${spesi[locale]}`);
+      assert.ok(spesi[locale] <= MAX_FREE_MT_LLM_FALLBACKS_PER_LOCALE, `${locale} non puo’ superare la quota`);
+    }
+    assert.equal(report.llmFallbacks, MAX_FREE_MT_LLM_FALLBACKS_PER_RUN, 'il cap per run resta il tetto complessivo');
+    assert.deepEqual(report.llmFallbacksByLocale, spesi);
   });
 });
 

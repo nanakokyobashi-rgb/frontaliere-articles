@@ -9,44 +9,116 @@
 
 export const MAX_FREE_MT_LLM_FALLBACKS_PER_RUN = 5;
 
+/**
+ * I locali tradotti che competono per quel budget. La lista vive qui e non nel
+ * loop di `create-article.mjs` perche' e' il DENOMINATORE della quota: cambiare
+ * i locali senza cambiare la quota rimetterebbe in piedi la fame di locale.
+ */
+export const FREE_MT_LLM_FALLBACK_LOCALES = ['en', 'de', 'fr'];
+
+/**
+ * QUOTA PER LOCALE, non budget globale consumato nell'ordine del loop.
+ *
+ * Il loop missing-field scorre `['en','de','fr']` × `['title','excerpt',
+ * 'body1','body2','body3']`: con un solo contatore per run, in una run in cui
+ * il free-MT degrada su tutti i campi i 5 claim finiscono TUTTI su `en`, e da
+ * `de:title` in poi ogni campo salta il retry mirato e cade sul valore
+ * italiano. Risultato: `/en/` recuperato, `/de/` e `/fr/` pubblicati con prosa
+ * ITALIANA in `content/`, in `meta-<locale>.json` e nei feed RSS — cioe' il
+ * difetto #831 che questa catena esiste per chiudere, live senza rebuild del
+ * sito.
+ *
+ * Con la quota nessun locale puo' affamare gli altri: `en` ne prende al
+ * massimo 2, `de` 2, quindi a `fr` ne resta sempre almeno 1 (5 - 2 - 2). E' la
+ * stessa correzione gia' applicata al budget undated dello scan news (#190
+ * punto 1, `selectUndatedBySourceQuota`), dove un budget globale riempito
+ * nell'ordine della lista lasciava a zero ogni fonte dopo la prima.
+ */
+export const MAX_FREE_MT_LLM_FALLBACKS_PER_LOCALE = Math.ceil(
+  MAX_FREE_MT_LLM_FALLBACKS_PER_RUN / FREE_MT_LLM_FALLBACK_LOCALES.length,
+);
+
+/**
+ * Chiave di un campo rifiutato: `<locale>:<campo>`, dove `<campo>` e' il nome
+ * del campo di contenuto (`title`, `excerpt`, `body1`...), NON il `fieldType`
+ * passato al motore MT (`title`/`description`) — e' il nome che il loop
+ * missing-field di `create-article.mjs` conosce.
+ */
+export function freeMtFieldKey(targetLang, field) {
+  return `${targetLang || '?'}:${field || '?'}`;
+}
+
 export function createFreeMtRecoveryReport() {
   return {
     unusableOutputs: 0,
     nonStringOutputs: 0,
     unusableByLocale: {},
-    unusableFields: {},
     llmFallbacks: 0,
+    // Mappa serializzabile locale -> claim spesi, il contatore su cui agisce
+    // la quota per locale.
+    llmFallbacksByLocale: {},
     llmFallbackCapped: false,
+    // Mappa serializzabile (il RUN_REPORT finisce in JSON: un Set diventerebbe
+    // `{}`) delle coppie (locale, campo) che il free-MT ha davvero rifiutato.
+    unusableFields: {},
   };
 }
 
-export function recordFreeMtUnusableOutput(report, { targetLang, fieldName, reason } = {}) {
+export function recordFreeMtUnusableOutput(report, { reason, targetLang, field, fieldName } = {}) {
   if (!report || typeof report !== 'object') return;
   report.unusableOutputs = (report.unusableOutputs || 0) + 1;
-  const locale = String(targetLang || 'unknown');
-  report.unusableByLocale = report.unusableByLocale || {};
-  report.unusableByLocale[locale] = (report.unusableByLocale[locale] || 0) + 1;
-  if (fieldName) {
-    report.unusableFields = report.unusableFields || {};
-    const key = `${locale}:${fieldName}`;
-    report.unusableFields[key] = (report.unusableFields[key] || 0) + 1;
+  if (targetLang) {
+    const locale = String(targetLang);
+    if (!report.unusableByLocale || typeof report.unusableByLocale !== 'object') report.unusableByLocale = {};
+    report.unusableByLocale[locale] = (report.unusableByLocale[locale] || 0) + 1;
   }
   if (reason === 'non-string') {
     report.nonStringOutputs = (report.nonStringOutputs || 0) + 1;
   }
+  const fieldKey = field || fieldName;
+  if (targetLang && fieldKey) {
+    if (!report.unusableFields || typeof report.unusableFields !== 'object') report.unusableFields = {};
+    const key = freeMtFieldKey(targetLang, fieldKey);
+    report.unusableFields[key] = (report.unusableFields[key] || 0) + 1;
+  }
 }
 
 /**
- * Reserve one focused LLM retry. Returns false once the run cap is reached.
- * The state is mutated so the same function is the only counter/decision
- * point used by the generator.
+ * Il campo (locale, nome) e' fra quelli che il free-MT ha rifiutato in questa
+ * run? Solo per questi il cap ha titolo di negare il retry mirato: un campo
+ * mancante per cause estranee al free-MT (floor-miss, output vuoto del
+ * percorso LLM) non consuma budget e non deve mai saltare il retry, perche'
+ * il suo fallback pubblica ITALIANO sotto `/en/`, `/de/`, `/fr/` (#831).
  */
-export function claimFreeMtLlmFallback(report) {
+export function wasFreeMtUnusable(report, targetLang, field) {
   if (!report || typeof report !== 'object') return false;
-  if ((report.llmFallbacks || 0) >= MAX_FREE_MT_LLM_FALLBACKS_PER_RUN) {
+  return Boolean(report.unusableFields?.[freeMtFieldKey(targetLang, field)]);
+}
+
+/**
+ * Reserve one focused LLM retry FOR `locale`. Returns false once either the
+ * per-locale quota or the run cap is reached. The state is mutated so the same
+ * function is the only counter/decision point used by the generator.
+ *
+ * Vedi `MAX_FREE_MT_LLM_FALLBACKS_PER_LOCALE`: il `locale` non e' opzionale
+ * nella sostanza — senza, tutti i claim finirebbero nello stesso secchio e la
+ * quota tornerebbe un budget globale. Un chiamante che non lo passa ricade su
+ * `?`, che ha la sua quota e quindi non puo' comunque svuotare il budget dei
+ * locali veri.
+ */
+export function claimFreeMtLlmFallback(report, locale) {
+  if (!report || typeof report !== 'object') return false;
+  if (!report.llmFallbacksByLocale || typeof report.llmFallbacksByLocale !== 'object') {
+    report.llmFallbacksByLocale = {};
+  }
+  const key = locale || '?';
+  const usedHere = report.llmFallbacksByLocale[key] || 0;
+  if (usedHere >= MAX_FREE_MT_LLM_FALLBACKS_PER_LOCALE
+    || (report.llmFallbacks || 0) >= MAX_FREE_MT_LLM_FALLBACKS_PER_RUN) {
     report.llmFallbackCapped = true;
     return false;
   }
   report.llmFallbacks = (report.llmFallbacks || 0) + 1;
+  report.llmFallbacksByLocale[key] = usedHere + 1;
   return true;
 }

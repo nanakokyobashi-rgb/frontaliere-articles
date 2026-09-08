@@ -18199,6 +18199,24 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'volkswagen-tagli-amag-rassicura',
+    category: 'novita',
+    date: '2026-09-08T09:12:19.209Z',
+    image: '/images/blog/volkswagen-tagli-amag-rassicura.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
+   {
+    id: 'tariffe-elettricita-2027-calo',
+    category: 'novita',
+    date: '2026-09-08T09:46:42.290Z',
+    image: '/images/blog/tariffe-elettricita-2027-calo.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

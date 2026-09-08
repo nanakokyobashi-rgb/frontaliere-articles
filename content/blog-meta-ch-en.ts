@@ -6067,6 +6067,12 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.carenza-benzina-gasolio-scorte.title': 'Petrol and diesel shortage: compulsory stocks taken',
     'blog.article.carenza-benzina-gasolio-scorte.excerpt': 'Cressier refinery stopped due to failure, limited Rhine transport. Authorized withdrawals of 30,000 m³ of gasoline and diesel between 8-20 September from mandatory stocks.',
     'blog.article.carenza-benzina-gasolio-scorte.imageAlt': 'Fuel storage facility in Switzerland with tanks and petroleum infrastructure',
+    'blog.article.volkswagen-tagli-amag-rassicura.title': 'Volkswagen cuts 50,000, AMAG reassures customers',
+    'blog.article.volkswagen-tagli-amag-rassicura.excerpt': 'Volkswagen cuts 50,000 seats. Amag reassures: no employment impact, stable prices and leadership in the electric car with Skoda.',
+    'blog.article.volkswagen-tagli-amag-rassicura.imageAlt': 'Volkswagen dealership in Switzerland with modern cars on display and professional sales environment.',
+    'blog.article.tariffe-elettricita-2027-calo.title': '2027 electricity bill drop: -4% in Switzerland',
+    'blog.article.tariffe-elettricita-2027-calo.excerpt': 'In 2027 electricity rates fall by 4% according to Elcom. A typical household saves CHF 53 per year, but regional variations remain significant.',
+    'blog.article.tariffe-elettricita-2027-calo.imageAlt': 'Swiss residential electricity meter on apartment building facade with 2027 tariff reduction',
 };
 
 export default blogMetaChEn;
