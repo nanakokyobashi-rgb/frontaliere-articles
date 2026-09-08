@@ -97,7 +97,7 @@ test('non congela un duplicato del feed copiato in tutti i locali', async () => 
   assert.match(out[0].titleByLocale.fr, /^traduzione-fr-/);
 });
 
-test('un duplicato successivo preserva il feed invece di clobberarlo con MT stantia', async () => {
+test('un duplicato successivo non clobbera il feed con MT stantia se il retry fallisce', async () => {
   const cache = {};
   const first = await enrichEventsWithLocaleFallbackTranslations(
     [event('guidle:stable')],
@@ -109,16 +109,21 @@ test('un duplicato successivo preserva il feed invece di clobberarlo con MT stan
   );
 
   assert.equal(first[0].titleByLocale.en, 'traduzione-en');
+  let secondCalls = 0;
   const second = await enrichEventsWithLocaleFallbackTranslations(
     [{ id: 'guidle:stable', titleByLocale: { it: SAME_TITLE, en: SAME_TITLE } }],
     cache,
     {
       delayMs: 0,
-      translateFn: async () => { throw new Error('la traduzione esistente va riusata'); },
+      translateFn: async () => {
+        secondCalls += 1;
+        return { text: '', passthrough: false };
+      },
     },
   );
 
   assert.equal(second[0].titleByLocale.en, SAME_TITLE);
+  assert.equal(secondCalls, 1, 'il duplicato presente nel feed resta sul percorso normale');
   assert.equal(Object.values(cache)[0].en, 'traduzione-en');
 });
 
