@@ -905,9 +905,10 @@
       "mode": "adapted",
       "reason": "Tre adattamenti sostanziali: FOLLOWUP_ELIGIBLE_AUTHORS con gli autori di QUESTO repo (senza, il filtro resta quello del sito e il batch sarebbe SEMPRE vuoto — il workflow girerebbe ogni tre ore senza trovare nulla e senza un errore); il gate autore dentro il prompt allineato; QUOTA_BEACON_PEER_REPO per cedere al sito; cron 40 */3 sfasato.",
       "baseline": {
-        "site": "5e8e926af147845d",
-        "corpus": "cdb587f35f2f3209",
-        "alignedAt": "2026-09-03"
+        "site": "14b9c786b8a75bb6",
+        "corpus": "928a75b0ea91a76d",
+        "alignedAt": "2026-09-08",
+        "forcedAt": "2026-09-08T11:46:19.769Z"
       }
     },
     {
@@ -971,9 +972,10 @@
       "mode": "adapted",
       "reason": "Stessa struttura del contratto del sito (gate anti-nipote, parse rules, i quattro hard-exclude) con il filtro di scopo di questo repo, e il formato del corpo della issue aggregata che la chiusura (`reconcile-followups.mjs`, `identical`) deve poter parsare.",
       "baseline": {
-        "site": "ba86d79cae8e91ab",
-        "corpus": "22688b9eada13b5c",
-        "alignedAt": "2026-08-07"
+        "site": "91ae62a48f39bfc9",
+        "corpus": "3230170145f9a190",
+        "alignedAt": "2026-09-08",
+        "forcedAt": "2026-09-08T11:46:26.079Z"
       }
     },
     {
