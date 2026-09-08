@@ -3503,7 +3503,7 @@
       "reason": "Contatori e cap della recovery LLM dopo un output free-MT non utilizzabile (#831 item 2). Il generatore del corpus e' l'unico produttore dopo il cutover; il sito non ha un gemello del modulo e non deve ricevere questa dipendenza.",
       "baseline": {
         "site": null,
-        "corpus": "17e9f097cb179683",
+        "corpus": "4f7af11d4b0f8552",
         "alignedAt": "2026-09-08"
       }
     }

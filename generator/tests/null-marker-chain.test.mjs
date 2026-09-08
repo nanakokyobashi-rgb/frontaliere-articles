@@ -146,9 +146,11 @@ describe('free-MT recovery — il degrado e’ misurato e limitato per run', () 
     assert.equal(report.llmFallbacks, MAX_FREE_MT_LLM_FALLBACKS_PER_RUN);
     assert.equal(report.llmFallbackCapped, true);
 
-    recordFreeMtUnusableOutput(report, { reason: 'non-string' });
+    recordFreeMtUnusableOutput(report, { targetLang: 'de', fieldName: 'title', reason: 'non-string' });
     assert.equal(report.unusableOutputs, 1);
     assert.equal(report.nonStringOutputs, 1);
+    assert.deepEqual(report.unusableByLocale, { de: 1 });
+    assert.deepEqual(report.unusableFields, { 'de:title': 1 });
   });
 });
 

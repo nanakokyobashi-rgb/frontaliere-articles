@@ -13,14 +13,24 @@ export function createFreeMtRecoveryReport() {
   return {
     unusableOutputs: 0,
     nonStringOutputs: 0,
+    unusableByLocale: {},
+    unusableFields: {},
     llmFallbacks: 0,
     llmFallbackCapped: false,
   };
 }
 
-export function recordFreeMtUnusableOutput(report, { reason } = {}) {
+export function recordFreeMtUnusableOutput(report, { targetLang, fieldName, reason } = {}) {
   if (!report || typeof report !== 'object') return;
   report.unusableOutputs = (report.unusableOutputs || 0) + 1;
+  const locale = String(targetLang || 'unknown');
+  report.unusableByLocale = report.unusableByLocale || {};
+  report.unusableByLocale[locale] = (report.unusableByLocale[locale] || 0) + 1;
+  if (fieldName) {
+    report.unusableFields = report.unusableFields || {};
+    const key = `${locale}:${fieldName}`;
+    report.unusableFields[key] = (report.unusableFields[key] || 0) + 1;
+  }
   if (reason === 'non-string') {
     report.nonStringOutputs = (report.nonStringOutputs || 0) + 1;
   }
