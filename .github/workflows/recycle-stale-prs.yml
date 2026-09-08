@@ -434,10 +434,22 @@ jobs:
               echo "Nessuna issue aperta con il titolo di dedup: niente da chiudere."
               exit 0
             fi
+            # E la chiusura si VERIFICA, invece di fidarsi del suo exit code
+            # (issue #1005). `set -e` non e' attivo e l'`exit 0` qui sotto era
+            # incondizionato: un `gh issue close` respinto — permessi,
+            # rate-limit, 5xx — lasciava la run VERDE con una riga su stderr,
+            # senza ritentativo, e il digest aperto con un elenco ormai falso
+            # fino a un prossimo run che ritrovi liste vuote, che puo' non
+            # arrivare presto. E' la classe «non si rompe, non fa», la stessa
+            # che i due guard qui sopra hanno gia' chiuso sul lato delle query.
+            # Il wrapper chiude, RILEGGE lo stato per numero, ritenta una volta
+            # e poi annota + esce non-zero: lo step diventa rosso e visibile,
+            # mentre `continue-on-error: true` tiene il JOB verde come oggi.
             echo "Chiudo l'issue dedup #$DEDUP_NUMBER."
-            gh issue close "$DEDUP_NUMBER" \
+            node scripts/ci/resolve-issue-verified.mjs \
+              --number "$DEDUP_NUMBER" \
               --comment "Chiusa da \`Recycle stale PRs\`: nessun oggetto \`needs-human\` aperto (ne PR ne issue), la condizione di chiusura scritta nel corpo e soddisfatta. Il prossimo residuo riapre un'issue nuova con lo stesso titolo."
-            exit 0
+            exit $?
           fi
           PR_COUNT=0; [ -n "$PRS" ] && PR_COUNT=$(printf '%s\n' "$PRS" | wc -l | tr -d ' ')
           ISSUE_COUNT=0; [ -n "$ISSUES" ] && ISSUE_COUNT=$(printf '%s\n' "$ISSUES" | wc -l | tr -d ' ')

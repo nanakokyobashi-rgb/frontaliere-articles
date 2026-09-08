@@ -127,16 +127,26 @@ jobs:
       # `resolveGithubIssue` (già usata da `--resolve` altrove nel creator, mai
       # cablata qui) è il no-op sicuro quando non c'è niente da chiudere.
       - name: Close ghost-articles issue (coda drenata)
+        continue-on-error: true
         if: steps.detect.outcome == 'success' && steps.detect.outputs.missing == '0'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
         run: |
-          node scripts/lib/github-issue-creator.mjs \
+          # Via il wrapper e non `--resolve` diretto (issue #1005): il ramo
+          # CLI `--resolve` fa `process.exit(0)` SEMPRE e `resolveGithubIssue`
+          # chiude con `allowFailure: true`, quindi un close respinto — token,
+          # rate-limit, 5xx — lasciava questo step verde e l'issue aperta
+          # mentre la coda e' drenata, senza ritentativo. Il wrapper verifica
+          # la POST-CONDIZIONE (nessuna issue aperta con quel titolo), ritenta
+          # una volta e poi annota + esce non-zero. `continue-on-error: true`
+          # sullo step tiene l'esito del JOB identico a oggi — prima non poteva
+          # fallire in nessun caso, e renderlo fallibile fabbricherebbe una
+          # Workflow Failure per un no-op di pulizia.
+          node scripts/ci/resolve-issue-verified.mjs \
             --title "Articoli fantasma: annunciati senza pagina sugli shard" \
             --workflow "reconcile-article-shards" \
-            --run-url "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" \
-            --resolve
+            --run-url "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
 
       # Il dispatch è consentito solo quando l'innesco non era a sua volta un
       # dispatch (anti-catena, vedi intestazione) e il run non è un dry run

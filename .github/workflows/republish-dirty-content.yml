@@ -126,16 +126,26 @@ jobs:
       # sporchi. `resolveGithubIssue` e' il no-op sicuro quando non c'e' niente
       # da chiudere.
       - name: Close dirty-content issue (coda drenata)
+        continue-on-error: true
         if: steps.detect.outcome == 'success' && steps.detect.outputs.distinct == '0'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
         run: |
-          node scripts/lib/github-issue-creator.mjs \
+          # Via il wrapper e non `--resolve` diretto (issue #1005): il ramo
+          # CLI `--resolve` fa `process.exit(0)` SEMPRE e `resolveGithubIssue`
+          # chiude con `allowFailure: true`, quindi un close respinto — token,
+          # rate-limit, 5xx — lasciava questo step verde e l'issue aperta
+          # mentre la coda e' drenata, senza ritentativo. Il wrapper verifica
+          # la POST-CONDIZIONE (nessuna issue aperta con quel titolo), ritenta
+          # una volta e poi annota + esce non-zero. `continue-on-error: true`
+          # sullo step tiene l'esito del JOB identico a oggi — prima non poteva
+          # fallire in nessun caso, e renderlo fallibile fabbricherebbe una
+          # Workflow Failure per un no-op di pulizia.
+          node scripts/ci/resolve-issue-verified.mjs \
             --title "Articoli con control character C0: ripubblicazione incompleta" \
             --workflow "republish-dirty-content" \
-            --run-url "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" \
-            --resolve
+            --run-url "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
 
       - name: Resolve backfill mode
         id: mode
