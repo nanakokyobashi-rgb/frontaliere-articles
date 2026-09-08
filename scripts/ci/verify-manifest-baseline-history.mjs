@@ -61,6 +61,7 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..')
 const MANIFEST_REL = 'scripts/ci/loop-sync-manifest.json';
 const JSON_OUT = process.argv.includes('--json');
 export const CANONICAL_HISTORY_REF = 'origin/main';
+export const CURRENT_HISTORY_REF = 'HEAD';
 
 /**
  * Il verdetto, PURO: niente disco, niente git, niente rete — e' questo a
@@ -127,9 +128,13 @@ export function parseFollowHistory(output) {
     }
     if (!sha) continue;
     entries.push({ sha, path: line });
-    sha = null;
   }
   return entries;
+}
+
+/** true solo per un path che non esisteva ancora in quel commit storico. */
+export function isExpectedMissingHistoricalPath(stderr) {
+  return /path '.+' does not exist in '.+'/.test(String(stderr));
 }
 
 /**
@@ -192,7 +197,7 @@ export function parseCatFileBatchOutput(buf, oidToPaths) {
 function blobsByPathFromHistory(paths) {
   if (paths.length === 0) return new Map();
   const want = new Set(paths);
-  const listing = git(['rev-list', '--full-history', CANONICAL_HISTORY_REF, '--objects', '--', ...paths]);
+  const listing = git(['rev-list', '--full-history', CURRENT_HISTORY_REF, CANONICAL_HISTORY_REF, '--objects', '--', ...paths]);
   const oidToPaths = new Map();
   for (const line of listing.split('\n')) {
     const sp = line.indexOf(' ');
@@ -225,13 +230,16 @@ function blobsFollowingRenames(rel) {
   const hashes = new Set();
   let commits;
   try {
-    commits = parseFollowHistory(git(['log', '--follow', '--format=%H', '--name-only', CANONICAL_HISTORY_REF, '--', rel]));
+    commits = parseFollowHistory(git(['log', '--follow', '--format=%H', '--name-only', CURRENT_HISTORY_REF, '--', rel]));
   } catch {
     return hashes;
   }
   for (const { sha, path: historicalPath } of commits) {
     const r = spawnSync('git', ['cat-file', 'blob', `${sha}:${historicalPath}`], { cwd: ROOT, maxBuffer: 1 << 28 });
     if (r.status === 0) hashes.add(sha256(r.stdout));
+    else if (!isExpectedMissingHistoricalPath(r.stderr)) {
+      throw new Error(`git cat-file blob ${sha}:${historicalPath}: ${r.stderr?.toString() || r.status}`);
+    }
   }
   return hashes;
 }

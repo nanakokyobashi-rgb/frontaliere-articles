@@ -88,17 +88,20 @@ test('loop-drift-check: il report accetta anche `1` e `True` e il rosso gia\' ri
   }
   const report = stepBlock(WORKFLOW, REPORT);
   assert.match(report, /id: drift_report/);
+  assert.doesNotMatch(report, /^\s*continue-on-error:/m);
   assert.match(
     report,
-    /continue-on-error: \$\{\{ github\.event_name == 'schedule' \|\| github\.event\.inputs\.report_issue == 'true' \|\| github\.event\.inputs\.report_issue == '1' \|\| github\.event\.inputs\.report_issue == 'True' \}\}/,
+    /GITHUB_OUTPUT/,
   );
+  assert.match(report, /issue_reported=/);
+  assert.match(report, /node scripts\/ci\/loop-drift-check\.mjs \$ARGS >"\$REPORT_LOG" 2>&1/);
   assert.match(report, /ARGS="--issue --strict"/);
 
   const provenance = stepBlock(WORKFLOW, PROVENANCE);
   assert.match(provenance, /id: provenance_report/);
   assert.match(
     provenance,
-    /continue-on-error: \$\{\{ steps\.drift_report\.outcome == 'failure' \}\}/,
+    /continue-on-error: \$\{\{ steps\.drift_report\.outputs\.issue_reported == 'true' \}\}/,
   );
 });
 
@@ -156,5 +159,5 @@ test('loop-drift-check: il checkout conserva tutta la storia ma scarica i blob o
   const checkout = stepBlock(WORKFLOW, 'Checkout');
   assert.ok(checkout, 'step `Checkout` non trovato');
   assert.match(checkout, /fetch-depth: 0/);
-  assert.match(checkout, /filter: blob:none/);
+  assert.match(checkout, /filter: blob:limit=1m/);
 });
