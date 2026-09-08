@@ -89,6 +89,92 @@ test('tests: il trigger `push` e\' scopato a `main`, altrimenti ogni commit paga
   );
 });
 
+// ── Il gate del generatore non deve duplicarsi sui branch delle PR ───────────
+//
+// Un `pull_request` porta già il gate sulla head reale della PR. Un `push` senza
+// allowlist, o con `branches-ignore`, aggiunge una seconda run sulla stessa head
+// e può consumare una seconda coda/review. Un `push` con `branches:` esplicita è
+// invece verificabile: può restare per i branch che non aprono una PR.
+function workflowOnBlock(src) {
+  const lines = active(src).split('\n');
+  const start = lines.findIndex((line) => /^on:\s*$/.test(line));
+  if (start === -1) return '';
+  const rest = lines.slice(start + 1);
+  const end = rest.findIndex((line) => /^\S/.test(line));
+  return lines.slice(start, end === -1 ? lines.length : start + 1 + end).join('\n');
+}
+
+function triggerBlock(onBlock, name) {
+  const lines = onBlock.split('\n');
+  const start = lines.findIndex((line) => new RegExp(`^  ${name}:\\s*$`).test(line));
+  if (start === -1) return null;
+  const rest = lines.slice(start + 1);
+  const end = rest.findIndex((line) => /^  [a-z][\w-]*:\s*$/.test(line));
+  return rest.slice(0, end === -1 ? rest.length : end).join('\n');
+}
+
+test('workflow: nessun `pull_request` convive con un `push` capace sui branch di PR', () => {
+  const workflows = fs
+    .readdirSync(path.join(ROOT, '.github/workflows'))
+    .filter((name) => /\.ya?ml$/.test(name));
+  const offenders = [];
+
+  for (const name of workflows) {
+    const onBlock = workflowOnBlock(read(`.github/workflows/${name}`));
+    const push = triggerBlock(onBlock, 'push');
+    if (!push || !triggerBlock(onBlock, 'pull_request')) continue;
+
+    const hasBranchesAllowlist = /^\s{4}branches:\s*$/m.test(push) || /^\s{4}branches:\s*\[/m.test(push);
+    const hasBranchesIgnore = /^\s{4}branches-ignore:\s*/m.test(push);
+    if (!hasBranchesAllowlist || hasBranchesIgnore) offenders.push(name);
+  }
+
+  assert.deepEqual(
+    offenders,
+    [],
+    'Un workflow con `pull_request` ha anche un `push` capace di colpire i branch di PR: ' +
+      offenders.join(', ') + '. Scopa il `push` a una allowlist esplicita.',
+  );
+});
+
+test('generator-ci: la allowlist `push` conserva il gate di engine-lockstep-auto', () => {
+  const onBlock = workflowOnBlock(read('.github/workflows/generator-ci.yml'));
+  const push = triggerBlock(onBlock, 'push');
+  assert.ok(push, 'blocco `push:` non trovato in generator-ci.yml');
+  assert.match(
+    push,
+    /^\s{4}branches:\s*\[\s*engine-lockstep-auto\s*\]/m,
+    'La allowlist di generator-ci deve contenere `engine-lockstep-auto`: il mirror viene pushato senza PR e altrimenti perde il gate.',
+  );
+});
+
+// ── Lo sweep di pr-autorebase non va scopato alla PR dell'evento ────────────
+//
+// Il job non lavora sulla PR che ha emesso l'evento: `pr-autorebase.mjs` fa uno
+// sweep di TUTTE le PR aperte e serve quattro classi near-merge — `## LGTM`,
+// `collision-risk`, `stale-review` e lo stuck-red. Tre di quelle quattro NON
+// hanno un `## LGTM` e non possono averlo. Un filtro sul body della review nel
+// guard del job le lascerebbe al solo `pull_request: closed(merged)` e al cron,
+// che il workflow stesso dichiara insufficiente: la regressione è un'ASSENZA
+// (la PR che nessuno sblocca), esattamente la classe che questo file copre.
+test('pr-autorebase: il guard del job non filtra `pull_request_review` sul body', () => {
+  const src = active(read('.github/workflows/pr-autorebase.yml'));
+  const job = jobBlock(src, 'rebase');
+  assert.ok(job, 'job `rebase` non trovato in pr-autorebase.yml');
+  const cond = job.slice(job.indexOf('if:'), job.indexOf('runs-on:'));
+  assert.ok(
+    !/pull_request_review/.test(cond),
+    'Il guard del job discrimina `pull_request_review`. Lo sweep serve quattro classi near-merge e\n' +
+      'tre di esse (collision-risk, stale-review, stuck-red) non hanno un `## LGTM` per costruzione:\n' +
+      `restringere l'evento le lascia al cron, che GitHub throttla. if: ${cond.trim()}`,
+  );
+  assert.ok(
+    !/github\.event\.review\./.test(cond),
+    `Il guard legge un attributo della review dell'evento, ma il job non lavora su quella PR: ` +
+      `fa uno sweep di tutte le PR aperte. if: ${cond.trim()}`,
+  );
+});
+
 // ── #201, nella sua forma nuova ─────────────────────────────────────────────
 //
 // La #201 nasceva dal trigger `workflow_run`: un `gh run rerun` di `tests` non
