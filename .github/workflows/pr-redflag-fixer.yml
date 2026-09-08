@@ -47,6 +47,12 @@ jobs:
     # nega) lo fa il preflight sotto, con una regex tollerante al bold/spaziatura MA
     # che richiede un delimitatore dopo "Important" — impossibile in un'espressione
     # `if:` YAML.
+    # NB: lo scope-check "PR autonoma" (autore Bot o head `fix/*`) NON vive più
+    # in questo `if:` — vedi lo step sotto. Un `if:` di job che fallisce lascia il
+    # job intero SKIPPED senza eseguire una riga di script: per una PR umana con
+    # un vero 🔴 Important quel salto era invisibile ovunque (issue #5534, PR
+    # #5515 — check-run "skipped", zero commenti, zero label). Qui restano solo i
+    # pre-filtri economici che non richiedono distinguere lo scope.
     # Reviewer set = `claude*` + `frontaliere-automation*` (prefisso: la
     # stessa App si presenta senza il suffisso `[bot]` in GraphQL). A job-level
     # `startsWith(..., 'claude')` alone skipped App-bot 🔴 on the site
@@ -61,9 +67,7 @@ jobs:
       (startsWith(github.event.review.user.login, 'claude') ||
        startsWith(github.event.review.user.login, 'frontaliere-automation')) &&
       contains(github.event.review.body, '🔴') &&
-      github.event.pull_request.draft == false &&
-      (github.event.pull_request.user.type == 'Bot' ||
-       startsWith(github.event.pull_request.head.ref, 'fix/'))
+      github.event.pull_request.draft == false
     runs-on: ubuntu-latest
     timeout-minutes: 3
     outputs:
@@ -77,6 +81,7 @@ jobs:
           PR_NUMBER: ${{ github.event.pull_request.number }}
           HEAD_REF: ${{ github.event.pull_request.head.ref }}
           REVIEW_BODY: ${{ github.event.review.body }}
+          PR_AUTHOR_TYPE: ${{ github.event.pull_request.user.type }}
         run: |
           set -uo pipefail
           # Marker 🔴-Important tollerante al markdown: il reviewer a volte bolda
@@ -100,6 +105,20 @@ jobs:
           # shellcheck disable=SC2016 # the single-quoted PCRE is intentional
           if ! printf '%s' "$REVIEW_BODY" | grep -qP '^(?:[^🟡🟢❓]*|(?:[^`«]|`[^`]*`|«[^»]*»|`(?![^`]*`))*[🟡🟢❓](?:[^`«]|`[^`]*`|«[^»]*»|`(?![^`]*`))*)(?<!\s`)(?<!^`)🔴\s*\*{0,2}\s*Important\s*\*{0,2}\s*[:—-]'; then
             echo "Review contiene 🔴 ma nessun finding '🔴 Important' (decorativo) → skip 🔴-fix (no-op)."
+            echo "actionable=false" >> "$GITHUB_OUTPUT"; exit 0
+          fi
+          # Scope: il 🔴-fixer agisce SOLO su PR autonome (per design, header del
+          # file). Una PR umana con un Important reale è fuori scope allo stesso
+          # modo di prima — ma ora lo dichiara con un commento idempotente invece
+          # di sparire in uno SKIPPED silenzioso (issue #5534).
+          if [ "$PR_AUTHOR_TYPE" != "Bot" ] && ! printf '%s' "$HEAD_REF" | grep -q '^fix/'; then
+            echo "PR autore umano, branch non 'fix/*' → fuori scope autonomo (per design) → skip 🔴-fix."
+            already=$(gh api "repos/$REPO/issues/$PR_NUMBER/comments" --paginate \
+              --jq '[.[] | select(.body | contains("REDFLAG_OUT_OF_SCOPE"))] | length' 2>/dev/null || echo 0)
+            if [ "${already:-0}" = "0" ]; then
+              gh pr comment "$PR_NUMBER" --repo "$REPO" --body "$(printf '<!-- REDFLAG_OUT_OF_SCOPE -->\nℹ️ 🔴-fixer: la review più recente contiene un finding \x60🔴 Important\x60, ma questa PR è fuori dallo scope autonomo (autore umano, branch non \x60fix/*\x60) — nessun fix automatico verrà tentato (per design). Se il finding resta aperto senza un commit nuovo, serve intervento manuale.')" \
+                2>/dev/null || true
+            fi
             echo "actionable=false" >> "$GITHUB_OUTPUT"; exit 0
           fi
           state=$(gh pr view "$PR_NUMBER" --repo "$REPO" --json state --jq '.state' 2>/dev/null || echo UNKNOWN)
