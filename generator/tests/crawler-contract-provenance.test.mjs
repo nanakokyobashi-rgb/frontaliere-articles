@@ -241,7 +241,10 @@ test('il `sourceSha256` usa solo la directory osservata', () => {
 });
 
 test('un source logic richiede il marker generato del proprio file', () => {
-  const valid = Buffer.from('# Crawler Group 01 logic — reusable workflow (on: workflow_call).\n');
+  const valid = Buffer.from(
+    '# Crawler Group 01 logic — reusable workflow (on: workflow_call).\n' +
+    'on:\n  workflow_call:\n',
+  );
   const residual = Buffer.from('# Crawler Group 01 logic — artifact residuale.\n');
   assert.equal(isLogicSource(valid, 'crawler-group-01-logic.yml'), true);
   assert.equal(isLogicSource(residual, 'crawler-group-01-logic.yml'), false);
@@ -257,9 +260,13 @@ test('un residuo omonimo non diventa `drifted`', async () => {
     'crawler-group-01-logic.yml',
   );
   assert.equal(resolved.sha256, null);
+  assert.equal(resolved.invalidSource, true);
   assert.deepEqual(resolved.triedPaths, ['.github/corpus-workflows/crawler-group-01-logic.yml']);
 
-  const valid = Buffer.from('# Crawler Group 01 logic — reusable workflow (on: workflow_call).\n');
+  const valid = Buffer.from(
+    '# Crawler Group 01 logic — reusable workflow (on: workflow_call).\n' +
+    'on:\n  workflow_call:\n',
+  );
   const alternateHit = await resolveSiteCandidate(
     ['.github/workflows/crawler-group-01-logic.yml', '.github/corpus-workflows/crawler-group-01-logic.yml'],
     async (rel) => rel.startsWith('.github/workflows')
@@ -269,6 +276,24 @@ test('un residuo omonimo non diventa `drifted`', async () => {
   );
   assert.equal(alternateHit.sha256, HASH);
   assert.equal(alternateHit.sitePath, '.github/corpus-workflows/crawler-group-01-logic.yml');
+});
+
+test('un marker invalido resta visibile nel verdetto, senza accusare gli artifact', () => {
+  const checks = planProvenanceChecks(CONTRACT, MANIFEST);
+  const observed = new Map(checks.map((c) => [c.field, { sha256: c.expected }]));
+  const victim = checks.find((c) => c.field.endsWith('#sourceSha256'));
+  observed.set(victim.field, {
+    sha256: null,
+    invalidSource: true,
+    triedPaths: victim.sitePathCandidates,
+  });
+  const verdict = evaluateProvenance(checks, observed);
+  const source = verdict.results.find((r) => r.field === victim.field);
+  assert.equal(source.state, 'absent');
+  assert.equal(source.invalidSource, true);
+  assert.match(source.detail, /marker della sorgente/);
+  assert.match(verdict.reason, /SITE_LOGIC_DIR/);
+  assert.doesNotMatch(verdict.reason, /artifact qui sono stantii/);
 });
 
 test('un 404 definitivo più un errore di rete diventano `absent`', async () => {
@@ -297,7 +322,7 @@ test('tutte le candidate in errore di trasporto restano `unobserved`', async () 
   assert.equal(resolved.triedPaths.length, 2);
 });
 
-test('la logica trovata in una directory diversa è `verified`, e il report nomina il path letto', () => {
+test('evaluateProvenance nomina il path osservato nel report', () => {
   const checks = planProvenanceChecks(fixtureContract, fixtureManifest);
   const elsewhere = '.github/corpus-workflows/crawler-group-01-logic.yml';
   const verdict = evaluateProvenance(checks, new Map([

@@ -118,9 +118,9 @@ const sha256 = (buf) => crypto.createHash('sha256').update(buf).digest('hex');
 
 /**
  * True when bytes are a generated logic source, rather than an artifact or a
- * same-named residual file. The first line is the stable marker emitted by
- * the site's current generator; the basename check prevents one group's
- * source from satisfying another group's coordinate.
+ * same-named residual file. The first line identifies the generated file and
+ * the YAML shape proves it is a reusable workflow; the basename check prevents
+ * one group's source from satisfying another group's coordinate.
  */
 export function isLogicSource(bytes, sourceLogic) {
   if (!bytes || !sourceLogic) return false;
@@ -132,7 +132,7 @@ export function isLogicSource(bytes, sourceLogic) {
     .join(' ');
   return firstLine.startsWith(`# ${label}`)
     && firstLine.includes('reusable workflow')
-    && firstLine.includes('workflow_call');
+    && /^on:[ \t]*\r?\n[ \t]+workflow_call:[ \t]*$/mu.test(Buffer.from(bytes).toString('utf8'));
 }
 
 /**
@@ -152,6 +152,7 @@ export async function resolveSiteCandidate(candidates, observe, sourceLogic = nu
   const triedPaths = [];
   let fallback = null;
   let observedResponse = false;
+  let invalidSource = false;
 
   for (const rel of candidates) {
     triedPaths.push(rel);
@@ -167,6 +168,7 @@ export async function resolveSiteCandidate(candidates, observe, sourceLogic = nu
     }
     if (sourceLogic && !isLogicSource(seen.bytes, sourceLogic)) {
       observedResponse = true;
+      invalidSource = true;
       fallback = { ...seen, sha256: null, sitePath: rel, invalidSource: true };
       continue;
     }
@@ -178,6 +180,7 @@ export async function resolveSiteCandidate(candidates, observe, sourceLogic = nu
       sha256: null,
       sitePath: fallback?.sitePath || candidates[candidates.length - 1],
       triedPaths,
+      ...(invalidSource ? { invalidSource: true } : {}),
     };
   }
   return {
@@ -279,15 +282,16 @@ export function evaluateProvenance(checks, observed) {
     } else if (seen.sha256 === null) {
       state = 'absent';
       const tried = seen.triedPaths?.length ? seen.triedPaths : [sitePath];
-      detail =
-        `${tried.join(', ')} non esiste${tried.length > 1 ? 'ono' : ''} su ${SITE_REPO}@${SITE_REF}`;
+      detail = seen.invalidSource
+        ? `${tried.join(', ')} risponde ma non contiene il marker della sorgente logic su ${SITE_REPO}@${SITE_REF}`
+        : `${tried.join(', ')} non esiste${tried.length > 1 ? 'ono' : ''} su ${SITE_REPO}@${SITE_REF}`;
     } else if (seen.sha256 === check.expected) {
       state = 'verified';
     } else {
       state = 'drifted';
       detail = `dichiarato ${check.expected.slice(0, 16)}, il sito serve ${seen.sha256.slice(0, 16)}`;
     }
-    results.push({ ...check, sitePath, state, detail });
+    results.push({ ...check, sitePath, state, detail, invalidSource: Boolean(seen?.invalidSource) });
   }
 
   const counts = {};
@@ -300,6 +304,7 @@ export function evaluateProvenance(checks, observed) {
   // che questo lato inventa. Dirlo nel verdetto manda il fixer su
   // `SITE_LOGIC_DIR` invece che a rigenerare artifact sani (issue #982).
   const sources = results.filter((r) => r.field.endsWith('#sourceSha256'));
+  const invalidSources = sources.filter((r) => r.invalidSource);
   const movedLogicDir = sources.length > 1 && sources.every((r) => r.state === 'absent');
 
   let red = false;
@@ -314,10 +319,23 @@ export function evaluateProvenance(checks, observed) {
       )];
       const others = broken.length - sources.length;
       reason =
-        `nessuno dei ${sources.length} \`*-logic.yml\` esiste su ${SITE_REPO}@${SITE_REF} sotto ` +
+        (invalidSources.length === sources.length
+          ? `nessuno dei ${sources.length} \`*-logic.yml\` sotto `
+          : `nessuno dei ${sources.length} \`*-logic.yml\` esiste su `) +
+        (invalidSources.length === sources.length ? '' : `${SITE_REPO}@${SITE_REF} sotto `) +
         `${tried.join(' o ')}: il sito li ha spostati e la coordinata di questo lato ` +
-        '(`SITE_LOGIC_DIR`) va aggiornata — gli artifact non c\'entrano.' +
+        (invalidSources.length === sources.length
+          ? '(`SITE_LOGIC_DIR`) va aggiornata: le risposte non portano il marker della sorgente — gli artifact non c\'entrano.'
+          : '(`SITE_LOGIC_DIR`) va aggiornata — gli artifact non c\'entrano.') +
         (others > 0 ? ` A parte: altri ${others} digest non corrispondono.` : '');
+    } else if (invalidSources.length) {
+      reason =
+        `${invalidSources.length}/${sources.length} sorgenti \`*-logic.yml\` rispondono senza il marker ` +
+        `della sorgente su ${SITE_REPO}@${SITE_REF}: verificare la coordinata ` +
+        '`SITE_LOGIC_DIR` o la generazione del sito.' +
+        (broken.length > invalidSources.length
+          ? ` A parte: altri ${broken.length - invalidSources.length} digest non corrispondono.`
+          : '');
     } else {
       reason =
         `${broken.length}/${results.length} digest del contratto non corrispondono ai byte del sito: ` +

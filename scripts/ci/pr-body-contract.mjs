@@ -10,8 +10,8 @@
  *      condiviso col sito): GitHub chiude SOLO la prima issue dopo la keyword,
  *      quindi le altre restano aperte in silenzio.
  *   3. Ogni voce di `## Non implementato (ancora)` dichiara uno stato concreto;
- *      una scappatoia o una prosa senza stato fa fallire il gate
- *      (`pr-body-nextstep-check.mjs`).
+ *      una scappatoia o una prosa senza stato e senza neppure un riferimento
+ *      `#N` fa fallire il gate (`pr-body-nextstep-check.mjs`).
  *      E' il difetto dell'escalation #140: la sezione c'era, non era vuota, e
  *      il contratto restava disatteso lo stesso — perche' cio' che il gate
  *      misurava era la PRESENZA, e cio' che REVIEW.md §98 chiede e' un PIANO.
@@ -49,6 +49,7 @@ import { checkClosesLines } from '../lib/pr-body-closes-check.mjs';
 import {
   checkNextStepStates,
   blockingNextStepFindings,
+  isBlockingNextStepFinding,
   suggestedSection,
 } from '../lib/pr-body-nextstep-check.mjs';
 import { checkCitedFilePaths, extractCitedPaths } from '../lib/pr-body-filepath-check.mjs';
@@ -90,7 +91,7 @@ function main() {
   const closes = checkClosesLines(body);
   const nextStep = checkNextStepStates(body);
   const nextStepProblems = blockingNextStepFindings(nextStep);
-  const nextStepAdvisories = nextStep.advisories.filter((a) => a.type !== 'no-literal-state');
+  const nextStepAdvisories = nextStep.advisories.filter((a) => !isBlockingNextStepFinding(a));
 
   // I file toccati dalla PR contano come esistenti anche quando l'albero non li
   // ha. Il checkout di `pull_request` e' il MERGE REF, quindi cio' che la PR
@@ -125,9 +126,10 @@ function main() {
   ];
 
   // Le decisioni motivate restano avvisi perché la regex non può provarne la
-  // sostanza. `no-literal-state`, invece, è già stato promosso in
-  // `nextStepProblems`: la misura di #140 ha dimostrato che lasciarlo verde
-  // sposta il difetto al reviewer invece di impedirne la ricorrenza.
+  // sostanza. `no-literal-state` è promosso in `nextStepProblems` solo quando
+  // manca anche un riferimento `#N` nudo: la misura aggiornata di #140 ha
+  // dimostrato che questa soglia prende il caso non tracciato senza bloccare
+  // ogni prosa comprensibile.
   //
   // Stessa politica, stessa ragione, per i path citati (#140, secondo giro): il
   // modulo trova le citazioni che non risolvono qui, ma su 45 PR mergiate ZERO

@@ -223,6 +223,27 @@ test('il gate promuove il no-literal-state a problema, senza cambiare il classif
   assert.doesNotMatch(suggestedSection(body, { strict: true }), /opzionale/);
 });
 
+test('il gate non promuove un no-literal-state con riferimento nudo', () => {
+  const body = withSection([
+    '- La voce resta documentata nel contesto della #123 e non richiede un nuovo intervento.',
+  ]);
+  const res = checkNextStepStates(body);
+  assert.equal(res.advisories[0].type, 'no-literal-state');
+  assert.equal(blockingNextStepFindings(res).length, 0);
+  assert.match(suggestedSection(body, { strict: true }), /opzionale/);
+});
+
+test('una decisione motivata senza scappatoia viene esentata simmetricamente', () => {
+  const body = withSection([
+    '- L estensione API non serve per scelta: il comportamento corrente è intenzionale.',
+  ]);
+  const res = checkNextStepStates(body);
+  assert.equal(res.advisories.length, 1);
+  assert.equal(res.advisories[0].type, 'hatch-exempted-by-decision');
+  assert.equal(blockingNextStepFindings(res).length, 0);
+  assert.equal(suggestedSection(body, { strict: true }), null);
+});
+
 // ---------------------------------------------------------------------------
 // L'output ripara: la sezione riscritta
 // ---------------------------------------------------------------------------
