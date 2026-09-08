@@ -59,6 +59,22 @@ test('un marker nella vecchia cache non riunisce eventi omonimi durante la migra
   assert.equal(cache['title::it::locarno film festival'].en, 'traduzione-migrata-1');
 });
 
+test('memoizza un titolo già identico nel locale target senza chiamare la cascata', async () => {
+  const cache = {};
+  const out = await enrichEventsWithLocaleFallbackTranslations(
+    [{ id: 'guidle:identical', titleByLocale: { it: SAME_TITLE, en: SAME_TITLE } }],
+    cache,
+    {
+      locales: ['it', 'en'],
+      delayMs: 0,
+      translateFn: async () => { throw new Error('un’identità già presente non va ritradotta'); },
+    },
+  );
+
+  assert.equal(out[0].titleByLocale.en, SAME_TITLE);
+  assert.equal(Object.values(cache)[0].en, SAME_TITLE);
+});
+
 test('memoizza il passthrough legittimo del titolo e non ripaga la cascata al secondo giro', async () => {
   const cache = {};
   const first = await enrichEventsWithLocaleFallbackTranslations(

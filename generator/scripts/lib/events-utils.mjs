@@ -20,7 +20,7 @@ import path from 'node:path';
 import { truncateSlugAtWordBoundary } from './slug-truncate.mjs';
 import CANTON_URL_SLUGS from '../../data/canton-url-slugs.json' with { type: 'json' };
 import { MUNICIPALITIES } from '../../data/municipalities.ts';
-import { freeTranslateWithRetry, getCascadeStats, isSourcePassthrough } from './free-translate.mjs';
+import { freeTranslateWithRetry, isSourcePassthrough } from './free-translate.mjs';
 import { hasUsableContentText, hasUsableTranslatedText } from './body2-payload-verdict.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -1094,42 +1094,30 @@ function wordCount(text) {
   return String(text ?? '').trim() ? String(text).trim().split(/\s+/).length : 0;
 }
 
-function sumStatsBucket(bucket) {
-  return Object.values(bucket ?? {}).reduce((total, value) => total + (Number.isFinite(value) ? value : 0), 0);
-}
-
-function cascadeReasonSnapshot() {
-  const stats = getCascadeStats();
-  return {
-    passthroughs: sumStatsBucket(stats.tierPassthroughs),
-    errors: sumStatsBucket(stats.tierErrors),
-  };
-}
-
 function asTranslationResult(value, sourceText) {
+  const explicitStatus = value && typeof value === 'object' && Object.prototype.hasOwnProperty.call(value, 'passthrough');
   const text = typeof value === 'string'
     ? value
     : value && typeof value === 'object' && typeof value.text === 'string'
       ? value.text
       : '';
-  const passthrough = Boolean(value && typeof value === 'object' && value.passthrough === true)
-    || Boolean(text && isSourcePassthrough(sourceText, text));
+  // A bare string equal to the source has no per-call provenance: do not turn
+  // it into a permanent memo. Callers that know the result is a legitimate
+  // identity must return `{ text, passthrough: false }`; a provider echo must
+  // return `{ text: '', passthrough: true }`.
+  const sourceEcho = Boolean(text && isSourcePassthrough(sourceText, text));
+  const passthrough = explicitStatus
+    ? value.passthrough === true
+    : sourceEcho;
+  if (sourceEcho && explicitStatus && value.passthrough === false) {
+    return { text, passthrough: false };
+  }
   return passthrough ? { text: '', passthrough: true } : { text, passthrough: false };
 }
 
-async function translateEventLocale({ translateFn, text, sourceLang, targetLang, fieldType }) {
-  const before = translateFn === freeTranslateWithRetry ? cascadeReasonSnapshot() : null;
-  const raw = await translateFn({ text, sourceLang, targetLang, fieldType, maxRetries: 1 });
-  const result = asTranslationResult(raw, text);
-  if (result.text || result.passthrough || !before) return result;
-
-  const after = cascadeReasonSnapshot();
-  return {
-    text: '',
-    // A passthrough with a later provider error is not a stable negative memo:
-    // another run may get a real translation when that provider recovers.
-    passthrough: after.passthroughs > before.passthroughs && after.errors === before.errors,
-  };
+async function translateEventLocale({ translateFn, eventId, text, sourceLang, targetLang, fieldType }) {
+  const raw = await translateFn({ eventId, text, sourceLang, targetLang, fieldType, maxRetries: 1 });
+  return asTranslationResult(raw, text);
 }
 
 async function fillLocaleGaps(byLocale, cache, { eventId, fieldType, locales, delayMs, translateFn }) {
@@ -1149,6 +1137,15 @@ async function fillLocaleGaps(byLocale, cache, { eventId, fieldType, locales, de
     if (target === sourceLocale) continue;
     const cacheKey = eventTranslationCacheKey({ eventId, fieldType, sourceLocale, normalizedSource });
     const entry = cache[cacheKey] || {};
+    const existingIdenticalTarget = hasUsableContentText(clean?.[target])
+      && isSourcePassthrough(sourceText, clean[target]);
+    if (existingIdenticalTarget) {
+      // The organizer already supplied the same title/description in this
+      // target locale. It is a legitimate identity, not a provider echo, and
+      // is safe to memoize because the key includes this event's discriminator.
+      if (entry[target] !== sourceText) cache[cacheKey] = { ...entry, [target]: sourceText };
+      continue;
+    }
     const legacyCacheKey = legacyEventTranslationCacheKey({ fieldType, sourceLocale, normalizedSource });
     const legacyEntry = cache[legacyCacheKey];
     if (Object.prototype.hasOwnProperty.call(entry, target)) {
@@ -1162,6 +1159,7 @@ async function fillLocaleGaps(byLocale, cache, { eventId, fieldType, locales, de
 
     const { text: translated, passthrough } = await translateEventLocale({
       translateFn,
+      eventId,
       text: sourceText,
       sourceLang: sourceLocale,
       targetLang: target,
