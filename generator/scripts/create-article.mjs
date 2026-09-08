@@ -143,6 +143,7 @@ import {
   createFreeMtRecoveryReport,
   recordFreeMtUnusableOutput,
   claimFreeMtLlmFallback,
+  wasFreeMtUnusable,
   MAX_FREE_MT_LLM_FALLBACKS_PER_RUN,
 } from './lib/free-mt-recovery.mjs';
 import { isReservedPublishedSlug } from '../../scripts/lib/published-slug-guard.mjs';
@@ -9740,7 +9741,11 @@ const ARTICLE_TRANSLATE_FREE_MT = String(process.env.ARTICLE_TRANSLATE_FREE_MT ?
 // Thin in-script wrapper: bind the lib field-translator to the prod MT cascade,
 // markdown repair, and logger. Returns '' on any failure so the caller's
 // per-field recovery (LLM retry → IT fallback) takes over.
-function freeMtField(text, sourceLang, targetLang, fieldType) {
+// `field` e' il nome del campo di contenuto (`title`, `excerpt`, `body1`...),
+// distinto dal `fieldType` che il motore MT riceve (`title`/`description`): e'
+// la chiave con cui il loop missing-field piu' sotto chiede «questo campo l'ha
+// rifiutato il free-MT?» prima di addebitargli il cap.
+function freeMtField(text, sourceLang, targetLang, fieldType, field = fieldType) {
   return translateFieldFreeMt({
     text,
     sourceLang,
@@ -9749,7 +9754,7 @@ function freeMtField(text, sourceLang, targetLang, fieldType) {
     translate: freeTranslateWithRetry,
     balanceMarkdown: balanceMarkdownMarkers,
     onWarn: (msg) => console.error(`  ⚠️  ${msg} — recupero per-campo`),
-    onUnusableOutput: (event) => recordFreeMtUnusableOutput(RUN_REPORT.translation, event),
+    onUnusableOutput: (event) => recordFreeMtUnusableOutput(RUN_REPORT.translation, { ...event, field }),
   });
 }
 
@@ -9760,19 +9765,19 @@ function freeMtField(text, sourceLang, targetLang, fieldType) {
 async function translateContentFreeMt(sourceLang, targetLang, targetLabel, sourceContent) {
   console.error(`🌍 [${targetLabel}] Traduzione ${targetLang.toUpperCase()} via cascade MT gratuita (no quota LLM)...`);
   const [title, excerpt, body1, body2, body3] = await Promise.all([
-    freeMtField(sourceContent.title, sourceLang, targetLang, 'title'),
-    freeMtField(sourceContent.excerpt, sourceLang, targetLang, 'description'),
-    freeMtField(sourceContent.body1, sourceLang, targetLang, 'description'),
-    freeMtField(sourceContent.body2, sourceLang, targetLang, 'description'),
-    freeMtField(sourceContent.body3, sourceLang, targetLang, 'description'),
+    freeMtField(sourceContent.title, sourceLang, targetLang, 'title', 'title'),
+    freeMtField(sourceContent.excerpt, sourceLang, targetLang, 'description', 'excerpt'),
+    freeMtField(sourceContent.body1, sourceLang, targetLang, 'description', 'body1'),
+    freeMtField(sourceContent.body2, sourceLang, targetLang, 'description', 'body2'),
+    freeMtField(sourceContent.body3, sourceLang, targetLang, 'description', 'body3'),
   ]);
 
   let faq;
   if (Array.isArray(sourceContent.faq) && sourceContent.faq.length > 0) {
     try {
       faq = await Promise.all(sourceContent.faq.map(async (item) => {
-        const q = await freeMtField(item?.q, sourceLang, targetLang, 'title');
-        const a = await freeMtField(item?.a, sourceLang, targetLang, 'description');
+        const q = await freeMtField(item?.q, sourceLang, targetLang, 'title', 'faq.q');
+        const a = await freeMtField(item?.a, sourceLang, targetLang, 'description', 'faq.a');
         return { q: q || item?.q || '', a: a || item?.a || '' };
       }));
     } catch (err) {
@@ -10165,39 +10170,56 @@ ${terminologyByLang[targetLang] || ''}`;
           ? `  ⚠️  Campo ${field} nella traduzione ${locale} troppo corto per essere un ${field} (${floorMiss}) — retry traduzione mirata...`
           : `  ⚠️  Campo ${field} mancante nella traduzione ${locale} — retry traduzione mirata...`,
       );
-      if (ARTICLE_TRANSLATE_FREE_MT && !claimFreeMtLlmFallback(RUN_REPORT.translation)) {
+      // IL CAP E' SCOPATO AI SOLI CAMPI CHE IL FREE-MT HA DAVVERO RIFIUTATO.
+      // Il budget e' 5 per RUN, i campi candidati 15 per articolo (3 locali x 5
+      // campi): addebitarlo a OGNI ingresso nel loop — un floor-miss, un campo
+      // vuoto per cause estranee al free-MT — lo esaurisce con un solo articolo
+      // e da li' in poi ogni campo salta il retry mirato e cade su `itValue`,
+      // cioe' pubblica prosa ITALIANA sotto `/en/`, `/de/`, `/fr/` in
+      // `content/`, in `meta-<locale>.json` e nei feed RSS: esattamente il
+      // difetto #831, live senza rebuild del sito. Il free-MT segnala la coppia
+      // (locale, campo) che ha rifiutato (`onUnusableOutput`), e solo quella
+      // paga il cap; per tutti gli altri campi il retry mirato resta intatto.
+      const capBloccaIlRetry = ARTICLE_TRANSLATE_FREE_MT
+        && wasFreeMtUnusable(RUN_REPORT.translation, locale, field)
+        && !claimFreeMtLlmFallback(RUN_REPORT.translation);
+      if (capBloccaIlRetry) {
         console.error(
           `  ⚠️  Recupero LLM per ${field} (${locale}) saltato: raggiunto il cap di `
           + `${MAX_FREE_MT_LLM_FALLBACKS_PER_RUN} fallback free-MT per run — `
           + `${ultimaRisorsa ? 'valore tradotto mantenuto' : 'fallback al valore italiano'}`,
         );
         if (ultimaRisorsa) continue;
-        data.content[locale][field] = itValue;
-        continue;
-      }
-      try {
-        // Reuse the in-scope callWithRetry (callLLM + JSON repair + truncation
-        // back-off) for a focused single-field re-translation.
-        const parsed = await callWithRetry(
-          `Traduci OBBLIGATORIAMENTE in ${langName} il seguente campo per il sito Frontaliere Ticino. Rispondi SOLO con JSON (no markdown):\n\nCAMPO ITALIANO (${field}):\n${itValue}\n\nFormato risposta: {"${field}": "..."}`,
-          1500,
-          `${locale}:${field}-missing-retry`,
-        );
-        // `String(retried)` on an object yields "[object Object]" — truthy and
-        // different from the IT value, so the old check ASSIGNED it. Require a
-        // real string so a non-string retry falls through to the IT fallback.
-        const retried = translatedStringOrNull(parsed?.[field], locale);
-        // Il floor vale anche sull'ESITO del retry: un retry che risponde `...`
-        // e' la stessa degenerazione, solo un turno piu' tardi.
-        const retriedMiss = retried ? metaFieldPlausibilityMiss(field, retried) : null;
-        if (retried && !retriedMiss && String(retried).trim() !== String(itValue).trim()) {
-          data.content[locale][field] = retried;
-          console.error(`  ✅ Campo ${field} (${locale}) ritradotto con successo dopo missing-field retry`);
-          continue;
+        // NIENTE `continue` qui: il ramo del cap cade sullo STESSO fallback IT
+        // in fondo al loop, quindi passa per `detectTruncation(itValue)` come
+        // il percorso normale. Assegnare `itValue` qui saltava quel check e
+        // pubblicava un fallback IT esso stesso troncato senza il `🔴 ...
+        // richiede verifica manuale` (#705).
+      } else {
+        try {
+          // Reuse the in-scope callWithRetry (callLLM + JSON repair + truncation
+          // back-off) for a focused single-field re-translation.
+          const parsed = await callWithRetry(
+            `Traduci OBBLIGATORIAMENTE in ${langName} il seguente campo per il sito Frontaliere Ticino. Rispondi SOLO con JSON (no markdown):\n\nCAMPO ITALIANO (${field}):\n${itValue}\n\nFormato risposta: {"${field}": "..."}`,
+            1500,
+            `${locale}:${field}-missing-retry`,
+          );
+          // `String(retried)` on an object yields "[object Object]" — truthy and
+          // different from the IT value, so the old check ASSIGNED it. Require a
+          // real string so a non-string retry falls through to the IT fallback.
+          const retried = translatedStringOrNull(parsed?.[field], locale);
+          // Il floor vale anche sull'ESITO del retry: un retry che risponde `...`
+          // e' la stessa degenerazione, solo un turno piu' tardi.
+          const retriedMiss = retried ? metaFieldPlausibilityMiss(field, retried) : null;
+          if (retried && !retriedMiss && String(retried).trim() !== String(itValue).trim()) {
+            data.content[locale][field] = retried;
+            console.error(`  ✅ Campo ${field} (${locale}) ritradotto con successo dopo missing-field retry`);
+            continue;
+          }
+          console.error(`  ⚠️  Retry ${field} (${locale}) non ha prodotto una traduzione valida${retriedMiss ? ` (${retriedMiss})` : ''} — ${ultimaRisorsa ? 'valore tradotto mantenuto' : 'fallback al valore italiano'}`);
+        } catch (retryErr) {
+          console.error(`  ⚠️  Retry ${field} (${locale}) fallito: ${retryErr.message} — ${ultimaRisorsa ? 'valore tradotto mantenuto' : 'fallback al valore italiano'}`);
         }
-        console.error(`  ⚠️  Retry ${field} (${locale}) non ha prodotto una traduzione valida${retriedMiss ? ` (${retriedMiss})` : ''} — ${ultimaRisorsa ? 'valore tradotto mantenuto' : 'fallback al valore italiano'}`);
-      } catch (retryErr) {
-        console.error(`  ⚠️  Retry ${field} (${locale}) fallito: ${retryErr.message} — ${ultimaRisorsa ? 'valore tradotto mantenuto' : 'fallback al valore italiano'}`);
       }
       // Vedi `ultimaRisorsa` sopra: sul solo floor-miss non si scende MAI sul
       // fallback IT. Italiano sotto `/de/` (#831) e' peggio di un titolo corto.

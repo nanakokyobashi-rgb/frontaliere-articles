@@ -36,7 +36,13 @@ import { fileURLToPath } from 'node:url';
 // copia locale nel test divergerebbe in silenzio dal fix (AGENTS.md #6).
 import { translatedStringOrNull } from '../scripts/lib/article-free-mt.mjs';
 import { hasUsableContentText, hasUsableTranslatedText, metaFieldPlausibilityMiss } from '../scripts/lib/body2-payload-verdict.mjs';
-import { createFreeMtRecoveryReport, claimFreeMtLlmFallback, MAX_FREE_MT_LLM_FALLBACKS_PER_RUN } from '../scripts/lib/free-mt-recovery.mjs';
+import {
+  createFreeMtRecoveryReport,
+  claimFreeMtLlmFallback,
+  recordFreeMtUnusableOutput,
+  wasFreeMtUnusable,
+  MAX_FREE_MT_LLM_FALLBACKS_PER_RUN,
+} from '../scripts/lib/free-mt-recovery.mjs';
 
 // Riempitivo dei campi meta nelle fixture. NON e' un dettaglio di stile: dal
 // floor di plausibilita' (#798) il loop missing-field giudica anche `title` e
@@ -101,18 +107,18 @@ const MISSING_FIELD_LOOP_SRC = extractMissingFieldLoop();
  * passano esplicitamente non esercitano il ramo warning IT-esso-stesso-troncato
  * (#705). `warnings` raccoglie i messaggi di `console.warn` per assert.
  */
-async function runMissingFieldLoop({ data, itContent, callWithRetry, detectTruncation, warnings = [] }) {
+async function runMissingFieldLoop({ data, itContent, callWithRetry, detectTruncation, warnings = [], translationReport }) {
   const capturingConsole = { error: () => {}, warn: (msg) => warnings.push(msg) };
-  const RUN_REPORT = { translation: createFreeMtRecoveryReport() };
+  const RUN_REPORT = { translation: translationReport || createFreeMtRecoveryReport() };
   const fn = new Function(
     'data', 'itContent', 'callWithRetry', 'translatedStringOrNull', 'hasUsableTranslatedText', 'metaFieldPlausibilityMiss', 'detectTruncation', 'console',
-    'ARTICLE_TRANSLATE_FREE_MT', 'claimFreeMtLlmFallback', 'RUN_REPORT', 'MAX_FREE_MT_LLM_FALLBACKS_PER_RUN',
+    'ARTICLE_TRANSLATE_FREE_MT', 'claimFreeMtLlmFallback', 'wasFreeMtUnusable', 'RUN_REPORT', 'MAX_FREE_MT_LLM_FALLBACKS_PER_RUN',
     `return (async () => { ${MISSING_FIELD_LOOP_SRC} })();`,
   );
   // `metaFieldPlausibilityMiss` e' il floor VERO (#798), non un mock: il ramo
   // floor-miss del loop tiene il valore tradotto invece di cadere sul fallback
   // IT, e un mock qui non proverebbe quel comportamento.
-  await fn(data, itContent, callWithRetry, translatedStringOrNull, hasUsableTranslatedText, metaFieldPlausibilityMiss, detectTruncation || (() => []), capturingConsole, true, claimFreeMtLlmFallback, RUN_REPORT, MAX_FREE_MT_LLM_FALLBACKS_PER_RUN);
+  await fn(data, itContent, callWithRetry, translatedStringOrNull, hasUsableTranslatedText, metaFieldPlausibilityMiss, detectTruncation || (() => []), capturingConsole, true, claimFreeMtLlmFallback, wasFreeMtUnusable, RUN_REPORT, MAX_FREE_MT_LLM_FALLBACKS_PER_RUN);
 }
 
 /**
@@ -449,4 +455,60 @@ test('translatedStringOrNull: rifiuta la serializzazione letterale di null, non 
   }
   // Il punto finale non e' la parola: `Null.` non e' `null` in nessun locale.
   assert.equal(translatedStringOrNull('Null.', 'en'), 'Null.');
+});
+
+// ── Il cap free-MT e' scopato ai campi che il free-MT ha rifiutato ─────────
+//
+// Il budget e' 5 per RUN, i campi candidati 15 per articolo. Addebitarlo a
+// ogni ingresso nel loop lo esaurisce con un articolo solo, e da li' in poi
+// OGNI campo mancante salta il retry mirato e cade sul valore italiano: prosa
+// IT sotto `/en/`, `/de/`, `/fr/`, cioe' il difetto #831 che la catena
+// dovrebbe chiudere.
+function reportConCapEsaurito(coppieRifiutate = []) {
+  const report = createFreeMtRecoveryReport();
+  for (const [targetLang, field] of coppieRifiutate) {
+    recordFreeMtUnusableOutput(report, { reason: 'unusable-text', targetLang, field });
+  }
+  for (let i = 0; i < MAX_FREE_MT_LLM_FALLBACKS_PER_RUN; i += 1) claimFreeMtLlmFallback(report);
+  return report;
+}
+
+test('ramo missing-field: cap esaurito ma campo NON rifiutato dal free-MT → il retry mirato parte comunque (#831)', async () => {
+  const complete = { ...META_PLAUSIBILI, body1: 'B1', body2: 'B2', body3: 'B3' };
+  const data = { content: { en: { ...complete }, de: { ...complete, body1: '' }, fr: { ...complete } } };
+  const itContent = { ...META_PLAUSIBILI, body1: 'B1it', body2: 'B2it', body3: 'B3it' };
+  const calls = [];
+  const callWithRetry = async (_p, _t, label) => { calls.push(label); return { body1: 'B1 auf Deutsch' }; };
+
+  // Il cap e' esaurito da un ALTRO campo (`de:title`): questo body1 non e' mai
+  // stato rifiutato dal free-MT, quindi non deve pagarne il conto.
+  await runMissingFieldLoop({ data, itContent, callWithRetry, translationReport: reportConCapEsaurito([['de', 'title']]) });
+
+  assert.deepEqual(calls, ['de:body1-missing-retry'], 'il campo estraneo al free-MT conserva il suo retry mirato');
+  assert.equal(data.content.de.body1, 'B1 auf Deutsch', 'niente fallback italiano sotto /de/');
+});
+
+test('ramo missing-field: campo rifiutato dal free-MT con cap esaurito → niente retry, e il fallback IT troncato resta segnalato (#705)', async () => {
+  const complete = { ...META_PLAUSIBILI, body1: 'B1', body2: 'B2', body3: 'B3' };
+  const data = { content: { en: { ...complete }, de: { ...complete, body1: '' }, fr: { ...complete } } };
+  const itContent = { ...META_PLAUSIBILI, body1: 'Questa frase non finisce mai e', body2: 'B2it', body3: 'B3it' };
+  const calls = [];
+  const callWithRetry = async (_p, _t, label) => { calls.push(label); return { body1: 'B1 auf Deutsch' }; };
+  const warnings = [];
+
+  await runMissingFieldLoop({
+    data,
+    itContent,
+    callWithRetry,
+    detectTruncation: () => [{ type: 'incomplete-ending' }],
+    warnings,
+    translationReport: reportConCapEsaurito([['de', 'body1']]),
+  });
+
+  assert.deepEqual(calls, [], 'il campo davvero rifiutato dal free-MT paga il cap: nessun retry LLM');
+  assert.equal(data.content.de.body1, itContent.body1, 'fallback IT come ultima risorsa');
+  assert.ok(
+    warnings.some((w) => String(w).includes('ESSO STESSO troncato')),
+    'anche il ramo del cap deve passare per detectTruncation(itValue) e segnalare il fallback IT troncato',
+  );
 });
