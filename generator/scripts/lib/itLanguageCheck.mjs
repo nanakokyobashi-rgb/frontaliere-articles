@@ -230,3 +230,70 @@ export function detectWrongLatinLanguage(text, locale = 'it') {
   }
   return null;
 }
+
+/**
+ * Campi meta dove una tabella compatta di aliquote e' contenuto LEGITTIMO, e
+ * dove quindi la deroga misurata in #1177 si applica.
+ *
+ * `excerpt` e' la sorgente; `description` e `ogDescription` ne sono la copia —
+ * `create-article.mjs` li deriva da `it.excerpt`, e le stesse stringhe
+ * finiscono in `content/seo/`. Derogare sull'excerpt e non su di loro
+ * significherebbe accettare l'articolo in generazione e poi vederlo rifiutato
+ * dallo scan SEO del corpus pubblicato: rosso su OGNI PR successiva, per un
+ * contenuto che il gate ha gia' dichiarato valido.
+ *
+ * `title` e `ogTitle` restano FUORI: la soglia morfologica e' stata misurata
+ * sui titoli, dove non ha falsi positivi, e li' una tabella di aliquote non e'
+ * contenuto atteso.
+ */
+export const RATE_TABLE_DEROGATION_FIELDS = ['excerpt', 'description', 'ogDescription'];
+
+/**
+ * `true` se il testo e' una tabella compatta di aliquote e sigle italiana:
+ * almeno due percentuali, almeno due acronimi E un ancoraggio italiano. La
+ * morfologia, tarata sulla prosa, legge questa forma come non-italiana anche
+ * quando e' italiana; l'ancoraggio impedisce che la sola forma «tabella»
+ * apra la deroga a un testo di un'altra lingua.
+ *
+ * @param {string} value
+ * @returns {boolean}
+ */
+export function isCompactItalianRateTable(value) {
+  if (typeof value !== 'string') return false;
+  const percentages = value.match(/\b\d+(?:[.,]\d+)?\s*%/g) ?? [];
+  const acronyms = value.match(/\b[A-Z]{2,}(?:\/[A-Z]{2,})*\b/g) ?? [];
+  const markerHits = latinLanguageMarkerHits(value);
+  const hasItalianAnchor = markerHits.it >= 1
+    || /\b(?:aliquota|aliquote|contributo|contributi|percentuale|percentuali)\b/i.test(value);
+  return percentages.length >= 2 && acronyms.length >= 2 && hasItalianAnchor;
+}
+
+/**
+ * `detectWrongLatinLanguage` con la deroga di #1177 applicata al CAMPO.
+ *
+ * UNICA sorgente della deroga: la usano sia il gate di generazione
+ * (`wrongLanguageAdoptions`) sia i tre scan del corpus pubblicato in
+ * `generator/tests/wrong-latin-language-adoption.test.mjs`. Due copie
+ * divergenti significherebbero un articolo accettato in generazione e rosso
+ * per sempre sullo scan — vedi `RATE_TABLE_DEROGATION_FIELDS`.
+ *
+ * I marker restano attivi: un campo adottato in una lingua diversa continua a
+ * essere rifiutato, la deroga vale solo per il segnale morfologico su `it`.
+ *
+ * @param {string} value
+ * @param {string} locale
+ * @param {string} field  il nome del campo meta (`title`|`excerpt`|`description`|`ogDescription`|…)
+ * @returns {{ lang: string, reason: 'markers'|'morphology' }|null}
+ */
+export function detectWrongLatinLanguageInField(value, locale, field) {
+  const esito = detectWrongLatinLanguage(value, locale);
+  if (
+    esito
+    && locale === 'it'
+    && esito.lang === 'non-it'
+    && esito.reason === 'morphology'
+    && RATE_TABLE_DEROGATION_FIELDS.includes(field)
+    && isCompactItalianRateTable(value)
+  ) return null;
+  return esito;
+}

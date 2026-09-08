@@ -182,31 +182,6 @@ jobs:
       # lo sweep settimanale puo' rimetterla in coda. Il giro successivo pagava
       # una run Claude INTERA sulla quota condivisa col sito per ri-diagnosticare
       # lo stesso file bloccato dal mirror e riemettere lo stesso verdetto —
-      # dopodiche' il post-step scopriva che la issue di la' esiste gia' e non
-      # consegnava niente (#972 item 5).
-      #
-      # E' la stessa classe del gate stale-dispatch: una condizione
-      # deterministica, leggibile PRIMA del run con una `gh issue list`, che
-      # veniva consultata dopo averlo pagato.
-      #
-      # Il corto-circuito vuole la CONGIUNZIONE «gia' consegnata» + «nessun
-      # residuo qui»: con un residuo la diagnosi nomina anche file che nessun
-      # canale di discesa porta giu' — lavoro di QUESTO repo — ed e' esattamente
-      # la ragione per cui la issue e' stata parcheggiata invece che chiusa;
-      # saltarla la trasformerebbe in uno stato assorbente. La regola vive in
-      # `redeliveryDecision`, non qui, e la inchioda
-      # `generator/tests/handoff-to-site.test.mjs`.
-      - name: Pre-flight — diagnosi gia' consegnata al sito (zero-Claude)
-        id: handoff_pre
-        if: steps.quota.outputs.quota_blocked != 'true' && steps.preflight.outputs.already_resolved != 'true' && steps.stale.outputs.stale_dispatch != 'true'
-        continue-on-error: true
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GH_REPO: ${{ github.repository }}
-          ISSUE_NUMBER: ${{ github.event.issue.number }}
-          SITE_TOKEN: ${{ env.GITHUB_PAT }}
-        run: node scripts/ci/handoff-to-site.mjs --preflight
-
       # ── Pre-flight 3: capability sui workflow ─────────────────────────────
       # Solo quando NON c'è il PAT: col PAT il push su `.github/workflows/**`
       # passa, e girare il guard toglierebbe una capacità che il run possiede.
@@ -221,7 +196,7 @@ jobs:
       # anche all'action, quindi saltare il guard riflette una capacità reale.
       - name: Pre-flight — workflows-scope capability guard (zero-Claude)
         id: scope_guard
-        if: env.GITHUB_PAT_NANAKO == '' && steps.quota.outputs.quota_blocked != 'true' && steps.preflight.outputs.already_resolved != 'true' && steps.stale.outputs.stale_dispatch != 'true' && steps.handoff_pre.outputs.handoff_delivered != 'true'
+        if: env.GITHUB_PAT_NANAKO == '' && steps.quota.outputs.quota_blocked != 'true' && steps.preflight.outputs.already_resolved != 'true' && steps.stale.outputs.stale_dispatch != 'true'
         continue-on-error: true
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -232,12 +207,28 @@ jobs:
       # ── Pre-flight 4: mutua esclusione ────────────────────────────────────
       - name: Pre-flight — in-progress claim gate (zero-Claude, mutex)
         id: claim
-        if: steps.quota.outputs.quota_blocked != 'true' && steps.preflight.outputs.already_resolved != 'true' && steps.stale.outputs.stale_dispatch != 'true' && steps.scope_guard.outputs.workflows_blocked != 'true' && steps.handoff_pre.outputs.handoff_delivered != 'true'
+        if: steps.quota.outputs.quota_blocked != 'true' && steps.preflight.outputs.already_resolved != 'true' && steps.stale.outputs.stale_dispatch != 'true' && steps.scope_guard.outputs.workflows_blocked != 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_REPO: ${{ github.repository }}
           ISSUE_NUMBER: ${{ github.event.issue.number }}
         run: node scripts/ci/claim-issue-in-flight.mjs
+
+      # ── Pre-flight 5: diagnosi gia' consegnata al sito (zero-Claude) ───────
+      # La consegna viene verificata DOPO il claim: prima di quel punto la
+      # issue puo' essere stata riusata da una run concorrente e il verdetto
+      # letto potrebbe appartenere alla run sbagliata. Il claim stabilisce
+      # l'identita' della run prima di consentire il corto-circuito.
+      - name: Pre-flight — diagnosi gia' consegnata al sito (zero-Claude)
+        id: handoff_pre
+        if: steps.quota.outputs.quota_blocked != 'true' && steps.preflight.outputs.already_resolved != 'true' && steps.stale.outputs.stale_dispatch != 'true' && steps.scope_guard.outputs.workflows_blocked != 'true' && steps.claim.outputs.in_flight != 'true'
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          SITE_TOKEN: ${{ env.GITHUB_PAT }}
+        run: node scripts/ci/handoff-to-site.mjs --preflight
 
       - name: Determine fix tier
         id: tier

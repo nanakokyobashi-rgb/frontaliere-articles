@@ -620,5 +620,15 @@
     "articleId": "tram-treno-lavori-ottobre",
     "ts": "2026-09-07T17:30:45.480Z",
     "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/cassa-malati%3a-bonus%2ech%2c-aumento-premi-sar%c3%a0-del-5%25/92021297": {
+    "articleId": "aumento-premi-cassa-malati-2027",
+    "ts": "2026-09-08T09:28:19.380Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/s/4067713": {
+    "articleId": "cassa-malati-rincari-2027",
+    "ts": "2026-09-08T10:31:08.034Z",
+    "keyForm": 2
   }
 }

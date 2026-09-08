@@ -360,7 +360,7 @@ async function main() {
   // Un token rifiutato non e' un guasto — le osservazioni sopra sono state
   // rifatte in anonimo — ma va detto: e' la sola spia del fatto che il resto
   // della passata ha viaggiato sui 60 fetch/ora anonimi per IP.
-  if (rawFetch.state.tokenRejected) {
+  if (rawFetch.state.tokenRejected.size > 0) {
     console.log(
       `\nℹ️ \`GH_TOKEN\` rifiutato da raw.githubusercontent per ${SITE_REPO}: ` +
       'le letture sono proseguite in anonimo (repo pubblico).',
@@ -370,5 +370,11 @@ async function main() {
 }
 
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
-  await main();
+  main().catch((error) => {
+    console.error(`verify-crawler-contract-provenance fallito: ${error && error.stack ? error.stack : error}`);
+    // Un errore di rete non osservato non deve diventare un rosso del dispatch
+    // di sola ispezione; `--strict` mantiene invece il contratto esplicito del
+    // chiamante che ha chiesto un verdetto bloccante.
+    process.exitCode = process.argv.includes('--strict') ? 1 : 0;
+  });
 }

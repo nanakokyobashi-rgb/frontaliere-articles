@@ -18208,6 +18208,33 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'tariffe-elettricita-2027-calo',
+    category: 'novita',
+    date: '2026-09-08T09:46:42.290Z',
+    image: '/images/blog/tariffe-elettricita-2027-calo.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
+   {
+    id: 'bollette-energia-calo-2027',
+    category: 'novita',
+    date: '2026-09-08T10:15:58.905Z',
+    image: '/images/blog/bollette-energia-calo-2027.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
+   {
+    id: 'bls-tagli-posti-trasporto-svizzera',
+    category: 'novita',
+    date: '2026-09-08T10:46:19.595Z',
+    image: '/images/blog/bls-tagli-posti-trasporto-svizzera.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

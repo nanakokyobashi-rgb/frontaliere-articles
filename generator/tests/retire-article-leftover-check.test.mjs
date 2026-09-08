@@ -37,6 +37,7 @@ import { readFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { mentionsId } from '../../scripts/lib/mentions-id.mjs';
+import { surfaceMentionsArticleId } from '../../scripts/lib/article-surfaces.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 
@@ -94,11 +95,7 @@ test('la regola ha una sorgente sola: nessun chiamante se la ri-scrive', () => {
   // Una copia locale in uno dei due li scollegherebbe in silenzio.
   for (const rel of CALLERS) {
     const src = readFileSync(path.join(ROOT, rel), 'utf-8');
-    assert.match(
-      src,
-      /import \{ mentionsId \} from '[^']*lib\/mentions-id\.mjs'/,
-      `${rel}: non importa mentionsId da scripts/lib/mentions-id.mjs`,
-    );
+    assert.match(src, /surfaceMentionsArticleId/, `${rel}: non usa la verifica sensibile alla superficie`);
     assert.doesNotMatch(
       src,
       /function mentionsId\s*\(/,
@@ -111,4 +108,20 @@ test('la regola ha una sorgente sola: nessun chiamante se la ri-scrive', () => {
       `${rel}: includes(id) nudo su una superficie — un id annidato inventa un residuo.`,
     );
   }
+});
+
+test('un id vuoto non coincide con ogni superficie', () => {
+  assert.equal(mentionsId('id: altro-articolo', ''), false);
+});
+
+test('il ledger confronta i valori, non il segmento dell\'URL chiave', () => {
+  const key = `https://example.org/${ID}`;
+  assert.equal(
+    surfaceMentionsArticleId('data/article-source-urls.json', JSON.stringify({ [key]: 'altro-id' }), ID),
+    false,
+  );
+  assert.equal(
+    surfaceMentionsArticleId('data/article-source-urls.json', JSON.stringify({ [key]: ID }), ID),
+    true,
+  );
 });

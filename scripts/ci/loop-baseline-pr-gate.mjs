@@ -133,11 +133,13 @@ export function changedBaselines(baseManifest, headManifest) {
  * @param {string|null} a.currentHash   hash ORA di quel lato (null: assente).
  * @param {boolean|undefined} a.historyMatch      esito del walk storico.
  * @param {boolean|undefined} a.historyExhausted  true se era TUTTA la storia.
+ * @param {boolean|undefined} a.historyReadable   false se tutti i fetch storici
+ *   hanno risposto 404, per esempio dopo una rinomina.
  * @param {boolean} [a.networkError]    il walk non e' stato possibile.
  * @returns {{status: 'ok'|'reject'|'warn', reason: string}}
  */
-export function gateVerdict({ side, baselineHash, currentHash, historyMatch, historyExhausted, networkError = false }) {
-  const verdict = ghostVerdict({ baselineHash, currentHash, historyMatch, historyExhausted });
+export function gateVerdict({ side, baselineHash, currentHash, historyMatch, historyExhausted, historyReadable, networkError = false }) {
+  const verdict = ghostVerdict({ baselineHash, currentHash, historyMatch, historyExhausted, historyReadable });
   if (verdict.ghost) {
     return { status: 'reject', reason: 'fantasma: non trovata in TUTTA la storia disponibile di quel lato' };
   }
@@ -188,7 +190,7 @@ function localHistoryMatch(rel, targetHash) {
   try {
     shas = git(['log', '--format=%H', '--', rel]).split('\n').filter(Boolean);
   } catch {
-    return { match: false, exhausted: false, checked: 0 };
+    return { match: false, exhausted: false, checked: 0, historyReadable: false };
   }
   let shallow = true;
   try {
@@ -207,9 +209,9 @@ function localHistoryMatch(rel, targetHash) {
       continue;
     }
     checked += 1;
-    if (sha256(buf) === targetHash) return { match: true, exhausted: true, checked };
+    if (sha256(buf) === targetHash) return { match: true, exhausted: true, checked, historyReadable: true };
   }
-  return { match: false, exhausted: !shallow, checked };
+  return { match: false, exhausted: !shallow, checked, historyReadable: checked > 0 };
 }
 
 /** Hash ORA del lato corpus (working tree del head), o null se il file non c'e'. */
@@ -228,6 +230,7 @@ async function verifyOne(change) {
   }
   let historyMatch;
   let historyExhausted;
+  let historyReadable;
   let networkError = false;
   if (currentHash !== change.hash) {
     if (isCorpus) {
@@ -235,6 +238,7 @@ async function verifyOne(change) {
       if (local.match || local.exhausted) {
         historyMatch = local.match;
         historyExhausted = local.exhausted;
+        historyReadable = local.historyReadable;
       }
     }
     if (historyMatch === undefined) {
@@ -247,6 +251,7 @@ async function verifyOne(change) {
         });
         historyMatch = r.match;
         historyExhausted = r.exhausted;
+        historyReadable = r.historyReadable;
       } catch {
         networkError = true;
       }
@@ -255,7 +260,7 @@ async function verifyOne(change) {
   return {
     ...change,
     filePath,
-    ...gateVerdict({ side: change.side, baselineHash: change.hash, currentHash, historyMatch, historyExhausted, networkError }),
+    ...gateVerdict({ side: change.side, baselineHash: change.hash, currentHash, historyMatch, historyExhausted, historyReadable, networkError }),
   };
 }
 

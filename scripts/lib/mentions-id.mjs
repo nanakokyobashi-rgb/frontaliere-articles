@@ -39,6 +39,7 @@
  * @returns {boolean}
  */
 export function mentionsId(text, id) {
+  if (typeof id !== 'string' || id.length === 0) return false;
   const re = new RegExp(`[a-z0-9-]*${id.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}[a-z0-9-]*`, 'g');
   for (const m of text.matchAll(re)) {
     if (m[0] === id || m[0] === `blog-${id}`) return true;

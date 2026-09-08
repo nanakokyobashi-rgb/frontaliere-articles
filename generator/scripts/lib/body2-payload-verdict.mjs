@@ -67,7 +67,11 @@
  * verdetto in comportamento.
  */
 
-import { isNonItalianScript, nonItalianScriptRatio, detectWrongLatinLanguage } from './itLanguageCheck.mjs';
+import {
+  isNonItalianScript,
+  nonItalianScriptRatio,
+  detectWrongLatinLanguageInField,
+} from './itLanguageCheck.mjs';
 
 /**
  * I campi di testo che una generazione IT completa DEVE portare.
@@ -895,7 +899,12 @@ export function wrongLanguageAdoptions(parsed, locale = 'it', expectedFields = R
   for (const field of campi) {
     const origine = sources[field];
     if (!origine || origine.isLocale) continue;
-    const sbagliata = detectWrongLatinLanguage(origine.value, locale);
+    // Gli excerpt IT possono essere tabelle compatte di aliquote e sigle: la
+    // morfologia, misurata sui titoli, li legge come testo non italiano anche
+    // quando il contenuto e' legittimo. La deroga vive in `itLanguageCheck` —
+    // sorgente unica condivisa con gli scan del corpus pubblicato, che
+    // altrimenti rigetterebbero cio' che questo gate ha accettato.
+    const sbagliata = detectWrongLatinLanguageInField(origine.value, locale, field);
     if (sbagliata) {
       motivi.push(`${field} lingua ${sbagliata.lang} adottata da ${origine.source} (${sbagliata.reason})`);
     }

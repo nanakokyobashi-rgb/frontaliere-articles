@@ -36411,8 +36411,8 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     title: 'Anche da sinistra votiamo Sì all\'iniziativa sulla neutralità',
     description: 'The left-wing in Switzerland supports the initiative on neutrality. Dati aggiornati 2026 per frontalieri in Ticino.',
     keywords: 'frontalieri, ticino, svizzera, italia, anche, sinistra, votiamo, iniziativa',
-    ogTitle: 'Left-wing votes yes on neutrality initiative',
-    ogDescription: 'The left-wing in Switzerland supports the initiative on neutrality.',
+    ogTitle: 'La sinistra vota sì all\'iniziativa sulla neutralità',
+    ogDescription: 'La sinistra svizzera sostiene l\'iniziativa sulla neutralità.',
     canonicalPath: '/articoli-svizzera/neutralita-iniziativa-sinistra/',
     structuredData: {
       "@context": "https://schema.org",
@@ -78796,6 +78796,123 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
       },
       "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
       "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/volkswagen-tagli-amag-rassicura/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-tariffe-elettricita-2027-calo': {
+    title: 'Calo bollette luce 2027: -4% in Svizzera | Frontaliere Ticino',
+    description: 'Tariffe dell\'elettricità in calo del 4% nel 2027 in Svizzera. Una famiglia tipo risparmia CHF 53 l\'anno. Consulta la tariffa del tuo comune su Elcom.',
+    keywords: 'frontalieri, ticino, svizzera, italia, calo, bollette, luce, tariffe',
+    ogTitle: 'Calo bollette luce 2027: -4% in Svizzera',
+    ogDescription: 'Elcom annuncia: nel 2027 le tariffe dell\'elettricità scendono del 4% in media nazionale. Una famiglia risparmia circa CHF 53 l\'anno, ma le variazioni regionali restano significative tra comuni e gestori di rete.',
+    canonicalPath: '/articoli-svizzera/tariffe-elettricita-2027-calo/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Calo bollette luce 2027: -4% in Svizzera",
+      "description": "Tariffe dell'elettricità in calo del 4% nel 2027 in Svizzera. Una famiglia tipo risparmia CHF 53 l'anno. Consulta la tariffa del tuo comune su Elcom.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/tariffe-elettricita-2027-calo.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Contatore elettrico su parete di edificio residenziale svizzero con tariffe in calo per il 2027"
+      },
+      "datePublished": "2026-09-08T09:46:42+00:00",
+      "dateModified": "2026-09-08T09:46:42+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/tariffe-elettricita-2027-calo/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-bollette-energia-calo-2027': {
+    title: 'Bollette energia giù del 4% nel 2027 | Frontaliere Ticino',
+    description: 'ElCom annuncia il calo dei prezzi dell\'energia nel 2027. Una famiglia media risparmierà 53 CHF all\'anno. Terzo anno consecutivo di riduzione tariffaria.',
+    keywords: 'frontalieri, ticino, svizzera, italia, bollette, energia, elcom, annuncia',
+    ogTitle: 'Bollette energia giù del 4% nel 2027',
+    ogDescription: 'Buone notizie per il budget familiare. ElCom ha annunciato che le bollette energetiche caleranno del 4% nel 2027. Una famiglia media che consuma 4\'500 kWh risparmierà 53 franchi all\'anno, pagando una bolletta annuale di 1\'194 CHF. È il terzo anno',
+    canonicalPath: '/articoli-svizzera/bollette-energia-calo-2027/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Bollette energia giù del 4% nel 2027",
+      "description": "ElCom annuncia il calo dei prezzi dell'energia nel 2027. Una famiglia media risparmierà 53 CHF all'anno. Terzo anno consecutivo di riduzione tariffaria.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/bollette-energia-calo-2027.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Contatore elettrico di una casa svizzera, simbolo del calo dei prezzi nel 2027"
+      },
+      "datePublished": "2026-09-08T10:15:58+00:00",
+      "dateModified": "2026-09-08T10:15:58+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/bollette-energia-calo-2027/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-bls-tagli-posti-trasporto-svizzera': {
+    title: 'BLS taglia 40 posti, chiude centri e riduce servizi',
+    description: 'BLS riduce 40 posti e chiude 5 centri viaggi per risparmiare 5 milioni CHF nel 2027-2028. Sindacati protestano contro i tagli ai servizi ferroviari.',
+    keywords: 'frontalieri, ticino, svizzera, italia, taglia, posti, chiude, centri',
+    ogTitle: 'BLS taglia 40 posti, chiude centri e riduce servizi',
+    ogDescription: 'La ferroviaria BLS annuncia riorganizzazione drastica: 40 posti eliminati, 5 centri viaggi chiusi, pulizia treni ridotta a 1 volta/mese. Sindacati critici sulla pressione dai cantoni. Risparmi da 5 milioni CHF 2027-2028.',
+    canonicalPath: '/articoli-svizzera/bls-tagli-posti-trasporto-svizzera/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "BLS taglia 40 posti, chiude centri e riduce servizi",
+      "description": "BLS riduce 40 posti e chiude 5 centri viaggi per risparmiare 5 milioni CHF nel 2027-2028. Sindacati protestano contro i tagli ai servizi ferroviari.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/bls-tagli-posti-trasporto-svizzera.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Veduta della Svizzera: paesaggio che rappresenta la mobilità nazionale e i trasporti pubblici"
+      },
+      "datePublished": "2026-09-08T10:46:19+00:00",
+      "dateModified": "2026-09-08T10:46:19+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/bls-tagli-posti-trasporto-svizzera/`,
       "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
     }
   },

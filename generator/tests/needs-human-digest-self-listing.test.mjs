@@ -340,7 +340,9 @@ test('ogni titolo escluso ha la sua sorgente reale, e ce n e una sola', () => {
 test('il titolo del digest ha una sola sorgente anche in needs-human-sweep.yml', () => {
   // Tre usi (prompt, step "Classify outcome", e il filtro dell altro workflow)
   // su un titolo che e' anche la chiave di ricerca dell oggetto: un letterale
-  // ripetuto qui basterebbe a farli divergere senza che nulla fallisca.
+  // ripetuto qui basterebbe a farli divergere senza che nulla fallisca. Il
+  // prompt consuma l'output del guard, così la risoluzione del valore è
+  // osservata prima dell'invocazione Claude.
   const sweep = readFileSync(path.join(ROOT, '.github/workflows/needs-human-sweep.yml'), 'utf8');
   const declared = /\n\s+DIGEST_TITLE:\s*'([^']+)'/.exec(sweep);
   assert.ok(declared, 'needs-human-sweep.yml deve definire DIGEST_TITLE');
@@ -352,7 +354,7 @@ test('il titolo del digest ha una sola sorgente anche in needs-human-sweep.yml',
   const title = declared[1];
   const literals = [...sweep.matchAll(new RegExp(title.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g'))];
   assert.equal(literals.length, 1, 'il titolo del digest compare fuori da DIGEST_TITLE: chi lo usa deve leggere la env');
-  assert.match(sweep, /titolo ESATTO `\$\{\{ env\.DIGEST_TITLE \}\}`/, 'il prompt deve interpolare DIGEST_TITLE');
+  assert.match(sweep, /titolo ESATTO `\$\{\{ steps\.digest_title\.outputs\.title \}\}`/, 'il prompt deve interpolare il titolo già validato');
   assert.match(sweep, /--match title "\$DIGEST_TITLE"/, 'lo step "Classify outcome" deve cercare il digest con DIGEST_TITLE');
 });
 

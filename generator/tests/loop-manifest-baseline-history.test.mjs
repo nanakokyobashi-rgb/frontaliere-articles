@@ -11,7 +11,25 @@
  */
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { baselineHistoryVerdict } from '../../scripts/ci/verify-manifest-baseline-history.mjs';
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { readFileSync } from 'node:fs';
+import {
+  baselineHistoryVerdict,
+  CANONICAL_HISTORY_REF,
+  CURRENT_HISTORY_REF,
+  isExpectedMissingHistoricalPath,
+  parseCatFileBatchOutput,
+  parseFollowHistory,
+} from '../../scripts/ci/verify-manifest-baseline-history.mjs';
+
+const HISTORY_SCRIPT = readFileSync(
+  new URL('../../scripts/ci/verify-manifest-baseline-history.mjs', import.meta.url),
+  'utf8',
+);
+
+const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 
 const entry = (path, corpus, extra = {}) => ({
   path,
@@ -91,4 +109,74 @@ test('la verifica e\' manifest-wide: una voce sana non copre una malata', () => 
 test('blobsByPath accetta anche array semplici (forma JSON del report)', () => {
   const v = baselineHistoryVerdict({ files: [entry('a.mjs', 'aaaa')], blobsByPath: { 'a.mjs': ['aaaa'] } });
   assert.equal(v.ok, true);
+});
+
+test('#1060: la baseline adapted di tests.yml è quella della riconciliazione attestata', () => {
+  const manifest = JSON.parse(fs.readFileSync(path.join(ROOT, 'scripts/ci/loop-sync-manifest.json'), 'utf8'));
+  const tracked = manifest.files.find((f) => f.path === '.github/workflows/tests.yml');
+  assert.ok(tracked);
+  assert.equal(tracked.mode, 'adapted');
+  assert.match(tracked.baseline.corpus, /^[0-9a-f]{16}$/);
+  assert.match(tracked.baseline.site, /^[0-9a-f]{16}$/);
+  assert.match(tracked.baseline.alignedAt, /^\d{4}-\d{2}-\d{2}$/);
+  assert.match(tracked.reason, new RegExp(`RICONCILIATO ${tracked.baseline.alignedAt} \\(\\#1060\\)`));
+});
+
+test('la storia usa il ref canonico e conserva i merge completi', () => {
+  assert.equal(CANONICAL_HISTORY_REF, 'origin/main');
+  assert.equal(CURRENT_HISTORY_REF, 'HEAD');
+  assert.match(
+    HISTORY_SCRIPT,
+    /git\(\['rev-list', '--full-history', CURRENT_HISTORY_REF, CANONICAL_HISTORY_REF, '--objects'/,
+  );
+  assert.doesNotMatch(HISTORY_SCRIPT, /git\(\['rev-list', '--all'/);
+});
+
+test('la passata sui rinomini usa il path storico associato a ogni commit', () => {
+  const newer = 'a'.repeat(40);
+  const older = 'b'.repeat(40);
+  assert.deepEqual(
+    parseFollowHistory(`${newer}\n\nnew-name.mjs\nold-name.mjs\n\n${older}\n\nolder-name.mjs\n`),
+    [
+      { sha: newer, path: 'new-name.mjs' },
+      { sha: newer, path: 'old-name.mjs' },
+      { sha: older, path: 'older-name.mjs' },
+    ],
+  );
+  assert.match(HISTORY_SCRIPT, /parseFollowHistory\(git\(\['log', '--follow'[\s\S]+--name-only[\s\S]+CURRENT_HISTORY_REF/);
+  assert.match(HISTORY_SCRIPT, /`\$\{sha\}:\$\{historicalPath\}`/);
+});
+
+test('un path storico assente e\' atteso, un errore di lettura no', () => {
+  assert.equal(isExpectedMissingHistoricalPath("fatal: path 'old-name.mjs' does not exist in 'abc'"), true);
+  assert.equal(isExpectedMissingHistoricalPath('fatal: Not a valid object name abc:old-name.mjs'), false);
+  assert.match(HISTORY_SCRIPT, /if \(r\.status === 0\) hashes\.add/);
+  assert.match(HISTORY_SCRIPT, /isExpectedMissingHistoricalPath\(r\.stderr\)/);
+});
+
+test('cat-file non maschera missing, ambiguous o stdout troncato come ghost di massa', () => {
+  const requested = new Map([['oid', new Set(['file.mjs'])]]);
+  assert.throws(
+    () => parseCatFileBatchOutput(Buffer.from('oid missing\n'), requested),
+    /oid missing/,
+  );
+  assert.throws(
+    () => parseCatFileBatchOutput(Buffer.from('oid ambiguous\n'), requested),
+    /oid ambiguous/,
+  );
+  assert.throws(
+    () => parseCatFileBatchOutput(Buffer.from('oid blob 4\nab'), requested),
+    /stdout troncato|contenuto troncato/,
+  );
+  assert.throws(
+    () => parseCatFileBatchOutput(Buffer.from('oid blob nope\n'), requested),
+    /header non parsabile/,
+  );
+  assert.throws(
+    () => parseCatFileBatchOutput(Buffer.from('oid blob 0\n\n'), new Map([
+      ['oid', new Set(['file.mjs'])],
+      ['another-oid', new Set(['another.mjs'])],
+    ])),
+    /stdout troncato.*another-oid/,
+  );
 });

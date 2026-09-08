@@ -187,6 +187,21 @@ jobs:
           QUOTA_BEACON_PEER_REPO: valerielinc-ops/frontaliere-si-o-no
         run: node scripts/ci/check-quota-backoff.mjs
 
+      # Questo valore entra nel prompt tramite un output già verificato, non
+      # tramite una interpolazione `env` non osservabile dentro `with:`. Se la
+      # sorgente non risolve, Claude non deve poter inventare un titolo e
+      # creare un digest che il resto del workflow non ritroverà.
+      - name: Validate digest title
+        id: digest_title
+        if: steps.quota.outputs.quota_blocked != 'true'
+        run: |
+          set -uo pipefail
+          [ -n "$DIGEST_TITLE" ] || {
+            echo "::error::needs-human-sweep: DIGEST_TITLE vuoto o non risolto; Claude non verrà invocato."
+            exit 1
+          }
+          printf 'title=%s\n' "$DIGEST_TITLE" >> "$GITHUB_OUTPUT"
+
       - name: Setup Headroom compression proxy
         if: steps.quota.outputs.quota_blocked != 'true'
         uses: ./.github/actions/setup-headroom
@@ -222,7 +237,7 @@ jobs:
                - **D — parcheggiata giusta**: `needs-human` corretto e già nel digest/registro. Non toccare nulla, non rimetterla nel digest se già presente. Ci rientra la famiglia delle CREDENZIALI (`Agent loop down: GITHUB_PAT…`, `GH_PAT expiry warning:`): la rotazione è stata DECLINATA dal proprietario il 2026-08-18 e il ciclo non può comunque agirci — non riproporla.
             3. VINCOLI: mai chiudere ciò che non hai misurato; mai rimuovere `agent:no-age-out`; un'issue con PR aperta collegata non si tocca; prima di instradare una fix verifica il `mode` in `scripts/ci/loop-sync-manifest.json` — una issue su un file `identical` si ripara SUL SITO, e ri-accodarla qui produrrebbe una PR che il mirror sovrascrive.
 
-            **Digest (ultima azione, sempre):** una sola issue col titolo ESATTO `${{ env.DIGEST_TITLE }}` (cerca fra le aperte con `gh search issues --repo $REPO`; se non esiste creala con label `needs-human,automation,agent:no-age-out`). Sostituisci/aggiorna il body con: l'elenco delle domande di classe A (numero, domanda decidibile, opzioni), le decisioni applicate in questo run (classe B/C, con issue e driver citato), e il conteggio residuo `needs-human`. Il body deve restare leggibile in 2 minuti: le domande sono POCHE e decidibili, o lo sweep ha fallito il suo compito.
+            **Digest (ultima azione, sempre):** una sola issue col titolo ESATTO `${{ steps.digest_title.outputs.title }}` (cerca fra le aperte con `gh search issues --repo $REPO`; se trovi più di una issue col titolo esatto, NON scegliere la prima: fermati e segnala l'ambiguità). Se non esiste creala con label `needs-human,automation,agent:no-age-out`. Sostituisci/aggiorna il body con: l'elenco delle domande di classe A (numero, domanda decidibile, opzioni), le decisioni applicate in questo run (classe B/C, con issue e driver citato), e il conteggio residuo `needs-human`. Il body deve restare leggibile in 2 minuti: le domande sono POCHE e decidibili, o lo sweep ha fallito il suo compito.
 
             **Telemetria:** chiudi postando sul digest un commento con l'ultimo marker su riga propria: `<!-- SWEEP_OUTCOME: a=<n> b=<n> c=<n> d=<n> -->`.
 
@@ -238,9 +253,25 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           CLAUDE_OUTCOME: ${{ steps.claude_sweep.outcome }}
+          DIGEST_TITLE_VALIDATION: ${{ steps.digest_title.outcome }}
         run: |
           set -uo pipefail
-          N=$(gh search issues --repo "$GITHUB_REPOSITORY" --state open --match title "$DIGEST_TITLE" --json number --jq '.[0].number // empty' 2>/dev/null || true)
+          if [ "$DIGEST_TITLE_VALIDATION" != "success" ]; then
+            echo "::error::needs-human-sweep: validazione DIGEST_TITLE non riuscita (outcome=$DIGEST_TITLE_VALIDATION); il run non è consegnato."
+            exit 1
+          fi
+          DIGEST_MATCHES=$(gh search issues --repo "$GITHUB_REPOSITORY" --state open --match title "$DIGEST_TITLE" --json number,title --jq '.[] | select(.title == env.DIGEST_TITLE) | .number' 2>/dev/null)
+          DIGEST_SEARCH_RC=$?
+          if [ "$DIGEST_SEARCH_RC" -ne 0 ]; then
+            echo "::error::needs-human-sweep: ricerca del digest fallita (rc=$DIGEST_SEARCH_RC); non scelgo un issue a caso."
+            exit 1
+          fi
+          DIGEST_MATCH_COUNT=$(printf '%s\n' "$DIGEST_MATCHES" | sed '/^[[:space:]]*$/d' | wc -l | tr -d '[:space:]')
+          if [ "$DIGEST_MATCH_COUNT" -gt 1 ]; then
+            echo "::error::needs-human-sweep: trovati $DIGEST_MATCH_COUNT digest aperti col titolo esatto; nessun numero è selezionabile in modo deterministico."
+            exit 1
+          fi
+          N=$(printf '%s\n' "$DIGEST_MATCHES" | sed '/^[[:space:]]*$/d' | head -n 1)
           if [ -n "${N:-}" ]; then
             HAS=$(gh issue view "$N" --repo "$GITHUB_REPOSITORY" --json comments --jq '[.comments[].body | select(test("<!-- SWEEP_OUTCOME:"))] | length' 2>/dev/null || echo 0)
           else

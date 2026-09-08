@@ -44,6 +44,7 @@ import {
   retentionWarning,
   floorFrom,
   countSourceArticles,
+  countSourceImages,
   countSeoEntries,
   collectSeoEntryIds,
   sectionFloor,
@@ -142,7 +143,7 @@ test('un feed troncato viene visto, e un feed corto per corpus corto no', () => 
     expected: {
       sourceArticles: { frontaliere: 10, svizzera: 10 },
       feedSources: { frontaliere: 10, svizzera: 10 },
-      sourceImages: 0,
+      sourceImages: null,
       rssMaxItems: 50,
     },
   };
@@ -171,7 +172,7 @@ test('un feed corto ma completo non blocca la pubblicazione, anche con molti cor
   const expected = {
     sourceArticles: { frontaliere: 3785, svizzera: 1850 },
     feedSources: { frontaliere: 30, svizzera: 1936 },
-    sourceImages: 0,
+    sourceImages: null,
     rssMaxItems: 50,
   };
   assert.equal(floorFrom(Math.min(50, 3785)), 45, 'il pavimento derivato dai corpi sarebbe stato 45');
@@ -187,7 +188,7 @@ test('chunk pieni e feed troncato restano una violazione, con la misura giusta',
   const expected = {
     sourceArticles: { frontaliere: 3785, svizzera: 1850 },
     feedSources: { frontaliere: 3750, svizzera: 1936 },
-    sourceImages: 0,
+    sourceImages: null,
     rssMaxItems: 50,
   };
   const violations = floorViolations(measured, expected);
@@ -278,12 +279,57 @@ test('build-blog-index tratta il corpus assente come un rifiuto, non come un ind
   );
 });
 
-test("images: manifest non emesso e' valido, manifest svuotato no", () => {
+test("images: manifest assente o senza sorgente e' una violazione esplicita", () => {
   const { measured, expected } = healthy();
-  assert.deepEqual(floorViolations({ ...measured, images: null }, expected), []);
+  const missingManifest = floorViolations({ ...measured, images: null }, expected);
+  assert.equal(missingManifest.length, 1);
+  assert.match(missingManifest[0], /images-manifest\.json assente/);
+
+  const missingSource = floorViolations(
+    { ...measured, images: null },
+    { ...expected, sourceImages: 0 },
+  );
+  assert.equal(missingSource.length, 1);
+  assert.match(missingSource[0], /public[\\/]images[\\/]blog/);
+
   const violations = floorViolations({ ...measured, images: 3 }, expected);
   assert.equal(violations.length, 1);
   assert.match(violations[0], /images-manifest\.json: 3 immagini contro 1990/);
+});
+
+test('un input di corpus che punta a un file o a un symlink pendente vale come directory mancante', () => {
+  const root = fs.mkdtempSync(join(os.tmpdir(), 'corpus-input-'));
+  const bodyRoot = join(root, 'content', 'blog-body');
+  fs.mkdirSync(bodyRoot, { recursive: true });
+  fs.writeFileSync(join(root, 'not-a-directory'), 'input');
+  fs.symlinkSync(join(root, 'not-a-directory'), join(bodyRoot, 'it'));
+  assert.equal(countSourceArticles(root, 'frontaliere'), 0);
+
+  fs.rmSync(join(bodyRoot, 'it'));
+  fs.symlinkSync(join(root, 'missing-target'), join(bodyRoot, 'it'));
+  assert.equal(countSourceArticles(root, 'frontaliere'), 0);
+  fs.rmSync(root, { recursive: true, force: true });
+});
+
+test('il conteggio delle immagini legge la directory sorgente una sola volta', () => {
+  const root = fs.mkdtempSync(join(os.tmpdir(), 'image-input-'));
+  const imageDir = join(root, 'public', 'images', 'blog');
+  fs.mkdirSync(imageDir, { recursive: true });
+  fs.writeFileSync(join(imageDir, 'a.webp'), 'a');
+  fs.writeFileSync(join(imageDir, 'b.webp'), 'b');
+  const original = fs.readdirSync;
+  let reads = 0;
+  fs.readdirSync = (...args) => {
+    if (args[0] === imageDir) reads += 1;
+    return original(...args);
+  };
+  try {
+    assert.equal(countSourceImages(root), 2);
+    assert.equal(reads, 1);
+  } finally {
+    fs.readdirSync = original;
+    fs.rmSync(root, { recursive: true, force: true });
+  }
 });
 
 test('feedSection separa le due sezioni dai nomi che RSS_SECTIONS genera', () => {
@@ -424,6 +470,15 @@ test('rapporto fra preallarme e gate: warning, nessuna violazione', () => {
   assert.match(advisories[0], /preallarme/);
 });
 
+test('il warning usa lo stesso pavimento intero del gate sul bordo', () => {
+  // 3432/3814 = 89,984%, ma floor(3814 * 0,9) = 3432: il gate passa sul
+  // bordo e il preallarme deve restare osservabile.
+  assert.equal(floorFrom(3814), 3432);
+  assert.match(retentionWarning('x', 3432, 3814), /sotto il preallarme/);
+  assert.doesNotMatch(retentionWarning('x', 3432, 3814), /-0\.0 pp/);
+  assert.equal(retentionWarning('x', 3431, 3814), null, 'sotto il floor il gate ha gia\' il verdetto');
+});
+
 test('rapporto sotto il gate: violazione, e nessun preallarme che la raddoppi', () => {
   const { measured, expected } = healthy();
   const truncated = { ...measured, articleCounts: { ...measured.articleCounts, articles: 500 } };
@@ -453,7 +508,9 @@ test('il report copre ogni rapporto che un pavimento sorveglia, coi riferimenti 
   assert.equal(byLabel['rss.xml'].source, Math.min(expected.rssMaxItems, expected.feedSources.frontaliere));
   assert.equal(byLabel['rss-svizzera.xml'].source, Math.min(expected.rssMaxItems, expected.feedSources.svizzera));
   assert.equal(byLabel['images-manifest.json'].source, 1990);
-  assert.equal(rows.length, 2 + measured.feeds.length + 1);
+  assert.equal(rows.length, 2 + 2 + measured.feeds.length + 1);
+  assert.ok(rows.some((r) => r.label === 'chunk SEO frontaliere/corpus'));
+  assert.ok(rows.some((r) => r.label === 'chunk SEO svizzera/corpus'));
 
   // Un preallarme su un feed resta uno per feed: e' il report intero a
   // produrli, non la riga rappresentativa che si stampa.
@@ -462,6 +519,27 @@ test('il report copre ogni rapporto che un pavimento sorveglia, coi riferimenti 
     feeds: measured.feeds.map((f) => ({ ...f, items: 47 })),
   };
   assert.equal(retentionAdvisories(retentionReport(shortFeeds, expected)).length, measured.feeds.length);
+});
+
+test('l\'erosione dei chunk SEO resta un advisory anche quando il feed e\' capato', () => {
+  const { measured, expected } = healthy();
+  const eroded = {
+    ...expected,
+    feedSources: { ...expected.feedSources, frontaliere: 60 },
+  };
+  const rows = retentionReport(measured, eroded);
+  const population = rows.find((r) => r.label === 'chunk SEO frontaliere/corpus');
+  assert.deepEqual(population, {
+    kind: 'feed-population',
+    label: 'chunk SEO frontaliere/corpus',
+    declared: 60,
+    source: 3785,
+  });
+  assert.equal(measured.feeds[0].items, 50, 'il feed resta pieno del suo cap');
+  const advisories = retentionAdvisories(rows);
+  assert.equal(advisories.length, 1);
+  assert.match(advisories[0], /chunk SEO frontaliere\/corpus/);
+  assert.match(advisories[0], /popolazione 60\/3785/);
 });
 
 test('il report tace dove il riferimento manca: quello e\' una violazione, non un rapporto', () => {
@@ -487,9 +565,11 @@ test('le righe stampate: i due rapporti del manifest, le immagini, e il feed piu
   };
   const lines = retentionLines(retentionReport(uneven, expected));
 
-  assert.equal(lines.length, 4, `2 manifest + 1 feed rappresentativo + 1 immagini, ricevute: ${lines.join(' | ')}`);
+  assert.equal(lines.length, 6, `2 manifest + 2 popolazioni + 1 feed rappresentativo + 1 immagini, ricevute: ${lines.join(' | ')}`);
   assert.ok(lines.some((l) => l.startsWith('manifest.counts.articles:')));
   assert.ok(lines.some((l) => l.startsWith('manifest.counts.swissArticles:')));
+  assert.ok(lines.some((l) => l.startsWith('chunk SEO frontaliere/corpus:')));
+  assert.ok(lines.some((l) => l.startsWith('chunk SEO svizzera/corpus:')));
   assert.ok(lines.some((l) => l.includes('rss-it.xml') && l.includes('piu\' magro')), 'il rappresentante e\' il minimo');
   assert.ok(lines.some((l) => l.startsWith('images-manifest.json:')));
   // Il margine e' in punti percentuali dal gate, che e' la grandezza che dice
@@ -501,8 +581,10 @@ test('le righe stampate: i due rapporti del manifest, le immagini, e il feed piu
 test('end-to-end: un rapporto eroso stampa ::warning:: ed esce 0', () => {
   const dir = fs.mkdtempSync(join(os.tmpdir(), 'api-floors-warn-'));
   const source = countSourceArticles(ROOT, 'frontaliere');
-  // Niente feed e niente images-manifest.json nel dist: qui si misura il
-  // livello advisory sul manifest, e i due rami assenti sono gia' coperti sopra.
+  const sourceImages = countSourceImages(ROOT);
+  // Niente feed nel dist: qui si misura il livello advisory sul manifest. Le
+  // immagini attese vanno invece dichiarate, altrimenti il nuovo floor
+  // segnala correttamente un manifest assente.
   fs.writeFileSync(
     join(dir, 'manifest.json'),
     JSON.stringify({
@@ -512,6 +594,7 @@ test('end-to-end: un rapporto eroso stampa ::warning:: ed esce 0', () => {
       },
     }),
   );
+  fs.writeFileSync(join(dir, 'images-manifest.json'), JSON.stringify({ images: Array(sourceImages).fill('image') }));
 
   const run = spawnSync(process.execPath, [join(ROOT, 'scripts/ci/verify-api-floors.mjs'), '--dist', dir], {
     encoding: 'utf-8',
@@ -522,6 +605,34 @@ test('end-to-end: un rapporto eroso stampa ::warning:: ed esce 0', () => {
   const out = `${run.stdout}${run.stderr}`;
   assert.match(out, /::warning::\[api-floors\] manifest\.counts\.articles: rapporto 9[45]\.\d\d% sotto il preallarme/);
   assert.match(out, /manifest\.counts\.swissArticles: \d+\/\d+ = 100\.00% \(margine 10\.0 pp/);
+});
+
+test('end-to-end: una run rossa conserva gli advisory degli altri rapporti', () => {
+  const dir = fs.mkdtempSync(join(os.tmpdir(), 'api-floors-red-warn-'));
+  const sourceFrontaliere = countSourceArticles(ROOT, 'frontaliere');
+  const sourceSvizzera = countSourceArticles(ROOT, 'svizzera');
+  const sourceImages = countSourceImages(ROOT);
+  fs.writeFileSync(
+    join(dir, 'manifest.json'),
+    JSON.stringify({
+      counts: {
+        articles: 500,
+        swissArticles: Math.round(sourceSvizzera * 0.95),
+      },
+    }),
+  );
+  fs.writeFileSync(join(dir, 'images-manifest.json'), JSON.stringify({ images: Array(sourceImages).fill('image') }));
+
+  const run = spawnSync(process.execPath, [join(ROOT, 'scripts/ci/verify-api-floors.mjs'), '--dist', dir], {
+    encoding: 'utf-8',
+  });
+  fs.rmSync(dir, { recursive: true, force: true });
+
+  assert.equal(run.status, 1, `il pavimento articles deve bloccare la pubblicazione:\n${run.stdout}\n${run.stderr}`);
+  const out = `${run.stdout}${run.stderr}`;
+  assert.match(out, /::warning::\[api-floors\] manifest\.counts\.swissArticles: rapporto/);
+  assert.match(out, /::error::manifest\.counts\.articles: 500 contro/);
+  assert.ok(sourceFrontaliere > 0);
 });
 
 test('build-blog-index sorveglia i suoi pavimenti con lo stesso livello advisory', () => {

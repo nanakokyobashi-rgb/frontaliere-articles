@@ -141,10 +141,12 @@ export function maskNavLinks(text) {
  * @param {string} args.sourceLang
  * @param {string} args.targetLang
  * @param {string} args.fieldType           'title' | 'description'
- * @param {(a: { text: string, sourceLang: string, targetLang: string, fieldType: string }) => Promise<string>} args.translate
+ * @param {string} [args.fieldName]         article field name for recovery telemetry
+ * @param {(a: { text: string, sourceLang: string, targetLang: string, fieldType: string }) => Promise<unknown>} args.translate
  *        the MT call (freeTranslateWithRetry in prod, a stub in tests)
  * @param {(s: string) => string} [args.balanceMarkdown]  optional markdown repair
  * @param {(msg: string) => void} [args.onWarn]
+ * @param {(event: { targetLang: string, fieldType: string, fieldName?: string, reason: string }) => void} [args.onUnusableOutput]
  * @returns {Promise<string>}
  */
 export async function translateFieldFreeMt({
@@ -152,9 +154,11 @@ export async function translateFieldFreeMt({
   sourceLang,
   targetLang,
   fieldType,
+  fieldName = null,
   translate,
   balanceMarkdown = (s) => s,
   onWarn = () => {},
+  onUnusableOutput = () => {},
 }) {
   const src = String(text ?? '').trim();
   if (!src) return '';
@@ -163,6 +167,7 @@ export async function translateFieldFreeMt({
   try {
     out = await translate({ text: masked, sourceLang, targetLang, fieldType });
   } catch (err) {
+    onUnusableOutput({ targetLang, fieldType, ...(fieldName ? { fieldName } : {}), reason: 'error' });
     onWarn(`free-MT ${targetLang}:${fieldType} failed (${err?.message || err})`);
     return '';
   }
@@ -176,11 +181,20 @@ export async function translateFieldFreeMt({
   // RSS `de` e come segmento di slug `/de/blog/null` (#868 item 4).
   // Scartarlo costa al piu' una recovery per-campo (retry mirato → fallback
   // IT): un retry, non una pubblicazione sbagliata.
-  if (!hasUsableContentText(out)) return '';
+  if (!hasUsableContentText(out)) {
+    onUnusableOutput({
+      targetLang,
+      fieldType,
+      ...(fieldName ? { fieldName } : {}),
+      reason: typeof out === 'string' ? 'unusable-text' : 'non-string',
+    });
+    return '';
+  }
   let restored = String(out);
   if (expected > 0) {
     const r = restore(restored);
     if (!r.ok) {
+      onUnusableOutput({ targetLang, fieldType, ...(fieldName ? { fieldName } : {}), reason: 'mangled-nav-link' });
       onWarn(`free-MT ${targetLang}:${fieldType} nav-link sentinel mangled (expected ${expected})`);
       return '';
     }
