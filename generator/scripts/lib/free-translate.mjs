@@ -530,9 +530,7 @@ async function translateWithDeepL(text, sourceLang, targetLang, outcome = null) 
   if (DEEPL_API_KEYS.length === 0) return '';
   const clean = normalizeBlock(text);
   if (!clean || sourceLang === targetLang) return '';
-  const outcomeBefore = outcome
-    ? { passthroughs: outcome.passthroughs, errors: outcome.errors }
-    : null;
+  const outcomeBefore = snapshotTranslationOutcome(outcome);
 
   const srcCode = DEEPL_LANG_MAP[sourceLang] || sourceLang?.toUpperCase() || '';
   const tgtCode = DEEPL_LANG_MAP[targetLang] || targetLang?.toUpperCase() || '';
@@ -573,11 +571,7 @@ async function translateWithDeepL(text, sourceLang, targetLang, outcome = null) 
       return ''; // network error, don't retry with other keys
     }
   }
-  if (
-    outcome
-    && outcome.passthroughs === outcomeBefore.passthroughs
-    && outcome.errors === outcomeBefore.errors
-  ) noteTranslationOutcome(outcome, 'incomplete');
+  noteIncompleteIfUntouched(outcome, outcomeBefore);
   return ''; // all keys exhausted
 }
 
@@ -585,9 +579,7 @@ async function translateWithDeepL(text, sourceLang, targetLang, outcome = null) 
 async function translateChunkGoogle(text, sourceLang, targetLang, outcome = null) {
   const q = normalizeBlock(text);
   if (!q) return '';
-  const outcomeBefore = outcome
-    ? { passthroughs: outcome.passthroughs, errors: outcome.errors }
-    : null;
+  const outcomeBefore = snapshotTranslationOutcome(outcome);
 
   for (const base of GOOGLE_TRANSLATE_ENDPOINTS) {
     const isClients5 = base.includes('clients5');
@@ -607,9 +599,15 @@ async function translateChunkGoogle(text, sourceLang, targetLang, outcome = null
         },
         signal: AbortSignal.timeout(TIMEOUT_MS),
       });
-      if (!res.ok) continue;
+      if (!res.ok) {
+        noteTranslationOutcome(outcome, 'errors');
+        continue;
+      }
       const raw = await res.text().catch(() => '');
-      if (!raw) continue;
+      if (!raw) {
+        noteTranslationOutcome(outcome, 'errors');
+        continue;
+      }
       try {
         const parsed = JSON.parse(raw);
         let translated = '';
@@ -637,11 +635,7 @@ async function translateChunkGoogle(text, sourceLang, targetLang, outcome = null
       continue;
     }
   }
-  if (
-    outcome
-    && outcome.passthroughs === outcomeBefore.passthroughs
-    && outcome.errors === outcomeBefore.errors
-  ) noteTranslationOutcome(outcome, 'incomplete');
+  noteIncompleteIfUntouched(outcome, outcomeBefore);
   return '';
 }
 
@@ -859,9 +853,7 @@ async function translateWithAzure(text, sourceLang, targetLang, outcome = null) 
   if (AZURE_TRANSLATOR_KEYS.length === 0) return '';
   const clean = normalizeBlock(text);
   if (!clean || sourceLang === targetLang) return '';
-  const outcomeBefore = outcome
-    ? { passthroughs: outcome.passthroughs, errors: outcome.errors }
-    : null;
+  const outcomeBefore = snapshotTranslationOutcome(outcome);
 
   // Azure supports up to 50K chars per request, but we chunk at 5K for safety
   const MAX_CHUNK = 5000;
@@ -948,15 +940,12 @@ async function translateWithAzure(text, sourceLang, targetLang, outcome = null) 
     } catch (err) {
       if (err?.quotaExhausted) continue;
       // Log non-quota Azure errors so silent failures are visible in CI logs
+      noteTranslationOutcome(outcome, 'errors');
       if (err?.message) console.warn(`⚠️  Azure Translator error: ${err.message}`);
       return '';
     }
   }
-  if (
-    outcome
-    && outcome.passthroughs === outcomeBefore.passthroughs
-    && outcome.errors === outcomeBefore.errors
-  ) noteTranslationOutcome(outcome, 'incomplete');
+  noteIncompleteIfUntouched(outcome, outcomeBefore);
   return '';
 }
 
@@ -1260,6 +1249,17 @@ function noteTranslationOutcome(state, outcome) {
     return;
   }
   state[outcome] = (state[outcome] || 0) + 1;
+}
+
+function snapshotTranslationOutcome(state) {
+  return state ? { passthroughs: state.passthroughs, errors: state.errors } : null;
+}
+
+function noteIncompleteIfUntouched(state, before) {
+  if (!state || !before) return;
+  if (state.passthroughs === before.passthroughs && state.errors === before.errors) {
+    noteTranslationOutcome(state, 'incomplete');
+  }
 }
 
 function mergeTranslationOutcome(target, source) {
