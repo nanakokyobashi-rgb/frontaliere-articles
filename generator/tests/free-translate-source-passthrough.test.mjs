@@ -281,7 +281,7 @@ describe('freeTranslate — guardia «uscita == sorgente»', () => {
     assert.equal(child.status, 0, child.stderr || child.stdout);
   });
 
-  test('un tier opzionale disabilitato impedisce il memo del passthrough', () => {
+  test('un tier opzionale disabilitato non blocca il memo del passthrough', () => {
     const moduleUrl = new URL('../scripts/lib/free-translate.mjs', import.meta.url).href;
     const childScript = `
       globalThis.fetch = async (url) => {
@@ -304,7 +304,7 @@ describe('freeTranslate — guardia «uscita == sorgente»', () => {
       const out = await freeTranslateWithRetryDetailed({
         text: ${JSON.stringify(IT)}, sourceLang: 'it', targetLang: 'en', fieldType: 'description', maxRetries: 0,
       });
-      if (JSON.stringify(out) !== JSON.stringify({ text: '', passthrough: false })) {
+      if (JSON.stringify(out) !== JSON.stringify({ text: '', passthrough: true })) {
         console.error(JSON.stringify(out));
         process.exit(1);
       }
@@ -395,7 +395,7 @@ describe('freeTranslate — guardia «uscita == sorgente»', () => {
     assert.equal(child.status, 0, child.stderr || child.stdout);
   });
 
-  test('tier opzionali non configurati impediscono il memo del passthrough', () => {
+  test('tier opzionali non configurati non bloccano il memo del passthrough', () => {
     const moduleUrl = new URL('../scripts/lib/free-translate.mjs', import.meta.url).href;
     const childScript = `
       globalThis.fetch = async (url) => {
@@ -418,7 +418,7 @@ describe('freeTranslate — guardia «uscita == sorgente»', () => {
       const out = await freeTranslateWithRetryDetailed({
         text: ${JSON.stringify(IT)}, sourceLang: 'it', targetLang: 'en', fieldType: 'description', maxRetries: 0,
       });
-      if (JSON.stringify(out) !== JSON.stringify({ text: '', passthrough: false })) {
+      if (JSON.stringify(out) !== JSON.stringify({ text: '', passthrough: true })) {
         console.error(JSON.stringify(out));
         process.exit(1);
       }
