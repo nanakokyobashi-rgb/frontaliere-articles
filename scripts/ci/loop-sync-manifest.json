@@ -382,7 +382,7 @@
     {
       "path": "scripts/lib/parse-positive-num.mjs",
       "mode": "corpus-only",
-      "reason": "La lettura validata di un override numerico da env o argv, estratta qui da `scripts/ci/scan-failed-runs.mjs` (#871). E' `corpus-only` e non `corpus-only-pending` dal 2026-09-06: il gemello NON scendera' sul sito, e non deve. Il sito copre la stessa classe con `scripts/lib/int-from-env.mjs` — `intFromEnv` (issue #7344 del sito: assente/vuota → default in silenzio, illeggibile → default + `::warning::`, mai un `NaN` propagato) piu' `positiveIntFromEnv`, che rifiuta anche lo zero e i negativi, atterrato con valerielinc-ops/frontaliere-si-o-no#7610 (mergiata il 2026-09-06) sui 12 call site dove il valore finisce in uno `slice`, in un indice o nel passo di un `for`. Copiarci sopra `parse-positive-num.mjs` creerebbe DUE sorgenti per la stessa validazione, che e' il difetto vietato da AGENTS.md #6. La misura originale della issue #884 (449 occorrenze in 308 file, zero equivalenti) cercava quattro nomi — `parsePositiveNum|parsePositiveInt|readPositiveEnv|envPositive` — e mancava l'equivalente del sito perche' si chiama diversamente.",
+      "reason": "La lettura validata di un override numerico da env o argv, estratta qui da `scripts/ci/scan-failed-runs.mjs` (#871). E' `corpus-only` e non `corpus-only-pending` dal 2026-09-06: il gemello NON scendera' sul sito, e non deve. La verifica sul sito copre solo la variante da env con `scripts/lib/int-from-env.mjs`: `intFromEnv` (assente/vuota → default in silenzio, illeggibile → default + `::warning::`) e `positiveIntFromEnv` (rifiuta anche zero e negativi, sui call site che usano conteggi). La verifica non copre la lettura da argv ne' le opzioni `sentinels`, `integer`, `warn` e `tool` di `parsePositiveNum`; quelle varianti restano specifiche del corpus. Copiarci sopra questo file creerebbe DUE sorgenti per la validazione env, il difetto vietato da AGENTS.md #6.",
       "baseline": {
         "site": null,
         "corpus": "4342dbe439942728",
@@ -3439,12 +3439,12 @@
     },
     {
       "path": "scripts/lib/cdn-asset-existence.mjs",
-      "mode": "corpus-only",
-      "reason": "Verifica di esistenza degli `/assets/` riscritti sul CDN dal fast-publish (issue #788). Solo qui: sul sito l'offload gira dentro il deploy che ha appena buildato e spinto `dist/assets`, quindi l'esistenza e' garantita dall'ordine; questo repo non builda nulla sotto `dist/assets` e riscrive riferimenti al bundle dell'ultimo deploy del sito.",
+      "mode": "adapted",
+      "reason": "Gemello adattato della verifica degli `/assets/` riscritti sul CDN dal fast-publish (issue #788). Il corpus verifica gli URL estratti con l'alfabeto condiviso `host/shared/cdnAssetOffloadRx.mjs`; il sito mantiene invece una guardia autonoma per i soft-404 HTML e per il percorso di publish del sito. Il contratto e' comune, ma le dipendenze e i gate dei due cicli sono diversi per costruzione.",
       "baseline": {
-        "site": null,
-        "corpus": "fa051a94fac7eb5d",
-        "alignedAt": "2026-09-04"
+        "site": "fc90732f0e8c3af3",
+        "corpus": "1db7f81712ca6755",
+        "alignedAt": "2026-09-08"
       }
     },
     {

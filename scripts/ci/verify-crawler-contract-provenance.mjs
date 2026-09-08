@@ -360,7 +360,7 @@ async function main() {
   // Un token rifiutato non e' un guasto — le osservazioni sopra sono state
   // rifatte in anonimo — ma va detto: e' la sola spia del fatto che il resto
   // della passata ha viaggiato sui 60 fetch/ora anonimi per IP.
-  if (rawFetch.state.tokenRejected) {
+  if (rawFetch.state.tokenRejected.size > 0) {
     console.log(
       `\nℹ️ \`GH_TOKEN\` rifiutato da raw.githubusercontent per ${SITE_REPO}: ` +
       'le letture sono proseguite in anonimo (repo pubblico).',

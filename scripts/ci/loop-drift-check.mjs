@@ -139,6 +139,7 @@ import path from 'node:path';
 import crypto from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 import { createGithubIssue } from '../lib/github-issue-creator.mjs';
+import { createRawFetcher } from '../lib/cross-repo-raw-fetch.mjs';
 import { parsePositiveNum } from '../lib/parse-positive-num.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
@@ -155,6 +156,7 @@ const SITE_REF = process.env.SITE_REF || SITE_DEFAULT_REF;
 // CI non vede la storia, va chiesta a GitHub.
 const CORPUS_REPO = process.env.GITHUB_REPOSITORY || 'nanakokyobashi-rgb/frontaliere-articles';
 const CORPUS_REF = process.env.GITHUB_SHA || 'main';
+const rawFetch = createRawFetcher({ userAgent: 'loop-drift-check', token: process.env.GH_TOKEN });
 // Commit massimi esaminati a ritroso per confermare che una baseline sia
 // esistita davvero. 100 è il per_page massimo dell'API commits: una singola
 // richiesta, nessuna paginazione. Per i file di libreria che questo manifest
@@ -554,9 +556,7 @@ function localHash(rel) {
  */
 async function siteFile(rel) {
   const url = `https://raw.githubusercontent.com/${SITE_REPO}/${SITE_REF}/${rel}`;
-  const headers = { 'User-Agent': 'loop-drift-check' };
-  if (process.env.GH_TOKEN) headers.Authorization = `Bearer ${process.env.GH_TOKEN}`;
-  const res = await fetch(url, { headers });
+  const res = await rawFetch(url);
   if (res.status === 404) return null;
   if (!res.ok) throw new Error(`GET ${rel} → HTTP ${res.status}`);
   return Buffer.from(await res.arrayBuffer());
@@ -609,22 +609,22 @@ function scalarFingerprintVerdict(entry, { site, corpus }) {
 async function repoHistoryMatch({ repo, ref, filePath, targetHash, cap = PROVENANCE_HISTORY_CAP }) {
   const perPage = Math.min(cap, 100);
   const url = `https://api.github.com/repos/${repo}/commits?path=${encodeURIComponent(filePath)}&sha=${encodeURIComponent(ref)}&per_page=${perPage}`;
-  const headers = { 'User-Agent': 'loop-drift-check', Accept: 'application/vnd.github+json' };
-  if (process.env.GH_TOKEN) headers.Authorization = `Bearer ${process.env.GH_TOKEN}`;
-  const res = await fetch(url, { headers });
+  const res = await rawFetch(url, { Accept: 'application/vnd.github+json' });
   if (!res.ok) throw new Error(`GET commits ${repo}/${filePath} → HTTP ${res.status}`);
   const exhausted = !(res.headers.get('link') || '').includes('rel="next"');
   const commits = await res.json();
 
   let checked = 0;
+  let readable = 0;
   for (const commit of commits) {
     checked += 1;
     const rawUrl = `https://raw.githubusercontent.com/${repo}/${commit.sha}/${filePath}`;
-    const r = await fetch(rawUrl, { headers: { 'User-Agent': 'loop-drift-check' } });
+    const r = await rawFetch(rawUrl);
     // 404 a una revisione storica capita per rinomine/spostamenti: non è un
     // errore, è semplicemente un punto della storia dove il path non esisteva
     // sotto questo nome. Si prosegue con gli altri commit.
     if (!r.ok) continue;
+    readable += 1;
     const hash = sha256(Buffer.from(await r.arrayBuffer()));
     // `matchedDate` — la data del commit PIÙ RECENTE il cui blob è ancora la
     // baseline. I commit arrivano dal più nuovo al più vecchio e ci si ferma al
@@ -635,10 +635,10 @@ async function repoHistoryMatch({ repo, ref, filePath, targetHash, cap = PROVENA
     // proprio quando un lato si è mosso dalla baseline — cioè nel caso
     // `site-ahead`).
     if (hash === targetHash) {
-      return { match: true, exhausted: true, checked, matchedDate: commit?.commit?.committer?.date || null };
+      return { match: true, exhausted: true, checked, readable, historyReadable: true, matchedDate: commit?.commit?.committer?.date || null };
     }
   }
-  return { match: false, exhausted, checked, matchedDate: null };
+  return { match: false, exhausted, checked, readable, historyReadable: readable > 0, matchedDate: null };
 }
 
 /**
@@ -659,12 +659,17 @@ async function repoHistoryMatch({ repo, ref, filePath, targetHash, cap = PROVENA
  *                      definitivo SOLO in questo caso, altrimenti resta
  *                      "non verificato" — mai un falso rosso per un file con
  *                      più storia di quanta ne sia stata esaminata.
+ *   historyReadable   false quando tutte le revisioni interrogate hanno
+ *                     risposto 404 (per esempio dopo una rinomina): la
+ *                     storia del vecchio path è esaurita, ma non è una prova
+ *                     che la baseline sia fantasma.
  */
-function ghostVerdict({ baselineHash, currentHash, historyMatch, historyExhausted }) {
+function ghostVerdict({ baselineHash, currentHash, historyMatch, historyExhausted, historyReadable = true }) {
   if (baselineHash == null) return { checked: false, ghost: false };
   if (currentHash === baselineHash) return { checked: true, ghost: false, matchedAt: 'current' };
   if (historyMatch === true) return { checked: true, ghost: false, matchedAt: 'history' };
   if (historyMatch === undefined) return { checked: false, ghost: false };
+  if (historyReadable === false) return { checked: true, ghost: false, unresolved: true, historyUnreadable: true };
   if (!historyExhausted) return { checked: true, ghost: false, unresolved: true };
   return { checked: true, ghost: true };
 }
@@ -692,11 +697,13 @@ async function checkBaselineProvenance(entry, now) {
     if (baselineHash == null) return;
     let historyMatch;
     let historyExhausted;
+    let historyReadable;
     if (currentHash !== baselineHash) {
       try {
         const r = await repoHistoryMatch({ repo, ref, filePath, targetHash: baselineHash });
         historyMatch = r.match;
         historyExhausted = r.exhausted;
+        historyReadable = r.historyReadable;
         if (side === 'site' && r.match) siteBaselineLastSeenAt = r.matchedDate;
         if (!r.match) {
           notes.push(
@@ -710,7 +717,7 @@ async function checkBaselineProvenance(entry, now) {
         return;
       }
     }
-    const verdict = ghostVerdict({ baselineHash, currentHash, historyMatch, historyExhausted });
+    const verdict = ghostVerdict({ baselineHash, currentHash, historyMatch, historyExhausted, historyReadable });
     if (verdict.ghost) ghosts.push(side);
   }
 
@@ -820,22 +827,33 @@ function gitBlobSha(buf) {
  *
  * @param {object} a
  * @param {string} a.mode          il `mode` della voce di manifest
+ * @param {string} [a.path]        path del file in QUESTO repo
  * @param {string|null} a.blobSha  git blob SHA del file in QUESTO repo; null se
  *   assente o illeggibile → mai un verdetto (fail-open)
+ * @param {string} [a.sitePath]    path dichiarato sul sito, se diverso
+ * @param {boolean} [a.trackingIssueClosed] abilita il controllo di un pending
  * @param {Map<string,string[]>|null} a.siteBlobIndex  blobSha → path sul sito.
  *   null quando l'inventario non è disponibile (rete giù, `--no-provenance`):
  *   fail-open, come tutto il resto dello script.
  * @returns {{misclassified: boolean, sitePaths: string[]}}
  */
-function corpusOnlyTwinVerdict({ mode, blobSha, siteBlobIndex }) {
-  // Solo `corpus-only`. `corpus-only-pending` dichiara GIÀ che il gemello
-  // arriverà e ha il suo stato `-landed`: segnalarla qui sarebbe rumore su un
-  // lavoro già tracciato.
-  if (mode !== 'corpus-only') return { misclassified: false, sitePaths: [] };
+function corpusOnlyTwinVerdict({ mode, path: corpusPath, blobSha, sitePath, trackingIssueClosed = false, siteBlobIndex }) {
+  // `corpus-only-pending` resta silenzioso finche' la issue e' aperta: il
+  // lavoro e' gia' tracciato. Una issue chiusa senza promozione, invece, e'
+  // proprio il caso in cui il backstop deve tornare a guardare.
+  if (mode !== 'corpus-only' && !(mode === 'corpus-only-pending' && trackingIssueClosed)) return { misclassified: false, sitePaths: [] };
   if (!blobSha || !siteBlobIndex) return { misclassified: false, sitePaths: [] };
-  const sitePaths = siteBlobIndex.get(blobSha);
-  if (!sitePaths || !sitePaths.length) return { misclassified: false, sitePaths: [] };
-  return { misclassified: true, sitePaths: [...sitePaths].sort() };
+  const contentPaths = [...new Set(siteBlobIndex.get(blobSha) || [])];
+  const sitePaths = new Set(contentPaths);
+  // Un contenuto ADATTATO non condivide lo sha: per quello si guarda anche la
+  // presenza del path dichiarato. Per `corpus-only` il path atteso e' quello
+  // della voce; per un pending puo' essere il `sitePath` alternativo.
+  const expectedPath = sitePath || corpusPath;
+  const pathIndex = siteBlobIndex.paths || new Set([...siteBlobIndex.values()].flat());
+  const pathMatch = expectedPath && pathIndex.has(expectedPath);
+  if (pathMatch) sitePaths.add(expectedPath);
+  if (!sitePaths.size) return { misclassified: false, sitePaths: [] };
+  return { misclassified: true, sitePaths: [...sitePaths].sort(), contentPaths, pathMatch: Boolean(pathMatch) };
 }
 
 /**
@@ -847,20 +865,42 @@ function corpusOnlyTwinVerdict({ mode, blobSha, siteBlobIndex }) {
  */
 async function siteBlobIndex() {
   const url = `https://api.github.com/repos/${SITE_REPO}/git/trees/${SITE_REF}?recursive=1`;
-  const headers = { 'User-Agent': 'loop-drift-check', Accept: 'application/vnd.github+json' };
-  if (process.env.GH_TOKEN) headers.Authorization = `Bearer ${process.env.GH_TOKEN}`;
-  const res = await fetch(url, { headers });
+  const res = await rawFetch(url, { Accept: 'application/vnd.github+json' });
   if (!res.ok) return null;
   const tree = await res.json();
   if (!tree || !Array.isArray(tree.tree) || tree.truncated) return null;
   const index = new Map();
   for (const node of tree.tree) {
     if (node.type !== 'blob' || !node.sha) continue;
+    if (!index.paths) index.paths = new Set();
+    index.paths.add(node.path);
     const at = index.get(node.sha);
     if (at) at.push(node.path);
     else index.set(node.sha, [node.path]);
   }
   return index;
+}
+
+/** True solo quando una issue di tracking risponde esplicitamente `closed`. */
+async function trackingIssueClosed(trackingIssue) {
+  if (typeof trackingIssue !== 'string') return false;
+  let match;
+  try {
+    match = new URL(trackingIssue).pathname.match(/^\/([^/]+)\/([^/]+)\/issues\/(\d+)\/?$/);
+  } catch {
+    return false;
+  }
+  if (!match) return false;
+  const [, owner, repo, number] = match;
+  const url = `https://api.github.com/repos/${owner}/${repo}/issues/${number}`;
+  try {
+    const res = await rawFetch(url, { Accept: 'application/vnd.github+json' });
+    if (!res.ok) return false;
+    const issue = await res.json();
+    return issue?.state === 'closed';
+  } catch {
+    return false;
+  }
 }
 
 /**
@@ -1600,14 +1640,23 @@ async function main() {
   // il caso in cui la dichiarazione sbagliata sopravvive. Costo: UNA richiesta
   // per l'intero albero del sito, non una per file.
   const corpusOnly = manifest.files.filter((e) => e.mode === 'corpus-only');
-  if (!INIT && corpusOnly.length) {
+  const pending = manifest.files.filter((e) => e.mode === 'corpus-only-pending');
+  if (!INIT && (corpusOnly.length || pending.length)) {
+    const closedPending = new Set();
+    for (const entry of pending) {
+      if (await trackingIssueClosed(entry.trackingIssue)) closedPending.add(entry.path);
+    }
+    const candidates = [...corpusOnly, ...pending.filter((entry) => closedPending.has(entry.path))];
     let index = null;
     try {
       index = await siteBlobIndex();
     } catch {
       index = null; // PROCEED-SAFE: senza inventario nessun verdetto, mai un falso rosso.
     }
-    for (const entry of corpusOnly) {
+    for (const entry of candidates) {
+      // Il normale fetch su `sitePath || path` ha già prodotto questo stato:
+      // non duplicare la stessa riga nel backstop per inventario.
+      if (entry.mode === 'corpus-only-pending' && results.some((r) => r.path === entry.path && r.state === 'corpus-only-pending-landed')) continue;
       let blobSha = null;
       try {
         const abs = path.join(ROOT, entry.path);
@@ -1615,21 +1664,35 @@ async function main() {
       } catch {
         blobSha = null;
       }
-      const twin = corpusOnlyTwinVerdict({ mode: entry.mode, blobSha, siteBlobIndex: index });
+      const twin = corpusOnlyTwinVerdict({
+        mode: entry.mode,
+        path: entry.path,
+        sitePath: entry.sitePath,
+        trackingIssueClosed: closedPending.has(entry.path),
+        blobSha,
+        siteBlobIndex: index,
+      });
       if (!twin.misclassified) continue;
+      // Il ciclo principale può avere già registrato lo stesso pending come
+      // assente sul path dichiarato. Il backstop per contenuto/path lo
+      // sostituisce con un solo verdetto, non aggiunge una riga contraddittoria.
+      const pendingIndex = results.findIndex(
+        (r) => r.path === entry.path && (r.state === 'corpus-only' || r.state === 'corpus-only-pending'),
+      );
+      if (pendingIndex >= 0) results.splice(pendingIndex, 1);
       results.push({
         path: entry.path,
         mode: entry.mode,
-        state: 'corpus-only-twin',
+        state: entry.mode === 'corpus-only-pending' ? 'corpus-only-pending-landed' : 'corpus-only-twin',
         actionable: true,
-        headline: `dichiarato \`corpus-only\`, ma il sito ha lo STESSO contenuto in ${twin.sitePaths.map((p) => `\`${p}\``).join(', ')}`,
+        headline: `dichiarato \`${entry.mode}\`, ma il sito ha una copia non dichiarata in ${twin.sitePaths.map((p) => `\`${p}\``).join(', ')}`,
         detail:
           "`classify()` esce sul ramo `corpus-only` senza mai interrogare il sito: finche' la voce " +
-          "dice 'non esiste la\'', il file resta fuori da ogni sorveglianza — e qui i due lati sono " +
-          'gia\' byte-identici, quindi una fix su un lato lascerebbe il gemello rotto in silenzio. ' +
-          'Un fetch su `path` non lo avrebbe visto, perche\' il gemello sta a un path DIVERSO: e\' la ' +
-          'stessa forma del punto cieco di `alert-pat-down.mjs`. Riclassifica a `identical` (o ' +
-          '`adapted` se la divergenza e\' voluta) con `sitePath` e la baseline dei due lati.',
+          "dice 'non esiste la\'', il file resta fuori da ogni sorveglianza. " +
+          (twin.contentPaths.length
+            ? 'L\'inventario ha trovato anche lo stesso blob, eventualmente a un path DIVERSO: un fetch su `path` non lo avrebbe visto.'
+            : 'L\'inventario ha trovato il path dichiarato, ma il contenuto puo\' essere ADATTATO: il confronto per hash da solo non lo avrebbe visto.') +
+          ' Riclassifica a `identical` (o `adapted` se la divergenza e\' voluta) con `sitePath` e la baseline dei due lati.',
         hashes: { blobSha, sitePaths: twin.sitePaths },
       });
     }
@@ -1678,7 +1741,7 @@ async function main() {
       '',
       section('ghost-baseline', '💀 Baseline fantasma — mai esistita nella storia esaminata'),
       section('stranded-twin', `🚨 Gemello \`identical\` fermo indietro da oltre ${STRANDED_AFTER_DAYS} giorni — nessun trasporto lo porta`),
-      section('corpus-only-twin', '🔴 Dichiarato `corpus-only`, ma il gemello esiste identico sul sito'),
+      section('corpus-only-twin', '🔴 Dichiarato `corpus-only`, ma il gemello esiste sul sito'),
       section('identical-unmirrorable', '🔴 Dichiarato `identical`, ma importa un modulo che il sito non ha'),
       section('undeclared-drift', '🔴 Divergenza non dichiarata'),
       section('both-moved', '🔴 Modificato su entrambi i lati'),
