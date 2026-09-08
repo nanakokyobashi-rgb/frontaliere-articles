@@ -18298,6 +18298,33 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'laura-bianchi',
     authorName: 'Laura Bianchi',
    },
+   {
+    id: 'ospedali-svizzeri-infermieri-fuga-anno',
+    category: 'novita',
+    date: '2026-09-08T19:39:29.018Z',
+    image: '/images/blog/ospedali-svizzeri-infermieri-fuga-anno.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
+   {
+    id: 'naturalizzazione-lucerna-documenti-timeline',
+    category: 'pratico',
+    date: '2026-09-08T20:09:40.491Z',
+    image: '/images/blog/naturalizzazione-lucerna-documenti-timeline.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
+   {
+    id: 'traffico-aereo-svizzero-cresce',
+    category: 'novita',
+    date: '2026-09-08T20:34:24.501Z',
+    image: '/images/blog/traffico-aereo-svizzero-cresce.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

@@ -6100,6 +6100,15 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.casse-pensioni-rendimenti-2025.title': 'Pensionskassen: Rendite-Boom im Jahr 2025',
     'blog.article.casse-pensioni-rendimenti-2025.excerpt': 'Die Schweizer Pensionskassen archivieren das aktiengetriebene Jahr 2025 mit einer durchschnittlichen Rendite von 6,3%. Konstanter Umwandlungssatz von 5,20% für zukünftige Renten.',
     'blog.article.casse-pensioni-rendimenti-2025.imageAlt': 'Investor überprüft Pensionsfonds-Renditen und Renteneinkünfte mit Finanzdokumenten.',
+    'blog.article.ospedali-svizzeri-infermieri-fuga-anno.title': 'Schweizer Spitäler: 1.700 Pflegekräfte pro Jahr auf der Flucht',
+    'blog.article.ospedali-svizzeri-infermieri-fuga-anno.excerpt': 'Der Obsan zeigt, dass 75% der Absolventen der Krankenpflege im Krankenhaus beginnen, aber mit 40 Jahren auf 47% sinken. Der VPOD fordert sofort bessere Konditionen.',
+    'blog.article.ospedali-svizzeri-infermieri-fuga-anno.imageAlt': 'Schweizer Alpenlandschaft als Symbol des nationalen Gesundheitssystems mit Engpässen bei Krankenpflegepersonal',
+    'blog.article.naturalizzazione-lucerna-documenti-timeline.title': 'Einbürgerung Luzern: Genehmigungen, Kosten und Verfahren',
+    'blog.article.naturalizzazione-lucerna-documenti-timeline.excerpt': 'Vollständiger Leitfaden zur ordentlichen Einbürgerung im Kanton Luzern: 10 Jahre Aufenthalt mit Ausweis C, Integrationsvoraussetzungen und deutscher Sprache B1, 12-24 Monate, Kantons- und Gemeindesteuern.',
+    'blog.article.naturalizzazione-lucerna-documenti-timeline.imageAlt': 'Luzerner Gemeindeamt mit Schweizer Naturalisierungsformularen und Bürgerschaftsdokumenten auf Verwaltungstisch',
+    'blog.article.traffico-aereo-svizzero-cresce.title': 'Schweizer Luftverkehr wächst, aber die Emissionen steigen',
+    'blog.article.traffico-aereo-svizzero-cresce.excerpt': 'Im Jahr 2025 übertraf die Zivilluftfahrt die Vor-Covid-Zahlen: 1,4 Millionen Flugbewegungen (+5%), 60,5 Millionen Passagiere (+4%). Die CO2-Emissionen steigen jedoch um 3 %.',
+    'blog.article.traffico-aereo-svizzero-cresce.imageAlt': 'Luftaufnahme der Schweizer Alpenlandschaft mit Flugzeug bei Sonnenuntergang',
 };
 
 export default blogMetaChDe;

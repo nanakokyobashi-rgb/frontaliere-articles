@@ -6100,6 +6100,15 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.casse-pensioni-rendimenti-2025.title': 'Casse pensioni: boom di rendimenti nel 2025',
     'blog.article.casse-pensioni-rendimenti-2025.excerpt': 'Le casse pensioni svizzere archiviano il 2025 con rendimento medio del 6,3%, trainato dalle azioni. Tasso conversione stabile al 5,20% per le rendite future.',
     'blog.article.casse-pensioni-rendimenti-2025.imageAlt': 'Investitore che rivede prospettive di rendita della propria cassa pensione con documenti finanziari e proiezioni.',
+    'blog.article.ospedali-svizzeri-infermieri-fuga-anno.title': 'Ospedali svizzeri: 1.700 infermieri in fuga ogni anno',
+    'blog.article.ospedali-svizzeri-infermieri-fuga-anno.excerpt': 'L\'Obsan rivela che il 75% dei diplomati in infermieristica inizia in ospedale, ma a 40 anni scende al 47%. Il VPOD chiede subito condizioni migliori.',
+    'blog.article.ospedali-svizzeri-infermieri-fuga-anno.imageAlt': 'Vista alpina della Svizzera, simbolo del sistema sanitario nazionale in crisi per carenza di infermieri qualificati',
+    'blog.article.naturalizzazione-lucerna-documenti-timeline.title': 'Naturalizzazione Lucerna: permessi, costi e procedure',
+    'blog.article.naturalizzazione-lucerna-documenti-timeline.excerpt': 'Guida completa alla naturalizzazione ordinaria nel Canton Lucerna: 10 anni di residenza con permesso C, requisiti di integrazione e lingua tedesca B1, tempi 12-24 mesi, tasse cantonali e comunali.',
+    'blog.article.naturalizzazione-lucerna-documenti-timeline.imageAlt': 'Ufficio comunale lucernese con moduli di naturalizzazione e documenti di cittadinanza svizzera su scrivania amministrativa',
+    'blog.article.traffico-aereo-svizzero-cresce.title': 'Traffico aereo svizzero cresce, ma le emissioni salgono',
+    'blog.article.traffico-aereo-svizzero-cresce.excerpt': 'Nel 2025 l\'aviazione civile ha superato i numeri pre-Covid: 1,4 milioni di movimenti (+5%), 60,5 milioni di passeggeri (+4%). Tuttavia, le emissioni CO2 salgono del 3%.',
+    'blog.article.traffico-aereo-svizzero-cresce.imageAlt': 'Vista aerea del paesaggio alpino svizzero con aereo in volo al tramonto',
 };
 
 export default blogMetaChIt;
