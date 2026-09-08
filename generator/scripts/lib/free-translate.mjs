@@ -788,7 +788,10 @@ async function translateWithLibreTranslateSelfHosted(text, sourceLang, targetLan
     }
     const data = await res.json();
     const translated = normalizeBlock(data?.translatedText || '');
-    if (translated && !rejectedAsPassthrough('libreTranslateSelfHosted', q, translated, outcome)) {
+    if (translated && rejectedAsPassthrough('libreTranslateSelfHosted', q, translated, outcome)) {
+      return '';
+    }
+    if (translated) {
       _ltWarmupDone = true;
       return translated;
     }
@@ -1422,6 +1425,9 @@ export async function freeTranslate({ text, sourceLang, targetLang, fieldType = 
       if (!mm || mm.includes('MYMEMORY WARNING')) {
         noteTranslationOutcome(_outcome, 'incomplete');
         return ''; // quota hit mid-chunk, abort
+      }
+      if (rejectedAsPassthrough('myMemory', chunk, mm, _outcome)) {
+        return ''; // an echoed chunk invalidates the whole assembled result
       }
       parts.push(mm);
     }
