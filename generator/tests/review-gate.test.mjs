@@ -68,10 +68,12 @@ sub="$1"; shift
 case "$sub" in
   api)
     p=""
+    jq=""
     while [ $# -gt 0 ]; do
       case "$1" in
         --paginate|--slurp) shift ;;
-        --jq|-H|-f|-F|-X) shift 2 ;;
+        --jq) jq="$2"; shift 2 ;;
+        -H|-f|-F|-X) shift 2 ;;
         *) if [ -z "$p" ]; then p="$1"; fi; shift ;;
       esac
     done
@@ -83,14 +85,32 @@ case "$sub" in
       */compare/*)
         node -e 'const c=require(process.argv[1]); const k=process.argv[2].split("/compare/")[1]; process.stdout.write(JSON.stringify((c.byRange||{})[k]||{files:[]}))' ${JSON.stringify(fixCompare)} "$p" ;;
       */issues/*/comments*) echo '[]' ;;
-      */pulls/*)   cat ${JSON.stringify(fixMeta)} ;;
+      */issues?*) echo '[]' ;;
+      */git/trees/*)
+        node -e 'const fs=require("fs"); const files=fs.readFileSync(process.argv[1],"utf8").split(/\\r?\\n/).filter(Boolean); files.push("generator/scripts/outside.mjs"); process.stdout.write(JSON.stringify({truncated:false,tree:files.map(path=>({type:"blob",path}))}))' ${JSON.stringify(fixFiles)} ;;
+      */pulls/*)
+        if [ "$jq" = ".base.sha" ]; then
+          node -e 'const m=require(process.argv[1]); process.stdout.write((m.base?.sha||"")+"\\n")' ${JSON.stringify(fixMeta)}
+        else
+          cat ${JSON.stringify(fixMeta)}
+        fi ;;
       *) echo '{}' ;;
     esac
     ;;
   pr)
     action="$1"; shift
-    if [ "$action" = "comment" ]; then
+    if [ "$action" = "view" ]; then
+      node -e 'const fs=require("fs"); const files=fs.readFileSync(process.argv[1],"utf8").split(/\\r?\\n/).filter(Boolean); process.stdout.write(JSON.stringify({changedFiles:files.length,files}))' ${JSON.stringify(fixFiles)}
+    elif [ "$action" = "comment" ]; then
       printf 'COMMENT %s\\n' "$*" >> ${JSON.stringify(calls)}
+    fi
+    ;;
+  issue)
+    action="$1"; shift
+    if [ "$action" = "list" ]; then
+      echo '[]'
+    elif [ "$action" = "create" ]; then
+      echo 'https://github.com/nanakokyobashi-rgb/frontaliere-articles/issues/123'
     fi
     ;;
   *) exit 0 ;;
@@ -136,6 +156,33 @@ test('LGTM accanto a un 🔴 Important → il check e\' ROSSO', () => {
     reviews: [botReview(HEAD, '🔴 Important: manca il guard\n\n## LGTM')],
   });
   assert.equal(r.status, 1, `Un 🔴 Important accanto al LGTM deve bloccare.\n${r.stdout}`);
+});
+
+test('Important fuori dal diff → il gate e\' verde e il finding diventa follow-up', () => {
+  const r = runGate({
+    reviews: [botReview(HEAD, [
+      '## Findings (1 Important, 0 Nit)',
+      '`generator/scripts/outside.mjs:10`: 🔴 Important: il controllo condiviso manca.',
+    ].join('\n'))],
+    files: ['generator/scripts/in-scope.mjs'],
+    meta: { base: { sha: 'c'.repeat(40) } },
+  });
+  assert.equal(r.status, 0, `Un finding solo fuori dal diff non deve bloccare.\n${r.stdout}`);
+  assert.match(r.stdout, /follow-up|fuori dal diff/i, r.stdout);
+});
+
+test('Important che inizia con nessuno resta rosso se cita un file nel diff', () => {
+  const r = runGate({
+    reviews: [botReview(HEAD, [
+      '## Findings (Important: 1, 0 Nit)',
+      '`generator/scripts/in-scope.mjs:10`: 🔴 Important: nessuno dei feed viene rigenerato.',
+      '',
+      '## LGTM',
+    ].join('\n'))],
+    files: ['generator/scripts/in-scope.mjs'],
+    meta: { base: { sha: 'c'.repeat(40) } },
+  });
+  assert.equal(r.status, 1, `Un finding in-diff che inizia con nessuno deve bloccare.\n${r.stdout}`);
 });
 
 test('nessuna review del bot e PR che non tocca il workflow di review → ROSSO', () => {

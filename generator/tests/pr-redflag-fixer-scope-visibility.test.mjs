@@ -12,17 +12,19 @@ import { fileURLToPath } from 'node:url';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const workflow = fs.readFileSync(path.join(ROOT, '.github/workflows/pr-redflag-fixer.yml'), 'utf8');
-const preflight = workflow.match(/\n  preflight:\n([\s\S]*?)\n  redflag-fix:\n/)?.[1];
+const preflight = workflow.match(/\n  preflight:\n([\s\S]*?)\n  scope:\n/)?.[1];
+const scope = workflow.match(/\n  scope:\n([\s\S]*?)\n  redflag-fix:\n/)?.[1];
 
 assert.ok(preflight, 'preflight job not found');
 
-test('a human PR with a red Important is not filtered at job level', () => {
+test('the autonomous fixer is limited to bots or fix/* branches in preflight', () => {
   const jobIf = preflight.match(/\n    if: \|\n([\s\S]*?)\n    runs-on:/)?.[1] ?? '';
 
   assert.ok(jobIf, 'job-level if: not found');
   assert.doesNotMatch(jobIf, /github\.event\.pull_request\.user\.type/);
   assert.doesNotMatch(jobIf, /github\.event\.pull_request\.head\.ref/);
   assert.match(preflight, /PR_AUTHOR_TYPE: \$\{\{ github\.event\.pull_request\.user\.type \}\}/);
+  assert.match(preflight, /PR con autore non Bot, branch non/);
   assert.match(
     preflight,
     /if \[ "\$PR_AUTHOR_TYPE" != "Bot" \] && ! printf '%s' "\$HEAD_REF" \| grep -q '\^fix\/'/,
@@ -35,4 +37,12 @@ test('a human PR with a red Important is not filtered at job level', () => {
   const scopeAt = preflight.indexOf('REDFLAG_OUT_OF_SCOPE');
   const branchGuardAt = preflight.indexOf('if ! gh api "repos/$REPO/branches/$HEAD_REF"');
   assert.ok(scopeAt > branchGuardAt, 'scope verdict must follow closed-PR and branch guards');
+});
+
+test('scope job is the shared declassification gate, and errors remain blocking', () => {
+  assert.ok(scope, 'scope job not found');
+  assert.match(scope, /node scripts\/ci\/review-scope\.mjs/);
+  assert.match(scope, /blocking=true/);
+  assert.match(workflow, /needs: \[preflight, scope\]/);
+  assert.match(workflow, /needs\.scope\.outputs\.blocking == 'true'/);
 });

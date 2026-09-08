@@ -63,7 +63,6 @@ jobs:
     # `REVIEWER_BOT_LOGIN_RE`/`_JQ` in `scripts/ci/lib/constants.mjs`, e per i
     # due `--jq` di `tests.yml` (skip-guard `## LGTM` e base incrementale).
     if: |
-      github.event.review.user.type == 'Bot' &&
       (startsWith(github.event.review.user.login, 'claude') ||
        startsWith(github.event.review.user.login, 'frontaliere-automation')) &&
       contains(github.event.review.body, '🔴') &&
@@ -141,9 +140,63 @@ jobs:
           fi
           echo "actionable=true" >> "$GITHUB_OUTPUT"
 
-  redflag-fix:
+  # Lo scope viene valutato dopo il checkout, usando la stessa classificazione
+  # del review-gate. Se tutti i finding Important sono fuori dal diff, la review
+  # ha già coniato una sola issue follow-up e il fixer non deve correggere la PR.
+  # Errori di classificazione sono conservativi: il job di fix resta azionabile.
+  scope:
     needs: preflight
     if: needs.preflight.outputs.actionable == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    outputs:
+      blocking: ${{ steps.classify.outputs.blocking }}
+      error: ${{ steps.classify.outputs.error }}
+    steps:
+      - name: Checkout dello script di classificazione
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 1
+          # Il branch della PR può non contenere ancora il classificatore: il
+          # gate è codice del repository base, non materiale da riparare.
+          ref: ${{ github.event.pull_request.base.ref }}
+
+      - name: Classifica finding fuori diff e conia follow-up
+        id: classify
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          REVIEW_BODY: ${{ github.event.review.body }}
+        run: |
+          set -uo pipefail
+          set +e
+          output=$(node scripts/ci/review-scope.mjs 2>&1)
+          status=$?
+          printf '%s\n' "$output"
+          if [ "$status" -ne 0 ]; then
+            echo "::warning::review-scope non verificabile: il fixer resta conservativamente azionabile."
+            echo "blocking=true" >> "$GITHUB_OUTPUT"
+            echo "error=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          summary=$(printf '%s\n' "$output" | tail -n 1)
+          blocking=$(printf '%s' "$summary" | jq -r '.blocking' 2>/dev/null || echo true)
+          if [ "$blocking" != "true" ] && [ "$blocking" != "false" ]; then
+            echo "::warning::output review-scope inatteso: il fixer resta conservativamente azionabile."
+            blocking=true
+            echo "error=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "error=false" >> "$GITHUB_OUTPUT"
+          fi
+          echo "blocking=$blocking" >> "$GITHUB_OUTPUT"
+
+  redflag-fix:
+    needs: [preflight, scope]
+    if: >-
+      needs.preflight.outputs.actionable == 'true' &&
+      (needs.scope.outputs.blocking == 'true' || needs.scope.outputs.error == 'true')
     runs-on: ubuntu-latest
     # 30→40 (2026-07-17): headroom per il cap turni alzato 45→60.
     timeout-minutes: 40
@@ -516,6 +569,7 @@ jobs:
             - Commit con identity canonica già configurata (Valerie Linc <valerielinc@gmail.com>), messaggio conventional, nessuna email non-canonica in coda.
             - Push sullo stesso branch: `git push origin HEAD:${{ github.event.pull_request.head.ref }}`. Il remote `origin` è autenticato con il token passato a questa action come `github_token` (il PAT, quando disponibile): l'action riscrive `origin` all'avvio, quindi vale QUEL token, non quello configurato dagli step precedenti. Non è il GITHUB_TOKEN → il push ri-attiva la review dentro tests.yml (re-review), e i file sotto `.github/workflows/**` sono pushabili. Se il push fallisce per scope/auth → prima di arrenderti verifica `git remote -v` (deve mostrare `x-access-token:***@github.com`); se dice `without workflows permission`, il PAT non è arrivato: documenta in un commento e TERMINA.
             - Aggiorna il body della PR (`gh pr edit $PR_NUMBER --body`) mantenendo `## Implementato` (aggiungi cosa hai fixato) + `## Non implementato (ancora)`.
+            - SCOPE: il blocco **Changed file list** è il confine della PR. Applica solo i finding `🔴 Important` che citano file presenti in quella lista; i finding su file fuori dal diff sono già stati coniati nel follow-up e non vanno fissati qui né trascinati nella PR.
 
             **Constraint:**
             - SOLO i 🔴 della review corrente. Non rifare l'intera PR, non drive-by.
