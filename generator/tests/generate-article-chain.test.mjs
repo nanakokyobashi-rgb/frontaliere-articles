@@ -632,7 +632,12 @@ test('il watchdog non sopravvive allo step, e non lo fa fallire da solo', () => 
   assert.match(gen, /kill_tree KILL "\$watch_pid"/, 'il watchdog va ucciso con il tentativo, con tutto il suo albero');
   // Il verdetto sull'esito resta dove stava: il watchdog alza un flag, non esce
   // mai per conto proprio.
-  const watchdogBody = sliceBetween(gen, 'stall_watchdog() {', 'watch_pid=""');
+  const watchdogBody = sliceBetween(
+    gen,
+    'stall_watchdog() {',
+    'watch_pid=""\n# Il watchdog non sopravvive',
+    { label: 'watchdog body' },
+  );
   assert.ok(!/\bexit [0-9]/.test(watchdogBody), 'il watchdog non deve poter terminare lo step da solo');
 });
 
@@ -691,7 +696,7 @@ test('il trigger push chaina ancora solo su content/**, mai sul bookkeeping', ()
   // i job, e l'assert negativo qui sotto avrebbe letto anche il loro corpo:
   // un test che passa o fallisce per ciò che sta in un job non è più il test del
   // blocco `on:`. `permissions:` è il primo top-level dopo `on:` in questo file.
-  const onBlock = ACTIVE.slice(ACTIVE.indexOf('on:'), ACTIVE.indexOf('\npermissions:'));
+  const onBlock = sliceBetween(ACTIVE, 'on:\n  schedule:', '\npermissions:', { label: 'trigger paths' });
   assert.match(onBlock, /- 'content\/\*\*'/);
   assert.ok(
     !/topic-candidates|data\/\*\*|- 'data\//.test(onBlock),

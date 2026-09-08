@@ -115,6 +115,47 @@ export const MIRROR_LOCKED_MODES = new Set(['identical']);
 
 const MANIFEST_PATH = fileURLToPath(new URL('./loop-sync-manifest.json', import.meta.url));
 
+/** Marker scritto nel commento quando una consegna lascia la issue parcheggiata. */
+export const PARK_MARKER = '<!-- HANDOFF_PARKED -->';
+
+/**
+ * Legge il manifest una volta e costruisce tutte le viste usate dalla decisione.
+ *
+ * `sitePath` è una traduzione, non un alias innocuo: se punta a un altro path
+ * del corpus, due voci finirebbero sullo stesso bersaglio del sito e una
+ * consegna potrebbe chiudere la issue sbagliata. Il manifest è quindi invalido
+ * e la decisione deve fermarsi, non scegliere in base all'ordine delle voci.
+ */
+export function readManifestSnapshot(manifestPath = MANIFEST_PATH) {
+  const man = JSON.parse(readFileSync(manifestPath, 'utf8'));
+  const files = Array.isArray(man?.files) ? man.files.filter((f) => f?.path) : [];
+  const corpusPaths = new Set(files.map((f) => f.path));
+  for (const f of files) {
+    const sitePath = f.sitePath || f.path;
+    if (sitePath !== f.path && corpusPaths.has(sitePath)) {
+      throw new Error(`manifest sitePath collision: ${f.path} -> ${sitePath}`);
+    }
+  }
+
+  const absent = new Set();
+  const locked = new Map();
+  const names = new Map();
+  const stranded = new Set();
+  for (const f of files) {
+    const sitePath = f.sitePath || f.path;
+    if (SITE_ABSENT_MODES.has(f.mode)) continue;
+    names.set(f.path, sitePath);
+    if (MIRROR_LOCKED_MODES.has(f.mode)) {
+      locked.set(f.path, sitePath);
+      if (descentBlock(f)) stranded.add(f.path);
+    }
+  }
+  for (const f of files) {
+    if (SITE_ABSENT_MODES.has(f.mode)) absent.add(f.path);
+  }
+  return { absent, locked, names, stranded };
+}
+
 /**
  * I `mode` che dichiarano «questo file sul sito NON esiste». Un path citato con
  * uno di questi non e' mai spedibile e non e' mai residuo: e' evidenza.
@@ -149,12 +190,7 @@ export const SITE_ABSENT_MODES = new Set(['corpus-only', 'corpus-only-pending'])
  */
 export function siteAbsentPaths(manifestPath = MANIFEST_PATH) {
   try {
-    const man = JSON.parse(readFileSync(manifestPath, 'utf8'));
-    const out = new Set();
-    for (const f of man?.files || []) {
-      if (SITE_ABSENT_MODES.has(f?.mode) && f?.path) out.add(f.path);
-    }
-    return out;
+    return readManifestSnapshot(manifestPath).absent;
   } catch {
     return new Set();
   }
@@ -176,13 +212,7 @@ export function siteAbsentPaths(manifestPath = MANIFEST_PATH) {
  */
 export function mirrorLockedPaths(manifestPath = MANIFEST_PATH) {
   try {
-    const man = JSON.parse(readFileSync(manifestPath, 'utf8'));
-    const out = new Map();
-    for (const f of man?.files || []) {
-      if (!MIRROR_LOCKED_MODES.has(f?.mode) || !f?.path) continue;
-      out.set(f.path, f.sitePath || f.path);
-    }
-    return out;
+    return readManifestSnapshot(manifestPath).locked;
   } catch {
     // Manifest illeggibile → mappa vuota: nessun `no-root-cause` viene
     // spedito. Il fallimento sicuro e' non consegnare, non consegnare a caso.
@@ -242,13 +272,7 @@ export function descentBlock(entry) {
  */
 export function strandedTwinPaths(manifestPath = MANIFEST_PATH) {
   try {
-    const man = JSON.parse(readFileSync(manifestPath, 'utf8'));
-    const out = new Set();
-    for (const f of man?.files || []) {
-      if (!MIRROR_LOCKED_MODES.has(f?.mode) || !f?.path) continue;
-      if (descentBlock(f)) out.add(f.path);
-    }
-    return out;
+    return readManifestSnapshot(manifestPath).stranded;
   } catch {
     return new Set();
   }
@@ -273,13 +297,7 @@ export function strandedTwinPaths(manifestPath = MANIFEST_PATH) {
  */
 export function sitePathMap(manifestPath = MANIFEST_PATH) {
   try {
-    const man = JSON.parse(readFileSync(manifestPath, 'utf8'));
-    const out = new Map();
-    for (const f of man?.files || []) {
-      if (!f?.path || SITE_ABSENT_MODES.has(f?.mode)) continue;
-      out.set(f.path, f.sitePath || f.path);
-    }
-    return out;
+    return readManifestSnapshot(manifestPath).names;
   } catch {
     return new Map();
   }
@@ -369,7 +387,7 @@ const CLAIM_WINDOW = 240;
  */
 export function citedAsMirrorBlocked(body, path) {
   const text = String(body || '');
-  const needle = '`' + path;
+  const needle = `\`${path}\``;
   for (let i = text.indexOf(needle); i !== -1; i = text.indexOf(needle, i + 1)) {
     const window = text.slice(Math.max(0, i - CLAIM_WINDOW), i + needle.length + CLAIM_WINDOW);
     if (MIRROR_CLAIM_RE.test(window)) return true;
@@ -424,7 +442,17 @@ export function citedAsMirrorBlocked(body, path) {
  *
  * @returns {{handoff: boolean, paths: string[], residual: string[], close: boolean, reason: string}}
  */
-export function handoffDecision({ verdict, body, lockedPaths, siteAbsent, siteNames, stranded, pinnedEntry } = {}) {
+export function handoffDecision({
+  verdict,
+  body,
+  lockedPaths,
+  siteAbsent,
+  siteNames,
+  stranded,
+  pinnedEntry,
+  manifestPath = MANIFEST_PATH,
+  manifestSnapshot,
+} = {}) {
   if (!verdict || !HANDOFF_VERDICTS.has(verdict)) {
     return { handoff: false, paths: [], residual: [], close: false, reason: `verdetto non instradabile: ${verdict ?? 'nessuno'}` };
   }
@@ -432,14 +460,28 @@ export function handoffDecision({ verdict, body, lockedPaths, siteAbsent, siteNa
   if (!paths.length) {
     return { handoff: false, paths: [], residual: [], close: false, reason: 'nessun path citato: la diagnosi non è azionabile così com\'è' };
   }
-  const absent = siteAbsent ?? siteAbsentPaths();
-  const locked = lockedPaths ?? mirrorLockedPaths();
-  const names = siteNames ?? sitePathMap();
+  let snapshot = manifestSnapshot;
+  if (!snapshot && (lockedPaths === undefined || siteAbsent === undefined || siteNames === undefined || stranded === undefined)) {
+    try {
+      snapshot = readManifestSnapshot(manifestPath);
+    } catch (error) {
+      return {
+        handoff: false,
+        paths: [],
+        residual: [],
+        close: false,
+        reason: `manifest non utilizzabile: ${String(error?.message || error)}`,
+      };
+    }
+  }
+  const absent = siteAbsent ?? snapshot?.absent ?? new Set();
+  const locked = lockedPaths ?? snapshot?.locked ?? new Map();
+  const names = siteNames ?? snapshot?.names ?? new Map();
   // `identical` non implica «trasportato» (#972 item 4): questi sono i gemelli
   // che nessun canale porta giu'. Non cambiano l'instradamento — la diagnosi va
   // consegnata comunque, e' di la' che si scrive la fix — ma tolgono alla
   // consegna la facolta' di chiudere qui.
-  const stuckSet = stranded ?? strandedTwinPaths();
+  const stuckSet = stranded ?? snapshot?.stranded ?? new Set();
   // UN solo idioma di traduzione per i due rami: «come si chiama di la'» e' una
   // domanda sola, e la risposta viene dal manifest INTERO (`sitePathMap`), non
   // dai soli `identical`. `locked` resta consultata per prima perche' i test
@@ -500,6 +542,16 @@ export function handoffDecision({ verdict, body, lockedPaths, siteAbsent, siteNa
   // da cambiare vive di la'), ma l'elenco spedito passa dal manifest come
   // nell'altro ramo: via l'evidenza, e forma del sito per i gemelli.
   const shippable = paths.filter((p) => !absent.has(p));
+  const uncorroborated = shippable.filter((p) => !citedAsMirrorBlocked(body, p));
+  if (uncorroborated.length) {
+    return {
+      handoff: false,
+      paths: [],
+      residual: [],
+      close: false,
+      reason: `blocked-* senza corroborazione del mirror per ${uncorroborated.join(', ')}`,
+    };
+  }
   const sitePaths = [...new Set(shippable.map(siteOf))];
   if (!sitePaths.length) {
     return {
@@ -666,9 +718,10 @@ export function handoffTitle(issueNumber, corpusTitle) {
  *
  * @returns {Array<{kind: 'state'|'comment', what: string, args: string[]}>}
  */
-export function originWriteSteps({ issue, repo, close, comment } = {}) {
+export function originWriteSteps({ issue, repo, close, comment, issueState } = {}) {
   const num = String(issue);
   const repoArgs = repo ? ['--repo', repo] : [];
+  if (close && String(issueState || '').toUpperCase() === 'CLOSED') return [];
   const steps = close
     ? [{ kind: 'state', what: 'chiusura', args: ['issue', 'close', num, ...repoArgs, '--reason', 'completed'] }]
     : [
@@ -698,9 +751,10 @@ function gh(args, { token, json = true } = {}) {
  * rendeva terminale il primo errore, e la issue del sito a quel punto esiste
  * già — quindi non c'è nessun giro successivo che ripassi di qui.
  */
-function runOriginSteps(steps) {
+function runOriginSteps(steps, { issueState } = {}) {
   let failed = 0;
   for (const s of steps) {
+    if (s.what === 'chiusura' && String(issueState || '').toUpperCase() === 'CLOSED') continue;
     try {
       gh(s.args, { json: false });
     } catch (e) {
@@ -735,6 +789,14 @@ export function bodyCitesOrigin(body, origin) {
 
 export function selectDeliveredIssue(entries, origin) {
   return (Array.isArray(entries) ? entries : []).find((entry) => bodyCitesOrigin(entry?.body, origin)) || null;
+}
+
+/** True se il commento di parcheggio è già stato scritto su questa issue. */
+export function hasParkMarker(commentsOrBody) {
+  const values = Array.isArray(commentsOrBody)
+    ? commentsOrBody.map((c) => c?.body)
+    : [commentsOrBody];
+  return values.some((value) => String(value || '').includes(PARK_MARKER));
 }
 
 function deliveredUrlFor(token) {
@@ -795,7 +857,7 @@ function preflight() {
   if (!REPO || !ISSUE) { console.log('handoff-preflight: REPO o ISSUE_NUMBER assenti → procedo.'); return setPreflightOutput(false); }
   const read = readDecision();
   if (!read) return setPreflightOutput(false);
-  const { d } = read;
+  const { data, d } = read;
   // Nessuna rete se la decisione non è instradabile: il caso normale è questo.
   const delivered = d.handoff ? deliveredUrlFor(process.env.SITE_TOKEN || '') : null;
   const r = redeliveryDecision({ decision: d, deliveredIssue: delivered });
@@ -804,7 +866,15 @@ function preflight() {
     return setPreflightOutput(false);
   }
   console.log(`handoff-preflight: #${ISSUE} corto-circuitata — ${r.reason}. Zero Claude: la run non avrebbe consegnato niente.`);
-  if (!DRY) runOriginSteps(originWriteSteps({ issue: ISSUE, repo: REPO, close: r.close }));
+  const alreadyParked = !r.close && hasParkMarker(data.comments);
+  if (!DRY && !alreadyParked) {
+    runOriginSteps(originWriteSteps({
+      issue: ISSUE,
+      repo: REPO,
+      close: r.close,
+      issueState: data.state,
+    }), { issueState: data.state });
+  }
   if (process.env.GITHUB_STEP_SUMMARY) {
     appendFileSync(
       process.env.GITHUB_STEP_SUMMARY,
@@ -824,26 +894,6 @@ function main() {
   if (!d.handoff) { console.log(`handoff-to-site: #${ISSUE} non instradata — ${d.reason}.`); return; }
 
   const origin = originUrl();
-  // Dedup PRIMA di aprire.
-  const existing = deliveredUrlFor(token);
-  if (existing?.url) {
-    console.log(`handoff-to-site: #${ISSUE} già consegnata → ${existing.url}. Niente doppioni.`);
-    // Ma lo STATO sì: se siamo di nuovo qui, il drainer ha ri-promosso la
-    // issue, cioè le label di routing ci sono ancora — la transizione del
-    // giro che ha consegnato non è andata a fondo. Questo è il solo punto
-    // in cui quel mezzo-stato è osservabile, e prima ci si usciva con un
-    // `return` che lo rendeva definitivo. I passi `state` sono idempotenti;
-    // il commento no, e infatti non viene ripetuto.
-    //
-    // Dal #972 item 5 questo è il ramo di RIPIEGO, non più quello normale: il
-    // pre-flight lo raggiunge prima di Claude quando non resta lavoro qui. Ci
-    // si arriva ancora quando il residuo c'è (la run è servita) o quando il
-    // pre-flight non ha potuto leggere — e allora questo resta l'unico posto
-    // che chiude la transizione.
-    runOriginSteps(originWriteSteps({ issue: ISSUE, repo: REPO, close: d.close }));
-    return;
-  }
-
   const body = [
     `Consegnata dal ciclo di \`${REPO}\` (post-step deterministico di \`issue-fix\`, zero-Claude).`,
     '',
@@ -865,6 +915,25 @@ function main() {
     console.log(`[${why}] aprirei su ${SITE_REPO}: "${handoffTitle(ISSUE, data.title)}"`);
     console.log(`[${why}] path: ${d.paths.join(', ')}`);
     if (!token) console.log('::warning::handoff-to-site: SITE_TOKEN assente → la diagnosi resta qui e nessuno la porta di là.');
+    return;
+  }
+
+  // Dedup DOPO il guard DRY/token: con `--dry-run` e un token disponibile la
+  // ricerca può leggere il sito, ma non deve mai riapplicare label o chiudere
+  // la issue d'origine.
+  const existing = deliveredUrlFor(token);
+  if (existing?.url) {
+    console.log(`handoff-to-site: #${ISSUE} già consegnata → ${existing.url}. Niente doppioni.`);
+    // La transizione di stato del giro precedente può essere rimasta a metà;
+    // il commento invece non va duplicato. Se il marker dice che la issue era
+    // già parcheggiata, una riapertura manuale non autorizza a riparcheggiarla.
+    if (!d.close && hasParkMarker(data.comments)) return;
+    runOriginSteps(originWriteSteps({
+      issue: ISSUE,
+      repo: REPO,
+      close: d.close,
+      issueState: data.state,
+    }), { issueState: data.state });
     return;
   }
 
@@ -899,14 +968,15 @@ function main() {
   const tail = d.close
     ? 'Chiudo qui: quando la fix scenderà col mirror, la condizione che ha aperto questa issue non ci sarà più.'
     : residual.length
-      ? `**Non la chiudo**: la diagnosi cita anche ${residual.map((p) => `\`${p}\``).join(', ')}, che nessun canale di discesa porta giù — o non è \`identical\` (lavoro di questo repo), o è un gemello che \`transport-identical-twins.mjs\` rifiuta per sempre e la cui discesa è una copia a mano. In entrambi i casi questa issue ne resta l'unico portatore. La parcheggio in \`needs-human\` togliendo le label di routing, così non ri-paga run mentre aspetta.`
-      : `**Non la chiudo**: il verdetto è \`no-root-cause\`, che copre anche il vicolo cieco vero — «consegnata» non implica «risolta», e una chiusura sbagliata farebbe evaporare l'unico portatore della diagnosi. La parcheggio in \`needs-human\` togliendo le label di routing: non ri-paga run, e \`needs-human-sweep.yml\` è la porta di rientro.`;
+      ? `${PARK_MARKER}\n**Non la chiudo**: la diagnosi cita anche ${residual.map((p) => `\`${p}\``).join(', ')}, che nessun canale di discesa porta giù — o non è \`identical\` (lavoro di questo repo), o è un gemello che \`transport-identical-twins.mjs\` rifiuta per sempre e la cui discesa è una copia a mano. In entrambi i casi questa issue ne resta l'unico portatore. La parcheggio in \`needs-human\` togliendo le label di routing, così non ri-paga run mentre aspetta.`
+      : `${PARK_MARKER}\n**Non la chiudo**: il verdetto è \`no-root-cause\`, che copre anche il vicolo cieco vero — «consegnata» non implica «risolta», e una chiusura sbagliata farebbe evaporare l'unico portatore della diagnosi. La parcheggio in \`needs-human\` togliendo le label di routing: non ri-paga run, e \`needs-human-sweep.yml\` è la porta di rientro.`;
   runOriginSteps(originWriteSteps({
     issue: ISSUE,
     repo: REPO,
     close: d.close,
+    issueState: data.state,
     comment: `📤 **Consegnata al sito**: ${url}\n\nIl fix vive in \`${SITE_REPO}\` e il ciclo di là ora ce l'ha, con la diagnosi di questo run riportata integralmente. ${tail}`,
-  }));
+  }), { issueState: data.state });
 }
 
 if (process.argv[1] && process.argv[1].endsWith('handoff-to-site.mjs')) {

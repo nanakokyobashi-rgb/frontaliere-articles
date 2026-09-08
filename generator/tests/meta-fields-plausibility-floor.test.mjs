@@ -234,9 +234,9 @@ test('il floor NON e\' un rastrello sui meta tradotti: pochi falsi positivi', ()
 
 test('translateArticle applica il floor ai meta tradotti senza cadere sul fallback IT', () => {
   const src = fs.readFileSync(path.join(REPO, 'generator/scripts/create-article.mjs'), 'utf8');
-  const loop = src.slice(
-    src.indexOf("for (const field of ['title', 'excerpt', 'body1', 'body2', 'body3'])"),
-  );
+  const loopStart = src.indexOf('  // Validate translated content fields.');
+  assert.notEqual(loopStart, -1, 'il punto di validazione delle traduzioni non e\' piu\' riconoscibile');
+  const loop = src.slice(loopStart);
   const corpo = loop.slice(0, loop.indexOf('detectTruncation(itValue'));
   assert.ok(
     /metaFieldPlausibilityMiss\(field, valoreTradotto\)/.test(corpo),

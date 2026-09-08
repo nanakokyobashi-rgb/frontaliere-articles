@@ -56,7 +56,7 @@ test('sliceBetween pretende entrambe le ancore, nell\'ordine giusto', () => {
   assert.throws(() => sliceBetween(SRC, 'charlie', 'alfa'), /dopo l'offset/);
 });
 
-test('l\'ancora finale ripetuta e\' quella che segue l\'iniziale, non la prima del file', () => {
+test('sliceBetween rifiuta un\'ancora ripetuta invece di scegliere in silenzio', () => {
   const src = 'FINE\nINIZIO\nx\nFINE\n';
-  assert.equal(sliceBetween(src, 'INIZIO', 'FINE'), 'INIZIO\nx\n');
+  assert.throws(() => sliceBetween(src, 'INIZIO', 'FINE'), /ambigua/);
 });

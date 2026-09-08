@@ -353,6 +353,16 @@ test('un registro sotto il floor dei 100 articoli viene rifiutato', () => {
   assert.ok(errors.some((e) => e.includes('42')), errors.join('; '));
 });
 
+test('un registro con id duplicati o mancanti viene rifiutato prima del confronto per insieme', () => {
+  const s = goodSurface();
+  s.articles = [{ id: 'dup' }, { id: 'dup' }, { id: undefined }];
+  s.manifest.counts.articles = 3;
+  s.slugs.blog = { dup: { it: 'dup' } };
+  const errors = validateAnnouncedSurface(s).join('\n');
+  assert.match(errors, /duplicat/i);
+  assert.match(errors, /undefined|mancant/i);
+});
+
 test('manifest senza counts viene rifiutato subito', () => {
   const errors = validateAnnouncedSurface({ manifest: {}, slugs: {}, articles: [], swissArticles: [] });
   assert.equal(errors.length, 1);

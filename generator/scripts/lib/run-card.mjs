@@ -92,7 +92,7 @@ export const RUN_CARD_INSTRUMENTED_SINCE = '2026-09-05T11:35:14Z';
  * esito perso.
  *
  * @param {any} report il `RUN_REPORT` di `create-article.mjs`
- * @returns {{schema:string,runId:string,section:string|null,status:string,endedAt:string|null,rebracket:{calls:number,viaFallbackUnsat:number},quotaDeferral:object|null}}
+ * @returns {{schema:string,runId:string,section:string|null,status:string,endedAt:string|null,rebracket:{calls:number,viaFallbackUnsat:number},quotaDeferral:object|null,promptFloor:object|null}}
  */
 export function buildRunCard(report) {
   const r = (report && typeof report === 'object') ? report : {};
@@ -110,6 +110,9 @@ export function buildRunCard(report) {
     },
     quotaDeferral: (rare.quotaDeferral && typeof rare.quotaDeferral === 'object')
       ? rare.quotaDeferral
+      : null,
+    promptFloor: (rare.promptFloor && typeof rare.promptFloor === 'object')
+      ? rare.promptFloor
       : null,
   };
 }
@@ -243,6 +246,8 @@ export function summariseRunCards(cards) {
     // dalla card per costruzione: il veto esce sopra il punto in cui la card
     // veniva scritta.
     inputCapVetoed: 0,
+    promptFloorIrreducible: 0,
+    marginDecided: 0,
     shares: [],
     // #832 item 2 — «il fenomeno c'e'?» e «su quante la soglia taglia?».
     runsWithEchoes: 0,
@@ -251,11 +256,20 @@ export function summariseRunCards(cards) {
     nearMajorityTie: 0,
     cascadesWithoutTally: 0,
     samples: [],
+    promptFloorSamples: [],
   };
   const num = (v) => (Number.isFinite(Number(v)) ? Number(v) : null);
   for (const c of list) {
     if (!c || typeof c !== 'object') continue;
     if (c.schema !== RUN_CARD_SCHEMA) { out.unknownSchema += 1; continue; }
+    if (c.promptFloor?.irreducible === true) {
+      out.promptFloorIrreducible += 1;
+      out.promptFloorSamples.push({
+        runId: c.runId,
+        section: c.section,
+        promptFloor: c.promptFloor,
+      });
+    }
     const rb = c.rebracket || {};
     out.rebracketCalls += Number(rb.calls) || 0;
     out.rebracketViaFallbackUnsat += Number(rb.viaFallbackUnsat) || 0;
@@ -265,6 +279,10 @@ export function summariseRunCards(cards) {
     if (qd.verdict === true) out.deferralAccepted += 1;
     if (qd.inputCapVeto === true) out.inputCapVetoed += 1;
     const share = qd.share && typeof qd.share === 'object' ? qd.share : {};
+    const inputCapDecision = qd.inputCapDecision && typeof qd.inputCapDecision === 'object'
+      ? qd.inputCapDecision
+      : {};
+    if (qd.inputCapVeto === true && inputCapDecision.decidedBy === 'margin') out.marginDecided += 1;
     if (Number.isFinite(Number(share.share))) out.shares.push(Number(share.share));
     // Gli echi DICHIARATI dal produttore: rispondono a «il fenomeno c'e'».
     const b = qd.breakdown && typeof qd.breakdown === 'object' ? qd.breakdown : {};
@@ -292,7 +310,9 @@ export function summariseRunCards(cards) {
     // rimasta una riga indipendente, e `transientMajorityVerdict` esce dal
     // pavimento senza mai arrivare al confronto — contarla come «pareggio»
     // gonfierebbe il numeratore con le cascate su cui la soglia non decide.
-    if (netTransient + netPersistent > 0 && Math.abs(netTransient - netPersistent) <= 1) {
+    const votedTransient = num(inputCapDecision.votedTransient ?? share.votedTransient) ?? netTransient;
+    const votedPersistent = num(inputCapDecision.persistent ?? share.persistent) ?? netPersistent;
+    if (votedTransient + votedPersistent > 0 && Math.abs(votedTransient - votedPersistent) <= 1) {
       out.nearMajorityTie += 1;
     }
     if (echoDecl > 0 || netEchoes > 0) {
@@ -304,6 +324,8 @@ export function summariseRunCards(cards) {
         remaining: netTotal,
         netTransient,
         netPersistent,
+        promptFloor: c.promptFloor?.irreducible === true ? c.promptFloor : null,
+        decidedBy: inputCapDecision.decidedBy || null,
         grossTotal,
         verdict: qd.verdict === true,
         inputCapVeto: qd.inputCapVeto === true,

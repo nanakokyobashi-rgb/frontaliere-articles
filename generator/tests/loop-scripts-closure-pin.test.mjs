@@ -30,27 +30,16 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { importSpecifiers } from './lib/relative-import-specifiers.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
-const GUARD = path.join(HERE, 'loop-scripts-closure.test.mjs');
+const GUARDS = [
+  path.join(HERE, 'loop-scripts-closure.test.mjs'),
+  path.join(HERE, 'import-closure.test.mjs'),
+];
+const specifiers = importSpecifiers;
 
-/** La regex vera del guard, estratta dal suo sorgente. */
-function guardImportRe() {
-  const src = fs.readFileSync(GUARD, 'utf8');
-  const m = src.match(/^const IMPORT_RE = (\/.*\/[a-z]*);$/m);
-  assert.ok(
-    m,
-    'IMPORT_RE non trovata nel sorgente del guard: se è stata rinominata o spostata, aggiorna questo pin',
-  );
-  const lit = m[1];
-  const lastSlash = lit.lastIndexOf('/');
-  return new RegExp(lit.slice(1, lastSlash), lit.slice(lastSlash + 1));
-}
-
-/** Stessa estrazione di `importSpecifiers` nel guard: gruppo 2 = specificatore. */
-const specifiers = (src) => [...src.matchAll(guardImportRe())].map((mm) => mm[2]);
-
-test("la regex del guard vede l'import braced su più righe (la cecità riparata)", () => {
+test("il guard vede l'import braced su più righe (la cecità riparata)", () => {
   const src = [
     'import {',
     '  decideReopen,',
@@ -61,7 +50,7 @@ test("la regex del guard vede l'import braced su più righe (la cecità riparata
   assert.deepEqual(specifiers(src), ['./lib/reopen-breaker.mjs']);
 });
 
-test('la regex del guard non scavalca la fine di uno statement per agganciare il successivo', () => {
+test('il guard non scavalca la fine di uno statement per agganciare il successivo', () => {
   // Il divieto di apici e `;` nella classe negata serve a questo: senza, il
   // match non greedy potrebbe attraversare `from './a.mjs';` e agganciare la
   // stringa dell'import dopo, contando UN import dove ce ne sono due.
@@ -82,7 +71,7 @@ test('il side-effect import senza from resta coperto', () => {
   assert.deepEqual(specifiers(src), ['./setup.mjs']);
 });
 
-test("la regex del guard vede l'import DINAMICO, che non è mai a inizio riga", () => {
+test("il guard vede l'import DINAMICO, che non è mai a inizio riga", () => {
   // #1030: `await import('./x.mjs')` sta a metà di un'espressione, quindi
   // l'ancora `^[ \t]*` lo rendeva invisibile. Tre offender vivi lo usavano sul
   // path caldo (`article-topic-selector.mjs` → `./ai-models.mjs`,
@@ -91,6 +80,24 @@ test("la regex del guard vede l'import DINAMICO, che non è mai a inizio riga", 
   // quei moduli lasciava il guard verde e rompeva la generazione a runtime.
   const src = "const m = await import('./x.mjs');\n";
   assert.deepEqual(specifiers(src), ['./x.mjs']);
+});
+
+test("il guard vede tutti gli import dinamici nella stessa espressione", () => {
+  const src = "await Promise.all([import('./a.mjs'), import('./b.mjs')]);\n";
+  assert.deepEqual(specifiers(src), ['./a.mjs', './b.mjs']);
+});
+
+test("un commento inline non apre un prefisso di import dinamico", () => {
+  const src = "const x = /* import('./not-a-module.mjs') */ true;\n";
+  assert.deepEqual(specifiers(src), []);
+});
+
+test("un import dinamico su una continuazione con `*` resta codice, non JSDoc", () => {
+  assert.deepEqual(specifiers("const x =\n  * (await import('./valid.mjs'));\n"), ['./valid.mjs']);
+});
+
+test('registry.import e un import dinamico in JSDoc non sono dipendenze', () => {
+  assert.deepEqual(specifiers("registry.import('./registry.mjs');\n/**\n * await import('./jsdoc.mjs')\n */\n"), []);
 });
 
 test("l'import dinamico DENTRO una stringa non è una dipendenza", () => {
@@ -139,11 +146,8 @@ test('`export default` di una stringa non è uno specificatore', () => {
 });
 
 test('le due copie della clausola non divergono', () => {
-  // #894 ha stretto alcune copie e non altre, ed è così che questa classe di
-  // bug è nata. Finché l'estrattore condiviso di #1029 non atterra, il legame
-  // fra le copie è coperto da questo test (AGENTS.md #6).
-  const twin = fs.readFileSync(path.join(HERE, 'import-closure.test.mjs'), 'utf8');
-  const m = twin.match(/^const SPECIFIER =\n\s*(\/.*\/[a-z]*);$/m);
-  assert.ok(m, 'SPECIFIER non trovata in import-closure.test.mjs: se è stata rinominata, aggiorna questo pin');
-  assert.equal(m[1], guardImportRe().toString());
+  for (const file of GUARDS) {
+    const src = fs.readFileSync(file, 'utf8');
+    assert.match(src, /import \{ importSpecifiers \} from '\.\/lib\/relative-import-specifiers\.mjs'/);
+  }
 });

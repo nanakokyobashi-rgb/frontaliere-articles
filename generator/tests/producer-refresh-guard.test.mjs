@@ -100,6 +100,7 @@ function makeHarness() {
       sanitizeText: (s) => s,
       reportStrippedControlChars: () => {},
       sanitizePromptPlaceholders,
+      assertArticlePassesFactualityGates: () => {},
     },
   };
 }
@@ -166,6 +167,7 @@ describe('refreshBodyFiles — la guardia sui segnaposto gira in processo, non s
       LOCALES,
       REPO_ROOT: '/fake/repo/root',
       sanitizePromptPlaceholders,
+      assertArticlePassesFactualityGates: () => {},
       refreshDescriptiveTexts: (...args) => {
         calls.push(args);
         return { changed: false, touched: [] };

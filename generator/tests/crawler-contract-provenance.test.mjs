@@ -34,7 +34,9 @@ import {
   SITE_LOGIC_DIR,
   SITE_LOGIC_DIR_FALLBACKS,
   evaluateProvenance,
+  isLogicSource,
   planProvenanceChecks,
+  resolveSiteCandidate,
   siteGeneratorPath,
   siteLogicDirs,
 } from '../../scripts/ci/verify-crawler-contract-provenance.mjs';
@@ -216,27 +218,113 @@ test('il manifest registra il verificatore: `scripts/ci` è un root censito', ()
  * assunta, il report nomina il file davvero letto, e 24 assenze in blocco
  * accusano la coordinata, non il contratto.
  */
-test('la directory della logica si prova, e un override esplicito si crede', () => {
+test('la directory della logica osservata si usa, e un override esplicito si crede', () => {
   const dirs = siteLogicDirs({});
   assert.deepEqual(dirs, [SITE_LOGIC_DIR, ...SITE_LOGIC_DIR_FALLBACKS]);
-  assert.ok(dirs.length > 1, 'una sola candidata è di nuovo una coordinata inventata');
+  assert.deepEqual(SITE_LOGIC_DIR_FALLBACKS, []);
+  assert.deepEqual(dirs, ['.github/workflows']);
   // Un override è una dichiarazione: niente tentativi alle spalle di chi l'ha scritto.
   assert.deepEqual(siteLogicDirs({ SITE_LOGIC_DIR: '.github/logic/' }), ['.github/logic']);
 });
 
-test('solo il `sourceSha256` ha candidate multiple: il dichiarato non si indovina', () => {
+test('il `sourceSha256` usa solo la directory osservata', () => {
   const checks = planProvenanceChecks(fixtureContract, fixtureManifest);
   const source = checks.find((c) => c.field.endsWith('#sourceSha256'));
   assert.deepEqual(
     source.sitePathCandidates,
     siteLogicDirs({}).map((d) => `${d}/crawler-group-01-logic.yml`),
   );
+  assert.equal(source.sitePathCandidates.length, 1);
   for (const c of checks.filter((c) => !c.field.endsWith('#sourceSha256'))) {
     assert.deepEqual(c.sitePathCandidates, [c.sitePath], c.field);
   }
 });
 
-test('la logica trovata in una directory diversa è `verified`, e il report nomina il path letto', () => {
+test('un source logic richiede la firma strutturale di un reusable workflow', () => {
+  const valid = Buffer.from(
+    '# Header cosmetico riscritto.\n' +
+    'on:\n  workflow_call:\n' +
+    'jobs:\n',
+  );
+  const residual = Buffer.from('# Crawler Group 01 logic — artifact residuale.\n');
+  assert.equal(isLogicSource(valid, 'crawler-group-01-logic.yml'), true);
+  assert.equal(isLogicSource(residual, 'crawler-group-01-logic.yml'), false);
+  assert.equal(isLogicSource(valid, 'crawler-group-02-logic.yml'), true);
+  assert.equal(isLogicSource(valid, 'crawler-group-01.yml'), false);
+});
+
+test('un residuo omonimo non diventa `drifted`', async () => {
+  const residual = Buffer.from('# Crawler Group 01 logic — artifact residuale.\n');
+  const resolved = await resolveSiteCandidate(
+    ['.github/corpus-workflows/crawler-group-01-logic.yml'],
+    async () => ({ sha256: OTHER, bytes: residual }),
+    'crawler-group-01-logic.yml',
+  );
+  assert.equal(resolved.sha256, null);
+  assert.equal(resolved.invalidSource, true);
+  assert.deepEqual(resolved.triedPaths, ['.github/corpus-workflows/crawler-group-01-logic.yml']);
+
+  const valid = Buffer.from(
+    '# Header cosmetico riscritto.\n' +
+    'on:\n  workflow_call:\n' +
+    'jobs:\n',
+  );
+  const alternateHit = await resolveSiteCandidate(
+    ['.github/workflows/crawler-group-01-logic.yml', '.github/corpus-workflows/crawler-group-01-logic.yml'],
+    async (rel) => rel.startsWith('.github/workflows')
+      ? { sha256: null }
+      : { sha256: HASH, bytes: valid },
+    'crawler-group-01-logic.yml',
+  );
+  assert.equal(alternateHit.sha256, HASH);
+  assert.equal(alternateHit.sitePath, '.github/corpus-workflows/crawler-group-01-logic.yml');
+});
+
+test('un marker invalido resta visibile nel verdetto, senza accusare gli artifact', () => {
+  const checks = planProvenanceChecks(CONTRACT, MANIFEST);
+  const observed = new Map(checks.map((c) => [c.field, { sha256: c.expected }]));
+  const victim = checks.find((c) => c.field.endsWith('#sourceSha256'));
+  observed.set(victim.field, {
+    sha256: null,
+    invalidSource: true,
+    triedPaths: victim.sitePathCandidates,
+  });
+  const verdict = evaluateProvenance(checks, observed);
+  const source = verdict.results.find((r) => r.field === victim.field);
+  assert.equal(source.state, 'absent');
+  assert.equal(source.invalidSource, true);
+  assert.match(source.detail, /marker della sorgente/);
+  assert.match(verdict.reason, /SITE_LOGIC_DIR/);
+  assert.doesNotMatch(verdict.reason, /artifact qui sono stantii/);
+});
+
+test('un 404 definitivo più un errore di rete diventano `absent`', async () => {
+  const resolved = await resolveSiteCandidate(
+    ['.github/workflows/crawler-group-01-logic.yml', '.github/corpus-workflows/crawler-group-01-logic.yml'],
+    async (rel) => rel.startsWith('.github/workflows')
+      ? { sha256: null }
+      : { error: 'HTTP 502' },
+    'crawler-group-01-logic.yml',
+  );
+  assert.equal(resolved.sha256, null);
+  assert.deepEqual(resolved.triedPaths, [
+    '.github/workflows/crawler-group-01-logic.yml',
+    '.github/corpus-workflows/crawler-group-01-logic.yml',
+  ]);
+});
+
+test('tutte le candidate in errore di trasporto restano `unobserved`', async () => {
+  const resolved = await resolveSiteCandidate(
+    ['.github/workflows/crawler-group-01-logic.yml', '.github/corpus-workflows/crawler-group-01-logic.yml'],
+    async () => ({ error: 'HTTP 503' }),
+    'crawler-group-01-logic.yml',
+  );
+  assert.equal(resolved.sha256, undefined);
+  assert.equal(resolved.error, 'HTTP 503');
+  assert.equal(resolved.triedPaths.length, 2);
+});
+
+test('evaluateProvenance nomina il path osservato nel report', () => {
   const checks = planProvenanceChecks(fixtureContract, fixtureManifest);
   const elsewhere = '.github/corpus-workflows/crawler-group-01-logic.yml';
   const verdict = evaluateProvenance(checks, new Map([

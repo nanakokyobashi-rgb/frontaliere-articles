@@ -108,6 +108,19 @@ test('rivalida TUTTE le voci, non solo quelle appena aggiunte', () => {
     () => declareApiArtifacts(api, { 'data/s.json': 2 }),
     /articles\.json: declared 7, on disk 3/,
   );
+  const manifestAfter = readFileSync(join(api, 'manifest.json'), 'utf-8');
+  assert.doesNotMatch(manifestAfter, /data\/s\.json/, 'una rivalidazione rossa non deve persistere la nuova voce');
+});
+
+test('il contatore opzionale e le voci nuove vengono scritti solo dopo la rivalidazione', () => {
+  const { api } = fixture({});
+  const rel = 'data/blog-index-frontaliere-it.json';
+  mkdirSync(join(api, 'data'), { recursive: true });
+  writeFileSync(join(api, rel), 'ok');
+  declareApiArtifacts(api, { [rel]: 2 }, { blogIndexShards: 1 });
+  const manifest = JSON.parse(readFileSync(join(api, 'manifest.json'), 'utf-8'));
+  assert.equal(manifest.files[rel], 2);
+  assert.equal(manifest.counts.blogIndexShards, 1);
 });
 
 test('senza manifest.json rifiuta invece di inventarne uno', () => {
@@ -117,17 +130,20 @@ test('senza manifest.json rifiuta invece di inventarne uno', () => {
 
 test('build-blog-index dichiara i suoi shard e rifiuta un set parziale', () => {
   const src = readFileSync(resolve(ROOT, 'scripts/build-blog-index.mjs'), 'utf-8');
-  assert.match(src, /declareApiArtifacts\(API_ROOT, writtenShards\)/);
+  assert.match(src, /declareApiArtifacts\(API_ROOT, writtenShards, \{ blogIndexShards: actual \}\)/);
   // I byte dichiarati sono quelli del testo scritto, newline finale compreso.
   assert.match(src, /writtenShards\[path\.relative\(API_ROOT, file\)\] = byteSize\(text\)/);
   assert.match(src, /writtenShards\[path\.relative\(API_ROOT, fullFile\)\] = byteSize\(fullText\)/);
   // Il set e' un prodotto cartesiano chiuso: una voce mancante e' un set
   // troncato, e va rifiutata prima della pubblicazione.
-  assert.match(src, /SECTIONS\.length \* LOCALES\.length \* 2/);
+  assert.match(src, /const expectedShards = new Set\(\s*SECTIONS\.flatMap/);
+  assert.doesNotMatch(src, /expectedShards\.add\(/, 'il set atteso non deve essere popolato insieme alle scritture');
+  assert.match(src, /expectedShards\.size/);
   assert.match(src, /refusing to publish a partial index set/);
   // Fuori da dist/api/ non c'e' un manifest da arricchire, e non se ne inventa uno.
   assert.match(src, /PUBLISHES_TO_API = OUT === DEFAULT_OUT/);
   assert.match(src, /if \(!failed && PUBLISHES_TO_API\)/);
+  assert.match(src, /const walk = \(dir\) => \{[\s\S]*?if \(entry\.isDirectory\(\)\) walk\(abs\);/);
 });
 
 test('il gate control-character di build-api scende nelle sottocartelle', () => {
