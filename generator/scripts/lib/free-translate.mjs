@@ -788,7 +788,10 @@ async function translateWithLibreTranslateSelfHosted(text, sourceLang, targetLan
     }
     const data = await res.json();
     const translated = normalizeBlock(data?.translatedText || '');
-    if (translated && !rejectedAsPassthrough('libreTranslateSelfHosted', q, translated, outcome)) {
+    if (translated && rejectedAsPassthrough('libreTranslateSelfHosted', q, translated, outcome)) {
+      return '';
+    }
+    if (translated) {
       _ltWarmupDone = true;
       return translated;
     }
