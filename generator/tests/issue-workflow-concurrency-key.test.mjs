@@ -68,38 +68,61 @@ function isPerIssueKey(group) {
 }
 
 /**
- * Legge il `group:` del blocco `concurrency:` di un workflow.
- * Accetta il blocco top-level e quello a livello di job, salta i commenti, e
- * ancora `group:` a inizio riga: una nota `# group: ...` non deve decidere al
- * posto di quello vero.
- * @returns {string|null} il valore del gruppo, o `null` se non c'e' concurrency
+ * Legge tutti i `group:` dei blocchi `concurrency:` di un workflow.
+ * Accetta i blocchi top-level e quelli a livello di job, oltre alle forme
+ * flow-style e quotate; salta i commenti, e ancora `group:` a inizio riga: una
+ * nota `# group: ...` non deve decidere al posto di quello vero.
+ * @returns {string[]} tutti i valori dei gruppi, nell'ordine del file
  */
 function concurrencyGroup(yaml) {
   const lines = yaml.split('\n');
   const indentOf = (l) => /^[ \t]*/.exec(l)[0].length;
   const isComment = (l) => /^\s*#/.test(l);
-  const start = lines.findIndex((l) => /^\s*concurrency:/.test(l) && !isComment(l));
-  if (start < 0) return null;
-  const base = indentOf(lines[start]);
-  for (let j = start + 1; j < lines.length; j += 1) {
-    const l = lines[j];
-    if (l.trim() === '') continue;
-    if (indentOf(l) <= base) break;
-    if (isComment(l)) continue;
-    const m = /^\s*group:\s*(.+?)\s*$/.exec(l);
-    if (m) return m[1];
+  const key = (name, line) => {
+    if (isComment(line)) return null;
+    return new RegExp(`^\\s*(?:(['"])${name}\\1|${name})\\s*:\\s*(.*)$`).exec(line);
+  };
+  const groups = [];
+  for (let i = 0; i < lines.length; i += 1) {
+    const start = key('concurrency', lines[i]);
+    if (!start) continue;
+    const base = indentOf(lines[i]);
+    const inline = start[2].trim();
+    if (inline) {
+      const flow = /(?:^|[,{])\s*['"]?group['"]?\s*:\s*(.*?)(?:\s*,\s*['"]?[A-Za-z0-9_-]+['"]?\s*:|\s*}\s*$)/.exec(inline);
+      if (flow) groups.push(flow[1].trim());
+      else if (!inline.startsWith('#') && !inline.startsWith('{')) groups.push(inline);
+    }
+    for (let j = i + 1; j < lines.length; j += 1) {
+      const l = lines[j];
+      if (l.trim() === '') continue;
+      if (indentOf(l) <= base) break;
+      const m = key('group', l);
+      if (m) groups.push(m[2].trim());
+    }
   }
-  return null;
+  return groups;
 }
 
 /** Il workflow e' innescato da eventi `issues:`? */
 function triggersOnIssues(yaml) {
   const lines = yaml.split('\n');
-  const start = lines.findIndex((l) => /^on:/.test(l));
+  const onKey = (line) => {
+    if (/^\s*#/.test(line)) return null;
+    return /^(\s*)(?:(['"])on\2|on)\s*:\s*(.*)$/.exec(line);
+  };
+  const start = lines.findIndex((l) => {
+    const m = onKey(l);
+    return m && m[1].length === 0;
+  });
   if (start < 0) return false;
+  const on = onKey(lines[start]);
+  const rest = on[3].replace(/\s+#.*$/, '').trim();
+  if (/^['"]?issues['"]?$/.test(rest)
+      || /(?:^|[,{[])\s*['"]?issues['"]?\s*(?::|[,}\]])/.test(rest)) return true;
   for (let j = start + 1; j < lines.length; j += 1) {
     if (lines[j].trim() !== '' && !/^\s/.test(lines[j])) break;
-    if (/^\s+issues:/.test(lines[j])) return true;
+    if (/^\s+['"]?issues['"]?\s*:/.test(lines[j])) return true;
   }
   return false;
 }
@@ -109,15 +132,20 @@ test('ogni workflow su eventi issue serializza su una chiave per-issue', () => {
   for (const file of fs.readdirSync(WORKFLOW_DIR).filter((f) => f.endsWith('.yml'))) {
     const yaml = fs.readFileSync(path.join(WORKFLOW_DIR, file), 'utf8');
     if (!triggersOnIssues(yaml)) continue;
-    const group = concurrencyGroup(yaml);
-    if (group === null) continue; // nessuna coda: niente da sfrattare
+    const groups = concurrencyGroup(yaml);
+    if (!groups.length) {
+      offenders.push(`${file} → manca concurrency per un workflow issue-triggered`);
+      continue;
+    }
     // La condizione non e' "interpola qualcosa" ma "interpola L'ISSUE": su un
     // evento `issues:` la maggior parte delle espressioni di contesto e'
     // COSTANTE. `${{ github.ref }}` e' sempre il default branch, `github.workflow`
     // e `github.repository` non cambiano mai — chiavi che sfrattano esattamente
     // come la costante letterale che questo gate esiste per vietare, ma che un
     // controllo su `${{` lascia passare (follow-up #918).
-    if (!isPerIssueKey(group)) offenders.push(`${file} → group: ${group}`);
+    for (const group of groups) {
+      if (!isPerIssueKey(group)) offenders.push(`${file} → group: ${group}`);
+    }
   }
   assert.deepEqual(
     offenders,
@@ -152,9 +180,10 @@ test('il fallback del triage e\' una costante condivisa, non run_id', () => {
   // coda due volte: il verso giusto del fallback dipende dai trigger, e questa
   // e' la differenza che non va persa in un copia-incolla dagli altri due file.
   const yaml = fs.readFileSync(path.join(WORKFLOW_DIR, 'issue-triage.yml'), 'utf8');
-  const group = concurrencyGroup(yaml);
-  assert.match(group, PER_ISSUE_KEY, 'la chiave del triage deve essere per-issue sugli eventi issue');
-  assert.doesNotMatch(group, /github\.run_id/, 'con run_id due sweep potrebbero girare insieme');
+  const groups = concurrencyGroup(yaml);
+  assert.equal(groups.length, 1);
+  assert.match(groups[0], PER_ISSUE_KEY, 'la chiave del triage deve essere per-issue sugli eventi issue');
+  assert.doesNotMatch(groups[0], /github\.run_id/, 'con run_id due sweep potrebbero girare insieme');
 });
 
 test('il gate rifiuta le espressioni COSTANTI per un evento issue, non solo le costanti letterali', () => {
@@ -178,4 +207,38 @@ test('il gate rifiuta le espressioni COSTANTI per un evento issue, non solo le c
   ]) {
     assert.equal(isPerIssueKey(group), true, `il gate rifiuta una chiave per-issue valida: ${group}`);
   }
+});
+
+test('#1087: il gate raccoglie ogni concurrency e riconosce trigger YAML quotati e flow-style', () => {
+  const issueKey = '${{ github.event.issue.number }}';
+  const yaml = [
+    '"on": {"issues": [opened], "workflow_dispatch": {}}',
+    'concurrency:',
+    `  group: issue-fix-${issueKey}`,
+    'jobs:',
+    '  build:',
+    '    concurrency: {group: issue-build-${{ github.event.issue.number }}, cancel-in-progress: false}',
+    '    runs-on: ubuntu-latest',
+  ].join('\n');
+  assert.equal(triggersOnIssues(yaml), true, 'il parser deve riconoscere on: quotato e mapping flow-style');
+  assert.deepEqual(concurrencyGroup(yaml), [
+    `issue-fix-${issueKey}`,
+    'issue-build-${{ github.event.issue.number }}',
+  ], 'il gate deve sorvegliare tutti i blocchi, non solo il primo');
+  assert.ok(concurrencyGroup(yaml).every(isPerIssueKey));
+  assert.equal(triggersOnIssues('on: [issues, workflow_dispatch]'), true,
+    'il parser deve riconoscere anche la lista flow-style');
+});
+
+test('#1087: un workflow issue-triggered senza concurrency è un errore del gate', () => {
+  const yaml = [
+    "'on': {issues: [labeled]}",
+    'jobs:',
+    '  fixer:',
+    '    runs-on: ubuntu-latest',
+  ].join('\n');
+  assert.equal(triggersOnIssues(yaml), true);
+  assert.deepEqual(concurrencyGroup(yaml), [], 'il workflow senza chiave deve restare senza gruppi');
+  assert.equal(concurrencyGroup(yaml).length > 0, false);
+  assert.match(fs.readFileSync(new URL(import.meta.url), 'utf8'), /manca concurrency per un workflow issue-triggered/);
 });
