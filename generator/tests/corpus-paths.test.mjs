@@ -60,6 +60,10 @@ test('leaves unrelated paths untouched', () => {
   }
 });
 
+test('rifiuta un namespace main non mappato invece di creare un target fantasma', () => {
+  assert.throws(() => corpusPath('services/future-main-file.ts'), /non mappato/i);
+});
+
 test('is idempotent — mapping an already-mapped path is a no-op', () => {
   const once = corpusPath('services/locales/blog-body/it/foo.ts');
   assert.equal(corpusPath(once), once);
