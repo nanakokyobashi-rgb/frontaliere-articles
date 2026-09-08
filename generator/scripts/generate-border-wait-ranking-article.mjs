@@ -35,6 +35,7 @@ import { buildBorderWaitRankingArticle } from './lib/border-wait-ranking-content
 import {
   registerArticleFiles,
   checkArticleIdExists,
+  assertArticlePassesFactualityGates,
   resolveRegisterLockAtStartup,
   buildBodyFile,
 } from './create-article.mjs';
@@ -160,6 +161,9 @@ export function buildData(todayIso, windowPayload = loadWindow()) {
     slugs: article.slugs,
     imageAlt: article.imageAlt,
     content: article.content,
+    // body4 is deterministic ranking prose; preserve the shared gate's
+    // cross-section numeric checks but skip only LLM paragraph heuristics.
+    _deterministicBodySections: ['body4'],
     _rankedCount: article._rankedCount,
   };
 }
@@ -171,6 +175,7 @@ export function refreshBodyFiles(data, repoRoot = REPO_ROOT, log = console.log) 
   // registrazione, e questo `writeFileSync` a ogni refresh successivo. Il guard
   // copriva solo il primo. Fail-closed: ripara il riparabile, lancia sul resto.
   sanitizePromptPlaceholders(data);
+  assertArticlePassesFactualityGates(data);
   for (const locale of LOCALES) {
     const dir = path.join(repoRoot, corpusPath('services/locales/blog-body'), locale);
     mkdirSync(dir, { recursive: true });
@@ -232,7 +237,8 @@ async function main() {
   // SPLIT — l'unica che nomina i file scritti e quelli mancanti — venga mai
   // emessa. Qui e non nel `main()` di create-article.mjs: questi produttori
   // importano registerArticleFiles() direttamente e non passano mai di la'.
-  resolveRegisterLockAtStartup();
+  if (!dryRun) resolveRegisterLockAtStartup();
+  assertArticlePassesFactualityGates(data);
   const exists = checkArticleIdExists(data.id);
 
   console.log(

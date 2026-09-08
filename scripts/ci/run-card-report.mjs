@@ -97,6 +97,9 @@ export function classifyDownloadFailure(err) {
   if (/no artifact|no valid artifacts|no artifacts found|artifact not found/i.test(text)) {
     return { kind: 'no-artifact', reason: 'nessun artifact corrispondente' };
   }
+  if (/retention(?: period)? (?:has )?expired|artifact[^\n]*(?:expired|no longer available)|expired[^\n]*artifact/i.test(text)) {
+    return { kind: 'no-artifact', reason: 'artifact non più disponibile: retention scaduta' };
+  }
   if (err && err.code === 'ENOENT') return { kind: 'error', reason: '`gh` non installato (ENOENT)' };
   const firstLine = text.split('\n').map((l) => l.trim()).filter(Boolean)[0] || 'causa non riportata da gh';
   return { kind: 'error', reason: firstLine.slice(0, 160) };
@@ -281,6 +284,7 @@ export function formatSummary(s, meta) {
   lines.push('');
   lines.push(`#621  [prompt-rebracket]: ${s.rebracketViaFallbackUnsat} viaFallbackUnsat su ${s.rebracketCalls} ri-bracketing eseguiti`);
   lines.push(`#804  cascate di esaurimento con breakdown: ${s.deferralCascades}  ·  differimenti accettati: ${s.deferralAccepted}  ·  vetate su input cap: ${s.inputCapVetoed}`);
+  lines.push(`#452  prompt sotto il pavimento dell'impalcatura: ${s.promptFloorIrreducible}  ·  verdetti decisi dal margine: ${s.marginDecided}`);
   if (s.shares.length) {
     const sorted = [...s.shares].sort((a, b) => a - b);
     const med = sorted[Math.floor(sorted.length / 2)];

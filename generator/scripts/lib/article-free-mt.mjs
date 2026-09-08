@@ -13,6 +13,7 @@
  */
 
 import { hasUsableTranslatedText, hasUsableContentText } from './body2-payload-verdict.mjs';
+import { findLoneSurrogates } from '../../../scripts/lib/sanitize-control-chars.mjs';
 
 const NAV_LINK_RE = /\[[^\]]+\]\(nav:[^)]+\)/g;
 const NAV_SENTINEL_RE = /0NAV(\d+)0/g;
@@ -72,7 +73,7 @@ export function translatedStringOrNull(value, targetLang) {
  * caller cannot tell the difference once the chunks are joined.
  *
  * @param {unknown[]} results  per-chunk parsed JSON objects
- * @param {string} bodyKey     'body1' | 'body2' | 'body3'
+ * @param {string} bodyKey     un campo `bodyN` dell'articolo
  * @param {string} [targetLang] locale dei chunk tradotti ('en' | 'de' | 'fr')
  * @returns {string|null}
  */
@@ -200,5 +201,19 @@ export async function translateFieldFreeMt({
     }
     restored = r.text;
   }
-  return balanceMarkdown(restored);
+  const balanced = balanceMarkdown(restored);
+  if (findLoneSurrogates(balanced).length > 0) {
+    onUnusableOutput({ targetLang, fieldType, ...(fieldName ? { fieldName } : {}), reason: 'lone-surrogate' });
+    onWarn(`free-MT ${targetLang}:${fieldType} produced a lone surrogate`);
+    return '';
+  }
+  // A successful transport response is not necessarily a translation. A
+  // normalized verbatim copy of the source is a failed free-MT attempt and
+  // must fall through to the existing recovery path (#1084).
+  if (sourceLang !== targetLang && balanced.trim().replace(/\s+/g, ' ') === src.replace(/\s+/g, ' ')) {
+    onUnusableOutput({ targetLang, fieldType, ...(fieldName ? { fieldName } : {}), reason: 'passthrough' });
+    onWarn(`free-MT ${targetLang}:${fieldType} returned the source verbatim`);
+    return '';
+  }
+  return balanced;
 }

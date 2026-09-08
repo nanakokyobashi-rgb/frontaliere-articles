@@ -461,6 +461,11 @@ async function main() {
   try { runs = JSON.parse(raw || '[]'); } catch { runs = []; }
   if (runs.length === 0) {
     console.log('Nessuna run leggibile → niente da riportare.');
+    const note = ghFailureNote();
+    if (note) {
+      console.log(note);
+      process.exitCode = 1;
+    }
     return;
   }
 

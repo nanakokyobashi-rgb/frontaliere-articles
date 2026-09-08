@@ -18262,6 +18262,24 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'infermieri-carenza-svizzera-2034',
+    category: 'novita',
+    date: '2026-09-08T12:32:55.771Z',
+    image: '/images/blog/infermieri-carenza-svizzera-2034.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
+   {
+    id: 'novartis-fondo-pensione-crollo',
+    category: 'novita',
+    date: '2026-09-08T12:50:10.915Z',
+    image: '/images/blog/novartis-fondo-pensione-crollo.webp',
+    hasCalculator: true,
+    authorSlug: 'laura-bianchi',
+    authorName: 'Laura Bianchi',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the
