@@ -11608,6 +11608,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.frontalieri-libro-analisi-miti.title': 'Swiss cross-border commuters: 400,000, myths and analysis',
     'blog.article.frontalieri-libro-analisi-miti.excerpt': 'Switzerland employs 400,000+ border workers (European record). New book dispels myths: growth 1978–2026, wages, taxation, transport. Ticino in the centre.',
     'blog.article.frontalieri-libro-analisi-miti.imageAlt': 'Lugano skyline with Lake Lugano and surrounding mountains, symbol of Ticino and cross-border work',
+    'blog.article.s30-guasto-tecnico-cadenazzo-luino.title': 'S30 blocked between Cadenazzo and Luino due to technical failure',
+    'blog.article.s30-guasto-tecnico-cadenazzo-luino.excerpt': 'Railway line interrupted until Wednesday 9 September 2026 at 4:00 am. Replacement buses available but with guaranteed delays and no connections.',
+    'blog.article.s30-guasto-tecnico-cadenazzo-luino.imageAlt': 'Bellinzona railway station with SBB trains on tracks during daylight hours',
 };
 
 export default blogMetaEn;
