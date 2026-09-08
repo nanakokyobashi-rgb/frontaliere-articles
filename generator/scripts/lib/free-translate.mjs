@@ -534,7 +534,10 @@ async function translateWithDeepL(text, sourceLang, targetLang, outcome = null) 
 
   const srcCode = DEEPL_LANG_MAP[sourceLang] || sourceLang?.toUpperCase() || '';
   const tgtCode = DEEPL_LANG_MAP[targetLang] || targetLang?.toUpperCase() || '';
-  if (!tgtCode) return '';
+  if (!tgtCode) {
+    noteTranslationOutcome(outcome, 'incomplete');
+    return '';
+  }
 
   // Try each non-exhausted key, rotating on quota errors
   for (let attempt = 0; attempt < DEEPL_API_KEYS.length; attempt++) {
@@ -905,14 +908,14 @@ async function translateWithAzure(text, sourceLang, targetLang, outcome = null) 
           _azureExhaustedKeys.add(key);
           _cascadeStats.tierErrors.azure = (_cascadeStats.tierErrors.azure || 0) + 1;
           noteTranslationOutcome(outcome, 'errors');
-          throw Object.assign(new Error('Azure auth'), { quotaExhausted: true, outcomeNoted: true });
+          throw Object.assign(new Error('Azure auth'), { quotaExhausted: true });
         }
         if (res.status === 429) {
           _azureExhaustedKeys.add(key);
           _cascadeStats.tierErrors.azure = (_cascadeStats.tierErrors.azure || 0) + 1;
           noteTranslationOutcome(outcome, 'errors');
           console.log(`🔑 Azure key #${idx + 1} quota exhausted — rotating`);
-          throw Object.assign(new Error('Azure quota'), { quotaExhausted: true, outcomeNoted: true });
+          throw Object.assign(new Error('Azure quota'), { quotaExhausted: true });
         }
         if (!res.ok) {
           // Other failure (e.g. 400 bad lang). Bump the tier error counter, then
@@ -1343,7 +1346,7 @@ export async function freeTranslate({ text, sourceLang, targetLang, fieldType = 
       }
     } catch (err) {
       _cascadeStats.tierErrors[tierName] = (_cascadeStats.tierErrors[tierName] || 0) + 1;
-      if (!err?.outcomeNoted) noteTranslationOutcome(_outcome, 'errors');
+      noteTranslationOutcome(_outcome, 'errors');
     }
     return '';
   }

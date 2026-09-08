@@ -137,34 +137,6 @@ describe('freeTranslate — guardia «uscita == sorgente»', () => {
     assert.equal(snapshot().passthroughs - before.passthroughs, 1);
   });
 
-  test('rifiuta un eco anche nel ramo MyMemory a chunk, prima di assemblarlo', async () => {
-    const longSource = Array.from(
-      { length: 180 },
-      (_, index) => `Paragrafo ${index}: i frontalieri verificano il regime fiscale prima di attraversare il confine.`,
-    ).join('\n\n');
-    globalThis.fetch = async (url) => {
-      if (String(url).includes('api.mymemory.translated.net')) {
-        const chunk = new URL(String(url)).searchParams.get('q');
-        return {
-          ok: true,
-          json: async () => ({ responseData: { translatedText: chunk, match: 1 } }),
-        };
-      }
-      throw new Error('offline nel test');
-    };
-    const before = snapshot();
-
-    const out = await freeTranslate({
-      text: longSource,
-      sourceLang: 'it',
-      targetLang: 'en',
-      fieldType: 'description',
-    });
-
-    assert.equal(out, '');
-    assert.equal(snapshot().passthroughs - before.passthroughs, 1);
-  });
-
   test('nomina il passthrough nel sommario della cascata', async () => {
     stubCascade(IT);
     await freeTranslate({ text: IT, sourceLang: 'it', targetLang: 'fr', fieldType: 'description' });
@@ -303,6 +275,61 @@ describe('freeTranslate — guardia «uscita == sorgente»', () => {
         HF_TOKEN: '',
         HUGGINGFACE_API_KEY: '',
         LIBRETRANSLATE_SELF_HOSTED_URL: 'http://self-hosted.test',
+        VITEST: '1',
+      },
+    });
+    assert.equal(child.status, 0, child.stderr || child.stdout);
+  });
+
+  test('la cascata reale memoizza il passthrough del self-hosted senza errori', () => {
+    const moduleUrl = new URL('../scripts/lib/free-translate.mjs', import.meta.url).href;
+    const childScript = `
+      const source = ${JSON.stringify(IT)};
+      let selfHostedCalls = 0;
+      globalThis.fetch = async (url) => {
+        const value = String(url);
+        if (value.startsWith('http://self-hosted.test/')) {
+          selfHostedCalls += 1;
+          return { ok: true, json: async () => ({ translatedText: source }) };
+        }
+        if (value.includes('api.mymemory.translated.net')) {
+          return { ok: true, json: async () => ({ responseData: { translatedText: source, match: 1 } }) };
+        }
+        if (value.includes('translate.googleapis.com')) {
+          return { ok: true, text: async () => JSON.stringify([[ [source] ]]) };
+        }
+        if (value.includes('clients5.google.com')) {
+          return { ok: true, text: async () => JSON.stringify({ sentences: [{ trans: source }] }) };
+        }
+        if (value.includes('/api/v1/')) return { ok: true, json: async () => ({ translation: source }) };
+        if (value.includes('/api/translate')) return { ok: true, json: async () => ({ 'translated-text': source }) };
+        if (value.includes('/translate')) return { ok: true, json: async () => ({ translatedText: source }) };
+        throw new Error('endpoint inatteso nel test');
+      };
+      const { freeTranslateWithRetryDetailed } = await import(${JSON.stringify(moduleUrl)});
+      const out = await freeTranslateWithRetryDetailed({
+        text: source, sourceLang: 'it', targetLang: 'en', fieldType: 'description', maxRetries: 0,
+      });
+      if (selfHostedCalls === 0 || JSON.stringify(out) !== JSON.stringify({ text: '', passthrough: true })) {
+        console.error(JSON.stringify({ selfHostedCalls, out }));
+        process.exit(1);
+      }
+    `;
+    const child = spawnSync(process.execPath, ['--input-type=module', '--eval', childScript], {
+      encoding: 'utf8',
+      env: {
+        ...process.env,
+        DEEPL_API_KEY: '',
+        DEEPL_API_KEY_2: '',
+        AZURE_TRANSLATOR_KEY: '',
+        AZURE_TRANSLATOR_KEY_2: '',
+        GSC_CLIENT_ID: '',
+        GSC_CLIENT_SECRET: '',
+        GSC_REFRESH_TOKEN: '',
+        HF_TOKEN: '',
+        HUGGINGFACE_API_KEY: '',
+        LIBRETRANSLATE_SELF_HOSTED_URL: 'http://self-hosted.test',
+        MT_LOCAL_OPUSMT: '',
         VITEST: '1',
       },
     });

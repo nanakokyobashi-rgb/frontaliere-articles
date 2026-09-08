@@ -1152,7 +1152,7 @@ async function fillLocaleGaps(byLocale, cache, { eventId, fieldType, locales, de
       if (cacheKey) cache[cacheKey] = { ...entry, [target]: translated };
       // Legacy keys are inspected only as migration targets. Never read a
       // positive value from them: doing so would merge distinct same-title
-      // events. Replacing an unusable marker keeps the old entry from poisoning
+      // events. Removing an unusable marker keeps the old entry from poisoning
       // the next run without resurrecting its old shared-cache semantics.
       const legacyEntry = cache[legacyKey];
       if (legacyEntry && !hasUsableContentText(legacyEntry[target])) {
