@@ -31,6 +31,11 @@
  */
 
 const NON_MARKUP_REGIONS = /<!\[CDATA\[[\s\S]*?\]\]>|<!--[\s\S]*?-->/g;
+const XML_QNAME_RE = /^[A-Za-z_][A-Za-z0-9_.-]*(?::[A-Za-z_][A-Za-z0-9_.-]*)?$/;
+
+function escapeRegExp(value) {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
 
 /** Il documento senza le regioni che non sono markup (CDATA, commenti). */
 export function stripNonMarkup(xml) {
@@ -46,6 +51,9 @@ export function stripNonMarkup(xml) {
  * parentesi chiusa, qui resa esplicita.
  */
 export function countXmlTags(xml, tag) {
-  const openTag = new RegExp(`<${tag}(?:\\s[^>]*)?>`, 'g');
+  if (typeof tag !== 'string' || !XML_QNAME_RE.test(tag)) {
+    throw new TypeError(`tag must be a valid QName XML: ${String(tag)}`);
+  }
+  const openTag = new RegExp(`<${escapeRegExp(tag)}(?:\\s[^>]*)?\\s*/?>`, 'g');
   return (stripNonMarkup(xml).match(openTag) ?? []).length;
 }

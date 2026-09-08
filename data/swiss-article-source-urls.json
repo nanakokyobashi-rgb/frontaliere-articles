@@ -1,6 +1,4 @@
 {
-  "https://www.rsi.ch/s/3984642": "pigioni-abusive-iniziativa-raggiunta",
-  "https://www.admin.ch/it/newnsb/zrex1p-tu13lnom9lcilw": "modifica-ordinanza-liquidita",
   "https://www.tio.ch/rubriche/ospite/1943781/inquilini-affitti-yannick-demaria-iniziativa": "iniziativa-protezione-pigioni-abusive",
   "https://www.tio.ch/svizzera/attualita/1943756/decine-in-ospedale-per-dolori-agli-occhi-dopo-l-eclissi-solare": "eclissi-solare-ospedali",
   "https://www.rsi.ch/s/3985176": "gli-sconti-sui-farmaci-non-vengono-trattenuti",
@@ -2129,6 +2127,16 @@
   "https://www.admin.ch/it/newnsb/1mie201yrzoa": {
     "articleId": "bollette-26-centesimi-2027",
     "ts": "2026-09-08T11:56:17.568Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/economia/1948761/migros-online-centro-nuovo-capacita-regensdorf-prodotti-punta": {
+    "articleId": "migros-online-regensdorf-2026",
+    "ts": "2026-09-08T12:11:42.703Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/salute%3a-carenza-di-personale-e-uscite-precoci-sono-in-aumento/92022848": {
+    "articleId": "infermieri-carenza-svizzera-2034",
+    "ts": "2026-09-08T12:32:55.929Z",
     "keyForm": 2
   }
 }

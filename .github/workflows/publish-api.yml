@@ -440,12 +440,12 @@ jobs:
           grep -q '<urlset' dist/api/sitemap-news-candidates.xml || {
             echo "::error::sitemap-news-candidates.xml is not a sitemap document — refusing"; exit 1; }
 
-          cands=$(grep -c '<url>' dist/api/sitemap-news-candidates.xml || true)
+          cands=$(node --input-type=module -e "import { readFileSync } from 'node:fs'; import { countXmlTags } from './scripts/lib/count-xml-tags.mjs'; console.log(countXmlTags(readFileSync('dist/api/sitemap-news-candidates.xml', 'utf8'), 'url')); ")
           echo "news candidates: $cands"
 
           # Every block must carry a publication date: it is the field the whole
           # freshness window turns on and the consumer refuses a block without one.
-          dates=$(grep -c '<news:publication_date>' dist/api/sitemap-news-candidates.xml || true)
+          dates=$(node --input-type=module -e "import { readFileSync } from 'node:fs'; import { countXmlTags } from './scripts/lib/count-xml-tags.mjs'; console.log(countXmlTags(readFileSync('dist/api/sitemap-news-candidates.xml', 'utf8'), 'news:publication_date')); ")
           if [ "$cands" -ne "$dates" ]; then
             echo "::error::$cands candidate blocks but $dates publication dates — refusing"
             exit 1

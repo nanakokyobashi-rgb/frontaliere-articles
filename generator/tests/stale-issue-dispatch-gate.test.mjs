@@ -39,6 +39,9 @@ import {
   gateCommentBlocked,
   OUTCOME_MARKER,
   GATE_MARKER,
+  GATE_MARKER_FOR,
+  GATE_MARKER_PREFIX,
+  latestDispatchLabelEventAt,
 } from '../../scripts/ci/check-stale-issue-dispatch.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
@@ -128,18 +131,49 @@ test('la telemetria parla il vocabolario di chi la legge, e per RAGIONE non per 
   assert.match(OUTCOME_MARKER.fix['pr-in-flight'], /<!-- FIX_OUTCOME: pr-already-open -->/);
   assert.match(OUTCOME_MARKER.decompose['already-decomposed'], /<!-- DECOMPOSE_OUTCOME: already-resolved -->/);
 
-  // Sul ramo label-consumata nessuna PR e' stata cercata: dichiararne una
-  // farebbe registrare a drainer e lessons-harvester una PR bloccante che non
-  // esiste. Il fatto osservato e' l'overlap, ed e' il codice del mutex.
+  // Sul ramo label-consumata nessuna PR e' stata cercata: `stale-dispatch`
+  // dichiara il fatto osservato senza fingere che la decomposizione sia finita.
   assert.match(OUTCOME_MARKER.fix['dispatch-label-gone'], /<!-- FIX_OUTCOME: overlap-skip -->/);
-
-  // Il vocabolario di decompose e' CHIUSO (issue-decompose.yml, «Classify
-  // outcome»): la label consumata non prova che la decomposizione sia avvenuta
-  // e nessuno dei quattro codici lo dice → nessun verdetto inventato.
-  assert.equal(OUTCOME_MARKER.decompose['dispatch-label-gone'], undefined);
+  assert.match(OUTCOME_MARKER.decompose['dispatch-label-gone'], /<!-- DECOMPOSE_OUTCOME: stale-dispatch -->/);
   for (const code of Object.values(OUTCOME_MARKER.decompose)) {
-    assert.match(code, /<!-- DECOMPOSE_OUTCOME: (decomposed-[0-9]+|atomic-requeue|needs-human-decision|already-resolved) -->/);
+    assert.match(code, /<!-- DECOMPOSE_OUTCOME: (decomposed-[0-9]+|atomic-requeue|needs-human-decision|already-resolved|stale-dispatch) -->/);
   }
+});
+
+test('il marker di gate e distinto per fase, ma conserva il prefisso legacy', () => {
+  assert.ok(GATE_MARKER_FOR.fix.startsWith(GATE_MARKER_PREFIX));
+  assert.ok(GATE_MARKER_FOR.decompose.startsWith(GATE_MARKER_PREFIX));
+  assert.equal(
+    gateCommentBlocked([{ body: GATE_MARKER_FOR.fix }], 'decompose'),
+    null,
+  );
+  assert.equal(
+    gateCommentBlocked([{ body: GATE_MARKER_FOR.fix }], 'fix'),
+    'gate-already-commented',
+  );
+});
+
+test('i marker e i verdetti prima dell\'ultimo dispatch non bloccano il nuovo ciclo', () => {
+  const events = [
+    { event: 'labeled', label: { name: 'agent:fix' }, created_at: '2026-09-07T10:00:00Z' },
+    { event: 'labeled', label: { name: 'agent:fix' }, created_at: '2026-09-08T10:00:00Z' },
+  ];
+  const cutoff = latestDispatchLabelEventAt(events, 'agent:fix');
+  const comments = [
+    { createdAt: '2026-09-07T10:01:00Z', body: `${GATE_MARKER_FOR.fix}\n<!-- FIX_OUTCOME: blocked-workflows-scope -->` },
+    { createdAt: '2026-09-08T10:01:00Z', body: 'nota nuova' },
+  ];
+  assert.equal(gateCommentBlocked(comments, 'fix', { lastLabelEventAt: cutoff }), null);
+});
+
+test('un outcome citato in code fence o citazione non blocca il gate', () => {
+  const body = [
+    '```md',
+    '<!-- FIX_OUTCOME: pr-already-open -->',
+    '```',
+    'Una citazione «<!-- FIX_OUTCOME: pr-already-open -->».',
+  ].join('\n');
+  assert.equal(gateCommentBlocked([{ body }], 'fix'), null);
 });
 
 test('il gate non scrive MAI sopra un verdetto gia\' presente', () => {
@@ -210,3 +244,8 @@ for (const wf of ['issue-fix.yml', 'issue-decompose.yml']) {
     }
   });
 }
+
+test('issue-decompose raccoglie anche lo stale-dispatch come esito chiuso', () => {
+  const src = fs.readFileSync(path.join(ROOT, '.github/workflows/issue-decompose.yml'), 'utf8');
+  assert.match(src, /DECOMPOSE_OUTCOME: \(decomposed-\[0-9\]\+\|atomic-requeue\|needs-human-decision\|already-resolved\|stale-dispatch\)/);
+});

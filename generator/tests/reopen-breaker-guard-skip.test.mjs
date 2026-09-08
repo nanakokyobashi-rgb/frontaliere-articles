@@ -44,6 +44,7 @@ import {
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const script = fs.readFileSync(path.join(ROOT, 'scripts/ci/pr-autorebase.mjs'), 'utf8');
+const testsWorkflow = fs.readFileSync(path.join(ROOT, '.github/workflows/tests.yml'), 'utf8');
 
 const step = (name, conclusion) => ({ name, conclusion });
 /** Gli step di un job rosso per il SOLO review gate, con la review girata. */
@@ -168,5 +169,14 @@ describe('WIRING: la decisione vera legge davvero il segnale', () => {
     // sulla forma corretta.
     const calls = (script.match(/(?<!function\s)vitestJobSteps\(head\)/g) || []).length;
     assert.equal(calls, 1);
+  });
+
+  test('un fingerprint fallback/NULL non puo trasformarsi in uno skip', () => {
+    const guard = testsWorkflow.slice(
+      testsWorkflow.indexOf('fpHead=$(node scripts/ci/pr-contribution-fingerprint.mjs'),
+      testsWorkflow.indexOf('\n\n      - name: Determine review tier'),
+    );
+    assert.match(guard, /\[ -n "\$fpLast" \]/);
+    assert.match(guard, /\[ "\$fpLast" != "NULL" \]/);
   });
 });

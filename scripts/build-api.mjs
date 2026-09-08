@@ -85,6 +85,7 @@ import { findShadowedTickerArticles } from './lib/ticker-shadow-check.mjs';
 // il markup, non il testo: una description RSS in CDATA che cita `<item>`
 // gonfiava identicamente il dichiarato e il ri-derivato (vedi il suo header).
 import { countXmlTags } from './lib/count-xml-tags.mjs';
+import { collectSeoEntryMetadata } from './lib/corpus-floors.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const OUT = path.join(ROOT, 'dist', 'api');
@@ -574,21 +575,8 @@ write('news-ticker-live.json', { schema: 1, articles: tickerArticles });
       const fp = path.join(ROOT, 'content', 'seo', file);
       if (!fs.existsSync(fp)) continue;
       const src = fs.readFileSync(fp, 'utf-8');
-      const entryRe = /'blog-([^']+)':\s*\{/g;
-      const positions = [];
-      let m;
-      while ((m = entryRe.exec(src)) !== null) positions.push({ id: m[1], start: m.index });
-      for (let i = 0; i < positions.length; i++) {
-        const { id, start } = positions[i];
-        const end = i + 1 < positions.length ? positions[i + 1].start : src.length;
-        const block = src.slice(start, Math.min(end, start + 4000));
-        // `(?:[^'\\]|\\.)*` rather than `[^']+`: create-article escapes literal
-        // apostrophes into these values, and the naive class stops at the
-        // backslash-quote — which in Italian truncates a third of the corpus
-        // (the bug engine/rssFeeds.mjs documents against its own parser).
-        const keywords = block.match(/keywords:\s*'((?:[^'\\]|\\.)*)'/)?.[1];
-        const headline = block.match(/"headline":\s*"((?:[^"\\]|\\.)*)"/)?.[1];
-        seoTextById.set(id, { keywords, headline });
+      for (const [id, metadata] of collectSeoEntryMetadata(src)) {
+        seoTextById.set(id, metadata);
       }
     }
   }
@@ -798,22 +786,22 @@ write('news-ticker-live.json', { schema: 1, articles: tickerArticles });
   const src = path.join(ROOT, ...DAILY_BRIEF_SRC);
   if (fs.existsSync(src)) {
     const raw = fs.readFileSync(src, 'utf-8');
-    let parsed;
     try {
-      parsed = JSON.parse(raw);
+      JSON.parse(raw);
     } catch (err) {
       throw new Error(`public/data/daily-brief.json is not valid JSON: ${err.message}`);
     }
-    const available = Number(parsed?.counts?.availableBlocks);
-    if (!Number.isFinite(available) || available < 1) {
+    const clean = sanitizeJsonText(raw);
+    const served = JSON.parse(clean);
+    const available = Object.values(served?.blocks ?? {}).filter((b) => b?.available).length;
+    if (available < 1) {
       throw new Error('daily-brief.json carries no available blocks — refusing to publish');
     }
-    const clean = sanitizeJsonText(raw);
     reportStrippedControlChars(path.join(OUT, DAILY_BRIEF), raw, clean);
     fs.writeFileSync(path.join(OUT, DAILY_BRIEF), clean);
     written[DAILY_BRIEF] = byteSize(clean);
     dailyBriefBlocks = available;
-    console.log(`[build-api] ${DAILY_BRIEF}: ${available}/4 blocks (${parsed?.dateIso}), ${byteSize(clean)} bytes`);
+    console.log(`[build-api] ${DAILY_BRIEF}: ${available}/4 blocks (${served?.dateIso}), ${byteSize(clean)} bytes`);
   } else {
     console.log(
       `[build-api] ${DAILY_BRIEF}: not emitted — the daily-brief producer has not run here yet`,
@@ -1075,7 +1063,13 @@ console.log(`[build-api] wrote ${Object.keys(written).length} files to dist/api`
         mismatches.push(`slugs.${section}: ${keys.length} ids, manifest.counts.${counter} declares ${declared[counter]}`);
       }
       if (!exists(registry)) continue; // assenza gia' in `absent`, con la sua diagnosi
-      const registryIds = new Set(jsonOut(registry).map((a) => a?.id));
+      const registryRows = jsonOut(registry);
+      const ids = registryRows.map((a) => a?.id);
+      const duplicates = [...new Set(ids.filter((id) => id != null).filter((id, i) => ids.indexOf(id) !== i))];
+      const missingId = ids.filter((id) => id == null).length;
+      if (duplicates.length) mismatches.push(`${registry} contains duplicate ids: ${duplicates.slice(0, 5).join(', ')}`);
+      if (missingId) mismatches.push(`${registry} contains ${missingId} missing ids`);
+      const registryIds = new Set(ids.filter((id) => id != null));
       const indexedIds = new Set(keys);
       const missing = [...registryIds].filter((id) => !indexedIds.has(id));
       const extra = keys.filter((id) => !registryIds.has(id));

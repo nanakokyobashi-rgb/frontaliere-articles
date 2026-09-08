@@ -41,6 +41,7 @@ import { readFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { expect } from './lib/expect-shim.mjs';
+import { sliceBetween } from './lib/anchored-slice.mjs';
 import {
   decideReopen,
   decideNeedsHumanPass,
@@ -263,8 +264,9 @@ describe('la guardia e sul percorso, non accanto ad esso', () => {
   });
 
   it('la segnalazione e UNA: commento sticky, non un commento nuovo a ogni giro', () => {
-    const guard = script.slice(script.indexOf('function guardedReopen'),
-      script.indexOf('function readReopenBudgetBody'));
+    const guard = sliceBetween(script, 'function guardedReopen', 'function readReopenBudgetBody', {
+      label: 'guardedReopen',
+    });
     expect(guard).toContain('upsertStickyComment');
     // `gh pr comment` diretto = un commento nuovo per tick: lo stesso difetto
     // in un'altra forma.

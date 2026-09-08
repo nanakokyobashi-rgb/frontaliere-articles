@@ -128,7 +128,12 @@ export function validateAnnouncedSurface({ manifest, slugs, articles, swissArtic
   ]) {
     if (!Array.isArray(registry)) continue;
     const indexed = new Set(Object.keys((slugs && slugs[key]) || {}));
-    const known = new Set(registry.map((a) => a && a.id));
+    const ids = registry.map((a) => a && a.id);
+    const duplicates = [...new Set(ids.filter((id) => id != null).filter((id, i) => ids.indexOf(id) !== i))];
+    const missingId = ids.filter((id) => id == null).length;
+    if (duplicates.length) errors.push(`${label} contiene id duplicati: ${duplicates.slice(0, 5).join(', ')}`);
+    if (missingId) errors.push(`${label} contiene ${missingId} id mancanti`);
+    const known = new Set(ids.filter((id) => id != null));
     const missing = [...known].filter((id) => !indexed.has(id));
     const extra = [...indexed].filter((id) => !known.has(id));
     if (missing.length || extra.length) {
