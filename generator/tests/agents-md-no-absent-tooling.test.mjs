@@ -53,8 +53,8 @@ function isTracked(rel) {
  * Strumenti che `AGENTS.md` puo' ORDINARE di usare solo se il repo li porta.
  *
  * `probe` si verifica su cio' che git TRACCIA, non su cio' che sta sul disco, e
- * la differenza e' il punto: `.gitnexus/` esiste nel checkout principale di
- * questa macchina e non nei worktree ne' in CI. Un probe su `existsSync` darebbe
+ * la differenza e' il punto: `.gitnexus/` esisteva nel checkout principale di
+ * quella macchina e non nei worktree ne' in CI. Un probe su `existsSync` darebbe
  * quindi risposte diverse a seconda di DOVE gira — verde dove nessuno guarda e
  * rosso altrove, che e' il modo piu' rapido per far disattivare un guard.
  */
