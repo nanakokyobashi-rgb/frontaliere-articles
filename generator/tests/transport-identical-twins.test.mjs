@@ -264,6 +264,49 @@ test("un import TypeScript non scrive l\u2019estensione: il citer va trovato lo 
   assert.equal(importSpecifierRe('loop-sync-manifest.json'), null);
 });
 
+test("lo specificatore NodeNext con l\u2019estensione compilata resta visibile (#934 item 1)", () => {
+  // Nello stile NodeNext un sorgente `.ts` si importa `from './shared/safeTruncate.js'`:
+  // li\u2019 lo stem non e\u2019 seguito dalla virgoletta di chiusura e
+  // `includes('safeTruncate.ts')` e\u2019 falso, quindi la voce tornava a ZERO
+  // accoppiamenti \u2014 copiabile da sola, cioe\u2019 il buco di #853 riaperto.
+  // L\u2019albero non ha ancora import di quella forma: il guard teneva per
+  // CONVENZIONE, e il giorno dell\u2019adozione nulla sarebbe diventato rosso.
+  const re = importSpecifierRe('safeTruncate.ts');
+  assert.ok(re.test("import { truncateCodeUnits } from './shared/safeTruncate.js';"));
+  assert.ok(re.test('from "../../host/shared/safeTruncate.mjs"'));
+  assert.ok(re.test("from '@/shared/safeTruncate.jsx'"));
+  assert.ok(re.test("from './shared/safeTruncate.cjs'"));
+
+  // La coda ammessa non e\u2019 un jolly: un file OMONIMO con un\u2019altra
+  // estensione resta un altro file, e la prosa resta prosa.
+  assert.ok(!re.test("from './shared/safeTruncate.json'"), 'un\u2019estensione non compilata non e\u2019 questo file');
+  assert.ok(!re.test("from './shared/safeTruncateOther.js'"), 'lo stem deve finire dove finisce lo specificatore');
+  assert.ok(!re.test("from 'safeTruncate.js'"), 'senza separatore e\u2019 un pacchetto');
+});
+
+test("l\u2019apostrofo italiano non apre piu\u2019 la classe di virgolette (#934 item 2)", () => {
+  // `[^'\"`]*` non era ancorato e attraversava i newline. Mezzo albero ha
+  // commenti in italiano: un `'` di prosa apriva la classe e qualunque `/stem'`
+  // in una riga SUCCESSIVA la chiudeva. Il verso e\u2019 conservativo, ma su uno
+  // stem frequente trasforma una voce trasportabile in un BLOCCO PERMANENTE con
+  // una ragione falsa nel report \u2014 il canale spento dall\u2019altro lato.
+  //
+  // L'apostrofo che apre la classe e' quello ASCII, non il tipografico `\u2019`:
+  // `[^'"`]` elenca le virgolette ASCII, quindi un `\u2019` di prosa e' inerte. E'
+  // l'ASCII che il repo usa davvero nei commenti (`register-lock.test.mjs` ne
+  // ha 46 righe), ed e' quindi quello con cui va provata la regressione.
+  const re = importSpecifierRe('authors.ts');
+  const prosa = [
+    "// l'estensione non compare mai nell'import,",
+    "// e questo /authors' e' solo prosa, non uno specificatore.",
+  ].join('\n');
+  assert.ok(!re.test(prosa), 'un apostrofo di prosa non apre uno specificatore multi-riga');
+
+  // Uno specificatore vero sta su UNA riga, quindi l'ancoraggio non toglie
+  // nessun match legittimo, nemmeno se la riga prima contiene un apostrofo.
+  assert.ok(re.test("// dell'engine\nimport { x } from './host/authors';"));
+});
+
 test("nell\u2019albero di oggi i nove gemelli `host/` NON sono piu\u2019 senza accoppiamenti", () => {
   // Guard sul repo reale, offline: e\u2019 la meta\u2019 che dice se la regola sopra
   // morde davvero. Se un giorno tornassero a zero, la copia isolata di una di
