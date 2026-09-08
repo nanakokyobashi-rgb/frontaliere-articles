@@ -1068,6 +1068,7 @@ function warnStrictPredicateDrops(poisoned, byLocale, label) {
  * nothing was poisoned in input.
  */
 const MAX_PASSTHROUGH_MEMO_WORDS = 32;
+const MIN_LOCALES_FOR_IDENTITY_MEMO = 3;
 
 function eventTranslationDiscriminator(event, index) {
   for (const candidate of [event?.id, event?.stableId]) {
@@ -1143,7 +1144,7 @@ async function fillLocaleGaps(byLocale, cache, { eventId, fieldType, locales, de
       && isSourcePassthrough(sourceText, clean[target])
       && fieldType === 'title'
       && wordCount(sourceText) <= MAX_PASSTHROUGH_MEMO_WORDS
-      && locales.length >= 3
+      && locales.length >= MIN_LOCALES_FOR_IDENTITY_MEMO
       && identicalTargets.length === 1;
     if (existingIdenticalTarget) {
       // The organizer already supplied the same short title in this target
@@ -1152,7 +1153,9 @@ async function fillLocaleGaps(byLocale, cache, { eventId, fieldType, locales, de
       // only a negative memo: if a later feed run omits this target, reusing
       // sourceText would publish Italian under the requested locale.
       if (hasUsableContentText(entry[target]) && !isSourcePassthrough(sourceText, entry[target])) {
-        updated[target] = entry[target];
+        // The current feed is authoritative while the target is present. Keep
+        // the paid translation for a later run where this slot is omitted,
+        // but never replace the organizer's current value with stale MT.
         continue;
       }
       if (!hasUsableContentText(entry[target]) && entry[target] !== null) {

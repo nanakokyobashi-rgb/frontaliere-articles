@@ -118,7 +118,8 @@ test('un duplicato successivo non clobbera una traduzione già memoizzata', asy
     },
   );
 
-  assert.equal(second[0].titleByLocale.en, 'traduzione-en');
+  assert.equal(second[0].titleByLocale.en, SAME_TITLE);
+  assert.equal(Object.values(cache)[0].en, 'traduzione-en');
 });
 
 test('con soli due locali il duplicato resta sul percorso di traduzione', async () => {
