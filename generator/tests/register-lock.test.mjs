@@ -153,6 +153,20 @@ test('il marker sopravvive a un crash a meta\' della sequenza di 9 scritture', (
   assert.equal(absent.length, steps.length - failAt);
 });
 
+test('label duplicate dei target vengono disambiguate con entrambi i path', () => {
+  const root = sandbox();
+  const first = path.join(root, 'one.ts');
+  const second = path.join(root, 'two.ts');
+  fs.writeFileSync(first, "id: 'x'\n");
+  const { present, absent } = registrationTargetStatus([
+    { label: 'registry', absPath: first, needle: "id: 'x'" },
+    { label: 'registry', absPath: second, needle: "id: 'x'" },
+  ]);
+  assert.deepEqual(present, [`registry [${first}]`]);
+  assert.deepEqual(absent, [`registry [${second}]`]);
+  fs.rmSync(root, { recursive: true, force: true });
+});
+
 test('il run successivo RIFIUTA di procedere su un corpus spezzato', () => {
   const root = sandbox();
   const build = makeTargets(root);

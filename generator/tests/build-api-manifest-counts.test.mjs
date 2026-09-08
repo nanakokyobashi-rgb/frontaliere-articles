@@ -148,6 +148,16 @@ test('dailyBriefBlocks e’ ri-derivato dai blocchi serviti, non dal numero che 
   assert.match(producer, /Object\.values\(blocks\)\.filter\(\(b\) => b\.available\)\.length/);
 });
 
+test('il writer daily brief conta lo stesso JSON sanificato che pubblica', () => {
+  const start = SRC.indexOf('// Daily-brief snapshot');
+  assert.ok(start >= 0);
+  const writer = SRC.slice(start, SRC.indexOf('// Written last:', start));
+  assert.match(writer, /const clean = sanitizeJsonText\(raw\)/);
+  assert.match(writer, /const served = JSON\.parse\(clean\)/);
+  assert.match(writer, /Object\.values\(served\?\.blocks \?\? \{\}\)\.filter\(\(b\) => b\?\.available\)\.length/);
+  assert.doesNotMatch(writer, /Number\(parsed\?\.counts\?\.availableBlocks\)/);
+});
+
 test('nessun contatore mappa l’ARTEFATTO ASSENTE su 0 in accordo col manifest', () => {
   // Il ramo che il gate non copriva. `derivedIfPresent` dava 0 su un artefatto
   // assente, e `counts` vale 0 per la stessa ragione (i rami `not emitted` del
