@@ -69,24 +69,33 @@ const PERMANENT_REJECTION_SIGNS = [
 function permanentRejectionGrepPattern(yml = readFileSync(WORKFLOW_PATH, 'utf-8')) {
   const commitStep = sliceBetween(yml, '- name: Commit and push', '- name: Push hero');
   const permanent = sliceBetween(commitStep, '\n          done', 'if [ "$LEDGER_ONLY" = true ]');
-  const rateHit = permanent.match(/! grep -E '([^']+)' "\$PUSH_LOG"\s*\|\s*grep -qiE '([^']+)'/);
-  const permanentHit = permanent.match(/&& grep -E '([^']+)' "\$PUSH_LOG"\s*\|\s*grep -qiE '([^']+)'/);
-  assert.ok(rateHit && permanentHit, 'commit step must classify outcome lines from the push log');
-  assert.equal(rateHit[1], permanentHit[1], 'rate-limit and permanent scans must share the outcome-line filter');
+  const outcomeHit = permanent.match(/grep -E '([^']+)' "\$PUSH_LOG"/);
+  const patterns = [...permanent.matchAll(/grep -qiE '([^']+)'/g)].map((match) => match[1]);
+  assert.equal(patterns.length, 2, 'commit step must classify rate-limit and permanent signs');
   return {
     commitStep,
     permanent,
-    outcomePattern: permanentHit[1],
-    ratePattern: rateHit[2],
-    pattern: permanentHit[2],
+    outcomePattern: outcomeHit?.[1],
+    ratePattern: patterns[0],
+    pattern: patterns[1],
   };
 }
 
-function pushLogMatchesPermanent(pattern, text) {
+function filterPushLog(outcomePattern, text) {
   const file = path.join(mkdtempSync(path.join(tmpdir(), 'push-log-')), 'push.log');
   writeFileSync(file, text);
   try {
-    execFileSync('grep', ['-qiE', pattern, file], { stdio: 'pipe' });
+    return execFileSync('grep', ['-E', outcomePattern, file], { encoding: 'utf8' });
+  } catch (err) {
+    if (err.status === 1) return '';
+    throw err;
+  }
+}
+
+function pushLogMatchesPermanent(pattern, outcomePattern, text) {
+  const outcome = filterPushLog(outcomePattern, text);
+  try {
+    execFileSync('grep', ['-qiE', pattern], { input: outcome, stdio: ['pipe', 'pipe', 'pipe'] });
     return true;
   } catch (err) {
     if (err.status === 1) return false;
@@ -549,7 +558,13 @@ test('a day that stages only the ledger cannot turn a lost push into a permanent
     'the push result must be read separately from tee under pipefail');
   assert.match(commitStep, /if \[ "\$push_status" -eq 0 \]; then/,
     'a successful git push must win even if tee fails');
-  const { permanent, pattern } = permanentRejectionGrepPattern(yml);
+  const { permanent, outcomePattern, pattern } = permanentRejectionGrepPattern(yml);
+  assert.ok(outcomePattern, 'the push output must be filtered once before classification');
+  assert.doesNotMatch(
+    commitStep,
+    /grep -E '[^']+' "\$PUSH_LOG"\s*\|\s*grep -qiE/,
+    'classification must not use a grep pipeline whose producer can receive SIGPIPE',
+  );
   const signs = pattern.split('|');
   for (const sign of PERMANENT_REJECTION_SIGNS) {
     assert.ok(signs.includes(sign), `permanent-rejection grep must include ${JSON.stringify(sign)}`);
@@ -569,9 +584,9 @@ test('a day that stages only the ledger cannot turn a lost push into a permanent
 });
 
 test('the permanent-rejection grep fires on ruleset/HTTP 403 and not on progress or a fetch-first race', () => {
-  const { pattern } = permanentRejectionGrepPattern();
+  const { outcomePattern, pattern } = permanentRejectionGrepPattern();
   assert.equal(
-    pushLogMatchesPermanent(pattern, [
+    pushLogMatchesPermanent(pattern, outcomePattern, [
       'Enumerating objects: 3, done.',
       'Counting objects: 100% (3/3), done.',
       'Writing objects: 100% (3/3), 403 bytes | 403.00 KiB/s, done.',
@@ -582,7 +597,7 @@ test('the permanent-rejection grep fires on ruleset/HTTP 403 and not on progress
     'git progress "403 bytes" on a network-failed ledger-only push must stay ledger-lost',
   );
   assert.equal(
-    pushLogMatchesPermanent(pattern, [
+    pushLogMatchesPermanent(pattern, outcomePattern, [
       '! [rejected] HEAD -> main (fetch first)',
       "error: failed to push some refs to 'https://github.com/nanakokyobashi-rgb/frontaliere-articles.git'",
       'hint: Updates were rejected because the remote contains work that you do',
@@ -591,16 +606,15 @@ test('the permanent-rejection grep fires on ruleset/HTTP 403 and not on progress
     'a non-fast-forward race is transient and must stay ledger-lost',
   );
   assert.equal(
-    pushLogMatchesPermanent(pattern, [
-      'remote: error: GH013: Repository rule violations found for refs/heads/main',
-      '! [remote rejected] HEAD -> main (push declined due to repository rule violations)',
+    pushLogMatchesPermanent(pattern, outcomePattern, [
+      '! [remote rejected] HEAD -> main (pre-receive hook declined)',
       "error: failed to push some refs to 'https://github.com/nanakokyobashi-rgb/frontaliere-articles.git'",
     ].join('\n')),
     true,
     'a ruleset rejection has no denied/403 and must still stay red',
   );
   assert.equal(
-    pushLogMatchesPermanent(pattern, [
+    pushLogMatchesPermanent(pattern, outcomePattern, [
       'remote: Permission to nanakokyobashi-rgb/frontaliere-articles.git denied to user.',
       "fatal: unable to access 'https://github.com/nanakokyobashi-rgb/frontaliere-articles.git/': The requested URL returned error: 403",
     ].join('\n')),
@@ -615,32 +629,21 @@ test('rate-limit and hint lines cannot turn a transient push into a permanent re
   assert.match(commitStep, /rate limit exceeded/);
   assert.match(commitStep, /HTTP 429/);
 
-  const dir = mkdtempSync(path.join(tmpdir(), 'push-log-filter-'));
-  const log = path.join(dir, 'push.log');
-  const filtered = (text) => {
-    writeFileSync(log, text);
-    try {
-      return execFileSync('grep', ['-E', outcomePattern, log], { encoding: 'utf8' });
-    } catch (err) {
-      if (err.status === 1) return '';
-      throw err;
-    }
-  };
-  const hintRace = filtered([
+  const hintRace = filterPushLog(outcomePattern, [
     '! [rejected] HEAD -> main (fetch first)',
     "error: failed to push some refs to 'https://github.com/example/repo.git'",
     'hint: the remote declined this race; try pulling before pushing',
   ].join('\n'));
-  assert.equal(pushLogMatchesPermanent(pattern, hintRace), false,
+  assert.equal(pushLogMatchesPermanent(pattern, outcomePattern, hintRace), false,
     'a hint is not an outcome and must not fire the permanent classifier');
 
-  const throttled = filtered([
+  const throttled = filterPushLog(outcomePattern, [
     'remote: secondary rate limit exceeded',
     "fatal: unable to access 'https://github.com/example/repo.git/': The requested URL returned error: 403",
   ].join('\n'));
-  assert.equal(pushLogMatchesPermanent(ratePattern, throttled), true,
+  assert.equal(pushLogMatchesPermanent(ratePattern, outcomePattern, throttled), true,
     'the causal rate-limit marker must be visible on the outcome lines');
-  assert.equal(pushLogMatchesPermanent(pattern, throttled), true,
+  assert.equal(pushLogMatchesPermanent(pattern, outcomePattern, throttled), true,
     'the permanent pattern may still match the 403; the workflow guard gives rate-limit precedence');
 });
 
