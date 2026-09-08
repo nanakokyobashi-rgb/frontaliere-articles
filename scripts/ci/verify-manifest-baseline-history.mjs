@@ -134,7 +134,7 @@ export function parseFollowHistory(output) {
 
 /** true solo per un path che non esisteva ancora in quel commit storico. */
 export function isExpectedMissingHistoricalPath(stderr) {
-  return /path '.+' does not exist in '.+'/.test(String(stderr));
+  return /path '.+' (does not exist in|exists on disk, but not in) '.+'/.test(String(stderr));
 }
 
 /**

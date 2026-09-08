@@ -95,6 +95,10 @@ test('loop-drift-check: il report accetta anche `1` e `True` e il rosso gia\' ri
   );
   assert.match(report, /issue_reported=/);
   assert.match(report, /node scripts\/ci\/loop-drift-check\.mjs \$ARGS >"\$REPORT_LOG" 2>&1/);
+  assert.match(
+    report,
+    /if \[ "\$DRIFT_STATUS" -ne 0 \] && \[ "\$ISSUE_REPORTED" != "true" \]; then[\s\S]+?\n\s*false\n\s*fi/,
+  );
   assert.match(report, /ARGS="--issue --strict"/);
 
   const provenance = stepBlock(WORKFLOW, PROVENANCE);

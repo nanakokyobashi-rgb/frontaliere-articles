@@ -149,6 +149,7 @@ test('la passata sui rinomini usa il path storico associato a ogni commit', () =
 
 test('un path storico assente e\' atteso, un errore di lettura no', () => {
   assert.equal(isExpectedMissingHistoricalPath("fatal: path 'old-name.mjs' does not exist in 'abc'"), true);
+  assert.equal(isExpectedMissingHistoricalPath("fatal: path 'old-name.mjs' exists on disk, but not in 'abc'"), true);
   assert.equal(isExpectedMissingHistoricalPath('fatal: Not a valid object name abc:old-name.mjs'), false);
   assert.match(HISTORY_SCRIPT, /if \(r\.status === 0\) hashes\.add/);
   assert.match(HISTORY_SCRIPT, /isExpectedMissingHistoricalPath\(r\.stderr\)/);

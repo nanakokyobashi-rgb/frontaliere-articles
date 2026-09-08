@@ -108,7 +108,7 @@ jobs:
           cat "$REPORT_LOG"
 
           ISSUE_REPORTED=false
-          if grep -Eq '\[github-issue-creator\] (Created:|Commented on existing|Recorded transient failure|Reopened #)' "$REPORT_LOG"; then
+          if grep -Eq '\[github-issue-creator\] (Created:|Commented on existing|Reopened #[0-9]+ —)' "$REPORT_LOG"; then
             ISSUE_REPORTED=true
           fi
           echo "issue_reported=$ISSUE_REPORTED" >> "$GITHUB_OUTPUT"
