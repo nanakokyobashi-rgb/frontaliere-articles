@@ -1123,8 +1123,16 @@ async function fillLocaleGaps(byLocale, cache, { eventId, fieldType, locales, de
     const entry = cache[cacheKey] || {};
     const legacyCacheKey = legacyEventTranslationCacheKey({ fieldType, sourceLocale, normalizedSource });
     const legacyEntry = cache[legacyCacheKey];
+    const targetAlreadyCarriesSource = hasUsableContentText(clean?.[target])
+      && normalizeText(clean[target]).replace(/\s+/g, ' ') === normalizedSource;
     if (Object.prototype.hasOwnProperty.call(entry, target)) {
       const memo = entry[target];
+      if (targetAlreadyCarriesSource) {
+        // The current feed is authoritative when it already carries the
+        // source text in this target locale. A positive MT memo from an older
+        // run must not replace a legitimate organizer value with stale MT.
+        continue;
+      }
       if (memo === null) continue; // stable passthrough memo, no network retry
       if (hasUsableContentText(memo)) {
         updated[target] = memo;

@@ -97,7 +97,7 @@ test('non congela un duplicato del feed copiato in tutti i locali', async () => 
   assert.match(out[0].titleByLocale.fr, /^traduzione-fr-/);
 });
 
-test('un duplicato successivo riusa la traduzione memoizzata', async () => {
+test('un duplicato successivo preserva il feed invece di clobberarlo con MT stantia', async () => {
   const cache = {};
   const first = await enrichEventsWithLocaleFallbackTranslations(
     [event('guidle:stable')],
@@ -118,7 +118,7 @@ test('un duplicato successivo riusa la traduzione memoizzata', async () => {
     },
   );
 
-  assert.equal(second[0].titleByLocale.en, 'traduzione-en');
+  assert.equal(second[0].titleByLocale.en, SAME_TITLE);
   assert.equal(Object.values(cache)[0].en, 'traduzione-en');
 });
 

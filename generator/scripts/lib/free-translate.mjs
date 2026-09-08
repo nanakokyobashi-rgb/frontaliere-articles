@@ -1171,7 +1171,12 @@ export function balanceMarkdownMarkers(s) {
   return out.trim();
 }
 
-export async function freeTranslate({ text, sourceLang, targetLang, fieldType = 'title' }) {
+function noteTranslationOutcome(state, outcome) {
+  if (!state) return;
+  state[outcome] = (state[outcome] || 0) + 1;
+}
+
+export async function freeTranslate({ text, sourceLang, targetLang, fieldType = 'title', _outcome = null }) {
   const sourceClean = normalizeBlock(text);
   if (!sourceClean) return '';
   if (sourceLang === targetLang) return sourceClean;
@@ -1219,7 +1224,10 @@ export async function freeTranslate({ text, sourceLang, targetLang, fieldType = 
       // proxy che risponde con l'eco) non e' la cascata che ha fallito. Se
       // rimandano la sorgente TUTTI, `freeTranslate` esce '' e il chiamante
       // legge quello che ha sempre letto: traduzione non avvenuta.
-      if (rejectedAsPassthrough(tierName, clean, result)) return '';
+      if (rejectedAsPassthrough(tierName, clean, result)) {
+        noteTranslationOutcome(_outcome, 'passthroughs');
+        return '';
+      }
       if (result) {
         _cascadeStats.tierHits[tierName] = (_cascadeStats.tierHits[tierName] || 0) + 1;
         _cascadeStats.successes++;
@@ -1228,6 +1236,7 @@ export async function freeTranslate({ text, sourceLang, targetLang, fieldType = 
       }
     } catch (err) {
       _cascadeStats.tierErrors[tierName] = (_cascadeStats.tierErrors[tierName] || 0) + 1;
+      noteTranslationOutcome(_outcome, 'errors');
     }
     return '';
   }
@@ -1290,11 +1299,17 @@ export async function freeTranslate({ text, sourceLang, targetLang, fieldType = 
     }
     // Chunk long text at sentence/paragraph boundaries
     const chunks = _chunkAtSentences(clean, 4800);
-    if (chunks.length === 0) return '';
+    if (chunks.length === 0) {
+      if (_outcome) _outcome.incomplete = true;
+      return '';
+    }
     const parts = [];
     for (const chunk of chunks) {
       const mm = await translateWithMyMemory(chunk, sourceLang, targetLang);
-      if (!mm || mm.includes('MYMEMORY WARNING')) return ''; // quota hit mid-chunk, abort
+      if (!mm || mm.includes('MYMEMORY WARNING')) {
+        if (_outcome) _outcome.incomplete = true;
+        return ''; // quota hit mid-chunk, abort
+      }
       parts.push(mm);
     }
     // `return joined` e non un confronto locale: questo e' il ramo dei testi
@@ -1373,13 +1388,13 @@ export async function freeTranslate({ text, sourceLang, targetLang, fieldType = 
  * @param {number} [options.maxRetries=2] - Max retry attempts after first failure
  * @returns {Promise<string>} Translated text or ''
  */
-export async function freeTranslateWithRetry({ text, sourceLang, targetLang, fieldType = 'title', maxRetries = 2 }) {
-  const result = await freeTranslate({ text, sourceLang, targetLang, fieldType });
+export async function freeTranslateWithRetry({ text, sourceLang, targetLang, fieldType = 'title', maxRetries = 2, _outcome = null }) {
+  const result = await freeTranslate({ text, sourceLang, targetLang, fieldType, _outcome });
   if (result) return result;
 
   for (let i = 1; i <= maxRetries; i++) {
     await delay(i * 1000);
-    const retry = await freeTranslate({ text, sourceLang, targetLang, fieldType });
+    const retry = await freeTranslate({ text, sourceLang, targetLang, fieldType, _outcome });
     if (retry) return retry;
   }
 
@@ -1400,19 +1415,11 @@ export function asTranslationResult(value) {
   return { text: typeof value.text === 'string' ? value.text : '', passthrough: value.passthrough === true };
 }
 
-function _tierTotal(bucket) {
-  let n = 0;
-  for (const value of Object.values(bucket)) n += value;
-  return n;
-}
-
 /** Return the retry result together with the reason for an empty translation. */
 export async function freeTranslateWithRetryDetailed({ text, sourceLang, targetLang, fieldType = 'title', maxRetries = 2 }) {
-  const passBefore = _tierTotal(_cascadeStats.tierPassthroughs);
-  const errBefore = _tierTotal(_cascadeStats.tierErrors);
-  const out = await freeTranslateWithRetry({ text, sourceLang, targetLang, fieldType, maxRetries });
+  const outcome = { passthroughs: 0, errors: 0, incomplete: false };
+  const out = await freeTranslateWithRetry({ text, sourceLang, targetLang, fieldType, maxRetries, _outcome: outcome });
   if (out) return { text: out, passthrough: false };
-  const passthrough =
-    _tierTotal(_cascadeStats.tierPassthroughs) > passBefore && _tierTotal(_cascadeStats.tierErrors) === errBefore;
+  const passthrough = outcome.passthroughs > 0 && outcome.errors === 0 && !outcome.incomplete;
   return { text: '', passthrough };
 }

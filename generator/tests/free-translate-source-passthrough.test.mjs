@@ -43,6 +43,7 @@ import assert from 'node:assert/strict';
 
 import {
   freeTranslate,
+  freeTranslateWithRetryDetailed,
   getCascadeStats,
   logCascadeSummary,
   isSourcePassthrough,
@@ -220,6 +221,42 @@ describe('freeTranslate — guardia «uscita == sorgente»', () => {
     assert.equal(out, '');
     assert.equal(after.passthroughs - before.passthroughs, 0);
     assert.equal(after.hits - before.hits, 0);
+  });
+
+  test('il dettaglio del retry resta per-chiamata e non eredita errori globali', async () => {
+    globalThis.fetch = async (url) => {
+      if (String(url).includes('api.mymemory.translated.net')) {
+        return {
+          ok: true,
+          json: async () => ({ responseData: { translatedText: IT, match: 1 } }),
+        };
+      }
+      return { ok: false, status: 503 };
+    };
+
+    const out = await freeTranslateWithRetryDetailed({
+      text: IT,
+      sourceLang: 'it',
+      targetLang: 'en',
+      fieldType: 'description',
+      maxRetries: 0,
+    });
+
+    assert.deepEqual(out, { text: '', passthrough: true });
+  });
+
+  test('un errore nella stessa chiamata impedisce il memo del passthrough', async () => {
+    stubCascade(IT);
+
+    const out = await freeTranslateWithRetryDetailed({
+      text: IT,
+      sourceLang: 'it',
+      targetLang: 'en',
+      fieldType: 'description',
+      maxRetries: 0,
+    });
+
+    assert.deepEqual(out, { text: '', passthrough: false });
   });
 });
 
