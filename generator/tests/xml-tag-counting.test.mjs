@@ -72,6 +72,12 @@ test('input assente o non stringa non fa esplodere un gate di publish', () => {
   assert.equal(stripNonMarkup(null), '');
 });
 
+test('il nome del tag è un QName XML escapato, non una regex fornita dal chiamante', () => {
+  assert.equal(countXmlTags('<rss><news:item/><news:item/></rss>', 'news:item'), 2);
+  assert.throws(() => countXmlTags('<rss><item/></rss>', 'item|url'), /QName XML/);
+  assert.throws(() => countXmlTags('<rss><item/></rss>', 'item\\'), /QName XML/);
+});
+
 test('writer, gate e pavimenti contano con la stessa funzione', () => {
   for (const file of CALLERS) {
     const src = read(file);
@@ -81,6 +87,13 @@ test('writer, gate e pavimenti contano con la stessa funzione', () => {
       `${file} deve importare il contatore condiviso invece di riscriverlo`,
     );
   }
+});
+
+test('publish-api usa il contatore condiviso anche per i due gate News XML', () => {
+  const workflow = read('.github/workflows/publish-api.yml');
+  assert.match(workflow, /countXmlTags/);
+  assert.doesNotMatch(workflow, /grep -c ['"]<url>['"]/);
+  assert.doesNotMatch(workflow, /grep -c ['"]<news:publication_date>['"]/);
 });
 
 test('nessun chiamante torna al needle testuale', () => {

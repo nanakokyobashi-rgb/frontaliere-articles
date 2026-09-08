@@ -60,6 +60,34 @@ export function matchingDelimiter(src, openIdx) {
   if (!close) throw new Error(`matchingDelimiter: '${open}' non è un delimitatore di apertura`);
   let depth = 0;
   let quote = null;
+
+  const canStartRegex = (idx) => {
+    let j = idx - 1;
+    while (j >= openIdx && /\s/.test(src[j])) j -= 1;
+    if (j < openIdx) return true;
+    const previous = src[j];
+    if ('([{=,:;!?&|+\-*%^~<>'.includes(previous)) return true;
+    let end = j;
+    while (j >= openIdx && /[A-Za-z_$]/.test(src[j])) j -= 1;
+    if (end === j) return false;
+    return /^(?:return|throw|case|delete|void|typeof|instanceof|in|of|yield|await|else|do)$/.test(src.slice(j + 1, end + 1));
+  };
+
+  const skipRegex = (start) => {
+    let inClass = false;
+    for (let i = start + 1; i < src.length; i += 1) {
+      if (src[i] === '\\') { i += 1; continue; }
+      if (src[i] === '\n' || src[i] === '\r') return start;
+      if (src[i] === '[') { inClass = true; continue; }
+      if (src[i] === ']' && inClass) { inClass = false; continue; }
+      if (src[i] === '/' && !inClass) {
+        while (/[A-Za-z]/.test(src[i + 1] || '')) i += 1;
+        return i;
+      }
+    }
+    return -1;
+  };
+
   for (let i = openIdx; i < src.length; i += 1) {
     const ch = src[i];
     if (quote !== null) {
@@ -77,6 +105,12 @@ export function matchingDelimiter(src, openIdx) {
       const end = src.indexOf('*/', i + 2);
       if (end === -1) return -1;
       i = end + 1;
+      continue;
+    }
+    if (ch === '/' && canStartRegex(i)) {
+      const end = skipRegex(i);
+      if (end === -1) return -1;
+      i = end;
       continue;
     }
     if (ch === "'" || ch === '"' || ch === '`') { quote = ch; continue; }
@@ -105,9 +139,13 @@ export function matchingDelimiter(src, openIdx) {
  * @returns {{declStart: number, openIdx: number, closeIdx: number} | null}
  */
 export function findIdListLiteralSpan(src, varName) {
-  const declRx = new RegExp(`(?:export\\s+)?(?:const|let|var)\\s+${escapeRegex(varName)}\\b[^=\\n]*=\\s*\\[`);
-  const m = declRx.exec(src);
-  if (!m) return null;
+  const declRx = new RegExp(`(?:export\\s+)?(?:const|let|var)\\s+${escapeRegex(varName)}\\b[^=\\n]*=\\s*\\[`, 'g');
+  const matches = [...src.matchAll(declRx)];
+  if (matches.length === 0) return null;
+  if (matches.length !== 1) {
+    throw new Error(`array ${varName}: dichiarazione ambigua (${matches.length} letterali trovati)`);
+  }
+  const m = matches[0];
   const openIdx = m.index + m[0].length - 1;
   const closeIdx = matchingDelimiter(src, openIdx);
   if (closeIdx === -1) throw new Error(`array ${varName}: la '[' della dichiarazione non si chiude — sorgente troncata?`);
@@ -136,15 +174,16 @@ export function removeFromIdListLiteral(src, varName, id) {
   const body = src.slice(span.openIdx + 1, span.closeIdx);
   const after = src.slice(span.closeIdx);
   const escaped = escapeRegex(id);
+  const quotedId = `(['"])${escaped}\\1`;
   let newBody;
-  if (new RegExp(`'${escaped}',\\s*`).test(body)) {
-    newBody = body.replace(new RegExp(`'${escaped}',\\s*`), '');
-  } else if (new RegExp(`,\\s*'${escaped}'`).test(body)) {
-    newBody = body.replace(new RegExp(`,\\s*'${escaped}'`), '');
-  } else if (new RegExp(`^\\s*'${escaped}'\\s*$`).test(body)) {
+  if (new RegExp(`${quotedId}\\s*,\\s*`).test(body)) {
+    newBody = body.replace(new RegExp(`${quotedId}\\s*,\\s*`), '');
+  } else if (new RegExp(`,\\s*${quotedId}`).test(body)) {
+    newBody = body.replace(new RegExp(`,\\s*${quotedId}`), '');
+  } else if (new RegExp(`^\\s*${quotedId}\\s*$`).test(body)) {
     newBody = '';
   } else {
-    return { changed: false, src };
+    throw new Error(`array ${varName}: id atteso ${JSON.stringify(id)} non trovato nel letterale`);
   }
   return { changed: true, src: before + newBody + after };
 }

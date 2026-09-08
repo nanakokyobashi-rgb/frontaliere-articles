@@ -227,7 +227,18 @@ export function beginRegisterLock(projectRoot, id, section) {
  * meant to survive it for the next invocation to trip on.
  */
 export function endRegisterLock(projectRoot, section) {
-  try { unlinkSync(registerLockPath(projectRoot, section)); } catch { /* already gone */ }
+  removeRegisterLock(projectRoot, registerLockFile(section));
+}
+
+function removeRegisterLock(projectRoot, relPath) {
+  try {
+    unlinkSync(path.join(projectRoot, relPath));
+  } catch (err) {
+    if (err?.code === 'ENOENT') return;
+    throw new RegisterLockError(
+      `could not remove registration lock ${relPath}: ${err?.message || err}`,
+    );
+  }
 }
 
 function normaliseLock(parsed) {
@@ -274,7 +285,14 @@ export function readLegacyRegisterLock(projectRoot) {
 export function registrationTargetStatus(targets) {
   const present = [];
   const absent = [];
-  for (const t of targets) {
+  const list = Array.isArray(targets) ? targets : [];
+  const rawLabels = list.map((t, index) => String(t?.label ?? t?.absPath ?? `target #${index + 1}`));
+  const counts = new Map();
+  for (const label of rawLabels) counts.set(label, (counts.get(label) || 0) + 1);
+  const labels = rawLabels.map((label, index) => (
+    counts.get(label) > 1 ? `${label} [${list[index]?.absPath || `target #${index + 1}`}]` : label
+  ));
+  for (const [index, t] of list.entries()) {
     let has = false;
     if (existsSync(t.absPath)) {
       if (t.needle == null) has = true;
@@ -289,7 +307,7 @@ export function registrationTargetStatus(targets) {
         } catch { has = false; }
       }
     }
-    (has ? present : absent).push(t.label);
+    (has ? present : absent).push(labels[index]);
   }
   return { present, absent };
 }
@@ -363,7 +381,7 @@ export function resolveRegisterLock(projectRoot, buildTargets, section) {
           `missing entries (or remove the partial ones) by hand, then delete ${relPath}.`,
       );
     }
-    try { unlinkSync(path.join(projectRoot, relPath)); } catch { /* already gone */ }
+    removeRegisterLock(projectRoot, relPath);
     resolved.push({
       file: relPath,
       state: present.length > 0 ? 'committed' : 'nothing-written',

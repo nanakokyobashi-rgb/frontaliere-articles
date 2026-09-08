@@ -17,6 +17,9 @@ import {
   extractSitePaths,
   handoffTitle,
   originWriteSteps,
+  hasParkMarker,
+  PARK_MARKER,
+  readManifestSnapshot,
   lastVerdictComment,
   HANDOFF_VERDICTS,
   MIRROR_LOCKED_MODES,
@@ -250,6 +253,20 @@ test('citedAsMirrorBlocked riconosce le 11 forme reali di #316 e non la menzione
   }
   assert.equal(citedAsMirrorBlocked(`Ho escluso \`${p}\`: non tocca questo campo.`, p), false);
   assert.equal(citedAsMirrorBlocked('', p), false);
+  assert.equal(
+    citedAsMirrorBlocked(`Root cause in \`${p}-residuo\`, identical nel manifest.`, p),
+    false,
+    'un path prefixato non deve matchare senza la chiusura del code span',
+  );
+});
+
+test('#1127: un blocked-* richiede la stessa corroborazione del mirror del path spedito', () => {
+  const filler = 'x'.repeat(300);
+  const body = `Il fix vive in valerielinc-ops/frontaliere-si-o-no. ${filler} `
+    + 'Il bersaglio è `scripts/lib/ai-models.mjs`, ma questa frase è solo informativa.';
+  const d = handoffDecision({ verdict: 'blocked-admin-settings', body });
+  assert.equal(d.handoff, false);
+  assert.match(d.reason, /corroborazione|mirror/i);
 });
 
 // --- #972 item 1: consegnare non autorizza a chiudere, su `no-root-cause` ---
@@ -528,6 +545,25 @@ test('#1184: la consegna chiusa not planned non resta un dedup terminale', async
   assert.match(delivered, /state === 'CLOSED'/);
   assert.match(delivered, /stateReason === 'NOT_PLANNED'/);
   assert.match(delivered, /return null/);
+});
+
+test('#1119: chiusura idempotente e parcheggio marcato', () => {
+  assert.deepEqual(originWriteSteps({ issue: '548', repo: 'o/r', close: true, issueState: 'CLOSED' }), []);
+  assert.equal(hasParkMarker([{}]), false);
+  assert.equal(hasParkMarker([{ body: `${PARK_MARKER}\nparcheggiata` }]), true);
+});
+
+test('#1127: una collisione path corpus/site fa fallire la lettura del manifest', () => {
+  const file = `/tmp/r12-manifest-collision-${process.pid}.json`;
+  fs.writeFileSync(file, JSON.stringify({ files: [
+    { path: 'generator/a.mjs', sitePath: 'scripts/a.mjs', mode: 'adapted' },
+    { path: 'scripts/a.mjs', sitePath: 'scripts/a.mjs', mode: 'identical' },
+  ] }));
+  try {
+    assert.throws(() => readManifestSnapshot(file), /collision|collide/i);
+  } finally {
+    fs.rmSync(file, { force: true });
+  }
 });
 
 // --- #972 item 4: `identical` non implica «trasportato» ---------------------

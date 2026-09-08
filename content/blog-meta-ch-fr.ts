@@ -6085,6 +6085,12 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.bollette-26-centesimi-2027.title': 'Les prix de l\'électricité en légère baisse en 2027',
     'blog.article.bollette-26-centesimi-2027.excerpt': 'En 2027, les ménages suisses paieront 26,5 ct./kWh de tarif moyen : baisse de 4% et économie de 53 francs par an selon ElCom.',
     'blog.article.bollette-26-centesimi-2027.imageAlt': 'Famille suisse consultant facture d\'énergie après baisse tarifaire 2027 annoncée par ElCom',
+    'blog.article.migros-online-regensdorf-2026.title': 'Migros Online : +21 000 produits à Regensdorf',
+    'blog.article.migros-online-regensdorf-2026.excerpt': 'Nouveau hub logistique à Regensdorf (ZH) avec 60 % plus de produits, 7 500 commandes/jour, 200-500 emplois. Livraisons le même jour à Zurich avant février 2027.',
+    'blog.article.migros-online-regensdorf-2026.imageAlt': 'Centre de distribution automatisé Migros Online à Regensdorf, Zurich, avec rayonnages et systèmes de transport',
+    'blog.article.infermieri-carenza-svizzera-2034.title': 'Infirmières : pénurie d\'ici 2034 en Suisse',
+    'blog.article.infermieri-carenza-svizzera-2034.excerpt': 'Le 4ème rapport Obsan prévoit une pénurie sévère d\'infirmières d\'ici 2034. Seulement 55% des besoins couverts par du personnel formé en Suisse.',
+    'blog.article.infermieri-carenza-svizzera-2034.imageAlt': 'Couloir d\'hôpital suisse moderne avec personnel de santé en costume médical',
 };
 
 export default blogMetaChFr;

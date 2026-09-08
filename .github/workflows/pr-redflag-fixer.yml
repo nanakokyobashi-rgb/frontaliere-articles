@@ -98,10 +98,17 @@ jobs:
           # `\n` delle classi negate; il guard `mirror bash` di
           # generator/tests/redflag-important-marker.test.mjs lo pretende verbatim.
           # shellcheck disable=SC2016 # the single-quoted PCRE is intentional
-          if ! printf '%s' "$REVIEW_BODY" | grep -qP '^(?:[^🟡🟢❓]*|(?:[^`«]|`[^`]*`|«[^»]*»|`(?![^`]*`))*[🟡🟢❓](?:[^`«]|`[^`]*`|«[^»]*»|`(?![^`]*`))*)(?<!\s`)(?<!^`)🔴\s*\*{0,2}\s*Important\s*\*{0,2}\s*[:—-]'; then
+          if ! printf '%s' "$REVIEW_BODY" | LC_ALL=C.UTF-8 grep -qP '^(?:(?=(?:[^`]*`[^`]*`)*[^`]*`[^`]*$)(?:[^🟡🟢❓]*|(?:[^«]|«[^»]*»)*[🟡🟢❓](?:[^«]|«[^»]*»)*)|(?:[^🟡🟢❓]*|(?:[^`«]|`[^`]*`|«[^»]*»|`(?![^`]*`))*[🟡🟢❓](?:[^`«]|`[^`]*`|«[^»]*»|`(?![^`]*`))*)(?<!\s`)(?<!^`))🔴\s*\*{0,2}\s*Important\s*\*{0,2}\s*[:—-]'; then
             echo "Review contiene 🔴 ma nessun finding '🔴 Important' (decorativo) → skip 🔴-fix (no-op)."
             echo "actionable=false" >> "$GITHUB_OUTPUT"; exit 0
           fi
+          case "$REVIEW_BODY" in
+            *'## Findings ('*) ;;
+            *)
+              echo "Review con 🔴 ma senza l'intestazione \\`## Findings (\\` → non è un verdetto del reviewer, skip 🔴-fix."
+              echo "actionable=false" >> "$GITHUB_OUTPUT"; exit 0
+              ;;
+          esac
           state=$(gh pr view "$PR_NUMBER" --repo "$REPO" --json state --jq '.state' 2>/dev/null || echo UNKNOWN)
           if [ "$state" != "OPEN" ]; then
             echo "PR #$PR_NUMBER non più OPEN (state=$state) → già risolta, skip 🔴-fix (no-op)."
@@ -229,6 +236,7 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REPO: ${{ github.repository }}
           PR_NUMBER: ${{ github.event.pull_request.number }}
+          REVIEW_BODY: ${{ github.event.review.body }}
           HAS_PAT: ${{ env.GITHUB_PAT_NANAKO != '' }}
           # La quota è per-account: il fixer di PR deve onorare anche il beacon
           # scritto dal ciclo del sito, non solo quello locale.
@@ -260,9 +268,20 @@ jobs:
             exit 0
           fi
 
-          # Round corrente = numero di marker già presenti.
+          # Il preflight non fa checkout: il fingerprint si calcola qui, dove lo
+          # script del repository è disponibile, prima di consumare un round.
           comments=$(gh api "repos/$REPO/issues/$PR_NUMBER/comments" --paginate \
             --jq '[.[] | .body] | join("\n")' 2>/dev/null || echo "")
+          INCOMING_FP=$(printf '%s' "$REVIEW_BODY" | node scripts/ci/redflag-findings-fingerprint.mjs 2>/dev/null || echo NULL)
+          PRIOR_FP=$(printf '%s' "$comments" | grep -oE 'REDFLAG_FINDINGS_FINGERPRINT: [a-f0-9]{64}' \
+            | tail -1 | cut -d' ' -f2 || true)
+          if [ -n "$INCOMING_FP" ] && [ "$INCOMING_FP" != "NULL" ] \
+             && [ -n "$PRIOR_FP" ] && [ "$INCOMING_FP" = "$PRIOR_FP" ]; then
+            echo "Finding 🔴 identici a un round già registrato ($INCOMING_FP) → skip duplicate review, nessun round consumato."
+            echo "proceed=false" >> "$GITHUB_OUTPUT"; exit 0
+          fi
+
+          # Round corrente = numero di marker già presenti.
           ROUND=$(printf '%s' "$comments" | grep -oE 'REDFLAG_FIX_ROUND: [0-9]+' \
             | grep -oE '[0-9]+' | sort -rn | head -1 || true)
           ROUND=${ROUND:-0}
@@ -306,7 +325,11 @@ jobs:
 
           # Posta/incrementa il marker round PRIMA di invocare Claude (così se la
           # run muore, il round è comunque contato → l'anti-loop tiene).
-          gh pr comment "$PR_NUMBER" --repo "$REPO" --body "$(printf '<!-- REDFLAG_FIX_ROUND: %s -->\n_🔴-fixer round %s/%s avviato (auto)._' "$NEXT" "$NEXT" "$MAX_ROUNDS")" \
+          FINDINGS_MARKER=""
+          if [ -n "${INCOMING_FP:-}" ] && [ "${INCOMING_FP:-NULL}" != "NULL" ]; then
+            FINDINGS_MARKER=$(printf '<!-- REDFLAG_FINDINGS_FINGERPRINT: %s -->\n' "$INCOMING_FP")
+          fi
+          gh pr comment "$PR_NUMBER" --repo "$REPO" --body "$(printf '<!-- REDFLAG_FIX_ROUND: %s -->\n%s_🔴-fixer round %s/%s avviato (auto)._' "$NEXT" "$FINDINGS_MARKER" "$NEXT" "$MAX_ROUNDS")" \
             2>/dev/null || true
           echo "proceed=true" >> "$GITHUB_OUTPUT"
           echo "round=$NEXT"  >> "$GITHUB_OUTPUT"
@@ -322,7 +345,7 @@ jobs:
       # re-review non partirebbe (anti-ricorsione); il fix verrebbe comunque
       # committato. Esposto come remote authenticato.
       - name: Configure push remote (App token / PAT)
-        if: steps.guard.outputs.proceed == 'true' && (env.APP_TOKEN != '' || env.GITHUB_PAT != '')
+        if: steps.guard.outputs.proceed == 'true' && (env.APP_TOKEN != '' || env.GITHUB_PAT_NANAKO != '')
         env:
           PUSH_TOKEN: ${{ env.GITHUB_PAT_NANAKO }}
           REPO: ${{ github.repository }}
@@ -379,7 +402,7 @@ jobs:
           # di un round gia' chiuso: l'agent non fallisce, fixa il round
           # sbagliato, e il marker di round e' gia' stato postato.
           gh api "repos/$REPO/pulls/$PR_NUMBER/reviews" \
-            --jq '[.[] | select(.user.login|test("^(claude|frontaliere-automation)";"i"))] | last | .body // empty' \
+            --jq '[.[] | select((.user.login|test("^(claude|frontaliere-automation)";"i")) and (.body|contains("## Findings (")))] | last | .body // empty' \
             > "$OUT/latest-review.md" 2>/dev/null || : > "$OUT/latest-review.md"
 
           {
