@@ -60,6 +60,7 @@ import { sha256 } from './loop-drift-check.mjs';
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const MANIFEST_REL = 'scripts/ci/loop-sync-manifest.json';
 const JSON_OUT = process.argv.includes('--json');
+export const CANONICAL_HISTORY_REF = 'origin/main';
 
 /**
  * Il verdetto, PURO: niente disco, niente git, niente rete — e' questo a
@@ -114,22 +115,84 @@ function isShallow() {
   }
 }
 
+/** Associa ogni commit del log `--follow` al path che aveva in quel commit. */
+export function parseFollowHistory(output) {
+  const entries = [];
+  let sha = null;
+  for (const line of String(output).split(/\r?\n/)) {
+    if (!line) continue;
+    if (/^[0-9a-f]{40}$/i.test(line)) {
+      sha = line;
+      continue;
+    }
+    if (!sha) continue;
+    entries.push({ sha, path: line });
+    sha = null;
+  }
+  return entries;
+}
+
 /**
- * Gli hash di tutti i blob mai comparsi ai path dati, dalla storia locale.
- *
- * `rev-list --all --objects -- <paths>` enumera in UNA passata gli oggetti di
- * tutti i path insieme (ogni riga: `<oid> <path>`), e `cat-file --batch` ne
- * legge il contenuto in un solo processo: 330 voci e ~1800 blob stanno in poco
- * piu' di un secondo, contro le centinaia di richieste HTTP che costerebbe la
- * stessa domanda via API.
+ * Decodifica l'output di `git cat-file --batch` senza trasformare una lettura
+ * interrotta in una mappa parziale. Un output `missing`, `ambiguous` o
+ * troncato e' un errore del verificatore, non una storia senza revisioni.
+ */
+export function parseCatFileBatchOutput(buf, oidToPaths) {
+  const byPath = new Map();
+  if (!oidToPaths || oidToPaths.size === 0) return byPath;
+  if (!Buffer.isBuffer(buf) || buf.length === 0) {
+    throw new Error('git cat-file --batch: stdout troncato o vuoto');
+  }
+
+  let off = 0;
+  const seenOids = new Set();
+  while (off < buf.length) {
+    const nl = buf.indexOf(10, off);
+    if (nl < 0) throw new Error('git cat-file --batch: stdout troncato (header senza newline)');
+    const header = buf.slice(off, nl).toString();
+    const [oid, type, sizeStr] = header.split(' ');
+    if (type === 'missing' || type === 'ambiguous') {
+      throw new Error(`git cat-file --batch: ${header}`);
+    }
+    if (type !== 'blob' || !/^\d+$/.test(sizeStr || '')) {
+      throw new Error(`git cat-file --batch: header non parsabile: ${header || '(vuoto)'}`);
+    }
+    if (!oidToPaths.has(oid)) {
+      throw new Error(`git cat-file --batch: oid inatteso: ${oid}`);
+    }
+    const size = Number(sizeStr);
+    if (!Number.isSafeInteger(size)) {
+      throw new Error(`git cat-file --batch: dimensione non parsabile per ${oid}: ${sizeStr}`);
+    }
+    const contentStart = nl + 1;
+    const contentEnd = contentStart + size;
+    if (contentEnd >= buf.length || buf[contentEnd] !== 10) {
+      throw new Error(`git cat-file --batch: contenuto troncato per ${oid}`);
+    }
+    seenOids.add(oid);
+    const hash = sha256(buf.slice(contentStart, contentEnd));
+    for (const rel of oidToPaths.get(oid) || []) {
+      if (!byPath.has(rel)) byPath.set(rel, new Set());
+      byPath.get(rel).add(hash);
+    }
+    off = contentEnd + 1;
+  }
+  if (seenOids.size !== oidToPaths.size) {
+    const missing = [...oidToPaths.keys()].filter((oid) => !seenOids.has(oid));
+    throw new Error(`git cat-file --batch: stdout troncato; nessuna risposta per ${missing.join(', ')}`);
+  }
+  return byPath;
+}
+
+/**
+ * Gli hash di tutti i blob mai comparsi ai path dati, dalla storia canonica.
  *
  * @returns {Map<string, Set<string>>}
  */
 function blobsByPathFromHistory(paths) {
-  const byPath = new Map();
-  if (paths.length === 0) return byPath;
+  if (paths.length === 0) return new Map();
   const want = new Set(paths);
-  const listing = git(['rev-list', '--all', '--objects', '--', ...paths]);
+  const listing = git(['rev-list', '--full-history', CANONICAL_HISTORY_REF, '--objects', '--', ...paths]);
   const oidToPaths = new Map();
   for (const line of listing.split('\n')) {
     const sp = line.indexOf(' ');
@@ -142,29 +205,14 @@ function blobsByPathFromHistory(paths) {
     if (!oidToPaths.has(oid)) oidToPaths.set(oid, new Set());
     oidToPaths.get(oid).add(rel);
   }
-  if (oidToPaths.size === 0) return byPath;
+  if (oidToPaths.size === 0) return new Map();
   const res = spawnSync('git', ['cat-file', '--batch'], {
     cwd: ROOT,
     input: `${[...oidToPaths.keys()].join('\n')}\n`,
     maxBuffer: 1 << 30,
   });
   if (res.status !== 0) throw new Error(`git cat-file --batch: ${res.stderr?.toString() || res.status}`);
-  const buf = res.stdout;
-  let off = 0;
-  while (off < buf.length) {
-    const nl = buf.indexOf(10, off);
-    if (nl < 0) break;
-    const [oid, , sizeStr] = buf.slice(off, nl).toString().split(' ');
-    const size = Number(sizeStr);
-    if (!Number.isFinite(size)) break;
-    const hash = sha256(buf.slice(nl + 1, nl + 1 + size));
-    for (const rel of oidToPaths.get(oid) || []) {
-      if (!byPath.has(rel)) byPath.set(rel, new Set());
-      byPath.get(rel).add(hash);
-    }
-    off = nl + 1 + size + 1; // header \n contenuto \n
-  }
-  return byPath;
+  return parseCatFileBatchOutput(res.stdout, oidToPaths);
 }
 
 /**
@@ -177,12 +225,12 @@ function blobsFollowingRenames(rel) {
   const hashes = new Set();
   let commits;
   try {
-    commits = git(['log', '--follow', '--format=%H', '--', rel]).split('\n').filter(Boolean);
+    commits = parseFollowHistory(git(['log', '--follow', '--format=%H', '--name-only', CANONICAL_HISTORY_REF, '--', rel]));
   } catch {
     return hashes;
   }
-  for (const sha of commits) {
-    const r = spawnSync('git', ['cat-file', 'blob', `${sha}:${rel}`], { cwd: ROOT, maxBuffer: 1 << 28 });
+  for (const { sha, path: historicalPath } of commits) {
+    const r = spawnSync('git', ['cat-file', 'blob', `${sha}:${historicalPath}`], { cwd: ROOT, maxBuffer: 1 << 28 });
     if (r.status === 0) hashes.add(sha256(r.stdout));
   }
   return hashes;

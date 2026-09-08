@@ -80,6 +80,28 @@ test('loop-drift-check: i due passi di rete escalano sullo stesso opt-in', () =>
   );
 });
 
+test('loop-drift-check: il report accetta anche `1` e `True` e il rosso gia\' riportato non duplica issue', () => {
+  for (const stepName of [REPORT, PROVENANCE]) {
+    const cond = escalationCondition(stepName);
+    assert.match(cond, /github\.event\.inputs\.report_issue.*=\s*"1"/);
+    assert.match(cond, /github\.event\.inputs\.report_issue.*=\s*"True"/);
+  }
+  const report = stepBlock(WORKFLOW, REPORT);
+  assert.match(report, /id: drift_report/);
+  assert.match(
+    report,
+    /continue-on-error: \$\{\{ github\.event_name == 'schedule' \|\| github\.event\.inputs\.report_issue == 'true' \|\| github\.event\.inputs\.report_issue == '1' \|\| github\.event\.inputs\.report_issue == 'True' \}\}/,
+  );
+  assert.match(report, /ARGS="--issue --strict"/);
+
+  const provenance = stepBlock(WORKFLOW, PROVENANCE);
+  assert.match(provenance, /id: provenance_report/);
+  assert.match(
+    provenance,
+    /continue-on-error: \$\{\{ steps\.drift_report\.outcome == 'failure' \}\}/,
+  );
+});
+
 test('loop-drift-check: l\'escalation e\' un opt-in, non «tutto cio\' che non e\' una PR»', () => {
   for (const stepName of [REPORT, PROVENANCE]) {
     const cond = escalationCondition(stepName);
@@ -115,4 +137,24 @@ test('loop-drift-check: `report_issue` resta dichiarato fra gli input del dispat
       'escalation dei due passi legge sempre vuoto e un dispatch non puo\' piu\' chiedere il\n' +
       'trattamento completo: resterebbe solo il cron.',
   );
+});
+
+test('loop-drift-check: il censimento dei gemelli gira solo sullo schedule e in coda', () => {
+  const censusName = 'Censimento opt-in dei gemelli';
+  const census = stepBlock(WORKFLOW, censusName);
+  assert.ok(census, `step \`${censusName}\` non trovato in ${WORKFLOW_REL}`);
+  assert.match(census, /if: always\(\) && github\.event_name == 'schedule'/);
+  assert.match(census, /LOOP_TWIN_CENSUS=1 node --test generator\/tests\/loop-sync-manifest-scope\.test\.mjs/);
+  assert.match(census, /GH_TOKEN: \$\{\{ secrets\.GITHUB_TOKEN \}\}/);
+  assert.ok(
+    WORKFLOW.indexOf(`- name: ${censusName}`) > WORKFLOW.indexOf('Baseline del manifest verificate contro la storia dei path'),
+    'il censimento deve restare dopo il report delle baseline',
+  );
+});
+
+test('loop-drift-check: il checkout conserva tutta la storia ma scarica i blob on-demand', () => {
+  const checkout = stepBlock(WORKFLOW, 'Checkout');
+  assert.ok(checkout, 'step `Checkout` non trovato');
+  assert.match(checkout, /fetch-depth: 0/);
+  assert.match(checkout, /filter: blob:none/);
 });
