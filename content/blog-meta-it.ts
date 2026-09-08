@@ -11595,6 +11595,14 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.tram-treno-lavori-ottobre.title': 'Tram-treno in Ticino: via ai primi cantieri a ottobre',
     'blog.article.tram-treno-lavori-ottobre.excerpt': 'Rttl Sa assegna dieci mandati di progettazione per 44,8 milioni e prepara l\'avvio delle opere principali nel 2027.',
     'blog.article.tram-treno-lavori-ottobre.imageAlt': 'Panorama di Lugano in Ticino con infrastrutture di trasporto',
+    'blog.article.bollettino-frontaliere-2026-09-08.title': 'Bollettino del frontaliere – 8 settembre 2026: a Chiasso-Strada 34 minuti di coda',
+    'blog.article.bollettino-frontaliere-2026-09-08.excerpt': 'I numeri di oggi, 8 settembre 2026, per chi attraversa il confine: le attese ai valichi misurate stamattina, i comuni dove la benzina costa meno, il cambio franco-euro aggiornato e i nuovi annunci di lavoro pubblicati in Svizzera. Dati del nostro monitoraggio, rilevati ogni giorno.',
+    'blog.article.bollettino-frontaliere-2026-09-08.imageAlt': 'I numeri del giorno per i frontalieri – 8 settembre 2026: attese ai valichi, prezzi benzina, cambio franco-euro e annunci di lavoro',
+    'blog.article.bollettino-frontaliere-2026-09-08.seoDescription': 'Bollettino frontalieri del 8 settembre 2026: code ai valichi stamattina, dove la benzina costa meno, cambio franco-euro e nuovi annunci di lavoro in Svizzera.',
+    'blog.article.bollettino-frontaliere-2026-09-08.ogDescription': 'I numeri del 8 settembre 2026 per i frontalieri: quanto si aspetta a ogni valico stamattina, in quali comuni conviene fare il pieno, quanto vale oggi il franco e quanti annunci di lavoro sono usciti in Svizzera.',
+    'blog.article.aumento-premi-cassa-malati-2027.title': 'Aumento premi cassa malati: +5% nel 2027',
+    'blog.article.aumento-premi-cassa-malati-2027.excerpt': 'bonus.ch prevede rincaro medio di quasi il 5% per 2027, superiore al 4,4% del 2026. Alcuni assicurati affrontano picchi fino al 20%. Ticino praticamente stabile.',
+    'blog.article.aumento-premi-cassa-malati-2027.imageAlt': 'Studio medico nel Canton Ticino con assicurazione malattia e calcolatore per verificare i premi',
 };
 
 export default blogMetaIt;
