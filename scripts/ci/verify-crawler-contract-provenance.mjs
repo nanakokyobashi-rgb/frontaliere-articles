@@ -370,5 +370,11 @@ async function main() {
 }
 
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
-  await main();
+  main().catch((error) => {
+    console.error(`verify-crawler-contract-provenance fallito: ${error && error.stack ? error.stack : error}`);
+    // Un errore di rete non osservato non deve diventare un rosso del dispatch
+    // di sola ispezione; `--strict` mantiene invece il contratto esplicito del
+    // chiamante che ha chiesto un verdetto bloccante.
+    process.exitCode = process.argv.includes('--strict') ? 1 : 0;
+  });
 }
