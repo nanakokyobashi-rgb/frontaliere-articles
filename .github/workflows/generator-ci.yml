@@ -10,8 +10,11 @@ name: Generator CI
 # nothing in this workflow touches it: no writes, no pushes, no secrets.
 
 on:
+  # `pull_request` copre i branch che arrivano a una PR con la stessa SHA e lo
+  # stesso branch; il mirror dell'engine viene invece pushato senza PR e deve
+  # conservare il gate (PR number da inserire dopo l'apertura).
   push:
-    branches-ignore: [main]
+    branches: [engine-lockstep-auto]
     paths:
       - 'generator/**'
       - '.github/workflows/generator-ci.yml'

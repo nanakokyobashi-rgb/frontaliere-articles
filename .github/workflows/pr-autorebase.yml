@@ -57,7 +57,10 @@ jobs:
   rebase:
     # Sul trigger `pull_request` solo i merge veri: una PR chiusa senza merge
     # non cambia lo stato delle altre.
-    if: github.event_name != 'pull_request' || github.event.pull_request.merged == true
+    if: >-
+      (github.event_name != 'pull_request' && github.event_name != 'pull_request_review')
+      || (github.event_name == 'pull_request' && github.event.pull_request.merged == true)
+      || (github.event_name == 'pull_request_review' && contains(github.event.review.body, '## LGTM'))
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
