@@ -448,31 +448,48 @@ async function main() {
   let published = 0;
   let failed = 0;
   const publishedIds = [];
-  for (const docSnap of snap.docs) {
-    // Sequential on purpose — registerArticleFiles() mutates shared source
-    // files (router.ts/blog-articles-data.ts/sitemaps/...) in-process; running
-    // two docs concurrently would race on the same file writes.
-    const result = await processDoc(db, FieldValue, docSnap);
-    if (result.ok) {
-      published += 1;
-      if (result.id) publishedIds.push(result.id);
-    } else {
-      failed += 1;
+  let fatalError = null;
+  let currentDocId = null;
+  try {
+    for (const docSnap of snap.docs) {
+      // Sequential on purpose — registerArticleFiles() mutates shared source
+      // files (router.ts/blog-articles-data.ts/sitemaps/...) in-process; running
+      // two docs concurrently would race on the same file writes.
+      currentDocId = docSnap.id;
+      const result = await processDoc(db, FieldValue, docSnap);
+      currentDocId = null;
+      if (result.ok) {
+        published += 1;
+        if (result.id) publishedIds.push(result.id);
+      } else {
+        failed += 1;
+      }
+    }
+  } catch (err) {
+    fatalError = err;
+    if (currentDocId && (isRegisterLockError(err) || isRegisterLockHeld())) {
+      console.error(
+        `::error::documento ${currentDocId} lasciato queued/orfano: registrazione interrotta, `
+        + 'riparare il corpus prima del prossimo drenaggio',
+      );
+    }
+    throw err;
+  } finally {
+    // GITHUB_OUTPUT deve essere aggiornato anche quando il ciclo si interrompe
+    // su un lock: gli id già pubblicati non vanno persi e il doc corrente viene
+    // nominato sopra se la registrazione lo ha lasciato orfano (#1126).
+    const githubOutput = process.env.GITHUB_OUTPUT;
+    if (githubOutput) {
+      try {
+        fs.appendFileSync(githubOutput, `published_ids=${JSON.stringify(publishedIds)}\n`);
+      } catch (outputErr) {
+        console.error(`::error::impossibile scrivere published_ids: ${outputErr.message}`);
+        if (!fatalError) throw outputErr;
+      }
     }
   }
 
   console.log(`[publish-journalist-article] done — published=${published} failed=${failed}`);
-
-  // Surface published article ids to the calling workflow (issue #4837
-  // stream C): publish-journalist-articles.yml dispatches
-  // fast-publish-article.yml once per id instead of waiting for the next
-  // full deploy.yml build. processDoc() already returned `id` on success —
-  // this loop was previously discarding it, only counting `published`.
-  // GITHUB_OUTPUT values must be single-line, so the array is JSON-encoded.
-  const githubOutput = process.env.GITHUB_OUTPUT;
-  if (githubOutput) {
-    fs.appendFileSync(githubOutput, `published_ids=${JSON.stringify(publishedIds)}\n`);
-  }
 }
 
 const invokedDirectly = (() => {

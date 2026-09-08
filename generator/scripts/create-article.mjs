@@ -2051,6 +2051,7 @@ const RUN_REPORT = {
      * Resta `null` sulle run che non finiscono in cascata di esaurimento.
      */
     quotaDeferral: null,
+    promptFloor: null,
   },
   notes: [],
 };
@@ -4877,6 +4878,84 @@ function collectBodySections(content) {
   return sections;
 }
 
+/** The shared AI contract requires body1..body3; direct producers may add bodyN. */
+function bodyFieldNames(content) {
+  const discovered = content && typeof content === 'object'
+    ? Object.keys(content).filter((k) => /^body\d+$/.test(k))
+    : [];
+  return [...new Set([...BODY_ONLY_FIELDS, ...discovered])]
+    .sort((a, b) => Number(a.slice(4)) - Number(b.slice(4)));
+}
+
+/** Coerce model-shaped body values before any required-field set is derived. */
+function coerceBodyFields(content) {
+  for (const field of bodyFieldNames(content)) {
+    const value = content?.[field];
+    if (value != null && typeof value !== 'string') {
+      content[field] = typeof value === 'object' ? JSON.stringify(value) : String(value);
+    }
+  }
+}
+
+// I body deterministici dei produttori secondari hanno una forma diversa da
+// quella prodotta dall'LLM. Le euristiche di troncamento sono utili sul testo
+// LLM, ma su un bollettino strutturato (liste, tabelle, frammenti di dati)
+// possono generare falsi rossi; i controlli numerici cross-section restano
+// invece applicati anche a questi body.
+const DETERMINISTIC_BODY_HEURISTIC_CODES = new Set([
+  'unbalanced-parentheses',
+  'truncated-bold',
+  'incomplete-ending',
+  'leaked-prompt-scaffolding',
+]);
+
+function runArticleFactualityGates({ deterministicBodySections = [], ...params } = {}) {
+  const result = runFactualityGates(params);
+  const deterministic = new Set(Array.isArray(deterministicBodySections) ? deterministicBodySections : []);
+  if (deterministic.size === 0) return result;
+
+  const locale = params.locale || 'it';
+  const issues = result.issues.filter((issue) => {
+    if (!DETERMINISTIC_BODY_HEURISTIC_CODES.has(issue.code)) return true;
+    return ![...deterministic].some((section) => {
+      const label = locale === 'it' ? section : `${locale}/${section}`;
+      return String(issue.message || '').includes(`[${label}]`);
+    });
+  });
+  const blocking = issues.filter((issue) => issue.severity === 'critical' || issue.severity === 'major');
+  return { ...result, issues, blocking, passed: blocking.length === 0 };
+}
+
+/**
+ * Factuality choke point shared by the AI path and the direct writers.
+ * `registerArticleFiles()` is also called by the deterministic producers,
+ * which do not pass through the primary generation loop.
+ */
+export function assertArticlePassesFactualityGates(data) {
+  const it = data?.content?.it;
+  if (it) {
+    const result = runArticleFactualityGates({
+      sections: collectBodySections(it),
+      locale: 'it',
+      sourceText: data?._sourceText || '',
+      sourceDate: data?._sourceDate,
+      publishedAt: new Date().toISOString(),
+      memory: defectMemory(),
+      deterministicBodySections: data?._deterministicBodySections,
+    });
+    if (result.issues.length > 0) {
+      console.error(`  🔍 Gate fattualita' [it]: ${result.issues.length} rilievi, ${result.blocking.length} bloccanti`);
+      console.error(formatIssues(result.issues));
+    }
+    if (!result.passed) {
+      const err = new Error(`Articolo rigettato dai gate deterministici: ${formatIssues(result.blocking)}`);
+      err.qualityReject = true;
+      throw err;
+    }
+  }
+  assertTranslationsPassFactualityGates(data);
+}
+
 /** Il testo di tutte le sezioni di corpo presenti, unite da `sep`. */
 function joinBodySections(content, sep = ' ') {
   return Object.values(collectBodySections(content)).join(sep);
@@ -5085,7 +5164,12 @@ function assertTranslationsPassFactualityGates(data) {
     if (!content) continue;
     const sections = collectBodySections(content);
     if (!Object.values(sections).some((s) => s.trim())) continue;
-    const result = runFactualityGates({ sections, locale, italianSections });
+    const result = runArticleFactualityGates({
+      sections,
+      locale,
+      italianSections,
+      deterministicBodySections: data?._deterministicBodySections,
+    });
     if (result.issues.length > 0) {
       console.error(`  🔍 Gate fattualita' [${locale}]: ${result.issues.length} rilievi, ${result.blocking.length} bloccanti`);
       console.error(formatIssues(result.issues));
@@ -9764,17 +9848,16 @@ function freeMtField(text, sourceLang, targetLang, fieldType, field = fieldType)
 }
 
 // Free-MT replacement for translateContent: same return shape ({title, excerpt,
-// body1..3, faq?}) but each field via the quota-free cascade. Missing/failed
+// body1..bodyN, faq?}) but each field via the quota-free cascade. Missing/failed
 // fields are simply omitted → the existing missing-field recovery loop in
 // translateArticle re-translates them (LLM) or falls back to IT.
 async function translateContentFreeMt(sourceLang, targetLang, targetLabel, sourceContent) {
   console.error(`🌍 [${targetLabel}] Traduzione ${targetLang.toUpperCase()} via cascade MT gratuita (no quota LLM)...`);
-  const [title, excerpt, body1, body2, body3] = await Promise.all([
+  const bodyFields = Object.keys(collectBodySections(sourceContent));
+  const [title, excerpt, ...bodyValues] = await Promise.all([
     freeMtField(sourceContent.title, sourceLang, targetLang, 'title', 'title'),
     freeMtField(sourceContent.excerpt, sourceLang, targetLang, 'description', 'excerpt'),
-    freeMtField(sourceContent.body1, sourceLang, targetLang, 'description', 'body1'),
-    freeMtField(sourceContent.body2, sourceLang, targetLang, 'description', 'body2'),
-    freeMtField(sourceContent.body3, sourceLang, targetLang, 'description', 'body3'),
+    ...bodyFields.map((field) => freeMtField(sourceContent[field], sourceLang, targetLang, 'description', field)),
   ]);
 
   let faq;
@@ -9794,9 +9877,9 @@ async function translateContentFreeMt(sourceLang, targetLang, targetLabel, sourc
   const out = {};
   if (title) out.title = title;
   if (excerpt) out.excerpt = excerpt;
-  if (body1) out.body1 = sanitizeBodyText(body1);
-  if (body2) out.body2 = sanitizeBodyText(body2);
-  if (body3) out.body3 = sanitizeBodyText(body3);
+  bodyFields.forEach((field, index) => {
+    if (bodyValues[index]) out[field] = sanitizeBodyText(bodyValues[index]);
+  });
   if (faq) out.faq = faq;
   console.error(`  ✅ ${targetLang.toUpperCase()} (MT gratuita) completato`);
   return out;
@@ -10042,7 +10125,8 @@ ${terminologyByLang[targetLang] || ''}`;
       console.error(`  ⚠️  ${label} translation failed: ${err.message} — fallback al recupero per-campo`);
       return {};
     };
-    const [partMeta, partB1, partB2, partB3, partFaq] = await Promise.all([
+    const bodyFields = Object.keys(collectBodySections(sourceContent));
+    const [partMeta, ...bodyPartsAndFaq] = await Promise.all([
       // Call 1: title + excerpt (small, ~300 tokens output)
       // VINCOLO TITOLO: il title tradotto DEVE restare ≤ 60 caratteri (gate SEO Semrush).
       // Se la lingua target tende a espandersi (DE/FR), riformula in modo più conciso
@@ -10051,17 +10135,17 @@ ${terminologyByLang[targetLang] || ''}`;
         `CONTENUTO ITALIANO DA TRADURRE:\n- title: ${sourceContent.title}\n- excerpt: ${sourceContent.excerpt}\n\nVINCOLI OBBLIGATORI per il title tradotto:\n- MASSIMO 60 caratteri totali (target 50-55).\n- NON includere "| Frontaliere Ticino" (aggiunto automaticamente).\n- Mantieni la keyword principale; abbrevia o riformula se necessario per restare entro 60 caratteri.`,
         '{"title": "...", "excerpt": "..."}',
       ), 1000, `${targetLang}:meta`).catch(onTranslateFail(`${targetLang}:meta`)),
-      // Call 2-4: body fields with dynamic sizing + sub-chunking safety
-      translateBodyField('body1', sourceContent.body1, targetLang).catch(onTranslateFail(`${targetLang}:body1`)),
-      translateBodyField('body2', sourceContent.body2, targetLang).catch(onTranslateFail(`${targetLang}:body2`)),
-      translateBodyField('body3', sourceContent.body3, targetLang).catch(onTranslateFail(`${targetLang}:body3`)),
+      // Body fields with dynamic sizing + sub-chunking safety.
+      ...bodyFields.map((field) =>
+        translateBodyField(field, sourceContent[field], targetLang)
+          .catch(onTranslateFail(`${targetLang}:${field}`))),
       // Call 5: FAQ (optional)
       faqTranslation,
     ]);
 
-    const [partA, partB] = [{ ...partMeta, ...partB1 }, { ...partB2, ...partB3, ...partFaq }];
-
-    const parsed = { ...partA, ...partB };
+    const partFaq = bodyPartsAndFaq.pop() || {};
+    const partB = bodyPartsAndFaq.reduce((acc, part) => ({ ...acc, ...part }), {});
+    const parsed = { ...partMeta, ...partB, ...partFaq };
     console.error(`  ✅ ${targetLang.toUpperCase()} completato`);
     return parsed;
   }
@@ -10118,7 +10202,13 @@ ${terminologyByLang[targetLang] || ''}`;
   // itself (a real upstream defect we cannot paper over).
   for (const locale of ['en', 'de', 'fr']) {
     const langName = locale === 'en' ? 'inglese' : locale === 'de' ? 'tedesco' : 'francese';
-    for (const field of ['title', 'excerpt', 'body1', 'body2', 'body3']) {
+    for (const field of [
+      'title',
+      'excerpt',
+      ...Object.keys(itContent || {})
+        .filter((fieldName) => /^body\d+$/.test(fieldName))
+        .sort((a, b) => Number(a.slice(4)) - Number(b.slice(4))),
+    ]) {
       // Truthiness nuda: la stringa `"null"` (serializzazione letterale del
       // null, la forma misurata su `haiku` in #799) la supera, quindi il campo
       // NON veniva ritradotto ne' cadeva sul fallback IT e finiva in
@@ -10264,7 +10354,9 @@ ${terminologyByLang[targetLang] || ''}`;
   // truncated.
   for (const locale of ['en', 'de', 'fr']) {
     const langName = locale === 'en' ? 'inglese' : locale === 'de' ? 'tedesco' : 'francese';
-    for (const field of ['body1', 'body2', 'body3']) {
+    for (const field of Object.keys(itContent || {})
+      .filter((fieldName) => /^body\d+$/.test(fieldName))
+      .sort((a, b) => Number(a.slice(4)) - Number(b.slice(4)))) {
       const text = data.content[locale]?.[field];
       if (!text) continue;
       // Every issue detectTruncation() returns (critical AND major — e.g.
@@ -10536,6 +10628,11 @@ function validate(data, opts = {}) {
     throw err;
   }
   const itContent = data.content.it || data.content;
+  // Coerce first: `collectBodySections()` intentionally ignores non-string
+  // values, but an array/object body must be repaired or rejected, never
+  // allowed to disappear from the required-field set (#980).
+  coerceBodyFields(itContent);
+  const expectedBodyFields = bodyFieldNames(itContent);
   if (!itContent || !itContent.title) {
     const err = new Error(`Campo mancante nella risposta AI: content.it.title`);
     err.qualityReject = true;
@@ -10687,7 +10784,7 @@ function validate(data, opts = {}) {
         throw err;
       }
     }
-    for (const field of ['title', 'excerpt', 'body1', 'body2', 'body3']) {
+    for (const field of ['title', 'excerpt', ...expectedBodyFields]) {
       // Ultima rete prima della scrittura, per TUTTI i locali: un campo che
       // vale la stringa `"null"` e' mancante quanto uno vuoto (#799).
       if (!hasUsableContentText(data.content[locale][field])) {
@@ -10923,14 +11020,15 @@ function validate(data, opts = {}) {
   ]);
   for (const locale of ['it', 'en', 'de', 'fr']) {
     if (!data.content[locale]) continue; // translations may not exist yet
+    const bodyFields = expectedBodyFields;
     // Coerce content fields to strings — AI models can return objects/arrays/numbers
-    for (const field of ['title', 'excerpt', 'body1', 'body2', 'body3']) {
+    for (const field of ['title', 'excerpt', ...bodyFields]) {
       const val = data.content[locale][field];
       if (val != null && typeof val !== 'string') {
         data.content[locale][field] = typeof val === 'object' ? JSON.stringify(val) : String(val);
       }
     }
-    for (const field of ['body1', 'body2', 'body3']) {
+    for (const field of bodyFields) {
       let text = data.content[locale][field] || '';
       // Remove raw <a href="..."> tags the AI might have inserted — they cause redirect issues
       text = text.replace(/<a\s+href="[^"]*"[^>]*>(.*?)<\/a>/gi, '$1');
@@ -11026,7 +11124,7 @@ function sanitizeBoldFormatting(data) {
 
   for (const locale of ['it', 'en', 'de', 'fr']) {
     if (!data.content[locale]) continue; // translations may not exist yet
-    for (const field of ['body1', 'body2', 'body3']) {
+    for (const field of Object.keys(collectBodySections(data.content[locale]))) {
       let text = String(data.content[locale][field] || '');
       const boldMatches = [...text.matchAll(/\*\*([^*]+)\*\*/g)];
       if (boldMatches.length === 0) {
@@ -11146,7 +11244,7 @@ function validateAndEnforceCTA(data) {
 
     if (!hasCTA) {
       console.error(`  ⚠️  CTA mancante in body3 [${locale}] — aggiungo CTA (${data.category})`);
-      data.content[locale].body3 += cta[locale];
+      data.content[locale].body3 = (data.content[locale].body3 || '') + cta[locale];
     }
   }
 
@@ -11200,10 +11298,11 @@ function enforceStrongInternalLinks(data) {
   for (const locale of ['it', 'en', 'de', 'fr']) {
     if (!data.content[locale]) continue;
 
-    const body1 = String(data.content[locale].body1 || '');
-    const body2 = String(data.content[locale].body2 || '');
-    const body3 = String(data.content[locale].body3 || '');
-    const context = `${data.id} ${data.content[locale].title || ''} ${data.content[locale].excerpt || ''} ${body1} ${body2} ${body3}`;
+    const bodySections = collectBodySections(data.content[locale]);
+    const body1 = String(bodySections.body1 || '');
+    const body2 = String(bodySections.body2 || '');
+    const body3 = String(bodySections.body3 || '');
+    const context = `${data.id} ${data.content[locale].title || ''} ${data.content[locale].excerpt || ''} ${Object.values(bodySections).join(' ')}`;
 
     const cluster =
       LINK_CLUSTER_PATTERNS.taxes20km.test(context) ? 'taxes20km'
@@ -11212,7 +11311,7 @@ function enforceStrongInternalLinks(data) {
       : 'generic';
 
     const actions = LINK_CLUSTER_ACTIONS[cluster];
-    const combined = `${body1}\n${body2}\n${body3}`;
+    const combined = Object.values(bodySections).join('\n');
     const existingActions = new Set(
       [...combined.matchAll(/\[[^\]]+\]\(nav:([a-z-]+)\)/g)].map((m) => m[1])
     );
@@ -12709,7 +12808,13 @@ function modifyRouterTs(data) {
   // l'id nuovo. Stessa regola della metà opposta (`removeFromIdListLiteral`,
   // `scripts/lib/ts-literals.mjs`): quando la sezione dice di avere il
   // letterale e lo span non c'è, si grida.
-  const declaresIdListLiteral = Boolean(ARTICLE_SURFACES[SECTION.section]?.idListVar);
+  const declaresIdListLiteral = ARTICLE_SURFACES[SECTION.section]?.idListVar === SECTION.allIdsConstName;
+  if (idListSpan && !declaresIdListLiteral) {
+    throw new Error(
+      `modifyRouterTs: ${SECTION.allIdsConstName} has a literal in ${corpusPath(blogDataFile)}, `
+      + `but ARTICLE_SURFACES.${SECTION.section}.idListVar does not point to it — refusing an ambiguous rewrite`,
+    );
+  }
   if (!idListSpan && declaresIdListLiteral) {
     throw new Error(
       `modifyRouterTs: la sezione ${SECTION.section} dichiara l'elenco letterale ` +
@@ -14209,7 +14314,7 @@ async function main() {
             if (_persistRankerStateOnSuccess) _persistRankerStateOnSuccess();
             return; // Success — exit main
           } catch (e) {
-            const isDuplicate = e.message.includes('DUPLICATO');
+            const isDuplicate = isDuplicateError(e);
             if (isDuplicate) captureDuplicateReasons(e.message);
             if (isDuplicate && attempt < MAX_DUPLICATE_RETRIES) {
               console.error(`\n🔄 Duplicato rilevato (${duplicateReasonTag(e.message)}${duplicateCandidateDetail(e.message)}), riprovo con un altro articolo... (${attempt}/${MAX_DUPLICATE_RETRIES})\n`);
@@ -14466,7 +14571,7 @@ async function main() {
           } catch { /* ignore */ }
           return; // Success — exit main
         } catch (e) {
-          const isDuplicate = e.message.includes('DUPLICATO');
+          const isDuplicate = isDuplicateError(e);
           if (isDuplicate) captureDuplicateReasons(e.message);
           // Fact-check / quality failures → try next keyword instead of crashing.
           // Includes REGOLA #0 topic-gate aborts — same rationale as the proven-pool
@@ -14887,6 +14992,9 @@ async function generateAndValidateArticle(url, sourceContext = null) {
           maxAttempts,
           section: SECTION_NAME,
         };
+        if (RUN_REPORT?.rareEvents) {
+          RUN_REPORT.rareEvents.promptFloor = { ...e.promptFloorReport, irreducible: true };
+        }
         const { short, attemptsSkipped } = promptFloorSummary(e);
         console.error(
           `  ⛔ [prompt-floor] section=${SECTION_NAME} attempt=${attempt}/${maxAttempts} `
@@ -15091,7 +15199,7 @@ async function generateAndValidateArticle(url, sourceContext = null) {
     }
 
     // Step 3a.0b-alt: Fabricated norm acronyms check on the IT title — BLOCKING.
-    // runFactualityGates() below (Step 3a.0b-bis) only sees sections.{body1,body2,body3},
+    // runFactualityGates() below (Step 3a.0b-bis) vede tutti i bodyN presenti,
     // never data.content.it.title, so a fabricated norm acronym landing in the
     // title alone would ship straight to dist/api/, og:title and JSON-LD headline
     // with no gate ever looking at it. Same call the en/de/fr path makes after
@@ -15122,12 +15230,8 @@ async function generateAndValidateArticle(url, sourceContext = null) {
     // scripts/lib/article-factuality-gates.mjs for the incident that motivated
     // each check.
     {
-      const gateResult = runFactualityGates({
-        sections: {
-          body1: data.content.it?.body1 || '',
-          body2: data.content.it?.body2 || '',
-          body3: data.content.it?.body3 || '',
-        },
+      const gateResult = runArticleFactualityGates({
+        sections: collectBodySections(data.content.it),
         // `stripInjectedBriefs`, non `pageContent` nudo (#96). Per un
         // evergreen `pageContent` E' il brief che questo stesso script ha
         // appena scritto, quindi passarlo qui chiedeva all'articolo di
@@ -15157,6 +15261,7 @@ async function generateAndValidateArticle(url, sourceContext = null) {
         sourceDate: lastSourcePublishedAt || undefined,
         publishedAt: new Date().toISOString(),
         memory: defectMemory(),
+        deterministicBodySections: data?._deterministicBodySections,
       });
 
       // Feed the learning loop. Recorded for EVERY attempt, including the ones
@@ -15392,16 +15497,13 @@ async function generateAndValidateArticle(url, sourceContext = null) {
       // invented for a closed bfs_stats source. Unlike a mid-loop retry there
       // is no further attempt to fall back to, so a gate failure here reverts
       // to the pre-expansion draft rather than publish unchecked content.
-      const expandGateResult = runFactualityGates({
-        sections: {
-          body1: data.content.it?.body1 || '',
-          body2: data.content.it?.body2 || '',
-          body3: data.content.it?.body3 || '',
-        },
+      const expandGateResult = runArticleFactualityGates({
+        sections: collectBodySections(data.content.it),
         sourceText: url.startsWith('evergreen://') ? '' : pageContent,
         sourceDate: lastSourcePublishedAt || undefined,
         publishedAt: new Date().toISOString(),
         memory: defectMemory(),
+        deterministicBodySections: data?._deterministicBodySections,
       });
 
       // Feed the learning loop, same as Step 3a.0b-bis above (#163): this is
@@ -15679,7 +15781,7 @@ async function generateAndValidateArticle(url, sourceContext = null) {
   // mutazioni del testo (3c strip, 3d CTA/link, 3e citazione) e prima di
   // qualunque scrittura, quindi giudica esattamente cio' che finira' su disco.
   // Vedi il commento della funzione per la misura che lo motiva.
-  assertTranslationsPassFactualityGates(data);
+  assertArticlePassesFactualityGates(data);
 
   // Step 3b: Generate article image via Gemini native image generation
   console.error('🎨 Generazione immagine articolo:');
@@ -15710,7 +15812,6 @@ async function generateAndValidateArticle(url, sourceContext = null) {
   modifySeoService(data);
   modifySitemap(data);
   modifySitemapNews(data);
-  endRegisterLock();
 
   // Step 4a.2: RSS feeds — NOT regenerated here any more (issue #4974 item 2).
   //
@@ -15727,6 +15828,9 @@ async function generateAndValidateArticle(url, sourceContext = null) {
   // Step 4b: Validate structured data (simulates ogPagesPlugin extraction)
   console.error('\n🔍 Validazione dati strutturati:');
   validateStructuredData(data);
+  // Il marker resta presente se la validazione finale fallisce: il commit dei
+  // file non va scambiato per una registrazione completata (#1126).
+  endRegisterLock();
 
   // Track source-domain weekly quotas only on successful article generation.
   // Stats-bfs:// is editorial-internal — bucket it under 'bfs.admin.ch' so the
@@ -16468,7 +16572,7 @@ export async function registerArticleFiles(data, opts = {}) {
   // registerArticleFiles() direttamente e non passano mai dallo Step 3a.2 del
   // flusso primario. Senza questa chiamata resterebbero l'unica via per cui un
   // body tradotto con un rilievo bloccante arriva su disco (#5661).
-  assertTranslationsPassFactualityGates(data);
+  assertArticlePassesFactualityGates(data);
   clampSeoDescriptions(data);
   const slugs = deriveAndSanitizeArticleSlugs(data);
   beginRegisterLock(data.id);
@@ -16481,8 +16585,11 @@ export async function registerArticleFiles(data, opts = {}) {
   modifySeoService(data);
   modifySitemap(data);
   if (!opts.skipNews) modifySitemapNews(data);
-  endRegisterLock();
   validateStructuredData(data);
+  // Chiudi il marker solo dopo che anche la validazione strutturale ha
+  // approvato il payload appena registrato; in caso contrario il marker deve
+  // obbligare il run successivo a riesaminare la registrazione (#1126).
+  endRegisterLock();
   // RSS regeneration removed with #4974 item 2 — see the sibling call site
   // above. `opts.skipRss` is kept accepted-and-ignored so existing callers
   // passing it keep working; there is simply nothing left to skip.
@@ -16616,17 +16723,18 @@ if (invokedDirectly) {
   // Il try/catch e' la stessa regola di `writeRunCard`: una sonda diagnostica
   // non puo' diventare la causa di un esito perso, e questo e' il percorso
   // d'errore.
-  if (isQuotaExhaustedError(e) && RUN_REPORT?.rareEvents) {
-    try {
+  try {
+    if (isQuotaExhaustedError(e) && RUN_REPORT?.rareEvents) {
       RUN_REPORT.rareEvents.quotaDeferral = {
         breakdown: (e && typeof e.exhaustionBreakdown === 'object' && e.exhaustionBreakdown) || null,
         share: quotaDeferralShare(e),
         verdict: isLegitimateQuotaDeferral(e),
         inputCapVeto: isInputCapDeferralVeto(e),
+        inputCapDecision: inputCapVetoSummary(e),
       };
-    } catch (probeErr) {
-      console.error(`  ⚠️  Campione di deferral non registrato: ${probeErr.message}`);
     }
+  } catch (probeErr) {
+    console.error(`  ⚠️  Campione di deferral non registrato: ${probeErr.message}`);
   }
   // Transient free-model pool exhaustion (every model in the fallback chain hit
   // its daily quota / rate limit) is NOT a code bug — free-tier daily limits

@@ -73,6 +73,30 @@ test('conflitto FRESCO: e\' un `gh issue edit` add+remove colto a meta\', non si
   assert.equal(settled.length, 1, 'la soglia deve restare configurabile, non cablata');
 });
 
+test('l\'eta\' usa l\'ultimo evento di label, non un commento che aggiorna la issue (#1084)', () => {
+  const staleLabel = agoSec(600);
+  const freshBodyEdit = agoSec(5);
+  const freshLabel = agoSec(5);
+  assert.equal(
+    reconciliations([{
+      ...iss(8, ['agent:fix', 'agent:fix-queued'], 600),
+      updatedAt: freshBodyEdit,
+      lastLabelEventAt: staleLabel,
+    }], { nowMs: NOW }).length,
+    1,
+    'un commento recente non deve riaprire la finestra di sicurezza',
+  );
+  assert.deepEqual(
+    reconciliations([{
+      ...iss(9, ['agent:fix', 'agent:fix-queued'], 600),
+      updatedAt: staleLabel,
+      lastLabelEventAt: freshLabel,
+    }], { nowMs: NOW }),
+    [],
+    'una label appena aggiunta deve restare protetta anche con updatedAt vecchio',
+  );
+});
+
 test('`updatedAt` assente o illeggibile → si salta (dubbio ⇒ non toccare)', () => {
   const broken = [
     { number: 1, labels: [{ name: 'agent:fix' }, { name: 'agent:fix-queued' }] },

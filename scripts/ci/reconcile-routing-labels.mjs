@@ -56,9 +56,13 @@
  * che nessun edit atomico puo' produrre.
  *
  * Direzione dell'errore: non toccare nulla su qualunque dubbio. Input mancante,
- * `gh` illeggibile, JSON malformato, `updatedAt` assente → si salta la issue e
- * si esce 0. Un conflitto lasciato in piedi costa una run in piu' al giro
- * successivo; una rimozione sbagliata cancella l'instradamento di una issue.
+ * `gh` illeggibile, JSON malformato, timestamp assente → si salta la issue e
+ * si esce 0. Per l'eta' si preferisce l'ultimo evento di label, quando
+ * disponibile; la funzione pura ricade su `updatedAt` per le risposte legacy,
+ * mentre il percorso runtime salta in modo fail-safe se la timeline non e'
+ * leggibile.
+ * Un conflitto lasciato in piedi costa una run in piu' al giro successivo; una
+ * rimozione sbagliata cancella l'instradamento di una issue.
  *
  * Env:
  *   GH_TOKEN     richiesto. Deliberatamente il GITHUB_TOKEN e non il PAT: qui
@@ -76,6 +80,7 @@
 import { execFileSync } from 'node:child_process';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { lastLabelEventAt } from './followup-drainer.mjs';
 
 /**
  * Le coppie attiva/coda del ciclo. Una issue non deve MAI portarle entrambe:
@@ -96,7 +101,7 @@ const labelNames = (iss) => (iss?.labels || []).map((l) => (typeof l === 'string
  *
  * Pura: nessun `gh`, nessun orologio implicito — `nowMs` e' un parametro.
  *
- * @param {Array<{number:number, labels?:Array<{name:string}|string>, updatedAt?:string}>} issues
+ * @param {Array<{number:number, labels?:Array<{name:string}|string>, updatedAt?:string, lastLabelEventAt?:string}>} issues
  * @param {{nowMs?: number, minAgeSec?: number}} [opts]
  * @returns {Array<{number:number, active:string, remove:string, ageSec:number}>}
  */
@@ -110,9 +115,10 @@ export function reconciliations(issues, opts = {}) {
     const names = labelNames(iss);
     for (const { active, queued } of ROUTE_CONFLICTS) {
       if (!names.includes(active) || !names.includes(queued)) continue;
-      // `updatedAt` assente o non parsabile → non si distingue un conflitto
-      // fermo da un edit a meta': si lascia stare.
-      const t = Date.parse(iss?.updatedAt ?? '');
+      // Se disponibile, l'evento di label evita di usare una modifica al body
+      // come falso segnale di freschezza del conflitto; altrimenti `updatedAt`
+      // mantiene compatibilita' con le risposte GitHub standard.
+      const t = Date.parse(iss?.lastLabelEventAt ?? iss?.updatedAt ?? '');
       if (!Number.isFinite(t)) continue;
       const ageSec = Math.floor((nowMs - t) / 1000);
       if (ageSec < minAgeSec) continue;
@@ -122,8 +128,10 @@ export function reconciliations(issues, opts = {}) {
   return out;
 }
 
+const repoName = () => process.env.GH_REPO || process.env.GITHUB_REPOSITORY || '';
+
 const repoArgs = () => {
-  const repo = process.env.GH_REPO || process.env.GITHUB_REPOSITORY || '';
+  const repo = repoName();
   return repo ? ['--repo', repo] : [];
 };
 
@@ -132,12 +140,42 @@ function gh(args, { json = true } = {}) {
   return json ? JSON.parse(out || '[]') : out;
 }
 
+/** Usa la timeline REST per non confondere un commento con un evento di label. */
+function withLastRoutingLabelEvent(issues) {
+  const repo = repoName();
+  if (!repo) return issues;
+  return issues.map((iss) => {
+    try {
+      const pages = gh([
+        'api',
+        'repos/' + repo + '/issues/' + iss.number + '/events',
+        '--paginate',
+        '--slurp',
+      ]);
+      const events = Array.isArray(pages) ? pages.flat() : [];
+      const times = ROUTE_CONFLICTS.flatMap(({ active, queued }) => [
+        lastLabelEventAt(events, active),
+        lastLabelEventAt(events, queued),
+      ]).filter((t) => Number.isFinite(t));
+      const latest = times.length > 0 ? Math.max(...times) : null;
+      // Stringa vuota deliberata: se la timeline fallisce o non contiene un
+      // evento leggibile, reconciliations() non deve ripiegare su updatedAt
+      // e rischiare una rimozione basata su un timestamp sbagliato.
+      return { ...iss, lastLabelEventAt: latest === null ? '' : new Date(latest).toISOString() };
+    } catch (e) {
+      console.log('::warning::timeline label di #' + iss.number + ' illeggibile ('
+        + String(e).slice(0, 120) + ') → salto.');
+      return { ...iss, lastLabelEventAt: '' };
+    }
+  });
+}
+
 /** Le issue candidate: solo quelle che portano gia' una label ATTIVA. */
 function fetchCandidates(only) {
   if (only) {
     try {
       const iss = gh(['issue', 'view', String(only), ...repoArgs(), '--json', 'number,labels,updatedAt,state']);
-      return iss?.state && String(iss.state).toUpperCase() !== 'OPEN' ? [] : [iss];
+      return iss?.state && String(iss.state).toUpperCase() !== 'OPEN' ? [] : withLastRoutingLabelEvent([iss]);
     } catch (e) {
       console.log(`::warning::#${only} illeggibile (${String(e).slice(0, 120)}) → nessuna riconciliazione.`);
       return [];
@@ -147,7 +185,7 @@ function fetchCandidates(only) {
   for (const { active } of ROUTE_CONFLICTS) {
     try {
       for (const iss of gh(['issue', 'list', ...repoArgs(), '--state', 'open', '--label', active,
-        '--limit', '100', '--json', 'number,labels,updatedAt'])) {
+        '--limit', '1000', '--json', 'number,labels,updatedAt'])) {
         byNumber.set(iss.number, iss);
       }
     } catch (e) {
@@ -155,7 +193,7 @@ function fetchCandidates(only) {
       console.log(`::warning::lista per ${active} fallita (${String(e).slice(0, 120)}) → salto.`);
     }
   }
-  return [...byNumber.values()];
+  return withLastRoutingLabelEvent([...byNumber.values()]);
 }
 
 function main() {

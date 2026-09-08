@@ -227,7 +227,18 @@ export function beginRegisterLock(projectRoot, id, section) {
  * meant to survive it for the next invocation to trip on.
  */
 export function endRegisterLock(projectRoot, section) {
-  try { unlinkSync(registerLockPath(projectRoot, section)); } catch { /* already gone */ }
+  removeRegisterLock(projectRoot, registerLockFile(section));
+}
+
+function removeRegisterLock(projectRoot, relPath) {
+  try {
+    unlinkSync(path.join(projectRoot, relPath));
+  } catch (err) {
+    if (err?.code === 'ENOENT') return;
+    throw new RegisterLockError(
+      `could not remove registration lock ${relPath}: ${err?.message || err}`,
+    );
+  }
 }
 
 function normaliseLock(parsed) {
@@ -370,7 +381,7 @@ export function resolveRegisterLock(projectRoot, buildTargets, section) {
           `missing entries (or remove the partial ones) by hand, then delete ${relPath}.`,
       );
     }
-    try { unlinkSync(path.join(projectRoot, relPath)); } catch { /* already gone */ }
+    removeRegisterLock(projectRoot, relPath);
     resolved.push({
       file: relPath,
       state: present.length > 0 ? 'committed' : 'nothing-written',
