@@ -169,7 +169,10 @@ export function detectClaudeRateLimit(raw) {
   // "429" in un log di workflow potrebbe appartenere a un altro step.
   if (!rateLimited && msgs.length === 0) {
     const text = String(raw || '');
-    if (/(?:http\s*)?429\b/i.test(text) && /rate[ _-]?limit|too many requests|api_error_status/i.test(text)) {
+    // `gh run view --log-failed` può includere più step della stessa run: un
+    // 429 di un'API estranea non è prova che Claude sia morto per quota.
+    const hasClaudeMarker = /\b(?:claude|anthropic)\b/i.test(text);
+    if (hasClaudeMarker && /(?:http\s*)?429\b/i.test(text) && /rate[ _-]?limit|too many requests|api_error_status/i.test(text)) {
       rateLimited = true;
     }
     const reset = text.match(/(?:resetsAt|reset(?:s)?[_ -]?at)\s*["'=:\s]+(\d{9,13})/i);
@@ -232,7 +235,7 @@ export function shouldRefundRateLimitedRound(raw) {
   // Un log testuale senza metriche non porta la prova di un turno. Se però
   // nomina esplicitamente un assistant/tool call, il fail-safe è non rimborsare:
   // il round potrebbe avere già consumato lavoro.
-  if (/\b(?:assistant|tool_use|tool call|turn)\b/i.test(text)) return false;
+  if (/(?:\b(?:assistant|tool_use|tool call|turns?)\b|num_turns)/i.test(text)) return false;
   return msgs.length === 0 || !msgs.some((m) => m && m.type === 'assistant');
 }
 

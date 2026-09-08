@@ -146,7 +146,7 @@ test('il rimborso posta l`handle PRIMA di cancellare il marker', () => {
   assert.match(src, /marker resta contato/);
   assert.doesNotMatch(formatRefundAttemptComment({
     round: 1, workflow: 'pr-fixer', resetsAt: null, rateLimitType: null, runUrl: '', marker: 'REDCHECK_FIX_ROUND',
-  }), /marker rimosso|rimborsato/);
+  }), /marker rimosso|rimborsato|REDCHECK_FIX_REFUNDED|QUOTA_RESETS_AT/);
 });
 
 for (const { file, marker } of FIXERS) {

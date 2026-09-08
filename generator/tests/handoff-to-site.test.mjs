@@ -519,6 +519,17 @@ test('#972: il dedup ripara lo stato invece di uscire', async () => {
   }
 });
 
+test('#1184: la consegna chiusa not planned non resta un dedup terminale', async () => {
+  const fs = await import('node:fs');
+  const src = fs.readFileSync(new URL('../../scripts/ci/handoff-to-site.mjs', import.meta.url), 'utf8');
+  const at = src.indexOf("const stateReason = String(match?.stateReason || '').toUpperCase()");
+  assert.ok(at > 0, 'deliveredUrlFor deve leggere lo stato della destinazione');
+  const delivered = src.slice(at, at + 400);
+  assert.match(delivered, /state === 'CLOSED'/);
+  assert.match(delivered, /stateReason === 'NOT_PLANNED'/);
+  assert.match(delivered, /return null/);
+});
+
 // --- #972 item 4: `identical` non implica «trasportato» ---------------------
 
 test('#972: i gemelli che nessun trasporto porta giù sono quelli che il trasporto stesso rifiuta', () => {

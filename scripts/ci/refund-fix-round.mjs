@@ -186,8 +186,6 @@ export function formatRefundAttemptComment({ round, workflow, resetsAt, rateLimi
     ? new Date(Number(resetsAt) * 1000).toISOString().replace('T', ' ').slice(0, 16) + ' UTC'
     : null;
   return [
-    marker ? `<!-- ${refundMarkerName(marker)}: ${round} -->` : null,
-    resetsAt ? `<!-- QUOTA_RESETS_AT: ${Math.round(Number(resetsAt))} -->` : null,
     `⏳ **Quota Claude esaurita${rateLimitType ? ` (\`${rateLimitType}\`)` : ''}** — \`${workflow}\` ha rilevato HTTP 429:`,
     'Questa è la traccia della procedura di rimborso; il marker viene rimosso solo dopo una DELETE verificata.',
     when ? `La quota torna disponibile alle **${when}**.` : null,

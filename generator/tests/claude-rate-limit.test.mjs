@@ -102,6 +102,16 @@ describe('#984: rimborso solo per un 429 senza lavoro Claude', () => {
     assert.equal(shouldRefundRateLimitedRound(zero), true);
     assert.equal(shouldRefundRateLimitedRound(used), false);
   });
+
+  it('ignora un 429 di un altro step del log della run', () => {
+    const unrelated = 'dependency step api_error_status: 429 rate_limit num_turns: 1 total_cost_usd: 0';
+    assert.equal(shouldRefundRateLimitedRound(unrelated), false);
+  });
+
+  it('tratta `turns` come evidenza di lavoro nel fallback testuale', () => {
+    const used = 'Claude api_error_status: 429 rate_limit turns: 3';
+    assert.equal(shouldRefundRateLimitedRound(used), false);
+  });
 });
 
 // Morte al cap DOPO la consegna: il verdetto segue il lavoro, non l'exit della CLI.

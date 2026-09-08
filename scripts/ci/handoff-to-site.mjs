@@ -743,11 +743,14 @@ function deliveredUrlFor(token) {
     const existing = gh(['issue', 'list', '--repo', SITE_REPO, '--state', 'all',
       '--search', `"${originUrl()}" in:body`, '--json', 'number,url,body,state,stateReason', '--limit', '5'], { token });
     const match = selectDeliveredIssue(existing, originUrl());
+    const state = String(match?.state || '').toUpperCase();
+    const stateReason = String(match?.stateReason || '').toUpperCase().replace(/[\s-]+/g, '_');
+    if (state === 'CLOSED' && stateReason === 'NOT_PLANNED') return null;
     return match ? {
       number: match.number,
       url: String(match.url || ''),
-      state: String(match.state || ''),
-      stateReason: String(match.stateReason || ''),
+      state,
+      stateReason,
     } : null;
   } catch {
     return null;

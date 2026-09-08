@@ -31,3 +31,9 @@ test('#984: la lettura del beacon è collegata a PR e commenti REST paginati', (
     'i commenti devono essere letti oltre la prima pagina');
   assert.match(src, /comments\?per_page=100/);
 });
+test('#984: le issue hanno priorità sulle PR nel tetto dei candidati', () => {
+  const src = fs.readFileSync(path.join(ROOT, 'scripts/ci/check-quota-backoff.mjs'), 'utf8');
+  assert.match(src, /const issueCandidates = beaconCandidates\(\[/);
+  assert.match(src, /const prCandidates = beaconCandidates\(\[listPullRequests\(scope\)\], opts\)/);
+  assert.match(src, /const candidates = \[\.\.\.issueCandidates, \.\.\.prCandidates\]/);
+});
