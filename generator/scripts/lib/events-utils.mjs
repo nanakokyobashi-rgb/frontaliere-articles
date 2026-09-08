@@ -1106,17 +1106,14 @@ async function fillLocaleGaps(byLocale, cache, { fieldType, locales, delayMs, tr
     if (target === sourceLocale) continue;
     const cacheKey = eventTranslationCacheKey({ fieldType, sourceLocale, normalizedSource });
     const entry = cache[cacheKey] || {};
-    const targetAlreadyCarriesSource = hasUsableContentText(clean?.[target])
-      && normalizeText(clean[target]).replace(/\s+/g, ' ') === normalizedSource;
     if (Object.prototype.hasOwnProperty.call(entry, target)) {
       const memo = entry[target];
       if (memo === null) continue; // stable passthrough memo, no network retry
       if (hasUsableContentText(memo)) {
-        // The current feed remains authoritative when it already carries the
-        // source in this locale. Do not replace it with stale MT or repay the
-        // cascade; the positive memo remains available if the target is
-        // missing on a later run.
-        if (!targetAlreadyCarriesSource) updated[target] = memo;
+        // A positive memo is the translation of the duplicate source value
+        // that put this target in `needing`. Reuse it instead of publishing
+        // the source text again; a distinct feed value is never in `needing`.
+        updated[target] = memo;
         continue;
       }
     }
