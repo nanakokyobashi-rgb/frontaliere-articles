@@ -46,6 +46,10 @@ const CONTRACT = JSON.parse(
 const MANIFEST = JSON.parse(
   readFileSync(path.join(ROOT, 'scripts/ci/loop-sync-manifest.json'), 'utf8'),
 );
+const PROVENANCE_SCRIPT = readFileSync(
+  path.join(ROOT, 'scripts/ci/verify-crawler-contract-provenance.mjs'),
+  'utf8',
+);
 
 const HASH = 'a'.repeat(64);
 const OTHER = 'b'.repeat(64);
@@ -179,6 +183,19 @@ test('un errore di rete isolato non è rosso, ma se lo sono tutte il verdetto no
   const blind = evaluateProvenance(checks, new Map(checks.map((c) => [c.field, { error: 'ENOTFOUND' }])));
   assert.equal(blind.red, true);
   assert.match(blind.reason, /non significa piu' niente/);
+});
+
+test('la CLI contiene le rejection di rete e lascia l exit governato da `--strict`', () => {
+  assert.match(
+    PROVENANCE_SCRIPT,
+    /main\(\)\.catch\(\(error\) =>/,
+    'una rejection fuori dal ciclo di fetch uscirebbe ancora direttamente da Node',
+  );
+  assert.match(
+    PROVENANCE_SCRIPT,
+    /process\.exitCode = process\.argv\.includes\('--strict'\) \? 1 : 0/,
+    'il fallback della CLI deve essere non-zero solo nel modo strict',
+  );
 });
 
 test('il manifest registra il verificatore: `scripts/ci` è un root censito', () => {
