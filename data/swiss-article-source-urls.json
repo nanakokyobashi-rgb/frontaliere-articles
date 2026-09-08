@@ -1,5 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/economia/1943690/consumi-postfinance-crescita-luglio-indicatore": "svizzeri-piu-propensi-a-spendere",
   "https://www.tio.ch/svizzera/economia/1943676/aziende-societa-ricavi-registrato-awp": "sestimali-aziende-svizzere",
   "https://www.rsi.ch/s/3949371": "iniziativa-bussola-governo-boccia",
   "https://www.rsi.ch/s/3984075": "immigrazione-svizzera-calo-2026",
@@ -2085,6 +2084,11 @@
   "https://www.tio.ch/newsblog/verita-immobiliari/1948435/il-tuo-affitto-non-scende-da-solo-devi-chiederlo": {
     "articleId": "affitto-scende-chiedi",
     "ts": "2026-09-08T06:24:48.998Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/economia/1948672/franco-chfd-test-aziende-nove": {
+    "articleId": "franco-chfd-test-aziende-2026",
+    "ts": "2026-09-08T07:44:11.547Z",
     "keyForm": 2
   }
 }
