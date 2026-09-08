@@ -25,6 +25,10 @@
  */
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
+import { mkdtempSync, rmSync, writeFileSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import {
   parseOnly,
   onlyArgError,
@@ -34,11 +38,29 @@ import {
   initPassOutcome,
   initBaseline,
   initOnlyManifestUnchanged,
+  localHash,
 } from '../../scripts/ci/loop-drift-check.mjs';
+
+const REPO_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
 
 test('parseOnly: senza --only non filtra niente', () => {
   assert.equal(parseOnly(['--init']), null);
   assert.equal(parseOnly([]), null);
+});
+
+test('localHash --init rifiuta un file presente nel working tree ma non in HEAD', () => {
+  const scratch = mkdtempSync(path.join(tmpdir(), 'loop-drift-local-hash-'));
+  const file = path.join(scratch, 'new-corpus-file.mjs');
+  writeFileSync(file, 'export const newFile = true;\n');
+  const rel = path.relative(REPO_ROOT, file);
+  try {
+    assert.throws(
+      () => localHash(rel, { committed: true }),
+      /esiste nel working tree ma non in HEAD.*committalo prima di --init/,
+    );
+  } finally {
+    rmSync(scratch, { recursive: true, force: true });
+  }
 });
 
 test('parseOnly: forma `--only=a,b`', () => {
