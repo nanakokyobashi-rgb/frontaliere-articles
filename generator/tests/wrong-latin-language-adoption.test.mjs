@@ -32,7 +32,7 @@
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { readFileSync, existsSync } from 'node:fs';
+import { readFileSync, existsSync, readdirSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -41,6 +41,7 @@ import {
   wrongLanguageAdoptions,
   resolveContentFieldSources,
   META_ONLY_FIELDS,
+  isCompactItalianRateTable,
 } from '../scripts/lib/body2-payload-verdict.mjs';
 import {
   detectWrongLatinLanguage,
@@ -145,11 +146,13 @@ test('#800 — un title italiano adottato da un candidato non-locale resta ok', 
 });
 
 test('#1177 — un excerpt italiano denso di sigle non e\' un falso non-IT', () => {
+  const excerpt = 'Aliquote: AVS/AI/IPG 5,3%, AD/AC 1,1%, LAINF 0,7–1,5%';
+  assert.equal(isCompactItalianRateTable(excerpt), true);
   const verdetto = classifyBody2Payload({
     parsed: {
       content: {
         it: { title: 'Titolo italiano abbastanza descrittivo', excerpt: '' },
-        excerpt: 'Aliquote: AVS/AI/IPG 5,3%, AD/AC 1,1%, LAINF 0,7–1,5%',
+        excerpt,
       },
     },
     expectedFields: META_ONLY_FIELDS,
@@ -160,11 +163,13 @@ test('#1177 — un excerpt italiano denso di sigle non e\' un falso non-IT', () 
 });
 
 test('#1177 — la deroga alle sigle non rende permissivo un excerpt generico', () => {
+  const excerpt = 'Tax rates: AHV/IV 5.3%, ALV 1.1%, employers pay the contribution.';
+  assert.equal(isCompactItalianRateTable(excerpt), false);
   const verdetto = classifyBody2Payload({
     parsed: {
       content: {
         it: { title: 'Titolo italiano abbastanza descrittivo', excerpt: '' },
-        excerpt: 'This generic English excerpt must still be rejected by the language gate.',
+        excerpt,
       },
     },
     expectedFields: META_ONLY_FIELDS,
@@ -300,7 +305,13 @@ function scanCorpusIt(t, campo) {
 
   const offender = valori
     .map((valore) => [valore, detectWrongLatinLanguage(valore, 'it')])
-    .filter(([valore, esito]) => esito && !OFFENDER_GENUINI.includes(valore));
+    .filter(([valore, esito]) => {
+      if (!esito || OFFENDER_GENUINI.includes(valore)) return false;
+      return !(campo === 'excerpt'
+        && esito.lang === 'non-it'
+        && esito.reason === 'morphology'
+        && isCompactItalianRateTable(valore));
+    });
 
   assert.deepEqual(
     offender.map(([valore, esito]) => `${esito.lang}/${esito.reason} :: ${valore}`),
@@ -324,7 +335,10 @@ const META_NON_IT = {
   de: ['content/blog-meta-de.ts', 'content/blog-meta-ch-de.ts'],
   fr: ['content/blog-meta-fr.ts', 'content/blog-meta-ch-fr.ts'],
 };
-const MIN_CAMPI_TRADOTTI = 1800;
+const MIN_CAMPI_TRADOTTI_PER_FILE = {
+  main: 3800,
+  ch: 2000,
+};
 
 function scanCorpusLocale(t, locale, campo) {
   const files = META_NON_IT[locale];
@@ -334,11 +348,18 @@ function scanCorpusLocale(t, locale, campo) {
     return;
   }
 
-  const valori = files.flatMap((file) => campiPubblicati(file, campo).map(({ value }) => value));
-  assert.ok(
-    valori.length >= MIN_CAMPI_TRADOTTI,
-    `letti solo ${valori.length} ${campo} ${locale}: superficie tradotta troncata`,
-  );
+  const scansioni = files.map((file) => {
+    const valori = campiPubblicati(file, campo).map(({ value }) => value);
+    const minimo = file.includes('blog-meta-ch-')
+      ? MIN_CAMPI_TRADOTTI_PER_FILE.ch
+      : MIN_CAMPI_TRADOTTI_PER_FILE.main;
+    assert.ok(
+      valori.length >= minimo,
+      `letti solo ${valori.length} ${campo} ${locale} in ${file} (minimo ${minimo}): superficie tradotta troncata`,
+    );
+    return valori;
+  });
+  const valori = scansioni.flat();
 
   const offender = valori
     .map((valore) => [valore, detectWrongLatinLanguage(valore, locale)])
@@ -360,16 +381,10 @@ for (const locale of Object.keys(META_NON_IT)) {
   });
 }
 
-const SEO_FILES = [
-  'content/seo/seo-blog.ts',
-  'content/seo/seo-blog-ch.ts',
-  'content/seo/seo-blog-2.ts',
-  'content/seo/seo-blog-3.ts',
-  'content/seo/seo-blog-4.ts',
-  'content/seo/seo-blog-5.ts',
-  'content/seo/seo-blog-6.ts',
-  'content/seo/seo-blog-7.ts',
-];
+const SEO_FILES = readdirSync(path.join(ROOT, 'content/seo'))
+  .filter((file) => /^seo-blog(?:-\d+|-ch)?\.ts$/.test(file))
+  .sort()
+  .map((file) => path.join('content/seo', file));
 const SEO_FIELDS = ['title', 'description', 'ogTitle', 'ogDescription'];
 const MIN_SEO_CAMPI_IT = 20000;
 const SEO_ENTRY_RE = /^\s*['"](blog-[^'"]+)['"]:\s*\{([\s\S]*?)(?=^\s*['"]blog-[^'"]+['"]:\s*\{|^\s*};)/gm;

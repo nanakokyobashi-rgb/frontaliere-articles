@@ -67,7 +67,12 @@
  * verdetto in comportamento.
  */
 
-import { isNonItalianScript, nonItalianScriptRatio, detectWrongLatinLanguage } from './itLanguageCheck.mjs';
+import {
+  isNonItalianScript,
+  nonItalianScriptRatio,
+  detectWrongLatinLanguage,
+  latinLanguageMarkerHits,
+} from './itLanguageCheck.mjs';
 
 /**
  * I campi di testo che una generazione IT completa DEVE portare.
@@ -885,10 +890,14 @@ export function isTopicGateAbortVerdict(parsed, { locale = 'it', expectedFields 
  * @param {string[]} [expectedFields]
  * @returns {string[]} motivi, gia' nella forma che `missing` usa.
  */
-function isCompactItalianRateTable(value) {
+export function isCompactItalianRateTable(value) {
+  if (typeof value !== 'string') return false;
   const percentages = value.match(/\b\d+(?:[.,]\d+)?\s*%/g) ?? [];
   const acronyms = value.match(/\b[A-Z]{2,}(?:\/[A-Z]{2,})*\b/g) ?? [];
-  return percentages.length >= 2 && acronyms.length >= 2;
+  const markerHits = latinLanguageMarkerHits(value);
+  const hasItalianAnchor = markerHits.it >= 1
+    || /\b(?:aliquota|aliquote|contributo|contributi|percentuale|percentuali)\b/i.test(value);
+  return percentages.length >= 2 && acronyms.length >= 2 && hasItalianAnchor;
 }
 
 export function wrongLanguageAdoptions(parsed, locale = 'it', expectedFields = REQUIRED_IT_BODY_FIELDS) {
