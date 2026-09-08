@@ -50,13 +50,12 @@ import assert from 'node:assert/strict';
 import { readFileSync, existsSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { mentionsId } from '../../scripts/lib/mentions-id.mjs';
 // Le superfici NON sono riscritte qui: le enumera lo stesso modulo che usa
 // `scripts/retire-article.mjs`. Un secondo elenco a mano è già divergito una
 // volta — mancavano `content/blogArticleIds.ts`, i file SEO e il ledger delle
 // immagini, quindi un id ritirato sopravvissuto lì passava verde proprio nel
 // test che esiste per accorgersene.
-import { SECTIONS, leftoverSurfacesFor, seoFilesFor } from '../../scripts/lib/article-surfaces.mjs';
+import { SECTIONS, leftoverSurfacesFor, seoFilesFor, surfaceMentionsArticleId } from '../../scripts/lib/article-surfaces.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 
@@ -132,7 +131,7 @@ test('ogni articolo ritirato è sparito da TUTTE le superfici', () => {
     // Le superfici testuali: registro, mappa slug, meta per locale, file SEO,
     // ledger URL→id, ledger immagini, union degli id.
     for (const rel of leftoverSurfacesFor(entry.section)) {
-      // `mentionsId` e non `includes(id)` nudo: gli id si annidano
+      // `surfaceMentionsArticleId` e non `includes(id)` nudo: gli id si annidano
       // (`frontalieri-disoccupazione-svizzera-2026` contiene
       // `disoccupazione-svizzera-2026`, ed è già così nel corpus) e i ledger
       // hanno per chiave URL i cui segmenti di path sono kebab. Un residuo
@@ -140,7 +139,7 @@ test('ogni articolo ritirato è sparito da TUTTE le superfici', () => {
       // `scripts/ci/list-pr-gate-tests.mjs`, quindi renderebbe rossa OGNI PR.
       // Stessa funzione che usa la verifica finale di
       // `scripts/retire-article.mjs`, importata dallo stesso modulo.
-      if (mentionsId(readSurface(rel), id)) leftovers.push(`${rel}: contiene ancora '${id}'`);
+      if (surfaceMentionsArticleId(rel, readSurface(rel), id)) leftovers.push(`${rel}: contiene ancora '${id}'`);
     }
 
     // I corpi e il sidecar sono file interi: deve mancare il file, non il contenuto.

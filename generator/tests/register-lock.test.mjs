@@ -655,6 +655,28 @@ test('un id CONTENUTO in un id piu\' lungo non fa leggere `present` un bersaglio
   }
 });
 
+test('una riformattazione innocua del writer non fa perdere un bersaglio registrato', () => {
+  const root = sandbox();
+  const registerLockTargets = loadRegisterLockTargets((r) => path.join(root, corpusPath(r)));
+  const id = 'permesso-g-frontalieri-2026';
+  const targets = registerLockTargets(id, 'frontaliere');
+  const write = (rel, text) => {
+    const abs = targets.find((t) => t.label === corpusPath(rel)).absPath;
+    fs.mkdirSync(path.dirname(abs), { recursive: true });
+    fs.writeFileSync(abs, text, 'utf-8');
+  };
+  const files = SECTION_FILES.frontaliere;
+  write(files.slug, `  "${id}" : { it: 'x' },\n`);
+  write(files.registry, `    id : "${id}" ,\n`);
+  write(files.seo, `  "blog-${id}" : {\n`);
+
+  const { present, absent } = registrationTargetStatus(targets);
+  for (const rel of [files.slug, files.registry, files.seo]) {
+    assert.ok(present.includes(corpusPath(rel)), `${rel} deve tollerare spazi e virgolette del writer`);
+  }
+  assert.equal(absent.length, targets.length - 3);
+});
+
 test('il label di ogni bersaglio nomina il file che esiste QUI, non la path pre-mappatura', () => {
   // I letterali di `registerLockTargets()` sono nel layout di main
   // (`data/…`, `services/locales/…`, `packages/articles/content/…`), mentre

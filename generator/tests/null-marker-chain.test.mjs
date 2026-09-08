@@ -45,7 +45,10 @@ import {
   sanitizeDatasetEvents,
   loadEventsDataset,
   STRICT_NULL_DROP_WARNING,
+  DATASET_EVENT_DROP_WARNING,
+  DATASET_DROP_WARNING,
 } from '../scripts/lib/events-utils.mjs';
+import { buildWeekendDigestArticle } from '../scripts/lib/events-digest-content.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const CREATE_ARTICLE = readFileSync(path.join(__dirname, '..', 'scripts', 'create-article.mjs'), 'utf-8');
@@ -581,11 +584,15 @@ describe('events: il warning nominato sullo scarto ambiguo', () => {
 
   test('il warning non cambia il verdetto: la chiave cade comunque', async () => {
     const events = [{ id: 'e1', descriptionByLocale: { it: 'Castagne e vin brule', de: 'NULL' } }];
-    const out = await cattura(() => enrichEventsWithLocaleFallbackTranslations(events, {}, {
-      delayMs: 0,
-      translateFn: async () => '',
-    }));
-    assert.ok(out.some((r) => r.includes('descriptionByLocale.de')));
+    let out;
+    const righe = await cattura(async () => {
+      out = await enrichEventsWithLocaleFallbackTranslations(events, {}, {
+        delayMs: 0,
+        translateFn: async () => '',
+      });
+    });
+    assert.equal('de' in out[0].descriptionByLocale, false, 'il marker non deve restare nel verdetto');
+    assert.ok(righe.some((r) => r.includes('descriptionByLocale.de')));
   });
 
   test('e vale anche sul pass-through di `deadline`, dove nessuna traduzione gira', async () => {
@@ -650,6 +657,14 @@ describe('events: la lettura del dataset applica il predicato severo', () => {
     assert.deepEqual(events.map((e) => e.id), ['e2']);
   });
 
+  test('un evento `Null` scartato nomina il record, non solo il conteggio finale', () => {
+    const { righe } = cattura(() =>
+      sanitizeDatasetEvents([{ id: 'e-null', title: 'Null' }]),
+    );
+    assert.equal(righe.filter((r) => r.includes(DATASET_EVENT_DROP_WARNING)).length, 1);
+    assert.match(righe[0], /e-null/);
+  });
+
   test('la descrizione piatta avvelenata sparisce, ma l’evento resta pubblicabile', () => {
     const { events, dropped } = sanitizeDatasetEvents([
       { id: 'e1', title: 'Sagra', description: 'NULL' },
@@ -691,10 +706,39 @@ describe('events: la lettura del dataset applica il predicato severo', () => {
     assert.equal('de' in valore.events[0].titleByLocale, false);
     assert.equal(valore.schemaVersion, 1, 'il resto del payload passa invariato');
     assert.equal(valore.generatedAt, '2026-09-06T00:00:00.000Z');
-    assert.equal(righe.filter((r) => r.includes(STRICT_NULL_DROP_WARNING)).length, 2, 'chiave + evento');
+    assert.equal(righe.filter((r) => r.includes(STRICT_NULL_DROP_WARNING)).length, 1, 'solo il marker per-locale');
+    assert.equal(righe.filter((r) => r.includes(DATASET_EVENT_DROP_WARNING)).length, 1, 'evento scartato');
+    assert.equal(righe.filter((r) => r.includes(DATASET_DROP_WARNING)).length, 1, 'conteggio aggregato');
   });
 
   test('file mancante o malformato resta zero eventi, senza lanciare', () => {
     assert.deepEqual(loadEventsDataset(path.join(os.tmpdir(), 'non-esiste-939.json')).events, []);
+  });
+
+  test('il digest usa il titolo della lingua corrente, non il titolo piatto', () => {
+    const article = buildWeekendDigestArticle({
+      todayIso: '2026-09-10',
+      events: [{
+        id: 'e-localized',
+        startDate: '2026-09-12',
+        endDate: '2026-09-12',
+        title: 'Titolo piatto',
+        titleByLocale: {
+          it: 'Titolo italiano',
+          en: 'English title',
+          de: 'Deutscher Titel',
+          fr: 'Titre français',
+        },
+        comune: 'Lugano',
+        canton: 'TI',
+      }],
+    });
+    assert.match(article.content.it.body2, /Titolo italiano/);
+    assert.match(article.content.en.body2, /English title/);
+    assert.match(article.content.de.body2, /Deutscher Titel/);
+    assert.match(article.content.fr.body2, /Titre français/);
+    for (const [locale, other] of [['it', 'English title'], ['en', 'Titolo italiano'], ['de', 'Titre français'], ['fr', 'Deutscher Titel']]) {
+      assert.doesNotMatch(article.content[locale].body2, new RegExp(other));
+    }
   });
 });

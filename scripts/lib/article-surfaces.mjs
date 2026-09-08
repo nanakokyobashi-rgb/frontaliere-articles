@@ -21,6 +21,8 @@
 import { existsSync, readdirSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { ledgerArticleId } from '../../generator/scripts/lib/source-url-ledger.mjs';
+import { mentionsId } from './mentions-id.mjs';
 
 /** La radice del repo: questo modulo vive in `scripts/lib/`. */
 export const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
@@ -67,6 +69,25 @@ export const SECTIONS = {
     sidecarDir: 'data/swiss-articles',
   },
 };
+
+const SOURCE_LEDGER_FILES = new Set(Object.values(SECTIONS).map(({ sourceLedger }) => sourceLedger));
+
+/**
+ * Cerca un id nelle superfici testuali, rispettando la struttura dei ledger
+ * URL→id: in quei due JSON l'id è il valore, non una parte della chiave URL.
+ */
+export function surfaceMentionsArticleId(rel, text, id) {
+  if (typeof id !== 'string' || id.length === 0) return false;
+  if (!SOURCE_LEDGER_FILES.has(rel)) return mentionsId(text, id);
+  try {
+    const parsed = JSON.parse(text);
+    if (!parsed || typeof parsed !== 'object' || Array.isArray(parsed)) return true;
+    return Object.values(parsed).some((value) => ledgerArticleId(value) === id);
+  } catch {
+    // Un ledger illeggibile non è prova di assenza: il gate deve restare chiuso.
+    return true;
+  }
+}
 
 /**
  * I file SEO della sezione, elencati o scoperti a runtime. Solo quelli esistenti.
