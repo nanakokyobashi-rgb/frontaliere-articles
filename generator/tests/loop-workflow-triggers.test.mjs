@@ -148,6 +148,33 @@ test('generator-ci: la allowlist `push` conserva il gate di engine-lockstep-auto
   );
 });
 
+// ── Lo sweep di pr-autorebase non va scopato alla PR dell'evento ────────────
+//
+// Il job non lavora sulla PR che ha emesso l'evento: `pr-autorebase.mjs` fa uno
+// sweep di TUTTE le PR aperte e serve quattro classi near-merge — `## LGTM`,
+// `collision-risk`, `stale-review` e lo stuck-red. Tre di quelle quattro NON
+// hanno un `## LGTM` e non possono averlo. Un filtro sul body della review nel
+// guard del job le lascerebbe al solo `pull_request: closed(merged)` e al cron,
+// che il workflow stesso dichiara insufficiente: la regressione è un'ASSENZA
+// (la PR che nessuno sblocca), esattamente la classe che questo file copre.
+test('pr-autorebase: il guard del job non filtra `pull_request_review` sul body', () => {
+  const src = active(read('.github/workflows/pr-autorebase.yml'));
+  const job = jobBlock(src, 'rebase');
+  assert.ok(job, 'job `rebase` non trovato in pr-autorebase.yml');
+  const cond = job.slice(job.indexOf('if:'), job.indexOf('runs-on:'));
+  assert.ok(
+    !/pull_request_review/.test(cond),
+    'Il guard del job discrimina `pull_request_review`. Lo sweep serve quattro classi near-merge e\n' +
+      'tre di esse (collision-risk, stale-review, stuck-red) non hanno un `## LGTM` per costruzione:\n' +
+      `restringere l'evento le lascia al cron, che GitHub throttla. if: ${cond.trim()}`,
+  );
+  assert.ok(
+    !/github\.event\.review\./.test(cond),
+    `Il guard legge un attributo della review dell'evento, ma il job non lavora su quella PR: ` +
+      `fa uno sweep di tutte le PR aperte. if: ${cond.trim()}`,
+  );
+});
+
 // ── #201, nella sua forma nuova ─────────────────────────────────────────────
 //
 // La #201 nasceva dal trigger `workflow_run`: un `gh run rerun` di `tests` non

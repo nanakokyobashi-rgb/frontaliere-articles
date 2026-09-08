@@ -57,10 +57,20 @@ jobs:
   rebase:
     # Sul trigger `pull_request` solo i merge veri: una PR chiusa senza merge
     # non cambia lo stato delle altre.
-    if: >-
-      (github.event_name != 'pull_request' && github.event_name != 'pull_request_review')
-      || (github.event_name == 'pull_request' && github.event.pull_request.merged == true)
-      || (github.event_name == 'pull_request_review' && contains(github.event.review.body, '## LGTM'))
+    #
+    # `pull_request_review` resta SENZA filtro sul body, di proposito. Il job non
+    # lavora sulla PR dell'evento: `pr-autorebase.mjs` fa uno sweep di TUTTE le PR
+    # aperte e serve quattro classi near-merge (`pr-autorebase.mjs:1051-1054`) —
+    # `## LGTM`, `collision-risk`, `stale-review` e lo stuck-red. Tre di quelle
+    # quattro sono per costruzione PR che un `## LGTM` non ce l'hanno e non
+    # possono averlo (lo stuck-red è definito proprio come lo stato in cui i test
+    # rossi fermano il job prima della review, quindi né LGTM né label). Filtrare
+    # l'evento su `contains(review.body, '## LGTM')` le lascerebbe appese al solo
+    # `pull_request: closed(merged)` e al cron — che il commento di testa dichiara
+    # insufficiente perché GitHub throttla i cron ad alta frequenza. Il costo del
+    # ramo non filtrato è una run zero-Claude e corta; la regressione opposta è
+    # silenziosa (una PR che nessuno sblocca), quindi il default è non filtrare.
+    if: github.event_name != 'pull_request' || github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
