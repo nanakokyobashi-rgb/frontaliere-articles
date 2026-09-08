@@ -30,6 +30,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
+import { readFileSync } from 'node:fs';
 import os from 'node:os';
 import { fileURLToPath } from 'node:url';
 import { dirname, join, resolve } from 'node:path';
@@ -47,6 +48,8 @@ import {
   countSourceImages,
   countSeoEntries,
   collectSeoEntryIds,
+  collectSeoEntryMetadata,
+  SEO_ENTRY_WINDOW,
   sectionFloor,
 } from '../../scripts/lib/corpus-floors.mjs';
 import {
@@ -397,7 +400,17 @@ test('countSeoEntries conta le voci come le conta parseSeoBlogs', () => {
   // Un chunk assente viene saltato, come lo salta parseSeoBlogs.
   assert.equal(countSeoEntries(dir, ['seo-blog.ts', 'mai-esistito.ts']), 2);
   assert.equal(collectSeoEntryIds('nessuna voce qui').size, 0);
+  const metadata = collectSeoEntryMetadata(entry('long'));
+  assert.equal(metadata.get('long').headline, 'T long');
+  assert.ok(SEO_ENTRY_WINDOW >= 4414, 'la finestra deve contenere il massimo misurato + margine');
   fs.rmSync(dir, { recursive: true, force: true });
+});
+
+test('build-api usa il parser SEO condiviso, non una terza finestra locale', () => {
+  const build = readFileSync(join(ROOT, 'scripts/build-api.mjs'), 'utf8');
+  assert.match(build, /collectSeoEntryMetadata/);
+  assert.doesNotMatch(build, /const entryRe = \/'blog-\(\[\^'\]\+\):\\s\*\\{\/g/);
+  assert.doesNotMatch(build, /start \+ 4000/);
 });
 
 test("publish-api.yml non porta piu' un pavimento assoluto scritto a mano", () => {
