@@ -905,8 +905,8 @@ export async function geocodeVenue(query, cache, fetchImpl = fetch) {
 // but the crawler rewrites its whole slice from scratch every run (no
 // historical merge — see crawl-tio-agenda.mjs main()), so without a disk
 // cache the SAME recurring event title would be re-translated every single
-// day forever. Cached here by field, source locale, and normalized source text
-// so identical content shares one translation regardless of event identity.
+// day forever. Cached here by event discriminator, field, source locale, and
+// normalized source text: identical titles from distinct events must not merge.
 const TRANSLATION_CACHE_PATH = path.join(REPO_ROOT, 'data', 'events-translation-cache.json');
 
 /** Load the on-disk title translation cache (`{ [eventCacheKey]: {en?,de?,fr?} }`). */
