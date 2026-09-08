@@ -13,6 +13,7 @@
 import { execFileSync } from 'node:child_process';
 import { readFileSync } from 'node:fs';
 import { REDFLAG_IMPORTANT_RE } from './lib/constants.mjs';
+import { fetchPrFiles } from './lib/fetchPrFiles.mjs';
 import { createGithubIssue } from '../lib/github-issue-creator.mjs';
 
 const FOLLOWUP_MARKER = 'OUT_OF_SCOPE_REVIEW_FOLLOWUP';
@@ -20,7 +21,7 @@ const FOLLOWUP_MARKER = 'OUT_OF_SCOPE_REVIEW_FOLLOWUP';
 const MAX_FOLLOWUP_BODY_LEN = 60000;
 const FILE_CITATION_RE = /(?:^|[\s([{"'`])((?:\.\.?\/)?(?:[A-Za-z0-9_.-]+\/)*[A-Za-z0-9_.-]+\.(?:cjs|css|html|js|json|md|mjs|sh|ts|tsx|txt|toml|yaml|yml|jsx))(?:[:#]L?\d+(?:[-–]\d+)?)?/giu;
 const IMPORTANT_MARKER_RE = /🔴\s*\*{0,2}\s*Important\s*\*{0,2}\s*[:—-]\s*/u;
-const ZERO_IMPORTANT_RE = /^(?:0|none|nessuno)(?:[.)\s]|$)/iu;
+const ZERO_IMPORTANT_RE = /^(?:0|none|nessuno)\s*$/iu;
 
 function resetImportantRegex() {
   REDFLAG_IMPORTANT_RE.lastIndex = 0;
@@ -87,7 +88,10 @@ export function importantFindings(body) {
     .map((line, index) => ({ line, index }))
     .filter(({ line }) => importantFindingLine(line));
   return markers.map(({ line, index }, markerIndex) => {
-    const end = markers[markerIndex + 1]?.index ?? lines.length;
+    const nextFinding = markers[markerIndex + 1]?.index ?? lines.length;
+    const nextH2 = lines.findIndex((candidate, candidateIndex) =>
+      candidateIndex > index && /^##\s/u.test(candidate));
+    const end = Math.min(nextFinding, nextH2 === -1 ? lines.length : nextH2);
     const text = lines.slice(index, end).join('\n').trim();
     return {
       line,
@@ -116,12 +120,9 @@ export function resolveCitedPath(citation, repositoryPaths, { treeAvailable = re
   if (candidates.length > 1) {
     return { status: 'non-risolubile', path: null, candidates };
   }
-  // Un path con slash puo' essere inferito solo quando il tree API non e'
-  // disponibile. Se il tree e' disponibile e il path non c'e', il reviewer ha
-  // citato un file inesistente/rinominato: resta non risolvibile e bloccante.
-  if (wanted.includes('/') && !treeAvailable) {
-    return { status: 'resolved', path: wanted, candidates: [], inferred: true };
-  }
+  // Senza tree non e' possibile distinguere un path fuori diff da uno
+  // inesistente/rinominato: il fallimento della fetch resta non risolvibile e
+  // bloccante, mai un'inferenza che approva la review.
   return { status: 'non-risolubile', path: null, candidates: [] };
 }
 
@@ -192,14 +193,7 @@ function gh(args, { json = true } = {}) {
 }
 
 function fetchChangedFiles(repo, pr) {
-  const output = gh(
-    ['api', `repos/${repo}/pulls/${pr}/files`, '--paginate', '--jq', '.[].filename'],
-    { json: false },
-  );
-  return output
-    .split(/\r?\n/)
-    .map(normalizePath)
-    .filter(Boolean);
+  return fetchPrFiles(Number(pr), gh, repo);
 }
 
 function fetchRepositoryPaths(repo, pr) {
@@ -363,18 +357,19 @@ function syncFollowupBody({ repo, pr, prUrl, findings, number }) {
 }
 
 async function mintFollowup({ repo, pr, prUrl, body, findings }) {
-  // Usa il writer condiviso: cerca prima gli aperti, riapre una gemella chiusa
-  // nella finestra prevista e aggiunge il nuovo item come commento invece di
-  // sovrascrivere il corpo. Il titolo e' stabile per PR, non per il primo file,
-  // cosi' un giro successivo resta sulla stessa issue anche se cambia il path.
+  // Il titolo stabile per PR rende il conio idempotente sul titolo: il writer
+  // deduplica gli aperti con la ricerca più il listing immediatamente consistente.
+  // Non riaprire una follow-up chiusa: se il drainer l'ha chiusa, il giro nuovo
+  // deve aprire un thread nuovo, non reinnestare item gia' risolti.
+  const title = `follow-up(#${pr}): finding fuori dal diff`;
   const result = await createGithubIssue({
-    title: `follow-up(#${pr}): finding fuori dal diff`,
+    title,
     description: body,
     priority: 2,
     labels: ['follow-up'],
-    // Una follow-up chiusa e poi riaperta e' ancora il thread della stessa PR;
-    // il writer applica il proprio percorso conservativo di riapertura.
-    reopenWithinHours: 30 * 24,
+    // Una follow-up chiusa puo' essere stata drenata: il suo corpo non va
+    // risuscitato nel nuovo thread. 0 e' l'opt-out esplicito del writer.
+    reopenWithinHours: 0,
   });
   if (!result || result.persisted !== true) {
     throw new Error(`writer follow-up non ha confermato la persistenza per PR #${pr}`);
@@ -400,15 +395,48 @@ async function mintFollowup({ repo, pr, prUrl, body, findings }) {
  */
 export async function classifyAndMintReview(body, { repo, pr, prUrl, mutate = true } = {}) {
   if (!repo || !pr) throw new Error('repo e pr sono obbligatori');
-  const changedFiles = fetchChangedFiles(repo, pr);
+  const changed = fetchChangedFiles(repo, pr);
+  const diffUnavailable = changed.complete !== true || changed.files.length === 0;
+  if (diffUnavailable) {
+    const findings = importantFindings(body);
+    const reason = changed.files.length === 0 ? 'empty' : changed.reason;
+    return {
+      findings,
+      outside: [],
+      inScope: [],
+      unresolved: findings.map((finding) => ({
+        ...finding,
+        reason: `diff non verificabile (${reason})`,
+      })),
+      outsideOnly: false,
+      blocking: findings.length > 0,
+      minted: false,
+      changedFiles: changed.files,
+      changedFilesComplete: changed.complete,
+      diffReason: reason,
+    };
+  }
   const repositoryPaths = fetchRepositoryPaths(repo, pr);
-  const result = classifyImportantFindings(body, changedFiles, repositoryPaths);
+  const result = classifyImportantFindings(body, changed.files, repositoryPaths);
   if (result.outside.length === 0 || !mutate) {
-    return { ...result, minted: false, changedFiles };
+    return {
+      ...result,
+      minted: false,
+      changedFiles: changed.files,
+      changedFilesComplete: changed.complete,
+      diffReason: changed.reason,
+    };
   }
   const issueBody = followupIssueBody({ repo, pr, prUrl, findings: result.outside });
   const followup = await mintFollowup({ repo, pr, prUrl, body: issueBody, findings: result.outside });
-  return { ...result, minted: true, followup, changedFiles };
+  return {
+    ...result,
+    minted: true,
+    followup,
+    changedFiles: changed.files,
+    changedFilesComplete: changed.complete,
+    diffReason: changed.reason,
+  };
 }
 
 function readReviewBody() {

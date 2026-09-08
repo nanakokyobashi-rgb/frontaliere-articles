@@ -16,12 +16,19 @@ import { fileURLToPath } from 'node:url';
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const src = fs.readFileSync(path.join(ROOT, '.github/workflows/pr-redflag-fixer.yml'), 'utf8');
 
-test('a frontaliere-automation[bot] review with 🔴 would pass the job-level trigger', () => {
-  assert.match(src, /github\.event\.pull_request\.user\.type == 'Bot'/);
+test('a frontaliere-automation[bot] review with 🔴 passes the job trigger and reaches author preflight', () => {
+  const jobIf = src.match(/\n    if: \|\n([\s\S]*?)\n    runs-on:/)?.[1] ?? '';
+  assert.match(jobIf, /startsWith\(github\.event\.review\.user\.login, 'frontaliere-automation'\)/);
+  assert.match(jobIf, /contains\(github\.event\.review\.body, '🔴'\)/);
+  assert.doesNotMatch(jobIf, /github\.event\.pull_request\.user\.type/,
+    'il job-level if: deve lasciare il predicato autore al preflight osservabile');
+  assert.doesNotMatch(jobIf, /github\.event\.pull_request\.head\.ref/,
+    'il job-level if: deve lasciare il predicato branch al preflight osservabile');
+  assert.match(src, /PR_AUTHOR_TYPE: \$\{\{ github\.event\.pull_request\.user\.type \}\}/);
+  assert.match(src, /if \[ "\$PR_AUTHOR_TYPE" != "Bot" \] && ! printf '%s' "\$HEAD_REF" \| grep -q '\^fix\//);
   assert.doesNotMatch(src, /github\.event\.review\.user\.type == 'Bot'/,
-    'il job deve filtrare sull autore della PR, non sul reviewer');
+    'il tipo del reviewer non identifica l autore della PR');
   assert.match(src, /contains\(github\.event\.review\.body, '🔴'\)/);
-  assert.match(src, /startsWith\(github\.event\.review\.user\.login, 'frontaliere-automation'\)/);
   assert.match(src, /startsWith\(github\.event\.review\.user\.login, 'claude'\) \|\|/);
 });
 

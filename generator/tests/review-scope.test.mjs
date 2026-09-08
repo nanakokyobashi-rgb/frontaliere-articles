@@ -25,6 +25,15 @@ test('legge il verdetto: Important: 0 non è un finding', () => {
   assert.equal(importantFindings(body).length, 1);
 });
 
+test('la prosa che inizia con nessuno, 0 o none è un finding', () => {
+  const body = [
+    '`scripts/ci/feeds.mjs:10`: 🔴 Important: nessuno dei dieci feed viene rigenerato.',
+    '`scripts/ci/articles.mjs:20`: 🔴 Important: 0 articoli finiscono in articles.json.',
+    '`scripts/ci/manifest.mjs:30`: 🔴 Important: none of the generated feeds is refreshed.',
+  ].join('\n');
+  assert.equal(importantFindings(body).length, 3);
+});
+
 test('non tronca il verdetto nell\'Adversarial check', () => {
   const body = [
     '## Findings (Important: 0, Nit: 0)',
@@ -38,6 +47,23 @@ test('non tronca il verdetto nell\'Adversarial check', () => {
   );
   assert.equal(result.findings.length, 1);
   assert.equal(result.outsideOnly, true);
+});
+
+test('il testo dell\'ultimo finding si ferma al successivo H2', () => {
+  const body = [
+    '## Findings (Important: 1)',
+    '`scripts/lib/outside.mjs:12`: 🔴 Important: il controllo condiviso manca.',
+    '',
+    '## Adversarial check',
+    '- La verifica cita `scripts/lib/adversarial-example.mjs:8` come esempio.',
+    '',
+    '## Summary',
+    '- Il riepilogo cita `scripts/ci/review-scope.mjs:194` per contesto.',
+  ].join('\n');
+  const findings = importantFindings(body);
+  assert.equal(findings.length, 1);
+  assert.deepEqual(findings[0].citations, [{ path: 'scripts/lib/outside.mjs', line: 12 }]);
+  assert.doesNotMatch(findings[0].text, /Adversarial|Summary|review-scope\.mjs/);
 });
 
 test('normalizza alias diff e risolve un path citato in forma abbreviata', () => {
@@ -78,6 +104,18 @@ test('un path completo assente dal tree resta non risolvibile e bloccante', () =
     '`scripts/ci/renamed-away.mjs:12`: 🔴 Important: il file citato non esiste.',
     ['engine/other.mjs'],
     ['engine/other.mjs'],
+  );
+  assert.equal(result.outsideOnly, false);
+  assert.equal(result.unresolved.length, 1);
+  assert.equal(result.unresolved[0].reason, 'file non risolto');
+  assert.equal(result.blocking, true);
+});
+
+test('tree non recuperabile rende non risolvibile un path completo fuori diff', () => {
+  const result = classifyImportantFindings(
+    '`scripts/ci/missing.mjs:12`: 🔴 Important: il file citato non è verificabile.',
+    ['engine/other.mjs'],
+    null,
   );
   assert.equal(result.outsideOnly, false);
   assert.equal(result.unresolved.length, 1);
@@ -200,7 +238,19 @@ if (args[0] === 'api' && args[1].endsWith('/files')) {
   process.stdout.write('engine/other.mjs\\n');
   process.exit(0);
 }
-if (args[0] === 'api') { process.stdout.write('non-e-una-sha\\n'); process.exit(0); }
+if (args[0] === 'pr' && args[1] === 'view') {
+  process.stdout.write(JSON.stringify({ changedFiles: 1, files: ['engine/other.mjs'] }));
+  process.exit(0);
+}
+if (args[0] === 'api' && args[1].includes('/git/trees/')) {
+  process.stdout.write(JSON.stringify({ truncated: false, tree: [
+    { type: 'blob', path: 'engine/other.mjs' },
+    { type: 'blob', path: 'scripts/lib/detect-language.mjs' },
+    { type: 'blob', path: 'scripts/lib/slugify.mjs' },
+  ] }));
+  process.exit(0);
+}
+if (args[0] === 'api') { process.stdout.write('c'.repeat(40) + '\\n'); process.exit(0); }
 if (args[0] === 'issue' && args[1] === 'list') {
   process.stdout.write(JSON.stringify(state.open || []));
   process.exit(0);
@@ -212,7 +262,152 @@ if (args[0] === 'issue' && args[1] === 'view') {
 process.exit(0);
 `;
 
-test('sul secondo giro il corpo della follow-up viene riscritto, non solo commentato', async () => {
+const DIFF_FAILURE_GH = `#!/usr/bin/env node
+'use strict';
+const fs = require('node:fs');
+const args = process.argv.slice(2);
+const mode = process.env.FAKE_DIFF_MODE || 'cap';
+if (args[0] === 'pr' && args[1] === 'view') {
+  const files = mode === 'cap'
+    ? Array.from({ length: 100 }, (_, i) => \`content/generated-\${i}.md\`)
+    : [];
+  process.stdout.write(JSON.stringify({ changedFiles: mode === 'cap' ? 14888 : 0, files }));
+  process.exit(0);
+}
+if (args[0] === 'api' && args[1].endsWith('/files')) {
+  const files = mode === 'cap'
+    ? Array.from({ length: 3000 }, (_, i) => \`content/generated-\${i}.md\`)
+    : [];
+  fs.writeSync(1, files.join('\\n') + (files.length ? '\\n' : ''));
+  process.exit(0);
+}
+if (args[0] === 'api') { process.stdout.write('non-e-una-sha\\n'); process.exit(0); }
+if (args[0] === 'issue' && args[1] === 'list') { process.stdout.write('[]'); process.exit(0); }
+if (args[0] === 'issue' && args[1] === 'create') {
+  process.stdout.write('https://github.com/o/r/issues/8'); process.exit(0);
+}
+if (args[0] === 'issue' && args[1] === 'view') { process.stdout.write(''); process.exit(0); }
+process.exit(0);
+`;
+
+const CLOSED_FOLLOWUP_GH = `#!/usr/bin/env node
+'use strict';
+const fs = require('node:fs');
+const args = process.argv.slice(2);
+fs.appendFileSync(process.env.FAKE_GH_LOG, JSON.stringify(args) + '\\n');
+if (args[0] === 'pr' && args[1] === 'view') {
+  process.stdout.write(JSON.stringify({ changedFiles: 1, files: ['engine/other.mjs'] }));
+  process.exit(0);
+}
+if (args[0] === 'api' && args[1].includes('/pulls/')) {
+  if (args[1].endsWith('/files')) { process.stdout.write('engine/other.mjs\\n'); process.exit(0); }
+  process.stdout.write('c'.repeat(40)); process.exit(0);
+}
+if (args[0] === 'api' && args[1].includes('/git/trees/')) {
+  process.stdout.write(JSON.stringify({ truncated: false, tree: [
+    { type: 'blob', path: 'engine/other.mjs' },
+    { type: 'blob', path: 'scripts/lib/closed.mjs' },
+  ] }));
+  process.exit(0);
+}
+if (args[0] === 'issue' && args[1] === 'list') {
+  const state = args[args.indexOf('--state') + 1];
+  const issues = state === 'closed'
+    ? [{ number: 7, title: 'follow-up(#905): finding fuori dal diff', url: 'https://x/7',
+      closedAt: new Date().toISOString(), state: 'CLOSED', stateReason: 'COMPLETED', labels: [] }]
+    : [];
+  process.stdout.write(JSON.stringify(issues)); process.exit(0);
+}
+if (args[0] === 'issue' && args[1] === 'create') {
+  process.stdout.write('https://github.com/o/r/issues/8'); process.exit(0);
+}
+if (args[0] === 'issue' && args[1] === 'view') { process.stdout.write(''); process.exit(0); }
+process.exit(0);
+`;
+
+async function classifyWithDiffFailure(mode) {
+  const { classifyAndMintReview } = await import('../../scripts/ci/review-scope.mjs');
+  const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'review-scope-diff-'));
+  const binDir = path.join(tmpDir, 'bin');
+  fs.mkdirSync(binDir);
+  fs.writeFileSync(path.join(binDir, 'gh'), DIFF_FAILURE_GH, { mode: 0o755 });
+  const previous = {
+    PATH: process.env.PATH,
+    FAKE_DIFF_MODE: process.env.FAKE_DIFF_MODE,
+    GH_REPO: process.env.GH_REPO,
+  };
+  process.env.PATH = `${binDir}${path.delimiter}${previous.PATH}`;
+  process.env.FAKE_DIFF_MODE = mode;
+  delete process.env.GH_REPO;
+  try {
+    return await classifyAndMintReview(
+      '`scripts/build-api.mjs:10`: 🔴 Important: il controllo della superficie pubblicata manca.',
+      { repo: 'o/r', pr: 904, prUrl: 'https://x/pr/904' },
+    );
+  } finally {
+    process.env.PATH = previous.PATH;
+    if (previous.FAKE_DIFF_MODE === undefined) delete process.env.FAKE_DIFF_MODE;
+    else process.env.FAKE_DIFF_MODE = previous.FAKE_DIFF_MODE;
+    if (previous.GH_REPO === undefined) delete process.env.GH_REPO;
+    else process.env.GH_REPO = previous.GH_REPO;
+    fs.rmSync(tmpDir, { recursive: true, force: true });
+  }
+}
+
+test('lista REST al hard-cap con complete=false resta BLOCCANTE', { concurrency: false }, async () => {
+  const result = await classifyWithDiffFailure('cap');
+  assert.equal(result.changedFilesComplete, false);
+  assert.equal(result.diffReason, 'rest-hard-limit');
+  assert.equal(result.outsideOnly, false);
+  assert.equal(result.minted, false);
+  assert.equal(result.blocking, true);
+});
+
+test('lista file vuota resta BLOCCANTE anche se il helper la dichiara complete', { concurrency: false }, async () => {
+  const result = await classifyWithDiffFailure('empty');
+  assert.equal(result.changedFiles.length, 0);
+  assert.equal(result.changedFilesComplete, true);
+  assert.equal(result.diffReason, 'empty');
+  assert.equal(result.outsideOnly, false);
+  assert.equal(result.minted, false);
+  assert.equal(result.blocking, true);
+});
+
+test('una follow-up chiusa non viene riaperta né riempita di nuovo', { concurrency: false }, async () => {
+  const { classifyAndMintReview } = await import('../../scripts/ci/review-scope.mjs');
+  const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'review-scope-closed-'));
+  const binDir = path.join(tmpDir, 'bin');
+  fs.mkdirSync(binDir);
+  const logFile = path.join(tmpDir, 'gh.log');
+  fs.writeFileSync(path.join(binDir, 'gh'), CLOSED_FOLLOWUP_GH, { mode: 0o755 });
+  const previous = { PATH: process.env.PATH, FAKE_GH_LOG: process.env.FAKE_GH_LOG, GH_REPO: process.env.GH_REPO };
+  process.env.PATH = `${binDir}${path.delimiter}${previous.PATH}`;
+  process.env.FAKE_GH_LOG = logFile;
+  delete process.env.GH_REPO;
+  try {
+    const result = await classifyAndMintReview(
+      '`scripts/lib/closed.mjs:10`: 🔴 Important: il controllo chiuso va corretto.',
+      { repo: 'o/r', pr: 905, prUrl: 'https://x/pr/905' },
+    );
+    assert.equal(result.outsideOnly, true);
+    assert.equal(result.minted, true);
+    assert.equal(result.followup.reopened, false);
+    const calls = fs.readFileSync(logFile, 'utf8').trim().split('\n').map((line) => JSON.parse(line));
+    const create = calls.find((args) => args[0] === 'issue' && args[1] === 'create');
+    assert.ok(create, JSON.stringify(calls));
+    assert.equal(create[create.indexOf('--title') + 1], 'follow-up(#905): finding fuori dal diff');
+    assert.doesNotMatch(fs.readFileSync(logFile, 'utf8'), /"reopen"/);
+  } finally {
+    process.env.PATH = previous.PATH;
+    if (previous.FAKE_GH_LOG === undefined) delete process.env.FAKE_GH_LOG;
+    else process.env.FAKE_GH_LOG = previous.FAKE_GH_LOG;
+    if (previous.GH_REPO === undefined) delete process.env.GH_REPO;
+    else process.env.GH_REPO = previous.GH_REPO;
+    fs.rmSync(tmpDir, { recursive: true, force: true });
+  }
+});
+
+test('sul secondo giro il corpo della follow-up viene riscritto, non solo commentato', { concurrency: false }, async () => {
   const { classifyAndMintReview } = await import('../../scripts/ci/review-scope.mjs');
   const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'review-scope-followup-'));
   const binDir = path.join(tmpDir, 'bin');

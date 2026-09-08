@@ -17,15 +17,14 @@ const scope = workflow.match(/\n  scope:\n([\s\S]*?)\n  redflag-fix:\n/)?.[1];
 
 assert.ok(preflight, 'preflight job not found');
 
-test('the autonomous fixer is limited to bots or fix/* branches', () => {
+test('the autonomous fixer is limited to bots or fix/* branches in preflight', () => {
   const jobIf = preflight.match(/\n    if: \|\n([\s\S]*?)\n    runs-on:/)?.[1] ?? '';
 
   assert.ok(jobIf, 'job-level if: not found');
-  assert.match(jobIf, /github\.event\.pull_request\.user\.type == 'Bot'/);
-  assert.doesNotMatch(jobIf, /github\.event\.review\.user\.type == 'Bot'/,
-    'il tipo del reviewer non identifica l autore della PR');
-  assert.match(jobIf, /startsWith\(github\.event\.pull_request\.head\.ref, 'fix\/'\)/);
+  assert.doesNotMatch(jobIf, /github\.event\.pull_request\.user\.type/);
+  assert.doesNotMatch(jobIf, /github\.event\.pull_request\.head\.ref/);
   assert.match(preflight, /PR_AUTHOR_TYPE: \$\{\{ github\.event\.pull_request\.user\.type \}\}/);
+  assert.match(preflight, /PR con autore non Bot, branch non/);
   assert.match(
     preflight,
     /if \[ "\$PR_AUTHOR_TYPE" != "Bot" \] && ! printf '%s' "\$HEAD_REF" \| grep -q '\^fix\/'/,

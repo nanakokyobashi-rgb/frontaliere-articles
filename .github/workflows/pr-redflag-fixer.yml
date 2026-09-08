@@ -47,10 +47,12 @@ jobs:
     # nega) lo fa il preflight sotto, con una regex tollerante al bold/spaziatura MA
     # che richiede un delimitatore dopo "Important" — impossibile in un'espressione
     # `if:` YAML.
-    # Il fixer autonomo ingaggia solo Bot o branch `fix/*`: un branch `codex/*`
-    # resta SKIPPED e non consuma un turno. Il review-gate, invece, applica la
-    # classificazione scope a ogni PR e conia il follow-up senza delegare il
-    # finding fuori diff a questo fixer.
+    # NB: lo scope-check "PR autonoma" (autore Bot o head `fix/*`) NON vive più
+    # in questo `if:` — vedi lo step sotto. Un `if:` di job che fallisce lascia il
+    # job intero SKIPPED senza eseguire una riga di script: per una PR umana con
+    # un vero 🔴 Important quel salto era invisibile ovunque (issue #5534, PR
+    # #5515 — check-run "skipped", zero commenti, zero label). Qui restano solo i
+    # pre-filtri economici che non richiedono distinguere lo scope.
     # Reviewer set = `claude*` + `frontaliere-automation*` (prefisso: la
     # stessa App si presenta senza il suffisso `[bot]` in GraphQL). A job-level
     # `startsWith(..., 'claude')` alone skipped App-bot 🔴 on the site
@@ -61,8 +63,6 @@ jobs:
     # `REVIEWER_BOT_LOGIN_RE`/`_JQ` in `scripts/ci/lib/constants.mjs`, e per i
     # due `--jq` di `tests.yml` (skip-guard `## LGTM` e base incrementale).
     if: |
-      (github.event.pull_request.user.type == 'Bot' ||
-       startsWith(github.event.pull_request.head.ref, 'fix/')) &&
       (startsWith(github.event.review.user.login, 'claude') ||
        startsWith(github.event.review.user.login, 'frontaliere-automation')) &&
       contains(github.event.review.body, '🔴') &&
