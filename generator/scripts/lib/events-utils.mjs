@@ -23,6 +23,8 @@ import { MUNICIPALITIES } from '../../data/municipalities.ts';
 import { freeTranslateWithRetry } from './free-translate.mjs';
 import { hasUsableContentText, hasUsableTranslatedText } from './body2-payload-verdict.mjs';
 
+export { hasUsableContentText };
+
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 // `../../..`: same one-level-deeper correction as evergreen-article-refresh.mjs
 // — this module moved from scripts/lib/ to generator/scripts/lib/, so the old

@@ -23,8 +23,8 @@ import {
   resolveCantonUrlKey,
   UNRESOLVED_CANTON_KEY,
   UNRESOLVED_CANTON_LABEL,
+  hasUsableContentText,
 } from './events-utils.mjs';
-import { hasUsableContentText } from './body2-payload-verdict.mjs';
 
 /** Stable, evergreen identity — never changes (no date in id/slug → no flooding). */
 export const DIGEST_ARTICLE_ID = 'eventi-weekend-ticino';
