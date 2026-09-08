@@ -418,8 +418,13 @@ async function main() {
       console.log(line);
     }
     if (refs.size > 0) {
+      // Il margine si misura qui, con l'orologio vero: verifyCdnAssetRefs usa
+      // il proprio `now` iniettabile, e un tetto di cui non si sa quanto avanza
+      // non e' un tetto misurato (issue #1219).
+      const startedAt = Date.now();
       const results = await verifyCdnAssetRefs({ urls: [...refs] });
-      for (const line of formatCdnAssetReport(results)) console.log(line);
+      const elapsedMs = Date.now() - startedAt;
+      for (const line of formatCdnAssetReport(results, '[cdn-asset-check]', { elapsedMs })) console.log(line);
     }
   } catch (err) {
     console.log(`[cdn-asset-check] verifica saltata (non-fatale): ${(err && err.message) || err}`);
