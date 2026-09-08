@@ -20,33 +20,46 @@
  * 40 PR mergiate nella finestra 2026-07-27 → 2026-08-10, di cui **5 sono
  * esattamente questa forma** (#124, #108, #89, #80, #75).
  *
- * ## Perche' il check e' a DUE livelli, e non uno solo
+ * ## Perche' il classificatore e' a DUE livelli, e il gate ha una policy
  *
  * La versione ovvia di questo gate — «ogni voce deve contenere una delle tre
  * forme letterali» — e' stata scritta e **misurata sui body reali prima di
- * decidere**. Boccia **34 PR su 40**, cioe' quasi ogni PR che il reviewer ha
- * letto e approvato. Non e' un difetto della regex: e' che il reviewer applica
- * un giudizio («questo piano c'e', anche se non nella forma letterale») che una
- * regex non ha. Un gate bloccante con quel tasso verrebbe spento in due giorni,
- * ed e' il modo tipico in cui un fix strutturale diventa un fastidio.
+ * decidere**. Il classificatore puro la tiene separata dalla sua policy:
+ * una prosa concreta può essere comprensibile al reviewer anche senza la forma
+ * letterale, ma la sezione contrattuale non deve più affidarsi a quel giudizio.
+ * La ricorrenza misurata oggi (#140) è il motivo per cui il runner promuove
+ * `no-literal-state` a problema bloccante solo quando la voce non contiene
+ * nemmeno un riferimento `#N` nudo e non dichiara una decisione motivata,
+ * lasciando la distinzione semantica disponibile nell'API pura. Il riferimento
+ * nudo è una soglia conservativa misurata sui body reali, non una nuova forma
+ * di stato.
  *
- * Le varianti misurate, per non doverle rimisurare:
+ * La misura aggiornata, eseguita il 2026-09-08 sui 310 body mergiati dal
+ * 2026-08-25 al 2026-09-08, conta 595 `no-literal-state`: 462 non contengono
+ * nemmeno un `#N` nudo. Il runner blocca quindi 462/595 finding senza
+ * trasformare in rosso ogni prosa concreta (la vecchia misura 34/40 valeva
+ * invece per la regola più ampia «ogni voce ha una forma letterale»). La
+ * distinzione è intenzionale: il riferimento nudo resta un avviso del
+ * classificatore e non diventa una nuova forma di stato.
  *
- *   regola                                        PR bocciate   voci   recall
- *   ogni voce ha una forma letterale                  34/40      —      5/5
- *   nessuno stato e nessun `#N`                       33/40     111     3/5
- *   scappatoia nominata (solo REVIEW.md)               3/40       3     0/5
- *   scappatoia + nessuno stato + nessuna decisione     8/40       9     1/5   <- BLOCCANTE
+ * Il classificatore mantiene i due livelli per non confondere una prosa
+ * concreta con una scappatoia: `checkNextStepStates()` restituisce quindi un
+ * `no-literal-state` come avviso. Il runner del contratto, pero', deve
+ * applicare il contratto letterale alla sezione che dichiara lavoro dovuto:
+ * `blockingNextStepFindings()` promuove quel tipo a problema bloccante solo se
+ * non c'è nemmeno un `#N` nudo. La decisione motivata resta solo un avviso,
+ * perché una regex non può provare che sia davvero una decisione.
  *
  * Quindi:
  *
- *   - **BLOCCANTE** (`violations`): la voce si appoggia a una scappatoia
- *     (`out of scope`, `posposto`, «un giro dedicato», «separatamente»…) E non
- *     dichiara nessuno stato E non e' una decisione motivata esplicita. Volume
- *     misurato: 9 voci su 40 PR. La rimedia una frase, e il gate la stampa.
- *   - **AVVISO** (`advisories`): la voce non ha una forma letterale ma nemmeno
- *     una scappatoia. Segnalata con la riscrittura pronta, **senza far fallire
- *     niente** — e' il caso in cui il giudizio serve davvero.
+ *   - **BLOCCANTE del classificatore** (`violations`): la voce si appoggia a
+ *     una scappatoia (`out of scope`, `posposto`, «un giro dedicato»,
+ *     «separatamente»…) E non dichiara nessuno stato E non e' una decisione
+ *     motivata esplicita. La rimedia una frase, e il gate la stampa.
+ *   - **AVVISO del classificatore** (`advisories`): la voce non ha una forma
+ *     letterale ma nemmeno una scappatoia. Il gate promuove a problema solo il
+ *     caso senza neppure un `#N` nudo; l'API pura conserva l'avviso per i
+ *     chiamanti che vogliono distinguere il giudizio semantico dalla policy.
  *
  * Il valore del livello bloccante non e' teorico: le voci-scappatoia di #106 e
  * #118 sono **diventate** i finding del reviewer su #108 e #124, cioe' le due
@@ -299,7 +312,7 @@ export function checkNextStepStates(body = '') {
           'scappatoia: serve `in questa PR`, `PR concatenata #N` oppure `blocked: <causa>`. ' +
           '(Se e\' una decisione motivata e non un rinvio, scrivilo: «per scelta», «by construction».)',
       });
-    } else if (hatch && decided) {
+    } else if (decided) {
       // L'esenzione «decisione motivata» resta — ma VISIBILE, non silenziosa.
       // Il messaggio della violazione qui sopra suggerisce «per scelta» come
       // rimedio: senza questo ramo, un fixer che aggiunge la frase SENZA
@@ -315,8 +328,10 @@ export function checkNextStepStates(body = '') {
         snippet: snippetOf(b.text),
         escapeHatch: hatch,
         message:
-          `Voce ${b.index} («${snippetOf(b.text, 55)}») contiene «${hatch}», che sarebbe una ` +
-          'scappatoia, ma la esenta dichiarandola una decisione motivata. Non blocca — ' +
+          (hatch
+            ? `Voce ${b.index} («${snippetOf(b.text, 55)}») contiene «${hatch}», che sarebbe una ` +
+              'scappatoia, ma la esenta dichiarandola una decisione motivata. Non blocca — '
+            : `Voce ${b.index} («${snippetOf(b.text, 55)}») dichiara una decisione motivata. Non blocca — `) +
           'verifica che sia davvero una decisione e non un rinvio rietichettato: nel secondo ' +
           'caso serve `in questa PR`, `PR concatenata #N` oppure `blocked: <causa>`.',
       });
@@ -329,12 +344,46 @@ export function checkNextStepStates(body = '') {
         snippet: snippetOf(b.text),
         message:
           `Voce ${b.index} («${snippetOf(b.text, 55)}») non porta una delle forme letterali ` +
-          'del contratto. Non blocca — ma se e\' lavoro dovuto, un `PR concatenata #N` lo rende ' +
-          'tracciabile invece che affidato alla memoria.',
+          'del contratto. Se e\' lavoro dovuto, un `PR concatenata #N` lo rende tracciabile ' +
+          'invece che affidato alla memoria.',
       });
     }
   }
   return { ok: violations.length === 0, violations, advisories };
+}
+
+/**
+ * Problemi che il gate del contratto deve bloccare.
+ *
+ * Il classificatore resta volutamente conservativo: una voce in prosa può
+ * essere un piano comprensibile anche senza una forma letterale. Il contratto
+ * del body non può però lasciare ogni caso al reviewer: la sezione
+ * `Non implementato` deve dichiarare uno stato oppure fallire in modo
+ * deterministico quando non porta neppure un riferimento `#N` nudo. Le
+ * esenzioni motivate (`hatch-exempted-by-decision`) restano avvisi e non
+ * vengono promosse.
+ *
+ * @param {{ violations?: Array<object>, advisories?: Array<object> }} result
+ * @returns {Array<object>}
+ */
+export function blockingNextStepFindings(result = {}) {
+  return [
+    ...(Array.isArray(result.violations) ? result.violations : []),
+    ...(Array.isArray(result.advisories) ? result.advisories.filter(isBlockingNextStepFinding) : []),
+  ];
+}
+
+/**
+ * Policy minima del runner per il finding che il classificatore lascia come
+ * avviso. Un `#N` nudo non è uno stato (lo resta per l'API pura), ma è una
+ * soglia conservativa: sui body reali della finestra #140 riduce il blocco ai
+ * casi senza alcun riferimento tracciabile. Una decisione motivata resta
+ * esente anche se il risultato arriva già dal classificatore in forma diversa.
+ */
+export function isBlockingNextStepFinding(finding = {}) {
+  if (finding.type !== 'no-literal-state') return false;
+  const text = stripEmphasis(String(finding.text ?? ''));
+  return !/#\d+\b/u.test(text) && !DECISION_RE.test(text);
 }
 
 /**
@@ -350,7 +399,7 @@ export function checkNextStepStates(body = '') {
  * @param {string} body
  * @returns {string|null} markdown della sezione corretta, o null se non serve
  */
-export function suggestedSection(body = '') {
+export function suggestedSection(body = '', { strict = false } = {}) {
   const { violations, advisories } = checkNextStepStates(body);
   // `hatch-exempted-by-decision` non entra nella riscrittura: la voce ha gia'
   // uno stato terminale (la decisione), e proporle uno `**Stato:**` direbbe di
@@ -359,7 +408,9 @@ export function suggestedSection(body = '') {
   if (!violations.length && !rewritable.length) return null;
   const flagged = new Map();
   for (const v of violations) flagged.set(v.index, 'violation');
-  for (const a of rewritable) flagged.set(a.index, 'advisory');
+  for (const a of rewritable) {
+    flagged.set(a.index, strict && isBlockingNextStepFinding(a) ? 'violation' : 'advisory');
+  }
 
   const s = String(body ?? '');
   const headerRe = NON_IMPL_ANCORA_RE.test(s) ? NON_IMPL_ANCORA_RE : NON_IMPL_ANY_RE;
