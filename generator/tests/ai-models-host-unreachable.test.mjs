@@ -1340,6 +1340,21 @@ describe('callLLM — il contatore dei flap del resolver (#818)', () => {
     const stats = getStats();
     assert.ok(stats.activeCooldowns.github > 0, `atteso il cooldown dopo l'escalation: ${JSON.stringify(stats.activeCooldowns)}`);
     assert.ok(stats.exhaustedModels.includes('gpt-4o'), `atteso il modello dell'escalation esaurito, visti: ${stats.exhaustedModels.join(', ')}`);
+    assert.equal(err.exhaustionBreakdown.transient, 2, `i due flap sotto soglia devono restare transitori: ${JSON.stringify(err.exhaustionBreakdown)}`);
+    assert.equal(err.exhaustionBreakdown.persistent, 1, `l'escalation deve prevalere sulla parola «aborted»: ${JSON.stringify(err.exhaustionBreakdown)}`);
+  });
+
+  it('classifica una causa persistente oltre il limite del testo mostrato', async () => {
+    process.env.AI_MODELS_FORCE_CHAIN = 'gpt-4o-mini';
+    globalThis.fetch = async () => {
+      throw new Error(`${'x'.repeat(200)} HTTP 401 invalid api key`);
+    };
+
+    const err = await run();
+    assert.ok(err, 'la catena deve fallire');
+    assert.equal(err.exhaustionBreakdown.transient, 0);
+    assert.equal(err.exhaustionBreakdown.persistent, 1,
+      `la causa oltre i 200 caratteri deve entrare nel voto: ${JSON.stringify(err.exhaustionBreakdown)}`);
   });
 });
 
