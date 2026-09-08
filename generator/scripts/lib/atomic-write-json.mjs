@@ -31,7 +31,19 @@ export function writeJsonAtomic(filePath, value, { compact = false } = {}) {
   const tmp = `${filePath}.${process.pid}.${tmpSeq++}.tmp`;
   try {
     fs.writeFileSync(tmp, content, 'utf8');
+    const tempFd = fs.openSync(tmp, 'r');
+    try {
+      fs.fsyncSync(tempFd);
+    } finally {
+      fs.closeSync(tempFd);
+    }
     fs.renameSync(tmp, filePath);
+    const directoryFd = fs.openSync(path.dirname(filePath), 'r');
+    try {
+      fs.fsyncSync(directoryFd);
+    } finally {
+      fs.closeSync(directoryFd);
+    }
   } catch (err) {
     try { fs.unlinkSync(tmp); } catch { /* best-effort cleanup */ }
     throw err;

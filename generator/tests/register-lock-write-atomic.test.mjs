@@ -104,3 +104,17 @@ test('writeJsonAtomic commette davvero via temp+rename', () => {
   assert.match(helper, /renameSync\(\s*tmp\s*,\s*filePath\s*\)/,
     'writeJsonAtomic deve committare con renameSync dal temp al target');
 });
+
+test('writeJsonAtomic forza temp e directory prima di dare per committato il marker', () => {
+  const helper = codeOnly(fs.readFileSync(
+    path.join(import.meta.dirname, '..', 'scripts', 'lib', 'atomic-write-json.mjs'), 'utf-8'));
+  const tempOpen = helper.indexOf("openSync(tmp, 'r')");
+  const tempSync = helper.indexOf('fsyncSync(tempFd)');
+  const rename = helper.indexOf('renameSync(tmp, filePath)');
+  const directoryOpen = helper.indexOf("openSync(path.dirname(filePath), 'r')");
+  const directorySync = helper.indexOf('fsyncSync(directoryFd)');
+  assert.ok(tempOpen >= 0 && tempOpen < tempSync, 'il temp deve essere aperto e sincronizzato');
+  assert.ok(tempSync < rename, 'il temp deve essere sincronizzato prima del rename');
+  assert.ok(rename < directoryOpen && directoryOpen < directorySync,
+    'la directory deve essere sincronizzata dopo il rename');
+});
