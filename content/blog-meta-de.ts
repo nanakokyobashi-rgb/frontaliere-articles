@@ -11610,6 +11610,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.s30-guasto-tecnico-cadenazzo-luino.title': 'S30 aufgrund eines technischen Defekts zwischen Cadenazzo und Luino blockiert',
     'blog.article.s30-guasto-tecnico-cadenazzo-luino.excerpt': 'Bahnstrecke bis Mittwoch, 9. September 2026, 4:00 Uhr unterbrochen. Ersatzbusse verfügbar, aber mit garantierten Verspätungen und ohne Anschlussflüge.',
     'blog.article.s30-guasto-tecnico-cadenazzo-luino.imageAlt': 'Bahnhof Bellinzona mit SBB-Zügen auf den Gleisen während des Tages',
+    'blog.article.libro-boom-frontalieri-svizzera.title': 'Das Buch zum Grenzgängerboom in der Schweiz',
+    'blog.article.libro-boom-frontalieri-svizzera.excerpt': 'Neues akademisches Buch erklärt, wie die Schweiz 400 \'000 Grenzgänger zählt. Von 84.000 im Jahr 1978 bis zum Boom nach dem Jahr 2000. Fokus auf Löhne, Steuern, Transport.',
+    'blog.article.libro-boom-frontalieri-svizzera.imageAlt': 'Tessin-Grenzlandschaft, Symbol des grenzüberschreitenden Arbeitsmarktes.',
 };
 
 export default blogMetaDe;
