@@ -83,9 +83,18 @@ case "$sub" in
       */compare/*)
         node -e 'const c=require(process.argv[1]); const k=process.argv[2].split("/compare/")[1]; process.stdout.write(JSON.stringify((c.byRange||{})[k]||{files:[]}))' ${JSON.stringify(fixCompare)} "$p" ;;
       */issues/*/comments*) echo '[]' ;;
+      */issues?*) echo '[]' ;;
       */pulls/*)   cat ${JSON.stringify(fixMeta)} ;;
       *) echo '{}' ;;
     esac
+    ;;
+  issue)
+    action="$1"; shift
+    if [ "$action" = "list" ]; then
+      echo '[]'
+    elif [ "$action" = "create" ]; then
+      echo 'https://github.com/nanakokyobashi-rgb/frontaliere-articles/issues/123'
+    fi
     ;;
   pr)
     action="$1"; shift
@@ -136,6 +145,19 @@ test('LGTM accanto a un 🔴 Important → il check e\' ROSSO', () => {
     reviews: [botReview(HEAD, '🔴 Important: manca il guard\n\n## LGTM')],
   });
   assert.equal(r.status, 1, `Un 🔴 Important accanto al LGTM deve bloccare.\n${r.stdout}`);
+});
+
+test('Important fuori dal diff → il gate e\' verde e il finding diventa follow-up', () => {
+  const r = runGate({
+    reviews: [botReview(HEAD, [
+      '## Findings (1 Important, 0 Nit)',
+      '`generator/scripts/outside.mjs:10`: 🔴 Important: il controllo condiviso manca.',
+    ].join('\n'))],
+    files: ['generator/scripts/in-scope.mjs'],
+    meta: { base: { sha: 'c'.repeat(40) } },
+  });
+  assert.equal(r.status, 0, `Un finding solo fuori dal diff non deve bloccare.\n${r.stdout}`);
+  assert.match(r.stdout, /follow-up|fuori dal diff/i, r.stdout);
 });
 
 test('nessuna review del bot e PR che non tocca il workflow di review → ROSSO', () => {
