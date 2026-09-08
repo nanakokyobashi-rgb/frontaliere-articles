@@ -345,6 +345,8 @@ jobs:
             3. `gh issue list --label follow-up --state all --json number,title --limit 50` (SOLO `number,title`: il bulk overview serve per la vista d'insieme/titoli; il dedup vero è item-level scoped via `--search`. MAI aggiungere `,body`: con ~170 issue follow-up il dump arriva a ~170KB emoji-heavy, troncato a un boundary di surrogate UTF-16 → lone surrogate → `400 no low surrogate in string`, ogni run fallisce.) Riusa questa lista per il dedup su tutte le PR del batch.
             4. Il contesto per-PR del batch è già prefetchato (zero-Claude, token-lever) in `${{ runner.temp }}/followup-ctx/followup-bundle.md`: leggilo con `Read` — contiene, per ciascuna PR #N del batch, `gh pr view` (number/title/body/mergedAt/mergeCommit/url/author) + le review, e l'elenco delle PR aperte con i rispettivi file (per l'In-flight PR overlap sotto). Non ripetere queste chiamate per-PR a meno che la sezione della PR risulti vuota/incompleta nel bundle.
 
+            - **Ordine obbligatorio dei campi:** `Suggested action` DEVE essere l'ultimo campo di ogni item `### <n>.`. Non aggiungere `- Rationale:`, `- Stato dichiarato nella PR:` o altri campi dopo: la chiusura misura solo quella regione e un campo successivo renderebbe il conio più largo del verdetto di chiusura.
+
             **Per OGNI PR #N del batch (CSV sopra):**
             - **Token derivato — prova obbligatoria:** se derivi un token per rendere azionabile un item, il token DEVE già esistere verbatim nel file citato dalla `Suggested action`; la chiusura lo verifica con `content.includes(tok)`. Non inventare un simbolo futuro: cita un token presente, così l'evidenza richiesta è eseguibile.
             - **Backfill check (SOLO se `EVENT_NAME=workflow_dispatch`):** ri-verifica che

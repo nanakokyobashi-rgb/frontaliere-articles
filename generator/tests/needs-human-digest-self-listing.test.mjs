@@ -91,7 +91,7 @@ test('il titolo di dedup ha una sola sorgente nello step', () => {
 
 test('la lista issue esclude l issue dedup stessa', () => {
   const step = surfaceStep();
-  const issueQuery = /ISSUES=\$\(gh api --paginate[\s\S]*?--jq '([^']+)'\)/.exec(step);
+  const issueQuery = /ISSUES=\$\(printf[\s\S]*?jq -r '([^']+)'\)/.exec(step);
   assert.ok(issueQuery, 'query della lista issue dello step non trovata');
   assert.match(
     issueQuery[1],
@@ -127,7 +127,7 @@ test('la condizione di chiusura promessa nel corpo resta raggiungibile', () => {
  * `steps.detect.outcome == 'success'`; qui produttore e consumatore stanno
  * nello stesso step, quindi l'equivalente e' catturare l'exit status.
  */
-test('l esito delle due query e catturato, non solo il loro output', () => {
+test('l esito del fetch e delle due partizioni e catturato', () => {
   const step = surfaceStep();
   assert.doesNotMatch(
     step,
@@ -136,19 +136,24 @@ test('l esito delle due query e catturato, non solo il loro output', () => {
   );
   assert.match(
     step,
-    /PRS=\$\(gh api --paginate[\s\S]*?\n\s+PRS_RC=\$\?/,
-    'l exit status della query PR va catturato subito dopo l assegnazione',
+    /NEEDS_HUMAN_ITEMS=\$\(gh api --paginate[\s\S]*?\n\s+NEEDS_HUMAN_RC=\$\?/,
+    'l exit status del fetch paginato va catturato subito dopo l assegnazione',
   );
   assert.match(
     step,
-    /ISSUES=\$\(gh api --paginate[\s\S]*?\n\s+ISSUES_RC=\$\?/,
-    'l exit status della query issue va catturato subito dopo l assegnazione',
+    /PRS=\$\(printf[\s\S]*?\n\s+PRS_RC=\$\?/,
+    'l exit status della partizione PR va catturato subito dopo l assegnazione',
+  );
+  assert.match(
+    step,
+    /ISSUES=\$\(printf[\s\S]*?\n\s+ISSUES_RC=\$\?/,
+    'l exit status della partizione issue va catturato subito dopo l assegnazione',
   );
 });
 
 test('una query fallita non arriva mai al ramo di chiusura', () => {
   const step = surfaceStep();
-  const guard = /if \[ "\$PRS_RC" -ne 0 \] \|\| \[ "\$ISSUES_RC" -ne 0 \]; then([\s\S]*?)\n\s+fi\n/.exec(step);
+  const guard = /if \[ "\$NEEDS_HUMAN_RC" -ne 0 \] \|\| \[ "\$PRS_RC" -ne 0 \] \|\| \[ "\$ISSUES_RC" -ne 0 \]; then([\s\S]*?)\n\s+fi\n/.exec(step);
   assert.ok(guard, 'manca il guard sull esito delle query');
   assert.match(guard[1], /\n\s+exit 1/, 'una query fallita deve far fallire lo step, non passare oltre');
   assert.doesNotMatch(
@@ -157,7 +162,7 @@ test('una query fallita non arriva mai al ramo di chiusura', () => {
     'il ramo di errore non deve chiudere niente: lo stato del backlog e sconosciuto, non vuoto',
   );
   // E deve stare PRIMA del ramo «liste vuote», o non lo protegge.
-  const guardAt = step.indexOf('"$PRS_RC" -ne 0');
+  const guardAt = step.indexOf('"$NEEDS_HUMAN_RC" -ne 0');
   const emptyAt = step.indexOf('if [ -z "$PRS" ] && [ -z "$ISSUES" ]; then');
   assert.notEqual(emptyAt, -1, 'ramo "liste vuote" non trovato');
   assert.ok(guardAt !== -1 && guardAt < emptyAt, 'il guard deve precedere il ramo di chiusura');
@@ -273,7 +278,7 @@ test('la chiusura risolve l issue con la stessa uguaglianza esatta con cui la li
  */
 test('la lista issue esclude i tracker permanenti per titolo, non per label', () => {
   const step = surfaceStep();
-  const issueQuery = /ISSUES=\$\(gh api --paginate([\s\S]*?)--jq '([^']+)'\)/.exec(step);
+  const issueQuery = /ISSUES=\$\(printf[\s\S]*?jq -r '([^']+)'\)/.exec(step);
   assert.ok(issueQuery, 'query della lista issue dello step non trovata');
   assert.match(
     step,
@@ -281,19 +286,19 @@ test('la lista issue esclude i tracker permanenti per titolo, non per label', ()
     'la lista viene dall endpoint `issues`, che filtra per label e restituisce `title`: senza, il filtro non ha su cosa lavorare',
   );
   assert.match(
-    issueQuery[2],
+    issueQuery[1],
     /index\(\s*\$i\.title\s*\)\s*\|\s*not/,
     'il jq deve escludere i tracker permanenti confrontando il TITOLO con PERMANENT_TRACKER_TITLES',
   );
   assert.match(
-    issueQuery[2],
+    issueQuery[1],
     /env\.PERMANENT_TRACKER_TITLES\s*\|\s*split\("\\n"\)/,
     'i titoli vengono da PERMANENT_TRACKER_TITLES, una riga per tracker',
   );
   // Il difetto riparato: escludere per label toglieva dall unico canale umano
   // anche le issue davvero bloccate a cui qualcuno ha messo `agent:no-age-out`.
   assert.doesNotMatch(
-    issueQuery[2],
+    issueQuery[1],
     /\.labels\[\]\.name/,
     'il filtro non deve tornare a guardare le label: `agent:no-age-out` vuol dire «non scade», non «non e un item umano»',
   );
@@ -376,7 +381,7 @@ test('nessuna delle due liste del digest puo essere troncata in silenzio', () =>
     'i sottocomandi `list` troncano al `--limit`: il digest deve leggere da `gh api --paginate`',
   );
   const paginated = [...step.matchAll(/\$\(gh api --paginate "\$NEEDS_HUMAN_API"/g)];
-  assert.equal(paginated.length, 2, 'entrambe le liste (PR e issue) devono venire da `gh api --paginate`');
+  assert.equal(paginated.length, 1, 'PR e issue devono condividere un solo fetch paginato');
   // Una sola sorgente per l'endpoint (AGENTS.md #6): due URL divergerebbero, e
   // le due liste finirebbero per descrivere backlog diversi.
   assert.equal(
@@ -390,12 +395,12 @@ test('nessuna delle due liste del digest puo essere troncata in silenzio', () =>
   // liste conterrebbero gli stessi oggetti.
   assert.match(
     step,
-    /--jq '\.\[\] \| select\(\.pull_request\) \|/,
+    /jq -r '\[\.\[\] \| select\(\.pull_request\) \|/,
     'la lista PR deve selezionare gli oggetti con `.pull_request`',
   );
   assert.match(
     step,
-    /--jq '\.\[\] \| select\(\.pull_request \| not\) \|/,
+    /jq -r '\[\.\[\] \| select\(\.pull_request \| not\) \|/,
     'la lista issue deve escludere gli oggetti con `.pull_request`, o elenca anche le PR',
   );
   // I campi dell'API REST sono snake_case: `updatedAt` (forma `gh ... list`)
