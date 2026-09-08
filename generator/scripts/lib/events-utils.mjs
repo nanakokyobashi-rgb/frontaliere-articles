@@ -1109,9 +1109,6 @@ function asTranslationResult(value, sourceText) {
   const passthrough = explicitStatus
     ? value.passthrough === true
     : sourceEcho;
-  if (sourceEcho && explicitStatus && value.passthrough === false) {
-    return { text, passthrough: false };
-  }
   return passthrough ? { text: '', passthrough: true } : { text, passthrough: false };
 }
 
@@ -1137,17 +1134,33 @@ async function fillLocaleGaps(byLocale, cache, { eventId, fieldType, locales, de
     if (target === sourceLocale) continue;
     const cacheKey = eventTranslationCacheKey({ eventId, fieldType, sourceLocale, normalizedSource });
     const entry = cache[cacheKey] || {};
-    const existingIdenticalTarget = hasUsableContentText(clean?.[target])
-      && isSourcePassthrough(sourceText, clean[target]);
-    if (existingIdenticalTarget) {
-      // The organizer already supplied the same title/description in this
-      // target locale. It is a legitimate identity, not a provider echo, and
-      // is safe to memoize because the key includes this event's discriminator.
-      if (entry[target] !== sourceText) cache[cacheKey] = { ...entry, [target]: sourceText };
-      continue;
-    }
     const legacyCacheKey = legacyEventTranslationCacheKey({ fieldType, sourceLocale, normalizedSource });
     const legacyEntry = cache[legacyCacheKey];
+    const identicalTargets = locales.filter((locale) => locale !== sourceLocale
+      && hasUsableContentText(clean?.[locale])
+      && isSourcePassthrough(sourceText, clean[locale]));
+    const existingIdenticalTarget = hasUsableContentText(clean?.[target])
+      && isSourcePassthrough(sourceText, clean[target])
+      && fieldType === 'title'
+      && wordCount(sourceText) <= MAX_PASSTHROUGH_MEMO_WORDS
+      && identicalTargets.length === 1;
+    if (existingIdenticalTarget) {
+      // The organizer already supplied the same short title in this target
+      // locale. One target identity is plausible; an all-locale duplicate feed
+      // is not, and remains eligible for the normal translation path. Store
+      // only a negative memo: if a later feed run omits this target, reusing
+      // sourceText would publish Italian under the requested locale.
+      if (entry[target] !== null) cache[cacheKey] = { ...entry, [target]: null };
+      if (
+        legacyEntry
+        && typeof legacyEntry === 'object'
+        && Object.prototype.hasOwnProperty.call(legacyEntry, target)
+        && !hasUsableContentText(legacyEntry[target])
+      ) {
+        cache[legacyCacheKey] = { ...legacyEntry, [target]: null };
+      }
+      continue;
+    }
     if (Object.prototype.hasOwnProperty.call(entry, target)) {
       const memo = entry[target];
       if (memo === null) continue; // stable passthrough memo, no network retry

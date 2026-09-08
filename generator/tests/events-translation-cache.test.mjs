@@ -72,7 +72,27 @@ test('memoizza un titolo già identico nel locale target senza chiamare la casc
   );
 
   assert.equal(out[0].titleByLocale.en, SAME_TITLE);
-  assert.equal(Object.values(cache)[0].en, SAME_TITLE);
+  assert.equal(Object.values(cache)[0].en, null);
+});
+
+test('non congela un duplicato del feed copiato in tutti i locali', async () => {
+  let calls = 0;
+  const out = await enrichEventsWithLocaleFallbackTranslations(
+    [{
+      id: 'guidle:duplicated-feed',
+      titleByLocale: { it: SAME_TITLE, en: SAME_TITLE, de: SAME_TITLE, fr: SAME_TITLE },
+    }],
+    {},
+    {
+      locales: ['it', 'en', 'de', 'fr'],
+      delayMs: 0,
+      translateFn: async ({ targetLang }) => `traduzione-${targetLang}-${++calls}`,
+    },
+  );
+
+  assert.equal(calls, 3);
+  assert.match(out[0].titleByLocale.de, /^traduzione-de-/);
+  assert.match(out[0].titleByLocale.fr, /^traduzione-fr-/);
 });
 
 test('memoizza il passthrough legittimo del titolo e non ripaga la cascata al secondo giro', async () => {
