@@ -36,6 +36,8 @@ const SITE_PATH = 'scripts/lib/control-char-publish-gate.mjs';
 const ok = {
   siteBaseline: 'a1b2c3d4e5f60718',
   sitePath: SITE_PATH,
+  repo: 'valerielinc-ops/frontaliere-si-o-no',
+  defaultRepo: 'valerielinc-ops/frontaliere-si-o-no',
   siteRef: 'main',
   defaultRef: 'main',
   inventoryPaths: [SITE_PATH],
@@ -98,4 +100,23 @@ test('il why nomina sempre il path atteso o la via d’uscita: un rifiuto muto n
     assert.equal(v.blocked, true);
     assert.ok(v.why.length > 40, `why troppo corto: ${v.why}`);
   }
+});
+
+test('un repo del sito non canonico non attesta una baseline', () => {
+  const v = initAttestVerdict({ ...ok, repo: 'fork/frontaliere-si-o-no' });
+  assert.equal(v.blocked, true);
+  assert.match(v.why, /SITE_REPO|canonico|fork\/frontaliere-si-o-no/);
+});
+
+test('un albero troncato ha un rifiuto esplicito e non si confonde con una rete assente', () => {
+  const v = initAttestVerdict({ ...ok, inventoryPaths: null, inventoryStatus: 'truncated' });
+  assert.equal(v.blocked, true);
+  assert.match(v.why, /troncato|non ricorsivo/);
+  assert.doesNotMatch(v.why, /rete, rate-limit anonimo, o albero troncato/);
+});
+
+test('un ref mosso durante la passata chiede di rilanciare', () => {
+  const v = initAttestVerdict({ ...ok, inventoryPaths: [], inventoryStatus: 'ref-moved' });
+  assert.equal(v.blocked, true);
+  assert.match(v.why, /ref.*mosso|rilancia/i);
 });

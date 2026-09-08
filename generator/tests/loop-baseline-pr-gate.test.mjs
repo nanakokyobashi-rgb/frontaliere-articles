@@ -9,7 +9,10 @@
  */
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
 import { changedBaselines, gateVerdict } from '../../scripts/ci/loop-baseline-pr-gate.mjs';
+
+const GATE_SOURCE = readFileSync(new URL('../../scripts/ci/loop-baseline-pr-gate.mjs', import.meta.url), 'utf8');
 
 const entry = (path, baseline, extra = {}) => ({ path, mode: 'identical', baseline, ...extra });
 
@@ -54,6 +57,15 @@ test('changedBaselines: manifest di base assente → tutto e\' nuovo', () => {
 test('changedBaselines: `sitePath` viaggia con la voce, per il walk sul lato sito', () => {
   const head = { files: [entry('a.mjs', { site: 'aaaa' }, { sitePath: 'tests/a.test.ts' })] };
   assert.equal(changedBaselines(null, head)[0].sitePath, 'tests/a.test.ts');
+});
+
+test('changedBaselines e gateVerdict leggono la traccia `forcedAt`', () => {
+  const forcedAt = '2026-09-08T12:34:56.000Z';
+  const base = { files: [entry('a.mjs', { site: 'aaaa' })] };
+  const head = { files: [entry('a.mjs', { site: 'bbbb', forcedAt })] };
+  assert.equal(changedBaselines(base, head)[0].forcedAt, forcedAt);
+  const verdict = gateVerdict({ side: 'site', baselineHash: 'bbbb', currentHash: 'bbbb', forcedAt });
+  assert.ok(verdict.reason.includes(`forcedAt=${forcedAt}`));
 });
 
 test('gateVerdict: combacia col contenuto attuale → ok, senza rete', () => {
@@ -102,4 +114,10 @@ test('gateVerdict: il verdetto fantasma resta quello di ghostVerdict, non una se
   // sarebbe il modo peggiore di fallire.
   const v = gateVerdict({ side: 'corpus', baselineHash: 'aaaa', currentHash: 'zzzz', historyMatch: false, historyExhausted: true });
   assert.match(v.reason, /fantasma/);
+});
+
+test('il rimedio del gate per una ghost-baseline allinea il guard init e traccia force', () => {
+  assert.match(GATE_SOURCE, /ghost-baseline/);
+  assert.match(GATE_SOURCE, /--force/);
+  assert.match(GATE_SOURCE, /forcedAt/);
 });

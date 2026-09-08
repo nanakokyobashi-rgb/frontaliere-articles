@@ -100,6 +100,15 @@ const targetFiles = filesArg
       .filter(Boolean)
   : null;
 
+// `--files=` presente ma vuoto non è un purge riuscito: costruirebbe zero
+// batch e uscirebbe 0 senza inviare alcuna richiesta a Cloudflare. Rifiutalo
+// prima del no-op intenzionale per token assente, così il chiamante vede il
+// refuso anche in una run senza credenziali.
+if (targetFiles && !targetFiles.length) {
+  console.error('❌ --files= richiede almeno un URL.');
+  process.exit(1);
+}
+
 /**
  * Split into cap-sized batches rather than refusing.
  *

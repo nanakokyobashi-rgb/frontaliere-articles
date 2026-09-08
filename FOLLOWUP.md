@@ -143,6 +143,8 @@ non chiudibile. Prima formula l'azione, poi giudica quella.
 **Non è una scusa per perdere lavoro azionabile:** se l'item ha un punto
 d'intervento ma la frase non lo cita, **derivalo** invece di scartare — ma in una
 forma che l'oracolo riconosce, cioe' con punteggiatura di codice
+Il token derivato DEVE già esistere verbatim nel file citato dalla `Suggested action`:
+la chiusura lo verifica con `content.includes(tok)`. Non inventare un simbolo futuro.
 (token-esempio: `funzione()`, `oggetto.campo`, `campo >= 1`). Le forme che NON
 qualificano sono tre (token-controesempio: `percorso/file.mjs`, `nomeCampo`,
 `run()`): il path nudo, l'identificatore nudo e il token troppo corto — anche
