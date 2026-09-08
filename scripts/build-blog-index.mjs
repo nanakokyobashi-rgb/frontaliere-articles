@@ -79,6 +79,11 @@ const SECTIONS = [
   { name: 'frontaliere', registry: 'content/blog-articles-data.ts', metaPrefix: 'blog-meta' },
   { name: 'svizzera', registry: 'content/swiss-articles-data.ts', metaPrefix: 'blog-meta-ch' },
 ];
+// L'attesa e' il PRODOTTO CARTESIANO, e va fissata PRIMA di scrivere.
+// Popolarla dentro il loop, accanto al write, la rende una tautologia: il gate
+// finale confronterebbe il set scritto con se stesso e non potrebbe piu'
+// fallire proprio quando una sezione o un locale esce anticipatamente da un
+// `continue` — cioe' nell'unico caso che deve rifiutare.
 const expectedShards = new Set(
   SECTIONS.flatMap((section) => LOCALES.flatMap((locale) => [
     path.relative(API_ROOT, path.join(OUT, `blog-index-${section.name}-${locale}.json`)),

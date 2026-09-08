@@ -81,8 +81,18 @@ const GATE_SRC = cutFunction('assertTranslationsPassFactualityGates', [
 // Il gate deriva le sezioni dalle chiavi `bodyN` presenti invece di elencarne
 // tre (#980): il ritaglio va quindi accompagnato dal suo helper, altrimenti
 // `new Function` istanzia un gate che non risolve `collectBodySections`.
-const SECTIONS_SRC = cutFunction('collectBodySections', ['body\\d+', 'sections']);
-const BODY_FIELDS_SRC = cutFunction('bodyFieldNames', ['body\\d+', 'BODY_ONLY_FIELDS']);
+// `collectBodySections` delega ora la scoperta delle chiavi a
+// `collectBodyFieldNames` (che le trova QUALUNQUE sia il tipo del valore),
+// quindi il ritaglio porta entrambe.
+const BODY_KEYS_SRC = cutFunction('collectBodyFieldNames', ['body\\d+']);
+const SECTIONS_SRC = [
+  BODY_KEYS_SRC,
+  cutFunction('collectBodySections', ['collectBodyFieldNames', 'sections']),
+].join('\n');
+const BODY_FIELDS_SRC = [
+  BODY_KEYS_SRC,
+  cutFunction('resolveBodyFields', ['REQUIRED_BODY_FIELDS', 'collectBodyFieldNames']),
+].join('\n');
 const ADMISSION_SRC = cutFunction('runArticleFactualityGates', [
   'runFactualityGates',
   'DETERMINISTIC_BODY_HEURISTIC_CODES',
@@ -207,20 +217,33 @@ test('#7 le sezioni sono derivate dalle chiavi, non elencate', () => {
 });
 
 test('#980 il contratto base body1..body3 resta obbligatorio anche con bodyN dinamici', () => {
-  const names = new Function('BODY_ONLY_FIELDS', `${BODY_FIELDS_SRC}\nreturn bodyFieldNames;`)(['body1', 'body2', 'body3']);
+  const names = new Function('REQUIRED_BODY_FIELDS', `${BODY_FIELDS_SRC}\nreturn resolveBodyFields;`)(['body1', 'body2', 'body3']);
   assert.deepEqual(names({ body1: 'a', body4: 'd' }), ['body1', 'body2', 'body3', 'body4']);
+  // Il set non e' derivato dal payload: un `body3` assente resta preteso, e un
+  // `body2` non-stringa resta giudicato invece di sparire dal set.
   assert.deepEqual(names({ body1: 'a', body2: ['non', 'stringa'] }), ['body1', 'body2', 'body3']);
+  assert.deepEqual(
+    names({ body1: 'a' }, { body1: 'a', body5: 'e' }),
+    ['body1', 'body2', 'body3', 'body5'],
+    'unione fra i blocchi passati, in ordine numerico',
+  );
 });
 
 test('#980 i body non-stringa vengono coercizzati prima del set richiesto', () => {
   const coerce = new Function(
-    'BODY_ONLY_FIELDS',
-    `${BODY_FIELDS_SRC}\n${cutFunction('coerceBodyFields', ['bodyFieldNames'])}\nreturn coerceBodyFields;`,
-  )(['body1', 'body2', 'body3']);
+    `${cutFunction('coerceContentFieldsToString', ['JSON.stringify'])}\nreturn coerceContentFieldsToString;`,
+  )();
   const content = { body1: 'a', body2: ['b', 'c'], body4: 42 };
-  coerce(content);
+  coerce(content, ['body1', 'body2', 'body3', 'body4']);
   assert.equal(content.body2, '["b","c"]');
   assert.equal(content.body4, '42');
+  assert.ok(!('body3' in content), 'un campo assente non viene inventato dalla coercizione');
+  // La coercizione gira PRIMA del controllo di presenza: e' il punto del fix.
+  const validateSrc = src.slice(src.indexOf('function validate(data, opts = {})'));
+  assert.ok(
+    validateSrc.indexOf('coerceContentFieldsToString(') < validateSrc.indexOf("for (const field of ['title', 'excerpt', ...expectedBodyFields])"),
+    'la coercizione deve precedere il controllo dei campi obbligatori',
+  );
 });
 
 test('#4 il gate e\' collegato a ENTRAMBI i percorsi di scrittura', () => {

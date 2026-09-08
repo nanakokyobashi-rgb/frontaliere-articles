@@ -4871,30 +4871,58 @@ const FABRICATED_ACRONYMS = [
 function collectBodySections(content) {
   const sections = {};
   if (!content || typeof content !== 'object') return sections;
-  const keys = Object.keys(content)
-    .filter((k) => /^body\d+$/.test(k) && typeof content[k] === 'string')
-    .sort((a, b) => Number(a.slice(4)) - Number(b.slice(4)));
+  const keys = collectBodyFieldNames(content).filter((k) => typeof content[k] === 'string');
   for (const k of keys) sections[k] = content[k];
   return sections;
 }
 
-/** The shared AI contract requires body1..body3; direct producers may add bodyN. */
-function bodyFieldNames(content) {
-  const discovered = content && typeof content === 'object'
-    ? Object.keys(content).filter((k) => /^body\d+$/.test(k))
-    : [];
-  return [...new Set([...BODY_ONLY_FIELDS, ...discovered])]
+/**
+ * I NOMI `bodyN` presenti nel blocco, QUALUNQUE sia il tipo del valore.
+ *
+ * `collectBodySections` filtra `typeof === 'string'` perche' i suoi consumatori
+ * concatenano testo. Un giudice non puo' usare quel filtro: un `body2` arrivato
+ * come array o oggetto sparirebbe proprio dai controlli che esistono per
+ * ripararlo o rigettarlo, e finirebbe su disco nella sua forma sbagliata.
+ */
+function collectBodyFieldNames(content) {
+  if (!content || typeof content !== 'object') return [];
+  return Object.keys(content)
+    .filter((k) => /^body\d+$/.test(k))
     .sort((a, b) => Number(a.slice(4)) - Number(b.slice(4)));
 }
 
-/** Coerce model-shaped body values before any required-field set is derived. */
-function coerceBodyFields(content) {
-  for (const field of bodyFieldNames(content)) {
-    const value = content?.[field];
+/**
+ * La base obbligatoria dei corpi. Non e' derivabile dal payload: e' il contratto
+ * che ogni articolo deve rispettare, e i tre file `content/blog-body/<locale>/`
+ * che il sito rende.
+ */
+const REQUIRED_BODY_FIELDS = BODY_ONLY_FIELDS;
+
+/**
+ * UNIONE fra la base obbligatoria e i `bodyN` scoperti — mai una sostituzione.
+ *
+ * Derivare il set richiesto SOLO dal payload che si sta giudicando rende il
+ * gate una tautologia («i campi richiesti sono i campi che ci sono»): un
+ * `content.it` senza `body3` passerebbe come articolo a due sezioni invece di
+ * essere `Campo body3 mancante per it`, e nessun gate a valle lo recupera —
+ * il thin-content finale misura i caratteri totali, che un body1+body2 lunghi
+ * superano. L'unione tiene insieme le due cose: `body4` viene giudicato quando
+ * c'e', `body3` viene preteso anche quando non c'e'.
+ */
+function coerceContentFieldsToString(content, fields) {
+  if (!content || typeof content !== 'object') return;
+  for (const field of fields) {
+    const value = content[field];
     if (value != null && typeof value !== 'string') {
       content[field] = typeof value === 'object' ? JSON.stringify(value) : String(value);
     }
   }
+}
+
+function resolveBodyFields(...contents) {
+  const names = new Set(REQUIRED_BODY_FIELDS);
+  for (const content of contents) for (const name of collectBodyFieldNames(content)) names.add(name);
+  return [...names].sort((a, b) => Number(a.slice(4)) - Number(b.slice(4)));
 }
 
 // I body deterministici dei produttori secondari hanno una forma diversa da
@@ -10202,13 +10230,9 @@ ${terminologyByLang[targetLang] || ''}`;
   // itself (a real upstream defect we cannot paper over).
   for (const locale of ['en', 'de', 'fr']) {
     const langName = locale === 'en' ? 'inglese' : locale === 'de' ? 'tedesco' : 'francese';
-    for (const field of [
-      'title',
-      'excerpt',
-      ...Object.keys(itContent || {})
-        .filter((fieldName) => /^body\d+$/.test(fieldName))
-        .sort((a, b) => Number(a.slice(4)) - Number(b.slice(4))),
-    ]) {
+    // Unione, non sostituzione: un `body3` assente dall'italiano non deve
+    // togliere `body3` dal recupero per-campo delle traduzioni.
+    for (const field of ['title', 'excerpt', ...resolveBodyFields(itContent, data.content[locale])]) {
       // Truthiness nuda: la stringa `"null"` (serializzazione letterale del
       // null, la forma misurata su `haiku` in #799) la supera, quindi il campo
       // NON veniva ritradotto ne' cadeva sul fallback IT e finiva in
@@ -10354,9 +10378,7 @@ ${terminologyByLang[targetLang] || ''}`;
   // truncated.
   for (const locale of ['en', 'de', 'fr']) {
     const langName = locale === 'en' ? 'inglese' : locale === 'de' ? 'tedesco' : 'francese';
-    for (const field of Object.keys(itContent || {})
-      .filter((fieldName) => /^body\d+$/.test(fieldName))
-      .sort((a, b) => Number(a.slice(4)) - Number(b.slice(4)))) {
+    for (const field of resolveBodyFields(itContent, data.content[locale])) {
       const text = data.content[locale]?.[field];
       if (!text) continue;
       // Every issue detectTruncation() returns (critical AND major — e.g.
@@ -10628,11 +10650,17 @@ function validate(data, opts = {}) {
     throw err;
   }
   const itContent = data.content.it || data.content;
-  // Coerce first: `collectBodySections()` intentionally ignores non-string
-  // values, but an array/object body must be repaired or rejected, never
-  // allowed to disappear from the required-field set (#980).
-  coerceBodyFields(itContent);
-  const expectedBodyFields = bodyFieldNames(itContent);
+  const expectedBodyFields = resolveBodyFields(itContent);
+  // La coercizione a stringa viene PRIMA di ogni giudizio: il loop piu' sotto
+  // esiste perche' «AI models can return objects/arrays/numbers», e un campo
+  // ancora non-stringa qui sfuggirebbe sia al controllo di presenza sia ai
+  // sanitizer del corpo.
+  for (const locale of ['it', 'en', 'de', 'fr']) {
+    const localeContent = data.content[locale];
+    if (!localeContent) continue; // translations may not exist yet
+    // Coerce content fields to strings — AI models can return objects/arrays/numbers
+    coerceContentFieldsToString(localeContent, ['title', 'excerpt', ...resolveBodyFields(itContent, localeContent)]);
+  }
   if (!itContent || !itContent.title) {
     const err = new Error(`Campo mancante nella risposta AI: content.it.title`);
     err.qualityReject = true;
@@ -11020,14 +11048,9 @@ function validate(data, opts = {}) {
   ]);
   for (const locale of ['it', 'en', 'de', 'fr']) {
     if (!data.content[locale]) continue; // translations may not exist yet
-    const bodyFields = expectedBodyFields;
-    // Coerce content fields to strings — AI models can return objects/arrays/numbers
-    for (const field of ['title', 'excerpt', ...bodyFields]) {
-      const val = data.content[locale][field];
-      if (val != null && typeof val !== 'string') {
-        data.content[locale][field] = typeof val === 'object' ? JSON.stringify(val) : String(val);
-      }
-    }
+    // I campi sono gia' stati coercizzati a stringa in testa a `validate()`,
+    // prima del controllo di presenza.
+    const bodyFields = resolveBodyFields(itContent, data.content[locale]);
     for (const field of bodyFields) {
       let text = data.content[locale][field] || '';
       // Remove raw <a href="..."> tags the AI might have inserted — they cause redirect issues
@@ -11244,7 +11267,11 @@ function validateAndEnforceCTA(data) {
 
     if (!hasCTA) {
       console.error(`  ⚠️  CTA mancante in body3 [${locale}] — aggiungo CTA (${data.category})`);
-      data.content[locale].body3 = (data.content[locale].body3 || '') + cta[locale];
+      // `|| ''`: senza la guardia un payload senza `body3` scrive la parola
+      // `undefined` in testa al terzo paragrafo pubblicato, in tutti e quattro
+      // i locali. `validate()` pretende `body3`, ma questo passo gira anche sui
+      // produttori diretti che non ci passano.
+      data.content[locale].body3 = `${data.content[locale].body3 || ''}${cta[locale]}`;
     }
   }
 

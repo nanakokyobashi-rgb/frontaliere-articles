@@ -35,7 +35,7 @@ import { fileURLToPath } from 'node:url';
 // esattamente la funzione che il loop ritagliato riceve in produzione, e una
 // copia locale nel test divergerebbe in silenzio dal fix (AGENTS.md #6).
 import { translatedStringOrNull } from '../scripts/lib/article-free-mt.mjs';
-import { hasUsableContentText, hasUsableTranslatedText, metaFieldPlausibilityMiss } from '../scripts/lib/body2-payload-verdict.mjs';
+import { BODY_ONLY_FIELDS, hasUsableContentText, hasUsableTranslatedText, metaFieldPlausibilityMiss } from '../scripts/lib/body2-payload-verdict.mjs';
 import {
   createFreeMtRecoveryReport,
   claimFreeMtLlmFallback,
@@ -80,6 +80,26 @@ function extractTruncationRetryLoop() {
 const LOOP_SRC = extractTruncationRetryLoop();
 
 /**
+ * `resolveBodyFields` VERO, ritagliato dal sorgente con le sue dipendenze.
+ * I due loop ritagliati lo chiamano per derivare i campi da giudicare: una
+ * copia locale nel test divergerebbe in silenzio dal set reale (AGENTS.md #6),
+ * ed e' esattamente il set — unione fra base obbligatoria e `bodyN` scoperti —
+ * cio' che questi loop devono coprire.
+ */
+function buildResolveBodyFields() {
+  const start = src.indexOf('function collectBodyFieldNames(content) {');
+  assert.notEqual(start, -1, 'collectBodyFieldNames non trovata — aggiornare questo test');
+  const fnStart = src.indexOf('function resolveBodyFields(', start);
+  assert.notEqual(fnStart, -1, 'resolveBodyFields non trovata — aggiornare questo test');
+  const end = src.indexOf('\n}\n', fnStart);
+  assert.notEqual(end, -1, 'fine di resolveBodyFields non trovata');
+  const block = src.slice(start, end + 3);
+  return new Function('BODY_ONLY_FIELDS', `${block}\nreturn resolveBodyFields;`)(BODY_ONLY_FIELDS);
+}
+
+const resolveBodyFields = buildResolveBodyFields();
+
+/**
  * Ritaglia il loop missing-field VERBATIM (gemello, simmetrico, del loop di
  * truncation-retry sopra): stesso antipattern `!itValue`, stesso fix
  * `!itValue?.trim()` (#691).
@@ -113,13 +133,13 @@ async function runMissingFieldLoop({ data, itContent, callWithRetry, detectTrunc
   const RUN_REPORT = { translation: translationReport || createFreeMtRecoveryReport() };
   const fn = new Function(
     'data', 'itContent', 'callWithRetry', 'translatedStringOrNull', 'hasUsableTranslatedText', 'metaFieldPlausibilityMiss', 'detectTruncation', 'console',
-    'ARTICLE_TRANSLATE_FREE_MT', 'claimFreeMtLlmFallback', 'wasFreeMtUnusable', 'RUN_REPORT', 'MAX_FREE_MT_LLM_FALLBACKS_PER_RUN', 'MAX_FREE_MT_LLM_FALLBACKS_PER_LOCALE',
+    'ARTICLE_TRANSLATE_FREE_MT', 'claimFreeMtLlmFallback', 'wasFreeMtUnusable', 'RUN_REPORT', 'MAX_FREE_MT_LLM_FALLBACKS_PER_RUN', 'MAX_FREE_MT_LLM_FALLBACKS_PER_LOCALE', 'resolveBodyFields',
     `return (async () => { ${MISSING_FIELD_LOOP_SRC} })();`,
   );
   // `metaFieldPlausibilityMiss` e' il floor VERO (#798), non un mock: il ramo
   // floor-miss del loop tiene il valore tradotto invece di cadere sul fallback
   // IT, e un mock qui non proverebbe quel comportamento.
-  await fn(data, itContent, callWithRetry, translatedStringOrNull, hasUsableTranslatedText, metaFieldPlausibilityMiss, detectTruncation || (() => []), capturingConsole, true, claimFreeMtLlmFallback, wasFreeMtUnusable, RUN_REPORT, MAX_FREE_MT_LLM_FALLBACKS_PER_RUN, MAX_FREE_MT_LLM_FALLBACKS_PER_LOCALE);
+  await fn(data, itContent, callWithRetry, translatedStringOrNull, hasUsableTranslatedText, metaFieldPlausibilityMiss, detectTruncation || (() => []), capturingConsole, true, claimFreeMtLlmFallback, wasFreeMtUnusable, RUN_REPORT, MAX_FREE_MT_LLM_FALLBACKS_PER_RUN, MAX_FREE_MT_LLM_FALLBACKS_PER_LOCALE, resolveBodyFields);
 }
 
 /**
@@ -151,12 +171,12 @@ async function runTruncationRetryLoop({ data, itContent, detectTruncation, callW
   };
   const fn = new Function(
     'data', 'itContent', 'detectTruncation', 'callWithRetry', 'translateInChunks',
-    'TRANSLATION_CHUNK_THRESHOLD', 'translatedStringOrNull', 'sanitizeBodyText', 'countWords', 'console',
+    'TRANSLATION_CHUNK_THRESHOLD', 'translatedStringOrNull', 'sanitizeBodyText', 'countWords', 'console', 'resolveBodyFields',
     `return (async () => { ${LOOP_SRC} })();`,
   );
   await fn(
     data, itContent, detectTruncation, callWithRetry, translateInChunks || noopTranslateInChunks,
-    TRANSLATION_CHUNK_THRESHOLD, translatedStringOrNull, sanitizeBodyText, countWords, capturingConsole,
+    TRANSLATION_CHUNK_THRESHOLD, translatedStringOrNull, sanitizeBodyText, countWords, capturingConsole, resolveBodyFields,
   );
 }
 
