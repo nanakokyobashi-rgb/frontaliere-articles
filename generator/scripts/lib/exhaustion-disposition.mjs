@@ -484,13 +484,15 @@ function deferralTally(breakdown) {
  *        che ci starebbe;
  *      - qui la parte che ci sta si ignora (vive gia' fuori dai due secchi) e
  *        si addebita al vincitore la sola ECCEDENZA.
- *    Scarto integrale contro scarto della sola eccedenza. Oggi non divergono
- *    su nessun verdetto solo perche' pendono entrambe verso il rosso —
+ *    Scarto integrale contro scarto della sola eccedenza. Sulla forma coerente
+ *    della run storica non divergono perche' pendono entrambe verso il rosso —
  *    denominatore piu' grande la', secchio vincente piu' piccolo qui — non
  *    perche' siano la stessa regola. Chi tocca una delle due non ha licenza di
  *    allineare l'altra «per coerenza»: sono giustificate separatamente, e la
  *    divergenza e' fissata da `exhaustion-transient-majority.test.mjs` perche'
- *    su questo predicato il commento non sia l'unica specifica.
+ *    su questo predicato il commento non sia l'unica specifica. L'affermazione
+ *    non e' universale: esiste anche una forma incoerente in cui la
+ *    diagnostica supera la soglia mentre il voto torna falso.
  *
  * @param {unknown} breakdown `err.exhaustionBreakdown`
  * @param {{tie?: 'transient'|'persistent'}} [options] a chi va il pareggio
@@ -544,8 +546,23 @@ function transientMajorityVerdict(breakdown, options = {}) {
     0,
     buckets.echoTotalReported - buckets.echoTransient - buckets.echoPersistent,
   );
-  const ambiguousMass = Math.max(0, buckets.total - buckets.transient - buckets.persistent);
-  const echoHiddenInBuckets = Math.max(0, echoUnattributed - ambiguousMass);
+  // Un `total` ASSENTE non e' uno zero osservato: non c'e' un denominatore con
+  // cui stimare quante righe ambigue possano ospitare gli echi non attribuiti.
+  // Trattarli come `total: 0` addebiterebbe l'intero echo al secchio transitorio
+  // e trasformerebbe un mock/errore legacy in un veto non dimostrato. Un
+  // `total: 0` esplicito resta invece una dichiarazione: la massa ambigua e'
+  // davvero vuota e l'echo non attribuito resta una prova contro il vincitore.
+  const rawTotal = (breakdown && typeof breakdown === 'object') ? breakdown.total : undefined;
+  const hasTotal = rawTotal !== undefined
+    && rawTotal !== null
+    && Number.isFinite(Number(rawTotal))
+    && Number(rawTotal) >= 0;
+  const ambiguousMass = hasTotal
+    ? Math.max(0, buckets.total - buckets.transient - buckets.persistent)
+    : 0;
+  const echoHiddenInBuckets = hasTotal
+    ? Math.max(0, echoUnattributed - ambiguousMass)
+    : 0;
   // Il guardrail conta le righe DI QUESTO voto: gli echi DICHIARATI contro
   // quelli rimasti nei due secchi. Il denominatore sono i due secchi netti —
   // non `providerCooldownSkips > total` del tally, che porterebbe dentro il
