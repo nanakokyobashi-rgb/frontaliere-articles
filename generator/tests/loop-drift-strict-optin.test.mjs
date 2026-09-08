@@ -165,3 +165,45 @@ test('loop-drift-check: il checkout conserva tutta la storia ma scarica i blob o
   assert.match(checkout, /fetch-depth: 0/);
   assert.match(checkout, /filter: blob:limit=1m/);
 });
+
+test('loop-drift-check: nessuna voce del manifest supera il limite del filtro del checkout', () => {
+  // `blob:limit=1m` regge la verifica delle baseline per UNA ragione empirica:
+  // i blob dei path del manifest stanno tutti sotto il limite, quindi arrivano
+  // col clone e `verify-manifest-baseline-history.mjs` non paga un lazy-fetch
+  // per oggetto dentro `timeout-minutes: 10`. Il giorno in cui una voce
+  // sfonda il limite quella premessa cade in SILENZIO: il blob viene omesso dal
+  // checkout, il verificatore lo richiede uno per uno e — da quando
+  // `blobsFollowingRenames` e' fail-loud sui `cat-file` non riusciti — un
+  // fetch che non risponde diventa un rosso della baseline su un dato corretto.
+  // Il margine oggi e' sottile e si consuma da solo: il file piu' grande
+  // (`generator/scripts/create-article.mjs`) e' al 91% del limite ed e' un file
+  // che si modifica di continuo. Qui il giorno in cui succede costa un rosso
+  // deterministico e a costo zero, invece di un watchdog lento.
+  const m = WORKFLOW.match(/filter: blob:limit=(\d+)([kmg])?\b/i);
+  assert.ok(m, 'il checkout non dichiara piu\' un `filter: blob:limit=<size>`');
+  const unit = { k: 1024, m: 1024 ** 2, g: 1024 ** 3 }[(m[2] || '').toLowerCase()] || 1;
+  const limit = Number(m[1]) * unit;
+
+  const manifest = JSON.parse(
+    fs.readFileSync(path.join(ROOT, 'scripts/ci/loop-sync-manifest.json'), 'utf8'),
+  );
+  const oversized = manifest.files
+    .filter((e) => e?.baseline?.corpus != null)
+    .map((e) => {
+      const abs = path.join(ROOT, e.path);
+      // Una voce `missing-here` non e' un difetto di questo test: la segnala il
+      // checker del drift, non il limite del filtro.
+      return fs.existsSync(abs) ? { path: e.path, size: fs.statSync(abs).size } : null;
+    })
+    .filter((e) => e && e.size > limit);
+
+  assert.deepEqual(
+    oversized,
+    [],
+    'Queste voci del manifest superano il `filter: blob:limit` del checkout, quindi il loro blob\n' +
+      'NON arriva col clone e la verifica delle baseline torna a lazy-fetchare oggetto per oggetto\n' +
+      '(misurato: minuti invece di secondi, dentro un job con `timeout-minutes: 10`, e un fetch\n' +
+      'fallito e\' un ghost-baseline inventato). Alza il limite del filtro nel checkout, oppure\n' +
+      `spezza il file:\n${JSON.stringify(oversized, null, 2)}`,
+  );
+});
