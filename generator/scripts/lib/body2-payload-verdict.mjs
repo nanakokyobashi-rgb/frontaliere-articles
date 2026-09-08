@@ -885,6 +885,12 @@ export function isTopicGateAbortVerdict(parsed, { locale = 'it', expectedFields 
  * @param {string[]} [expectedFields]
  * @returns {string[]} motivi, gia' nella forma che `missing` usa.
  */
+function isCompactItalianRateTable(value) {
+  const percentages = value.match(/\b\d+(?:[.,]\d+)?\s*%/g) ?? [];
+  const acronyms = value.match(/\b[A-Z]{2,}(?:\/[A-Z]{2,})*\b/g) ?? [];
+  return percentages.length >= 2 && acronyms.length >= 2;
+}
+
 export function wrongLanguageAdoptions(parsed, locale = 'it', expectedFields = REQUIRED_IT_BODY_FIELDS) {
   const campi = expectedFields.filter((f) => META_ONLY_FIELDS.includes(f));
   if (campi.length === 0) return [];
@@ -896,6 +902,13 @@ export function wrongLanguageAdoptions(parsed, locale = 'it', expectedFields = R
     const origine = sources[field];
     if (!origine || origine.isLocale) continue;
     const sbagliata = detectWrongLatinLanguage(origine.value, locale);
+    // Gli excerpt IT possono essere tabelle compatte di aliquote e sigle:
+    // la morfologia, misurata sui titoli, li legge come testo non italiano
+    // anche quando il contenuto e' legittimo. I marker restano attivi, cosi'
+    // un excerpt adottato in una lingua diversa continua a essere rifiutato.
+    if (locale === 'it' && field === 'excerpt'
+      && sbagliata?.lang === 'non-it' && sbagliata.reason === 'morphology'
+      && isCompactItalianRateTable(origine.value)) continue;
     if (sbagliata) {
       motivi.push(`${field} lingua ${sbagliata.lang} adottata da ${origine.source} (${sbagliata.reason})`);
     }

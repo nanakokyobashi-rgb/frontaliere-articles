@@ -144,6 +144,60 @@ test('#800 — un title italiano adottato da un candidato non-locale resta ok', 
   assert.equal(verdetto.verdict, 'ok', JSON.stringify(verdetto.missing));
 });
 
+test('#1177 — un excerpt italiano denso di sigle non e\' un falso non-IT', () => {
+  const verdetto = classifyBody2Payload({
+    parsed: {
+      content: {
+        it: { title: 'Titolo italiano abbastanza descrittivo', excerpt: '' },
+        excerpt: 'Aliquote: AVS/AI/IPG 5,3%, AD/AC 1,1%, LAINF 0,7–1,5%',
+      },
+    },
+    expectedFields: META_ONLY_FIELDS,
+  });
+
+  assert.equal(verdetto.verdict, 'ok', JSON.stringify(verdetto.missing));
+  assert.deepEqual(verdetto.missing, []);
+});
+
+test('#1177 — la deroga alle sigle non rende permissivo un excerpt generico', () => {
+  const verdetto = classifyBody2Payload({
+    parsed: {
+      content: {
+        it: { title: 'Titolo italiano abbastanza descrittivo', excerpt: '' },
+        excerpt: 'This generic English excerpt must still be rejected by the language gate.',
+      },
+    },
+    expectedFields: META_ONLY_FIELDS,
+  });
+
+  assert.equal(verdetto.verdict, 'reject', JSON.stringify(verdetto.missing));
+  assert.ok(verdetto.missing.some((m) => m.startsWith('excerpt lingua ')));
+});
+
+test('#1153 — il rilevatore distingue un campo italiano su EN/DE/FR', () => {
+  const casi = [
+    ['en', 'Giovani nel Ticino: fuga e mancato rientro, la posizione politica'],
+    ['de', 'Il territorio poroso tra Varese e la Svizzera: un confine che ora unisce più che dividere'],
+    ['fr', 'Giovani nel Ticino: fuga e mancato rientro, la posizione politica'],
+  ];
+
+  for (const [locale, title] of casi) {
+    const verdetto = classifyBody2Payload({
+      parsed: {
+        content: {
+          [locale]: { title: '', excerpt: 'A sufficiently long local excerpt for this language.' },
+          title,
+        },
+      },
+      locale,
+      expectedFields: META_ONLY_FIELDS,
+    });
+
+    assert.equal(verdetto.verdict, 'reject', `${locale}: ${title}`);
+    assert.ok(verdetto.missing.some((m) => m.startsWith('title lingua it')), `${locale}: ${JSON.stringify(verdetto.missing)}`);
+  }
+});
+
 // ── 2. Il rilevatore, sui suoi due segnali ────────────────────────────────
 
 test('#800 — le liste di parole-funzione sono ESCLUSIVE fra le quattro lingue', () => {
@@ -188,22 +242,46 @@ const META_IT = ['content/blog-meta-it.ts', 'content/blog-meta-ch-it.ts'];
 // Il corpus pubblicato ne conta 5.682 (title) e 5.683 (excerpt) al 2026-09-06. La soglia sta molto sotto
 // per non rompersi a ogni pubblicazione, ma abbastanza sopra da rendere
 // impossibile un pass a vuoto su un checkout troncato.
-const MIN_CAMPI_IT = 4000;
+const MIN_CAMPI_IT = 5000;
 // #985 ha bonificato l'unico offender genuino rimasto
 // (`sbb-controllers-bonuses-fines-ticino-2026`), quindi questa lista e' VUOTA
 // e deve restarci: ogni voce aggiunta qui e' un titolo in lingua sbagliata che
 // il gate smette di vedere. Una regressione si ritraduce, non si allowlista.
 const OFFENDER_GENUINI = [];
 
+function campiDalSorgente(sorgente, campo) {
+  // Accetta sia stringhe JS con apici singoli sia quelle con doppi apici: il
+  // corpus CH contiene entrambe le forme. Il lookahead evita di considerare
+  // una stringa troncata come un campo pubblicato.
+  const re = new RegExp(
+    `['"]blog\\.article\\.([^'"]+)\\.${campo}['"]\\s*:\\s*(['"])((?:\\\\.|(?!\\2)[^\\r\\n])*?)\\2\\s*(?=[,}])`,
+    'g',
+  );
+  return [...sorgente.matchAll(re)].map((m) => ({
+    slug: m[1],
+    value: m[3].replace(/\\([\\'"\\\\])/g, '$1'),
+  }));
+}
+
 function campiPubblicati(file, campo) {
   const sorgente = readFileSync(path.join(ROOT, file), 'utf8');
-  const valori = [];
-  // Mappa i18n piatta: `'blog.article.<slug>.<campo>': 'Valore',`
-  const re = new RegExp(`\\.${campo}':\\s*'((?:[^'\\\\]|\\\\.)*)',`, 'g');
-  for (const m of sorgente.matchAll(re)) {
-    valori.push(m[1].replace(/\\'/g, "'"));
-  }
-  return valori;
+  const slugs = campiDalSorgente(sorgente, 'title').map(({ slug }) => slug);
+  const campi = campiDalSorgente(sorgente, campo);
+  const slugSet = new Set(slugs);
+  const campoSet = new Set(campi.map(({ slug }) => slug));
+
+  assert.equal(slugs.length, slugSet.size, `${file}: slug title duplicati o parser disallineato`);
+  assert.equal(campi.length, campoSet.size, `${file}: ${campo} duplicati o parser disallineato`);
+  assert.equal(
+    campi.length,
+    slugs.length,
+    `${file}: ${campo} letti ${campi.length}, ma gli slug sono ${slugs.length}: estrazione parziale`,
+  );
+  assert.deepEqual(
+    [...campoSet].sort(), [...slugSet].sort(),
+    `${file}: gli slug di ${campo} non coincidono con quelli dei title`,
+  );
+  return campi;
 }
 
 function scanCorpusIt(t, campo) {
@@ -213,7 +291,7 @@ function scanCorpusIt(t, campo) {
     return;
   }
 
-  const valori = META_IT.flatMap((f) => campiPubblicati(f, campo));
+  const valori = META_IT.flatMap((f) => campiPubblicati(f, campo).map(({ value }) => value));
   assert.ok(
     valori.length >= MIN_CAMPI_IT,
     `letti solo ${valori.length} ${campo} IT (minimo ${MIN_CAMPI_IT}): corpus troncato o `
@@ -239,4 +317,107 @@ test('#800 — zero falsi positivi sui title IT pubblicati', (t) => {
 // — e #985 ne ha bonificato uno inglese che nessuno stava misurando.
 test('#985 — zero falsi positivi sugli excerpt IT pubblicati', (t) => {
   scanCorpusIt(t, 'excerpt');
+});
+
+const META_NON_IT = {
+  en: ['content/blog-meta-en.ts', 'content/blog-meta-ch-en.ts'],
+  de: ['content/blog-meta-de.ts', 'content/blog-meta-ch-de.ts'],
+  fr: ['content/blog-meta-fr.ts', 'content/blog-meta-ch-fr.ts'],
+};
+const MIN_CAMPI_TRADOTTI = 1800;
+
+function scanCorpusLocale(t, locale, campo) {
+  const files = META_NON_IT[locale];
+  const mancanti = files.filter((file) => !existsSync(path.join(ROOT, file)));
+  if (mancanti.length > 0) {
+    t.skip(`superficie ${locale} non presente in questo checkout: ${mancanti.join(', ')}`);
+    return;
+  }
+
+  const valori = files.flatMap((file) => campiPubblicati(file, campo).map(({ value }) => value));
+  assert.ok(
+    valori.length >= MIN_CAMPI_TRADOTTI,
+    `letti solo ${valori.length} ${campo} ${locale}: superficie tradotta troncata`,
+  );
+
+  const offender = valori
+    .map((valore) => [valore, detectWrongLatinLanguage(valore, locale)])
+    .filter(([, esito]) => esito);
+
+  assert.deepEqual(
+    offender.map(([valore, esito]) => `${esito.lang}/${esito.reason} :: ${valore}`),
+    [],
+    `il rilevatore trova lingua sbagliata su ${campo} ${locale} (${valori.length} misurati)`,
+  );
+}
+
+for (const locale of Object.keys(META_NON_IT)) {
+  test(`#1153 — zero adozioni di lingua sbagliata sui title ${locale} pubblicati`, (t) => {
+    scanCorpusLocale(t, locale, 'title');
+  });
+  test(`#1153 — zero adozioni di lingua sbagliata sugli excerpt ${locale} pubblicati`, (t) => {
+    scanCorpusLocale(t, locale, 'excerpt');
+  });
+}
+
+const SEO_FILES = [
+  'content/seo/seo-blog.ts',
+  'content/seo/seo-blog-ch.ts',
+  'content/seo/seo-blog-2.ts',
+  'content/seo/seo-blog-3.ts',
+  'content/seo/seo-blog-4.ts',
+  'content/seo/seo-blog-5.ts',
+  'content/seo/seo-blog-6.ts',
+  'content/seo/seo-blog-7.ts',
+];
+const SEO_FIELDS = ['title', 'description', 'ogTitle', 'ogDescription'];
+const MIN_SEO_CAMPI_IT = 20000;
+const SEO_ENTRY_RE = /^\s*['"](blog-[^'"]+)['"]:\s*\{([\s\S]*?)(?=^\s*['"]blog-[^'"]+['"]:\s*\{|^\s*};)/gm;
+
+function seoCampo(blocco, campo) {
+  const re = new RegExp(
+    `^\\s*${campo}:\\s*(['"])((?:\\\\.|(?!\\1)[^\\r\\n])*?)\\1`,
+    'm',
+  );
+  const match = blocco.match(re);
+  return match ? match[2].replace(/\\([\\'"\\\\])/g, '$1') : null;
+}
+
+test('#1177 — la classe SEO IT resta coperta dalla scansione', (t) => {
+  const mancanti = SEO_FILES.filter((file) => !existsSync(path.join(ROOT, file)));
+  if (mancanti.length > 0) {
+    t.skip(`SEO non presente in questo checkout: ${mancanti.join(', ')}`);
+    return;
+  }
+
+  const campi = [];
+  for (const file of SEO_FILES) {
+    const source = readFileSync(path.join(ROOT, file), 'utf8');
+    for (const entry of source.matchAll(SEO_ENTRY_RE)) {
+      const blocco = entry[2];
+      const canonical = seoCampo(blocco, 'canonicalPath');
+      if (!canonical?.startsWith('/articoli-')) continue;
+      for (const campo of SEO_FIELDS) {
+        const value = seoCampo(blocco, campo);
+        assert.notEqual(value, null, `${file}:${entry[1]} manca ${campo}`);
+        campi.push({ file, id: entry[1], campo, value });
+      }
+    }
+  }
+
+  assert.ok(campi.length >= MIN_SEO_CAMPI_IT, `letti solo ${campi.length} campi SEO IT: scansione troncata`);
+  const offender = campi
+    .map(({ value, ...meta }) => ({ ...meta, value, esito: detectWrongLatinLanguage(value, 'it') }))
+    .filter(({ esito }) => esito);
+  assert.deepEqual(
+    offender.map(({ file, id, campo, value, esito }) => `${file}:${id}.${campo} ${esito.lang}/${esito.reason} :: ${value}`),
+    [],
+    `il rilevatore trova lingua sbagliata in ${offender.length} campi SEO IT`,
+  );
+});
+
+test('#1177 — il bullet del body IT e\' italiano', () => {
+  const source = readFileSync(path.join(ROOT, 'content/blog-body/it/chiese-ticino-derubate-2026.ts'), 'utf8');
+  assert.doesNotMatch(source, /Bargeld, Silberbesteck und Einbruchswerkzeug sichergestellt/);
+  assert.match(source, /Contanti, posate d\\'argento e strumenti da scasso sequestrati/);
 });
