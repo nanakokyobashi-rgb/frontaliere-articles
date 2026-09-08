@@ -208,3 +208,19 @@ test('non memoizza il passthrough di un testo lungo, dove potrebbe essere un eco
   assert.deepEqual(out[0].titleByLocale, { it: longTitle });
   assert.deepEqual(cache, {});
 });
+
+test('non pubblica il testo sorgente quando il translator segnala passthrough esplicito', async () => {
+  const cache = {};
+  const out = await enrichEventsWithLocaleFallbackTranslations(
+    [event('guidle:explicit-source')],
+    cache,
+    {
+      locales: ['it', 'en'],
+      delayMs: 0,
+      translateFn: async ({ text }) => ({ text, passthrough: true }),
+    },
+  );
+
+  assert.deepEqual(out[0].titleByLocale, { it: SAME_TITLE });
+  assert.equal(cache['["title","id:guidle:explicit-source","it","locarno film festival"]'].en, null);
+});

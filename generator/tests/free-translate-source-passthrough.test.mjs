@@ -47,6 +47,7 @@ import {
   getCascadeStats,
   logCascadeSummary,
   isSourcePassthrough,
+  asTranslationResult,
 } from '../scripts/lib/free-translate.mjs';
 
 const IT = [
@@ -258,6 +259,13 @@ describe('freeTranslate — guardia «uscita == sorgente»', () => {
 
     assert.deepEqual(out, { text: '', passthrough: false });
   });
+});
+
+test('un passthrough esplicito non conserva il testo sorgente nel risultato normalizzato', () => {
+  assert.deepEqual(
+    asTranslationResult({ text: IT, passthrough: true }),
+    { text: '', passthrough: true },
+  );
 });
 
 describe('isSourcePassthrough', () => {

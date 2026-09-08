@@ -1514,7 +1514,8 @@ export async function freeTranslateWithRetry({ text, sourceLang, targetLang, fie
 export function asTranslationResult(value) {
   if (typeof value === 'string') return { text: value, passthrough: false };
   if (!value || typeof value !== 'object') return { text: '', passthrough: false };
-  return { text: typeof value.text === 'string' ? value.text : '', passthrough: value.passthrough === true };
+  if (value.passthrough === true) return { text: '', passthrough: true };
+  return { text: typeof value.text === 'string' ? value.text : '', passthrough: false };
 }
 
 /** Return the retry result together with the reason for an empty translation. */
