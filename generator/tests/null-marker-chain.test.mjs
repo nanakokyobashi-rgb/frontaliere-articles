@@ -40,6 +40,16 @@ import {
 } from '../scripts/lib/body2-payload-verdict.mjs';
 import { translateFieldFreeMt } from '../scripts/lib/article-free-mt.mjs';
 import {
+  createFreeMtRecoveryReport,
+  recordFreeMtUnusableOutput,
+  claimFreeMtLlmFallback,
+  MAX_FREE_MT_LLM_FALLBACKS_PER_RUN,
+  MAX_FREE_MT_LLM_FALLBACKS_PER_LOCALE,
+  FREE_MT_LLM_FALLBACK_LOCALES,
+} from '../scripts/lib/free-mt-recovery.mjs';
+import { isReservedPublishedSlug } from '../../scripts/lib/published-slug-guard.mjs';
+import { buildSitemap } from '../../scripts/lib/build-sitemap.mjs';
+import {
   localesNeedingTranslation,
   enrichEventsWithLocaleFallbackTranslations,
   sanitizeDatasetEvents,
@@ -114,6 +124,70 @@ describe('translateFieldFreeMt — l’uscita di un motore non e’ prosa', () =
     // `Null` come PAROLA dentro una frase non e' il marker: si scarta solo il
     // valore INTERO, e questo e' cio' che tiene il filtro non distruttivo.
     assert.equal(await run('Null Grad in Airolo'), 'Null Grad in Airolo');
+  });
+
+  test('un output non-stringa emette un segnale distinto e non diventa testo', async () => {
+    const signals = [];
+    const out = await translateFieldFreeMt({
+      text: 'Un titolo italiano qualunque',
+      sourceLang: 'it',
+      targetLang: 'de',
+      fieldType: 'title',
+      translate: async () => ({ translated: 'Null' }),
+      onUnusableOutput: (event) => signals.push(event),
+    });
+    assert.equal(out, '');
+    assert.deepEqual(signals, [{ targetLang: 'de', fieldType: 'title', reason: 'non-string' }]);
+  });
+});
+
+describe('free-MT recovery — il degrado e’ misurato e limitato per run', () => {
+  test('la quota per locale si esaurisce, senza confondere l’assenza vera', () => {
+    const report = createFreeMtRecoveryReport();
+    for (let i = 0; i < MAX_FREE_MT_LLM_FALLBACKS_PER_LOCALE; i += 1) {
+      assert.equal(claimFreeMtLlmFallback(report, 'en'), true, `fallback en ${i + 1}`);
+    }
+    assert.equal(claimFreeMtLlmFallback(report, 'en'), false, 'oltre la quota del locale');
+    assert.equal(report.llmFallbacks, MAX_FREE_MT_LLM_FALLBACKS_PER_LOCALE);
+    assert.equal(report.llmFallbackCapped, true);
+
+    recordFreeMtUnusableOutput(report, { targetLang: 'de', fieldName: 'title', reason: 'non-string' });
+    assert.equal(report.unusableOutputs, 1);
+    assert.equal(report.nonStringOutputs, 1);
+    assert.deepEqual(report.unusableByLocale, { de: 1 });
+    assert.deepEqual(report.unusableFields, { 'de:title': 1 });
+  });
+
+  // #831: con un budget UNICO per run consumato nell'ordine del loop
+  // (`en` → `de` → `fr`), una run in cui il free-MT degrada su ogni campo
+  // spendeva tutti e 5 i claim su `en`, e `de`/`fr` finivano pubblicati con
+  // prosa italiana. La quota per locale e' l'invariante che lo impedisce.
+  test('`en` non puo’ affamare `de`/`fr`: a ogni locale resta almeno un claim', () => {
+    const report = createFreeMtRecoveryReport();
+    const spesi = Object.fromEntries(FREE_MT_LLM_FALLBACK_LOCALES.map((l) => [l, 0]));
+    // Stesso ordine del loop missing-field di create-article.mjs, e 5 campi
+    // per locale: la forma esatta della run degradata.
+    for (const locale of FREE_MT_LLM_FALLBACK_LOCALES) {
+      for (let i = 0; i < 5; i += 1) {
+        if (claimFreeMtLlmFallback(report, locale)) spesi[locale] += 1;
+      }
+    }
+    for (const locale of FREE_MT_LLM_FALLBACK_LOCALES) {
+      assert.ok(spesi[locale] >= 1, `${locale} deve conservare almeno un retry mirato, ne ha ${spesi[locale]}`);
+      assert.ok(spesi[locale] <= MAX_FREE_MT_LLM_FALLBACKS_PER_LOCALE, `${locale} non puo’ superare la quota`);
+    }
+    assert.equal(report.llmFallbacks, MAX_FREE_MT_LLM_FALLBACKS_PER_RUN, 'il cap per run resta il tetto complessivo');
+    assert.deepEqual(report.llmFallbacksByLocale, spesi);
+  });
+
+  test('errori di trasporto e sentinel markdown corrotti sono telemetria, non campi da addebitare', () => {
+    const report = createFreeMtRecoveryReport();
+    recordFreeMtUnusableOutput(report, { targetLang: 'de', fieldName: 'title', reason: 'error' });
+    recordFreeMtUnusableOutput(report, { targetLang: 'de', fieldName: 'excerpt', reason: 'mangled-nav-link' });
+
+    assert.equal(report.unusableOutputs, 2);
+    assert.deepEqual(report.unusableByLocale, { de: 2 });
+    assert.deepEqual(report.unusableFields, {}, 'solo output testualmente inutilizzabile o non-stringa paga il cap');
   });
 });
 
@@ -247,6 +321,56 @@ describe('events-utils — il feed dell’organizzatore non parla tedesco', () =
 // ── #868 item 1 — lo slug: la sola parte che non si corregge dopo ──────────
 
 describe('slug: un titolo `Null` non produce /de/blog/null', () => {
+  test('la guardia di pubblicazione distingue la parola tedesca dal segmento riservato', () => {
+    assert.equal(isReservedPublishedSlug('null'), true);
+    assert.equal(isReservedPublishedSlug('Null'), true);
+    assert.equal(isReservedPublishedSlug('undefined'), true);
+    assert.equal(isReservedPublishedSlug('Null Grad in Airolo'), false);
+  });
+
+  test('la sitemap omette solo l’alternativa nulla, non l’articolo buono', () => {
+    const { xml, count } = buildSitemap(
+      [{ id: 'articolo-null-legittimo', date: '2026-09-08' }],
+      'frontaliere',
+      {
+        'articolo-null-legittimo': {
+          it: 'articolo-valido',
+          en: 'valid-article',
+          de: 'null',
+          fr: 'article-valide',
+        },
+      },
+      { 'blog.article.articolo-null-legittimo.title': 'Titolo' },
+    );
+    assert.equal(count, 1);
+    assert.match(xml, /\/articoli-frontaliere\/articolo-valido\//);
+    assert.match(xml, /hreflang="en"[^\n]+\/en\/cross-border-articles\/valid-article\//);
+    assert.doesNotMatch(xml, /\/de\/grenzgaenger-artikel\/null\//);
+  });
+
+  test('il builder dei canonical non costruisce un URL per lo slug riservato', () => {
+    const start = CREATE_ARTICLE.indexOf('export function buildArticlePublishedUrls(data) {');
+    assert.notEqual(start, -1, 'builder dei canonical non trovato');
+    const end = CREATE_ARTICLE.indexOf('\n}\n', start);
+    assert.notEqual(end, -1, 'chiusura del builder dei canonical non trovata');
+    const source = CREATE_ARTICLE.slice(start, end + 2).replace(/^export /, '');
+    const buildArticlePublishedUrls = new Function(
+      'SECTION',
+      'BASE_URL',
+      'isReservedPublishedSlug',
+      `${source}\nreturn buildArticlePublishedUrls;`,
+    )(
+      { hubSlug: { it: 'articoli-frontaliere', en: 'cross-border-articles', de: 'grenzgaenger-artikel', fr: 'articles-frontalier' } },
+      'https://frontaliereticino.ch',
+      isReservedPublishedSlug,
+    );
+    const urls = buildArticlePublishedUrls({
+      slugs: { it: 'articolo-valido', en: 'valid-article', de: 'null', fr: 'article-valide' },
+    });
+    assert.match(urls.en, /\/en\/cross-border-articles\/valid-article\/$/);
+    assert.equal(urls.de, undefined, 'un canonical /de/.../null non deve essere costruito');
+  });
+
   test('il cablaggio passa dal classificatore condiviso, non da slugifySlugPart nudo', () => {
     // Le quattro derivazioni di uno slug da un titolo LOCALIZZATO. Il test e'
     // sul testo perche' e' l'unico modo di provare che nessuna delle quattro
@@ -489,7 +613,7 @@ describe('quale predicato, dove', () => {
 
     const freeMt = leggi('article-free-mt.mjs');
     assert.ok(
-      /if \(!hasUsableContentText\(out\)\) return '';/.test(freeMt),
+      /if \(!hasUsableContentText\(out\)\) \{/.test(freeMt),
       'l’uscita del motore MT deve passare dal predicato severo',
     );
   });
