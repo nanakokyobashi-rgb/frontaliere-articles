@@ -570,6 +570,7 @@ async function translateWithDeepL(text, sourceLang, targetLang, outcome = null) 
       return ''; // network error, don't retry with other keys
     }
   }
+  noteTranslationOutcome(outcome, 'incomplete');
   return ''; // all keys exhausted
 }
 
@@ -626,6 +627,7 @@ async function translateChunkGoogle(text, sourceLang, targetLang, outcome = null
       continue;
     }
   }
+  noteTranslationOutcome(outcome, 'incomplete');
   return '';
 }
 
@@ -910,7 +912,10 @@ async function translateWithAzure(text, sourceLang, targetLang, outcome = null) 
         }
         const data = await res.json();
         const t = data?.[0]?.translations?.[0]?.text || '';
-        if (!t) return '';
+        if (!t) {
+          noteTranslationOutcome(outcome, 'incomplete');
+          return '';
+        }
         translated.push(t);
         if (chunks.length > 1) await delay(100);
       }
@@ -930,6 +935,7 @@ async function translateWithAzure(text, sourceLang, targetLang, outcome = null) 
       return '';
     }
   }
+  noteTranslationOutcome(outcome, 'incomplete');
   return '';
 }
 
@@ -988,15 +994,21 @@ async function _getGoogleCloudAccessToken() {
   return '';
 }
 
-async function translateWithGoogleCloud(text, sourceLang, targetLang) {
+async function translateWithGoogleCloud(text, sourceLang, targetLang, outcome = null) {
   if (!_gcOAuthAvailable) return '';
   const clean = normalizeBlock(text);
   if (!clean || sourceLang === targetLang) return '';
-  if (_googleCloudDailyChars + clean.length > GOOGLE_CLOUD_DAILY_LIMIT) return '';
+  if (_googleCloudDailyChars + clean.length > GOOGLE_CLOUD_DAILY_LIMIT) {
+    noteTranslationOutcome(outcome, 'incomplete');
+    return '';
+  }
 
   try {
     const token = await _getGoogleCloudAccessToken();
-    if (!token) return '';
+    if (!token) {
+      noteTranslationOutcome(outcome, 'incomplete');
+      return '';
+    }
 
     const res = await fetch('https://translation.googleapis.com/language/translate/v2', {
       method: 'POST',
@@ -1008,11 +1020,20 @@ async function translateWithGoogleCloud(text, sourceLang, targetLang) {
       body: JSON.stringify({ q: clean, source: sourceLang, target: targetLang, format: 'text' }),
       signal: AbortSignal.timeout(TIMEOUT_MS),
     });
-    if (res.status === 403 || res.status === 429) return ''; // quota exceeded
-    if (!res.ok) return '';
+    if (res.status === 403 || res.status === 429) {
+      noteTranslationOutcome(outcome, 'incomplete');
+      return ''; // quota exceeded
+    }
+    if (!res.ok) {
+      noteTranslationOutcome(outcome, 'incomplete');
+      return '';
+    }
     const data = await res.json();
     const translated = normalizeBlock(data?.data?.translations?.[0]?.translatedText || '');
-    if (!translated) return '';
+    if (!translated) {
+      noteTranslationOutcome(outcome, 'incomplete');
+      return '';
+    }
     // Il contatore giornaliero sale anche su un eco: i caratteri li ha
     // consumati la chiamata, non la qualita' della risposta, e non contarli
     // faceva sforare il cap di 16K/giorno che questo contatore esiste per
@@ -1020,12 +1041,13 @@ async function translateWithGoogleCloud(text, sourceLang, targetLang) {
     _googleCloudDailyChars += clean.length;
     return translated;
   } catch {
+    noteTranslationOutcome(outcome, 'incomplete');
     return '';
   }
 }
 
 // ── Hugging Face OPUS-MT (Helsinki-NLP open-source models) ─────────────────
-async function translateWithHuggingFace(text, sourceLang, targetLang) {
+async function translateWithHuggingFace(text, sourceLang, targetLang, outcome = null) {
   if (!HF_TOKEN) return '';
   const clean = normalizeBlock(text);
   if (!clean || sourceLang === targetLang) return '';
@@ -1047,13 +1069,18 @@ async function translateWithHuggingFace(text, sourceLang, targetLang) {
       body: JSON.stringify({ inputs: truncated }),
       signal: AbortSignal.timeout(TIMEOUT_MS),
     });
-    if (!res.ok) return '';
+    if (!res.ok) {
+      noteTranslationOutcome(outcome, 'incomplete');
+      return '';
+    }
     const data = await res.json();
     const translated = normalizeBlock(
       Array.isArray(data) ? data[0]?.translation_text || '' : data?.translation_text || ''
     );
+    if (!translated) noteTranslationOutcome(outcome, 'incomplete');
     return translated; // il confronto con la sorgente e' salito in `tryTier`
   } catch {
+    noteTranslationOutcome(outcome, 'incomplete');
     return '';
   }
 }
@@ -1248,13 +1275,17 @@ export async function freeTranslate({ text, sourceLang, targetLang, fieldType = 
   // description callers pass 'description' so broad single-word fallback rules
   // are skipped and legitimate body prose ("nel nostro orologio") is never
   // rewritten. Glossary triggers are matched against the UNMASKED source.
-  const finalize = (out) => finalizeTranslatedText({
-    sourceText: sourceClean,
-    translatedText: balanceMarkdownMarkers(out),
-    targetLang,
-    fieldType,
-    protectedTokens,
-  });
+  const finalize = (out) => {
+    const finalized = finalizeTranslatedText({
+      sourceText: sourceClean,
+      translatedText: balanceMarkdownMarkers(out),
+      targetLang,
+      fieldType,
+      protectedTokens,
+    });
+    if (!finalized) noteTranslationOutcome(_outcome, 'incomplete');
+    return finalized;
+  };
 
   /** Try a tier: track success/error/passthrough, return result or '' */
   async function tryTier(tierName, fn) {
@@ -1297,7 +1328,7 @@ export async function freeTranslate({ text, sourceLang, targetLang, fieldType = 
   if (t1b) return finalize(t1b);
 
   // Tier 3: Google Cloud Translation (official API, 500K free/month, hard-capped 16K/day)
-  const t2c = await tryTier('googleCloud', () => translateWithGoogleCloud(clean, sourceLang, targetLang));
+  const t2c = await tryTier('googleCloud', () => translateWithGoogleCloud(clean, sourceLang, targetLang, _outcome));
   if (t2c) return finalize(t2c);
 
   // Tier 3a: Local Opus-MT (Helsinki-NLP via @huggingface/transformers, on-runner).
@@ -1392,7 +1423,7 @@ export async function freeTranslate({ text, sourceLang, targetLang, fieldType = 
   if (t4) return finalize(t4);
 
   // Tier 5: Hugging Face OPUS-MT (Helsinki-NLP open-source, good for short text)
-  const t5 = await tryTier('huggingFace', () => translateWithHuggingFace(clean, sourceLang, targetLang));
+  const t5 = await tryTier('huggingFace', () => translateWithHuggingFace(clean, sourceLang, targetLang, _outcome));
   if (t5) return finalize(t5);
 
   // Tier 6: Mozhi+DuckDuckGo (Bing via Mozhi proxy — works sometimes from CI)
