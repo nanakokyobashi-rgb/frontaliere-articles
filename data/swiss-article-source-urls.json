@@ -1,5 +1,4 @@
 {
-  "https://www.swissinfo.ch/ita/la-siccit%c3%a0-mette-a-dura-prova-i-corsi-d%27acqua-svizzeri/91890120": "la-siccit-mette-a-dura-prova-i-corsi-dacqua-svizzeri",
   "https://www.admin.ch/it/newnsb/xqstovongrnmqrcgilbd1": "prezzi-produzione-importazione-luglio-2026",
   "https://www.tio.ch/svizzera/economia/1943668/reno-centesimi-svizzera-costi-basilea": "reno-ai-minimi-prezzi-svizzera",
   "https://www.tio.ch/dal-mondo/economia/1943678/carbone-produzione-lignite-elettricita-totale": "carbone-minimi-storici-elettricita",
@@ -2065,6 +2064,11 @@
   "https://www.tio.ch/svizzera/attualita/1948418/fecondazione-in-vitro-non-rimborsabile-e-un-ingiustizia": {
     "articleId": "fiv-costi-assicurazione-svizzera",
     "ts": "2026-09-08T05:18:16.295Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/attualita/1948606/deposito-scorie-rosti-compensazioni-sito": {
+    "articleId": "rosti-deposito-scorie-compensazioni",
+    "ts": "2026-09-08T05:29:01.240Z",
     "keyForm": 2
   }
 }
