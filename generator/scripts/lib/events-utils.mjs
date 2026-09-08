@@ -1143,6 +1143,7 @@ async function fillLocaleGaps(byLocale, cache, { eventId, fieldType, locales, de
       && isSourcePassthrough(sourceText, clean[target])
       && fieldType === 'title'
       && wordCount(sourceText) <= MAX_PASSTHROUGH_MEMO_WORDS
+      && locales.length >= 3
       && identicalTargets.length === 1;
     if (existingIdenticalTarget) {
       // The organizer already supplied the same short title in this target
@@ -1150,7 +1151,13 @@ async function fillLocaleGaps(byLocale, cache, { eventId, fieldType, locales, de
       // is not, and remains eligible for the normal translation path. Store
       // only a negative memo: if a later feed run omits this target, reusing
       // sourceText would publish Italian under the requested locale.
-      if (entry[target] !== null) cache[cacheKey] = { ...entry, [target]: null };
+      if (hasUsableContentText(entry[target]) && !isSourcePassthrough(sourceText, entry[target])) {
+        updated[target] = entry[target];
+        continue;
+      }
+      if (!hasUsableContentText(entry[target]) && entry[target] !== null) {
+        cache[cacheKey] = { ...entry, [target]: null };
+      }
       if (
         legacyEntry
         && typeof legacyEntry === 'object'

@@ -65,9 +65,11 @@ test('memoizza un titolo già identico nel locale target senza chiamare la casc
     [{ id: 'guidle:identical', titleByLocale: { it: SAME_TITLE, en: SAME_TITLE } }],
     cache,
     {
-      locales: ['it', 'en'],
       delayMs: 0,
-      translateFn: async () => { throw new Error('un’identità già presente non va ritradotta'); },
+      translateFn: async ({ targetLang }) => {
+        if (targetLang === 'en') throw new Error('un’identità già presente non va ritradotta');
+        return `traduzione-${targetLang}`;
+      },
     },
   );
 
@@ -93,6 +95,46 @@ test('non congela un duplicato del feed copiato in tutti i locali', async () => 
   assert.equal(calls, 3);
   assert.match(out[0].titleByLocale.de, /^traduzione-de-/);
   assert.match(out[0].titleByLocale.fr, /^traduzione-fr-/);
+});
+
+test('un duplicato successivo non clobbera una traduzione già memoizzata', async () => {
+  const cache = {};
+  const first = await enrichEventsWithLocaleFallbackTranslations(
+    [event('guidle:stable')],
+    cache,
+    {
+      delayMs: 0,
+      translateFn: async ({ targetLang }) => `traduzione-${targetLang}`,
+    },
+  );
+
+  assert.equal(first[0].titleByLocale.en, 'traduzione-en');
+  const second = await enrichEventsWithLocaleFallbackTranslations(
+    [{ id: 'guidle:stable', titleByLocale: { it: SAME_TITLE, en: SAME_TITLE } }],
+    cache,
+    {
+      delayMs: 0,
+      translateFn: async () => { throw new Error('la traduzione esistente va riusata'); },
+    },
+  );
+
+  assert.equal(second[0].titleByLocale.en, 'traduzione-en');
+});
+
+test('con soli due locali il duplicato resta sul percorso di traduzione', async () => {
+  let calls = 0;
+  const out = await enrichEventsWithLocaleFallbackTranslations(
+    [{ id: 'guidle:two-locales', titleByLocale: { it: SAME_TITLE, en: SAME_TITLE } }],
+    {},
+    {
+      locales: ['it', 'en'],
+      delayMs: 0,
+      translateFn: async ({ targetLang }) => { calls += 1; return `traduzione-${targetLang}`; },
+    },
+  );
+
+  assert.equal(calls, 1);
+  assert.equal(out[0].titleByLocale.en, 'traduzione-en');
 });
 
 test('memoizza il passthrough legittimo del titolo e non ripaga la cascata al secondo giro', async () => {
