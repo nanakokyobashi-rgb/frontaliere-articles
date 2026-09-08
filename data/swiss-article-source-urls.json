@@ -1,26 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/cronaca/1943508/carcere-bois-mermet-popolazione-bois-evaso": "evaso-bois-mermet",
-  "https://www.laregione.ch/svizzera/svizzera/1943471/miliardi-iva-aumento-punti-acquisti": "iva-aumento-sicurezza",
-  "https://www.tio.ch/svizzera/cronaca/1943460/ciclista-incidente-e-bike-ospedale-berna": "incidente-e-bike-morte-ciclista",
-  "https://www.rsi.ch/info/cultura-e-spettacoli/eurovision-se-il-paese-vincitore-%c3%a8-in-guerra-non-ospiter%c3%a0-il-concorso--3949995.html": "regolamento-eurovision-sicurezza-2027",
-  "https://jobs.rsi.ch/it/lavoro-e-carriera/jobs": "opportunita-lavoro-rsi-svizzera",
-  "https://www.laregione.ch/rubriche/scienza-e-medicina": "scienza-medicina-attualita-svizzera",
-  "https://www.laregione.ch/rubriche/salute-sessuale": "salute-sessuale-ticino",
-  "https://www.laregione.ch/svizzera/svizzera/1943573/eclissi-svizzera-terminata-ultima-coperto": "eclissi-solare-svizzera-conclusa",
-  "https://www.laregione.ch/svizzera/svizzera/1943590/controllo-finanze-ufsp-federale-cdf": "il-controllo-delle-finanze-critica-duramente-l-ufsp",
-  "https://www.rsi.ch/s/3949140": "reno-siccita-logistica-svizzera",
-  "https://www.rsi.ch/info/ambiente/mezzo-milione-di-giovani-polpi-contro-il-granchio-blu--3934308.html": "polpi-contro-granchio-blu",
-  "https://www.rsi.ch/s/3947496": "governo-dice-no-iniziativa-alimentazione",
-  "https://www.rsi.ch/s/3946380": "autorita-argoviesi-sotto-indagine-per-il-caso-dell-ex-parlamentare-udc",
-  "https://www.rsi.ch/s/3949320": "gianotti-delegata-geneva-ai-summit-2027",
-  "https://www.rsi.ch/info/svizzera/sconti-sui-farmaci-la-vigilanza-%c3%a8-poco-efficace--3947373.html": "sconti-farmaci-vigilanza-poco-efficace",
-  "https://www.rsi.ch/info/scienza-e-tecnologia/la-scienza-che-%e2%80%9csfrutta%e2%80%9d-l%e2%80%99eclissi-solare--3949668.html": "eclissi-solare-studi",
-  "https://www.tio.ch/ticino/politica/1943609/tram-treno-aggiudicato-un-appalto-da-8-6-milioni": "tram-treno-aggiudicato-appalto",
-  "https://www.tio.ch/svizzera/attualita/1943152/elvis-susanne-madre-padre-documenti": "elvis-presley-padre-biologico",
-  "https://www.rsi.ch/info/dialogo/come-le-mucche-svizzere-affrontano-la-canicola--3933039.html": "mucche-svizzere-canica",
-  "https://www.tio.ch/svizzera/politica/1943619/cdf-ufsp-vantaggi-federale-sconti-farmaci-miliardi-pazienti": "sconti-farmaci-pazienti",
-  "https://www.swissinfo.ch/ita/la-siccit%c3%a0-mette-a-dura-prova-i-corsi-d%27acqua-svizzeri/91890120": "la-siccit-mette-a-dura-prova-i-corsi-dacqua-svizzeri",
-  "https://www.admin.ch/it/newnsb/xqstovongrnmqrcgilbd1": "prezzi-produzione-importazione-luglio-2026",
   "https://www.tio.ch/svizzera/economia/1943668/reno-centesimi-svizzera-costi-basilea": "reno-ai-minimi-prezzi-svizzera",
   "https://www.tio.ch/dal-mondo/economia/1943678/carbone-produzione-lignite-elettricita-totale": "carbone-minimi-storici-elettricita",
   "https://apps.apple.com/ch/app/cdt-digital/id391355824": "cdt-epaper-ios-revista",
@@ -1985,6 +1963,116 @@
   "https://www.swissinfo.ch/ita/tragitto-casa-scuola%3a-per-41%25-genitori-%c3%a8-rischioso%2c-studio/92015568": {
     "articleId": "tragitto-casa-scuola-rischioso",
     "ts": "2026-09-07T10:21:29.053Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/ticino/attualita/1948469/settembre-e-il-mese-dell-ambiente": {
+    "articleId": "settembre-mese-ambiente-collina-doro",
+    "ts": "2026-09-07T10:35:33.405Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/info/mondo/la-%e2%80%9crana-del-caff%c3%a8%e2%80%9d-scoperta-una-nuova-specie-in-costa-rica--3945972.html": {
+    "articleId": "rana-caff-scoperta-costa-rica",
+    "ts": "2026-09-07T10:44:59.994Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/rubriche/ospite/1948480/neutralita-il-27-settembre-scegliamo-la-svizzera": {
+    "articleId": "neutralita-svizzera-27-settembre",
+    "ts": "2026-09-07T11:10:20.424Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/info/scienza-e-tecnologia/bepicolombo-verso-mercurio-la-missione-nella-fase-cruciale--4057341.html": {
+    "articleId": "bepi-colombo-missione-mercurio",
+    "ts": "2026-09-07T11:30:16.971Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/info/natura-e-animali/cibo-per-cani-e-gatti-i-cinque-errori-pi%c3%b9-comuni--4052856.html": {
+    "articleId": "cibo-per-cani-gatti-errori-comuni",
+    "ts": "2026-09-07T11:40:59.584Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/confederazione-vuole-mantenere-aree-thun-per-esercito-e-difesa/92016218": {
+    "articleId": "confederazione-mantiene-aree-thun-difesa",
+    "ts": "2026-09-07T11:45:17.889Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/economia/1948493/lavoro-mercato-anni-disoccupati-bastano": {
+    "articleId": "disoccupazione-giovani-svizzera-agosto-2023",
+    "ts": "2026-09-07T11:50:27.349Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/politica/1948486/cassis-svizzera-intervista-ue-stati-uniti-neutralita-ogni-guerra-sanzionato": {
+    "articleId": "svizzera-sanzioni-stati-uniti-ignazio-cassis",
+    "ts": "2026-09-07T11:56:21.678Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/newsblog/target/1948495/l-intelligenza-artificiale-spiegata-alla-terza-eta": {
+    "articleId": "laboratorio-intelligenza-artificiale-terza-eta",
+    "ts": "2026-09-07T12:03:46.404Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/impatto-ia-su-dipendenti-telecom%2c-syndicom-formula-rivendicazioni/92016507": {
+    "articleId": "impatto-ia-dipendenti-telecom-syndicom-rivendicazioni",
+    "ts": "2026-09-07T12:33:59.289Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/ticino/attualita/1948472/melide-igor": {
+    "articleId": "melide-riqualifica-centro",
+    "ts": "2026-09-07T12:45:00.187Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/festival-zurigo%3a-alla-svizzera-luna-wedler-il-golden-eye-award/92016935": {
+    "articleId": "luna-wedler-golden-eye-award-zurigo",
+    "ts": "2026-09-07T13:05:52.037Z",
+    "keyForm": 2
+  },
+  "https://www.cdt.ch/news/svizzera/nei-parchi-giochi-svizzeri-91-mozziconi-di-sigarette-438534": {
+    "articleId": "salute-parchi-giochi-svizzeri-mozziconi-sigarette",
+    "ts": "2026-09-07T13:16:04.335Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/dal-mondo/cronaca/1948503/vittime-morte-nepal-lutto-inondazione": {
+    "articleId": "nepal-inondazione-lutto-vittime",
+    "ts": "2026-09-07T13:46:52.537Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/cronaca/1948521/investito-mortalmente-da-un-treno-aveva-13-anni": {
+    "articleId": "investito-treno-13-anni-berna",
+    "ts": "2026-09-07T14:02:05.103Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/seco%3a-%22mercato-del-lavoro-svizzero-rimane-solido%22/92017594": {
+    "articleId": "seco-mercato-lavoro-svizzero-solido",
+    "ts": "2026-09-07T14:27:04.108Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/s/4066013": {
+    "articleId": "posta-svizzera-taglio-posti",
+    "ts": "2026-09-07T14:48:37.923Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/bns%3a-riserve-di-divise-aumentano-ulteriormente-in-agosto/92018100": {
+    "articleId": "riserve-bns-aumento-agosto",
+    "ts": "2026-09-07T15:16:14.556Z",
+    "keyForm": 2
+  },
+  "https://www.admin.ch/it/newnsb/g8rrikjnignr": {
+    "articleId": "incontro-pensioni-salute-2026",
+    "ts": "2026-09-07T19:26:55.921Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/attualita/1948418/fecondazione-in-vitro-non-rimborsabile-e-un-ingiustizia": {
+    "articleId": "fiv-costi-assicurazione-svizzera",
+    "ts": "2026-09-08T05:18:16.295Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/attualita/1948606/deposito-scorie-rosti-compensazioni-sito": {
+    "articleId": "rosti-deposito-scorie-compensazioni",
+    "ts": "2026-09-08T05:29:01.240Z",
+    "keyForm": 2
+  },
+  "https://www.admin.ch/it/newnsb/vaihkpwvhud1": {
+    "articleId": "sanzioni-onu-sesam-aggiornamento",
+    "ts": "2026-09-08T05:41:38.148Z",
     "keyForm": 2
   }
 }
