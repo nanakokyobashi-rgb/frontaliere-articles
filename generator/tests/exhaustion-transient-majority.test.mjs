@@ -20,6 +20,7 @@
  */
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
 
 import {
   inputCapVetoSummary,
@@ -27,6 +28,11 @@ import {
   isTransientMajority,
   quotaDeferralShare,
 } from '../scripts/lib/exhaustion-disposition.mjs';
+
+const DISPOSITION_SOURCE = readFileSync(
+  new URL('../scripts/lib/exhaustion-disposition.mjs', import.meta.url),
+  'utf8',
+);
 
 /** Il verdetto nelle due polarita', per asserirle insieme. */
 const bothTies = (breakdown) => ({
@@ -173,6 +179,52 @@ test('le due politiche sul MEDESIMO `echoUnattributed` sono opposte, e devono re
   // l'eccedenza sarebbe 0 e 53 vs 52 tornerebbe `true` in tie transitorio.
   assert.deepEqual(bothTies(run31823202761), { transient: false, persistent: false },
     'voto: la sola eccedenza si addebita al vincitore, e ribalta un margine di UNO');
+});
+
+test('la forma incoerente puo\' superare la soglia diagnostica e perdere il voto (#1090 item 1)', () => {
+  // Enumerazione dei breakdown piccoli: questa e' la forma minima trovata in
+  // cui `quotaDeferralShare` supera la soglia mentre il voto rifiuta il
+  // differimento. `echo.total` contraddice la popolazione; non e' quindi una
+  // controprova sulle forme coerenti, ma chiude il quantificatore universale
+  // lasciato dal commento di #888.
+  const breakdown = {
+    transient: 1,
+    persistent: 0,
+    total: 1,
+    providerCooldownSkips: { total: 2 },
+  };
+  const share = quotaDeferralShare({ exhaustionBreakdown: breakdown });
+  assert.ok(share.share > share.required, JSON.stringify(share));
+  assert.equal(isTransientMajority(breakdown, { tie: 'transient' }), false,
+    'il margine sugli echi non attribuiti respinge il voto anche con share=1');
+});
+
+test('il commento non universalizza la forma fissata dal test (#1090 item 1)', () => {
+  assert.doesNotMatch(
+    DISPOSITION_SOURCE,
+    /Oggi non divergono su nessun verdetto solo perche'/,
+    'la forma coerente della run storica non puo\' restare un universale implicito',
+  );
+  assert.match(DISPOSITION_SOURCE, /non e' universale/);
+});
+
+test('un `total` assente non addebita l\'intero echo al vincitore (#1090 item 2)', () => {
+  const withoutTotal = {
+    transient: 53,
+    persistent: 52,
+    providerCooldownSkips: { total: 11 },
+  };
+  const vote = inputCapVetoSummary({ exhaustionBreakdown: withoutTotal });
+  assert.equal(vote.echoHiddenInBuckets, 0,
+    'senza denominatore l\'echo non attribuito non puo\' essere addebitato al transitorio');
+  assert.equal(vote.votedTransient, 53);
+  assert.equal(isTransientMajority(withoutTotal, { tie: 'transient' }), true,
+    'il mock legacy conserva il voto transitorio sui due secchi osservati');
+
+  const explicitZero = { ...withoutTotal, total: 0 };
+  assert.equal(inputCapVetoSummary({ exhaustionBreakdown: explicitZero }).echoHiddenInBuckets, 11,
+    'total: 0 esplicito resta diverso da un campo assente');
+  assert.equal(isTransientMajority(explicitZero, { tie: 'transient' }), false);
 });
 
 /** La diagnostica del voto, con la polarita' del veto input-cap (#357). */
