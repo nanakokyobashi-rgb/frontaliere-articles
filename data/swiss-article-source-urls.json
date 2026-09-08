@@ -1,5 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/economia/1943676/aziende-societa-ricavi-registrato-awp": "sestimali-aziende-svizzere",
   "https://www.rsi.ch/s/3949371": "iniziativa-bussola-governo-boccia",
   "https://www.rsi.ch/s/3984075": "immigrazione-svizzera-calo-2026",
   "https://www.swissinfo.ch/ita/swissquote-in-forte-calo-in-borsa%2c-pesa-debolezza-mercato-cripto/91890234": "swissquote-in-fore-calo-in-borsa",
@@ -2089,6 +2088,11 @@
   "https://www.tio.ch/svizzera/economia/1948672/franco-chfd-test-aziende-nove": {
     "articleId": "franco-chfd-test-aziende-2026",
     "ts": "2026-09-08T07:44:11.547Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/attualita/1948673/infortuni-gravi-quasi-il-90-torna-al-lavoro": {
+    "articleId": "infortuni-reinserimento-suva",
+    "ts": "2026-09-08T07:58:32.227Z",
     "keyForm": 2
   }
 }
