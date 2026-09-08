@@ -530,6 +530,9 @@ async function translateWithDeepL(text, sourceLang, targetLang, outcome = null) 
   if (DEEPL_API_KEYS.length === 0) return '';
   const clean = normalizeBlock(text);
   if (!clean || sourceLang === targetLang) return '';
+  const outcomeBefore = outcome
+    ? { passthroughs: outcome.passthroughs, errors: outcome.errors }
+    : null;
 
   const srcCode = DEEPL_LANG_MAP[sourceLang] || sourceLang?.toUpperCase() || '';
   const tgtCode = DEEPL_LANG_MAP[targetLang] || targetLang?.toUpperCase() || '';
@@ -570,7 +573,11 @@ async function translateWithDeepL(text, sourceLang, targetLang, outcome = null) 
       return ''; // network error, don't retry with other keys
     }
   }
-  noteTranslationOutcome(outcome, 'incomplete');
+  if (
+    outcome
+    && outcome.passthroughs === outcomeBefore.passthroughs
+    && outcome.errors === outcomeBefore.errors
+  ) noteTranslationOutcome(outcome, 'incomplete');
   return ''; // all keys exhausted
 }
 
@@ -578,6 +585,9 @@ async function translateWithDeepL(text, sourceLang, targetLang, outcome = null) 
 async function translateChunkGoogle(text, sourceLang, targetLang, outcome = null) {
   const q = normalizeBlock(text);
   if (!q) return '';
+  const outcomeBefore = outcome
+    ? { passthroughs: outcome.passthroughs, errors: outcome.errors }
+    : null;
 
   for (const base of GOOGLE_TRANSLATE_ENDPOINTS) {
     const isClients5 = base.includes('clients5');
@@ -627,7 +637,11 @@ async function translateChunkGoogle(text, sourceLang, targetLang, outcome = null
       continue;
     }
   }
-  noteTranslationOutcome(outcome, 'incomplete');
+  if (
+    outcome
+    && outcome.passthroughs === outcomeBefore.passthroughs
+    && outcome.errors === outcomeBefore.errors
+  ) noteTranslationOutcome(outcome, 'incomplete');
   return '';
 }
 
@@ -845,6 +859,9 @@ async function translateWithAzure(text, sourceLang, targetLang, outcome = null) 
   if (AZURE_TRANSLATOR_KEYS.length === 0) return '';
   const clean = normalizeBlock(text);
   if (!clean || sourceLang === targetLang) return '';
+  const outcomeBefore = outcome
+    ? { passthroughs: outcome.passthroughs, errors: outcome.errors }
+    : null;
 
   // Azure supports up to 50K chars per request, but we chunk at 5K for safety
   const MAX_CHUNK = 5000;
@@ -935,7 +952,11 @@ async function translateWithAzure(text, sourceLang, targetLang, outcome = null) 
       return '';
     }
   }
-  noteTranslationOutcome(outcome, 'incomplete');
+  if (
+    outcome
+    && outcome.passthroughs === outcomeBefore.passthroughs
+    && outcome.errors === outcomeBefore.errors
+  ) noteTranslationOutcome(outcome, 'incomplete');
   return '';
 }
 
