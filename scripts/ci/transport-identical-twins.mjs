@@ -516,10 +516,72 @@ const NON_READ_CALL_NAMES = new Set([
   'Set', 'Map', 'Promise', 'Error',
 ]);
 
-/** Rimuove i commenti lasciando intatti gli indici dei literal. */
-function stripJsComments(src) {
+/**
+ * Le parole dopo cui una `/` apre un literal regex e non è una divisione.
+ * Senza questo un `if (…) return /x/` finirebbe letto come operatore.
+ */
+const REGEX_PRECEDING_WORDS = new Set([
+  'return', 'typeof', 'instanceof', 'in', 'of', 'new', 'delete', 'void', 'case',
+  'do', 'else', 'yield', 'await', 'throw',
+]);
+
+/**
+ * Fine di un literal regex che inizia a `start`, o -1 se lì la `/` è una
+ * divisione. Il terminatore va cercato fuori dalle character class — è proprio
+ * `/method:\s*['"](?:POST|PUT)['"]/` a rompere un lexer che non le conosce — e
+ * un a capo prima della `/` di chiusura dice che literal non era.
+ */
+function regexLiteralEnd(src, start) {
+  let inClass = false;
+  for (let i = start + 1; i < src.length; i += 1) {
+    const ch = src[i];
+    if (ch === '\\') {
+      i += 1;
+      continue;
+    }
+    if (ch === '\n') return -1;
+    if (inClass) {
+      if (ch === ']') inClass = false;
+      continue;
+    }
+    if (ch === '[') inClass = true;
+    else if (ch === '/') {
+      let j = i + 1;
+      while (j < src.length && /[a-z]/i.test(src[j])) j += 1;
+      return j - 1;
+    }
+  }
+  return -1;
+}
+
+/**
+ * L'unico lexer del modulo: `blank` decide se i literal escono mascherati
+ * (ricerca di chiamate e parentesi) o intatti (ricerca dei path citati). Gli
+ * indici restano allineati al sorgente in entrambi i casi.
+ *
+ * I literal regex sono riconosciuti, non subiti: una quote dentro una character
+ * class apriva lo stato stringa e da lì mascherava TUTTO il resto del file —
+ * `callRanges()` non vedeva più nessuna chiamata e `readsContentOf()` dichiarava
+ * «solo citato» un fixture che legge davvero. È il falso silenzio di #853.
+ *
+ * `code` in uscita dice che il lexer ha chiuso ogni literal aperto. Se è
+ * `false` l'analisi non è affidabile e chi la usa deve andare fail-open.
+ */
+function scanJs(src, { blank }) {
   let out = '';
   let state = 'code';
+  let lastSig = '';
+  // `word` è l'ULTIMO identificatore chiuso, non quello in corso: fra `return`
+  // e la `/` che segue c'è uno spazio, e azzerarlo lì rimetterebbe il literal
+  // regex in posizione di divisione.
+  let word = '';
+  let prevCh = '';
+  // Le `${…}` di un template sono CODICE dentro un literal: senza pila il
+  // lexer resta in stato stringa e perde ogni chiamata interpolata (e con essa
+  // il resto del file, se il template ne annida un altro).
+  const frames = [];
+  let braceDepth = 0;
+  const emitLiteral = (ch) => (blank ? (ch === '\n' ? '\n' : ' ') : ch);
   for (let i = 0; i < src.length; i += 1) {
     const ch = src[i];
     const next = src[i + 1];
@@ -540,80 +602,99 @@ function stripJsComments(src) {
       continue;
     }
     if (state !== 'code') {
-      out += ch;
+      if (state === '`' && ch === '$' && next === '{') {
+        out += '${';
+        i += 1;
+        frames.push(braceDepth);
+        braceDepth = 0;
+        state = 'code';
+        lastSig = '{';
+        word = '';
+        prevCh = ch;
+        continue;
+      }
+      out += emitLiteral(ch);
       if (ch === '\\' && i + 1 < src.length) {
-        out += src[++i];
+        out += emitLiteral(src[++i]);
       } else if (ch === state) state = 'code';
       continue;
+    }
+    if (ch === '{') braceDepth += 1;
+    else if (ch === '}') {
+      if (braceDepth === 0 && frames.length) {
+        out += ch;
+        braceDepth = frames.pop();
+        state = '`';
+        lastSig = '`';
+        word = '';
+        prevCh = ch;
+        continue;
+      }
+      if (braceDepth > 0) braceDepth -= 1;
     }
     if (ch === '/' && next === '/') {
       out += '  ';
       i += 1;
       state = 'line-comment';
-    } else if (ch === '/' && next === '*') {
+      word = '';
+      prevCh = ch;
+      continue;
+    }
+    if (ch === '/' && next === '*') {
       out += '  ';
       i += 1;
       state = 'block-comment';
-    } else if (ch === "'" || ch === '"' || ch === '`') {
-      out += ch;
+      word = '';
+      prevCh = ch;
+      continue;
+    }
+    if (ch === '/' && (!/[\w$)\]]/.test(lastSig) || REGEX_PRECEDING_WORDS.has(word))) {
+      const close = regexLiteralEnd(src, i);
+      if (close >= 0) {
+        for (let j = i; j <= close; j += 1) out += blank ? (j === i ? '/' : ' ') : src[j];
+        i = close;
+        lastSig = '/';
+        word = '';
+        prevCh = ch;
+        continue;
+      }
+    }
+    if (ch === "'" || ch === '"' || ch === '`') {
+      out += emitLiteral(ch);
       state = ch;
-    } else out += ch;
+      lastSig = ch;
+      word = '';
+      prevCh = ch;
+      continue;
+    }
+    out += ch;
+    if (/[\w$]/.test(ch)) word = /[\w$]/.test(prevCh) ? word + ch : ch;
+    else if (!/\s/.test(ch)) word = '';
+    prevCh = ch;
+    if (!/\s/.test(ch)) lastSig = ch;
   }
-  // Una regex con virgolette può sembrare una stringa a questo lexer minimo.
-  // In quel caso il testo mascherato non è affidabile: conserva il sorgente e
-  // lascia che `readsContentOf` scelga il verso fail-open.
-  return state === 'code' || state === 'line-comment' ? out : src;
+  // Un commento di riga senza a capo finale e' chiuso dall'EOF: non e' un
+  // literal rimasto aperto.
+  return { out, code: (state === 'code' || state === 'line-comment') && frames.length === 0 };
+}
+
+/** Rimuove i commenti lasciando intatti gli indici dei literal. */
+function stripJsComments(src) {
+  return scanJs(src, { blank: false }).out;
 }
 
 /** Maschera literal e commenti per cercare parentesi e chiamate nel codice. */
 function maskJsSyntax(src) {
-  let out = '';
-  let state = 'code';
-  for (let i = 0; i < src.length; i += 1) {
-    const ch = src[i];
-    const next = src[i + 1];
-    if (state === 'line-comment') {
-      if (ch === '\n') {
-        out += ch;
-        state = 'code';
-      } else out += ' ';
-      continue;
-    }
-    if (state === 'block-comment') {
-      if (ch === '*' && next === '/') {
-        out += '  ';
-        i += 1;
-      } else if (ch === '\n') out += '\n';
-      else out += ' ';
-      if (ch === '*' && next === '/') state = 'code';
-      continue;
-    }
-    if (state !== 'code') {
-      out += ch === '\n' ? '\n' : ' ';
-      if (ch === '\\' && i + 1 < src.length) {
-        out += src[++i] === '\n' ? '\n' : ' ';
-      } else if (ch === state) state = 'code';
-      continue;
-    }
-    if (ch === '/' && next === '/') {
-      out += '  ';
-      i += 1;
-      state = 'line-comment';
-    } else if (ch === '/' && next === '*') {
-      out += '  ';
-      i += 1;
-      state = 'block-comment';
-    } else if (ch === "'" || ch === '"' || ch === '`') {
-      out += ch === '\n' ? '\n' : ' ';
-      state = ch;
-    } else out += ch;
-  }
-  return state === 'code' || state === 'line-comment' ? out : null;
+  return scanJs(src, { blank: true }).out;
+}
+
+/** Il lexer ha chiuso ogni literal? In caso contrario l'analisi non vale. */
+function lexIsBalanced(src) {
+  return scanJs(src, { blank: true }).code;
 }
 
 function callRanges(src) {
   const masked = maskJsSyntax(src);
-  if (masked === null) return null;
   const ranges = [];
   for (const m of masked.matchAll(/\b([A-Za-z_$][\w$]*)\s*\(/g)) {
     const open = masked.indexOf('(', m.index);
@@ -662,14 +743,17 @@ export function readsContentOf(rel, text) {
   // Senza testo non sappiamo se il fixture legge davvero: il verso sicuro e'
   // tenere l'accoppiamento, non dichiarare chiuso il canale.
   if (typeof text !== 'string') return true;
+  // Stesso verso quando il lexer non chiude un literal aperto: l'analisi delle
+  // chiamate non vale niente, e «non lo so» resta «legge».
+  if (!lexIsBalanced(text)) return true;
   const src = stripJsComments(text);
+  if (!lexIsBalanced(src)) return true;
   const escaped = String(rel).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
   // Il path puo' essere passato dal fixture con uno o piu' prefissi relativi
   // prima del path repo-relative (`../../scripts/...`).
   const lit = `['"\`](?:\\.{1,2}/)*${escaped}['"\`]`;
   const literalRe = new RegExp(lit, 'g');
   const ranges = callRanges(src);
-  if (ranges === null) return true;
 
   for (const m of src.matchAll(literalRe)) {
     const at = m.index;

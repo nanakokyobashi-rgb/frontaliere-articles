@@ -518,6 +518,61 @@ test('readsContentOf resta fail-open se una regex con virgolette confonde il lex
   assert.equal(readsContentOf('scripts/ci/loop-sync-manifest.json', text), true);
 });
 
+test('readsContentOf non perde la lettura dietro un literal regex con una quote', () => {
+  const rel = 'scripts/ci/loop-sync-manifest.json';
+  // Il caso reale: una quote dentro una character class apriva lo stato stringa
+  // e mascherava TUTTO il resto del file, quindi nessuna chiamata era piu'
+  // visibile e la lettura sotto spariva — il falso silenzio di #853.
+  assert.equal(
+    readsContentOf(
+      rel,
+      "assert.doesNotMatch(RUNTIME, /method:\\s*['\"](?:POST|PUT)['\"]/);\n"
+        + "const manifest = JSON.parse(readFileSync('scripts/ci/loop-sync-manifest.json', 'utf8'));",
+    ),
+    true,
+  );
+  // Anche il regex in posizione di operando dopo una parola chiave, dove la `/`
+  // non e' una divisione.
+  assert.equal(
+    readsContentOf(rel, "return /[(){}'\"`]/.test(s) && readFileSync('scripts/ci/loop-sync-manifest.json', 'utf8');"),
+    true,
+  );
+  // Il verso opposto regge: dopo il regex la citazione in commento resta tale.
+  assert.equal(
+    readsContentOf(rel, "const re = /['\"]/g;\n// vedi `scripts/ci/loop-sync-manifest.json`"),
+    false,
+  );
+  // Una divisione non e' un regex: `a / b` non deve inghiottire la riga dopo.
+  assert.equal(
+    readsContentOf(rel, "const ratio = a / b;\nconst M = 'scripts/ci/loop-sync-manifest.json';\nassert.ok(list.includes(M));"),
+    false,
+  );
+});
+
+test('readsContentOf vede la lettura interpolata in un template', () => {
+  const rel = 'scripts/ci/loop-sync-manifest.json';
+  assert.equal(
+    readsContentOf(rel, "const msg = `manifest: ${readFileSync('scripts/ci/loop-sync-manifest.json', 'utf8')}`;"),
+    true,
+  );
+  // Un template annidato dentro l'interpolazione non lascia il lexer aperto:
+  // se lo lasciasse, il fail-open direbbe «legge» anche a una citazione.
+  assert.equal(
+    readsContentOf(rel, "const msg = `a ${b ? `x${c}` : ''} b`;\nconst M = 'scripts/ci/loop-sync-manifest.json';\nassert.ok(list.includes(M));"),
+    false,
+  );
+});
+
+test('readsContentOf va fail-open quando il lexer non chiude un literal', () => {
+  const rel = 'scripts/ci/loop-sync-manifest.json';
+  // Sorgente troncata a meta' literal: l'analisi delle chiamate non vale
+  // niente, e «non lo so» resta «legge».
+  assert.equal(
+    readsContentOf(rel, "const broken = 'apertura mai chiusa\nlist.includes('scripts/ci/loop-sync-manifest.json')"),
+    true,
+  );
+});
+
 test('l\u2019eccezione e\u2019 il solo manifest, e solo da nominato: gli altri descrittori restano accoppiamenti', () => {
   // L'asimmetria fra i due versi, resa un test perché è l'errore facile:
   // riusare `SET_DESCRIPTORS` anche qui rimetterebbe il falso silenzio di #853
