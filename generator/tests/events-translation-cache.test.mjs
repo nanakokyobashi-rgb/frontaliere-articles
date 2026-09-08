@@ -82,6 +82,26 @@ test('senza discriminante stabile traduce ma non persiste una chiave condivisa',
   assert.deepEqual(cache, {});
 });
 
+test('non usa sourceKey come identità di eventi distinti', async () => {
+  let calls = 0;
+  const cache = {};
+  const events = [
+    { sourceKey: 'guidle', titleByLocale: { it: SAME_TITLE } },
+    { sourceKey: 'guidle', titleByLocale: { it: SAME_TITLE } },
+  ];
+
+  const out = await enrichEventsWithLocaleFallbackTranslations(events, cache, {
+    locales: ['it', 'en'],
+    delayMs: 0,
+    translateFn: async () => `traduzione-${++calls}`,
+  });
+
+  assert.equal(calls, 2, 'sourceKey identifica la sorgente, non il singolo evento');
+  assert.equal(out[0].titleByLocale.en, 'traduzione-1');
+  assert.equal(out[1].titleByLocale.en, 'traduzione-2');
+  assert.deepEqual(cache, {});
+});
+
 test('memoizza un passthrough esplicito senza pubblicare la sorgente nel target', async () => {
   const cache = {};
   const out = await enrichEventsWithLocaleFallbackTranslations(

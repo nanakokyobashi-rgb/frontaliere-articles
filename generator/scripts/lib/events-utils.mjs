@@ -1085,7 +1085,6 @@ function eventTranslationDiscriminator(event) {
     ['id', event?.id],
     ['stableId', event?.stableId],
     ['url', event?.url],
-    ['sourceKey', event?.sourceKey],
   ];
   for (const [label, value] of candidates) {
     if (typeof value === 'string' && value.trim()) return `${label}:${value.trim()}`;
