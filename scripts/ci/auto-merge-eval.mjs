@@ -368,7 +368,7 @@ function evaluateDriftFallback() {
   return true;
 }
 
-function main() {
+async function main() {
   if (!REPO) fail('GITHUB_REPOSITORY mancante — skip.');
   if (!PR || !/^\d+$/.test(PR)) fail(`PR number mancante/invalido ('${PR}') — skip.`);
   console.log(`auto-merge-eval PR #${PR} repo=${REPO}`);
@@ -429,7 +429,7 @@ function main() {
   let outsideOnlyApproved = false;
   if (hasRedflag) {
     try {
-      const scope = classifyAndMintReview(body, {
+      const scope = await classifyAndMintReview(body, {
         repo: REPO,
         pr: PR,
         prUrl: `https://github.com/${REPO}/pull/${PR}`,
@@ -755,5 +755,8 @@ function main() {
 
 // Esegui solo come CLI (non quando importato dai test → evita gh/process.exit).
 if (process.argv[1]?.endsWith('auto-merge-eval.mjs')) {
-  main();
+  main().catch((error) => {
+    console.error(`auto-merge-eval: errore non gestito (${String(error).slice(0, 240)}).`);
+    process.exitCode = 1;
+  });
 }

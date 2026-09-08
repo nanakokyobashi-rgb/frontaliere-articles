@@ -13,6 +13,7 @@
 import { execFileSync } from 'node:child_process';
 import { readFileSync } from 'node:fs';
 import { REDFLAG_IMPORTANT_RE } from './lib/constants.mjs';
+import { createGithubIssue } from '../lib/github-issue-creator.mjs';
 
 const FOLLOWUP_MARKER = 'OUT_OF_SCOPE_REVIEW_FOLLOWUP';
 const FILE_CITATION_RE = /(?:^|[\s([{"'`])((?:\.\.?\/)?(?:[A-Za-z0-9_.-]+\/)*[A-Za-z0-9_.-]+\.(?:cjs|css|html|js|json|md|mjs|sh|ts|tsx|txt|toml|yaml|yml|jsx))(?:[:#]L?\d+(?:[-–]\d+)?)?/giu;
@@ -68,12 +69,12 @@ function importantFindingLine(line) {
 }
 
 function findingsSection(body) {
-  const text = String(body || '');
-  const start = text.search(/^##\s+Findings\b/im);
-  if (start < 0) return '';
-  const rest = text.slice(start);
-  const end = rest.search(/^##\s+(?:Adversarial check|LGTM|Summary)\b/im);
-  return end < 0 ? rest : rest.slice(0, end);
+  // REVIEW.md permits a blocking verdict in both `## Findings` and
+  // `## Adversarial check`. Truncating at the latter silently declassifies a
+  // real in-diff Important finding. Parse the whole review body; the marker
+  // predicate below still excludes `Important: 0` and quoted lower-severity
+  // prose through the shared positional regex.
+  return String(body || '');
 }
 
 /** Ritorna i blocchi che sono davvero verdetti Important, non il conteggio. */
@@ -96,11 +97,11 @@ export function importantFindings(body) {
 }
 
 function suffixMatches(candidate, wanted) {
-  return candidate === wanted || candidate.endsWith(`/${wanted}`) || wanted.endsWith(`/${candidate}`);
+  return candidate === wanted || candidate.endsWith(`/${wanted}`);
 }
 
 /** Risolve un riferimento reviewer sul path completo o lo marca ambiguo. */
-export function resolveCitedPath(citation, repositoryPaths) {
+export function resolveCitedPath(citation, repositoryPaths, { treeAvailable = repositoryPaths !== null && repositoryPaths !== undefined } = {}) {
   const wanted = normalizePath(citation.path);
   const paths = [...new Set((repositoryPaths || []).map(normalizePath).filter(Boolean))];
   const candidates = paths.filter((path) => {
@@ -113,16 +114,17 @@ export function resolveCitedPath(citation, repositoryPaths) {
   if (candidates.length > 1) {
     return { status: 'non-risolubile', path: null, candidates };
   }
-  // Un path con slash e' gia' un riferimento non ambiguo. Se il tree API non e'
-  // disponibile, lo si puo' comunque confrontare con il diff normalizzato.
-  if (wanted.includes('/')) {
+  // Un path con slash puo' essere inferito solo quando il tree API non e'
+  // disponibile. Se il tree e' disponibile e il path non c'e', il reviewer ha
+  // citato un file inesistente/rinominato: resta non risolvibile e bloccante.
+  if (wanted.includes('/') && !treeAvailable) {
     return { status: 'resolved', path: wanted, candidates: [], inferred: true };
   }
   return { status: 'non-risolubile', path: null, candidates: [] };
 }
 
 function changedContains(changedFiles, resolvedPath) {
-  return changedFiles.some((file) => suffixMatches(file, resolvedPath));
+  return changedFiles.some((file) => file === resolvedPath || file.endsWith(`/${resolvedPath}`));
 }
 
 /**
@@ -132,7 +134,8 @@ function changedContains(changedFiles, resolvedPath) {
  */
 export function classifyImportantFindings(body, changedFiles, repositoryPaths = null) {
   const changed = [...new Set((changedFiles || []).map(normalizePath).filter(Boolean))];
-  const knownPaths = repositoryPaths === null ? changed : repositoryPaths;
+  const treeAvailable = repositoryPaths !== null && repositoryPaths !== undefined;
+  const knownPaths = treeAvailable ? repositoryPaths : changed;
   const outside = [];
   const inScope = [];
   const unresolved = [];
@@ -144,7 +147,7 @@ export function classifyImportantFindings(body, changedFiles, repositoryPaths = 
     }
     const resolved = finding.citations.map((citation) => ({
       citation,
-      result: resolveCitedPath(citation, knownPaths),
+      result: resolveCitedPath(citation, knownPaths, { treeAvailable }),
     }));
     const bad = resolved.find((item) => item.result.status !== 'resolved');
     if (bad) {
@@ -231,14 +234,15 @@ function suggestedAction(finding) {
   const path = finding.resolvedFiles[0];
   const citation = finding.citations[0];
   const token = distinctiveToken(finding.text || finding.line);
-  const anchor = `${path}:${citation.line || 1}`;
+  const anchor = citation.line ? `${path} alla riga ${citation.line}` : path;
   if (token) {
-    return `Applicare la correzione indicata dal reviewer in \`${anchor}\` e verificare \`${token}\`.`;
+    return `Applicare la correzione indicata dal reviewer in ${anchor} e verificare \`${token}\`.`;
   }
-  // L'ancora path:riga conserva un punto di accettazione falsificabile anche
-  // quando il reviewer non ha citato un simbolo: non inventiamo un nome di
-  // funzione che potrebbe non esistere nel file.
-  return `Applicare la correzione indicata dal reviewer in \`${anchor}\` e verificare la riga citata.`;
+  // Il path e la riga restano contesto umano, non un token di accettazione:
+  // `path:12` sarebbe sempre "distintivo" per il matcher dei follow-up ma non
+  // puo' mai comparire nel contenuto del file. Senza un token di codice reale
+  // l'item resta leggibile ma non falsificabile, quindi non viene auto-chiuso.
+  return `Applicare la correzione indicata dal reviewer in ${anchor} e verificare la riga citata.`;
 }
 
 export function followupIssueBody({ repo, pr, prUrl, findings }) {
@@ -270,47 +274,36 @@ export function followupIssueBody({ repo, pr, prUrl, findings }) {
   ].join('\n');
 }
 
-function followupTitle(pr, findings) {
-  const firstPath = findings[0]?.resolvedFiles?.[0] || 'file non specificato';
-  return `follow-up(#${pr}): finding fuori dal diff — ${firstPath}`.slice(0, 120);
-}
-
-function findExistingFollowup(repo, pr) {
-  try {
-    const issues = gh([
-      'issue', 'list', '--repo', repo, '--state', 'all', '--label', 'follow-up',
-      '--search', `follow-up(#${pr})`, '--limit', '100', '--json', 'number,title,body',
-    ]);
-    if (!Array.isArray(issues)) return null;
-    const titleRe = new RegExp(`^follow-up\\(#${pr}\\):`);
-    return issues.find((issue) =>
-      String(issue.body || '').includes(`${FOLLOWUP_MARKER}: ${repo}#${pr}`) ||
-      titleRe.test(String(issue.title || '')),
-    ) || null;
-  } catch (error) {
-    throw new Error(`lista follow-up non leggibile: ${String(error).slice(0, 180)}`);
+async function mintFollowup({ repo, pr, body, findings }) {
+  // Usa il writer condiviso: cerca prima gli aperti, riapre una gemella chiusa
+  // nella finestra prevista e aggiunge il nuovo item come commento invece di
+  // sovrascrivere il corpo. Il titolo e' stabile per PR, non per il primo file,
+  // cosi' un giro successivo resta sulla stessa issue anche se cambia il path.
+  const result = await createGithubIssue({
+    title: `follow-up(#${pr}): finding fuori dal diff`,
+    description: body,
+    priority: 2,
+    labels: ['follow-up'],
+    // Una follow-up chiusa e poi riaperta e' ancora il thread della stessa PR;
+    // il writer applica il proprio percorso conservativo di riapertura.
+    reopenWithinHours: 30 * 24,
+  });
+  if (!result || result.persisted !== true) {
+    throw new Error(`writer follow-up non ha confermato la persistenza per PR #${pr}`);
   }
-}
-
-function mintFollowup({ repo, pr, body, findings }) {
-  const existing = findExistingFollowup(repo, pr);
-  const title = followupTitle(pr, findings);
-  if (existing) {
-    gh(['issue', 'edit', String(existing.number), '--repo', repo, '--body', body], { json: false });
-    return { number: existing.number, updated: true };
-  }
-  const url = gh([
-    'issue', 'create', '--repo', repo, '--title', title, '--body', body, '--label', 'follow-up',
-  ], { json: false }).trim();
-  if (!url) throw new Error('gh issue create non ha restituito un URL');
-  return { url, updated: false };
+  return {
+    number: result.number,
+    url: result.url,
+    reopened: result.reopened === true,
+    updated: result.reopened !== true && result.number != null,
+  };
 }
 
 /**
  * Classifica la review sulla PR reale e, solo se tutti i finding sono fuori
  * scope, conia/aggiorna la singola issue della PR.
  */
-export function classifyAndMintReview(body, { repo, pr, prUrl, mutate = true } = {}) {
+export async function classifyAndMintReview(body, { repo, pr, prUrl, mutate = true } = {}) {
   if (!repo || !pr) throw new Error('repo e pr sono obbligatori');
   const changedFiles = fetchChangedFiles(repo, pr);
   const repositoryPaths = fetchRepositoryPaths(repo, pr);
@@ -319,7 +312,7 @@ export function classifyAndMintReview(body, { repo, pr, prUrl, mutate = true } =
     return { ...result, minted: false, changedFiles };
   }
   const issueBody = followupIssueBody({ repo, pr, prUrl, findings: result.outside });
-  const followup = mintFollowup({ repo, pr, body: issueBody, findings: result.outside });
+  const followup = await mintFollowup({ repo, pr, body: issueBody, findings: result.outside });
   return { ...result, minted: true, followup, changedFiles };
 }
 
@@ -330,7 +323,7 @@ function readReviewBody() {
 
 if (process.argv[1] && process.argv[1].endsWith('review-scope.mjs')) {
   try {
-    const result = classifyAndMintReview(readReviewBody(), {
+    const result = await classifyAndMintReview(readReviewBody(), {
       repo: process.env.GITHUB_REPOSITORY || process.env.REPO,
       pr: process.env.PR_NUMBER,
       prUrl: process.env.PR_URL,

@@ -182,7 +182,7 @@ function reviewAppliesToHead(last) {
   return Boolean(headFp && revFp && headFp === revFp);
 }
 
-function main() {
+async function main() {
   if (!REPO || !PR || !HEAD_SHA) {
     console.log('::error::review-gate: GITHUB_REPOSITORY, PR_NUMBER e HEAD_SHA sono obbligatori.');
     process.exit(1);
@@ -196,7 +196,7 @@ function main() {
     let scope = null;
     if (applies && hasRedflag) {
       try {
-        scope = classifyAndMintReview(body, {
+        scope = await classifyAndMintReview(body, {
           repo: REPO,
           pr: PR,
           prUrl: `https://github.com/${REPO}/pull/${PR}`,
@@ -262,4 +262,7 @@ function main() {
   process.exit(1);
 }
 
-main();
+main().catch((error) => {
+  console.error(`review-gate: errore non gestito (${String(error).slice(0, 240)}).`);
+  process.exit(1);
+});

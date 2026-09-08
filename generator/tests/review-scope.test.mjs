@@ -6,6 +6,7 @@ import {
   importantFindings,
   normalizePath,
 } from '../../scripts/ci/review-scope.mjs';
+import { citedTokens, hasFalsifiableAcceptance } from '../../scripts/ci/followup-resolution-match.mjs';
 
 test('legge il verdetto: Important: 0 non è un finding', () => {
   const body = [
@@ -14,6 +15,21 @@ test('legge il verdetto: Important: 0 non è un finding', () => {
     '`scripts/ci/review-gate.mjs:10`: 🔴 Important: manca il controllo.',
   ].join('\n');
   assert.equal(importantFindings(body).length, 1);
+});
+
+test('non tronca il verdetto nell\'Adversarial check', () => {
+  const body = [
+    '## Findings (Important: 0, Nit: 0)',
+    '## Adversarial check',
+    '- `scripts/lib/shared.mjs:12`: 🔴 Important: il contratto condiviso è rotto.',
+  ].join('\n');
+  const result = classifyImportantFindings(
+    body,
+    ['engine/other.mjs'],
+    ['scripts/lib/shared.mjs', 'engine/other.mjs'],
+  );
+  assert.equal(result.findings.length, 1);
+  assert.equal(result.outsideOnly, true);
 });
 
 test('normalizza alias diff e risolve un path citato in forma abbreviata', () => {
@@ -49,6 +65,18 @@ test('basename ambiguo resta non risolvibile e quindi bloccante', () => {
   assert.equal(result.blocking, true);
 });
 
+test('un path completo assente dal tree resta non risolvibile e bloccante', () => {
+  const result = classifyImportantFindings(
+    '`scripts/ci/renamed-away.mjs:12`: 🔴 Important: il file citato non esiste.',
+    ['engine/other.mjs'],
+    ['engine/other.mjs'],
+  );
+  assert.equal(result.outsideOnly, false);
+  assert.equal(result.unresolved.length, 1);
+  assert.equal(result.unresolved[0].reason, 'file non risolto');
+  assert.equal(result.blocking, true);
+});
+
 test('il follow-up aggrega tutti i finding della PR in una issue tracciabile', () => {
   const body = followupIssueBody({
     repo: 'nanakokyobashi-rgb/frontaliere-articles',
@@ -63,4 +91,19 @@ test('il follow-up aggrega tutti i finding della PR in una issue tracciabile', (
   assert.match(body, /### 1\./);
   assert.match(body, /- Suggested action:.*`detectLanguage\(\)`/);
   assert.match(body, /- Suggested action:.*$/m);
+});
+
+test('un path:riga non viene spacciato per acceptance falsificabile', () => {
+  const body = followupIssueBody({
+    repo: 'nanakokyobashi-rgb/frontaliere-articles',
+    pr: 902,
+    findings: [{
+      resolvedFiles: ['scripts/lib/shared.mjs'],
+      citations: [{ line: 12 }],
+      line: '🔴 Important: il controllo condiviso manca.',
+    }],
+  });
+  const action = body.slice(body.indexOf('- Suggested action:'));
+  assert.deepEqual(citedTokens(action), []);
+  assert.equal(hasFalsifiableAcceptance(action), false);
 });

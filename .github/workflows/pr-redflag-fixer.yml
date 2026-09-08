@@ -61,7 +61,7 @@ jobs:
     # `REVIEWER_BOT_LOGIN_RE`/`_JQ` in `scripts/ci/lib/constants.mjs`, e per i
     # due `--jq` di `tests.yml` (skip-guard `## LGTM` e base incrementale).
     if: |
-      (github.event.review.user.type == 'Bot' ||
+      (github.event.pull_request.user.type == 'Bot' ||
        startsWith(github.event.pull_request.head.ref, 'fix/')) &&
       (startsWith(github.event.review.user.login, 'claude') ||
        startsWith(github.event.review.user.login, 'frontaliere-automation')) &&
