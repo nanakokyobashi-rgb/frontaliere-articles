@@ -1082,7 +1082,9 @@ function eventTranslationDiscriminator(event, index) {
   const sourceKey = String(event?.sourceKey ?? '').trim();
   const url = String(event?.url ?? event?.sourceUrl ?? '').trim();
   if (sourceKey || url) return `source:${sourceKey}|url:${url}`;
-  return `batch-index:${index}`;
+  // A batch position is not an identity: ordering changes between crawler
+  // runs and would let a later event inherit another event's memo.
+  return null;
 }
 
 function eventTranslationCacheKey({ eventId, fieldType, sourceLocale, normalizedSource }) {
@@ -1119,13 +1121,15 @@ async function fillLocaleGaps(byLocale, cache, { eventId, fieldType, locales, de
   const updated = { ...clean };
   for (const target of needing) {
     if (target === sourceLocale) continue;
-    const cacheKey = eventTranslationCacheKey({ eventId, fieldType, sourceLocale, normalizedSource });
-    const entry = cache[cacheKey] || {};
+    const cacheKey = eventId
+      ? eventTranslationCacheKey({ eventId, fieldType, sourceLocale, normalizedSource })
+      : null;
+    const entry = cacheKey ? (cache[cacheKey] || {}) : {};
     const legacyCacheKey = legacyEventTranslationCacheKey({ fieldType, sourceLocale, normalizedSource });
     const legacyEntry = cache[legacyCacheKey];
     const targetAlreadyCarriesSource = hasUsableContentText(clean?.[target])
       && normalizeText(clean[target]).replace(/\s+/g, ' ') === normalizedSource;
-    if (Object.prototype.hasOwnProperty.call(entry, target)) {
+    if (cacheKey && Object.prototype.hasOwnProperty.call(entry, target)) {
       const memo = entry[target];
       if (memo === null) continue; // stable passthrough memo, no network retry
       if (!targetAlreadyCarriesSource && hasUsableContentText(memo)) {
@@ -1147,12 +1151,12 @@ async function fillLocaleGaps(byLocale, cache, { eventId, fieldType, locales, de
       fieldType,
     });
     if (hasUsableContentText(translated)) {
-      cache[cacheKey] = { ...entry, [target]: translated };
+      if (cacheKey) cache[cacheKey] = { ...entry, [target]: translated };
       // Old caches were keyed only by source text. Never read those values:
       // doing so would merge distinct events with the same title. Clean up a
       // stale marker there as a one-way migration, though, so existing cache
-      // files do not keep poisoned values forever and older callers/tests keep
-      // seeing the marker replaced. New reads remain event-scoped above.
+      // files do not keep poisoned values forever. New reads remain
+      // event-scoped above.
       if (
         legacyEntry
         && typeof legacyEntry === 'object'
@@ -1167,6 +1171,7 @@ async function fillLocaleGaps(byLocale, cache, { eventId, fieldType, locales, de
       }
     } else if (
       passthrough
+      && cacheKey
       && !hasUsableContentText(entry?.[target])
       && wordCount(sourceText) <= MAX_PASSTHROUGH_MEMO_WORDS
     ) {

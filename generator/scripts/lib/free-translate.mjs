@@ -1359,8 +1359,13 @@ export async function freeTranslate({ text, sourceLang, targetLang, fieldType = 
   // Opus-MT's IT-target quality is weaker, and IT is the primary indexed locale,
   // so for IT it stays a post-MyMemory fallback (Tier 4a' below). Opt-in via
   // MT_LOCAL_OPUSMT; no-op (returns '') when disabled or the model can't load.
+  const translateLocalOpusWithOutcome = async () => {
+    const result = await translateWithLocalOpusMt(clean, sourceLang, targetLang);
+    if (!result) noteTranslationOutcome(_outcome, 'incomplete');
+    return result;
+  };
   if (targetLang !== 'it' && localOpusMtEnabled()) {
-    const t3a = await tryTier('localOpusMt', () => translateWithLocalOpusMt(clean, sourceLang, targetLang));
+    const t3a = await tryTier('localOpusMt', translateLocalOpusWithOutcome);
     if (t3a) return finalize(t3a);
   }
 
@@ -1425,7 +1430,7 @@ export async function freeTranslate({ text, sourceLang, targetLang, fieldType = 
   // mirroring the self-hosted LT IT gate). Pivots through English for it↔de/fr.
   // Opt-in via MT_LOCAL_OPUSMT; no-op when disabled or the model can't load.
   if (targetLang === 'it' && localOpusMtEnabled()) {
-    const t3aFallback = await tryTier('localOpusMt', () => translateWithLocalOpusMt(clean, sourceLang, targetLang));
+    const t3aFallback = await tryTier('localOpusMt', translateLocalOpusWithOutcome);
     if (t3aFallback) return finalize(t3aFallback);
   }
 

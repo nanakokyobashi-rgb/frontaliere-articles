@@ -40,6 +40,25 @@ test('separa nel keyspace due eventi distinti con lo stesso titolo e riusa ciasc
   assert.equal(second[1].titleByLocale.en, 'traduzione-2');
 });
 
+test('non usa la posizione del batch come identità persistente quando manca un discriminante stabile', async () => {
+  let calls = 0;
+  const cache = {};
+  const translateFn = async () => `traduzione-${++calls}`;
+  const events = [
+    { titleByLocale: { it: SAME_TITLE } },
+    { titleByLocale: { it: SAME_TITLE } },
+  ];
+
+  await enrichEventsWithLocaleFallbackTranslations(events, cache, {
+    locales: ['it', 'en'],
+    delayMs: 0,
+    translateFn,
+  });
+
+  assert.equal(calls, 2);
+  assert.deepEqual(cache, {});
+});
+
 test('un marker nella vecchia cache non riunisce eventi omonimi durante la migrazione', async () => {
   let calls = 0;
   const cache = { 'title::it::locarno film festival': { en: 'Null' } };
