@@ -20,7 +20,11 @@ import path from 'node:path';
 import { truncateSlugAtWordBoundary } from './slug-truncate.mjs';
 import CANTON_URL_SLUGS from '../../data/canton-url-slugs.json' with { type: 'json' };
 import { MUNICIPALITIES } from '../../data/municipalities.ts';
-import { asTranslationResult, freeTranslateWithRetryDetailed } from './free-translate.mjs';
+import {
+  asTranslationResult,
+  freeTranslateWithRetryDetailed,
+  getTranslationCascadeConfigurationKey,
+} from './free-translate.mjs';
 import { hasUsableContentText, hasUsableTranslatedText } from './body2-payload-verdict.mjs';
 
 export { hasUsableContentText };
@@ -1094,9 +1098,15 @@ function eventTranslationCacheKey({ fieldType, sourceLocale, normalizedSource })
   return JSON.stringify([fieldType, sourceLocale, normalizedSource]);
 }
 
-function eventTranslationNegativeCacheKey({ eventId, fieldType, sourceLocale, normalizedSource }) {
+function eventTranslationNegativeCacheKey({
+  eventId,
+  fieldType,
+  sourceLocale,
+  normalizedSource,
+  cascadeConfigurationKey,
+}) {
   if (!eventId) return null;
-  return JSON.stringify([fieldType, eventId, sourceLocale, normalizedSource]);
+  return JSON.stringify([fieldType, eventId, sourceLocale, normalizedSource, cascadeConfigurationKey]);
 }
 
 function wordCount(text) {
@@ -1121,7 +1131,13 @@ async function fillLocaleGaps(byLocale, cache, { eventId, fieldType, locales, de
   const normalizedSource = normalizeText(sourceText).replace(/\s+/g, ' ');
   const updated = { ...clean };
   const cacheKey = eventTranslationCacheKey({ fieldType, sourceLocale, normalizedSource });
-  const negativeCacheKey = eventTranslationNegativeCacheKey({ eventId, fieldType, sourceLocale, normalizedSource });
+  const negativeCacheKey = eventTranslationNegativeCacheKey({
+    eventId,
+    fieldType,
+    sourceLocale,
+    normalizedSource,
+    cascadeConfigurationKey: getTranslationCascadeConfigurationKey(),
+  });
   const sharedEntry = cache[cacheKey] || {};
   const negativeEntry = negativeCacheKey ? (cache[negativeCacheKey] || {}) : {};
   for (const target of needing) {

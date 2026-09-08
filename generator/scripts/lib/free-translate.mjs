@@ -144,6 +144,25 @@ const LIBRETRANSLATE_TIMEOUT_MS = Number.isFinite(_ltTimeoutRaw) && _ltTimeoutRa
 
 const DEEPL_LANG_MAP = { it: 'IT', en: 'EN', de: 'DE', fr: 'FR' };
 
+/**
+ * Configuration fingerprint for durable event-cache decisions.
+ *
+ * It deliberately exposes only capability booleans, never credentials. A
+ * negative passthrough memo made while optional tiers are unavailable must not
+ * suppress a later retry after those tiers are configured again.
+ */
+export function getTranslationCascadeConfigurationKey() {
+  return JSON.stringify({
+    version: 1,
+    deepl: DEEPL_API_KEYS.length > 0,
+    azure: AZURE_TRANSLATOR_KEYS.length > 0,
+    googleCloud: _gcOAuthAvailable,
+    localOpusMt: localOpusMtEnabled(),
+    libreTranslateSelfHosted: Boolean(LIBRETRANSLATE_SELF_HOSTED),
+    huggingFace: Boolean(HF_TOKEN),
+  });
+}
+
 // ── Instance Health Tracking ────────────────────────────────────────────────
 // Track which instances have failed recently to skip them on subsequent calls.
 // An instance is only marked unhealthy after HEALTH_FAILURE_THRESHOLD consecutive

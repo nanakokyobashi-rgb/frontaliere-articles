@@ -2,6 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 
 import { enrichEventsWithLocaleFallbackTranslations } from '../scripts/lib/events-utils.mjs';
+import { getTranslationCascadeConfigurationKey } from '../scripts/lib/free-translate.mjs';
 
 const SAME_TITLE = 'Locarno Film Festival';
 
@@ -113,9 +114,10 @@ test('mantiene il memo negativo per evento senza perdere il dedup positivo', asy
 
   assert.deepEqual(out.map((event) => event.titleByLocale), [{ it: SAME_TITLE }, { it: SAME_TITLE }]);
   assert.equal(calls, 2, 'un passthrough negativo descrive il singolo evento');
+  const cascadeKey = getTranslationCascadeConfigurationKey();
   assert.deepEqual(Object.keys(cache).map((key) => JSON.parse(key)).sort((a, b) => a[1].localeCompare(b[1])), [
-    ['title', 'url:https://events.test/one', 'it', 'locarno film festival'],
-    ['title', 'url:https://events.test/two', 'it', 'locarno film festival'],
+    ['title', 'url:https://events.test/one', 'it', 'locarno film festival', cascadeKey],
+    ['title', 'url:https://events.test/two', 'it', 'locarno film festival', cascadeKey],
   ]);
 });
 
@@ -282,5 +284,12 @@ test('non pubblica il testo sorgente quando il translator segnala passthrough es
   );
 
   assert.deepEqual(out[0].titleByLocale, { it: SAME_TITLE });
-  assert.equal(cache['["title","id:guidle:explicit-source","it","locarno film festival"]'].en, null);
+  const key = JSON.stringify([
+    'title',
+    'id:guidle:explicit-source',
+    'it',
+    'locarno film festival',
+    getTranslationCascadeConfigurationKey(),
+  ]);
+  assert.equal(cache[key].en, null);
 });
