@@ -3133,8 +3133,8 @@
       "sitePath": ".github/corpus-workflows/translate-pending.yml",
       "mode": "identical",
       "baseline": {
-        "site": "f94a35b5828f0988",
-        "corpus": "f94a35b5828f0988",
+        "site": "0f754399571d7532",
+        "corpus": "0f754399571d7532",
         "alignedAt": "2026-09-08"
       }
     },
