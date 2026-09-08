@@ -11611,6 +11611,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.s30-guasto-tecnico-cadenazzo-luino.title': 'S30 blocked between Cadenazzo and Luino due to technical failure',
     'blog.article.s30-guasto-tecnico-cadenazzo-luino.excerpt': 'Railway line interrupted until Wednesday 9 September 2026 at 4:00 am. Replacement buses available but with guaranteed delays and no connections.',
     'blog.article.s30-guasto-tecnico-cadenazzo-luino.imageAlt': 'Bellinzona railway station with SBB trains on tracks during daylight hours',
+    'blog.article.libro-boom-frontalieri-svizzera.title': 'The book about the border worker boom in Switzerland',
+    'blog.article.libro-boom-frontalieri-svizzera.excerpt': 'New academic book explains how Switzerland has 400,000 frontier workers. From 84,000 in 1978 to the boom after 2000. Focus on wages, taxation, transport.',
+    'blog.article.libro-boom-frontalieri-svizzera.imageAlt': 'Ticino region landscape at the Swiss-Italian border, symbolizing the cross-border labor market.',
 };
 
 export default blogMetaEn;
