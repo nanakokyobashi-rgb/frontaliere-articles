@@ -11,7 +11,13 @@
  */
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
+import { createHash } from 'node:crypto';
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { baselineHistoryVerdict } from '../../scripts/ci/verify-manifest-baseline-history.mjs';
+
+const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 
 const entry = (path, corpus, extra = {}) => ({
   path,
@@ -91,4 +97,18 @@ test('la verifica e\' manifest-wide: una voce sana non copre una malata', () => 
 test('blobsByPath accetta anche array semplici (forma JSON del report)', () => {
   const v = baselineHistoryVerdict({ files: [entry('a.mjs', 'aaaa')], blobsByPath: { 'a.mjs': ['aaaa'] } });
   assert.equal(v.ok, true);
+});
+
+test('#1060: la baseline adapted di tests.yml è quella della riconciliazione attestata', () => {
+  const manifest = JSON.parse(fs.readFileSync(path.join(ROOT, 'scripts/ci/loop-sync-manifest.json'), 'utf8'));
+  const tracked = manifest.files.find((f) => f.path === '.github/workflows/tests.yml');
+  assert.ok(tracked);
+  assert.equal(tracked.mode, 'adapted');
+  const currentCorpus = createHash('sha256')
+    .update(fs.readFileSync(path.join(ROOT, '.github/workflows/tests.yml')))
+    .digest('hex').slice(0, 16);
+  assert.equal(tracked.baseline.corpus, currentCorpus);
+  assert.equal(tracked.baseline.site, '5cafe12c0b7d3f4e');
+  assert.equal(tracked.baseline.alignedAt, '2026-09-08');
+  assert.match(tracked.reason, /RICONCILIATO 2026-09-08 \(#1060\)/);
 });

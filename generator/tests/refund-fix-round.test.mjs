@@ -21,6 +21,7 @@ import { fileURLToPath } from 'node:url';
 
 import {
   formatRefundComment,
+  formatRefundAttemptComment,
   pickRoundCommentId,
   refundMarkerName,
   roundMarkerRe,
@@ -46,6 +47,14 @@ test('pickRoundCommentId prende il marker del round richiesto', () => {
 test('pickRoundCommentId non confonde i round del gemello', () => {
   const comments = [{ id: 9, body: '<!-- REDFLAG_FIX_ROUND: 1 -->' }];
   assert.equal(pickRoundCommentId(comments, 'REDCHECK_FIX_ROUND', 1), null);
+});
+
+test('pickRoundCommentId ordina per timestamp, non per ordine della pagina API', () => {
+  const comments = [
+    { id: 100, created_at: '2026-09-08T12:00:00Z', body: '<!-- REDCHECK_FIX_ROUND: 1 --> newest' },
+    { id: 99, created_at: '2026-09-08T11:00:00Z', body: '<!-- REDCHECK_FIX_ROUND: 1 --> older' },
+  ];
+  assert.equal(pickRoundCommentId(comments, 'REDCHECK_FIX_ROUND', 1), 100);
 });
 
 test('pickRoundCommentId: nessun marker, input degeneri → null (mai una delete alla cieca)', () => {
@@ -111,16 +120,33 @@ test('senza resetsAt il beacon viene omesso, non scritto vuoto', () => {
   assert.ok(!/QUOTA_RESETS_AT/.test(body));
 });
 
+test('#984: execution_file vuoto usa solo il log verificabile della run', () => {
+  const src = fs.readFileSync(path.join(ROOT, 'scripts/ci/refund-fix-round.mjs'), 'utf-8');
+  assert.match(src, /function executionRaw\(\)/);
+  assert.match(src, /GITHUB_RUN_ID/);
+  assert.match(src, /'run', 'view'.*'--log-failed'/s);
+  assert.match(src, /Nessun execution file né log verificabile/);
+  assert.match(src, /shouldRefundRateLimitedRound\(raw\)/);
+});
+
 test('il rimborso posta l`handle PRIMA di cancellare il marker', () => {
   const src = fs.readFileSync(path.join(ROOT, 'scripts/ci/refund-fix-round.mjs'), 'utf-8');
-  const post = src.indexOf("gh(['pr', 'comment'");
-  const del = src.indexOf("'-X', 'DELETE'");
+  const post = src.indexOf("ghStatus(['pr', 'comment'");
+  const del = src.indexOf("ghStatus(['api', '-X', 'DELETE'");
   assert.ok(post > 0 && del > 0, 'post del commento e DELETE del marker devono esistere entrambi');
   // `gh()` inghiotte i fallimenti: se la DELETE riesce e il post no, il round e`
   // rimborsato e l'handle non esiste — marker sparito, classe B disarmata, PR
   // ferma col budget intero. L'ordine inverso fallisce verso lo stato ante-PR.
   assert.ok(post < del,
     'DELETE del marker prima del commento di rimborso: sul fallimento del post la PR resta senza handle');
+  assert.match(src, /formatRefundAttemptComment/);
+  assert.match(src, /api', '--paginate', '--slurp/,
+    'la ricerca del marker deve considerare tutte le pagine dei commenti');
+  assert.match(src, /DELETE del marker fallita/);
+  assert.match(src, /marker resta contato/);
+  assert.doesNotMatch(formatRefundAttemptComment({
+    round: 1, workflow: 'pr-fixer', resetsAt: null, rateLimitType: null, runUrl: '', marker: 'REDCHECK_FIX_ROUND',
+  }), /marker rimosso|rimborsato/);
 });
 
 for (const { file, marker } of FIXERS) {
@@ -140,6 +166,8 @@ for (const { file, marker } of FIXERS) {
       `${file} non passa MARKER=${marker} a refund-fix-round.mjs`);
     assert.ok(yaml.includes('node scripts/ci/refund-fix-round.mjs'),
       `${file} non invoca il rimborso: un 429 tornerebbe a consumare un round`);
+    assert.match(yaml, /QUOTA_BEACON_PEER_REPO: valerielinc-ops\/frontaliere-si-o-no/,
+      `${file} legge un beacon locale ma resta cieco al 429 del peer che condivide l'account`);
     assert.ok(/ROUND: \$\{\{ steps\.guard\.outputs\.round \}\}/.test(yaml),
       `${file} deve rimborsare il round che il guard ha appena postato`);
 
@@ -165,4 +193,6 @@ test('stale-pr-rescuer: la classe B riconosce anche l`handle di rimborso', () =>
     'per sempre, perche` refund-fix-round.mjs cancella proprio il marker che il rescuer legge');
   assert.ok(yaml.includes("*'<!-- REDFLAG_FIX_ROUND:'*"),
     'stale-pr-rescuer.yml non guarda piu` il marker di round della classe B');
+  assert.ok(yaml.includes("*'<!-- REDCHECK_FIX_REFUNDED:'*"),
+    'stale-pr-rescuer.yml non guarda l`handle del fixer REDCHECK');
 });

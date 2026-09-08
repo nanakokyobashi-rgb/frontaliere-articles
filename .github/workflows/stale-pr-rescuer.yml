@@ -201,6 +201,7 @@ jobs:
             case "$LAST_BODY" in *'## LGTM'*) LAST_LGTM=1 ;; *) LAST_LGTM=0 ;; esac
 
             REASON=""; RESCUE=""; CLASS=""
+            # shellcheck disable=SC2016 # the single-quoted PCRE is intentional
             if [ -n "$LAST_CID" ] && [ "$LAST_CID" != "$HEAD" ] && [ "$TESTS_CONCL" = "success" ] && [ "$LAST_LGTM" = "0" ]; then
               CLASS="D"
               # D — direzione 3 della #201. Sottoinsieme stretto di A: nessuna PR
@@ -300,7 +301,7 @@ jobs:
             # dei fixer), quindi ri-arma il rerun senza ri-armare l'anti-loop.
             if [ "$CLASS" = "B" ]; then
               case "$POSTED_BODIES" in
-                *'<!-- REDFLAG_FIX_ROUND:'*|*'<!-- REDFLAG_FIX_REFUNDED:'*)
+                *'<!-- REDFLAG_FIX_ROUND:'*|*'<!-- REDFLAG_FIX_REFUNDED:'*|*'<!-- REDCHECK_FIX_REFUNDED:'*)
                   case "$POSTED_BODIES" in
                     *"$DISPATCH_MARKER"*) ;; # già dispatchato su questo head
                     *) NEEDS_DISPATCH=true ;;

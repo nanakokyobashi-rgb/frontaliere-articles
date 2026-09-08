@@ -27,6 +27,8 @@ import {
   strandedTwinPaths,
   descentBlock,
   redeliveryDecision,
+  bodyCitesOrigin,
+  selectDeliveredIssue,
   SITE_ABSENT_MODES,
   SITE_REPO,
 } from '../../scripts/ci/handoff-to-site.mjs';
@@ -602,6 +604,34 @@ test('#972: manifest illeggibile → nessun blocco alla chiusura, cioè il compo
 
 const DELIVERED = 'https://github.com/valerielinc-ops/frontaliere-si-o-no/issues/4242';
 
+test('#1184: il dedup distingue `/issues/4` da `/issues/42` e conserva la entry esatta', () => {
+  const origin = 'https://github.com/nanakokyobashi-rgb/frontaliere-articles/issues/4';
+  assert.equal(bodyCitesOrigin(`${origin} è stata consegnata`, origin), true);
+  assert.equal(bodyCitesOrigin(`${origin}2 è stata consegnata`, origin), false);
+  const exact = { number: 7, url: DELIVERED, body: `Origine: ${origin}` };
+  assert.equal(selectDeliveredIssue([{ number: 42, url: 'wrong', body: `${origin}2` }, exact], origin), exact);
+  assert.equal(selectDeliveredIssue([{ number: 42, url: 'wrong', body: `${origin}2` }], origin), null);
+});
+
+test('#1184: la consegna `not planned` non abilita il corto-circuito', () => {
+  const decision = handoffDecision({ verdict: 'blocked-admin-settings', body: MIRROR_BODY });
+  const r = redeliveryDecision({
+    decision,
+    deliveredIssue: { url: DELIVERED, state: 'CLOSED', stateReason: 'NOT_PLANNED' },
+  });
+  assert.equal(r.skip, false);
+  assert.match(r.reason, /not planned/);
+});
+
+test('#1184: il dedup cerca body + stato e i verdetti leggono commenti REST paginati', () => {
+  const src = fs.readFileSync(new URL('../../scripts/ci/handoff-to-site.mjs', import.meta.url), 'utf8');
+  assert.match(src, /--json', 'number,url,body,state,stateReason'/);
+  assert.match(src, /selectDeliveredIssue\(existing, originUrl\(\)\)/);
+  assert.match(src, /api', '--paginate', '--slurp/);
+  assert.match(src, /comments\?per_page=100/);
+  assert.doesNotMatch(src, /issue', 'view', ISSUE, '--repo', REPO, '--json', 'title,comments'/);
+});
+
 test('#972: consegnata e senza residuo → il secondo giro non paga Claude', () => {
   const decision = handoffDecision({ verdict: 'blocked-admin-settings', body: MIRROR_BODY });
   assert.equal(decision.handoff, true);
@@ -681,6 +711,14 @@ test('#972: il pre-flight è cablato e OGNI step che costa lo consulta', () => {
   assert.match(gate, /run: node scripts\/ci\/handoff-to-site\.mjs --preflight/);
   assert.match(gate, /SITE_TOKEN: \$\{\{ env\.GITHUB_PAT \}\}/,
     'senza il token del sito la ricerca del dedup non è disponibile e il gate è inerte per costruzione');
+  assert.ok(src.indexOf('id: claim') < src.indexOf('id: handoff_pre'),
+    'il pre-flight deve verificare il verdetto dopo il claim della issue, non prima');
+  assert.match(gate, /steps\.claim\.outputs\.in_flight != 'true'/,
+    'il pre-flight deve essere escluso quando il claim ha trovato una run concorrente');
+  const claim = all.find((s) => /id: claim\b/.test(s));
+  assert.ok(claim);
+  assert.doesNotMatch(claim, /steps\.handoff_pre\./,
+    'il claim non può dipendere dal pre-flight che deve seguire il claim');
 
   // Il gate legge `env.GITHUB_PAT`, che esiste solo dopo Remote Config: uno
   // step piazzato prima leggerebbe una stringa vuota e non corto-circuiterebbe

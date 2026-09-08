@@ -593,7 +593,7 @@ export function handoffDecision({ verdict, body, lockedPaths, siteAbsent, siteNa
  *
  * @returns {{skip: boolean, close: boolean, reason: string}}
  */
-export function redeliveryDecision({ decision, deliveredUrl } = {}) {
+export function redeliveryDecision({ decision, deliveredUrl, deliveredIssue } = {}) {
   const d = decision || {};
   // L'instradabilità PRIMA della consegna: quando il verdetto non è instradabile
   // il pre-flight non interroga nemmeno il sito, quindi `deliveredUrl` è vuoto
@@ -602,21 +602,32 @@ export function redeliveryDecision({ decision, deliveredUrl } = {}) {
   if (!d.handoff) {
     return { skip: false, close: false, reason: d.reason || 'nessuna decisione da instradare' };
   }
-  if (!deliveredUrl) {
+  const delivery = deliveredIssue || (deliveredUrl ? { url: deliveredUrl } : null);
+  const url = String(delivery?.url || '');
+  if (!url) {
     return { skip: false, close: false, reason: 'nessuna consegna precedente per questa issue' };
+  }
+  const state = String(delivery?.state || '').toUpperCase();
+  const stateReason = String(delivery?.stateReason || '').toUpperCase().replace(/[\s-]+/g, '_');
+  if (state === 'CLOSED' && stateReason === 'NOT_PLANNED') {
+    return {
+      skip: false,
+      close: false,
+      reason: `consegna trovata a ${url}, ma la issue di destinazione è chiusa come \`not planned\`: non è una consegna assorbente, il lavoro deve poter ripartire`,
+    };
   }
   const residual = d.residual || [];
   if (residual.length) {
     return {
       skip: false,
       close: false,
-      reason: `consegnata a ${deliveredUrl}, ma resta lavoro qui (${residual.join(', ')}): il parcheggio esiste per questo`,
+      reason: `consegnata a ${url}, ma resta lavoro qui (${residual.join(', ')}): il parcheggio esiste per questo`,
     };
   }
   return {
     skip: true,
     close: !!d.close,
-    reason: `già consegnata a ${deliveredUrl} e senza residuo qui: tutto ciò che la diagnosi nomina si scrive di là`,
+    reason: `già consegnata a ${url} e senza residuo qui: tutto ciò che la diagnosi nomina si scrive di là`,
   };
 }
 
@@ -717,27 +728,46 @@ function originUrl() {
  * Per il post-step il rischio è un doppione, non una perdita; per il pre-flight
  * è una run in più, che è il comportamento di oggi.
  */
+export function bodyCitesOrigin(body, origin) {
+  const escaped = String(origin || '').replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  return new RegExp(`${escaped}(?!\\d)`).test(String(body || ''));
+}
+
+export function selectDeliveredIssue(entries, origin) {
+  return (Array.isArray(entries) ? entries : []).find((entry) => bodyCitesOrigin(entry?.body, origin)) || null;
+}
+
 function deliveredUrlFor(token) {
   if (!token) return '';
   try {
     const existing = gh(['issue', 'list', '--repo', SITE_REPO, '--state', 'all',
-      '--search', `"${originUrl()}" in:body`, '--json', 'number,url', '--limit', '5'], { token });
-    return Array.isArray(existing) && existing.length ? String(existing[0].url || '') : '';
+      '--search', `"${originUrl()}" in:body`, '--json', 'number,url,body,state,stateReason', '--limit', '5'], { token });
+    const match = selectDeliveredIssue(existing, originUrl());
+    return match ? {
+      number: match.number,
+      url: String(match.url || ''),
+      state: String(match.state || ''),
+      stateReason: String(match.stateReason || ''),
+    } : null;
   } catch {
-    return '';
+    return null;
   }
 }
 
 /** L'ultimo verdetto della issue e la decisione che ne discende, o `null`. */
 function readDecision() {
   let data;
+  let pages;
   try {
-    data = gh(['issue', 'view', ISSUE, '--repo', REPO, '--json', 'title,comments']);
+    data = gh(['api', `repos/${REPO}/issues/${ISSUE}`]);
+    pages = gh(['api', '--paginate', '--slurp', `repos/${REPO}/issues/${ISSUE}/comments?per_page=100`]);
   } catch (e) {
     console.log(`handoff-to-site: issue #${ISSUE} non leggibile (${String(e).slice(0, 100)}) → niente da fare.`);
     return null;
   }
-  const last = lastVerdictComment(data?.comments || []);
+  const comments = Array.isArray(pages) ? pages.flatMap((page) => Array.isArray(page) ? page : []) : [];
+  data = { ...(data || {}), comments };
+  const last = lastVerdictComment(comments);
   return { data, last, d: handoffDecision({ verdict: last?.verdict, body: last?.body, pinnedEntry: pinnedBy(ISSUE, REPO) }) };
 }
 
@@ -764,8 +794,8 @@ function preflight() {
   if (!read) return setPreflightOutput(false);
   const { d } = read;
   // Nessuna rete se la decisione non è instradabile: il caso normale è questo.
-  const delivered = d.handoff ? deliveredUrlFor(process.env.SITE_TOKEN || '') : '';
-  const r = redeliveryDecision({ decision: d, deliveredUrl: delivered });
+  const delivered = d.handoff ? deliveredUrlFor(process.env.SITE_TOKEN || '') : null;
+  const r = redeliveryDecision({ decision: d, deliveredIssue: delivered });
   if (!r.skip) {
     console.log(`handoff-preflight: #${ISSUE} procede — ${r.reason}.`);
     return setPreflightOutput(false);
@@ -792,9 +822,9 @@ function main() {
 
   const origin = originUrl();
   // Dedup PRIMA di aprire.
-  const existingUrl = deliveredUrlFor(token);
-  if (existingUrl) {
-    console.log(`handoff-to-site: #${ISSUE} già consegnata → ${existingUrl}. Niente doppioni.`);
+  const existing = deliveredUrlFor(token);
+  if (existing?.url) {
+    console.log(`handoff-to-site: #${ISSUE} già consegnata → ${existing.url}. Niente doppioni.`);
     // Ma lo STATO sì: se siamo di nuovo qui, il drainer ha ri-promosso la
     // issue, cioè le label di routing ci sono ancora — la transizione del
     // giro che ha consegnato non è andata a fondo. Questo è il solo punto
