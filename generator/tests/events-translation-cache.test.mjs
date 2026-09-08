@@ -59,7 +59,7 @@ test('un marker nella vecchia cache non riunisce eventi omonimi durante la migra
   assert.equal(cache['title::it::locarno film festival'].en, 'traduzione-migrata-1');
 });
 
-test('memoizza un titolo già identico nel locale target senza chiamare la cascata', async () => {
+test('memoizza un passthrough esplicito senza pubblicare la sorgente nel target', async () => {
   const cache = {};
   const out = await enrichEventsWithLocaleFallbackTranslations(
     [{ id: 'guidle:identical', titleByLocale: { it: SAME_TITLE, en: SAME_TITLE } }],
@@ -67,7 +67,7 @@ test('memoizza un titolo già identico nel locale target senza chiamare la casc
     {
       delayMs: 0,
       translateFn: async ({ targetLang }) => {
-        if (targetLang === 'en') throw new Error('un’identità già presente non va ritradotta');
+        if (targetLang === 'en') return { text: '', passthrough: true };
         return `traduzione-${targetLang}`;
       },
     },
@@ -97,7 +97,7 @@ test('non congela un duplicato del feed copiato in tutti i locali', async () => 
   assert.match(out[0].titleByLocale.fr, /^traduzione-fr-/);
 });
 
-test('un duplicato successivo non clobbera una traduzione già memoizzata', async () => {
+test('un duplicato successivo riusa la traduzione memoizzata', async () => {
   const cache = {};
   const first = await enrichEventsWithLocaleFallbackTranslations(
     [event('guidle:stable')],
@@ -118,7 +118,7 @@ test('un duplicato successivo non clobbera una traduzione già memoizzata', asy
     },
   );
 
-  assert.equal(second[0].titleByLocale.en, SAME_TITLE);
+  assert.equal(second[0].titleByLocale.en, 'traduzione-en');
   assert.equal(Object.values(cache)[0].en, 'traduzione-en');
 });
 

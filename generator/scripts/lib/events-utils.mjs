@@ -20,7 +20,7 @@ import path from 'node:path';
 import { truncateSlugAtWordBoundary } from './slug-truncate.mjs';
 import CANTON_URL_SLUGS from '../../data/canton-url-slugs.json' with { type: 'json' };
 import { MUNICIPALITIES } from '../../data/municipalities.ts';
-import { freeTranslateWithRetry, isSourcePassthrough } from './free-translate.mjs';
+import { freeTranslateWithRetry } from './free-translate.mjs';
 import { hasUsableContentText, hasUsableTranslatedText } from './body2-payload-verdict.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -1068,7 +1068,6 @@ function warnStrictPredicateDrops(poisoned, byLocale, label) {
  * nothing was poisoned in input.
  */
 const MAX_PASSTHROUGH_MEMO_WORDS = 32;
-const MIN_LOCALES_FOR_IDENTITY_MEMO = 3;
 
 function eventTranslationDiscriminator(event, index) {
   for (const candidate of [event?.id, event?.stableId]) {
@@ -1095,27 +1094,23 @@ function wordCount(text) {
   return String(text ?? '').trim() ? String(text).trim().split(/\s+/).length : 0;
 }
 
-function asTranslationResult(value, sourceText) {
+function asTranslationResult(value) {
   const explicitStatus = value && typeof value === 'object' && Object.prototype.hasOwnProperty.call(value, 'passthrough');
   const text = typeof value === 'string'
     ? value
     : value && typeof value === 'object' && typeof value.text === 'string'
       ? value.text
       : '';
-  // A bare string equal to the source has no per-call provenance: do not turn
-  // it into a permanent memo. Callers that know the result is a legitimate
-  // identity must return `{ text, passthrough: false }`; a provider echo must
-  // return `{ text: '', passthrough: true }`.
-  const sourceEcho = Boolean(text && isSourcePassthrough(sourceText, text));
-  const passthrough = explicitStatus
-    ? value.passthrough === true
-    : sourceEcho;
+  // A bare string has no per-call provenance. Only an explicit status can
+  // produce a negative memo; a provider/error result must not be inferred from
+  // its text or from process-wide cascade counters.
+  const passthrough = explicitStatus && value.passthrough === true;
   return passthrough ? { text: '', passthrough: true } : { text, passthrough: false };
 }
 
 async function translateEventLocale({ translateFn, eventId, text, sourceLang, targetLang, fieldType }) {
   const raw = await translateFn({ eventId, text, sourceLang, targetLang, fieldType, maxRetries: 1 });
-  return asTranslationResult(raw, text);
+  return asTranslationResult(raw);
 }
 
 async function fillLocaleGaps(byLocale, cache, { eventId, fieldType, locales, delayMs, translateFn }) {
@@ -1137,40 +1132,6 @@ async function fillLocaleGaps(byLocale, cache, { eventId, fieldType, locales, de
     const entry = cache[cacheKey] || {};
     const legacyCacheKey = legacyEventTranslationCacheKey({ fieldType, sourceLocale, normalizedSource });
     const legacyEntry = cache[legacyCacheKey];
-    const identicalTargets = locales.filter((locale) => locale !== sourceLocale
-      && hasUsableContentText(clean?.[locale])
-      && isSourcePassthrough(sourceText, clean[locale]));
-    const existingIdenticalTarget = hasUsableContentText(clean?.[target])
-      && isSourcePassthrough(sourceText, clean[target])
-      && fieldType === 'title'
-      && wordCount(sourceText) <= MAX_PASSTHROUGH_MEMO_WORDS
-      && locales.length >= MIN_LOCALES_FOR_IDENTITY_MEMO
-      && identicalTargets.length === 1;
-    if (existingIdenticalTarget) {
-      // The organizer already supplied the same short title in this target
-      // locale. One target identity is plausible; an all-locale duplicate feed
-      // is not, and remains eligible for the normal translation path. Store
-      // only a negative memo: if a later feed run omits this target, reusing
-      // sourceText would publish Italian under the requested locale.
-      if (hasUsableContentText(entry[target]) && !isSourcePassthrough(sourceText, entry[target])) {
-        // The current feed is authoritative while the target is present. Keep
-        // the paid translation for a later run where this slot is omitted,
-        // but never replace the organizer's current value with stale MT.
-        continue;
-      }
-      if (!hasUsableContentText(entry[target]) && entry[target] !== null) {
-        cache[cacheKey] = { ...entry, [target]: null };
-      }
-      if (
-        legacyEntry
-        && typeof legacyEntry === 'object'
-        && Object.prototype.hasOwnProperty.call(legacyEntry, target)
-        && !hasUsableContentText(legacyEntry[target])
-      ) {
-        cache[legacyCacheKey] = { ...legacyEntry, [target]: null };
-      }
-      continue;
-    }
     if (Object.prototype.hasOwnProperty.call(entry, target)) {
       const memo = entry[target];
       if (memo === null) continue; // stable passthrough memo, no network retry
