@@ -64,7 +64,7 @@ const MASSIMALE_FILE = {
   RFW: 1,
   LPSPS: 1,
   // PR #1276 aveva alzato `LD` da 13 a 17 per le quattro traduzioni di
-  // `nestle-ai-consumatori-ricerca`; questa PR conserva la ragione storica ma
+  // `nestle-ai-consumatori-ricerca`; questa PR (#1277) conserva la ragione storica ma
   // esclude `JSON-LD` (e gli altri composti) dal conteggio.
   LD: 8,
   LSS: 26,
