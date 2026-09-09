@@ -1,5 +1,4 @@
 {
-  "https://www.swissinfo.ch/ita/franco-pi%c3%b9-debole%3a-euro-torna-sopra-0%2c94%2c-prima-volta-da-un-anno/91899303": "svizzero-franco-euro",
   "https://www.tio.ch/svizzera/politica/1944069/pacchetto-ue-w-thrich-salari-protezione-commissione-stati-accordi-rifiuto-opzione": "travail-suisse-ue-accordi",
   "https://www.tvsvizzera.it/tvs/lavoro-ed-economia/slow-water-lagricoltura-svizzera-si-prepara-alla-crisi-climatica/91860488": "frontaliere-ticino-slow-water",
   "https://www.stelle.admin.ch/it": "lavorare-amministrazione-federale-svizzera",
@@ -2233,6 +2232,11 @@
   "https://www.tio.ch/svizzera/economia/1949053/zimmer-processo-biomet-winterthur-impieghi": {
     "articleId": "zimmer-biomet-tagli-impieghi",
     "ts": "2026-09-09T14:26:36.694Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/economia/1949067/ubs-yumo-svizzera-piattaforma-giovani-insegna-fare-risparmi-investimenti": {
+    "articleId": "ubs-yumo-educazione-finanziaria",
+    "ts": "2026-09-09T14:43:40.499Z",
     "keyForm": 2
   }
 }
