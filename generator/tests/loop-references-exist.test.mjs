@@ -252,6 +252,20 @@ const resolveToken = (token) => (token.includes('/') ? token : `${WORKFLOW_DIR}/
  *                    test «`retired` solo su file `identical`».
  */
 const DECLARED_ABSENT = {
+  'scripts/ci/followup-resolution-match.mjs :: scripts/audit-canton-url-drift.mjs': {
+    kind: 'site-only',
+    reason:
+      'Il gemello identical include questo referente nelle istruzioni della scheda, ma ' +
+      'lo script vive solo nel repo del sito: qui la citazione è documentale e nessun ' +
+      'percorso runtime dipende dalla sua presenza nel corpus.',
+  },
+  'scripts/ci/followup-resolution-match.mjs :: scripts/ci/gate-minted-followups.mjs': {
+    kind: 'site-only',
+    reason:
+      'Il gemello identical include questo referente nelle istruzioni della scheda, ma ' +
+      'il gate vive solo nel repo del sito: qui la citazione è documentale e nessun ' +
+      'percorso runtime dipende dalla sua presenza nel corpus.',
+  },
   'scripts/ci/followup-drainer.mjs :: mirror-articles-engine.yml': {
     kind: 'site-only',
     reason:

@@ -282,9 +282,9 @@
       "path": "scripts/ci/followup-resolution-match.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "2913a3b426726667",
-        "corpus": "2913a3b426726667",
-        "alignedAt": "2026-09-06"
+        "site": "1743c1bb096314d8",
+        "corpus": "1743c1bb096314d8",
+        "alignedAt": "2026-09-08"
       }
     },
     {
@@ -785,9 +785,9 @@
       "path": "scripts/lib/secrets-scope-detect.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "b98c79e19464a968",
-        "corpus": "b98c79e19464a968",
-        "alignedAt": "2026-08-25"
+        "site": "099740a388ddf385",
+        "corpus": "099740a388ddf385",
+        "alignedAt": "2026-09-08"
       }
     },
     {
