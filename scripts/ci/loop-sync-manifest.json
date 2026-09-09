@@ -126,9 +126,9 @@
       "path": "scripts/ci/alert-pat-down.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "a0b8956a6e389cb8",
-        "corpus": "a0b8956a6e389cb8",
-        "alignedAt": "2026-08-07"
+        "site": "d0e26059bcae990c",
+        "corpus": "d0e26059bcae990c",
+        "alignedAt": "2026-09-09"
       }
     },
     {
@@ -253,9 +253,9 @@
       "path": "scripts/ci/claude-usage-summary.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "e485429ea717dfaf",
-        "corpus": "e485429ea717dfaf",
-        "alignedAt": "2026-08-07"
+        "site": "cc5b2fca24f3e328",
+        "corpus": "cc5b2fca24f3e328",
+        "alignedAt": "2026-09-09"
       }
     },
     {
@@ -282,9 +282,9 @@
       "path": "scripts/ci/followup-resolution-match.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "1743c1bb096314d8",
-        "corpus": "1743c1bb096314d8",
-        "alignedAt": "2026-09-08"
+        "site": "f2b694821553ec78",
+        "corpus": "f2b694821553ec78",
+        "alignedAt": "2026-09-09"
       }
     },
     {
@@ -687,9 +687,9 @@
       "path": "scripts/ci/triage-sweep.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "96b65da7be89b73f",
-        "corpus": "96b65da7be89b73f",
-        "alignedAt": "2026-09-06"
+        "site": "9e987bd0a7535a3d",
+        "corpus": "9e987bd0a7535a3d",
+        "alignedAt": "2026-09-09"
       }
     },
     {
@@ -1441,9 +1441,9 @@
       "mode": "identical",
       "reason": "Push con retry usato dai job che scrivono sugli shard. RIALLINEATO il 2026-08-24 (stranded-twin, 5.2gg): il sito aveva aggiunto il flag opt-in `--soft-fail-exhausted` (warn+exit 0 invece di exit 1 su MAX_ATTEMPTS esaurito, per un caller la cui data e' una recomputation a finestra scorrevole che si riprende da sola al giro dopo — vedi issue del sito #5568). Nessun caller di questo repo lo passa ancora, quindi la copia e' comportamentalmente no-op qui finche' non viene adottato. Il file cita esplicitamente issue del SITO (#2988, #4190, #4557, #3809, #4183, #5568): e' un gemello, non un omonimo. Le registrazioni dei merge driver (`known-slugs-shard`, `orphan-enriched-shard`, `ai-cache`, `compat-shard`) puntano a `scripts/ci/merge-*.mjs` che qui non esistono — innocuo: ogni `git config` finisce in `|| true` e nessun `.gitattributes` locale marca quei path, quindi il driver non viene mai invocato. Se un giorno un `.gitattributes` di questo repo marcasse uno di quei path, il driver mancante diventerebbe un guasto: e' l'unica condizione da tenere d'occhio.",
       "baseline": {
-        "site": "96f3a1440c3b3463",
-        "corpus": "96f3a1440c3b3463",
-        "alignedAt": "2026-09-01"
+        "site": "5539bf6e4fa73668",
+        "corpus": "5539bf6e4fa73668",
+        "alignedAt": "2026-09-09"
       }
     },
     {
@@ -1517,9 +1517,9 @@
       "path": "scripts/lib/upload-cdn-file.sh",
       "mode": "identical",
       "baseline": {
-        "site": "070de13a96329c71",
-        "corpus": "070de13a96329c71",
-        "alignedAt": "2026-09-06"
+        "site": "c349bc4c956a7e34",
+        "corpus": "c349bc4c956a7e34",
+        "alignedAt": "2026-09-09"
       }
     },
     {
