@@ -2973,9 +2973,9 @@
       "sitePath": ".github/corpus-workflows/crawler-group-07.yml",
       "mode": "identical",
       "baseline": {
-        "site": "a687c7406bfc2c0b",
-        "corpus": "a687c7406bfc2c0b",
-        "alignedAt": "2026-09-08"
+        "site": "2aef416bb4085fd5",
+        "corpus": "2aef416bb4085fd5",
+        "alignedAt": "2026-09-09"
       }
     },
     {
@@ -3153,8 +3153,8 @@
       "sitePath": ".github/corpus-workflows/contract.json",
       "mode": "identical",
       "baseline": {
-        "site": "0398e15f2001da29",
-        "corpus": "0398e15f2001da29",
+        "site": "d66c67284a86aa64",
+        "corpus": "d66c67284a86aa64",
         "alignedAt": "2026-09-09"
       }
     },
