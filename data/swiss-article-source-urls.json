@@ -1,5 +1,4 @@
 {
-  "https://www.rsi.ch/info/scienza-e-tecnologia/un-laser-che-vede-ascolta-e-si-corregge-da-solo--3984651.html": "laser-vede-ascolta-si-corregge-da-solo",
   "https://www.tio.ch/dal-mondo/cronaca/1943873/sisma-morti-feriti-bilancio-satellitari": "sisma-colombia-morti-feriti",
   "https://www.admin.ch/it/newnsb/1bh4hncuypwb_wqjpywr4": "economia-svizzera-crescita-trimestrale",
   "https://www.rsi.ch/s/3986376": "economia-recupero-2026",
@@ -2209,6 +2208,11 @@
   "https://www.rsi.ch/info/svizzera/una-stablecoin-in-franchi-il-progetto-entra-nella-fase-operativa--4067737.html": {
     "articleId": "stablecoin-franco-fase-operativa",
     "ts": "2026-09-09T11:48:44.960Z",
+    "keyForm": 2
+  },
+  "https://www.seco.admin.ch/it/newnsb/5xgohc4gf9pm": {
+    "articleId": "accordo-clima-commercio-consultazione",
+    "ts": "2026-09-09T12:32:04.547Z",
     "keyForm": 2
   }
 }
