@@ -81,6 +81,7 @@ jobs:
           RUN_ID: ${{ github.event.workflow_run.id }}
           RUN_SHA: ${{ github.event.workflow_run.head_sha }}
           RUN_BRANCH: ${{ github.event.workflow_run.head_branch }}
+          CI_CHECK_NAME: 'tests (node --test)'
         run: |
           set -uo pipefail
           skip() { echo "$1"; echo "actionable=false" >> "$GITHUB_OUTPUT"; exit 0; }
@@ -155,26 +156,55 @@ jobs:
             skip "Nessun check in stato failure sulla HEAD adesso → gia' rientrato, skip (no-op)."
           fi
 
-          # `tests` e' un check aggregato: quando l'unico step rosso e' il
-          # verdetto della review, il codice non e' il problema del
-          # ❌-fixer. La review e' gia' stata eseguita, quindi il proprietario
-          # del segnale e' il 🔴-fixer (o il normale ciclo di re-review), non
-          # un secondo agente che spenderebbe Claude per scoprire la stessa
-          # cosa. Il filtro e' conservativo e fail-open: un errore nella jobs
-          # API non puo' trasformare un rosso non classificato in uno skip.
-          review_only=$(gh api "repos/$REPO/actions/runs/$RUN_ID/jobs?per_page=100" \
-            --jq "
-              [ .jobs[]?.steps[]? ] as \$steps |
-              [ \$steps[] | select(.conclusion == \"failure\") | .name ] as \$failures |
-              if ((\$failures | length) == 1
-                  and \$failures[0] == \"Require approving Claude review\"
-                  and any(\$steps[]; .name == \"Run Claude review\" and .conclusion == \"success\"))
-              then \"true\"
-              else \"false\"
-              end
-            " 2>/dev/null || echo "false")
-          if [ "${review_only:-false}" = "true" ]; then
-            skip "Il check richiesto e' rosso solo per il verdetto della review Claude gia' eseguita → competenza del 🔴-fixer, skip zero-Claude (no-op)."
+          # `tests` e' un check aggregato: quando il rosso e' SOLO il verdetto
+          # di una review che ESISTE gia' sulla HEAD e porta un `🔴 Important`, il
+          # codice non e' il problema del ❌-fixer. Il proprietario del segnale
+          # e' il 🔴-fixer, che su quella review parte da solo; un secondo agente
+          # spenderebbe Claude per riscoprire la stessa cosa.
+          #
+          # La prova e' la REVIEW, non la `conclusion` degli step del run.
+          # `Run Claude review` ha `continue-on-error: true` (`tests.yml`) e la
+          # jobs API riporta la conclusion DOPO l'applicazione del flag: e'
+          # `success` anche quando l'action e' MORTA (sul 429 lo step di abort
+          # esce 0 di proposito), come gia' documentato in
+          # `scripts/ci/lib/vitestCheck.mjs`. In quel caso il gate resta l'unico
+          # step rosso ma non esiste NESSUNA review → nessun evento
+          # `pull_request_review` → il 🔴-fixer non parte mai, e skippare qui
+          # lascerebbe il rosso orfano proprio dove il re-trigger e' la cura.
+          # Simmetrico il caso opposto: una review postata senza `🔴 Important`
+          # (solo 🟡/❓, o un `## LGTM` mancante per formato) rende rosso il
+          # gate, ma il 🔴-fixer su di essa esce no-op — quel rosso e' del
+          # ❌-fixer e non va scartato.
+          #
+          # E vale solo se `tests` e' l'UNICO check rosso della HEAD: `rollup`
+          # raccoglie anche `generator-ci`, `pr-collision-detector`,
+          # `loop-drift-check`, che il verdetto della review non spiega.
+          review_owned=false
+          if [ "$rollup" = "$CI_CHECK_NAME" ]; then
+            # Ultima review del reviewer bot sulla HEAD. `@base64` perche' il
+            # corpo e' multilinea e le pagine si concatenano: cosi' `tail -n 1`
+            # prende l'ultima REVIEW, non l'ultima riga dell'ultimo corpo. Il
+            # predicato sul login e' `REVIEWER_BOT_LOGIN_JQ`
+            # (`scripts/ci/lib/constants.mjs`), verbatim: uno `run:` YAML non
+            # puo' importarlo, e il guard `generator/tests/reviewer-bot-login.test.mjs`
+            # lo pretende qui. `$head_sha` passa da env perche' il jq resta in
+            # apici singoli, cioe' byte-identico alla costante.
+            last_review=$(HEAD_SHA_FILTER="$head_sha" gh api "repos/$REPO/pulls/$PR/reviews?per_page=100" --paginate \
+              --jq '.[] | select(.commit_id == env.HEAD_SHA_FILTER and .user.type=="Bot" and (.user.login|test("^(claude|frontaliere-automation)";"i"))) | .body | @base64' \
+              2>/dev/null | tail -n 1 | base64 -d 2>/dev/null || echo "")
+            # Stesso marker del gemello: `REDFLAG_IMPORTANT_RE.source` senza i
+            # `\n` delle classi negate (grep e' gia' orientato alla riga). Il
+            # guard `mirror bash` di `generator/tests/redflag-important-marker.test.mjs`
+            # lo pretende verbatim anche qui, cosi' la terza copia non puo'
+            # divergere: un marker riconosciuto la' e non qui riporterebbe le due
+            # decisioni in disaccordo sullo stesso corpo.
+            # shellcheck disable=SC2016 # the single-quoted PCRE is intentional
+            if printf '%s' "$last_review" | LC_ALL=C.UTF-8 grep -qP '^(?:(?=(?:[^`]*`[^`]*`)*[^`]*`[^`]*$)(?:[^🟡🟢❓]*|(?:[^«]|«[^»]*»)*[🟡🟢❓](?:[^«]|«[^»]*»)*)|(?:[^🟡🟢❓]*|(?:[^`«]|`[^`]*`|«[^»]*»|`(?![^`]*`))*[🟡🟢❓](?:[^`«]|`[^`]*`|«[^»]*»|`(?![^`]*`))*)(?<!\s`)(?<!^`))🔴\s*\*{0,2}\s*Important\s*\*{0,2}\s*[:—-]'; then
+              review_owned=true
+            fi
+          fi
+          if [ "$review_owned" = "true" ]; then
+            skip "Il check richiesto e' l'unico rosso della HEAD e l'ultima review su $head_sha porta un 🔴 Important → competenza del 🔴-fixer, skip zero-Claude (no-op)."
           fi
 
           # Non correre sopra il gemello: se il 🔴-fixer sta girando su questo

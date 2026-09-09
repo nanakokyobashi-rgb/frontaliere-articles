@@ -162,16 +162,17 @@ export const VITEST_SHARD_NAME_RE = /^vitest shard \d+\/\d+$/;
  * Gemello del sito: `scripts/ci/lib/constants.mjs` in valerielinc-ops/frontaliere-si-o-no
  * (`mode: adapted` nel manifest, quindi la modifica si fa qui e non scende dal mirror).
  *
- * NB: il preflight di `pr-redflag-fixer.yml` e la Classe B di
+ * NB: il preflight di `pr-redflag-fixer.yml`, quello di `pr-redcheck-fixer.yml`
+ * (dove decide CHI possiede un check rosso) e la Classe B di
  * `stale-pr-rescuer.yml` grepano la STESSA forma in bash — un `if:`/`run:` YAML non
  * puo' importare questa regex. `grep` e' gia' orientato alla riga, quindi il pattern
  * bash e' questa `.source` senza i `\n` delle classi negate:
  * `grep -qP '^(?:[^🟡🟢❓]*|(?:[^`«]|`[^`]*`|«[^»]*»|`(?![^`]*`))*[🟡🟢❓](?:[^`«]|`[^`]*`|«[^»]*»|`(?![^`]*`))*)(?<!\s\`)(?<!^\`)🔴\s*\*{0,2}\s*Important\s*\*{0,2}\s*[:—-]'`.
  * I due lookbehind sono a lunghezza fissa, quindi PCRE1 (`grep -P`) li accetta —
  * uno solo, `(?<!(?:^|\s)\`)`, sarebbe a lunghezza variabile e li' non compila.
- * Le tre copie non possono piu' divergere in silenzio: il guard `mirror bash` di
- * `generator/tests/redflag-important-marker.test.mjs` deriva il pattern atteso da
- * questa `.source` e lo pretende, verbatim, in entrambi i workflow.
+ * Le quattro copie non possono piu' divergere in silenzio: il guard `mirror bash`
+ * di `generator/tests/redflag-important-marker.test.mjs` deriva il pattern atteso
+ * da questa `.source` e lo pretende, verbatim, in ognuno dei tre workflow.
  */
 export const REDFLAG_IMPORTANT_RE = /^(?:(?=(?:[^\n`]*`[^\n`]*`)*[^\n`]*`[^\n`]*$)(?:[^\n🟡🟢❓]*|(?:[^\n«]|«[^\n»]*»)*[🟡🟢❓](?:[^\n«]|«[^\n»]*»)*)|(?:[^\n🟡🟢❓]*|(?:[^\n`«]|`[^\n`]*`|«[^\n»]*»|`(?![^\n`]*`))*[🟡🟢❓](?:[^\n`«]|`[^\n`]*`|«[^\n»]*»|`(?![^\n`]*`))*)(?<!\s`)(?<!^`))🔴\s*\*{0,2}\s*Important\s*\*{0,2}\s*[:—-]/mu;
 

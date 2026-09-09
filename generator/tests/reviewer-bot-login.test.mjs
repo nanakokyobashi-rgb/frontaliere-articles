@@ -35,6 +35,7 @@ test('il predicato jq è derivato dalla regex, non riscritto', () => {
 test('i workflow che filtrano le review usano il predicato jq condiviso', () => {
   const workflows = [
     '.github/workflows/pr-redflag-fixer.yml',
+    '.github/workflows/pr-redcheck-fixer.yml',
     '.github/workflows/stale-pr-rescuer.yml',
     '.github/workflows/tests.yml',
   ];
