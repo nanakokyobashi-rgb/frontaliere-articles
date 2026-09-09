@@ -1,5 +1,4 @@
 {
-  "https://lenews.ch/2026/08/14/switzerland-is-attracting-fewer-immigrants-and-losing-more-of-those-already-here": "svizzera-calo-immigrazione-emigrazione-2026",
   "https://www.tio.ch/svizzera/cronaca/1944044/veicoli-automatizzata-ricerca-arresti-sistema": "tendicione-arresti-veicoli-ricerca-2024",
   "https://www.admin.ch/it/newnsb/1wbaza8pftxucacigyz8g": "sanzioni-onu-aggiornamento-2026",
   "https://www.tio.ch/svizzera/attualita/1944041/possono-retina-danni-eclissi-richieste": "eclissi-danni-retina",
@@ -2265,6 +2264,11 @@
   "https://www.swissinfo.ch/ita/unia-su-tagli-a-winterthur%2c-%22lavoratori-non-paghino-per-azionisti%22/92031502": {
     "articleId": "zimmer-biomet-svizzera-unia",
     "ts": "2026-09-09T17:53:18.756Z",
+    "keyForm": 2
+  },
+  "https://www.admin.ch/it/newnsb/pkgtw7aoiyfn": {
+    "articleId": "banda-larga-consiglio-federale",
+    "ts": "2026-09-09T18:15:37.817Z",
     "keyForm": 2
   }
 }
