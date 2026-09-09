@@ -1,5 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/attualita/1944094/asilo-centro-federale-altstatten-nuovo-sg-porte-aperte": "cfa-altstaetten-aperte",
   "https://lenews.ch/2026/08/14/switzerland-is-attracting-fewer-immigrants-and-losing-more-of-those-already-here": "svizzera-calo-immigrazione-emigrazione-2026",
   "https://www.tio.ch/svizzera/cronaca/1944044/veicoli-automatizzata-ricerca-arresti-sistema": "tendicione-arresti-veicoli-ricerca-2024",
   "https://www.admin.ch/it/newnsb/1wbaza8pftxucacigyz8g": "sanzioni-onu-aggiornamento-2026",
@@ -2261,6 +2260,11 @@
   "https://www.tio.ch/ticino/politica/1949079/cantone-e-comuni-si-confrontano-su-fisco-progetto-ticino-2020-e-riforma-arp": {
     "articleId": "cantone-comuni-fisco-riforma-arp",
     "ts": "2026-09-09T17:32:52.261Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/unia-su-tagli-a-winterthur%2c-%22lavoratori-non-paghino-per-azionisti%22/92031502": {
+    "articleId": "zimmer-biomet-svizzera-unia",
+    "ts": "2026-09-09T17:53:18.756Z",
     "keyForm": 2
   }
 }
