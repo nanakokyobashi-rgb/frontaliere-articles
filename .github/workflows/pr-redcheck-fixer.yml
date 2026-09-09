@@ -149,32 +149,37 @@ jobs:
 
           # La CI corrente deve essere DAVVERO rossa adesso: fra il trigger e qui
           # un rerun puo' aver rimesso verde, e allora non c'e' niente da fixare.
-          rollup=$(gh api "repos/$REPO/commits/$head_sha/check-runs?per_page=100" \
-            --jq '[.check_runs[] | select(.conclusion=="failure") | .name] | join(", ")' 2>/dev/null || echo "")
-          if [ -z "$rollup" ]; then
+          failed_checks=$(gh api "repos/$REPO/commits/$head_sha/check-runs?per_page=100" \
+            --jq '[.check_runs[] | select(.conclusion=="failure") | .name]' 2>/dev/null || echo "[]")
+          if [ "$failed_checks" = "[]" ]; then
             skip "Nessun check in stato failure sulla HEAD adesso → gia' rientrato, skip (no-op)."
           fi
+          rollup=$(printf '%s' "$failed_checks" | jq -r 'join(", ")' 2>/dev/null || echo "")
 
           # `tests` e' un check aggregato: quando l'unico step rosso e' il
-          # verdetto della review, il codice non e' il problema del
-          # ❌-fixer. La review e' gia' stata eseguita, quindi il proprietario
-          # del segnale e' il 🔴-fixer (o il normale ciclo di re-review), non
-          # un secondo agente che spenderebbe Claude per scoprire la stessa
-          # cosa. Il filtro e' conservativo e fail-open: un errore nella jobs
-          # API non puo' trasformare un rosso non classificato in uno skip.
-          review_only=$(gh api "repos/$REPO/actions/runs/$RUN_ID/jobs?per_page=100" \
-            --jq "
-              [ .jobs[]?.steps[]? ] as \$steps |
-              [ \$steps[] | select(.conclusion == \"failure\") | .name ] as \$failures |
-              if ((\$failures | length) == 1
-                  and \$failures[0] == \"Require approving Claude review\"
-                  and any(\$steps[]; .name == \"Run Claude review\" and .conclusion == \"success\"))
-              then \"true\"
-              else \"false\"
-              end
-            " 2>/dev/null || echo "false")
+          # verdetto della review ed esiste una review reale sulla HEAD con un
+          # finding 🔴 Important. Il finding è il segnale che il redflag-fixer
+          # possiede il caso. La conclusion di `Run Claude review` non basta:
+          # lo step ha `continue-on-error` e può morire riportando `success`.
+          # Si entra qui solo se il rollup contiene esclusivamente `tests`;
+          # un altro check rosso mantiene il percorso normale. Il piccolo
+          # helper Node importa le costanti condivise e fallisce chiuso:
+          # API vuota/illeggibile → review_only=false.
+          review_only=false
+          if [ "$(printf '%s' "$failed_checks" | jq -r 'length' 2>/dev/null || echo 0)" -eq 1 ] \
+            && [ "$(printf '%s' "$failed_checks" | jq -r '.[0]' 2>/dev/null || echo '')" = "tests (node --test)" ]; then
+            jobs_json=$(gh api "repos/$REPO/actions/runs/$RUN_ID/jobs?per_page=100" --paginate --slurp 2>/dev/null || echo "[]")
+            reviews_json=$(gh api "repos/$REPO/pulls/$PR/reviews" --paginate --slurp 2>/dev/null || echo "[]")
+            review_payload=$(jq -n \
+              --arg head_sha "$head_sha" \
+              --argjson jobs "$jobs_json" \
+              --argjson reviews "$reviews_json" \
+              '{headSha:$head_sha,jobs:$jobs,reviews:$reviews}' 2>/dev/null || echo '{}')
+            review_only=$(printf '%s' "$review_payload" \
+              | node scripts/ci/redcheck-review-prefilter.mjs 2>/dev/null || echo "false")
+          fi
           if [ "${review_only:-false}" = "true" ]; then
-            skip "Il check richiesto e' rosso solo per il verdetto della review Claude gia' eseguita → competenza del 🔴-fixer, skip zero-Claude (no-op)."
+            skip "Il check richiesto e' rosso solo per una review Claude sulla HEAD con finding 🔴 Important → competenza del 🔴-fixer, skip zero-Claude (no-op)."
           fi
 
           # Non correre sopra il gemello: se il 🔴-fixer sta girando su questo

@@ -9,6 +9,11 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import {
+  CLAUDE_REVIEW_STEP_NAME,
+  REVIEW_GATE_STEP_NAME,
+} from '../../scripts/ci/lib/vitestCheck.mjs';
+import { reviewOnlyFailure } from '../../scripts/ci/redcheck-review-prefilter.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const WORKFLOW = path.join(ROOT, '.github/workflows/pr-redcheck-fixer.yml');
@@ -27,18 +32,23 @@ test('redcheck filtra il rosso di sola review prima di spendere Claude', () => {
 
   assert.match(
     block,
-    /actions\/runs\/\$RUN_ID\/jobs\?per_page=100/,
+    /actions\/runs\/\$RUN_ID\/jobs\?per_page=100[\s\S]*--paginate[\s\S]*--slurp/,
     'il preflight deve leggere gli step del run tests fallito, non solo il rollup dei check',
   );
   assert.match(
     block,
-    /Require approving Claude review/,
-    'il filtro deve riconoscere il gate che rende rosso il verdetto della review',
+    /pulls\/\$PR\/reviews[\s\S]*--paginate[\s\S]*--slurp/,
+    'il preflight deve verificare che una review reale sia stata postata sulla PR',
   );
   assert.match(
     block,
-    /Run Claude review/,
-    'il filtro deve distinguere una review realmente eseguita da una review saltata',
+    /failed_checks[\s\S]*tests \(node --test\)/,
+    'il filtro non deve ignorare un altro check rosso della stessa HEAD',
+  );
+  assert.match(
+    block,
+    /redcheck-review-prefilter\.mjs/,
+    'la decisione deve passare dall helper che usa le costanti condivise',
   );
   assert.match(
     block,
@@ -50,4 +60,66 @@ test('redcheck filtra il rosso di sola review prima di spendere Claude', () => {
     /review_only[^\n]*true[\s\S]*skip[\s\S]*(?:review|Claude)/,
     'un rosso di sola review deve uscire dal preflight senza invocare Claude del fixer',
   );
+});
+
+test('l helper importa i nomi degli step e il matcher dei finding condivisi', async () => {
+  const helper = await import('../../scripts/ci/redcheck-review-prefilter.mjs');
+  assert.equal(typeof helper.reviewOnlyFailure, 'function');
+  const helperSource = fs.readFileSync(
+    path.join(ROOT, 'scripts/ci/redcheck-review-prefilter.mjs'),
+    'utf8',
+  );
+  assert.match(helperSource, /REVIEW_GATE_STEP_NAME/);
+  assert.match(helperSource, /CLAUDE_REVIEW_STEP_NAME/);
+  assert.match(helperSource, /REDFLAG_IMPORTANT_RE/);
+  assert.match(helperSource, /REVIEWER_BOT_LOGIN_RE/);
+});
+
+const HEAD = 'a'.repeat(40);
+const jobs = (extra = []) => [{
+  name: 'tests (node --test)',
+  steps: [
+    { name: REVIEW_GATE_STEP_NAME, conclusion: 'failure' },
+    { name: CLAUDE_REVIEW_STEP_NAME, conclusion: 'success' },
+    ...extra,
+  ],
+}];
+const review = (body, commit_id = HEAD) => ({
+  user: { type: 'Bot', login: 'claude[bot]' },
+  commit_id,
+  body,
+});
+
+test('il predicato richiede un finding reale sulla HEAD, non la conclusion dello step', () => {
+  assert.equal(
+    reviewOnlyFailure({
+      headSha: HEAD,
+      jobs: [{ jobs: jobs() }],
+      reviews: [[review('`x.mjs:1`: 🔴 Important: il gate manca.')]],
+    }),
+    true,
+  );
+  assert.equal(
+    reviewOnlyFailure({
+      headSha: HEAD,
+      jobs: [{ jobs: jobs() }],
+      reviews: [[review('## Findings (Important: 0, Nit: 2)\n\n## LGTM')]],
+    }),
+    false,
+  );
+  assert.equal(
+    reviewOnlyFailure({
+      headSha: HEAD,
+      jobs: [{ jobs: jobs() }],
+      reviews: [[review('`x.mjs:1`: 🔴 Important: il gate manca.', 'b'.repeat(40))]],
+    }),
+    false,
+  );
+});
+
+test('il predicato resta chiuso su abort, failure misto e review assente', () => {
+  const base = { headSha: HEAD, reviews: [[review('`x.mjs:1`: 🔴 Important: il gate manca.')]] };
+  assert.equal(reviewOnlyFailure({ ...base, jobs: [{ jobs: jobs([{ name: 'Generator CI gate', conclusion: 'failure' }]) }] }), false);
+  assert.equal(reviewOnlyFailure({ ...base, jobs: [{ jobs: jobs().map(({ name, steps }) => ({ name, steps: steps.filter((s) => s.name !== CLAUDE_REVIEW_STEP_NAME) })) }] }), false);
+  assert.equal(reviewOnlyFailure({ headSha: HEAD, jobs: [{ jobs: jobs() }], reviews: [] }), false);
 });
