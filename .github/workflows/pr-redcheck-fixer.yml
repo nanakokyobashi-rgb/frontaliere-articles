@@ -435,10 +435,10 @@ jobs:
           git config --unset-all "http.https://github.com/.extraheader" || true
           git remote set-url origin "https://x-access-token:${PUSH_TOKEN}@github.com/${REPO}.git"
 
-      # SHA di partenza (post-merge origin/main, pre-Claude): il classify finale
-      # lo confronta con la HEAD remota per capire se il round ha davvero
-      # pushato un fix. Un round che pusha e' SUCCESS anche se la CLI e' poi
-      # morta ai turni in cleanup.
+      # Baseline del round (post-merge origin/main, pre-Claude): il classify
+      # finale confronta SHA, body e commenti per capire se il round ha davvero
+      # consegnato lavoro. Il body resta fuori dai log: si conserva solo il suo
+      # digest, cosi' un edit reale e' osservabile senza esporre il contenuto.
       - name: Record base SHA (pre-Claude)
         id: base
         if: steps.guard.outputs.proceed == 'true'
@@ -447,12 +447,27 @@ jobs:
           REPO: ${{ github.repository }}
           PR_NUMBER: ${{ needs.preflight.outputs.pr_number }}
         run: |
+          set -uo pipefail
           echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
           # Baseline dei commenti PRE-Claude (dopo il marker del round): serve al
           # classify per distinguere «Claude ha lasciato una spiegazione» da
           # «Claude non ha fatto ne' detto nulla» quando esce pulito senza push.
           n=$(gh api "repos/$REPO/issues/$PR_NUMBER/comments" --paginate --jq 'length' 2>/dev/null || echo 0)
           echo "comments=${n:-0}" >> "$GITHUB_OUTPUT"
+          # Il body e' l'altro artefatto che Claude puo' consegnare. Accetta
+          # solo la forma prevista dall'API (oggetto con body stringa/null) e
+          # persiste esclusivamente SHA-256: un errore di lettura blocca chiuso.
+          if ! body_sha=$(gh api "repos/$REPO/pulls/$PR_NUMBER" \
+            --jq 'if type != "object" then error("PR response is not an object") elif (has("body") | not) then error("PR response has no body field") elif .body != null and (.body | type) != "string" then error("PR body is not a string or null") else (.body // "") end' \
+            | sha256sum | cut -d' ' -f1); then
+            echo "::error::Impossibile leggere un body valido della PR prima di Claude."
+            exit 1
+          fi
+          if ! printf '%s\n' "$body_sha" | grep -Eq '^[0-9a-f]{64}$'; then
+            echo "::error::Il digest SHA-256 del body PR prima di Claude non e' valido."
+            exit 1
+          fi
+          echo "body_sha=$body_sha" >> "$GITHUB_OUTPUT"
 
       # Contesto del rosso, deterministico e BOUNDED, prima di spendere un turno
       # Claude. Due ragioni per farlo qui e non nel prompt: il log di una run e'
@@ -680,13 +695,13 @@ jobs:
       #  - commit pushato sul branch → SUCCESS (la re-review girera'). Vale anche
       #    se la CLI e' morta ai turni DOPO il push.
       #  - nessun push + CLI fallita → non-progresso reale → ROSSO.
-      #  - nessun push + CLI pulita + un commento NUOVO → terminale legittimo
-      #    (es. «non auto-fixabile», come chiede il prompt) → verde.
-      #  - nessun push + CLI pulita + NESSUN commento → non-progresso SILENZIOSO
-      #    → ROSSO. E' il caso che senza questo ramo sarebbe indistinguibile da un
-      #    round che ha davvero lavorato: uscirebbe verde, e ne' il rescuer ne' il
-      #    round-cap potrebbero piu' raccoglierlo, perche' un round «riuscito» non
-      #    ri-arma niente.
+      #  - nessun push + CLI pulita + body PR cambiato → progresso body-only,
+      #    quindi SUCCESS.
+      #  - body invariato + un commento NUOVO → terminale legittimo (es.
+      #    «non auto-fixabile», come chiede il prompt) → verde.
+      #  - body invariato + NESSUN commento → non-progresso SILENZIOSO → ROSSO.
+      #    Un `gh pr edit` che riscrive lo stesso body resta quindi osservabile
+      #    come no-op e non puo' spegnere il segnale.
       - name: Classify outcome (work-done, not CLI exit)
         if: always() && steps.guard.outputs.proceed == 'true'
         env:
@@ -696,6 +711,8 @@ jobs:
           HEAD_REF: ${{ needs.preflight.outputs.head_ref }}
           BASE_SHA: ${{ steps.base.outputs.sha }}
           BASE_COMMENTS: ${{ steps.base.outputs.comments }}
+          BASE_BODY_SHA: ${{ steps.base.outputs.body_sha }}
+          BASE_CAPTURE_OUTCOME: ${{ steps.base.outcome }}
           CLAUDE_OUTCOME: ${{ steps.claude_fix.outcome }}
         run: |
           set -uo pipefail
@@ -703,18 +720,37 @@ jobs:
           git fetch origin "$HEAD_REF" -q 2>/dev/null || true
           REMOTE_SHA=$(git rev-parse "origin/$HEAD_REF" 2>/dev/null || echo "")
           echo "base=$BASE_SHA local=$HEAD_NOW remote=$REMOTE_SHA claude=$CLAUDE_OUTCOME"
+          if [ "${BASE_CAPTURE_OUTCOME:-}" != "success" ] || \
+             ! printf '%s\n' "$BASE_BODY_SHA" | grep -Eq '^[0-9a-f]{64}$'; then
+            echo "::error::❌-check-fix: baseline del body PR assente o illeggibile → classificazione BLOCCANTE, job ROSSO."
+            exit 1
+          fi
           if [ -n "$HEAD_NOW" ] && [ -n "$BASE_SHA" ] && [ "$HEAD_NOW" != "$BASE_SHA" ] && [ "$REMOTE_SHA" = "$HEAD_NOW" ]; then
             echo "Fix pushato questo round (HEAD avanzato e presente su origin/$HEAD_REF) → round SUCCESS. Job verde anche se la CLI e' uscita '$CLAUDE_OUTCOME'."
             exit 0
           fi
-          if [ "$CLAUDE_OUTCOME" = "failure" ]; then
-            echo "::error::❌-check-fix: nessun commit pushato e la run Claude e' fallita ('$CLAUDE_OUTCOME') → non-progresso reale. Job ROSSO (segnale preservato; il round-cap porta a needs-human a N>=2)."
+          if [ "$CLAUDE_OUTCOME" != "success" ]; then
+            echo "::error::❌-check-fix: nessun commit pushato e la run Claude non e' terminata con success ('$CLAUDE_OUTCOME') → non-progresso reale. Job ROSSO (segnale preservato; il round-cap porta a needs-human a N>=2)."
             exit 1
+          fi
+          if ! now_body_sha=$(gh api "repos/$REPO/pulls/$PR_NUMBER" \
+            --jq 'if type != "object" then error("PR response is not an object") elif (has("body") | not) then error("PR response has no body field") elif .body != null and (.body | type) != "string" then error("PR body is not a string or null") else (.body // "") end' \
+            | sha256sum | cut -d' ' -f1); then
+            echo "::error::❌-check-fix: impossibile leggere un body valido della PR dopo Claude → classificazione BLOCCANTE, job ROSSO."
+            exit 1
+          fi
+          if ! printf '%s\n' "$now_body_sha" | grep -Eq '^[0-9a-f]{64}$'; then
+            echo "::error::❌-check-fix: il digest SHA-256 del body PR dopo Claude non e' valido → classificazione BLOCCANTE, job ROSSO."
+            exit 1
+          fi
+          if [ "$now_body_sha" != "$BASE_BODY_SHA" ]; then
+            echo "Body PR cambiato senza push, CLI terminata con success → progresso body-only. Job verde."
+            exit 0
           fi
           NOW_COMMENTS=$(gh api "repos/$REPO/issues/$PR_NUMBER/comments" --paginate --jq 'length' 2>/dev/null || echo "${BASE_COMMENTS:-0}")
           if [ "${NOW_COMMENTS:-0}" -le "${BASE_COMMENTS:-0}" ]; then
-            echo "::error::❌-check-fix: nessun commit pushato, CLI uscita '$CLAUDE_OUTCOME', e nessun commento nuovo a spiegare perche' (commenti $BASE_COMMENTS→$NOW_COMMENTS) → non-progresso SILENZIOSO, non un terminale legittimo. Job ROSSO."
+            echo "::error::❌-check-fix: nessun commit pushato, CLI uscita '$CLAUDE_OUTCOME', body invariato e nessun commento nuovo a spiegare perche' (commenti ${BASE_COMMENTS:-0}→${NOW_COMMENTS:-0}) → non-progresso SILENZIOSO, non un terminale legittimo. Job ROSSO."
             exit 1
           fi
-          echo "Nessun push ma CLI terminata pulita ('$CLAUDE_OUTCOME') con una spiegazione nuova sulla PR → terminale legittimo (es. non auto-fixabile). Job verde."
+          echo "Nessun push, body invariato ma CLI terminata pulita ('$CLAUDE_OUTCOME') con una spiegazione nuova sulla PR → terminale legittimo (es. non auto-fixabile). Job verde."
           exit 0
