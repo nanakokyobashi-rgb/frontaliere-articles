@@ -1,5 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/cronaca/1943691/bambino-incidente-anni-morto-agosto": "incidente-veicolo-agricolo-morto-bambino-9-anni",
   "https://www.rsi.ch/info/dialogo/cani-e-gatti-sono-pi%c3%b9-intelligenti-di-quanto-si-pensi--3933408.html": "intelligenza-animali-domestici-ricerca",
   "https://www.tvsvizzera.it/tvs/svizzera-istruzioni-per-luso": "trasparenza-fatture-ospedaliere-svizzera",
   "https://www.admin.ch/it/newnsb/yl8ygcr01mgjz6jnmghea": "nuova-notifiche-di-cessazione-delle-inquieste-del-sisi",
@@ -2189,6 +2188,11 @@
   "https://www.tio.ch/svizzera/economia/1948849/modelli-intelligenza-nestle-gruppo-consumatori": {
     "articleId": "nestle-ai-consumatori-ricerca",
     "ts": "2026-09-09T02:03:59.538Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/s/4068571": {
+    "articleId": "f35-caccia-commissione-amherd",
+    "ts": "2026-09-09T02:21:06.197Z",
     "keyForm": 2
   }
 }
