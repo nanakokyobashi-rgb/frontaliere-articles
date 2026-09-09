@@ -198,9 +198,10 @@ jobs:
                ## Implementato
                - <regola aggiunta> ← cluster <source/bucket> ×<count> (es. PR/issue #...)
                ## Non implementato (ancora)
-               - <cluster scartati e perché: già coperto / troppo vago / volume non-istruzione>
+               - <cluster scartato e perché: già coperto / troppo vago / volume non-istruzione>. **Stato:** `Nessun lavoro dovuto` (oppure `in questa PR` / `PR concatenata #N` / `blocked: <causa>` se del lavoro resta davvero dovuto)
                ```
-               Aggiungi in fondo: "⚠️ Proposta auto-generata dal lessons-harvester. Human-gated: rivedere prima di mergere. Se modifica `.github/workflows/` non è prevista (solo `.md`)."
+               Lo `**Stato:**` letterale su OGNI voce non è cosmetico: `scripts/ci/pr-body-contract.mjs` gira dentro il check richiesto `tests (node --test)` ed è il PRIMO step del job, quindi un body senza stato nasce rosso e fa saltare in cascata anche il gate della review. Un cluster scartato è uno stato terminale: `Nessun lavoro dovuto` è la forma che `pr-body-nextstep-check.mjs` accetta — «scartato», «rumore», «nessun flag azionabile» da soli NON bastano. I sibling che aprono PR (`issue-fix.yml`, `transport-identical-twins.yml`) lo prescrivono già.
+               Aggiungi in fondo, DOPO una riga vuota (altrimenti il trailer viene risucchiato nell'ultimo bullet e il gate lo legge come parte della voce): "⚠️ Proposta auto-generata dal lessons-harvester. Human-gated: rivedere prima di mergere. Se modifica `.github/workflows/` non è prevista (solo `.md`)."
             7. NON mergiare. È una proposta: la rivede un umano.
 
       - name: Report failure to GitHub Issues
