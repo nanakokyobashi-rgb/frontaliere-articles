@@ -6154,6 +6154,12 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.avs-prestazioni-complementari-ginevra.title': 'AVS e prestazioni complementari Canton Ginevra',
     'blog.article.avs-prestazioni-complementari-ginevra.excerpt': 'Come funziona l\'AVS nel Canton Ginevra: cassa di compensazione, calcolo della rendita, lacune contributive e prestazioni complementari per il minimo vitale.',
     'blog.article.avs-prestazioni-complementari-ginevra.imageAlt': 'Scrivania di ufficio amministrativo cantonale con documenti di rendita AVS e prestazioni complementari, ambiente di lavoro professionale.',
+    'blog.article.imposta-successione-appenzello-interno-aliquote.title': 'Imposta successione Appenzello Interno: aliquote ed esenzioni',
+    'blog.article.imposta-successione-appenzello-interno-aliquote.excerpt': 'Guida alla tassazione successoria in Appenzello Interno: come funzionano aliquote per grado di parentela, esenzioni coniuge e figli, procedura dichiarazione.',
+    'blog.article.imposta-successione-appenzello-interno-aliquote.imageAlt': 'Paesaggio tradizionale del cantone Appenzello Interno con architettura alpina svizzera',
+    'blog.article.regola-3-30-300-verde-citta.title': 'Verde urbano: la regola 3-30-300 per città fresche',
+    'blog.article.regola-3-30-300-verde-citta.excerpt': 'Studio europeo su 862 città: il 28% della popolazione svizzera vive in quartieri verdi. La regola 3-30-300 indica il percorso verso città più fresche',
+    'blog.article.regola-3-30-300-verde-citta.imageAlt': 'Piazza del Sole a Bellinzona con edifici e poca vegetazione, esempio di isola di calore urbano',
 };
 
 export default blogMetaChIt;
