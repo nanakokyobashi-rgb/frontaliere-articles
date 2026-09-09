@@ -1,5 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/cronaca/1944122/popolazione-fumo-moriken-allerta-incendio": "incendio-moeriken-2024",
   "https://www.tio.ch/svizzera/cronaca/1944076/ciclista-grave-stato-ospedale-soccorso": "ciclista-grave-dopo-una-caduta",
   "https://www.swissinfo.ch/ita/offre-20-franchi-a-controllore-per-non-pagare-multa%2c-si-muove-l%27mpc/91900170": "offre-controllore-treno-multa",
   "https://www.tio.ch/sport/calcio/1944097/aa-coppa-svizera-quali-formazione": "coppa-svizzera-risultati-partiti",
@@ -2285,6 +2284,11 @@
   "https://www.swissinfo.ch/ita/ubs-lancia-yumo%2c-piattaforma-spiega-ai-giovani-denaro-ed-economia/92031883": {
     "articleId": "yumo-piattaforma-giovani-finanza",
     "ts": "2026-09-09T20:44:51.116Z",
+    "keyForm": 2
+  },
+  "https://www.admin.ch/it/newnsb/b8vgbeq0hug8": {
+    "articleId": "commissioni-extraparlamentari-riorganizzazione",
+    "ts": "2026-09-09T23:11:29.217Z",
     "keyForm": 2
   }
 }
