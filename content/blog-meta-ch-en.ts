@@ -6175,6 +6175,21 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.internet-banda-larga-svizzera.title': 'Fast internet throughout Switzerland: federal plan',
     'blog.article.internet-banda-larga-svizzera.excerpt': 'Federal Council adopts CHF 730 million programme for broadband in sparsely populated areas. Target: 1 Gb/s by 2030.',
     'blog.article.internet-banda-larga-svizzera.imageAlt': 'Swiss Alpine village with modern fiber optic infrastructure in rural mountains',
+    'blog.article.giornata-informativa-esercito-donne.title': 'Compulsory Information Day for Swiss Women',
+    'blog.article.giornata-informativa-esercito-donne.excerpt': 'The Federal Council approves the message for a mandatory information day on the army and civil protection. Popular vote in 2028, implementation early 2030.',
+    'blog.article.giornata-informativa-esercito-donne.imageAlt': 'Swiss institutional government building with national flag, representing federal administration and policy decisions',
+    'blog.article.legge-militare-struttura-condotta-2026.title': 'Federal Council: new Swiss army structure',
+    'blog.article.legge-militare-struttura-condotta-2026.excerpt': 'The Federal Council launches consultation on changes to military law: new conduct structure, overseas services for militia servicemen, protection from espionage.',
+    'blog.article.legge-militare-struttura-condotta-2026.imageAlt': 'Swiss Federal Parliament in Bern, where the Federal Council initiated the consultation on military law reforms',
+    'blog.article.consiglio-federale-ruag-mro.title': 'Federal Council: RUAG MRO becomes a public company',
+    'blog.article.consiglio-federale-ruag-mro.excerpt': 'The Federal Council adopts the message to transform RUAG MRO from a private company to a public company by special law. More transparent governance and strengthened federal control.',
+    'blog.article.consiglio-federale-ruag-mro.imageAlt': 'View of Bellinzona, capital of Ticino, representing Switzerland',
+    'blog.article.zimmer-biomet-tagli-impieghi.title': 'Zimmer Biomet cuts up to 580 jobs in Winterthur',
+    'blog.article.zimmer-biomet-tagli-impieghi.excerpt': 'The US giant launches the consultation procedure with workers to reduce staff. Procedures and benefits for affected employees.',
+    'blog.article.zimmer-biomet-tagli-impieghi.imageAlt': 'Zimmer Biomet manufacturing facility in Winterthur, canton Zurich, where up to 580 jobs will be cut',
+    'blog.article.ubs-yumo-educazione-finanziaria.title': 'UBS launches YUMO: free financial education',
+    'blog.article.ubs-yumo-educazione-finanziaria.excerpt': 'Free UBS platform to teach young Swiss people how to manage savings, investments and personal finances. Available in Italian, German, French and English.',
+    'blog.article.ubs-yumo-educazione-finanziaria.imageAlt': 'View of Lugano with lake and mountains, symbolizing modern Switzerland',
 };
 
 export default blogMetaChEn;

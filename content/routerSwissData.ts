@@ -2084,6 +2084,11 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'stablecoin-franco-fase-operativa': { it: 'stablecoin-franco-fase-operativa', en: 'stablecoin-franc-operational-phase', de: 'stablecoin-franken-operativ-phase', fr: 'stablecoin-franc-phase-operative' },
  'accordo-clima-commercio-consultazione': { it: 'accordo-clima-commercio-consultazione', en: 'climate-commerce-agreement-consultation', de: 'klima-handels-vereinbarung-konsultation', fr: 'accord-climat-commerce-consultation' },
  'internet-banda-larga-svizzera': { it: 'internet-banda-larga-svizzera', en: 'fast-internet-broadband-switzerland', de: 'schnelles-internet-breitband-schweiz', fr: 'internet-rapide-haut-debit-suisse' },
+ 'giornata-informativa-esercito-donne': { it: 'giornata-informativa-esercito-donne', en: 'mandatory-information-day-military-women', de: 'obligatorischer-informationstag-militar-frauen', fr: 'journee-information-obligatoire-armee-femmes' },
+ 'legge-militare-struttura-condotta-2026': { it: 'legge-militare-struttura-condotta-2026', en: 'military-law-command-structure-2026', de: 'militaergesetz-kommandostruktur-2026', fr: 'loi-militaire-structure-commandement-2026' },
+ 'consiglio-federale-ruag-mro': { it: 'consiglio-federale-ruag-mro', en: 'federal-council-ruag-mro', de: 'bundesrat-ruag-mro', fr: 'conseil-federal-ruag-mro' },
+ 'zimmer-biomet-tagli-impieghi': { it: 'zimmer-biomet-tagli-impieghi', en: 'zimmer-biomet-job-cuts', de: 'zimmer-biomet-stellenabbau', fr: 'zimmer-biomet-suppressions-emplois' },
+ 'ubs-yumo-educazione-finanziaria': { it: 'ubs-yumo-educazione-finanziaria', en: 'ubs-yumo-financial-education', de: 'ubs-yumo-finanzbildung', fr: 'ubs-yumo-education-financiere' },
 };
 
 export const REVERSE_SWISS: Record<ArticleLocale, Record<string, string>> = (() => {

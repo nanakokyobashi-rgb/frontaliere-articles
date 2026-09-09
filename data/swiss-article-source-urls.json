@@ -1,9 +1,4 @@
 {
-  "https://www.admin.ch/it/newnsb/1bh4hncuypwb_wqjpywr4": "economia-svizzera-crescita-trimestrale",
-  "https://www.rsi.ch/s/3986376": "economia-recupero-2026",
-  "https://www.swissinfo.ch/ita/finma-lancia-l%27allarme%3a-%22cyberattacchi-in-aumento%2c-ia-%c3%a8-un-rischio%22/91900664": "finma-allarme-cyberattacchi",
-  "https://www.admin.ch/it/newnsb/vuqfqounkiqgd_bcmybzs": "asilo-nuovo-altstaetten",
-  "https://www.swissinfo.ch/ita/franco-pi%c3%b9-debole%3a-euro-torna-sopra-0%2c94%2c-prima-volta-da-un-anno/91899303": "svizzero-franco-euro",
   "https://www.tio.ch/svizzera/politica/1944069/pacchetto-ue-w-thrich-salari-protezione-commissione-stati-accordi-rifiuto-opzione": "travail-suisse-ue-accordi",
   "https://www.tvsvizzera.it/tvs/lavoro-ed-economia/slow-water-lagricoltura-svizzera-si-prepara-alla-crisi-climatica/91860488": "frontaliere-ticino-slow-water",
   "https://www.stelle.admin.ch/it": "lavorare-amministrazione-federale-svizzera",
@@ -2217,6 +2212,31 @@
   "https://www.rsi.ch/s/4071154": {
     "articleId": "internet-banda-larga-svizzera",
     "ts": "2026-09-09T12:52:12.835Z",
+    "keyForm": 2
+  },
+  "https://www.admin.ch/it/newnsb/f3icqi3q6dhy": {
+    "articleId": "giornata-informativa-esercito-donne",
+    "ts": "2026-09-09T13:28:14.375Z",
+    "keyForm": 2
+  },
+  "https://www.admin.ch/it/newnsb/tcvrfkjrt6rn": {
+    "articleId": "legge-militare-struttura-condotta-2026",
+    "ts": "2026-09-09T13:43:52.956Z",
+    "keyForm": 2
+  },
+  "https://www.admin.ch/it/newnsb/u1cjj4hjgi5y": {
+    "articleId": "consiglio-federale-ruag-mro",
+    "ts": "2026-09-09T14:04:13.916Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/economia/1949053/zimmer-processo-biomet-winterthur-impieghi": {
+    "articleId": "zimmer-biomet-tagli-impieghi",
+    "ts": "2026-09-09T14:26:36.694Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/economia/1949067/ubs-yumo-svizzera-piattaforma-giovani-insegna-fare-risparmi-investimenti": {
+    "articleId": "ubs-yumo-educazione-finanziaria",
+    "ts": "2026-09-09T14:43:40.499Z",
     "keyForm": 2
   }
 }

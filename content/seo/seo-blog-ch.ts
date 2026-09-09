@@ -80165,6 +80165,201 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-giornata-informativa-esercito-donne': {
+    title: 'Giornata informativa obbligatoria per le donne svizzere',
+    description: 'Il Consiglio federale approva il messaggio per una giornata informativa obbligatoria sull\'esercito e protezione civile per le donne. Votazione nel 2028',
+    keywords: 'frontalieri, ticino, svizzera, italia, giornata, informativa, obbligatoria, donne',
+    ogTitle: 'Consiglio federale approva giornata informativa per donne',
+    ogDescription: 'Il Consiglio federale ha approvato il 9 settembre 2026 il messaggio per una giornata informativa obbligatoria sull\'esercito e la protezione civile per le cittadine svizzere. Richiede modifiche costituzionali e una votazione popolare nel 2028',
+    canonicalPath: '/articoli-svizzera/giornata-informativa-esercito-donne/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Giornata informativa obbligatoria per le donne svizzere",
+      "description": "Il Consiglio federale approva il messaggio per una giornata informativa obbligatoria sull'esercito e protezione civile per le donne. Votazione nel 2028",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/giornata-informativa-esercito-donne.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Palazzo istituzionale svizzero con bandiera nazionale, simbolo dell'amministrazione federale e delle decisioni politiche del Consiglio federale"
+      },
+      "datePublished": "2026-09-09T13:28:14+00:00",
+      "dateModified": "2026-09-09T13:28:14+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/giornata-informativa-esercito-donne/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-legge-militare-struttura-condotta-2026': {
+    title: 'Consiglio federale: nuova struttura esercito svizzero',
+    description: 'Il Consiglio federale avvia consultazione su modifiche legge militare: nuova struttura di condotta, servizi all\'estero per militari di milizia, protezione',
+    keywords: 'frontalieri, ticino, svizzera, italia, consiglio, federale, nuova, struttura',
+    ogTitle: 'Nuova struttura dell\'esercito svizzero',
+    ogDescription: 'Il Consiglio federale trasforma la struttura dell\'esercito per rafforzare la difesa. Scopri le novità su obblighi militari, protezione da spionaggio e progetti pilota.',
+    canonicalPath: '/articoli-svizzera/legge-militare-struttura-condotta-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Consiglio federale: nuova struttura esercito svizzero",
+      "description": "Il Consiglio federale avvia consultazione su modifiche legge militare: nuova struttura di condotta, servizi all'estero per militari di milizia, protezione",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/legge-militare-struttura-condotta-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Parlamento federale svizzero a Berna, sede del Consiglio federale che ha avviato la consultazione sulla riforma dell'esercito"
+      },
+      "datePublished": "2026-09-09T13:43:52+00:00",
+      "dateModified": "2026-09-09T13:43:52+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/legge-militare-struttura-condotta-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-consiglio-federale-ruag-mro': {
+    title: 'Consiglio federale: RUAG MRO diventa società pubblica',
+    description: 'Consiglio federale adotta messaggio per trasformare RUAG MRO da società privata a società pubblica con legge speciale e governance più trasparente.',
+    keywords: 'frontalieri, ticino, svizzera, italia, consiglio, federale, ruag, diventa',
+    ogTitle: 'Consiglio federale: RUAG MRO diventa società pubblica',
+    ogDescription: 'RUAG MRO diventa società pubblica con legge speciale. Governance più trasparente, controllo federale rafforzato e nuove regole su conflitti di interesse nella gestione dell\'azienda d\'armamento della Confederazione.',
+    canonicalPath: '/articoli-svizzera/consiglio-federale-ruag-mro/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Consiglio federale: RUAG MRO diventa società pubblica",
+      "description": "Consiglio federale adotta messaggio per trasformare RUAG MRO da società privata a società pubblica con legge speciale e governance più trasparente.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/consiglio-federale-ruag-mro.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Veduta di Bellinzona, capitale del Ticino e rappresentante della Svizzera"
+      },
+      "datePublished": "2026-09-09T14:04:13+00:00",
+      "dateModified": "2026-09-09T14:04:13+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/consiglio-federale-ruag-mro/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-zimmer-biomet-tagli-impieghi': {
+    title: 'Zimmer Biomet taglia fino a 580 impieghi a Winterthur',
+    description: 'Zimmer Biomet annuncia tagli fino a 580 posti a Winterthur nel cantone Zurigo. Procedura di consultazione con i lavoratori avviata. Accesso ai benefici',
+    keywords: 'frontalieri, ticino, svizzera, italia, zimmer, biomet, taglia, fino',
+    ogTitle: 'Zimmer Biomet taglia fino a 580 impieghi a Winterthur',
+    ogDescription: 'Il colosso statunitense Zimmer Biomet ha comunicato il taglio di fino a 580 posti presso lo stabilimento di Winterthur. La procedura di consultazione con i lavoratori è stata avviata oggi.',
+    canonicalPath: '/articoli-svizzera/zimmer-biomet-tagli-impieghi/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Zimmer Biomet taglia fino a 580 impieghi a Winterthur",
+      "description": "Zimmer Biomet annuncia tagli fino a 580 posti a Winterthur nel cantone Zurigo. Procedura di consultazione con i lavoratori avviata. Accesso ai benefici",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/zimmer-biomet-tagli-impieghi.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Stabilimento produttivo di Zimmer Biomet a Winterthur nel cantone Zurigo, dove saranno tagliati fino a 580 posti di lavoro"
+      },
+      "datePublished": "2026-09-09T14:26:36+00:00",
+      "dateModified": "2026-09-09T14:26:36+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/zimmer-biomet-tagli-impieghi/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-ubs-yumo-educazione-finanziaria': {
+    title: 'UBS lancia YUMO: educazione finanziaria gratuita',
+    description: 'Piattaforma gratuita di UBS per insegnare ai giovani svizzeri a gestire risparmi, investimenti e finanze personali. Disponibile in italiano, tedesco, francese',
+    keywords: 'frontalieri, ticino, svizzera, italia, lancia, yumo, educazione, finanziaria',
+    ogTitle: 'UBS lancia YUMO: educazione finanziaria gratuita per giovani',
+    ogDescription: 'UBS presenta YUMO, la nuova piattaforma digitale gratuita per insegnare ai giovani svizzeri a gestire consapevolmente risparmi, investimenti e denaro personale. Disponibile in italiano, tedesco, francese e inglese.',
+    canonicalPath: '/articoli-svizzera/ubs-yumo-educazione-finanziaria/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "UBS lancia YUMO: educazione finanziaria gratuita",
+      "description": "Piattaforma gratuita di UBS per insegnare ai giovani svizzeri a gestire risparmi, investimenti e finanze personali. Disponibile in italiano, tedesco, francese",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/ubs-yumo-educazione-finanziaria.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Veduta di Lugano con lago e montagne sullo sfondo, simbolo della Svizzera moderna"
+      },
+      "datePublished": "2026-09-09T14:43:40+00:00",
+      "dateModified": "2026-09-09T14:43:40+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/ubs-yumo-educazione-finanziaria/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;
