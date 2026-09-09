@@ -1,5 +1,4 @@
 {
-  "https://www.stelle.admin.ch/it": "lavorare-amministrazione-federale-svizzera",
   "https://www.swissinfo.ch/ita/sg%3a-porte-aperte-al-nuovo-centro-federale-d%27asilo-ad-altst%c3%a4tten/91903753": "centro-asilo-altstaetten",
   "https://www.rsi.ch/s/3990270": "sindacati-delusi",
   "https://www.rsi.ch/s/3989274": "casse-malattia-tetto-stipendi-politica-simbolica",
@@ -2245,6 +2244,11 @@
   "https://www.swissinfo.ch/ita/guerre-e-caldo-frenano-i-viaggi%2c-fatturato-tour-operator-in-calo/92028475": {
     "articleId": "tour-operator-calo-conflitti",
     "ts": "2026-09-09T16:03:45.072Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/politica/1949044/federale-ampliamento-consiglio-internet-zone-accesso": {
+    "articleId": "banda-larga-zone-rurali",
+    "ts": "2026-09-09T16:22:52.272Z",
     "keyForm": 2
   }
 }
