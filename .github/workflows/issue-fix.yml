@@ -257,6 +257,16 @@ jobs:
             echo "issue #$ISSUE_NUMBER: nessun gruppo B19 → flusso singolo"
             exit 0
           fi
+          # La label dichiara il leader nel suffisso `-<numero>`: solo quella issue
+          # apre la run di gruppo. Senza questo confronto ogni membro etichettato
+          # `agent:fix` diventerebbe leader e lancerebbe la propria run — la
+          # `concurrency` e' per-issue e il claim mutex prende solo `$ISSUE_NUMBER`,
+          # quindi due membri produrrebbero due PR che chiudono le stesse issue.
+          group_leader=${group_label##*-}
+          if [ "$group_leader" != "$ISSUE_NUMBER" ]; then
+            echo "issue #$ISSUE_NUMBER: gruppo $group_label guidato da #$group_leader → flusso singolo"
+            exit 0
+          fi
 
           if ! GROUP_MAX_SIZE=$(node --input-type=module -e "import('./scripts/ci/followup-drainer.mjs').then(({ ISSUE_GROUP_MAX_SIZE }) => process.stdout.write(String(ISSUE_GROUP_MAX_SIZE)))"); then
             echo "::warning::impossibile leggere il tetto del raggruppatore → fallback alla issue #$ISSUE_NUMBER"
