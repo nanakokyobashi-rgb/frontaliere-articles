@@ -1,5 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/politica/1944069/pacchetto-ue-w-thrich-salari-protezione-commissione-stati-accordi-rifiuto-opzione": "travail-suisse-ue-accordi",
   "https://www.tvsvizzera.it/tvs/lavoro-ed-economia/slow-water-lagricoltura-svizzera-si-prepara-alla-crisi-climatica/91860488": "frontaliere-ticino-slow-water",
   "https://www.stelle.admin.ch/it": "lavorare-amministrazione-federale-svizzera",
   "https://www.swissinfo.ch/ita/sg%3a-porte-aperte-al-nuovo-centro-federale-d%27asilo-ad-altst%c3%a4tten/91903753": "centro-asilo-altstaetten",
@@ -2237,6 +2236,11 @@
   "https://www.tio.ch/svizzera/economia/1949067/ubs-yumo-svizzera-piattaforma-giovani-insegna-fare-risparmi-investimenti": {
     "articleId": "ubs-yumo-educazione-finanziaria",
     "ts": "2026-09-09T14:43:40.499Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/attualita/1948814/svizzera-accordo-rete-alleanza-elettricita-isola": {
+    "articleId": "alleanza-energia-elettrica-svizzera",
+    "ts": "2026-09-09T15:04:55.514Z",
     "keyForm": 2
   }
 }
