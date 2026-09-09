@@ -1,5 +1,4 @@
 {
-  "https://www.swissinfo.ch/ita/finma-lancia-l%27allarme%3a-%22cyberattacchi-in-aumento%2c-ia-%c3%a8-un-rischio%22/91900664": "finma-allarme-cyberattacchi",
   "https://www.admin.ch/it/newnsb/vuqfqounkiqgd_bcmybzs": "asilo-nuovo-altstaetten",
   "https://www.swissinfo.ch/ita/franco-pi%c3%b9-debole%3a-euro-torna-sopra-0%2c94%2c-prima-volta-da-un-anno/91899303": "svizzero-franco-euro",
   "https://www.tio.ch/svizzera/politica/1944069/pacchetto-ue-w-thrich-salari-protezione-commissione-stati-accordi-rifiuto-opzione": "travail-suisse-ue-accordi",
@@ -2225,6 +2224,11 @@
   "https://www.admin.ch/it/newnsb/tcvrfkjrt6rn": {
     "articleId": "legge-militare-struttura-condotta-2026",
     "ts": "2026-09-09T13:43:52.956Z",
+    "keyForm": 2
+  },
+  "https://www.admin.ch/it/newnsb/u1cjj4hjgi5y": {
+    "articleId": "consiglio-federale-ruag-mro",
+    "ts": "2026-09-09T14:04:13.916Z",
     "keyForm": 2
   }
 }
