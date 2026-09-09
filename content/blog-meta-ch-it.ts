@@ -6133,6 +6133,21 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.aprire-attivita-appenzello-interno-costi.title': 'Aprire attività Appenzello Interno: costi e registrazione',
     'blog.article.aprire-attivita-appenzello-interno-costi.excerpt': 'Guida completa ad aprire un\'attività in Appenzello Interno: registrazione, capitale minimo e obblighi AVS, LPP, LAMal.',
     'blog.article.aprire-attivita-appenzello-interno-costi.imageAlt': 'Ufficio amministrativo svizzero con documenti di registrazione al registro di commercio',
+    'blog.article.pa30-consultazione-agricola.title': 'PA30+: consultazione federale su agricoltura',
+    'blog.article.pa30-consultazione-agricola.excerpt': 'Consultazione PA30+ con tutti gli attori agroalimentari. Novità su voto online a Neuchâtel, malattie rare e fondi clima.',
+    'blog.article.pa30-consultazione-agricola.imageAlt': 'Paesaggio agricolo svizzero con prati alpini e boschi durante ondata di calore estivo',
+    'blog.article.uri-franchigie-modelli-sussidio.title': 'Cassa malati Uri: franchigie, modelli e riduzione',
+    'blog.article.uri-franchigie-modelli-sussidio.excerpt': 'Nel Canton Uri, i premi LAMal variano per franchigia e modello assicurativo. Scopri le fasce disponibili (CHF 300–2500), i modelli di copertura e come accedere al sussidio cantonale.',
+    'blog.article.uri-franchigie-modelli-sussidio.imageAlt': 'Studio medico moderno in Svizzera con operatori che consultano documenti di assicurazione malattia',
+    'blog.article.permesso-c-canton-uri-richiesta.title': 'Permesso C canton Uri: anni e procedura',
+    'blog.article.permesso-c-canton-uri-richiesta.excerpt': 'Requisiti federali e cantonali per ottenere il permesso di domicilio C nel Cantone Uri: 10 anni di residenza, integrazione e conoscenze linguistiche.',
+    'blog.article.permesso-c-canton-uri-richiesta.imageAlt': 'Edificio dell\'amministrazione cantonale per la gestione dei permessi di domicilio e dell\'integrazione dei cittadini stranieri.',
+    'blog.article.nestle-ai-consumatori-ricerca.title': 'Nestle monitora le ricerche AI dei consumatori',
+    'blog.article.nestle-ai-consumatori-ricerca.excerpt': 'Il gruppo svizzero monitora come i modelli linguistici accedono ai suoi siti e analizza le domande dei consumatori all\'IA per adattare il marketing.',
+    'blog.article.nestle-ai-consumatori-ricerca.imageAlt': 'Sede di Nestlé a Vevey: l\'azienda svizzera monitora l\'accesso dell\'intelligenza artificiale ai suoi siti',
+    'blog.article.f35-caccia-commissione-amherd.title': 'F-35, Berna e USA: nessun prezzo fisso concordato',
+    'blog.article.f35-caccia-commissione-amherd.excerpt': 'Rapporto della Commissione di vigilanza smentisce Amherd: non c\'era accordo su prezzo fisso con gli USA. Credito aggiuntivo di 394 milioni CHF e riduzione a 30 caccia.',
+    'blog.article.f35-caccia-commissione-amherd.imageAlt': 'Parlamento federale svizzero a Berna, simbolo della vigilanza amministrativa sui progetti di difesa della Confederazione',
 };
 
 export default blogMetaChIt;

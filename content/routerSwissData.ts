@@ -2070,6 +2070,11 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'neutralita-iniziativa-svizzera-freysinger': { it: 'neutralita-iniziativa-svizzera-freysinger', en: 'neutrality-initiative-switzerland-freysinger', de: 'neutralitaet-initiative-schweiz-freysinger', fr: 'neutralite-initiative-suisse-freysinger' },
  'licenza-guida-lucerna-procedura': { it: 'licenza-guida-lucerna-procedura', en: 'driver-license-lucerne-procedure', de: 'fuehrerschein-luzern-verfahren', fr: 'permis-lucerne-procedure' },
  'aprire-attivita-appenzello-interno-costi': { it: 'aprire-attivita-appenzello-interno-costi', en: 'open-business-appenzell-internal-register', de: 'geschaft-offnen-appenzell-intern-handelsregister', fr: 'creer-entreprise-appenzell-interne-registre' },
+ 'pa30-consultazione-agricola': { it: 'pa30-consultazione-agricola', en: 'pa30-agricultural-consultation', de: 'pa30-landwirtschaftliche-konsultation', fr: 'pa30-consultation-agricole' },
+ 'uri-franchigie-modelli-sussidio': { it: 'uri-franchigie-modelli-sussidio', en: 'uri-franchises-models-subsidy', de: 'uri-franchisen-modelle-subvention', fr: 'uri-franchises-modeles-subsides' },
+ 'permesso-c-canton-uri-richiesta': { it: 'permesso-c-canton-uri-richiesta', en: 'permit-c-canton-uri-request', de: 'aufenthaltserlaubnis-c-kanton-uri-antrag', fr: 'permis-c-canton-uri-demande' },
+ 'nestle-ai-consumatori-ricerca': { it: 'nestle-ai-consumatori-ricerca', en: 'nestle-ai-consumer-research', de: 'nestle-ai-konsumenten-forschung', fr: 'nestle-ia-recherche-consommateurs' },
+ 'f35-caccia-commissione-amherd': { it: 'f35-caccia-commissione-amherd', en: 'f35-fighter-jets-commission-amherd', de: 'f35-kampfflugzeuge-kommission-amherd', fr: 'f35-chasseurs-commission-amherd' },
 };
 
 export const REVERSE_SWISS: Record<ArticleLocale, Record<string, string>> = (() => {

@@ -61,7 +61,20 @@ const MASSIMALE_FILE = {
   LPST: 4,
   RFW: 1,
   LPSPS: 1,
-  LD: 13,
+  // `LD` passa da 13 a 17 per le quattro traduzioni aggiunte con l'articolo
+  // `nestle-ai-consumatori-ricerca`: in ciascuna il riferimento a `JSON-LD`
+  // è parte necessaria della spiegazione sui metadati web strutturati, non un
+  // import, un commento o una copia accidentale da rimuovere.
+  //
+  // - content/blog-body-ch/de/nestle-ai-consumatori-ricerca.ts: `JSON-LD` è
+  //   nominato nell'elenco dei metadati da strutturare per i bot.
+  // - content/blog-body-ch/en/nestle-ai-consumatori-ricerca.ts: stesso
+  //   riferimento tecnico nella traduzione inglese dell'articolo.
+  // - content/blog-body-ch/fr/nestle-ai-consumatori-ricerca.ts: stesso
+  //   riferimento tecnico nella traduzione francese dell'articolo.
+  // - content/blog-body-ch/it/nestle-ai-consumatori-ricerca.ts: stesso
+  //   riferimento tecnico nella traduzione italiana dell'articolo.
+  LD: 17,
   LSS: 26,
   BWG: 3,
 };

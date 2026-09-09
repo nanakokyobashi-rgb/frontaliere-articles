@@ -6133,6 +6133,21 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.aprire-attivita-appenzello-interno-costi.title': 'Geschäft öffnen Appenzell Innerrhoden: Kosten und Anmeldung',
     'blog.article.aprire-attivita-appenzello-interno-costi.excerpt': 'Vollständiger Leitfaden zur Gründung eines Unternehmens in Appenzell Innerrhoden: Registrierung, Mindestkapital und Pflichten AHV, BVG, KVG.',
     'blog.article.aprire-attivita-appenzello-interno-costi.imageAlt': 'Schweizer Verwaltungsbüro mit Handelsregisterformularen und Registrierungsdokumenten',
+    'blog.article.pa30-consultazione-agricola.title': 'PA30+: Bundeskonsultation zur Landwirtschaft',
+    'blog.article.pa30-consultazione-agricola.excerpt': 'Konsultation PA30+ mit allen Akteuren der Agrar- und Ernährungswirtschaft. Neuigkeiten zur Online-Abstimmung in Neuenburg, zu seltenen Krankheiten und Klimafonds.',
+    'blog.article.pa30-consultazione-agricola.imageAlt': 'Schweizer Landwirtschaftslandschaft mit Alpweiden und Wäldern während Hitzewelle',
+    'blog.article.uri-franchigie-modelli-sussidio.title': 'URI-Krankenkasse: Selbstbehalte, Modelle und Reduktion',
+    'blog.article.uri-franchigie-modelli-sussidio.excerpt': 'Im Kanton Uri variieren die KVG-Prämien je nach Franchise und Versicherungsmodell. Entdecken Sie die verfügbaren Spannen (CHF 300–2500), die Deckungsmodelle und wie Sie auf den Kantonsbeitrag zugreifen können.',
+    'blog.article.uri-franchigie-modelli-sussidio.imageAlt': 'Modernes Gesundheitsbüro in der Schweiz mit Fachleuten, die Versicherungsdokumente konsultieren',
+    'blog.article.permesso-c-canton-uri-richiesta.title': 'Ausweis C Kanton Uri: Jahre und Verfahren',
+    'blog.article.permesso-c-canton-uri-richiesta.excerpt': 'Eidgenössische und kantonale Voraussetzungen für die Niederlassungsbewilligung C im Kanton Uri: 10 Jahre Aufenthalt, Integration und Sprachkenntnisse.',
+    'blog.article.permesso-c-canton-uri-richiesta.imageAlt': 'Kantonale Behördengebäude für die Verwaltung von Aufenthaltserlaubnissen und Integration ausländischer Bürger.',
+    'blog.article.nestle-ai-consumatori-ricerca.title': 'Nestle überwacht die KI-Suche der Verbraucher',
+    'blog.article.nestle-ai-consumatori-ricerca.excerpt': 'Die Schweizer Gruppe überwacht, wie Sprachmodelle auf ihre Websites zugreifen und analysiert die Nachfrage der Konsumenten nach KI, um das Marketing anzupassen.',
+    'blog.article.nestle-ai-consumatori-ricerca.imageAlt': 'Nestlé-Zentrale in Vevey: Schweizer Unternehmen überwacht AI-Zugriff auf ihre Websites',
+    'blog.article.f35-caccia-commissione-amherd.title': 'F-35, Bern und USA: kein Festpreis vereinbart',
+    'blog.article.f35-caccia-commissione-amherd.excerpt': 'Bericht der Aufsichtskommission dementiert Amherd: Es gab keine Festpreisvereinbarung mit den USA. Zusatzkredit von CHF 394 Mio. und Reduktion auf 30 Jagdflugzeuge.',
+    'blog.article.f35-caccia-commissione-amherd.imageAlt': 'Schweizer Bundesparlament in Bern, Symbol der Verwaltungsaufsicht über Verteidigungsprojekte',
 };
 
 export default blogMetaChDe;

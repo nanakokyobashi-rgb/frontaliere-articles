@@ -79619,6 +79619,201 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-pa30-consultazione-agricola': {
+    title: 'PA30+: consultazione federale su agricoltura | Frontaliere Ticino',
+    description: 'Consultazione PA30+ per riforma agricola svizzera. Novità su voto digitale a Neuchâtel, malattie rare e fondi climate per boschi e agricoltura. Dati aggiornati',
+    keywords: 'frontalieri, ticino, svizzera, italia, pa30, consultazione, federale, agricoltura',
+    ogTitle: 'PA30+: consultazione federale su agricoltura',
+    ogDescription: 'Consultazione PA30+ su agricoltura svizzera. Voto online a Neuchâtel, malattie rare, fondi contro canicola. Scadenze 2026: voto 27 settembre, pacchetto UE in Parlamento, sperimentazione e-voting 29 novembre.',
+    canonicalPath: '/articoli-svizzera/pa30-consultazione-agricola/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "PA30+: consultazione federale su agricoltura",
+      "description": "Consultazione PA30+ per riforma agricola svizzera. Novità su voto digitale a Neuchâtel, malattie rare e fondi climate per boschi e agricoltura. Dati aggiornati",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/pa30-consultazione-agricola.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Paesaggio agricolo svizzero con prati alpini e boschi durante ondata di calore estivo"
+      },
+      "datePublished": "2026-09-09T01:07:51+00:00",
+      "dateModified": "2026-09-09T01:07:51+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/pa30-consultazione-agricola/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-uri-franchigie-modelli-sussidio': {
+    title: 'Cassa malati Uri: franchigie, modelli e riduzione',
+    description: 'Nel Canton Uri, i premi LAMal variano per franchigia e modello assicurativo. Scopri le fasce disponibili (CHF 300–2500), i modelli di copertura e come accedere',
+    keywords: 'frontalieri, ticino, svizzera, italia, cassa, malati, franchigie, modelli',
+    ogTitle: 'Cassa malati Uri: franchigie, modelli e riduzione',
+    ogDescription: 'Nel Canton Uri, i premi LAMal variano per franchigia e modello assicurativo. Scopri le fasce disponibili (CHF 300–2500), i modelli di copertura e come accedere al sussidio cantonale.',
+    canonicalPath: '/articoli-svizzera/uri-franchigie-modelli-sussidio/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Cassa malati Uri: franchigie, modelli e riduzione",
+      "description": "Nel Canton Uri, i premi LAMal variano per franchigia e modello assicurativo. Scopri le fasce disponibili (CHF 300–2500), i modelli di copertura e come accedere",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/uri-franchigie-modelli-sussidio.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Studio medico moderno in Svizzera con operatori che consultano documenti di assicurazione malattia"
+      },
+      "datePublished": "2026-09-09T01:23:52+00:00",
+      "dateModified": "2026-09-09T01:23:52+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/uri-franchigie-modelli-sussidio/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-permesso-c-canton-uri-richiesta': {
+    title: 'Permesso C canton Uri: anni e procedura | Frontaliere Ticino',
+    description: 'Guida completa al permesso di domicilio C nel Cantone Uri: requisiti federali (10 anni residenza, 5 UE/AELS), integrazione, lingua e procedura di richiesta',
+    keywords: 'frontalieri, ticino, svizzera, italia, permesso, canton, anni, procedura',
+    ogTitle: 'Permesso C canton Uri: requisiti e guida pratica',
+    ogDescription: 'Scopri come richiedere il permesso di domicilio C nel Cantone Uri: 10 anni di residenza (5 per UE/AELS), criteri di integrazione, conoscenze linguistiche, procedura SEM e rilascio anticipato.',
+    canonicalPath: '/articoli-svizzera/permesso-c-canton-uri-richiesta/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Permesso C canton Uri: anni e procedura",
+      "description": "Guida completa al permesso di domicilio C nel Cantone Uri: requisiti federali (10 anni residenza, 5 UE/AELS), integrazione, lingua e procedura di richiesta",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/permesso-c-canton-uri-richiesta.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Edificio dell'amministrazione cantonale per la gestione dei permessi di domicilio e dell'integrazione dei cittadini stranieri."
+      },
+      "datePublished": "2026-09-09T01:51:36+00:00",
+      "dateModified": "2026-09-09T01:51:36+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/permesso-c-canton-uri-richiesta/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-nestle-ai-consumatori-ricerca': {
+    title: 'Nestle monitora le ricerche AI dei consumatori',
+    description: 'Il gruppo svizzero monitora come i modelli linguistici accedono ai suoi siti e analizza le domande dei consumatori all\'IA per adattare il marketing.',
+    keywords: 'frontalieri, ticino, svizzera, italia, nestle, monitora, ricerche, consumatori',
+    ogTitle: 'Nestle monitora le ricerche AI dei consumatori',
+    ogDescription: 'Il gruppo svizzero monitora come i modelli linguistici accedono ai suoi siti e analizza le domande dei consumatori all\'IA per adattare il marketing.',
+    canonicalPath: '/articoli-svizzera/nestle-ai-consumatori-ricerca/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Nestle monitora le ricerche AI dei consumatori",
+      "description": "Il gruppo svizzero monitora come i modelli linguistici accedono ai suoi siti e analizza le domande dei consumatori all'IA per adattare il marketing.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/nestle-ai-consumatori-ricerca.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Sede di Nestlé a Vevey: l'azienda svizzera monitora l'accesso dell'intelligenza artificiale ai suoi siti"
+      },
+      "datePublished": "2026-09-09T02:03:59+00:00",
+      "dateModified": "2026-09-09T02:03:59+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/nestle-ai-consumatori-ricerca/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-f35-caccia-commissione-amherd': {
+    title: 'F-35, Berna e USA: nessun prezzo fisso concordato',
+    description: 'Rapporto della Commissione di vigilanza smentisce Amherd: non c\'era accordo su prezzo fisso con gli USA per i F-35A. Credito aggiuntivo di 394 milioni CHF.',
+    keywords: 'frontalieri, ticino, svizzera, italia, f-35, berna, nessun, prezzo',
+    ogTitle: 'F-35, Berna e USA: nessun prezzo fisso concordato',
+    ogDescription: 'La Commissione di vigilanza del Consiglio nazionale critica la gestione dei negoziati per i caccia F-35. Nessun prezzo fisso era stato concordato con Washington. La Svizzera avrà 30 F-35 invece di 36 e dovrà aggiungere 394 milioni CHF al bilancio',
+    canonicalPath: '/articoli-svizzera/f35-caccia-commissione-amherd/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "F-35, Berna e USA: nessun prezzo fisso concordato",
+      "description": "Rapporto della Commissione di vigilanza smentisce Amherd: non c'era accordo su prezzo fisso con gli USA per i F-35A. Credito aggiuntivo di 394 milioni CHF.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/f35-caccia-commissione-amherd.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Parlamento federale svizzero a Berna, simbolo della vigilanza amministrativa sui progetti di difesa della Confederazione"
+      },
+      "datePublished": "2026-09-09T02:21:06+00:00",
+      "dateModified": "2026-09-09T02:21:06+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/f35-caccia-commissione-amherd/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

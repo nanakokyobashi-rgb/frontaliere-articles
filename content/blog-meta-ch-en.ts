@@ -6133,6 +6133,21 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.aprire-attivita-appenzello-interno-costi.title': 'Open Internal Appenzello activity: costs and registration',
     'blog.article.aprire-attivita-appenzello-interno-costi.excerpt': 'Complete guide to opening a business in Appenzello Interno: registration, minimum capital and AVS, LPP, LAMal obligations.',
     'blog.article.aprire-attivita-appenzello-interno-costi.imageAlt': 'Swiss administrative office with commercial register documents and official paperwork',
+    'blog.article.pa30-consultazione-agricola.title': 'PA30+: Federal Consultation on Agriculture',
+    'blog.article.pa30-consultazione-agricola.excerpt': 'PA30+ consultation with all agri-food stakeholders. News about online voting in Neuchâtel, rare diseases and climate funds.',
+    'blog.article.pa30-consultazione-agricola.imageAlt': 'Swiss rural landscape with alpine meadows and forests during summer heat wave',
+    'blog.article.uri-franchigie-modelli-sussidio.title': 'Uri sick fund: deductibles, models and reduction',
+    'blog.article.uri-franchigie-modelli-sussidio.excerpt': 'In Canton Uri, LAMal premiums vary by deductible and insurance model. Discover the bands available (CHF 300–2500), the coverage models and how to access the cantonal subsidy.',
+    'blog.article.uri-franchigie-modelli-sussidio.imageAlt': 'Modern healthcare office in Switzerland with professionals consulting health insurance documents',
+    'blog.article.permesso-c-canton-uri-richiesta.title': 'Permit C canton Uri: years and procedure',
+    'blog.article.permesso-c-canton-uri-richiesta.excerpt': 'Federal and cantonal requirements to obtain residence permit C in Canton Uri: 10 years of residence, integration and language skills.',
+    'blog.article.permesso-c-canton-uri-richiesta.imageAlt': 'Cantonal government office building responsible for residence permits and foreign citizen integration.',
+    'blog.article.nestle-ai-consumatori-ricerca.title': 'Nestle monitors consumer AI searches',
+    'blog.article.nestle-ai-consumatori-ricerca.excerpt': 'The Swiss group monitors how language models access its sites and analyzes consumer questions about AI to tailor marketing.',
+    'blog.article.nestle-ai-consumatori-ricerca.imageAlt': 'Nestlé headquarters in Vevey: Swiss company monitors AI access to its websites',
+    'blog.article.f35-caccia-commissione-amherd.title': 'F-35, Bern and USA: no fixed price agreed',
+    'blog.article.f35-caccia-commissione-amherd.excerpt': 'Report of the Supervisory Commission denies Amherd: there was no agreement on a fixed price with the US. Additional credit of CHF 394 million and reduction to 30 fighters.',
+    'blog.article.f35-caccia-commissione-amherd.imageAlt': 'Swiss Federal Parliament in Bern, symbol of administrative oversight on defense projects',
 };
 
 export default blogMetaChEn;

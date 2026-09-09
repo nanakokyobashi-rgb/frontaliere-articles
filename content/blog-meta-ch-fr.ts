@@ -6133,6 +6133,21 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.aprire-attivita-appenzello-interno-costi.title': 'Ouvrir l\'activité Appenzell Interne : coûts et inscription',
     'blog.article.aprire-attivita-appenzello-interno-costi.excerpt': 'Guide complet pour ouvrir une entreprise à Appenzell Interne : enregistrement, capital minimum et obligations AVS, LPP, LAMal.',
     'blog.article.aprire-attivita-appenzello-interno-costi.imageAlt': 'Bureau administratif suisse avec formulaires d\'enregistrement du registre du commerce',
+    'blog.article.pa30-consultazione-agricola.title': 'PA30+ : consultation fédérale sur l\'agriculture',
+    'blog.article.pa30-consultazione-agricola.excerpt': 'Consultation PA30+ avec tous les acteurs agroalimentaires. Nouveautés sur le vote en ligne à Neuchâtel, maladies rares et fonds climat.',
+    'blog.article.pa30-consultazione-agricola.imageAlt': 'Paysage agricole suisse avec prairies alpines et forêts pendant vague de chaleur',
+    'blog.article.uri-franchigie-modelli-sussidio.title': 'Caisse maladie URI : franchises, modèles et réduction',
+    'blog.article.uri-franchigie-modelli-sussidio.excerpt': 'Dans le canton d\'Uri, les primes LAMal varient selon la franchise et le modèle d\'assurance. Découvrez les tranches disponibles (CHF 300–2500), les modèles de couverture et comment accéder à l\'allocation cantonale.',
+    'blog.article.uri-franchigie-modelli-sussidio.imageAlt': 'Bureau de santé moderne en Suisse avec des professionnels consultant des documents d\'assurance maladie',
+    'blog.article.permesso-c-canton-uri-richiesta.title': 'Permis C canton URI : années et procédure',
+    'blog.article.permesso-c-canton-uri-richiesta.excerpt': 'Conditions fédérales et cantonales pour obtenir le permis de séjour C dans le canton d\'Uri : 10 ans de résidence, d\'intégration et de connaissances linguistiques.',
+    'blog.article.permesso-c-canton-uri-richiesta.imageAlt': 'Bâtiment administratif cantonal responsable des permis de résidence et de l\'intégration des citoyens étrangers.',
+    'blog.article.nestle-ai-consumatori-ricerca.title': 'Nestlé surveille les recherches des consommateurs',
+    'blog.article.nestle-ai-consumatori-ricerca.excerpt': 'Le groupe suisse surveille comment les modèles linguistiques accèdent à ses sites et analyse les demandes des consommateurs à l\'IA pour adapter le marketing.',
+    'blog.article.nestle-ai-consumatori-ricerca.imageAlt': 'Siège de Nestlé à Vevey: l\'entreprise suisse surveille l\'accès de l\'IA à ses sites',
+    'blog.article.f35-caccia-commissione-amherd.title': 'F-35, Berne et USA : pas de prix fixe convenu',
+    'blog.article.f35-caccia-commissione-amherd.excerpt': 'Le rapport de la Commission de surveillance dément Amherd : il n\'y avait pas d\'accord sur un prix fixe avec les États-Unis. Crédit supplémentaire de 394 millions de CHF et réduction à 30 chasseurs.',
+    'blog.article.f35-caccia-commissione-amherd.imageAlt': 'Parlement fédéral suisse à Berne, symbole de la surveillance administrative des projets de défense',
 };
 
 export default blogMetaChFr;
