@@ -1,5 +1,4 @@
 {
-  "https://www.admin.ch/it/newnsb/1bh4hncuypwb_wqjpywr4": "economia-svizzera-crescita-trimestrale",
   "https://www.rsi.ch/s/3986376": "economia-recupero-2026",
   "https://www.swissinfo.ch/ita/finma-lancia-l%27allarme%3a-%22cyberattacchi-in-aumento%2c-ia-%c3%a8-un-rischio%22/91900664": "finma-allarme-cyberattacchi",
   "https://www.admin.ch/it/newnsb/vuqfqounkiqgd_bcmybzs": "asilo-nuovo-altstaetten",
@@ -2217,6 +2216,11 @@
   "https://www.rsi.ch/s/4071154": {
     "articleId": "internet-banda-larga-svizzera",
     "ts": "2026-09-09T12:52:12.835Z",
+    "keyForm": 2
+  },
+  "https://www.admin.ch/it/newnsb/f3icqi3q6dhy": {
+    "articleId": "giornata-informativa-esercito-donne",
+    "ts": "2026-09-09T13:28:14.375Z",
     "keyForm": 2
   }
 }
