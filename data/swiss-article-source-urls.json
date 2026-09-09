@@ -1,5 +1,4 @@
 {
-  "https://www.rsi.ch/s/3989274": "casse-malattia-tetto-stipendi-politica-simbolica",
   "https://www.tio.ch/svizzera/attualita/1944094/asilo-centro-federale-altstatten-nuovo-sg-porte-aperte": "cfa-altstaetten-aperte",
   "https://lenews.ch/2026/08/14/switzerland-is-attracting-fewer-immigrants-and-losing-more-of-those-already-here": "svizzera-calo-immigrazione-emigrazione-2026",
   "https://www.tio.ch/svizzera/cronaca/1944044/veicoli-automatizzata-ricerca-arresti-sistema": "tendicione-arresti-veicoli-ricerca-2024",
@@ -2257,6 +2256,11 @@
   "https://www.stelle.admin.ch/it": {
     "articleId": "opportunita-lavoro-federale",
     "ts": "2026-09-09T17:14:57.264Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/ticino/politica/1949079/cantone-e-comuni-si-confrontano-su-fisco-progetto-ticino-2020-e-riforma-arp": {
+    "articleId": "cantone-comuni-fisco-riforma-arp",
+    "ts": "2026-09-09T17:32:52.261Z",
     "keyForm": 2
   }
 }
