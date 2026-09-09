@@ -1,5 +1,4 @@
 {
-  "https://www.swissinfo.ch/ita/vs%3a-mezzo-agricolo-esce-di-strada%2c-muore-bambino-di-nove-anni/91892452": "mezzo-agricolo-esce-di-strada-muore-bambino-di-nove-anni",
   "https://www.rsi.ch/s/3983871": "ospedali-svizzeri-pulizia-va-migliorata",
   "https://www.tio.ch/svizzera/cronaca/1943691/bambino-incidente-anni-morto-agosto": "incidente-veicolo-agricolo-morto-bambino-9-anni",
   "https://www.rsi.ch/info/dialogo/cani-e-gatti-sono-pi%c3%b9-intelligenti-di-quanto-si-pensi--3933408.html": "intelligenza-animali-domestici-ricerca",
@@ -2181,6 +2180,11 @@
   "https://www.tio.ch/ticino/attualita/1948889/neutralita-svizzera-freysinger-udc-consigliere": {
     "articleId": "neutralita-iniziativa-svizzera-freysinger",
     "ts": "2026-09-08T22:42:51.860Z",
+    "keyForm": 2
+  },
+  "https://www.admin.ch/it": {
+    "articleId": "pa30-consultazione-agricola",
+    "ts": "2026-09-09T01:07:51.783Z",
     "keyForm": 2
   }
 }
