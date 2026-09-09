@@ -47,6 +47,11 @@ test('redcheck filtra il rosso di sola review prima di spendere Claude', () => {
   );
   assert.match(
     block,
+    /check_runs_readable[\s\S]*prefilter review-only disabilitato[\s\S]*percorso normale mantenuto/,
+    'un errore della check-runs API deve disabilitare solo il prefilter, non trasformarsi in uno skip',
+  );
+  assert.match(
+    block,
     /redcheck-review-prefilter\.mjs/,
     'la decisione deve passare dall helper che usa le costanti condivise',
   );
@@ -95,6 +100,20 @@ test('il predicato richiede un finding reale sulla HEAD, non la conclusion dello
     reviewOnlyFailure({
       headSha: HEAD,
       jobs: [{ jobs: jobs() }],
+      reviews: [[review('`x.mjs:1`: 🔴 Important: il gate manca.')]],
+    }),
+    true,
+  );
+  const skippedReviewJobs = jobs().map(({ name, steps }) => ({
+    name,
+    steps: steps.map((step) => step.name === CLAUDE_REVIEW_STEP_NAME
+      ? { ...step, conclusion: 'skipped' }
+      : step),
+  }));
+  assert.equal(
+    reviewOnlyFailure({
+      headSha: HEAD,
+      jobs: [{ jobs: skippedReviewJobs }],
       reviews: [[review('`x.mjs:1`: 🔴 Important: il gate manca.')]],
     }),
     true,

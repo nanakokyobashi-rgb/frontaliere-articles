@@ -149,9 +149,18 @@ jobs:
 
           # La CI corrente deve essere DAVVERO rossa adesso: fra il trigger e qui
           # un rerun puo' aver rimesso verde, e allora non c'e' niente da fixare.
-          failed_checks=$(gh api "repos/$REPO/commits/$head_sha/check-runs?per_page=100" \
-            --jq '[.check_runs[] | select(.conclusion=="failure") | .name]' 2>/dev/null || echo "[]")
-          if [ "$failed_checks" = "[]" ]; then
+          check_runs_readable=true
+          if ! failed_checks=$(gh api "repos/$REPO/commits/$head_sha/check-runs?per_page=100" \
+            --jq '[.check_runs[] | select(.conclusion=="failure") | .name]' 2>/dev/null); then
+            check_runs_readable=false
+            failed_checks='["check-runs API unreadable"]'
+            echo "::warning::Check-runs API illeggibile → prefilter review-only disabilitato, percorso normale mantenuto."
+          elif ! printf '%s' "$failed_checks" | jq -e 'type == "array"' >/dev/null 2>&1; then
+            check_runs_readable=false
+            failed_checks='["check-runs API malformed"]'
+            echo "::warning::Risposta check-runs malformata → prefilter review-only disabilitato, percorso normale mantenuto."
+          fi
+          if [ "$check_runs_readable" = "true" ] && [ "$failed_checks" = "[]" ]; then
             skip "Nessun check in stato failure sulla HEAD adesso → gia' rientrato, skip (no-op)."
           fi
           rollup=$(printf '%s' "$failed_checks" | jq -r 'join(", ")' 2>/dev/null || echo "")
