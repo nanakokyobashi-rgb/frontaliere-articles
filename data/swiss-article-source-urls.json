@@ -1,5 +1,4 @@
 {
-  "https://www.tvsvizzera.it/tvs/lavoro-ed-economia/slow-water-lagricoltura-svizzera-si-prepara-alla-crisi-climatica/91860488": "frontaliere-ticino-slow-water",
   "https://www.stelle.admin.ch/it": "lavorare-amministrazione-federale-svizzera",
   "https://www.swissinfo.ch/ita/sg%3a-porte-aperte-al-nuovo-centro-federale-d%27asilo-ad-altst%c3%a4tten/91903753": "centro-asilo-altstaetten",
   "https://www.rsi.ch/s/3990270": "sindacati-delusi",
@@ -2241,6 +2240,11 @@
   "https://www.tio.ch/svizzera/attualita/1948814/svizzera-accordo-rete-alleanza-elettricita-isola": {
     "articleId": "alleanza-energia-elettrica-svizzera",
     "ts": "2026-09-09T15:04:55.514Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/guerre-e-caldo-frenano-i-viaggi%2c-fatturato-tour-operator-in-calo/92028475": {
+    "articleId": "tour-operator-calo-conflitti",
+    "ts": "2026-09-09T16:03:45.072Z",
     "keyForm": 2
   }
 }
