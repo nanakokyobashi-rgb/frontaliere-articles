@@ -34,18 +34,20 @@ import path from 'node:path';
 const ROOT = path.resolve(import.meta.dirname, '..', '..');
 
 /**
- * Massimali misurati su `origin/main` il 2026-08-25, in FILE distinti che
+ * Massimali misurati su `origin/main` il 2026-09-09, in FILE distinti che
  * contengono la sigla come parola intera sotto `content/`.
  *
- * Comando (uno per sigla, riproducibile a mano):
- *   git grep -a -w -l -- <SIGLA> HEAD -- content/ | wc -l
+ * Comando grezzo (uno per sigla, riproducibile a mano):
+ *   git grep -a -w -n -- <SIGLA> HEAD -- content/
  *
  * `-a`: i file del corpus contengono byte che git tratterebbe come binari, e
  * senza questo flag il conteggio torna zero senza dirlo (stessa trappola gia'
  * misurata su `create-article.mjs` per `grep`).
  * `-w`: confine di parola, che e' cio' che esclude i falsi positivi da sigle
  * piu' lunghe — `MLPS` e `TULPS` contengono `LPS`, e senza `-w` gonfiavano la
- * misura di #323.
+ * misura di #323. Git considera pero' `-` un separatore: il risultato viene
+ * quindi filtrato a livello di occorrenza, scartando la sigla adiacente a `-`
+ * quando fa parte di un composto come `JSON-LD` o `LTF-TI`.
  *
  * Scostamento dai numeri del body di #332 (misurati intorno al 2026-08-16):
  * LTF 89→103 file, RPS 10→10, LSO 8→8, LPF 9→6, LPST 4→4. Le occorrenze totali
@@ -54,43 +56,64 @@ const ROOT = path.resolve(import.meta.dirname, '..', '..');
  * in prosa scade, questo si rimisura a ogni run.
  */
 const MASSIMALE_FILE = {
-  LTF: 103,
+  LTF: 102,
   RPS: 10,
   LSO: 8,
   LPF: 6,
   LPST: 4,
   RFW: 1,
   LPSPS: 1,
-  // `LD` passa da 13 a 17 per le quattro traduzioni aggiunte con l'articolo
-  // `nestle-ai-consumatori-ricerca`: in ciascuna il riferimento a `JSON-LD`
-  // è parte necessaria della spiegazione sui metadati web strutturati, non un
-  // import, un commento o una copia accidentale da rimuovere.
-  //
-  // - content/blog-body-ch/de/nestle-ai-consumatori-ricerca.ts: `JSON-LD` è
-  //   nominato nell'elenco dei metadati da strutturare per i bot.
-  // - content/blog-body-ch/en/nestle-ai-consumatori-ricerca.ts: stesso
-  //   riferimento tecnico nella traduzione inglese dell'articolo.
-  // - content/blog-body-ch/fr/nestle-ai-consumatori-ricerca.ts: stesso
-  //   riferimento tecnico nella traduzione francese dell'articolo.
-  // - content/blog-body-ch/it/nestle-ai-consumatori-ricerca.ts: stesso
-  //   riferimento tecnico nella traduzione italiana dell'articolo.
-  LD: 17,
+  // PR #1276 aveva alzato `LD` da 13 a 17 per le quattro traduzioni di
+  // `nestle-ai-consumatori-ricerca`; questa PR conserva la ragione storica ma
+  // esclude `JSON-LD` (e gli altri composti) dal conteggio.
+  LD: 8,
   LSS: 26,
   BWG: 3,
 };
 
-/** File distinti sotto `content/` che contengono la sigla come parola intera. */
+function escapeRegExp(value) {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+/** Una sigla adiacente a `-` e' parte di un composto piu' grande. */
+function haOccorrenzaNonComposta(riga, sigla) {
+  const pattern = new RegExp(`(?<![A-Za-z0-9_])${escapeRegExp(sigla)}(?![A-Za-z0-9_])`, 'g');
+  return [...riga.matchAll(pattern)].some(({ index }) => riga[index - 1] !== '-' && riga[index + sigla.length] !== '-');
+}
+
+/** File distinti sotto `content/` che contengono la sigla fuori dai composti. */
+const fileConSiglaCache = new Map();
 function fileConSigla(sigla) {
+  if (fileConSiglaCache.has(sigla)) return fileConSiglaCache.get(sigla);
+
   try {
     const out = execFileSync(
       'git',
-      ['grep', '-a', '-w', '-l', '--', sigla, 'HEAD', '--', 'content/'],
+      ['grep', '-a', '-w', '-n', '--', sigla, 'HEAD', '--', 'content/'],
       { cwd: ROOT, encoding: 'utf8', maxBuffer: 32 * 1024 * 1024, stdio: ['ignore', 'pipe', 'pipe'] },
     );
-    return out.split('\n').filter(Boolean).length;
+
+    const files = new Set();
+    for (const riga of out.split('\n').filter(Boolean)) {
+      if (!riga.startsWith('HEAD:')) throw new Error(`Formato inatteso di git grep: ${riga}`);
+      const senzaRef = riga.slice('HEAD:'.length);
+      const primoSeparatore = senzaRef.indexOf(':');
+      const secondoSeparatore = senzaRef.indexOf(':', primoSeparatore + 1);
+      if (primoSeparatore < 0 || secondoSeparatore < 0) throw new Error(`Formato inatteso di git grep: ${riga}`);
+      const file = senzaRef.slice(0, primoSeparatore);
+      const testo = senzaRef.slice(secondoSeparatore + 1);
+      if (haOccorrenzaNonComposta(testo, sigla)) files.add(file);
+    }
+
+    const conteggio = files.size;
+    fileConSiglaCache.set(sigla, conteggio);
+    return conteggio;
   } catch (e) {
     // `git grep` esce 1 quando non trova NIENTE: e' un risultato, non un guasto.
-    if (e.status === 1) return 0;
+    if (e.status === 1) {
+      fileConSiglaCache.set(sigla, 0);
+      return 0;
+    }
     throw e;
   }
 }
@@ -100,13 +123,20 @@ for (const [sigla, massimale] of Object.entries(MASSIMALE_FILE)) {
     const oggi = fileConSigla(sigla);
     assert.ok(
       oggi <= massimale,
-      `\`${sigla}\` compare ora in ${oggi} file di content/ (massimale ${massimale}, misurato il 2026-08-25).\n` +
+      `\`${sigla}\` compare ora in ${oggi} file di content/ fuori dai composti con \`-\` (massimale ${massimale}, misurato il 2026-09-09).\n` +
         `Un articolo nuovo ha introdotto una sigla normativa che nessuno ha ancora verificato come reale o fabbricata (#332).\n` +
-        `Rimisura con: git grep -a -w -l -- ${sigla} HEAD -- content/ | wc -l\n` +
+        `Rimisura con: git grep -a -w -n -- ${sigla} HEAD -- content/ e scarta le occorrenze adiacenti a \`-\`.\n` +
         `Se la sigla e' REALE, alza il massimale qui con la misura nel commit. Se e' FABBRICATA, va in FABRICATED_NORM_ACRONYMS di generator/scripts/lib/article-factuality-gates.mjs, non qui.`,
     );
   });
 }
+
+test('#332: i composti non contano, una sigla autonoma si', () => {
+  assert.equal(haOccorrenzaNonComposta('schema JSON-LD', 'LD'), false);
+  assert.equal(haOccorrenzaNonComposta('codice LTF-TI', 'LTF'), false);
+  assert.equal(haOccorrenzaNonComposta('sigla LD', 'LD'), true);
+  assert.equal(haOccorrenzaNonComposta('JSON-LD e LD', 'LD'), true);
+});
 
 test('#332: il ratchet non e\' vacuo — almeno una sigla e\' davvero contata', () => {
   // Difesa contro il modo in cui questo gate morirebbe in silenzio: `git grep`
