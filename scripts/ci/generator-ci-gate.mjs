@@ -35,6 +35,29 @@
  * il piu' rumoroso: promuoverlo a bloccante e' una decisione separata da questa
  * migrazione, non un effetto collaterale.
  *
+ * ## Perche' un `cancelled` non e' un verdetto (e non deve essere rosso)
+ *
+ * Un SHA porta piu' check-run con lo stesso nome `test`: `generator-ci.yml` ha
+ * `concurrency: cancel-in-progress`, quindi una push ravvicinata lascia sullo
+ * STESSO commit un run cancellato dopo pochi secondi PIU' il run rimpiazzo che
+ * lo sostituisce. Osservato su PR #1275: `test` cancelled alle 02:42:19 (1s di
+ * vita) e `test` success alle 02:45:10, entrambi sulla head. Questo gate girava
+ * alle 02:44, quando l'unico check-run COMPLETATO era la cancellazione: la
+ * leggeva come conclusion non-success e usciva 1 subito, senza mai arrivare al
+ * verdetto vero che stava per atterrare 80 secondi dopo.
+ *
+ * Il ramo `cancelled` di `vitestCheck.mjs` documenta gia' la ragione di fondo:
+ * un run cancellato «non ha prodotto NESSUN verdetto sul codice». Trattarlo
+ * come fallimento non e' severita', e' un falso rosso — e per un gate il cui
+ * mestiere e' ATTENDERE un verdetto, la risposta giusta a «verdetto non ancora
+ * prodotto» e' continuare ad attendere, non concludere.
+ *
+ * Il gate NON si indebolisce: `failure`/`timed_out`/`action_required` restano
+ * rossi immediati, e se dalla head non arriva mai altro che cancellazioni il
+ * tetto scade e il verdetto e' comunque ROSSO (nessun merge su uno stato
+ * ignoto). L'unica cosa che smette di accadere e' scambiare il rumore della
+ * concurrency per un contratto rotto.
+ *
  * Uso:  node scripts/ci/generator-ci-gate.mjs
  * Env:  GH_TOKEN, GITHUB_REPOSITORY, PR_NUMBER, HEAD_SHA,
  *       GENERATOR_CI_GATE_TIMEOUT_MS (opzionale, default 30 min)
@@ -44,6 +67,38 @@ import { execFileSync } from 'node:child_process';
 import { touchesGeneratorCiPaths } from './auto-merge-eval.mjs';
 import { GENERATOR_CI_JOB_NAME } from './lib/constants.mjs';
 import { latestCompletedConclusionByName } from './lib/vitestCheck.mjs';
+
+/**
+ * Conclusion che NON sono un verdetto sul codice, ma l'assenza di un verdetto.
+ *
+ * Solo `cancelled`, di proposito: e' l'unica che GitHub produce senza aver
+ * eseguito il contratto (concurrency `cancel-in-progress`, runner shutdown).
+ * `failure`, `timed_out`, `action_required` e `stale` restano verdetti rossi —
+ * `vitestCheck.mjs` elenca proprio quelle quattro come «failure reali».
+ */
+export const NON_VERDICT_CONCLUSIONS = new Set(['cancelled']);
+
+/**
+ * Il verdetto di `generator-ci` sulla head: come
+ * `latestCompletedConclusionByName`, ma i check-run che non portano un verdetto
+ * (`NON_VERDICT_CONCLUSIONS`) non partecipano alla selezione.
+ *
+ * Scartarli PRIMA di prendere «l'ultimo completato» e' quel che rende la
+ * funzione invariante all'ordine di atterraggio: un `cancelled` che arriva dopo
+ * un `success` non lo sovrascrive, e un `cancelled` che arriva prima non
+ * anticipa un verdetto che deve ancora concludere.
+ *
+ * @param {Array<{name?: string, status?: string, conclusion?: string, completed_at?: string}>} checkRuns
+ * @param {string} name
+ * @returns {string} la conclusion piu' fresca fra quelle che sono un verdetto,
+ *   o '' se nessun verdetto e' ancora atterrato (il chiamante attende).
+ */
+export function generatorCiVerdict(checkRuns, name) {
+  const withVerdict = Array.isArray(checkRuns)
+    ? checkRuns.filter((c) => !NON_VERDICT_CONCLUSIONS.has(c?.conclusion))
+    : [];
+  return latestCompletedConclusionByName(withVerdict, name);
+}
 
 const REPO = process.env.GITHUB_REPOSITORY || '';
 const PR = process.env.PR_NUMBER || '';
@@ -99,7 +154,7 @@ async function main() {
     } catch (e) {
       console.log(`generator-ci-gate: check-runs illeggibili (${String(e).slice(0, 120)}) — riprovo.`);
     }
-    const conclusion = latestCompletedConclusionByName(checkRuns, GENERATOR_CI_JOB_NAME);
+    const conclusion = generatorCiVerdict(checkRuns, GENERATOR_CI_JOB_NAME);
     if (conclusion === 'success') {
       console.log(`generator-ci-gate: '${GENERATOR_CI_JOB_NAME}' = success ✔`);
       process.exit(0);
@@ -125,4 +180,6 @@ async function main() {
   }
 }
 
-main();
+if (process.argv[1]?.endsWith('generator-ci-gate.mjs')) {
+  main();
+}
