@@ -48,9 +48,15 @@ permissions:
   id-token: write
 
 jobs:
-  # Preflight senza checkout, solo `gh`: risolve la PR e applica OGNI gate prima
-  # di spendere un checkout da 28.777 file. `actionable=false` → skip verde,
-  # nessun round consumato. Stessa forma del gemello.
+  # Preflight quasi senza checkout: risolve la PR con `gh` e applica OGNI gate
+  # prima di spendere il checkout pieno da 28.777 file. `actionable=false` →
+  # skip verde, nessun round consumato. Stessa forma del gemello.
+  #
+  # L'unico materiale che serve sul disco e' l'helper del prefilter review-only:
+  # `scripts/ci/` viene preso con uno sparse checkout del BASE ref (il gate e'
+  # codice del repository base, non materiale da riparare), come fa il gemello
+  # per `review-scope.mjs`. Senza di esso `node scripts/ci/...` uscirebbe con
+  # `ERR_MODULE_NOT_FOUND` e il prefilter sarebbe un ramo morto sempre `false`.
   preflight:
     # `tests` gira su `pull_request`, su `workflow_dispatch` e su `push` a
     # `main`. Il ramo `push` va escluso: su `main` non c'e' nessuna PR da
@@ -71,6 +77,15 @@ jobs:
       failed_run_id: ${{ steps.pre.outputs.failed_run_id }}
       head_sha: ${{ steps.pre.outputs.head_sha }}
     steps:
+      - name: Checkout dell'helper del prefilter (solo `scripts/ci/`)
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 1
+          # Il branch della PR puo' non contenere ancora l'helper, e comunque
+          # non e' lui a decidere le regole del proprio preflight.
+          ref: ${{ github.event.repository.default_branch }}
+          sparse-checkout: scripts/ci
+
       - name: PR azionabile, e il rosso e' ancora quello della HEAD?
         id: pre
         env:
@@ -184,8 +199,14 @@ jobs:
               --argjson jobs "$jobs_json" \
               --argjson reviews "$reviews_json" \
               '{headSha:$head_sha,jobs:$jobs,reviews:$reviews}' 2>/dev/null || echo '{}')
-            review_only=$(printf '%s' "$review_payload" \
-              | node scripts/ci/redcheck-review-prefilter.mjs 2>/dev/null || echo "false")
+            # Niente `2>/dev/null`: un helper rotto (modulo mancante, sintassi)
+            # deve essere VISIBILE come warning, non collassare in silenzio in
+            # un `false` indistinguibile da un prefilter che non e' scattato.
+            if ! review_only=$(printf '%s' "$review_payload" \
+              | node scripts/ci/redcheck-review-prefilter.mjs); then
+              echo "::warning::Helper del prefilter review-only non eseguibile → prefilter disabilitato, percorso normale mantenuto."
+              review_only=false
+            fi
           fi
           if [ "${review_only:-false}" = "true" ]; then
             skip "Il check richiesto e' rosso solo per una review Claude sulla HEAD con finding 🔴 Important → competenza del 🔴-fixer, skip zero-Claude (no-op)."

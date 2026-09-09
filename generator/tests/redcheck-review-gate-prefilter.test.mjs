@@ -27,6 +27,38 @@ function preflightBlock() {
   return source.slice(start, end);
 }
 
+function preflightJob() {
+  const start = source.indexOf('\n  preflight:\n');
+  const end = source.indexOf('\n\n  redcheck-fix:', start);
+  assert.notEqual(start, -1, 'il job preflight non e\' stato trovato');
+  assert.notEqual(end, -1, 'il job redcheck-fix non e\' stato trovato');
+  return source.slice(start, end);
+}
+
+test('il preflight ha sul disco l helper che decide il prefilter', () => {
+  const job = preflightJob();
+
+  assert.match(
+    job,
+    /uses: actions\/checkout@v5[\s\S]*sparse-checkout: scripts\/ci/,
+    'senza checkout di scripts/ci l helper esce con ERR_MODULE_NOT_FOUND e il prefilter e\' un ramo morto',
+  );
+  assert.ok(
+    job.indexOf('uses: actions/checkout@v5') < job.indexOf('redcheck-review-prefilter.mjs'),
+    'il checkout deve precedere lo step che invoca l helper',
+  );
+  assert.doesNotMatch(
+    job,
+    /redcheck-review-prefilter\.mjs 2>\/dev\/null/,
+    'un helper rotto deve restare visibile, non collassare in un false silenzioso',
+  );
+  assert.match(
+    job,
+    /::warning::[^\n]*prefilter[^\n]*percorso normale mantenuto/,
+    'exit != 0 dell helper deve emettere un warning e mantenere il percorso normale',
+  );
+});
+
 test('redcheck filtra il rosso di sola review prima di spendere Claude', () => {
   const block = preflightBlock();
 
