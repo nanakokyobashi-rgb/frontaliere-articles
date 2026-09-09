@@ -14,8 +14,10 @@ import { fileURLToPath } from 'node:url';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const WORKFLOW_DIR = path.join(ROOT, '.github/workflows');
+// The site already ratchets this empirical ceiling; keep the corpus aligned
+// while leaving margin below the undocumented server-side invalidation limit.
 const MAX_PROMPT_CHARS = 20_000;
-const PROMPT_RE = /^(\s*)prompt:\s*[|>](?:[+-]?\d?|\d?[+-]?)(?:\s+#.*)?$/;
+const PROMPT_RE = /^(\s*)prompt:\s*[|>](?:[+-]?\d?|\d?[+-]?)(?:[ \t]+(?:#.*)?)?$/;
 
 function workflowFiles() {
   return fs
@@ -31,7 +33,7 @@ function workflowFiles() {
  * espressioni GitHub o dipendenze del runner.
  */
 function promptBlocks(text) {
-  const lines = text.split('\n');
+  const lines = text.split(/\r?\n/);
   const blocks = [];
   for (let i = 0; i < lines.length; i += 1) {
     const match = PROMPT_RE.exec(lines[i]);
@@ -61,7 +63,7 @@ test('il discovery copre tutti i workflow e trova gli scalar prompt', () => {
     const source = fs.readFileSync(path.join(WORKFLOW_DIR, file), 'utf8');
     return total + promptBlocks(source).length;
   }, 0);
-  assert.ok(promptCount > 0, 'nessun scalar prompt trovato: il controllo sarebbe vacuo');
+  assert.ok(promptCount >= 8, 'il discovery dei prompt è diventato parziale o vacuo');
 });
 
 test('nessun prompt multilinea supera il tetto che evita workflow invalidi', () => {
