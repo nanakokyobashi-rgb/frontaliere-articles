@@ -652,6 +652,20 @@ jobs:
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
         run: node scripts/ci/review-gate.mjs
 
+      # GitHub tratta un check richiesto `skipped` come verde. Se il gate non
+      # viene valutato, pero', non esiste alcun verdetto da portare avanti:
+      # questo step trasforma ogni percorso non risolvibile in un rosso reale.
+      # Il gate sopra resta sempre il punto che valuta LGTM, Important e
+      # carry-forward; qui si sorveglia soltanto che quel punto abbia girato.
+      - name: Fail when required review gate is skipped
+        if: >-
+          ${{ always() && github.event_name == 'pull_request' &&
+          github.event.pull_request.draft == false &&
+          steps.review_gate.outcome == 'skipped' }}
+        run: |
+          echo "::error::Required review gate was skipped on a pull request; no approving review verdict was evaluated."
+          exit 1
+
       - name: Claude usage metrics
         # Solo se la review e' effettivamente girata: a review skippata non c'e'
         # execution_file da riassumere. Best-effort, non fallisce mai il job.
