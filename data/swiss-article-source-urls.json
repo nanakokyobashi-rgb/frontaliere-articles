@@ -1,5 +1,4 @@
 {
-  "https://www.admin.ch/it/newnsb/yl8ygcr01mgjz6jnmghea": "nuova-notifiche-di-cessazione-delle-inquieste-del-sisi",
   "https://www.tio.ch/dal-mondo/attualita/1943818/salute-trump-donald-dubbi-stati": "abort-topical-relevance-trump-health",
   "https://www.rsi.ch/info/scienza-e-tecnologia/un-laser-che-vede-ascolta-e-si-corregge-da-solo--3984651.html": "laser-vede-ascolta-si-corregge-da-solo",
   "https://www.tio.ch/dal-mondo/cronaca/1943873/sisma-morti-feriti-bilancio-satellitari": "sisma-colombia-morti-feriti",
@@ -2201,6 +2200,11 @@
   "https://www.tio.ch/svizzera/economia/1948977/prezzi-franchi-carburanti-svizzera-litro-pompa": {
     "articleId": "carburanti-record-prezzi-2026",
     "ts": "2026-09-09T10:07:20.739Z",
+    "keyForm": 2
+  },
+  "https://www.seco.admin.ch/it/newnsb/-qcngz3zj7rv": {
+    "articleId": "prezzi-amministrati-concorrenza-potere",
+    "ts": "2026-09-09T10:57:16.063Z",
     "keyForm": 2
   }
 }
