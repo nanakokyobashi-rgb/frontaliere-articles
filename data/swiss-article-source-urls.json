@@ -1,5 +1,4 @@
 {
-  "https://www.rsi.ch/s/3990270": "sindacati-delusi",
   "https://www.rsi.ch/s/3989274": "casse-malattia-tetto-stipendi-politica-simbolica",
   "https://www.tio.ch/svizzera/attualita/1944094/asilo-centro-federale-altstatten-nuovo-sg-porte-aperte": "cfa-altstaetten-aperte",
   "https://lenews.ch/2026/08/14/switzerland-is-attracting-fewer-immigrants-and-losing-more-of-those-already-here": "svizzera-calo-immigrazione-emigrazione-2026",
@@ -2253,6 +2252,11 @@
   "https://www.admin.ch/it/newnsb/8qdeko8cquh2": {
     "articleId": "emissione-prestiti-federali-2026",
     "ts": "2026-09-09T16:49:45.300Z",
+    "keyForm": 2
+  },
+  "https://www.stelle.admin.ch/it": {
+    "articleId": "opportunita-lavoro-federale",
+    "ts": "2026-09-09T17:14:57.264Z",
     "keyForm": 2
   }
 }
