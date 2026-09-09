@@ -24,7 +24,8 @@
  *      modifica il workflow che OSPITA la review (→ il reviewer Claude non può
  *      girare per workflow-validation 401) ED è di autore fidato ED ha il
  *      completeness contract del body verde → approva su gate deterministici al
- *      posto della review. Un `🔴` reale blocca comunque.
+ *      posto della review. Un `🔴` su un file nel diff resta bloccante; un
+ *      finding fuori diff richiede la issue follow-up prima di approvare.
  *   3. check-run `CI_CHECK_NAME` (qui `tests (node --test)`) sulla HEAD == `success`
  *      (NON solo != failure: richiede success → niente merge su pending/missing).
  *   4. Generator CI gate (#242): SOLO se la PR tocca i path che fanno scattare
@@ -75,6 +76,7 @@ import {
 import { latestCompletedVitestConclusion, latestCompletedConclusionByName } from './lib/vitestCheck.mjs';
 import { checkClosesLines } from '../lib/pr-body-closes-check.mjs';
 import { checkMergePreviewDuplicates } from './lib/mergePreviewCheck.mjs';
+import { classifyAndMintReview } from './review-scope.mjs';
 
 const REPO = process.env.GITHUB_REPOSITORY || '';
 const PR = process.argv[2];
@@ -366,7 +368,7 @@ function evaluateDriftFallback() {
   return true;
 }
 
-function main() {
+async function main() {
   if (!REPO) fail('GITHUB_REPOSITORY mancante — skip.');
   if (!PR || !/^\d+$/.test(PR)) fail(`PR number mancante/invalido ('${PR}') — skip.`);
   console.log(`auto-merge-eval PR #${PR} repo=${REPO}`);
@@ -407,15 +409,47 @@ function main() {
   );
   const lastBot = botReviews.length ? botReviews[botReviews.length - 1] : null;
   const body = lastBot ? (lastBot.body || '') : '';
-  // Un 🔴 Important reale del reviewer BLOCCA sempre, anche su una PR drift (se il
-  // 🔴 c'è, il reviewer HA girato e ha trovato qualcosa). Marker tollerante al
+  // Un 🔴 Important reale del reviewer BLOCCA se resta nel diff o non è
+  // risolvibile; un finding fuori diff passa solo dopo il follow-up. Marker tollerante al
   // markdown del reviewer: il literal `'🔴 Important'` manca il bold
   // `🔴 **Important` (drift osservato su PR #2211 round-2). Stessa classe della
   // detection brittle in pr-redflag-fixer.yml.
   const hasRedflag = !!body && REDFLAG_IMPORTANT_RE.test(body);
-  if (hasRedflag) return fail(`Ultima review claude-bot contiene un finding '🔴 Important' — skip (no merge).`);
+  // Non coniare un follow-up da una review ormai stantia: prima applica la
+  // stessa regola di carry-forward del ramo LGTM. Un contributo cambiato (o
+  // non confrontabile) viene fermato senza trasformare il vecchio verdetto in
+  // lavoro nuovo.
+  if (hasRedflag && lastBot?.commit_id && lastBot.commit_id !== head) {
+    const fpHead = prContributionFingerprint(head);
+    const fpReview = prContributionFingerprint(lastBot.commit_id);
+    if (fpHead === null || fpReview === null || fpHead !== fpReview) {
+      return fail(`Ultima review claude-bot riferita a ${lastBot.commit_id} ≠ HEAD ${head} e il diff della PR è cambiato (o non comparabile) — skip; un push nuovo ri-attiverà il review.`);
+    }
+  }
+  let outsideOnlyApproved = false;
+  if (hasRedflag) {
+    try {
+      const scope = await classifyAndMintReview(body, {
+        repo: REPO,
+        pr: PR,
+        prUrl: `https://github.com/${REPO}/pull/${PR}`,
+      });
+      outsideOnlyApproved = scope.outsideOnly && scope.minted;
+      if (outsideOnlyApproved) {
+        console.log(
+          `Gate review: ${scope.outside.length} finding Important fuori dal diff → follow-up ${scope.followup?.number || scope.followup?.url || 'coniato'}, non bloccante ✔`,
+        );
+      } else {
+        return fail(
+          `Ultima review claude-bot contiene ${scope.inScope.length} finding nel diff e ${scope.unresolved.length} non risolvibili — skip (no merge).`,
+        );
+      }
+    } catch (error) {
+      return fail(`Classificazione scope della review fallita (${String(error).slice(0, 180)}) — skip (no merge).`);
+    }
+  }
 
-  if (lastBot && body.includes('## LGTM')) {
+  if (lastBot && (body.includes('## LGTM') || outsideOnlyApproved)) {
     // Percorso normale: `## LGTM` presente. Deve valere per l'HEAD corrente. Se è
     // su un commit precedente, accettalo SOLO se l'head è un rebase di
     // solo-merge-di-main: il contributo proprio della PR è byte-identico a quello
@@ -430,6 +464,8 @@ function main() {
         return fail(`Ultima review claude-bot riferita a ${lastBot.commit_id} ≠ HEAD ${head} e il diff della PR è cambiato (o non comparabile) — skip; un push nuovo ri-attiverà il review.`);
       }
       console.log(`Gate review: ## LGTM su ${lastBot.commit_id} ≠ HEAD ${head} ma contributo PR invariato (rebase di solo main-merge) → carry-forward ✔`);
+    } else if (outsideOnlyApproved) {
+      console.log('Gate review: tutti i finding Important sono fuori dal diff e il follow-up è stato coniato ✔');
     } else {
       console.log('Gate review: ## LGTM presente, nessun 🔴 Important ✔');
     }
@@ -719,5 +755,8 @@ function main() {
 
 // Esegui solo come CLI (non quando importato dai test → evita gh/process.exit).
 if (process.argv[1]?.endsWith('auto-merge-eval.mjs')) {
-  main();
+  main().catch((error) => {
+    console.error(`auto-merge-eval: errore non gestito (${String(error).slice(0, 240)}).`);
+    process.exitCode = 1;
+  });
 }

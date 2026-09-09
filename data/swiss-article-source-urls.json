@@ -1,23 +1,4 @@
 {
-  "https://www.admin.ch/it": "consiglio-federale-pacchetto-misure",
-  "https://www.swissinfo.ch/ita/siccit%c3%a0-e-caldo-mettono-in-difficolt%c3%a0-produzione-t%c3%aate-de-moine/91892552": "tete-de-moine-impatti",
-  "https://www.rsi.ch/s/3984642": "pigioni-abusive-iniziativa-raggiunta",
-  "https://www.admin.ch/it/newnsb/zrex1p-tu13lnom9lcilw": "modifica-ordinanza-liquidita",
-  "https://www.tio.ch/rubriche/ospite/1943781/inquilini-affitti-yannick-demaria-iniziativa": "iniziativa-protezione-pigioni-abusive",
-  "https://www.tio.ch/svizzera/attualita/1943756/decine-in-ospedale-per-dolori-agli-occhi-dopo-l-eclissi-solare": "eclissi-solare-ospedali",
-  "https://www.rsi.ch/s/3985176": "gli-sconti-sui-farmaci-non-vengono-trattenuti",
-  "https://www.tio.ch/dal-mondo/economia/1943783/svezia-lavoro-anni-sciopero-tesla": "dopo-3-anni-termina-lo-sciopero-tesla-in-svezia",
-  "https://www.tio.ch/svizzera/cronaca/1943762/ustioni-milano-crans-montana-ricoverata-paziente": "dimissioni-pazienti-crans-montana",
-  "https://www.tio.ch/svizzera/cronaca/1943682/sera-albula-linea-chiusa-ferrovia": "ferrovia-albula-chiusa",
-  "https://www.tio.ch/svizzera/attualita/1943719/uzwil-acqua-siccita-piscina-svizzera": "chiusura-piscina-uzwil-siccita",
-  "https://www.tio.ch/ticino/attualita/1943804/siccita-grado-acqua-limitazioni-claro": "siccita-claro-2026",
-  "https://www.tio.ch/svizzera/attualita/1943523/federale-consiglio-situazione-rosti-caldo-misure-essere-siccita": "caldo-e-siccita-senza-modalita-di-crisi",
-  "https://www.tio.ch/svizzera/attualita/1943694/svizzera-caldo-scuola-rientro-qualita": "rientro-scuola-calor",
-  "https://www.tio.ch/dal-mondo/economia/1943793/porsche-taycan-produzione-modello-punta": "porsche-arretra-elettrico-taycan",
-  "https://www.swissinfo.ch/ita/vs%3a-mezzo-agricolo-esce-di-strada%2c-muore-bambino-di-nove-anni/91892452": "mezzo-agricolo-esce-di-strada-muore-bambino-di-nove-anni",
-  "https://www.rsi.ch/s/3983871": "ospedali-svizzeri-pulizia-va-migliorata",
-  "https://www.tio.ch/svizzera/cronaca/1943691/bambino-incidente-anni-morto-agosto": "incidente-veicolo-agricolo-morto-bambino-9-anni",
-  "https://www.rsi.ch/info/dialogo/cani-e-gatti-sono-pi%c3%b9-intelligenti-di-quanto-si-pensi--3933408.html": "intelligenza-animali-domestici-ricerca",
   "https://www.tvsvizzera.it/tvs/svizzera-istruzioni-per-luso": "trasparenza-fatture-ospedaliere-svizzera",
   "https://www.admin.ch/it/newnsb/yl8ygcr01mgjz6jnmghea": "nuova-notifiche-di-cessazione-delle-inquieste-del-sisi",
   "https://www.tio.ch/dal-mondo/attualita/1943818/salute-trump-donald-dubbi-stati": "abort-topical-relevance-trump-health",
@@ -2121,6 +2102,101 @@
   "https://www.tio.ch/svizzera/economia/1948716/bls-centri-treni-posti-viaggi": {
     "articleId": "bls-tagli-posti-trasporto-svizzera",
     "ts": "2026-09-08T10:46:19.759Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/attualita/1948678/svizzera-media-punti-ocse-giovani-matematica-lettura-risultati-prestazioni-scienze": {
+    "articleId": "studenti-svizzeri-lettura-pisa-2025",
+    "ts": "2026-09-08T11:37:33.137Z",
+    "keyForm": 2
+  },
+  "https://www.admin.ch/it/newnsb/1mie201yrzoa": {
+    "articleId": "bollette-26-centesimi-2027",
+    "ts": "2026-09-08T11:56:17.568Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/economia/1948761/migros-online-centro-nuovo-capacita-regensdorf-prodotti-punta": {
+    "articleId": "migros-online-regensdorf-2026",
+    "ts": "2026-09-08T12:11:42.703Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/salute%3a-carenza-di-personale-e-uscite-precoci-sono-in-aumento/92022848": {
+    "articleId": "infermieri-carenza-svizzera-2034",
+    "ts": "2026-09-08T12:32:55.929Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/novartis-crolla-del-10%25-in-borsa%2c-pesano-studi-su-nuovi-preparati/92022061": {
+    "articleId": "novartis-fondo-pensione-crollo",
+    "ts": "2026-09-08T12:50:11.065Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/ticino/politica/1948813/salario-legge-referendum-ticino-beneficiari": {
+    "articleId": "salario-minimo-ticino-mozione-ettlin",
+    "ts": "2026-09-08T15:06:51.557Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/casse-pensioni%2c-buoni-rendimenti-grazie-alle-azioni/92023367": {
+    "articleId": "casse-pensioni-rendimenti-2025",
+    "ts": "2026-09-08T19:20:17.760Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/attualita/1948794/cure-professioni-condizioni-vpod-sistema-oss-professionisti": {
+    "articleId": "ospedali-svizzeri-infermieri-fuga-anno",
+    "ts": "2026-09-08T19:39:29.166Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/traffico-aereo-svizzero-cresce-e-con-esso-aumentano-le-emissioni/92025181": {
+    "articleId": "traffico-aereo-svizzero-cresce",
+    "ts": "2026-09-08T20:34:24.716Z",
+    "keyForm": 2
+  },
+  "https://www.tvsvizzera.it/tvs/qui-svizzera/novartis-crolla-del-10-in-borsa-pesano-studi-su-nuovi-preparati/92022806": {
+    "articleId": "novartis-giornata-nera",
+    "ts": "2026-09-08T20:53:48.139Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/politica/1948825/washington-f-35a-berna-concordato-prezzo": {
+    "articleId": "f35a-prezzo-fisso-non-concordato",
+    "ts": "2026-09-08T21:22:31.064Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/attualita/1948824/svizzera-esercito-capo-obiettivo-mosca": {
+    "articleId": "svizzera-obiettivo-mosca-esercito",
+    "ts": "2026-09-08T21:40:21.849Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/abb-e-rolls-royce-smr-uniscono-forze-per-reattori-modulari-nucleari/92024969": {
+    "articleId": "abb-rolls-royce-smr-reattori",
+    "ts": "2026-09-08T21:57:31.783Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/attualita/1948768/svizzera-emissioni-traffico-co2-aereo": {
+    "articleId": "aviazione-emissioni-svizzera-2025",
+    "ts": "2026-09-08T22:23:58.145Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/ticino/attualita/1948889/neutralita-svizzera-freysinger-udc-consigliere": {
+    "articleId": "neutralita-iniziativa-svizzera-freysinger",
+    "ts": "2026-09-08T22:42:51.860Z",
+    "keyForm": 2
+  },
+  "https://www.admin.ch/it": {
+    "articleId": "pa30-consultazione-agricola",
+    "ts": "2026-09-09T01:07:51.783Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/economia/1948849/modelli-intelligenza-nestle-gruppo-consumatori": {
+    "articleId": "nestle-ai-consumatori-ricerca",
+    "ts": "2026-09-09T02:03:59.538Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/s/4068571": {
+    "articleId": "f35-caccia-commissione-amherd",
+    "ts": "2026-09-09T02:21:06.197Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/info/ambiente/isole-di-calore-serve-pi%c3%b9-verde-in-citt%c3%a0--4065398.html": {
+    "articleId": "regola-3-30-300-verde-citta",
+    "ts": "2026-09-09T05:21:41.639Z",
     "keyForm": 2
   }
 }

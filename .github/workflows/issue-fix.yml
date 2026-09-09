@@ -230,6 +230,118 @@ jobs:
           SITE_TOKEN: ${{ env.GITHUB_PAT }}
         run: node scripts/ci/handoff-to-site.mjs --preflight
 
+      - name: Load issue group context (B19, zero-Claude)
+        id: group
+        if: steps.quota.outputs.quota_blocked != 'true' && steps.preflight.outputs.already_resolved != 'true' && steps.stale.outputs.stale_dispatch != 'true' && steps.scope_guard.outputs.workflows_blocked != 'true' && steps.claim.outputs.in_flight != 'true' && steps.handoff_pre.outputs.handoff_delivered != 'true'
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          CTX_DIR: ${{ runner.temp }}/issue-fix-ctx
+        run: |
+          set -euo pipefail
+          mkdir -p "$CTX_DIR"
+          : > "$CTX_DIR/group.json"
+          group_is_group=false
+          group_label_output=
+          group_numbers_output=
+
+          load_group_context() {
+            local leader_json group_label group_contract members valid numbers
+            local group_max_size group_label_pattern query_limit
+
+            if ! leader_json=$(gh issue view "$ISSUE_NUMBER" --repo "$REPO" --json labels); then
+              echo "::warning::impossibile leggere le label della issue #$ISSUE_NUMBER → fallback alla issue singola"
+              return 0
+            fi
+
+            # Tetto e matcher arrivano dalla stessa sorgente del producer. Il
+            # tail protegge il contratto da eventuale stdout diagnostico emesso
+            # da un import transitivo senza duplicare la regola nel YAML.
+            if ! group_contract=$(node --input-type=module -e "import('./scripts/ci/followup-drainer.mjs').then(({ ISSUE_GROUP_MAX_SIZE, ISSUE_GROUP_LABEL_PATTERN }) => process.stdout.write(JSON.stringify({ maxSize: ISSUE_GROUP_MAX_SIZE, labelPattern: ISSUE_GROUP_LABEL_PATTERN })))" | tail -n 1); then
+              echo "::warning::impossibile leggere il contratto del raggruppatore → fallback alla issue #$ISSUE_NUMBER"
+              return 0
+            fi
+            if ! group_max_size=$(printf '%s' "$group_contract" | jq -er '.maxSize | numbers | tostring') || \
+              ! group_label_pattern=$(printf '%s' "$group_contract" | jq -er '.labelPattern | strings | select(length > 0)'); then
+              echo "::warning::contratto B19 non valido → fallback alla issue #$ISSUE_NUMBER"
+              return 0
+            fi
+            case "$group_max_size" in
+              [2-9]|[1-9][0-9]*) ;;
+              *) echo "::warning::tetto B19 non valido ($group_max_size) → fallback alla issue #$ISSUE_NUMBER"; return 0 ;;
+            esac
+
+            if ! group_label=$(printf '%s' "$leader_json" | jq -r --arg pattern "$group_label_pattern" \
+              '[.labels[]?.name | select(test($pattern))] | .[0] // empty'); then
+              echo "::warning::impossibile riconoscere la label B19 → fallback alla issue #$ISSUE_NUMBER"
+              return 0
+            fi
+            if [ -z "$group_label" ]; then
+              echo "issue #$ISSUE_NUMBER: nessun gruppo B19 → flusso singolo"
+              return 0
+            fi
+
+            # La label è assegnata a tutti i membri, ma solo il numero in coda
+            # alla label può armare il run. Un membro etichettato per errore
+            # degrada al flusso singolo e non apre una seconda PR di gruppo.
+            if [ "${group_label##*-}" != "$ISSUE_NUMBER" ]; then
+              echo "issue #$ISSUE_NUMBER: membro non-leader di $group_label → flusso singolo"
+              return 0
+            fi
+
+            query_limit=$((group_max_size + 1))
+            if ! members=$(gh issue list --repo "$REPO" --state open --label "$group_label" \
+              --json number,title,body,labels,createdAt,updatedAt --limit "$query_limit"); then
+              echo "::warning::impossibile leggere i membri di $group_label → fallback alla issue #$ISSUE_NUMBER"
+              return 0
+            fi
+            if ! valid=$(printf '%s' "$members" | jq -r --arg label "$group_label" --arg leader "$ISSUE_NUMBER" --argjson max "$group_max_size" \
+              'type == "array" and length >= 2 and length <= $max
+               and ([.[].number | tostring] | index($leader) != null)
+               and all(.[]; any(.labels[]?; .name == $label))'); then
+              echo "::warning::impossibile validare $group_label → fallback alla issue #$ISSUE_NUMBER"
+              return 0
+            fi
+            if [ "$valid" != true ]; then
+              echo "::warning::gruppo $group_label non valido o oltre il tetto → fallback alla issue #$ISSUE_NUMBER"
+              return 0
+            fi
+
+            if ! printf '%s' "$members" | jq --arg leader "$ISSUE_NUMBER" \
+              'sort_by(if (.number | tostring) == $leader then 0 else 1 end, .createdAt, .number)' > "$CTX_DIR/group.json"; then
+              echo "::warning::impossibile scrivere il contesto di $group_label → fallback alla issue #$ISSUE_NUMBER"
+              return 0
+            fi
+            if ! numbers=$(jq -er '[.[].number] | join(",")' "$CTX_DIR/group.json"); then
+              echo "::warning::impossibile leggere il contesto di $group_label → fallback alla issue #$ISSUE_NUMBER"
+              return 0
+            fi
+            group_is_group=true
+            group_label_output=$group_label
+            group_numbers_output=$numbers
+            echo "issue #$ISSUE_NUMBER: gruppo B19 $group_label → membri #$numbers"
+          }
+
+          load_group_context
+          {
+            echo "is_group=$group_is_group"
+            echo "group_label=$group_label_output"
+            echo "group_numbers=$group_numbers_output"
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Validate issue group context file (zero-Claude)
+        id: group_context
+        if: steps.group.outputs.is_group == 'true'
+        env:
+          CTX_DIR: ${{ runner.temp }}/issue-fix-ctx
+        run: |
+          set -euo pipefail
+          if [ ! -r "$CTX_DIR/group.json" ] || ! jq -e 'type == "array" and length >= 2' "$CTX_DIR/group.json" >/dev/null; then
+            echo "::error::contesto del gruppo B19 illeggibile: il ramo group non può procedere"
+            exit 1
+          fi
       - name: Determine fix tier
         id: tier
         if: steps.quota.outputs.quota_blocked != 'true' && steps.preflight.outputs.already_resolved != 'true' && steps.stale.outputs.stale_dispatch != 'true' && steps.scope_guard.outputs.workflows_blocked != 'true' && steps.claim.outputs.in_flight != 'true' && steps.handoff_pre.outputs.handoff_delivered != 'true'
@@ -343,6 +455,9 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ISSUE_NUMBER: ${{ github.event.issue.number }}
+          ISSUE_GROUP: ${{ steps.group.outputs.is_group }}
+          ISSUE_GROUP_LABEL: ${{ steps.group.outputs.group_label }}
+          ISSUE_GROUP_NUMBERS: ${{ steps.group.outputs.group_numbers }}
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           # Il token con cui l'ACTION fa le sue operazioni git/GitHub. Senza
@@ -381,18 +496,22 @@ jobs:
           prompt: |
             Sei l'agent di fix autonomo per la issue #${{ github.event.issue.number }} ("${{ github.event.issue.title }}"). Tier: ${{ steps.tier.outputs.tier }}, categoria: ${{ steps.tier.outputs.category }}.
 
+            **Raggruppamento B19:** `group=${{ steps.group.outputs.is_group }}`, membri `${{ steps.group.outputs.group_numbers }}`. Se `group=true`, carica `${{ runner.temp }}/issue-fix-ctx/group.json`: contiene tutte le issue della stessa PR, già verificate dal drainer con una firma e un punto di riparazione comuni, entro il tetto numerico definito da `ISSUE_GROUP_MAX_SIZE`. Diagnostica ogni membro e risolvi tutti i membri nella stessa PR; non prendere lavoro esterno al gruppo. Nel body della PR usa una riga di chiusura per ogni membro, una keyword per riga. Se un membro non è confermabile o non è riparabile con certezza, non forzarlo: lascialo senza keyword di chiusura e dichiaralo in `## Non implementato (ancora)` con uno stato letterale. Se `group=false`, il flusso resta quello della issue singola.
+
             Questo repo pubblica una superficie dati su HTTP (`dist/api/`) che `frontaliereticino.ch` consuma in produzione. **Il sito non ribuilda quando questo repo pubblica**: un errore qui è live subito.
 
             **Bootstrap (in quest'ordine):**
             1. Leggi `ISSUES.md` → "Fix flow" — contratto operativo del fixer.
             2. Leggi `AGENTS.md` — non-negoziabili e architettura. VINCOLANTE.
-            3. Carica la issue: `gh issue view $ISSUE_NUMBER --json number,title,body,labels,comments`.
+            3. Carica la issue: `gh issue view $ISSUE_NUMBER --json number,title,body,labels,comments`. Se `group=true`, leggi anche `${{ runner.temp }}/issue-fix-ctx/group.json` e tratta ogni record come una issue da chiudere nella stessa PR: la diagnosi deve confermare il punto di riparazione comune, non limitarsi alla label.
 
             **Pre-condizioni (termina se falliscono):**
             - Esiste già una PR aperta che cita "#$ISSUE_NUMBER" → commenta "PR già in volo: #<n>, skip." e TERMINA.
             - **Overlap sui file:** estrai i path target dal body. Se una PR aperta modifica già uno di quei file → commenta e TERMINA, per non creare un conflitto o un doppione. Nel dubbio (issue non file-specifica) procedi.
             - **Capability guard — valutalo SUBITO, prima di implementare.** ${{ env.GITHUB_PAT_NANAKO != '' && 'Questo run ha il PAT, e il PAT è passato SIA al remote git SIA a `claude-code-action` (input `github_token`). **Modificare `.github/workflows/**` è quindi una capacità PIENA: fallo senza esitare.** Non trattarlo come un percorso rischioso e non pre-annunciare un blocco. Se un push viene rifiutato, LEGGI il messaggio prima di concludere: `blocked-workflows-scope` va usato SOLO se il testo dice letteralmente "without `workflows` permission". In quel caso NON abbandonare al primo tentativo — verifica `git remote -v` (deve puntare a `x-access-token:***@github.com`) e `git config --get-all http."https://github.com/".extraheader` (deve essere VUOTO, altrimenti l Authorization header prevale sull URL e il push viaggia con l identità della App); correggi e ritenta UNA volta. Solo se fallisce ancora con lo stesso testo, documenta con `blocked-workflows-scope` e includi il messaggio di rifiuto integrale. Qualunque altro errore di push (conflitto, protezione del branch, rete) NON è questo caso e va gestito come tale.' || 'Questo run NON ha il PAT: sia il remote git sia `claude-code-action` ricadono sul GITHUB_TOKEN, che per policy di GitHub non può creare né modificare file sotto `.github/workflows/**`. Se il fix richiede di toccarli il push fallirebbe SEMPRE → nessuna PR. NON implementare: posta un commento col diff proposto e "blocco scope workflows: il PAT non è stato caricato (controlla lo step Load secrets from Remote Config), serve il PAT o una mano umana", e TERMINA SUBITO con `blocked-workflows-scope`.' }} In ogni caso, se il fix richiede impostazioni del repo, branch protection o segreti non presenti in CI → documenta e TERMINA senza implementare. Fare tutto il lavoro per poi scoprire il blocco al push è il modo più costoso di fallire: il blocco è deterministico, va visto al turno 1.
             - **Issue aggregata — is_aggregate=${{ steps.tier.outputs.is_aggregate }}.** Se `true`, tentare tutti gli item in un run sfora il budget turni e consegna ZERO PR. **Regola ferrea:** fixa ESATTAMENTE UN item, poi fermati. (a) applica il capability guard per-item, saltando quelli fuori capacità senza abortire l'intera issue; (b) scegli il primo item in-capacità a maggior valore; (c) implementa solo quello; (d) appena la PR è aperta STOP IMMEDIATO, anche con turni residui; (e) elenca gli altri in `## Non implementato`, che li ri-accoda. Ogni ciclo chiude almeno un item, quindi converge.
+
+            **Se `group=true`, il gruppo B19 sostituisce il flusso singolo:** il tetto è già 3 issue atomiche con punto di riparazione comune; implementa tutti i membri del gruppo nella singola PR, senza prendere lavoro esterno. Usa una riga `Closes #N` separata per ogni membro completato. Se un membro non è confermabile o non è riparabile con certezza, non forzarlo: lascialo senza keyword di chiusura e dichiaralo in `## Non implementato` con uno stato letterale. Se `group=false`, valgono le regole della issue singola e dell'aggregata sopra.
 
             **Fix flow:**
             1. Branch isolato — **resume-aware** (`resume=${{ steps.resume.outputs.resume }}`): se `false`, `git checkout -b fix/issue-$ISSUE_NUMBER`. Se `true`, un run precedente è morto dopo il checkpoint: `git fetch origin fix/issue-$ISSUE_NUMBER && git checkout fix/issue-$ISSUE_NUMBER`, ispeziona con `git log --oneline origin/main..HEAD --stat` e CONTINUA da lì se il diff è pertinente; se è stale, `git reset --hard origin/main`. Usa giudizio, non è un automatismo.

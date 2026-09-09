@@ -11605,6 +11605,18 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.cassa-malati-rincari-2027.title': 'Sick pay premiums: +5% in 2027',
     'blog.article.cassa-malati-rincari-2027.excerpt': 'According to bonus.ch, LAMal premiums will increase by almost 5% in 2027, with peaks of up to 20%. Direct impact on border workers\' paychecks.',
     'blog.article.cassa-malati-rincari-2027.imageAlt': 'Health insurance documents and digital premium calculator interface',
+    'blog.article.frontalieri-libro-analisi-miti.title': 'Swiss cross-border commuters: 400,000, myths and analysis',
+    'blog.article.frontalieri-libro-analisi-miti.excerpt': 'Switzerland employs 400,000+ border workers (European record). New book dispels myths: growth 1978–2026, wages, taxation, transport. Ticino in the centre.',
+    'blog.article.frontalieri-libro-analisi-miti.imageAlt': 'Lugano skyline with Lake Lugano and surrounding mountains, symbol of Ticino and cross-border work',
+    'blog.article.s30-guasto-tecnico-cadenazzo-luino.title': 'S30 blocked between Cadenazzo and Luino due to technical failure',
+    'blog.article.s30-guasto-tecnico-cadenazzo-luino.excerpt': 'Railway line interrupted until Wednesday 9 September 2026 at 4:00 am. Replacement buses available but with guaranteed delays and no connections.',
+    'blog.article.s30-guasto-tecnico-cadenazzo-luino.imageAlt': 'Bellinzona railway station with SBB trains on tracks during daylight hours',
+    'blog.article.libro-boom-frontalieri-svizzera.title': 'The book about the border worker boom in Switzerland',
+    'blog.article.libro-boom-frontalieri-svizzera.excerpt': 'New academic book explains how Switzerland has 400,000 frontier workers. From 84,000 in 1978 to the boom after 2000. Focus on wages, taxation, transport.',
+    'blog.article.libro-boom-frontalieri-svizzera.imageAlt': 'Ticino region landscape at the Swiss-Italian border, symbolizing the cross-border labor market.',
+    'blog.article.mesenzana-lavorare-ticino.title': 'Living in Mesenzana and working in Ticino',
+    'blog.article.mesenzana-lavorare-ticino.excerpt': 'Learn how to live in Mesenzana and work in Ticino as a border worker: permits, taxation, transport, cost of living and procedures. Practical guide.',
+    'blog.article.mesenzana-lavorare-ticino.imageAlt': 'Scenic view of the Switzerland-Italy border crossing at Brogeda with Alpine hills in the background',
 };
 
 export default blogMetaEn;

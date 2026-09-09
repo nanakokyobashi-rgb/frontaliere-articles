@@ -20,13 +20,15 @@
  *
  * L'ULTIMA review di un bot reviewer (`claude`/`claude[bot]` o
  * `frontaliere-automation[bot]`), che contenga
- * `## LGTM` e NESSUN finding `🔴 Important` (stessa `REDFLAG_IMPORTANT_RE` che
- * usa il redflag-fixer — una sola regex, nessun drift). Deve stare sulla head
- * corrente; se sta su un commit precedente vale il CARRY-FORWARD: se il
- * fingerprint del contributo (3-dot vs merge-base, code-only) e' identico fra i
- * due commit, la PR non ha cambiato il proprio codice — tipicamente un rebase
- * di solo main-merge — e la review resta valida. E' la stessa funzione che
- * usava `auto-merge-eval.mjs`, importata e non riscritta.
+ * `## LGTM` e NESSUN finding `🔴 Important`, oppure solo finding su file fuori
+ * dal diff corrente già raccolti in una issue follow-up (stessa
+ * `REDFLAG_IMPORTANT_RE` che usa il redflag-fixer — una sola regex, nessun
+ * drift). Deve stare sulla head corrente; se sta su un commit precedente vale
+ * il CARRY-FORWARD: se il fingerprint del contributo (3-dot vs merge-base,
+ * code-only) e' identico fra i due commit, la PR non ha cambiato il proprio
+ * codice — tipicamente un rebase di solo main-merge — e la review resta valida.
+ * E' la stessa funzione che usava `auto-merge-eval.mjs`, importata e non
+ * riscritta.
  *
  * ## Il drift-fallback
  *
@@ -56,6 +58,7 @@ import {
   prBodyContractOk,
 } from './auto-merge-eval.mjs';
 import { REDFLAG_IMPORTANT_RE, REVIEWER_BOT_LOGIN_RE } from './lib/constants.mjs';
+import { classifyAndMintReview } from './review-scope.mjs';
 
 const REPO = process.env.GITHUB_REPOSITORY || '';
 const PR = process.env.PR_NUMBER || '';
@@ -179,7 +182,7 @@ function reviewAppliesToHead(last) {
   return Boolean(headFp && revFp && headFp === revFp);
 }
 
-function main() {
+async function main() {
   if (!REPO || !PR || !HEAD_SHA) {
     console.log('::error::review-gate: GITHUB_REPOSITORY, PR_NUMBER e HEAD_SHA sono obbligatori.');
     process.exit(1);
@@ -188,8 +191,34 @@ function main() {
 
   if (last) {
     const body = last.body || '';
-    const approving = body.includes('## LGTM') && !REDFLAG_IMPORTANT_RE.test(body);
     const applies = reviewAppliesToHead(last);
+    const hasRedflag = REDFLAG_IMPORTANT_RE.test(body);
+    let scope = null;
+    if (applies && hasRedflag) {
+      try {
+        scope = await classifyAndMintReview(body, {
+          repo: REPO,
+          pr: PR,
+          prUrl: `https://github.com/${REPO}/pull/${PR}`,
+        });
+        if (scope.outside.length > 0 && scope.minted) {
+          console.log(
+            `review-gate: ${scope.outside.length} finding Important fuori dal diff → follow-up ${scope.followup?.number || scope.followup?.url || 'coniato'}.`,
+          );
+        }
+        if (scope.blocking) {
+          console.log(
+            `review-gate: scope conservativo — ${scope.inScope.length} finding nel diff, ${scope.unresolved.length} non risolvibili → resta bloccante.`,
+          );
+        }
+      } catch (error) {
+        console.log(
+          `review-gate: classificazione scope fallita (${String(error).slice(0, 180)}) → finding bloccante per sicurezza.`,
+        );
+      }
+    }
+    const outsideOnlyApproved = Boolean(applies && hasRedflag && scope?.outsideOnly && scope?.minted);
+    const approving = (body.includes('## LGTM') && !hasRedflag) || outsideOnlyApproved;
     if (approving && applies) {
       if (last.commit_id === HEAD_SHA) {
         console.log(`review-gate: review approvante sulla head ${HEAD_SHA}.`);
@@ -233,4 +262,7 @@ function main() {
   process.exit(1);
 }
 
-main();
+main().catch((error) => {
+  console.error(`review-gate: errore non gestito (${String(error).slice(0, 240)}).`);
+  process.exit(1);
+});

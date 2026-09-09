@@ -126,6 +126,35 @@ describe('translateFieldFreeMt — l’uscita di un motore non e’ prosa', () =
     assert.equal(await run('Null Grad in Airolo'), 'Null Grad in Airolo');
   });
 
+  test('rifiuta un output identico alla sorgente e lo classifica come passthrough', async () => {
+    const signals = [];
+    const source = 'Un titolo italiano qualunque';
+    const out = await translateFieldFreeMt({
+      text: source,
+      sourceLang: 'it',
+      targetLang: 'de',
+      fieldType: 'title',
+      translate: async () => `  ${source}  `,
+      onUnusableOutput: (event) => signals.push(event),
+    });
+    assert.equal(out, '');
+    assert.deepEqual(signals, [{ targetLang: 'de', fieldType: 'title', reason: 'passthrough' }]);
+  });
+
+  test('rifiuta un lone surrogate prodotto dal motore prima del write boundary', async () => {
+    const signals = [];
+    const out = await translateFieldFreeMt({
+      text: 'Titolo italiano',
+      sourceLang: 'it',
+      targetLang: 'de',
+      fieldType: 'title',
+      translate: async () => `Ein Titel \uD83D`,
+      onUnusableOutput: (event) => signals.push(event),
+    });
+    assert.equal(out, '');
+    assert.deepEqual(signals, [{ targetLang: 'de', fieldType: 'title', reason: 'lone-surrogate' }]);
+  });
+
   test('un output non-stringa emette un segnale distinto e non diventa testo', async () => {
     const signals = [];
     const out = await translateFieldFreeMt({
@@ -214,8 +243,8 @@ describe('events-utils — il feed dell’organizzatore non parla tedesco', () =
 
   test('#868 item 3 — una entry `Null` gia’ in cache non viene riusata: si ritraduce', async () => {
     const events = [{ id: 'e1', titleByLocale: { it: 'Mercatino di Natale', en: 'Christmas market' } }];
-    // La cache e' persistente fra le run: la chiave e' quella che
-    // `fillLocaleGaps` compone (`fieldType::sourceLocale::testoNormalizzato`).
+    // La cache legacy e' persistente fra le run, ma nessun percorso la legge o
+    // la riscrive: la sua migrazione era codice morto e gonfiava il JSON.
     const cache = { 'title::it::mercatino di natale': { de: 'Null', fr: 'NULL' } };
     const chiamate = [];
     const out = await enrichEventsWithLocaleFallbackTranslations(events, cache, {
@@ -228,7 +257,7 @@ describe('events-utils — il feed dell’organizzatore non parla tedesco', () =
     assert.deepEqual(chiamate.sort(), ['de', 'fr'], 'entrambe le entry avvelenate devono essere ritradotte');
     assert.equal(out[0].titleByLocale.de, 'titolo-de');
     assert.equal(out[0].titleByLocale.fr, 'titolo-fr');
-    assert.equal(cache['title::it::mercatino di natale'].de, 'titolo-de', 'la cache va anche RISCRITTA');
+    assert.deepEqual(cache['title::it::mercatino di natale'], { de: 'Null', fr: 'NULL' }, 'la chiave legacy morta resta intatta');
   });
 
   test('#831 item 3 — una traduzione inutilizzabile non scrive la chiave: il locale resta scoperto', async () => {

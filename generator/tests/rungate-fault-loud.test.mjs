@@ -134,6 +134,46 @@ test('gate PRESENTE ma non caricabile: guasto distinto, non inconclusive', () =>
   assert.match(stdout, /batch_prs=4242/, 'Proceed-safe invariato.\n' + stdout);
 });
 
+test('gate che termina per errore d’ambiente: errore visibile, non verdetto', () => {
+  const { stdout, summary } = runInSandbox({
+    // Un gate che non riesce a eseguire una dipendenza non ha prodotto un verdetto.
+    'is-followup-fix-pr.mjs':
+      "import { execFileSync } from 'node:child_process';\n" +
+      "execFileSync('rungate-dipendenza-inesistente', []);\n",
+    'followup-has-candidates.mjs': "console.log('has_candidates=true');\n",
+  });
+
+  assert.match(
+    stdout,
+    /::error title=Gate del follow-up non eseguibile::is-followup-fix-pr\.mjs/,
+    'Un errore d’ambiente deve essere visibile, non diventare inconclusive silenzioso.\nstdout:\n' + stdout,
+  );
+  assert.match(summary, /is-followup-fix-pr\.mjs.*non eseguibile/, 'Il summary deve conservare il guasto.\n' + summary);
+  assert.match(stdout, /batch_prs=4242/, 'Il proceed-safe resta: senza verdetto la PR va tenuta.\n' + stdout);
+});
+
+test('gate presente con verdetto SOPPRIMI: la PR non entra nel batch', () => {
+  const { stdout } = runInSandbox({
+    'is-followup-fix-pr.mjs': "console.log('is_followup_fix=true');\n",
+    'followup-has-candidates.mjs': "console.log('has_candidates=true');\n",
+  });
+
+  assert.match(stdout, /follow-up FIX \(grandchild-suppression\) → skip/);
+  assert.match(stdout, /batch_prs=\n/, 'Una soppressione reale deve lasciare il batch vuoto.\n' + stdout);
+  assert.doesNotMatch(stdout, /batch_prs=4242/);
+});
+
+test('gate presente con verdetto NO-OP: la PR non entra nel batch', () => {
+  const { stdout } = runInSandbox({
+    'is-followup-fix-pr.mjs': "console.log('is_followup_fix=false');\n",
+    'followup-has-candidates.mjs': "console.log('has_candidates=false');\n",
+  });
+
+  assert.match(stdout, /no plausible candidate .*skip/);
+  assert.match(stdout, /batch_prs=\n/, 'Una soppressione reale deve lasciare il batch vuoto.\n' + stdout);
+  assert.doesNotMatch(stdout, /batch_prs=4242/);
+});
+
 test('gate girato e INCONCLUSIVE: resta silenzioso (proceed-safe legittimo)', () => {
   const { stdout, summary } = runInSandbox({
     // Gira, esce 0, ma non stampa la chiave attesa → incertezza vera.

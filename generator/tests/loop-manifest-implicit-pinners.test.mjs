@@ -26,6 +26,8 @@ import { fileURLToPath } from 'node:url';
 import {
   implicitPinnersVerdict,
   declaredAbsentCiters,
+  crawlerContractIsActive,
+  resetPinnerIndex,
   DECLARED_ABSENT_REGISTRY_REL,
   CRAWLER_CONTRACT_REL,
   DORMANT_WITH_CRAWLER_CONTRACT,
@@ -35,7 +37,10 @@ import {
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const MANIFEST = JSON.parse(fs.readFileSync(path.join(ROOT, 'scripts/ci/loop-sync-manifest.json'), 'utf8'));
 const REGISTRY = fs.readFileSync(path.join(ROOT, DECLARED_ABSENT_REGISTRY_REL), 'utf8');
-const CRAWLER_CONTRACT = fs.existsSync(path.join(ROOT, CRAWLER_CONTRACT_REL));
+const CRAWLER_CONTRACT_SOURCE = fs.existsSync(path.join(ROOT, CRAWLER_CONTRACT_REL))
+  ? fs.readFileSync(path.join(ROOT, CRAWLER_CONTRACT_REL), 'utf8')
+  : null;
+const CRAWLER_CONTRACT = crawlerContractIsActive(CRAWLER_CONTRACT_SOURCE);
 /** L'indice come lo costruisce lo script: solo le dichiarazioni ATTIVE. */
 const activeCiters = () => declaredAbsentCiters(REGISTRY, { crawlerContract: CRAWLER_CONTRACT });
 
@@ -53,6 +58,45 @@ test('il parse del registro non torna vuoto: una mappa vuota spegne il rilevator
   assert.deepEqual(bogus, [], `Chiavi che non sono path repo-relative:\n  ${bogus.join('\n  ')}`);
 });
 
+const countEntries = (index) => [...index.values()].reduce((total, refs) => total + refs.length, 0);
+
+test('il parser accetta apici singoli, doppi e template senza attraversare una riga', () => {
+  const parsed = declaredAbsentCiters([
+    '  "scripts/it\'s.mjs :: docs/a.md": true,',
+    "  'scripts/b.mjs :: docs/b.md': true,",
+    '  `scripts/c.mjs :: docs/c.md`: true,',
+    '  "scripts/d.mjs ::',
+    '  docs/d.md": true,',
+    '  "scripts/should-not-join.mjs :: docs/e.md": true,',
+  ].join('\n'));
+  assert.deepEqual([...parsed.entries()], [
+    ["scripts/it's.mjs", ['docs/a.md']],
+    ['scripts/b.mjs', ['docs/b.md']],
+    ['scripts/c.mjs', ['docs/c.md']],
+    ['scripts/should-not-join.mjs', ['docs/e.md']],
+  ]);
+});
+
+test('il registro mantiene un floor di cardinalità misurato sul checkout', () => {
+  const all = declaredAbsentCiters(REGISTRY, { crawlerContract: false });
+  const active = activeCiters();
+  assert.ok(all.size >= 61, 'il registro ha perso chiavi di citanti');
+  assert.ok(countEntries(all) >= 142, 'il registro ha perso dichiarazioni totali');
+  assert.ok(active.size >= 37, 'il registro ha perso citanti attivi');
+  assert.ok(countEntries(active) >= 70, 'il registro ha perso dichiarazioni attive');
+});
+
+test('il contract crawler usa il valore JSON e la cache pinner ha una chiave d input', () => {
+  assert.equal(crawlerContractIsActive('null'), false);
+  assert.equal(crawlerContractIsActive('false'), false);
+  assert.equal(crawlerContractIsActive('0'), false);
+  assert.equal(crawlerContractIsActive('{}'), true);
+  const checker = fs.readFileSync(path.join(ROOT, 'scripts/ci/loop-drift-check.mjs'), 'utf8');
+  assert.match(checker, /let PINNER_INDEX_KEY = null/);
+  assert.match(checker, /crawlerContract: crawlerContractIsActive\(contractSource\)/);
+  resetPinnerIndex();
+});
+
 test('il registro e\' `corpus-only`: non scende mai insieme alla copia', () => {
   const entry = MANIFEST.files.find((f) => f.path === DECLARED_ABSENT_REGISTRY_REL);
   assert.ok(entry, 'il registro non e\' piu\' nel manifest');
@@ -64,7 +108,7 @@ test('il registro e\' `corpus-only`: non scende mai insieme alla copia', () => {
 });
 
 test('almeno una voce `identical` del manifest ha una dichiarazione appaiata', () => {
-  // La misura del 2026-09-07 su `main` diceva 20 su 157 contando le sole
+  // La rimisura del 2026-09-08 su questo `main` dice 20 su 159 contando le sole
   // dichiarazioni ATTIVE (44 contandole tutte). Il numero esatto si muove a
   // ogni PR, ma ZERO vorrebbe dire che il rilevatore non trova piu` niente —
   // cioe` il silenzio che questo modulo esiste per rompere.

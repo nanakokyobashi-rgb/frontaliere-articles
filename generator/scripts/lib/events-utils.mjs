@@ -20,7 +20,11 @@ import path from 'node:path';
 import { truncateSlugAtWordBoundary } from './slug-truncate.mjs';
 import CANTON_URL_SLUGS from '../../data/canton-url-slugs.json' with { type: 'json' };
 import { MUNICIPALITIES } from '../../data/municipalities.ts';
-import { freeTranslateWithRetry } from './free-translate.mjs';
+import {
+  asTranslationResult,
+  freeTranslateWithRetryDetailed,
+  getTranslationCascadeConfigurationKey,
+} from './free-translate.mjs';
 import { hasUsableContentText, hasUsableTranslatedText } from './body2-payload-verdict.mjs';
 
 export { hasUsableContentText };
@@ -905,11 +909,11 @@ export async function geocodeVenue(query, cache, fetchImpl = fetch) {
 // but the crawler rewrites its whole slice from scratch every run (no
 // historical merge — see crawl-tio-agenda.mjs main()), so without a disk
 // cache the SAME recurring event title would be re-translated every single
-// day forever. Cached here by normalized Italian title so only genuinely new
-// titles cost a network call.
+// day forever. Positive translations are cached by field, source locale, and
+// normalized source text; negative passthrough outcomes stay event-scoped.
 const TRANSLATION_CACHE_PATH = path.join(REPO_ROOT, 'data', 'events-translation-cache.json');
 
-/** Load the on-disk title translation cache (`{ [normalizedItTitle]: {en?,de?,fr?} }`). */
+/** Load the on-disk title translation cache (`{ [eventCacheKey]: {en?,de?,fr?} }`). */
 export function loadEventTitleTranslationCache() {
   try {
     if (!existsSync(TRANSLATION_CACHE_PATH)) return {};
@@ -938,11 +942,14 @@ export function saveEventTitleTranslationCache(cache) {
 // machine-translated from the first present, non-colliding locale (in
 // `locales` priority order), or from the first present locale if ALL of them
 // collide. Shared here (not copy-pasted into both crawlers, AGENTS.md §6) and
-// reuses the SAME on-disk cache as `loadEventTitleTranslationCache` — a
-// compound key (`fieldType::sourceLocale::normalizedSourceText`) keeps new
-// entries collision-free against tio-agenda's own bare-title keys.
+// reuses the SAME on-disk cache as `loadEventTitleTranslationCache`. Entries
+// Positive entries are keyed by field, source locale, and normalized source
+// text: two events with the same translation input share one memo. Negative
+// passthrough entries retain the event discriminator because they describe the
+// cascade state for one event, not a translation result.
 const LOCALE_FALLBACK_DELAY_MS = 200;
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+const DEFAULT_TRANSLATE_FN = freeTranslateWithRetryDetailed;
 
 /**
  * Which locales in `byLocale` (a `titleByLocale`/`descriptionByLocale`-shaped
@@ -1071,7 +1078,47 @@ function warnStrictPredicateDrops(poisoned, byLocale, label) {
  * `byLocale` — or the SAME reference when nothing needs translating and
  * nothing was poisoned in input.
  */
-async function fillLocaleGaps(byLocale, cache, { fieldType, locales, delayMs, translateFn }) {
+const MAX_PASSTHROUGH_MEMO_WORDS = 32;
+
+/** Return the stable identity used only by event-scoped negative memos. */
+function eventTranslationDiscriminator(event) {
+  const candidates = [
+    ['id', event?.id],
+    ['stableId', event?.stableId],
+    ['url', event?.url],
+  ];
+  for (const [label, value] of candidates) {
+    if (typeof value === 'string' && value.trim()) return `${label}:${value.trim()}`;
+    if (typeof value === 'number' && Number.isFinite(value)) return `${label}:${value}`;
+  }
+  return null;
+}
+
+function eventTranslationCacheKey({ fieldType, sourceLocale, normalizedSource }) {
+  return JSON.stringify([fieldType, sourceLocale, normalizedSource]);
+}
+
+function eventTranslationNegativeCacheKey({
+  eventId,
+  fieldType,
+  sourceLocale,
+  normalizedSource,
+  cascadeConfigurationKey,
+}) {
+  if (!eventId) return null;
+  return JSON.stringify([fieldType, eventId, sourceLocale, normalizedSource, cascadeConfigurationKey]);
+}
+
+function wordCount(text) {
+  return String(text ?? '').trim() ? String(text).trim().split(/\s+/).length : 0;
+}
+
+async function translateEventLocale({ translateFn, text, sourceLang, targetLang, fieldType }) {
+  const raw = await translateFn({ text, sourceLang, targetLang, fieldType, maxRetries: 1 });
+  return asTranslationResult(raw);
+}
+
+async function fillLocaleGaps(byLocale, cache, { eventId, fieldType, locales, delayMs, translateFn }) {
   // Prima di ogni ramo, compresi i due che non entrano nel loop.
   const clean = stripUnusableLocaleValues(byLocale, `${fieldType}ByLocale`);
   const needing = localesNeedingTranslation(clean, locales);
@@ -1082,27 +1129,58 @@ async function fillLocaleGaps(byLocale, cache, { fieldType, locales, delayMs, tr
   const sourceLocale = present.find((l) => !needing.includes(l)) || present[0];
   const sourceText = clean[sourceLocale];
   const normalizedSource = normalizeText(sourceText).replace(/\s+/g, ' ');
-
   const updated = { ...clean };
+  const cacheKey = eventTranslationCacheKey({ fieldType, sourceLocale, normalizedSource });
+  const negativeCacheKey = eventTranslationNegativeCacheKey({
+    eventId,
+    fieldType,
+    sourceLocale,
+    normalizedSource,
+    cascadeConfigurationKey: getTranslationCascadeConfigurationKey(),
+  });
+  const sharedEntry = cache[cacheKey] || {};
+  const negativeEntry = negativeCacheKey ? (cache[negativeCacheKey] || {}) : {};
   for (const target of needing) {
     if (target === sourceLocale) continue;
-    const cacheKey = `${fieldType}::${sourceLocale}::${normalizedSource}`;
-    const entry = cache[cacheKey] || {};
-    let translated = entry[target];
-    if (!hasUsableContentText(translated)) {
-      translated = await translateFn({ text: sourceText, sourceLang: sourceLocale, targetLang: target, fieldType, maxRetries: 1 });
-      if (hasUsableContentText(translated)) {
-        cache[cacheKey] = { ...entry, [target]: translated };
-        if (translateFn === freeTranslateWithRetry) await sleep(delayMs);
+    if (Object.prototype.hasOwnProperty.call(sharedEntry, target)) {
+      const memo = sharedEntry[target];
+      if (hasUsableContentText(memo)) {
+        // `target` is in `needing` because its value is absent or duplicates
+        // another locale. Reuse the positive memo as the authoritative
+        // translation instead of publishing the source text again.
+        updated[target] = memo;
+        continue;
       }
     }
-    // Una traduzione `"null"` non deve ne' entrare in cache ne' sovrascrivere
-    // il gap: il locale resta scoperto e cade sul testo della sorgente. La
-    // chiave gia' avvelenata in ingresso (#868 item 5) e' gia' caduta con
-    // `stripUnusableLocaleValues`, quindi qui basta non riscriverla: una
-    // traduzione fallita — esito ordinario della cascata gratuita
-    // (rate-limit, motore giu', quota) — lascia il locale assente.
-    if (hasUsableContentText(translated)) updated[target] = translated;
+    if (Object.prototype.hasOwnProperty.call(negativeEntry, target) && negativeEntry[target] === null) {
+      continue; // stable passthrough memo for this event, no network retry
+    }
+
+    const { text: translated, passthrough } = await translateEventLocale({
+      translateFn,
+      text: sourceText,
+      sourceLang: sourceLocale,
+      targetLang: target,
+      fieldType,
+    });
+    if (hasUsableContentText(translated)) {
+      sharedEntry[target] = translated;
+      cache[cacheKey] = sharedEntry;
+      updated[target] = translated;
+      if (translateFn === DEFAULT_TRANSLATE_FN) {
+        await sleep(delayMs);
+      }
+    } else if (
+      passthrough
+      && wordCount(sourceText) <= MAX_PASSTHROUGH_MEMO_WORDS
+    ) {
+      // Keep the negative memo as null: writing sourceText into a missing target
+      // locale would publish Italian under the requested locale.
+      if (negativeCacheKey) {
+        negativeEntry[target] = null;
+        cache[negativeCacheKey] = negativeEntry;
+      }
+    }
   }
   return updated;
 }
@@ -1139,13 +1217,14 @@ export async function enrichEventsWithLocaleFallbackTranslations(events, cache, 
   const {
     locales = ['it', 'en', 'de', 'fr'],
     delayMs = LOCALE_FALLBACK_DELAY_MS,
-    translateFn = freeTranslateWithRetry,
+    translateFn = DEFAULT_TRANSLATE_FN,
     deadline = null,
   } = options;
   const out = [];
   let skipped = 0;
   for (const event of events) {
     const next = { ...event };
+    const eventId = eventTranslationDiscriminator(event);
     // Le chiavi avvelenate cadono PRIMA del pass-through di `deadline`: un
     // evento spedito non tradotto tiene il testo della sorgente, ma un `NULL`
     // del feed non e' testo della sorgente — e' il modo in cui quel feed dice
@@ -1162,10 +1241,17 @@ export async function enrichEventsWithLocaleFallbackTranslations(events, cache, 
       continue;
     }
     if (next.titleByLocale) {
-      next.titleByLocale = await fillLocaleGaps(next.titleByLocale, cache, { fieldType: 'title', locales, delayMs, translateFn });
+      next.titleByLocale = await fillLocaleGaps(next.titleByLocale, cache, {
+        eventId,
+        fieldType: 'title',
+        locales,
+        delayMs,
+        translateFn,
+      });
     }
     if (next.descriptionByLocale) {
       next.descriptionByLocale = await fillLocaleGaps(next.descriptionByLocale, cache, {
+        eventId,
         fieldType: 'description',
         locales,
         delayMs,

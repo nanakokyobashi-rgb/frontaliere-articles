@@ -258,12 +258,12 @@ const normPairText = (s) => String(s ?? '').replace(/\s+/g, ' ').trim().toLowerC
 // Tarati sulle FAQ pubblicate — la misura sta nel commento di `wrongLocalePair`.
 const THIRD_LANG_MIN_CONFIDENCE = 0.6; // affidabilita' dichiarata dal rilevatore
 const THIRD_LANG_MIN_SCORE = 500;      // evidenza assoluta, non solo margine
+const THIRD_LANG_SHORT_TEXT_CONFIDENCE = 0.85; // ramo strong-marker senza scores
 
-/** Due coppie FAQ sono la stessa coppia (confronto normalizzato, non `===`). */
-function samePair(a, b) {
-  return !!a && !!b
-    && normPairText(a.q) === normPairText(b.q)
-    && normPairText(a.a) === normPairText(b.a);
+/** La chiave stabile di una coppia FAQ (confronto normalizzato, non `===`). */
+function pairKey(pair) {
+  if (!pair) return null;
+  return `${normPairText(pair.q)}\u0000${normPairText(pair.a)}`;
 }
 
 /**
@@ -364,29 +364,77 @@ function samePair(a, b) {
  *   il chiamante ce l'ha. Senza, resta il solo controllo di lingua e si perde
  *   il ramo che coglie il fallback per-coppia di `translateFaqArray()`.
  * @param {string} [sourceLang='it']
- * @returns {{index: number, detected: string, via: 'verbatim'|'lingua'|'terza-lingua'}|null}
+ * @returns {Array<{index: number, detected: string, via: 'verbatim'|'lingua'|'terza-lingua'}>|null}
  */
 export function wrongLocalePair(faqArray, expectedLocale, sourceFaq = null, sourceLang = 'it') {
   // Su `expectedLocale === sourceLang` non c'e' traduzione da giudicare: la
   // sorgente italiana sotto `/it/` e' l'esito giusto, non un passthrough.
   if (expectedLocale === sourceLang) return null;
+  const sourcePairs = Array.isArray(sourceFaq)
+    ? new Set(sourceFaq.map(pairKey).filter(Boolean))
+    : null;
+  const wrong = [];
   for (let i = 0; i < faqArray.length; i++) {
-    if (samePair(faqArray[i], sourceFaq?.[i])) {
-      return { index: i, detected: sourceLang, via: 'verbatim' };
+    if (sourcePairs?.has(pairKey(faqArray[i]))) {
+      wrong.push({ index: i, detected: sourceLang, via: 'verbatim' });
+      continue;
     }
     const text = `${faqArray[i].q} ${faqArray[i].a}`;
     if (text.length < 50) continue; // too short to detect
     const { lang: detected, confidence, scores } = detectLanguageWithConfidence(text, expectedLocale);
-    if (detected === sourceLang) return { index: i, detected, via: 'lingua' };
+    if (detected === sourceLang) {
+      wrong.push({ index: i, detected, via: 'lingua' });
+      continue;
+    }
     // Terza lingua: rifiuta solo col segnale forte (vedi sopra), altrimenti il
     // ramo si riprende i falsi positivi che questo predicato serve a togliere.
     if (detected !== expectedLocale
       && confidence >= THIRD_LANG_MIN_CONFIDENCE
-      && (scores?.[detected] ?? 0) >= THIRD_LANG_MIN_SCORE) {
-      return { index: i, detected, via: 'terza-lingua' };
+      && (Object.keys(scores || {}).length === 0
+        ? confidence >= THIRD_LANG_SHORT_TEXT_CONFIDENCE
+        : (scores?.[detected] ?? 0) >= THIRD_LANG_MIN_SCORE)) {
+      wrong.push({ index: i, detected, via: 'terza-lingua' });
     }
   }
-  return null;
+  return wrong.length > 0 ? wrong : null;
+}
+
+/** Rimuove solo le coppie giudicate sbagliate, conservando quelle sane. */
+export function filterWrongLocalePairs(faqArray, wrong) {
+  if (!Array.isArray(wrong) || wrong.length === 0) return faqArray;
+  const rejected = new Set(wrong.map(({ index }) => index));
+  return faqArray.filter((_, index) => !rejected.has(index));
+}
+
+// Il minimo di coppie che una FAQ pubblicata deve avere. UNA sorgente per i due
+// scrittori (`batch-add-faq-to-articles.mjs` lo importa da qui): il ramo IT lo
+// impone gia' sulla generazione, e un locale scritto sotto questo numero
+// sarebbe una FAQ piu' povera dell'italiano sulla stessa pagina.
+export const MIN_FAQ_PAIRS = 3;
+
+/**
+ * Il pavimento di una scrittura potata, e insieme la condizione che il
+ * RILEVATORE usa per riaccodare il locale.
+ *
+ * Perche' esiste: conservare le coppie sane invece di buttare l'articolo e'
+ * giusto, ma senza pavimento la potatura e' PERMANENTE. Il rilevatore riaccoda
+ * un locale solo se manca la chiave `.faq` o se `wrongLocalePair` trova ancora
+ * una coppia sbagliata: dopo una scrittura parziale nessuna delle due vale
+ * piu', e la FAQ pubblicata resta sotto il minimo per sempre, senza un errore.
+ * Sotto il pavimento quindi NON si scrive: la FAQ vecchia resta, il rilevatore
+ * la rivede al giro dopo e la traduzione viene ritentata.
+ *
+ * `Math.min` con la sorgente: pretendere 3 coppie da una sorgente che ne ha 2
+ * sarebbe un pavimento irraggiungibile, cioe' un locale mai piu' scritto.
+ */
+export function minPairsForWrite(sourceFaq) {
+  const sourceLen = Array.isArray(sourceFaq) ? sourceFaq.length : 0;
+  return Math.min(sourceLen || MIN_FAQ_PAIRS, MIN_FAQ_PAIRS);
+}
+
+/** true quando l'array potato non raggiunge il pavimento e non va scritto. */
+export function belowFaqFloor(keptFaq, sourceFaq) {
+  return (keptFaq?.length ?? 0) < minPairsForWrite(sourceFaq);
 }
 
 // ── Translation (same cascade as job crawlers) ──────────────
@@ -543,26 +591,39 @@ async function main() {
       // Verify the translation is actually in the right locale — per coppia,
       // perche' il fallback italiano di `translateFaqArray()` e' per coppia.
       const wrong = wrongLocalePair(translated, issue.locale, issue.itFaq);
+      let toWrite = translated;
       if (wrong) {
-        console.error(`${label} ❌ Translation not in ${issue.locale} `
-          + `(coppia ${wrong.index + 1}/${translated.length}: ${wrong.detected}, `
-          + `rilevata per ${wrong.via})`);
-        failed++;
-        continue;
+        toWrite = filterWrongLocalePairs(translated, wrong);
+        console.error(`${label} ⚠️  ${wrong.length} coppia/e non in ${issue.locale} `
+          + `(${wrong.map((pair) => `${pair.index + 1}:${pair.detected}/${pair.via}`).join(', ')}): `
+          + `${toWrite.length} coppia/e sane conservate`);
+        // Sotto il pavimento non si scrive NIENTE. Qui il write e' un
+        // `replaceFaqInFile` su una FAQ gia' presente: scrivere il residuo
+        // potato sostituirebbe la FAQ del locale con una piu' povera, e il
+        // prossimo scan non la vedrebbe piu' come issue — `wrongLocalePair`
+        // sulle sole superstiti torna `null`. Il conteggio `fixed++` la
+        // dichiarerebbe pure riparata. Meglio lasciarla com'e' e ritentare.
+        if (belowFaqFloor(toWrite, issue.itFaq)) {
+          console.error(`${label} ❌ Solo ${toWrite.length}/${minPairsForWrite(issue.itFaq)} coppie sane: `
+            + 'non scrivo (una FAQ potata non verrebbe piu\' riaccodata), ritento al giro dopo');
+          failed++;
+          continue;
+        }
       }
 
       const localePath = resolve(BODY_DIR, issue.locale, issue.file);
       if (issue.reason === 'missing') {
-        if (!insertFaqKey(localePath, issue.articleId, translated)) {
+        if (!insertFaqKey(localePath, issue.articleId, toWrite)) {
           console.error(`${label} ❌ Could not insert FAQ key`);
           failed++;
           continue;
         }
       } else {
-        replaceFaqInFile(localePath, translated);
+        replaceFaqInFile(localePath, toWrite);
       }
 
-      console.log(`${label} ✅ Fixed (${translated.length} pairs)`);
+      console.log(`${label} ✅ Fixed (${toWrite.length} pairs`
+        + (wrong ? `, ${wrong.length} skipped)` : ')'));
       fixed++;
     } catch (err) {
       console.error(`${label} ❌ ${err.message}`);

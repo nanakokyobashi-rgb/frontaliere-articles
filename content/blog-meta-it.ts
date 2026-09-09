@@ -11606,6 +11606,18 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.cassa-malati-rincari-2027.title': 'Premi cassa malati: +5% nel 2027',
     'blog.article.cassa-malati-rincari-2027.excerpt': 'Secondo bonus.ch, premi LAMal aumenteranno quasi il 5% nel 2027, con picchi fino al 20%. Impatto diretto sulla busta paga dei frontalieri.',
     'blog.article.cassa-malati-rincari-2027.imageAlt': 'Documenti di assicurazione malattia e calcolatore digitale di premi LAMal',
+    'blog.article.frontalieri-libro-analisi-miti.title': 'Frontalieri svizzera: 400mila, miti e analisi',
+    'blog.article.frontalieri-libro-analisi-miti.excerpt': 'La Svizzera impiega 400mila+ frontalieri (record europeo). Nuovo libro sfata miti: crescita 1978–2026, salari, fiscalità, trasporti. Ticino al centro.',
+    'blog.article.frontalieri-libro-analisi-miti.imageAlt': 'Panorama di Lugano con il lago e le montagne circostanti, simbolo della regione ticinese e del lavoro frontaliero',
+    'blog.article.s30-guasto-tecnico-cadenazzo-luino.title': 'S30 bloccata tra Cadenazzo e Luino per guasto tecnico',
+    'blog.article.s30-guasto-tecnico-cadenazzo-luino.excerpt': 'Linea ferroviaria interrotta fino a mercoledì 9 settembre 2026 ore 4:00. Bus sostitutivi disponibili ma con ritardi garantiti e assenza di coincidenze.',
+    'blog.article.s30-guasto-tecnico-cadenazzo-luino.imageAlt': 'Stazione ferroviaria di Bellinzona con binari e treni SBB in sosta durante il giorno',
+    'blog.article.libro-boom-frontalieri-svizzera.title': 'Il libro sul boom dei frontalieri in Svizzera',
+    'blog.article.libro-boom-frontalieri-svizzera.excerpt': 'Nuovo libro accademico spiega come la Svizzera conta 400.000 frontalieri. Da 84.000 nel 1978 al boom dopo il 2000. Focus su salari, fiscalità, trasporti.',
+    'blog.article.libro-boom-frontalieri-svizzera.imageAlt': 'Paesaggio della regione ticinese al confine con l\'Italia, simbolo del mercato del lavoro frontaliero svizzero-italiano.',
+    'blog.article.mesenzana-lavorare-ticino.title': 'Vivere a Mesenzana e lavorare in Ticino',
+    'blog.article.mesenzana-lavorare-ticino.excerpt': 'Scopri come vivere a Mesenzana e lavorare in Ticino da frontaliere: permessi, fiscalità, trasporti, costo della vita e procedimenti. Guida pratica.',
+    'blog.article.mesenzana-lavorare-ticino.imageAlt': 'Paesaggio del confine Ticino-Italia presso il valico di Brogeda, con colline Alpi sullo sfondo',
 };
 
 export default blogMetaIt;

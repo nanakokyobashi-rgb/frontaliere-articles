@@ -33,6 +33,7 @@ import { describe, it } from 'node:test';
 import {
   AI_MODELS,
   DEFAULT_CHAIN,
+  causeIndex,
   classifyExhaustionCause,
   classifyNonRetryableError,
 } from '../scripts/lib/ai-models.mjs';
@@ -183,6 +184,12 @@ describe('classifyNonRetryableError — la ruggine va marcata esaurita', () => {
 });
 
 describe('classifyExhaustionCause — le cause di skip finiscono nel secchio giusto', () => {
+  it('cerca l\'indice anche con una regex globale, senza consumare il match', () => {
+    const globale = /quota/g;
+    assert.equal(causeIndex(globale, 'quota quota'), 0);
+    assert.equal(causeIndex(globale, 'quota quota'), 0);
+  });
+
   // Le stringhe sono quelle che _exhaustSkipCause produce davvero, una per ogni
   // valore possibile di _exhaustReason.
   const PERSISTENTI = [

@@ -89,6 +89,15 @@ export function corpusPath(rel) {
     }
   }
 
+  // `services/` is the generator's main-layout namespace. Returning an
+  // unknown path unchanged would let a future writer create a second tree at
+  // the corpus root while all its existence checks still inspect `content/`.
+  // State under `data/`, `public/` and `scripts/` deliberately remains
+  // pass-through; only this source namespace is fail-closed.
+  if (bare.startsWith('services/')) {
+    throw new Error(`corpusPath: path main non mappato: ${rel}`);
+  }
+
   return rel;
 }
 

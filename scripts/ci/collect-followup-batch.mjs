@@ -189,7 +189,7 @@ export function maxTurnsFor(batchCount) {
 
 /**
  * Guasti di CONFIGURAZIONE raccolti da `runGate` durante la run: un gate che non
- * esiste, o che esiste ma non si carica. NON contiene gli inconclusive
+ * esiste, non si carica o termina in errore. NON contiene gli inconclusive
  * legittimi, che restano silenziosi per costruzione.
  * Chiave: `<gate>|<kind>` — un gate rotto vale una riga sola, non una per PR.
  * @type {Map<string, {gate:string, kind:string, detail:string, count:number}>}
@@ -199,12 +199,10 @@ const gateFaults = new Map();
 /**
  * Firma di un fallimento di CARICAMENTO del modulo, letta su stderr del figlio.
  * Distingue «il gate non si carica» (guasto: import rotto, export inesistente,
- * sintassi invalida) da «il gate è crashato mentre girava» (incertezza: rientra
- * nel proceed-safe silenzioso).
+ * sintassi invalida) da un altro errore di esecuzione, così il log può spiegare
+ * quale parte della configurazione si è rotta.
  * ponytail: match testuale su stderr, non un codice d'uscita dedicato — Node non
- * ne espone uno che separi load-time da run-time. Se un giorno un errore di
- * caricamento sfuggisse alla lista, il caso degrada nel ramo inconclusive, cioè
- * nel comportamento di prima: mai peggio del precedente.
+ * ne espone uno che separi load-time da run-time.
  */
 const MODULE_LOAD_ERROR =
   /ERR_MODULE_NOT_FOUND|ERR_UNSUPPORTED_DIR_IMPORT|ERR_UNKNOWN_FILE_EXTENSION|ERR_REQUIRE_ESM|SyntaxError|Cannot find (?:module|package)|does not provide an export named/;
@@ -225,7 +223,7 @@ function recordGateFault(gate, kind, detail) {
   gateFaults.set(key, { gate, kind, detail, count: 1 });
   console.log(
     `::error title=Gate del follow-up ${kind}::${gate} — ${detail}. ` +
-    'Il gate NON ha girato: il triage procede senza di lui (proceed-safe), ' +
+    'Il gate NON ha consegnato un verdetto: il triage procede senza di lui (proceed-safe), ' +
     'ma questo è un guasto di configurazione, non un caso incerto.',
   );
 }
@@ -250,8 +248,8 @@ function recordGateFault(gate, kind, detail) {
  *     → RUMOROSO.
  *  2. **gate presente ma non caricabile** — import che non risolve, export che
  *     non esiste, sintassi invalida. Stesso guasto, altra forma. → RUMOROSO.
- *  3. **gate girato e inconclusive** — ha risposto qualcosa che non si parsa, o
- *     è crashato a metà. Questa è incertezza vera, ed è il proceed-safe
+ *  3. **gate girato e inconclusive** — è uscito correttamente ma ha risposto
+ *     qualcosa che non si parsa. Questa è incertezza vera, ed è il proceed-safe
  *     legittimo. → silenzioso, come prima.
  *
  * L'invariante di CI — «ogni gate invocato per nome esiste e si carica» — vive
@@ -289,7 +287,16 @@ function runGate(scriptName, prNumber, outputKey) {
       recordGateFault(scriptName, 'non caricabile', line.trim().slice(0, 200));
       return null;
     }
-    return null; // esito 3: proceed-safe — gate crash → inconclusive → keep the PR.
+    // Un'uscita non-zero non è un verdetto: il gate non ha consegnato il proprio
+    // contratto. Anche un crash dopo l'avvio va reso visibile; il proceed-safe
+    // resta comunque in vigore e tiene la PR nel batch.
+    const detail = (
+      stderr.split('\n').find((line) => line.trim()) ||
+      e?.message ||
+      `uscita non-zero (${e?.status ?? e?.code ?? 'sconosciuta'})`
+    ).trim().slice(0, 200);
+    recordGateFault(scriptName, 'non eseguibile', detail);
+    return null;
   }
 }
 

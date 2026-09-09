@@ -120,6 +120,12 @@ test('un secondo finding sulla stessa riga resta ROSSO (#977)', () => {
   assert.equal(REDFLAG_IMPORTANT_RE.test('- `a.mjs:L1`: 🟡 Nit: il pattern `🔴 Important:` va documentato.'), false);
 });
 
+test('un numero dispari di backtick non fa sparire un finding successivo (#1120)', () => {
+  const line = '🟡 Nit: cita `🔴 Important: no` e `🔴 Important: yes';
+  assert.equal(REDFLAG_IMPORTANT_RE.test(line), true);
+  assert.equal(REDFLAG_IMPORTANT_RE.test('🟡 Nit: cita `🔴 Important: no`'), false);
+});
+
 // --- il glifo-ancora non puo' stare dentro una citazione (#1106) ------------
 // La clausola 1-bis apriva la citazione al glifo: con un `.*` davanti, l'ancora
 // poteva essere un 🟡 CITATO, e da li' il controllo di apri-citazione non vedeva

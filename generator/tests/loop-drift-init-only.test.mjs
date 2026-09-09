@@ -25,11 +25,42 @@
  */
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { parseOnly, onlyArgError, forceArgError, resolveInitTargets, initWriteVerdict, initPassOutcome } from '../../scripts/ci/loop-drift-check.mjs';
+import { mkdtempSync, rmSync, writeFileSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+import {
+  parseOnly,
+  onlyArgError,
+  forceArgError,
+  resolveInitTargets,
+  initWriteVerdict,
+  initPassOutcome,
+  initBaseline,
+  initOnlyManifestUnchanged,
+  localHash,
+} from '../../scripts/ci/loop-drift-check.mjs';
+
+const REPO_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
 
 test('parseOnly: senza --only non filtra niente', () => {
   assert.equal(parseOnly(['--init']), null);
   assert.equal(parseOnly([]), null);
+});
+
+test('localHash --init rifiuta un file presente nel working tree ma non in HEAD', () => {
+  const scratch = mkdtempSync(path.join(tmpdir(), 'loop-drift-local-hash-'));
+  const file = path.join(scratch, 'new-corpus-file.mjs');
+  writeFileSync(file, 'export const newFile = true;\n');
+  const rel = path.relative(REPO_ROOT, file);
+  try {
+    assert.throws(
+      () => localHash(rel, { committed: true }),
+      /esiste nel working tree ma non in HEAD.*committalo prima di --init/,
+    );
+  } finally {
+    rmSync(scratch, { recursive: true, force: true });
+  }
 });
 
 test('parseOnly: forma `--only=a,b`', () => {
@@ -189,6 +220,19 @@ test('initWriteVerdict: gli stati non-drift di una voce registrata non bloccano'
   }
 });
 
+test('initWriteVerdict: gli stati rimossi o non portati con modifica restano drift aperto', () => {
+  for (const state of ['removed-on-site', 'not-ported-changed']) {
+    const v = initWriteVerdict(
+      { mode: 'adapted' },
+      { site: null, corpus: H.c },
+      { site: H.a, corpus: H.b },
+      state,
+    );
+    assert.equal(v.blocked, true, state);
+    assert.match(v.why, new RegExp(state));
+  }
+});
+
 // --- granularita' del rifiuto (issue #978) -----------------------------------
 //
 // Il primo taglio del guard rifiutava ATOMICAMENTE: una voce bloccata e il
@@ -246,4 +290,45 @@ test('initPassOutcome: se TUTTE le voci sono bloccate non si scrive niente', () 
     bumpAlignedAt: false,
     exitCode: 1,
   });
+});
+
+test('initPassOutcome: una fetch fallita rende la passata non verificata e non bumpa la data', () => {
+  const o = initPassOutcome({ written: 1, blocked: 0, failed: 1, targeted: false });
+  assert.equal(o.write, true);
+  assert.equal(o.bumpAlignedAt, false);
+  assert.equal(o.exitCode, 1);
+});
+
+test('initBaseline: --force lascia una traccia nella baseline scritta', () => {
+  assert.deepEqual(
+    initBaseline({ site: H.a, corpus: H.a, alignedAt: '2026-09-08', forcedAt: '2026-09-08T12:34:56.000Z' }),
+    { site: H.a, corpus: H.a, alignedAt: '2026-09-08', forcedAt: '2026-09-08T12:34:56.000Z' },
+  );
+  assert.deepEqual(
+    initBaseline({ site: H.a, corpus: H.a, alignedAt: '2026-09-08' }),
+    { site: H.a, corpus: H.a, alignedAt: '2026-09-08' },
+  );
+});
+
+test('--init --only: le entry fuori filtro conservano la propria serializzazione JSON', () => {
+  const before = {
+    _doc: ['contract'],
+    alignedAt: '2026-09-07',
+    files: [
+      { path: 'a.mjs', mode: 'identical', baseline: { site: H.a, corpus: H.a } },
+      { path: 'b.mjs', mode: 'adapted', reason: 'resta uguale', baseline: { site: H.b, corpus: H.c } },
+    ],
+  };
+  const after = JSON.parse(JSON.stringify(before));
+  after.files[0].baseline = { site: H.c, corpus: H.c, alignedAt: '2026-09-08' };
+  assert.deepEqual(
+    initOnlyManifestUnchanged(before, after, new Set(['a.mjs'])),
+    { ok: true, changed: [] },
+  );
+
+  const outsideMutation = JSON.parse(JSON.stringify(after));
+  outsideMutation.files[1].reason = 'mutata per errore';
+  const verdict = initOnlyManifestUnchanged(before, outsideMutation, new Set(['a.mjs']));
+  assert.equal(verdict.ok, false);
+  assert.deepEqual(verdict.changed, ['files:b.mjs']);
 });

@@ -128,6 +128,11 @@ jobs:
           prs=$(gh api --paginate "repos/$REPO/issues?state=open&labels=stale-review&per_page=100" \
             --jq '.[] | select(.pull_request) | {number, title, body, createdAt: .created_at, labels: [.labels[] | {name}]}' \
             | jq -s '.')
+          PRS_RC=$?
+          if [ "$PRS_RC" -ne 0 ]; then
+            echo "::error::Query stale-review fallita (rc=$PRS_RC): non riciclo PR con lista incompleta."
+            exit 1
+          fi
           COUNT=$(printf '%s' "$prs" | jq 'length')
           echo "stale-review PRs aperte: $COUNT"
 
@@ -151,7 +156,12 @@ jobs:
             if [ $((NOW - CS)) -lt "$MAXAGE" ]; then echo "PR #$N non abbastanza vecchia — skip"; continue; fi
 
             # Gate 2: nessun commit nuovo da >MAXAGE (lavoro davvero abbandonato).
-            LASTCOMMIT=$(gh pr view "$N" --repo "$REPO" --json commits --jq '.commits[-1].committedDate // empty' 2>/dev/null || true)
+            # Una sola `gh pr view` per i due campi che servono: l'ultimo commit
+            # (gate 2) e il nome del head ref, che il gate di liberazione del
+            # branch qui sotto deve poter interrogare per nome.
+            PRMETA=$(gh pr view "$N" --repo "$REPO" --json commits,headRefName 2>/dev/null || true)
+            LASTCOMMIT=$(printf '%s' "$PRMETA" | jq -r '.commits[-1].committedDate // empty' 2>/dev/null || true)
+            HEADREF=$(printf '%s' "$PRMETA" | jq -r '.headRefName // empty' 2>/dev/null || true)
             # LASTCOMMIT vuoto = PR senza commit o head fork inaccessibile: NON
             # ricicliamo (il close --delete-branch su un head fork può fallire
             # silenziosamente lasciando il ref, e "0 commit" non è il lavoro
@@ -175,29 +185,76 @@ jobs:
             echo "::notice::PR #$N RICICLABILE → chiudi + re-queue issue #$ISSUE"
             if [ "$DRY" = "true" ]; then echo "(dry-run) skip azione PR #$N"; continue; fi
 
-            # --delete-branch OBBLIGATORIO: issue-fix ricrea il branch con nome
-            # DETERMINISTICO `fix/issue-N` e pusha con `git push -u` (no force). Se
-            # il branch remoto della PR chiusa sopravvive, la storia diverge
-            # (vecchio commit su main vecchio) → push non-fast-forward → rifiutato
-            # → 0 PR → R3-B no-opa sul path che deve fixare. Cancellare il ref
-            # libera il nome per il push fresco. (richiede permissions.contents:write)
-            gh pr close "$N" --repo "$REPO" --delete-branch --comment "$(printf '♻️ **recycle** (auto): PR ferma >%sh come \x60stale-review\x60 con branch indietro su un main mosso di molti commit. Chiusa (branch remoto cancellato) e issue sorgente #%s ri-accodata per un fix fresco contro main corrente (issue-fix aprirà un branch nuovo con lo stesso nome). Il lavoro non è perso: la issue resta aperta.' "${MAX_AGE_HOURS:-24}" "$ISSUE")" \
-              2>/dev/null || echo "close fallito PR #$N"
+            # ── ORDINE: prima si LIBERA il ref, poi si ri-accoda ────────────
+            #
+            # Il re-label e' un trigger: `issue-fix` parte sull'evento
+            # `labeled`, ricrea il branch con nome DETERMINISTICO `fix/issue-N`
+            # e pusha con `git push -u` (no force). Se in quel momento il ref
+            # remoto della PR stale e' ancora vivo, la storia diverge (vecchio
+            # commit su un main mosso) → push non-fast-forward → rifiutato →
+            # 0 PR → R3-B no-op SILENZIOSO proprio sul path che deve fixare.
+            # Ri-accodare prima della chiusura apre quella finestra a ogni
+            # riciclo, ed e' certa quando la close fallisce.
+            #
+            # Quindi: close --delete-branch, verifica che il ref sia sparito,
+            # e solo allora il re-label. L'esito della close E' il gate.
+            #
+            # Il requisito che il re-queue proteggeva resta: senza PAT non si
+            # tocca niente e la PR resta APERTA (un `agent:fix` via
+            # GITHUB_TOKEN non triggera `issue-fix` — anti-ricorsione, sender
+            # github-actions[bot] — quindi chiudere qui vorrebbe dire chiudere
+            # senza che nessuno riprenda il lavoro).
+            if [ -z "${PAT:-}" ]; then
+              echo "⚠️ PAT assente — PR #${N} NON chiusa e issue #${ISSUE} NON ri-accodata. Ri-applicare agent:fix a mano."
+              gh issue comment "${ISSUE}" --repo "${REPO}" --body "♻️ PR stale #${N} non chiusa: riapplicare \`agent:fix\` (serve PAT) per un fix fresco." 2>/dev/null || true
+              continue
+            fi
+
+            # --delete-branch OBBLIGATORIO: vedi sopra, e' cio' che libera il
+            # nome per il push fresco. (richiede permissions.contents:write)
+            if ! gh pr close "$N" --repo "$REPO" --delete-branch --comment "$(printf '♻️ **recycle** (auto): PR ferma >%sh come \x60stale-review\x60 con branch indietro su un main mosso di molti commit. Chiusa (branch remoto cancellato) e issue sorgente #%s ri-accodata per un fix fresco contro main corrente (issue-fix aprirà un branch nuovo con lo stesso nome). Il lavoro non è perso: la issue resta aperta.' "${MAX_AGE_HOURS:-24}" "$ISSUE")"; then
+              echo "::warning::close fallita PR #${N}: NON ri-accodo issue #${ISSUE} (la PR resta aperta e il lavoro recuperabile)."
+              continue
+            fi
+
+            # La close puo' tornare 0 e lasciare comunque il ref (head su fork,
+            # branch protetto, race). Il push di issue-fix e' il consumatore del
+            # ref, non della PR: si verifica il REF, non lo stato della PR.
+            ref_free=false
+            if [ -z "${HEADREF:-}" ]; then
+              echo "::warning::PR #${N}: head ref sconosciuto, non posso verificare che sia libero"
+            else
+              for attempt in 1 2 3; do
+                if ! gh api "repos/${REPO}/git/refs/heads/${HEADREF}" >/dev/null 2>&1; then
+                  ref_free=true; break
+                fi
+                if [ "$attempt" = "2" ]; then
+                  gh api -X DELETE "repos/${REPO}/git/refs/heads/${HEADREF}" >/dev/null 2>&1 || true
+                fi
+                sleep 2
+              done
+            fi
+            if [ "${ref_free}" != "true" ]; then
+              # Ri-accodare ora significherebbe un push non-fast-forward e zero
+              # PR. La issue resta aperta e il canale manuale la recupera.
+              echo "::error::PR #${N}: branch ${HEADREF:-?} ancora presente dopo la close — NON ri-accodo issue #${ISSUE}."
+              gh issue comment "${ISSUE}" --repo "${REPO}" --body "♻️ PR stale #${N} chiusa ma il branch \`${HEADREF:-?}\` non è stato cancellato: riapplicare \`agent:fix\` a mano dopo aver rimosso il ref (un fix fresco non potrebbe pushare)." 2>/dev/null || true
+              continue
+            fi
 
             # Re-queue: serve PAT (un agent:fix via GITHUB_TOKEN NON triggera
-            # issue-fix — anti-ricorsione; sender github-actions[bot] non passa il
-            # gate). Col PAT il sender è un account del progetto, che il gate di
-            # issue-fix accetta → trigger valido.
-            if [ -n "${PAT:-}" ]; then
-              GH_TOKEN="$PAT" gh issue edit "$ISSUE" --repo "$REPO" --remove-label agent:fix 2>/dev/null || true
-              sleep 2
-              GH_TOKEN="$PAT" gh issue edit "$ISSUE" --repo "$REPO" --add-label agent:fix 2>/dev/null \
-                && echo "issue #$ISSUE ri-accodata (agent:fix via PAT)" \
-                || echo "re-label fallito issue #$ISSUE"
+            # issue-fix — anti-ricorsione; sender github-actions[bot] non passa
+            # il gate). Col PAT il sender e' un account del progetto, che il
+            # gate di issue-fix accetta → trigger valido.
+            GH_TOKEN="${PAT}" gh issue edit "${ISSUE}" --repo "${REPO}" --remove-label agent:fix 2>/dev/null || true
+            sleep 2
+            if GH_TOKEN="${PAT}" gh issue edit "${ISSUE}" --repo "${REPO}" --add-label agent:fix 2>/dev/null; then
+              echo "issue #${ISSUE} ri-accodata (agent:fix via PAT)"
             else
-              echo "⚠️ PAT assente — issue #$ISSUE NON ri-accodata automaticamente. Ri-applicare agent:fix a mano."
-              gh issue comment "$ISSUE" --repo "$REPO" --body "♻️ PR sorgente chiusa come stale. Ri-applicare \`agent:fix\` (serve PAT) per un fix fresco." 2>/dev/null || true
+              echo "::error::re-label fallito issue #${ISSUE} (PR #${N} gia' chiusa): riapplicare agent:fix a mano."
+              gh issue comment "${ISSUE}" --repo "${REPO}" --body "♻️ PR stale #${N} chiusa ma il re-label \`agent:fix\` è fallito: riapplicarlo a mano per un fix fresco." 2>/dev/null || true
             fi
+
           done
           echo "Recycle scan completo."
 
@@ -337,13 +394,13 @@ jobs:
           # PR e issue vengono dallo STESSO endpoint `issues`, che le elenca
           # entrambe: e' l'unico che accetta il filtro per label
           # (`repos/.../pulls` non ce l'ha), e la presenza di `.pull_request`
-          # e' la discriminante fra i due tipi. Restano due query separate, con
-          # due esiti separati, perche' il guard sotto distingue quale delle
-          # due non ha potuto guardare.
+          # e' la discriminante fra i due tipi. Si pagina una volta sola e si
+          # partiziona il risultato in memoria: due query sullo stesso endpoint
+          # raddoppiavano il consumo di rate-limit e potevano osservare pagine
+          # diverse durante una mutazione del backlog.
           NEEDS_HUMAN_API="repos/$GH_REPO/issues?state=open&labels=needs-human&per_page=100"
-          PRS=$(gh api --paginate "$NEEDS_HUMAN_API" \
-            --jq '.[] | select(.pull_request) | "- #\(.number) \(.title) (ultimo update \(.updated_at))"')
-          PRS_RC=$?
+          NEEDS_HUMAN_ITEMS=$(gh api --paginate "$NEEDS_HUMAN_API" --jq '.[]' | jq -s '.')
+          NEEDS_HUMAN_RC=$?
           # L'issue dedup di questo stesso step nasce con `automation` e NON
           # con `needs-human` — ma niente le impedisce di riceverla dopo: il
           # followup-drainer gliel'ha messa il 2026-09-02T13:39:50Z (issue
@@ -363,16 +420,17 @@ jobs:
           # di questa. Elencarlo come «oggetto che aspetta occhi umani» e' anche
           # falso: il digest E' il canale umano, non un item da sbloccare.
           # Perche' per titolo e non per label: vedi PERMANENT_TRACKER_TITLES.
-          ISSUES=$(gh api --paginate "$NEEDS_HUMAN_API" \
-            --jq '.[] | select(.pull_request | not) | select(.title != env.DEDUP_TITLE) | select(. as $i | [env.PERMANENT_TRACKER_TITLES | split("\n")[] | select(length > 0)] | index($i.title) | not) | "- #\(.number) \(.title) (ultimo update \(.updated_at))"')
+          PRS=$(printf '%s\n' "$NEEDS_HUMAN_ITEMS" | jq -r '[.[] | select(.pull_request) | "- #\(.number) \(.title) (ultimo update \(.updated_at))"] | join("\n")')
+          PRS_RC=$?
+          ISSUES=$(printf '%s\n' "$NEEDS_HUMAN_ITEMS" | jq -r '[.[] | select(.pull_request | not) | select(.title != env.DEDUP_TITLE) | select(. as $i | [env.PERMANENT_TRACKER_TITLES | split("\n")[] | select(length > 0)] | index($i.title) | not) | "- #\(.number) \(.title) (ultimo update \(.updated_at))"] | join("\n")')
           ISSUES_RC=$?
-          if [ "$PRS_RC" -ne 0 ] || [ "$ISSUES_RC" -ne 0 ]; then
+          if [ "$NEEDS_HUMAN_RC" -ne 0 ] || [ "$PRS_RC" -ne 0 ] || [ "$ISSUES_RC" -ne 0 ]; then
             # Query fallita: lo stato del backlog e' SCONOSCIUTO, non vuoto.
             # Non si chiude e non si ripubblica il corpo (che con una lista
             # troncata da un errore direbbe il falso): si fallisce lo step —
             # `continue-on-error: true` tiene comunque verde il job, ma il
             # rosso resta visibile e il prossimo run ricalcola da zero.
-            echo "::error::Query needs-human fallita (PR rc=$PRS_RC, issue rc=$ISSUES_RC): non tocco l'issue dedup. Liste vuote per un errore non sono «nessun residuo»."
+            echo "::error::Query needs-human fallita (fetch rc=$NEEDS_HUMAN_RC, PR rc=$PRS_RC, issue rc=$ISSUES_RC): non tocco l'issue dedup. Liste vuote per un errore non sono «nessun residuo»."
             exit 1
           fi
           if [ -z "$PRS" ] && [ -z "$ISSUES" ]; then

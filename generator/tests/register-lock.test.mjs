@@ -153,6 +153,20 @@ test('il marker sopravvive a un crash a meta\' della sequenza di 9 scritture', (
   assert.equal(absent.length, steps.length - failAt);
 });
 
+test('label duplicate dei target vengono disambiguate con entrambi i path', () => {
+  const root = sandbox();
+  const first = path.join(root, 'one.ts');
+  const second = path.join(root, 'two.ts');
+  fs.writeFileSync(first, "id: 'x'\n");
+  const { present, absent } = registrationTargetStatus([
+    { label: 'registry', absPath: first, needle: "id: 'x'" },
+    { label: 'registry', absPath: second, needle: "id: 'x'" },
+  ]);
+  assert.deepEqual(present, [`registry [${first}]`]);
+  assert.deepEqual(absent, [`registry [${second}]`]);
+  fs.rmSync(root, { recursive: true, force: true });
+});
+
 test('il run successivo RIFIUTA di procedere su un corpus spezzato', () => {
   const root = sandbox();
   const build = makeTargets(root);
@@ -779,8 +793,10 @@ test('la risoluzione del lock precede ogni decisione sulla presenza dell\'id', (
       const start = src.indexOf(site.scope);
       assert.notEqual(start, -1, `${site.file}: "${site.scope}" non trovato — aggiornare questo test`);
       body = src.slice(start);
+      const nextFunction = body.search(/\n(?:export )?(?:async )?function\s+\w+\s*\(/);
+      if (nextFunction >= 0) body = body.slice(0, nextFunction);
     }
-    const resolveAt = body.search(/^\s*resolveRegisterLockAtStartup\(\);/m);
+    const resolveAt = body.search(/^\s*(?:if \(!dryRun\) )?resolveRegisterLockAtStartup\(\);/m);
     assert.notEqual(
       resolveAt,
       -1,
@@ -907,6 +923,17 @@ test('isRegisterLockHeld() dice se le 9 scritture sono state interrotte', () => 
   // Sezione malformata: non lancia da dentro un catch-guard, altrimenti
   // sostituirebbe la diagnosi originale con la propria.
   assert.equal(isRegisterLockHeld(root, 'non/valida'), false);
+});
+
+test('endRegisterLock propaga un errore di rimozione invece di mascherarlo', () => {
+  const root = sandbox();
+  const lockPath = registerLockPath(root, SECTION);
+  fs.mkdirSync(lockPath, { recursive: true });
+  assert.throws(
+    () => endRegisterLock(root, SECTION),
+    (err) => isRegisterLockError(err) && /could not remove registration lock/.test(err.message),
+  );
+  fs.rmSync(lockPath, { recursive: true });
 });
 
 test('publish-journalist rilancia l\'errore del lock invece di marcare il doc failed', () => {

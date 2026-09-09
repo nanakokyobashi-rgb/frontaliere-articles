@@ -7652,7 +7652,25 @@ export async function callLLM(messages, opts = {}) {
     chain = applyModelsPrefer(chain, o.prefer);
   }
 
+  // Keep the user-facing summary bounded, but retain the full reason and any
+  // machine-derived verdict for the final classification.
   const errors = [];
+  const classificationErrors = [];
+  const pushError = (display, classification = display) => {
+    const errorRow = errors.push(display) - 1;
+    // `transientWindow` = quanto della ragione PIENA e' anche la riga mostrata.
+    // La ragione piena serve alla causa persistente (un 401 oltre il taglio
+    // deve votare lo stesso), ma il vocabolario transitorio non puo' votare
+    // sulla coda: vedi il blocco «LA CODA NON VOTA TRANSITORIO» in
+    // classifyExhaustionCause. Per le voci sintetiche (display === reason) la
+    // finestra e' l'intera stringa, quindi il comportamento non cambia.
+    classificationErrors.push(
+      classification && typeof classification === 'object'
+        ? { transientWindow: display.length, ...classification }
+        : { reason: classification, authoritative: null, transientWindow: display.length },
+    );
+    return errorRow;
+  };
   // Every pre-flight rejection caused by the INPUT size, as { reqLimit, estTokens }.
   // Kept separate from `errors` (free text, only ever regex-tallied by
   // classifyExhaustionCause) because it is the one failure class a caller can
@@ -7680,7 +7698,7 @@ export async function callLLM(messages, opts = {}) {
       // i===0, exactly the case this fix targets), that left the cascade
       // unclassified, so create-article.mjs's catch-all treated it as a hard
       // failure (exit 1) instead of a graceful defer. Fixed per PR #3307 review.
-      errors.push(`${model}: skipped — wall-clock deadline exceeded (timeout), aborted remaining chain (${chain.length - i} models left)`);
+      pushError(`${model}: skipped — wall-clock deadline exceeded (timeout), aborted remaining chain (${chain.length - i} models left)`);
       break;
     }
 
@@ -7702,7 +7720,7 @@ export async function callLLM(messages, opts = {}) {
       // The cause is the RECORDED one, not a fixed disjunction: see
       // _exhaustSkipCause for why naming it wrong here turned a persistent-fault
       // run into a green deferral 60+ times on 2026-08-14.
-      errors.push(`${model}: skipped — exhausted (${cause})`);
+      pushError(`${model}: skipped — exhausted (${cause})`);
       _recordLastResortSkip(model, `exhausted (${cause})`);
       continue;
     }
@@ -7721,7 +7739,7 @@ export async function callLLM(messages, opts = {}) {
     if (isProviderCoolingDown(provider)) {
       const skipPhrase = providerCooldownSkipPhrase(provider);
       _logPreflightSkipOnce(model, 'cooldown', `provider ${provider} ${skipPhrase}`);
-      errors.push(providerCooldownSkipLine(model, provider, skipPhrase));
+      pushError(providerCooldownSkipLine(model, provider, skipPhrase));
       _recordLastResortSkip(model, `provider ${skipPhrase}`);
       continue;
     }
@@ -7734,7 +7752,7 @@ export async function callLLM(messages, opts = {}) {
         ? 'exhausted'
         : `no API key for provider ${provider}`;
       _logPreflightSkipOnce(model, 'availability', reason);
-      errors.push(`${model}: skipped — ${reason}`);
+      pushError(`${model}: skipped — ${reason}`);
       _recordLastResortSkip(model, reason);
       continue;
     }
@@ -7746,7 +7764,7 @@ export async function callLLM(messages, opts = {}) {
     const modelLimit = MODEL_MAX_OUTPUT_TOKENS[apiModelId];
     if (modelLimit && o.maxTokens > modelLimit) {
       _logPreflightSkipOnce(model, 'maxOutput', `model max output ${modelLimit} < requested maxTokens ${o.maxTokens}`);
-      errors.push(`${model}: skipped — model max output ${modelLimit} < requested maxTokens ${o.maxTokens}`);
+      pushError(`${model}: skipped — model max output ${modelLimit} < requested maxTokens ${o.maxTokens}`);
       _recordLastResortSkip(model, 'max output token limit');
       continue;
     }
@@ -7775,7 +7793,7 @@ export async function callLLM(messages, opts = {}) {
       if (estTokens > reqLimit) {
         // One-line log per skip so ops can see the cascade in the workflow output
         console.warn(`⏭️  [${model}] Skipped — request would exceed ${reqLimit}-token limit (estimated ${estTokens})`);
-        errors.push(`${model}: skipped — request ~${estTokens} tokens exceeds ${reqLimit}-token input cap`);
+        pushError(`${model}: skipped — request ~${estTokens} tokens exceeds ${reqLimit}-token input cap`);
         _recordLastResortSkip(model, 'request token limit');
         // Remember the budget this model would have accepted. The cascade can
         // only ever SKIP an oversized payload — it has no way to shrink one —
@@ -7802,7 +7820,7 @@ export async function callLLM(messages, opts = {}) {
       // niente lo dica. Vedi il commento della funzione.
       if (isPerRunCallCapReached(model)) {
         _logPreflightSkipOnce(model, 'claudeCliCap', `claude-cli call cap reached (${cap}/run, CLAUDE_CLI_MAX_CALLS_PER_RUN)`);
-        errors.push(`${model}: skipped — claude-cli call cap reached (${cap}/run)`);
+        pushError(`${model}: skipped — claude-cli call cap reached (${cap}/run)`);
         _recordLastResortSkip(model, 'claude-cli call cap reached');
         continue;
       }
@@ -7868,7 +7886,10 @@ export async function callLLM(messages, opts = {}) {
       // interamente da flap dava `transient: 0` → `transientExhaustion: false`
       // → nessun differimento e un Bug «Workflow Failure» aperto per un guasto
       // che questo stesso modulo definisce transitorio per costruzione.
-      const errorRow = errors.push(`${model}: ${msg.slice(0, 200).replace(ENTRY_TAIL_SEPARATOR_RE, '')}`) - 1;
+      const errorRow = pushError(
+        `${model}: ${msg.slice(0, 200).replace(ENTRY_TAIL_SEPARATOR_RE, '')}`,
+        { reason: `${model}: ${msg}`, authoritative: null },
+      );
       _recordLastResortOutcome(model, 'failed');
 
       // claude CLI binary missing (spawn ENOENT — install step failed/was
@@ -7938,6 +7959,7 @@ export async function callLLM(messages, opts = {}) {
           // Il modello resta ritentabile, quindi la sua riga vota transitorio
           // come quella di un flap sotto soglia (#818).
           errors[errorRow] += ` — resolver flap (${flapCode}), host temporarily unresolvable, retryable`;
+          classificationErrors[errorRow].authoritative = 'resolver flap';
         } else if (flaps >= RESOLVER_FLAP_ESCALATION) {
           e.hostUnreachable = flapCode;
           // Azzerato QUI (#818): l'escalation ha gia' speso la striscia — ban
@@ -7956,6 +7978,7 @@ export async function callLLM(messages, opts = {}) {
           // mette la catena fuori gioco, e votare «transitorio» qui e'
           // esattamente l'esito verde-senza-articolo.
           errors[errorRow] += ` — unreachable (${flapCode}), non-retryable`;
+          classificationErrors[errorRow].authoritative = 'unreachable';
         } else {
           console.warn(`🔁 [${model}] Resolver flap (${flapCode}) on ${provider} ${flaps}/${RESOLVER_FLAP_ESCALATION} — retryable, no ban and no provider cooldown`);
           // La riga grezza e' `fetch failed`, che non vota (vedi il commento
@@ -7964,6 +7987,7 @@ export async function callLLM(messages, opts = {}) {
           // qualificazione `transientExhaustion` restava falso e il chiamante
           // apriva un Bug invece di differire (#818).
           errors[errorRow] += ` — resolver flap (${flapCode}), host temporarily unresolvable, retryable`;
+          classificationErrors[errorRow].authoritative = 'resolver flap';
         }
       }
       const isExhausted =
@@ -8326,7 +8350,7 @@ export async function callLLM(messages, opts = {}) {
   // at the next quota window, so deferring on it would loop forever and swallow
   // the alert. The report doesn't reclassify the failure — it hands the caller
   // the number it needs to fix the prompt and try again deliberately.
-  err.exhaustionBreakdown = classifyExhaustionCause(errors);
+  err.exhaustionBreakdown = classifyExhaustionCause(classificationErrors);
   // ── IL VOTO PASSA DALL'UNICA SORGENTE (#855/#857) ────────────────────────
   //
   // Era `transient > 0 && transient >= persistent` sui secchi LORDI, appena
@@ -8361,8 +8385,22 @@ import { isTransientMajority } from './exhaustion-disposition.mjs';
  * persistent buckets. Transient = quota/rate/cooldown/timeout/5xx/overloaded
  * (recovers on its own). Persistent = auth/credit/removed-model/payload/no-key
  * (needs intervention). Reasons matching neither are ignored in the tally.
+ * Entries may be strings or `{ reason, authoritative, transientWindow }`: the
+ * verdict lets a resolver override wording that appears earlier in the raw
+ * message, and the window caps how far into `reason` an UNCORROBORATED
+ * transient match may still vote (default: the whole string).
  */
-export function classifyExhaustionCause(errors) {
+export function causeIndex(re, reason) {
+  return String(reason == null ? '' : reason).search(re);
+}
+
+function authoritativeCauseBucket(value) {
+  if (value === 'resolver flap') return 'transient';
+  if (value === 'unreachable') return 'persistent';
+  return null;
+}
+
+export function classifyExhaustionCause(errors, { authoritative } = {}) {
   // `non-retryable provider error`, `no longer offered`, `repeated unusable
   // content` and `no longer available` are the vocabulary _exhaustSkipCause and
   // classifyNonRetryableError emit. They are named here EXPLICITLY rather than
@@ -8418,19 +8456,52 @@ export function classifyExhaustionCause(errors) {
   // segue e' coda del provider o continuazione ricucita. A parita' di indice —
   // possibile solo se le due regex matchano nello STESSO punto — resta il
   // transitorio, polarita' invariata rispetto a prima.
-  const causeIndex = (re, reason) => {
-    const m = String(reason == null ? '' : reason).match(re);
-    return m ? m.index : -1;
-  };
-  for (const reason of errors) {
-    const transientAt = causeIndex(transientRe, reason);
-    const persistentAt = causeIndex(persistentRe, reason);
-    const isTransient = transientAt >= 0 && (persistentAt < 0 || transientAt <= persistentAt);
-    const isPersistent = !isTransient && persistentAt >= 0;
+  const entries = Array.isArray(errors) ? errors : [errors];
+  for (const entry of entries) {
+    const reason = entry && typeof entry === 'object' ? entry.reason : entry;
+    const entryAuthoritative = entry && typeof entry === 'object'
+      ? entry.authoritative ?? authoritative
+      : authoritative;
+    const text = String(reason == null ? '' : reason);
+    // ── LA CODA NON VOTA TRANSITORIO (#1121 follow-up) ──────────────────────
+    //
+    // Il primo-indice-vince di #976 presuppone che il testo classificato sia
+    // «la causa primaria + la sua coda», e a rendere vera quella premessa era
+    // il taglio a 200 caratteri della riga mostrata. Passare la ragione PIENA
+    // al tally serve alla causa persistente (un 401 oltre il taglio deve
+    // votare), ma toglie la finestra anche a `transientRe`, che matcha
+    // `aborted`, `timeout`, `temporarily` e `\b5\d\d\b` — token che il corpo
+    // di un errore di provider porta di routine centinaia di caratteri dopo la
+    // causa vera (pagina HTML d'errore, stack trace, `x-request-id: 503abc`).
+    // Una voce che prima restava AMBIGUA voterebbe transitoria sulla coda, e
+    // il tally scivolerebbe verso `isTransientMajority` → differimento verde,
+    // zero articoli, nessun Bug aperto: proprio l'esito «verde-senza-articolo»
+    // che questo tally esiste per impedire.
+    //
+    // Quindi le due finestre sono asimmetriche di proposito: la persistente e'
+    // il testo intero, la transitoria resta quella mostrata. Un verdetto
+    // AUTOREVOLE (resolver flap / unreachable) non passa di qui: e' corroborato
+    // da `e.code`, non dal vocabolario.
+    const transientWindow = entry && typeof entry === 'object' && Number.isFinite(entry.transientWindow)
+      ? entry.transientWindow
+      : text.length;
+    const transientText = text.slice(0, transientWindow);
+    const authoritativeBucket = authoritativeCauseBucket(entryAuthoritative);
+    const transientAt = causeIndex(transientRe, transientText);
+    const persistentAt = causeIndex(persistentRe, text);
+    const isTransient = authoritativeBucket === 'transient'
+      || (authoritativeBucket === null && transientAt >= 0 && (persistentAt < 0 || transientAt <= persistentAt));
+    const isPersistent = authoritativeBucket === 'persistent'
+      || (authoritativeBucket === null && !isTransient && persistentAt >= 0);
     if (isTransient) transient += 1;
     else if (isPersistent) persistent += 1;
     // neither → ambiguous, left out of the tally
-    if (PROVIDER_COOLDOWN_SKIP_RE.test(reason)) {
+    // Stessa finestra, stessa ragione: l'eco di cooldown e' una riga che QUESTO
+    // modulo scrive (`providerCooldownSkipLine`), sempre dentro la parte
+    // mostrata. Cercarlo sul testo pieno farebbe passare per eco un messaggio
+    // di provider che contiene `: skipped \u2014 provider <x> ` nel proprio
+    // corpo, sottraendolo dal denominatore di `isLegitimateQuotaDeferral`.
+    if (PROVIDER_COOLDOWN_SKIP_RE.test(transientText)) {
       // Ripartito per secchio e non solo in totale: chi sottrae deve togliere
       // l'eco dal NUMERATORE quando l'eco votava transitorio (una notte di
       // quota vera: ogni provider 429, ogni fratello saltato) e solo dal
@@ -8441,5 +8512,5 @@ export function classifyExhaustionCause(errors) {
       else if (isPersistent) providerCooldownSkips.persistent += 1;
     }
   }
-  return { transient, persistent, total: errors.length, providerCooldownSkips };
+  return { transient, persistent, total: entries.length, providerCooldownSkips };
 }

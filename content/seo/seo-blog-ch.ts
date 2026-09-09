@@ -78917,6 +78917,1059 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-studenti-svizzeri-lettura-pisa-2025': {
+    title: 'Studenti svizzeri leggono meno: risultati PISA 2025',
+    description: 'PISA 2025: quindicenni svizzeri eccellono in scienze, ma lettura e matematica calano. Il 28,8% non raggiunge competenze minime. L\'indagine rivela l\'influenza',
+    keywords: 'frontalieri, ticino, svizzera, italia, studenti, svizzeri, leggono, meno',
+    ogTitle: 'Studenti svizzeri leggono meno: risultati PISA 2025',
+    ogDescription: 'PISA 2025: quindicenni svizzeri eccellono in scienze, ma lettura e matematica calano. Il 28,8% non raggiunge competenze minime. L\'indagine rivela l\'influenza cruciale dell\'origine sociale.',
+    canonicalPath: '/articoli-svizzera/studenti-svizzeri-lettura-pisa-2025/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Studenti svizzeri leggono meno: risultati PISA 2025",
+      "description": "PISA 2025: quindicenni svizzeri eccellono in scienze, ma lettura e matematica calano. Il 28,8% non raggiunge competenze minime. L'indagine rivela l'influenza",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/studenti-svizzeri-lettura-pisa-2025.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Aula scolastica svizzera con studenti che risolvono esercizi di matematica e lettura"
+      },
+      "datePublished": "2026-09-08T11:37:32+00:00",
+      "dateModified": "2026-09-08T11:37:32+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/studenti-svizzeri-lettura-pisa-2025/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-bollette-26-centesimi-2027': {
+    title: 'Prezzi dell\'elettricità in leggero calo nel 2027',
+    description: 'Nel 2027 le economie domestiche svizzere pagheranno meno per l\'energia. Tariffa media a 26,5 ct/kWh: calo del 4%, risparmio di 53 franchi annui secondo ElCom.',
+    keywords: 'frontalieri, ticino, svizzera, italia, prezzi, dell, elettricità, leggero',
+    ogTitle: 'Prezzi dell\'elettricità in leggero calo nel 2027',
+    ogDescription: 'Nel 2027 le bollette dell\'energia calano del 4% in media. Economie domestiche svizzere a 26,5 ct/kWh: risparmio di 53 franchi annuali. Nuove tariffe comunicate da ElCom, valide dal 1° gennaio 2027.',
+    canonicalPath: '/articoli-svizzera/bollette-26-centesimi-2027/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Prezzi dell'elettricità in leggero calo nel 2027",
+      "description": "Nel 2027 le economie domestiche svizzere pagheranno meno per l'energia. Tariffa media a 26,5 ct/kWh: calo del 4%, risparmio di 53 franchi annui secondo ElCom.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/bollette-26-centesimi-2027.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Una famiglia svizzera rilegge la bolletta dell'energia dopo il calo tariffario annunciato da ElCom per il 2027"
+      },
+      "datePublished": "2026-09-08T11:56:17+00:00",
+      "dateModified": "2026-09-08T11:56:17+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/bollette-26-centesimi-2027/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-migros-online-regensdorf-2026': {
+    title: 'Migros online: +21.000 prodotti a Regensdorf | Frontaliere Ticino',
+    description: 'Migros apre il nuovo hub logistico a Regensdorf: online da 12.500 a 21.000 prodotti (+60%), 7.500 ordini/giorno, 200-500 posti di lavoro, consegne veloci',
+    keywords: 'frontalieri, ticino, svizzera, italia, migros, online, prodotti, regensdorf',
+    ogTitle: 'Migros online: +21.000 prodotti e nuovo hub a Regensdorf',
+    ogDescription: 'Nuovo centro di distribuzione Migros Online a Regensdorf (ZH): +60% prodotti (21.000), 7.500 ordini/giorno, 200-500 posti di lavoro. Fatturato 362 milioni CHF, 47% mercato. Consegne stesso giorno a Zurigo entro febbraio 2027.',
+    canonicalPath: '/articoli-svizzera/migros-online-regensdorf-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Migros online: +21.000 prodotti a Regensdorf",
+      "description": "Migros apre il nuovo hub logistico a Regensdorf: online da 12.500 a 21.000 prodotti (+60%), 7.500 ordini/giorno, 200-500 posti di lavoro, consegne veloci",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/migros-online-regensdorf-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Centro di distribuzione automatizzato di Migros Online a Regensdorf, Zurigo, con scaffalature e nastri trasportatori"
+      },
+      "datePublished": "2026-09-08T12:11:42+00:00",
+      "dateModified": "2026-09-08T12:11:42+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/migros-online-regensdorf-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-infermieri-carenza-svizzera-2034': {
+    title: 'Infermieri: carenza entro il 2034 in Svizzera | Frontaliere Ticino',
+    description: 'Il 4° rapporto Obsan prevede carenza grave di infermieri entro il 2034. Tasso copertura: massimo 55%. Scopri le cause e le uscite precoci dal settore.',
+    keywords: 'frontalieri, ticino, svizzera, italia, infermieri, carenza, entro, rapporto',
+    ogTitle: 'Carenza infermieri Svizzera 2034: report Obsan',
+    ogDescription: 'La Svizzera affronterà carenza grave di infermieri entro il 2034. Solo il 55% del fabbisogno coperto da personale svizzero formato. Il 4° rapporto Obsan evidenzia: sostituzione di 1/3 del personale e invecchiamento della popolazione. Il 47%',
+    canonicalPath: '/articoli-svizzera/infermieri-carenza-svizzera-2034/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Infermieri: carenza entro il 2034 in Svizzera",
+      "description": "Il 4° rapporto Obsan prevede carenza grave di infermieri entro il 2034. Tasso copertura: massimo 55%. Scopri le cause e le uscite precoci dal settore.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/infermieri-carenza-svizzera-2034.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Corridoio di ospedale svizzero con operatori sanitari: carenza di infermieri è una sfida per il sistema"
+      },
+      "datePublished": "2026-09-08T12:32:55+00:00",
+      "dateModified": "2026-09-08T12:32:55+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/infermieri-carenza-svizzera-2034/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-novartis-fondo-pensione-crollo': {
+    title: 'Novartis crolla 10% in borsa per studi falliti',
+    description: 'Pelacarsen e Del-desiran non superano i test clinici. Capitalizzazione giù di 24 miliardi CHF, il crollo più grave della storia. Dati aggiornati 2026',
+    keywords: 'frontalieri, ticino, svizzera, italia, novartis, crolla, borsa, studi',
+    ogTitle: 'Novartis crolla 10% in borsa per studi falliti',
+    ogDescription: 'Pelacarsen e Del-desiran non superano i test clinici. Capitalizzazione giù di 24 miliardi CHF, il crollo più grave della storia.',
+    canonicalPath: '/articoli-svizzera/novartis-fondo-pensione-crollo/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Novartis crolla 10% in borsa per studi falliti",
+      "description": "Pelacarsen e Del-desiran non superano i test clinici. Capitalizzazione giù di 24 miliardi CHF, il crollo più grave della storia. Dati aggiornati 2026",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/novartis-fondo-pensione-crollo.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Veduta della Svizzera che evoca la stabilità economica nazionale in un momento di volatilità di borsa"
+      },
+      "datePublished": "2026-09-08T12:50:10+00:00",
+      "dateModified": "2026-09-08T12:50:10+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/laura-bianchi/#person",
+        "name": "Laura Bianchi",
+        "url": "https://frontaliereticino.ch/autori/laura-bianchi/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/novartis-fondo-pensione-crollo/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-salario-minimo-ticino-mozione-ettlin': {
+    title: 'Salario minimo Ticino a rischio: 4.000 lavoratori esclusi',
+    description: 'Il salario minimo ticinese raggiunge 21.75-22.25 CHF/ora, ma la mozione Ettlin rischia di escludere 4.000 lavoratori. Scopri come potrebbe cambiare il tuo',
+    keywords: 'frontalieri, ticino, svizzera, italia, salario, minimo, rischio, lavoratori',
+    ogTitle: 'Salario minimo Ticino a rischio: cosa devi sapere',
+    ogDescription: 'Il 7 settembre 2026 il Partito Socialista ritira l\'iniziativa, ma la mozione Ettlin minaccia i benefici per 4.000 lavoratori nel settore ristorazione. Aumento di 316 CHF mensili a rischio.',
+    canonicalPath: '/articoli-svizzera/salario-minimo-ticino-mozione-ettlin/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Salario minimo Ticino a rischio: 4.000 lavoratori esclusi",
+      "description": "Il salario minimo ticinese raggiunge 21.75-22.25 CHF/ora, ma la mozione Ettlin rischia di escludere 4.000 lavoratori. Scopri come potrebbe cambiare il tuo",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/salario-minimo-ticino-mozione-ettlin.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Aula del Parlamento federale svizzero durante una seduta plenaria sulla politica salariale"
+      },
+      "datePublished": "2026-09-08T15:06:51+00:00",
+      "dateModified": "2026-09-08T15:06:51+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/salario-minimo-ticino-mozione-ettlin/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-casse-pensioni-rendimenti-2025': {
+    title: 'Casse pensioni: boom di rendimenti nel 2025 | Frontaliere Ticino',
+    description: 'Casse pensioni svizzere: +6,3% nel 2025, azioni al 34%, tasso conversione 5,20%. Implicazioni per la rendita futura e scenari di investimento. Dati aggiornati',
+    keywords: 'frontalieri, ticino, svizzera, italia, casse, pensioni, boom, rendimenti',
+    ogTitle: 'Casse pensioni: boom di rendimenti nel 2025',
+    ogDescription: 'Nel 2025 le casse pensioni svizzere hanno registrato un rendimento medio del 6,3%, trainato dalle azioni (34% del portafoglio). Nel 2026 il trend continua con +5%. Scopri come impatta la tua rendita futura al 5,20% di conversione media.',
+    canonicalPath: '/articoli-svizzera/casse-pensioni-rendimenti-2025/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Casse pensioni: boom di rendimenti nel 2025",
+      "description": "Casse pensioni svizzere: +6,3% nel 2025, azioni al 34%, tasso conversione 5,20%. Implicazioni per la rendita futura e scenari di investimento. Dati aggiornati",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/casse-pensioni-rendimenti-2025.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Investitore che rivede prospettive di rendita della propria cassa pensione con documenti finanziari e proiezioni."
+      },
+      "datePublished": "2026-09-08T19:20:17+00:00",
+      "dateModified": "2026-09-08T19:20:17+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/laura-bianchi/#person",
+        "name": "Laura Bianchi",
+        "url": "https://frontaliereticino.ch/autori/laura-bianchi/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/casse-pensioni-rendimenti-2025/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-ospedali-svizzeri-infermieri-fuga-anno': {
+    title: 'Ospedali svizzeri: 1.700 infermieri in fuga ogni anno',
+    description: 'Crisi sanitaria svizzera: 1.700 infermieri diplomati abbandonano ogni anno. Il 75% inizia in ospedale, il 47% resta a 40 anni. Richieste VPOD per miglioramenti.',
+    keywords: 'frontalieri, ticino, svizzera, italia, ospedali, svizzeri, infermieri, fuga',
+    ogTitle: 'Ospedali svizzeri: 1.700 infermieri in fuga ogni anno',
+    ogDescription: 'In Svizzera il sistema sanitario perde competenze: 1.700 infermieri diplomati abbandonano ogni anno la professione. Scopri i dati dell\'Obsan e le richieste del sindacato VPOD per migliorare le condizioni di lavoro nei reparti ospedalieri.',
+    canonicalPath: '/articoli-svizzera/ospedali-svizzeri-infermieri-fuga-anno/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Ospedali svizzeri: 1.700 infermieri in fuga ogni anno",
+      "description": "Crisi sanitaria svizzera: 1.700 infermieri diplomati abbandonano ogni anno. Il 75% inizia in ospedale, il 47% resta a 40 anni. Richieste VPOD per miglioramenti.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/ospedali-svizzeri-infermieri-fuga-anno.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista alpina della Svizzera, simbolo del sistema sanitario nazionale in crisi per carenza di infermieri qualificati"
+      },
+      "datePublished": "2026-09-08T19:39:29+00:00",
+      "dateModified": "2026-09-08T19:39:29+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/ospedali-svizzeri-infermieri-fuga-anno/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-naturalizzazione-lucerna-documenti-timeline': {
+    title: 'Naturalizzazione Lucerna: permessi, costi e procedure',
+    description: 'Guida alla naturalizzazione nel Canton Lucerna: requisiti federali, documenti necessari, tempi di procedura e costi amministrativi per ottenere la cittadinanza',
+    keywords: 'frontalieri, ticino, svizzera, italia, naturalizzazione, lucerna, permessi, costi',
+    ogTitle: 'Naturalizzazione Lucerna: guida completa a procedura e costi',
+    ogDescription: 'Come ottenere la cittadinanza svizzera nel Canton Lucerna? Scopri i requisiti federali (10 anni con permesso C), i criteri di integrazione e lingua tedesca richiesti, la documentazione necessaria, i tempi di procedura (12-24 mesi) e i costi',
+    canonicalPath: '/articoli-svizzera/naturalizzazione-lucerna-documenti-timeline/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Naturalizzazione Lucerna: permessi, costi e procedure",
+      "description": "Guida alla naturalizzazione nel Canton Lucerna: requisiti federali, documenti necessari, tempi di procedura e costi amministrativi per ottenere la cittadinanza",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/naturalizzazione-lucerna-documenti-timeline.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Ufficio comunale lucernese con moduli di naturalizzazione e documenti di cittadinanza svizzera su scrivania amministrativa"
+      },
+      "datePublished": "2026-09-08T20:09:40+00:00",
+      "dateModified": "2026-09-08T20:09:40+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/naturalizzazione-lucerna-documenti-timeline/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-traffico-aereo-svizzero-cresce': {
+    title: 'Traffico aereo svizzero cresce, ma le emissioni salgono',
+    description: 'Nel 2025 aviazione civile svizzera ha superato numeri pre-Covid con 1,4 milioni di movimenti e 60,5 milioni di passeggeri. Ma emissioni CO2 salgono del 3%.',
+    keywords: 'frontalieri, ticino, svizzera, italia, traffico, aereo, svizzero, cresce',
+    ogTitle: 'Aviazione svizzera cresce, emissioni CO2 in rialzo nel 2025',
+    ogDescription: 'Nel 2025 l\'aviazione civile svizzera ha superato i numeri pre-Covid con 1,4 milioni di movimenti e 60,5 milioni di passeggeri. Tuttavia, le emissioni CO2 sono salite del 3%. I dati UST indicano una ripresa economica ma anche una sfida ambientale',
+    canonicalPath: '/articoli-svizzera/traffico-aereo-svizzero-cresce/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Traffico aereo svizzero cresce, ma le emissioni salgono",
+      "description": "Nel 2025 aviazione civile svizzera ha superato numeri pre-Covid con 1,4 milioni di movimenti e 60,5 milioni di passeggeri. Ma emissioni CO2 salgono del 3%.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/traffico-aereo-svizzero-cresce.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista aerea del paesaggio alpino svizzero con aereo in volo al tramonto"
+      },
+      "datePublished": "2026-09-08T20:34:24+00:00",
+      "dateModified": "2026-09-08T20:34:24+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/traffico-aereo-svizzero-cresce/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-novartis-giornata-nera': {
+    title: 'Giornata nera per Novartis: crollo del 10% | Frontaliere Ticino',
+    description: 'Azioni Novartis crollano di oltre il 10% in una giornata. Capitalizzazione persa: 24 miliardi CHF. Due fallimenti nella ricerca clinica scuotono il gigante',
+    keywords: 'frontalieri, ticino, svizzera, italia, giornata, nera, novartis, crollo',
+    ogTitle: 'Novartis crolla: -10% e 24 miliardi persi',
+    ogDescription: 'Martedì è stata una giornata nera per Novartis. Il gigante farmaceutico basilese ha subìto il peggior crollo giornaliero della sua storia: -10%, 24 miliardi CHF di capitalizzazione persi. Due fallimenti nella ricerca clinica hanno scosso gli',
+    canonicalPath: '/articoli-svizzera/novartis-giornata-nera/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Giornata nera per Novartis: crollo del 10%",
+      "description": "Azioni Novartis crollano di oltre il 10% in una giornata. Capitalizzazione persa: 24 miliardi CHF. Due fallimenti nella ricerca clinica scuotono il gigante",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/novartis-giornata-nera.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Sala di trading svizzera con dati di borsa su schermi, raffigurante l'importanza economica della Svizzera."
+      },
+      "datePublished": "2026-09-08T20:53:48+00:00",
+      "dateModified": "2026-09-08T20:53:48+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/novartis-giornata-nera/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-f35a-prezzo-fisso-non-concordato': {
+    title: 'F-35A: nessun prezzo fisso concordato | Frontaliere Ticino',
+    description: 'La Commissione della gestione critica i negoziati F-35A: nessun prezzo fisso concordato. Viola Amherd informò il governo con 7-8 mesi di ritardo.',
+    keywords: 'frontalieri, ticino, svizzera, italia, f-35a, nessun, prezzo, fisso',
+    ogTitle: 'F-35A: nessun prezzo fisso concordato',
+    ogDescription: 'Il rapporto della Commissione svela: nessun prezzo fisso nei negoziati F-35A. Viola Amherd informò il governo con 7-8 mesi di ritardo. Pochi letto il contratto intero. Gravi lacune nella trasparenza e nelle procedure federali di negoziazione.',
+    canonicalPath: '/articoli-svizzera/f35a-prezzo-fisso-non-concordato/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "F-35A: nessun prezzo fisso concordato",
+      "description": "La Commissione della gestione critica i negoziati F-35A: nessun prezzo fisso concordato. Viola Amherd informò il governo con 7-8 mesi di ritardo.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/f35a-prezzo-fisso-non-concordato.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Palazzo federale svizzero di Berna, simbolo della trasparenza e del controllo parlamentare federale"
+      },
+      "datePublished": "2026-09-08T21:22:30+00:00",
+      "dateModified": "2026-09-08T21:22:30+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/f35a-prezzo-fisso-non-concordato/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-svizzera-obiettivo-mosca-esercito': {
+    title: 'Capo dell\'esercito: Svizzera obiettivo della Russia',
+    description: 'Il capo dell\'esercito Benedikt Roos avverte che la Svizzera è nel mirino di Mosca. Minacce ibride a infrastrutture critiche, droni e lacune nella difesa',
+    keywords: 'frontalieri, ticino, svizzera, italia, capo, dell, esercito, obiettivo',
+    ogTitle: 'Capo dell\'esercito: Svizzera obiettivo della Russia',
+    ogDescription: 'Benedikt Roos, capo dell\'esercito svizzero, dichiara in intervista che la Svizzera è un obiettivo per Mosca. Scopri le minacce ibride, i droni e le lacune di difesa che riguardano tutti i residenti svizzeri.',
+    canonicalPath: '/articoli-svizzera/svizzera-obiettivo-mosca-esercito/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Capo dell'esercito: Svizzera obiettivo della Russia",
+      "description": "Il capo dell'esercito Benedikt Roos avverte che la Svizzera è nel mirino di Mosca. Minacce ibride a infrastrutture critiche, droni e lacune nella difesa",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/svizzera-obiettivo-mosca-esercito.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Veduta del Castelgrande a Bellinzona, simbolo della storia militare ticinese"
+      },
+      "datePublished": "2026-09-08T21:40:21+00:00",
+      "dateModified": "2026-09-08T21:40:21+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/svizzera-obiettivo-mosca-esercito/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-abb-rolls-royce-smr-reattori': {
+    title: 'ABB e Rolls-Royce: alleanza reattori nucleari | Frontaliere Ticino',
+    description: 'Il colosso ABB insieme a Rolls-Royce SMR per soluzioni di automazione nei piccoli reattori modulari. Capacità generativa: 470 MW a basse emissioni di carbonio.',
+    keywords: 'frontalieri, ticino, svizzera, italia, rolls-royce, alleanza, reattori, nucleari',
+    ogTitle: 'ABB e Rolls-Royce: alleanza reattori nucleari',
+    ogDescription: 'Il colosso ABB insieme a Rolls-Royce SMR per soluzioni di automazione nei piccoli reattori modulari. Capacità generativa: 470 MW a basse emissioni di carbonio.',
+    canonicalPath: '/articoli-svizzera/abb-rolls-royce-smr-reattori/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "ABB e Rolls-Royce: alleanza reattori nucleari",
+      "description": "Il colosso ABB insieme a Rolls-Royce SMR per soluzioni di automazione nei piccoli reattori modulari. Capacità generativa: 470 MW a basse emissioni di carbonio.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/abb-rolls-royce-smr-reattori.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Partnership strategica tra ABB e Rolls-Royce SMR per reattori nucleari modulari a basse emissioni"
+      },
+      "datePublished": "2026-09-08T21:57:31+00:00",
+      "dateModified": "2026-09-08T21:57:31+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/abb-rolls-royce-smr-reattori/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-aviazione-emissioni-svizzera-2025': {
+    title: 'Traffico aereo e emissioni: ritorno ai livelli pre-Covid',
+    description: 'Nel 2025 la Svizzera registra 1,4 milioni di movimenti aerei e 60,5 milioni di passeggeri. Crescono le emissioni di CO2 (+3%). UST conferma il recupero',
+    keywords: 'frontalieri, ticino, svizzera, italia, traffico, aereo, emissioni, ritorno',
+    ogTitle: 'Traffico aereo e emissioni: ritorno ai livelli pre-Covid',
+    ogDescription: 'Le statistiche UST 2025 confermano: il traffico aereo svizzero ha superato i numeri pre-Covid con 1,4 milioni di movimenti e 60,5 milioni di passeggeri. Aumentano le emissioni di CO2 e il consumo di carburante. Scopri i dati sui tre principali',
+    canonicalPath: '/articoli-svizzera/aviazione-emissioni-svizzera-2025/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Traffico aereo e emissioni: ritorno ai livelli pre-Covid",
+      "description": "Nel 2025 la Svizzera registra 1,4 milioni di movimenti aerei e 60,5 milioni di passeggeri. Crescono le emissioni di CO2 (+3%). UST conferma il recupero",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/aviazione-emissioni-svizzera-2025.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista aerea del paesaggio svizzero da finestra di aereo commerciale, città e laghi visibili sottostante durante volo di crociera."
+      },
+      "datePublished": "2026-09-08T22:23:58+00:00",
+      "dateModified": "2026-09-08T22:23:58+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/aviazione-emissioni-svizzera-2025/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-neutralita-iniziativa-svizzera-freysinger': {
+    title: 'Neutralità: la Svizzera alle urne per l\'iniziativa',
+    description: 'Oscar Freysinger invita a votare a favore dell\'Iniziativa per la neutralità. Oltre 300 partecipanti alla Festa di Pro Svizzera a Lugano. Dati aggiornati 2026',
+    keywords: 'frontalieri, ticino, svizzera, italia, neutralità, alle, urne, iniziativa',
+    ogTitle: 'Neutralità svizzera: il voto sull\'iniziativa',
+    ogDescription: 'Oltre 300 persone a Lugano per discutere dell\'iniziativa neutralità. Freysinger: non esiste semi-neutralità. Gli svizzeri voteranno su questo principio costituzionale.',
+    canonicalPath: '/articoli-svizzera/neutralita-iniziativa-svizzera-freysinger/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Neutralità: la Svizzera alle urne per l'iniziativa",
+      "description": "Oscar Freysinger invita a votare a favore dell'Iniziativa per la neutralità. Oltre 300 partecipanti alla Festa di Pro Svizzera a Lugano. Dati aggiornati 2026",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/neutralita-iniziativa-svizzera-freysinger.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Veduta di Lugano dal lago con bandiera svizzera e edifici civici"
+      },
+      "datePublished": "2026-09-08T22:42:51+00:00",
+      "dateModified": "2026-09-08T22:42:51+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/neutralita-iniziativa-svizzera-freysinger/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-licenza-guida-lucerna-procedura': {
+    title: 'Patente estero a Lucerna: conversione e esami | Frontaliere Ticino',
+    description: 'Procedura completa per convertire patente internazionale nel Canton Lucerna: esame teorico, pratico, corsi obbligatori. Tempi, costi e step-by-step.',
+    keywords: 'frontalieri, ticino, svizzera, italia, patente, estero, lucerna, conversione',
+    ogTitle: 'Patente estero a Lucerna: conversione e esami',
+    ogDescription: 'Converti la tua patente internazionale in patente svizzera nel Canton Lucerna. Scopri la procedura completa: esami, corsi obbligatori, tempi e documenti richiesti.',
+    canonicalPath: '/articoli-svizzera/licenza-guida-lucerna-procedura/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Patente estero a Lucerna: conversione e esami",
+      "description": "Procedura completa per convertire patente internazionale nel Canton Lucerna: esame teorico, pratico, corsi obbligatori. Tempi, costi e step-by-step.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/licenza-guida-lucerna-procedura.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Ufficio della circolazione del Canton Lucerna con personale che assiste nel processo di conversione della patente."
+      },
+      "datePublished": "2026-09-08T23:05:40+00:00",
+      "dateModified": "2026-09-08T23:05:40+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/licenza-guida-lucerna-procedura/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-aprire-attivita-appenzello-interno-costi': {
+    title: 'Aprire attività Appenzello Interno: costi e registrazione',
+    description: 'Come aprire un\'attività in Appenzello Interno: iscrizione registro commercio, costi, capitale minimo e obblighi AVS, LPP, LAMal. Dati aggiornati 2026',
+    keywords: 'frontalieri, ticino, svizzera, italia, aprire, attività, appenzello, interno',
+    ogTitle: 'Aprire attività Appenzello Interno: costi e procedure',
+    ogDescription: 'Guida completa per aprire un\'attività nel cantone Appenzello Interno: procedure federali e cantonali, capitale minimo, costi di registrazione, obblighi assicurativi AVS, LPP, LAINF e LAMal.',
+    canonicalPath: '/articoli-svizzera/aprire-attivita-appenzello-interno-costi/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Aprire attività Appenzello Interno: costi e registrazione",
+      "description": "Come aprire un'attività in Appenzello Interno: iscrizione registro commercio, costi, capitale minimo e obblighi AVS, LPP, LAMal. Dati aggiornati 2026",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/aprire-attivita-appenzello-interno-costi.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Ufficio amministrativo svizzero con documenti di registrazione al registro di commercio"
+      },
+      "datePublished": "2026-09-08T23:31:05+00:00",
+      "dateModified": "2026-09-08T23:31:05+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/aprire-attivita-appenzello-interno-costi/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-pa30-consultazione-agricola': {
+    title: 'PA30+: consultazione federale su agricoltura | Frontaliere Ticino',
+    description: 'Consultazione PA30+ per riforma agricola svizzera. Novità su voto digitale a Neuchâtel, malattie rare e fondi climate per boschi e agricoltura. Dati aggiornati',
+    keywords: 'frontalieri, ticino, svizzera, italia, pa30, consultazione, federale, agricoltura',
+    ogTitle: 'PA30+: consultazione federale su agricoltura',
+    ogDescription: 'Consultazione PA30+ su agricoltura svizzera. Voto online a Neuchâtel, malattie rare, fondi contro canicola. Scadenze 2026: voto 27 settembre, pacchetto UE in Parlamento, sperimentazione e-voting 29 novembre.',
+    canonicalPath: '/articoli-svizzera/pa30-consultazione-agricola/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "PA30+: consultazione federale su agricoltura",
+      "description": "Consultazione PA30+ per riforma agricola svizzera. Novità su voto digitale a Neuchâtel, malattie rare e fondi climate per boschi e agricoltura. Dati aggiornati",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/pa30-consultazione-agricola.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Paesaggio agricolo svizzero con prati alpini e boschi durante ondata di calore estivo"
+      },
+      "datePublished": "2026-09-09T01:07:51+00:00",
+      "dateModified": "2026-09-09T01:07:51+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/pa30-consultazione-agricola/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-uri-franchigie-modelli-sussidio': {
+    title: 'Cassa malati Uri: franchigie, modelli e riduzione',
+    description: 'Nel Canton Uri, i premi LAMal variano per franchigia e modello assicurativo. Scopri le fasce disponibili (CHF 300–2500), i modelli di copertura e come accedere',
+    keywords: 'frontalieri, ticino, svizzera, italia, cassa, malati, franchigie, modelli',
+    ogTitle: 'Cassa malati Uri: franchigie, modelli e riduzione',
+    ogDescription: 'Nel Canton Uri, i premi LAMal variano per franchigia e modello assicurativo. Scopri le fasce disponibili (CHF 300–2500), i modelli di copertura e come accedere al sussidio cantonale.',
+    canonicalPath: '/articoli-svizzera/uri-franchigie-modelli-sussidio/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Cassa malati Uri: franchigie, modelli e riduzione",
+      "description": "Nel Canton Uri, i premi LAMal variano per franchigia e modello assicurativo. Scopri le fasce disponibili (CHF 300–2500), i modelli di copertura e come accedere",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/uri-franchigie-modelli-sussidio.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Studio medico moderno in Svizzera con operatori che consultano documenti di assicurazione malattia"
+      },
+      "datePublished": "2026-09-09T01:23:52+00:00",
+      "dateModified": "2026-09-09T01:23:52+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/uri-franchigie-modelli-sussidio/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-permesso-c-canton-uri-richiesta': {
+    title: 'Permesso C canton Uri: anni e procedura | Frontaliere Ticino',
+    description: 'Guida completa al permesso di domicilio C nel Cantone Uri: requisiti federali (10 anni residenza, 5 UE/AELS), integrazione, lingua e procedura di richiesta',
+    keywords: 'frontalieri, ticino, svizzera, italia, permesso, canton, anni, procedura',
+    ogTitle: 'Permesso C canton Uri: requisiti e guida pratica',
+    ogDescription: 'Scopri come richiedere il permesso di domicilio C nel Cantone Uri: 10 anni di residenza (5 per UE/AELS), criteri di integrazione, conoscenze linguistiche, procedura SEM e rilascio anticipato.',
+    canonicalPath: '/articoli-svizzera/permesso-c-canton-uri-richiesta/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Permesso C canton Uri: anni e procedura",
+      "description": "Guida completa al permesso di domicilio C nel Cantone Uri: requisiti federali (10 anni residenza, 5 UE/AELS), integrazione, lingua e procedura di richiesta",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/permesso-c-canton-uri-richiesta.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Edificio dell'amministrazione cantonale per la gestione dei permessi di domicilio e dell'integrazione dei cittadini stranieri."
+      },
+      "datePublished": "2026-09-09T01:51:36+00:00",
+      "dateModified": "2026-09-09T01:51:36+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/permesso-c-canton-uri-richiesta/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-nestle-ai-consumatori-ricerca': {
+    title: 'Nestle monitora le ricerche AI dei consumatori',
+    description: 'Il gruppo svizzero monitora come i modelli linguistici accedono ai suoi siti e analizza le domande dei consumatori all\'IA per adattare il marketing.',
+    keywords: 'frontalieri, ticino, svizzera, italia, nestle, monitora, ricerche, consumatori',
+    ogTitle: 'Nestle monitora le ricerche AI dei consumatori',
+    ogDescription: 'Il gruppo svizzero monitora come i modelli linguistici accedono ai suoi siti e analizza le domande dei consumatori all\'IA per adattare il marketing.',
+    canonicalPath: '/articoli-svizzera/nestle-ai-consumatori-ricerca/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Nestle monitora le ricerche AI dei consumatori",
+      "description": "Il gruppo svizzero monitora come i modelli linguistici accedono ai suoi siti e analizza le domande dei consumatori all'IA per adattare il marketing.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/nestle-ai-consumatori-ricerca.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Sede di Nestlé a Vevey: l'azienda svizzera monitora l'accesso dell'intelligenza artificiale ai suoi siti"
+      },
+      "datePublished": "2026-09-09T02:03:59+00:00",
+      "dateModified": "2026-09-09T02:03:59+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/nestle-ai-consumatori-ricerca/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-f35-caccia-commissione-amherd': {
+    title: 'F-35, Berna e USA: nessun prezzo fisso concordato',
+    description: 'Rapporto della Commissione di vigilanza smentisce Amherd: non c\'era accordo su prezzo fisso con gli USA per i F-35A. Credito aggiuntivo di 394 milioni CHF.',
+    keywords: 'frontalieri, ticino, svizzera, italia, f-35, berna, nessun, prezzo',
+    ogTitle: 'F-35, Berna e USA: nessun prezzo fisso concordato',
+    ogDescription: 'La Commissione di vigilanza del Consiglio nazionale critica la gestione dei negoziati per i caccia F-35. Nessun prezzo fisso era stato concordato con Washington. La Svizzera avrà 30 F-35 invece di 36 e dovrà aggiungere 394 milioni CHF al bilancio',
+    canonicalPath: '/articoli-svizzera/f35-caccia-commissione-amherd/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "F-35, Berna e USA: nessun prezzo fisso concordato",
+      "description": "Rapporto della Commissione di vigilanza smentisce Amherd: non c'era accordo su prezzo fisso con gli USA per i F-35A. Credito aggiuntivo di 394 milioni CHF.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/f35-caccia-commissione-amherd.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Parlamento federale svizzero a Berna, simbolo della vigilanza amministrativa sui progetti di difesa della Confederazione"
+      },
+      "datePublished": "2026-09-09T02:21:06+00:00",
+      "dateModified": "2026-09-09T02:21:06+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/f35-caccia-commissione-amherd/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-avviare-impresa-canton-appenzello-interno': {
+    title: 'Aprire impresa Appenzello interno: guida | Frontaliere Ticino',
+    description: 'Come registrare impresa Appenzello Interno: forme giuridiche, capitali, contributi AVS e procedure di iscrizione presso il registro commercio. Dati aggiornati',
+    keywords: 'frontalieri, ticino, svizzera, italia, aprire, impresa, appenzello, interno',
+    ogTitle: 'Aprire impresa Appenzello Interno: guida',
+    ogDescription: 'Guida completa per registrare un\'impresa nel Canton Appenzello Interno. Forme giuridiche, capitali minimi CHF 0-100\'000, contributi AVS 5.3%+5.3%, iscrizione 2-4 settimane presso l\'Ufficio commercio del cantone.',
+    canonicalPath: '/articoli-svizzera/avviare-impresa-canton-appenzello-interno/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Aprire impresa Appenzello interno: guida",
+      "description": "Come registrare impresa Appenzello Interno: forme giuridiche, capitali, contributi AVS e procedure di iscrizione presso il registro commercio. Dati aggiornati",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/avviare-impresa-canton-appenzello-interno.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Ufficio comunale svizzero con scrivanie in legno e registri ufficiali per l'iscrizione di attività commerciali"
+      },
+      "datePublished": "2026-09-09T02:59:32+00:00",
+      "dateModified": "2026-09-09T02:59:32+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/avviare-impresa-canton-appenzello-interno/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-avs-prestazioni-complementari-ginevra': {
+    title: 'AVS e prestazioni complementari Canton Ginevra',
+    description: 'Sistema AVS nel Canton Ginevra: cassa di compensazione cantonale, calcolo rendita, lacune contributive e prestazioni complementari per il minimo vitale.',
+    keywords: 'frontalieri, ticino, svizzera, italia, prestazioni, complementari, canton, ginevra',
+    ogTitle: 'AVS e prestazioni complementari Canton Ginevra',
+    ogDescription: 'Guida completa ad AVS e prestazioni complementari nel Canton Ginevra: come funziona la cassa di compensazione cantonale, il calcolo della rendita, il trattamento delle lacune contributive e l\'accesso alle prestazioni complementari per coprire',
+    canonicalPath: '/articoli-svizzera/avs-prestazioni-complementari-ginevra/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "AVS e prestazioni complementari Canton Ginevra",
+      "description": "Sistema AVS nel Canton Ginevra: cassa di compensazione cantonale, calcolo rendita, lacune contributive e prestazioni complementari per il minimo vitale.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/avs-prestazioni-complementari-ginevra.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Scrivania di ufficio amministrativo cantonale con documenti di rendita AVS e prestazioni complementari, ambiente di lavoro professionale."
+      },
+      "datePublished": "2026-09-09T03:45:44+00:00",
+      "dateModified": "2026-09-09T03:45:44+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/laura-bianchi/#person",
+        "name": "Laura Bianchi",
+        "url": "https://frontaliereticino.ch/autori/laura-bianchi/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/avs-prestazioni-complementari-ginevra/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-imposta-successione-appenzello-interno-aliquote': {
+    title: 'Imposta successione Appenzello Interno: aliquote ed esenzioni',
+    description: 'Guida alla tassazione successoria in Appenzello Interno: come funzionano aliquote per grado di parentela, esenzioni coniuge e figli, procedura dichiarazione.',
+    keywords: 'frontalieri, ticino, svizzera, italia, imposta, successione, appenzello, interno',
+    ogTitle: 'Imposta successione Appenzello Interno: aliquote',
+    ogDescription: 'Guida alla tassazione successoria in Appenzello Interno: come funzionano aliquote per grado di parentela, esenzioni coniuge e figli, procedura dichiarazione.',
+    canonicalPath: '/articoli-svizzera/imposta-successione-appenzello-interno-aliquote/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Imposta successione Appenzello Interno: aliquote ed esenzioni",
+      "description": "Guida alla tassazione successoria in Appenzello Interno: come funzionano aliquote per grado di parentela, esenzioni coniuge e figli, procedura dichiarazione.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/imposta-successione-appenzello-interno-aliquote.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Paesaggio tradizionale del cantone Appenzello Interno con architettura alpina svizzera"
+      },
+      "datePublished": "2026-09-09T04:27:23+00:00",
+      "dateModified": "2026-09-09T04:27:23+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/imposta-successione-appenzello-interno-aliquote/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-regola-3-30-300-verde-citta': {
+    title: 'Verde urbano: la regola 3-30-300 per città fresche',
+    description: 'Studio europeo rivela: solo il 28% degli abitanti svizzeri vive in zone verdi. Scopri la regola 3-30-300 per città più fresche. Dati aggiornati 2026',
+    keywords: 'frontalieri, ticino, svizzera, italia, verde, urbano, regola, 3-30-300',
+    ogTitle: 'Verde urbano: la regola 3-30-300 per città fresche',
+    ogDescription: 'Le isole di calore rendono le città insopportabili. Studio europeo del JRC su 862 città: solo il 28% della popolazione svizzera vive in zone verdi. La regola 3-30-300 indica come rigenerare lo spazio urbano con tre criteri concreti.',
+    canonicalPath: '/articoli-svizzera/regola-3-30-300-verde-citta/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Verde urbano: la regola 3-30-300 per città fresche",
+      "description": "Studio europeo rivela: solo il 28% degli abitanti svizzeri vive in zone verdi. Scopri la regola 3-30-300 per città più fresche. Dati aggiornati 2026",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/regola-3-30-300-verde-citta.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Piazza del Sole a Bellinzona con edifici e poca vegetazione, esempio di isola di calore urbano"
+      },
+      "datePublished": "2026-09-09T05:21:41+00:00",
+      "dateModified": "2026-09-09T05:21:41+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/regola-3-30-300-verde-citta/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

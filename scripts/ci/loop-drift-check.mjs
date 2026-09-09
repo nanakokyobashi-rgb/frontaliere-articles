@@ -137,6 +137,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
+import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import { createGithubIssue } from '../lib/github-issue-creator.mjs';
 import { createRawFetcher } from '../lib/cross-repo-raw-fetch.mjs';
@@ -144,7 +145,8 @@ import { parsePositiveNum } from '../lib/parse-positive-num.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const MANIFEST_PATH = path.join(ROOT, 'scripts/ci/loop-sync-manifest.json');
-const SITE_REPO = process.env.SITE_REPO || 'valerielinc-ops/frontaliere-si-o-no';
+const SITE_DEFAULT_REPO = 'valerielinc-ops/frontaliere-si-o-no';
+const SITE_REPO = process.env.SITE_REPO || SITE_DEFAULT_REPO;
 // Il ref CANONICO del sito: l'unico su cui un hash e' la verita' del giorno.
 // UNA sorgente sola (AGENTS.md #6) perche' `initAttestVerdict` deve poter dire
 // «questa baseline non viene da `main`» senza duplicare la stringa.
@@ -307,7 +309,13 @@ function resolveInitTargets(only, manifestPaths) {
  * divergenti e nessuno li ha riconciliati. Non ci sono `stable` mascherati qui
  * dentro — sono esattamente i verdetti che chiedono a un umano di decidere.
  */
-const OPEN_DRIFT_STATES = new Set(['site-ahead', 'both-moved', 'undeclared-drift']);
+const OPEN_DRIFT_STATES = new Set([
+  'site-ahead',
+  'both-moved',
+  'undeclared-drift',
+  'removed-on-site',
+  'not-ported-changed',
+]);
 
 /**
  * Se `--init` puo' riscrivere QUESTA voce, o se riscriverla seppellirebbe un
@@ -428,9 +436,29 @@ function initWriteVerdict(entry, now, base, state) {
  * @param {boolean} a.checked           false con `--no-provenance`.
  * @returns {{blocked: boolean, why: string}}
  */
-function initAttestVerdict({ siteBaseline, sitePath, siteRef, defaultRef, inventoryPaths, checked }) {
+function initAttestVerdict({
+  siteBaseline,
+  sitePath,
+  repo = SITE_REPO,
+  defaultRepo = SITE_DEFAULT_REPO,
+  siteRef,
+  defaultRef,
+  inventoryPaths,
+  inventoryStatus = 'ok',
+  checked,
+}) {
   if (!checked) return { blocked: false, why: '' };
   if (siteBaseline == null) return { blocked: false, why: '' };
+
+  if (repo !== defaultRepo) {
+    return {
+      blocked: true,
+      why:
+        `\`SITE_REPO\` e' \`${repo}\`, non il repo canonico \`${defaultRepo}\`: una baseline attestata ` +
+        'su un fork o su un altro repository non appartiene al lato che il drift check sorveglia. ' +
+        'Rimuovi `SITE_REPO` dall\'ambiente o correggilo al repo canonico.',
+    };
+  }
 
   if (siteRef !== defaultRef) {
     return {
@@ -439,6 +467,26 @@ function initAttestVerdict({ siteBaseline, sitePath, siteRef, defaultRef, invent
         `\`SITE_REF\` e' \`${siteRef}\`, non \`${defaultRef}\`: l'hash registrato sarebbe quello di un ref ` +
         'che il drift check non guarda mai, cioe\' una baseline mai esistita sul lato che conta. ' +
         `Rilancia senza \`SITE_REF\` (o con \`${defaultRef}\`).`,
+    };
+  }
+
+  if (inventoryStatus === 'ref-moved') {
+    return {
+      blocked: true,
+      why:
+        `il ref del sito si e' mosso durante la lettura dell'albero per \`${sitePath}\`: ` +
+        'la GET raw e l\'inventario potrebbero appartenere a revisioni diverse. ' +
+        'Rilancia la passata con il ref fermo prima di registrare la baseline.',
+    };
+  }
+
+  if (inventoryStatus === 'truncated') {
+    return {
+      blocked: true,
+      why:
+        `l'albero GitHub del sito e' stato restituito troncato (stato \`truncated\`) mentre si attestava \`${sitePath}\`: ` +
+        'un inventario ricorsivo incompleto non prova la provenienza dei byte. ' +
+        'Riprova con un albero completo oppure usa `--no-provenance` dichiarando il limite.',
     };
   }
 
@@ -522,16 +570,47 @@ function forceArgError(force, init, only) {
  *   sono state riscritte), `targeted` se c'era un `--only`.
  * @returns {{write: boolean, bumpAlignedAt: boolean, exitCode: number}}
  */
-function initPassOutcome({ written, blocked, targeted }) {
+function initPassOutcome({ written, blocked, failed = 0, targeted }) {
   return {
     // Zero voci scritte → niente da salvare: riscrivere il file identico
     // produrrebbe un commit vuoto che sembra un `--init` andato a buon fine.
     write: written > 0,
     // `manifest.alignedAt` e' la data dell'ultimo allineamento INTEGRALE: con
     // `--only` non c'e' stato, e con una voce bloccata nemmeno.
-    bumpAlignedAt: !targeted && blocked === 0 && written > 0,
-    exitCode: blocked > 0 ? 1 : 0,
+    bumpAlignedAt: !targeted && blocked === 0 && failed === 0 && written > 0,
+    exitCode: blocked > 0 || failed > 0 ? 1 : 0,
   };
+}
+
+/** Costruisce una baseline init; `forcedAt` rende l'atto esplicito nel manifest. */
+function initBaseline({ site, corpus, alignedAt, forcedAt = null }) {
+  const baseline = { site, corpus, alignedAt };
+  if (forcedAt) baseline.forcedAt = forcedAt;
+  return baseline;
+}
+
+/**
+ * Verifica l'invariante di `--init --only` prima di serializzare il manifest.
+ * Le entry fuori filtro e le chiavi radice devono essere byte-equivalenti nella
+ * loro rappresentazione JSON; solo le entry nominate possono cambiare.
+ */
+function initOnlyManifestUnchanged(before, after, targets) {
+  if (!(targets instanceof Set)) return { ok: true, changed: [] };
+  const changed = [];
+  const rootKeys = new Set([...Object.keys(before || {}), ...Object.keys(after || {})]);
+  for (const key of rootKeys) {
+    if (key === 'files') continue;
+    if (JSON.stringify(before?.[key]) !== JSON.stringify(after?.[key])) changed.push(key);
+  }
+  const beforeFiles = new Map((before?.files || []).map((entry) => [entry.path, entry]));
+  const afterFiles = new Map((after?.files || []).map((entry) => [entry.path, entry]));
+  for (const rel of new Set([...beforeFiles.keys(), ...afterFiles.keys()])) {
+    if (targets.has(rel)) continue;
+    if (JSON.stringify(beforeFiles.get(rel)) !== JSON.stringify(afterFiles.get(rel))) {
+      changed.push(`files:${rel}`);
+    }
+  }
+  return { ok: changed.length === 0, changed };
 }
 
 const ONLY = parseOnly(RAW_ARGS);
@@ -542,9 +621,27 @@ function readManifest() {
   return JSON.parse(fs.readFileSync(MANIFEST_PATH, 'utf8'));
 }
 
-/** Hash del file locale, o null se non esiste. */
-function localHash(rel) {
+/** Hash del file locale, o del blob committato durante `--init`. */
+function localHash(rel, { committed = false } = {}) {
   const p = path.join(ROOT, rel);
+  if (committed) {
+    let bytes;
+    try {
+      bytes = execFileSync('git', ['show', `HEAD:${rel}`], { cwd: ROOT, maxBuffer: 10 * 1024 * 1024 });
+    } catch {
+      if (!fs.existsSync(p)) return null;
+      throw new Error(`il file del corpus esiste nel working tree ma non in HEAD (${rel}): committalo prima di --init`);
+    }
+    if (!fs.existsSync(p)) {
+      throw new Error(`il file del corpus e' assente dal working tree ma presente in HEAD (${rel}): ripristinalo prima di --init`);
+    }
+    const workingHash = sha256(fs.readFileSync(p));
+    const committedHash = sha256(bytes);
+    if (workingHash !== committedHash) {
+      throw new Error(`il file del corpus e' diverso da HEAD (${rel}): committalo prima di --init`);
+    }
+    return committedHash;
+  }
   if (!fs.existsSync(p)) return null;
   return sha256(fs.readFileSync(p));
 }
@@ -866,19 +963,102 @@ function corpusOnlyTwinVerdict({ mode, path: corpusPath, blobSha, sitePath, trac
 async function siteBlobIndex() {
   const url = `https://api.github.com/repos/${SITE_REPO}/git/trees/${SITE_REF}?recursive=1`;
   const res = await rawFetch(url, { Accept: 'application/vnd.github+json' });
-  if (!res.ok) return null;
+  if (!res.ok) return { status: 'unavailable', reason: `HTTP ${res.status}` };
   const tree = await res.json();
-  if (!tree || !Array.isArray(tree.tree) || tree.truncated) return null;
+  if (tree?.truncated) return { status: 'truncated', reason: 'GitHub ha troncato l’albero ricorsivo' };
+  if (!tree || !Array.isArray(tree.tree)) return { status: 'unavailable', reason: 'risposta GitHub senza albero' };
   const index = new Map();
+  const shaByPath = new Map();
   for (const node of tree.tree) {
     if (node.type !== 'blob' || !node.sha) continue;
+    shaByPath.set(node.path, node.sha);
     if (!index.paths) index.paths = new Set();
     index.paths.add(node.path);
     const at = index.get(node.sha);
     if (at) at.push(node.path);
     else index.set(node.sha, [node.path]);
   }
-  return index;
+  return { status: 'ok', index, shaByPath, treeSha: tree.sha || null };
+}
+
+/** Rilegge il blob autorevole del tree, non la risposta raw/CDN. */
+let siteCommitShaPromise;
+
+/** SHA del commit risolto dal ref, necessario per il fallback dei blob grandi. */
+async function siteRefCommitSha() {
+  if (!siteCommitShaPromise) {
+    siteCommitShaPromise = (async () => {
+      try {
+        const res = await rawFetch(
+          `https://api.github.com/repos/${SITE_REPO}/commits/${encodeURIComponent(SITE_REF)}`,
+          { Accept: 'application/vnd.github+json' },
+        );
+        if (!res.ok) return null;
+        const payload = await res.json();
+        return typeof payload?.sha === 'string' ? payload.sha : null;
+      } catch {
+        return null;
+      }
+    })();
+  }
+  return siteCommitShaPromise;
+}
+
+async function siteGitBlob(blobSha, { sitePath } = {}) {
+  const url = `https://api.github.com/repos/${SITE_REPO}/git/blobs/${blobSha}`;
+  try {
+    const res = await rawFetch(url, { Accept: 'application/vnd.github+json' });
+    if (!res.ok) return null;
+    const payload = await res.json();
+    if (payload?.encoding === 'base64' && typeof payload.content === 'string') {
+      return Buffer.from(payload.content, 'base64');
+    }
+    // GitHub risponde `encoding: none` senza contenuto per blob grandi. Il ref
+    // va prima risolto a un COMMIT SHA: il tree SHA dell'inventario non e' un
+    // commit-ish accettato da raw.githubusercontent. Il chiamante ricontrolla
+    // comunque il blob SHA-1 dei byte riletti.
+    if (payload?.encoding !== 'none' || !sitePath) return null;
+    const commitSha = await siteRefCommitSha();
+    if (!commitSha) return null;
+    const immutable = await rawFetch(`https://raw.githubusercontent.com/${SITE_REPO}/${commitSha}/${sitePath}`);
+    if (!immutable.ok) return null;
+    return Buffer.from(await immutable.arrayBuffer());
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * Valida un mismatch raw/tree con una seconda lettura autorevole.
+ * Se il ref cambia tra due tree, il verdetto è un rilancio, non un rifiuto dei
+ * byte: non si possono confrontare due revisioni diverse nella stessa passata.
+ */
+async function initInventoryVerdict({ siteBytes, sitePath, inventory, refresh }) {
+  if (!inventory || inventory.status !== 'ok') {
+    return { paths: null, status: inventory?.status || 'unavailable' };
+  }
+  const rawSha = gitBlobSha(siteBytes);
+  const paths = inventory.index.get(rawSha) || [];
+  if (paths.includes(sitePath)) return { paths, status: 'ok' };
+
+  const treeSha = inventory.shaByPath.get(sitePath);
+  if (!treeSha) return { paths, status: 'ok' };
+
+  const fresh = await refresh();
+  if (
+    fresh?.status === 'ok' &&
+    inventory.treeSha &&
+    fresh.treeSha &&
+    inventory.treeSha !== fresh.treeSha
+  ) {
+    return { paths: null, status: 'ref-moved' };
+  }
+
+  const authoritative = await siteGitBlob(treeSha, { sitePath });
+  if (!authoritative || gitBlobSha(authoritative) !== treeSha) {
+    return { paths: null, status: 'unavailable' };
+  }
+  return { paths: [], status: 'mismatch-confirmed' };
 }
 
 /** True solo quando una issue di tracking risponde esplicitamente `closed`. */
@@ -1035,6 +1215,14 @@ const DECLARED_ABSENT_REGISTRY_REL = 'generator/tests/loop-references-exist.test
 const CRAWLER_CONTRACT_REL = 'generator/data/crawler-cross-repo-contract.json';
 const DORMANT_WITH_CRAWLER_CONTRACT = /^\.github\/workflows\/(?:crawler-group-\d{2}|translate-pending)\.yml :: /;
 
+function crawlerContractIsActive(source) {
+  try {
+    return Boolean(JSON.parse(String(source ?? '')));
+  } catch {
+    return false;
+  }
+}
+
 /**
  * I file che hanno una dichiarazione appaiata nel registro, con i loro
  * referenti. PURA: prende il testo del registro, non legge il disco.
@@ -1053,14 +1241,14 @@ const DORMANT_WITH_CRAWLER_CONTRACT = /^\.github\/workflows\/(?:crawler-group-\d
  */
 function declaredAbsentCiters(source, { crawlerContract = false } = {}) {
   const out = new Map();
-  for (const m of String(source || '').matchAll(/^\s*'([^']+?) :: ([^']+?)':/gm)) {
-    const citer = m[1];
+  for (const m of String(source || '').matchAll(/^\s*(['"`])((?:(?!\1)[^\n])+?) :: ((?:(?!\1)[^\n])+?)\1:/gm)) {
+    const citer = m[2];
     // Una voce dormiente non e' fatta valere da nessun test: avvisarne sarebbe
     // un falso positivo, non una cautela.
-    if (crawlerContract && DORMANT_WITH_CRAWLER_CONTRACT.test(`${citer} :: ${m[2]}`)) continue;
+    if (crawlerContract && DORMANT_WITH_CRAWLER_CONTRACT.test(citer + ' :: ' + m[3])) continue;
     const at = out.get(citer);
-    if (at) at.push(m[2]);
-    else out.set(citer, [m[2]]);
+    if (at) at.push(m[3]);
+    else out.set(citer, [m[3]]);
   }
   return out;
 }
@@ -1088,10 +1276,10 @@ function declaredAbsentCiters(source, { crawlerContract = false } = {}) {
  *
  * ## Perche' un avviso sul `site-ahead` e non un blocco
  *
- * Misura del 2026-09-07 su `main`, contate le sole dichiarazioni ATTIVE (cioe'
+ * Rimisura del 2026-09-08 su `main`, contate le sole dichiarazioni ATTIVE (cioe'
  * al netto di quelle che `ACTIVE_DECLARED_ABSENT` spegne col contract
- * crawler): **20 delle 157 voci `identical`** hanno almeno una dichiarazione
- * appaiata (71 chiavi attive su 143, 37 file citanti su 61). Il registro e'
+ * crawler): **20 delle 159 voci `identical`** hanno almeno una dichiarazione
+ * appaiata (70 dichiarazioni attive su 142, 37 file citanti su 61). Il registro e'
  * `corpus-only`, quindi non entrera' MAI nell'insieme trasportabile: trattare
  * la coppia come bloccante spegnerebbe il 13% del canale in modo permanente — l'eccesso opposto, e peggiore, del silenzio di oggi. E il
  * legame e' CONDIZIONALE: si rompe solo se la copia cambia proprio quelle
@@ -1121,20 +1309,37 @@ function implicitPinnersVerdict({ mode, state, pinners = [] }) {
   return { pinned: found.length > 0, pinners: found };
 }
 
-/** Il registro letto una volta sola: citante -> referenti dichiarati assenti. */
+/** Indice cache-ato: citante -> referenti dichiarati assenti, invalidato dal testo. */
 let PINNER_INDEX = null;
+let PINNER_INDEX_KEY = null;
 function pinnerIndex() {
-  if (!PINNER_INDEX) {
-    try {
-      PINNER_INDEX = declaredAbsentCiters(fs.readFileSync(path.join(ROOT, DECLARED_ABSENT_REGISTRY_REL), 'utf8'), {
-        crawlerContract: fs.existsSync(path.join(ROOT, CRAWLER_CONTRACT_REL)),
-      });
-    } catch {
-      // Fail-open: registro assente o illeggibile = nessun avviso, mai un rosso.
-      PINNER_INDEX = new Map();
-    }
+  let registrySource = null;
+  let contractSource = null;
+  try {
+    registrySource = fs.readFileSync(path.join(ROOT, DECLARED_ABSENT_REGISTRY_REL), 'utf8');
+  } catch {
+    // Fail-open: registro assente o illeggibile = nessun avviso, mai un rosso.
   }
+  try {
+    contractSource = fs.readFileSync(path.join(ROOT, CRAWLER_CONTRACT_REL), 'utf8');
+  } catch {
+    // File assente = contract inattivo; il valore viene comunque nella chiave.
+  }
+  const key = String(registrySource ?? '<missing>') + '\u0000' + String(contractSource ?? '<missing>');
+  if (PINNER_INDEX && PINNER_INDEX_KEY === key) return PINNER_INDEX;
+
+  PINNER_INDEX_KEY = key;
+  PINNER_INDEX = registrySource === null
+    ? new Map()
+    : declaredAbsentCiters(registrySource, {
+      crawlerContract: crawlerContractIsActive(contractSource),
+    });
   return PINNER_INDEX;
+}
+
+function resetPinnerIndex() {
+  PINNER_INDEX = null;
+  PINNER_INDEX_KEY = null;
 }
 
 /** Le dichiarazioni appaiate di UNA voce, lette dal registro. */
@@ -1379,6 +1584,7 @@ async function main() {
     return 1;
   }
   const manifest = readManifest();
+  const manifestBefore = JSON.parse(JSON.stringify(manifest));
   const { targets: initTargets, unknown: initUnknown } = resolveInitTargets(ONLY, manifest.files.map((f) => f.path));
   if (initUnknown.length) {
     // Un path non dichiarato e' quasi sempre un refuso, e proseguire
@@ -1395,20 +1601,42 @@ async function main() {
   // chi lancia. Le altre voci si scrivono comunque: vedi `initPassOutcome()`.
   const initBlocked = [];
   const initWritten = [];
+  const initFailed = [];
   // Inventario dell'albero del sito, chiesto UNA volta sola e solo se una voce
   // ha davvero un lato sito da attestare: `--init --only` su una `corpus-only`
   // non deve pagare una richiesta. `undefined` = mai chiesto, `null` = chiesto
   // e non disponibile (che per `initAttestVerdict` e' un rifiuto, non un
   // fail-open: e' una baseline che si sta SCRIVENDO).
   let initInventory;
-  const initSiteBlobIndex = async () => {
-    if (initInventory === undefined) {
-      try {
-        initInventory = await siteBlobIndex();
-      } catch {
-        initInventory = null;
-      }
+  let initInventoryRefresh;
+  const initSiteBlobIndex = async ({ refresh = false } = {}) => {
+    if (!refresh && initInventory !== undefined) return initInventory;
+    if (refresh && initInventoryRefresh?.fromTreeSha === initInventory?.treeSha) {
+      return initInventoryRefresh.promise;
     }
+    const fetchInventory = (async () => {
+      try {
+        return await siteBlobIndex();
+      } catch {
+        return { status: 'unavailable', reason: 'errore di rete' };
+      }
+    })();
+    if (refresh) {
+      const fromTreeSha = initInventory?.treeSha || null;
+      let refreshRecord;
+      const promise = fetchInventory.then((fresh) => {
+        // Un refresh fallito non deve cancellare l'inventario valido: il
+        // verdetto corrente può ancora leggere il blob autorevole del tree
+        // precedente, e le voci successive non devono ereditare un falso buio.
+        if (fresh?.status === 'ok') initInventory = fresh;
+        else if (initInventoryRefresh === refreshRecord) initInventoryRefresh = null;
+        return fresh;
+      });
+      refreshRecord = { fromTreeSha, promise };
+      initInventoryRefresh = refreshRecord;
+      return promise;
+    }
+    initInventory = await fetchInventory;
     return initInventory;
   };
 
@@ -1430,12 +1658,13 @@ async function main() {
       siteBytes = entry.mode === 'corpus-only' ? null : await siteFile(sitePath);
       now = {
         site: siteBytes === null ? null : sha256(siteBytes),
-        corpus: localHash(rel),
+        corpus: localHash(rel, { committed: INIT }),
       };
     } catch (e) {
       // Una fetch fallita non deve rendere il report inutile: si segnala il
       // file come non verificato e si va avanti.
       results.push({ path: rel, mode: entry.mode, state: 'check-failed', actionable: false, headline: `verifica fallita: ${String(e.message).slice(0, 80)}`, detail: '' });
+      if (INIT) initFailed.push({ path: rel, reason: String(e.message || e).slice(0, 120) });
       continue;
     }
 
@@ -1444,6 +1673,7 @@ async function main() {
       // la baseline e ogni voce e' `stable` per costruzione — che e' esattamente
       // il modo in cui un drift aperto spariva.
       const guard = initWriteVerdict(entry, now, base, classify(entry, now, base).state);
+      let forcedAt = null;
       if (guard.blocked) {
         initBlocked.push({ path: rel, why: guard.why, forceable: true });
         // Con `--force` si scrive lo stesso, ma il blocco resta stampato: la
@@ -1451,6 +1681,7 @@ async function main() {
         // salta QUESTA voce e basta: la sua baseline resta quella di prima e
         // le altre vengono registrate lo stesso.
         if (!FORCE) continue;
+        forcedAt = new Date().toISOString();
       }
 
       // `corpus-only` e `corpus-only-pending` non hanno un sito da tracciare:
@@ -1467,16 +1698,27 @@ async function main() {
       // il solo punto del programma in cui la domanda ha ancora senso: dopo la
       // scrittura, la risposta e' la baseline.
       let inventoryPaths = null;
+      let inventoryStatus = 'ok';
       if (!NO_PROVENANCE && siteBaseline !== null && siteBytes !== null) {
-        const index = await initSiteBlobIndex();
-        inventoryPaths = index ? index.get(gitBlobSha(siteBytes)) || [] : null;
+        const inventory = await initSiteBlobIndex();
+        const attested = await initInventoryVerdict({
+          siteBytes,
+          sitePath,
+          inventory,
+          refresh: () => initSiteBlobIndex({ refresh: true }),
+        });
+        inventoryPaths = attested.paths;
+        inventoryStatus = attested.status;
       }
       const attest = initAttestVerdict({
         siteBaseline,
         sitePath,
+        repo: SITE_REPO,
+        defaultRepo: SITE_DEFAULT_REPO,
         siteRef: SITE_REF,
         defaultRef: SITE_DEFAULT_REF,
         inventoryPaths,
+        inventoryStatus,
         checked: !NO_PROVENANCE,
       });
       if (attest.blocked) {
@@ -1487,7 +1729,7 @@ async function main() {
         continue;
       }
 
-      entry.baseline = {
+      entry.baseline = initBaseline({
         site: siteBaseline,
         corpus: now.corpus,
         // L'allineamento di QUESTA voce e' di OGGI: e' oggi che ne stiamo
@@ -1496,7 +1738,8 @@ async function main() {
         // e' mai avvenuto e che in una passata parziale (issue #978) non viene
         // nemmeno bumpato: la baseline sarebbe di oggi con la data di ieri.
         alignedAt: new Date().toISOString().slice(0, 10),
-      };
+        forcedAt,
+      });
       initWritten.push(rel);
       continue;
     }
@@ -1607,11 +1850,23 @@ async function main() {
     // rifiuto anche con `--force`, quindi continua a contare come non scritta.
     const forced = FORCE ? initBlocked.filter((b) => b.forceable).length : 0;
     const skipped = initBlocked.length - forced;
-    const outcome = initPassOutcome({ written: initWritten.length, blocked: skipped, targeted: Boolean(initTargets) });
+    const outcome = initPassOutcome({
+      written: initWritten.length,
+      blocked: skipped,
+      failed: initFailed.length,
+      targeted: Boolean(initTargets),
+    });
     if (forced) {
       console.error(`--init --force: ${forced} voce/i riscritte NONOSTANTE il blocco qui sopra.`);
     }
     if (outcome.bumpAlignedAt) manifest.alignedAt = new Date().toISOString().slice(0, 10);
+    if (initTargets) {
+      const invariant = initOnlyManifestUnchanged(manifestBefore, manifest, initTargets);
+      if (!invariant.ok) {
+        console.error(`--init --only: sono cambiate entry fuori filtro (${invariant.changed.join(', ')}): manifest non scritto.`);
+        return 1;
+      }
+    }
     if (outcome.write) {
       fs.writeFileSync(MANIFEST_PATH, `${JSON.stringify(manifest, null, 2)}\n`);
       console.log(`Baseline registrate per ${initWritten.length} file: ${initWritten.join(', ')}.`);
@@ -1629,6 +1884,15 @@ async function main() {
           'Riconcilia i due lati, oppure rilancia `--init --only <path> --force` sulle SOLE voci di cui stai chiudendo tu il drift. ' +
           "I rifiuti di ATTESTAZIONE (baseline non confermata dall'albero del sito) `--force` non li copre: si risolvono con `GH_TOKEN`/un ritentativo, oppure si dichiarano con `--no-provenance`.",
       );
+    }
+    if (initFailed.length) {
+      console.error(
+        `--init: ${initFailed.length} voce/i non verificate per errore di lettura: ` +
+          initFailed.map(({ path: rel, reason }) => `${rel} (${reason})`).join('; '),
+      );
+      if (!initWritten.length && !skipped) {
+        console.error(`--init: nessuna voce registrata: ${initFailed.length} non verificate.`);
+      }
     }
     return outcome.exitCode;
   }
@@ -1649,7 +1913,8 @@ async function main() {
     const candidates = [...corpusOnly, ...pending.filter((entry) => closedPending.has(entry.path))];
     let index = null;
     try {
-      index = await siteBlobIndex();
+      const inventory = await siteBlobIndex();
+      index = inventory?.status === 'ok' ? inventory.index : null;
     } catch {
       index = null; // PROCEED-SAFE: senza inventario nessun verdetto, mai un falso rosso.
     }
@@ -1802,4 +2067,4 @@ if (process.argv[1] && process.argv[1].endsWith('loop-drift-check.mjs')) {
 // baseline con LA STESSA regola con cui la pesa il cron, altrimenti una voce
 // accettata in PR verrebbe dichiarata fantasma il mattino dopo — o peggio, il
 // contrario. Una seconda copia della regola lo renderebbe inevitabile.
-export { classify, parseOnly, onlyArgError, forceArgError, resolveInitTargets, initWriteVerdict, initAttestVerdict, initPassOutcome, ghostVerdict, strandedVerdict, corpusOnlyTwinVerdict, unmirrorableDepsVerdict, implicitPinnersVerdict, declaredAbsentCiters, DECLARED_ABSENT_REGISTRY_REL, CRAWLER_CONTRACT_REL, DORMANT_WITH_CRAWLER_CONTRACT, resolvedLocalImports, gitBlobSha, scalarFingerprintVerdict, siteFile, sha256, repoHistoryMatch };
+export { classify, parseOnly, onlyArgError, forceArgError, resolveInitTargets, initWriteVerdict, initAttestVerdict, initPassOutcome, initBaseline, initOnlyManifestUnchanged, localHash, ghostVerdict, strandedVerdict, corpusOnlyTwinVerdict, unmirrorableDepsVerdict, implicitPinnersVerdict, declaredAbsentCiters, crawlerContractIsActive, resetPinnerIndex, DECLARED_ABSENT_REGISTRY_REL, CRAWLER_CONTRACT_REL, DORMANT_WITH_CRAWLER_CONTRACT, resolvedLocalImports, gitBlobSha, scalarFingerprintVerdict, siteFile, sha256, repoHistoryMatch };
