@@ -59,11 +59,17 @@ test('il discovery copre tutti i workflow e trova gli scalar prompt', () => {
   const files = workflowFiles();
   assert.ok(files.length > 0, 'la cartella dei workflow è vuota o il discovery è rotto');
 
-  const promptCount = files.reduce((total, file) => {
-    const source = fs.readFileSync(path.join(WORKFLOW_DIR, file), 'utf8');
-    return total + promptBlocks(source).length;
-  }, 0);
-  assert.ok(promptCount >= 8, 'il discovery dei prompt è diventato parziale o vacuo');
+  const workflowSources = files.map((file) => ({
+    file,
+    source: fs.readFileSync(path.join(WORKFLOW_DIR, file), 'utf8'),
+  }));
+  const promptWorkflows = workflowSources.filter(({ source }) =>
+    /^\s*prompt\s*:\s*[|>]/m.test(source),
+  );
+  assert.ok(promptWorkflows.length > 0, 'nessun block scalar prompt trovato: il controllo sarebbe vacuo');
+  for (const { file, source } of promptWorkflows) {
+    assert.ok(promptBlocks(source).length > 0, `${file}: il parser non ha estratto il block scalar prompt`);
+  }
 });
 
 test('nessun prompt multilinea supera il tetto che evita workflow invalidi', () => {
