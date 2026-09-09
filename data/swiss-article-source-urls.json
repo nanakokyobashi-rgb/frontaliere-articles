@@ -1,5 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/cronaca/1944076/ciclista-grave-stato-ospedale-soccorso": "ciclista-grave-dopo-una-caduta",
   "https://www.swissinfo.ch/ita/offre-20-franchi-a-controllore-per-non-pagare-multa%2c-si-muove-l%27mpc/91900170": "offre-controllore-treno-multa",
   "https://www.tio.ch/sport/calcio/1944097/aa-coppa-svizera-quali-formazione": "coppa-svizzera-risultati-partiti",
   "https://www.admin.ch/it/newnsb/fjrhye9no5ebzov3xa3dw": "labatori-di-agsrosope-consegna-chiavi",
@@ -2289,6 +2288,11 @@
   "https://www.admin.ch/it/newnsb/b8vgbeq0hug8": {
     "articleId": "commissioni-extraparlamentari-riorganizzazione",
     "ts": "2026-09-09T23:11:29.217Z",
+    "keyForm": 2
+  },
+  "https://www.tvsvizzera.it/tvs/svizzera-istruzioni-per-luso": {
+    "articleId": "svizzera-corruzione-restituzione-banche",
+    "ts": "2026-09-09T23:35:39.102Z",
     "keyForm": 2
   }
 }
