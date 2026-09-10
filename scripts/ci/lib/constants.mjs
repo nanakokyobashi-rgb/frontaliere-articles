@@ -33,6 +33,9 @@
  */
 export const VITEST_CHECK_NAME = process.env.CI_CHECK_NAME || 'tests (node --test)';
 
+/** Il check required e il job con gli step sono la stessa esecuzione. */
+export const VITEST_EXECUTION_JOB_NAME = VITEST_CHECK_NAME;
+
 /**
  * Matcha il nome dei check-run dei singoli SHARD vitest in `tests.yml`
  * (`name: vitest shard ${{ matrix.shard }}/4` → `vitest shard 1/4`, …). Distinto

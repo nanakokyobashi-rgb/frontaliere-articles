@@ -103,3 +103,20 @@ test('CI_CHECK_NAME resta sovrascrivibile da env', async () => {
     'VITEST_CHECK_NAME non legge piu\' process.env.CI_CHECK_NAME: i due repo non possono piu\' convergere sullo stesso file.',
   );
 });
+
+test('il selettore condiviso legge verdetto e step dallo stesso job corrente', async () => {
+  const { VITEST_CHECK_NAME, VITEST_EXECUTION_JOB_NAME } = await import('../../scripts/ci/lib/constants.mjs');
+  const { latestCompletedVitestConclusion, latestCompletedVitestExecutionRun } = await import('../../scripts/ci/lib/vitestCheck.mjs');
+  const latest = {
+    name: VITEST_CHECK_NAME, status: 'completed', conclusion: 'failure',
+    completed_at: '2026-09-10T06:00:00Z', details_url: 'https://github.com/owner/repo/actions/runs/1/job/2',
+  };
+  const runs = [
+    { ...latest, conclusion: 'success', completed_at: '2026-09-10T05:00:00Z' },
+    latest,
+    { ...latest, conclusion: 'skipped', completed_at: '2026-09-10T07:00:00Z' },
+  ];
+  assert.equal(VITEST_EXECUTION_JOB_NAME, VITEST_CHECK_NAME);
+  assert.equal(latestCompletedVitestExecutionRun(runs), latest);
+  assert.equal(latestCompletedVitestConclusion(runs), 'failure');
+});
