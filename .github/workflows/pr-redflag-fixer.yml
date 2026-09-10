@@ -498,6 +498,16 @@ jobs:
         if: steps.guard.outputs.proceed == 'true'
         uses: ./.github/actions/setup-headroom
 
+      - name: Pre-flight — Claude quota beacon for Codex fallback
+        id: quota
+        if: steps.guard.outputs.proceed == 'true'
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+          CODEX_FALLBACK_MODE: '1'
+        run: node scripts/ci/check-quota-backoff.mjs
+
       - name: Run Claude 🔴-fix
         id: claude_review
         if: steps.guard.outputs.proceed == 'true'
@@ -507,7 +517,7 @@ jobs:
         # fallimento del round. I fail genuini (nessun push) vengono ri-marcati RED
         # dal classify → il segnale "non-progress" resta visibile nel loop-health.
         continue-on-error: true
-        uses: anthropics/claude-code-action@v1
+        uses: ./.github/actions/claude-codex-fallback
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PR_NUMBER: ${{ github.event.pull_request.number }}
@@ -516,6 +526,8 @@ jobs:
           FIX_TIER: ${{ steps.guard.outputs.tier }}
           FIX_ROUND: ${{ steps.guard.outputs.round }}
         with:
+          preflight_blocked: ${{ steps.quota.outputs.codex_fallback }}
+          codex_auth_json: ${{ secrets.CODEX_AUTH_JSON }}
           # Auth via subscription Max (zero API cost). MAI ANTHROPIC_API_KEY.
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           # Stesso token dello step "Configure push remote" qui sopra, e per la
@@ -536,6 +548,7 @@ jobs:
           # workflow esiste per innescare. Vuoto = ramo di default dell'action
           # (conia un token proprio), cioe' il comportamento odierno.
           github_token: ${{ env.GITHUB_PAT_NANAKO }}
+          codex_github_token: ${{ env.GITHUB_PAT_NANAKO || secrets.GITHUB_TOKEN }}
           show_full_output: true
           # Le review/PR autonome sono di claude[bot] / github-actions[bot] /
           # frontaliere-automation[bot] (App): le PR aggiornate via App token

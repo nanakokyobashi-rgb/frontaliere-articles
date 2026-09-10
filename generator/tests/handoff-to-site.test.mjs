@@ -147,7 +147,8 @@ test('mirrorLockedPaths legge il manifest reale, non un elenco ricopiato', () =>
   assert.deepEqual([...MIRROR_LOCKED_MODES], ['identical']);
   const locked = mirrorLockedPaths();
   assert.ok(locked.size > 0, 'il manifest dichiara dei file identical');
-  assert.ok(locked.has('scripts/ci/followup-drainer.mjs'), 'il file di #316 è fra quelli bloccati');
+  assert.ok(locked.has('scripts/ci/followup-resolution-match.mjs'), 'il manifest espone un gemello identical del ciclo');
+  assert.equal(locked.has('scripts/ci/followup-drainer.mjs'), false, 'il drainer adapted è nostro da modificare');
   // Un `adapted` è nostro da modificare: non deve mai finire qui dentro.
   assert.equal(locked.has('scripts/lib/classify-issue.mjs'), false);
 });
@@ -161,7 +162,7 @@ test('mirrorLockedPaths mappa sul `sitePath`, che nella maggior parte dei casi D
   const locked = mirrorLockedPaths();
   assert.equal(locked.get('host/shared/clauseTail.mjs'), 'build-plugins/shared/clauseTail.mjs');
   // Quando `sitePath` manca, i due lati coincidono: identità, non `undefined`.
-  assert.equal(locked.get('scripts/ci/followup-drainer.mjs'), 'scripts/ci/followup-drainer.mjs');
+  assert.equal(locked.get('scripts/ci/followup-resolution-match.mjs'), 'scripts/ci/followup-resolution-match.mjs');
   for (const [corpusPath, sitePath] of locked) assert.ok(sitePath, `sitePath vuoto per ${corpusPath}`);
 });
 
@@ -330,6 +331,9 @@ test('sitePathMap traduce anche i gemelli `adapted`, che `mirrorLockedPaths` non
   const names = sitePathMap();
   assert.equal(names.get('generator/scripts/create-article.mjs'), 'scripts/create-article.mjs');
   assert.equal(mirrorLockedPaths().has('generator/scripts/create-article.mjs'), false);
+  assert.equal(names.get('scripts/ci/followup-drainer.mjs'), 'scripts/ci/followup-drainer.mjs');
+  assert.equal(mirrorLockedPaths().has('scripts/ci/followup-drainer.mjs'), false);
+  assert.equal(names.get('.github/workflows/post-merge-followup.yml'), '.github/workflows/post-merge-followup.yml');
   // Gli `identical` restano tradotti come prima, e i `not-ported` ci sono.
   assert.equal(names.get('host/shared/clauseTail.mjs'), 'build-plugins/shared/clauseTail.mjs');
   assert.ok(names.has('scripts/lib/control-char-publish-gate.mjs'));
@@ -701,6 +705,10 @@ test('#972: `close` viaggia con la decisione, il corto-circuito non lo inventa',
     verdict: 'no-root-cause',
     body: 'Root cause nota: `scripts/ci/followup-drainer.mjs` è `mode: identical`, '
       + 'scriverlo qui verrebbe sovrascritto al mirror successivo.',
+    // Fixture storico: il caso di #972 verifica la decisione con un manifest
+    // identical esplicito, indipendente dall adattamento ormai dichiarato nel
+    // manifest reale.
+    lockedPaths: LOCKED,
   });
   assert.equal(parks.handoff, true);
   assert.equal(parks.close, false);
@@ -776,7 +784,7 @@ test('#972: il pre-flight è cablato e OGNI step che costa lo consulta', () => {
   // Il cablaggio: ogni step che invoca Claude — e ogni step che ne legge
   // l'esito — deve saltare sul corto-circuito. Senza, il gate gira, stampa, e
   // la run costosa parte lo stesso.
-  const claudeSteps = all.filter((s) => /anthropics\/claude-code-action/.test(s));
+  const claudeSteps = all.filter((s) => /(?:anthropics\/claude-code-action|\.\/\.github\/actions\/claude-codex-fallback)/.test(s));
   assert.ok(claudeSteps.length, 'nessuno step Claude: aggiornare questo test');
   for (const s of claudeSteps) {
     assert.match(s, /steps\.handoff_pre\.outputs\.handoff_delivered != 'true'/,

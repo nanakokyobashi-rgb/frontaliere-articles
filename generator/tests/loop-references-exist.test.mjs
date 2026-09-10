@@ -252,18 +252,47 @@ const resolveToken = (token) => (token.includes('/') ? token : `${WORKFLOW_DIR}/
  *                    test «`retired` solo su file `identical`».
  */
 const DECLARED_ABSENT = {
+  '.github/workflows/issue-fix.yml :: scripts/lib/pr-body-generator-contract.mjs': {
+    kind: 'site-only',
+    reason:
+      'Helper del contratto di chiusura del body presente nel repository del sito; il workflow '
+      + 'del corpus mantiene il fallback Closes quando il helper non è disponibile localmente.',
+  },
+  '.github/workflows/post-merge-followup.yml :: auto-merge-on-lgtm.yml': {
+    kind: 'site-only',
+    reason:
+      'Il prompt descrive il percorso di merge posseduto dal sito; il workflow omonimo non è '
+      + 'un referente runtime del triage nel repository del corpus.',
+  },
+  '.github/workflows/post-merge-followup.yml :: pr-review-loop.yml': {
+    kind: 'example',
+    reason:
+      'Nome storico usato nella prosa del prompt per indicare il vecchio percorso di review; '
+      + 'nessuno step del triage dipende dall esistenza di quel workflow.',
+  },
+  '.github/workflows/post-merge-followup.yml :: scripts/ci/foo.mjs': {
+    kind: 'example',
+    reason:
+      'Path dimostrativo usato nella spiegazione dei token non distintivi; non identifica un '
+      + 'modulo richiesto dal workflow o da un import del ciclo.',
+  },
+  '.github/workflows/post-merge-followup.yml :: scripts/create-article.mjs': {
+    kind: 'site-only',
+    reason:
+      'Il prompt assegna al sito il twin del producer degli articoli; il path è documentale e '
+      + 'non è un file runtime del repository corpus in questa forma.',
+  },
+  '.github/workflows/post-merge-followup.yml :: scripts/ci/bar.mjs': {
+    kind: 'example',
+    reason:
+      'Path dimostrativo nella forma COMANDO della scheda metrica; il triage non esegue né '
+      + 'importa questo modulo inesistente.',
+  },
   'scripts/ci/followup-resolution-match.mjs :: scripts/audit-canton-url-drift.mjs': {
     kind: 'site-only',
     reason:
       'Il gemello identical include questo referente nelle istruzioni della scheda, ma ' +
       'lo script vive solo nel repo del sito: qui la citazione è documentale e nessun ' +
-      'percorso runtime dipende dalla sua presenza nel corpus.',
-  },
-  'scripts/ci/followup-resolution-match.mjs :: scripts/ci/gate-minted-followups.mjs': {
-    kind: 'site-only',
-    reason:
-      'Il gemello identical include questo referente nelle istruzioni della scheda, ma ' +
-      'il gate vive solo nel repo del sito: qui la citazione è documentale e nessun ' +
       'percorso runtime dipende dalla sua presenza nel corpus.',
   },
   'scripts/ci/followup-drainer.mjs :: mirror-articles-engine.yml': {
@@ -368,17 +397,6 @@ const DECLARED_ABSENT = {
   'scripts/ci/check-workflows-scope.mjs :: .github/workflows/foo.yml': {
     kind: 'example',
     reason: 'Placeholder in un docstring che mostra la forma della bullet-list «File di partenza».',
-  },
-  'scripts/lib/parse-positive-num.mjs :: scripts/lib/int-from-env.mjs': {
-    kind: 'site-only',
-    reason:
-      "Citazione CONTRASTIVA di un file che vive sul SITO: il docstring lo nomina per dire " +
-      "perche' `parse-positive-num.mjs` NON scendera' di la' (`intFromEnv` + " +
-      "`positiveIntFromEnv` coprono gia' la stessa classe, e due sorgenti per la stessa " +
-      "validazione sono il difetto vietato da AGENTS.md #6). E' la ragione per cui la voce di " +
-      "manifest e' `corpus-only` e non `corpus-only-pending`, issue #884. Niente qui dipende " +
-      "dalla sua esistenza LOCALE: se comparisse in questo repo la frase diventerebbe falsa, " +
-      "non vera.",
   },
   'scripts/lib/workflow-scope-detect.mjs :: scripts/create-article.mjs': {
     kind: 'renamed-here',
@@ -1434,15 +1452,6 @@ const DECLARED_ABSENT = {
       'vecchio trigger workflow_run — frontaliere-si-o-no#6537). Il dispatcher vive ' +
       'ESCLUSIVAMENTE nel sito; questo file e\' il bersaglio, non il chiamante. ' +
       'Descrittiva.',
-  },
-  'scripts/ci/claude-rate-limit.mjs :: pr-review-loop.yml': {
-    kind: 'retired',
-    reason:
-      'Il referente e\' sparito da ENTRAMBI i repo il 2026-09-03: la Claude review vive ora ' +
-      'dentro `tests.yml` e i quattro workflow che facevano review, contratto del body e ' +
-      'merge non esistono piu\'. La frase qui e\' storica e descrittiva — nota che il vecchio reviewer gestiva gia\' il 429 dal suo lato, e quel comportamento e\' stato portato nello step di tests.yml. ' +
-      'Il file e\' `identical` nel manifest: riscriverla qui fabbricherebbe un `corpus-ahead` ' +
-      'su un commento, quindi la correzione va fatta sul sito e fatta scendere.',
   },
   'scripts/ci/fetch-pr-files.mjs :: pr-review-loop.yml': {
     kind: 'retired',

@@ -26,16 +26,18 @@ import { createGithubIssue } from '../lib/github-issue-creator.mjs';
 import { FIX_OUTCOME_RE } from './close-recovered-failure-issues.mjs';
 import { FALSE_POSITIVE_DECLARATION_RE } from './lib/false-positive-declaration.mjs';
 import { REVIEWER_BOT_LOGIN_RE } from './lib/constants.mjs';
+import { intFromEnv } from '../lib/int-from-env.mjs';
 
-const WINDOW_DAYS = Number(process.env.WINDOW_DAYS || 14);
-const THRESHOLD = Number(process.env.THRESHOLD || 3);
-const MAX_PRS = Number(process.env.MAX_PRS || 40);
-const MAX_ISSUES = Number(process.env.MAX_ISSUES || 120);
+const WINDOW_DAYS = intFromEnv('WINDOW_DAYS', 14);
+const THRESHOLD = intFromEnv('THRESHOLD', 3);
+const MAX_PRS = intFromEnv('MAX_PRS', 40);
+const MAX_ISSUES = intFromEnv('MAX_ISSUES', 120);
 const OUT = process.env.HARVEST_OUT || 'harvest-clusters.json';
+const NO_AUTOCLOSE = process.env.FOLLOWUP_NO_AUTOCLOSE === '1' || process.env.NO_AUTOCLOSE === '1';
 // EFFICACY_FACTOR: a documented pattern that STILL recurs at ≥ THRESHOLD×factor
 // is evidence the prose rule isn't preventing the mistake → escalate to a
 // structural fix instead of writing another line nobody follows.
-const EFFICACY_FACTOR = Number(process.env.EFFICACY_FACTOR || 2);
+const EFFICACY_FACTOR = intFromEnv('EFFICACY_FACTOR', 2);
 
 const sinceMs = Date.now() - WINDOW_DAYS * 86_400_000;
 const sinceDay = new Date(sinceMs).toISOString().slice(0, 10);
@@ -270,7 +272,7 @@ export function isGenuineSiblingClassViolation(text) {
 // sitemap», «non emette il canonical») restano fuori, perche' li' la negazione E'
 // il difetto. La clausola si chiude al primo confine di frase (`.`/`;`/`—`/a
 // capo), cosi' non mangia il resto della riga.
-const IMPACT_VERB = String.raw`impatt\w*|impact\b|ricadut\w*|tocca\w*|toccano|toccat\w*|toccare|touch\w*|raggiung\w*|reach\w*|coinvolg\w*|affect\w*`;
+const IMPACT_VERB = String.raw`impatt\w*|impact\b|ricadut\w*|tocca\w*|touch\w*|raggiung\w*|reach\w*|coinvolg\w*|affect\w*`;
 // Il corpo di una clausola si chiude al primo confine di frase, ma un punto e'
 // confine SOLO se seguito da spazio o da fine riga: dentro un code span
 // (`articles.json`, `create-article.mjs`, `publish-api.yml`) non lo e'. Senza
@@ -284,21 +286,13 @@ const CLAUSE_BODY = String.raw`(?:[^.;—\n]|\.(?!\s|$))`;
 //     stesso anti-pattern in `cf-purge-cache.mjs` non e' toccato». E' la
 //     formulazione che REVIEW.md prescrive per un finding di classe, ed e' anche
 //     il tell `non toccat` della TAXONOMY `sibling-class-fix`, che collide per
-//     costruzione con `toccat\w*` di IMPACT_VERB. Su una riga cosi' lo strip non
+//     costruzione con `tocca\w*` di IMPACT_VERB (che copre gia' toccano/toccata/
+//     toccare: le alternative esplicite erano rami morti). Su una riga cosi' lo strip non
 //     deve girare, altrimenti il bucket process piu' canonico perde la sua entrata
 //     piu' tipica: misurato sulle ultime 114 PR mergiate, 6 righe su 50 con
 //     «negazione + participio» sono findings di sweep veri (#880 e #822 su tutte).
 //     I tell sono quelli della TAXONOMY meno la negazione, cosi' le due
 //     definizioni di «riga di sweep» non possono divergere.
-//
-//     Il guard vale per la FRASE che porta il tell, non per la riga intera: una
-//     riga che afferma uno sweep incompleto E chiude con la ricognizione negata
-//     («lo stesso anti-pattern in `build-rss.mjs` non e' toccato. Nessun impatto
-//     su `dist/api/`, sulle sitemap o sui feed.») saltava lo strip per intero e
-//     ri-alimentava `canonical-sitemap` col vocabolario che compare SOLO nella
-//     ricognizione — cioe' il falso positivo che questo blocco chiude. La misura
-//     delle 3.618 righe conta i totali per bucket, non la co-occorrenza delle due
-//     forme sulla stessa riga, quindi non copriva questo caso.
 const SWEEP_ASSERTION_RE = /stesso anti-?pattern|file gemello|stesso costrutto|sibling|class-complete|ramo (?:equivalente|gemello)/iu;
 // (A) negazione PRIMA del verbo: «nessun impatto su …», «nulla tocca …»,
 //     «nessun articolo nuovo raggiunge …», «no impact on …».
@@ -307,12 +301,14 @@ const NEGATED_IMPACT_CLAUSE_RE =
 // (B) negazione DOPO il verbo, in forma contrastiva: «il ramo tocca l'automazione
 //     delle issue di CI, non `dist/api/`, le sitemap, i feed o gli slug». Qui il
 //     vocabolario del bucket sta nella coda negata, quindi si toglie SOLO quella
-//     (lookbehind a lunghezza variabile: cio' che precede la virgola resta
-//     scansionabile e un finding vero non viene mangiato). La virgola e la
-//     contrastivita' sono obbligatorie: sono cio' che distingue questa coda da un
-//     «non» qualsiasi piu' avanti nella frase.
+//     (il gruppo catturato conserva cio' che precede la virgola, senza un lookbehind
+//     a lunghezza fissa). Se nella stessa clausola compaiono piu' verbi di impatto,
+//     il corpo temperato forza il match sull'ULTIMO: un verbo piu' a sinistra non puo'
+//     mangiare il prefisso legittimo del finding. La virgola e la contrastivita' sono
+//     obbligatorie: sono cio' che distingue questa coda da un «non» qualsiasi piu'
+//     avanti nella frase.
 const CONTRASTIVE_NEGATED_TAIL_RE =
-  new RegExp(String.raw`(?<=\b(?:${IMPACT_VERB})\b${CLAUSE_BODY}{0,120}),\s*(?:e\s+|ma\s+)?(?:non|not)\b${CLAUSE_BODY}*`, 'giu');
+  new RegExp(String.raw`(\b(?:${IMPACT_VERB})\b(?:(?!\b(?:${IMPACT_VERB})\b)${CLAUSE_BODY})*?),\s*(?:e\s+|ma\s+)?(?:non|not)\b${CLAUSE_BODY}*`, 'giu');
 // Confine di frase, nella STESSA accezione di `CLAUSE_BODY`: `;`, `—`, a capo, e
 // il punto solo se seguito da spazio o fine riga (dentro un code span non lo e').
 // Tenerne una definizione sola e' cio' che impedisce al guard di sweep e allo
@@ -333,14 +329,14 @@ function sentenceAround(text, start, end) {
 
 export function stripNegatedImpactClauses(text) {
   const s = String(text ?? '');
-  // Il guard (C) e' per-frase: la clausola resta solo se il tell di sweep sta
-  // nella SUA frase. Entrambe le regex sono capture-free, quindi il replacer
-  // riceve `(match, offset, whole)`.
+  // Preserve sweep assertions only in their own sentence. The contrastive
+  // regex captures the legitimate prefix, which must survive the stripping.
   const stripUnlessSweep = (match, offset, whole) =>
-    (SWEEP_ASSERTION_RE.test(sentenceAround(whole, offset, offset + match.length)) ? match : ' ');
+    SWEEP_ASSERTION_RE.test(sentenceAround(whole, offset, offset + match.length)) ? match : ' ';
   return s
     .replace(NEGATED_IMPACT_CLAUSE_RE, stripUnlessSweep)
-    .replace(CONTRASTIVE_NEGATED_TAIL_RE, stripUnlessSweep);
+    .replace(CONTRASTIVE_NEGATED_TAIL_RE, (match, prefix, offset, whole) =>
+      SWEEP_ASSERTION_RE.test(sentenceAround(whole, offset, offset + match.length)) ? match : prefix + ' ');
 }
 
 export function bucketFinding(text) {
@@ -364,7 +360,22 @@ export function bucketFinding(text) {
     if (t.key === 'sibling-class-fix' && !isGenuineSiblingClassViolation(text)) continue;
     return t.key;
   }
-  return fingerprintFinding(scannable); // unbucketed → fingerprint safety net (or null)
+  // La rete fingerprint riceve il testo INTERO, non quello strippato. Lo strip e'
+  // un'euristica sul CONFINE della clausola negata, e su una riga in cui la
+  // negazione porta su un participio o su un verbo di impatto usato in senso
+  // comportamentale — «il redirect non raggiunge `/lavoro/ticino`, il canonical
+  // resta rotto» — mangia anche la coda, che e' il difetto vero. Se anche il
+  // safety net vedesse il testo strippato, quella riga cadrebbe attraverso
+  // ENTRAMBI i livelli e sparirebbe dal tally: nessuna escalation, mai. E' la
+  // direzione opposta a quella che questo modulo chiude (il falso positivo
+  // GONFIA un bucket; questo lo SVUOTA in silenzio) ed e' la piu' pericolosa,
+  // perche' invisibile. Passando `text` la riga perde al piu' il bucket topic,
+  // ma resta contata e puo' ancora escalare.
+  // Misurato su 651 righe con glifo di 172 review reali dei due repo: cambiano 6
+  // righe, NESSUN bucket topic si muove (5 cambiano solo la lead-phrase del
+  // fingerprint, 1 rientra nella rete da `null`), quindi il rimedio a #901 resta
+  // intatto e i due controesempi smettono di sparire.
+  return fingerprintFinding(text); // unbucketed → fingerprint safety net (or null)
 }
 
 // Severities that count as a CONFIRMED recurring mistake. `❓` is an
@@ -411,7 +422,9 @@ export function tallyFindings(prs, { bucketOf = bucketFinding } = {}) {
   for (const { number, reviews, mergedAt } of prs || []) {
     const seenBuckets = new Set(); // per-PR dedup across all its reviews
     for (const r of reviews || []) {
-      if (!REVIEWER_BOT_LOGIN_RE.test(r.author?.login || '')) continue;
+      // GraphQL exposes bot logins without the REST [bot] suffix.
+      const reviewerLogin = String(r.author?.login || '').replace(/\[bot\]$/i, '') + '[bot]';
+      if (!REVIEWER_BOT_LOGIN_RE.test(reviewerLogin)) continue;
       for (const line of String(r.body || '').split('\n')) {
         const sev = detectSeverity(line);
         if (!sev || !COUNTABLE_SEVERITIES.has(sev)) continue;
@@ -437,135 +450,80 @@ export function tallyFindings(prs, { bucketOf = bucketFinding } = {}) {
 // re-fires escalation #2290 perpetually with no actionable fix (you cannot make
 // the gate aggressive enough without dropping real bugs — explicitly forbidden by
 // the gate's bias-to-PROCEED invariant). Those two classes:
-//   1. AGGREGATE follow-ups ("N item deferred", N≥2, sweep/batch/bulk, o item enumerati
-//      nel corpo): the gate refuses to short-circuit them (one item resolved ≠ all).
-//      Il titolo porta il conteggio verbatim SOLO quando post-merge-followup.yml lo
-//      scrive (AGENTS.md #925); quando non lo scrive gli item stanno nel BODY, che dal
-//      #568 questo classificatore legge (`hasEnumeratedItems`) — il body arriva dalla
-//      `issue list` che questo stadio fa comunque, senza una fetch in più.
+//   1. AGGREGATE follow-ups ("N item deferred", N≥2, or sweep/batch/bulk): the gate
+//      refuses to short-circuit them (one item resolved ≠ all). Their title carries
+//      the count verbatim (post-merge-followup.yml batches them, AGENTS.md #925), so
+//      this is detectable from the title alone — no extra body fetch.
 //   2. NON-follow-up issues (crawler-health, validation-failure, free-form): the
 //      gate's scope is `follow-up`-labelled only; everything else is always let
 //      through. A crawler-health `stale` that auto-resolves transiently (#2147) can
 //      never be pre-empted by a content-token matcher.
 // Same feedback-loop class as the reconcile-bot / pre-flight-deterministic skips in
 // the outcome loop below: don't count burn that no safe gate could have prevented.
-/**
- * Item enumerati STRUTTURALMENTE nel body: `## 1.` / `## 2.` (>=2 sezioni numerate),
- * `1. **Titolo.**` / `2. **Titolo.**` (>=2 item di lista ordinata con lead in grassetto)
- * oppure `- **Titolo**` / `- [ ] **Titolo**` (>=2 bullet top-level con lead in grassetto).
- *
- * Perche' esiste (#568): i rilevatori di aggregati leggevano SOLO il titolo — un conteggio
- * esplicito ("N items deferred", N>=2) o le parole `sweep|batch|bulk`. I follow-up
- * multi-item che post-merge-followup.yml genera SENZA conteggio nel titolo (clausole unite
- * da "+", item enumerati nel corpo) restavano invisibili. Misurato il 2026-09-05 su tre
- * esempi dell'escalation #560: #374 (5 item, dichiarati tali dal fixer stesso), #505 (2) e
- * #466 (3) davano `isAggregate` false su 3/3 e `isAvoidableAlreadyFixed` true su 3/3 —
- * cioe' contati come burn "evitabile" dal gate dell'harvester pur essendo aggregati la cui
- * risoluzione e' scaglionata su piu' PR, gonfiando proprio il bucket che ha innescato #560.
- *
- * La direzione dell'errore e' sicura per la PRE-FLIGHT (un falso positivo fa PROCEDERE il
- * fixer) ma NON per reconcile: li' un aggregato inventato toglie l'auto-chiusura e lascia
- * la issue in coda a tempo indefinito, cioe' fa CRESCERE la coda (#926). Per questo il
- * conteggio salta i blocchi recintati e chiede un lead-TITOLO in grassetto, non un'enfasi. Il conteggio esplicito nel titolo resta
- * autoritativo e continua a corto-circuitare PRIMA di qui (#3378).
- *
- * DUPLICATA di proposito in `check-issue-already-resolved.mjs`, `harvest-agent-lessons.mjs`
- * e `reconcile-followups.mjs`: i tre file sono `mode: identical` nel manifest, quindi
- * estrarre un modulo comune e' lavoro del SITO (una de-duplicazione fatta qui viene
- * sovrascritta al mirror successivo — stessa ragione gia' scritta nel manifest per
- * `needs-human-prepass.mjs`). Il legame e' coperto da un test invece che da un import,
- * che e' l'uscita prevista da AGENTS.md #6 nella forma di `ci-check-name.test.mjs`:
- * `generator/tests/aggregate-detectors-agree.test.mjs` fallisce se una copia diverge.
- *
- * @param {string} body corpo della issue
- * @returns {boolean} true se il corpo enumera >=2 item
- */
+function stripFencedBlocks(text) {
+  const lines = String(text || '').split('\n');
+  const out = [];
+  let fence = null;
+  let fenceStart = -1;
+
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i];
+    const match = /^([ \t]*)(`{3,}|~{3,})/.exec(line);
+    if (fence) {
+      const closes = match
+        && match[2][0] === fence.char
+        && match[2].length >= fence.length
+        && match[1].length >= fence.indent;
+      if (closes) fence = null;
+      continue;
+    }
+    if (match) {
+      fence = { char: match[2][0], length: match[2].length, indent: match[1].length };
+      fenceStart = i;
+      continue;
+    }
+    out.push(line);
+  }
+
+  return fence ? [...out, ...lines.slice(fenceStart)].join('\n') : out.join('\n');
+}
+
 export function hasEnumeratedItems(body) {
-  const b = stripFencedBlocks(String(body || ''));
-  const numberedSections = (b.match(/^#{2,4}[ \t]*\d+[.)](?=[ \t]|$)/gm) || []).length;
+  const b = stripFencedBlocks(body);
+  const numberedSections = (b.match(/^#{2,4}[ \t]*(?:Item[ \t]*)?\d+[ \t]*[.)—–](?=[ \t]|$)/gim) || []).length;
   if (numberedSections >= 2) return true;
-  // Lista ordinata con lead in grassetto: `1. **Titolo.**` / `2. **Titolo.**` (#831, #832).
-  // Il grassetto e' cio' che distingue l'item enumerato dai passi di una procedura numerata,
-  // ma solo se apre a inizio riga e chiude sulla stessa riga (`isBoldTitleLead`, #926).
   const lines = b.split('\n');
-  const orderedBoldItems = lines.filter((l) => {
-    const m = /^[ \t]*\d+[.)][ \t]+(.*)$/.exec(l);
-    return m ? isBoldTitleLead(m[1]) : false;
-  }).length;
+  const orderedBoldItems = lines.reduce((count, line, index) => {
+    const match = /^[ \t]*\d+[.)][ \t]+(.*)$/.exec(line);
+    return count + (match && isBoldTitleLead(match[1], lines, index + 1) ? 1 : 0);
+  }, 0);
   if (orderedBoldItems >= 2) return true;
-  const boldLeadBullets = lines.filter((l) => {
-    const m = /^[-*][ \t]+(?:\[[ xX]\][ \t]*)?(.*)$/.exec(l);
-    return m ? isBoldTitleLead(m[1]) : false;
-  }).length;
+  const boldLeadBullets = lines.reduce((count, line, index) => {
+    const match = /^[-*][ \t]+(?:\[[ xX]\][ \t]*)?(.*)$/.exec(line);
+    return count + (match && isBoldTitleLead(match[1], lines, index + 1) ? 1 : 0);
+  }, 0);
   return boldLeadBullets >= 2;
 }
 
-/**
- * Righe dentro un blocco recintato (\`\`\` o ~~~) rimosse prima del conteggio (#926).
- *
- * Un follow-up a UN SOLO item il cui corpo incolla uno snippet markdown — forma
- * comune quando la scheda cita il diff o il template — enumerava item che non
- * esistono: `hasEnumeratedItems` tornava true e `reconcile-followups.mjs`
- * (`closeEligible = ... && !isAggregate`) smetteva di auto-chiuderlo per sempre,
- * lasciandolo in coda a tempo indefinito. Un aggregato INVENTATO non e' il lato
- * sicuro dell'errore: fa crescere la coda invece di far bruciare un tentativo.
- *
- * @param {string} text
- * @returns {string} lo stesso testo senza le righe recintate (fence inclusi)
- */
-function stripFencedBlocks(text) {
-  const out = [];
-  let fence = '';
-  for (const line of text.split('\n')) {
-    const m = /^[ \t]{0,3}(`{3,}|~{3,})/.exec(line);
-    if (fence) {
-      // Chiude solo un fence dello stesso carattere e lungo almeno quanto l'apertura.
-      if (m && m[1][0] === fence[0] && m[1].length >= fence.length) fence = '';
-      continue;
-    }
-    if (m) { fence = m[1]; continue; }
-    out.push(line);
+function isBoldTitleLead(rest, lines = [], start = 0) {
+  const bold = /^\*\*(?![ \t])(?:[^*]|\*(?!\*))+\*\*/;
+  let candidate = String(rest || '');
+  if (bold.test(candidate)) return true;
+  for (let i = start; i < lines.length; i++) {
+    const line = lines[i];
+    if (/^[ \t]*(?:\d+[.)]|[-*])[ \t]+/.test(line)) break;
+    candidate += '\n' + line;
+    if (bold.test(candidate)) return true;
   }
-  return out.join('\n');
+  return false;
 }
 
-/**
- * Il resto di una riga di lista inizia con un lead in grassetto? (#926)
- *
- * Criterio deliberatamente minimo: il grassetto apre a inizio riga e CHIUDE
- * sulla stessa riga. Niente requisiti su punteggiatura o su cosa segue.
- *
- * La versione precedente chiedeva anche che il grassetto portasse dentro la
- * punteggiatura (`**Titolo.**`) o fosse seguito da fine riga o da un separatore
- * (`**Titolo**:`, `**Titolo** —`), per escludere l'enfasi in mezzo alla prosa
- * (`2. **nota** finale che non e' un item`). Ma quel caso non e' separabile
- * lessicalmente dal lead-titolo piu' comune di questo repo — grassetto che
- * finisce con inline-code e continua con testo qualsiasi, nella forma
- * "- **<inline-code>** (alimenta …)" (#551, #549). Misurato sulle issue
- * `follow-up` vive, il criterio stretto trasformava aggregati reali in
- * single-item, cioe' rendeva `closeEligible` una
- * issue i cui item sono per davvero due: auto-chiusura sulla prova di UN solo
- * item, il drop silenzioso che #568 esiste per impedire.
- *
- * Il falso positivo che resta (un grassetto d'enfasi conta come item, e la issue
- * non si auto-chiude) fa crescere la coda; il falso negativo evitato e'
- * irreversibile. La direzione dell'errore e' scelta, non subita.
- *
- * @param {string} rest testo della riga dopo il marcatore di lista
- * @returns {boolean}
- */
-function isBoldTitleLead(rest) {
-  return /^\*\*(?![ \t])(?:[^*\n]|\*(?!\*))+\*\*/.test(rest);
-}
-
-// Pure → unit-tested. `labels` is an array of label-name strings; `body` è il corpo della
-// issue, opzionale solo per retro-compatibilità delle firme — senza di esso i follow-up
-// multi-item che enumerano gli item nel corpo tornano a contare come burn evitabile (#568).
+// Pure → unit-tested. `labels` is an array of label-name strings.
 export function isAvoidableAlreadyFixed(title, labels, body = '') {
   const names = Array.isArray(labels) ? labels : [];
   if (!names.includes('follow-up')) return false; // out of the gate's scope
   const t = String(title || '');
-  const m = t.match(/(\d+)\s+items?\s+deferred/i);
+  const m = t.match(/\b(\d+)\s+items?\s+(?:deferred|deferit[oi])\b/i);
   // An explicit count is authoritative once present — no keyword fallback
   // needed (and none applied), else a single-item title containing an
   // ordinary word like "batch" (e.g. "1 item deferred ... batch backfill...")
@@ -676,7 +634,7 @@ export function isAvoidableMaxTurns(title, labels, delivery = false, body = '') 
   //     count is authoritative once present, no keyword fallback needed (else a
   //     single-item title containing an ordinary word like "batch" was
   //     misclassified as an aggregate, #3378).
-  const m = t.match(/(\d+)\s+items?\s+deferred/i);
+  const m = t.match(/\b(\d+)\s+items?\s+(?:deferred|deferit[oi])\b/i);
   if (m) return Number(m[1]) < 2;
   if (/\b(?:sweep|batch|bulk)\b/i.test(t)) return false; // aggregate by keyword (no explicit count stated)
   if (hasEnumeratedItems(body)) return false; // aggregate by enumerazione nel corpo (#568)
@@ -966,17 +924,37 @@ export function examplesSinceFix(examples, cutoffMs) {
   });
 }
 
-function escalationBody(c) {
-  const examples = (c.examples || [])
-    .map((e) => '#' + (e.pr || e.issue))
-    .filter((s) => s !== '#undefined')
+function formatExamples(c) {
+  return (c.examples || [])
+    .map((e) => e.pr || e.issue)
+    .filter(Boolean)
+    .map((value) => `#${value}`)
     .join(', ') || '—';
+}
+
+export function buildEscalationSignals(c) {
+  return {
+    cosa: `bucket ${c.source}/${c.key}: pattern documentato che ricorre nonostante la regola`,
+    metrica: {
+      osservato: c.count,
+      atteso: `< ${THRESHOLD}×${EFFICACY_FACTOR} occorrenze nella finestra`,
+    },
+    comando: 'node scripts/ci/harvest-agent-lessons.mjs --dry-run',
+    evidenza: [
+      `bucket=${c.source}/${c.key}`,
+      `finestra=${WINDOW_DAYS}gg dal ${sinceDay}`,
+      `esempi=${formatExamples(c)}`,
+    ],
+  };
+}
+
+function escalationBody(c) {
   return [
     '## Bucket',
     `\`${c.source}/${c.key}\` — count **${c.count}** su finestra ${WINDOW_DAYS}gg (dal ${sinceDay})`,
     '',
     '## Esempi PR/issue',
-    examples,
+    formatExamples(c),
     '',
     '## Perché escalare',
     `Pattern GIÀ documentato ma che ricorre ≥ soglia×fattore-efficacia ` +
@@ -1026,7 +1004,7 @@ async function main() {
   // visible without reading 31 run logs by hand.
   const recoverableMaxTurns = [];
   const fixIssues = ghJson(['issue', 'list', '--search', `label:agent:triaged updated:>=${sinceDay}`,
-    '--state', 'all', '--limit', String(MAX_ISSUES), '--json', 'number,title,labels,body']) || [];
+    '--state', 'all', '--limit', String(MAX_ISSUES), '--json', 'number,title,labels']) || [];
   for (const issue of fixIssues.slice(0, MAX_ISSUES)) {
     const { number } = issue;
     const labelNames = (issue.labels || []).map((l) => l.name);
@@ -1256,6 +1234,7 @@ async function main() {
         const res = await createGithubIssue({
           title: escalationTitle(c),
           description: escalationBody(c),
+          signals: buildEscalationSignals(c),
           priority: 2,
           labels: ['follow-up'],
           workflow: 'Lessons harvester',
@@ -1289,6 +1268,10 @@ async function main() {
     for (const iss of openEsc) {
       const key = parseEscalationKey(iss.title);
       if (liveKeys.has(key)) continue; // ancora attivo → lascia aperta
+      if (NO_AUTOCLOSE) {
+        console.log(`SELF-HEAL close skipped #${iss.number} — no-autoclose`);
+        continue;
+      }
       try {
         gh(['issue', 'comment', String(iss.number), '--body',
           `🌱 Self-heal: il bucket \`${key}\` non ricorre più sopra soglia nella finestra ${WINDOW_DAYS}gg (dal ${sinceDay}) → il pattern si è fermato. Chiusa dal lessons-harvester. Riemergerà in automatico se torna a ricorrere.`]);

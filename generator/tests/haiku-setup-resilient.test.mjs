@@ -85,17 +85,22 @@ test('generate-article: continue-on-error non è finito, per errore, sull\'inter
   // Non basta cercare la chiave a colonna 0 (lì non può stare in un workflow):
   // un flag a livello di job vive a 4 spazi sotto `generate:` e renderebbe
   // verde il job anche su un fallimento reale della generazione. L'invariante
-  // vera è: OGNI occorrenza del flag nel file sta dentro lo step chiamante di
-  // Haiku, e lì ce n'è una sola.
+  // vera è: le occorrenze stanno nello step Haiku oppure nel cleanup broker
+  // esplicitamente best-effort; nessun altro step può assorbire la generazione.
   const step = callerStepBlock(GA);
   const inStep = (step.match(/continue-on-error:/g) ?? []).length;
   const total = (GA.match(/continue-on-error:/g) ?? []).length;
+  const cleanup = GA.match(
+    /- name: Cleanup Codex auth broker[\s\S]*?(?=\n      - name:|$)/,
+  )?.[0] ?? '';
+  const inCleanup = (cleanup.match(/continue-on-error:/g) ?? []).length;
   assert.equal(inStep, 1, 'lo step chiamante di Haiku deve avere esattamente un `continue-on-error`');
+  assert.equal(inCleanup, 1, 'il cleanup broker deve essere best-effort esattamente una volta');
   assert.equal(
     total,
-    inStep,
-    'C\'è un `continue-on-error` fuori dallo step chiamante di Haiku (a livello di job, o su un ' +
-      'altro step): renderebbe verdi fallimenti reali. Deve restare sullo step Haiku soltanto — ' +
-      'se un altro step lo acquisisce di proposito, aggiorna questo test dichiarandolo.',
+    inStep + inCleanup,
+    'C\'è un `continue-on-error` fuori dagli step Haiku e cleanup broker (a livello di job, o su ' +
+      'un altro step): renderebbe verdi fallimenti reali. Se un altro step lo acquisisce di ' +
+      'proposito, aggiorna questo test dichiarandolo.',
   );
 });

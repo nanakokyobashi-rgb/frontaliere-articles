@@ -31,7 +31,9 @@ on:
   workflow_dispatch:
 
 concurrency:
-  group: followup-drainer
+  # Shared repo-scoped mutex with post-merge-followup and followup-reconcile:
+  # queue promotion must not race a daily bucket append or sealing pass.
+  group: followup-daily-${{ github.repository }}
   cancel-in-progress: false
 
 permissions:

@@ -792,9 +792,14 @@ test('la guardia non e\' advisory: un fallimento ferma davvero il push', () => {
   // commit, quindi va pinnata la sua PRECONDIZIONE: nessuno dei due deve
   // acquisire un `always()`.
   const after = sliceBetween(WF, '      - name: Generate responsive image thumbnail', '      - name: Summary');
-  assert.ok(
-    !/if: always\(\)/.test(after),
-    'un always() su thumbnail o commit rimetterebbe l\'articolo bocciato sulla strada di main',
+  const alwaysSteps = after
+    .split(/\n(?=      - name: )/)
+    .filter((step) => /if: always\(\)/.test(step))
+    .map((step) => (step.match(/^      - name: (.+)$/m) || [])[1]);
+  assert.deepEqual(
+    alwaysSteps,
+    ['Cleanup Codex auth broker'],
+    'solo la cleanup nominata del broker puo usare always(): thumbnail e commit devono restare protetti',
   );
 });
 

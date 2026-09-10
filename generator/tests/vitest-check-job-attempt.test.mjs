@@ -136,7 +136,9 @@ test('pr-autorebase chiede i job dell\'attempt corrente, non /actions/jobs/<id>'
   const script = fs.readFileSync(path.join(ROOT, 'scripts/ci/pr-autorebase.mjs'), 'utf8');
   assert.match(script, /actions\/runs\/\$\{ref\.runId\}\/jobs\?filter=latest/,
     'il fetch degli step deve passare per la lista filter=latest del run');
-  assert.ok(!/actions\/jobs\/\$\{/.test(script),
+  const completedJobReader = script.match(/function vitestJobSteps\(head\) \{[\s\S]*?^\}/m)?.[0];
+  assert.ok(completedJobReader, 'completed job reader must exist');
+  assert.ok(!/actions\/jobs\/\$\{/.test(completedJobReader),
     '`/actions/jobs/<id>` risponde anche per un attempt superato: non e\' un oracolo di freschezza');
   assert.match(script, /currentAttemptJobSteps\(/,
     'gli step devono passare dalla verifica di attempt/identita\'');

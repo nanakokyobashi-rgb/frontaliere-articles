@@ -64,6 +64,7 @@
  * Exit 0 sempre (anche quando NON mergia): un gate non soddisfatto è un esito
  * atteso (l'altro trigger ri-valuterà), non un errore di workflow.
  */
+import { isReviewTestPath, findTestOnlyApproval } from './review-test-policy.mjs';
 import { execFileSync } from 'node:child_process';
 import {
   VITEST_CHECK_NAME,
@@ -174,7 +175,7 @@ export function codeContributionFingerprint(files) {
   if (!Array.isArray(files)) return null;
   const parts = [];
   for (const f of files) {
-    if (NON_REVIEWABLE_FINGERPRINT_RE.test(f.filename || '')) continue; // dati/static: non è contributo CODE
+    if ((isReviewTestPath(f.filename) && (!f.previous_filename || isReviewTestPath(f.previous_filename))) || NON_REVIEWABLE_FINGERPRINT_RE.test(f.filename || '')) continue; // dati/static: non è contributo CODE
     // `patch` assente (binario/troppo grande) su un file CODE modificato -> bail.
     if (f.patch === undefined && f.status !== 'removed' && f.status !== 'added') return null;
     // Tieni SOLO le righe di contenuto +/- (escludi header +++/--- e hunk @@):
@@ -407,7 +408,8 @@ async function main() {
   const botReviews = (reviews || []).filter(
     (r) => r.user && r.user.type === 'Bot' && REVIEWER_BOT_LOGIN_RE.test(r.user.login || '')
   );
-  const lastBot = botReviews.length ? botReviews[botReviews.length - 1] : null;
+  const lastBot = findTestOnlyApproval(reviews, head, { ghFn: gh, repo: REPO, pr: PR })
+    || (botReviews.length ? botReviews[botReviews.length - 1] : null);
   const body = lastBot ? (lastBot.body || '') : '';
   // Un 🔴 Important reale del reviewer BLOCCA se resta nel diff o non è
   // risolvibile; un finding fuori diff passa solo dopo il follow-up. Marker tollerante al
