@@ -244,9 +244,18 @@ jobs:
         id: count
         run: |
           set -euo pipefail
-          MODIFIED=$(git diff --name-only -- content/blog-body/ | wc -l | tr -d ' ')
+          BLOG_MODIFIED=$(git status --porcelain=v1 --untracked-files=all -- content/blog-body/ | wc -l | tr -d ' ')
+          STATE_MODIFIED=0
+          if [ -e data/faq-locale-rejections.json ]; then
+            if git ls-files --error-unmatch data/faq-locale-rejections.json >/dev/null 2>&1; then
+              if ! git diff --quiet -- data/faq-locale-rejections.json; then STATE_MODIFIED=1; fi
+            else
+              STATE_MODIFIED=1
+            fi
+          fi
+          MODIFIED=$((BLOG_MODIFIED + STATE_MODIFIED))
           echo "modified_count=$MODIFIED" >> "$GITHUB_OUTPUT"
-          echo "modified blog body files: $MODIFIED"
+          echo "modified FAQ content/state files: $MODIFIED"
 
       - name: Commit and push changes
         if: steps.mode.outputs.dry != 'true' && steps.count.outputs.modified_count != '0'
@@ -259,6 +268,9 @@ jobs:
 
           git add content/blog-body/
           git add -f data/batch-faq-progress.json 2>/dev/null || true
+          if [ -e data/faq-locale-rejections.json ]; then
+            git add -f data/faq-locale-rejections.json
+          fi
 
           if git diff --cached --quiet; then
             echo "no staged changes — nothing to commit"

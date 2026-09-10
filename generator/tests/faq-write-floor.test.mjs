@@ -25,7 +25,17 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { MIN_FAQ_PAIRS, belowFaqFloor, minPairsForWrite } from '../scripts/fix-faq-locales.mjs';
+import {
+  FAQ_REJECTION_MAX_CONSECUTIVE,
+  MIN_FAQ_PAIRS,
+  belowFaqFloor,
+  belowFaqSourceCount,
+  faqLocaleIssueKey,
+  faqSourceFingerprint,
+  minPairsForWrite,
+  nextFaqRejection,
+  shouldSkipFaqRejection,
+} from '../scripts/fix-faq-locales.mjs';
 
 const QUI = path.dirname(fileURLToPath(import.meta.url));
 const BATCH = path.join(QUI, '..', 'scripts', 'batch-add-faq-to-articles.mjs');
@@ -54,6 +64,31 @@ test('sotto il pavimento la scrittura e\' rifiutata, sopra e\' ammessa', () => {
   assert.equal(belowFaqFloor(null, pairs(4)), true, 'nessuna coppia non e\' una scrittura valida');
 });
 
+test('il rilevatore riaccoda un locale che ha meno FAQ della sorgente', () => {
+  assert.equal(belowFaqSourceCount(pairs(3), pairs(8)), true, '3/8 deve restare visibile');
+  assert.equal(belowFaqSourceCount(pairs(8), pairs(8)), false);
+  assert.equal(belowFaqSourceCount(pairs(2), pairs(1)), false);
+  assert.equal(belowFaqSourceCount(null, pairs(8)), false, 'un literal illeggibile non e\' misurabile qui');
+});
+
+test('il ledger ferma il rifiuto deterministico dopo due run sulla stessa sorgente', () => {
+  const source = pairs(3);
+  const changedSource = pairs(4);
+  const key = faqLocaleIssueKey('articolo', 'en');
+  assert.equal(key, 'frontaliere/articolo/en');
+  assert.equal(faqSourceFingerprint(source), faqSourceFingerprint(source));
+
+  const first = nextFaqRejection(undefined, source);
+  const second = nextFaqRejection(first, source);
+  assert.equal(first.consecutive, 1);
+  assert.equal(second.consecutive, FAQ_REJECTION_MAX_CONSECUTIVE);
+  assert.equal(shouldSkipFaqRejection(first, source), false);
+  assert.equal(shouldSkipFaqRejection(second, source), true);
+  assert.equal(shouldSkipFaqRejection(second, changedSource), false, 'una sorgente cambiata riapre il tentativo');
+  assert.equal(nextFaqRejection(second, changedSource).consecutive, 1);
+  assert.equal(nextFaqRejection({ source: faqSourceFingerprint(source), consecutive: 'corrupt' }, source).consecutive, 1);
+});
+
 test('ENTRAMBI gli scrittori consultano il pavimento prima di scrivere', () => {
   // La classe, non il singolo file: `translateFaq` (batch) e il ramo
   // `wrong` di `main()` (fix-faq-locales) potano con lo stesso
@@ -66,6 +101,18 @@ test('ENTRAMBI gli scrittori consultano il pavimento prima di scrivere', () => {
       + 'scriverebbe un set troncato che nessun rilevatore riaccoda',
     );
   }
+});
+
+test('il fix-faq rende osservabile il deficit e persiste il blocco di ritraduzione', () => {
+  const src = fs.readFileSync(FIX, 'utf-8');
+  assert.match(src, /reason: 'below_source_count'/);
+  assert.match(src, /shouldSkipFaqRejection\(/);
+  assert.match(src, /nextFaqRejection\(/);
+
+  const workflow = fs.readFileSync(path.join(QUI, '..', '..', '.github', 'workflows', 'batch-faq-articles.yml'), 'utf-8');
+  assert.match(workflow, /data\/faq-locale-rejections\.json/);
+  assert.match(workflow, /git status --porcelain=v1/);
+  assert.match(workflow, /git add -f data\/faq-locale-rejections\.json/);
 });
 
 test('MIN_FAQ_PAIRS ha UNA sorgente sola', () => {
