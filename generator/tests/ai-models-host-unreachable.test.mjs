@@ -1243,7 +1243,7 @@ describe('#813 — l\'escalation del flap salta i provider di ultima risorsa', (
  *      niente.
  */
 describe('callLLM — il contatore dei flap del resolver (#818)', () => {
-  const ENV_KEYS = ['AI_MODELS_FORCE_CHAIN', 'GH_MODELS_PAT', 'AI_MODELS_PREFER'];
+  const ENV_KEYS = ['AI_MODELS_FORCE_CHAIN', 'GH_MODELS_PAT', 'COHERE_API_KEY', 'AI_MODELS_PREFER'];
   let envBackup = {};
   let realFetch;
 
@@ -1345,7 +1345,7 @@ describe('callLLM — il contatore dei flap del resolver (#818)', () => {
     assert.equal(err.exhaustionBreakdown.persistent, 1, `l'escalation deve prevalere sulla parola «aborted»: ${JSON.stringify(err.exhaustionBreakdown)}`);
   });
 
-  it('classifica una causa persistente oltre il limite del testo mostrato', async () => {
+  it('classifica un 401 persistente anche quando la causa supera la riga mostrata', async () => {
     process.env.AI_MODELS_FORCE_CHAIN = 'gpt-4o-mini';
     globalThis.fetch = async () => {
       throw new Error(`${'x'.repeat(200)} HTTP 401 invalid api key`);
@@ -1355,12 +1355,88 @@ describe('callLLM — il contatore dei flap del resolver (#818)', () => {
     assert.ok(err, 'la catena deve fallire');
     assert.equal(err.exhaustionBreakdown.transient, 0);
     assert.equal(err.exhaustionBreakdown.persistent, 1,
-      `la causa oltre i 200 caratteri deve entrare nel voto: ${JSON.stringify(err.exhaustionBreakdown)}`);
+      `la coda non autorevole non deve entrare nel voto: ${JSON.stringify(err.exhaustionBreakdown)}`);
+  });
+
+  it('legge dal testo intero una causa persistente oltre la finestra del transitorio', () => {
+    const body = 'x'.repeat(220) + ' HTTP 403 insufficient credits';
+    const b = classifyExhaustionCause([
+      { reason: 'gh/m1: ' + body, authoritative: null, transientWindow: 200 },
+    ]);
+    assert.equal(b.transient, 0, 'la finestra iniziale non contiene un token transitorio');
+    assert.equal(b.persistent, 1, 'il vocabolario persistente deve leggere la causa completa');
+  });
+
+  it('conserva il verdetto persistente autorevole e lo serializza nella riga', async () => {
+    process.env.AI_MODELS_FORCE_CHAIN = 'gpt-4o-mini';
+    globalThis.fetch = async () => new Response('invalid api key', { status: 401 });
+
+    const err = await run();
+    assert.ok(err, 'la catena deve fallire');
+    assert.equal(err.exhaustionBreakdown.transient, 0);
+    assert.equal(err.exhaustionBreakdown.persistent, 1,
+      `un HTTP 401 autorevole deve votare persistente: ${JSON.stringify(err.exhaustionBreakdown)}`);
+    assert.match(err.message, /\[authoritative-cause=persistent\]/);
+  });
+
+  it('non promuove unavailable_model o schema_unsupported a persistente', async () => {
+    process.env.AI_MODELS_FORCE_CHAIN = 'gpt-4o-mini';
+    for (const body of ['unavailable_model', 'unsupported parameter: response_format is not supported']) {
+      resetState();
+      globalThis.fetch = async () => new Response(body, { status: 400 });
+      const err = await run();
+      assert.ok(err, 'la catena deve fallire');
+      assert.equal(err.exhaustionBreakdown.transient, 0, body);
+      assert.equal(err.exhaustionBreakdown.persistent, 0, body);
+    }
+  });
+
+  it('un messaggio persistente esterno impedisce a EAI_AGAIN annidato di votare flap', async () => {
+    process.env.AI_MODELS_FORCE_CHAIN = 'gpt-4o-mini';
+    globalThis.fetch = async () => {
+      throw Object.assign(new Error('HTTP 401 invalid api key'), {
+        cause: undiciFetchFailed('EAI_AGAIN').cause,
+      });
+    };
+
+    const err = await run();
+    assert.ok(err, 'la catena deve fallire');
+    assert.equal(getStats().resolverFlaps.github, undefined,
+      'una causa persistente di primo livello non deve aprire una striscia resolver');
+    assert.equal(err.exhaustionBreakdown.transient, 0);
+    assert.equal(err.exhaustionBreakdown.persistent, 1,
+      `il persistent esterno deve prevalere sul resolver annidato: ${JSON.stringify(err.exhaustionBreakdown)}`);
+  });
+
+  it('gli skip sintetici su taglia sono persistenti anche con numeri che sembrano 5xx', async () => {
+    process.env.AI_MODELS_FORCE_CHAIN = 'cohere/command-r-08-2024';
+    process.env.COHERE_API_KEY = 'test-key';
+
+    const err = await callLLM([{ role: 'user', content: 'x' }], {
+      ...OPTS,
+      maxTokens: 999999,
+    }).then(() => null, (e) => e);
+    assert.ok(err, 'lo skip di pre-flight deve produrre un errore aggregato');
+    assert.equal(err.exhaustionBreakdown.transient, 0);
+    assert.equal(err.exhaustionBreakdown.persistent, 1,
+      `lo skip max-output deve essere autorevolmente persistente: ${JSON.stringify(err.exhaustionBreakdown)}`);
+    assert.match(err.message, /\[authoritative-cause=persistent\]/);
+  });
+
+  it('marca come persistente anche lo skip sul cap di input', async () => {
+    process.env.AI_MODELS_FORCE_CHAIN = 'gpt-4o-mini';
+
+    const err = await callLLM([{ role: 'user', content: 'x'.repeat(20000) }], OPTS)
+      .then(() => null, (e) => e);
+    assert.ok(err, 'lo skip del cap di input deve produrre un errore aggregato');
+    assert.match(err.message, /input cap/);
+    assert.equal(err.exhaustionBreakdown.transient, 0);
+    assert.equal(err.exhaustionBreakdown.persistent, 1,
+      `lo skip input-cap deve essere autorevolmente persistente: ${JSON.stringify(err.exhaustionBreakdown)}`);
   });
 
   it('non lascia votare il vocabolario transitorio sulla coda oltre la riga mostrata', () => {
-    // La finestra piena serve alla causa PERSISTENTE (test sopra). Se la
-    // togliesse anche a `transientRe`, il corpo di un errore di provider —
+    // Il corpo di un errore di provider —
     // `x-request-id: 503abc`, `aborted`, `temporarily` centinaia di caratteri
     // dopo la causa vera — voterebbe transitorio da solo, spostando la
     // maggioranza verso il differimento verde senza articolo.

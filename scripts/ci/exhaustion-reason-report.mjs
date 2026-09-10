@@ -79,7 +79,10 @@
 
 import { execFileSync } from 'node:child_process';
 
-import { classifyExhaustionCause } from '../../generator/scripts/lib/ai-models.mjs';
+import {
+  authoritativeCauseFromText,
+  classifyExhaustionCause,
+} from '../../generator/scripts/lib/ai-models.mjs';
 import { isTransientMajority } from '../../generator/scripts/lib/exhaustion-disposition.mjs';
 
 /**
@@ -241,7 +244,7 @@ const CHAIN_SEPARATOR = ' → ';
  * Pura → testabile.
  *
  * @param {string} text testo di log
- * @returns {Array<{errors: string[], capCount: number}>} una voce per cascata svuotata
+ * @returns {Array<{errors: Array<string|{reason: string, authoritative: string}>, capCount: number}>} una voce per cascata svuotata
  */
 export function parseAggregateExhaustion(text) {
   const out = [];
@@ -252,8 +255,14 @@ export function parseAggregateExhaustion(text) {
     const parts = splitErrorEntries(m[2], chain);
     const budget = parts.find((p) => p.startsWith('Prompt budget:'));
     const capMatch = budget && budget.match(/Prompt budget:\s*(\d+) model/);
+    const errors = parts
+      .filter((p) => !p.startsWith('Prompt budget:'))
+      .map((p) => {
+        const authoritative = authoritativeCauseFromText(p);
+        return authoritative ? { reason: p, authoritative } : p;
+      });
     out.push({
-      errors: parts.filter((p) => !p.startsWith('Prompt budget:')),
+      errors,
       capCount: capMatch ? Number(capMatch[1]) : 0,
     });
   }
@@ -355,7 +364,7 @@ export function splitErrorEntries(payload, chainModels) {
  *
  * Pura → testabile.
  *
- * @param {{errors: string[], capCount: number}} cascade
+ * @param {{errors: Array<string|{reason: string, authoritative: string}>, capCount: number}} cascade
  * @returns {{breakdown: object, grossTransient: boolean, netTransient: boolean, grossVeto: boolean, netVeto: boolean, flip: boolean}}
  */
 export function deferralVerdicts(cascade) {

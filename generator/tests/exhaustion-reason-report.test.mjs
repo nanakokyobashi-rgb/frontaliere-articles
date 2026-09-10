@@ -256,6 +256,19 @@ test('la coda `Prompt budget:` non e\' una riga di errore, ma e\' la premessa de
   assert.equal(v.netVeto, true, 'e resta tale al netto: qui non ci sono echi');
 });
 
+test('il report conserva il verdetto autorevole serializzato nella riga', () => {
+  const msg = 'All AI models failed. Chain: [gpt-4o-mini]. Errors: '
+    + 'gpt-4o-mini: HTTP 401: invalid api key [authoritative-cause=persistent]';
+  const [cascade] = parseAggregateExhaustion(msg);
+
+  assert.deepEqual(cascade.errors, [{
+    reason: 'gpt-4o-mini: HTTP 401: invalid api key [authoritative-cause=persistent]',
+    authoritative: 'persistent',
+  }]);
+  assert.equal(deferralVerdicts(cascade).breakdown.transient, 0);
+  assert.equal(deferralVerdicts(cascade).breakdown.persistent, 1);
+});
+
 test('senza `inputCapReport` il veto non si applica e non entra nel confronto', () => {
   // Distinguere «non si applica» da «si applica e dice no»: contare la prima
   // come `veto=false` gonfierebbe il denominatore del flip con cascate su cui
