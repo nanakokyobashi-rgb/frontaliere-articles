@@ -42,6 +42,14 @@
  */
 import { mkdirSync, realpathSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
+import {
+  inputCapVetoSummary,
+  isExhaustionBreakdownTotalValid,
+  isInputCapDeferralVeto,
+  isLegitimateQuotaDeferral,
+  normalizeExhaustionBreakdown,
+  quotaDeferralShare,
+} from './exhaustion-disposition.mjs';
 
 /**
  * La radice del workspace, dedotta dalla posizione di questo modulo
@@ -115,6 +123,61 @@ export function buildRunCard(report) {
       ? rare.promptFloor
       : null,
   };
+}
+
+/**
+ * Sanitize one card at the JSON replay boundary. A live card has a valid
+ * `errors.length` denominator; a hand-edited or older card may not. Keep the
+ * raw event visible, rebuild the smallest safe breakdown, and do not claim a
+ * share from an inferred population. Input-cap provenance can still be
+ * recomputed from its own stored refusal count.
+ *
+ * @param {any} card
+ * @returns {any}
+ */
+export function normalizeRunCard(card) {
+  if (!card || typeof card !== 'object') return card;
+  const qd = card.quotaDeferral;
+  if (!qd || typeof qd !== 'object' || Array.isArray(qd)) return card;
+  const sourceBreakdown = qd.breakdown;
+  const breakdown = normalizeExhaustionBreakdown(sourceBreakdown);
+  if (!breakdown) {
+    return {
+      ...card,
+      quotaDeferral: { ...qd, breakdown: null, share: null, verdict: false, inputCapVeto: false },
+    };
+  }
+  const inputCapDecision = (qd.inputCapDecision
+    && typeof qd.inputCapDecision === 'object'
+    && !Array.isArray(qd.inputCapDecision))
+    ? qd.inputCapDecision
+    : null;
+  const err = {
+    code: 'ALL_MODELS_EXHAUSTED',
+    exhaustionBreakdown: breakdown,
+  };
+  if (inputCapDecision) {
+    err.inputCapReport = {
+      count: inputCapDecision.refusals,
+      estimatedRequestTokens: inputCapDecision.estimatedRequestTokens,
+      maxSkippedReqLimit: inputCapDecision.maxSkippedReqLimit,
+    };
+  }
+  const repaired = !isExhaustionBreakdownTotalValid(sourceBreakdown);
+  const next = {
+    ...qd,
+    breakdown,
+    share: repaired ? null : quotaDeferralShare(err),
+    verdict: repaired ? false : isLegitimateQuotaDeferral(err),
+  };
+  if (inputCapDecision) {
+    next.inputCapVeto = isInputCapDeferralVeto(err);
+    next.inputCapDecision = {
+      ...inputCapDecision,
+      ...inputCapVetoSummary(err),
+    };
+  }
+  return { ...card, quotaDeferral: next };
 }
 
 /**

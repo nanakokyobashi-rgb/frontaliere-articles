@@ -39,7 +39,11 @@ import {
 import {
   readCards, ARTIFACT_GLOB, classifyDownloadFailure, classifyCardlessRun, dirBytes, humanBytes, formatSummary,
 } from '../../scripts/ci/run-card-report.mjs';
-import { isLegitimateQuotaDeferral, quotaDeferralShare } from '../scripts/lib/exhaustion-disposition.mjs';
+import {
+  isLegitimateQuotaDeferral,
+  isTransientMajority,
+  quotaDeferralShare,
+} from '../scripts/lib/exhaustion-disposition.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const read = (rel) => fs.readFileSync(path.join(ROOT, rel), 'utf8');
@@ -241,6 +245,31 @@ test('readCards legge le card da una cartella di artifact scaricati', () => {
   // Una card corrotta si CONTA: farla sparire ricrea lo stesso difetto, un
   // denominatore che non dice cosa non ha visto.
   assert.equal(unreadable, 1);
+});
+
+test('readCards normalizza un breakdown rigiocato prima del riepilogo (#1267)', () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'run-card-replay-'));
+  const replayed = cardWith(11, 106, 53);
+  delete replayed.quotaDeferral.breakdown.total;
+  replayed.quotaDeferral.inputCapDecision = {
+    refusals: 1,
+    estimatedRequestTokens: 9,
+    maxSkippedReqLimit: 4,
+  };
+  fs.writeFileSync(path.join(dir, 'run-card-frontaliere.json'), JSON.stringify(replayed));
+
+  const { cards, unreadable } = readCards(dir);
+  assert.equal(unreadable, 0);
+  assert.equal(cards.length, 1);
+  const qd = cards[0].quotaDeferral;
+  assert.equal(qd.breakdown.total, 106, 'il denominatore rigiocato diventa almeno la somma dei due secchi');
+  assert.equal(qd.share, null, 'un totale inferito non puo\' sostenere uno share storico');
+  assert.equal(qd.verdict, false, 'la card rigiocata non viene promossa a differimento');
+  assert.equal(qd.inputCapVeto, true, 'il voto input-cap rigiocato usa il breakdown normalizzato');
+  assert.equal(isTransientMajority(qd.breakdown, { tie: 'transient' }), false);
+
+  const summary = summariseRunCards(cards);
+  assert.equal(summary.cascadesWithoutTally, 1, 'la card resta visibile ma non entra nei conteggi come un tally inventato');
 });
 
 test('classifyDownloadFailure separa «nessun artifact» da un guasto di gh (#924 item 3)', () => {
