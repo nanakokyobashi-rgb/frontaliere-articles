@@ -24,7 +24,6 @@ function normalizePath(value) {
     .replace(/^\.\//, '')
     .replace(/:L?\d+$/i, '');
 }
-
 /** Path citati nel testo, senza eventuali suffissi di riga. */
 export function citedPaths(text) {
   const out = [];
@@ -198,4 +197,3 @@ export function machineAdmission(text, opts = {}) {
     return 'unknown';
   }
 }
-

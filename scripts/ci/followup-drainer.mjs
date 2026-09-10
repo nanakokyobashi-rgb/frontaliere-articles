@@ -2331,7 +2331,7 @@ export const WORKFLOWS_CAPABILITY_SOURCES = Object.freeze({
  * Capacità di pushare `.github/workflows/**` con UNA identità dichiarata.
  *
  * Da usare nei job che hanno già pinnato la credenziale di push (es. lo step
- * «Promote validated crawlers» di `prospector-loop.yml`, che riscrive il remote
+ * «Promote validated crawlers» del workflow di promozione, che riscrive il remote
  * su `x-access-token:${APP_TOKEN}`): una sola sorgente per identità, così la
  * capacità letta e l'identità che pusha non possono divergere.
  *

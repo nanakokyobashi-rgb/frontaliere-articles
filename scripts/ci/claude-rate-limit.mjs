@@ -62,7 +62,7 @@
  * cui la quota torna disponibile, quindi il backoff non è un'euristica a tempo
  * ma una scadenza dichiarata dal server.
  *
- * NB: `pr-review-loop.yml` gestiva già il 429 dal suo lato (exit 0 con warning,
+ * NB: il vecchio workflow di review gestiva già il 429 dal suo lato (exit 0 con warning,
  * per non innescare re-run amplificanti) con una grep inline in bash; non è
  * stato consolidato qui perché toccare quel file impone il vincolo di
  * byte-identità con `main` del reviewer (AGENTS.md → workflow-validation drift)

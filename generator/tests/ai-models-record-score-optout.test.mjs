@@ -898,8 +898,11 @@ describe('#887 — nessun gate `recordScore` attorno alla chiamata', () => {
       'un gate attorno alla chiamata salta anche il tally di run: la run diagnostica si stampa 0ok/0ko sui modelli che ha chiamato',
     );
 
-    for (const fn of ['recordModelSuccess', 'recordModelFailure']) {
-      const calls = [...SRC.matchAll(new RegExp(`\\n\\s+${fn}\\(model[,)]`, 'g'))];
+    for (const [fn, modelExpression] of [
+      ['recordModelSuccess', 'servedModel'],
+      ['recordModelFailure', 'model'],
+    ]) {
+      const calls = [...SRC.matchAll(new RegExp(`\\n\\s+${fn}\\(${modelExpression}[,)]`, 'g'))];
       assert.ok(calls.length > 0, `atteso almeno un call site interno di ${fn}`);
     }
   });

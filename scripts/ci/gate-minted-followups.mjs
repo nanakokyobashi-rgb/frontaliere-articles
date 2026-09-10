@@ -40,7 +40,7 @@
  * IL PREZZO, dichiarato. Un item demoto che era lavoro vero esce dal tracciamento e
  * sopravvive solo nel commento della PR. Succede: #7646 item 1 cita due path e
  * `CRAWLER_GENERATION_TOKEN` ma nudi, fuori da una riga `Suggested action`; #6192 item 1
- * cita `SYSTEMIC_RATE_CEILING` e `post-deploy-validate-dist.yml`. Il verso è deliberato:
+ * cita `SYSTEMIC_RATE_CEILING` e il precedente gate di deploy. Il verso è deliberato:
  * un item che nessun check potrà mai dichiarare affrontato non è lavoro tracciabile ma un
  * promemoria, e 13 promemoria al giorno in coda hanno un costo che si misura.
  *
@@ -1146,7 +1146,7 @@ function main() {
             continue;
           }
           gh(['issue', 'comment', String(iss.number), ...repoArgs, '--body',
-            `${why}\n\nNessun item valido resta: questa issue non sarebbe mai potuta uscire dalla coda (\`aggregateCloseGate()\` la blocca per costruzione). Chiusa in ingresso; il testo resta qui e nel commento di summary della PR #${pr}. Se un item era lavoro vero, riaprilo come issue autonoma con una riga \`Suggested action\` che citi il simbolo **nella sua forma di codice**: un identificatore nudo (\`nomeFunzione\`) e un path nudo (\`scripts/ci/foo.mjs\`) non contano, perché compaiono nel file citato a prescindere dal fix — servono \`nomeFunzione()\`, \`oggetto.campo\`, \`COSTANTE >= 1\` o simili (\`isDistinctiveToken()\`, classe #1647). In alternativa, e spesso piu' facile, dagli una scheda: una riga \`- METRICA: prima=<n> atteso=<n> | COMANDO: <comando che nomina un file, uno script o un test>\`. Il referente non deve esistere ancora — lo crea la PR di fix — ma una metrica gia' al bersaglio (\`prima=N atteso=N\`) viene rifiutata: non c'e' niente da muovere.`],
+            `${why}\n\nNessun item valido resta: questa issue non sarebbe mai potuta uscire dalla coda (\`aggregateCloseGate()\` la blocca per costruzione). Chiusa in ingresso; il testo resta qui e nel commento di summary della PR #${pr}. Se un item era lavoro vero, riaprilo come issue autonoma con una riga \`Suggested action\` che citi il simbolo **nella sua forma di codice**: un identificatore nudo (\`nomeFunzione\`) e un path nudo (\`un file d'esempio\`) non contano, perché compaiono nel file citato a prescindere dal fix — servono \`nomeFunzione()\`, \`oggetto.campo\`, \`COSTANTE >= 1\` o simili (\`isDistinctiveToken()\`, classe #1647). In alternativa, e spesso piu' facile, dagli una scheda: una riga \`- METRICA: prima=<n> atteso=<n> | COMANDO: <comando che nomina un file, uno script o un test>\`. Il referente non deve esistere ancora — lo crea la PR di fix — ma una metrica gia' al bersaglio (\`prima=N atteso=N\`) viene rifiutata: non c'e' niente da muovere.`],
             { allowFail: true });
           report.push(`- 🚫 #${iss.number} soppressa in ingresso (${d.demoted.length} item senza condizione di accettazione) — PR #${pr}`);
         } else {

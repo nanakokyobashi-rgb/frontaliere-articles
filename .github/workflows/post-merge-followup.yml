@@ -249,6 +249,7 @@ jobs:
         # Claude and switches to the one-shot Codex subscription fallback only on
         # a detected usage-limit/quota response.
         env:
+          CLAUDE_CODE_SUBPROCESS_ENV_SCRUB: 0
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BATCH_PRS: ${{ steps.collect.outputs.batch_prs }}
           BATCH_COUNT: ${{ steps.collect.outputs.batch_count }}

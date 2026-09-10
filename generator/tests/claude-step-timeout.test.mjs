@@ -45,7 +45,7 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..')
 const WORKFLOW_DIR = path.join(ROOT, '.github/workflows');
 
 /** L'action che identifica uno step "Claude" ovunque nel repo. */
-const CLAUDE_ACTION = /uses:\s*anthropics\/claude-code-action/;
+const CLAUDE_ACTION = /uses:\s*(?:anthropics\/claude-code-action|\.\/\.github\/actions\/claude-codex-fallback)/;
 
 /**
  * Tetto massimo accettato per uno step Claude. 120 minuti sono ~10x la piu'

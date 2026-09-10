@@ -56,8 +56,9 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..')
 const CI_DIR = path.join(ROOT, 'scripts/ci');
 const CALLER = path.join(CI_DIR, 'collect-followup-batch.mjs');
 
-// `runGate('nome.mjs', ...)` — solo il primo argomento, che e' il nome del file.
-const RUN_GATE_CALL = /\brunGate\(\s*(['"])([^'"]+)\1/g;
+// `runGate('nome.mjs', ...)` e `runGateOutput('nome.mjs', ...)` — solo il
+// primo argomento, che e' il nome del file.
+const RUN_GATE_CALL = /\b(?:runGateOutput|runGate)(?![A-Za-z_$])\(\s*(['"])([^'"]+)\1/g;
 // `import { a, b as c } from './rel.mjs'` — solo gli import NOMINATI e RELATIVI.
 const NAMED_IMPORT = /import\s*\{([^}]*)\}\s*from\s*(['"])(\.[^'"]+)\2/g;
 
@@ -84,7 +85,7 @@ function gateNames() {
   return [...source.matchAll(RUN_GATE_CALL)].map((m) => m[2]);
 }
 
-test('ogni gate invocato da runGate() esiste in scripts/ci/', () => {
+test('ogni gate invocato da runGate/runGateOutput() esiste in scripts/ci/', () => {
   const names = gateNames();
 
   // Guardia sul test stesso: se un refactor rinomina `runGate` o passa il nome
@@ -92,7 +93,7 @@ test('ogni gate invocato da runGate() esiste in scripts/ci/', () => {
   // verde a vuoto — che e' il falso verde che questo file esiste per impedire.
   assert.ok(
     names.length >= 2,
-    `Attese almeno 2 chiamate runGate() in ${path.relative(ROOT, CALLER)}, trovate ${names.length}. ` +
+    `Attese almeno 2 chiamate runGate/runGateOutput() in ${path.relative(ROOT, CALLER)}, trovate ${names.length}. ` +
     'Se le chiamate sono cambiate forma, aggiorna RUN_GATE_CALL: un test che non trova nulla non protegge nulla.',
   );
 
