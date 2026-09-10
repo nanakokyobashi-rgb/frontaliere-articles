@@ -69,6 +69,8 @@
  * senza alcun guadagno di comportamento. Vedi `## Non implementato` della PR.
  */
 
+import { FIX_OUTCOME_RE } from './claude-rate-limit-contract.mjs';
+
 /** Codice FIX_OUTCOME granulare per una run che non è mai partita per quota. */
 export const RATE_LIMITED_OUTCOME = 'rate-limited';
 
@@ -81,6 +83,55 @@ export const RATE_LIMITED_OUTCOME = 'rate-limited';
  * di dover toccare quella regex (e di romperla per tutti gli altri codici).
  */
 export const QUOTA_RESETS_RE = /<!--\s*QUOTA_RESETS_AT:\s*(\d{9,13})\s*-->/i;
+
+/**
+ * Bot identities allowed to mint a quota beacon. A marker in an issue comment
+ * is not evidence by itself: a human can type the same HTML comment, and a
+ * forged beacon must never suppress a Claude run or trigger Codex.
+ *
+ * GraphQL returns the login without `[bot]` while REST returns it with the
+ * suffix, so validation canonicalizes both forms before this allow-list check.
+ */
+export const AUTHORIZED_QUOTA_BEACON_BOTS = Object.freeze([
+  'github-actions',
+  'claude',
+  'frontaliere-automation',
+]);
+const AUTHORIZED_QUOTA_BEACON_BOT_SET = new Set(AUTHORIZED_QUOTA_BEACON_BOTS);
+
+function commentLogin(comment) {
+  const login = comment?.author?.login ?? comment?.user?.login;
+  return String(login || '').trim().toLowerCase().replace(/\[bot\]$/, '');
+}
+
+function isAuthorizedBotComment(comment) {
+  const login = commentLogin(comment);
+  if (!AUTHORIZED_QUOTA_BEACON_BOT_SET.has(login)) return false;
+  // REST's type flag is authoritative when present. GraphQL comments do not
+  // expose it, so the explicit login allow-list is the fallback there.
+  if (comment?.user?.type && String(comment.user.type).toLowerCase() !== 'bot') return false;
+  return true;
+}
+
+/** True only for a complete, bot-authored FIX_OUTCOME marker. */
+function isAuthorizedFixOutcomeComment(comment) {
+  if (!isAuthorizedBotComment(comment)) return false;
+  return FIX_OUTCOME_RE.test(String(comment?.body || ''));
+}
+
+/**
+ * True only for the exact quota beacon contract: an authorized automation bot
+ * authored both the `rate-limited` outcome and a parseable reset marker in the
+ * same comment. Human look-alikes and partial markers are rejected.
+ *
+ * @param {{body?: string, author?: {login?: string}, user?: {login?: string, type?: string}}} comment
+ */
+export function isAuthorizedQuotaBeaconComment(comment) {
+  if (!isAuthorizedFixOutcomeComment(comment)) return false;
+  const match = FIX_OUTCOME_RE.exec(String(comment?.body || ''));
+  return match?.[1]?.toLowerCase() === RATE_LIMITED_OUTCOME
+    && parseQuotaResetsAt(comment?.body || '') !== null;
+}
 
 /**
  * Parsa l'execution file della claude-code-action, che può essere un array JSON
@@ -269,6 +320,7 @@ export function parseQuotaResetsAt(body) {
 export function maxQuotaResetsAt(comments) {
   let best = null;
   for (const c of comments || []) {
+    if (!isAuthorizedQuotaBeaconComment(c)) continue;
     const r = parseQuotaResetsAt(c?.body || '');
     if (r !== null && (best === null || r > best)) best = r;
   }
