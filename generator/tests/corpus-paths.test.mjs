@@ -40,6 +40,15 @@ test('preserves a trailing slash, because git-add pathspecs carry one', () => {
   assert.equal(corpusPath('services/locales/blog-body/'), 'content/blog-body/');
 });
 
+test('maps the roots of every mapped prefix before the fail-closed guard (#1262)', () => {
+  assert.equal(corpusPath('services/seo'), 'content/seo');
+  assert.equal(corpusPath('services/seo/'), 'content/seo/');
+  assert.equal(corpusPath('services/locales'), 'content');
+  assert.equal(corpusPath('services/locales/'), 'content/');
+  assert.equal(corpusPath('packages/articles/content'), 'content');
+  assert.equal(corpusPath('packages/articles/content/'), 'content/');
+});
+
 test('leaves the generator’s own state files under data/ alone', () => {
   // The whole reason the mapping is an explicit table rather than a
   // `data/ -> content/` prefix rule: these MOVE with the generator (§3) and

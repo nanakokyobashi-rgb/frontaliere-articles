@@ -36,6 +36,8 @@ import { ARTICLE_SECTION_CORE } from './shared/articleSectionCore.mjs';
 export const BASE_URL = 'https://frontaliereticino.ch';
 export const RSS_LOCALES = ['it', 'en', 'de', 'fr'];
 export const RSS_MAX_ITEMS = 50;
+/** Maximum source span used for one SEO entry by every corpus consumer. */
+export const SEO_ENTRY_WINDOW = 4000;
 
 /**
  * Every frontaliere SEO chunk, including the one new articles are written to.
@@ -163,8 +165,10 @@ function parseSeoBlogs(fs, path, rootDir, seoDir, seoFiles) {
 
     for (let i = 0; i < entryPositions.length; i++) {
       const { articleId, start } = entryPositions[i];
-      const end = i + 1 < entryPositions.length ? entryPositions[i + 1].start : start + 4000;
-      const block = src.slice(start, Math.min(end, start + 4000));
+      const end = i + 1 < entryPositions.length
+        ? entryPositions[i + 1].start
+        : start + SEO_ENTRY_WINDOW;
+      const block = src.slice(start, Math.min(end, start + SEO_ENTRY_WINDOW));
 
       // `(?:[^"\\]|\\.)*`, not `[^"]+`: create-article escapes literal quotes in
       // these values (`.replace(/"/g, '\\"')`), and the naive class stops at the

@@ -28,6 +28,9 @@
  */
 import fs from 'node:fs';
 import path from 'node:path';
+import { SEO_ENTRY_WINDOW } from '../../engine/rssFeeds.mjs';
+
+export { SEO_ENTRY_WINDOW };
 
 /**
  * Quanta parte del corpus sorgente deve sopravvivere fino all'artefatto.
@@ -240,11 +243,6 @@ export function sectionFloor(root, section, retention = FLOOR_RETENTION) {
  */
 export const SEO_CHUNK_DIR = path.join('content', 'seo');
 
-// Misurato sul corpus reale: il blocco piu' lungo osservato e' 4414 caratteri.
-// Il margine evita che il parser del gate torni cieco appena una voce cresce,
-// mantenendo comunque un limite esplicito e condiviso con build-api.
-export const SEO_ENTRY_WINDOW = 5000;
-
 /**
  * Le voci di un chunk SEO che diventano davvero `<item>`, aggiunte a `into`.
  *
@@ -258,10 +256,9 @@ export const SEO_ENTRY_WINDOW = 5000;
  * capace di muoversi da sola (due su sette letti, feed fermo tre mesi).
  *
  * I criteri ricalcano quelli di `parseSeoBlogs`, che e' il produttore: stesso
- * regex di inizio voce, stessi campi obbligatori e una finestra di riferimento
- * portata a 5000 caratteri. Il margine rispetto alla finestra storica di 4000
- * evita che il pavimento riproduca in silenzio lo stesso troncamento del
- * produttore. L'insieme e' un Set di articleId perche' la',
+ * regex di inizio voce, stessi campi obbligatori e la stessa finestra di
+ * riferimento `SEO_ENTRY_WINDOW`. Cosi' il pavimento non puo' contare una voce
+ * oltre il limite che il feed non legge. L'insieme e' un Set di articleId perche' la',
  * un livello sopra, le voci finiscono in una Map chiavata per articleId: due
  * chunk che citano lo stesso id producono UN item, non due.
  *

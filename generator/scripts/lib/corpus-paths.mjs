@@ -87,6 +87,11 @@ export function corpusPath(rel) {
       const mapped = `${to}${bare.slice(from.length)}`;
       return trailingSlash ? `${mapped}/` : mapped;
     }
+    const prefixRoot = from.slice(0, -1);
+    if (bare === prefixRoot) {
+      const mapped = to.endsWith('/') ? to.slice(0, -1) : to;
+      return trailingSlash ? `${mapped}/` : mapped;
+    }
   }
 
   // `services/` is the generator's main-layout namespace. Returning an

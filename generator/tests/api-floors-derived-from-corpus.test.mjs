@@ -62,6 +62,7 @@ import {
   measureDist,
   expectFromCorpus,
 } from '../../scripts/ci/verify-api-floors.mjs';
+import { SEO_ENTRY_WINDOW as PRODUCER_SEO_ENTRY_WINDOW } from '../../engine/rssFeeds.mjs';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
 const WORKFLOW = fs.readFileSync(join(ROOT, '.github/workflows/publish-api.yml'), 'utf-8');
@@ -402,7 +403,8 @@ test('countSeoEntries conta le voci come le conta parseSeoBlogs', () => {
   assert.equal(collectSeoEntryIds('nessuna voce qui').size, 0);
   const metadata = collectSeoEntryMetadata(entry('long'));
   assert.equal(metadata.get('long').headline, 'T long');
-  assert.ok(SEO_ENTRY_WINDOW >= 4414, 'la finestra deve contenere il massimo misurato + margine');
+  assert.equal(SEO_ENTRY_WINDOW, PRODUCER_SEO_ENTRY_WINDOW, 'corpus e producer devono leggere la stessa finestra');
+  assert.equal(SEO_ENTRY_WINDOW, 4000, 'la finestra resta quella del parser producer');
   fs.rmSync(dir, { recursive: true, force: true });
 });
 
