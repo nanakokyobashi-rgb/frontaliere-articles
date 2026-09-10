@@ -62,15 +62,20 @@
  */
 import { execFileSync, spawnSync } from 'node:child_process';
 import { readFileSync, writeFileSync } from 'node:fs';
-import { VITEST_CHECK_NAME, REVIEWER_BOT_LOGIN_RE } from './lib/constants.mjs';
+import {
+  VITEST_CHECK_NAME,
+  VITEST_EXECUTION_JOB_NAME,
+  isReviewerBot,
+} from './lib/constants.mjs';
 import {
   latestCompletedVitestConclusion,
-  latestCompletedVitestRun,
+  latestCompletedVitestExecutionRun,
   vitestVerdictIsTransientCancellation,
   vitestFailureIsNotAttributableToPr,
   vitestFailureIsReviewGate,
   reviewSkippedByGuard,
   reviewAbortedWithoutVerdict,
+  reviewStepIsInFlight,
   jobRefFromCheckRun,
   currentAttemptJobSteps,
 } from './lib/vitestCheck.mjs';
@@ -87,6 +92,7 @@ import {
   decideNeedsHumanPass,
   renderReopenBudget,
 } from './lib/reopen-breaker.mjs';
+import { intFromEnv } from '../lib/int-from-env.mjs';
 
 const DRY = process.argv.includes('--dry-run');
 const REPO = process.env.GITHUB_REPOSITORY || '';
@@ -95,14 +101,14 @@ const MAX_PER_RUN = 10;
 // Costo tipico di una PR nel loop, misurato sui run reali (fase di lavoro
 // 19-114s per 1-10 PR): ~30s copre il caso normale con margine. È una STIMA per
 // decidere se COMINCIARE, non un timer: nessuna PR viene interrotta a metà.
-const PR_COST_MS = Number(process.env.AUTOREBASE_PR_COST_MS || 30_000);
+const PR_COST_MS = intFromEnv('AUTOREBASE_PR_COST_MS', 30_000);
 // Sezione critica NON atomica: `gh pr close` + `gh pr reopen`. Se il job muore
 // fra le due la PR resta CHIUSA e nessuno la riapre (vedi reopenToRetrigger).
 // Non si entra senza il tempo di uscirne — con margine largo rispetto a due
 // chiamate API che nel caso peggiore ritentano.
 /** Tentativi di reopen e pausa fra uno e l'altro — vedi reopenToRetrigger. */
-const REOPEN_ATTEMPTS = Number(process.env.AUTOREBASE_REOPEN_ATTEMPTS || 4);
-const REOPEN_RETRY_SLEEP_S = Number(process.env.AUTOREBASE_REOPEN_RETRY_SLEEP_S || 5);
+const REOPEN_ATTEMPTS = Math.max(4, intFromEnv('AUTOREBASE_REOPEN_ATTEMPTS', 4));
+const REOPEN_RETRY_SLEEP_S = intFromEnv('AUTOREBASE_REOPEN_RETRY_SLEEP_S', 5);
 /**
  * DERIVATO dai due sopra, non scritto a mano: il guard vale solo se il tempo
  * riservato copre davvero il peggior caso della sezione critica. Con un numero
@@ -111,8 +117,7 @@ const REOPEN_RETRY_SLEEP_S = Number(process.env.AUTOREBASE_REOPEN_RETRY_SLEEP_S 
  * job muore fra `close` e `reopen` lasciando la PR chiusa.
  * close + N chiamate reopen (≈3s l'una, generoso su un'API degradata) + le pause.
  */
-const REOPEN_COST_MS = Number(process.env.AUTOREBASE_REOPEN_COST_MS
-  || 3_000 + REOPEN_ATTEMPTS * 3_000 + (REOPEN_ATTEMPTS - 1) * REOPEN_RETRY_SLEEP_S * 1_000);
+const REOPEN_COST_MS = intFromEnv('AUTOREBASE_REOPEN_COST_MS', 3_000 + REOPEN_ATTEMPTS * 3_000 + (REOPEN_ATTEMPTS - 1) * REOPEN_RETRY_SLEEP_S * 1_000);
 /**
  * Etichetta che dice al worktree-branch-janitor di NON cancellare l'head ref di
  * questa PR. Si applica solo quando la coppia close+reopen si è rotta a metà:
@@ -120,7 +125,7 @@ const REOPEN_COST_MS = Number(process.env.AUTOREBASE_REOPEN_COST_MS
  */
 const REOPEN_FAILED_LABEL = 'autorebase-reopen-failed';
 /** Tetto di riaperture sullo STESSO stato — vedi lib/reopen-breaker.mjs. */
-const MAX_REOPENS = Number(process.env.AUTOREBASE_MAX_REOPENS || DEFAULT_MAX_REOPENS);
+const MAX_REOPENS = intFromEnv('AUTOREBASE_MAX_REOPENS', DEFAULT_MAX_REOPENS);
 
 const budget = runBudgetFromEnv();
 const CONFLICT_MARKER = '<!-- AUTOREBASE_CONFLICT -->';
@@ -153,7 +158,7 @@ const STUCK_RED_MARKER = '<!-- AUTOREBASE_STUCK_RED_RESCUE -->';
 // vecchio di N ore va ri-verificato una volta anche senza prova di main-rosso
 // (copre i fallimenti INFRA, es. #5019: `RPC failed; curl 56` + runner shutdown
 // durante il checkout, zero test eseguiti, con main verde in quel momento).
-const STUCK_RED_STALE_H = Number(process.env.AUTOREBASE_STUCK_RED_STALE_H || 24);
+const STUCK_RED_STALE_H = intFromEnv('AUTOREBASE_STUCK_RED_STALE_H', 24);
 // Re-trigger one-shot per il rosso da REVIEW GATE (#7429). Dall'unificazione
 // tests+review del 2026-08-26 il job `vitest (unit + integration)` è rosso anche
 // quando i test passano e a fallire è lo step `Require approving Claude review`:
@@ -172,7 +177,7 @@ const STUCK_RED_STALE_H = Number(process.env.AUTOREBASE_STUCK_RED_STALE_H || 24)
 // non-fast-forward push is rejected, and they must fetch+reset+cherry-pick to
 // recover (observed on #1616 this session). The rebase isn't urgent — main is
 // always seconds-fresh — so deferring one tick (~30m) is free. 0 disables.
-const ACTIVITY_GUARD_MIN = Number(process.env.AUTOREBASE_ACTIVITY_GUARD_MIN || 6);
+const ACTIVITY_GUARD_MIN = intFromEnv('AUTOREBASE_ACTIVITY_GUARD_MIN', 6);
 
 function gh(args, { json = true, allowFail = false } = {}) {
   try {
@@ -287,8 +292,7 @@ function hasLgtmReview(num) {
   const reviews = gh(['api', `repos/${REPO}/pulls/${num}/reviews`, '--paginate'], { allowFail: true });
   if (!Array.isArray(reviews)) return false;
   return reviews.some(
-    (r) => r.user && r.user.type === 'Bot' && REVIEWER_BOT_LOGIN_RE.test(r.user.login || '') &&
-      (r.body || '').includes('## LGTM')
+    (r) => isReviewerBot(r.user) && (r.body || '').includes('## LGTM')
   );
 }
 
@@ -299,9 +303,7 @@ function hasLgtmReview(num) {
 function hasAnyClaudeReview(num) {
   const reviews = gh(['api', `repos/${REPO}/pulls/${num}/reviews`, '--paginate'], { allowFail: true });
   if (!Array.isArray(reviews)) return true; // fail-safe: su errore API assumi review esistente (no reopen)
-  return reviews.some(
-    (r) => r.user && r.user.type === 'Bot' && REVIEWER_BOT_LOGIN_RE.test(r.user.login || '')
-  );
+  return reviews.some((r) => isReviewerBot(r.user));
 }
 
 /** Re-trigger DETERMINISTICO di review+tests per una PR classe-A: il push PAT
@@ -425,19 +427,9 @@ function guardedReopen(num, head, { stuckRedReason = '' } = {}) {
   // Rosso da review gate: causa del messaggio SEMPRE (anche a one-shot già
   // speso, altrimenti il commento tornerebbe a dire «far passare i test» a una
   // PR i cui test sono verdi), ma esenzione dalla precondizione una volta sola.
-  // Una sola lettura degli step del job: le tre domande — «di chi è il rosso»,
-  // «la review è girata su quella run» e «è arrivata in fondo» — si rispondono
-  // sulla STESSA lista.
   const steps = vitestConclusion === 'failure' ? vitestJobSteps(head) : [];
   const reviewGateRed = vitestFailureIsReviewGate(steps);
-  // Review saltata dal `Re-review guard`: il gate è rosso sui verdetti già
-  // postati e un re-trigger ri-esegue il guard, che salta di nuovo → il
-  // one-shot andrebbe speso per un no-op. Non si concede (e lo sticky lo dice).
   const reviewSkipped = reviewGateRed && reviewSkippedByGuard(steps);
-  // Review PARTITA e morta senza postare: il gate è rosso di conseguenza, non
-  // per un verdetto negativo. Il one-shot si concede (il re-trigger è la cura),
-  // ma il messaggio deve mandare a rilanciare la review, non a chiudere un
-  // `🔴 Important` che non è mai stato scritto.
   const reviewAborted = reviewGateRed && reviewAbortedWithoutVerdict(steps);
   const reviewGateReason = reviewGateRed && !reviewSkipped && !(prior && prior.reviewGateUsed)
     ? 'review-gate' : '';
@@ -587,24 +579,25 @@ function mainTestsRuns() {
 /** Gli step del job che ha prodotto l'ultimo check-run vitest COMPLETATO
  * sull'head. Il job id si ricava dal `details_url` del check-run
  * (`.../runs/<run_id>/job/<job_id>`), che è l'unico riferimento che la
- * check-runs API dà al job di Actions — ma quel puntatore NON garantisce
- * l'attempt corrente: dopo un «Re-run failed jobs» descrive l'attempt
- * precedente, e la lista di step sarebbe stantia. Si chiedono quindi i job
- * dell'attempt corrente del run (`filter=latest`) e si accettano gli step solo
- * se quel job è ancora fra loro e descrive lo stesso verdetto del check-run
- * (`currentAttemptJobSteps`). `[]` se il link non è parsabile, la chiamata
- * fallisce o il job è di un attempt superato → `vitestFailureIsReviewGate`
- * risponde `false` e vale la precondizione normale (fail-CLOSED: nel dubbio
- * non si ricicla). */
+ * check-runs API dà al job di Actions. Accetta solo il job del tentativo
+ * corrente con lo stesso head e verdetto: un rerun può lasciare link vecchi.
+ * `[]` se il link non è parsabile, il job è superato o la chiamata fallisce →
+ * `vitestFailureIsReviewGate` risponde `false` e vale la
+ * precondizione normale (fail-CLOSED: nel dubbio non si ricicla). */
+const _vitestJobSteps = new Map();
 function vitestJobSteps(head) {
-  const last = latestCompletedVitestRun(checkRunsOf(head));
+  if (_vitestJobSteps.has(head)) return _vitestJobSteps.get(head);
+  const last = latestCompletedVitestExecutionRun(checkRunsOf(head));
   const ref = jobRefFromCheckRun(last);
-  if (!ref) return [];
-  const out = gh(
-    ['api', `repos/${REPO}/actions/runs/${ref.runId}/jobs?filter=latest&per_page=100`,
-      '--jq', '.jobs'],
+  if (!ref) {
+    _vitestJobSteps.set(head, []);
+    return [];
+  }
+  const out = gh(['api', `repos/${REPO}/actions/runs/${ref.runId}/jobs?filter=latest&per_page=100`, '--paginate', '--jq', '.jobs'],
     { json: true, allowFail: true });
-  return currentAttemptJobSteps({ checkRun: last, jobId: ref.jobId, jobs: out });
+  const steps = currentAttemptJobSteps({ checkRun: last, jobId: ref.jobId, jobs: out });
+  _vitestJobSteps.set(head, steps);
+  return steps;
 }
 
 /** Il vitest rosso sull'head NON è attribuibile alla PR (main rosso al momento
@@ -625,8 +618,10 @@ function hasCommentMarker(num, marker) {
   return hasCommentMarkerShared(gh, REPO, num, marker);
 }
 
-/** C'è una review Claude (`pr-review-loop`, check-run `review`) ANCORA in volo
- * sull'head (status `queued`/`in_progress`)? Il push del rebase si autentica via
+/** C'è una review Claude ANCORA in volo sull'head (Jobs API: lo step `Run Claude
+ * review` è `queued`/`in_progress`)? Dal 2026-08-26 la review vive dentro il
+ * job `vitest (unit + integration)`: cercare un check-run chiamato `review`
+ * è quindi un segnale morto. Il push del rebase si autentica via
  * App/PAT (x-access-token) e quindi RI-TRIGGERA `pull_request` → `pr-review-loop`
  * ha `cancel-in-progress: true` → il nostro push CANCELLA la review in corso e ne
  * avvia un'altra. Con main caldo (commit ogni pochi minuti) e una review da
@@ -637,11 +632,24 @@ function hasCommentMarker(num, marker) {
  * tick (come ACTIVITY_GUARD). Il rebase non è urgente (main è sempre fresco); la
  * review conclude, posta il verdetto, e auto-merge-eval porta avanti l'LGTM. */
 function reviewInProgress(head) {
-  const out = gh(
-    ['api', `repos/${REPO}/commits/${head}/check-runs?per_page=100`,
-      '--jq', '[.check_runs[] | select(.name == "review" and (.status == "in_progress" or .status == "queued"))] | length'],
-    { json: false, allowFail: true });
-  return (parseInt((out || '0').trim(), 10) || 0) > 0;
+  const checks = checkRunsOf(head);
+  const activeVitest = checks.filter(
+    (check) => check?.name === VITEST_EXECUTION_JOB_NAME &&
+      ['queued', 'in_progress'].includes(String(check.status || '')),
+  );
+  for (const check of activeVitest) {
+    const jobId = /\/job\/(\d+)(?:[/?#]|$)/.exec(check.details_url || '')?.[1];
+    // An active check with no job link is still an unknown review state. Do
+    // not rebase into that gap: the push could cancel a review whose Jobs API
+    // record has not been materialized yet.
+    if (!jobId) return true;
+    const job = gh(['api', `repos/${REPO}/actions/jobs/${jobId}`], { allowFail: true });
+    // During startup GitHub can return the job with `steps: []`; this is not a
+    // negative answer, it is the short window before the review step appears.
+    if (!job || !Array.isArray(job.steps) || job.steps.length === 0) return true;
+    if (reviewStepIsInFlight(job?.steps)) return true;
+  }
+  return false;
 }
 
 /** Statuti NON terminali di un workflow-run GitHub: il run sta ancora
@@ -790,6 +798,18 @@ async function mergeableState(num) {
 function ensureStaleLabel(num) {
   if (DRY) { console.log(`[dry] +label stale-review #${num}`); return; }
   gh(['pr', 'edit', String(num), '--repo', REPO, '--add-label', 'stale-review'],
+    { json: false, allowFail: true });
+}
+
+/**
+ * Consuma la label di rescue dopo che il suo rebase/ri-trigger è riuscito.
+ * Lasciarla appesa riattiva il ramo stale a ogni evento e può riproporre un
+ * autorebase già completato; se l'azione successiva fallisce, invece, la
+ * label resta per il prossimo rescue.
+ */
+function clearStaleReviewLabel(num) {
+  if (DRY) { console.log(`[dry] -label stale-review #${num}`); return; }
+  gh(['pr', 'edit', String(num), '--repo', REPO, '--remove-label', 'stale-review'],
     { json: false, allowFail: true });
 }
 
@@ -1116,10 +1136,10 @@ async function processPR(pr) {
         // Classe-A: nemmeno la review esiste (drift 401) — il solo vitest non
         // sblocca (auto-merge esige LGTM). Reopen = review+tests insieme.
         console.log(`PR #${num} 0 dietro main, NESSUNA review claude e niente vitest → close+reopen (re-trigger review+tests).`);
-        guardedReopen(num, head);
+        if (guardedReopen(num, head)) clearStaleReviewLabel(num);
       } else {
         console.log(`PR #${num} 0 dietro main ma head ${head.slice(0, 8)} SENZA check-run vitest → dispatch tests.yml (heal, no rebase).`);
-        dispatchTests(num, branch);
+        if (dispatchTests(num, branch)) clearStaleReviewLabel(num);
       }
     } else if (vitestVerdictIsTransient(head)) {
       // Il check vitest ESISTE ma il suo verdetto rosso è una CANCELLAZIONE da
@@ -1131,7 +1151,7 @@ async function processPR(pr) {
       // Ri-dispatch tests.yml (heal), NESSUN rebase. Un `failure` REALE non passa
       // di qui → niente re-run gratis (AGENTS #5 + frugalità CI).
       console.log(`PR #${num} 0 dietro main, vitest rosso da CANCELLAZIONE (transient, nessun verdetto sul codice) → dispatch tests.yml (heal, no rebase).`);
-      dispatchTests(num, branch);
+      if (dispatchTests(num, branch)) clearStaleReviewLabel(num);
     } else {
       console.log(`PR #${num} 0 dietro main, vitest già presente sull'head — skip.`);
     }
@@ -1163,7 +1183,7 @@ async function processPR(pr) {
             // auto-merge-eval valida la risoluzione: se l'unione fosse errata i
             // test falliscono e non si mergia). LGTM carry-forward.
             console.log(`✅ PR #${num}: conflitto import-union AUTO-RISOLTO + pushato → mergeable; dispatch tests.`);
-            dispatchTests(num, branch);
+            if (dispatchTests(num, branch)) clearStaleReviewLabel(num);
             done = true;
           }
         }
@@ -1217,7 +1237,7 @@ async function processPR(pr) {
   });
   if (action === 'heal') {
     console.log(`PR #${num} LGTM non-collision, ${behind} dietro main, head ${head.slice(0, 8)} SENZA check-run vitest → dispatch tests (heal, NO rebase: main non-strict, auto-merge la mergia behind).`);
-    dispatchTests(num, branch);
+    if (dispatchTests(num, branch)) clearStaleReviewLabel(num);
     return;
   }
   if (action === 'skip') {
@@ -1355,7 +1375,7 @@ async function processPR(pr) {
   if (!lgtm) {
     if (labels.includes('needs-human')) {
       console.log(`PR #${num}: rebasata ma needs-human (round-cap) → no reopen (attende umano); solo dispatch tests.`);
-      dispatchTests(num, branch);
+      if (dispatchTests(num, branch)) clearStaleReviewLabel(num);
       return;
     }
     const why = hasAnyClaudeReview(num) ? '🔴/❓ non chiuso + drift sanato' : 'classe-A senza review';
@@ -1369,11 +1389,13 @@ async function processPR(pr) {
     // esattamente la ri-esecuzione promessa — `stuckRedReason` disattiva la
     // sola precondizione (il budget del breaker conta comunque).
     if (guardedReopen(num, head, { stuckRedReason })) {
+      clearStaleReviewLabel(num);
       console.log(`✅ PR #${num}: rebasata, pushata e ri-aperta (${why}) → review+redflag ri-triggerati drift-free.`);
     }
     return;
   }
   if (dispatchTests(num, branch)) {
+    clearStaleReviewLabel(num);
     console.log(`✅ PR #${num}: rebasata su origin/main, pushata (${branch}) e dispatchato tests.yml → vitest sull'head; LGTM carry-forward, zero Claude.`);
   }
 }

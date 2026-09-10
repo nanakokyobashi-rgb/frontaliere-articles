@@ -143,22 +143,19 @@ function isBoldTitleLead(rest, lines = [], start = 0) {
 }
 
 export function hasEnumeratedItems(body) {
-  const b = stripFencedBlocks(String(body || ''));
-  const numberedSections = (b.match(/^#{2,4}[ \t]*\d+[.)](?=[ \t]|$)/gm) || []).length;
+  const b = stripFencedBlocks(body);
+  const numberedSections = (b.match(/^#{2,4}[ \t]*(?:Item[ \t]*)?\d+[ \t]*[.)—–](?=[ \t]|$)/gim) || []).length;
   if (numberedSections >= 2) return true;
-  // Lista ordinata con lead in grassetto: `1. **Titolo.**` / `2. **Titolo.**` (#831, #832).
-  // Il grassetto e' cio' che distingue l'item enumerato dai passi di una procedura numerata,
-  // ma solo se apre a inizio riga e chiude sulla stessa riga (`isBoldTitleLead`, #926).
   const lines = b.split('\n');
-  const orderedBoldItems = lines.filter((l) => {
-    const m = /^[ \t]*\d+[.)][ \t]+(.*)$/.exec(l);
-    return m ? isBoldTitleLead(m[1]) : false;
-  }).length;
+  const orderedBoldItems = lines.reduce((count, line, index) => {
+    const match = /^[ \t]*\d+[.)][ \t]+(.*)$/.exec(line);
+    return count + (match && isBoldTitleLead(match[1], lines, index + 1) ? 1 : 0);
+  }, 0);
   if (orderedBoldItems >= 2) return true;
-  const boldLeadBullets = lines.filter((l) => {
-    const m = /^[-*][ \t]+(?:\[[ xX]\][ \t]*)?(.*)$/.exec(l);
-    return m ? isBoldTitleLead(m[1]) : false;
-  }).length;
+  const boldLeadBullets = lines.reduce((count, line, index) => {
+    const match = /^[-*][ \t]+(?:\[[ xX]\][ \t]*)?(.*)$/.exec(line);
+    return count + (match && isBoldTitleLead(match[1], lines, index + 1) ? 1 : 0);
+  }, 0);
   return boldLeadBullets >= 2;
 }
 

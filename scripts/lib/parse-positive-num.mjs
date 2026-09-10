@@ -1,6 +1,6 @@
 /**
  * parse-positive-num.mjs — la lettura di un override numerico (argv o env),
- * unica per tutto il repo.
+ * condivisa dai consumer del corpus che richiedono sentinelle o valori frazionari.
  *
  * ## Perché una libreria e non un `Number(env || default)` per chiamante
  *
@@ -22,7 +22,7 @@
  *     comunque il canale — la ragione per cui esiste l'opzione `integer`.
  *
  * Tre validazioni copiaincollate avrebbero coperto tre di questi casi e non il
- * quarto che nasce domani. Questo file è la sorgente unica: `tool` esiste
+ * quarto che nasce domani. Questo file centralizza questi call site: `tool` esiste
  * perché il prefisso del warning nomini chi ha davvero ignorato l'override,
  * altrimenti il log manda a leggere lo script sbagliato.
  *
@@ -45,20 +45,13 @@
  * uno per leva: un `-1` accettato ovunque riaprirebbe il buco su
  * `--lookback-min`, dove non significa niente.
  *
- * ## Il gemello del sito: non esiste, e non deve
+ * ## Rapporto con il lettore env condiviso col sito
  *
- * La voce di `scripts/ci/loop-sync-manifest.json` e' `corpus-only`, non
- * `corpus-only-pending`: il sito copre la STESSA classe con
- * `scripts/lib/int-from-env.mjs` — `intFromEnv` (assente/vuota → default in
- * silenzio, illeggibile → default + `::warning::`) e `positiveIntFromEnv`, che
- * rifiuta anche lo zero e i negativi (valerielinc-ops/frontaliere-si-o-no#7610,
- * mergiata il 2026-09-06, sui call site che finiscono in uno `slice` o nel passo
- * di un `for`). Portare QUESTO file di la' darebbe due sorgenti per la stessa
- * validazione, che e' il difetto vietato da AGENTS.md #6. La misura della issue
- * #884 («zero equivalenti sul sito») cercava solo
- * `parsePositiveNum|parsePositiveInt|readPositiveEnv|envPositive`, e l'helper
- * del sito si chiama diversamente: prima di riaprire il debito, cerca la
- * FUNZIONE, non il nome.
+ * Questo parser resta `corpus-only`: accetta valori grezzi da argv o env,
+ * sentinelle esplicite e, quando richiesti, numeri frazionari. Il modulo
+ * `scripts/lib/int-from-env.mjs` ora viaggia con i consumer condivisi del ciclo
+ * PR e legge interi direttamente dall'ambiente. I call site esistenti di questo
+ * parser conservano la propria semantica e le annotazioni specifiche del tool.
  *
  * @param {unknown} raw valore grezzo (argv o env)
  * @param {number} fallback default da usare se `raw` è assente o illeggibile
