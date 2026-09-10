@@ -351,11 +351,15 @@ jobs:
           REPO: ${{ github.repository }}
           ISSUE_NUMBER: ${{ github.event.issue.number }}
           ISSUE_TITLE: ${{ github.event.issue.title }}
+          CTX_DIR: ${{ runner.temp }}/issue-fix-ctx
         # I cap turni sono anti-runaway sopra il p99 dei run sani, non budget di
         # lavoro: un run che muore al cap brucia la quota intera e non consegna
         # niente, che è peggio di qualche turno in più.
         run: |
           set -euo pipefail
+          mkdir -p "$CTX_DIR"
+          # Daily selection and tiering use one immutable issue snapshot.
+          gh issue view "$ISSUE_NUMBER" --repo "$REPO" --json title,body > "$CTX_DIR/issue.json"
           labels_json=$(gh issue view "$ISSUE_NUMBER" --repo "$REPO" --json labels --jq '[.labels[].name]')
           decision=$(node scripts/lib/classify-issue.mjs "$ISSUE_TITLE" "$labels_json")
           cat=$(node -e "process.stdout.write(JSON.parse(process.argv[1]).category)" "$decision")
@@ -378,6 +382,76 @@ jobs:
           esac
           echo "model=claude-opus-5" >> "$GITHUB_OUTPUT"
           echo "category=$cat" >> "$GITHUB_OUTPUT"
+          # A daily bucket is an aggregate even when it currently contains one
+          # item. Select exactly the first stable open item for this run.
+          if jq -e '.title | test("^follow-up\\(daily:")' "$CTX_DIR/issue.json" >/dev/null 2>&1; then
+            node --input-type=module - "$CTX_DIR/issue.json" >> "$GITHUB_OUTPUT" <<'NODE'
+          import fs from 'node:fs';
+          import { dailyBucketInfo, parseFollowupItems } from './scripts/ci/followup-resolution-match.mjs';
+          const issue = JSON.parse(fs.readFileSync(process.argv[2], 'utf8'));
+          const info = dailyBucketInfo(issue.title || '');
+          const items = parseFollowupItems(issue.body || '');
+          const open = items.find((item) => item.id && item.state === 'open');
+          console.log('is_daily_bucket=true');
+          console.log(`daily_key=${info?.dailyKey || ''}`);
+          console.log(`selected_item_id=${open?.id || ''}`);
+          console.log('is_aggregate=true');
+          NODE
+          else
+            echo "is_daily_bucket=false" >> "$GITHUB_OUTPUT"
+            echo "daily_key=" >> "$GITHUB_OUTPUT"
+            echo "selected_item_id=" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Validate daily bucket item selection (fail closed)
+        id: daily_item_guard
+        if: steps.tier.outputs.is_daily_bucket == 'true'
+        env:
+          DAILY_ITEM_ID: ${{ steps.tier.outputs.selected_item_id }}
+        run: |
+          set -eu
+          case "${DAILY_ITEM_ID:-}" in
+            FU-[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]-[0-9][0-9][0-9])
+              echo "daily item selezionato: ${DAILY_ITEM_ID}"
+              ;;
+            *)
+              echo "::error::daily bucket senza DAILY_ITEM_ID stabile: nessuna PR verrà creata"
+              exit 1
+              ;;
+          esac
+
+      - name: Closing keyword for the PR body (zero-Claude)
+        id: closing
+        if: steps.quota.outputs.quota_blocked != 'true' && steps.preflight.outputs.already_resolved != 'true' && steps.stale.outputs.stale_dispatch != 'true' && steps.scope_guard.outputs.workflows_blocked != 'true' && steps.claim.outputs.in_flight != 'true' && steps.handoff_pre.outputs.handoff_delivered != 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          IS_DAILY: ${{ steps.tier.outputs.is_daily_bucket }}
+          DAILY_ITEM_ID: ${{ steps.tier.outputs.selected_item_id }}
+        run: |
+          set -uo pipefail
+          if [ "${IS_DAILY:-false}" = true ]; then
+            ref="Addresses #${ISSUE_NUMBER}"
+            if [ -n "${DAILY_ITEM_ID:-}" ]; then
+              ref="${ref}"$'\nFollow-up item: '"${DAILY_ITEM_ID}"
+            else
+              echo "::error::daily bucket #${ISSUE_NUMBER} senza item open stabile"
+              exit 1
+            fi
+            {
+              echo "closing_ref<<CLOSING_REF_EOF"
+              printf '%s\n' "$ref"
+              echo "CLOSING_REF_EOF"
+            } >> "$GITHUB_OUTPUT"
+            echo "closing-ref: daily bucket → $ref"
+            exit 0
+          fi
+          ref=$(gh issue view "$ISSUE_NUMBER" --repo "$GH_REPO" --json number,title,body,labels 2>/dev/null \
+            | node scripts/lib/pr-body-generator-contract.mjs --closing-ref 2>/dev/null) || ref=""
+          if [ -z "$ref" ]; then ref="Closes #${ISSUE_NUMBER}"; fi
+          echo "closing_ref=$ref" >> "$GITHUB_OUTPUT"
+          echo "Closing ref: $ref"
 
       # Un run precedente può essere morto DOPO aver pushato il checkpoint WIP:
       # in quel caso il branch esiste già su origin col diff reale, e ripartire
@@ -459,6 +533,10 @@ jobs:
           ISSUE_GROUP: ${{ steps.group.outputs.is_group }}
           ISSUE_GROUP_LABEL: ${{ steps.group.outputs.group_label }}
           ISSUE_GROUP_NUMBERS: ${{ steps.group.outputs.group_numbers }}
+          IS_DAILY_BUCKET: ${{ steps.tier.outputs.is_daily_bucket }}
+          DAILY_KEY: ${{ steps.tier.outputs.daily_key }}
+          DAILY_ITEM_ID: ${{ steps.tier.outputs.selected_item_id }}
+          CLOSING_REF: ${{ steps.closing.outputs.closing_ref }}
         with:
           preflight_blocked: ${{ steps.quota.outputs.codex_fallback }}
           codex_auth_json: ${{ secrets.CODEX_AUTH_JSON }}
@@ -515,6 +593,8 @@ jobs:
             - **Capability guard — valutalo SUBITO, prima di implementare.** ${{ env.GITHUB_PAT_NANAKO != '' && 'Questo run ha il PAT, e il PAT è passato SIA al remote git SIA a `claude-code-action` (input `github_token`). **Modificare `.github/workflows/**` è quindi una capacità PIENA: fallo senza esitare.** Non trattarlo come un percorso rischioso e non pre-annunciare un blocco. Se un push viene rifiutato, LEGGI il messaggio prima di concludere: `blocked-workflows-scope` va usato SOLO se il testo dice letteralmente "without `workflows` permission". In quel caso NON abbandonare al primo tentativo — verifica `git remote -v` (deve puntare a `x-access-token:***@github.com`) e `git config --get-all http."https://github.com/".extraheader` (deve essere VUOTO, altrimenti l Authorization header prevale sull URL e il push viaggia con l identità della App); correggi e ritenta UNA volta. Solo se fallisce ancora con lo stesso testo, documenta con `blocked-workflows-scope` e includi il messaggio di rifiuto integrale. Qualunque altro errore di push (conflitto, protezione del branch, rete) NON è questo caso e va gestito come tale.' || 'Questo run NON ha il PAT: sia il remote git sia `claude-code-action` ricadono sul GITHUB_TOKEN, che per policy di GitHub non può creare né modificare file sotto `.github/workflows/**`. Se il fix richiede di toccarli il push fallirebbe SEMPRE → nessuna PR. NON implementare: posta un commento col diff proposto e "blocco scope workflows: il PAT non è stato caricato (controlla lo step Load secrets from Remote Config), serve il PAT o una mano umana", e TERMINA SUBITO con `blocked-workflows-scope`.' }} In ogni caso, se il fix richiede impostazioni del repo, branch protection o segreti non presenti in CI → documenta e TERMINA senza implementare. Fare tutto il lavoro per poi scoprire il blocco al push è il modo più costoso di fallire: il blocco è deterministico, va visto al turno 1.
             - **Issue aggregata — is_aggregate=${{ steps.tier.outputs.is_aggregate }}.** Se `true`, tentare tutti gli item in un run sfora il budget turni e consegna ZERO PR. **Regola ferrea:** fixa ESATTAMENTE UN item, poi fermati. (a) applica il capability guard per-item, saltando quelli fuori capacità senza abortire l'intera issue; (b) scegli il primo item in-capacità a maggior valore; (c) implementa solo quello; (d) appena la PR è aperta STOP IMMEDIATO, anche con turni residui; (e) elenca gli altri in `## Non implementato`, che li ri-accoda. Ogni ciclo chiude almeno un item, quindi converge.
 
+            **Daily bucket — is_daily_bucket=${{ steps.tier.outputs.is_daily_bucket }}, daily_key=${{ steps.tier.outputs.daily_key }}, item=${{ steps.tier.outputs.selected_item_id }}.** È un contenitore giornaliero condiviso: lavora SOLO l'item stabile selezionato `${{ steps.tier.outputs.selected_item_id }}` e non gli altri item del bucket. Nel body della PR copia VERBATIM la riga di chiusura pre-calcolata `${{ steps.closing.outputs.closing_ref }}`. Per un daily bucket deve essere `Addresses #${{ github.event.issue.number }}` più `Follow-up item: ${{ steps.tier.outputs.selected_item_id }}`; non usare mai `Closes`.
+
             **Se `group=true`, il gruppo B19 sostituisce il flusso singolo:** il tetto è già 3 issue atomiche con punto di riparazione comune; implementa tutti i membri del gruppo nella singola PR, senza prendere lavoro esterno. Usa una riga `Closes #N` separata per ogni membro completato. Se un membro non è confermabile o non è riparabile con certezza, non forzarlo: lascialo senza keyword di chiusura e dichiaralo in `## Non implementato` con uno stato letterale. Se `group=false`, valgono le regole della issue singola e dell'aggregata sopra.
 
             **Fix flow:**
@@ -536,7 +616,7 @@ jobs:
                ## Non implementato (ancora)
                - <scope non fatto + stato: in questa PR / PR concatenata #N / blocked: <causa>>
                ```
-               **Eccezione — issue AGGREGATA (is_aggregate=${{ steps.tier.outputs.is_aggregate }}).** Se `true`, la regola ferrea qui sopra ti fa chiudere UN item su N: `Closes #$ISSUE_NUMBER` al merge chiuderebbe il TRACKER, e con esso gli item che hai appena elencato in `## Non implementato` — non resta piu' niente da ri-accodare, e il ciclo non converge. `scripts/ci/reconcile-followups.mjs` rifiuta gia' di auto-chiudere un aggregato (`closeEligible = ... && !isAggregate`); la keyword nel body bypassa quella protezione. **Usa `Refs #$ISSUE_NUMBER`**, che lascia la issue aperta per il giro successivo.
+               **Eccezione — issue AGGREGATA (is_aggregate=${{ steps.tier.outputs.is_aggregate }}).** Se `true`, la regola ferrea qui sopra ti fa chiudere UN item su N: `Closes #$ISSUE_NUMBER` al merge chiuderebbe il TRACKER, e con esso gli item che hai appena elencato in `## Non implementato` — non resta piu' niente da ri-accodare, e il ciclo non converge. `scripts/ci/reconcile-followups.mjs` rifiuta gia' di auto-chiudere un aggregato (`closeEligible = ... && !isAggregate`); la keyword nel body bypassa quella protezione. **Usa la riga `closing_ref` pre-calcolata dal workflow** (`Refs #$ISSUE_NUMBER` per gli aggregati normali; `Addresses #$ISSUE_NUMBER` + `Follow-up item: FU-...` per i daily), mai una keyword inventata.
 
                **Eccezione — fix provabile solo da una run su `main`.** Se QUESTA PR tocca `.github/workflows/**` o la config dell'action Claude (`claude_args`, `settings`, sandbox, `permissionMode`, `github_token`) per un bug osservabile solo a runtime (sandbox/bwrap, permessi, rate-limit, dispatch) — nessun test né lettura del diff può dimostrare che il fix funziona, solo una run reale — **non usare `Closes #$ISSUE_NUMBER`**: usa `Refs #$ISSUE_NUMBER` e, dopo l'apertura della PR, `gh issue edit $ISSUE_NUMBER --add-label awaiting-production-proof`. Dettagli in `ISSUES.md` → "Fix flow".
             10. La PR entra da sola nel ciclo di review e auto-merge. **NON mergiare a mano.**

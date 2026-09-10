@@ -303,6 +303,41 @@ export function parseQuotaResetsAt(body) {
   return n > 1e11 ? Math.round(n / 1000) : Math.round(n);
 }
 
+function commentTimestamp(comment) {
+  const at = Date.parse(String(comment?.createdAt ?? comment?.created_at ?? ''));
+  return Number.isFinite(at) ? at : null;
+}
+
+// I fallback deterministici del backstop non sono verdetti del fixer per il
+// rescue, ma restano FIX_OUTCOME validi come prova che una run è arrivata oltre
+// il pre-flight quota. Il chiamante sceglie quindi esplicitamente se ignorarli.
+const BACKSTOP_MARKER = 'post-step deterministico';
+
+function fixOutcomeEntry(comment, { ignoreBackstop = false } = {}) {
+  const body = String(comment?.body || '');
+  if (ignoreBackstop && body.includes(BACKSTOP_MARKER)) return null;
+  const match = FIX_OUTCOME_RE.exec(body);
+  if (!match) return null;
+  const at = commentTimestamp(comment);
+  if (at === null) return null;
+  return { outcome: match[1].toLowerCase(), at };
+}
+
+/** Return the latest authentic FIX_OUTCOME marker with its timestamp. */
+export function latestFixOutcomeEntryFromComments(comments) {
+  let latest = null;
+  for (const comment of comments || []) {
+    const entry = fixOutcomeEntry(comment, { ignoreBackstop: true });
+    if (entry && (!latest || entry.at >= latest.at)) latest = entry;
+  }
+  return latest || { outcome: null, at: null };
+}
+
+/** Return only the latest authentic FIX_OUTCOME code. */
+export function latestFixOutcomeFromComments(comments) {
+  return latestFixOutcomeEntryFromComments(comments).outcome;
+}
+
 /**
  * L'epoch di reset più LONTANO fra i beacon presenti in una lista di commenti,
  * o null. Il più lontano e non il più recente: se una issue ha accumulato più
