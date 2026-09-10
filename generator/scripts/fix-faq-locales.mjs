@@ -466,9 +466,7 @@ export function faqSourceFingerprint(sourceFaq) {
 export function nextFaqRejection(previous, sourceFaq, { prunedWrite = false } = {}) {
   const source = faqSourceFingerprint(sourceFaq);
   const priorConsecutive = Number(previous?.consecutive);
-  const sameRejection = Boolean(previous?.prunedWrite) === prunedWrite;
-  const consecutive = sameRejection
-    && previous?.source === source
+  const consecutive = previous?.source === source
     && Number.isFinite(priorConsecutive)
     && priorConsecutive > 0
     ? priorConsecutive + 1
@@ -484,6 +482,19 @@ export function nextFaqRejection(previous, sourceFaq, { prunedWrite = false } = 
 export function shouldSkipFaqRejection(previous, sourceFaq) {
   return previous?.source === faqSourceFingerprint(sourceFaq)
     && Number(previous.consecutive) >= FAQ_REJECTION_MAX_CONSECUTIVE;
+}
+
+/** Esclude gli issue gia' throttled prima di consumare il limite del run. */
+export function selectFaqIssuesForProcessing(issues, rejectionLedger, section, limit) {
+  const ledger = rejectionLedger && typeof rejectionLedger === 'object'
+    ? rejectionLedger
+    : {};
+  return issues
+    .filter((issue) => !shouldSkipFaqRejection(
+      ledger[faqLocaleIssueKey(issue.articleId, issue.locale, section)],
+      issue.itFaq,
+    ))
+    .slice(0, limit);
 }
 
 const FAQ_REJECTION_LEDGER_PATH = resolve(ROOT, 'data/faq-locale-rejections.json');
@@ -668,7 +679,7 @@ async function main() {
     return;
   }
 
-  const toProcess = issues.slice(0, LIMIT);
+  const toProcess = selectFaqIssuesForProcessing(issues, rejectionLedger, SECTION, LIMIT);
   console.log(`\nProcessing ${toProcess.length} issues...\n`);
 
   let fixed = 0, failed = 0, repeatedRejectionSkips = 0;
@@ -684,7 +695,7 @@ async function main() {
           : 'rifiuto sotto pavimento';
         console.error(`${label} ⏭️  ${rejectionKind} registrata ${previousRejection.consecutive} volte consecutive: salto la ritraduzione`);
         repeatedRejectionSkips++;
-        failed++;
+        if (!previousRejection.prunedWrite) failed++;
         continue;
       }
 

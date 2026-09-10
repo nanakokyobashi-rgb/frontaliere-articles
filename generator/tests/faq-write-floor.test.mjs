@@ -34,6 +34,7 @@ import {
   faqSourceFingerprint,
   minPairsForWrite,
   nextFaqRejection,
+  selectFaqIssuesForProcessing,
   shouldSkipFaqRejection,
 } from '../scripts/fix-faq-locales.mjs';
 
@@ -125,7 +126,22 @@ test('il ledger ferma il rifiuto deterministico dopo due run sulla stessa sorgen
   assert.equal(partialFirst.prunedWrite, true);
   assert.equal(partialSecond.consecutive, FAQ_REJECTION_MAX_CONSECUTIVE);
   assert.equal(shouldSkipFaqRejection(partialSecond, source), true, 'dopo due potature uguali si salta solo la ritraduzione');
-  assert.equal(nextFaqRejection(partialSecond, source).consecutive, 1, 'un rifiuto sotto pavimento riparte con il suo contatore');
+  assert.equal(nextFaqRejection(partialSecond, source).consecutive, FAQ_REJECTION_MAX_CONSECUTIVE + 1, 'il tipo cambia ma la sorgente uguale mantiene il contatore');
+});
+
+test('gli skip throttled non consumano il limite e lasciano passare il lavoro azionabile', () => {
+  const source = pairs(8);
+  const issue = (articleId) => ({ articleId, locale: 'en', itFaq: source });
+  const issues = [issue('frozen-1'), issue('frozen-2'), issue('frozen-3'), issue('actionable-1'), issue('actionable-2')];
+  const rejectionLedger = Object.fromEntries(
+    issues.slice(0, 3).map(({ articleId }) => [
+      faqLocaleIssueKey(articleId, 'en'),
+      nextFaqRejection(nextFaqRejection(undefined, source, { prunedWrite: true }), source, { prunedWrite: true }),
+    ]),
+  );
+
+  const selected = selectFaqIssuesForProcessing(issues, rejectionLedger, 'frontaliere', 2);
+  assert.deepEqual(selected.map(({ articleId }) => articleId), ['actionable-1', 'actionable-2']);
 });
 
 test('ENTRAMBI gli scrittori consultano il pavimento prima di scrivere', () => {
@@ -147,6 +163,8 @@ test('il fix-faq rende osservabile il deficit e persiste il blocco di ritraduzio
   assert.match(src, /reason: 'below_source_count'/);
   assert.match(src, /shouldSkipFaqRejection\(/);
   assert.match(src, /nextFaqRejection\(/);
+  assert.match(src, /selectFaqIssuesForProcessing\(issues, rejectionLedger, SECTION, LIMIT\)/);
+  assert.match(src, /repeatedRejectionSkips\+\+;\s*if \(!previousRejection\.prunedWrite\) failed\+\+;/s);
 
   const workflow = fs.readFileSync(path.join(QUI, '..', '..', '.github', 'workflows', 'batch-faq-articles.yml'), 'utf-8');
   assert.match(workflow, /data\/faq-locale-rejections\.json/);
