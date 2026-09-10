@@ -225,6 +225,17 @@ test('un `total` assente non addebita l\'intero echo al vincitore (#1090 item 2)
   assert.equal(inputCapVetoSummary({ exhaustionBreakdown: explicitZero }).echoHiddenInBuckets, 11,
     'total: 0 esplicito resta diverso da un campo assente');
   assert.equal(isTransientMajority(explicitZero, { tie: 'transient' }), false);
+
+  // Un campo PRESENTE ma corrotto non e' la stessa cosa di uno assente: il
+  // replay non puo' usare `-1`, `null` o una stringa per cancellare la prova
+  // degli echi e riaprire il verde silenzioso di #313.
+  for (const total of [undefined, null, -1, 'not-a-number']) {
+    const corrupted = { ...withoutTotal, total };
+    const summary = inputCapVetoSummary({ exhaustionBreakdown: corrupted });
+    assert.equal(summary.echoHiddenInBuckets, 11, `total corrotto ${JSON.stringify(total)} resta sospetto`);
+    assert.equal(isTransientMajority(corrupted, { tie: 'transient' }), false,
+      `total corrotto ${JSON.stringify(total)} non compra una maggioranza`);
+  }
 });
 
 /** La diagnostica del voto, con la polarita' del veto input-cap (#357). */
