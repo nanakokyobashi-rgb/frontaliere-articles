@@ -30,10 +30,20 @@
  * quello con hint vuoto) e rende il gate deterministico: stessa sorgente,
  * stesso verdetto, su qualunque runner.
  *
- * ## Perché una sola variabile
+ * ## Le variabili, e perché queste
  *
- * `ASSET_CDN` è l'unica letta da `host/` che raggiunga la superficie pinnata.
- * Le altre due sono state verificate e NON la raggiungono:
+ * `ASSET_CDN` è la prima. Dal 2026-09-10 ce ne sono altre due, per la stessa
+ * ragione e con lo stesso rimedio: `VITE_FIREBASE_API_KEY` e
+ * `FIREBASE_API_KEY`, che `host/firebaseAuthPersistence.ts` legge per costruire
+ * `firebase:authUser:<key>:[DEFAULT]`, la chiave che il registro Offerwall
+ * sonda dentro `offerwallFcSnippet` — uno dei 22 scalari. Il valore arriva da
+ * Remote Config (`generator/scripts/load-rc-env.mjs`) e in CI ci arriva
+ * davvero: senza azzerarlo il digest cambierebbe a seconda che lo step di
+ * caricamento RC abbia girato prima o no, che è esattamente la falsa diagnosi
+ * di drift descritta qui sopra. Il digest registrato è quello SENZA chiave (il
+ * ramo a prefisso), l'unico che non dipenda da un segreto.
+ *
+ * Le altre due sono state verificate e NON raggiungono la superficie pinnata:
  *   · `WRITE_COLLISION_MODE` (`host/sharedWriteRegistry.ts`) è letta per
  *     chiamata dentro `currentMode()`, e la probe di
  *     `shell-contract-functions.test.mjs` pinna solo la forma di
@@ -46,7 +56,7 @@
  */
 
 /** Le variabili d'ambiente che `host/` legge e che raggiungono il contratto. */
-export const CONTRACT_ENV_KEYS = ['ASSET_CDN'];
+export const CONTRACT_ENV_KEYS = ['ASSET_CDN', 'VITE_FIREBASE_API_KEY', 'FIREBASE_API_KEY'];
 
 /**
  * Azzera l'ambiente PRIMA del primo import di `host/siteShellBootstrap.ts`.

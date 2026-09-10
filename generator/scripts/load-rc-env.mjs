@@ -57,6 +57,15 @@ const RC_TO_ENV = {
   GH_MODELS_PAT_8:                ['GH_MODELS_PAT_8'],
   GH_MODELS_PAT_9:                ['GH_MODELS_PAT_9'],
   GOOGLE_MAPS_API_KEY:            ['GOOGLE_MAPS_API_KEY'],
+  // Firebase Web API key. Pubblica per costruzione (finisce nel bundle client e
+  // nella chiave di persistenza `firebase:authUser:<key>:[DEFAULT]`), ma
+  // pubblica NON vuol dire scrivibile in un sorgente: inlinata in
+  // `host/constants.ts` il 2026-09-10 (PR #1315) ha aperto un alert del secret
+  // scanning su una chiave che non si puo' piu' togliere dalla storia. Qui c'e'
+  // la sua unica casa: chi ne ha bisogno la legge da process.env, e
+  // `scripts/ci/scan-hardcoded-secrets.mjs` rende rossa la PR che la reinlina.
+  // Assente da RC su un progetto che non l'ha creata: semplicemente saltata.
+  FIREBASE_API_KEY:               ['FIREBASE_API_KEY', 'VITE_FIREBASE_API_KEY'],
   TOMTOM_API_KEY:             ['TOMTOM_API_KEY'],
   HERE_API_KEY:               ['HERE_API_KEY'],
   // HERE Cost Management Usage API (OAuth access key) — reconciles the routing

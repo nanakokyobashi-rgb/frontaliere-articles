@@ -14,6 +14,8 @@
  */
 
 
+import { getFirebaseAuthPersistenceKey } from './firebaseAuthPersistence';
+
 export const SEO_STATIC_CSS_FILENAME = 'seo-static.css';
 
 /**
@@ -61,11 +63,16 @@ export const CDN_PRECONNECT_HINT = ASSET_CDN_ORIGIN
 export const BASE_URL = 'https://frontaliereticino.ch';
 
 // Keep the transported Offerwall registry aligned with the site's active
-// Firebase Auth persistence key. The host does not receive Vite's runtime
-// environment, so it uses the same public fallback as
-// `frontaliere-si-o-no/services/firebaseAuthPersistence.ts`; a key rotation
-// must update both paths in the paired change.
-const FIREBASE_AUTH_PERSISTENCE_KEY = 'firebase:authUser:AIzaSyCxbA2_3BiBOjZryR5LOXCf_c2-Sgg7YSc:[DEFAULT]';
+// Firebase Auth persistence key. Same shape as the site, which calls
+// getFirebaseAuthPersistenceKey() from
+// `frontaliere-si-o-no/services/firebaseAuthPersistence.ts` and feeds it
+// import.meta.env.VITE_FIREBASE_API_KEY: the key is a VALUE, not a literal.
+// Here it comes from Firebase Remote Config through
+// `generator/scripts/load-rc-env.mjs`, and is '' when the environment does not
+// carry it — see host/firebaseAuthPersistence.ts and OFFERWALL_AUTH_CHECK
+// below for what '' means. #1315 inlined it instead, and GitHub secret
+// scanning flagged this file at line 66 of commit c9bc65a4.
+const FIREBASE_AUTH_PERSISTENCE_KEY = getFirebaseAuthPersistenceKey();
 
 /**
  * GA4 measurement ID — same as Firebase Analytics measurementId.
@@ -189,7 +196,29 @@ export const FC_PUBLISHER_ID = ADSENSE_CLIENT_ID.replace(/^ca-/, '');
  * deliberately NOT included here — it is a separate feature, out of scope for
  * the Offerwall render fix.
  */
-export const OFFERWALL_FC_SNIPPET = `<script>(function(){var g=window.googlefc=window.googlefc||{};var ow=g.offerwall=g.offerwall||{};var cc=ow.customchoice=ow.customchoice||{};if(cc.registry)return;function hasAccess(){try{if(window.localStorage.getItem('newsletter_subscribed')==='true')return true;if(window.localStorage.getItem('${FIREBASE_AUTH_PERSISTENCE_KEY}')!==null)return true;}catch(e){}return false;}cc.registry={initialize:function(params){var E=cc.InitializeResponseEnum||{};if(hasAccess()){return Promise.resolve(E.ACCESS_GRANTED||'ACCESS_GRANTED');}window.__ftOfferwallLang=(params&&params.offerwallLanguageCode)||null;return Promise.resolve(E.ACCESS_NOT_GRANTED||'ACCESS_NOT_GRANTED');},show:function(){var fn=window.__ftOfferwallSubscribe;function run(f){try{return Promise.resolve(f(window.__ftOfferwallLang)).then(function(ok){return !!ok;});}catch(e){return Promise.resolve(false);}}if(typeof fn!=='function'){return new Promise(function(resolve){var settled=false;function settle(ok){if(settled)return;settled=true;resolve(!!ok);}var q=window.__ftOfferwallShowQueue=window.__ftOfferwallShowQueue||[];var timer=setTimeout(function(){settle(false);},10000);q.push(function(hook){if(settled)return;clearTimeout(timer);run(hook).then(settle,function(){settle(false);});});});}return run(fn);}};})();</script>
+/**
+ * The `hasAccess()` localStorage probe, in the two shapes the registry can take.
+ *
+ * With the Web API key in the environment this is the site's exact byte
+ * sequence — one `getItem()` on `firebase:authUser:<key>:[DEFAULT]` — so a page
+ * emitted here and the same page emitted by the site's full build agree
+ * character for character, which is what `host/shell-contract-fingerprint.json`
+ * exists to keep true.
+ *
+ * Without it the key is unknown (see host/firebaseAuthPersistence.ts: this repo
+ * has no obfuscated fallback, deliberately), and the probe falls back to
+ * scanning localStorage for the `firebase:authUser:` PREFIX — the registry's
+ * behaviour before #1315. It answers the same question, because the only thing
+ * `hasAccess()` asks is whether a signed-in user exists and any
+ * `firebase:authUser:*` entry means one does. What it must NEVER do is emit
+ * `getItem('')`: that returns null for everyone and would lock every signed-in
+ * reader out of their own access.
+ */
+const OFFERWALL_AUTH_CHECK = FIREBASE_AUTH_PERSISTENCE_KEY
+  ? `if(window.localStorage.getItem('${FIREBASE_AUTH_PERSISTENCE_KEY}')!==null)return true;`
+  : "for(var i=0;i<window.localStorage.length;i++){var k=window.localStorage.key(i);if(k&&k.indexOf('firebase:authUser:')===0)return true;}";
+
+export const OFFERWALL_FC_SNIPPET = `<script>(function(){var g=window.googlefc=window.googlefc||{};var ow=g.offerwall=g.offerwall||{};var cc=ow.customchoice=ow.customchoice||{};if(cc.registry)return;function hasAccess(){try{if(window.localStorage.getItem('newsletter_subscribed')==='true')return true;${OFFERWALL_AUTH_CHECK}}catch(e){}return false;}cc.registry={initialize:function(params){var E=cc.InitializeResponseEnum||{};if(hasAccess()){return Promise.resolve(E.ACCESS_GRANTED||'ACCESS_GRANTED');}window.__ftOfferwallLang=(params&&params.offerwallLanguageCode)||null;return Promise.resolve(E.ACCESS_NOT_GRANTED||'ACCESS_NOT_GRANTED');},show:function(){var fn=window.__ftOfferwallSubscribe;function run(f){try{return Promise.resolve(f(window.__ftOfferwallLang)).then(function(ok){return !!ok;});}catch(e){return Promise.resolve(false);}}if(typeof fn!=='function'){return new Promise(function(resolve){var settled=false;function settle(ok){if(settled)return;settled=true;resolve(!!ok);}var q=window.__ftOfferwallShowQueue=window.__ftOfferwallShowQueue||[];var timer=setTimeout(function(){settle(false);},10000);q.push(function(hook){if(settled)return;clearTimeout(timer);run(hook).then(settle,function(){settle(false);});});});}return run(fn);}};})();</script>
  <script>(function(){function loadFc(){if(!document.querySelector('script[data-fc-loader]')){var s=document.createElement('script');s.async=true;s.src='https://fundingchoicesmessages.google.com/i/${FC_PUBLISHER_ID}?ers=1';s.setAttribute('data-fc-loader','1');document.head.appendChild(s);}(function sig(){if(!window.frames['googlefcPresent']){if(document.body){var f=document.createElement('iframe');f.style='width:0;height:0;border:none;z-index:-1000;left:-1000px;top:-1000px;';f.style.display='none';f.name='googlefcPresent';document.body.appendChild(f);}else{setTimeout(sig,0);}}})();}function ricFb(cb){if(document.readyState==='complete'){setTimeout(cb,200);}else{window.addEventListener('load',function(){setTimeout(cb,200);},{once:true});}}function schedule(){(window.requestIdleCallback||ricFb)(loadFc,{timeout:4000});}if(document.readyState==='loading'){window.addEventListener('DOMContentLoaded',schedule,{once:true});}else{schedule();}})();</script>`;
 
 export const ADSENSE_SNIPPET = `<meta name="google-adsense-account" content="${ADSENSE_CLIENT_ID}">

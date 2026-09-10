@@ -94,6 +94,17 @@ nella sua mappa `RC_TO_ENV` resta `undefined` per chi lo legge da
 `process.env`, per quanto sia impostato in Remote Config. Se aggiungi un
 secret, mappalo lì o è inerte.
 
+Dal 2026-09-10 la regola non è più solo prosa: `scripts/ci/scan-hardcoded-secrets.mjs`
+scansiona i file tracciati (meno `content/`, `data/`, `public/`) cercando le
+forme con prefisso dichiarato — `AIza`, `ghp_`, `github_pat_`, `GOCSPX-`,
+`sk-ant-`, `xox…`, `AKIA`, blocchi di chiave privata — e
+`generator/tests/no-hardcoded-secrets.test.mjs` lo esegue dentro
+`tests (node --test)`, cioè sul check-run che governa il merge di **ogni** PR.
+Serviva: il contratto qui sopra c'era già, e non ha impedito alla PR #1315 di
+inlinare una Google API key in `host/constants.ts` con la CI verde — a vederla
+è stato il secret scanning di GitHub, cioè a push avvenuto, quando la storia
+non si riscrive più.
+
 Due comportamenti che confondono se non li conosci:
 
 - Una variabile **già presente** nell'ambiente non viene sovrascritta dal
