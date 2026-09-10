@@ -71,6 +71,23 @@ test('il rilevatore riaccoda un locale che ha meno FAQ della sorgente', () => {
   assert.equal(belowFaqSourceCount(null, pairs(8)), false, 'un literal illeggibile non e\' misurabile qui');
 });
 
+test('una potatura sopra il pavimento resta un rifiuto parziale e conserva il ledger', () => {
+  assert.equal(belowFaqFloor(pairs(5), pairs(8)), false, '5/8 supera il pavimento minimo');
+  assert.equal(belowFaqSourceCount(pairs(5), pairs(8)), true, '5/8 non e\' una scrittura completa');
+
+  const src = fs.readFileSync(FIX, 'utf-8');
+  assert.match(
+    src,
+    /belowFaqFloor\(toWrite, issue\.itFaq\)\s*\|\|\s*belowFaqSourceCount\(toWrite, issue\.itFaq\)/,
+    'la potatura sopra il pavimento deve passare dal rifiuto con ledger',
+  );
+  assert.match(
+    src,
+    /if \(rejectionLedger\[issueKey\]\) \{\s*delete rejectionLedger\[issueKey\]/s,
+    'il ledger deve essere cancellato solo dopo il ramo di scrittura completa',
+  );
+});
+
 test('il ledger ferma il rifiuto deterministico dopo due run sulla stessa sorgente', () => {
   const source = pairs(3);
   const changedSource = pairs(4);

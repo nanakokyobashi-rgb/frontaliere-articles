@@ -631,8 +631,9 @@ async function main() {
   const rejectionLedger = loadFaqRejectionLedger();
   const liveIssueKeys = new Set(issues.map((issue) => faqLocaleIssueKey(issue.articleId, issue.locale, SECTION)));
   let ledgerDirty = false;
+  const sectionPrefix = SECTION + '/';
   for (const key of Object.keys(rejectionLedger)) {
-    if (!liveIssueKeys.has(key)) {
+    if (key.startsWith(sectionPrefix) && !liveIssueKeys.has(key)) {
       delete rejectionLedger[key];
       ledgerDirty = true;
     }
@@ -695,20 +696,17 @@ async function main() {
         console.error(`${label} ⚠️  ${wrong.length} coppia/e non in ${issue.locale} `
           + `(${wrong.map((pair) => `${pair.index + 1}:${pair.detected}/${pair.via}`).join(', ')}): `
           + `${toWrite.length} coppia/e sane conservate`);
-        // Sotto il pavimento non si scrive NIENTE. Qui il write e' un
-        // `replaceFaqInFile` su una FAQ gia' presente: scrivere il residuo
-        // potato sostituirebbe la FAQ del locale con una piu' povera, e il
-        // prossimo scan non la vedrebbe piu' come issue — `wrongLocalePair`
-        // sulle sole superstiti torna `null`. Il conteggio `fixed++` la
-        // dichiarerebbe pure riparata. Meglio lasciarla com'e' e ritentare.
+        // Una potatura parziale non e' una scrittura completa neppure se supera
+        // il pavimento: il rilevatore la riaccoda per conteggio della sorgente,
+        // quindi va trattata come rifiuto e ritentata senza sostituire il body.
       }
 
-      if (belowFaqFloor(toWrite, issue.itFaq)) {
+      if (belowFaqFloor(toWrite, issue.itFaq) || belowFaqSourceCount(toWrite, issue.itFaq)) {
         const nextRejection = nextFaqRejection(rejectionLedger[issueKey], issue.itFaq);
         rejectionLedger[issueKey] = nextRejection;
         ledgerDirty = true;
         persistLedger();
-        console.error(`${label} ❌ Solo ${toWrite.length}/${minPairsForWrite(issue.itFaq)} coppie sane: `
+        console.error(`${label} ❌ Solo ${toWrite.length}/${issue.itFaq.length} coppie sane: `
           + `non scrivo; rifiuto consecutivo ${nextRejection.consecutive}/${FAQ_REJECTION_MAX_CONSECUTIVE}, `
           + 'ritento al giro dopo');
         failed++;
