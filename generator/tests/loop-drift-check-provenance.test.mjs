@@ -23,7 +23,7 @@
  */
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { ghostVerdict } from '../../scripts/ci/loop-drift-check.mjs';
+import { ghostVerdict, repoHistoryMatch, sha256 } from '../../scripts/ci/loop-drift-check.mjs';
 
 test('baseline null: niente da verificare, mai ghost', () => {
   const v = ghostVerdict({ baselineHash: null, currentHash: 'abc123', historyMatch: undefined, historyExhausted: undefined });
@@ -85,4 +85,55 @@ test('importare il modulo non esegue loop-drift-check: nessun fetch, nessun proc
   // Stessa guardia CLI pinnata in loop-drift-check-classify.test.mjs: se
   // l'import avesse eseguito main(), il processo sarebbe già uscito.
   assert.equal(typeof ghostVerdict, 'function');
+});
+
+test('il walk storico legge i blob in batch bounded e conserva il primo match in ordine', async () => {
+  const commits = Array.from({ length: 20 }, (_, index) => ({
+    sha: `commit-${index}`,
+    commit: { committer: { date: `2026-09-${String(index + 1).padStart(2, '0')}T00:00:00Z` } },
+  }));
+  const targetHash = sha256(Buffer.from('baseline'));
+  let inFlight = 0;
+  let maxInFlight = 0;
+  const rawCalls = [];
+
+  const fetcher = async (url) => {
+    if (url.includes('/commits?')) {
+      return {
+        ok: true,
+        status: 200,
+        headers: { get: () => null },
+        json: async () => commits,
+      };
+    }
+    const match = url.match(/\/commit-(\d+)\//);
+    assert.ok(match, `blob URL inatteso: ${url}`);
+    const index = Number(match[1]);
+    rawCalls.push(index);
+    inFlight += 1;
+    maxInFlight = Math.max(maxInFlight, inFlight);
+    await new Promise((resolve) => setTimeout(resolve, 2));
+    inFlight -= 1;
+    return {
+      ok: true,
+      status: 200,
+      arrayBuffer: async () => Buffer.from(index === 1 ? 'baseline' : `other-${index}`),
+    };
+  };
+
+  const result = await repoHistoryMatch({
+    repo: 'owner/repo',
+    ref: 'main',
+    filePath: 'scripts/example.mjs',
+    targetHash,
+    fetcher,
+  });
+
+  assert.equal(result.match, true);
+  assert.equal(result.checked, 8, 'il conteggio deve riflettere la finestra realmente hashata');
+  assert.equal(result.readable, 8);
+  assert.equal(result.matchedDate, commits[1].commit.committer.date);
+  assert.ok(maxInFlight > 1, 'le letture indipendenti devono poter avanzare insieme');
+  assert.ok(maxInFlight <= 8, 'la concorrenza deve avere un tetto');
+  assert.ok(rawCalls.length < commits.length, 'un match nel primo batch non deve scaricare tutta la storia');
 });
