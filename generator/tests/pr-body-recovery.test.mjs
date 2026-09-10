@@ -55,3 +55,15 @@ test('both Codex entry points use the shared sandbox prerequisites', () => {
   assert.match(setup, /bwrap --unshare-user --unshare-net/);
   assert.doesNotMatch(setup, /sysctl|danger-full-access/);
 });
+
+
+test('a failed body stops every later independent family so edit recovery can settle', () => {
+  const afterBody = tests.split('        id: body_contract\n')[1].split('      # ═════════')[1];
+  assert.ok(afterBody, 'the body preflight must precede the test families');
+  const later = tests.slice(tests.indexOf('        id: unit_gates'));
+  const conditions = [...later.matchAll(/^        if: (?:>-\n          )?([^\n]+)/gm)];
+  assert.ok(conditions.length >= 10);
+  for (const [, condition] of conditions) {
+    assert.ok(condition.includes("steps.body_contract.outcome != 'failure'"), condition);
+  }
+});

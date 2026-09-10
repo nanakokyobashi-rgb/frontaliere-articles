@@ -136,10 +136,9 @@ jobs:
       # ══════════════════════════════════════════════════════════════════════
       # FAMIGLIA 1/3 — contratto del body (ex workflow `PR body contract`)
       #
-      # `!cancelled()` sul primo step di ogni famiglia: un rosso di un'altra
-      # famiglia NON deve impedire a questa di girare — era la proprieta' dei
-      # workflow separati, e va conservata ora che sono step. Dentro una
-      # famiglia la catena resta fail-fast.
+      # Un contratto del body fallito ferma tutte le famiglie successive,
+      # così la recovery dopo un edit può rieseguire subito il run concluso.
+      # Negli altri casi restano le condizioni indipendenti delle famiglie.
       #
       # Due esclusioni, entrambe portate qui dal workflow che sostituisce:
       #  - le draft sono lavoro in corso, il body si completa prima di uscirne;
@@ -148,6 +147,7 @@ jobs:
       #    contratto umano su di essa e' un errore di categoria.
       # ══════════════════════════════════════════════════════════════════════
       - name: PR-body completeness + multi-issue Closes (zero-Claude)
+        id: body_contract
         if: >-
           ${{ !cancelled() && github.event_name == 'pull_request' &&
           github.event.pull_request.draft == false &&
@@ -188,7 +188,7 @@ jobs:
       # ══════════════════════════════════════════════════════════════════════
       - name: Unit + closure gates (i gate sul contenuto girano altrove)
         id: unit_gates
-        if: ${{ !cancelled() }}
+        if: ${{ steps.body_contract.outcome != 'failure' && !cancelled() }}
         run: |
           set -euo pipefail
           files=$(node scripts/ci/list-pr-gate-tests.mjs)
@@ -207,7 +207,7 @@ jobs:
       # non gira), ma un rosso di un'ALTRA famiglia non deve saltarlo — che e'
       # la proprieta' che i workflow separati avevano e che va conservata.
       - name: Baseline verificabili nel manifest del ciclo (diff-scoped)
-        if: ${{ !cancelled() && steps.unit_gates.conclusion == 'success' }}
+        if: ${{ steps.body_contract.outcome != 'failure' && !cancelled() && steps.unit_gates.conclusion == 'success' }}
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
@@ -239,7 +239,7 @@ jobs:
         # giudizio gia' dato — e un `## LGTM` negato bloccherebbe il canale con
         # cui le correzioni all'engine scendono.
         if: >-
-          ${{ github.event_name == 'pull_request' &&
+          ${{ steps.body_contract.outcome != 'failure' && github.event_name == 'pull_request' &&
           github.event.pull_request.draft == false &&
           github.event.pull_request.head.ref != 'engine-lockstep-auto' }}
         env:
@@ -271,7 +271,7 @@ jobs:
       # compare vuoto/errore → review piena.
       - name: Re-review guard (skip Claude when no code changed since last LGTM)
         id: guard
-        if: steps.resolve.outputs.should_review == 'true'
+        if: steps.body_contract.outcome != 'failure' && steps.resolve.outputs.should_review == 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
@@ -314,7 +314,7 @@ jobs:
 
       - name: Determine review tier
         id: tier
-        if: steps.resolve.outputs.should_review == 'true' && steps.guard.outputs.skip != 'true'
+        if: steps.body_contract.outcome != 'failure' && steps.resolve.outputs.should_review == 'true' && steps.guard.outputs.skip != 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PR_NUMBER: ${{ steps.resolve.outputs.pr_number }}
@@ -445,7 +445,7 @@ jobs:
       # il `gh pr diff`, che su una PR di corpus puo' essere enorme.
       - name: Prefetch review context (zero-Claude, saves turns)
         id: prefetch
-        if: steps.tier.outputs.tier != 'tests-only' && steps.resolve.outputs.should_review == 'true' && steps.guard.outputs.skip != 'true'
+        if: steps.body_contract.outcome != 'failure' && steps.tier.outputs.tier != 'tests-only' && steps.resolve.outputs.should_review == 'true' && steps.guard.outputs.skip != 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PR_NUMBER: ${{ steps.resolve.outputs.pr_number }}
@@ -516,7 +516,7 @@ jobs:
 
       - name: Pre-flight — Claude quota beacon for Codex fallback
         id: quota
-        if: steps.tier.outputs.tier != 'tests-only' && steps.resolve.outputs.should_review == 'true' && steps.guard.outputs.skip != 'true'
+        if: steps.body_contract.outcome != 'failure' && steps.tier.outputs.tier != 'tests-only' && steps.resolve.outputs.should_review == 'true' && steps.guard.outputs.skip != 'true'
         continue-on-error: true
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -526,7 +526,7 @@ jobs:
 
       - name: Publish automatic LGTM for a tests-only PR
         id: test_only_review
-        if: ${{ success() && steps.resolve.outputs.should_review == 'true' && steps.guard.outputs.skip != 'true' && steps.tier.outputs.tier == 'tests-only' }}
+        if: ${{ steps.body_contract.outcome != 'failure' && success() && steps.resolve.outputs.should_review == 'true' && steps.guard.outputs.skip != 'true' && steps.tier.outputs.tier == 'tests-only' }}
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REPO: ${{ github.repository }}
@@ -546,7 +546,7 @@ jobs:
         # tinge il job di rosso, lo lascia classificare al guard.
         timeout-minutes: 45
         id: claude_review
-        if: steps.tier.outputs.tier != 'tests-only' && steps.resolve.outputs.should_review == 'true' && steps.guard.outputs.skip != 'true'
+        if: steps.body_contract.outcome != 'failure' && steps.tier.outputs.tier != 'tests-only' && steps.resolve.outputs.should_review == 'true' && steps.guard.outputs.skip != 'true'
         # Un fallimento dell'action non deve abortire il job prima che il guard
         # sotto possa classificarlo: e' il guard a decidere se fallire forte.
         continue-on-error: true
@@ -607,7 +607,7 @@ jobs:
       # errore API transiente SENZA aver postato una review: il job sembra verde
       # ma la PR si ferma in silenzio. Si classifica dal log di esecuzione.
       - name: Fail on transient API error (no review posted)
-        if: steps.tier.outputs.tier != 'tests-only' && always() && steps.resolve.outputs.should_review == 'true' && steps.guard.outputs.skip != 'true' && steps.claude_review.outputs.fallback_used != 'true'
+        if: steps.body_contract.outcome != 'failure' && steps.tier.outputs.tier != 'tests-only' && always() && steps.resolve.outputs.should_review == 'true' && steps.guard.outputs.skip != 'true' && steps.claude_review.outputs.fallback_used != 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PR_NUMBER: ${{ steps.resolve.outputs.pr_number }}
@@ -666,7 +666,7 @@ jobs:
       # review gia' postate, e non trovarne una approvante deve bloccare.
       - name: Require approving Claude review
         id: review_gate
-        if: always() && steps.resolve.outputs.should_review == 'true'
+        if: steps.body_contract.outcome != 'failure' && always() && steps.resolve.outputs.should_review == 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
@@ -683,7 +683,7 @@ jobs:
       # carry-forward; qui si sorveglia soltanto che quel punto abbia girato.
       - name: Fail when required review gate is skipped
         if: >-
-          ${{ always() && github.event_name == 'pull_request' &&
+          ${{ steps.body_contract.outcome != 'failure' && always() && github.event_name == 'pull_request' &&
           github.event.pull_request.draft == false &&
           steps.review_gate.outcome == 'skipped' }}
         run: |
@@ -693,7 +693,7 @@ jobs:
       - name: Claude usage metrics
         # Solo se la review e' effettivamente girata: a review skippata non c'e'
         # execution_file da riassumere. Best-effort, non fallisce mai il job.
-        if: steps.tier.outputs.tier != 'tests-only' && always() && steps.resolve.outputs.should_review == 'true' && steps.guard.outputs.skip != 'true'
+        if: steps.body_contract.outcome != 'failure' && steps.tier.outputs.tier != 'tests-only' && always() && steps.resolve.outputs.should_review == 'true' && steps.guard.outputs.skip != 'true'
         run: node scripts/ci/claude-usage-summary.mjs "${{ steps.claude_review.outputs.execution_file }}" "pr-review"
 
       # ── IL SECONDO VERDETTO CONDIZIONALE ─────────────────────────────────
@@ -710,7 +710,7 @@ jobs:
       # sempre nulla.
       - name: Generator CI gate (solo per le PR che ne toccano i path)
         if: >-
-          ${{ always() && github.event_name == 'pull_request' &&
+          ${{ steps.body_contract.outcome != 'failure' && always() && github.event_name == 'pull_request' &&
           github.event.pull_request.draft == false }}
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
