@@ -174,6 +174,20 @@ test('files: ogni mode diverso da identical porta una ragione', () => {
   }
 });
 
+test('followup-drainer: la baseline post-B19 non dichiara piu\' una falsa identita\'', () => {
+  const entry = byPath.get('scripts/ci/followup-drainer.mjs');
+  assert.ok(entry, 'followup-drainer.mjs deve restare censito');
+  assert.equal(entry.mode, 'adapted', 'la copia corpus resta adattata dopo #1310');
+  assert.ok(entry.baseline?.site, 'la baseline del sito deve essere attestata');
+  assert.ok(entry.baseline?.corpus, 'la baseline corpus deve essere attestata');
+  assert.match(entry.reason, /2026-09-10/);
+  assert.match(entry.reason, /#1284/);
+  assert.match(entry.reason, /#8081/);
+  assert.match(entry.reason, /ISSUE_GROUP_MAX_SIZE/);
+  assert.match(entry.reason, /autoTitleGroupingKey\(\)/);
+  assert.doesNotMatch(entry.reason, /byte-identico a origin\/main del sito/);
+});
+
 test('files: sitePath e baseline coerenti col mode', () => {
   for (const f of manifest.files) {
     if (f.sitePath !== undefined) {
