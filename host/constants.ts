@@ -62,7 +62,9 @@ export const BASE_URL = 'https://frontaliereticino.ch';
 
 // Keep the transported Offerwall registry aligned with the site's active
 // Firebase Auth persistence key. The host does not receive Vite's runtime
-// environment, so it uses the same public fallback as the site build.
+// environment, so it uses the same public fallback as
+// `frontaliere-si-o-no/services/firebaseAuthPersistence.ts`; a key rotation
+// must update both paths in the paired change.
 const FIREBASE_AUTH_PERSISTENCE_KEY = 'firebase:authUser:AIzaSyCxbA2_3BiBOjZryR5LOXCf_c2-Sgg7YSc:[DEFAULT]';
 
 /**
