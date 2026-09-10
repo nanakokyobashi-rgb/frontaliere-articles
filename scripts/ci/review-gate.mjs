@@ -50,6 +50,8 @@
  * Exit: 0 approvato · 1 non approvato (il check-run diventa rosso)
  */
 import { execFileSync } from 'node:child_process';
+import { readFileSync } from 'node:fs';
+import { parseCodexFallbackEvidence, FALLBACK_STATUS } from './claude-codex-fallback.mjs';
 import { createHash } from 'node:crypto';
 import {
   prContributionFingerprint,
@@ -93,6 +95,18 @@ function lastBotReview() {
   } catch (e) {
     console.log(`review-gate: impossibile leggere le review (${String(e).slice(0, 160)}).`);
     return undefined; // undefined = incertezza, diverso da null = nessuna review
+  }
+  if (process.env.CODEX_FALLBACK_EVIDENCE_FILE) {
+    // Evidence comes from this run, never from the review's untrusted prose.
+    const evidence = parseCodexFallbackEvidence(readFileSync(process.env.CODEX_FALLBACK_EVIDENCE_FILE, 'utf8'));
+    if (evidence?.status !== FALLBACK_STATUS.SUCCESS) throw new Error('Evidenza Codex non valida o fallita');
+    const codex = reviews.filter((r) => r.user?.type === 'Bot'
+      && /^(?:github-actions\[bot\]|frontaliere-automation\[bot\])$/i.test(r.user?.login || '')
+      && r.commit_id === HEAD_SHA
+      && String(r.body || '').includes('<!-- CODEX_FALLBACK_REVIEW -->'));
+    // Missing/stale Codex review must not fall through to the workflow drift exemption.
+    if (!codex.length) throw new Error('Nessuna review Codex marcata sulla HEAD');
+    return codex[codex.length - 1];
   }
   const bots = reviews.filter(
     (r) => r.user?.type === 'Bot' && REVIEWER_BOT_LOGIN_RE.test(r.user?.login || ''),

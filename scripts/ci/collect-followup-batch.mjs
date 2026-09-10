@@ -485,7 +485,7 @@ export function main() {
   const query = `repo:${REPO} is:pr is:merged merged:>=${watermark}`;
   let prListRaw = gh([
     'api', `search/issues?q=${encodeURIComponent(query)}&per_page=${SEARCH_PAGE_SIZE}`,
-    '--paginate', '--slurp', ...repoArgs,
+    '--paginate', '--slurp',
   ]);
   let candidates;
   if (prListRaw !== null && !String(prListRaw).trim()) {
