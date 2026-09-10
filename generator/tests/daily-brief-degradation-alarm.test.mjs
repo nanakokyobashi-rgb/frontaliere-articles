@@ -86,15 +86,26 @@ const PERMANENT_REJECTION_FIXTURES = new Map([
 
 function permanentRejectionGrepPattern(yml = readFileSync(WORKFLOW_PATH, 'utf-8')) {
   const commitStep = sliceBetween(yml, '- name: Commit and push', '- name: Push hero');
-  const permanent = sliceBetween(commitStep, '\n          done', 'if [ "$LEDGER_ONLY" = true ]');
-  const rateHit = permanent.match(/! grep -qiE '([^']+)' <<< "\$OUTCOME"/);
-  const permanentHit = permanent.match(/&& grep -qiE '([^']+)' <<< "\$OUTCOME"/);
-  const outcomeHit = commitStep.match(/OUTCOME="\$\(grep -E '([^']+)' "\$ATTEMPT_LOG" \|\| true\)"/);
-  assert.ok(rateHit && permanentHit && outcomeHit, 'commit step must classify outcome lines from the push log');
+  const permanent = sliceBetween(
+    commitStep,
+    '\n          done',
+    'if [ "$LEDGER_ONLY" = true ]; then\n            echo "::warning::push fallito dopo 3 tentativi',
+  );
+  const rateHit = commitStep.match(/! grep -qiE '([^']+)' <<< "\$LAST_OUTCOME"/);
+  const permanentHit = commitStep.match(/&& grep -qiE '([^']+)' <<< "\$LAST_OUTCOME"/);
+  const lastOutcomeHit = commitStep.match(/LAST_OUTCOME="\$\(grep -E '([^']+)' "\$ATTEMPT_LOG" \|\| true\)"/);
+  const outcomeLogHit = commitStep.match(/cat "\$ATTEMPT_LOG" >> "\$PUSH_OUTCOME_LOG"/);
+  const permanentLogHit = commitStep.match(/cat "\$ATTEMPT_LOG" >> "\$PERMANENT_OUTCOME_LOG"/);
+  const allOutcomeHit = commitStep.match(/ALL_OUTCOME="\$\(grep -E '([^']+)' "\$PUSH_OUTCOME_LOG" \|\| true\)"/);
+  assert.ok(
+    rateHit && permanentHit && lastOutcomeHit && outcomeLogHit && permanentLogHit && allOutcomeHit,
+    'commit step must classify each push attempt and retain push-only snapshots',
+  );
   return {
     commitStep,
     permanent,
-    outcomePattern: outcomeHit[1],
+    outcomePattern: lastOutcomeHit[1],
+    allOutcomePattern: allOutcomeHit[1],
     ratePattern: rateHit[1],
     pattern: permanentHit[1],
   };
@@ -109,6 +120,31 @@ function pushLogMatchesPermanent(outcomePattern, pattern, text) {
   } catch (err) {
     if (err.status === 1) return false;
     throw err;
+  }
+  try {
+    execFileSync('grep', ['-qiE', pattern], { input: outcome, stdio: 'pipe' });
+    return true;
+  } catch (err) {
+    if (err.status === 1) return false;
+    throw err;
+  }
+}
+
+function pushAttemptCountsAsPermanent(outcomePattern, ratePattern, pattern, text) {
+  const file = path.join(mkdtempSync(path.join(tmpdir(), 'push-attempt-')), 'push.log');
+  writeFileSync(file, text);
+  let outcome;
+  try {
+    outcome = execFileSync('grep', ['-E', outcomePattern, file], { encoding: 'utf8' });
+  } catch (err) {
+    if (err.status === 1) return false;
+    throw err;
+  }
+  try {
+    execFileSync('grep', ['-qiE', ratePattern], { input: outcome, stdio: 'pipe' });
+    return false;
+  } catch (err) {
+    if (err.status !== 1) throw err;
   }
   try {
     execFileSync('grep', ['-qiE', pattern], { input: outcome, stdio: 'pipe' });
@@ -548,8 +584,8 @@ test('a day that stages only the ledger cannot turn a lost push into a permanent
     'the ledger-only case must be recognised by comparing the staged set to the ledger path itself',
   );
   const branches = commitStep.split('LEDGER_ONLY" = true');
-  assert.equal(branches.length, 2, 'only the retry-exhausted exit — a transient cause — may be degraded');
-  const head = branches[1].slice(0, branches[1].indexOf('fi'));
+  assert.equal(branches.length, 3, 'only empty and retry-exhausted transient causes may be degraded');
+  const head = branches[2].slice(0, branches[2].indexOf('fi'));
   assert.match(head, /::warning::/, 'the degraded branch warns');
   assert.match(head, /pushed=ledger-lost/, 'and says so on the step output');
   assert.match(head, /exit 0/, 'and stays green');
@@ -569,8 +605,10 @@ test('a day that stages only the ledger cannot turn a lost push into a permanent
   assert.match(commitStep, /git push "\$REMOTE" "HEAD:\$TARGET" 2>&1 \| tee "\$ATTEMPT_LOG"/,
     'the push must capture its output, or the cause of the failure cannot be classified');
   assert.match(commitStep, /: > "\$ATTEMPT_LOG"/, 'the attempt log must be truncated before each retry');
+  assert.match(commitStep, /cat "\$ATTEMPT_LOG" >> "\$PUSH_OUTCOME_LOG"/, 'the machine-readable log must retain every push snapshot');
   assert.match(commitStep, /cat "\$ATTEMPT_LOG" >> "\$PUSH_LOG"/, 'the human-readable push log must retain every retry');
-  assert.doesNotMatch(commitStep, /tee -a "\$PUSH_LOG"/, 'classification must not read an accumulated retry log');
+  assert.match(commitStep, /cat "\$ATTEMPT_LOG" >> "\$PERMANENT_OUTCOME_LOG"/, 'eligible permanent markers must survive across retries');
+  assert.doesNotMatch(commitStep, /grep -E '[^']+' "\$PUSH_LOG"/, 'the human summary must never be the classification source');
   assert.match(commitStep, /push_status=\$\{PIPESTATUS\[0\]\}/,
     'the push result must be read separately from tee under pipefail');
   assert.match(commitStep, /if \[ "\$push_status" -eq 0 \]; then/,
@@ -590,28 +628,122 @@ test('a day that stages only the ledger cannot turn a lost push into a permanent
   assert.equal(signs.includes('remote rejected'), false, 'bare remote rejected swallows ref races and platform errors');
   assert.match(permanent, /::error::/, 'and it is an error');
   assert.match(permanent, /exit 1/, 'and it is red');
-  assert.doesNotMatch(permanent, /LEDGER_ONLY/, 'a permanent rejection is fatal even on a ledger-only day');
+  const permanentDecisionAt = permanent.indexOf('if [ -n "$ALL_OUTCOME" ]');
+  const emptyDecisionAt = permanent.lastIndexOf('if [ -z "$LAST_OUTCOME" ]');
+  assert.ok(permanentDecisionAt >= 0 && permanentDecisionAt < emptyDecisionAt,
+    'permanent markers must be consulted before the empty latest outcome branch');
+  const permanentBranch = permanent.slice(permanentDecisionAt, emptyDecisionAt);
+  assert.match(permanentBranch, /PERMANENT_OUTCOME_LOG/, 'the early decision must read the permanent marker union');
+  assert.doesNotMatch(permanentBranch, /LEDGER_ONLY/, 'a permanent rejection is fatal even on a ledger-only day');
 
   // L'edizione, invece, resta rossa: dopo il `fi` del ramo degradato la coda
   // dello step e' ancora l'errore del push perso. Contare gli `exit 1` non lo
   // proverebbe: il totale resterebbe uguale se il rosso si spostasse altrove.
-  const tail = branches[1].slice(branches[1].indexOf('fi') + 2);
+  const tail = branches[2].slice(branches[2].indexOf('fi') + 2);
   assert.match(tail, /::error::push failed after 3 attempts/, 'a lost EDITION must still be red');
   assert.match(tail, /exit 1/, 'and it must exit non-zero');
 });
 
-test('the permanent classifier captures one attempt outcome and avoids grep pipelines under pipefail', () => {
-  const { commitStep, outcomePattern } = permanentRejectionGrepPattern();
-  assert.match(commitStep, /OUTCOME="\$\(grep -E '([^']+)' "\$ATTEMPT_LOG" \|\| true\)"/,
-    'the outcome lines must be captured once from the latest attempt');
-  assert.match(commitStep, /! grep -qiE '[^']+' <<< "\$OUTCOME"/,
-    'rate-limit classification must reuse the captured outcome');
-  assert.match(commitStep, /&& grep -qiE '[^']+' <<< "\$OUTCOME"/,
-    'permanent classification must reuse the captured outcome');
+test('the permanent classifier separates latest rate-limit veto from per-attempt markers', () => {
+  const { commitStep, outcomePattern, allOutcomePattern, ratePattern, pattern } = permanentRejectionGrepPattern();
+  assert.match(commitStep, /LAST_OUTCOME="\$\(grep -E '([^']+)' "\$ATTEMPT_LOG" \|\| true\)"/,
+    'the latest attempt must have its own outcome projection');
+  assert.match(commitStep, /PUSH_OUTCOME_LOG="\$\(mktemp\)"/,
+    'all push attempts must have a separate cumulative log');
+  assert.match(commitStep, /PERMANENT_OUTCOME_LOG="\$\(mktemp\)"/,
+    'the permanent-marker union must have its own filtered log');
+  assert.match(commitStep, /ALL_OUTCOME="\$\(grep -E '[^']+' "\$PUSH_OUTCOME_LOG" \|\| true\)"/,
+    'the cumulative outcome projection must read the push-only union');
+  assert.match(commitStep, /! grep -qiE '[^']+' <<< "\$LAST_OUTCOME"/,
+    'rate-limit classification must read only the latest attempt');
+  assert.match(commitStep, /&& grep -qiE '[^']+' <<< "\$LAST_OUTCOME"/,
+    'permanent classification must inspect one attempt at a time');
+  assert.match(commitStep, /grep -qiE '[^']+' "\$PERMANENT_OUTCOME_LOG"/,
+    'the final permanent decision must use the filtered union');
   assert.match(outcomePattern, /\^ \*! \\\[/,
     'ref-status lines must be part of the outcome filter');
-  assert.doesNotMatch(commitStep, /grep -E '[^']+' "\$PUSH_LOG"\s*\|\s*grep -qiE/,
-    'the classifier must not use a grep pipeline that can return SIGPIPE 141');
+  assert.doesNotMatch(commitStep, /grep .*"\$PUSH_LOG".*grep/,
+    'the classifier must not inspect the human summary');
+  assert.doesNotMatch(commitStep, /ALL_OUTCOME="\$\(grep -E '[^']+' "\$PUSH_LOG"/,
+    'ALL_OUTCOME must never read the human summary');
+
+  const earlierPermanent = [
+    'remote: Permission denied',
+    '! [rejected] HEAD -> main (fetch first)',
+  ].join('\n');
+  assert.equal(
+    pushAttemptCountsAsPermanent(outcomePattern, ratePattern, pattern, earlierPermanent),
+    true,
+    'a permanent marker from attempt 1 must survive a different later failure',
+  );
+  assert.equal(
+    pushAttemptCountsAsPermanent(outcomePattern, ratePattern, pattern, [
+      'remote: secondary rate limit exceeded',
+      'fatal: HTTP 403',
+    ].join('\n')),
+    false,
+    'a 403 in the same throttled attempt must not enter the permanent union',
+  );
+  assert.equal(
+    pushLogMatchesPermanent(allOutcomePattern, pattern, [
+      'remote: Permission denied',
+      'error: [push-rebase] failed before attempt 2; aborting',
+      'fatal: repository not found during rebase abort',
+    ].join('\n')),
+    true,
+    'the raw cumulative projection may contain only push snapshots; rebase text is not appended to it by the workflow',
+  );
+});
+
+test('an earlier permanent marker is not lost when the final push has no outcome', () => {
+  const { permanent } = permanentRejectionGrepPattern();
+  const permanentDecisionAt = permanent.indexOf('if [ -n "$ALL_OUTCOME" ]');
+  const emptyDecisionAt = permanent.lastIndexOf('if [ -z "$LAST_OUTCOME" ]');
+  assert.ok(permanentDecisionAt >= 0, 'the permanent decision must be explicit');
+  assert.ok(emptyDecisionAt >= 0, 'the empty-outcome fallback must be explicit');
+  assert.ok(permanentDecisionAt < emptyDecisionAt,
+    'an earlier permanent push result must be checked before ledger-lost fallback');
+
+  const decisionBeforeEmpty = permanent.slice(permanentDecisionAt, emptyDecisionAt);
+  assert.match(decisionBeforeEmpty, /PERMANENT_OUTCOME_LOG/,
+    'the pre-empty decision must consult durable push evidence');
+  assert.match(decisionBeforeEmpty, /LAST_OUTCOME/,
+    'the latest rate-limit veto must still be considered before the red');
+  assert.match(decisionBeforeEmpty, /::error::/,
+    'the retained permanent marker must spend the red');
+  assert.match(decisionBeforeEmpty, /exit 1/,
+    'the retained permanent marker must stop the step');
+  assert.doesNotMatch(decisionBeforeEmpty, /pushed=ledger-lost/,
+    'the permanent branch must not degrade the run');
+});
+
+test('an empty latest outcome is explicit and the intermediate rebase is retained', () => {
+  const { commitStep, permanent } = permanentRejectionGrepPattern();
+  const emptyAt = permanent.lastIndexOf('if [ -z "$LAST_OUTCOME" ]');
+  const permanentAt = permanent.indexOf('if [ -n "$ALL_OUTCOME" ]');
+  assert.ok(emptyAt >= 0 && permanentAt >= 0 && permanentAt < emptyAt,
+    'the empty outcome must be checked after permanent evidence');
+  const emptyBranch = permanent.slice(emptyAt);
+  assert.match(emptyBranch, /push-outcome-empty/, 'the empty outcome must leave a machine-readable signal');
+  assert.match(emptyBranch, /LEDGER_ONLY/, 'the empty outcome must distinguish a ledger-only retry');
+  assert.match(emptyBranch, /pushed=ledger-lost/, 'a ledger-only empty outcome may be delayed, not silently lost');
+  assert.match(emptyBranch, /exit 0/, 'a ledger-only empty outcome stays on the transient path');
+  assert.match(emptyBranch, /exit 1/, 'an edition with an empty outcome remains red');
+
+  assert.match(commitStep, /git pull --rebase "\$REMOTE" "\$TARGET" 2>&1/,
+    'the intermediate rebase must be captured');
+  assert.match(commitStep, /\| tee -a "\$PUSH_LOG"/, 'rebase output must enter the cumulative log');
+  assert.doesNotMatch(commitStep, /git pull --rebase[\s\S]*?\| tee -a "\$ATTEMPT_LOG"/, 'rebase output must stay out of the push attempt log');
+  assert.match(commitStep, /rebase_status=\$\{PIPESTATUS\[0\]\}/,
+    'the rebase result must be separated from tee');
+  assert.match(commitStep, /git rebase --abort 2>&1/, 'a failed rebase must be aborted visibly');
+  assert.match(commitStep, /\[push-rebase\] (completed|failed|aborted)/,
+    'success and partial failure must remain distinguishable in outcome lines');
+  const abortGuard = sliceFrom(commitStep, 'if [ "$abort_status" -eq 0 ]; then');
+  const abortBranch = sliceUntil(abortGuard, '\n          fi');
+  assert.match(abortBranch, /abort failed/, 'an abort failure must be explicit');
+  assert.match(abortBranch, /refusing to retry/, 'an abort failure must stop the retry loop');
+  assert.match(abortBranch, /exit 1/, 'an abort failure must leave the run red');
 });
 
 test('the permanent-rejection grep fires on ruleset/HTTP 403 and not on progress or a fetch-first race', () => {
@@ -700,8 +832,8 @@ test('rate-limit and hint lines cannot turn a transient push into a permanent re
   ].join('\n');
   assert.equal(pushLogMatchesPermanent(outcomePattern, ratePattern, throttled), true,
     'the causal rate-limit marker must be visible on the outcome lines');
-  assert.equal(pushLogMatchesPermanent(outcomePattern, pattern, throttled), true,
-    'the permanent pattern may still match the 403; the workflow guard gives rate-limit precedence');
+  assert.equal(pushAttemptCountsAsPermanent(outcomePattern, ratePattern, pattern, throttled), false,
+    'a permanent-looking 403 in the same throttled attempt must be filtered out');
 });
 
 test('the crossing verdict is not spent on a run whose ledger never reached main', () => {
