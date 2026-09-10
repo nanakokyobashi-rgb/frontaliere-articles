@@ -1,5 +1,4 @@
 {
-  "https://www.swissinfo.ch/ita/offre-20-franchi-a-controllore-per-non-pagare-multa%2c-si-muove-l%27mpc/91900170": "offre-controllore-treno-multa",
   "https://www.tio.ch/sport/calcio/1944097/aa-coppa-svizera-quali-formazione": "coppa-svizzera-risultati-partiti",
   "https://www.admin.ch/it/newnsb/fjrhye9no5ebzov3xa3dw": "labatori-di-agsrosope-consegna-chiavi",
   "https://www.tio.ch/dal-mondo/politica/1944135/ora-cambio-legale-senato-trump": "trump-ora-legale-senato-usa",
@@ -2293,6 +2292,11 @@
   "https://www.tvsvizzera.it/tvs/svizzera-istruzioni-per-luso": {
     "articleId": "svizzera-corruzione-restituzione-banche",
     "ts": "2026-09-09T23:35:39.102Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/politica/1949060/federale-essere-amherd-consiglio-prescrizione-consigliera-viola-chiede-acquisto-f-35": {
+    "articleId": "f-35-amherd-prescrizione-responsabilita",
+    "ts": "2026-09-10T02:33:16.770Z",
     "keyForm": 2
   }
 }
