@@ -6184,6 +6184,7 @@ async function _callOpenAICompatible(apiModel, messages, opts, { endpoint, apiKe
           }
           const err = new Error(`[${displayModel}] HTTP ${res.status}: ${raw.slice(0, 300)}`);
           err.nonRetryable = true;
+          err.nonRetryableReason = nrc.reason ?? (nrc.markExhausted ? 'persistent' : null);
           throw err;
         }
         // Retryable error — wait and retry (use double backoff for 429 rate limits)
@@ -7715,6 +7716,7 @@ async function _callGeminiRaw(model, messages, opts) {
           }
           const err = new Error(`[${model}] HTTP ${res.status}: ${raw.slice(0, 300)}`);
           err.nonRetryable = true;
+          err.nonRetryableReason = nrc.reason ?? (nrc.markExhausted ? 'persistent' : null);
           throw err;
         }
         if (isRetryableError(res.status, raw) && attempt < opts.maxRetriesPerModel) {
@@ -8380,7 +8382,7 @@ export async function callLLM(messages, opts = {}) {
       // che questo stesso modulo definisce transitorio per costruzione.
       const errorRow = pushError(
         `${model}: ${msg.slice(0, 200).replace(ENTRY_TAIL_SEPARATOR_RE, '')}`,
-        { reason: `${model}: ${msg}`, authoritative: e.nonRetryable === true ? 'persistent' : null },
+        { reason: `${model}: ${msg}`, authoritative: e.nonRetryableReason === 'persistent' ? 'persistent' : null },
       );
       _recordLastResortOutcome(model, 'failed');
 
@@ -8972,17 +8974,16 @@ export function classifyExhaustionCause(errors, { authoritative } = {}) {
     // zero articoli, nessun Bug aperto: proprio l'esito «verde-senza-articolo»
     // che questo tally esiste per impedire.
     //
-    // Quindi una causa NON autorevole resta nella finestra mostrata per
-    // entrambe le regex. Il testo intero e' ammesso solo quando il provider ha
-    // consegnato un verdetto autorevole, portato dall'oggetto o dal marker
-    // serializzato nella riga del report.
+    // Quindi una causa NON autorevole resta nella finestra mostrata per il
+    // transitorio, mentre il vocabolario persistente legge il messaggio intero:
+    // una causa persistente oltre il taglio non deve diventare ambigua.
     const transientWindow = entry && typeof entry === 'object' && Number.isFinite(entry.transientWindow)
       ? entry.transientWindow
       : text.length;
     const transientText = text.slice(0, transientWindow);
     const authoritativeBucket = authoritativeCauseBucket(entryAuthoritative);
     const transientAt = causeIndex(transientRe, transientText);
-    const persistentText = authoritativeBucket === null ? transientText : text;
+    const persistentText = text;
     const persistentAt = causeIndex(PERSISTENT_EXHAUSTION_RE, persistentText);
     const isTransient = authoritativeBucket === 'transient'
       || (authoritativeBucket === null && transientAt >= 0 && (persistentAt < 0 || transientAt <= persistentAt));

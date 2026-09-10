@@ -1345,7 +1345,7 @@ describe('callLLM — il contatore dei flap del resolver (#818)', () => {
     assert.equal(err.exhaustionBreakdown.persistent, 1, `l'escalation deve prevalere sulla parola «aborted»: ${JSON.stringify(err.exhaustionBreakdown)}`);
   });
 
-  it('non classifica come persistente una causa non autorevole oltre la riga mostrata', async () => {
+  it('classifica un 401 persistente anche quando la causa supera la riga mostrata', async () => {
     process.env.AI_MODELS_FORCE_CHAIN = 'gpt-4o-mini';
     globalThis.fetch = async () => {
       throw new Error(`${'x'.repeat(200)} HTTP 401 invalid api key`);
@@ -1354,8 +1354,17 @@ describe('callLLM — il contatore dei flap del resolver (#818)', () => {
     const err = await run();
     assert.ok(err, 'la catena deve fallire');
     assert.equal(err.exhaustionBreakdown.transient, 0);
-    assert.equal(err.exhaustionBreakdown.persistent, 0,
+    assert.equal(err.exhaustionBreakdown.persistent, 1,
       `la coda non autorevole non deve entrare nel voto: ${JSON.stringify(err.exhaustionBreakdown)}`);
+  });
+
+  it('legge dal testo intero una causa persistente oltre la finestra del transitorio', () => {
+    const body = 'x'.repeat(220) + ' HTTP 403 insufficient credits';
+    const b = classifyExhaustionCause([
+      { reason: 'gh/m1: ' + body, authoritative: null, transientWindow: 200 },
+    ]);
+    assert.equal(b.transient, 0, 'la finestra iniziale non contiene un token transitorio');
+    assert.equal(b.persistent, 1, 'il vocabolario persistente deve leggere la causa completa');
   });
 
   it('conserva il verdetto persistente autorevole e lo serializza nella riga', async () => {
@@ -1368,6 +1377,18 @@ describe('callLLM — il contatore dei flap del resolver (#818)', () => {
     assert.equal(err.exhaustionBreakdown.persistent, 1,
       `un HTTP 401 autorevole deve votare persistente: ${JSON.stringify(err.exhaustionBreakdown)}`);
     assert.match(err.message, /\[authoritative-cause=persistent\]/);
+  });
+
+  it('non promuove unavailable_model o schema_unsupported a persistente', async () => {
+    process.env.AI_MODELS_FORCE_CHAIN = 'gpt-4o-mini';
+    for (const body of ['unavailable_model', 'unsupported parameter: response_format is not supported']) {
+      resetState();
+      globalThis.fetch = async () => new Response(body, { status: 400 });
+      const err = await run();
+      assert.ok(err, 'la catena deve fallire');
+      assert.equal(err.exhaustionBreakdown.transient, 0, body);
+      assert.equal(err.exhaustionBreakdown.persistent, 0, body);
+    }
   });
 
   it('un messaggio persistente esterno impedisce a EAI_AGAIN annidato di votare flap', async () => {
