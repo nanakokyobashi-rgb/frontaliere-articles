@@ -14,22 +14,27 @@
  * lascia un check-run `failure` su quello SHA; `[0]` ne pescava uno ARBITRARIO,
  * così un `failure` stantio mascherava il `success` reale → auto-merge bloccato
  * a oltranza pur con i test verdi (l'auto-merge è event-driven e non ri-valuta
- * da solo). La selezione "ultimo COMPLETATO per completed_at" è invariante
- * all'ordine API e ai duplicati: vince il verdetto finito più fresco per il
- * codice all'HEAD.
+ * da solo). La selezione "ultimo COMPLETATO con verdetto per completed_at" è
+ * invariante all'ordine API e ai duplicati: vince il verdetto finito più fresco
+ * per il codice all'HEAD. Un job `skipped` è completato ma non è un verdetto e
+ * viene escluso.
  *
  * I run in-progress/queued (senza `completed_at`) sono ignorati di proposito:
  * un dispatch manuale appeso non deve bloccare il merge per sempre. Se NESSUN
  * vitest è ancora concluso ritorna '' (gate in attesa) — preserva l'invariante
  * #1454 "niente merge su pending/missing".
  */
-import { VITEST_CHECK_NAME, VITEST_SHARD_NAME_RE } from './constants.mjs';
+import {
+  VITEST_CHECK_NAME,
+  VITEST_EXECUTION_JOB_NAME,
+  VITEST_SHARD_NAME_RE,
+} from './constants.mjs';
 
 /**
  * @param {Array<{name?: string, status?: string, conclusion?: string, completed_at?: string}>} checkRuns
  *   L'array `.check_runs` della GitHub check-runs API.
- * @returns {string} La conclusion del check-run vitest COMPLETATO più recente
- *   (per `completed_at`), o '' se nessuno è ancora concluso/presente.
+ * @returns {string} La conclusion del check-run vitest COMPLETATO con verdetto
+ *   più recente (per `completed_at`), o '' se nessuno è ancora concluso/presente.
  */
 export function latestCompletedVitestConclusion(checkRuns) {
   const last = latestCompletedVitestRun(checkRuns);
@@ -41,7 +46,8 @@ export function latestCompletedVitestConclusion(checkRuns) {
  * la sua conclusion: serve a chi ha bisogno anche del `completed_at` (quando la
  * PR è stata testata) per correlarlo con lo stato di `main` a quell'istante —
  * vedi `vitestFailureIsNotAttributableToPr`. Stessa identica selezione (ultimo
- * COMPLETATO per `completed_at`), estratta per non duplicare il filtro fragile.
+ * COMPLETATO con verdetto per `completed_at`), estratta per non duplicare il
+ * filtro fragile.
  *
  * @param {Array<{name?: string, status?: string, conclusion?: string, completed_at?: string}>} checkRuns
  * @returns {{name?: string, status?: string, conclusion?: string, completed_at?: string}|null}
@@ -51,8 +57,21 @@ export function latestCompletedVitestRun(checkRuns) {
 }
 
 /**
+ * Il job che esegue la suite e la review pubblica anche il check required.
+ * Questo helper restituisce il suo link Jobs API ai consumer che leggono gli
+ * step; la selezione coincide con quella del verdetto required.
+ *
+ * @param {Array<{name?: string, status?: string, conclusion?: string, completed_at?: string}>} checkRuns
+ * @returns {{name?: string, status?: string, conclusion?: string, completed_at?: string, details_url?: string}|null}
+ */
+export function latestCompletedVitestExecutionRun(checkRuns) {
+  return latestCompletedRunByName(checkRuns, VITEST_EXECUTION_JOB_NAME);
+}
+
+/**
  * Generalizzazione di `latestCompletedVitestRun` a un check-run name
- * arbitrario — stessa selezione ("ultimo COMPLETATO per `completed_at`", non
+ * arbitrario — stessa selezione ("ultimo COMPLETATO con verdetto per
+ * `completed_at`", non
  * un `[0]` arbitrario), stessa ragione (un SHA immutabile può portare più
  * check-run con lo stesso nome, es. un `workflow_dispatch` manuale sullo
  * stesso branch). Usata anche per `GENERATOR_CI_JOB_NAME` (#242: il gate
@@ -71,6 +90,7 @@ export function latestCompletedRunByName(checkRuns, name) {
         c &&
         c.name === name &&
         c.status === 'completed' &&
+        c.conclusion !== 'skipped' &&
         typeof c.completed_at === 'string' &&
         c.completed_at,
     )
@@ -79,7 +99,7 @@ export function latestCompletedRunByName(checkRuns, name) {
 }
 
 /**
- * Conclusion del check-run COMPLETATO più recente per un nome arbitrario, o
+ * Conclusion del check-run COMPLETATO con verdetto più recente per un nome arbitrario, o
  * `''` se nessuno è ancora concluso/presente. Sibling di
  * `latestCompletedVitestConclusion` per check-run diversi da vitest (#242).
  *
@@ -102,18 +122,19 @@ export function latestCompletedConclusionByName(checkRuns, name) {
  * presentarsi altrimenti. Dopo il de-sharding (#2882) può, e il nome mentiva:
  * un verdetto `cancelled` non è un `failure`. Vedi le due topologie sotto.
  *
- * ── Topologia CORRENTE: un solo job (post #2882) ───────────────────────────
- * `tests.yml` ha un unico job `vitest (unit + integration)`, senza matrice.
- * Una cancellazione (concurrency `cancel-in-progress`, runner shutdown) atterra
- * quindi come `cancelled` DIRETTAMENTE sul check-run, senza collasso in
- * `failure`. Quel verdetto non è un fallimento: il run non ha prodotto NESSUN
- * verdetto sul codice, quindi ri-eseguirlo non può mascherare un test rotto —
- * è l'unico modo per ottenere un'informazione che al momento non esiste.
+ * ── Topologia CORRENTE: un unico job required ─────────────
+ * `tests.yml` ha un unico job che esegue i controlli e pubblica il required, senza
+ * matrice. Una cancellazione (concurrency `cancel-in-progress`, runner
+ * shutdown) atterra quindi come `cancelled` sul check required, senza
+ * collasso in `failure`. Quel verdetto non è un fallimento del codice: il run
+ * non ha prodotto NESSUN verdetto, quindi ri-eseguirlo non può mascherare un
+ * test rotto — è l'unico modo per ottenere un'informazione che al momento non
+ * esiste.
  *
  * Senza questo ramo `cancelled` è uno stato ASSORBENTE, la stessa trappola
  * chiusa da `vitestFailureIsNotAttributableToPr` per il caso `failure`:
  *   - `auto-merge-eval` esige `success` → blocca;
- *   - la review Claude gira dentro il job vitest, DOPO i test (fino al
+ *   - la review Claude gira dentro il job di esecuzione, DOPO i test (fino al
  *     2026-08-26 era `pr-review-loop.yml`, gattato su `tests` success)
  *     → nessuna review ⇒ nessun `## LGTM`, nessuna label;
  *   - `vitestFailureIsNotAttributableToPr` esige `failure` → non copre;
@@ -138,7 +159,7 @@ export function latestCompletedConclusionByName(checkRuns, name) {
  *    un run fresco già in coda risolverà da sé → non ri-dispatchare. Questo
  *    gestisce anche i duplicati su SHA immutabile (un `workflow_dispatch` manuale
  *    sullo stesso SHA): se esiste un set più nuovo ancora in corso, attendiamo.
- *  - Il verdetto COMPLETATO più recente (`latestCompletedVitestConclusion`, non
+ *  - Il verdetto COMPLETATO con conclusion non-`skipped` più recente (`latestCompletedVitestConclusion`, non
  *    un `[0]` arbitrario) dev'essere `cancelled` o `failure`: se l'ultimo run è
  *    già `success` non c'è nulla da sanare.
  *
@@ -199,7 +220,7 @@ export function vitestVerdictIsTransientCancellation(checkRuns) {
  * vitest=failure sull'HEAD è sempre un fail reale». Sul merge ref quella
  * premessa è FALSA, e su di essa poggiava l'intera catena di recupero, che
  * diventa uno stato ASSORBENTE:
- *   1. la review Claude gira dentro il job vitest, DOPO i test (fino al
+ *   1. la review Claude gira dentro il job di esecuzione, DOPO i test (fino al
  *      2026-08-26 era `pr-review-loop.yml`, gattato su `tests` success)
  *      → vitest rosso ⇒ nessuna review ⇒ nessun `## LGTM`, nessuna label.
  *   2. `pr-autorebase.mjs` tratta come near-merge solo LGTM / `collision-risk` /
@@ -290,20 +311,47 @@ export function vitestFailureIsNotAttributableToPr({
  */
 export const REVIEW_GATE_STEP_NAME = 'Require approving Claude review';
 
-/**
- * Nome dello step di `tests.yml` che fallisce quando `claude-code-action` è
- * morta senza postare una review (max_turns, `outcome=failure`, 5xx). Vive qui
- * accanto agli altri due nomi perché è il terzo pezzo dello stesso
- * discriminante: dice che il rosso del gate è la CONSEGUENZA di una review mai
- * conclusa, non un verdetto negativo — vedi `vitestFailureIsReviewGate` e
- * `reviewAbortedWithoutVerdict`. Pinnato contro il workflow da
- * `generator/tests/review-step-names.test.mjs`.
- */
+/** Nome dello step che esegue davvero la review dentro il job di esecuzione. */
+export const CLAUDE_REVIEW_STEP_NAME = 'Run Claude review';
+
+/** Nome dello step che rende esplicita una review abortita senza verdetto. */
 export const REVIEW_ABORT_STEP_NAME = 'Fail on transient API error (no review posted)';
 
+const REVIEW_STEP_IN_FLIGHT = new Set(['queued', 'in_progress']);
+const NON_GATING_REVIEW_STEPS = new Set([
+  'Mint GitHub App token for Claude review',
+  'Claude usage metrics',
+  'Explain the job verdict in the run summary',
+]);
+// Questi due step appartengono alla review, non al codice della PR. Un loro
+// rosso non deve trasformare un gate puro in un falso rosso dei test.
+export const REVIEW_DEATH_STEP_NAMES = new Set([
+  CLAUDE_REVIEW_STEP_NAME,
+  REVIEW_ABORT_STEP_NAME,
+]);
+
 /**
- * Il rosso del check `vitest (unit + integration)` è il REVIEW GATE e non i
- * test?
+ * La review è in volo secondo la Jobs API?
+ *
+ * Il check-run non si chiama più `review`: dal 2026-08-26 la review è uno
+ * step del job required `vitest (unit + integration)`. Il chiamante deve quindi
+ * leggere `.steps` del job corrente e non cercare un check-run ormai morto.
+ */
+export function reviewStepIsInFlight(steps) {
+  if (!Array.isArray(steps)) return false;
+  return steps.some(
+    (step) => step?.name === CLAUDE_REVIEW_STEP_NAME && REVIEW_STEP_IN_FLIGHT.has(String(step.status || '')),
+  );
+}
+
+/** Uno step advisory non è un test né il review gate. */
+export function isNonGatingReviewStep(name) {
+  return NON_GATING_REVIEW_STEPS.has(String(name || ''));
+}
+
+/**
+ * Il rosso del check required `vitest (unit + integration)` è il REVIEW GATE
+ * del job di esecuzione e non i test?
  *
  * ── PERCHÉ SERVE ───────────────────────────────────────────────────────────
  * Fino al 2026-08-26 la review Claude era un workflow a parte
@@ -323,38 +371,6 @@ export const REVIEW_ABORT_STEP_NAME = 'Fail on transient API error (no review po
  * precondizione normale. Meglio non riciclare una PR riciclabile che riciclare
  * all'infinito una PR coi test rossi (#5896/#5906).
  *
- * ── L'ECCEZIONE: LA MORTE DELLA REVIEW (#975) ──────────────────────────────
- * «Un altro step rosso» valeva come prova di «test rotti sotto» finché ogni
- * altro step del job giudicava il CODICE. Uno non lo fa:
- * `REVIEW_ABORT_STEP_NAME` fallisce quando `claude-code-action` è morta —
- * `terminal_reason=max_turns`, `outcome=failure`, 5xx transiente — SENZA
- * postare un verdetto. In quello stato la co-occorrenza col gate non è un
- * indizio, è una CONSEGUENZA: nessuna review postata ⇒ nessun `## LGTM` sulla
- * HEAD ⇒ `Require approving Claude review` fallisce per costruzione. I test
- * sono verdi (la catena è fail-fast: col rosso dei test `Resolve PR` non gira
- * e il gate resta `skipped`, non `failure`), e lo step morto scrive lui stesso
- * sulla PR «rilancia il run di `tests` più recente». Negare lì il one-shot
- * significa negarlo proprio dove il re-trigger È la cura, e far dire allo
- * sticky «serve far passare i test» a una PR coi test verdi.
- *
- * Nella whitelist c'è anche `CLAUDE_REVIEW_STEP_NAME`. Oggi non dovrebbe mai
- * comparire rosso — lo step ha `continue-on-error: true`, e la `conclusion` che
- * la jobs API riporta è quella DOPO l'applicazione del flag — ma la ragione per
- * tollerarlo è identica e non dipende da quel dettaglio: se lo step della
- * review è rosso, a essere morta è la review, non i test della PR. Farne
- * dipendere il discriminante sarebbe fragile per niente.
- *
- * ── PERCHÉ UNA WHITELIST DI DUE NOMI E NON UN ALLENTAMENTO ─────────────────
- * Misura sulle ultime 60 run `tests` fallite (2026-09-06): 43 hanno il review
- * gate rosso e in ZERO di esse un secondo step è fallito. `Generator CI gate`
- * è fallito 2 volte, entrambe insieme a `Unit + closure gates` — cioè su
- * codice davvero rotto, dove negare il one-shot è giusto: un re-trigger non
- * ripara `generator-ci`. La co-occorrenza è quindi l'eccezione, non la norma,
- * e non giustifica un discriminante generico. L'unico caso in cui è
- * STRUTTURALE è la morte della review, e si nomina per identità. Tutto il
- * resto — `Generator CI gate`, i gate unit, il contratto del body — resta
- * fail-CLOSED com'era.
- *
  * Pura: nessuna I/O. Il chiamante fetcha gli step e rende l'azione one-shot.
  *
  * @param {Array<{name?: string, conclusion?: string}>} steps `.steps` di
@@ -365,31 +381,43 @@ export function vitestFailureIsReviewGate(steps) {
   if (!Array.isArray(steps) || steps.length === 0) return false;
   let gateFailed = false;
   for (const s of steps) {
-    if (!s || s.conclusion !== 'failure') continue;
-    if (s.name === REVIEW_GATE_STEP_NAME) gateFailed = true;
-    // La morte della review NON è un secondo rosso indipendente: è la CAUSA
-    // del rosso del gate. Vedi «L'ECCEZIONE» sopra.
-    else if (!REVIEW_DEATH_STEP_NAMES.has(s.name)) return false;
+    // `cancelled` è un rosso operativo quanto `failure`: un cap del job può
+    // lasciare i test senza verdetto, e ignorarlo farebbe passare il caso per
+    // review pura (#1185).
+    if (!s || !['failure', 'cancelled'].includes(s.conclusion)) continue;
+    // Jobs API può esporre `failure` anche per `continue-on-error: true`.
+    // Questi step sono advisory: il solo fallimento del review gate resta il
+    // discriminante, non il rumore di token/metriche dopo il gate.
+    if (isNonGatingReviewStep(s.name)) continue;
+    if (s.name === REVIEW_GATE_STEP_NAME && s.conclusion === 'failure') gateFailed = true;
+    else if (REVIEW_DEATH_STEP_NAMES.has(s.name)) continue;
+    else return false; // un altro step rosso: non è (solo) il gate.
   }
   return gateFailed;
 }
 
 /**
- * Il rosso del review gate viene da una review MORTA senza postare, non da un
- * verdetto negativo?
+ * Il gate è rosso perché il `Re-review guard` ha saltato Claude, non perché la
+ * review sia fallita a metà? Pura e conservativa: un abort esplicito della
+ * review prevale sul semplice `skipped`, così un errore API non consuma/nega
+ * il one-shot del review gate (#1140).
  *
- * Stessa lista di step delle altre due domande, terzo discriminante: lo step
- * `REVIEW_ABORT_STEP_NAME` è `failure`. È il complemento di
- * `reviewSkippedByGuard` — lì la review non è partita e il re-trigger è un
- * no-op; qui è partita, è morta, e il re-trigger è esattamente ciò che le dà
- * un'altra possibilità. Serve al chiamante per NOMINARE la causa vera
- * all'operatore: «manca un `## LGTM`» e «la review è morta a metà» chiedono
- * due azioni diverse.
- *
- * Fail-CLOSED come le altre: senza un `REVIEW_GATE_STEP_NAME` in `failure`
- * risponde `false`.
- *
- * Pura: nessuna I/O.
+ * @param {Array<{name?: string, conclusion?: string}>} steps
+ * @returns {boolean}
+ */
+export function reviewSkippedByGuard(steps) {
+  if (!Array.isArray(steps) || steps.length === 0) return false;
+  const gate = steps.find((s) => s && s.name === REVIEW_GATE_STEP_NAME);
+  if (!gate || gate.conclusion !== 'failure') return false;
+  const abort = steps.find((s) => s && s.name === REVIEW_ABORT_STEP_NAME);
+  if (abort && ['failure', 'cancelled'].includes(abort.conclusion)) return false;
+  const review = steps.find((s) => s && s.name === CLAUDE_REVIEW_STEP_NAME);
+  return Boolean(review && review.conclusion === 'skipped');
+}
+
+/**
+ * La review è partita ma è morta senza postare il proprio verdetto?
+ * L'output esplicito dello step di abort è la prova disponibile al consumer.
  *
  * @param {Array<{name?: string, conclusion?: string}>} steps
  * @returns {boolean}
@@ -468,68 +496,3 @@ export function currentAttemptJobSteps({ checkRun, jobId, jobs }) {
   if (checkRun.head_sha && job.head_sha && job.head_sha !== checkRun.head_sha) return [];
   return Array.isArray(job.steps) ? job.steps : [];
 }
-
-/**
- * Nome dello step di `tests.yml` che invoca `claude-code-action` per la review.
- * Vive qui accanto a `REVIEW_GATE_STEP_NAME` perché è l'altra metà dello stesso
- * discriminante: il gate dice CHE il verdetto manca, questo step dice se un
- * verdetto NUOVO era possibile su quella run — vedi `reviewSkippedByGuard`.
- * Pinnato contro il workflow da `generator/tests/review-step-names.test.mjs`.
- */
-export const CLAUDE_REVIEW_STEP_NAME = 'Run Claude review';
-
-/**
- * Il rosso del review gate è arrivato SENZA che la review girasse, perché il
- * `Re-review guard` l'ha saltata?
- *
- * ── PERCHÉ SERVE ───────────────────────────────────────────────────────────
- * Il one-shot del review gate (`decideReopen` → `failureNotAttributable ===
- * 'review-gate'`) si regge su una premessa: «la review è già girata e il
- * re-trigger ne produce una nuova». Quella premessa cade quando lo step
- * `Re-review guard` di `tests.yml` ha saltato Claude — delta dall'ultima
- * `## LGTM` di soli file non-code, oppure fingerprint del contributo invariato
- * — e lo step `Require approving Claude review` è fallito lo stesso sui
- * verdetti GIÀ postati (tipicamente un 🔴 Important ancora aperto).
- *
- * In quello stato il close+reopen è un no-op per costruzione: `tests.yml`
- * riparte, il guard rivaluta lo stesso fingerprint del contributo — che il
- * merge di `main` pushato da pr-autorebase non altera, è calcolato 3-dot
- * contro la merge-base — salta di nuovo, e il gate fallisce identico. Si
- * brucia il one-shot e una `tests` intera per tornare esattamente dov'era, e
- * lo sticky promette all'operatore un effetto che su quella PR non si verifica.
- *
- * ── IL SEGNALE ─────────────────────────────────────────────────────────────
- * `Run Claude review` ha `if: ... && steps.guard.outputs.skip != 'true'`,
- * quindi la jobs API lo riporta `skipped` esattamente quando il guard ha
- * saltato. L'altro motivo di skip (`should_review != 'true'`) è escluso dalla
- * premessa stessa: quella condizione è nell'`if` del gate, che allora sarebbe
- * `skipped` e non `failure`.
- *
- * Fail-CLOSED: senza uno step `Require approving Claude review` in `failure`,
- * o senza lo step della review nella lista (lista stantia, vuota, o workflow
- * rinominato), risponde `false` — cioè non toglie il one-shot a nessuno sulla
- * base di un dubbio.
- *
- * Pura: nessuna I/O. Stessa lista di step di `vitestFailureIsReviewGate`.
- *
- * @param {Array<{name?: string, conclusion?: string}>} steps
- * @returns {boolean}
- */
-export function reviewSkippedByGuard(steps) {
-  if (!Array.isArray(steps) || steps.length === 0) return false;
-  const gate = steps.find((s) => s && s.name === REVIEW_GATE_STEP_NAME);
-  if (!gate || gate.conclusion !== 'failure') return false;
-  const review = steps.find((s) => s && s.name === CLAUDE_REVIEW_STEP_NAME);
-  return Boolean(review && review.conclusion === 'skipped');
-}
-
-/**
- * Gli step il cui rosso dice «la review è morta», non «i test sono rotti»:
- * l'unica eccezione al fail-CLOSED di `vitestFailureIsReviewGate` (#975).
- * Deliberatamente una whitelist di NOMI e non una categoria — la misura dice
- * che ogni altra co-occorrenza osservata era codice davvero rotto.
- */
-export const REVIEW_DEATH_STEP_NAMES = new Set([
-  CLAUDE_REVIEW_STEP_NAME,
-  REVIEW_ABORT_STEP_NAME,
-]);

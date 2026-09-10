@@ -231,7 +231,7 @@ for (const wf of ['issue-fix.yml', 'issue-decompose.yml']) {
 
     // Il cablaggio: ogni step che invoca Claude deve saltare sul corto-circuito.
     // Senza, il gate gira, stampa, e la run costosa parte lo stesso.
-    const claudeSteps = all.filter((s) => /anthropics\/claude-code-action/.test(s));
+    const claudeSteps = all.filter((s) => /(?:anthropics\/claude-code-action|\.\/\.github\/actions\/claude-codex-fallback)/.test(s));
     assert.ok(claudeSteps.length > 0, `${wf}: nessuno step Claude trovato — il parser degli step e' andato fuori sincrono.`);
     for (const s of claudeSteps) {
       const name = (s.match(/- name: (.+)/) || [])[1];

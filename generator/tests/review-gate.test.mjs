@@ -17,6 +17,7 @@
  * `gh` stubbato: un test a regex sul sorgente («c'e' un `includes('## LGTM')`»)
  * passerebbe anche su un ramo irraggiungibile.
  */
+import { formatCodexFallbackEvidence } from '../../scripts/ci/claude-codex-fallback.mjs';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
@@ -42,7 +43,7 @@ const GOOD_BODY = '## Implementato\n- una cosa vera\n\n## Non implementato (anco
  * cieco su `$1` leggerebbe `--paginate` come path e cadrebbe nel default,
  * cioe' un test verde su un gate che non vede piu' niente.
  */
-function runGate({ reviews = [], files = [], meta = null, compare = null }) {
+function runGate({ reviews = [], files = [], meta = null, compare = null, codexEvidence = null }) {
   const dir = mkdtempSync(path.join(tmpdir(), 'review-gate-'));
   try {
     const bin = path.join(dir, 'bin');
@@ -120,6 +121,8 @@ exit 0
     );
     chmodSync(path.join(bin, 'gh'), 0o755);
 
+    const evidenceFile = path.join(dir, 'codex-evidence.txt');
+    if (codexEvidence !== null) writeFileSync(evidenceFile, codexEvidence);
     const r = spawnSync(process.execPath, [SCRIPT], {
       encoding: 'utf8',
       env: {
@@ -129,6 +132,7 @@ exit 0
         PR_NUMBER: '901',
         HEAD_SHA: HEAD,
         GH_TOKEN: 'stub',
+        CODEX_FALLBACK_EVIDENCE_FILE: codexEvidence === null ? '' : evidenceFile,
       },
     });
     return { status: r.status, stdout: `${r.stdout}${r.stderr}` };
@@ -350,4 +354,37 @@ test('carry-forward: solo `content/` cambiato → verde (e\' la churn del corpus
     },
   });
   assert.equal(r.status, 0, `La churn di content/ non deve invalidare una LGTM.\n${r.stdout}`);
+});
+
+const codexEvidence = formatCodexFallbackEvidence({ trigger: 'runtime-429', status: 'success' });
+const codexReview = (overrides = {}) => ({
+  user: { type: 'Bot', login: 'github-actions[bot]' },
+  commit_id: HEAD,
+  body: '<!-- CODEX_FALLBACK_REVIEW -->\n## LGTM',
+  ...overrides,
+});
+
+test('Codex LGTM requires valid run evidence and exact HEAD', () => {
+  assert.equal(runGate({ reviews: [codexReview()], codexEvidence }).status, 0);
+  assert.equal(runGate({ reviews: [codexReview()] }).status, 1);
+  for (const review of [
+    codexReview({ commit_id: OLD }),
+    codexReview({ body: '## LGTM' }),
+    codexReview({ user: { type: 'User', login: 'github-actions[bot]' } }),
+    codexReview({ user: { type: 'Bot', login: 'other[bot]' } }),
+    codexReview({ body: '<!-- CODEX_FALLBACK_REVIEW -->\n🔴 Important: fix required' }),
+  ]) {
+    const result = runGate({ reviews: [review], codexEvidence,
+      files: ['.github/workflows/tests.yml'], meta: { assoc: 'OWNER', login: 'valerielinc-ops', body: GOOD_BODY } });
+    assert.equal(result.status, 1, result.stdout);
+  }
+});
+
+test('invalid or failed Codex evidence cannot reuse an approving Claude review', () => {
+  for (const evidence of ['invalid',
+    formatCodexFallbackEvidence({ trigger: 'runtime-429', status: 'failure' }),
+    codexEvidence.replace('gpt-5.6-luna', 'wrong-model')]) {
+    const result = runGate({ reviews: [botReview(HEAD, '## LGTM'), codexReview()], codexEvidence: evidence });
+    assert.equal(result.status, 1, result.stdout);
+  }
 });

@@ -29,7 +29,7 @@
  *   - If an open PR already references the issue (in-flight) → proceed (work in progress,
  *     status-quo token still present is expected).
  *   - Ambiguous / weak / no match → DO NOTHING, exit 0 with already_resolved=false → the
- *     normal fixer runs unchanged. The cascade (issue-fix → tests+review → auto-merge)
+ *     normal fixer runs unchanged. The cascade (issue-fix → pr-review-loop → auto-merge)
  *     is untouched for every non-short-circuited issue.
  *
  * On short-circuit it removes `agent:fix` (so the issue is not re-dispatched), adds
@@ -54,7 +54,7 @@ import { execFileSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { detectAlreadyResolved, closingMergedPr } from './followup-resolution-match.mjs';
+import { dailyBucketInfo, detectAlreadyResolved, closingMergedPr } from './followup-resolution-match.mjs';
 
 const DRY_RUN = process.env.DRY_RUN === '1';
 const ISSUE = process.env.ISSUE_NUMBER;
@@ -139,149 +139,92 @@ const io = {
 };
 
 /**
- * Item enumerati STRUTTURALMENTE nel body: `## 1.` / `## 2.` (>=2 sezioni numerate),
- * `1. **Titolo.**` / `2. **Titolo.**` (>=2 item di lista ordinata con lead in grassetto)
- * oppure `- **Titolo**` / `- [ ] **Titolo**` (>=2 bullet top-level con lead in grassetto).
- *
- * Perche' esiste (#568): i rilevatori di aggregati leggevano SOLO il titolo — un conteggio
- * esplicito ("N items deferred", N>=2) o le parole `sweep|batch|bulk`. I follow-up
- * multi-item che post-merge-followup.yml genera SENZA conteggio nel titolo (clausole unite
- * da "+", item enumerati nel corpo) restavano invisibili. Misurato il 2026-09-05 su tre
- * esempi dell'escalation #560: #374 (5 item, dichiarati tali dal fixer stesso), #505 (2) e
- * #466 (3) davano `isAggregate` false su 3/3 e `isAvoidableAlreadyFixed` true su 3/3 —
- * cioe' contati come burn "evitabile" dal gate dell'harvester pur essendo aggregati la cui
- * risoluzione e' scaglionata su piu' PR, gonfiando proprio il bucket che ha innescato #560.
- *
- * La direzione dell'errore e' sicura per la PRE-FLIGHT (un falso positivo fa PROCEDERE il
- * fixer) ma NON per reconcile: li' un aggregato inventato toglie l'auto-chiusura e lascia
- * la issue in coda a tempo indefinito, cioe' fa CRESCERE la coda (#926). Per questo il
- * conteggio salta i blocchi recintati e chiede un lead-TITOLO in grassetto, non un'enfasi. Il conteggio esplicito nel titolo resta
- * autoritativo e continua a corto-circuitare PRIMA di qui (#3378).
- *
- * DUPLICATA di proposito in `check-issue-already-resolved.mjs`, `harvest-agent-lessons.mjs`
- * e `reconcile-followups.mjs`: i tre file sono `mode: identical` nel manifest, quindi
- * estrarre un modulo comune e' lavoro del SITO (una de-duplicazione fatta qui viene
- * sovrascritta al mirror successivo — stessa ragione gia' scritta nel manifest per
- * `needs-human-prepass.mjs`). Il legame e' coperto da un test invece che da un import,
- * che e' l'uscita prevista da AGENTS.md #6 nella forma di `ci-check-name.test.mjs`:
- * `generator/tests/aggregate-detectors-agree.test.mjs` fallisce se una copia diverge.
- *
- * @param {string} body corpo della issue
- * @returns {boolean} true se il corpo enumera >=2 item
+ * Righe dentro un blocco recintato rimosse prima del conteggio (#926).
+ * Un fence indentato è valido quando lo snippet è annidato sotto un bullet;
+ * un fence non chiuso ripristina il segmento scartato come fallback sicuro.
+ * @param {string} text
+ * @returns {string}
  */
+function stripFencedBlocks(text) {
+  const lines = String(text || '').split('\n');
+  const out = [];
+  let fence = null;
+  let fenceStart = -1;
+
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i];
+    const match = /^([ \t]*)(`{3,}|~{3,})/.exec(line);
+    if (fence) {
+      const closes = match
+        && match[2][0] === fence.char
+        && match[2].length >= fence.length
+        && match[1].length >= fence.indent;
+      if (closes) fence = null;
+      continue;
+    }
+    if (match) {
+      fence = { char: match[2][0], length: match[2].length, indent: match[1].length };
+      fenceStart = i;
+      continue;
+    }
+    out.push(line);
+  }
+
+  return fence ? [...out, ...lines.slice(fenceStart)].join('\n') : out.join('\n');
+}
+
 export function hasEnumeratedItems(body) {
-  const b = stripFencedBlocks(String(body || ''));
-  const numberedSections = (b.match(/^#{2,4}[ \t]*\d+[.)](?=[ \t]|$)/gm) || []).length;
+  const b = stripFencedBlocks(body);
+  const numberedSections = (b.match(/^#{2,4}[ \t]*(?:Item[ \t]*)?\d+[ \t]*[.)—–](?=[ \t]|$)/gim) || []).length;
   if (numberedSections >= 2) return true;
-  // Lista ordinata con lead in grassetto: `1. **Titolo.**` / `2. **Titolo.**` (#831, #832).
-  // Il grassetto e' cio' che distingue l'item enumerato dai passi di una procedura numerata,
-  // ma solo se apre a inizio riga e chiude sulla stessa riga (`isBoldTitleLead`, #926).
   const lines = b.split('\n');
-  const orderedBoldItems = lines.filter((l) => {
-    const m = /^[ \t]*\d+[.)][ \t]+(.*)$/.exec(l);
-    return m ? isBoldTitleLead(m[1]) : false;
-  }).length;
+  const orderedBoldItems = lines.reduce((count, line, index) => {
+    const match = /^[ \t]*\d+[.)][ \t]+(.*)$/.exec(line);
+    return count + (match && isBoldTitleLead(match[1], lines, index + 1) ? 1 : 0);
+  }, 0);
   if (orderedBoldItems >= 2) return true;
-  const boldLeadBullets = lines.filter((l) => {
-    const m = /^[-*][ \t]+(?:\[[ xX]\][ \t]*)?(.*)$/.exec(l);
-    return m ? isBoldTitleLead(m[1]) : false;
-  }).length;
+  const boldLeadBullets = lines.reduce((count, line, index) => {
+    const match = /^[-*][ \t]+(?:\[[ xX]\][ \t]*)?(.*)$/.exec(line);
+    return count + (match && isBoldTitleLead(match[1], lines, index + 1) ? 1 : 0);
+  }, 0);
   return boldLeadBullets >= 2;
 }
 
-/**
- * Righe dentro un blocco recintato (\`\`\` o ~~~) rimosse prima del conteggio (#926).
- *
- * Un follow-up a UN SOLO item il cui corpo incolla uno snippet markdown — forma
- * comune quando la scheda cita il diff o il template — enumerava item che non
- * esistono: `hasEnumeratedItems` tornava true e `reconcile-followups.mjs`
- * (`closeEligible = ... && !isAggregate`) smetteva di auto-chiuderlo per sempre,
- * lasciandolo in coda a tempo indefinito. Un aggregato INVENTATO non e' il lato
- * sicuro dell'errore: fa crescere la coda invece di far bruciare un tentativo.
- *
- * @param {string} text
- * @returns {string} lo stesso testo senza le righe recintate (fence inclusi)
- */
-function stripFencedBlocks(text) {
-  const out = [];
-  let fence = '';
-  for (const line of text.split('\n')) {
-    const m = /^[ \t]{0,3}(`{3,}|~{3,})/.exec(line);
-    if (fence) {
-      // Chiude solo un fence dello stesso carattere e lungo almeno quanto l'apertura.
-      if (m && m[1][0] === fence[0] && m[1].length >= fence.length) fence = '';
-      continue;
-    }
-    if (m) { fence = m[1]; continue; }
-    out.push(line);
+function isBoldTitleLead(rest, lines = [], start = 0) {
+  const bold = /^\*\*(?![ \t])(?:[^*]|\*(?!\*))+\*\*/;
+  let candidate = String(rest || '');
+  if (bold.test(candidate)) return true;
+  for (let i = start; i < lines.length; i++) {
+    const line = lines[i];
+    if (/^[ \t]*(?:\d+[.)]|[-*])[ \t]+/.test(line)) break;
+    candidate += '\n' + line;
+    if (bold.test(candidate)) return true;
   }
-  return out.join('\n');
+  return false;
 }
 
 /**
- * Il resto di una riga di lista inizia con un lead in grassetto? (#926)
- *
- * Criterio deliberatamente minimo: il grassetto apre a inizio riga e CHIUDE
- * sulla stessa riga. Niente requisiti su punteggiatura o su cosa segue.
- *
- * La versione precedente chiedeva anche che il grassetto portasse dentro la
- * punteggiatura (`**Titolo.**`) o fosse seguito da fine riga o da un separatore
- * (`**Titolo**:`, `**Titolo** —`), per escludere l'enfasi in mezzo alla prosa
- * (`2. **nota** finale che non e' un item`). Ma quel caso non e' separabile
- * lessicalmente dal lead-titolo piu' comune di questo repo — grassetto che
- * finisce con inline-code e continua con testo qualsiasi, nella forma
- * "- **<inline-code>** (alimenta …)" (#551, #549). Misurato sulle issue
- * `follow-up` vive, il criterio stretto trasformava aggregati reali in
- * single-item, cioe' rendeva `closeEligible` una
- * issue i cui item sono per davvero due: auto-chiusura sulla prova di UN solo
- * item, il drop silenzioso che #568 esiste per impedire.
- *
- * Il falso positivo che resta (un grassetto d'enfasi conta come item, e la issue
- * non si auto-chiude) fa crescere la coda; il falso negativo evitato e'
- * irreversibile. La direzione dell'errore e' scelta, non subita.
- *
- * @param {string} rest testo della riga dopo il marcatore di lista
- * @returns {boolean}
- */
-function isBoldTitleLead(rest) {
-  return /^\*\*(?![ \t])(?:[^*\n]|\*(?!\*))+\*\*/.test(rest);
-}
-
-/**
- * Aggregate follow-up: never short-circuit on one match (one item resolved != all). Three
- * detectors, OR'd:
- *   1. Numeric count "N items deferred" with N>=2 — authoritative once stated.
- *   2. Keyword fallback `sweep|batch|bulk` — a sweep enumerates many targets WITHOUT an
- *      "N items deferred" count (e.g. "Sweep: ~30 crawlers", #1826). Without it the sweep
- *      scores single-item and the preflight short-circuits after the FIRST resolved target,
- *      removing `agent:fix` and dropping the rest of the sweep. Bias-to-PROCEED holds: a
- *      false aggregate just lets the normal fixer run (safe), never a false short-circuit.
- *      Mirrors the same fallback in reconcile-followups.mjs / issue-fix.yml (single bug
- *      class across the sibling aggregate detectors).
- *   3. Item enumerati nel BODY (`hasEnumeratedItems`, #568) — la forma che i follow-up
- *      multi-item prendono quando il titolo non porta nessun conteggio.
+ * Aggregate follow-up: never short-circuit on one match (one item resolved ≠ all). Three
+ * detectors, OR'd: explicit title count, keyword fallback, body enumeration.
  */
 export function isAggregate(title, body) {
-  const text = `${title}\n${body}`;
-  // Il conteggio si legge sul solo TITOLO (#926). Letto su titolo+corpo, un corpo che
-  // CITA il `## Non implementato` del parent con «1 item deferred» — la forma che la
-  // scheda del fixer produce per costruzione — corto-circuitava a false un'issue i cui
-  // item sono comunque enumerati sotto, sopprimendo l'aggregazione. E' la direzione
-  // pericolosa dell'errore: il fixer chiude al PRIMO item risolto e lascia cadere gli
-  // altri. I due gemelli (`reconcile-followups.mjs`, `harvest-agent-lessons.mjs`) leggono
-  // gia' la regex numerica sul solo titolo: qui era l'unica copia disallineata.
-  const m = String(title || '').match(/(\d+)\s+items?\s+deferred/i);
-  // An explicit count is authoritative once stated - trust it fully rather
-  // than falling through to the heuristics below, which exist ONLY for
-  // aggregates that never state a count (e.g. "Sweep: ~30 crawlers").
+  const titleText = String(title || '');
+  // Daily buckets are aggregates even when their current count is one. Keep
+  // this shared predicate aligned with the issue-fix closing-ref generator so
+  // a fallback path can never emit `Closes #N` for a daily bucket.
+  if (dailyBucketInfo(titleText)) return true;
+  const m = titleText.match(/\b(\d+)\s+items?\s+(?:deferred|deferit[oi])\b/i);
+  // An explicit count is authoritative once stated — trust it fully rather
+  // than falling through to the keyword heuristic below, which exists ONLY
+  // for aggregates that never state a count (e.g. "Sweep: ~30 crawlers").
   // Without this short-circuit, a genuinely single-item follow-up whose
   // title happens to contain "batch"/"sweep"/"bulk" as an ordinary word
   // (e.g. "batch backfill re-checks tier-3...") was misclassified as an
-  // aggregate despite explicitly saying "1 item deferred" - a false-positive
-  // that wrongly blocked the PR-body contract gate on a fully-completed single item
+  // aggregate despite explicitly saying "1 item deferred" — a false-positive
+  // that wrongly blocked `pr-body-contract` on a fully-completed single item
   // (#3378).
   if (m) return Number(m[1]) >= 2;
-  if (/\b(?:sweep|batch|bulk)\b/i.test(text)) return true;
+  if (/\b(?:sweep|batch|bulk)\b/i.test(titleText)) return true;
   return hasEnumeratedItems(body);
 }
 
@@ -319,6 +262,14 @@ function main() {
   }
 
   const body = iss.body || '';
+  // A daily bucket is reconciled item-by-item. An issue-wide token match here
+  // could short-circuit the fixer for FU-001 while FU-002 is still open; leave
+  // selection and closure to the daily bucket gates instead.
+  if (dailyBucketInfo(iss.title || '')) {
+    console.log('Daily follow-up bucket — proceeding (item-level reconciliation owns resolution).');
+    setOutput(false);
+    return;
+  }
   if (isAggregate(iss.title || '', body)) {
     console.log('Aggregate multi-item follow-up — proceeding (one item resolved ≠ all).');
     setOutput(false);

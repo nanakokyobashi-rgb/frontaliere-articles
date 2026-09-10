@@ -99,6 +99,7 @@ jobs:
           QUOTA_BEACON_PEER_REPO: valerielinc-ops/frontaliere-si-o-no
           QUOTA_LBL_ACTIVE: agent:decompose
           QUOTA_LBL_REQUEUE: agent:decompose-queued
+          CODEX_FALLBACK_MODE: '1'
         run: node scripts/ci/check-quota-backoff.mjs
 
       # ── Pre-flight 2: dispatch stantio ────────────────────────────────────
@@ -129,14 +130,17 @@ jobs:
         id: claude_decompose
         if: steps.quota.outputs.quota_blocked != 'true' && steps.stale.outputs.stale_dispatch != 'true'
         continue-on-error: true
-        uses: anthropics/claude-code-action@v1
+        uses: ./.github/actions/claude-codex-fallback
         env:
           GH_TOKEN: ${{ env.GITHUB_PAT_NANAKO || secrets.GITHUB_TOKEN }}
           ISSUE_NUMBER: ${{ github.event.issue.number }}
           REPO: ${{ github.repository }}
         with:
+          preflight_blocked: ${{ steps.quota.outputs.codex_fallback }}
+          codex_auth_json: ${{ secrets.CODEX_AUTH_JSON }}
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           github_token: ${{ env.GITHUB_PAT_NANAKO }}
+          codex_github_token: ${{ env.GITHUB_PAT_NANAKO || secrets.GITHUB_TOKEN }}
           show_full_output: true
           allowed_bots: 'github-actions[bot], claude[bot]'
           claude_args: "--effort medium --max-turns 35 --model claude-opus-5 --dangerously-skip-permissions"
@@ -185,11 +189,11 @@ jobs:
             - L'ULTIMO commento sul padre porta SEMPRE `<!-- DECOMPOSE_OUTCOME: <code> -->` con `<code>` ∈ `decomposed-K` · `atomic-requeue` · `needs-human-decision` · `already-resolved` · `stale-dispatch`.
 
       - name: Claude usage metrics
-        if: always() && steps.quota.outputs.quota_blocked != 'true' && steps.stale.outputs.stale_dispatch != 'true'
+        if: always() && steps.claude_decompose.outputs.fallback_used != 'true' && steps.quota.outputs.quota_blocked != 'true' && steps.stale.outputs.stale_dispatch != 'true'
         run: node scripts/ci/claude-usage-summary.mjs "${{ steps.claude_decompose.outputs.execution_file }}" "issue-decompose"
 
       - name: Mark Claude terminal outcome (granular telemetry)
-        if: always() && steps.quota.outputs.quota_blocked != 'true' && steps.stale.outputs.stale_dispatch != 'true' && steps.claude_decompose.outcome == 'failure'
+        if: always() && steps.claude_decompose.outputs.fallback_used != 'true' && steps.quota.outputs.quota_blocked != 'true' && steps.stale.outputs.stale_dispatch != 'true' && steps.claude_decompose.outcome == 'failure'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_REPO: ${{ github.repository }}

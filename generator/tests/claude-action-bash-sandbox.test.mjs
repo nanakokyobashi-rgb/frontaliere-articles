@@ -54,6 +54,7 @@ import { dirname, resolve, join } from 'node:path';
 
 const here = dirname(fileURLToPath(import.meta.url));
 const WF_DIR = resolve(here, '../../.github/workflows');
+const CLAUDE_ACTION = /(?:anthropics\/claude-code-action|\.\/\.github\/actions\/claude-codex-fallback)/;
 
 /**
  * Valore di `chiave: <valore>` dentro un blocco di step, cercato solo sulle
@@ -88,7 +89,7 @@ function stepClaude() {
   for (const file of readdirSync(WF_DIR).filter((f) => /\.ya?ml$/.test(f)).sort()) {
     const testo = readFileSync(join(WF_DIR, file), 'utf8');
     for (const blocco of stepDi(testo)) {
-      if (!/^\s*uses:\s*anthropics\/claude-code-action/m.test(blocco)) continue;
+      if (!CLAUDE_ACTION.test(blocco)) continue;
       out.push({
         file,
         nome: valoreChiave(blocco, 'name').replace(/^- /, '') || '(senza nome)',

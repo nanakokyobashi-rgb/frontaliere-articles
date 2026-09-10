@@ -67,6 +67,7 @@ import { fileURLToPath } from 'node:url';
 import { isBackoffActive, maxQuotaResetsAt } from './claude-rate-limit.mjs';
 
 const DRY_RUN = process.env.DRY_RUN === '1';
+const CODEX_FALLBACK_MODE = process.env.CODEX_FALLBACK_MODE === '1';
 const ISSUE = process.env.ISSUE_NUMBER;
 const LOOKBACK_H = Number(process.env.QUOTA_BEACON_LOOKBACK_H || 24);
 const MAX_ISSUES = Number(process.env.QUOTA_BEACON_MAX_ISSUES || 12);
@@ -120,12 +121,12 @@ function gh(args, { allowFail = true } = {}) {
   }
 }
 
-function setOutput(blocked, resetsAt) {
-  console.log(`quota_blocked=${blocked} resets_at=${resetsAt || ''}`);
+function setOutput(blocked, resetsAt, codexFallback = false) {
+  console.log(`quota_blocked=${blocked} codex_fallback=${codexFallback} resets_at=${resetsAt || ''}`);
   if (process.env.GITHUB_OUTPUT) {
     fs.appendFileSync(
       process.env.GITHUB_OUTPUT,
-      `quota_blocked=${blocked}\nresets_at=${resetsAt || ''}\n`
+      `quota_blocked=${blocked}\ncodex_fallback=${codexFallback}\nresets_at=${resetsAt || ''}\n`
     );
   }
 }
@@ -150,6 +151,17 @@ export function beaconCandidates(lists, { now, lookbackH, max }) {
     }
   }
   return [...seen.values()].sort((a, b) => b.t - a.t).slice(0, max).map((x) => x.number);
+}
+
+/** Project an active beacon onto either the legacy backoff or Codex fallback. */
+export function quotaFallbackDecision({ resetsAt = null, nowSec, codexFallbackMode = false } = {}) {
+  const active = Number.isFinite(Number(resetsAt))
+    && isBackoffActive(Number(resetsAt), Number(nowSec));
+  return {
+    active,
+    quotaBlocked: active && !codexFallbackMode,
+    codexFallback: active && codexFallbackMode,
+  };
 }
 
 // Stesso tetto dichiarato di `followup-drainer.mjs`, e per lo stesso motivo:
@@ -279,6 +291,17 @@ function main() {
   const minutes = Math.max(1, Math.round((resetsAt - nowSec) / 60));
   console.log(`::warning::Quota Claude esaurita fino alle ${when} (~${minutes} min) — salto il fixer PRIMA di spendere la chiamata Claude.`);
 
+  const projection = quotaFallbackDecision({
+    resetsAt,
+    nowSec,
+    codexFallbackMode: CODEX_FALLBACK_MODE,
+  });
+  if (projection.codexFallback) {
+    console.log('Fallback Codex abilitato: nessuna ri-accodatura, l’action provider-neutral tenterà una sola esecuzione.');
+    setOutput(false, resetsAt, true);
+    return;
+  }
+
   // Ri-accoda questa issue senza consumare un tentativo: la run non ha letto la
   // issue, non è un fallimento dell'agente. Label attiva → label di coda (per
   // default `agent:fix` → `agent:fix-queued`; per lo stadio di decomposizione
@@ -300,7 +323,7 @@ function main() {
     gh(['issue', 'edit', ISSUE, ...repoArgs, '--add-label', LBL_REQUEUE, '--remove-label', LBL_ACTIVE]);
   }
 
-  setOutput(true, resetsAt);
+  setOutput(true, resetsAt, false);
 }
 
 // TOTAL / PROCEED-SAFE: un throw non gestito non deve mai lasciare la issue

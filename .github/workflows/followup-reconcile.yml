@@ -57,7 +57,9 @@ permissions:
   issues: write
 
 concurrency:
-  group: followup-reconcile
+  # Shared repo-scoped mutex with post-merge-followup and followup-drainer:
+  # all three can read/append/seal the same daily bucket.
+  group: followup-daily-${{ github.repository }}
   cancel-in-progress: false
 
 jobs:

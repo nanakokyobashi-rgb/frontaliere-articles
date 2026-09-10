@@ -1,5 +1,9 @@
 # Review Instructions
 
+## Esclusione dei test (policy del proprietario, 2026-09-10)
+
+I file sotto `tests/` o `__tests__/`, anche annidati, e i file `*.test.*`/`*.spec.*` JavaScript/TypeScript sono esclusi dalla review, dalle ricerche cross-file e dai finding. Questa regola sostituisce le precedenti eccezioni sui bug nei test esistenti. I test continuano a essere eseguiti in CI. Una PR composta esclusivamente da questi file riceve `## LGTM` deterministico dopo i controlli, senza chiamare un modello. Una PR mista viene reviewata soltanto per i file non-test.
+
 Contratto del reviewer. Filtra i finding per **scopo del progetto**, non per stile, naming o sicurezza.
 
 Portato da `valerielinc-ops/frontaliere-si-o-no`. La struttura è deliberatamente la stessa — severity, formato, completeness contract, escalation — così una modifica al contratto del sito resta leggibile e riportabile qui. Ciò che cambia è il **filtro di scopo**, perché i due repo hanno funnel diversi. Vedi `scripts/ci/loop-sync-manifest.json`.
