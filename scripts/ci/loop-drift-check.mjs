@@ -170,6 +170,12 @@ const PROVENANCE_HISTORY_CAP = parsePositiveNum(process.env.PROVENANCE_HISTORY_C
   tool: 'loop-drift-check',
   integer: true,
 });
+// Un walk storico puo' contenere decine di revisioni. Le letture dei blob
+// sono indipendenti, ma il ciclo deve restare bounded: una Promise.all su
+// tutta la storia trasformerebbe un refuso o una storia lunga in un burst
+// incontrollato verso GitHub. Il batch conserva l'ordine del verdetto e paga
+// al massimo una finestra oltre il primo match.
+const PROVENANCE_FETCH_CONCURRENCY = 8;
 // Giorni dopo i quali un gemello `identical` fermo in `site-ahead` smette di
 // essere latenza e diventa un `stranded-twin` (issue #303). Vedi
 // `strandedVerdict` per la calibrazione del default.
@@ -703,36 +709,49 @@ function scalarFingerprintVerdict(entry, { site, corpus }) {
  *   - `checked`   quanti commit sono stati effettivamente hashati (utile nei
  *     report, per distinguere "un commit solo" da "cento").
  */
-async function repoHistoryMatch({ repo, ref, filePath, targetHash, cap = PROVENANCE_HISTORY_CAP }) {
+async function repoHistoryMatch({
+  repo,
+  ref,
+  filePath,
+  targetHash,
+  cap = PROVENANCE_HISTORY_CAP,
+  fetcher = rawFetch,
+}) {
   const perPage = Math.min(cap, 100);
   const url = `https://api.github.com/repos/${repo}/commits?path=${encodeURIComponent(filePath)}&sha=${encodeURIComponent(ref)}&per_page=${perPage}`;
-  const res = await rawFetch(url, { Accept: 'application/vnd.github+json' });
+  const res = await fetcher(url, { Accept: 'application/vnd.github+json' });
   if (!res.ok) throw new Error(`GET commits ${repo}/${filePath} → HTTP ${res.status}`);
   const exhausted = !(res.headers.get('link') || '').includes('rel="next"');
   const commits = await res.json();
 
   let checked = 0;
   let readable = 0;
-  for (const commit of commits) {
-    checked += 1;
-    const rawUrl = `https://raw.githubusercontent.com/${repo}/${commit.sha}/${filePath}`;
-    const r = await rawFetch(rawUrl);
-    // 404 a una revisione storica capita per rinomine/spostamenti: non è un
-    // errore, è semplicemente un punto della storia dove il path non esisteva
-    // sotto questo nome. Si prosegue con gli altri commit.
-    if (!r.ok) continue;
-    readable += 1;
-    const hash = sha256(Buffer.from(await r.arrayBuffer()));
-    // `matchedDate` — la data del commit PIÙ RECENTE il cui blob è ancora la
-    // baseline. I commit arrivano dal più nuovo al più vecchio e ci si ferma al
-    // primo match, quindi questo è l'ultimo istante in cui quel lato ERA
-    // allineato: la divergenza è cominciata subito dopo. È la misura che
-    // `strandedVerdict` usa per l'età, e arriva senza una sola chiamata di rete
-    // in più (questo walk lo paga già la verifica di provenienza, che gira
-    // proprio quando un lato si è mosso dalla baseline — cioè nel caso
-    // `site-ahead`).
-    if (hash === targetHash) {
-      return { match: true, exhausted: true, checked, readable, historyReadable: true, matchedDate: commit?.commit?.committer?.date || null };
+  for (let start = 0; start < commits.length; start += PROVENANCE_FETCH_CONCURRENCY) {
+    const batch = commits.slice(start, start + PROVENANCE_FETCH_CONCURRENCY);
+    const inspected = await Promise.all(batch.map(async (commit) => {
+      const rawUrl = `https://raw.githubusercontent.com/${repo}/${commit.sha}/${filePath}`;
+      const r = await fetcher(rawUrl);
+      // 404 a una revisione storica capita per rinomine/spostamenti: non è un
+      // errore, è semplicemente un punto della storia dove il path non esisteva
+      // sotto questo nome. Si prosegue con gli altri commit.
+      if (!r.ok) return { readable: false, hash: null };
+      return { readable: true, hash: sha256(Buffer.from(await r.arrayBuffer())) };
+    }));
+
+    checked += inspected.length;
+    readable += inspected.filter((observation) => observation.readable).length;
+    for (let offset = 0; offset < inspected.length; offset += 1) {
+      const observation = inspected[offset];
+      if (!observation.readable) continue;
+      const commit = batch[offset];
+      // `matchedDate` — la data del commit PIÙ RECENTE il cui blob è ancora la
+      // baseline. I commit arrivano dal più nuovo al più vecchio e si esamina
+      // il batch in quell'ordine, quindi questo è l'ultimo istante in cui quel
+      // lato ERA allineato: la divergenza è cominciata subito dopo. È la misura
+      // che `strandedVerdict` usa per l'età.
+      if (observation.hash === targetHash) {
+        return { match: true, exhausted: true, checked, readable, historyReadable: true, matchedDate: commit?.commit?.committer?.date || null };
+      }
     }
   }
   return { match: false, exhausted, checked, readable, historyReadable: readable > 0, matchedDate: null };
