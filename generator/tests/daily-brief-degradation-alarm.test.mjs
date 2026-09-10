@@ -96,14 +96,16 @@ function permanentRejectionGrepPattern(yml = readFileSync(WORKFLOW_PATH, 'utf-8'
   const lastOutcomeHit = commitStep.match(/LAST_OUTCOME="\$\(grep -E '([^']+)' "\$ATTEMPT_LOG" \|\| true\)"/);
   const outcomeLogHit = commitStep.match(/cat "\$ATTEMPT_LOG" >> "\$PUSH_OUTCOME_LOG"/);
   const permanentLogHit = commitStep.match(/cat "\$ATTEMPT_LOG" >> "\$PERMANENT_OUTCOME_LOG"/);
+  const allOutcomeHit = commitStep.match(/ALL_OUTCOME="\$\(grep -E '([^']+)' "\$PUSH_OUTCOME_LOG" \|\| true\)"/);
   assert.ok(
-    rateHit && permanentHit && lastOutcomeHit && outcomeLogHit && permanentLogHit,
+    rateHit && permanentHit && lastOutcomeHit && outcomeLogHit && permanentLogHit && allOutcomeHit,
     'commit step must classify each push attempt and retain push-only snapshots',
   );
   return {
     commitStep,
     permanent,
     outcomePattern: lastOutcomeHit[1],
+    allOutcomePattern: allOutcomeHit[1],
     ratePattern: rateHit[1],
     pattern: permanentHit[1],
   };
@@ -626,7 +628,12 @@ test('a day that stages only the ledger cannot turn a lost push into a permanent
   assert.equal(signs.includes('remote rejected'), false, 'bare remote rejected swallows ref races and platform errors');
   assert.match(permanent, /::error::/, 'and it is an error');
   assert.match(permanent, /exit 1/, 'and it is red');
-  const permanentBranch = sliceUntil(sliceFrom(permanent, 'if ! grep -qiE'), '\n          fi');
+  const permanentDecisionAt = permanent.indexOf('if [ -n "$ALL_OUTCOME" ]');
+  const emptyDecisionAt = permanent.lastIndexOf('if [ -z "$LAST_OUTCOME" ]');
+  assert.ok(permanentDecisionAt >= 0 && permanentDecisionAt < emptyDecisionAt,
+    'permanent markers must be consulted before the empty latest outcome branch');
+  const permanentBranch = permanent.slice(permanentDecisionAt, emptyDecisionAt);
+  assert.match(permanentBranch, /PERMANENT_OUTCOME_LOG/, 'the early decision must read the permanent marker union');
   assert.doesNotMatch(permanentBranch, /LEDGER_ONLY/, 'a permanent rejection is fatal even on a ledger-only day');
 
   // L'edizione, invece, resta rossa: dopo il `fi` del ramo degradato la coda
@@ -638,13 +645,15 @@ test('a day that stages only the ledger cannot turn a lost push into a permanent
 });
 
 test('the permanent classifier separates latest rate-limit veto from per-attempt markers', () => {
-  const { commitStep, outcomePattern, ratePattern, pattern } = permanentRejectionGrepPattern();
+  const { commitStep, outcomePattern, allOutcomePattern, ratePattern, pattern } = permanentRejectionGrepPattern();
   assert.match(commitStep, /LAST_OUTCOME="\$\(grep -E '([^']+)' "\$ATTEMPT_LOG" \|\| true\)"/,
     'the latest attempt must have its own outcome projection');
   assert.match(commitStep, /PUSH_OUTCOME_LOG="\$\(mktemp\)"/,
     'all push attempts must have a separate cumulative log');
   assert.match(commitStep, /PERMANENT_OUTCOME_LOG="\$\(mktemp\)"/,
     'the permanent-marker union must have its own filtered log');
+  assert.match(commitStep, /ALL_OUTCOME="\$\(grep -E '[^']+' "\$PUSH_OUTCOME_LOG" \|\| true\)"/,
+    'the cumulative outcome projection must read the push-only union');
   assert.match(commitStep, /! grep -qiE '[^']+' <<< "\$LAST_OUTCOME"/,
     'rate-limit classification must read only the latest attempt');
   assert.match(commitStep, /&& grep -qiE '[^']+' <<< "\$LAST_OUTCOME"/,
@@ -655,6 +664,8 @@ test('the permanent classifier separates latest rate-limit veto from per-attempt
     'ref-status lines must be part of the outcome filter');
   assert.doesNotMatch(commitStep, /grep .*"\$PUSH_LOG".*grep/,
     'the classifier must not inspect the human summary');
+  assert.doesNotMatch(commitStep, /ALL_OUTCOME="\$\(grep -E '[^']+' "\$PUSH_LOG"/,
+    'ALL_OUTCOME must never read the human summary');
 
   const earlierPermanent = [
     'remote: Permission denied',
@@ -673,14 +684,46 @@ test('the permanent classifier separates latest rate-limit veto from per-attempt
     false,
     'a 403 in the same throttled attempt must not enter the permanent union',
   );
+  assert.equal(
+    pushLogMatchesPermanent(allOutcomePattern, pattern, [
+      'remote: Permission denied',
+      'error: [push-rebase] failed before attempt 2; aborting',
+      'fatal: repository not found during rebase abort',
+    ].join('\n')),
+    true,
+    'the raw cumulative projection may contain only push snapshots; rebase text is not appended to it by the workflow',
+  );
+});
+
+test('an earlier permanent marker is not lost when the final push has no outcome', () => {
+  const { permanent } = permanentRejectionGrepPattern();
+  const permanentDecisionAt = permanent.indexOf('if [ -n "$ALL_OUTCOME" ]');
+  const emptyDecisionAt = permanent.lastIndexOf('if [ -z "$LAST_OUTCOME" ]');
+  assert.ok(permanentDecisionAt >= 0, 'the permanent decision must be explicit');
+  assert.ok(emptyDecisionAt >= 0, 'the empty-outcome fallback must be explicit');
+  assert.ok(permanentDecisionAt < emptyDecisionAt,
+    'an earlier permanent push result must be checked before ledger-lost fallback');
+
+  const decisionBeforeEmpty = permanent.slice(permanentDecisionAt, emptyDecisionAt);
+  assert.match(decisionBeforeEmpty, /PERMANENT_OUTCOME_LOG/,
+    'the pre-empty decision must consult durable push evidence');
+  assert.match(decisionBeforeEmpty, /LAST_OUTCOME/,
+    'the latest rate-limit veto must still be considered before the red');
+  assert.match(decisionBeforeEmpty, /::error::/,
+    'the retained permanent marker must spend the red');
+  assert.match(decisionBeforeEmpty, /exit 1/,
+    'the retained permanent marker must stop the step');
+  assert.doesNotMatch(decisionBeforeEmpty, /pushed=ledger-lost/,
+    'the permanent branch must not degrade the run');
 });
 
 test('an empty latest outcome is explicit and the intermediate rebase is retained', () => {
   const { commitStep, permanent } = permanentRejectionGrepPattern();
-  const emptyAt = permanent.indexOf('if [ -z "$LAST_OUTCOME" ]');
-  const rateAt = permanent.indexOf("secondary rate limit");
-  assert.ok(emptyAt >= 0 && rateAt > emptyAt, 'empty outcome must be checked before rate-limit classification');
-  const emptyBranch = sliceUntil(sliceFrom(permanent, 'if [ -z "$LAST_OUTCOME" ]'), '\n          fi');
+  const emptyAt = permanent.lastIndexOf('if [ -z "$LAST_OUTCOME" ]');
+  const permanentAt = permanent.indexOf('if [ -n "$ALL_OUTCOME" ]');
+  assert.ok(emptyAt >= 0 && permanentAt >= 0 && permanentAt < emptyAt,
+    'the empty outcome must be checked after permanent evidence');
+  const emptyBranch = permanent.slice(emptyAt);
   assert.match(emptyBranch, /push-outcome-empty/, 'the empty outcome must leave a machine-readable signal');
   assert.match(emptyBranch, /LEDGER_ONLY/, 'the empty outcome must distinguish a ledger-only retry');
   assert.match(emptyBranch, /pushed=ledger-lost/, 'a ledger-only empty outcome may be delayed, not silently lost');
