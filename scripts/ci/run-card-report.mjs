@@ -43,7 +43,11 @@ import { mkdtempSync, readdirSync, readFileSync, rmSync, statSync } from 'node:f
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 
-import { RUN_CARD_INSTRUMENTED_SINCE, summariseRunCards } from '../../generator/scripts/lib/run-card.mjs';
+import {
+  RUN_CARD_INSTRUMENTED_SINCE,
+  normalizeRunCard,
+  summariseRunCards,
+} from '../../generator/scripts/lib/run-card.mjs';
 
 /** Esplicito e non dedotto dal cwd: questo script si lancia anche da un worktree. */
 export const DEFAULT_REPO = process.env.RUN_CARD_REPO || 'nanakokyobashi-rgb/frontaliere-articles';
@@ -222,7 +226,7 @@ export function readCards(dir) {
   const cards = [];
   let unreadable = 0;
   for (const f of collectCardFiles(dir)) {
-    try { cards.push(JSON.parse(readFileSync(f, 'utf8'))); } catch { unreadable += 1; }
+    try { cards.push(normalizeRunCard(JSON.parse(readFileSync(f, 'utf8')))); } catch { unreadable += 1; }
   }
   return { cards, unreadable };
 }

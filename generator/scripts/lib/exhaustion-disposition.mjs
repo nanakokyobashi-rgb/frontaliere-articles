@@ -284,6 +284,66 @@ export const QUOTA_DEFERRAL_MIN_TRANSIENT_SHARE = 0.5;
  * @param {unknown} breakdown `err.exhaustionBreakdown`
  * @returns {{transient:number,persistent:number,ambiguous:number,total:number,providerCooldownSkips:number}}
  */
+/** A count emitted by `classifyExhaustionCause` is always a non-negative integer. */
+function nonNegativeInteger(value) {
+  const n = Number(value);
+  return Number.isInteger(n) && n >= 0 ? n : 0;
+}
+
+/**
+ * A replayed card cannot trust a denominator that is absent, malformed, or
+ * smaller than the two buckets it claims to describe. The live producer emits
+ * an integer `errors.length`; when old/corrupt JSON is replayed, use the
+ * observed buckets as the smallest safe population instead of letting the
+ * object enter the scorer in a shape the producer never writes.
+ *
+ * @param {unknown} breakdown
+ * @returns {boolean}
+ */
+export function isExhaustionBreakdownTotalValid(breakdown) {
+  if (!breakdown || typeof breakdown !== 'object' || Array.isArray(breakdown)) return false;
+  const total = Number(breakdown.total);
+  return Object.hasOwn(breakdown, 'total')
+    && breakdown.total !== null
+    && Number.isInteger(total)
+    && total >= nonNegativeInteger(breakdown.transient) + nonNegativeInteger(breakdown.persistent);
+}
+
+/**
+ * Normalize the JSON boundary used by offline run-card replays. This is a
+ * copy, never a mutation: a card with a repaired denominator is kept visible,
+ * but its derived share is deliberately invalidated by the caller because the
+ * inferred minimum is not the original population.
+ *
+ * @param {unknown} breakdown
+ * @returns {object|null}
+ */
+export function normalizeExhaustionBreakdown(breakdown) {
+  if (!breakdown || typeof breakdown !== 'object' || Array.isArray(breakdown)) return null;
+  const transient = nonNegativeInteger(breakdown.transient);
+  const persistent = nonNegativeInteger(breakdown.persistent);
+  const total = isExhaustionBreakdownTotalValid(breakdown)
+    ? Number(breakdown.total)
+    : transient + persistent;
+  const sourceEcho = (breakdown.providerCooldownSkips
+    && typeof breakdown.providerCooldownSkips === 'object'
+    && !Array.isArray(breakdown.providerCooldownSkips))
+    ? breakdown.providerCooldownSkips
+    : {};
+  return {
+    ...breakdown,
+    transient,
+    persistent,
+    total,
+    providerCooldownSkips: {
+      ...sourceEcho,
+      total: nonNegativeInteger(sourceEcho.total),
+      transient: Math.min(nonNegativeInteger(sourceEcho.transient), transient),
+      persistent: Math.min(nonNegativeInteger(sourceEcho.persistent), persistent),
+    },
+  };
+}
+
 /**
  * ── I DUE SECCHI DEL VOTO, SENZA IL TOTALE DI MEZZO ─────────────────────────
  *
@@ -548,19 +608,21 @@ function transientMajorityVerdict(breakdown, options = {}) {
   );
   // Un `total` ASSENTE non e' uno zero osservato: non c'e' un denominatore con
   // cui stimare quante righe ambigue possano ospitare gli echi non attribuiti.
-  // Trattarli come `total: 0` addebiterebbe l'intero echo al secchio transitorio
-  // e trasformerebbe un mock/errore legacy in un veto non dimostrato. Un
-  // `total: 0` esplicito resta invece una dichiarazione: la massa ambigua e'
-  // davvero vuota e l'echo non attribuito resta una prova contro il vincitore.
+  // Il comportamento legacy resta quindi quello dei due secchi osservati. Un
+  // `total` PRESENTE ma corrotto (null, negativo o non numerico) e' diverso:
+  // l'oggetto dichiara un denominatore e lo contraddice, quindi non puo' usare
+  // l'assenza di una massa ambigua come prova a proprio favore. Gli echi non
+  // attribuiti vengono addebitati al vincitore, come per `total: 0` esplicito;
+  // `normalizeExhaustionBreakdown()` chiude poi il confine delle card rigiocate.
   const rawTotal = (breakdown && typeof breakdown === 'object') ? breakdown.total : undefined;
-  const hasTotal = rawTotal !== undefined
-    && rawTotal !== null
-    && Number.isFinite(Number(rawTotal))
-    && Number(rawTotal) >= 0;
+  const totalPresent = Boolean(
+    breakdown && typeof breakdown === 'object' && Object.hasOwn(breakdown, 'total'),
+  );
+  const hasTotal = isExhaustionBreakdownTotalValid(breakdown);
   const ambiguousMass = hasTotal
     ? Math.max(0, buckets.total - buckets.transient - buckets.persistent)
     : 0;
-  const echoHiddenInBuckets = hasTotal
+  const echoHiddenInBuckets = totalPresent
     ? Math.max(0, echoUnattributed - ambiguousMass)
     : 0;
   // Il guardrail conta le righe DI QUESTO voto: gli echi DICHIARATI contro
