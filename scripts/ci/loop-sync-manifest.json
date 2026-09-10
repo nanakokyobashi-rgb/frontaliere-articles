@@ -672,7 +672,7 @@
     {
       "path": "scripts/ci/followup-drainer.mjs",
       "mode": "adapted",
-      "reason": "Portato lo stadio di decomposizione (sito #6228) con gli adattamenti corpus: parser numerico locale `parse-positive-num.mjs`, classificatore/route del corpus e guard `manifest-pinned-issues.mjs` su age-out, parent-close e verdict-exit. Il file non è più mirror-locked: la sorgente dei pin e il contratto del parser non esistono byte-identici sul sito.",
+      "reason": "Portato lo stadio di decomposizione (sito #6228) con gli adattamenti corpus: parser numerico locale `parse-positive-num.mjs`, classificatore/route del corpus e guard `manifest-pinned-issues.mjs` su age-out, parent-close e verdict-exit. La riconciliazione post-#1284 del 2026-09-10 conferma che il grouping B19 (`ISSUE_GROUP_MAX_SIZE`, `ISSUE_GROUP_LABEL_PATTERN`, `autoTitleGroupingKey()`, `prepareIssueGroup()`) è già presente nel gemello del sito dal 2026-09-09 (#8081) e nel corpus da #1284: il vecchio segnale `corpus-ahead` è stato assorbito nella baseline attestata da #1310. Il file non è più mirror-locked: la sorgente dei pin e il contratto del parser non esistono byte-identici sul sito.",
       "baseline": {
         "site": "2224d435396695c7",
         "corpus": "400c0e21db98b8ab",
