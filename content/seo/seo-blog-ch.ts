@@ -80633,6 +80633,591 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-banda-larga-consiglio-federale': {
+    title: 'Banda larga rurale: il programma federale 2030-2037',
+    description: 'Il Consiglio federale approva il 9 settembre 2026 il programma di sostegno alla banda larga. Investimento di 365 milioni CHF federali fino al 2037.',
+    keywords: 'frontalieri, ticino, svizzera, italia, banda, larga, rurale, programma',
+    ogTitle: 'Banda larga in Svizzera: il programma del Consiglio federale',
+    ogDescription: 'Il Consiglio federale lancia un programma di 730 milioni CHF per portare Internet veloce (1 Gbps) nelle zone rurali svizzere. Fibra ottica e radiocomunicazione per comuni con bassa redditività dal 2030.',
+    canonicalPath: '/articoli-svizzera/banda-larga-consiglio-federale/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Banda larga rurale: il programma federale 2030-2037",
+      "description": "Il Consiglio federale approva il 9 settembre 2026 il programma di sostegno alla banda larga. Investimento di 365 milioni CHF federali fino al 2037.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/banda-larga-consiglio-federale.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Tecnico che installa cavi in fibra ottica su una casa di campagna svizzera, simbolo dell'espansione della banda larga nelle zone rurali."
+      },
+      "datePublished": "2026-09-09T18:15:37+00:00",
+      "dateModified": "2026-09-09T18:15:37+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/banda-larga-consiglio-federale/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-previdenza-agosto-rendimenti-positivi': {
+    title: 'Casse pensioni svizzere: +0,7% ad agosto | Frontaliere Ticino',
+    description: 'Casse pensioni svizzere in positivo: rendimento di +0,7% ad agosto 2026, trainato da azioni estere a +14%. Analisi UBS e performance storica dal 2006.',
+    keywords: 'frontalieri, ticino, svizzera, italia, casse, pensioni, svizzere, agosto',
+    ogTitle: 'Casse pensioni svizzere: +0,7% ad agosto',
+    ogDescription: 'Le casse pensioni svizzere hanno chiuso agosto in territorio positivo con rendimento dello 0,7% netto spese. Azioni estere brillano a +14%, supportate da utili societari e investimenti nell\'IA. Scopri come il tuo portafoglio pensionistico è impattato',
+    canonicalPath: '/articoli-svizzera/previdenza-agosto-rendimenti-positivi/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Casse pensioni svizzere: +0,7% ad agosto",
+      "description": "Casse pensioni svizzere in positivo: rendimento di +0,7% ad agosto 2026, trainato da azioni estere a +14%. Analisi UBS e performance storica dal 2006.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/previdenza-agosto-rendimenti-positivi.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Panorama di Lugano con edifici finanziari e paesaggio lacustre, contesto economico svizzero"
+      },
+      "datePublished": "2026-09-09T18:43:10+00:00",
+      "dateModified": "2026-09-09T18:43:10+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/laura-bianchi/#person",
+        "name": "Laura Bianchi",
+        "url": "https://frontaliereticino.ch/autori/laura-bianchi/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/previdenza-agosto-rendimenti-positivi/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-assegni-familiari-svitto-richiesta': {
+    title: 'Assegni familiari in Svitto: come richiederli | Frontaliere Ticino',
+    description: 'Come richiedere gli assegni familiari nel Canton Svitto: condizioni di diritto, procedure di domanda, documentazione necessaria e contatti della cassa',
+    keywords: 'frontalieri, ticino, svizzera, italia, assegni, familiari, svitto, richiederli',
+    ogTitle: 'Assegni familiari in Svitto: come richiederli',
+    ogDescription: 'Nel Cantone di Svitto gli assegni familiari sono un contributo pubblico per genitori con figli. Scopri chi ha diritto, come fare domanda, quali documenti servono e dove contactare la cassa di compensazione locale.',
+    canonicalPath: '/articoli-svizzera/assegni-familiari-svitto-richiesta/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Assegni familiari in Svitto: come richiederli",
+      "description": "Come richiedere gli assegni familiari nel Canton Svitto: condizioni di diritto, procedure di domanda, documentazione necessaria e contatti della cassa",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/assegni-familiari-svitto-richiesta.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Famiglia svizzera che esamina documenti degli assegni familiari presso uno sportello amministrativo cantonale"
+      },
+      "datePublished": "2026-09-09T19:02:56+00:00",
+      "dateModified": "2026-09-09T19:02:56+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/assegni-familiari-svitto-richiesta/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-divieto-oro-sudan-consiglio-federale': {
+    title: 'Divieto di oro sudanese in Svizzera dal 10 settembre',
+    description: 'Consiglio federale vieta commercio, importazione e transito di oro sudanese dal 10 settembre 2026. Allineamento sanzioni UE, impatti aziendali e procedure',
+    keywords: 'frontalieri, ticino, svizzera, italia, divieto, sudanese, settembre, consiglio',
+    ogTitle: 'Svizzera vieta oro sudanese: nuove sanzioni dal 10 settembre 2026',
+    ogDescription: 'Consiglio federale blocca acquisto, importazione e transito di oro sudanese dal 10 settembre 2026. Sanzioni allineate all\'UE. Cosa devono fare commercianti e istituti finanziari svizzeri.',
+    canonicalPath: '/articoli-svizzera/divieto-oro-sudan-consiglio-federale/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Divieto di oro sudanese in Svizzera dal 10 settembre",
+      "description": "Consiglio federale vieta commercio, importazione e transito di oro sudanese dal 10 settembre 2026. Allineamento sanzioni UE, impatti aziendali e procedure",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/divieto-oro-sudan-consiglio-federale.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Documentazione di conformità e lingotti di oro su scrivania in contesto amministrativo svizzero federale"
+      },
+      "datePublished": "2026-09-09T19:24:59+00:00",
+      "dateModified": "2026-09-09T19:24:59+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/divieto-oro-sudan-consiglio-federale/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-aeroporto-zurigo-shuttle-autonomi': {
+    title: 'Aeroporto Zurigo: shuttle autonomi senza autista',
+    description: 'Due shuttle autonomi a Zurigo da settembre 2026. Primo progetto di livello 4 con 15mila km testati e operatori riqualificati per il controllo remoto.',
+    keywords: 'frontalieri, ticino, svizzera, italia, aeroporto, zurigo, shuttle, autonomi',
+    ogTitle: 'Aeroporto Zurigo: shuttle autonomi senza autista',
+    ogDescription: 'Zurigo lancia il primo progetto di shuttle autonomi in operazione: due navette senza conducente da settembre 2026. Oltre 15mila km testati, operatori riqualificati per il controllo remoto, progetto pilota fino a fine 2026.',
+    canonicalPath: '/articoli-svizzera/aeroporto-zurigo-shuttle-autonomi/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Aeroporto Zurigo: shuttle autonomi senza autista",
+      "description": "Due shuttle autonomi a Zurigo da settembre 2026. Primo progetto di livello 4 con 15mila km testati e operatori riqualificati per il controllo remoto.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/aeroporto-zurigo-shuttle-autonomi.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Navette autonome all'aeroporto di Zurigo: shuttle elettrici senza conducente in operazione"
+      },
+      "datePublished": "2026-09-09T19:49:00+00:00",
+      "dateModified": "2026-09-09T19:49:00+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/aeroporto-zurigo-shuttle-autonomi/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-assegni-familiari-svitto-guida': {
+    title: 'Assegni familiari canton Svitto: come funzionano e come richiederli',
+    description: 'Guida pratica agli assegni familiari nel Canton Svitto: come funziona il sistema, chi ha diritto, importi mensili e come presentare domanda alla cassa',
+    keywords: 'frontalieri, ticino, svizzera, italia, assegni, familiari, canton, svitto',
+    ogTitle: 'Assegni familiari canton Svitto: guida completa',
+    ogDescription: 'Nel Canton Svitto gli assegni familiari sono un diritto riconosciuto a genitori con figli. Scopri come funziona il sistema, gli importi, le procedure e dove presentare domanda.',
+    canonicalPath: '/articoli-svizzera/assegni-familiari-svitto-guida/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Assegni familiari canton Svitto: come funzionano e come richiederli",
+      "description": "Guida pratica agli assegni familiari nel Canton Svitto: come funziona il sistema, chi ha diritto, importi mensili e come presentare domanda alla cassa",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/assegni-familiari-svitto-guida.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Famiglia svizzera che consulta documenti relativi agli assegni familiari a casa"
+      },
+      "datePublished": "2026-09-09T20:08:57+00:00",
+      "dateModified": "2026-09-09T20:08:57+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/assegni-familiari-svitto-guida/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-yumo-piattaforma-giovani-finanza': {
+    title: 'YUMO, piattaforma UBS per educazione finanziaria',
+    description: 'UBS lancia YUMO, piattaforma gratuita per insegnare finanza ed economia ai giovani svizzeri. Disponibile in 4 lingue: tedesco, francese, italiano e inglese.',
+    keywords: 'frontalieri, ticino, svizzera, italia, yumo, piattaforma, educazione, finanziaria',
+    ogTitle: 'YUMO lancia piattaforma educazione finanziaria giovani',
+    ogDescription: 'UBS presenta YUMO, la nuova piattaforma digitale gratuita per insegnare ai giovani svizzeri come gestire il denaro, risparmi e investimenti. Con contenuti in tedesco, francese, italiano e inglese per approfondire economia e finanza personale.',
+    canonicalPath: '/articoli-svizzera/yumo-piattaforma-giovani-finanza/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "YUMO, piattaforma UBS per educazione finanziaria",
+      "description": "UBS lancia YUMO, piattaforma gratuita per insegnare finanza ed economia ai giovani svizzeri. Disponibile in 4 lingue: tedesco, francese, italiano e inglese.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/yumo-piattaforma-giovani-finanza.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Giovani che imparano finanza ed economia su una piattaforma digitale in Svizzera"
+      },
+      "datePublished": "2026-09-09T20:44:51+00:00",
+      "dateModified": "2026-09-09T20:44:51+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/yumo-piattaforma-giovani-finanza/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-opportunita-lavoro-seco': {
+    title: 'Lavorare alla SECO: opportunità di apprendistato e stage',
+    description: 'La SECO offre apprendistati AFC, tirocini SMC e stage universitari. Scopri i profili ricercati, l\'ambiente di lavoro e come candidarsi all\'agenzia federale.',
+    keywords: 'frontalieri, ticino, svizzera, italia, lavorare, alla, seco, opportunità',
+    ogTitle: 'Lavorare alla SECO: opportunità di apprendistato e stage',
+    ogDescription: 'La SECO con 900+ dipendenti offre apprendistati AFC per commercio, business digitale e IT, tirocini SMC e stage universitari in ambienti stimolanti. Scopri come candidarsi e qual è il ruolo strategico di questa agenzia federale nella politica',
+    canonicalPath: '/articoli-svizzera/opportunita-lavoro-seco/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Lavorare alla SECO: opportunità di apprendistato e stage",
+      "description": "La SECO offre apprendistati AFC, tirocini SMC e stage universitari. Scopri i profili ricercati, l'ambiente di lavoro e come candidarsi all'agenzia federale.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/opportunita-lavoro-seco.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Ambiente di lavoro moderno presso una sede amministrativa federale svizzera con persone che collaborano in uffici luminosi"
+      },
+      "datePublished": "2026-09-09T21:16:43+00:00",
+      "dateModified": "2026-09-09T21:16:43+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/opportunita-lavoro-seco/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-svitto-guida-aprire-impresa-costi': {
+    title: 'Come aprire un\'attività in Svitto: guida ai costi',
+    description: 'Iscrizione al registro di commercio, forme giuridiche, capitale minimo e obblighi assicurativi: tutto ciò che serve per avviare un\'impresa nel cantone Svitto.',
+    keywords: 'frontalieri, ticino, svizzera, italia, aprire, attività, svitto, costi',
+    ogTitle: 'Come aprire un\'attività in Svitto: guida ai costi',
+    ogDescription: 'Iscrizione al registro di commercio, forme giuridiche, capitale minimo e obblighi assicurativi: tutto ciò che serve per avviare un\'impresa nel cantone Svitto.',
+    canonicalPath: '/articoli-svizzera/svitto-guida-aprire-impresa-costi/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Come aprire un'attività in Svitto: guida ai costi",
+      "description": "Iscrizione al registro di commercio, forme giuridiche, capitale minimo e obblighi assicurativi: tutto ciò che serve per avviare un'impresa nel cantone Svitto.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/svitto-guida-aprire-impresa-costi.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Imprenditore svizzero consulta documenti di iscrizione commerciale con calcolatrice su scrivania in ufficio moderno."
+      },
+      "datePublished": "2026-09-09T21:48:30+00:00",
+      "dateModified": "2026-09-09T21:48:30+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/svitto-guida-aprire-impresa-costi/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-premi-lamal-san-gallo-riduzione': {
+    title: 'Premi cassa malati San Gallo: riduzione e modelli',
+    description: 'LAMal in Canton San Gallo: franchigie CHF 300–2500, modelli alternativi, sussidio cantonale. Procedura passo-passo per richiedere la riduzione di premio',
+    keywords: 'frontalieri, ticino, svizzera, italia, premi, cassa, malati, gallo',
+    ogTitle: 'Premi cassa malati San Gallo: riduzione e modelli',
+    ogDescription: 'Scopri come funzionano i premi LAMal in Canton San Gallo. Franchigie fisse CHF 300–2500, modelli alternativi (HMO), sussidio cantonale. Procedura annuale per richiedere la riduzione di premio e scadenze.',
+    canonicalPath: '/articoli-svizzera/premi-lamal-san-gallo-riduzione/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Premi cassa malati San Gallo: riduzione e modelli",
+      "description": "LAMal in Canton San Gallo: franchigie CHF 300–2500, modelli alternativi, sussidio cantonale. Procedura passo-passo per richiedere la riduzione di premio",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/premi-lamal-san-gallo-riduzione.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Persona con documenti di assicurazione malattia LAMal e modulo di riduzione premio, ufficio amministrativo svizzero"
+      },
+      "datePublished": "2026-09-09T22:37:47+00:00",
+      "dateModified": "2026-09-09T22:37:47+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/premi-lamal-san-gallo-riduzione/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-commissioni-extraparlamentari-riorganizzazione': {
+    title: 'Consiglio federale riorganizza commissioni extraparlamentari',
+    description: 'Il Consiglio federale adotta la riorganizzazione delle commissioni extraparlamentari: scioglimento di 3, fusione di 7 in 2 strutture; risparmi ~100.000 CHF',
+    keywords: 'frontalieri, ticino, svizzera, italia, consiglio, federale, riorganizza, commissioni',
+    ogTitle: 'Commissioni extraparlamentari: riorganizzazione adottata',
+    ogDescription: 'Il Consiglio federale adotta il messaggio sulla riorganizzazione delle commissioni extraparlamentari nel quadro della verifica 2025. Tre commissioni sciolte, sette fuse in due strutture, risparmi circa 100.000 franchi annui a partire dal 1° gennaio',
+    canonicalPath: '/articoli-svizzera/commissioni-extraparlamentari-riorganizzazione/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Consiglio federale riorganizza commissioni extraparlamentari",
+      "description": "Il Consiglio federale adotta la riorganizzazione delle commissioni extraparlamentari: scioglimento di 3, fusione di 7 in 2 strutture; risparmi ~100.000 CHF",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/commissioni-extraparlamentari-riorganizzazione.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Sala riunioni dell'Amministrazione federale svizzera con documenti ufficiali e bandiera svizzera"
+      },
+      "datePublished": "2026-09-09T23:11:29+00:00",
+      "dateModified": "2026-09-09T23:11:29+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/commissioni-extraparlamentari-riorganizzazione/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-svizzera-corruzione-restituzione-banche': {
+    title: 'Denaro da corruzione: il dilemma svizzero | Frontaliere Ticino',
+    description: 'Restituzione di fondi illeciti: un processo lungo e complesso. Perché la Svizzera non obbliga le banche a versare direttamente agli Stati lesi?. Dati aggiornati',
+    keywords: 'frontalieri, ticino, svizzera, italia, denaro, corruzione, dilemma, svizzero',
+    ogTitle: 'Denaro da corruzione: il dilemma svizzero',
+    ogDescription: 'Restituzione di fondi illeciti: un processo lungo e complesso. Perché la Svizzera non obbliga le banche a versare direttamente agli Stati lesi?',
+    canonicalPath: '/articoli-svizzera/svizzera-corruzione-restituzione-banche/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Denaro da corruzione: il dilemma svizzero",
+      "description": "Restituzione di fondi illeciti: un processo lungo e complesso. Perché la Svizzera non obbliga le banche a versare direttamente agli Stati lesi?. Dati aggiornati",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/svizzera-corruzione-restituzione-banche.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Sede della regolamentazione bancaria federale svizzera che supervisiona il sistema di restituzione dei fondi illeciti"
+      },
+      "datePublished": "2026-09-09T23:35:38+00:00",
+      "dateModified": "2026-09-09T23:35:38+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/svizzera-corruzione-restituzione-banche/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-salari-mercato-lavoro-turgovia-settori-livelli': {
+    title: 'Salari e lavoro Turgovia: settori, livelli e contratti',
+    description: 'Nel cantone Turgovia non esiste un salario minimo federale; le ore settimanali sono 45 o 50 a seconda del settore, con contributi AVS/AHV al 5.3%',
+    keywords: 'frontalieri, ticino, svizzera, italia, salari, lavoro, turgovia, settori',
+    ogTitle: 'Salari e lavoro Turgovia: settori, livelli e contratti',
+    ogDescription: 'Nel cantone Turgovia non esiste un salario minimo federale; le ore settimanali sono 45 o 50 a seconda del settore, con contributi AVS/AHV al 5.3% per il dipendente.',
+    canonicalPath: '/articoli-svizzera/salari-mercato-lavoro-turgovia-settori-livelli/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Salari e lavoro Turgovia: settori, livelli e contratti",
+      "description": "Nel cantone Turgovia non esiste un salario minimo federale; le ore settimanali sono 45 o 50 a seconda del settore, con contributi AVS/AHV al 5.3%",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/salari-mercato-lavoro-turgovia-settori-livelli.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Ufficio svizzero con vista alpina, simbolo del mercato del lavoro cantonale"
+      },
+      "datePublished": "2026-09-10T00:11:38+00:00",
+      "dateModified": "2026-09-10T00:11:38+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/salari-mercato-lavoro-turgovia-settori-livelli/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-f-35-amherd-prescrizione-responsabilita': {
+    title: 'F-35: Amherd rischia responsabilità per costi extra',
+    description: 'CdG: Amherd sapeva dei rischi costi F-35 mesi prima. Prescrizione triennale in scadenza, Wyssmann (UDC) chiede interruzione. Possibile danno erariale.',
+    keywords: 'frontalieri, ticino, svizzera, italia, f-35, amherd, rischia, responsabilità',
+    ogTitle: 'F-35: Amherd rischia responsabilità per costi extra non comunicati',
+    ogDescription: 'La Commissione della gestione accerta che l\'ex consigliera federale Viola Amherd conosceva i rischi di costi aggiuntivi sugli F-35 prima di informare il Consiglio federale. Il consigliere nazionale UDC Rémy Wyssmann chiede di bloccare la prescrizione',
+    canonicalPath: '/articoli-svizzera/f-35-amherd-prescrizione-responsabilita/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "F-35: Amherd rischia responsabilità per costi extra",
+      "description": "CdG: Amherd sapeva dei rischi costi F-35 mesi prima. Prescrizione triennale in scadenza, Wyssmann (UDC) chiede interruzione. Possibile danno erariale.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/f-35-amherd-prescrizione-responsabilita.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Palazzo federale a Berna con bandiera svizzera al tramonto"
+      },
+      "datePublished": "2026-09-10T02:33:16+00:00",
+      "dateModified": "2026-09-10T02:33:16+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/f-35-amherd-prescrizione-responsabilita/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-stefan-leist-vicedirettore-aff-2026': {
+    title: 'Stefan Leist nominato vicedirettore Amministrazione federale finanze',
+    description: 'Karin Keller-Sutter nomina Stefan Leist vicedirettore AFF dal 1° ottobre 2026. Già alla guida della divisione Politica finanziaria dal 1° marzo. Implicazioni',
+    keywords: 'frontalieri, ticino, svizzera, italia, stefan, leist, nominato, vicedirettore',
+    ogTitle: 'Stefan Leist vicedirettore AFF: nomina e implicazioni per la finanza federale',
+    ogDescription: 'La consigliera federale Karin Keller-Sutter ha nominato Stefan Leist direttore sostituto dell\'Amministrazione federale delle finanze dal 1° ottobre 2026. Già vicedirettore e capo divisione Politica finanziaria dal 1° marzo, Leit porta esperienza SECO',
+    canonicalPath: '/articoli-svizzera/stefan-leist-vicedirettore-aff-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Stefan Leist nominato vicedirettore Amministrazione federale finanze",
+      "description": "Karin Keller-Sutter nomina Stefan Leist vicedirettore AFF dal 1° ottobre 2026. Già alla guida della divisione Politica finanziaria dal 1° marzo. Implicazioni",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/stefan-leist-vicedirettore-aff-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Stefan Leist, nuovo vicedirettore dell'Amministrazione federale delle finanze"
+      },
+      "datePublished": "2026-09-10T05:17:54+00:00",
+      "dateModified": "2026-09-10T05:17:54+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/stefan-leist-vicedirettore-aff-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

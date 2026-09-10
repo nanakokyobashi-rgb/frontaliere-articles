@@ -2096,6 +2096,21 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'opportunita-lavoro-federale': { it: 'opportunita-lavoro-federale', en: 'federal-employment-opportunities', de: 'chancen-bundesverwaltung', fr: 'opportunites-emploi-federale' },
  'cantone-comuni-fisco-riforma-arp': { it: 'cantone-comuni-fisco-riforma-arp', en: 'canton-municipalities-fiscal-reform-arp', de: 'kanton-gemeinden-fiskale-reform-arp', fr: 'canton-communes-fiscal-autorites-protection' },
  'zimmer-biomet-svizzera-unia': { it: 'zimmer-biomet-svizzera-unia', en: 'zimmer-biomet-switzerland-unia', de: 'zimmer-biomet-schweiz-unia', fr: 'zimmer-biomet-suisse-unia' },
+ 'banda-larga-consiglio-federale': { it: 'banda-larga-consiglio-federale', en: 'broadband-expansion-2030-2037', de: 'breitband-bundesrat-programm', fr: 'haut-debit-conseil-federal-2030' },
+ 'previdenza-agosto-rendimenti-positivi': { it: 'previdenza-agosto-rendimenti-positivi', en: 'pension-august-positive-returns', de: 'altersvorsorge-august-positive-renditen', fr: 'retraite-aout-rendements-positifs' },
+ 'assegni-familiari-svitto-richiesta': { it: 'assegni-familiari-svitto-richiesta', en: 'family-allowances-canton-schwyz-how-to-apply', de: 'familienausgleiche-kanton-schwyz-antrag', fr: 'allocations-familiales-canton-schwyz-demande' },
+ 'divieto-oro-sudan-consiglio-federale': { it: 'divieto-oro-sudan-consiglio-federale', en: 'sudan-gold-import-ban-switzerland-2026', de: 'sudan-gold-verbot-schweiz-2026', fr: 'embargo-or-soudan-suisse-2026' },
+ 'aeroporto-zurigo-shuttle-autonomi': { it: 'aeroporto-zurigo-shuttle-autonomi', en: 'zurich-airport-autonomous-shuttles', de: 'flughafen-zurich-autonome-shuttles', fr: 'aeroport-zurich-navettes-autonomes' },
+ 'assegni-familiari-svitto-guida': { it: 'assegni-familiari-svitto-guida', en: 'family-allowances-schwyz-guide', de: 'familienbeihilfe-schwyz-anleitung', fr: 'allocations-familiales-schwyz-guide' },
+ 'yumo-piattaforma-giovani-finanza': { it: 'yumo-piattaforma-giovani-finanza', en: 'yumo-platform-young-people-finance', de: 'yumo-plattform-junge-leute-finanzen', fr: 'yumo-plateforme-jeunes-finance' },
+ 'opportunita-lavoro-seco': { it: 'opportunita-lavoro-seco', en: 'seco-job-opportunities', de: 'seco-berufliche-chancen', fr: 'opportunites-emploi-seco' },
+ 'svitto-guida-aprire-impresa-costi': { it: 'svitto-guida-aprire-impresa-costi', en: 'switzerland-guide-start-business-costs', de: 'schwytz-leitfaden-geschaft-eroffnen-kosten', fr: 'suisse-guide-ouvrir-entreprise-frais' },
+ 'premi-lamal-san-gallo-riduzione': { it: 'premi-lamal-san-gallo-riduzione', en: 'health-insurance-premiums-st-gallen-reduction', de: 'krankenversicherungspramien-st-gallen-reduktion', fr: 'primes-assurance-maladie-saint-gall-reduction' },
+ 'commissioni-extraparlamentari-riorganizzazione': { it: 'commissioni-extraparlamentari-riorganizzazione', en: 'extraparlamentary-commissions-reorganization', de: 'reorganisation-ausserparlamentarischer-kommissionen', fr: 'reorganisation-commissions-extraparliamentaires' },
+ 'svizzera-corruzione-restituzione-banche': { it: 'svizzera-corruzione-restituzione-banche', en: 'switzerland-corruption-restitution-banks', de: 'schweiz-korruption-rueckerstattung-banken', fr: 'suisse-corruption-restitution-banques' },
+ 'salari-mercato-lavoro-turgovia-settori-livelli': { it: 'salari-mercato-lavoro-turgovia-settori-livelli', en: 'salaries-labour-market-turgovia-sectors-levels', de: 'gehaelter-arbeitsmarkt-turgovia-sektoren-niveaus', fr: 'salaires-marche-travail-turgovia-secteurs-niveaux' },
+ 'f-35-amherd-prescrizione-responsabilita': { it: 'f-35-amherd-prescrizione-responsabilita', en: 'f-35-amherd-statute-limitations-liability', de: 'f-35-amherd-verjaehrung-verantwortung', fr: 'f-35-amherd-prescription-responsabilite' },
+ 'stefan-leist-vicedirettore-aff-2026': { it: 'stefan-leist-vicedirettore-aff-2026', en: 'stefan-leist-deputy-director-ffa-2026', de: 'stefan-leist-vizedirektor-efv-2026', fr: 'stefan-leist-directeur-adjoint-aff-2026' },
 };
 
 export const REVERSE_SWISS: Record<ArticleLocale, Record<string, string>> = (() => {

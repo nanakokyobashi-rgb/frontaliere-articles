@@ -11625,6 +11625,12 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.casnate-bernate-trasferimento.title': 'Vivre à Casnate, travailler au Tessin',
     'blog.article.casnate-bernate-trasferimento.excerpt': 'Déménager à Casnate et travailler au Tessin : impôt à la source, AVS/LPP et procédures pour les frontaliers à partir de 2024.',
     'blog.article.casnate-bernate-trasferimento.imageAlt': 'Vue de Mendrisio au coucher du soleil, Tessin, près de la frontière suisse-italienne',
+    'blog.article.frontalieri-assunzioni-lugano-interrogazione.title': 'Frontaliers à Lugano : question de la mairie',
+    'blog.article.frontalieri-assunzioni-lugano-interrogazione.excerpt': 'Omar Wicht interroge la Mairie de Lugano sur les embauches de frontaliers depuis 2024. Une demande de clarté sur le nombre, les dicastères et les raisons des sélections dans le secteur public.',
+    'blog.article.frontalieri-assunzioni-lugano-interrogazione.imageAlt': 'Lugano, où la mairie gère les embauches de frontaliers dans l\'administration communale',
+    'blog.article.esplosione-centrale-ritom-san-gottardo.title': 'Tessin : explosion centrale ritom, dommages de la ligne du Saint-Gothard',
+    'blog.article.esplosione-centrale-ritom-san-gottardo.excerpt': 'Matinée du mercredi 9 septembre 2026 : explosion et effondrement partiel dans la centrale hydroélectrique historique de Ritom (1917). Deux ouvriers grièvement blessés, enquête en cours.',
+    'blog.article.esplosione-centrale-ritom-san-gottardo.imageAlt': 'Explosion à la centrale hydroélectrique du Ritom, Canton du Tessin, montrant des dommages structurels et l\'intervention des secours.',
 };
 
 export default blogMetaFr;

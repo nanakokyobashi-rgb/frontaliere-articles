@@ -34707,6 +34707,24 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'frontalieri-assunzioni-lugano-interrogazione',
+ category: 'pratico',
+ date: '2026-09-09T21:02:38.016Z',
+ image: '/images/blog/frontalieri-assunzioni-lugano-interrogazione.webp',
+ hasCalculator: true,
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
+ {
+ id: 'esplosione-centrale-ritom-san-gottardo',
+ category: 'novita',
+ date: '2026-09-10T00:26:40.803Z',
+ image: '/images/blog/esplosione-centrale-ritom-san-gottardo.webp',
+ hasCalculator: true,
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

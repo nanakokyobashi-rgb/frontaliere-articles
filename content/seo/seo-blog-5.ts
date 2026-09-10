@@ -89071,6 +89071,84 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-frontalieri-assunzioni-lugano-interrogazione': {
+    title: 'Frontalieri a Lugano: interrogazione del Municipio',
+    description: 'Omar Wicht interroga il Municipio di Lugano su assunzioni di frontalieri con permesso G dal 2024. Scopri come funzionano le regole e quali diritti hai',
+    keywords: 'frontalieri, ticino, svizzera, italia, lugano, interrogazione, municipio, omar',
+    ogTitle: 'Frontalieri a Lugano: interrogazione del Municipio',
+    ogDescription: 'Il consigliere Omar Wicht interroga il Municipio di Lugano chiedendo dati precisi sui frontalieri assunti dal 2024. Scopri le regole di assunzione e i diritti del frontaliere nel settore pubblico ticinese.',
+    canonicalPath: '/articoli-frontaliere/frontalieri-assunzioni-lugano-interrogazione',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Frontalieri a Lugano: interrogazione del Municipio",
+      "description": "Omar Wicht interroga il Municipio di Lugano su assunzioni di frontalieri con permesso G dal 2024. Scopri come funzionano le regole e quali diritti hai",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/frontalieri-assunzioni-lugano-interrogazione.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Lugano, dove il Municipio gestisce le assunzioni di frontalieri e cittadini stranieri nell'amministrazione comunale"
+      },
+      "datePublished": "2026-09-09T21:02:38+00:00",
+      "dateModified": "2026-09-09T21:02:38+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/frontalieri-assunzioni-lugano-interrogazione/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-esplosione-centrale-ritom-san-gottardo': {
+    title: 'Ticino: esplosione centrale ritom, danni linea san gottardo',
+    description: 'Mercoledì 9 settembre 2026, esplosione e crollo parziale nella storica centrale idroelettrica del Ritom (Ticino). Due operai feriti gravemente. Indagini',
+    keywords: 'frontalieri, ticino, svizzera, italia, esplosione, centrale, ritom, danni',
+    ogTitle: 'Ticino: esplosione centrale idroelettrica Ritom, danni linea San Gottardo',
+    ogDescription: 'Grave incidente al Canton Ticino: esplosione e crollo parziale nella storica centrale idroelettrica del Ritom, fondamentale per la linea ferroviaria del San Gottardo. Due operai feriti gravemente. Indagini in corso per accertare le cause.',
+    canonicalPath: '/articoli-frontaliere/esplosione-centrale-ritom-san-gottardo',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Ticino: esplosione centrale ritom, danni linea san gottardo",
+      "description": "Mercoledì 9 settembre 2026, esplosione e crollo parziale nella storica centrale idroelettrica del Ritom (Ticino). Due operai feriti gravemente. Indagini",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/esplosione-centrale-ritom-san-gottardo.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Esplosione nella centrale idroelettrica del Ritom, Canton Ticino, con danni strutturali e intervento dei soccorsi."
+      },
+      "datePublished": "2026-09-10T00:26:40+00:00",
+      "dateModified": "2026-09-10T00:26:40+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/esplosione-centrale-ritom-san-gottardo/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;
