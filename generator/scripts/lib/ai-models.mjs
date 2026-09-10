@@ -2553,6 +2553,32 @@ const PROVIDER_COOLDOWN_SKIP_RE = /:\s*skipped\s+\u2014\s+provider\s+\S+\s/i;
 // spazi e pipe orfane non portano informazione, il contenuto non si tocca.
 const ENTRY_TAIL_SEPARATOR_RE = /[\s|]+$/;
 
+// The provider row is truncated for display. Non-authoritative persistent
+// causes must therefore be read from that same bounded row; only a machine
+// verdict (metadata or this marker) may justify reading the full reason.
+const PERSISTENT_EXHAUSTION_RE = /\b40[124]\b|tokens?_limit_reached|context.?length|maximum context|too many tokens|exceeds .*input cap|max output \d+ <|no API key|unknown.?model|no such model|does not exist|decommissioned|deprecated|no longer supported|no longer available|no longer offered|non-retryable|unusable content|payment|insufficient|credit/i;
+const AUTHORITATIVE_CAUSE_MARKER_RE = /\[authoritative-cause=(resolver-flap|unreachable|persistent)\]/i;
+
+/** Stable, parseable marker for an authoritative production verdict. */
+export function formatAuthoritativeCauseMarker(value) {
+  const normalized = value === 'resolver flap' ? 'resolver-flap' : String(value || '').toLowerCase();
+  return ['resolver-flap', 'unreachable', 'persistent'].includes(normalized)
+    ? `[authoritative-cause=${normalized}]`
+    : '';
+}
+
+/** Read an authoritative verdict carried by a displayed aggregate error row. */
+export function authoritativeCauseFromText(text) {
+  const match = AUTHORITATIVE_CAUSE_MARKER_RE.exec(String(text == null ? '' : text));
+  if (!match) return null;
+  return match[1].toLowerCase() === 'resolver-flap' ? 'resolver flap' : match[1].toLowerCase();
+}
+
+/** Persistent vocabulary shared by the live catch path and the final tally. */
+export function hasPersistentExhaustionCause(text) {
+  return PERSISTENT_EXHAUSTION_RE.test(String(text == null ? '' : text));
+}
+
 // Single source of truth for what counts a "last-resort" model and its
 // prefix (AGENTS.md #6 — do not re-declare 'local/'/'omniroute/'/'claude-cli/'
 // yet again below). Declared here, ahead of _freshLastResortStats, because
@@ -8093,19 +8119,28 @@ export async function callLLM(messages, opts = {}) {
   const errors = [];
   const classificationErrors = [];
   const pushError = (display, classification = display) => {
-    const errorRow = errors.push(display) - 1;
+    const classificationObject = classification && typeof classification === 'object'
+      ? { transientWindow: String(display).length, ...classification }
+      : { reason: classification, authoritative: null, transientWindow: String(display).length };
+    const marker = formatAuthoritativeCauseMarker(classificationObject.authoritative);
+    const shown = marker && !String(display).includes(marker)
+      ? `${display} ${marker}`
+      : String(display);
+    const errorRow = errors.push(shown) - 1;
     // `transientWindow` = quanto della ragione PIENA e' anche la riga mostrata.
-    // La ragione piena serve alla causa persistente (un 401 oltre il taglio
-    // deve votare lo stesso), ma il vocabolario transitorio non puo' votare
-    // sulla coda: vedi il blocco «LA CODA NON VOTA TRANSITORIO» in
-    // classifyExhaustionCause. Per le voci sintetiche (display === reason) la
-    // finestra e' l'intera stringa, quindi il comportamento non cambia.
-    classificationErrors.push(
-      classification && typeof classification === 'object'
-        ? { transientWindow: display.length, ...classification }
-        : { reason: classification, authoritative: null, transientWindow: display.length },
-    );
+    // La ragione piena puo' votare persistente oltre il taglio solo quando il
+    // provider ha consegnato un verdetto autorevole; altrimenti entrambe le
+    // regex restano nella finestra mostrata. Per le voci sintetiche il marker
+    // rende esplicita la loro causa persistente.
+    classificationErrors.push(classificationObject);
     return errorRow;
+  };
+  const setErrorAuthority = (errorRow, authoritative) => {
+    const classification = classificationErrors[errorRow];
+    if (!classification || typeof classification !== 'object') return;
+    classification.authoritative = authoritative;
+    const marker = formatAuthoritativeCauseMarker(authoritative);
+    if (marker && !errors[errorRow].includes(marker)) errors[errorRow] += ` ${marker}`;
   };
   // Every pre-flight rejection caused by the INPUT size, as { reqLimit, estTokens }.
   // Kept separate from `errors` (free text, only ever regex-tallied by
@@ -8200,7 +8235,10 @@ export async function callLLM(messages, opts = {}) {
     const modelLimit = MODEL_MAX_OUTPUT_TOKENS[apiModelId];
     if (modelLimit && o.maxTokens > modelLimit) {
       _logPreflightSkipOnce(model, 'maxOutput', `model max output ${modelLimit} < requested maxTokens ${o.maxTokens}`);
-      pushError(`${model}: skipped — model max output ${modelLimit} < requested maxTokens ${o.maxTokens}`);
+      pushError(
+        `${model}: skipped — model max output ${modelLimit} < requested maxTokens ${o.maxTokens}`,
+        { reason: `${model}: model max output ${modelLimit} < requested maxTokens ${o.maxTokens}`, authoritative: 'persistent' },
+      );
       _recordLastResortSkip(model, 'max output token limit');
       continue;
     }
@@ -8229,7 +8267,10 @@ export async function callLLM(messages, opts = {}) {
       if (estTokens > reqLimit) {
         // One-line log per skip so ops can see the cascade in the workflow output
         console.warn(`⏭️  [${model}] Skipped — request would exceed ${reqLimit}-token limit (estimated ${estTokens})`);
-        pushError(`${model}: skipped — request ~${estTokens} tokens exceeds ${reqLimit}-token input cap`);
+        pushError(
+          `${model}: skipped — request ~${estTokens} tokens exceeds ${reqLimit}-token input cap`,
+          { reason: `${model}: request ~${estTokens} tokens exceeds ${reqLimit}-token input cap`, authoritative: 'persistent' },
+        );
         _recordLastResortSkip(model, 'request token limit');
         // Remember the budget this model would have accepted. The cascade can
         // only ever SKIP an oversized payload — it has no way to shrink one —
@@ -8339,7 +8380,7 @@ export async function callLLM(messages, opts = {}) {
       // che questo stesso modulo definisce transitorio per costruzione.
       const errorRow = pushError(
         `${model}: ${msg.slice(0, 200).replace(ENTRY_TAIL_SEPARATOR_RE, '')}`,
-        { reason: `${model}: ${msg}`, authoritative: null },
+        { reason: `${model}: ${msg}`, authoritative: e.nonRetryable === true ? 'persistent' : null },
       );
       _recordLastResortOutcome(model, 'failed');
 
@@ -8382,7 +8423,8 @@ export async function callLLM(messages, opts = {}) {
       // questa riga tre flap sparsi su tutta la run, con 429 e timeout in
       // mezzo, escalavano come tre di fila: la soglia misurava «tre flap
       // qualsiasi nella run» invece di «il resolver e' rotto adesso».
-      const flapCode = e.hostUnreachable ? null : classifyTransientResolver(e);
+      const outerPersistent = e.nonRetryable === true || hasPersistentExhaustionCause(msg.slice(0, 200));
+      const flapCode = e.hostUnreachable || outerPersistent ? null : classifyTransientResolver(e);
       if (!flapCode) {
         // Il comportamento non cambia — la striscia si chiude come prima —, ma
         // ora si sa CON CHE COSA: `_recordResolverFlapReset` conta la classe
@@ -8410,7 +8452,7 @@ export async function callLLM(messages, opts = {}) {
           // Il modello resta ritentabile, quindi la sua riga vota transitorio
           // come quella di un flap sotto soglia (#818).
           errors[errorRow] += ` — resolver flap (${flapCode}), host temporarily unresolvable, retryable`;
-          classificationErrors[errorRow].authoritative = 'resolver flap';
+          setErrorAuthority(errorRow, 'resolver flap');
         } else if (flaps >= RESOLVER_FLAP_ESCALATION) {
           e.hostUnreachable = flapCode;
           // Azzerato QUI (#818): l'escalation ha gia' speso la striscia — ban
@@ -8429,7 +8471,7 @@ export async function callLLM(messages, opts = {}) {
           // mette la catena fuori gioco, e votare «transitorio» qui e'
           // esattamente l'esito verde-senza-articolo.
           errors[errorRow] += ` — unreachable (${flapCode}), non-retryable`;
-          classificationErrors[errorRow].authoritative = 'unreachable';
+          setErrorAuthority(errorRow, 'unreachable');
         } else {
           console.warn(`🔁 [${model}] Resolver flap (${flapCode}) on ${provider} ${flaps}/${RESOLVER_FLAP_ESCALATION} — retryable, no ban and no provider cooldown`);
           // La riga grezza e' `fetch failed`, che non vota (vedi il commento
@@ -8438,7 +8480,7 @@ export async function callLLM(messages, opts = {}) {
           // qualificazione `transientExhaustion` restava falso e il chiamante
           // apriva un Bug invece di differire (#818).
           errors[errorRow] += ` — resolver flap (${flapCode}), host temporarily unresolvable, retryable`;
-          classificationErrors[errorRow].authoritative = 'resolver flap';
+          setErrorAuthority(errorRow, 'resolver flap');
         }
       }
       const isExhausted =
@@ -8839,7 +8881,7 @@ import { isTransientMajority } from './exhaustion-disposition.mjs';
  * Entries may be strings or `{ reason, authoritative, transientWindow }`: the
  * verdict lets a resolver override wording that appears earlier in the raw
  * message, and the window caps how far into `reason` an UNCORROBORATED
- * transient match may still vote (default: the whole string).
+ * match may still vote (default: the whole string).
  */
 export function causeIndex(re, reason) {
   return String(reason == null ? '' : reason).search(re);
@@ -8847,7 +8889,7 @@ export function causeIndex(re, reason) {
 
 function authoritativeCauseBucket(value) {
   if (value === 'resolver flap') return 'transient';
-  if (value === 'unreachable') return 'persistent';
+  if (value === 'unreachable' || value === 'persistent') return 'persistent';
   return null;
 }
 
@@ -8859,7 +8901,6 @@ export function classifyExhaustionCause(errors, { authoritative } = {}) {
   // that classifies correctly only because it happens to contain a status code
   // is one rewording away from silently flipping a persistent fault to
   // transient — which is exactly the failure this pair of regexes suffered.
-  const persistentRe = /\b40[124]\b|tokens?_limit_reached|context.?length|maximum context|too many tokens|exceeds .*input cap|max output \d+ <|no API key|unknown.?model|no such model|does not exist|decommissioned|deprecated|no longer supported|no longer available|no longer offered|non-retryable|unusable content|payment|insufficient|credit/i;
   // `timed out` alongside `timeout`: the claude-CLI provider rejects with
   // "claude CLI timed out after 120000ms", which matched NEITHER regex and fell
   // into the ignored ambiguous bucket — leaving the one model that was actually
@@ -8911,16 +8952,18 @@ export function classifyExhaustionCause(errors, { authoritative } = {}) {
   for (const entry of entries) {
     const reason = entry && typeof entry === 'object' ? entry.reason : entry;
     const entryAuthoritative = entry && typeof entry === 'object'
-      ? entry.authoritative ?? authoritative
-      : authoritative;
+      ? entry.authoritative ?? authoritative ?? authoritativeCauseFromText(reason)
+      : authoritative ?? authoritativeCauseFromText(reason);
     const text = String(reason == null ? '' : reason);
     // ── LA CODA NON VOTA TRANSITORIO (#1121 follow-up) ──────────────────────
     //
     // Il primo-indice-vince di #976 presuppone che il testo classificato sia
     // «la causa primaria + la sua coda», e a rendere vera quella premessa era
-    // il taglio a 200 caratteri della riga mostrata. Passare la ragione PIENA
-    // al tally serve alla causa persistente (un 401 oltre il taglio deve
-    // votare), ma toglie la finestra anche a `transientRe`, che matcha
+    // il taglio a 200 caratteri della riga mostrata. La ragione PIENA resta
+    // disponibile al tally per i verdetti autorevoli; per le righe senza
+    // metadato si usa invece la finestra mostrata, che impedisce anche a
+    // `persistentRe` di leggere una coda ambigua. La finestra limita inoltre
+    // `transientRe`, che matcha
     // `aborted`, `timeout`, `temporarily` e `\b5\d\d\b` — token che il corpo
     // di un errore di provider porta di routine centinaia di caratteri dopo la
     // causa vera (pagina HTML d'errore, stack trace, `x-request-id: 503abc`).
@@ -8929,17 +8972,18 @@ export function classifyExhaustionCause(errors, { authoritative } = {}) {
     // zero articoli, nessun Bug aperto: proprio l'esito «verde-senza-articolo»
     // che questo tally esiste per impedire.
     //
-    // Quindi le due finestre sono asimmetriche di proposito: la persistente e'
-    // il testo intero, la transitoria resta quella mostrata. Un verdetto
-    // AUTOREVOLE (resolver flap / unreachable) non passa di qui: e' corroborato
-    // da `e.code`, non dal vocabolario.
+    // Quindi una causa NON autorevole resta nella finestra mostrata per
+    // entrambe le regex. Il testo intero e' ammesso solo quando il provider ha
+    // consegnato un verdetto autorevole, portato dall'oggetto o dal marker
+    // serializzato nella riga del report.
     const transientWindow = entry && typeof entry === 'object' && Number.isFinite(entry.transientWindow)
       ? entry.transientWindow
       : text.length;
     const transientText = text.slice(0, transientWindow);
     const authoritativeBucket = authoritativeCauseBucket(entryAuthoritative);
     const transientAt = causeIndex(transientRe, transientText);
-    const persistentAt = causeIndex(persistentRe, text);
+    const persistentText = authoritativeBucket === null ? transientText : text;
+    const persistentAt = causeIndex(PERSISTENT_EXHAUSTION_RE, persistentText);
     const isTransient = authoritativeBucket === 'transient'
       || (authoritativeBucket === null && transientAt >= 0 && (persistentAt < 0 || transientAt <= persistentAt));
     const isPersistent = authoritativeBucket === 'persistent'
