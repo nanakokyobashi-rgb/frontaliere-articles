@@ -256,6 +256,10 @@ jobs:
           REPO: ${{ github.repository }}
           GITHUB_PAT: ${{ env.GITHUB_PAT }}
           EVENT_NAME: ${{ github.event_name }}
+          # Sandbox contract for the Claude invocation. The composite action still
+          # owns the Claude→Codex quota fallback; this only disables extended
+          # thinking in the primary Claude path and is inherited by its child.
+          MAX_THINKING_TOKENS: '0'
         with:
           preflight_blocked: ${{ steps.quota.outputs.codex_fallback }}
           codex_auth_json: ${{ secrets.CODEX_AUTH_JSON }}
@@ -345,6 +349,26 @@ jobs:
             - Se `batch_count` supera il budget della sessione, lavora in chunk seriali: dopo ogni chunk salva gli item nel bucket esistente, poi continua dal primo PR non commentato. Non aprire un secondo bucket per lo stesso `(daily_key, target repository)`.
             - Solo il gate zero-Claude successivo demota gli item privi di acceptance falsificabile, porta il bucket a `State: sealed` e aggiunge `agent:fix-queued`. Un bucket collecting non è lavorabile dal drainer.
             - Una PR di fix daily con `Addresses #<bucket>` e `Follow-up item: FU-...` passa il gate anti-nipote solo per cercare finding nuovi: non creare issue figlie. Leggi il bucket padre nello stesso repository target; i finding già coperti dal padre aggiornano `Sources`/si deduplicano, quelli genuinamente nuovi si appendono al padre (se sealed, riportalo a collecting per il gate successivo). Se il padre è illeggibile, posta il blocco sulla PR e non creare un contenitore alternativo.
+
+            **Contratto di output parsabile (OBBLIGATORIO, non prosa libera):** il corpo del bucket deve contenere una sezione per ogni item. La forma legacy è `### <n>.`; per il daily usa sempre l'heading stabile `### FU-YYYY-MM-DD-NNN — <titolo breve>`, dove `NNN` è il primo numero libero a tre cifre della chiave giornaliera: non rinumerare gli ID già assegnati e riusa lo stesso ID nei retry. L'ID deve comparire anche nei marker della PR (`Follow-up item: FU-...`). **Ordine obbligatorio dei campi:** `Target repository`, `Target file`, `Source`, `Stato dichiarato nella PR`, `Original text`, `Funnel impact`, `Rationale`, `Acceptance token`, `Sources`, `Suggested action` (Suggested action è l'ultimo campo).
+            ```text
+            ### FU-YYYY-MM-DD-NNN — <titolo breve>
+            - Target repository: owner/repo
+            - Target file: path/to/file.mjs
+            - Source: PR #N / review section
+            - Stato dichiarato nella PR: <testo letterale oppure «nessuno»>
+            - Original text:
+              > <finding originale, senza inventare una decisione>
+            - Funnel impact: <perché è nel perimetro>
+            - Rationale: <cosa va cambiato e perché>
+            - Acceptance token: `<token-codice già citato nella Suggested action>`
+            - Sources: PR #N
+            - Suggested action: verificare e rendere vero `<token-codice>` nel file target
+            ```
+            La riga `Acceptance token` è descrittiva: l'oracolo unico è `citedTokens()`/`hasFalsifiableAcceptance()`, applicato alla `Suggested action`. Se il lavoro non si riduce a un token, usa invece una riga `- METRICA: prima=<n> atteso=<n> | COMANDO: <comando che nomina file, script o test>`; il comando deve nominare un referente e `prima` non può già essere uguale ad `atteso`.
+            **Token derivato:** prima formula l'azione, poi cerca nel file target il simbolo/campo da toccare e riportalo verbatim nella `Suggested action`; la prova deve essere eseguibile come `content.includes(tok)` (il referente può essere introdotto dalla PR, ma il token derivato deve essere una forma di codice distintiva).
+            Il metro si applica alla `Suggested action` CHE STAI PER SCRIVERE, non al bullet grezzo o a `Original text`: usa forme come `nomeFunzione()`, `oggetto.campo`, `COSTANTE >= 1`, mai un identificatore o path nudo. `token-esempio: `discoverFreeModels()`, `staleIds.length`, `coerceRecordScore()`, `manifest.counts`, `machineAdmission()`, `targetRepository.name()``.
+            `token-controesempio: `run()`, `nomeCampo`, `scripts/ci/foo.mjs`` — sono rifiutati da `isDistinctiveToken()` (corto, identificatore nudo, path nudo). Non coniare `no-acceptance-condition`: raccoglilo nel summary della PR, come `Live-verification`.
 
             **Per OGNI PR #N del batch (CSV sopra):**
             - **Backfill check (SOLO se `EVENT_NAME=workflow_dispatch`):** ri-verifica che

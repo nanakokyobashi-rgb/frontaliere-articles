@@ -142,14 +142,12 @@ test('reconcile: `blocked` batte ogni altra condizione di auto-close', () => {
 });
 
 /**
- * Il censimento dei closer, e la riga che dice perche' tre di loro non sono
+ * Il censimento dei closer, e la riga che dice perche' i mirror-locked non sono
  * riparabili QUI.
  *
- * `scripts/ci/**` contiene quattro script che chiudono issue. Solo uno,
- * `handoff-to-site.mjs`, e' di questo repo: gli altri tre sono `mode: identical`
- * nel manifest, cioe' condivisi col sito — una fix scritta qui verrebbe
- * sovrascritta al mirror successivo (AGENTS.md #3). La loro meta' del pin si
- * scrive di la', ed e' lavoro tracciato, non lavoro dimenticato.
+ * `scripts/ci/**` contiene i closer condivisi dal ciclo. I closer corpus-owned
+ * interrogano il manifest; solo i file ancora `mode: identical` sono bloccati
+ * dal mirror e devono ricevere la loro meta' del pin sul sito.
  *
  * Il guard e' quindi CONDIZIONATO AL MODE, letto dal manifest invece che da un
  * elenco ricopiato: un closer corpus-owned deve consultare i pin, un
@@ -200,9 +198,7 @@ test('ogni closer corpus-owned consulta la sorgente dei pin', () => {
  */
 test('i closer mirror-locked sono dichiarati, non dimenticati', () => {
   const EXPECTED_MIRROR_LOCKED = [
-    'scripts/ci/followup-drainer.mjs',
     'scripts/ci/harvest-agent-lessons.mjs',
-    'scripts/ci/reconcile-followups.mjs',
   ];
   const actual = discoverClosers().filter((c) => c.mode === 'identical').map((c) => c.rel);
   assert.deepEqual(

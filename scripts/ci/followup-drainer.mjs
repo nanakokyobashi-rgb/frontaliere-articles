@@ -66,6 +66,7 @@ import {
 import { FIX_OUTCOME_RE } from './close-recovered-failure-issues.mjs';
 import { runBudgetFromEnv } from './lib/run-budget.mjs';
 import { parsePositiveNum } from '../lib/parse-positive-num.mjs';
+import { pinnedBy } from './manifest-pinned-issues.mjs';
 import {
   bucketState,
   dailyKeyFromBucketBody,
@@ -190,6 +191,10 @@ const ITEM_COST_MS = intFromEnv('FOLLOWUP_ITEM_COST_MS', 8_000);
 
 const DRY = process.argv.includes('--dry-run');
 const REPO = process.env.GITHUB_REPOSITORY || '';
+
+function manifestPinFor(issueNumber) {
+  return pinnedBy(issueNumber, REPO);
+}
 
 // Il corpus ha un classificatore adattato che precede il pin keep-open del
 // sito. Manteniamo qui il piccolo predicato richiesto dal rescue daily senza
@@ -2974,6 +2979,11 @@ export function runDrain() {
       console.log(`age-out: ${candidates.length} eleggibili, cap ${AGEOUT_MAX_PER_RUN}/run → ${candidates.length - toClose.length} rinviate al prossimo tick (no silent cap).`);
     }
     for (const iss of toClose) {
+      const pinnedPath = manifestPinFor(iss.number);
+      if (pinnedPath) {
+        console.log(`📌 age-out: #${iss.number} tenuta aperta dal manifest (${pinnedPath}).`);
+        continue;
+      }
       // Coppia non atomica (comment → close): senza budget il job può morire fra
       // le due e lasciare la issue commentata-ma-aperta, che al tick successivo
       // viene ri-commentata. Non si comincia se non c'è il tempo di finire.
@@ -3057,6 +3067,11 @@ export function runDrain() {
         } catch { allClosed = false; break; } // stato illeggibile → non chiudere
       }
       if (!allClosed) continue;
+      const pinnedPath = manifestPinFor(p.number);
+      if (pinnedPath) {
+        console.log(`📌 parent-close: #${p.number} tenuta aperta dal manifest (${pinnedPath}).`);
+        continue;
+      }
       if (DRY) { console.log(`[dry] parent-close #${p.number} (figlie ${kids.join(', ')} tutte chiuse)`); continue; }
       try {
         gh(['issue', 'comment', String(p.number), '--repo', REPO, '--body',
@@ -3271,6 +3286,11 @@ export function runDrain() {
       acted++;
 
       if (d.action === 'close') {
+        const pinnedPath = manifestPinFor(iss.number);
+        if (pinnedPath) {
+          console.log(`📌 verdict-exit: #${iss.number} tenuta aperta dal manifest (${pinnedPath}).`);
+          continue;
+        }
         const note = `✅ **Auto-chiusa dal followup-drainer (zero-Claude)**: l'ultimo giro del fixer ha emesso \`FIX_OUTCOME: already-fixed\`, cioè è andato a guardare il codice e il difetto non c'era più. Il verdetto è più forte del token-match con cui \`reconcile-followups.mjs\` già auto-chiude, quindi non serve una seconda run per confermarlo.\n\n**Riapri** se il difetto ricorre — il monitor che ha aperto questa issue lo fa da sé. Per disattivare questa chiusura: \`FOLLOWUP_NO_AUTOCLOSE=1\`.`;
         if (DRY) { console.log(`[dry] close #${iss.number} (verdict-exit: ${d.reason}) — "${iss.title}"`); continue; }
         // ORDINE: label → close → commento, e NON commento → close come

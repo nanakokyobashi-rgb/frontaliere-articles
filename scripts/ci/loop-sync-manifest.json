@@ -231,11 +231,32 @@
     },
     {
       "path": "scripts/ci/claude-rate-limit.mjs",
-      "mode": "identical",
+      "mode": "adapted",
+      "reason": "Il parser condiviso importa `claude-rate-limit-contract.mjs`, aggiunto nel percorso fallback e assente da origin/main del sito. La variante corpus resta intenzionalmente distinta finché il contratto del fallback non è atterrato su entrambi i lati.",
       "baseline": {
-        "site": "1387162334c8f6ed",
-        "corpus": "1387162334c8f6ed",
-        "alignedAt": "2026-09-04"
+        "site": "56298f523aa53a7a",
+        "corpus": "6819d0624f60c556",
+        "alignedAt": "2026-09-10"
+      }
+    },
+    {
+      "path": "scripts/ci/claude-codex-fallback.mjs",
+      "mode": "corpus-only",
+      "reason": "Wrapper locale che applica il fallback OAuth Codex quando la sessione Claude raggiunge quota. Il sito ha il proprio percorso di fallback nel ramo di sviluppo e non importa questo modulo dal corpus; non esiste un gemello pubblicato da mirrorare in questa voce.",
+      "baseline": {
+        "site": null,
+        "corpus": "79091aa7f0bf1bad",
+        "alignedAt": "2026-09-10"
+      }
+    },
+    {
+      "path": "scripts/ci/claude-rate-limit-contract.mjs",
+      "mode": "corpus-only",
+      "reason": "Contratto locale per distinguere quota/429 dai risultati Claude ammessi nel workflow del corpus. È usato dal fallback del corpus e non ha un file gemello nel sito pubblicato.",
+      "baseline": {
+        "site": null,
+        "corpus": "d8a6e057ae3475f9",
+        "alignedAt": "2026-09-10"
       }
     },
     {
@@ -647,12 +668,12 @@
     },
     {
       "path": "scripts/ci/followup-drainer.mjs",
-      "mode": "identical",
-      "reason": "Portato lo stadio di decomposizione (sito #6228, byte-identico a origin/main del sito): routing agent:decompose-queued, DECOMPOSE-DRAIN/RESCUE, PARENT-CLOSE, rotazione scan parked-retry, fairness env-gated (env solo nel drainer.yml del sito: qui il blocco e' inerte), rimozione park network-audit.",
+      "mode": "adapted",
+      "reason": "Portato lo stadio di decomposizione (sito #6228) con gli adattamenti corpus: parser numerico locale `parse-positive-num.mjs`, classificatore/route del corpus e guard `manifest-pinned-issues.mjs` su age-out, parent-close e verdict-exit. Il file non è più mirror-locked: la sorgente dei pin e il contratto del parser non esistono byte-identici sul sito.",
       "baseline": {
-        "site": "2f9a68733b9cef1d",
-        "corpus": "2f9a68733b9cef1d",
-        "alignedAt": "2026-09-01"
+        "site": "68e447f9a887acb0",
+        "corpus": "ae337a528218acaa",
+        "alignedAt": "2026-09-10"
       }
     },
     {
@@ -946,6 +967,26 @@
         "site": "7e46173ed1e1334d",
         "corpus": "e51f349de4cebfe2",
         "alignedAt": "2026-08-07"
+      }
+    },
+    {
+      "path": "scripts/ci/gate-minted-followups.mjs",
+      "mode": "adapted",
+      "reason": "Gate corpus adattato al parser `parse-positive-num.mjs` e alla sorgente `manifest-pinned-issues.mjs`; ricontrolla e ricalcola il body con CAS prima di sopprimere una issue e non chiude i trackingIssue pinnati. Il gemello del sito resta distinto per il suo parser e il suo manifest.",
+      "baseline": {
+        "site": "2beb683893e75830",
+        "corpus": "1007db9ce2ff14e5",
+        "alignedAt": "2026-09-10"
+      }
+    },
+    {
+      "path": "scripts/ci/lib/machine-broken.mjs",
+      "mode": "adapted",
+      "reason": "Helper del gate con la variante del corpus; la copia locale conserva il contratto di classificazione ma segue le dipendenze e le suite Node del pubblicatore, quindi non va trattata come file mirror-locked.",
+      "baseline": {
+        "site": "a586dea263223cf5",
+        "corpus": "cda5686760382ca6",
+        "alignedAt": "2026-09-10"
       }
     },
     {
@@ -3380,11 +3421,12 @@
     },
     {
       "path": "scripts/ci/reconcile-followups.mjs",
-      "mode": "identical",
+      "mode": "adapted",
+      "reason": "Riconciliatore adattato al parser numerico `parse-positive-num.mjs` del corpus e al suo `manifest-pinned-issues.mjs`: il secondo auto-close resta deterministico ma non può chiudere un trackingIssue pinnato. La copia del sito mantiene il proprio parser/manifest.",
       "baseline": {
-        "site": "09507c1fb90d4cd9",
-        "corpus": "09507c1fb90d4cd9",
-        "alignedAt": "2026-09-03"
+        "site": "32650b8e06345c23",
+        "corpus": "dfab1f6ad94d5ae2",
+        "alignedAt": "2026-09-10"
       }
     },
     {

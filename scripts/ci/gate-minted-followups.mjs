@@ -87,6 +87,7 @@ import {
 } from './followup-resolution-match.mjs';
 import { parsePositiveNum } from '../lib/parse-positive-num.mjs';
 import { hasTriageComment } from './collect-followup-batch.mjs';
+import { pinnedBy } from './manifest-pinned-issues.mjs';
 
 const DRY_RUN = process.env.DRY_RUN === '1';
 const MAX_AGE_MIN = parsePositiveNum(process.env.GATE_MAX_AGE_MIN, 240, {
@@ -518,6 +519,13 @@ function sameIssueSnapshot(expected, actual) {
     && String(actual.body || '') === String(expected?.body || '');
 }
 
+function manifestPinFor(issueNumber) {
+  return pinnedBy(
+    issueNumber,
+    process.env.GH_REPO || process.env.GITHUB_REPOSITORY || '',
+  );
+}
+
 /**
  * Parse the complete open follow-up listing returned by
  * `gh api --paginate --slurp`.  REST pagination has no useful `--limit` signal
@@ -824,6 +832,22 @@ function consolidateDailyBuckets(open, repoArgs, recoverable = new Set()) {
         console.log(`⚠️ daily ${identity}: audit comment #${duplicate.number} non riuscito → non lo chiudo.`);
         continue;
       }
+      // The audit comment is a write of its own. Re-read after it and compare the
+      // complete title/body snapshot immediately before closing, so an append made
+      // by another daily writer cannot be lost by this close handshake.
+      const beforeDuplicateClose = parseIssueJson(gh(['issue', 'view', String(duplicate.number), ...repoArgs,
+        '--json', 'number,title,body,createdAt'], { allowFail: true }));
+      if (!beforeDuplicateClose || !sameIssueSnapshot(duplicate, beforeDuplicateClose)) {
+        closeFailed = true;
+        console.log(`⚠️ daily ${identity}: duplicato #${duplicate.number} cambiato dopo l'audit → non lo chiudo; retry idempotente.`);
+        continue;
+      }
+      const duplicatePin = manifestPinFor(duplicate.number);
+      if (duplicatePin) {
+        closeFailed = true;
+        console.log(`📌 daily ${identity}: duplicato #${duplicate.number} tenuto aperto dal manifest (${duplicatePin}).`);
+        continue;
+      }
       const closed = gh(['issue', 'close', String(duplicate.number), ...repoArgs, '--reason', 'not planned'], { allowFail: true });
       if (closed === null) closeFailed = true;
     }
@@ -1002,8 +1026,8 @@ function main() {
           }
           console.log(`#${iss.number}: body cambiato dopo la lista → decisione ricalcolata dalla lettura nuova (${d.action}/${d.reason}).`);
         }
-        const list = d.demoted.map((it) => `- «${itemHeadline(it)}»`).join('\n');
-        const duplicateList = (d.duplicates || [])
+        let list = d.demoted.map((it) => `- «${itemHeadline(it)}»`).join('\n');
+        let duplicateList = (d.duplicates || [])
           .map((entry) => `- «${itemHeadline(entry.item?.text || entry.item?.raw || '')}» (${entry.fingerprint})`)
           .join('\n');
         // Il TESTO INTEGRALE, non il titolo. Nel ramo `demote` il corpo della issue viene
@@ -1013,8 +1037,8 @@ function main() {
         // poggia l'intera scelta di demozione («resta leggibile sulla PR») sarebbe falsa,
         // in modo irreversibile e ~11 volte al giorno. Nel ramo `suppress` il corpo resta
         // perché la issue è solo chiusa, ma il blocco integrale non fa danno neanche lì.
-        const verbatim = demotedBlock(d.demoted);
-        const why = d.action === 'dedupe'
+        let verbatim = demotedBlock(d.demoted);
+        let why = d.action === 'dedupe'
           ? `${MINT_GATE_MARKER}\n🧹 **Gate deterministico sul conio** (zero-Claude): ${d.duplicates.length} item con fingerprint duplicato sono stati accorpati nel primo item; le rispettive \`Sources\` restano unite e non viene creato un secondo lavoro. Fingerprint: \`target repository + target file + token/azione normalizzata\`.\n\n${duplicateList}`
           : `${MINT_GATE_MARKER}\n🚧 **Gate deterministico sul conio** (zero-Claude): ${d.demoted.length} item non porta${d.demoted.length === 1 ? '' : 'no'} una condizione di accettazione falsificabile — né un token-codice distintivo in una riga \`Suggested action\`, né una scheda con un \`COMANDO\` che nomini un referente — quindi nessuna evidenza potrà mai provarl${d.demoted.length === 1 ? 'o' : 'i'} affrontat${d.demoted.length === 1 ? 'o' : 'i'}. Oracolo: \`hasFalsifiableAcceptance()\` in \`scripts/ci/followup-resolution-match.mjs\`, lo STESSO che chiude l'item.\n\n${list}`;
         if (DRY_RUN) { console.log(why); continue; }
@@ -1022,7 +1046,7 @@ function main() {
         // issue. Il verso opposto — riscrivi il corpo, poi prova a commentare — perde gli
         // item per sempre se la seconda chiamata fallisce, ed e' proprio la finestra in
         // cui `gh` fallisce piu' spesso (rate limit dopo N scritture in un batch).
-        const commentBody = `${MINT_GATE_MARKER}\n## Item demoti dal gate sul conio\n\nNon tracciati come item (nessuna condizione di accettazione falsificabile), ma **conservati qui integralmente**, come i \`Live-verification\`. ${d.action === 'suppress' ? `Issue #${iss.number} chiusa in ingresso: non restava nessun item valido.` : `Issue #${iss.number} resta aperta con ${d.valid.length} item valid${d.valid.length === 1 ? 'o' : 'i'}; questi sono stati tolti dal suo corpo e vivono solo qui.`}\n\n${verbatim}`;
+        let commentBody = `${MINT_GATE_MARKER}\n## Item demoti dal gate sul conio\n\nNon tracciati come item (nessuna condizione di accettazione falsificabile), ma **conservati qui integralmente**, come i \`Live-verification\`. ${d.action === 'suppress' ? `Issue #${iss.number} chiusa in ingresso: non restava nessun item valido.` : `Issue #${iss.number} resta aperta con ${d.valid.length} item valid${d.valid.length === 1 ? 'o' : 'i'}; questi sono stati tolti dal suo corpo e vivono solo qui.`}\n\n${verbatim}`;
         if (!commentTargets.length && d.action !== 'dedupe') {
           console.log(`⚠️ #${iss.number}: nessuna PR sorgente leggibile per conservare gli item demoti → issue lasciata intatta.`);
           report.push(`- ⚠️ #${iss.number} demozione/soppressione rinviata, PR sorgente assente`);
@@ -1040,10 +1064,90 @@ function main() {
           continue;
         }
         if (d.action === 'suppress') {
+          // The source-PR preservation comment above is itself a concurrent write.
+          // Take the final issue snapshot after it, recompute the decision from that
+          // body, and never close a stale decision. If a new demoted item appeared,
+          // preserve that fresh body too, then perform one last CAS read immediately
+          // before the close. This is the close boundary, not an advisory re-check.
+          const latestBeforeClose = parseIssueJson(gh(['issue', 'view', String(iss.number), ...repoArgs,
+            '--json', 'number,title,body,createdAt'], { allowFail: true }));
+          if (!latestBeforeClose) {
+            console.log(`⚠️ #${iss.number}: ultima lettura prima della soppressione illeggibile → issue lasciata aperta.`);
+            report.push(`- ⚠️ #${iss.number} soppressione rinviata, baseline finale illeggibile`);
+            continue;
+          }
+          const latestDaily = dailyBucketInfo(latestBeforeClose.title || '');
+          const latestTriageComplete = latestDaily
+            ? bucketState(latestBeforeClose.body || '') === 'sealed'
+              || recoveredDailyIdentities.has(dailyBucketIdentity(latestBeforeClose.title || ''))
+            : TRIAGE_COMPLETE;
+          const latestDecision = decideMintGate(latestBeforeClose, {
+            machineOptions: { cache: machineCache },
+            triageComplete: latestDaily ? latestTriageComplete : TRIAGE_COMPLETE,
+          });
+          if (latestDecision.action !== 'suppress') {
+            console.log(`#${iss.number}: decisione finale ricalcolata (${latestDecision.action}/${latestDecision.reason}) → nessuna chiusura stale.`);
+            report.push(`- ⏭️ #${iss.number} soppressione annullata dalla decisione finale (${latestDecision.action}/${latestDecision.reason})`);
+            continue;
+          }
+          d = latestDecision;
+          if (!sameIssueSnapshot(iss, latestBeforeClose)) {
+            const latestTargets = latestDaily ? sourcePrNumbers(latestBeforeClose.body, pr) : [pr];
+            const latestVerbatim = demotedBlock(latestDecision.demoted);
+            const latestList = latestDecision.demoted.map((it) => `- «${itemHeadline(it)}»`).join('\n');
+            const latestWhy = `${MINT_GATE_MARKER}\n🚧 **Gate deterministico sul conio** (zero-Claude): ${latestDecision.demoted.length} item non porta${latestDecision.demoted.length === 1 ? '' : 'no'} una condizione di accettazione falsificabile — né un token-codice distintivo in una riga \`Suggested action\`, né una scheda con un \`COMANDO\` che nomini un referente — quindi nessuna evidenza potrà mai provarl${latestDecision.demoted.length === 1 ? 'o' : 'i'} affrontat${latestDecision.demoted.length === 1 ? 'o' : 'i'}. Oracolo: \`hasFalsifiableAcceptance()\` in \`scripts/ci/followup-resolution-match.mjs\`, lo STESSO che chiude l'item.\n\n${latestList}`;
+            const latestCommentBody = `${MINT_GATE_MARKER}\n## Item demoti dal gate sul conio\n\nNon tracciati come item (nessuna condizione di accettazione falsificabile), ma **conservati qui integralmente**, come i \`Live-verification\`. Issue #${latestBeforeClose.number} chiusa in ingresso: non restava nessun item valido.\n\n${latestVerbatim}`;
+            if (!latestTargets.length) {
+              console.log(`⚠️ #${iss.number}: nessuna PR sorgente nella baseline finale → issue lasciata aperta.`);
+              report.push(`- ⚠️ #${iss.number} soppressione rinviata, PR sorgente assente nella baseline finale`);
+              continue;
+            }
+            const refreshedResults = latestTargets.map((targetPr) => gh([
+              'pr', 'comment', String(targetPr), ...prRepoArgs, '--body', latestCommentBody,
+            ], { allowFail: true }));
+            if (refreshedResults.some((result) => result === null)) {
+              console.log(`⚠️ #${iss.number}: conservazione della baseline finale sulla PR non riuscita → issue lasciata aperta.`);
+              report.push(`- ⚠️ #${iss.number} soppressione rinviata (commento finale sulla PR fallito)`);
+              continue;
+            }
+            const confirmed = parseIssueJson(gh(['issue', 'view', String(iss.number), ...repoArgs,
+              '--json', 'number,title,body,createdAt'], { allowFail: true }));
+            if (!confirmed || !sameIssueSnapshot(latestBeforeClose, confirmed)) {
+              console.log(`⚠️ #${iss.number}: CAS finale fallita dopo la conservazione → issue lasciata aperta, retry.`);
+              report.push(`- ⚠️ #${iss.number} soppressione rinviata per CAS finale concorrente`);
+              continue;
+            }
+            iss = confirmed;
+            d = decideMintGate(iss, {
+              machineOptions: { cache: machineCache },
+              triageComplete: latestDaily ? latestTriageComplete : TRIAGE_COMPLETE,
+            });
+            if (d.action !== 'suppress') {
+              console.log(`#${iss.number}: decisione CAS finale non più soppressiva (${d.action}/${d.reason}) → issue lasciata aperta.`);
+              report.push(`- ⏭️ #${iss.number} CAS finale annullata (${d.action}/${d.reason})`);
+              continue;
+            }
+            verbatim = latestVerbatim;
+            why = latestWhy;
+            commentBody = latestCommentBody;
+          }
+          const pinnedPath = manifestPinFor(iss.number);
+          if (pinnedPath) {
+            console.log(`📌 #${iss.number}: soppressione bloccata dal manifest (${pinnedPath}); issue lasciata aperta.`);
+            report.push(`- 📌 #${iss.number} soppressione bloccata dal pin ${pinnedPath}`);
+            continue;
+          }
+          // The CAS/pin guard is deliberately the last read/decision before this
+          // close. The audit comment follows the close because it is not part of
+          // the preservation proof and would otherwise open another write window.
+          const closed = gh(['issue', 'close', String(iss.number), ...repoArgs, '--reason', 'not planned'], { allowFail: true });
+          if (closed === null) {
+            report.push(`- ⚠️ #${iss.number} soppressione non riuscita, issue invariata`);
+            continue;
+          }
           gh(['issue', 'comment', String(iss.number), ...repoArgs, '--body',
             `${why}\n\nNessun item valido resta: questa issue non sarebbe mai potuta uscire dalla coda (\`aggregateCloseGate()\` la blocca per costruzione). Chiusa in ingresso; il testo resta qui e nel commento di summary della PR #${pr}. Se un item era lavoro vero, riaprilo come issue autonoma con una riga \`Suggested action\` che citi il simbolo **nella sua forma di codice**: un identificatore nudo (\`nomeFunzione\`) e un path nudo (\`scripts/ci/foo.mjs\`) non contano, perché compaiono nel file citato a prescindere dal fix — servono \`nomeFunzione()\`, \`oggetto.campo\`, \`COSTANTE >= 1\` o simili (\`isDistinctiveToken()\`, classe #1647). In alternativa, e spesso piu' facile, dagli una scheda: una riga \`- METRICA: prima=<n> atteso=<n> | COMANDO: <comando che nomina un file, uno script o un test>\`. Il referente non deve esistere ancora — lo crea la PR di fix — ma una metrica gia' al bersaglio (\`prima=N atteso=N\`) viene rifiutata: non c'e' niente da muovere.`],
             { allowFail: true });
-          gh(['issue', 'close', String(iss.number), ...repoArgs, '--reason', 'not planned'], { allowFail: true });
           report.push(`- 🚫 #${iss.number} soppressa in ingresso (${d.demoted.length} item senza condizione di accettazione) — PR #${pr}`);
         } else {
           const bf = writeBodyFile(d.body);

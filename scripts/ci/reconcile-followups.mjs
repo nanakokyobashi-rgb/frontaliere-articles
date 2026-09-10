@@ -60,6 +60,7 @@ import {
   splitFollowupItems,
 } from './followup-resolution-match.mjs';
 import { parsePositiveNum } from '../lib/parse-positive-num.mjs';
+import { pinnedBy } from './manifest-pinned-issues.mjs';
 
 const DRY_RUN = process.env.DRY_RUN === '1';
 const NO_AUTOCLOSE = process.env.NO_AUTOCLOSE === '1';
@@ -68,6 +69,7 @@ const MARKER = '<!-- reconcile-bot -->';
 const CLOSE_MARKER = '<!-- reconcile-bot:autoclose -->';
 const LABEL = 'maybe-resolved';
 const CLOSED_LABEL = 'fu-resolved-auto';
+const REPO = process.env.GH_REPO || process.env.GITHUB_REPOSITORY || '';
 export const UNCLASSIFIABLE_LABEL = 'reconcile-unclassifiable';
 export const UNCLASSIFIABLE_MARKER_PREFIX = '<!-- reconcile-unclassifiable';
 export const UNCLASSIFIABLE_MARKER_SCHEMA = 1;
@@ -772,6 +774,11 @@ ${evidenceLines(c.evidence)}
 Chiusa come **completed** (done-but-open). Si **riapre da sola** se il segnale sottostante ricorre (titoli monitor dedup-stabili) — o riapri a mano se lo scope non era davvero coperto.`;
     console.log(`#${c.number} "${c.title}" → AUTO-CLOSE (${c.evidence.length} match)`);
     if (DRY_RUN) continue;
+    const pinnedPath = pinnedBy(c.number, REPO);
+    if (pinnedPath) {
+      console.log(`📌 #${c.number}: auto-close bloccato dal manifest (${pinnedPath}); issue lasciata aperta.`);
+      continue;
+    }
     gh(['issue', 'comment', String(c.number), ...repoArgs, '--body', comment], { allowFail: true });
     gh(['issue', 'edit', String(c.number), ...repoArgs, '--add-label', CLOSED_LABEL], { allowFail: true });
     gh(['issue', 'close', String(c.number), ...repoArgs, '--reason', 'completed'], { allowFail: true });
