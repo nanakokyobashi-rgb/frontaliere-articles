@@ -603,6 +603,16 @@ jobs:
       # Niente proxy di compressione, per la stessa ragione della review in
       # `tests.yml`: qui l'input dell'agente e' un LOG, e la differenza fra un
       # rosso vero e un falso rosso sta nelle righe che un compressore toglie.
+      - name: Pre-flight — Claude quota beacon for Codex fallback
+        id: quota
+        if: steps.guard.outputs.proceed == 'true'
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+          CODEX_FALLBACK_MODE: '1'
+        run: node scripts/ci/check-quota-backoff.mjs
+
       - name: Run Claude ❌-check-fix
         id: claude_fix
         if: steps.guard.outputs.proceed == 'true'
@@ -610,7 +620,7 @@ jobs:
         # outcome` finale decide il colore sul LAVORO reale (commit pushato), non
         # sul subtype della CLI.
         continue-on-error: true
-        uses: anthropics/claude-code-action@v1
+        uses: ./.github/actions/claude-codex-fallback
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PR_NUMBER: ${{ needs.preflight.outputs.pr_number }}
@@ -618,6 +628,8 @@ jobs:
           FIX_TIER: ${{ steps.guard.outputs.tier }}
           FIX_ROUND: ${{ steps.guard.outputs.round }}
         with:
+          preflight_blocked: ${{ steps.quota.outputs.codex_fallback }}
+          codex_auth_json: ${{ secrets.CODEX_AUTH_JSON }}
           # Auth via subscription Max (zero costo API). MAI ANTHROPIC_API_KEY.
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           # Stessa identita' dello step `Configure push remote` qui sopra: senza
@@ -626,6 +638,7 @@ jobs:
           # appena configurato — e ogni fix su `.github/workflows/**` morirebbe
           # al push nonostante il capability guard lo avesse lasciato passare.
           github_token: ${{ env.GITHUB_PAT_NANAKO }}
+          codex_github_token: ${{ env.GITHUB_PAT_NANAKO || secrets.GITHUB_TOKEN }}
           show_full_output: true
           allowed_bots: 'github-actions[bot], claude[bot]'
           claude_args: "--effort medium --max-turns 60 --model ${{ steps.guard.outputs.model }} --dangerously-skip-permissions"

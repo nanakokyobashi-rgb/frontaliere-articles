@@ -120,6 +120,7 @@ jobs:
           QUOTA_BEACON_PEER_REPO: valerielinc-ops/frontaliere-si-o-no
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_REPO: ${{ github.repository }}
+          CODEX_FALLBACK_MODE: '1'
         # Senza ISSUE_NUMBER lo script è in sola RILEVAZIONE: legge il beacon
         # `<!-- QUOTA_RESETS_AT: … -->` lasciato sulle issue della coda issue-fix
         # (stessa quota, stesso account) e non modifica nessuna label.
@@ -207,7 +208,7 @@ jobs:
         # ridondante (lo step di skip sopra esce 1 e GitHub salta già il resto) ma
         # esplicita: il gate non deve dipendere dall'ordine degli step per reggere.
         if: steps.quota.outputs.quota_blocked != 'true' && steps.collect.outputs.batch_count != '0' && steps.collect.outputs.batch_count != ''
-        uses: anthropics/claude-code-action@v1
+        uses: ./.github/actions/claude-codex-fallback
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BATCH_PRS: ${{ steps.collect.outputs.batch_prs }}
@@ -263,6 +264,8 @@ jobs:
           # contro un costo del 100% delle esecuzioni.
           CLAUDE_CODE_SUBPROCESS_ENV_SCRUB: 0
         with:
+          preflight_blocked: ${{ steps.quota.outputs.codex_fallback }}
+          codex_auth_json: ${{ secrets.CODEX_AUTH_JSON }}
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           # `allowed_non_write_users` (sotto) funziona SOLO con `github_token` esplicito,
           # non con la sola GitHub App auth di `claude_code_oauth_token` (docs/security.md
@@ -273,6 +276,8 @@ jobs:
           # `permissions:` del job (pull-requests/issues write), scade a fine job — NON un
           # PAT statico.
           github_token: ${{ secrets.GITHUB_TOKEN }}
+          codex_github_token: ${{ secrets.GITHUB_TOKEN }}
+          codex_corpus_github_token: ${{ env.GITHUB_PAT }}
           # Il merge che alimenta questo workflow è fatto da automation interna con DUE
           # actor bot distinti — entrambi vanno in whitelist o claude-code-action aborta
           # "Workflow initiated by non-human actor":
@@ -440,7 +445,7 @@ jobs:
         # serve sapere se qualcuno ha lasciato marker a metà. Le due condizioni
         # sul batch/quota ricalcano quelle dello step Claude: se Claude non
         # doveva girare, non c'è nessun obbligo da verificare.
-        if: always() && steps.quota.outputs.quota_blocked != 'true' && steps.collect.outputs.batch_count != '0' && steps.collect.outputs.batch_count != ''
+        if: always() && steps.followup.outputs.fallback_used != 'true' && steps.quota.outputs.quota_blocked != 'true' && steps.collect.outputs.batch_count != '0' && steps.collect.outputs.batch_count != ''
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_REPO: ${{ github.repository }}
