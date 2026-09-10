@@ -404,7 +404,7 @@ test('countSeoEntries conta le voci come le conta parseSeoBlogs', () => {
   const metadata = collectSeoEntryMetadata(entry('long'));
   assert.equal(metadata.get('long').headline, 'T long');
   assert.equal(SEO_ENTRY_WINDOW, PRODUCER_SEO_ENTRY_WINDOW, 'corpus e producer devono leggere la stessa finestra');
-  assert.equal(SEO_ENTRY_WINDOW, 4000, 'la finestra resta quella del parser producer');
+  assert.equal(SEO_ENTRY_WINDOW, 6000, 'la finestra ha margine sul blocco SEO massimo misurato');
   fs.rmSync(dir, { recursive: true, force: true });
 });
 

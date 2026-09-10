@@ -274,8 +274,12 @@ export function collectSeoEntryMetadata(src, into = new Map()) {
 
   for (let i = 0; i < positions.length; i += 1) {
     const { id, start } = positions[i];
-    const end = i + 1 < positions.length ? positions[i + 1].start : src.length;
-    const block = src.slice(start, Math.min(end, start + SEO_ENTRY_WINDOW));
+    const end = i + 1 < positions.length
+      ? positions[i + 1].start
+      : start + SEO_ENTRY_WINDOW;
+    // Match parseSeoBlogs: a successor is the exact boundary, while the
+    // bounded fallback applies only to the final entry in the chunk.
+    const block = src.slice(start, end);
     into.set(id, {
       keywords: block.match(/keywords:\s*'((?:[^'\\]|\\.)*)'/)?.[1],
       headline: block.match(/"headline":\s*"((?:[^"\\]|\\.)*)"/)?.[1],

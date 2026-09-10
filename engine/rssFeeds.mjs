@@ -36,8 +36,12 @@ import { ARTICLE_SECTION_CORE } from './shared/articleSectionCore.mjs';
 export const BASE_URL = 'https://frontaliereticino.ch';
 export const RSS_LOCALES = ['it', 'en', 'de', 'fr'];
 export const RSS_MAX_ITEMS = 50;
-/** Maximum source span used for one SEO entry by every corpus consumer. */
-export const SEO_ENTRY_WINDOW = 4000;
+/**
+ * Maximum source span used for the trailing SEO entry by every corpus
+ * consumer. The live corpus reaches 5093 characters; 6000 leaves measured
+ * headroom without putting a clamp in front of entries with a successor.
+ */
+export const SEO_ENTRY_WINDOW = 6000;
 
 /**
  * Every frontaliere SEO chunk, including the one new articles are written to.
@@ -168,7 +172,10 @@ function parseSeoBlogs(fs, path, rootDir, seoDir, seoFiles) {
       const end = i + 1 < entryPositions.length
         ? entryPositions[i + 1].start
         : start + SEO_ENTRY_WINDOW;
-      const block = src.slice(start, Math.min(end, start + SEO_ENTRY_WINDOW));
+      // A successor is the authoritative boundary: clamping it can discard
+      // fields from a perfectly valid non-trailing entry. Only the trailing
+      // entry needs the bounded fallback above.
+      const block = src.slice(start, end);
 
       // `(?:[^"\\]|\\.)*`, not `[^"]+`: create-article escapes literal quotes in
       // these values (`.replace(/"/g, '\\"')`), and the naive class stops at the
