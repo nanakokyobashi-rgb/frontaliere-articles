@@ -445,6 +445,7 @@ jobs:
           REPO: ${{ github.repository }}
           CTX_DIR: ${{ runner.temp }}/review-ctx
           TIER: ${{ steps.tier.outputs.tier }}
+          REVIEW_DIFF_EXCLUSIONS: content,data,dist,public
         run: |
           set -uo pipefail
           mkdir -p "$CTX_DIR"
@@ -460,24 +461,10 @@ jobs:
           # incrementale il diff completo e' inutile e puo' essere enorme.
           if [ "${TIER:-}" = "minimal" ]; then
             : > "$CTX_DIR/diff.patch"
-          elif [ -n "${INCREMENTAL_BASE:-}" ]; then
-            echo "(review incrementale: diff completo omesso, vedi delta.patch)" > "$CTX_DIR/diff.patch"
           else
-            gh pr diff "$PR_NUMBER" --repo "$REPO" \
-              --exclude 'content/**' --exclude 'data/**' --exclude 'dist/**' --exclude 'public/**' \
-              > "$CTX_DIR/diff.patch" \
-              || echo "(diff fetch fallito — rieseguire gh pr diff a mano)" > "$CTX_DIR/diff.patch"
-          fi
-          if [ -n "${INCREMENTAL_BASE:-}" ]; then
-            if gh api "repos/$REPO/compare/$INCREMENTAL_BASE...$HEAD_SHA" > "$CTX_DIR/compare.json" 2>/dev/null; then
-              jq -r '.files[]? | select(.filename|test("^(content|data|dist|public)/")|not) | .filename' \
-                "$CTX_DIR/compare.json" > "$CTX_DIR/delta-files.txt"
-              jq -r '.files[]? | select(.filename|test("^(content|data|dist|public)/")|not) | "\(.filename)\n\(.patch // "(binary/large)")"' \
-                "$CTX_DIR/compare.json" > "$CTX_DIR/delta.patch"
-            else
-              echo "(delta fetch fallito — compare non disponibile)" > "$CTX_DIR/delta.patch"
-              : > "$CTX_DIR/delta-files.txt"
-            fi
+            # Resolve/hydrate the complete scoped patch on the host. A missing
+            # patch must fail here, not force the model to rebuild it via API.
+            node scripts/ci/prefetch-review-diff.mjs || exit 1
           fi
           # Claude non ha bisogno dell'elenco completo dei file di corpus: per la
           # review servono il body, il diff code e i file code toccati.
@@ -573,6 +560,7 @@ jobs:
           # una sola.
           claude_args: "--effort medium --max-turns ${{ steps.tier.outputs.max_turns }} --model ${{ steps.tier.outputs.model }} --dangerously-skip-permissions"
           prompt: |
+            Report the exact workflow tier `${{ steps.tier.outputs.tier }}` in Scope; this classifies review scope, not model reasoning effort.
             Reviewer automatico PR #${{ steps.resolve.outputs.pr_number }} (HEAD ${{ steps.resolve.outputs.head_sha }}). Tier: ${{ steps.tier.outputs.tier }}.
 
             Questo repo (`frontaliere-articles`) pubblica una superficie dati su HTTP che il sito consuma in produzione: `dist/api/` (manifest, articles.json, meta per locale, slugs, sitemap blog, dieci feed RSS, news-ticker). Un bug in cio' che la genera esce **live senza che il sito faccia un deploy** — non c'e' una build del sito a fare da rete.
