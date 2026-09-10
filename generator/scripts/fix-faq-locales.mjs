@@ -445,9 +445,11 @@ export function belowFaqSourceCount(localeFaq, sourceFaq) {
     && localeFaq.length < sourceFaq.length;
 }
 
-// A floor rejection is a recoverable work item, but retrying the same source
-// forever only burns translation quota. Keep the state per article/locale and
-// reset it automatically when the Italian source changes.
+// A deterministic FAQ rejection is a recoverable work item, but retrying the
+// same source forever only burns translation quota. Keep the state per
+// article/locale and reset it automatically when the Italian source changes.
+// `prunedWrite` distinguishes a published above-floor partial from a rejected
+// below-floor write, so the former can be retried without freezing the FAQ.
 export const FAQ_REJECTION_MAX_CONSECUTIVE = 2;
 
 export function faqLocaleIssueKey(articleId, locale, section = 'frontaliere') {
@@ -461,10 +463,12 @@ export function faqSourceFingerprint(sourceFaq) {
     .slice(0, 16);
 }
 
-export function nextFaqRejection(previous, sourceFaq) {
+export function nextFaqRejection(previous, sourceFaq, { prunedWrite = false } = {}) {
   const source = faqSourceFingerprint(sourceFaq);
   const priorConsecutive = Number(previous?.consecutive);
-  const consecutive = previous?.source === source
+  const sameRejection = Boolean(previous?.prunedWrite) === prunedWrite;
+  const consecutive = sameRejection
+    && previous?.source === source
     && Number.isFinite(priorConsecutive)
     && priorConsecutive > 0
     ? priorConsecutive + 1
@@ -473,6 +477,7 @@ export function nextFaqRejection(previous, sourceFaq) {
     source,
     sourceCount: Array.isArray(sourceFaq) ? sourceFaq.length : 0,
     consecutive,
+    ...(prunedWrite ? { prunedWrite: true } : {}),
   };
 }
 
@@ -674,7 +679,10 @@ async function main() {
     try {
       const previousRejection = rejectionLedger[issueKey];
       if (shouldSkipFaqRejection(previousRejection, issue.itFaq)) {
-        console.error(`${label} ⏭️  rifiuto sotto pavimento già registrato ${previousRejection.consecutive} volte consecutive: salto la ritraduzione`);
+        const rejectionKind = previousRejection.prunedWrite
+          ? 'potatura sopra pavimento già pubblicata'
+          : 'rifiuto sotto pavimento';
+        console.error(`${label} ⏭️  ${rejectionKind} registrata ${previousRejection.consecutive} volte consecutive: salto la ritraduzione`);
         repeatedRejectionSkips++;
         failed++;
         continue;
@@ -697,8 +705,8 @@ async function main() {
           + `(${wrong.map((pair) => `${pair.index + 1}:${pair.detected}/${pair.via}`).join(', ')}): `
           + `${toWrite.length} coppia/e sane conservate`);
         // Una potatura sopra il pavimento si puo' pubblicare: il rilevatore la
-        // riaccoda per conteggio della sorgente, ma non va alimentato il ledger
-        // o si congelerebbe il caso sistematico dopo due rifiuti consecutivi.
+        // riaccoda per conteggio della sorgente, mentre il ledger prunedWrite
+        // limita la sola ritraduzione ripetuta senza rifiutare il residuo.
       }
 
       if (belowFaqFloor(toWrite, issue.itFaq)) {
@@ -726,7 +734,13 @@ async function main() {
 
       console.log(`${label} ✅ Fixed (${toWrite.length} pairs`
         + (wrong ? `, ${wrong.length} skipped)` : ')'));
-      if (rejectionLedger[issueKey]) {
+      const partialWrite = belowFaqSourceCount(toWrite, issue.itFaq);
+      if (partialWrite) {
+        const nextRejection = nextFaqRejection(previousRejection, issue.itFaq, { prunedWrite: true });
+        rejectionLedger[issueKey] = nextRejection;
+        ledgerDirty = true;
+        persistLedger();
+      } else if (rejectionLedger[issueKey]) {
         delete rejectionLedger[issueKey];
         ledgerDirty = true;
         persistLedger();
@@ -739,7 +753,7 @@ async function main() {
   }
 
   console.log(`\n📊 Results: ${fixed} fixed, ${failed} failed, ${issues.length - toProcess.length} remaining`
-    + ` (${repeatedRejectionSkips} repeated floor rejections skipped)`);
+    + ` (${repeatedRejectionSkips} repeated FAQ rejections skipped)`);
   logCascadeSummary();
 }
 

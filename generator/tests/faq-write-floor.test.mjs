@@ -71,7 +71,7 @@ test('il rilevatore riaccoda un locale che ha meno FAQ della sorgente', () => {
   assert.equal(belowFaqSourceCount(null, pairs(8)), false, 'un literal illeggibile non e\' misurabile qui');
 });
 
-test('una potatura sopra il pavimento viene scritta senza alimentare il ledger', () => {
+test('una potatura sopra il pavimento registra una scrittura parziale senza congelarla', () => {
   assert.equal(belowFaqFloor(pairs(5), pairs(8)), false, '5/8 supera il pavimento minimo');
   assert.equal(belowFaqSourceCount(pairs(5), pairs(8)), true, '5/8 non e\' una scrittura completa');
 
@@ -88,8 +88,18 @@ test('una potatura sopra il pavimento viene scritta senza alimentare il ledger',
   );
   assert.match(
     src,
-    /if \(rejectionLedger\[issueKey\]\) \{\s*delete rejectionLedger\[issueKey\]/s,
-    'un ledger precedente deve essere cancellato solo dopo una scrittura riuscita',
+    /nextFaqRejection\(previousRejection, issue\.itFaq, \{ prunedWrite: true \}\)/,
+    'la potatura pubblicata deve avere un contatore distinto dal rifiuto sotto pavimento',
+  );
+  assert.match(
+    src,
+    /const partialWrite = belowFaqSourceCount\(toWrite, issue\.itFaq\);/,
+    'il ledger parziale deve basarsi sul deficit osservabile rispetto alla sorgente',
+  );
+  assert.match(
+    src,
+    /else if \(rejectionLedger\[issueKey\]\) \{\s*delete rejectionLedger\[issueKey\]/s,
+    'un ledger precedente deve essere cancellato solo dopo una scrittura completa',
   );
 });
 
@@ -109,6 +119,13 @@ test('il ledger ferma il rifiuto deterministico dopo due run sulla stessa sorgen
   assert.equal(shouldSkipFaqRejection(second, changedSource), false, 'una sorgente cambiata riapre il tentativo');
   assert.equal(nextFaqRejection(second, changedSource).consecutive, 1);
   assert.equal(nextFaqRejection({ source: faqSourceFingerprint(source), consecutive: 'corrupt' }, source).consecutive, 1);
+
+  const partialFirst = nextFaqRejection(undefined, source, { prunedWrite: true });
+  const partialSecond = nextFaqRejection(partialFirst, source, { prunedWrite: true });
+  assert.equal(partialFirst.prunedWrite, true);
+  assert.equal(partialSecond.consecutive, FAQ_REJECTION_MAX_CONSECUTIVE);
+  assert.equal(shouldSkipFaqRejection(partialSecond, source), true, 'dopo due potature uguali si salta solo la ritraduzione');
+  assert.equal(nextFaqRejection(partialSecond, source).consecutive, 1, 'un rifiuto sotto pavimento riparte con il suo contatore');
 });
 
 test('ENTRAMBI gli scrittori consultano il pavimento prima di scrivere', () => {
