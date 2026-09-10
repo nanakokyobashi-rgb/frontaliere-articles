@@ -696,12 +696,12 @@ async function main() {
         console.error(`${label} ⚠️  ${wrong.length} coppia/e non in ${issue.locale} `
           + `(${wrong.map((pair) => `${pair.index + 1}:${pair.detected}/${pair.via}`).join(', ')}): `
           + `${toWrite.length} coppia/e sane conservate`);
-        // Una potatura parziale non e' una scrittura completa neppure se supera
-        // il pavimento: il rilevatore la riaccoda per conteggio della sorgente,
-        // quindi va trattata come rifiuto e ritentata senza sostituire il body.
+        // Una potatura sopra il pavimento si puo' pubblicare: il rilevatore la
+        // riaccoda per conteggio della sorgente, ma non va alimentato il ledger
+        // o si congelerebbe il caso sistematico dopo due rifiuti consecutivi.
       }
 
-      if (belowFaqFloor(toWrite, issue.itFaq) || belowFaqSourceCount(toWrite, issue.itFaq)) {
+      if (belowFaqFloor(toWrite, issue.itFaq)) {
         const nextRejection = nextFaqRejection(rejectionLedger[issueKey], issue.itFaq);
         rejectionLedger[issueKey] = nextRejection;
         ledgerDirty = true;
