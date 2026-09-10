@@ -136,9 +136,10 @@
       "mode": "adapted",
       "reason": "Divergenza a DUE direzioni, nessuna delle quali e' copiabile — per questo non e' piu' `identical` (riconciliazione di nanako#318 punto 2). QUI in piu': il gate 4 `generator-ci` (#242/#252), che esige il check-run del generatore sulle PR che toccano generator/engine/host — sul sito quel workflow non esiste, portarcelo bloccherebbe ogni PR in attesa di un check che nessuno emette. SUL SITO in piu': l'osservazione #5552 (`lib/checkRunObservation.mjs` + `lib/prComments.mjs`, che qui non esistono), che elenca i check-run completati sulla HEAD senza bloccare. Copiare in una delle due direzioni romperebbe l'altro lato, quindi restano diversi apposta; la sorveglianza sulla baseline resta accesa e intercetta comunque una modifica futura su uno dei due lati.",
       "baseline": {
-        "site": "201eb0ba8586389f",
-        "corpus": "0de66640755babac",
-        "alignedAt": "2026-09-03"
+        "site": "840c008714ef481c",
+        "corpus": "208d0da51eb787c5",
+        "alignedAt": "2026-09-10",
+        "forcedAt": "2026-09-10T12:33:04.391Z"
       }
     },
     {
@@ -166,9 +167,9 @@
       "path": "scripts/ci/check-issue-already-resolved.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "9464562c14d306a6",
-        "corpus": "9464562c14d306a6",
-        "alignedAt": "2026-08-07"
+        "site": "d697adb04f364f0a",
+        "corpus": "d697adb04f364f0a",
+        "alignedAt": "2026-09-10"
       }
     },
     {
@@ -234,17 +235,18 @@
       "mode": "adapted",
       "reason": "Parser condiviso del fallback con riconoscimento corpus dei log testuali Claude/Anthropic e dei messaggi di quota legacy; il sito usa il parser degli eventi strutturati.",
       "baseline": {
-        "site": "56298f523aa53a7a",
-        "corpus": "6819d0624f60c556",
-        "alignedAt": "2026-09-10"
+        "site": "617f7342bb1ab755",
+        "corpus": "748ee752af1354ac",
+        "alignedAt": "2026-09-10",
+        "forcedAt": "2026-09-10T12:33:08.000Z"
       }
     },
     {
       "path": "scripts/ci/claude-codex-fallback.mjs",
       "mode": "identical",
       "baseline": {
-        "site": null,
-        "corpus": "79091aa7f0bf1bad",
+        "site": "2188d488d170671c",
+        "corpus": "2188d488d170671c",
         "alignedAt": "2026-09-10"
       }
     },
@@ -252,8 +254,8 @@
       "path": "scripts/ci/claude-rate-limit-contract.mjs",
       "mode": "identical",
       "baseline": {
-        "site": null,
-        "corpus": "d8a6e057ae3475f9",
+        "site": "0d9c5a83519853ad",
+        "corpus": "0d9c5a83519853ad",
         "alignedAt": "2026-09-10"
       }
     },
@@ -301,9 +303,9 @@
       "path": "scripts/ci/followup-resolution-match.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "f2b694821553ec78",
-        "corpus": "f2b694821553ec78",
-        "alignedAt": "2026-09-09"
+        "site": "12d9d4634e35abb2",
+        "corpus": "12d9d4634e35abb2",
+        "alignedAt": "2026-09-10"
       }
     },
     {
@@ -311,9 +313,9 @@
       "mode": "identical",
       "reason": "Gate grandchild-suppression invocato per nome da collect-followup-batch.mjs. Mancava nel corpus dalla nascita di quel chiamante: runGate ne inghiottiva l'ENOENT e ricadeva su proceed-safe, quindi il gate era inconclusive SEMPRE (46 PR su 46 in tre run, zero soppressioni in assoluto). Elencato qui perche' un file invocato per nome, e non importato, e' invisibile al drift check finche' non e' nel manifest.",
       "baseline": {
-        "site": "7d95a7a2d70ca0f3",
-        "corpus": "7d95a7a2d70ca0f3",
-        "alignedAt": "2026-09-07"
+        "site": "d07668933f2d473f",
+        "corpus": "d07668933f2d473f",
+        "alignedAt": "2026-09-10"
       }
     },
     {
@@ -339,9 +341,9 @@
       "path": "scripts/ci/pr-autorebase.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "b8f4e7d0b8b18912",
-        "corpus": "b8f4e7d0b8b18912",
-        "alignedAt": "2026-09-05"
+        "site": "cc5a750c2f699595",
+        "corpus": "cc5a750c2f699595",
+        "alignedAt": "2026-09-10"
       }
     },
     {
@@ -394,9 +396,9 @@
       "path": "scripts/ci/lib/vitestCheck.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "e08c2fb34506658c",
-        "corpus": "e08c2fb34506658c",
-        "alignedAt": "2026-09-05"
+        "site": "70c2badbc0a09558",
+        "corpus": "70c2badbc0a09558",
+        "alignedAt": "2026-09-10"
       }
     },
     {
@@ -414,8 +416,8 @@
       "reason": "La lettura validata di un override numerico da env o argv, estratta qui da `scripts/ci/scan-failed-runs.mjs` (#871). E' `corpus-only` e non `corpus-only-pending` dal 2026-09-06: il gemello NON scendera' sul sito, e non deve. La verifica sul sito copre solo la variante da env con `scripts/lib/int-from-env.mjs`: `intFromEnv` (assente/vuota → default in silenzio, illeggibile → default + `::warning::`) e `positiveIntFromEnv` (rifiuta anche zero e negativi, sui call site che usano conteggi). La verifica non copre la lettura da argv ne' le opzioni `sentinels`, `integer`, `warn` e `tool` di `parsePositiveNum`; quelle varianti restano specifiche del corpus. Copiarci sopra questo file creerebbe DUE sorgenti per la validazione env, il difetto vietato da AGENTS.md #6.",
       "baseline": {
         "site": null,
-        "corpus": "4342dbe439942728",
-        "alignedAt": "2026-09-05"
+        "corpus": "5a7ef07e9d472670",
+        "alignedAt": "2026-09-10"
       }
     },
     {
@@ -468,11 +470,12 @@
     {
       "path": "scripts/ci/lib/constants.mjs",
       "mode": "adapted",
-      "reason": "Il check-run atteso dall'auto-merge qui si chiama `tests (node --test)`, non `vitest (unit + integration)`: questo repo non usa vitest. Il nome dell'export resta `VITEST_CHECK_NAME` proprio per non far divergere i tre consumer (auto-merge-eval, pr-autorebase, vitestCheck), che restano identici e copiabili. Il valore e' sovrascrivibile via env CI_CHECK_NAME. RICONCILIATO 2026-09-06 (#977 item 3) da `both-moved`: il sito si e' mosso una volta sola dalla baseline del 2026-09-03, con valerielinc-ops/frontaliere-si-o-no#7600, che porta la PRIMA forma posizionale di `REDFLAG_IMPORTANT_RE` (lead a classe negata semplice + lookbehind `(?<!`) ` di un carattere); qui quella forma e' arrivata prima (#959) ed e' gia' stata superata da #1106, che ne chiude i due residui (il lookbehind di un carattere spegneva il gate su una label incollata al marker; due finding sulla stessa riga diventavano verdi). Non c'e' quindi niente da riportare in giu': il contenuto del sito e' un sottoinsieme di questo, e la baseline registra la lettura di entrambi i lati. DEBITO VERSO IL SITO, non chiudibile da qui: `main` del sito gira ancora la regex pre-#977, quindi quei due buchi sono aperti la'; la risalita deve nascere sul sito (il mirror va in una direzione sola e questo repo non ha una credenziale cross-repo in scrittura). Le altre differenze del file — `GENERATOR_CI_JOB_NAME`, `GENERATOR_CI_TRIGGER_PATHS`, `REVIEWER_BOT_LOGIN_RE`/`_JQ` come prefisso, la lista `REVIEW_WORKFLOW_DRIFT_FILES` puntata a `tests.yml` — sono adattamenti gia' in essere alla baseline, non movimento del sito: il file NON differisce piu' di una riga sola, e dirlo qui evita che il prossimo lettore legga il resto come drift da riparare.",
+      "reason": "Il check required e il job di esecuzione coincidono: `VITEST_EXECUTION_JOB_NAME` segue `VITEST_CHECK_NAME`, mantenendo il nome locale del corpus e il suo override CI_CHECK_NAME. Il check-run atteso dall'auto-merge qui si chiama `tests (node --test)`, non `vitest (unit + integration)`: questo repo non usa vitest. Il nome dell'export resta `VITEST_CHECK_NAME` proprio per non far divergere i tre consumer (auto-merge-eval, pr-autorebase, vitestCheck), che restano identici e copiabili. Il valore e' sovrascrivibile via env CI_CHECK_NAME. RICONCILIATO 2026-09-06 (#977 item 3) da `both-moved`: il sito si e' mosso una volta sola dalla baseline del 2026-09-03, con valerielinc-ops/frontaliere-si-o-no#7600, che porta la PRIMA forma posizionale di `REDFLAG_IMPORTANT_RE` (lead a classe negata semplice + lookbehind `(?<!`) ` di un carattere); qui quella forma e' arrivata prima (#959) ed e' gia' stata superata da #1106, che ne chiude i due residui (il lookbehind di un carattere spegneva il gate su una label incollata al marker; due finding sulla stessa riga diventavano verdi). Non c'e' quindi niente da riportare in giu': il contenuto del sito e' un sottoinsieme di questo, e la baseline registra la lettura di entrambi i lati. DEBITO VERSO IL SITO, non chiudibile da qui: `main` del sito gira ancora la regex pre-#977, quindi quei due buchi sono aperti la'; la risalita deve nascere sul sito (il mirror va in una direzione sola e questo repo non ha una credenziale cross-repo in scrittura). Le altre differenze del file — `GENERATOR_CI_JOB_NAME`, `GENERATOR_CI_TRIGGER_PATHS`, `REVIEWER_BOT_LOGIN_RE`/`_JQ` come prefisso, la lista `REVIEW_WORKFLOW_DRIFT_FILES` puntata a `tests.yml` — sono adattamenti gia' in essere alla baseline, non movimento del sito: il file NON differisce piu' di una riga sola, e dirlo qui evita che il prossimo lettore legga il resto come drift da riparare.",
       "baseline": {
-        "site": "fd6260735824d5e6",
-        "corpus": "a013e26bc6e1a713",
-        "alignedAt": "2026-09-06"
+        "site": "e61df9c2c8b1e0ed",
+        "corpus": "00b20026ad92a440",
+        "alignedAt": "2026-09-10",
+        "forcedAt": "2026-09-10T12:33:10.423Z"
       }
     },
     {
@@ -508,11 +511,12 @@
     {
       "path": ".github/workflows/tests.yml",
       "mode": "adapted",
-      "reason": "Stesso RUOLO del tests.yml del sito — dal 2026-09-03 su entrambi i lati e' il job UNICO che produce il check richiesto dal ruleset su `main`: contratto del body, test, Claude review col suo verdetto. Il contenuto resta interamente diverso: qui e' `node --test` dependency-free, senza vitest, senza shard, senza npm ci, e il NONCODE_RE nomina l'albero di questo repo (content/, dist/). In piu' qui, e non sul sito: lo step finale `generator-ci-gate`, perche' il ruleset puo' richiedere solo contesti presenti su OGNI PR e generator-ci.yml e' path-scoped. Diverge anche sul TRIGGER: qui gira anche su `push` a `main`, perche' il rescue `stuck-red` di pr-autorebase.mjs legge actions/workflows/tests.yml/runs?branch=main e senza una run success li' non ha prova da esibire (#267); il `push` e' pero' scopato a `main`, altrimenti ogni commit su un branch con PR aperta pagherebbe DUE review Claude. Una divergenza deliberata dal sito: qui la review NON monta il proxy di compressione Headroom. Comprime in modo lossy cio' che i tool restituiscono al modello, e su questo repo il prodotto del reviewer sono le misure (counts di manifest.json, righe di log che distinguono un rosso vero da un falso rosso); e' la stessa ragione per cui il proprietario lo ha scartato lato sessione il 2026-09-03. Resta montato su issue-fix/issue-decompose, dove c'era gia'. RICONCILIATO 2026-09-08 (#1060): lette le copie correnti su main; il corpus conserva il workflow node:test dependency-free mentre il sito conserva la variante Vitest/shard, con divergenze intenzionali e nessun hunk da portare. Le baseline sono state registrate dal comando attestato `node scripts/ci/loop-drift-check.mjs --init --only .github/workflows/tests.yml --force`, senza inventare una run reale.",
+      "reason": "Un solo check obbligatorio per codice, test e review in entrambi i repo; gli edit del body sono gestiti dal recupero selettivo esterno. Il sito usa Vitest e un contratto API prima del checkout; il corpus usa node:test e i propri validatori modulari del body dopo il checkout. Il corpus conserva il gate generator-ci path-scoped, le esclusioni draft/engine-lockstep-auto e la review senza proxy Headroom. RICONCILIATO 2026-09-10 (#1060): baseline attestata dopo il merge della PR sito 8200, con preflight e selezione del recupero coerenti con i gate propri del corpus.",
       "baseline": {
-        "site": "5cafe12c0b7d3f4e",
-        "corpus": "f39e19c5467c4cc7",
-        "alignedAt": "2026-09-08"
+        "site": "02a2db85e3004622",
+        "corpus": "3cdc0cb253798b27",
+        "alignedAt": "2026-09-10",
+        "forcedAt": "2026-09-10T12:33:10.945Z"
       }
     },
     {
@@ -639,9 +643,10 @@
       "mode": "adapted",
       "reason": "Stessa struttura del contratto del sito (severity, completeness contract, tier, escalation, formato) perche' una modifica la' resti leggibile e riportabile. Cambia il FILTRO DI SCOPO: il sito e' un funnel SEO/AdSense, questo repo pubblica una superficie dati che va live senza deploy del sito. Le tre storie di rottura citate sono di questo repo.",
       "baseline": {
-        "site": "4198ed3448ecc9e6",
-        "corpus": "13d07dd907494123",
-        "alignedAt": "2026-08-07"
+        "site": "f45def87435c51d7",
+        "corpus": "a552e64a97068278",
+        "alignedAt": "2026-09-10",
+        "forcedAt": "2026-09-10T12:33:11.436Z"
       }
     },
     {
@@ -669,9 +674,10 @@
       "mode": "adapted",
       "reason": "Portato lo stadio di decomposizione (sito #6228) con gli adattamenti corpus: parser numerico locale `parse-positive-num.mjs`, classificatore/route del corpus e guard `manifest-pinned-issues.mjs` su age-out, parent-close e verdict-exit. Il file non è più mirror-locked: la sorgente dei pin e il contratto del parser non esistono byte-identici sul sito.",
       "baseline": {
-        "site": "68e447f9a887acb0",
-        "corpus": "ae337a528218acaa",
-        "alignedAt": "2026-09-10"
+        "site": "2224d435396695c7",
+        "corpus": "400c0e21db98b8ab",
+        "alignedAt": "2026-09-10",
+        "forcedAt": "2026-09-10T12:33:12.370Z"
       }
     },
     {
@@ -902,11 +908,12 @@
     {
       "path": ".github/workflows/stale-pr-rescuer.yml",
       "mode": "adapted",
-      "reason": "Il nome del check-run sul sito e' hardcoded DUE volte dentro jq; qui arriva da CI_CHECK_NAME e viene passato con --arg. Un literal in piu' nello YAML sarebbe una seconda sorgente di verita' per lo stesso valore — la classe di drift che ci-check-name.test.mjs sorveglia, e che dentro una stringa jq nessun test vedrebbe. Cadenza :35.",
+      "reason": "Il corpus usa CI_CHECK_NAME e classi di recupero A/B/C/D con il workflow pr-autorebase indipendente; il sito riesegue il run di codice dalla label corrente dentro tests.yml. Si preservano i rimedi specifici del corpus, il rerun della classe B con marker del fixer e la cadenza :35.",
       "baseline": {
-        "site": "f9e7b8ab68fdbe20",
-        "corpus": "ab254432bf4d6588",
-        "alignedAt": "2026-09-03"
+        "site": "7f21b1a6977aa7de",
+        "corpus": "5f9405e2e553f8d7",
+        "alignedAt": "2026-09-10",
+        "forcedAt": "2026-09-10T12:33:12.822Z"
       }
     },
     {
@@ -962,9 +969,10 @@
       "mode": "adapted",
       "reason": "ELIGIBLE_AUTHORS ora legge FOLLOWUP_ELIGIBLE_AUTHORS. Sul sito e' un literal con i suoi account: lasciato cosi' avrebbe scartato ogni PR del corpus. L'override e' opzionale, quindi il file resta valido identico anche sul sito.",
       "baseline": {
-        "site": "7e46173ed1e1334d",
-        "corpus": "e51f349de4cebfe2",
-        "alignedAt": "2026-08-07"
+        "site": "81ca0db390dd1254",
+        "corpus": "d002b9bdca29dc1a",
+        "alignedAt": "2026-09-10",
+        "forcedAt": "2026-09-10T12:33:13.239Z"
       }
     },
     {
@@ -972,9 +980,10 @@
       "mode": "adapted",
       "reason": "Gate corpus adattato al parser `parse-positive-num.mjs` e alla sorgente `manifest-pinned-issues.mjs`; ricontrolla e ricalcola il body con CAS prima di sopprimere una issue e non chiude i trackingIssue pinnati. Il gemello del sito resta distinto per il suo parser e il suo manifest.",
       "baseline": {
-        "site": "2beb683893e75830",
-        "corpus": "1007db9ce2ff14e5",
-        "alignedAt": "2026-09-10"
+        "site": "7d10dc4d094256eb",
+        "corpus": "80793d795df62223",
+        "alignedAt": "2026-09-10",
+        "forcedAt": "2026-09-10T12:33:13.580Z"
       }
     },
     {
@@ -982,9 +991,10 @@
       "mode": "adapted",
       "reason": "Helper del gate con la variante del corpus; la copia locale conserva il contratto di classificazione ma segue le dipendenze e le suite Node del pubblicatore, quindi non va trattata come file mirror-locked.",
       "baseline": {
-        "site": "a586dea263223cf5",
-        "corpus": "cda5686760382ca6",
-        "alignedAt": "2026-09-10"
+        "site": "93898e95cadccdaf",
+        "corpus": "0d1711b87e43ea41",
+        "alignedAt": "2026-09-10",
+        "forcedAt": "2026-09-10T12:33:13.849Z"
       }
     },
     {
@@ -1001,9 +1011,9 @@
       "path": "scripts/ci/harvest-agent-lessons.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "4357728b4a52cfbc",
-        "corpus": "4357728b4a52cfbc",
-        "alignedAt": "2026-09-04"
+        "site": "02ffd48e42595ffa",
+        "corpus": "02ffd48e42595ffa",
+        "alignedAt": "2026-09-10"
       }
     },
     {
@@ -3184,7 +3194,7 @@
       "baseline": {
         "site": "181c65f007c09fde",
         "corpus": "181c65f007c09fde",
-        "alignedAt": "2026-09-09"
+        "alignedAt": "2026-09-10"
       }
     },
     {
@@ -3352,9 +3362,10 @@
       "mode": "adapted",
       "reason": "Gate del check Node del corpus: conserva il carry-forward del contributo e il fallback deterministico per drift del workflow. Come il sito, una review Codex richiede evidenza della run, identità bot ammessa, marker e HEAD esatta.",
       "baseline": {
-        "site": null,
-        "corpus": "8299c4f5f058226a",
-        "alignedAt": "2026-09-03"
+        "site": "164fe984b258c1ed",
+        "corpus": "31450af30ed026ec",
+        "alignedAt": "2026-09-10",
+        "forcedAt": "2026-09-10T12:33:28.574Z"
       }
     },
     {
@@ -3422,9 +3433,10 @@
       "mode": "adapted",
       "reason": "Riconciliatore adattato al parser numerico `parse-positive-num.mjs` del corpus e al suo `manifest-pinned-issues.mjs`: il secondo auto-close resta deterministico ma non può chiudere un trackingIssue pinnato. La copia del sito mantiene il proprio parser/manifest.",
       "baseline": {
-        "site": "32650b8e06345c23",
-        "corpus": "dfab1f6ad94d5ae2",
-        "alignedAt": "2026-09-10"
+        "site": "943dd8b908571717",
+        "corpus": "15199d21df208103",
+        "alignedAt": "2026-09-10",
+        "forcedAt": "2026-09-10T12:33:28.976Z"
       }
     },
     {
@@ -3575,6 +3587,42 @@
         "site": null,
         "corpus": "4c849425d7930b44",
         "alignedAt": "2026-09-08"
+      }
+    },
+    {
+      "path": ".github/workflows/retry-code-check-after-body-edit.yml",
+      "mode": "identical",
+      "baseline": {
+        "site": "c4c5c45669fbe69d",
+        "corpus": "c4c5c45669fbe69d",
+        "alignedAt": "2026-09-10"
+      }
+    },
+    {
+      "path": "scripts/lib/int-from-env.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "be879e505710750e",
+        "corpus": "be879e505710750e",
+        "alignedAt": "2026-09-10"
+      }
+    },
+    {
+      "path": "scripts/ci/prefetch-review-diff.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "ed6ec76d58d3c7b0",
+        "corpus": "ed6ec76d58d3c7b0",
+        "alignedAt": "2026-09-10"
+      }
+    },
+    {
+      "path": "scripts/ci/review-test-policy.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "2d34eac0549c80ca",
+        "corpus": "2d34eac0549c80ca",
+        "alignedAt": "2026-09-10"
       }
     }
   ]
