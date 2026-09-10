@@ -15,7 +15,8 @@
  * l'array FAQ»). Opt-in: la run schedulata non la passa.
  */
 
-import { readFileSync, writeFileSync, existsSync, readdirSync, unlinkSync, renameSync } from 'fs';
+import { readFileSync, writeFileSync, existsSync, readdirSync, unlinkSync, renameSync, mkdirSync } from 'fs';
+import { createHash } from 'crypto';
 import { resolve, basename } from 'path';
 import { fileURLToPath, pathToFileURL } from 'url';
 import { dirname } from 'path';
@@ -437,6 +438,91 @@ export function belowFaqFloor(keptFaq, sourceFaq) {
   return (keptFaq?.length ?? 0) < minPairsForWrite(sourceFaq);
 }
 
+/** True when a readable locale has fewer FAQ pairs than its Italian source. */
+export function belowFaqSourceCount(localeFaq, sourceFaq) {
+  return Array.isArray(localeFaq)
+    && Array.isArray(sourceFaq)
+    && localeFaq.length < sourceFaq.length;
+}
+
+// A deterministic FAQ rejection is a recoverable work item, but retrying the
+// same source forever only burns translation quota. Keep the state per
+// article/locale and reset it automatically when the Italian source changes.
+// `prunedWrite` distinguishes a published above-floor partial from a rejected
+// below-floor write, so the former can be retried without freezing the FAQ.
+export const FAQ_REJECTION_MAX_CONSECUTIVE = 2;
+
+export function faqLocaleIssueKey(articleId, locale, section = 'frontaliere') {
+  return `${String(section)}/${String(articleId)}/${String(locale)}`;
+}
+
+export function faqSourceFingerprint(sourceFaq) {
+  return createHash('sha256')
+    .update(JSON.stringify(Array.isArray(sourceFaq) ? sourceFaq : null))
+    .digest('hex')
+    .slice(0, 16);
+}
+
+export function nextFaqRejection(previous, sourceFaq, { prunedWrite = false } = {}) {
+  const source = faqSourceFingerprint(sourceFaq);
+  const priorConsecutive = Number(previous?.consecutive);
+  const consecutive = previous?.source === source
+    && Number.isFinite(priorConsecutive)
+    && priorConsecutive > 0
+    ? priorConsecutive + 1
+    : 1;
+  return {
+    source,
+    sourceCount: Array.isArray(sourceFaq) ? sourceFaq.length : 0,
+    consecutive,
+    ...(prunedWrite ? { prunedWrite: true } : {}),
+  };
+}
+
+export function shouldSkipFaqRejection(previous, sourceFaq) {
+  return previous?.source === faqSourceFingerprint(sourceFaq)
+    && Number(previous.consecutive) >= FAQ_REJECTION_MAX_CONSECUTIVE;
+}
+
+/** Esclude gli issue gia' throttled prima di consumare il limite del run. */
+export function selectFaqIssuesForProcessing(issues, rejectionLedger, section, limit) {
+  const ledger = rejectionLedger && typeof rejectionLedger === 'object'
+    ? rejectionLedger
+    : {};
+  return issues
+    .filter((issue) => !shouldSkipFaqRejection(
+      ledger[faqLocaleIssueKey(issue.articleId, issue.locale, section)],
+      issue.itFaq,
+    ))
+    .slice(0, limit);
+}
+
+const FAQ_REJECTION_LEDGER_PATH = resolve(ROOT, 'data/faq-locale-rejections.json');
+
+function loadFaqRejectionLedger() {
+  if (!existsSync(FAQ_REJECTION_LEDGER_PATH)) return {};
+  try {
+    const parsed = JSON.parse(readFileSync(FAQ_REJECTION_LEDGER_PATH, 'utf-8'));
+    return parsed && typeof parsed === 'object' && !Array.isArray(parsed) ? parsed : {};
+  } catch (err) {
+    console.error(`⚠️ Impossibile leggere ${FAQ_REJECTION_LEDGER_PATH}: ${err.message}`);
+    return {};
+  }
+}
+
+function saveFaqRejectionLedger(ledger) {
+  mkdirSync(dirname(FAQ_REJECTION_LEDGER_PATH), { recursive: true });
+  const ordered = Object.fromEntries(Object.entries(ledger).sort(([a], [b]) => a.localeCompare(b)));
+  const tmp = `${FAQ_REJECTION_LEDGER_PATH}.${process.pid}.tmp`;
+  try {
+    writeFileSync(tmp, `${JSON.stringify(ordered, null, 2)}\n`, 'utf-8');
+    renameSync(tmp, FAQ_REJECTION_LEDGER_PATH);
+  } catch (err) {
+    try { unlinkSync(tmp); } catch { /* best-effort cleanup */ }
+    throw err;
+  }
+}
+
 // ── Translation (same cascade as job crawlers) ──────────────
 
 async function translateFaqArray(faqArray, targetLang) {
@@ -551,10 +637,30 @@ async function main() {
         // il gate di scrittura, per stretto che fosse, non lo vedeva mai.
         if (localeFaq && wrongLocalePair(localeFaq, locale, itFaq)) {
           issues.push({ articleId, file, locale, reason: 'wrong_locale', itFaq });
+        } else if (localeFaq && belowFaqSourceCount(localeFaq, itFaq)) {
+          issues.push({ articleId, file, locale, reason: 'below_source_count', itFaq });
         }
       }
     }
   }
+
+  const rejectionLedger = loadFaqRejectionLedger();
+  const liveIssueKeys = new Set(issues.map((issue) => faqLocaleIssueKey(issue.articleId, issue.locale, SECTION)));
+  let ledgerDirty = false;
+  const sectionPrefix = SECTION + '/';
+  for (const key of Object.keys(rejectionLedger)) {
+    if (key.startsWith(sectionPrefix) && !liveIssueKeys.has(key)) {
+      delete rejectionLedger[key];
+      ledgerDirty = true;
+    }
+  }
+  const persistLedger = () => {
+    if (!DRY_RUN && ledgerDirty) {
+      saveFaqRejectionLedger(rejectionLedger);
+      ledgerDirty = false;
+    }
+  };
+  persistLedger();
 
   const byReason = {};
   for (const i of issues) byReason[i.reason] = (byReason[i.reason] || 0) + 1;
@@ -573,14 +679,26 @@ async function main() {
     return;
   }
 
-  const toProcess = issues.slice(0, LIMIT);
+  const toProcess = selectFaqIssuesForProcessing(issues, rejectionLedger, SECTION, LIMIT);
   console.log(`\nProcessing ${toProcess.length} issues...\n`);
 
-  let fixed = 0, failed = 0;
+  let fixed = 0, failed = 0, repeatedRejectionSkips = 0;
   for (let idx = 0; idx < toProcess.length; idx++) {
     const issue = toProcess[idx];
     const label = `[${idx + 1}/${toProcess.length}] [${issue.locale.toUpperCase()}] ${issue.articleId}`;
+    const issueKey = faqLocaleIssueKey(issue.articleId, issue.locale, SECTION);
     try {
+      const previousRejection = rejectionLedger[issueKey];
+      if (shouldSkipFaqRejection(previousRejection, issue.itFaq)) {
+        const rejectionKind = previousRejection.prunedWrite
+          ? 'potatura sopra pavimento già pubblicata'
+          : 'rifiuto sotto pavimento';
+        console.error(`${label} ⏭️  ${rejectionKind} registrata ${previousRejection.consecutive} volte consecutive: salto la ritraduzione`);
+        repeatedRejectionSkips++;
+        if (!previousRejection.prunedWrite) failed++;
+        continue;
+      }
+
       const translated = await translateFaqArray(issue.itFaq, issue.locale);
       if (!translated) {
         console.error(`${label} ❌ Translation produced no valid FAQ`);
@@ -597,18 +715,21 @@ async function main() {
         console.error(`${label} ⚠️  ${wrong.length} coppia/e non in ${issue.locale} `
           + `(${wrong.map((pair) => `${pair.index + 1}:${pair.detected}/${pair.via}`).join(', ')}): `
           + `${toWrite.length} coppia/e sane conservate`);
-        // Sotto il pavimento non si scrive NIENTE. Qui il write e' un
-        // `replaceFaqInFile` su una FAQ gia' presente: scrivere il residuo
-        // potato sostituirebbe la FAQ del locale con una piu' povera, e il
-        // prossimo scan non la vedrebbe piu' come issue — `wrongLocalePair`
-        // sulle sole superstiti torna `null`. Il conteggio `fixed++` la
-        // dichiarerebbe pure riparata. Meglio lasciarla com'e' e ritentare.
-        if (belowFaqFloor(toWrite, issue.itFaq)) {
-          console.error(`${label} ❌ Solo ${toWrite.length}/${minPairsForWrite(issue.itFaq)} coppie sane: `
-            + 'non scrivo (una FAQ potata non verrebbe piu\' riaccodata), ritento al giro dopo');
-          failed++;
-          continue;
-        }
+        // Una potatura sopra il pavimento si puo' pubblicare: il rilevatore la
+        // riaccoda per conteggio della sorgente, mentre il ledger prunedWrite
+        // limita la sola ritraduzione ripetuta senza rifiutare il residuo.
+      }
+
+      if (belowFaqFloor(toWrite, issue.itFaq)) {
+        const nextRejection = nextFaqRejection(rejectionLedger[issueKey], issue.itFaq);
+        rejectionLedger[issueKey] = nextRejection;
+        ledgerDirty = true;
+        persistLedger();
+        console.error(`${label} ❌ Solo ${toWrite.length}/${issue.itFaq.length} coppie sane: `
+          + `non scrivo; rifiuto consecutivo ${nextRejection.consecutive}/${FAQ_REJECTION_MAX_CONSECUTIVE}, `
+          + 'ritento al giro dopo');
+        failed++;
+        continue;
       }
 
       const localePath = resolve(BODY_DIR, issue.locale, issue.file);
@@ -624,6 +745,17 @@ async function main() {
 
       console.log(`${label} ✅ Fixed (${toWrite.length} pairs`
         + (wrong ? `, ${wrong.length} skipped)` : ')'));
+      const partialWrite = belowFaqSourceCount(toWrite, issue.itFaq);
+      if (partialWrite) {
+        const nextRejection = nextFaqRejection(previousRejection, issue.itFaq, { prunedWrite: true });
+        rejectionLedger[issueKey] = nextRejection;
+        ledgerDirty = true;
+        persistLedger();
+      } else if (rejectionLedger[issueKey]) {
+        delete rejectionLedger[issueKey];
+        ledgerDirty = true;
+        persistLedger();
+      }
       fixed++;
     } catch (err) {
       console.error(`${label} ❌ ${err.message}`);
@@ -631,7 +763,8 @@ async function main() {
     }
   }
 
-  console.log(`\n📊 Results: ${fixed} fixed, ${failed} failed, ${issues.length - toProcess.length} remaining`);
+  console.log(`\n📊 Results: ${fixed} fixed, ${failed} failed, ${issues.length - toProcess.length} remaining`
+    + ` (${repeatedRejectionSkips} repeated FAQ rejections skipped)`);
   logCascadeSummary();
 }
 

@@ -156,12 +156,13 @@ jobs:
             if [ $((NOW - CS)) -lt "$MAXAGE" ]; then echo "PR #$N non abbastanza vecchia — skip"; continue; fi
 
             # Gate 2: nessun commit nuovo da >MAXAGE (lavoro davvero abbandonato).
-            # Una sola `gh pr view` per i due campi che servono: l'ultimo commit
-            # (gate 2) e il nome del head ref, che il gate di liberazione del
-            # branch qui sotto deve poter interrogare per nome.
-            PRMETA=$(gh pr view "$N" --repo "$REPO" --json commits,headRefName 2>/dev/null || true)
-            LASTCOMMIT=$(printf '%s' "$PRMETA" | jq -r '.commits[-1].committedDate // empty' 2>/dev/null || true)
+            # Una sola `gh pr view` per i tre campi che servono: il massimo delle
+            # date di commit (gate 2), il nome del ref e la SHA della head, che
+            # il gate di liberazione del branch qui sotto deve verificare.
+            PRMETA=$(gh pr view "$N" --repo "$REPO" --json commits,headRefName,headRefOid 2>/dev/null || true)
+            LASTCOMMIT=$(printf '%s' "$PRMETA" | jq -r '[.commits[]?.committedDate | select(type == "string" and length > 0)] | max // empty' 2>/dev/null || true)
             HEADREF=$(printf '%s' "$PRMETA" | jq -r '.headRefName // empty' 2>/dev/null || true)
+            HEADSHA=$(printf '%s' "$PRMETA" | jq -r '.headRefOid // empty' 2>/dev/null || true)
             # LASTCOMMIT vuoto = PR senza commit o head fork inaccessibile: NON
             # ricicliamo (il close --delete-branch su un head fork può fallire
             # silenziosamente lasciando il ref, e "0 commit" non è il lavoro
@@ -225,10 +226,19 @@ jobs:
               echo "::warning::PR #${N}: head ref sconosciuto, non posso verificare che sia libero"
             else
               for attempt in 1 2 3; do
-                if ! gh api "repos/${REPO}/git/refs/heads/${HEADREF}" >/dev/null 2>&1; then
+                REF_SHA=$(gh api "repos/${REPO}/git/refs/heads/${HEADREF}" --jq '.object.sha' 2>/dev/null || true)
+                if [ -z "$REF_SHA" ]; then
                   ref_free=true; break
                 fi
                 if [ "$attempt" = "2" ]; then
+                  if [ -z "${HEADSHA:-}" ]; then
+                    echo "::warning::PR #${N}: head SHA sconosciuta, skip DELETE del ref ${HEADREF}"
+                    break
+                  fi
+                  if [ "$REF_SHA" != "$HEADSHA" ]; then
+                    echo "::warning::PR #${N}: ref ${HEADREF} punta a ${REF_SHA}, diverso dalla head chiusa ${HEADSHA}; skip DELETE"
+                    break
+                  fi
                   gh api -X DELETE "repos/${REPO}/git/refs/heads/${HEADREF}" >/dev/null 2>&1 || true
                 fi
                 sleep 2
