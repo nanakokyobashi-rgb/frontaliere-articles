@@ -1511,6 +1511,29 @@ describe('classifyResolverResetEvidence — la prova che il fallimento porta sul
     assert.equal(classifyResolverResetEvidence(undiciFetchFailed('ENOTFOUND')), 'resolved');
   });
 
+  it('usa la prova posata alla sorgente e separa IP letterali e provider senza resolver', () => {
+    assert.equal(
+      classifyResolverResetEvidence(Object.assign(new Error('quota reached'), { responseReceived: true }), 'github'),
+      'resolved',
+    );
+    assert.equal(
+      classifyResolverResetEvidence(Object.assign(new Error('fetch failed'), { endpointHost: '127.0.0.1' }), 'local'),
+      'noResolver',
+    );
+    assert.equal(
+      classifyResolverResetEvidence(Object.assign(new Error('fetch failed'), { endpointHost: '[::1]' }), 'omniroute'),
+      'noResolver',
+    );
+    assert.equal(
+      classifyResolverResetEvidence(Object.assign(new Error('spawn claude ENOENT'), { code: 'ENOENT' }), 'claude-cli'),
+      'noResolver',
+    );
+    assert.equal(
+      classifyResolverResetEvidence(Object.assign(new Error('fetch failed'), { endpointHost: 'models.github.ai' }), 'github'),
+      'silent',
+    );
+  });
+
   it('un abort o un timeout senza risposta non prova niente', () => {
     assert.equal(classifyResolverResetEvidence(Object.assign(new Error('aborted'), { name: 'AbortError' })), 'silent');
     // `code: 23` e' il codice DOMException — un NUMERO, non un codice syscall
@@ -1657,6 +1680,59 @@ describe('callLLM — il reset della striscia si conta per classe (#848 item 3)'
     assert.ok(line, 'il riepilogo deve portare la riga dei flap');
     assert.doesNotMatch(line, /none this run/, `l\'escalation non deve sparire: ${line}`);
     assert.match(line, /escalated=[1-9]/, line);
+  });
+
+  it('la riga per-evento porta la classe machine-stabile dell\'evidenza', async () => {
+    process.env.AI_MODELS_FORCE_CHAIN = 'gpt-4o-mini,gpt-4.1-mini,gpt-4o,gpt-4.1';
+    globalThis.fetch = async () => { throw undiciFetchFailed('EAI_AGAIN'); };
+    const warnings = [];
+    const origWarn = console.warn;
+    console.warn = (...args) => warnings.push(args.map(String).join(' '));
+    try {
+      assert.ok(await run(), 'la catena deve fallire');
+    } finally {
+      console.warn = origWarn;
+    }
+    assert.ok(
+      warnings.some((line) => line.includes('evidence=escalated')),
+      `manca il token di classe: ${warnings.join('\n')}`,
+    );
+  });
+
+  it('isola le strisce di due callLLM concorrenti sullo stesso provider', async () => {
+    process.env.AI_MODELS_FORCE_CHAIN = 'gpt-4o-mini,gpt-4.1-mini';
+    let call = 0;
+    let releaseSecond;
+    let secondStartedResolve;
+    let thirdStartedResolve;
+    const secondStarted = new Promise((resolve) => { secondStartedResolve = resolve; });
+    const thirdStarted = new Promise((resolve) => { thirdStartedResolve = resolve; });
+    globalThis.fetch = async () => {
+      call += 1;
+      if (call === 1) throw undiciFetchFailed('EAI_AGAIN');
+      if (call === 2) {
+        secondStartedResolve();
+        await new Promise((resolve) => { releaseSecond = resolve; });
+        throw undiciFetchFailed('EAI_AGAIN');
+      }
+      thirdStartedResolve();
+      return {
+        ok: true,
+        status: 200,
+        text: async () => JSON.stringify({ choices: [{ message: { content: 'ciao' } }] }),
+      };
+    };
+
+    const first = run();
+    await secondStarted;
+    const second = run();
+    await thirdStarted;
+    await second;
+    releaseSecond();
+    await first;
+
+    assert.deepEqual(getStats().resolverFlapResets, {}, 'il successo della seconda chiamata non deve chiudere la prima');
+    assert.deepEqual(getStats().resolverFlaps.github, 2, 'la prima chiamata deve conservare i suoi due flap');
   });
 
   it('una run senza reset stampa comunque la riga — e\' il denominatore', () => {

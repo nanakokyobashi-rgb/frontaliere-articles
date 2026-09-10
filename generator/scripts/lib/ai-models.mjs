@@ -4775,7 +4775,7 @@ export function getStats() {
     ..._stats,
     exhaustedModels: [..._exhaustedModels],
     consecutive429s: Object.fromEntries(_consecutive429),  // FRO-325
-    resolverFlaps: Object.fromEntries(_resolverFlaps),     // #770
+    resolverFlaps: _resolverFlapSnapshot(),                 // #770
     // Da quale classe di prova sono arrivati i reset che hanno chiuso una
     // striscia gia' iniziata (#848 item 3). `silent` e' il numero che decide.
     resolverFlapResets: Object.fromEntries([..._resolverFlapResets].map(([p, r]) => [p, { ...r }])),
@@ -4851,7 +4851,7 @@ function _formatResolverFlapLine(s) {
     .map(([p, n]) => `${p}=${n}/${RESOLVER_FLAP_ESCALATION}`)
     .join(', ');
   const resets = Object.entries(s.resolverFlapResets)
-    .map(([p, r]) => `${p} silent=${r.silent} resolved=${r.resolved} success=${r.success} escalated=${r.escalated} (${r.streaksDiscarded} discarded)`)
+    .map(([p, r]) => `${p} silent=${r.silent} resolved=${r.resolved} success=${r.success} escalated=${r.escalated} (${r.streaksDiscarded} discarded) noResolver=${r.noResolver}`)
     .join(' · ');
   if (!open && !resets) return '   resolver flaps: none this run';
   const parts = [];
@@ -5000,7 +5000,7 @@ export function resetState() {
   _pendingCounterDeltas.clear();
   _runOutcomes.clear();
   _consecutive429.clear();
-  _resolverFlaps.clear();
+  _resolverContexts.clear();
   _resolverFlapResets.clear();
   _callLatency.clear();
   _clampedTimeouts.clear();
@@ -5191,9 +5191,6 @@ const TRANSIENT_RESOLVER_CODES = new Set(['EAI_AGAIN']);
  */
 const RESOLVER_FLAP_ESCALATION = 3;
 
-/** @type {Map<string, number>} provider → consecutive resolver flaps */
-const _resolverFlaps = new Map();
-
 /**
  * Walk an error's `cause` chain and `AggregateError.errors` (undici wraps the
  * syscall two levels down, and hands back an AggregateError when DNS returned
@@ -5269,6 +5266,31 @@ const RESOLVER_PROVEN_CODES = new Set([
 /** Una risposta HTTP ricevuta: `[model] HTTP 503: ...` e' la forma che questo modulo alza. */
 const HTTP_RESPONSE_RE = /\bHTTP \d{3}\b/;
 
+function _endpointHost(endpoint) {
+  try {
+    return new URL(endpoint).hostname.replace(/^\[|\]$/g, '');
+  } catch {
+    return '';
+  }
+}
+
+function _isLiteralAddress(host) {
+  if (!host) return false;
+  try {
+    const net = process.getBuiltinModule?.('node:net');
+    return net?.isIP?.(host.replace(/^\[|\]$/g, '')) !== 0;
+  } catch {
+    return false;
+  }
+}
+
+// The CLI talks to a child process and never performs a network lookup in this
+// module. Keep this predicate beside the evidence classifier so process
+// failures cannot silently enter a DNS metric.
+function _providerUsesResolver(provider) {
+  return _normalizeProviderKey(provider) !== _normalizeProviderKey(PROVIDER.CLAUDE_CLI);
+}
+
 /**
  * La striscia dei flap si chiude su QUALUNQUE altra classe di fallimento
  * (vedi il reset in `callLLM`), e #848 item 3 chiede se non debba invece
@@ -5284,12 +5306,21 @@ const HTTP_RESPONSE_RE = /\bHTTP \d{3}\b/;
  * chiamarla non cambia nulla di cio' che misura.
  *
  * @param {unknown} err
- * @returns {'resolved'|'silent'} `resolved` = il nome e' stato risolto (una
+ * @returns {'resolved'|'silent'|'noResolver'} `resolved` = il nome e' stato risolto (una
  *   risposta HTTP e' arrivata, o il codice/indirizzo dice che c'era gia' un
  *   peer); `silent` = l'errore non dice niente sul resolver (abort e timeout
  *   senza risposta, `spawn ENOENT`, un payload malformato alzato come Error).
  */
-export function classifyResolverResetEvidence(err) {
+export function classifyResolverResetEvidence(err, provider) {
+  if (!_providerUsesResolver(provider)) return 'noResolver';
+  const endpointHost = _walkErrorChain(err, (e) => (
+    typeof e.endpointHost === 'string' && e.endpointHost ? e.endpointHost : null
+  ));
+  if (_isLiteralAddress(endpointHost)) return 'noResolver';
+  const responseReceived = _walkErrorChain(err, (e) => (
+    e.responseReceived === true ? true : null
+  ));
+  if (responseReceived === true) return 'resolved';
   const proven = _walkErrorChain(err, (e) => {
     if (typeof e.code === 'string' && RESOLVER_PROVEN_CODES.has(e.code)) return true;
     // L'indirizzo del peer c'e' solo se il DNS lo ha prodotto.
@@ -5308,8 +5339,25 @@ export function classifyResolverResetEvidence(err) {
  * traffico normale.
  */
 const _resolverFlapResets = new Map();
+const _resolverContexts = new Set();
 
-const _freshResolverFlapResets = () => ({ success: 0, resolved: 0, silent: 0, escalated: 0, streaksDiscarded: 0 });
+function _newResolverContext() {
+  const context = { flaps: new Map() };
+  _resolverContexts.add(context);
+  return context;
+}
+
+function _resolverFlapSnapshot() {
+  const totals = new Map();
+  for (const context of _resolverContexts) {
+    for (const [provider, count] of context.flaps) {
+      totals.set(provider, (totals.get(provider) || 0) + count);
+    }
+  }
+  return Object.fromEntries(totals);
+}
+
+const _freshResolverFlapResets = () => ({ success: 0, resolved: 0, silent: 0, noResolver: 0, escalated: 0, streaksDiscarded: 0 });
 
 /**
  * L'UNICO punto in cui una striscia di flap si chiude (AGENTS.md #6): i tre
@@ -5318,7 +5366,7 @@ const _freshResolverFlapResets = () => ({ success: 0, resolved: 0, silent: 0, es
  * descriverebbe meta' degli eventi.
  *
  * `escalated` e' entrato qui dopo la review di #945. Prima l'escalation
- * cancellava `_resolverFlaps` a mano e non passava di qua, quindi la striscia
+ * cancellava la mappa di contesto a mano e non passava di qua, quindi la striscia
  * spesa spariva da ENTRAMBE le mappe: una run con tre flap consecutivi e un
  * provider bannato stampava la stessa identica riga di una run senza un solo
  * flap. L'harvest leggeva «misurata, zero» dove il fenomeno era arrivato a
@@ -5327,12 +5375,13 @@ const _freshResolverFlapResets = () => ({ success: 0, resolved: 0, silent: 0, es
  * Il ramo last-resort (#813) NON passa di qua, ed e' corretto: li' la striscia
  * non viene chiusa affatto, resta aperta e visibile in `open [...]`.
  *
+ * @param {{flaps: Map<string, number>}} context
  * @param {string} provider
- * @param {'success'|'resolved'|'silent'|'escalated'} evidence
+ * @param {'success'|'resolved'|'silent'|'noResolver'|'escalated'} evidence
  */
-function _recordResolverFlapReset(provider, evidence) {
-  const streak = _resolverFlaps.get(provider) || 0;
-  _resolverFlaps.delete(provider);
+function _recordResolverFlapReset(context, provider, evidence) {
+  const streak = context.flaps.get(provider) || 0;
+  context.flaps.delete(provider);
   if (!streak) return;
   const row = _resolverFlapResets.get(provider) || _freshResolverFlapResets();
   row[evidence]++;
@@ -5345,8 +5394,9 @@ function _recordResolverFlapReset(provider, evidence) {
     ? 'un fallimento che non prova niente sul resolver'
     : evidence === 'success' ? 'un successo'
       : evidence === 'escalated' ? 'l\'escalation (ban + cooldown)'
+        : evidence === 'noResolver' ? 'un evento senza resolver'
         : 'un fallimento con risposta ricevuta';
-  console.warn(`🧮 [${provider}] striscia di flap del resolver (${streak}/${RESOLVER_FLAP_ESCALATION}) chiusa da ${what} (#848)`);
+  console.warn(`🧮 [${provider}] striscia di flap del resolver (${streak}/${RESOLVER_FLAP_ESCALATION}) chiusa da ${what} evidence=${evidence} (#848)`);
 }
 
 /**
@@ -6016,9 +6066,11 @@ async function _callOpenAICompatible(apiModel, messages, opts, { endpoint, apiKe
     ...(responseFormat ? { response_format: responseFormat } : {}),
     ...(extraBody || {}),
   };
+  const endpointHost = _endpointHost(endpoint);
 
   for (let attempt = 1; attempt <= opts.maxRetriesPerModel; attempt++) {
     _stats.calls++;
+    let responseReceived = false;
     try {
       const res = await fetch(endpoint, {
         method: 'POST',
@@ -6034,6 +6086,7 @@ async function _callOpenAICompatible(apiModel, messages, opts, { endpoint, apiKe
         // a slow local model dies as `fetch failed` long before the AbortSignal.
         ...(dispatcher ? { dispatcher } : {}),
       });
+      responseReceived = true;
 
       // OmniRoute's "auto" combo resolves to one specific underlying provider
       // per call and reports it back via response headers — otherwise
@@ -6176,6 +6229,10 @@ async function _callOpenAICompatible(apiModel, messages, opts, { endpoint, apiKe
       _stats.successes++;
       return text;
     } catch (e) {
+      if (e && typeof e === 'object') {
+        if (responseReceived) e.responseReceived = true;
+        if (endpointHost) e.endpointHost = endpointHost;
+      }
       // Re-throw daily limit errors (already marked)
       if (e.message?.includes('Daily request limit')) throw e;
       // Re-throw non-retryable errors immediately (unknown model, context limit)
@@ -7579,9 +7636,11 @@ async function _callGeminiRaw(model, messages, opts) {
   };
 
   const endpoint = `${GEMINI_API_BASE}/${model}:generateContent?key=${apiKey}`;
+  const endpointHost = _endpointHost(endpoint);
 
   for (let attempt = 1; attempt <= opts.maxRetriesPerModel; attempt++) {
     _stats.calls++;
+    let responseReceived = false;
     try {
       const res = await fetch(endpoint, {
         method: 'POST',
@@ -7589,6 +7648,7 @@ async function _callGeminiRaw(model, messages, opts) {
         body: JSON.stringify(body),
         signal: AbortSignal.timeout(opts.timeout),
       });
+      responseReceived = true;
 
       const raw = await res.text().catch(() => '');
 
@@ -7666,6 +7726,10 @@ async function _callGeminiRaw(model, messages, opts) {
       _stats.successes++;
       return text;
     } catch (e) {
+      if (e && typeof e === 'object') {
+        if (responseReceived) e.responseReceived = true;
+        if (endpointHost) e.endpointHost = endpointHost;
+      }
       if (e.message?.includes('Daily quota')) throw e;
       if (e.nonRetryable) throw e;
       // Tag prima del `throw` dell'ultimo tentativo — gemello della riga in
@@ -7905,6 +7969,7 @@ export async function callSingleModel(messages, opts = {}) {
   // Normalizzato una volta sola, qui: da questo punto in giu' `o.recordScore`
   // e' un booleano, per i gate come per chiunque legga le opzioni.
   o.recordScore = coerceRecordScore(o.recordScore);
+  o._resolverContext = _newResolverContext();
   const model = o.model || AI_MODELS.GPT4O;
 
   if (_shouldSkipExhausted(model)) {
@@ -7956,6 +8021,7 @@ export async function callLLM(messages, opts = {}) {
 
   const o = { ...DEFAULT_OPTS, ...opts };
   o.recordScore = coerceRecordScore(o.recordScore);
+  o._resolverContext = _newResolverContext();
 
   // Opt-in response cache: reuse identical deterministic prompts within the run
   // (e.g. fact-check re-checking an unchanged article body across regeneration
@@ -8225,7 +8291,7 @@ export async function callLLM(messages, opts = {}) {
       if (!servedViaCodex) {
         _consecutive429.delete(model); // FRO-325: reset 429 counter on success
         _clampedTimeouts.delete(model); // an answer clears the adaptive-ceiling doubt
-        _recordResolverFlapReset(provider, 'success'); // the name resolved: the flap streak is over (#770)
+        _recordResolverFlapReset(o._resolverContext, provider, 'success'); // the name resolved: the flap streak is over (#770)
         _recordLastResortOutcome(model, 'served');
         if (provider === PROVIDER.CLAUDE_CLI) _claudeCliConsecutiveTimeouts = 0;
         if (provider === PROVIDER.OMNIROUTE) _omniRouteConsecutiveFailures = 0;
@@ -8325,10 +8391,10 @@ export async function callLLM(messages, opts = {}) {
         // il reset alle sole classi che provano che il resolver funziona: sotto
         // una certa frequenza di reset `silent` l'item e' teorico, sopra e' il
         // difetto che impedisce all'escalation di scattare.
-        _recordResolverFlapReset(provider, classifyResolverResetEvidence(e));
+        _recordResolverFlapReset(o._resolverContext, provider, classifyResolverResetEvidence(e, provider));
       } else {
-        const flaps = (_resolverFlaps.get(provider) || 0) + 1;
-        _resolverFlaps.set(provider, flaps);
+        const flaps = (o._resolverContext.flaps.get(provider) || 0) + 1;
+        o._resolverContext.flaps.set(provider, flaps);
         // #813 — l'escalation NON si applica ai provider di ultima risorsa.
         // Il flap e' una prova che il codice stesso definisce transitoria, e
         // promuoverla qui manda `local/`/`omniroute/` — cioe' l'ultima riga
@@ -8356,7 +8422,7 @@ export async function callLLM(messages, opts = {}) {
           // dall'escalation e' un evento che #848 item 3 deve contare come gli
           // altri. Cancellandola qui spariva da entrambe le mappe e la run
           // stampava «none this run» a fondo scala (review di #945).
-          _recordResolverFlapReset(provider, 'escalated');
+          _recordResolverFlapReset(o._resolverContext, provider, 'escalated');
           console.warn(`🚫 [${model}] ${flaps} consecutive resolver failures (${flapCode}) on ${provider} — no longer treating it as a hiccup`);
           // Stesso vocabolario della riga di skip dei fratelli, e per la
           // stessa ragione (vedi `_providerCooldownReason`): un flap escalato
