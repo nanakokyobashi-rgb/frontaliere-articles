@@ -1,4 +1,5 @@
 name: tests
+run-name: "Code checks and review · ${{ github.event.pull_request.number && format('PR #{0}', github.event.pull_request.number) || github.ref_name }} · ${{ github.event.action || github.event_name }}"
 
 # Il check-run che governa il merge di QUALUNQUE PR di questo repo.
 #
@@ -67,12 +68,12 @@ name: tests
 # (`.github/workflows/content-gates-main.yml`): li' gira il sottoinsieme dei
 # gate che leggono `content/**`, con gli offender in una issue.
 on:
-  # `edited` e' load-bearing: un'edit del body deve rivalidare il contratto.
+  # Body validation stays inside the code check; metadata edits do not rerun it.
   # `ready_for_review` idem — finche' la PR e' draft la review non gira, e senza
   # questo trigger una draft promossa non avrebbe piu' nessun evento che la
   # faccia partire (`synchronize` fira sui push, non sul cambio di stato).
   pull_request:
-    types: [opened, synchronize, reopened, ready_for_review, edited]
+    types: [opened, synchronize, reopened, ready_for_review]
   push:
     branches: [main]
   workflow_dispatch:
