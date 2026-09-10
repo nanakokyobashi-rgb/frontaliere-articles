@@ -736,9 +736,12 @@ jobs:
       # ai-models.mjs. "Generate the article" sotto dipende solo da
       # steps.mode.outputs.dry, non dall'esito di questo step.
       - name: Setup Claude CLI Haiku fallback
+        id: setup_claude_haiku_fallback
         if: steps.mode.outputs.dry != 'true'
         continue-on-error: true
         uses: ./.github/actions/setup-claude-haiku-fallback
+        with:
+          codex_auth_json: ${{ secrets.CODEX_AUTH_JSON }}
 
       # Dry mode stops here: create-article.mjs has no --dry-run, and its first
       # side effect is a network call to a model provider. Proving it LOADS is as
@@ -835,6 +838,7 @@ jobs:
           # token; senza entrambi il modello resta «no API key for provider
           # claude_cli», che e' com'e' stato fino al 2026-08-14.
           CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          CODEX_AUTH_BROKER_SOCKET: ${{ steps.setup_claude_haiku_fallback.outputs.codex_auth_broker_socket }}
         run: |
           # `set +e` explicitly: GitHub's default shell is `bash -eo pipefail`,
           # so without this the step dies the instant create-article.mjs exits
@@ -1768,6 +1772,18 @@ jobs:
       # AFTER generation succeeds, so ARTICLE alone can't tell "generated" from
       # "generated, then rejected". Reading `steps.guard.outcome` (`id: guard`
       # on that step) is what lets this branch distinguish the two.
+      - name: Cleanup Codex auth broker
+        if: always()
+        continue-on-error: true
+        env:
+          CODEX_AUTH_BROKER_SOCKET: ${{ steps.setup_claude_haiku_fallback.outputs.codex_auth_broker_socket }}
+        run: |
+          if [ -z "$CODEX_AUTH_BROKER_SOCKET" ] || [ ! -S "$CODEX_AUTH_BROKER_SOCKET" ]; then
+            exit 0
+          fi
+          node .github/actions/setup-claude-haiku-fallback/codex-auth-broker.mjs \
+            --cleanup --socket "$CODEX_AUTH_BROKER_SOCKET" \
+            || echo "::warning::Codex auth broker cleanup did not complete"
       - name: Summary
         if: always()
         env:
