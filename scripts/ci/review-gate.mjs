@@ -49,6 +49,7 @@
  * Env:  GH_TOKEN, GITHUB_REPOSITORY, PR_NUMBER, HEAD_SHA, RUN_URL (opzionale)
  * Exit: 0 approvato · 1 non approvato (il check-run diventa rosso)
  */
+import { findTestOnlyApproval } from './review-test-policy.mjs';
 import { execFileSync } from 'node:child_process';
 import { readFileSync } from 'node:fs';
 import { parseCodexFallbackEvidence, FALLBACK_STATUS } from './claude-codex-fallback.mjs';
@@ -96,6 +97,8 @@ function lastBotReview() {
     console.log(`review-gate: impossibile leggere le review (${String(e).slice(0, 160)}).`);
     return undefined; // undefined = incertezza, diverso da null = nessuna review
   }
+  const automatic = findTestOnlyApproval(reviews, HEAD_SHA, { ghFn: gh, repo: REPO, pr: PR });
+  if (automatic) return automatic;
   if (process.env.CODEX_FALLBACK_EVIDENCE_FILE) {
     // Evidence comes from this run, never from the review's untrusted prose.
     const evidence = parseCodexFallbackEvidence(readFileSync(process.env.CODEX_FALLBACK_EVIDENCE_FILE, 'utf8'));

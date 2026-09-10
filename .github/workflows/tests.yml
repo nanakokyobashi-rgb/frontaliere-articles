@@ -285,11 +285,11 @@ jobs:
           if [ -z "$last" ]; then
             echo "skip=false" >> "$GITHUB_OUTPUT"; echo "Nessuna review LGTM precedente → review piena."; exit 0
           fi
-          changed=$(gh api "repos/$REPO/compare/$last...$HEAD_SHA" --jq '.files[].filename' 2>/dev/null || true)
+          changed=$(gh api "repos/$REPO/compare/$last...$HEAD_SHA" --jq '.files[] | .filename, (.previous_filename // empty)' 2>/dev/null || true)
           if [ -z "$changed" ]; then
             echo "skip=false" >> "$GITHUB_OUTPUT"; echo "Compare vuoto/errore → review piena (conservativo)."; exit 0
           fi
-          code=$(echo "$changed" | grep -vE "$NONCODE_RE" || true)
+          code=$(echo "$changed" | node scripts/ci/review-test-policy.mjs filter | grep -vE "$NONCODE_RE" || true)
           if [ -z "$code" ]; then
             echo "skip=true" >> "$GITHUB_OUTPUT"
             echo "Delta dall'ultima LGTM = solo content/data (nessun code) → skip Claude; il review gate legge la LGTM in carry-forward."
@@ -365,7 +365,16 @@ jobs:
             set_tier high claude-opus-5 60
             exit 0
           fi
-          code_files=$(echo "$files" | grep -vE "$NONCODE_RE" || true)
+          if printf '%s' "$result" | node scripts/ci/review-test-policy.mjs only; then
+            if node scripts/ci/review-test-policy.mjs check; then
+              set_tier tests-only none 0
+            else
+              # Includes a rename from application code or an uncertain snapshot.
+              set_tier high claude-opus-5 60
+            fi
+            exit 0
+          fi
+          code_files=$(echo "$files" | node scripts/ci/review-test-policy.mjs filter | grep -vE "$NONCODE_RE" || true)
           if [ -z "$code_files" ]; then
             # Una PR di soli articoli/dati non ha contributo reviewabile: resta
             # da verificare solo il contratto del body. E' il caso PIU' FREQUENTE
@@ -389,7 +398,7 @@ jobs:
           lastRev=$(gh api "repos/$REPO/pulls/$PR_NUMBER/reviews" --paginate \
             --jq '[.[] | select(.user.type=="Bot" and (.user.login|test("^(claude|frontaliere-automation)";"i")))] | last | .commit_id // empty' 2>/dev/null || true)
           if [ -n "$lastRev" ] && [ "$lastRev" != "$HEAD_SHA" ]; then
-            delta_code=$(gh api "repos/$REPO/compare/$lastRev...$HEAD_SHA" --jq '.files[].filename' 2>/dev/null \
+            delta_code=$(gh api "repos/$REPO/compare/$lastRev...$HEAD_SHA" --jq '.files[] | .filename, (.previous_filename // empty)' 2>/dev/null \
               | grep -Fxf <(echo "$code_files") || true)
             if [ -n "$delta_code" ]; then
               echo "incremental_base=$lastRev" >> "$GITHUB_OUTPUT"
@@ -436,7 +445,7 @@ jobs:
       # il `gh pr diff`, che su una PR di corpus puo' essere enorme.
       - name: Prefetch review context (zero-Claude, saves turns)
         id: prefetch
-        if: steps.resolve.outputs.should_review == 'true' && steps.guard.outputs.skip != 'true'
+        if: steps.tier.outputs.tier != 'tests-only' && steps.resolve.outputs.should_review == 'true' && steps.guard.outputs.skip != 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PR_NUMBER: ${{ steps.resolve.outputs.pr_number }}
@@ -468,9 +477,9 @@ jobs:
           fi
           # Claude non ha bisogno dell'elenco completo dei file di corpus: per la
           # review servono il body, il diff code e i file code toccati.
-          grep -vE "$NONCODE_RE" "$CTX_DIR/files.txt" > "$CTX_DIR/code-files.txt" || : > "$CTX_DIR/code-files.txt"
+          node scripts/ci/review-test-policy.mjs filter < "$CTX_DIR/files.txt" | grep -vE "$NONCODE_RE" > "$CTX_DIR/code-files.txt" || : > "$CTX_DIR/code-files.txt"
           if [ -n "${INCREMENTAL_BASE:-}" ]; then
-            grep -vE "$NONCODE_RE" "$CTX_DIR/delta-files.txt" > "$CTX_DIR/review-code-files.txt" || : > "$CTX_DIR/review-code-files.txt"
+            node scripts/ci/review-test-policy.mjs filter < "$CTX_DIR/delta-files.txt" | grep -vE "$NONCODE_RE" > "$CTX_DIR/review-code-files.txt" || : > "$CTX_DIR/review-code-files.txt"
           else
             cp "$CTX_DIR/code-files.txt" "$CTX_DIR/review-code-files.txt"
           fi
@@ -507,13 +516,23 @@ jobs:
 
       - name: Pre-flight — Claude quota beacon for Codex fallback
         id: quota
-        if: steps.resolve.outputs.should_review == 'true' && steps.guard.outputs.skip != 'true'
+        if: steps.tier.outputs.tier != 'tests-only' && steps.resolve.outputs.should_review == 'true' && steps.guard.outputs.skip != 'true'
         continue-on-error: true
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_REPO: ${{ github.repository }}
           CODEX_FALLBACK_MODE: '1'
         run: node scripts/ci/check-quota-backoff.mjs
+
+      - name: Publish automatic LGTM for a tests-only PR
+        id: test_only_review
+        if: ${{ success() && steps.resolve.outputs.should_review == 'true' && steps.guard.outputs.skip != 'true' && steps.tier.outputs.tier == 'tests-only' }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          PR_NUMBER: ${{ steps.resolve.outputs.pr_number }}
+          HEAD_SHA: ${{ steps.resolve.outputs.head_sha }}
+        run: node scripts/ci/review-test-policy.mjs post
 
       - name: Run Claude review
         # Tetto sullo step (stessa classe del tetto su `Run Claude fix` in
@@ -527,7 +546,7 @@ jobs:
         # tinge il job di rosso, lo lascia classificare al guard.
         timeout-minutes: 45
         id: claude_review
-        if: steps.resolve.outputs.should_review == 'true' && steps.guard.outputs.skip != 'true'
+        if: steps.tier.outputs.tier != 'tests-only' && steps.resolve.outputs.should_review == 'true' && steps.guard.outputs.skip != 'true'
         # Un fallimento dell'action non deve abortire il job prima che il guard
         # sotto possa classificarlo: e' il guard a decidere se fallire forte.
         continue-on-error: true
@@ -560,6 +579,7 @@ jobs:
           # una sola.
           claude_args: "--effort medium --max-turns ${{ steps.tier.outputs.max_turns }} --model ${{ steps.tier.outputs.model }} --dangerously-skip-permissions"
           prompt: |
+            Test files are excluded from review by owner policy: do not read, probe or raise findings on tests, including during cross-file analysis.
             Report the exact workflow tier `${{ steps.tier.outputs.tier }}` in Scope; this classifies review scope, not model reasoning effort.
             Reviewer automatico PR #${{ steps.resolve.outputs.pr_number }} (HEAD ${{ steps.resolve.outputs.head_sha }}). Tier: ${{ steps.tier.outputs.tier }}.
 
@@ -587,7 +607,7 @@ jobs:
       # errore API transiente SENZA aver postato una review: il job sembra verde
       # ma la PR si ferma in silenzio. Si classifica dal log di esecuzione.
       - name: Fail on transient API error (no review posted)
-        if: always() && steps.resolve.outputs.should_review == 'true' && steps.guard.outputs.skip != 'true' && steps.claude_review.outputs.fallback_used != 'true'
+        if: steps.tier.outputs.tier != 'tests-only' && always() && steps.resolve.outputs.should_review == 'true' && steps.guard.outputs.skip != 'true' && steps.claude_review.outputs.fallback_used != 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PR_NUMBER: ${{ steps.resolve.outputs.pr_number }}
@@ -673,7 +693,7 @@ jobs:
       - name: Claude usage metrics
         # Solo se la review e' effettivamente girata: a review skippata non c'e'
         # execution_file da riassumere. Best-effort, non fallisce mai il job.
-        if: always() && steps.resolve.outputs.should_review == 'true' && steps.guard.outputs.skip != 'true'
+        if: steps.tier.outputs.tier != 'tests-only' && always() && steps.resolve.outputs.should_review == 'true' && steps.guard.outputs.skip != 'true'
         run: node scripts/ci/claude-usage-summary.mjs "${{ steps.claude_review.outputs.execution_file }}" "pr-review"
 
       # ── IL SECONDO VERDETTO CONDIZIONALE ─────────────────────────────────
