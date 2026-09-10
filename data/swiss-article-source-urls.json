@@ -1,5 +1,4 @@
 {
-  "https://www.tio.ch/sport/calcio/1944097/aa-coppa-svizera-quali-formazione": "coppa-svizzera-risultati-partiti",
   "https://www.admin.ch/it/newnsb/fjrhye9no5ebzov3xa3dw": "labatori-di-agsrosope-consegna-chiavi",
   "https://www.tio.ch/dal-mondo/politica/1944135/ora-cambio-legale-senato-trump": "trump-ora-legale-senato-usa",
   "https://www.tio.ch/rubriche/ospite/1944152/iniziativa-neutralita-partito-sinistra-nato": "neutralita-iniziativa-sinistra",
@@ -2297,6 +2296,11 @@
   "https://www.tio.ch/svizzera/politica/1949060/federale-essere-amherd-consiglio-prescrizione-consigliera-viola-chiede-acquisto-f-35": {
     "articleId": "f-35-amherd-prescrizione-responsabilita",
     "ts": "2026-09-10T02:33:16.770Z",
+    "keyForm": 2
+  },
+  "https://www.admin.ch/it/newnsb/sggekcibadfx": {
+    "articleId": "stefan-leist-vicedirettore-aff-2026",
+    "ts": "2026-09-10T05:17:54.983Z",
     "keyForm": 2
   }
 }
