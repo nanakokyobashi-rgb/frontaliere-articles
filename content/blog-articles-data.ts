@@ -24603,7 +24603,7 @@ const RAW_ARTICLES = [
  id: 'eventi-weekend-ticino',
  category: 'novita',
  date: '2026-06-29',
- updatedAt: '2026-09-03',
+ updatedAt: '2026-09-10',
  image: '/images/places/lugano-view.webp',
  hasCalculator: false,
  authorSlug: 'redazione',
@@ -34733,6 +34733,15 @@ const RAW_ARTICLES = [
  hasCalculator: false,
  authorSlug: 'marco-ferrari',
  authorName: 'Marco Ferrari',
+ },
+ {
+ id: 'uss-stipendi-minimo-2027',
+ category: 'novita',
+ date: '2026-09-10T12:11:42.025Z',
+ image: '/images/blog/uss-stipendi-minimo-2027.webp',
+ hasCalculator: true,
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
  },
 ] satisfies Article[];
 
