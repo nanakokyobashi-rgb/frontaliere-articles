@@ -448,15 +448,14 @@ jobs:
             echo "::error::Impossibile leggere un body valido della PR prima di Claude."
             exit 1
           fi
-          if ! body_sha=$(sed -E -e 's/\r$//' -e 's/[[:space:]]+$//' "$body_file" | sha256sum | cut -d' ' -f1); then
-            echo "::error::Impossibile calcolare il digest del body PR prima di Claude."
-            exit 1
-          fi
-          # `gh api --jq` termina anche una stringa vuota con il suo newline.
-          # Un body PR vuoto e' riparabile da Claude: il caso non va confuso
-          # con una risposta API a zero byte, che indica una lettura non verificabile.
+          # Un body PR vuoto e' riparabile da Claude; blocchiamo solo una
+          # risposta API a zero byte, prima che entri nel calcolo SHA-256.
           if [ ! -s "$body_file" ]; then
             echo "::error::La risposta API del body PR prima di Claude e' vuota o non verificabile."
+            exit 1
+          fi
+          if ! body_sha=$(sed -E -e 's/\r$//' -e 's/[[:space:]]+$//' "$body_file" | sha256sum | cut -d' ' -f1); then
+            echo "::error::Impossibile calcolare il digest del body PR prima di Claude."
             exit 1
           fi
           if ! printf '%s\n' "$body_sha" | grep -Eq '^[0-9a-f]{64}$'; then
@@ -753,14 +752,14 @@ jobs:
             echo "::error::❌-check-fix: impossibile leggere un body valido della PR dopo Claude → classificazione BLOCCANTE, job ROSSO."
             exit 1
           fi
-          if ! now_body_sha=$(sed -E -e 's/\r$//' -e 's/[[:space:]]+$//' "$body_file" | sha256sum | cut -d' ' -f1); then
-            echo "::error::❌-check-fix: impossibile calcolare il digest del body PR dopo Claude → classificazione BLOCCANTE, job ROSSO."
-            exit 1
-          fi
           # Un body PR vuoto dopo Claude resta osservabile; blocchiamo solo una
-          # risposta API a zero byte, cioe' una lettura non verificabile.
+          # risposta API a zero byte, prima che entri nel calcolo SHA-256.
           if [ ! -s "$body_file" ]; then
             echo "::error::❌-check-fix: la risposta API del body PR dopo Claude e' vuota o non verificabile → classificazione BLOCCANTE, job ROSSO."
+            exit 1
+          fi
+          if ! now_body_sha=$(sed -E -e 's/\r$//' -e 's/[[:space:]]+$//' "$body_file" | sha256sum | cut -d' ' -f1); then
+            echo "::error::❌-check-fix: impossibile calcolare il digest del body PR dopo Claude → classificazione BLOCCANTE, job ROSSO."
             exit 1
           fi
           if ! printf '%s\n' "$now_body_sha" | grep -Eq '^[0-9a-f]{64}$'; then
