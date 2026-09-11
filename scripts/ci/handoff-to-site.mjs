@@ -788,7 +788,12 @@ export function bodyCitesOrigin(body, origin) {
 }
 
 export function selectDeliveredIssue(entries, origin) {
-  return (Array.isArray(entries) ? entries : []).find((entry) => bodyCitesOrigin(entry?.body, origin)) || null;
+  const matches = (Array.isArray(entries) ? entries : [])
+    .filter((entry) => bodyCitesOrigin(entry?.body, origin));
+  // `gh issue list --state all` non garantisce che il primo match sia aperto:
+  // una vecchia consegna chiusa come `not planned` non deve oscurare quella
+  // ancora attiva e causare un doppione sul sito (#1243).
+  return matches.find((entry) => String(entry?.state || '').toUpperCase() === 'OPEN') || matches[0] || null;
 }
 
 /** True se il commento di parcheggio è già stato scritto su questa issue. */

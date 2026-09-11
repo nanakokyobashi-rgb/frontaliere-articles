@@ -103,6 +103,11 @@ describe('#984: rimborso solo per un 429 senza lavoro Claude', () => {
     assert.equal(shouldRefundRateLimitedRound(used), false);
   });
 
+  it('accetta il marker CLI strutturato anche con uno step senza nome Claude', () => {
+    const generic = 'runner step type: result is_error: true api_error_status: 429 rate_limit num_turns: 1 total_cost_usd: 0';
+    assert.equal(shouldRefundRateLimitedRound(generic), true);
+  });
+
   it('ignora un 429 di un altro step del log della run', () => {
     const unrelated = 'dependency step api_error_status: 429 rate_limit num_turns: 1 total_cost_usd: 0';
     assert.equal(shouldRefundRateLimitedRound(unrelated), false);
