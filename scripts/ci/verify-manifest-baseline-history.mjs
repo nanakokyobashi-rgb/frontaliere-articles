@@ -273,7 +273,9 @@ function blobsFollowingRenames(rel, { partialClone = isPartialClone() } = {}) {
       commits = parseFollowHistory(
         git(['-c', 'core.quotePath=false', 'log', '--follow', '--format=%H', '--name-only', ref, '--', rel]),
       );
-    } catch {
+    } catch (error) {
+      const diagnostic = error?.stderr ?? error?.message ?? '';
+      if (partialClone && isLazyFetchFailure(diagnostic)) return null;
       continue;
     }
     for (const { sha, path: historicalPath } of commits) {
