@@ -140,7 +140,9 @@ runs:
             elif [ "$owner" = "$current_uid" ]; then
               # A runner-owned component is trusted only when the job cannot
               # rewrite it through its owner write bit.
-              (( (8#$mode & 200) == 0 )) || return 1
+              # `stat` prints an octal permission string (for example 0755).
+              # Interpret it as octal before masking the owner write bit.
+              (( (8#$mode & 0200) == 0 )) || return 1
             else
               return 1
             fi

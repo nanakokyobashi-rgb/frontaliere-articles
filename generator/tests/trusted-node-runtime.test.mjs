@@ -30,7 +30,7 @@ test('il resolver ammette solo prefissi di sistema e mantiene il controllo dei c
   assert.doesNotMatch(roots, /RUNNER_TEMP|runner_temp|\/tmp|HOME/);
   assert.match(RUNTIME, /\(\( \(8#\$mode & 022\) == 0 \)\)/);
   assert.match(RUNTIME, /if \[ "\$owner" = '0' \]; then/);
-  assert.match(RUNTIME, /\(\( \(8#\$mode & 200\) == 0 \)\)/);
+  assert.match(RUNTIME, /\(\( \(8#\$mode & 0200\) == 0 \)\)/);
 });
 
 test('workspace, home del runner, /tmp e RUNNER_TEMP restano percorsi vietati', () => {
