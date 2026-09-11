@@ -133,6 +133,9 @@ export function collectCdnAssetRefs(html, cdnBase) {
  */
 export const CDN_ASSET_CHECK_MAX_URLS = 24;
 
+/** Default per-asset timeout shared by the verifier and its report. */
+export const CDN_ASSET_CHECK_TIMEOUT_MS = 8_000;
+
 /**
  * Tetto sul TEMPO complessivo. Le HEAD sono in serie e ciascuna vale
  * `timeoutMs`: senza budget, N URL su un CDN che pende costano N × timeout
@@ -182,7 +185,7 @@ export function nextRequestTimeoutMs({ budgetRemainingMs, urlRemainingMs }) {
 export async function verifyCdnAssetRefs({
   urls,
   fetchImpl = fetch,
-  timeoutMs = 8000,
+  timeoutMs = CDN_ASSET_CHECK_TIMEOUT_MS,
   maxUrls = CDN_ASSET_CHECK_MAX_URLS,
   budgetMs = CDN_ASSET_CHECK_BUDGET_MS,
   now = Date.now,
@@ -286,7 +289,7 @@ export async function verifyCdnAssetRefs({
 export function formatCdnAssetReport(
   results,
   prefix = '[cdn-asset-check]',
-  { elapsedMs = null, budgetMs = CDN_ASSET_CHECK_BUDGET_MS, timeoutMs = 8000 } = {},
+  { elapsedMs = null, budgetMs = CDN_ASSET_CHECK_BUDGET_MS, timeoutMs = CDN_ASSET_CHECK_TIMEOUT_MS } = {},
 ) {
   const lines = [];
   const missing = results.filter((r) => r.state === 'missing');
