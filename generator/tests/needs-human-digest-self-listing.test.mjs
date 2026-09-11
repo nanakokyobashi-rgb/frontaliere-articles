@@ -360,7 +360,11 @@ test('il titolo del digest ha una sola sorgente anche in needs-human-sweep.yml',
   const literals = [...sweep.matchAll(new RegExp(title.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g'))];
   assert.equal(literals.length, 1, 'il titolo del digest compare fuori da DIGEST_TITLE: chi lo usa deve leggere la env');
   assert.match(sweep, /titolo ESATTO `\$\{\{ steps\.digest_title\.outputs\.title \}\}`/, 'il prompt deve interpolare il titolo già validato');
-  assert.match(sweep, /--match title "\$DIGEST_TITLE"/, 'lo step "Classify outcome" deve cercare il digest con DIGEST_TITLE');
+  assert.match(
+    sweep,
+    /select\(\.title == env\.DIGEST_TITLE\)/,
+    'lo step "Classify outcome" deve cercare il digest con DIGEST_TITLE',
+  );
 });
 
 /**

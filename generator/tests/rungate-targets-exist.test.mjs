@@ -49,6 +49,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
+import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -62,9 +63,18 @@ const RUN_GATE_CALL = /\b(?:runGateOutput|runGate)(?![A-Za-z_$])\(\s*(['"])([^'"
 // `import { a, b as c } from './rel.mjs'` — solo gli import NOMINATI e RELATIVI.
 const NAMED_IMPORT = /import\s*\{([^}]*)\}\s*from\s*(['"])(\.[^'"]+)\2/g;
 
-/** I nomi esportati da un modulo, letti staticamente. Nessuna esecuzione. */
-function exportedNames(source) {
+/**
+ * I nomi esportati da un modulo, letti staticamente. Nessuna esecuzione.
+ * `export * from` viene seguito sul disco perché il modulo che importa un gate
+ * può ricevere il simbolo da un barrel, non solo da una dichiarazione locale.
+ */
+function exportedNames(source, modulePath = null, seen = new Set()) {
   const names = new Set();
+  if (modulePath) {
+    const resolvedModulePath = path.resolve(modulePath);
+    if (seen.has(resolvedModulePath)) return names;
+    seen.add(resolvedModulePath);
+  }
   for (const m of source.matchAll(/^export\s+(?:async\s+)?(?:function\*?|const|let|var|class)\s+([A-Za-z_$][\w$]*)/gm)) {
     names.add(m[1]);
   }
@@ -75,6 +85,20 @@ function exportedNames(source) {
       if (!spec) continue;
       const as = spec.match(/\bas\s+([A-Za-z_$][\w$]*)$/);
       names.add(as ? as[1] : spec);
+    }
+  }
+
+  if (modulePath) {
+    for (const m of source.matchAll(/^export\s+\*\s+from\s+(['"])(\.[^'"]+)\1/gm)) {
+      const base = path.resolve(path.dirname(modulePath), m[2]);
+      const candidates = [base, `${base}.mjs`, `${base}.js`, `${base}.ts`];
+      const target = candidates.find((candidate) => {
+        try { return fs.statSync(candidate).isFile(); } catch { return false; }
+      });
+      if (!target || seen.has(path.resolve(target))) continue;
+      let childSource;
+      try { childSource = fs.readFileSync(target, 'utf8'); } catch { continue; }
+      for (const name of exportedNames(childSource, target, seen)) names.add(name);
     }
   }
   return names;
@@ -121,7 +145,7 @@ test('ogni import nominato di un gate risolve a un export che esiste', () => {
         broken.push(`${gate}: il modulo ${imp[3]} non esiste`);
         continue;
       }
-      const available = exportedNames(fs.readFileSync(target, 'utf8'));
+      const available = exportedNames(fs.readFileSync(target, 'utf8'), target);
       for (const part of imp[1].split(',')) {
         const wanted = part.trim().split(/\s+as\s+/)[0].trim();
         if (wanted && !available.has(wanted)) {
@@ -139,4 +163,18 @@ test('ogni import nominato di un gate risolve a un export che esiste', () => {
     'inconclusive: il gate non gira e nessuno se ne accorge. Nota che i gemelli ' +
     "`adapted` del manifest possono divergere: l'export va aggiunto QUI, non copiato dal sito.",
   );
+});
+
+test('exportedNames() segue una ri-esportazione `export * from`', () => {
+  const dir = fs.realpathSync(fs.mkdtempSync(path.join(os.tmpdir(), 'rungate-exports-')));
+  try {
+    const source = path.join(dir, 'source.mjs');
+    const barrel = path.join(dir, 'barrel.mjs');
+    fs.writeFileSync(source, 'export const forwarded = true;\n');
+    fs.writeFileSync(barrel, "export * from './source.mjs';\n");
+
+    assert.equal(exportedNames(fs.readFileSync(barrel, 'utf8'), barrel).has('forwarded'), true);
+  } finally {
+    fs.rmSync(dir, { recursive: true, force: true });
+  }
 });

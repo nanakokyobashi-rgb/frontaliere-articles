@@ -575,7 +575,7 @@
       "reason": "Questo file.",
       "baseline": {
         "site": null,
-        "corpus": "b30c519db59fbbb8",
+        "corpus": "ec5b75a0e99a4dc6",
         "alignedAt": "2026-09-11"
       }
     },
@@ -2471,7 +2471,7 @@
       "path": "host/firebaseAuthPersistence.ts",
       "sitePath": "services/firebaseAuthPersistence.ts",
       "mode": "adapted",
-      "reason": "Helper runtime per derivare la chiave di persistenza Firebase da Remote Config via generator/scripts/load-rc-env.mjs. La shell trasportata non lo chiama piu': host/constants.ts risponde alla domanda hasAccess() scansionando direttamente il namespace firebase:authUser:, mentre il codice applicativo puo' restringere la ricerca quando dispone della configurazione runtime. La divergenza e' intenzionale e impedisce di riportare nel corpus un literal o un fallback offuscato.",
+      "reason": "Helper runtime per derivare la chiave di persistenza Firebase da Remote Config via generator/scripts/load-rc-env.mjs. La shell trasportata non puo' conoscere quella chiave: host/constants.ts risponde alla domanda pre-bootstrap di hasAccess() leggendo solo il marker esplicito frontaliere:auth-session, scritto da authService dopo una sessione confermata. Quando la configurazione runtime e' disponibile, il codice applicativo restringe invece la ricerca alla chiave esatta firebase:authUser:<key>:[DEFAULT]. La divergenza e' intenzionale e impedisce di riportare nel corpus un literal o un fallback che confonda un altro progetto Firebase.",
       "baseline": {
         "site": "32331a9b688af124",
         "corpus": "f7660c2461775da6",
@@ -2482,7 +2482,7 @@
       "path": "host/constants.ts",
       "sitePath": "build-plugins/constants.ts",
       "mode": "adapted",
-      "reason": "Costanti del sito che l'engine legge via SiteShellContract. E' un ESTRATTO PER CHIUSURA di build-plugins/constants.ts (850 righe la': solo le ~15 dichiarazioni che il contratto raggiunge, 177 righe qui), quindi non potra' mai essere byte-identico e adapted e' il mode giusto. Per questa sola entry scalarFingerprint confronta i 22 scalari authoritative: cambiamenti del sorgente fuori dalla chiusura restano stable, ma un digest diverso, mancante, malformato o non dichiarato non puo' mai essere stable. I comportamenti del contratto restano coperti dai fingerprint test esistenti; host/host-drift.test.mjs non esiste e non e' una guardia. La PR corpus #1374 prepara il lato corpus alla rimozione della chiave; origin/main del sito non e' ancora allineato e conserva il digest precedente 56e5a6da… finche' la PR sito #8299 non sara' mergeata. Il digest a8d61011… qui dichiarato e' la destinazione verificata del contratto dopo l'allineamento di entrambe le PR, non una dichiarazione di parita' gia' presente sui branch main. Durante la finestra la divergenza e' intenzionale e va ricontrollata dopo #8299; il digest non dipende da segreti o variabili di ambiente del runner.",
+      "reason": "Costanti del sito che l'engine legge via SiteShellContract. E' un ESTRATTO PER CHIUSURA di build-plugins/constants.ts (850 righe la': solo le ~15 dichiarazioni che il contratto raggiunge, 177 righe qui), quindi non potra' mai essere byte-identico e adapted e' il mode giusto. Per questa sola entry scalarFingerprint confronta i 22 scalari authoritative: cambiamenti del sorgente fuori dalla chiusura restano stable, ma un digest diverso, mancante, malformato o non dichiarato non puo' mai essere stable. I comportamenti del contratto restano coperti dai fingerprint test esistenti; host/host-drift.test.mjs non esiste e non e' una guardia. Il follow-up corpus prepara il lato host al cambio della PR sito #8299: il gate statico passa dalla scansione arbitraria del namespace firebase:authUser: al marker esplicito frontaliere:auth-session, mentre il codice runtime conserva il match sulla chiave Firebase esatta. Il digest 22b3b2bf… e' la destinazione verificata del contratto dopo l'allineamento delle due PR, non una dichiarazione di parita' gia' presente sui branch main. Durante la finestra la divergenza e' intenzionale e va ricontrollata dopo #8299; il digest non dipende da segreti o variabili di ambiente del runner.",
       "baseline": {
         "site": "8318a415439ca0d0",
         "corpus": "7c8c22b48ee255aa",
@@ -2492,7 +2492,7 @@
         "sitePath": "tests/articles-shell-contract-fingerprint.json",
         "corpusPath": "host/shell-contract-fingerprint.json",
         "scalarFields": 22,
-        "sha256": "a8d61011f201bab590ebe2b4220429823048d6ccefe6a192fdd3ccbf95bc8bf7"
+        "sha256": "22b3b2bf199de18eab45aa9cd081420b4ae60c29028cbd3a0a24f9a681dd0d89"
       }
     },
     {
@@ -2696,8 +2696,8 @@
       "reason": "Impronta dei 42 membri di SiteShellContract, prodotta e verificata da `host/tests/shell-contract-fingerprint.test.mjs`. Artefatto di questo lato: e' il gate runtime che impedisce di spedire l'engine senza la sua meta' `host/`.",
       "baseline": {
         "site": null,
-        "corpus": "2db6595933fc9e97",
-        "alignedAt": "2026-08-09"
+        "corpus": "f8052772228f9d5b",
+        "alignedAt": "2026-09-11"
       }
     },
     {
@@ -2736,8 +2736,8 @@
       "reason": "Normalizzazione dell'ambiente per i due gate che pinnano SiteShellContract (issue #788): il digest degli scalari copre `cdnPreconnectHint`, che `host/constants.ts` deriva da `process.env.ASSET_CDN` a module-evaluation time, quindi senza azzerarlo il gate cross-repo dipende dall'ambiente del runner. Artefatto di questo lato: nessun omonimo sul sito.",
       "baseline": {
         "site": null,
-        "corpus": "3f851d3a1aff3783",
-        "alignedAt": "2026-09-04"
+        "corpus": "940356862207405b",
+        "alignedAt": "2026-09-11"
       }
     },
     {
