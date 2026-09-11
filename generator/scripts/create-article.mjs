@@ -4931,10 +4931,11 @@ function runArticleFactualityGates({ deterministicBodySections = [], ...params }
     });
   });
   // Deterministic producers are allowed to emit structured fragments that
-  // look incomplete to the prose heuristics. Only critical factuality issues
-  // are publication-blocking here; ordinary AI output keeps the stricter
-  // critical+major policy in the shared gate itself.
-  const blocking = issues.filter((issue) => issue.severity === 'critical');
+  // look incomplete to the prose heuristics. After that narrow exemption,
+  // keep both critical and major factuality issues publication-blocking: a
+  // translation-number-dropped/added finding is semantic evidence, not prose
+  // shape noise, even when it appears in a bulletin or ranking.
+  const blocking = issues.filter((issue) => issue.severity === 'critical' || issue.severity === 'major');
   return { ...result, issues, blocking, passed: blocking.length === 0 };
 }
 

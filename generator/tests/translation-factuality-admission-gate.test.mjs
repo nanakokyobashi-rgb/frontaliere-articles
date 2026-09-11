@@ -240,7 +240,7 @@ test('#1261 i bodyN vengono coercizzati in ogni locale prima dei gate', () => {
   assert.equal(content.de.body2, '42');
 });
 
-test('#1261 un produttore deterministico blocca solo rilievi critical', () => {
+test('#1261 un produttore deterministico esenta solo euristiche di forma', () => {
   const factory = new Function(
     'runFactualityGates',
     'DETERMINISTIC_BODY_HEURISTIC_CODES',
@@ -260,7 +260,7 @@ test('#1261 un produttore deterministico blocca solo rilievi critical', () => {
     'leaked-prompt-scaffolding',
   ]));
   const result = runGate({ locale: 'it', deterministicBodySections: ['body1'] });
-  assert.deepEqual(result.blocking.map((issue) => issue.code), ['critical-fact']);
+  assert.deepEqual(result.blocking.map((issue) => issue.code), ['structured-major', 'critical-fact']);
   assert.equal(result.passed, false);
 });
 

@@ -197,6 +197,15 @@ test('un id assente fa fallire la rimozione, invece di lasciare una rimozione pa
   });
 });
 
+test('un id presente in una forma non riconosciuta fa fallire anche il chiamante', () => {
+  const src = "export const IDS: string[] = [lookup('mai-esistito')];\n";
+  assert.throws(() => removeFromIdListLiteral(src, 'IDS', 'mai-esistito'), (error) => {
+    assert.match(error.message, /presente ma il letterale ha una forma non riconosciuta/);
+    assert.equal(error.code, undefined);
+    return true;
+  });
+});
+
 test('un elenco DERIVATO non e\' un letterale: nessuna finestra, nessuna riscrittura', () => {
   // La sezione svizzera fa cosi'. `create-article.mjs` deve saltare il blocco
   // (span `null`) invece di inventarsi un array da riscrivere.

@@ -223,6 +223,13 @@ export function removeFromIdListLiteral(src, varName, id) {
   } else if (new RegExp(`^\\s*${quotedId}\\s*$`).test(body)) {
     newBody = '';
   } else {
+    // Distinguish an id that is genuinely absent (a recoverable interrupted
+    // retirement) from an id still present in a literal shape this helper
+    // does not understand. The caller may tolerate only the former; silently
+    // accepting the latter would leave the id in the published union.
+    if (new RegExp(quotedId).test(body)) {
+      throw new Error(`array ${varName}: id ${JSON.stringify(id)} è presente ma il letterale ha una forma non riconosciuta`);
+    }
     const error = new Error(`array ${varName}: id atteso ${JSON.stringify(id)} non trovato nel letterale`);
     error.code = 'ID_LIST_ENTRY_MISSING';
     throw error;
