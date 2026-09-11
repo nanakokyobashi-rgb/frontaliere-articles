@@ -201,35 +201,10 @@ jobs:
           ISSUE_NUMBER: ${{ github.event.issue.number }}
         run: node scripts/ci/check-workflows-scope.mjs
 
-      # ── Pre-flight 4: mutua esclusione ────────────────────────────────────
-      - name: Pre-flight — in-progress claim gate (zero-Claude, mutex)
-        id: claim
-        if: steps.preflight.outputs.already_resolved != 'true' && steps.stale.outputs.stale_dispatch != 'true' && steps.scope_guard.outputs.workflows_blocked != 'true'
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GH_REPO: ${{ github.repository }}
-          ISSUE_NUMBER: ${{ github.event.issue.number }}
-        run: node scripts/ci/claim-issue-in-flight.mjs
-
-      # ── Pre-flight 5: diagnosi gia' consegnata al sito (zero-Claude) ───────
-      # La consegna viene verificata DOPO il claim: prima di quel punto la
-      # issue puo' essere stata riusata da una run concorrente e il verdetto
-      # letto potrebbe appartenere alla run sbagliata. Il claim stabilisce
-      # l'identita' della run prima di consentire il corto-circuito.
-      - name: Pre-flight — diagnosi gia' consegnata al sito (zero-Claude)
-        id: handoff_pre
-        if: steps.preflight.outputs.already_resolved != 'true' && steps.stale.outputs.stale_dispatch != 'true' && steps.scope_guard.outputs.workflows_blocked != 'true' && steps.claim.outputs.in_flight != 'true'
-        continue-on-error: true
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GH_REPO: ${{ github.repository }}
-          ISSUE_NUMBER: ${{ github.event.issue.number }}
-          SITE_TOKEN: ${{ env.GITHUB_PAT }}
-        run: node scripts/ci/handoff-to-site.mjs --preflight
-
+      # ── Pre-flight 4: contesto di gruppo prima del claim ──────────────────
       - name: Load issue group context (B19, zero-Claude)
         id: group
-        if: steps.preflight.outputs.already_resolved != 'true' && steps.stale.outputs.stale_dispatch != 'true' && steps.scope_guard.outputs.workflows_blocked != 'true' && steps.claim.outputs.in_flight != 'true' && steps.handoff_pre.outputs.handoff_delivered != 'true'
+        if: steps.preflight.outputs.already_resolved != 'true' && steps.stale.outputs.stale_dispatch != 'true' && steps.scope_guard.outputs.workflows_blocked != 'true'
         continue-on-error: true
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -339,6 +314,37 @@ jobs:
             echo "::error::contesto del gruppo B19 illeggibile: il ramo group non può procedere"
             exit 1
           fi
+
+      # ── Pre-flight 5: mutua esclusione ────────────────────────────────────
+      # Il claim arriva DOPO il caricamento del contesto: per un leader B19 la
+      # stessa mutua esclusione viene applicata a tutti i membri, prima che una
+      # run singola possa iniziare diagnosi o aprire una PR concorrente.
+      - name: Pre-flight — in-progress claim gate (zero-Claude, mutex)
+        id: claim
+        if: steps.preflight.outputs.already_resolved != 'true' && steps.stale.outputs.stale_dispatch != 'true' && steps.scope_guard.outputs.workflows_blocked != 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          ISSUE_NUMBERS: ${{ steps.group.outputs.group_numbers }}
+        run: node scripts/ci/claim-issue-group-in-flight.mjs
+
+      # ── Pre-flight 6: diagnosi gia' consegnata al sito (zero-Claude) ───────
+      # La consegna viene verificata DOPO il claim: prima di quel punto la
+      # issue puo' essere stata riusata da una run concorrente e il verdetto
+      # letto potrebbe appartenere alla run sbagliata. Il claim stabilisce
+      # l'identita' della run prima di consentire il corto-circuito.
+      - name: Pre-flight — diagnosi gia' consegnata al sito (zero-Claude)
+        id: handoff_pre
+        if: steps.preflight.outputs.already_resolved != 'true' && steps.stale.outputs.stale_dispatch != 'true' && steps.scope_guard.outputs.workflows_blocked != 'true' && steps.claim.outputs.in_flight != 'true'
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          SITE_TOKEN: ${{ env.GITHUB_PAT }}
+        run: node scripts/ci/handoff-to-site.mjs --preflight
+
       - name: Determine fix tier
         id: tier
         if: steps.preflight.outputs.already_resolved != 'true' && steps.stale.outputs.stale_dispatch != 'true' && steps.scope_guard.outputs.workflows_blocked != 'true' && steps.claim.outputs.in_flight != 'true' && steps.handoff_pre.outputs.handoff_delivered != 'true'
@@ -902,10 +908,15 @@ jobs:
         continue-on-error: true
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          ISSUE: ${{ github.event.issue.number }}
+          CLAIMED_NUMBERS: ${{ steps.claim.outputs.claimed_numbers }}
         run: |
-          gh issue edit "$ISSUE" --repo "${{ github.repository }}" --remove-label agent:in-progress 2>/dev/null || true
-          echo "Rilasciato agent:in-progress su #$ISSUE (best-effort)."
+          set -uo pipefail
+          IFS=',' read -r -a claimed <<< "${CLAIMED_NUMBERS:-}"
+          for issue in "${claimed[@]}"; do
+            [ -n "$issue" ] || continue
+            gh issue edit "$issue" --repo "${{ github.repository }}" --remove-label agent:in-progress 2>/dev/null || true
+            echo "Rilasciato agent:in-progress su #$issue (best-effort)."
+          done
 
       - name: Cleanup Firebase credentials
         if: always()
