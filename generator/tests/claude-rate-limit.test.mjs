@@ -1,7 +1,11 @@
 import assert from 'node:assert/strict';
 import { describe, it } from 'node:test';
 
-import { detectClaudeRateLimit, shouldRefundRateLimitedRound } from '../../scripts/ci/claude-rate-limit.mjs';
+import {
+  detectClaudeRateLimit,
+  parseExecutionMessages,
+  shouldRefundRateLimitedRound,
+} from '../../scripts/ci/claude-rate-limit.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -19,6 +23,14 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..')
 const readRoot = (rel) => fs.readFileSync(path.join(ROOT, rel), 'utf8');
 
 describe('detectClaudeRateLimit', () => {
+  it('mantiene i messaggi validi attorno a righe NDJSON troncate o diagnostiche', () => {
+    const before = { type: 'result', is_error: true, api_error_status: 429 };
+    const after = { type: 'rate_limit_event', rate_limit_info: { status: 'rejected' } };
+    const raw = [JSON.stringify(before), '{"type":"result","terminal_reason":', 'runner diagnostic', JSON.stringify(after)].join('\n');
+
+    assert.deepEqual(parseExecutionMessages(raw), [before, after]);
+  });
+
   it('non confonde overage rifiutato con quota primaria esaurita quando status è allowed', () => {
     const raw = JSON.stringify([
       {

@@ -662,17 +662,37 @@ jobs:
             echo "Codex primary riuscito: nessun log Claude da classificare."
             exit 0
           fi
+          # L'execution file è NDJSON ma può terminare con una riga diagnostica o
+          # troncata. Normalizzalo una sola volta col parser condiviso, che scarta
+          # soltanto la riga illeggibile; i classificatori sotto non devono usare
+          # jq -s direttamente sul file grezzo e perdere marker validi precedenti.
+          EXEC_EVENTS_FILE=''
+          cleanup_execution_events() {
+            if [ -n "${EXEC_EVENTS_FILE:-}" ]; then
+              rm -f "${EXEC_EVENTS_FILE}"
+            fi
+          }
+          trap cleanup_execution_events EXIT
+          if [ -n "${EXEC_FILE:-}" ] && [ -f "${EXEC_FILE}" ]; then
+            EXEC_EVENTS_FILE="${RUNNER_TEMP:-/tmp}/claude-review-events-${RUN_ID:-$$}.jsonl"
+            if ! node scripts/ci/parse-claude-execution.mjs "${EXEC_FILE}" > "${EXEC_EVENTS_FILE}"; then
+              set_review_output review_abort_cause probe_failed
+              set_review_output permanent_failure true
+              echo "::error::Impossibile normalizzare l'execution file Claude: marker non classificati."
+              exit 0
+            fi
+          fi
           # max_turns PRIMA del 429: il terminal marker e' piu' specifico dei
           # campi di telemetria condivisi. Il ramo 429 sotto accetta solo
           # marker strutturati (status HTTP, evento rifiutato o errore tipizzato):
           # un semplice `rate_limit` nel file puo' essere il metadata di una
           # richiesta riuscita e non deve trasformare un altro errore in warning.
-          if [ -n "${EXEC_FILE:-}" ] && [ -f "${EXEC_FILE}" ] \
+          if [ -n "${EXEC_EVENTS_FILE:-}" ] && [ -f "${EXEC_EVENTS_FILE}" ] \
              && jq -e -s '
                flatten | any(.[]?;
                  .terminal_reason == "max_turns"
                )
-             ' "${EXEC_FILE}" >/dev/null 2>&1; then
+             ' "${EXEC_EVENTS_FILE}" >/dev/null 2>&1; then
             # Il cap dei turni non prova da solo l'assenza di un verdetto: Claude
             # puo' aver gia' inviato la review e consumare l'ultimo turno mentre
             # chiude la propria esecuzione. Verifichiamo la HEAD e la finestra di
@@ -739,7 +759,7 @@ jobs:
           # ricolpisce la quota GIA' esaurita → tempesta auto-amplificante. Il
           # merge resta comunque bloccato, perche' il review gate sotto non
           # trova nessun `## LGTM` sulla head e fallisce lui.
-          if [ -n "${EXEC_FILE:-}" ] && [ -f "${EXEC_FILE}" ]; then
+          if [ -n "${EXEC_EVENTS_FILE:-}" ] && [ -f "${EXEC_EVENTS_FILE}" ]; then
             RATE_LIMIT_MARKER=false
             if jq -e -s '
               flatten | any(.[]?;
@@ -752,7 +772,7 @@ jobs:
                   or (.type == "rate_limit_error")
                 )
               )
-            ' "${EXEC_FILE}" >/dev/null 2>&1; then
+            ' "${EXEC_EVENTS_FILE}" >/dev/null 2>&1; then
               RATE_LIMIT_MARKER=true
             fi
           fi
@@ -763,7 +783,7 @@ jobs:
             echo "::warning::Review abortita su 429 (quota). Non fallisco QUI: eviterei solo di amplificare i re-run sulla quota condivisa col sito. Il review gate blocchera' comunque il merge."
             exit 0
           fi
-          if [ -n "${EXEC_FILE:-}" ] && [ -f "${EXEC_FILE}" ]; then
+          if [ -n "${EXEC_EVENTS_FILE:-}" ] && [ -f "${EXEC_EVENTS_FILE}" ]; then
             SERVER_ERROR_MARKER=false
             if jq -e -s '
               flatten | any(.[]?;
@@ -776,7 +796,7 @@ jobs:
                     ))
                 )
               )
-            ' "${EXEC_FILE}" >/dev/null 2>&1; then
+            ' "${EXEC_EVENTS_FILE}" >/dev/null 2>&1; then
               SERVER_ERROR_MARKER=true
             fi
             if [ "$SERVER_ERROR_MARKER" = true ]; then
@@ -794,7 +814,7 @@ jobs:
               flatten | any(.[]?;
                 (.type == "result" or .type == null) and .is_error == true
               )
-            ' "${EXEC_FILE}" >/dev/null 2>&1; then
+            ' "${EXEC_EVENTS_FILE}" >/dev/null 2>&1; then
               set_review_output review_abort_cause non_retryable
               set_review_output permanent_failure true
               echo "::error::Review action con errore non classificato come transiente: nessun autorebase automatico."
