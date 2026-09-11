@@ -62,6 +62,7 @@ import {
   expectFromCorpus,
   FEED_POPULATION_WARN_RETENTION,
   feedSourceFloor,
+  previousRevision,
 } from '../../scripts/ci/verify-api-floors.mjs';
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
 const WORKFLOW = fs.readFileSync(join(ROOT, '.github/workflows/publish-api.yml'), 'utf-8');
@@ -495,6 +496,16 @@ test("publish-api.yml non porta piu' un pavimento assoluto scritto a mano", () =
     WORKFLOW,
     /imgs" -lt 1\b/,
     'il pavimento `-lt 1` sulle immagini accettava 1990 immagini ridotte a una',
+  );
+});
+
+test('il floor storico usa github.event.before e conserva un fallback esplicito', () => {
+  assert.equal(previousRevision(ROOT, 'before-sha'), 'before-sha');
+  assert.equal(previousRevision(ROOT, '0'.repeat(40)), null);
+  assert.match(
+    WORKFLOW,
+    /API_FLOOR_BASE_REVISION:\s*\$\{\{ github\.event\.before \}\}/,
+    'publish-api deve passare la base del push, non lasciare che lo script scelga HEAD^',
   );
 });
 

@@ -75,7 +75,12 @@ export function feedSection(fileName) {
   return /^rss-svizzera/.test(fileName) ? 'svizzera' : 'frontaliere';
 }
 
-function previousRevision(root) {
+const ZERO_REVISION_RE = /^0+$/;
+
+export function previousRevision(root, configuredRevision = process.env.API_FLOOR_BASE_REVISION) {
+  const configured = String(configuredRevision || '').trim();
+  if (configured) return ZERO_REVISION_RE.test(configured) ? null : configured;
+
   try {
     return execFileSync('git', ['-C', root, 'rev-parse', 'HEAD^'], {
       encoding: 'utf8',
@@ -86,22 +91,74 @@ function previousRevision(root) {
   }
 }
 
+function assertGitRevision(root, revision) {
+  try {
+    execFileSync('git', ['-C', root, 'cat-file', '-e', `${revision}^{commit}`], {
+      stdio: ['ignore', 'ignore', 'ignore'],
+    });
+  } catch (error) {
+    throw new Error(`revisione storica ${revision} non disponibile nel checkout`, { cause: error });
+  }
+}
+
+/** Legge un path a una revisione distinguendo file assente da errore git. */
+function readGitFileAtRevision(root, revision, rel) {
+  let listing;
+  try {
+    listing = execFileSync('git', ['-C', root, 'ls-tree', '-r', '--name-only', revision, '--', rel], {
+      encoding: 'utf8',
+      stdio: ['ignore', 'pipe', 'ignore'],
+    });
+  } catch (error) {
+    throw new Error(`impossibile elencare ${rel} alla revisione ${revision}`, { cause: error });
+  }
+  if (!listing.split('\n').some((entry) => entry === rel)) return null;
+
+  try {
+    return execFileSync('git', ['-C', root, 'show', `${revision}:${rel}`], {
+      encoding: 'utf8',
+      stdio: ['ignore', 'pipe', 'ignore'],
+      maxBuffer: 64 * 1024 * 1024,
+    });
+  } catch (error) {
+    throw new Error(`impossibile leggere ${rel} alla revisione ${revision}`, { cause: error });
+  }
+}
+
+function escapeRegExp(value) {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+function parseStringArray(source) {
+  return [...source.matchAll(/['"]([^'"]+)['"]/g)].map((match) => match[1]);
+}
+
+/** Recupera dalla storia la lista di chunk propria della sezione. */
+function historicalSeoFilesAtRevision(root, revision, sectionId) {
+  assertGitRevision(root, revision);
+  const source = readGitFileAtRevision(root, revision, 'engine/rssFeeds.mjs');
+  if (source === null) return [];
+
+  const section = new RegExp(
+    `\\bid:\\s*['"]${escapeRegExp(sectionId)}['"][\\s\\S]*?\\bseoFiles:\\s*([A-Za-z_$][\\w$]*|\\[[\\s\\S]*?\\])`,
+  ).exec(source)?.[1];
+  if (!section) return [];
+  if (section.startsWith('[')) return parseStringArray(section);
+
+  const declaration = new RegExp(
+    `(?:const|let|var)\\s+${escapeRegExp(section)}\\s*=\\s*(\\[[\\s\\S]*?\\])`,
+  ).exec(source)?.[1];
+  return declaration ? parseStringArray(declaration) : [];
+}
+
 function countSeoEntriesAtRevision(root, revision, seoFiles) {
+  assertGitRevision(root, revision);
   const ids = new Set();
   for (const file of seoFiles) {
     const rel = path.posix.join(SEO_CHUNK_DIR.split(path.sep).join('/'), file);
-    let source;
-    try {
-      source = execFileSync('git', ['-C', root, 'show', `${revision}:${rel}`], {
-        encoding: 'utf8',
-        stdio: ['ignore', 'pipe', 'ignore'],
-        maxBuffer: 64 * 1024 * 1024,
-      });
-    } catch (error) {
-      // A newly-added chunk had no population in the previous revision.
-      if (error?.status === 128) continue;
-      throw error;
-    }
+    const source = readGitFileAtRevision(root, revision, rel);
+    // Un chunk aggiunto dopo la revisione storica non aveva popolazione allora.
+    if (source === null) continue;
     collectSeoEntryIds(source, ids);
   }
   return ids.size;
@@ -395,9 +452,13 @@ export async function expectFromCorpus(root) {
   const revision = previousRevision(root);
   for (const section of RSS_SECTIONS) {
     feedSources[section.id] = countSeoEntries(root, section.seoFiles);
-    previousFeedSources[section.id] = revision === null
-      ? null
-      : countSeoEntriesAtRevision(root, revision, section.seoFiles);
+    if (revision === null) {
+      previousFeedSources[section.id] = null;
+      continue;
+    }
+    const previousSeoFiles = historicalSeoFilesAtRevision(root, revision, section.id);
+    const historicalPopulationFiles = [...new Set([...section.seoFiles, ...previousSeoFiles])];
+    previousFeedSources[section.id] = countSeoEntriesAtRevision(root, revision, historicalPopulationFiles);
   }
   return {
     sourceArticles: {
