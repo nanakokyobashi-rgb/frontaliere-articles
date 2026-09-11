@@ -353,6 +353,7 @@ export function shouldTriageAfterCandidateGate({ hasCandidates, followupPartial 
 // Gate failures are configuration faults, not inconclusive verdicts. Keep the
 // proceed-safe batch behavior while surfacing missing/unloadable gates loudly.
 const gateFaults = new Map();
+const gateWindowStats = new Map();
 const MODULE_LOAD_ERROR =
   /ERR_MODULE_NOT_FOUND|ERR_UNSUPPORTED_DIR_IMPORT|ERR_UNKNOWN_FILE_EXTENSION|ERR_REQUIRE_ESM|Cannot find (?:module|package)|does not provide an export named/;
 const LOAD_TIME_SYNTAX_ERROR =
@@ -412,28 +413,62 @@ function reportGateFaults() {
   }
 }
 
+function recordGateWindowResult(gate, reason) {
+  const stats = gateWindowStats.get(gate) || { total: 0, inconclusive: 0 };
+  stats.total += 1;
+  if (reason === 'inconclusive') stats.inconclusive += 1;
+  gateWindowStats.set(gate, stats);
+}
+
+function reportGateWindowInconclusive() {
+  const alarms = [...gateWindowStats.entries()]
+    .filter(([, stats]) => stats.total >= 1 && stats.inconclusive === stats.total);
+  if (!alarms.length) return;
+
+  const rows = alarms.map(([gate, stats]) =>
+    `- \`${gate}\` — inconclusive su ${stats.total}/${stats.total} PR della finestra`);
+  console.log(
+    `::warning title=Gate del follow-up sempre inconclusive::${alarms
+      .map(([gate]) => gate).join(', ')} non ha prodotto un verdetto in tutta la finestra.`,
+  );
+  console.log(
+    `Gate sempre inconclusive in questa run: ${alarms.map(([gate]) => gate).join(', ')}.`,
+  );
+  if (process.env.GITHUB_STEP_SUMMARY) {
+    fs.appendFileSync(
+      process.env.GITHUB_STEP_SUMMARY,
+      '## ⚠️ Gate del follow-up inconclusive per tutta la finestra\n\n' +
+      rows.join('\n') + '\n\n' +
+      'Il batch resta proceed-safe, ma il gate va riparato o la finestra continuerà a passare senza soppressioni.\n',
+    );
+  }
+}
+
 /**
  * Invoke an existing per-PR gate script as a subprocess. GITHUB_OUTPUT/STEP_SUMMARY
  * are blanked for the child so it only prints to stdout (no pollution of OUR outputs).
- * @returns {string|null} stdout, or null when inconclusive (proceed-safe).
+ * @returns {{output:string|null, reason:null|'gate-missing'|'gate-error'}}
  */
 function runGateOutput(scriptName, prNumber) {
   const gatePath = path.join(HERE, scriptName);
   if (!fs.existsSync(gatePath)) {
     recordGateFault(scriptName, 'assente', `nessun file in ${gatePath}`);
-    return null;
+    return { output: null, reason: 'gate-missing' };
   }
   try {
-    return execFileSync('node', [gatePath], {
-      encoding: 'utf-8',
-      maxBuffer: 32 * 1024 * 1024,
-      env: { ...process.env, PR_NUMBER: String(prNumber), GITHUB_OUTPUT: '', GITHUB_STEP_SUMMARY: '' },
-    });
+    return {
+      output: execFileSync('node', [gatePath], {
+        encoding: 'utf-8',
+        maxBuffer: 32 * 1024 * 1024,
+        env: { ...process.env, PR_NUMBER: String(prNumber), GITHUB_OUTPUT: '', GITHUB_STEP_SUMMARY: '' },
+      }),
+      reason: null,
+    };
   } catch (error) {
     // A gate can publish its verdict and then fail while flushing an output or
     // during cleanup. Preserve that real verdict before classifying the exit.
     const stdout = String(error?.stdout || '');
-    if (GATE_VERDICT.test(stdout)) return stdout;
+    if (GATE_VERDICT.test(stdout)) return { output: stdout, reason: null };
 
     const stderr = String(error?.stderr || '');
     // On some Node versions execFileSync puts the captured diagnostic only in
@@ -456,7 +491,7 @@ function runGateOutput(scriptName, prNumber) {
       ).trim().slice(0, 200);
       recordGateFault(scriptName, 'non eseguibile', detail);
     }
-    return null;
+    return { output: null, reason: 'gate-error' };
   }
 }
 
@@ -467,11 +502,27 @@ function gateBoolean(output, outputKey) {
 }
 
 function runGate(scriptName, prNumber, outputKey) {
-  return gateBoolean(runGateOutput(scriptName, prNumber), outputKey);
+  const result = runGateOutput(scriptName, prNumber);
+  const verdict = result.reason ? null : gateBoolean(result.output, outputKey);
+  const reason = result.reason || (verdict === null ? 'inconclusive' : null);
+  recordGateWindowResult(scriptName, reason);
+  return { verdict, reason, output: result.output };
+}
+
+function logGateNoVerdict(label, result, prNumber) {
+  if (result.verdict !== null) return;
+  if (result.reason === 'inconclusive') {
+    console.log(`PR #${prNumber}: ${label} gate inconclusive — PROCEED-SAFE (keep).`);
+  } else if (result.reason === 'gate-missing') {
+    console.log(`PR #${prNumber}: ${label} gate MISSING — PROCEED-SAFE (keep); la configurazione è già stata segnalata.`);
+  } else {
+    console.log(`PR #${prNumber}: ${label} gate non eseguibile — PROCEED-SAFE (keep); il guasto è già stato segnalato.`);
+  }
 }
 
 function emit(batch, dailyKey = triageDailyKey(), { collectionOk = true } = {}) {
   reportGateFaults();
+  reportGateWindowInconclusive();
   const csv = batch.join(',');
   const count = batch.length;
   const ok = collectionOk === true;
@@ -573,20 +624,21 @@ export function main() {
     }
 
     // Gate 1: grandchild-suppression. true → it's a follow-up fix → skip.
-    const fixGateOutput = runGateOutput('is-followup-fix-pr.mjs', n);
-    const isFix = gateBoolean(fixGateOutput, 'is_followup_fix');
-    const isPartialDailyFix = gateBoolean(fixGateOutput, 'followup_partial');
+    const fixGate = runGate('is-followup-fix-pr.mjs', n, 'is_followup_fix');
+    const isFix = fixGate.verdict;
+    const isPartialDailyFix = gateBoolean(fixGate.output, 'followup_partial');
     if (!shouldTriageAfterFixGate({ isFollowupFix: isFix, followupPartial: isPartialDailyFix })) {
       console.log(`PR #${n}: follow-up FIX (grandchild-suppression) → skip.`);
       continue;
     }
-    if (isFix === null) console.log(`PR #${n}: grandchild gate inconclusive — PROCEED-SAFE (keep).`);
+    if (isFix === null) logGateNoVerdict('grandchild', fixGate, n);
     if (isFix === true && isPartialDailyFix === true) {
       console.log(`PR #${n}: partial daily follow-up FIX → keep for parent-bucket triage; no grandchild issue.`);
     }
 
     // Gate 2: no-op candidate pre-gate. false → nothing to triage → skip.
-    const hasCand = runGate('followup-has-candidates.mjs', n, 'has_candidates');
+    const candidateGate = runGate('followup-has-candidates.mjs', n, 'has_candidates');
+    const hasCand = candidateGate.verdict;
     if (!shouldTriageAfterCandidateGate({ hasCandidates: hasCand, followupPartial: isPartialDailyFix })) {
       console.log(`PR #${n}: no plausible candidate (no-op gate) → skip.`);
       continue;
@@ -594,7 +646,7 @@ export function main() {
     if (hasCand === false && isPartialDailyFix === true) {
       console.log(`PR #${n}: partial daily follow-up FIX has no ordinary candidate → keep to inspect parent bucket for new findings.`);
     }
-    if (hasCand === null) console.log(`PR #${n}: candidate gate inconclusive — PROCEED-SAFE (keep).`);
+    if (hasCand === null) logGateNoVerdict('candidate', candidateGate, n);
 
     batch.push(n);
     console.log(`PR #${n}: passes both gates → added to batch.`);

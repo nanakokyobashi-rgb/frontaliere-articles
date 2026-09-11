@@ -12,6 +12,8 @@
  * the next full build overwrites them with. `host/host-drift.test.mjs` is the
  * guard.
  */
+import { FIREBASE_AUTH_SESSION_MARKER_KEY } from './firebaseAuthPersistence';
+
 export const SEO_STATIC_CSS_FILENAME = 'seo-static.css';
 
 /**
@@ -183,11 +185,12 @@ export const FC_PUBLISHER_ID = ADSENSE_CLIENT_ID.replace(/^ca-/, '');
 /**
  * The `hasAccess()` localStorage probe cannot embed the Firebase Web API key:
  * it is public runtime configuration, so static article HTML must remain free
- * of it. The stable Auth namespace answers the same synchronous question until
- * the hydrated app has loaded runtime config and can narrow the check to its
- * active project.
+ * of it. authService writes an explicit project-independent marker after
+ * Firebase confirms the session. Reading only that marker answers the
+ * synchronous pre-bootstrap question without mistaking another project's Auth
+ * namespace for this site's session.
  */
-const OFFERWALL_AUTH_CHECK = "for(var i=0;i<window.localStorage.length;i++){var k=window.localStorage.key(i);if(k&&k.indexOf('firebase:authUser:')===0)return true;}";
+const OFFERWALL_AUTH_CHECK = `if(window.localStorage.getItem('${FIREBASE_AUTH_SESSION_MARKER_KEY}')==='true')return true;`;
 
 export const OFFERWALL_FC_SNIPPET = `<script>(function(){var g=window.googlefc=window.googlefc||{};var ow=g.offerwall=g.offerwall||{};var cc=ow.customchoice=ow.customchoice||{};if(cc.registry)return;function hasAccess(){try{if(window.localStorage.getItem('newsletter_subscribed')==='true')return true;${OFFERWALL_AUTH_CHECK}}catch(e){}return false;}cc.registry={initialize:function(params){var E=cc.InitializeResponseEnum||{};if(hasAccess()){return Promise.resolve(E.ACCESS_GRANTED||'ACCESS_GRANTED');}window.__ftOfferwallLang=(params&&params.offerwallLanguageCode)||null;return Promise.resolve(E.ACCESS_NOT_GRANTED||'ACCESS_NOT_GRANTED');},show:function(){var fn=window.__ftOfferwallSubscribe;function run(f){try{return Promise.resolve(f(window.__ftOfferwallLang)).then(function(ok){return !!ok;});}catch(e){return Promise.resolve(false);}}if(typeof fn!=='function'){return new Promise(function(resolve){var settled=false;function settle(ok){if(settled)return;settled=true;resolve(!!ok);}var q=window.__ftOfferwallShowQueue=window.__ftOfferwallShowQueue||[];var timer=setTimeout(function(){settle(false);},10000);q.push(function(hook){if(settled)return;clearTimeout(timer);run(hook).then(settle,function(){settle(false);});});});}return run(fn);}};})();</script>
  <script>(function(){function loadFc(){if(!document.querySelector('script[data-fc-loader]')){var s=document.createElement('script');s.async=true;s.src='https://fundingchoicesmessages.google.com/i/${FC_PUBLISHER_ID}?ers=1';s.setAttribute('data-fc-loader','1');document.head.appendChild(s);}(function sig(){if(!window.frames['googlefcPresent']){if(document.body){var f=document.createElement('iframe');f.style='width:0;height:0;border:none;z-index:-1000;left:-1000px;top:-1000px;';f.style.display='none';f.name='googlefcPresent';document.body.appendChild(f);}else{setTimeout(sig,0);}}})();}function ricFb(cb){if(document.readyState==='complete'){setTimeout(cb,200);}else{window.addEventListener('load',function(){setTimeout(cb,200);},{once:true});}}function schedule(){(window.requestIdleCallback||ricFb)(loadFc,{timeout:4000});}if(document.readyState==='loading'){window.addEventListener('DOMContentLoaded',schedule,{once:true});}else{schedule();}})();</script>`;

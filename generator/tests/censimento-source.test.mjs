@@ -268,6 +268,41 @@ test('la sorgente raggiungibile segue anche un import dinamico', () => {
     + 'come uno statico');
 });
 
+test('reachableSource attraversa TS e lo stripper conserva import type, generici e choke-point', () => {
+  const dir = mkTree({
+    'root.ts': [
+      "import type { Payload } from './payload';",
+      "import { build } from './payload';",
+      'const value = build<Payload>({ id: \'ok\' });',
+      '// commento TS da togliere: dist/api/comment-only',
+      'const write = (file) => writeFileSync(file, distTarget);',
+    ].join('\n'),
+    'payload.ts': [
+      'export type Payload = { id: string };',
+      'export const build = <T extends Payload>(value: T): T => value;',
+      "export const distTarget = 'dist/api/manifest.json';",
+    ].join('\n'),
+    'root.mjs': "import './payload';\n",
+  });
+  try {
+    const rootTs = path.join(dir, 'root.ts');
+    const stripped = codeOnly(fs.readFileSync(rootTs, 'utf8'));
+    assert.doesNotMatch(stripped, /comment-only/, 'la riga di commento TS deve essere rimossa');
+    assert.match(stripped, /build<Payload>/, 'la sintassi generica deve restare codice');
+
+    const reachable = createReachableSource();
+    const PUBLISHED = /dist\/api/;
+    assert.match(reachable(rootTs), PUBLISHED, 'un root TS deve raggiungere il payload TS');
+    assert.doesNotMatch(
+      reachable(path.join(dir, 'root.mjs')),
+      PUBLISHED,
+      'un root .mjs non deve inventare un import implicito del solo payload.ts',
+    );
+  } finally {
+    fs.rmSync(dir, { recursive: true, force: true });
+  }
+});
+
 test('un ciclo di import non tronca la sorgente per gli altri importatori', () => {
   // #922 item 2. A→B→A: la visita che parte da A calcola per B il combinato
   // `srcB + ''`, perche' il ritorno su A e' il taglio del ciclo. Prima quella

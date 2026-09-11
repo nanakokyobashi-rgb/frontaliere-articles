@@ -85,10 +85,11 @@ const DIRS = ['scripts/ci', 'scripts/ci/lib', 'scripts/lib'];
 // gli stessi di `import-closure.test.mjs` e di
 // `loop-drift-check.mjs:resolvedLocalImports()`.
 //
-// `.ts` prima dei gemelli `.mjs`/`.js`: i rami di fallback si attivano solo per
-// un importatore senza estensione, cioe' TypeScript, e li' `./foo` accanto a
-// `foo.ts` e `foo.mjs` risolve il `.ts`. Le quattro copie della lista devono
-// muoversi insieme (#1029 le unifichera'), ordine compreso.
+// `.ts` prima dei gemelli `.mjs`/`.js`, ma solo quando l'importatore e' `.ts`
+// (o `.tsx`). Un importatore `.mjs` segue la risoluzione ESM: `./foo` non puo'
+// diventare `foo.ts` per il solo fatto che il file esiste accanto. Le quattro
+// copie della lista devono muoversi insieme (#1029 le unifichera'), ordine
+// compreso.
 //
 // Prima qui c'era `if (!path.extname(target)) target += '.mjs'`: un unico
 // candidato, scelto da una euristica che sbaglia in due modi opposti. Un
@@ -98,13 +99,14 @@ const DIRS = ['scripts/ci', 'scripts/ci/lib', 'scripts/lib'];
 // `./lib/foo.config` — dove `.config` non e' un'estensione di modulo — non
 // riceveva nessun fallback. Provare i candidati invece di indovinarne uno
 // toglie l'euristica di mezzo.
-function resolutionCandidates(base) {
+function resolutionCandidates(base, importer) {
+  const tsImporter = ['.ts', '.tsx'].includes(path.extname(importer || '').toLowerCase());
   return [
     base,
-    `${base}.ts`,
+    ...(tsImporter ? [`${base}.ts`] : []),
     `${base}.mjs`,
     `${base}.js`,
-    path.join(base, 'index.ts'),
+    ...(tsImporter ? [path.join(base, 'index.ts')] : []),
     path.join(base, 'index.mjs'),
     path.join(base, 'index.js'),
   ];
@@ -117,8 +119,8 @@ function resolutionCandidates(base) {
  * modulo, e contarla come risolta renderebbe il fallback fail-open — un guard
  * che sbagliava in rosso diventerebbe uno che sbaglia in verde.
  */
-function resolveRelative(base) {
-  for (const candidate of resolutionCandidates(base)) {
+function resolveRelative(base, importer) {
+  for (const candidate of resolutionCandidates(base, importer)) {
     try {
       if (fs.statSync(path.join(ROOT, candidate)).isFile()) return candidate;
     } catch {
@@ -152,9 +154,9 @@ test('ogni import relativo degli script del ciclo risolve a un file esistente', 
     for (const spec of importSpecifiers(src)) {
       if (!spec.startsWith('.')) continue;
       const base = path.normalize(path.join(path.dirname(rel), spec));
-      const target = resolveRelative(base);
+      const target = resolveRelative(base, rel);
       if (!target) {
-        broken.push(`${rel} → ${spec} (provati: ${resolutionCandidates(base).join(', ')})`);
+        broken.push(`${rel} → ${spec} (provati: ${resolutionCandidates(base, rel).join(', ')})`);
         continue;
       }
       walk(target);
@@ -171,6 +173,13 @@ test('ogni import relativo degli script del ciclo risolve a un file esistente', 
     `Import non risolti — questi script fallirebbero a runtime con ERR_MODULE_NOT_FOUND, ` +
       `dopo essere passati indenni da node --check:\n  ${broken.join('\n  ')}`,
   );
+});
+
+test('un importatore .mjs non risolve un import estensionless tramite solo .ts', () => {
+  const base = 'scripts/ci/fixture/only-ts';
+  assert.equal(resolutionCandidates(base, 'scripts/ci/entry.mjs').includes(`${base}.ts`), false);
+  assert.equal(resolutionCandidates(base, 'scripts/ci/entry.mjs').includes(path.join(base, 'index.ts')), false);
+  assert.equal(resolutionCandidates(base, 'scripts/ci/entry.ts').includes(`${base}.ts`), true);
 });
 
 test('gli script del ciclo non introducono dipendenze npm non dichiarate', () => {

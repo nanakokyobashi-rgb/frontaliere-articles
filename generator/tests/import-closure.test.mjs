@@ -75,9 +75,10 @@ function sourceFiles(dir, acc = []) {
 // `loop-scripts-closure.test.mjs`, con in piu' i due rami `.ts`.
 //
 // `.ts` prima dei gemelli `.mjs`/`.js`: i rami di fallback si attivano solo per
-// un importatore senza estensione, cioe' TypeScript, e li' `./foo` accanto a
-// `foo.ts` e `foo.mjs` risolve il `.ts`. Le quattro copie della lista devono
-// muoversi insieme (#1029 le unifichera'), ordine compreso.
+// un importatore TypeScript (`.ts`/`.tsx`). Da un importatore `.mjs` un
+// `./foo` estensionless non puo' diventare `foo.ts` solo perche' quel file
+// esiste accanto: sotto Node sarebbe ERR_MODULE_NOT_FOUND. Le quattro copie
+// della lista devono muoversi insieme (#1029 le unifichera'), ordine compreso.
 //
 // Perche' non basta il path nudo: `sourceFiles()` include i file `.ts` sotto
 // generator/ (services/, data/, build-plugins/), e in TypeScript l'import
@@ -87,13 +88,14 @@ function sourceFiles(dir, acc = []) {
 // rosso questo gate su codice corretto: non un difetto trovato, un difetto
 // inventato. Zero casi nell'albero di oggi, quindi il buco era latente — ma un
 // gate che sbaglia sul codice giusto viene disattivato, non riparato.
-function resolutionCandidates(base) {
+function resolutionCandidates(base, importer) {
+  const tsImporter = ['.ts', '.tsx'].includes(path.extname(importer || '').toLowerCase());
   return [
     base,
-    `${base}.ts`,
+    ...(tsImporter ? [`${base}.ts`] : []),
     `${base}.mjs`,
     `${base}.js`,
-    path.join(base, 'index.ts'),
+    ...(tsImporter ? [path.join(base, 'index.ts')] : []),
     path.join(base, 'index.mjs'),
     path.join(base, 'index.js'),
   ];
@@ -107,8 +109,8 @@ function resolutionCandidates(base) {
  * come risolta renderebbe il fallback fail-open — cioe' trasformerebbe un gate
  * che sbagliava in rosso in uno che sbaglia in verde, che e' peggio.
  */
-function resolveOnDisk(base) {
-  for (const candidate of resolutionCandidates(base)) {
+function resolveOnDisk(base, importer) {
+  for (const candidate of resolutionCandidates(base, importer)) {
     try {
       if (fs.statSync(candidate).isFile()) return candidate;
     } catch {
@@ -125,8 +127,8 @@ test('every relative import under generator/ resolves to a file that exists', ()
     for (const spec of importSpecifiers(src)) {
       if (!spec.startsWith('.')) continue;
       const abs = path.resolve(path.dirname(file), spec);
-      if (!resolveOnDisk(abs)) {
-        const tried = resolutionCandidates(abs)
+      if (!resolveOnDisk(abs, file)) {
+        const tried = resolutionCandidates(abs, file)
           .map((c) => path.relative(GENERATOR_ROOT, c))
           .join(', ');
         missing.push(`${path.relative(GENERATOR_ROOT, file)} → ${spec} (provati: ${tried})`);
@@ -146,15 +148,17 @@ test('la risoluzione prova le estensioni, e non e\' diventata fail-open', () => 
     fs.mkdirSync(path.join(dir, 'plain'));
 
     // Il caso della issue: `./foo` con `foo.ts` accanto risolve.
-    assert.equal(resolveOnDisk(path.join(dir, 'foo')), path.join(dir, 'foo.ts'));
+    assert.equal(resolveOnDisk(path.join(dir, 'foo'), path.join(dir, 'entry.ts')), path.join(dir, 'foo.ts'));
+    // Da un `.mjs` lo stesso specificatore non carica implicitamente il `.ts`.
+    assert.equal(resolveOnDisk(path.join(dir, 'foo'), path.join(dir, 'entry.mjs')), null);
     // Lo specificatore che porta gia' l'estensione continua a risolvere per primo.
-    assert.equal(resolveOnDisk(path.join(dir, 'bare.mjs')), path.join(dir, 'bare.mjs'));
+    assert.equal(resolveOnDisk(path.join(dir, 'bare.mjs'), path.join(dir, 'entry.mjs')), path.join(dir, 'bare.mjs'));
     // Una cartella con index risolve all'index, non alla cartella.
-    assert.equal(resolveOnDisk(path.join(dir, 'pkg')), path.join(dir, 'pkg', 'index.ts'));
+    assert.equal(resolveOnDisk(path.join(dir, 'pkg'), path.join(dir, 'entry.ts')), path.join(dir, 'pkg', 'index.ts'));
     // E cio' che non esiste NON risolve: il fallback non e' fail-open.
-    assert.equal(resolveOnDisk(path.join(dir, 'bar')), null);
+    assert.equal(resolveOnDisk(path.join(dir, 'bar'), path.join(dir, 'entry.mjs')), null);
     // Nemmeno una directory senza index, che `existsSync` da solo direbbe risolta.
-    assert.equal(resolveOnDisk(path.join(dir, 'plain')), null);
+    assert.equal(resolveOnDisk(path.join(dir, 'plain'), path.join(dir, 'entry.ts')), null);
   } finally {
     fs.rmSync(dir, { recursive: true, force: true });
   }

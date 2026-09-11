@@ -210,7 +210,7 @@ test('gate presente con verdetto NO-OP: la PR non entra nel batch', () => {
   assert.doesNotMatch(stdout, /batch_prs=4242/);
 });
 
-test('gate girato e INCONCLUSIVE: resta silenzioso (proceed-safe legittimo)', () => {
+test('gate girato e INCONCLUSIVE: distinto dal guasto e allarmato se tutta la finestra', () => {
   const { stdout, summary } = runInSandbox({
     // Gira, esce 0, ma non stampa la chiave attesa → incertezza vera.
     'is-followup-fix-pr.mjs': "console.log('niente di parsabile');\n",
@@ -220,7 +220,26 @@ test('gate girato e INCONCLUSIVE: resta silenzioso (proceed-safe legittimo)', ()
   assert.doesNotMatch(stdout, /::error/, 'Un gate che ha girato e non sa decidere non è un guasto.\n' + stdout);
   assert.equal(summary.includes('Gate del follow-up NON eseguiti'), false, 'Nessuna sezione guasti attesa.\n' + summary);
   assert.match(stdout, /grandchild gate inconclusive/, 'Resta il log proceed-safe di sempre.\n' + stdout);
+  assert.match(
+    stdout,
+    /::warning title=Gate del follow-up sempre inconclusive::is-followup-fix-pr\.mjs/,
+    'Una finestra interamente inconclusive deve alzare un allarme distinto dal gate mancante.\n' + stdout,
+  );
+  assert.match(summary, /Gate del follow-up inconclusive per tutta la finestra/);
+  assert.match(summary, /is-followup-fix-pr\.mjs.*inconclusive su 1\/1/);
   assert.match(stdout, /batch_prs=4242/, 'Proceed-safe invariato.\n' + stdout);
+});
+
+test('ogni gate interamente inconclusive nella finestra viene nominato', () => {
+  const { stdout, summary } = runInSandbox({
+    'is-followup-fix-pr.mjs': "console.log('nessun verdetto');\n",
+    'followup-has-candidates.mjs': "console.log('nessun verdetto');\n",
+  });
+
+  assert.match(stdout, /::warning title=Gate del follow-up sempre inconclusive::is-followup-fix-pr\.mjs, followup-has-candidates\.mjs/);
+  assert.match(summary, /is-followup-fix-pr\.mjs.*inconclusive su 1\/1/);
+  assert.match(summary, /followup-has-candidates\.mjs.*inconclusive su 1\/1/);
+  assert.match(stdout, /batch_prs=4242/, 'L\'allarme non cambia il proceed-safe.\n' + stdout);
 });
 
 // ── FATALE SOLO SU «assente» — decisione del proprietario, 2026-09-07 ────────

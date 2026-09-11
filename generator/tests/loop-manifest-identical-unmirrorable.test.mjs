@@ -93,7 +93,7 @@ test('dipendenze assenti o non dichiarate → mai un verdetto (fail-open)', () =
 
 // ── 2. L'estrazione degli import ───────────────────────────────────────────
 
-const known = (c) => ['a/b/dep.mjs', 'a/b/braced.mjs', 'a/b/star.mjs', 'a/b/noext.mjs'].includes(c);
+const known = (c) => ['a/b/dep.mjs', 'a/b/braced.mjs', 'a/b/star.mjs', 'a/b/noext.mjs', 'a/b/only-ts.ts'].includes(c);
 
 test('un import BRACED SU PIU\' RIGHE viene visto', () => {
   // La forma su cui `loop-scripts-closure.test.mjs` era cieco prima della sua
@@ -121,6 +121,11 @@ test('lo specificatore senza estensione risolve come in Node', () => {
   // engine/ e host/ usano la forma senza estensione: se non la si prova, la
   // dipendenza sparisce e il guard e' verde su un legame che esiste.
   assert.deepEqual(resolvedLocalImports('a/b/x.mjs', "import q from './noext';\n", known), ['a/b/noext.mjs']);
+});
+
+test('un importatore .mjs non risolve un estensionless tramite solo .ts', () => {
+  assert.deepEqual(resolvedLocalImports('a/b/x.mjs', "import q from './only-ts';\n", known), []);
+  assert.deepEqual(resolvedLocalImports('a/b/x.ts', "import q from './only-ts';\n", known), ['a/b/only-ts.ts']);
 });
 
 test('`..` risolve fuori dalla directory del file', () => {
