@@ -258,6 +258,12 @@ const DECLARED_ABSENT = {
       'Helper del contratto di chiusura del body presente nel repository del sito; il workflow '
       + 'del corpus mantiene il fallback Closes quando il helper non è disponibile localmente.',
   },
+  'scripts/ci/verify-crawler-contract-provenance.mjs :: scripts/lib/git-commit-data.sh': {
+    kind: 'site-only',
+    reason:
+      'Runtime helper posseduto dal repository del sito: il verificatore del corpus lo legge '
+      + 'via fetch remoto e non lo importa né lo esegue localmente.',
+  },
   '.github/workflows/post-merge-followup.yml :: auto-merge-on-lgtm.yml': {
     kind: 'site-only',
     reason:
