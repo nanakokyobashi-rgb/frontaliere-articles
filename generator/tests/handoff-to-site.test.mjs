@@ -604,12 +604,53 @@ test('#972: i gemelli che nessun trasporto porta giù sono quelli che il traspor
 });
 
 test('#1142: descentBlock usa la stessa regola fixture del trasporto', () => {
-  assert.equal(descentBlock({ path: 'scripts/ci/followup-drainer.mjs', mode: 'identical' }), null);
-  assert.match(descentBlock({ path: '.github/workflows/translate-pending.yml', mode: 'identical' }), /workflows/);
-  const fixture = { path: 'host/tests/shell-contract-functions.golden.json', mode: 'identical' };
-  assert.equal(descentBlock(fixture, { couplings: [] }), null, 'fixture senza blocchi di coupling segue il trasporto');
-  assert.match(descentBlock(fixture, { couplings: [{ path: 'scripts/ci/followup-drainer.mjs', mode: 'corpus-only' }] }), /fixture accoppiato/);
-  assert.match(descentBlock(fixture, { couplings: [{ path: 'tests/opaque.bin', mode: 'illeggibile', unreadable: 'EACCES' }] }), /non leggibili/);
+  const previous = process.env.PAT_WORKFLOWS_SCOPE;
+  delete process.env.PAT_WORKFLOWS_SCOPE;
+  try {
+    assert.equal(descentBlock({ path: 'scripts/ci/followup-drainer.mjs', mode: 'identical' }), null);
+    assert.match(descentBlock({ path: '.github/workflows/translate-pending.yml', mode: 'identical' }), /workflows/);
+    const fixture = { path: 'host/tests/shell-contract-functions.golden.json', mode: 'identical' };
+    assert.equal(descentBlock(fixture, { couplings: [] }), null, 'fixture senza blocchi di coupling segue il trasporto');
+    assert.match(descentBlock(fixture, { couplings: [{ path: '.github/workflows/translate-pending.yml', mode: 'identical' }] }), /fixture accoppiato/);
+    assert.match(descentBlock(fixture, { couplings: [{ path: 'scripts/ci/followup-drainer.mjs', mode: 'corpus-only' }] }), /fixture accoppiato/);
+    assert.match(descentBlock(fixture, { couplings: [{ path: 'tests/opaque.bin', mode: 'illeggibile', unreadable: 'EACCES' }] }), /non leggibili/);
+  } finally {
+    if (previous === undefined) delete process.env.PAT_WORKFLOWS_SCOPE;
+    else process.env.PAT_WORKFLOWS_SCOPE = previous;
+  }
+});
+
+test('#1142: un coupling permanent-blocked entra nello stranded e resta nel residual', () => {
+  const previous = process.env.PAT_WORKFLOWS_SCOPE;
+  delete process.env.PAT_WORKFLOWS_SCOPE;
+  try {
+    const fixture = 'host/tests/shell-contract-functions.golden.json';
+    const workflow = '.github/workflows/translate-pending.yml';
+    const stranded = new Set();
+    if (descentBlock({ path: fixture, mode: 'identical' }, {
+      couplings: [{ path: workflow, mode: 'identical' }],
+    })) stranded.add(fixture);
+
+    const body = 'Root cause: `'+fixture+'` è accoppiato a `'+workflow+'`, entrambi '
+      + '`mode: identical` nel repo `valerielinc-ops/frontaliere-si-o-no`; '
+      + 'la copia del workflow resta bloccata senza scope e verrebbe sovrascritta al mirror successivo.';
+    const d = handoffDecision({
+      verdict: 'blocked-workflows-scope',
+      body,
+      manifestSnapshot: {
+        absent: new Set(),
+        locked: new Map([[fixture, fixture], [workflow, workflow]]),
+        names: new Map([[fixture, fixture], [workflow, workflow]]),
+        stranded,
+      },
+    });
+    assert.equal(d.handoff, true);
+    assert.equal(d.close, false, 'un coupling che il trasporto non può copiare vieta la chiusura');
+    assert.deepEqual(d.residual, [fixture]);
+  } finally {
+    if (previous === undefined) delete process.env.PAT_WORKFLOWS_SCOPE;
+    else process.env.PAT_WORKFLOWS_SCOPE = previous;
+  }
 });
 
 test('#972: un `blocked-*` su un gemello che non scenderà mai consegna ma NON chiude', () => {

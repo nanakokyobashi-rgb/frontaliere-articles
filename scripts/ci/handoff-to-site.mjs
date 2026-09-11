@@ -138,6 +138,33 @@ export function readManifestSnapshot(manifestPath = MANIFEST_PATH) {
     }
   }
 
+  // `localCouplings()` espone il mode dichiarato, ma non il fatto che quel
+  // vicino sia escluso PER SEMPRE dal trasporto. In particolare un
+  // `identical` sotto `.github/workflows/` resta bloccato quando il token non
+  // ha lo scope `workflows`: passare solo `mode: identical` al ramo fixture lo
+  // farebbe sembrare trasportabile e lascerebbe il fixture fuori da `stranded`.
+  // Misuriamo prima la chiusura di `permanentBlock`, poi la passiamo a
+  // `descentBlock` così la permanenza si propaga lungo la stessa catena del
+  // trasporto vero.
+  const couplingsOf = new Map();
+  for (const f of files) {
+    if (MIRROR_LOCKED_MODES.has(f.mode) && isFixture(f.path)) {
+      couplingsOf.set(f.path, localCouplings(f.path, modeOf));
+    }
+  }
+  const blockedForever = new Set();
+  for (let changed = true; changed; ) {
+    changed = false;
+    for (const f of files) {
+      if (!MIRROR_LOCKED_MODES.has(f.mode) || blockedForever.has(f.path)) continue;
+      const couplings = couplingsOf.get(f.path) || [];
+      if (descentBlock(f, { couplings, blockedForever })) {
+        blockedForever.add(f.path);
+        changed = true;
+      }
+    }
+  }
+
   const absent = new Set();
   const locked = new Map();
   const names = new Map();
@@ -148,8 +175,7 @@ export function readManifestSnapshot(manifestPath = MANIFEST_PATH) {
     names.set(f.path, sitePath);
     if (MIRROR_LOCKED_MODES.has(f.mode)) {
       locked.set(f.path, sitePath);
-      const couplings = isFixture(f.path) ? localCouplings(f.path, modeOf) : [];
-      if (descentBlock(f, { couplings })) stranded.add(f.path);
+      if (blockedForever.has(f.path)) stranded.add(f.path);
     }
   }
   for (const f of files) {
@@ -248,9 +274,35 @@ export function mirrorLockedPaths(manifestPath = MANIFEST_PATH) {
  * passa gli accoppiamenti misurati da `localCouplings`, invece di trattare la
  * semplice forma «fixture» come un blocco permanente: altrimenti il hand-off
  * parcheggerebbe anche fixture che il trasporto copia davvero.
+ *
+ * `localCouplings` conserva il mode dichiarato, mentre `permanentBlock` guarda
+ * anche la destinazione effettiva: per esempio un gemello `identical` sotto
+ * `.github/workflows/` è `blockedForever` senza scope `workflows`. Prima di
+ * delegare la decisione al criterio condiviso rendiamo esplicita quella
+ * permanenza; `blockedForever` è la chiusura già calcolata dal manifest e
+ * permette di propagare il blocco anche lungo una catena fixture → fixture.
  */
-export function descentBlock(entry, { couplings = [] } = {}) {
-  return permanentBlock(entry, { outOfScopePrefixes: [], couplings });
+export function descentBlock(entry, { couplings = [], blockedForever = new Set() } = {}) {
+  const effectiveCouplings = couplings.map((coupling) => {
+    const directReason = permanentBlock(
+      { path: coupling.path, mode: coupling.mode },
+      { outOfScopePrefixes: [] },
+    );
+    const isBlockedForever = blockedForever.has(coupling.path) || Boolean(directReason);
+    if (!isBlockedForever) return coupling;
+    return {
+      ...coupling,
+      // `couplingBlockers()` condivide il criterio del trasporto attraverso
+      // il mode: uno stato effettivo permanente deve quindi entrare nella
+      // stessa lista anche quando il mode dichiarato era `identical`.
+      mode: coupling.mode === 'identical' ? 'blockedForever' : coupling.mode,
+      blockedForever: true,
+      permanentBlock: typeof directReason === 'string'
+        ? directReason
+        : `blockedForever: ${coupling.path}`,
+    };
+  });
+  return permanentBlock(entry, { outOfScopePrefixes: [], couplings: effectiveCouplings });
 }
 
 /**
