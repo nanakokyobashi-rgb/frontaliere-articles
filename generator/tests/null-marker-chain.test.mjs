@@ -59,6 +59,7 @@ import {
   DATASET_DROP_WARNING,
 } from '../scripts/lib/events-utils.mjs';
 import { buildWeekendDigestArticle } from '../scripts/lib/events-digest-content.mjs';
+import { enclosingFunctionByLine, TOP_LEVEL } from './lib/identifier-scope.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const CREATE_ARTICLE = readFileSync(path.join(__dirname, '..', 'scripts', 'create-article.mjs'), 'utf-8');
@@ -431,7 +432,9 @@ describe('slug: un titolo `Null` non produce /de/blog/null', () => {
       /^function localizedTitleSlugCandidate[\s\S]{0,400}?inspectSlugForPromptPlaceholder\(testo\)\.slug/,
       'l\u2019helper condiviso non attraversa piu\u2019 il classificatore: un titolo `Null` tornerebbe lo slug `null`',
     );
-    const codice = CREATE_ARTICLE.replace(/^\s*(?:\/\/|\*).*$/gm, '');
+    // Solo spazi orizzontali: `\s*` consumerebbe anche i newline e
+    // disallineerebbe l'indice di riga dal classificatore condiviso.
+    const codice = CREATE_ARTICLE.replace(/^[ \t]*(?:\/\/|\*).*$/gm, '');
     // Il vincolo NON e' sul nome dell'argomento: una regressione che scrive
     // `slugifySlugPart(data.content[locale].title)` o `slugifySlugPart(t)`
     // resterebbe verde su un'assertion legata a un elenco di identificatori,
@@ -452,9 +455,24 @@ describe('slug: un titolo `Null` non produce /de/blog/null', () => {
     );
     // Ancorate alla funzione che le contiene, non a una finestra di righe: due
     // righe aggiunte nel mezzo non devono far fallire il test.
+    // `codice` conserva le righe ma elimina le righe di commento. Il file
+    // completo contiene il wrapper CLI finale che questo lettore considera
+    // sbilanciato; per lo scope basta il tratto bilanciato che comprende
+    // `validate()` e i relativi helper. Le righe vuote iniziali riallineano gli
+    // indici assoluti usati dalle match sul sorgente completo.
+    const scopeStart = CREATE_ARTICLE.indexOf('function validate(data, opts = {}) {');
+    const scopeEndAnchor = CREATE_ARTICLE.indexOf('export function deriveAndSanitizeArticleSlugs(data) {');
+    const scopeEnd = CREATE_ARTICLE.indexOf('\n}', scopeEndAnchor) + 2;
+    assert.notEqual(scopeStart, -1, '`validate()` non trovata per la scansione dello scope');
+    assert.notEqual(scopeEndAnchor, -1, '`deriveAndSanitizeArticleSlugs()` non trovata per la scansione dello scope');
+    assert.ok(scopeEnd > scopeEndAnchor, 'la fine del tratto di scope non e\' stata trovata');
+    const prefixLines = CREATE_ARTICLE.slice(0, scopeStart).split('\n').length - 1;
+    const scopeSource = `${'\n'.repeat(prefixLines)}${CREATE_ARTICLE.slice(scopeStart, scopeEnd)}`;
+    const ownerByLine = enclosingFunctionByLine(scopeSource);
     const funzioneChiudente = (idx) => {
-      const m = [...codice.slice(0, idx).matchAll(/^(?:export\s+)?(?:async\s+)?function\s+([A-Za-z0-9_$]+)/gm)].pop();
-      return m ? m[1] : null;
+      const riga = codice.slice(0, idx).split('\n').length;
+      const owner = ownerByLine[riga];
+      return owner === TOP_LEVEL ? null : owner;
     };
     assert.deepEqual(
       nude.map((m) => funzioneChiudente(m.index)).sort(),

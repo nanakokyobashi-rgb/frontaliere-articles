@@ -103,6 +103,10 @@ function mutationMethods(text, identifier) {
   return [...text.matchAll(re)].map((match) => match[1] ?? match[3]);
 }
 
+function mutationMethodsForReference(reference, identifier) {
+  return mutationMethods(reference.text, reference.bindingName ?? identifier);
+}
+
 const ENV_KEYS = [
   'AI_MODELS_FORCE_CHAIN', 'AI_MODELS_PREFER', 'GH_MODELS_PAT',
   'GH_MODELS_PAT_2',
@@ -214,7 +218,7 @@ describe('#874/#864/#845 — una sola porta di scrittura verso ai_model_scores/_
 
     // La MUTAZIONE resta pinnata anche per FORMA: nominare il Set e scriverlo
     // sono due diritti diversi, e i lettori dell'allowlist hanno solo il primo.
-    const scritture = riferimenti.flatMap((r) => mutationMethods(r.text, '_dirtyModels')
+    const scritture = riferimenti.flatMap((r) => mutationMethodsForReference(r, '_dirtyModels')
       .map((metodo) => ({ ...r, metodo })));
     assert.deepEqual(
       scritture
@@ -252,8 +256,28 @@ describe('#874/#864/#845 — una sola porta di scrittura verso ai_model_scores/_
 
     assert.deepEqual(
       pin(`${base}function scorciatoia(id) {\n  const d = _dirtyModels;\n  d.add(id);\n}\n`).scoperti,
-      ['6: const d = _dirtyModels; [in scorciatoia]'],
+      [
+        '6: const d = _dirtyModels; [in scorciatoia]',
+        '7: d.add(id); [in scorciatoia]',
+      ],
       'un ALIAS del Set deve far rosso: `d.add(id)` scrive il documento condiviso quanto la porta',
+    );
+    const lettore = `${base}function getStats() {
+  const d = _dirtyModels;
+  d.add(id);
+}
+`;
+    const lettoreRefs = pinIdentifierToFunctions(lettore, '_dirtyModels', {
+      functions: ['_proposeLedgerWrite', 'getStats'],
+      declaration: /^const _dirtyModels = new Set\(\);$/,
+    }).riferimenti;
+    const lettoreScritture = lettoreRefs.flatMap((r) => mutationMethodsForReference(r, '_dirtyModels')
+      .map((metodo) => ({ ...r, metodo })))
+      .filter(({ metodo, fn }) => metodo === 'add' && fn === 'getStats');
+    assert.deepEqual(
+      lettoreScritture.map(({ line, text, fn }) => `${line}: ${text} [in ${fn}]`),
+      ['7: d.add(id); [in getStats]'],
+      'un alias dentro un lettore ammesso deve restare soggetto al vincolo di forma della mutazione (#1196)',
     );
     assert.deepEqual(
       pin(`${base}function scorciatoia() {\n  return _dirtyModels.add.bind(_dirtyModels);\n}\n`).scoperti,
@@ -279,7 +303,7 @@ describe('#874/#864/#845 — una sola porta di scrittura verso ai_model_scores/_
       declaration: /^const _dirtyModels = new Set\(\);$/,
     }).riferimenti;
     assert.deepEqual(
-      formeRefs.flatMap((r) => mutationMethods(r.text, '_dirtyModels')),
+      formeRefs.flatMap((r) => mutationMethodsForReference(r, '_dirtyModels')),
       ['add', 'add'],
       'il contatore deve vedere due mutazioni sulla stessa riga, incluse optional e computed',
     );
@@ -1406,7 +1430,7 @@ describe('#895 — il memo del cap appreso e la porta del ledger sono due cose d
     // la tabella metodo→funzione, non solo le due `.set(` che esistono oggi.
     const scritture = Object.entries(SCRITTORI_EXHAUST).flatMap(([nome]) =>
       pinIdentifierToFunctions(SRC, nome, PORTE_EXHAUST[nome]).riferimenti.flatMap((r) =>
-        mutationMethods(r.text, nome)
+        mutationMethodsForReference(r, nome)
           .filter((metodo) => ['set', 'delete', 'clear'].includes(metodo))
           .map((metodo) => ({ ...r, nome, metodo }))));
     assert.deepEqual(
@@ -1434,7 +1458,7 @@ describe('#895 — il memo del cap appreso e la porta del ledger sono due cose d
       functions: ['_setExhaustReason', '_shouldSkipExhausted'],
       declaration: /^const _exhaustReason = new Map\(\);$/,
     }).riferimenti;
-    const violazioneLettore = lettoreRefs.flatMap((r) => mutationMethods(r.text, '_exhaustReason')
+    const violazioneLettore = lettoreRefs.flatMap((r) => mutationMethodsForReference(r, '_exhaustReason')
       .filter((metodo) => ['set', 'delete', 'clear'].includes(metodo))
       .map((metodo) => ({ ...r, metodo })))
       .filter(({ metodo, fn }) => !SCRITTORI_EXHAUST._exhaustReason[metodo]?.includes(fn));
