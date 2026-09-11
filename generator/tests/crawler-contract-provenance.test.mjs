@@ -129,6 +129,27 @@ test('#1264 — una flag runtime presente ma assente dal sorgente è rossa', () 
   assert.match(verdict.reason, /--slice-only/);
 });
 
+test('#1264 — un piano runtime vuoto è rosso quando il runtime è dichiarato', () => {
+  const verdict = evaluateRuntimeFlagChecks([], new Map(), {
+    runtimeDeclared: true,
+  });
+  assert.equal(verdict.red, true);
+  assert.equal(verdict.counts.unobserved, 1);
+  assert.match(verdict.reason, /nessuna invocazione runtime/);
+});
+
+test('#1264 — il dispatch bash accetta `==` e ignora gli esempi nei commenti', () => {
+  const supported = Buffer.from(
+    '# [[ "${1:-}" == "--slice-only" ]] è solo documentazione\n' +
+    'if [[ "${1:-}" == "--slice-only" ]]; then\n',
+  );
+  const commented = Buffer.from(
+    '# if [[ "${1:-}" == "--slice-only" ]]; then\n',
+  );
+  assert.equal(isRuntimeFlagSupported(supported, '--slice-only'), true);
+  assert.equal(isRuntimeFlagSupported(commented, '--slice-only'), false);
+});
+
 test('#1264 — la provenienza runtime distingue 404, rete e path non dichiarato', () => {
   const contract = { siteRuntimePaths: [CRAWLER_COMMIT_RUNTIME_PATH] };
   const artifacts = [{

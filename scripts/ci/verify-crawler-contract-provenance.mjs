@@ -244,15 +244,19 @@ export function planRuntimeFlagChecks(
 export function isRuntimeFlagSupported(bytes, flag) {
   if (!bytes || !RUNTIME_FLAG_PATTERN.test(flag)) return false;
   const text = Buffer.from(bytes).toString('utf8');
+  const executableText = text
+    .split(/\r?\n/u)
+    .filter((line) => !line.trimStart().startsWith('#'))
+    .join('\n');
   const escaped = escapeRegExp(flag);
   const comparison = new RegExp(
-    "\\$\\{1:-\\}[\\s'\"]*=\\s*['\"]?" +
+    "\\$\\{1:-\\}[\\s'\"]*={1,2}\\s*['\"]?" +
       escaped +
       "['\"]?(?=[\\s\\];]|$)",
     'u',
   );
   const caseLabel = new RegExp('(?:^|[|;&\\s])' + escaped + '\\s*\\)', 'mu');
-  return comparison.test(text) || caseLabel.test(text);
+  return comparison.test(executableText) || caseLabel.test(executableText);
 }
 
 /**
@@ -261,7 +265,15 @@ export function isRuntimeFlagSupported(bytes, flag) {
  * failure. A transport error remains proceed-safe unless it blinds every
  * runtime check, matching the digest verifier's policy.
  */
-export function evaluateRuntimeFlagChecks(checks, observed) {
+export function evaluateRuntimeFlagChecks(
+  checks,
+  observed,
+  {
+    runtimeDeclared = false,
+    runtimePath = CRAWLER_COMMIT_RUNTIME_PATH,
+    unobservedArtifacts = [],
+  } = {},
+) {
   const results = [];
   for (const check of checks || []) {
     const seen = observed instanceof Map ? observed.get(check.field) : observed?.[check.field];
@@ -285,6 +297,39 @@ export function evaluateRuntimeFlagChecks(checks, observed) {
     results.push({ ...check, state, detail });
   }
 
+  // Un artifact che il checkout locale non riesce a leggere non deve far
+  // saltare l'intero report prima dei fetch remoti: resta una osservazione
+  // `unobserved`, così il caso isolato è proceed-safe e quello cieco diventa
+  // rosso insieme agli altri controlli.
+  for (const artifact of unobservedArtifacts || []) {
+    results.push({
+      field: `${artifact.file}#runtime`,
+      sitePath: runtimePath,
+      runtimePath,
+      flag: null,
+      artifactFiles: [artifact.file],
+      state: 'unobserved',
+      detail: `artifact locale non leggibile: ${String(artifact.error || 'errore sconosciuto').slice(0, 120)}`,
+    });
+  }
+
+  // Un piano vuoto mentre il contratto dichiara il runtime è un fallimento
+  // del guard, non la prova che il runtime non venga invocato: altrimenti un
+  // template generato con una forma di comando non riconosciuta potrebbe
+  // cancellare silenziosamente tutti i controlli.
+  const emptyRuntimePlan = results.length === 0 && runtimeDeclared;
+  if (emptyRuntimePlan) {
+    results.push({
+      field: `${runtimePath}#<nessuna-invocazione-rilevata>`,
+      sitePath: runtimePath,
+      runtimePath,
+      flag: null,
+      artifactFiles: [],
+      state: 'unobserved',
+      detail: 'nessuna invocazione runtime rilevata negli artifact dichiarati',
+    });
+  }
+
   const counts = {};
   for (const result of results) counts[result.state] = (counts[result.state] || 0) + 1;
   const broken = results.filter((result) => (
@@ -301,6 +346,11 @@ export function evaluateRuntimeFlagChecks(checks, observed) {
       broken.length + '/' + results.length +
       ' flag runtime invocate dagli artifact non sono garantite dal sorgente remoto: ' +
       broken.map((result) => result.flag + ' (' + result.state + ')').join(', ');
+  } else if (emptyRuntimePlan) {
+    red = true;
+    reason =
+      'nessuna invocazione runtime rilevata negli artifact dichiarati: ' +
+      'il piano non può autoassolversi per assenza di controlli.';
   } else if (results.length > 0 && unobserved === results.length) {
     red = true;
     reason =
@@ -589,10 +639,21 @@ async function main() {
   const contract = JSON.parse(fs.readFileSync(CONTRACT_PATH, 'utf8'));
   const manifest = JSON.parse(fs.readFileSync(MANIFEST_PATH, 'utf8'));
   const checks = planProvenanceChecks(contract, manifest);
-  const artifactSources = (contract.artifacts || []).map((artifact) => ({
-    file: artifact.file,
-    text: fs.readFileSync(path.join(ROOT, '.github/workflows', artifact.file), 'utf8'),
-  }));
+  const unreadableArtifacts = [];
+  const artifactSources = [];
+  for (const artifact of contract.artifacts || []) {
+    try {
+      artifactSources.push({
+        file: artifact.file,
+        text: fs.readFileSync(path.join(ROOT, '.github/workflows', artifact.file), 'utf8'),
+      });
+    } catch (error) {
+      unreadableArtifacts.push({
+        file: artifact.file,
+        error: error.message || String(error),
+      });
+    }
+  }
   const runtimeChecks = planRuntimeFlagChecks(contract, artifactSources);
 
   // Un fetch per path DISTINTO: i 24 `sourceSha256` puntano a 24 file diversi,
@@ -627,7 +688,10 @@ async function main() {
 
   const verdict = mergeVerdicts(
     evaluateProvenance(checks, observed),
-    evaluateRuntimeFlagChecks(runtimeChecks, runtimeObserved),
+    evaluateRuntimeFlagChecks(runtimeChecks, runtimeObserved, {
+      runtimeDeclared: (contract.siteRuntimePaths || []).includes(CRAWLER_COMMIT_RUNTIME_PATH),
+      unobservedArtifacts: unreadableArtifacts,
+    }),
   );
   console.log(args.has('--json') ? JSON.stringify(verdict, null, 2) : formatReport(verdict));
   // Un token rifiutato non e' un guasto — le osservazioni sopra sono state
