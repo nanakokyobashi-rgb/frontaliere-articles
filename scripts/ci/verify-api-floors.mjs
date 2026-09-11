@@ -52,7 +52,8 @@ import {
 // Stessa funzione del writer e del gate manifest.counts in build-api.mjs: un
 // `<item>` citato dentro un CDATA non e' un elemento del feed, e contarlo qui
 // alzerebbe la misura sopra il pavimento mascherando un feed troncato.
-import { countXmlTags, stripNonMarkup } from '../lib/count-xml-tags.mjs';
+import { countXmlTags } from '../lib/count-xml-tags.mjs';
+import { stripNonMarkup } from '../lib/count-xml-tags.mjs';
 
 export const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
 
