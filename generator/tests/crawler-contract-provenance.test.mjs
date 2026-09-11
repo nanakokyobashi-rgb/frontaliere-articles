@@ -36,6 +36,7 @@ import {
   SITE_LOGIC_DIR_FALLBACKS,
   evaluateProvenance,
   evaluateRuntimeFlagChecks,
+  formatReport,
   isLogicSource,
   isRuntimeFlagSupported,
   planProvenanceChecks,
@@ -59,6 +60,7 @@ const PROVENANCE_SCRIPT = readFileSync(
 
 const HASH = 'a'.repeat(64);
 const OTHER = 'b'.repeat(64);
+const SOURCE_COMMIT = 'c'.repeat(40);
 
 const fixtureManifest = {
   files: [
@@ -75,8 +77,16 @@ const fixtureContract = {
       sourceLogic: 'crawler-group-01-logic.yml',
       sourceSha256: HASH,
       artifactSha256: HASH,
+      generatorSha256: HASH,
     },
   ],
+  sourceRef: 'main',
+  sourceCommit: SOURCE_COMMIT,
+  artifactObservation: {
+    generatorSha256: HASH,
+    sourceRef: 'main',
+    sourceCommit: SOURCE_COMMIT,
+  },
 };
 
 test('#1264 — il piano runtime raccoglie ogni flag invocata dagli artifact', () => {
@@ -201,23 +211,37 @@ test('`generatedBy` col solo nome del repo o con owner/repo dà lo stesso path',
 test('il piano copre generatore, sorgente e artifact di ogni voce', () => {
   const checks = planProvenanceChecks(fixtureContract, fixtureManifest);
   assert.deepEqual(
-    checks.map((c) => [c.field, c.sitePath]),
+    checks.filter((c) => !c.localOnly).map((c) => [c.field, c.sitePath]),
     [
       ['generatorSha256', 'scripts/generate-crawler-group-workflows.mjs'],
       ['crawler-group-01.yml#sourceSha256', `${SITE_LOGIC_DIR}/crawler-group-01-logic.yml`],
       ['crawler-group-01.yml#artifactSha256', '.github/corpus-workflows/crawler-group-01.yml'],
     ],
   );
+  assert.deepEqual(
+    checks.filter((c) => c.localOnly).map((c) => c.field),
+    [
+      'contract#sourceRef',
+      'contract#sourceCommit',
+      'contract#artifactObservation.generatorSha256',
+      'contract#artifactObservation.sourceRef',
+      'contract#artifactObservation.sourceCommit',
+      'crawler-group-01.yml#generatorSha256',
+    ],
+  );
+  assert.equal(checks.filter((c) => !c.localOnly).every((c) => c.observationRef === 'main'), true);
 });
 
-test('il piano reale copre i 49 digest del contratto committato', () => {
+test('il piano reale copre i 49 digest e la lineage del contratto committato', () => {
   const checks = planProvenanceChecks(CONTRACT, MANIFEST);
-  assert.equal(checks.length, 1 + CONTRACT.artifacts.length * 2);
-  assert.equal(checks.length, 49);
+  assert.equal(checks.filter((c) => !c.localOnly).length, 1 + CONTRACT.artifacts.length * 2);
+  assert.equal(checks.filter((c) => c.localOnly).length, 5 + CONTRACT.artifacts.length);
+  assert.equal(checks.length, 5 + CONTRACT.artifacts.length + 1 + CONTRACT.artifacts.length * 2);
+  assert.equal(checks.filter((c) => !c.localOnly).length, 49);
   // Nessun digest resta senza una coordinata sul sito: un `sitePath` null
   // sarebbe `undeclared`, cioè rosso, ma è meglio vederlo qui che allo
   // schedule del giorno dopo.
-  assert.deepEqual(checks.filter((c) => !c.sitePath || !c.expected), []);
+  assert.deepEqual(checks.filter((c) => !c.localOnly && (!c.sitePath || !c.expected)), []);
   for (const artifact of CONTRACT.artifacts) {
     assert.ok(
       checks.some((c) => c.field === `${artifact.file}#sourceSha256` && c.expected === artifact.sourceSha256),
@@ -253,8 +277,9 @@ test('un generatore mosso sul sito diventa `drifted` e rosso', () => {
     ['crawler-group-01.yml#sourceSha256', { sha256: HASH }],
     ['crawler-group-01.yml#artifactSha256', { sha256: HASH }],
   ]));
-  assert.equal(verdict.results[0].state, 'drifted');
-  assert.match(verdict.results[0].detail, /il sito serve bbbbbbbbbbbbbbbb/);
+  const generator = verdict.results.find((r) => r.field === 'generatorSha256');
+  assert.equal(generator.state, 'drifted');
+  assert.match(generator.detail, /il sito serve bbbbbbbbbbbbbbbb/);
   assert.equal(verdict.red, true);
 });
 
@@ -265,7 +290,8 @@ test('un path del sito sparito è `absent`, non un verde per assenza di prove', 
     ['crawler-group-01.yml#sourceSha256', { sha256: null }],
     ['crawler-group-01.yml#artifactSha256', { sha256: HASH }],
   ]));
-  assert.equal(verdict.results[1].state, 'absent');
+  const source = verdict.results.find((r) => r.field.endsWith('#sourceSha256'));
+  assert.equal(source.state, 'absent');
   assert.equal(verdict.red, true);
 });
 
@@ -273,7 +299,8 @@ test('tutto verificato è verde, e il piano completo non lascia buchi', () => {
   const checks = planProvenanceChecks(fixtureContract, fixtureManifest);
   const verdict = evaluateProvenance(checks, new Map(checks.map((c) => [c.field, { sha256: HASH }])));
   assert.equal(verdict.red, false);
-  assert.equal(verdict.counts.verified, 3);
+  assert.equal(verdict.counts.verified, checks.length);
+  assert.equal(verdict.observationRef, 'main');
   assert.equal(verdict.reason, null);
 });
 
@@ -284,7 +311,8 @@ test('un errore di rete isolato non è rosso, ma se lo sono tutte il verdetto no
     ['crawler-group-01.yml#sourceSha256', { sha256: HASH }],
     ['crawler-group-01.yml#artifactSha256', { sha256: HASH }],
   ]));
-  assert.equal(partial.results[0].state, 'unobserved');
+  const generator = partial.results.find((r) => r.field === 'generatorSha256');
+  assert.equal(generator.state, 'unobserved');
   assert.equal(partial.red, false, 'un 502 isolato non deve produrre un falso rosso');
 
   const blind = evaluateProvenance(checks, new Map(checks.map((c) => [c.field, { error: 'ENOTFOUND' }])));
@@ -340,7 +368,7 @@ test('il `sourceSha256` usa solo la directory osservata', () => {
     siteLogicDirs({}).map((d) => `${d}/crawler-group-01-logic.yml`),
   );
   assert.equal(source.sitePathCandidates.length, 1);
-  for (const c of checks.filter((c) => !c.field.endsWith('#sourceSha256'))) {
+  for (const c of checks.filter((c) => !c.localOnly && !c.field.endsWith('#sourceSha256'))) {
     assert.deepEqual(c.sitePathCandidates, [c.sitePath], c.field);
   }
 });
@@ -371,6 +399,64 @@ test('un source logic richiede la firma strutturale di un reusable workflow', ()
   assert.equal(isLogicSource(residual, 'crawler-group-01-logic.yml'), false);
   assert.equal(isLogicSource(valid, 'crawler-group-02-logic.yml'), true);
   assert.equal(isLogicSource(valid, 'crawler-group-01.yml'), false);
+});
+
+test('un source logic tollera commenti YAML e flow-style senza leggere esempi', () => {
+  const trailingComment = Buffer.from(
+    'on: { workflow_call: {} } # trigger osservato\n' +
+    'jobs: {}\n',
+  );
+  const blockComment = Buffer.from(
+    'on: # trigger osservato\n' +
+    '  workflow_call: {}\n' +
+    'jobs: {} # job osservato\n',
+  );
+  const commentOnly = Buffer.from(
+    '# on: { workflow_call: {} }\n' +
+    '# jobs: {}\n',
+  );
+  const quotedText = Buffer.from(
+    'on: { name: "workflow_call" }\n' +
+    'jobs: {}\n',
+  );
+  assert.equal(isLogicSource(trailingComment, 'crawler-group-01-logic.yml'), true);
+  assert.equal(isLogicSource(blockComment, 'crawler-group-01-logic.yml'), true);
+  assert.equal(isLogicSource(commentOnly, 'crawler-group-01-logic.yml'), false);
+  assert.equal(isLogicSource(quotedText, 'crawler-group-01-logic.yml'), false);
+});
+
+test('la lineage pinned resta locale mentre il report osserva la head corrente', () => {
+  const checks = planProvenanceChecks(fixtureContract, fixtureManifest);
+  const observed = new Map(checks.map((check) => [check.field, { sha256: HASH }]));
+  const clean = evaluateProvenance(checks, observed);
+  assert.equal(clean.observationRef, 'main');
+  assert.match(clean.results.find((r) => r.field === 'generatorSha256').detail, /^$/);
+  assert.match(formatReport(clean), /@main/);
+
+  const driftedChecks = planProvenanceChecks({
+    ...fixtureContract,
+    artifactObservation: { ...fixtureContract.artifactObservation, generatorSha256: OTHER },
+  }, fixtureManifest);
+  const drifted = evaluateProvenance(
+    driftedChecks,
+    new Map(driftedChecks.map((check) => [check.field, { sha256: HASH }])),
+  );
+  const lineage = drifted.results.find((r) => r.field === 'contract#artifactObservation.generatorSha256');
+  assert.equal(lineage.state, 'drifted');
+  assert.equal(drifted.red, true);
+});
+
+test('un sourceRef non canonico resta lineage invalida e non diventa ref remoto', () => {
+  const checks = planProvenanceChecks({
+    ...fixtureContract,
+    sourceRef: 'main/../../altro/main',
+  }, fixtureManifest);
+  const sourceRef = checks.find((check) => check.field === 'contract#sourceRef');
+  assert.equal(sourceRef.observed, null);
+  assert.equal(checks.filter((check) => !check.localOnly).every((check) => check.observationRef === 'main'), true);
+  const verdict = evaluateProvenance(checks, new Map(checks.map((check) => [check.field, { sha256: HASH }])));
+  assert.equal(verdict.red, true);
+  assert.match(verdict.reason, /sourceRef/);
 });
 
 test('un residuo omonimo non diventa `drifted`', async () => {
@@ -487,7 +573,8 @@ test('24 sorgenti presenti ma non riconosciute accusano la coordinata, non gli a
   const verdict = evaluateProvenance(checks, observed);
   assert.equal(verdict.red, true);
   assert.match(verdict.reason, /SITE_LOGIC_DIR/);
-  assert.match(verdict.reason, /risposte non portano il marker/);
+  assert.match(verdict.reason, /rispondono senza il marker/);
+  assert.doesNotMatch(verdict.reason, /li ha spostati/);
   assert.doesNotMatch(verdict.reason, /stantii/);
 });
 
