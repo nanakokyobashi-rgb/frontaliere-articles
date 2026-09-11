@@ -318,6 +318,10 @@ test('importSpecifierRe non accoppia un import senza estensione ai gemelli omoni
   assert.ok(!mjs.test("from './shared/viteAssetHashRx'"), 'la forma senza estensione non può scegliere il gemello .mjs');
   assert.ok(mjs.test("from './shared/viteAssetHashRx.mjs'"));
 
+  const jsOnly = importSpecifierRe('jsOnly.mjs', { allowExtensionless: true });
+  assert.ok(jsOnly.test("from './shared/jsOnly'"), 'un file ESM senza gemello TS può essere importato senza estensione');
+  assert.ok(jsOnly.test("from './shared/jsOnly.mjs'"));
+
   const manifest = JSON.parse(fs.readFileSync(path.join(ROOT, 'scripts/ci/loop-sync-manifest.json'), 'utf8'));
   const modeOf = new Map(manifest.files.map((e) => [e.path, e.mode]));
   const tsCouplings = localCouplings('host/shared/viteAssetHashRx.ts', modeOf);
@@ -330,6 +334,26 @@ test('importSpecifierRe non accoppia un import senza estensione ai gemelli omoni
     !mjsCouplings.some((c) => c.path === 'host/shared/chunkFiles.ts'),
     'lo stesso import senza estensione non deve accoppiare anche il gemello .mjs',
   );
+});
+
+test('un file JS/ESM senza gemello TypeScript vede il consumer extensionless', () => {
+  const target = 'host/shared/transport-extensionless-js-only-1263.mjs';
+  const consumer = 'host/transport-extensionless-js-only-1263.test.mjs';
+  fs.writeFileSync(path.join(ROOT, target), 'export const value = 1;\n');
+  fs.writeFileSync(
+    path.join(ROOT, consumer),
+    "import { value } from './shared/transport-extensionless-js-only-1263';\n",
+  );
+  try {
+    const couplings = localCouplings(target, new Map());
+    assert.ok(
+      couplings.some((entry) => entry.path === consumer),
+      'un import senza estensione verso un JS-only non deve diventare invisibile',
+    );
+  } finally {
+    fs.rmSync(path.join(ROOT, target), { force: true });
+    fs.rmSync(path.join(ROOT, consumer), { force: true });
+  }
 });
 
 test("l\u2019apostrofo italiano non apre piu\u2019 la classe di virgolette (#934 item 2)", () => {

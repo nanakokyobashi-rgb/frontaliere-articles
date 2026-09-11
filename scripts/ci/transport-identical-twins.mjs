@@ -978,23 +978,29 @@ function walkSubtree(root, acc = [], blind = new Map()) {
  * `host/` adotta gli specificatori `.js` il falso silenzio sarebbe rientrato
  * senza che nulla diventasse rosso.
  */
-export function importSpecifierRe(base) {
+const TYPE_SCRIPT_EXTENSIONS = new Set(['.ts', '.tsx', '.mts', '.cts']);
+const JAVASCRIPT_EXTENSIONS = new Set(['.js', '.jsx', '.mjs', '.cjs']);
+
+/**
+ * @param {string} base
+ * @param {{allowExtensionless?: boolean}} [options]
+ */
+export function importSpecifierRe(base, { allowExtensionless = false } = {}) {
   const stem = base.replace(/\.(?:ts|tsx|mts|cts|mjs|cjs|js|jsx)$/, '');
   if (stem === base) return null;
   const esc = stem.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
   const extension = base.slice(stem.length);
-  // L'assenza di estensione è una convenzione TypeScript, non una proprietà
-  // del basename: per `.mjs`/`.js` accettiamo solo la forma esplicita, mentre
-  // per i sorgenti TS enumera la coda valida per ciascuna estensione più la
-  // forma senza estensione. Così `viteAssetHashRx.mjs` non cattura l'import
-  // `./viteAssetHashRx` che appartiene alla voce `.ts` omonima.
+  // L'assenza di estensione è una convenzione TypeScript quando esiste un
+  // gemello TS. Per un file JS/ESM che non ha quel gemello, invece, è una forma
+  // risolvibile e va osservata: altrimenti il consumer resta invisibile.
   const suffixesByExtension = {
     '.ts': ['', '.js'],
     '.tsx': ['', '.js', '.jsx'],
     '.mts': ['', '.mjs'],
     '.cts': ['', '.cjs'],
   };
-  const suffixes = suffixesByExtension[extension] || [extension];
+  const suffixes = suffixesByExtension[extension]
+    || (allowExtensionless ? ['', extension] : [extension]);
   const suffixPattern = suffixes
     .map((suffix) => suffix.replace('.', '\\.'))
     .join('|');
@@ -1011,12 +1017,27 @@ export function manualTransportReason(manual = []) {
 
 export function localCouplings(rel, modeOf) {
   const base = rel.split('/').pop();
-  const specifier = importSpecifierRe(base);
   const dir = path.dirname(rel);
   const found = new Set();
   const unreadable = new Map();
 
   const scan = walkSubtree(couplingScanRoot(rel));
+  const extension = path.extname(base);
+  const relStem = extension ? rel.slice(0, rel.length - extension.length) : rel;
+  const hasTypeScriptTwin = JAVASCRIPT_EXTENSIONS.has(extension)
+    && scan.files.some((candidate) => (
+      candidate !== rel
+      && path.dirname(candidate) === dir
+      && (() => {
+        const candidateExtension = path.extname(candidate);
+        return candidateExtension
+          && candidate.slice(0, candidate.length - candidateExtension.length) === relStem
+          && TYPE_SCRIPT_EXTENSIONS.has(candidateExtension);
+      })()
+    ));
+  const specifier = importSpecifierRe(base, {
+    allowExtensionless: !hasTypeScriptTwin,
+  });
   for (const [d, reason] of scan.blind) unreadable.set(d, reason);
   for (const other of scan.files) {
     if (other === rel) continue;
