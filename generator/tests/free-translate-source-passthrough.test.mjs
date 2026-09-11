@@ -189,7 +189,7 @@ describe('freeTranslate — guardia «uscita == sorgente»', () => {
     assert.match(out, /Translated chunk/);
     assert.match(out, /## FAQ/);
     assert.ok(myMemoryCalls > 2);
-    assert.equal(snapshot().passthroughs - before.passthroughs, 0);
+    assert.equal(snapshot().passthroughs - before.passthroughs, 1);
     assert.equal(snapshot().hits - before.hits, 1);
   });
 

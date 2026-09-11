@@ -1468,8 +1468,8 @@ export async function freeTranslate({ text, sourceLang, targetLang, fieldType = 
       // tradotti produrrebbe testo misto. Un resto breve (titolo, URL o
       // placeholder) resta invece nell'assemblato e viene giudicato da
       // `tryTier` sul campo completo, senza buttare via le traduzioni buone.
-      if (isSubstantivePassthroughChunk(chunk)
-        && rejectedAsPassthrough('myMemory', chunk, normalized, _outcome)) return '';
+      if (rejectedAsPassthrough('myMemory', chunk, normalized, _outcome)
+        && isSubstantivePassthroughChunk(chunk)) return '';
       parts.push(normalized);
     }
     // `return joined` e non un confronto locale: questo e' il ramo dei testi
