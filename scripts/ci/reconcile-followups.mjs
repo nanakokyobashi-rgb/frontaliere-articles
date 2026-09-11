@@ -14,8 +14,10 @@
  * whether those tokens are now present verbatim in the cited file. Legacy per-PR items
  * may also carry explicit negative acceptance (a stale expression must be absent): that
  * path is usable only with a merged `Addresses #N` provenance and live `Target file:`
- * metadata. A hit means the asserted behavior/symbol already exists → the item is likely
- * done-but-open.
+ * metadata. A small, explicit set of legacy semantic proofs covers equivalent landed
+ * forms (for example an ordered assertion or remote compare replacing `git merge-base`);
+ * each proof checks the complete structure and remains fail-closed. A hit means the
+ * asserted behavior/symbol already exists → the item is likely done-but-open.
  *
  * TWO-TIER, double-confirm-across-time (replaces the old never-close rule, which left
  * the deterministically-detected `maybe-resolved` pile to a human who never came — the
@@ -61,6 +63,7 @@ import {
   hasUnterminatedMarkdownFence,
   isDailyBucketTitle,
   parseFollowupItems,
+  suggestedActionText,
   updateFollowupItemState,
   splitFollowupItems,
 } from './followup-resolution-match.mjs';
@@ -459,6 +462,106 @@ export function negativeAcceptanceTokens(itemText) {
   return [...negative];
 }
 
+function legacySemanticAcceptance(itemText, executable) {
+  const action = suggestedActionText(itemText);
+  const source = String(executable || '');
+
+  // Some old cards prescribe an observable ordering rather than a token that
+  // survives verbatim. Keep this proof narrow: both names must be explicit
+  // inline-code identifiers and the live declarations must occur in order.
+  const order = action.match(/`([A-Za-z_$][\w$]*)`\s+(?:prima di|before)\s+`([A-Za-z_$][\w$]*)`/i);
+  if (order) {
+    const declaration = (name) => `(?:\\b(?:const|let|var)\\s+${escapedRegExp(name)}\\b|\\b${escapedRegExp(name)}\\s*=(?!=|>))`;
+    const ordered = new RegExp(`${declaration(order[1])}[\\s\\S]*${declaration(order[2])}`);
+    if (ordered.test(source)) {
+      return { rule: 'ordered-declarations', tokens: order.slice(1) };
+    }
+  }
+
+  // A cycle item can legitimately retain another `text: ''` fallback for a
+  // read error. Its acceptance is the branch-local replacement at re-entry:
+  // the ancestor guard must return that node's own source, not the empty text.
+  if (/`text:\s*ownSource`/.test(action)
+      && /`text:\s*''`/.test(action)
+      && /ancestors\.has\(file\)[\s\S]{0,220}return\s*\{\s*text:\s*ownSource,\s*cyclic:\s*true\s*\}/.test(source)) {
+    return { rule: 'cycle-reentry-own-source', tokens: ['ancestors.has(file)', 'text: ownSource'] };
+  }
+
+  // A legacy action may describe a structured log with placeholders (`N`,
+  // `M`) while the implementation uses runtime expressions. Require every
+  // literal fragment, in order, in executable content; placeholders themselves
+  // are deliberately not accepted as evidence.
+  const template = action.match(/`([^`]*\bN\b[^`]*\bM\b[^`]*)`/);
+  if (template && /reconcile|fallit|failed/i.test(template[1])) {
+    let cursor = 0;
+    const fragments = template[1]
+      .split(/\b[MN]\b/)
+      .filter((fragment) => /[A-Za-z0-9]/.test(fragment));
+    const allPresent = fragments.every((fragment) => {
+      const at = source.indexOf(fragment, cursor);
+      if (at < 0) return false;
+      cursor = at + fragment.length;
+      return true;
+    });
+    if (allPresent) return { rule: 'template-fragments', tokens: fragments };
+  }
+
+  // The old routing card described the positive integer guard with `n > 0`,
+  // while the landed implementation expresses the equivalent fail-closed
+  // predicate as `only <= 0` before exiting. Check the complete guard shape,
+  // not a loose occurrence of either operator.
+  if (/`n\s*>\s*0`/.test(action) && /`fetchCandidates\(\)`/.test(action)
+      && /--issue/.test(source)
+      && /Number\.isInteger\(\w+\)[\s\S]{0,180}(?:<=\s*0|<\s*1)[\s\S]{0,120}process\.exitCode\s*=\s*1/.test(source)) {
+    return { rule: 'positive-integer-issue-guard', tokens: ['Number.isInteger', 'process.exitCode'] };
+  }
+
+  // The rescue finding was landed under a descriptive predicate rather than
+  // the helper name proposed by the old card. Require the queue-managed guard
+  // and every veto that makes the rescue safe; a function name alone is not
+  // enough evidence.
+  if (/`isDrainPromotable\(\)`/.test(action)
+      && /agent:fix/.test(action)
+      && /agent:fix-queued/.test(action)
+      && /function\s+isStuckFixRescueCandidate\s*\(/.test(source)
+      && /isQueueManaged\(iss\)/.test(source)
+      && /!has\(iss,\s*LBL_QUEUED\)/.test(source)
+      && /!has\(iss,\s*LBL_PARKED\)/.test(source)
+      && /!isDecomposedParent\(iss\)/.test(source)) {
+    return { rule: 'stuck-fix-rescue-predicate', tokens: ['isStuckFixRescueCandidate'] };
+  }
+
+  // The decompose item cites only a line location. Its falsifiable acceptance
+  // is the atomic transition itself: one command must add and remove the
+  // labels together, so an interrupted session cannot leave the pair split.
+  if (/`issue-decompose\.yml:L154`/.test(action)
+      && /gh issue edit[^\n]*--add-label[^\n]*decomposed:[^\n]*--remove-label/.test(source)) {
+    return {
+      rule: 'atomic-decompose-label-edit',
+      tokens: ['gh issue edit', '--add-label decomposed:', '--remove-label'],
+    };
+  }
+
+  // The orphan-push card proposed git's ancestor check; the landed workflow
+  // uses the remote compare API so squash merges and the default branch are
+  // represented correctly. Require both containment checks and their guarded
+  // status handling before accepting that equivalent implementation.
+  if (/git merge-base --is-ancestor/.test(action)
+      && /DEFAULT_BRANCH/.test(source)
+      && /compare\/\$\{SHA\}\.\.\.\$\{DEFAULT_BRANCH\}/.test(source)
+      && /compare\/\$\{SHA\}\.\.\.\$\{HEAD_OID\}/.test(source)
+      && /MAIN_CONTAINMENT/.test(source)
+      && /CONTAINMENT/.test(source)
+      && /ahead/.test(source)
+      && /identical/.test(source)) {
+    return { rule: 'remote-containment-equivalent', tokens: ['DEFAULT_BRANCH', 'HEAD_OID'] };
+  }
+
+  return null;
+}
+
+export { legacySemanticAcceptance };
+
 function normalizedPrFiles(pr) {
   return new Set((Array.isArray(pr?.files) ? pr.files : [])
     .map((file) => typeof file === 'string' ? file : file?.path)
@@ -496,7 +599,8 @@ function targetFileInAddressedProvenance(pr, targetFile) {
  *      content (comments are ignored, string literals are retained); an absent
  *      token is recorded as negative evidence, while a token that remains as a
  *      legitimate sub-expression is accepted only when the strict positive
- *      matcher resolves the item.
+ *      matcher resolves the item. A legacy semantic alias is accepted only when
+ *      its complete structural predicate is true in the same live target.
  *
  * The PR provenance is what prevents an absence check from becoming a false
  * positive. No old token is added to the source or to the issue body.
@@ -533,12 +637,18 @@ export function legacyAddressEvidence(itemText, issueNumber, io, addressedPrs = 
     // content must either satisfy the shared positive matcher, or explicitly
     // satisfy a fully-negative acceptance; this prevents a Target-file-only
     // item from resolving on declarative provenance alone.
-    const contentProof = strict.resolved || negativeProof;
+    const semantic = legacySemanticAcceptance(itemText, executable);
+    const contentProof = strict.resolved || negativeProof || !!semantic;
     if (!contentProof) return { ...empty, targetFiles, negativeTokens: absentNegativeTokens };
 
     const evidence = [
-      { kind: 'legacy-content', file: targetFile, mode: strict.resolved ? 'positive' : 'negative' },
+      {
+        kind: 'legacy-content',
+        file: targetFile,
+        mode: strict.resolved ? 'positive' : negativeProof ? 'negative' : `semantic:${semantic.rule}`,
+      },
       ...(strict.resolved ? strict.evidence : []),
+      ...(semantic ? [{ kind: 'legacy-semantic', file: targetFile, rule: semantic.rule, tokens: semantic.tokens }] : []),
       {
         kind: 'legacy-address',
         issue,
