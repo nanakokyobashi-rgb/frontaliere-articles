@@ -27,5 +27,9 @@ test('Claude fallback is suppressed when Codex side effects are possible', () =>
   assert.match(action, /steps\.codex\.outcome == 'failure'/);
   assert.match(action, /steps\.codex\.outputs\.side_effect_detected == 'false'/);
   assert.match(action, /restore_sanitized_git_config/);
+  const stopGhStart = action.indexOf('        stop_gh_bridge() {');
+  const stopGhEnd = action.indexOf('        trap stop_gh_bridge EXIT', stopGhStart);
+  assert.notEqual(stopGhStart, -1);
+  assert.match(action.slice(stopGhStart, stopGhEnd), /restore_sanitized_git_config \|\| true/);
   assert.match(action, /cmp -s -- \"\$codex_state_before\" \"\$codex_state_after\"/);
 });
