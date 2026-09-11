@@ -163,8 +163,12 @@ function parseSeoBlogs(fs, path, rootDir, seoDir, seoFiles) {
 
     for (let i = 0; i < entryPositions.length; i++) {
       const { articleId, start } = entryPositions[i];
-      const end = i + 1 < entryPositions.length ? entryPositions[i + 1].start : start + 4000;
-      const block = src.slice(start, Math.min(end, start + 4000));
+      const end = i + 1 < entryPositions.length
+        ? entryPositions[i + 1].start
+        : src.length;
+      // A successor is the authoritative boundary; the trailing entry ends at
+      // the source boundary. There is no safe fixed span for either case.
+      const block = src.slice(start, end);
 
       // `(?:[^"\\]|\\.)*`, not `[^"]+`: create-article escapes literal quotes in
       // these values (`.replace(/"/g, '\\"')`), and the naive class stops at the

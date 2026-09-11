@@ -87,6 +87,11 @@ export function corpusPath(rel) {
       const mapped = `${to}${bare.slice(from.length)}`;
       return trailingSlash ? `${mapped}/` : mapped;
     }
+    const prefixRoot = from.slice(0, -1);
+    if (bare === prefixRoot) {
+      const mapped = to.endsWith('/') ? to.slice(0, -1) : to;
+      return trailingSlash ? `${mapped}/` : mapped;
+    }
   }
 
   // `services/` is the generator's main-layout namespace. Returning an
@@ -94,7 +99,7 @@ export function corpusPath(rel) {
   // the corpus root while all its existence checks still inspect `content/`.
   // State under `data/`, `public/` and `scripts/` deliberately remains
   // pass-through; only this source namespace is fail-closed.
-  if (bare.startsWith('services/')) {
+  if (bare === 'services' || bare.startsWith('services/')) {
     throw new Error(`corpusPath: path main non mappato: ${rel}`);
   }
 

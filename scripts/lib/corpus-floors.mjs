@@ -240,11 +240,6 @@ export function sectionFloor(root, section, retention = FLOOR_RETENTION) {
  */
 export const SEO_CHUNK_DIR = path.join('content', 'seo');
 
-// Misurato sul corpus reale: il blocco piu' lungo osservato e' 4414 caratteri.
-// Il margine evita che il parser del gate torni cieco appena una voce cresce,
-// mantenendo comunque un limite esplicito e condiviso con build-api.
-export const SEO_ENTRY_WINDOW = 5000;
-
 /**
  * Le voci di un chunk SEO che diventano davvero `<item>`, aggiunte a `into`.
  *
@@ -258,10 +253,9 @@ export const SEO_ENTRY_WINDOW = 5000;
  * capace di muoversi da sola (due su sette letti, feed fermo tre mesi).
  *
  * I criteri ricalcano quelli di `parseSeoBlogs`, che e' il produttore: stesso
- * regex di inizio voce, stessi campi obbligatori e una finestra di riferimento
- * portata a 5000 caratteri. Il margine rispetto alla finestra storica di 4000
- * evita che il pavimento riproduca in silenzio lo stesso troncamento del
- * produttore. L'insieme e' un Set di articleId perche' la',
+ * regex di inizio voce, stessi campi obbligatori e lo stesso confine, cioe'
+ * l'inizio della voce successiva o la fine del sorgente per l'ultima voce.
+ * Cosi' il pavimento conta esattamente cio' che il feed puo' leggere. L'insieme e' un Set di articleId perche' la',
  * un livello sopra, le voci finiscono in una Map chiavata per articleId: due
  * chunk che citano lo stesso id producono UN item, non due.
  *
@@ -277,8 +271,12 @@ export function collectSeoEntryMetadata(src, into = new Map()) {
 
   for (let i = 0; i < positions.length; i += 1) {
     const { id, start } = positions[i];
-    const end = i + 1 < positions.length ? positions[i + 1].start : src.length;
-    const block = src.slice(start, Math.min(end, start + SEO_ENTRY_WINDOW));
+    const end = i + 1 < positions.length
+      ? positions[i + 1].start
+      : src.length;
+    // Match parseSeoBlogs: a successor is the exact boundary and the final
+    // entry runs to the end of the source, with no fixed truncation.
+    const block = src.slice(start, end);
     into.set(id, {
       keywords: block.match(/keywords:\s*'((?:[^'\\]|\\.)*)'/)?.[1],
       headline: block.match(/"headline":\s*"((?:[^"\\]|\\.)*)"/)?.[1],
