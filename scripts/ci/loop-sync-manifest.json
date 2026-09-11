@@ -575,8 +575,8 @@
       "reason": "Questo file.",
       "baseline": {
         "site": null,
-        "corpus": "b1654ab15577a976",
-        "alignedAt": "2026-08-07"
+        "corpus": "b30c519db59fbbb8",
+        "alignedAt": "2026-09-11"
       }
     },
     {
@@ -1406,7 +1406,7 @@
       "path": "generator/scripts/fix-faq-locales.mjs",
       "sitePath": "scripts/fix-faq-locales.mjs",
       "mode": "adapted",
-      "reason": "Riparazione delle FAQ per locale. Differenza comune a tutti i gemelli trasportati: `PROJECT_ROOT` risale di due livelli invece di uno, perche' il trasporto ha spostato lo script da `scripts/` a `generator/scripts/`. Oltre a quello: `corpusPath()` sul BODY_DIR, e i due write passano da un helper `writeCorpusFile` che applica la guardia sui control char C0 (issue #66). Le due divergenze hanno la stessa radice — questo repo e' quello dove i byte finiscono davvero in content/ — e sono le stesse di generate-events-digest-article.mjs e batch-add-faq-to-articles.mjs.",
+      "reason": "Riparazione delle FAQ per locale. Differenza comune a tutti i gemelli trasportati: `PROJECT_ROOT` risale di due livelli invece di uno, perche' il trasporto ha spostato lo script da `scripts/` a `generator/scripts/`. Oltre a quello: `corpusPath()` sul BODY_DIR, e i due write passano da un helper `writeCorpusFile` che applica la guardia sui control char C0 (issue #66). Le due divergenze hanno la stessa radice — questo repo e' quello dove i byte finiscono davvero in content/ — e sono le stesse di generate-events-digest-article.mjs e batch-add-faq-to-articles.mjs. Il parser `../../scripts/lib/parse-positive-num.mjs` e' una dipendenza corpus-only dichiarata nel manifest: non va copiato nel gemello del sito.",
       "baseline": {
         "site": "4b873db68cf657f2",
         "corpus": "bc212c55ece38bc7",

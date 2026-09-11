@@ -52,8 +52,10 @@ test('il limite FAQ assente resta illimitato, gli input invalidi falliscono chiu
   assert.equal(parseFaqLimitArgs([]), Infinity);
   assert.equal(normalizeFaqLimit('0'), 0);
   assert.equal(normalizeFaqLimit('2'), 2);
+  assert.equal(parseFaqLimitArgs(['--limit=3']), 3);
   assert.throws(() => normalizeFaqLimit('non-numerico'), /intero >= 0/);
   assert.throws(() => normalizeFaqLimit('-1'), /intero >= 0/);
+  assert.throws(() => parseFaqLimitArgs(['--limit=non-numerico']), /intero >= 0/);
   assert.throws(() => parseFaqLimitArgs(['--limit']), /richiede un valore/);
   assert.throws(() => parseFaqLimitArgs(['--limit', '--dry-run']), /richiede un valore/);
 });
@@ -69,6 +71,13 @@ test('i due entry point rifiutano --limit invalido con exit code 2', () => {
       assert.match(result.stderr, /Invalid --limit/);
     }
   }
+
+  const invalidSection = spawnSync(process.execPath, [FIX, '--section=inesistente'], {
+    encoding: 'utf8',
+    env: { ...process.env, DRY_RUN: '1' },
+  });
+  assert.equal(invalidSection.status, 1);
+  assert.match(invalidSection.stderr, /Invalid --section="inesistente"/);
 });
 
 test('il batch writer rifiuta --concurrency invalido con exit code 2', () => {
@@ -129,8 +138,8 @@ test('una potatura sopra il pavimento registra una scrittura parziale senza cong
   );
   assert.match(
     src,
-    /nextFaqRejection\(previousRejection, issue\.itFaq, \{ prunedWrite: true \}\)/,
-    'la potatura pubblicata deve avere un contatore distinto dal rifiuto sotto pavimento',
+    /nextFaqRejection\(previousRejection, issue\.itFaq, \{[\s\S]*prunedWrite: true,[\s\S]*keptPairs: toWrite\.length,[\s\S]*\}\)/,
+    'la potatura pubblicata deve persistere il numero di coppie conservate',
   );
   assert.match(
     src,
@@ -161,12 +170,36 @@ test('il ledger ferma il rifiuto deterministico dopo due run sulla stessa sorgen
   assert.equal(nextFaqRejection(second, changedSource).consecutive, 1);
   assert.equal(nextFaqRejection({ source: faqSourceFingerprint(source), consecutive: 'corrupt' }, source).consecutive, 1);
 
-  const partialFirst = nextFaqRejection(undefined, source, { prunedWrite: true });
-  const partialSecond = nextFaqRejection(partialFirst, source, { prunedWrite: true });
+  const partialFirst = nextFaqRejection(undefined, source, { prunedWrite: true, keptPairs: 3 });
+  const partialSecond = nextFaqRejection(partialFirst, source, { prunedWrite: true, keptPairs: 3 });
   assert.equal(partialFirst.prunedWrite, true);
+  assert.equal(partialFirst.keptPairs, 3);
   assert.equal(partialSecond.consecutive, FAQ_REJECTION_MAX_CONSECUTIVE);
   assert.equal(shouldSkipFaqRejection(partialSecond, source), true, 'dopo due potature uguali si salta solo la ritraduzione');
   assert.equal(nextFaqRejection(partialSecond, source).consecutive, FAQ_REJECTION_MAX_CONSECUTIVE + 1, 'il tipo cambia ma la sorgente uguale mantiene il contatore');
+
+  const improved = nextFaqRejection(partialSecond, source, { prunedWrite: true, keptPairs: 5 });
+  assert.equal(improved.keptPairs, 5);
+  assert.equal(improved.consecutive, 1, 'una potatura che conserva piu coppie riapre il tentativo');
+
+  const belowFloor = nextFaqRejection(partialSecond, source);
+  assert.equal(belowFloor.prunedWrite, undefined, 'il rifiuto sotto pavimento non viene scambiato per scrittura');
+  assert.equal(belowFloor.keptPairs, 3, 'il percorso sotto pavimento conserva l ultima misura pubblicata');
+});
+
+test('una potatura legacy senza keptPairs non resta throttled e si backfilla al primo giro misurato', () => {
+  const source = pairs(8);
+  const legacy = {
+    source: faqSourceFingerprint(source),
+    sourceCount: source.length,
+    consecutive: FAQ_REJECTION_MAX_CONSECUTIVE,
+    prunedWrite: true,
+  };
+
+  assert.equal(shouldSkipFaqRejection(legacy, source), false);
+  const repaired = nextFaqRejection(legacy, source, { prunedWrite: true, keptPairs: 4 });
+  assert.equal(repaired.consecutive, 1);
+  assert.equal(repaired.keptPairs, 4);
 });
 
 test('gli skip throttled non consumano il limite e lasciano passare il lavoro azionabile', () => {
@@ -176,7 +209,11 @@ test('gli skip throttled non consumano il limite e lasciano passare il lavoro az
   const rejectionLedger = Object.fromEntries(
     issues.slice(0, 3).map(({ articleId }) => [
       faqLocaleIssueKey(articleId, 'en'),
-      nextFaqRejection(nextFaqRejection(undefined, source, { prunedWrite: true }), source, { prunedWrite: true }),
+      nextFaqRejection(
+        nextFaqRejection(undefined, source, { prunedWrite: true, keptPairs: 4 }),
+        source,
+        { prunedWrite: true, keptPairs: 4 },
+      ),
     ]),
   );
 
@@ -191,9 +228,9 @@ test('il selettore separa i throttled dal residuo del limite', () => {
   const throttledIssue = issue('frozen');
   const rejectionLedger = {
     [faqLocaleIssueKey('frozen', 'en')]: nextFaqRejection(
-      nextFaqRejection(undefined, source, { prunedWrite: true }),
+      nextFaqRejection(undefined, source, { prunedWrite: true, keptPairs: 4 }),
       source,
-      { prunedWrite: true },
+      { prunedWrite: true, keptPairs: 4 },
     ),
   };
 
@@ -226,7 +263,8 @@ test('il fix-faq rende osservabile il deficit e persiste il blocco di ritraduzio
   assert.match(src, /reason: 'below_source_count'/);
   assert.match(src, /shouldSkipFaqRejection\(/);
   assert.match(src, /nextFaqRejection\(/);
-  assert.match(src, /selectFaqIssuesForProcessing\(issues, rejectionLedger, SECTION, LIMIT\)/);
+  assert.match(src, /selectFaqIssuesForProcessing\(issues, rejectionLedger, section, limit\)/);
+  assert.match(src, /reescapeBroken\(bodyDir, limit\)/);
   assert.doesNotMatch(src, /if \(shouldSkipFaqRejection\(previousRejection, issue\.itFaq\)\)/);
   assert.match(src, /const \{ toProcess, throttled \} = selectFaqIssuesForProcessing\(/);
 

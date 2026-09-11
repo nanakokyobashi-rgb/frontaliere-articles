@@ -46,26 +46,15 @@ import {
 import { unescapeTsString } from './lib/unescape-ts-string.mjs';
 
 // ── CLI argument parsing ─────────────────────────────────────
-const args = process.argv.slice(2);
-
-function getArg(name) {
-  const idx = args.indexOf(name);
-  if (idx === -1) return undefined;
-  return args[idx + 1];
-}
-
-const HELP = args.includes('--help') || args.includes('-h');
-const DRY_RUN = args.includes('--dry-run');
-const SKIP_TRANSLATE = args.includes('--skip-translate');
-function parseLimitOrExit(argv) {
+function parseLimitArgs(argv) {
   try {
     return parseFaqLimitArgs(argv);
   } catch (err) {
-    console.error(`Invalid --limit: ${err.message}`);
-    process.exit(2);
+    const wrapped = new RangeError(`Invalid --limit: ${err.message}`);
+    wrapped.exitCode = 2;
+    throw wrapped;
   }
 }
-const LIMIT = parseLimitOrExit(args);
 
 function parseConcurrencyArgs(argv) {
   const concurrencyIdx = argv.indexOf('--concurrency');
@@ -87,39 +76,63 @@ function parseConcurrencyArgs(argv) {
   return parsed;
 }
 
-function parseConcurrencyOrExit(argv) {
+export function parseSectionArg(argv) {
+  for (let idx = 0; idx < argv.length; idx++) {
+    const arg = argv[idx];
+    let section;
+    if (arg.startsWith('--section=')) {
+      section = arg.slice('--section='.length);
+    } else if (arg === '--section') {
+      section = argv[idx + 1];
+      if (section === undefined || section.startsWith('--')) {
+        throw new RangeError('--section richiede frontaliere o svizzera');
+      }
+    } else {
+      continue;
+    }
+    if (!['frontaliere', 'svizzera'].includes(section)) {
+      throw new RangeError(`Invalid --section="${section}". Valid: frontaliere, svizzera`);
+    }
+    return section;
+  }
+  return 'frontaliere';
+}
+
+export function parseCliOptions(argv) {
+  const help = argv.includes('--help') || argv.includes('-h');
+  const options = {
+    help,
+    dryRun: argv.includes('--dry-run'),
+    skipTranslate: argv.includes('--skip-translate'),
+  };
+  // Help remains side-effect free and intentionally takes precedence over CLI
+  // validation: it is a usage request, not a batch run.
+  if (help) return options;
+
+  options.limit = parseLimitArgs(argv);
   try {
-    return parseConcurrencyArgs(argv);
+    options.concurrency = parseConcurrencyArgs(argv);
   } catch (err) {
-    console.error(`Invalid --concurrency: ${err.message}`);
-    process.exit(2);
+    const wrapped = new RangeError(`Invalid --concurrency: ${err.message}`);
+    wrapped.exitCode = 2;
+    throw wrapped;
   }
+  try {
+    options.section = parseSectionArg(argv);
+  } catch (err) {
+    const wrapped = new RangeError(err.message);
+    wrapped.exitCode = 1;
+    throw wrapped;
+  }
+  options.sectionBodyDir = options.section === 'svizzera' ? 'blog-body-ch' : 'blog-body';
+  options.bodyDir = corpusPath(`services/locales/${options.sectionBodyDir}`);
+  options.progressFile = options.section === 'svizzera'
+    ? 'data/batch-faq-progress-ch.json'
+    : 'data/batch-faq-progress.json';
+  return options;
 }
 
-const CONCURRENCY = parseConcurrencyOrExit(args);
-
-// ── Section selection (--section=frontaliere|svizzera, default frontaliere) ──
-// Switches the body-dir enumeration source between the cross-border and the
-// Switzerland-wide article sets. The i18n key namespace (blog.article.{id}.*)
-// is shared, so only the directory differs. frontaliere = byte-identical.
-function getSectionArg() {
-  let section = 'frontaliere';
-  for (const a of args) {
-    const m = /^--section=(.+)$/.exec(a);
-    if (m) section = m[1];
-  }
-  const inline = getArg('--section');
-  if (inline) section = inline;
-  if (!['frontaliere', 'svizzera'].includes(section)) {
-    console.error(`Invalid --section="${section}". Valid: frontaliere, svizzera`);
-    process.exit(1);
-  }
-  return section;
-}
-const SECTION = getSectionArg();
-const SECTION_BODY_DIR = SECTION === 'svizzera' ? 'blog-body-ch' : 'blog-body';
-
-if (HELP) {
+function printHelp() {
   console.log(`
 batch-add-faq-to-articles.mjs — Add AI-generated FAQ to existing blog articles
 
@@ -129,7 +142,7 @@ USAGE:
 OPTIONS:
   --help, -h        Show this help message
   --dry-run         Preview what would be done without making API calls or modifying files
-  --limit N         Process only the first N articles (useful for testing)
+  --limit N|--limit=N Process only the first N articles (useful for testing)
   --concurrency N   Number of articles to process in parallel (default: 3)
   --skip-translate  Only generate Italian FAQ, skip EN/DE/FR translation
   --section NAME    Article section: frontaliere (default) | svizzera.
@@ -157,18 +170,10 @@ EXAMPLES:
   # Italian FAQ only (no translation cost)
   node scripts/batch-add-faq-to-articles.mjs --skip-translate --limit 10
 `);
-  process.exit(0);
 }
 
 // ── Constants ────────────────────────────────────────────────
 const LOCALES = ['it', 'en', 'de', 'fr'];
-// Mapped to this repo's `content/` layout; see lib/corpus-paths.mjs.
-const BODY_DIR = corpusPath(`services/locales/${SECTION_BODY_DIR}`);
-// Section-keyed progress file so a svizzera run does not skip frontaliere
-// articles (and vice versa). frontaliere keeps the original filename.
-const PROGRESS_FILE = SECTION === 'svizzera'
-  ? 'data/batch-faq-progress-ch.json'
-  : 'data/batch-faq-progress.json';
 
 // ── Helpers ──────────────────────────────────────────────────
 
@@ -278,10 +283,10 @@ function extractFaqFromText(raw) {
 }
 
 /** Load progress file or create empty state */
-function loadProgress() {
-  if (existsSync(resolve(PROGRESS_FILE))) {
+function loadProgress(progressFile) {
+  if (existsSync(resolve(progressFile))) {
     try {
-      return JSON.parse(read(PROGRESS_FILE));
+      return JSON.parse(read(progressFile));
     } catch {
       console.error('⚠️  Corrupted progress file, starting fresh');
     }
@@ -289,9 +294,9 @@ function loadProgress() {
   return { completed: [], failed: [], startedAt: new Date().toISOString() };
 }
 
-function saveProgress(progress) {
+function saveProgress(progressFile, progress) {
   progress.updatedAt = new Date().toISOString();
-  write(PROGRESS_FILE, JSON.stringify(progress, null, 2));
+  write(progressFile, JSON.stringify(progress, null, 2));
 }
 
 /** Incremental git commit — saves work so CI timeout doesn't lose progress */
@@ -323,13 +328,13 @@ const COMMIT_EVERY = 25;
  * Formato stabile, greppabile:
  *   [git-push-chain] label=<l> ms=<n> outcome=<pushed|rebased|failed|commit-failed>
  */
-function gitCommitAndPush(label) {
+function gitCommitAndPush(label, { sectionBodyDir, progressFile }) {
   const chainStartedAt = Date.now();
   let outcome = 'commit-failed';
   try {
-    const bodyDirGitPath = resolveGitAddPath(ROOT, `services/locales/${SECTION_BODY_DIR}/`);
+    const bodyDirGitPath = resolveGitAddPath(ROOT, `services/locales/${sectionBodyDir}/`);
     execSync(
-      `git add ${bodyDirGitPath} && git add -f ${PROGRESS_FILE} 2>/dev/null; ` +
+      `git add ${bodyDirGitPath} && git add -f ${progressFile} 2>/dev/null; ` +
       `git diff --cached --quiet || git commit -m "❓ FAQ batch checkpoint (${label})"`,
       { cwd: ROOT, stdio: 'pipe', timeout: 30000 }
     );
@@ -363,10 +368,10 @@ function gitCommitAndPush(label) {
   }
 }
 
-function commitIfNeeded(currentStep) {
+function commitIfNeeded(currentStep, options) {
   if ((currentStep - _lastCommitStep) >= COMMIT_EVERY) {
     _lastCommitStep = currentStep;
-    gitCommitAndPush(`step ${currentStep}`);
+    gitCommitAndPush(`step ${currentStep}`, options);
   }
 }
 
@@ -400,10 +405,10 @@ function commitIfNeeded(currentStep) {
 // `initScoreStore()` abbia armato quel pair, non c'e' ancora niente di sporco
 // da perdere, e il processo termina sul SIGKILL che Actions manda dopo la
 // grace window — lo stesso esito di sempre.
-function installSigtermCheckpoint() {
+function installSigtermCheckpoint(options) {
   process.on('SIGTERM', () => {
     console.error('\n⚠️  SIGTERM — saving progress...');
-    gitCommitAndPush('interrupted');
+    gitCommitAndPush('interrupted', options);
   });
 }
 
@@ -640,15 +645,15 @@ export function extractFaqFromContent(fileContent, articleId) {
  * - needsTopUp: IT .faq exists but < MIN_FAQ_PAIRS → needs extra AI pairs
  * - needsTranslation: EN/DE/FR missing or wrong locale
  */
-function discoverArticles() {
-  const itDir = resolve(BODY_DIR, 'it');
+function discoverArticles(bodyDir) {
+  const itDir = resolve(bodyDir, 'it');
   const files = readdirSync(itDir).filter(f => f.endsWith('.ts')).sort();
   const needsGeneration = [];
   const needsTopUp = [];
   const needsTranslation = [];
 
   for (const file of files) {
-    const itPath = `${BODY_DIR}/it/${file}`;
+    const itPath = `${bodyDir}/it/${file}`;
     const itContent = read(itPath);
     const articleId = extractArticleId(itContent, file);
     if (!articleId) continue;
@@ -672,7 +677,7 @@ function discoverArticles() {
     // Translation: check each non-IT locale
     const missingLocales = [];
     for (const locale of ['en', 'de', 'fr']) {
-      const localePath = `${BODY_DIR}/${locale}/${file}`;
+      const localePath = `${bodyDir}/${locale}/${file}`;
       if (!existsSync(resolve(localePath))) continue;
       const locContent = read(localePath);
       if (!hasFaqKey(locContent, articleId)) {
@@ -1143,7 +1148,7 @@ export function insertFaqIntoBodyFile(filePath, articleId, faqArray) {
 
 // ── Process single article ───────────────────────────────────
 
-async function processArticle(articleId, file, itBodyContent) {
+async function processArticle(articleId, file, itBodyContent, { bodyDir, skipTranslate }) {
   const label = `[${articleId}]`;
 
   // 1. Extract Italian body text
@@ -1204,13 +1209,13 @@ async function processArticle(articleId, file, itBodyContent) {
   console.error(`${label} ✅ ${validFaq.length} FAQ pairs generated`);
 
   // 4. Write Italian FAQ
-  const itPath = `${BODY_DIR}/it/${file}`;
+  const itPath = `${bodyDir}/it/${file}`;
   if (!insertFaqIntoBodyFile(itPath, articleId, validFaq)) {
     return { success: false, error: 'Failed to write IT FAQ' };
   }
 
   // 5. Translate to EN, DE, FR (parallel)
-  if (!SKIP_TRANSLATE) {
+  if (!skipTranslate) {
     const translations = await Promise.allSettled([
       translateFaq(validFaq, 'en'),
       translateFaq(validFaq, 'de'),
@@ -1221,7 +1226,7 @@ async function processArticle(articleId, file, itBodyContent) {
 
     for (let i = 0; i < translations.length; i++) {
       const locale = localeMap[i];
-      const localePath = `${BODY_DIR}/${locale}/${file}`;
+      const localePath = `${bodyDir}/${locale}/${file}`;
 
       if (!existsSync(resolve(localePath))) {
         console.error(`${label} ⚠️  ${locale} body file missing, skipping`);
@@ -1256,7 +1261,7 @@ async function processArticle(articleId, file, itBodyContent) {
 
 // ── Process article top-up (existing FAQ < MIN_FAQ_PAIRS) ────
 
-async function processTopUp(articleId, file, itContent, existingFaq) {
+async function processTopUp(articleId, file, itContent, existingFaq, { bodyDir, skipTranslate }) {
   const label = `[${articleId}] [TOP-UP ${existingFaq.length}→${MIN_FAQ_PAIRS}+]`;
 
   // Stessa guardia di `processArticle`: niente chiave `bodyN` per questo id
@@ -1307,15 +1312,15 @@ async function processTopUp(articleId, file, itContent, existingFaq) {
   console.error(`${label} ✅ ${existingFaq.length} existing + ${newPairs.length} new = ${validMerged.length} total`);
 
   // 3. Write updated IT FAQ
-  const itPath = `${BODY_DIR}/it/${file}`;
+  const itPath = `${bodyDir}/it/${file}`;
   if (!replaceFaqInBodyFile(itPath, validMerged, articleId)) {
     return { success: false, error: 'Failed to write updated IT FAQ' };
   }
 
   // 4. Translate and update all locales
-  if (!SKIP_TRANSLATE) {
+  if (!skipTranslate) {
     for (const locale of ['en', 'de', 'fr']) {
-      const localePath = `${BODY_DIR}/${locale}/${file}`;
+      const localePath = `${bodyDir}/${locale}/${file}`;
       if (!existsSync(resolve(localePath))) continue;
 
       try {
@@ -1344,12 +1349,12 @@ async function processTopUp(articleId, file, itContent, existingFaq) {
 
 // ── Process translation-only (IT FAQ ok, locale missing/wrong) ──
 
-async function processTranslation(articleId, file, itFaq, missingLocales) {
+async function processTranslation(articleId, file, itFaq, missingLocales, { bodyDir }) {
   const label = `[${articleId}] [TRANSLATE ${missingLocales.join(',')}]`;
   let fixed = 0;
 
   for (const locale of missingLocales) {
-    const localePath = `${BODY_DIR}/${locale}/${file}`;
+    const localePath = `${bodyDir}/${locale}/${file}`;
     if (!existsSync(resolve(localePath))) continue;
 
     try {
@@ -1394,30 +1399,53 @@ async function runWithConcurrency(tasks, concurrency) {
 
 // ── Main ─────────────────────────────────────────────────────
 
-async function main() {
+async function main(argv = process.argv.slice(2)) {
+  let options;
+  try {
+    options = parseCliOptions(argv);
+  } catch (err) {
+    console.error(err.message);
+    process.exitCode = err.exitCode || 1;
+    return;
+  }
+  if (options.help) {
+    printHelp();
+    return;
+  }
+
+  const {
+    dryRun,
+    skipTranslate,
+    limit,
+    concurrency,
+    bodyDir,
+    progressFile,
+  } = options;
+  installSigtermCheckpoint(options);
+
   console.error('═══════════════════════════════════════════════════════════');
   console.error('  batch-add-faq-to-articles.mjs');
   console.error('═══════════════════════════════════════════════════════════');
-  console.error(`  Mode: ${DRY_RUN ? 'DRY RUN' : 'LIVE'}`);
-  console.error(`  Concurrency: ${CONCURRENCY}`);
-  console.error(`  Limit: ${LIMIT === Infinity ? 'none' : LIMIT}`);
-  console.error(`  Translate: ${SKIP_TRANSLATE ? 'NO (Italian only)' : 'YES (all 4 locales)'}`);
+  console.error(`  Mode: ${dryRun ? 'DRY RUN' : 'LIVE'}`);
+  console.error(`  Concurrency: ${concurrency}`);
+  console.error(`  Limit: ${limit === Infinity ? 'none' : limit}`);
+  console.error(`  Translate: ${skipTranslate ? 'NO (Italian only)' : 'YES (all 4 locales)'}`);
   console.error('');
 
   // Initialize AI model scoring
-  if (!DRY_RUN) {
+  if (!dryRun) {
     await initScoreStore();
   }
 
   // 1. Discover articles needing work
   console.error('📂 Scanning articles...');
-  const { needsGeneration, needsTopUp, needsTranslation } = discoverArticles();
+  const { needsGeneration, needsTopUp, needsTranslation } = discoverArticles(bodyDir);
   console.error(`   🆕 Need generation:  ${needsGeneration.length}`);
   console.error(`   📈 Need top-up (<${MIN_FAQ_PAIRS} pairs): ${needsTopUp.length}`);
   console.error(`   🌐 Need translation: ${needsTranslation.length}`);
 
   // 2. Load progress and filter already-completed (only for generation)
-  const progress = loadProgress();
+  const progress = loadProgress(progressFile);
   const completedSet = new Set(progress.completed);
   const pendingGeneration = needsGeneration.filter(a => !completedSet.has(a.id));
   console.error(`   Already generated:  ${progress.completed.length}`);
@@ -1430,7 +1458,7 @@ async function main() {
   }
 
   // 3. Apply limit (generation first, then top-up, then translation)
-  let remaining = LIMIT;
+  let remaining = limit;
   const genSlice = pendingGeneration.slice(0, remaining);
   remaining -= genSlice.length;
   const topUpSlice = needsTopUp.slice(0, remaining);
@@ -1440,7 +1468,7 @@ async function main() {
   console.error('');
 
   // 4. Dry run
-  if (DRY_RUN) {
+  if (dryRun) {
     console.error('── DRY RUN ──');
     if (genSlice.length > 0) {
       console.error('\n🆕 Generation:');
@@ -1468,7 +1496,7 @@ async function main() {
   const genTasks = genSlice.map((article) => async () => {
     step++;
     console.error(`\n[${step}/${totalSteps}] 🆕 ${article.id}`);
-    const result = await processArticle(article.id, article.file, article.itContent);
+    const result = await processArticle(article.id, article.file, article.itContent, options);
     if (result.success) {
       successCount++;
       totalFaq += result.faqCount || 0;
@@ -1477,8 +1505,8 @@ async function main() {
       failCount++;
       progress.failed.push({ id: article.id, error: result.error, at: new Date().toISOString() });
     }
-    saveProgress(progress);
-    commitIfNeeded(step);
+    saveProgress(progressFile, progress);
+    commitIfNeeded(step, options);
     return result;
   });
 
@@ -1486,14 +1514,14 @@ async function main() {
   const topUpTasks = topUpSlice.map((article) => async () => {
     step++;
     console.error(`\n[${step}/${totalSteps}] 📈 ${article.id} (${article.existingFaq.length} pairs)`);
-    const result = await processTopUp(article.id, article.file, article.itContent, article.existingFaq);
+    const result = await processTopUp(article.id, article.file, article.itContent, article.existingFaq, options);
     if (result.success) {
       successCount++;
       totalFaq += result.faqCount || 0;
     } else {
       failCount++;
     }
-    commitIfNeeded(step);
+    commitIfNeeded(step, options);
     return result;
   });
 
@@ -1501,14 +1529,14 @@ async function main() {
   const transTasks = transSlice.map((article) => async () => {
     step++;
     console.error(`\n[${step}/${totalSteps}] 🌐 ${article.id} [${article.missingLocales.join(',')}]`);
-    const result = await processTranslation(article.id, article.file, article.itFaq, article.missingLocales);
+    const result = await processTranslation(article.id, article.file, article.itFaq, article.missingLocales, options);
     if (result.success) successCount++;
     else failCount++;
-    commitIfNeeded(step);
+    commitIfNeeded(step, options);
     return result;
   });
 
-  await runWithConcurrency([...genTasks, ...topUpTasks, ...transTasks], CONCURRENCY);
+  await runWithConcurrency([...genTasks, ...topUpTasks, ...transTasks], concurrency);
 
   // 6. Flush AI model scores
   try {
@@ -1553,7 +1581,6 @@ async function main() {
 // reuse `generateFaqIT` (e.g. publish-journalist-article.mjs), which would
 // otherwise trigger the entire batch scan as an import side effect.
 if (import.meta.url === `file://${process.argv[1]}`) {
-  installSigtermCheckpoint();
   main().catch(err => {
     console.error(`\n💥 Fatal error: ${err.message}`);
     console.error(err.stack);
