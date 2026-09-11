@@ -73,9 +73,9 @@ test('con un preambolo seleziona il payload JSON finale, non quello piu\' lungo'
 });
 
 test('non inserisce una virgola dentro una stringa con virgolette non escapate', () => {
-  const raw = '{"body1":"prosa con } "key": testo","next":"ok"}';
+  const raw = '{"body1":"prosa "quoted } "key": testo","next":"ok"}';
   const parsed = JSON.parse(repairLlmJson(raw));
-  assert.equal(parsed.body1, 'prosa con } "key": testo');
+  assert.equal(parsed.body1, 'prosa "quoted } "key": testo');
   assert.equal(parsed.next, 'ok');
 });
 

@@ -599,6 +599,26 @@ export function fixJsonStringBody(input, { fixAsterisks = false } = {}) {
  * likely to alter prose inside a string than to repair a payload.
  */
 function insertMissingPropertyCommas(input) {
+  const hasContainerPropertyAfterComma = (quoteIdx) => {
+    let separator = quoteIdx + 1;
+    while (separator < input.length && /\s/.test(input[separator])) separator++;
+    if (input[separator] !== ',') return false;
+
+    let keyStart = separator + 1;
+    while (keyStart < input.length && /\s/.test(input[keyStart])) keyStart++;
+    if (input[keyStart] !== '"') return false;
+
+    const keyEnd = scanKeyEnd(input, keyStart);
+    if (keyEnd === -1) return false;
+    let colon = keyEnd;
+    while (colon < input.length && /\s/.test(input[colon])) colon++;
+    if (input[colon] !== ':') return false;
+
+    let valueStart = colon + 1;
+    while (valueStart < input.length && /\s/.test(input[valueStart])) valueStart++;
+    return input[valueStart] === '{' || input[valueStart] === '[';
+  };
+
   let out = '';
   let inString = false;
   let escaped = false;
@@ -610,7 +630,10 @@ function insertMissingPropertyCommas(input) {
     if (inString) {
       if (escaped) escaped = false;
       else if (ch === '\\') escaped = true;
-      else if (ch === '"') inString = false;
+      else if (ch === '"' && (
+        decideQuoteCloses(input, i, true)
+        || hasContainerPropertyAfterComma(i)
+      )) inString = false;
       continue;
     }
 
