@@ -62,7 +62,7 @@ test('il limite FAQ assente resta illimitato, gli input invalidi falliscono chiu
 
 test('i due entry point rifiutano --limit invalido con exit code 2', () => {
   for (const file of [FIX, BATCH]) {
-    for (const value of ['--dry-run', '-1']) {
+    for (const value of ['--dry-run', '-1', 'abc', '1.5']) {
       const result = spawnSync(process.execPath, [file, '--limit', value], {
         encoding: 'utf8',
         env: { ...process.env, DRY_RUN: '1' },

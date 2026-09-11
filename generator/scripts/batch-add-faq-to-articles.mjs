@@ -33,6 +33,7 @@ import { sanitizeText } from '../../scripts/lib/sanitize-control-chars.mjs';
 import { parsePositiveNum } from '../../scripts/lib/parse-positive-num.mjs';
 import { reportStrippedControlChars } from './lib/control-char-write-report.mjs';
 import { callLLM, callSingleModel, AI_MODELS, initScoreStore, getStats, flushScores, resetExhaustedModel, printRunSummary } from './lib/ai-models.mjs';
+import { exitAfterDrain } from './lib/drain-stdio.mjs';
 import { freeTranslateWithRetry, logCascadeSummary } from './lib/free-translate.mjs';
 import { stripCodeFences, findMatchingClose, fixJsonStringBody, JSON_QUOTE_SAFETY_RULE_IT, describeJsonParseError, describeRawForDiagnostics } from './lib/llm-json-repair.mjs';
 import {
@@ -1581,9 +1582,9 @@ async function main(argv = process.argv.slice(2)) {
 // reuse `generateFaqIT` (e.g. publish-journalist-article.mjs), which would
 // otherwise trigger the entire batch scan as an import side effect.
 if (import.meta.url === `file://${process.argv[1]}`) {
-  main().catch(err => {
+  main().catch(async err => {
     console.error(`\n💥 Fatal error: ${err.message}`);
     console.error(err.stack);
-    process.exit(1);
+    await exitAfterDrain(1);
   });
 }

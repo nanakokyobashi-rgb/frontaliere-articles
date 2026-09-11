@@ -1918,6 +1918,16 @@
       }
     },
     {
+      "path": "generator/scripts/lib/drain-stdio.mjs",
+      "mode": "corpus-only",
+      "reason": "Helper dependency-free del generatore per `drainStdio()`/`exitAfterDrain()`: attende le write gia' accodate su stdout e stderr prima di `process.exit()`, con timeout bounded e contratto best-effort. Il log del generatore vive nel corpus; il gemello del sito non produce articoli e non ha questo exit path operativo, quindi non esiste un modulo da portare e `corpus-only` e' corretto.",
+      "baseline": {
+        "site": null,
+        "corpus": "c51dfc54925a0391",
+        "alignedAt": "2026-09-11"
+      }
+    },
+    {
       "path": "generator/scripts/lib/dup-stoplist.mjs",
       "sitePath": "scripts/lib/dup-stoplist.mjs",
       "mode": "identical",

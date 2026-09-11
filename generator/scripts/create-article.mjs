@@ -66,6 +66,7 @@ import { createInterface } from 'node:readline';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { callLLM as _aiCallLLM, AI_MODELS, DEFAULT_CHAIN, getPreferredModel, isLocalLlmEnabled, getStats as getAiStats, initScoreStore, flushScoresBeforeExit, recordModelContentFailure, recordModelContentSuccess, isQuotaExhaustedError, printRunSummary, estimateRequestTokens, getDeclaredRequestTokenLimit, isModelAvailable, isPerRunCallCapReached } from './lib/ai-models.mjs';
+import { drainStdio, exitAfterDrain } from './lib/drain-stdio.mjs';
 
 // ── Il modello preferito per la SOLA generazione del corpo ──────────────────
 //
@@ -13603,7 +13604,7 @@ function requestCooperativeStop(signal) {
   // timer non si vede nemmeno.
   setTimeout(() => {
     console.warn(`::warning::create-article.mjs: la fermata cooperativa non e' rientrata entro ${COOPERATIVE_STOP_GRACE_MS / 1000}s dal ${signal} — uscita forzata 143 prima del SIGKILL esterno.`);
-    process.exit(143);
+    void exitAfterDrain(143);
   }, COOPERATIVE_STOP_GRACE_MS).unref();
 }
 
@@ -13786,6 +13787,12 @@ async function exitAfterFlush(code) {
   } catch {
     // flushScoresBeforeExit non lancia; il catch e' qui perche' l'uscita non
     // dipenda mai dal ledger, nemmeno se un domani cambiasse contratto.
+  }
+  process.exitCode = code;
+  try {
+    await drainStdio();
+  } catch {
+    // Il drain e' best-effort: un errore dello stream non deve cambiare l'exit.
   }
   process.exit(code);
 }
