@@ -23,7 +23,7 @@
  */
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { ghostVerdict, repoHistoryMatch, sha256 } from '../../scripts/ci/loop-drift-check.mjs';
+import { ghostVerdict, provenanceRateLimitVerdict, repoHistoryMatch, sha256 } from '../../scripts/ci/loop-drift-check.mjs';
 
 test('baseline null: niente da verificare, mai ghost', () => {
   const v = ghostVerdict({ baselineHash: null, currentHash: 'abc123', historyMatch: undefined, historyExhausted: undefined });
@@ -79,6 +79,29 @@ test('ricerca storica non eseguita (es. fetch fallito): non verificato, non un f
   const v = ghostVerdict({ baselineHash: 'abc123', currentHash: 'def456', historyMatch: undefined, historyExhausted: undefined });
   assert.equal(v.checked, false);
   assert.equal(v.ghost, false, 'un errore di rete non deve mai produrre un ghost: PROCEED-SAFE come il resto dello script');
+});
+
+test('rate limit di provenienza rende actionable la entry e dichiara il resto non verificato', () => {
+  const verdict = provenanceRateLimitVerdict(
+    { path: 'scripts/example.mjs', mode: 'identical', baseline: { site: 'old', corpus: 'old' } },
+    { site: 'new-site', corpus: 'new-corpus' },
+    'GET commits → rate limit anonimo',
+  );
+  assert.equal(verdict.state, 'provenance-rate-limited');
+  assert.equal(verdict.actionable, true);
+  assert.match(verdict.detail, /entry successive.*non verificate/i);
+});
+
+test('la passata di provenienza si ferma al rate limit invece di accumulare note verdi', async () => {
+  const fs = await import('node:fs');
+  const url = await import('node:url');
+  const path = await import('node:path');
+  const root = path.resolve(path.dirname(url.fileURLToPath(import.meta.url)), '../..');
+  const source = fs.readFileSync(path.join(root, 'scripts/ci/loop-drift-check.mjs'), 'utf8');
+  assert.match(source, /const provenancePass = \{ rateLimited: false/);
+  assert.match(source, /if \(provenancePass\.rateLimited\)/);
+  assert.match(source, /provenanceRateLimitVerdict\(entry, now/);
+  assert.match(source, /e instanceof CrossRepoRateLimitError/);
 });
 
 test('importare il modulo non esegue loop-drift-check: nessun fetch, nessun process.exit', () => {

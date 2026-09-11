@@ -513,12 +513,6 @@ export const SET_DESCRIPTORS = new Set([
  * parsato: cambia sotto, e l'aspettativa del test cambia con lui.
  */
 const READ_CALL_NAMES = new Set(['readFileSync', 'readFile', 'createReadStream', 'openSync', 'require', 'import']);
-const NON_READ_CALL_NAMES = new Set([
-  'assert', 'deepEqual', 'equal', 'ok', 'strictEqual', 'includes', 'has', 'test', 'match', 'replace',
-  'split', 'trim', 'join', 'resolve', 'basename', 'dirname', 'parse', 'URL', 'log', 'warn', 'error',
-  'map', 'filter', 'some', 'every', 'find', 'keys', 'values', 'String', 'Number', 'Boolean', 'Date',
-  'Set', 'Map', 'Promise', 'Error',
-]);
 
 /**
  * Le parole dopo cui una `/` apre un literal regex e non è una divisione.
@@ -717,11 +711,11 @@ function callRanges(src) {
 }
 
 function isReadCall(name) {
-  if (READ_CALL_NAMES.has(name) || /^(?:read|load|fetch|open)[A-Z_$\w]*$/i.test(name)) return true;
-  // Un wrapper non riconosciuto resta un possibile lettore: il silenzio e'
-  // pericoloso. Le sole eccezioni sono chiamate note che trasformano o
-  // verificano valori, non che leggono contenuto.
-  return !NON_READ_CALL_NAMES.has(name);
+  // Un wrapper sconosciuto non dimostra che il literal sia stato letto: il
+  // default deve restare chiuso per non accoppiare il manifest a una funzione
+  // che lo nomina soltanto (issue #1245). I wrapper di lettura convenzionali
+  // restano coperti dalla forma `read*`/`load*`/`fetch*`/`open*`.
+  return READ_CALL_NAMES.has(name) || /^(?:read|load|fetch|open)[A-Z_$\w]*$/i.test(name);
 }
 
 /**
@@ -738,10 +732,9 @@ function isReadCall(name) {
  *   - l'alias: il path legato a una costante (`const P = path.join(ROOT, '…')`)
  *     e la costante passata alla lettura più sotto.
  *
- * Il verso incerto è VOLUTAMENTE «legge»: un match di troppo tiene un
- * accoppiamento che forse non c'è — costa una copia a mano nominata nel report
- * — mentre un match mancato dichiara chiuso un insieme che non lo è, cioè la PR
- * di trasporto rossa che spegne il canale.
+ * Il match è conservativo: una chiamata sconosciuta non prova una lettura e
+ * non deve bloccare il canale di trasporto per un semplice riferimento
+ * testuale. L'allowlist e i prefissi convenzionali restano espliciti sopra.
  */
 export function readsContentOf(rel, text) {
   // Senza testo non sappiamo se il fixture legge davvero: il verso sicuro e'
