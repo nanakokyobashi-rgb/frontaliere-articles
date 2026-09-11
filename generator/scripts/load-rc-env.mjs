@@ -282,6 +282,18 @@ export const ALLOW_EMPTY_RC_KEYS = new Set([
   // '' disables free-only provider filtering — see
   // scripts/lib/omniroute-free-providers.mjs (resolveOmniRouteAllowlist).
   'OMNIROUTE_PROVIDER_ALLOWLIST',
+  // '' is an explicit zero/off rollout value for the ranking experiment. Keep
+  // all tuning keys here so an empty Remote Config template value is not
+  // collapsed into "missing" and replaced by the consumer's internal default.
+  'JOB_EMAIL_RANKING_ENABLED',
+  'JOB_EMAIL_RANKING_ROLLOUT',
+  'JOB_EMAIL_RANKING_ALPHA',
+  'JOB_EMAIL_RANKING_EPSILON',
+  'JOB_EMAIL_RANKING_WINDOW_DAYS',
+  'JOB_EMAIL_RANKING_SHRINK_K',
+  'JOB_EMAIL_RANKING_MIN_IMPRESSIONS',
+  'JOB_EMAIL_RANKING_NEW_JOB_BOOST',
+  'JOB_EMAIL_RANKING_MAX_CONSECUTIVE_EXPOSURES',
 ]);
 
 /**
@@ -300,6 +312,17 @@ export const ALLOW_EMPTY_RC_KEYS = new Set([
 export function shouldExportRcValue(value, rcKey) {
   if (value) return true;
   return value === '' && ALLOW_EMPTY_RC_KEYS.has(rcKey);
+}
+
+/**
+ * Format unresolved parameter names without exposing any RC values or secrets.
+ * A missing parameter is different from an explicitly empty allowlisted value;
+ * naming it makes a site/corpus mapping drift actionable instead of silently
+ * falling through to the consumer's internal default.
+ */
+export function formatMissingRcKeys(keys) {
+  if (keys.length === 0) return '';
+  return `⚠️ Remote Config keys not resolved: ${keys.join(', ')}`;
 }
 
 // ─── Helpers ─────────────────────────────────────────────────────────────
@@ -533,6 +556,7 @@ async function main() {
   let loaded = 0;
   let skipped = 0;
   let missing = 0;
+  const missingKeys = [];
   const lines = []; // For GITHUB_ENV or stdout
 
   for (const [rcKey, envKeys] of Object.entries(RC_TO_ENV)) {
@@ -543,6 +567,7 @@ async function main() {
     // empty value carries meaning.
     if (!shouldExportRcValue(value, rcKey)) {
       missing++;
+      missingKeys.push(rcKey);
       continue;
     }
 
@@ -583,6 +608,8 @@ async function main() {
     }
   }
 
+  const missingMessage = formatMissingRcKeys(missingKeys);
+  if (missingMessage) statusLog(missingMessage);
   statusLog(`✅ RC secrets loaded: ${loaded} set, ${skipped} already in env, ${missing} not in RC`);
 }
 
