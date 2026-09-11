@@ -328,3 +328,27 @@ export function countSeoEntries(root, seoFiles, seoDir = SEO_CHUNK_DIR) {
   }
   return ids.size;
 }
+
+/**
+ * Ultima pubblicazione valida nei chunk SEO che alimentano una sezione.
+ *
+ * Il valore viene misurato sugli stessi blocchi e con gli stessi campi che
+ * `collectSeoEntryIds` consegna al produttore dei feed: il pavimento e la
+ * guardia di freschezza non devono usare due popolazioni diverse.
+ */
+export function latestSeoPublication(root, seoFiles, seoDir = SEO_CHUNK_DIR) {
+  let latest = null;
+  for (const file of seoFiles) {
+    const filePath = path.join(root, seoDir, file);
+    if (!fs.existsSync(filePath)) continue;
+    for (const [articleId, metadata] of collectSeoEntryMetadata(fs.readFileSync(filePath, 'utf-8'))) {
+      if (!metadata.headline || !metadata.datePublished) continue;
+      const timestamp = Date.parse(metadata.datePublished);
+      if (!Number.isFinite(timestamp)) continue;
+      if (!latest || timestamp > latest.timestamp) {
+        latest = { articleId, datePublished: metadata.datePublished, timestamp };
+      }
+    }
+  }
+  return latest;
+}

@@ -49,6 +49,7 @@ import {
   countSeoEntries,
   collectSeoEntryIds,
   collectSeoEntryMetadata,
+  latestSeoPublication,
   sectionFloor,
 } from '../../scripts/lib/corpus-floors.mjs';
 import {
@@ -61,6 +62,7 @@ import {
   measureDist,
   expectFromCorpus,
   FEED_POPULATION_WARN_RETENTION,
+  FEED_FRESHNESS_MAX_LAG_HOURS,
   feedSourceFloor,
   previousRevision,
 } from '../../scripts/ci/verify-api-floors.mjs';
@@ -387,18 +389,46 @@ test('feedSection separa le due sezioni dai nomi che RSS_SECTIONS genera', () =>
   assert.equal(feedSection('rss-svizzera-fr.xml'), 'svizzera');
   assert.equal(feedSection('rss.xml'), 'frontaliere');
   assert.equal(feedSection('rss-de.xml'), 'frontaliere');
+  assert.equal(feedSection('rss-future.xml'), null, 'un feed non censito non deve ricadere su frontaliere');
+  assert.equal(
+    feedSection('rss-nuova-de.xml', [
+      { id: 'nuova', mainFeed: 'rss-nuova.xml', feedFile: (locale) => `rss-nuova-${locale}.xml` },
+    ]),
+    'nuova',
+  );
   assert.deepEqual(Object.keys(SECTION_COUNTERS).sort(), ['frontaliere', 'svizzera']);
+});
+
+test('un feed non mappato produce una violazione esplicita', () => {
+  const { measured, expected } = healthy();
+  const violations = floorViolations(
+    { ...measured, feeds: [{ name: 'rss-future.xml', items: 50 }] },
+    expected,
+  );
+  assert.equal(violations.length, 1);
+  assert.match(violations[0], /rss-future\.xml: nessuna sezione RSS_SECTIONS corrispondente/);
 });
 
 test('measureDist riconosce i feed dal documento, non dal nome del file', () => {
   const dir = fs.mkdtempSync(join(os.tmpdir(), 'api-floors-'));
   fs.writeFileSync(join(dir, 'manifest.json'), JSON.stringify({ counts: { articles: 7, swissArticles: 2 } }));
-  fs.writeFileSync(join(dir, 'rss.xml'), '<rss><item>a</item><item>b</item></rss>');
+  fs.writeFileSync(
+    join(dir, 'rss.xml'),
+    '<rss><item><pubDate>Tue, 09 Sep 2026 00:00:00 GMT</pubDate></item>' +
+      '<item><pubDate>Wed, 10 Sep 2026 00:00:00 GMT</pubDate></item></rss>',
+  );
   // Una sitemap e' <urlset>, non <rss>: non deve entrare nel conteggio dei feed.
   fs.writeFileSync(join(dir, 'sitemap-blog.xml'), '<urlset><url>x</url></urlset>');
 
   const measured = measureDist(dir);
-  assert.deepEqual(measured.feeds, [{ name: 'rss.xml', items: 2 }]);
+  assert.deepEqual(measured.feeds, [{
+    name: 'rss.xml',
+    items: 2,
+    latestPublication: {
+      datePublished: 'Wed, 10 Sep 2026 00:00:00 GMT',
+      timestamp: Date.parse('Wed, 10 Sep 2026 00:00:00 GMT'),
+    },
+  }]);
   assert.equal(measured.images, null, 'images-manifest.json assente ⇒ null, che e\' un caso valido');
   assert.equal(measured.articleCounts.articles, 7);
   fs.rmSync(dir, { recursive: true, force: true });
@@ -468,6 +498,79 @@ test('countSeoEntries conta le voci come le conta parseSeoBlogs', () => {
   const metadata = collectSeoEntryMetadata(entry('long'));
   assert.equal(metadata.get('long').headline, 'T long');
   fs.rmSync(dir, { recursive: true, force: true });
+});
+
+test('latestSeoPublication prende la data piu\' recente dai chunk che alimentano la sezione', () => {
+  const dir = fs.mkdtempSync(join(os.tmpdir(), 'seo-latest-'));
+  const seoDir = join(dir, 'content', 'seo');
+  fs.mkdirSync(seoDir, { recursive: true });
+  fs.writeFileSync(
+    join(seoDir, 'older.ts'),
+    `'blog-old': { "headline": "Old", "datePublished": "2026-01-01T00:00:00Z" },\n`,
+  );
+  fs.writeFileSync(
+    join(seoDir, 'newer.ts'),
+    `'blog-new': { "headline": "New", "datePublished": "2026-02-03T04:05:06Z" },\n`,
+  );
+
+  assert.deepEqual(latestSeoPublication(dir, ['older.ts', 'newer.ts']), {
+    articleId: 'new',
+    datePublished: '2026-02-03T04:05:06Z',
+    timestamp: Date.parse('2026-02-03T04:05:06Z'),
+  });
+  fs.rmSync(dir, { recursive: true, force: true });
+});
+
+test('un feed oltre la soglia di freschezza viene rifiutato rispetto ai chunk SEO', () => {
+  const { measured, expected } = healthy();
+  const sourceDate = '2026-09-10T00:00:00Z';
+  const staleDate = '2026-09-06T00:00:00Z';
+  const expectedWithFreshness = {
+    ...expected,
+    latestSeoPublications: {
+      frontaliere: {
+        articleId: 'newest',
+        datePublished: sourceDate,
+        timestamp: Date.parse(sourceDate),
+      },
+    },
+  };
+  const stale = floorViolations(
+    {
+      ...measured,
+      feeds: [{
+        ...measured.feeds[0],
+        latestPublication: { datePublished: staleDate, timestamp: Date.parse(staleDate) },
+      }],
+    },
+    expectedWithFreshness,
+  );
+  assert.equal(stale.length, 1);
+  assert.match(stale[0], /feed stantio/);
+  assert.match(stale[0], /96\.0h/);
+  assert.match(stale[0], new RegExp(`${FEED_FRESHNESS_MAX_LAG_HOURS}h`));
+
+  const freshDate = '2026-09-07T01:00:00Z';
+  assert.deepEqual(
+    floorViolations(
+      {
+        ...measured,
+        feeds: [{
+          ...measured.feeds[0],
+          latestPublication: { datePublished: freshDate, timestamp: Date.parse(freshDate) },
+        }],
+      },
+      expectedWithFreshness,
+    ),
+    [],
+  );
+
+  const missingDate = floorViolations(
+    { ...measured, feeds: [{ ...measured.feeds[0], latestPublication: null }] },
+    expectedWithFreshness,
+  );
+  assert.equal(missingDate.length, 1);
+  assert.match(missingDate[0], /nessun <pubDate> valido/);
 });
 
 test('build-api usa il parser SEO condiviso, non una terza finestra locale', () => {
