@@ -16,7 +16,7 @@
  *
  * What it does:
  *   1. Fetches the web page content at the given URL
- *   2. Calls Gemini 2.0 Flash to generate article data in 4 languages
+ *   2. Calls the configured LLM provider chain to generate article data in 4 languages
  *   3. Generates a contextual article image using Gemini native image generation
  *   4. Validates CTA presence and enforces internal links to site tools
  *   5. Programmatically detects duplicates (Jaccard similarity on titles + ID/slug checks)
@@ -8421,9 +8421,11 @@ Rispondi SOLO con JSON valido, senza markdown.` },
   // i fatti che ci si era accorciati per perdere.
   //
   // Da quando la generazione del corpo PREFERISCE claude-cli/haiku — l'unico
-  // membro del roster senza cap di input dichiarato — il primo tentativo non
-  // ha piu' motivo di accorciare: il modello che rispondera' per primo non ha
-  // un tetto da rispettare. Quindi gradino 0, prompt intero.
+  // membro del roster senza cap di input dichiarato — la scala della chiamata
+  // unica non ha piu' motivo di accorciare il primo tentativo. Se pero' il
+  // prompt unico supera il cap della flotta, la generazione passa alla vista
+  // divisa corpo/metadati qui sotto: i fallback capped ricevono cosi' una
+  // richiesta spedibile senza mutilare il contesto del corpo.
   //
   // Non serve un fallback inventato, perche' esiste gia': se haiku non e'
   // disponibile e la cascata degrada sui modelli capped, `callLLM` lancia
@@ -8766,10 +8768,11 @@ Rispondi SOLO con JSON valido, senza markdown.` },
   //   2/2 metadati   3272                4986  (articolo da 6000ch)
   //
   // IL FLAG. `CREATE_ARTICLE_PROMPT_SPLIT`, default **`auto`**:
-  //   auto (default) — divide SOLO quando la chiamata unica non entra senza
-  //                    perdere i fatti di dominio, o non entra affatto.
-  //                    Nel caso nominale (nessun cap dettato, modello senza
-  //                    tetto) resta UNA chiamata: la divisione ne costa due.
+  //   auto (default) — divide quando la chiamata unica non entra, oppure
+  //                    dovrebbe perdere i fatti di dominio per rientrare.
+  //                    Vale anche con un preferito senza cap: il prompt unico
+  //                    non viene inviato ai fallback capped se il preferito
+  //                    fallisce.
   //   on             — divide sempre.
   //   off            — non divide mai: comportamento identico a prima,
   //                    reversibile senza rollback.
@@ -8779,7 +8782,7 @@ Rispondi SOLO con JSON valido, senza markdown.` },
   // della scheda (`fatti=0ch`), e ora e' anche cio' che il test osserva.
   const _splitSalvaFatti = domainFactsBlock.length > 0 && _promptFattiChars === 0;
   const _splitAttiva = _splitMode === 'on'
-    || (_splitMode !== 'off' && !_saltaScala && (_splitSalvaFatti || !_promptFits));
+    || (_splitMode !== 'off' && (_splitSalvaFatti || !_promptFits));
 
   const _buildHalf = (part, sourceBody, domainFacts, remediation) => {
     const schema = buildArticleJsonSchema(primaryLocale, part);

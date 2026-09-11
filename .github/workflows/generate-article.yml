@@ -459,6 +459,7 @@ jobs:
             if [ "$last_hour" -ge "$cap" ]; then
               echo "::warning::tetto orario della catena raggiunto: $last_hour run create nell'ultima ora (cap $cap) → anello non ammesso"
               echo "proceed=false" >> "$GITHUB_OUTPUT"
+              echo "GENERATION_OUTCOME kind=skipped reason=chain-hour-cap section=unknown"
               exit 0
             fi
             echo "Tetto orario: $last_hour run nell'ultima ora su un cap di $cap."
@@ -577,6 +578,7 @@ jobs:
             echo "Ci sono $older run di generate-article già in volo e più vecchie di questa ($self_created)."
             echo "La catena sta già camminando: questo arrivo ($EVENT_NAME) è un riavvio ridondante → skip."
             echo "proceed=false" >> "$GITHUB_OUTPUT"
+            echo "GENERATION_OUTCOME kind=skipped reason=admit-in-flight section=unknown"
             exit 0
           fi
           echo "Nessuna generazione più vecchia in volo → si procede."
@@ -1202,6 +1204,9 @@ jobs:
           all_declared=true
           # La prima ragione non dichiarata incontrata, per il messaggio finale.
           undeclared_why=""
+          outcome_kind="error"
+          outcome_reason="unclassified"
+          outcome_section="$TARGET_SECTION"
 
           for sec in "${sections[@]}"; do
             remaining=$(( budget_s - SECONDS ))
@@ -1279,6 +1284,9 @@ jobs:
             # separatamente nei log, non stimarle.
             if [ -f "$stall_flag" ]; then
               echo "::warning::create-article.mjs muto per ${stall_s}s sulla sezione $sec — ucciso dal watchdog dello stallo, mentre il cap di durata (${cap}s) non era nemmeno vicino"
+              outcome_kind="timeout"
+              outcome_reason="stall"
+              outcome_section="$sec"
               all_declared=false
               [ -n "$undeclared_why" ] || undeclared_why="stallo: nessun output per ${stall_s}s sulla sezione $sec (kill del watchdog, exit $rc) — l'event loop e' bloccato da lavoro sincrono, ed e' un difetto DIVERSO dal kill duro per budget scaduto. Lo stack e' nell'artifact generate-article-diagnostics."
               break
@@ -1294,6 +1302,9 @@ jobs:
               # quaranta minuti spesi contro un muro. Il `break` resta (il muro
               # e' lo stesso per l'altra sezione), il verde no.
               echo "::warning::create-article.mjs hard-killed after ${cap}s on section $sec — no article this run"
+              outcome_kind="timeout"
+              outcome_reason="hard-kill"
+              outcome_section="$sec"
               all_declared=false
               [ -n "$undeclared_why" ] || undeclared_why="kill duro dopo ${cap}s sulla sezione $sec (exit $rc): un provider che stalla non e' un differimento"
               break
@@ -1357,6 +1368,33 @@ jobs:
           if [ "$tried" = "0" ]; then
             all_declared=false
           fi
+
+          # Lascia una classificazione esplicita nel log anche quando il job
+          # viene poi chiuso con exit 0/1. Il watchdog usa questi eventi per
+          # separare articolo prodotto, no-op legittimo, timeout e rosso
+          # tecnico; il solo risultato del job non contiene questa distinzione.
+          if [ "$produced" = "true" ]; then
+            outcome_kind="generated"
+            outcome_reason="article"
+            outcome_section="$effective"
+          elif [ "$tried" = "0" ]; then
+            outcome_kind="error"
+            outcome_reason="no-attempt"
+            outcome_section="$effective"
+          elif [ "$roster_blocked" = "true" ]; then
+            outcome_kind="error"
+            outcome_reason="roster-blocked"
+            outcome_section="$effective"
+          elif [ "$outcome_kind" != "timeout" ] && [ "$all_declared" != "true" ]; then
+            outcome_kind="error"
+            outcome_reason="undeclared"
+            outcome_section="$effective"
+          elif [ "$all_declared" = "true" ]; then
+            outcome_kind="no-article"
+            outcome_reason="declared"
+            outcome_section="$effective"
+          fi
+          echo "GENERATION_OUTCOME kind=$outcome_kind reason=$outcome_reason section=$outcome_section"
 
           # `article` is the signal; `section` is the section that actually
           # wrote, which is what the next chain link alternates off.

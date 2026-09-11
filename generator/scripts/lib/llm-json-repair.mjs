@@ -1,7 +1,7 @@
 /**
  * Shared JSON-repair helpers for cleaning up common LLM JSON output quirks
  * (markdown fences, literal newlines inside strings, unescaped inner quotes,
- * stray markdown-bold asterisks). Used by every script that JSON.parse()s an
+ * stray markdown-bold asterisks, and omitted commas after nested values). Used by every script that JSON.parse()s an
  * LLM response so a fix to the repair logic lands once instead of drifting
  * across independent copies (create-article.mjs repairLlmJson,
  * batch-add-faq-to-articles.mjs repairJsonArray both had this inlined).
@@ -592,22 +592,71 @@ export function fixJsonStringBody(input, { fixAsterisks = false } = {}) {
 // il comportamento era RICOPIARLA nel test — e una copia non ha modo di
 // accorgersi che l'originale e' cambiata. Le sue tre primitive erano gia' tutte
 // in questo file: il trasloco riunisce la funzione alle sue parti.
+/**
+ * Add the comma most often omitted between two object properties when the
+ * first value is itself an object/array. This is deliberately narrow: scalar
+ * comma insertion needs a full JSON lexer and guessing there would be more
+ * likely to alter prose inside a string than to repair a payload.
+ */
+function insertMissingPropertyCommas(input) {
+  return input.replace(/([}\]])(\s*)(?="(?:\\.|[^"\\])*"\s*:)/g, '$1,$2');
+}
+
+function normalizeJsonCandidate(input) {
+  const out = fixJsonStringBody(input, { fixAsterisks: true });
+  return out.replace(/,(\s*,)+/g, ',').replace(/,(\s*[}\]])/g, '$1');
+}
+
 export function repairLlmJson(raw) {
-  let c = stripCodeFences(raw);
+  const c = insertMissingPropertyCommas(stripCodeFences(raw));
   const start = c.indexOf('{');
-  if (start !== -1) {
+  if (start === -1) return normalizeJsonCandidate(c);
+
+  const candidates = [];
+  const firstCloseIdx = findMatchingClose(c, start, true);
+  if (firstCloseIdx !== -1) {
+    candidates.push(c.slice(start, firstCloseIdx + 1));
+  } else {
     // Bracket-balanced extraction (mirrors repairJsonArray in batch-add-faq-to-articles.mjs)
     // so trailing LLM prose or a foreign '}' from an interior nested object does not
     // pull in the wrong boundary via lastIndexOf. Falls back to lastIndexOf when
     // findMatchingClose returns -1 (e.g. raw truncated inside a string literal).
-    const closeIdx = findMatchingClose(c, start, true);
-    if (closeIdx !== -1) {
-      c = c.slice(start, closeIdx + 1);
-    } else {
-      const end = c.lastIndexOf('}');
-      if (end > start) c = c.slice(start, end + 1);
+    const end = c.lastIndexOf('}');
+    if (end > start) candidates.push(c.slice(start, end + 1));
+    else candidates.push(c.slice(start));
+  }
+
+  // A prose preamble can contain an example JSON object before the actual
+  // answer. Search a bounded number of later object starts only in that case;
+  // for a payload that starts at index 0, preserving the first/truncated
+  // candidate is important because a nested object is not a replacement for
+  // the missing outer payload.
+  if (start > 0) {
+    let nextStart = c.indexOf('{', start + 1);
+    let examined = 0;
+    while (nextStart !== -1 && examined < 24) {
+      const nextCloseIdx = findMatchingClose(c, nextStart, true);
+      if (nextCloseIdx !== -1) {
+        candidates.push(c.slice(nextStart, nextCloseIdx + 1));
+        examined++;
+      }
+      nextStart = c.indexOf('{', nextStart + 1);
     }
   }
-  const out = fixJsonStringBody(c, { fixAsterisks: true });
-  return out.replace(/,(\s*,)+/g, ',').replace(/,(\s*[}\]])/g, '$1');
+
+  // Prefer the longest parseable candidate: it is the outer answer when the
+  // first opening brace belongs to a preamble example or a nested value.
+  let best = null;
+  for (const candidate of candidates) {
+    const repaired = normalizeJsonCandidate(candidate);
+    try {
+      JSON.parse(repaired);
+      if (best === null || repaired.length > best.length) best = repaired;
+    } catch {
+      // Callers still receive the repaired candidate below so their existing
+      // retry/diagnostic path remains unchanged for genuinely truncated JSON.
+    }
+  }
+  if (best !== null) return best;
+  return normalizeJsonCandidate(candidates[0] ?? c);
 }

@@ -722,7 +722,7 @@ function conHaikuDisponibile(fn) {
   }
 }
 
-test('col preferito senza cap il primo tentativo manda il prompt INTERO', () => {
+test('col preferito senza cap il primo tentativo divide il prompt per i fallback capped', () => {
   const conPreferenza = conHaikuDisponibile(() => newsPrompt({}, 'frontaliere', PREFERISCE_HAIKU));
   const senzaPreferenza = newsPrompt();
 
@@ -742,6 +742,20 @@ test('col preferito senza cap il primo tentativo manda il prompt INTERO', () => 
     conPreferenza.prompt.includes('FATTI DI DOMINIO VERIFICATI'),
     'i fatti di dominio sono stati tolti lo stesso: e\' il primo gradino della scala',
   );
+  assert.equal(conPreferenza.splitAttiva, true, 'un prompt unico sopra il cap deve attivare la divisione automatica');
+  assert.ok(conPreferenza.splitCall1, 'la chiamata body della divisione non e\' stata costruita');
+  assert.ok(
+    conPreferenza.splitCall1.est <= PROMPT_TOKEN_BUDGET,
+    `la chiamata body pesa ${conPreferenza.splitCall1.est} token, sopra il cap ${PROMPT_TOKEN_BUDGET}`,
+  );
+  assert.ok(
+    conPreferenza.splitCall1.fattiChars > 0,
+    'la divisione ha perso i fatti di dominio proprio nel corpo che deve usarli',
+  );
+  assert.ok(
+    conPreferenza.promptSpedito.includes('SOURCE CONTENT:'),
+    'il prompt effettivamente spedito non contiene la fonte del corpo',
+  );
 });
 
 test('appena il preferito dichiara un cap, la scala torna a mordere', () => {
@@ -749,7 +763,7 @@ test('appena il preferito dichiara un cap, la scala torna a mordere', () => {
   // primo 413 e lo persiste su Firestore. Il giorno in cui haiku ne prende uno,
   // questo ramo deve tornare da solo al comportamento di prima — senza che
   // nessuno si ricordi di una costante da aggiornare.
-  const conCap = conHaikuDisponibile(() => newsPrompt({}, 'frontaliere', { PREFERRED_GENERATION_MODELS: ['nvidia/meta/llama-3.1-8b-instruct'] }));
+  const conCap = conHaikuDisponibile(() => newsPrompt({}, 'frontaliere', { PREFERRED_GENERATION_MODELS: ['nvidia/nvidia/nemotron-3-super-120b-a12b'] }));
   assert.ok(
     conCap.estTokens <= PROMPT_TOKEN_BUDGET,
     `preferito CON cap dichiarato e prompt a ${conCap.estTokens} token, sopra ${PROMPT_TOKEN_BUDGET}: `

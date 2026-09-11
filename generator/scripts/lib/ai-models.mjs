@@ -89,7 +89,7 @@ export const AI_MODELS = Object.freeze({
   LLAMA_4_SCOUT:    'Llama-4-Scout-17B-16E-Instruct',
   LLAMA_3_3_70B:    'Llama-3.3-70B-Instruct',
   // LLAMA_3_1_405B removed — GitHub Models HTTP 400 "unknown_model: Meta-Llama-3.1-405B-Instruct" (2026-07-05, confirmed retired live against the real inference endpoint, 20x in 30-run sample)
-  // LLAMA_3_1_8B removed — GitHub Models HTTP 400 "unknown_model: Meta-Llama-3.1-8B-Instruct" (2026-07-05, confirmed retired live against the real inference endpoint, 20x in 30-run sample). NB: GROQ_LLAMA_3_1_8B/CB_LLAMA_3_1_8B/FW_LLAMA_3_1_8B/NV_LLAMA_3_1_8B are separate, still-alive constants on other providers.
+  // LLAMA_3_1_8B removed — GitHub Models HTTP 400 "unknown_model: Meta-Llama-3.1-8B-Instruct" (2026-07-05, confirmed retired live against the real inference endpoint, 20x in 30-run sample). NB: GROQ_LLAMA_3_1_8B/CB_LLAMA_3_1_8B/FW_LLAMA_3_1_8B are separate provider entries; the old NVIDIA pin was retired with the rest of that account's dead ids.
   PHI_4:            'Phi-4',
   DEEPSEEK_R1:      'DeepSeek-R1',
   // COHERE_CMD_R_PLUS removed — GitHub Models HTTP 400 "unknown_model: Cohere-command-r-plus-08-2024" (2026-07-05, confirmed retired live against the real inference endpoint, 14x in 30-run sample)
@@ -122,13 +122,6 @@ export const AI_MODELS = Object.freeze({
   // Gemma models use the same Gemini API endpoint — 14,400 req/day each!
   GEMINI_FLASH:     'gemini-2.5-flash',
   GEMINI_PRO:       'gemini-2.5-pro',
-  // gemini-2.0-flash e' RITIRATO: l'API risponde HTTP 404 "This model models/gemini-2.0-flash is
-  //                       no longer available" (2026-08-14, run 31823202761, 8 hit). Resta in
-  //                       roster di proposito: dal fix al matcher del 404 qui sotto viene marcato
-  //                       esaurito al PRIMO 404 e non piu' richiamato per il resto della run.
-  //                       Curare il roster a mano e' cio' che ha gia' fallito una volta (vedi
-  //                       GEMINI_31_FLASH_LITE piu' sotto): la lista rimarcisce, il matcher no.
-  GEMINI_2_FLASH:   'gemini-2.0-flash',
   GEMINI_FLASH_LITE:'gemini-2.5-flash-lite',
   // Gemma models via Gemini API — 14,400 req/day each!
   GEMMA_4_31B:      'gemma-4-31b-it',
@@ -141,9 +134,6 @@ export const AI_MODELS = Object.freeze({
   //                       OR_GEMMA_3_12B / CF_GEMMA_3_12B remain available.
   // New Gemini 3.x models (preview)
   GEMINI_3_FLASH:   'gemini-3-flash-preview',
-  // gemini-3-pro-preview e' RITIRATO (HTTP 404 "no longer available", 2026-08-14, 4 hit). Stessa
-  //                       nota di GEMINI_2_FLASH sopra: se ne occupa il matcher, non la lista.
-  GEMINI_3_PRO:     'gemini-3-pro-preview',
   // GEMINI_31_FLASH_LITE removed — Gemini API HTTP 404 "models/gemini-3.1-flash-lite-preview is no longer available" (2026-05-27, run 26534353239).
   //                       The GA replacement `gemini-3.1-flash-lite` is exposed below as GEMINI_31_FLASH_LITE_GA and stays in the chain.
   GEMINI_31_PRO:    'gemini-3.1-pro-preview',
@@ -152,9 +142,6 @@ export const AI_MODELS = Object.freeze({
   GEMINI_FLASH_LATEST:        'gemini-flash-latest',
   GEMINI_FLASH_LITE_LATEST:   'gemini-flash-lite-latest',
   GEMINI_PRO_LATEST:          'gemini-pro-latest',
-  // gemini-2.0-flash-lite e' RITIRATO (HTTP 404 "no longer available", 2026-08-14, 10 hit — il
-  //                       fallimento piu' frequente di quella run). Stessa nota.
-  GEMINI_2_FLASH_LITE:        'gemini-2.0-flash-lite',
   GEMINI_31_FLASH_LITE_GA:    'gemini-3.1-flash-lite',
 
   // ── Groq (OpenAI-compatible, ultra-fast inference) ──
@@ -243,15 +230,11 @@ export const AI_MODELS = Object.freeze({
   // ── NVIDIA NIM (OpenAI-compatible, free tier inference) ──
   // NV_NEMOTRON_70B removed — NVIDIA NIM HTTP 404 "Not Found for account" (2026-06-15, run 27544487773). No longer served on this NVIDIA account; was already out of DEFAULT_CHAIN (see "NV_NEMOTRON_70B removed" comment in the chain). The bare-"nemotron" token in NVIDIA_ALLOW_FAMILY_RE was re-injecting it via discovery, so a dead static id here is moot, but removing it keeps the catalog honest.
   // NV_NEMOTRON_49B removed — NVIDIA NIM HTTP 404 "Not Found for account" (2026-06-15, run 27544487773). No longer served on this NVIDIA account. Dropped from DEFAULT_CHAIN in the same change.
-  NV_LLAMA_3_1_8B:   'nvidia/meta/llama-3.1-8b-instruct',
   // NV_PHI_3_MINI removed — NVIDIA NIM HTTP 404 "404 page not found" (2026-05-18)
-  // NV_MISTRAL_SM_4 / NV_NEMOTRON_NANO_9B added — verified translating de↔it 2026-06-15 via
-  // live integrate.api.nvidia.com calls (replacements for the NV_NEMOTRON_70B/49B that 404'd
-  // on this account in #2196). Neither matches NVIDIA_ALLOW_FAMILY_RE (no nemotron-at-slash /
-  // llama-3.x token), so dynamic discovery does NOT auto-inject them — the static pin is
-  // genuinely additive and survives a discovery timeout/outage. NVIDIA NIM = free tier.
-  NV_MISTRAL_SM_4:      'nvidia/mistralai/mistral-small-4-119b-2603',     // API: mistralai/mistral-small-4-119b-2603 — fast (<1s), clean it/de
-  NV_NEMOTRON_NANO_9B:  'nvidia/nvidia/nvidia-nemotron-nano-9b-v2',       // API: nvidia/nvidia-nemotron-nano-9b-v2 — correct it/de, slower (~29s)
+  // Live fallback observed answering article-sized prompts on 2026-09-10/11.
+  // Keep one static NVIDIA pin: discovery is best-effort and its catalog has no
+  // context field, while the provider-wide pre-flight cap still protects it.
+  NV_NEMOTRON_SUPER:    'nvidia/nvidia/nemotron-3-super-120b-a12b',
   HF_MISTRAL_7B:   'hf/mistralai/Mistral-7B-Instruct-v0.3',
   HF_ZEPHYR_7B:    'hf/HuggingFaceH4/zephyr-7b-beta',
   HF_LLAMA_3_3_70B:'hf/meta-llama/Llama-3.3-70B-Instruct',
@@ -407,7 +390,6 @@ export const DEFAULT_CHAIN = [
   // AI_MODELS.GPT_5 removed — GitHub Models HTTP 400 "unavailable_model" (2026-05-18)
   AI_MODELS.LLAMA_4_MAVERICK,   // 4.  Meta Llama 4 flagship  (GitHub Models)
   AI_MODELS.GEMINI_FLASH,       // 5.  Google fast            (Gemini API free)
-  AI_MODELS.GEMINI_3_PRO,       // 5b. Gemini 3 Pro preview   (ritirato — vedi nota su AI_MODELS)
   AI_MODELS.GEMINI_3_FLASH,     // 5c. Gemini 3 Flash preview (Gemini API free)
   // AI_MODELS.O3 removed — GitHub Models HTTP 400 "unavailable_model" (2026-05-18)
   // AI_MODELS.GROK_3 removed — GitHub Models HTTP 400 "unknown_model: grok-3" (2026-05-18)
@@ -417,6 +399,7 @@ export const DEFAULT_CHAIN = [
   // AI_MODELS.GPT_5_CHAT removed — GitHub Models HTTP 400 "unavailable_model" (2026-05-18)
   AI_MODELS.GEMMA_4_26B,          // 9c. Gemma 4 26B MoE        (Gemini API — 14,400/day!)
   AI_MODELS.GROQ_GPT_OSS_120B,  // 10. GPT-OSS 120B          (Groq - ultra fast)
+  AI_MODELS.NV_NEMOTRON_SUPER,  // live NVIDIA fallback        (article-sized prompts)
   AI_MODELS.GPT_4_1_MINI,       // 11. GPT 4.1 Mini           (GitHub Models)
   AI_MODELS.LLAMA_3_3_70B,      // 12. Meta 70B               (GitHub Models)
   AI_MODELS.LLAMA_4_SCOUT,      // 13. Meta Llama 4 Scout     (GitHub Models)
@@ -441,7 +424,6 @@ export const DEFAULT_CHAIN = [
   // SN_LLAMA_3_3_70B removed — SambaNova HTTP 402 PAYMENT_METHOD_REQUIRED (2026-04)
   // AI_MODELS.O1 removed — GitHub Models HTTP 400 "unavailable_model" (2026-05-18)
   // AI_MODELS.LLAMA_3_2_90B removed chain — GitHub Models HTTP 400 "unknown_model: Llama-3.2-90B-Vision-Instruct" (2026-07-05, confirmed retired live, 12x in 30-run sample)
-  AI_MODELS.GEMINI_2_FLASH,     // 25. Google 2.0 flash       (ritirato — vedi nota su AI_MODELS)
   // AI_MODELS.GEMINI_31_FLASH_LITE removed — Gemini API HTTP 404 "models/gemini-3.1-flash-lite-preview is no longer available" (2026-05-27, run 26534353239).
   //                                 The deprecated preview kept winning the fallback selector because 404 didn't mark it exhausted, causing the
   //                                 entire blog-generator workflow to fail with 50+ retries against the dead endpoint. The GA non-preview model
@@ -517,9 +499,6 @@ export const DEFAULT_CHAIN = [
   // NV_NEMOTRON_70B removed — NVIDIA NIM HTTP 404 (model not found 2026-03)
   AI_MODELS.CF_GLM_47_FLASH,    // 69. GLM 4.7 Flash           (Cloudflare Workers AI)
   // NV_NEMOTRON_49B removed — NVIDIA NIM HTTP 404 "Not Found for account" (2026-06-15, run 27544487773); no longer served on this NVIDIA account
-  AI_MODELS.NV_LLAMA_3_1_8B,    // 71. Llama 3.1 8B           (NVIDIA NIM)
-  AI_MODELS.NV_MISTRAL_SM_4,     // 71b. Mistral Small 4 119B  (NVIDIA NIM — added, verified translating it↔de 2026-06-15; fast <1s)
-  AI_MODELS.NV_NEMOTRON_NANO_9B, // 71c. Nemotron Nano 9B v2   (NVIDIA NIM — added, verified translating it↔de 2026-06-15; slower ~29s)
   // AI_MODELS.NV_PHI_3_MINI removed — NVIDIA NIM HTTP 404 "404 page not found" (2026-05-18)
   // AI_MODELS.CF_DEEPSEEK_R1_32B removed — Cloudflare HTTP 400 "No such model @cf/deepseek/deepseek-r1-distill-qwen-32b" (2026-05-18)
   // CF_GRANITE_4_MICRO removed — "No such model @cf/ibm/granite-4.0-h-micro" (2026-04)
@@ -585,7 +564,6 @@ export const DEFAULT_CHAIN = [
   AI_MODELS.GEMINI_FLASH_LATEST,        // alias → today's stable flash
   AI_MODELS.GEMINI_FLASH_LITE_LATEST,   // alias → today's stable flash-lite
   AI_MODELS.GEMINI_PRO_LATEST,          // alias → today's stable pro
-  AI_MODELS.GEMINI_2_FLASH_LITE,        // Gemini 2.0 flash lite (ritirato — vedi nota su AI_MODELS)
   AI_MODELS.GEMINI_31_FLASH_LITE_GA,    // Gemini 3.1 flash lite GA (non-preview)
   // Groq compound full (not just mini)
   AI_MODELS.GROQ_COMPOUND_FULL,
@@ -2989,11 +2967,11 @@ const NVIDIA_SPECIALISED_RE = /vision|\bcode\b|codegemma|codellama|starcoder/i;
 // allowlist lets them through and discovery re-injects them every run; per-run
 // exhaustion only skips them AFTER the first wasted 404, then they return next
 // run. Deny up-front. Scoped tightly to the observed-dead sizes so live siblings
-// (e.g. nvidia/llama-3.3-nemotron-super-49b-v1, nemotron-3.5-content-safety, and
-// non-nemotron meta/llama-3.1-70b-instruct) keep flowing. If NVIDIA later serves
+// (e.g. nvidia/nemotron-3-super-120b-a12b, nvidia/llama-3.3-nemotron-super-49b-v1,
+// nemotron-3.5-content-safety, and non-nemotron meta/llama-3.1-70b-instruct) keep flowing. If NVIDIA later serves
 // these to the account, drop the relevant alternation (one-liner) — same
 // maintenance pattern as the allowlist above.
-const NVIDIA_DEAD_RE = /nemotron-4-340b|nemotron-nano-3-30b|llama-3\.1-nemotron-(?:ultra-253b|70b|51b)/i;
+const NVIDIA_DEAD_RE = /nemotron-4-340b|nemotron-nano-3-30b|llama-3\.1-nemotron-(?:ultra-253b|70b|51b)|(?:^|\/)llama-3\.1-8b-instruct$|(?:^|\/)mistral-small-4-119b-2603$|(?:^|\/)nemotron-nano-9b-v2$/i;
 
 // Exported for unit testing provider `pick`/alias matching (issue #892).
 export const DISCOVERY_PROVIDERS = Object.freeze([

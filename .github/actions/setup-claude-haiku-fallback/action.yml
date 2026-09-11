@@ -21,7 +21,10 @@ description: >-
   here is harmless even on steps that never reach the fallback tier.
   Haiku is optional by construction: if the runner has no immutable, attested
   Node/npm pair, this action disables only the Haiku lane and leaves the normal
-  model cascade running.
+  model cascade running. Official runner-toolcache components are normalized
+  before attestation when the runner owns them; the pinned Claude CLI is then
+  installed under a root-owned /opt/runner prefix and its absolute path/digest
+  are exported for the later generator step.
   When Claude reports a real usage limit/HTTP 429, ai-models.mjs makes one
   indirect Codex CLI attempt using CODEX_AUTH_JSON from a temporary
   CODEX_HOME/auth.json; this action installs the pinned CLI needed for that
@@ -53,6 +56,12 @@ outputs:
       The endpoint is exposed only as an action output, never through
       GITHUB_ENV.
     value: ${{ steps.start_codex_auth_broker.outputs.socket }}
+  claude_cli_bin:
+    description: Absolute path of the attested pinned Claude CLI, when available.
+    value: ${{ steps.setup_claude_cli.outputs.claude_cli_bin }}
+  claude_cli_sha256:
+    description: SHA-256 digest of the attested pinned Claude CLI.
+    value: ${{ steps.setup_claude_cli.outputs.claude_cli_sha256 }}
 runs:
   using: "composite"
   steps:
@@ -102,6 +111,16 @@ runs:
         cut_cmd=/usr/bin/cut
         [ -x "$cut_cmd" ] || cut_cmd=/bin/cut
         [ -x "$cut_cmd" ] || disable_haiku 'Trusted cut utility is unavailable.'
+        chmod_cmd=/usr/bin/chmod
+        [ -x "$chmod_cmd" ] || chmod_cmd=/bin/chmod
+        [ -x "$chmod_cmd" ] || disable_haiku 'Trusted chmod utility is unavailable.'
+        sudo_cmd=''
+        for candidate_sudo in /usr/bin/sudo /bin/sudo; do
+          if [ -x "$candidate_sudo" ] && "$candidate_sudo" -n true >/dev/null 2>&1; then
+            sudo_cmd="$candidate_sudo"
+            break
+          fi
+        done
         realpath() { "$realpath_cmd" "$@"; }
         workspace_root="$(realpath "$workspace_root")"
         action_path="$(realpath "$action_path")"
@@ -118,6 +137,43 @@ runs:
         }
         stat_owner() {
           "$stat_cmd" -c '%u' "$1" 2>/dev/null || "$stat_cmd" -f '%u' "$1" 2>/dev/null || true
+        }
+        harden_toolchain_path() {
+          local current="$1" mode owner current_uid parent
+          current_uid="$($id_cmd -u)"
+          while :; do
+            [ -e "$current" ] || return 1
+            mode="$(stat_mode "$current")"
+            owner="$(stat_owner "$current")"
+            [ -n "$mode" ] && [ -n "$owner" ] || return 1
+            mode="${mode: -3}"
+            case "$mode" in
+              [0-7][0-7][0-7]) ;;
+              *) return 1 ;;
+            esac
+            if [ "$owner" = '0' ]; then
+              # Root-owned components need only lose group/other write bits.
+              # Never chmod a root-owned path without a non-interactive sudo.
+              if (( (8#$mode & 022) != 0 )); then
+                [ -n "$sudo_cmd" ] || return 1
+                "$sudo_cmd" -n "$chmod_cmd" go-w -- "$current" || return 1
+              fi
+            elif [ "$owner" = "$current_uid" ]; then
+              # A runner-owned toolcache is the normal hosted-runner layout, but
+              # it is mutable by default. Remove every write bit before using it
+              # as an attested runtime; npm installation happens in a separate
+              # root-owned prefix below.
+              if (( (8#$mode & 0222) != 0 )); then
+                "$chmod_cmd" a-w -- "$current" || return 1
+              fi
+            else
+              return 1
+            fi
+            [ "$current" = '/' ] && break
+            parent="$(/usr/bin/dirname "$current" 2>/dev/null || /bin/dirname "$current")"
+            [ "$parent" != "$current" ] || break
+            current="$parent"
+          done
         }
         path_components_trusted() {
           local current="$1" mode owner current_uid parent
@@ -243,6 +299,26 @@ runs:
             done
           done < <(printf '%s\n' "${PATH:-}" | "$tr_cmd" ':' '\n')
         }
+        # Hosted runners commonly expose Node in a runner-owned toolcache whose
+        # directory/file modes are 0777. Normalize only the exact node/npm
+        # candidates, never the workspace or arbitrary PATH entries, before the
+        # immutable-component check reports its verdict.
+        harden_runtime_candidates() {
+          local path_entry binary candidate resolved
+          while IFS= read -r path_entry; do
+            [ -n "$path_entry" ] || continue
+            case "$path_entry" in /*) ;; *) continue ;; esac
+            for binary in node npm; do
+              candidate="$path_entry/$binary"
+              [ -f "$candidate" ] || continue
+              resolved="$(realpath "$candidate" 2>/dev/null || true)"
+              [ -n "$resolved" ] || continue
+              trusted_prefix "$resolved" || continue
+              harden_toolchain_path "$resolved" || true
+            done
+          done < <(printf '%s\n' "${PATH:-}" | "$tr_cmd" ':' '\n')
+        }
+        harden_runtime_candidates
         report_runtime_candidates
         node_realpath="$(find_trusted_node || true)"
         npm_realpath="$(find_trusted_npm || true)"
@@ -368,15 +444,19 @@ runs:
           NPM_CONFIG_GLOBALCONFIG="$global_npmrc"
           npm_config_cache="$install_root/cache"
         )
-        global_prefix="$(/usr/bin/env -i "${clean_env[@]}" "$trusted_node" "$trusted_npm" prefix --global)"
-        global_prefix="$("$realpath_bin" "$global_prefix")"
-        case "$global_prefix" in
-          /usr|/usr/*|/usr/local|/usr/local/*|/bin|/bin/*|/opt/hostedtoolcache|/opt/hostedtoolcache/*|/opt/runner|/opt/runner/*|/opt/homebrew|/opt/homebrew/*) ;;
-          *) echo '::error::Claude global npm prefix is outside the trusted host toolchain.'; exit 1 ;;
-        esac
-        /usr/bin/env -i "${clean_env[@]}" "$trusted_node" "$trusted_npm" install --global \
+        sudo_cmd=/usr/bin/sudo
+        [ -x "$sudo_cmd" ] || sudo_cmd=/bin/sudo
+        [ -x "$sudo_cmd" ] && "$sudo_cmd" -n true >/dev/null 2>&1 || {
+          echo '::error::Non-interactive sudo is unavailable for the root-owned Claude CLI prefix.'
+          exit 1
+        }
+        "$sudo_cmd" -n /usr/bin/mkdir -p /opt/runner
+        "$sudo_cmd" -n /usr/bin/chmod 755 /opt/runner
+        claude_prefix="$("$sudo_cmd" -n /usr/bin/mktemp -d /opt/runner/claude-haiku-cli.XXXXXX)"
+        "$sudo_cmd" -n /usr/bin/chmod 755 "$claude_prefix"
+        "$sudo_cmd" -n /usr/bin/env -i "${clean_env[@]}" NPM_CONFIG_PREFIX="$claude_prefix" "$trusted_node" "$trusted_npm" install --global --prefix "$claude_prefix" \
           --no-package-lock --no-fund --no-audit @anthropic-ai/claude-code@2.1.267
-        global_root="$(/usr/bin/env -i "${clean_env[@]}" "$trusted_node" "$trusted_npm" root --global)"
+        global_root="$("$sudo_cmd" -n /usr/bin/env -i "${clean_env[@]}" NPM_CONFIG_PREFIX="$claude_prefix" "$trusted_node" "$trusted_npm" root --global)"
         global_root="$("$realpath_bin" "$global_root")"
         claude_package_json="$global_root/@anthropic-ai/claude-code/package.json"
         claude_package_version="$("$trusted_node" -e 'const fs=require("node:fs"); process.stdout.write(JSON.parse(fs.readFileSync(process.argv[1], "utf8")).version)' "$claude_package_json" 2>/dev/null || true)"
@@ -384,9 +464,10 @@ runs:
           echo "::error::Unexpected Claude Code package version: $claude_package_version"
           exit 1
         fi
-        claude_bin="$global_prefix/bin/claude"
+        claude_bin="$claude_prefix/bin/claude"
         claude_realpath="$("$realpath_bin" "$claude_bin" 2>/dev/null || true)"
-        [ -f "$claude_realpath" ] && [ -x "$claude_realpath" ] || {
+        case "$claude_realpath" in /opt/runner/claude-haiku-cli.*/*) ;; *) echo '::error::Pinned Claude CLI resolved outside the root-owned prefix.'; exit 1 ;; esac
+        [ -f "$claude_realpath" ] && [ -x "$claude_realpath" ] && [ ! -L "$claude_realpath" ] || {
           echo '::error::Pinned Claude Code CLI was not installed at its trusted global prefix.'
           exit 1
         }
@@ -395,8 +476,15 @@ runs:
           echo "::error::Unexpected Claude Code CLI version: $claude_cli_version"
           exit 1
         fi
+        claude_sha256="$(sha256_file "$claude_realpath" || true)"
+        printf '%s' "$claude_sha256" | /usr/bin/grep -Eq '^[a-f0-9]{64}$' || {
+          echo '::error::Unable to attest the pinned Claude Code CLI.'
+          exit 1
+        }
         rm -rf -- "$install_root"
-        echo "ENABLE_HAIKU_ARTICLE_FALLBACK=1" >> "$GITHUB_ENV"
+        printf 'claude_cli_bin=%s\nclaude_cli_sha256=%s\n' "$claude_realpath" "$claude_sha256" >> "$GITHUB_OUTPUT"
+        printf 'CLAUDE_CLI_BIN=%s\nCLAUDE_CLI_SHA256=%s\nENABLE_HAIKU_ARTICLE_FALLBACK=1\n' \
+          "$claude_realpath" "$claude_sha256" >> "$GITHUB_ENV"
         )
         setup_status=$?
         if [ "$setup_status" -eq 0 ]; then
