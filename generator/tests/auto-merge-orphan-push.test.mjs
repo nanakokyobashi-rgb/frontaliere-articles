@@ -113,6 +113,10 @@ test('(e) seleziona anche una PR chiusa senza merge e controlla la head mergiata
   assert.match(job, /mergedAt/);
   assert.match(job, /headRefOid/);
   assert.match(job, /select\(\.state != "OPEN"\)/);
+  assert.match(job, /repos\/\$\{REPO\}\/compare\/\$\{SHA\}\.\.\.main/);
+  assert.match(job, /repos\/\$\{REPO\}\/commits\/\$\{SHA\}/);
+  assert.match(job, /PUSHED_AT/);
+  assert.match(job, /PUSHED_AT[\s\S]*MERGED_AT/);
   assert.match(
     job,
     /repos\/\$\{REPO\}\/compare\/\$\{SHA\}\.\.\.\$\{HEAD_OID\}/,
@@ -120,15 +124,21 @@ test('(e) seleziona anche una PR chiusa senza merge e controlla la head mergiata
       + 'l\'OID del commit originale come antenato',
   );
   assert.match(job, /CONTAINMENT.*\n[\s\S]*\[ \"\$CONTAINMENT\" = "ahead" \]/);
+  assert.match(job, /TARGET='\{\}'/);
+  assert.doesNotMatch(job, /\$\{TARGET:-\{\}\}/);
 });
 
 test('(f) il warning orfano e\' deduplicato con un marker sulla PR', () => {
   const job = jobBlock(ATTIVE, 'warn-orphan-push');
   assert.ok(job, 'job `warn-orphan-push` non trovato');
   assert.match(job, /MARKER='<!-- orphan-push-warn -->'/);
-  assert.match(job, /gh pr view "\$PR_NUMBER"[\s\S]*--json comments/);
+  assert.match(job, /gh api --paginate "repos\/\$\{REPO\}\/issues\/\$\{PR_NUMBER\}\/comments"/);
   assert.match(job, /grep -Fq "\$MARKER"/);
   assert.match(job, /\$\{MARKER\}/);
+  assert.ok(
+    job.indexOf('echo "::warning::Push orfano:') < job.indexOf("MARKER='"),
+    'l annotation per-SHA deve precedere il gate di dedup per-PR',
+  );
 });
 
 // Il test (c) — «il job `auto-merge` e' gateato su `event_name != 'push'`» —
