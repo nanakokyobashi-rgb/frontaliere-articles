@@ -445,7 +445,7 @@ jobs:
             echo "::error::Impossibile leggere un body valido della PR prima di Claude."
             exit 1
           fi
-          if ! body_sha=$(sed -e 's/\r$//' -e 's/[[:space:]]+$//' "$body_file" | sha256sum | cut -d' ' -f1); then
+          if ! body_sha=$(sed -E -e 's/\r$//' -e 's/[[:space:]]+$//' "$body_file" | sha256sum | cut -d' ' -f1); then
             echo "::error::Impossibile calcolare il digest del body PR prima di Claude."
             exit 1
           fi
@@ -748,7 +748,7 @@ jobs:
             echo "::error::❌-check-fix: impossibile leggere un body valido della PR dopo Claude → classificazione BLOCCANTE, job ROSSO."
             exit 1
           fi
-          if ! now_body_sha=$(sed -e 's/\r$//' -e 's/[[:space:]]+$//' "$body_file" | sha256sum | cut -d' ' -f1); then
+          if ! now_body_sha=$(sed -E -e 's/\r$//' -e 's/[[:space:]]+$//' "$body_file" | sha256sum | cut -d' ' -f1); then
             echo "::error::❌-check-fix: impossibile calcolare il digest del body PR dopo Claude → classificazione BLOCCANTE, job ROSSO."
             exit 1
           fi
