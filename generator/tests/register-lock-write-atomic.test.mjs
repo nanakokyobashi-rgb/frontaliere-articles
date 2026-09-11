@@ -120,30 +120,32 @@ test('writeJsonAtomic forza temp e directory prima di dare per committato il mar
     'la directory deve essere sincronizzata dopo il rename');
 });
 
-test('EINVAL nel fsync della directory non annulla una scrittura gia\' committata', () => {
-  const root = sandbox();
-  const target = path.join(root, 'nested', 'marker.json');
-  const originalFsync = fs.fsyncSync;
-  let calls = 0;
-  fs.fsyncSync = (fd) => {
-    calls += 1;
-    if (calls === 2) {
-      const error = new Error('directory fsync unsupported');
-      error.code = 'EINVAL';
-      throw error;
+test('un errore nel fsync della directory non annulla una scrittura gia\' committata', () => {
+  for (const code of ['EINVAL', 'EACCES']) {
+    const root = sandbox();
+    const target = path.join(root, 'nested', 'marker.json');
+    const originalFsync = fs.fsyncSync;
+    let calls = 0;
+    fs.fsyncSync = (fd) => {
+      calls += 1;
+      if (calls === 2) {
+        const error = new Error(`directory fsync unsupported (${code})`);
+        error.code = code;
+        throw error;
+      }
+      return originalFsync(fd);
+    };
+    try {
+      assert.doesNotThrow(() => writeJsonAtomic(target, { committed: true }));
+    } finally {
+      fs.fsyncSync = originalFsync;
     }
-    return originalFsync(fd);
-  };
-  try {
-    assert.doesNotThrow(() => writeJsonAtomic(target, { committed: true }));
-  } finally {
-    fs.fsyncSync = originalFsync;
-  }
 
-  assert.deepEqual(JSON.parse(fs.readFileSync(target, 'utf8')), { committed: true });
-  assert.deepEqual(
-    fs.readdirSync(path.dirname(target)).filter((name) => name.endsWith('.tmp')),
-    [],
-    'il temp deve restare consumato dal rename anche quando il fsync directory non è supportato',
-  );
+    assert.deepEqual(JSON.parse(fs.readFileSync(target, 'utf8')), { committed: true });
+    assert.deepEqual(
+      fs.readdirSync(path.dirname(target)).filter((name) => name.endsWith('.tmp')),
+      [],
+      `il temp deve restare consumato dal rename anche con fsync directory ${code}`,
+    );
+  }
 });

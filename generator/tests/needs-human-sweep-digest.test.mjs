@@ -53,6 +53,23 @@ test('il titolo digest ambiguo non viene risolto scegliendo il primo risultato',
   const guardAt = step.indexOf('if [ "$DIGEST_MATCH_COUNT" -gt 1 ]; then');
   const numberAt = step.indexOf('N=');
   assert.ok(guardAt !== -1 && numberAt !== -1 && guardAt < numberAt, 'il guard deve precedere la scelta del numero');
+
+  const markerAt = step.indexOf('if HAS_LINES=');
+  const markerCountAt = step.indexOf('\n          HAS=', markerAt);
+  assert.ok(markerAt !== -1 && markerCountAt !== -1, 'la lettura dei marker del digest deve essere presente');
+  const markerRead = step.slice(markerAt, markerCountAt);
+  assert.match(
+    markerRead,
+    /gh api --paginate "repos\/\$GITHUB_REPOSITORY\/issues\/\$N\/comments\?per_page=100"/,
+    'i commenti del digest devono essere letti senza il cap implicito di gh issue view',
+  );
+  assert.match(
+    markerRead,
+    /--jq '\.\[\] \| select\(\.body \| test\("<!-- SWEEP_OUTCOME:"\)\) \| 1'/,
+    'la query paginata deve contare i marker su ogni pagina',
+  );
+  assert.match(markerRead, /DIGEST_MARKER_RC=\$\?[\s\S]*?exit 1/, 'un errore nella lettura dei marker deve restare rosso');
+  assert.doesNotMatch(markerRead, /2>\/dev\/null|\|\| echo 0/, 'un errore del digest non deve degradare a zero marker');
 });
 
 test('il valore del titolo digest è validato prima del prompt Claude e passato con un token osservabile', () => {

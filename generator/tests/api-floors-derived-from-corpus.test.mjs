@@ -596,8 +596,8 @@ test('il report copre ogni rapporto che un pavimento sorveglia, coi riferimenti 
   assert.equal(byLabel['rss-svizzera.xml'].source, Math.min(expected.rssMaxItems, expected.feedSources.svizzera));
   assert.equal(byLabel['images-manifest.json'].source, 1990);
   assert.equal(rows.length, 2 + 2 + measured.feeds.length + 1);
-  assert.ok(rows.some((r) => r.label === 'chunk SEO frontaliere/corpus'));
-  assert.ok(rows.some((r) => r.label === 'chunk SEO svizzera/corpus'));
+  assert.ok(rows.some((r) => r.label === 'chunk SEO frontaliere/run precedente'));
+  assert.ok(rows.some((r) => r.label === 'chunk SEO svizzera/run precedente'));
 
   // Un preallarme su un feed resta uno per feed: e' il report intero a
   // produrli, non la riga rappresentativa che si stampa.
@@ -616,17 +616,17 @@ test('l\'erosione dei chunk SEO resta un advisory anche quando il feed e\' capat
     previousFeedSources: { ...expected.previousFeedSources, frontaliere: 3750 },
   };
   const rows = retentionReport(measured, eroded);
-  const population = rows.find((r) => r.label === 'chunk SEO frontaliere/corpus');
+  const population = rows.find((r) => r.label === 'chunk SEO frontaliere/run precedente');
   assert.deepEqual(population, {
     kind: 'feed-population',
-    label: 'chunk SEO frontaliere/corpus',
+    label: 'chunk SEO frontaliere/run precedente',
     declared: 60,
     source: 3750,
   });
   assert.equal(measured.feeds[0].items, 50, 'il feed resta pieno del suo cap');
   const advisories = retentionAdvisories(rows);
   assert.equal(advisories.length, 1);
-  assert.match(advisories[0], /chunk SEO frontaliere\/corpus/);
+  assert.match(advisories[0], /chunk SEO frontaliere\/run precedente/);
   assert.match(advisories[0], /popolazione 60\/3750/);
   assert.equal(FEED_POPULATION_WARN_RETENTION, 0.9);
 });
@@ -639,16 +639,16 @@ test('una differenza storica fisiologica dei chunk non produce il warning retent
     previousFeedSources: { ...expected.previousFeedSources, frontaliere: 3847 },
   };
   const population = retentionReport(measured, nearCurrent)
-    .find((row) => row.label === 'chunk SEO frontaliere/corpus');
+    .find((row) => row.label === 'chunk SEO frontaliere/run precedente');
   assert.deepEqual(population, {
     kind: 'feed-population',
-    label: 'chunk SEO frontaliere/corpus',
+    label: 'chunk SEO frontaliere/run precedente',
     declared: 3784,
     source: 3847,
   });
   assert.deepEqual(
     retentionAdvisories(retentionReport(measured, nearCurrent))
-      .filter((line) => line.includes('chunk SEO frontaliere/corpus')),
+      .filter((line) => line.includes('chunk SEO frontaliere/run precedente')),
     [],
   );
 });
@@ -679,8 +679,8 @@ test('le righe stampate: i due rapporti del manifest, le immagini, e il feed piu
   assert.equal(lines.length, 6, `2 manifest + 2 popolazioni + 1 feed rappresentativo + 1 immagini, ricevute: ${lines.join(' | ')}`);
   assert.ok(lines.some((l) => l.startsWith('manifest.counts.articles:')));
   assert.ok(lines.some((l) => l.startsWith('manifest.counts.swissArticles:')));
-  assert.ok(lines.some((l) => l.startsWith('chunk SEO frontaliere/corpus:')));
-  assert.ok(lines.some((l) => l.startsWith('chunk SEO svizzera/corpus:')));
+  assert.ok(lines.some((l) => l.startsWith('chunk SEO frontaliere/run precedente:')));
+  assert.ok(lines.some((l) => l.startsWith('chunk SEO svizzera/run precedente:')));
   assert.ok(lines.some((l) => l.includes('rss-it.xml') && l.includes('piu\' magro')), 'il rappresentante e\' il minimo');
   assert.ok(lines.some((l) => l.startsWith('images-manifest.json:')));
   // Il margine e' in punti percentuali dal gate, che e' la grandezza che dice
@@ -714,6 +714,7 @@ test('end-to-end: un rapporto eroso stampa ::warning:: ed esce 0', () => {
 
   assert.equal(run.status, 0, `il preallarme non blocca la pubblicazione:\n${run.stdout}\n${run.stderr}`);
   const out = `${run.stdout}${run.stderr}`;
+  assert.match(out, /\[api-floors\] chunk SEO .*run precedente:/, 'la run deve esporre il riferimento storico dei chunk');
   assert.match(out, /::warning::\[api-floors\] manifest\.counts\.articles: rapporto 9[45]\.\d\d% sotto il preallarme/);
   assert.match(out, /manifest\.counts\.swissArticles: \d+\/\d+ = 100\.00% \(margine 10\.0 pp/);
 });

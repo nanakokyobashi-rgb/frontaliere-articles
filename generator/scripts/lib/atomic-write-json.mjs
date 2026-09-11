@@ -48,8 +48,8 @@ export function writeJsonAtomic(filePath, value, { compact = false } = {}) {
 
   // The rename is already committed. Directory fsync is a durability hint,
   // not part of the rollback transaction: overlayfs and some network mounts
-  // reject fsync on a directory with EINVAL even though the target is valid.
-  // Never report that expected portability limitation as an unwritten file.
+  // reject fsync on a directory even though the target is valid. Never report
+  // that expected portability limitation as an unwritten file.
   try {
     const directoryFd = fs.openSync(path.dirname(filePath), 'r');
     try {
@@ -57,7 +57,5 @@ export function writeJsonAtomic(filePath, value, { compact = false } = {}) {
     } finally {
       fs.closeSync(directoryFd);
     }
-  } catch (err) {
-    if (err?.code !== 'EINVAL') throw err;
-  }
+  } catch { /* best-effort durability hint after the commit */ }
 }
