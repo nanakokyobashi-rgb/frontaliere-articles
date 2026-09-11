@@ -6,8 +6,9 @@
  *
  * Firebase Auth persiste la sessione del browser sotto
  * `firebase:authUser:<Web API key>:[DEFAULT]`. Il registro Offerwall
- * trasportato in `host/constants.ts` la legge per rispondere all'unica domanda
- * che pone (`hasAccess()`): c'e' un utente autenticato?
+ * trasportato in `host/constants.ts` legge ora il namespace
+ * `firebase:authUser:` senza chiamare questo helper, così la shell statica non
+ * deve conoscere la chiave del progetto.
  *
  * ## Perche' la chiave NON sta in questo file
  *
@@ -17,8 +18,8 @@
  * come le altre — e il secret scanning di GitHub ha aperto l'alert su
  * `host/constants.ts#L66` (commit c9bc65a4) quando ormai era pubblica.
  *
- * Il sito NON la inlina: `build-plugins/constants.ts` chiama
- * `getFirebaseAuthPersistenceKey()` e il valore arriva da
+ * Il sito NON la inlina. Il codice applicativo può chiamare
+ * `getFirebaseAuthPersistenceKey()` quando deve restringere la ricerca; il valore arriva da
  * `import.meta.env.VITE_FIREBASE_API_KEY`. Qui vale la stessa regola di
  * `AGENTS.md` § Credenziali: il valore vive in Firebase Remote Config e
  * arriva a `process.env` per l'unica strada che questo repo ha,
@@ -33,12 +34,12 @@
  * per costruzione, e rimetterebbe nel repo cio' che questo file esiste per
  * togliere.
  *
- * Senza chiave questa funzione rende **stringa vuota**, e il chiamante DEVE
+ * Senza chiave questa funzione rende **stringa vuota**, e ogni chiamante DEVE
  * trattarla come «non la so» invece di emettere una lookup su `''` — che
  * tornerebbe sempre `null` e negherebbe l'accesso a ogni utente autenticato.
- * `host/constants.ts` ricade allora sulla scansione del PREFISSO
- * `firebase:authUser:`, cioe' il comportamento che il registro aveva prima
- * della #1315: risponde alla stessa domanda senza conoscere nessuna chiave.
+ * La shell trasportata in `host/constants.ts` usa direttamente la scansione del
+ * PREFISSO `firebase:authUser:`; il comportamento resta quindi indipendente
+ * dalla configurazione runtime anche quando questo helper non viene chiamato.
  */
 
 /** Nome dell'app Firebase di default, la sola che il sito inizializzi. */
