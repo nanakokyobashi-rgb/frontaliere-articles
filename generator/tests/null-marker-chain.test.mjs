@@ -41,6 +41,7 @@ import {
 import {
   translateFieldFreeMt,
   maskMunicipalityNames,
+  maskNavLinks,
   ensureMunicipalityNames,
 } from '../scripts/lib/article-free-mt.mjs';
 import {
@@ -205,6 +206,20 @@ describe('translateFieldFreeMt — l’uscita di un motore non e’ prosa', () =
     }]);
   });
 
+  test('il restore rifiuta indici duplicati, mancanti o fuori range', () => {
+    const municipalities = maskMunicipalityNames('Besano e Martello');
+    assert.equal(municipalities.restore('0M00Q0 e 0M01Q0').ok, true);
+    assert.equal(municipalities.restore('0M00Q0 e 0M00Q0').ok, false, 'duplicato');
+    assert.equal(municipalities.restore('0M00Q0').ok, false, 'indice omesso');
+    assert.equal(municipalities.restore('0M00Q0 e 0M02Q0').ok, false, 'indice fuori range');
+
+    const nav = maskNavLinks('[Besano](nav:municipalities) e [calcolo](nav:calculator)');
+    assert.equal(nav.restore(nav.masked).ok, true);
+    assert.equal(nav.restore(nav.masked.replace('0NAV10', '0NAV00')).ok, false, 'duplicato');
+    assert.equal(nav.restore(nav.masked.replace('0NAV10', '')).ok, false, 'indice omesso');
+    assert.equal(nav.restore(`${nav.masked} 0NAV990`).ok, false, 'indice fuori range');
+  });
+
   test('il postcondition reinserisce il nome originale anche fuori dal percorso free-MT', () => {
     assert.deepEqual(
       ensureMunicipalityNames('Guida pratica per Besano', 'Praktischer Leitfaden'),
@@ -241,9 +256,14 @@ describe('translateFieldFreeMt — l’uscita di un motore non e’ prosa', () =
     assert.match(CREATE_ARTICLE, /preserveMunicipalityNames:\s*true/);
     const translatedAt = CREATE_ARTICLE.indexOf('await translateArticle(data);');
     const guardAt = CREATE_ARTICLE.indexOf('preserveMunicipalityNamesInMetadata(data);', translatedAt);
+    const sanitizeAt = CREATE_ARTICLE.indexOf('sanitizePromptPlaceholders(data);', translatedAt);
     const nextStepAt = CREATE_ARTICLE.indexOf('relocalizeSlugsAfterTranslation(data', translatedAt);
-    assert.ok(translatedAt !== -1 && guardAt > translatedAt && guardAt < nextStepAt,
-      'il postcondition dei nomi propri deve seguire la traduzione prima delle scritture successive');
+    assert.ok(
+      translatedAt !== -1
+        && nextStepAt > translatedAt
+        && sanitizeAt > nextStepAt
+        && guardAt > sanitizeAt,
+      'il postcondition dei nomi propri deve seguire l\'ultima sanitizzazione dei placeholder');
   });
 });
 

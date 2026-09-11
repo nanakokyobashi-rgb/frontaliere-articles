@@ -70,6 +70,28 @@ function municipalityIsPresent(text, name) {
   return municipalityTermRegExp(name).test(String(text ?? ''));
 }
 
+function restoreIndexedSentinels(value, pattern, originals) {
+  pattern.lastIndex = 0;
+  const seen = new Set();
+  let valid = true;
+  const text = String(value ?? '').replace(pattern, (_, rawIndex) => {
+    const index = Number(rawIndex);
+    if (!Number.isInteger(index)
+      || index < 0
+      || index >= originals.length
+      || seen.has(index)) {
+      valid = false;
+      return '';
+    }
+    seen.add(index);
+    return originals[index];
+  });
+  const complete = valid
+    && seen.size === originals.length
+    && originals.every((_, index) => seen.has(index));
+  return { text, ok: complete };
+}
+
 /**
  * Mask municipality names before sending excerpt/imageAlt to machine
  * translation. The sentinel contains no translatable word, and `restore()`
@@ -89,16 +111,11 @@ export function maskMunicipalityNames(text) {
     const index = originals.push(match) - 1;
     return `0M0${index}Q0`;
   });
-  const restore = (translated) => {
-    let restored = 0;
-    const out = String(translated ?? '').replace(MUNICIPALITY_SENTINEL_RE, (_, index) => {
-      const original = originals[Number(index)];
-      if (original === undefined) return '';
-      restored += 1;
-      return original;
-    });
-    return { text: out, ok: restored === originals.length };
-  };
+  const restore = (translated) => restoreIndexedSentinels(
+    translated,
+    MUNICIPALITY_SENTINEL_RE,
+    originals,
+  );
   return { masked, expected: originals.length, restore };
 }
 
@@ -221,16 +238,7 @@ export function maskNavLinks(text) {
     store.push(m);
     return token;
   });
-  const restore = (s) => {
-    let n = 0;
-    const out = String(s ?? '').replace(NAV_SENTINEL_RE, (_, i) => {
-      const original = store[Number(i)];
-      if (original === undefined) return '';
-      n += 1;
-      return original;
-    });
-    return { text: out, ok: n === store.length };
-  };
+  const restore = (s) => restoreIndexedSentinels(s, NAV_SENTINEL_RE, store);
   return { masked, expected: store.length, restore };
 }
 

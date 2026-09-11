@@ -15801,7 +15801,6 @@ async function generateAndValidateArticle(url, sourceContext = null) {
 
   // Step 3b: Translate to EN/DE/FR (only runs if not a duplicate)
   await translateArticle(data);
-  preserveMunicipalityNamesInMetadata(data);
 
   // Step 3b.0: Rilocalizza gli slug en/de/fr (issue #191). Questo e' il primo
   // istante della pipeline in cui i titoli tradotti esistono, quindi e' il
@@ -15910,6 +15909,12 @@ async function generateAndValidateArticle(url, sourceContext = null) {
     e.qualityReject = true;
     throw e;
   }
+
+  // This is the last metadata mutation before the primary write path. The
+  // placeholder guard may replace a localized imageAlt wholesale with its IT
+  // fallback; restore municipality names only after that replacement, or a
+  // comune present only in the localized source would be lost.
+  preserveMunicipalityNamesInMetadata(data);
 
   // Step 3a.2: gate deterministico sui body tradotti — BLOCCANTE (#5661).
   // Stesso punto e stessa ragione dello Step 3a.1 qui sopra: e' dopo tutte le
