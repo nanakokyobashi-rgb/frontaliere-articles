@@ -6321,7 +6321,7 @@ async function _callOpenAICompatible(apiModel, messages, opts, { endpoint, apiKe
             markModelExhausted(modelForTracking, 'quota', '', { recordScore: _shouldRecordScore(opts) });
             _stats.exhausted++;
           }
-          throw new Error(`[${displayModel}] Daily request limit reached`);
+          throw Object.assign(new Error(`[${displayModel}] Daily request limit reached`), { exhausted: true });
         }
         // Non-retryable client errors (unknown model, context too small)
         const nrc = classifyNonRetryableError(res.status, raw);
@@ -7856,7 +7856,7 @@ async function _callGeminiRaw(model, messages, opts) {
           // Gate sul parametro, non sul call site (#846).
           markModelExhausted(model, 'quota', '', { recordScore: _shouldRecordScore(opts) });
           _stats.exhausted++;
-          throw new Error(`[${model}] Daily quota reached`);
+          throw Object.assign(new Error(`[${model}] Daily quota reached`), { exhausted: true });
         }
         // Non-retryable client errors (unknown model, context too small)
         const nrc = classifyNonRetryableError(res.status, raw);
@@ -8175,15 +8175,29 @@ export async function callSingleModel(messages, opts = {}) {
     throw new Error(`[${model}] Model is exhausted for this run`);
   }
 
+  // Keep direct calls on the same ledger contract as the fallback cascade.
+  // Claude's usage-limit path can replace the requested model with Codex, so
+  // the reference must be passed through the provider call and the model that
+  // actually answered gets the success credit.
+  const callModelRef = { model, provider: getProvider(model) };
+  const callOpts = { ...o, modelUsedRef: callModelRef };
+
   try {
-    return await _callModel(model, messages, o);
+    const result = await _callModel(model, messages, callOpts);
+    const servedModel = callModelRef.model || model;
+    recordModelSuccess(servedModel, { recordScore: o.recordScore });
+    if (o.modelUsedRef && typeof o.modelUsedRef === 'object') {
+      Object.assign(o.modelUsedRef, callModelRef);
+      o.modelUsedRef.model = servedModel;
+    }
+    return result;
   } catch (error) {
     // callLLM has this companion in its cascade catch. A direct caller also
     // reaches the request-cap learning paths, so it must record the same
     // outcome or a cap proposal can be the only ledger evidence for the model.
     recordModelFailure(model, {
       nonRetryable: !!error?.nonRetryable,
-      exhausted: !!error?.exhausted,
+      exhausted: !!error?.exhausted || isQuotaExhaustedError(error) || _isTimeoutError(error),
       transportOnly: !!error?.transportFault,
       recordScore: o.recordScore,
     });

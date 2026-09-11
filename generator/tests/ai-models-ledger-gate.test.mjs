@@ -1080,6 +1080,64 @@ describe('#895 — il memo del cap appreso e la porta del ledger sono due cose d
     assert.equal(entry?.failures, 1, `callSingleModel non ha registrato il fallimento compagno: ${JSON.stringify(entry)}`);
   });
 
+  it('callSingleModel registra il successo del modello che ha davvero risposto', async () => {
+    process.env.GH_MODELS_PAT = 'test-pat';
+    const model = 'gpt-4o-mini';
+    globalThis.fetch = async () => ({
+      ok: true,
+      status: 200,
+      headers: new Map(),
+      text: async () => JSON.stringify({ choices: [{ message: { content: 'ok' } }] }),
+      json: async () => ({ choices: [{ message: { content: 'ok' } }] }),
+    });
+    const store = makeStore();
+    __installScoreStoreForTests(store.db, null);
+
+    const out = await callSingleModel([{ role: 'user', content: 'x' }], {
+      model,
+      maxRetriesPerModel: 1,
+      backoffMs: 1,
+      timeout: 5000,
+    });
+    await flushScores();
+
+    assert.equal(out, 'ok');
+    const entry = store.last()?.models?.[model];
+    assert.equal(entry?.successes, 1, `il successo diretto deve arrivare al ledger: ${JSON.stringify(store.last())}`);
+    assert.equal(entry?.score, 2, `il successo diretto deve aumentare il punteggio: ${JSON.stringify(entry)}`);
+    assert.equal(getStats().runOutcomes.find((item) => item.model === model)?.successes, 1);
+  });
+
+  it('callSingleModel classifica una quota plain come exhausted e non come failure retryable', async () => {
+    process.env.GH_MODELS_PAT = 'test-pat';
+    const model = 'gpt-4o-mini';
+    globalThis.fetch = async () => ({
+      ok: false,
+      status: 429,
+      headers: new Map(),
+      text: async () => JSON.stringify({ error: { message: 'userbymodelbyday quota exhausted' } }),
+      json: async () => ({ error: { message: 'userbymodelbyday quota exhausted' } }),
+    });
+    const store = makeStore();
+    __installScoreStoreForTests(store.db, null);
+
+    await assert.rejects(() => callSingleModel([{ role: 'user', content: 'x' }], {
+      model,
+      maxRetriesPerModel: 1,
+      backoffMs: 1,
+      timeout: 5000,
+    }));
+    await flushScores();
+
+    const entry = store.last()?.models?.[model];
+    assert.equal(entry?.failures, 1, `la quota diretta deve essere contata: ${JSON.stringify(store.last())}`);
+    assert.equal(entry?.score, -50, `la quota diretta non deve prendere la penale retryable: ${JSON.stringify(entry)}`);
+    assert.ok(
+      typeof entry?.exhaustedUntil === 'string' && !Number.isNaN(Date.parse(entry.exhaustedUntil)),
+      `la quota diretta deve persistere il ban: ${JSON.stringify(entry)}`,
+    );
+  });
+
   it('la sola ri-proposta di un cap non serializza un exhaustedUntil globale', async () => {
     const model = 'openrouter/cap-only-1214';
     const encoded = model.replace(/\//g, '__');
