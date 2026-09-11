@@ -744,7 +744,7 @@ export const PLACEHOLDER_RULES = Object.freeze([
     // l'etichetta. Si accetta solo a inizio riga (eventualmente con un bullet),
     // così una frase editoriale come «la domanda frequente riguarda...» non
     // diventa un falso positivo.
-    rx: new RegExp(String.raw`(?:^|\n)[ \t]*${FAQ_LINE_PREFIX_RX}\**[ \t]*${FAQ_LABEL_RX}\**[ \t]*[:.?\-–—][ \t]*(?=\S)`, 'im'),
+    rx: new RegExp(String.raw`(?:^|\n)[ \t]*${FAQ_LINE_PREFIX_RX}\**[ \t]*${FAQ_LABEL_RX}\**[ \t]*[:.?\-–—][ \t]*(?=\S)`, 'gim'),
     why: 'Etichetta FAQ non numerata rimasta nel testo pubblicato: è uno schema del prompt, non contenuto editoriale.',
   },
   {
@@ -796,10 +796,28 @@ export function findPromptPlaceholders(value) {
   if (typeof value !== 'string' || !value) return [];
   const hits = [];
   for (const rule of PLACEHOLDER_RULES) {
-    const m = rule.rx.exec(value);
-    if (!m) continue;
-    if (rule.id === 'faq-unnumbered-label' && isTranslatedFaqSectionHeading(value, m.index)) continue;
-    hits.push({ rule: rule.id, kind: rule.kind, found: m[0].trim(), index: m.index });
+    // A few structural matchers need a small custom scanner rather than a
+    // native RegExp. Preserve their established single-hit interface.
+    if (!(rule.rx instanceof RegExp)) {
+      const m = rule.rx.exec(value);
+      if (!m) continue;
+      if (rule.id === 'faq-unnumbered-label' && isTranslatedFaqSectionHeading(value, m.index)) continue;
+      hits.push({ rule: rule.id, kind: rule.kind, found: m[0].trim(), index: m.index });
+      continue;
+    }
+    // A translated plural FAQ heading is a legitimate section title. A
+    // non-global `exec()` would stop at that first excluded hit and miss a
+    // real label later in the same field, so every rule is scanned from the
+    // beginning and every occurrence gets its own exclusion decision.
+    const matcher = rule.rx.global
+      ? rule.rx
+      : new RegExp(rule.rx.source, `${rule.rx.flags}g`);
+    matcher.lastIndex = 0;
+    for (const m of value.matchAll(matcher)) {
+      if (rule.id === 'faq-unnumbered-label' && isTranslatedFaqSectionHeading(value, m.index)) continue;
+      hits.push({ rule: rule.id, kind: rule.kind, found: m[0].trim(), index: m.index });
+    }
+    matcher.lastIndex = 0;
   }
   return hits;
 }

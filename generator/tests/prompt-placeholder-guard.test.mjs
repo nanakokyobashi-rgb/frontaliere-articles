@@ -467,6 +467,15 @@ describe('i falsi positivi misurati sul corpus: `(max ` NON e\' un marcatore', (
     }
   });
 
+  it('non perde un’etichetta dopo una heading FAQ tradotta esclusa', () => {
+    const hits = findPromptPlaceholders(
+      '## Frequently Asked Questions: sezione editoriale\n'
+      + 'Frequently Asked Question: How do I request a refund?',
+    );
+    assert.deepEqual(hits.map((hit) => hit.rule), ['faq-unnumbered-label']);
+    assert.equal(hits[0].found, 'Frequently Asked Question:');
+  });
+
   it('non tratta una frase editoriale come etichetta FAQ', () => {
     assert.deepEqual(
       findPromptPlaceholders('La domanda frequente riguarda i tempi del rimborso.'),
