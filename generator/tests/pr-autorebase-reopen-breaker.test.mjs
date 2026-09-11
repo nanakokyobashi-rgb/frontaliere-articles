@@ -308,10 +308,24 @@ describe('stuck-red: un failure PROVATO non attribuibile non blocca il reopen', 
   it('il breaker vale anche per gli stuck-red: budget esaurito -> stop comunque', () => {
     const fp = reopenFingerprint({ ...green, vitestConclusion: 'failure' });
     const exhausted = { count: DEFAULT_MAX_REOPENS, fingerprint: fp };
-    expect(decideReopen({
-      vitestConclusion: 'failure', fingerprint: fp, prior: exhausted,
-      failureNotAttributable: 'red-main',
-    }).action).toBe('skip-breaker');
+    for (const failureNotAttributable of ['red-main', 'stale']) {
+      const d = decideReopen({
+        vitestConclusion: 'failure', fingerprint: fp, prior: exhausted,
+        failureNotAttributable, reviewGateFailure: true, reviewSkippedByGuard: true,
+      });
+      expect(d.action).toBe('skip-breaker');
+      expect(d.cause).toBe('stuck-red');
+    }
+  });
+
+  it('il messaggio del breaker conserva stuck-red anche se il gate è saltato', () => {
+    const fp = reopenFingerprint({ ...green, vitestConclusion: 'failure' });
+    const body = renderReopenBudget({
+      count: DEFAULT_MAX_REOPENS, max: DEFAULT_MAX_REOPENS, fingerprint: fp,
+      action: 'skip-breaker', reason: 'stuck', cause: 'stuck-red',
+    });
+    expect(body).toContain('stuck-red');
+    expect(body).not.toContain('Re-review guard');
   });
 
   it('WIRING: il call-site post-rebase passa stuckRedReason a guardedReopen', () => {

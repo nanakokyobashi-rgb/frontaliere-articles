@@ -317,13 +317,20 @@ export const CLAUDE_REVIEW_STEP_NAME = 'Run Claude review';
 /** Nome dello step che rende esplicita una review abortita senza verdetto. */
 export const REVIEW_ABORT_STEP_NAME = 'Fail on transient API error (no review posted)';
 
+/** Nome dello step che decide se Claude va saltata sul contributo invariato. */
+export const REVIEW_GUARD_STEP_NAME = 'Re-review guard (skip Claude when no code changed since last LGTM)';
+
+/** Nome dello step che distingue un gate rosso per verdetto da un errore transitorio. */
+export const REVIEW_GATE_FAILURE_STEP_NAME = 'Classify review gate failure';
+
 const REVIEW_STEP_IN_FLIGHT = new Set(['queued', 'in_progress']);
-const NON_GATING_REVIEW_STEPS = new Set([
+export const NON_GATING_REVIEW_STEPS = new Set([
   'Mint GitHub App token for Claude review',
   'Claude usage metrics',
   'Explain the job verdict in the run summary',
+  REVIEW_GATE_FAILURE_STEP_NAME,
 ]);
-// Questi due step appartengono alla review, non al codice della PR. Un loro
+// Questi step appartengono alla review, non al codice della PR. Un loro
 // rosso non deve trasformare un gate puro in un falso rosso dei test.
 export const REVIEW_DEATH_STEP_NAMES = new Set([
   CLAUDE_REVIEW_STEP_NAME,
@@ -398,9 +405,11 @@ export function vitestFailureIsReviewGate(steps) {
 
 /**
  * Il gate è rosso perché il `Re-review guard` ha saltato Claude, non perché la
- * review sia fallita a metà? Pura e conservativa: un abort esplicito della
- * review prevale sul semplice `skipped`, così un errore API non consuma/nega
- * il one-shot del review gate (#1140).
+ * review sia fallita a metà? Pura e conservativa: lo skip è valido solo se il
+ * guard è riuscito, l'abort è `skipped` e il classificatore del gate ha
+ * confermato un `verdict`. Se il classificatore è `success` (errore API,
+ * rate-limit o causa sconosciuta), oppure manca, il rosso non è un verdetto
+ * carry-forward: il one-shot resta disponibile (#1140).
  *
  * @param {Array<{name?: string, conclusion?: string}>} steps
  * @returns {boolean}
@@ -409,8 +418,12 @@ export function reviewSkippedByGuard(steps) {
   if (!Array.isArray(steps) || steps.length === 0) return false;
   const gate = steps.find((s) => s && s.name === REVIEW_GATE_STEP_NAME);
   if (!gate || gate.conclusion !== 'failure') return false;
+  const classification = steps.find((s) => s && s.name === REVIEW_GATE_FAILURE_STEP_NAME);
+  if (!classification || classification.conclusion !== 'failure') return false;
+  const guard = steps.find((s) => s && s.name === REVIEW_GUARD_STEP_NAME);
+  if (!guard || guard.conclusion !== 'success') return false;
   const abort = steps.find((s) => s && s.name === REVIEW_ABORT_STEP_NAME);
-  if (abort && ['failure', 'cancelled'].includes(abort.conclusion)) return false;
+  if (!abort || abort.conclusion !== 'skipped') return false;
   const review = steps.find((s) => s && s.name === CLAUDE_REVIEW_STEP_NAME);
   return Boolean(review && review.conclusion === 'skipped');
 }

@@ -11,6 +11,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import {
   CLAUDE_REVIEW_STEP_NAME,
+  NON_GATING_REVIEW_STEPS,
   REVIEW_GATE_STEP_NAME,
 } from '../../scripts/ci/lib/vitestCheck.mjs';
 import { reviewOnlyFailure } from '../../scripts/ci/redcheck-review-prefilter.mjs';
@@ -108,6 +109,7 @@ test('l helper importa i nomi degli step e il matcher dei finding condivisi', as
   );
   assert.match(helperSource, /REVIEW_GATE_STEP_NAME/);
   assert.match(helperSource, /CLAUDE_REVIEW_STEP_NAME/);
+  assert.match(helperSource, /NON_GATING_REVIEW_STEPS/);
   assert.match(helperSource, /REDFLAG_IMPORTANT_RE/);
   assert.match(helperSource, /REVIEWER_BOT_LOGIN_RE/);
 });
@@ -165,6 +167,23 @@ test('il predicato richiede un finding reale sulla HEAD, non la conclusion dello
       reviews: [[review('`x.mjs:1`: 🔴 Important: il gate manca.', 'b'.repeat(40))]],
     }),
     false,
+  );
+});
+
+test('il classificatore failure resta nel job ma non aggiunge una failure di codice', () => {
+  assert.equal(
+    NON_GATING_REVIEW_STEPS.has('Classify review gate failure'),
+    true,
+    'il nome del classificatore deve provenire dalla stessa topologia condivisa',
+  );
+  assert.equal(
+    reviewOnlyFailure({
+      headSha: HEAD,
+      jobs: [{ jobs: jobs([{ name: 'Classify review gate failure', conclusion: 'failure' }]) }],
+      reviews: [[review('`x.mjs:1`: 🔴 Important: il gate manca.')]],
+    }),
+    true,
+    'la failure esplicita del classificatore distingue il verdetto ma non deve instradare al redcheck fixer',
   );
 });
 

@@ -73,7 +73,7 @@ import { FIX_OUTCOME_RE } from './close-recovered-failure-issues.mjs';
 // copie divergono in silenzio, e qui divergere significa chiudere una issue che
 // nessun canale risolvera'. Entrambi i moduli hanno la guardia `argv` sul
 // proprio `main`, quindi importarli non fa ne' rete ne' scritture.
-import { permanentBlock, isFixture } from './transport-identical-twins.mjs';
+import { permanentBlock, isFixture, localCouplings } from './transport-identical-twins.mjs';
 // Le issue che il manifest tiene APERTE (`corpus-only-pending` → `trackingIssue`).
 // Sorgente unica, come `mirrorLockedPaths()`: la lista viene dal manifest, non da
 // numeri ricopiati qui che divergerebbero al primo cambio di voce (AGENTS.md #6).
@@ -130,10 +130,38 @@ export function readManifestSnapshot(manifestPath = MANIFEST_PATH) {
   const man = JSON.parse(readFileSync(manifestPath, 'utf8'));
   const files = Array.isArray(man?.files) ? man.files.filter((f) => f?.path) : [];
   const corpusPaths = new Set(files.map((f) => f.path));
+  const modeOf = new Map(files.map((f) => [f.path, f.mode]));
   for (const f of files) {
     const sitePath = f.sitePath || f.path;
     if (sitePath !== f.path && corpusPaths.has(sitePath)) {
       throw new Error(`manifest sitePath collision: ${f.path} -> ${sitePath}`);
+    }
+  }
+
+  // `localCouplings()` espone il mode dichiarato, ma non il fatto che quel
+  // vicino sia escluso PER SEMPRE dal trasporto. In particolare un
+  // `identical` sotto `.github/workflows/` resta bloccato quando il token non
+  // ha lo scope `workflows`: passare solo `mode: identical` al ramo fixture lo
+  // farebbe sembrare trasportabile e lascerebbe il fixture fuori da `stranded`.
+  // Misuriamo prima la chiusura di `permanentBlock`, poi la passiamo a
+  // `descentBlock` così la permanenza si propaga lungo la stessa catena del
+  // trasporto vero.
+  const couplingsOf = new Map();
+  for (const f of files) {
+    if (MIRROR_LOCKED_MODES.has(f.mode) && isFixture(f.path)) {
+      couplingsOf.set(f.path, localCouplings(f.path, modeOf));
+    }
+  }
+  const blockedForever = new Set();
+  for (let changed = true; changed; ) {
+    changed = false;
+    for (const f of files) {
+      if (!MIRROR_LOCKED_MODES.has(f.mode) || blockedForever.has(f.path)) continue;
+      const couplings = couplingsOf.get(f.path) || [];
+      if (descentBlock(f, { couplings, blockedForever })) {
+        blockedForever.add(f.path);
+        changed = true;
+      }
     }
   }
 
@@ -147,7 +175,7 @@ export function readManifestSnapshot(manifestPath = MANIFEST_PATH) {
     names.set(f.path, sitePath);
     if (MIRROR_LOCKED_MODES.has(f.mode)) {
       locked.set(f.path, sitePath);
-      if (descentBlock(f)) stranded.add(f.path);
+      if (blockedForever.has(f.path)) stranded.add(f.path);
     }
   }
   for (const f of files) {
@@ -241,20 +269,40 @@ export function mirrorLockedPaths(manifestPath = MANIFEST_PATH) {
  * (il token del ciclo non ha lo scope `workflows`: «restano una copia a mano»),
  * ed e' esattamente cio' che un verdetto `blocked-workflows-scope` nomina.
  *
- * Un fixture e' incerto e non «no»: il trasporto lo copia solo se i suoi
- * accoppiamenti locali sono a loro volta `identical`, e quella domanda vuole
- * l'albero del repo, non il manifest. Qui vale come non-discendente perche' il
- * lato sicuro dell'errore e' parcheggiare invece di chiudere: un parcheggio
- * sbagliato ha una porta di rientro (`needs-human-sweep.yml`), una chiusura
- * sbagliata no.
+ * Un fixture segue la stessa regola del trasporto: il suo sottoalbero deve
+ * essere leggibile e ogni accoppiamento deve restare `identical`. Il chiamante
+ * passa gli accoppiamenti misurati da `localCouplings`, invece di trattare la
+ * semplice forma «fixture» come un blocco permanente: altrimenti il hand-off
+ * parcheggerebbe anche fixture che il trasporto copia davvero.
+ *
+ * `localCouplings` conserva il mode dichiarato, mentre `permanentBlock` guarda
+ * anche la destinazione effettiva: per esempio un gemello `identical` sotto
+ * `.github/workflows/` è `blockedForever` senza scope `workflows`. Prima di
+ * delegare la decisione al criterio condiviso rendiamo esplicita quella
+ * permanenza; `blockedForever` è la chiusura già calcolata dal manifest e
+ * permette di propagare il blocco anche lungo una catena fixture → fixture.
  */
-export function descentBlock(entry) {
-  const forever = permanentBlock(entry, { outOfScopePrefixes: [] });
-  if (forever) return forever;
-  if (isFixture(entry?.path)) {
-    return 'fixture: il trasporto lo copia solo se i suoi accoppiamenti locali sono `identical`, e qui non e\' verificabile';
-  }
-  return null;
+export function descentBlock(entry, { couplings = [], blockedForever = new Set() } = {}) {
+  const effectiveCouplings = couplings.map((coupling) => {
+    const directReason = permanentBlock(
+      { path: coupling.path, mode: coupling.mode },
+      { outOfScopePrefixes: [] },
+    );
+    const isBlockedForever = blockedForever.has(coupling.path) || Boolean(directReason);
+    if (!isBlockedForever) return coupling;
+    return {
+      ...coupling,
+      // `couplingBlockers()` condivide il criterio del trasporto attraverso
+      // il mode: uno stato effettivo permanente deve quindi entrare nella
+      // stessa lista anche quando il mode dichiarato era `identical`.
+      mode: coupling.mode === 'identical' ? 'blockedForever' : coupling.mode,
+      blockedForever: true,
+      permanentBlock: typeof directReason === 'string'
+        ? directReason
+        : `blockedForever: ${coupling.path}`,
+    };
+  });
+  return permanentBlock(entry, { outOfScopePrefixes: [], couplings: effectiveCouplings });
 }
 
 /**
@@ -568,18 +616,27 @@ export function handoffDecision({
   // gemello che `transport-identical-twins.mjs` rifiuta per SEMPRE quella frase
   // e' falsa — i 25 workflow `identical` sono il caso canonico, ed e'
   // precisamente quello che un `blocked-workflows-scope` nomina: il fix di la'
-  // non scendera' mai da solo, la discesa e' una copia a mano, e chiudere qui
-  // fa evaporare l'unico posto in cui quella copia e' ancora richiesta. Si
-  // consegna lo stesso (la fix si scrive comunque di la') e si parcheggia,
-  // elencando i gemelli fermi come residuo: e' lavoro che resta qui.
-  const stuck = shippable.filter((p) => stuckSet.has(p));
-  if (stuck.length) {
+  // non scendera' mai da solo, la discesa e' una copia a mano. Anche gli altri
+  // path citati ma non `identical` restano residui: la diagnosi puo' essere
+  // aggregata e chiudere qui mentre una sua meta' e' ancora lavoro del corpus
+  // (la stessa regola gia' usata dal ramo `no-root-cause`).
+  const residual = [...new Set(shippable.filter((p) => stuckSet.has(p) || !locked.has(p)))];
+  if (residual.length) {
+    const stuckResidual = residual.filter((p) => stuckSet.has(p));
+    const otherResidual = residual.filter((p) => !stuckSet.has(p));
+    const details = [];
+    if (stuckResidual.length) {
+      details.push(`${stuckResidual.length} gemelli che nessun trasporto porta giu' (${stuckResidual.join(', ')}): la discesa e' una copia a mano`);
+    }
+    if (otherResidual.length) {
+      details.push(`${otherResidual.length} altri path citati non garantiti dal trasporto (${otherResidual.join(', ')})`);
+    }
     return {
       handoff: true,
       paths: sitePaths,
-      residual: stuck,
+      residual,
       close: false,
-      reason: `diagnosi con ${sitePaths.length} path del sito, di cui ${stuck.length} gemelli che nessun trasporto porta giu' (${stuck.join(', ')}): la discesa e' una copia a mano`,
+      reason: `diagnosi con ${sitePaths.length} path del sito; ${details.join('; ')}: la issue resta aperta`,
     };
   }
   // STESSA FORMA del ramo `stuck` qui sopra, per una ragione diversa: qui il

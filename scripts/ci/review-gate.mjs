@@ -51,7 +51,7 @@
  */
 import { findTestOnlyApproval } from './review-test-policy.mjs';
 import { execFileSync } from 'node:child_process';
-import { readFileSync } from 'node:fs';
+import { appendFileSync, readFileSync } from 'node:fs';
 import { parseCodexFallbackEvidence, FALLBACK_STATUS } from './claude-codex-fallback.mjs';
 import { createHash } from 'node:crypto';
 import {
@@ -68,6 +68,27 @@ const PR = process.env.PR_NUMBER || '';
 const HEAD_SHA = process.env.HEAD_SHA || '';
 const RUN_URL = process.env.RUN_URL || '';
 const MARKER = '<!-- REVIEW_GATE_NO_LGTM -->';
+let gateFailureKind = 'verdict';
+
+/**
+ * Il check richiesto deve restare rosso anche quando l'API è degradata, ma il
+ * consumer dell'autorebase deve distinguere quel rosso da un verdetto negativo.
+ * Gli step della Jobs API espongono la conclusion, non le output del processo:
+ * il workflow aggiunge quindi un classificatore che legge questo output.
+ */
+function markTransientFailure() {
+  gateFailureKind = 'transient';
+}
+
+function writeFailureKind() {
+  const output = process.env.GITHUB_OUTPUT;
+  if (!output) return;
+  try {
+    appendFileSync(output, `failure_kind=${gateFailureKind}\n`);
+  } catch (error) {
+    console.log(`review-gate: impossibile scrivere failure_kind (${String(error).slice(0, 120)}).`);
+  }
+}
 
 function gh(args, { json = true } = {}) {
   const out = execFileSync('gh', args, { encoding: 'utf8', maxBuffer: 64 * 1024 * 1024 });
@@ -94,6 +115,7 @@ function lastBotReview() {
     // approva o blocca su un insieme vuoto senza dirlo.
     reviews = gh(['api', `repos/${REPO}/pulls/${PR}/reviews`, '--paginate']) || [];
   } catch (e) {
+    markTransientFailure();
     console.log(`review-gate: impossibile leggere le review (${String(e).slice(0, 160)}).`);
     return undefined; // undefined = incertezza, diverso da null = nessuna review
   }
@@ -132,6 +154,7 @@ function driftFallbackApproves() {
       .map((s) => s.trim())
       .filter(Boolean);
   } catch (e) {
+    markTransientFailure();
     console.log(`drift-fallback: file della PR illeggibili (${String(e).slice(0, 160)}) — no fallback.`);
     return false;
   }
@@ -150,6 +173,7 @@ function driftFallbackApproves() {
       '{assoc: .author_association, login: .user.login, type: .user.type, body: (.body // "")}',
     ]);
   } catch (e) {
+    markTransientFailure();
     console.log(`drift-fallback: meta della PR illeggibile (${String(e).slice(0, 160)}) — no fallback.`);
     return false;
   }
@@ -196,6 +220,7 @@ function reviewAppliesToHead(last) {
   if (last.commit_id === HEAD_SHA) return true;
   const headFp = fingerprint(HEAD_SHA);
   const revFp = fingerprint(last.commit_id);
+  if (!headFp || !revFp) markTransientFailure();
   return Boolean(headFp && revFp && headFp === revFp);
 }
 
@@ -229,6 +254,7 @@ async function main() {
           );
         }
       } catch (error) {
+        markTransientFailure();
         console.log(
           `review-gate: classificazione scope fallita (${String(error).slice(0, 180)}) → finding bloccante per sicurezza.`,
         );
@@ -273,6 +299,7 @@ async function main() {
   commentOnce(
     `${MARKER}\n⚠️ **Review gate bloccato** — sulla head \`${HEAD_SHA}\` non c'e' una review Claude con \`## LGTM\` e senza \`🔴 Important\`. Il merge resta bloccato finche' non ne arriva una.${RUN_URL ? `\n\nRun: ${RUN_URL}` : ''}`,
   );
+  writeFailureKind();
   console.log(
     "::error::Nessuna review Claude approvante sulla head: manca '## LGTM' oppure e' presente un finding 🔴 Important.",
   );
@@ -280,6 +307,8 @@ async function main() {
 }
 
 main().catch((error) => {
+  markTransientFailure();
+  writeFailureKind();
   console.error(`review-gate: errore non gestito (${String(error).slice(0, 240)}).`);
   process.exit(1);
 });

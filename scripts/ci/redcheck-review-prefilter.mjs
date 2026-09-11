@@ -12,6 +12,7 @@
 import { pathToFileURL } from 'node:url';
 import {
   CLAUDE_REVIEW_STEP_NAME,
+  NON_GATING_REVIEW_STEPS,
   REVIEW_GATE_STEP_NAME,
 } from './lib/vitestCheck.mjs';
 import {
@@ -39,7 +40,8 @@ export function reviewOnlyFailure(input) {
   const testsJob = jobs.find((job) => job?.name === 'tests (node --test)');
   const steps = Array.isArray(testsJob?.steps) ? testsJob.steps : [];
   const failures = steps
-    .filter((step) => step?.conclusion === 'failure')
+    .filter((step) => step?.conclusion === 'failure'
+      && !NON_GATING_REVIEW_STEPS.has(String(step.name || '')))
     .map((step) => step.name);
   if (failures.length !== 1 || failures[0] !== REVIEW_GATE_STEP_NAME) return false;
 
