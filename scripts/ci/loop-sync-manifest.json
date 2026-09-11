@@ -231,6 +231,16 @@
       }
     },
     {
+      "path": "scripts/ci/claim-issue-group-in-flight.mjs",
+      "mode": "corpus-only",
+      "reason": "Claim atomico del leader e dei membri B19 prima del fixer corpus. Il workflow issue-fix.yml del corpus carica il contesto di gruppo e passa ISSUE_NUMBERS; il sito non ha questo workflow adattato ne' il consumer corpus dei follow-up raggruppati, quindi non esiste un gemello da portare e il file resta specifico del corpus.",
+      "baseline": {
+        "site": null,
+        "corpus": "69ea673e0dd1ea8b",
+        "alignedAt": "2026-09-11"
+      }
+    },
+    {
       "path": "scripts/ci/claude-rate-limit.mjs",
       "mode": "adapted",
       "reason": "Parser condiviso del fallback con riconoscimento corpus dei log testuali Claude/Anthropic e dei messaggi di quota legacy; il sito usa il parser degli eventi strutturati.",
