@@ -39,14 +39,37 @@ import { fileURLToPath } from 'node:url';
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const AGENTS = fs.readFileSync(path.join(ROOT, 'AGENTS.md'), 'utf8');
 
-/** True se git traccia almeno un file sotto `rel`. Fail-open su errore di git. */
-function isTracked(rel) {
+/** True se git traccia almeno un file sotto `rel`; un probe fallito è esplicito. */
+function isTracked(rel, exec = execFileSync) {
   try {
-    const out = execFileSync('git', ['-C', ROOT, 'ls-files', '--', rel], { encoding: 'utf8' });
+    const out = exec('git', ['-C', ROOT, 'ls-files', '--', rel], { encoding: 'utf8' });
     return out.trim().length > 0;
-  } catch {
-    return true; // git non disponibile: non trasformare un guard in un falso rosso
+  } catch (error) {
+    throw new Error(`Impossibile determinare se git traccia '${rel}'.`, { cause: error });
   }
+}
+
+const OPERATIONAL_ORDER = /\b(?:must|should|need\s+to|use|run|invoke|launch|execute|before|prima|usa|usare|utilizza|lancia|lanciare|esegui|eseguire|invoca|invocare)\b/i;
+const NEGATED_ORDER = /\b(?:do\s+not|don't|never|must\s+not|should\s+not|non)\s+(?:use|run|invoke|launch|execute|usa|usare|utilizza|lancia|esegui|invoca)\b/i;
+
+/**
+ * Cerca ordini operativi nelle sole righe Markdown attive.
+ *
+ * Un riferimento descrittivo, un blockquote o un esempio fenced non ordina
+ * all'agente di usare lo strumento e non deve quindi accendere il guard.
+ */
+function hasOperationalMention(markdown, tooling) {
+  let fenced = false;
+  return markdown.split(/\r?\n/).some((line) => {
+    if (/^\s*(```+|~~~+)/.test(line)) {
+      fenced = !fenced;
+      return false;
+    }
+    if (fenced || /^\s*>/.test(line)) return false;
+    if (!tooling.mentions.some((re) => re.test(line))) return false;
+    if (NEGATED_ORDER.test(line)) return false;
+    return OPERATIONAL_ORDER.test(line);
+  });
 }
 
 /**
@@ -71,7 +94,7 @@ const TOOLING = [
 test('AGENTS.md non ordina strumenti che il repo non porta', () => {
   const offenders = [];
   for (const t of TOOLING) {
-    const cited = t.mentions.some((re) => re.test(AGENTS));
+    const cited = hasOperationalMention(AGENTS, t);
     if (!cited) continue;
     if (isTracked(t.probe)) continue;
     offenders.push(
@@ -93,7 +116,30 @@ test('il guard vede il blocco anche senza i suoi marker', () => {
   const senzaMarker = 'Usa i tool GitNexus per capire il codice.\n';
   const t = TOOLING[0];
   assert.ok(
-    t.mentions.some((re) => re.test(senzaMarker)),
-    'La rilevazione dipende dai soli marker HTML: un blocco riscritto a mano passerebbe.',
+    hasOperationalMention(senzaMarker, t),
+    'La rilevazione deve riconoscere un ordine operativo anche senza marker HTML.',
+  );
+});
+
+test('il guard ignora citazioni descrittive, blockquote ed esempi fenced', () => {
+  const t = TOOLING[0];
+  const descriptive = [
+    'Questo test documenta il nome GitNexus senza ordinarne l\'uso.',
+    '> Usa GitNexus prima di ogni modifica.',
+    '```md',
+    'Usa GitNexus prima di ogni modifica.',
+    '```',
+  ].join('\n');
+  assert.equal(hasOperationalMention(descriptive, t), false);
+});
+
+test('un errore del probe git non viene trasformato in un falso verde', () => {
+  assert.throws(
+    () => isTracked('.gitnexus', () => {
+      throw new Error('git missing');
+    }),
+    (error) => error instanceof Error
+      && error.message.includes("Impossibile determinare se git traccia '.gitnexus'.")
+      && error.cause?.message === 'git missing',
   );
 });

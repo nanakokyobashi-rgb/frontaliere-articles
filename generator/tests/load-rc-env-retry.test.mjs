@@ -16,7 +16,15 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { isRetryableRcFetchStatus, extractGoogleErrorReason, rcFetchBackoffMs, RC_FETCH_TIMEOUT_MS } from '../scripts/load-rc-env.mjs';
+import {
+  ALLOW_EMPTY_RC_KEYS,
+  extractGoogleErrorReason,
+  formatMissingRcKeys,
+  isRetryableRcFetchStatus,
+  rcFetchBackoffMs,
+  RC_FETCH_TIMEOUT_MS,
+  shouldExportRcValue,
+} from '../scripts/load-rc-env.mjs';
 import { TOKEN_EXCHANGE_TIMEOUT_MS, extractOAuthErrorReason, isRetryableTokenExchangeStatus } from '../scripts/lib/google-service-account-token.mjs';
 import { sliceBetween, sliceFrom } from './lib/anchored-slice.mjs';
 
@@ -41,6 +49,33 @@ test('il backoff cresce esponenzialmente per tentativo', () => {
   assert.equal(rcFetchBackoffMs(2), 2000);
   assert.equal(rcFetchBackoffMs(3), 4000);
   assert.equal(rcFetchBackoffMs(4), 8000);
+});
+
+test('i nove parametri JOB_EMAIL_RANKING preservano il segnale empty/off', () => {
+  const rankingKeys = [
+    'JOB_EMAIL_RANKING_ENABLED',
+    'JOB_EMAIL_RANKING_ROLLOUT',
+    'JOB_EMAIL_RANKING_ALPHA',
+    'JOB_EMAIL_RANKING_EPSILON',
+    'JOB_EMAIL_RANKING_WINDOW_DAYS',
+    'JOB_EMAIL_RANKING_SHRINK_K',
+    'JOB_EMAIL_RANKING_MIN_IMPRESSIONS',
+    'JOB_EMAIL_RANKING_NEW_JOB_BOOST',
+    'JOB_EMAIL_RANKING_MAX_CONSECUTIVE_EXPOSURES',
+  ];
+  for (const key of rankingKeys) {
+    assert.equal(ALLOW_EMPTY_RC_KEYS.has(key), true, `${key} deve ammettere il valore empty esplicito`);
+    assert.equal(shouldExportRcValue('', key), true, `${key}=empty deve arrivare al consumer`);
+    assert.equal(shouldExportRcValue(null, key), false, `${key} assente deve restare missing`);
+  }
+});
+
+test('il loader nomina i parametri RC irrisolti senza loggare valori', () => {
+  assert.equal(
+    formatMissingRcKeys(['JOB_EMAIL_RANKING_SHRINK_K', 'JOB_EMAIL_RANKING_MAX_CONSECUTIVE_EXPOSURES']),
+    '⚠️ Remote Config keys not resolved: JOB_EMAIL_RANKING_SHRINK_K, JOB_EMAIL_RANKING_MAX_CONSECUTIVE_EXPOSURES',
+  );
+  assert.equal(formatMissingRcKeys([]), '');
 });
 
 // #199: né fetchTemplateViaRest né exchangeAssertionForToken avevano un
