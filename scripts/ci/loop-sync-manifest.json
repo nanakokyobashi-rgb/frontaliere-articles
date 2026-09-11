@@ -575,8 +575,8 @@
       "reason": "Sorgente unica della domanda «questa issue e' tenuta aperta dal manifest?» (issue #986). Una voce `corpus-only-pending` dichiara che il gemello sul sito manca e punta al lavoro che lo traccia via `trackingIssue`, e quel campo ha un contratto scritto in due posti indipendenti: `loop-sync-manifest-scope.test.mjs` pretende che la issue sia APERTA, e `loop-drift-check.mjs` promuove la voce a `-landed` solo quando il gemello arriva — con la issue chiusa la voce resta pending per sempre, dicendo «in lavorazione» su un lavoro che nessuno sta piu' facendo (la forma di #45). Nessuno dei closer del ciclo leggeva quel contratto: misurato il 2026-09-07 su #986, la chiusura era raggiungibile da `handoff-to-site.mjs` (il ramo `blocked-*` torna `close: true` appena la diagnosi cita un path spedibile, e `.github/workflows/issue-fix.yml` lo e' — il solo canale che poteva far avanzare quella issue era anche quello che la distruggeva), da `reconcile-followups.mjs` (`closeEligible` sul token-match, e #986 non e' aggregata) e da `followup-drainer.mjs` (verdict-exit su `already-fixed`). E' `corpus-only` perche' i pin li definisce il manifest di QUESTO repo: il sito ha il proprio, e un elenco di numeri non e' portabile fra i due.",
       "baseline": {
         "site": null,
-        "corpus": "e0147683e7c7d773",
-        "alignedAt": "2026-09-07"
+        "corpus": "a4acaa8097f41997",
+        "alignedAt": "2026-09-11"
       }
     },
     {
@@ -604,9 +604,10 @@
       "mode": "adapted",
       "reason": "Solo la cadenza (53 5 invece di 17 5). NB: la mia esclusione iniziale era sbagliata — lo step Claude e' gatato su has_novel=='true', quindi senza pattern nuovi il workflow esce a costo ZERO, non brucia una run al giorno.",
       "baseline": {
-        "site": "4eee66a5917239d8",
-        "corpus": "8fa19800e54df34d",
-        "alignedAt": "2026-08-07"
+        "site": "c24d679b209811d3",
+        "corpus": "53ae79b47ab50b37",
+        "alignedAt": "2026-09-11",
+        "forcedAt": "2026-09-11T23:21:48.970Z"
       }
     },
     {
@@ -792,9 +793,10 @@
       "mode": "adapted",
       "reason": "Niente npm ci; ponte RC del corpus; promozione via GITHUB_PAT_NANAKO; cadenza sfasata dal sito.",
       "baseline": {
-        "site": "d9409a02c28b646a",
-        "corpus": "b51bd246fac7389d",
-        "alignedAt": "2026-08-07"
+        "site": "f78b4128cab80562",
+        "corpus": "415aef09bd9f7e59",
+        "alignedAt": "2026-09-11",
+        "forcedAt": "2026-09-11T23:21:49.006Z"
       }
     },
     {
@@ -2924,8 +2926,8 @@
       "reason": "Porta al SITO la diagnosi che il fixer di QUESTO repo ha pagato e non puo' applicare (il caso «lato sbagliato del mirror»: 4 su 4 dei `blocked-admin-settings` aperti il 2026-08-24). E' `corpus-only` e non `corpus-only-pending`: il gemello sul sito non e' questo file, e' la direzione INVERSA — sito->corpus — che ha gia' il suo meccanismo in `loop-drift-check.mjs`. Un secondo script identico la' non servirebbe a niente, quindi non c'e' nulla da portare. Aggiornato il 2026-08-25: FIX_OUTCOME_RE non e' piu' ridefinita qui ma importata da close-recovered-failure-issues.mjs, che gia' la esportava — due copie identiche della stessa regex erano due posti dove il contratto poteva divergere in silenzio. Aggiornato il 2026-09-04 (#316): `no-root-cause` e' instradabile quando cita un path `mode: identical`, perche' su #316 quel verdetto NON significava «causa non trovata» ma «lato sbagliato del mirror» per 10 run consecutivi.",
       "baseline": {
         "site": null,
-        "corpus": "2d5f60e1130204c3",
-        "alignedAt": "2026-08-25"
+        "corpus": "4b70cd510b6716dd",
+        "alignedAt": "2026-09-11"
       }
     },
     {
