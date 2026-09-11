@@ -135,12 +135,12 @@ export function isLogicSource(bytes, sourceLogic) {
     `^(?:${key}|["']${key}["']):(?:[ \\t]|$)`,
     'u',
   ).test(line);
-  const workflowCallKey = /^(?:[ \\t]+)(?:workflow_call|["']workflow_call["']):(?:[ \\t]|$)/u;
-  const inlineWorkflowCallKey = /(?:^|[,{][ \\t]*)(?:workflow_call|["']workflow_call["']):/u;
+  const workflowCallKey = /^(?:[ \t]+)(?:workflow_call|["']workflow_call["']):(?:[ \t]|$)/u;
+  const inlineWorkflowCallKey = /(?:^|[,{][ \t]*)(?:workflow_call|["']workflow_call["']):/u;
 
   let hasWorkflowCall = false;
   for (let index = 0; index < lines.length; index += 1) {
-    const match = lines[index].match(/^(?:on|["']on["']):[ \\t]*(.*)$/u);
+    const match = lines[index].match(/^(?:on|["']on["']):[ \t]*(.*)$/u);
     if (!match) continue;
     const value = match[1].trim();
     if (value.startsWith('{')) {
@@ -154,9 +154,9 @@ export function isLogicSource(bytes, sourceLogic) {
       let childIndent = null;
       for (let cursor = index + 1; cursor < lines.length; cursor += 1) {
         const line = lines[cursor];
-        if (/^[ \\t]*(?:#.*)?$/u.test(line)) continue;
+        if (/^[ \t]*(?:#.*)?$/u.test(line)) continue;
         if (topLevelKey(line, 'jobs') || /^(?:[A-Za-z0-9_-]+|["'][^"']+["']):/u.test(line)) break;
-        const indent = line.match(/^[ \\t]*/u)[0].length;
+        const indent = line.match(/^[ \t]*/u)[0].length;
         if (indent === 0) break;
         childIndent ??= indent;
         if (indent === childIndent && workflowCallKey.test(line)) {
@@ -345,7 +345,8 @@ export function evaluateProvenance(checks, observed) {
   // `SITE_LOGIC_DIR` invece che a rigenerare artifact sani (issue #982).
   const sources = results.filter((r) => r.field.endsWith('#sourceSha256'));
   const invalidSources = sources.filter((r) => r.invalidSource);
-  const movedLogicDir = sources.length > 1 && sources.every((r) => r.state === 'absent');
+  const movedLogicDir = sources.length > 1
+    && sources.every((r) => r.state === 'absent' || r.state === 'unrecognized');
 
   let red = false;
   let reason = null;

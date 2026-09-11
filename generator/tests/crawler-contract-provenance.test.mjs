@@ -254,10 +254,15 @@ test('un source logic richiede la firma strutturale di un reusable workflow', ()
     'on: { workflow_call: {} }\n' +
     'jobs:\n',
   );
+  const tabsAfterYamlKeys = Buffer.from(
+    'on:\n  workflow_call:\t\n' +
+    'jobs:\n',
+  );
   const residual = Buffer.from('# Crawler Group 01 logic — artifact residuale.\n');
   assert.equal(isLogicSource(valid, 'crawler-group-01-logic.yml'), true);
   assert.equal(isLogicSource(quoted, 'crawler-group-01-logic.yml'), true);
   assert.equal(isLogicSource(inline, 'crawler-group-01-logic.yml'), true);
+  assert.equal(isLogicSource(tabsAfterYamlKeys, 'crawler-group-01-logic.yml'), true);
   assert.equal(isLogicSource(residual, 'crawler-group-01-logic.yml'), false);
   assert.equal(isLogicSource(valid, 'crawler-group-02-logic.yml'), true);
   assert.equal(isLogicSource(valid, 'crawler-group-01.yml'), false);
@@ -364,6 +369,21 @@ test('24 `*-logic.yml` assenti in blocco accusano la coordinata, non gli artifac
   // E il dettaglio elenca tutto ciò che è stato provato, non solo la prima candidata.
   const source = verdict.results.find((r) => r.field.endsWith('#sourceSha256'));
   for (const cand of source.sitePathCandidates) assert.ok(source.detail.includes(cand), cand);
+});
+
+test('24 sorgenti presenti ma non riconosciute accusano la coordinata, non gli artifact', () => {
+  const checks = planProvenanceChecks(CONTRACT, MANIFEST);
+  const observed = new Map(checks.map((c) => [
+    c.field,
+    c.field.endsWith('#sourceSha256')
+      ? { sha256: null, invalidSource: true, triedPaths: c.sitePathCandidates }
+      : { sha256: c.expected },
+  ]));
+  const verdict = evaluateProvenance(checks, observed);
+  assert.equal(verdict.red, true);
+  assert.match(verdict.reason, /SITE_LOGIC_DIR/);
+  assert.match(verdict.reason, /risposte non portano il marker/);
+  assert.doesNotMatch(verdict.reason, /stantii/);
 });
 
 test('un solo `*-logic.yml` sparito resta un problema del contratto', () => {
