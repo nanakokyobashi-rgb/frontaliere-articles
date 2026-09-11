@@ -207,17 +207,22 @@ test('con soli due locali il duplicato resta sul percorso di traduzione', async 
 
 test('memoizza il passthrough legittimo del titolo e non ripaga la cascata al secondo giro', async () => {
   const cache = {};
+  let firstCalls = 0;
   const first = await enrichEventsWithLocaleFallbackTranslations(
     [event('myswitzerland:locarno')],
     cache,
     {
       locales: ['it', 'en'],
       delayMs: 0,
-      translateFn: async () => ({ text: '', passthrough: true }),
+      translateFn: async () => {
+        firstCalls += 1;
+        return { text: '', passthrough: true };
+      },
     },
   );
 
   assert.deepEqual(first[0].titleByLocale, { it: SAME_TITLE });
+  assert.equal(firstCalls, 1, 'il titolo identico it/en deve pagare la cascata solo al primo giro');
   assert.equal(Object.values(cache)[0].en, null);
 
   const second = await enrichEventsWithLocaleFallbackTranslations(

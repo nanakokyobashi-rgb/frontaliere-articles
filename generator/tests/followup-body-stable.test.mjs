@@ -17,7 +17,9 @@
  *
  * Questo test è ciò che rende quella misura durevole: il giorno in cui uno stadio
  * inizia a riscrivere un body, diventa rosso QUI invece di far auto-chiudere un
- * aggregato parziale in silenzio.
+ * aggregato parziale in silenzio. Le continuazioni shell con `\\` vengono
+ * ricomposte prima dello scan, così il controllo vede anche un `gh issue edit`
+ * spezzato su più righe (#1073 item 7).
  */
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
@@ -43,11 +45,24 @@ const FILES = [
   ...walk(path.join(ROOT, '.github/workflows'), ['.yml', '.yaml']),
 ];
 
+/** Ricompone una continuazione shell mantenendo gli a capo reali delle altre righe. */
+function joinShellContinuations(source) {
+  return String(source).replace(/\\[ \t]*\r?\n/g, ' ');
+}
+
+test('il guard ricompone un gh issue edit spezzato da una continuazione shell (#1073 item 7)', () => {
+  const source = 'gh issue edit 123 \\\n  --body-file /tmp/body.md';
+  const [line] = joinShellContinuations(source).split('\n');
+
+  assert.match(line, /\bissue\s+edit\b/);
+  assert.match(line, /--body-file\b/);
+});
+
 test('nessuno stadio del ciclo riscrive il CORPO di una issue (#926)', () => {
   const offenders = [];
   for (const file of FILES) {
     const rel = path.relative(ROOT, file);
-    const lines = readFileSync(file, 'utf8').split('\n');
+    const lines = joinShellContinuations(readFileSync(file, 'utf8')).split('\n');
     lines.forEach((line, i) => {
       const where = `${rel}:${i + 1}`;
       // `gh issue edit … --body` / `--body-file`: riscrittura diretta del corpo.

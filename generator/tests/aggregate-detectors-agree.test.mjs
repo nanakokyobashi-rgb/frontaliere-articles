@@ -34,6 +34,12 @@ import { isAggregateTitle, hasEnumeratedItems as fromReconcile } from '../../scr
 import {
   isAvoidableAlreadyFixed, isAvoidableMaxTurns, hasEnumeratedItems as fromHarvest,
 } from '../../scripts/ci/harvest-agent-lessons.mjs';
+import {
+  countBacklogItems,
+  countAggregateItems,
+  detectBacklogTracker,
+  detectWideScopeAggregate,
+} from '../../scripts/ci/followup-drainer.mjs';
 
 /** Le tre copie devono concordare: se divergono, il test dedicato sotto lo dice. */
 const hasEnumeratedItemsAll = (body) => fromPreflight(body);
@@ -197,12 +203,16 @@ test('un fence non inventa un aggregato (#926)', () => {
     'un aggregato inventato non e\' piu\' auto-chiudibile e resta in coda per sempre');
 });
 
-test('il lead in grassetto chiede solo apertura a inizio riga e chiusura sulla stessa (#926)', () => {
+test('il lead in grassetto può chiudersi anche dopo un a capo (#1073 item 2)', () => {
   // Tutte le forme di lead-titolo restano item: chiusura dentro il grassetto,
   // riga intera, separatore dopo il grassetto, inline-code seguito da prosa.
   assert.equal(hasEnumeratedItemsAll('1. **Titolo.** Testo.\n2. **Altro:** Testo.'), true);
   assert.equal(hasEnumeratedItemsAll('- **Titolo**: testo\n- **Altro** — testo'), true);
   assert.equal(hasEnumeratedItemsAll('1. **A**\n2. **B**'), true);
+  const multilineLead = '1. **Un titolo che\n continua** resta un item.\n2. **Altro titolo** resta distinto.';
+  assert.equal(fromPreflight(multilineLead), true);
+  assert.equal(fromReconcile(multilineLead), true);
+  assert.equal(fromHarvest(multilineLead), true);
   // #551/#549: grassetto che finisce con inline-code e prosegue con testo qualsiasi.
   const { boldInlineCodeLead: c } = BODIES;
   assert.equal(isAggregate(c.title, c.body), true,
@@ -214,6 +224,67 @@ test('il lead in grassetto chiede solo apertura a inizio riga e chiusura sulla s
   assert.equal(hasEnumeratedItemsAll('1. **Solo un item.** e poi\n2. **nota** finale'), true);
   // Il grassetto che NON chiude sulla riga resta fuori.
   assert.equal(hasEnumeratedItemsAll('1. **apertura senza chiusura\n2. **altra apertura'), false);
+});
+
+test('il drainer non conta fence indentati e conserva il fallback dei fence aperti (#1073 item 1, 3, 4)', () => {
+  const closedFence = [
+    '## 1. Item reale',
+    '',
+    '    ```markdown',
+    '    ## 2. Item inventato',
+    '    - [ ] voce inventata',
+    '    ```',
+    '',
+    '## 2. Secondo item reale',
+  ].join('\n');
+  assert.equal(countBacklogItems(closedFence), 2);
+  assert.equal(countAggregateItems(closedFence), 2);
+  assert.equal(detectBacklogTracker('Backlog dalla sessione', closedFence), false);
+
+  // Un fence aperto non può far sparire il testo che segue: il segmento viene
+  // ripristinato grezzo, quindi il conteggio resta conservativo (3, non 1).
+  const unclosedFence = [
+    '## 1. Primo item',
+    '```markdown',
+    '## 2. Testo dentro il segmento aperto',
+    '## 3. Item successivo da non perdere',
+  ].join('\n');
+  assert.equal(countBacklogItems(unclosedFence), 3);
+  assert.equal(countAggregateItems(unclosedFence), 3);
+
+  const wideBody = [
+    '### 1. A',
+    '### 2. B',
+    '### 3. C',
+    '### 4. D',
+    '```md',
+    '### 5. Finto',
+    '```',
+  ].join('\n');
+  assert.deepEqual(detectWideScopeAggregate('follow-up(#9): 4 items deferred', wideBody), {
+    items: 4,
+    titleItems: 4,
+    bodyItems: 4,
+  });
+});
+
+test('i tre gemelli restano allineati su conteggio stretto e scope del titolo (#1073 item 5, 6)', () => {
+  const proseCount = 'follow-up(#9): 3 items — testo descrittivo';
+  assert.equal(isAggregate(proseCount, ''), false);
+  assert.equal(isAggregateTitle(proseCount, ''), false);
+
+  const explicitCount = 'follow-up(#9): 3 items deferred — testo descrittivo';
+  assert.equal(isAggregate(explicitCount, ''), true);
+  assert.equal(isAggregateTitle(explicitCount, ''), true);
+
+  // Parole come `sweep|batch|bulk` nel corpo non trasformano una issue a un
+  // solo item in aggregata: il fallback è deliberatamente title-only.
+  const singleTitle = 'follow-up(#9): 1 item deferred — batch backfill';
+  const keywordBody = 'Il corpo cita sweep, batch e bulk come prosa, non come item.';
+  assert.equal(isAggregate(singleTitle, keywordBody), false);
+  assert.equal(isAggregateTitle(singleTitle, keywordBody), false);
+  assert.equal(isAvoidableAlreadyFixed(singleTitle, ['follow-up'], keywordBody), true);
+  assert.equal(isAvoidableMaxTurns(singleTitle, [], false, keywordBody), true);
 });
 
 test('il conteggio esplicito nel titolo resta autoritativo sopra il corpo (#3378)', () => {
