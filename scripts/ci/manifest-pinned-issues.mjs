@@ -63,6 +63,10 @@ export const PINNING_MODES = new Set(['corpus-only-pending']);
 
 const ISSUE_URL_RE = /^https:\/\/github\.com\/([\w.-]+\/[\w.-]+)\/issues\/(\d+)$/;
 
+function normalizeRepo(repo) {
+  return String(repo || '').trim().toLowerCase();
+}
+
 /**
  * Le issue che il manifest tiene aperte, come mappa **`owner/repo#numero` →
  * path della voce che le pinna**. Pura.
@@ -87,23 +91,34 @@ export function manifestPinnedIssues(manifestPath = MANIFEST_PATH) {
     if (!PINNING_MODES.has(f?.mode)) continue;
     const m = ISSUE_URL_RE.exec(String(f?.trackingIssue || ''));
     if (!m) continue;
-    out.set(`${m[1]}#${Number(m[2])}`, f.path);
+    out.set(`${normalizeRepo(m[1])}#${Number(m[2])}`, f.path);
   }
   return out;
 }
 
 /**
- * La voce di manifest che tiene aperta questa issue, o `null` se nessuna. Pura.
+ * La voce di manifest che tiene aperta questa issue, o `null` se nessuna.
  *
  * `repo` in forma `owner/nome`. Senza `repo` la domanda non e' rispondibile —
  * un numero nudo non identifica una issue — e la risposta e' `null`, cioe'
- * «chiudi pure»: la direzione sicura, come sopra.
+ * «chiudi pure»: la direzione sicura, come sopra. Il confronto e' case-insensitive
+ * perche' owner e nome del repository sono identificatori, non testo da mostrare.
+ * Se il manifest contiene pin ma la chiave cercata non c'e', il miss viene scritto
+ * nel log: altrimenti un `null` prodotto da repo/env errati torna indistinguibile
+ * da «nessun pin esiste» proprio nel ramo che autorizza la chiusura.
  *
  * @returns {string|null} il `path` della voce che pinna, utile a scrivere il
  *          motivo nel commento invece di un «non posso» senza causa.
  */
 export function pinnedBy(issueNumber, repo, pinned = manifestPinnedIssues()) {
   const n = Number(issueNumber);
-  if (!Number.isInteger(n) || !repo) return null;
-  return pinned.get(`${repo}#${n}`) ?? null;
+  const normalizedRepo = normalizeRepo(repo);
+  if (!Number.isInteger(n) || !normalizedRepo) return null;
+  const key = `${normalizedRepo}#${n}`;
+  const entry = pinned.get(key) ?? [...pinned.entries()]
+    .find(([candidate]) => String(candidate).toLowerCase() === key)?.[1] ?? null;
+  if (!entry && pinned.size > 0) {
+    console.log(`manifest pin lookup: nessun pin per ${key}; ${pinned.size} voce/i corpus-only-pending caricate`);
+  }
+  return entry;
 }
