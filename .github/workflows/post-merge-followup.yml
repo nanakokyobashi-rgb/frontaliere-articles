@@ -126,11 +126,12 @@ jobs:
       # Il follow-up puo' trovare un file che appartiene al producer del corpus,
       # anche quando la PR sorgente e' nel sito. In quel caso l'issue deve nascere
       # su nanako: il GITHUB_TOKEN del sito e' scoped al solo repo corrente.
-      # Carichiamo il PAT Valerie cross-repo solo quando esiste davvero un batch, cosi'
-      # una finestra vuota non paga ne' Firebase ne' il caricamento RC.
+      # Carichiamo il PAT Valerie cross-repo anche senza un batch: i gate finali
+      # fanno recovery di bucket gia' coniati e devono poterli sigillare nella
+      # finestra successiva, senza dipendere da una nuova PR raccolta.
 
       - name: Prepare Firebase credentials for follow-up routing
-        if: steps.collect.outputs.batch_count != '0' && steps.collect.outputs.batch_count != ''
+        if: always()
         env:
           FIREBASE_SERVICE_ACCOUNT_JSON: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}
         run: |
@@ -142,7 +143,7 @@ jobs:
           fi
 
       - name: Load cross-repo follow-up credentials
-        if: steps.collect.outputs.batch_count != '0' && steps.collect.outputs.batch_count != ''
+        if: always()
         continue-on-error: true
         run: node generator/scripts/load-rc-env.mjs
 
@@ -254,6 +255,10 @@ jobs:
           # included in the Codex child environment and is accepted only for
           # nanakokyobashi-rgb/frontaliere-articles issue operations.
           codex_corpus_github_token: ${{ env.GITHUB_PAT_NANAKO || env.GITHUB_PAT }}
+          # A corpus PR can contain actionable follow-ups whose target file
+          # belongs to the site. Keep Valerie's cross-repo PAT in the
+          # host-side site scope; Codex receives neither PAT.
+          codex_site_github_token: ${{ env.GITHUB_PAT }}
           # Il merge che alimenta questo workflow è fatto da automation interna con DUE
           # actor bot distinti — entrambi vanno in whitelist o claude-code-action aborta
           # "Workflow initiated by non-human actor":
@@ -313,7 +318,10 @@ jobs:
             **Bootstrap (UNA volta, condiviso per TUTTO il batch — non ri-leggere per ogni PR):**
             1. Leggi `FOLLOWUP.md` — contratto operativo completo (parse rules, filtro scopo, dedup, issue format, closing comment).
             2. Leggi `REVIEW.md → "Scopo progetto"` per il filtro funnel.
-            3. `gh issue list --label follow-up --state all --json number,title --limit 300` (SOLO `number,title`: il bulk overview serve per la vista d'insieme; il dedup vero è item-level e il body va letto solo per i bucket daily candidati). Riusa questa lista per il dedup su tutte le PR del batch.
+            3. Per il dedup prepara una lista `number,title` separata per ciascun repository target, entrambe in sola lettura:
+               `gh issue list --repo nanakokyobashi-rgb/frontaliere-articles --label follow-up --state all --json number,title --limit 300`
+               e `gh issue list --repo valerielinc-ops/frontaliere-si-o-no --label follow-up --state all --json number,title --limit 300`.
+               Il bulk overview serve per la vista d'insieme; il dedup vero è item-level e il body va letto solo per i bucket daily candidati. Riusa la lista del repository target corretto per tutte le PR del batch.
             4. Il contesto per-PR del batch è già prefetchato (zero-Claude, token-lever) in `${{ runner.temp }}/followup-ctx/followup-bundle.md`: leggilo con `Read` — contiene, per ciascuna PR #N del batch, `gh pr view` (number/title/body/mergedAt/mergeCommit/url/author) + le review, e l'elenco delle PR aperte con i rispettivi file (per l'In-flight PR overlap sotto). Non ripetere queste chiamate per-PR a meno che la sezione della PR risulti vuota/incompleta nel bundle.
 
             **Protocollo bucket giornaliero (vincolante):**
@@ -370,13 +378,14 @@ jobs:
               Se un item cita piu' file, scegli il repo del file che richiede la modifica
               comportamentale; se cita solo un sintomo, individua prima il file sorgente
               reale. Scrivi sempre nell'issue `Target repository:` e `Target file:`.
+              Per Valerie usa SEMPRE `gh issue create --repo valerielinc-ops/frontaliere-si-o-no ...`.
               Per Nanako usa SEMPRE `gh` con il repository esplicito:
               `gh issue create --repo nanakokyobashi-rgb/frontaliere-articles ...`.
               Nel processo Codex non cercare né interpolare `GITHUB_PAT` o `GH_TOKEN`:
               il token resta nel bridge host-side della action e il wrapper `gh` lo
-              seleziona per il repository corpus. Se il bridge risponde che il
-              credential corpus è indisponibile, posta il blocco di routing sulla PR
-              e lascia l'item da ritentare nella prossima passata.
+              seleziona per lo scope sito o corpus. Se il bridge risponde che il
+              credential del target è indisponibile, posta il blocco di routing sulla
+              PR e lascia l'item da ritentare nella prossima passata.
               Dedup, label e commenti vanno eseguiti sullo stesso `--repo` target.
             - Parse PR body `## Non implementato (ancora)`. **Il routing lo decide lo STATO LETTERALE del bullet, non una parola-scusa** (AGENTS.md #8; `scripts/ci/followup-has-candidates.mjs` applica esattamente questa regola a monte, e sono la stessa tassonomia — non inventarne una terza):
               - `in questa PR` · `PR concatenata #N` · `per scelta` · `by construction` · `blocked: decisione del proprietario` → **NON creare issue**: la voce è già chiusa o già tracciata altrove.
@@ -423,14 +432,13 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REPO: ${{ github.repository }}
+          SITE_REPO: valerielinc-ops/frontaliere-si-o-no
           BATCH_PRS: ${{ steps.collect.outputs.batch_prs }}
           BATCH_COUNT: ${{ steps.collect.outputs.batch_count }}
           COLLECTION_OK: ${{ steps.collect.outputs.collection_ok }}
           CLAUDE_OUTCOME: ${{ steps.followup.outputs.claude_outcome }}
           ACTION_SUCCESS: ${{ steps.followup.outputs.action_success }}
           CORPUS_REPO: nanakokyobashi-rgb/frontaliere-articles
-          GITHUB_PAT_NANAKO: ${{ env.GITHUB_PAT_NANAKO || env.GITHUB_PAT }}
-          GITHUB_PAT: ${{ env.GITHUB_PAT }}
         run: |
           set -uo pipefail
           complete=false
@@ -451,12 +459,13 @@ jobs:
           bucket_persisted_for_pr() {
             bucket="$1"
             pr_number="$2"
-            for target_repo in "${REPO:-}" "${CORPUS_REPO:-}"; do
+            for target_repo in "${REPO:-}" "${CORPUS_REPO:-}" "${SITE_REPO:-}"; do
               [ -n "$target_repo" ] || continue
-              target_token="${GH_TOKEN:-}"
-              if [ "$target_repo" = "${CORPUS_REPO:-}" ]; then
-                target_token="${GITHUB_PAT_NANAKO:-${GITHUB_PAT:-}}"
-              fi
+              case "$target_repo" in
+                "${CORPUS_REPO:-}") target_token="${GITHUB_PAT_NANAKO:-${GITHUB_PAT:-${GH_TOKEN:-}}}" ;;
+                "${SITE_REPO:-}") target_token="${GITHUB_PAT_SITE:-${GITHUB_PAT:-${GH_TOKEN:-}}}" ;;
+                *) target_token="${GH_TOKEN:-${GITHUB_PAT:-}}" ;;
+              esac
               [ -n "$target_token" ] || continue
               issue_json=$(GH_TOKEN="$target_token" gh issue view "$bucket" --repo "$target_repo" --json number,title,body 2>/dev/null) || continue
               if printf '%s' "$issue_json" | jq -e --arg bucket "$bucket" --arg pr "$pr_number" '
@@ -583,7 +592,6 @@ jobs:
         if: always()
         continue-on-error: true
         env:
-          GH_TOKEN: ${{ env.GITHUB_PAT_NANAKO || env.GITHUB_PAT }}
           GH_REPO: nanakokyobashi-rgb/frontaliere-articles
           GATE_PR_REPO: ${{ github.repository }}
           BATCH_PRS: ${{ steps.collect.outputs.batch_prs }}
@@ -591,11 +599,61 @@ jobs:
           COLLECTION_OK: ${{ steps.collect.outputs.collection_ok }}
           TRIAGE_COMPLETE: ${{ steps.triage_complete.outputs.triage_complete }}
         run: |
-          if [ -z "${GH_TOKEN:-}" ]; then
+          corpus_token="${GITHUB_PAT_NANAKO:-${GITHUB_PAT:-}}"
+          if [ -z "$corpus_token" ]; then
             echo "::warning::Gate sul conio corpus saltato: GITHUB_PAT_NANAKO/GITHUB_PAT assente; issue lasciate intatte."
             exit 0
           fi
-          node scripts/ci/gate-minted-followups.mjs
+          GH_TOKEN="$corpus_token" GATE_PR_TOKEN="$corpus_token" node scripts/ci/gate-minted-followups.mjs
+
+      # Quando il batch corpus conia item che puntano a file del sito, il gate
+      # precedente non li vede: GH_REPO è volutamente il corpus. Il gate deve girare
+      # dal checkout del sito, perché parser e manifest sono gemelli adattati e non
+      # intercambiabili. Il token issue sito e quello della PR sorgente corpus restano
+      # separati: senza questa passata il bucket resta collecting e non può entrare in
+      # `agent:fix-queued`.
+      - name: Checkout site gate implementation
+        id: site_gate_checkout
+        if: always()
+        continue-on-error: true
+        uses: actions/checkout@v5
+        with:
+          repository: valerielinc-ops/frontaliere-si-o-no
+          ref: main
+          path: .site-gate
+          fetch-depth: 1
+          persist-credentials: false
+          sparse-checkout: |
+            .github/workflows
+            scripts/ci
+            scripts/lib
+          sparse-checkout-cone-mode: false
+
+      - name: Gate sul conio — sito (zero-Claude)
+        if: always() && steps.site_gate_checkout.outcome == 'success'
+        continue-on-error: true
+        env:
+          GH_REPO: valerielinc-ops/frontaliere-si-o-no
+          GATE_PR_REPO: ${{ github.repository }}
+          BATCH_PRS: ${{ steps.collect.outputs.batch_prs }}
+          TRIAGE_DAILY_KEY: ${{ steps.collect.outputs.daily_key }}
+          COLLECTION_OK: ${{ steps.collect.outputs.collection_ok }}
+          TRIAGE_COMPLETE: ${{ steps.triage_complete.outputs.triage_complete }}
+        run: |
+          site_token="${GITHUB_PAT_SITE:-${GITHUB_PAT:-}}"
+          if [ -z "$site_token" ]; then
+            echo "::warning::Gate sul conio sito saltato: GITHUB_PAT/GITHUB_PAT_SITE assente; issue lasciate intatte."
+            exit 0
+          fi
+          corpus_token="${GITHUB_PAT_NANAKO:-${GITHUB_PAT:-}}"
+          if [ -z "$corpus_token" ]; then
+            echo "::warning::Gate sul conio sito senza token PR corpus; issue lasciate intatte."
+            exit 0
+          fi
+          (
+            cd .site-gate
+            GH_TOKEN="$site_token" GATE_PR_TOKEN="$corpus_token" node scripts/ci/gate-minted-followups.mjs
+          )
 
       - name: Claude usage metrics
         if: always() && steps.followup.outputs.claude_used == 'true'

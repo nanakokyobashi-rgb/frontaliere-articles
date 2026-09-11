@@ -61,7 +61,7 @@ const blockedCommands = new Set([
 const blockedApiPath = /(?:^|[/?])(secrets?|variables?|installations?|apps?|hooks?|ssh[_-]?keys?|gpg[_-]?keys?|settings)(?:[/?]|$)/i;
 const blockedFlags = new Set([
   '--debug', '--verbose', '--trace', '--output', '-o', '--config', '--insecure-storage',
-  '--with-token', '--pinentry-mode', '--jq', '--include', '--exclude',
+  '--with-token', '--pinentry-mode', '--include', '--exclude',
 ]);
 const fileFlags = new Set(['--body-file', '--input', '--template']);
 const fieldFlags = new Set(['-F', '--field', '-f', '--raw-field']);
@@ -211,6 +211,18 @@ function validateOperation(args, commandIndex, command, repository, allowedSubco
   return '';
 }
 
+function blockedFlagError(arg, command) {
+  if (arg === '--jq' || arg.startsWith('--jq=')) {
+    return command === 'api'
+      ? ''
+      : `gh --jq is only permitted for read-only gh api requests: ${arg}`;
+  }
+  if (blockedFlags.has(arg) || [...blockedFlags].some((flag) => arg.startsWith(`${flag}=`))) {
+    return `gh flag is not permitted by the Codex fallback bridge: ${arg}`;
+  }
+  return '';
+}
+
 function explicitRepositories(args) {
   const values = [];
   for (let index = 0; index < args.length; index += 1) {
@@ -227,14 +239,17 @@ export function resolveGhScope(args, {
   repository,
   host,
   siteToken,
+  currentToken = siteToken,
+  siteRepository: configuredSiteRepository = repository,
   corpusToken = '',
   corpusRepository = CORPUS_REPOSITORY,
 } = {}) {
   if (!Array.isArray(args) || args.some((arg) => typeof arg !== 'string')) return { error: 'invalid args' };
-  const siteRepository = repositoryName(repository);
+  const currentRepository = repositoryName(repository);
+  const siteRepository = repositoryName(configuredSiteRepository);
   const expectedCorpus = repositoryName(corpusRepository);
   const expectedHost = normalizedHost(host);
-  if (!siteRepository || !expectedCorpus || expectedCorpus !== CORPUS_REPOSITORY || !expectedHost) {
+  if (!currentRepository || !siteRepository || !expectedCorpus || expectedCorpus !== CORPUS_REPOSITORY || !expectedHost) {
     return { error: 'Codex GitHub bridge scope is missing its exact repository/host context' };
   }
   const repositories = explicitRepositories(args);
@@ -242,31 +257,57 @@ export function resolveGhScope(args, {
     return { error: 'gh --repo must name an exact owner/repository pair' };
   }
   const hasExplicitRepository = repositories.length > 0;
-  const explicitRepository = repositories[0] || siteRepository;
+  // A missing --repo means the current checkout, even when the action also
+  // knows a separate site repository for explicit cross-repo writes. Using
+  // siteRepository as the default silently routed corpus `gh api repos/...`
+  // reads through the site scope and rejected the current corpus endpoint.
+  const explicitRepository = repositories[0]
+    || (hasExplicitRepository ? siteRepository : currentRepository);
   if (repositories.some((value) => value !== explicitRepository)) {
     return { error: 'gh --repo may not select multiple repositories in one request' };
   }
-  // The current checkout is the host-side site scope even when the checkout
-  // itself is the corpus: review/comment operations on the current PR use the
-  // runner GITHUB_TOKEN and need the normal `pr` allow-list. The separate
-  // corpus PAT is selected only when the model explicitly targets the corpus
-  // with --repo, which is the write-routing boundary in the prompt.
+  // An explicit corpus target always uses the dedicated corpus PAT, including
+  // when the checkout itself is the corpus: its GITHUB_TOKEN may lack the
+  // event/write scope required by the follow-up writers. When that target is
+  // also the current checkout, retain the normal local allow-list because
+  // prompts may spell out `--repo $REPO` for `gh search issues`.
   if (hasExplicitRepository && explicitRepository === expectedCorpus) {
     if (!corpusToken) return { error: 'Codex corpus bridge credential is unavailable' };
+    const isCurrentCorpus = currentRepository === expectedCorpus;
     return {
       kind: 'corpus',
       repository: expectedCorpus,
       token: corpusToken,
-      allowedCommandSet: corpusAllowedCommands,
-      allowedSubcommandMap: corpusAllowedSubcommands,
+      allowedCommandSet: isCurrentCorpus ? allowedCommands : corpusAllowedCommands,
+      allowedSubcommandMap: isCurrentCorpus ? allowedSubcommands : corpusAllowedSubcommands,
     };
   }
+
+  // Calls without --repo operate on the current checkout (for example the
+  // PR comment/review that closes the current corpus run). They retain the
+  // runner token and the normal command allow-list.
+  if (!hasExplicitRepository && explicitRepository === currentRepository) {
+    if (!currentToken) return { error: 'Codex GitHub bridge current-repository credential is unavailable' };
+    return {
+      kind: 'site',
+      repository: currentRepository,
+      token: currentToken,
+      allowedCommandSet: allowedCommands,
+      allowedSubcommandMap: allowedSubcommands,
+    };
+  }
+
+  // An explicit site target may come from the corpus checkout. It must use a
+  // dedicated site PAT; the current corpus runner token is not a cross-repo
+  // credential. On the site checkout the normal bridge token is a safe
+  // fallback, keeping existing callers unchanged.
   if (explicitRepository === siteRepository) {
-    if (!siteToken) return { error: 'Codex GitHub bridge site credential is unavailable' };
+    const targetToken = siteToken || (currentRepository === siteRepository ? currentToken : '');
+    if (!targetToken) return { error: 'Codex GitHub bridge site credential is unavailable' };
     return {
       kind: 'site',
       repository: siteRepository,
-      token: siteToken,
+      token: targetToken,
       allowedCommandSet: allowedCommands,
       allowedSubcommandMap: allowedSubcommands,
     };
@@ -537,9 +578,8 @@ export function validateGhArgs(args, {
   if (bodyError) return bodyError;
   for (let index = 0; index < args.length; index += 1) {
     const arg = args[index];
-    if (blockedFlags.has(arg) || [...blockedFlags].some((flag) => arg.startsWith(`${flag}=`))) {
-      return `gh flag is not permitted by the Codex fallback bridge: ${arg}`;
-    }
+    const blockedFlagMessage = blockedFlagError(arg, command);
+    if (blockedFlagMessage) return blockedFlagMessage;
     const fileFlag = [...fileFlags].find((flag) => arg === flag || arg.startsWith(`${flag}=`));
     if (fileFlag) {
       const value = arg === fileFlag ? args[index + 1] : arg.slice(fileFlag.length + 1);
@@ -574,7 +614,8 @@ export function validateGhArgs(args, {
 
 function main() {
   const socketPath = process.env.CODEX_GH_SOCKET;
-  const siteToken = process.env.CODEX_GH_AUTH;
+  const currentToken = process.env.CODEX_GH_AUTH;
+  const siteToken = process.env.CODEX_GH_SITE_AUTH || '';
   const corpusToken = process.env.CODEX_GH_CORPUS_AUTH || '';
   const realGh = process.env.CODEX_REAL_GH;
   const sideEffectFile = process.env.CODEX_GH_SIDE_EFFECT_FILE || '';
@@ -582,9 +623,12 @@ function main() {
   const workspaceRoot = process.env.CODEX_GH_WORKSPACE || cwd;
   const scratchRoot = process.env.CODEX_GH_SCRATCH;
   const repository = repositoryName(process.env.CODEX_GH_REPOSITORY);
+  const siteRepository = repositoryName(
+    process.env.CODEX_GH_SITE_REPOSITORY || 'valerielinc-ops/frontaliere-si-o-no',
+  );
   const host = normalizedHost(process.env.CODEX_GH_HOST);
   const corpusRepository = process.env.CODEX_GH_CORPUS_REPOSITORY || CORPUS_REPOSITORY;
-  if (!socketPath || !siteToken || !realGh || !cwd || !workspaceRoot || !scratchRoot || !repository || !host
+  if (!socketPath || !currentToken || !realGh || !cwd || !workspaceRoot || !scratchRoot || !repository || !siteRepository || !host
     || corpusRepository !== CORPUS_REPOSITORY) process.exit(2);
   const baseEnv = {
     PATH: process.env.PATH || '/usr/bin:/bin',
@@ -670,6 +714,8 @@ function main() {
           repository,
           host,
           siteToken,
+          currentToken,
+          siteRepository,
           corpusToken,
           corpusRepository,
         });

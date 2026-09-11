@@ -629,6 +629,8 @@ jobs:
             - Escalation ❓ su cio' che tocca la superficie pubblicata: un `❓ q` il cui soggetto impatta `dist/api/`, le sitemap, i feed RSS, gli slug o i canonical va promosso a 🔴 oppure aperto come follow-up issue e linkato. Mai un ❓ passivo accanto a `## LGTM`: li' un errore e' gia' in produzione.
             - Niente finding «manca un test»: elenca rischi di COMPORTAMENTO non verificati. Eccezione: un BUG in un test ESISTENTE (assertion o regex leaky, fixture con date assolute).
 
+            Se il bundle elenca un Important storico sul contratto del body con un anchor `PR body:L<n>`, quando lo hai risolto devi riportare la conferma in forma esatta `Fix di \`PR body:L<n>\`: ok.` (una riga per ogni anchor), prima di `Important: 0` e `## LGTM`; non sostituirla con una parafrasi del bullet. Per un Important senza anchor di file o body usa invece il testo normalizzato richiesto dal bundle, sempre dentro i backtick della conferma.
+
             Posta ESATTAMENTE una review con `gh pr review ${PR_NUMBER} --comment --body "<markdown nel formato di REVIEW.md>"`. Chiudi con `## LGTM` solo quando non c'e' un `🔴 Important` aperto, nessuna domanda funnel-critical irrisolta e il contratto del body e' valido. Incerto → `❓ q:`, mai speculazione. Lavora read-only: niente edit, commit, push, npm o test. Fermati subito dopo aver postato.
 
       # claude-code-action puo' uscire 0 anche quando il run e' abortito su un

@@ -223,6 +223,7 @@ jobs:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           github_token: ${{ env.GITHUB_PAT_NANAKO || secrets.GITHUB_TOKEN }}
           codex_github_token: ${{ env.GITHUB_PAT_NANAKO || secrets.GITHUB_TOKEN }}
+          codex_site_github_token: ${{ env.GITHUB_PAT }}
           show_full_output: true
           allowed_bots: 'github-actions[bot], claude[bot]'
           claude_args: "--effort medium --max-turns 60 --model claude-opus-5 --dangerously-skip-permissions"
@@ -230,7 +231,7 @@ jobs:
             Sei lo sweep settimanale delle issue `needs-human` di questo repo (il CORPUS, `$REPO`). Il tuo compito: separare le decisioni VERE del proprietario dal resto, e rimettere il resto nel ciclo autonomo. NON implementi fix e NON apri PR.
 
             **Bootstrap:**
-            1. Leggi `VISION.md` PER INTERO. Questo repo NON ne ha una copia, ed è deliberato: la sorgente unica è quella del SITO. Recuperala con lo stesso comando di `issue-decompose.yml`: `gh api repos/$SITE_REPO/contents/VISION.md --jq .content | base64 -d`. I driver di decisione (D1-D8) e il registro delle decisioni già prese sono il tuo criterio di classificazione. La lista «Sempre umano» è stata RIMOSSA il 2026-08-24 (istruzione diretta del proprietario, registro in VISION.md): non esiste più una categoria di business riservata all'umano. Se il recupero fallisce, FERMATI e posta il motivo sul digest: senza i driver non hai criterio, e classificare a intuito è il modo di far implementare al fixer scelte che non gli spettano.
+            1. Leggi `VISION.md` PER INTERO. Questo repo NON ne ha una copia, ed è deliberato: la sorgente unica è quella del SITO. Recuperala con lo stesso comando di `issue-decompose.yml`: `gh api --repo valerielinc-ops/frontaliere-si-o-no repos/valerielinc-ops/frontaliere-si-o-no/contents/VISION.md --jq .content | base64 -d`. I driver di decisione (D1-D8) e il registro delle decisioni già prese sono il tuo criterio di classificazione. La lista «Sempre umano» è stata RIMOSSA il 2026-08-24 (istruzione diretta del proprietario, registro in VISION.md): non esiste più una categoria di business riservata all'umano. Se il recupero fallisce, FERMATI e posta il motivo sul digest: senza i driver non hai criterio, e classificare a intuito è il modo di far implementare al fixer scelte che non gli spettano.
             2. `gh issue list --repo $REPO --state open --label needs-human --json number,title,labels,createdAt,updatedAt --limit 100` — ordina per updatedAt crescente (le più ferme prima).
 
             **Per ogni issue (MASSIMO 15 azioni totali in questo run — un'azione = un cambio di label/stato; le issue oltre il cap restano al giro successivo):**
