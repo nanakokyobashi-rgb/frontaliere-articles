@@ -4020,26 +4020,33 @@ async function _persistScoresToFirestore() {
       }
     }
 
-    // If model has an EXPLICIT current-run quota proposal, persist the reset
-    // time (next midnight UTC) — but ONLY for 'quota' exhaustion, which is the
-    // one reason that genuinely lasts until the provider's daily reset. A
-    // learned cap/schema is not evidence for that proposal; when it is the
-    // only ledger mutation, `exhaustedUntil` must stay out of this entry. The
-    // other breaker
-    // reasons (timeout / content / nonretryable) describe a single call's
-    // outcome in THIS process: a 20-min article generation that timed out,
-    // or two malformed-JSON replies to one big schema prompt, say nothing
-    // about the model serving a different workflow's small prompt right
-    // now. Persisting those used to ban the model for EVERY workflow until
-    // midnight UTC via the shared aggregate doc, silently shrinking the
-    // free-tier pool on thin evidence — a driver of the recurring
-    // "tutti i modelli esauriti" deferrals that zero article production.
-    // In-process the ban still holds for the rest of the run (that's the
-    // circuit-breaker working); it just doesn't outlive the process.
-    // Local CPU fallback is exempt from persistence entirely: it has no
-    // daily-quota concept — see the matching restore-path guard above
-    // (initScoreStore), which likewise assumes persisted = quota.
-    if (
+    // A measured SUCCESS is stronger evidence than an exhaustedUntil restored
+    // from an older run. This is the GitHub multi-PAT path: a fresh account
+    // served the request even though the migrated marker still describes the
+    // old account. Decide this before the quota branch below, otherwise the
+    // stale marker wins and the ban is written back over the success.
+    if (counterDelta?.successes) {
+      entry.exhaustedUntil = null;
+    } else if (
+      // If model has an EXPLICIT current-run quota proposal, persist the reset
+      // time (next midnight UTC) — but ONLY for 'quota' exhaustion, which is the
+      // one reason that genuinely lasts until the provider's daily reset. A
+      // learned cap/schema is not evidence for that proposal; when it is the
+      // only ledger mutation, `exhaustedUntil` must stay out of this entry. The
+      // Other breaker reasons (timeout / content / nonretryable) describe a
+      // single call's outcome in THIS process: a 20-min article generation
+      // that timed out, or two malformed-JSON replies to one big schema
+      // prompt, say nothing about the model serving a different workflow's
+      // small prompt right now. Persisting those used to ban the model for
+      // EVERY workflow until midnight UTC via the shared aggregate doc,
+      // silently shrinking the free-tier pool on thin evidence — a driver of
+      // the recurring "tutti i modelli esauriti" deferrals that zero article
+      // production.
+      // In-process the ban still holds for the rest of the run (that's the
+      // circuit-breaker working); it just doesn't outlive the process.
+      // Local CPU fallback is exempt from persistence entirely: it has no
+      // daily-quota concept — see the matching restore-path guard above
+      // (initScoreStore), which likewise assumes persisted = quota.
       (_quotaExhaustionProposals.has(modelId)) &&
       !_learningOnlyLedgerProposals.has(modelId) &&
       _exhaustedModels.has(modelId) &&
@@ -4050,11 +4057,6 @@ async function _persistScoresToFirestore() {
       tomorrow.setUTCDate(tomorrow.getUTCDate() + 1);
       tomorrow.setUTCHours(0, 0, 0, 0);
       entry.exhaustedUntil = tomorrow.toISOString();
-    } else if (counterDelta?.successes) {
-      // Il campo si AZZERA solo con una prova in mano: una risposta buona da
-      // questo modello in questo processo dice che l'account non e' a quota, e
-      // il ban persistito va tolto (e' il caso della rotazione multi-PAT).
-      entry.exhaustedUntil = null;
     }
     // Altrimenti il campo e' OMESSO, per la stessa ragione di `score` e dei
     // contatori qui sopra: con `{merge: true}` uno `null` assoluto CANCELLA il
@@ -4091,10 +4093,19 @@ async function _persistScoresToFirestore() {
       // A new proposal increments the generation and re-dirties the model.
       // Leave both its state and markers intact; the next flush must serialize
       // that newer mutation instead of treating it as already persisted.
-      if (
-        !snapshot
-        || _dirtyGenerations.get(modelId) !== snapshot.generation
-      ) continue;
+      const currentGeneration = _dirtyGenerations.get(modelId);
+      if (!snapshot || currentGeneration !== snapshot.generation) {
+        // Another overlapping flush has already observed a newer mutation.
+        // Its write may land before OR after this older one; in the latter
+        // order the older payload just overwrote newer absolute fields. Keep
+        // the model dirty and schedule a repair write. A reset clears the
+        // generation map, so do not resurrect pre-reset state with this retry.
+        if (snapshot && currentGeneration !== undefined) {
+          _dirtyModels.add(modelId);
+          _schedulePersist();
+        }
+        continue;
+      }
       if (snapshot.learningOnly) _learningOnlyLedgerProposals.delete(modelId);
       if (snapshot.quotaExhaustion) _quotaExhaustionProposals.delete(modelId);
     }
