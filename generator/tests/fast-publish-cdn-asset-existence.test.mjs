@@ -22,6 +22,8 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import {
   collectCdnAssetRefs,
+  CDN_ASSET_CHECK_BUDGET_MS,
+  CDN_ASSET_CHECK_TIMEOUT_MS,
   hasSameOriginAssetRef,
   verifyCdnAssetRefs,
   formatCdnAssetReport,
@@ -32,6 +34,31 @@ import { ASSET_EXT_ALTERNATION } from '../../host/shared/cdnAssetOffloadRx.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const CDN = 'https://cdn.frontaliereticino.ch';
+
+test('#1265 — timeout dell\'asset e\' una sorgente unica per verifica e report', async () => {
+  const src = fs.readFileSync(path.join(ROOT, 'scripts/lib/cdn-asset-existence.mjs'), 'utf8');
+  assert.equal(CDN_ASSET_CHECK_TIMEOUT_MS, 8_000);
+  assert.equal((src.match(/timeoutMs = CDN_ASSET_CHECK_TIMEOUT_MS/g) || []).length, 2);
+  assert.equal((src.match(/timeoutMs = 8000/g) || []).length, 0);
+
+  const asked = [];
+  await verifyCdnAssetRefs({
+    urls: [`${CDN}/assets/ok.js`],
+    fetchImpl: async () => ({ ok: true, status: 200 }),
+    makeSignal: (ms) => {
+      asked.push(ms);
+      return undefined;
+    },
+  });
+  assert.deepEqual(asked, [CDN_ASSET_CHECK_TIMEOUT_MS]);
+
+  const report = formatCdnAssetReport(
+    [{ url: `${CDN}/assets/ok.js`, state: 'present', status: 200, error: null }],
+    '[cdn-asset-check]',
+    { elapsedMs: CDN_ASSET_CHECK_BUDGET_MS + CDN_ASSET_CHECK_TIMEOUT_MS + 1 },
+  );
+  assert.equal(report.filter((line) => line.startsWith('::warning::')).length, 1);
+});
 
 test('collectCdnAssetRefs raccoglie gli URL riscritti, distinti e in ordine', () => {
   const html = [

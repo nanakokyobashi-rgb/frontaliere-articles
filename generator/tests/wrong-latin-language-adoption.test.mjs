@@ -313,26 +313,77 @@ function campiDalSorgente(sorgente, campo) {
   }));
 }
 
-function campiPubblicati(file, campo) {
-  const sorgente = readFileSync(path.join(ROOT, file), 'utf8');
+function campiDichiarati(sorgente, campo) {
+  const re = /['"]blog\.article\.([^'"]+)\.([^'"]+)['"]\s*:/g;
+  return [...sorgente.matchAll(re)]
+    .filter((m) => m[2] === campo)
+    .map((m) => ({ slug: m[1] }));
+}
+
+const CAMPI_META_OBBLIGATORI = new Set(['title']);
+
+function validaCampiPubblicati(sorgente, file, campo) {
   const slugs = campiDalSorgente(sorgente, 'title').map(({ slug }) => slug);
+  const dichiarati = campiDichiarati(sorgente, campo);
   const campi = campiDalSorgente(sorgente, campo);
   const slugSet = new Set(slugs);
+  const dichiaratiSet = new Set(dichiarati.map(({ slug }) => slug));
   const campoSet = new Set(campi.map(({ slug }) => slug));
 
   assert.equal(slugs.length, slugSet.size, `${file}: slug title duplicati o parser disallineato`);
+  assert.equal(dichiarati.length, dichiaratiSet.size, `${file}: ${campo} dichiarati duplicati`);
   assert.equal(campi.length, campoSet.size, `${file}: ${campo} duplicati o parser disallineato`);
   assert.equal(
     campi.length,
-    slugs.length,
-    `${file}: ${campo} letti ${campi.length}, ma gli slug sono ${slugs.length}: estrazione parziale`,
+    dichiarati.length,
+    `${file}: ${campo} letti ${campi.length}, ma le dichiarazioni sono ${dichiarati.length}: estrazione parziale`,
   );
   assert.deepEqual(
-    [...campoSet].sort(), [...slugSet].sort(),
-    `${file}: gli slug di ${campo} non coincidono con quelli dei title`,
+    [...campoSet].sort(), [...dichiaratiSet].sort(),
+    `${file}: gli slug letti di ${campo} non coincidono con quelli dichiarati`,
   );
+  assert.ok(
+    [...dichiaratiSet].every((slug) => slugSet.has(slug)),
+    `${file}: ${campo} dichiarati per articoli senza title`,
+  );
+  if (CAMPI_META_OBBLIGATORI.has(campo)) {
+    assert.equal(
+      campi.length,
+      slugs.length,
+      `${file}: ${campo} letti ${campi.length}, ma gli slug sono ${slugs.length}: campo obbligatorio incompleto`,
+    );
+    assert.deepEqual(
+      [...campoSet].sort(), [...slugSet].sort(),
+      `${file}: gli slug di ${campo} non coincidono con quelli dei title`,
+    );
+  }
   return campi;
 }
+
+function campiPubblicati(file, campo) {
+  const sorgente = readFileSync(path.join(ROOT, file), 'utf8');
+  return validaCampiPubblicati(sorgente, file, campo);
+}
+
+test('#1265 — i campi opzionali seguono le dichiarazioni reali, non il conteggio dei title', () => {
+  const sorgente = [
+    "'blog.article.primo.title': 'Primo',",
+    "'blog.article.primo.excerpt': 'Estratto presente',",
+    "'blog.article.secondo.title': 'Secondo',",
+  ].join('\n');
+  assert.deepEqual(validaCampiPubblicati(sorgente, 'fixture.ts', 'excerpt'), [
+    { slug: 'primo', value: 'Estratto presente' },
+  ]);
+
+  const valoreNonChiuso = [
+    sorgente,
+    "'blog.article.secondo.excerpt': 'Estratto non chiuso,",
+  ].join('\n');
+  assert.throws(
+    () => validaCampiPubblicati(valoreNonChiuso, 'fixture.ts', 'excerpt'),
+    /estrazione parziale/,
+  );
+});
 
 function scanCorpusIt(t, campo) {
   const mancanti = META_IT.filter((f) => !existsSync(path.join(ROOT, f)));

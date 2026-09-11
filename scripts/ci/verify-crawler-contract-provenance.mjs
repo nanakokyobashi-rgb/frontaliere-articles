@@ -43,6 +43,8 @@
  *
  *   verified    l'hash dichiarato e' quello servito dal sito ORA.
  *   drifted     il sito serve altri byte: l'artifact qui e' stantio. ROSSO.
+ *   unrecognized il path esiste, ma i byte non hanno la firma di una sorgente
+ *               logic riconoscibile. ROSSO, distinto da un 404.
  *   absent      il path dichiarato non esiste piu' sul sito (404). ROSSO: un
  *               digest che punta al nulla non e' verificabile per definizione.
  *   undeclared  la voce di contratto non porta il digest o il suo sorgente —
@@ -118,25 +120,66 @@ const sha256 = (buf) => crypto.createHash('sha256').update(buf).digest('hex');
 
 /**
  * True when bytes are a generated logic source, rather than an artifact or a
- * same-named residual file. The YAML shape is load-bearing: `on:
- * workflow_call:` plus `jobs:` proves a reusable workflow, while the basename
- * guard prevents a non-logic candidate from being treated as a source. A
- * cosmetic comment change on the site cannot invalidate the observation.
+ * same-named residual file. The YAML shape is load-bearing: a top-level
+ * `on`/`"on"`/`'on'` trigger containing `workflow_call` plus top-level `jobs:`
+ * proves a reusable workflow. The check accepts block and inline YAML forms,
+ * while the basename guard prevents a non-logic candidate from being treated
+ * as a source. A cosmetic comment change on the site cannot invalidate the
+ * observation.
  */
 export function isLogicSource(bytes, sourceLogic) {
   if (!bytes || !/^[a-z0-9][a-z0-9-]*-logic\.yml$/u.test(String(sourceLogic))) return false;
   const text = Buffer.from(bytes).toString('utf8');
-  return /^on:[ \t]*\r?\n[ \t]+workflow_call:[ \t]*$/mu.test(text)
-    && /^jobs:[ \t]*$/mu.test(text);
+  const lines = text.split(/\r?\n/u);
+  const topLevelKey = (line, key) => new RegExp(
+    `^(?:${key}|["']${key}["']):(?:[ \\t]|$)`,
+    'u',
+  ).test(line);
+  const workflowCallKey = /^(?:[ \\t]+)(?:workflow_call|["']workflow_call["']):(?:[ \\t]|$)/u;
+  const inlineWorkflowCallKey = /(?:^|[,{][ \\t]*)(?:workflow_call|["']workflow_call["']):/u;
+
+  let hasWorkflowCall = false;
+  for (let index = 0; index < lines.length; index += 1) {
+    const match = lines[index].match(/^(?:on|["']on["']):[ \\t]*(.*)$/u);
+    if (!match) continue;
+    const value = match[1].trim();
+    if (value.startsWith('{')) {
+      const inline = [];
+      for (let cursor = index; cursor < lines.length; cursor += 1) {
+        if (cursor > index && topLevelKey(lines[cursor], 'jobs')) break;
+        inline.push(lines[cursor]);
+      }
+      hasWorkflowCall = inlineWorkflowCallKey.test(inline.join('\n'));
+    } else {
+      let childIndent = null;
+      for (let cursor = index + 1; cursor < lines.length; cursor += 1) {
+        const line = lines[cursor];
+        if (/^[ \\t]*(?:#.*)?$/u.test(line)) continue;
+        if (topLevelKey(line, 'jobs') || /^(?:[A-Za-z0-9_-]+|["'][^"']+["']):/u.test(line)) break;
+        const indent = line.match(/^[ \\t]*/u)[0].length;
+        if (indent === 0) break;
+        childIndent ??= indent;
+        if (indent === childIndent && workflowCallKey.test(line)) {
+          hasWorkflowCall = true;
+          break;
+        }
+      }
+    }
+    break;
+  }
+
+  const hasJobs = lines.some((line) => topLevelKey(line, 'jobs'));
+  return hasWorkflowCall && hasJobs;
 }
 
 /**
  * Resolve one site observation from ordered candidates.
  *
  * A source candidate is accepted only with its generated-source marker. A
- * 404, or any other observed non-source response, is definitive absence when
- * no valid candidate is found; `unobserved` is reserved for the case where
- * every candidate failed in transport.
+ * 404 is definitive absence when no valid candidate is found. A response
+ * whose bytes are present but do not carry the source signature is kept as
+ * `unrecognized`; `unobserved` is reserved for the case where every
+ * candidate failed in transport.
  *
  * @param {string[]} candidates
  * @param {(rel: string) => Promise<object>} observe
@@ -275,10 +318,10 @@ export function evaluateProvenance(checks, observed) {
       state = 'unobserved';
       detail = seen?.error ? String(seen.error).slice(0, 120) : 'nessuna osservazione';
     } else if (seen.sha256 === null) {
-      state = 'absent';
+      state = seen.invalidSource ? 'unrecognized' : 'absent';
       const tried = seen.triedPaths?.length ? seen.triedPaths : [sitePath];
       detail = seen.invalidSource
-        ? `${tried.join(', ')} risponde ma non contiene il marker della sorgente logic su ${SITE_REPO}@${SITE_REF}`
+        ? `${tried.join(', ')} e' presente ma non riconosciuta come sorgente logic su ${SITE_REPO}@${SITE_REF}`
         : `${tried.join(', ')} non esiste${tried.length > 1 ? 'ono' : ''} su ${SITE_REPO}@${SITE_REF}`;
     } else if (seen.sha256 === check.expected) {
       state = 'verified';
@@ -291,7 +334,9 @@ export function evaluateProvenance(checks, observed) {
 
   const counts = {};
   for (const r of results) counts[r.state] = (counts[r.state] || 0) + 1;
-  const broken = results.filter((r) => r.state === 'drifted' || r.state === 'absent' || r.state === 'undeclared');
+  const broken = results.filter((r) => (
+    r.state === 'drifted' || r.state === 'absent' || r.state === 'unrecognized' || r.state === 'undeclared'
+  ));
   const unobserved = counts.unobserved || 0;
 
   // Se spariscono TUTTI i `*-logic.yml` insieme, il sospettato non e' il
@@ -348,7 +393,7 @@ export function evaluateProvenance(checks, observed) {
 
 export function formatReport({ results, counts, red, reason }) {
   const lines = [`# Provenienza del contratto cross-repo — ${SITE_REPO}@${SITE_REF}`, ''];
-  const order = ['drifted', 'absent', 'undeclared', 'unobserved', 'verified'];
+  const order = ['drifted', 'unrecognized', 'absent', 'undeclared', 'unobserved', 'verified'];
   for (const state of order) {
     const rows = results.filter((r) => r.state === state);
     if (!rows.length) continue;

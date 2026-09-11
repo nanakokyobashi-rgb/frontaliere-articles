@@ -246,8 +246,18 @@ test('un source logic richiede la firma strutturale di un reusable workflow', ()
     'on:\n  workflow_call:\n' +
     'jobs:\n',
   );
+  const quoted = Buffer.from(
+    '"on":\n  "workflow_call": {}\n' +
+    '"jobs":\n',
+  );
+  const inline = Buffer.from(
+    'on: { workflow_call: {} }\n' +
+    'jobs:\n',
+  );
   const residual = Buffer.from('# Crawler Group 01 logic — artifact residuale.\n');
   assert.equal(isLogicSource(valid, 'crawler-group-01-logic.yml'), true);
+  assert.equal(isLogicSource(quoted, 'crawler-group-01-logic.yml'), true);
+  assert.equal(isLogicSource(inline, 'crawler-group-01-logic.yml'), true);
   assert.equal(isLogicSource(residual, 'crawler-group-01-logic.yml'), false);
   assert.equal(isLogicSource(valid, 'crawler-group-02-logic.yml'), true);
   assert.equal(isLogicSource(valid, 'crawler-group-01.yml'), false);
@@ -291,9 +301,9 @@ test('un marker invalido resta visibile nel verdetto, senza accusare gli artifac
   });
   const verdict = evaluateProvenance(checks, observed);
   const source = verdict.results.find((r) => r.field === victim.field);
-  assert.equal(source.state, 'absent');
+  assert.equal(source.state, 'unrecognized');
   assert.equal(source.invalidSource, true);
-  assert.match(source.detail, /marker della sorgente/);
+  assert.match(source.detail, /presente ma non riconosciuta/);
   assert.match(verdict.reason, /SITE_LOGIC_DIR/);
   assert.doesNotMatch(verdict.reason, /artifact qui sono stantii/);
 });
