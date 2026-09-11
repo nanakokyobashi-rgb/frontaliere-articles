@@ -3622,6 +3622,53 @@ export async function discoverOpenRouterFreeModels(opts = {}) {
 export const EXHAUST_RESTORE_MAX_AHEAD_MS = 26 * 60 * 60 * 1000;
 
 /**
+ * Convert a persisted Firestore timestamp without letting malformed data
+ * escape from the restore loop. Firestore documents normally return a
+ * Timestamp instance, but JSON snapshots and older ledger readers can leave
+ * `{_seconds, _nanoseconds}` (or the public `seconds`/`nanoseconds` spelling)
+ * behind.
+ */
+function _persistedTimestampDate(raw) {
+  try {
+    if (raw && typeof raw.toDate === 'function') return raw.toDate();
+    if (raw && typeof raw === 'object' && !Array.isArray(raw)) {
+      const hasSeconds = Object.prototype.hasOwnProperty.call(raw, '_seconds') ||
+        Object.prototype.hasOwnProperty.call(raw, 'seconds');
+      if (hasSeconds) {
+        const seconds = Number(raw._seconds ?? raw.seconds);
+        const nanoseconds = Number(raw._nanoseconds ?? raw.nanoseconds ?? 0);
+        if (!Number.isFinite(seconds) || !Number.isFinite(nanoseconds) || nanoseconds < 0 || nanoseconds >= 1e9) {
+          return null;
+        }
+        return new Date(seconds * 1000 + nanoseconds / 1e6);
+      }
+    }
+    return new Date(raw);
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * Render a persisted value for a warning without allowing JSON diagnostics to
+ * abort `initScoreStore()`. Cyclic objects, BigInt values and hostile toJSON /
+ * toString implementations all remain diagnostic-only failures.
+ */
+export function _safeDiagnosticValue(value) {
+  try {
+    const json = JSON.stringify(value);
+    if (json !== undefined) return json;
+  } catch {
+    // Fall through to a best-effort string representation.
+  }
+  try {
+    return String(value);
+  } catch {
+    return '<non-serializzabile>';
+  }
+}
+
+/**
  * Ramo puro del restore di `exhaustedUntil`, estratto per essere testabile:
  * `initScoreStore()` senza credenziale esce PRIMA del restore e
  * `__installScoreStoreForTests` installa il db a restore gia' saltato, quindi
@@ -3634,9 +3681,7 @@ export const EXHAUST_RESTORE_MAX_AHEAD_MS = 26 * 60 * 60 * 1000;
  */
 export function _restorableExhaustUntil(raw, now = new Date(), maxAheadMs = EXHAUST_RESTORE_MAX_AHEAD_MS) {
   if (!raw) return { until: null, reason: 'absent' };
-  const until = typeof raw.toDate === 'function'
-    ? raw.toDate()                  // Firestore Timestamp
-    : new Date(raw);                // ISO string fallback
+  const until = _persistedTimestampDate(raw);
   if (!(until instanceof Date) || Number.isNaN(until.getTime())) {
     return { until: null, reason: 'unparsable' };
   }
@@ -3751,7 +3796,7 @@ export async function initScoreStore() {
           // Ban NON ripristinato: vedi _restorableExhaustUntil. Nominato, perche'
           // altrimenti l'unico sintomo resterebbe un modello assente dalla cascata.
           const shown = reason === 'unparsable'
-            ? JSON.stringify(data.exhaustedUntil)
+            ? _safeDiagnosticValue(data.exhaustedUntil)
             : resetTime.toISOString();
           console.warn(
             `⚠️  [ScoreStore] ${modelId}: exhaustedUntil ${shown} ${reason === 'unparsable'
