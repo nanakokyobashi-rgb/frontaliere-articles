@@ -236,7 +236,18 @@ function main() {
   // 1b. array letterale piatto degli id (es. `ALL_BLOG_ARTICLE_IDS`), se la
   //     sezione ne ha uno indipendente dalla mappa slug appena ripulita.
   if (cfg.idListVar) {
-    const idList = removeFromIdListLiteral(slugDataSrc, cfg.idListVar, id);
+    let idList;
+    try {
+      idList = removeFromIdListLiteral(slugDataSrc, cfg.idListVar, id);
+    } catch (error) {
+      // A prior interrupted retirement may have removed the id from this
+      // secondary list while leaving the slug row to finish. That state is
+      // already the requested result; tolerate only this named absence and
+      // keep surfacing shape/I/O errors.
+      if (error?.code !== 'ID_LIST_ENTRY_MISSING') throw error;
+      console.warn(`elenco flat ${cfg.idListVar}: '${id}' già assente — continuo con la rimozione`);
+      idList = { changed: false, src: slugDataSrc };
+    }
     if (idList.changed) {
       slugDataSrc = idList.src;
       planned.push({ file: cfg.slugDataFile, what: `elenco flat ${cfg.idListVar}` });
