@@ -8,11 +8,16 @@
  * `continue-on-error`, so an aborted action can still be reported as success.
  * A review posted by a reviewer bot on the exact HEAD, with a real Important
  * finding, is the stronger signal that the redflag fixer owns the failure.
+ * An explicit transient-review abort is also distinguishable from a code
+ * failure, but it is not assigned to either fixer: redcheck must not spend a
+ * repair round when there is no code diagnosis to apply.
  */
 import { pathToFileURL } from 'node:url';
 import {
   CLAUDE_REVIEW_STEP_NAME,
   NON_GATING_REVIEW_STEPS,
+  REVIEW_ABORT_STEP_NAME,
+  REVIEW_DEATH_STEP_NAMES,
   REVIEW_GATE_STEP_NAME,
 } from './lib/vitestCheck.mjs';
 import {
@@ -30,38 +35,67 @@ function rowsFromPages(value, key) {
 
 /**
  * @param {{headSha?: string, jobs?: unknown, reviews?: unknown}} input
- * @returns {boolean}
+ * @returns {'important'|'transient'|''}
  */
-export function reviewOnlyFailure(input) {
+export function reviewFailureKind(input) {
   const headSha = typeof input?.headSha === 'string' ? input.headSha : '';
-  if (!headSha) return false;
+  if (!headSha) return '';
 
   const jobs = rowsFromPages(input?.jobs, 'jobs');
   const testsJob = jobs.find((job) => job?.name === 'tests (node --test)');
   const steps = Array.isArray(testsJob?.steps) ? testsJob.steps : [];
-  const failures = steps
-    .filter((step) => step?.conclusion === 'failure'
-      && !NON_GATING_REVIEW_STEPS.has(String(step.name || '')))
-    .map((step) => step.name);
-  if (failures.length !== 1 || failures[0] !== REVIEW_GATE_STEP_NAME) return false;
+  const failedSteps = steps
+    .filter((step) => step?.conclusion === 'failure')
+    .map((step) => String(step.name || ''));
+  const codeFailures = failedSteps.filter((name) =>
+    name !== REVIEW_GATE_STEP_NAME
+    && !NON_GATING_REVIEW_STEPS.has(name)
+    && !REVIEW_DEATH_STEP_NAMES.has(name));
+  if (codeFailures.length > 0) return '';
 
-  // Keep the topology check, but do not trust this step's conclusion: the
-  // action has continue-on-error and can die without posting a review.
-  if (!steps.some((step) => step?.name === CLAUDE_REVIEW_STEP_NAME)) return false;
+  const gateFailed = failedSteps.includes(REVIEW_GATE_STEP_NAME);
+  const reviewAborted = failedSteps.includes(REVIEW_ABORT_STEP_NAME);
 
-  const reviews = rowsFromPages(input?.reviews, null);
-  const lastOnHead = reviews
-    .filter((review) =>
-      review?.commit_id === headSha
-      && review?.user?.type === 'Bot'
-      && REVIEWER_BOT_LOGIN_RE.test(review.user.login ?? ''),
-    )
-    .at(-1);
-  if (!lastOnHead) return false;
+  // A gate verdict with a real Important finding belongs to redflag-fixer.
+  // Keep this branch fail-closed: the review must be present on the exact HEAD
+  // and must contain the finding, not merely have a failed review step.
+  if (gateFailed) {
+    // Keep the topology check, but do not trust this step's conclusion: the
+    // action has continue-on-error and can die without posting a review.
+    if (!steps.some((step) => step?.name === CLAUDE_REVIEW_STEP_NAME)) return '';
 
-  // No 🔴 Important means the review can be a no-LGTM/nit-only review with no
-  // owner capable of repairing the gate. Leave that case to redcheck.
-  return REDFLAG_IMPORTANT_RE.test(lastOnHead.body ?? '');
+    const reviews = rowsFromPages(input?.reviews, null);
+    const lastOnHead = reviews
+      .filter((review) =>
+        review?.commit_id === headSha
+        && review?.user?.type === 'Bot'
+        && REVIEWER_BOT_LOGIN_RE.test(review.user.login ?? ''),
+      )
+      .at(-1);
+    if (!lastOnHead) return '';
+
+    // No 🔴 Important means the review can be a no-LGTM/nit-only review with
+    // no owner capable of repairing the gate. Leave that case to redcheck.
+    if (REDFLAG_IMPORTANT_RE.test(lastOnHead.body ?? '')) return 'important';
+  }
+
+  // The action explicitly reported a transient failure and no code step is
+  // red. There is no safe patch for redcheck to derive, so avoid a pointless
+  // Claude round. A gate failure without an Important review stays fail-closed
+  // above; it may still be a real missing/ambiguous verdict.
+  if (reviewAborted && !gateFailed) return 'transient';
+  return '';
+}
+
+/**
+ * Backward-compatible boolean API for callers that only own Important review
+ * findings.
+ *
+ * @param {{headSha?: string, jobs?: unknown, reviews?: unknown}} input
+ * @returns {boolean}
+ */
+export function reviewOnlyFailure(input) {
+  return reviewFailureKind(input) === 'important';
 }
 
 async function main() {
@@ -69,10 +103,11 @@ async function main() {
   process.stdin.setEncoding('utf8');
   for await (const chunk of process.stdin) raw += chunk;
   try {
-    process.stdout.write(`${reviewOnlyFailure(JSON.parse(raw))}\n`);
+    const kind = reviewFailureKind(JSON.parse(raw));
+    process.stdout.write(process.argv.includes('--kind') ? `${kind || 'none'}\n` : `${kind === 'important'}\n`);
   } catch {
     // An unreadable or incomplete API response must not suppress the fixer.
-    process.stdout.write('false\n');
+    process.stdout.write(process.argv.includes('--kind') ? 'none\n' : 'false\n');
   }
 }
 
