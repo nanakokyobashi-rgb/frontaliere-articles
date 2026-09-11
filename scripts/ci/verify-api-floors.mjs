@@ -52,7 +52,7 @@ import {
 // Stessa funzione del writer e del gate manifest.counts in build-api.mjs: un
 // `<item>` citato dentro un CDATA non e' un elemento del feed, e contarlo qui
 // alzerebbe la misura sopra il pavimento mascherando un feed troncato.
-import { countXmlTags } from '../lib/count-xml-tags.mjs';
+import { countXmlTags, stripNonMarkup } from '../lib/count-xml-tags.mjs';
 
 export const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
 
@@ -447,7 +447,7 @@ export function retentionLines(rows, retention = FLOOR_RETENTION) {
 
 function latestFeedPublication(xml) {
   let latest = null;
-  for (const match of xml.matchAll(/<pubDate>\s*([^<]*?)\s*<\/pubDate>/g)) {
+  for (const match of stripNonMarkup(xml).matchAll(/<pubDate>\s*([^<]*?)\s*<\/pubDate>/g)) {
     const datePublished = match[1].trim();
     const timestamp = Date.parse(datePublished);
     if (!Number.isFinite(timestamp)) continue;

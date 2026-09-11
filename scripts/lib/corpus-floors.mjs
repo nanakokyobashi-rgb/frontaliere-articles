@@ -337,17 +337,29 @@ export function countSeoEntries(root, seoFiles, seoDir = SEO_CHUNK_DIR) {
  * guardia di freschezza non devono usare due popolazioni diverse.
  */
 export function latestSeoPublication(root, seoFiles, seoDir = SEO_CHUNK_DIR) {
-  let latest = null;
+  // `parseSeoBlogs` usa una sola Map attraversando i chunk nell'ordine della
+  // sezione: un id ripetuto viene quindi sostituito dall'ultima voce valida.
+  // Replicare quella semantica prima di cercare il massimo evita che una data
+  // rimasta in un chunk precedente descriva un articolo che il producer ha
+  // gia' sovrascritto.
+  const entries = new Map();
   for (const file of seoFiles) {
     const filePath = path.join(root, seoDir, file);
     if (!fs.existsSync(filePath)) continue;
     for (const [articleId, metadata] of collectSeoEntryMetadata(fs.readFileSync(filePath, 'utf-8'))) {
+      // Una voce non emettibile non sostituisce quella valida precedente:
+      // `parseSeoBlogs` fa `continue` prima del proprio `Map.set`.
       if (!metadata.headline || !metadata.datePublished) continue;
-      const timestamp = Date.parse(metadata.datePublished);
-      if (!Number.isFinite(timestamp)) continue;
-      if (!latest || timestamp > latest.timestamp) {
-        latest = { articleId, datePublished: metadata.datePublished, timestamp };
-      }
+      entries.set(articleId, metadata);
+    }
+  }
+
+  let latest = null;
+  for (const [articleId, metadata] of entries) {
+    const timestamp = Date.parse(metadata.datePublished);
+    if (!Number.isFinite(timestamp)) continue;
+    if (!latest || timestamp > latest.timestamp) {
+      latest = { articleId, datePublished: metadata.datePublished, timestamp };
     }
   }
   return latest;

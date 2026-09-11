@@ -399,6 +399,18 @@ test('feedSection separa le due sezioni dai nomi che RSS_SECTIONS genera', () =>
   assert.deepEqual(Object.keys(SECTION_COUNTERS).sort(), ['frontaliere', 'svizzera']);
 });
 
+test('feedSection rispetta il primo match e riconosce anche una sezione senza feedFile', () => {
+  const sections = [
+    { id: 'prima', mainFeed: 'rss-duplicato.xml', feedFile: () => 'rss-duplicato.xml' },
+    { id: 'seconda', mainFeed: 'rss-duplicato.xml' },
+    { id: 'solo-main', mainFeed: 'rss-solo-main.xml' },
+  ];
+
+  assert.equal(feedSection('rss-duplicato.xml', sections), 'prima');
+  assert.equal(feedSection('rss-solo-main.xml', sections), 'solo-main');
+  assert.equal(feedSection('rss-non-censito.xml', sections), null);
+});
+
 test('un feed non mappato produce una violazione esplicita', () => {
   const { measured, expected } = healthy();
   const violations = floorViolations(
@@ -414,7 +426,9 @@ test('measureDist riconosce i feed dal documento, non dal nome del file', () => 
   fs.writeFileSync(join(dir, 'manifest.json'), JSON.stringify({ counts: { articles: 7, swissArticles: 2 } }));
   fs.writeFileSync(
     join(dir, 'rss.xml'),
-    '<rss><item><pubDate>Tue, 09 Sep 2026 00:00:00 GMT</pubDate></item>' +
+    '<rss><description><![CDATA[<pubDate>Fri, 11 Sep 2026 00:00:00 GMT</pubDate>]]></description>' +
+      '<!-- <pubDate>Sat, 12 Sep 2026 00:00:00 GMT</pubDate> -->' +
+      '<item><pubDate>Tue, 09 Sep 2026 00:00:00 GMT</pubDate></item>' +
       '<item><pubDate>Wed, 10 Sep 2026 00:00:00 GMT</pubDate></item></rss>',
   );
   // Una sitemap e' <urlset>, non <rss>: non deve entrare nel conteggio dei feed.
@@ -506,11 +520,13 @@ test('latestSeoPublication prende la data piu\' recente dai chunk che alimentano
   fs.mkdirSync(seoDir, { recursive: true });
   fs.writeFileSync(
     join(seoDir, 'older.ts'),
-    `'blog-old': { "headline": "Old", "datePublished": "2026-01-01T00:00:00Z" },\n`,
+    `'blog-old': { "headline": "Old", "datePublished": "2026-01-01T00:00:00Z" },\n` +
+      `'blog-duplicato': { "headline": "Old duplicate", "datePublished": "2026-04-01T00:00:00Z" },\n`,
   );
   fs.writeFileSync(
     join(seoDir, 'newer.ts'),
-    `'blog-new': { "headline": "New", "datePublished": "2026-02-03T04:05:06Z" },\n`,
+    `'blog-new': { "headline": "New", "datePublished": "2026-02-03T04:05:06Z" },\n` +
+      `'blog-duplicato': { "headline": "New duplicate", "datePublished": "2026-01-01T00:00:00Z" },\n`,
   );
 
   assert.deepEqual(latestSeoPublication(dir, ['older.ts', 'newer.ts']), {
@@ -519,6 +535,47 @@ test('latestSeoPublication prende la data piu\' recente dai chunk che alimentano
     timestamp: Date.parse('2026-02-03T04:05:06Z'),
   });
   fs.rmSync(dir, { recursive: true, force: true });
+});
+
+test('expectFromCorpus legge davvero un root alternativo e non il checkout del test', async () => {
+  const root = fs.mkdtempSync(join(os.tmpdir(), 'api-floors-root-'));
+  try {
+    fs.mkdirSync(join(root, 'content', 'blog-body', 'it'), { recursive: true });
+    fs.mkdirSync(join(root, 'content', 'blog-body-ch', 'it'), { recursive: true });
+    fs.mkdirSync(join(root, 'content', 'seo'), { recursive: true });
+    fs.mkdirSync(join(root, 'public', 'images', 'blog'), { recursive: true });
+    fs.writeFileSync(join(root, 'content', 'blog-body', 'it', 'frontaliere.ts'), 'export {};');
+    fs.writeFileSync(join(root, 'content', 'blog-body-ch', 'it', 'svizzera.ts'), 'export {};');
+    fs.writeFileSync(
+      join(root, 'content', 'seo', 'seo-blog.ts'),
+      `'blog-alt': { "headline": "Alt", "datePublished": "2026-02-03T04:05:06Z" },\n`,
+    );
+    fs.writeFileSync(
+      join(root, 'content', 'seo', 'seo-blog-ch.ts'),
+      `'blog-alt-ch': { "headline": "Alt CH", "datePublished": "2026-02-04T04:05:06Z" },\n`,
+    );
+    fs.writeFileSync(join(root, 'public', 'images', 'blog', 'alt.webp'), 'image');
+
+    const configuredRevision = process.env.API_FLOOR_BASE_REVISION;
+    process.env.API_FLOOR_BASE_REVISION = '0000000000000000000000000000000000000000';
+    let expected;
+    try {
+      expected = await expectFromCorpus(root);
+    } finally {
+      if (configuredRevision === undefined) delete process.env.API_FLOOR_BASE_REVISION;
+      else process.env.API_FLOOR_BASE_REVISION = configuredRevision;
+    }
+    assert.deepEqual(expected.sourceArticles, { frontaliere: 1, svizzera: 1 });
+    assert.deepEqual(expected.feedSources, { frontaliere: 1, svizzera: 1 });
+    assert.deepEqual(expected.latestSeoPublications.frontaliere, {
+      articleId: 'alt',
+      datePublished: '2026-02-03T04:05:06Z',
+      timestamp: Date.parse('2026-02-03T04:05:06Z'),
+    });
+    assert.equal(expected.sourceImages, 1);
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
 });
 
 test('un feed oltre la soglia di freschezza viene rifiutato rispetto ai chunk SEO', () => {
