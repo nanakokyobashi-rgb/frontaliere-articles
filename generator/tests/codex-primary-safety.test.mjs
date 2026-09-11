@@ -127,7 +127,8 @@ test('the corpus checkout keeps current calls on the runner and routes explicit 
     },
   );
   assert.equal(currentCorpusExplicit.repository, CORPUS_REPOSITORY);
-  assert.equal(currentCorpusExplicit.token, 'current-corpus-token');
+  assert.equal(currentCorpusExplicit.kind, 'corpus');
+  assert.equal(currentCorpusExplicit.token, 'corpus-token');
   assert.equal(currentCorpusExplicit.allowedCommandSet.has('search'), true);
   assert.equal(
     validateGhArgs(

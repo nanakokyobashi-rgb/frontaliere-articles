@@ -266,11 +266,27 @@ export function resolveGhScope(args, {
   if (repositories.some((value) => value !== explicitRepository)) {
     return { error: 'gh --repo may not select multiple repositories in one request' };
   }
-  // Any request that names the current checkout explicitly is still local to
-  // that checkout. Some prompts spell out `--repo $REPO` even for local calls
-  // (notably `gh search issues` in needs-human-sweep); routing those through
-  // the restricted cross-repo corpus scope would reject valid read/write ops.
-  if (explicitRepository === currentRepository) {
+  // An explicit corpus target always uses the dedicated corpus PAT, including
+  // when the checkout itself is the corpus: its GITHUB_TOKEN may lack the
+  // event/write scope required by the follow-up writers. When that target is
+  // also the current checkout, retain the normal local allow-list because
+  // prompts may spell out `--repo $REPO` for `gh search issues`.
+  if (hasExplicitRepository && explicitRepository === expectedCorpus) {
+    if (!corpusToken) return { error: 'Codex corpus bridge credential is unavailable' };
+    const isCurrentCorpus = currentRepository === expectedCorpus;
+    return {
+      kind: 'corpus',
+      repository: expectedCorpus,
+      token: corpusToken,
+      allowedCommandSet: isCurrentCorpus ? allowedCommands : corpusAllowedCommands,
+      allowedSubcommandMap: isCurrentCorpus ? allowedSubcommands : corpusAllowedSubcommands,
+    };
+  }
+
+  // Calls without --repo operate on the current checkout (for example the
+  // PR comment/review that closes the current corpus run). They retain the
+  // runner token and the normal command allow-list.
+  if (!hasExplicitRepository && explicitRepository === currentRepository) {
     if (!currentToken) return { error: 'Codex GitHub bridge current-repository credential is unavailable' };
     return {
       kind: 'site',
@@ -278,19 +294,6 @@ export function resolveGhScope(args, {
       token: currentToken,
       allowedCommandSet: allowedCommands,
       allowedSubcommandMap: allowedSubcommands,
-    };
-  }
-
-  // A different explicit corpus target is a cross-repo operation and receives
-  // the dedicated corpus PAT plus its narrower command allow-list.
-  if (hasExplicitRepository && explicitRepository === expectedCorpus) {
-    if (!corpusToken) return { error: 'Codex corpus bridge credential is unavailable' };
-    return {
-      kind: 'corpus',
-      repository: expectedCorpus,
-      token: corpusToken,
-      allowedCommandSet: corpusAllowedCommands,
-      allowedSubcommandMap: corpusAllowedSubcommands,
     };
   }
 
