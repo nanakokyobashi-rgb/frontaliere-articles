@@ -2984,7 +2984,7 @@
       "reason": "Parser e guard di forma del payload `gh api --paginate --slurp` usato dal digest needs-human: rifiuta GraphQL errors/shape inattesa, pubblica un marker di payload validato e distingue le due partizioni parziali (#1143). E' un helper del workflow adattato di questo repo, senza gemello sul sito.",
       "baseline": {
         "site": null,
-        "corpus": "a760c31fe1dee79f",
+        "corpus": "89649df5bdb3f9e2",
         "alignedAt": "2026-09-11"
       }
     },
