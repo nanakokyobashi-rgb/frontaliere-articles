@@ -37,7 +37,11 @@
  *   0 — ran fine, including per-doc failures (expected/handled, recorded on
  *       the doc as status:'failed' so the journalist can fix + resubmit).
  *   1 — hard infra failure only (Firestore unreachable / query threw before
- *       any doc could be processed).
+ *       any doc could be processed), or an interrupted multi-file registration.
+ *       In the latter case, documents completed earlier in the same drain are
+ *       put back in `queued`: their files share the same registry/SEO files as
+ *       the partial document, so the calling workflow must checkpoint only the
+ *       marker rather than publish a mixed batch.
  *
  * Usage:
  *   GOOGLE_APPLICATION_CREDENTIALS=<sa.json> node scripts/publish-journalist-article.mjs
@@ -266,6 +270,37 @@ function resolveJournalistAuthor(doc) {
   return (doc?.authorUid ? getAuthorByUid(doc.authorUid) : undefined) || null;
 }
 
+/**
+ * A later document can interrupt a batch after earlier documents have already
+ * been stamped `published`, but before the calling workflow commits the shared
+ * registry/SEO files. Re-queue those earlier documents before rethrowing. This
+ * is deliberately a Firestore batch (chunked at the service limit): either a
+ * chunk is fully made retryable or the failure remains loud, and the workflow's
+ * marker-only checkpoint never has to guess which lines in shared files belong
+ * to a complete article versus the partial one.
+ */
+async function requeuePublishedDocuments(db, FieldValue, publishedDocs) {
+  const requeuedIds = [];
+  const BATCH_LIMIT = 500;
+  for (let offset = 0; offset < publishedDocs.length; offset += BATCH_LIMIT) {
+    const chunk = publishedDocs.slice(offset, offset + BATCH_LIMIT);
+    const batch = db.batch();
+    for (const { docRef } of chunk) {
+      batch.update(docRef, {
+        status: 'queued',
+        publishedAt: FieldValue.delete(),
+        slugs: FieldValue.delete(),
+        publishedUrls: FieldValue.delete(),
+        liveVerifiedAt: FieldValue.delete(),
+        errorMessage: null,
+      });
+    }
+    await batch.commit();
+    requeuedIds.push(...chunk.map(({ id }) => id));
+  }
+  return requeuedIds;
+}
+
 async function processDoc(db, FieldValue, docSnap) {
   const docId = docSnap.id;
   const doc = docSnap.data();
@@ -448,6 +483,8 @@ async function main() {
   let published = 0;
   let failed = 0;
   const publishedIds = [];
+  const publishedDocs = [];
+  const requeuedIds = [];
   let fatalError = null;
   let currentDocId = null;
   try {
@@ -460,7 +497,9 @@ async function main() {
       currentDocId = null;
       if (result.ok) {
         published += 1;
-        if (result.id) publishedIds.push(result.id);
+        const id = result.id || docSnap.id;
+        publishedIds.push(id);
+        publishedDocs.push({ docRef: docSnap.ref, id });
       } else {
         failed += 1;
       }
@@ -473,6 +512,27 @@ async function main() {
         + 'riparare il corpus prima del prossimo drenaggio',
       );
     }
+    if (publishedDocs.length > 0) {
+      try {
+        requeuedIds.push(...await requeuePublishedDocuments(db, FieldValue, publishedDocs));
+        // The workflow failure path intentionally commits the marker only. The
+        // completed documents are now queued again, so advertising them as
+        // published would make the summary claim the opposite of Firestore.
+        publishedIds.length = 0;
+        console.error(
+          `::warning::${requeuedIds.length} documento/i completato/i prima dell'interruzione `
+          + 'rimesso/i in coda: il prossimo drenaggio li ritentera dopo la riparazione del marker',
+        );
+      } catch (requeueErr) {
+        // Do not turn a failed rollback into a green producer: a published
+        // status that could not be reverted is itself an orphan risk and must
+        // remain visible next to the original registration failure.
+        console.error(
+          `::error::impossibile rimettere in coda i documenti completati prima dell'interruzione: `
+          + `${requeueErr instanceof Error ? requeueErr.message : String(requeueErr)}`,
+        );
+      }
+    }
     throw err;
   } finally {
     // GITHUB_OUTPUT deve essere aggiornato anche quando il ciclo si interrompe
@@ -482,6 +542,7 @@ async function main() {
     if (githubOutput) {
       try {
         fs.appendFileSync(githubOutput, `published_ids=${JSON.stringify(publishedIds)}\n`);
+        fs.appendFileSync(githubOutput, `requeued_ids=${JSON.stringify(requeuedIds)}\n`);
       } catch (outputErr) {
         console.error(`::error::impossibile scrivere published_ids: ${outputErr.message}`);
         if (!fatalError) throw outputErr;

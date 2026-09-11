@@ -161,8 +161,11 @@ jobs:
       # A journalist producer can leave a registration marker and then exit
       # non-zero. The normal guard and commit steps are behind the implicit
       # success() condition, so preserve the marker evidence explicitly before
-      # the failure skips them. The commit below repeats this add as a safety
-      # net and commits marker files only on that path.
+      # the failure skips them. When an earlier document completed in the same
+      # drain, the producer re-queues it before rethrowing: its output shares
+      # registry/SEO files with the partial document, so the failure path must
+      # keep the mixed content out of main and carry only the marker evidence.
+      # The commit below repeats this add as a safety net.
       - name: Checkpoint — stage registration marker after producer failure
         id: registration-checkpoint
         if: always() && steps.mode.outputs.dry != 'true'
@@ -243,7 +246,7 @@ jobs:
               git add -A -- 'generator/data/register-in-progress-*.json'
             fi
             COMMIT_MESSAGE="Checkpoint interrupted journalist registration"
-            echo "producer outcome: $PRODUCER_OUTCOME; committing registration evidence only"
+            echo "producer outcome: $PRODUCER_OUTCOME; committing registration evidence only; completed documents were re-queued"
           elif [ "$GUARD_OUTCOME" != "success" ]; then
             echo "::warning::content guard outcome: $GUARD_OUTCOME — refusing to commit producer output"
             exit 0
@@ -280,7 +283,7 @@ jobs:
           # Deliberately NOT `|| true`. Firestore already says these are
           # published; if the commit never lands they are orphaned, and the only
           # signal anyone gets is this failure.
-          echo "::error::push failed after 5 attempts — these ids are stamped 'published' in Firestore but NOT committed: ${{ steps.publish.outputs.published_ids }}"
+          echo "::error::push failed after 5 attempts — these ids are stamped 'published' in Firestore but NOT committed: ${{ steps.publish.outputs.published_ids || 'none' }}; re-queued after producer interruption: ${{ steps.publish.outputs.requeued_ids || 'none' }}"
           exit 1
 
       - name: Summary
@@ -290,5 +293,6 @@ jobs:
             echo "### Publish Journalist Articles"
             echo "- Dry run: ${{ steps.mode.outputs.dry }}"
             echo "- Published ids: ${{ steps.publish.outputs.published_ids || 'none' }}"
+            echo "- Re-queued ids: ${{ steps.publish.outputs.requeued_ids || 'none' }}"
             echo "- Target ref: ${{ github.ref_name }}"
           } >> "$GITHUB_STEP_SUMMARY"
