@@ -438,17 +438,25 @@ export function negativeAcceptanceTokens(itemText) {
         || /(?:\bnessun\s*|\b(?:non|no|not)\s+(?:resti|rimanga|remain|rest|stay)?\s*)[`'"({]*$/i.test(beforeShort);
       const negativeAfter = /(?:\bsmettere\s+di\b|\bmust\s+not\b|\bnot\s+remain\b|\brimuov[ioa]\b|\belimin[ia]\b|\bsparit[oa]\b)/i.test(afterShort);
       const negativeWindow = negativeBefore || negativeAfter;
-      if (replacementBefore || negativeWindow) {
+      // A few legacy cards describe a stale guard semantically instead of using
+      // `sostituisci X con Y`: the length check and the whitespace-bearing input
+      // literal are the old acceptance, while the validator call is the new one.
+      // Keep this narrowly tied to normalization/input language; never turn an
+      // arbitrary quoted string or `.length` expression into negative evidence.
+      const semanticNormalization = /\b(?:normalizz\w*|trimm?at\w*|whitespace|spazi\w*|quot\w*|input|literal|valore)\b/i
+        .test(`${beforeShort} ${afterShort}`);
+      const staleLengthGuard = semanticNormalization && /\.length\s*[<>=!]/.test(token);
+      const tokenText = token.trim();
+      const staleWhitespaceLiteral = semanticNormalization
+        && /^(['"]).*\1$/.test(tokenText)
+        && /\s/.test(tokenText.slice(1, -1));
+      if (replacementBefore || negativeWindow || staleLengthGuard || staleWhitespaceLiteral) {
         negative.add(token);
         break;
       }
     }
   }
   return [...negative];
-}
-
-function transportAddressEvidence(body) {
-  return /\b(?:transport|trasporto|sincronizz|sync|identical|gemell[io]|lockstep)\b/i.test(String(body || ''));
 }
 
 function normalizedPrFiles(pr) {
@@ -459,16 +467,36 @@ function normalizedPrFiles(pr) {
 }
 
 /**
+ * Transport provenance is recognized from deterministic PR identity, never
+ * from free-form body prose.  The transport PR itself must carry the target
+ * file; an Addresses PR may point at its verified transport twin through
+ * `supportingPrs`.
+ */
+function isRecognizableTransportPr(pr) {
+  const identity = `${pr?.title || ''} ${pr?.headRefName || ''}`;
+  return /\b(?:lockstep|transport|trasporto)\b/i.test(identity);
+}
+
+function targetFileInAddressedProvenance(pr, targetFile) {
+  if (normalizedPrFiles(pr).has(targetFile)) return { pr, viaTransport: false };
+  const transportPr = (Array.isArray(pr?.supportingPrs) ? pr.supportingPrs : [])
+    .find((candidate) => isRecognizableTransportPr(candidate)
+      && normalizedPrFiles(candidate).has(targetFile));
+  return transportPr ? { pr: transportPr, viaTransport: true } : null;
+}
+
+/**
  * Pure legacy acceptance proof for one item.
  *
  * A legacy item is resolved only when all three independent facts hold:
  *   1. its live `Target file:` metadata identifies exactly one file;
  *   2. a merged PR explicitly says `Addresses #N` and either changed that file
- *      or is an official transport PR whose body declares the transport;
+ *      or points to a recognizable official transport PR which changed that file;
  *   3. every token explicitly marked as obsolete is evaluated against executable
  *      content (comments are ignored, string literals are retained); an absent
  *      token is recorded as negative evidence, while a token that remains as a
- *      legitimate sub-expression is left to the merged PR's semantic proof.
+ *      legitimate sub-expression is accepted only when the strict positive
+ *      matcher resolves the item.
  *
  * The PR provenance is what prevents an absence check from becoming a false
  * positive. No old token is added to the source or to the issue body.
@@ -479,42 +507,50 @@ export function legacyAddressEvidence(itemText, issueNumber, io, addressedPrs = 
     const fileExists = io && typeof io.fileExists === 'function' ? io.fileExists : () => false;
     const readFile = io && typeof io.readFile === 'function' ? io.readFile : () => null;
     const targetFiles = declaredTargetFiles(itemText, fileExists);
-    if (targetFiles.length !== 1) return { ...empty, targetFiles, eligible: false };
+    if (targetFiles.length !== 1) return { ...empty, targetFiles };
     const targetFile = targetFiles[0];
     const content = readFile(targetFile);
-    if (typeof content !== 'string') return { ...empty, targetFiles, eligible: true };
+    if (typeof content !== 'string') return { ...empty, targetFiles };
     const issue = Number(issueNumber);
-    if (!Number.isInteger(issue) || issue <= 0) return { ...empty, targetFiles, eligible: true };
+    if (!Number.isInteger(issue) || issue <= 0) return { ...empty, targetFiles };
+    let targetProvenance = null;
     const pr = (Array.isArray(addressedPrs) ? addressedPrs : []).find((candidate) => {
       if (!candidate?.mergedAt || !Number.isInteger(Number(candidate.number))) return false;
       const addressed = new RegExp(`\\bAddresses\\s+#${issue}\\b`, 'i').test(String(candidate.body || ''));
       if (!addressed) return false;
-      const files = normalizedPrFiles(candidate);
-      return files.has(targetFile) || transportAddressEvidence(candidate.body);
+      targetProvenance = targetFileInAddressedProvenance(candidate, targetFile);
+      return !!targetProvenance;
     });
-    if (!pr) return { ...empty, targetFiles, eligible: true };
+    if (!pr) return { ...empty, targetFiles };
 
+    const strict = detectAlreadyResolved(itemText, io);
     const negativeTokens = negativeAcceptanceTokens(itemText);
     const executable = stripJavaScriptComments(content);
-    // A legacy token can survive in a corrected guard as a legitimate
-    // sub-expression (for example the non-null branch of a now terminal
-    // validator).  Only tokens that are actually absent are reported as
-    // negative evidence; the merged `Addresses` provenance remains mandatory
-    // for both the absent and the semantically-updated cases.
     const absentNegativeTokens = negativeTokens.filter((token) => !executable.includes(token));
+    const negativeProof = negativeTokens.length > 0
+      && absentNegativeTokens.length === negativeTokens.length;
+    // Provenance and a live target are necessary but not sufficient.  The
+    // content must either satisfy the shared positive matcher, or explicitly
+    // satisfy a fully-negative acceptance; this prevents a Target-file-only
+    // item from resolving on declarative provenance alone.
+    const contentProof = strict.resolved || negativeProof;
+    if (!contentProof) return { ...empty, targetFiles, negativeTokens: absentNegativeTokens };
 
     const evidence = [
+      { kind: 'legacy-content', file: targetFile, mode: strict.resolved ? 'positive' : 'negative' },
+      ...(strict.resolved ? strict.evidence : []),
       {
         kind: 'legacy-address',
         issue,
         pr: Number(pr.number),
         file: targetFile,
         mergedAt: String(pr.mergedAt),
+        transportPr: targetProvenance.viaTransport ? Number(targetProvenance.pr.number) : null,
       },
       { kind: 'legacy-target', file: targetFile },
       ...absentNegativeTokens.map((tok) => ({ kind: 'legacy-negative', file: targetFile, tok })),
     ];
-    return { resolved: true, evidence, targetFiles, negativeTokens: absentNegativeTokens, eligible: true };
+    return { resolved: true, evidence, targetFiles, negativeTokens: absentNegativeTokens };
   } catch {
     return empty;
   }
@@ -524,8 +560,10 @@ export function legacyAddressEvidence(itemText, issueNumber, io, addressedPrs = 
 export function legacyResolutionContext(issueNumber, body, io, addressedPrs = []) {
   const items = parseFollowupItems(body);
   if (!items.length) return { resolved: false, evidence: [], byItem: new Map(), validItems: [] };
-  const validItems = items.filter((item) => hasFalsifiableAcceptance(item.text)
-    || declaredTargetFiles(item.text, io?.fileExists).length === 1);
+  // Keep this list identical to the shared close predicate.  Live Target-file
+  // metadata is provenance, not acceptance, and must never promote a prose-only
+  // item into an aggregate gate.
+  const validItems = items.filter((item) => hasFalsifiableAcceptance(item.text));
   const byItem = new Map();
   for (const item of validItems) {
     byItem.set(item.text, legacyAddressEvidence(item.text, issueNumber, io, addressedPrs));
@@ -690,8 +728,10 @@ export function aggregateCloseGate(body, io, { legacyResolver = null } = {}) {
   if (typeof legacyResolver === 'function') {
     for (const item of items) legacyResults.set(item, legacyResolver(item));
   }
-  const valid = items.filter((item) => hasFalsifiableAcceptance(item)
-    || legacyResults.get(item)?.eligible === true);
+  // This must remain the shared validity predicate. Target-file metadata can
+  // establish provenance for a real acceptance item, but cannot make prose-only
+  // text a gating item.
+  const valid = items.filter((item) => hasFalsifiableAcceptance(item));
   if (!valid.length) return { blocks: true, reason: 'no-valid-item' };
   const allConfirmed = valid.every((s) => {
     if (detectAlreadyResolved(s, io).resolved) return true;
@@ -768,12 +808,14 @@ const diskIo = {
 let mergedPrListCache = null;
 const mergedPrDetailCache = new Map();
 const mergedAddressedPrCache = new Map();
+const mergedAddressedListCache = new Map();
 
 function mergedPrDetails(number) {
   const n = Number(number);
   if (!Number.isInteger(n) || n <= 0) return null;
   if (mergedPrDetailCache.has(n)) return mergedPrDetailCache.get(n);
-  const raw = gh(['pr', 'view', String(n), ...repoArgs, '--json', 'number,body,mergedAt,files'], { allowFail: true });
+  const raw = gh(['pr', 'view', String(n), ...repoArgs,
+    '--json', 'number,title,body,headRefName,mergedAt,files'], { allowFail: true });
   const parsed = parseIssueJson(raw);
   const result = parsed && parsed.mergedAt ? parsed : null;
   mergedPrDetailCache.set(n, result);
@@ -792,7 +834,7 @@ function mergedAddressedPrs(issueNumber) {
   if (mergedAddressedPrCache.has(n)) return mergedAddressedPrCache.get(n);
   if (!Array.isArray(mergedPrListCache)) {
     const raw = gh(['pr', 'list', '--state', 'merged', ...repoArgs,
-      '--json', 'number,body,mergedAt', '--limit', '100'], { allowFail: true });
+      '--json', 'number,title,body,headRefName,mergedAt', '--limit', '100'], { allowFail: true });
     try {
       const parsed = JSON.parse(raw || '[]');
       mergedPrListCache = Array.isArray(parsed) ? parsed : [];
@@ -800,11 +842,26 @@ function mergedAddressedPrs(issueNumber) {
       mergedPrListCache = [];
     }
   }
+  if (!mergedAddressedListCache.has(n)) {
+    const raw = gh(['pr', 'list', '--state', 'merged', ...repoArgs,
+      '--search', `Addresses #${n} in:body`,
+      '--json', 'number,title,body,headRefName,mergedAt', '--limit', '100'], { allowFail: true });
+    try {
+      const parsed = JSON.parse(raw || '[]');
+      mergedAddressedListCache.set(n, Array.isArray(parsed) ? parsed : []);
+    } catch {
+      mergedAddressedListCache.set(n, []);
+    }
+  }
+  const transportPrs = mergedPrListCache
+    .filter((listed) => isRecognizableTransportPr(listed))
+    .map((listed) => mergedPrDetails(listed.number))
+    .filter(Boolean);
   const candidates = [];
-  for (const listed of mergedPrListCache) {
+  for (const listed of mergedAddressedListCache.get(n)) {
     if (!new RegExp(`\\bAddresses\\s+#${n}\\b`, 'i').test(String(listed?.body || ''))) continue;
     const detail = mergedPrDetails(listed.number);
-    if (detail) candidates.push(detail);
+    if (detail) candidates.push({ ...detail, supportingPrs: transportPrs });
   }
   mergedAddressedPrCache.set(n, candidates);
   return candidates;
@@ -839,10 +896,14 @@ function evidenceLines(evidence) {
     .slice(0, 6)
     .map((e) => {
       if (e.kind === 'legacy-address') {
-        return `- PR #${e.pr} mergiata con \`Addresses #${e.issue}\` verificata sul target \`${e.file}\``;
+        const via = e.transportPr ? ` tramite PR di trasporto riconoscibile #${e.transportPr}` : '';
+        return `- PR #${e.pr} mergiata con \`Addresses #${e.issue}\`${via}, file target \`${e.file}\` presente nei files verificati`;
       }
       if (e.kind === 'legacy-target') {
         return `- target file live verificato: \`${e.file}\``;
+      }
+      if (e.kind === 'legacy-content') {
+        return `- contenuto live del target verificato con prova ${e.mode}: \`${e.file}\``;
       }
       if (e.kind === 'legacy-negative') {
         return `- acceptance negativa verificata: \`${e.tok}\` assente dal codice eseguibile di \`${e.file}\``;
@@ -1023,8 +1084,7 @@ function main() {
     if (hasPriorFlag === null) {
       console.log(`::warning::reconcile-followups: impossibile leggere i commenti di #${iss.number}; flag/chiusura non determinabili, issue lasciata nel ciclo`);
     }
-    const legacyStrongEvidence = evidence.some((e) => e.kind === 'legacy-address')
-      && evidence.some((e) => e.kind === 'legacy-target');
+    const legacyStrongEvidence = evidence.some((e) => e.kind === 'legacy-content');
     const strongEvidence = isStrongAutoCloseEvidence(evidence.map((e) => e.tok)) || legacyStrongEvidence;
     const action = decideReconcileAction({
       resolved, hasMaybeResolved, hasPriorFlag, isAggregate, blocked, noAutoclose: NO_AUTOCLOSE, strongEvidence,

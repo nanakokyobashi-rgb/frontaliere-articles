@@ -69,7 +69,46 @@ test('legacy acceptance richiede Addresses + Target file e registra la negativa 
   assert.equal(legacyAddressEvidence(item, 1249, io, []).resolved, false);
 });
 
-test('l’aggregata non ignora un item legacy privo di token ma con Target file', () => {
+test('la provenienza dichiarativa da sola non risolve un item senza prova contenutistica', () => {
+  const item = [
+    '- Target file: scripts/ci/example.mjs',
+    '- Rationale: il trasporto ufficiale dichiara il target corretto.',
+  ].join('\n');
+  const result = legacyAddressEvidence(item, 1249, io, addressed);
+  assert.equal(result.resolved, false);
+});
+
+test('il trasporto richiede identità riconoscibile e target nei suoi files', () => {
+  const item = [
+    '- Target file: scripts/ci/example.mjs',
+    '- Suggested action: sostituisci `oldThing.exec(r.text)` con `[...r.text.matchAll(...)]`.',
+  ].join('\n');
+  const transported = [{
+    number: 1335,
+    mergedAt: '2026-09-11T03:28:43Z',
+    title: 'chore(loop): trasporto ufficiale',
+    body: 'Addresses #1259',
+    files: [],
+    supportingPrs: [{
+      number: 1333,
+      mergedAt: '2026-09-11T03:14:48Z',
+      title: 'Lockstep crawler workflows with the site',
+      headRefName: 'crawler-workflows-lockstep-test',
+      files: [{ path: TARGET }],
+    }],
+  }];
+  const result = legacyAddressEvidence(item, 1259, io, transported);
+  assert.equal(result.resolved, true);
+  assert.equal(result.evidence.find((entry) => entry.kind === 'legacy-address').transportPr, 1333);
+  assert.equal(legacyAddressEvidence(item, 1259, io, [{
+    number: 1335,
+    mergedAt: '2026-09-11T03:28:43Z',
+    body: 'Addresses #1259 — sync',
+    files: [],
+  }]).resolved, false);
+});
+
+test('l’aggregata non promuove un item solo-prosa con Target file a item di gating', () => {
   const body = [
     '### 1. Forma sostituita',
     '- Target file: scripts/ci/example.mjs',
@@ -80,7 +119,9 @@ test('l’aggregata non ignora un item legacy privo di token ma con Target file'
     '- Rationale: il PR già trasportato copre il target dichiarato.',
   ].join('\n');
   const gate = aggregateCloseGate(body, io, {
-    legacyResolver: (item) => legacyAddressEvidence(item, 1249, io, addressed),
+    legacyResolver: (item) => item.includes('Item senza token storico')
+      ? { resolved: false, eligible: true }
+      : legacyAddressEvidence(item, 1249, io, addressed),
   });
   assert.deepEqual(gate, { blocks: false, reason: null });
 });
