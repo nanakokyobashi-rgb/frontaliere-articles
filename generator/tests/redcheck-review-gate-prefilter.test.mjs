@@ -12,9 +12,13 @@ import { fileURLToPath } from 'node:url';
 import {
   CLAUDE_REVIEW_STEP_NAME,
   NON_GATING_REVIEW_STEPS,
+  REVIEW_ABORT_STEP_NAME,
   REVIEW_GATE_STEP_NAME,
 } from '../../scripts/ci/lib/vitestCheck.mjs';
-import { reviewOnlyFailure } from '../../scripts/ci/redcheck-review-prefilter.mjs';
+import {
+  reviewFailureKind,
+  reviewOnlyFailure,
+} from '../../scripts/ci/redcheck-review-prefilter.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const WORKFLOW = path.join(ROOT, '.github/workflows/pr-redcheck-fixer.yml');
@@ -90,6 +94,11 @@ test('redcheck filtra il rosso di sola review prima di spendere Claude', () => {
   );
   assert.match(
     block,
+    /redcheck-review-prefilter\.mjs --kind/,
+    'il preflight deve conservare il tipo di failure, non solo il booleano Important',
+  );
+  assert.match(
+    block,
     /review_only.*true|true.*review_only/s,
     'il filtro deve produrre una decisione deterministica review-only',
   );
@@ -98,11 +107,17 @@ test('redcheck filtra il rosso di sola review prima di spendere Claude', () => {
     /review_only[^\n]*true[\s\S]*skip[\s\S]*(?:review|Claude)/,
     'un rosso di sola review deve uscire dal preflight senza invocare Claude del fixer',
   );
+  assert.match(
+    block,
+    /review_failure_kind[^\n]*transient[\s\S]*skip[\s\S]*diagnosi[\s\S]*(?:Claude|zero-Claude)/,
+    'un abort transiente senza rosso di codice deve uscire senza invocare Claude del fixer',
+  );
 });
 
 test('l helper importa i nomi degli step e il matcher dei finding condivisi', async () => {
   const helper = await import('../../scripts/ci/redcheck-review-prefilter.mjs');
   assert.equal(typeof helper.reviewOnlyFailure, 'function');
+  assert.equal(typeof helper.reviewFailureKind, 'function');
   const helperSource = fs.readFileSync(
     path.join(ROOT, 'scripts/ci/redcheck-review-prefilter.mjs'),
     'utf8',
@@ -110,6 +125,8 @@ test('l helper importa i nomi degli step e il matcher dei finding condivisi', as
   assert.match(helperSource, /REVIEW_GATE_STEP_NAME/);
   assert.match(helperSource, /CLAUDE_REVIEW_STEP_NAME/);
   assert.match(helperSource, /NON_GATING_REVIEW_STEPS/);
+  assert.match(helperSource, /REVIEW_ABORT_STEP_NAME/);
+  assert.match(helperSource, /REVIEW_DEATH_STEP_NAMES/);
   assert.match(helperSource, /REDFLAG_IMPORTANT_RE/);
   assert.match(helperSource, /REVIEWER_BOT_LOGIN_RE/);
 });
@@ -192,4 +209,61 @@ test('il predicato resta chiuso su abort, failure misto e review assente', () =>
   assert.equal(reviewOnlyFailure({ ...base, jobs: [{ jobs: jobs([{ name: 'Generator CI gate', conclusion: 'failure' }]) }] }), false);
   assert.equal(reviewOnlyFailure({ ...base, jobs: [{ jobs: jobs().map(({ name, steps }) => ({ name, steps: steps.filter((s) => s.name !== CLAUDE_REVIEW_STEP_NAME) })) }] }), false);
   assert.equal(reviewOnlyFailure({ headSha: HEAD, jobs: [{ jobs: jobs() }], reviews: [] }), false);
+});
+
+test('un abort transiente senza failure di codice non attiva il fixer', () => {
+  const transientJobs = [{
+    name: 'tests (node --test)',
+    steps: [
+      { name: CLAUDE_REVIEW_STEP_NAME, conclusion: 'success' },
+      { name: REVIEW_ABORT_STEP_NAME, conclusion: 'failure' },
+    ],
+  }];
+  assert.equal(
+    reviewFailureKind({ headSha: HEAD, jobs: [{ jobs: transientJobs }], reviews: [] }),
+    'transient',
+  );
+  assert.equal(
+    reviewOnlyFailure({ headSha: HEAD, jobs: [{ jobs: transientJobs }], reviews: [] }),
+    false,
+  );
+});
+
+test('un abort che rende rosso anche il gate resta transient, salvo Important reale', () => {
+  const transientWithGateJobs = [{
+    name: 'tests (node --test)',
+    steps: [
+      { name: REVIEW_GATE_STEP_NAME, conclusion: 'failure' },
+      { name: CLAUDE_REVIEW_STEP_NAME, conclusion: 'success' },
+      { name: REVIEW_ABORT_STEP_NAME, conclusion: 'failure' },
+    ],
+  }];
+  assert.equal(
+    reviewFailureKind({ headSha: HEAD, jobs: [{ jobs: transientWithGateJobs }], reviews: [] }),
+    'transient',
+  );
+  assert.equal(
+    reviewFailureKind({
+      headSha: HEAD,
+      jobs: [{ jobs: transientWithGateJobs }],
+      reviews: [[review('`x.mjs:1`: 🔴 Important: il gate manca.')]],
+    }),
+    'important',
+    'un finding reale sulla HEAD mantiene la precedenza sull abort',
+  );
+});
+
+test('un abort transiente misto a un errore di codice resta nel percorso normale', () => {
+  const transientAndCodeJobs = [{
+    name: 'tests (node --test)',
+    steps: [
+      { name: 'Generator CI gate', conclusion: 'failure' },
+      { name: CLAUDE_REVIEW_STEP_NAME, conclusion: 'success' },
+      { name: REVIEW_ABORT_STEP_NAME, conclusion: 'failure' },
+    ],
+  }];
+  assert.equal(
+    reviewFailureKind({ headSha: HEAD, jobs: [{ jobs: transientAndCodeJobs }], reviews: [] }),
+    '',
+  );
 });

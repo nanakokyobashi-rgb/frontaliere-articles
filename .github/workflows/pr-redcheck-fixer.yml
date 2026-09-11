@@ -183,16 +183,21 @@ jobs:
           fi
           rollup=$(printf '%s' "$failed_checks" | jq -r 'join(", ")' 2>/dev/null || echo "")
 
-          # `tests` e' un check aggregato: quando l'unico step rosso e' il
-          # verdetto della review ed esiste una review reale sulla HEAD con un
-          # finding 🔴 Important. Il finding è il segnale che il redflag-fixer
-          # possiede il caso. La conclusion di `Run Claude review` non basta:
-          # lo step ha `continue-on-error` e può morire riportando `success`.
-          # Si entra qui solo se il rollup contiene esclusivamente `tests`;
-          # un altro check rosso mantiene il percorso normale. Il piccolo
-          # helper Node importa le costanti condivise e fallisce chiuso:
-          # API vuota/illeggibile → review_only=false.
+          # `tests` e' un check aggregato. Il piccolo helper Node distingue due
+          # rossi della review senza confonderli con un test rotto:
+          #
+          # - `important`: il gate ha un finding 🔴 Important reale sulla HEAD;
+          #   il proprietario e' il redflag-fixer;
+          # - `transient`: la review e' abortita senza un errore di codice;
+          #   nessun fixer puo' applicare una diagnosi, quindi redcheck non
+          #   deve spendere un round Claude a vuoto.
+          #
+          # La conclusion di `Run Claude review` non basta: lo step ha
+          # `continue-on-error` e puo' morire riportando `success`. Un altro
+          # check/step rosso mantiene il percorso normale. Il helper fallisce
+          # chiuso: API vuota/illeggibile -> review_failure_kind=none.
           review_only=false
+          review_failure_kind=none
           if [ "$(printf '%s' "$failed_checks" | jq -r 'length' 2>/dev/null || echo 0)" -eq 1 ] \
             && [ "$(printf '%s' "$failed_checks" | jq -r '.[0]' 2>/dev/null || echo '')" = "tests (node --test)" ]; then
             jobs_json=$(gh api "repos/$REPO/actions/runs/$RUN_ID/jobs?per_page=100" --paginate --slurp 2>/dev/null || echo "[]")
@@ -204,15 +209,21 @@ jobs:
               '{headSha:$head_sha,jobs:$jobs,reviews:$reviews}' 2>/dev/null || echo '{}')
             # Niente `2>/dev/null`: un helper rotto (modulo mancante, sintassi)
             # deve essere VISIBILE come warning, non collassare in silenzio in
-            # un `false` indistinguibile da un prefilter che non e' scattato.
-            if ! review_only=$(printf '%s' "$review_payload" \
-              | node scripts/ci/redcheck-review-prefilter.mjs); then
+            # un `none` indistinguibile da un prefilter che non e' scattato.
+            if ! review_failure_kind=$(printf '%s' "$review_payload" \
+              | node scripts/ci/redcheck-review-prefilter.mjs --kind); then
               echo "::warning::Helper del prefilter review-only non eseguibile → prefilter disabilitato, percorso normale mantenuto."
+              review_failure_kind=none
               review_only=false
+            elif [ "$review_failure_kind" = "important" ]; then
+              review_only=true
             fi
           fi
           if [ "${review_only:-false}" = "true" ]; then
             skip "Il check richiesto e' rosso solo per una review Claude sulla HEAD con finding 🔴 Important → competenza del 🔴-fixer, skip zero-Claude (no-op)."
+          fi
+          if [ "${review_failure_kind:-none}" = "transient" ]; then
+            skip "La review Claude e' abortita senza step di codice rosso → nessuna diagnosi riparabile, skip zero-Claude (no-op)."
           fi
 
           # Non correre sopra il gemello: se il 🔴-fixer sta girando su questo
