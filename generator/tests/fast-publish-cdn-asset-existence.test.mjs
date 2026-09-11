@@ -45,6 +45,9 @@ test('#1265 — timeout dell\'asset e\' una sorgente unica per verifica e report
   await verifyCdnAssetRefs({
     urls: [`${CDN}/assets/ok.js`],
     fetchImpl: async () => ({ ok: true, status: 200 }),
+    // Il timeout e' calcolato dal deadline dell'asset: senza un clock
+    // iniettato, Date.now() puo' avanzare tra urlStartedAt e makeSignal().
+    now: () => 10_000,
     makeSignal: (ms) => {
       asked.push(ms);
       return undefined;
