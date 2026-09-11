@@ -5,6 +5,7 @@ import { spawnSync } from 'node:child_process';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { parseMergedPRPages } from '../../scripts/ci/collect-followup-batch.mjs';
 
 for (const script of ['collect-followup-batch', 'gate-minted-followups']) {
   test(`${script}: REST pagination scopes the endpoint, never gh api --repo`, () => {
@@ -47,3 +48,31 @@ else process.exit(66);
     }
   });
 }
+
+test('collect-followup-batch rifiuta una finestra REST troncata e non ricade su gh pr list', () => {
+  const item = (number) => ({
+    number,
+    title: 'merged',
+    user: { login: 'valerielinc-ops' },
+    pull_request: { merged_at: '2026-09-07T00:00:00Z' },
+    head: { ref: 'fix/' + number },
+  });
+  const complete = [
+    { total_count: 2, incomplete_results: false, items: [item(1)] },
+    { total_count: 2, incomplete_results: false, items: [item(2)] },
+  ];
+  assert.deepEqual(parseMergedPRPages(JSON.stringify(complete)).map((pr) => pr.number), [1, 2]);
+
+  const truncated = [{
+    total_count: 101,
+    incomplete_results: false,
+    items: Array.from({ length: 100 }, (_, index) => item(index + 1)),
+  }];
+  assert.equal(parseMergedPRPages(JSON.stringify(truncated)), null);
+
+  const collector = readFileSync(
+    fileURLToPath(new URL('../../scripts/ci/collect-followup-batch.mjs', import.meta.url)),
+    'utf8',
+  );
+  assert.doesNotMatch(collector, /gh\(\['pr', 'list'/);
+});

@@ -68,6 +68,11 @@ const TRIAGE_COMMENT_PREFIX = '## Post-merge follow-up triage';
 const FALLBACK_HOURS = Number(process.env.FALLBACK_HOURS) || 6;
 const SEARCH_PAGE_SIZE = 100;
 const HERE = path.dirname(fileURLToPath(import.meta.url));
+const GATE_DIRECTORY_SENTINELS = [
+  'followup-resolution-match.mjs',
+  'is-followup-fix-pr.mjs',
+  'followup-has-candidates.mjs',
+];
 
 const REPO = process.env.GH_REPO || process.env.GITHUB_REPOSITORY || '';
 const repoArgs = REPO
@@ -352,6 +357,8 @@ export function shouldTriageAfterCandidateGate({ hasCandidates, followupPartial 
 
 // Gate failures are configuration faults, not inconclusive verdicts. Keep the
 // proceed-safe batch behavior while surfacing missing/unloadable gates loudly.
+// A sparse/partial checkout is different: when none of the known gate siblings
+// is materialized, the missing files cannot prove a broken configuration.
 const gateFaults = new Map();
 const gateWindowStats = new Map();
 const MODULE_LOAD_ERROR =
@@ -390,6 +397,10 @@ function recordGateFault(gate, kind, detail) {
     `::error title=Gate del follow-up ${kind}::${gate} — ${detail}. ` +
     'Il gate non ha consegnato un verdetto: il triage procede senza di lui (proceed-safe), ma questo è un guasto di configurazione.',
   );
+}
+
+function gateDirectoryIsMaterialized() {
+  return GATE_DIRECTORY_SENTINELS.some((name) => fs.existsSync(path.join(HERE, name)));
 }
 
 function reportGateFaults() {
@@ -452,7 +463,8 @@ function reportGateWindowInconclusive() {
 function runGateOutput(scriptName, prNumber) {
   const gatePath = path.join(HERE, scriptName);
   if (!fs.existsSync(gatePath)) {
-    recordGateFault(scriptName, 'assente', `nessun file in ${gatePath}`);
+    const kind = gateDirectoryIsMaterialized() ? 'assente' : 'non materializzata';
+    recordGateFault(scriptName, kind, `nessun file in ${gatePath}`);
     return { output: null, reason: 'gate-missing' };
   }
   try {
@@ -569,26 +581,14 @@ export function main() {
   // Search API pagination has an explicit total_count, unlike `gh pr list --limit`
   // which silently truncated the batch at 100 results and advanced the watermark.
   const query = `repo:${REPO} is:pr is:merged merged:>=${watermark}`;
-  let prListRaw = gh([
+  const prListRaw = gh([
     'api', `search/issues?q=${encodeURIComponent(query)}&per_page=${SEARCH_PAGE_SIZE}`,
     '--paginate', '--slurp',
   ]);
-  let candidates;
-  if (prListRaw !== null && !String(prListRaw).trim()) {
-    // Compatibility with the corpus' dependency-free test/stub surface. A
-    // real `gh api` response is never empty; only this narrow case falls back
-    // to the pre-daily command, so an API error (null) remains fail-closed.
-    prListRaw = gh(['pr', 'list', '--state', 'merged', '--limit', String(SEARCH_PAGE_SIZE), '--json', 'number,title,author,mergedAt,headRefName', ...repoArgs]);
-    if (prListRaw === null || !String(prListRaw).trim()) {
-      throw new Error('gh api search PR non riuscita: elenco incompleto');
-    }
-    candidates = parseMergedPRs(prListRaw);
-  } else {
-    if (prListRaw === null) throw new Error('gh api search PR non riuscita: elenco incompleto');
-    const mergedPages = parseMergedPRPages(prListRaw);
-    if (!mergedPages) throw new Error('risposta paginata PR incompleta/non verificabile');
-    candidates = parseMergedPRs(JSON.stringify(mergedPages));
-  }
+  if (prListRaw === null) throw new Error('gh api search PR non riuscita: elenco incompleto');
+  const mergedPages = parseMergedPRPages(prListRaw);
+  if (!mergedPages) throw new Error('risposta paginata PR incompleta/non verificabile');
+  const candidates = parseMergedPRs(JSON.stringify(mergedPages));
   console.log(`Merged PRs since watermark (eligible authors): ${candidates.length}`);
 
   const batch = [];

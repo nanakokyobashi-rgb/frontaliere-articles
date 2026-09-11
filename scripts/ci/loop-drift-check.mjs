@@ -219,6 +219,11 @@ const FORCE = ARGS.has('--force');
 // e' l'unico modo di registrare senza rete, e lo dice chi lancia.
 const NO_PROVENANCE = ARGS.has('--no-provenance');
 
+function writeIssueReported(persisted) {
+  if (!process.env.GITHUB_OUTPUT) return;
+  fs.appendFileSync(process.env.GITHUB_OUTPUT, `issue_reported=${persisted ? 'true' : 'false'}\n`);
+}
+
 /**
  * I path elencati in `--only` (`--only=a,b`, oppure `--only a b`).
  *
@@ -2117,13 +2122,14 @@ async function main() {
       '_Aperta da `scripts/ci/loop-drift-check.mjs`._',
     ].filter(Boolean).join('\n');
 
-    await createGithubIssue({
+    const issueReport = await createGithubIssue({
       title: 'Loop drift: il ciclo autonomo diverge dal sito',
       description,
       priority: 3,
       labels: ['Bug'],
       workflow: 'loop-drift-check',
     });
+    writeIssueReported(issueReport?.persisted === true);
   }
 
   return STRICT && actionable.length ? 1 : 0;

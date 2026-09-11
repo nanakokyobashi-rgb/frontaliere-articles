@@ -116,6 +116,18 @@ function isShallow() {
   }
 }
 
+/** true se git deve poter chiedere blob mancanti al promisor remoto. */
+export function isPartialClone() {
+  for (const args of [
+    ['config', '--get', 'extensions.partialclone'],
+    ['config', '--get-regexp', '^remote\\..*\\.promisor$'],
+  ]) {
+    const result = spawnSync('git', args, { cwd: ROOT, encoding: 'utf8' });
+    if (result.status === 0 && String(result.stdout || '').trim()) return true;
+  }
+  return false;
+}
+
 /** Associa ogni commit del log `--follow` al path che aveva in quel commit. */
 export function parseFollowHistory(output) {
   const entries = [];
@@ -134,15 +146,30 @@ export function parseFollowHistory(output) {
 
 /** true solo per un path che non esisteva ancora in quel commit storico. */
 export function isExpectedMissingHistoricalPath(stderr) {
-  return /path '.+' does not exist in '.+'/.test(String(stderr));
+  return /path '.+' (?:does not exist in|exists on disk, but not in) '.+'/.test(String(stderr));
+}
+
+/** true per un oggetto che git non ha potuto leggere dal promisor. */
+export function isLazyFetchFailure(stderr) {
+  return /(?:\boid\s+missing\b|\bpromisor\b|\blazy[- ]?fetch\b|\b(?:could not|unable to)\s+(?:fetch|read)\b|\bnot a valid object name\b)/i.test(
+    String(stderr),
+  );
 }
 
 /**
  * Decodifica l'output di `git cat-file --batch` senza trasformare una lettura
  * interrotta in una mappa parziale. Un output `missing`, `ambiguous` o
- * troncato e' un errore del verificatore, non una storia senza revisioni.
+ * troncato e' un errore del verificatore, non una storia senza revisioni. In
+ * un clone partial/promisor, pero', `missing` puo' significare che il
+ * lazy-fetch non ha consegnato il blob: con `allowMissing` la lettura torna
+ * inconclusiva e il chiamante non la trasforma in un ghost.
+ *
+ * @param {Buffer} buf
+ * @param {Map<string, Set<string>>} oidToPaths
+ * @param {{allowMissing?: boolean}} [options]
+ * @returns {Map<string, Set<string>>|null} null = lettura inconclusiva.
  */
-export function parseCatFileBatchOutput(buf, oidToPaths) {
+export function parseCatFileBatchOutput(buf, oidToPaths, { allowMissing = false } = {}) {
   const byPath = new Map();
   if (!oidToPaths || oidToPaths.size === 0) return byPath;
   if (!Buffer.isBuffer(buf) || buf.length === 0) {
@@ -156,7 +183,11 @@ export function parseCatFileBatchOutput(buf, oidToPaths) {
     if (nl < 0) throw new Error('git cat-file --batch: stdout troncato (header senza newline)');
     const header = buf.slice(off, nl).toString();
     const [oid, type, sizeStr] = header.split(' ');
-    if (type === 'missing' || type === 'ambiguous') {
+    if (type === 'missing') {
+      if (allowMissing) return null;
+      throw new Error(`git cat-file --batch: ${header}`);
+    }
+    if (type === 'ambiguous') {
       throw new Error(`git cat-file --batch: ${header}`);
     }
     if (type !== 'blob' || !/^\d+$/.test(sizeStr || '')) {
@@ -194,10 +225,13 @@ export function parseCatFileBatchOutput(buf, oidToPaths) {
  *
  * @returns {Map<string, Set<string>>}
  */
-function blobsByPathFromHistory(paths) {
+function blobsByPathFromHistory(paths, { partialClone = isPartialClone() } = {}) {
   if (paths.length === 0) return new Map();
   const want = new Set(paths);
-  const listing = git(['rev-list', '--full-history', CURRENT_HISTORY_REF, CANONICAL_HISTORY_REF, '--objects', '--', ...paths]);
+  const listing = git([
+    '-c', 'core.quotePath=false', 'rev-list', '--full-history',
+    CURRENT_HISTORY_REF, CANONICAL_HISTORY_REF, '--objects', '--', ...paths,
+  ]);
   const oidToPaths = new Map();
   for (const line of listing.split('\n')) {
     const sp = line.indexOf(' ');
@@ -211,13 +245,17 @@ function blobsByPathFromHistory(paths) {
     oidToPaths.get(oid).add(rel);
   }
   if (oidToPaths.size === 0) return new Map();
-  const res = spawnSync('git', ['cat-file', '--batch'], {
+  const res = spawnSync('git', ['-c', 'core.quotePath=false', 'cat-file', '--batch'], {
     cwd: ROOT,
     input: `${[...oidToPaths.keys()].join('\n')}\n`,
     maxBuffer: 1 << 30,
   });
-  if (res.status !== 0) throw new Error(`git cat-file --batch: ${res.stderr?.toString() || res.status}`);
-  return parseCatFileBatchOutput(res.stdout, oidToPaths);
+  if (res.status !== 0) {
+    const stderr = res.stderr?.toString() || '';
+    if (partialClone && isLazyFetchFailure(stderr)) return null;
+    throw new Error(`git cat-file --batch: ${stderr || res.status}`);
+  }
+  return parseCatFileBatchOutput(res.stdout, oidToPaths, { allowMissing: partialClone });
 }
 
 /**
@@ -226,22 +264,49 @@ function blobsByPathFromHistory(paths) {
  * legittimo di mancato match, ed e' raro — quindi si paga un `git log` per voce
  * sospetta, non per tutte e 330.
  */
-function blobsFollowingRenames(rel) {
+function blobsFollowingRenames(rel, { partialClone = isPartialClone() } = {}) {
   const hashes = new Set();
-  let commits;
-  try {
-    commits = parseFollowHistory(git(['log', '--follow', '--format=%H', '--name-only', CURRENT_HISTORY_REF, '--', rel]));
-  } catch {
-    return hashes;
-  }
-  for (const { sha, path: historicalPath } of commits) {
-    const r = spawnSync('git', ['cat-file', 'blob', `${sha}:${historicalPath}`], { cwd: ROOT, maxBuffer: 1 << 28 });
-    if (r.status === 0) hashes.add(sha256(r.stdout));
-    else if (!isExpectedMissingHistoricalPath(r.stderr)) {
-      throw new Error(`git cat-file blob ${sha}:${historicalPath}: ${r.stderr?.toString() || r.status}`);
+  const seen = new Set();
+  for (const ref of new Set([CURRENT_HISTORY_REF, CANONICAL_HISTORY_REF])) {
+    let commits;
+    try {
+      commits = parseFollowHistory(
+        git(['-c', 'core.quotePath=false', 'log', '--follow', '--format=%H', '--name-only', ref, '--', rel]),
+      );
+    } catch (error) {
+      const diagnostic = error?.stderr ?? error?.message ?? '';
+      if (partialClone && isLazyFetchFailure(diagnostic)) return null;
+      continue;
+    }
+    for (const { sha, path: historicalPath } of commits) {
+      const key = `${sha}\0${historicalPath}`;
+      if (seen.has(key)) continue;
+      seen.add(key);
+      const r = spawnSync(
+        'git',
+        ['-c', 'core.quotePath=false', 'cat-file', 'blob', `${sha}:${historicalPath}`],
+        { cwd: ROOT, maxBuffer: 1 << 28 },
+      );
+      if (r.status === 0) hashes.add(sha256(r.stdout));
+      else if (isExpectedMissingHistoricalPath(r.stderr)) continue;
+      else if (partialClone && isLazyFetchFailure(r.stderr)) return null;
+      else {
+        throw new Error(`git cat-file blob ${sha}:${historicalPath}: ${r.stderr?.toString() || r.status}`);
+      }
     }
   }
   return hashes;
+}
+
+function reportInconclusive(message) {
+  if (JSON_OUT) {
+    console.log(JSON.stringify({ ok: false, inconclusive: true, reason: message }, null, 2));
+  } else {
+    console.error(`⚠️ ${message}`);
+  }
+  // Un lazy-fetch non consegnato non e' una verifica verde: il workflow deve
+  // fermarsi prima di trattare una baseline non letta come attestata.
+  process.exitCode = 1;
 }
 
 function main() {
@@ -258,11 +323,26 @@ function main() {
   }
 
   const paths = files.filter((e) => e?.baseline?.corpus != null).map((e) => e.path);
-  const blobsByPath = blobsByPathFromHistory(paths);
+  const partialClone = isPartialClone();
+  const blobsByPath = blobsByPathFromHistory(paths, { partialClone });
+  if (blobsByPath === null) {
+    reportInconclusive(
+      `${MANIFEST_REL}: lettura inconclusiva in clone partial/promisor: un lazy-fetch di un blob storico non ha risposto; ` +
+      'nessuna baseline viene classificata come ghost.',
+    );
+    return;
+  }
   let verdict = baselineHistoryVerdict({ files, blobsByPath });
   // I rinomini si pagano solo sui sospetti.
   for (const ghost of verdict.ghosts) {
-    const extra = blobsFollowingRenames(ghost.path);
+    const extra = blobsFollowingRenames(ghost.path, { partialClone });
+    if (extra === null) {
+      reportInconclusive(
+        `${MANIFEST_REL}: lettura inconclusiva in clone partial/promisor durante la passata sui rinomini; ` +
+        'nessuna baseline viene classificata come ghost.',
+      );
+      return;
+    }
     if (extra.size === 0) continue;
     const merged = new Set([...(blobsByPath.get(ghost.path) || []), ...extra]);
     blobsByPath.set(ghost.path, merged);

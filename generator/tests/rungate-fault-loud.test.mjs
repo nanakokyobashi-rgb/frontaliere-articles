@@ -41,10 +41,17 @@ import { fileURLToPath } from 'node:url';
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const SCRIPT = path.join(ROOT, 'scripts/ci/collect-followup-batch.mjs');
 
-/** Una PR mergiata di un autore ammesso: basta a far arrivare il flusso ai gate. */
-const PR_LIST = JSON.stringify([
-  { number: 4242, title: 'feat: qualcosa', author: { login: 'valerielinc-ops' }, mergedAt: '2026-09-07T00:00:00Z', headRefName: 'feat/x' },
-]);
+const PR_SEARCH_PAGES = JSON.stringify([{
+  total_count: 1,
+  incomplete_results: false,
+  items: [{
+    number: 4242,
+    title: 'feat: qualcosa',
+    user: { login: 'valerielinc-ops' },
+    pull_request: { merged_at: '2026-09-07T00:00:00Z' },
+    head: { ref: 'feat/x' },
+  }],
+}]);
 
 /**
  * Sandbox: copia dello script + stub `gh` in PATH + `$GITHUB_STEP_SUMMARY` su
@@ -69,7 +76,7 @@ function runInSandbox(gates = {}) {
     '#!/bin/sh\n' +
     'case "$1 $2" in\n' +
     '  "run list") echo "[]" ;;\n' +
-    `  "pr list") cat <<'JSON'\n${PR_LIST}\nJSON\n  ;;\n` +
+    `  "api search/issues"*) cat <<'JSON'\n${PR_SEARCH_PAGES}\nJSON\n  ;;\n` +
     '  "pr view") echo "{\\"comments\\":[]}" ;;\n' +
     '  *) echo "" ;;\n' +
     'esac\n',
@@ -97,18 +104,14 @@ function runInSandbox(gates = {}) {
   return { stdout, status: run.status, summary: fs.existsSync(summary) ? fs.readFileSync(summary, 'utf-8') : '' };
 }
 
-test('gate ASSENTE: annotation ::error:: e sezione nel run summary', () => {
+test('checkout sparse: directory dei gate non materializzata e fault non fatale', () => {
   const { stdout, summary } = runInSandbox(); // nessun gate accanto alla copia
 
-  assert.match(
-    stdout,
-    /::error title=Gate del follow-up assente::is-followup-fix-pr\.mjs/,
-    'Un gate che non esiste deve produrre una annotation GitHub Actions, ' +
-    'non ricadere in silenzio sul proceed-safe.\nstdout:\n' + stdout,
-  );
+  assert.match(stdout, /non materializzata/, 'Il checkout parziale deve essere riconoscibile.\n' + stdout);
+  assert.doesNotMatch(stdout, /::error title=Gate del follow-up assente::/);
   assert.match(summary, /Gate del follow-up NON eseguiti/, 'Il guasto deve comparire nel $GITHUB_STEP_SUMMARY.\n' + summary);
-  assert.match(summary, /is-followup-fix-pr\.mjs.*assente/, 'Il summary deve nominare il gate e il tipo di guasto.\n' + summary);
-  assert.match(summary, /followup-has-candidates\.mjs.*assente/, 'Entrambi i gate mancanti vanno elencati.\n' + summary);
+  assert.match(summary, /is-followup-fix-pr\.mjs.*non materializzata/, 'Il summary deve nominare il gate e il tipo di checkout.\n' + summary);
+  assert.match(summary, /followup-has-candidates\.mjs.*non materializzata/, 'Entrambi i gate mancanti vanno elencati.\n' + summary);
 
   // Il verso del proceed-safe NON cambia: la PR resta nel batch.
   assert.match(stdout, /batch_prs=4242/, 'Il proceed-safe deve restare invariato: la PR va tenuta.\n' + stdout);
@@ -252,10 +255,13 @@ test('ogni gate interamente inconclusive nella finestra viene nominato', () => {
 // il ciclo del corpus — che alimenta la generazione degli articoli — costerebbe
 // piu' di quanto salva.
 
-test('gate ASSENTE: la run FALLISCE (watermark fermo, finestra ri-coperta)', () => {
-  const { status, stdout } = runInSandbox();
+test('gate ASSENTE dopo materializzazione della directory: la run FALLISCE', () => {
+  const { status, stdout, summary } = runInSandbox({
+    'is-followup-fix-pr.mjs': "console.log('is_followup_fix=false');\n",
+  });
   assert.equal(status, 1, 'un gate assente deve rendere la run fallita');
-  assert.match(stdout, /::error title=Gate del follow-up assente::/);
+  assert.match(stdout, /::error title=Gate del follow-up assente::followup-has-candidates\.mjs/);
+  assert.match(summary, /followup-has-candidates\.mjs.*assente/);
 });
 
 test('gate NON CARICABILE: urla ma NON fa fallire la run', () => {
