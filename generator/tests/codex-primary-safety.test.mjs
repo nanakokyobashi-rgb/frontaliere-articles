@@ -164,6 +164,8 @@ test('Claude fallback is suppressed when Codex side effects are possible', () =>
   assert.match(action, /steps\.codex\.outputs\.side_effect_detected == 'false'/);
   assert.match(action, /Prepare host-side GitHub bridge for Claude fallback/);
   assert.match(action, /steps\.claude_bridge\.outcome == 'success'/);
+  assert.match(action, /cp -- "\$action_path\/gh-bridge\.sh" "\$bridge_root\/gh"/);
+  assert.match(action, /resolved_gh="\$\(PATH="\$bridge_path" command -v gh/);
   assert.match(action, /echo "\$bridge_root" >> "\$GITHUB_PATH"/);
   assert.match(action, /Cleanup Claude fallback GitHub bridge/);
   assert.match(action, /restore_sanitized_git_config/);

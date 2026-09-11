@@ -1154,12 +1154,17 @@ runs:
         }
         bridge_root="$(mktemp -d "$runner_temp/claude-gh-bridge.XXXXXX")"
         chmod 700 "$bridge_root"
-        mkdir -p "$bridge_root/home" "$bridge_root/scratch" "$bridge_root/socket"
-        chmod 700 "$bridge_root/home" "$bridge_root/scratch" "$bridge_root/socket"
-        for name in gh-bridge.sh gh-bridge-client.mjs gh-bridge-server.mjs bridge-transport.mjs child-lifecycle.mjs; do
+        mkdir -p "$bridge_root/home" "$bridge_root/scratch"
+        chmod 700 "$bridge_root/home" "$bridge_root/scratch"
+        for name in gh-bridge-client.mjs gh-bridge-server.mjs bridge-transport.mjs child-lifecycle.mjs; do
           cp -- "$action_path/$name" "$bridge_root/$name"
           chmod 700 "$bridge_root/$name"
         done
+        # GITHUB_PATH exposes command names, not arbitrary filenames. Publish an
+        # executable literally named `gh`, otherwise Claude would silently call
+        # the runner CLI and bypass the host-side scope selector.
+        cp -- "$action_path/gh-bridge.sh" "$bridge_root/gh"
+        chmod 700 "$bridge_root/gh"
         side_effect_file="$bridge_root/side-effects"
         : > "$side_effect_file"
         chmod 600 "$side_effect_file"
@@ -1183,16 +1188,27 @@ runs:
           "$node_bin" "$bridge_root/gh-bridge-server.mjs" >/dev/null 2>&1 &
         bridge_pid=$!
         for _ in $(seq 1 100); do
-          [ -d "$bridge_root/socket" ] && break
+          if [ -d "$bridge_root/socket" ]; then
+            kill -0 "$bridge_pid" 2>/dev/null && break
+            break
+          fi
           kill -0 "$bridge_pid" 2>/dev/null || break
           sleep 0.1
         done
-        if [ ! -d "$bridge_root/socket" ]; then
+        if [ ! -d "$bridge_root/socket" ] || ! kill -0 "$bridge_pid" 2>/dev/null; then
           kill "$bridge_pid" 2>/dev/null || true
           wait "$bridge_pid" 2>/dev/null || true
           echo '::error::Claude fallback GitHub bridge did not start.'
           exit 1
         fi
+        bridge_path="$bridge_root:$PATH"
+        resolved_gh="$(PATH="$bridge_path" command -v gh || true)"
+        [ "$resolved_gh" = "$bridge_root/gh" ] || {
+          echo '::error::Claude fallback did not resolve the host-side gh wrapper.'
+          kill "$bridge_pid" 2>/dev/null || true
+          wait "$bridge_pid" 2>/dev/null || true
+          exit 1
+        }
         printf 'pid=%s\nroot=%s\n' "$bridge_pid" "$bridge_root" >> "$GITHUB_OUTPUT"
         {
           echo 'CODEX_BRIDGE_TRANSPORT=files'
