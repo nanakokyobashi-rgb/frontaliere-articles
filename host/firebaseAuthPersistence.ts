@@ -6,9 +6,9 @@
  *
  * Firebase Auth persiste la sessione del browser sotto
  * `firebase:authUser:<Web API key>:[DEFAULT]`. Il registro Offerwall
- * trasportato in `host/constants.ts` legge ora il namespace
- * `firebase:authUser:` senza chiamare questo helper, così la shell statica non
- * deve conoscere la chiave del progetto.
+ * trasportato in `host/constants.ts` legge un marker esplicito scritto da
+ * authService, così la shell statica non deve conoscere la chiave del progetto
+ * né confondere la sessione di un altro progetto Firebase.
  *
  * ## Perche' la chiave NON sta in questo file
  *
@@ -37,13 +37,14 @@
  * Senza chiave questa funzione rende **stringa vuota**, e ogni chiamante DEVE
  * trattarla come «non la so» invece di emettere una lookup su `''` — che
  * tornerebbe sempre `null` e negherebbe l'accesso a ogni utente autenticato.
- * La shell trasportata in `host/constants.ts` usa direttamente la scansione del
- * PREFISSO `firebase:authUser:`; il comportamento resta quindi indipendente
- * dalla configurazione runtime anche quando questo helper non viene chiamato.
+ * La shell trasportata in `host/constants.ts` usa il marker esplicito; il
+ * comportamento resta quindi indipendente dalla configurazione runtime anche
+ * quando questo helper non viene chiamato.
  */
 
 /** Nome dell'app Firebase di default, la sola che il sito inizializzi. */
 const DEFAULT_FIREBASE_APP_NAME = '[DEFAULT]';
+export const FIREBASE_AUTH_SESSION_MARKER_KEY = 'frontaliere:auth-session';
 
 /**
  * La Web API key, da Remote Config via `load-rc-env.mjs`. `VITE_` per primo:

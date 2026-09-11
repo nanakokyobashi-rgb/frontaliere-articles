@@ -98,7 +98,7 @@ test('gli identificatori pubblici del repo non fanno rosso il gate', () => {
     "export const GA4_MEASUREMENT_ID = 'G-LGJ9LE360F';",
     "export const ADSENSE_CLIENT_ID = 'ca-pub-8628054934855353';",
     `data-cf-beacon='{"token": "1268b58e83f74d22a2136ff48e0746b7", "version": "2024.6.1"}'`,
-    "if(k&&k.indexOf('firebase:authUser:')===0)return true;",
+    "if(window.localStorage.getItem('frontaliere:auth-session')==='true')return true;",
   ];
   for (const riga of pubblici) {
     assert.deepEqual(scanText(riga, 'pubblico'), [], `falso positivo su un valore pubblico: ${riga}`);
