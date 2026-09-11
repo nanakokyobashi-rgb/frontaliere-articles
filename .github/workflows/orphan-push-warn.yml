@@ -60,9 +60,14 @@ jobs:
             exit 0
           fi
           # Una PR aperta sulla stessa head non e' orfana: e' il ciclo normale.
-          if ! OPEN=$(gh pr list --repo "$REPO" --head "$HEAD_REF" --state open \
-            --json number --jq '.[0].number // empty' 2>/dev/null); then
+          if ! OPEN_RAW=$(gh pr list --repo "$REPO" --head "$HEAD_REF" --state open \
+            --json number,headRepository 2>/dev/null); then
             echo "::warning::Impossibile leggere le PR aperte per $HEAD_REF — classificazione sospesa, nessun commento aggiunto."
+            exit 0
+          fi
+          if ! OPEN=$(printf '%s' "$OPEN_RAW" | jq -r --arg repo "$REPO" \
+            'map(select(.headRepository.nameWithOwner == $repo)) | .[0].number // empty' 2>/dev/null); then
+            echo "::warning::Elenco delle PR aperte non parseabile per $HEAD_REF — classificazione sospesa, nessun commento aggiunto."
             exit 0
           fi
           if [ -n "${OPEN:-}" ]; then
@@ -73,11 +78,16 @@ jobs:
           # l'ordine di `gh pr list` non e' documentato. Seleziona l'ultima PR
           # chiusa di qualunque tipo: una CLOSED senza merge e' comunque lavoro
           # che non e' atterrato su main.
-          if ! TARGET=$(gh pr list --repo "$REPO" --head "$HEAD_REF" --state all \
-            --limit 100 --json number,createdAt,closedAt,state,mergedAt,headRefOid,mergeCommit \
-            --jq 'map(select(.state != "OPEN")) | sort_by(.createdAt) | last // {}' \
+          if ! TARGET_RAW=$(gh pr list --repo "$REPO" --head "$HEAD_REF" --state all \
+            --limit 100 --json number,createdAt,closedAt,state,mergedAt,headRefOid,mergeCommit,headRepository \
             2>/dev/null); then
             echo "::warning::Impossibile leggere le PR chiuse per $HEAD_REF — classificazione sospesa, nessun commento aggiunto."
+            exit 0
+          fi
+          if ! TARGET=$(printf '%s' "$TARGET_RAW" | jq -c --arg repo "$REPO" \
+            'map(select(.state != "OPEN" and .headRepository.nameWithOwner == $repo)) | sort_by(.createdAt) | last // {}' \
+            2>/dev/null); then
+            echo "::warning::Elenco delle PR chiuse non parseabile per $HEAD_REF — classificazione sospesa, nessun commento aggiunto."
             exit 0
           fi
           # Un risultato vuoto resta un JSON valido (`last // {}`); evita
@@ -139,15 +149,18 @@ jobs:
           if [ -n "${LIFECYCLE_AT:-}" ]; then
             for attempt in 1 2 3; do
               if ! AFTER_ROUND=$(gh pr list --repo "$REPO" --head "$HEAD_REF" --state all \
-                --limit 100 --json number,createdAt 2>/dev/null); then
+                --limit 100 --json number,createdAt,headRepository 2>/dev/null); then
                 echo "::warning::Secondo giro non verificabile per $HEAD_REF — classificazione sospesa, nessun commento aggiunto."
                 exit 0
               fi
               if [ -z "${AFTER_ROUND:-}" ]; then AFTER_ROUND='[]'; fi
-              NEW_ROUND=$(printf '%s' "$AFTER_ROUND" | jq -r \
-                --arg cutoff "$LIFECYCLE_AT" \
-                'map(select(.createdAt > $cutoff)) | sort_by(.createdAt) | last | .number // empty' \
-                2>/dev/null || true)
+              if ! NEW_ROUND=$(printf '%s' "$AFTER_ROUND" | jq -r \
+                --arg cutoff "$LIFECYCLE_AT" --arg repo "$REPO" \
+                'map(select(.headRepository.nameWithOwner == $repo and .createdAt > $cutoff)) | sort_by(.createdAt) | last | .number // empty' \
+                2>/dev/null); then
+                echo "::warning::Secondo giro non parseabile per $HEAD_REF — classificazione sospesa, nessun commento aggiunto."
+                exit 0
+              fi
               if [ -n "${NEW_ROUND:-}" ]; then
                 echo "Secondo giro: PR #$NEW_ROUND creata dopo la chiusura della PR #$PR_NUMBER sulla stessa head — push non attribuito alla PR precedente."
                 exit 0
@@ -198,7 +211,9 @@ jobs:
                 echo "::warning::Timestamp server-side non parseabile per il confronto con la head ${HEAD_OID} — nessun commento aggiunto."
                 exit 0
               fi
-              if [ "$RUN_STARTED_EPOCH" -le "$MERGED_EPOCH" ]; then
+              # La conversione conserva solo i secondi: l'uguaglianza non
+              # dimostra l'ordine degli eventi, quindi lascia attivo il warning.
+              if [ "$RUN_STARTED_EPOCH" -lt "$MERGED_EPOCH" ]; then
                 echo "Commit $SHA gia' contenuto nella head storica $HEAD_OID della PR #$PR_NUMBER — nessun push orfano."
                 exit 0
               fi

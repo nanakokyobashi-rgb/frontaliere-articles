@@ -64,8 +64,11 @@ if printf '%s' "$args" | grep -Fq -- '--state open'; then
   printf '%s' "$ORPHAN_TEST_OPEN"
   exit 0
 fi
-if printf '%s' "$args" | grep -Fq -- '--state all' && printf '%s' "$args" | grep -Fq -- '--jq'; then
-  printf '%s' "$ORPHAN_TEST_TARGET"
+if printf '%s' "$args" | grep -Fq -- '--state all' && printf '%s' "$args" | grep -Fq -- 'mergeCommit'; then
+  case "$ORPHAN_TEST_TARGET" in
+    '['*) printf '%s' "$ORPHAN_TEST_TARGET" ;;
+    *) printf '[%s]' "$ORPHAN_TEST_TARGET" ;;
+  esac
   exit 0
 fi
 if printf '%s' "$args" | grep -Fq -- '--state all'; then
@@ -108,7 +111,7 @@ exit 1
     ORPHAN_TEST_COMMENT_FILE: commentFile,
     ORPHAN_TEST_DEFAULT_BRANCH: 'main',
     ORPHAN_TEST_MERGE_OID: scenario.mergeOid || 'merge-oid',
-    ORPHAN_TEST_OPEN: '',
+    ORPHAN_TEST_OPEN: '[]',
     ORPHAN_TEST_TARGET: '{}',
     ORPHAN_TEST_AFTER_ROUND: '[]',
     ORPHAN_TEST_MAIN_STATUS: 'diverged',
@@ -206,8 +209,10 @@ test('(e) seleziona anche una PR chiusa senza merge e controlla le containment p
   assert.match(job, /closedAt/);
   assert.match(job, /headRefOid/);
   assert.match(job, /mergeCommit/);
-  assert.match(job, /select\(\.state != "OPEN"\)/);
+  assert.match(job, /select\(\.state != "OPEN"/);
   assert.match(job, /DEFAULT_BRANCH/);
+  assert.match(job, /headRepository/);
+  assert.match(job, /headRepository\.nameWithOwner == \$repo/);
   assert.match(job, /repos\/\$\{REPO\}\/compare\/\$\{SHA\}\.\.\.\$\{DEFAULT_BRANCH\}/);
   assert.match(job, /MERGE_COMMIT_OID/);
   assert.match(job, /repos\/\$\{REPO\}\/compare\/\$\{SHA\}\.\.\.\$\{MERGE_COMMIT_OID\}/);
@@ -257,6 +262,7 @@ test('(g) il verdetto osservabile distingue merged contenuto, closed-unmerged, s
       mergedAt: '2026-09-11T06:05:00Z',
       headRefOid: 'head-oid',
       mergeCommit: { oid: 'merge-oid' },
+      headRepository: { nameWithOwner: 'owner/repo' },
     }),
     ORPHAN_TEST_MAIN_STATUS: 'diverged',
     ORPHAN_TEST_MERGE_STATUS: 'ahead',
@@ -272,12 +278,40 @@ test('(g) il verdetto osservabile distingue merged contenuto, closed-unmerged, s
       closedAt: '2026-09-11T06:05:00Z',
       headRefOid: 'head-oid',
       mergeCommit: { oid: null },
+      headRepository: { nameWithOwner: 'owner/repo' },
     }),
     ORPHAN_TEST_COMMENTS: '[]',
   });
   assert.equal(closed.status, 0);
   assert.match(closed.stdout, /CLOSED WITHOUT MERGE/);
   assert.match(closed.comment, /orphan-push-warn/);
+
+  const foreignHead = runWorkflow({
+    ORPHAN_TEST_OPEN: '[{"number":99,"headRepository":{"nameWithOwner":"fork/repo"}}]',
+    ORPHAN_TEST_TARGET: JSON.stringify([
+      {
+        number: 99,
+        createdAt: '2026-09-11T06:06:00Z',
+        closedAt: '2026-09-11T06:07:00Z',
+        mergedAt: '2026-09-11T06:07:00Z',
+        headRefOid: 'fork-head',
+        mergeCommit: { oid: 'fork-merge' },
+        headRepository: { nameWithOwner: 'fork/repo' },
+      },
+      {
+        number: 49,
+        createdAt: '2026-09-11T05:00:00Z',
+        closedAt: '2026-09-11T06:05:00Z',
+        headRefOid: 'head-oid',
+        mergeCommit: { oid: null },
+        headRepository: { nameWithOwner: 'owner/repo' },
+      },
+    ]),
+    ORPHAN_TEST_COMMENTS: '[]',
+  });
+  assert.equal(foreignHead.status, 0);
+  assert.match(foreignHead.stdout, /CLOSED WITHOUT MERGE/);
+  assert.match(foreignHead.comment, /orphan-push-warn/);
 
   const secondRound = runWorkflow({
     ORPHAN_TEST_TARGET: JSON.stringify({
@@ -287,8 +321,9 @@ test('(g) il verdetto osservabile distingue merged contenuto, closed-unmerged, s
       mergedAt: '2026-09-11T06:05:00Z',
       headRefOid: 'head-oid',
       mergeCommit: { oid: 'merge-oid' },
+      headRepository: { nameWithOwner: 'owner/repo' },
     }),
-    ORPHAN_TEST_AFTER_ROUND: '[{"number":44,"createdAt":"2026-09-11T06:06:00Z"}]',
+    ORPHAN_TEST_AFTER_ROUND: '[{"number":44,"createdAt":"2026-09-11T06:06:00Z","headRepository":{"nameWithOwner":"owner/repo"}}]',
   });
   assert.equal(secondRound.status, 0);
   assert.match(secondRound.stdout, /Secondo giro: PR #44/);
@@ -302,6 +337,7 @@ test('(g) il verdetto osservabile distingue merged contenuto, closed-unmerged, s
       mergedAt: '2026-09-11T06:05:00Z',
       headRefOid: 'head-oid',
       mergeCommit: { oid: 'merge-oid' },
+      headRepository: { nameWithOwner: 'owner/repo' },
     }),
     ORPHAN_TEST_RUN_STARTED_AT: '2026-09-11T06:04:00Z',
     ORPHAN_TEST_MERGE_STATUS: 'diverged',
@@ -321,6 +357,7 @@ test('(g) il verdetto osservabile distingue merged contenuto, closed-unmerged, s
       mergedAt: '2026-09-11T06:05:00Z',
       headRefOid: 'head-oid',
       mergeCommit: { oid: 'merge-oid' },
+      headRepository: { nameWithOwner: 'owner/repo' },
     }),
     ORPHAN_TEST_COMMIT_TIMESTAMP: '2026-09-11T06:00:00Z',
     ORPHAN_TEST_RUN_STARTED_AT: '2026-09-11T06:06:00Z',
@@ -332,6 +369,27 @@ test('(g) il verdetto osservabile distingue merged contenuto, closed-unmerged, s
   assert.match(dedup.stdout, /nessun commento duplicato/);
   assert.equal(dedup.comment, '', 'il secondo passaggio dello stesso push non deve duplicare il commento');
 
+  // La precisione API resta al secondo nella conversione: l'uguaglianza non
+  // prova l'ordine, quindi deve lasciare attivo il warning invece di trattare
+  // il push come pre-merge.
+  const sameSecond = runWorkflow({
+    ORPHAN_TEST_TARGET: JSON.stringify({
+      number: 48,
+      createdAt: '2026-09-11T04:00:00Z',
+      closedAt: '2026-09-11T06:05:00Z',
+      mergedAt: '2026-09-11T06:05:00Z',
+      headRefOid: 'head-oid',
+      mergeCommit: { oid: 'merge-oid' },
+      headRepository: { nameWithOwner: 'owner/repo' },
+    }),
+    ORPHAN_TEST_RUN_STARTED_AT: '2026-09-11T06:05:00Z',
+    ORPHAN_TEST_HEAD_STATUS: 'ahead',
+    ORPHAN_TEST_COMMENTS: '[]',
+  });
+  assert.equal(sameSecond.status, 0);
+  assert.match(sameSecond.stdout, /Push orfano: commit push-sha/);
+  assert.match(sameSecond.comment, /orphan-push-warn/);
+
   const missingApiTimestamp = runWorkflow({
     ORPHAN_TEST_TARGET: JSON.stringify({
       number: 47,
@@ -340,6 +398,7 @@ test('(g) il verdetto osservabile distingue merged contenuto, closed-unmerged, s
       mergedAt: '2026-09-11T06:05:00Z',
       headRefOid: 'head-oid',
       mergeCommit: { oid: 'merge-oid' },
+      headRepository: { nameWithOwner: 'owner/repo' },
     }),
     ORPHAN_TEST_RUN_STARTED_AT: '',
     ORPHAN_TEST_HEAD_STATUS: 'ahead',
