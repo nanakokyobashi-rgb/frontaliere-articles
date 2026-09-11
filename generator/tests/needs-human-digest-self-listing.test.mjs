@@ -87,7 +87,9 @@ test('il titolo di dedup ha una sola sorgente nello step', () => {
   // legge la variabile.
   const literals = [...step.matchAll(new RegExp(title.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g'))];
   assert.equal(literals.length, 1, 'il titolo letterale compare fuori da DEDUP_TITLE');
-  assert.match(step, /--title "\$DEDUP_TITLE"/, 'github-issue-creator deve ricevere $DEDUP_TITLE');
+  assert.match(step, /node scripts\/ci\/publish-needs-human-digest\.mjs/, 'il publisher strict del digest deve essere usato nello step');
+  assert.match(step, /--fail-on-write/, 'il publisher deve rialzare una scrittura non persistita');
+  assert.match(step, /--title "\$DEDUP_TITLE"/, 'il publisher deve ricevere $DEDUP_TITLE');
 });
 
 test('la lista issue esclude l issue dedup stessa', () => {

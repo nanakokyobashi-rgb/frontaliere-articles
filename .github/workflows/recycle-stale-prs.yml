@@ -565,7 +565,8 @@ jobs:
           [ -n "$PRS" ] || PRS='_(nessuna)_'
           [ -n "$ISSUES" ] || ISSUES='_(nessuna)_'
           DESC=$(printf '%b\n\nNessun processo automatico sblocchera questi oggetti, e su `needs-human` la label e un filtro di ESCLUSIONE dalle code del drainer, non una segnalazione. Servono occhi umani.\n\n**PR** (%s) — il fixer dei red-flag ha raggiunto il round-cap e si e fermato (anti-loop), oppure sono draft parcheggiate, che ogni strato del ciclo salta by-design:\n\n%s\n\n**Issue** (%s) — escalate dal followup-drainer (too-large) o dal gate cronico di close-recovered-failure-issues.mjs (un guasto che ricorre oltre soglia). Restano fuori dal pool dei retry parcheggiati e dal rescue agent:fix dei crawler finche portano la label. Esclusi i tracker permanenti, riconosciuti per TITOLO (il digest dello sweep, il ledger transient): sono aperti per costruzione e non sono item da sbloccare. Escludere per label non sarebbe la stessa cosa — `agent:no-age-out` vuol dire «non scade», e nasconderebbe da qui una issue davvero bloccata:\n\n%s\n\n_Issue dedup giornaliera da recycle-stale-prs.yml (zero-Claude); si aggiorna con un commento di recurrence finche esiste qualcosa di needs-human, e si richiude da sola al primo run in cui entrambe le liste sono vuote (i tracker permanenti non contano come residuo)._' "$DIGEST_PREFIX" "$PR_COUNT" "$PRS" "$ISSUE_COUNT" "$ISSUES")
-          node scripts/lib/github-issue-creator.mjs \
+          node scripts/ci/publish-needs-human-digest.mjs \
+            --fail-on-write \
             --title "$DEDUP_TITLE" \
             --description "$DESC" \
             --priority 2 \
