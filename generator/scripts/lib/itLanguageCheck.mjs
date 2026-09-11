@@ -235,9 +235,10 @@ export function detectWrongLatinLanguage(text, locale = 'it') {
  * Campi meta dove una tabella compatta di aliquote e' contenuto LEGITTIMO, e
  * dove quindi la deroga misurata in #1177 si applica.
  *
- * `excerpt` e' la sorgente; `description` e `ogDescription` ne sono la copia —
- * `create-article.mjs` li deriva da `it.excerpt`, e le stesse stringhe
- * finiscono in `content/seo/`. Derogare sull'excerpt e non su di loro
+ * `excerpt` e' la sorgente; `description`, `ogDescription` e
+ * `twitterDescription` ne sono la copia — `create-article.mjs` li deriva da
+ * `it.excerpt`, e le stesse stringhe finiscono in `content/seo/`. Derogare
+ * sull'excerpt e non su di loro
  * significherebbe accettare l'articolo in generazione e poi vederlo rifiutato
  * dallo scan SEO del corpus pubblicato: rosso su OGNI PR successiva, per un
  * contenuto che il gate ha gia' dichiarato valido.
@@ -246,7 +247,12 @@ export function detectWrongLatinLanguage(text, locale = 'it') {
  * sui titoli, dove non ha falsi positivi, e li' una tabella di aliquote non e'
  * contenuto atteso.
  */
-export const RATE_TABLE_DEROGATION_FIELDS = ['excerpt', 'description', 'ogDescription'];
+export const RATE_TABLE_DEROGATION_FIELDS = [
+  'excerpt',
+  'description',
+  'ogDescription',
+  'twitterDescription',
+];
 
 /**
  * `true` se il testo e' una tabella compatta di aliquote e sigle italiana:
@@ -263,7 +269,8 @@ export function isCompactItalianRateTable(value) {
   const percentages = value.match(/\b\d+(?:[.,]\d+)?\s*%/g) ?? [];
   const acronyms = value.match(/\b[A-Z]{2,}(?:\/[A-Z]{2,})*\b/g) ?? [];
   const hasItalianAnchor = /\b(?:aliquota|aliquote|contributo|contributi|percentuale|percentuali)\b/i.test(value);
-  return percentages.length >= 2 && acronyms.length >= 2 && hasItalianAnchor;
+  const hasSwissRateCluster = /\b(?:AVS|AI|IPG|LAINF|LPP)(?:\/[A-Z]{2,})*(?:\s*[:=])?\s*\d+(?:[.,]\d+)?\s*%/i.test(value);
+  return percentages.length >= 2 && acronyms.length >= 2 && (hasItalianAnchor || hasSwissRateCluster);
 }
 
 /**

@@ -20,6 +20,7 @@ import {
   CANONICAL_HISTORY_REF,
   CURRENT_HISTORY_REF,
   isExpectedMissingHistoricalPath,
+  isLazyFetchFailure,
   parseCatFileBatchOutput,
   parseFollowHistory,
 } from '../../scripts/ci/verify-manifest-baseline-history.mjs';
@@ -127,7 +128,7 @@ test('la storia usa il ref canonico e conserva i merge completi', () => {
   assert.equal(CURRENT_HISTORY_REF, 'HEAD');
   assert.match(
     HISTORY_SCRIPT,
-    /git\(\['rev-list', '--full-history', CURRENT_HISTORY_REF, CANONICAL_HISTORY_REF, '--objects'/,
+    /git\(\[\s*'-c', 'core\.quotePath=false', 'rev-list', '--full-history',\s*CURRENT_HISTORY_REF, CANONICAL_HISTORY_REF, '--objects'/,
   );
   assert.doesNotMatch(HISTORY_SCRIPT, /git\(\['rev-list', '--all'/);
 });
@@ -143,13 +144,22 @@ test('la passata sui rinomini usa il path storico associato a ogni commit', () =
       { sha: older, path: 'older-name.mjs' },
     ],
   );
-  assert.match(HISTORY_SCRIPT, /parseFollowHistory\(git\(\['log', '--follow'[\s\S]+--name-only[\s\S]+CURRENT_HISTORY_REF/);
+  assert.match(
+    HISTORY_SCRIPT,
+    /parseFollowHistory\(\s*git\(\['-c', 'core\.quotePath=false', 'log', '--follow'[\s\S]+--name-only[\s\S]+(?:ref|CURRENT_HISTORY_REF)/,
+  );
+  assert.match(HISTORY_SCRIPT, /new Set\(\[CURRENT_HISTORY_REF, CANONICAL_HISTORY_REF\]\)/);
+  assert.match(HISTORY_SCRIPT, /spawnSync\(\s*'git',\s*\['-c', 'core\.quotePath=false', 'cat-file', '--batch'/);
+  assert.match(HISTORY_SCRIPT, /spawnSync\(\s*'git',\s*\['-c', 'core\.quotePath=false', 'cat-file', 'blob'/);
   assert.match(HISTORY_SCRIPT, /`\$\{sha\}:\$\{historicalPath\}`/);
 });
 
 test('un path storico assente e\' atteso, un errore di lettura no', () => {
   assert.equal(isExpectedMissingHistoricalPath("fatal: path 'old-name.mjs' does not exist in 'abc'"), true);
+  assert.equal(isExpectedMissingHistoricalPath("fatal: path 'keep.mjs' exists on disk, but not in 'abc'"), true);
   assert.equal(isExpectedMissingHistoricalPath('fatal: Not a valid object name abc:old-name.mjs'), false);
+  assert.equal(isLazyFetchFailure('oid missing'), true);
+  assert.equal(isLazyFetchFailure('fatal: path old-name.mjs exists on disk, but not in abc'), false);
   assert.match(HISTORY_SCRIPT, /if \(r\.status === 0\) hashes\.add/);
   assert.match(HISTORY_SCRIPT, /isExpectedMissingHistoricalPath\(r\.stderr\)/);
 });
@@ -159,6 +169,11 @@ test('cat-file non maschera missing, ambiguous o stdout troncato come ghost di m
   assert.throws(
     () => parseCatFileBatchOutput(Buffer.from('oid missing\n'), requested),
     /oid missing/,
+  );
+  assert.equal(
+    parseCatFileBatchOutput(Buffer.from('oid missing\n'), requested, { allowMissing: true }),
+    null,
+    'un missing in clone promisor e\' inconclusivo, non un ghost',
   );
   assert.throws(
     () => parseCatFileBatchOutput(Buffer.from('oid ambiguous\n'), requested),

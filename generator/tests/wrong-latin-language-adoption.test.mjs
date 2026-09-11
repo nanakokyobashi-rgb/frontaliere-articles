@@ -46,6 +46,7 @@ import {
   detectWrongLatinLanguage,
   detectWrongLatinLanguageInField,
   isCompactItalianRateTable,
+  RATE_TABLE_DEROGATION_FIELDS,
   latinLanguageMarkerHits,
   vowelFinalWordRatio,
 } from '../scripts/lib/itLanguageCheck.mjs';
@@ -147,7 +148,7 @@ test('#800 — un title italiano adottato da un candidato non-locale resta ok', 
 });
 
 test('#1177 — un excerpt italiano denso di sigle non e\' un falso non-IT', () => {
-  const excerpt = 'Aliquote: AVS/AI/IPG 5,3%, AD/AC 1,1%, LAINF 0,7–1,5%';
+  const excerpt = 'AVS/AI/IPG 5,3%, AD/AC 1,1%, LAINF 0,7-1,5%';
   assert.equal(isCompactItalianRateTable(excerpt), true);
   const verdetto = classifyBody2Payload({
     parsed: {
@@ -196,9 +197,15 @@ test('#1220 — la deroga vale sulle stesse stringhe anche per il corpus pubblic
     ),
     [],
   );
-  // I campi che gli scan del corpus misurano: l'excerpt e le sue due copie SEO,
+  // I campi che gli scan del corpus misurano: l'excerpt e le sue tre copie SEO,
   // che `create-article.mjs` deriva da `it.excerpt`.
-  for (const campo of ['excerpt', 'description', 'ogDescription']) {
+  assert.deepEqual(RATE_TABLE_DEROGATION_FIELDS, [
+    'excerpt',
+    'description',
+    'ogDescription',
+    'twitterDescription',
+  ]);
+  for (const campo of RATE_TABLE_DEROGATION_FIELDS) {
     assert.equal(detectWrongLatinLanguageInField(tabella, 'it', campo), null, `deroga assente su ${campo}`);
   }
   // ...e nessun altro: il title resta giudicato dalla soglia misurata sui titoli.
