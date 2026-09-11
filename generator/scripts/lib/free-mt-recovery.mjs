@@ -7,7 +7,11 @@
  * LLM quota sink.
  */
 
-export const MAX_FREE_MT_LLM_FALLBACKS_PER_RUN = 5;
+// La superficie del loop missing-field è passata da 15 a 21 candidati per
+// articolo (5 → 7 campi per ciascuno dei 3 locali, includendo faq.q/faq.a).
+// Manteniamo la stessa proporzione di recovery (un fallback ogni tre campi)
+// senza lasciare le FAQ fuori dalla quota osservata.
+export const MAX_FREE_MT_LLM_FALLBACKS_PER_RUN = 7;
 
 /**
  * I locali tradotti che competono per quel budget. La lista vive qui e non nel
@@ -20,16 +24,19 @@ export const FREE_MT_LLM_FALLBACK_LOCALES = ['en', 'de', 'fr'];
  * QUOTA PER LOCALE, non budget globale consumato nell'ordine del loop.
  *
  * Il loop missing-field scorre `['en','de','fr']` × `['title','excerpt',
- * 'body1','body2','body3']`: con un solo contatore per run, in una run in cui
- * il free-MT degrada su tutti i campi i 5 claim finiscono TUTTI su `en`, e da
+ * 'body1','body2','body3','faq.q','faq.a']`: con un solo contatore per run, in
+ * una run in cui il free-MT degrada su tutti i campi i 7 claim finiscono TUTTI
+ * su `en`, e da
  * `de:title` in poi ogni campo salta il retry mirato e cade sul valore
  * italiano. Risultato: `/en/` recuperato, `/de/` e `/fr/` pubblicati con prosa
  * ITALIANA in `content/`, in `meta-<locale>.json` e nei feed RSS — cioe' il
  * difetto #831 che questa catena esiste per chiudere, live senza rebuild del
- * sito.
+ * sito. Oggi i candidati sono 7 per locale (21 complessivi), quindi il
+ * tetto proporzionale è 7 e la quota per locale è 3: `en` 3, `de` 3, a `fr`
+ * resta sempre almeno 1.
  *
  * Con la quota nessun locale puo' affamare gli altri: `en` ne prende al
- * massimo 2, `de` 2, quindi a `fr` ne resta sempre almeno 1 (5 - 2 - 2). E' la
+ * massimo 3, `de` 3, quindi a `fr` ne resta sempre almeno 1 (7 - 3 - 3). E' la
  * stessa correzione gia' applicata al budget undated dello scan news (#190
  * punto 1, `selectUndatedBySourceQuota`), dove un budget globale riempito
  * nell'ordine della lista lasciava a zero ogni fonte dopo la prima.
