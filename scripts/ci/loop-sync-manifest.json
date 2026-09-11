@@ -3482,7 +3482,7 @@
     {
       "path": "scripts/ci/redcheck-review-prefilter.mjs",
       "mode": "corpus-only",
-      "reason": "Predicato fail-closed del preflight di `pr-redcheck-fixer.yml`: riconosce il rosso esclusivo del review gate solo quando una review del bot sulla HEAD contiene un finding `🔴 Important`, cosi' il redflag-fixer resta il proprietario del caso senza spendere Claude una seconda volta. Non esiste sul sito e non deve: il workflow corpus ha questo preflight adattato e il sito mantiene il proprio percorso.",
+      "reason": "Predicato fail-closed del preflight di `pr-redcheck-fixer.yml`: distingue il rosso esclusivo del review gate con un finding `🔴 Important` sulla HEAD (proprietà del redflag-fixer) dall'abort transiente della review senza failure di codice (nessun fixer deve spendere Claude senza una diagnosi). Non esiste sul sito e non deve: il workflow corpus ha questo preflight adattato e il sito mantiene il proprio percorso.",
       "baseline": {
         "site": null,
         "corpus": "913133c808b31af5",
