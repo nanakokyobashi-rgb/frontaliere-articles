@@ -28,10 +28,11 @@
  */
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
+import { spawnSync } from 'node:child_process';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 
 import {
   buildRunCard, summariseRunCards, writeRunCard, RUN_CARD_SCHEMA, RUN_CARD_INSTRUMENTED_SINCE,
@@ -428,7 +429,8 @@ test('writeRunCard scrive esattamente al path assoluto ricevuto', () => {
   // `<repo>/home/runner/...`. Muto due volte — `$diag_dir` vuota, quindi
   // artifact assente e strumentazione no-op, piu' un albero `home/` sotto il
   // workspace che il `git add -A` dello step di commit avrebbe portato su main.
-  const base = fs.mkdtempSync(path.join(os.tmpdir(), 'run-card-abs-'));
+  const tempRoot = process.env.RUNNER_TEMP?.trim() || os.tmpdir();
+  const base = fs.mkdtempSync(path.join(path.resolve(tempRoot), 'run-card-abs-'));
   const target = path.join(base, 'generate-diagnostics', 'run-card-frontaliere.json');
   const written = writeRunCard(target, {
     runId: '99', section: 'frontaliere', status: 'generated', endedAt: null,
@@ -439,6 +441,7 @@ test('writeRunCard scrive esattamente al path assoluto ricevuto', () => {
   assert.equal(JSON.parse(fs.readFileSync(target, 'utf8')).rebracket.viaFallbackUnsat, 1);
   // E in nessun altro posto: nessun albero parassita sotto la radice del repo.
   assert.ok(!fs.existsSync(path.join(ROOT, target)), 'la card e finita anche sotto il repo');
+  fs.rmSync(base, { recursive: true, force: true });
 });
 
 test('writeRunCard RIFIUTA un target dentro il workspace (#922)', () => {
@@ -470,13 +473,93 @@ test('writeRunCard RIFIUTA un target dentro il workspace (#922)', () => {
   // Contro-prova: un fratello che CONDIVIDE il prefisso testuale della radice
   // ma non e' dentro l'albero deve passare, o il guard bloccherebbe anche
   // `$RUNNER_TEMP` su un runner che lo colloca accanto al workspace.
-  const sibling = `${ROOT}-diagnostics-${process.pid}`;
+  const siblingParent = process.env.RUNNER_TEMP?.trim()
+    ? path.resolve(process.env.RUNNER_TEMP)
+    : path.dirname(ROOT);
+  const sibling = path.join(siblingParent, `run-card-diagnostics-${process.pid}`);
   try {
     const written = writeRunCard(path.join(sibling, 'run-card-x.json'), { runId: '2' });
     assert.ok(fs.existsSync(written), 'un target fuori dal workspace deve essere scritto');
   } finally {
     fs.rmSync(sibling, { recursive: true, force: true });
   }
+});
+
+test('writeRunCard richiede containment positivo in RUNNER_TEMP e rifiuta un assoluto esterno (#1209)', () => {
+  const runnerTemp = fs.mkdtempSync(path.join(os.tmpdir(), 'run-card-runner-temp-'));
+  const outside = fs.mkdtempSync(path.join(os.tmpdir(), 'run-card-outside-'));
+  const previous = process.env.RUNNER_TEMP;
+  process.env.RUNNER_TEMP = runnerTemp;
+  try {
+    const insideRunner = path.join(runnerTemp, 'generate-diagnostics', 'inside.json');
+    assert.equal(writeRunCard(insideRunner, { runId: 'inside-runner-temp' }), insideRunner);
+    assert.ok(fs.existsSync(insideRunner), 'un target sotto RUNNER_TEMP deve essere scritto');
+
+    const external = path.join(outside, 'outside.json');
+    assert.throws(
+      () => writeRunCard(external, { runId: 'outside-runner-temp' }),
+      /RUNNER_TEMP/,
+      'un assoluto fuori da RUNNER_TEMP non deve essere accettato solo perche fuori dal repo',
+    );
+    assert.ok(!fs.existsSync(external), 'il target esterno rifiutato non deve essere creato');
+
+    const insideWorkspace = path.join(ROOT, '.tmp', 'run-card-runner-temp.json');
+    assert.throws(
+      () => writeRunCard(insideWorkspace, { runId: 'inside-workspace' }),
+      /dentro il workspace/,
+      'il vincolo workspace resta prioritario quando il runner temp e separato',
+    );
+  } finally {
+    if (previous === undefined) delete process.env.RUNNER_TEMP;
+    else process.env.RUNNER_TEMP = previous;
+    fs.rmSync(runnerTemp, { recursive: true, force: true });
+    fs.rmSync(outside, { recursive: true, force: true });
+  }
+});
+
+test('un run-card spostato/copiato usa GITHUB_WORKSPACE e il fallback richiede il marcatore repo (#1209)', () => {
+  const fixture = fs.mkdtempSync(path.join(os.tmpdir(), 'run-card-moved-'));
+  const workspace = fs.mkdtempSync(path.join(os.tmpdir(), 'run-card-workspace-'));
+  const copiedLib = path.join(fixture, 'moved', 'generator', 'scripts', 'lib');
+  fs.mkdirSync(copiedLib, { recursive: true });
+  fs.writeFileSync(
+    path.join(workspace, 'package.json'),
+    JSON.stringify({ name: '@frontaliereticino/articles' }),
+  );
+  fs.copyFileSync(
+    path.join(ROOT, 'generator/scripts/lib/run-card.mjs'),
+    path.join(copiedLib, 'run-card.mjs'),
+  );
+  fs.copyFileSync(
+    path.join(ROOT, 'generator/scripts/lib/exhaustion-disposition.mjs'),
+    path.join(copiedLib, 'exhaustion-disposition.mjs'),
+  );
+
+  const moduleUrl = pathToFileURL(path.join(copiedLib, 'run-card.mjs')).href;
+  const target = path.join(workspace, 'diagnostics', 'run-card.json');
+  const childCode = `import { writeRunCard } from ${JSON.stringify(moduleUrl)};\n`
+    + `writeRunCard(${JSON.stringify(target)}, { runId: 'moved-copy' });`;
+  const withWorkspace = spawnSync(process.execPath, ['--input-type=module', '-e', childCode], {
+    encoding: 'utf8',
+    env: { ...process.env, GITHUB_WORKSPACE: workspace, RUNNER_TEMP: '' },
+  });
+  assert.notEqual(withWorkspace.status, 0, 'il modulo copiato deve rispettare la radice dichiarata dal runner');
+  assert.match(withWorkspace.stderr, /dentro il workspace/);
+  assert.ok(!fs.existsSync(target), 'il guard GITHUB_WORKSPACE non deve creare il target');
+
+  const withoutWorkspace = spawnSync(process.execPath, ['--input-type=module', '-e', childCode], {
+    encoding: 'utf8',
+    env: (() => {
+      const env = { ...process.env, RUNNER_TEMP: '' };
+      delete env.GITHUB_WORKSPACE;
+      return env;
+    })(),
+  });
+  assert.notEqual(withoutWorkspace.status, 0, 'un fallback senza radice repo non deve essere accettato');
+  assert.match(withoutWorkspace.stderr, /marcatore repo package\.json/);
+
+  fs.rmSync(fixture, { recursive: true, force: true });
+  fs.rmSync(workspace, { recursive: true, force: true });
 });
 
 test('il commento di writeRunCard non e piu la sola sede dell invariante (#922)', () => {

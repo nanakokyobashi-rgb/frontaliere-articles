@@ -39,8 +39,11 @@ import { describe, it, beforeEach, afterEach } from 'node:test';
 
 import {
   callLLM,
+  callSingleModel,
   discoverFreeModels,
   flushScores,
+  __learnRequestTokenLimitForTests,
+  __restoreScoreEntriesForTests,
   getDeclaredRequestTokenLimit,
   getStats,
   markModelExhausted,
@@ -52,6 +55,7 @@ import {
   _cooldownSeverityDurations,
   _perMachineEndpointEnvVars,
   _restorableExhaustUntil,
+  _exhaustSkipCause,
   _safeDiagnosticValue,
   __installScoreStoreForTests,
   EXHAUST_RESTORE_MAX_AHEAD_MS,
@@ -101,6 +105,7 @@ function mutationMethods(text, identifier) {
 
 const ENV_KEYS = [
   'AI_MODELS_FORCE_CHAIN', 'AI_MODELS_PREFER', 'GH_MODELS_PAT',
+  'GH_MODELS_PAT_2',
   'OMNIROUTE_ENABLED', 'OMNIROUTE_URL', 'LOCAL_LLM_ENABLED', 'LOCAL_LLM_URL',
 ];
 
@@ -221,13 +226,13 @@ describe('#874/#864/#845 — una sola porta di scrittura verso ai_model_scores/_
     );
     assert.equal(
       scritture.length,
-      4,
-      `le mutazioni del Set devono restare quattro (add nella porta e nel rimessaggio, clear prima dello spedire e `
+      5,
+      `le mutazioni del Set devono restare cinque (add nella porta, nel rimessaggio e nel riaccodamento di una write obsoleta, clear prima dello spedire e `
       + `nel reset), trovate ${scritture.length}: ${scritture.map((s) => `${s.line} [in ${s.fn}]`).join(', ')}`,
     );
     assert.deepEqual(
       scritture.map(({ metodo }) => metodo).sort(),
-      ['add', 'add', 'clear', 'clear'],
+      ['add', 'add', 'add', 'clear', 'clear'],
       'il pin deve riconoscere tutte le mutazioni, non solo la prima per riga',
     );
   });
@@ -752,12 +757,69 @@ describe('#875 — resetState() lascia uno stato coerente', () => {
     );
   });
 
+  it('un successo da PAT fresco prevale sul marker quota di un ban ripristinato', async () => {
+    const model = 'gpt-4o-mini';
+    const encoded = model.replace(/\//g, '__');
+    const store = makeStore();
+    let calls = 0;
+    process.env.GH_MODELS_PAT = 'pat-legacy';
+    process.env.GH_MODELS_PAT_2 = 'pat-fresco';
+    globalThis.fetch = async () => {
+      calls++;
+      if (calls === 1) {
+        return {
+          ok: false,
+          status: 429,
+          headers: new Map(),
+          text: async () => JSON.stringify({ error: { message: 'userbymodelbyday quota exhausted' } }),
+          json: async () => ({ error: { message: 'userbymodelbyday quota exhausted' } }),
+        };
+      }
+      return {
+        ok: true,
+        status: 200,
+        headers: new Map(),
+        text: async () => JSON.stringify({ choices: [{ message: { content: 'served by fresh PAT' } }] }),
+        json: async () => ({ choices: [{ message: { content: 'served by fresh PAT' } }] }),
+      };
+    };
+    __installScoreStoreForTests(store.db, null);
+
+    // Il restore reimposta il ban in-processo; markModelExhausted() riproduce
+    // il marker che initScoreStore aggiunge alla migrazione del documento
+    // legacy. Il successo del secondo PAT deve vincere quel marker in flush.
+    __restoreScoreEntriesForTests({
+      [encoded]: {
+        modelId: model,
+        exhaustedUntil: new Date(Date.now() + 60 * 60 * 1000).toISOString(),
+      },
+    });
+    markModelExhausted(model, 'quota', 'legacy migration replay');
+
+    const out = await callSingleModel([{ role: 'user', content: 'x' }], {
+      model,
+      maxRetriesPerModel: 1,
+      backoffMs: 1,
+      timeout: 5000,
+    });
+    await flushScores();
+
+    assert.equal(out, 'served by fresh PAT');
+    assert.equal(calls, 2, 'il PAT esaurito deve ruotare su quello fresco');
+    assert.equal(
+      store.last()?.models?.[encoded]?.exhaustedUntil,
+      null,
+      `il ban migrato non deve essere riscritto sopra un successo reale: ${JSON.stringify(store.last())}`,
+    );
+  });
+
   it('una quota esaurita qui continua a scrivere la data di reset', async () => {
     const store = makeStore();
     resetState();
     __installScoreStoreForTests(store.db, null);
 
     markModelExhausted('gpt-4o-mini', 'quota');
+    __learnRequestTokenLimitForTests('gpt-4o-mini', 'tokens_limit_reached. Limit 2048 tokens');
     await flushScores();
 
     const entry = store.last()?.models?.['gpt-4o-mini'];
@@ -1049,6 +1111,237 @@ describe('#895 — il memo del cap appreso e la porta del ledger sono due cose d
     );
   });
 
+  it('callSingleModel accompagna ogni cap imparato con recordModelFailure', async () => {
+    process.env.GH_MODELS_PAT = 'test-pat';
+    const model = 'gpt-4o-mini';
+    globalThis.fetch = async () => ({
+      ok: false,
+      status: 413,
+      headers: new Map(),
+      text: async () => JSON.stringify({ error: { message: 'tokens_limit_reached. Limit 2048 tokens' } }),
+      json: async () => ({ error: { message: 'tokens_limit_reached. Limit 2048 tokens' } }),
+    });
+    const store = makeStore();
+    __installScoreStoreForTests(store.db, null);
+
+    await assert.rejects(() => callSingleModel([{ role: 'user', content: 'x' }], {
+      model,
+      maxRetriesPerModel: 1,
+      backoffMs: 1,
+      timeout: 5000,
+    }));
+    await flushScores();
+
+    const entry = store.last()?.models?.[model];
+    assert.equal(entry?.maxRequestTokens, 2048, `il cap manca dal record: ${JSON.stringify(store.last())}`);
+    assert.equal(entry?.failures, 1, `callSingleModel non ha registrato il fallimento compagno: ${JSON.stringify(entry)}`);
+  });
+
+  it('callSingleModel registra il successo del modello che ha davvero risposto', async () => {
+    process.env.GH_MODELS_PAT = 'test-pat';
+    const model = 'gpt-4o-mini';
+    globalThis.fetch = async () => ({
+      ok: true,
+      status: 200,
+      headers: new Map(),
+      text: async () => JSON.stringify({ choices: [{ message: { content: 'ok' } }] }),
+      json: async () => ({ choices: [{ message: { content: 'ok' } }] }),
+    });
+    const store = makeStore();
+    __installScoreStoreForTests(store.db, null);
+
+    const out = await callSingleModel([{ role: 'user', content: 'x' }], {
+      model,
+      maxRetriesPerModel: 1,
+      backoffMs: 1,
+      timeout: 5000,
+    });
+    await flushScores();
+
+    assert.equal(out, 'ok');
+    const entry = store.last()?.models?.[model];
+    assert.equal(entry?.successes, 1, `il successo diretto deve arrivare al ledger: ${JSON.stringify(store.last())}`);
+    assert.equal(entry?.score, 2, `il successo diretto deve aumentare il punteggio: ${JSON.stringify(entry)}`);
+    assert.equal(getStats().runOutcomes.find((item) => item.model === model)?.successes, 1);
+  });
+
+  it('callSingleModel classifica una quota plain come exhausted e non come failure retryable', async () => {
+    process.env.GH_MODELS_PAT = 'test-pat';
+    const model = 'gpt-4o-mini';
+    globalThis.fetch = async () => ({
+      ok: false,
+      status: 429,
+      headers: new Map(),
+      text: async () => JSON.stringify({ error: { message: 'userbymodelbyday quota exhausted' } }),
+      json: async () => ({ error: { message: 'userbymodelbyday quota exhausted' } }),
+    });
+    const store = makeStore();
+    __installScoreStoreForTests(store.db, null);
+
+    await assert.rejects(() => callSingleModel([{ role: 'user', content: 'x' }], {
+      model,
+      maxRetriesPerModel: 1,
+      backoffMs: 1,
+      timeout: 5000,
+    }));
+    await flushScores();
+
+    const entry = store.last()?.models?.[model];
+    assert.equal(entry?.failures, 1, `la quota diretta deve essere contata: ${JSON.stringify(store.last())}`);
+    assert.equal(entry?.score, -50, `la quota diretta non deve prendere la penale retryable: ${JSON.stringify(entry)}`);
+    assert.ok(
+      typeof entry?.exhaustedUntil === 'string' && !Number.isNaN(Date.parse(entry.exhaustedUntil)),
+      `la quota diretta deve persistere il ban: ${JSON.stringify(entry)}`,
+    );
+  });
+
+  it('la sola ri-proposta di un cap non serializza un exhaustedUntil globale', async () => {
+    const model = 'openrouter/cap-only-1214';
+    const encoded = model.replace(/\//g, '__');
+    const store = makeStore();
+    __installScoreStoreForTests(store.db, null);
+
+    // Il modello e' gia' esausto in-processo, ma questo ban arriva da un
+    // chiamante che ha esplicitamente disattivato il ledger. La proposta che
+    // segue riguarda solo il cap imparato e non puo' trasformare quel marchio
+    // locale in un ban condiviso.
+    markModelExhausted(model, 'quota', 'diagnostic-only', { recordScore: false });
+    __learnRequestTokenLimitForTests(model, 'tokens_limit_reached. Limit 2048 tokens');
+    await flushScores();
+
+    const entry = store.last()?.models?.[encoded];
+    assert.equal(entry?.maxRequestTokens, 2048, `il cap deve essere scritto: ${JSON.stringify(store.last())}`);
+    assert.equal(
+      Object.hasOwn(entry || {}, 'exhaustedUntil'),
+      false,
+      `la ri-proposta del solo cap ha pubblicato un ban globale: ${JSON.stringify(entry)}`,
+    );
+  });
+
+  it('conserva la proposta quota arrivata durante una write cap-only', async () => {
+    const model = 'openrouter/cap-quota-race-1214';
+    const written = [];
+    let releaseFirstWrite;
+    let firstWriteStarted;
+    const firstWrite = new Promise((resolve) => { firstWriteStarted = resolve; });
+    const firstWriteReleased = new Promise((resolve) => { releaseFirstWrite = resolve; });
+    const db = {
+      collection: () => ({
+        doc: () => ({
+          set: async (data) => {
+            written.push(data);
+            if (written.length === 1) {
+              firstWriteStarted();
+              await firstWriteReleased;
+            }
+          },
+          get: async () => ({ exists: false, data: () => null }),
+        }),
+      }),
+    };
+
+    __installScoreStoreForTests(db, null);
+    __learnRequestTokenLimitForTests(model, 'tokens_limit_reached. Limit 2048 tokens');
+    const inFlight = flushScores();
+    await firstWrite;
+
+    // This proposal happens after the cap-only payload was assembled but
+    // before its network write lands. The next flush must carry the quota ban.
+    markModelExhausted(model, 'quota', 'arrived-during-write');
+    releaseFirstWrite();
+    await inFlight;
+    await flushScores();
+
+    const firstEntry = written[0]?.models?.[model.replace(/\//g, '__')];
+    const secondEntry = written[1]?.models?.[model.replace(/\//g, '__')];
+    assert.equal(written.length, 2, `la proposta nuova deve restare sporca: ${JSON.stringify(written)}`);
+    assert.equal(
+      Object.hasOwn(firstEntry || {}, 'exhaustedUntil'),
+      false,
+      `la prima write deve restare cap-only: ${JSON.stringify(firstEntry)}`,
+    );
+    assert.equal(secondEntry?.maxRequestTokens, 2048, `il secondo giro deve conservare il cap: ${JSON.stringify(secondEntry)}`);
+    assert.ok(
+      typeof secondEntry?.exhaustedUntil === 'string' && !Number.isNaN(Date.parse(secondEntry.exhaustedUntil)),
+      `la quota arrivata durante la write cap-only deve arrivare al giro successivo: ${JSON.stringify(secondEntry)}`,
+    );
+  });
+
+  it('una write obsoleta ri-accoda la mutazione piu\u0300 nuova e ripara l\'entry', async () => {
+    const model = 'openrouter/flush-order-race-1214';
+    const encoded = model.replace(/\//g, '__');
+    const written = [];
+    let releaseFirstWrite;
+    let firstWriteStarted;
+    const firstWrite = new Promise((resolve) => { firstWriteStarted = resolve; });
+    const firstWriteReleased = new Promise((resolve) => { releaseFirstWrite = resolve; });
+    const db = {
+      collection: () => ({
+        doc: () => ({
+          set: async (data) => {
+            written.push(data);
+            if (written.length === 1) {
+              firstWriteStarted();
+              await firstWriteReleased;
+            }
+          },
+          get: async () => ({ exists: false, data: () => null }),
+        }),
+      }),
+    };
+
+    __installScoreStoreForTests(db, null);
+    recordModelSuccess(model);
+    const firstFlush = flushScores();
+    await firstWrite;
+
+    // Il secondo flush cattura la generazione piu' nuova e arriva a Firestore
+    // prima della prima write. Si rilascia poi la prima per forzare l'ordine
+    // B→A che lasciava in documento l'entry assoluta piu' vecchia.
+    recordModelFailure(model);
+    const secondFlush = flushScores();
+    await secondFlush;
+    releaseFirstWrite();
+    await firstFlush;
+
+    assert.equal(getStats().dirtyModels, 1, 'la write obsoleta deve riaccodare il modello piu\u0300 nuovo');
+    await flushScores();
+
+    assert.equal(written.length, 3, `serve una terza write di riparazione: ${JSON.stringify(written)}`);
+    const repaired = written[2]?.models?.[encoded];
+    assert.equal(repaired?.score, -1, `la riparazione deve riscrivere lo score corrente: ${JSON.stringify(repaired)}`);
+  });
+
+  it('il secondo ciclo load/re-learn riusa la chiave canonica anche dopo resetState', async () => {
+    const model = 'cerebras/meta/llama-3.1-8b-instruct-1214';
+    const encoded = model.replace(/\//g, '__');
+    const body = 'tokens_limit_reached. Limit 2048 tokens';
+    const store = makeStore();
+
+    __installScoreStoreForTests(store.db, null);
+    __restoreScoreEntriesForTests({
+      [encoded]: { modelId: encoded, maxRequestTokens: 2048 },
+    });
+    assert.equal(getDeclaredRequestTokenLimit(model), 2048, 'il primo load deve decodificare data.modelId');
+    __learnRequestTokenLimitForTests(model, body);
+    assert.equal(getStats().dirtyModels, 0, 'il primo re-learn dello stesso cap non deve sporcare il ledger');
+    await flushScores();
+    assert.equal(store.written.length, 0, 'nessuna riscrittura era necessaria dopo il primo load');
+
+    resetState();
+    __installScoreStoreForTests(store.db, null);
+    // Secondo load: l'id canonico manca dal payload e deve arrivare dalla
+    // decodifica della chiave del campo Firestore.
+    __restoreScoreEntriesForTests({
+      [encoded]: { maxRequestTokens: 2048 },
+    });
+    assert.equal(getDeclaredRequestTokenLimit(model), 2048, 'il secondo load deve decodificare la chiave del campo');
+    __learnRequestTokenLimitForTests(model, body);
+    assert.equal(getStats().dirtyModels, 0, 'il secondo re-learn non deve aprire una nuova proposta');
+    await flushScores();
+    assert.equal(store.written.length, 0, 'il secondo ciclo non deve riscrivere il cap invariato');
+  });
+
   // Item 2. Gemello strutturale del pin su `_dirtyModels` in cima al file,
   // sull'ALTRA coppia di stato che aveva due writer: `_exhaustReason` /
   // `_exhaustDetail`. Il ramo `else` del breaker host-unreachable ne ricopiava a
@@ -1163,13 +1456,20 @@ describe('#895 — il memo del cap appreso e la porta del ledger sono due cose d
     markModelExhausted('gpt-4o-mini', 'nonretryable', 'HTTP 402');
     resetState();
     markModelExhausted('gpt-4o-mini', 'nonretryable');
+    const expectedCause = _exhaustSkipCause('gpt-4o-mini');
 
     await assert.rejects(
       () => callLLM([{ role: 'user', content: 'x' }], { maxRetriesPerModel: 1, backoffMs: 1, timeout: 5000 }),
       (e) => {
+        const message = String(e.message);
+        assert.ok(expectedCause, '_exhaustSkipCause() deve produrre una causa verificabile');
         assert.ok(
-          !String(e.message).includes('HTTP 402'),
-          `dettaglio sopravvissuto al reset e riattaccato a un marchio nuovo: ${e.message}`,
+          message.includes(`skipped — exhausted (${expectedCause})`),
+          `la causa prodotta da _exhaustSkipCause() non e\' arrivata al reject: ${message}`,
+        );
+        assert.ok(
+          !message.includes('HTTP 402'),
+          `dettaglio sopravvissuto al reset e riattaccato a un marchio nuovo: ${message}`,
         );
         return true;
       },

@@ -298,9 +298,9 @@ test('il riepilogo di fine run nomina i modelli chiamati in QUESTA run', async (
   run.recordModelSuccess('nvidia/meta/llama-3.1-8b-instruct');
 
   const printed = [];
-  const orig = console.log;
-  console.log = (...a) => printed.push(a.join(' '));
-  try { run.printRunSummary(); } finally { console.log = orig; }
+  const orig = console.error;
+  console.error = (...a) => printed.push(a.join(' '));
+  try { run.printRunSummary(); } finally { console.error = orig; }
 
   const out = printed.join('\n');
   const modelsLine = out.split('\n').find((l) => l.includes('models:'));
