@@ -7,6 +7,8 @@ name: Orphan push warn
 # atterrato dopo l'auto-merge ed e' rimasto orfano.
 #
 # Questo job e' SEGNALE, non blocco: commenta sulla PR (numero + sha) ed esce 0.
+# Salta i commit gia' contenuti nella head della PR mergiata, deduplica il
+# commento sulla stessa PR e segnala anche le PR chiuse senza merge.
 #
 # ── PERCHE' E' UN WORKFLOW A SE' DAL 2026-09-03 ─────────────────────────────
 # Viveva come primo job del workflow dell'auto-merge su LGTM, che aveva gia' il
@@ -55,22 +57,52 @@ jobs:
             echo "PR #$OPEN aperta su $HEAD_REF — push non orfano."
             exit 0
           fi
-          # `sort_by(.createdAt) | last`, non `.[0]`: un branch riusato accumula N PR
-          # MERGED sulla stessa head, e l'ordine di `gh pr list` non e' documentato.
-          # Il warning citerebbe una PR vecchia a caso invece di quella su cui il push
-          # e' appena atterrato. Stesso predicato di `deliveredPrNumber()` in
-          # `scripts/ci/mark-claude-terminal-outcome.mjs`.
-          MERGED=$(gh pr list --repo "$REPO" --head "$HEAD_REF" --state merged \
-            --json number,createdAt --jq 'sort_by(.createdAt) | last | .number // empty' 2>/dev/null || true)
-          if [ -z "${MERGED:-}" ]; then
-            echo "Nessuna PR MERGED associata a $HEAD_REF — niente da segnalare."
+          # Un branch riusato accumula PR MERGED e CLOSED sulla stessa head, e
+          # l'ordine di `gh pr list` non e' documentato. Seleziona l'ultima PR
+          # chiusa di qualunque tipo: una CLOSED senza merge e' comunque lavoro
+          # che non e' atterrato su main.
+          TARGET=$(gh pr list --repo "$REPO" --head "$HEAD_REF" --state all \
+            --limit 100 --json number,createdAt,state,mergedAt,headRefOid \
+            --jq 'map(select(.state != "OPEN")) | sort_by(.createdAt) | last // {}' \
+            2>/dev/null || true)
+          PR_NUMBER=$(printf '%s' "${TARGET:-{}}" | jq -r '.number // empty' 2>/dev/null || true)
+          if [ -z "${PR_NUMBER:-}" ]; then
+            echo "Nessuna PR chiusa associata a $HEAD_REF — niente da segnalare."
             exit 0
           fi
-          echo "::warning::Push orfano: commit $SHA sul branch $HEAD_REF della PR #$MERGED già MERGED."
+          MERGED_AT=$(printf '%s' "$TARGET" | jq -r '.mergedAt // empty' 2>/dev/null || true)
+          HEAD_OID=$(printf '%s' "$TARGET" | jq -r '.headRefOid // empty' 2>/dev/null || true)
+
+          # Confronta con la head della PR, non con il merge commit: il commit
+          # della PR puo' essere stato squashato e quindi non essere un antenato
+          # del merge commit pur essendo gia' atterrato su main. `ahead` e
+          # `identical` sono l'equivalente remoto di merge-base --is-ancestor.
+          if [ -n "${MERGED_AT:-}" ] && [ -n "${HEAD_OID:-}" ]; then
+            CONTAINMENT=$(gh api "repos/${REPO}/compare/${SHA}...${HEAD_OID}" \
+              --jq '.status' 2>/dev/null || true)
+            if [ "$CONTAINMENT" = "ahead" ] || [ "$CONTAINMENT" = "identical" ]; then
+              echo "Commit $SHA gia' contenuto nella head $HEAD_OID della PR #$PR_NUMBER — nessun push orfano."
+              exit 0
+            fi
+          fi
+
+          if [ -n "${MERGED_AT:-}" ]; then
+            KIND='MERGED'
+          else
+            KIND='CLOSED WITHOUT MERGE'
+          fi
+          MARKER='<!-- orphan-push-warn -->'
+          COMMENTS=$(gh pr view "$PR_NUMBER" --repo "$REPO" --json comments \
+            --jq '[.comments[].body] | join("\n")' 2>/dev/null || true)
+          if printf '%s' "$COMMENTS" | grep -Fq "$MARKER"; then
+            echo "Avviso push orfano gia' presente sulla PR #$PR_NUMBER — nessun commento duplicato."
+            exit 0
+          fi
+          echo "::warning::Push orfano: commit $SHA sul branch $HEAD_REF della PR #$PR_NUMBER ($KIND)."
           BODY=$(printf '%s\n\n%s\n\n%s' \
             "⚠️ Push orfano dopo merge" \
-            "Il commit ${SHA} è atterrato sul branch ${HEAD_REF} della PR #${MERGED}, che è già MERGED. Il commit non è su main e resterebbe orfano in silenzio." \
-            "Recuperalo con una nuova PR (cherry-pick) se deve entrare.")
-          gh pr comment "$MERGED" --repo "$REPO" --body "$BODY" \
-            || echo "Commento su PR #$MERGED fallito — il push resta un segnale, non un blocco."
+            "Il commit ${SHA} è atterrato sul branch ${HEAD_REF} della PR #${PR_NUMBER}, che è ${KIND}. Il commit non è su main e resterebbe orfano in silenzio." \
+            "Recuperalo con una nuova PR (cherry-pick) se deve entrare. ${MARKER}")
+          gh pr comment "$PR_NUMBER" --repo "$REPO" --body "$BODY" \
+            || echo "Commento su PR #$PR_NUMBER fallito — il push resta un segnale, non un blocco."
           exit 0

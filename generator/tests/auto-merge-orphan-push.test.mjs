@@ -106,6 +106,31 @@ test('(d) il job warn-orphan-push ignora il push di cancellazione branch del pro
   );
 });
 
+test('(e) seleziona anche una PR chiusa senza merge e controlla la head mergiata', () => {
+  const job = jobBlock(ATTIVE, 'warn-orphan-push');
+  assert.ok(job, 'job `warn-orphan-push` non trovato');
+  assert.match(job, /--state all/);
+  assert.match(job, /mergedAt/);
+  assert.match(job, /headRefOid/);
+  assert.match(job, /select\(\.state != "OPEN"\)/);
+  assert.match(
+    job,
+    /repos\/\$\{REPO\}\/compare\/\$\{SHA\}\.\.\.\$\{HEAD_OID\}/,
+    'il confronto deve usare la head della PR: il merge commit di uno squash non contiene '
+      + 'l\'OID del commit originale come antenato',
+  );
+  assert.match(job, /CONTAINMENT.*\n[\s\S]*\[ \"\$CONTAINMENT\" = "ahead" \]/);
+});
+
+test('(f) il warning orfano e\' deduplicato con un marker sulla PR', () => {
+  const job = jobBlock(ATTIVE, 'warn-orphan-push');
+  assert.ok(job, 'job `warn-orphan-push` non trovato');
+  assert.match(job, /MARKER='<!-- orphan-push-warn -->'/);
+  assert.match(job, /gh pr view "\$PR_NUMBER"[\s\S]*--json comments/);
+  assert.match(job, /grep -Fq "\$MARKER"/);
+  assert.match(job, /\$\{MARKER\}/);
+});
+
 // Il test (c) — «il job `auto-merge` e' gateato su `event_name != 'push'`» —
 // e' stato rimosso il 2026-09-03 insieme al suo oggetto: il merge e' passato
 // all'auto-merge nativo di GitHub e non esiste piu' un job di merge che
