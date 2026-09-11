@@ -359,6 +359,20 @@ describe('etichette dello schema dentro il corpo — si tolgono, non si butta l\
     assert.equal(value, '## FAQ\n- Quali sono le conseguenze a lungo termine?');
   });
 
+  it('ripara anche la forma non numerata, con domanda o trattino come separatore', () => {
+    const { value, stripped } = stripFaqNumberedLabels(
+      '## FAQ\n- Domanda frequente — Quali sono le conseguenze a lungo termine?\nDomanda frequente? Quali sono i requisiti per il rimborso?',
+    );
+    assert.equal(stripped, 2);
+    assert.equal(value, '## FAQ\n- Quali sono le conseguenze a lungo termine?\nQuali sono i requisiti per il rimborso?');
+  });
+
+  it('non ripara una forma non numerata senza contenuto sufficiente sulla riga', () => {
+    const { value, stripped } = stripFaqNumberedLabels('Domanda frequente: Ciao?');
+    assert.equal(stripped, 0);
+    assert.equal(value, 'Domanda frequente: Ciao?');
+  });
+
   it('NON tocca l\'etichetta nuda: quella va scartata, non ripulita', () => {
     assert.equal(stripFaqNumberedLabels('Domanda frequente 1').stripped, 0);
     assert.equal(stripFaqNumberedLabels('Domanda frequente 2?').stripped, 0);
@@ -412,6 +426,19 @@ describe('i falsi positivi misurati sul corpus: `(max ` NON e\' un marcatore', (
   it('un articolo che PARLA di FAQ non viene toccato', () => {
     assert.deepEqual(findPromptPlaceholders('## Domande frequenti\n\nQuanto costa il permesso G?'), []);
     assert.deepEqual(findPromptPlaceholders('Le domande frequenti dei frontalieri riguardano soprattutto i ristorni.'), []);
+  });
+
+  it('vede anche l\'etichetta FAQ non numerata uscita in un body reale', () => {
+    const hits = findPromptPlaceholders('### Guida pratica\n\nDomanda frequente: *Posso chiedere un rimborso?*');
+    assert.deepEqual(hits.map((hit) => hit.rule), ['faq-unnumbered-label']);
+    assert.equal(hits[0].kind, 'schema-label');
+  });
+
+  it('non tratta una frase editoriale come etichetta FAQ', () => {
+    assert.deepEqual(
+      findPromptPlaceholders('La domanda frequente riguarda i tempi del rimborso.'),
+      [],
+    );
   });
 });
 

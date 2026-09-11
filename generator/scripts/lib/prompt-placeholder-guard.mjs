@@ -732,6 +732,16 @@ export const PLACEHOLDER_RULES = Object.freeze([
     why: "L'etichetta numerata dello schema FAQ, usata come intestazione o come domanda. Lo schema si ferma a 3: la regola conta qualunque cifra.",
   },
   {
+    id: 'faq-unnumbered-label',
+    kind: 'schema-label',
+    // Un modello può perdere il numero dello schema e conservare comunque
+    // l'etichetta. Si accetta solo a inizio riga (eventualmente con un bullet),
+    // così una frase editoriale come «la domanda frequente riguarda...» non
+    // diventa un falso positivo.
+    rx: /(?:^|\n)[ \t]*(?:[*#>\-–—]\s*)?\**\s*domanda\s+frequente\s*\**\s*[:.]\s*(?=\S)/im,
+    why: "Etichetta FAQ non numerata (`Domanda frequente:`) rimasta nel testo pubblicato: è uno schema del prompt, non contenuto editoriale.",
+  },
+  {
     id: 'faq-numbered-bare',
     kind: 'schema-echo',
     rx: /^\s*\**\s*domanda\s+frequente\s+\d+\s*\**\s*\??\s*$/i,
@@ -801,17 +811,25 @@ export function stripFaqNumberedLabels(value) {
   let stripped = 0;
   // `pre` si porta dentro la spaziatura: senza, «- Domanda frequente 1: X»
   // tornerebbe «-X», perche' lo spazio del bullet viene mangiato dall'etichetta.
-  const out = value.replace(
-    /((?:^|[\s\n*#>\-–—.)\]])\s*)\**\s*[Dd]omanda\s+frequente\s+\d+\**\s*[:.\-–—]\s*(?=\S)/g,
-    (match, pre, offset, whole) => {
+  // La variante non numerata usa la stessa ancora di riga della regola
+  // `faq-unnumbered-label`: una frase editoriale nel mezzo della prosa non va
+  // riparata. Il passaggio in due regex mantiene inoltre la lista numerata
+  // («1. Domanda frequente 1: …») gia' supportata.
+  const patterns = [
+    /((?:^|[\s\n*#>\-–—.)\]])\s*)\**\s*[Dd]omanda\s+frequente\s+\d+\**\s*[:.?\-–—]\s*(?=\S)/g,
+    /((?:^|\n)[ \t]*(?:[*#>\-–—]\s*)?)\**\s*[Dd]omanda\s+frequente\**\s*[:.?\-–—]\s*(?=\S)/g,
+  ];
+  let out = value;
+  for (const pattern of patterns) {
+    out = out.replace(pattern, (match, pre, offset, whole) => {
       // Solo se dopo l'etichetta resta contenuto vero sulla stessa riga.
       const rest = whole.slice(offset + match.length);
       const line = rest.split('\n', 1)[0].trim();
       if (line.length < 8) return match;
       stripped += 1;
       return pre;
-    },
-  );
+    });
+  }
   return { value: out, stripped };
 }
 
