@@ -33,12 +33,14 @@ test('il titolo digest ambiguo non viene risolto scegliendo il primo risultato',
   );
   assert.match(
     step,
-    /if ! DIGEST_MATCHES=\$\(gh api --paginate[\s\S]*?select\(\.title == env\.DIGEST_TITLE\)[^']*'/,
-    'la query paginata deve raccogliere tutte le issue il cui titolo è quello esatto del digest',
+    /if DIGEST_MATCHES=\$\(gh api --paginate[\s\S]*?--jq '\.\[\] \| select\(\.pull_request \| not\) \| select\(\.title == env\.DIGEST_TITLE\) \| \.number'\); then/,
+    'la query paginata deve iterare ogni issue e raccogliere tutte quelle col titolo esatto del digest',
   );
   assert.doesNotMatch(step, /gh search issues/, 'la ricerca non deve avere il cap implicito di gh search');
   assert.match(step, /if \[ -z "\$\{N:-\}" \]; then[\s\S]*?exit 1/, 'zero digest deve essere un errore esplicito');
-  assert.doesNotMatch(step, /DIGEST_SEARCH_RC=\$\?/, 'il vecchio guard morto sotto errexit non deve tornare');
+  assert.match(step, /DIGEST_SEARCH_RC=\$\?/, 'un errore della ricerca deve riportare il codice di uscita della CLI');
+  const search = step.slice(step.indexOf('if DIGEST_MATCHES='), step.indexOf('DIGEST_MATCH_COUNT='));
+  assert.doesNotMatch(search, /2>\/dev\/null/, 'gli errori della ricerca non devono essere soppressi');
   assert.match(
     step,
     /DIGEST_MATCH_COUNT=.*(?:wc -l|length)/,

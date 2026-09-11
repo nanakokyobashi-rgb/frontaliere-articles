@@ -267,10 +267,14 @@ jobs:
           fi
           # The convenience search command has a default result cap. Paginate the issues API
           # so an exact-title duplicate cannot hide past that cap; the query
-          # failure is deliberately inside `if`, where bash errexit is disabled.
-          if ! DIGEST_MATCHES=$(gh api --paginate "repos/$GITHUB_REPOSITORY/issues?state=open&per_page=100" \
-            --jq 'select(.pull_request | not) | select(.title == env.DIGEST_TITLE) | .number' 2>/dev/null); then
-            echo "::error::needs-human-sweep: ricerca del digest fallita; non scelgo un issue a caso."
+          # failure is deliberately inside `if`, where bash errexit is disabled;
+          # keep stderr visible and report the CLI status for actionable failures.
+          if DIGEST_MATCHES=$(gh api --paginate "repos/$GITHUB_REPOSITORY/issues?state=open&per_page=100" \
+            --jq '.[] | select(.pull_request | not) | select(.title == env.DIGEST_TITLE) | .number'); then
+            :
+          else
+            DIGEST_SEARCH_RC=$?
+            echo "::error::needs-human-sweep: ricerca del digest fallita (gh api rc=$DIGEST_SEARCH_RC); non scelgo un issue a caso."
             exit 1
           fi
           DIGEST_MATCH_COUNT=$(printf '%s\n' "$DIGEST_MATCHES" | sed '/^[[:space:]]*$/d' | wc -l | tr -d '[:space:]')
