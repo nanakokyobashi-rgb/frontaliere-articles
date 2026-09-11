@@ -499,11 +499,20 @@ export function faqSourceFingerprint(sourceFaq) {
 export function nextFaqRejection(previous, sourceFaq, { prunedWrite = false, keptPairs } = {}) {
   const source = faqSourceFingerprint(sourceFaq);
   const hasKeptPairs = Number.isInteger(keptPairs) && keptPairs >= 0;
+  const previousKeptPairs = Number.isInteger(previous?.keptPairs) && previous.keptPairs >= 0
+    ? previous.keptPairs
+    : undefined;
+  // The live ledger predates `keptPairs`: an old partial write is evidence of
+  // progress, but its amount is unknown. Let the first measured write reopen
+  // the counter instead of throttling it forever on the legacy count.
+  const previousPrunedWriteIsUnmeasured = previous?.prunedWrite === true
+    && previousKeptPairs === undefined;
   const priorConsecutive = Number(previous?.consecutive);
   const improvedPrunedWrite = prunedWrite
     && hasKeptPairs
-    && Number.isInteger(previous?.keptPairs)
-    && keptPairs > previous.keptPairs;
+    && (previousPrunedWriteIsUnmeasured
+      || previousKeptPairs === undefined
+      || keptPairs > previousKeptPairs);
   const consecutive = improvedPrunedWrite
     ? 1
     : previous?.source === source
@@ -519,11 +528,18 @@ export function nextFaqRejection(previous, sourceFaq, { prunedWrite = false, kep
       prunedWrite: true,
       ...(hasKeptPairs ? { keptPairs } : {}),
     } : {}),
+    ...(!hasKeptPairs && previousKeptPairs !== undefined
+      ? { keptPairs: previousKeptPairs }
+      : {}),
   };
 }
 
 export function shouldSkipFaqRejection(previous, sourceFaq) {
-  return previous?.source === faqSourceFingerprint(sourceFaq)
+  const hasMeasuredPrunedWrite = Number.isInteger(previous?.keptPairs)
+    && previous.keptPairs >= 0;
+  const legacyPrunedWrite = previous?.prunedWrite === true && !hasMeasuredPrunedWrite;
+  return !legacyPrunedWrite
+    && previous?.source === faqSourceFingerprint(sourceFaq)
     && Number(previous.consecutive) >= FAQ_REJECTION_MAX_CONSECUTIVE;
 }
 

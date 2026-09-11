@@ -172,6 +172,25 @@ test('il ledger ferma il rifiuto deterministico dopo due run sulla stessa sorgen
   const improved = nextFaqRejection(partialSecond, source, { prunedWrite: true, keptPairs: 5 });
   assert.equal(improved.keptPairs, 5);
   assert.equal(improved.consecutive, 1, 'una potatura che conserva piu coppie riapre il tentativo');
+
+  const belowFloor = nextFaqRejection(partialSecond, source);
+  assert.equal(belowFloor.prunedWrite, undefined, 'il rifiuto sotto pavimento non viene scambiato per scrittura');
+  assert.equal(belowFloor.keptPairs, 3, 'il percorso sotto pavimento conserva l ultima misura pubblicata');
+});
+
+test('una potatura legacy senza keptPairs non resta throttled e si backfilla al primo giro misurato', () => {
+  const source = pairs(8);
+  const legacy = {
+    source: faqSourceFingerprint(source),
+    sourceCount: source.length,
+    consecutive: FAQ_REJECTION_MAX_CONSECUTIVE,
+    prunedWrite: true,
+  };
+
+  assert.equal(shouldSkipFaqRejection(legacy, source), false);
+  const repaired = nextFaqRejection(legacy, source, { prunedWrite: true, keptPairs: 4 });
+  assert.equal(repaired.consecutive, 1);
+  assert.equal(repaired.keptPairs, 4);
 });
 
 test('gli skip throttled non consumano il limite e lasciano passare il lavoro azionabile', () => {
@@ -181,7 +200,11 @@ test('gli skip throttled non consumano il limite e lasciano passare il lavoro az
   const rejectionLedger = Object.fromEntries(
     issues.slice(0, 3).map(({ articleId }) => [
       faqLocaleIssueKey(articleId, 'en'),
-      nextFaqRejection(nextFaqRejection(undefined, source, { prunedWrite: true }), source, { prunedWrite: true }),
+      nextFaqRejection(
+        nextFaqRejection(undefined, source, { prunedWrite: true, keptPairs: 4 }),
+        source,
+        { prunedWrite: true, keptPairs: 4 },
+      ),
     ]),
   );
 
@@ -196,9 +219,9 @@ test('il selettore separa i throttled dal residuo del limite', () => {
   const throttledIssue = issue('frozen');
   const rejectionLedger = {
     [faqLocaleIssueKey('frozen', 'en')]: nextFaqRejection(
-      nextFaqRejection(undefined, source, { prunedWrite: true }),
+      nextFaqRejection(undefined, source, { prunedWrite: true, keptPairs: 4 }),
       source,
-      { prunedWrite: true },
+      { prunedWrite: true, keptPairs: 4 },
     ),
   };
 
