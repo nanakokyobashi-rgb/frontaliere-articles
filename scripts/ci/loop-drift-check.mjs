@@ -140,7 +140,7 @@ import crypto from 'node:crypto';
 import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import { createGithubIssue } from '../lib/github-issue-creator.mjs';
-import { createRawFetcher } from '../lib/cross-repo-raw-fetch.mjs';
+import { CrossRepoRateLimitError, createRawFetcher } from '../lib/cross-repo-raw-fetch.mjs';
 import { parsePositiveNum } from '../lib/parse-positive-num.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
@@ -159,6 +159,11 @@ const SITE_REF = process.env.SITE_REF || SITE_DEFAULT_REF;
 const CORPUS_REPO = process.env.GITHUB_REPOSITORY || 'nanakokyobashi-rgb/frontaliere-articles';
 const CORPUS_REF = process.env.GITHUB_SHA || 'main';
 const rawFetch = createRawFetcher({ userAgent: 'loop-drift-check', token: process.env.GH_TOKEN });
+// Le API di tracking hanno un verdetto diverso dalle letture raw: un 404
+// legittimo di una issue chiusa/non trovata non deve poter latchare
+// `tokenRejected` nello stesso fetcher usato per la provenienza dei file
+// (issue #1245).
+const trackingFetch = createRawFetcher({ userAgent: 'loop-drift-check-tracking', token: process.env.GH_TOKEN });
 // Commit massimi esaminati a ritroso per confermare che una baseline sia
 // esistita davvero. 100 è il per_page massimo dell'API commits: una singola
 // richiesta, nessuna paginazione. Per i file di libreria che questo manifest
@@ -797,12 +802,20 @@ function ghostVerdict({ baselineHash, currentHash, historyMatch, historyExhauste
  * Un fallimento di rete non genera un ghost: si segnala e si prosegue,
  * PROCEED-SAFE come il resto di questo script.
  */
-async function checkBaselineProvenance(entry, now) {
+async function checkBaselineProvenance(entry, now, passState = { rateLimited: false, detail: '' }) {
   const rel = entry.path;
   const sitePath = entry.sitePath || rel;
   const base = entry.baseline || {};
   const ghosts = [];
   const notes = [];
+  if (passState?.rateLimited) {
+    return {
+      ghosts,
+      detail: passState.detail || 'verifica di provenienza non eseguita: rate limit GitHub',
+      siteBaselineLastSeenAt: null,
+      rateLimited: true,
+    };
+  }
   // Ultimo istante in cui il SITO era ancora sulla baseline (vedi `matchedDate`
   // in repoHistoryMatch). Resta null quando il lato sito non si è mosso, quando
   // la baseline non è verificabile, o su errore di rete: in tutti e tre i casi
@@ -811,6 +824,7 @@ async function checkBaselineProvenance(entry, now) {
 
   async function checkSide(side, { repo, ref, filePath, baselineHash, currentHash }) {
     if (baselineHash == null) return;
+    if (passState?.rateLimited) return;
     let historyMatch;
     let historyExhausted;
     let historyReadable;
@@ -829,6 +843,11 @@ async function checkBaselineProvenance(entry, now) {
           );
         }
       } catch (e) {
+        if (e instanceof CrossRepoRateLimitError) {
+          passState.rateLimited = true;
+          passState.detail = `verifica di provenienza interrotta da rate limit GitHub: ${e.message}`;
+          return;
+        }
         notes.push(`verifica storica di \`baseline.${side}\` fallita: ${String(e.message || e).slice(0, 120)}`);
         return;
       }
@@ -840,7 +859,31 @@ async function checkBaselineProvenance(entry, now) {
   await checkSide('site', { repo: SITE_REPO, ref: SITE_REF, filePath: sitePath, baselineHash: base.site, currentHash: now.site });
   await checkSide('corpus', { repo: CORPUS_REPO, ref: CORPUS_REF, filePath: rel, baselineHash: base.corpus, currentHash: now.corpus });
 
-  return { ghosts, detail: notes.join(' '), siteBaselineLastSeenAt };
+  return {
+    ghosts,
+    detail: notes.join(' '),
+    siteBaselineLastSeenAt,
+    rateLimited: Boolean(passState?.rateLimited),
+    rateLimitDetail: passState?.detail || '',
+  };
+}
+
+function provenanceRateLimitVerdict(entry, now, detail, normalVerdict = null) {
+  const rateLimitNote = `${detail || 'La verifica storica non ha potuto leggere GitHub.'} Le entry successive restano non verificate nella stessa passata.`;
+  const verdict = normalVerdict || {
+    state: 'provenance-rate-limited',
+    actionable: true,
+    headline: 'provenienza non verificata: rate limit GitHub',
+  };
+  return {
+    path: entry.path,
+    mode: entry.mode,
+    ...verdict,
+    actionable: true,
+    ...(normalVerdict ? { provenanceState: 'provenance-rate-limited' } : {}),
+    detail: [verdict.detail, rateLimitNote].filter(Boolean).join(' '),
+    hashes: { ...now, baseline: entry.baseline || {} },
+  };
 }
 
 /**
@@ -1093,7 +1136,7 @@ async function trackingIssueClosed(trackingIssue) {
   const [, owner, repo, number] = match;
   const url = `https://api.github.com/repos/${owner}/${repo}/issues/${number}`;
   try {
-    const res = await rawFetch(url, { Accept: 'application/vnd.github+json' });
+    const res = await trackingFetch(url, { Accept: 'application/vnd.github+json' });
     if (!res.ok) return false;
     const issue = await res.json();
     return issue?.state === 'closed';
@@ -1621,6 +1664,11 @@ async function main() {
   const initBlocked = [];
   const initWritten = [];
   const initFailed = [];
+  // Il rate limit di una singola verifica storica invalida la provenienza del
+  // resto della passata: continuare a interrogarla produce note duplicate e
+  // un report falsamente verde. Le entry restanti vengono marcate esplicitamente
+  // come non verificate e il pass diventa actionable.
+  const provenancePass = { rateLimited: false, detail: '' };
   // Inventario dell'albero del sito, chiesto UNA volta sola e solo se una voce
   // ha davvero un lato sito da attestare: `--init --only` su una `corpus-only`
   // non deve pagare una richiesta. `undefined` = mai chiesto, `null` = chiesto
@@ -1802,14 +1850,18 @@ async function main() {
     // del sito. Questo controllo è ORTOGONALE al verdetto sopra: anche una
     // entry che `classify()` giudica innocua puo' nascondere una baseline
     // fantasma, e qui la si scopre a prescindere dal `mode`.
-    let provenance = { ghosts: [], detail: '' };
+    let provenance = { ghosts: [], detail: '', rateLimited: false, rateLimitDetail: '', siteBaselineLastSeenAt: null };
     if (!NO_PROVENANCE) {
-      try {
-        provenance = await checkBaselineProvenance(entry, now);
-      } catch (e) {
-        // PROCEED-SAFE: un controllo di provenienza rotto non deve inghiottire
-        // il resto del report.
-        provenance = { ghosts: [], detail: `verifica di provenienza fallita: ${String(e.message || e).slice(0, 120)}` };
+      if (provenancePass.rateLimited) {
+        provenance = { ...provenance, rateLimited: true, rateLimitDetail: provenancePass.detail };
+      } else {
+        try {
+          provenance = await checkBaselineProvenance(entry, now, provenancePass);
+        } catch (e) {
+          // PROCEED-SAFE: un controllo di provenienza rotto non deve inghiottire
+          // il resto del report.
+          provenance = { ...provenance, detail: `verifica di provenienza fallita: ${String(e.message || e).slice(0, 120)}` };
+        }
       }
     }
 
@@ -1820,9 +1872,18 @@ async function main() {
         state: 'ghost-baseline',
         actionable: true,
         headline: `baseline.${provenance.ghosts.join(' e baseline.')} non corrisponde a nessun blob mai esistito`,
-        detail: provenance.detail,
+        detail: [provenance.detail, provenance.rateLimitDetail].filter(Boolean).join(' '),
         hashes: { ...now, baseline: base },
       });
+    } else if (provenance.rateLimited) {
+      // Il verdetto locale resta valido: il rate limit impedisce solo la prova
+      // storica, non cancella drift o convergenza già calcolati in memoria.
+      results.push(provenanceRateLimitVerdict(
+        entry,
+        now,
+        [provenance.detail, provenance.rateLimitDetail].filter(Boolean).join(' '),
+        verdict,
+      ));
     } else {
       // Issue #303: un `identical` in `site-ahead` da oltre la soglia non è
       // latenza, è un gemello che nessun trasporto porta. Escalation del solo
@@ -2014,7 +2075,9 @@ async function main() {
   // sulla stessa issue invece di aprirne una nuova.
   if (AS_ISSUE && actionable.length) {
     const section = (state, title) => {
-      const rows = actionable.filter((r) => r.state === state);
+      const rows = state === 'provenance-rate-limited'
+        ? actionable.filter((r) => r.provenanceState === state)
+        : actionable.filter((r) => r.state === state && r.provenanceState !== 'provenance-rate-limited');
       if (!rows.length) return '';
       return [`### ${title}`, '', ...rows.map((r) => `- \`${r.path}\` — ${r.headline}\n  ${r.detail}`), ''].join('\n');
     };
@@ -2023,6 +2086,7 @@ async function main() {
       '',
       `${results.length} file sorvegliati, **${actionable.length}** richiedono una decisione.`,
       '',
+      section('provenance-rate-limited', '⚠️ Provenienza non verificata — verdetto locale conservato'),
       section('ghost-baseline', '💀 Baseline fantasma — mai esistita nella storia esaminata'),
       section('stranded-twin', `🚨 Gemello \`identical\` fermo indietro da oltre ${STRANDED_AFTER_DAYS} giorni — nessun trasporto lo porta`),
       section('corpus-only-twin', '🔴 Dichiarato `corpus-only`, ma il gemello esiste sul sito'),
@@ -2086,4 +2150,4 @@ if (process.argv[1] && process.argv[1].endsWith('loop-drift-check.mjs')) {
 // baseline con LA STESSA regola con cui la pesa il cron, altrimenti una voce
 // accettata in PR verrebbe dichiarata fantasma il mattino dopo — o peggio, il
 // contrario. Una seconda copia della regola lo renderebbe inevitabile.
-export { classify, parseOnly, onlyArgError, forceArgError, resolveInitTargets, initWriteVerdict, initAttestVerdict, initPassOutcome, initBaseline, initOnlyManifestUnchanged, localHash, ghostVerdict, strandedVerdict, corpusOnlyTwinVerdict, unmirrorableDepsVerdict, implicitPinnersVerdict, declaredAbsentCiters, crawlerContractIsActive, resetPinnerIndex, DECLARED_ABSENT_REGISTRY_REL, CRAWLER_CONTRACT_REL, DORMANT_WITH_CRAWLER_CONTRACT, resolvedLocalImports, gitBlobSha, scalarFingerprintVerdict, siteFile, sha256, repoHistoryMatch };
+export { classify, parseOnly, onlyArgError, forceArgError, resolveInitTargets, initWriteVerdict, initAttestVerdict, initPassOutcome, initBaseline, initOnlyManifestUnchanged, localHash, ghostVerdict, strandedVerdict, provenanceRateLimitVerdict, corpusOnlyTwinVerdict, unmirrorableDepsVerdict, implicitPinnersVerdict, declaredAbsentCiters, crawlerContractIsActive, resetPinnerIndex, DECLARED_ABSENT_REGISTRY_REL, CRAWLER_CONTRACT_REL, DORMANT_WITH_CRAWLER_CONTRACT, resolvedLocalImports, gitBlobSha, scalarFingerprintVerdict, siteFile, sha256, repoHistoryMatch };

@@ -582,14 +582,26 @@ test('readsContentOf distingue il literal letto — annidato o via alias — dal
   assert.equal(readsContentOf(rel, "readFileSync(CONTRACT_PATH, 'utf8');\n// vedi `scripts/ci/loop-sync-manifest.json`"), false);
 });
 
-test('readsContentOf resta fail-open su prefissi relativi e wrapper di lettura', () => {
+test('readsContentOf riconosce prefissi relativi e wrapper di lettura espliciti', () => {
   const rel = 'scripts/ci/loop-sync-manifest.json';
   assert.equal(
     readsContentOf(rel, "readFileSync(new URL(import.meta.url, '../../scripts/ci/loop-sync-manifest.json'), 'utf8')"),
     true,
   );
   assert.equal(readsContentOf(rel, "loadJson('../../scripts/ci/loop-sync-manifest.json')"), true);
-  assert.equal(readsContentOf(rel, "sharedContentReader('../../scripts/ci/loop-sync-manifest.json')"), true);
+  assert.equal(readsContentOf(rel, "loadContentReader('../../scripts/ci/loop-sync-manifest.json')"), true);
+  // Il default-closed vale anche per il manifest: un wrapper sconosciuto non
+  // dimostra una lettura e non deve spegnere il mirror per un riferimento solo
+  // testuale. Solo i nomi di lettura espliciti sopra fanno coupling.
+  assert.equal(readsContentOf(rel, "sharedContentReader('../../scripts/ci/loop-sync-manifest.json')"), false);
+  assert.equal(readsContentOf(rel, "sharedContentWriter('../../scripts/ci/loop-sync-manifest.json')"), false);
+  assert.equal(readsContentOf(rel, "describe('scripts/ci/loop-sync-manifest.json', () => {})"), false);
+  assert.equal(readsContentOf(rel, "it('scripts/ci/loop-sync-manifest.json', () => {})"), false);
+  assert.equal(readsContentOf(rel, "list.push('scripts/ci/loop-sync-manifest.json')"), false);
+  assert.equal(readsContentOf(rel, "text.startsWith('scripts/ci/loop-sync-manifest.json')"), false);
+  assert.equal(readsContentOf(rel, "JSON.stringify('scripts/ci/loop-sync-manifest.json')"), false);
+  assert.equal(readsContentOf(rel, "mysteryWrapper('scripts/ci/loop-sync-manifest.json')"), false);
+  assert.equal(readsContentOf('scripts/ci/other.json', "sharedContentReader('../../scripts/ci/other.json')"), false);
   assert.equal(readsContentOf(rel, undefined), true, 'senza testo il verso sicuro è l\u2019accoppiamento');
 });
 

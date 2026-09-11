@@ -62,6 +62,21 @@ test('403 e 404 autenticati sono ugualmente sospetti: il 404 mascherava un `abse
   assert.equal(needsAnonymousRetry(500, { authenticated: true }), false);
 });
 
+test('429 autenticato è un rate limit reale, non un sospetto sul token', async () => {
+  assert.equal(needsAnonymousRetry(429, { authenticated: true }), false);
+  assert.equal(TOKEN_SUSPECT_STATUSES.has(429), false);
+  const { impl, calls } = fakeFetch([{ status: 429 }]);
+  const fetchRaw = createRawFetcher({ userAgent: 'ua', token: 'tok', fetchImpl: impl });
+
+  await assert.rejects(
+    fetchRaw('https://raw.githubusercontent.com/other/repo/main/a.yml'),
+    (error) => error instanceof CrossRepoRateLimitError && error.status === 429,
+  );
+  assert.deepEqual(calls.map((c) => c.authenticated), [true]);
+  assert.equal(fetchRaw.state.tokenRejected.has('other/repo'), false);
+  assert.equal(fetchRaw.state.anonymousRetries, 0);
+});
+
 test('un 404 confermato anche in anonimo resta un\'assenza vera, e il token resta in uso', async () => {
   const { impl, calls } = fakeFetch([
     { status: 404 },
@@ -111,17 +126,6 @@ test('un 2xx autenticato latcha l\u2019accettazione: i 404 successivi non fanno 
   assert.deepEqual(calls.map((c) => c.authenticated), [true, true, true]);
   assert.equal(fetchRaw.state.tokenAccepted.get('other/repo'), true);
   assert.equal(fetchRaw.state.anonymousRetries, 0);
-});
-
-test('429 autenticato ritenta in anonimo come gli altri rifiuti del token', async () => {
-  const { impl, calls } = fakeFetch([{ status: 429 }, { status: 200 }]);
-  const fetchRaw = createRawFetcher({ userAgent: 'ua', token: 'tok', fetchImpl: impl });
-
-  const res = await fetchRaw('https://raw.githubusercontent.com/other/repo/main/a.yml');
-
-  assert.equal(res.status, 200);
-  assert.deepEqual(calls.map((c) => c.authenticated), [true, false]);
-  assert.equal(fetchRaw.state.tokenRejected.get('other/repo'), true);
 });
 
 test('un rate limit dopo il latch del token è un errore tipizzato, non un 404', async () => {
@@ -197,4 +201,7 @@ test('i chiamanti cross-repo passano dal fetcher, non da `fetch` nudo', async ()
       `${rel} rimette l'Authorization a mano su una lettura cross-repo`,
     );
   }
+  const drift = fs.readFileSync(path.join(root, 'scripts/ci/loop-drift-check.mjs'), 'utf8');
+  assert.match(drift, /const trackingFetch = createRawFetcher/);
+  assert.match(drift, /const res = await trackingFetch\(url/);
 });

@@ -42,7 +42,7 @@
  * a chi non ha accesso, e senza controprova e' indistinguibile da un'assenza
  * vera.
  */
-export const TOKEN_SUSPECT_STATUSES = new Set([401, 403, 404, 429]);
+export const TOKEN_SUSPECT_STATUSES = new Set([401, 403, 404]);
 
 /** Vale la pena richiedere in anonimo? Solo se il token era in gioco. */
 export function needsAnonymousRetry(status, { authenticated } = {}) {
@@ -113,6 +113,10 @@ export function createRawFetcher({ userAgent, token, fetchImpl = fetch } = {}) {
       state.tokenAccepted.set(repo, true);
       return res;
     }
+    // Un rate limit sulla richiesta autenticata è un limite reale, non un
+    // rifiuto del token da ritentare anonimamente: altrimenti il 429 latcherebbe
+    // `tokenRejected` e degraderebbe l'intero repo al rate limit anonimo.
+    if (authenticated && isRateLimitResponse(res)) throw new CrossRepoRateLimitError(url, res);
     // Dopo un 2xx il token è accettato, quindi non si ritenta in anonimo:
     // un rate limit successivo resta però un limite reale, non un 404 da
     // consegnare al chiamante come se il contenuto mancasse.
