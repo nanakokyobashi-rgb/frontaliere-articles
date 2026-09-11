@@ -2994,7 +2994,7 @@
       "reason": "Wrapper CLI del digest needs-human: importa il reporter condiviso senza alterarne il contratto best-effort e, con `--fail-on-write`, trasforma `persisted: false` o un risultato nullo in un exit non-zero osservabile dal watchdog di recycle-stale-prs.yml (#1143). E' specifico del workflow adattato del corpus e non ha gemello sul sito.",
       "baseline": {
         "site": null,
-        "corpus": "37f4505efa9dc06e",
+        "corpus": "4dbe4fb2c1845eec",
         "alignedAt": "2026-09-11"
       }
     },
