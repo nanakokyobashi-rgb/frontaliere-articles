@@ -1015,6 +1015,28 @@ export function manualTransportReason(manual = []) {
   );
 }
 
+/**
+ * A JavaScript/ESM twin is extensionless-importable only when the same stem
+ * has no TypeScript source beside it. Keep this decision pure so the coupling
+ * scan and its regression tests use exactly the same conservative predicate.
+ */
+export function hasTypeScriptTwin(rel, candidates = []) {
+  const extension = path.extname(rel);
+  if (!JAVASCRIPT_EXTENSIONS.has(extension)) return false;
+  const dir = path.dirname(rel);
+  const relStem = rel.slice(0, rel.length - extension.length);
+  return candidates.some((candidate) => (
+    candidate !== rel
+    && path.dirname(candidate) === dir
+    && (() => {
+      const candidateExtension = path.extname(candidate);
+      return candidateExtension
+        && candidate.slice(0, candidate.length - candidateExtension.length) === relStem
+        && TYPE_SCRIPT_EXTENSIONS.has(candidateExtension);
+    })()
+  ));
+}
+
 export function localCouplings(rel, modeOf) {
   const base = rel.split('/').pop();
   const dir = path.dirname(rel);
@@ -1022,21 +1044,9 @@ export function localCouplings(rel, modeOf) {
   const unreadable = new Map();
 
   const scan = walkSubtree(couplingScanRoot(rel));
-  const extension = path.extname(base);
-  const relStem = extension ? rel.slice(0, rel.length - extension.length) : rel;
-  const hasTypeScriptTwin = JAVASCRIPT_EXTENSIONS.has(extension)
-    && scan.files.some((candidate) => (
-      candidate !== rel
-      && path.dirname(candidate) === dir
-      && (() => {
-        const candidateExtension = path.extname(candidate);
-        return candidateExtension
-          && candidate.slice(0, candidate.length - candidateExtension.length) === relStem
-          && TYPE_SCRIPT_EXTENSIONS.has(candidateExtension);
-      })()
-    ));
+  const hasTwin = hasTypeScriptTwin(rel, scan.files);
   const specifier = importSpecifierRe(base, {
-    allowExtensionless: !hasTypeScriptTwin,
+    allowExtensionless: !hasTwin,
   });
   for (const [d, reason] of scan.blind) unreadable.set(d, reason);
   for (const other of scan.files) {

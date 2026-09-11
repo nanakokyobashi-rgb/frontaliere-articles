@@ -466,6 +466,40 @@ function legacySemanticAcceptance(itemText, executable) {
   const action = suggestedActionText(itemText);
   const source = String(executable || '');
 
+  // #1261 predates the final deterministic-major policy. Its old token says
+  // «critical or major», while the landed implementation deliberately keeps
+  // only critical plus the two named cross-locale translation codes. Accept
+  // that semantic replacement only when the complete whitelist is live in the
+  // declared Target file; Addresses/provenance is still checked by the caller.
+  if (/`issue\.severity\s*===\s*['"]critical['"]\s*\|\|\s*issue\.severity\s*===\s*['"]major['"]`/.test(action)
+      && /runArticleFactualityGates/.test(source)
+      && /isDeterministicBlockingIssue\s*=\s*\(issue\)\s*=>/.test(source)
+      && /if\s*\(issue\.severity\s*===\s*['"]critical['"]\)\s*return\s+true/.test(source)
+      && /if\s*\(issue\.severity\s*!==\s*['"]major['"]\)\s*return\s+false/.test(source)
+      && /DETERMINISTIC_MAJOR_BLOCKING_CODES\.has\(issue\.code\)/.test(source)
+      && /translation-number-dropped/.test(source)
+      && /translation-number-added/.test(source)) {
+    return {
+      rule: 'deterministic-major-whitelist',
+      tokens: ['critical', 'translation-number-dropped', 'translation-number-added'],
+    };
+  }
+
+  // #1263's old token names the helper call without its later option object.
+  // The live predicate is equivalent only when JS/ESM extensionless matching
+  // is enabled precisely for files without a sibling TypeScript stem.
+  if (/`importSpecifierRe\(base\)`/.test(action)
+      && /function\s+hasTypeScriptTwin\s*\(rel,\s*candidates\s*=\s*\[\]\)/.test(source)
+      && /JAVASCRIPT_EXTENSIONS\.has\(extension\)/.test(source)
+      && /TYPE_SCRIPT_EXTENSIONS\.has\(candidateExtension\)/.test(source)
+      && /hasTypeScriptTwin\(rel,\s*scan\.files\)/.test(source)
+      && /allowExtensionless:\s*!hasTwin/.test(source)) {
+    return {
+      rule: 'extensionless-js-without-typescript-twin',
+      tokens: ['hasTypeScriptTwin', 'allowExtensionless: !hasTwin'],
+    };
+  }
+
   // Some old cards prescribe an observable ordering rather than a token that
   // survives verbatim. Keep this proof narrow: both names must be explicit
   // inline-code identifiers and the live declarations must occur in order.

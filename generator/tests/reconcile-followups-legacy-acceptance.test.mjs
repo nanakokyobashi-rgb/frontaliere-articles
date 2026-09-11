@@ -209,6 +209,47 @@ test('legacy riconosce containment remoto solo con default branch e head della P
   assert.equal(result.evidence.find((entry) => entry.kind === 'legacy-semantic')?.rule, 'remote-containment-equivalent');
 });
 
+test('legacy prova la whitelist dei major deterministici senza riabilitare tutti i major', () => {
+  const action = 'riallineare la soglia a `issue.severity === \'critical\' || issue.severity === \'major\'`.';
+  const source = [
+    'function runArticleFactualityGates() {',
+    '  const isDeterministicBlockingIssue = (issue) => {',
+    "    if (issue.severity === 'critical') return true;",
+    "    if (issue.severity !== 'major') return false;",
+    '    return DETERMINISTIC_MAJOR_BLOCKING_CODES.has(issue.code);',
+    '  };',
+    '}',
+    "const DETERMINISTIC_MAJOR_BLOCKING_CODES = new Set(['translation-number-dropped', 'translation-number-added']);",
+  ].join('\n');
+  const result = semanticResult(1261, 'generator/scripts/create-article.mjs', action, source);
+  assert.equal(result.resolved, true);
+  assert.equal(result.evidence.find((entry) => entry.kind === 'legacy-semantic')?.rule, 'deterministic-major-whitelist');
+  assert.equal(
+    semanticResult(1261, 'generator/scripts/create-article.mjs', action, source.replace('translation-number-added', 'tax-implausible')).resolved,
+    false,
+  );
+});
+
+test('legacy prova il coupling extensionless solo senza gemello TypeScript', () => {
+  const action = 'ripristinare `importSpecifierRe(base)` per il consumer senza estensione.';
+  const source = [
+    'export function hasTypeScriptTwin(rel, candidates = []) {',
+    '  const extension = path.extname(rel);',
+    '  if (!JAVASCRIPT_EXTENSIONS.has(extension)) return false;',
+    '  return candidates.some((candidate) => TYPE_SCRIPT_EXTENSIONS.has(candidateExtension));',
+    '}',
+    'const hasTwin = hasTypeScriptTwin(rel, scan.files);',
+    'const specifier = importSpecifierRe(base, { allowExtensionless: !hasTwin });',
+  ].join('\n');
+  const result = semanticResult(1263, 'scripts/ci/transport-identical-twins.mjs', action, source);
+  assert.equal(result.resolved, true);
+  assert.equal(result.evidence.find((entry) => entry.kind === 'legacy-semantic')?.rule, 'extensionless-js-without-typescript-twin');
+  assert.equal(
+    semanticResult(1263, 'scripts/ci/transport-identical-twins.mjs', action, source.replace('allowExtensionless: !hasTwin', 'allowExtensionless: true')).resolved,
+    false,
+  );
+});
+
 test('legacy acceptance richiede Addresses + Target file e registra la negativa assente', () => {
   const item = [
     '- Target file: scripts/ci/example.mjs',

@@ -4944,11 +4944,12 @@ function runArticleFactualityGates({ deterministicBodySections = [], ...params }
   // gate's previous policy (critical-only), but admit the two named
   // translation-number findings before checking the section label: their
   // emitters identify the locale (`[en]`), not a deterministic body section.
-  const blocking = issues.filter((issue) => {
+  const isDeterministicBlockingIssue = (issue) => {
     if (issue.severity === 'critical') return true;
     if (issue.severity !== 'major') return false;
     return DETERMINISTIC_MAJOR_BLOCKING_CODES.has(issue.code);
-  });
+  };
+  const blocking = issues.filter(isDeterministicBlockingIssue);
   return { ...result, issues, blocking, passed: blocking.length === 0 };
 }
 

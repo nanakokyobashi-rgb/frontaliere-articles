@@ -52,6 +52,7 @@ import {
   permanentBlock,
   realignFromCommitted,
   couplingScanRoot,
+  hasTypeScriptTwin,
   importSpecifierRe,
   SET_DESCRIPTORS,
   unreadableCouplings,
@@ -333,6 +334,28 @@ test('importSpecifierRe non accoppia un import senza estensione ai gemelli omoni
   assert.ok(
     !mjsCouplings.some((c) => c.path === 'host/shared/chunkFiles.ts'),
     'lo stesso import senza estensione non deve accoppiare anche il gemello .mjs',
+  );
+});
+
+test('hasTypeScriptTwin distingue lo stem JS/ESM dal gemello TypeScript', () => {
+  assert.equal(
+    hasTypeScriptTwin('host/shared/viteAssetHashRx.mjs', [
+      'host/shared/viteAssetHashRx.ts',
+    ]),
+    true,
+  );
+  assert.equal(
+    hasTypeScriptTwin('host/shared/jsOnly.mjs', [
+      'host/shared/other.ts',
+    ]),
+    false,
+  );
+  assert.equal(
+    hasTypeScriptTwin('host/shared/jsOnly.mjs', [
+      'host/shared/jsOnly.mjs',
+      'host/shared/jsOnly.test.ts',
+    ]),
+    false,
   );
 });
 
