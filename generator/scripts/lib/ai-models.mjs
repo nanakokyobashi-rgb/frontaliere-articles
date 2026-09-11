@@ -3,6 +3,7 @@ import net from 'node:net';
 import os from 'node:os';
 import path from 'node:path';
 import { CODEX_FALLBACK_MODEL } from '../../../scripts/ci/claude-codex-fallback.mjs';
+import { exitAfterDrain } from './drain-stdio.mjs';
 
 /**
  * Centralized AI Model Service — v15 (free-only, 115+ models, 14 providers)
@@ -4110,8 +4111,8 @@ function _registerExitHooks() {
   // generate-article.yml is SIGKILL, measured 42 times out of 42 with zero
   // SIGTERM, and SIGKILL runs no handler at all. What this fixes is the
   // cooperative stop (a cancelled workflow, a local Ctrl-C).
-  process.on('SIGINT', async () => { await flushScoresBeforeExit(); process.exit(130); });
-  process.on('SIGTERM', async () => { await flushScoresBeforeExit(); process.exit(143); });
+  process.on('SIGINT', async () => { await flushScoresBeforeExit(); await exitAfterDrain(130); });
+  process.on('SIGTERM', async () => { await flushScoresBeforeExit(); await exitAfterDrain(143); });
 }
 
 // ── Score mutation (with Firestore persistence) ──────────────

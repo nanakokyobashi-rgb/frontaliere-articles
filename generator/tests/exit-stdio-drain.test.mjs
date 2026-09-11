@@ -1,0 +1,154 @@
+/**
+ * Regressioni per il drenaggio degli stream prima di `process.exit()` (#1134).
+ *
+ * Il primo livello usa pipe reali: una write oltre il buffer della pipe viene
+ * seguita da una coda di log su stdout e stderr. Il secondo livello sorveglia
+ * staticamente ogni uscita terminale dei tre entry point, perche' create-
+ * article.mjs non e' importabile in questa suite senza le dipendenze runtime.
+ */
+import { test } from 'node:test';
+import assert from 'node:assert/strict';
+import { spawn } from 'node:child_process';
+import { mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+const LIB = fileURLToPath(new URL('../scripts/lib/drain-stdio.mjs', import.meta.url));
+const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+const PAYLOAD_BYTES = 200_001;
+const OUT_TAIL = 'STDOUT-TELEMETRY-TAIL';
+const ERR_TAIL = 'STDERR-TELEMETRY-TAIL';
+
+function sourceOf(relativePath) {
+  return readFileSync(path.join(ROOT, relativePath), 'utf8');
+}
+
+function runChild({ drain }) {
+  const dir = mkdtempSync(path.join(tmpdir(), 'frontaliere-drain-'));
+  const childFile = path.join(dir, 'child.mjs');
+  writeFileSync(childFile, [
+    drain ? `import { exitAfterDrain } from ${JSON.stringify(LIB)};` : '',
+    `process.stdout.write('o'.repeat(${PAYLOAD_BYTES}));`,
+    `process.stderr.write('e'.repeat(${PAYLOAD_BYTES}));`,
+    `process.stdout.write(${JSON.stringify(OUT_TAIL)});`,
+    `process.stderr.write(${JSON.stringify(ERR_TAIL)});`,
+    drain ? 'await exitAfterDrain(7);' : 'process.exit(7);',
+  ].join('\n'));
+
+  return new Promise((resolve, reject) => {
+    const child = spawn(process.execPath, [childFile], { stdio: ['ignore', 'pipe', 'pipe'] });
+    const out = [];
+    const err = [];
+    const collect = () => {
+      child.stdout.on('data', (chunk) => out.push(chunk));
+      child.stderr.on('data', (chunk) => err.push(chunk));
+    };
+
+    // Without the helper, attach readers only once the child has already
+    // exited: bytes still in the kernel pipe remain observable, while bytes
+    // left in Node's write queue are gone. With the helper, read immediately
+    // so the child can actually complete its bounded drain.
+    if (drain) collect();
+    child.once('error', reject);
+    child.once('exit', () => { if (!drain) collect(); });
+    child.once('close', (code) => {
+      const result = {
+        code: code ?? -1,
+        stdout: Buffer.concat(out).toString('utf8'),
+        stderr: Buffer.concat(err).toString('utf8'),
+      };
+      rmSync(dir, { recursive: true, force: true });
+      resolve(result);
+    });
+  });
+}
+
+function runBlockedChild() {
+  const dir = mkdtempSync(path.join(tmpdir(), 'frontaliere-drain-timeout-'));
+  const childFile = path.join(dir, 'child.mjs');
+  writeFileSync(childFile, [
+    `import { exitAfterDrain } from ${JSON.stringify(LIB)};`,
+    `process.stdout.write('x'.repeat(${PAYLOAD_BYTES * 4}));`,
+    'await exitAfterDrain(9, 40);',
+  ].join('\n'));
+  const startedAt = Date.now();
+
+  return new Promise((resolve, reject) => {
+    const child = spawn(process.execPath, [childFile], { stdio: ['ignore', 'pipe', 'pipe'] });
+    child.once('error', reject);
+    child.once('close', (code) => {
+      rmSync(dir, { recursive: true, force: true });
+      resolve({ code: code ?? -1, elapsedMs: Date.now() - startedAt });
+    });
+  });
+}
+
+test('senza drain la coda delle pipe si perde, con drain arrivano entrambi gli stream', async () => {
+  const lost = await runChild({ drain: false });
+  assert.ok(lost.stdout.length < PAYLOAD_BYTES + OUT_TAIL.length, 'stdout non risulta troncato nel caso senza drain');
+  assert.ok(lost.stderr.length < PAYLOAD_BYTES + ERR_TAIL.length, 'stderr non risulta troncato nel caso senza drain');
+  assert.doesNotMatch(lost.stdout, new RegExp(OUT_TAIL));
+  assert.doesNotMatch(lost.stderr, new RegExp(ERR_TAIL));
+
+  const drained = await runChild({ drain: true });
+  assert.equal(drained.code, 7);
+  assert.equal(drained.stdout.length, PAYLOAD_BYTES + OUT_TAIL.length);
+  assert.equal(drained.stderr.length, PAYLOAD_BYTES + ERR_TAIL.length);
+  assert.match(drained.stdout, new RegExp(`${OUT_TAIL}$`));
+  assert.match(drained.stderr, new RegExp(`${ERR_TAIL}$`));
+});
+
+test('un buffer gia\' vuoto non paga il timeout', async () => {
+  const { drainStdio } = await import('../scripts/lib/drain-stdio.mjs');
+  const startedAt = Date.now();
+  await drainStdio(60_000);
+  assert.ok(Date.now() - startedAt < 1_000);
+});
+
+test('un consumer bloccato non supera il timeout e non cambia l\'exit code', async () => {
+  const result = await runBlockedChild();
+  assert.equal(result.code, 9);
+  assert.ok(result.elapsedMs < 1_000, `timeout non bounded: ${result.elapsedMs}ms`);
+});
+
+test('create-article drena dopo il ledger e prima dell\'unico process.exit nudo', () => {
+  const source = sourceOf('scripts/create-article.mjs');
+  const start = source.indexOf('async function exitAfterFlush(code) {');
+  const end = source.indexOf('\n}\n', start);
+  assert.ok(start >= 0 && end > start, 'exitAfterFlush non trovato');
+  const body = source.slice(start, end);
+  const flush = body.indexOf('flushScoresBeforeExit()');
+  const drain = body.indexOf('await drainStdio(');
+  const exit = body.indexOf('process.exit(');
+  assert.ok(flush >= 0 && flush < drain && drain < exit);
+  assert.match(body, /process\.exitCode\s*=\s*code/);
+  assert.equal((source.match(/^\s*process\.exit\(/gm) || []).length, 1);
+  assert.match(source, /exitAfterDrain\(143\)/);
+});
+
+test('batch e fix-faq non mantengono uscite nude', () => {
+  const batch = sourceOf('scripts/batch-add-faq-to-articles.mjs');
+  assert.match(batch, /import \{ exitAfterDrain \} from '\.\/lib\/drain-stdio\.mjs'/);
+  assert.match(batch.slice(batch.indexOf('main().catch(')), /await exitAfterDrain\(1\)/);
+  assert.equal((batch.match(/^\s*process\.exit\(/gm) || []).length, 0);
+
+  const fix = sourceOf('scripts/fix-faq-locales.mjs');
+  assert.match(fix, /async function parseFaqLimitOrExit\(/);
+  assert.match(fix, /await exitAfterDrain\(2\)/);
+  assert.match(fix, /await exitAfterDrain\(1\)/);
+  assert.equal((fix.match(/^\s*process\.exit\(/gm) || []).length, 0);
+});
+
+test('i signal handler del ledger usano lo stesso drenaggio', () => {
+  const source = sourceOf('scripts/lib/ai-models.mjs');
+  const start = source.indexOf('function _registerExitHooks() {');
+  const end = source.indexOf('\n}\n', start);
+  const hooks = source.slice(start, end);
+  for (const signal of ['SIGINT', 'SIGTERM']) {
+    const line = hooks.split('\n').find((candidate) => candidate.includes(`'${signal}'`));
+    assert.ok(line, `${signal} non registrato`);
+    assert.match(line, /exitAfterDrain\(/);
+    assert.doesNotMatch(line, /process\.exit\(/);
+  }
+});

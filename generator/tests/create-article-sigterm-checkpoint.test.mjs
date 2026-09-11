@@ -99,7 +99,7 @@ test('#525: esiste un\'uscita forzata bounded, o l\'handler ALLUNGA la vita del 
   // cioe' la finestra cooperativa avrebbe peggiorato la cosa che doveva
   // migliorare.
   assert.match(ATTIVO, /COOPERATIVE_STOP_GRACE_MS/);
-  assert.match(ATTIVO, /process\.exit\(143\)/,
+  assert.match(ATTIVO, /(?:process\.exit|exitAfterDrain)\(143\)/,
     '143 = 128 + SIGTERM: il codice che il chiamante gia\' si aspetta da un kill per segnale');
   assert.match(ATTIVO, /\.unref\(\)/,
     'senza unref il timer terrebbe vivo l\'event loop e una run sana finirebbe per aspettarlo');
