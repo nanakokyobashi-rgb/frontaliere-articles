@@ -183,9 +183,17 @@ test('#1177 — la deroga alle sigle non rende permissivo un excerpt generico', 
 
 test('#1238 — una coppia sigla-percentuale non basta per aprire la deroga', () => {
   const inglese = 'AI 50% GDP 20% markets report annual costs';
+  const ingleseConDueRighe = 'AI 50%; AD 20% markets report annual costs';
 
   assert.equal(isCompactItalianRateTable(inglese), false);
   assert.equal(detectWrongLatinLanguageInField(inglese, 'it', 'excerpt')?.lang, 'non-it');
+  assert.equal(isCompactItalianRateTable(ingleseConDueRighe), false);
+});
+
+test('#1238 — la tabella a elenco resta una deroga completa', () => {
+  const elenco = '- AVS/AI/IPG: 5,3%\n- AD/AC: 1,1%\n- LAINF: 0,7-1,5%';
+
+  assert.equal(isCompactItalianRateTable(elenco), true);
 });
 
 test('#1220 — la deroga vale sulle stesse stringhe anche per il corpus pubblicato', () => {
@@ -195,6 +203,7 @@ test('#1220 — la deroga vale sulle stesse stringhe anche per il corpus pubblic
   // successiva, per contenuto che il gate ha gia' dichiarato valido.
   const tabella = 'Aliquote: AVS/AI/IPG 5,3%, AD/AC 1,1%, LAINF 0,7-1,5%';
 
+  assert.equal(isCompactItalianRateTable(tabella), true);
   assert.notEqual(detectWrongLatinLanguage(tabella, 'it'), null, 'il caso non e\' piu\' quello misurato');
   assert.deepEqual(
     wrongLanguageAdoptions(
