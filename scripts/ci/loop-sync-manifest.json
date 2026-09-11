@@ -333,9 +333,9 @@
       "mode": "identical",
       "reason": "Gate no-op invocato per nome da collect-followup-batch.mjs, stessa classe di is-followup-fix-pr.mjs: assente nel corpus e inghiottito da runGate. Importa bulletState da scripts/lib/pr-body-sections-check.mjs e isReviewerBot da scripts/ci/lib/constants.mjs, entrambi gia' presenti nel corpus.",
       "baseline": {
-        "site": "32ad2255c449841a",
-        "corpus": "32ad2255c449841a",
-        "alignedAt": "2026-09-07"
+        "site": "6e925df5c6641f7c",
+        "corpus": "6e925df5c6641f7c",
+        "alignedAt": "2026-09-11"
       }
     },
     {
