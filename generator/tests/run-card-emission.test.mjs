@@ -251,10 +251,12 @@ test('readCards normalizza un breakdown rigiocato prima del riepilogo (#1267)', 
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'run-card-replay-'));
   const replayed = cardWith(11, 106, 53);
   delete replayed.quotaDeferral.breakdown.total;
+  replayed.quotaDeferral.inputCapVeto = false;
   replayed.quotaDeferral.inputCapDecision = {
     refusals: 1,
     estimatedRequestTokens: 9,
     maxSkippedReqLimit: 4,
+    decidedBy: 'legacy-run',
   };
   fs.writeFileSync(path.join(dir, 'run-card-frontaliere.json'), JSON.stringify(replayed));
 
@@ -265,11 +267,42 @@ test('readCards normalizza un breakdown rigiocato prima del riepilogo (#1267)', 
   assert.equal(qd.breakdown.total, 106, 'il denominatore rigiocato diventa almeno la somma dei due secchi');
   assert.equal(qd.share, null, 'un totale inferito non puo\' sostenere uno share storico');
   assert.equal(qd.verdict, false, 'la card rigiocata non viene promossa a differimento');
-  assert.equal(qd.inputCapVeto, true, 'il voto input-cap rigiocato usa il breakdown normalizzato');
+  assert.equal(qd.inputCapVeto, false, 'un veto rigiocato non viene ricalcolato sul totale inferito');
+  assert.deepEqual(qd.inputCapDecision, {
+    refusals: 1,
+    estimatedRequestTokens: 9,
+    maxSkippedReqLimit: 4,
+    decidedBy: 'legacy-run',
+  }, 'la decisione registrata dalla run resta visibile senza una nuova polarita\'');
   assert.equal(isTransientMajority(qd.breakdown, { tie: 'transient' }), false);
 
   const summary = summariseRunCards(cards);
   assert.equal(summary.cascadesWithoutTally, 1, 'la card resta visibile ma non entra nei conteggi come un tally inventato');
+});
+
+test('readCards invalida anche i derivati quando ripara un bucket, non solo il total (#1267)', () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'run-card-replay-bucket-'));
+  const replayed = cardWith(0, 106, 53);
+  replayed.quotaDeferral.breakdown.transient = -1;
+  replayed.quotaDeferral.inputCapVeto = false;
+  replayed.quotaDeferral.inputCapDecision = {
+    refusals: 1,
+    decidedBy: 'legacy-bucket',
+  };
+  fs.writeFileSync(path.join(dir, 'run-card-frontaliere.json'), JSON.stringify(replayed));
+
+  try {
+    const { cards, unreadable } = readCards(dir);
+    assert.equal(unreadable, 0);
+    const qd = cards[0].quotaDeferral;
+    assert.equal(qd.breakdown.transient, 0, 'il bucket negativo viene sanificato');
+    assert.equal(qd.share, null, 'un bucket sanificato non sostiene uno share storico');
+    assert.equal(qd.verdict, false, 'un bucket sanificato non compra un differimento');
+    assert.equal(qd.inputCapVeto, false, 'il veto non viene ricalcolato sui bucket sanificati');
+    assert.deepEqual(qd.inputCapDecision, { refusals: 1, decidedBy: 'legacy-bucket' });
+  } finally {
+    fs.rmSync(dir, { recursive: true, force: true });
+  }
 });
 
 test('classifyDownloadFailure separa «nessun artifact» da un guasto di gh (#924 item 3)', () => {
