@@ -266,10 +266,10 @@ const resolveRelativeImport = (fromFile, spec) => {
  * — e' il punto dell'esercizio, perche' i choke-point importano gli stessi lib.
  *
  * `ancestors` e' lo STACK del ramo corrente (rimosso al backtrack): evita di
- * rientrare in un ciclo senza inquinare la cache. Se fosse un set che cresce
- * solo (o venisse controllato prima della cache), un modulo condiviso raggiunto
- * da due rami fratelli (A importa B e C, entrambi importano D) risulterebbe
- * troncato sul secondo ramo.
+ * rientrare in un ciclo senza inquinare la cache. La cache resta condivisa fra
+ * rami fratelli (A importa B e C, entrambi importano D), ma una rientranza va
+ * controllata prima della cache perche' il nodo che chiude il ciclo contribuisca
+ * con la propria sorgente.
  *
  * #922 item 2: il ramo ciclico non cacheava il proprio `''`, ma il chiamante
  * cacheava il COMBINATO che quel `''` aveva troncato. Con A→B→A la chiamata su
@@ -281,15 +281,22 @@ const resolveRelativeImport = (fromFile, spec) => {
  */
 export const createReachableSource = () => {
   const cache = new Map();
-  const walk = (file, ancestors) => {
-    if (cache.has(file)) return { text: cache.get(file), cyclic: false };
-    let ownSource;
+  const readOwnSource = (file) => {
     try {
-      ownSource = codeOnly(fs.readFileSync(file, 'utf-8'));
+      return codeOnly(fs.readFileSync(file, 'utf-8'));
     } catch {
-      return { text: '', cyclic: false };
+      return null;
     }
-    if (ancestors.has(file)) return { text: ownSource, cyclic: true };
+  };
+  const walk = (file, ancestors) => {
+    // La rientranza ha precedenza sulla cache: anche se un path equivalente
+    // fosse stato visitato da un altro ramo, il nodo che chiude il ciclo deve
+    // contribuire con la propria sorgente, non con un combinato appartenente
+    // a quel ramo.
+    if (ancestors.has(file)) return { text: readOwnSource(file) ?? '', cyclic: true };
+    if (cache.has(file)) return { text: cache.get(file), cyclic: false };
+    const ownSource = readOwnSource(file);
+    if (ownSource === null) return { text: '', cyclic: false };
     ancestors.add(file);
     const src = ownSource;
     let combined = src;

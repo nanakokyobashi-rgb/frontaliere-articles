@@ -411,6 +411,46 @@ describe('#874/#864/#845 — una sola porta di scrittura verso ai_model_scores/_
     const alias = finto('const env = process.env;\nprocess.env.LOCAL_LLM_URL;\n');
     assert.equal(alias.opachi.length, 1, 'un alias dell\'intero process.env sfugge all\'enumerazione');
 
+    const forwarding = finto([
+      'const child = { ...process.env };',
+      'const options = { env: process.env };',
+      'const keys = Object.keys(process.env);',
+      'const { env } = process;',
+      'process.env.LOCAL_LLM_URL;',
+    ].join('\n'));
+    assert.equal(
+      forwarding.opachi.length,
+      4,
+      'ogni forma di forwarding dell\'intero ambiente deve essere rumorosa, non passare in silenzio',
+    );
+    assert.deepEqual(forwarding.scoperti, [], 'il forwarding opaco non deve inventare un nome di endpoint');
+
+    const typed = finto([
+      'const { PIPPO_URL }: NodeJS.ProcessEnv = process.env;',
+      'process.env.LOCAL_LLM_URL;',
+    ].join('\n'));
+    assert.deepEqual(
+      typed.scoperti,
+      ['PIPPO_URL'],
+      'una destrutturazione tipizzata deve restare una lettura statica del nome',
+    );
+    assert.deepEqual(typed.opachi, [], 'il tipo fra `}` e `=` non deve trasformare la lettura in opaca');
+
+    const trailing = stripCommentLines([
+      'const real = process.env.LOCAL_LLM_URL; // process.env.PIPPO_URL',
+      'const dynamic = process.env[cfg.urlEnv]; // process.env[OTHER_URL]',
+      'const onlyComment = 1; // const { GHOST_URL } = process.env;',
+    ].join('\n'));
+    const trailingScan = scanEnvReads(trailing);
+    assert.deepEqual([...trailingScan.names], ['LOCAL_LLM_URL'],
+      'un nome citato solo nel commento in coda non deve diventare una lettura');
+    assert.equal(trailingScan.opaque.length, 1,
+      'il commento in coda non deve aggiungere una seconda lettura opaca');
+
+    const markerInCode = scanEnvReads("const note = 'env-scan: documentazione';\nprocess.env[cfg.urlEnv];");
+    assert.equal(markerInCode.opaque.length, 1,
+      'env-scan dentro una stringa non deve esentare una lettura dinamica');
+
     // E l'esenzione esplicita spegne il rumore, ma solo con un motivo scritto.
     assert.deepEqual(
       finto('const u = process.env[cfg.urlEnv]; // env-scan: chiave da una tabella di provider\nprocess.env.LOCAL_LLM_URL;\n').opachi,

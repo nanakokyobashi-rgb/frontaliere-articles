@@ -12,15 +12,20 @@
  * dove avrebbe potuto stare — ha il `push:` scopato a `main`, cioè il trigger
  * OPPOSTO a quello che serve qui.
  *
- * Questo test NON reimplementa il workflow. Legge lo YAML shipped e
- * asserisce le cose che, se sparissero, riaprirebbero il silenzio:
+ * Il test legge lo YAML shipped, controlla le invarianti strutturali ed esegue
+ * lo script con un `gh` simulato per osservare i verdetti che, se sparissero,
+ * riaprirebbero il silenzio:
  *   (a) il blocco `on` prima di `jobs` contiene `push`;
  *   (b) esiste uno step/job che parla di MERGED o orphan push;
- *   (c) il job `auto-merge` è gated via dal trigger push.
+ *   (c) un push già contenuto e un secondo giro sulla stessa head non
+ *       commentano la PR vecchia;
+ *   (d) una PR chiusa senza merge e un push senza PR hanno verdetti distinti.
  */
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
+import { spawnSync } from 'node:child_process';
 import fs from 'node:fs';
+import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -37,6 +42,88 @@ const active = (text) =>
     .join('\n');
 
 const ATTIVE = active(src);
+
+const runAt = src.indexOf('        run: |\n');
+assert.notEqual(runAt, -1, 'orphan-push-warn.yml non contiene lo script del job');
+const RUN = src.slice(runAt)
+  .split('\n')
+  .slice(1)
+  .map((line) => line.startsWith('          ') ? line.slice(10) : line)
+  .join('\n');
+
+function runWorkflow(scenario) {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'orphan-push-warn-'));
+  const bin = path.join(dir, 'bin');
+  fs.mkdirSync(bin);
+  const commentFile = path.join(dir, 'comment');
+  fs.writeFileSync(path.join(bin, 'sleep'), '#!/bin/sh\nexit 0\n', { mode: 0o755 });
+  fs.writeFileSync(path.join(bin, 'gh'), `#!/bin/sh
+set -eu
+args="$*"
+if printf '%s' "$args" | grep -Fq -- '--state open'; then
+  printf '%s' "$ORPHAN_TEST_OPEN"
+  exit 0
+fi
+if printf '%s' "$args" | grep -Fq -- '--state all' && printf '%s' "$args" | grep -Fq -- '--jq'; then
+  printf '%s' "$ORPHAN_TEST_TARGET"
+  exit 0
+fi
+if printf '%s' "$args" | grep -Fq -- '--state all'; then
+  printf '%s' "$ORPHAN_TEST_AFTER_ROUND"
+  exit 0
+fi
+if printf '%s' "$args" | grep -Fq -- '/comments'; then
+  printf '%s' "$ORPHAN_TEST_COMMENTS"
+  exit 0
+fi
+if printf '%s' "$args" | grep -Fq -- '/compare/'; then
+  if printf '%s' "$args" | grep -Fq -- "...$ORPHAN_TEST_DEFAULT_BRANCH"; then
+    printf '%s' "$ORPHAN_TEST_MAIN_STATUS"
+  elif printf '%s' "$args" | grep -Fq -- "...$ORPHAN_TEST_MERGE_OID"; then
+    printf '%s' "$ORPHAN_TEST_MERGE_STATUS"
+  else
+    printf '%s' "$ORPHAN_TEST_HEAD_STATUS"
+  fi
+  exit 0
+fi
+if [ "\${1:-}" = pr ] && [ "\${2:-}" = comment ]; then
+  printf '%s' "$*" > "$ORPHAN_TEST_COMMENT_FILE"
+  exit 0
+fi
+exit 1
+`, { mode: 0o755 });
+
+  const env = {
+    ...process.env,
+    GH_TOKEN: 'test-token',
+    REPO: 'owner/repo',
+    DEFAULT_BRANCH: 'main',
+    HEAD_REF: 'feature/reused',
+    SHA: 'push-sha',
+    PUSHED_AT: '2026-09-11T06:00:00Z',
+    ORPHAN_TEST_COMMENT_FILE: commentFile,
+    ORPHAN_TEST_DEFAULT_BRANCH: 'main',
+    ORPHAN_TEST_MERGE_OID: scenario.mergeOid || 'merge-oid',
+    ORPHAN_TEST_OPEN: '',
+    ORPHAN_TEST_TARGET: '{}',
+    ORPHAN_TEST_AFTER_ROUND: '[]',
+    ORPHAN_TEST_MAIN_STATUS: 'diverged',
+    ORPHAN_TEST_MERGE_STATUS: 'diverged',
+    ORPHAN_TEST_HEAD_STATUS: 'diverged',
+    ORPHAN_TEST_COMMENTS: '[]',
+    ...scenario,
+    PATH: `${bin}:${process.env.PATH}`,
+  };
+  try {
+    const result = spawnSync('bash', ['-c', RUN], { env, encoding: 'utf8' });
+    return {
+      ...result,
+      comment: fs.existsSync(commentFile) ? fs.readFileSync(commentFile, 'utf8') : '',
+    };
+  } finally {
+    fs.rmSync(dir, { recursive: true, force: true });
+  }
+}
 
 /** Testa del file: tutto ciò che precede `jobs:`. È lo stesso taglio della
  *  metrica della scheda; qui si asserisce sul testo attivo, non sui commenti. */
@@ -106,16 +193,20 @@ test('(d) il job warn-orphan-push ignora il push di cancellazione branch del pro
   );
 });
 
-test('(e) seleziona anche una PR chiusa senza merge e controlla la head mergiata', () => {
+test('(e) seleziona anche una PR chiusa senza merge e controlla le containment proof', () => {
   const job = jobBlock(ATTIVE, 'warn-orphan-push');
   assert.ok(job, 'job `warn-orphan-push` non trovato');
   assert.match(job, /--state all/);
   assert.match(job, /mergedAt/);
+  assert.match(job, /closedAt/);
   assert.match(job, /headRefOid/);
+  assert.match(job, /mergeCommit/);
   assert.match(job, /select\(\.state != "OPEN"\)/);
   assert.match(job, /DEFAULT_BRANCH/);
   assert.match(job, /repos\/\$\{REPO\}\/compare\/\$\{SHA\}\.\.\.\$\{DEFAULT_BRANCH\}/);
-  assert.match(job, /AFTER_MERGE/);
+  assert.match(job, /MERGE_COMMIT_OID/);
+  assert.match(job, /repos\/\$\{REPO\}\/compare\/\$\{SHA\}\.\.\.\$\{MERGE_COMMIT_OID\}/);
+  assert.match(job, /AFTER_ROUND/);
   assert.match(job, /NEW_ROUND/);
   assert.match(job, /createdAt/);
   assert.match(job, /for attempt in 1 2 3/);
@@ -128,7 +219,10 @@ test('(e) seleziona anche una PR chiusa senza merge e controlla la head mergiata
   assert.match(job, /CONTAINMENT.*\n[\s\S]*\[ \"\$CONTAINMENT\" = "ahead" \]/);
   assert.match(job, /TARGET='\{\}'/);
   assert.doesNotMatch(job, /\$\{TARGET:-\{\}\}/);
-  assert.doesNotMatch(job, /PUSHED_AT/);
+  assert.match(job, /PUSHED_AT/);
+  assert.match(job, /REALLY ORPHAN/);
+  assert.match(job, /CLOSED WITHOUT MERGE/);
+  assert.match(job, /classificazione sospesa/);
 });
 
 test('(f) il warning orfano e\' deduplicato con un marker sulla PR', () => {
@@ -142,6 +236,78 @@ test('(f) il warning orfano e\' deduplicato con un marker sulla PR', () => {
     job.indexOf('echo "::warning::Push orfano:') < job.indexOf("MARKER='"),
     'l annotation per-SHA deve precedere il gate di dedup per-PR',
   );
+});
+
+test('(g) il verdetto osservabile distingue merged contenuto, closed-unmerged, secondo giro e really orphan', () => {
+  const merged = runWorkflow({
+    ORPHAN_TEST_TARGET: JSON.stringify({
+      number: 41,
+      createdAt: '2026-09-11T04:00:00Z',
+      closedAt: '2026-09-11T06:05:00Z',
+      mergedAt: '2026-09-11T06:05:00Z',
+      headRefOid: 'head-oid',
+      mergeCommit: { oid: 'merge-oid' },
+    }),
+    ORPHAN_TEST_MAIN_STATUS: 'diverged',
+    ORPHAN_TEST_MERGE_STATUS: 'ahead',
+  });
+  assert.equal(merged.status, 0);
+  assert.match(merged.stdout, /merge commit merge-oid/);
+  assert.equal(merged.comment, '', 'un push gia\' antenato del merge commit non deve commentare');
+
+  const closed = runWorkflow({
+    ORPHAN_TEST_TARGET: JSON.stringify({
+      number: 42,
+      createdAt: '2026-09-11T04:00:00Z',
+      closedAt: '2026-09-11T06:05:00Z',
+      headRefOid: 'head-oid',
+      mergeCommit: { oid: null },
+    }),
+    ORPHAN_TEST_COMMENTS: '[]',
+  });
+  assert.equal(closed.status, 0);
+  assert.match(closed.stdout, /CLOSED WITHOUT MERGE/);
+  assert.match(closed.comment, /orphan-push-warn/);
+
+  const secondRound = runWorkflow({
+    ORPHAN_TEST_TARGET: JSON.stringify({
+      number: 43,
+      createdAt: '2026-09-11T04:00:00Z',
+      closedAt: '2026-09-11T06:05:00Z',
+      mergedAt: '2026-09-11T06:05:00Z',
+      headRefOid: 'head-oid',
+      mergeCommit: { oid: 'merge-oid' },
+    }),
+    ORPHAN_TEST_AFTER_ROUND: '[{"number":44,"createdAt":"2026-09-11T06:06:00Z"}]',
+  });
+  assert.equal(secondRound.status, 0);
+  assert.match(secondRound.stdout, /Secondo giro: PR #44/);
+  assert.equal(secondRound.comment, '', 'il secondo giro sulla stessa head non deve commentare la PR precedente');
+
+  const dedup = runWorkflow({
+    ORPHAN_TEST_TARGET: JSON.stringify({
+      number: 45,
+      createdAt: '2026-09-11T04:00:00Z',
+      closedAt: '2026-09-11T06:05:00Z',
+      mergedAt: '2026-09-11T06:05:00Z',
+      headRefOid: 'head-oid',
+      mergeCommit: { oid: 'merge-oid' },
+    }),
+    PUSHED_AT: '2026-09-11T06:06:00Z',
+    ORPHAN_TEST_HEAD_STATUS: 'ahead',
+    ORPHAN_TEST_COMMENTS: '<!-- orphan-push-warn -->',
+  });
+  assert.equal(dedup.status, 0);
+  assert.match(dedup.stdout, /Push orfano: commit push-sha/);
+  assert.match(dedup.stdout, /nessun commento duplicato/);
+  assert.equal(dedup.comment, '', 'il secondo passaggio dello stesso push non deve duplicare il commento');
+
+  const reallyOrphan = runWorkflow({
+    ORPHAN_TEST_TARGET: '{}',
+  });
+  assert.equal(reallyOrphan.status, 0);
+  assert.match(reallyOrphan.stdout, /REALLY ORPHAN/);
+  assert.equal(reallyOrphan.comment, '', 'un push senza PR non ha una destinazione per il commento');
 });
 
 // Il test (c) — «il job `auto-merge` e' gateato su `event_name != 'push'`» —
