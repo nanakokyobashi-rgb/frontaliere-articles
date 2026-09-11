@@ -4897,6 +4897,14 @@ function coerceBodyFields(content) {
   }
 }
 
+/** Coerce every locale's bodyN fields before any locale gate reads them. */
+function coerceContentBodyFields(contentByLocale) {
+  if (!contentByLocale || typeof contentByLocale !== 'object') return;
+  for (const localeContent of Object.values(contentByLocale)) {
+    if (localeContent && typeof localeContent === 'object') coerceBodyFields(localeContent);
+  }
+}
+
 // I body deterministici dei produttori secondari hanno una forma diversa da
 // quella prodotta dall'LLM. Le euristiche di troncamento sono utili sul testo
 // LLM, ma su un bollettino strutturato (liste, tabelle, frammenti di dati)
@@ -4907,6 +4915,16 @@ const DETERMINISTIC_BODY_HEURISTIC_CODES = new Set([
   'truncated-bold',
   'incomplete-ending',
   'leaked-prompt-scaffolding',
+]);
+
+// Among major findings, only these two are deterministic cross-locale
+// evidence that a producer must not publish. Other major findings can be
+// useful diagnostics for a structured producer, but are not promoted to a
+// publication block here; in particular this keeps Italian-adjudicated
+// declassifications and policy heuristics out of the deterministic bypass.
+const DETERMINISTIC_MAJOR_BLOCKING_CODES = new Set([
+  'translation-number-dropped',
+  'translation-number-added',
 ]);
 
 function runArticleFactualityGates({ deterministicBodySections = [], ...params } = {}) {
@@ -4922,7 +4940,15 @@ function runArticleFactualityGates({ deterministicBodySections = [], ...params }
       return String(issue.message || '').includes(`[${label}]`);
     });
   });
-  const blocking = issues.filter((issue) => issue.severity === 'critical' || issue.severity === 'major');
+  // The shape exemption is section-scoped. Keep global majors on the base
+  // gate's previous policy (critical-only), but admit the two named
+  // translation-number findings before checking the section label: their
+  // emitters identify the locale (`[en]`), not a deterministic body section.
+  const blocking = issues.filter((issue) => {
+    if (issue.severity === 'critical') return true;
+    if (issue.severity !== 'major') return false;
+    return DETERMINISTIC_MAJOR_BLOCKING_CODES.has(issue.code);
+  });
   return { ...result, issues, blocking, passed: blocking.length === 0 };
 }
 
@@ -4932,6 +4958,7 @@ function runArticleFactualityGates({ deterministicBodySections = [], ...params }
  * which do not pass through the primary generation loop.
  */
 export function assertArticlePassesFactualityGates(data) {
+  coerceContentBodyFields(data?.content);
   const it = data?.content?.it;
   if (it) {
     const result = runArticleFactualityGates({
@@ -10627,6 +10654,7 @@ function validate(data, opts = {}) {
     err.qualityReject = true;
     throw err;
   }
+  coerceContentBodyFields(data.content);
   const itContent = data.content.it || data.content;
   // Coerce first: `collectBodySections()` intentionally ignores non-string
   // values, but an array/object body must be repaired or rejected, never

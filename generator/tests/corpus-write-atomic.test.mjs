@@ -277,12 +277,23 @@ test("l'elenco dei choke-point copre ogni scrittura di un artefatto pubblicato",
     + 'censimento sarebbe verde perche\' cieco.');
 
   // #922 item 3: `blind` copre CHOKE_POINTS + COVERED_ELSEWHERE, cioe' le due
-  // liste dei file che DEVONO essere visti. Le altre due sono scuse — dicono
-  // «questo write l'abbiamo guardato e va bene cosi'» — e nessuno verificava
-  // che corrispondessero ancora a un match. Una voce morta li' e' peggio che
-  // inutile: scusa in anticipo un write futuro nello stesso file, senza che
-  // nessuna assertion lo dica. E' il caso di `refresh-events-dataset.mjs`,
-  // trovato a mano al round 2; da qui in avanti lo trova la suite.
+  // liste dei file che DEVONO essere visti. Prima di controllare le scuse,
+  // asserisci il caso pericoloso: un choke-point nuovo non censito. Altrimenti
+  // una voce morta nelle scuse nasconde il messaggio sul write che fa davvero
+  // danno e il prossimo agente legge solo un fallimento di bookkeeping.
+  const missing = found.filter((f) => !listed.has(f));
+  assert.deepEqual(missing, [],
+    'questi file scrivono un artefatto pubblicato ma non sono censiti: '
+    + `${missing.join(', ')}. Rendili atomici e aggiungili a CHOKE_POINTS, oppure `
+    + "mettili in REGENERABLE_STATE / NOT_WORKFLOW_DRIVEN con la ragione — "
+    + "e' esattamente il buco che le due review del round 2 hanno trovato.");
+
+  // Le altre due sono scuse — dicono «questo write l'abbiamo guardato e va
+  // bene cosi'» — e nessuno deve lasciare in piedi una voce che non
+  // corrisponde piu' a un match. Una voce morta e' peggio che inutile: scusa
+  // in anticipo un write futuro nello stesso file, senza che nessuna assertion
+  // lo dica. E' il caso di `refresh-events-dataset.mjs`, trovato a mano al
+  // round 2; da qui in avanti lo trova la suite.
   const excuses = [...REGENERABLE_STATE, ...NOT_WORKFLOW_DRIVEN, ...APPEND_ONLY_CHANNEL];
   const dead = excuses.filter((rel) => !found.includes(rel));
   assert.deepEqual(dead, [],
@@ -291,13 +302,6 @@ test("l'elenco dei choke-point copre ogni scrittura di un artefatto pubblicato",
     + 'niente e assolve in anticipo il prossimo write nello stesso file: '
     + 'togli la voce, oppure spiega nel commento perche\' il criterio non la '
     + 'vede piu\'.');
-
-  const missing = found.filter((f) => !listed.has(f));
-  assert.deepEqual(missing, [],
-    'questi file scrivono un artefatto pubblicato ma non sono censiti: '
-    + `${missing.join(', ')}. Rendili atomici e aggiungili a CHOKE_POINTS, oppure `
-    + "mettili in REGENERABLE_STATE / NOT_WORKFLOW_DRIVEN con la ragione — "
-    + "e' esattamente il buco che le due review del round 2 hanno trovato.");
 });
 
 test('nel file del ranking sono atomici ENTRAMBI i choke-point, non solo il body', () => {

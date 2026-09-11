@@ -1,5 +1,4 @@
 {
-  "https://www.tio.ch/dal-mondo/politica/1944135/ora-cambio-legale-senato-trump": "trump-ora-legale-senato-usa",
   "https://www.tio.ch/rubriche/ospite/1944152/iniziativa-neutralita-partito-sinistra-nato": "neutralita-iniziativa-sinistra",
   "https://www.tio.ch/ticino/attualita/1944153/i-luoghi-strategici-del-traffico-aereo-diventano-mete-escursionistiche": "luoghi-strategici-del-traffico-aereo-diventano-mete-escursionistiche",
   "https://www.tio.ch/svizzera/economia/1944148/produzione-foraggio-latte-produttori-calo-siccita-situazione-formaggio-canicola-prova": "canicola-siccita-produttori-formaggio-svizzera",
@@ -2305,6 +2304,11 @@
   "https://www.swissinfo.ch/ita/nuovo-investimento-svizzero-in-usa%2c-lonza-costruir%c3%a0-nuova-fabbrica/92037653": {
     "articleId": "investimento-svizzero-usa-lonza",
     "ts": "2026-09-11T00:33:25.918Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/commissione-parlamento-europeo-approva-accordi-svizzera-ue/92034491": {
+    "articleId": "commissione-ue-approva-accordi-svizzera",
+    "ts": "2026-09-11T04:18:19.695Z",
     "keyForm": 2
   }
 }

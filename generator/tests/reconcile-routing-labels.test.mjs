@@ -25,12 +25,17 @@
  */
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
+import { spawnSync } from 'node:child_process';
 import fs from 'node:fs';
+import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { reconciliations, ROUTE_CONFLICTS } from '../../scripts/ci/reconcile-routing-labels.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
+const ROUTER = path.join(ROOT, 'scripts/ci/reconcile-routing-labels.mjs');
+const ROUTER_SRC = fs.readFileSync(ROUTER, 'utf8');
+const DECOMPOSE = fs.readFileSync(path.join(ROOT, '.github/workflows/issue-decompose.yml'), 'utf8');
 const NOW = Date.parse('2026-09-06T12:00:00Z');
 const agoSec = (s) => new Date(NOW - s * 1000).toISOString();
 const iss = (number, labels, ageSec = 600) => ({
@@ -152,4 +157,59 @@ test('la riconciliazione non usa il PAT: rimuove una label, non deve svegliare n
     assert.ok(!/GITHUB_PAT_NANAKO/.test(step), `${name}: col PAT una rimozione emetterebbe eventi che nessuno deve ascoltare`);
     assert.match(step, /continue-on-error: true/, `${name}: una riconciliazione mancata non deve rendere rossa la run`);
   }
+});
+
+test('`--issue` accetta solo interi positivi e rifiuta `0` prima di leggere GitHub', () => {
+  const result = spawnSync(process.execPath, [ROUTER, '--issue', '0'], {
+    encoding: 'utf8',
+    env: { ...process.env, GH_REPO: 'nanakokyobashi-rgb/frontaliere-articles' },
+  });
+  assert.equal(result.status, 1, `${result.stdout}\n${result.stderr}`);
+  assert.match(result.stderr, /--issue richiede un numero intero positivo/);
+});
+
+test('il riepilogo distingue successi/fallimenti e il writer decompose e\' atomico', () => {
+  assert.match(ROUTER_SRC, /let reconciled = 0/);
+  assert.match(ROUTER_SRC, /reconciled\+\+/);
+  assert.match(ROUTER_SRC, /let failed = 0/);
+  assert.match(ROUTER_SRC, /failed\+\+/);
+  assert.match(ROUTER_SRC, /Riconciliazioni: \$\{reconciled\}/);
+  assert.match(ROUTER_SRC, /reconcile: \$\{failed\} falliti su \$\{todo\.length\}/);
+
+  const transitions = DECOMPOSE.split('\n').filter((line) => line.includes('gh issue edit'));
+  assert.ok(transitions.length >= 4, 'le transizioni di stato del prompt sono sparite');
+  for (const line of transitions) {
+    assert.match(line, /--add-label/);
+    assert.match(line, /--remove-label/);
+  }
+});
+
+test('una rimozione fallita non entra nel totale delle riconciliazioni', () => {
+  const fakeBin = fs.mkdtempSync(path.join(os.tmpdir(), 'reconcile-gh-'));
+  const fakeGh = path.join(fakeBin, 'gh');
+  fs.writeFileSync(fakeGh, `#!/bin/sh
+if [ "$1" = "issue" ] && [ "$2" = "list" ]; then
+  printf '%s\\n' '[{"number":1,"labels":[{"name":"agent:fix"},{"name":"agent:fix-queued"}],"updatedAt":"1970-01-01T00:00:00Z"},{"number":2,"labels":[{"name":"agent:fix"},{"name":"agent:fix-queued"}],"updatedAt":"1970-01-01T00:00:00Z"}]'
+  exit 0
+fi
+if [ "$1" = "issue" ] && [ "$2" = "edit" ]; then
+  [ "$3" = "2" ] && exit 1
+  exit 0
+fi
+exit 0
+`);
+  fs.chmodSync(fakeGh, 0o755);
+  const result = spawnSync(process.execPath, [ROUTER], {
+    encoding: 'utf8',
+    env: {
+      ...process.env,
+      PATH: `${fakeBin}:${process.env.PATH}`,
+      GH_REPO: '',
+      GITHUB_REPOSITORY: '',
+      MIN_AGE_SEC: '0',
+    },
+  });
+  assert.equal(result.status, 0, `${result.stdout}\n${result.stderr}`);
+  assert.match(result.stdout, /Riconciliazioni: 1\./);
+  assert.match(result.stdout, /reconcile: 1 falliti su 2/);
 });
