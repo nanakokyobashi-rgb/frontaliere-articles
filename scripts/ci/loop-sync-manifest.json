@@ -303,9 +303,9 @@
       "path": "scripts/ci/followup-resolution-match.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "12d9d4634e35abb2",
-        "corpus": "12d9d4634e35abb2",
-        "alignedAt": "2026-09-10"
+        "site": "a7744e18a9fbdea8",
+        "corpus": "a7744e18a9fbdea8",
+        "alignedAt": "2026-09-11"
       }
     },
     {
@@ -341,9 +341,9 @@
       "path": "scripts/ci/pr-autorebase.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "cc5a750c2f699595",
-        "corpus": "cc5a750c2f699595",
-        "alignedAt": "2026-09-10"
+        "site": "4c6da30faffb631d",
+        "corpus": "4c6da30faffb631d",
+        "alignedAt": "2026-09-11"
       }
     },
     {
@@ -397,9 +397,9 @@
       "path": "scripts/ci/lib/prComments.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "d704b6847ba24f8d",
-        "corpus": "d704b6847ba24f8d",
-        "alignedAt": "2026-08-07"
+        "site": "a5fe209f91e8d29c",
+        "corpus": "a5fe209f91e8d29c",
+        "alignedAt": "2026-09-11"
       }
     },
     {
@@ -3223,8 +3223,8 @@
       "sitePath": ".github/corpus-workflows/contract.json",
       "mode": "identical",
       "baseline": {
-        "site": "81744404173f4ef8",
-        "corpus": "81744404173f4ef8",
+        "site": "21350a33415fb381",
+        "corpus": "21350a33415fb381",
         "alignedAt": "2026-09-11"
       }
     },
@@ -3363,8 +3363,8 @@
       "sitePath": ".github/corpus-workflows/observers/scripts/lib/crawler-generation-token.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "024ff3be7962dd9f",
-        "corpus": "024ff3be7962dd9f",
+        "site": "4bc0d4d514be3f67",
+        "corpus": "4bc0d4d514be3f67",
         "alignedAt": "2026-09-11"
       }
     },

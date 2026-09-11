@@ -138,13 +138,36 @@ test('outOfScope: un path che ha già il suo trasporto non ne prende un secondo'
 });
 
 test('.github/workflows/ resta fuori: il token del ciclo non ha quello scope', () => {
-  const v = transportVerdict(
-    twin({ path: '.github/workflows/tests.yml' }),
-    { site: 'bbbb', corpus: 'aaaa' },
-    BASE,
-  );
-  assert.equal(v.transport, false, 'un push rifiutato DOPO la scrittura fallisce in fondo invece che all\'inizio');
-  assert.match(v.reason, /workflows/);
+  const previous = process.env.PAT_WORKFLOWS_SCOPE;
+  delete process.env.PAT_WORKFLOWS_SCOPE;
+  try {
+    const v = transportVerdict(
+      twin({ path: '.github/workflows/tests.yml' }),
+      { site: 'bbbb', corpus: 'aaaa' },
+      BASE,
+    );
+    assert.equal(v.transport, false, 'un push rifiutato DOPO la scrittura fallisce in fondo invece che all\'inizio');
+    assert.match(v.reason, /workflows/);
+  } finally {
+    if (previous === undefined) delete process.env.PAT_WORKFLOWS_SCOPE;
+    else process.env.PAT_WORKFLOWS_SCOPE = previous;
+  }
+});
+
+test('.github/workflows/ scende quando la sonda autorizza il token di push', () => {
+  const previous = process.env.PAT_WORKFLOWS_SCOPE;
+  process.env.PAT_WORKFLOWS_SCOPE = 'true';
+  try {
+    const v = transportVerdict(
+      twin({ path: '.github/workflows/tests.yml' }),
+      { site: 'bbbb', corpus: 'aaaa' },
+      BASE,
+    );
+    assert.equal(v.transport, true);
+  } finally {
+    if (previous === undefined) delete process.env.PAT_WORKFLOWS_SCOPE;
+    else process.env.PAT_WORKFLOWS_SCOPE = previous;
+  }
 });
 
 test('un path del manifest non è una destinazione fidata', () => {
