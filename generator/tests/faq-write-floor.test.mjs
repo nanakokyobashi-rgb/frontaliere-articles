@@ -34,6 +34,7 @@ import {
   faqSourceFingerprint,
   minPairsForWrite,
   nextFaqRejection,
+  normalizeFaqLimit,
   selectFaqIssuesForProcessing,
   shouldSkipFaqRejection,
 } from '../scripts/fix-faq-locales.mjs';
@@ -43,6 +44,12 @@ const BATCH = path.join(QUI, '..', 'scripts', 'batch-add-faq-to-articles.mjs');
 const FIX = path.join(QUI, '..', 'scripts', 'fix-faq-locales.mjs');
 
 const pairs = (n) => Array.from({ length: n }, (_, i) => ({ q: `domanda ${i}`, a: `risposta ${i}` }));
+
+test('un limite FAQ assente o non numerico non trasforma il batch in uno slice vuoto', () => {
+  assert.equal(normalizeFaqLimit(undefined), Infinity);
+  assert.equal(normalizeFaqLimit('non-numerico'), Infinity);
+  assert.equal(normalizeFaqLimit('2'), 2);
+});
 
 test('il pavimento e\' MIN_FAQ_PAIRS quando la sorgente ne ha almeno altrettante', () => {
   assert.equal(MIN_FAQ_PAIRS, 3);

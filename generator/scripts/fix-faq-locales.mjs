@@ -72,7 +72,12 @@ const HELP = args.includes('--help') || args.includes('-h');
 // generate-border-wait-ranking-article.mjs, che riscrisse quattro body.
 const DRY_RUN = args.includes('--dry-run') || process.env.DRY_RUN === '1';
 const limitIdx = args.indexOf('--limit');
-const LIMIT = limitIdx >= 0 ? parseInt(args[limitIdx + 1], 10) : Infinity;
+export function normalizeFaqLimit(value) {
+  const parsed = parseInt(value, 10);
+  return Number.isFinite(parsed) ? parsed : Infinity;
+}
+
+const LIMIT = limitIdx >= 0 ? normalizeFaqLimit(args[limitIdx + 1]) : Infinity;
 // Riparazione pura dei file gia' scritti con l'escape rotto: nessuna chiamata
 // di traduzione, nessun modello. Opt-in, e la run schedulata NON lo passa.
 const REESCAPE_BROKEN = args.includes('--reescape-broken');
