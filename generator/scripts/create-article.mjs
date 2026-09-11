@@ -16707,6 +16707,11 @@ export async function registerArticleFiles(data, opts = {}) {
   // Prima di clampSeoDescriptions: troncare a 160 caratteri un campo che e' il
   // segnaposto lo renderebbe solo un segnaposto piu' corto.
   sanitizePromptPlaceholders(data);
+  // La postcondizione sui nomi propri deve coprire anche i producer secondari
+  // che entrano direttamente qui: free-MT rifiutato e fallback LLM possono
+  // perdere un comune dall'excerpt, e l'imageAlt del giornalista non passa dal
+  // percorso AI primario.
+  preserveMunicipalityNamesInMetadata(data);
   // Stessa ragione, stesso percorso condiviso: i quattro produttori secondari
   // (daily-brief, events-digest, border-wait-ranking, journalist) importano
   // registerArticleFiles() direttamente e non passano mai dallo Step 3a.2 del
