@@ -124,6 +124,17 @@ jobs:
         continue-on-error: true
         run: node generator/scripts/load-rc-env.mjs
 
+      # La copia usa il PAT caricato sopra, non il GITHUB_TOKEN del workflow.
+      # Sondiamo quindi proprio quell'identità: se il PAT ha `workflow`, il
+      # trasporto può includere i gemelli sotto `.github/workflows/`; altrimenti
+      # `unsafeTarget()` resta fail-closed e li lascia nel canale manuale.
+      - name: Probe scope workflows del token di trasporto
+        if: steps.guard.outputs.open_transports == '0'
+        continue-on-error: true
+        env:
+          PUSH_TOKEN: ${{ env.GITHUB_PAT_NANAKO }}
+        run: node scripts/ci/probe-workflow-scope.mjs
+
       # Il dry-run gira SEMPRE, anche senza PAT: il report nel log e' gia' la
       # meta' osservativa, e senza di lui un run senza credenziali non
       # lascerebbe traccia di cosa avrebbe portato.

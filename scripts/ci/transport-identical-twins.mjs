@@ -204,10 +204,12 @@ const sha256 = (buf) => crypto.createHash('sha256').update(buf).digest('hex').sl
  * Windows farebbero uscire la copia dal checkout. È l'unico punto dello script
  * che scrive, quindi è l'unico punto dove serve.
  *
- * `.github/workflows/` è escluso a parte, e non per la sicurezza del path: il
- * token del ciclo non ha lo scope `workflows`, quindi una copia lì produrrebbe
- * un push RIFIUTATO dopo aver scritto il file — cioè una passata che fallisce
- * in fondo invece che all'inizio. Quei 20 gemelli restano una copia a mano.
+ * `.github/workflows/` è escluso a parte quando il token di push non dichiara
+ * lo scope `workflows`, quindi una copia lì produrrebbe un push RIFIUTATO dopo
+ * aver scritto il file — cioè una passata che fallisce in fondo invece che
+ * all'inizio. La sonda `probe-workflow-scope.mjs` scrive il verdetto per
+ * l'identità reale del push; in assenza di una sonda positiva il rifiuto resta
+ * fail-closed.
  */
 export function unsafeTarget(rel) {
   if (typeof rel !== 'string' || rel.trim() === '') return 'path vuoto';
@@ -216,7 +218,9 @@ export function unsafeTarget(rel) {
   if (rel.split('/').includes('..')) return 'path risalente';
   const abs = path.resolve(ROOT, rel);
   if (abs !== ROOT && !abs.startsWith(ROOT + path.sep)) return 'destinazione fuori dal checkout';
-  if (rel.startsWith('.github/workflows/')) return 'workflow: il token del ciclo non ha lo scope `workflows`';
+  if (rel.startsWith('.github/workflows/') && process.env.PAT_WORKFLOWS_SCOPE !== 'true') {
+    return 'workflow: il token del ciclo non ha lo scope `workflows`';
+  }
   return null;
 }
 
