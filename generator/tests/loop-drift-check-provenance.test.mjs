@@ -92,6 +92,20 @@ test('rate limit di provenienza rende actionable la entry e dichiara il resto no
   assert.match(verdict.detail, /entry successive.*non verificate/i);
 });
 
+test('rate limit di provenienza conserva il verdetto locale e lo annota nel detail', () => {
+  const verdict = provenanceRateLimitVerdict(
+    { path: 'scripts/example.mjs', mode: 'identical', baseline: { site: 'old', corpus: 'old' } },
+    { site: 'new-site', corpus: 'new-corpus' },
+    'GET commits → rate limit anonimo',
+    { state: 'site-ahead', actionable: true, headline: 'il sito è avanti', detail: 'hash locali già confrontati' },
+  );
+  assert.equal(verdict.state, 'site-ahead');
+  assert.equal(verdict.provenanceState, 'provenance-rate-limited');
+  assert.equal(verdict.actionable, true);
+  assert.match(verdict.detail, /hash locali già confrontati/);
+  assert.match(verdict.detail, /entry successive.*non verificate/i);
+});
+
 test('la passata di provenienza si ferma al rate limit invece di accumulare note verdi', async () => {
   const fs = await import('node:fs');
   const url = await import('node:url');
@@ -101,6 +115,11 @@ test('la passata di provenienza si ferma al rate limit invece di accumulare note
   assert.match(source, /const provenancePass = \{ rateLimited: false/);
   assert.match(source, /if \(provenancePass\.rateLimited\)/);
   assert.match(source, /provenanceRateLimitVerdict\(entry, now/);
+  assert.match(source, /section\('provenance-rate-limited'/);
+  assert.ok(
+    source.indexOf('if (provenance.ghosts.length)') < source.indexOf('else if (provenance.rateLimited)'),
+    'i ghost devono restare prioritari rispetto alla nota di rate limit',
+  );
   assert.match(source, /e instanceof CrossRepoRateLimitError/);
 });
 

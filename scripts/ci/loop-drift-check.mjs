@@ -868,14 +868,20 @@ async function checkBaselineProvenance(entry, now, passState = { rateLimited: fa
   };
 }
 
-function provenanceRateLimitVerdict(entry, now, detail) {
-  return {
-    path: entry.path,
-    mode: entry.mode,
+function provenanceRateLimitVerdict(entry, now, detail, normalVerdict = null) {
+  const rateLimitNote = `${detail || 'La verifica storica non ha potuto leggere GitHub.'} Le entry successive restano non verificate nella stessa passata.`;
+  const verdict = normalVerdict || {
     state: 'provenance-rate-limited',
     actionable: true,
     headline: 'provenienza non verificata: rate limit GitHub',
-    detail: `${detail || 'La verifica storica non ha potuto leggere GitHub.'} Le entry successive restano non verificate nella stessa passata.`,
+  };
+  return {
+    path: entry.path,
+    mode: entry.mode,
+    ...verdict,
+    actionable: true,
+    ...(normalVerdict ? { provenanceState: 'provenance-rate-limited' } : {}),
+    detail: [verdict.detail, rateLimitNote].filter(Boolean).join(' '),
     hashes: { ...now, baseline: entry.baseline || {} },
   };
 }
@@ -1844,22 +1850,18 @@ async function main() {
     // del sito. Questo controllo è ORTOGONALE al verdetto sopra: anche una
     // entry che `classify()` giudica innocua puo' nascondere una baseline
     // fantasma, e qui la si scopre a prescindere dal `mode`.
-    let provenance = { ghosts: [], detail: '' };
+    let provenance = { ghosts: [], detail: '', rateLimited: false, rateLimitDetail: '', siteBaselineLastSeenAt: null };
     if (!NO_PROVENANCE) {
       if (provenancePass.rateLimited) {
-        results.push(provenanceRateLimitVerdict(entry, now, provenancePass.detail));
-        continue;
-      }
-      try {
-        provenance = await checkBaselineProvenance(entry, now, provenancePass);
-      } catch (e) {
-        // PROCEED-SAFE: un controllo di provenienza rotto non deve inghiottire
-        // il resto del report.
-        provenance = { ghosts: [], detail: `verifica di provenienza fallita: ${String(e.message || e).slice(0, 120)}` };
-      }
-      if (provenance.rateLimited) {
-        results.push(provenanceRateLimitVerdict(entry, now, provenance.rateLimitDetail || provenance.detail));
-        continue;
+        provenance = { ...provenance, rateLimited: true, rateLimitDetail: provenancePass.detail };
+      } else {
+        try {
+          provenance = await checkBaselineProvenance(entry, now, provenancePass);
+        } catch (e) {
+          // PROCEED-SAFE: un controllo di provenienza rotto non deve inghiottire
+          // il resto del report.
+          provenance = { ...provenance, detail: `verifica di provenienza fallita: ${String(e.message || e).slice(0, 120)}` };
+        }
       }
     }
 
@@ -1870,9 +1872,18 @@ async function main() {
         state: 'ghost-baseline',
         actionable: true,
         headline: `baseline.${provenance.ghosts.join(' e baseline.')} non corrisponde a nessun blob mai esistito`,
-        detail: provenance.detail,
+        detail: [provenance.detail, provenance.rateLimitDetail].filter(Boolean).join(' '),
         hashes: { ...now, baseline: base },
       });
+    } else if (provenance.rateLimited) {
+      // Il verdetto locale resta valido: il rate limit impedisce solo la prova
+      // storica, non cancella drift o convergenza già calcolati in memoria.
+      results.push(provenanceRateLimitVerdict(
+        entry,
+        now,
+        [provenance.detail, provenance.rateLimitDetail].filter(Boolean).join(' '),
+        verdict,
+      ));
     } else {
       // Issue #303: un `identical` in `site-ahead` da oltre la soglia non è
       // latenza, è un gemello che nessun trasporto porta. Escalation del solo
@@ -2064,7 +2075,9 @@ async function main() {
   // sulla stessa issue invece di aprirne una nuova.
   if (AS_ISSUE && actionable.length) {
     const section = (state, title) => {
-      const rows = actionable.filter((r) => r.state === state);
+      const rows = state === 'provenance-rate-limited'
+        ? actionable.filter((r) => r.provenanceState === state)
+        : actionable.filter((r) => r.state === state && r.provenanceState !== 'provenance-rate-limited');
       if (!rows.length) return '';
       return [`### ${title}`, '', ...rows.map((r) => `- \`${r.path}\` — ${r.headline}\n  ${r.detail}`), ''].join('\n');
     };
@@ -2073,6 +2086,7 @@ async function main() {
       '',
       `${results.length} file sorvegliati, **${actionable.length}** richiedono una decisione.`,
       '',
+      section('provenance-rate-limited', '⚠️ Provenienza non verificata — verdetto locale conservato'),
       section('ghost-baseline', '💀 Baseline fantasma — mai esistita nella storia esaminata'),
       section('stranded-twin', `🚨 Gemello \`identical\` fermo indietro da oltre ${STRANDED_AFTER_DAYS} giorni — nessun trasporto lo porta`),
       section('corpus-only-twin', '🔴 Dichiarato `corpus-only`, ma il gemello esiste sul sito'),

@@ -513,6 +513,16 @@ export const SET_DESCRIPTORS = new Set([
  * parsato: cambia sotto, e l'aspettativa del test cambia con lui.
  */
 const READ_CALL_NAMES = new Set(['readFileSync', 'readFile', 'createReadStream', 'openSync', 'require', 'import']);
+// Solo per il caso speciale del manifest: queste chiamate trasformano o
+// verificano valori, non sono wrapper di lettura. Tutti gli altri nomi
+// sconosciuti restano un'incertezza e tengono l'accoppiamento, invece di
+// dichiarare chiuso il canale sulla base di una supposizione.
+const NON_CONTENT_CALL_NAMES = new Set([
+  'assert', 'deepEqual', 'equal', 'ok', 'strictEqual', 'includes', 'has', 'test', 'match', 'replace',
+  'split', 'trim', 'join', 'resolve', 'basename', 'dirname', 'parse', 'URL', 'log', 'warn', 'error',
+  'map', 'filter', 'some', 'every', 'find', 'keys', 'values', 'String', 'Number', 'Boolean', 'Date',
+  'Set', 'Map', 'Promise', 'Error',
+]);
 
 /**
  * Le parole dopo cui una `/` apre un literal regex e non è una divisione.
@@ -751,17 +761,23 @@ export function readsContentOf(rel, text) {
   const lit = `['"\`](?:\\.{1,2}/)*${escaped}['"\`]`;
   const literalRe = new RegExp(lit, 'g');
   const ranges = callRanges(src);
+  const manifestNeedsConservativeCoupling = rel === SET_MANIFEST_REL;
 
   for (const m of src.matchAll(literalRe)) {
     const at = m.index;
-    if (ranges.some((r) => at > r.open && at < r.close && isReadCall(r.name))) return true;
+    const containingCalls = ranges.filter((r) => at > r.open && at < r.close);
+    if (containingCalls.some((r) => isReadCall(r.name))) return true;
+    if (manifestNeedsConservativeCoupling && containingCalls.some((r) => !NON_CONTENT_CALL_NAMES.has(r.name))) return true;
   }
   if (new RegExp(`(?:^|[\\n;])\\s*(?:import|export)\\b[^;]*${lit}`).test(src)) return true;
 
   for (const m of src.matchAll(new RegExp(`(?:const|let|var)\\s+([A-Za-z_$][\\w$]*)\\s*=[^;]*${lit}`, 'g'))) {
-    if (ranges.some((r) => r.open < m.index && m.index < r.close && isReadCall(r.name))) continue;
+    const containingCalls = ranges.filter((r) => r.open < m.index && m.index < r.close);
+    if (containingCalls.some((r) => isReadCall(r.name))) continue;
     const alias = new RegExp(`\\b${m[1]}\\b`);
-    if (ranges.some((r) => r.open < src.length && alias.test(src.slice(r.open + 1, r.close)) && isReadCall(r.name))) return true;
+    const aliasCalls = ranges.filter((r) => r.open < src.length && alias.test(src.slice(r.open + 1, r.close)));
+    if (aliasCalls.some((r) => isReadCall(r.name))) return true;
+    if (manifestNeedsConservativeCoupling && aliasCalls.some((r) => !NON_CONTENT_CALL_NAMES.has(r.name))) return true;
   }
   return false;
 }

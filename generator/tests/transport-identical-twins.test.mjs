@@ -590,8 +590,12 @@ test('readsContentOf riconosce prefissi relativi e wrapper di lettura espliciti'
   );
   assert.equal(readsContentOf(rel, "loadJson('../../scripts/ci/loop-sync-manifest.json')"), true);
   assert.equal(readsContentOf(rel, "loadContentReader('../../scripts/ci/loop-sync-manifest.json')"), true);
-  assert.equal(readsContentOf(rel, "sharedContentReader('../../scripts/ci/loop-sync-manifest.json')"), false);
-  assert.equal(readsContentOf(rel, "sharedContentWriter('../../scripts/ci/loop-sync-manifest.json')"), false);
+  // Un wrapper non riconosciuto non dimostra una lettura, ma sul manifest
+  // l'incertezza tiene comunque l'accoppiamento: chiudere il canale qui
+  // lascerebbe il manifest fermo mentre il consumer scende.
+  assert.equal(readsContentOf(rel, "sharedContentReader('../../scripts/ci/loop-sync-manifest.json')"), true);
+  assert.equal(readsContentOf(rel, "sharedContentWriter('../../scripts/ci/loop-sync-manifest.json')"), true);
+  assert.equal(readsContentOf('scripts/ci/other.json', "sharedContentReader('../../scripts/ci/other.json')"), false);
   assert.equal(readsContentOf(rel, undefined), true, 'senza testo il verso sicuro è l\u2019accoppiamento');
 });
 
