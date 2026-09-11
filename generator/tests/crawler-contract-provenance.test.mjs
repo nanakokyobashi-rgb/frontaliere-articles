@@ -229,7 +229,7 @@ test('il piano copre generatore, sorgente e artifact di ogni voce', () => {
       'crawler-group-01.yml#generatorSha256',
     ],
   );
-  assert.equal(checks.filter((c) => !c.localOnly).every((c) => c.observationRef === SOURCE_COMMIT), true);
+  assert.equal(checks.filter((c) => !c.localOnly).every((c) => c.observationRef === 'main'), true);
 });
 
 test('il piano reale copre i 49 digest e la lineage del contratto committato', () => {
@@ -300,7 +300,7 @@ test('tutto verificato è verde, e il piano completo non lascia buchi', () => {
   const verdict = evaluateProvenance(checks, new Map(checks.map((c) => [c.field, { sha256: HASH }])));
   assert.equal(verdict.red, false);
   assert.equal(verdict.counts.verified, checks.length);
-  assert.equal(verdict.observationRef, SOURCE_COMMIT);
+  assert.equal(verdict.observationRef, 'main');
   assert.equal(verdict.reason, null);
 });
 
@@ -425,13 +425,13 @@ test('un source logic tollera commenti YAML e flow-style senza leggere esempi', 
   assert.equal(isLogicSource(quotedText, 'crawler-group-01-logic.yml'), false);
 });
 
-test('la lineage pinned entra nel report e un mismatch locale diventa rosso', () => {
+test('la lineage pinned resta locale mentre il report osserva la head corrente', () => {
   const checks = planProvenanceChecks(fixtureContract, fixtureManifest);
   const observed = new Map(checks.map((check) => [check.field, { sha256: HASH }]));
   const clean = evaluateProvenance(checks, observed);
-  assert.equal(clean.observationRef, SOURCE_COMMIT);
+  assert.equal(clean.observationRef, 'main');
   assert.match(clean.results.find((r) => r.field === 'generatorSha256').detail, /^$/);
-  assert.match(formatReport(clean), new RegExp(`@${SOURCE_COMMIT}`));
+  assert.match(formatReport(clean), /@main/);
 
   const driftedChecks = planProvenanceChecks({
     ...fixtureContract,
@@ -444,6 +444,19 @@ test('la lineage pinned entra nel report e un mismatch locale diventa rosso', ()
   const lineage = drifted.results.find((r) => r.field === 'contract#artifactObservation.generatorSha256');
   assert.equal(lineage.state, 'drifted');
   assert.equal(drifted.red, true);
+});
+
+test('un sourceRef non canonico resta lineage invalida e non diventa ref remoto', () => {
+  const checks = planProvenanceChecks({
+    ...fixtureContract,
+    sourceRef: 'main/../../altro/main',
+  }, fixtureManifest);
+  const sourceRef = checks.find((check) => check.field === 'contract#sourceRef');
+  assert.equal(sourceRef.observed, null);
+  assert.equal(checks.filter((check) => !check.localOnly).every((check) => check.observationRef === 'main'), true);
+  const verdict = evaluateProvenance(checks, new Map(checks.map((check) => [check.field, { sha256: HASH }])));
+  assert.equal(verdict.red, true);
+  assert.match(verdict.reason, /sourceRef/);
 });
 
 test('un residuo omonimo non diventa `drifted`', async () => {

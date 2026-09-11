@@ -77,7 +77,7 @@ const MANIFEST_PATH = path.join(ROOT, 'scripts/ci/loop-sync-manifest.json');
 const SITE_REPO = process.env.SITE_REPO || 'valerielinc-ops/frontaliere-si-o-no';
 const SITE_REF = process.env.SITE_REF || 'main';
 const SOURCE_COMMIT_RE = /^[a-f0-9]{40}$/u;
-const SOURCE_REF_RE = /^(?![.-])[A-Za-z0-9._/-]{1,256}$/u;
+const SOURCE_REF_RE = /^(?![./-])(?!.*\/$)(?!.*(?:^|\/)\.{1,2}(?:\/|$))(?!.*\.\.)(?!.*\/{2})(?!.*[~^:?*\[\]\\@{}])[A-Za-z0-9._/-]{1,256}$/u;
 
 /**
  * Dove vivono i `*-logic.yml` sul sito. E' l'unica coordinata che il contratto
@@ -139,13 +139,19 @@ function contractObservationLineage(contract) {
     : {};
   const validSourceRef = sourceRef && SOURCE_REF_RE.test(sourceRef) ? sourceRef : null;
   const validSourceCommit = sourceCommit && SOURCE_COMMIT_RE.test(sourceCommit) ? sourceCommit : null;
-  const observationRef = validSourceCommit || validSourceRef || SITE_REF;
+  // `sourceCommit`/`sourceRef` sono lineage, non il bersaglio del drift gate:
+  // i digest remoti devono sempre osservare la head configurata (`main` di
+  // default), altrimenti si confrontano i byte con il commit che li ha creati
+  // e un cambiamento successivo del sito diventa invisibile.
+  const lineageRef = validSourceCommit || validSourceRef || SITE_REF;
+  const observationRef = SITE_REF;
   return {
     sourceRef,
     sourceCommit,
     observation,
     validSourceRef,
     validSourceCommit,
+    lineageRef,
     observationRef,
   };
 }
@@ -631,10 +637,20 @@ export function evaluateProvenance(checks, observed) {
   const counts = {};
   for (const r of results) counts[r.state] = (counts[r.state] || 0) + 1;
   const broken = results.filter((r) => (
-    r.state === 'drifted' || r.state === 'absent' || r.state === 'unrecognized' || r.state === 'undeclared'
+    !r.localOnly
+    && (r.state === 'drifted' || r.state === 'absent' || r.state === 'unrecognized' || r.state === 'undeclared')
+  ));
+  const localBroken = results.filter((r) => (
+    r.localOnly
+    && (r.state === 'drifted' || r.state === 'absent' || r.state === 'unrecognized' || r.state === 'undeclared')
   ));
   const remoteResults = results.filter((result) => !result.localOnly);
   const unobserved = remoteResults.filter((result) => result.state === 'unobserved').length;
+  const localReason = localBroken.length
+    ? `${localBroken.length} controlli locali di lineage non corrispondono: `
+      + localBroken.map((r) => `\`${r.field}\` (${r.detail})`).join('; ')
+      + '.'
+    : null;
 
   // Se spariscono TUTTI i `*-logic.yml` insieme, il sospettato non e' il
   // contratto: sono 24 file che non si perdono uno per uno, e' la directory
@@ -684,6 +700,10 @@ export function evaluateProvenance(checks, observed) {
     reason =
       `${unobserved}/${remoteResults.length} voci remote non osservate: il verdetto «tutto verificato» non significa ` +
       'piu\' niente, quindi non viene dato.';
+  }
+  if (localReason) {
+    red = true;
+    reason = reason ? `${reason} A parte: ${localReason}` : localReason;
   }
 
   return { results, counts, red, reason, observationRef };
