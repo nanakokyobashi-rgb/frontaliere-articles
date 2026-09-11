@@ -72,21 +72,40 @@ export const SECTIONS = {
 
 const SOURCE_LEDGER_FILES = new Set(Object.values(SECTIONS).map(({ sourceLedger }) => sourceLedger));
 
+export const SURFACE_ARTICLE_ID_STATUS = Object.freeze({
+  ABSENT: 'absent',
+  PRESENT: 'present',
+  UNREADABLE: 'unreadable',
+});
+
 /**
  * Cerca un id nelle superfici testuali, rispettando la struttura dei ledger
  * URL→id: in quei due JSON l'id è il valore, non una parte della chiave URL.
  */
-export function surfaceMentionsArticleId(rel, text, id) {
-  if (typeof id !== 'string' || id.length === 0) return false;
-  if (!SOURCE_LEDGER_FILES.has(rel)) return mentionsId(text, id);
+export function surfaceArticleIdStatus(rel, text, id) {
+  if (typeof id !== 'string' || id.length === 0) return SURFACE_ARTICLE_ID_STATUS.ABSENT;
+  if (!SOURCE_LEDGER_FILES.has(rel)) {
+    return mentionsId(text, id)
+      ? SURFACE_ARTICLE_ID_STATUS.PRESENT
+      : SURFACE_ARTICLE_ID_STATUS.ABSENT;
+  }
   try {
     const parsed = JSON.parse(text);
-    if (!parsed || typeof parsed !== 'object' || Array.isArray(parsed)) return true;
-    return Object.values(parsed).some((value) => ledgerArticleId(value) === id);
+    if (!parsed || typeof parsed !== 'object' || Array.isArray(parsed)) return SURFACE_ARTICLE_ID_STATUS.UNREADABLE;
+    return Object.values(parsed).some((value) => ledgerArticleId(value) === id)
+      ? SURFACE_ARTICLE_ID_STATUS.PRESENT
+      : SURFACE_ARTICLE_ID_STATUS.ABSENT;
   } catch {
-    // Un ledger illeggibile non è prova di assenza: il gate deve restare chiuso.
-    return true;
+    return SURFACE_ARTICLE_ID_STATUS.UNREADABLE;
   }
+}
+
+/**
+ * Boolean compatibility for the PR gate: unreadable ledgers remain blocking,
+ * because an unreadable surface is not proof that the article is gone.
+ */
+export function surfaceMentionsArticleId(rel, text, id) {
+  return surfaceArticleIdStatus(rel, text, id) !== SURFACE_ARTICLE_ID_STATUS.ABSENT;
 }
 
 /**
