@@ -24,6 +24,7 @@ import { freeTranslateWithRetry, logCascadeSummary } from './lib/free-translate.
 import { detectLanguageWithConfidence } from './lib/detect-language.mjs';
 import { corpusPath } from './lib/corpus-paths.mjs';
 import { sanitizeText } from '../../scripts/lib/sanitize-control-chars.mjs';
+import { parsePositiveNum } from '../../scripts/lib/parse-positive-num.mjs';
 import { reportStrippedControlChars } from './lib/control-char-write-report.mjs';
 import { escapeForSingleQuoteTS, unescapeForSingleQuoteTS } from './lib/article-meta-block.mjs';
 
@@ -71,13 +72,40 @@ const HELP = args.includes('--help') || args.includes('-h');
 // E' lo stesso difetto che l'intestazione di quell'armatura racconta per
 // generate-border-wait-ranking-article.mjs, che riscrisse quattro body.
 const DRY_RUN = args.includes('--dry-run') || process.env.DRY_RUN === '1';
-const limitIdx = args.indexOf('--limit');
 export function normalizeFaqLimit(value) {
-  const parsed = parseInt(value, 10);
-  return Number.isFinite(parsed) ? parsed : Infinity;
+  if (value === undefined) return Infinity;
+  const raw = String(value).trim();
+  if (!raw) throw new RangeError('--limit richiede un intero >= 0');
+  const parsed = parsePositiveNum(raw, Number.NaN, {
+    label: '--limit',
+    integer: true,
+    sentinels: [0],
+    warn: () => {},
+  });
+  if (Number.isFinite(parsed) && parsed >= 0) return parsed;
+  throw new RangeError(`--limit richiede un intero >= 0; ricevuto ${String(value)}`);
 }
 
-const LIMIT = limitIdx >= 0 ? normalizeFaqLimit(args[limitIdx + 1]) : Infinity;
+export function parseFaqLimitArgs(argv) {
+  const limitIdx = argv.indexOf('--limit');
+  if (limitIdx < 0) return Infinity;
+  const value = argv[limitIdx + 1];
+  if (value === undefined || value.startsWith('--')) {
+    throw new RangeError('--limit richiede un valore intero >= 0');
+  }
+  return normalizeFaqLimit(value);
+}
+
+function parseFaqLimitOrExit(argv) {
+  try {
+    return parseFaqLimitArgs(argv);
+  } catch (err) {
+    console.error(`Invalid --limit: ${err.message}`);
+    process.exit(2);
+  }
+}
+
+const LIMIT = parseFaqLimitOrExit(args);
 // Riparazione pura dei file gia' scritti con l'escape rotto: nessuna chiamata
 // di traduzione, nessun modello. Opt-in, e la run schedulata NON lo passa.
 const REESCAPE_BROKEN = args.includes('--reescape-broken');

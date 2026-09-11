@@ -278,8 +278,27 @@ test('nextRequestTimeoutMs concede il MINIMO fra budget residuo e timeout dell\'
   assert.equal(nextRequestTimeoutMs({ budgetRemainingMs: 0, urlRemainingMs: 8000 }), 0);
   assert.equal(nextRequestTimeoutMs({ budgetRemainingMs: -5, urlRemainingMs: 8000 }), 0);
   assert.equal(nextRequestTimeoutMs({ budgetRemainingMs: 8000, urlRemainingMs: -1 }), 0);
-  // mai 0 per arrotondamento: una frazione di ms resta una richiesta, non un salto
-  assert.equal(nextRequestTimeoutMs({ budgetRemainingMs: 0.4, urlRemainingMs: 8000 }), 1);
+  // una frazione di ms non autorizza una richiesta che il signal arrotonderebbe
+  // a 1ms: il chiamante deve classificarla come skipped.
+  assert.equal(nextRequestTimeoutMs({ budgetRemainingMs: 0.4, urlRemainingMs: 8000 }), 0);
+});
+
+test('budget residuo frazionario: non avvia una HEAD da arrotondare a 1ms', async () => {
+  let calls = 0;
+  const res = await verifyCdnAssetRefs({
+    urls: [`${CDN}/assets/quasi-scaduto.js`],
+    budgetMs: 0.4,
+    fetchImpl: async () => {
+      calls += 1;
+      return { ok: true, status: 200 };
+    },
+    makeSignal: () => {
+      throw new Error('AbortSignal creato senza un millisecondo intero residuo');
+    },
+  });
+  assert.equal(calls, 0);
+  assert.equal(res[0].state, 'skipped');
+  assert.match(res[0].error, /nessun millisecondo intero residuo/);
 });
 
 test('HEAD lenta: la richiesta parte col BUDGET RESIDUO, non col timeout pieno', async () => {
@@ -310,10 +329,22 @@ test('fallback GET: eredita il residuo dell\'asset, non un secondo timeout pieno
   let clock = 0;
   const asked = [];
   const calls = [];
+  let bodyCanceled = false;
   const fetchImpl = async (url, init) => {
     calls.push(init.method);
     clock += init.method === 'HEAD' ? 5000 : 1000;
-    return init.method === 'HEAD' ? { ok: false, status: 405 } : { ok: true, status: 200 };
+    return init.method === 'HEAD'
+      ? { ok: false, status: 405 }
+      : {
+          ok: true,
+          status: 200,
+          body: {
+            cancel: async () => {
+              bodyCanceled = true;
+              clock += 25;
+            },
+          },
+        };
   };
   const res = await verifyCdnAssetRefs({
     urls: [`${CDN}/assets/solo-get.js`],
@@ -328,6 +359,7 @@ test('fallback GET: eredita il residuo dell\'asset, non un secondo timeout pieno
   });
   assert.deepEqual(calls, ['HEAD', 'GET']);
   assert.deepEqual(asked, [8000, 3000], 'il GET ha ricevuto un timeout intero: un solo asset costa 2 x timeoutMs');
+  assert.equal(bodyCanceled, true, 'il body del GET di fallback resta aperto oltre la misura del passo');
   assert.deepEqual(res.map((r) => [r.state, r.status]), [['present', 200]]);
 });
 

@@ -155,12 +155,29 @@ export const CDN_ASSET_CHECK_BUDGET_MS = 30_000;
  * @param {object} a
  * @param {number} a.budgetRemainingMs  quanto resta del tetto complessivo
  * @param {number} a.urlRemainingMs     quanto resta del timeout di QUESTO asset
- * @returns {number} ms >= 1, oppure 0 se il tempo e' finito
+ * @returns {number} ms >= 1, oppure 0 se non resta neppure un millisecondo
  */
 export function nextRequestTimeoutMs({ budgetRemainingMs, urlRemainingMs }) {
   const ms = Math.min(Number(budgetRemainingMs), Number(urlRemainingMs));
-  if (!Number.isFinite(ms) || ms <= 0) return 0;
-  return Math.max(1, Math.floor(ms));
+  if (!Number.isFinite(ms) || ms < 1) return 0;
+  return Math.floor(ms);
+}
+
+/**
+ * Chiude il body di un fallback GET senza trasformare un errore di cleanup in
+ * un verdetto sul CDN. Il tempo del cancel resta dentro verifyCdnAssetRefs,
+ * quindi il chiamante misura anche il costo reale della risposta.
+ *
+ * @param {Response|{body?: {cancel?: () => Promise<void>}}|null} response
+ */
+async function cancelResponseBody(response) {
+  if (typeof response?.body?.cancel !== 'function') return;
+  try {
+    await response.body.cancel();
+  } catch {
+    // Il controllo è fail-open: un body che non si lascia cancellare non deve
+    // cambiare lo stato già determinato dalla risposta HTTP.
+  }
 }
 
 /**
@@ -215,7 +232,18 @@ export async function verifyCdnAssetRefs({
         urlRemainingMs: timeoutMs - (now() - urlStartedAt),
       });
     try {
-      let res = await fetchImpl(url, { method: 'HEAD', redirect: 'follow', signal: makeSignal(nextTimeout()) });
+      const headTimeout = nextTimeout();
+      if (headTimeout === 0) {
+        results.push({
+          url,
+          state: 'skipped',
+          status: null,
+          error: `nessun millisecondo intero residuo per la HEAD ` +
+            `(budget di ${budgetMs}ms, timeout di ${timeoutMs}ms per asset)`,
+        });
+        continue;
+      }
+      let res = await fetchImpl(url, { method: 'HEAD', redirect: 'follow', signal: makeSignal(headTimeout) });
       // Alcune origin non implementano HEAD (405/501): la domanda è
       // sull'esistenza dell'oggetto, non sul metodo, quindi si ripiega su GET
       // invece di registrare un falso `missing`.
@@ -234,6 +262,7 @@ export async function verifyCdnAssetRefs({
           continue;
         }
         res = await fetchImpl(url, { method: 'GET', redirect: 'follow', signal: makeSignal(getTimeout) });
+        await cancelResponseBody(res);
       }
       if (res.ok) {
         results.push({ url, state: 'present', status: res.status, error: null });
