@@ -158,6 +158,28 @@ jobs:
         if: steps.mode.outputs.dry != 'true'
         run: node generator/scripts/publish-journalist-article.mjs
 
+      # A journalist producer can leave a registration marker and then exit
+      # non-zero. The normal guard and commit steps are behind the implicit
+      # success() condition, so preserve the marker evidence explicitly before
+      # the failure skips them. The commit below repeats this add as a safety
+      # net and commits marker files only on that path.
+      - name: Checkpoint — stage registration marker after producer failure
+        id: registration-checkpoint
+        if: always() && steps.mode.outputs.dry != 'true'
+        run: |
+          set -euo pipefail
+          PRODUCER_OUTCOME="${{ steps.publish.outcome }}"
+          if [ "$PRODUCER_OUTCOME" = "success" ]; then
+            echo "producer completed; the normal commit will stage marker changes"
+            exit 0
+          fi
+          if [ -z "$(git status --porcelain -- 'generator/data/register-in-progress-*.json')" ]; then
+            echo "producer outcome: $PRODUCER_OUTCOME; no changed registration marker to checkpoint"
+            exit 0
+          fi
+          git add -A -- 'generator/data/register-in-progress-*.json'
+          echo "staged registration marker checkpoint for producer outcome: $PRODUCER_OUTCOME"
+
       # ── La guardia sul percorso di scrittura (issue #275) ──────────────────
       #
       # PERCHE' ANCHE QUI, dato che questo produttore passa da
@@ -209,12 +231,28 @@ jobs:
 
       - name: Commit and push registered articles
         id: commit
-        if: steps.mode.outputs.dry != 'true'
+        if: always() && steps.mode.outputs.dry != 'true'
         run: |
           set -euo pipefail
-          git add -A
+          PRODUCER_OUTCOME="${{ steps.publish.outcome }}"
+          GUARD_OUTCOME="${{ steps.guard.outcome }}"
+          if [ "$PRODUCER_OUTCOME" != "success" ]; then
+            # The checkpoint normally staged this already. Repeat the
+            # deletion-aware add as a safety net if that step could not run.
+            if [ -n "$(git status --porcelain -- 'generator/data/register-in-progress-*.json')" ]; then
+              git add -A -- 'generator/data/register-in-progress-*.json'
+            fi
+            COMMIT_MESSAGE="Checkpoint interrupted journalist registration"
+            echo "producer outcome: $PRODUCER_OUTCOME; committing registration evidence only"
+          elif [ "$GUARD_OUTCOME" != "success" ]; then
+            echo "::warning::content guard outcome: $GUARD_OUTCOME — refusing to commit producer output"
+            exit 0
+          else
+            COMMIT_MESSAGE="Publish journalist article(s)"
+            git add -A
+          fi
           if git diff --cached --quiet; then
-            echo "no journalist-article changes"
+            echo "no journalist-article or registration marker checkpoint changes"
             exit 0
           fi
           if [ -z "${GITHUB_PAT:-}" ]; then
@@ -222,7 +260,7 @@ jobs:
             exit 1
           fi
 
-          git commit -m "Publish journalist article(s)"
+          git commit -m "$COMMIT_MESSAGE"
 
           TARGET="${{ github.ref_name }}"
           REMOTE="https://x-access-token:${GITHUB_PAT}@github.com/${{ github.repository }}.git"

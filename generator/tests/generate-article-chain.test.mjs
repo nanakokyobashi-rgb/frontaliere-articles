@@ -340,6 +340,15 @@ test('un exit non-zero non fatale prova comunque l\'altra sezione', () => {
   assert.equal(r.invocations.length, 2);
 });
 
+test('un errore dopo una scrittura parziale resta vincolante per il commit', () => {
+  const r = runGenerateStep({ section: 'frontaliere', plan: ['7 1', '0 1'] });
+  assert.equal(r.outputs.article, 'false', 'un corpo scritto da un processo fallito non e\' un articolo prodotto');
+  assert.equal(r.outputs.partial_failure, 'true');
+  assert.equal(r.invocations.length, 1, 'un output parziale blocca il fallback, che erediterebbe gli stessi file');
+  assert.equal(r.status, 1, 'la run deve restare rossa: il commit non puo\' partire');
+  assert.match(r.stdout, /output parziale non pubblicabile/);
+});
+
 test('una dispatch manuale ottiene la sezione che ha chiesto e nessun\'altra', () => {
   const r = runGenerateStep({ section: 'svizzera', event: 'workflow_dispatch', plan: ['0 0'] });
   assert.equal(r.invocations.length, 1);

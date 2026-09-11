@@ -1157,6 +1157,7 @@ jobs:
           min_attempt_s=$(( budget_s / 16 ))
           [ "$min_attempt_s" -lt 1 ] && min_attempt_s=1
           produced=false
+          partial_failure=false
           effective="$TARGET_SECTION"
           tried=0
           # ── L'OSSERVATORE (issue #313 / #348) ────────────────────────────
@@ -1318,6 +1319,18 @@ jobs:
 
             body="$(article_body_added || true)"
             if [ -n "$body" ]; then
+              if [ "$rc" != "0" ]; then
+                # A process that writes a body and then fails has produced only
+                # a partial transaction. Do not let the body probe turn that
+                # failure into `produced=true`: the commit step uses this
+                # output, and git add -A would otherwise publish the partial
+                # files together with any marker or later fallback output.
+                partial_failure=true
+                all_declared=false
+                [ -n "$undeclared_why" ] || undeclared_why="create-article.mjs ha scritto un corpo sulla sezione $sec ma e' terminato con exit $rc: output parziale non pubblicabile"
+                echo "::error::create-article.mjs ha scritto un corpo sulla sezione $sec ma e' terminato con exit $rc — output parziale non pubblicabile"
+                break
+              fi
               produced=true
               effective="$sec"
               echo "article body added: $body"
@@ -1372,8 +1385,9 @@ jobs:
             echo "section=$effective"
             echo "declared=$all_declared"
             echo "roster_blocked=$roster_blocked"
+            echo "partial_failure=$partial_failure"
           } >> "$GITHUB_OUTPUT"
-          echo "article=$produced section=$effective declared=$all_declared roster_blocked=$roster_blocked attempts=$tried/${#sections[@]}"
+          echo "article=$produced section=$effective declared=$all_declared roster_blocked=$roster_blocked partial_failure=$partial_failure attempts=$tried/${#sections[@]}"
 
           # ── LA RUN DIVENTA ROSSA (issue #313 / #348) ──────────────────────
           # Gli output sono gia' scritti sopra: gli step con `if: always()` (il
@@ -1386,6 +1400,9 @@ jobs:
           # getterebbe via un articolo buono, gia' pagato in LLM, traduzioni e
           # immagine. E' la ragione per cui il roster_blocked di #357 era in
           # congiunzione, e resta vera parola per parola qui.
+          if [ "$partial_failure" = "true" ]; then
+            exit 1
+          fi
           if [ "$produced" = "true" ]; then
             exit 0
           fi

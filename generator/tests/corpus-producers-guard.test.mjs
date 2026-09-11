@@ -334,6 +334,34 @@ for (const p of producers) {
   });
 }
 
+test('publish-journalist persiste il marker anche quando producer o guard falliscono', () => {
+  const publisher = workflows.find((w) => w.file === 'publish-journalist-articles.yml');
+  assert.ok(publisher, 'publish-journalist-articles.yml non esiste piu\'');
+
+  const checkpoint = extractRun(
+    publisher.src,
+    'Checkpoint — stage registration marker after producer failure',
+  );
+  assert.match(checkpoint, /PRODUCER_OUTCOME="\$\{\{ steps\.publish\.outcome \}\}"/);
+  assert.match(checkpoint, /git add -A -- 'generator\/data\/register-in-progress-\*\.json'/);
+
+  const commit = extractRun(publisher.src, 'Commit and push registered articles');
+  const failureBranch = commit.slice(
+    commit.indexOf('if [ "$PRODUCER_OUTCOME" != "success" ]'),
+    commit.indexOf('elif [ "$GUARD_OUTCOME" != "success" ]'),
+  );
+  assert.match(failureBranch, /COMMIT_MESSAGE="Checkpoint interrupted journalist registration"/);
+  assert.match(failureBranch, /git add -A -- 'generator\/data\/register-in-progress-\*\.json'/);
+  assert.doesNotMatch(
+    failureBranch,
+    /git add -A\s*\n/,
+    'il ramo di errore non deve trasformare l output parziale in un commit completo',
+  );
+  assert.match(commit, /elif \[ "\$GUARD_OUTCOME" != "success" \]/);
+  assert.match(commit, /refusing to commit producer output/);
+  assert.match(commit, /else\n\s+COMMIT_MESSAGE="Publish journalist article\(s\)"\n\s+git add -A/);
+});
+
 // ═══════════════════════════════════════════════════════════════════════════
 // 3a. RIFIUTO ESEGUITO — il blocco della guardia, eseguito davvero
 // ═══════════════════════════════════════════════════════════════════════════
