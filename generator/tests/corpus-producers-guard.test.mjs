@@ -298,13 +298,31 @@ for (const p of producers) {
       !/continue-on-error/.test(block),
       `${p.file}: con continue-on-error lo step diventa decorazione — fallisce, si vede rosso, e il commit parte lo stesso`,
     );
-    // Gli step successivi hanno un `if:` senza status function, quindi GitHub
-    // applica `success()` implicito: uno step fallito qui li salta. E' quella
-    // proprieta' a impedire il commit, quindi va pinnata la sua PRECONDIZIONE.
-    assert.ok(
-      !/if:\s*always\(\)/.test(block),
-      `${p.file}: un always() fra la guardia e il commit rimetterebbe l'articolo bocciato sulla strada di main`,
-    );
+    // I producer con una registrazione multi-file hanno un'eccezione
+    // intenzionale: il checkpoint del marker deve girare con `always()` anche
+    // quando il producer muore. In quel caso il commit successivo deve però
+    // limitarsi all'evidenza del marker; con producer riuscito e guardia rossa
+    // deve rifiutare l'output, mantenendo la guardia non advisory.
+    if (/id:\s*registration-checkpoint/.test(block)) {
+      assert.match(block, /if:\s*always\(\) && steps\.mode\.outputs\.dry != 'true'/,
+        `${p.file}: checkpoint always() non esplicito`);
+      const commitBlock = p.src.slice(c);
+      assert.match(commitBlock, /PRODUCER_OUTCOME=/,
+        `${p.file}: il commit non osserva l'esito del producer`);
+      assert.match(commitBlock, /GUARD_OUTCOME=/,
+        `${p.file}: il commit non osserva l'esito della guardia`);
+      assert.match(commitBlock, /elif \[ "\$GUARD_OUTCOME" != "success" \]/,
+        `${p.file}: una guardia rossa potrebbe ancora far committare l'output`);
+      assert.match(commitBlock, /refusing to commit producer output/,
+        `${p.file}: il ramo di rifiuto della guardia non e' esplicito`);
+    } else {
+      // Gli altri producer conservano il contratto storico: uno step fallito
+      // qui salta i passi successivi tramite il success() implicito.
+      assert.ok(
+        !/if:\s*always\(\)/.test(block),
+        `${p.file}: un always() fra la guardia e il commit rimetterebbe l'articolo bocciato sulla strada di main`,
+      );
+    }
   });
 
   test(`${p.file}: il blocco della guardia non interpola nulla`, () => {

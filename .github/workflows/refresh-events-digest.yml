@@ -109,6 +109,7 @@ jobs:
         run: npm run refresh:events
 
       - name: Refresh the weekend digest
+        id: producer
         env:
           DRY_RUN: ${{ steps.mode.outputs.dry == 'true' && '1' || '0' }}
         run: node generator/scripts/generate-events-digest-article.mjs
@@ -160,8 +161,30 @@ jobs:
           } >> "$GITHUB_STEP_SUMMARY"
           exit 1
 
+      # A producer can leave a registration marker and then exit non-zero.
+      # The normal commit step is behind the default success() condition, so
+      # checkpoint the evidence explicitly before credentials and commit.
+      - name: Checkpoint — stage registration marker after producer failure
+        id: registration-checkpoint
+        if: always() && steps.mode.outputs.dry != 'true'
+        run: |
+          set -euo pipefail
+          PRODUCER_OUTCOME="${{ steps.producer.outcome }}"
+          if [ "$PRODUCER_OUTCOME" = "success" ]; then
+            echo "producer completed; the normal commit will stage marker changes"
+            exit 0
+          fi
+          if [ -z "$(git status --porcelain -- 'generator/data/register-in-progress-*.json')" ]; then
+            echo "producer outcome: $PRODUCER_OUTCOME; no changed registration marker to checkpoint"
+            exit 0
+          fi
+          # -A is intentional here: it preserves additions, updates, and
+          # deletions of the tracked marker set after an interrupted run.
+          git add -A -- 'generator/data/register-in-progress-*.json'
+          echo "staged registration marker checkpoint for producer outcome: $PRODUCER_OUTCOME"
+
       - name: Prepare Firebase credentials
-        if: steps.mode.outputs.dry != 'true'
+        if: always() && steps.mode.outputs.dry != 'true'
         env:
           FIREBASE_SERVICE_ACCOUNT_JSON: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}
         run: |
@@ -174,29 +197,45 @@ jobs:
           echo "GOOGLE_APPLICATION_CREDENTIALS=$RUNNER_TEMP/sa.json" >> "$GITHUB_ENV"
 
       - name: Load secrets from Remote Config
-        if: steps.mode.outputs.dry != 'true'
+        if: always() && steps.mode.outputs.dry != 'true'
         run: node generator/scripts/load-rc-env.mjs
 
       - name: Commit and push
-        if: steps.mode.outputs.dry != 'true'
+        id: commit
+        if: always() && steps.mode.outputs.dry != 'true'
         run: |
           set -euo pipefail
-          # data/events.json is gitignored: it is a fetched cache of another
-          # repo's dataset, and committing 1.9 MB of it per run would be noise.
-          # A registration marker is tracked evidence of a crash between
-          # writes; stage it so the next run can resolve the split instead of
-          # receiving a fresh checkout with only half the transaction.
-          shopt -s nullglob
-          REGISTER_MARKERS=(generator/data/register-in-progress-*.json)
-          git add content/blog-body/it/eventi-weekend-ticino.ts \
-                  content/blog-body/en/eventi-weekend-ticino.ts \
-                  content/blog-body/de/eventi-weekend-ticino.ts \
-                  content/blog-body/fr/eventi-weekend-ticino.ts \
-                  content/blog-articles-data.ts \
-                  content/seo/seo-blog-5.ts \
-                  "${REGISTER_MARKERS[@]}"
+          PRODUCER_OUTCOME="${{ steps.producer.outcome }}"
+          GUARD_OUTCOME="${{ steps.guard.outcome }}"
+          if [ "$PRODUCER_OUTCOME" != "success" ]; then
+            # The checkpoint normally staged this already. Repeat the
+            # deletion-aware add as a safety net if that step could not run.
+            if [ -n "$(git status --porcelain -- 'generator/data/register-in-progress-*.json')" ]; then
+              git add -A -- 'generator/data/register-in-progress-*.json'
+            fi
+            COMMIT_MESSAGE="Checkpoint interrupted weekend digest registration"
+            echo "producer outcome: $PRODUCER_OUTCOME; committing registration evidence only"
+          elif [ "$GUARD_OUTCOME" != "success" ]; then
+            echo "::warning::content guard outcome: $GUARD_OUTCOME — refusing to commit producer output"
+            exit 0
+          else
+            COMMIT_MESSAGE="Refresh the weekend events digest"
+            # data/events.json is gitignored: it is a fetched cache of another
+            # repo's dataset, and committing 1.9 MB of it per run would be noise.
+            # Explicitly stage article output, then stage all marker changes;
+            # -A includes a marker deletion as well as an addition/update.
+            git add content/blog-body/it/eventi-weekend-ticino.ts \
+                    content/blog-body/en/eventi-weekend-ticino.ts \
+                    content/blog-body/de/eventi-weekend-ticino.ts \
+                    content/blog-body/fr/eventi-weekend-ticino.ts \
+                    content/blog-articles-data.ts \
+                    content/seo/seo-blog-5.ts
+            if [ -n "$(git status --porcelain -- 'generator/data/register-in-progress-*.json')" ]; then
+              git add -A -- 'generator/data/register-in-progress-*.json'
+            fi
+          fi
           if git diff --cached --quiet; then
-            echo "no digest changes"
+            echo "no digest or registration marker checkpoint changes"
             exit 0
           fi
           if [ -z "${GITHUB_PAT:-}" ]; then
@@ -206,7 +245,7 @@ jobs:
 
           git config user.name "Valerie Linc"
           git config user.email "valerielinc@gmail.com"
-          git commit -m "Refresh the weekend events digest"
+          git commit -m "$COMMIT_MESSAGE"
 
           TARGET="${{ github.ref_name }}"
           REMOTE="https://x-access-token:${GITHUB_PAT}@github.com/${{ github.repository }}.git"

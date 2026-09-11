@@ -125,6 +125,7 @@ jobs:
       # renders the unique 1200×675 hero from the day's numbers. Refuses thin
       # or stale snapshots with exit 0 — see the script header.
       - name: Generate the daily edition
+        id: producer
         env:
           DRY_RUN: ${{ steps.mode.outputs.dry == 'true' && '1' || '0' }}
         run: node generator/scripts/generate-daily-brief-article.mjs
@@ -183,54 +184,97 @@ jobs:
           } >> "$GITHUB_STEP_SUMMARY"
           exit 1
 
+      # A producer can leave a registration marker and then exit non-zero.
+      # The normal commit step is behind the default success() condition, so
+      # checkpoint the evidence explicitly before credentials and commit.
+      - name: Checkpoint — stage registration marker after producer failure
+        id: registration-checkpoint
+        if: always() && steps.mode.outputs.dry != 'true'
+        run: |
+          set -euo pipefail
+          PRODUCER_OUTCOME="${{ steps.producer.outcome }}"
+          if [ "$PRODUCER_OUTCOME" = "success" ]; then
+            echo "producer completed; the normal commit will stage marker changes"
+            exit 0
+          fi
+          if [ -z "$(git status --porcelain -- 'generator/data/register-in-progress-*.json')" ]; then
+            echo "producer outcome: $PRODUCER_OUTCOME; no changed registration marker to checkpoint"
+            exit 0
+          fi
+          # -A is intentional here: it preserves additions, updates, and
+          # deletions of the tracked marker set after an interrupted run.
+          git add -A -- 'generator/data/register-in-progress-*.json'
+          echo "staged registration marker checkpoint for producer outcome: $PRODUCER_OUTCOME"
+
       # RC is loaded only when there is a commit to push (GITHUB_PAT) and
       # assets to warm on the CDN (R2_*). A dry run never touches it.
       - name: Load secrets from Remote Config
-        if: steps.mode.outputs.dry != 'true'
+        if: always() && steps.mode.outputs.dry != 'true'
         run: node generator/scripts/load-rc-env.mjs
 
       - name: Configure git identity
-        if: steps.mode.outputs.dry != 'true'
+        if: always() && steps.mode.outputs.dry != 'true'
         run: |
           git config user.name "Valerie Linc"
           git config user.email "valerielinc@gmail.com"
 
       - name: Commit and push
         id: commit
-        if: steps.mode.outputs.dry != 'true'
+        if: always() && steps.mode.outputs.dry != 'true'
         run: |
           set -euo pipefail
-          # Explicit list, never -A. Globs (nullglob: a no-edition day expands
-          # them to nothing, and `git add` of an unmatched pathspec would fail
-          # the green exit below). The seo glob covers a shard roll past
-          # seo-blog-5.
-          shopt -s nullglob
-          # `data/daily-brief-degradation.json` is the streak ledger and is the
-          # ONE path that must be staged even on a day with no edition: the
-          # 0/4-blocks branch skips the snapshot on purpose, and without this
-          # add the count would die on the runner and a permanent blackout
-          # would never reach the threshold (#885). Il file e' versionato e il
-          # refresh lo riscrive quando il contenuto cambia davvero (#927), quindi
-          # esiste sempre qui e finisce in stage solo se lo streak si e' mosso.
-          git add public/data/daily-brief.json \
-                  data/daily-brief-degradation.json \
-                  generator/data/register-in-progress-*.json \
-                  content/blogArticleIds.ts \
-                  content/routerBlogData.ts \
-                  content/blog-articles-data.ts \
-                  content/blog-meta-it.ts \
-                  content/blog-meta-en.ts \
-                  content/blog-meta-de.ts \
-                  content/blog-meta-fr.ts \
-                  content/seo/seo-blog-*.ts
-          EDITION_FILES=(content/blog-body/*/bollettino-frontaliere-*.ts \
-                         public/images/blog/bollettino-frontaliere-*.webp \
-                         public/images/blog/thumbnails/bollettino-frontaliere-*-480w.webp)
-          if [ "${#EDITION_FILES[@]}" -gt 0 ]; then
-            git add "${EDITION_FILES[@]}"
+          PRODUCER_OUTCOME="${{ steps.producer.outcome }}"
+          GUARD_OUTCOME="${{ steps.guard.outcome }}"
+          if [ "$PRODUCER_OUTCOME" != "success" ]; then
+            # The checkpoint normally staged this already. Repeat the
+            # deletion-aware add as a safety net if that step could not run.
+            if [ -n "$(git status --porcelain -- 'generator/data/register-in-progress-*.json')" ]; then
+              git add -A -- 'generator/data/register-in-progress-*.json'
+            fi
+            COMMIT_MESSAGE="Checkpoint interrupted daily edition registration"
+            echo "producer outcome: $PRODUCER_OUTCOME; committing registration evidence only"
+          elif [ "$GUARD_OUTCOME" != "success" ]; then
+            echo "::warning::content guard outcome: $GUARD_OUTCOME — refusing to commit producer output"
+            echo "pushed=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          else
+            COMMIT_MESSAGE="Daily brief edition $(date -u +%F)"
+            # Explicit list for normal producer output. Globs (nullglob: a
+            # no-edition day expands them to nothing, and `git add` of an
+            # unmatched pathspec would fail the green exit below). The seo glob
+            # covers a shard roll past seo-blog-5.
+            shopt -s nullglob
+            # `data/daily-brief-degradation.json` is the streak ledger and is the
+            # ONE path that must be staged even on a day with no edition: the
+            # 0/4-blocks branch skips the snapshot on purpose, and without this
+            # add the count would die on the runner and a permanent blackout
+            # would never reach the threshold (#885). Il file e' versionato e il
+            # refresh lo riscrive quando il contenuto cambia davvero (#927), quindi
+            # esiste sempre qui e finisce in stage solo se lo streak si e' mosso.
+            git add public/data/daily-brief.json \
+                    data/daily-brief-degradation.json \
+                    content/blogArticleIds.ts \
+                    content/routerBlogData.ts \
+                    content/blog-articles-data.ts \
+                    content/blog-meta-it.ts \
+                    content/blog-meta-en.ts \
+                    content/blog-meta-de.ts \
+                    content/blog-meta-fr.ts \
+                    content/seo/seo-blog-*.ts
+            EDITION_FILES=(content/blog-body/*/bollettino-frontaliere-*.ts \
+                           public/images/blog/bollettino-frontaliere-*.webp \
+                           public/images/blog/thumbnails/bollettino-frontaliere-*-480w.webp)
+            if [ "${#EDITION_FILES[@]}" -gt 0 ]; then
+              git add "${EDITION_FILES[@]}"
+            fi
+            # Quote the pathspec so a missing file cannot expand into an
+            # empty argument, and -A also stages marker deletions.
+            if [ -n "$(git status --porcelain -- 'generator/data/register-in-progress-*.json')" ]; then
+              git add -A -- 'generator/data/register-in-progress-*.json'
+            fi
           fi
           if git diff --cached --quiet; then
-            echo "no edition today (no data, or nothing changed) — exiting green"
+            echo "no edition or registration marker checkpoint today — exiting green"
             echo "pushed=false" >> "$GITHUB_OUTPUT"
             exit 0
           fi
@@ -267,7 +311,7 @@ jobs:
             exit 1
           fi
 
-          git commit -m "Daily brief edition $(date -u +%F)"
+          git commit -m "$COMMIT_MESSAGE"
 
           TARGET="${{ github.ref_name }}"
           REMOTE="https://x-access-token:${GITHUB_PAT}@github.com/${{ github.repository }}.git"

@@ -223,6 +223,20 @@ describe('translateFieldFreeMt — l’uscita di un motore non e’ prosa', () =
     assert.equal(masked.restore(masked.masked).text, 'Besano, Martello e Villa di Chiavenna');
   });
 
+  test('riusa la disambiguazione del topic guard per non proteggere parole comuni', () => {
+    for (const name of ['Mese', 'Dazio', 'Premia', 'Rossa', 'Erba']) {
+      const masked = maskMunicipalityNames(`Estratto: ${name}`);
+      assert.equal(masked.expected, 0, `${name} non è un toponimo disambiguato`);
+      assert.deepEqual(
+        ensureMunicipalityNames(`Estratto: ${name}`, 'Lokalisierter Auszug'),
+        { text: 'Lokalisierter Auszug', added: [] },
+        `${name} non va riaggiunto senza evidenza disambiguata`,
+      );
+    }
+    assert.equal(maskMunicipalityNames('Estratto: Martello').expected, 1,
+      'un comune non ambiguo resta protetto');
+  });
+
   test('il percorso articolo abilita la protezione sull\'excerpt e la applica dopo la traduzione', () => {
     assert.match(CREATE_ARTICLE, /preserveMunicipalityNames:\s*true/);
     const translatedAt = CREATE_ARTICLE.indexOf('await translateArticle(data);');

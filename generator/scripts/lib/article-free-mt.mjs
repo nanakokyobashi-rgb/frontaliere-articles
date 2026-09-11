@@ -14,7 +14,7 @@
 
 import { hasUsableTranslatedText, hasUsableContentText } from './body2-payload-verdict.mjs';
 import { findLoneSurrogates } from '../../../scripts/lib/sanitize-control-chars.mjs';
-import { municipalityNames } from './topic-coverage-guard.mjs';
+import { comuneTopicKey, municipalityNames } from './topic-coverage-guard.mjs';
 
 const NAV_LINK_RE = /\[[^\]]+\]\(nav:[^)]+\)/g;
 const NAV_SENTINEL_RE = /0NAV(\d+)0/g;
@@ -25,10 +25,25 @@ const NAV_SENTINEL_RE = /0NAV(\d+)0/g;
 // source; a hand-maintained allow-list would silently miss the next comune
 // added to `data/municipalities.ts`.
 const MUNICIPALITY_SENTINEL_RE = /0M0(\d+)Q0/gi;
+
+function municipalitySlug(name) {
+  return String(name)
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+}
+
 const MUNICIPALITY_NAMES = Object.freeze(
   [...new Map(
     municipalityNames()
-      .map((name) => [String(name).normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase(), String(name)])
+      // `municipalityNames()` is the source list, not proof that a raw label
+      // is safe to protect in prose. Reuse the topic guard's disambiguation:
+      // words such as Mese, Dazio, Premia, Rossa and Erba are municipalities
+      // in the data but ordinary vocabulary in the corpus.
+      .filter((name) => comuneTopicKey(name) === municipalitySlug(name))
+      .map((name) => [municipalitySlug(name), String(name)])
       .filter(([key]) => key.length > 0),
   ).values()].sort((a, b) => b.length - a.length),
 );

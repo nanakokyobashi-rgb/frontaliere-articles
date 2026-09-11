@@ -468,7 +468,20 @@ test('i tre workflow producer con staging esplicito includono il marker di regis
     const src = fs.readFileSync(new URL(workflow, import.meta.url), 'utf-8');
     assert.match(src, /generator\/data\/register-in-progress-\*\.json/,
       `${workflow}: marker non presente nello staging esplicito`);
-    assert.match(src, /nullglob/, `${workflow}: un giorno senza marker deve restare un commit valido`);
+    assert.match(src, /git status --porcelain -- 'generator\/data\/register-in-progress-\*\.json'/,
+      `${workflow}: un giorno senza marker deve restare un commit valido`);
+    assert.match(src, /id: producer/, `${workflow}: il producer deve avere un outcome osservabile`);
+    assert.match(src, /id: registration-checkpoint/, `${workflow}: checkpoint del marker assente`);
+    assert.match(src, /if: always\(\) && steps\.mode\.outputs\.dry != 'true'/,
+      `${workflow}: il checkpoint deve sopravvivere al fallimento del producer`);
+    assert.match(src, /steps\.producer\.outcome/,
+      `${workflow}: il commit non distingue successo e fallimento del producer`);
+    assert.match(src, /if \[ "\$PRODUCER_OUTCOME" != "success" \]/,
+      `${workflow}: manca il ramo di commit della registrazione interrotta`);
+    assert.ok(
+      (src.match(/git add -A -- 'generator\/data\/register-in-progress-\*\.json'/g) ?? []).length >= 2,
+      `${workflow}: il marker deve essere staged con -A sia al checkpoint sia nel commit`,
+    );
   }
 });
 

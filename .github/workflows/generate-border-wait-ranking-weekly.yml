@@ -124,6 +124,7 @@ jobs:
       # tsx, not node: this entry point reaches ../build-plugins/borderWaitData.ts
       # and services/borderWaitFormat.ts, which plain Node ESM cannot resolve.
       - name: Refresh ranking digest article body + snapshot JSON
+        id: producer
         env:
           DRY_RUN: ${{ steps.mode.outputs.dry == 'true' && '1' || '0' }}
         run: npx -y tsx@4 generator/scripts/generate-border-wait-ranking-article.mjs
@@ -174,11 +175,33 @@ jobs:
           } >> "$GITHUB_STEP_SUMMARY"
           exit 1
 
+      # A producer can leave a registration marker and then exit non-zero.
+      # The normal commit step is behind the default success() condition, so
+      # checkpoint the evidence explicitly before credentials and commit.
+      - name: Checkpoint — stage registration marker after producer failure
+        id: registration-checkpoint
+        if: always() && steps.mode.outputs.dry != 'true'
+        run: |
+          set -euo pipefail
+          PRODUCER_OUTCOME="${{ steps.producer.outcome }}"
+          if [ "$PRODUCER_OUTCOME" = "success" ]; then
+            echo "producer completed; the normal commit will stage marker changes"
+            exit 0
+          fi
+          if [ -z "$(git status --porcelain -- 'generator/data/register-in-progress-*.json')" ]; then
+            echo "producer outcome: $PRODUCER_OUTCOME; no changed registration marker to checkpoint"
+            exit 0
+          fi
+          # -A is intentional here: it preserves additions, updates, and
+          # deletions of the tracked marker set after an interrupted run.
+          git add -A -- 'generator/data/register-in-progress-*.json'
+          echo "staged registration marker checkpoint for producer outcome: $PRODUCER_OUTCOME"
+
       # Only the push needs a credential here — the window comes from the public
       # CDN and the render is offline — so Remote Config is loaded only on a run
       # that will actually commit. A dry run never touches it.
       - name: Prepare Firebase credentials
-        if: steps.mode.outputs.dry != 'true'
+        if: always() && steps.mode.outputs.dry != 'true'
         env:
           FIREBASE_SERVICE_ACCOUNT_JSON: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}
         run: |
@@ -191,32 +214,50 @@ jobs:
           echo "GOOGLE_APPLICATION_CREDENTIALS=$RUNNER_TEMP/sa.json" >> "$GITHUB_ENV"
 
       - name: Load secrets from Remote Config
-        if: steps.mode.outputs.dry != 'true'
+        if: always() && steps.mode.outputs.dry != 'true'
         run: node generator/scripts/load-rc-env.mjs
 
       - name: Configure git identity
-        if: steps.mode.outputs.dry != 'true'
+        if: always() && steps.mode.outputs.dry != 'true'
         run: |
           git config user.name "Valerie Linc"
           git config user.email "valerielinc@gmail.com"
 
       - name: Commit and push
         id: commit
-        if: steps.mode.outputs.dry != 'true'
+        if: always() && steps.mode.outputs.dry != 'true'
         run: |
           set -euo pipefail
-          # Keep an interrupted registration marker with the partial writes;
-          # the next run needs the evidence to refuse or repair the split.
-          shopt -s nullglob
-          REGISTER_MARKERS=(generator/data/register-in-progress-*.json)
-          git add public/data/border-wait-ranking.json \
-                  content/blog-body/it/classifica-dogane-ticino.ts \
-                  content/blog-body/en/classifica-dogane-ticino.ts \
-                  content/blog-body/de/classifica-dogane-ticino.ts \
-                  content/blog-body/fr/classifica-dogane-ticino.ts \
-                  "${REGISTER_MARKERS[@]}"
+          PRODUCER_OUTCOME="${{ steps.producer.outcome }}"
+          GUARD_OUTCOME="${{ steps.guard.outcome }}"
+          if [ "$PRODUCER_OUTCOME" != "success" ]; then
+            # The checkpoint normally staged this already. Repeat the
+            # deletion-aware add as a safety net if that step could not run.
+            if [ -n "$(git status --porcelain -- 'generator/data/register-in-progress-*.json')" ]; then
+              git add -A -- 'generator/data/register-in-progress-*.json'
+            fi
+            COMMIT_MESSAGE="Checkpoint interrupted border-wait registration"
+            echo "producer outcome: $PRODUCER_OUTCOME; committing registration evidence only"
+          elif [ "$GUARD_OUTCOME" != "success" ]; then
+            echo "::warning::content guard outcome: $GUARD_OUTCOME — refusing to commit producer output"
+            exit 0
+          else
+            COMMIT_MESSAGE="Weekly border-wait ranking digest refresh"
+            # Keep an interrupted registration marker with the partial writes;
+            # the next run needs the evidence to refuse or repair the split.
+            git add public/data/border-wait-ranking.json \
+                    content/blog-body/it/classifica-dogane-ticino.ts \
+                    content/blog-body/en/classifica-dogane-ticino.ts \
+                    content/blog-body/de/classifica-dogane-ticino.ts \
+                    content/blog-body/fr/classifica-dogane-ticino.ts
+            # Quote the pathspec so a missing file cannot expand into an empty
+            # argument, and -A also stages marker deletions.
+            if [ -n "$(git status --porcelain -- 'generator/data/register-in-progress-*.json')" ]; then
+              git add -A -- 'generator/data/register-in-progress-*.json'
+            fi
+          fi
           if git diff --cached --quiet; then
-            echo "no ranking digest changes"
+            echo "no ranking digest or registration marker checkpoint changes"
             exit 0
           fi
           if [ -z "${GITHUB_PAT:-}" ]; then
@@ -224,7 +265,7 @@ jobs:
             exit 1
           fi
 
-          git commit -m "Weekly border-wait ranking digest refresh"
+          git commit -m "$COMMIT_MESSAGE"
 
           TARGET="${{ github.ref_name }}"
           REMOTE="https://x-access-token:${GITHUB_PAT}@github.com/${{ github.repository }}.git"
