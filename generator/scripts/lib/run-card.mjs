@@ -44,7 +44,6 @@ import { mkdirSync, realpathSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import {
   inputCapVetoSummary,
-  isExhaustionBreakdownTotalValid,
   isInputCapDeferralVeto,
   isLegitimateQuotaDeferral,
   normalizeExhaustionBreakdown,
@@ -126,11 +125,39 @@ export function buildRunCard(report) {
 }
 
 /**
+ * `normalizeExhaustionBreakdown()` also repairs malformed buckets and echo
+ * fields, not only `total`. Replaying derived values is safe only when none of
+ * the fields that the producer emitted changed. A missing optional echo split
+ * is compatible with pre-split cards; a present but malformed split is not.
+ *
+ * @param {unknown} source
+ * @param {object} normalized
+ * @returns {boolean}
+ */
+function replayBreakdownNeedsRepair(source, normalized) {
+  if (!source || typeof source !== 'object' || Array.isArray(source)) return true;
+
+  for (const key of ['transient', 'persistent', 'total']) {
+    if (source[key] !== normalized[key]) return true;
+  }
+
+  const sourceEcho = source.providerCooldownSkips;
+  if (sourceEcho === undefined) return false;
+  if (!sourceEcho || typeof sourceEcho !== 'object' || Array.isArray(sourceEcho)) return true;
+
+  const normalizedEcho = normalized.providerCooldownSkips;
+  return ['total', 'transient', 'persistent'].some((key) => (
+    Object.hasOwn(sourceEcho, key) && sourceEcho[key] !== normalizedEcho[key]
+  ));
+}
+
+/**
  * Sanitize one card at the JSON replay boundary. A live card has a valid
  * `errors.length` denominator; a hand-edited or older card may not. Keep the
  * raw event visible, rebuild the smallest safe breakdown, and do not claim a
- * share from an inferred population. Input-cap provenance can still be
- * recomputed from its own stored refusal count.
+ * share from an inferred population. If any breakdown field needed repair,
+ * preserve the input-cap decision recorded by the run instead of recomputing
+ * it from the inferred numbers.
  *
  * @param {any} card
  * @returns {any}
@@ -144,7 +171,13 @@ export function normalizeRunCard(card) {
   if (!breakdown) {
     return {
       ...card,
-      quotaDeferral: { ...qd, breakdown: null, share: null, verdict: false, inputCapVeto: false },
+      quotaDeferral: {
+        ...qd,
+        breakdown: null,
+        share: null,
+        verdict: false,
+        inputCapVeto: typeof qd.inputCapVeto === 'boolean' ? qd.inputCapVeto : null,
+      },
     };
   }
   const inputCapDecision = (qd.inputCapDecision
@@ -163,7 +196,7 @@ export function normalizeRunCard(card) {
       maxSkippedReqLimit: inputCapDecision.maxSkippedReqLimit,
     };
   }
-  const repaired = !isExhaustionBreakdownTotalValid(sourceBreakdown);
+  const repaired = replayBreakdownNeedsRepair(sourceBreakdown, breakdown);
   const next = {
     ...qd,
     breakdown,
@@ -171,11 +204,21 @@ export function normalizeRunCard(card) {
     verdict: repaired ? false : isLegitimateQuotaDeferral(err),
   };
   if (inputCapDecision) {
-    next.inputCapVeto = isInputCapDeferralVeto(err);
-    next.inputCapDecision = {
-      ...inputCapDecision,
-      ...inputCapVetoSummary(err),
-    };
+    if (repaired) {
+      // The live card is the authority for the applied veto. Recomputing it
+      // from a denominator or bucket that this reader just invented would
+      // turn a legacy replay into a fabricated decision.
+      next.inputCapVeto = typeof qd.inputCapVeto === 'boolean' ? qd.inputCapVeto : null;
+      next.inputCapDecision = inputCapDecision;
+    } else {
+      next.inputCapVeto = isInputCapDeferralVeto(err);
+      next.inputCapDecision = {
+        ...inputCapDecision,
+        ...inputCapVetoSummary(err),
+      };
+    }
+  } else if (repaired) {
+    next.inputCapVeto = typeof qd.inputCapVeto === 'boolean' ? qd.inputCapVeto : null;
   }
   return { ...card, quotaDeferral: next };
 }
