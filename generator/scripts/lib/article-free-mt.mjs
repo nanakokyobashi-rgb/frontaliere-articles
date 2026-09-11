@@ -14,9 +14,98 @@
 
 import { hasUsableTranslatedText, hasUsableContentText } from './body2-payload-verdict.mjs';
 import { findLoneSurrogates } from '../../../scripts/lib/sanitize-control-chars.mjs';
+import { municipalityNames } from './topic-coverage-guard.mjs';
 
 const NAV_LINK_RE = /\[[^\]]+\]\(nav:[^)]+\)/g;
 const NAV_SENTINEL_RE = /0NAV(\d+)0/g;
+
+// Municipality names are proper names even when their spelling happens to be
+// an ordinary word in the target language (e.g. Martello → "hammer" in an
+// English translation). Keep the list derived from the canonical municipality
+// source; a hand-maintained allow-list would silently miss the next comune
+// added to `data/municipalities.ts`.
+const MUNICIPALITY_SENTINEL_RE = /0M0(\d+)Q0/gi;
+const MUNICIPALITY_NAMES = Object.freeze(
+  [...new Map(
+    municipalityNames()
+      .map((name) => [String(name).normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase(), String(name)])
+      .filter(([key]) => key.length > 0),
+  ).values()].sort((a, b) => b.length - a.length),
+);
+
+function escapeRegExp(value) {
+  return String(value).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+const MUNICIPALITY_MATCH_RE = MUNICIPALITY_NAMES.length > 0
+  ? new RegExp(
+    `(?<![\\p{L}\\p{N}])(?:${MUNICIPALITY_NAMES.map(escapeRegExp).join('|')})(?![\\p{L}\\p{N}])`,
+    'giu',
+  )
+  : null;
+
+function municipalityTermRegExp(name) {
+  return new RegExp(
+    `(?<![\\p{L}\\p{N}])${escapeRegExp(name)}(?![\\p{L}\\p{N}])`,
+    'iu',
+  );
+}
+
+function municipalityIsPresent(text, name) {
+  return municipalityTermRegExp(name).test(String(text ?? ''));
+}
+
+/**
+ * Mask municipality names before sending excerpt/imageAlt to machine
+ * translation. The sentinel contains no translatable word, and `restore()`
+ * fails closed when a provider drops or changes one.
+ *
+ * @param {string} text
+ * @returns {{ masked: string, expected: number, restore: (s: string) => { text: string, ok: boolean } }}
+ */
+export function maskMunicipalityNames(text) {
+  const source = String(text ?? '');
+  if (!MUNICIPALITY_MATCH_RE) {
+    return { masked: source, expected: 0, restore: (s) => ({ text: String(s ?? ''), ok: true }) };
+  }
+  MUNICIPALITY_MATCH_RE.lastIndex = 0;
+  const originals = [];
+  const masked = source.replace(MUNICIPALITY_MATCH_RE, (match) => {
+    const index = originals.push(match) - 1;
+    return `0M0${index}Q0`;
+  });
+  const restore = (translated) => {
+    let restored = 0;
+    const out = String(translated ?? '').replace(MUNICIPALITY_SENTINEL_RE, (_, index) => {
+      const original = originals[Number(index)];
+      if (original === undefined) return '';
+      restored += 1;
+      return original;
+    });
+    return { text: out, ok: restored === originals.length };
+  };
+  return { masked, expected: originals.length, restore };
+}
+
+/**
+ * Ensure a translated metadata field still contains every municipality name
+ * present in its Italian source. Masking handles the free-MT path; this final
+ * postcondition also covers the legacy LLM path and imageAlt, whose four
+ * locales arrive in the primary generation response rather than through MT.
+ * Missing names are appended as an explicit parenthetical instead of guessing
+ * which translated word should be replaced.
+ *
+ * @param {string} sourceText Italian source field
+ * @param {string} translatedText localized field
+ * @returns {{ text: string, added: string[] }}
+ */
+export function ensureMunicipalityNames(sourceText, translatedText) {
+  const target = String(translatedText ?? '');
+  const missing = MUNICIPALITY_NAMES.filter((name) =>
+    municipalityIsPresent(sourceText, name) && !municipalityIsPresent(target, name));
+  if (missing.length === 0 || target.trim().length === 0) return { text: target, added: [] };
+  return { text: `${target.trim()} (${missing.join(', ')})`, added: missing };
+}
 
 /**
  * Returns the translated field only when the model actually produced a string.
@@ -132,10 +221,10 @@ export function maskNavLinks(text) {
 
 /**
  * Translate a single article text field via the injected free MT translator,
- * preserving internal nav-links. Returns '' on any failure (empty input, MT
- * error, empty output, or a mangled nav-link sentinel) so the caller's per-field
- * recovery (LLM retry → IT fallback) takes over — free MT can only IMPROVE
- * coverage, never produce broken output.
+ * preserving internal nav-links and, when requested, municipality names.
+ * Returns '' on any failure (empty input, MT error, empty output, or a mangled
+ * sentinel) so the caller's per-field recovery (LLM retry → IT fallback) takes
+ * over — free MT can only IMPROVE coverage, never produce broken output.
  *
  * @param {object} args
  * @param {string} args.text                source text
@@ -146,6 +235,7 @@ export function maskNavLinks(text) {
  * @param {(a: { text: string, sourceLang: string, targetLang: string, fieldType: string }) => Promise<unknown>} args.translate
  *        the MT call (freeTranslateWithRetry in prod, a stub in tests)
  * @param {(s: string) => string} [args.balanceMarkdown]  optional markdown repair
+ * @param {boolean} [args.preserveMunicipalityNames=false] protect municipality names
  * @param {(msg: string) => void} [args.onWarn]
  * @param {(event: { targetLang: string, fieldType: string, fieldName?: string, reason: string }) => void} [args.onUnusableOutput]
  * @returns {Promise<string>}
@@ -158,15 +248,19 @@ export async function translateFieldFreeMt({
   fieldName = null,
   translate,
   balanceMarkdown = (s) => s,
+  preserveMunicipalityNames = false,
   onWarn = () => {},
   onUnusableOutput = () => {},
 }) {
   const src = String(text ?? '').trim();
   if (!src) return '';
-  const { masked, expected, restore } = maskNavLinks(src);
+  const nav = maskNavLinks(src);
+  const municipalities = preserveMunicipalityNames
+    ? maskMunicipalityNames(nav.masked)
+    : { masked: nav.masked, expected: 0, restore: (s) => ({ text: String(s ?? ''), ok: true }) };
   let out;
   try {
-    out = await translate({ text: masked, sourceLang, targetLang, fieldType });
+    out = await translate({ text: municipalities.masked, sourceLang, targetLang, fieldType });
   } catch (err) {
     onUnusableOutput({ targetLang, fieldType, ...(fieldName ? { fieldName } : {}), reason: 'error' });
     onWarn(`free-MT ${targetLang}:${fieldType} failed (${err?.message || err})`);
@@ -192,11 +286,20 @@ export async function translateFieldFreeMt({
     return '';
   }
   let restored = String(out);
-  if (expected > 0) {
-    const r = restore(restored);
+  if (municipalities.expected > 0) {
+    const r = municipalities.restore(restored);
+    if (!r.ok) {
+      onUnusableOutput({ targetLang, fieldType, ...(fieldName ? { fieldName } : {}), reason: 'mangled-municipality-name' });
+      onWarn(`free-MT ${targetLang}:${fieldType} municipality sentinel mangled (expected ${municipalities.expected})`);
+      return '';
+    }
+    restored = r.text;
+  }
+  if (nav.expected > 0) {
+    const r = nav.restore(restored);
     if (!r.ok) {
       onUnusableOutput({ targetLang, fieldType, ...(fieldName ? { fieldName } : {}), reason: 'mangled-nav-link' });
-      onWarn(`free-MT ${targetLang}:${fieldType} nav-link sentinel mangled (expected ${expected})`);
+      onWarn(`free-MT ${targetLang}:${fieldType} nav-link sentinel mangled (expected ${nav.expected})`);
       return '';
     }
     restored = r.text;

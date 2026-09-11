@@ -115,6 +115,32 @@ function assertSection(section, caller) {
   }
 }
 
+/**
+ * Validate the complete configuration key space before any registration starts.
+ *
+ * The section is part of a marker filename, so a key accepted by
+ * `ARTICLE_SECTION_CONFIGS` but rejected by `SECTION_RE` would otherwise fail
+ * only when the first article reached the registration transaction. Keep this
+ * check next to the filename validator so the two accepted key spaces cannot
+ * drift.
+ *
+ * @param {object} configs
+ */
+export function assertSectionConfigKeys(configs) {
+  if (!configs || typeof configs !== 'object' || Array.isArray(configs)) {
+    throw new RegisterLockError(
+      'article section configuration must be a non-array object before registration starts',
+    );
+  }
+  const invalid = Object.keys(configs).filter((key) => !SECTION_RE.test(key));
+  if (invalid.length > 0) {
+    throw new RegisterLockError(
+      `invalid article section configuration key(s): ${invalid.map((key) => JSON.stringify(key)).join(', ')}; ` +
+        'section keys must match /^[a-z0-9][a-z0-9-]*$/ before registration starts',
+    );
+  }
+}
+
 /** Repo-relative path of the marker for one section. */
 export function registerLockFile(section) {
   assertSection(section, 'registerLockFile');
@@ -356,7 +382,10 @@ export function resolveRegisterLock(projectRoot, buildTargets, section) {
     if (!lock) continue;
     // Un marker dell'ALTRA sezione: lo si lascia esattamente dov'e'. Vale solo
     // per il file legacy, che e' l'unico non gia' scopato dal proprio nome.
-    if (lock.section && lock.section !== section) {
+    // Un marker nel path per-sezione con sezione interna discordante e' invece
+    // anomalo: non va trasformato in un defer silenzioso, ma verificato usando
+    // la sezione dichiarata nel marker.
+    if (relPath === LEGACY_REGISTER_LOCK_FILE && lock.section && lock.section !== section) {
       deferred.push({ file: relPath, id: lock.id, section: lock.section, runId: lock.runId, origin: describeLockOrigin(lock) });
       continue;
     }

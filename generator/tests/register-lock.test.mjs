@@ -44,6 +44,7 @@ import {
   readLegacyRegisterLock,
   registrationTargetStatus,
   resolveRegisterLock,
+  assertSectionConfigKeys,
   RegisterLockError,
   isRegisterLockError,
   isRegisterLockHeld,
@@ -406,6 +407,69 @@ test('il marker LEGACY (pre-#965, unico per repo) resta risolvibile dalla sezion
   assert.equal(owner.state, 'nothing-written');
   assert.deepEqual(owner.resolved.map((r) => r.file), [LEGACY_REGISTER_LOCK_FILE]);
   assert.equal(fs.existsSync(legacy), false);
+});
+
+test('un marker per-sezione con sezione interna discordante non viene deferito', () => {
+  // Il nome del file è già il confine di ownership: un marker non-legacy con
+  // un campo interno stantio non deve essere trattato come marker straniero e
+  // lasciato lì per sempre. Si verifica sui target dichiarati nel marker e si
+  // rimuove solo dopo aver stabilito che non è stato scritto nulla.
+  const root = sandbox();
+  const build = makeTargets(root);
+  beginRegisterLock(root, ARTICLE_ID, SECTION);
+  const marker = registerLockPath(root, SECTION);
+  const parsed = JSON.parse(fs.readFileSync(marker, 'utf-8'));
+  parsed.section = 'svizzera';
+  fs.writeFileSync(marker, JSON.stringify(parsed), 'utf-8');
+
+  const outcome = resolveRegisterLock(root, build, SECTION);
+  assert.deepEqual(outcome, {
+    state: 'nothing-written',
+    id: ARTICLE_ID,
+    section: 'svizzera',
+    resolved: [{
+      file: registerLockFile(SECTION),
+      state: 'nothing-written',
+      id: ARTICLE_ID,
+      section: 'svizzera',
+      runId: CURRENT_RUN_ID,
+    }],
+    deferred: [],
+  });
+  assert.equal(fs.existsSync(marker), false, 'il marker anomalo risolto non resta come defer permanente');
+});
+
+test('le chiavi di configurazione delle sezioni sono validate prima del primo run', () => {
+  assert.doesNotThrow(() => assertSectionConfigKeys({ frontaliere: {}, 'svizzera-2': {} }));
+  for (const bad of ['Frontaliere', '../svizzera', 'svizzera/ch', '', '-svizzera', '_svizzera']) {
+    const configs = { frontaliere: {}, [String(bad)]: {} };
+    assert.throws(
+      () => assertSectionConfigKeys(configs),
+      (err) => isRegisterLockError(err) && /invalid article section configuration key/.test(err.message),
+      `chiave non validata: ${String(bad)}`,
+    );
+  }
+  assert.throws(() => assertSectionConfigKeys([]), /non-array object/);
+
+  const configStart = CREATE_ARTICLE_SRC.indexOf('export const ARTICLE_SECTION_CONFIGS = {');
+  const configEnd = CREATE_ARTICLE_SRC.indexOf('\n};', configStart);
+  const validationAt = CREATE_ARTICLE_SRC.indexOf('assertSectionConfigKeys(ARTICLE_SECTION_CONFIGS);', configStart);
+  const parseAt = CREATE_ARTICLE_SRC.indexOf('function parseSectionArg', configStart);
+  assert.ok(configStart !== -1 && configEnd !== -1 && validationAt > configEnd && validationAt < parseAt,
+    'create-article deve validare la mappa prima di parsare la sezione e iniziare il lavoro');
+});
+
+test('i tre workflow producer con staging esplicito includono il marker di registrazione', () => {
+  for (const workflow of [
+    '../../.github/workflows/generate-daily-brief.yml',
+    '../../.github/workflows/refresh-events-digest.yml',
+    '../../.github/workflows/generate-border-wait-ranking-weekly.yml',
+  ]) {
+    const src = fs.readFileSync(new URL(workflow, import.meta.url), 'utf-8');
+    assert.match(src, /generator\/data\/register-in-progress-\*\.json/,
+      `${workflow}: marker non presente nello staging esplicito`);
+    assert.match(src, /nullglob/, `${workflow}: un giorno senza marker deve restare un commit valido`);
+  }
 });
 
 test('il marker porta l\'identita\' del RUN, non solo il pid', () => {

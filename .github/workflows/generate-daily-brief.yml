@@ -214,6 +214,7 @@ jobs:
           # esiste sempre qui e finisce in stage solo se lo streak si e' mosso.
           git add public/data/daily-brief.json \
                   data/daily-brief-degradation.json \
+                  generator/data/register-in-progress-*.json \
                   content/blogArticleIds.ts \
                   content/routerBlogData.ts \
                   content/blog-articles-data.ts \

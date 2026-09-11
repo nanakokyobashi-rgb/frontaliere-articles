@@ -38,7 +38,11 @@ import {
   resolveContentFieldSources,
   normalizeItalianContentFromPayload,
 } from '../scripts/lib/body2-payload-verdict.mjs';
-import { translateFieldFreeMt } from '../scripts/lib/article-free-mt.mjs';
+import {
+  translateFieldFreeMt,
+  maskMunicipalityNames,
+  ensureMunicipalityNames,
+} from '../scripts/lib/article-free-mt.mjs';
 import {
   createFreeMtRecoveryReport,
   recordFreeMtUnusableOutput,
@@ -167,6 +171,65 @@ describe('translateFieldFreeMt — l’uscita di un motore non e’ prosa', () =
     });
     assert.equal(out, '');
     assert.deepEqual(signals, [{ targetLang: 'de', fieldType: 'title', reason: 'non-string' }]);
+  });
+
+  test('preserva i nomi propri dei comuni attraverso la traduzione free-MT', async () => {
+    const input = 'Guida pratica per Besano e Martello';
+    const out = await translateFieldFreeMt({
+      text: input,
+      sourceLang: 'it',
+      targetLang: 'de',
+      fieldType: 'description',
+      preserveMunicipalityNames: true,
+      translate: async ({ text }) => text.replace('Guida pratica per', 'Praktischer Leitfaden für'),
+    });
+    assert.equal(out, 'Praktischer Leitfaden für Besano e Martello');
+  });
+
+  test('un sentinel di comune alterato fa scattare il recupero, non pubblica il nome tradotto', async () => {
+    const signals = [];
+    const out = await translateFieldFreeMt({
+      text: 'Guida pratica per Besano',
+      sourceLang: 'it',
+      targetLang: 'de',
+      fieldType: 'description',
+      preserveMunicipalityNames: true,
+      translate: async ({ text }) => text.replace(/0M0\d+Q0/g, 'Gemeinde'),
+      onUnusableOutput: (event) => signals.push(event),
+    });
+    assert.equal(out, '');
+    assert.deepEqual(signals, [{
+      targetLang: 'de',
+      fieldType: 'description',
+      reason: 'mangled-municipality-name',
+    }]);
+  });
+
+  test('il postcondition reinserisce il nome originale anche fuori dal percorso free-MT', () => {
+    assert.deepEqual(
+      ensureMunicipalityNames('Guida pratica per Besano', 'Praktischer Leitfaden'),
+      { text: 'Praktischer Leitfaden (Besano)', added: ['Besano'] },
+    );
+    assert.deepEqual(
+      ensureMunicipalityNames('Guida pratica per Besano', 'Praktischer Leitfaden für Besano'),
+      { text: 'Praktischer Leitfaden für Besano', added: [] },
+    );
+  });
+
+  test('la lista protetta deriva dai comuni canonici e non da una sequenza manuale', () => {
+    const masked = maskMunicipalityNames('Besano, Martello e Villa di Chiavenna');
+    assert.equal(masked.expected, 3);
+    assert.match(masked.masked, /0M0\d+Q0/);
+    assert.equal(masked.restore(masked.masked).text, 'Besano, Martello e Villa di Chiavenna');
+  });
+
+  test('il percorso articolo abilita la protezione sull\'excerpt e la applica dopo la traduzione', () => {
+    assert.match(CREATE_ARTICLE, /preserveMunicipalityNames:\s*true/);
+    const translatedAt = CREATE_ARTICLE.indexOf('await translateArticle(data);');
+    const guardAt = CREATE_ARTICLE.indexOf('preserveMunicipalityNamesInMetadata(data);', translatedAt);
+    const nextStepAt = CREATE_ARTICLE.indexOf('relocalizeSlugsAfterTranslation(data', translatedAt);
+    assert.ok(translatedAt !== -1 && guardAt > translatedAt && guardAt < nextStepAt,
+      'il postcondition dei nomi propri deve seguire la traduzione prima delle scritture successive');
   });
 });
 

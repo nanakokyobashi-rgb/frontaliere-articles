@@ -479,6 +479,16 @@
       }
     },
     {
+      "path": "scripts/lib/seo-entry.mjs",
+      "mode": "corpus-only",
+      "reason": "Helper fail-closed per rimuovere atomicamente tutte le entry SEO duplicate durante il ritiro di un articolo (#1130). Il sito non ha questo percorso di pubblicazione corpus-side e non deve ricevere una copia con assunzioni diverse sul formato dei chunk SEO.",
+      "baseline": {
+        "site": null,
+        "corpus": "0366f72a12026e09",
+        "alignedAt": "2026-09-11"
+      }
+    },
+    {
       "path": "scripts/lib/workflow-scope-detect.mjs",
       "mode": "identical",
       "baseline": {

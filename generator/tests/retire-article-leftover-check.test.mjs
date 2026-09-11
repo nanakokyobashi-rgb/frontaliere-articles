@@ -34,11 +34,16 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
-import { readFileSync } from 'node:fs';
+import { mkdtempSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { mentionsId } from '../../scripts/lib/mentions-id.mjs';
 import {
+  IMAGES_LEDGER,
+  SECTIONS,
+  leftoverSurfacesFor,
+  requiredSurfaceFilesFor,
   surfaceMentionsArticleId,
   surfaceArticleIdStatus,
   SURFACE_ARTICLE_ID_STATUS,
@@ -160,6 +165,31 @@ test('un ledger illeggibile è distinto da un residuo reale, ma resta bloccante'
     SURFACE_ARTICLE_ID_STATUS.ABSENT,
   );
   assert.equal(surfaceMentionsArticleId(rel, '{ non-json', ID), true);
+});
+
+test('il ledger immagini può contenere l\'id ma non è una superficie residua', () => {
+  const fixture = JSON.stringify({ [ID]: 'images/blog/disoccupazione.webp' });
+  assert.equal(surfaceArticleIdStatus(IMAGES_LEDGER, fixture, ID), SURFACE_ARTICLE_ID_STATUS.PRESENT);
+  assert.equal(leftoverSurfacesFor('frontaliere').includes(IMAGES_LEDGER), false);
+  assert.equal(leftoverSurfacesFor('svizzera').includes(IMAGES_LEDGER), false);
+});
+
+test('una superficie obbligatoria mancante fallisce esplicitamente', () => {
+  const root = mkdtempSync(path.join(os.tmpdir(), 'article-surfaces-'));
+  try {
+    const required = [SECTIONS.frontaliere.slugDataFile, ...SECTIONS.frontaliere.metaFiles];
+    for (const rel of required) {
+      const abs = path.join(root, rel);
+      mkdirSync(path.dirname(abs), { recursive: true });
+      writeFileSync(abs, 'fixture\n', 'utf-8');
+    }
+    assert.throws(
+      () => requiredSurfaceFilesFor('frontaliere', root),
+      /superfici obbligatorie mancanti.*content\/blog-articles-data\.ts/,
+    );
+  } finally {
+    rmSync(root, { recursive: true, force: true });
+  }
 });
 
 test('retire-article rifiuta un id mancante, vuoto o fatto di spazi prima di scrivere', () => {

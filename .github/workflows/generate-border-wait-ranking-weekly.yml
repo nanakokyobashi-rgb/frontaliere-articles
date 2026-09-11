@@ -205,11 +205,16 @@ jobs:
         if: steps.mode.outputs.dry != 'true'
         run: |
           set -euo pipefail
+          # Keep an interrupted registration marker with the partial writes;
+          # the next run needs the evidence to refuse or repair the split.
+          shopt -s nullglob
+          REGISTER_MARKERS=(generator/data/register-in-progress-*.json)
           git add public/data/border-wait-ranking.json \
                   content/blog-body/it/classifica-dogane-ticino.ts \
                   content/blog-body/en/classifica-dogane-ticino.ts \
                   content/blog-body/de/classifica-dogane-ticino.ts \
-                  content/blog-body/fr/classifica-dogane-ticino.ts
+                  content/blog-body/fr/classifica-dogane-ticino.ts \
+                  "${REGISTER_MARKERS[@]}"
           if git diff --cached --quiet; then
             echo "no ranking digest changes"
             exit 0

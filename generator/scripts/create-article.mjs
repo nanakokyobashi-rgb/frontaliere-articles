@@ -139,7 +139,12 @@ function _preferisceModelloSenzaCap(prefer) {
 // Routing article translation through it instead of the generation LLM frees
 // ~60% of per-article LLM calls for actual generation (the quota bottleneck).
 import { freeTranslateWithRetry, balanceMarkdownMarkers } from './lib/free-translate.mjs';
-import { translateFieldFreeMt, translatedStringOrNull, joinTranslatedChunks } from './lib/article-free-mt.mjs';
+import {
+  translateFieldFreeMt,
+  translatedStringOrNull,
+  joinTranslatedChunks,
+  ensureMunicipalityNames,
+} from './lib/article-free-mt.mjs';
 import {
   createFreeMtRecoveryReport,
   recordFreeMtUnusableOutput,
@@ -305,6 +310,7 @@ import {
   endRegisterLock as endRegisterLockImpl,
   resolveRegisterLock as resolveRegisterLockImpl,
   registerLockFile,
+  assertSectionConfigKeys,
   RegisterLockError,
   isRegisterLockError,
   isRegisterLockHeld as isRegisterLockHeldImpl,
@@ -3121,6 +3127,13 @@ export const ARTICLE_SECTION_CONFIGS = {
     sourceUrlsFile: 'data/swiss-article-source-urls.json',
   },
 };
+
+// The filename validator in register-lock.mjs and this exported config must
+// agree before the generator can start: a key accepted here is later used in
+// a per-section marker path. Fail at module startup, not halfway through the
+// first article registration when a malformed section would already have
+// written unrelated state.
+assertSectionConfigKeys(ARTICLE_SECTION_CONFIGS);
 
 /** Parse --section=<name> from argv (default frontaliere). Validates. */
 function parseSectionArg(argv) {
@@ -9864,17 +9877,54 @@ const ARTICLE_TRANSLATE_FREE_MT = String(process.env.ARTICLE_TRANSLATE_FREE_MT ?
 // distinto dal `fieldType` che il motore MT riceve (`title`/`description`): e'
 // la chiave con cui il loop missing-field piu' sotto chiede «questo campo l'ha
 // rifiutato il free-MT?» prima di addebitargli il cap.
-function freeMtField(text, sourceLang, targetLang, fieldType, field = fieldType) {
+function freeMtField(
+  text,
+  sourceLang,
+  targetLang,
+  fieldType,
+  field = fieldType,
+  { preserveMunicipalityNames = false } = {},
+) {
   return translateFieldFreeMt({
     text,
     sourceLang,
     targetLang,
     fieldType,
+    preserveMunicipalityNames,
     translate: freeTranslateWithRetry,
     balanceMarkdown: balanceMarkdownMarkers,
     onWarn: (msg) => console.error(`  ⚠️  ${msg} — recupero per-campo`),
     onUnusableOutput: (event) => recordFreeMtUnusableOutput(RUN_REPORT.translation, { ...event, field }),
   });
+}
+
+/**
+ * Restore municipality spellings on every localized metadata surface. The
+ * free-MT excerpt path masks them before translation; this final postcondition
+ * also covers the legacy LLM response and `imageAlt`, which arrives as a
+ * four-locale field in the primary generation payload.
+ */
+function preserveMunicipalityNamesInMetadata(data) {
+  const sourceExcerpt = data.content?.it?.excerpt;
+  const sourceImageAlt = data.imageAlt?.it;
+  for (const locale of ['en', 'de', 'fr']) {
+    const localized = data.content?.[locale];
+    if (typeof sourceExcerpt === 'string' && typeof localized?.excerpt === 'string') {
+      const fixed = ensureMunicipalityNames(sourceExcerpt, localized.excerpt);
+      if (fixed.added.length > 0) {
+        console.warn(`  ⚠️  [municipality-names] ${locale.toUpperCase()}.excerpt: reinseriti ${fixed.added.join(', ')}`);
+        localized.excerpt = fixed.text;
+      }
+    }
+    if (typeof sourceImageAlt === 'string' && typeof data.imageAlt?.[locale] === 'string') {
+      const fixed = ensureMunicipalityNames(sourceImageAlt, data.imageAlt[locale]);
+      if (fixed.added.length > 0) {
+        console.warn(`  ⚠️  [municipality-names] ${locale.toUpperCase()}.imageAlt: reinseriti ${fixed.added.join(', ')}`);
+        data.imageAlt[locale] = fixed.text;
+      }
+    }
+  }
+  return data;
 }
 
 // Free-MT replacement for translateContent: same return shape ({title, excerpt,
@@ -9886,7 +9936,14 @@ async function translateContentFreeMt(sourceLang, targetLang, targetLabel, sourc
   const bodyFields = Object.keys(collectBodySections(sourceContent));
   const [title, excerpt, ...bodyValues] = await Promise.all([
     freeMtField(sourceContent.title, sourceLang, targetLang, 'title', 'title'),
-    freeMtField(sourceContent.excerpt, sourceLang, targetLang, 'description', 'excerpt'),
+    freeMtField(
+      sourceContent.excerpt,
+      sourceLang,
+      targetLang,
+      'description',
+      'excerpt',
+      { preserveMunicipalityNames: true },
+    ),
     ...bodyFields.map((field) => freeMtField(sourceContent[field], sourceLang, targetLang, 'description', field)),
   ]);
 
@@ -15744,6 +15801,7 @@ async function generateAndValidateArticle(url, sourceContext = null) {
 
   // Step 3b: Translate to EN/DE/FR (only runs if not a duplicate)
   await translateArticle(data);
+  preserveMunicipalityNamesInMetadata(data);
 
   // Step 3b.0: Rilocalizza gli slug en/de/fr (issue #191). Questo e' il primo
   // istante della pipeline in cui i titoli tradotti esistono, quindi e' il

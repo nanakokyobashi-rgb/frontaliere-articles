@@ -183,12 +183,18 @@ jobs:
           set -euo pipefail
           # data/events.json is gitignored: it is a fetched cache of another
           # repo's dataset, and committing 1.9 MB of it per run would be noise.
+          # A registration marker is tracked evidence of a crash between
+          # writes; stage it so the next run can resolve the split instead of
+          # receiving a fresh checkout with only half the transaction.
+          shopt -s nullglob
+          REGISTER_MARKERS=(generator/data/register-in-progress-*.json)
           git add content/blog-body/it/eventi-weekend-ticino.ts \
                   content/blog-body/en/eventi-weekend-ticino.ts \
                   content/blog-body/de/eventi-weekend-ticino.ts \
                   content/blog-body/fr/eventi-weekend-ticino.ts \
                   content/blog-articles-data.ts \
-                  content/seo/seo-blog-5.ts
+                  content/seo/seo-blog-5.ts \
+                  "${REGISTER_MARKERS[@]}"
           if git diff --cached --quiet; then
             echo "no digest changes"
             exit 0
