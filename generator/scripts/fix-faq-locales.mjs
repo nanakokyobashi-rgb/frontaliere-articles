@@ -489,17 +489,31 @@ export function shouldSkipFaqRejection(previous, sourceFaq) {
     && Number(previous.consecutive) >= FAQ_REJECTION_MAX_CONSECUTIVE;
 }
 
-/** Esclude gli issue gia' throttled prima di consumare il limite del run. */
+/**
+ * Separa gli issue gia' throttled prima di consumare il limite del run.
+ * Restituire il gruppo escluso rende osservabile la differenza fra lavoro
+ * parcheggiato e lavoro che non entra nel batch per il limite esplicito.
+ */
 export function selectFaqIssuesForProcessing(issues, rejectionLedger, section, limit) {
   const ledger = rejectionLedger && typeof rejectionLedger === 'object'
     ? rejectionLedger
     : {};
-  return issues
-    .filter((issue) => !shouldSkipFaqRejection(
+  const throttled = [];
+  const eligible = [];
+  for (const issue of issues) {
+    if (shouldSkipFaqRejection(
       ledger[faqLocaleIssueKey(issue.articleId, issue.locale, section)],
       issue.itFaq,
-    ))
-    .slice(0, limit);
+    )) {
+      throttled.push(issue);
+    } else {
+      eligible.push(issue);
+    }
+  }
+  return {
+    toProcess: eligible.slice(0, limit),
+    throttled,
+  };
 }
 
 const FAQ_REJECTION_LEDGER_PATH = resolve(ROOT, 'data/faq-locale-rejections.json');
@@ -684,25 +698,28 @@ async function main() {
     return;
   }
 
-  const toProcess = selectFaqIssuesForProcessing(issues, rejectionLedger, SECTION, LIMIT);
+  const { toProcess, throttled } = selectFaqIssuesForProcessing(issues, rejectionLedger, SECTION, LIMIT);
   console.log(`\nProcessing ${toProcess.length} issues...\n`);
 
-  let fixed = 0, failed = 0, repeatedRejectionSkips = 0;
+  const repeatedRejectionSkips = throttled.length;
+  let fixed = 0;
+  let failed = 0;
+  for (const issue of throttled) {
+    const issueKey = faqLocaleIssueKey(issue.articleId, issue.locale, SECTION);
+    const previousRejection = rejectionLedger[issueKey];
+    const rejectionKind = previousRejection.prunedWrite
+      ? 'potatura sopra pavimento già pubblicata'
+      : 'rifiuto sotto pavimento';
+    console.error(`[${issue.locale.toUpperCase()}] ${issue.articleId} ⏭️  ${rejectionKind} `
+      + `registrata ${previousRejection.consecutive} volte consecutive: salto la ritraduzione`);
+    if (!previousRejection.prunedWrite) failed++;
+  }
   for (let idx = 0; idx < toProcess.length; idx++) {
     const issue = toProcess[idx];
     const label = `[${idx + 1}/${toProcess.length}] [${issue.locale.toUpperCase()}] ${issue.articleId}`;
     const issueKey = faqLocaleIssueKey(issue.articleId, issue.locale, SECTION);
     try {
       const previousRejection = rejectionLedger[issueKey];
-      if (shouldSkipFaqRejection(previousRejection, issue.itFaq)) {
-        const rejectionKind = previousRejection.prunedWrite
-          ? 'potatura sopra pavimento già pubblicata'
-          : 'rifiuto sotto pavimento';
-        console.error(`${label} ⏭️  ${rejectionKind} registrata ${previousRejection.consecutive} volte consecutive: salto la ritraduzione`);
-        repeatedRejectionSkips++;
-        if (!previousRejection.prunedWrite) failed++;
-        continue;
-      }
 
       const translated = await translateFaqArray(issue.itFaq, issue.locale);
       if (!translated) {
@@ -768,7 +785,8 @@ async function main() {
     }
   }
 
-  console.log(`\n📊 Results: ${fixed} fixed, ${failed} failed, ${issues.length - toProcess.length} remaining`
+  const remaining = Math.max(0, issues.length - toProcess.length - throttled.length);
+  console.log(`\n📊 Results: ${fixed} fixed, ${failed} failed, ${remaining} remaining`
     + ` (${repeatedRejectionSkips} repeated FAQ rejections skipped)`);
   logCascadeSummary();
 }
