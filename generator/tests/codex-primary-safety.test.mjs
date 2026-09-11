@@ -14,6 +14,7 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..')
 const action = fs.readFileSync(path.join(ROOT, '.github/actions/claude-codex-fallback/action.yml'), 'utf8');
 const lessonsWorkflow = fs.readFileSync(path.join(ROOT, '.github/workflows/lessons-harvester.yml'), 'utf8');
 const followupWorkflow = fs.readFileSync(path.join(ROOT, '.github/workflows/post-merge-followup.yml'), 'utf8');
+const testsWorkflow = fs.readFileSync(path.join(ROOT, '.github/workflows/tests.yml'), 'utf8');
 
 function workflowStep(source, name) {
   const start = source.indexOf(`      - name: ${name}`);
@@ -102,6 +103,18 @@ test('il bridge corpus resta host-side anche quando il PAT arriva da GITHUB_ENV'
   assert.match(routing, /gh issue create --repo nanakokyobashi-rgb\/frontaliere-articles/);
   assert.doesNotMatch(routing, /GH_TOKEN=\"\$GITHUB_PAT\"/,
     'Codex deve usare il wrapper gh del bridge, non una variabile che il sandbox non riceve');
+});
+
+test('the corpus review loads its host-side PAT before invoking Codex', () => {
+  const reviewStep = workflowStep(testsWorkflow, 'Run Claude review');
+  const followupStep = workflowStep(followupWorkflow, 'Run Claude follow-up triage (batch)');
+  assert.match(testsWorkflow, /Prepare Firebase credentials for Codex review/);
+  assert.match(testsWorkflow, /Load cross-repo Codex credentials/);
+  assert.match(testsWorkflow, /node generator\/scripts\/load-rc-env\.mjs/);
+  assert.match(reviewStep, /codex_corpus_github_token: \$\{\{ env\.GITHUB_PAT_NANAKO \|\| env\.GITHUB_PAT \}\}/);
+  assert.doesNotMatch(reviewStep, /GITHUB_PAT:\s*\$\{\{ env\.GITHUB_PAT \}\}/);
+  assert.match(followupStep, /codex_corpus_github_token: \$\{\{ env\.GITHUB_PAT_NANAKO \|\| env\.GITHUB_PAT \}\}/);
+  assert.doesNotMatch(followupStep, /GITHUB_PAT:\s*\$\{\{ env\.GITHUB_PAT \}\}/);
 });
 
 test('#1312: Lessons harvester non blocca Codex quando la quota Claude e\u0027 esaurita', () => {

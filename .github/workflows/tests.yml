@@ -540,6 +540,23 @@ jobs:
           HEAD_SHA: ${{ steps.resolve.outputs.head_sha }}
         run: node scripts/ci/review-test-policy.mjs post
 
+      - name: Prepare Firebase credentials for Codex review
+        if: steps.body_contract.outcome != 'failure' && steps.tier.outputs.tier != 'tests-only' && steps.resolve.outputs.should_review == 'true' && steps.guard.outputs.skip != 'true'
+        env:
+          FIREBASE_SERVICE_ACCOUNT_JSON: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}
+        run: |
+          if [ -n "$FIREBASE_SERVICE_ACCOUNT_JSON" ]; then
+            printf '%s' "$FIREBASE_SERVICE_ACCOUNT_JSON" > "$RUNNER_TEMP/codex-firebase-sa.json"
+            echo "GOOGLE_APPLICATION_CREDENTIALS=$RUNNER_TEMP/codex-firebase-sa.json" >> "$GITHUB_ENV"
+          else
+            echo "::warning::FIREBASE_SERVICE_ACCOUNT_JSON assente: il bridge corpus non potrà caricare il PAT da Remote Config"
+          fi
+
+      - name: Load cross-repo Codex credentials
+        if: steps.body_contract.outcome != 'failure' && steps.tier.outputs.tier != 'tests-only' && steps.resolve.outputs.should_review == 'true' && steps.guard.outputs.skip != 'true'
+        continue-on-error: true
+        run: node generator/scripts/load-rc-env.mjs
+
       - name: Run Claude review
         # Tetto sullo step (stessa classe del tetto su `Run Claude fix` in
         # issue-fix.yml). Qui il cap del job e' 360min ed e' CONDIVISO con la
@@ -566,6 +583,10 @@ jobs:
           INCREMENTAL_BASE: ${{ steps.tier.outputs.incremental_base }}
         with:
           codex_github_token: ${{ env.APP_TOKEN || secrets.GITHUB_TOKEN }}
+          # The input expression may be empty when the value was loaded through
+          # GITHUB_ENV; the composite action also captures the inherited runtime
+          # GITHUB_PAT_NANAKO/GITHUB_PAT host-side and never passes it to Codex.
+          codex_corpus_github_token: ${{ env.GITHUB_PAT_NANAKO || env.GITHUB_PAT }}
           codex_auth_json: ${{ secrets.CODEX_AUTH_JSON }}
           github_token: ${{ env.APP_TOKEN || secrets.GITHUB_TOKEN }}
           review_marker: '<!-- CODEX_FALLBACK_REVIEW -->'
@@ -688,6 +709,10 @@ jobs:
         run: node scripts/ci/review-gate.mjs
 
       # La Jobs API espone solo la conclusion del review gate, non la ragione
+      - name: Cleanup Firebase credentials for Codex review
+        if: always()
+        run: rm -f -- "$RUNNER_TEMP/codex-firebase-sa.json"
+
       # che lo ha fatto uscire 1. Il processo scrive failure_kind su
       # GITHUB_OUTPUT: questo step trasforma un verdetto esplicito in una
       # conclusione failure e lascia success un errore API/rate-limit o uno
