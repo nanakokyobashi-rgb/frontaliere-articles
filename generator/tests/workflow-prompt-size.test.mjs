@@ -121,6 +121,10 @@ function scanPromptKeys(text, file = '') {
 test('il discovery copre workflow e action e trova gli scalar prompt', () => {
   const files = sourceFiles();
   assert.ok(files.length > 0, 'le cartelle GitHub sono vuote o il discovery è rotto');
+  assert.ok(
+    files.some((file) => file.startsWith('.github/actions/')),
+    'il discovery deve includere la glob `.github/actions/**` oltre ai workflow',
+  );
 
   const scans = files.map((file) => ({
     file,
