@@ -322,3 +322,15 @@ test('nel file del ranking sono atomici ENTRAMBI i choke-point, non solo il body
   assert.match(src, /renameSync\(\s*rankingTmp\s*,\s*RANKING_JSON_PATH\s*\)/,
     'il commit su RANKING_JSON_PATH deve passare da renameSync(rankingTmp, RANKING_JSON_PATH)');
 });
+
+test('il verdetto missing precede dead quando il censimento trova due problemi', () => {
+  const src = fs.readFileSync(new URL('./corpus-write-atomic.test.mjs', import.meta.url), 'utf-8');
+  const missing = src.indexOf('assert.deepEqual(missing, []');
+  const dead = src.indexOf('assert.deepEqual(dead, []');
+  assert.ok(missing >= 0, 'il censimento deve avere un verdetto esplicito per i choke-point nuovi');
+  assert.ok(dead >= 0, 'il censimento deve avere un verdetto esplicito per il bookkeeping morto');
+  assert.ok(
+    missing < dead,
+    'un choke-point non censito deve essere mostrato prima di una voce dead, così il messaggio utile non viene nascosto',
+  );
+});
