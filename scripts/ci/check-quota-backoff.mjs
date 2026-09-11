@@ -153,6 +153,29 @@ export function beaconCandidates(lists, { now, lookbackH, max }) {
   return [...seen.values()].sort((a, b) => b.t - a.t).slice(0, max).map((x) => x.number);
 }
 
+/**
+ * Un candidato PR resta osservabile anche quando la coda issue riempie il
+ * tetto. I beacon dei fixer PR sono la sola fonte del quota window per un
+ * round già passato al review/fixer, quindi una lista di issue non può
+ * renderli tutti invisibili.
+ */
+export function mergeBeaconCandidates(issueCandidates = [], prCandidates = [], max = MAX_ISSUES) {
+  const limit = Math.max(0, Number(max) || 0);
+  const issues = [...new Set((issueCandidates || []).filter((n) => Number.isInteger(n)))];
+  const prs = [...new Set((prCandidates || []).filter((n) => Number.isInteger(n)))];
+  if (!limit || !prs.length) return issues.slice(0, limit);
+
+  const reservedPr = prs.find((number) => !issues.includes(number));
+  if (reservedPr === undefined) return [...issues, ...prs].slice(0, limit);
+
+  const withoutReserved = issues.filter((number) => number !== reservedPr);
+  return [
+    ...withoutReserved.slice(0, Math.max(0, limit - 1)),
+    reservedPr,
+    ...prs.filter((number) => number !== reservedPr),
+  ].slice(0, limit);
+}
+
 /** Project an active beacon onto either the legacy backoff or Codex fallback. */
 export function quotaFallbackDecision({ resetsAt = null, nowSec, codexFallbackMode = false } = {}) {
   const active = Number.isFinite(Number(resetsAt))
@@ -246,9 +269,7 @@ function activeBeaconIn(scope, nowMs, nowSec) {
     listIssues(LBL_DECOMP_QUEUED, scope),
   ], opts);
   const prCandidates = beaconCandidates([listPullRequests(scope)], opts);
-  const candidates = [...issueCandidates, ...prCandidates]
-    .filter((num, i, all) => all.indexOf(num) === i)
-    .slice(0, MAX_ISSUES);
+  const candidates = mergeBeaconCandidates(issueCandidates, prCandidates, MAX_ISSUES);
   for (const num of candidates) {
     const r = maxQuotaResetsAt(commentsOf(num, scope));
     if (r !== null && isBackoffActive(r, nowSec)) return { resetsAt: r, issue: num };

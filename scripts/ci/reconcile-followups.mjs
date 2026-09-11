@@ -52,6 +52,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import {
   bucketState,
+  citedFiles,
   citedTokens,
   dailyKeyFromBucketBody,
   dailyBucketInfo,
@@ -466,6 +467,97 @@ function legacySemanticAcceptance(itemText, executable) {
   const action = suggestedActionText(itemText);
   const source = String(executable || '');
 
+  // #1243 item 1: the provisional refund comment must retain only the quota
+  // beacon when the marker DELETE has not completed. The PR provenance and the
+  // live target check are enforced by the caller; this rule proves the helper
+  // itself, rather than trusting a prose-only mention of the beacon.
+  if (/QUOTA_RESETS_AT/.test(action)
+      && /activeBeaconIn/.test(action)
+      && /formatRefundAttemptComment\s*\(/.test(source)
+      && /formatRefundAttemptComment[\s\S]{0,1400}(?:resetBeacon\(resetsAt\)|QUOTA_RESETS_AT)/.test(source)
+      && /formatRefundComment\s*\([\s\S]{0,1800}refundMarkerName/.test(source)) {
+    return { rule: 'refund-provisional-quota-beacon', tokens: ['QUOTA_RESETS_AT', 'formatRefundAttemptComment'] };
+  }
+
+  // #1243 item 2: text-only runner logs can identify Claude through the CLI's
+  // structured markers even when the failing step has a generic name.
+  if (/hasClaudeMarker/.test(action)
+      && /api_error_status/.test(action)
+      && /rate_limit_event/.test(action)
+      && /hasClaudeMarker\s*=/.test(source)
+      && /rate_limit_event/.test(source)
+      && /rate_limit_info/.test(source)
+      && /api_error_status/.test(source)) {
+    return { rule: 'cli-rate-limit-markers', tokens: ['rate_limit_event', 'api_error_status'] };
+  }
+
+  // #1243 item 4: handoff dedup must prefer an open delivery over an older
+  // closed/not-planned match returned by `gh issue list --state all`.
+  if (/selectDeliveredIssue/.test(action)
+      && /issue\.state\s*===\s*['"]OPEN['"]/.test(action)
+      && /const matches\s*=/.test(source)
+      && /matches\.find\([\s\S]{0,260}state[\s\S]{0,120}OPEN/.test(source)
+      && /matches\[0\]/.test(source)) {
+    return { rule: 'prefer-open-handoff-delivery', tokens: ['selectDeliveredIssue', 'OPEN'] };
+  }
+
+  // #1244 item 1: FAQ fields must enter the same per-field recovery loop as
+  // title/body fields, with indexed state so one unusable FAQ pair does not
+  // contaminate the others.
+  if (/faq\.q/.test(action)
+      && /faq\.a/.test(action)
+      && /MAX_FREE_MT_LLM_FALLBACKS_PER_LOCALE/.test(action)
+      && /faqIndexes/.test(source)
+      && /recoveryField/.test(source)
+      && /wasFreeMtUnusable\(RUN_REPORT\.translation/.test(source)
+      && /claimFreeMtLlmFallback\(RUN_REPORT\.translation/.test(source)) {
+    return { rule: 'faq-fields-in-missing-field-recovery', tokens: ['faq.q', 'faq.a', 'recoveryField'] };
+  }
+
+  // #1244 item 2: the quota/report state is created at the article boundary,
+  // while field events and per-locale claims continue to use that report.
+  if (/report\.translation\.unusableFields/.test(action)
+      && /llmFallbacksByLocale/.test(action)
+      && /translateArticle\(\)/.test(action)
+      && /RUN_REPORT\.translation\s*=\s*createFreeMtRecoveryReport\(\)/.test(source)
+      && /recordFreeMtUnusableOutput\(RUN_REPORT\.translation/.test(source)
+      && /claimFreeMtLlmFallback\(RUN_REPORT\.translation/.test(source)) {
+    return { rule: 'translation-recovery-reset-per-article', tokens: ['RUN_REPORT.translation', 'createFreeMtRecoveryReport'] };
+  }
+
+  // #1245 item 1: only known readers and conventional read/load/fetch/open
+  // wrappers may make a fixture a live coupling.
+  if (/isReadCall\(\)/.test(action)
+      && /\^\(\?:read\|load\|fetch\|open\)/.test(action)
+      && /const READ_CALL_NAMES\s*=\s*new Set/.test(source)
+      && /function isReadCall\s*\(/.test(source)
+      && /READ_CALL_NAMES\.has\(name\)/.test(source)
+      && /\^\(\?:read\|load\|fetch\|open\)/.test(source)) {
+    return { rule: 'explicit-read-call-whitelist', tokens: ['READ_CALL_NAMES', 'isReadCall'] };
+  }
+
+  // #1245 item 3: tracking-issue lookups have their own fetcher, so an
+  // authenticated 404 cannot poison raw cross-repo provenance state.
+  if (/trackingIssueClosed\(\)/.test(action)
+      && /repositoryKey/.test(action)
+      && /trackingFetch/.test(source)
+      && /createRawFetcher\(\{\s*userAgent:\s*['"]loop-drift-check-tracking/.test(source)
+      && /trackingFetch\(url/.test(source)
+      && /if\s*\(!res\.ok\)\s*return false/.test(source)) {
+    return { rule: 'tracking-fetch-isolated', tokens: ['trackingFetch', 'trackingIssueClosed'] };
+  }
+
+  // #1245 item 4: after the first rate limit, the pass-level state turns every
+  // remaining provenance result into an explicit non-verified verdict.
+  if (/repoHistoryMatch\(\)/.test(action)
+      && /rate limit/.test(action)
+      && /provenanceRateLimitVerdict/.test(source)
+      && /passState\?\.rateLimited/.test(source)
+      && /instanceof CrossRepoRateLimitError/.test(source)
+      && /entry successive/.test(source)) {
+    return { rule: 'provenance-rate-limit-pass-state', tokens: ['provenanceRateLimitVerdict', 'rateLimited'] };
+  }
+
   // #1261 predates the final deterministic-major policy. Its old token says
   // «critical or major», while the landed implementation deliberately keeps
   // only critical plus the two named cross-locale translation codes. Accept
@@ -603,6 +695,43 @@ function normalizedPrFiles(pr) {
     .map(String));
 }
 
+function addressedPrsForIssue(issueNumber, addressedPrs = []) {
+  const issue = Number(issueNumber);
+  if (!Number.isInteger(issue) || issue <= 0) return [];
+  return (Array.isArray(addressedPrs) ? addressedPrs : []).filter((pr) =>
+    pr?.mergedAt
+      && Number.isInteger(Number(pr.number))
+      && new RegExp(`\\bAddresses\\s+#${issue}\\b`, 'i').test(String(pr.body || '')),
+  );
+}
+
+/**
+ * Legacy cards predate the live `Target file:` field. Derive candidates only
+ * from files changed by a merged PR that explicitly addresses this issue.
+ * A cited path or basename narrows the set; otherwise the content proof below
+ * tries every addressed file and still requires one complete acceptance rule.
+ */
+function legacyTargetFiles(itemText, issueNumber, io, addressedPrs = []) {
+  const fileExists = io && typeof io.fileExists === 'function' ? io.fileExists : () => false;
+  const declared = declaredTargetFiles(itemText, fileExists);
+  if (declared.length) return declared;
+
+  const addressedFiles = [...new Set(addressedPrsForIssue(issueNumber, addressedPrs)
+    .flatMap((pr) => [...normalizedPrFiles(pr)])
+    .filter((file) => fileExists(file)))];
+  if (!addressedFiles.length) return [];
+
+  const cited = citedFiles(itemText, fileExists).filter((file) => addressedFiles.includes(file));
+  if (cited.length) return [...new Set(cited)];
+
+  const body = String(itemText || '');
+  const byBasename = addressedFiles.filter((file) => {
+    const basename = file.split('/').at(-1);
+    return basename && body.includes(basename);
+  });
+  return byBasename.length ? [...new Set(byBasename)] : addressedFiles;
+}
+
 /**
  * Transport provenance is recognized from deterministic PR identity, never
  * from free-form body prose.  The transport PR itself must carry the target
@@ -626,7 +755,9 @@ function targetFileInAddressedProvenance(pr, targetFile) {
  * Pure legacy acceptance proof for one item.
  *
  * A legacy item is resolved only when all three independent facts hold:
- *   1. its live `Target file:` metadata identifies exactly one file;
+ *   1. its live `Target file:` metadata identifies one file, or the legacy
+ *      adapter derives candidates exclusively from files changed by its merged
+ *      `Addresses #N` PR;
  *   2. a merged PR explicitly says `Addresses #N` and either changed that file
  *      or points to a recognizable official transport PR which changed that file;
  *   3. every token explicitly marked as obsolete is evaluated against executable
@@ -644,57 +775,70 @@ export function legacyAddressEvidence(itemText, issueNumber, io, addressedPrs = 
   try {
     const fileExists = io && typeof io.fileExists === 'function' ? io.fileExists : () => false;
     const readFile = io && typeof io.readFile === 'function' ? io.readFile : () => null;
-    const targetFiles = declaredTargetFiles(itemText, fileExists);
-    if (targetFiles.length !== 1) return { ...empty, targetFiles };
-    const targetFile = targetFiles[0];
-    const content = readFile(targetFile);
-    if (typeof content !== 'string') return { ...empty, targetFiles };
     const issue = Number(issueNumber);
-    if (!Number.isInteger(issue) || issue <= 0) return { ...empty, targetFiles };
-    let targetProvenance = null;
-    const pr = (Array.isArray(addressedPrs) ? addressedPrs : []).find((candidate) => {
-      if (!candidate?.mergedAt || !Number.isInteger(Number(candidate.number))) return false;
-      const addressed = new RegExp(`\\bAddresses\\s+#${issue}\\b`, 'i').test(String(candidate.body || ''));
-      if (!addressed) return false;
-      targetProvenance = targetFileInAddressedProvenance(candidate, targetFile);
-      return !!targetProvenance;
-    });
-    if (!pr) return { ...empty, targetFiles };
-
-    const strict = detectAlreadyResolved(itemText, io);
+    if (!Number.isInteger(issue) || issue <= 0) return empty;
+    const declared = declaredTargetFiles(itemText, fileExists);
+    const targetFiles = legacyTargetFiles(itemText, issue, io, addressedPrs);
+    if (!targetFiles.length) return { ...empty, targetFiles };
     const negativeTokens = negativeAcceptanceTokens(itemText);
-    const executable = stripJavaScriptComments(content);
-    const absentNegativeTokens = negativeTokens.filter((token) => !executable.includes(token));
-    const negativeProof = negativeTokens.length > 0
-      && absentNegativeTokens.length === negativeTokens.length;
-    // Provenance and a live target are necessary but not sufficient.  The
-    // content must either satisfy the shared positive matcher, or explicitly
-    // satisfy a fully-negative acceptance; this prevents a Target-file-only
-    // item from resolving on declarative provenance alone.
-    const semantic = legacySemanticAcceptance(itemText, executable);
-    const contentProof = strict.resolved || negativeProof || !!semantic;
-    if (!contentProof) return { ...empty, targetFiles, negativeTokens: absentNegativeTokens };
+    const addressed = addressedPrsForIssue(issue, addressedPrs);
 
-    const evidence = [
-      {
-        kind: 'legacy-content',
-        file: targetFile,
-        mode: strict.resolved ? 'positive' : negativeProof ? 'negative' : `semantic:${semantic.rule}`,
-      },
-      ...(strict.resolved ? strict.evidence : []),
-      ...(semantic ? [{ kind: 'legacy-semantic', file: targetFile, rule: semantic.rule, tokens: semantic.tokens }] : []),
-      {
-        kind: 'legacy-address',
-        issue,
-        pr: Number(pr.number),
-        file: targetFile,
-        mergedAt: String(pr.mergedAt),
-        transportPr: targetProvenance.viaTransport ? Number(targetProvenance.pr.number) : null,
-      },
-      { kind: 'legacy-target', file: targetFile },
-      ...absentNegativeTokens.map((tok) => ({ kind: 'legacy-negative', file: targetFile, tok })),
-    ];
-    return { resolved: true, evidence, targetFiles, negativeTokens: absentNegativeTokens };
+    for (const targetFile of targetFiles) {
+      const content = readFile(targetFile);
+      if (typeof content !== 'string') continue;
+      let targetProvenance = null;
+      let provenancePr = null;
+      for (const candidate of addressed) {
+        const candidateProvenance = targetFileInAddressedProvenance(candidate, targetFile);
+        if (candidateProvenance) {
+          targetProvenance = candidateProvenance;
+          provenancePr = candidate;
+          break;
+        }
+      }
+      if (!provenancePr) continue;
+
+      // With no live Target file, scope the strict matcher to the candidate
+      // selected from PR provenance. This prevents an unrelated quoted test
+      // path from vetoing the changed implementation.
+      const acceptanceItem = declared.length
+        ? itemText
+        : [`- Target file: ${targetFile}`, `- Suggested action: ${suggestedActionText(itemText)}`].join('\n');
+      const strict = detectAlreadyResolved(acceptanceItem, io);
+      const executable = stripJavaScriptComments(content);
+      const absentNegativeTokens = negativeTokens.filter((token) => !executable.includes(token));
+      const negativeProof = negativeTokens.length > 0
+        && absentNegativeTokens.length === negativeTokens.length;
+      // Provenance and a live target are necessary but not sufficient. The
+      // content must either satisfy the shared positive matcher, or explicitly
+      // satisfy a fully-negative/semantic acceptance proof.
+      const semantic = legacySemanticAcceptance(itemText, executable);
+      const contentProof = strict.resolved || negativeProof || !!semantic;
+      if (!contentProof) continue;
+
+      const evidence = [
+        {
+          kind: 'legacy-content',
+          file: targetFile,
+          mode: strict.resolved ? 'positive' : negativeProof ? 'negative' : `semantic:${semantic.rule}`,
+        },
+        ...(strict.resolved ? strict.evidence : []),
+        ...(semantic ? [{ kind: 'legacy-semantic', file: targetFile, rule: semantic.rule, tokens: semantic.tokens }] : []),
+        {
+          kind: 'legacy-address',
+          issue,
+          pr: Number(provenancePr.number),
+          file: targetFile,
+          mergedAt: String(provenancePr.mergedAt),
+          transportPr: targetProvenance.viaTransport ? Number(targetProvenance.pr.number) : null,
+        },
+        { kind: 'legacy-target', file: targetFile },
+        ...absentNegativeTokens.map((tok) => ({ kind: 'legacy-negative', file: targetFile, tok })),
+      ];
+      return { resolved: true, evidence, targetFiles, negativeTokens: absentNegativeTokens };
+    }
+
+    return { ...empty, targetFiles, negativeTokens };
   } catch {
     return empty;
   }

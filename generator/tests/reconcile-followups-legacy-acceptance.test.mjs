@@ -302,6 +302,76 @@ test('il trasporto richiede identità riconoscibile e target nei suoi files', ()
   }]).resolved, false);
 });
 
+test('legacy deriva il target dal PR Addresses quando manca Target file', () => {
+  const target = 'generator/scripts/create-article.mjs';
+  const item = [
+    '- Original text:',
+    '  > il loop non include `faq.q` e `faq.a`.',
+    '- Suggested action: estendere il loop con `faq.q` e `faq.a` e rispettare `MAX_FREE_MT_LLM_FALLBACKS_PER_LOCALE`.',
+  ].join('\n');
+  const source = [
+    "const faqIndexes = field.startsWith('faq.') ? itContent.faq.map((_, index) => index) : [null];",
+    'const recoveryField = `${field}[${faqIndex}]`;',
+    'const freeMtRejected = wasFreeMtUnusable(RUN_REPORT.translation, locale, recoveryField);',
+    'const capBloccaIlRetry = wasFreeMtUnusable(RUN_REPORT.translation, locale, recoveryField) && !claimFreeMtLlmFallback(RUN_REPORT.translation, locale);',
+  ].join('\n');
+  const result = legacyAddressEvidence(item, 1244, {
+    fileExists: (path) => path === target,
+    readFile: () => source,
+  }, [{
+    number: 1361,
+    mergedAt: '2026-09-11T07:58:42Z',
+    body: '## Implementato\n\nAddresses #1244',
+    files: [{ path: target }],
+  }]);
+  assert.equal(result.resolved, true);
+  assert.deepEqual(result.targetFiles, [target]);
+  assert.equal(result.evidence.find((entry) => entry.kind === 'legacy-semantic')?.rule, 'faq-fields-in-missing-field-recovery');
+});
+
+test('legacy riconosce i marker CLI senza il nome Claude nello step', () => {
+  const item = '- Suggested action: allargare `hasClaudeMarker()` a `api_error_status` e `rate_limit_event`.';
+  const target = 'scripts/ci/claude-rate-limit.mjs';
+  const source = [
+    'const hasClaudeMarker = /\\b(?:claude|anthropic|rate_limit_event|rate_limit_info)\\b/i.test(text)',
+    "  || /\\bapi_error_status\\b/i.test(text);",
+    'if (hasClaudeMarker && /429/.test(text)) rateLimited = true;',
+  ].join('\n');
+  const result = legacyAddressEvidence(item, 1243, {
+    fileExists: (path) => path === target,
+    readFile: () => source,
+  }, [{
+    number: 1400,
+    mergedAt: '2026-09-11T08:00:00Z',
+    body: '## Implementato\n\nAddresses #1243',
+    files: [{ path: target }],
+  }]);
+  assert.equal(result.resolved, true);
+  assert.equal(result.evidence.find((entry) => entry.kind === 'legacy-semantic')?.rule, 'cli-rate-limit-markers');
+});
+
+test('legacy riconosce il beacon provvisorio del rimborso', () => {
+  const item = '- Suggested action: rimetti `QUOTA_RESETS_AT` così `activeBeaconIn()` vede il rimborso.';
+  const target = 'scripts/ci/refund-fix-round.mjs';
+  const source = [
+    'export function formatRefundComment() { return refundMarkerName(marker); }',
+    'export function formatRefundAttemptComment({ resetsAt }) {',
+    '  return [resetBeacon(resetsAt), "429"].join("\\n");',
+    '}',
+  ].join('\n');
+  const result = legacyAddressEvidence(item, 1243, {
+    fileExists: (path) => path === target,
+    readFile: () => source,
+  }, [{
+    number: 1401,
+    mergedAt: '2026-09-11T08:01:00Z',
+    body: '## Implementato\n\nAddresses #1243',
+    files: [{ path: target }],
+  }]);
+  assert.equal(result.resolved, true);
+  assert.equal(result.evidence.find((entry) => entry.kind === 'legacy-semantic')?.rule, 'refund-provisional-quota-beacon');
+});
+
 test('l’aggregata non promuove un item solo-prosa con Target file a item di gating', () => {
   const body = [
     '### 1. Forma sostituita',
