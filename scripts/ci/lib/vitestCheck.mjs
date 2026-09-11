@@ -324,7 +324,7 @@ export const REVIEW_GUARD_STEP_NAME = 'Re-review guard (skip Claude when no code
 export const REVIEW_GATE_FAILURE_STEP_NAME = 'Classify review gate failure';
 
 const REVIEW_STEP_IN_FLIGHT = new Set(['queued', 'in_progress']);
-const NON_GATING_REVIEW_STEPS = new Set([
+export const NON_GATING_REVIEW_STEPS = new Set([
   'Mint GitHub App token for Claude review',
   'Claude usage metrics',
   'Explain the job verdict in the run summary',
