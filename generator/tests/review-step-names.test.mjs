@@ -167,6 +167,7 @@ test('max_turns distingue una review gia\' postata sulla HEAD nella run corrente
   const block = stepBlock(yaml, REVIEW_ABORT_STEP_NAME);
   assert.match(yaml, /^\s*actions:\s*read\s*$/m, 'la probe della run deve poter leggere Actions API');
   assert.match(block, /jq -e -s/);
+  assert.match(block, /flatten \| any\(\.\[\]\?;/);
   assert.match(block, /terminal_reason == "max_turns"/);
   assert.match(block, /actions\/runs\/\$RUN_ID/);
   assert.match(block, /pulls\/\$PR_NUMBER\/reviews/);
@@ -177,6 +178,7 @@ test('max_turns distingue una review gia\' postata sulla HEAD nella run corrente
   assert.match(block, /\.submitted_at \/\/ ""\) >= \$run_started_at/);
   assert.doesNotMatch(block, /env\.RUN_STARTED_AT/);
   assert.match(block, /review_abort_cause verdict_posted/);
+  assert.match(block, /review_abort_cause probe_failed/);
   assert.match(block, /review_abort_cause max_turns/);
   const posted = block.indexOf('review_abort_cause verdict_posted');
   const abort = block.indexOf('review_abort_cause max_turns');
@@ -203,6 +205,7 @@ test('429 e cause non riattivabili viaggiano come segnali distinti', async () =>
   assert.match(abort, /api_error_status.*429/);
   assert.match(abort, /rate_limit_event/);
   assert.match(abort, /status.*rejected/);
+  assert.doesNotMatch(abort, /grep -qE .*is_error.*true/);
   assert.doesNotMatch(abort, /rate\[ _-\]\?limit/);
 
   const permanentName = 'Fail on non-retryable review action error (no automatic retry)';
