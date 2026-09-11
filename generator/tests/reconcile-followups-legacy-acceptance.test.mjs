@@ -98,6 +98,15 @@ test('legacy accetta un ordine esplicito solo se le dichiarazioni live lo rispet
     'const dead = excuses.filter(Boolean);\nconst missing = found.filter(Boolean);',
   );
   assert.equal(blocked.resolved, false);
+  assert.equal(
+    semanticResult(
+      1075,
+      'generator/tests/corpus-write-atomic.test.mjs',
+      'asserire `missing` prima di `dead`.',
+      'missing == found;\ndead = excuses.filter(Boolean);',
+    ).resolved,
+    false,
+  );
 });
 
 test('legacy controlla il ramo di rientro nel ciclo, non una stringa vuota qualsiasi', () => {
@@ -157,6 +166,15 @@ test('legacy verifica i frammenti letterali del warning con placeholder runtime'
   );
   assert.equal(result.resolved, true);
   assert.equal(result.evidence.find((entry) => entry.kind === 'legacy-semantic')?.rule, 'template-fragments');
+  assert.equal(
+    semanticResult(
+      1076,
+      'scripts/ci/reconcile-routing-labels.mjs',
+      'stampare `N/M reconcile falliti` separatamente.',
+      'console.log(" reconcile falliti");',
+    ).resolved,
+    true,
+  );
 });
 
 test('legacy controlla che la transizione decompose sia un solo edit atomico', () => {
