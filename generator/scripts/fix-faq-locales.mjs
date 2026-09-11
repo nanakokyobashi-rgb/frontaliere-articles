@@ -506,14 +506,10 @@ export function nextFaqRejection(previous, sourceFaq, { prunedWrite = false, kep
   // The live ledger predates `keptPairs`: an old partial write is evidence of
   // progress, but its amount is unknown. Let the first measured write reopen
   // the counter instead of throttling it forever on the legacy count.
-  const previousPrunedWriteIsUnmeasured = previous?.prunedWrite === true
-    && previousKeptPairs === undefined;
   const priorConsecutive = Number(previous?.consecutive);
   const improvedPrunedWrite = prunedWrite
     && hasKeptPairs
-    && (previousPrunedWriteIsUnmeasured
-      || previousKeptPairs === undefined
-      || keptPairs > previousKeptPairs);
+    && (previousKeptPairs === undefined || keptPairs > previousKeptPairs);
   const consecutive = improvedPrunedWrite
     ? 1
     : previous?.source === source
