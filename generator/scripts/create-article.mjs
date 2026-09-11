@@ -4955,17 +4955,17 @@ function runArticleFactualityGates({ deterministicBodySections = [], ...params }
     const label = locale === 'it' ? section : `${locale}/${section}`;
     return String(issue.message || '').includes(`[${label}]`);
   });
-  // The shape exemption is section-scoped. Preserve major protection on
-  // prose/global findings outside those sections, while allowing only the
-  // explicitly structured sections to relax their own diagnostics. Named
-  // translation-number findings always block; Italian-adjudicated majors
-  // remain report-only as promised by their downgrade policy.
+  // The shape exemption is section-scoped. Keep global majors on the base
+  // gate's previous policy (critical-only), and admit a major here only when
+  // it is one of the named translation-number findings attached to a
+  // deterministic section. Italian-adjudicated majors remain report-only as
+  // promised by their downgrade policy.
   const blocking = issues.filter((issue) => {
     if (issue.severity === 'critical') return true;
     if (issue.severity !== 'major') return false;
+    if (!belongsToDeterministicSection(issue)) return false;
     if (ITALIAN_ADJUDICATED_MAJOR_CODES.has(issue.code)) return false;
-    if (DETERMINISTIC_MAJOR_BLOCKING_CODES.has(issue.code)) return true;
-    return !belongsToDeterministicSection(issue);
+    return DETERMINISTIC_MAJOR_BLOCKING_CODES.has(issue.code);
   });
   return { ...result, issues, blocking, passed: blocking.length === 0 };
 }

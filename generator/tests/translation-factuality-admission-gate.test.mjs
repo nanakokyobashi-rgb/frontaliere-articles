@@ -288,9 +288,6 @@ test('#1261 un produttore deterministico esenta solo euristiche di forma', () =>
   // (The factory receives the policy set as its fourth dependency.)
   const result = runGate({ locale: 'it', deterministicBodySections: ['body1'] });
   assert.deepEqual(result.blocking.map((issue) => issue.code), [
-    'unknown-institution',
-    'tax-implausible',
-    'incomplete-ending',
     'translation-number-dropped',
     'translation-number-added',
     'critical-fact',
