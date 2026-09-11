@@ -27,6 +27,7 @@
  * Esce 1 elencando ogni violazione; 0 e un riepilogo se tutto regge.
  */
 import fs from 'node:fs';
+import { execFileSync } from 'node:child_process';
 import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import {
@@ -41,6 +42,7 @@ import {
   countSourceImages,
   missingCorpusMessage,
   countSeoEntries,
+  collectSeoEntryIds,
   SECTION_BODY_DIRS,
   SEO_CHUNK_DIR,
   IMAGE_SOURCE_DIR,
@@ -58,6 +60,11 @@ export const SECTION_COUNTERS = {
   svizzera: 'swissArticles',
 };
 
+/** La popolazione dei chunk ha un preallarme proprio: 90% di una run precedente.
+ * Il 97% della retention degli articoli sarebbe rumore permanente per il
+ * rapporto chunk/corrente, mentre il 90% segnala una contrazione sostanziale. */
+export const FEED_POPULATION_WARN_RETENTION = 0.9;
+
 /**
  * A quale sezione appartiene un feed, dal nome del file.
  *
@@ -68,19 +75,66 @@ export function feedSection(fileName) {
   return /^rss-svizzera/.test(fileName) ? 'svizzera' : 'frontaliere';
 }
 
+function previousRevision(root) {
+  try {
+    return execFileSync('git', ['-C', root, 'rev-parse', 'HEAD^'], {
+      encoding: 'utf8',
+      stdio: ['ignore', 'pipe', 'ignore'],
+    }).trim() || null;
+  } catch {
+    return null;
+  }
+}
+
+function countSeoEntriesAtRevision(root, revision, seoFiles) {
+  const ids = new Set();
+  for (const file of seoFiles) {
+    const rel = path.posix.join(SEO_CHUNK_DIR.split(path.sep).join('/'), file);
+    let source;
+    try {
+      source = execFileSync('git', ['-C', root, 'show', `${revision}:${rel}`], {
+        encoding: 'utf8',
+        stdio: ['ignore', 'pipe', 'ignore'],
+        maxBuffer: 64 * 1024 * 1024,
+      });
+    } catch (error) {
+      // A newly-added chunk had no population in the previous revision.
+      if (error?.status === 128) continue;
+      throw error;
+    }
+    collectSeoEntryIds(source, ids);
+  }
+  return ids.size;
+}
+
+/** Current population, plus a historical floor that cannot shrink with it. */
+export function feedSourceFloor(expected, section) {
+  const current = expected.feedSources?.[section] ?? 0;
+  if (current <= 0) return 0;
+  const previous = expected.previousFeedSources?.[section];
+  return Number.isFinite(previous) ? Math.max(current, previous) : current;
+}
+
+function feedPopulationReference(expected, section) {
+  const current = expected.feedSources?.[section] ?? 0;
+  const previous = expected.previousFeedSources?.[section];
+  return Number.isFinite(previous) ? previous : current;
+}
+
 /**
  * Il nucleo puro: date le misure, quali pavimenti sono sfondati.
  *
  * @param {{articleCounts: Record<string, number>, feeds: {name: string, items: number}[],
- *          images: number|null}} measured  cio' che l'artefatto dichiara
+ *          images: number|null, imageErrors?: string[]}} measured  cio' che l'artefatto dichiara
  * @param {{sourceArticles: Record<string, number>, feedSources: Record<string, number>,
- *          sourceImages: number|null, rssMaxItems: number}} expected   cio' che il corpus
+ *          previousFeedSources?: Record<string, number|null>, sourceImages: number|null,
+ *          rssMaxItems: number}} expected   cio' che il corpus
  *          sorgente promette: `sourceArticles` sono i file di corpo (il riferimento di
  *          `manifest.counts`), `feedSources` le voci dei chunk SEO (quello dei feed)
  * @returns {string[]} una riga per violazione, vuoto se tutto regge
  */
 export function floorViolations(measured, expected, retention = undefined) {
-  const violations = [];
+  const violations = [...(measured.imageErrors ?? [])];
   const floor = (n) => floorFrom(n, retention);
 
   for (const [section, counter] of Object.entries(SECTION_COUNTERS)) {
@@ -122,13 +176,13 @@ export function floorViolations(measured, expected, retention = undefined) {
   const missingSeo = new Set();
   for (const feed of measured.feeds) {
     const section = feedSection(feed.name);
-    const source = expected.feedSources?.[section] ?? 0;
+    const current = expected.feedSources?.[section] ?? 0;
     // Stessa regola dei corpi, un riferimento diverso: zero voci nei chunk non
     // e' «feed legittimamente vuoto», e' la lista dei chunk che non risolve —
     // il modo esatto in cui un feed e' gia' rimasto fermo tre mesi. Una riga
     // per sezione, non una per feed: i cinque feed di una sezione condividono
     // il riferimento, e ripeterlo cinque volte non aggiunge niente.
-    if (source === 0) {
+    if (current === 0) {
       if (!missingSeo.has(section)) {
         missingSeo.add(section);
         violations.push(
@@ -137,11 +191,12 @@ export function floorViolations(measured, expected, retention = undefined) {
       }
       continue;
     }
+    const source = feedSourceFloor(expected, section);
     const min = floor(Math.min(expected.rssMaxItems, source));
     if (feed.items < min) {
       violations.push(
         `${feed.name}: ${feed.items} <item> contro ${min} attesi ` +
-          `(${source} voci nei chunk SEO di ${section}) — feed troncato`,
+          `(${current} voci nei chunk SEO di ${section}; riferimento storico/floor ${source}) — feed troncato`,
       );
     }
   }
@@ -153,6 +208,9 @@ export function floorViolations(measured, expected, retention = undefined) {
   if (expected.sourceImages !== null) {
     if (expected.sourceImages === 0) {
       violations.push(missingCorpusMessage('images-manifest.json', IMAGE_SOURCE_DIR));
+    } else if (measured.imageErrors?.length) {
+      // The shape error is already a precise violation; do not add the less
+      // useful "manifest assente" wording on top of it.
     } else if (measured.images === null) {
       violations.push(
         `images-manifest.json assente: il corpus sorgente ne tiene ${expected.sourceImages} immagini in ${IMAGE_SOURCE_DIR}`,
@@ -202,16 +260,19 @@ export function retentionReport(measured, expected) {
   }
 
   // Il feed e' capato a RSS_MAX_ITEMS, ma la sua popolazione sorgente non lo
-  // e'. Misurare i chunk contro i corpi rende visibile un'erosione da 3750 a
-  // 60 voci, che il rapporto del feed (50/50) non puo' osservare.
-  for (const [section, source] of Object.entries(expected.sourceArticles)) {
+  // e'. Confrontare i chunk con la popolazione della run precedente rende
+  // visibile un'erosione da 3750 a 60 voci, che il rapporto del feed (50/50)
+  // non puo' osservare e che il rapporto chunk/corpi misurava sul denominatore
+  // sbagliato.
+  for (const section of Object.keys(SECTION_COUNTERS)) {
     const declared = expected.feedSources?.[section] ?? 0;
+    const source = feedPopulationReference(expected, section);
     if (source <= 0 || declared <= 0) continue;
     rows.push({ kind: 'feed-population', label: `chunk SEO ${section}/corpus`, declared, source });
   }
 
   for (const feed of measured.feeds) {
-    const source = expected.feedSources?.[feedSection(feed.name)] ?? 0;
+    const source = feedSourceFloor(expected, feedSection(feed.name));
     if (source <= 0) continue;
     // Lo stesso atteso del pavimento: un feed e' tagliato a RSS_MAX_ITEMS,
     // quindi su una sezione grande il 100% e' 50 item, non 3750.
@@ -250,7 +311,7 @@ export function retentionAdvisories(rows, retention = FLOOR_RETENTION, warn = FL
   return rows
     .map((r) =>
       r.kind === 'feed-population'
-        ? populationWarning(r.label, r.declared, r.source, warn)
+        ? populationWarning(r.label, r.declared, r.source, FEED_POPULATION_WARN_RETENTION)
         : retentionWarning(r.label, r.declared, r.source, retention, warn),
     )
     .filter((line) => line !== null);
@@ -302,11 +363,22 @@ export function measureDist(distDir) {
     .map(({ name, xml }) => ({ name, items: countXmlTags(xml, 'item') }));
 
   const imageManifest = path.join(distDir, 'images-manifest.json');
-  const images = fs.existsSync(imageManifest)
-    ? JSON.parse(fs.readFileSync(imageManifest, 'utf-8')).images.length
-    : null;
+  let images = null;
+  const imageErrors = [];
+  if (fs.existsSync(imageManifest)) {
+    try {
+      const parsed = JSON.parse(fs.readFileSync(imageManifest, 'utf-8'));
+      if (!Array.isArray(parsed?.images)) {
+        imageErrors.push('images-manifest.json: campo "images" assente o non è un array');
+      } else {
+        images = parsed.images.length;
+      }
+    } catch (error) {
+      imageErrors.push(`images-manifest.json: JSON non leggibile (${error.message})`);
+    }
+  }
 
-  return { articleCounts: manifest.counts ?? {}, feeds, images };
+  return { articleCounts: manifest.counts ?? {}, feeds, images, imageErrors };
 }
 
 /** Riconta il corpus sorgente, che e' il riferimento esterno all'artefatto. */
@@ -319,8 +391,13 @@ export async function expectFromCorpus(root) {
     pathToFileURL(path.join(root, 'engine', 'rssFeeds.mjs')).href
   );
   const feedSources = {};
+  const previousFeedSources = {};
+  const revision = previousRevision(root);
   for (const section of RSS_SECTIONS) {
     feedSources[section.id] = countSeoEntries(root, section.seoFiles);
+    previousFeedSources[section.id] = revision === null
+      ? null
+      : countSeoEntriesAtRevision(root, revision, section.seoFiles);
   }
   return {
     sourceArticles: {
@@ -328,6 +405,7 @@ export async function expectFromCorpus(root) {
       svizzera: countSourceArticles(root, 'svizzera'),
     },
     feedSources,
+    previousFeedSources,
     sourceImages: countSourceImages(root),
     rssMaxItems: RSS_MAX_ITEMS,
   };
@@ -337,8 +415,17 @@ async function main() {
   const distIdx = process.argv.indexOf('--dist');
   const distDir = distIdx >= 0 ? path.resolve(process.argv[distIdx + 1]) : path.join(ROOT, 'dist', 'api');
 
-  const measured = measureDist(distDir);
-  const expected = await expectFromCorpus(ROOT);
+  let measured;
+  let expected;
+  try {
+    measured = measureDist(distDir);
+    expected = await expectFromCorpus(ROOT);
+  } catch (error) {
+    const message = error instanceof Error ? error.message : String(error);
+    console.error(`::error::[api-floors] ${message}`);
+    process.exitCode = 1;
+    return;
+  }
   const violations = floorViolations(measured, expected);
 
   console.log(
