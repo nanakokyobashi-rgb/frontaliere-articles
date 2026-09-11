@@ -757,9 +757,9 @@ jobs:
             echo "::error::❌-check-fix: impossibile calcolare il digest del body PR dopo Claude → classificazione BLOCCANTE, job ROSSO."
             exit 1
           fi
-          # `gh api --jq` termina anche una stringa vuota con il suo newline.
-          empty_body_sha=$(printf '\n' | sha256sum | cut -d' ' -f1)
-          if [ "$now_body_sha" = "$empty_body_sha" ]; then
+          # Un body PR vuoto dopo Claude resta osservabile; blocchiamo solo una
+          # risposta API a zero byte, cioe' una lettura non verificabile.
+          if [ ! -s "$body_file" ]; then
             echo "::error::❌-check-fix: la risposta API del body PR dopo Claude e' vuota o non verificabile → classificazione BLOCCANTE, job ROSSO."
             exit 1
           fi

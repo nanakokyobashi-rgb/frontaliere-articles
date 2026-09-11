@@ -161,8 +161,7 @@ test('il digest del body è acquisito prima e classificato fail-closed', () => {
   const commentsAt = classify.indexOf('NOW_COMMENTS=');
   assert.ok(currentBodyAt !== -1 && commentsAt !== -1 && currentBodyAt < commentsAt,
     'il body deve essere confrontato prima del fallback sui commenti');
-  assert.match(classify, /if \[ "\$now_body_sha" = "\$empty_body_sha" \]; then[\s\S]{0,240}?exit 1/, 'la lettura finale deve rifiutare il digest vuoto emesso da gh --jq');
-  assert.match(classify, /empty_body_sha=\$\(printf '\\n'/, 'il digest vuoto finale deve riflettere il newline emesso da gh --jq');
+  assert.match(classify, /if \[ ! -s "\$body_file" \]; then[\s\S]{0,240}?exit 1/, 'la lettura finale deve rifiutare una risposta API a zero byte');
   assert.match(classify, /s\/\\r\$\/[\s\S]*s\/\[\[:space:\]\]\+\$\//, 'la lettura finale deve canonizzare CR e spazio in coda');
   assert.match(classify, /if \[ "\$\{BASE_CAPTURE_OUTCOME:-\}" != "success" \][\s\S]{0,240}?exit 1/,
     'la baseline deve essere ancorata al guard reale e restare bounded');
