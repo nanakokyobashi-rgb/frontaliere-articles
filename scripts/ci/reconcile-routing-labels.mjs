@@ -232,6 +232,8 @@ function main() {
     }
   }
   console.log(`Riconciliazioni: ${reconciled}${dry ? ' (dry-run)' : ''}.`);
+  console.log(`Rimozioni riuscite: ${reconciled}.`);
+  console.log(`Rimozioni fallite: ${failed}.`);
   if (failed > 0) console.log(`::warning::reconcile: ${failed} falliti su ${todo.length}.`);
 }
 

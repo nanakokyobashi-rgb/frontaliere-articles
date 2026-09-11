@@ -498,10 +498,13 @@ export function blockedRefs(body = '', { homeScope = 'site' } = {}) {
  * chiamate in più. Porta dentro i riferimenti, così una riga di registro NUOVA
  * su una issue già annotata riapre bocca una volta sola.
  */
-export function noteMarker(reg, staleBlocks = []) {
+export function noteMarker(reg, staleBlocks = [], { staleBlocksUnknown = false } = {}) {
   const parts = [];
-  if (reg && reg.refs.length) parts.push(`r=${reg.refs.join(',')}`);
-  if (staleBlocks.length) parts.push(`b=${staleBlocks.map((s) => s.key).join(',')}`);
+  if (reg && Array.isArray(reg.refs) && reg.refs.length) parts.push(`r=${reg.refs.join(',')}`);
+  // Sotto cap l'elenco e' incompleto: `?` rappresenta l'osservazione stabile
+  // «non misurato», non l'affermazione «non ci sono blocchi».
+  if (staleBlocksUnknown) parts.push('b=?');
+  else if (staleBlocks.length) parts.push(`b=${staleBlocks.map((s) => s.key).join(',')}`);
   return parts.length ? `<!-- PREPASS_NOTE: ${parts.join(' ')} -->` : null;
 }
 
@@ -544,7 +547,31 @@ export function noteGate({ marker = null, comments = [], commentsRead = false } 
   if (!commentsRead) {
     return { post: false, code: 'unread', why: 'commenti non letti: idempotenza non dimostrabile' };
   }
-  if ((comments || []).some((c) => String(c?.body || '').includes(marker))) {
+  const markerParts = (value) => {
+    const m = /^<!-- PREPASS_NOTE: ([^>]+) -->$/.exec(String(value || '').trim());
+    if (!m) return null;
+    const out = new Map();
+    for (const token of m[1].split(/\s+/)) {
+      const at = token.indexOf('=');
+      if (at > 0) out.set(token.slice(0, at), token.slice(at + 1));
+    }
+    return out;
+  };
+  const current = markerParts(marker);
+  const degradedCurrent = current?.get('b') === '?';
+  const already = (Array.isArray(comments) ? comments : []).some((c) => {
+    const body = String(c?.body || '');
+    if (body.includes(marker)) return true;
+    if (!degradedCurrent) return false;
+    // Una nota completa gia' presente per la stessa chiave di registro e' la
+    // stessa osservazione quando il resolver si degrada. Al ritorno del budget
+    // il marker sano non contiene `?`, quindi un cambiamento reale riapre la
+    // nota una sola volta.
+    const previous = markerParts((body.match(/<!-- PREPASS_NOTE: [^>]+ -->/) || [])[0]);
+    if (!previous || !previous.has('b') || previous.get('b') === '?') return false;
+    return previous.get('r') === current.get('r');
+  });
+  if (already) {
     return { post: false, code: 'already', why: 'già annotata' };
   }
   return { post: true, code: 'ok', why: '' };
@@ -558,9 +585,9 @@ export function noteGate({ marker = null, comments = [], commentsRead = false } 
  * riga allegata non è più indistinguibile dalle altre trenta del `keep`, e lo
  * sweep del lunedì non paga più il costo di cercarla. Pura → testabile.
  */
-export function prepassNote(reg, staleBlocks = []) {
+export function prepassNote(reg, staleBlocks = [], { staleBlocksUnknown = false } = {}) {
   const rows = [...((reg && reg.unconditional) || []), ...((reg && reg.conditional) || [])];
-  if (!rows.length && !staleBlocks.length) return null;
+  if (!rows.length && !staleBlocks.length && !staleBlocksUnknown) return null;
   const out = [];
 
   if (rows.length) {
@@ -606,6 +633,15 @@ export function prepassNote(reg, staleBlocks = []) {
       + 'Quello che qui costa zero è la MISURA, ed è quella che manca allo sweep: la classe C del '
       + 'suo prompt («claim scaduta») chiede la misura più economica che decide, e ora ce l\'ha già '
       + 'scritta sotto gli occhi.',
+    );
+  }
+  if (staleBlocksUnknown) {
+    if (out.length) out.push('');
+    out.push(
+      '⚠️ **Riferimenti non completamente misurati.** Il budget `MAX_REF_LOOKUPS` '
+      + 'è esaurito in questo run: l\'assenza di altri blocchi non è una prova. '
+      + 'La chiave della nota usa `b=?` per non ripostare la stessa osservazione '
+      + 'a ogni variazione del sottoinsieme leggibile.',
     );
   }
   return out.join('\n');
@@ -868,7 +904,7 @@ export function needsVerdictLookup(title = '') {
 export function prepassDecision({
   title = '', body = '', labels = [], verdict = null, verdictAt = null,
   verdictLookupFailed = false, expiryRequeues = 0, registryRequeues = 0, now = Date.now(),
-  registry = [], staleBlocks = [], homeScope = HOME_SCOPE,
+  registry = [], staleBlocks = [], staleBlocksUnknown = false, homeScope = HOME_SCOPE,
 } = {}) {
   const reg = matchRegistry(`${title}\n${body}`, registry, { homeScope });
   const d = decideAction({
@@ -880,8 +916,12 @@ export function prepassDecision({
   // l'elenco delle domande aperte. I riferimenti citati cambierebbero ogni
   // volta, quindi cambierebbe il marker di idempotenza e la nota diventerebbe
   // un commento settimanale sull'unica issue che nessuno vuole più rumorosa.
-  const note = labels.includes('agent:no-age-out') ? null : prepassNote(reg, staleBlocks);
-  return note ? { ...d, note, marker: noteMarker(reg, staleBlocks) } : d;
+  const note = labels.includes('agent:no-age-out')
+    ? null
+    : prepassNote(reg, staleBlocks, { staleBlocksUnknown });
+  return note
+    ? { ...d, note, marker: noteMarker(reg, staleBlocks, { staleBlocksUnknown }) }
+    : d;
 }
 
 /** Il ramo che sceglie l'azione. Separato dal wrapper solo per tenerlo puro. */
@@ -937,21 +977,26 @@ function decideAction({
   // perché a valle è fallito qualcosa che il ri-accodo non tocca. Senza tetto e
   // senza marker l'oscillazione è GIORNALIERA e indistinguibile, nel riepilogo,
   // da un riconoscimento legittimo. Vedi `PREPASS_REGISTRY_MARKER`.
+  let registryRequeueCapped = false;
+  let registryCapReason = '';
   if (reg && reg.unconditional.length && !reg.conditional.length
       && !(verdict && PREPASS_VERDICT_BEATS_FAMILY.has(verdict))) {
     const r = reg.unconditional[0];
     const cited = reg.refs.map((n) => `#${n}`).join(' ');
     if (registryRequeues >= REGISTRY_REQUEUE_MAX_CYCLES) {
+      // Il tetto blocca solo il requeue motivato dal registro. Non deve
+      // diventare un return terminale prima del riconoscimento di famiglia:
+      // una issue può essere contemporaneamente registry-matched e un monitor
+      // con una porta di rientro autonoma.
+      registryRequeueCapped = true;
+      registryCapReason = `oscillazione registro→requeue fermata: tetto registry raggiunto (${registryRequeues}/${REGISTRY_REQUEUE_MAX_CYCLES}) sulla riga del ${r.date} (${cited}) — il ramo registry non ri-accoda più da solo`;
+    } else {
       return {
-        action: 'keep',
-        reason: `oscillazione registro→requeue: ${registryRequeues} giri già fatti (tetto ${REGISTRY_REQUEUE_MAX_CYCLES}) sulla stessa riga del ${r.date} (${cited}) — la decisione del proprietario non è cambiata e il ri-accodo non è più un'ipotesi nuova, serve il giudizio dello sweep`,
+        action: 'requeue',
+        registryRequeue: true,
+        reason: `il registro di \`VISION.md\` (${SITE_REPO}) ha già deciso il ${r.date} sui riferimenti citati nel corpo (${cited}), con una riga incondizionata (nessun qualificatore): non è più una domanda per il proprietario — giro ${registryRequeues + 1}/${REGISTRY_REQUEUE_MAX_CYCLES}`,
       };
     }
-    return {
-      action: 'requeue',
-      registryRequeue: true,
-      reason: `il registro di \`VISION.md\` (${SITE_REPO}) ha già deciso il ${r.date} sui riferimenti citati nel corpo (${cited}), con una riga incondizionata (nessun qualificatore): non è più una domanda per il proprietario — giro ${registryRequeues + 1}/${REGISTRY_REQUEUE_MAX_CYCLES}`,
-    };
   }
 
   if (verdict && STALE_BLOCK_VERDICTS.has(verdict)) {
@@ -959,7 +1004,11 @@ function decideAction({
   }
 
   const monitor = MONITOR_TITLE_PATTERNS.find((re) => re.test(title));
-  if (!monitor) return { action: 'keep', reason: 'famiglia non riconosciuta: la valuta il run Claude' };
+  if (!monitor) {
+    return registryRequeueCapped
+      ? { action: 'keep', reason: `${registryCapReason}; famiglia monitor non riconosciuta: la valuta il run Claude` }
+      : { action: 'keep', reason: 'famiglia non riconosciuta: la valuta il run Claude' };
+  }
 
   // Un container con più target si scorpora: ri-accodarlo intero è il modo
   // documentato di rifare `max-turns`. Il rilevatore è quello CONDIVISO di
@@ -1001,7 +1050,10 @@ function decideAction({
         reason: `container multi-item ma NON scorporabile a valle${blocking.length ? ` (${blocking.join(', ')})` : ''}: il promotore lo rifiuterebbe`,
       };
     }
-    return { action: 'decompose', reason: 'container multi-item generato da un monitor' };
+    return {
+      action: 'decompose',
+      reason: `${registryRequeueCapped ? `${registryCapReason}; ` : ''}container multi-item generato da un monitor`,
+    };
   }
   // Il verdetto batte il riconoscimento di famiglia — ma SOLO il `requeue`, ed è
   // per questo che sta qui sotto e non prima dello scorporo.
@@ -1070,7 +1122,10 @@ function decideAction({
       reason: `famiglia di monitor riconosciuta (${monitor}), verdetto \`${verdict}\` scaduto (${Math.floor(ageMs / 86400000)}g > ${VERDICT_MAX_AGE_DAYS}g): non più vincolante — giro ${expiryRequeues + 1}/${EXPIRY_REQUEUE_MAX_CYCLES}`,
     };
   }
-  return { action: 'requeue', reason: `famiglia di monitor riconosciuta (${monitor})` };
+  return {
+    action: 'requeue',
+    reason: `${registryRequeueCapped ? `${registryCapReason}; ` : ''}famiglia di monitor riconosciuta (${monitor})`,
+  };
 }
 
 function gh(args, { json = true } = {}) {
@@ -1086,10 +1141,12 @@ function gh(args, { json = true } = {}) {
 function makeRefResolver() {
   const cache = new Map();
   let capLogged = false;
-  return (repo, number) => {
+  let capHit = false;
+  const resolve = (repo, number) => {
     const key = `${repo}#${number}`;
     if (cache.has(key)) return cache.get(key);
     if (cache.size >= MAX_REF_LOOKUPS) {
+      capHit = true;
       // Gli altri due cap di questo file stampano entrambi «no silent cap»;
       // questo no, ed era l'unico che spegne una MISURA invece di rimandare
       // un'azione (#923, item 5). Da qui in poi «nessun blocco scaduto» non
@@ -1119,6 +1176,8 @@ function makeRefResolver() {
     cache.set(key, v);
     return v;
   };
+  resolve.wasCapped = () => capHit;
+  return resolve;
 }
 
 function main() {
@@ -1188,14 +1247,17 @@ function main() {
     // I blocchi scaduti si misurano solo dove il corpo ne dichiara uno: su una
     // issue che non nomina mai `blocked` questo costa zero chiamate.
     const staleBlocks = [];
-    for (const ref of blockedRefs(body, { homeScope: HOME_SCOPE })) {
+    const refs = blockedRefs(body, { homeScope: HOME_SCOPE });
+    for (const ref of refs) {
       const st = refState(ref.repo, ref.number);
       if (st) staleBlocks.push(st);
     }
+    const staleBlocksUnknown = refs.length > 0 && refState.wasCapped();
 
     const d = prepassDecision({
       title: iss.title, body, labels, verdict, verdictAt, verdictLookupFailed,
-      expiryRequeues, registryRequeues, registry, staleBlocks, homeScope: HOME_SCOPE,
+      expiryRequeues, registryRequeues, registry, staleBlocks, staleBlocksUnknown,
+      homeScope: HOME_SCOPE,
     });
     counts[d.action]++;
 

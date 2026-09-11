@@ -31,6 +31,7 @@ import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { reconciliations, ROUTE_CONFLICTS } from '../../scripts/ci/reconcile-routing-labels.mjs';
+import { staleFixRescueGate } from '../../scripts/ci/followup-drainer.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const ROUTER = path.join(ROOT, 'scripts/ci/reconcile-routing-labels.mjs');
@@ -174,6 +175,8 @@ test('il riepilogo distingue successi/fallimenti e il writer decompose e\' atomi
   assert.match(ROUTER_SRC, /let failed = 0/);
   assert.match(ROUTER_SRC, /failed\+\+/);
   assert.match(ROUTER_SRC, /Riconciliazioni: \$\{reconciled\}/);
+  assert.match(ROUTER_SRC, /Rimozioni riuscite: \$\{reconciled\}/);
+  assert.match(ROUTER_SRC, /Rimozioni fallite: \$\{failed\}/);
   assert.match(ROUTER_SRC, /reconcile: \$\{failed\} falliti su \$\{todo\.length\}/);
 
   const transitions = DECOMPOSE.split('\n').filter((line) => line.includes('gh issue edit'));
@@ -182,6 +185,23 @@ test('il riepilogo distingue successi/fallimenti e il writer decompose e\' atomi
     assert.match(line, /--add-label/);
     assert.match(line, /--remove-label/);
   }
+});
+
+test('#1211: agent:fix stale senza PR/beacon viene riarmato, gli stati vivi aspettano', () => {
+  const stale = staleFixRescueGate({ outcome: null, ageMin: 45, hasPR: false, orphanMinAgeMin: 30 });
+  assert.equal(stale.action, 'rearm');
+  assert.match(stale.reason, /senza PR/);
+
+  assert.equal(
+    staleFixRescueGate({ outcome: null, ageMin: 45, hasPR: true, orphanMinAgeMin: 30 }).action,
+    'skip',
+    'una PR aperta è lavoro vivo, non un orfano',
+  );
+  assert.equal(
+    staleFixRescueGate({ outcome: null, ageMin: 1, hasPR: false, orphanMinAgeMin: 30 }).action,
+    'settling',
+    'una promozione fresca non va riarmata mentre la run può ancora comparire',
+  );
 });
 
 test('una rimozione fallita non entra nel totale delle riconciliazioni', () => {
@@ -211,5 +231,7 @@ exit 0
   });
   assert.equal(result.status, 0, `${result.stdout}\n${result.stderr}`);
   assert.match(result.stdout, /Riconciliazioni: 1\./);
+  assert.match(result.stdout, /Rimozioni riuscite: 1\./);
+  assert.match(result.stdout, /Rimozioni fallite: 1\./);
   assert.match(result.stdout, /reconcile: 1 falliti su 2/);
 });
