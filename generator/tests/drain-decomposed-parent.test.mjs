@@ -25,6 +25,7 @@ import {
   isAgeOutCandidate,
   isReparkableCandidate,
   isDecomposeEligible,
+  isStuckFixRescueCandidate,
 } from '../../scripts/ci/followup-drainer.mjs';
 
 const SRC = readFileSync(
@@ -33,6 +34,10 @@ const SRC = readFileSync(
 );
 
 const iss = (...labels) => ({ labels: labels.map((name) => ({ name })) });
+const queueIssue = (labels = []) => ({
+  title: 'follow-up(#1076): rescue regression',
+  labels: ['agent:fix', ...labels].map((name) => ({ name })),
+});
 
 test('#826: un padre decomposed:1 non è promuovibile dal DRAIN', () => {
   assert.equal(isDrainPromotable(iss('agent:fix-queued', 'decomposed:1')), false);
@@ -95,4 +100,12 @@ test('#826: le due porte di rientro parkano il padre invece di ri-accodarlo', ()
   // guardare la label: senza questo ramo il padre farebbe ping-pong fra
   // `agent:fix-queued` e `fu-parked` a ogni tick.
   assert.match(SRC, /has\(iss, LBL_DECOMPOSED\) && quotaBackoffUntil === null/);
+});
+
+test('#1076: il rescue vede agent:fix senza PR/beacon e non tocca i concorrenti', () => {
+  assert.equal(isStuckFixRescueCandidate(queueIssue()), true);
+  assert.equal(isStuckFixRescueCandidate(queueIssue(['agent:fix-queued'])), false);
+  assert.equal(isStuckFixRescueCandidate(queueIssue(['fu-parked'])), false);
+  assert.equal(isStuckFixRescueCandidate(queueIssue(['decomposed:1'])), false);
+  assert.match(SRC, /allFix\.filter\(isStuckFixRescueCandidate\)/);
 });
