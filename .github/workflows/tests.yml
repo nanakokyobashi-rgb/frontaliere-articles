@@ -563,6 +563,7 @@ jobs:
         with:
           codex_github_token: ${{ env.APP_TOKEN || secrets.GITHUB_TOKEN }}
           codex_auth_json: ${{ secrets.CODEX_AUTH_JSON }}
+          github_token: ${{ env.APP_TOKEN || secrets.GITHUB_TOKEN }}
           review_marker: '<!-- CODEX_FALLBACK_REVIEW -->'
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           # Mai `*`. Le PR aperte dal fixer sono di `claude[bot]`; quelle del
