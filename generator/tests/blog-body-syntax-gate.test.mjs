@@ -48,6 +48,49 @@ const ROOT = path.resolve(HERE, '../..');
 const GATE = path.join(ROOT, 'scripts/ci/check-blog-body-syntax.mjs');
 const WORKFLOW = path.join(ROOT, '.github/workflows/publish-api.yml');
 
+// Questa e' la forma unica della guardia: deve riconoscere import/export
+// statici, anche braced su piu' righe, ma non una stringa `esbuild` in coda a
+// un commento sulla riga di un import builtin.
+const STATIC_ESBUILD_RE = /^\s*(?:import|export)(?:\s|(?=[{*'"]))(?:(?:[^'";]*?[\s}*]from\s*)?['"]esbuild['"])/gm;
+const LOCAL_IMPORT_RE = /^\s*(?:import|export)\s+(?:[^'";]*?\sfrom\s+)?['"](\.\.?\/[^'"]+)['"]/gm;
+const LOCAL_MODULE_EXTENSIONS = ['', '.mjs', '.js', '.cjs'];
+
+function staticEsbuildImports(source) {
+  return [...String(source).matchAll(STATIC_ESBUILD_RE)].map((match) => match[0]);
+}
+
+function resolveLocalModule(importer, specifier) {
+  const raw = path.resolve(path.dirname(importer), specifier);
+  const candidates = path.extname(raw)
+    ? [raw]
+    : LOCAL_MODULE_EXTENSIONS.map((extension) => `${raw}${extension}`);
+  return candidates.find((candidate) => {
+    try {
+      return fs.statSync(candidate).isFile();
+    } catch {
+      return false;
+    }
+  }) || null;
+}
+
+function collectLocalModuleSources(entry) {
+  const queue = [entry];
+  const seen = new Set();
+  const modules = [];
+  while (queue.length > 0) {
+    const file = queue.pop();
+    if (seen.has(file)) continue;
+    seen.add(file);
+    const source = fs.readFileSync(file, 'utf8');
+    modules.push({ file, source });
+    for (const match of source.matchAll(LOCAL_IMPORT_RE)) {
+      const dependency = resolveLocalModule(file, match[1]);
+      if (dependency && !seen.has(dependency)) queue.push(dependency);
+    }
+  }
+  return modules;
+}
+
 // ── I pavimenti ─────────────────────────────────────────────────────────────
 
 test('conteggi realistici non producono violazioni', () => {
@@ -190,7 +233,21 @@ test('senza esbuild il gate LANCIA, invece di dichiararsi saltato', () => {
   }
 });
 
-test('il gate non importa esbuild staticamente', () => {
+test('la guardia esbuild copre commenti, import multilinea ed export', () => {
+  const fixture = [
+    "import { createRequire } from 'node:module'; // risolve 'esbuild' a runtime",
+    'import {',
+    '  build,',
+    "} from 'esbuild';",
+    "export { transform } from 'esbuild';",
+  ].join('\n');
+  const statico = staticEsbuildImports(fixture);
+  assert.equal(statico.length, 2);
+  assert.ok(statico.every((line) => line.includes("'esbuild'")));
+  assert.ok(!statico.some((line) => line.includes('createRequire')));
+});
+
+test('il gate e tutti i suoi import locali non importano esbuild staticamente', () => {
   // `generator/tests/loop-scripts-closure.test.mjs` rifiuta gli import di
   // pacchetti non dichiarati in package.json per tutto scripts/ci/, perche' il
   // ciclo gira senza `npm ci`. esbuild non e' fra le dipendenze e non deve
@@ -198,15 +255,30 @@ test('il gate non importa esbuild staticamente', () => {
   // transformers. La risoluzione a runtime e' quello che tiene le due cose
   // insieme, e trasformarla in un import statico romperebbe l'altro guard —
   // con un messaggio che non spiega perche'. Questo lo spiega.
-  const src = fs.readFileSync(GATE, 'utf8');
-  const statico = src
-    .split('\n')
-    .filter((l) => /^\s*import(?:\s|(?=[{*'"]))[^\n]*?(?:[\s}*]from\s*)?['"]esbuild['"]/.test(l));
+  const modules = collectLocalModuleSources(GATE);
+  const statico = modules.flatMap(({ file, source }) =>
+    staticEsbuildImports(source).map((line) => path.relative(ROOT, file) + ': ' + line),
+  );
   assert.deepEqual(
     statico,
     [],
-    'esbuild va risolto a runtime (createRequire), non importato staticamente.',
+    'esbuild va risolto a runtime (createRequire), non importato staticamente nel gate o nei suoi helper locali.',
   );
+});
+
+test('la guardia segue gli helper locali del gate', () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'blog-body-esbuild-helper-'));
+  try {
+    fs.mkdirSync(path.join(dir, 'lib'));
+    fs.writeFileSync(path.join(dir, 'gate.mjs'), "import './lib/helper.mjs';\n");
+    fs.writeFileSync(path.join(dir, 'lib/helper.mjs'), "export { transform } from 'esbuild';\n");
+
+    const modules = collectLocalModuleSources(path.join(dir, 'gate.mjs'));
+    const statico = modules.flatMap(({ source }) => staticEsbuildImports(source));
+    assert.equal(statico.length, 1, 'un import statico in un helper locale deve essere rilevato');
+  } finally {
+    fs.rmSync(dir, { recursive: true, force: true });
+  }
 });
 
 test('formatOffender riporta il path relativo e i messaggi di esbuild', () => {
