@@ -254,12 +254,24 @@ export const RATE_TABLE_DEROGATION_FIELDS = [
   'twitterDescription',
 ];
 
+// Sigle che possono aprire una riga della tabella delle trattenute svizzere.
+// Il prefisso della riga e' intenzionalmente chiuso: un acronimo qualunque
+// (es. `GDP`) non puo' trasformare una frase inglese in una tabella italiana.
+const SWISS_RATE_CODE = '(?:AVS|AI|IPG|AD|AC|LAINF|LPP)';
+const SWISS_RATE_ROW_RE = new RegExp(
+  `(?:^|[,;|]\\s*)${SWISS_RATE_CODE}(?:\\s*/\\s*${SWISS_RATE_CODE})*`
+    + `\\s*(?:[:=]\\s*)?\\d+(?:[.,]\\d+)?`
+    + `(?:\\s*[-–]\\s*\\d+(?:[.,]\\d+)?)?\\s*%`,
+  'gi',
+);
+
 /**
  * `true` se il testo e' una tabella compatta di aliquote e sigle italiana:
- * almeno due percentuali, almeno due acronimi E un'ancora lessicale italiana. La
- * morfologia, tarata sulla prosa, legge questa forma come non-italiana anche
- * quando e' italiana; l'ancoraggio impedisce che la sola forma «tabella»
- * apra la deroga a un testo di un'altra lingua.
+ * almeno due percentuali, almeno due acronimi E un'ancora lessicale italiana,
+ * oppure almeno due righe complete di aliquota svizzera. La morfologia, tarata
+ * sulla prosa, legge questa forma come non-italiana anche quando e' italiana;
+ * la grammatica delle righe impedisce che una sigla svizzera isolata apra la
+ * deroga a un testo di un'altra lingua.
  *
  * @param {string} value
  * @returns {boolean}
@@ -269,7 +281,7 @@ export function isCompactItalianRateTable(value) {
   const percentages = value.match(/\b\d+(?:[.,]\d+)?\s*%/g) ?? [];
   const acronyms = value.match(/\b[A-Z]{2,}(?:\/[A-Z]{2,})*\b/g) ?? [];
   const hasItalianAnchor = /\b(?:aliquota|aliquote|contributo|contributi|percentuale|percentuali)\b/i.test(value);
-  const hasSwissRateCluster = /\b(?:AVS|AI|IPG|LAINF|LPP)(?:\/[A-Z]{2,})*(?:\s*[:=])?\s*\d+(?:[.,]\d+)?\s*%/i.test(value);
+  const hasSwissRateCluster = (value.match(SWISS_RATE_ROW_RE) ?? []).length >= 2;
   return percentages.length >= 2 && acronyms.length >= 2 && (hasItalianAnchor || hasSwissRateCluster);
 }
 

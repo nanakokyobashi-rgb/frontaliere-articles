@@ -181,6 +181,13 @@ test('#1177 — la deroga alle sigle non rende permissivo un excerpt generico', 
   assert.ok(verdetto.missing.some((m) => m.startsWith('excerpt lingua ')));
 });
 
+test('#1238 — una coppia sigla-percentuale non basta per aprire la deroga', () => {
+  const inglese = 'AI 50% GDP 20% markets report annual costs';
+
+  assert.equal(isCompactItalianRateTable(inglese), false);
+  assert.equal(detectWrongLatinLanguageInField(inglese, 'it', 'excerpt')?.lang, 'non-it');
+});
+
 test('#1220 — la deroga vale sulle stesse stringhe anche per il corpus pubblicato', () => {
   // Il gate di generazione e gli scan del corpus DEVONO dare lo stesso verdetto
   // sullo stesso testo: se l'excerpt-tabella passa in generazione ma lo scan lo
