@@ -468,10 +468,10 @@ test('exit 4 (ragione legittima DICHIARATA) resta assorbito', () => {
   assert.equal(runGenerateBlock({ nodeExit: EXIT_NO_ARTICLE_DECLARED }).status, 0);
 });
 
-test('la congiunzione: roster bloccato MA articolo prodotto → verde', () => {
-  // Se un tentativo scrive comunque un corpo, il roster ha servito: fallire qui
-  // butterebbe via un articolo buono.
+test('la congiunzione: roster bloccato dopo output parziale resta rosso', () => {
+  // Un corpo lasciato dopo exit 3 e' output parziale, non un articolo prodotto:
+  // il fallimento del generatore resta vincolante per il commit.
   const r = runGenerateBlock({ nodeExit: EXIT_ROSTER_CANNOT_SERVE_PROMPT, writesArticle: true });
-  assert.equal(r.status, 0);
-  assert.match(r.outputs, /article=true/);
+  assert.equal(r.status, 1, 'un exit 3 dopo una scrittura parziale deve restare rosso');
+  assert.match(r.outputs, /article=false/);
 });
