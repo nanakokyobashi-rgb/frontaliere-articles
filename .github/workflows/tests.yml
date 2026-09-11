@@ -83,6 +83,7 @@ on:
 # proprio verdetto e i commenti di diagnosi.
 permissions:
   contents: read
+  actions: read
   pull-requests: write
   issues: write
   id-token: write
@@ -661,15 +662,18 @@ jobs:
             echo "Codex primary riuscito: nessun log Claude da classificare."
             exit 0
           fi
-          # max_turns PRIMA del 429, e l'ordine e' sostanziale: la regex del 429
-          # contiene un `rate[ _-]?limit` nudo che matcha i metadata di
-          # rate-limit-headroom presenti su OGNI chiamata, anche riuscita.
-          # Combinata con `is_error:true` (settato genericamente anche su un
-          # abort per max_turns), una review semplicemente finita i turni
-          # verrebbe scambiata per un 429 e declassata a warning — job verde,
-          # zero review postate, nessun segnale.
+          # max_turns PRIMA del 429: il terminal marker e' piu' specifico dei
+          # campi di telemetria condivisi. Il ramo 429 sotto accetta solo
+          # marker strutturati (status HTTP, evento rifiutato o errore tipizzato):
+          # un semplice `rate_limit` nel file puo' essere il metadata di una
+          # richiesta riuscita e non deve trasformare un altro errore in warning.
           if [ -n "${EXEC_FILE:-}" ] && [ -f "${EXEC_FILE}" ] \
-             && grep -qE '"terminal_reason"[[:space:]]*:[[:space:]]*"max_turns"' "${EXEC_FILE}"; then
+             && jq -e -s '
+               flatten | any(.[]?;
+                 .terminal_reason == "max_turns"
+                 and (.type == "result" or .type == null)
+               )
+             ' "${EXEC_FILE}" >/dev/null 2>&1; then
             # Il cap dei turni non prova da solo l'assenza di un verdetto: Claude
             # puo' aver gia' inviato la review e consumare l'ultimo turno mentre
             # chiude la propria esecuzione. Verifichiamo la HEAD e la finestra di
@@ -677,21 +681,32 @@ jobs:
             # trasformato in «nessun finding» dal ciclo di autorebase (#1185).
             RUN_STARTED_AT=$(gh api "repos/$REPO/actions/runs/$RUN_ID" --jq '.run_started_at // empty' 2>/dev/null || true)
             REVIEWS=''
-            if [ -n "${RUN_STARTED_AT:-}" ]; then
-              REVIEWS=$(gh api "repos/$REPO/pulls/$PR_NUMBER/reviews?per_page=100" --paginate --slurp 2>/dev/null || true)
-            fi
-            if [ -n "${REVIEWS:-}" ] && jq -e '
-              any(.[][]?;
-                (.user.type == "Bot")
-                and ((.user.login // "") | test("^(claude|frontaliere-automation)"; "i"))
-                and .commit_id == env.HEAD_SHA
-                and (.submitted_at // "") >= env.RUN_STARTED_AT
-              )
-            ' <<<"$REVIEWS" >/dev/null; then
-              set_review_output review_abort_cause verdict_posted
-              echo "::warning::Review Claude pubblicata sulla HEAD in questa run; max_turns non e' un abort senza verdetto. Il review gate valuta la review appena postata."
+            if [ -z "${RUN_STARTED_AT:-}" ]; then
+              set_review_output review_abort_cause probe_failed
+              set_review_output permanent_failure true
+              echo "::error::Impossibile leggere run_started_at dalla Actions API: max_turns non classificato come abort senza verdetto."
               exit 0
             fi
+
+            # La review REST puo' diventare visibile alcuni secondi dopo il
+            # termine dell'action: tre probe bounded evitano di scambiare la
+            # consistenza eventuale per assenza di verdetto.
+            for attempt in 1 2 3; do
+              REVIEWS=$(gh api "repos/$REPO/pulls/$PR_NUMBER/reviews?per_page=100" --paginate --slurp 2>/dev/null || true)
+              if [ -n "${REVIEWS:-}" ] && jq -e --arg head_sha "$HEAD_SHA" --arg run_started_at "$RUN_STARTED_AT" '
+                any(.[][]?;
+                  (.user.type == "Bot")
+                  and ((.user.login // "") | test("^(claude|frontaliere-automation)"; "i"))
+                  and .commit_id == $head_sha
+                  and (.submitted_at // "") >= $run_started_at
+                )
+              ' <<<"$REVIEWS" >/dev/null 2>&1; then
+                set_review_output review_abort_cause verdict_posted
+                echo "::warning::Review Claude pubblicata sulla HEAD in questa run; max_turns non e' un abort senza verdetto. Il review gate valuta la review appena postata."
+                exit 0
+              fi
+              [ "$attempt" -eq 3 ] || sleep 2
+            done
             NUM_TURNS=$(grep -oE '"num_turns"[[:space:]]*:[[:space:]]*[0-9]+' "${EXEC_FILE}" | tail -1 | grep -oE '[0-9]+' || true)
             set_review_output review_aborted true
             set_review_output review_abort_cause max_turns
@@ -707,7 +722,14 @@ jobs:
           # trova nessun `## LGTM` sulla head e fallisce lui.
           if [ -n "${EXEC_FILE:-}" ] && [ -f "${EXEC_FILE}" ] \
              && grep -qE '"is_error"[[:space:]]*:[[:space:]]*true' "${EXEC_FILE}" \
-             && grep -qiE '"api_error_status"[[:space:]]*:[[:space:]]*429|"type"[[:space:]]*:[[:space:]]*"rate_limit_error"|rate[ _-]?limit|too many requests' "${EXEC_FILE}"; then
+             && {
+               grep -qE '"api_error_status"[[:space:]]*:[[:space:]]*429([[:space:],}]|$)' "${EXEC_FILE}" \
+               || {
+                 grep -qE '"type"[[:space:]]*:[[:space:]]*"rate_limit_event"' "${EXEC_FILE}" \
+                 && grep -qE '"status"[[:space:]]*:[[:space:]]*"rejected"' "${EXEC_FILE}";
+               } \
+               || grep -qE '"error"[[:space:]]*:[[:space:]]*"rate_limit"|"type"[[:space:]]*:[[:space:]]*"rate_limit_error"' "${EXEC_FILE}";
+             }; then
             set_review_output review_aborted true
             set_review_output review_abort_cause rate_limit
             set_review_output retryable_failure true
@@ -733,6 +755,13 @@ jobs:
               echo "::error::Review action con errore non classificato come transiente: nessun autorebase automatico."
               exit 0
             fi
+          fi
+          if [ "${REVIEW_OUTCOME}" = "cancelled" ]; then
+            set_review_output review_aborted true
+            set_review_output review_abort_cause cancelled
+            set_review_output retryable_failure true
+            echo "::error::Review Claude cancellata prima del verdetto — rilanciare il job."
+            exit 1
           fi
           if [ "${REVIEW_OUTCOME}" = "failure" ]; then
             # Un failure senza prova di max_turns/429/5xx non e' sicuro da

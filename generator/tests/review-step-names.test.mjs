@@ -165,11 +165,17 @@ test('lo step di abort gira anche quando la review muore, e sta PRIMA del gate',
 test('max_turns distingue una review gia\' postata sulla HEAD nella run corrente', async () => {
   const { REVIEW_ABORT_STEP_NAME } = await import('../../scripts/ci/lib/vitestCheck.mjs');
   const block = stepBlock(yaml, REVIEW_ABORT_STEP_NAME);
+  assert.match(yaml, /^\s*actions:\s*read\s*$/m, 'la probe della run deve poter leggere Actions API');
+  assert.match(block, /jq -e -s/);
+  assert.match(block, /terminal_reason == "max_turns"/);
   assert.match(block, /actions\/runs\/\$RUN_ID/);
   assert.match(block, /pulls\/\$PR_NUMBER\/reviews/);
   assert.match(block, /--paginate --slurp/);
-  assert.match(block, /\.commit_id == env\.HEAD_SHA/);
-  assert.match(block, /\.submitted_at \/\/ ""\) >= env\.RUN_STARTED_AT/);
+  assert.match(block, /--arg head_sha "\$HEAD_SHA"/);
+  assert.match(block, /--arg run_started_at "\$RUN_STARTED_AT"/);
+  assert.match(block, /\.commit_id == \$head_sha/);
+  assert.match(block, /\.submitted_at \/\/ ""\) >= \$run_started_at/);
+  assert.doesNotMatch(block, /env\.RUN_STARTED_AT/);
   assert.match(block, /review_abort_cause verdict_posted/);
   assert.match(block, /review_abort_cause max_turns/);
   const posted = block.indexOf('review_abort_cause verdict_posted');
@@ -190,8 +196,14 @@ test('429 e cause non riattivabili viaggiano come segnali distinti', async () =>
   assert.match(abort, /review_abort_cause rate_limit/);
   assert.match(abort, /review_aborted true/);
   assert.match(abort, /review_abort_cause server_error/);
+  assert.match(abort, /REVIEW_OUTCOME.*cancelled/);
+  assert.match(abort, /review_abort_cause cancelled/);
   assert.match(abort, /retryable_failure true/);
   assert.match(abort, /permanent_failure true/);
+  assert.match(abort, /api_error_status.*429/);
+  assert.match(abort, /rate_limit_event/);
+  assert.match(abort, /status.*rejected/);
+  assert.doesNotMatch(abort, /rate\[ _-\]\?limit/);
 
   const permanentName = 'Fail on non-retryable review action error (no automatic retry)';
   const permanent = stepBlock(yaml, permanentName);
