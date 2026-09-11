@@ -1192,18 +1192,20 @@ function resolvedLocalImports(rel, source, known) {
     // coincide per caso, ma appena uno passa a `corpus-only`
     // `unmirrorableDepsVerdict()` (e `transportVerdict()`, che decide la
     // DIREZIONE del mirror) leggerebbe il `mode` dell'altro file. I rami di
-    // fallback si attivano solo per un importatore senza estensione, cioe'
-    // TypeScript — un `.mjs` sotto Node non puo' scrivere quella forma —
-    // quindi far vincere `.ts` e' sicuro incondizionatamente.
-    const hit = [
+    // fallback si attivano solo per un importatore TypeScript (`.ts`/`.tsx`):
+    // un `.mjs` sotto Node non puo' scrivere quella forma, quindi far vincere
+    // `.ts` e' sicuro solo quando l'importatore lo consente davvero.
+    const tsImporter = ['.ts', '.tsx'].includes(path.posix.extname(rel).toLowerCase());
+    const candidates = [
       base,
-      `${base}.ts`,
+      ...(tsImporter ? [`${base}.ts`] : []),
       `${base}.mjs`,
       `${base}.js`,
-      `${base}/index.ts`,
+      ...(tsImporter ? [`${base}/index.ts`] : []),
       `${base}/index.mjs`,
       `${base}/index.js`,
-    ].find(known);
+    ];
+    const hit = candidates.find(known);
     if (hit && !out.includes(hit)) out.push(hit);
   }
   return out;

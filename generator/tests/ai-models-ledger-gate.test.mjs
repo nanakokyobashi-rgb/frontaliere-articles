@@ -52,6 +52,7 @@ import {
   _cooldownSeverityDurations,
   _perMachineEndpointEnvVars,
   _restorableExhaustUntil,
+  _safeDiagnosticValue,
   __installScoreStoreForTests,
   EXHAUST_RESTORE_MAX_AHEAD_MS,
 } from '../scripts/lib/ai-models.mjs';
@@ -1195,6 +1196,33 @@ describe('restore di exhaustedUntil: tetto sulla distanza nel futuro', () => {
     assert.equal(_restorableExhaustUntil({ toDate: () => until }, now).reason, 'restore');
   });
 
+  it('accetta un Timestamp serializzato con secondi e nanosecondi', () => {
+    const until = new Date(now.getTime() + 3_600_000 + 123);
+    const serialized = {
+      _seconds: Math.floor(until.getTime() / 1000),
+      _nanoseconds: (until.getTime() % 1000) * 1_000_000,
+    };
+    assert.deepEqual(_restorableExhaustUntil(serialized, now), { until, reason: 'restore' });
+  });
+
+  it('un Timestamp con toDate() difettoso diventa unparsable senza lanciare', () => {
+    assert.doesNotThrow(() => _restorableExhaustUntil({ toDate: () => { throw new Error('bad timestamp'); } }, now));
+    assert.equal(_restorableExhaustUntil({ toDate: () => { throw new Error('bad timestamp'); } }, now).reason, 'unparsable');
+  });
+
+  it('la diagnostica non serializzabile non interrompe il ledger', () => {
+    const cyclic = {};
+    cyclic.self = cyclic;
+    assert.doesNotThrow(() => _safeDiagnosticValue(cyclic));
+    assert.match(_safeDiagnosticValue(cyclic), /\[object Object\]/);
+
+    const hostile = {
+      toJSON: () => { throw new Error('cannot stringify'); },
+      toString: () => { throw new Error('cannot stringify'); },
+    };
+    assert.equal(_safeDiagnosticValue(hostile), '<non-serializzabile>');
+  });
+
   it('un valore illeggibile o assente non ripristina niente', () => {
     assert.equal(_restorableExhaustUntil('non-una-data', now).reason, 'unparsable');
     assert.equal(_restorableExhaustUntil(null, now).reason, 'absent');
@@ -1204,6 +1232,11 @@ describe('restore di exhaustedUntil: tetto sulla distanza nel futuro', () => {
     assert.ok(
       SRC_CODE.includes('_restorableExhaustUntil(data.exhaustedUntil, now)'),
       'il ramo di restore deve chiamare l\'helper: in-line non e\' esercitabile da nessun test',
+    );
+    assert.match(
+      SRC_CODE,
+      /_safeDiagnosticValue\(data\.exhaustedUntil\)/,
+      'la diagnostica del valore persistito deve passare dalla serializzazione safe',
     );
     assert.equal(
       (SRC_CODE.match(/resetTime > now/g) || []).length,
