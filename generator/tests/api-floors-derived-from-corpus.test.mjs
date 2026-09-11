@@ -60,6 +60,9 @@ import {
   retentionLines,
   measureDist,
   expectFromCorpus,
+  FEED_POPULATION_WARN_RETENTION,
+  feedSourceFloor,
+  previousRevision,
 } from '../../scripts/ci/verify-api-floors.mjs';
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
 const WORKFLOW = fs.readFileSync(join(ROOT, '.github/workflows/publish-api.yml'), 'utf-8');
@@ -72,6 +75,7 @@ function healthy() {
     // La popolazione che GENERA i feed: le voci datate dei chunk SEO, non i
     // file di corpo. Diverge dai corpi per costruzione — e' il punto.
     feedSources: { frontaliere: 3750, svizzera: 1936 },
+    previousFeedSources: { frontaliere: 3750, svizzera: 1936 },
     sourceImages: 1990,
     rssMaxItems: 50,
   };
@@ -149,6 +153,27 @@ test('un feed troncato viene visto, e un feed corto per corpus corto no', () => 
     },
   };
   assert.deepEqual(floorViolations(tiny.measured, tiny.expected), []);
+});
+
+test('un calo dei chunk sotto il cap non puo\' abbassare da solo il pavimento del feed', () => {
+  const expected = {
+    sourceArticles: { frontaliere: 3785, svizzera: 1850 },
+    feedSources: { frontaliere: 5, svizzera: 1936 },
+    previousFeedSources: { frontaliere: 50, svizzera: 1936 },
+    sourceImages: null,
+    rssMaxItems: 50,
+  };
+  const measured = {
+    articleCounts: { articles: 3782, swissArticles: 1850 },
+    feeds: [{ name: 'rss.xml', items: 5 }],
+    images: null,
+  };
+
+  assert.equal(feedSourceFloor(expected, 'frontaliere'), 50);
+  const violations = floorViolations(measured, expected);
+  assert.equal(violations.length, 1);
+  assert.match(violations[0], /rss\.xml: 5 <item> contro 45 attesi/);
+  assert.match(violations[0], /5 voci nei chunk SEO.*riferimento storico\/floor 50/);
 });
 
 /*
@@ -312,6 +337,30 @@ test('un input di corpus che punta a un file o a un symlink pendente vale come d
   fs.rmSync(root, { recursive: true, force: true });
 });
 
+test('ELOOP/EACCES del corpus diventano un errore di riferimento diagnosticabile', () => {
+  const originalStat = fs.statSync;
+  const root = fs.mkdtempSync(join(os.tmpdir(), 'corpus-errno-'));
+  try {
+    for (const code of ['ELOOP', 'EACCES']) {
+      fs.statSync = () => {
+        const error = new Error(`simulated ${code}`);
+        error.code = code;
+        throw error;
+      };
+      assert.throws(
+        () => countSourceArticles(root, 'frontaliere'),
+        (error) => error.code === 'MISSING_CORPUS'
+          && error.cause?.code === code
+          && /riferimento del pavimento assente/.test(error.message)
+          && /content[\\/]blog-body[\\/]it/.test(error.message),
+      );
+    }
+  } finally {
+    fs.statSync = originalStat;
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
 test('il conteggio delle immagini legge la directory sorgente una sola volta', () => {
   const root = fs.mkdtempSync(join(os.tmpdir(), 'image-input-'));
   const imageDir = join(root, 'public', 'images', 'blog');
@@ -352,6 +401,24 @@ test('measureDist riconosce i feed dal documento, non dal nome del file', () => 
   assert.deepEqual(measured.feeds, [{ name: 'rss.xml', items: 2 }]);
   assert.equal(measured.images, null, 'images-manifest.json assente ⇒ null, che e\' un caso valido');
   assert.equal(measured.articleCounts.articles, 7);
+  fs.rmSync(dir, { recursive: true, force: true });
+});
+
+test('measureDist trasforma un images-manifest malformato in una violazione esplicita', () => {
+  const dir = fs.mkdtempSync(join(os.tmpdir(), 'api-floors-images-shape-'));
+  fs.writeFileSync(join(dir, 'manifest.json'), JSON.stringify({ counts: { articles: 7, swissArticles: 2 } }));
+  fs.writeFileSync(join(dir, 'images-manifest.json'), JSON.stringify({ images: { length: 7 } }));
+
+  const measured = measureDist(dir);
+  assert.equal(measured.images, null);
+  assert.deepEqual(measured.imageErrors, ['images-manifest.json: campo "images" assente o non è un array']);
+  const violations = floorViolations(measured, {
+    sourceArticles: { frontaliere: 7, svizzera: 2 },
+    feedSources: { frontaliere: 0, svizzera: 0 },
+    sourceImages: 10,
+    rssMaxItems: 50,
+  });
+  assert.deepEqual(violations, measured.imageErrors);
   fs.rmSync(dir, { recursive: true, force: true });
 });
 
@@ -429,6 +496,16 @@ test("publish-api.yml non porta piu' un pavimento assoluto scritto a mano", () =
     WORKFLOW,
     /imgs" -lt 1\b/,
     'il pavimento `-lt 1` sulle immagini accettava 1990 immagini ridotte a una',
+  );
+});
+
+test('il floor storico usa github.event.before e conserva un fallback esplicito', () => {
+  assert.equal(previousRevision(ROOT, 'before-sha'), 'before-sha');
+  assert.equal(previousRevision(ROOT, '0'.repeat(40)), null);
+  assert.match(
+    WORKFLOW,
+    /API_FLOOR_BASE_REVISION:\s*\$\{\{ github\.event\.before \}\}/,
+    'publish-api deve passare la base del push, non lasciare che lo script scelga HEAD^',
   );
 });
 
@@ -536,6 +613,7 @@ test('l\'erosione dei chunk SEO resta un advisory anche quando il feed e\' capat
   const eroded = {
     ...expected,
     feedSources: { ...expected.feedSources, frontaliere: 60 },
+    previousFeedSources: { ...expected.previousFeedSources, frontaliere: 3750 },
   };
   const rows = retentionReport(measured, eroded);
   const population = rows.find((r) => r.label === 'chunk SEO frontaliere/corpus');
@@ -543,13 +621,36 @@ test('l\'erosione dei chunk SEO resta un advisory anche quando il feed e\' capat
     kind: 'feed-population',
     label: 'chunk SEO frontaliere/corpus',
     declared: 60,
-    source: 3785,
+    source: 3750,
   });
   assert.equal(measured.feeds[0].items, 50, 'il feed resta pieno del suo cap');
   const advisories = retentionAdvisories(rows);
   assert.equal(advisories.length, 1);
   assert.match(advisories[0], /chunk SEO frontaliere\/corpus/);
-  assert.match(advisories[0], /popolazione 60\/3785/);
+  assert.match(advisories[0], /popolazione 60\/3750/);
+  assert.equal(FEED_POPULATION_WARN_RETENTION, 0.9);
+});
+
+test('una differenza storica fisiologica dei chunk non produce il warning retention degli articoli', () => {
+  const { measured, expected } = healthy();
+  const nearCurrent = {
+    ...expected,
+    feedSources: { ...expected.feedSources, frontaliere: 3784 },
+    previousFeedSources: { ...expected.previousFeedSources, frontaliere: 3847 },
+  };
+  const population = retentionReport(measured, nearCurrent)
+    .find((row) => row.label === 'chunk SEO frontaliere/corpus');
+  assert.deepEqual(population, {
+    kind: 'feed-population',
+    label: 'chunk SEO frontaliere/corpus',
+    declared: 3784,
+    source: 3847,
+  });
+  assert.deepEqual(
+    retentionAdvisories(retentionReport(measured, nearCurrent))
+      .filter((line) => line.includes('chunk SEO frontaliere/corpus')),
+    [],
+  );
 });
 
 test('il report tace dove il riferimento manca: quello e\' una violazione, non un rapporto', () => {
