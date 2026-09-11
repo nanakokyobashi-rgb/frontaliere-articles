@@ -31,11 +31,15 @@ import { readFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import {
+  CRAWLER_COMMIT_RUNTIME_PATH,
   SITE_LOGIC_DIR,
   SITE_LOGIC_DIR_FALLBACKS,
   evaluateProvenance,
+  evaluateRuntimeFlagChecks,
   isLogicSource,
+  isRuntimeFlagSupported,
   planProvenanceChecks,
+  planRuntimeFlagChecks,
   resolveSiteCandidate,
   siteGeneratorPath,
   siteLogicDirs,
@@ -74,6 +78,86 @@ const fixtureContract = {
     },
   ],
 };
+
+test('#1264 — il piano runtime raccoglie ogni flag invocata dagli artifact', () => {
+  const contract = { siteRuntimePaths: [CRAWLER_COMMIT_RUNTIME_PATH] };
+  const artifacts = [
+    {
+      file: 'crawler-group-01.yml',
+      text: 'run: bash scripts/lib/git-commit-data.sh --slice-only "slice"\n' +
+        'run: bash scripts/lib/git-commit-data.sh --extra-only "extra"\n',
+    },
+    {
+      file: 'crawler-group-02.yml',
+      text: 'run: bash scripts/lib/git-commit-data.sh --group-batch "batch"\n',
+    },
+  ];
+  const checks = planRuntimeFlagChecks(contract, artifacts);
+  assert.deepEqual(
+    checks.map((check) => check.flag),
+    ['--extra-only', '--group-batch', '--slice-only'],
+  );
+  assert.equal(checks.every((check) => check.declared), true);
+  assert.deepEqual(
+    checks.find((check) => check.flag === '--slice-only').artifactFiles,
+    ['crawler-group-01.yml'],
+  );
+});
+
+test('#1264 — una flag runtime presente ma assente dal sorgente è rossa', () => {
+  const source = Buffer.from(
+    'if [ "' + '$' + '{1:-}" = "--extra-only" ]; then\n' +
+    'elif [ "' + '$' + '{1:-}" = "--group-batch" ]; then\n',
+  );
+  const contract = { siteRuntimePaths: [CRAWLER_COMMIT_RUNTIME_PATH] };
+  const artifacts = [{
+    file: 'crawler-group-01.yml',
+    text: 'run: bash scripts/lib/git-commit-data.sh --extra-only "extra"\n' +
+      'run: bash scripts/lib/git-commit-data.sh --slice-only "slice"\n',
+  }];
+  const checks = planRuntimeFlagChecks(contract, artifacts);
+  const observed = new Map(checks.map((check) => [
+    check.field,
+    { sha256: HASH, bytes: source },
+  ]));
+  const verdict = evaluateRuntimeFlagChecks(checks, observed);
+  assert.equal(isRuntimeFlagSupported(source, '--extra-only'), true);
+  assert.equal(isRuntimeFlagSupported(source, '--slice-only'), false);
+  assert.equal(verdict.red, true);
+  assert.equal(verdict.counts.verified, 1);
+  assert.equal(verdict.counts.unrecognized, 1);
+  assert.match(verdict.reason, /--slice-only/);
+});
+
+test('#1264 — la provenienza runtime distingue 404, rete e path non dichiarato', () => {
+  const contract = { siteRuntimePaths: [CRAWLER_COMMIT_RUNTIME_PATH] };
+  const artifacts = [{
+    file: 'crawler-group-01.yml',
+    text: 'run: bash scripts/lib/git-commit-data.sh --extra-only "extra"\n',
+  }];
+  const [check] = planRuntimeFlagChecks(contract, artifacts);
+  const absent = evaluateRuntimeFlagChecks(
+    [check],
+    new Map([[check.field, { sha256: null, bytes: null }]]),
+  );
+  assert.equal(absent.results[0].state, 'absent');
+  assert.equal(absent.red, true);
+
+  const unobserved = evaluateRuntimeFlagChecks(
+    [check],
+    new Map([[check.field, { error: 'HTTP 502' }]]),
+  );
+  assert.equal(unobserved.results[0].state, 'unobserved');
+  assert.equal(unobserved.red, true);
+
+  const undeclared = planRuntimeFlagChecks(
+    { siteRuntimePaths: [] },
+    artifacts,
+  );
+  const undeclaredVerdict = evaluateRuntimeFlagChecks(undeclared, new Map());
+  assert.equal(undeclaredVerdict.results[0].state, 'undeclared');
+  assert.equal(undeclaredVerdict.red, true);
+});
 
 test('`generatedBy` col solo nome del repo o con owner/repo dà lo stesso path', () => {
   assert.equal(
