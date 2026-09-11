@@ -83,6 +83,7 @@ on:
 # proprio verdetto e i commenti di diagnosi.
 permissions:
   contents: read
+  actions: read
   pull-requests: write
   issues: write
   id-token: write
@@ -634,10 +635,14 @@ jobs:
       # errore API transiente SENZA aver postato una review: il job sembra verde
       # ma la PR si ferma in silenzio. Si classifica dal log di esecuzione.
       - name: Fail on transient API error (no review posted)
+        id: review_abort
         if: steps.body_contract.outcome != 'failure' && steps.tier.outputs.tier != 'tests-only' && always() && steps.resolve.outputs.should_review == 'true' && steps.guard.outputs.skip != 'true' && steps.claude_review.outputs.primary_success != 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          RUN_ID: ${{ github.run_id }}
           PR_NUMBER: ${{ steps.resolve.outputs.pr_number }}
+          HEAD_SHA: ${{ steps.resolve.outputs.head_sha }}
           REVIEW_OUTCOME: ${{ steps.claude_review.outcome }}
           EXEC_FILE: ${{ steps.claude_review.outputs.execution_file }}
           CODEX_PRIMARY_SUCCESS: ${{ steps.claude_review.outputs.primary_success }}
@@ -646,20 +651,105 @@ jobs:
           REVIEW_MAX_TURNS: ${{ steps.tier.outputs.max_turns }}
         run: |
           set -uo pipefail
+          set_review_output() {
+            printf '%s=%s\n' "$1" "$2" >> "$GITHUB_OUTPUT"
+          }
+          set_review_output review_aborted false
+          set_review_output review_abort_cause none
+          set_review_output retryable_failure false
+          set_review_output permanent_failure false
           if [ "${CODEX_PRIMARY_SUCCESS:-false}" = 'true' ]; then
             echo "Codex primary riuscito: nessun log Claude da classificare."
             exit 0
           fi
-          # max_turns PRIMA del 429, e l'ordine e' sostanziale: la regex del 429
-          # contiene un `rate[ _-]?limit` nudo che matcha i metadata di
-          # rate-limit-headroom presenti su OGNI chiamata, anche riuscita.
-          # Combinata con `is_error:true` (settato genericamente anche su un
-          # abort per max_turns), una review semplicemente finita i turni
-          # verrebbe scambiata per un 429 e declassata a warning — job verde,
-          # zero review postate, nessun segnale.
-          if [ -n "${EXEC_FILE:-}" ] && [ -f "${EXEC_FILE}" ] \
-             && grep -qE '"terminal_reason"[[:space:]]*:[[:space:]]*"max_turns"' "${EXEC_FILE}"; then
+          # L'execution file è NDJSON ma può terminare con una riga diagnostica o
+          # troncata. Normalizzalo una sola volta col parser condiviso, che scarta
+          # soltanto la riga illeggibile; i classificatori sotto non devono usare
+          # jq -s direttamente sul file grezzo e perdere marker validi precedenti.
+          EXEC_EVENTS_FILE=''
+          cleanup_execution_events() {
+            if [ -n "${EXEC_EVENTS_FILE:-}" ]; then
+              rm -f "${EXEC_EVENTS_FILE}"
+            fi
+          }
+          trap cleanup_execution_events EXIT
+          if [ -n "${EXEC_FILE:-}" ] && [ -f "${EXEC_FILE}" ]; then
+            EXEC_EVENTS_FILE="${RUNNER_TEMP:-/tmp}/claude-review-events-${RUN_ID:-$$}.jsonl"
+            if ! node scripts/ci/parse-claude-execution.mjs "${EXEC_FILE}" > "${EXEC_EVENTS_FILE}"; then
+              set_review_output review_abort_cause probe_failed
+              set_review_output permanent_failure true
+              echo "::error::Impossibile normalizzare l'execution file Claude: marker non classificati."
+              exit 0
+            fi
+          fi
+          # max_turns PRIMA del 429: il terminal marker e' piu' specifico dei
+          # campi di telemetria condivisi. Il ramo 429 sotto accetta solo
+          # marker strutturati (status HTTP, evento rifiutato o errore tipizzato):
+          # un semplice `rate_limit` nel file puo' essere il metadata di una
+          # richiesta riuscita e non deve trasformare un altro errore in warning.
+          if [ -n "${EXEC_EVENTS_FILE:-}" ] && [ -f "${EXEC_EVENTS_FILE}" ] \
+             && jq -e -s '
+               flatten | any(.[]?;
+                 .terminal_reason == "max_turns"
+               )
+             ' "${EXEC_EVENTS_FILE}" >/dev/null 2>&1; then
+            # Il cap dei turni non prova da solo l'assenza di un verdetto: Claude
+            # puo' aver gia' inviato la review e consumare l'ultimo turno mentre
+            # chiude la propria esecuzione. Verifichiamo la HEAD e la finestra di
+            # questa run prima di marchiare l'abort, altrimenti un 🔴 reale viene
+            # trasformato in «nessun finding» dal ciclo di autorebase (#1185).
+            if RUN_STARTED_AT=$(gh api "repos/$REPO/actions/runs/$RUN_ID" --jq '.run_started_at // empty' 2>/dev/null); then
+              :
+            else
+              set_review_output review_abort_cause probe_failed
+              set_review_output permanent_failure true
+              echo "::error::Impossibile interrogare la Actions API per run_started_at: max_turns non classificato come abort senza verdetto."
+              exit 0
+            fi
+            REVIEWS=''
+            if [ -z "${RUN_STARTED_AT:-}" ]; then
+              set_review_output review_abort_cause probe_failed
+              set_review_output permanent_failure true
+              echo "::error::Impossibile leggere run_started_at dalla Actions API: max_turns non classificato come abort senza verdetto."
+              exit 0
+            fi
+
+            # La review REST puo' diventare visibile alcuni secondi dopo il
+            # termine dell'action: tre probe bounded evitano di scambiare la
+            # consistenza eventuale per assenza di verdetto.
+            for attempt in 1 2 3; do
+              if REVIEWS=$(gh api "repos/$REPO/pulls/$PR_NUMBER/reviews?per_page=100" --paginate --slurp 2>/dev/null); then
+                :
+              else
+                PROBE_STATUS=$?
+                if [ "$attempt" -eq 3 ]; then
+                  set_review_output review_abort_cause probe_failed
+                  set_review_output permanent_failure true
+                  echo "::error::Impossibile interrogare la Reviews API dopo tre tentativi (status=${PROBE_STATUS}): max_turns non classificato come abort senza verdetto."
+                  exit 0
+                fi
+                echo "::warning::Probe della Reviews API fallita (tentativo ${attempt}, status=${PROBE_STATUS}); ritento prima di classificare max_turns."
+                sleep 2
+                continue
+              fi
+              if [ -n "${REVIEWS:-}" ] && jq -e --arg head_sha "$HEAD_SHA" --arg run_started_at "$RUN_STARTED_AT" '
+                flatten | any(.[]?;
+                  (.user.type == "Bot")
+                  and ((.user.login // "") | test("^(claude|frontaliere-automation)"; "i"))
+                  and .commit_id == $head_sha
+                  and (.submitted_at // "") >= $run_started_at
+                )
+              ' <<<"$REVIEWS" >/dev/null 2>&1; then
+                set_review_output review_abort_cause verdict_posted
+                echo "::warning::Review Claude pubblicata sulla HEAD in questa run; max_turns non e' un abort senza verdetto. Il review gate valuta la review appena postata."
+                exit 0
+              fi
+              [ "$attempt" -eq 3 ] || sleep 2
+            done
             NUM_TURNS=$(grep -oE '"num_turns"[[:space:]]*:[[:space:]]*[0-9]+' "${EXEC_FILE}" | tail -1 | grep -oE '[0-9]+' || true)
+            set_review_output review_aborted true
+            set_review_output review_abort_cause max_turns
+            set_review_output retryable_failure true
             BODY=$(printf '⚠️ **Review automatica fallita** (`terminal_reason=max_turns`, tier `%s`, cap %s turni, usati %s): Claude ha esaurito il budget prima di postare un verdetto. Nessuna review pubblicata — il check di questo job resta rosso e l auto-merge non puo scattare.\n\nLog: %s\n\nPer sbloccare: rilancia il run di `tests` piu recente di questa PR, oppure fai la review a mano col contratto di `REVIEW.md`.\n\nSe questa PR ha gia avuto una morte `max_turns`, un retry raramente basta: valuta di splittarla.' "${REVIEW_TIER:-?}" "${REVIEW_MAX_TURNS:-?}" "${NUM_TURNS:-?}" "$RUN_URL")
             gh pr comment "$PR_NUMBER" --body "$BODY" || echo "::warning::gh pr comment fallito (non bloccante)."
             echo "::error::Review Claude morta su max-turns (tier=${REVIEW_TIER:-?}, cap=${REVIEW_MAX_TURNS:-?}, turni=${NUM_TURNS:-?}) senza postare — rilancia, o splitta la PR se ricorre."
@@ -669,24 +759,99 @@ jobs:
           # ricolpisce la quota GIA' esaurita → tempesta auto-amplificante. Il
           # merge resta comunque bloccato, perche' il review gate sotto non
           # trova nessun `## LGTM` sulla head e fallisce lui.
-          if [ -n "${EXEC_FILE:-}" ] && [ -f "${EXEC_FILE}" ] \
-             && grep -qE '"is_error"[[:space:]]*:[[:space:]]*true' "${EXEC_FILE}" \
-             && grep -qiE '"api_error_status"[[:space:]]*:[[:space:]]*429|"type"[[:space:]]*:[[:space:]]*"rate_limit_error"|rate[ _-]?limit|too many requests' "${EXEC_FILE}"; then
+          if [ -n "${EXEC_EVENTS_FILE:-}" ] && [ -f "${EXEC_EVENTS_FILE}" ]; then
+            RATE_LIMIT_MARKER=false
+            if jq -e -s '
+              flatten | any(.[]?;
+                (
+                  ((.type == "result" or .type == null) and .is_error == true
+                    and (.api_error_status == 429 or .api_error_status == "429"))
+                  or (.type == "rate_limit_event"
+                    and .rate_limit_info.status == "rejected")
+                  or (.error == "rate_limit")
+                  or (.type == "rate_limit_error")
+                )
+              )
+            ' "${EXEC_EVENTS_FILE}" >/dev/null 2>&1; then
+              RATE_LIMIT_MARKER=true
+            fi
+          fi
+          if [ "${RATE_LIMIT_MARKER:-false}" = true ]; then
+            set_review_output review_aborted true
+            set_review_output review_abort_cause rate_limit
+            set_review_output retryable_failure true
             echo "::warning::Review abortita su 429 (quota). Non fallisco QUI: eviterei solo di amplificare i re-run sulla quota condivisa col sito. Il review gate blocchera' comunque il merge."
             exit 0
           fi
-          if [ "${REVIEW_OUTCOME}" = "failure" ]; then
-            echo "::error::claude-code-action fallita (outcome=failure) — rilancia il job."
-            exit 1
-          fi
-          if [ -n "${EXEC_FILE:-}" ] && [ -f "${EXEC_FILE}" ]; then
-            if grep -qE '"is_error"[[:space:]]*:[[:space:]]*true' "${EXEC_FILE}" \
-               && grep -qiE '"api_error_status"[[:space:]]*:[[:space:]]*5[0-9][0-9]|overloaded|server_error|internal server error|api error: 5' "${EXEC_FILE}"; then
+          if [ -n "${EXEC_EVENTS_FILE:-}" ] && [ -f "${EXEC_EVENTS_FILE}" ]; then
+            SERVER_ERROR_MARKER=false
+            if jq -e -s '
+              flatten | any(.[]?;
+                (
+                  ((.type == "result" or .type == null) and .is_error == true
+                    and (
+                      ((.api_error_status // "") | tostring | test("^5[0-9]{2}$"))
+                      or ((.error // .subtype // .message // "") | tostring
+                        | test("overloaded|server_error|internal server error|api error: 5"; "i"))
+                    ))
+                )
+              )
+            ' "${EXEC_EVENTS_FILE}" >/dev/null 2>&1; then
+              SERVER_ERROR_MARKER=true
+            fi
+            if [ "$SERVER_ERROR_MARKER" = true ]; then
+              set_review_output review_aborted true
+              set_review_output review_abort_cause server_error
+              set_review_output retryable_failure true
               echo "::error::Review abortita su un 5xx transiente senza postare — rilancia il job."
               exit 1
             fi
+            # Tutti gli altri errori strutturati sono non-riattivabili per
+            # default: OAuth scaduto, argomenti invalidi o action ritirata non
+            # cambiano con un close+reopen. Il dettaglio resta nel log/file; il
+            # consumer condiviso potra' usare questo output per la causa precisa.
+            if jq -e -s '
+              flatten | any(.[]?;
+                (.type == "result" or .type == null) and .is_error == true
+              )
+            ' "${EXEC_EVENTS_FILE}" >/dev/null 2>&1; then
+              set_review_output review_abort_cause non_retryable
+              set_review_output permanent_failure true
+              echo "::error::Review action con errore non classificato come transiente: nessun autorebase automatico."
+              exit 0
+            fi
+          fi
+          if [ "${REVIEW_OUTCOME}" = "cancelled" ]; then
+            set_review_output review_aborted true
+            set_review_output review_abort_cause cancelled
+            set_review_output retryable_failure true
+            echo "::error::Review Claude cancellata prima del verdetto — rilanciare il job."
+            exit 1
+          fi
+          if [ "${REVIEW_OUTCOME}" = "failure" ]; then
+            # Un failure senza prova di max_turns/429/5xx non e' sicuro da
+            # riattivare: il secondo step separato lo rende rosso senza
+            # nominarlo come REVIEW_ABORT_STEP_NAME, cosi' il consumer non lo
+            # scambia per un review-gate retryable (#1185 item 2).
+            set_review_output review_abort_cause non_retryable
+            set_review_output permanent_failure true
+            echo "::error::claude-code-action fallita senza causa transient provata (outcome=failure): nessun autorebase automatico."
+            exit 0
           fi
           echo "Step di review concluso senza errori API non recuperati."
+
+      # Questo rosso NON appartiene a REVIEW_DEATH_STEP_NAMES: una causa
+      # permanente deve bloccare il job, ma non puo' concedere il one-shot del
+      # review gate. Il gate sotto gira comunque con always() e conserva il suo
+      # verdetto separato.
+      - name: Fail on non-retryable review action error (no automatic retry)
+        if: steps.body_contract.outcome != 'failure' && steps.tier.outputs.tier != 'tests-only' && always() && steps.resolve.outputs.should_review == 'true' && steps.guard.outputs.skip != 'true' && steps.review_abort.outputs.permanent_failure == 'true'
+        env:
+          REVIEW_ABORT_CAUSE: ${{ steps.review_abort.outputs.review_abort_cause }}
+        run: |
+          set -u
+          echo "::error::Review automatica non riattivabile (cause=${REVIEW_ABORT_CAUSE:-unknown}); correggere la causa prima di un nuovo run."
+          exit 1
 
       # ── IL VERDETTO ──────────────────────────────────────────────────────
       # E' questo step a rendere il check-run rosso quando manca il `## LGTM` o

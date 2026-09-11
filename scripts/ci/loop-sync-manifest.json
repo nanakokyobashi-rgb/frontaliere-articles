@@ -3685,6 +3685,16 @@
         "corpus": "2d34eac0549c80ca",
         "alignedAt": "2026-09-10"
       }
+    },
+    {
+      "path": "scripts/ci/parse-claude-execution.mjs",
+      "mode": "corpus-only",
+      "reason": "Wrapper del parser condiviso `parseExecutionMessages()` usato dal workflow corpus per normalizzare una volta l'execution stream Claude prima dei classificatori dei failure. Non esiste sul sito e non deve: il gemello adattato del workflow non invoca questo consumer locale.",
+      "baseline": {
+        "site": null,
+        "corpus": "3be8a132bc5de01a",
+        "alignedAt": "2026-09-11"
+      }
     }
   ]
 }
