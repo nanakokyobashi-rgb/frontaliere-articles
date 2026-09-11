@@ -8984,14 +8984,7 @@ export function classifyExhaustionCause(errors, { authoritative } = {}) {
     const authoritativeBucket = authoritativeCauseBucket(entryAuthoritative);
     const persistentText = text;
     const persistentAt = causeIndex(PERSISTENT_EXHAUSTION_RE, persistentText);
-    // Once the persistent match lies outside the displayed window, the
-    // transient match must use the full text too: otherwise its index is
-    // measured in a shorter coordinate space and cannot be compared with
-    // `persistentAt` (#1320 item 1).
-    const transientAt = causeIndex(
-      transientRe,
-      persistentAt >= transientWindow ? persistentText : transientText,
-    );
+    const transientAt = causeIndex(transientRe, transientText);
     const isTransient = authoritativeBucket === 'transient'
       || (authoritativeBucket === null && transientAt >= 0 && (persistentAt < 0 || transientAt <= persistentAt));
     const isPersistent = authoritativeBucket === 'persistent'

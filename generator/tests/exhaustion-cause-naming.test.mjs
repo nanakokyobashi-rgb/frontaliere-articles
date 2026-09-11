@@ -403,13 +403,13 @@ describe('classifyExhaustionCause — quando una voce contiene DUE cause (#976)'
     assert.equal(primaTransitoria.transient, 1);
   });
 
-  it('riconfronta le cause oltre la finestra nella stessa coordinata (#1320)', () => {
+  it('non fa votare alla coda transitoria oltre la finestra (#1320)', () => {
     const body = `${'x'.repeat(220)} temporarily unavailable before HTTP 401 invalid api key`;
     const b = classifyExhaustionCause([
       { reason: `m: ${body}`, authoritative: null, transientWindow: 200 },
     ]);
-    assert.equal(b.transient, 1, 'la causa transitoria viene prima anche oltre la finestra mostrata');
-    assert.equal(b.persistent, 0);
+    assert.equal(b.transient, 0, 'il token transitorio nella coda non deve cambiare il voto');
+    assert.equal(b.persistent, 1, 'la causa persistente resta il verdetto della riga mostrata');
   });
 
   it('lo stesso ordine decide il secchio dell\'eco di cooldown', () => {
