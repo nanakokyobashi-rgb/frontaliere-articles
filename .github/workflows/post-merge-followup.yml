@@ -603,15 +603,32 @@ jobs:
             echo "::warning::Gate sul conio corpus saltato: GITHUB_PAT_NANAKO/GITHUB_PAT assente; issue lasciate intatte."
             exit 0
           fi
-          GH_TOKEN="$corpus_token" node scripts/ci/gate-minted-followups.mjs
+          GH_TOKEN="$corpus_token" GATE_PR_TOKEN="$corpus_token" node scripts/ci/gate-minted-followups.mjs
 
       # Quando il batch corpus conia item che puntano a file del sito, il gate
-      # precedente non li vede: GH_REPO è volutamente il corpus. Esegui la stessa
-      # chiusura deterministica sul repository target sito, commentando comunque la
-      # PR sorgente nel corpus. Senza questa passata il bucket resta collecting e
-      # non può entrare in `agent:fix-queued`.
-      - name: Gate sul conio — sito (zero-Claude)
+      # precedente non li vede: GH_REPO è volutamente il corpus. Il gate deve girare
+      # dal checkout del sito, perché parser e manifest sono gemelli adattati e non
+      # intercambiabili. Il token issue sito e quello della PR sorgente corpus restano
+      # separati: senza questa passata il bucket resta collecting e non può entrare in
+      # `agent:fix-queued`.
+      - name: Checkout site gate implementation
+        id: site_gate_checkout
         if: always()
+        continue-on-error: true
+        uses: actions/checkout@v5
+        with:
+          repository: valerielinc-ops/frontaliere-si-o-no
+          ref: main
+          path: .site-gate
+          fetch-depth: 1
+          persist-credentials: false
+          sparse-checkout: |
+            scripts/ci
+            scripts/lib
+          sparse-checkout-cone-mode: false
+
+      - name: Gate sul conio — sito (zero-Claude)
+        if: always() && steps.site_gate_checkout.outcome == 'success'
         continue-on-error: true
         env:
           GH_REPO: valerielinc-ops/frontaliere-si-o-no
@@ -626,7 +643,15 @@ jobs:
             echo "::warning::Gate sul conio sito saltato: GITHUB_PAT/GITHUB_PAT_SITE assente; issue lasciate intatte."
             exit 0
           fi
-          GH_TOKEN="$site_token" node scripts/ci/gate-minted-followups.mjs
+          corpus_token="${GITHUB_PAT_NANAKO:-${GITHUB_PAT:-}}"
+          if [ -z "$corpus_token" ]; then
+            echo "::warning::Gate sul conio sito senza token PR corpus; issue lasciate intatte."
+            exit 0
+          fi
+          (
+            cd .site-gate
+            GH_TOKEN="$site_token" GATE_PR_TOKEN="$corpus_token" node scripts/ci/gate-minted-followups.mjs
+          )
 
       - name: Claude usage metrics
         if: always() && steps.followup.outputs.claude_used == 'true'

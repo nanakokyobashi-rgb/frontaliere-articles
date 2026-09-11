@@ -1218,6 +1218,15 @@ runs:
           echo "CODEX_NODE_REAL=$node_bin"
         } >> "$GITHUB_ENV"
         echo "$bridge_root" >> "$GITHUB_PATH"
+        # The bridge server already captured the PATs above.  Do not let the
+        # fallback action inherit the raw credentials through the runner's
+        # persistent environment; Claude must reach GitHub only through the
+        # host-side `gh` wrapper and its explicit --repo scope.
+        {
+          echo 'GITHUB_PAT='
+          echo 'GITHUB_PAT_NANAKO='
+          echo 'GITHUB_PAT_SITE='
+        } >> "$GITHUB_ENV"
 
     - name: Run Claude fallback
       id: claude

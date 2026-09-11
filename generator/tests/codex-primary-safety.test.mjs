@@ -13,6 +13,7 @@ import { isMutatingGitArgs } from '../../.github/actions/claude-codex-fallback/g
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const action = fs.readFileSync(path.join(ROOT, '.github/actions/claude-codex-fallback/action.yml'), 'utf8');
+const mintGate = fs.readFileSync(path.join(ROOT, 'scripts/ci/gate-minted-followups.mjs'), 'utf8');
 const lessonsWorkflow = fs.readFileSync(path.join(ROOT, '.github/workflows/lessons-harvester.yml'), 'utf8');
 const followupWorkflow = fs.readFileSync(path.join(ROOT, '.github/workflows/post-merge-followup.yml'), 'utf8');
 const issueDecomposeWorkflow = fs.readFileSync(path.join(ROOT, '.github/workflows/issue-decompose.yml'), 'utf8');
@@ -167,6 +168,9 @@ test('Claude fallback is suppressed when Codex side effects are possible', () =>
   assert.match(action, /cp -- "\$action_path\/gh-bridge\.sh" "\$bridge_root\/gh"/);
   assert.match(action, /resolved_gh="\$\(PATH="\$bridge_path" command -v gh/);
   assert.match(action, /echo "\$bridge_root" >> "\$GITHUB_PATH"/);
+  assert.match(action, /echo 'GITHUB_PAT='/);
+  assert.match(action, /echo 'GITHUB_PAT_NANAKO='/);
+  assert.match(action, /echo 'GITHUB_PAT_SITE='/);
   assert.match(action, /Cleanup Claude fallback GitHub bridge/);
   assert.match(action, /restore_sanitized_git_config/);
   const stopGhStart = action.indexOf('        stop_gh_bridge() {');
@@ -211,6 +215,10 @@ test('the corpus review loads its host-side PAT before invoking Codex', () => {
   assert.match(followupWorkflow, /SITE_REPO: valerielinc-ops\/frontaliere-si-o-no/);
   assert.match(followupWorkflow, /target_token="\$\{GITHUB_PAT_SITE:-\$\{GITHUB_PAT:-\$\{GH_TOKEN:-\}\}\}"/);
   assert.match(followupWorkflow, /Gate sul conio — sito \(zero-Claude\)/);
+  assert.match(followupWorkflow, /Checkout site gate implementation/);
+  assert.match(followupWorkflow, /repository: valerielinc-ops\/frontaliere-si-o-no/);
+  assert.match(followupWorkflow, /cd \.site-gate/);
+  assert.match(followupWorkflow, /GATE_PR_TOKEN="\$corpus_token"/);
   assert.match(followupWorkflow, /gh issue list --repo nanakokyobashi-rgb\/frontaliere-articles/);
   assert.match(followupWorkflow, /gh issue list --repo valerielinc-ops\/frontaliere-si-o-no/);
   assert.doesNotMatch(followupWorkflow, /GITHUB_PAT_NANAKO:\s*\$\{\{ env\.GITHUB_PAT_NANAKO/);
@@ -218,6 +226,9 @@ test('the corpus review loads its host-side PAT before invoking Codex', () => {
   assert.match(issueDecomposeWorkflow, /gh api --repo valerielinc-ops\/frontaliere-si-o-no repos\/valerielinc-ops\/frontaliere-si-o-no\/contents\/VISION\.md/);
   assert.match(needsHumanWorkflow, /codex_site_github_token: \$\{\{ env\.GITHUB_PAT \}\}/);
   assert.match(needsHumanWorkflow, /gh api --repo valerielinc-ops\/frontaliere-si-o-no repos\/valerielinc-ops\/frontaliere-si-o-no\/contents\/VISION\.md/);
+  assert.match(mintGate, /GATE_PR_TOKEN/);
+  assert.match(mintGate, /function ghPr\(/);
+  assert.match(mintGate, /ghPr\(\['pr', 'comment'/);
 });
 
 test('#1312: Lessons harvester non blocca Codex quando la quota Claude e\u0027 esaurita', () => {
