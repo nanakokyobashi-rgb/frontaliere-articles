@@ -129,8 +129,8 @@ test('una potatura sopra il pavimento registra una scrittura parziale senza cong
   );
   assert.match(
     src,
-    /nextFaqRejection\(previousRejection, issue\.itFaq, \{ prunedWrite: true \}\)/,
-    'la potatura pubblicata deve avere un contatore distinto dal rifiuto sotto pavimento',
+    /nextFaqRejection\(previousRejection, issue\.itFaq, \{[\s\S]*prunedWrite: true,[\s\S]*keptPairs: toWrite\.length,[\s\S]*\}\)/,
+    'la potatura pubblicata deve persistere il numero di coppie conservate',
   );
   assert.match(
     src,
@@ -161,12 +161,17 @@ test('il ledger ferma il rifiuto deterministico dopo due run sulla stessa sorgen
   assert.equal(nextFaqRejection(second, changedSource).consecutive, 1);
   assert.equal(nextFaqRejection({ source: faqSourceFingerprint(source), consecutive: 'corrupt' }, source).consecutive, 1);
 
-  const partialFirst = nextFaqRejection(undefined, source, { prunedWrite: true });
-  const partialSecond = nextFaqRejection(partialFirst, source, { prunedWrite: true });
+  const partialFirst = nextFaqRejection(undefined, source, { prunedWrite: true, keptPairs: 3 });
+  const partialSecond = nextFaqRejection(partialFirst, source, { prunedWrite: true, keptPairs: 3 });
   assert.equal(partialFirst.prunedWrite, true);
+  assert.equal(partialFirst.keptPairs, 3);
   assert.equal(partialSecond.consecutive, FAQ_REJECTION_MAX_CONSECUTIVE);
   assert.equal(shouldSkipFaqRejection(partialSecond, source), true, 'dopo due potature uguali si salta solo la ritraduzione');
   assert.equal(nextFaqRejection(partialSecond, source).consecutive, FAQ_REJECTION_MAX_CONSECUTIVE + 1, 'il tipo cambia ma la sorgente uguale mantiene il contatore');
+
+  const improved = nextFaqRejection(partialSecond, source, { prunedWrite: true, keptPairs: 5 });
+  assert.equal(improved.keptPairs, 5);
+  assert.equal(improved.consecutive, 1, 'una potatura che conserva piu coppie riapre il tentativo');
 });
 
 test('gli skip throttled non consumano il limite e lasciano passare il lavoro azionabile', () => {

@@ -496,10 +496,17 @@ export function faqSourceFingerprint(sourceFaq) {
     .slice(0, 16);
 }
 
-export function nextFaqRejection(previous, sourceFaq, { prunedWrite = false } = {}) {
+export function nextFaqRejection(previous, sourceFaq, { prunedWrite = false, keptPairs } = {}) {
   const source = faqSourceFingerprint(sourceFaq);
+  const hasKeptPairs = Number.isInteger(keptPairs) && keptPairs >= 0;
   const priorConsecutive = Number(previous?.consecutive);
-  const consecutive = previous?.source === source
+  const improvedPrunedWrite = prunedWrite
+    && hasKeptPairs
+    && Number.isInteger(previous?.keptPairs)
+    && keptPairs > previous.keptPairs;
+  const consecutive = improvedPrunedWrite
+    ? 1
+    : previous?.source === source
     && Number.isFinite(priorConsecutive)
     && priorConsecutive > 0
     ? priorConsecutive + 1
@@ -508,7 +515,10 @@ export function nextFaqRejection(previous, sourceFaq, { prunedWrite = false } = 
     source,
     sourceCount: Array.isArray(sourceFaq) ? sourceFaq.length : 0,
     consecutive,
-    ...(prunedWrite ? { prunedWrite: true } : {}),
+    ...(prunedWrite ? {
+      prunedWrite: true,
+      ...(hasKeptPairs ? { keptPairs } : {}),
+    } : {}),
   };
 }
 
@@ -797,7 +807,10 @@ async function main() {
         + (wrong ? `, ${wrong.length} skipped)` : ')'));
       const partialWrite = belowFaqSourceCount(toWrite, issue.itFaq);
       if (partialWrite) {
-        const nextRejection = nextFaqRejection(previousRejection, issue.itFaq, { prunedWrite: true });
+        const nextRejection = nextFaqRejection(previousRejection, issue.itFaq, {
+          prunedWrite: true,
+          keptPairs: toWrite.length,
+        });
         rejectionLedger[issueKey] = nextRejection;
         ledgerDirty = true;
         persistLedger();
