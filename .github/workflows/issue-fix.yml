@@ -212,6 +212,15 @@ jobs:
           ISSUE_NUMBER: ${{ github.event.issue.number }}
           CTX_DIR: ${{ runner.temp }}/issue-fix-ctx
         run: |
+          # Scrivere subito i default rende l'output sicuro anche se uno dei
+          # comandi successivi abortisce lo step (che è continue-on-error).
+          # I consumer ricevono così sempre un valore esplicito e il fallback
+          # resta quello del flusso singolo.
+          {
+            echo "is_group=false"
+            echo "group_label="
+            echo "group_numbers="
+          } >> "$GITHUB_OUTPUT"
           set -euo pipefail
           mkdir -p "$CTX_DIR"
           : > "$CTX_DIR/group.json"
@@ -532,9 +541,9 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ISSUE_NUMBER: ${{ github.event.issue.number }}
-          ISSUE_GROUP: ${{ steps.group.outputs.is_group }}
-          ISSUE_GROUP_LABEL: ${{ steps.group.outputs.group_label }}
-          ISSUE_GROUP_NUMBERS: ${{ steps.group.outputs.group_numbers }}
+          ISSUE_GROUP: ${{ steps.group.outputs.is_group || 'false' }}
+          ISSUE_GROUP_LABEL: ${{ steps.group.outputs.group_label || '' }}
+          ISSUE_GROUP_NUMBERS: ${{ steps.group.outputs.group_numbers || '' }}
           IS_DAILY_BUCKET: ${{ steps.tier.outputs.is_daily_bucket }}
           DAILY_KEY: ${{ steps.tier.outputs.daily_key }}
           DAILY_ITEM_ID: ${{ steps.tier.outputs.selected_item_id }}
@@ -579,7 +588,7 @@ jobs:
           prompt: |
             Sei l'agent di fix autonomo per la issue #${{ github.event.issue.number }} ("${{ github.event.issue.title }}"). Tier: ${{ steps.tier.outputs.tier }}, categoria: ${{ steps.tier.outputs.category }}.
 
-            **Raggruppamento B19:** `group=${{ steps.group.outputs.is_group }}`, membri `${{ steps.group.outputs.group_numbers }}`. Se `group=true`, carica `${{ runner.temp }}/issue-fix-ctx/group.json`: contiene tutte le issue della stessa PR, già verificate dal drainer con una firma e un punto di riparazione comuni, entro il tetto numerico definito da `ISSUE_GROUP_MAX_SIZE`. Diagnostica ogni membro e risolvi tutti i membri nella stessa PR; non prendere lavoro esterno al gruppo. Nel body della PR usa una riga di chiusura per ogni membro, una keyword per riga. Se un membro non è confermabile o non è riparabile con certezza, non forzarlo: lascialo senza keyword di chiusura e dichiaralo in `## Non implementato (ancora)` con uno stato letterale. Se `group=false`, il flusso resta quello della issue singola.
+            **Raggruppamento B19:** `group=${{ steps.group.outputs.is_group || 'false' }}`, membri `${{ steps.group.outputs.group_numbers || '' }}`. Se `group=true`, carica `${{ runner.temp }}/issue-fix-ctx/group.json`: contiene tutte le issue della stessa PR, già verificate dal drainer con una firma e un punto di riparazione comuni, entro il tetto numerico definito da `ISSUE_GROUP_MAX_SIZE`. Diagnostica ogni membro e risolvi tutti i membri nella stessa PR; non prendere lavoro esterno al gruppo. Nel body della PR usa una riga di chiusura per ogni membro, una keyword per riga. Se un membro non è confermabile o non è riparabile con certezza, non forzarlo: lascialo senza keyword di chiusura e dichiaralo in `## Non implementato (ancora)` con uno stato letterale. Se `group=false`, il flusso resta quello della issue singola.
 
             Questo repo pubblica una superficie dati su HTTP (`dist/api/`) che `frontaliereticino.ch` consuma in produzione. **Il sito non ribuilda quando questo repo pubblica**: un errore qui è live subito.
 
