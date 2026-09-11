@@ -105,8 +105,8 @@ export function parseCliOptions(argv) {
     dryRun: argv.includes('--dry-run'),
     skipTranslate: argv.includes('--skip-translate'),
   };
-  // Help remains side-effect free and takes precedence over validation, as it
-  // did before these values moved out of module scope.
+  // Help remains side-effect free and intentionally takes precedence over CLI
+  // validation: it is a usage request, not a batch run.
   if (help) return options;
 
   options.limit = parseLimitArgs(argv);
