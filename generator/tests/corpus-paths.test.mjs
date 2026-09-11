@@ -78,6 +78,17 @@ test('mantiene fail-closed anche la radice del namespace services', () => {
   assert.throws(() => corpusPath('services/'), /non mappato/i);
 });
 
+test('mantiene fail-closed il namespace packages/articles fuori dal prefisso mappato', () => {
+  for (const p of [
+    'packages/articles',
+    'packages/articles/',
+    'packages/articles/engine/rssFeeds.mjs',
+    'packages/articles/content-extra/file.ts',
+  ]) {
+    assert.throws(() => corpusPath(p), /non mappato/i, p);
+  }
+});
+
 test('is idempotent — mapping an already-mapped path is a no-op', () => {
   const once = corpusPath('services/locales/blog-body/it/foo.ts');
   assert.equal(corpusPath(once), once);
@@ -95,6 +106,10 @@ test('resolveGitAddPaths maps every entry and ignores repoRoot', () => {
     'public/sitemap-news.xml',
   ]);
   assert.equal(resolveGitAddPath('/anywhere', files[0]), 'content/blog-meta-it.ts');
+  assert.throws(
+    () => resolveGitAddPath('/anywhere', 'packages/articles/engine/rssFeeds.mjs'),
+    /non mappato/i,
+  );
 });
 
 test('every mapped corpus target actually exists in this repo', async () => {
@@ -181,9 +196,10 @@ test('no source file builds a corpus path without going through corpusPath()', a
   );
 });
 
-test('this repo has no symlinks, which is why the resolver was dropped', async () => {
+test('the published content tree has no symlinks, so the resolver stays dropped', async () => {
   // If this ever fails, main's realpath-based resolve-git-add-path.mjs becomes
-  // relevant again and corpus-paths.mjs's header is no longer true.
+  // relevant again for corpus targets, and corpus-paths.mjs's header is no
+  // longer true.
   const fs = await import('node:fs');
   const path = await import('node:path');
   const url = await import('node:url');
