@@ -88,7 +88,6 @@ const ADMISSION_SRC = cutFunction('runArticleFactualityGates', [
   'runFactualityGates',
   'DETERMINISTIC_BODY_HEURISTIC_CODES',
   'DETERMINISTIC_MAJOR_BLOCKING_CODES',
-  'ITALIAN_ADJUDICATED_MAJOR_CODES',
 ]);
 
 /** Istanzia la funzione vera con le sue dipendenze di chiusura iniettate. */
@@ -99,7 +98,6 @@ function makeGate() {
     'console',
     'DETERMINISTIC_BODY_HEURISTIC_CODES',
     'DETERMINISTIC_MAJOR_BLOCKING_CODES',
-    'ITALIAN_ADJUDICATED_MAJOR_CODES',
     `${SECTIONS_SRC}\n${ADMISSION_SRC}\n${GATE_SRC}\nreturn assertTranslationsPassFactualityGates;`,
   );
   // console silenziata: il gate stampa i rilievi, non deve sporcare l'output.
@@ -114,7 +112,6 @@ function makeGate() {
       'leaked-prompt-scaffolding',
     ]),
     new Set(['translation-number-dropped', 'translation-number-added']),
-    new Set(['tax-exceeds-income', 'contradictory-figures', 'arithmetic-error', 'percent-factor-mismatch']),
   );
 }
 
@@ -256,7 +253,6 @@ test('#1261 un produttore deterministico esenta solo euristiche di forma', () =>
     'runFactualityGates',
     'DETERMINISTIC_BODY_HEURISTIC_CODES',
     'DETERMINISTIC_MAJOR_BLOCKING_CODES',
-    'ITALIAN_ADJUDICATED_MAJOR_CODES',
     `${ADMISSION_SRC}\nreturn runArticleFactualityGates;`,
   );
   const runGate = factory(() => ({
@@ -266,8 +262,8 @@ test('#1261 un produttore deterministico esenta solo euristiche di forma', () =>
       { code: 'tax-implausible', severity: 'major', message: 'importo atipico' },
       { code: 'incomplete-ending', severity: 'major', message: '[body2] frase troncata' },
       { code: 'tax-exceeds-income', severity: 'major', message: '[en/body2] declassato dall\'italiano' },
-      { code: 'translation-number-dropped', severity: 'major', message: '[body1] numero perso' },
-      { code: 'translation-number-added', severity: 'major', message: '[body1] numero aggiunto' },
+      { code: 'translation-number-dropped', severity: 'major', message: '[en] numero perso' },
+      { code: 'translation-number-added', severity: 'major', message: '[en] numero aggiunto' },
       { code: 'critical-fact', severity: 'critical', message: '[body1] fatto incoerente' },
     ],
     blocking: [],
@@ -277,16 +273,10 @@ test('#1261 un produttore deterministico esenta solo euristiche di forma', () =>
     'truncated-bold',
     'incomplete-ending',
     'leaked-prompt-scaffolding',
-  ]), new Set(['translation-number-dropped', 'translation-number-added']), new Set([
-    'tax-exceeds-income',
-    'contradictory-figures',
-    'arithmetic-error',
-    'percent-factor-mismatch',
-  ]));
-  // The four adjudicated codes are intentionally report-only after their
-  // translation-only downgrade.
-  // (The factory receives the policy set as its fourth dependency.)
-  const result = runGate({ locale: 'it', deterministicBodySections: ['body1'] });
+  ]), new Set(['translation-number-dropped', 'translation-number-added']));
+  // The translation-number emitters identify only the locale (`[en]`), so the
+  // two named codes must remain blocking even without a `[en/bodyN]` label.
+  const result = runGate({ locale: 'en', deterministicBodySections: ['body1'] });
   assert.deepEqual(result.blocking.map((issue) => issue.code), [
     'translation-number-dropped',
     'translation-number-added',

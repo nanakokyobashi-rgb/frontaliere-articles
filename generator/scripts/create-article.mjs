@@ -4927,17 +4927,6 @@ const DETERMINISTIC_MAJOR_BLOCKING_CODES = new Set([
   'translation-number-added',
 ]);
 
-// `adjudicateAgainstItalian()` deliberately downgrades these translation-only
-// findings to report-only major issues. The deterministic wrapper must not
-// undo that policy while preserving the major checks on non-deterministic
-// sections of the same article.
-const ITALIAN_ADJUDICATED_MAJOR_CODES = new Set([
-  'tax-exceeds-income',
-  'contradictory-figures',
-  'arithmetic-error',
-  'percent-factor-mismatch',
-]);
-
 function runArticleFactualityGates({ deterministicBodySections = [], ...params } = {}) {
   const result = runFactualityGates(params);
   const deterministic = new Set(Array.isArray(deterministicBodySections) ? deterministicBodySections : []);
@@ -4951,20 +4940,13 @@ function runArticleFactualityGates({ deterministicBodySections = [], ...params }
       return String(issue.message || '').includes(`[${label}]`);
     });
   });
-  const belongsToDeterministicSection = (issue) => [...deterministic].some((section) => {
-    const label = locale === 'it' ? section : `${locale}/${section}`;
-    return String(issue.message || '').includes(`[${label}]`);
-  });
   // The shape exemption is section-scoped. Keep global majors on the base
-  // gate's previous policy (critical-only), and admit a major here only when
-  // it is one of the named translation-number findings attached to a
-  // deterministic section. Italian-adjudicated majors remain report-only as
-  // promised by their downgrade policy.
+  // gate's previous policy (critical-only), but admit the two named
+  // translation-number findings before checking the section label: their
+  // emitters identify the locale (`[en]`), not a deterministic body section.
   const blocking = issues.filter((issue) => {
     if (issue.severity === 'critical') return true;
     if (issue.severity !== 'major') return false;
-    if (!belongsToDeterministicSection(issue)) return false;
-    if (ITALIAN_ADJUDICATED_MAJOR_CODES.has(issue.code)) return false;
     return DETERMINISTIC_MAJOR_BLOCKING_CODES.has(issue.code);
   });
   return { ...result, issues, blocking, passed: blocking.length === 0 };
