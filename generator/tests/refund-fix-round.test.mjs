@@ -150,14 +150,15 @@ test('il rimborso posta l`handle PRIMA di cancellare il marker', () => {
 });
 
 for (const { file, marker } of FIXERS) {
-  test(`${path.basename(file)}: guard con pre-flight di quota e rimborso cablato su ${marker}`, () => {
+  test(`${path.basename(file)}: quota telemetry, Codex primario e rimborso cablato su ${marker}`, () => {
     const yaml = fs.readFileSync(path.join(ROOT, file), 'utf-8');
 
-    // Anche lo skip pre-flight deve lasciare l'handle di re-trigger: li' il
-    // marker di round non viene MAI postato, quindi la classe B non avrebbe
-    // nessun segnale e la PR resterebbe ferma senza aver consumato niente.
-    assert.ok(yaml.includes(`<!-- ${refundMarkerName(marker)}: 0 -->`),
-      `${file}: lo skip per quota non lascia \`${refundMarkerName(marker)}\` → nessun re-trigger`);
+    // La quota Claude è osservabilità, non un gate: il Codex primario deve
+    // poter partire anche quando il beacon segnala un 429.
+    assert.doesNotMatch(yaml, new RegExp(`steps\\.quota\\.outputs\\.codex_fallback`),
+      `${file}: il vecchio skip quota non deve più impedire il tentativo Codex`);
+    assert.match(yaml, /Pre-flight — Claude quota telemetry \(Codex primary\)/,
+      `${file}: il pre-flight deve essere esplicitamente telemetria`);
 
     // Il conteggio dei round e il rimborso devono parlare dello STESSO marker.
     assert.ok(yaml.includes(`${marker}: [0-9]+`),
@@ -171,13 +172,22 @@ for (const { file, marker } of FIXERS) {
     assert.ok(/ROUND: \$\{\{ steps\.guard\.outputs\.round \}\}/.test(yaml),
       `${file} deve rimborsare il round che il guard ha appena postato`);
 
-    // Il pre-flight deve stare PRIMA del marker, o il round e` gia` speso.
+    // Il marker viene prima della telemetry: il round è già riservato, poi il
+    // beacon osserva la quota e infine l'action tenta Codex.
     const quotaAt = yaml.indexOf('check-quota-backoff.mjs');
     const markerAt = yaml.indexOf(`<!-- ${marker}: %s -->`);
+    const actionAt = yaml.indexOf('- name: Run Claude');
     assert.notEqual(quotaAt, -1, `${file} non consulta il beacon di quota prima del round`);
     assert.notEqual(markerAt, -1, `${file} non posta piu' il marker di round`);
-    assert.ok(quotaAt < markerAt,
-      `${file}: il gate di quota deve precedere la scrittura del marker di round`);
+    assert.notEqual(actionAt, -1, `${file} non invoca l'action Codex/Claude`);
+    assert.ok(markerAt < quotaAt && quotaAt < actionAt,
+      `${file}: marker → telemetry → action devono restare in quest'ordine`);
+    const quotaStep = yaml.slice(yaml.lastIndexOf('- name:', quotaAt), actionAt);
+    assert.match(quotaStep, /continue-on-error: true/,
+      `${file}: un guasto del beacon non deve sopprimere l'action`);
+    const actionStep = yaml.slice(actionAt, yaml.indexOf('\n      - name:', actionAt + 1));
+    assert.doesNotMatch(actionStep, /steps\.quota\.outputs\./,
+      `${file}: la condizione dell'action non deve dipendere dalla quota Claude`);
   });
 }
 

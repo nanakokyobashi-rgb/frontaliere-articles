@@ -17,7 +17,8 @@ name: Issue decompose (Claude → sub-issues)
 #    all'agente, così le sub-issue create TRIGGERANO issue-triage.
 #  - Niente `npm ci` (gli script del ciclo sono zero-dep); ponte RC in
 #    `generator/scripts/load-rc-env.mjs`.
-#  - Pre-flight quota col beacon peer (cediamo alla quota del sito).
+#  - Telemetry quota col beacon peer: osserviamo la quota del sito senza
+#    bloccare il tentativo Codex-primary.
 #  - Prompt sul dominio di QUESTO repo (generator/engine/content, gemelli sul
 #    sito, `node --test`).
 
@@ -87,11 +88,12 @@ jobs:
         continue-on-error: true
         run: node generator/scripts/load-rc-env.mjs
 
-      # Stesso gate di issue-fix: su finestra 429 aperta (anche quella del
-      # sito, via beacon peer) la issue torna in coda decompose senza consumare
-      # il ri-arma del rescue, e nessuno step Claude parte.
-      - name: Pre-flight — quota backoff gate (zero-Claude)
+      # Il beacon resta telemetria: Codex è il provider primario e la quota
+      # Claude non deve impedire il tentativo Codex. Claude interviene solo se
+      # Codex non completa l'azione.
+      - name: Pre-flight — quota telemetry (Codex primary)
         id: quota
+        continue-on-error: true
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_REPO: ${{ github.repository }}
@@ -113,7 +115,7 @@ jobs:
       # passo della prima run). Bias a PROCEDERE su qualunque dubbio.
       - name: Pre-flight — stale-dispatch gate (zero-Claude)
         id: stale
-        if: steps.quota.outputs.quota_blocked != 'true'
+        if: always()
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_REPO: ${{ github.repository }}
@@ -123,12 +125,12 @@ jobs:
         run: node scripts/ci/check-stale-issue-dispatch.mjs
 
       - name: Setup Headroom compression proxy
-        if: steps.quota.outputs.quota_blocked != 'true' && steps.stale.outputs.stale_dispatch != 'true'
+        if: always() && steps.stale.outputs.stale_dispatch != 'true'
         uses: ./.github/actions/setup-headroom
 
       - name: Run Claude decompose
         id: claude_decompose
-        if: steps.quota.outputs.quota_blocked != 'true' && steps.stale.outputs.stale_dispatch != 'true'
+        if: always() && steps.stale.outputs.stale_dispatch != 'true'
         continue-on-error: true
         uses: ./.github/actions/claude-codex-fallback
         env:
@@ -136,7 +138,6 @@ jobs:
           ISSUE_NUMBER: ${{ github.event.issue.number }}
           REPO: ${{ github.repository }}
         with:
-          preflight_blocked: ${{ steps.quota.outputs.codex_fallback }}
           codex_auth_json: ${{ secrets.CODEX_AUTH_JSON }}
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           github_token: ${{ env.GITHUB_PAT_NANAKO }}
@@ -189,11 +190,11 @@ jobs:
             - L'ULTIMO commento sul padre porta SEMPRE `<!-- DECOMPOSE_OUTCOME: <code> -->` con `<code>` ∈ `decomposed-K` · `atomic-requeue` · `needs-human-decision` · `already-resolved` · `stale-dispatch`.
 
       - name: Claude usage metrics
-        if: always() && steps.claude_decompose.outputs.fallback_used != 'true' && steps.quota.outputs.quota_blocked != 'true' && steps.stale.outputs.stale_dispatch != 'true'
+        if: always() && steps.claude_decompose.outputs.claude_used == 'true' && steps.stale.outputs.stale_dispatch != 'true'
         run: node scripts/ci/claude-usage-summary.mjs "${{ steps.claude_decompose.outputs.execution_file }}" "issue-decompose"
 
       - name: Mark Claude terminal outcome (granular telemetry)
-        if: always() && steps.claude_decompose.outputs.fallback_used != 'true' && steps.quota.outputs.quota_blocked != 'true' && steps.stale.outputs.stale_dispatch != 'true' && steps.claude_decompose.outcome == 'failure'
+        if: always() && steps.claude_decompose.outputs.claude_used == 'true' && steps.stale.outputs.stale_dispatch != 'true' && steps.claude_decompose.outcome == 'failure'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_REPO: ${{ github.repository }}
@@ -204,7 +205,7 @@ jobs:
         run: node scripts/ci/mark-claude-terminal-outcome.mjs
 
       - name: Emit DECOMPOSE_OUTCOME telemetry (deterministic backstop)
-        if: always() && steps.quota.outputs.quota_blocked != 'true' && steps.stale.outputs.stale_dispatch != 'true'
+        if: always() && steps.stale.outputs.stale_dispatch != 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ISSUE: ${{ github.event.issue.number }}
@@ -218,7 +219,7 @@ jobs:
           gh issue comment "$ISSUE" --body "$(printf '<!-- DECOMPOSE_OUTCOME: no-outcome -->\n_Outcome rilevato dal post-step deterministico (run morta senza verdetto): il rescue del drainer ri-armerà o parcheggerà._')" || true
 
       - name: Classify outcome (work-done, not CLI exit)
-        if: always() && steps.quota.outputs.quota_blocked != 'true' && steps.stale.outputs.stale_dispatch != 'true'
+        if: always() && steps.stale.outputs.stale_dispatch != 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ISSUE: ${{ github.event.issue.number }}

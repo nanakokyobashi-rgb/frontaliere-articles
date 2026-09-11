@@ -124,7 +124,7 @@ jobs:
       # cooldown del parked-retry e l'age-out. Un rilevatore che si ri-annuncia
       # diventerebbe la causa del blocco che aiuta a diagnosticare.
       #
-      # Zero Claude, zero quota: solo `gh api` in lettura piu' un commento per
+      # Zero provider, zero quota: solo `gh api` in lettura piu' un commento per
       # issue nuova. Best-effort: non deve mai far cadere l'harvester.
       - name: Annota il lavoro orfano dei max-turns (zero-Claude)
         continue-on-error: true
@@ -137,7 +137,7 @@ jobs:
         if: steps.guard.outputs.open_proposals == '0' && steps.harvest.outputs.has_novel == 'true'
         uses: ./.github/actions/setup-headroom
 
-      - name: Pre-flight — Claude quota beacon for Codex fallback
+      - name: Pre-flight — Claude quota telemetry (Codex primary)
         id: quota
         if: steps.guard.outputs.open_proposals == '0' && steps.harvest.outputs.has_novel == 'true'
         continue-on-error: true
@@ -156,7 +156,6 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REPO: ${{ github.repository }}
         with:
-          preflight_blocked: ${{ steps.quota.outputs.codex_fallback }}
           codex_auth_json: ${{ secrets.CODEX_AUTH_JSON }}
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
