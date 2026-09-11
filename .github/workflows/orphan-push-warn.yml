@@ -41,6 +41,7 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
           REPO: ${{ github.repository }}
+          DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
           HEAD_REF: ${{ github.ref_name }}
           SHA: ${{ github.sha }}
         run: |
@@ -77,26 +78,35 @@ jobs:
           MERGED_AT=$(printf '%s' "$TARGET" | jq -r '.mergedAt // empty' 2>/dev/null || true)
           HEAD_OID=$(printf '%s' "$TARGET" | jq -r '.headRefOid // empty' 2>/dev/null || true)
 
+          # La query OPEN sopra corre in una race con `gh pr create`: il
+          # nuovo giro puo' esistere pochi istanti dopo. Sopprimi il commento
+          # sulla PR vecchia solo con questa prova positiva, non con la sola
+          # data del commit; senza prova il caso resta un orfano segnalabile.
+          if [ -n "${MERGED_AT:-}" ]; then
+            for attempt in 1 2 3; do
+              AFTER_MERGE=$(gh pr list --repo "$REPO" --head "$HEAD_REF" --state all \
+                --limit 100 --json number,createdAt 2>/dev/null || true)
+              if [ -z "${AFTER_MERGE:-}" ]; then AFTER_MERGE='[]'; fi
+              NEW_ROUND=$(printf '%s' "$AFTER_MERGE" | jq -r \
+                --arg merged "$MERGED_AT" \
+                'map(select(.createdAt > $merged)) | sort_by(.createdAt) | last | .number // empty' \
+                2>/dev/null || true)
+              if [ -n "${NEW_ROUND:-}" ]; then
+                echo "PR #$NEW_ROUND creata dopo il merge della PR #$PR_NUMBER sulla stessa head — push non attribuito alla PR precedente."
+                exit 0
+              fi
+              if [ "$attempt" -lt 3 ]; then sleep 5; fi
+            done
+          fi
+
           # Prima verifica la cosa piu' forte: se il pushato e' gia' nella
           # storia di main, non e' orfano. Per gli squash la head originale
-          # non e' antenata del merge: il controllo temporale qui sotto copre
-          # il nuovo giro senza attribuirlo alla PR vecchia.
-          MAIN_CONTAINMENT=$(gh api "repos/${REPO}/compare/${SHA}...main" \
+          # non e' antenata del merge: la prova positiva del nuovo giro qui
+          # sopra evita di attribuirlo alla PR vecchia.
+          MAIN_CONTAINMENT=$(gh api "repos/${REPO}/compare/${SHA}...${DEFAULT_BRANCH}" \
             --jq '.status' 2>/dev/null || true)
           if [ "$MAIN_CONTAINMENT" = "ahead" ] || [ "$MAIN_CONTAINMENT" = "identical" ]; then
             echo "Commit $SHA gia' contenuto in main — nessun push orfano."
-            exit 0
-          fi
-
-          # Un commit creato dopo il merge e' il nuovo giro su una head
-          # riusata, non una prova che il vecchio lavoro sia stato pushato di
-          # nuovo. Emetti comunque l'annotation per-SHA, ma non commentare la
-          # PR vecchia: il nuovo giro avra' la propria PR appena viene creata.
-          PUSHED_AT=$(gh api "repos/${REPO}/commits/${SHA}" \
-            --jq '.commit.committer.date // .commit.author.date // empty' \
-            2>/dev/null || true)
-          if [ -n "${MERGED_AT:-}" ] && [ -n "${PUSHED_AT:-}" ] && [[ "$PUSHED_AT" > "$MERGED_AT" ]]; then
-            echo "::warning::Push post-merge su head riusata: commit $SHA e' successivo al merge della PR #$PR_NUMBER; nessun commento sulla PR precedente."
             exit 0
           fi
 
@@ -124,8 +134,11 @@ jobs:
           MARKER='<!-- orphan-push-warn -->'
           # `--paginate` evita che un thread lungo tronchi il marker e riapra
           # il commento duplicato a ogni push.
-          COMMENTS=$(gh api --paginate "repos/${REPO}/issues/${PR_NUMBER}/comments" \
-            --jq '.[].body' 2>/dev/null || true)
+          if ! COMMENTS=$(gh api --paginate "repos/${REPO}/issues/${PR_NUMBER}/comments" \
+            --jq '.[].body' 2>/dev/null); then
+            echo "::warning::Commenti della PR #$PR_NUMBER illeggibili — dedup indeterminabile, nessun commento aggiunto."
+            exit 0
+          fi
           if printf '%s' "$COMMENTS" | grep -Fq "$MARKER"; then
             echo "Avviso push orfano gia' presente sulla PR #$PR_NUMBER — nessun commento duplicato."
             exit 0

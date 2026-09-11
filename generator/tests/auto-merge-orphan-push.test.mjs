@@ -113,10 +113,12 @@ test('(e) seleziona anche una PR chiusa senza merge e controlla la head mergiata
   assert.match(job, /mergedAt/);
   assert.match(job, /headRefOid/);
   assert.match(job, /select\(\.state != "OPEN"\)/);
-  assert.match(job, /repos\/\$\{REPO\}\/compare\/\$\{SHA\}\.\.\.main/);
-  assert.match(job, /repos\/\$\{REPO\}\/commits\/\$\{SHA\}/);
-  assert.match(job, /PUSHED_AT/);
-  assert.match(job, /PUSHED_AT[\s\S]*MERGED_AT/);
+  assert.match(job, /DEFAULT_BRANCH/);
+  assert.match(job, /repos\/\$\{REPO\}\/compare\/\$\{SHA\}\.\.\.\$\{DEFAULT_BRANCH\}/);
+  assert.match(job, /AFTER_MERGE/);
+  assert.match(job, /NEW_ROUND/);
+  assert.match(job, /createdAt/);
+  assert.match(job, /for attempt in 1 2 3/);
   assert.match(
     job,
     /repos\/\$\{REPO\}\/compare\/\$\{SHA\}\.\.\.\$\{HEAD_OID\}/,
@@ -126,6 +128,7 @@ test('(e) seleziona anche una PR chiusa senza merge e controlla la head mergiata
   assert.match(job, /CONTAINMENT.*\n[\s\S]*\[ \"\$CONTAINMENT\" = "ahead" \]/);
   assert.match(job, /TARGET='\{\}'/);
   assert.doesNotMatch(job, /\$\{TARGET:-\{\}\}/);
+  assert.doesNotMatch(job, /PUSHED_AT/);
 });
 
 test('(f) il warning orfano e\' deduplicato con un marker sulla PR', () => {
