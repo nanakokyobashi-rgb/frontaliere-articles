@@ -254,7 +254,7 @@ test('il fix-faq rende osservabile il deficit e persiste il blocco di ritraduzio
   assert.match(src, /reason: 'below_source_count'/);
   assert.match(src, /shouldSkipFaqRejection\(/);
   assert.match(src, /nextFaqRejection\(/);
-  assert.match(src, /selectFaqIssuesForProcessing\(issues, rejectionLedger, SECTION, LIMIT\)/);
+  assert.match(src, /selectFaqIssuesForProcessing\(issues, rejectionLedger, SECTION, limit\)/);
   assert.doesNotMatch(src, /if \(shouldSkipFaqRejection\(previousRejection, issue\.itFaq\)\)/);
   assert.match(src, /const \{ toProcess, throttled \} = selectFaqIssuesForProcessing\(/);
 

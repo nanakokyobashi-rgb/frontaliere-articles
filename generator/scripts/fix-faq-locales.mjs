@@ -105,7 +105,6 @@ function parseFaqLimitOrExit(argv) {
   }
 }
 
-const LIMIT = parseFaqLimitOrExit(args);
 // Riparazione pura dei file gia' scritti con l'escape rotto: nessuna chiamata
 // di traduzione, nessun modello. Opt-in, e la run schedulata NON lo passa.
 const REESCAPE_BROKEN = args.includes('--reescape-broken');
@@ -677,6 +676,10 @@ async function main() {
     return;
   }
 
+  // Valuta gli argomenti solo nell'entry point: importare questo modulo per le
+  // funzioni pure non deve poter chiamare process.exit(2) nel processo ospite.
+  const limit = parseFaqLimitOrExit(args);
+
   if (REESCAPE_BROKEN) {
     console.log(`🔧 Ri-escape dei .faq scritti con l'escape rotto (${SECTION})...\n`);
     reescapeBroken();
@@ -752,7 +755,7 @@ async function main() {
     return;
   }
 
-  const { toProcess, throttled } = selectFaqIssuesForProcessing(issues, rejectionLedger, SECTION, LIMIT);
+  const { toProcess, throttled } = selectFaqIssuesForProcessing(issues, rejectionLedger, SECTION, limit);
   console.log(`\nProcessing ${toProcess.length} issues...\n`);
 
   const repeatedRejectionSkips = throttled.length;
