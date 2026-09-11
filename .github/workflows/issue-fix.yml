@@ -597,6 +597,8 @@ jobs:
             2. Leggi `AGENTS.md` — non-negoziabili e architettura. VINCOLANTE.
             3. Carica la issue: `gh issue view $ISSUE_NUMBER --json number,title,body,labels,comments`. Se `group=true`, leggi anche `${{ runner.temp }}/issue-fix-ctx/group.json` e tratta ogni record come una issue da chiudere nella stessa PR: la diagnosi deve confermare il punto di riparazione comune, non limitarsi alla label.
 
+            **Stati già dichiarati nei residui (leggi PRIMA di implementare):** se la issue nasce da una PR (follow-up, `Addresses`/`da PR #N` nel body, o una qualunque PR citata come origine nel body), leggi il body della PR d'origine e classifica i bullet di `## Non implementato (ancora)` con `extractSection`, `sectionBullets` e `bulletState` da `scripts/lib/pr-body-sections-check.mjs`; usa le stesse funzioni di `scripts/ci/followup-has-candidates.mjs`, non un parser inventato. `blocked:` non è monolitico: chiudono `in questa PR`, `PR concatenata #N`, `per scelta`, `by construction` e `blocked: decisione del proprietario`, anche nella variante inglese `blocked: owner decision`; ogni altro `blocked: <causa>` resta lavoro dovuto. `PR concatenata` senza `#N` non chiude.
+
             **Pre-condizioni (termina se falliscono):**
             - Esiste già una PR aperta che cita "#$ISSUE_NUMBER" → commenta "PR già in volo: #<n>, skip." e TERMINA.
             - **Overlap sui file:** estrai i path target dal body. Se una PR aperta modifica già uno di quei file → commenta e TERMINA, per non creare un conflitto o un doppione. Nel dubbio (issue non file-specifica) procedi.
