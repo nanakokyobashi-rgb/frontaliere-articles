@@ -56,6 +56,24 @@
  *   node scripts/lib/classify-issue.mjs "<title>" '<labels-json-array>'
  */
 
+const FIXER_EXEMPT_LABELS = new Set(['backlog', 'needs-human']);
+
+/**
+ * Labels che tengono un'issue fuori dal ciclo automatico del corpus.
+ *
+ * Il gemello del sito ha un set di pin diverso; qui la topologia locale è
+ * `backlog`/`needs-human`, e `triage-sweep.mjs` deve condividere questa
+ * decisione invece di duplicarla.
+ *
+ * @param {Array<string|{name?: string}>} labels
+ */
+export function isFixerExempt(labels = []) {
+  const names = (labels || []).map((label) =>
+    String(typeof label === 'string' ? label : label?.name ?? '').toLowerCase(),
+  );
+  return names.some((name) => FIXER_EXEMPT_LABELS.has(name));
+}
+
 export function classifyIssue(title = '', labels = []) {
   const set = new Set((labels || []).map((s) => String(s).toLowerCase()));
   const has = (name) => set.has(String(name).toLowerCase());
