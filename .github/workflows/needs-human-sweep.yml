@@ -265,10 +265,16 @@ jobs:
             echo "::error::needs-human-sweep: validazione DIGEST_TITLE non riuscita (outcome=$DIGEST_TITLE_VALIDATION); il run non è consegnato."
             exit 1
           fi
-          DIGEST_MATCHES=$(gh search issues --repo "$GITHUB_REPOSITORY" --state open --match title "$DIGEST_TITLE" --json number,title --jq '.[] | select(.title == env.DIGEST_TITLE) | .number' 2>/dev/null)
-          DIGEST_SEARCH_RC=$?
-          if [ "$DIGEST_SEARCH_RC" -ne 0 ]; then
-            echo "::error::needs-human-sweep: ricerca del digest fallita (rc=$DIGEST_SEARCH_RC); non scelgo un issue a caso."
+          # The convenience search command has a default result cap. Paginate the issues API
+          # so an exact-title duplicate cannot hide past that cap; the query
+          # failure is deliberately inside `if`, where bash errexit is disabled;
+          # keep stderr visible and report the CLI status for actionable failures.
+          if DIGEST_MATCHES=$(gh api --paginate "repos/$GITHUB_REPOSITORY/issues?state=open&per_page=100" \
+            --jq '.[] | select(.pull_request | not) | select(.title == env.DIGEST_TITLE) | .number'); then
+            :
+          else
+            DIGEST_SEARCH_RC=$?
+            echo "::error::needs-human-sweep: ricerca del digest fallita (gh api rc=$DIGEST_SEARCH_RC); non scelgo un issue a caso."
             exit 1
           fi
           DIGEST_MATCH_COUNT=$(printf '%s\n' "$DIGEST_MATCHES" | sed '/^[[:space:]]*$/d' | wc -l | tr -d '[:space:]')
@@ -277,11 +283,11 @@ jobs:
             exit 1
           fi
           N=$(printf '%s\n' "$DIGEST_MATCHES" | sed '/^[[:space:]]*$/d' | head -n 1)
-          if [ -n "${N:-}" ]; then
-            HAS=$(gh issue view "$N" --repo "$GITHUB_REPOSITORY" --json comments --jq '[.comments[].body | select(test("<!-- SWEEP_OUTCOME:"))] | length' 2>/dev/null || echo 0)
-          else
-            HAS=0
+          if [ -z "${N:-}" ]; then
+            echo "::error::needs-human-sweep: nessun digest aperto col titolo esatto '$DIGEST_TITLE'; il risultato non è classificabile in modo sicuro."
+            exit 1
           fi
+          HAS=$(gh issue view "$N" --repo "$GITHUB_REPOSITORY" --json comments --jq '[.comments[].body | select(test("<!-- SWEEP_OUTCOME:"))] | length' 2>/dev/null || echo 0)
           echo "digest=${N:-<none>} sweep-markers=$HAS claude=$CLAUDE_OUTCOME"
           if [ "${HAS:-0}" != "0" ]; then
             echo "✓ marker SWEEP_OUTCOME presente → run SUCCESS."
