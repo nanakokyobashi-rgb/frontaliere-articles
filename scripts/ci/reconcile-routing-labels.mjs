@@ -203,8 +203,9 @@ function main() {
   const dry = ['1', 'true'].includes(String(process.env.DRY_RUN || '').toLowerCase());
   const minAgeSec = Number(process.env.MIN_AGE_SEC || 120);
 
-  if (iOnly >= 0 && !Number.isInteger(only)) {
-    console.log('::warning::--issue senza numero valido → nessuna riconciliazione.');
+  if (iOnly >= 0 && (!Number.isInteger(only) || only <= 0)) {
+    console.error('::error::--issue richiede un numero intero positivo → nessuna riconciliazione.');
+    process.exitCode = 1;
     return;
   }
 
@@ -216,17 +217,22 @@ function main() {
     return;
   }
 
+  let reconciled = 0;
+  let failed = 0;
   for (const r of todo) {
     const why = `#${r.number} porta ${r.active} + ${r.remove} da ${r.ageSec}s → rimuovo ${r.remove} (vince la label attiva).`;
     if (dry) { console.log(`[dry] ${why}`); continue; }
     try {
       gh(['issue', 'edit', String(r.number), ...repoArgs(), '--remove-label', r.remove], { json: false });
+      reconciled++;
       console.log(why);
     } catch (e) {
+      failed++;
       console.log(`::warning::#${r.number} rimozione ${r.remove} fallita: ${String(e).slice(0, 120)}`);
     }
   }
-  console.log(`Riconciliazioni: ${todo.length}${dry ? ' (dry-run)' : ''}.`);
+  console.log(`Riconciliazioni: ${reconciled}${dry ? ' (dry-run)' : ''}.`);
+  if (failed > 0) console.log(`::warning::reconcile: ${failed} falliti su ${todo.length}.`);
 }
 
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {

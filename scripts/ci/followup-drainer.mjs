@@ -1695,6 +1695,21 @@ export function isQueueManaged(iss) {
 }
 
 /**
+ * Candidate del rescue `stuckFix`: `agent:fix` senza una coda/parcheggio
+ * concorrente e senza un padre gia' decomposto. La PR, il verdetto e il beacon
+ * di quota vengono verificati dal ciclo dopo l'ammissione; non devono escludere
+ * questo stato dalla scansione, altrimenti una run morta resta bloccata su
+ * `agent:fix` senza alcun altro segnale.
+ * @param {{title?: string, labels?: Array<{name:string}>}} iss
+ */
+export function isStuckFixRescueCandidate(iss) {
+  return isQueueManaged(iss)
+    && !has(iss, LBL_QUEUED)
+    && !has(iss, LBL_PARKED)
+    && !isDecomposedParent(iss);
+}
+
+/**
  * Tracker / issue-contatore PERMANENTE (`agent:no-age-out`, #5615).
  *
  * Esiste per essere una condizione permanentemente visibile: non si chiude mai e
@@ -3614,9 +3629,7 @@ export function runDrain() {
     console.log(`rescue orfani/crawler saltati: ${inflight} run issue-fix vive (l'invariante dei rescue e' inflight===0; il drain prosegue).`);
   }
 
-  const stuckFix = rescueSafe ? allFix.filter(
-    (i) => isQueueManaged(i) && !has(i, LBL_QUEUED) && !has(i, LBL_PARKED) && !isDecomposedParent(i)
-  ) : [];
+  const stuckFix = rescueSafe ? allFix.filter(isStuckFixRescueCandidate) : [];
   // Il complemento esatto di `stuckFix` dentro `agent:fix`: i crawler
   // (`route='fix'`, unica categoria non queue-managed). Erano l'unica categoria
   // che nessuno strato di recupero guardava — vedi `crawlerFixDecision` (#5514).

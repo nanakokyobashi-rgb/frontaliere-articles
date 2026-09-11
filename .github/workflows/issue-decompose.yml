@@ -179,7 +179,7 @@ jobs:
                <!-- DECOMPOSE_OUTCOME: decomposed-K -->
                ```
                DECOMPOSED_INTO elenca TUTTE le figlie (create + riusate + eventuale contenitore), solo numeri separati da spazio: è il contratto col PARENT-CLOSE del drainer.
-            5. Chiudi lo stadio: `gh issue edit $ISSUE_NUMBER --add-label "decomposed:1" --remove-label agent:decompose`. Il padre resta APERTO: lo chiude il drainer a figlie tutte chiuse.
+            5. Chiudi lo stadio con UN SOLO comando `gh issue edit` che contenga sia `--add-label` sia `--remove-label` sulla stessa invocazione (mai due comandi separati): `gh issue edit $ISSUE_NUMBER --add-label "decomposed:1" --remove-label agent:decompose`. Il padre resta APERTO: lo chiude il drainer a figlie tutte chiuse.
 
             **Vincoli:**
             - NON modificare file del repo, NON aprire PR, NON implementare. Solo lettura + issue.
