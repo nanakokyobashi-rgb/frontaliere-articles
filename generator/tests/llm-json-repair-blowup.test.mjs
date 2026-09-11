@@ -65,11 +65,18 @@ test('la riparazione completa una virgola mancante dopo un oggetto annidato', ()
   assert.equal(parsed.content.it.body1, 'B');
 });
 
-test('con un preambolo seleziona il payload JSON finale piu\' esteso', () => {
-  const raw = 'Ecco un esempio: {"id":"example","content":{"it":{"title":"E"}}}. Risposta finale: {"id":"final","content":{"it":{"title":"T","body1":"B"}},"slugs":{"it":"final"}}';
+test('con un preambolo seleziona il payload JSON finale, non quello piu\' lungo', () => {
+  const raw = 'Ecco un esempio: {"id":"example","content":{"it":{"title":"E","body1":"B","body2":"C","body3":"D"}},"slugs":{"it":"example"},"extra":"non usare"}. Risposta finale: {"id":"final","slugs":{"it":"final"}}';
   const parsed = JSON.parse(repairLlmJson(raw));
   assert.equal(parsed.id, 'final');
   assert.equal(parsed.slugs.it, 'final');
+});
+
+test('non inserisce una virgola dentro una stringa con virgolette non escapate', () => {
+  const raw = '{"body1":"prosa con } "key": testo","next":"ok"}';
+  const parsed = JSON.parse(repairLlmJson(raw));
+  assert.equal(parsed.body1, 'prosa con } "key": testo');
+  assert.equal(parsed.next, 'ok');
 });
 
 function millis(fn) {
