@@ -7,6 +7,7 @@ import {
   CORPUS_REPOSITORY,
   isMutatingGhArgs,
   resolveGhScope,
+  validateGhArgs,
 } from '../../.github/actions/claude-codex-fallback/gh-bridge-server.mjs';
 import { isMutatingGitArgs } from '../../.github/actions/claude-codex-fallback/git-bridge-server.mjs';
 
@@ -29,6 +30,48 @@ test('the GitHub bridge marks only state-changing gh operations', () => {
   assert.equal(isMutatingGhArgs(['issue', 'edit', '--repo', 'owner/repo', '1']), true);
   assert.equal(isMutatingGhArgs(['--repo', 'owner/repo', 'pr', 'view', '1']), false);
   assert.equal(isMutatingGhArgs(['api', 'repos/owner/repo', '--method', 'GET']), false);
+});
+
+test('the corpus bridge permits read-only API metadata without permitting mutations', () => {
+  const scope = resolveGhScope(
+    ['api', `repos/${CORPUS_REPOSITORY}/issues`, '--method', 'GET'],
+    {
+      repository: CORPUS_REPOSITORY,
+      host: 'github.com',
+      siteToken: 'site-token',
+      corpusToken: 'corpus-token',
+    },
+  );
+  assert.equal(scope.kind, 'corpus');
+  assert.equal(scope.allowedCommandSet.has('api'), true);
+  assert.equal(
+    scope.allowedCommandSet.has('issue'),
+    true,
+  );
+
+  const context = {
+    cwd: ROOT,
+    workspaceRoot: ROOT,
+    scratchRoot: ROOT,
+    host: 'github.com',
+    repository: scope.repository,
+    allowedCommandSet: scope.allowedCommandSet,
+    allowedSubcommandMap: scope.allowedSubcommandMap,
+  };
+  assert.equal(
+    validateGhArgs(
+      ['api', `repos/${CORPUS_REPOSITORY}/issues`, '--method', 'GET'],
+      context,
+    ),
+    '',
+  );
+  assert.match(
+    validateGhArgs(
+      ['api', `repos/${CORPUS_REPOSITORY}/issues`, '--method', 'POST'],
+      context,
+    ),
+    /mutations/,
+  );
 });
 
 test('the corpus checkout always selects the corpus credential', () => {
