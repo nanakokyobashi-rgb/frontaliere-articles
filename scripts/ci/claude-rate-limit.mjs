@@ -220,9 +220,13 @@ export function detectClaudeRateLimit(raw) {
   // "429" in un log di workflow potrebbe appartenere a un altro step.
   if (!rateLimited && msgs.length === 0) {
     const text = String(raw || '');
-    // `gh run view --log-failed` può includere più step della stessa run: un
-    // 429 di un'API estranea non è prova che Claude sia morto per quota.
-    const hasClaudeMarker = /\b(?:claude|anthropic)\b/i.test(text);
+    // `gh run view --log-failed` può includere più step della stessa run e il
+    // nome dello step può essere generico. I campi emessi dalla CLI (`type:
+    // rate_limit_event`, `rate_limit_info`, `api_error_status`) sono il marker
+    // autorevole: non serve che il prefisso del log dica "claude".
+    const hasClaudeMarker = /\b(?:claude|anthropic|rate_limit_event|rate_limit_info)\b/i.test(text)
+      || ( /\bapi_error_status\b/i.test(text)
+        && /\b(?:is_error\s*[:=]\s*true|terminal_reason\s*[:=]\s*["']?api_error|rateLimitType)\b/i.test(text));
     if (hasClaudeMarker && /(?:http\s*)?429\b/i.test(text) && /rate[ _-]?limit|too many requests|api_error_status/i.test(text)) {
       rateLimited = true;
     }

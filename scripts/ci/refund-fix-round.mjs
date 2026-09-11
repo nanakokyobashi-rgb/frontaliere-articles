@@ -148,6 +148,12 @@ export function refundMarkerName(marker) {
   return String(marker || '').replace(/_ROUND$/, '') + '_REFUNDED';
 }
 
+function resetBeacon(resetsAt) {
+  return Number.isFinite(Number(resetsAt)) && Number(resetsAt) > 0
+    ? `<!-- QUOTA_RESETS_AT: ${Math.round(Number(resetsAt))} -->`
+    : null;
+}
+
 /**
  * Il commento che sostituisce il marker rimborsato. Puro → testabile.
  * NB: NON contiene il marker di round (verrebbe ri-contato) e NON contiene un
@@ -165,7 +171,7 @@ export function formatRefundComment({ round, workflow, resetsAt, rateLimitType, 
     : null;
   return [
     marker ? `<!-- ${refundMarkerName(marker)}: ${round} -->` : null,
-    resetsAt ? `<!-- QUOTA_RESETS_AT: ${Math.round(Number(resetsAt))} -->` : null,
+    resetBeacon(resetsAt),
     `⏳ **Quota Claude esaurita${rateLimitType ? ` (\`${rateLimitType}\`)` : ''}** — \`${workflow}\` è uscito su HTTP 429:`,
     'Claude **non ha letto questa PR** e non ha speso token (0 turni, $0).',
     '',
@@ -186,6 +192,7 @@ export function formatRefundAttemptComment({ round, workflow, resetsAt, rateLimi
     ? new Date(Number(resetsAt) * 1000).toISOString().replace('T', ' ').slice(0, 16) + ' UTC'
     : null;
   return [
+    resetBeacon(resetsAt),
     `⏳ **Quota Claude esaurita${rateLimitType ? ` (\`${rateLimitType}\`)` : ''}** — \`${workflow}\` ha rilevato HTTP 429:`,
     'Questa è la traccia della procedura di rimborso; il marker viene rimosso solo dopo una DELETE verificata.',
     when ? `La quota torna disponibile alle **${when}**.` : null,

@@ -120,6 +120,20 @@ test('senza resetsAt il beacon viene omesso, non scritto vuoto', () => {
   assert.ok(!/QUOTA_RESETS_AT/.test(body));
 });
 
+test('il commento provvisorio conserva il beacon della quota prima della DELETE', () => {
+  const body = formatRefundAttemptComment({
+    round: 1,
+    workflow: 'pr-redflag-fixer',
+    resetsAt: 1788624000,
+    rateLimitType: 'five_hour',
+    runUrl: 'https://example.invalid/run/1',
+    marker: 'REDFLAG_FIX_ROUND',
+  });
+  assert.match(body, /<!-- QUOTA_RESETS_AT: 1788624000 -->/);
+  assert.match(body, /five_hour/);
+  assert.match(body, /DELETE verificata/);
+});
+
 test('#984: execution_file vuoto usa solo il log verificabile della run', () => {
   const src = fs.readFileSync(path.join(ROOT, 'scripts/ci/refund-fix-round.mjs'), 'utf-8');
   assert.match(src, /function executionRaw\(\)/);

@@ -25,6 +25,7 @@ import {
   registerLockPath,
   registerLockFile,
 } from '../scripts/lib/register-lock.mjs';
+import { writeJsonAtomic } from '../scripts/lib/atomic-write-json.mjs';
 
 const ARTICLE_ID = 'permesso-g-frontalieri-2026';
 const SECTION = 'frontaliere';
@@ -117,4 +118,32 @@ test('writeJsonAtomic forza temp e directory prima di dare per committato il mar
   assert.ok(tempSync < rename, 'il temp deve essere sincronizzato prima del rename');
   assert.ok(rename < directoryOpen && directoryOpen < directorySync,
     'la directory deve essere sincronizzata dopo il rename');
+});
+
+test('EINVAL nel fsync della directory non annulla una scrittura gia\' committata', () => {
+  const root = sandbox();
+  const target = path.join(root, 'nested', 'marker.json');
+  const originalFsync = fs.fsyncSync;
+  let calls = 0;
+  fs.fsyncSync = (fd) => {
+    calls += 1;
+    if (calls === 2) {
+      const error = new Error('directory fsync unsupported');
+      error.code = 'EINVAL';
+      throw error;
+    }
+    return originalFsync(fd);
+  };
+  try {
+    assert.doesNotThrow(() => writeJsonAtomic(target, { committed: true }));
+  } finally {
+    fs.fsyncSync = originalFsync;
+  }
+
+  assert.deepEqual(JSON.parse(fs.readFileSync(target, 'utf8')), { committed: true });
+  assert.deepEqual(
+    fs.readdirSync(path.dirname(target)).filter((name) => name.endsWith('.tmp')),
+    [],
+    'il temp deve restare consumato dal rename anche quando il fsync directory non è supportato',
+  );
 });

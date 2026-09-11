@@ -29,6 +29,9 @@ export function writeJsonAtomic(filePath, value, { compact = false } = {}) {
   const json = compact ? JSON.stringify(value) : JSON.stringify(value, null, 2);
   const content = `${json}\n`;
   const tmp = `${filePath}.${process.pid}.${tmpSeq++}.tmp`;
+  // This block is the commit/rollback boundary: before rename the target is
+  // still untouched, so every failure can remove the temporary file without
+  // lying to the caller about what was committed.
   try {
     fs.writeFileSync(tmp, content, 'utf8');
     const tempFd = fs.openSync(tmp, 'r');
@@ -38,6 +41,16 @@ export function writeJsonAtomic(filePath, value, { compact = false } = {}) {
       fs.closeSync(tempFd);
     }
     fs.renameSync(tmp, filePath);
+  } catch (err) {
+    try { fs.unlinkSync(tmp); } catch { /* best-effort cleanup */ }
+    throw err;
+  }
+
+  // The rename is already committed. Directory fsync is a durability hint,
+  // not part of the rollback transaction: overlayfs and some network mounts
+  // reject fsync on a directory with EINVAL even though the target is valid.
+  // Never report that expected portability limitation as an unwritten file.
+  try {
     const directoryFd = fs.openSync(path.dirname(filePath), 'r');
     try {
       fs.fsyncSync(directoryFd);
@@ -45,7 +58,6 @@ export function writeJsonAtomic(filePath, value, { compact = false } = {}) {
       fs.closeSync(directoryFd);
     }
   } catch (err) {
-    try { fs.unlinkSync(tmp); } catch { /* best-effort cleanup */ }
-    throw err;
+    if (err?.code !== 'EINVAL') throw err;
   }
 }

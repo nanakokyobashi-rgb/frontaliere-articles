@@ -4,7 +4,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { beaconCandidates } from '../../scripts/ci/check-quota-backoff.mjs';
+import { beaconCandidates, mergeBeaconCandidates } from '../../scripts/ci/check-quota-backoff.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 
@@ -31,9 +31,17 @@ test('#984: la lettura del beacon è collegata a PR e commenti REST paginati', (
     'i commenti devono essere letti oltre la prima pagina');
   assert.match(src, /comments\?per_page=100/);
 });
-test('#984: le issue hanno priorità sulle PR nel tetto dei candidati', () => {
+test('#1243: il tetto riserva un candidato PR quando la coda issue è piena', () => {
+  assert.deepEqual(
+    mergeBeaconCandidates([12, 11, 10], [99, 98], 3),
+    [12, 11, 99],
+  );
+  assert.deepEqual(
+    mergeBeaconCandidates([12, 11], [11, 99], 3),
+    [12, 11, 99],
+  );
   const src = fs.readFileSync(path.join(ROOT, 'scripts/ci/check-quota-backoff.mjs'), 'utf8');
   assert.match(src, /const issueCandidates = beaconCandidates\(\[/);
   assert.match(src, /const prCandidates = beaconCandidates\(\[listPullRequests\(scope\)\], opts\)/);
-  assert.match(src, /const candidates = \[\.\.\.issueCandidates, \.\.\.prCandidates\]/);
+  assert.match(src, /mergeBeaconCandidates\(issueCandidates, prCandidates, MAX_ISSUES\)/);
 });

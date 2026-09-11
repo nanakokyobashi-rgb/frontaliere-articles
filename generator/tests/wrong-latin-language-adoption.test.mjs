@@ -425,17 +425,30 @@ const META_NON_IT = {
   de: ['content/blog-meta-de.ts', 'content/blog-meta-ch-de.ts'],
   fr: ['content/blog-meta-fr.ts', 'content/blog-meta-ch-fr.ts'],
 };
-// Misura corrente del parser: 3.845 campi sui file main e 2.022 sui CH per
-// ciascun locale. Il margine assorbe ritiri fisiologici senza permettere a un
-// file perso o troncato di far passare una sola superficie.
-const MIN_CAMPI_TRADOTTI_PER_FILE = {
-  main: 3400,
-  ch: 1800,
-};
+// Ogni indice tradotto deve restare vicino alla cardinalita' IT dello stesso
+// file. Una frazione del sorgente segue le pubblicazioni e non assorbe in
+// silenzio un ritiro anomalo di ~10% come farebbe un floor assoluto.
+const MIN_CAMPI_TRADOTTI_FRAZIONE = 0.9;
+
+function metaItPerFile(file) {
+  return file.includes('blog-meta-ch-') ? META_IT[1] : META_IT[0];
+}
+
+function minCampiTradotti(sourceCount) {
+  return Math.ceil(sourceCount * MIN_CAMPI_TRADOTTI_FRAZIONE);
+}
+
+test('#1234 — il floor tradotto segue la cardinalita\' IT', () => {
+  const minimo = minCampiTradotti(3846);
+  assert.equal(minimo, 3462);
+  assert.ok(3450 < minimo, 'un calo di circa il 10% non deve passare sotto un floor assoluto');
+});
 
 function scanCorpusLocale(t, locale, campo) {
   const files = META_NON_IT[locale];
-  const mancanti = files.filter((file) => !existsSync(path.join(ROOT, file)));
+  const sourceFiles = files.map(metaItPerFile);
+  const mancanti = [...new Set([...files, ...sourceFiles])]
+    .filter((file) => !existsSync(path.join(ROOT, file)));
   if (mancanti.length > 0) {
     t.skip(`superficie ${locale} non presente in questo checkout: ${mancanti.join(', ')}`);
     return;
@@ -443,12 +456,13 @@ function scanCorpusLocale(t, locale, campo) {
 
   const scansioni = files.map((file) => {
     const valori = campiPubblicati(file, campo).map(({ value }) => value);
-    const minimo = file.includes('blog-meta-ch-')
-      ? MIN_CAMPI_TRADOTTI_PER_FILE.ch
-      : MIN_CAMPI_TRADOTTI_PER_FILE.main;
+    const fonte = metaItPerFile(file);
+    const conteggioSorgente = campiPubblicati(fonte, campo).length;
+    const minimo = minCampiTradotti(conteggioSorgente);
     assert.ok(
       valori.length >= minimo,
-      `letti solo ${valori.length} ${campo} ${locale} in ${file} (minimo ${minimo}): superficie tradotta troncata`,
+      `letti solo ${valori.length} ${campo} ${locale} in ${file} `
+      + `(minimo ${minimo}, 90% dei ${conteggioSorgente} del sorgente ${fonte}): superficie tradotta troncata`,
     );
     return valori;
   });
@@ -483,7 +497,12 @@ const SEO_FILES = existsSync(SEO_DIR)
   : [];
 const SEO_FIELDS = ['title', 'description', 'ogTitle', 'ogDescription'];
 const MIN_SEO_CAMPI_IT = 20000;
-const SEO_ENTRY_RE = /^\s*['"](blog-[^'"]+)['"]:\s*\{([\s\S]*?)(?=^\s*['"]blog-[^'"]+['"]:\s*\{|^\s*};)/gm;
+const SEO_ENTRY_RE = /^[ \t]*['"](blog-[^'"]+)['"]:\s*\{([\s\S]*?)(?=^[ \t]*['"]blog-[^'"]+['"]:\s*\{|^[ \t]*}\s*(?:as\s+const\s*)?;)/gm;
+const SEO_ENTRY_KEY_RE = /^[ \t]*['"]blog-[^'"]+['"]:\s*\{/gm;
+
+function parseSeoEntries(source) {
+  return [...String(source).matchAll(SEO_ENTRY_RE)];
+}
 
 function seoCampo(blocco, campo) {
   const re = new RegExp(
@@ -493,6 +512,19 @@ function seoCampo(blocco, campo) {
   const match = blocco.match(re);
   return match ? match[2].replace(/\\([\\'"\\\\])/g, '$1') : null;
 }
+
+test('#1234 — il parser SEO chiude anche un chunk `as const`', () => {
+  const source = [
+    'const pages = {',
+    " 'blog-primo': { canonicalPath: '/articoli-primo/' },",
+    " 'blog-secondo': { canonicalPath: '/articoli-secondo/' },",
+    '} as const;',
+  ].join('\n');
+  assert.deepEqual(
+    parseSeoEntries(source).map((entry) => entry[1]),
+    ['blog-primo', 'blog-secondo'],
+  );
+});
 
 test('#1177 — la classe SEO IT resta coperta dalla scansione', (t) => {
   if (!existsSync(SEO_DIR)) {
@@ -506,22 +538,45 @@ test('#1177 — la classe SEO IT resta coperta dalla scansione', (t) => {
   }
 
   const campi = [];
+  const scartate = [];
   for (const file of SEO_FILES) {
     const source = readFileSync(path.join(ROOT, file), 'utf8');
-    for (const entry of source.matchAll(SEO_ENTRY_RE)) {
+    const entryKeys = [...source.matchAll(SEO_ENTRY_KEY_RE)];
+    const entries = parseSeoEntries(source);
+    assert.equal(
+      entries.length,
+      entryKeys.length,
+      `${file}: il parser SEO ha letto ${entries.length} entry su ${entryKeys.length} dichiarate`,
+    );
+    const campiDelFile = [];
+    for (const entry of entries) {
       const blocco = entry[2];
       // I chunk possono contenere più superfici; `/articoli-` è il contratto
       // del canonical IT, quindi è il discriminante di lingua della scansione.
       const canonical = seoCampo(blocco, 'canonicalPath');
-      if (!canonical?.startsWith('/articoli-')) continue;
+      if (!canonical?.startsWith('/articoli-')) {
+        scartate.push(`${file}:${entry[1]} canonical=${canonical ?? '<assente>'}`);
+        continue;
+      }
       for (const campo of SEO_FIELDS) {
         const value = seoCampo(blocco, campo);
         assert.notEqual(value, null, `${file}:${entry[1]} manca ${campo}`);
-        campi.push({ file, id: entry[1], campo, value });
+        campiDelFile.push({ file, id: entry[1], campo, value });
       }
     }
+    assert.equal(
+      campiDelFile.length,
+      entryKeys.length * SEO_FIELDS.length,
+      `${file}: letti ${campiDelFile.length} campi SEO su ${entryKeys.length * SEO_FIELDS.length} attesi`,
+    );
+    campi.push(...campiDelFile);
   }
 
+  assert.deepEqual(
+    scartate,
+    [],
+    `entry SEO IT escluse dal filtro canonical: ${scartate.join(', ')}`,
+  );
   assert.ok(campi.length >= MIN_SEO_CAMPI_IT, `letti solo ${campi.length} campi SEO IT: scansione troncata`);
   const offender = campi
     .map(({ value, campo, ...meta }) => ({ ...meta, campo, value, esito: detectWrongLatinLanguageInField(value, 'it', campo) }))

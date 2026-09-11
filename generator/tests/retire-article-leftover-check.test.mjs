@@ -33,18 +33,23 @@
  */
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
+import { spawnSync } from 'node:child_process';
 import { readFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { mentionsId } from '../../scripts/lib/mentions-id.mjs';
-import { surfaceMentionsArticleId } from '../../scripts/lib/article-surfaces.mjs';
+import {
+  surfaceMentionsArticleId,
+  surfaceArticleIdStatus,
+  SURFACE_ARTICLE_ID_STATUS,
+} from '../../scripts/lib/article-surfaces.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 
 /** I chiamanti della regola: devono usarla, non ri-scriverla. */
 const CALLERS = [
-  'scripts/retire-article.mjs',
-  'generator/tests/retired-articles-fully-removed.test.mjs',
+  { rel: 'scripts/retire-article.mjs', symbol: 'surfaceArticleIdStatus' },
+  { rel: 'generator/tests/retired-articles-fully-removed.test.mjs', symbol: 'surfaceMentionsArticleId' },
 ];
 
 const ID = 'disoccupazione-svizzera-2026';
@@ -93,9 +98,13 @@ test('la regola ha una sorgente sola: nessun chiamante se la ri-scrive', () => {
   // verifica finale dello script e il gate di PR guardano le stesse superfici,
   // e finché la regola è una sola i due casi qui sopra parlano per entrambi.
   // Una copia locale in uno dei due li scollegherebbe in silenzio.
-  for (const rel of CALLERS) {
+  for (const { rel, symbol } of CALLERS) {
     const src = readFileSync(path.join(ROOT, rel), 'utf-8');
-    assert.match(src, /surfaceMentionsArticleId/, `${rel}: non usa la verifica sensibile alla superficie`);
+    assert.match(
+      src,
+      new RegExp(`import\\s*\\{[^}]*\\b${symbol}\\b[^}]*\\}\\s*from\\s*'[^']*lib/article-surfaces\\.mjs'`, 's'),
+      `${rel}: non importa ${symbol} dal modulo delle superfici`,
+    );
     assert.doesNotMatch(
       src,
       /function mentionsId\s*\(/,
@@ -124,4 +133,34 @@ test('il ledger confronta i valori, non il segmento dell\'URL chiave', () => {
     surfaceMentionsArticleId('data/article-source-urls.json', JSON.stringify({ [key]: ID }), ID),
     true,
   );
+});
+
+test('un ledger illeggibile è distinto da un residuo reale, ma resta bloccante', () => {
+  const rel = 'data/article-source-urls.json';
+  assert.equal(
+    surfaceArticleIdStatus(rel, '{ non-json', ID),
+    SURFACE_ARTICLE_ID_STATUS.UNREADABLE,
+  );
+  assert.equal(
+    surfaceArticleIdStatus(rel, JSON.stringify([ID]), ID),
+    SURFACE_ARTICLE_ID_STATUS.UNREADABLE,
+  );
+  assert.equal(
+    surfaceArticleIdStatus(rel, JSON.stringify({ '/source': ID }), ID),
+    SURFACE_ARTICLE_ID_STATUS.PRESENT,
+  );
+  assert.equal(
+    surfaceArticleIdStatus(rel, JSON.stringify({ '/source': 'altro-id' }), ID),
+    SURFACE_ARTICLE_ID_STATUS.ABSENT,
+  );
+  assert.equal(surfaceMentionsArticleId(rel, '{ non-json', ID), true);
+});
+
+test('retire-article rifiuta un id mancante, vuoto o fatto di spazi prima di scrivere', () => {
+  const script = path.join(ROOT, 'scripts/retire-article.mjs');
+  for (const args of [[], [''], ['   ']]) {
+    const run = spawnSync(process.execPath, [script, ...args], { encoding: 'utf8' });
+    assert.equal(run.status, 2, `argv=${JSON.stringify(args)}: ${run.stderr}`);
+    assert.match(run.stderr, /uso: node scripts\/retire-article\.mjs/);
+  }
 });

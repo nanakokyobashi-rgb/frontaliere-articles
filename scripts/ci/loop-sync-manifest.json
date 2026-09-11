@@ -231,6 +231,16 @@
       }
     },
     {
+      "path": "scripts/ci/claim-issue-group-in-flight.mjs",
+      "mode": "corpus-only",
+      "reason": "Claim atomico del leader e dei membri B19 prima del fixer corpus. Il workflow issue-fix.yml del corpus carica il contesto di gruppo e passa ISSUE_NUMBERS; il sito non ha questo workflow adattato ne' il consumer corpus dei follow-up raggruppati, quindi non esiste un gemello da portare e il file resta specifico del corpus.",
+      "baseline": {
+        "site": null,
+        "corpus": "6cff9f6b61968f3b",
+        "alignedAt": "2026-09-11"
+      }
+    },
+    {
       "path": "scripts/ci/claude-rate-limit.mjs",
       "mode": "adapted",
       "reason": "Parser condiviso del fallback con riconoscimento corpus dei log testuali Claude/Anthropic e dei messaggi di quota legacy; il sito usa il parser degli eventi strutturati.",
@@ -565,8 +575,8 @@
       "reason": "Questo file.",
       "baseline": {
         "site": null,
-        "corpus": "b1654ab15577a976",
-        "alignedAt": "2026-08-07"
+        "corpus": "b30c519db59fbbb8",
+        "alignedAt": "2026-09-11"
       }
     },
     {
@@ -1396,7 +1406,7 @@
       "path": "generator/scripts/fix-faq-locales.mjs",
       "sitePath": "scripts/fix-faq-locales.mjs",
       "mode": "adapted",
-      "reason": "Riparazione delle FAQ per locale. Differenza comune a tutti i gemelli trasportati: `PROJECT_ROOT` risale di due livelli invece di uno, perche' il trasporto ha spostato lo script da `scripts/` a `generator/scripts/`. Oltre a quello: `corpusPath()` sul BODY_DIR, e i due write passano da un helper `writeCorpusFile` che applica la guardia sui control char C0 (issue #66). Le due divergenze hanno la stessa radice — questo repo e' quello dove i byte finiscono davvero in content/ — e sono le stesse di generate-events-digest-article.mjs e batch-add-faq-to-articles.mjs.",
+      "reason": "Riparazione delle FAQ per locale. Differenza comune a tutti i gemelli trasportati: `PROJECT_ROOT` risale di due livelli invece di uno, perche' il trasporto ha spostato lo script da `scripts/` a `generator/scripts/`. Oltre a quello: `corpusPath()` sul BODY_DIR, e i due write passano da un helper `writeCorpusFile` che applica la guardia sui control char C0 (issue #66). Le due divergenze hanno la stessa radice — questo repo e' quello dove i byte finiscono davvero in content/ — e sono le stesse di generate-events-digest-article.mjs e batch-add-faq-to-articles.mjs. Il parser `../../scripts/lib/parse-positive-num.mjs` e' una dipendenza corpus-only dichiarata nel manifest: non va copiato nel gemello del sito.",
       "baseline": {
         "site": "4b873db68cf657f2",
         "corpus": "bc212c55ece38bc7",
@@ -3213,8 +3223,8 @@
       "sitePath": ".github/corpus-workflows/translate-pending.yml",
       "mode": "identical",
       "baseline": {
-        "site": "26919a86b4041fa0",
-        "corpus": "26919a86b4041fa0",
+        "site": "421e29c4b786ca57",
+        "corpus": "421e29c4b786ca57",
         "alignedAt": "2026-09-11"
       }
     },
@@ -3223,8 +3233,8 @@
       "sitePath": ".github/corpus-workflows/contract.json",
       "mode": "identical",
       "baseline": {
-        "site": "b638f7279e56f3fc",
-        "corpus": "b638f7279e56f3fc",
+        "site": "63ed04e3b215083b",
+        "corpus": "63ed04e3b215083b",
         "alignedAt": "2026-09-11"
       }
     },
@@ -3420,13 +3430,13 @@
     },
     {
       "path": "scripts/ci/refund-fix-round.mjs",
-      "mode": "corpus-only-pending",
-      "reason": "Rimborsa il round di `pr-redcheck-fixer.yml` / `pr-redflag-fixer.yml` quando la run Claude e' morta su 429: il marker di round si posta PRIMA di invocare Claude (giusto per un crash, sbagliato per un 429, dove l'agente non e' mai partito) e al cap la PR prende `needs-human`, che qui e' un filtro di ESCLUSIONE da ogni coda automatica. Gemello lato PR di cio' che `check-quota-backoff.mjs` + il marker `rate-limited` gia' fanno lato issue («la issue non consuma un tentativo»). `corpus-only-pending` e non `corpus-only`: i due fixer esistono anche sul sito con lo stesso anti-loop e la stessa quota condivisa, quindi la stessa catena assorbente e' li' non chiusa — va portato, ma dal lato del sito.",
-      "trackingIssue": "https://github.com/nanakokyobashi-rgb/frontaliere-articles/issues/733",
+      "mode": "adapted",
+      "reason": "Rimborsa il round di `pr-redcheck-fixer.yml` / `pr-redflag-fixer.yml` quando la run Claude e' morta su 429: il marker di round si posta PRIMA di invocare Claude (giusto per un crash, sbagliato per un 429, dove l'agente non e' mai partito) e al cap la PR prende `needs-human`, che qui e' un filtro di ESCLUSIONE da ogni coda automatica. Gemello lato PR di cio' che `check-quota-backoff.mjs` + il marker `rate-limited` gia' fanno lato issue («la issue non consuma un tentativo»). Il porting lato sito e' atterrato in PR #8298; il corpus conserva la propria variante adattata e il confine resta HTTP, senza import diretti tra repo.",
       "baseline": {
-        "site": null,
-        "corpus": "34fe944e62e07c25",
-        "alignedAt": "2026-09-05"
+        "site": "3fd833f4a3b32f72",
+        "corpus": "89cf833c04a43ef6",
+        "alignedAt": "2026-09-11",
+        "forcedAt": "2026-09-11T10:33:31.749Z"
       }
     },
     {

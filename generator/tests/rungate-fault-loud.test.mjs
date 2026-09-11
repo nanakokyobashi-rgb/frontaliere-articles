@@ -134,6 +134,42 @@ test('gate PRESENTE ma non caricabile: guasto distinto, non inconclusive', () =>
   assert.match(stdout, /batch_prs=4242/, 'Proceed-safe invariato.\n' + stdout);
 });
 
+test('gate che consegna il verdetto prima dell’exit non-zero: il verdetto resta autorevole', () => {
+  const { stdout, summary } = runInSandbox({
+    'is-followup-fix-pr.mjs':
+      "console.log('is_followup_fix=true');\n" +
+      "process.exit(1);\n",
+    'followup-has-candidates.mjs': "console.log('has_candidates=true');\n",
+  });
+
+  assert.match(stdout, /follow-up FIX \(grandchild-suppression\) → skip/);
+  assert.doesNotMatch(stdout, /non eseguibile/, 'Un verdetto già emesso non è un gate senza verdetto.\n' + stdout);
+  assert.doesNotMatch(summary, /Gate del follow-up NON eseguiti/, 'Il verdetto non deve produrre un falso fault.\n' + summary);
+  assert.match(stdout, /batch_prs=\n/, 'La soppressione deve restare effettiva.\n' + stdout);
+});
+
+test('SyntaxError runtime: esecuzione fallita, non modulo non caricabile', () => {
+  const { stdout } = runInSandbox({
+    'is-followup-fix-pr.mjs': "throw new SyntaxError('runtime parser failure');\n",
+    'followup-has-candidates.mjs': "console.log('has_candidates=true');\n",
+  });
+
+  assert.match(stdout, /::error title=Gate del follow-up non eseguibile::is-followup-fix-pr\.mjs/);
+  assert.doesNotMatch(stdout, /::error title=Gate del follow-up non caricabile::is-followup-fix-pr\.mjs/);
+  assert.match(stdout, /SyntaxError: runtime parser failure/, 'Il dettaglio deve indicare la causa reale.\n' + stdout);
+  assert.match(stdout, /batch_prs=4242/);
+});
+
+test('il dettaglio preferisce la riga Error alla cornice interna di Node', () => {
+  const { stdout } = runInSandbox({
+    'is-followup-fix-pr.mjs': "throw new Error('causa reale del gate');\n",
+    'followup-has-candidates.mjs': "console.log('has_candidates=true');\n",
+  });
+
+  assert.match(stdout, /::error title=Gate del follow-up non eseguibile::is-followup-fix-pr\.mjs/);
+  assert.match(stdout, /Error: causa reale del gate/, 'L’annotation deve mostrare la causa, non node:internal.\n' + stdout);
+});
+
 test('gate che termina per errore d’ambiente: errore visibile, non verdetto', () => {
   const { stdout, summary } = runInSandbox({
     // Un gate che non riesce a eseguire una dipendenza non ha prodotto un verdetto.

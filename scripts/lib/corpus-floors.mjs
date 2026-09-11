@@ -131,17 +131,17 @@ export function retentionWarning(
  *
  * Un feed emette al massimo `RSS_MAX_ITEMS`, quindi il suo rapporto rispetto
  * a quel cap non vede se i chunk SEO sono passati da migliaia a poche decine.
- * Questa riga confronta invece i chunk con il corpus della sezione: e' solo
- * diagnostica e deve restare visibile anche quando il rapporto e' gia' sotto
- * il gate degli articoli.
+ * Questa riga confronta invece i chunk con la loro popolazione della run
+ * precedente: e' solo diagnostica e resta visibile senza riusare il rapporto
+ * fra chunk e corpi, che sono popolazioni scollegate.
  */
 export function populationWarning(label, declared, source, warn = FLOOR_WARN_RETENTION) {
   const ratio = retentionRatio(declared, source);
   if (ratio === null || ratio >= warn) return null;
   return (
     `${label}: popolazione ${declared}/${source} = ${(ratio * 100).toFixed(2)}% ` +
-    `sotto il preallarme ${(warn * 100).toFixed(0)}% — i chunk SEO stanno erodendo il corpus ` +
-    `della sezione`
+    `sotto il preallarme ${(warn * 100).toFixed(0)}% — i chunk SEO sono scesi rispetto ` +
+    `alla loro run precedente`
   );
 }
 
@@ -202,16 +202,29 @@ function countFiles(dir, ext) {
   return files.filter((f) => f.endsWith(ext)).length;
 }
 
+function countCorpusFiles(root, rel, ext, what) {
+  try {
+    return countFiles(path.join(root, rel), ext);
+  } catch (error) {
+    if (error?.code === 'ELOOP' || error?.code === 'EACCES') {
+      const wrapped = new Error(missingCorpusMessage(what, path.join(root, rel)), { cause: error });
+      wrapped.code = 'MISSING_CORPUS';
+      throw wrapped;
+    }
+    throw error;
+  }
+}
+
 /** Quanti articoli sorgente ha la sezione, contati sui file di corpo. */
 export function countSourceArticles(root, section) {
   const rel = SECTION_BODY_DIRS[section];
   if (!rel) throw new Error(`unknown corpus section: ${section}`);
-  return countFiles(path.join(root, rel), '.ts');
+  return countCorpusFiles(root, rel, '.ts', section);
 }
 
 /** Quante immagini hero ci sono in sorgente. */
 export function countSourceImages(root) {
-  return countFiles(path.join(root, IMAGE_SOURCE_DIR), '.webp');
+  return countCorpusFiles(root, IMAGE_SOURCE_DIR, '.webp', 'images-manifest.json');
 }
 
 /**
