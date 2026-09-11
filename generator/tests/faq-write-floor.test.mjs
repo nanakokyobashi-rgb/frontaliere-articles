@@ -71,6 +71,19 @@ test('i due entry point rifiutano --limit invalido con exit code 2', () => {
   }
 });
 
+test('il batch writer rifiuta --concurrency invalido con exit code 2', () => {
+  for (const value of ['abc', '-1', '0', '--dry-run']) {
+    const result = spawnSync(process.execPath, [BATCH, '--concurrency', value], {
+      encoding: 'utf8',
+      env: { ...process.env, DRY_RUN: '1' },
+    });
+    assert.equal(result.status, 2, `batch --concurrency ${value} deve uscire 2`);
+    assert.match(result.stderr, /Invalid --concurrency/);
+  }
+  assert.match(fs.readFileSync(BATCH, 'utf-8'), /concurrencyIdx/);
+  assert.match(fs.readFileSync(BATCH, 'utf-8'), /return 3/);
+});
+
 test('il pavimento e\' MIN_FAQ_PAIRS quando la sorgente ne ha almeno altrettante', () => {
   assert.equal(MIN_FAQ_PAIRS, 3);
   assert.equal(minPairsForWrite(pairs(8)), MIN_FAQ_PAIRS);
