@@ -17,7 +17,7 @@ on:
 # Un fixer alla volta per PR: evita due round Claude concorrenti sullo stesso
 # branch (push race).
 concurrency:
-  group: redflag-fix-${{ github.event.pull_request.number }}
+  group: redcheck-fix-${{ github.event.pull_request.head.ref || github.event.workflow_run.head_branch || github.event.inputs.pr }}
   cancel-in-progress: false
 
 permissions:

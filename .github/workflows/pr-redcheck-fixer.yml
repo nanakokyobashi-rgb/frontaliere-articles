@@ -35,10 +35,10 @@ on:
 
 # Serializzato per BRANCH, non per numero PR: nel contesto `workflow_run` il
 # numero non e' affidabile (`pull_requests` e' spesso vuoto), mentre
-# `head_branch` c'e' sempre. Due round Claude concorrenti sullo stesso branch si
-# sovrascriverebbero il push.
+# `head_branch` c'e' sempre. La stessa espressione viene usata dal gemello
+# `pr-redflag-fixer.yml`, cosi' i due fixer condividono il mutex sulla PR.
 concurrency:
-  group: redcheck-fix-${{ github.event.workflow_run.head_branch || github.event.inputs.pr }}
+  group: redcheck-fix-${{ github.event.pull_request.head.ref || github.event.workflow_run.head_branch || github.event.inputs.pr }}
   cancel-in-progress: false
 
 permissions:
@@ -431,10 +431,27 @@ jobs:
           # Il body e' l'altro artefatto che Claude puo' consegnare. Accetta
           # solo la forma prevista dall'API (oggetto con body stringa/null) e
           # persiste esclusivamente SHA-256: un errore di lettura blocca chiuso.
-          if ! body_sha=$(gh api "repos/$REPO/pulls/$PR_NUMBER" \
+          # Il file temporaneo tiene separato lo status di `gh` dal digest: una
+          # jq `error()` che lasci stdout vuoto non può diventare il digest
+          # valido del contenuto vuoto.
+          if ! body_file=$(mktemp "${RUNNER_TEMP:-/tmp}/redcheck-body.XXXXXX"); then
+            echo "::error::Impossibile creare il file temporaneo per il body della PR."
+            exit 1
+          fi
+          trap 'rm -f "$body_file"' EXIT
+          if ! gh api "repos/$REPO/pulls/$PR_NUMBER" \
             --jq 'if type != "object" then error("PR response is not an object") elif (has("body") | not) then error("PR response has no body field") elif .body != null and (.body | type) != "string" then error("PR body is not a string or null") else (.body // "") end' \
-            | sha256sum | cut -d' ' -f1); then
+            > "$body_file"; then
             echo "::error::Impossibile leggere un body valido della PR prima di Claude."
+            exit 1
+          fi
+          if ! body_sha=$(sed -e 's/\r$//' -e 's/[[:space:]]+$//' "$body_file" | sha256sum | cut -d' ' -f1); then
+            echo "::error::Impossibile calcolare il digest del body PR prima di Claude."
+            exit 1
+          fi
+          empty_body_sha=$(printf '' | sha256sum | cut -d' ' -f1)
+          if [ "$body_sha" = "$empty_body_sha" ]; then
+            echo "::error::La risposta API del body PR prima di Claude e' vuota o non verificabile."
             exit 1
           fi
           if ! printf '%s\n' "$body_sha" | grep -Eq '^[0-9a-f]{64}$'; then
@@ -720,10 +737,24 @@ jobs:
             echo "::error::❌-check-fix: nessun commit pushato e la run Claude non e' terminata con success ('$CLAUDE_OUTCOME') → non-progresso reale. Job ROSSO (segnale preservato; il round-cap porta a needs-human a N>=2)."
             exit 1
           fi
-          if ! now_body_sha=$(gh api "repos/$REPO/pulls/$PR_NUMBER" \
+          if ! body_file=$(mktemp "${RUNNER_TEMP:-/tmp}/redcheck-body.XXXXXX"); then
+            echo "::error::❌-check-fix: impossibile creare il file temporaneo per il body PR dopo Claude → classificazione BLOCCANTE, job ROSSO."
+            exit 1
+          fi
+          trap 'rm -f "$body_file"' EXIT
+          if ! gh api "repos/$REPO/pulls/$PR_NUMBER" \
             --jq 'if type != "object" then error("PR response is not an object") elif (has("body") | not) then error("PR response has no body field") elif .body != null and (.body | type) != "string" then error("PR body is not a string or null") else (.body // "") end' \
-            | sha256sum | cut -d' ' -f1); then
+            > "$body_file"; then
             echo "::error::❌-check-fix: impossibile leggere un body valido della PR dopo Claude → classificazione BLOCCANTE, job ROSSO."
+            exit 1
+          fi
+          if ! now_body_sha=$(sed -e 's/\r$//' -e 's/[[:space:]]+$//' "$body_file" | sha256sum | cut -d' ' -f1); then
+            echo "::error::❌-check-fix: impossibile calcolare il digest del body PR dopo Claude → classificazione BLOCCANTE, job ROSSO."
+            exit 1
+          fi
+          empty_body_sha=$(printf '' | sha256sum | cut -d' ' -f1)
+          if [ "$now_body_sha" = "$empty_body_sha" ]; then
+            echo "::error::❌-check-fix: la risposta API del body PR dopo Claude e' vuota o non verificabile → classificazione BLOCCANTE, job ROSSO."
             exit 1
           fi
           if ! printf '%s\n' "$now_body_sha" | grep -Eq '^[0-9a-f]{64}$'; then

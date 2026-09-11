@@ -24,6 +24,7 @@ import { fileURLToPath } from 'node:url';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const WORKFLOW = readFileSync(path.join(ROOT, '.github/workflows/pr-redcheck-fixer.yml'), 'utf8');
+const REDFLAG_WORKFLOW = readFileSync(path.join(ROOT, '.github/workflows/pr-redflag-fixer.yml'), 'utf8');
 const CLASSIFY_NAME = 'Classify outcome (work-done, not CLI exit)';
 
 function stepBlock(name) {
@@ -53,7 +54,7 @@ function fakeExecutable(dir, name, source) {
   chmodSync(file, 0o755);
 }
 
-function runClassifier({ baseBody, currentBody }) {
+function runClassifier({ baseBody, currentBody, baseBodySha = sha256(baseBody), baseCaptureOutcome = 'success' }) {
   const temp = mkdtempSync(path.join(os.tmpdir(), 'pr-redcheck-outcome-'));
   const bin = path.join(temp, 'bin');
   mkdirSync(bin);
@@ -84,8 +85,8 @@ esac
         HEAD_REF: 'fix/body-outcome',
         BASE_SHA: 'base-sha',
         BASE_COMMENTS: '0',
-        BASE_BODY_SHA: sha256(baseBody),
-        BASE_CAPTURE_OUTCOME: 'success',
+        BASE_BODY_SHA: baseBodySha,
+        BASE_CAPTURE_OUTCOME: baseCaptureOutcome,
         CLAUDE_OUTCOME: 'success',
         FAKE_HEAD: 'base-sha',
         FAKE_REMOTE: 'base-sha',
@@ -101,12 +102,55 @@ esac
   }
 }
 
+function runBaseCapture({ body }) {
+  const temp = mkdtempSync(path.join(os.tmpdir(), 'pr-redcheck-base-'));
+  const bin = path.join(temp, 'bin');
+  mkdirSync(bin);
+  const output = path.join(temp, 'github-output');
+
+  fakeExecutable(bin, 'git', String.raw`
+case "$1 $2" in
+  "rev-parse HEAD") printf '%s\n' 'base-sha' ;;
+  *) exit 64 ;;
+esac
+`);
+  fakeExecutable(bin, 'gh', String.raw`
+case "$*" in
+  */issues/*/comments*) printf '0\n' ;;
+  */pulls/*) printf '%s' "$FAKE_BODY" ;;
+  *) exit 64 ;;
+esac
+`);
+
+  try {
+    return spawnSync('/bin/bash', ['-c', runScript(stepBlock('Record base SHA (pre-Claude)'))], {
+      cwd: temp,
+      env: {
+        ...process.env,
+        PATH: `${bin}:${process.env.PATH}`,
+        REPO: 'example/repo',
+        PR_NUMBER: '7',
+        RUNNER_TEMP: temp,
+        GITHUB_OUTPUT: output,
+        FAKE_BODY: body,
+      },
+      encoding: 'utf8',
+      timeout: 10_000,
+    });
+  } finally {
+    rmSync(temp, { recursive: true, force: true });
+  }
+}
+
 test('il digest del body è acquisito prima e classificato fail-closed', () => {
   const base = stepBlock('Record base SHA (pre-Claude)');
   const classify = stepBlock(CLASSIFY_NAME);
 
   assert.match(base, /set -uo pipefail/, 'la lettura del body deve propagare gli errori della pipeline');
-  assert.match(base, /pulls\/\$PR_NUMBER[\s\S]*body_sha=/, 'la baseline deve salvare il digest del body della PR');
+  assert.match(base, /echo "body_sha=\$body_sha"/, 'la baseline deve salvare il digest del body della PR');
+  assert.match(base, /gh api[\s\S]*> "\$body_file"/, 'lo status di gh deve essere osservabile prima del digest');
+  assert.match(base, /if \[ "\$body_sha" = "\$empty_body_sha" \]; then[\s\S]{0,220}?exit 1/, 'la baseline deve rifiutare il digest del contenuto vuoto');
+  assert.match(base, /s\/\\r\$\/[\s\S]*s\/\[\[:space:\]\]\+\$\//, 'la baseline deve canonizzare CR e spazio in coda');
   assert.match(classify, /BASE_BODY_SHA: \$\{\{ steps\.base\.outputs\.body_sha \}\}/);
   assert.match(classify, /BASE_CAPTURE_OUTCOME: \$\{\{ steps\.base\.outcome \}\}/);
 
@@ -114,15 +158,51 @@ test('il digest del body è acquisito prima e classificato fail-closed', () => {
   const commentsAt = classify.indexOf('NOW_COMMENTS=');
   assert.ok(currentBodyAt !== -1 && commentsAt !== -1 && currentBodyAt < commentsAt,
     'il body deve essere confrontato prima del fallback sui commenti');
-  assert.match(
-    classify,
-    /BASE_CAPTURE_OUTCOME[\s\S]*?exit 1/,
-    'una baseline del body assente o invalida deve bloccare la classificazione',
-  );
+  assert.match(classify, /if \[ "\$now_body_sha" = "\$empty_body_sha" \]; then[\s\S]{0,240}?exit 1/, 'la lettura finale deve rifiutare il digest del contenuto vuoto');
+  assert.match(classify, /s\/\\r\$\/[\s\S]*s\/\[\[:space:\]\]\+\$\//, 'la lettura finale deve canonizzare CR e spazio in coda');
+  assert.match(classify, /if \[ "\$\{BASE_CAPTURE_OUTCOME:-\}" != "success" \][\s\S]{0,240}?exit 1/,
+    'la baseline deve essere ancorata al guard reale e restare bounded');
 
   const steps = [...WORKFLOW.matchAll(/^      - name: [^\n]*/gm)];
   assert.equal(steps.at(-1)?.[0].trimEnd(), `      - name: ${CLASSIFY_NAME}`,
     'il verdetto deve restare nell\'ultimo step');
+});
+
+test('la cattura baseline respinge una risposta body vuota anche con gh exit 0', () => {
+  const result = runBaseCapture({ body: '' });
+  assert.equal(result.status, 1,
+    `una risposta API vuota non può diventare una baseline valida:\nstdout=${result.stdout}\nstderr=${result.stderr}`);
+});
+
+test('la baseline fallita o il digest invalido bloccano prima del confronto body', () => {
+  const baseBody = '## Implementato\n\n- body iniziale';
+  const changedBody = `${baseBody}\n- correzione sostanziale`;
+
+  const failedCapture = runClassifier({
+    baseBody,
+    currentBody: changedBody,
+    baseCaptureOutcome: 'failure',
+  });
+  assert.equal(failedCapture.status, 1,
+    `una baseline fallita non può diventare progresso body-only:\nstdout=${failedCapture.stdout}\nstderr=${failedCapture.stderr}`);
+
+  const invalidDigest = runClassifier({
+    baseBody,
+    currentBody: changedBody,
+    baseBodySha: 'not-a-sha',
+  });
+  assert.equal(invalidDigest.status, 1,
+    `un digest invalido non può diventare progresso body-only:\nstdout=${invalidDigest.stdout}\nstderr=${invalidDigest.stderr}`);
+});
+
+test('i fixer di PR condividono il mutex sullo stesso branch', () => {
+  const groupOf = (source) => source.match(/^  group: (.+)$/m)?.[1];
+  const redcheckGroup = groupOf(WORKFLOW);
+  const redflagGroup = groupOf(REDFLAG_WORKFLOW);
+  assert.equal(redcheckGroup, redflagGroup,
+    'redcheck e redflag devono serializzare la stessa PR con la stessa chiave');
+  assert.match(redcheckGroup || '', /github\.event\.pull_request\.head\.ref/);
+  assert.match(redcheckGroup || '', /github\.event\.workflow_run\.head_branch/);
 });
 
 test('body cambiato è progresso, body identico è non-progresso', () => {
