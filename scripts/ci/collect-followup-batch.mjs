@@ -354,7 +354,28 @@ export function shouldTriageAfterCandidateGate({ hasCandidates, followupPartial 
 // proceed-safe batch behavior while surfacing missing/unloadable gates loudly.
 const gateFaults = new Map();
 const MODULE_LOAD_ERROR =
-  /ERR_MODULE_NOT_FOUND|ERR_UNSUPPORTED_DIR_IMPORT|ERR_UNKNOWN_FILE_EXTENSION|ERR_REQUIRE_ESM|SyntaxError|Cannot find (?:module|package)|does not provide an export named/;
+  /ERR_MODULE_NOT_FOUND|ERR_UNSUPPORTED_DIR_IMPORT|ERR_UNKNOWN_FILE_EXTENSION|ERR_REQUIRE_ESM|Cannot find (?:module|package)|does not provide an export named/;
+const LOAD_TIME_SYNTAX_ERROR =
+  /\bat (?:compileSourceTextModule|ModuleLoader\.(?:moduleStrategy|loadAndTranslate)|internalCompileFunction)\b/;
+const GATE_VERDICT =
+  /(?:^|\n)(?:is_followup_fix|followup_partial|has_candidates)=(?:true|false)(?:\n|$)/;
+const ERROR_DETAIL_LINE =
+  /^\s*(?:[A-Za-z_$][\w$]*\.)?(?:Error|[A-Z][A-Za-z]*Error)(?:\s+\[[^\]]+\])?:\s*/;
+
+function firstNonEmptyLine(text) {
+  return String(text || '').split('\n').find((line) => line.trim()) || '';
+}
+
+function firstMatchingLine(text, predicate) {
+  return String(text || '').split('\n').find((line) => predicate(line)) || '';
+}
+
+function isModuleLoadError(stderr, gatePath) {
+  if (MODULE_LOAD_ERROR.test(stderr)) return true;
+  const gateName = path.basename(gatePath);
+  const namesGate = stderr.includes(gatePath) || stderr.includes(gateName);
+  return namesGate && LOAD_TIME_SYNTAX_ERROR.test(stderr);
+}
 
 function recordGateFault(gate, kind, detail) {
   const key = `${gate}|${kind}`;
@@ -409,13 +430,27 @@ function runGateOutput(scriptName, prNumber) {
       env: { ...process.env, PR_NUMBER: String(prNumber), GITHUB_OUTPUT: '', GITHUB_STEP_SUMMARY: '' },
     });
   } catch (error) {
+    // A gate can publish its verdict and then fail while flushing an output or
+    // during cleanup. Preserve that real verdict before classifying the exit.
+    const stdout = String(error?.stdout || '');
+    if (GATE_VERDICT.test(stdout)) return stdout;
+
     const stderr = String(error?.stderr || '');
-    if (MODULE_LOAD_ERROR.test(stderr)) {
-      const line = stderr.split('\n').find((candidate) => MODULE_LOAD_ERROR.test(candidate)) || stderr;
+    // On some Node versions execFileSync puts the captured diagnostic only in
+    // error.message. Search both surfaces so the annotation keeps the actual
+    // Error: line instead of the first file header.
+    const diagnostic = [stderr, String(error?.message || '')].filter(Boolean).join('\n');
+    if (isModuleLoadError(diagnostic, gatePath)) {
+      const line = (
+        firstMatchingLine(diagnostic, (candidate) => MODULE_LOAD_ERROR.test(candidate)) ||
+        firstMatchingLine(diagnostic, (candidate) => ERROR_DETAIL_LINE.test(candidate)) ||
+        firstNonEmptyLine(diagnostic)
+      );
       recordGateFault(scriptName, 'non caricabile', line.trim().slice(0, 200));
     } else {
       const detail = (
-        stderr.split('\n').find((line) => line.trim()) ||
+        firstMatchingLine(diagnostic, (line) => ERROR_DETAIL_LINE.test(line)) ||
+        firstNonEmptyLine(diagnostic) ||
         error?.message ||
         `uscita non-zero (${error?.status ?? error?.code ?? 'sconosciuta'})`
       ).trim().slice(0, 200);
