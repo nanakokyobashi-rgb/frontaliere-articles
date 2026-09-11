@@ -131,14 +131,22 @@ export function matchingDelimiter(src, openIdx) {
  * Mask comments and string/template literals without changing offsets.
  * Declaration matching is lexical: a phrase that looks like
  * `export const IDS = [` inside either surface is not a declaration.
+ * `preserveStrings` is used by the removal probe: it still masks comments,
+ * while retaining quoted array expressions so an unsupported literal shape
+ * remains an error instead of being mistaken for an absent id.
  */
-function maskNonCode(src) {
+function maskNonCode(src, { preserveStrings = false } = {}) {
   const out = Array.from(src, (ch) => (ch === '\n' || ch === '\r' ? ch : ' '));
   let quote = null;
   for (let i = 0; i < src.length; i += 1) {
     const ch = src[i];
     if (quote !== null) {
-      if (ch === '\\') { i += 1; continue; }
+      if (preserveStrings) out[i] = ch;
+      if (ch === '\\') {
+        if (preserveStrings && i + 1 < src.length) out[i + 1] = src[i + 1];
+        i += 1;
+        continue;
+      }
       if (ch === quote) quote = null;
       continue;
     }
@@ -156,6 +164,7 @@ function maskNonCode(src) {
     }
     if (ch === "'" || ch === '"' || ch === '`') {
       quote = ch;
+      if (preserveStrings) out[i] = ch;
       continue;
     }
     out[i] = ch;
@@ -227,7 +236,7 @@ export function removeFromIdListLiteral(src, varName, id) {
     // retirement) from an id still present in a literal shape this helper
     // does not understand. The caller may tolerate only the former; silently
     // accepting the latter would leave the id in the published union.
-    if (new RegExp(quotedId).test(body)) {
+    if (new RegExp(quotedId).test(maskNonCode(body, { preserveStrings: true }))) {
       throw new Error(`array ${varName}: id ${JSON.stringify(id)} è presente ma il letterale ha una forma non riconosciuta`);
     }
     const error = new Error(`array ${varName}: id atteso ${JSON.stringify(id)} non trovato nel letterale`);

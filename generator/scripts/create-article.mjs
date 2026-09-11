@@ -4917,6 +4917,16 @@ const DETERMINISTIC_BODY_HEURISTIC_CODES = new Set([
   'leaked-prompt-scaffolding',
 ]);
 
+// Among major findings, only these two are deterministic cross-locale
+// evidence that a producer must not publish. Other major findings can be
+// useful diagnostics for a structured producer, but are not promoted to a
+// publication block here; in particular this keeps Italian-adjudicated
+// declassifications and policy heuristics out of the deterministic bypass.
+const DETERMINISTIC_MAJOR_BLOCKING_CODES = new Set([
+  'translation-number-dropped',
+  'translation-number-added',
+]);
+
 function runArticleFactualityGates({ deterministicBodySections = [], ...params } = {}) {
   const result = runFactualityGates(params);
   const deterministic = new Set(Array.isArray(deterministicBodySections) ? deterministicBodySections : []);
@@ -4931,11 +4941,12 @@ function runArticleFactualityGates({ deterministicBodySections = [], ...params }
     });
   });
   // Deterministic producers are allowed to emit structured fragments that
-  // look incomplete to the prose heuristics. After that narrow exemption,
-  // keep both critical and major factuality issues publication-blocking: a
-  // translation-number-dropped/added finding is semantic evidence, not prose
-  // shape noise, even when it appears in a bulletin or ranking.
-  const blocking = issues.filter((issue) => issue.severity === 'critical' || issue.severity === 'major');
+  // look incomplete to the prose heuristics. Critical policy/factuality
+  // findings remain blocking; among major findings, only the explicit
+  // translation-number checks are deterministic semantic evidence rather
+  // than a producer-specific prose/policy diagnostic.
+  const blocking = issues.filter((issue) => issue.severity === 'critical'
+    || (issue.severity === 'major' && DETERMINISTIC_MAJOR_BLOCKING_CODES.has(issue.code)));
   return { ...result, issues, blocking, passed: blocking.length === 0 };
 }
 

@@ -206,6 +206,19 @@ test('un id presente in una forma non riconosciuta fa fallire anche il chiamante
   });
 });
 
+test('un id citato solo in un commento è davvero assente', () => {
+  const src = [
+    "export const IDS: string[] = [lookup('altro')];",
+    "// 'mai-esistito' non è una voce del letterale",
+    '',
+  ].join('\n');
+  assert.throws(() => removeFromIdListLiteral(src, 'IDS', 'mai-esistito'), (error) => {
+    assert.equal(error.code, 'ID_LIST_ENTRY_MISSING');
+    assert.match(error.message, /id atteso .*mai-esistito.*non trovato/);
+    return true;
+  });
+});
+
 test('un elenco DERIVATO non e\' un letterale: nessuna finestra, nessuna riscrittura', () => {
   // La sezione svizzera fa cosi'. `create-article.mjs` deve saltare il blocco
   // (span `null`) invece di inventarsi un array da riscrivere.

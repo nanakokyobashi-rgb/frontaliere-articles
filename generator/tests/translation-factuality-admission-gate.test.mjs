@@ -87,6 +87,7 @@ const CONTENT_BODY_FIELDS_SRC = cutFunction('coerceContentBodyFields', ['coerceB
 const ADMISSION_SRC = cutFunction('runArticleFactualityGates', [
   'runFactualityGates',
   'DETERMINISTIC_BODY_HEURISTIC_CODES',
+  'DETERMINISTIC_MAJOR_BLOCKING_CODES',
 ]);
 
 /** Istanzia la funzione vera con le sue dipendenze di chiusura iniettate. */
@@ -96,15 +97,22 @@ function makeGate() {
     'formatIssues',
     'console',
     'DETERMINISTIC_BODY_HEURISTIC_CODES',
+    'DETERMINISTIC_MAJOR_BLOCKING_CODES',
     `${SECTIONS_SRC}\n${ADMISSION_SRC}\n${GATE_SRC}\nreturn assertTranslationsPassFactualityGates;`,
   );
   // console silenziata: il gate stampa i rilievi, non deve sporcare l'output.
-  return factory(runFactualityGates, formatIssues, { error: () => {} }, new Set([
-    'unbalanced-parentheses',
-    'truncated-bold',
-    'incomplete-ending',
-    'leaked-prompt-scaffolding',
-  ]));
+  return factory(
+    runFactualityGates,
+    formatIssues,
+    { error: () => {} },
+    new Set([
+      'unbalanced-parentheses',
+      'truncated-bold',
+      'incomplete-ending',
+      'leaked-prompt-scaffolding',
+    ]),
+    new Set(['translation-number-dropped', 'translation-number-added']),
+  );
 }
 
 /**
@@ -244,11 +252,16 @@ test('#1261 un produttore deterministico esenta solo euristiche di forma', () =>
   const factory = new Function(
     'runFactualityGates',
     'DETERMINISTIC_BODY_HEURISTIC_CODES',
+    'DETERMINISTIC_MAJOR_BLOCKING_CODES',
     `${ADMISSION_SRC}\nreturn runArticleFactualityGates;`,
   );
   const runGate = factory(() => ({
     issues: [
       { code: 'structured-major', severity: 'major', message: '[body1] frammento strutturato' },
+      { code: 'unknown-institution', severity: 'major', message: '[body1] sigla non verificata' },
+      { code: 'tax-implausible', severity: 'major', message: '[body1] importo atipico' },
+      { code: 'translation-number-dropped', severity: 'major', message: '[body1] numero perso' },
+      { code: 'translation-number-added', severity: 'major', message: '[body1] numero aggiunto' },
       { code: 'critical-fact', severity: 'critical', message: '[body1] fatto incoerente' },
     ],
     blocking: [],
@@ -258,9 +271,13 @@ test('#1261 un produttore deterministico esenta solo euristiche di forma', () =>
     'truncated-bold',
     'incomplete-ending',
     'leaked-prompt-scaffolding',
-  ]));
+  ]), new Set(['translation-number-dropped', 'translation-number-added']));
   const result = runGate({ locale: 'it', deterministicBodySections: ['body1'] });
-  assert.deepEqual(result.blocking.map((issue) => issue.code), ['structured-major', 'critical-fact']);
+  assert.deepEqual(result.blocking.map((issue) => issue.code), [
+    'translation-number-dropped',
+    'translation-number-added',
+    'critical-fact',
+  ]);
   assert.equal(result.passed, false);
 });
 
