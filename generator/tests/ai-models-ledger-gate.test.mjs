@@ -83,6 +83,21 @@ const SRC = readFileSync(new URL('../scripts/lib/ai-models.mjs', import.meta.url
 // svuotate e non tolte, cosi' i numeri di riga restano quelli del file.
 const SRC_CODE = stripCommentLines(SRC);
 
+/**
+ * Trova ogni chiamata a un metodo di un binding, compresi optional chaining e
+ * chiavi statiche computed. `matchAll` e' intenzionale: piu' mutazioni sulla
+ * stessa riga sono piu' ingressi, non una sola occorrenza da consumare con
+ * `RegExp#exec`.
+ */
+function mutationMethods(text, identifier) {
+  const escaped = identifier.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const re = new RegExp(
+    `(?<![\\w$.])${escaped}(?:(?:\\?\\.|\\.)([A-Za-z_$][\\w$]*)|\\[\\s*(['"])([A-Za-z_$][\\w$]*)\\2\\s*\\])\\s*\\(`,
+    'g',
+  );
+  return [...text.matchAll(re)].map((match) => match[1] ?? match[3]);
+}
+
 const ENV_KEYS = [
   'AI_MODELS_FORCE_CHAIN', 'AI_MODELS_PREFER', 'GH_MODELS_PAT',
   'OMNIROUTE_ENABLED', 'OMNIROUTE_URL', 'LOCAL_LLM_ENABLED', 'LOCAL_LLM_URL',
@@ -175,8 +190,6 @@ describe('#874/#864/#845 — una sola porta di scrittura verso ai_model_scores/_
       'resetState',
     ],
   };
-  const MUTAZIONI_DIRTY_MODELS = new RegExp(`(?<![\\w.])_dirtyModels\\.(${Object.keys(SCRITTORI_DIRTY_MODELS).join('|')})\\(`);
-
   it('ogni riferimento a `_dirtyModels` sta in una funzione dell\'allowlist (#1047)', () => {
     const { scoperti, fantasmi, riferimenti } = pinIdentifierToFunctions(SRC, '_dirtyModels', PORTE_DIRTY_MODELS);
 
@@ -195,12 +208,11 @@ describe('#874/#864/#845 — una sola porta di scrittura verso ai_model_scores/_
 
     // La MUTAZIONE resta pinnata anche per FORMA: nominare il Set e scriverlo
     // sono due diritti diversi, e i lettori dell'allowlist hanno solo il primo.
-    const scritture = riferimenti
-      .map((r) => ({ ...r, metodo: MUTAZIONI_DIRTY_MODELS.exec(r.text)?.[1] }))
-      .filter(({ metodo }) => metodo);
+    const scritture = riferimenti.flatMap((r) => mutationMethods(r.text, '_dirtyModels')
+      .map((metodo) => ({ ...r, metodo })));
     assert.deepEqual(
       scritture
-        .filter(({ metodo, fn }) => !SCRITTORI_DIRTY_MODELS[metodo].includes(fn))
+        .filter(({ metodo, fn }) => !SCRITTORI_DIRTY_MODELS[metodo]?.includes(fn))
         .map(({ line, text, fn }) => `${line}: ${text} [in ${fn}]`),
       [],
       'una mutazione di _dirtyModels fuori dai suoi scrittori: e\' un secondo ingresso sul documento condiviso '
@@ -211,6 +223,11 @@ describe('#874/#864/#845 — una sola porta di scrittura verso ai_model_scores/_
       4,
       `le mutazioni del Set devono restare quattro (add nella porta e nel rimessaggio, clear prima dello spedire e `
       + `nel reset), trovate ${scritture.length}: ${scritture.map((s) => `${s.line} [in ${s.fn}]`).join(', ')}`,
+    );
+    assert.deepEqual(
+      scritture.map(({ metodo }) => metodo).sort(),
+      ['add', 'add', 'clear', 'clear'],
+      'il pin deve riconoscere tutte le mutazioni, non solo la prima per riga',
     );
   });
 
@@ -236,6 +253,29 @@ describe('#874/#864/#845 — una sola porta di scrittura verso ai_model_scores/_
       pin(`${base}function scorciatoia() {\n  return _dirtyModels.add.bind(_dirtyModels);\n}\n`).scoperti,
       ['6: return _dirtyModels.add.bind(_dirtyModels); [in scorciatoia]'],
       'un metodo BINDATO fuori dalla porta deve far rosso',
+    );
+    assert.deepEqual(
+      pin(`${base}function scorciatoia(id) {\n  _dirtyModels?.add(id);\n}\n`).scoperti,
+      ['6: _dirtyModels?.add(id); [in scorciatoia]'],
+      'un accesso con optional chaining deve far rosso quanto la forma puntata',
+    );
+    assert.deepEqual(
+      pin(`${base}function scorciatoia(id) {\n  _dirtyModels['add'](id);\n}\n`).scoperti,
+      ["6: _dirtyModels['add'](id); [in scorciatoia]"],
+      'un accesso computed statico deve far rosso quanto la forma puntata',
+    );
+    const formeMutazione = 'const _dirtyModels = new Set();\n'
+      + 'function _proposeLedgerWrite(id) {\n'
+      + '  _dirtyModels?.add(id); _dirtyModels["add"](id);\n'
+      + '}\n';
+    const formeRefs = pinIdentifierToFunctions(formeMutazione, '_dirtyModels', {
+      functions: ['_proposeLedgerWrite'],
+      declaration: /^const _dirtyModels = new Set\(\);$/,
+    }).riferimenti;
+    assert.deepEqual(
+      formeRefs.flatMap((r) => mutationMethods(r.text, '_dirtyModels')),
+      ['add', 'add'],
+      'il contatore deve vedere due mutazioni sulla stessa riga, incluse optional e computed',
     );
     assert.deepEqual(
       pin(`${base}function scorciatoia(id) {\n  riempi([..._dirtyModels], id);\n}\n`).scoperti,
@@ -276,6 +316,20 @@ describe('#874/#864/#845 — una sola porta di scrittura verso ai_model_scores/_
       }).scoperti,
       [],
       'una citazione in un commento non e\' un uso',
+    );
+
+    const inline = 'const _dirtyModels = new Set();\n'
+      + 'function _proposeLedgerWrite(id) {\n'
+      + '  _dirtyModels.add(id); // _dirtyModels.add("commento")\n'
+      + '}\n';
+    const inlinePin = pinIdentifierToFunctions(inline, '_dirtyModels', {
+      functions: ['_proposeLedgerWrite'],
+      declaration: /^const _dirtyModels = new Set\(\);$/,
+    });
+    assert.deepEqual(
+      inlinePin.riferimenti.map(({ text }) => text),
+      ['const _dirtyModels = new Set();', '_dirtyModels.add(id);'],
+      'un commento inline non deve diventare una seconda mutazione sulla stessa riga',
     );
 
     assert.throws(
@@ -989,6 +1043,16 @@ describe('#895 — il memo del cap appreso e la porta del ledger sono due cose d
     },
   };
 
+  // Nominare la coppia e mutarla sono due diritti diversi anche qui. In
+  // particolare `delete` non e' una lettura: consentirlo a
+  // `_shouldSkipExhausted` riaprirebbe il secondo writer che questo pin deve
+  // impedire. `clear` resta confinato al reset, mentre entrambe le `.set` sono
+  // della porta `_setExhaustReason`.
+  const SCRITTORI_EXHAUST = {
+    _exhaustReason: { set: ['_setExhaustReason'], delete: [], clear: ['resetState'] },
+    _exhaustDetail: { set: ['_setExhaustReason'], delete: [], clear: ['resetState'] },
+  };
+
   it('nel sorgente la CAUSA dell\'esaurimento si scrive solo dentro _setExhaustReason', () => {
     for (const [nome, porte] of Object.entries(PORTE_EXHAUST)) {
       const { scoperti, fantasmi, riferimenti } = pinIdentifierToFunctions(SRC, nome, porte);
@@ -1004,18 +1068,47 @@ describe('#895 — il memo del cap appreso e la porta del ledger sono due cose d
     }
 
     // La scrittura vera e propria resta pinnata anche per FORMA: la porta e'
-    // una, e le due `.set(` che la compongono devono stare li' dentro.
-    const scritture = pinIdentifierToFunctions(SRC, '_exhaustReason', { functions: [], declaration: /^$/ })
-      .riferimenti.concat(
-        pinIdentifierToFunctions(SRC, '_exhaustDetail', { functions: [], declaration: /^$/ }).riferimenti,
-      )
-      .filter(({ text }) => /(?<![\w.])_exhaust(Reason|Detail)\.set\(/.test(text));
+    // una, e tutte le mutazioni (`set`, `delete`, `clear`) devono rispettare
+    // la tabella metodo→funzione, non solo le due `.set(` che esistono oggi.
+    const scritture = Object.entries(SCRITTORI_EXHAUST).flatMap(([nome]) =>
+      pinIdentifierToFunctions(SRC, nome, PORTE_EXHAUST[nome]).riferimenti.flatMap((r) =>
+        mutationMethods(r.text, nome)
+          .filter((metodo) => ['set', 'delete', 'clear'].includes(metodo))
+          .map((metodo) => ({ ...r, nome, metodo }))));
     assert.deepEqual(
-      scritture.filter(({ fn }) => fn !== '_setExhaustReason').map(({ line, text, fn }) => `${line}: ${text} [in ${fn}]`),
+      scritture
+        .filter(({ nome, metodo, fn }) => !SCRITTORI_EXHAUST[nome]?.[metodo]?.includes(fn))
+        .map(({ line, text, fn }) => `${line}: ${text} [in ${fn}]`),
       [],
-      'una `.set(` sulla coppia della causa fuori da _setExhaustReason',
+      'una mutazione sulla coppia della causa fuori dalla funzione autorizzata',
     );
-    assert.equal(scritture.length, 2, `dentro la porta devono restare le due scritture, trovate ${scritture.length}`);
+    assert.deepEqual(
+      scritture.map(({ nome, metodo, fn }) => `${nome}.${metodo}:${fn}`).sort(),
+      [
+        '_exhaustDetail.clear:resetState',
+        '_exhaustDetail.set:_setExhaustReason',
+        '_exhaustReason.clear:resetState',
+        '_exhaustReason.set:_setExhaustReason',
+      ],
+      'la tabella deve contare ogni mutazione, anche clear, senza concedere delete ai lettori',
+    );
+
+    const lettore = 'const _exhaustReason = new Map();\n'
+      + 'function _setExhaustReason(model, reason) {\n  _exhaustReason.set(model, reason);\n}\n'
+      + 'function _shouldSkipExhausted(model) {\n  _exhaustReason.delete(model);\n}\n';
+    const lettoreRefs = pinIdentifierToFunctions(lettore, '_exhaustReason', {
+      functions: ['_setExhaustReason', '_shouldSkipExhausted'],
+      declaration: /^const _exhaustReason = new Map\(\);$/,
+    }).riferimenti;
+    const violazioneLettore = lettoreRefs.flatMap((r) => mutationMethods(r.text, '_exhaustReason')
+      .filter((metodo) => ['set', 'delete', 'clear'].includes(metodo))
+      .map((metodo) => ({ ...r, metodo })))
+      .filter(({ metodo, fn }) => !SCRITTORI_EXHAUST._exhaustReason[metodo]?.includes(fn));
+    assert.deepEqual(
+      violazioneLettore.map(({ text, fn }) => `${text} [in ${fn}]`),
+      ['_exhaustReason.delete(model); [in _shouldSkipExhausted]'],
+      'un delete dentro un lettore deve essere rosso, anche se il pin di scope lo conosce',
+    );
   });
 
   it('resetState() non lascia in piedi il DETTAGLIO di una causa appena buttata via', async () => {

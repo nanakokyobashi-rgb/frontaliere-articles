@@ -48,8 +48,6 @@
  * rosso. Un pin che nessuno ha mai visto dire di no non e' una prova.
  */
 
-import { stripCommentLines } from './env-reads.mjs';
-
 /** Il nome fittizio dello scope di modulo. */
 export const TOP_LEVEL = '(top-level)';
 
@@ -212,11 +210,150 @@ export function enclosingFunctionByLine(src) {
 }
 
 /**
+ * Lascia intatto il codice e sostituisce commenti e letterali con spazi,
+ * conservando i newline. Il pin deve cercare un identificatore nel CODICE:
+ * una citazione in un commento inline, una stringa, un regex literal o il
+ * testo di un template non e' un riferimento al binding del modulo.
+ *
+ * Le espressioni `${...}` dei template tornano nel lettore `code`, quindi un
+ * riferimento vero dentro un'interpolazione resta visibile. La stessa
+ * grammatica a stati di `enclosingFunctionByLine` impedisce a `//` dentro un
+ * regex o a graffe dentro una stringa di cambiare il confine del codice.
+ */
+function maskNonCode(src, { preserveStrings = false } = {}) {
+  // Keep UTF-16 indexing aligned with `src`: `[...src]` collapses surrogate
+  // pairs, so one emoji in an earlier comment would shift every later mask.
+  const masked = src.split('');
+  const blank = (i) => { if (masked[i] !== '\n') masked[i] = ' '; };
+  const templateDepths = [];
+  let depth = 0;
+  let state = 'code';
+
+  for (let i = 0; i < src.length; i++) {
+    const c = src[i];
+    if (c === '\n') {
+      if (state === 'line') state = 'code';
+      continue;
+    }
+
+    switch (state) {
+      case 'line':
+        blank(i);
+        continue;
+      case 'block':
+        blank(i);
+        if (c === '*' && src[i + 1] === '/') {
+          blank(i + 1);
+          i++;
+          state = 'code';
+        }
+        continue;
+      case 'sq':
+      case 'dq':
+        if (!preserveStrings) blank(i);
+        if (c === '\\' && i + 1 < src.length) {
+          if (!preserveStrings) blank(i + 1);
+          i++;
+        } else if (c === (state === 'sq' ? "'" : '"')) {
+          state = 'code';
+        }
+        continue;
+      case 'regex':
+        blank(i);
+        if (c === '\\' && i + 1 < src.length) {
+          blank(i + 1);
+          i++;
+        } else if (c === '[') {
+          state = 'class';
+        } else if (c === '/') {
+          state = 'code';
+        }
+        continue;
+      case 'class':
+        blank(i);
+        if (c === '\\' && i + 1 < src.length) {
+          blank(i + 1);
+          i++;
+        } else if (c === ']') {
+          state = 'regex';
+        }
+        continue;
+      case 'tpl':
+        blank(i);
+        if (c === '\\' && i + 1 < src.length) {
+          blank(i + 1);
+          i++;
+        } else if (c === '`') {
+          state = 'code';
+        } else if (c === '$' && src[i + 1] === '{') {
+          blank(i + 1);
+          i++;
+          templateDepths.push(depth);
+          depth++;
+          state = 'code';
+        }
+        continue;
+      default:
+        break;
+    }
+
+    if (c === '/' && src[i + 1] === '/') {
+      blank(i);
+      blank(i + 1);
+      i++;
+      state = 'line';
+      continue;
+    }
+    if (c === '/' && src[i + 1] === '*') {
+      blank(i);
+      blank(i + 1);
+      i++;
+      state = 'block';
+      continue;
+    }
+    if (c === "'") {
+      if (!preserveStrings) blank(i);
+      state = 'sq';
+      continue;
+    }
+    if (c === '"') {
+      if (!preserveStrings) blank(i);
+      state = 'dq';
+      continue;
+    }
+    if (c === '`') {
+      blank(i);
+      state = 'tpl';
+      continue;
+    }
+    if (c === '/' && isRegexStart(src, i)) {
+      blank(i);
+      state = 'regex';
+      continue;
+    }
+    if (c === '{') {
+      depth++;
+      continue;
+    }
+    if (c === '}') {
+      depth--;
+      if (templateDepths.length && templateDepths.at(-1) === depth) {
+        templateDepths.pop();
+        state = 'tpl';
+      }
+    }
+  }
+
+  return masked.join('');
+}
+
+/**
  * Ogni riferimento all'identificatore NUDO `name` in `src`, con la funzione che
- * lo contiene. Le righe di solo commento sono svuotate prima del confronto (un
- * sorgente che cita il proprio codice in prosa non lo sta usando), mentre
- * l'attribuzione riga→funzione legge il sorgente INTERO, dove i commenti sono
- * riconosciuti dal lettore a stati e non possono sfasare le graffe.
+ * lo contiene. Prima del confronto il lettore a stati svuota i commenti a
+ * livello di carattere (anche quando sono in coda a una riga), mentre
+ * `codeText` conserva solo il codice per non contare un identificatore dentro
+ * una stringa. `text` conserva le stringhe statiche necessarie a riconoscere
+ * una mutazione computed come `_dirtyModels['add'](`.
  *
  * `foo._dirtyModels` non conta: e' la proprieta' di qualcun altro, non questo
  * binding di modulo.
@@ -231,10 +368,17 @@ export function identifierReferences(src, name) {
   // dell'accesso a proprieta' ma non i tre dello spread, che e' esattamente la
   // forma con cui il Set viene passato a una helper.
   const re = new RegExp(`(?<![\\w$])(?<!(?<!\\.\\.)\\.)${name.replace(/[$]/g, '\\$&')}\\b`);
-  return stripCommentLines(src)
+  const code = maskNonCode(src);
+  const codeLines = code.split('\n');
+  return maskNonCode(src, { preserveStrings: true })
     .split('\n')
-    .map((text, i) => ({ line: i + 1, text: text.trim(), fn: owner[i + 1] ?? TOP_LEVEL }))
-    .filter(({ text }) => re.test(text));
+    .map((text, i) => ({
+      line: i + 1,
+      text: text.trim(),
+      codeText: codeLines[i].trim(),
+      fn: owner[i + 1] ?? TOP_LEVEL,
+    }))
+    .filter(({ codeText }) => re.test(codeText));
 }
 
 /**
