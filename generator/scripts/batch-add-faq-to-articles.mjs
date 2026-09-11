@@ -34,7 +34,14 @@ import { reportStrippedControlChars } from './lib/control-char-write-report.mjs'
 import { callLLM, callSingleModel, AI_MODELS, initScoreStore, getStats, flushScores, resetExhaustedModel, printRunSummary } from './lib/ai-models.mjs';
 import { freeTranslateWithRetry, logCascadeSummary } from './lib/free-translate.mjs';
 import { stripCodeFences, findMatchingClose, fixJsonStringBody, JSON_QUOTE_SAFETY_RULE_IT, describeJsonParseError, describeRawForDiagnostics } from './lib/llm-json-repair.mjs';
-import { belowFaqFloor, filterWrongLocalePairs, MIN_FAQ_PAIRS, minPairsForWrite, wrongLocalePair } from './fix-faq-locales.mjs';
+import {
+  belowFaqFloor,
+  filterWrongLocalePairs,
+  MIN_FAQ_PAIRS,
+  minPairsForWrite,
+  parseFaqLimitArgs,
+  wrongLocalePair,
+} from './fix-faq-locales.mjs';
 import { unescapeTsString } from './lib/unescape-ts-string.mjs';
 
 // ── CLI argument parsing ─────────────────────────────────────
@@ -49,7 +56,15 @@ function getArg(name) {
 const HELP = args.includes('--help') || args.includes('-h');
 const DRY_RUN = args.includes('--dry-run');
 const SKIP_TRANSLATE = args.includes('--skip-translate');
-const LIMIT = getArg('--limit') ? parseInt(getArg('--limit'), 10) : Infinity;
+function parseLimitOrExit(argv) {
+  try {
+    return parseFaqLimitArgs(argv);
+  } catch (err) {
+    console.error(`Invalid --limit: ${err.message}`);
+    process.exit(2);
+  }
+}
+const LIMIT = parseLimitOrExit(args);
 const CONCURRENCY = getArg('--concurrency') ? parseInt(getArg('--concurrency'), 10) : 3;
 
 // ── Section selection (--section=frontaliere|svizzera, default frontaliere) ──
