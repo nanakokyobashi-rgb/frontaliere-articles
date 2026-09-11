@@ -21,6 +21,7 @@
  */
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
+import { spawnSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -34,6 +35,7 @@ import {
   faqSourceFingerprint,
   minPairsForWrite,
   nextFaqRejection,
+  parseFaqLimitArgs,
   normalizeFaqLimit,
   selectFaqIssuesForProcessing,
   shouldSkipFaqRejection,
@@ -45,10 +47,41 @@ const FIX = path.join(QUI, '..', 'scripts', 'fix-faq-locales.mjs');
 
 const pairs = (n) => Array.from({ length: n }, (_, i) => ({ q: `domanda ${i}`, a: `risposta ${i}` }));
 
-test('un limite FAQ assente o non numerico non trasforma il batch in uno slice vuoto', () => {
+test('il limite FAQ assente resta illimitato, gli input invalidi falliscono chiusi', () => {
   assert.equal(normalizeFaqLimit(undefined), Infinity);
-  assert.equal(normalizeFaqLimit('non-numerico'), Infinity);
+  assert.equal(parseFaqLimitArgs([]), Infinity);
+  assert.equal(normalizeFaqLimit('0'), 0);
   assert.equal(normalizeFaqLimit('2'), 2);
+  assert.throws(() => normalizeFaqLimit('non-numerico'), /intero >= 0/);
+  assert.throws(() => normalizeFaqLimit('-1'), /intero >= 0/);
+  assert.throws(() => parseFaqLimitArgs(['--limit']), /richiede un valore/);
+  assert.throws(() => parseFaqLimitArgs(['--limit', '--dry-run']), /richiede un valore/);
+});
+
+test('i due entry point rifiutano --limit invalido con exit code 2', () => {
+  for (const file of [FIX, BATCH]) {
+    for (const value of ['--dry-run', '-1']) {
+      const result = spawnSync(process.execPath, [file, '--limit', value], {
+        encoding: 'utf8',
+        env: { ...process.env, DRY_RUN: '1' },
+      });
+      assert.equal(result.status, 2, `${path.basename(file)} --limit ${value} deve uscire 2`);
+      assert.match(result.stderr, /Invalid --limit/);
+    }
+  }
+});
+
+test('il batch writer rifiuta --concurrency invalido con exit code 2', () => {
+  for (const value of ['abc', '-1', '0', '--dry-run']) {
+    const result = spawnSync(process.execPath, [BATCH, '--concurrency', value], {
+      encoding: 'utf8',
+      env: { ...process.env, DRY_RUN: '1' },
+    });
+    assert.equal(result.status, 2, `batch --concurrency ${value} deve uscire 2`);
+    assert.match(result.stderr, /Invalid --concurrency/);
+  }
+  assert.match(fs.readFileSync(BATCH, 'utf-8'), /concurrencyIdx/);
+  assert.match(fs.readFileSync(BATCH, 'utf-8'), /return 3/);
 });
 
 test('il pavimento e\' MIN_FAQ_PAIRS quando la sorgente ne ha almeno altrettante', () => {
@@ -214,4 +247,6 @@ test('MIN_FAQ_PAIRS ha UNA sorgente sola', () => {
     /import \{[^}]*MIN_FAQ_PAIRS[^}]*\} from '\.\/fix-faq-locales\.mjs'/.test(batchSrc),
     'batch-add-faq-to-articles.mjs deve importare MIN_FAQ_PAIRS da fix-faq-locales.mjs',
   );
+  assert.match(batchSrc, /parseFaqLimitArgs/, 'il batch writer deve usare la stessa validazione del limite');
+  assert.match(fs.readFileSync(FIX, 'utf-8'), /parsePositiveNum/, 'il parser condiviso deve rifiutare input numerici non positivi');
 });

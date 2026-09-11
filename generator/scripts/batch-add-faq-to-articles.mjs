@@ -30,11 +30,19 @@ const __dirname = dirname(__filename);
 const ROOT = resolve(__dirname, '..', '..');
 import { corpusPath, resolveGitAddPath } from './lib/corpus-paths.mjs';
 import { sanitizeText } from '../../scripts/lib/sanitize-control-chars.mjs';
+import { parsePositiveNum } from '../../scripts/lib/parse-positive-num.mjs';
 import { reportStrippedControlChars } from './lib/control-char-write-report.mjs';
 import { callLLM, callSingleModel, AI_MODELS, initScoreStore, getStats, flushScores, resetExhaustedModel, printRunSummary } from './lib/ai-models.mjs';
 import { freeTranslateWithRetry, logCascadeSummary } from './lib/free-translate.mjs';
 import { stripCodeFences, findMatchingClose, fixJsonStringBody, JSON_QUOTE_SAFETY_RULE_IT, describeJsonParseError, describeRawForDiagnostics } from './lib/llm-json-repair.mjs';
-import { belowFaqFloor, filterWrongLocalePairs, MIN_FAQ_PAIRS, minPairsForWrite, wrongLocalePair } from './fix-faq-locales.mjs';
+import {
+  belowFaqFloor,
+  filterWrongLocalePairs,
+  MIN_FAQ_PAIRS,
+  minPairsForWrite,
+  parseFaqLimitArgs,
+  wrongLocalePair,
+} from './fix-faq-locales.mjs';
 import { unescapeTsString } from './lib/unescape-ts-string.mjs';
 
 // ── CLI argument parsing ─────────────────────────────────────
@@ -49,8 +57,46 @@ function getArg(name) {
 const HELP = args.includes('--help') || args.includes('-h');
 const DRY_RUN = args.includes('--dry-run');
 const SKIP_TRANSLATE = args.includes('--skip-translate');
-const LIMIT = getArg('--limit') ? parseInt(getArg('--limit'), 10) : Infinity;
-const CONCURRENCY = getArg('--concurrency') ? parseInt(getArg('--concurrency'), 10) : 3;
+function parseLimitOrExit(argv) {
+  try {
+    return parseFaqLimitArgs(argv);
+  } catch (err) {
+    console.error(`Invalid --limit: ${err.message}`);
+    process.exit(2);
+  }
+}
+const LIMIT = parseLimitOrExit(args);
+
+function parseConcurrencyArgs(argv) {
+  const concurrencyIdx = argv.indexOf('--concurrency');
+  if (concurrencyIdx < 0) return 3;
+  const value = argv[concurrencyIdx + 1];
+  if (value === undefined || value.startsWith('--')) {
+    throw new RangeError('--concurrency richiede un intero positivo');
+  }
+  const raw = String(value).trim();
+  if (!raw) throw new RangeError('--concurrency richiede un intero positivo');
+  const parsed = parsePositiveNum(raw, Number.NaN, {
+    label: '--concurrency',
+    integer: true,
+    warn: () => {},
+  });
+  if (!Number.isFinite(parsed) || parsed <= 0) {
+    throw new RangeError(`--concurrency richiede un intero positivo; ricevuto ${String(value)}`);
+  }
+  return parsed;
+}
+
+function parseConcurrencyOrExit(argv) {
+  try {
+    return parseConcurrencyArgs(argv);
+  } catch (err) {
+    console.error(`Invalid --concurrency: ${err.message}`);
+    process.exit(2);
+  }
+}
+
+const CONCURRENCY = parseConcurrencyOrExit(args);
 
 // ── Section selection (--section=frontaliere|svizzera, default frontaliere) ──
 // Switches the body-dir enumeration source between the cross-border and the
