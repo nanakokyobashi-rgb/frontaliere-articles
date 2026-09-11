@@ -8982,9 +8982,9 @@ export function classifyExhaustionCause(errors, { authoritative } = {}) {
       : text.length;
     const transientText = text.slice(0, transientWindow);
     const authoritativeBucket = authoritativeCauseBucket(entryAuthoritative);
-    const transientAt = causeIndex(transientRe, transientText);
     const persistentText = text;
     const persistentAt = causeIndex(PERSISTENT_EXHAUSTION_RE, persistentText);
+    const transientAt = causeIndex(transientRe, transientText);
     const isTransient = authoritativeBucket === 'transient'
       || (authoritativeBucket === null && transientAt >= 0 && (persistentAt < 0 || transientAt <= persistentAt));
     const isPersistent = authoritativeBucket === 'persistent'
