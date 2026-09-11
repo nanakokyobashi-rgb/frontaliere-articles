@@ -33,9 +33,12 @@ test('il titolo digest ambiguo non viene risolto scegliendo il primo risultato',
   );
   assert.match(
     step,
-    /DIGEST_MATCHES=\$\(gh search issues[\s\S]*?--json number,title --jq '[^']*\.title == env\.DIGEST_TITLE[^']*'/,
-    'la query deve raccogliere tutte le issue il cui titolo è quello esatto del digest',
+    /if ! DIGEST_MATCHES=\$\(gh api --paginate[\s\S]*?select\(\.title == env\.DIGEST_TITLE\)[^']*'/,
+    'la query paginata deve raccogliere tutte le issue il cui titolo è quello esatto del digest',
   );
+  assert.doesNotMatch(step, /gh search issues/, 'la ricerca non deve avere il cap implicito di gh search');
+  assert.match(step, /if \[ -z "\$\{N:-\}" \]; then[\s\S]*?exit 1/, 'zero digest deve essere un errore esplicito');
+  assert.doesNotMatch(step, /DIGEST_SEARCH_RC=\$\?/, 'il vecchio guard morto sotto errexit non deve tornare');
   assert.match(
     step,
     /DIGEST_MATCH_COUNT=.*(?:wc -l|length)/,
@@ -80,5 +83,7 @@ test('il valore del titolo digest è validato prima del prompt Claude e passato 
   const validationGuard = /if \[ "\$DIGEST_TITLE_VALIDATION" != "success" \]; then([\s\S]*?)\n\s+fi/.exec(outcome);
   assert.ok(validationGuard, 'il verdetto finale deve avere un guard sulla validazione del titolo');
   assert.match(validationGuard[1], /exit 1/, 'una validazione fallita deve lasciare rosso anche il verdetto finale');
-  assert.ok(outcome.indexOf('DIGEST_TITLE_VALIDATION') < outcome.indexOf('DIGEST_MATCHES='), 'il verdetto deve verificare il titolo prima di interrogare GitHub');
+  const validationGuardAt = outcome.indexOf('if [ "$DIGEST_TITLE_VALIDATION"');
+  const searchAt = outcome.indexOf('DIGEST_MATCHES=');
+  assert.ok(validationGuardAt !== -1 && searchAt !== -1 && validationGuardAt < searchAt, 'il verdetto deve verificare il titolo prima di interrogare GitHub');
 });
