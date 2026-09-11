@@ -12,6 +12,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { codeOnly, relativeImportSpec, createReachableSource } from './lib/reachable-source.mjs';
 
 const BT = '`';
@@ -179,6 +180,46 @@ test('codeOnly ricade sul sorgente non strippato quando lo scan finisce desincro
   assert.equal(out, src, 'nessuna riga viene toccata quando lo scan non e\' affidabile');
 });
 
+test('codeOnly attiva il fail-safe anche con due backtick dentro literal regex', () => {
+  // Due backtick in regex diverse richiudono la pila ingenua: il primo apre un
+  // template fantasma, il template vero lo chiude, e il secondo regex richiude
+  // la pila prima di EOF. Il file resta quindi verde ma una riga `//` emessa
+  // dal template vero viene persa.
+  const src = [
+    'const primo = /a' + BT + 'b/;',
+    'const body = ' + BT,
+    '  // path: content/services/locales/blog-body/it/x.ts',
+    BT + ';',
+    'const secondo = /c' + BT + 'd/;',
+  ].join('\n');
+  const out = codeOnly(src);
+  assert.equal(out, src,
+    'un backtick dentro un literal regex rende inaffidabile tutto lo scan, anche '
+    + 'quando la parita\' complessiva torna pari');
+});
+
+test('codeOnly non perde il marker di desincronizzazione prima di un commento in coda', () => {
+  const src = [
+    'const re = /a' + BT + 'b/; // la riga continua con un commento',
+    '// prosa che non va riscritta dopo uno scan incerto',
+  ].join('\n');
+  assert.equal(codeOnly(src), src,
+    'il ritorno anticipato sul commento non deve cancellare il fail-safe gia\' armato');
+});
+
+test('codeOnly conserva una stringa continuata con backslash a fine riga', () => {
+  const src = [
+    "const text = 'prima" + "\\",
+    '  // path: content/services/locales/blog-body/it/x.ts' + BT + "'",
+    '// prosa fuori dalla stringa: dist/api',
+  ].join('\n');
+  const out = codeOnly(src);
+  assert.match(out, /path: content\/services\/locales\/blog-body\/it\/x\.ts`/,
+    'la riga continuata e\' testo della stringa, non un commento da eliminare');
+  assert.doesNotMatch(out, /prosa fuori dalla stringa/,
+    'dopo la chiusura della stringa lo stripping riprende');
+});
+
 test('codeOnly chiude un blocco che finisce con un backslash prima di */', () => {
   // Il backslash NON e' un escape dentro `/* … */`: se lo scanner lo tratta
   // come tale la chiusura viene mancata e tutto il resto del file viene
@@ -244,6 +285,21 @@ test('un ciclo di import non tronca la sorgente per gli altri importatori', () =
   assert.match(reachable(path.join(dir, 'altro.mjs')), /blog-body/,
     'il taglio del ciclo non deve essere cacheato addosso a chi lo ha subito: '
     + 'il censimento resterebbe cieco su ogni importatore di quel modulo');
+});
+
+test('un nodo che rientra nel ciclo conserva almeno la propria sorgente', () => {
+  const dir = mkTree({
+    'a.mjs': "import './b.mjs';\nexport const a = 'a';",
+    'b.mjs': "import './a.mjs';\nexport const target = 'content/services/locales/blog-body/it/x.ts';",
+  });
+  const source = fs.readFileSync(
+    path.join(path.dirname(fileURLToPath(import.meta.url)), 'lib/reachable-source.mjs'),
+    'utf-8',
+  );
+  assert.match(source, /ancestors\.has\(file\)[\s\S]*text: ownSource/,
+    'il ramo di ri-entrata non deve restituire una sorgente vuota');
+  const reachable = createReachableSource();
+  assert.match(reachable(path.join(dir, 'a.mjs')), /blog-body/);
 });
 
 test('la cache resta condivisa fra rami fratelli che passano dallo stesso modulo', () => {

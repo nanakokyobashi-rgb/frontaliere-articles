@@ -32,21 +32,33 @@ import path from 'node:path';
 // resto del file. Su `create-article.mjs` succedeva davvero, e l'effetto era
 // che un centinaio di righe di commento veniva letto come testo emesso.
 //
-// Non c'e' riconoscimento dei literal regex: un backtick dentro una regex apre
-// un template fantasma, e da li' in poi la parita' e' invertita. NON e' una
-// direzione innocua per costruzione — il PROSSIMO backtick, quello di un
-// template VERO, chiude il fantasma, quindi il corpo del template vero viene
-// letto come CODICE e le sue righe emesse che iniziano con `//` o `/*` vengono
-// azzerate: perdere codice E' raggiungibile da qui. Il meccanismo e' gia' vivo
-// nel repo (`generator/scripts/lib/llm-payload-diagnostics.mjs:87`, `/```+\s*$/`).
-// Quello che rende sicura la direzione non e' il riconoscimento delle regex —
-// che richiederebbe l'euristica sul token precedente, e sbaglia nella direzione
-// pericolosa — ma il fail-safe di fine file in `codeOnly()`: se lo scan finisce
-// desincronizzato, quel file non viene strippato affatto.
+// I literal regex vengono riconosciuti solo con un'euristica conservativa sul
+// token precedente: un backtick dentro una regex apre un template fantasma, e
+// da li' in poi la parita' puo' anche tornare pari prima di EOF. In quel caso
+// `scanLine()` marca lo scan come desincronizzato e il fail-safe di `codeOnly()`
+// restituisce il sorgente intero. Il meccanismo e' gia' vivo nel repo
+// (`generator/scripts/lib/llm-payload-diagnostics.mjs:87`, `/```+\s*$/`).
+const REGEX_START_BEFORE = /(?:^|[\(\[\{:,;=!?&|+\-*%^~<>])\s*$/;
+const REGEX_START_WORD = /\b(?:case|delete|do|else|new|of|return|throw|typeof|void|yield|await)\s*$/;
+
+const canStartRegex = (line, index) => {
+  const before = line.slice(0, index).trimEnd();
+  return before.length === 0 || REGEX_START_BEFORE.test(before) || REGEX_START_WORD.test(before);
+};
+
+const hasUnescapedTrailingBackslash = (line) => {
+  let count = 0;
+  for (let i = line.length - 1; i >= 0 && line[i] === '\\'; i--) count++;
+  return count % 2 === 1;
+};
+
 const scanLine = (line, state) => {
   const stack = state.stack.slice();
   let inBlock = state.inBlock;
-  let quote = null;
+  let quote = state.quote || null;
+  let inRegex = false;
+  let inRegexClass = false;
+  let desynchronized = state.desynchronized === true;
   const top = () => stack[stack.length - 1];
   for (let i = 0; i < line.length; i++) {
     const c = line[i];
@@ -56,6 +68,25 @@ const scanLine = (line, state) => {
     // file, cioe' la direzione che fa danno in silenzio.
     if (inBlock) {
       if (c === '*' && line[i + 1] === '/') { inBlock = false; i++; }
+      continue;
+    }
+    if (inRegex) {
+      // Uncertainty is sticky: a backtick is meaningful even when escaped or
+      // inside a character class, because this scanner cannot prove that the
+      // slash really started a regex rather than an expression it has already
+      // misread.
+      if (c === '`') desynchronized = true;
+      if (c === '\\') {
+        if (line[i + 1] === '`') desynchronized = true;
+        i++;
+        continue;
+      }
+      if (inRegexClass) {
+        if (c === ']') inRegexClass = false;
+        continue;
+      }
+      if (c === '[') { inRegexClass = true; continue; }
+      if (c === '/') inRegex = false;
       continue;
     }
     if (c === '\\') { i++; continue; }
@@ -71,8 +102,20 @@ const scanLine = (line, state) => {
     // Contesto di CODICE: il livello esterno, oppure dentro un `${…}`.
     if (c === '`') { stack.push({ type: 'template' }); continue; }
     if (c === "'" || c === '"') { quote = c; continue; }
-    if (c === '/' && line[i + 1] === '/') return { stack, inBlock: false };
+    if (c === '/' && line[i + 1] === '/') {
+      return {
+        stack,
+        inBlock: false,
+        quote: quote && hasUnescapedTrailingBackslash(line) ? quote : null,
+        desynchronized,
+      };
+    }
     if (c === '/' && line[i + 1] === '*') { inBlock = true; i++; continue; }
+    if (c === '/' && canStartRegex(line, i)) {
+      inRegex = true;
+      inRegexClass = false;
+      continue;
+    }
     if (top()?.type === 'expr') {
       if (c === '{') top().depth += 1;
       else if (c === '}') {
@@ -81,10 +124,16 @@ const scanLine = (line, state) => {
       }
     }
   }
-  // Una stringa non chiusa a fine riga non esiste in JS: se `quote` e' ancora
-  // aperto abbiamo letto male (tipicamente un apostrofo dentro una regex), e
-  // lo stato si azzera da solo alla riga dopo invece di propagare l'errore.
-  return { stack, inBlock };
+  // Una stringa non chiusa a fine riga e' valida solo quando il backslash
+  // finale ha continuato la riga. In quel caso `quote` sopravvive al newline;
+  // altrimenti si azzera come prima. Un regex non chiuso e' sorgente invalido:
+  // meglio degradare a sorgente non strippato che prendere una decisione cieca.
+  return {
+    stack,
+    inBlock,
+    quote: quote && hasUnescapedTrailingBackslash(line) ? quote : null,
+    desynchronized: desynchronized || inRegex,
+  };
 };
 
 /**
@@ -95,24 +144,43 @@ const scanLine = (line, state) => {
  */
 export const codeOnly = (src) => {
   const out = [];
-  let state = { stack: [], inBlock: false };
+  let state = { stack: [], inBlock: false, quote: null, desynchronized: false };
   const inTemplate = () => state.stack[state.stack.length - 1]?.type === 'template';
   for (const line of src.split('\n')) {
     if (state.inBlock) {
       const end = line.indexOf('*/');
       if (end === -1) { out.push(''); continue; }
       const rest = line.slice(end + 2);
-      state = scanLine(rest, { stack: state.stack, inBlock: false });
+      state = scanLine(rest, {
+        stack: state.stack,
+        inBlock: false,
+        quote: state.quote,
+        desynchronized: state.desynchronized,
+      });
       out.push(rest);
       continue;
     }
     const t = line.trim();
-    if (!inTemplate() && t.startsWith('//')) { out.push(''); continue; }
-    if (!inTemplate() && t.startsWith('/*')) {
+    if (!inTemplate() && !state.quote && t.startsWith('//')) { out.push(''); continue; }
+    if (!inTemplate() && !state.quote && t.startsWith('/*')) {
       const end = line.indexOf('*/');
-      if (end === -1) { state = { stack: state.stack, inBlock: true }; out.push(''); continue; }
+      if (end === -1) {
+        state = {
+          stack: state.stack,
+          inBlock: true,
+          quote: null,
+          desynchronized: state.desynchronized,
+        };
+        out.push('');
+        continue;
+      }
       const rest = line.slice(end + 2);
-      state = scanLine(rest, { stack: state.stack, inBlock: false });
+      state = scanLine(rest, {
+        stack: state.stack,
+        inBlock: false,
+        quote: state.quote,
+        desynchronized: state.desynchronized,
+      });
       out.push(rest);
       continue;
     }
@@ -121,12 +189,12 @@ export const codeOnly = (src) => {
   }
   // Fail-safe: a fine file la pila dei contesti deve essere vuota e nessun
   // blocco puo' restare aperto — un sorgente JS valido non finisce dentro un
-  // template o dentro `/* …`. Se succede, lo scan e' desincronizzato (tipico:
-  // un backtick dentro un literal regex, che questo scanner non riconosce) e
-  // ogni decisione presa da li' in poi vale zero. In quel caso si restituisce
-  // il sorgente NON strippato: piu' rumore nel censimento, mai un file letto
-  // a meta'. Sbagliare per rumore e' recuperabile, sbagliare per cecita' no.
-  if (state.stack.length > 0 || state.inBlock) return src;
+  // template o dentro `/* …`, oppure un backtick in un literal regex rilevato
+  // da `scanLine()`. Se succede, lo scan e' desincronizzato e ogni decisione
+  // presa da li' in poi vale zero. In quel caso si restituisce il sorgente NON
+  // strippato: piu' rumore nel censimento, mai un file letto a meta'. Sbagliare
+  // per rumore e' recuperabile, sbagliare per cecita' no.
+  if (state.stack.length > 0 || state.inBlock || state.desynchronized) return src;
   return out.join('\n');
 };
 
@@ -201,25 +269,25 @@ const resolveRelativeImport = (fromFile, spec) => {
  *
  * #922 item 2: il ramo ciclico non cacheava il proprio `''`, ma il chiamante
  * cacheava il COMBINATO che quel `''` aveva troncato. Con A→B→A la chiamata su
- * B produce `srcB + ''`, e quella voce finiva in cache per B: un letterale
+ * B produceva `srcB + ''`, e quella voce finiva in cache per B: un letterale
  * pubblicato definito in A restava invisibile a TUTTI gli altri importatori di
- * B, senza rumore. Ora il taglio si propaga come `cyclic` lungo lo stack e chi
- * lo riceve non si cachea — una ri-visita sui grafi ciclici, zero costo sugli
- * altri.
+ * B, senza rumore. Ora il nodo che rientra restituisce la propria sorgente,
+ * il taglio si propaga come `cyclic` lungo lo stack e chi lo riceve non si
+ * cachea — una ri-visita sui grafi ciclici, zero costo sugli altri.
  */
 export const createReachableSource = () => {
   const cache = new Map();
   const walk = (file, ancestors) => {
     if (cache.has(file)) return { text: cache.get(file), cyclic: false };
-    if (ancestors.has(file)) return { text: '', cyclic: true };
-    ancestors.add(file);
-    let src;
+    let ownSource;
     try {
-      src = codeOnly(fs.readFileSync(file, 'utf-8'));
+      ownSource = codeOnly(fs.readFileSync(file, 'utf-8'));
     } catch {
-      ancestors.delete(file);
       return { text: '', cyclic: false };
     }
+    if (ancestors.has(file)) return { text: ownSource, cyclic: true };
+    ancestors.add(file);
+    const src = ownSource;
     let combined = src;
     let cyclic = false;
     for (const m of src.matchAll(relativeImportSpec())) {
