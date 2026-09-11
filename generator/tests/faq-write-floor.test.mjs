@@ -34,6 +34,7 @@ import {
   faqSourceFingerprint,
   minPairsForWrite,
   nextFaqRejection,
+  normalizeFaqLimit,
   selectFaqIssuesForProcessing,
   shouldSkipFaqRejection,
 } from '../scripts/fix-faq-locales.mjs';
@@ -43,6 +44,12 @@ const BATCH = path.join(QUI, '..', 'scripts', 'batch-add-faq-to-articles.mjs');
 const FIX = path.join(QUI, '..', 'scripts', 'fix-faq-locales.mjs');
 
 const pairs = (n) => Array.from({ length: n }, (_, i) => ({ q: `domanda ${i}`, a: `risposta ${i}` }));
+
+test('un limite FAQ assente o non numerico non trasforma il batch in uno slice vuoto', () => {
+  assert.equal(normalizeFaqLimit(undefined), Infinity);
+  assert.equal(normalizeFaqLimit('non-numerico'), Infinity);
+  assert.equal(normalizeFaqLimit('2'), 2);
+});
 
 test('il pavimento e\' MIN_FAQ_PAIRS quando la sorgente ne ha almeno altrettante', () => {
   assert.equal(MIN_FAQ_PAIRS, 3);
@@ -141,7 +148,30 @@ test('gli skip throttled non consumano il limite e lasciano passare il lavoro az
   );
 
   const selected = selectFaqIssuesForProcessing(issues, rejectionLedger, 'frontaliere', 2);
-  assert.deepEqual(selected.map(({ articleId }) => articleId), ['actionable-1', 'actionable-2']);
+  assert.deepEqual(selected.toProcess.map(({ articleId }) => articleId), ['actionable-1', 'actionable-2']);
+  assert.deepEqual(selected.throttled.map(({ articleId }) => articleId), ['frozen-1', 'frozen-2', 'frozen-3']);
+});
+
+test('il selettore separa i throttled dal residuo del limite', () => {
+  const source = pairs(8);
+  const issue = (articleId) => ({ articleId, locale: 'en', itFaq: source });
+  const throttledIssue = issue('frozen');
+  const rejectionLedger = {
+    [faqLocaleIssueKey('frozen', 'en')]: nextFaqRejection(
+      nextFaqRejection(undefined, source, { prunedWrite: true }),
+      source,
+      { prunedWrite: true },
+    ),
+  };
+
+  const selected = selectFaqIssuesForProcessing(
+    [throttledIssue, issue('first'), issue('second')],
+    rejectionLedger,
+    'frontaliere',
+    1,
+  );
+  assert.deepEqual(selected.toProcess.map(({ articleId }) => articleId), ['first']);
+  assert.deepEqual(selected.throttled.map(({ articleId }) => articleId), ['frozen']);
 });
 
 test('ENTRAMBI gli scrittori consultano il pavimento prima di scrivere', () => {
@@ -164,7 +194,8 @@ test('il fix-faq rende osservabile il deficit e persiste il blocco di ritraduzio
   assert.match(src, /shouldSkipFaqRejection\(/);
   assert.match(src, /nextFaqRejection\(/);
   assert.match(src, /selectFaqIssuesForProcessing\(issues, rejectionLedger, SECTION, LIMIT\)/);
-  assert.match(src, /repeatedRejectionSkips\+\+;\s*if \(!previousRejection\.prunedWrite\) failed\+\+;/s);
+  assert.doesNotMatch(src, /if \(shouldSkipFaqRejection\(previousRejection, issue\.itFaq\)\)/);
+  assert.match(src, /const \{ toProcess, throttled \} = selectFaqIssuesForProcessing\(/);
 
   const workflow = fs.readFileSync(path.join(QUI, '..', '..', '.github', 'workflows', 'batch-faq-articles.yml'), 'utf-8');
   assert.match(workflow, /data\/faq-locale-rejections\.json/);
