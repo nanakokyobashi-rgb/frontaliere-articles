@@ -3,7 +3,11 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { isMutatingGhArgs } from '../../.github/actions/claude-codex-fallback/gh-bridge-server.mjs';
+import {
+  CORPUS_REPOSITORY,
+  isMutatingGhArgs,
+  resolveGhScope,
+} from '../../.github/actions/claude-codex-fallback/gh-bridge-server.mjs';
 import { isMutatingGitArgs } from '../../.github/actions/claude-codex-fallback/git-bridge-server.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
@@ -24,6 +28,46 @@ test('the GitHub bridge marks only state-changing gh operations', () => {
   assert.equal(isMutatingGhArgs(['issue', 'edit', '--repo', 'owner/repo', '1']), true);
   assert.equal(isMutatingGhArgs(['--repo', 'owner/repo', 'pr', 'view', '1']), false);
   assert.equal(isMutatingGhArgs(['api', 'repos/owner/repo', '--method', 'GET']), false);
+});
+
+test('the corpus checkout always selects the corpus credential', () => {
+  const corpus = resolveGhScope(
+    ['--repo', CORPUS_REPOSITORY, 'issue', 'create'],
+    {
+      repository: CORPUS_REPOSITORY,
+      host: 'github.com',
+      siteToken: 'site-token',
+      corpusToken: 'corpus-token',
+    },
+  );
+  assert.equal(corpus.kind, 'corpus');
+  assert.equal(corpus.repository, CORPUS_REPOSITORY);
+  assert.equal(corpus.token, 'corpus-token');
+
+  const currentCorpus = resolveGhScope(
+    ['issue', 'list'],
+    {
+      repository: CORPUS_REPOSITORY,
+      host: 'github.com',
+      siteToken: 'site-token',
+      corpusToken: 'corpus-token',
+    },
+  );
+  assert.equal(currentCorpus.kind, 'corpus');
+  assert.equal(currentCorpus.token, 'corpus-token');
+
+  assert.match(
+    resolveGhScope(
+      ['--repo', 'valerielinc-ops/frontaliere-si-o-no', 'pr', 'view'],
+      {
+        repository: CORPUS_REPOSITORY,
+        host: 'github.com',
+        siteToken: 'site-token',
+        corpusToken: 'corpus-token',
+      },
+    ).error,
+    /restricted/,
+  );
 });
 
 test('the Git bridge marks delivery and local-state-changing operations', () => {
