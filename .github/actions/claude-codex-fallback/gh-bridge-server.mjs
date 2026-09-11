@@ -61,7 +61,7 @@ const blockedCommands = new Set([
 const blockedApiPath = /(?:^|[/?])(secrets?|variables?|installations?|apps?|hooks?|ssh[_-]?keys?|gpg[_-]?keys?|settings)(?:[/?]|$)/i;
 const blockedFlags = new Set([
   '--debug', '--verbose', '--trace', '--output', '-o', '--config', '--insecure-storage',
-  '--with-token', '--pinentry-mode', '--jq', '--include', '--exclude',
+  '--with-token', '--pinentry-mode', '--include', '--exclude',
 ]);
 const fileFlags = new Set(['--body-file', '--input', '--template']);
 const fieldFlags = new Set(['-F', '--field', '-f', '--raw-field']);
@@ -207,6 +207,18 @@ function validateOperation(args, commandIndex, command, repository, allowedSubco
     if (blockedMutationFlags.has(arg) || [...blockedMutationFlags].some((flag) => arg.startsWith(`${flag}=`))) {
       return `gh mutation flag is not permitted by the Codex fallback bridge: ${arg}`;
     }
+  }
+  return '';
+}
+
+function blockedFlagError(arg, command) {
+  if (arg === '--jq' || arg.startsWith('--jq=')) {
+    return command === 'api'
+      ? ''
+      : `gh --jq is only permitted for read-only gh api requests: ${arg}`;
+  }
+  if (blockedFlags.has(arg) || [...blockedFlags].some((flag) => arg.startsWith(`${flag}=`))) {
+    return `gh flag is not permitted by the Codex fallback bridge: ${arg}`;
   }
   return '';
 }
@@ -565,9 +577,8 @@ export function validateGhArgs(args, {
   if (bodyError) return bodyError;
   for (let index = 0; index < args.length; index += 1) {
     const arg = args[index];
-    if (blockedFlags.has(arg) || [...blockedFlags].some((flag) => arg.startsWith(`${flag}=`))) {
-      return `gh flag is not permitted by the Codex fallback bridge: ${arg}`;
-    }
+    const blockedFlagMessage = blockedFlagError(arg, command);
+    if (blockedFlagMessage) return blockedFlagMessage;
     const fileFlag = [...fileFlags].find((flag) => arg === flag || arg.startsWith(`${flag}=`));
     if (fileFlag) {
       const value = arg === fileFlag ? args[index + 1] : arg.slice(fileFlag.length + 1);

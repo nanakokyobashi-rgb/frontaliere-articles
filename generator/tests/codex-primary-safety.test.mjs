@@ -63,10 +63,17 @@ test('the corpus bridge permits read-only API metadata without permitting mutati
   };
   assert.equal(
     validateGhArgs(
-      ['api', `repos/${CORPUS_REPOSITORY}/issues`, '--method', 'GET'],
+      ['api', `repos/${CORPUS_REPOSITORY}/issues`, '--method', 'GET', '--jq', '.content'],
       context,
     ),
     '',
+  );
+  assert.match(
+    validateGhArgs(
+      ['issue', 'view', '1403', '--repo', CORPUS_REPOSITORY, '--jq', '.body'],
+      context,
+    ),
+    /only permitted for read-only gh api requests/,
   );
   assert.match(
     validateGhArgs(
@@ -168,9 +175,15 @@ test('Claude fallback is suppressed when Codex side effects are possible', () =>
   assert.match(action, /cp -- "\$action_path\/gh-bridge\.sh" "\$bridge_root\/gh"/);
   assert.match(action, /resolved_gh="\$\(PATH="\$bridge_path" command -v gh/);
   assert.match(action, /echo "\$bridge_root" >> "\$GITHUB_PATH"/);
-  assert.match(action, /echo 'GITHUB_PAT='/);
-  assert.match(action, /echo 'GITHUB_PAT_NANAKO='/);
-  assert.match(action, /echo 'GITHUB_PAT_SITE='/);
+  const fallbackStart = action.indexOf('    - name: Run Claude fallback');
+  const cleanupStart = action.indexOf('    - name: Cleanup Claude fallback GitHub bridge', fallbackStart);
+  assert.notEqual(fallbackStart, -1);
+  assert.notEqual(cleanupStart, -1);
+  const fallback = action.slice(fallbackStart, cleanupStart);
+  assert.match(fallback, /      env:\n        GITHUB_PAT: ''\n        GITHUB_PAT_NANAKO: ''\n        GITHUB_PAT_SITE: ''/);
+  assert.doesNotMatch(action, /echo 'GITHUB_PAT='/);
+  assert.doesNotMatch(action, /echo 'GITHUB_PAT_NANAKO='/);
+  assert.doesNotMatch(action, /echo 'GITHUB_PAT_SITE='/);
   assert.match(action, /Cleanup Claude fallback GitHub bridge/);
   assert.match(action, /restore_sanitized_git_config/);
   const stopGhStart = action.indexOf('        stop_gh_bridge() {');
