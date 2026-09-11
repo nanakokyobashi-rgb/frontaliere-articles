@@ -106,6 +106,44 @@ test('(d) il job warn-orphan-push ignora il push di cancellazione branch del pro
   );
 });
 
+test('(e) seleziona anche una PR chiusa senza merge e controlla la head mergiata', () => {
+  const job = jobBlock(ATTIVE, 'warn-orphan-push');
+  assert.ok(job, 'job `warn-orphan-push` non trovato');
+  assert.match(job, /--state all/);
+  assert.match(job, /mergedAt/);
+  assert.match(job, /headRefOid/);
+  assert.match(job, /select\(\.state != "OPEN"\)/);
+  assert.match(job, /DEFAULT_BRANCH/);
+  assert.match(job, /repos\/\$\{REPO\}\/compare\/\$\{SHA\}\.\.\.\$\{DEFAULT_BRANCH\}/);
+  assert.match(job, /AFTER_MERGE/);
+  assert.match(job, /NEW_ROUND/);
+  assert.match(job, /createdAt/);
+  assert.match(job, /for attempt in 1 2 3/);
+  assert.match(
+    job,
+    /repos\/\$\{REPO\}\/compare\/\$\{SHA\}\.\.\.\$\{HEAD_OID\}/,
+    'il confronto deve usare la head della PR: il merge commit di uno squash non contiene '
+      + 'l\'OID del commit originale come antenato',
+  );
+  assert.match(job, /CONTAINMENT.*\n[\s\S]*\[ \"\$CONTAINMENT\" = "ahead" \]/);
+  assert.match(job, /TARGET='\{\}'/);
+  assert.doesNotMatch(job, /\$\{TARGET:-\{\}\}/);
+  assert.doesNotMatch(job, /PUSHED_AT/);
+});
+
+test('(f) il warning orfano e\' deduplicato con un marker sulla PR', () => {
+  const job = jobBlock(ATTIVE, 'warn-orphan-push');
+  assert.ok(job, 'job `warn-orphan-push` non trovato');
+  assert.match(job, /MARKER='<!-- orphan-push-warn -->'/);
+  assert.match(job, /gh api --paginate "repos\/\$\{REPO\}\/issues\/\$\{PR_NUMBER\}\/comments"/);
+  assert.match(job, /grep -Fq "\$MARKER"/);
+  assert.match(job, /\$\{MARKER\}/);
+  assert.ok(
+    job.indexOf('echo "::warning::Push orfano:') < job.indexOf("MARKER='"),
+    'l annotation per-SHA deve precedere il gate di dedup per-PR',
+  );
+});
+
 // Il test (c) — «il job `auto-merge` e' gateato su `event_name != 'push'`» —
 // e' stato rimosso il 2026-09-03 insieme al suo oggetto: il merge e' passato
 // all'auto-merge nativo di GitHub e non esiste piu' un job di merge che
