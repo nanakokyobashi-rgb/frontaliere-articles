@@ -391,6 +391,11 @@ jobs:
       # gate, on the artifact rather than the process, so a truncated write can
       # never be published over a good copy.
       - name: Verify artifact
+        env:
+          # On a push, the previous publish is github.event.before, not HEAD^:
+          # a push may contain more than one commit. Workflow dispatch has no
+          # event.before and deliberately uses the script's local fallback.
+          API_FLOOR_BASE_REVISION: ${{ github.event.before }}
         run: |
           set -euo pipefail
           # I PAVIMENTI di magnitudine stanno tutti in un solo posto, e sono
