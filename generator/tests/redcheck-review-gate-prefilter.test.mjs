@@ -229,6 +229,30 @@ test('un abort transiente senza failure di codice non attiva il fixer', () => {
   );
 });
 
+test('un abort che rende rosso anche il gate resta transient, salvo Important reale', () => {
+  const transientWithGateJobs = [{
+    name: 'tests (node --test)',
+    steps: [
+      { name: REVIEW_GATE_STEP_NAME, conclusion: 'failure' },
+      { name: CLAUDE_REVIEW_STEP_NAME, conclusion: 'success' },
+      { name: REVIEW_ABORT_STEP_NAME, conclusion: 'failure' },
+    ],
+  }];
+  assert.equal(
+    reviewFailureKind({ headSha: HEAD, jobs: [{ jobs: transientWithGateJobs }], reviews: [] }),
+    'transient',
+  );
+  assert.equal(
+    reviewFailureKind({
+      headSha: HEAD,
+      jobs: [{ jobs: transientWithGateJobs }],
+      reviews: [[review('`x.mjs:1`: 🔴 Important: il gate manca.')]],
+    }),
+    'important',
+    'un finding reale sulla HEAD mantiene la precedenza sull abort',
+  );
+});
+
 test('un abort transiente misto a un errore di codice resta nel percorso normale', () => {
   const transientAndCodeJobs = [{
     name: 'tests (node --test)',

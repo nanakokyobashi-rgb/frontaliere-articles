@@ -72,7 +72,11 @@ export function reviewFailureKind(input) {
         && REVIEWER_BOT_LOGIN_RE.test(review.user.login ?? ''),
       )
       .at(-1);
-    if (!lastOnHead) return '';
+    // The transient-abort step and the gate can both be red: the gate is an
+    // `always()` consumer of the review result, so it fails after an aborted
+    // action even though there is no verdict to repair. Keep that explicit
+    // signal, but only after giving a real Important finding precedence.
+    if (!lastOnHead) return reviewAborted ? 'transient' : '';
 
     // No 🔴 Important means the review can be a no-LGTM/nit-only review with
     // no owner capable of repairing the gate. Leave that case to redcheck.
@@ -81,9 +85,10 @@ export function reviewFailureKind(input) {
 
   // The action explicitly reported a transient failure and no code step is
   // red. There is no safe patch for redcheck to derive, so avoid a pointless
-  // Claude round. A gate failure without an Important review stays fail-closed
-  // above; it may still be a real missing/ambiguous verdict.
-  if (reviewAborted && !gateFailed) return 'transient';
+  // Claude round. A gate failure without an Important review is transient only
+  // when the same run also reports the explicit abort; otherwise it stays
+  // fail-closed because it may be a real missing/ambiguous verdict.
+  if (reviewAborted) return 'transient';
   return '';
 }
 
