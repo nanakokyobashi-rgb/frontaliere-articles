@@ -76,6 +76,8 @@ const CONTRACT_PATH = path.join(ROOT, 'generator/data/crawler-cross-repo-contrac
 const MANIFEST_PATH = path.join(ROOT, 'scripts/ci/loop-sync-manifest.json');
 const SITE_REPO = process.env.SITE_REPO || 'valerielinc-ops/frontaliere-si-o-no';
 const SITE_REF = process.env.SITE_REF || 'main';
+const SOURCE_COMMIT_RE = /^[a-f0-9]{40}$/u;
+const SOURCE_REF_RE = /^(?![.-])[A-Za-z0-9._/-]{1,256}$/u;
 
 /**
  * Dove vivono i `*-logic.yml` sul sito. E' l'unica coordinata che il contratto
@@ -118,6 +120,36 @@ export function siteLogicDirs(env = process.env) {
 
 const sha256 = (buf) => crypto.createHash('sha256').update(buf).digest('hex');
 
+function localLineageCheck(field, expected, observed) {
+  return {
+    field,
+    localOnly: true,
+    sitePath: null,
+    sitePathCandidates: [],
+    expected: expected ?? null,
+    observed: observed ?? null,
+  };
+}
+
+function contractObservationLineage(contract) {
+  const sourceRef = typeof contract?.sourceRef === 'string' ? contract.sourceRef : null;
+  const sourceCommit = typeof contract?.sourceCommit === 'string' ? contract.sourceCommit : null;
+  const observation = contract?.artifactObservation && typeof contract.artifactObservation === 'object'
+    ? contract.artifactObservation
+    : {};
+  const validSourceRef = sourceRef && SOURCE_REF_RE.test(sourceRef) ? sourceRef : null;
+  const validSourceCommit = sourceCommit && SOURCE_COMMIT_RE.test(sourceCommit) ? sourceCommit : null;
+  const observationRef = validSourceCommit || validSourceRef || SITE_REF;
+  return {
+    sourceRef,
+    sourceCommit,
+    observation,
+    validSourceRef,
+    validSourceCommit,
+    observationRef,
+  };
+}
+
 /**
  * True when bytes are a generated logic source, rather than an artifact or a
  * same-named residual file. The YAML shape is load-bearing: a top-level
@@ -130,7 +162,7 @@ const sha256 = (buf) => crypto.createHash('sha256').update(buf).digest('hex');
 export function isLogicSource(bytes, sourceLogic) {
   if (!bytes || !/^[a-z0-9][a-z0-9-]*-logic\.yml$/u.test(String(sourceLogic))) return false;
   const text = Buffer.from(bytes).toString('utf8');
-  const lines = text.split(/\r?\n/u);
+  const lines = text.split(/\r?\n/u).map(stripYamlComment);
   const topLevelKey = (line, key) => new RegExp(
     `^(?:${key}|["']${key}["']):(?:[ \\t]|$)`,
     'u',
@@ -170,6 +202,39 @@ export function isLogicSource(bytes, sourceLogic) {
 
   const hasJobs = lines.some((line) => topLevelKey(line, 'jobs'));
   return hasWorkflowCall && hasJobs;
+}
+
+/** Remove YAML comments without treating a quoted `#` as a comment. */
+function stripYamlComment(line) {
+  let quote = null;
+  let escaped = false;
+  for (let index = 0; index < line.length; index += 1) {
+    const ch = line[index];
+    if (quote === '"') {
+      if (escaped) {
+        escaped = false;
+      } else if (ch === '\\') {
+        escaped = true;
+      } else if (ch === '"') {
+        quote = null;
+      }
+      continue;
+    }
+    if (quote === "'") {
+      if (ch === "'" && line[index + 1] === "'") {
+        index += 1;
+      } else if (ch === "'") {
+        quote = null;
+      }
+      continue;
+    }
+    if (ch === '"' || ch === "'") {
+      quote = ch;
+    } else if (ch === '#' && (index === 0 || /\s/u.test(line[index - 1]))) {
+      return line.slice(0, index);
+    }
+  }
+  return line;
 }
 
 /**
@@ -447,16 +512,40 @@ export function siteGeneratorPath(contract) {
  * uno — non si tira a indovinare su una coordinata dichiarata. Solo i
  * `sourceSha256`, la cui directory nessuno dichiara, ne hanno piu' di uno.
  */
-export function planProvenanceChecks(contract, manifest, logicDirs = siteLogicDirs()) {
+export function planProvenanceChecks(
+  contract,
+  manifest,
+  logicDirs = siteLogicDirs(),
+  observationRef = contractObservationLineage(contract).observationRef,
+) {
   const bySitePath = new Map(
     (manifest?.files || []).map((entry) => [entry.path, entry.sitePath || null]),
   );
   const declared = (sitePath) => ({ sitePath, sitePathCandidates: sitePath ? [sitePath] : [] });
+  const lineage = contractObservationLineage(contract);
   const checks = [
+    localLineageCheck('contract#sourceRef', lineage.sourceRef, lineage.validSourceRef),
+    localLineageCheck('contract#sourceCommit', lineage.sourceCommit, lineage.validSourceCommit),
+    localLineageCheck(
+      'contract#artifactObservation.generatorSha256',
+      contract.generatorSha256,
+      lineage.observation.generatorSha256,
+    ),
+    localLineageCheck(
+      'contract#artifactObservation.sourceRef',
+      lineage.sourceRef,
+      lineage.observation.sourceRef,
+    ),
+    localLineageCheck(
+      'contract#artifactObservation.sourceCommit',
+      lineage.sourceCommit,
+      lineage.observation.sourceCommit,
+    ),
     {
       field: 'generatorSha256',
       ...declared(siteGeneratorPath(contract)),
       expected: contract.generatorSha256 || null,
+      observationRef,
     },
   ];
 
@@ -470,6 +559,7 @@ export function planProvenanceChecks(contract, manifest, logicDirs = siteLogicDi
       sitePath: candidates[0] || null,
       sitePathCandidates: candidates,
       expected: artifact.sourceSha256 || null,
+      observationRef,
     });
     checks.push({
       field: `${artifact.file}#artifactSha256`,
@@ -478,7 +568,13 @@ export function planProvenanceChecks(contract, manifest, logicDirs = siteLogicDi
       // (AGENTS.md #6), e un `sitePath` sbagliato esce rosso una volta sola.
       ...declared(bySitePath.get(`.github/workflows/${artifact.file}`) || null),
       expected: artifact.artifactSha256 || null,
+      observationRef,
     });
+    checks.push(localLineageCheck(
+      `${artifact.file}#generatorSha256`,
+      contract.generatorSha256,
+      artifact.generatorSha256,
+    ));
   }
 
   return checks;
@@ -491,6 +587,7 @@ export function planProvenanceChecks(contract, manifest, logicDirs = siteLogicDi
  */
 export function evaluateProvenance(checks, observed) {
   const results = [];
+  const observationRef = checks.find((check) => check.observationRef)?.observationRef || SITE_REF;
   for (const check of checks) {
     const seen = observed instanceof Map ? observed.get(check.field) : observed?.[check.field];
     // Il path RISOLTO se l'osservatore ne ha provati piu' d'uno: il report deve
@@ -498,9 +595,19 @@ export function evaluateProvenance(checks, observed) {
     const sitePath = seen?.sitePath || check.sitePath;
     let state;
     let detail = '';
-    if (!check.expected || !check.sitePath) {
+    if (check.localOnly) {
+      if (check.expected == null || check.observed == null) {
+        state = 'undeclared';
+        detail = 'il contratto non porta una lineage completa e valida';
+      } else if (check.observed === check.expected) {
+        state = 'verified';
+      } else {
+        state = 'drifted';
+        detail = `dichiarato ${String(check.expected).slice(0, 16)}, osservato ${String(check.observed).slice(0, 16)}`;
+      }
+    } else if (check.expected == null || !check.sitePath) {
       state = 'undeclared';
-      detail = !check.expected
+      detail = check.expected == null
         ? 'il contratto non porta il digest'
         : 'il contratto non dice quale path del sito verificare';
     } else if (!seen || seen.error) {
@@ -510,8 +617,8 @@ export function evaluateProvenance(checks, observed) {
       state = seen.invalidSource ? 'unrecognized' : 'absent';
       const tried = seen.triedPaths?.length ? seen.triedPaths : [sitePath];
       detail = seen.invalidSource
-        ? `${tried.join(', ')} e' presente ma non riconosciuta come sorgente logic su ${SITE_REPO}@${SITE_REF}`
-        : `${tried.join(', ')} non esiste${tried.length > 1 ? 'ono' : ''} su ${SITE_REPO}@${SITE_REF}`;
+        ? `${tried.join(', ')} e' presente ma non riconosciuta come sorgente logic su ${SITE_REPO}@${check.observationRef || observationRef}`
+        : `${tried.join(', ')} non esiste${tried.length > 1 ? 'ono' : ''} su ${SITE_REPO}@${check.observationRef || observationRef}`;
     } else if (seen.sha256 === check.expected) {
       state = 'verified';
     } else {
@@ -526,7 +633,8 @@ export function evaluateProvenance(checks, observed) {
   const broken = results.filter((r) => (
     r.state === 'drifted' || r.state === 'absent' || r.state === 'unrecognized' || r.state === 'undeclared'
   ));
-  const unobserved = counts.unobserved || 0;
+  const remoteResults = results.filter((result) => !result.localOnly);
+  const unobserved = remoteResults.filter((result) => result.state === 'unobserved').length;
 
   // Se spariscono TUTTI i `*-logic.yml` insieme, il sospettato non e' il
   // contratto: sono 24 file che non si perdono uno per uno, e' la directory
@@ -535,7 +643,7 @@ export function evaluateProvenance(checks, observed) {
   const sources = results.filter((r) => r.field.endsWith('#sourceSha256'));
   const invalidSources = sources.filter((r) => r.invalidSource);
   const movedLogicDir = sources.length > 1
-    && sources.every((r) => r.state === 'absent' || r.state === 'unrecognized');
+    && sources.every((r) => r.state === 'absent');
 
   let red = false;
   let reason = null;
@@ -552,7 +660,7 @@ export function evaluateProvenance(checks, observed) {
         (invalidSources.length === sources.length
           ? `nessuno dei ${sources.length} \`*-logic.yml\` sotto `
           : `nessuno dei ${sources.length} \`*-logic.yml\` esiste su `) +
-        (invalidSources.length === sources.length ? '' : `${SITE_REPO}@${SITE_REF} sotto `) +
+        (invalidSources.length === sources.length ? '' : `${SITE_REPO}@${observationRef} sotto `) +
         `${tried.join(' o ')}: il sito li ha spostati e la coordinata di questo lato ` +
         (invalidSources.length === sources.length
           ? '(`SITE_LOGIC_DIR`) va aggiornata: le risposte non portano il marker della sorgente — gli artifact non c\'entrano.'
@@ -561,7 +669,7 @@ export function evaluateProvenance(checks, observed) {
     } else if (invalidSources.length) {
       reason =
         `${invalidSources.length}/${sources.length} sorgenti \`*-logic.yml\` rispondono senza il marker ` +
-        `della sorgente su ${SITE_REPO}@${SITE_REF}: verificare la coordinata ` +
+        `della sorgente su ${SITE_REPO}@${observationRef}: verificare la coordinata ` +
         '`SITE_LOGIC_DIR` o la generazione del sito.' +
         (broken.length > invalidSources.length
           ? ` A parte: altri ${broken.length - invalidSources.length} digest non corrispondono.`
@@ -571,14 +679,14 @@ export function evaluateProvenance(checks, observed) {
         `${broken.length}/${results.length} digest del contratto non corrispondono ai byte del sito: ` +
         'i 24 artifact qui sono stantii finche\' non vengono rigenerati dal sorgente.';
     }
-  } else if (results.length > 0 && unobserved === results.length) {
+  } else if (remoteResults.length > 0 && unobserved === remoteResults.length) {
     red = true;
     reason =
-      `${unobserved}/${results.length} voci non osservate: il verdetto «tutto verificato» non significa ` +
+      `${unobserved}/${remoteResults.length} voci remote non osservate: il verdetto «tutto verificato» non significa ` +
       'piu\' niente, quindi non viene dato.';
   }
 
-  return { results, counts, red, reason };
+  return { results, counts, red, reason, observationRef };
 }
 
 function mergeVerdicts(...verdicts) {
@@ -591,11 +699,12 @@ function mergeVerdicts(...verdicts) {
     counts,
     red: verdicts.some((verdict) => verdict.red),
     reason: reasons.length ? reasons.join(' A parte: ') : null,
+    observationRef: verdicts.find((verdict) => verdict.observationRef)?.observationRef || SITE_REF,
   };
 }
 
-export function formatReport({ results, counts, red, reason }) {
-  const lines = [`# Provenienza del contratto cross-repo — ${SITE_REPO}@${SITE_REF}`, ''];
+export function formatReport({ results, counts, red, reason, observationRef = SITE_REF }) {
+  const lines = [`# Provenienza del contratto cross-repo — ${SITE_REPO}@${observationRef}`, ''];
   const order = ['drifted', 'unrecognized', 'absent', 'undeclared', 'unobserved', 'verified'];
   for (const state of order) {
     const rows = results.filter((r) => r.state === state);
@@ -626,8 +735,8 @@ const rawFetch = createRawFetcher({
 });
 
 /** Byte del file dal sito al ref dato; null su 404. */
-async function siteFile(rel) {
-  const url = `https://raw.githubusercontent.com/${SITE_REPO}/${SITE_REF}/${rel}`;
+async function siteFile(rel, ref = SITE_REF) {
+  const url = `https://raw.githubusercontent.com/${SITE_REPO}/${ref}/${rel}`;
   const res = await rawFetch(url);
   if (res.status === 404) return null;
   if (!res.ok) throw new Error(`GET ${rel} → HTTP ${res.status}`);
@@ -639,6 +748,7 @@ async function main() {
   const contract = JSON.parse(fs.readFileSync(CONTRACT_PATH, 'utf8'));
   const manifest = JSON.parse(fs.readFileSync(MANIFEST_PATH, 'utf8'));
   const checks = planProvenanceChecks(contract, manifest);
+  const observationRef = checks.find((check) => check.observationRef)?.observationRef || SITE_REF;
   const unreadableArtifacts = [];
   const artifactSources = [];
   for (const artifact of contract.artifacts || []) {
@@ -662,7 +772,7 @@ async function main() {
   const observe = async (rel) => {
     if (!cache.has(rel)) {
       try {
-        const bytes = await siteFile(rel);
+        const bytes = await siteFile(rel, observationRef);
         cache.set(rel, { sha256: bytes === null ? null : sha256(bytes), bytes });
       } catch (e) {
         cache.set(rel, { error: String(e.message || e) });
