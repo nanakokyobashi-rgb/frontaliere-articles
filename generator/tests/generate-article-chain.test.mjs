@@ -103,6 +103,8 @@ function runGenerateStep({
   stallGrace = null,
   talkForS = 0,
   clockOffsetS = null,
+  registrationDirtyOnAttempt = null,
+  registrationDirtyPath = 'content/routerBlogData.ts',
 } = {}) {
   const dir = mkdtempSync(path.join(tmpdir(), 'generate-article-chain-'));
   try {
@@ -111,6 +113,7 @@ function runGenerateStep({
     const calls = path.join(dir, 'calls');
     const argv = path.join(dir, 'argv');
     const staged = path.join(dir, 'staged');
+    const registrationDirty = path.join(dir, 'registration-dirty');
     const planFile = path.join(dir, 'plan');
     const ghOutput = path.join(dir, 'github_output');
     const capsFile = path.join(dir, 'caps');
@@ -154,12 +157,26 @@ talk="\${TALK_FOR_S:-0}"
 i=0
 while [ "$i" -lt "$talk" ]; do sleep 1; echo "[stub] riga $i"; i=$((i + 1)); done
 if [ "$prod" = "1" ]; then echo "content/blog-body/it/articolo-$n.ts" >> "${staged}"; fi
+if [ -n "\${REGISTRATION_DIRTY_ATTEMPT:-}" ] && [ "$n" = "\${REGISTRATION_DIRTY_ATTEMPT:-}" ]; then printf '%s\\n' "\${REGISTRATION_DIRTY_PATH:-}" > "${registrationDirty}"; fi
 exit "$rc"
 `;
-    // `git add -A` e' un no-op; il probe legge l'indice finto.
+    // `git add -A` e' un no-op; il probe legge l'indice finto. Il ramo
+    // `--name-status` espone solamente il path dirty se il pathspec del
+    // workflow lo richiede davvero, cosi' marker e target sono regressioni
+    // eseguibili e non solo stringhe nel test.
     const gitStub = `#!/usr/bin/env bash
 if [ "$1" = "diff" ]; then
-  [ -f "${staged}" ] && cat "${staged}"
+  if [ "\${3:-}" = "--name-status" ] && [ -f "${registrationDirty}" ]; then
+    dirty="$(cat "${registrationDirty}")"
+    case "$dirty" in
+      content/*)
+        case "$*" in *"content/"*) printf 'M\\t%s\\n' "$dirty";; esac ;;
+      generator/data/register-in-progress*)
+        case "$*" in *"register-in-progress"*) printf 'A\\t%s\\n' "$dirty";; esac ;;
+    esac
+  elif [ -f "${staged}" ]; then
+    cat "${staged}"
+  fi
   exit 0
 fi
 exit 0
@@ -211,6 +228,8 @@ exit 0
         ...(stall === null ? {} : { GENERATE_STALL_S: String(stall) }),
         ...(stallPoll === null ? {} : { GENERATE_STALL_POLL_S: String(stallPoll) }),
         ...(stallGrace === null ? {} : { GENERATE_STALL_GRACE_S: String(stallGrace) }),
+        ...(registrationDirtyOnAttempt === null ? {} : { REGISTRATION_DIRTY_ATTEMPT: String(registrationDirtyOnAttempt) }),
+        ...(registrationDirtyOnAttempt === null ? {} : { REGISTRATION_DIRTY_PATH: registrationDirtyPath }),
       },
     });
     const elapsedMs = Date.now() - startedAt;
@@ -348,6 +367,26 @@ test('un errore dopo una scrittura parziale resta vincolante per il commit', () 
   assert.equal(r.status, 1, 'la run deve restare rossa: il commit non puo\' partire');
   assert.match(r.stdout, /output parziale non pubblicabile/);
 });
+
+for (const registrationDirtyPath of [
+  'content/routerBlogData.ts',
+  'generator/data/register-in-progress-frontaliere.json',
+]) {
+  test(`un errore prima del body con registrazione dirty (${registrationDirtyPath}) blocca il fallback`, () => {
+    const r = runGenerateStep({
+      section: 'frontaliere',
+      plan: ['7 0', '0 1'],
+      registrationDirtyOnAttempt: 1,
+      registrationDirtyPath,
+    });
+    assert.equal(r.outputs.article, 'false', 'la registrazione incompleta non e\' un articolo prodotto');
+    assert.equal(r.outputs.partial_failure, 'true');
+    assert.equal(r.invocations.length, 1, 'un marker/target dirty blocca la sezione gemella');
+    assert.equal(r.status, 1, 'una transazione di registrazione senza body deve lasciare la run rossa');
+    assert.match(r.stdout, /registrazione dirty/);
+    assert.match(r.stdout, /output parziale non pubblicabile/);
+  });
+}
 
 test('una dispatch manuale ottiene la sezione che ha chiesto e nessun\'altra', () => {
   const r = runGenerateStep({ section: 'svizzera', event: 'workflow_dispatch', plan: ['0 0'] });
