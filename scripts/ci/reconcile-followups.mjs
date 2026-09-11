@@ -79,10 +79,36 @@ const CLOSE_MARKER = '<!-- reconcile-bot:autoclose -->';
 const LABEL = 'maybe-resolved';
 const CLOSED_LABEL = 'fu-resolved-auto';
 const REPO = process.env.GH_REPO || process.env.GITHUB_REPOSITORY || '';
+export const COMMENT_LOOKUP_FAILURE_MIN_COUNT = parsePositiveNum(
+  process.env.RECONCILE_COMMENT_LOOKUP_FAILURE_MIN_COUNT,
+  3,
+  { label: 'RECONCILE_COMMENT_LOOKUP_FAILURE_MIN_COUNT', integer: true },
+);
+export const COMMENT_LOOKUP_FAILURE_MAX_RATIO = parsePositiveNum(
+  process.env.RECONCILE_COMMENT_LOOKUP_FAILURE_MAX_RATIO,
+  0.5,
+  { label: 'RECONCILE_COMMENT_LOOKUP_FAILURE_MAX_RATIO' },
+);
 export const UNCLASSIFIABLE_LABEL = 'reconcile-unclassifiable';
 export const UNCLASSIFIABLE_MARKER_PREFIX = '<!-- reconcile-unclassifiable';
 export const UNCLASSIFIABLE_MARKER_SCHEMA = 1;
 export const UNCLASSIFIABLE_MARKER_RE = /<!-- reconcile-unclassifiable schema=(\d+) classifier=([0-9a-f]{64}) fingerprint=([0-9a-f]{64}) -->/;
+
+/**
+ * Un lookup commenti fallito resta fail-open per la singola issue, ma non deve
+ * restare invisibile come causa persistente. Oltre alla soglia assoluta,
+ * segnaliamo anche il caso in cui falliscono tutti i lookup del run: così una
+ * sola issue con permessi rotti non può congelarsi per sempre in silenzio.
+ */
+export function isCommentLookupDegraded(failed, attempted, {
+  minCount = COMMENT_LOOKUP_FAILURE_MIN_COUNT,
+  maxRatio = COMMENT_LOOKUP_FAILURE_MAX_RATIO,
+} = {}) {
+  const f = Number(failed);
+  const a = Number(attempted);
+  if (!Number.isInteger(f) || !Number.isInteger(a) || f <= 0 || a <= 0 || f > a) return false;
+  return f >= minCount || f === a || f / a >= maxRatio;
+}
 
 function classifierVersion() {
   const source = [
@@ -1269,6 +1295,8 @@ function main() {
   const closed = [];
   const unclassifiableCandidates = [];
   let unclassifiableSkipped = 0;
+  let commentLookupFailed = 0;
+  let commentLookupAttempted = 0;
 
   for (let iss of issues) {
     if (inFlight(iss.number)) { console.log(`#${iss.number}: in-flight PR open, skip`); continue; }
@@ -1392,8 +1420,10 @@ function main() {
       );
     }
     const isAggregate = aggGate.blocks;
+    commentLookupAttempted++;
     const hasPriorFlag = alreadyCommented(iss.number);
     if (hasPriorFlag === null) {
+      commentLookupFailed++;
       console.log(`::warning::reconcile-followups: impossibile leggere i commenti di #${iss.number}; flag/chiusura non determinabili, issue lasciata nel ciclo`);
     }
     const legacyStrongEvidence = evidence.some((e) => e.kind === 'legacy-content');
@@ -1472,13 +1502,17 @@ Chiusa come **completed** (done-but-open). Si **riapre da sola** se il segnale s
     gh(['issue', 'close', String(c.number), ...repoArgs, '--reason', 'completed'], { allowFail: true });
   }
 
-  const summary = `Reconcile follow-ups: scanned ${issues.length}, cache-skipped ${unclassifiableSkipped}, cache-marked ${unclassifiableCandidates.length}, flagged ${flagged.length}, auto-closed ${closed.length}${DRY_RUN ? ' (dry-run)' : ''}${NO_AUTOCLOSE ? ' (no-autoclose)' : ''}.`;
+  const summary = `Reconcile follow-ups: scanned ${issues.length}, cache-skipped ${unclassifiableSkipped}, cache-marked ${unclassifiableCandidates.length}, flagged ${flagged.length}, auto-closed ${closed.length}, comment-lookups ${commentLookupFailed}/${commentLookupAttempted} falliti${DRY_RUN ? ' (dry-run)' : ''}${NO_AUTOCLOSE ? ' (no-autoclose)' : ''}.`;
   console.log(summary);
   if (process.env.GITHUB_STEP_SUMMARY) {
     const uc = unclassifiableCandidates.map((c) => `- 🔎 #${c.number} ${c.title} (aggregate non classificabile, resta aperta)`).join('\n');
     const fl = flagged.map((f) => `- 🟡 #${f.number} ${f.title} (flag: ${f.reason}, ${f.evidence.length} match)`).join('\n');
     const cl = closed.map((c) => `- ✅ #${c.number} ${c.title} (auto-closed, ${c.evidence.length} match)`).join('\n');
     fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, `## ${summary}\n${[uc, cl, fl].filter(Boolean).join('\n')}\n`);
+  }
+  if (isCommentLookupDegraded(commentLookupFailed, commentLookupAttempted)) {
+    console.log(`::error::reconcile-followups: ${commentLookupFailed}/${commentLookupAttempted} lookup dei commenti falliti (soglia ${COMMENT_LOOKUP_FAILURE_MIN_COUNT} o almeno il ${Math.round(COMMENT_LOOKUP_FAILURE_MAX_RATIO * 100)}%): skip conservativo mantenuto, ma il run è marcato rosso per non congelare una issue indefinitamente.`);
+    process.exitCode = 1;
   }
 }
 

@@ -49,7 +49,7 @@ function withoutComments(block) {
  * non-greedy, che si fermerebbe alla prima `fi` interna.
  */
 function emptyListsBranch(step) {
-  const head = 'if [ -z "$PRS" ] && [ -z "$ISSUES" ]; then';
+  const head = 'if [ -z "$PRS" ] && [ -z "$ISSUES" ] && [ -z "$INCOMPLETE_MARKER" ]; then';
   const at = step.indexOf(head);
   assert.notEqual(at, -1, 'ramo "liste vuote" non trovato: la promessa del corpo non e mantenuta');
   const lines = step.slice(at + head.length).split('\n');
@@ -69,6 +69,7 @@ function emptyListsBranch(step) {
 
 test('il titolo di dedup ha una sola sorgente nello step', () => {
   const step = surfaceStep();
+  assert.match(step, /id: surface_digest/, 'il watchdog deve poter osservare l outcome dello step');
   const assignment = /\n\s+DEDUP_TITLE:\s*'([^']+)'/.exec(step);
   assert.ok(assignment, 'lo step deve definire DEDUP_TITLE una volta sola, come env');
   assert.equal(
@@ -136,9 +137,12 @@ test('l esito del fetch e delle due partizioni e catturato', () => {
   );
   assert.match(
     step,
-    /NEEDS_HUMAN_ITEMS=\$\(gh api --paginate[\s\S]*?\n\s+NEEDS_HUMAN_RC=\$\?/,
+    /NEEDS_HUMAN_RAW=\$\(gh api --paginate --slurp[\s\S]*?\n\s+NEEDS_HUMAN_RC=\$\?/,
     'l exit status del fetch paginato va catturato subito dopo l assegnazione',
   );
+  assert.match(step, /node scripts\/ci\/needs-human-digest\.mjs/);
+  assert.match(step, /NEEDS_HUMAN_SHAPE_RC=\$\?/);
+  assert.match(step, /NEEDS_HUMAN_PAYLOAD_MARKER=/);
   assert.match(
     step,
     /PRS=\$\(printf[\s\S]*?\n\s+PRS_RC=\$\?/,
@@ -153,7 +157,7 @@ test('l esito del fetch e delle due partizioni e catturato', () => {
 
 test('una query fallita non arriva mai al ramo di chiusura', () => {
   const step = surfaceStep();
-  const guard = /if \[ "\$NEEDS_HUMAN_RC" -ne 0 \] \|\| \[ "\$PRS_RC" -ne 0 \] \|\| \[ "\$ISSUES_RC" -ne 0 \]; then([\s\S]*?)\n\s+fi\n/.exec(step);
+  const guard = /if \[ "\$NEEDS_HUMAN_RC" -ne 0 \] \|\| \[ "\$NEEDS_HUMAN_SHAPE_RC" -ne 0 \] \|\| \[ "\$NEEDS_HUMAN_MARKER_RC" -ne 0 \]; then([\s\S]*?)\n\s+fi\n/.exec(step);
   assert.ok(guard, 'manca il guard sull esito delle query');
   assert.match(guard[1], /\n\s+exit 1/, 'una query fallita deve far fallire lo step, non passare oltre');
   assert.doesNotMatch(
@@ -163,9 +167,31 @@ test('una query fallita non arriva mai al ramo di chiusura', () => {
   );
   // E deve stare PRIMA del ramo «liste vuote», o non lo protegge.
   const guardAt = step.indexOf('"$NEEDS_HUMAN_RC" -ne 0');
-  const emptyAt = step.indexOf('if [ -z "$PRS" ] && [ -z "$ISSUES" ]; then');
+  const emptyAt = step.indexOf('if [ -z "$PRS" ] && [ -z "$ISSUES" ] && [ -z "$INCOMPLETE_MARKER" ]; then');
   assert.notEqual(emptyAt, -1, 'ramo "liste vuote" non trovato');
   assert.ok(guardAt !== -1 && guardAt < emptyAt, 'il guard deve precedere il ramo di chiusura');
+});
+
+test('un solo lato fallito pubblica la metà buona con marker, non chiude il digest', () => {
+  const step = surfaceStep();
+  assert.match(step, /if \[ "\$PRS_RC" -ne 0 \] && \[ "\$ISSUES_RC" -ne 0 \]; then[\s\S]*?exit 1/);
+  assert.match(step, /NEEDS_HUMAN_DIGEST_INCOMPLETE: \$INCOMPLETE_CHANNELS/);
+  assert.match(step, /lista PR non disponibile|lista issue non disponibile/);
+  assert.match(step, /INCOMPLETE_MARKER/);
+  const partialAt = step.indexOf('if [ "$PRS_RC" -ne 0 ] && [ "$ISSUES_RC" -ne 0 ]; then');
+  const emptyAt = step.indexOf('if [ -z "$PRS" ] && [ -z "$ISSUES" ] && [ -z "$INCOMPLETE_MARKER" ]; then');
+  assert.ok(partialAt >= 0 && partialAt < emptyAt, 'la decisione asimmetrica deve precedere la chiusura');
+  assert.doesNotMatch(step.slice(partialAt, emptyAt), /gh issue close/);
+});
+
+test('il watchdog rialza un fallimento persistente sotto continue-on-error', () => {
+  const at = text.indexOf('- name: Watchdog — needs-human digest outcome');
+  assert.ok(at >= 0, 'watchdog del digest assente');
+  const watchdog = text.slice(at, text.indexOf('\n      - name: ', at + 10) === -1 ? undefined : text.indexOf('\n      - name: ', at + 10));
+  assert.match(watchdog, /steps\.surface_digest\.outcome/);
+  assert.match(watchdog, /SURFACE_OUTCOME.*success/);
+  assert.match(watchdog, /exit 1/);
+  assert.doesNotMatch(watchdog, /continue-on-error/);
 });
 
 test('a liste vuote lo step richiude l issue dedup, non si limita a uscire', () => {
@@ -384,7 +410,7 @@ test('nessuna delle due liste del digest puo essere troncata in silenzio', () =>
     /\$\(gh (?:pr|issue) list/,
     'i sottocomandi `list` troncano al `--limit`: il digest deve leggere da `gh api --paginate`',
   );
-  const paginated = [...step.matchAll(/\$\(gh api --paginate "\$NEEDS_HUMAN_API"/g)];
+  const paginated = [...step.matchAll(/\$\(gh api --paginate --slurp "\$NEEDS_HUMAN_API"/g)];
   assert.equal(paginated.length, 1, 'PR e issue devono condividere un solo fetch paginato');
   // Una sola sorgente per l'endpoint (AGENTS.md #6): due URL divergerebbero, e
   // le due liste finirebbero per descrivere backlog diversi.

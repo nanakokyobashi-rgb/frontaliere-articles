@@ -2713,6 +2713,37 @@ export function isSettlingPromotion({ outcome, ageMin, settleMin }) {
   return outcome === null && ageMin < settleMin;
 }
 
+/**
+ * Gate comune del rescue queue-managed.
+ *
+ * Un `agent:fix` vecchio senza PR e senza un verdetto/beacon leggibile deve
+ * tornare alla coda: lasciare la label attiva è uno stato assorbente perché
+ * l'evento `labeled` è già stato consumato. La decisione è pura; i rami
+ * successivi gestiscono gli esiti speciali (`rate-limited`, `pr-created`,
+ * `max-turns`) e l'incremento di `fu-attempt`.
+ */
+export function staleFixRescueGate({
+  outcome = null,
+  ageMin,
+  hasPR = false,
+  settleMin = SETTLE_MIN,
+  orphanMinAgeMin = ORPHAN_MIN_AGE_MIN,
+} = {}) {
+  if (hasPR) return { action: 'skip', reason: 'ha una PR fix aperta' };
+  if (isSettlingPromotion({ outcome, ageMin, settleMin })) {
+    return { action: 'settling', reason: 'promozione fresca, run non ancora visibile' };
+  }
+  if (ageMin < orphanMinAgeMin) {
+    return { action: 'wait', reason: `agent:fix giovane (${Math.round(ageMin)}min < ${orphanMinAgeMin}min)` };
+  }
+  return {
+    action: 'rearm',
+    reason: outcome
+      ? `agent:fix stale senza PR (ultimo esito: ${outcome})`
+      : 'agent:fix stale senza PR e senza beacon/verdetto',
+  };
+}
+
 // --- CRAWLER RESCUE + PARK (escalation #5514) --------------------------------
 // I crawler sono l'UNICA categoria con `route='fix'` (agent:fix diretto, salta la
 // coda) e sono per questo l'unica categoria che il rescue orfani sotto esclude
@@ -3716,7 +3747,6 @@ export function runDrain() {
     if (!budget.take(`#${iss.number} (rescue)`, ITEM_COST_MS)) break;
     const ageMin = minutesSince(iss.updatedAt);
     const hasPR = hasFixPR(iss.number);
-    if (hasPR) continue;   // ha PR → run completata con successo, non orfano né settling
     // Da qui: agent:fix SENZA PR. inFlightFixCount() in cima ha già garantito
     // che NESSUNA run è queued/in_progress, quindi questo non è un fix che gira:
     // o è appena stato promosso e la run non è ancora visibile (≤SETTLE_MIN →
@@ -3736,8 +3766,12 @@ export function runDrain() {
     // della issue e sopravvive a ogni run successiva.
     const outcomeEntry = latestFixOutcomeEntry(iss.number);
     const outcome = outcomeEntry.outcome;
-    if (isSettlingPromotion({ outcome, ageMin, settleMin: SETTLE_MIN })) { settlingPromotions++; continue; } // registrazione run
-    if (ageMin < ORPHAN_MIN_AGE_MIN) continue; // fix finito senza PR ma non ancora orfano → non bloccare il drain
+    const rescueGate = staleFixRescueGate({
+      outcome, ageMin, hasPR, settleMin: SETTLE_MIN, orphanMinAgeMin: ORPHAN_MIN_AGE_MIN,
+    });
+    if (rescueGate.action === 'skip') continue; // ha PR → run completata con successo
+    if (rescueGate.action === 'settling') { settlingPromotions++; continue; } // registrazione run
+    if (rescueGate.action === 'wait') continue; // fix finito senza PR ma non ancora orfano
     // vecchio + nessuna PR → orfano. Ma «nessuna PR» ha due cause diverse:
     // (a) run morta/crashata (nessun verdetto) → ri-tentabile; (b) ABORT pulita
     // del fixer con verdetto deterministico-non-ri-tentabile (no-root-cause,

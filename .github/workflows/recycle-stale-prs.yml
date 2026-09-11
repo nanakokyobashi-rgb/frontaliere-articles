@@ -327,6 +327,7 @@ jobs:
       # e rinominarlo orfanerebbe l'issue dedup gia' aperta (corpus #409, sito
       # #5041), che nessuno chiuderebbe piu'. Le due liste stanno nel corpo.
       - name: Surface needs-human PRs and issues (dedup, zero-Claude)
+        id: surface_digest
         if: always()
         continue-on-error: true
         env:
@@ -409,8 +410,29 @@ jobs:
           # raddoppiavano il consumo di rate-limit e potevano osservare pagine
           # diverse durante una mutazione del backlog.
           NEEDS_HUMAN_API="repos/$GH_REPO/issues?state=open&labels=needs-human&per_page=100"
-          NEEDS_HUMAN_ITEMS=$(gh api --paginate "$NEEDS_HUMAN_API" --jq '.[]' | jq -s '.')
+          # `--slurp` conserva la forma delle pagine; il parser controlla sia
+          # quella forma sia gli envelope `errors + data` prima di permettere a
+          # un array vuoto di entrare nel ramo di chiusura. Il marker è una
+          # seconda sentinella: il JSON valido da solo non dimostra che il
+          # normalizzatore abbia accettato il contratto corretto.
+          NEEDS_HUMAN_RAW=$(gh api --paginate --slurp "$NEEDS_HUMAN_API")
           NEEDS_HUMAN_RC=$?
+          NEEDS_HUMAN_PAYLOAD=''
+          NEEDS_HUMAN_ITEMS=''
+          NEEDS_HUMAN_SHAPE_RC=1
+          NEEDS_HUMAN_MARKER_RC=1
+          NEEDS_HUMAN_PAYLOAD_MARKER='<!-- NEEDS_HUMAN_DIGEST_PAYLOAD_OK -->'
+          if [ "$NEEDS_HUMAN_RC" -eq 0 ]; then
+            NEEDS_HUMAN_PAYLOAD=$(printf '%s' "$NEEDS_HUMAN_RAW" | node scripts/ci/needs-human-digest.mjs)
+            NEEDS_HUMAN_SHAPE_RC=$?
+            if [ "$NEEDS_HUMAN_SHAPE_RC" -eq 0 ]; then
+              NEEDS_HUMAN_MARKER=$(printf '%s\n' "$NEEDS_HUMAN_PAYLOAD" | sed -n '1p')
+              if [ "$NEEDS_HUMAN_MARKER" = "$NEEDS_HUMAN_PAYLOAD_MARKER" ]; then
+                NEEDS_HUMAN_MARKER_RC=0
+                NEEDS_HUMAN_ITEMS=$(printf '%s\n' "$NEEDS_HUMAN_PAYLOAD" | tail -n +2)
+              fi
+            fi
+          fi
           # L'issue dedup di questo stesso step nasce con `automation` e NON
           # con `needs-human` — ma niente le impedisce di riceverla dopo: il
           # followup-drainer gliel'ha messa il 2026-09-02T13:39:50Z (issue
@@ -434,16 +456,48 @@ jobs:
           PRS_RC=$?
           ISSUES=$(printf '%s\n' "$NEEDS_HUMAN_ITEMS" | jq -r '[.[] | select(.pull_request | not) | select(.title != env.DEDUP_TITLE) | select(. as $i | [env.PERMANENT_TRACKER_TITLES | split("\n")[] | select(length > 0)] | index($i.title) | not) | "- #\(.number) \(.title) (ultimo update \(.updated_at))"] | join("\n")')
           ISSUES_RC=$?
-          if [ "$NEEDS_HUMAN_RC" -ne 0 ] || [ "$PRS_RC" -ne 0 ] || [ "$ISSUES_RC" -ne 0 ]; then
+          if [ "$NEEDS_HUMAN_RC" -ne 0 ] || [ "$NEEDS_HUMAN_SHAPE_RC" -ne 0 ] || [ "$NEEDS_HUMAN_MARKER_RC" -ne 0 ]; then
             # Query fallita: lo stato del backlog e' SCONOSCIUTO, non vuoto.
             # Non si chiude e non si ripubblica il corpo (che con una lista
             # troncata da un errore direbbe il falso): si fallisce lo step —
             # `continue-on-error: true` tiene comunque verde il job, ma il
             # rosso resta visibile e il prossimo run ricalcola da zero.
-            echo "::error::Query needs-human fallita (fetch rc=$NEEDS_HUMAN_RC, PR rc=$PRS_RC, issue rc=$ISSUES_RC): non tocco l'issue dedup. Liste vuote per un errore non sono «nessun residuo»."
+            echo "::error::Payload needs-human fallito (fetch rc=$NEEDS_HUMAN_RC, shape rc=$NEEDS_HUMAN_SHAPE_RC, marker rc=$NEEDS_HUMAN_MARKER_RC): non tocco l'issue dedup. Liste vuote per una risposta parziale o malformata non sono «nessun residuo»."
             exit 1
           fi
-          if [ -z "$PRS" ] && [ -z "$ISSUES" ]; then
+          # Le due partizioni hanno esiti indipendenti. Se una sola fallisce,
+          # la metà buona resta pubblicabile ma porta un marker esplicito e un
+          # placeholder: non si chiude un digest quando una metà è sconosciuta.
+          # Se falliscono entrambe, non c'è una metà affidabile da pubblicare.
+          if [ "$PRS_RC" -ne 0 ] && [ "$ISSUES_RC" -ne 0 ]; then
+            echo "::error::Partizioni needs-human entrambe fallite (PR rc=$PRS_RC, issue rc=$ISSUES_RC): non tocco l'issue dedup."
+            exit 1
+          fi
+          INCOMPLETE_CHANNELS=''
+          PR_COUNT=0
+          ISSUE_COUNT=0
+          if [ "$PRS_RC" -ne 0 ]; then
+            INCOMPLETE_CHANNELS='prs'
+            PRS='_(lista PR non disponibile in questo run; la metà buona resta pubblicata)_'
+            PR_COUNT='n/d'
+          else
+            [ -n "$PRS" ] && PR_COUNT=$(printf '%s\n' "$PRS" | wc -l | tr -d ' ')
+          fi
+          if [ "$ISSUES_RC" -ne 0 ]; then
+            INCOMPLETE_CHANNELS="${INCOMPLETE_CHANNELS}${INCOMPLETE_CHANNELS:+,}issues"
+            ISSUES='_(lista issue non disponibile in questo run; la metà buona resta pubblicata)_'
+            ISSUE_COUNT='n/d'
+          else
+            [ -n "$ISSUES" ] && ISSUE_COUNT=$(printf '%s\n' "$ISSUES" | wc -l | tr -d ' ')
+          fi
+          INCOMPLETE_MARKER=''
+          DIGEST_PREFIX=''
+          if [ -n "$INCOMPLETE_CHANNELS" ]; then
+            INCOMPLETE_MARKER="<!-- NEEDS_HUMAN_DIGEST_INCOMPLETE: $INCOMPLETE_CHANNELS -->"
+            DIGEST_PREFIX="$INCOMPLETE_MARKER\n⚠️ **Lista incompleta:** il prossimo run con entrambe le partizioni leggibili sostituirà questo marker e il contenuto parziale."
+            echo "::warning::$INCOMPLETE_MARKER una sola metà del digest è stata pubblicata; la chiusura resta disabilitata."
+          fi
+          if [ -z "$PRS" ] && [ -z "$ISSUES" ] && [ -z "$INCOMPLETE_MARKER" ]; then
             # Liste vuote = la condizione di chiusura che il corpo promette.
             # Uscire e basta la lasciava non mantenuta: l'issue dedup restava
             # aperta con un elenco ormai falso, e nessun altro processo la
@@ -507,15 +561,30 @@ jobs:
               --comment "Chiusa da \`Recycle stale PRs\`: nessun oggetto \`needs-human\` aperto (ne PR ne issue), la condizione di chiusura scritta nel corpo e soddisfatta. Il prossimo residuo riapre un'issue nuova con lo stesso titolo."
             exit 0
           fi
-          PR_COUNT=0; [ -n "$PRS" ] && PR_COUNT=$(printf '%s\n' "$PRS" | wc -l | tr -d ' ')
-          ISSUE_COUNT=0; [ -n "$ISSUES" ] && ISSUE_COUNT=$(printf '%s\n' "$ISSUES" | wc -l | tr -d ' ')
           echo "needs-human aperti: $PR_COUNT PR, $ISSUE_COUNT issue"
           [ -n "$PRS" ] || PRS='_(nessuna)_'
           [ -n "$ISSUES" ] || ISSUES='_(nessuna)_'
-          DESC=$(printf 'Nessun processo automatico sblocchera questi oggetti, e su `needs-human` la label e un filtro di ESCLUSIONE dalle code del drainer, non una segnalazione. Servono occhi umani.\n\n**PR** (%s) — il fixer dei red-flag ha raggiunto il round-cap e si e fermato (anti-loop), oppure sono draft parcheggiate, che ogni strato del ciclo salta by-design:\n\n%s\n\n**Issue** (%s) — escalate dal followup-drainer (too-large) o dal gate cronico di close-recovered-failure-issues.mjs (un guasto che ricorre oltre soglia). Restano fuori dal pool dei retry parcheggiati e dal rescue agent:fix dei crawler finche portano la label. Esclusi i tracker permanenti, riconosciuti per TITOLO (il digest dello sweep, il ledger transient): sono aperti per costruzione e non sono item da sbloccare. Escludere per label non sarebbe la stessa cosa — `agent:no-age-out` vuol dire «non scade», e nasconderebbe da qui una issue davvero bloccata:\n\n%s\n\n_Issue dedup giornaliera da recycle-stale-prs.yml (zero-Claude); si aggiorna con un commento di recurrence finche esiste qualcosa di needs-human, e si richiude da sola al primo run in cui entrambe le liste sono vuote (i tracker permanenti non contano come residuo)._' "$PR_COUNT" "$PRS" "$ISSUE_COUNT" "$ISSUES")
+          DESC=$(printf '%b\n\nNessun processo automatico sblocchera questi oggetti, e su `needs-human` la label e un filtro di ESCLUSIONE dalle code del drainer, non una segnalazione. Servono occhi umani.\n\n**PR** (%s) — il fixer dei red-flag ha raggiunto il round-cap e si e fermato (anti-loop), oppure sono draft parcheggiate, che ogni strato del ciclo salta by-design:\n\n%s\n\n**Issue** (%s) — escalate dal followup-drainer (too-large) o dal gate cronico di close-recovered-failure-issues.mjs (un guasto che ricorre oltre soglia). Restano fuori dal pool dei retry parcheggiati e dal rescue agent:fix dei crawler finche portano la label. Esclusi i tracker permanenti, riconosciuti per TITOLO (il digest dello sweep, il ledger transient): sono aperti per costruzione e non sono item da sbloccare. Escludere per label non sarebbe la stessa cosa — `agent:no-age-out` vuol dire «non scade», e nasconderebbe da qui una issue davvero bloccata:\n\n%s\n\n_Issue dedup giornaliera da recycle-stale-prs.yml (zero-Claude); si aggiorna con un commento di recurrence finche esiste qualcosa di needs-human, e si richiude da sola al primo run in cui entrambe le liste sono vuote (i tracker permanenti non contano come residuo)._' "$DIGEST_PREFIX" "$PR_COUNT" "$PRS" "$ISSUE_COUNT" "$ISSUES")
           node scripts/lib/github-issue-creator.mjs \
             --title "$DEDUP_TITLE" \
             --description "$DESC" \
             --priority 2 \
             --label automation \
             --workflow "Recycle stale PRs"
+
+      # `continue-on-error` sul produttore protegge il resto del recycle, ma da
+      # solo renderebbe un errore persistente indistinguibile da un digest sano.
+      # Questo watchdog osserva l'outcome dello step e rialza il segnale al job:
+      # il corpo dell'ultima pubblicazione buona resta intatto, mentre il run
+      # diventa visibilmente rosso finché il produttore non torna aggiornabile.
+      - name: Watchdog — needs-human digest outcome
+        if: always()
+        env:
+          SURFACE_OUTCOME: ${{ steps.surface_digest.outcome }}
+        run: |
+          set -eu
+          if [ "$SURFACE_OUTCOME" != "success" ]; then
+            echo "::error::needs-human digest non aggiornato in questo run (surface outcome=$SURFACE_OUTCOME): l'ultima pubblicazione buona resta conservata, ma serve un run riuscito."
+            exit 1
+          fi
+          echo "needs-human digest aggiornato o verificato con successo."

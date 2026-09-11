@@ -26,6 +26,7 @@ import {
   isReparkableCandidate,
   isDecomposeEligible,
   isStuckFixRescueCandidate,
+  staleFixRescueGate,
 } from '../../scripts/ci/followup-drainer.mjs';
 
 const SRC = readFileSync(
@@ -108,4 +109,10 @@ test('#1076: il rescue vede agent:fix senza PR/beacon e non tocca i concorrenti'
   assert.equal(isStuckFixRescueCandidate(queueIssue(['fu-parked'])), false);
   assert.equal(isStuckFixRescueCandidate(queueIssue(['decomposed:1'])), false);
   assert.match(SRC, /allFix\.filter\(isStuckFixRescueCandidate\)/);
+  assert.match(SRC, /const rescueGate = staleFixRescueGate\(/);
+  assert.match(SRC, /add: \[LBL_QUEUED\][\s\S]*remove: \[LBL_FIX\]/);
+  assert.equal(
+    staleFixRescueGate({ outcome: null, ageMin: 31, hasPR: false, orphanMinAgeMin: 30 }).action,
+    'rearm',
+  );
 });

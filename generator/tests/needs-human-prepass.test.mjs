@@ -734,6 +734,27 @@ test('la nota dice stato e data, e il blocco scaduto da solo NON instrada', () =
   assert.equal(noteMarker({ refs: [] }, stale), '<!-- PREPASS_NOTE: b=a#1 -->');
 });
 
+test('#1078 item 1: il cap dei lookup usa una chiave stabile e non riposta la nota', () => {
+  const stale = [{ key: 'a#1', link: 'a#1', state: 'CLOSED', at: '2026-08-18' }];
+  const known = noteMarker({ refs: [7] }, stale);
+  const degraded = noteMarker({ refs: [7] }, stale, { staleBlocksUnknown: true });
+  assert.equal(degraded, '<!-- PREPASS_NOTE: r=7 b=? -->');
+  assert.match(
+    prepassNote({ unconditional: [], conditional: [], refs: [] }, [], { staleBlocksUnknown: true }),
+    /MAX_REF_LOOKUPS/,
+  );
+  assert.equal(
+    noteGate({ marker: degraded, comments: [{ body: `nota\n${known}` }], commentsRead: true }).post,
+    false,
+    'un run degradato non deve cambiare chiave e ripostare la stessa nota completa',
+  );
+  assert.equal(
+    noteGate({ marker: known, comments: [{ body: degraded }], commentsRead: true }).post,
+    true,
+    'quando il resolver torna sano, una misura nuova può aggiornare la nota',
+  );
+});
+
 test('senza righe e senza blocchi non si scrive niente (nessun commento a vuoto)', () => {
   assert.equal(prepassNote({ unconditional: [], conditional: [], refs: [] }, []), null);
   assert.equal(noteMarker({ refs: [] }, []), null);
@@ -820,6 +841,17 @@ test('#923: al tetto il ramo registro torna al giudizio dello sweep', () => {
   assert.equal(d.registryRequeue, undefined);
   // La riga resta comunque ALLEGATA: si smette di ri-accodare, non di misurare.
   assert.match(d.note, /Registro di `VISION.md`/);
+});
+
+test('#1078 item 2: il tetto registry non blocca una famiglia monitor riconosciuta', () => {
+  const d = prepassDecision({
+    ...REGISTRY_REQUEUE_BASE,
+    title: 'Crawler Failure: Run zurich',
+    registryRequeues: REGISTRY_REQUEUE_MAX_CYCLES,
+  });
+  assert.equal(d.action, 'requeue');
+  assert.equal(d.registryRequeue, undefined, 'il tetto non deve contare nuovi giri registry');
+  assert.match(d.reason, /tetto registry.*famiglia di monitor riconosciuta/i);
 });
 
 test('#923: i due contatori non si contano a vicenda', () => {
