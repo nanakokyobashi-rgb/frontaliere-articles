@@ -16,6 +16,7 @@
  *   process.env['OMNIROUTE_URL']            // indicizzazione: invisibile a uno dei due
  *   process.env[cfg.urlEnv]                 // chiave dinamica: non risolvibile
  *   const env = process.env;                 // alias: l'oggetto intero sfugge
+ *   const child = { ...process.env };       // forwarding opaco dell'intero env
  *
  * Le prime due sono statiche e vanno semplicemente RICONOSCIUTE. Le ultime due
  * non sono risolvibili leggendo il testo, e per loro l'unica risposta onesta e'
@@ -32,19 +33,58 @@
 /** Il marcatore che dichiara sicura una lettura non risolvibile staticamente. */
 export const ENV_SCAN_EXEMPTION_RE = /env-scan:\s*\S/;
 
+function trailingLineCommentStart(line) {
+  let quote = null;
+  let escaped = false;
+  for (let i = 0; i < line.length; i++) {
+    const c = line[i];
+    if (quote) {
+      if (escaped) { escaped = false; continue; }
+      if (c === '\\') { escaped = true; continue; }
+      if (c === quote) quote = null;
+      continue;
+    }
+    if (c === "'" || c === '"' || c === '`') { quote = c; continue; }
+    if (c === '/' && line[i + 1] === '/') return i;
+  }
+  return -1;
+}
+
+function stripTrailingLineComment(line) {
+  const commentAt = trailingLineCommentStart(line);
+  if (commentAt < 0) return line;
+  const comment = line.slice(commentAt);
+  // Keep only a harmless marker so an exemption remains effective without
+  // letting the prose after `//` create a phantom read.
+  return ENV_SCAN_EXEMPTION_RE.test(comment)
+    ? `${line.slice(0, commentAt)} // env-scan: preserved`
+    : line.slice(0, commentAt);
+}
+
+function hasTrailingExemption(line) {
+  const commentAt = trailingLineCommentStart(line);
+  return commentAt >= 0 && ENV_SCAN_EXEMPTION_RE.test(line.slice(commentAt));
+}
+
 /**
- * Svuota le righe che sono SOLO commento, lasciando i numeri di riga intatti.
+ * Svuota le righe che sono SOLO commento e la coda `//` delle righe di codice,
+ * lasciando i numeri di riga intatti.
  *
  * Serve ai sorgenti che citano il proprio codice in prosa: un
  * `process.env.NUOVO_PROVIDER_URL` dentro un docblock non e' una lettura. Il
  * filtro e' per riga e non a blocchi di proposito — un `/*` dentro un commento
  * `//` aprirebbe un finto blocco e il primo `*` seguito da `/` si porterebbe via
- * il codice in mezzo (misurato: 4.732 righe su 7.535 di `ai-models.mjs`).
+ * il codice in mezzo (misurato: 4.732 righe su 7.535 di `ai-models.mjs`). La
+ * coda viene tolta solo fuori da apici e backtick, così un URL o una stringa
+ * non diventa un commento fantasma.
  */
 export function stripCommentLines(src) {
   return src
     .split('\n')
-    .map((riga) => (/^\s*(\/\/|\/\*|\*)/.test(riga) ? '' : riga))
+    .map((riga) => {
+      const senzaCoda = stripTrailingLineComment(riga);
+      return /^\s*(\/\/|\/\*|\*)/.test(senzaCoda) ? '' : senzaCoda;
+    })
     .join('\n');
 }
 
@@ -82,7 +122,7 @@ export function scanEnvReads(src) {
   const add = (name, index) => { names.add(name); reads.push({ name, line: lineAt(index) }); };
   const opaco = (form, index) => {
     const line = lineAt(index);
-    if (ENV_SCAN_EXEMPTION_RE.test(righe[line - 1] ?? '')) return;
+    if (hasTrailingExemption(righe[line - 1] ?? '')) return;
     opaque.push({ line, form, text: (righe[line - 1] ?? '').trim() });
   };
 
@@ -99,8 +139,9 @@ export function scanEnvReads(src) {
     else opaco('chiave dinamica', m.index);
   }
 
-  // 4. `const { A, B: c } = process.env` — anche su piu' righe.
-  for (const m of src.matchAll(/\{([^{}]*)\}\s*=\s*process\.env\b/g)) {
+  // 4. `const { A, B: c } = process.env` — anche su piu' righe e con una
+  // type annotation fra `}` e `=`.
+  for (const m of src.matchAll(/\{([^{}]*)\}\s*(?::\s*[^=;{}]+)?\s*=\s*process\.env\b/g)) {
     for (const pezzo of m[1].split(',')) {
       const t = pezzo.trim();
       if (!t) continue;
@@ -117,6 +158,21 @@ export function scanEnvReads(src) {
   //    gia' contata ai punti 1-2.
   for (const m of src.matchAll(/(?:^|[^.\w$])([A-Za-z_$][\w$]*)\s*=\s*process\.env\s*(?![.[])/g)) {
     opaco(`alias \`${m[1]}\` dell'intero process.env`, m.index);
+  }
+
+  // 6. Forwarding dell'intero ambiente in forme che non espongono alcun nome:
+  // spread, proprietà `env`, Object.keys() e destrutturazione di `process`.
+  for (const m of src.matchAll(/\.\.\.\s*process\.env\b/g)) {
+    opaco('spread dell\'intero process.env', m.index);
+  }
+  for (const m of src.matchAll(/\b[A-Za-z_$][\w$]*\s*:\s*process\.env\b/g)) {
+    opaco('proprietà che inoltra l\'intero process.env', m.index);
+  }
+  for (const m of src.matchAll(/\bObject\s*\.\s*keys\s*\(\s*process\.env\s*\)/g)) {
+    opaco('enumerazione dell\'intero process.env', m.index);
+  }
+  for (const m of src.matchAll(/\b(?:const|let|var)\s*\{[^{}]*\benv\b[^{}]*\}\s*=\s*process\b(?!\s*\.)/g)) {
+    opaco('destrutturazione di process.env', m.index);
   }
 
   return { names, reads, opaque };

@@ -12,7 +12,6 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
-import { fileURLToPath } from 'node:url';
 import { codeOnly, relativeImportSpec, createReachableSource } from './lib/reachable-source.mjs';
 
 const BT = '`';
@@ -324,17 +323,22 @@ test('un ciclo di import non tronca la sorgente per gli altri importatori', () =
 
 test('un nodo che rientra nel ciclo conserva almeno la propria sorgente', () => {
   const dir = mkTree({
-    'a.mjs': "import './b.mjs';\nexport const a = 'a';",
-    'b.mjs': "import './a.mjs';\nexport const target = 'content/services/locales/blog-body/it/x.ts';",
+    'a.mjs': "import './b.mjs';\nexport const a = 'content/services/locales/blog-body/it/a.ts';",
+    'b.mjs': "import './a.mjs';\nexport const b = 'dist/api/manifest.json';",
   });
-  const source = fs.readFileSync(
-    path.join(path.dirname(fileURLToPath(import.meta.url)), 'lib/reachable-source.mjs'),
-    'utf-8',
-  );
-  assert.match(source, /ancestors\.has\(file\)[\s\S]*text: ownSource/,
-    'il ramo di ri-entrata non deve restituire una sorgente vuota');
   const reachable = createReachableSource();
-  assert.match(reachable(path.join(dir, 'a.mjs')), /blog-body/);
+  const count = (text, needle) => text.split(needle).length - 1;
+  const fromA = reachable(path.join(dir, 'a.mjs'));
+  assert.equal(count(fromA, 'blog-body/it/a.ts'), 2,
+    'il nodo A rientrato nel ciclo deve contribuire di nuovo con la propria sorgente');
+  assert.equal(count(fromA, 'dist/api/manifest.json'), 1,
+    'la sorgente di B deve entrare una volta nel risultato di A');
+
+  const fromB = reachable(path.join(dir, 'b.mjs'));
+  assert.equal(count(fromB, 'dist/api/manifest.json'), 2,
+    'il risultato di B deve includere la propria sorgente al rientro');
+  assert.equal(count(fromB, 'blog-body/it/a.ts'), 1,
+    'il ciclo non deve contaminare il root fratello con un combinato troncato o duplicato');
 });
 
 test('la cache resta condivisa fra rami fratelli che passano dallo stesso modulo', () => {
