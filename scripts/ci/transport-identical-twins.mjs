@@ -513,15 +513,22 @@ export const SET_DESCRIPTORS = new Set([
  * parsato: cambia sotto, e l'aspettativa del test cambia con lui.
  */
 const READ_CALL_NAMES = new Set(['readFileSync', 'readFile', 'createReadStream', 'openSync', 'require', 'import']);
-// Solo per il caso speciale del manifest: queste chiamate trasformano o
-// verificano valori, non sono wrapper di lettura. Tutti gli altri nomi
-// sconosciuti restano un'incertezza e tengono l'accoppiamento, invece di
-// dichiarare chiuso il canale sulla base di una supposizione.
-const NON_CONTENT_CALL_NAMES = new Set([
+// Il manifest ha un segnale conservativo distinto dal default-closed di
+// `isReadCall`: una chiamata globale sconosciuta che riceve il suo literal può
+// essere un reader/wrapper, quindi non chiudiamo il coupling per supposizione.
+// I nomi globali qui sotto sono DSL di test, assert, logger o costruttori noti:
+// il literal in questi argomenti è un valore descritto/verificato, non il
+// contenuto del file. I metodi qualificati sono filtrati separatamente dal
+// flag `member` di `callRanges`, così `push`, `slice`, `stringify`, ecc. non
+// diventano una deny-list aperta che il default-closed dovrebbe sostituire.
+const NON_CONTENT_DIRECT_CALL_NAMES = new Set([
   'assert', 'deepEqual', 'equal', 'ok', 'strictEqual', 'includes', 'has', 'test', 'match', 'replace',
   'split', 'trim', 'join', 'resolve', 'basename', 'dirname', 'parse', 'URL', 'log', 'warn', 'error',
   'map', 'filter', 'some', 'every', 'find', 'keys', 'values', 'String', 'Number', 'Boolean', 'Date',
   'Set', 'Map', 'Promise', 'Error',
+  // Globali comuni dei runner di test: il path può essere il titolo, non un
+  // file aperto dal callback.
+  'describe', 'it', 'before', 'after', 'beforeEach', 'afterEach', 'suite', 'context', 'specify', 'step',
 ]);
 
 /**
@@ -715,7 +722,14 @@ function callRanges(src) {
         break;
       }
     }
-    if (close >= 0) ranges.push({ name: m[1], open, close });
+    if (close >= 0) {
+      ranges.push({
+        name: m[1],
+        open,
+        close,
+        member: /\.\s*$/.test(masked.slice(0, m.index)),
+      });
+    }
   }
   return ranges;
 }
@@ -726,6 +740,18 @@ function isReadCall(name) {
   // che lo nomina soltanto (issue #1245). I wrapper di lettura convenzionali
   // restano coperti dalla forma `read*`/`load*`/`fetch*`/`open*`.
   return READ_CALL_NAMES.has(name) || /^(?:read|load|fetch|open)[A-Z_$\w]*$/i.test(name);
+}
+
+/**
+ * Il segnale speciale del manifest è «coupling incerto», non «questa chiamata
+ * dimostra una read». Un wrapper globale non riconosciuto resta accoppiato per
+ * non lasciare il ledger fuori da una copia; un metodo qualificato o una DSL
+ * nota, invece, è una trasformazione/verifica e resta default-closed.
+ */
+function isManifestCouplingCall(call) {
+  if (isReadCall(call.name)) return true;
+  if (call.member) return false;
+  return !NON_CONTENT_DIRECT_CALL_NAMES.has(call.name);
 }
 
 /**
@@ -767,7 +793,7 @@ export function readsContentOf(rel, text) {
     const at = m.index;
     const containingCalls = ranges.filter((r) => at > r.open && at < r.close);
     if (containingCalls.some((r) => isReadCall(r.name))) return true;
-    if (manifestNeedsConservativeCoupling && containingCalls.some((r) => !NON_CONTENT_CALL_NAMES.has(r.name))) return true;
+    if (manifestNeedsConservativeCoupling && containingCalls.some(isManifestCouplingCall)) return true;
   }
   if (new RegExp(`(?:^|[\\n;])\\s*(?:import|export)\\b[^;]*${lit}`).test(src)) return true;
 
@@ -777,7 +803,7 @@ export function readsContentOf(rel, text) {
     const alias = new RegExp(`\\b${m[1]}\\b`);
     const aliasCalls = ranges.filter((r) => r.open < src.length && alias.test(src.slice(r.open + 1, r.close)));
     if (aliasCalls.some((r) => isReadCall(r.name))) return true;
-    if (manifestNeedsConservativeCoupling && aliasCalls.some((r) => !NON_CONTENT_CALL_NAMES.has(r.name))) return true;
+    if (manifestNeedsConservativeCoupling && aliasCalls.some(isManifestCouplingCall)) return true;
   }
   return false;
 }

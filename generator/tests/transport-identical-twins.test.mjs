@@ -595,6 +595,15 @@ test('readsContentOf riconosce prefissi relativi e wrapper di lettura espliciti'
   // lascerebbe il manifest fermo mentre il consumer scende.
   assert.equal(readsContentOf(rel, "sharedContentReader('../../scripts/ci/loop-sync-manifest.json')"), true);
   assert.equal(readsContentOf(rel, "sharedContentWriter('../../scripts/ci/loop-sync-manifest.json')"), true);
+  // Il segnale non è una deny-list aperta: una DSL globale che usa il literal
+  // come titolo e i metodi qualificati che trasformano/ispezionano stringhe
+  // restano default-closed.
+  assert.equal(readsContentOf(rel, "describe('scripts/ci/loop-sync-manifest.json', () => {})"), false);
+  assert.equal(readsContentOf(rel, "it('scripts/ci/loop-sync-manifest.json', () => {})"), false);
+  assert.equal(readsContentOf(rel, "list.push('scripts/ci/loop-sync-manifest.json')"), false);
+  assert.equal(readsContentOf(rel, "text.startsWith('scripts/ci/loop-sync-manifest.json')"), false);
+  assert.equal(readsContentOf(rel, "JSON.stringify('scripts/ci/loop-sync-manifest.json')"), false);
+  assert.equal(readsContentOf(rel, "mysteryWrapper('scripts/ci/loop-sync-manifest.json')"), true);
   assert.equal(readsContentOf('scripts/ci/other.json', "sharedContentReader('../../scripts/ci/other.json')"), false);
   assert.equal(readsContentOf(rel, undefined), true, 'senza testo il verso sicuro è l\u2019accoppiamento');
 });
