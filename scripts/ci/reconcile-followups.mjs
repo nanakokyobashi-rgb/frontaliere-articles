@@ -11,8 +11,11 @@
  *
  * For each open `follow-up` issue, it extracts the cited file(s) and the distinctive
  * CODE token(s) quoted in the body (`Original text` / `Suggested action`), then checks
- * whether those tokens are now present verbatim in the cited file. A hit means the
- * asserted behavior/symbol already exists → the item is likely done-but-open.
+ * whether those tokens are now present verbatim in the cited file. Legacy per-PR items
+ * may also carry explicit negative acceptance (a stale expression must be absent): that
+ * path is usable only with a merged `Addresses #N` provenance and live `Target file:`
+ * metadata. A hit means the asserted behavior/symbol already exists → the item is likely
+ * done-but-open.
  *
  * TWO-TIER, double-confirm-across-time (replaces the old never-close rule, which left
  * the deterministically-detected `maybe-resolved` pile to a human who never came — the
@@ -25,8 +28,9 @@
  *      label): AUTO-CLOSE with a citation comment + `fu-resolved-auto`, `--reason completed`.
  * Why this is safe (no quality loss): the close fires only on TWO independent deterministic
  * confirmations separated in time, after a human grace window, on the hardened matcher
- * (ALL distinctive prescribed code tokens present — the same bar that gates the issue-fix
- * pre-flight, which DROPS work, a strictly higher-stakes action than a reversible close).
+ * (ALL distinctive prescribed code tokens present, or the separate provenance-backed legacy
+ * acceptance with its explicit negative assertions evaluated — the same bar remains in force
+ * for the ordinary path).
  * Multi-item aggregates and keep-open/strategic issues never auto-close (a prose-only
  * sub-item contributes no gating token, so "all tokens present" can't prove every item is
  * done). A genuinely-pending fix recurs and reopens via the dedup-stable monitor title.
@@ -46,6 +50,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import {
   bucketState,
+  citedTokens,
   dailyKeyFromBucketBody,
   dailyBucketInfo,
   detectAlreadyResolved,
@@ -304,6 +309,275 @@ export function isStrongAutoCloseEvidence(matchedTokens) {
 }
 
 /**
+ * Remove JavaScript comments while retaining string literals.
+ *
+ * Legacy follow-ups sometimes prescribe removing a command-line fragment.  A
+ * stale fragment can remain in a documentation comment after the executable
+ * code has been corrected; counting that comment as a live negative failure
+ * would strand the issue again.  This small scanner is deliberately limited to
+ * comments (not a JavaScript parser): strings and template literals remain in
+ * the result because a command argument inside one is executable data.
+ */
+export function stripJavaScriptComments(source) {
+  const text = String(source || '');
+  const out = [];
+  let state = 'code';
+  let quote = '';
+  let escaped = false;
+
+  for (let i = 0; i < text.length; i += 1) {
+    const ch = text[i];
+    const next = text[i + 1];
+    if (state === 'line-comment') {
+      if (ch === '\n') {
+        out.push(ch);
+        state = 'code';
+      }
+      continue;
+    }
+    if (state === 'block-comment') {
+      if (ch === '*' && next === '/') {
+        i += 1;
+        state = 'code';
+      } else if (ch === '\n') {
+        out.push(ch);
+      }
+      continue;
+    }
+    if (state === 'string') {
+      out.push(ch);
+      if (escaped) escaped = false;
+      else if (ch === '\\') escaped = true;
+      else if (ch === quote) state = 'code';
+      continue;
+    }
+    if (ch === '/' && next === '/') {
+      i += 1;
+      state = 'line-comment';
+      continue;
+    }
+    if (ch === '/' && next === '*') {
+      i += 1;
+      state = 'block-comment';
+      continue;
+    }
+    if (ch === "'" || ch === '"' || ch === '`') {
+      quote = ch;
+      escaped = false;
+      state = 'string';
+    }
+    out.push(ch);
+  }
+  return out.join('');
+}
+
+function unprotectedLines(text) {
+  const lines = [];
+  let fence = null;
+  for (const line of String(text || '').split('\n')) {
+    const marker = /^\s*(`{3,}|~{3,})(.*)$/.exec(line);
+    const quoted = /^\s*>/.test(line);
+    if (!quoted && !fence) lines.push(line);
+    if (fence) {
+      if (!quoted && marker && marker[1][0] === fence[0]
+          && marker[1].length >= fence.length && /^\s*$/.test(marker[2])) {
+        fence = null;
+      }
+    } else if (!quoted && marker) {
+      fence = [marker[1][0], marker[1].length];
+    }
+  }
+  return lines;
+}
+
+/** Live schema metadata for an item; quoted/fenced examples never count. */
+export function declaredTargetFiles(itemText, fileExists = () => false) {
+  const out = new Set();
+  for (const line of unprotectedLines(itemText)) {
+    const match = /^\s*-\s+Target file:\s*([\w./-]+\.[a-z]{2,5})(?::L?\d+(?:-L?\d+)?)?\s*$/i.exec(line);
+    if (match && match[1].includes('/') && fileExists(match[1])) out.add(match[1]);
+  }
+  return [...out];
+}
+
+function escapedRegExp(value) {
+  return String(value).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+/**
+ * Return tokens that the legacy prose explicitly requires to disappear.
+ *
+ * This is intentionally narrower than a generic "token absent" rule.  A
+ * token is negative only when the surrounding prescribed action says
+ * `smettere/non ...`, `invece di/instead of`, or `sostituisci/replace ... con/with`.
+ * The remaining tokens are never reclassified as negative for the ordinary
+ * matcher. Thus absence alone can never resolve an issue: a merged PR with an explicit `Addresses`
+ * declaration and a live Target file is still required by
+ * `legacyAddressEvidence()` below.
+ */
+export function negativeAcceptanceTokens(itemText) {
+  const source = String(itemText || '');
+  const tokens = citedTokens(source);
+  const negative = new Set();
+  for (const token of tokens) {
+    const re = new RegExp(escapedRegExp(token), 'g');
+    for (const match of source.matchAll(re)) {
+      const lineStart = source.lastIndexOf('\n', match.index) + 1;
+      const lineEnd = source.indexOf('\n', match.index);
+      const start = lineStart;
+      const end = lineEnd < 0 ? source.length : lineEnd;
+      const before = source.slice(start, match.index);
+      const after = source.slice(match.index + token.length, end);
+      const beforeShort = before.slice(-100);
+      const afterShort = after.slice(0, 100);
+      const replaceTail = beforeShort.match(/(?:sostituisci|replace)([\s\S]{0,100})$/i)?.[1] || '';
+      const replacementBefore = !!replaceTail
+        && !/\b(?:con|with)\b/i.test(replaceTail)
+        && /\b(?:con|with)\b/i.test(afterShort);
+      const negativeBefore = /(?:\binvece\s+di\b|\binstead\s+of\b)[^`]{0,80}[`'"({]*$/i.test(beforeShort)
+        || /(?:\bnessun\s*|\b(?:non|no|not)\s+(?:resti|rimanga|remain|rest|stay)?\s*)[`'"({]*$/i.test(beforeShort);
+      const negativeAfter = /(?:\bsmettere\s+di\b|\bmust\s+not\b|\bnot\s+remain\b|\brimuov[ioa]\b|\belimin[ia]\b|\bsparit[oa]\b)/i.test(afterShort);
+      const negativeWindow = negativeBefore || negativeAfter;
+      // A few legacy cards describe a stale guard semantically instead of using
+      // `sostituisci X con Y`: the length check and the whitespace-bearing input
+      // literal are the old acceptance, while the validator call is the new one.
+      // Keep this narrowly tied to normalization/input language; never turn an
+      // arbitrary quoted string or `.length` expression into negative evidence.
+      const semanticNormalization = /\b(?:normalizz\w*|trimm?at\w*|whitespace|spazi\w*|quot\w*|input|literal|valore)\b/i
+        .test(`${beforeShort} ${afterShort}`);
+      const staleLengthGuard = semanticNormalization && /\.length\s*[<>=!]/.test(token);
+      const tokenText = token.trim();
+      const staleWhitespaceLiteral = semanticNormalization
+        && /^(['"]).*\1$/.test(tokenText)
+        && /\s/.test(tokenText.slice(1, -1));
+      if (replacementBefore || negativeWindow || staleLengthGuard || staleWhitespaceLiteral) {
+        negative.add(token);
+        break;
+      }
+    }
+  }
+  return [...negative];
+}
+
+function normalizedPrFiles(pr) {
+  return new Set((Array.isArray(pr?.files) ? pr.files : [])
+    .map((file) => typeof file === 'string' ? file : file?.path)
+    .filter(Boolean)
+    .map(String));
+}
+
+/**
+ * Transport provenance is recognized from deterministic PR identity, never
+ * from free-form body prose.  The transport PR itself must carry the target
+ * file; an Addresses PR may point at its verified transport twin through
+ * `supportingPrs`.
+ */
+function isRecognizableTransportPr(pr) {
+  const identity = `${pr?.title || ''} ${pr?.headRefName || ''}`;
+  return /\b(?:lockstep|transport|trasporto)\b/i.test(identity);
+}
+
+function targetFileInAddressedProvenance(pr, targetFile) {
+  if (normalizedPrFiles(pr).has(targetFile)) return { pr, viaTransport: false };
+  const transportPr = (Array.isArray(pr?.supportingPrs) ? pr.supportingPrs : [])
+    .find((candidate) => isRecognizableTransportPr(candidate)
+      && normalizedPrFiles(candidate).has(targetFile));
+  return transportPr ? { pr: transportPr, viaTransport: true } : null;
+}
+
+/**
+ * Pure legacy acceptance proof for one item.
+ *
+ * A legacy item is resolved only when all three independent facts hold:
+ *   1. its live `Target file:` metadata identifies exactly one file;
+ *   2. a merged PR explicitly says `Addresses #N` and either changed that file
+ *      or points to a recognizable official transport PR which changed that file;
+ *   3. every token explicitly marked as obsolete is evaluated against executable
+ *      content (comments are ignored, string literals are retained); an absent
+ *      token is recorded as negative evidence, while a token that remains as a
+ *      legitimate sub-expression is accepted only when the strict positive
+ *      matcher resolves the item.
+ *
+ * The PR provenance is what prevents an absence check from becoming a false
+ * positive. No old token is added to the source or to the issue body.
+ */
+export function legacyAddressEvidence(itemText, issueNumber, io, addressedPrs = []) {
+  const empty = { resolved: false, evidence: [], targetFiles: [], negativeTokens: [] };
+  try {
+    const fileExists = io && typeof io.fileExists === 'function' ? io.fileExists : () => false;
+    const readFile = io && typeof io.readFile === 'function' ? io.readFile : () => null;
+    const targetFiles = declaredTargetFiles(itemText, fileExists);
+    if (targetFiles.length !== 1) return { ...empty, targetFiles };
+    const targetFile = targetFiles[0];
+    const content = readFile(targetFile);
+    if (typeof content !== 'string') return { ...empty, targetFiles };
+    const issue = Number(issueNumber);
+    if (!Number.isInteger(issue) || issue <= 0) return { ...empty, targetFiles };
+    let targetProvenance = null;
+    const pr = (Array.isArray(addressedPrs) ? addressedPrs : []).find((candidate) => {
+      if (!candidate?.mergedAt || !Number.isInteger(Number(candidate.number))) return false;
+      const addressed = new RegExp(`\\bAddresses\\s+#${issue}\\b`, 'i').test(String(candidate.body || ''));
+      if (!addressed) return false;
+      targetProvenance = targetFileInAddressedProvenance(candidate, targetFile);
+      return !!targetProvenance;
+    });
+    if (!pr) return { ...empty, targetFiles };
+
+    const strict = detectAlreadyResolved(itemText, io);
+    const negativeTokens = negativeAcceptanceTokens(itemText);
+    const executable = stripJavaScriptComments(content);
+    const absentNegativeTokens = negativeTokens.filter((token) => !executable.includes(token));
+    const negativeProof = negativeTokens.length > 0
+      && absentNegativeTokens.length === negativeTokens.length;
+    // Provenance and a live target are necessary but not sufficient.  The
+    // content must either satisfy the shared positive matcher, or explicitly
+    // satisfy a fully-negative acceptance; this prevents a Target-file-only
+    // item from resolving on declarative provenance alone.
+    const contentProof = strict.resolved || negativeProof;
+    if (!contentProof) return { ...empty, targetFiles, negativeTokens: absentNegativeTokens };
+
+    const evidence = [
+      { kind: 'legacy-content', file: targetFile, mode: strict.resolved ? 'positive' : 'negative' },
+      ...(strict.resolved ? strict.evidence : []),
+      {
+        kind: 'legacy-address',
+        issue,
+        pr: Number(pr.number),
+        file: targetFile,
+        mergedAt: String(pr.mergedAt),
+        transportPr: targetProvenance.viaTransport ? Number(targetProvenance.pr.number) : null,
+      },
+      { kind: 'legacy-target', file: targetFile },
+      ...absentNegativeTokens.map((tok) => ({ kind: 'legacy-negative', file: targetFile, tok })),
+    ];
+    return { resolved: true, evidence, targetFiles, negativeTokens: absentNegativeTokens };
+  } catch {
+    return empty;
+  }
+}
+
+/** Pure issue-level adapter used by the reconcile loop and unit tests. */
+export function legacyResolutionContext(issueNumber, body, io, addressedPrs = []) {
+  const items = parseFollowupItems(body);
+  if (!items.length) return { resolved: false, evidence: [], byItem: new Map(), validItems: [] };
+  // Keep this list identical to the shared close predicate.  Live Target-file
+  // metadata is provenance, not acceptance, and must never promote a prose-only
+  // item into an aggregate gate.
+  const validItems = items.filter((item) => hasFalsifiableAcceptance(item.text));
+  const byItem = new Map();
+  for (const item of validItems) {
+    byItem.set(item.text, legacyAddressEvidence(item.text, issueNumber, io, addressedPrs));
+  }
+  const results = validItems.map((item) => byItem.get(item.text));
+  return {
+    resolved: validItems.length > 0 && results.every((result) => result?.resolved),
+    evidence: results.flatMap((result) => result?.evidence || []),
+    byItem,
+    validItems,
+  };
+}
+
+/**
  * Item-level close gate for a sealed daily bucket. Every item must be structurally
  * readable, accepted, explicitly `done`, token-confirmed, and backed by strong evidence.
  * A single unresolved/ambiguous/weak item vetoes the whole issue.
@@ -443,16 +717,26 @@ export function reconcileDailyItems(
  *
  * @returns {{blocks: boolean, reason: string|null}}
  */
-export function aggregateCloseGate(body, io) {
+export function aggregateCloseGate(body, io, { legacyResolver = null } = {}) {
   if (hasUnterminatedMarkdownFence(body)) return { blocks: true, reason: 'unterminated-markdown-fence' };
   if (bucketState(body) || hasStableItemIds(body)) return dailyBucketCloseGate(body, io);
   const items = splitFollowupItems(body);
   // Corpo senza struttura a item: non abbiamo riclassificato nulla, quindi
   // resta il veto storico. Mai interpretare «non so leggerlo» come «vuoto».
   if (!items.length) return { blocks: true, reason: 'aggregate-unparsed' };
-  const valid = items.filter(hasFalsifiableAcceptance);
+  const legacyResults = new Map();
+  if (typeof legacyResolver === 'function') {
+    for (const item of items) legacyResults.set(item, legacyResolver(item));
+  }
+  // This must remain the shared validity predicate. Target-file metadata can
+  // establish provenance for a real acceptance item, but cannot make prose-only
+  // text a gating item.
+  const valid = items.filter((item) => hasFalsifiableAcceptance(item));
   if (!valid.length) return { blocks: true, reason: 'no-valid-item' };
-  const allConfirmed = valid.every((s) => detectAlreadyResolved(s, io).resolved);
+  const allConfirmed = valid.every((s) => {
+    if (detectAlreadyResolved(s, io).resolved) return true;
+    return legacyResults.get(s)?.resolved === true;
+  });
   return allConfirmed ? { blocks: false, reason: null } : { blocks: true, reason: 'valid-item-unconfirmed' };
 }
 
@@ -521,6 +805,68 @@ const diskIo = {
   },
 };
 
+let mergedPrListCache = null;
+const mergedPrDetailCache = new Map();
+const mergedAddressedPrCache = new Map();
+const mergedAddressedListCache = new Map();
+
+function mergedPrDetails(number) {
+  const n = Number(number);
+  if (!Number.isInteger(n) || n <= 0) return null;
+  if (mergedPrDetailCache.has(n)) return mergedPrDetailCache.get(n);
+  const raw = gh(['pr', 'view', String(n), ...repoArgs,
+    '--json', 'number,title,body,headRefName,mergedAt,files'], { allowFail: true });
+  const parsed = parseIssueJson(raw);
+  const result = parsed && parsed.mergedAt ? parsed : null;
+  mergedPrDetailCache.set(n, result);
+  return result;
+}
+
+/**
+ * Read merged PR provenance once per reconcile run. `Addresses` is deliberately
+ * the only accepted issue reference here: `Closes` would let a transport PR
+ * change issue state before this workflow's grace window and is forbidden for
+ * aggregate follow-ups.
+ */
+function mergedAddressedPrs(issueNumber) {
+  const n = Number(issueNumber);
+  if (!Number.isInteger(n) || n <= 0) return [];
+  if (mergedAddressedPrCache.has(n)) return mergedAddressedPrCache.get(n);
+  if (!Array.isArray(mergedPrListCache)) {
+    const raw = gh(['pr', 'list', '--state', 'merged', ...repoArgs,
+      '--json', 'number,title,body,headRefName,mergedAt', '--limit', '100'], { allowFail: true });
+    try {
+      const parsed = JSON.parse(raw || '[]');
+      mergedPrListCache = Array.isArray(parsed) ? parsed : [];
+    } catch {
+      mergedPrListCache = [];
+    }
+  }
+  if (!mergedAddressedListCache.has(n)) {
+    const raw = gh(['pr', 'list', '--state', 'merged', ...repoArgs,
+      '--search', `Addresses #${n} in:body`,
+      '--json', 'number,title,body,headRefName,mergedAt', '--limit', '100'], { allowFail: true });
+    try {
+      const parsed = JSON.parse(raw || '[]');
+      mergedAddressedListCache.set(n, Array.isArray(parsed) ? parsed : []);
+    } catch {
+      mergedAddressedListCache.set(n, []);
+    }
+  }
+  const transportPrs = mergedPrListCache
+    .filter((listed) => isRecognizableTransportPr(listed))
+    .map((listed) => mergedPrDetails(listed.number))
+    .filter(Boolean);
+  const candidates = [];
+  for (const listed of mergedAddressedListCache.get(n)) {
+    if (!new RegExp(`\\bAddresses\\s+#${n}\\b`, 'i').test(String(listed?.body || ''))) continue;
+    const detail = mergedPrDetails(listed.number);
+    if (detail) candidates.push({ ...detail, supportingPrs: transportPrs });
+  }
+  mergedAddressedPrCache.set(n, candidates);
+  return candidates;
+}
+
 function readIssueComments(number) {
   if (issueCommentCache.has(number)) return issueCommentCache.get(number);
   const out = gh(['issue', 'view', String(number), ...repoArgs, '--json', 'comments'], { allowFail: true });
@@ -548,7 +894,22 @@ function alreadyCommented(number, comments = undefined) {
 function evidenceLines(evidence) {
   return evidence
     .slice(0, 6)
-    .map((e) => `- \`${e.tok}\` già presente in \`${e.file}\``)
+    .map((e) => {
+      if (e.kind === 'legacy-address') {
+        const via = e.transportPr ? ` tramite PR di trasporto riconoscibile #${e.transportPr}` : '';
+        return `- PR #${e.pr} mergiata con \`Addresses #${e.issue}\`${via}, file target \`${e.file}\` presente nei files verificati`;
+      }
+      if (e.kind === 'legacy-target') {
+        return `- target file live verificato: \`${e.file}\``;
+      }
+      if (e.kind === 'legacy-content') {
+        return `- contenuto live del target verificato con prova ${e.mode}: \`${e.file}\``;
+      }
+      if (e.kind === 'legacy-negative') {
+        return `- acceptance negativa verificata: \`${e.tok}\` assente dal codice eseguibile di \`${e.file}\``;
+      }
+      return `- \`${e.tok}\` già presente in \`${e.file}\``;
+    })
     .join('\n');
 }
 
@@ -620,6 +981,7 @@ function main() {
     const daily = dailyBucketInfo(iss.title || '');
     let resolved;
     let evidence;
+    let legacyContext = null;
     if (daily) {
       // Daily buckets are reconciled item-by-item. An issue-wide token hit would let
       // one completed item hide another open item, which is precisely the aggregate
@@ -673,6 +1035,20 @@ function main() {
       evidence = [...(bucketGate.evidenceById?.values() || [])].flat();
     } else {
       ({ resolved, evidence } = detectAlreadyResolved(iss.body || '', diskIo));
+      // Legacy per-PR follow-ups can contain a mixture of positive tokens and
+      // expressions explicitly meant to disappear.  The strict shared matcher
+      // must keep rejecting that mixed set; this adapted reconcile path adds a
+      // separate, provenance-backed acceptance instead of weakening it.
+      legacyContext = legacyResolutionContext(
+        iss.number,
+        iss.body || '',
+        diskIo,
+        mergedAddressedPrs(iss.number),
+      );
+      if (!resolved && legacyContext.resolved) {
+        resolved = true;
+        evidence = legacyContext.evidence;
+      }
     }
 
     // The marker records the exact structural veto. It is deliberately written even
@@ -689,7 +1065,9 @@ function main() {
     const hasMaybeResolved = labelNames.includes(LABEL);
     const blocked = labelNames.some((n) => KEEP_OPEN_LABELS.has(n));
     let aggGate = isAggregateTitle(iss.title, iss.body || '')
-      ? aggregateCloseGate(iss.body || '', diskIo)
+      ? aggregateCloseGate(iss.body || '', diskIo, {
+        legacyResolver: legacyContext ? (itemText) => legacyContext.byItem.get(itemText) : null,
+      })
       : { blocks: false, reason: null };
     if (isDailyBucketTitle(iss.title || '')) {
       const dailyInfo = dailyBucketInfo(iss.title || '');
@@ -706,7 +1084,8 @@ function main() {
     if (hasPriorFlag === null) {
       console.log(`::warning::reconcile-followups: impossibile leggere i commenti di #${iss.number}; flag/chiusura non determinabili, issue lasciata nel ciclo`);
     }
-    const strongEvidence = isStrongAutoCloseEvidence(evidence.map((e) => e.tok));
+    const legacyStrongEvidence = evidence.some((e) => e.kind === 'legacy-content');
+    const strongEvidence = isStrongAutoCloseEvidence(evidence.map((e) => e.tok)) || legacyStrongEvidence;
     const action = decideReconcileAction({
       resolved, hasMaybeResolved, hasPriorFlag, isAggregate, blocked, noAutoclose: NO_AUTOCLOSE, strongEvidence,
     });
@@ -752,7 +1131,7 @@ ${c.marker}`;
       ? '\n\nℹ️ Evidenza debole (singolo token poco specifico): **non** verrà auto-chiusa — verifica e chiudi a mano se lo scope è coperto.'
       : '\n\nSe al prossimo run risulterà ancora risolta, verrà **auto-chiusa** (finestra di grazia: obietta rimuovendo `maybe-resolved` o aggiungendo `keep-open`).';
     const comment = `${MARKER}
-🤖 **Reconcile (auto)**: i token citati da questa issue risultano già presenti nei file citati — probabile **done-but-open** (coperto da una PR successiva senza \`Closes #${f.number}\`).
+🤖 **Reconcile (auto)**: l'acceptance deterministica di questa issue è verificata — token positivi presenti e/o acceptance negativa/provenienza legacy confermata — probabile **done-but-open** (coperta da una PR successiva senza \`Closes #${f.number}\`).
 
 ${evidenceLines(f.evidence)}${note}`;
     console.log(`#${f.number} "${f.title}" → flag (${f.reason}, ${f.evidence.length} match)`);
@@ -764,7 +1143,7 @@ ${evidenceLines(f.evidence)}${note}`;
   // Tier 2 — auto-close (second confirmation, grace window elapsed, eligible).
   for (const c of closed) {
     const comment = `${CLOSE_MARKER}
-✅ **Reconcile auto-close**: seconda conferma deterministica (\`maybe-resolved\` da un run precedente, finestra di grazia trascorsa senza obiezioni, ancora risolta, ${c.daily ? 'daily bucket con TUTTI gli item validi done' : 'single-item'}, nessuna label keep-open). Tutti i token-codice prescritti sono presenti nei file citati:
+✅ **Reconcile auto-close**: seconda conferma deterministica (\`maybe-resolved\` da un run precedente, finestra di grazia trascorsa senza obiezioni, ancora risolta, ${c.daily ? 'daily bucket con TUTTI gli item validi done' : 'single-item'}, nessuna label keep-open). L'evidenza prescritta è verificata nei file citati:
 
 ${evidenceLines(c.evidence)}
 
