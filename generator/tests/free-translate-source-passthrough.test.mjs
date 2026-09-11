@@ -166,6 +166,33 @@ describe('freeTranslate — guardia «uscita == sorgente»', () => {
     assert.equal(snapshot().hits - before.hits, 0);
   });
 
+  test('non scarta la traduzione per un ultimo chunk breve restituito verbatim', async () => {
+    const firstChunk = Array.from({ length: 100 }, (_, i) => `Frase sorgente numero ${i} con testo sufficiente.`).join(' ');
+    const secondChunk = Array.from({ length: 90 }, (_, i) => `Frase sorgente numero ${i + 100} con testo sufficiente.`).join(' ');
+    const filler = Array.from({ length: 55 }, () => 'parola').join(' ');
+    const longText = `${firstChunk} ${secondChunk} ${filler} ## FAQ`;
+    let myMemoryCalls = 0;
+    globalThis.fetch = async (url) => {
+      if (!String(url).includes('api.mymemory.translated.net')) throw new Error('offline nel test');
+      const query = new URL(url).searchParams.get('q') || '';
+      myMemoryCalls += 1;
+      const translatedText = query.includes('## FAQ') ? query : `Translated chunk ${myMemoryCalls}`;
+      return {
+        ok: true,
+        json: async () => ({ responseData: { translatedText, match: 1 } }),
+      };
+    };
+    const before = snapshot();
+
+    const out = await freeTranslate({ text: longText, sourceLang: 'it', targetLang: 'en', fieldType: 'description' });
+
+    assert.match(out, /Translated chunk/);
+    assert.match(out, /## FAQ/);
+    assert.ok(myMemoryCalls > 2);
+    assert.equal(snapshot().passthroughs - before.passthroughs, 0);
+    assert.equal(snapshot().hits - before.hits, 1);
+  });
+
   test('nomina il passthrough nel sommario della cascata', async () => {
     stubCascade(IT);
     await freeTranslate({ text: IT, sourceLang: 'it', targetLang: 'fr', fieldType: 'description' });
