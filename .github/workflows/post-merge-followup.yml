@@ -624,6 +624,7 @@ jobs:
           fetch-depth: 1
           persist-credentials: false
           sparse-checkout: |
+            .github/workflows
             scripts/ci
             scripts/lib
           sparse-checkout-cone-mode: false

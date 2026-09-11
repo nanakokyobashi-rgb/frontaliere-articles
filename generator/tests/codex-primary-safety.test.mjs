@@ -39,8 +39,9 @@ test('the corpus bridge permits read-only API metadata without permitting mutati
   const scope = resolveGhScope(
     ['api', `repos/${CORPUS_REPOSITORY}/issues`, '--repo', CORPUS_REPOSITORY, '--method', 'GET'],
     {
-      repository: CORPUS_REPOSITORY,
+      repository: 'valerielinc-ops/frontaliere-si-o-no',
       host: 'github.com',
+      siteRepository: 'valerielinc-ops/frontaliere-si-o-no',
       siteToken: 'site-token',
       corpusToken: 'corpus-token',
     },
@@ -88,8 +89,9 @@ test('the corpus checkout keeps current calls on the runner and routes explicit 
   const corpus = resolveGhScope(
     ['--repo', CORPUS_REPOSITORY, 'issue', 'create'],
     {
-      repository: CORPUS_REPOSITORY,
+      repository: 'valerielinc-ops/frontaliere-si-o-no',
       host: 'github.com',
+      siteRepository: 'valerielinc-ops/frontaliere-si-o-no',
       siteToken: 'site-token',
       corpusToken: 'corpus-token',
     },
@@ -112,6 +114,36 @@ test('the corpus checkout keeps current calls on the runner and routes explicit 
   assert.equal(currentCorpus.repository, CORPUS_REPOSITORY);
   assert.equal(currentCorpus.token, 'site-token');
   assert.equal(currentCorpus.allowedCommandSet.has('pr'), true);
+
+  const currentCorpusExplicit = resolveGhScope(
+    ['search', 'issues', '--repo', CORPUS_REPOSITORY],
+    {
+      repository: CORPUS_REPOSITORY,
+      siteRepository: 'valerielinc-ops/frontaliere-si-o-no',
+      host: 'github.com',
+      currentToken: 'current-corpus-token',
+      siteToken: 'site-token',
+      corpusToken: 'corpus-token',
+    },
+  );
+  assert.equal(currentCorpusExplicit.repository, CORPUS_REPOSITORY);
+  assert.equal(currentCorpusExplicit.token, 'current-corpus-token');
+  assert.equal(currentCorpusExplicit.allowedCommandSet.has('search'), true);
+  assert.equal(
+    validateGhArgs(
+      ['search', 'issues', '--repo', CORPUS_REPOSITORY],
+      {
+        cwd: ROOT,
+        workspaceRoot: ROOT,
+        scratchRoot: ROOT,
+        host: 'github.com',
+        repository: currentCorpusExplicit.repository,
+        allowedCommandSet: currentCorpusExplicit.allowedCommandSet,
+        allowedSubcommandMap: currentCorpusExplicit.allowedSubcommandMap,
+      },
+    ),
+    '',
+  );
 
   const currentCorpusApi = resolveGhScope(
     ['api', `repos/${CORPUS_REPOSITORY}/pulls/1403`, '--method', 'GET'],
@@ -236,6 +268,7 @@ test('the corpus review loads its host-side PAT before invoking Codex', () => {
   assert.match(followupWorkflow, /Gate sul conio — sito \(zero-Claude\)/);
   assert.match(followupWorkflow, /Checkout site gate implementation/);
   assert.match(followupWorkflow, /repository: valerielinc-ops\/frontaliere-si-o-no/);
+  assert.match(followupWorkflow, /sparse-checkout:\s*\|\n\s+\.github\/workflows\n\s+scripts\/ci/);
   assert.match(followupWorkflow, /cd \.site-gate/);
   assert.match(followupWorkflow, /GATE_PR_TOKEN="\$corpus_token"/);
   assert.match(followupWorkflow, /gh issue list --repo nanakokyobashi-rgb\/frontaliere-articles/);

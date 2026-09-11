@@ -266,11 +266,23 @@ export function resolveGhScope(args, {
   if (repositories.some((value) => value !== explicitRepository)) {
     return { error: 'gh --repo may not select multiple repositories in one request' };
   }
-  // The current checkout is the host-side site scope even when the checkout
-  // itself is the corpus: review/comment operations on the current PR use the
-  // runner GITHUB_TOKEN and need the normal `pr` allow-list. The separate
-  // corpus PAT is selected only when the model explicitly targets the corpus
-  // with --repo, which is the write-routing boundary in the prompt.
+  // Any request that names the current checkout explicitly is still local to
+  // that checkout. Some prompts spell out `--repo $REPO` even for local calls
+  // (notably `gh search issues` in needs-human-sweep); routing those through
+  // the restricted cross-repo corpus scope would reject valid read/write ops.
+  if (explicitRepository === currentRepository) {
+    if (!currentToken) return { error: 'Codex GitHub bridge current-repository credential is unavailable' };
+    return {
+      kind: 'site',
+      repository: currentRepository,
+      token: currentToken,
+      allowedCommandSet: allowedCommands,
+      allowedSubcommandMap: allowedSubcommands,
+    };
+  }
+
+  // A different explicit corpus target is a cross-repo operation and receives
+  // the dedicated corpus PAT plus its narrower command allow-list.
   if (hasExplicitRepository && explicitRepository === expectedCorpus) {
     if (!corpusToken) return { error: 'Codex corpus bridge credential is unavailable' };
     return {
@@ -279,20 +291,6 @@ export function resolveGhScope(args, {
       token: corpusToken,
       allowedCommandSet: corpusAllowedCommands,
       allowedSubcommandMap: corpusAllowedSubcommands,
-    };
-  }
-
-  // Calls without --repo operate on the current checkout (for example the
-  // PR comment/review that closes the current corpus run). They retain the
-  // runner token and the normal command allow-list.
-  if (!hasExplicitRepository && explicitRepository === currentRepository) {
-    if (!currentToken) return { error: 'Codex GitHub bridge current-repository credential is unavailable' };
-    return {
-      kind: 'site',
-      repository: currentRepository,
-      token: currentToken,
-      allowedCommandSet: allowedCommands,
-      allowedSubcommandMap: allowedSubcommands,
     };
   }
 
