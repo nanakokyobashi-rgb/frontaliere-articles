@@ -117,7 +117,7 @@ esac
   fakeExecutable(bin, 'gh', String.raw`
 case "$*" in
   */issues/*/comments*) printf '0\n' ;;
-  */pulls/*) printf '%s' "$FAKE_BODY" ;;
+  */pulls/*) printf '%s\n' "$FAKE_BODY" ;;
   *) exit 64 ;;
 esac
 `);
@@ -149,6 +149,7 @@ test('il digest del body è acquisito prima e classificato fail-closed', () => {
   assert.match(base, /set -uo pipefail/, 'la lettura del body deve propagare gli errori della pipeline');
   assert.match(base, /echo "body_sha=\$body_sha"/, 'la baseline deve salvare il digest del body della PR');
   assert.match(base, /gh api[\s\S]*> "\$body_file"/, 'lo status di gh deve essere osservabile prima del digest');
+  assert.match(base, /empty_body_sha=\$\(printf '\\n'/, 'il digest vuoto deve riflettere il newline emesso da gh --jq');
   assert.match(base, /if \[ "\$body_sha" = "\$empty_body_sha" \]; then[\s\S]{0,220}?exit 1/, 'la baseline deve rifiutare il digest del contenuto vuoto');
   assert.match(base, /s\/\\r\$\/[\s\S]*s\/\[\[:space:\]\]\+\$\//, 'la baseline deve canonizzare CR e spazio in coda');
   assert.match(classify, /BASE_BODY_SHA: \$\{\{ steps\.base\.outputs\.body_sha \}\}/);
@@ -159,6 +160,7 @@ test('il digest del body è acquisito prima e classificato fail-closed', () => {
   assert.ok(currentBodyAt !== -1 && commentsAt !== -1 && currentBodyAt < commentsAt,
     'il body deve essere confrontato prima del fallback sui commenti');
   assert.match(classify, /if \[ "\$now_body_sha" = "\$empty_body_sha" \]; then[\s\S]{0,240}?exit 1/, 'la lettura finale deve rifiutare il digest del contenuto vuoto');
+  assert.match(classify, /empty_body_sha=\$\(printf '\\n'/, 'il digest vuoto finale deve riflettere il newline emesso da gh --jq');
   assert.match(classify, /s\/\\r\$\/[\s\S]*s\/\[\[:space:\]\]\+\$\//, 'la lettura finale deve canonizzare CR e spazio in coda');
   assert.match(classify, /if \[ "\$\{BASE_CAPTURE_OUTCOME:-\}" != "success" \][\s\S]{0,240}?exit 1/,
     'la baseline deve essere ancorata al guard reale e restare bounded');

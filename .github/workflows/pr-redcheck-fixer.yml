@@ -449,7 +449,8 @@ jobs:
             echo "::error::Impossibile calcolare il digest del body PR prima di Claude."
             exit 1
           fi
-          empty_body_sha=$(printf '' | sha256sum | cut -d' ' -f1)
+          # `gh api --jq` termina anche una stringa vuota con il suo newline.
+          empty_body_sha=$(printf '\n' | sha256sum | cut -d' ' -f1)
           if [ "$body_sha" = "$empty_body_sha" ]; then
             echo "::error::La risposta API del body PR prima di Claude e' vuota o non verificabile."
             exit 1
@@ -752,7 +753,8 @@ jobs:
             echo "::error::❌-check-fix: impossibile calcolare il digest del body PR dopo Claude → classificazione BLOCCANTE, job ROSSO."
             exit 1
           fi
-          empty_body_sha=$(printf '' | sha256sum | cut -d' ' -f1)
+          # `gh api --jq` termina anche una stringa vuota con il suo newline.
+          empty_body_sha=$(printf '\n' | sha256sum | cut -d' ' -f1)
           if [ "$now_body_sha" = "$empty_body_sha" ]; then
             echo "::error::❌-check-fix: la risposta API del body PR dopo Claude e' vuota o non verificabile → classificazione BLOCCANTE, job ROSSO."
             exit 1
