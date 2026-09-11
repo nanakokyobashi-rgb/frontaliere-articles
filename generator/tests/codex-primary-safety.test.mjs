@@ -8,6 +8,15 @@ import { isMutatingGitArgs } from '../../.github/actions/claude-codex-fallback/g
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const action = fs.readFileSync(path.join(ROOT, '.github/actions/claude-codex-fallback/action.yml'), 'utf8');
+const lessonsWorkflow = fs.readFileSync(path.join(ROOT, '.github/workflows/lessons-harvester.yml'), 'utf8');
+
+function workflowStep(source, name) {
+  const start = source.indexOf(`      - name: ${name}`);
+  assert.notEqual(start, -1, `workflow step «${name}» non trovato`);
+  const rest = source.slice(start + 1);
+  const next = rest.indexOf('\n      - name: ');
+  return next === -1 ? rest : rest.slice(0, next);
+}
 
 test('the GitHub bridge marks only state-changing gh operations', () => {
   assert.equal(isMutatingGhArgs(['--repo', 'owner/repo', 'pr', 'comment', '--body-file', 'body.md']), true);
@@ -32,4 +41,20 @@ test('Claude fallback is suppressed when Codex side effects are possible', () =>
   assert.notEqual(stopGhStart, -1);
   assert.match(action.slice(stopGhStart, stopGhEnd), /restore_sanitized_git_config \|\| true/);
   assert.match(action, /cmp -s -- \"\$codex_state_before\" \"\$codex_state_after\"/);
+});
+
+test('#1312: Lessons harvester non blocca Codex quando la quota Claude e\u0027 esaurita', () => {
+  const quota = workflowStep(lessonsWorkflow, 'Pre-flight — Claude quota telemetry (Codex primary)');
+  const draft = workflowStep(lessonsWorkflow, 'Draft doc-rule proposal (Claude — only if NOVEL patterns)');
+
+  assert.match(quota, /continue-on-error: true/,
+    'la telemetria quota non deve trasformare un 429 in un workflow failure');
+  assert.match(draft, /uses: \.\/\.github\/actions\/claude-codex-fallback/,
+    'il Lessons harvester deve usare l’action provider-neutral con Codex primario');
+  assert.match(draft, /codex_auth_json: \$\{\{ secrets\.CODEX_AUTH_JSON \}\}/,
+    'il workflow deve fornire l’autenticazione subscription al provider primario');
+  assert.match(draft, /codex_github_token: \$\{\{ secrets\.GITHUB_TOKEN \}\}/,
+    'il provider primario deve avere il token GitHub esplicito per il bridge');
+  assert.doesNotMatch(draft, /steps\.quota\.outputs\.quota_blocked/,
+    'un beacon Claude attivo non deve saltare il tentativo Codex primario');
 });
