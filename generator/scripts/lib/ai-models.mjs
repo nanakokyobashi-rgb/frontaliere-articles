@@ -2753,6 +2753,16 @@ const _modelDetails = new Map();
 const _dirtyModels = new Set();
 
 /**
+ * Monotonic per-model write generations. A successful Firestore write may
+ * clear proposal markers only when the model has not been proposed again
+ * while that write was in flight. The clock intentionally survives
+ * resetState(): an in-flight write must not mistake a post-reset generation
+ * for the generation it snapshotted before the reset.
+ */
+const _dirtyGenerations = new Map();
+let _dirtyGenerationClock = 0;
+
+/**
  * Proposals created only to publish a runtime-learned cap/schema marker. The
  * proposal makes the model dirty, but it is not evidence for a shared daily
  * quota ban. Cleared when a real scored outcome accompanies the proposal.
@@ -2814,6 +2824,7 @@ function _proposeLedgerWrite(modelId, recordScore = true, { persist = true } = {
   if (!modelKey) return false;
   if (!coerceRecordScore(recordScore)) return false;
   if (_isPerMachineEndpoint(modelKey)) return false;
+  _dirtyGenerations.set(modelKey, ++_dirtyGenerationClock);
   _dirtyModels.add(modelKey);
   if (persist) _schedulePersist();
   return true;
@@ -3940,6 +3951,14 @@ async function _persistScoresToFirestore() {
 
   const now = new Date().toISOString();
   const toPersist = [..._dirtyModels];
+  // The marker sets are part of the same mutation as the dirty model. Keep
+  // their state beside the generation so cleanup below cannot erase a newer
+  // quota/cap decision that arrived while ref.set() was awaiting the network.
+  const proposalSnapshot = new Map(toPersist.map((modelId) => [modelId, {
+    generation: _dirtyGenerations.get(modelId),
+    learningOnly: _learningOnlyLedgerProposals.has(modelId),
+    quotaExhaustion: _quotaExhaustionProposals.has(modelId),
+  }]));
   _dirtyModels.clear();
   _mutationCount = 0;
   // Snapshot the counter deltas alongside the dirty set: both are cleared here
@@ -4068,8 +4087,16 @@ async function _persistScoresToFirestore() {
       .doc(FIRESTORE_AGGREGATE_DOC);
     await ref.set({ models: modelsDelta, updatedAt: now }, { merge: true });
     for (const modelId of toPersist) {
-      _learningOnlyLedgerProposals.delete(modelId);
-      _quotaExhaustionProposals.delete(modelId);
+      const snapshot = proposalSnapshot.get(modelId);
+      // A new proposal increments the generation and re-dirties the model.
+      // Leave both its state and markers intact; the next flush must serialize
+      // that newer mutation instead of treating it as already persisted.
+      if (
+        !snapshot
+        || _dirtyGenerations.get(modelId) !== snapshot.generation
+      ) continue;
+      if (snapshot.learningOnly) _learningOnlyLedgerProposals.delete(modelId);
+      if (snapshot.quotaExhaustion) _quotaExhaustionProposals.delete(modelId);
     }
   } catch (err) {
     console.warn(`⚠️  [ScoreStore] Persist failed: ${err?.message || err}`);
@@ -5153,6 +5180,7 @@ export function resetState() {
   _modelScores.clear();
   _modelDetails.clear();
   _dirtyModels.clear();
+  _dirtyGenerations.clear();
   _learningOnlyLedgerProposals.clear();
   _quotaExhaustionProposals.clear();
   _pendingCounterDeltas.clear();

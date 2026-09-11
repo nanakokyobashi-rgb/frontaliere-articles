@@ -1103,6 +1103,55 @@ describe('#895 — il memo del cap appreso e la porta del ledger sono due cose d
     );
   });
 
+  it('conserva la proposta quota arrivata durante una write cap-only', async () => {
+    const model = 'openrouter/cap-quota-race-1214';
+    const written = [];
+    let releaseFirstWrite;
+    let firstWriteStarted;
+    const firstWrite = new Promise((resolve) => { firstWriteStarted = resolve; });
+    const firstWriteReleased = new Promise((resolve) => { releaseFirstWrite = resolve; });
+    const db = {
+      collection: () => ({
+        doc: () => ({
+          set: async (data) => {
+            written.push(data);
+            if (written.length === 1) {
+              firstWriteStarted();
+              await firstWriteReleased;
+            }
+          },
+          get: async () => ({ exists: false, data: () => null }),
+        }),
+      }),
+    };
+
+    __installScoreStoreForTests(db, null);
+    __learnRequestTokenLimitForTests(model, 'tokens_limit_reached. Limit 2048 tokens');
+    const inFlight = flushScores();
+    await firstWrite;
+
+    // This proposal happens after the cap-only payload was assembled but
+    // before its network write lands. The next flush must carry the quota ban.
+    markModelExhausted(model, 'quota', 'arrived-during-write');
+    releaseFirstWrite();
+    await inFlight;
+    await flushScores();
+
+    const firstEntry = written[0]?.models?.[model.replace(/\//g, '__')];
+    const secondEntry = written[1]?.models?.[model.replace(/\//g, '__')];
+    assert.equal(written.length, 2, `la proposta nuova deve restare sporca: ${JSON.stringify(written)}`);
+    assert.equal(
+      Object.hasOwn(firstEntry || {}, 'exhaustedUntil'),
+      false,
+      `la prima write deve restare cap-only: ${JSON.stringify(firstEntry)}`,
+    );
+    assert.equal(secondEntry?.maxRequestTokens, 2048, `il secondo giro deve conservare il cap: ${JSON.stringify(secondEntry)}`);
+    assert.ok(
+      typeof secondEntry?.exhaustedUntil === 'string' && !Number.isNaN(Date.parse(secondEntry.exhaustedUntil)),
+      `la quota arrivata durante la write cap-only deve arrivare al giro successivo: ${JSON.stringify(secondEntry)}`,
+    );
+  });
+
   it('il secondo ciclo load/re-learn riusa la chiave canonica anche dopo resetState', async () => {
     const model = 'cerebras/meta/llama-3.1-8b-instruct-1214';
     const encoded = model.replace(/\//g, '__');
