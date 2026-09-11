@@ -11,7 +11,44 @@
  */
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { closedIssueRefs, closingMergedPr } from '../../scripts/ci/followup-resolution-match.mjs';
+import {
+  citedFiles,
+  closingMergedPr,
+  closedIssueRefs,
+  detectAlreadyResolved,
+} from '../../scripts/ci/followup-resolution-match.mjs';
+
+test('legacy quoted source paths remain file locators without widening token scope', () => {
+  const target = '.github/workflows/crawler-group-01.yml';
+  const body = [
+    '### 1. Legacy crawler item',
+    '- Original text:',
+    `  > \`${target}:L261-L267\`: the old call site drops the exit code`,
+    '- Suggested action: preserve `git-commit-data.sh --extra-only` while handling its result.',
+  ].join('\n');
+
+  assert.deepEqual(citedFiles(body, (path) => path === target), [target]);
+  const result = detectAlreadyResolved(body, {
+    fileExists: (path) => path === target,
+    readFile: () => 'git-commit-data.sh --extra-only',
+  });
+  assert.equal(result.resolved, true);
+});
+
+test('plain paths in Suggested action are resolved as locators', () => {
+  const target = 'scripts/ci/verify-crawler-contract-provenance.mjs';
+  const body = [
+    '### 1. Runtime provenance item',
+    `- Suggested action: extend (${target}) with \`createRawFetcher(\` and \`CONTRACT.siteRuntimePaths\`.`,
+  ].join('\n');
+
+  assert.deepEqual(citedFiles(body, (path) => path === target), [target]);
+  const result = detectAlreadyResolved(body, {
+    fileExists: (path) => path === target,
+    readFile: () => 'createRawFetcher( CONTRACT.siteRuntimePaths',
+  });
+  assert.equal(result.resolved, true);
+});
 
 test('Italian "Chiude anche la issue #N" is recognized — the exact PR #418 shape', () => {
   const body = 'Chiude anche la issue #402, ferma con `agent:fix` e 6 run del fixer a vuoto.';
