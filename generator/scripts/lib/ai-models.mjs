@@ -2023,7 +2023,8 @@ export function shouldUseSchemaMode(providerName, hasSchema = true, modelForTrac
   const mode = getSchemaMode();
   if (mode === 'off') return false;
   if (mode === 'force') return true;
-  if (modelForTracking && _learnedSchemaIncompatible.has(modelForTracking)) return false;
+  const modelKey = _normalizeMemoModelKey(modelForTracking);
+  if (modelKey && _learnedSchemaIncompatible.has(modelKey)) return false;
   const key = _normalizeProviderKey(providerName);
   if (key === _normalizeProviderKey(PROVIDER.GEMINI)) return true;
   return PROVIDERS_WITH_STRICT_JSON_SCHEMA.has(key);
@@ -2730,8 +2731,16 @@ const FIRESTORE_AGGREGATE_DOC = '_all';
 // Firestore field names cannot contain `/`. The original modelId may include
 // slashes (e.g. `openrouter/meta-llama/llama-3.3-70b:free`) so we encode them
 // with the same `__` substitution the legacy per-doc layout used.
+function _normalizeMemoModelKey(modelId) {
+  if (typeof modelId !== 'string') return '';
+  // Persisted aggregate keys and legacy document ids use `__` for `/`. Decode
+  // both the field name and the optional modelId payload before any memo lookup
+  // so load and re-learn share one keyspace, including re-decoded ids.
+  return modelId.replace(/__/g, '/');
+}
+
 function _encodeModelId(modelId) {
-  return modelId.replace(/\//g, '__');
+  return _normalizeMemoModelKey(modelId).replace(/\//g, '__');
 }
 
 /** @type {Map<string, number>} model → cumulative score */
@@ -2742,6 +2751,16 @@ const _modelDetails = new Map();
 
 /** @type {Set<string>} models whose score changed since last persist */
 const _dirtyModels = new Set();
+
+/**
+ * Proposals created only to publish a runtime-learned cap/schema marker. The
+ * proposal makes the model dirty, but it is not evidence for a shared daily
+ * quota ban. Cleared when a real scored outcome accompanies the proposal.
+ */
+const _learningOnlyLedgerProposals = new Set();
+
+/** Explicit quota-ban proposals made by markModelExhausted in this process. */
+const _quotaExhaustionProposals = new Set();
 
 /**
  * ── L'UNICA PORTA VERSO `ai_model_scores/_all` ────────────────────────────
@@ -2791,10 +2810,11 @@ const _dirtyModels = new Set();
  *   marchio in-processo) leggono questo valore invece di ripetere il test.
  */
 function _proposeLedgerWrite(modelId, recordScore = true, { persist = true } = {}) {
-  if (!modelId) return false;
+  const modelKey = _normalizeMemoModelKey(modelId);
+  if (!modelKey) return false;
   if (!coerceRecordScore(recordScore)) return false;
-  if (_isPerMachineEndpoint(modelId)) return false;
-  _dirtyModels.add(modelId);
+  if (_isPerMachineEndpoint(modelKey)) return false;
+  _dirtyModels.add(modelKey);
   if (persist) _schedulePersist();
   return true;
 }
@@ -3692,6 +3712,93 @@ export function _restorableExhaustUntil(raw, now = new Date(), maxAheadMs = EXHA
   return { until, reason: 'restore' };
 }
 
+function _entriesFromPersistedModels(models) {
+  return Object.entries(models || {})
+    .map(([encodedId, data]) => {
+      const declaredId = typeof data?.modelId === 'string' && data.modelId
+        ? data.modelId
+        : encodedId;
+      return [_normalizeMemoModelKey(declaredId), data || {}];
+    })
+    .filter(([modelId]) => modelId);
+}
+
+/** Restore one load-shaped collection of entries, shared by init and tests. */
+function _restorePersistedEntries(entries, now = new Date()) {
+  const stats = {
+    loaded: 0,
+    decayed: 0,
+    exhaustedRestored: 0,
+    learnedLimitsRestored: 0,
+    schemaIncompatibleRestored: 0,
+  };
+
+  for (const [rawModelId, rawData] of entries) {
+    const modelId = _normalizeMemoModelKey(rawModelId);
+    const data = rawData && typeof rawData === 'object' ? rawData : {};
+    if (!modelId) continue;
+
+    const rawScore = data.score || 0;
+    const decayedScore = _decayScore(rawScore, data.lastUsed);
+    if (decayedScore !== 0) {
+      _modelScores.set(modelId, decayedScore);
+      stats.loaded++;
+      if (decayedScore !== rawScore) stats.decayed++;
+    }
+
+    if (data.successes || data.failures) {
+      _modelDetails.set(modelId, {
+        successes: data.successes || 0,
+        failures: data.failures || 0,
+      });
+    }
+
+    // Local CPU fallback has no daily-quota concept (unlike a remote API
+    // account) — a stale content/timeout failure from hours ago says nothing
+    // about whether the local server will fail again right now.
+    if (data.exhaustedUntil && !_isLastResortProvider(modelId)) {
+      const { until: resetTime, reason } = _restorableExhaustUntil(data.exhaustedUntil, now);
+      if (reason === 'restore') {
+        _exhaustedModels.add(modelId);
+        // Persisted exhaustedUntil is the daily-limit (quota) path → eligible
+        // for the GitHub multi-PAT skip-exemption.
+        _setExhaustReason(modelId, 'quota');
+        stats.exhaustedRestored++;
+        console.warn(`🚫 [ScoreStore] ${modelId} still exhausted until ${resetTime.toISOString().slice(0, 16)}`);
+      } else if (reason === 'too-far-ahead' || reason === 'unparsable') {
+        const shown = reason === 'unparsable'
+          ? _safeDiagnosticValue(data.exhaustedUntil)
+          : resetTime.toISOString();
+        console.warn(
+          `⚠️  [ScoreStore] ${modelId}: exhaustedUntil ${shown} ${reason === 'unparsable'
+            ? 'illeggibile'
+            : `oltre il tetto di ${EXHAUST_RESTORE_MAX_AHEAD_MS / 3_600_000}h`} — ban IGNORATO, modello di nuovo eleggibile`
+        );
+      }
+    }
+
+    // Runtime-learned request-token ceiling — unlike exhaustedUntil this isn't
+    // a daily quota, so restore it unconditionally for every provider.
+    if (typeof data.maxRequestTokens === 'number' && data.maxRequestTokens > 0) {
+      _learnedRequestTokenLimits.set(modelId, data.maxRequestTokens);
+      // A value arriving from the shared document is already proposed. This
+      // prevents the first re-learn of the same value from dirtying it again.
+      _ledgerProposedRequestTokenLimits.set(modelId, data.maxRequestTokens);
+      stats.learnedLimitsRestored++;
+    }
+
+    // Runtime-learned schema-mode incompatibility — same restore semantics as
+    // maxRequestTokens above.
+    if (data.schemaIncompatible === true) {
+      _learnedSchemaIncompatible.add(modelId);
+      _ledgerProposedSchemaIncompatible.add(modelId);
+      stats.schemaIncompatibleRestored++;
+    }
+  }
+
+  return stats;
+}
+
 export async function initScoreStore() {
   if (_storeInitialized) return;
   _storeInitialized = true;
@@ -3721,12 +3828,8 @@ export async function initScoreStore() {
     // collection so the very first run after this refactor migrates state
     // forward — the next flush() rewrites everything into the aggregate doc.
     const now = new Date();
-    let loaded = 0;
-    let decayed = 0;
-    let exhaustedRestored = 0;
-    let learnedLimitsRestored = 0;
-    let schemaIncompatibleRestored = 0;
     let source = 'aggregate';
+    const legacyModelIds = [];
 
     const aggregateRef = _firestoreDb
       .collection(FIRESTORE_COLLECTION)
@@ -3740,10 +3843,7 @@ export async function initScoreStore() {
 
     if (aggregateModels && Object.keys(aggregateModels).length > 0) {
       // Field names use the encoded form; the original id is stored alongside.
-      entries = Object.entries(aggregateModels).map(([encId, data]) => [
-        data?.modelId || encId.replace(/__/g, '/'),
-        data || {},
-      ]);
+      entries = _entriesFromPersistedModels(aggregateModels);
     } else {
       // One-time migration path: read the legacy per-model docs.
       source = 'legacy-collection';
@@ -3751,85 +3851,30 @@ export async function initScoreStore() {
       for (const doc of snapshot.docs) {
         if (doc.id === FIRESTORE_AGGREGATE_DOC) continue;
         const data = doc.data();
-        const modelId = data?.modelId || doc.id.replace(/__/g, '/');
+        const modelId = _normalizeMemoModelKey(
+          typeof data?.modelId === 'string' && data.modelId ? data.modelId : doc.id,
+        );
         entries.push([modelId, data]);
         // Mark every migrated model as dirty so the next flush rewrites it
         // into the aggregate doc — after which the legacy docs become
         // unused snapshots and can be deleted out-of-band. Passa dalla porta
         // come ogni altro writer: una voce legacy di un endpoint per-macchina
         // non va ri-pubblicata nell'aggregato (#874).
-        _proposeLedgerWrite(modelId, true, { persist: false });
-      }
-    }
-
-    for (const [modelId, data] of entries) {
-      const rawScore = data.score || 0;
-      const decayedScore = _decayScore(rawScore, data.lastUsed);
-      if (decayedScore !== 0) {
-        _modelScores.set(modelId, decayedScore);
-        loaded++;
-        if (decayedScore !== rawScore) decayed++;
-      }
-
-      if (data.successes || data.failures) {
-        _modelDetails.set(modelId, {
-          successes: data.successes || 0,
-          failures: data.failures || 0,
-        });
-      }
-
-      // Local CPU fallback has no daily-quota concept (unlike a remote API
-      // account) — a stale content/timeout failure from hours ago says
-      // nothing about whether the local server will fail again right now.
-      // Skip restoring any persisted ban for it so it's always eligible as
-      // last resort every run. See markModelExhausted / _persistScoresToFirestore.
-      if (data.exhaustedUntil && !_isLastResortProvider(modelId)) {
-        const { until: resetTime, reason } = _restorableExhaustUntil(data.exhaustedUntil, now);
-        if (reason === 'restore') {
-          _exhaustedModels.add(modelId);
-          // Persisted exhaustedUntil is the daily-limit (quota) path → eligible
-          // for the GitHub multi-PAT skip-exemption. Dalla stessa porta degli
-          // altri writer della causa (#895 item 2).
-          _setExhaustReason(modelId, 'quota');
-          exhaustedRestored++;
-          console.warn(`🚫 [ScoreStore] ${modelId} still exhausted until ${resetTime.toISOString().slice(0, 16)}`);
-        } else if (reason === 'too-far-ahead' || reason === 'unparsable') {
-          // Ban NON ripristinato: vedi _restorableExhaustUntil. Nominato, perche'
-          // altrimenti l'unico sintomo resterebbe un modello assente dalla cascata.
-          const shown = reason === 'unparsable'
-            ? _safeDiagnosticValue(data.exhaustedUntil)
-            : resetTime.toISOString();
-          console.warn(
-            `⚠️  [ScoreStore] ${modelId}: exhaustedUntil ${shown} ${reason === 'unparsable'
-              ? 'illeggibile'
-              : `oltre il tetto di ${EXHAUST_RESTORE_MAX_AHEAD_MS / 3_600_000}h`} — ban IGNORATO, modello di nuovo eleggibile`
-          );
+        if (_proposeLedgerWrite(modelId, true, { persist: false })) {
+          legacyModelIds.push(modelId);
         }
       }
-
-      // Runtime-learned request-token ceiling (see _learnRequestTokenLimit) —
-      // unlike exhaustedUntil this isn't a daily quota, it's a static size
-      // limit, so it restores unconditionally for every provider including
-      // local/fallback.
-      if (typeof data.maxRequestTokens === 'number' && data.maxRequestTokens > 0) {
-        _learnedRequestTokenLimits.set(modelId, data.maxRequestTokens);
-        // Arriva DAL documento condiviso: e' gia' proposto per definizione, e
-        // segnarlo evita che il primo re-learn dello stesso valore sporchi il
-        // modello per riscrivere cio' che c'e' gia' (#895 item 1).
-        _ledgerProposedRequestTokenLimits.set(modelId, data.maxRequestTokens);
-        learnedLimitsRestored++;
-      }
-
-      // Runtime-learned schema-mode incompatibility (see _learnSchemaIncompatible)
-      // — same unconditional-restore reasoning as maxRequestTokens above.
-      if (data.schemaIncompatible === true) {
-        _learnedSchemaIncompatible.add(modelId);
-        _ledgerProposedSchemaIncompatible.add(modelId);   // vedi sopra (#895 item 1)
-        schemaIncompatibleRestored++;
-      }
     }
 
-    console.log(`☁️  [ScoreStore] Loaded ${loaded} model scores from Firestore [${source}] (${decayed} decayed, ${exhaustedRestored} still exhausted, ${learnedLimitsRestored} learned token limits, ${schemaIncompatibleRestored} schema-incompatible)`);
+    const restoreStats = _restorePersistedEntries(entries, now);
+    // Legacy documents have to be copied into the aggregate. Preserve a valid
+    // persisted quota during that migration, but do not turn a cap-only re-learn
+    // into a new quota proposal.
+    for (const modelId of legacyModelIds) {
+      if (_exhaustedModels.has(modelId)) _quotaExhaustionProposals.add(modelId);
+    }
+
+    console.log(`☁️  [ScoreStore] Loaded ${restoreStats.loaded} model scores from Firestore [${source}] (${restoreStats.decayed} decayed, ${restoreStats.exhaustedRestored} still exhausted, ${restoreStats.learnedLimitsRestored} learned token limits, ${restoreStats.schemaIncompatibleRestored} schema-incompatible)`);
 
     // Register exit hooks for final flush
     _registerExitHooks();
@@ -3870,6 +3915,15 @@ export function __installScoreStoreForTests(db, fieldValue = null) {
   _firestoreDb = db;
   _firestoreFieldValue = fieldValue;
   _storeInitialized = true;
+}
+
+/**
+ * Test seam for the aggregate-load half of the learned-memo contract. The
+ * entries go through the same encoded-field/modelId normalization and restore
+ * routine used by initScoreStore(), without requiring firebase-admin.
+ */
+export function __restoreScoreEntriesForTests(aggregateModels) {
+  return _restorePersistedEntries(_entriesFromPersistedModels(aggregateModels));
 }
 
 // ── Firestore persist (debounced) ────────────────────────────
@@ -3947,9 +4001,12 @@ async function _persistScoresToFirestore() {
       }
     }
 
-    // If model is exhausted, persist the reset time (next midnight UTC) —
-    // but ONLY for 'quota' exhaustion, which is the one reason that
-    // genuinely lasts until the provider's daily reset. The other breaker
+    // If model has an EXPLICIT current-run quota proposal, persist the reset
+    // time (next midnight UTC) — but ONLY for 'quota' exhaustion, which is the
+    // one reason that genuinely lasts until the provider's daily reset. A
+    // learned cap/schema is not evidence for that proposal; when it is the
+    // only ledger mutation, `exhaustedUntil` must stay out of this entry. The
+    // other breaker
     // reasons (timeout / content / nonretryable) describe a single call's
     // outcome in THIS process: a 20-min article generation that timed out,
     // or two malformed-JSON replies to one big schema prompt, say nothing
@@ -3964,6 +4021,8 @@ async function _persistScoresToFirestore() {
     // daily-quota concept — see the matching restore-path guard above
     // (initScoreStore), which likewise assumes persisted = quota.
     if (
+      (_quotaExhaustionProposals.has(modelId)) &&
+      !_learningOnlyLedgerProposals.has(modelId) &&
       _exhaustedModels.has(modelId) &&
       !_isLastResortProvider(modelId) &&
       _exhaustReason.get(modelId) === 'quota'
@@ -4008,6 +4067,10 @@ async function _persistScoresToFirestore() {
       .collection(FIRESTORE_COLLECTION)
       .doc(FIRESTORE_AGGREGATE_DOC);
     await ref.set({ models: modelsDelta, updatedAt: now }, { merge: true });
+    for (const modelId of toPersist) {
+      _learningOnlyLedgerProposals.delete(modelId);
+      _quotaExhaustionProposals.delete(modelId);
+    }
   } catch (err) {
     console.warn(`⚠️  [ScoreStore] Persist failed: ${err?.message || err}`);
     // Re-add dirty models so next flush retries them — and give them back their
@@ -4120,20 +4183,24 @@ function _registerExitHooks() {
 /** Record a model success — boosts its rank and persists to Firestore */
 export function recordModelSuccess(modelId, { recordScore = true } = {}) {
   if (!modelId) return;
+  const modelKey = _normalizeMemoModelKey(modelId);
+  if (!modelKey) return;
   // In opt-out non si muove NIENTE che il ledger possa poi spedire — nemmeno
   // `_modelScores`, che il flush legge come valore assoluto: bastava che il
   // modello diventasse dirty per un'altra ragione perche' il punteggio inquinato
   // dal ping diagnostico partisse comunque. Resta il solo tally di run, che
   // muore col processo. Vedi il gemello in `recordModelFailure`.
   if (!coerceRecordScore(recordScore)) {
-    _bumpOutcome(modelId, 'successes', { ledger: false });
+    _bumpOutcome(modelKey, 'successes', { ledger: false });
     return;
   }
-  _modelScores.set(modelId, (_modelScores.get(modelId) || 0) + SCORE_SUCCESS);
-  const d = _modelDetails.get(modelId) || { successes: 0, failures: 0 };
+  _modelScores.set(modelKey, (_modelScores.get(modelKey) || 0) + SCORE_SUCCESS);
+  const d = _modelDetails.get(modelKey) || { successes: 0, failures: 0 };
   d.successes++;
-  _modelDetails.set(modelId, d);
-  _bumpOutcome(modelId, 'successes', { ledger: _proposeLedgerWrite(modelId, recordScore) });
+  _modelDetails.set(modelKey, d);
+  const ledgerProposed = _proposeLedgerWrite(modelKey, recordScore);
+  if (ledgerProposed) _learningOnlyLedgerProposals.delete(modelKey);
+  _bumpOutcome(modelKey, 'successes', { ledger: ledgerProposed });
 }
 
 /**
@@ -4191,9 +4258,11 @@ function _bumpOutcome(modelId, field, { ledger = true } = {}) {
  */
 export function recordModelContentSuccess(modelId, { recordScore } = {}) {
   if (!modelId) return;
+  const modelKey = _normalizeMemoModelKey(modelId);
+  if (!modelKey) return;
   if (recordScore !== undefined && !coerceRecordScore(recordScore) && !_optOutContentResetWarned) {
     _optOutContentResetWarned = true;
-    _noteOptOutSignal(OPT_OUT_SIGNAL_KINDS.CONTENT_RESET_IGNORED, { model: modelId });
+    _noteOptOutSignal(OPT_OUT_SIGNAL_KINDS.CONTENT_RESET_IGNORED, { model: modelKey });
     console.warn(
       '\u26a0\ufe0f  [recordModelContentSuccess] recordScore:false ignorato — il reset dello streak di contenuto e\' in-processo, '
       + 'non una proposta al ledger, e il suo gemello `recordModelContentFailure` incrementa lo streak anche in opt-out: '
@@ -4201,7 +4270,7 @@ export function recordModelContentSuccess(modelId, { recordScore } = {}) {
       + 'Lo streak di `_consecutiveContentFailures` e\' condiviso con chi genera in questo stesso processo — separa i due processi.',
     );
   }
-  _consecutiveContentFailures.delete(modelId);
+  _consecutiveContentFailures.delete(modelKey);
 }
 
 /**
@@ -4241,14 +4310,16 @@ export function recordModelContentSuccess(modelId, { recordScore } = {}) {
  */
 export function recordModelContentFailure(modelId, { recordScore = true } = {}) {
   if (!modelId) return;
-  recordModelFailure(modelId, { recordScore });
-  const count = (_consecutiveContentFailures.get(modelId) || 0) + 1;
-  _consecutiveContentFailures.set(modelId, count);
-  if (_isLastResortProvider(modelId)) return;
+  const modelKey = _normalizeMemoModelKey(modelId);
+  if (!modelKey) return;
+  recordModelFailure(modelKey, { recordScore });
+  const count = (_consecutiveContentFailures.get(modelKey) || 0) + 1;
+  _consecutiveContentFailures.set(modelKey, count);
+  if (_isLastResortProvider(modelKey)) return;
   if (count >= MAX_CONSECUTIVE_CONTENT_FAILURES) {
-    markModelExhausted(modelId, 'content', '', { recordScore });
+    markModelExhausted(modelKey, 'content', '', { recordScore });
     _stats.exhausted++;
-    console.warn(`🚫 [${modelId}] Exhausted after ${count} consecutive content-quality failures`);
+    console.warn(`🚫 [${modelKey}] Exhausted after ${count} consecutive content-quality failures`);
   }
 }
 
@@ -4270,6 +4341,8 @@ export function recordModelFailure(modelId, { nonRetryable = false, exhausted = 
   // TypeError si porta via la diagnostica proprio del giro andato male.
   // Riproducibile su `main` con due `recordModelFailure`, uno dei quali senza id.
   if (!modelId) return;
+  modelId = _normalizeMemoModelKey(modelId);
+  if (!modelId) return;
   // Opt-out del chiamante: il fallimento resta CONTATO nella run — un modello
   // che fallisce senza comparire fra i falliti rende invisibile il prossimo
   // incidente — ma non muove niente che il flush possa spedire. Il gate sta
@@ -4290,7 +4363,9 @@ export function recordModelFailure(modelId, { nonRetryable = false, exhausted = 
   const d = _modelDetails.get(modelId) || { successes: 0, failures: 0 };
   d.failures++;
   _modelDetails.set(modelId, d);
-  _bumpOutcome(modelId, 'failures', { ledger: _proposeLedgerWrite(modelId, recordScore) });
+  const ledgerProposed = _proposeLedgerWrite(modelId, recordScore);
+  if (ledgerProposed) _learningOnlyLedgerProposals.delete(modelId);
+  _bumpOutcome(modelId, 'failures', { ledger: ledgerProposed });
 }
 
 /**
@@ -4657,11 +4732,12 @@ export function applyModelsPrefer(chain, prefer) {
  * rimedio esiste gia' ed e' `err.retryRequestTokenBudget` al throw qui sotto.
  */
 export function getDeclaredRequestTokenLimit(model) {
-  const apiModelId = getApiModelId(model);
+  const modelKey = _normalizeMemoModelKey(model);
+  const apiModelId = getApiModelId(modelKey);
   const knownLimits = [
     MODEL_MAX_REQUEST_TOKENS[apiModelId],
-    _learnedRequestTokenLimits.get(model),
-    DEFAULT_REQUEST_TOKENS_BY_PROVIDER[getProvider(model)],
+    _learnedRequestTokenLimits.get(modelKey),
+    DEFAULT_REQUEST_TOKENS_BY_PROVIDER[getProvider(modelKey)],
   ].filter((v) => typeof v === 'number' && v > 0);
   return knownLimits.length ? Math.min(...knownLimits) : undefined;
 }
@@ -4707,10 +4783,18 @@ function _setExhaustReason(modelId, reason, detail = '') {
 // La divisione e' la stessa gia' adottata per `cooldownProvider` nel gate di
 // callLLM: in-processo si', documento condiviso no.
 export function markModelExhausted(modelId, reason = 'quota', detail = '', { recordScore = true } = {}) {
-  _exhaustedModels.add(modelId);
-  _setExhaustReason(modelId, reason, detail);
-  _proposeLedgerWrite(modelId, recordScore);
-  console.warn(`🚫 Model ${modelId} marked as exhausted (${reason}) — will be skipped for rest of run`);
+  const modelKey = _normalizeMemoModelKey(modelId);
+  if (!modelKey) return;
+  _exhaustedModels.add(modelKey);
+  _setExhaustReason(modelKey, reason, detail);
+  const ledgerProposed = _proposeLedgerWrite(modelKey, recordScore);
+  if (ledgerProposed) {
+    // Un ban esplicito e' evidenza distinta da una ri-proposta di cap/schema:
+    // solo questo evento puo' proporre un nuovo exhaustedUntil condiviso.
+    _learningOnlyLedgerProposals.delete(modelKey);
+    if (reason === 'quota') _quotaExhaustionProposals.add(modelKey);
+  }
+  console.warn(`🚫 Model ${modelKey} marked as exhausted (${reason}) — will be skipped for rest of run`);
 }
 
 /**
@@ -4742,7 +4826,7 @@ export function markModelExhausted(modelId, reason = 'quota', detail = '', { rec
  * already keys on, and the regexes there now name them explicitly rather than
  * matching them by accident.
  */
-function _exhaustSkipCause(model) {
+export function _exhaustSkipCause(model) {
   const reason = _exhaustReason.get(model) || 'quota';
   const detail = _exhaustDetail.get(model);
   switch (reason) {
@@ -4995,8 +5079,8 @@ function _formatRunOutcomesLine(s) {
 }
 
 /**
- * FRO-325: Print a human-readable end-of-run summary to console.
- * Call this at the end of a crawler run for visibility into AI usage.
+ * FRO-325: Print a human-readable end-of-run summary to stderr.
+ * Stdout remains reserved for machine-readable pipeline payloads.
  */
 export function printRunSummary() {
   const s = getStats();
@@ -5030,7 +5114,7 @@ export function printRunSummary() {
   if (s.errors.length > 0) {
     lines.push(`   Errors: ${s.errors.length}`);
   }
-  console.log(lines.join('\n'));
+  console.error(lines.join('\n'));
 }
 
 /** Reset exhausted models and scores (useful for long-running processes or tests) */
@@ -5069,6 +5153,8 @@ export function resetState() {
   _modelScores.clear();
   _modelDetails.clear();
   _dirtyModels.clear();
+  _learningOnlyLedgerProposals.clear();
+  _quotaExhaustionProposals.clear();
   _pendingCounterDeltas.clear();
   _runOutcomes.clear();
   _consecutive429.clear();
@@ -5895,20 +5981,28 @@ function _parseRequestTokenLimit(bodyText = '') {
 function _learnRequestTokenLimit(modelForTracking, bodyText, { recordScore = true } = {}) {
   const limit = _parseRequestTokenLimit(bodyText);
   if (!limit || limit < 500) return;
+  const modelKey = _normalizeMemoModelKey(modelForTracking);
+  if (!modelKey) return;
   // Due domande, due memo (#895 item 1): si esce solo se il cap e' gia' noto in
   // processo E gia' proposto al ledger. Se il memo c'e' ma la proposta manca —
   // il caso di una chiamata precedente in opt-out — si ripassa dalla porta.
-  const known = _learnedRequestTokenLimits.get(modelForTracking) === limit;
-  const proposed = _ledgerProposedRequestTokenLimits.get(modelForTracking) === limit;
+  const known = _learnedRequestTokenLimits.get(modelKey) === limit;
+  const proposed = _ledgerProposedRequestTokenLimits.get(modelKey) === limit;
   if (known && proposed) return;
-  _learnedRequestTokenLimits.set(modelForTracking, limit);
+  _learnedRequestTokenLimits.set(modelKey, limit);
   // Il cap resta valido IN PROCESSO (e' cio' che evita di ripagare un 400 per
   // ogni id fratello); verso il ledger passa dalla porta, che lo rifiuta se
   // l'endpoint e' per-macchina — un Ollama servito a 8k su questo runner non
   // deve insegnare quel tetto a tutte le altre macchine (#864).
-  if (_proposeLedgerWrite(modelForTracking, recordScore)) {
-    _ledgerProposedRequestTokenLimits.set(modelForTracking, limit);
+  if (_proposeLedgerWrite(modelKey, recordScore)) {
+    _ledgerProposedRequestTokenLimits.set(modelKey, limit);
+    if (!_quotaExhaustionProposals.has(modelKey)) _learningOnlyLedgerProposals.add(modelKey);
   }
+}
+
+/** Test seam for the load/re-learn keyspace contract. */
+export function __learnRequestTokenLimitForTests(modelForTracking, bodyText, opts = {}) {
+  return _learnRequestTokenLimit(modelForTracking, bodyText, opts);
 }
 
 /**
@@ -5938,13 +6032,16 @@ const _ledgerProposedSchemaIncompatible = new Set();
  * (in-run immediately, cross-run via Firestore). No-op if already known.
  */
 function _learnSchemaIncompatible(modelForTracking, { recordScore = true } = {}) {
+  const modelKey = _normalizeMemoModelKey(modelForTracking);
+  if (!modelKey) return;
   // «Lo so gia'» non implica «l'ho gia' proposto» (#895 item 1).
-  if (_learnedSchemaIncompatible.has(modelForTracking)
-    && _ledgerProposedSchemaIncompatible.has(modelForTracking)) return;
-  _learnedSchemaIncompatible.add(modelForTracking);
+  if (_learnedSchemaIncompatible.has(modelKey)
+    && _ledgerProposedSchemaIncompatible.has(modelKey)) return;
+  _learnedSchemaIncompatible.add(modelKey);
   // Stessa divisione di _learnRequestTokenLimit qui sopra (#864).
-  if (_proposeLedgerWrite(modelForTracking, recordScore)) {
-    _ledgerProposedSchemaIncompatible.add(modelForTracking);
+  if (_proposeLedgerWrite(modelKey, recordScore)) {
+    _ledgerProposedSchemaIncompatible.add(modelKey);
+    if (!_quotaExhaustionProposals.has(modelKey)) _learningOnlyLedgerProposals.add(modelKey);
   }
 }
 
@@ -8050,7 +8147,20 @@ export async function callSingleModel(messages, opts = {}) {
     throw new Error(`[${model}] Model is exhausted for this run`);
   }
 
-  return _callModel(model, messages, o);
+  try {
+    return await _callModel(model, messages, o);
+  } catch (error) {
+    // callLLM has this companion in its cascade catch. A direct caller also
+    // reaches the request-cap learning paths, so it must record the same
+    // outcome or a cap proposal can be the only ledger evidence for the model.
+    recordModelFailure(model, {
+      nonRetryable: !!error?.nonRetryable,
+      exhausted: !!error?.exhausted,
+      transportOnly: !!error?.transportFault,
+      recordScore: o.recordScore,
+    });
+    throw error;
+  }
 }
 
 /**

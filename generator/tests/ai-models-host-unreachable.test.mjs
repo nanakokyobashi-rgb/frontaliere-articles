@@ -1717,9 +1717,9 @@ describe('callLLM — il reset della striscia si conta per classe (#848 item 3)'
   // raccolto cosi' non si distingue da un log troncato.
   const summaryOf = () => {
     const out = [];
-    const orig = console.log;
-    console.log = (...a) => out.push(a.map(String).join(' '));
-    try { printRunSummary(); } finally { console.log = orig; }
+    const orig = console.error;
+    console.error = (...a) => out.push(a.map(String).join(' '));
+    try { printRunSummary(); } finally { console.error = orig; }
     return out.join('\n');
   };
   const flapLineOf = (text) => text.split('\n').find((l) => l.includes('resolver flaps:'));

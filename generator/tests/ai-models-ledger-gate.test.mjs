@@ -39,8 +39,11 @@ import { describe, it, beforeEach, afterEach } from 'node:test';
 
 import {
   callLLM,
+  callSingleModel,
   discoverFreeModels,
   flushScores,
+  __learnRequestTokenLimitForTests,
+  __restoreScoreEntriesForTests,
   getDeclaredRequestTokenLimit,
   getStats,
   markModelExhausted,
@@ -52,6 +55,7 @@ import {
   _cooldownSeverityDurations,
   _perMachineEndpointEnvVars,
   _restorableExhaustUntil,
+  _exhaustSkipCause,
   _safeDiagnosticValue,
   __installScoreStoreForTests,
   EXHAUST_RESTORE_MAX_AHEAD_MS,
@@ -758,6 +762,7 @@ describe('#875 — resetState() lascia uno stato coerente', () => {
     __installScoreStoreForTests(store.db, null);
 
     markModelExhausted('gpt-4o-mini', 'quota');
+    __learnRequestTokenLimitForTests('gpt-4o-mini', 'tokens_limit_reached. Limit 2048 tokens');
     await flushScores();
 
     const entry = store.last()?.models?.['gpt-4o-mini'];
@@ -1049,6 +1054,85 @@ describe('#895 — il memo del cap appreso e la porta del ledger sono due cose d
     );
   });
 
+  it('callSingleModel accompagna ogni cap imparato con recordModelFailure', async () => {
+    process.env.GH_MODELS_PAT = 'test-pat';
+    const model = 'gpt-4o-mini';
+    globalThis.fetch = async () => ({
+      ok: false,
+      status: 413,
+      headers: new Map(),
+      text: async () => JSON.stringify({ error: { message: 'tokens_limit_reached. Limit 2048 tokens' } }),
+      json: async () => ({ error: { message: 'tokens_limit_reached. Limit 2048 tokens' } }),
+    });
+    const store = makeStore();
+    __installScoreStoreForTests(store.db, null);
+
+    await assert.rejects(() => callSingleModel([{ role: 'user', content: 'x' }], {
+      model,
+      maxRetriesPerModel: 1,
+      backoffMs: 1,
+      timeout: 5000,
+    }));
+    await flushScores();
+
+    const entry = store.last()?.models?.[model];
+    assert.equal(entry?.maxRequestTokens, 2048, `il cap manca dal record: ${JSON.stringify(store.last())}`);
+    assert.equal(entry?.failures, 1, `callSingleModel non ha registrato il fallimento compagno: ${JSON.stringify(entry)}`);
+  });
+
+  it('la sola ri-proposta di un cap non serializza un exhaustedUntil globale', async () => {
+    const model = 'openrouter/cap-only-1214';
+    const encoded = model.replace(/\//g, '__');
+    const store = makeStore();
+    __installScoreStoreForTests(store.db, null);
+
+    // Il modello e' gia' esausto in-processo, ma questo ban arriva da un
+    // chiamante che ha esplicitamente disattivato il ledger. La proposta che
+    // segue riguarda solo il cap imparato e non puo' trasformare quel marchio
+    // locale in un ban condiviso.
+    markModelExhausted(model, 'quota', 'diagnostic-only', { recordScore: false });
+    __learnRequestTokenLimitForTests(model, 'tokens_limit_reached. Limit 2048 tokens');
+    await flushScores();
+
+    const entry = store.last()?.models?.[encoded];
+    assert.equal(entry?.maxRequestTokens, 2048, `il cap deve essere scritto: ${JSON.stringify(store.last())}`);
+    assert.equal(
+      Object.hasOwn(entry || {}, 'exhaustedUntil'),
+      false,
+      `la ri-proposta del solo cap ha pubblicato un ban globale: ${JSON.stringify(entry)}`,
+    );
+  });
+
+  it('il secondo ciclo load/re-learn riusa la chiave canonica anche dopo resetState', async () => {
+    const model = 'cerebras/meta/llama-3.1-8b-instruct-1214';
+    const encoded = model.replace(/\//g, '__');
+    const body = 'tokens_limit_reached. Limit 2048 tokens';
+    const store = makeStore();
+
+    __installScoreStoreForTests(store.db, null);
+    __restoreScoreEntriesForTests({
+      [encoded]: { modelId: encoded, maxRequestTokens: 2048 },
+    });
+    assert.equal(getDeclaredRequestTokenLimit(model), 2048, 'il primo load deve decodificare data.modelId');
+    __learnRequestTokenLimitForTests(model, body);
+    assert.equal(getStats().dirtyModels, 0, 'il primo re-learn dello stesso cap non deve sporcare il ledger');
+    await flushScores();
+    assert.equal(store.written.length, 0, 'nessuna riscrittura era necessaria dopo il primo load');
+
+    resetState();
+    __installScoreStoreForTests(store.db, null);
+    // Secondo load: l'id canonico manca dal payload e deve arrivare dalla
+    // decodifica della chiave del campo Firestore.
+    __restoreScoreEntriesForTests({
+      [encoded]: { maxRequestTokens: 2048 },
+    });
+    assert.equal(getDeclaredRequestTokenLimit(model), 2048, 'il secondo load deve decodificare la chiave del campo');
+    __learnRequestTokenLimitForTests(model, body);
+    assert.equal(getStats().dirtyModels, 0, 'il secondo re-learn non deve aprire una nuova proposta');
+    await flushScores();
+    assert.equal(store.written.length, 0, 'il secondo ciclo non deve riscrivere il cap invariato');
+  });
+
   // Item 2. Gemello strutturale del pin su `_dirtyModels` in cima al file,
   // sull'ALTRA coppia di stato che aveva due writer: `_exhaustReason` /
   // `_exhaustDetail`. Il ramo `else` del breaker host-unreachable ne ricopiava a
@@ -1163,13 +1247,20 @@ describe('#895 — il memo del cap appreso e la porta del ledger sono due cose d
     markModelExhausted('gpt-4o-mini', 'nonretryable', 'HTTP 402');
     resetState();
     markModelExhausted('gpt-4o-mini', 'nonretryable');
+    const expectedCause = _exhaustSkipCause('gpt-4o-mini');
 
     await assert.rejects(
       () => callLLM([{ role: 'user', content: 'x' }], { maxRetriesPerModel: 1, backoffMs: 1, timeout: 5000 }),
       (e) => {
+        const message = String(e.message);
+        assert.ok(expectedCause, '_exhaustSkipCause() deve produrre una causa verificabile');
         assert.ok(
-          !String(e.message).includes('HTTP 402'),
-          `dettaglio sopravvissuto al reset e riattaccato a un marchio nuovo: ${e.message}`,
+          message.includes(`skipped — exhausted (${expectedCause})`),
+          `la causa prodotta da _exhaustSkipCause() non e\' arrivata al reject: ${message}`,
+        );
+        assert.ok(
+          !message.includes('HTTP 402'),
+          `dettaglio sopravvissuto al reset e riattaccato a un marchio nuovo: ${message}`,
         );
         return true;
       },
