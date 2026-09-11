@@ -300,10 +300,13 @@ function blobsFollowingRenames(rel, { partialClone = isPartialClone() } = {}) {
 
 function reportInconclusive(message) {
   if (JSON_OUT) {
-    console.log(JSON.stringify({ ok: true, inconclusive: true, reason: message }, null, 2));
+    console.log(JSON.stringify({ ok: false, inconclusive: true, reason: message }, null, 2));
   } else {
     console.error(`⚠️ ${message}`);
   }
+  // Un lazy-fetch non consegnato non e' una verifica verde: il workflow deve
+  // fermarsi prima di trattare una baseline non letta come attestata.
+  process.exitCode = 1;
 }
 
 function main() {

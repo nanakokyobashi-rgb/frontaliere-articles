@@ -192,8 +192,12 @@ test('#1238 — una coppia sigla-percentuale non basta per aprire la deroga', ()
 
 test('#1238 — la tabella a elenco resta una deroga completa', () => {
   const elenco = '- AVS/AI/IPG: 5,3%\n- AD/AC: 1,1%\n- LAINF: 0,7-1,5%';
+  const labelSingolare = 'percentuale: AVS 5%; AI 2%';
+  const labelPlurale = 'aliquote: AVS 5%; AI 2%';
 
   assert.equal(isCompactItalianRateTable(elenco), true);
+  assert.equal(isCompactItalianRateTable(labelSingolare), true);
+  assert.equal(isCompactItalianRateTable(labelPlurale), true);
 });
 
 test('#1220 — la deroga vale sulle stesse stringhe anche per il corpus pubblicato', () => {

@@ -263,14 +263,16 @@ const SWISS_RATE_CODE_GROUP = `${SWISS_RATE_CODE}`
 const SWISS_RATE_VALUE = `\\d+(?:[.,]\\d+)?`
   + `(?:\\s*[-–]\\s*\\d+(?:[.,]\\d+)?)?\\s*%`;
 const SWISS_RATE_ROW = `${SWISS_RATE_CODE_GROUP}\\s*(?:[:=]\\s*)?${SWISS_RATE_VALUE}`;
+const SWISS_RATE_HEADING = '(?:aliquot(?:e|a)|contribut(?:i|o)|percentual(?:e|i))';
 const SWISS_RATE_ROW_RE = new RegExp(
-  `(?:^|[,;|\\r?\\n]\\s*)(?:[-*•]\\s*)?${SWISS_RATE_ROW}`,
+  `(?:^\\s*(?:${SWISS_RATE_HEADING}\\s*:\\s*)?|[,;|\\r\\n]\\s*)`
+    + `(?:[-*•]\\s*)?${SWISS_RATE_ROW}`,
   'gi',
 );
 const SWISS_RATE_TABLE_RE = new RegExp(
-  `^\\s*(?:(?:aliquot(?:e|a)|contribut(?:i|o)|percentuali?)\\s*:\\s*)?`
+  `^\\s*(?:${SWISS_RATE_HEADING}\\s*:\\s*)?`
     + `(?:[-*•]\\s*)?${SWISS_RATE_ROW}`
-    + `(?:\\s*(?:[,;|]|\\r?\\n)\\s*(?:[-*•]\\s*)?${SWISS_RATE_ROW})+`
+    + `(?:\\s*(?:[,;|]|\\r\\n|\\n)\\s*(?:[-*•]\\s*)?${SWISS_RATE_ROW})+`
     + `\\s*\\.?\\s*$`,
   'i',
 );
