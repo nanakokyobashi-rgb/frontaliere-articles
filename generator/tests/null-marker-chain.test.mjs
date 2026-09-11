@@ -194,10 +194,10 @@ describe('free-MT recovery — il degrado e’ misurato e limitato per run', () 
   test('`en` non puo’ affamare `de`/`fr`: a ogni locale resta almeno un claim', () => {
     const report = createFreeMtRecoveryReport();
     const spesi = Object.fromEntries(FREE_MT_LLM_FALLBACK_LOCALES.map((l) => [l, 0]));
-    // Stesso ordine del loop missing-field di create-article.mjs, e 5 campi
-    // per locale: la forma esatta della run degradata.
+    // Stesso ordine del loop missing-field di create-article.mjs, e 7 campi
+    // per locale (inclusi faq.q/faq.a): la forma esatta della run degradata.
     for (const locale of FREE_MT_LLM_FALLBACK_LOCALES) {
-      for (let i = 0; i < 5; i += 1) {
+      for (let i = 0; i < 7; i += 1) {
         if (claimFreeMtLlmFallback(report, locale)) spesi[locale] += 1;
       }
     }

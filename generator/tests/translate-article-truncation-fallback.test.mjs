@@ -85,7 +85,7 @@ const LOOP_SRC = extractTruncationRetryLoop();
  * `!itValue?.trim()` (#691).
  */
 function extractMissingFieldLoop() {
-  const marker = '`${locale}:${field}-missing-retry`,';
+  const marker = '`${locale}:${recoveryField}-missing-retry`,';
   const m = src.indexOf(marker);
   assert.notEqual(m, -1, 'marker non trovato — aggiornare questo test');
   const startAnchor = "for (const locale of ['en', 'de', 'fr']) {";
@@ -460,7 +460,7 @@ test('translatedStringOrNull: rifiuta la serializzazione letterale di null, non 
 
 // ── Il cap free-MT e' scopato ai campi che il free-MT ha rifiutato ─────────
 //
-// Il budget e' 5 per RUN, i campi candidati 15 per articolo. Addebitarlo a
+// Il budget e' 7 per RUN, i campi candidati 21 per articolo. Addebitarlo a
 // ogni ingresso nel loop lo esaurisce con un articolo solo, e da li' in poi
 // OGNI campo mancante salta il retry mirato e cade sul valore italiano: prosa
 // IT sotto `/en/`, `/de/`, `/fr/`, cioe' il difetto #831 che la catena
@@ -479,6 +479,88 @@ function reportConCapEsaurito(coppieRifiutate = [], localiEsauriti = ['de']) {
   return report;
 }
 
+test('la quota free-MT copre i 21 candidati, incluse le FAQ', () => {
+  assert.equal(MAX_FREE_MT_LLM_FALLBACKS_PER_RUN, 7);
+  assert.equal(MAX_FREE_MT_LLM_FALLBACKS_PER_LOCALE, 3);
+});
+
+test('ramo missing-field: faq.q e faq.a rifiutati ottengono il retry anche se il free-MT aveva lasciato IT', async () => {
+  const faqIt = {
+    q: 'Domanda italiana abbastanza lunga per il test.',
+    a: 'Risposta italiana abbastanza lunga per il test.',
+  };
+  const data = {
+    content: {
+      en: { ...META_PLAUSIBILI, faq: [{ ...faqIt }] },
+      de: { ...META_PLAUSIBILI, faq: [{ q: 'Deutsche Frage ausreichend lang.', a: 'Deutsche Antwort ausreichend lang.' }] },
+      fr: { ...META_PLAUSIBILI, faq: [{ q: 'Question française suffisamment longue.', a: 'Réponse française suffisamment longue.' }] },
+    },
+  };
+  const itContent = { ...META_PLAUSIBILI, faq: [{ ...faqIt }] };
+  const report = createFreeMtRecoveryReport();
+  recordFreeMtUnusableOutput(report, { reason: 'unusable-text', targetLang: 'en', field: 'faq.q[0]' });
+  recordFreeMtUnusableOutput(report, { reason: 'unusable-text', targetLang: 'en', field: 'faq.a[0]' });
+  const calls = [];
+  const callWithRetry = async (_prompt, _tokens, label) => {
+    calls.push(label);
+    const part = label.includes('.q[') ? 'q' : 'a';
+    return { faq: [{ [part]: part === 'q' ? 'Question in English.' : 'Answer in English.' }] };
+  };
+
+  await runMissingFieldLoop({ data, itContent, callWithRetry, translationReport: report });
+
+  assert.deepEqual(calls, ['en:faq.q[0]-missing-retry', 'en:faq.a[0]-missing-retry']);
+  assert.equal(data.content.en.faq[0].q, 'Question in English.');
+  assert.equal(data.content.en.faq[0].a, 'Answer in English.');
+});
+
+test("recovery FAQ indicizzata: un rifiuto non contagia le coppie gia' usabili", async () => {
+  const faqIt = [
+    { q: 'Prima domanda italiana abbastanza lunga per il test.', a: 'Prima risposta italiana abbastanza lunga per il test.' },
+    { q: 'Seconda domanda italiana abbastanza lunga per il test.', a: 'Seconda risposta italiana abbastanza lunga per il test.' },
+  ];
+  const data = {
+    content: {
+      en: {
+        ...META_PLAUSIBILI,
+        faq: [
+          { q: '', a: '' },
+          { q: 'Second English question remains usable.', a: 'Second English answer remains usable.' },
+        ],
+      },
+      de: { ...META_PLAUSIBILI, faq: faqIt.map((item) => ({ ...item })) },
+      fr: { ...META_PLAUSIBILI, faq: faqIt.map((item) => ({ ...item })) },
+    },
+  };
+  const itContent = { ...META_PLAUSIBILI, faq: faqIt };
+  const report = createFreeMtRecoveryReport();
+  recordFreeMtUnusableOutput(report, { reason: 'unusable-text', targetLang: 'en', field: 'faq.q[0]' });
+  recordFreeMtUnusableOutput(report, { reason: 'unusable-text', targetLang: 'en', field: 'faq.a[0]' });
+  const calls = [];
+  const callWithRetry = async (_prompt, _tokens, label) => {
+    calls.push(label);
+    const part = label.includes('.q[') ? 'q' : 'a';
+    return { faq: [{ [part]: part === 'q' ? 'First English question.' : 'First English answer.' }] };
+  };
+
+  await runMissingFieldLoop({ data, itContent, callWithRetry, translationReport: report });
+
+  assert.deepEqual(calls, ['en:faq.q[0]-missing-retry', 'en:faq.a[0]-missing-retry']);
+  assert.deepEqual(data.content.en.faq[1], {
+    q: 'Second English question remains usable.',
+    a: 'Second English answer remains usable.',
+  });
+});
+
+test('il report di recovery si resetta per articolo e separa gli addebiti del cap', () => {
+  const translateStart = src.indexOf('async function translateArticle(data) {');
+  assert.notEqual(translateStart, -1);
+  const afterStart = src.slice(translateStart, translateStart + 500);
+  assert.match(afterStart, /RUN_REPORT\.translation = createFreeMtRecoveryReport\(\)/);
+  assert.match(src, /return \{ q: q \|\| '', a: a \|\| '' \}/);
+  assert.match(src, /unusable_fields=\$\{JSON\.stringify\(recovery\.unusableFields \|\| \{\}\)\}/);
+});
+
 test('ramo missing-field: cap esaurito ma campo NON rifiutato dal free-MT → il retry mirato parte comunque (#831)', async () => {
   const complete = { ...META_PLAUSIBILI, body1: 'B1', body2: 'B2', body3: 'B3' };
   const data = { content: { en: { ...complete }, de: { ...complete, body1: '' }, fr: { ...complete } } };
@@ -496,7 +578,7 @@ test('ramo missing-field: cap esaurito ma campo NON rifiutato dal free-MT → il
 
 // #831 (round redflag): il budget era UNICO per run e il loop scorre `en`
 // prima di `de` e `fr`. In una run in cui il free-MT degrada su tutti i campi
-// — l'esatto scenario per cui il cap esiste — i 5 claim finivano tutti su
+// — l'esatto scenario per cui il cap esiste — i 7 claim finivano tutti su
 // `en`, e da `de` in poi ogni campo saltava il retry mirato cadendo su
 // `itValue`: `/de/` e `/fr/` pubblicati con prosa ITALIANA. Con la quota per
 // locale `en` non puo' piu' affamare gli altri.
