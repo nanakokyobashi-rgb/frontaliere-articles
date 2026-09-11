@@ -95,7 +95,7 @@ function permanentRejectionGrepPattern(yml = readFileSync(WORKFLOW_PATH, 'utf-8'
   const permanentHit = commitStep.match(/&& grep -qiE '([^']+)' <<< "\$LAST_OUTCOME"/);
   const lastOutcomeHit = commitStep.match(/LAST_OUTCOME="\$\(grep -E '([^']+)' "\$ATTEMPT_LOG" \|\| true\)"/);
   const outcomeLogHit = commitStep.match(/cat "\$ATTEMPT_LOG" >> "\$PUSH_OUTCOME_LOG"/);
-  const permanentLogHit = commitStep.match(/cat "\$ATTEMPT_LOG" >> "\$PERMANENT_OUTCOME_LOG"/);
+  const permanentLogHit = commitStep.match(/printf '%s\\n' "\$LAST_OUTCOME" >> "\$PERMANENT_OUTCOME_LOG"/);
   const allOutcomeHit = commitStep.match(/ALL_OUTCOME="\$\(grep -E '([^']+)' "\$PUSH_OUTCOME_LOG" \|\| true\)"/);
   assert.ok(
     rateHit && permanentHit && lastOutcomeHit && outcomeLogHit && permanentLogHit && allOutcomeHit,
@@ -607,7 +607,8 @@ test('a day that stages only the ledger cannot turn a lost push into a permanent
   assert.match(commitStep, /: > "\$ATTEMPT_LOG"/, 'the attempt log must be truncated before each retry');
   assert.match(commitStep, /cat "\$ATTEMPT_LOG" >> "\$PUSH_OUTCOME_LOG"/, 'the machine-readable log must retain every push snapshot');
   assert.match(commitStep, /cat "\$ATTEMPT_LOG" >> "\$PUSH_LOG"/, 'the human-readable push log must retain every retry');
-  assert.match(commitStep, /cat "\$ATTEMPT_LOG" >> "\$PERMANENT_OUTCOME_LOG"/, 'eligible permanent markers must survive across retries');
+  assert.match(commitStep, /printf '%s\\n' "\$LAST_OUTCOME" >> "\$PERMANENT_OUTCOME_LOG"/, 'only filtered permanent markers must survive across retries');
+  assert.doesNotMatch(commitStep, /cat "\$ATTEMPT_LOG" >> "\$PERMANENT_OUTCOME_LOG"/, 'the permanent union must not retain unfiltered attempt prose');
   assert.doesNotMatch(commitStep, /grep -E '[^']+' "\$PUSH_LOG"/, 'the human summary must never be the classification source');
   assert.match(commitStep, /push_status=\$\{PIPESTATUS\[0\]\}/,
     'the push result must be read separately from tee under pipefail');
@@ -692,6 +693,21 @@ test('the permanent classifier separates latest rate-limit veto from per-attempt
     ].join('\n')),
     true,
     'the raw cumulative projection may contain only push snapshots; rebase text is not appended to it by the workflow',
+  );
+  assert.equal(
+    pushLogMatchesPermanent(outcomePattern, pattern, [
+      'remote: Permission denied',
+      'hint: rebase abort reported repository not found, but this is not a push outcome',
+    ].join('\n')),
+    true,
+    'the push outcome filter still retains the actual permanent marker',
+  );
+  assert.equal(
+    pushLogMatchesPermanent(outcomePattern, pattern, [
+      'hint: rebase abort reported repository not found, but this is not a push outcome',
+    ].join('\n')),
+    false,
+    'unclassified rebase prose cannot create a permanent marker by itself',
   );
 });
 
