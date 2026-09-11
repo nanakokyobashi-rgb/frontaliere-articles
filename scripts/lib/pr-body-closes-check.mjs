@@ -91,13 +91,14 @@ function lineHasMultiCloseViolation(line) {
 // The ONLY tokens GitHub acts on. Note what is absent: the gerunds. `Closing
 // #12` / `Fixing #12` read as closure to a human and do nothing at all.
 const EFFECTIVE_KW = '(?:close[sd]?|fix(?:e[sd])?|resolve[sd]?)';
-// `[\s:*_\`[]*` and not `[\s:]*[*_\`[]*`: the two classes interleave in real
-// bodies (`**Closes** #12`, `*Chiude* #12`), where a space sits BETWEEN the
-// closing emphasis and the ref. GitHub renders the emphasis away and honors the
-// keyword, so a detector that stops there reads a closing body as not closing —
-// and for INTENT_RE below it is a missed report, the expensive direction. None
-// of the added characters is a letter, so no prose can bridge verb and ref.
-const MD_GAP = '[\\s:*_`[]*';
+// Markdown punctuation can interleave with horizontal spacing in real bodies.
+// Newlines are excluded from the gap: a keyword on one line must not govern a
+// reference on a later line, while horizontal Markdown punctuation remains
+// tolerated between the keyword and ref.
+// Keep the gap horizontal: `\\s` would let a keyword reach a reference on a
+// later line, while GitHub only closes the reference it sees on that line.
+// Markdown emphasis/punctuation may still sit between the keyword and ref.
+const MD_GAP = '(?:[^\\S\\n]|[:*_`\\[])*';
 const EFFECTIVE_RE = new RegExp(`\\b${EFFECTIVE_KW}\\b${MD_GAP}(${REF})`, 'gi');
 
 // Tokens that state closure but are NOT GitHub keywords. Italian verbs (the
@@ -144,9 +145,9 @@ const NEG_REPORT_RE = new RegExp(
 // the chain breaks at the asterisks, and the false positive the guard exists to
 // prevent comes back — in the exact form the bodies of this repo are written in.
 // So both report guards read the prefix with the emphasis markers taken out.
-// A run BETWEEN two word characters is deleted rather than spaced: it is an
-// intra-word underscore (`skip_total`), and turning it into a space would split
-// one word into two and eat the ≤2-word budget, which flips the guard off. A run
+// Only an underscore run BETWEEN two word characters is deleted: it is an
+// intra-word identifier marker (`skip_total`). Asterisks and backticks in the
+// same position are prose punctuation, so they become a space instead. A run
 // anywhere else becomes a space, so `qualcosa**non** chiude #12` keeps the word
 // boundary the `\b` needs.
 // Exported because `pr-body-nextstep-check.mjs` has the same guard blinded the
@@ -155,10 +156,10 @@ const NEG_REPORT_RE = new RegExp(
 const EMPHASIS_RUN_RE = /[*_`]+/g;
 const WORD_CHAR_RE = /[\p{L}\p{N}]/u;
 export function stripEmphasis(s) {
-  return s.replace(EMPHASIS_RUN_RE, (run, at, whole) => {
+  return String(s || '').replace(EMPHASIS_RUN_RE, (run, at, whole) => {
     const prev = whole[at - 1];
     const next = whole[at + run.length];
-    return prev && next && WORD_CHAR_RE.test(prev) && WORD_CHAR_RE.test(next) ? '' : ' ';
+    return /^_+$/.test(run) && prev && next && WORD_CHAR_RE.test(prev) && WORD_CHAR_RE.test(next) ? '' : ' ';
   })
     // I marker diventati spazi lasciano corse di spazi dove il testo ne aveva
     // uno solo (`per **scelta**` -> `per  scelta `), e ogni regex che cerca una

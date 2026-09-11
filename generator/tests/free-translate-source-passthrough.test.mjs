@@ -143,6 +143,29 @@ describe('freeTranslate — guardia «uscita == sorgente»', () => {
     assert.equal(snapshot().passthroughs - before.passthroughs, 1);
   });
 
+  test('rifiuta il passthrough parziale nel ramo MyMemory a chunk', async () => {
+    const longText = Array.from({ length: 140 }, (_, i) => `Frase sorgente numero ${i} con testo sufficiente.`).join(' ');
+    let myMemoryCalls = 0;
+    globalThis.fetch = async (url) => {
+      if (!String(url).includes('api.mymemory.translated.net')) throw new Error('offline nel test');
+      const query = new URL(url).searchParams.get('q') || '';
+      myMemoryCalls += 1;
+      const translatedText = myMemoryCalls === 1 ? 'Translated first chunk' : query;
+      return {
+        ok: true,
+        json: async () => ({ responseData: { translatedText, match: 1 } }),
+      };
+    };
+    const before = snapshot();
+
+    const out = await freeTranslate({ text: longText, sourceLang: 'it', targetLang: 'en', fieldType: 'description' });
+
+    assert.equal(out, '');
+    assert.ok(myMemoryCalls > 1);
+    assert.equal(snapshot().passthroughs - before.passthroughs, 1);
+    assert.equal(snapshot().hits - before.hits, 0);
+  });
+
   test('nomina il passthrough nel sommario della cascata', async () => {
     stubCascade(IT);
     await freeTranslate({ text: IT, sourceLang: 'it', targetLang: 'fr', fieldType: 'description' });
