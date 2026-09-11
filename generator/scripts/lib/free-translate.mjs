@@ -400,6 +400,21 @@ export function isSourcePassthrough(sourceText, translatedText) {
   return src === normalizeBlock(translatedText).toLowerCase();
 }
 
+// Un segmento breve puo' essere un titolo, una URL o un placeholder che il
+// motore lascia intatto senza indicare che il body intero sia un passthrough.
+// Solo un segmento con abbastanza parole traducibili puo' quindi invalidare il
+// campo a chunk; l'eventuale eco breve resta nell'assemblato e viene giudicato
+// dal confronto sul campo intero in `tryTier`.
+const MIN_SUBSTANTIVE_PASSTHROUGH_WORDS = 8;
+const TRANSLATABLE_WORD_RE = /[\p{L}\p{M}]+(?:['’\-][\p{L}\p{M}]+)*/gu;
+
+function isSubstantivePassthroughChunk(text) {
+  const candidate = normalizeBlock(text)
+    .replace(/https?:\/\/\S+/gi, ' ')
+    .replace(/\bZQX\d+XQZ\b/gi, ' ');
+  return (candidate.match(TRANSLATABLE_WORD_RE) || []).length >= MIN_SUBSTANTIVE_PASSTHROUGH_WORDS;
+}
+
 /**
  * `isSourcePassthrough` piu' la contabilita', per i tier che il passthrough lo
  * devono intercettare da soli.
@@ -1448,7 +1463,14 @@ export async function freeTranslate({ text, sourceLang, targetLang, fieldType = 
         noteTranslationOutcome(_outcome, 'incomplete');
         return ''; // quota hit mid-chunk, abort
       }
-      parts.push(mm);
+      const normalized = normalizeBlock(mm);
+      // Un eco sostanzioso invalida l'intero campo: assemblarlo con chunk
+      // tradotti produrrebbe testo misto. Un resto breve (titolo, URL o
+      // placeholder) resta invece nell'assemblato e viene giudicato da
+      // `tryTier` sul campo completo, senza buttare via le traduzioni buone.
+      if (rejectedAsPassthrough('myMemory', chunk, normalized, _outcome)
+        && isSubstantivePassthroughChunk(chunk)) return '';
+      parts.push(normalized);
     }
     // `return joined` e non un confronto locale: questo e' il ramo dei testi
     // lunghi, cioe' dei body, cioe' esattamente dei 27 passthrough misurati.

@@ -51,9 +51,10 @@ name: Needs-human sweep (Claude, weekly)
 #    (`issues: write` del `GITHUB_TOKEN`) e a valle lo raccoglie
 #    `followup-drainer` che gira su CRON (`5,30,55 * * * *`), non su
 #    `issues: labeled` — quindi nessuna anti-ricorsione da aggirare.
-# 3. **Pre-flight quota col beacon peer**: cediamo alla quota del sito, come
-#    `issue-fix`/`issue-decompose`. `ISSUE_NUMBER` è opzionale in
-#    `check-quota-backoff.mjs` e qui non c'è (uno sweep non ha una issue sola).
+# 3. **Telemetry quota col beacon peer**: osserviamo la quota del sito, come
+#    `issue-fix`/`issue-decompose`, senza bloccare il tentativo Codex-primary.
+#    `ISSUE_NUMBER` è opzionale in `check-quota-backoff.mjs` e qui non c'è (uno
+#    sweep non ha una issue sola).
 # 4. **Niente `npm ci`**: gli script del ciclo sono zero-dep (`node:test`).
 # 5. **Checkout sparse su `content/`** (240 MB, 14.748 file generati dai bot),
 #    non sulla lista `data/`+`public/` del sito.
@@ -177,10 +178,11 @@ jobs:
         continue-on-error: true
         run: node generator/scripts/load-rc-env.mjs
 
-      # Su finestra 429 aperta (anche quella del SITO, via beacon peer) nessuno
-      # step Claude parte: lo sweep è idempotente e il giro successivo recupera.
-      - name: Pre-flight — quota backoff gate (zero-Claude)
+      # Il beacon è telemetria: Codex è il provider primario e la quota Claude
+      # non deve impedire lo sweep. Claude interviene solo se Codex fallisce.
+      - name: Pre-flight — quota telemetry (Codex primary)
         id: quota
+        continue-on-error: true
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_REPO: ${{ github.repository }}
@@ -194,7 +196,7 @@ jobs:
       # creare un digest che il resto del workflow non ritroverà.
       - name: Validate digest title
         id: digest_title
-        if: steps.quota.outputs.quota_blocked != 'true'
+        if: always()
         run: |
           set -uo pipefail
           [ -n "$DIGEST_TITLE" ] || {
@@ -204,12 +206,12 @@ jobs:
           printf 'title=%s\n' "$DIGEST_TITLE" >> "$GITHUB_OUTPUT"
 
       - name: Setup Headroom compression proxy
-        if: steps.quota.outputs.quota_blocked != 'true'
+        if: always() && steps.digest_title.outcome == 'success'
         uses: ./.github/actions/setup-headroom
 
       - name: Run Claude sweep
         id: claude_sweep
-        if: steps.quota.outputs.quota_blocked != 'true'
+        if: always() && steps.digest_title.outcome == 'success'
         continue-on-error: true
         uses: ./.github/actions/claude-codex-fallback
         env:
@@ -217,7 +219,6 @@ jobs:
           REPO: ${{ github.repository }}
           SITE_REPO: valerielinc-ops/frontaliere-si-o-no
         with:
-          preflight_blocked: ${{ steps.quota.outputs.codex_fallback }}
           codex_auth_json: ${{ secrets.CODEX_AUTH_JSON }}
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           github_token: ${{ env.GITHUB_PAT_NANAKO || secrets.GITHUB_TOKEN }}
@@ -246,14 +247,14 @@ jobs:
             **Telemetria:** chiudi postando sul digest un commento con l'ultimo marker su riga propria: `<!-- SWEEP_OUTCOME: a=<n> b=<n> c=<n> d=<n> -->`.
 
       - name: Claude usage metrics
-        if: always() && steps.claude_sweep.outputs.fallback_used != 'true' && steps.quota.outputs.quota_blocked != 'true'
+        if: always() && steps.claude_sweep.outputs.claude_used == 'true'
         continue-on-error: true
         run: node scripts/ci/claude-usage-summary.mjs "${{ steps.claude_sweep.outputs.execution_file }}" "needs-human-sweep"
 
       # Colore lavoro reale: verde se il marker SWEEP_OUTCOME è stato postato
       # (anche a cap raggiunto), rosso se la CLI è morta senza produrlo.
       - name: Classify outcome (work-done, not CLI exit)
-        if: always() && steps.quota.outputs.quota_blocked != 'true'
+        if: always()
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           CLAUDE_OUTCOME: ${{ steps.claude_sweep.outcome }}

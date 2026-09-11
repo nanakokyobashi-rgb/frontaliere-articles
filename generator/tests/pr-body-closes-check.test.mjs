@@ -22,7 +22,7 @@
  */
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { checkClosesLines } from '../../scripts/lib/pr-body-closes-check.mjs';
+import { checkClosesLines, stripEmphasis } from '../../scripts/lib/pr-body-closes-check.mjs';
 
 const refs = (body) =>
   checkClosesLines(body).violations
@@ -139,4 +139,12 @@ test('una keyword in grassetto è comunque una keyword, nei due versi', () => {
   assert.deepEqual(refs('*Risolve* #133'), ['#133']);
   assert.deepEqual(refs('**Closes** #133\nchiude #133'), []);
   assert.deepEqual(refs('Closes #133'), []);
+});
+
+test('il gap di chiusura resta orizzontale e stripEmphasis non fonde parole vere', () => {
+  const body = 'Le issue non sono ancora fixed:\n\n* #849\n\nchiude #849';
+  assert.deepEqual(refs(body), ['#849']);
+  assert.equal(stripEmphasis('skip_total'), 'skiptotal');
+  assert.equal(stripEmphasis('stato_attuale'), 'statoattuale');
+  assert.equal(stripEmphasis('parola*altra*parola'), 'parola altra parola');
 });

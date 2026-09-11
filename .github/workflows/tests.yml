@@ -514,7 +514,9 @@ jobs:
           echo "Contesto prefetchato in $CTX_DIR:"
           ls -la "$CTX_DIR"
 
-      - name: Pre-flight — Claude quota beacon for Codex fallback
+      # Il beacon è telemetria: Codex è il provider primario e la quota Claude
+      # non deve impedire la review. Claude interviene solo se Codex fallisce.
+      - name: Pre-flight — Claude quota telemetry (Codex primary)
         id: quota
         if: steps.body_contract.outcome != 'failure' && steps.tier.outputs.tier != 'tests-only' && steps.resolve.outputs.should_review == 'true' && steps.guard.outputs.skip != 'true'
         continue-on-error: true
@@ -560,7 +562,6 @@ jobs:
           INCREMENTAL_BASE: ${{ steps.tier.outputs.incremental_base }}
         with:
           codex_github_token: ${{ env.APP_TOKEN || secrets.GITHUB_TOKEN }}
-          preflight_blocked: ${{ steps.quota.outputs.codex_fallback }}
           codex_auth_json: ${{ secrets.CODEX_AUTH_JSON }}
           review_marker: '<!-- CODEX_FALLBACK_REVIEW -->'
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
@@ -607,17 +608,22 @@ jobs:
       # errore API transiente SENZA aver postato una review: il job sembra verde
       # ma la PR si ferma in silenzio. Si classifica dal log di esecuzione.
       - name: Fail on transient API error (no review posted)
-        if: steps.body_contract.outcome != 'failure' && steps.tier.outputs.tier != 'tests-only' && always() && steps.resolve.outputs.should_review == 'true' && steps.guard.outputs.skip != 'true' && steps.claude_review.outputs.fallback_used != 'true'
+        if: steps.body_contract.outcome != 'failure' && steps.tier.outputs.tier != 'tests-only' && always() && steps.resolve.outputs.should_review == 'true' && steps.guard.outputs.skip != 'true' && steps.claude_review.outputs.primary_success != 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PR_NUMBER: ${{ steps.resolve.outputs.pr_number }}
           REVIEW_OUTCOME: ${{ steps.claude_review.outcome }}
           EXEC_FILE: ${{ steps.claude_review.outputs.execution_file }}
+          CODEX_PRIMARY_SUCCESS: ${{ steps.claude_review.outputs.primary_success }}
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
           REVIEW_TIER: ${{ steps.tier.outputs.tier }}
           REVIEW_MAX_TURNS: ${{ steps.tier.outputs.max_turns }}
         run: |
           set -uo pipefail
+          if [ "${CODEX_PRIMARY_SUCCESS:-false}" = 'true' ]; then
+            echo "Codex primary riuscito: nessun log Claude da classificare."
+            exit 0
+          fi
           # max_turns PRIMA del 429, e l'ordine e' sostanziale: la regex del 429
           # contiene un `rate[ _-]?limit` nudo che matcha i metadata di
           # rate-limit-headroom presenti su OGNI chiamata, anche riuscita.
@@ -693,7 +699,7 @@ jobs:
       - name: Claude usage metrics
         # Solo se la review e' effettivamente girata: a review skippata non c'e'
         # execution_file da riassumere. Best-effort, non fallisce mai il job.
-        if: steps.body_contract.outcome != 'failure' && steps.tier.outputs.tier != 'tests-only' && always() && steps.resolve.outputs.should_review == 'true' && steps.guard.outputs.skip != 'true'
+        if: steps.body_contract.outcome != 'failure' && steps.tier.outputs.tier != 'tests-only' && always() && steps.resolve.outputs.should_review == 'true' && steps.guard.outputs.skip != 'true' && steps.claude_review.outputs.claude_used == 'true'
         run: node scripts/ci/claude-usage-summary.mjs "${{ steps.claude_review.outputs.execution_file }}" "pr-review"
 
       # ── IL SECONDO VERDETTO CONDIZIONALE ─────────────────────────────────
