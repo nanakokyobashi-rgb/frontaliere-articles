@@ -11,7 +11,7 @@
  */
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { classifyIssue } from '../../scripts/lib/classify-issue.mjs';
+import { classifyIssue, isFixerExempt } from '../../scripts/lib/classify-issue.mjs';
 
 test('publish e\' l\'unica categoria che salta la coda', () => {
   const r = classifyIssue('Workflow Failure: Publish article data API', ['Bug']);
@@ -134,6 +134,12 @@ test('needs-human non cambia la category (resta visibile per telemetria, solo il
   const r = classifyIssue('Workflow Failure: engine lockstep drift', ['needs-human']);
   assert.equal(r.category, 'engine');
   assert.equal(r.route, 'none');
+});
+
+test('i pin locali del classificatore tengono l\'issue fuori dal fixer', () => {
+  assert.equal(isFixerExempt(['backlog']), true);
+  assert.equal(isFixerExempt([{ name: 'needs-human' }]), true);
+  assert.equal(isFixerExempt(['priority:high']), false);
 });
 
 test('la CLI emette JSON con la forma attesa dallo YAML del triage', async () => {
