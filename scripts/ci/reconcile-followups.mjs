@@ -471,7 +471,7 @@ function legacySemanticAcceptance(itemText, executable) {
   // inline-code identifiers and the live declarations must occur in order.
   const order = action.match(/`([A-Za-z_$][\w$]*)`\s+(?:prima di|before)\s+`([A-Za-z_$][\w$]*)`/i);
   if (order) {
-    const declaration = (name) => `(?:\\b(?:const|let|var)\\s+${escapedRegExp(name)}\\b|\\b${escapedRegExp(name)}\\s*=)`;
+    const declaration = (name) => `(?:\\b(?:const|let|var)\\s+${escapedRegExp(name)}\\b|\\b${escapedRegExp(name)}\\s*=(?!=|>))`;
     const ordered = new RegExp(`${declaration(order[1])}[\\s\\S]*${declaration(order[2])}`);
     if (ordered.test(source)) {
       return { rule: 'ordered-declarations', tokens: order.slice(1) };
@@ -494,7 +494,9 @@ function legacySemanticAcceptance(itemText, executable) {
   const template = action.match(/`([^`]*\bN\b[^`]*\bM\b[^`]*)`/);
   if (template && /reconcile|fallit|failed/i.test(template[1])) {
     let cursor = 0;
-    const fragments = template[1].split(/\b[MN]\b/).filter(Boolean);
+    const fragments = template[1]
+      .split(/\b[MN]\b/)
+      .filter((fragment) => /[A-Za-z0-9]/.test(fragment));
     const allPresent = fragments.every((fragment) => {
       const at = source.indexOf(fragment, cursor);
       if (at < 0) return false;
@@ -533,8 +535,11 @@ function legacySemanticAcceptance(itemText, executable) {
   // is the atomic transition itself: one command must add and remove the
   // labels together, so an interrupted session cannot leave the pair split.
   if (/`issue-decompose\.yml:L154`/.test(action)
-      && /gh issue edit[^\n]*--add-label[^\n]*--remove-label/.test(source)) {
-    return { rule: 'atomic-decompose-label-edit', tokens: ['gh issue edit', '--add-label', '--remove-label'] };
+      && /gh issue edit[^\n]*--add-label[^\n]*decomposed:[^\n]*--remove-label/.test(source)) {
+    return {
+      rule: 'atomic-decompose-label-edit',
+      tokens: ['gh issue edit', '--add-label decomposed:', '--remove-label'],
+    };
   }
 
   // The orphan-push card proposed git's ancestor check; the landed workflow
