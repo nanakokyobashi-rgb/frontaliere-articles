@@ -167,9 +167,9 @@
       "path": "scripts/ci/check-issue-already-resolved.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "d697adb04f364f0a",
-        "corpus": "d697adb04f364f0a",
-        "alignedAt": "2026-09-10"
+        "site": "e45dab34842b950d",
+        "corpus": "e45dab34842b950d",
+        "alignedAt": "2026-09-11"
       }
     },
     {
@@ -245,9 +245,9 @@
       "path": "scripts/ci/claude-codex-fallback.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "2188d488d170671c",
-        "corpus": "2188d488d170671c",
-        "alignedAt": "2026-09-10"
+        "site": "e689fea0127bdeed",
+        "corpus": "e689fea0127bdeed",
+        "alignedAt": "2026-09-11"
       }
     },
     {
