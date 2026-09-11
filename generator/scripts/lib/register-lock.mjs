@@ -400,6 +400,13 @@ export function resolveRegisterLock(projectRoot, buildTargets, section) {
           'hand and remove the lock file.',
       );
     }
+    if (relPath !== LEGACY_REGISTER_LOCK_FILE && lock.section !== section) {
+      throw new RegisterLockError(
+        `registration lock at ${relPath} declares section "${lock.section}" but its filename belongs to `
+          + `section "${section}"; refusing to remove evidence for a different section `
+          + `(${describeLockOrigin(lock)}). Inspect the marker and corpus by hand.`,
+      );
+    }
     const { present, absent } = registrationTargetStatus(buildTargets(lock.id, lock.section));
     if (present.length > 0 && absent.length > 0) {
       throw new RegisterLockError(

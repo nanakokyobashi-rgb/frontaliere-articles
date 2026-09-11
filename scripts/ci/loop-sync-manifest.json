@@ -2274,6 +2274,16 @@
       }
     },
     {
+      "path": "generator/scripts/lib/journalist-publish-recovery.mjs",
+      "mode": "corpus-only",
+      "reason": "Recovery per i documenti giornalista marcati `published` prima che il workflow possa committare le superfici condivise. Vive solo nel corpus: il percorso Firestore del publisher e il relativo checkpoint sono specifici della pipeline di pubblicazione qui, mentre il sito non ha questo modulo gemello. La logica per chunk riconcilia un `batch.commit()` con esito incerto, ritenta solo i documenti ancora `published` e conserva gli ID realmente rimessi in coda; resta dependency-free per la regressione `node --test` e non e' un file da portare nel mirror del sito.",
+      "baseline": {
+        "site": null,
+        "corpus": null,
+        "alignedAt": null
+      }
+    },
+    {
       "path": "generator/scripts/lib/profession-taxonomy.mjs",
       "sitePath": "scripts/lib/profession-taxonomy.mjs",
       "mode": "identical",

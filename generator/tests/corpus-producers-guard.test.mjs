@@ -367,16 +367,23 @@ test('publish-journalist rimette in coda i completati prima di un fatal successi
     path.join(ROOT, 'generator/scripts/publish-journalist-article.mjs'),
     'utf8',
   );
-  assert.match(source, /async function requeuePublishedDocuments\(db, FieldValue, publishedDocs\)/);
+  const recovery = fs.readFileSync(
+    path.join(ROOT, 'generator/scripts/lib/journalist-publish-recovery.mjs'),
+    'utf8',
+  );
+  assert.match(source, /import \{ requeuePublishedDocuments \} from '\.\/lib\/journalist-publish-recovery\.mjs';/);
   assert.match(source, /publishedDocs\.push\(\{ docRef: docSnap\.ref, id \}\)/);
   const fatalCatch = source.slice(
     source.indexOf('  } catch (err) {', source.indexOf('async function main()')),
     source.indexOf('  } finally {', source.indexOf('async function main()')),
   );
-  assert.match(fatalCatch, /requeuePublishedDocuments\(db, FieldValue, publishedDocs\)/);
-  assert.match(fatalCatch, /publishedIds\.length = 0/);
-  assert.match(source, /status: 'queued'/);
-  assert.match(source, /publishedAt: FieldValue\.delete\(\)/);
+  assert.match(fatalCatch, /requeuePublishedDocuments\(\{ db, FieldValue, publishedDocs, requeuedIds \}\)/);
+  assert.match(fatalCatch, /discardRequeuedFromPublishedIds\(\)/);
+  assert.match(fatalCatch, /unresolvedIds/);
+  assert.match(recovery, /status: 'queued'/);
+  assert.match(recovery, /await batch\.commit\(\)/);
+  assert.match(recovery, /await doc\.docRef\.get\(\)/);
+  assert.match(recovery, /JOURNALIST_REQUEUE_MAX_ATTEMPTS/);
   assert.match(source, /requeued_ids=\$\{JSON\.stringify\(requeuedIds\)\}/);
 });
 

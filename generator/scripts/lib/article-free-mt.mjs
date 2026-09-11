@@ -14,7 +14,11 @@
 
 import { hasUsableTranslatedText, hasUsableContentText } from './body2-payload-verdict.mjs';
 import { findLoneSurrogates } from '../../../scripts/lib/sanitize-control-chars.mjs';
-import { comuneTopicKey, municipalityNames } from './topic-coverage-guard.mjs';
+import {
+  comuneTopicKey,
+  isMunicipalityIndexUsable,
+  municipalityNames,
+} from './topic-coverage-guard.mjs';
 
 const NAV_LINK_RE = /\[[^\]]+\]\(nav:[^)]+\)/g;
 const NAV_SENTINEL_RE = /0NAV(\d+)0/g;
@@ -59,6 +63,14 @@ const MUNICIPALITY_MATCH_RE = MUNICIPALITY_NAMES.length > 0
   )
   : null;
 
+function assertMunicipalityProtectionReady() {
+  if (isMunicipalityIndexUsable() && MUNICIPALITY_NAMES.length > 0) return;
+  throw new Error(
+    '❌ INDICE COMUNI VUOTO O TRONCATO: impossibile preservare i nomi propri; '
+      + 'risolvi municipalities.ts prima di tradurre o pubblicare i metadata.',
+  );
+}
+
 function municipalityTermRegExp(name) {
   return new RegExp(
     `(?<![\\p{L}\\p{N}])${escapeRegExp(name)}(?![\\p{L}\\p{N}])`,
@@ -101,6 +113,7 @@ function restoreIndexedSentinels(value, pattern, originals) {
  * @returns {{ masked: string, expected: number, restore: (s: string) => { text: string, ok: boolean } }}
  */
 export function maskMunicipalityNames(text) {
+  assertMunicipalityProtectionReady();
   const source = String(text ?? '');
   if (!MUNICIPALITY_MATCH_RE) {
     return { masked: source, expected: 0, restore: (s) => ({ text: String(s ?? ''), ok: true }) };
@@ -132,6 +145,7 @@ export function maskMunicipalityNames(text) {
  * @returns {{ text: string, added: string[] }}
  */
 export function ensureMunicipalityNames(sourceText, translatedText) {
+  assertMunicipalityProtectionReady();
   const target = String(translatedText ?? '');
   const missing = MUNICIPALITY_NAMES.filter((name) =>
     municipalityIsPresent(sourceText, name) && !municipalityIsPresent(target, name));

@@ -412,8 +412,9 @@ test('il marker LEGACY (pre-#965, unico per repo) resta risolvibile dalla sezion
 test('un marker per-sezione con sezione interna discordante non viene deferito', () => {
   // Il nome del file è già il confine di ownership: un marker non-legacy con
   // un campo interno stantio non deve essere trattato come marker straniero e
-  // lasciato lì per sempre. Si verifica sui target dichiarati nel marker e si
-  // rimuove solo dopo aver stabilito che non è stato scritto nulla.
+  // soprattutto non può essere rimosso usando i target dell'altra sezione.
+  // Filename e payload sono una coppia di ownership: una discordanza è un
+  // errore da riparare a mano, prima di qualunque controllo/rimozione.
   const root = sandbox();
   const build = makeTargets(root);
   beginRegisterLock(root, ARTICLE_ID, SECTION);
@@ -422,21 +423,13 @@ test('un marker per-sezione con sezione interna discordante non viene deferito',
   parsed.section = 'svizzera';
   fs.writeFileSync(marker, JSON.stringify(parsed), 'utf-8');
 
-  const outcome = resolveRegisterLock(root, build, SECTION);
-  assert.deepEqual(outcome, {
-    state: 'nothing-written',
-    id: ARTICLE_ID,
-    section: 'svizzera',
-    resolved: [{
-      file: registerLockFile(SECTION),
-      state: 'nothing-written',
-      id: ARTICLE_ID,
-      section: 'svizzera',
-      runId: CURRENT_RUN_ID,
-    }],
-    deferred: [],
-  });
-  assert.equal(fs.existsSync(marker), false, 'il marker anomalo risolto non resta come defer permanente');
+  assert.throws(
+    () => resolveRegisterLock(root, build, SECTION),
+    (err) => isRegisterLockError(err)
+      && /declares section "svizzera"/.test(err.message)
+      && /filename belongs to section "frontaliere"/.test(err.message),
+  );
+  assert.equal(fs.existsSync(marker), true, 'la discordanza non deve cancellare l\'evidenza');
 });
 
 test('le chiavi di configurazione delle sezioni sono validate prima del primo run', () => {

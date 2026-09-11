@@ -74,6 +74,7 @@ import {
   assertNoFabricatedLaborOfficeCrossLocale,
 } from './create-article.mjs';
 import { isRegisterLockError } from './lib/register-lock.mjs';
+import { requeuePublishedDocuments } from './lib/journalist-publish-recovery.mjs';
 import { assertNoFabricatedNormAcronyms } from './lib/article-factuality-gates.mjs';
 import { generateFaqIT } from './batch-add-faq-to-articles.mjs';
 import { appendCatalogEntry } from './generate-journalist-image-catalog.mjs';
@@ -270,37 +271,6 @@ function resolveJournalistAuthor(doc) {
   return (doc?.authorUid ? getAuthorByUid(doc.authorUid) : undefined) || null;
 }
 
-/**
- * A later document can interrupt a batch after earlier documents have already
- * been stamped `published`, but before the calling workflow commits the shared
- * registry/SEO files. Re-queue those earlier documents before rethrowing. This
- * is deliberately a Firestore batch (chunked at the service limit): either a
- * chunk is fully made retryable or the failure remains loud, and the workflow's
- * marker-only checkpoint never has to guess which lines in shared files belong
- * to a complete article versus the partial one.
- */
-async function requeuePublishedDocuments(db, FieldValue, publishedDocs) {
-  const requeuedIds = [];
-  const BATCH_LIMIT = 500;
-  for (let offset = 0; offset < publishedDocs.length; offset += BATCH_LIMIT) {
-    const chunk = publishedDocs.slice(offset, offset + BATCH_LIMIT);
-    const batch = db.batch();
-    for (const { docRef } of chunk) {
-      batch.update(docRef, {
-        status: 'queued',
-        publishedAt: FieldValue.delete(),
-        slugs: FieldValue.delete(),
-        publishedUrls: FieldValue.delete(),
-        liveVerifiedAt: FieldValue.delete(),
-        errorMessage: null,
-      });
-    }
-    await batch.commit();
-    requeuedIds.push(...chunk.map(({ id }) => id));
-  }
-  return requeuedIds;
-}
-
 async function processDoc(db, FieldValue, docSnap) {
   const docId = docSnap.id;
   const doc = docSnap.data();
@@ -487,6 +457,12 @@ async function main() {
   const requeuedIds = [];
   let fatalError = null;
   let currentDocId = null;
+  const discardRequeuedFromPublishedIds = () => {
+    const requeued = new Set(requeuedIds);
+    for (let index = publishedIds.length - 1; index >= 0; index -= 1) {
+      if (requeued.has(publishedIds[index])) publishedIds.splice(index, 1);
+    }
+  };
   try {
     for (const docSnap of snap.docs) {
       // Sequential on purpose — registerArticleFiles() mutates shared source
@@ -514,21 +490,30 @@ async function main() {
     }
     if (publishedDocs.length > 0) {
       try {
-        requeuedIds.push(...await requeuePublishedDocuments(db, FieldValue, publishedDocs));
+        await requeuePublishedDocuments({ db, FieldValue, publishedDocs, requeuedIds });
         // The workflow failure path intentionally commits the marker only. The
         // completed documents are now queued again, so advertising them as
         // published would make the summary claim the opposite of Firestore.
-        publishedIds.length = 0;
+        discardRequeuedFromPublishedIds();
         console.error(
           `::warning::${requeuedIds.length} documento/i completato/i prima dell'interruzione `
           + 'rimesso/i in coda: il prossimo drenaggio li ritentera dopo la riparazione del marker',
         );
       } catch (requeueErr) {
-        // Do not turn a failed rollback into a green producer: a published
-        // status that could not be reverted is itself an orphan risk and must
-        // remain visible next to the original registration failure.
+        // The helper keeps the accumulator and reports the IDs it observed as
+        // queued even when a later chunk remains unresolved. Do not turn a
+        // partial rollback into a green producer: the remaining published IDs
+        // must stay visible next to the original registration failure.
+        for (const id of requeueErr?.requeuedIds || []) {
+          if (!requeuedIds.includes(id)) requeuedIds.push(id);
+        }
+        discardRequeuedFromPublishedIds();
+        const unresolvedIds = requeueErr?.unresolvedIds || publishedDocs
+          .filter(({ id }) => !requeuedIds.includes(id))
+          .map(({ id }) => id);
         console.error(
-          `::error::impossibile rimettere in coda i documenti completati prima dell'interruzione: `
+          `::error::rollback giornalista parziale: ${requeuedIds.length} documento/i rimesso/i in coda; `
+          + `${unresolvedIds.length} ancora published (${unresolvedIds.join(', ') || 'nessun id'}) — `
           + `${requeueErr instanceof Error ? requeueErr.message : String(requeueErr)}`,
         );
       }

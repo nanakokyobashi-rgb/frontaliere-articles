@@ -45,6 +45,10 @@ import {
   ensureMunicipalityNames,
 } from '../scripts/lib/article-free-mt.mjs';
 import {
+  resetTopicCoverageCaches,
+  setMunicipalityIndexForTests,
+} from '../scripts/lib/topic-coverage-guard.mjs';
+import {
   createFreeMtRecoveryReport,
   recordFreeMtUnusableOutput,
   claimFreeMtLlmFallback,
@@ -250,6 +254,22 @@ describe('translateFieldFreeMt — l’uscita di un motore non e’ prosa', () =
     }
     assert.equal(maskMunicipalityNames('Estratto: Martello').expected, 1,
       'un comune non ambiguo resta protetto');
+  });
+
+  test('la preservazione fallisce chiusa se l\'indice comuni è vuoto o troncato', () => {
+    setMunicipalityIndexForTests(new Map());
+    try {
+      assert.throws(
+        () => maskMunicipalityNames('Estratto: Besano'),
+        /INDICE COMUNI VUOTO O TRONCATO/,
+      );
+      assert.throws(
+        () => ensureMunicipalityNames('Estratto: Besano', 'Lokalisierter Auszug'),
+        /INDICE COMUNI VUOTO O TRONCATO/,
+      );
+    } finally {
+      resetTopicCoverageCaches();
+    }
   });
 
   test('il percorso articolo abilita la protezione sull\'excerpt e la applica dopo la traduzione', () => {
