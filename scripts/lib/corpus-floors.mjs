@@ -28,9 +28,6 @@
  */
 import fs from 'node:fs';
 import path from 'node:path';
-import { SEO_ENTRY_WINDOW } from '../../engine/rssFeeds.mjs';
-
-export { SEO_ENTRY_WINDOW };
 
 /**
  * Quanta parte del corpus sorgente deve sopravvivere fino all'artefatto.
@@ -256,9 +253,9 @@ export const SEO_CHUNK_DIR = path.join('content', 'seo');
  * capace di muoversi da sola (due su sette letti, feed fermo tre mesi).
  *
  * I criteri ricalcano quelli di `parseSeoBlogs`, che e' il produttore: stesso
- * regex di inizio voce, stessi campi obbligatori e la stessa finestra di
- * riferimento `SEO_ENTRY_WINDOW`. Cosi' il pavimento non puo' contare una voce
- * oltre il limite che il feed non legge. L'insieme e' un Set di articleId perche' la',
+ * regex di inizio voce, stessi campi obbligatori e lo stesso confine, cioe'
+ * l'inizio della voce successiva o la fine del sorgente per l'ultima voce.
+ * Cosi' il pavimento conta esattamente cio' che il feed puo' leggere. L'insieme e' un Set di articleId perche' la',
  * un livello sopra, le voci finiscono in una Map chiavata per articleId: due
  * chunk che citano lo stesso id producono UN item, non due.
  *
@@ -276,9 +273,9 @@ export function collectSeoEntryMetadata(src, into = new Map()) {
     const { id, start } = positions[i];
     const end = i + 1 < positions.length
       ? positions[i + 1].start
-      : start + SEO_ENTRY_WINDOW;
-    // Match parseSeoBlogs: a successor is the exact boundary, while the
-    // bounded fallback applies only to the final entry in the chunk.
+      : src.length;
+    // Match parseSeoBlogs: a successor is the exact boundary and the final
+    // entry runs to the end of the source, with no fixed truncation.
     const block = src.slice(start, end);
     into.set(id, {
       keywords: block.match(/keywords:\s*'((?:[^'\\]|\\.)*)'/)?.[1],

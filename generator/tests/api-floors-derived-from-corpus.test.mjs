@@ -49,7 +49,6 @@ import {
   countSeoEntries,
   collectSeoEntryIds,
   collectSeoEntryMetadata,
-  SEO_ENTRY_WINDOW,
   sectionFloor,
 } from '../../scripts/lib/corpus-floors.mjs';
 import {
@@ -62,8 +61,6 @@ import {
   measureDist,
   expectFromCorpus,
 } from '../../scripts/ci/verify-api-floors.mjs';
-import { SEO_ENTRY_WINDOW as PRODUCER_SEO_ENTRY_WINDOW } from '../../engine/rssFeeds.mjs';
-
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
 const WORKFLOW = fs.readFileSync(join(ROOT, '.github/workflows/publish-api.yml'), 'utf-8');
 const BLOG_INDEX = fs.readFileSync(join(ROOT, 'scripts/build-blog-index.mjs'), 'utf-8');
@@ -403,8 +400,6 @@ test('countSeoEntries conta le voci come le conta parseSeoBlogs', () => {
   assert.equal(collectSeoEntryIds('nessuna voce qui').size, 0);
   const metadata = collectSeoEntryMetadata(entry('long'));
   assert.equal(metadata.get('long').headline, 'T long');
-  assert.equal(SEO_ENTRY_WINDOW, PRODUCER_SEO_ENTRY_WINDOW, 'corpus e producer devono leggere la stessa finestra');
-  assert.equal(SEO_ENTRY_WINDOW, 6000, 'la finestra ha margine sul blocco SEO massimo misurato');
   fs.rmSync(dir, { recursive: true, force: true });
 });
 
