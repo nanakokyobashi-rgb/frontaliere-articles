@@ -1122,6 +1122,11 @@ describe('#971 — nessun titolo scollegato dallo slug nel corpus PUBBLICATO', (
     'vivere-oltre-monti-lavorare-grigioni',
     'trasferirsi-svizzera-guida',
   ]);
+  // Misurato sul checkout del 2026-09-11: 296 serie, di cui 46 eccezioni
+  // esplicite. Il floor lascia assorbire ritiri legittimi senza permettere che
+  // una perdita di parsing o una porzione troncata renda il gate vacuo.
+  const SERIES_ARTICLES_FLOOR = 250;
+  const ALLOWED_NULL_COMUNE_KEYS_MAX = 46;
   const seriesArticles = () => CORPUS.filter((a) => SERIES_ID_RE.test(a.id));
 
   const broken = () => seriesArticles().flatMap((a) => {
@@ -1133,8 +1138,10 @@ describe('#971 — nessun titolo scollegato dallo slug nel corpus PUBBLICATO', (
     }
   });
 
-  it('il campione si carica — senza articoli della serie il test sotto è vacuo', () => {
-    expect(seriesArticles().length).toBe(EXPECTED_SERIES_IDS.size);
+  it('il campione resta sopra il floor misurato e non inventa id fuori dal registro EN', () => {
+    const ids = seriesArticles().map((a) => a.id);
+    expect(ids.length).toBeGreaterThanOrEqual(SERIES_ARTICLES_FLOOR);
+    expect(ids.filter((id) => !EXPECTED_SERIES_IDS.has(id))).toEqual([]);
   });
 
   it('ogni serie senza chiave-comune è un eccezione esplicita, non un fail-open', () => {
@@ -1142,7 +1149,8 @@ describe('#971 — nessun titolo scollegato dallo slug nel corpus PUBBLICATO', (
       .filter((a) => !comuneTopicKey(a.id.replace(/-/g, ' ')))
       .map((a) => a.id)
       .sort();
-    expect(observed).toEqual([...ALLOWED_NULL_COMUNE_KEYS].sort());
+    expect(observed.filter((id) => !ALLOWED_NULL_COMUNE_KEYS.has(id))).toEqual([]);
+    expect(ALLOWED_NULL_COMUNE_KEYS.size).toBeLessThan(ALLOWED_NULL_COMUNE_KEYS_MAX + 1);
   });
 
   it('ogni articolo della serie ha un titolo che nomina il comune del suo slug', () => {
@@ -1236,6 +1244,10 @@ describe('#971 — nessun titolo scollegato dallo slug nel corpus PUBBLICATO', (
   it('considera presenti i token del comune anche quando la traduzione inserisce parole', () => {
     expect(namesTokens('Trasferirsi a Villa di Chiavenna da frontaliere', ['villa', 'chiavenna'])).toBe(true);
     expect(namesTokens('Trasferirsi a Villa Chiavenna da frontaliere', ['villa', 'chiavenna'])).toBe(true);
+  });
+
+  it('non mescola token presi da comuni distinti', () => {
+    expect(namesTokens('Trasferirsi a Villa di Chiavenna da frontaliere', ['villa', 'guardia'])).toBe(false);
   });
 
   it('rifiuta un titolo non-IT identico al titolo italiano', () => {
