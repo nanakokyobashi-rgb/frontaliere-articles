@@ -546,7 +546,7 @@
     {
       "source": "observers/generator/tests/crawler-cross-repo-artifacts.test.mjs",
       "target": "generator/tests/crawler-cross-repo-artifacts.test.mjs",
-      "sha256": "dcaceb4ce558cef96e487fe86c7bbf1a65241e43f6064e449fe0c17f0ee1ac73"
+      "sha256": "a51e1042084935b37e5b7ee0cfa52c080660239a5f89b2c9ed042ff1a4560925"
     },
     {
       "source": "observers/workflows/crawler-generation-observer-shadow.yml",

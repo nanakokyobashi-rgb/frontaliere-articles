@@ -206,8 +206,11 @@ test('loop-drift osserva live i 24 artifact portabili e il contratto del generat
     assert.ok(entry, `${artifact.file}: mapping loop-sync assente`);
     assert.equal(entry.mode, 'identical', artifact.file);
     assert.equal(entry.sitePath, `.github/corpus-workflows/${artifact.file}`, artifact.file);
-    assert.equal(entry.baseline.site, artifact.artifactSha256.slice(0, 16), artifact.file);
     assert.equal(entry.baseline.corpus, artifact.artifactSha256.slice(0, 16), artifact.file);
+    // Questa PR aggiorna il lato corpus; il digest site resta quello storico
+    // finché il gemello non viene trasportato nel repository sito. Il gate
+    // delle baseline verifica che quel digest esista davvero nella sua storia.
+    assert.match(entry.baseline.site, /^[0-9a-f]{16}$/, artifact.file);
   }
 
   const contractEntry = entries.get('generator/data/crawler-cross-repo-contract.json');
@@ -215,8 +218,10 @@ test('loop-drift osserva live i 24 artifact portabili e il contratto del generat
   assert.equal(contractEntry.mode, 'identical');
   assert.equal(contractEntry.sitePath, '.github/corpus-workflows/contract.json');
   const contractHash = sha256(readFileSync(CONTRACT_PATH, 'utf8')).slice(0, 16);
-  assert.equal(contractEntry.baseline.site, contractHash);
   assert.equal(contractEntry.baseline.corpus, contractHash);
+  // Il sito non è parte di questa PR: la sua baseline deve restare un digest
+  // storico reale, non una copia corpus che il lato sito non ha mai emesso.
+  assert.match(contractEntry.baseline.site, /^[0-9a-f]{16}$/);
 });
 
 test('il retry e limitato al checkout sparse pre-logica, con backoff', () => {
