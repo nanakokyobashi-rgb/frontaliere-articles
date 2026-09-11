@@ -3083,8 +3083,8 @@
       "sitePath": ".github/corpus-workflows/crawler-group-07.yml",
       "mode": "identical",
       "baseline": {
-        "site": "f5b07d77c9a29548",
-        "corpus": "f5b07d77c9a29548",
+        "site": "67a9306aa1af39be",
+        "corpus": "67a9306aa1af39be",
         "alignedAt": "2026-09-11"
       }
     },
@@ -3263,8 +3263,8 @@
       "sitePath": ".github/corpus-workflows/contract.json",
       "mode": "identical",
       "baseline": {
-        "site": "63ed04e3b215083b",
-        "corpus": "63ed04e3b215083b",
+        "site": "8852d1940b0a2bed",
+        "corpus": "8852d1940b0a2bed",
         "alignedAt": "2026-09-11"
       }
     },
@@ -3273,9 +3273,9 @@
       "sitePath": ".github/corpus-workflows/observers/generator/tests/crawler-cross-repo-artifacts.test.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "3f3664844cfd951c",
-        "corpus": "3f3664844cfd951c",
-        "alignedAt": "2026-09-01"
+        "site": "dcaceb4ce558cef9",
+        "corpus": "dcaceb4ce558cef9",
+        "alignedAt": "2026-09-11"
       }
     },
     {
