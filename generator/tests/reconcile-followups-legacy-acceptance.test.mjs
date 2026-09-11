@@ -7,6 +7,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {
+  addressedMergedRows,
   aggregateCloseGate,
   declaredTargetFiles,
   legacyAddressEvidence,
@@ -54,6 +55,15 @@ test('absence check ignora commenti ma conserva stringhe eseguibili', () => {
   ].join('\n'));
   assert.doesNotMatch(stripped, /`--jq`, `length`/);
   assert.match(stripped, /"--jq", "length"/);
+});
+
+test('la provenienza Addresses ricade sulla lista merged quando la search è vuota', () => {
+  const rows = addressedMergedRows(1259, [], [
+    { number: 1335, body: 'Addresses #1259' },
+    { number: 1336, body: 'Closes #1259' },
+    { number: 1335, body: 'Addresses #1259 (duplicato)' },
+  ]);
+  assert.deepEqual(rows.map((row) => row.number), [1335]);
 });
 
 test('legacy acceptance richiede Addresses + Target file e registra la negativa assente', () => {
