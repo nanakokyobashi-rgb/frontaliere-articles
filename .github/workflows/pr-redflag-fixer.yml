@@ -312,35 +312,9 @@ jobs:
           PR_NUMBER: ${{ github.event.pull_request.number }}
           REVIEW_BODY: ${{ github.event.review.body }}
           HAS_PAT: ${{ env.GITHUB_PAT_NANAKO != '' }}
-          # La quota è per-account: il fixer di PR deve onorare anche il beacon
-          # scritto dal ciclo del sito, non solo quello locale.
-          QUOTA_BEACON_PEER_REPO: valerielinc-ops/frontaliere-si-o-no
         run: |
           set -uo pipefail
           MAX_ROUNDS=2
-
-          # Beacon di quota PRIMA di qualunque altra cosa: il marker di round si
-          # posta piu' sotto e non e' revocabile a costo zero, quindi entrare qui
-          # con la finestra 429 gia' aperta vuol dire spendere un round contro un
-          # muro noto. `GITHUB_OUTPUT=` disarma la scrittura del gate: la
-          # decisione la legge questo step da stdout, non i suoi output.
-          QUOTA=$(GITHUB_OUTPUT='' node scripts/ci/check-quota-backoff.mjs 2>/dev/null \
-            | grep -oE 'quota_blocked=(true|false)' | tail -1 | cut -d= -f2 || true)
-          if [ "${QUOTA:-false}" = "true" ]; then
-            echo "::warning::Finestra di rate-limit Claude aperta -> skip senza consumare un round (il prossimo trigger riparte col budget intero)."
-            # Handle di re-trigger: la classe B di `stale-pr-rescuer.yml` decide il
-            # rerun di `tests` sulla PRESENZA di un marker del fixer sul thread, ed
-            # e' l'unico modo in cui il fixer riparte senza un commit umano. Uscire
-            # di qui senza lasciarne uno rende lo skip di quota uno stallo. Il nome
-            # e' quello di `refundMarkerName()` in `scripts/ci/refund-fix-round.mjs`
-            # (unica sorgente, legame coperto da `generator/tests/refund-fix-round.test.mjs`):
-            # `_FIX_REFUNDED` non fa match sul grep del contatore `_FIX_ROUND`, quindi
-            # ri-arma il re-trigger senza ri-armare il round. `: 0` = nessun round preso.
-            gh pr comment "$PR_NUMBER" --repo "$REPO" --body "$(printf '<!-- REDFLAG_FIX_REFUNDED: 0 -->\n⏳ 🔴-fixer skip: finestra di quota Claude ancora aperta (beacon di backoff attivo) -> nessun round consumato, nessun turno bruciato. Il prossimo trigger reale riparte col budget intero.')" \
-              2>/dev/null || true
-            echo "proceed=false" >> "$GITHUB_OUTPUT"
-            exit 0
-          fi
 
           # Il preflight non fa checkout: il fingerprint si calcola qui, dove lo
           # script del repository è disponibile, prima di consumare un round.
@@ -498,13 +472,14 @@ jobs:
         if: steps.guard.outputs.proceed == 'true'
         uses: ./.github/actions/setup-headroom
 
-      - name: Pre-flight — Claude quota beacon for Codex fallback
+      - name: Pre-flight — Claude quota telemetry (Codex primary)
         id: quota
         if: steps.guard.outputs.proceed == 'true'
         continue-on-error: true
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_REPO: ${{ github.repository }}
+          QUOTA_BEACON_PEER_REPO: valerielinc-ops/frontaliere-si-o-no
           CODEX_FALLBACK_MODE: '1'
         run: node scripts/ci/check-quota-backoff.mjs
 
@@ -526,7 +501,6 @@ jobs:
           FIX_TIER: ${{ steps.guard.outputs.tier }}
           FIX_ROUND: ${{ steps.guard.outputs.round }}
         with:
-          preflight_blocked: ${{ steps.quota.outputs.codex_fallback }}
           codex_auth_json: ${{ secrets.CODEX_AUTH_JSON }}
           # Auth via subscription Max (zero API cost). MAI ANTHROPIC_API_KEY.
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
@@ -590,7 +564,7 @@ jobs:
             - Una sola passata: applica, valida, committa, pusha, aggiorna body, STOP.
 
       - name: Claude usage metrics
-        if: always() && steps.guard.outputs.proceed == 'true'
+        if: always() && steps.guard.outputs.proceed == 'true' && steps.claude_review.outputs.claude_used == 'true'
         run: node scripts/ci/claude-usage-summary.mjs "${{ steps.claude_review.outputs.execution_file }}" "pr-redflag-fixer"
 
       # Un 429 non e' un round: Claude non e' mai partito (0 turni, $0) e non ha
