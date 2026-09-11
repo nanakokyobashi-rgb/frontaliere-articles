@@ -74,7 +74,7 @@ test('the corpus bridge permits read-only API metadata without permitting mutati
   );
 });
 
-test('the corpus checkout always selects the corpus credential', () => {
+test('the corpus checkout keeps current calls on the runner and routes explicit cross-repo targets', () => {
   const corpus = resolveGhScope(
     ['--repo', CORPUS_REPOSITORY, 'issue', 'create'],
     {
@@ -102,18 +102,21 @@ test('the corpus checkout always selects the corpus credential', () => {
   assert.equal(currentCorpus.token, 'site-token');
   assert.equal(currentCorpus.allowedCommandSet.has('pr'), true);
 
-  assert.match(
-    resolveGhScope(
-      ['--repo', 'valerielinc-ops/frontaliere-si-o-no', 'pr', 'view'],
-      {
-        repository: CORPUS_REPOSITORY,
-        host: 'github.com',
-        siteToken: 'site-token',
-        corpusToken: 'corpus-token',
-      },
-    ).error,
-    /restricted/,
+  const site = resolveGhScope(
+    ['--repo', 'valerielinc-ops/frontaliere-si-o-no', 'issue', 'create'],
+    {
+      repository: CORPUS_REPOSITORY,
+      siteRepository: 'valerielinc-ops/frontaliere-si-o-no',
+      host: 'github.com',
+      currentToken: 'current-corpus-token',
+      siteToken: 'site-token',
+      corpusToken: 'corpus-token',
+    },
   );
+  assert.equal(site.kind, 'site');
+  assert.equal(site.repository, 'valerielinc-ops/frontaliere-si-o-no');
+  assert.equal(site.token, 'site-token');
+  assert.equal(site.allowedCommandSet.has('issue'), true);
 });
 
 test('the Git bridge marks delivery and local-state-changing operations', () => {
@@ -139,12 +142,17 @@ test('il bridge corpus resta host-side anche quando il PAT arriva da GITHUB_ENV'
     action.includes('codex_corpus_github_auth="${CODEX_CORPUS_GH_AUTH:-${GITHUB_PAT_NANAKO:-${GITHUB_PAT:-}}}"'),
     'il bridge deve usare il PAT caricato dal runtime se l input statico è vuoto',
   );
-  assert.match(action, /unset CODEX_GH_AUTH CODEX_CORPUS_GH_AUTH GITHUB_PAT_NANAKO GITHUB_PAT/);
+  assert.ok(
+    action.includes('codex_site_github_auth="${CODEX_SITE_GH_AUTH:-${GITHUB_PAT_SITE:-${GITHUB_PAT:-}}}"'),
+    'il bridge deve poter usare il PAT Valerie host-side per un target sito dal checkout corpus',
+  );
+  assert.match(action, /unset CODEX_GH_AUTH CODEX_CORPUS_GH_AUTH CODEX_SITE_GH_AUTH GITHUB_PAT_NANAKO GITHUB_PAT GITHUB_PAT_SITE/);
 
-  const start = followupWorkflow.indexOf('Per Nanako usa SEMPRE');
+  const start = followupWorkflow.indexOf('Per Valerie usa SEMPRE');
   const end = followupWorkflow.indexOf('Parse PR body', start);
   assert.ok(start >= 0 && end > start, 'blocco di routing corpus non trovato');
   const routing = followupWorkflow.slice(start, end);
+  assert.match(routing, /gh issue create --repo valerielinc-ops\/frontaliere-si-o-no/);
   assert.match(routing, /gh issue create --repo nanakokyobashi-rgb\/frontaliere-articles/);
   assert.doesNotMatch(routing, /GH_TOKEN=\"\$GITHUB_PAT\"/,
     'Codex deve usare il wrapper gh del bridge, non una variabile che il sandbox non riceve');
@@ -159,7 +167,9 @@ test('the corpus review loads its host-side PAT before invoking Codex', () => {
   assert.match(reviewStep, /codex_corpus_github_token: \$\{\{ env\.GITHUB_PAT_NANAKO \|\| env\.GITHUB_PAT \}\}/);
   assert.doesNotMatch(reviewStep, /GITHUB_PAT:\s*\$\{\{ env\.GITHUB_PAT \}\}/);
   assert.match(followupStep, /codex_corpus_github_token: \$\{\{ env\.GITHUB_PAT_NANAKO \|\| env\.GITHUB_PAT \}\}/);
+  assert.match(followupStep, /codex_site_github_token: \$\{\{ env\.GITHUB_PAT \}\}/);
   assert.doesNotMatch(followupStep, /GITHUB_PAT:\s*\$\{\{ env\.GITHUB_PAT \}\}/);
+  assert.match(followupWorkflow, /target_token="\$\{GITHUB_PAT:-\$\{GH_TOKEN:-\}\}"/);
 });
 
 test('#1312: Lessons harvester non blocca Codex quando la quota Claude e\u0027 esaurita', () => {

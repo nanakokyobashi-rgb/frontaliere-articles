@@ -227,14 +227,17 @@ export function resolveGhScope(args, {
   repository,
   host,
   siteToken,
+  currentToken = siteToken,
+  siteRepository: configuredSiteRepository = repository,
   corpusToken = '',
   corpusRepository = CORPUS_REPOSITORY,
 } = {}) {
   if (!Array.isArray(args) || args.some((arg) => typeof arg !== 'string')) return { error: 'invalid args' };
-  const siteRepository = repositoryName(repository);
+  const currentRepository = repositoryName(repository);
+  const siteRepository = repositoryName(configuredSiteRepository);
   const expectedCorpus = repositoryName(corpusRepository);
   const expectedHost = normalizedHost(host);
-  if (!siteRepository || !expectedCorpus || expectedCorpus !== CORPUS_REPOSITORY || !expectedHost) {
+  if (!currentRepository || !siteRepository || !expectedCorpus || expectedCorpus !== CORPUS_REPOSITORY || !expectedHost) {
     return { error: 'Codex GitHub bridge scope is missing its exact repository/host context' };
   }
   const repositories = explicitRepositories(args);
@@ -261,12 +264,32 @@ export function resolveGhScope(args, {
       allowedSubcommandMap: corpusAllowedSubcommands,
     };
   }
+
+  // Calls without --repo operate on the current checkout (for example the
+  // PR comment/review that closes the current corpus run). They retain the
+  // runner token and the normal command allow-list.
+  if (!hasExplicitRepository && explicitRepository === currentRepository) {
+    if (!currentToken) return { error: 'Codex GitHub bridge current-repository credential is unavailable' };
+    return {
+      kind: 'site',
+      repository: currentRepository,
+      token: currentToken,
+      allowedCommandSet: allowedCommands,
+      allowedSubcommandMap: allowedSubcommands,
+    };
+  }
+
+  // An explicit site target may come from the corpus checkout. It must use a
+  // dedicated site PAT; the current corpus runner token is not a cross-repo
+  // credential. On the site checkout the normal bridge token is a safe
+  // fallback, keeping existing callers unchanged.
   if (explicitRepository === siteRepository) {
-    if (!siteToken) return { error: 'Codex GitHub bridge site credential is unavailable' };
+    const targetToken = siteToken || (currentRepository === siteRepository ? currentToken : '');
+    if (!targetToken) return { error: 'Codex GitHub bridge site credential is unavailable' };
     return {
       kind: 'site',
       repository: siteRepository,
-      token: siteToken,
+      token: targetToken,
       allowedCommandSet: allowedCommands,
       allowedSubcommandMap: allowedSubcommands,
     };
@@ -574,7 +597,8 @@ export function validateGhArgs(args, {
 
 function main() {
   const socketPath = process.env.CODEX_GH_SOCKET;
-  const siteToken = process.env.CODEX_GH_AUTH;
+  const currentToken = process.env.CODEX_GH_AUTH;
+  const siteToken = process.env.CODEX_GH_SITE_AUTH || '';
   const corpusToken = process.env.CODEX_GH_CORPUS_AUTH || '';
   const realGh = process.env.CODEX_REAL_GH;
   const sideEffectFile = process.env.CODEX_GH_SIDE_EFFECT_FILE || '';
@@ -582,9 +606,12 @@ function main() {
   const workspaceRoot = process.env.CODEX_GH_WORKSPACE || cwd;
   const scratchRoot = process.env.CODEX_GH_SCRATCH;
   const repository = repositoryName(process.env.CODEX_GH_REPOSITORY);
+  const siteRepository = repositoryName(
+    process.env.CODEX_GH_SITE_REPOSITORY || 'valerielinc-ops/frontaliere-si-o-no',
+  );
   const host = normalizedHost(process.env.CODEX_GH_HOST);
   const corpusRepository = process.env.CODEX_GH_CORPUS_REPOSITORY || CORPUS_REPOSITORY;
-  if (!socketPath || !siteToken || !realGh || !cwd || !workspaceRoot || !scratchRoot || !repository || !host
+  if (!socketPath || !currentToken || !realGh || !cwd || !workspaceRoot || !scratchRoot || !repository || !siteRepository || !host
     || corpusRepository !== CORPUS_REPOSITORY) process.exit(2);
   const baseEnv = {
     PATH: process.env.PATH || '/usr/bin:/bin',
@@ -670,6 +697,8 @@ function main() {
           repository,
           host,
           siteToken,
+          currentToken,
+          siteRepository,
           corpusToken,
           corpusRepository,
         });

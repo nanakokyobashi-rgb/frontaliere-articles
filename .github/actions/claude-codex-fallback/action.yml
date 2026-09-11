@@ -33,6 +33,10 @@ inputs:
     description: "Optional separate token for the exact frontaliere-articles corpus scope; host-side bridge only."
     required: false
     default: ""
+  codex_site_github_token:
+    description: "Optional separate token for the exact site scope when this action runs from the corpus checkout; host-side bridge only."
+    required: false
+    default: ""
   allowed_bots:
     description: "Bot allow-list passed to the Claude fallback action."
     required: false
@@ -433,6 +437,7 @@ runs:
         CODEX_RUNTIME_SNAPSHOT: ${{ steps.runtime_snapshot.outputs.runtime_root }}
         CODEX_GH_AUTH: ${{ inputs.codex_github_token }}
         CODEX_CORPUS_GH_AUTH: ${{ inputs.codex_corpus_github_token }}
+        CODEX_SITE_GH_AUTH: ${{ inputs.codex_site_github_token }}
         CODEX_ACTION_PATH: ${{ github.action_path }}
         CODEX_PROMPT: ${{ inputs.prompt }}
         CODEX_REVIEW_MARKER: ${{ inputs.review_marker }}
@@ -499,7 +504,11 @@ runs:
         # the host-side bridge usable from the inherited step environment too.
         # The value never enters Codex: it is captured only by the bridge.
         codex_corpus_github_auth="${CODEX_CORPUS_GH_AUTH:-${GITHUB_PAT_NANAKO:-${GITHUB_PAT:-}}}"
-        unset CODEX_GH_AUTH CODEX_CORPUS_GH_AUTH GITHUB_PAT_NANAKO GITHUB_PAT
+        # A corpus checkout can discover follow-up items whose target is the
+        # site. Capture the site PAT host-side as a separate scope; unlike the
+        # current-repository token it is never exposed to the Codex process.
+        codex_site_github_auth="${CODEX_SITE_GH_AUTH:-${GITHUB_PAT_SITE:-${GITHUB_PAT:-}}}"
+        unset CODEX_GH_AUTH CODEX_CORPUS_GH_AUTH CODEX_SITE_GH_AUTH GITHUB_PAT_NANAKO GITHUB_PAT GITHUB_PAT_SITE
         if [ -z "$codex_github_auth" ]; then
           echo "::error::The primary Codex run requires the caller's explicit codex_github_token input."
           exit 1
@@ -900,12 +909,14 @@ runs:
           CODEX_BRIDGE_TRANSPORT=files \
           CODEX_GH_AUTH="$codex_github_auth" \
           CODEX_GH_CORPUS_AUTH="$codex_corpus_github_auth" \
+          CODEX_GH_SITE_AUTH="$codex_site_github_auth" \
           CODEX_GH_SOCKET="$gh_socket" \
           CODEX_REAL_GH="$gh_host_realpath" \
           CODEX_GH_CWD="${PWD:-$(pwd)}" \
           CODEX_GH_WORKSPACE="${GITHUB_WORKSPACE:-${PWD:-$(pwd)}}" \
           CODEX_GH_SCRATCH="$scratch_dir" \
           CODEX_GH_REPOSITORY="$codex_github_repository" \
+          CODEX_GH_SITE_REPOSITORY="valerielinc-ops/frontaliere-si-o-no" \
           CODEX_GH_HOST="$codex_github_host" \
           CODEX_GH_CORPUS_REPOSITORY="nanakokyobashi-rgb/frontaliere-articles" \
           CODEX_GH_SIDE_EFFECT_FILE="$codex_side_effect_file" \
