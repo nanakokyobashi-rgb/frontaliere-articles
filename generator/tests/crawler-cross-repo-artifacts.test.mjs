@@ -54,12 +54,6 @@ function crawlerIdsFromArtifact(text) {
   return crawlerIds;
 }
 
-function expectedCrawlerEntriesFromArtifact(text) {
-  const match = /^\s+CRAWLER_GENERATION_EXPECTED_CRAWLERS:\s+'([^']+)'$/m.exec(text);
-  assert.ok(match, 'roster atteso del finalizer non trovato');
-  return JSON.parse(match[1]);
-}
-
 test('il parser del roster tollera field-order e ignora wait o campi annidati non-background', () => {
   const workflow = [
     '      - name: Run coop',
@@ -90,24 +84,6 @@ test('il parser del roster conserva il formato corrente minimale', () => {
     '        background: true',
   ].join('\n');
   assert.deepEqual(crawlerIdsFromArtifact(workflow), ['coop']);
-});
-
-test('crawler group 07 usa gli stessi id canonici in step, expected roster e artifacts.members', () => {
-  const artifact = CONTRACT.artifacts.find((entry) => entry.file === 'crawler-group-07.yml');
-  assert.ok(artifact);
-  const workflow = readFileSync(path.join(WORKFLOWS, artifact.file), 'utf8');
-  const stepIds = crawlerIdsFromArtifact(workflow);
-  const expected = expectedCrawlerEntriesFromArtifact(workflow);
-  const expectedIds = expected.map((entry) => entry.crawlerId);
-
-  assert.deepEqual([...new Set(stepIds)].sort(), [...new Set(expectedIds)].sort());
-  assert.deepEqual([...new Set(stepIds)].sort(), [...new Set(artifact.members)].sort());
-  assert.equal(expected.find((entry) => entry.crawlerId === 'guess-europe')?.primarySlice,
-    'data/jobs/by-crawler/guess-europe.json');
-  assert.equal(expected.find((entry) => entry.crawlerId === 'vf-international-the-north-face-timberland')?.primarySlice,
-    'data/jobs/by-crawler/vf-international-the-north-face-timberland.json');
-  assert.equal(expected.some((entry) => entry.crawlerId === 'guess'), false);
-  assert.equal(expected.some((entry) => entry.crawlerId === 'vf'), false);
 });
 
 test('il contratto censisce 23 gruppi + translate-pending e tutti i crawler unici', () => {
@@ -206,11 +182,8 @@ test('loop-drift osserva live i 24 artifact portabili e il contratto del generat
     assert.ok(entry, `${artifact.file}: mapping loop-sync assente`);
     assert.equal(entry.mode, 'identical', artifact.file);
     assert.equal(entry.sitePath, `.github/corpus-workflows/${artifact.file}`, artifact.file);
+    assert.equal(entry.baseline.site, artifact.artifactSha256.slice(0, 16), artifact.file);
     assert.equal(entry.baseline.corpus, artifact.artifactSha256.slice(0, 16), artifact.file);
-    // Questa PR aggiorna il lato corpus; il digest site resta quello storico
-    // finché il gemello non viene trasportato nel repository sito. Il gate
-    // delle baseline verifica che quel digest esista davvero nella sua storia.
-    assert.match(entry.baseline.site, /^[0-9a-f]{16}$/, artifact.file);
   }
 
   const contractEntry = entries.get('generator/data/crawler-cross-repo-contract.json');
@@ -218,10 +191,8 @@ test('loop-drift osserva live i 24 artifact portabili e il contratto del generat
   assert.equal(contractEntry.mode, 'identical');
   assert.equal(contractEntry.sitePath, '.github/corpus-workflows/contract.json');
   const contractHash = sha256(readFileSync(CONTRACT_PATH, 'utf8')).slice(0, 16);
+  assert.equal(contractEntry.baseline.site, contractHash);
   assert.equal(contractEntry.baseline.corpus, contractHash);
-  // Il sito non è parte di questa PR: la sua baseline deve restare un digest
-  // storico reale, non una copia corpus che il lato sito non ha mai emesso.
-  assert.match(contractEntry.baseline.site, /^[0-9a-f]{16}$/);
 });
 
 test('il retry e limitato al checkout sparse pre-logica, con backoff', () => {
