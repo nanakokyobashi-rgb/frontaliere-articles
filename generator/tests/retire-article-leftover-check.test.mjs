@@ -119,6 +119,12 @@ test('la regola ha una sorgente sola: nessun chiamante se la ri-scrive', () => {
   }
 });
 
+test('il ledger dei ritirati usa lo stesso writer atomico del resto della catena', () => {
+  const src = readFileSync(path.join(ROOT, 'scripts/retire-article.mjs'), 'utf-8');
+  assert.match(src, /import\s+\{\s*writeJsonAtomic\s*\}\s+from\s+'\.\.\/generator\/scripts\/lib\/atomic-write-json\.mjs'/);
+  assert.match(src, /writeJsonAtomic\(ledgerPath, ledger\)/);
+});
+
 test('un id vuoto non coincide con ogni superficie', () => {
   assert.equal(mentionsId('id: altro-articolo', ''), false);
 });

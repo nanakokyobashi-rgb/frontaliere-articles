@@ -287,7 +287,18 @@ jobs:
             echo "::error::needs-human-sweep: nessun digest aperto col titolo esatto '$DIGEST_TITLE'; il risultato non è classificabile in modo sicuro."
             exit 1
           fi
-          HAS=$(gh issue view "$N" --repo "$GITHUB_REPOSITORY" --json comments --jq '[.comments[].body | select(test("<!-- SWEEP_OUTCOME:"))] | length' 2>/dev/null || echo 0)
+          # `gh issue view --json comments` has a client-side result cap. Read
+          # every comment through the paginated API and fail closed if that
+          # read is unavailable; a missing marker is not evidence of clean work.
+          if HAS_LINES=$(gh api --paginate "repos/$GITHUB_REPOSITORY/issues/$N/comments?per_page=100" \
+            --jq '.[] | select(.body | test("<!-- SWEEP_OUTCOME:")) | 1'); then
+            :
+          else
+            DIGEST_MARKER_RC=$?
+            echo "::error::needs-human-sweep: lettura dei marker del digest fallita (gh api rc=$DIGEST_MARKER_RC); non classifico il run come pulito."
+            exit 1
+          fi
+          HAS=$(printf '%s\n' "$HAS_LINES" | sed '/^[[:space:]]*$/d' | wc -l | tr -d '[:space:]')
           echo "digest=${N:-<none>} sweep-markers=$HAS claude=$CLAUDE_OUTCOME"
           if [ "${HAS:-0}" != "0" ]; then
             echo "✓ marker SWEEP_OUTCOME presente → run SUCCESS."

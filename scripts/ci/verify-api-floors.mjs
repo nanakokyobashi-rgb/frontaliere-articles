@@ -325,7 +325,7 @@ export function retentionReport(measured, expected) {
     const declared = expected.feedSources?.[section] ?? 0;
     const source = feedPopulationReference(expected, section);
     if (source <= 0 || declared <= 0) continue;
-    rows.push({ kind: 'feed-population', label: `chunk SEO ${section}/corpus`, declared, source });
+    rows.push({ kind: 'feed-population', label: `chunk SEO ${section}/run precedente`, declared, source });
   }
 
   for (const feed of measured.feeds) {
@@ -495,7 +495,9 @@ async function main() {
   );
   console.log(
     `[api-floors] chunk SEO (la popolazione che genera i feed): ` +
-      `${expected.feedSources.frontaliere} frontaliere, ${expected.feedSources.svizzera} svizzera`,
+      `${expected.feedSources.frontaliere} frontaliere, ${expected.feedSources.svizzera} svizzera; ` +
+      `run precedente: ${expected.previousFeedSources?.frontaliere ?? 'non disponibile'} frontaliere, ` +
+      `${expected.previousFeedSources?.svizzera ?? 'non disponibile'} svizzera`,
   );
   console.log(
     `[api-floors] manifest: articles=${measured.articleCounts.articles}, ` +
