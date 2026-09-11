@@ -15,6 +15,8 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..')
 const action = fs.readFileSync(path.join(ROOT, '.github/actions/claude-codex-fallback/action.yml'), 'utf8');
 const lessonsWorkflow = fs.readFileSync(path.join(ROOT, '.github/workflows/lessons-harvester.yml'), 'utf8');
 const followupWorkflow = fs.readFileSync(path.join(ROOT, '.github/workflows/post-merge-followup.yml'), 'utf8');
+const issueDecomposeWorkflow = fs.readFileSync(path.join(ROOT, '.github/workflows/issue-decompose.yml'), 'utf8');
+const needsHumanWorkflow = fs.readFileSync(path.join(ROOT, '.github/workflows/needs-human-sweep.yml'), 'utf8');
 const testsWorkflow = fs.readFileSync(path.join(ROOT, '.github/workflows/tests.yml'), 'utf8');
 
 function workflowStep(source, name) {
@@ -160,6 +162,10 @@ test('the Git bridge marks delivery and local-state-changing operations', () => 
 test('Claude fallback is suppressed when Codex side effects are possible', () => {
   assert.match(action, /steps\.codex\.outcome == 'failure'/);
   assert.match(action, /steps\.codex\.outputs\.side_effect_detected == 'false'/);
+  assert.match(action, /Prepare host-side GitHub bridge for Claude fallback/);
+  assert.match(action, /steps\.claude_bridge\.outcome == 'success'/);
+  assert.match(action, /echo "\$bridge_root" >> "\$GITHUB_PATH"/);
+  assert.match(action, /Cleanup Claude fallback GitHub bridge/);
   assert.match(action, /restore_sanitized_git_config/);
   const stopGhStart = action.indexOf('        stop_gh_bridge() {');
   const stopGhEnd = action.indexOf('        trap stop_gh_bridge EXIT', stopGhStart);
@@ -200,7 +206,16 @@ test('the corpus review loads its host-side PAT before invoking Codex', () => {
   assert.match(followupStep, /codex_corpus_github_token: \$\{\{ env\.GITHUB_PAT_NANAKO \|\| env\.GITHUB_PAT \}\}/);
   assert.match(followupStep, /codex_site_github_token: \$\{\{ env\.GITHUB_PAT \}\}/);
   assert.doesNotMatch(followupStep, /GITHUB_PAT:\s*\$\{\{ env\.GITHUB_PAT \}\}/);
-  assert.match(followupWorkflow, /target_token="\$\{GITHUB_PAT:-\$\{GH_TOKEN:-\}\}"/);
+  assert.match(followupWorkflow, /SITE_REPO: valerielinc-ops\/frontaliere-si-o-no/);
+  assert.match(followupWorkflow, /target_token="\$\{GITHUB_PAT_SITE:-\$\{GITHUB_PAT:-\$\{GH_TOKEN:-\}\}\}"/);
+  assert.match(followupWorkflow, /Gate sul conio — sito \(zero-Claude\)/);
+  assert.match(followupWorkflow, /gh issue list --repo nanakokyobashi-rgb\/frontaliere-articles/);
+  assert.match(followupWorkflow, /gh issue list --repo valerielinc-ops\/frontaliere-si-o-no/);
+  assert.doesNotMatch(followupWorkflow, /GITHUB_PAT_NANAKO:\s*\$\{\{ env\.GITHUB_PAT_NANAKO/);
+  assert.match(issueDecomposeWorkflow, /codex_site_github_token: \$\{\{ env\.GITHUB_PAT \}\}/);
+  assert.match(issueDecomposeWorkflow, /gh api --repo valerielinc-ops\/frontaliere-si-o-no repos\/valerielinc-ops\/frontaliere-si-o-no\/contents\/VISION\.md/);
+  assert.match(needsHumanWorkflow, /codex_site_github_token: \$\{\{ env\.GITHUB_PAT \}\}/);
+  assert.match(needsHumanWorkflow, /gh api --repo valerielinc-ops\/frontaliere-si-o-no repos\/valerielinc-ops\/frontaliere-si-o-no\/contents\/VISION\.md/);
 });
 
 test('#1312: Lessons harvester non blocca Codex quando la quota Claude e\u0027 esaurita', () => {

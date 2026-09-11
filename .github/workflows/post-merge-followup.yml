@@ -317,7 +317,10 @@ jobs:
             **Bootstrap (UNA volta, condiviso per TUTTO il batch — non ri-leggere per ogni PR):**
             1. Leggi `FOLLOWUP.md` — contratto operativo completo (parse rules, filtro scopo, dedup, issue format, closing comment).
             2. Leggi `REVIEW.md → "Scopo progetto"` per il filtro funnel.
-            3. `gh issue list --label follow-up --state all --json number,title --limit 300` (SOLO `number,title`: il bulk overview serve per la vista d'insieme; il dedup vero è item-level e il body va letto solo per i bucket daily candidati). Riusa questa lista per il dedup su tutte le PR del batch.
+            3. Per il dedup prepara una lista `number,title` separata per ciascun repository target, entrambe in sola lettura:
+               `gh issue list --repo nanakokyobashi-rgb/frontaliere-articles --label follow-up --state all --json number,title --limit 300`
+               e `gh issue list --repo valerielinc-ops/frontaliere-si-o-no --label follow-up --state all --json number,title --limit 300`.
+               Il bulk overview serve per la vista d'insieme; il dedup vero è item-level e il body va letto solo per i bucket daily candidati. Riusa la lista del repository target corretto per tutte le PR del batch.
             4. Il contesto per-PR del batch è già prefetchato (zero-Claude, token-lever) in `${{ runner.temp }}/followup-ctx/followup-bundle.md`: leggilo con `Read` — contiene, per ciascuna PR #N del batch, `gh pr view` (number/title/body/mergedAt/mergeCommit/url/author) + le review, e l'elenco delle PR aperte con i rispettivi file (per l'In-flight PR overlap sotto). Non ripetere queste chiamate per-PR a meno che la sezione della PR risulti vuota/incompleta nel bundle.
 
             **Protocollo bucket giornaliero (vincolante):**
@@ -428,14 +431,13 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REPO: ${{ github.repository }}
+          SITE_REPO: valerielinc-ops/frontaliere-si-o-no
           BATCH_PRS: ${{ steps.collect.outputs.batch_prs }}
           BATCH_COUNT: ${{ steps.collect.outputs.batch_count }}
           COLLECTION_OK: ${{ steps.collect.outputs.collection_ok }}
           CLAUDE_OUTCOME: ${{ steps.followup.outputs.claude_outcome }}
           ACTION_SUCCESS: ${{ steps.followup.outputs.action_success }}
           CORPUS_REPO: nanakokyobashi-rgb/frontaliere-articles
-          GITHUB_PAT_NANAKO: ${{ env.GITHUB_PAT_NANAKO || env.GITHUB_PAT }}
-          GITHUB_PAT: ${{ env.GITHUB_PAT }}
         run: |
           set -uo pipefail
           complete=false
@@ -456,14 +458,13 @@ jobs:
           bucket_persisted_for_pr() {
             bucket="$1"
             pr_number="$2"
-            for target_repo in "${REPO:-}" "${CORPUS_REPO:-}"; do
+            for target_repo in "${REPO:-}" "${CORPUS_REPO:-}" "${SITE_REPO:-}"; do
               [ -n "$target_repo" ] || continue
-              target_token="${GH_TOKEN:-}"
-              if [ "$target_repo" = "${CORPUS_REPO:-}" ]; then
-                target_token="${GITHUB_PAT_NANAKO:-${GITHUB_PAT:-}}"
-              else
-                target_token="${GITHUB_PAT:-${GH_TOKEN:-}}"
-              fi
+              case "$target_repo" in
+                "${CORPUS_REPO:-}") target_token="${GITHUB_PAT_NANAKO:-${GITHUB_PAT:-${GH_TOKEN:-}}}" ;;
+                "${SITE_REPO:-}") target_token="${GITHUB_PAT_SITE:-${GITHUB_PAT:-${GH_TOKEN:-}}}" ;;
+                *) target_token="${GH_TOKEN:-${GITHUB_PAT:-}}" ;;
+              esac
               [ -n "$target_token" ] || continue
               issue_json=$(GH_TOKEN="$target_token" gh issue view "$bucket" --repo "$target_repo" --json number,title,body 2>/dev/null) || continue
               if printf '%s' "$issue_json" | jq -e --arg bucket "$bucket" --arg pr "$pr_number" '
@@ -590,7 +591,6 @@ jobs:
         if: always()
         continue-on-error: true
         env:
-          GH_TOKEN: ${{ env.GITHUB_PAT_NANAKO || env.GITHUB_PAT }}
           GH_REPO: nanakokyobashi-rgb/frontaliere-articles
           GATE_PR_REPO: ${{ github.repository }}
           BATCH_PRS: ${{ steps.collect.outputs.batch_prs }}
@@ -598,11 +598,35 @@ jobs:
           COLLECTION_OK: ${{ steps.collect.outputs.collection_ok }}
           TRIAGE_COMPLETE: ${{ steps.triage_complete.outputs.triage_complete }}
         run: |
-          if [ -z "${GH_TOKEN:-}" ]; then
+          corpus_token="${GITHUB_PAT_NANAKO:-${GITHUB_PAT:-}}"
+          if [ -z "$corpus_token" ]; then
             echo "::warning::Gate sul conio corpus saltato: GITHUB_PAT_NANAKO/GITHUB_PAT assente; issue lasciate intatte."
             exit 0
           fi
-          node scripts/ci/gate-minted-followups.mjs
+          GH_TOKEN="$corpus_token" node scripts/ci/gate-minted-followups.mjs
+
+      # Quando il batch corpus conia item che puntano a file del sito, il gate
+      # precedente non li vede: GH_REPO è volutamente il corpus. Esegui la stessa
+      # chiusura deterministica sul repository target sito, commentando comunque la
+      # PR sorgente nel corpus. Senza questa passata il bucket resta collecting e
+      # non può entrare in `agent:fix-queued`.
+      - name: Gate sul conio — sito (zero-Claude)
+        if: always()
+        continue-on-error: true
+        env:
+          GH_REPO: valerielinc-ops/frontaliere-si-o-no
+          GATE_PR_REPO: ${{ github.repository }}
+          BATCH_PRS: ${{ steps.collect.outputs.batch_prs }}
+          TRIAGE_DAILY_KEY: ${{ steps.collect.outputs.daily_key }}
+          COLLECTION_OK: ${{ steps.collect.outputs.collection_ok }}
+          TRIAGE_COMPLETE: ${{ steps.triage_complete.outputs.triage_complete }}
+        run: |
+          site_token="${GITHUB_PAT_SITE:-${GITHUB_PAT:-}}"
+          if [ -z "$site_token" ]; then
+            echo "::warning::Gate sul conio sito saltato: GITHUB_PAT/GITHUB_PAT_SITE assente; issue lasciate intatte."
+            exit 0
+          fi
+          GH_TOKEN="$site_token" node scripts/ci/gate-minted-followups.mjs
 
       - name: Claude usage metrics
         if: always() && steps.followup.outputs.claude_used == 'true'

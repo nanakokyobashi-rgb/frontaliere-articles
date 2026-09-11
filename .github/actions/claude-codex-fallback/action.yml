@@ -1119,12 +1119,96 @@ runs:
         printf 'codex_output=%s\n' "$codex_output_destination" >> "$GITHUB_OUTPUT"
         exit "$codex_status"
 
+    # The Anthropic action receives one github_token input and overwrites GH_TOKEN
+    # inside its Claude process.  That input is necessarily the current checkout
+    # token on the normal caller path, while a corpus follow-up may need to write
+    # a site bucket with the separate Valerie PAT loaded through GITHUB_ENV.  Keep
+    # that cross-repo credential host-side here: Claude sees only the gh client
+    # wrapper, and the bridge chooses the exact scope from --repo.  This also keeps
+    # the fallback safe when the Codex primary failed before its own bridge existed.
+    - name: Prepare host-side GitHub bridge for Claude fallback
+      id: claude_bridge
+      if: always() && (steps.codex.outcome == 'skipped' || (steps.codex.outcome == 'failure' && steps.codex.outputs.side_effect_detected == 'false'))
+      shell: bash
+      env:
+        CODEX_ACTION_PATH: ${{ github.action_path }}
+        CODEX_CURRENT_TOKEN: ${{ inputs.codex_github_token }}
+        CODEX_CORPUS_TOKEN: ${{ inputs.codex_corpus_github_token }}
+        CODEX_SITE_TOKEN: ${{ inputs.codex_site_github_token }}
+      run: |
+        set -euo pipefail
+        action_path="${CODEX_ACTION_PATH:?Codex action path unavailable}"
+        runner_temp="${RUNNER_TEMP:-/tmp}"
+        workspace_root="${GITHUB_WORKSPACE:-${PWD:-$(pwd)}}"
+        workspace_root="$(realpath "$workspace_root")"
+        node_bin="$(command -v node || true)"
+        gh_bin="$(command -v gh || true)"
+        [ -x "$node_bin" ] || { echo '::error::Claude fallback bridge requires a host Node runtime.'; exit 1; }
+        [ -x "$gh_bin" ] || { echo '::error::Claude fallback bridge requires the host GitHub CLI.'; exit 1; }
+        current_token="${CODEX_CURRENT_TOKEN:-${GH_TOKEN:-${GITHUB_TOKEN:-}}}"
+        corpus_token="${CODEX_CORPUS_TOKEN:-${GITHUB_PAT_NANAKO:-${GITHUB_PAT:-}}}"
+        site_token="${CODEX_SITE_TOKEN:-${GITHUB_PAT_SITE:-${GITHUB_PAT:-}}}"
+        [ -n "$current_token" ] || {
+          echo '::error::Claude fallback bridge requires a current-repository credential.'
+          exit 1
+        }
+        bridge_root="$(mktemp -d "$runner_temp/claude-gh-bridge.XXXXXX")"
+        chmod 700 "$bridge_root"
+        mkdir -p "$bridge_root/home" "$bridge_root/scratch" "$bridge_root/socket"
+        chmod 700 "$bridge_root/home" "$bridge_root/scratch" "$bridge_root/socket"
+        for name in gh-bridge.sh gh-bridge-client.mjs gh-bridge-server.mjs bridge-transport.mjs child-lifecycle.mjs; do
+          cp -- "$action_path/$name" "$bridge_root/$name"
+          chmod 700 "$bridge_root/$name"
+        done
+        side_effect_file="$bridge_root/side-effects"
+        : > "$side_effect_file"
+        chmod 600 "$side_effect_file"
+        env -i \
+          CODEX_BRIDGE_TRANSPORT=files \
+          CODEX_GH_AUTH="$current_token" \
+          CODEX_GH_CORPUS_AUTH="$corpus_token" \
+          CODEX_GH_SITE_AUTH="$site_token" \
+          CODEX_GH_SOCKET="$bridge_root/socket" \
+          CODEX_REAL_GH="$gh_bin" \
+          CODEX_GH_CWD="$workspace_root" \
+          CODEX_GH_WORKSPACE="$workspace_root" \
+          CODEX_GH_SCRATCH="$bridge_root/scratch" \
+          CODEX_GH_REPOSITORY="${GITHUB_REPOSITORY:?Current repository unavailable}" \
+          CODEX_GH_SITE_REPOSITORY="valerielinc-ops/frontaliere-si-o-no" \
+          CODEX_GH_HOST="${GITHUB_SERVER_URL:?GitHub host unavailable}" \
+          CODEX_GH_CORPUS_REPOSITORY="nanakokyobashi-rgb/frontaliere-articles" \
+          CODEX_GH_SIDE_EFFECT_FILE="$side_effect_file" \
+          PATH="$(dirname "$node_bin"):/usr/bin:/bin" \
+          HOME="$bridge_root/home" \
+          "$node_bin" "$bridge_root/gh-bridge-server.mjs" >/dev/null 2>&1 &
+        bridge_pid=$!
+        for _ in $(seq 1 100); do
+          [ -d "$bridge_root/socket" ] && break
+          kill -0 "$bridge_pid" 2>/dev/null || break
+          sleep 0.1
+        done
+        if [ ! -d "$bridge_root/socket" ]; then
+          kill "$bridge_pid" 2>/dev/null || true
+          wait "$bridge_pid" 2>/dev/null || true
+          echo '::error::Claude fallback GitHub bridge did not start.'
+          exit 1
+        fi
+        printf 'pid=%s\nroot=%s\n' "$bridge_pid" "$bridge_root" >> "$GITHUB_OUTPUT"
+        {
+          echo 'CODEX_BRIDGE_TRANSPORT=files'
+          echo "CODEX_GH_SOCKET=$bridge_root/socket"
+          echo "CODEX_GH_CLIENT=$bridge_root/gh-bridge-client.mjs"
+          echo "CODEX_GH_REAL=$gh_bin"
+          echo "CODEX_NODE_REAL=$node_bin"
+        } >> "$GITHUB_ENV"
+        echo "$bridge_root" >> "$GITHUB_PATH"
+
     - name: Run Claude fallback
       id: claude
       # A failed Codex process is retryable only when the bridge and Git-state
       # snapshots prove that it did not deliver or mutate anything. Unknown
       # state is deliberately non-retryable to avoid duplicate fixes/PRs.
-      if: always() && (steps.codex.outcome == 'skipped' || (steps.codex.outcome == 'failure' && steps.codex.outputs.side_effect_detected == 'false'))
+      if: always() && steps.claude_bridge.outcome == 'success' && (steps.codex.outcome == 'skipped' || (steps.codex.outcome == 'failure' && steps.codex.outputs.side_effect_detected == 'false'))
       continue-on-error: true
       uses: anthropics/claude-code-action@9c5ddab2e6d17b83ea679153b31f1d5f023cf636
       with:
@@ -1135,6 +1219,25 @@ runs:
         show_full_output: ${{ inputs.show_full_output }}
         claude_args: ${{ inputs.claude_args }}
         prompt: ${{ inputs.prompt }}
+
+    - name: Cleanup Claude fallback GitHub bridge
+      if: always() && steps.claude_bridge.outcome == 'success'
+      shell: bash
+      env:
+        BRIDGE_PID: ${{ steps.claude_bridge.outputs.pid }}
+        BRIDGE_ROOT: ${{ steps.claude_bridge.outputs.root }}
+        RUNNER_TEMP_ROOT: ${{ runner.temp }}
+      run: |
+        set -u
+        if [ -n "${BRIDGE_PID:-}" ]; then
+          kill "$BRIDGE_PID" 2>/dev/null || true
+          wait "$BRIDGE_PID" 2>/dev/null || true
+        fi
+        case "${BRIDGE_ROOT:-}" in
+          "${RUNNER_TEMP_ROOT}"/claude-gh-bridge.*)
+            rm -rf -- "$BRIDGE_ROOT"
+            ;;
+        esac
 
     - name: Record structured Codex primary evidence
       id: finalize
