@@ -92,6 +92,7 @@ test('the corpus checkout keeps current calls on the runner and routes explicit 
     ['issue', 'list'],
     {
       repository: CORPUS_REPOSITORY,
+      siteRepository: 'valerielinc-ops/frontaliere-si-o-no',
       host: 'github.com',
       siteToken: 'site-token',
       corpusToken: 'corpus-token',
@@ -101,6 +102,36 @@ test('the corpus checkout keeps current calls on the runner and routes explicit 
   assert.equal(currentCorpus.repository, CORPUS_REPOSITORY);
   assert.equal(currentCorpus.token, 'site-token');
   assert.equal(currentCorpus.allowedCommandSet.has('pr'), true);
+
+  const currentCorpusApi = resolveGhScope(
+    ['api', `repos/${CORPUS_REPOSITORY}/pulls/1403`, '--method', 'GET'],
+    {
+      repository: CORPUS_REPOSITORY,
+      siteRepository: 'valerielinc-ops/frontaliere-si-o-no',
+      host: 'github.com',
+      currentToken: 'current-corpus-token',
+      siteToken: 'site-token',
+      corpusToken: 'corpus-token',
+    },
+  );
+  assert.equal(currentCorpusApi.kind, 'site');
+  assert.equal(currentCorpusApi.repository, CORPUS_REPOSITORY);
+  assert.equal(currentCorpusApi.token, 'current-corpus-token');
+  assert.equal(
+    validateGhArgs(
+      ['api', `repos/${CORPUS_REPOSITORY}/pulls/1403`, '--method', 'GET'],
+      {
+        cwd: ROOT,
+        workspaceRoot: ROOT,
+        scratchRoot: ROOT,
+        host: 'github.com',
+        repository: currentCorpusApi.repository,
+        allowedCommandSet: currentCorpusApi.allowedCommandSet,
+        allowedSubcommandMap: currentCorpusApi.allowedSubcommandMap,
+      },
+    ),
+    '',
+  );
 
   const site = resolveGhScope(
     ['--repo', 'valerielinc-ops/frontaliere-si-o-no', 'issue', 'create'],

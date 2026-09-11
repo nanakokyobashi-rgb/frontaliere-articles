@@ -245,7 +245,12 @@ export function resolveGhScope(args, {
     return { error: 'gh --repo must name an exact owner/repository pair' };
   }
   const hasExplicitRepository = repositories.length > 0;
-  const explicitRepository = repositories[0] || siteRepository;
+  // A missing --repo means the current checkout, even when the action also
+  // knows a separate site repository for explicit cross-repo writes. Using
+  // siteRepository as the default silently routed corpus `gh api repos/...`
+  // reads through the site scope and rejected the current corpus endpoint.
+  const explicitRepository = repositories[0]
+    || (hasExplicitRepository ? siteRepository : currentRepository);
   if (repositories.some((value) => value !== explicitRepository)) {
     return { error: 'gh --repo may not select multiple repositories in one request' };
   }
