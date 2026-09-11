@@ -317,7 +317,7 @@ export function evaluateRuntimeFlagChecks(
   // del guard, non la prova che il runtime non venga invocato: altrimenti un
   // template generato con una forma di comando non riconosciuta potrebbe
   // cancellare silenziosamente tutti i controlli.
-  const emptyRuntimePlan = results.length === 0 && runtimeDeclared;
+  const emptyRuntimePlan = (checks?.length ?? 0) === 0 && runtimeDeclared;
   if (emptyRuntimePlan) {
     results.push({
       field: `${runtimePath}#<nessuna-invocazione-rilevata>`,
