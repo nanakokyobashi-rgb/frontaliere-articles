@@ -34,7 +34,7 @@ test('the GitHub bridge marks only state-changing gh operations', () => {
 
 test('the corpus bridge permits read-only API metadata without permitting mutations', () => {
   const scope = resolveGhScope(
-    ['api', `repos/${CORPUS_REPOSITORY}/issues`, '--method', 'GET'],
+    ['api', `repos/${CORPUS_REPOSITORY}/issues`, '--repo', CORPUS_REPOSITORY, '--method', 'GET'],
     {
       repository: CORPUS_REPOSITORY,
       host: 'github.com',
@@ -97,8 +97,10 @@ test('the corpus checkout always selects the corpus credential', () => {
       corpusToken: 'corpus-token',
     },
   );
-  assert.equal(currentCorpus.kind, 'corpus');
-  assert.equal(currentCorpus.token, 'corpus-token');
+  assert.equal(currentCorpus.kind, 'site');
+  assert.equal(currentCorpus.repository, CORPUS_REPOSITORY);
+  assert.equal(currentCorpus.token, 'site-token');
+  assert.equal(currentCorpus.allowedCommandSet.has('pr'), true);
 
   assert.match(
     resolveGhScope(
