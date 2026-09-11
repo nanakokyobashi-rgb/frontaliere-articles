@@ -76,6 +76,10 @@ if printf '%s' "$args" | grep -Fq -- '/comments'; then
   printf '%s' "$ORPHAN_TEST_COMMENTS"
   exit 0
 fi
+if printf '%s' "$args" | grep -Fq -- '/actions/runs/'; then
+  printf '%s' "$ORPHAN_TEST_RUN_STARTED_AT"
+  exit 0
+fi
 if printf '%s' "$args" | grep -Fq -- '/compare/'; then
   if printf '%s' "$args" | grep -Fq -- "...$ORPHAN_TEST_DEFAULT_BRANCH"; then
     printf '%s' "$ORPHAN_TEST_MAIN_STATUS"
@@ -100,7 +104,7 @@ exit 1
     DEFAULT_BRANCH: 'main',
     HEAD_REF: 'feature/reused',
     SHA: 'push-sha',
-    RUN_STARTED_AT: '2026-09-11T06:00:00Z',
+    GITHUB_RUN_ID: 'run-id',
     ORPHAN_TEST_COMMENT_FILE: commentFile,
     ORPHAN_TEST_DEFAULT_BRANCH: 'main',
     ORPHAN_TEST_MERGE_OID: scenario.mergeOid || 'merge-oid',
@@ -111,6 +115,7 @@ exit 1
     ORPHAN_TEST_MERGE_STATUS: 'diverged',
     ORPHAN_TEST_HEAD_STATUS: 'diverged',
     ORPHAN_TEST_COMMENTS: '[]',
+    ORPHAN_TEST_RUN_STARTED_AT: '2026-09-11T06:00:00Z',
     ...scenario,
     PATH: `${bin}:${process.env.PATH}`,
   };
@@ -219,8 +224,11 @@ test('(e) seleziona anche una PR chiusa senza merge e controlla le containment p
   assert.match(job, /CONTAINMENT.*\n[\s\S]*\[ \"\$CONTAINMENT\" = "ahead" \]/);
   assert.match(job, /TARGET='\{\}'/);
   assert.doesNotMatch(job, /\$\{TARGET:-\{\}\}/);
-  assert.match(job, /RUN_STARTED_AT/);
-  assert.match(job, /github\.run_started_at/);
+  assert.match(job, /GITHUB_RUN_ID/);
+  assert.match(job, /github\.run_id/);
+  assert.match(job, /repos\/\$\{REPO\}\/actions\/runs\/\$\{GITHUB_RUN_ID\}/);
+  assert.match(job, /\.run_started_at/);
+  assert.doesNotMatch(job, /github\.run_started_at/);
   assert.doesNotMatch(job, /github\.event\.head_commit\.timestamp/);
   assert.match(job, /REALLY ORPHAN/);
   assert.match(job, /CLOSED WITHOUT MERGE/);
@@ -295,7 +303,7 @@ test('(g) il verdetto osservabile distingue merged contenuto, closed-unmerged, s
       headRefOid: 'head-oid',
       mergeCommit: { oid: 'merge-oid' },
     }),
-    RUN_STARTED_AT: '2026-09-11T06:04:00Z',
+    ORPHAN_TEST_RUN_STARTED_AT: '2026-09-11T06:04:00Z',
     ORPHAN_TEST_MERGE_STATUS: 'diverged',
     ORPHAN_TEST_HEAD_STATUS: 'ahead',
   });
@@ -315,7 +323,7 @@ test('(g) il verdetto osservabile distingue merged contenuto, closed-unmerged, s
       mergeCommit: { oid: 'merge-oid' },
     }),
     ORPHAN_TEST_COMMIT_TIMESTAMP: '2026-09-11T06:00:00Z',
-    RUN_STARTED_AT: '2026-09-11T06:06:00Z',
+    ORPHAN_TEST_RUN_STARTED_AT: '2026-09-11T06:06:00Z',
     ORPHAN_TEST_HEAD_STATUS: 'ahead',
     ORPHAN_TEST_COMMENTS: '<!-- orphan-push-warn -->',
   });
@@ -323,6 +331,23 @@ test('(g) il verdetto osservabile distingue merged contenuto, closed-unmerged, s
   assert.match(dedup.stdout, /Push orfano: commit push-sha/);
   assert.match(dedup.stdout, /nessun commento duplicato/);
   assert.equal(dedup.comment, '', 'il secondo passaggio dello stesso push non deve duplicare il commento');
+
+  const missingApiTimestamp = runWorkflow({
+    ORPHAN_TEST_TARGET: JSON.stringify({
+      number: 47,
+      createdAt: '2026-09-11T04:00:00Z',
+      closedAt: '2026-09-11T06:05:00Z',
+      mergedAt: '2026-09-11T06:05:00Z',
+      headRefOid: 'head-oid',
+      mergeCommit: { oid: 'merge-oid' },
+    }),
+    ORPHAN_TEST_RUN_STARTED_AT: '',
+    ORPHAN_TEST_HEAD_STATUS: 'ahead',
+  });
+  assert.equal(missingApiTimestamp.status, 0);
+  assert.match(missingApiTimestamp.stdout, /Timestamp server-side.*assente/);
+  assert.doesNotMatch(missingApiTimestamp.stdout, /gia' contenuto nella head storica/);
+  assert.equal(missingApiTimestamp.comment, '', 'timestamp API mancante sospende il verdetto, non lo trasforma in un non-orphano');
 
   const reallyOrphan = runWorkflow({
     ORPHAN_TEST_TARGET: '{}',
