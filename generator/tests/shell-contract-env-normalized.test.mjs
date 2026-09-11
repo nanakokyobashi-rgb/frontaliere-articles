@@ -43,6 +43,14 @@ const NOT_REACHING_CONTRACT = {
     'host/sharedWriteRegistry.ts: letta per chiamata in currentMode(), e la probe pinna ' +
     'solo la forma di WriteCollector (typeof add/flush, skippedByHash iniziale).',
   BUILD_LOCALE: 'host/shared/localeEmitFilter.ts: non raggiunta da nessun membro del contratto.',
+  FIREBASE_API_KEY:
+    'host/firebaseAuthPersistence.ts: getFirebaseApiKey() è usata solo dai consumer runtime; ' +
+    'host/constants.ts importa esclusivamente FIREBASE_AUTH_SESSION_MARKER_KEY, quindi la ' +
+    'lettura non viene valutata dalla superficie pinnata.',
+  VITE_FIREBASE_API_KEY:
+    'host/firebaseAuthPersistence.ts: getFirebaseApiKey() è usata solo dai consumer runtime; ' +
+    'host/constants.ts importa esclusivamente FIREBASE_AUTH_SESSION_MARKER_KEY, quindi la ' +
+    'lettura non viene valutata dalla superficie pinnata.',
 };
 
 test('ogni test che pinna il contratto normalizza l\'ambiente PRIMA di importare il bootstrap', () => {

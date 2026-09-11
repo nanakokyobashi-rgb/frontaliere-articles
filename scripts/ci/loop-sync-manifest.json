@@ -575,7 +575,7 @@
       "reason": "Questo file.",
       "baseline": {
         "site": null,
-        "corpus": "b30c519db59fbbb8",
+        "corpus": "03c189c2996b344a",
         "alignedAt": "2026-09-11"
       }
     },
@@ -2696,7 +2696,7 @@
       "reason": "Impronta dei 42 membri di SiteShellContract, prodotta e verificata da `host/tests/shell-contract-fingerprint.test.mjs`. Artefatto di questo lato: e' il gate runtime che impedisce di spedire l'engine senza la sua meta' `host/`.",
       "baseline": {
         "site": null,
-        "corpus": "ad6a0315ae7c6122",
+        "corpus": "f8052772228f9d5b",
         "alignedAt": "2026-09-11"
       }
     },
@@ -2736,7 +2736,7 @@
       "reason": "Normalizzazione dell'ambiente per i due gate che pinnano SiteShellContract (issue #788): il digest degli scalari copre `cdnPreconnectHint`, che `host/constants.ts` deriva da `process.env.ASSET_CDN` a module-evaluation time, quindi senza azzerarlo il gate cross-repo dipende dall'ambiente del runner. Artefatto di questo lato: nessun omonimo sul sito.",
       "baseline": {
         "site": null,
-        "corpus": "ecf6b41ccd043394",
+        "corpus": "940356862207405b",
         "alignedAt": "2026-09-11"
       }
     },
