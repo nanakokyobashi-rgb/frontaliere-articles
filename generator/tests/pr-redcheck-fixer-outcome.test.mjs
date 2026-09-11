@@ -102,7 +102,7 @@ esac
   }
 }
 
-function runBaseCapture({ body }) {
+function runBaseCapture({ body, emptyResponse = false }) {
   const temp = mkdtempSync(path.join(os.tmpdir(), 'pr-redcheck-base-'));
   const bin = path.join(temp, 'bin');
   mkdirSync(bin);
@@ -117,7 +117,9 @@ esac
   fakeExecutable(bin, 'gh', String.raw`
 case "$*" in
   */issues/*/comments*) printf '0\n' ;;
-  */pulls/*) printf '%s\n' "$FAKE_BODY" ;;
+  */pulls/*)
+    if [ "$FAKE_EMPTY_RESPONSE" = "1" ]; then exit 0; fi
+    printf '%s\n' "$FAKE_BODY" ;;
   *) exit 64 ;;
 esac
 `);
@@ -133,6 +135,7 @@ esac
         RUNNER_TEMP: temp,
         GITHUB_OUTPUT: output,
         FAKE_BODY: body,
+        FAKE_EMPTY_RESPONSE: emptyResponse ? '1' : '0',
       },
       encoding: 'utf8',
       timeout: 10_000,
@@ -149,8 +152,7 @@ test('il digest del body è acquisito prima e classificato fail-closed', () => {
   assert.match(base, /set -uo pipefail/, 'la lettura del body deve propagare gli errori della pipeline');
   assert.match(base, /echo "body_sha=\$body_sha"/, 'la baseline deve salvare il digest del body della PR');
   assert.match(base, /gh api[\s\S]*> "\$body_file"/, 'lo status di gh deve essere osservabile prima del digest');
-  assert.match(base, /empty_body_sha=\$\(printf '\\n'/, 'il digest vuoto deve riflettere il newline emesso da gh --jq');
-  assert.match(base, /if \[ "\$body_sha" = "\$empty_body_sha" \]; then[\s\S]{0,220}?exit 1/, 'la baseline deve rifiutare il digest del contenuto vuoto');
+  assert.match(base, /if \[ ! -s "\$body_file" \]; then[\s\S]{0,220}?exit 1/, 'la baseline deve rifiutare una risposta API a zero byte');
   assert.match(base, /s\/\\r\$\/[\s\S]*s\/\[\[:space:\]\]\+\$\//, 'la baseline deve canonizzare CR e spazio in coda');
   assert.match(classify, /BASE_BODY_SHA: \$\{\{ steps\.base\.outputs\.body_sha \}\}/);
   assert.match(classify, /BASE_CAPTURE_OUTCOME: \$\{\{ steps\.base\.outcome \}\}/);
@@ -159,7 +161,7 @@ test('il digest del body è acquisito prima e classificato fail-closed', () => {
   const commentsAt = classify.indexOf('NOW_COMMENTS=');
   assert.ok(currentBodyAt !== -1 && commentsAt !== -1 && currentBodyAt < commentsAt,
     'il body deve essere confrontato prima del fallback sui commenti');
-  assert.match(classify, /if \[ "\$now_body_sha" = "\$empty_body_sha" \]; then[\s\S]{0,240}?exit 1/, 'la lettura finale deve rifiutare il digest del contenuto vuoto');
+  assert.match(classify, /if \[ "\$now_body_sha" = "\$empty_body_sha" \]; then[\s\S]{0,240}?exit 1/, 'la lettura finale deve rifiutare il digest vuoto emesso da gh --jq');
   assert.match(classify, /empty_body_sha=\$\(printf '\\n'/, 'il digest vuoto finale deve riflettere il newline emesso da gh --jq');
   assert.match(classify, /s\/\\r\$\/[\s\S]*s\/\[\[:space:\]\]\+\$\//, 'la lettura finale deve canonizzare CR e spazio in coda');
   assert.match(classify, /if \[ "\$\{BASE_CAPTURE_OUTCOME:-\}" != "success" \][\s\S]{0,240}?exit 1/,
@@ -170,10 +172,16 @@ test('il digest del body è acquisito prima e classificato fail-closed', () => {
     'il verdetto deve restare nell\'ultimo step');
 });
 
-test('la cattura baseline respinge una risposta body vuota anche con gh exit 0', () => {
+test('la cattura baseline accetta un body PR vuoto quando gh emette il newline JSON', () => {
   const result = runBaseCapture({ body: '' });
+  assert.equal(result.status, 0,
+    `un body PR vuoto e' riparabile e non deve bloccare Claude:\nstdout=${result.stdout}\nstderr=${result.stderr}`);
+});
+
+test('la cattura baseline respinge una risposta API a zero byte anche con gh exit 0', () => {
+  const result = runBaseCapture({ body: '', emptyResponse: true });
   assert.equal(result.status, 1,
-    `una risposta API vuota non può diventare una baseline valida:\nstdout=${result.stdout}\nstderr=${result.stderr}`);
+    `una risposta API senza byte non può diventare una baseline valida:\nstdout=${result.stdout}\nstderr=${result.stderr}`);
 });
 
 test('la baseline fallita o il digest invalido bloccano prima del confronto body', () => {
@@ -197,14 +205,18 @@ test('la baseline fallita o il digest invalido bloccano prima del confronto body
     `un digest invalido non può diventare progresso body-only:\nstdout=${invalidDigest.stdout}\nstderr=${invalidDigest.stderr}`);
 });
 
-test('i fixer di PR condividono il mutex sullo stesso branch', () => {
+test('i fixer di PR serializzano il branch senza sfrattare la pending gemella', () => {
   const groupOf = (source) => source.match(/^  group: (.+)$/m)?.[1];
   const redcheckGroup = groupOf(WORKFLOW);
   const redflagGroup = groupOf(REDFLAG_WORKFLOW);
-  assert.equal(redcheckGroup, redflagGroup,
-    'redcheck e redflag devono serializzare la stessa PR con la stessa chiave');
-  assert.match(redcheckGroup || '', /github\.event\.pull_request\.head\.ref/);
-  assert.match(redcheckGroup || '', /github\.event\.workflow_run\.head_branch/);
+  assert.notEqual(redcheckGroup, redflagGroup,
+    'i workflow devono evitare una coda condivisa che sfratta la pending gemella');
+  assert.match(redcheckGroup || '', /^redcheck-fix-/);
+  assert.match(redflagGroup || '', /^redflag-fix-\$\{\{ github\.event\.pull_request\.head\.ref \}\}$/);
+  assert.match(WORKFLOW, /busy=[\s\S]*--workflow=pr-redflag-fixer\.yml/,
+    'redcheck deve riconoscere un redflag gia\u0027 attivo prima del push');
+  assert.match(REDFLAG_WORKFLOW, /while :[\s\S]*--workflow=pr-redcheck-fixer\.yml[\s\S]*sleep 10/,
+    'redflag deve attendere il redcheck attivo invece di modificare il branch in parallelo');
 });
 
 test('body cambiato è progresso, body identico è non-progresso', () => {

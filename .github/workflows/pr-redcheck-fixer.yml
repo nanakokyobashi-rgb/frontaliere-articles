@@ -35,8 +35,11 @@ on:
 
 # Serializzato per BRANCH, non per numero PR: nel contesto `workflow_run` il
 # numero non e' affidabile (`pull_requests` e' spesso vuoto), mentre
-# `head_branch` c'e' sempre. La stessa espressione viene usata dal gemello
-# `pr-redflag-fixer.yml`, cosi' i due fixer condividono il mutex sulla PR.
+# `head_branch` c'e' sempre. Il gemello mantiene un gruppo distinto: GitHub
+# conserva una sola run pending per gruppo e un gruppo condiviso potrebbe
+# sfrattare silenziosamente un 🔴-fixer. Il preflight sotto impedisce comunque
+# l'overlap: redcheck aspetta il prossimo rosso quando redflag e' attivo, mentre
+# redflag aspetta qui prima di toccare body o branch.
 concurrency:
   group: redcheck-fix-${{ github.event.pull_request.head.ref || github.event.workflow_run.head_branch || github.event.inputs.pr }}
   cancel-in-progress: false
@@ -450,8 +453,9 @@ jobs:
             exit 1
           fi
           # `gh api --jq` termina anche una stringa vuota con il suo newline.
-          empty_body_sha=$(printf '\n' | sha256sum | cut -d' ' -f1)
-          if [ "$body_sha" = "$empty_body_sha" ]; then
+          # Un body PR vuoto e' riparabile da Claude: il caso non va confuso
+          # con una risposta API a zero byte, che indica una lettura non verificabile.
+          if [ ! -s "$body_file" ]; then
             echo "::error::La risposta API del body PR prima di Claude e' vuota o non verificabile."
             exit 1
           fi

@@ -14,10 +14,13 @@ on:
   pull_request_review:
     types: [submitted]
 
-# Un fixer alla volta per PR: evita due round Claude concorrenti sullo stesso
-# branch (push race).
+# Un fixer alla volta per BRANCH dentro questo workflow. Il gruppo resta distinto
+# da redcheck: con `cancel-in-progress: false` GitHub conserva una sola pending e
+# una coda condivisa potrebbe sfrattare silenziosamente proprio la run redflag.
+# Il preflight aspetta la coda redcheck prima di fare checkout o modificare body,
+# mentre il preflight redcheck scarta un rosso quando redflag e' gia' attivo.
 concurrency:
-  group: redcheck-fix-${{ github.event.pull_request.head.ref || github.event.workflow_run.head_branch || github.event.inputs.pr }}
+  group: redflag-fix-${{ github.event.pull_request.head.ref }}
   cancel-in-progress: false
 
 permissions:
@@ -68,7 +71,7 @@ jobs:
       contains(github.event.review.body, '🔴') &&
       github.event.pull_request.draft == false
     runs-on: ubuntu-latest
-    timeout-minutes: 3
+    timeout-minutes: 45
     outputs:
       actionable: ${{ steps.pre.outputs.actionable }}
     steps:
@@ -138,6 +141,20 @@ jobs:
             fi
             echo "actionable=false" >> "$GITHUB_OUTPUT"; exit 0
           fi
+          # Cross-workflow mutex: i gruppi `concurrency` sono distinti per non
+          # sfrattare una pending redflag, quindi la serializzazione del push si
+          # completa qui. La run resta in attesa, invece di perdere l'evento di
+          # review, finche' il fixer redcheck dello stesso branch termina.
+          while :; do
+            if ! busy=$(gh run list --repo "$REPO" --workflow=pr-redcheck-fixer.yml --branch "$HEAD_REF" \
+              --json status --jq '[.[] | select(.status=="in_progress" or .status=="queued")] | length' 2>/dev/null); then
+              echo "::warning::Impossibile leggere la coda redcheck per '$HEAD_REF' → ritento prima di modificare la PR."
+              busy=1
+            fi
+            if [ "${busy:-0}" -eq 0 ]; then break; fi
+            echo "Redcheck attivo su '$HEAD_REF' → attendo prima del checkout redflag (run in coda: $busy)."
+            sleep 10
+          done
           echo "actionable=true" >> "$GITHUB_OUTPUT"
 
   # Lo scope viene valutato dopo il checkout, usando la stessa classificazione
