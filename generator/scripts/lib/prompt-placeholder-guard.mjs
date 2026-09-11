@@ -568,6 +568,12 @@ const budgetParentheticalMatcher = {
 /** I letterali che diventano matcher (tutti tranne quelli di competenza dello slug guard). */
 const TEXT_LITERALS = SCHEMA_PLACEHOLDER_LITERALS.filter((l) => !SLUG_OWNED_LITERALS.includes(l));
 
+// FAQ labels survive translation even when the surrounding placeholder prose
+// does not. Keep the language variants in one expression so detection and
+// repair cannot drift apart.
+const FAQ_LABEL_RX = String.raw`(?:domanda[ \t]+frequente|frequently[ \t]+asked[ \t]+questions?|foire[ \t]+aux[ \t]+questions?|question[ \t]+fr[eé]quemment[ \t]+pos[eé]e|h[aä]ufig[ \t]+gestellte[ \t]+fragen?)`;
+const FAQ_LINE_PREFIX_RX = String.raw`(?:\d+[.)][ \t]*|[*#>\-–—]+[ \t]*)?`;
+
 /**
  * ── LE REGOLE ─────────────────────────────────────────────────────────────
  *
@@ -738,8 +744,8 @@ export const PLACEHOLDER_RULES = Object.freeze([
     // l'etichetta. Si accetta solo a inizio riga (eventualmente con un bullet),
     // così una frase editoriale come «la domanda frequente riguarda...» non
     // diventa un falso positivo.
-    rx: /(?:^|\n)[ \t]*(?:[*#>\-–—]\s*)?\**\s*domanda\s+frequente\s*\**\s*[:.]\s*(?=\S)/im,
-    why: "Etichetta FAQ non numerata (`Domanda frequente:`) rimasta nel testo pubblicato: è uno schema del prompt, non contenuto editoriale.",
+    rx: new RegExp(String.raw`(?:^|\n)[ \t]*${FAQ_LINE_PREFIX_RX}\**[ \t]*${FAQ_LABEL_RX}\**[ \t]*[:.?\-–—][ \t]*(?=\S)`, 'im'),
+    why: 'Etichetta FAQ non numerata rimasta nel testo pubblicato: è uno schema del prompt, non contenuto editoriale.',
   },
   {
     id: 'faq-numbered-bare',
@@ -763,6 +769,19 @@ export const PLACEHOLDER_RULES = Object.freeze([
   })),
 ]);
 
+// These are genuine translated section headings already present in the
+// corpus. A heading such as `## Frequently Asked Questions — Net Salary`
+// names the section; it is not a prompt label glued to a question. Keep the
+// plural translated section forms out of the placeholder result while still
+// reporting singular translated labels and all Italian forms.
+const TRANSLATED_FAQ_SECTION_HEADING_RX = /^#{1,6}[ \t]*(?:frequently\s+asked\s+questions|foire\s+aux\s+questions|h[aä]ufig\s+gestellte\s+fragen)\**[ \t]*[:.?\-–—]/i;
+
+function isTranslatedFaqSectionHeading(value, offset = 0) {
+  const lineStart = value.lastIndexOf('\n', offset) + 1;
+  const line = value.slice(lineStart).split('\n', 1)[0];
+  return TRANSLATED_FAQ_SECTION_HEADING_RX.test(line);
+}
+
 // ─────────────────────────────────────────────────────────────────────────────
 // Rilevamento
 // ─────────────────────────────────────────────────────────────────────────────
@@ -779,6 +798,7 @@ export function findPromptPlaceholders(value) {
   for (const rule of PLACEHOLDER_RULES) {
     const m = rule.rx.exec(value);
     if (!m) continue;
+    if (rule.id === 'faq-unnumbered-label' && isTranslatedFaqSectionHeading(value, m.index)) continue;
     hits.push({ rule: rule.id, kind: rule.kind, found: m[0].trim(), index: m.index });
   }
   return hits;
@@ -817,11 +837,12 @@ export function stripFaqNumberedLabels(value) {
   // («1. Domanda frequente 1: …») gia' supportata.
   const patterns = [
     /((?:^|[\s\n*#>\-–—.)\]])\s*)\**\s*[Dd]omanda\s+frequente\s+\d+\**\s*[:.?\-–—]\s*(?=\S)/g,
-    /((?:^|\n)[ \t]*(?:[*#>\-–—]\s*)?)\**\s*[Dd]omanda\s+frequente\**\s*[:.?\-–—]\s*(?=\S)/g,
+    new RegExp(String.raw`((?:^|\n)[ \t]*${FAQ_LINE_PREFIX_RX})\**[ \t]*${FAQ_LABEL_RX}\**[ \t]*[:.?\-–—][ \t]*(?=\S)`, 'gim'),
   ];
   let out = value;
   for (const pattern of patterns) {
     out = out.replace(pattern, (match, pre, offset, whole) => {
+      if (isTranslatedFaqSectionHeading(whole, offset)) return match;
       // Solo se dopo l'etichetta resta contenuto vero sulla stessa riga.
       const rest = whole.slice(offset + match.length);
       const line = rest.split('\n', 1)[0].trim();

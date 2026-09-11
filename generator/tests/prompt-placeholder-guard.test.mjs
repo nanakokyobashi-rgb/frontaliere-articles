@@ -367,6 +367,23 @@ describe('etichette dello schema dentro il corpo — si tolgono, non si butta l\
     assert.equal(value, '## FAQ\n- Quali sono le conseguenze a lungo termine?\nQuali sono i requisiti per il rimborso?');
   });
 
+  it('ripara le etichette tradotte e conserva heading, numerazione e bullet', () => {
+    const { value, stripped } = stripFaqNumberedLabels(
+      '## Frequently Asked Question: How do I request a refund?\n'
+      + '1. Foire aux questions — Comment demander un remboursement?\n'
+      + '> Question Fréquemment Posée: Comment demander un remboursement?\n'
+      + '- Häufig gestellte Frage? Wie beantrage ich eine Rückerstattung?',
+    );
+    assert.equal(stripped, 4);
+    assert.equal(
+      value,
+      '## How do I request a refund?\n'
+      + '1. Comment demander un remboursement?\n'
+      + '> Comment demander un remboursement?\n'
+      + '- Wie beantrage ich eine Rückerstattung?',
+    );
+  });
+
   it('non ripara una forma non numerata senza contenuto sufficiente sulla riga', () => {
     const { value, stripped } = stripFaqNumberedLabels('Domanda frequente: Ciao?');
     assert.equal(stripped, 0);
@@ -432,6 +449,22 @@ describe('i falsi positivi misurati sul corpus: `(max ` NON e\' un marcatore', (
     const hits = findPromptPlaceholders('### Guida pratica\n\nDomanda frequente: *Posso chiedere un rimborso?*');
     assert.deepEqual(hits.map((hit) => hit.rule), ['faq-unnumbered-label']);
     assert.equal(hits[0].kind, 'schema-label');
+  });
+
+  it('vede le etichette FAQ tradotte e i prefissi di riga', () => {
+    const examples = [
+      '## Frequently Asked Question: How do I request a refund?',
+      '1. Foire aux questions — Comment demander un remboursement?',
+      '> Question Fréquemment Posée: Comment demander un remboursement?',
+      'Häufig gestellte Fragen: Wie beantrage ich eine Rückerstattung?',
+    ];
+    for (const value of examples) {
+      assert.deepEqual(
+        findPromptPlaceholders(value).map((hit) => hit.rule),
+        ['faq-unnumbered-label'],
+        value,
+      );
+    }
   });
 
   it('non tratta una frase editoriale come etichetta FAQ', () => {
