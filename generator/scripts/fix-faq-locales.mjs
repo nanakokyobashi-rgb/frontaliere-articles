@@ -87,13 +87,20 @@ export function normalizeFaqLimit(value) {
 }
 
 export function parseFaqLimitArgs(argv) {
-  const limitIdx = argv.indexOf('--limit');
-  if (limitIdx < 0) return Infinity;
-  const value = argv[limitIdx + 1];
-  if (value === undefined || value.startsWith('--')) {
-    throw new RangeError('--limit richiede un valore intero >= 0');
+  for (let idx = 0; idx < argv.length; idx++) {
+    const arg = argv[idx];
+    if (arg.startsWith('--limit=')) {
+      return normalizeFaqLimit(arg.slice('--limit='.length));
+    }
+    if (arg === '--limit') {
+      const value = argv[idx + 1];
+      if (value === undefined || value.startsWith('--')) {
+        throw new RangeError('--limit richiede un valore intero >= 0');
+      }
+      return normalizeFaqLimit(value);
+    }
   }
-  return normalizeFaqLimit(value);
+  return Infinity;
 }
 
 function parseFaqLimitOrExit(argv) {
@@ -112,26 +119,21 @@ const REESCAPE_BROKEN = args.includes('--reescape-broken');
 // ── Section selection (--section=frontaliere|svizzera, default frontaliere) ──
 // Switches the body-dir enumeration between the cross-border and the
 // Switzerland-wide article sets. frontaliere is byte-identical.
-function getSectionArg() {
+function getSectionArg(argv) {
   let section = 'frontaliere';
-  for (const a of args) {
+  for (const a of argv) {
     const m = /^--section=(.+)$/.exec(a);
     if (m) section = m[1];
   }
-  const inlineIdx = args.indexOf('--section');
-  if (inlineIdx >= 0 && args[inlineIdx + 1] && !args[inlineIdx + 1].startsWith('--')) {
-    section = args[inlineIdx + 1];
+  const inlineIdx = argv.indexOf('--section');
+  if (inlineIdx >= 0 && argv[inlineIdx + 1] && !argv[inlineIdx + 1].startsWith('--')) {
+    section = argv[inlineIdx + 1];
   }
   if (!['frontaliere', 'svizzera'].includes(section)) {
-    console.error(`Invalid --section="${section}". Valid: frontaliere, svizzera`);
-    process.exit(1);
+    throw new RangeError(`Invalid --section="${section}". Valid: frontaliere, svizzera`);
   }
   return section;
 }
-const SECTION = getSectionArg();
-const SECTION_BODY_SUBDIR = SECTION === 'svizzera' ? 'blog-body-ch' : 'blog-body';
-
-const BODY_DIR = resolve(ROOT, corpusPath(`services/locales/${SECTION_BODY_SUBDIR}`));
 
 // ── Il literal TS che porta l'array FAQ ─────────────────────
 //
@@ -626,14 +628,14 @@ async function translateFaqArray(faqArray, targetLang) {
 // con la decodifica legacy, che su quei file funziona per costruzione, e lo
 // riscrive con l'escape corretto. Il contenuto non cambia — cambia la codifica.
 
-function reescapeBroken() {
+function reescapeBroken(bodyDir, limit) {
   const locales = ['it', 'en', 'de', 'fr'];
   const repaired = [];
   for (const locale of locales) {
-    const dir = resolve(BODY_DIR, locale);
+    const dir = resolve(bodyDir, locale);
     if (!existsSync(dir)) continue;
     for (const file of readdirSync(dir).filter(f => f.endsWith('.ts'))) {
-      if (repaired.length >= LIMIT) break;
+      if (repaired.length >= limit) break;
       const filePath = resolve(dir, file);
       const raw = rawFaqLiteral(filePath);
       if (raw === null) continue;
@@ -679,27 +681,36 @@ async function main() {
   // Valuta gli argomenti solo nell'entry point: importare questo modulo per le
   // funzioni pure non deve poter chiamare process.exit(2) nel processo ospite.
   const limit = parseFaqLimitOrExit(args);
+  let section;
+  try {
+    section = getSectionArg(args);
+  } catch (err) {
+    console.error(err.message);
+    process.exit(1);
+  }
+  const sectionBodySubdir = section === 'svizzera' ? 'blog-body-ch' : 'blog-body';
+  const bodyDir = resolve(ROOT, corpusPath(`services/locales/${sectionBodySubdir}`));
 
   if (REESCAPE_BROKEN) {
-    console.log(`🔧 Ri-escape dei .faq scritti con l'escape rotto (${SECTION})...\n`);
-    reescapeBroken();
+    console.log(`🔧 Ri-escape dei .faq scritti con l'escape rotto (${section})...\n`);
+    reescapeBroken(bodyDir, limit);
     return;
   }
 
   console.log('🔍 Scanning for FAQ locale issues...\n');
 
-  const itDir = resolve(BODY_DIR, 'it');
+  const itDir = resolve(bodyDir, 'it');
   const itFiles = readdirSync(itDir).filter(f => f.endsWith('.ts'));
   const issues = [];
 
   for (const file of itFiles) {
     const articleId = basename(file, '.ts');
-    const itPath = resolve(BODY_DIR, 'it', file);
+    const itPath = resolve(bodyDir, 'it', file);
     const itFaq = extractFaqFromFile(itPath);
     if (!itFaq || itFaq.length === 0) continue;
 
     for (const locale of ['en', 'de', 'fr']) {
-      const localePath = resolve(BODY_DIR, locale, file);
+      const localePath = resolve(bodyDir, locale, file);
       if (!existsSync(localePath)) continue;
 
       if (!hasFaqKey(localePath)) {
@@ -721,9 +732,9 @@ async function main() {
   }
 
   const rejectionLedger = loadFaqRejectionLedger();
-  const liveIssueKeys = new Set(issues.map((issue) => faqLocaleIssueKey(issue.articleId, issue.locale, SECTION)));
+  const liveIssueKeys = new Set(issues.map((issue) => faqLocaleIssueKey(issue.articleId, issue.locale, section)));
   let ledgerDirty = false;
-  const sectionPrefix = SECTION + '/';
+  const sectionPrefix = section + '/';
   for (const key of Object.keys(rejectionLedger)) {
     if (key.startsWith(sectionPrefix) && !liveIssueKeys.has(key)) {
       delete rejectionLedger[key];
@@ -755,14 +766,14 @@ async function main() {
     return;
   }
 
-  const { toProcess, throttled } = selectFaqIssuesForProcessing(issues, rejectionLedger, SECTION, limit);
+  const { toProcess, throttled } = selectFaqIssuesForProcessing(issues, rejectionLedger, section, limit);
   console.log(`\nProcessing ${toProcess.length} issues...\n`);
 
   const repeatedRejectionSkips = throttled.length;
   let fixed = 0;
   let failed = 0;
   for (const issue of throttled) {
-    const issueKey = faqLocaleIssueKey(issue.articleId, issue.locale, SECTION);
+    const issueKey = faqLocaleIssueKey(issue.articleId, issue.locale, section);
     const previousRejection = rejectionLedger[issueKey];
     const rejectionKind = previousRejection.prunedWrite
       ? 'potatura sopra pavimento già pubblicata'
@@ -774,7 +785,7 @@ async function main() {
   for (let idx = 0; idx < toProcess.length; idx++) {
     const issue = toProcess[idx];
     const label = `[${idx + 1}/${toProcess.length}] [${issue.locale.toUpperCase()}] ${issue.articleId}`;
-    const issueKey = faqLocaleIssueKey(issue.articleId, issue.locale, SECTION);
+    const issueKey = faqLocaleIssueKey(issue.articleId, issue.locale, section);
     try {
       const previousRejection = rejectionLedger[issueKey];
 
@@ -811,7 +822,7 @@ async function main() {
         continue;
       }
 
-      const localePath = resolve(BODY_DIR, issue.locale, issue.file);
+      const localePath = resolve(bodyDir, issue.locale, issue.file);
       if (issue.reason === 'missing') {
         if (!insertFaqKey(localePath, issue.articleId, toWrite)) {
           console.error(`${label} ❌ Could not insert FAQ key`);

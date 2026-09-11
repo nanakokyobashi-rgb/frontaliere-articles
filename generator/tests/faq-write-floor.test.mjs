@@ -52,8 +52,10 @@ test('il limite FAQ assente resta illimitato, gli input invalidi falliscono chiu
   assert.equal(parseFaqLimitArgs([]), Infinity);
   assert.equal(normalizeFaqLimit('0'), 0);
   assert.equal(normalizeFaqLimit('2'), 2);
+  assert.equal(parseFaqLimitArgs(['--limit=3']), 3);
   assert.throws(() => normalizeFaqLimit('non-numerico'), /intero >= 0/);
   assert.throws(() => normalizeFaqLimit('-1'), /intero >= 0/);
+  assert.throws(() => parseFaqLimitArgs(['--limit=non-numerico']), /intero >= 0/);
   assert.throws(() => parseFaqLimitArgs(['--limit']), /richiede un valore/);
   assert.throws(() => parseFaqLimitArgs(['--limit', '--dry-run']), /richiede un valore/);
 });
@@ -69,6 +71,13 @@ test('i due entry point rifiutano --limit invalido con exit code 2', () => {
       assert.match(result.stderr, /Invalid --limit/);
     }
   }
+
+  const invalidSection = spawnSync(process.execPath, [FIX, '--section=inesistente'], {
+    encoding: 'utf8',
+    env: { ...process.env, DRY_RUN: '1' },
+  });
+  assert.equal(invalidSection.status, 1);
+  assert.match(invalidSection.stderr, /Invalid --section="inesistente"/);
 });
 
 test('il batch writer rifiuta --concurrency invalido con exit code 2', () => {
@@ -254,7 +263,8 @@ test('il fix-faq rende osservabile il deficit e persiste il blocco di ritraduzio
   assert.match(src, /reason: 'below_source_count'/);
   assert.match(src, /shouldSkipFaqRejection\(/);
   assert.match(src, /nextFaqRejection\(/);
-  assert.match(src, /selectFaqIssuesForProcessing\(issues, rejectionLedger, SECTION, limit\)/);
+  assert.match(src, /selectFaqIssuesForProcessing\(issues, rejectionLedger, section, limit\)/);
+  assert.match(src, /reescapeBroken\(bodyDir, limit\)/);
   assert.doesNotMatch(src, /if \(shouldSkipFaqRejection\(previousRejection, issue\.itFaq\)\)/);
   assert.match(src, /const \{ toProcess, throttled \} = selectFaqIssuesForProcessing\(/);
 
