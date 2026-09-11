@@ -83,6 +83,7 @@ const GATE_SRC = cutFunction('assertTranslationsPassFactualityGates', [
 // `new Function` istanzia un gate che non risolve `collectBodySections`.
 const SECTIONS_SRC = cutFunction('collectBodySections', ['body\\d+', 'sections']);
 const BODY_FIELDS_SRC = cutFunction('bodyFieldNames', ['body\\d+', 'BODY_ONLY_FIELDS']);
+const CONTENT_BODY_FIELDS_SRC = cutFunction('coerceContentBodyFields', ['coerceBodyFields', 'contentByLocale']);
 const ADMISSION_SRC = cutFunction('runArticleFactualityGates', [
   'runFactualityGates',
   'DETERMINISTIC_BODY_HEURISTIC_CODES',
@@ -221,6 +222,46 @@ test('#980 i body non-stringa vengono coercizzati prima del set richiesto', () =
   coerce(content);
   assert.equal(content.body2, '["b","c"]');
   assert.equal(content.body4, '42');
+});
+
+test('#1261 i bodyN vengono coercizzati in ogni locale prima dei gate', () => {
+  const coerce = new Function(
+    'BODY_ONLY_FIELDS',
+    `${BODY_FIELDS_SRC}\n${cutFunction('coerceBodyFields', ['bodyFieldNames'])}\n${CONTENT_BODY_FIELDS_SRC}\nreturn coerceContentBodyFields;`,
+  )(['body1', 'body2', 'body3']);
+  const content = {
+    it: { body1: ['it', 'body'] },
+    en: { body4: { translated: true } },
+    de: { body2: 42 },
+  };
+  coerce(content);
+  assert.equal(content.it.body1, '["it","body"]');
+  assert.equal(content.en.body4, '{"translated":true}');
+  assert.equal(content.de.body2, '42');
+});
+
+test('#1261 un produttore deterministico blocca solo rilievi critical', () => {
+  const factory = new Function(
+    'runFactualityGates',
+    'DETERMINISTIC_BODY_HEURISTIC_CODES',
+    `${ADMISSION_SRC}\nreturn runArticleFactualityGates;`,
+  );
+  const runGate = factory(() => ({
+    issues: [
+      { code: 'structured-major', severity: 'major', message: '[body1] frammento strutturato' },
+      { code: 'critical-fact', severity: 'critical', message: '[body1] fatto incoerente' },
+    ],
+    blocking: [],
+    passed: false,
+  }), new Set([
+    'unbalanced-parentheses',
+    'truncated-bold',
+    'incomplete-ending',
+    'leaked-prompt-scaffolding',
+  ]));
+  const result = runGate({ locale: 'it', deterministicBodySections: ['body1'] });
+  assert.deepEqual(result.blocking.map((issue) => issue.code), ['critical-fact']);
+  assert.equal(result.passed, false);
 });
 
 test('#4 il gate e\' collegato a ENTRAMBI i percorsi di scrittura', () => {

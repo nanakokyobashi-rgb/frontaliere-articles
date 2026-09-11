@@ -81,6 +81,10 @@ export function matchingDelimiter(src, openIdx) {
       if (src[i] === '[') { inClass = true; continue; }
       if (src[i] === ']' && inClass) { inClass = false; continue; }
       if (src[i] === '/' && !inClass) {
+        // A second slash is a line comment, not a regex terminator. Treat the
+        // ambiguous literal as unclosed so a declaration cannot be located
+        // through a closing bracket hidden in the rest of the comment.
+        if (src[i + 1] === '/') return -1;
         while (/[A-Za-z]/.test(src[i + 1] || '')) i += 1;
         return i;
       }
@@ -124,6 +128,42 @@ export function matchingDelimiter(src, openIdx) {
 }
 
 /**
+ * Mask comments and string/template literals without changing offsets.
+ * Declaration matching is lexical: a phrase that looks like
+ * `export const IDS = [` inside either surface is not a declaration.
+ */
+function maskNonCode(src) {
+  const out = Array.from(src, (ch) => (ch === '\n' || ch === '\r' ? ch : ' '));
+  let quote = null;
+  for (let i = 0; i < src.length; i += 1) {
+    const ch = src[i];
+    if (quote !== null) {
+      if (ch === '\\') { i += 1; continue; }
+      if (ch === quote) quote = null;
+      continue;
+    }
+    if (ch === '/' && src[i + 1] === '/') {
+      i += 2;
+      while (i < src.length && src[i] !== '\n') i += 1;
+      i -= 1;
+      continue;
+    }
+    if (ch === '/' && src[i + 1] === '*') {
+      const end = src.indexOf('*/', i + 2);
+      const stop = end === -1 ? src.length : end + 2;
+      i = stop - 1;
+      continue;
+    }
+    if (ch === "'" || ch === '"' || ch === '`') {
+      quote = ch;
+      continue;
+    }
+    out[i] = ch;
+  }
+  return out.join('');
+}
+
+/**
  * La finestra del letterale `<const> <varName> … = [ … ]`, o `null` se il file
  * non lo dichiara COME letterale.
  *
@@ -140,7 +180,7 @@ export function matchingDelimiter(src, openIdx) {
  */
 export function findIdListLiteralSpan(src, varName) {
   const declRx = new RegExp(`(?:export\\s+)?(?:const|let|var)\\s+${escapeRegex(varName)}\\b[^=\\n]*=\\s*\\[`, 'g');
-  const matches = [...src.matchAll(declRx)];
+  const matches = [...maskNonCode(src).matchAll(declRx)];
   if (matches.length === 0) return null;
   if (matches.length !== 1) {
     throw new Error(`array ${varName}: dichiarazione ambigua (${matches.length} letterali trovati)`);
@@ -183,7 +223,9 @@ export function removeFromIdListLiteral(src, varName, id) {
   } else if (new RegExp(`^\\s*${quotedId}\\s*$`).test(body)) {
     newBody = '';
   } else {
-    throw new Error(`array ${varName}: id atteso ${JSON.stringify(id)} non trovato nel letterale`);
+    const error = new Error(`array ${varName}: id atteso ${JSON.stringify(id)} non trovato nel letterale`);
+    error.code = 'ID_LIST_ENTRY_MISSING';
+    throw error;
   }
   return { changed: true, src: before + newBody + after };
 }

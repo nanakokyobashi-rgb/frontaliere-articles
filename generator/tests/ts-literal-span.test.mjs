@@ -148,6 +148,28 @@ test('matchingDelimiter distingue divisione e regex literal', () => {
   assert.ok(out.src.includes('/[\\]]+/.test(value)'));
 });
 
+test('matchingDelimiter va fail-closed se una regex contiene una seconda slash', () => {
+  const src = [
+    'export const IDS: string[] = [',
+    '  /valore // non è una chiusura regex',
+    "  'uno',",
+    '];',
+  ].join('\n');
+  assert.throws(() => findIdListLiteralSpan(src, 'IDS'), /non si chiude/);
+});
+
+test('commenti e stringhe che imitano dichiarazioni non contano come duplicati', () => {
+  const src = [
+    '// export const IDS: string[] = [\'commento\'];',
+    "const fake = 'export const IDS = [\\\"stringa\\\"];';",
+    "export const IDS: string[] = ['vero', 'altro'];",
+    '',
+  ].join('\n');
+  const out = removeFromIdListLiteral(src, 'IDS', 'vero');
+  assert.equal(out.changed, true);
+  assert.match(out.src, /IDS: string\[\] = \['altro'\]/);
+});
+
 test('una dichiarazione duplicata del letterale viene rifiutata', () => {
   const src = [
     'export const IDS: string[] = [\'uno\'];',
@@ -168,10 +190,11 @@ test('un id che ne CONTIENE un altro non viene scambiato per lui', () => {
 
 test('un id assente fa fallire la rimozione, invece di lasciare una rimozione parziale', () => {
   const src = "export const IDS: string[] = ['uno'];\n";
-  assert.throws(
-    () => removeFromIdListLiteral(src, 'IDS', 'mai-esistito'),
-    /id atteso .*mai-esistito.*non trovato/,
-  );
+  assert.throws(() => removeFromIdListLiteral(src, 'IDS', 'mai-esistito'), (error) => {
+    assert.match(error.message, /id atteso .*mai-esistito.*non trovato/);
+    assert.equal(error.code, 'ID_LIST_ENTRY_MISSING');
+    return true;
+  });
 });
 
 test('un elenco DERIVATO non e\' un letterale: nessuna finestra, nessuna riscrittura', () => {
@@ -237,6 +260,11 @@ test('i chiamanti importano la regola invece di ri-scriverla', () => {
     assert.equal(/indexOf\('\];'\)/.test(src), false, `${caller}: cerca ancora la chiusura come primo '];'`);
     assert.equal(/\[\^=\]\*=\\s\*\\\[/.test(src), false, `${caller}: ancora l'ancora per NOME che attraversa i newline`);
   }
+  assert.match(
+    read('scripts/retire-article.mjs'),
+    /error\?\.code !== 'ID_LIST_ENTRY_MISSING'/,
+    'retire-article deve tollerare solo l\'id gia\' assente e rilanciare gli altri errori',
+  );
 });
 
 test('la RIGENERAZIONE grida quando la sezione dichiara il letterale e lo span e\' null', () => {

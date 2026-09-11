@@ -4897,6 +4897,14 @@ function coerceBodyFields(content) {
   }
 }
 
+/** Coerce every locale's bodyN fields before any locale gate reads them. */
+function coerceContentBodyFields(contentByLocale) {
+  if (!contentByLocale || typeof contentByLocale !== 'object') return;
+  for (const localeContent of Object.values(contentByLocale)) {
+    if (localeContent && typeof localeContent === 'object') coerceBodyFields(localeContent);
+  }
+}
+
 // I body deterministici dei produttori secondari hanno una forma diversa da
 // quella prodotta dall'LLM. Le euristiche di troncamento sono utili sul testo
 // LLM, ma su un bollettino strutturato (liste, tabelle, frammenti di dati)
@@ -4922,7 +4930,11 @@ function runArticleFactualityGates({ deterministicBodySections = [], ...params }
       return String(issue.message || '').includes(`[${label}]`);
     });
   });
-  const blocking = issues.filter((issue) => issue.severity === 'critical' || issue.severity === 'major');
+  // Deterministic producers are allowed to emit structured fragments that
+  // look incomplete to the prose heuristics. Only critical factuality issues
+  // are publication-blocking here; ordinary AI output keeps the stricter
+  // critical+major policy in the shared gate itself.
+  const blocking = issues.filter((issue) => issue.severity === 'critical');
   return { ...result, issues, blocking, passed: blocking.length === 0 };
 }
 
@@ -4932,6 +4944,7 @@ function runArticleFactualityGates({ deterministicBodySections = [], ...params }
  * which do not pass through the primary generation loop.
  */
 export function assertArticlePassesFactualityGates(data) {
+  coerceContentBodyFields(data?.content);
   const it = data?.content?.it;
   if (it) {
     const result = runArticleFactualityGates({
@@ -10627,6 +10640,7 @@ function validate(data, opts = {}) {
     err.qualityReject = true;
     throw err;
   }
+  coerceContentBodyFields(data.content);
   const itContent = data.content.it || data.content;
   // Coerce first: `collectBodySections()` intentionally ignores non-string
   // values, but an array/object body must be repaired or rejected, never
