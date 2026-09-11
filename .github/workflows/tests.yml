@@ -709,10 +709,6 @@ jobs:
         run: node scripts/ci/review-gate.mjs
 
       # La Jobs API espone solo la conclusion del review gate, non la ragione
-      - name: Cleanup Firebase credentials for Codex review
-        if: always()
-        run: rm -f -- "$RUNNER_TEMP/codex-firebase-sa.json"
-
       # che lo ha fatto uscire 1. Il processo scrive failure_kind su
       # GITHUB_OUTPUT: questo step trasforma un verdetto esplicito in una
       # conclusione failure e lascia success un errore API/rate-limit o uno
