@@ -46,6 +46,7 @@ import {
   detectWrongLatinLanguage,
   detectWrongLatinLanguageInField,
   isCompactItalianRateTable,
+  RATE_TABLE_DEROGATION_FIELDS,
   latinLanguageMarkerHits,
   vowelFinalWordRatio,
 } from '../scripts/lib/itLanguageCheck.mjs';
@@ -147,7 +148,7 @@ test('#800 — un title italiano adottato da un candidato non-locale resta ok', 
 });
 
 test('#1177 — un excerpt italiano denso di sigle non e\' un falso non-IT', () => {
-  const excerpt = 'Aliquote: AVS/AI/IPG 5,3%, AD/AC 1,1%, LAINF 0,7–1,5%';
+  const excerpt = 'AVS/AI/IPG 5,3%, AD/AC 1,1%, LAINF 0,7-1,5%';
   assert.equal(isCompactItalianRateTable(excerpt), true);
   const verdetto = classifyBody2Payload({
     parsed: {
@@ -180,6 +181,25 @@ test('#1177 — la deroga alle sigle non rende permissivo un excerpt generico', 
   assert.ok(verdetto.missing.some((m) => m.startsWith('excerpt lingua ')));
 });
 
+test('#1238 — una coppia sigla-percentuale non basta per aprire la deroga', () => {
+  const inglese = 'AI 50% GDP 20% markets report annual costs';
+  const ingleseConDueRighe = 'AI 50%; AD 20% markets report annual costs';
+
+  assert.equal(isCompactItalianRateTable(inglese), false);
+  assert.equal(detectWrongLatinLanguageInField(inglese, 'it', 'excerpt')?.lang, 'non-it');
+  assert.equal(isCompactItalianRateTable(ingleseConDueRighe), false);
+});
+
+test('#1238 — la tabella a elenco resta una deroga completa', () => {
+  const elenco = '- AVS/AI/IPG: 5,3%\n- AD/AC: 1,1%\n- LAINF: 0,7-1,5%';
+  const labelSingolare = 'percentuale: AVS 5%; AI 2%';
+  const labelPlurale = 'aliquote: AVS 5%; AI 2%';
+
+  assert.equal(isCompactItalianRateTable(elenco), true);
+  assert.equal(isCompactItalianRateTable(labelSingolare), true);
+  assert.equal(isCompactItalianRateTable(labelPlurale), true);
+});
+
 test('#1220 — la deroga vale sulle stesse stringhe anche per il corpus pubblicato', () => {
   // Il gate di generazione e gli scan del corpus DEVONO dare lo stesso verdetto
   // sullo stesso testo: se l'excerpt-tabella passa in generazione ma lo scan lo
@@ -187,6 +207,7 @@ test('#1220 — la deroga vale sulle stesse stringhe anche per il corpus pubblic
   // successiva, per contenuto che il gate ha gia' dichiarato valido.
   const tabella = 'Aliquote: AVS/AI/IPG 5,3%, AD/AC 1,1%, LAINF 0,7-1,5%';
 
+  assert.equal(isCompactItalianRateTable(tabella), true);
   assert.notEqual(detectWrongLatinLanguage(tabella, 'it'), null, 'il caso non e\' piu\' quello misurato');
   assert.deepEqual(
     wrongLanguageAdoptions(
@@ -196,9 +217,15 @@ test('#1220 — la deroga vale sulle stesse stringhe anche per il corpus pubblic
     ),
     [],
   );
-  // I campi che gli scan del corpus misurano: l'excerpt e le sue due copie SEO,
+  // I campi che gli scan del corpus misurano: l'excerpt e le sue tre copie SEO,
   // che `create-article.mjs` deriva da `it.excerpt`.
-  for (const campo of ['excerpt', 'description', 'ogDescription']) {
+  assert.deepEqual(RATE_TABLE_DEROGATION_FIELDS, [
+    'excerpt',
+    'description',
+    'ogDescription',
+    'twitterDescription',
+  ]);
+  for (const campo of RATE_TABLE_DEROGATION_FIELDS) {
     assert.equal(detectWrongLatinLanguageInField(tabella, 'it', campo), null, `deroga assente su ${campo}`);
   }
   // ...e nessun altro: il title resta giudicato dalla soglia misurata sui titoli.

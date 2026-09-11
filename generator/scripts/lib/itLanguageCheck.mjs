@@ -235,9 +235,10 @@ export function detectWrongLatinLanguage(text, locale = 'it') {
  * Campi meta dove una tabella compatta di aliquote e' contenuto LEGITTIMO, e
  * dove quindi la deroga misurata in #1177 si applica.
  *
- * `excerpt` e' la sorgente; `description` e `ogDescription` ne sono la copia —
- * `create-article.mjs` li deriva da `it.excerpt`, e le stesse stringhe
- * finiscono in `content/seo/`. Derogare sull'excerpt e non su di loro
+ * `excerpt` e' la sorgente; `description`, `ogDescription` e
+ * `twitterDescription` ne sono la copia — `create-article.mjs` li deriva da
+ * `it.excerpt`, e le stesse stringhe finiscono in `content/seo/`. Derogare
+ * sull'excerpt e non su di loro
  * significherebbe accettare l'articolo in generazione e poi vederlo rifiutato
  * dallo scan SEO del corpus pubblicato: rosso su OGNI PR successiva, per un
  * contenuto che il gate ha gia' dichiarato valido.
@@ -246,14 +247,42 @@ export function detectWrongLatinLanguage(text, locale = 'it') {
  * sui titoli, dove non ha falsi positivi, e li' una tabella di aliquote non e'
  * contenuto atteso.
  */
-export const RATE_TABLE_DEROGATION_FIELDS = ['excerpt', 'description', 'ogDescription'];
+export const RATE_TABLE_DEROGATION_FIELDS = [
+  'excerpt',
+  'description',
+  'ogDescription',
+  'twitterDescription',
+];
+
+// Sigle che possono aprire una riga della tabella delle trattenute svizzere.
+// Il prefisso della riga e' intenzionalmente chiuso: un acronimo qualunque
+// (es. `GDP`) non puo' trasformare una frase inglese in una tabella italiana.
+const SWISS_RATE_CODE = '(?:AVS|AI|IPG|AD|AC|LAINF|LAA|LPP)';
+const SWISS_RATE_CODE_GROUP = `${SWISS_RATE_CODE}`
+  + `(?:\\s*/\\s*${SWISS_RATE_CODE}|\\s*\\(\\s*${SWISS_RATE_CODE}\\s*\\))*`;
+const SWISS_RATE_VALUE = `\\d+(?:[.,]\\d+)?`
+  + `(?:\\s*[-–]\\s*\\d+(?:[.,]\\d+)?)?\\s*%`;
+const SWISS_RATE_ROW = `${SWISS_RATE_CODE_GROUP}\\s*(?:[:=]\\s*)?${SWISS_RATE_VALUE}`;
+const SWISS_RATE_HEADING = '(?:aliquot(?:e|a)|contribut(?:i|o)|percentual(?:e|i))';
+const SWISS_RATE_ROW_RE = new RegExp(
+  `(?:^\\s*(?:${SWISS_RATE_HEADING}\\s*:\\s*)?|[,;|\\r\\n]\\s*)`
+    + `(?:[-*•]\\s*)?${SWISS_RATE_ROW}`,
+  'gi',
+);
+const SWISS_RATE_TABLE_RE = new RegExp(
+  `^\\s*(?:${SWISS_RATE_HEADING}\\s*:\\s*)?`
+    + `(?:[-*•]\\s*)?${SWISS_RATE_ROW}`
+    + `(?:\\s*(?:[,;|]|\\r\\n|\\n)\\s*(?:[-*•]\\s*)?${SWISS_RATE_ROW})+`
+    + `\\s*\\.?\\s*$`,
+  'i',
+);
 
 /**
  * `true` se il testo e' una tabella compatta di aliquote e sigle italiana:
- * almeno due percentuali, almeno due acronimi E un'ancora lessicale italiana. La
- * morfologia, tarata sulla prosa, legge questa forma come non-italiana anche
- * quando e' italiana; l'ancoraggio impedisce che la sola forma «tabella»
- * apra la deroga a un testo di un'altra lingua.
+ * almeno due percentuali, almeno due acronimi e almeno due righe complete di
+ * aliquota svizzera. La morfologia, tarata sulla prosa, legge questa forma
+ * come non-italiana anche quando e' italiana; la grammatica chiusa ammette
+ * label e bullet di tabella, ma nessuna prosa residua.
  *
  * @param {string} value
  * @returns {boolean}
@@ -262,8 +291,11 @@ export function isCompactItalianRateTable(value) {
   if (typeof value !== 'string') return false;
   const percentages = value.match(/\b\d+(?:[.,]\d+)?\s*%/g) ?? [];
   const acronyms = value.match(/\b[A-Z]{2,}(?:\/[A-Z]{2,})*\b/g) ?? [];
-  const hasItalianAnchor = /\b(?:aliquota|aliquote|contributo|contributi|percentuale|percentuali)\b/i.test(value);
-  return percentages.length >= 2 && acronyms.length >= 2 && hasItalianAnchor;
+  const hasSwissRateCluster = (value.match(SWISS_RATE_ROW_RE) ?? []).length >= 2;
+  return percentages.length >= 2
+    && acronyms.length >= 2
+    && hasSwissRateCluster
+    && SWISS_RATE_TABLE_RE.test(value);
 }
 
 /**

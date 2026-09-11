@@ -108,7 +108,10 @@ jobs:
           cat "$REPORT_LOG"
 
           ISSUE_REPORTED=false
-          if grep -Eq '\[github-issue-creator\] (Created:|Commented on existing|Recorded transient failure|Reopened #)' "$REPORT_LOG"; then
+          # Il verificatore scrive questa prova strutturata solo dopo un ritorno
+          # `persisted: true` dal creator: il log resta diagnostica, non un
+          # protocollo fra due moduli indipendenti.
+          if grep -Fxq 'issue_reported=true' "$GITHUB_OUTPUT"; then
             ISSUE_REPORTED=true
           fi
           echo "issue_reported=$ISSUE_REPORTED" >> "$GITHUB_OUTPUT"
