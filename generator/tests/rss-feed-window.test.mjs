@@ -10,6 +10,7 @@ import {
 } from '../../engine/rssFeeds.mjs';
 import {
   collectSeoEntryIds,
+  collectSeoEntryMetadata,
 } from '../../scripts/lib/corpus-floors.mjs';
 
 const LATEST_ID = 'uss-stipendi-minimo-2027';
@@ -52,6 +53,11 @@ test('usa il successore e la fine del sorgente per preservare una coda SEO lunga
     assert.match(feed, new RegExp(LATEST_ID));
     assert.match(feed, /Headline precedente/);
     assert.equal(collectSeoEntryIds(source).size, 2);
+    assert.equal(
+      collectSeoEntryMetadata(source).get(LATEST_ID)?.datePublished,
+      '2026-09-10T10:00:00+00:00',
+      'the floor must read fields after the former fixed window as well',
+    );
   } finally {
     fs.rmSync(root, { recursive: true, force: true });
   }
