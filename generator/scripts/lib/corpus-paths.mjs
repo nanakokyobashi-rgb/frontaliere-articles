@@ -19,8 +19,8 @@
  * silently no-ops when the pathspec IS a file symlink whose target changed, so
  * main needs a `realpath` pass before every `git add`.
  *
- * This repository has no symlinks at all (verified: `find . -type l` is empty)
- * — `content/` IS the real tree. Porting the symlink resolver would have been
+ * The published `content/` tree has no symlinks (verified: `find content -type l`
+ * is empty) — it IS the real tree. Porting the symlink resolver would have been
  * porting a workaround for a problem that does not exist here, and worse, its
  * `realpathSync` fallback would silently rewrite paths for reasons that no
  * longer apply. So the git-add helpers below are the same API with the symlink
@@ -94,12 +94,17 @@ export function corpusPath(rel) {
     }
   }
 
-  // `services/` is the generator's main-layout namespace. Returning an
+  // These are the generator's main-layout source namespaces. Returning an
   // unknown path unchanged would let a future writer create a second tree at
-  // the corpus root while all its existence checks still inspect `content/`.
-  // State under `data/`, `public/` and `scripts/` deliberately remains
-  // pass-through; only this source namespace is fail-closed.
-  if (bare === 'services' || bare.startsWith('services/')) {
+  // the repository root while all its existence checks still inspect
+  // `content/`. State under `data/`, `public/` and `scripts/` deliberately
+  // remains pass-through; source namespaces are fail-closed.
+  if (
+    bare === 'services' ||
+    bare.startsWith('services/') ||
+    bare === 'packages/articles' ||
+    bare.startsWith('packages/articles/')
+  ) {
     throw new Error(`corpusPath: path main non mappato: ${rel}`);
   }
 
