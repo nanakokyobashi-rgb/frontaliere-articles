@@ -434,10 +434,14 @@ const MODULE_LOAD_ERROR =
   /ERR_MODULE_NOT_FOUND|ERR_UNSUPPORTED_DIR_IMPORT|ERR_UNKNOWN_FILE_EXTENSION|ERR_REQUIRE_ESM|Cannot find (?:module|package)|does not provide an export named/;
 const LOAD_TIME_SYNTAX_ERROR =
   /\bat (?:compileSourceTextModule|ModuleLoader\.(?:moduleStrategy|loadAndTranslate)|internalCompileFunction)\b/;
+const LOAD_TIME_MODULE_CONTEXT =
+  /Require stack:|imported from\b|The requested module\b|(?:Error|[A-Z][A-Za-z]*Error) \[ERR_(?:MODULE_NOT_FOUND|UNSUPPORTED_DIR_IMPORT|UNKNOWN_FILE_EXTENSION|REQUIRE_ESM)\]/;
+const LOAD_TIME_INSTANTIATE_FRAME =
+  /\bat (?:#asyncInstantiate|ModuleJob\._instantiate)\b/;
 const GATE_VERDICT =
   /(?:^|\n)(?:is_followup_fix|followup_partial|has_candidates)=(?:true|false)(?:\n|$)/;
 const ERROR_DETAIL_LINE =
-  /^\s*(?:[A-Za-z_$][\w$]*\.)?(?:Error|[A-Z][A-Za-z]*Error)(?:\s+\[[^\]]+\])?:\s*/;
+  /^\s*(?:Uncaught\s+)?(?:[A-Za-z_$][\w$]*\.)?(?:Error|[A-Z][A-Za-z]*Error)(?:\s+\[[^\]]+\])?:\s*/;
 
 function firstNonEmptyLine(text) {
   return String(text || '').split('\n').find((line) => line.trim()) || '';
@@ -447,11 +451,26 @@ function firstMatchingLine(text, predicate) {
   return String(text || '').split('\n').find((line) => predicate(line)) || '';
 }
 
+function firstErrorLineBeforeNodeFrame(text) {
+  const lines = String(text || '').split('\n');
+  const firstFrame = lines.findIndex((line) => /^\s*at\s+/.test(line));
+  const prelude = firstFrame >= 0 ? lines.slice(0, firstFrame) : lines;
+  return prelude.find((line) => ERROR_DETAIL_LINE.test(line)) || '';
+}
+
 function isModuleLoadError(stderr, gatePath) {
-  if (MODULE_LOAD_ERROR.test(stderr)) return true;
+  const text = String(stderr || '');
+  if (!text || !MODULE_LOAD_ERROR.test(text)) return false;
   const gateName = path.basename(gatePath);
-  const namesGate = stderr.includes(gatePath) || stderr.includes(gateName);
-  return namesGate && LOAD_TIME_SYNTAX_ERROR.test(stderr);
+  const namesGate = text.includes(gatePath) || text.includes(gateName);
+  // This predicate deliberately receives stderr only. A runtime Error.message
+  // can repeat a module-looking phrase, but Node's load diagnostics carry an
+  // explicit module context (or the compile-time stack for a syntax failure).
+  return namesGate && (
+    LOAD_TIME_SYNTAX_ERROR.test(text) ||
+    /Require stack:|imported from\b/.test(text) ||
+    (LOAD_TIME_MODULE_CONTEXT.test(text) && LOAD_TIME_INSTANTIATE_FRAME.test(text))
+  );
 }
 
 function recordGateFault(gate, kind, detail) {
@@ -553,20 +572,22 @@ function runGateOutput(scriptName, prNumber) {
 
     const stderr = String(error?.stderr || '');
     // On some Node versions execFileSync puts the captured diagnostic only in
-    // error.message. Search both surfaces so the annotation keeps the actual
-    // Error: line instead of the first file header.
+    // error.message. Search both surfaces for the detail, but classify module
+    // loading from stderr alone: a runtime SyntaxError/message must not become
+    // a false MODULE_LOAD_ERROR.
     const diagnostic = [stderr, String(error?.message || '')].filter(Boolean).join('\n');
-    if (isModuleLoadError(diagnostic, gatePath)) {
+    if (isModuleLoadError(stderr, gatePath)) {
       const line = (
-        firstMatchingLine(diagnostic, (candidate) => MODULE_LOAD_ERROR.test(candidate)) ||
-        firstMatchingLine(diagnostic, (candidate) => ERROR_DETAIL_LINE.test(candidate)) ||
-        firstNonEmptyLine(diagnostic)
+        firstErrorLineBeforeNodeFrame(diagnostic) ||
+        firstMatchingLine(stderr, (candidate) => MODULE_LOAD_ERROR.test(candidate)) ||
+        firstNonEmptyLine(stderr || diagnostic)
       );
       recordGateFault(scriptName, 'non caricabile', line.trim().slice(0, 200));
     } else {
       const detail = (
-        firstMatchingLine(diagnostic, (line) => ERROR_DETAIL_LINE.test(line)) ||
-        firstNonEmptyLine(diagnostic) ||
+        firstErrorLineBeforeNodeFrame(diagnostic) ||
+        firstNonEmptyLine(stderr) ||
+        firstNonEmptyLine(String(error?.message || '')) ||
         error?.message ||
         `uscita non-zero (${error?.status ?? error?.code ?? 'sconosciuta'})`
       ).trim().slice(0, 200);

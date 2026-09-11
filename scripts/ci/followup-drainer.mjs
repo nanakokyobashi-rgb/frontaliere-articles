@@ -1576,10 +1576,13 @@ function autoTitleGroupingKey(issue, repository = '') {
   const prefix = normalizeGroupingText(title.slice(0, AUTO_TITLE_PREFIX_LENGTH));
   if (!prefix) return null;
   const targetPaths = actionTargetPaths(body);
-  // La firma del monitor è sufficiente quando non dichiara un sottosistema;
-  // quando invece dichiara più target non si può provare un punto comune.
+  // Quando il marker automatico dichiara più target non si può provare un
+  // punto comune. Se dichiara un marker noto ma non produce una scope leggibile,
+  // rifiuta la chiave: il prefisso del titolo non è una prova di correlazione.
   if (targetPaths.length > 1) return null;
-  const scope = targetPaths[0] || autoBodyScope(body) || prefix;
+  const bodyScope = autoBodyScope(body);
+  if (!targetPaths.length && !bodyScope) return null;
+  const scope = targetPaths[0] || bodyScope;
   return `auto-title:${repositoryScope(issue, repository)}:${prefix}:scope:${normalizeGroupingText(scope)}`;
 }
 
@@ -2432,7 +2435,7 @@ export function isIssueGroupable(issue, {
   const body = String(issue?.body || '');
   if (!issueGroupingKey(issue, { repository })) return false;
   if (isFixerExempt(names(issue))) return false;
-  if (has(issue, LBL_FIX) || has(issue, LBL_PARKED) || has(issue, 'needs-human')) return false;
+  if (has(issue, LBL_FIX) || has(issue, LBL_PARKED) || has(issue, 'needs-human') || has(issue, LBL_PROOF)) return false;
   if (isDecomposedParent(issue) || has(issue, LBL_DECOMP_QUEUED) || has(issue, LBL_DECOMP)) return false;
   if (detectCompressContractDocsRatchet(title) || detectMalformedBody(title, body)) return false;
   if (detectEpicTracker(title, body) || detectBacklogTracker(title, body)) return false;
@@ -2490,20 +2493,59 @@ function editChecked(num, { add = [], remove = [] }) {
   }
 }
 
-function groupDigestFromLabel(label) {
-  const rest = String(label || '').slice(ISSUE_GROUP_LABEL_PREFIX.length);
-  return /^([0-9a-f]{12})-\d+$/.exec(rest)?.[1] || null;
+function groupLabelInfo(label) {
+  const value = String(label || '');
+  if (!ISSUE_GROUP_LABEL_RE.test(value)) return null;
+  const rest = value.slice(ISSUE_GROUP_LABEL_PREFIX.length);
+  const match = /^([0-9a-f]{12})-(\d+)$/.exec(rest);
+  if (!match) return null;
+  const leaderNumber = Number(match[2]);
+  return Number.isSafeInteger(leaderNumber) && leaderNumber > 0
+    ? { digest: match[1], leaderNumber }
+    : null;
 }
 
-function activeGroupDigests(issues) {
+function groupDigestFromLabel(label) {
+  return groupLabelInfo(label)?.digest || null;
+}
+
+/** Tutte le label di istanza, incluse quelle ormai stantie/non valide. */
+export function issueGroupInstanceLabels(issue) {
+  return names(issue).filter((name) => name.startsWith(ISSUE_GROUP_LABEL_PREFIX));
+}
+
+/**
+ * Digest dei gruppi che non possono essere riformati in questo tick.
+ *
+ * Un leader ancora in `agent:fix` tiene il gruppo in assestamento anche prima
+ * che GitHub mostri la PR. Dopo la rimozione di quella label, invece, la
+ * protezione sopravvive solo se esiste la PR del leader (`fix/issue-N`) aperta:
+ * le label rimaste sui membri in coda da sole non sono prova di lavoro in volo.
+ * `openPrs === null` rappresenta una scansione fallita e il chiamante blocca il
+ * grouping per non trasformare un glitch API in una seconda PR.
+ */
+export function activeGroupDigests(issues, openPrs = []) {
+  const openBranches = new Set(
+    (Array.isArray(openPrs) ? openPrs : [])
+      .map((pr) => pr?.headRefName ?? pr?.head?.ref)
+      .filter((ref) => typeof ref === 'string'),
+  );
   const digests = new Set();
   for (const issue of issues || []) {
-    for (const label of names(issue).filter((n) => ISSUE_GROUP_LABEL_RE.test(n))) {
-      const digest = groupDigestFromLabel(label);
-      if (digest) digests.add(digest);
+    for (const label of issueGroupInstanceLabels(issue)) {
+      const info = groupLabelInfo(label);
+      if (!info) continue;
+      const leaderRunActive = has(issue, LBL_FIX);
+      const leaderPrActive = openBranches.has(`fix/issue-${info.leaderNumber}`);
+      if (leaderRunActive || leaderPrActive) digests.add(info.digest);
     }
   }
   return digests;
+}
+
+function clearIssueGroupLabels(issue) {
+  const labels = issueGroupInstanceLabels(issue);
+  return labels.length === 0 || editChecked(issue.number, { remove: labels });
 }
 
 /** Applica il marker di istanza a tutti i membri prima di armare il leader. */
@@ -2513,8 +2555,7 @@ function prepareIssueGroup(group) {
   if (!label || !Array.isArray(group?.issues) || group.issues.length < 2) return null;
   ensureLabel(label, '5319e7', `Gruppo issue B19: chiave condivisa, massimo ${ISSUE_GROUP_MAX_SIZE} issue nella PR`);
   for (const issue of group.issues) {
-    const stale = names(issue)
-      .filter((name) => name.startsWith(ISSUE_GROUP_LABEL_PREFIX) && name !== label);
+    const stale = issueGroupInstanceLabels(issue).filter((name) => name !== label);
     if (!editChecked(issue.number, { add: [label], remove: stale })) return null;
   }
   return label;
@@ -2912,6 +2953,21 @@ function latestFixOutcome(num) {
 /** Beacon di quota sulla issue (epoch di reset), o null. Best-effort. */
 function quotaResetsAt(num) {
   return maxQuotaResetsAt(issueComments(num) || []);
+}
+
+/**
+ * Scansione completa delle PR aperte usata dal mutex dei gruppi B19. La label
+ * di istanza resta sui membri dopo la fine del run del leader; il ref della PR
+ * aperta è la prova persistente che quel digest è ancora in lavorazione.
+ * `null` è un errore di scansione, distinto dalla lista vuota.
+ */
+function loadOpenGroupPrs() {
+  try {
+    const raw = gh(['api', `repos/${REPO}/pulls?state=open&per_page=100`, '--paginate', '--slurp']);
+    return flattenPaginatedOpenPrs(raw);
+  } catch {
+    return null;
+  }
 }
 
 /**
@@ -3772,6 +3828,10 @@ export function runDrain() {
     if (rescueGate.action === 'skip') continue; // ha PR → run completata con successo
     if (rescueGate.action === 'settling') { settlingPromotions++; continue; } // registrazione run
     if (rescueGate.action === 'wait') continue; // fix finito senza PR ma non ancora orfano
+    if (!clearIssueGroupLabels(iss)) {
+      console.log(`::warning::RESCUE-SKIP #${iss.number}: impossibile rimuovere le label di istanza B19 prima della riparazione`);
+      continue;
+    }
     // vecchio + nessuna PR → orfano. Ma «nessuna PR» ha due cause diverse:
     // (a) run morta/crashata (nessun verdetto) → ri-tentabile; (b) ABORT pulita
     // del fixer con verdetto deterministico-non-ri-tentabile (no-root-cause,
@@ -3943,6 +4003,10 @@ export function runDrain() {
     if (d.action === 'settling') { settlingPromotions++; continue; }
     if (d.action === 'hold-quota') {
       console.log(`HOLD CRAWLER ${tag} (${d.reason}) → resta agent:fix come beacon, nessun tentativo consumato`);
+      continue;
+    }
+    if (!clearIssueGroupLabels(iss)) {
+      console.log(`::warning::RESCUE-SKIP #${iss.number}: impossibile rimuovere le label di istanza B19 prima della riparazione crawler`);
       continue;
     }
     if (d.action === 'requeue-delivered') {
@@ -4132,11 +4196,18 @@ export function runDrain() {
   // gruppo non sostituisce i pre-flight del drain; li anticipa solo per evitare
   // di mescolare un candidato non lavorabile con membri sani.
   const queuedNumbers = new Set(queued.map((i) => Number(i.number)));
-  const activeGroupDigestsSet = activeGroupDigests(allFix);
   const groupsByMember = new Map();
   const groupStates = new Map();
   const queuedWithBodies = listIssuesWithBodies(LBL_QUEUED);
-  if (queuedWithBodies !== null) {
+  const groupIssues = [
+    ...allFix,
+    ...pool,
+    ...(queuedWithBodies || []),
+  ];
+  const openGroupPrs = loadOpenGroupPrs();
+  const groupScanAvailable = openGroupPrs !== null;
+  const activeGroupDigestsSet = activeGroupDigests(groupIssues, openGroupPrs);
+  if (queuedWithBodies !== null && groupScanAvailable) {
     const groupable = queuedWithBodies
       .filter((i) => queuedNumbers.has(Number(i.number)))
       // A daily bucket is already an aggregate with its own one-item circuit
@@ -4154,7 +4225,7 @@ export function runDrain() {
       const digest = issueGroupDigest(group.key);
       if (digest && activeGroupDigestsSet.has(digest)) {
         active++;
-        console.log(`GROUP-SKIP ${digest}: gruppo già armato in agent:fix, membri lasciati in coda fino all'esito della PR.`);
+        console.log(`GROUP-SKIP ${digest}: gruppo già armato da agent:fix o dalla PR aperta del leader, membri lasciati in coda.`);
         continue;
       }
 
@@ -4187,6 +4258,8 @@ export function runDrain() {
     if (planned || active) {
       console.log(`issue grouping: ${planned} gruppo/i pianificato/i (2–${ISSUE_GROUP_MAX_SIZE} issue, chiave certa); ${active} già attivo/i.`);
     }
+  } else if (queuedWithBodies !== null) {
+    console.log('issue grouping: scansione delle PR aperte non disponibile → nessun nuovo gruppo B19 in questo tick.');
   }
 
   // Quante promozioni sono gia' state fatte in questo tick, e il tetto.
@@ -4204,10 +4277,14 @@ export function runDrain() {
   // body serve solo per i candidati realmente considerati → fetch lazy, 1 alla volta.
   for (const cand of queued) {
     const plannedGroup = groupsByMember.get(Number(cand.number));
-    const candidateGroupDigests = names(cand)
-      .filter((name) => name.startsWith(ISSUE_GROUP_LABEL_PREFIX))
+    const candidateGroupLabels = issueGroupInstanceLabels(cand);
+    const candidateGroupDigests = candidateGroupLabels
       .map(groupDigestFromLabel)
       .filter(Boolean);
+    if (!groupScanAvailable && candidateGroupLabels.length) {
+      console.log(`GROUP-SKIP #${cand.number}: scansione delle PR aperte non disponibile, membro B19 non promosso singolarmente.`);
+      continue;
+    }
     if (candidateGroupDigests.some((digest) => activeGroupDigestsSet.has(digest))) {
       console.log(`GROUP-SKIP #${cand.number}: membro di un gruppo già armato → nessuna promozione singola.`);
       continue;

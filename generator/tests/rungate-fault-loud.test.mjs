@@ -163,6 +163,18 @@ test('SyntaxError runtime: esecuzione fallita, non modulo non caricabile', () =>
   assert.match(stdout, /batch_prs=4242/);
 });
 
+test('SyntaxError runtime con testo module-like: MODULE_LOAD_ERROR resta limitato al load-time', () => {
+  const { stdout } = runInSandbox({
+    'is-followup-fix-pr.mjs':
+      "throw new SyntaxError('The requested module runtime does not provide an export named runtime');\n",
+    'followup-has-candidates.mjs': "console.log('has_candidates=true');\n",
+  });
+
+  assert.match(stdout, /::error title=Gate del follow-up non eseguibile::is-followup-fix-pr\.mjs/);
+  assert.doesNotMatch(stdout, /::error title=Gate del follow-up non caricabile::is-followup-fix-pr\.mjs/);
+  assert.match(stdout, /SyntaxError: The requested module runtime does not provide an export named runtime/);
+});
+
 test('il dettaglio preferisce la riga Error alla cornice interna di Node', () => {
   const { stdout } = runInSandbox({
     'is-followup-fix-pr.mjs': "throw new Error('causa reale del gate');\n",
