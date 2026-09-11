@@ -26,7 +26,7 @@ const failOnWrite = args.includes('--fail-on-write');
 const title = get('--title');
 
 if (!title) {
-  console.error('Usage: node publish-needs-human-digest.mjs --fail-on-write --title "..." [--description "..."] [--priority N] [--label LABEL] [--workflow "..."]');
+  console.error('Usage: node publish-needs-human-digest.mjs --fail-on-write --title "..."');
   process.exit(1);
 }
 
