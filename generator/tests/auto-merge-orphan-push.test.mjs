@@ -100,7 +100,7 @@ exit 1
     DEFAULT_BRANCH: 'main',
     HEAD_REF: 'feature/reused',
     SHA: 'push-sha',
-    PUSHED_AT: '2026-09-11T06:00:00Z',
+    RUN_STARTED_AT: '2026-09-11T06:00:00Z',
     ORPHAN_TEST_COMMENT_FILE: commentFile,
     ORPHAN_TEST_DEFAULT_BRANCH: 'main',
     ORPHAN_TEST_MERGE_OID: scenario.mergeOid || 'merge-oid',
@@ -219,7 +219,9 @@ test('(e) seleziona anche una PR chiusa senza merge e controlla le containment p
   assert.match(job, /CONTAINMENT.*\n[\s\S]*\[ \"\$CONTAINMENT\" = "ahead" \]/);
   assert.match(job, /TARGET='\{\}'/);
   assert.doesNotMatch(job, /\$\{TARGET:-\{\}\}/);
-  assert.match(job, /PUSHED_AT/);
+  assert.match(job, /RUN_STARTED_AT/);
+  assert.match(job, /github\.run_started_at/);
+  assert.doesNotMatch(job, /github\.event\.head_commit\.timestamp/);
   assert.match(job, /REALLY ORPHAN/);
   assert.match(job, /CLOSED WITHOUT MERGE/);
   assert.match(job, /classificazione sospesa/);
@@ -284,7 +286,7 @@ test('(g) il verdetto osservabile distingue merged contenuto, closed-unmerged, s
   assert.match(secondRound.stdout, /Secondo giro: PR #44/);
   assert.equal(secondRound.comment, '', 'il secondo giro sulla stessa head non deve commentare la PR precedente');
 
-  const dedup = runWorkflow({
+  const preMergeSquash = runWorkflow({
     ORPHAN_TEST_TARGET: JSON.stringify({
       number: 45,
       createdAt: '2026-09-11T04:00:00Z',
@@ -293,7 +295,27 @@ test('(g) il verdetto osservabile distingue merged contenuto, closed-unmerged, s
       headRefOid: 'head-oid',
       mergeCommit: { oid: 'merge-oid' },
     }),
-    PUSHED_AT: '2026-09-11T06:06:00Z',
+    RUN_STARTED_AT: '2026-09-11T06:04:00Z',
+    ORPHAN_TEST_MERGE_STATUS: 'diverged',
+    ORPHAN_TEST_HEAD_STATUS: 'ahead',
+  });
+  assert.equal(preMergeSquash.status, 0);
+  assert.match(preMergeSquash.stdout, /head storica head-oid/);
+  assert.equal(preMergeSquash.comment, '', 'un push pre-merge contenuto nella head storica non deve commentare');
+
+  // Il commit e' stato creato prima del merge, ma il push/run e' arrivato
+  // dopo: il timestamp del commit non deve piu' sopprimere l'unico warning.
+  const dedup = runWorkflow({
+    ORPHAN_TEST_TARGET: JSON.stringify({
+      number: 46,
+      createdAt: '2026-09-11T04:00:00Z',
+      closedAt: '2026-09-11T06:05:00Z',
+      mergedAt: '2026-09-11T06:05:00Z',
+      headRefOid: 'head-oid',
+      mergeCommit: { oid: 'merge-oid' },
+    }),
+    ORPHAN_TEST_COMMIT_TIMESTAMP: '2026-09-11T06:00:00Z',
+    RUN_STARTED_AT: '2026-09-11T06:06:00Z',
     ORPHAN_TEST_HEAD_STATUS: 'ahead',
     ORPHAN_TEST_COMMENTS: '<!-- orphan-push-warn -->',
   });

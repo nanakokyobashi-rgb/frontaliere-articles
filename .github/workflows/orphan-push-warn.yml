@@ -45,7 +45,10 @@ jobs:
           DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
           HEAD_REF: ${{ github.ref_name }}
           SHA: ${{ github.sha }}
-          PUSHED_AT: ${{ github.event.head_commit.timestamp }}
+          # `run_started_at` e' metadato server-side della run attivata dal
+          # push. Non usare `head_commit.timestamp`: descrive il commit e puo'
+          # precedere di molto il momento in cui il commit e' stato pushato.
+          RUN_STARTED_AT: ${{ github.run_started_at }}
         run: |
           set -uo pipefail
           # Niente `set -e`: un gh che fallisce non deve rendere rosso il push.
@@ -162,10 +165,14 @@ jobs:
               exit 0
             fi
             if [ "$CONTAINMENT" = "ahead" ] || [ "$CONTAINMENT" = "identical" ]; then
-              if [ -z "${PUSHED_AT:-}" ]; then
-                echo "::warning::Timestamp del push non verificabile per il confronto con la head ${HEAD_OID} — nessun commento aggiunto."
+              if [ -z "${RUN_STARTED_AT:-}" ]; then
+                echo "::warning::Timestamp server-side della run non verificabile per il confronto con la head ${HEAD_OID} — nessun commento aggiunto."
                 exit 0
               fi
+              # La run e' attivata dal push: se e' iniziata prima della
+              # chiusura/merge, il push non puo' essere post-merge. Una coda
+              # GitHub lenta puo' produrre un warning in piu' per un push
+              # pre-merge, ma non puo' piu' sopprimere in silenzio un orfano.
               # GNU date e BSD date espongono parser diversi; il runner GitHub
               # usa GNU, ma il fallback mantiene il test dello script
               # deterministico anche su macOS.
@@ -174,13 +181,13 @@ jobs:
                   || date -u -j -f '%Y-%m-%dT%H:%M:%SZ' "$1" +%s 2>/dev/null \
                   || true
               }
-              PUSHED_EPOCH=$(parse_epoch "$PUSHED_AT")
+              RUN_STARTED_EPOCH=$(parse_epoch "$RUN_STARTED_AT")
               MERGED_EPOCH=$(parse_epoch "$MERGED_AT")
-              if [ -z "${PUSHED_EPOCH:-}" ] || [ -z "${MERGED_EPOCH:-}" ]; then
-                echo "::warning::Timestamp non parseabile per il confronto con la head ${HEAD_OID} — nessun commento aggiunto."
+              if [ -z "${RUN_STARTED_EPOCH:-}" ] || [ -z "${MERGED_EPOCH:-}" ]; then
+                echo "::warning::Timestamp server-side non parseabile per il confronto con la head ${HEAD_OID} — nessun commento aggiunto."
                 exit 0
               fi
-              if [ "$PUSHED_EPOCH" -le "$MERGED_EPOCH" ]; then
+              if [ "$RUN_STARTED_EPOCH" -le "$MERGED_EPOCH" ]; then
                 echo "Commit $SHA gia' contenuto nella head storica $HEAD_OID della PR #$PR_NUMBER — nessun push orfano."
                 exit 0
               fi
