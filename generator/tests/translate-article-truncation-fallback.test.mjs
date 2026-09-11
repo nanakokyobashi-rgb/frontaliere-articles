@@ -85,7 +85,7 @@ const LOOP_SRC = extractTruncationRetryLoop();
  * `!itValue?.trim()` (#691).
  */
 function extractMissingFieldLoop() {
-  const marker = '`${locale}:${field}-missing-retry`,';
+  const marker = '`${locale}:${recoveryField}-missing-retry`,';
   const m = src.indexOf(marker);
   assert.notEqual(m, -1, 'marker non trovato — aggiornare questo test');
   const startAnchor = "for (const locale of ['en', 'de', 'fr']) {";
@@ -498,20 +498,58 @@ test('ramo missing-field: faq.q e faq.a rifiutati ottengono il retry anche se il
   };
   const itContent = { ...META_PLAUSIBILI, faq: [{ ...faqIt }] };
   const report = createFreeMtRecoveryReport();
-  recordFreeMtUnusableOutput(report, { reason: 'unusable-text', targetLang: 'en', field: 'faq.q' });
-  recordFreeMtUnusableOutput(report, { reason: 'unusable-text', targetLang: 'en', field: 'faq.a' });
+  recordFreeMtUnusableOutput(report, { reason: 'unusable-text', targetLang: 'en', field: 'faq.q[0]' });
+  recordFreeMtUnusableOutput(report, { reason: 'unusable-text', targetLang: 'en', field: 'faq.a[0]' });
   const calls = [];
   const callWithRetry = async (_prompt, _tokens, label) => {
     calls.push(label);
-    const part = label.includes('faq.q') ? 'q' : 'a';
+    const part = label.includes('.q[') ? 'q' : 'a';
     return { faq: [{ [part]: part === 'q' ? 'Question in English.' : 'Answer in English.' }] };
   };
 
   await runMissingFieldLoop({ data, itContent, callWithRetry, translationReport: report });
 
-  assert.deepEqual(calls, ['en:faq.q-missing-retry', 'en:faq.a-missing-retry']);
+  assert.deepEqual(calls, ['en:faq.q[0]-missing-retry', 'en:faq.a[0]-missing-retry']);
   assert.equal(data.content.en.faq[0].q, 'Question in English.');
   assert.equal(data.content.en.faq[0].a, 'Answer in English.');
+});
+
+test("recovery FAQ indicizzata: un rifiuto non contagia le coppie gia' usabili", async () => {
+  const faqIt = [
+    { q: 'Prima domanda italiana abbastanza lunga per il test.', a: 'Prima risposta italiana abbastanza lunga per il test.' },
+    { q: 'Seconda domanda italiana abbastanza lunga per il test.', a: 'Seconda risposta italiana abbastanza lunga per il test.' },
+  ];
+  const data = {
+    content: {
+      en: {
+        ...META_PLAUSIBILI,
+        faq: [
+          { q: '', a: '' },
+          { q: 'Second English question remains usable.', a: 'Second English answer remains usable.' },
+        ],
+      },
+      de: { ...META_PLAUSIBILI, faq: faqIt.map((item) => ({ ...item })) },
+      fr: { ...META_PLAUSIBILI, faq: faqIt.map((item) => ({ ...item })) },
+    },
+  };
+  const itContent = { ...META_PLAUSIBILI, faq: faqIt };
+  const report = createFreeMtRecoveryReport();
+  recordFreeMtUnusableOutput(report, { reason: 'unusable-text', targetLang: 'en', field: 'faq.q[0]' });
+  recordFreeMtUnusableOutput(report, { reason: 'unusable-text', targetLang: 'en', field: 'faq.a[0]' });
+  const calls = [];
+  const callWithRetry = async (_prompt, _tokens, label) => {
+    calls.push(label);
+    const part = label.includes('.q[') ? 'q' : 'a';
+    return { faq: [{ [part]: part === 'q' ? 'First English question.' : 'First English answer.' }] };
+  };
+
+  await runMissingFieldLoop({ data, itContent, callWithRetry, translationReport: report });
+
+  assert.deepEqual(calls, ['en:faq.q[0]-missing-retry', 'en:faq.a[0]-missing-retry']);
+  assert.deepEqual(data.content.en.faq[1], {
+    q: 'Second English question remains usable.',
+    a: 'Second English answer remains usable.',
+  });
 });
 
 test('il report di recovery si resetta per articolo e separa gli addebiti del cap', () => {

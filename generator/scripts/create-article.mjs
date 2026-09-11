@@ -9892,9 +9892,9 @@ async function translateContentFreeMt(sourceLang, targetLang, targetLabel, sourc
   let faq;
   if (Array.isArray(sourceContent.faq) && sourceContent.faq.length > 0) {
     try {
-      faq = await Promise.all(sourceContent.faq.map(async (item) => {
-        const q = await freeMtField(item?.q, sourceLang, targetLang, 'title', 'faq.q');
-        const a = await freeMtField(item?.a, sourceLang, targetLang, 'description', 'faq.a');
+      faq = await Promise.all(sourceContent.faq.map(async (item, faqIndex) => {
+        const q = await freeMtField(item?.q, sourceLang, targetLang, 'title', `faq.q[${faqIndex}]`);
+        const a = await freeMtField(item?.a, sourceLang, targetLang, 'description', `faq.a[${faqIndex}]`);
         // Lasciare vuoto un campo rifiutato è intenzionale: il loop
         // missing-field deve vedere il buco e pagare, se ammesso, un retry LLM
         // mirato invece di pubblicare in silenzio la domanda/risposta italiana
@@ -10248,14 +10248,15 @@ ${terminologyByLang[targetLang] || ''}`;
         .sort((a, b) => Number(a.slice(4)) - Number(b.slice(4))),
       ...(Array.isArray(itContent?.faq) && itContent.faq.length > 0 ? ['faq.q', 'faq.a'] : []),
     ]) {
-      // FAQ q/a sono campi ripetuti: la chiave di recovery resta `faq.q` /
-      // `faq.a`, mentre l'indice serve a leggere e scrivere l'elemento giusto
-      // dell'array senza far pagare una sola FAQ per tutte le altre.
+      // FAQ q/a sono campi ripetuti: la chiave di recovery comprende l'indice
+      // (`faq.q[0]`, `faq.q[1]`, ...), così il rifiuto di una coppia non fa
+      // rientrare nel loop le FAQ già tradotte e usabili.
       const faqIndexes = field.startsWith('faq.')
         ? itContent.faq.map((_, index) => index)
         : [null];
       for (const faqIndex of faqIndexes) {
         const faqPart = field.startsWith('faq.') ? field.slice(4) : null;
+        const recoveryField = faqPart ? `${field}[${faqIndex}]` : field;
         const readField = (content) => faqPart
           ? content?.faq?.[faqIndex]?.[faqPart]
           : content?.[field];
@@ -10305,7 +10306,7 @@ ${terminologyByLang[targetLang] || ''}`;
       const traduzioneUsabile = hasUsableTranslatedText(valoreTradotto, locale);
       const floorMiss = traduzioneUsabile ? metaFieldPlausibilityMiss(field, valoreTradotto) : null;
       const freeMtRejected = ARTICLE_TRANSLATE_FREE_MT
-        && wasFreeMtUnusable(RUN_REPORT.translation, locale, field);
+        && wasFreeMtUnusable(RUN_REPORT.translation, locale, recoveryField);
       if (traduzioneUsabile && !floorMiss && !freeMtRejected) continue;
       // ULTIMA RISORSA ASIMMETRICA. Un campo implausibile e' comunque prosa
       // NELLA LINGUA GIUSTA: se il retry non produce di meglio si tiene quello,
@@ -10349,7 +10350,7 @@ ${terminologyByLang[targetLang] || ''}`;
       // e `/fr/` pubblicati in italiano, cioe' di nuovo #831. Vedi
       // `MAX_FREE_MT_LLM_FALLBACKS_PER_LOCALE`.
       const capBloccaIlRetry = ARTICLE_TRANSLATE_FREE_MT
-        && wasFreeMtUnusable(RUN_REPORT.translation, locale, field)
+        && wasFreeMtUnusable(RUN_REPORT.translation, locale, recoveryField)
         && !claimFreeMtLlmFallback(RUN_REPORT.translation, locale);
       if (capBloccaIlRetry) {
         console.error(
@@ -10371,7 +10372,7 @@ ${terminologyByLang[targetLang] || ''}`;
           const parsed = await callWithRetry(
             `Traduci OBBLIGATORIAMENTE in ${langName} il seguente campo per il sito Frontaliere Ticino. Rispondi SOLO con JSON (no markdown):\n\nCAMPO ITALIANO (${retryFieldLabel}):\n${itValue}\n\nFormato risposta: ${faqPart ? `{"faq": [{"${faqPart}": "..."}]}` : `{"${field}": "..."}`}`,
             1500,
-            `${locale}:${field}-missing-retry`,
+            `${locale}:${recoveryField}-missing-retry`,
           );
           // `String(retried)` on an object yields "[object Object]" — truthy and
           // different from the IT value, so the old check ASSIGNED it. Require a
