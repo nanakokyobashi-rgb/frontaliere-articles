@@ -170,6 +170,18 @@ test('commenti e stringhe che imitano dichiarazioni non contano come duplicati',
   assert.match(out.src, /IDS: string\[\] = \['altro'\]/);
 });
 
+test('un carattere astrale prima dell\'array non sposta gli offset della maschera', () => {
+  const src = [
+    '// 🇨🇭 mantiene la sonda sulla stessa unita di misura UTF-16',
+    "export const IDS: string[] = ['uno', 'due'];",
+    '',
+  ].join('\n');
+  const out = removeFromIdListLiteral(src, 'IDS', 'uno');
+  assert.equal(out.changed, true);
+  assert.match(out.src, /IDS: string\[\] = \['due'\]/);
+  assert.match(out.src, /🇨🇭/u);
+});
+
 test('una dichiarazione duplicata del letterale viene rifiutata', () => {
   const src = [
     'export const IDS: string[] = [\'uno\'];',

@@ -136,7 +136,14 @@ export function matchingDelimiter(src, openIdx) {
  * remains an error instead of being mistaken for an absent id.
  */
 function maskNonCode(src, { preserveStrings = false } = {}) {
-  const out = Array.from(src, (ch) => (ch === '\n' || ch === '\r' ? ch : ' '));
+  // Index the mask in UTF-16 code units, exactly like the scanner below and
+  // like JavaScript string offsets. `Array.from()` iterates code points, so a
+  // single astral character would shift every later offset used for the raw
+  // splice in `removeFromIdListLiteral`.
+  const out = new Array(src.length);
+  for (let i = 0; i < src.length; i += 1) {
+    out[i] = src[i] === '\n' || src[i] === '\r' ? src[i] : ' ';
+  }
   let quote = null;
   for (let i = 0; i < src.length; i += 1) {
     const ch = src[i];
@@ -223,20 +230,34 @@ export function removeFromIdListLiteral(src, varName, id) {
   const body = src.slice(span.openIdx + 1, span.closeIdx);
   const after = src.slice(span.closeIdx);
   const escaped = escapeRegex(id);
-  const quotedId = `(['"])${escaped}\\1`;
+  const quotedId = `(?:'${escaped}'|"${escaped}")`;
+  // `maskNonCode` preserves offsets. Keep string tokens visible for this
+  // probe (the id itself is necessarily quoted), but hide comments so a
+  // commented-out entry cannot win the match before the real array entry.
+  const maskedBody = maskNonCode(body, { preserveStrings: true });
+  const entryRx = new RegExp(`(^|,)\\s*(${quotedId})\\s*(?=,|$)`);
+  const entryMatch = entryRx.exec(maskedBody);
   let newBody;
-  if (new RegExp(`${quotedId}\\s*,\\s*`).test(body)) {
-    newBody = body.replace(new RegExp(`${quotedId}\\s*,\\s*`), '');
-  } else if (new RegExp(`,\\s*${quotedId}`).test(body)) {
-    newBody = body.replace(new RegExp(`,\\s*${quotedId}`), '');
-  } else if (new RegExp(`^\\s*${quotedId}\\s*$`).test(body)) {
-    newBody = '';
+  if (entryMatch) {
+    const tokenStart = entryMatch.index + entryMatch[0].indexOf(entryMatch[2]);
+    const tokenEnd = tokenStart + entryMatch[2].length;
+    let end = tokenEnd;
+    while (/\s/u.test(maskedBody[end] || '')) end += 1;
+    if (maskedBody[end] === ',') {
+      end += 1;
+      while (/\s/u.test(maskedBody[end] || '')) end += 1;
+    } else if (entryMatch[1] === ',') {
+      // The last item has no trailing comma: remove its preceding comma and
+      // separator, retaining the raw body everywhere else.
+      newBody = body.slice(0, entryMatch.index) + body.slice(tokenEnd);
+    }
+    if (newBody === undefined) newBody = body.slice(0, tokenStart) + body.slice(end);
   } else {
     // Distinguish an id that is genuinely absent (a recoverable interrupted
     // retirement) from an id still present in a literal shape this helper
     // does not understand. The caller may tolerate only the former; silently
     // accepting the latter would leave the id in the published union.
-    if (new RegExp(quotedId).test(maskNonCode(body, { preserveStrings: true }))) {
+    if (new RegExp(quotedId).test(maskedBody)) {
       throw new Error(`array ${varName}: id ${JSON.stringify(id)} è presente ma il letterale ha una forma non riconosciuta`);
     }
     const error = new Error(`array ${varName}: id atteso ${JSON.stringify(id)} non trovato nel letterale`);

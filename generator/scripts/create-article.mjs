@@ -4927,6 +4927,17 @@ const DETERMINISTIC_MAJOR_BLOCKING_CODES = new Set([
   'translation-number-added',
 ]);
 
+// `adjudicateAgainstItalian()` deliberately downgrades these translation-only
+// findings to report-only major issues. The deterministic wrapper must not
+// undo that policy while preserving the major checks on non-deterministic
+// sections of the same article.
+const ITALIAN_ADJUDICATED_MAJOR_CODES = new Set([
+  'tax-exceeds-income',
+  'contradictory-figures',
+  'arithmetic-error',
+  'percent-factor-mismatch',
+]);
+
 function runArticleFactualityGates({ deterministicBodySections = [], ...params } = {}) {
   const result = runFactualityGates(params);
   const deterministic = new Set(Array.isArray(deterministicBodySections) ? deterministicBodySections : []);
@@ -4940,13 +4951,22 @@ function runArticleFactualityGates({ deterministicBodySections = [], ...params }
       return String(issue.message || '').includes(`[${label}]`);
     });
   });
-  // Deterministic producers are allowed to emit structured fragments that
-  // look incomplete to the prose heuristics. Critical policy/factuality
-  // findings remain blocking; among major findings, only the explicit
-  // translation-number checks are deterministic semantic evidence rather
-  // than a producer-specific prose/policy diagnostic.
-  const blocking = issues.filter((issue) => issue.severity === 'critical'
-    || (issue.severity === 'major' && DETERMINISTIC_MAJOR_BLOCKING_CODES.has(issue.code)));
+  const belongsToDeterministicSection = (issue) => [...deterministic].some((section) => {
+    const label = locale === 'it' ? section : `${locale}/${section}`;
+    return String(issue.message || '').includes(`[${label}]`);
+  });
+  // The shape exemption is section-scoped. Preserve major protection on
+  // prose/global findings outside those sections, while allowing only the
+  // explicitly structured sections to relax their own diagnostics. Named
+  // translation-number findings always block; Italian-adjudicated majors
+  // remain report-only as promised by their downgrade policy.
+  const blocking = issues.filter((issue) => {
+    if (issue.severity === 'critical') return true;
+    if (issue.severity !== 'major') return false;
+    if (ITALIAN_ADJUDICATED_MAJOR_CODES.has(issue.code)) return false;
+    if (DETERMINISTIC_MAJOR_BLOCKING_CODES.has(issue.code)) return true;
+    return !belongsToDeterministicSection(issue);
+  });
   return { ...result, issues, blocking, passed: blocking.length === 0 };
 }
 
