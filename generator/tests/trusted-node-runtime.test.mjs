@@ -64,7 +64,7 @@ test('nessuna coppia attestabile disattiva Haiku senza aggirare il controllo', (
   assert.match(RUNTIME, /printf 'available=false\\n' >> "\$GITHUB_OUTPUT"/);
   assert.match(
     RUNTIME,
-    /printf 'HAIKU_FALLBACK_GATE=0\\nENABLE_HAIKU_ARTICLE_FALLBACK=0\\n' >> "\$GITHUB_ENV"/,
+    /printf 'HAIKU_FALLBACK_GATE=0\\nENABLE_HAIKU_ARTICLE_FALLBACK=0\\nENABLE_CODEX_ARTICLE_FALLBACK=0\\n' >> "\$GITHUB_ENV"/,
   );
 });
 
@@ -74,7 +74,7 @@ test('anche una CLI Haiku non installabile lascia disponibile la cascata normale
   assert.match(CLAUDE, /printf 'available=true\\n' >> "\$GITHUB_OUTPUT"/);
   assert.match(CLAUDE, /printf 'available=false\\n' >> "\$GITHUB_OUTPUT"/);
   assert.match(CLAUDE, /Haiku fallback disabled|Haiku setup unavailable/);
-  assert.match(CLAUDE, /steps\.setup_claude_cli\.outputs\.available == 'true'/);
+  assert.match(CLAUDE, /steps\.trusted_toolchain\.outputs\.available == 'true'/);
 });
 
 test('la CLI Haiku viene installata in un prefisso attestato e passa il suo path al consumer', () => {

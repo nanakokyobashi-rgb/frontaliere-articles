@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 /**
- * Host-side one-shot runner for the Claude -> Codex subscription fallback.
+ * Host-side one-shot runner for the Codex subscription primary in the article
+ * lane. Claude remains the caller's fallback when this request fails.
  *
  * The setup action passes CODEX_AUTH_JSON over stdin and never writes it to a
  * file or to GITHUB_ENV. This process keeps the credential in memory, serves
@@ -89,7 +90,7 @@ function permissionConfig() {
   return `default_permissions = "${CODEX_PROFILE}"
 
 [permissions.${CODEX_PROFILE}]
-description = "Read-only Codex fallback in an empty temporary workspace"
+description = "Read-only Codex primary in an empty temporary workspace"
 extends = ":read-only"
 
 [permissions.${CODEX_PROFILE}.network]

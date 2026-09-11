@@ -708,7 +708,7 @@ jobs:
           fi
           echo "model provider credentials present"
 
-      # ── L'UNICO MODELLO CON UN CONTESTO CAPACE (issue #313 / #348) ─────────
+      # ── I DUE CLI CON UN CONTESTO CAPACE (issue #313 / #348) ────────────────
       #
       # Va DOPO «Load secrets from Remote Config», e non prima: l'action legge
       # env.ENABLE_HAIKU_ARTICLE_FALLBACK, che esiste solo dopo quel caricamento
@@ -716,13 +716,12 @@ jobs:
       # RC_TO_ENV resta undefined per quanto sia impostato in Remote Config).
       #
       # MISURATO, run 31817957722: 38 rifiuti su input cap per un prompt stimato
-      # ~9740 token contro un cap massimo di 8000, e l'unico membro del roster
-      # che quel prompt lo regge — claude-cli/haiku — saltato con «no API key
-      # for provider claude_cli». Il gate in ai-models.mjs vuole DUE cose
-      # (isClaudeCliFallbackEnabled + hasClaudeCodeOauthToken): il flag lo
-      # accende questa action, il token lo passa lo step di generazione qui
-      # sotto via `env:`. Passarlo solo qui non basterebbe — la variabile deve
-      # esistere nel processo che chiama callLLM.
+      # ~9740 token contro un cap massimo di 8000, e gli unici membri del roster
+      # che quel prompt lo reggono sono i due CLI subscription — Codex prima, Haiku
+      # poi — saltati in precedenza con «no API key». Il gate in ai-models.mjs
+      # offre Codex solo quando action + broker sono pronti, e Claude quando il
+      # flag + token sono presenti. Il token va passato allo step di generazione
+      # qui sotto via `env:`: deve esistere nel processo che chiama callLLM.
       #
       # Il secret esiste gia' in questo repo (CLAUDE_CODE_OAUTH_TOKEN, lo stesso
       # del piano Max usato dalla review in tests.yml e da issue-fix.yml): non c'e' nulla
@@ -730,14 +729,13 @@ jobs:
       # continue-on-error: true — issue #367. Gli step delle composite action
       # non supportano continue-on-error (nulla lo assorbe dentro
       # setup-claude-haiku-fallback/action.yml), quindi va sullo STEP
-      # CHIAMANTE qui. Il fallback Haiku e' opzionale per costruzione (vedi il
-      # commento sopra): un fallimento di rete su `npm install -g
-      # @anthropic-ai/claude-code` non deve abbattere l'intero job — deve solo
-      # lasciare il flag ENABLE_HAIKU_ARTICLE_FALLBACK non alzato, che e' lo
-      # stato "claude-cli/haiku non disponibile" gia' gestito a valle da
-      # ai-models.mjs. "Generate the article" sotto dipende solo da
+      # CHIAMANTE qui. Le lane CLI sono opzionali per costruzione (vedi il
+      # commento sopra): un fallimento di rete su una delle installazioni CLI
+      # non deve abbattere l'intero job — deve solo lasciare il relativo
+      # provider non disponibile, stato gia' gestito a valle da ai-models.mjs.
+      # "Generate the article" sotto dipende solo da
       # steps.mode.outputs.dry, non dall'esito di questo step.
-      - name: Setup Claude CLI Haiku fallback
+      - name: Setup Codex primary with Claude fallback
         id: setup_claude_haiku_fallback
         if: steps.mode.outputs.dry != 'true'
         continue-on-error: true
@@ -835,10 +833,11 @@ jobs:
           SOURCE_URL: ${{ inputs.url }}
           EVENT_NAME: ${{ github.event_name }}
           # Issue #313 — la meta' che DEVE stare sul processo che chiama callLLM:
-          # ai-models.mjs offre claude-cli/haiku solo se hasClaudeCodeOauthToken()
-          # e' vero QUI dentro. L'action sopra accende il flag, questo passa il
-          # token; senza entrambi il modello resta «no API key for provider
-          # claude_cli», che e' com'e' stato fino al 2026-08-14.
+          # ai-models.mjs offre Codex quando il broker action-owned e' attivo,
+          # e claude-cli/haiku solo se hasClaudeCodeOauthToken() e il relativo
+          # flag sono veri QUI dentro. L'action sopra prepara la prima lane e
+          # questo passa il token della seconda; senza i prerequisiti il
+          # provider resta semplicemente «non disponibile».
           CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           CODEX_AUTH_BROKER_SOCKET: ${{ steps.setup_claude_haiku_fallback.outputs.codex_auth_broker_socket }}
         run: |

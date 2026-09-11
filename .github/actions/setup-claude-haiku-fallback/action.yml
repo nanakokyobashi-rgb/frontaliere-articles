@@ -1,17 +1,13 @@
-name: "Setup Claude CLI Haiku fallback"
+name: "Setup Codex primary with Claude fallback"
 description: >-
-  Installs @anthropic-ai/claude-code and forces ENABLE_HAIKU_ARTICLE_FALLBACK=1
-  (RC kill-switch: set the Remote Config flag to '0' to disable this
-  workflow). Model tier AI_MODELS.CLAUDE_CLI_HAIKU in generator/scripts/lib/ai-models.mjs.
-  Since 2026-07-29 (AI_COMPETING_TIERS default) this tier is tier-0 BY
-  DEFAULT — it competes on real score against every free-tier model
-  (sortChainByScore), no longer pinned below local/* or reached only after
-  every other model has failed; capped at CLAUDE_CLI_MAX_CALLS_PER_RUN
-  calls/run (default 25) since this quota is shared with
-  pr-review-loop.yml/issue-fix.yml. Set AI_COMPETING_TIERS='' to restore the
-  old pinned-last-resort behavior. Zero marginal cost: auth is
-  CLAUDE_CODE_OAUTH_TOKEN (same Max-plan subscription token already used by
-  pr-review-loop.yml/issue-fix.yml), never ANTHROPIC_API_KEY.
+  Installs a pinned Codex CLI and the Claude Code CLI lane for article
+  generation. When CODEX_AUTH_JSON is available, Codex is attempted first via
+  a private broker socket; if that one-shot attempt fails, the generator tries
+  Claude Haiku, then its normal model cascade. The historical
+  ENABLE_HAIKU_ARTICLE_FALLBACK flag remains the Remote Config kill-switch for
+  this optional lane, so existing callers keep working.
+  Claude uses CLAUDE_CODE_OAUTH_TOKEN (the same Max-plan subscription token
+  already used by pr-review-loop.yml/issue-fix.yml), never ANTHROPIC_API_KEY.
   Caller MUST run "node generator/scripts/load-rc-env.mjs" before this action so
   env.ENABLE_HAIKU_ARTICLE_FALLBACK reflects Remote Config. Caller MUST also
   pass CLAUDE_CODE_OAUTH_TOKEN (sourced from secrets.CLAUDE_CODE_OAUTH_TOKEN)
@@ -19,18 +15,14 @@ description: >-
   offers the model when both the flag AND the token are present
   (isClaudeCliFallbackEnabled/hasClaudeCodeOauthToken). Passing the token
   here is harmless even on steps that never reach the fallback tier.
-  Haiku is optional by construction: if the runner has no immutable, attested
-  Node/npm pair, this action disables only the Haiku lane and leaves the normal
-  model cascade running. Official runner-toolcache components are normalized
-  before attestation when the runner owns them; the pinned Claude CLI is then
-  installed under a root-owned /opt/runner prefix and its absolute path/digest
-  are exported for the later generator step.
-  When Claude reports a real usage limit/HTTP 429, ai-models.mjs makes one
-  indirect Codex CLI attempt using CODEX_AUTH_JSON from a temporary
-  CODEX_HOME/auth.json; this action installs the pinned CLI needed for that
-  path. Callers pass the optional secret through the codex_auth_json input;
-  only the broker bootstrap step receives it, keeps it in broker memory, and
-  exports a private Unix-socket path for the later fallback consumer.
+  Both optional lanes are fail-open by construction: if the runner has no
+  immutable, attested Node/npm pair, the normal model cascade remains
+  available. Official runner-toolcache components are normalized before
+  attestation when the runner owns them; the pinned Claude CLI is installed
+  under a root-owned /opt/runner prefix and the pinned Codex CLI under a
+  private temporary prefix. Callers pass the optional secret through the
+  codex_auth_json input; only the broker bootstrap step receives it, keeps it
+  in broker memory, and exports a private Unix-socket path for the generator.
   CORRECTED CLAIM (was wrong in this file since generate-article.yml run
   29676088799, propagated into setup-omniroute/action.yml via PR #4816):
   env.* is NOT immune to the null/unset->0 coercion previously blamed only
@@ -52,7 +44,7 @@ inputs:
 outputs:
   codex_auth_broker_socket:
     description: >-
-      Short-lived private Unix-socket endpoint for the one-shot Codex fallback.
+      Short-lived private Unix-socket endpoint for the one-shot Codex primary.
       The endpoint is exposed only as an action output, never through
       GITHUB_ENV.
     value: ${{ steps.start_codex_auth_broker.outputs.socket }}
@@ -69,9 +61,11 @@ runs:
     # bash instead of GitHub Actions' `if:` expression language, which
     # evaluates a true-unset env.X as equal to '0' rather than as ''. See
     # the CORRECTED CLAIM note above.
-    - name: Resolve Claude CLI Haiku fallback gate
+    - name: Resolve Codex primary / Claude fallback gate
       shell: bash
-      run: echo "HAIKU_FALLBACK_GATE=${ENABLE_HAIKU_ARTICLE_FALLBACK:-1}" >> "$GITHUB_ENV"
+      run: |
+        echo "HAIKU_FALLBACK_GATE=${ENABLE_HAIKU_ARTICLE_FALLBACK:-1}" >> "$GITHUB_ENV"
+        echo 'ENABLE_CODEX_ARTICLE_FALLBACK=0' >> "$GITHUB_ENV"
 
     - name: Resolve trusted Node/npm toolchain
       id: trusted_toolchain
@@ -91,7 +85,7 @@ runs:
           local reason="$1"
           echo "::warning::${reason} Haiku fallback disabled; the normal model cascade remains available"
           printf 'available=false\n' >> "$GITHUB_OUTPUT"
-          printf 'HAIKU_FALLBACK_GATE=0\nENABLE_HAIKU_ARTICLE_FALLBACK=0\n' >> "$GITHUB_ENV"
+          printf 'HAIKU_FALLBACK_GATE=0\nENABLE_HAIKU_ARTICLE_FALLBACK=0\nENABLE_CODEX_ARTICLE_FALLBACK=0\n' >> "$GITHUB_ENV"
           exit 0
         }
         realpath_cmd=''
@@ -371,7 +365,7 @@ runs:
         if [ "$resolver_status" -ne 0 ]; then
           echo '::warning::Trusted Node/npm resolver could not complete; Haiku fallback disabled; the normal model cascade remains available'
           printf 'available=false\n' >> "$GITHUB_OUTPUT"
-          printf 'HAIKU_FALLBACK_GATE=0\nENABLE_HAIKU_ARTICLE_FALLBACK=0\n' >> "$GITHUB_ENV"
+          printf 'HAIKU_FALLBACK_GATE=0\nENABLE_HAIKU_ARTICLE_FALLBACK=0\nENABLE_CODEX_ARTICLE_FALLBACK=0\n' >> "$GITHUB_ENV"
         fi
 
     - name: Setup Claude CLI Haiku fallback
@@ -492,22 +486,22 @@ runs:
         else
           echo '::warning::Claude Code Haiku setup unavailable; the normal model cascade remains available'
           printf 'available=false\n' >> "$GITHUB_OUTPUT"
-          printf 'HAIKU_FALLBACK_GATE=0\nENABLE_HAIKU_ARTICLE_FALLBACK=0\n' >> "$GITHUB_ENV"
+          printf 'ENABLE_HAIKU_ARTICLE_FALLBACK=0\n' >> "$GITHUB_ENV"
         fi
 
     # Keep the Codex binary outside the mutable checkout and out of the global
     # PATH. The broker receives this action-owned path plus its attestation;
     # consumer steps can only send a prompt over the socket and cannot replace
     # the binary with a pre-existing `codex` executable.
-    - name: Prepare Linux sandbox for indirect Codex fallback
+    - name: Prepare Linux sandbox for Codex primary
       id: setup_codex_sandbox
       continue-on-error: true
-      if: env.HAIKU_FALLBACK_GATE != '0' && steps.trusted_toolchain.outputs.available == 'true' && steps.setup_claude_cli.outputs.available == 'true' && inputs.codex_auth_json != ''
+      if: env.HAIKU_FALLBACK_GATE != '0' && steps.trusted_toolchain.outputs.available == 'true' && inputs.codex_auth_json != ''
       uses: ./.github/actions/setup-codex-sandbox
 
-    - name: Install pinned Codex CLI for the indirect fallback
+    - name: Install pinned Codex CLI for the primary lane
       id: install_codex_cli
-      if: env.HAIKU_FALLBACK_GATE != '0' && steps.trusted_toolchain.outputs.available == 'true' && steps.setup_claude_cli.outputs.available == 'true' && inputs.codex_auth_json != '' && steps.setup_codex_sandbox.outcome == 'success'
+      if: env.HAIKU_FALLBACK_GATE != '0' && steps.trusted_toolchain.outputs.available == 'true' && inputs.codex_auth_json != '' && steps.setup_codex_sandbox.outcome == 'success'
       shell: bash
       env:
         TRUSTED_NODE: ${{ steps.trusted_toolchain.outputs.node_realpath }}
@@ -624,7 +618,7 @@ runs:
     # Keep the subscription secret on this one action step. Only an explicit
     # AI consumer step receives the output socket path; unrelated housekeeping
     # steps do not inherit a broker capability.
-    - name: Start Codex auth broker for the indirect fallback
+    - name: Start Codex auth broker for the primary lane
       id: start_codex_auth_broker
       if: env.HAIKU_FALLBACK_GATE != '0' && inputs.codex_auth_json != '' && steps.install_codex_cli.outputs.codex_bin != ''
       shell: bash
@@ -719,6 +713,7 @@ runs:
         fi
         chmod 600 "$broker_socket"
         printf 'socket=%s\n' "$broker_socket" >> "$GITHUB_OUTPUT"
+        printf 'ENABLE_CODEX_ARTICLE_FALLBACK=1\n' >> "$GITHUB_ENV"
         unset CODEX_AUTH_JSON
 
     # Unconditional (no `if:`) so it also fires when the step above got
@@ -739,5 +734,5 @@ runs:
         if [ -n "$CODEX_CLI_BIN" ]; then
           echo "codex CLI: attested at $CODEX_CLI_BIN (version 0.153.4)"
         else
-          echo "codex CLI: unavailable or failed attestation — Claude usage-limit fallback will continue to the normal model chain"
+          echo "codex CLI: unavailable or failed attestation — Claude fallback and the normal model chain will continue"
         fi

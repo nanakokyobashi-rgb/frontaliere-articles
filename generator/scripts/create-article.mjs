@@ -69,24 +69,27 @@ import { callLLM as _aiCallLLM, AI_MODELS, DEFAULT_CHAIN, getPreferredModel, isL
 
 // ── Il modello preferito per la SOLA generazione del corpo ──────────────────
 //
-// Decisione del proprietario (issue #379): «Porta Haiku al primo livello — lo
-// paghiamo e funziona», e «solo dove serve davvero, nei punti critici e dove il
-// modello free non e' affidabile». Questo e' quel punto: la generazione del
-// corpo italiano e' l'unica chiamata i cui gate (fedelta' alla fonte, tassi
-// chiave, lunghezza minima) bocciano davvero l'output dei modelli free.
+// Decisione del proprietario: per la generazione editoriale ad alto valore la
+// prima scelta e' Codex via subscription; Claude Haiku resta il soccorso
+// immediato, prima della cascata gratuita. Questo e' quel punto: la
+// generazione del corpo italiano e' l'unica chiamata i cui gate (fedelta' alla
+// fonte, tassi chiave, lunghezza minima) bocciano davvero l'output dei modelli
+// free.
 //
 // `prefer` sposta l'id in testa DOPO l'ordinamento per punteggio, quindi vince
-// malgrado lo score storico (haiku e' a -666 nel ledger, vedi il commento di
-// applyPreferOverride in ai-models.mjs). E' per-chiamata apposta: la quota del
-// piano Max e' CONDIVISA con pr-review-loop.yml e issue-fix.yml, e una
-// preferenza globale la brucerebbe affamando il ciclo dei merge.
+// malgrado lo score storico. L'ordine e' per-chiamata apposta: l'autenticazione
+// subscription e' condivisa con i workflow agentici, e una preferenza globale
+// la brucerebbe affamando il ciclo dei merge.
 //
 // NON e' passata a: traduzioni, meta, FAQ, classificazione, selezione headline,
 // riformulazione del titolo — li' i modelli free funzionano e i gate lo
 // confermano. E nemmeno al fact-check: quello e' un consenso fra verificatori
 // INDIPENDENTI, e mandarli tutti sullo stesso modello collasserebbe
 // l'indipendenza che il guard «local/fallback cannot self-verify» difende.
-const PREFERRED_GENERATION_MODELS = [AI_MODELS.CLAUDE_CLI_HAIKU];
+const PREFERRED_GENERATION_MODELS = [
+  AI_MODELS.CODEX_CLI_PRIMARY,
+  AI_MODELS.CLAUDE_CLI_HAIKU,
+];
 
 /**
  * True se almeno un modello preferito e' DISPONIBILE ORA e non dichiara un cap
@@ -95,14 +98,14 @@ const PREFERRED_GENERATION_MODELS = [AI_MODELS.CLAUDE_CLI_HAIKU];
  * Le due condizioni sono entrambe necessarie, e per ragioni diverse.
  *
  * `getDeclaredRequestTokenLimit` va calcolata sulla stessa funzione che usa il
- * pre-flight di callLLM: se domani haiku acquisisce un cap — a mano in
+ * pre-flight di callLLM: se domani uno dei due CLI acquisisce un cap — a mano in
  * MODEL_MAX_REQUEST_TOKENS, o imparato a runtime da un 413 via
  * `_learnedRequestTokenLimits` — questa torna false da sola e il prompt
  * riprende ad accorciarsi, senza una costante da ricordarsi di aggiornare.
  *
- * `isModelAvailable` evita un tentativo buttato per OGNI headline dove il
- * preferito non c'e'. Senza, un ambiente con `ENABLE_HAIKU_ARTICLE_FALLBACK`
- * spento o senza `CLAUDE_CODE_OAUTH_TOKEN` costruirebbe il prompt intero
+ * `isModelAvailable` evita un tentativo buttato per OGNI headline dove i CLI
+ * preferiti non ci sono. Senza, un ambiente con la lane disattivata o senza
+ * l'autenticazione subscription costruirebbe il prompt intero
  * (~9500 token) per una flotta il cui cap piu' permissivo e' 8000: ogni modello
  * skippato dal pre-flight, `ALL_MODELS_EXHAUSTED`, e solo al tentativo 2 il
  * budget dettato rimette in moto la scala. Il rimedio funziona — e' verificato —
@@ -112,7 +115,7 @@ const PREFERRED_GENERATION_MODELS = [AI_MODELS.CLAUDE_CLI_HAIKU];
  * `isPerRunCallCapReached` chiude il buco che le altre due non vedono, ed e' il
  * caso che questa stessa PR rende raggiungibile alzando
  * CLAUDE_CLI_MAX_CALLS_PER_RUN a 40 (= 20 tentativi × 2 chiamate). Superate le
- * 40 chiamate claude-cli, `callLLM` esclude haiku dalla catena — ma
+ * 40 chiamate claude-cli, `callLLM` esclude Haiku dalla catena — ma
  * `isModelAvailable` guarda solo skip-exhausted e presenza del token, quindi
  * continuava a rispondere «c'e'». Da li' in poi, per OGNI headline successiva:
  * scala saltata al gradino 0, prompt intero (~9500 token), tutti i modelli free
@@ -8420,15 +8423,15 @@ Rispondi SOLO con JSON valido, senza markdown.` },
   // Ci si accorciava per farsi accettare, e si veniva bocciati per aver perso
   // i fatti che ci si era accorciati per perdere.
   //
-  // Da quando la generazione del corpo PREFERISCE claude-cli/haiku — l'unico
-  // membro del roster senza cap di input dichiarato — la scala della chiamata
+  // Da quando la generazione del corpo PREFERISCE Codex e, subito dopo, Haiku —
+  // entrambi i CLI senza cap di input dichiarato — la scala della chiamata
   // unica non ha piu' motivo di accorciare il primo tentativo. Se pero' il
   // prompt unico supera il cap della flotta, la generazione passa alla vista
   // divisa corpo/metadati qui sotto: i fallback capped ricevono cosi' una
   // richiesta spedibile senza mutilare il contesto del corpo.
   //
-  // Non serve un fallback inventato, perche' esiste gia': se haiku non e'
-  // disponibile e la cascata degrada sui modelli capped, `callLLM` lancia
+  // Non serve un fallback inventato, perche' esiste gia': se Codex e Claude non
+  // sono disponibili e la cascata degrada sui modelli capped, `callLLM` lancia
   // `ALL_MODELS_EXHAUSTED` con `err.retryRequestTokenBudget` — il cap piu'
   // permissivo fra quelli che hanno rifiutato — il `catch` del ciclo di retry
   // lo raccoglie in `lastPromptTokenBudget`, e il tentativo successivo entra
@@ -8443,7 +8446,7 @@ Rispondi SOLO con JSON valido, senza markdown.` },
   // modello diverso da quello precedente per uscire da un fallimento
   // ripetuto, e quel modello ha quasi sempre un cap dichiarato — la scala di
   // riduzione deve tornare a mordere per lui, non restare skippata pensando
-  // ad haiku che non verra' piu' chiamato. Vedi il gate sulla `prefer:` sotto.
+  // ai CLI che non verranno piu' chiamati. Vedi il gate sulla `prefer:` sotto.
   const _preferActiveThisAttempt = generationAttempt === 1;
   const _preferSenzaCap = _preferActiveThisAttempt && _preferisceModelloSenzaCap(PREFERRED_GENERATION_MODELS);
   const _saltaScala = _preferSenzaCap && !(Number(sourceContext?._promptTokenBudget) > 0);
@@ -8854,8 +8857,8 @@ Rispondi SOLO con JSON valido, senza markdown.` },
   // si arma SOLO quando `err.retryRequestTokenBudget` viene dal roster
   // (`_budgetDettato`), cioe' quando la libreria ha visto ALMENO un modello
   // saltato per cap di INPUT — ma l'unico membro di
-  // `PREFERRED_GENERATION_MODELS` (claude-cli/haiku) non dichiara nessun cap
-  // di input (getDeclaredRequestTokenLimit lo salta sempre), quindi non puo'
+  // `PREFERRED_GENERATION_MODELS` (Codex + claude-cli/haiku) non dichiara
+  // nessun cap di input (getDeclaredRequestTokenLimit li salta sempre), quindi non puo'
   // MAI essere fra i modelli saltati per dimensione. Se ha fallito, ha fallito
   // per un'altra ragione (timeout, quota, rate-limit) che ridimensionare il
   // prompt non cambia: ricontattarlo con lo stesso `prefer` e' spendere una

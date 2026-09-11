@@ -1,5 +1,5 @@
 /**
- * Contract test for the indirect Claude -> OAuth Codex fallback wiring.
+ * Contract test for the Codex-primary / Claude-fallback wiring.
  *
  * The composite action owns the raw OAuth JSON and exposes only its broker
  * socket. Every workflow consumer must carry that capability to its generator
@@ -51,7 +51,7 @@ function stepBlock(lines, index) {
   return lines.slice(start, end).join('\n');
 }
 
-test('every active Haiku fallback caller wires the OAuth Codex broker', () => {
+test('every active article CLI caller wires the OAuth Codex broker', () => {
   assert.equal(workflowFiles.length, 25, 'caller inventory changed: review new/removed consumers');
   for (const rel of workflowFiles) {
     const source = read(rel);
@@ -81,10 +81,22 @@ test('every active Haiku fallback caller wires the OAuth Codex broker', () => {
   }
 });
 
-test('indirect fallback keeps the pinned OAuth model and medium effort', () => {
+test('Codex primary keeps the pinned OAuth model and is ordered before Claude', () => {
   const aiModels = read('generator/scripts/lib/ai-models.mjs');
+  const createArticle = read('generator/scripts/create-article.mjs');
+  const action = read('.github/actions/setup-claude-haiku-fallback/action.yml');
   const broker = read('.github/actions/setup-claude-haiku-fallback/codex-auth-broker.mjs');
-  assert.match(aiModels, /CODEX_INDIRECT_FALLBACK_EFFORT\s*=\s*['"]medium['"]/);
+  assert.match(aiModels, /CODEX_CLI_PRIMARY:\s*`codex-cli\/\$\{CODEX_FALLBACK_MODEL\}`/);
+  assert.match(aiModels, /if \(model\.startsWith\('codex-cli\/'\)\)/);
+  assert.match(aiModels, /case PROVIDER\.CODEX_CLI:\s+return _callCodexCli/);
+  assert.match(aiModels, /_claimCodexCliFallback\(\)/);
+  assert.doesNotMatch(aiModels, /_tryCodexCliUsageLimitFallback/);
+  const preferenceStart = createArticle.indexOf('const PREFERRED_GENERATION_MODELS');
+  const codexPreference = createArticle.indexOf('AI_MODELS.CODEX_CLI_PRIMARY', preferenceStart);
+  const claudePreference = createArticle.indexOf('AI_MODELS.CLAUDE_CLI_HAIKU', preferenceStart);
+  assert.ok(preferenceStart >= 0 && codexPreference >= 0 && claudePreference > codexPreference, 'Codex must precede Claude in the article preference');
+  assert.match(action, /name: "Setup Codex primary with Claude fallback"/);
+  assert.doesNotMatch(action, /indirect Codex fallback/);
   assert.match(broker, /CODEX_MODEL\s*=\s*['"]gpt-5\.6-luna['"]/);
   assert.match(broker, /CODEX_EFFORT\s*=\s*['"]medium['"]/);
 });

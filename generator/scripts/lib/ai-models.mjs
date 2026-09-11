@@ -342,15 +342,22 @@ export const AI_MODELS = Object.freeze({
   // remote API — it only runs when all remote providers are exhausted.
   LOCAL_FALLBACK:      'local/fallback',
 
-  // ── Claude CLI Haiku fallback (opt-in via Remote Config) ── Routed through
-  // the local `claude` CLI subprocess using the existing CLAUDE_CODE_OAUTH_TOKEN
-  // (Max subscription — $0 marginal cost, same auth already used by
-  // pr-review-loop.yml/issue-fix.yml). Inert unless ENABLE_HAIKU_ARTICLE_FALLBACK
-  // is set (see load-rc-env.mjs) AND the token is present. Since 2026-07-29
-  // (AI_COMPETING_TIERS) this tier is tier-0 BY DEFAULT — it competes with
-  // every normal model on real score, not pinned last. See _lastResortTier /
-  // AI_COMPETING_TIERS below for the ramp-up mechanics; set
-  // AI_COMPETING_TIERS='' to restore the old pinned-last behavior.
+  // ── Codex CLI article primary (opt-in via the shared CLI lane) ────────────
+  // Routed through the action-owned broker using the ChatGPT subscription. The
+  // broker keeps CODEX_AUTH_JSON private and exposes only one text request to
+  // this process. The same lane installs Claude Haiku as its second choice;
+  // create-article.mjs makes the order explicit with `prefer: [Codex, Claude]`.
+  // The model is intentionally absent from DEFAULT_CHAIN: Codex is reserved for
+  // the high-value article-body generation path, not translations, metadata,
+  // FAQ work or fact-check consensus.
+  CODEX_CLI_PRIMARY: `codex-cli/${CODEX_FALLBACK_MODEL}`,
+
+  // ── Claude CLI Haiku fallback (opt-in via the shared CLI lane) ────────────
+  // Routed through the local `claude` CLI subprocess using the existing
+  // CLAUDE_CODE_OAUTH_TOKEN (Max subscription — $0 marginal cost, same auth
+  // already used by pr-review-loop.yml/issue-fix.yml). Inert unless the CLI
+  // lane flag is set AND the token is present. This is the fallback after the
+  // Codex article-primary attempt.
   // Uses the CLI's own 'haiku' alias (confirmed live: `claude --model haiku`
   // resolves to claude-haiku-4-5-20251001 today) instead of a dated snapshot
   // id, so this tracks whatever Anthropic ships as "current Haiku" without
@@ -640,6 +647,10 @@ const PROVIDER = Object.freeze({
   // would otherwise produce 0 articles for that window. A local open-source model
   // (e.g. Qwen2.5) keeps the funnel producing at $0/zero-quota. See _callLocal.
   LOCAL:       'local',
+  // Codex CLI subprocess reached through the action-owned Unix-socket broker.
+  // The broker keeps the subscription credential out of the generator process;
+  // this provider never talks to the network directly from here.
+  CODEX_CLI:   'codex_cli',
   // Claude CLI subprocess (Haiku), opt-in via Remote Config. Tier-0 (competing)
   // by default since 2026-07-29 — see AI_MODELS.CLAUDE_CLI_HAIKU /
   // AI_COMPETING_TIERS. _isLastResortProvider() still exempts it from
@@ -741,13 +752,27 @@ function getOmniRouteUrl() { return (process.env.OMNIROUTE_URL || OMNIROUTE_DEFA
 // key, so keep a sentinel, same pattern as Local/getLocalLlmApiKey.
 function getOmniRouteApiKey() { return (process.env.OMNIROUTE_API_KEY || 'omniroute-no-key').trim(); }
 
-// ── Claude CLI Haiku fallback (opt-in via RC, absolute last resort) ──
-// ENABLE_HAIKU_ARTICLE_FALLBACK is loaded from Firebase Remote Config by
-// load-rc-env.mjs (default unset → OFF). Gated on BOTH the flag and the OAuth
-// token so a flag flipped on without the workflow secret wired doesn't attempt
-// (and fail) every run.
+// ── CLI article lane (Codex primary, Claude fallback) ──────────────────────
+// ENABLE_HAIKU_ARTICLE_FALLBACK is the historical Remote Config flag loaded by
+// load-rc-env.mjs. Keep accepting it while the action also publishes the more
+// truthful ENABLE_CODEX_ARTICLE_FALLBACK name: existing callers and the RC
+// kill-switch remain compatible, but the preferred path now starts with Codex.
+function isTruthyEnv(name) {
+  return /^(1|true|yes|on)$/i.test((process.env[name] || '').trim()); // env-scan: name is restricted to the literal CLI flag/gate names in this module
+}
+function isArticleCliLaneEnabled() {
+  const resolvedGate = String(process.env.HAIKU_FALLBACK_GATE || '').trim();
+  if (resolvedGate) return isTruthyEnv('HAIKU_FALLBACK_GATE');
+  return isTruthyEnv('ENABLE_CODEX_ARTICLE_FALLBACK')
+    || isTruthyEnv('ENABLE_HAIKU_ARTICLE_FALLBACK');
+}
 function isClaudeCliFallbackEnabled() {
-  return /^(1|true|yes|on)$/i.test((process.env.ENABLE_HAIKU_ARTICLE_FALLBACK || '').trim());
+  return isArticleCliLaneEnabled() && isTruthyEnv('ENABLE_HAIKU_ARTICLE_FALLBACK');
+}
+function isCodexCliPrimaryEnabled() {
+  return isArticleCliLaneEnabled()
+    && isTruthyEnv('ENABLE_CODEX_ARTICLE_FALLBACK')
+    && !!String(process.env.CODEX_AUTH_BROKER_SOCKET || '').trim();
 }
 function hasClaudeCodeOauthToken() {
   return !!(process.env.CLAUDE_CODE_OAUTH_TOKEN || '').trim();
@@ -755,18 +780,12 @@ function hasClaudeCodeOauthToken() {
 const CLAUDE_CLI_BIN = (process.env.CLAUDE_CLI_BIN || 'claude').trim();
 const CODEX_CLI_MAX_TIMEOUT_MS = 600_000;
 const CODEX_CLI_MIN_TIMEOUT_MS = 15_000;
-const CODEX_FALLBACK_MARKER_PREFIX = 'claude-haiku-codex-fallback';
-// Indirect provider fallback is deliberately lighter than the workflow-agent
-// fallback (which uses effort=max): this path replaces a single content call,
-// preserves the caller's schema/output contract, and must leave wall-clock
-// budget for the normal model chain if Codex also fails.
-export const CODEX_INDIRECT_FALLBACK_EFFORT = 'medium';
-// The Codex subscription fallback is one-shot per GitHub run. The in-process
+const CODEX_FALLBACK_MARKER_PREFIX = 'codex-article-primary';
+// The Codex subscription primary is one-shot per GitHub run. The in-process
 // flag is only a fast path for callers outside Actions; workflow processes use
 // the atomic marker in RUNNER_TEMP below so parallel crawler workers cannot
-// multiply the paid/subscription fallback. A failed Codex attempt is not
-// retried and the original Claude error continues through callLLM's normal
-// fallback chain.
+// multiply the subscription attempt. A failed attempt is not retried: the
+// preferred chain immediately continues with Claude, then the normal models.
 let _codexCliFallbackAttempted = false;
 // Flipped true on the first `spawn claude ENOENT` (see the catch block in
 // callLLM's fallback loop). Process-local, never persisted — see that comment
@@ -1366,6 +1385,7 @@ function getProvider(model) {
   if (model.startsWith('chutes/'))     return PROVIDER.CHUTES;
   if (model.startsWith('zai/'))        return PROVIDER.ZAI;
   if (model.startsWith('local/'))      return PROVIDER.LOCAL;
+  if (model.startsWith('codex-cli/'))  return PROVIDER.CODEX_CLI;
   if (model.startsWith('claude-cli/')) return PROVIDER.CLAUDE_CLI;
   if (model.startsWith('omniroute/'))  return PROVIDER.OMNIROUTE;
   return PROVIDER.GITHUB;
@@ -1401,6 +1421,7 @@ function getApiModelId(model) {
   if (model.startsWith('chutes/'))     return model.slice(7);   // 7 chars: "chutes/"
   if (model.startsWith('zai/'))        return model.slice(4);   // 4 chars: "zai/"
   if (model.startsWith('local/'))      return getLocalLlmModelId(); // served-model label is runtime-configured
+  if (model.startsWith('codex-cli/'))  return model.slice(10);  // 10 chars: "codex-cli/"
   if (model.startsWith('claude-cli/')) return model.slice(11);  // 11 chars: "claude-cli/"
   if (model.startsWith('omniroute/'))  return model.slice(10);  // 10 chars: "omniroute/" → "auto"
   return model;
@@ -1434,6 +1455,11 @@ function getApiKeyForProvider(provider) {
     // a sentinel marks local/* available so the chain can reach it as last resort
     // (and '' when disabled → every local/* model is skipped). Mirrors Cloudflare.
     case PROVIDER.LOCAL:       return isLocalLlmEnabled() ? 'local-no-key' : '';
+    // Codex auth never enters this process as a token: the setup action exposes
+    // only its private broker socket. The one-shot marker is part of the same
+    // availability check, so later crawler workers fall through to Claude
+    // without launching a doomed second Codex request.
+    case PROVIDER.CODEX_CLI:   return _codexCliSlotAvailable() ? 'codex-cli-no-key' : '';
     // No real key — auth is the CLAUDE_CODE_OAUTH_TOKEN env var, read directly
     // by the `claude` CLI subprocess. Gate on RC flag + token presence so the
     // chain only offers this model when both are actually usable. Mirrors Local.
@@ -1447,10 +1473,12 @@ function getApiKeyForProvider(provider) {
 }
 
 /**
- * True for opt-in providers (local CPU fallback, Claude CLI Haiku, OmniRoute —
- * see AI_MODELS.LOCAL_FALLBACK / CLAUDE_CLI_HAIKU / OMNIROUTE_AUTO) that must
- * never be marked exhausted/banned. Local and Claude CLI have no daily-quota
- * concept at all, so persisting a ban just guarantees zero output for the
+ * True for opt-in providers (local CPU fallback, Codex/Claude CLI, OmniRoute —
+ * see AI_MODELS.LOCAL_FALLBACK / CODEX_CLI_PRIMARY / CLAUDE_CLI_HAIKU /
+ * OMNIROUTE_AUTO) that must
+ * never be marked exhausted/banned. Local, Codex CLI and Claude CLI have no
+ * daily-quota concept at all, so persisting a ban just guarantees zero output
+ * for the
  * rest of the budget. OmniRoute's reasoning is distinct but lands on the same
  * exemption: the CI pilot instance is EPHEMERAL — a fresh, empty sqlite
  * provider DB every run (scripts/ci/omniroute-poc-register.mjs re-registers
@@ -1462,14 +1490,17 @@ function getApiKeyForProvider(provider) {
  *
  * Orthogonal to AI_COMPETING_TIERS (2026-07-29): this is about a PROVIDER's
  * technical properties (no real quota / ephemeral instance), not its current
- * tier RANK. omniroute/claude-cli stay exempt here even while promoted to
+ * tier RANK. omniroute/codex-cli/claude-cli stay exempt here even while promoted to
  * tier-0 — the per-provider cooldown (cooldownProvider(), unconditional,
  * see the main callLLM loop) plus ordinary score-based sinking on failure
  * already bound the "retry forever" risk without needing the ban too.
  */
 function _isLastResortProvider(modelId) {
   const p = getProvider(modelId);
-  return p === PROVIDER.LOCAL || p === PROVIDER.CLAUDE_CLI || p === PROVIDER.OMNIROUTE;
+  return p === PROVIDER.LOCAL
+    || p === PROVIDER.CODEX_CLI
+    || p === PROVIDER.CLAUDE_CLI
+    || p === PROVIDER.OMNIROUTE;
 }
 
 /**
@@ -1626,17 +1657,17 @@ function _envProxyMayIntercept() {
  *     `OMNIROUTE_URL`). Puntati a un host REMOTO, un connect morto e'
  *     indistinguibile da quello di GitHub, e l'esenzione regalava proprio la
  *     meta' di #475 che li' vale: il connect morto ripagato ad ogni giro.
- *   - `claude-cli` non compone nessun numero: e' `spawn`. Un codice di connect
- *     che emergesse da li' parlerebbe del processo, non di un host remoto,
- *     quindi resta esente incondizionatamente (il suo breaker e' la tempesta
- *     di timeout, `_claudeCliTimeoutStormDetected`).
+ *   - `claude-cli` non compone nessun numero: e' `spawn`; `codex-cli` parla
+ *     solo con il broker Unix locale. Un codice di connect che emergesse da
+ *     una di queste lane parlerebbe del processo/peer locale, non di un host
+ *     remoto, quindi entrambe restano esenti incondizionatamente.
  *
  * Restringere l'esenzione a «endpoint di loopback» tiene intatto tutto cio'
  * che era load-bearing e toglie solo il caso che non lo e' mai stato.
  */
 function _isHostUnreachableExempt(modelId, err) {
   const p = getProvider(modelId);
-  if (p === PROVIDER.CLAUDE_CLI) return true;
+  if (p === PROVIDER.CLAUDE_CLI || p === PROVIDER.CODEX_CLI) return true;
   // #813 — cio' che si giudica e' il SOCKET, non la stringa di configurazione,
   // e vale per OGNI provider: un connect rifiutato da un proxy locale, o da un
   // qualunque peer su questa macchina, non e' una prova sull'host di
@@ -1978,20 +2009,15 @@ function getSchemaMode() {
  * unconditionally, so Groq (not in the set, never sent the schema) was
  * pre-flight-skipped on ~516 phantom tokens it would never have received.
  *
- * NOT a third sender: `claude_cli` isn't OpenAI-compat, isn't in
- * PROVIDERS_WITH_STRICT_JSON_SCHEMA, and this function correctly returns
- * false for it — yet `_callClaudeCli` sends the (relaxed) schema via
- * `--json-schema` whenever `getSchemaMode() !== 'off'`, unconditionally on
- * PROVIDERS_WITH_STRICT_JSON_SCHEMA/_learnedSchemaIncompatible. That earlier
- * claim ("both halves that need the answer ask it") was false the moment
- * _callClaudeCli started sending a schema: estimateRequestTokens' call to
- * THIS function under-counted every claude-cli/* request with a schema by
- * ~1805 bytes ≈ 452 tokens. See `_schemaBytesWillBeSent` below, which is what
- * estimateRequestTokens actually calls now — it defers to this function for
- * every OpenAI-compat/Gemini provider and answers the CLI case separately, on
- * purpose: folding claude_cli into PROVIDERS_WITH_STRICT_JSON_SCHEMA would
- * change SEND behavior (this function doubles as the send-time gate), not
- * just the estimate.
+ * NOT a third sender: `claude_cli` and `codex_cli` aren't OpenAI-compat, aren't
+ * in PROVIDERS_WITH_STRICT_JSON_SCHEMA, and this function correctly returns
+ * false for them — yet the CLI lanes send a schema through their own
+ * `--json-schema`/broker request whenever `getSchemaMode() !== 'off'`,
+ * independently of PROVIDERS_WITH_STRICT_JSON_SCHEMA/_learnedSchemaIncompatible.
+ * That is why `_schemaBytesWillBeSent` below answers the CLI case separately:
+ * folding either provider into PROVIDERS_WITH_STRICT_JSON_SCHEMA would change
+ * SEND behavior (this function doubles as the send-time gate), not just the
+ * estimate.
  *
  * Exported for tests / smoke probes.
  */
@@ -2013,26 +2039,28 @@ export function shouldUseSchemaMode(providerName, hasSchema = true, modelForTrac
  *
  * Deliberately NOT folded into shouldUseSchemaMode(): that function is also
  * the SEND-time decision for _callOpenAICompatible/_callGeminiRaw (it builds
- * `response_format`), so adding `claude_cli` to
- * PROVIDERS_WITH_STRICT_JSON_SCHEMA to make this predicate true for it would
+ * `response_format`), so adding either CLI provider to
+ * PROVIDERS_WITH_STRICT_JSON_SCHEMA to make this predicate true would
  * change what those functions send, not just what this counts — and
- * claude_cli isn't OpenAI-compat in the first place (it takes a CLI flag, not
- * a `response_format`), so it was never a candidate for that Set on its own
- * merits. This function exists so the estimate can know a fact the send-time
- * gate was never meant to encode.
+ * claude_cli/codex_cli aren't OpenAI-compat in the first place (they take CLI
+ * or broker schema instructions, not a `response_format`), so they were never
+ * candidates for that Set on their own merits. This function exists so the
+ * estimate can know a fact the send-time gate was never meant to encode.
  *
- * Mirrors _callClaudeCli's OWN condition for pushing `--json-schema`
+ * Mirrors the CLI lanes' OWN condition for pushing a schema
  * (`opts.jsonSchema && getSchemaMode() !== 'off'`) exactly — not
- * shouldUseSchemaMode()'s: the CLI never consults
+ * shouldUseSchemaMode()'s: these lanes never consult
  * PROVIDERS_WITH_STRICT_JSON_SCHEMA or _learnedSchemaIncompatible, so this
- * predicate doesn't either for that provider. If _callClaudeCli's condition
- * changes, this one has to change with it — there's no import to enforce
- * that, only tests/scripts/ai-models-claude-cli-schema-estimate.test.ts
- * asserting the two conditions stay textually in sync.
+ * predicate doesn't either for those providers. If either CLI condition
+ * changes, this one has to change with it — there's no import to enforce that,
+ * only tests/scripts/ai-models-claude-cli-schema-estimate.test.ts asserting the
+ * conditions stay textually in sync.
  */
 function _schemaBytesWillBeSent(providerName, hasSchema, modelForTracking) {
   if (!hasSchema) return false;
-  if (_normalizeProviderKey(providerName) === _normalizeProviderKey(PROVIDER.CLAUDE_CLI)) {
+  const providerKey = _normalizeProviderKey(providerName);
+  if (providerKey === _normalizeProviderKey(PROVIDER.CLAUDE_CLI)
+    || providerKey === _normalizeProviderKey(PROVIDER.CODEX_CLI)) {
     return getSchemaMode() !== 'off';
   }
   return shouldUseSchemaMode(providerName, hasSchema, modelForTracking);
@@ -4773,7 +4801,8 @@ export function isModelAvailable(modelId) {
  * Cloudflare Workers AI, Mistral AI) are considered.
  */
 export function isAnyModelAvailable() {
-  return DEFAULT_CHAIN.some(m => isModelAvailable(m));
+  return DEFAULT_CHAIN.some(m => isModelAvailable(m))
+    || isModelAvailable(AI_MODELS.CODEX_CLI_PRIMARY);
 }
 
 /**
@@ -5337,7 +5366,9 @@ function _isLiteralAddress(host) {
 // module. Keep this predicate beside the evidence classifier so process
 // failures cannot silently enter a DNS metric.
 function _providerUsesResolver(provider) {
-  return _normalizeProviderKey(provider) !== _normalizeProviderKey(PROVIDER.CLAUDE_CLI);
+  const key = _normalizeProviderKey(provider);
+  return key !== _normalizeProviderKey(PROVIDER.CLAUDE_CLI)
+    && key !== _normalizeProviderKey(PROVIDER.CODEX_CLI);
 }
 
 /**
@@ -6688,38 +6719,6 @@ async function _callLocal(model, messages, opts) {
  * of the remote chain rather than like slow CPU inference. See
  * PROVIDER.OMNIROUTE / AI_MODELS.OMNIROUTE_AUTO.
  */
-/**
- * Classify only a Claude CLI usage-limit/HTTP-429 terminal signal.
- *
- * A plain subprocess failure is deliberately not enough: 529 overloads,
- * max-turns, ENOENT, timeouts and malformed output must continue through the
- * existing Claude error path and then the normal callLLM chain. The stream
- * trace is the strongest signal (the CLI's rejected rate_limit_event), while
- * the result envelope covers the action's explicit api_error_status shape.
- */
-function _isClaudeCliUsageLimit({ parsed = null, trace = null, text = '' } = {}) {
-  if (trace?.rateLimitRejected === true) return true;
-  if (parsed && typeof parsed === 'object') {
-    if (parsed.is_error === true && Number(parsed.api_error_status) === 429) return true;
-    if (parsed.error === 'rate_limit') return true;
-    if (parsed.error && typeof parsed.error === 'object') {
-      const error = parsed.error;
-      if (error.type === 'rate_limit' || error.code === 'rate_limit' || Number(error.status) === 429) return true;
-    }
-    if (parsed.terminal_reason === 'api_error' && Number(parsed.status) === 429) return true;
-  }
-
-  // Some CLI versions put the HTTP status only in `result`/stderr. Keep the
-  // textual matcher strict: a bare phrase such as "rate limit" is not proof
-  // of a provider response, while an explicit HTTP/status 429 is.
-  let body = String(text || '');
-  if (parsed && typeof parsed === 'object') {
-    try { body += ` ${JSON.stringify(parsed)}`; } catch { /* ignore */ }
-  }
-  return /\b(?:HTTP(?:\s+status)?|status|status[_ -]?code|api[_ -]?error[_ -]?status)\s*[:=]?\s*429\b/i.test(body)
-    || /\b429\s+(?:too\s+many\s+requests|rate[ -]?limit|usage[ -]?limit|quota)\b/i.test(body);
-}
-
 function _codexFallbackTimeoutMs(opts = {}) {
   const raw = Number.parseInt((process.env.CODEX_CLI_TIMEOUT_MS || '').trim(), 10);
   // Keep the client-side contract in lockstep with the broker's validation:
@@ -6731,7 +6730,7 @@ function _codexFallbackTimeoutMs(opts = {}) {
   );
   if (!opts.deadlineMs) return configured;
   const remaining = opts.deadlineMs - Date.now();
-  if (remaining <= 0) throw new Error('Codex fallback skipped: caller deadline already expired');
+  if (remaining <= 0) throw new Error('Codex primary skipped: caller deadline already expired');
   // The minimum is a useful default, never a reason to run past the caller's
   // absolute deadline. A near-expiry caller gets the short amount of time
   // actually left; the normal cascade then remains responsible for deciding
@@ -6798,6 +6797,12 @@ function _claimCodexCliFallback() {
   }
 }
 
+function _codexCliSlotAvailable() {
+  if (!isCodexCliPrimaryEnabled() || _codexCliFallbackAttempted) return false;
+  const markerPath = _codexFallbackMarkerPath();
+  return !markerPath || !fs.existsSync(markerPath);
+}
+
 export function __claimCodexFallbackForTests() {
   return _claimCodexCliFallback();
 }
@@ -6814,7 +6819,7 @@ function _requestCodexExecution({ prompt, timeoutMs, schema, deadlineMs }) {
   const socketPath = String(process.env.CODEX_AUTH_BROKER_SOCKET || '').trim();
   if (!socketPath) return Promise.reject(new Error('CODEX_AUTH_BROKER_SOCKET is not configured'));
   const remaining = Number(deadlineMs) > 0 ? Number(deadlineMs) - Date.now() : Infinity;
-  if (remaining <= 0) return Promise.reject(new Error('Codex fallback skipped: caller deadline already expired'));
+  if (remaining <= 0) return Promise.reject(new Error('Codex primary skipped: caller deadline already expired'));
   const requestTimeoutMs = Math.min(
     Math.max(1, Number.isFinite(Number(timeoutMs)) ? Number(timeoutMs) : CODEX_CLI_MAX_TIMEOUT_MS),
     CODEX_CLI_MAX_TIMEOUT_MS,
@@ -6950,62 +6955,26 @@ function _validateCodexCliResult(result, { wantsJson, schemaApplied }) {
 }
 
 /**
- * One-shot Codex CLI subscription fallback. The action-owned broker
- * materializes auth in a private temporary CODEX_HOME only for this invocation
- * and removes it in its finally block, including timeout/output failures.
+ * One-shot Codex CLI subscription primary. The action-owned broker materializes
+ * auth in a private temporary CODEX_HOME only for this invocation and removes
+ * it in its finally block, including timeout/output failures.
  */
 async function _callCodexCli(messages, opts = {}) {
+  const timeoutMs = _codexFallbackTimeoutMs(opts);
+  if (!_claimCodexCliFallback()) {
+    throw new Error('Codex primary skipped: one-shot already consumed');
+  }
   const jsonRequest = _codexFallbackJsonRequest(opts);
   const result = await _requestCodexExecution({
     prompt: _codexPrompt(messages, { jsonOnly: jsonRequest.wantsJson }),
-    timeoutMs: _codexFallbackTimeoutMs(opts),
+    timeoutMs,
     schema: jsonRequest.schema,
     deadlineMs: opts.deadlineMs,
   });
   if (opts.deadlineMs && Date.now() >= opts.deadlineMs) {
-    throw new Error('Codex fallback skipped: caller deadline expired during execution');
+    throw new Error('Codex primary skipped: caller deadline expired during execution');
   }
   return _validateCodexCliResult(result, jsonRequest);
-}
-
-async function _tryCodexCliUsageLimitFallback(messages, opts, claudeError, claudeModel) {
-  if (!claudeError?.claudeCliUsageLimit) return null;
-  if (!String(process.env.CODEX_AUTH_BROKER_SOCKET || '').trim()) {
-    console.warn('⚠️ Claude CLI usage limit detected, but CODEX_AUTH_BROKER_SOCKET is not configured — continuing normal fallback chain');
-    return null;
-  }
-
-  // Reserve before the await so concurrent Claude calls cannot launch two
-  // Codex attempts. A failed attempt remains consumed by design (one-shot).
-  let claimed;
-  try {
-    claimed = _claimCodexCliFallback();
-  } catch (err) {
-    console.warn(`⚠️ Claude CLI usage limit → Codex fallback lock failed: ${String(err?.message || err).slice(0, 300)} — continuing normal fallback chain`);
-    return null;
-  }
-  if (!claimed) return null;
-  try {
-    const result = await _callCodexCli(messages, opts);
-    // The Claude request really did receive a 429. Keep its consecutive-429
-    // telemetry and failure score attached to Claude; the successful result is
-    // credited to Codex by callLLM through modelUsedRef below.
-    if (claudeModel) {
-      _consecutive429.set(claudeModel, (_consecutive429.get(claudeModel) || 0) + 1);
-      _recordLastResortOutcome(claudeModel, 'failed');
-      if (opts?.recordScore !== false) recordModelFailure(claudeModel);
-    }
-    if (opts?.modelUsedRef && typeof opts.modelUsedRef === 'object') {
-      opts.modelUsedRef.model = CODEX_FALLBACK_MODEL;
-      opts.modelUsedRef.provider = 'codex-cli';
-      opts.modelUsedRef.indirectFallback = true;
-    }
-    console.warn(`✅ Claude CLI usage limit → Codex fallback succeeded (${CODEX_FALLBACK_MODEL}, effort=${CODEX_INDIRECT_FALLBACK_EFFORT})`);
-    return result;
-  } catch (err) {
-    console.warn(`⚠️ Claude CLI usage limit → Codex fallback failed: ${String(err?.message || err).slice(0, 300)} — continuing normal fallback chain`);
-    return null;
-  }
 }
 function _callOmniRoute(model, messages, opts) {
   const apiModel = getApiModelId(model); // = 'auto'
@@ -7139,12 +7108,6 @@ async function _callClaudeCli(model, messages, opts) {
   try {
     ({ code, stdout, stderr, trace } = await spawnCall());
   } catch (err) {
-    // A rejected rate-limit event is authoritative even when the CLI had
-    // already emitted a salvageable partial payload. Give the subscription
-    // replacement its promised first chance; if it is unavailable or fails,
-    // retain the pre-existing salvage path below.
-    const codex = await _tryCodexCliUsageLimitFallback(messages, opts, err, model);
-    if (codex !== null) return codex;
     // Il timeout ha ucciso il processo, ma il contenuto puo' essere gia'
     // arrivato: un `tool_use` di StructuredOutput e' emesso a blocco chiuso,
     // quindi o non c'e' o e' intero. Preferirlo all'errore e' cio' che
@@ -7167,9 +7130,6 @@ async function _callClaudeCli(model, messages, opts) {
     // timeout — un processo uscito 0 senza result non e' la stessa cosa di uno
     // che ha scritto spazzatura.
     const error = new Error(`[${model}] claude CLI senza evento result (exit ${code})${trace.describe()}: ${(stdout || stderr).slice(0, 300)}`);
-    error.claudeCliUsageLimit = _isClaudeCliUsageLimit({ trace, text: stderr });
-    const codex = await _tryCodexCliUsageLimitFallback(messages, opts, error, model);
-    if (codex !== null) return codex;
     const recovered = _salvageClaudeCliPayload(model, trace.salvage(), `nessun evento result (exit ${code})`);
     if (recovered !== null) return recovered;
     throw error;
@@ -7180,9 +7140,6 @@ async function _callClaudeCli(model, messages, opts) {
     // 6.773 token di output, `result` vuoto). Anche qui il primo tentativo
     // rifiutato e' un articolo completo, e buttarlo costa quanto il timeout.
     const error = new Error(`[${model}] claude CLI error: ${String(parsed.result || stderr || 'unknown').slice(0, 300)}`);
-    error.claudeCliUsageLimit = _isClaudeCliUsageLimit({ parsed, trace, text: stderr });
-    const codex = await _tryCodexCliUsageLimitFallback(messages, opts, error, model);
-    if (codex !== null) return codex;
     const recovered = _salvageClaudeCliPayload(model, trace.salvage(), `is_error (exit ${code})`);
     if (recovered !== null) return recovered;
     throw error;
@@ -7618,7 +7575,6 @@ async function _runClaudeCliProcess(args, timeoutMs) {
       const streamExcerpt = trace.describe();
       const err = new Error(`claude CLI timed out after ${timeoutMs}ms${streamExcerpt}${stderrExcerpt}${stdoutExcerpt}`);
       err.name = 'TimeoutError';
-      err.claudeCliUsageLimit = trace.rateLimitRejected === true;
       // Cio' che era gia' arrivato quando abbiamo ucciso il processo. Va
       // sull'errore e non in un resolve() perche' la decisione se un payload
       // parziale valga una risposta e' del chiamante, non del trasporto.
@@ -7843,7 +7799,8 @@ const HARD_CALL_CAP_GRACE_MS = 60_000;
 function _hardCallCapMs(model, opts) {
   const provider = getProvider(model);
   let base = Math.max(opts?.timeout || 0, 30_000);
-  // Mirror the per-provider timeout ceilings _callLocal / _callClaudeCli can
+  // Mirror the per-provider timeout ceilings _callLocal / _callCodexCli /
+  // _callClaudeCli can
   // grow to, otherwise the cap would fire before their own timeout ever
   // could. LOCAL: dimensionato sul MASSIMO che _callLocal puo' concedersi
   // (LOCAL_LLM_MAX_TIMEOUT_MS), non sul floor — stessa correzione applicata a
@@ -7859,6 +7816,10 @@ function _hardCallCapMs(model, opts) {
   // qui sopra («otherwise the cap would fire before their own timeout ever
   // could») esiste per prevenire.
   else if (provider === PROVIDER.CLAUDE_CLI) base = Math.max(base, CLAUDE_CLI_MAX_TIMEOUT_MS);
+  // Codex is brokered with the same 10-minute process ceiling on the action
+  // side. Keep the outer backstop above that ceiling so a healthy primary call
+  // can finish before callLLM abandons it.
+  else if (provider === PROVIDER.CODEX_CLI) base = Math.max(base, CODEX_CLI_MAX_TIMEOUT_MS);
   const attempts = Math.max(1, opts?.maxRetriesPerModel || 1);
   let cap = attempts * (base + MAX_RETRY_AFTER_MS) * 2 + HARD_CALL_CAP_GRACE_MS;
   if (opts?.deadlineMs) {
@@ -7992,6 +7953,7 @@ function _routeModelCall(model, messages, opts) {
     case PROVIDER.CHUTES:      return _callChutes(model, messages, opts);
     case PROVIDER.ZAI:         return _callZai(model, messages, opts);
     case PROVIDER.LOCAL:       return _callLocal(model, messages, opts);
+    case PROVIDER.CODEX_CLI:   return _callCodexCli(messages, opts);
     case PROVIDER.CLAUDE_CLI:  return _callClaudeCli(model, messages, opts);
     case PROVIDER.OMNIROUTE:   return _callOmniRoute(model, messages, opts);
     default: throw new Error(`[${model}] Unknown provider: ${provider}`);
@@ -8336,15 +8298,12 @@ export async function callLLM(messages, opts = {}) {
       }
 
       // Keep the requested model separate from the model that actually
-      // answered. The Claude→Codex path is still entered through Claude's
-      // provider, but a successful replacement must credit Codex and expose
-      // that identity to downstream content validation.
+      // answered. This is normally the same id; the ref remains useful to
+      // callers that inspect the serving model after a scored fallback.
       const callModelRef = { model, provider };
       const callOpts = { ...o, modelUsedRef: callModelRef };
       const result = await _callModel(model, messages, callOpts);
       const servedModel = callModelRef.model || model;
-      const servedViaCodex = callModelRef.indirectFallback === true
-        && servedModel === CODEX_FALLBACK_MODEL;
 
       // ✅ Success — boost this model's score so it stays near the top
       // (skipped for diagnostic-only callers, see DEFAULT_OPTS.recordScore)
@@ -8354,14 +8313,12 @@ export async function callLLM(messages, opts = {}) {
       // diagnostica finiva percio' con `0ok/0ko` su modelli che aveva chiamato
       // davvero, che e' la lettura che rende invisibile il prossimo incidente.
       recordModelSuccess(servedModel, { recordScore: _shouldRecordScore(o) });
-      if (!servedViaCodex) {
-        _consecutive429.delete(model); // FRO-325: reset 429 counter on success
-        _clampedTimeouts.delete(model); // an answer clears the adaptive-ceiling doubt
-        _recordResolverFlapReset(o._resolverContext, provider, 'success'); // the name resolved: the flap streak is over (#770)
-        _recordLastResortOutcome(model, 'served');
-        if (provider === PROVIDER.CLAUDE_CLI) _claudeCliConsecutiveTimeouts = 0;
-        if (provider === PROVIDER.OMNIROUTE) _omniRouteConsecutiveFailures = 0;
-      }
+      _consecutive429.delete(model); // FRO-325: reset 429 counter on success
+      _clampedTimeouts.delete(model); // an answer clears the adaptive-ceiling doubt
+      _recordResolverFlapReset(o._resolverContext, provider, 'success'); // the name resolved: the flap streak is over (#770)
+      _recordLastResortOutcome(model, 'served');
+      if (provider === PROVIDER.CLAUDE_CLI) _claudeCliConsecutiveTimeouts = 0;
+      if (provider === PROVIDER.OMNIROUTE) _omniRouteConsecutiveFailures = 0;
 
       if (i > 0) {
         console.warn(`✅ Fallback to ${servedModel} succeeded (score → ${_modelScores.get(servedModel) || 0})`);
