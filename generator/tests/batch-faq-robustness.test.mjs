@@ -32,6 +32,7 @@
  */
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
+import { spawnSync } from 'node:child_process';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
@@ -83,13 +84,37 @@ test('importare il modulo non arma nessun handler di segnale', () => {
   const guardia = src.indexOf('if (import.meta.url ===');
   assert.ok(guardia > 0, 'la guardia sull entry point deve esserci');
   // Le CHIAMATE, non la definizione: `function installSigtermCheckpoint()` sta
-  // per forza sopra la guardia, ed e' giusto che ci stia.
-  const chiamate = [...src.matchAll(/(?<!function\s)\binstallSigtermCheckpoint\(\)/g)].map((m) => m.index);
+  // dentro `main()`, che viene invocata solo dalla guardia.
+  const chiamate = [...src.matchAll(/(?<!function\s)\binstallSigtermCheckpoint\([^)]*\)/g)].map((m) => m.index);
   assert.ok(chiamate.length > 0, 'lo script deve pur armarlo quando gira davvero');
+  const main = src.indexOf('async function main(');
+  assert.ok(main > 0, 'la guardia CLI deve avere una main esplicita');
   for (const i of chiamate) {
-    assert.ok(i > guardia,
-      'installSigtermCheckpoint() va CHIAMATA solo dentro la guardia sull entry point: a module scope si arma anche su un import');
+    assert.ok(i > main,
+      'installSigtermCheckpoint() va chiamata dentro main: a module scope si arma anche su un import');
   }
+});
+
+test('la configurazione CLI resta import-safe e section usa first-wins', () => {
+  const options = batch.parseCliOptions([
+    '--limit=3',
+    '--section=frontaliere',
+    '--section=svizzera',
+    '--concurrency',
+    '2',
+  ]);
+  assert.equal(options.limit, 3);
+  assert.equal(options.concurrency, 2);
+  assert.equal(options.section, 'frontaliere',
+    'le flag ripetute devono avere la stessa precedenza first-wins del parser limit');
+
+  const probe = spawnSync(process.execPath, [
+    '--input-type=module',
+    '-e',
+    `process.argv.push('--limit=not-a-number', '--section=invalid'); await import(${JSON.stringify(SCRIPT)}); console.log('import-ok');`,
+  ], { encoding: 'utf8' });
+  assert.equal(probe.status, 0, probe.stderr);
+  assert.match(probe.stdout, /import-ok/);
 });
 
 // ── #393 — il corpo che entra nel prompt e' quello del proprio id ────────────
