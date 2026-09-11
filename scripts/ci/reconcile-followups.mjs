@@ -823,6 +823,30 @@ function mergedPrDetails(number) {
 }
 
 /**
+ * Keep the issue-specific search as the primary source, but recover from a
+ * transient/permission-limited empty search with the already-fetched merged
+ * window.  The fallback is still exact: only a literal `Addresses #N` body
+ * reference is admitted, never a `Closes` reference or a free-form keyword.
+ */
+export function addressedMergedRows(issueNumber, searchedRows = [], fallbackRows = []) {
+  const n = Number(issueNumber);
+  if (!Number.isInteger(n) || n <= 0) return [];
+  const addressed = new RegExp(`\\bAddresses\\s+#${n}\\b`, 'i');
+  const seen = new Set();
+  const rows = [
+    ...(Array.isArray(searchedRows) ? searchedRows : []),
+    ...(Array.isArray(fallbackRows) ? fallbackRows : []),
+  ];
+  return rows.filter((row) => {
+    const number = Number(row?.number);
+    if (!Number.isInteger(number) || number <= 0 || seen.has(number)) return false;
+    if (!addressed.test(String(row?.body || ''))) return false;
+    seen.add(number);
+    return true;
+  });
+}
+
+/**
  * Read merged PR provenance once per reconcile run. `Addresses` is deliberately
  * the only accepted issue reference here: `Closes` would let a transport PR
  * change issue state before this workflow's grace window and is forbidden for
@@ -858,8 +882,8 @@ function mergedAddressedPrs(issueNumber) {
     .map((listed) => mergedPrDetails(listed.number))
     .filter(Boolean);
   const candidates = [];
-  for (const listed of mergedAddressedListCache.get(n)) {
-    if (!new RegExp(`\\bAddresses\\s+#${n}\\b`, 'i').test(String(listed?.body || ''))) continue;
+  const addressedRows = addressedMergedRows(n, mergedAddressedListCache.get(n), mergedPrListCache);
+  for (const listed of addressedRows) {
     const detail = mergedPrDetails(listed.number);
     if (detail) candidates.push({ ...detail, supportingPrs: transportPrs });
   }
