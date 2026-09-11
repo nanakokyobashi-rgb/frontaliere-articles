@@ -831,6 +831,20 @@ describe('wiring — il guard e\' cablato sul percorso di scrittura CONDIVISO', 
     assert.ok(corpo.includes('sanitizePromptPlaceholders(data)'), 'guard non invocato in registerArticleFiles');
   });
 
+  it('la postcondizione dei comuni gira anche nel percorso condiviso', () => {
+    const corpo = registerArticleFilesBody();
+    const sanitizeAt = corpo.indexOf('sanitizePromptPlaceholders(data)');
+    const municipalitiesAt = corpo.indexOf('preserveMunicipalityNamesInMetadata(data)');
+    const factualityAt = corpo.indexOf('assertArticlePassesFactualityGates(data)');
+    assert.ok(sanitizeAt !== -1, 'guard placeholder mancante nel percorso condiviso');
+    assert.ok(municipalitiesAt !== -1, 'postcondizione dei comuni mancante nel percorso condiviso');
+    assert.ok(factualityAt !== -1, 'gate di factuality mancante nel percorso condiviso');
+    assert.ok(
+      sanitizeAt < municipalitiesAt && municipalitiesAt < factualityAt,
+      'i comuni vanno preservati dopo la sanitizzazione e prima della scrittura/gate',
+    );
+  });
+
   it('sanitizePromptPlaceholders gira anche nel flusso AI primario (generateAndValidateArticle)', () => {
     // Il flusso primario — main() → generateAndValidateArticle(), il
     // produttore piu' frequente del corpus (cron ogni ~30 min) — scrive i

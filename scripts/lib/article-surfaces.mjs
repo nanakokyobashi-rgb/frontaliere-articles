@@ -9,18 +9,20 @@
  *     (`scripts/ci/list-pr-gate-tests.mjs`), che rilegge le stesse superfici su
  *     ogni voce di `data/retired-articles.json`.
  *
- * Fino a qui l'elenco era scritto due volte, e le due copie erano già
- * divergenti: il gate non guardava `content/blogArticleIds.ts`, i file SEO né
- * il ledger delle immagini, quindi un id ritirato sopravvissuto lì passava
- * verde — proprio nel test che esiste per accorgersene. Un elenco duplicato non
- * diverge «se qualcuno sbaglia»: diverge da solo, perché una superficie nuova
- * si aggiunge dove serve subito (lo script) e non dove serve dopo (il gate).
- * Da qui la sorgente unica (AGENTS.md #6), come già per `mentions-id.mjs`.
+ * Fino a qui l'elenco era scritto a mano, e la copia era già divergente dalla
+ * sorgente del generatore: il gate non guardava `content/blogArticleIds.ts` o
+ * i file SEO, quindi un id ritirato sopravvissuto lì passava verde — proprio
+ * nel test che esiste per accorgersene. Un elenco duplicato non diverge «se
+ * qualcuno sbaglia»: diverge da solo, perché una superficie nuova si aggiunge
+ * dove serve subito e non dove serve dopo. Da qui la sorgente unica
+ * (AGENTS.md #6), come già per `mentions-id.mjs`.
  */
 
 import { existsSync, readdirSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { ARTICLE_SECTION_CORE } from '../../engine/shared/articleSectionCore.mjs';
+import { corpusPath } from '../../generator/scripts/lib/corpus-paths.mjs';
 import { ledgerArticleId } from '../../generator/scripts/lib/source-url-ledger.mjs';
 import { mentionsId } from './mentions-id.mjs';
 
@@ -32,11 +34,24 @@ export const IMAGES_LEDGER = 'data/blog-images-used.json';
 export const IMAGE_CATALOG = 'public/data/journalist-image-catalog.json';
 export const RETIRED_LEDGER = 'data/retired-articles.json';
 
+/**
+ * The main-layout tuple is canonical in `ARTICLE_SECTION_CORE`. The corpus
+ * only maps those paths into its published layout; section-specific extras
+ * remain here because they are genuinely not part of that shared tuple.
+ */
+function canonicalSurfaces(core) {
+  return {
+    registryFile: corpusPath(core.registryFile),
+    slugDataFile: corpusPath(core.slugDataFile),
+    metaFiles: LOCALES.map((locale) => corpusPath(`services/locales/${core.metaPrefix}-${locale}.ts`)),
+    bodyDir: corpusPath(`services/locales/${core.bodyDir}`),
+  };
+}
+
 /** Descrittori per sezione: le superfici su cui `create-article.mjs` scrive. */
 export const SECTIONS = {
   frontaliere: {
-    registryFile: 'content/blog-articles-data.ts',
-    slugDataFile: 'content/routerBlogData.ts',
+    ...canonicalSurfaces(ARTICLE_SECTION_CORE.frontaliere),
     // `ALL_BLOG_ARTICLE_IDS` è un array letterale indipendente, non derivato
     // da `BLOG_SLUGS`: rimuovere la riga slug non lo tocca. `routerSwissData.ts`
     // non ha bisogno del suo equivalente qui perché lì è
@@ -47,22 +62,17 @@ export const SECTIONS = {
     // che è un file a sé e non deriva da nulla. Senza ripulirla il tipo
     // continua ad ammettere un id che non esiste più su nessuna superficie.
     idUnionFile: 'content/blogArticleIds.ts',
-    metaFiles: LOCALES.map((l) => `content/blog-meta-${l}.ts`),
-    bodyDir: 'content/blog-body',
     seoFiles: null, // scoperti a runtime: content/seo/seo-blog*.ts
     seoGlobPrefix: 'content/seo/seo-blog',
     sourceLedger: 'data/article-source-urls.json',
     sidecarDir: 'data/blog-articles',
   },
   svizzera: {
-    registryFile: 'content/swiss-articles-data.ts',
-    slugDataFile: 'content/routerSwissData.ts',
+    ...canonicalSurfaces(ARTICLE_SECTION_CORE.svizzera),
     idListVar: null,
     // `create-article.mjs`: la sezione svizzera NON mantiene la union
     // (`updateRouterUnion` falso), gli id sono stringhe libere.
     idUnionFile: null,
-    metaFiles: LOCALES.map((l) => `content/blog-meta-ch-${l}.ts`),
-    bodyDir: 'content/blog-body-ch',
     seoFiles: ['content/seo/seo-blog-ch.ts'],
     seoGlobPrefix: null,
     sourceLedger: 'data/swiss-article-source-urls.json',
@@ -130,6 +140,26 @@ export function seoFilesFor(section) {
 }
 
 /**
+ * Files every section must have for a registration to be inspectable. These
+ * are not optional inputs: if one is absent, treating the section as clean
+ * would make a partial retirement pass the guard open. SEO chunks and the
+ * source/id ledgers are intentionally handled separately because their
+ * presence varies by producer/history.
+ */
+export function requiredSurfaceFilesFor(section, root = ROOT) {
+  const cfg = SECTIONS[section];
+  if (!cfg) throw new Error(`sezione sconosciuta: '${section}'`);
+  const required = [cfg.registryFile, cfg.slugDataFile, ...cfg.metaFiles];
+  const missing = required.filter((file) => !existsSync(path.join(root, file)));
+  if (missing.length > 0) {
+    throw new Error(
+      `superfici obbligatorie mancanti per la sezione '${section}': ${missing.join(', ')}`,
+    );
+  }
+  return required;
+}
+
+/**
  * Le superfici TESTUALI su cui un id ritirato non deve più comparire — quelle
  * da cui si rimuove una riga o un blocco, non il file intero (corpi e sidecar
  * si cancellano, e la loro assenza si verifica con `existsSync`).
@@ -139,13 +169,11 @@ export function seoFilesFor(section) {
 export function leftoverSurfacesFor(section) {
   const cfg = SECTIONS[section];
   if (!cfg) throw new Error(`sezione sconosciuta: '${section}'`);
-  return [
-    cfg.registryFile,
-    cfg.slugDataFile,
-    ...cfg.metaFiles,
+  const required = requiredSurfaceFilesFor(section);
+  const optional = [
     ...seoFilesFor(section),
     cfg.sourceLedger,
-    IMAGES_LEDGER,
     ...(cfg.idUnionFile ? [cfg.idUnionFile] : []),
   ].filter((f) => existsSync(path.join(ROOT, f)));
+  return [...required, ...optional];
 }

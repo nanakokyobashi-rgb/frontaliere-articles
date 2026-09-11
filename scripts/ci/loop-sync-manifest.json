@@ -479,6 +479,16 @@
       }
     },
     {
+      "path": "scripts/lib/seo-entry.mjs",
+      "mode": "corpus-only",
+      "reason": "Helper fail-closed per rimuovere atomicamente tutte le entry SEO duplicate durante il ritiro di un articolo (#1130). Il sito non ha questo percorso di pubblicazione corpus-side e non deve ricevere una copia con assunzioni diverse sul formato dei chunk SEO.",
+      "baseline": {
+        "site": null,
+        "corpus": "f5c10340550b94f3",
+        "alignedAt": "2026-09-11"
+      }
+    },
+    {
       "path": "scripts/lib/workflow-scope-detect.mjs",
       "mode": "identical",
       "baseline": {
@@ -2261,6 +2271,16 @@
         "site": null,
         "corpus": "58011f21c0ea671d",
         "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/journalist-publish-recovery.mjs",
+      "mode": "corpus-only",
+      "reason": "Recovery per i documenti giornalista marcati `published` prima che il workflow possa committare le superfici condivise. Vive solo nel corpus: il percorso Firestore del publisher e il relativo checkpoint sono specifici della pipeline di pubblicazione qui, mentre il sito non ha questo modulo gemello. La logica per chunk riconcilia un `batch.commit()` con esito incerto, ritenta solo i documenti ancora `published` e conserva gli ID realmente rimessi in coda; resta dependency-free per la regressione `node --test` e non e' un file da portare nel mirror del sito.",
+      "baseline": {
+        "site": null,
+        "corpus": "9f2333e28695e90c",
+        "alignedAt": "2026-09-11"
       }
     },
     {

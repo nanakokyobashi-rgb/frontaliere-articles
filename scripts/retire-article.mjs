@@ -60,6 +60,7 @@ import {
 // la usa anche `generator/scripts/create-article.mjs`, che lo STESSO array lo
 // rigenera (vedi il file per il perché delle due euristiche cadute).
 import { matchingDelimiter, removeFromIdListLiteral } from './lib/ts-literals.mjs';
+import { removeSeoEntriesFromSource } from './lib/seo-entry.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 
@@ -140,21 +141,9 @@ function removeMetaKeys(file, id) {
   return { changed: out !== src, src: out };
 }
 
-/** Rimuove il blocco `'blog-<id>': { … },` da un file SEO. */
+/** Rimuove tutti i blocchi `'blog-<id>': { … },` da un file SEO. */
 function removeSeoEntry(file, id) {
-  const src = read(file);
-  const needle = `'blog-${id}': {`;
-  const at = src.indexOf(needle);
-  if (at === -1) return { changed: false, src };
-  const open = src.indexOf('{', at);
-  const close = matchingDelimiter(src, open);
-  if (close === -1) throw new Error(`${file}: graffe sbilanciate attorno a blog-${id}`);
-  let start = at;
-  while (start > 0 && (src[start - 1] === ' ' || src[start - 1] === '\t')) start -= 1;
-  let end = close + 1;
-  if (src[end] === ',') end += 1;
-  if (src[end] === '\n') end += 1;
-  return { changed: true, src: src.slice(0, start) + src.slice(end) };
+  return removeSeoEntriesFromSource(read(file), id, file);
 }
 
 /**
