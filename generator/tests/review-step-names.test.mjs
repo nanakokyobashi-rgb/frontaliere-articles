@@ -166,6 +166,8 @@ test('max_turns distingue una review gia\' postata sulla HEAD nella run corrente
   const { REVIEW_ABORT_STEP_NAME } = await import('../../scripts/ci/lib/vitestCheck.mjs');
   const block = stepBlock(yaml, REVIEW_ABORT_STEP_NAME);
   assert.match(yaml, /^\s*actions:\s*read\s*$/m, 'la probe della run deve poter leggere Actions API');
+  assert.match(block, /node scripts\/ci\/parse-claude-execution\.mjs "\$\{EXEC_FILE\}" > "\$\{EXEC_EVENTS_FILE\}"/);
+  assert.match(block, /EXEC_EVENTS_FILE/);
   assert.match(block, /jq -e -s/);
   assert.match(block, /flatten \| any\(\.\[\]\?;/);
   assert.match(block, /terminal_reason == "max_turns"/);

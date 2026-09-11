@@ -3692,7 +3692,7 @@
       "reason": "Wrapper del parser condiviso `parseExecutionMessages()` usato dal workflow corpus per normalizzare una volta l'execution stream Claude prima dei classificatori dei failure. Non esiste sul sito e non deve: il gemello adattato del workflow non invoca questo consumer locale.",
       "baseline": {
         "site": null,
-        "corpus": "0ab31d0b6cc894b5",
+        "corpus": "3be8a132bc5de01a",
         "alignedAt": "2026-09-11"
       }
     }
