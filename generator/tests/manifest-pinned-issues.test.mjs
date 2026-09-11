@@ -82,15 +82,15 @@ test('senza repo, o su manifest illeggibile, non si pinna niente (direzione sicu
 });
 
 /**
- * Il caso misurato: `.github/workflows/issue-fix.yml` e' `adapted`, quindi
- * spedibile e non `stranded` — il ramo `blocked-*` tornava `close: true`. Su
- * #986 questo significa che il solo canale capace di far avanzare la issue era
- * anche quello che la chiudeva.
+ * Il caso misurato: un gemello `identical` trasportabile resta spedibile e non
+ * `stranded` — il ramo `blocked-*` torna `close: true`. Il test usa proprio
+ * questa forma per isolare il pin: #1142 aggiunge invece come residuo anche gli
+ * altri path citati che non sono garantiti dal trasporto.
  */
 test('handoff: una issue pinnata si consegna ma NON si chiude', () => {
   const body =
     'Il file da cambiare vive in valerielinc-ops/frontaliere-si-o-no: ' +
-    '`.github/workflows/issue-fix.yml` ha ancora la copia in shell.';
+    '`scripts/ci/followup-resolution-match.mjs` ha ancora la copia in shell.';
 
   const free = handoffDecision({ verdict: 'blocked-admin-settings', body });
   assert.equal(free.handoff, true);

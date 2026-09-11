@@ -25,6 +25,10 @@ on:
         description: 'Soglia "deeply stale" in ore (default 24)'
         type: string
         default: '24'
+      max_recycles:
+        description: 'Massimo di close+re-queue per run (default 5; lo scan riparte al run successivo)'
+        type: string
+        default: '5'
 
 permissions:
   contents: write   # serve per --delete-branch sul gh pr close (vedi sotto)
@@ -103,11 +107,18 @@ jobs:
           # commit + issue OPEN) tengono il blast radius minimo.
           DRY_RUN: ${{ github.event_name == 'schedule' && 'false' || github.event.inputs.dry_run }}
           MAX_AGE_HOURS: ${{ github.event.inputs.max_age_hours || '24' }}
+          MAX_RECYCLES_PER_RUN: ${{ github.event.inputs.max_recycles || '5' }}
         run: |
           set -uo pipefail
           DRY="${DRY_RUN:-true}"
           NOW=$(date -u +%s)
           MAXAGE=$(( ${MAX_AGE_HOURS:-24} * 3600 ))
+          MAX_RECYCLES="${MAX_RECYCLES_PER_RUN:-5}"
+          if ! printf '%s' "$MAX_RECYCLES" | grep -qE '^[1-9][0-9]*$'; then
+            echo "::error::MAX_RECYCLES_PER_RUN deve essere un intero positivo (ricevuto: $MAX_RECYCLES)."
+            exit 1
+          fi
+          RECYCLE_ATTEMPTS=0
 
           # `autorebase-reopen-failed` e' escluso: quella label la mette
           # pr-autorebase quando la coppia close+reopen si rompe a meta', e dice
@@ -125,12 +136,18 @@ jobs:
           # ferme per sempre quelle che deve riciclare. L'endpoint `issues` e'
           # l'unico che filtra per label; `.pull_request` seleziona le PR e il
           # rimappaggio riporta i campi alla forma che i gate sotto leggono.
-          prs=$(gh api --paginate "repos/$REPO/issues?state=open&labels=stale-review&per_page=100" \
-            --jq '.[] | select(.pull_request) | {number, title, body, createdAt: .created_at, labels: [.labels[] | {name}]}' \
-            | jq -s '.')
+          # Cattura PRIMA l'esito di gh --paginate, poi aggrega le righe JSON.
+          # Se gh muore dopo una pagina, l'output parziale non arriva mai al
+          # ramo di close: il prossimo run riparte dall'elenco completo.
+          prs_lines=$(gh api --paginate "repos/$REPO/issues?state=open&labels=stale-review&per_page=100" \
+            --jq '.[] | select(.pull_request) | {number, title, body, createdAt: .created_at, labels: [.labels[] | {name}]}' )
           PRS_RC=$?
           if [ "$PRS_RC" -ne 0 ]; then
             echo "::error::Query stale-review fallita (rc=$PRS_RC): non riciclo PR con lista incompleta."
+            exit 1
+          fi
+          if ! prs=$(printf '%s\n' "$prs_lines" | jq -s '.'); then
+            echo "::error::Output stale-review non valido dopo la paginazione: non riciclo PR."
             exit 1
           fi
           COUNT=$(printf '%s' "$prs" | jq 'length')
@@ -210,6 +227,16 @@ jobs:
               gh issue comment "${ISSUE}" --repo "${REPO}" --body "♻️ PR stale #${N} non chiusa: riapplicare \`agent:fix\` (serve PAT) per un fix fresco." 2>/dev/null || true
               continue
             fi
+
+            # Cap misurato sul numero di chiusure tentate, riservato PRIMA
+            # dell'operazione distruttiva. Con timeout 10min e tre probe di
+            # ref per PR, 5 lascia margine a un run lento e rende lo scan
+            # ripartibile: il prossimo run riprende la lista da capo.
+            if [ "$RECYCLE_ATTEMPTS" -ge "$MAX_RECYCLES" ]; then
+              echo "::notice::Cap $MAX_RECYCLES_PER_RUN raggiunto: fermo prima di un altro gh pr close --delete-branch; il prossimo run riprenderà lo scan."
+              break
+            fi
+            RECYCLE_ATTEMPTS=$((RECYCLE_ATTEMPTS + 1))
 
             # --delete-branch OBBLIGATORIO: vedi sopra, e' cio' che libera il
             # nome per il push fresco. (richiede permissions.contents:write)
@@ -376,21 +403,21 @@ jobs:
             Crawler transient failures (rolling ledger)
         run: |
           set -uo pipefail
-          # L'ESITO delle due query, non solo il loro output. `set -e` non e'
-          # attivo (i rami sotto decidono da soli), quindi un `gh` non-zero —
-          # jq su una forma inattesa, rate-limit, token scaduto — lascia la
-          # variabile VUOTA e indistinguibile da «nessun residuo». Se capita a
-          # entrambe (stessa causa: e' la stessa API con lo stesso token), il
-          # ramo sotto chiude il digest mentre il backlog
-          # needs-human e' pieno: senza fallire, e sotto `continue-on-error:
-          # true`, l'unico canale che gli umani leggono sparirebbe in silenzio.
+          # L'ESITO della query paginata e delle sue due partizioni, non solo il
+          # loro output. `set -e` non e' attivo (i rami sotto decidono da soli),
+          # quindi un `gh` non-zero — jq su una forma inattesa, rate-limit,
+          # token scaduto — lascia la variabile VUOTA e indistinguibile da
+          # «nessun residuo». La risposta unica fallita potrebbe quindi chiudere
+          # il digest mentre il backlog needs-human e' pieno: senza fallire, e
+          # sotto `continue-on-error: true`, l'unico canale che gli umani leggono
+          # sparirebbe in silenzio.
           # I due gemelli che chiudono con `--resolve` in questo repo
           # (reconcile-article-shards.yml, republish-dirty-content.yml) gia'
           # subordinano la chiusura a `steps.detect.outcome == 'success'` prima
           # ancora di guardare il conteggio; qui produttore e consumatore
           # stanno nello stesso step, e l'equivalente e' catturare `$?`.
           #
-          # E il PERIMETRO delle due query, non solo il loro esito: girano su
+          # E il PERIMETRO della query, non solo il suo esito: gira su
           # `gh api --paginate` e non su `gh pr list` / `gh issue list --limit
           # N`. Quei sottocomandi non hanno `--paginate` e il loro `--limit`
           # TRONCA IN SILENZIO: la lista PR qui non ne aveva nemmeno uno,
@@ -406,30 +433,48 @@ jobs:
           # entrambe: e' l'unico che accetta il filtro per label
           # (`repos/.../pulls` non ce l'ha), e la presenza di `.pull_request`
           # e' la discriminante fra i due tipi. Si pagina una volta sola e si
-          # partiziona il risultato in memoria: due query sullo stesso endpoint
-          # raddoppiavano il consumo di rate-limit e potevano osservare pagine
-          # diverse durante una mutazione del backlog.
-          NEEDS_HUMAN_API="repos/$GH_REPO/issues?state=open&labels=needs-human&per_page=100"
-          # `--slurp` conserva la forma delle pagine; il parser controlla sia
-          # quella forma sia gli envelope `errors + data` prima di permettere a
-          # un array vuoto di entrare nel ramo di chiusura. Il marker è una
-          # seconda sentinella: il JSON valido da solo non dimostra che il
-          # normalizzatore abbia accettato il contratto corretto.
-          NEEDS_HUMAN_RAW=$(gh api --paginate --slurp "$NEEDS_HUMAN_API")
-          NEEDS_HUMAN_RC=$?
+          # partiziona il risultato in memoria: una sola risposta evita il
+          # doppio consumo di rate-limit e osserva un backlog coerente.
+          # `gh --paginate --jq` emette un oggetto per item; il `jq -s` locale
+          # ricompone la risposta prima della validazione del payload. Cosi' il
+          # comando paginato resta l'unico fetch, ma il parser di #1389 continua
+          # a rifiutare JSON invalido, envelope con errors e forme troncate.
+          OPEN_ISSUES_API="repos/$GH_REPO/issues?state=open&per_page=100"
+          # shellcheck disable=SC2016 # le variabili $ENV.* appartengono a jq, non alla shell
+          OPEN_ISSUES_LINES=$(gh api --paginate "$OPEN_ISSUES_API" --jq '.[] | . as $i | {
+            number: $i.number,
+            title: $i.title,
+            updated_at: $i.updated_at,
+            pull_request: ($i.pull_request // null),
+            needs_human: ([$i.labels[]? | .name] | index("needs-human") != null),
+            dedup: (($i.pull_request == null) and ($i.title == $ENV.DEDUP_TITLE)),
+            permanent_tracker: (($i.pull_request == null) and (($ENV.PERMANENT_TRACKER_TITLES | split("\n") | map(select(length > 0)) | index($i.title)) != null))
+          }')
+          OPEN_ISSUES_FETCH_RC=$?
+          OPEN_ISSUES_ARRAY=''
+          OPEN_ISSUES_ARRAY_RC=1
           NEEDS_HUMAN_PAYLOAD=''
           NEEDS_HUMAN_ITEMS=''
+          NEEDS_HUMAN_RC=1
           NEEDS_HUMAN_SHAPE_RC=1
           NEEDS_HUMAN_MARKER_RC=1
           NEEDS_HUMAN_PAYLOAD_MARKER='<!-- NEEDS_HUMAN_DIGEST_PAYLOAD_OK -->'
-          if [ "$NEEDS_HUMAN_RC" -eq 0 ]; then
-            NEEDS_HUMAN_PAYLOAD=$(printf '%s' "$NEEDS_HUMAN_RAW" | node scripts/ci/needs-human-digest.mjs)
-            NEEDS_HUMAN_SHAPE_RC=$?
-            if [ "$NEEDS_HUMAN_SHAPE_RC" -eq 0 ]; then
-              NEEDS_HUMAN_MARKER=$(printf '%s\n' "$NEEDS_HUMAN_PAYLOAD" | sed -n '1p')
-              if [ "$NEEDS_HUMAN_MARKER" = "$NEEDS_HUMAN_PAYLOAD_MARKER" ]; then
-                NEEDS_HUMAN_MARKER_RC=0
-                NEEDS_HUMAN_ITEMS=$(printf '%s\n' "$NEEDS_HUMAN_PAYLOAD" | tail -n +2)
+          if [ "$OPEN_ISSUES_FETCH_RC" -eq 0 ]; then
+            OPEN_ISSUES_ARRAY=$(printf '%s\n' "$OPEN_ISSUES_LINES" | jq -s '.')
+            OPEN_ISSUES_ARRAY_RC=$?
+            if [ "$OPEN_ISSUES_ARRAY_RC" -eq 0 ]; then
+              # Il parser controlla ogni item e rifiuta errors/data parziali
+              # prima che un array vuoto possa entrare nel ramo di chiusura.
+              NEEDS_HUMAN_PAYLOAD=$(printf '%s' "$OPEN_ISSUES_ARRAY" | node scripts/ci/needs-human-digest.mjs)
+              NEEDS_HUMAN_SHAPE_RC=$?
+              if [ "$NEEDS_HUMAN_SHAPE_RC" -eq 0 ]; then
+                NEEDS_HUMAN_MARKER=$(printf '%s\n' "$NEEDS_HUMAN_PAYLOAD" | sed -n '1p')
+                if [ "$NEEDS_HUMAN_MARKER" = "$NEEDS_HUMAN_PAYLOAD_MARKER" ]; then
+                  NEEDS_HUMAN_MARKER_RC=0
+                  OPEN_ISSUES_ITEMS=$(printf '%s\n' "$NEEDS_HUMAN_PAYLOAD" | tail -n +2)
+                  NEEDS_HUMAN_ITEMS=$(printf '%s\n' "$OPEN_ISSUES_ITEMS" | jq '[.[] | select(.needs_human == true)]')
+                  NEEDS_HUMAN_RC=$?
+                fi
               fi
             fi
           fi
@@ -454,15 +499,15 @@ jobs:
           # Perche' per titolo e non per label: vedi PERMANENT_TRACKER_TITLES.
           PRS=$(printf '%s\n' "$NEEDS_HUMAN_ITEMS" | jq -r '[.[] | select(.pull_request) | "- #\(.number) \(.title) (ultimo update \(.updated_at))"] | join("\n")')
           PRS_RC=$?
-          ISSUES=$(printf '%s\n' "$NEEDS_HUMAN_ITEMS" | jq -r '[.[] | select(.pull_request | not) | select(.title != env.DEDUP_TITLE) | select(. as $i | [env.PERMANENT_TRACKER_TITLES | split("\n")[] | select(length > 0)] | index($i.title) | not) | "- #\(.number) \(.title) (ultimo update \(.updated_at))"] | join("\n")')
+          ISSUES=$(printf '%s\n' "$NEEDS_HUMAN_ITEMS" | jq -r '[.[] | select((.pull_request | not) and (.dedup | not) and (.permanent_tracker | not)) | "- #\(.number) \(.title) (ultimo update \(.updated_at))"] | join("\n")')
           ISSUES_RC=$?
-          if [ "$NEEDS_HUMAN_RC" -ne 0 ] || [ "$NEEDS_HUMAN_SHAPE_RC" -ne 0 ] || [ "$NEEDS_HUMAN_MARKER_RC" -ne 0 ]; then
+          if [ "$OPEN_ISSUES_FETCH_RC" -ne 0 ] || [ "$OPEN_ISSUES_ARRAY_RC" -ne 0 ] || [ "$NEEDS_HUMAN_RC" -ne 0 ] || [ "$NEEDS_HUMAN_SHAPE_RC" -ne 0 ] || [ "$NEEDS_HUMAN_MARKER_RC" -ne 0 ]; then
             # Query fallita: lo stato del backlog e' SCONOSCIUTO, non vuoto.
             # Non si chiude e non si ripubblica il corpo (che con una lista
             # troncata da un errore direbbe il falso): si fallisce lo step —
             # `continue-on-error: true` tiene comunque verde il job, ma il
             # rosso resta visibile e il prossimo run ricalcola da zero.
-            echo "::error::Payload needs-human fallito (fetch rc=$NEEDS_HUMAN_RC, shape rc=$NEEDS_HUMAN_SHAPE_RC, marker rc=$NEEDS_HUMAN_MARKER_RC): non tocco l'issue dedup. Liste vuote per una risposta parziale o malformata non sono «nessun residuo»."
+            echo "::error::Payload needs-human fallito (fetch rc=$OPEN_ISSUES_FETCH_RC, array rc=$OPEN_ISSUES_ARRAY_RC, partition rc=$NEEDS_HUMAN_RC, shape rc=$NEEDS_HUMAN_SHAPE_RC, marker rc=$NEEDS_HUMAN_MARKER_RC): non tocco l'issue dedup. Liste vuote per una risposta parziale o malformata non sono «nessun residuo»."
             exit 1
           fi
           # Le due partizioni hanno esiti indipendenti. Se una sola fallisce,
@@ -510,7 +555,7 @@ jobs:
             #
             # La chiusura risolve il NUMERO dell'issue con la STESSA
             # uguaglianza esatta con cui la lista qui sopra la esclude
-            # (`.title == env.DEDUP_TITLE`), e chiude quel numero. Passava da
+            # (`.title == $ENV.DEDUP_TITLE`), e chiude quel numero. Passava da
             # `github-issue-creator.mjs --resolve`, che cerca per PREFISSO
             # SANITIZZATO a 60 char (`searchIssuesByTitlePrefix`,
             # `startsWith`): il titolo di dedup ne ha 52, quindi il prefisso e'
@@ -527,23 +572,18 @@ jobs:
             # altri chiamanti. Qui apertura, esclusione e chiusura tornano a
             # usare UNA sola forma della chiave.
             #
-            # `gh api --paginate` e non `gh issue list --limit N` per la stessa
-            # ragione delle due query sopra: `--limit` tronca IN SILENZIO, e un
-            # digest oltre il cap non verrebbe trovato — che qui vuol dire «non
-            # chiudo» (innocuo) ma con un cap piu' basso della realta' e' la
-            # stessa bugia silenziosa. Con `--paginate` il `--jq` gira PER
-            # PAGINA, quindi `first(...)` puo' produrre una riga per pagina:
-            # `head -n 1` fuori dalla pipeline di `gh` (su una variabile gia'
-            # catturata, per non dare un SIGPIPE a `gh` sotto `pipefail`).
-            # E NON riusa `$NEEDS_HUMAN_API`: quello filtra per
-            # `labels=needs-human`, che l'issue dedup non ha per costruzione
-            # (nasce con `automation`) — cercarla li' la troverebbe solo nei
-            # run in cui qualcuno gliel'ha aggiunta, cioe' proprio il caso di
-            # #733. Il perimetro qui e' «tutte le issue aperte», la chiave e'
-            # il titolo.
+            # La risposta unica e' gia' arrivata con `gh api --paginate`: non
+            # si ripete una query sull'endpoint solo per trovare il dedup, e
+            # non si usa `gh issue list --limit N`, che tronca IN SILENZIO. Il
+            # digest oltre il cap non verrebbe trovato — qui vuol dire «non
+            # chiudo» (innocuo), ma con un cap piu' basso della realta' e' la
+            # stessa bugia silenziosa.
+            # Il numero arriva dalla risposta unica delle issue aperte: il
+            # dedup viene classificato per titolo esatto in `gh api --jq`,
+            # anche se nasce con `automation` e non porta `needs-human`.
             echo "Niente needs-human aperto (ne PR ne issue): richiudo l'issue dedup, se aperta."
-            DEDUP_MATCHES=$(gh api --paginate "repos/$GH_REPO/issues?state=open&per_page=100" \
-              --jq 'first(.[] | select(.pull_request | not) | select(.title == env.DEDUP_TITLE) | .number)')
+            DEDUP_NUMBER=$(printf '%s\n' "$OPEN_ISSUES_ITEMS" \
+              | jq -r '[.[] | select(.dedup) | .number] | first // empty')
             DEDUP_RC=$?
             if [ "$DEDUP_RC" -ne 0 ]; then
               # Stesso principio del guard sopra: query fallita non e' «nessun
@@ -551,7 +591,6 @@ jobs:
               echo "::error::Query dell'issue dedup fallita (rc=$DEDUP_RC): non chiudo niente. Un risultato vuoto per un errore non e «issue gia chiusa»."
               exit 1
             fi
-            DEDUP_NUMBER=$(printf '%s\n' "$DEDUP_MATCHES" | head -n 1)
             if [ -z "$DEDUP_NUMBER" ]; then
               echo "Nessuna issue aperta con il titolo di dedup: niente da chiudere."
               exit 0

@@ -9,9 +9,9 @@
  * drift by-construction (AGENTS.md #6).
  *
  * Uso:  node scripts/ci/pr-contribution-fingerprint.mjs <sha>
- *   stdout: sha256 esadecimale del fingerprint, oppure `NULL` se non calcolabile
+ *   stdout: sha256 esadecimale del fingerprint, oppure `UNKNOWN` se non calcolabile
  *           (compare troncato/errore/file grandi → bail conservativo: il guard NON
- *           deve skippare la review su un NULL).
+ *           deve skippare la review su un fingerprint sconosciuto).
  * Env:  GH_TOKEN (read-only), GITHUB_REPOSITORY.
  *
  * Confronto nel guard: fingerprint(HEAD) === fingerprint(last-LGTM-commit) ⇒ il
@@ -28,9 +28,10 @@ if (!sha) {
 
 const fp = prContributionFingerprint(sha);
 if (fp == null) {
-  // null = incertezza (compare troncato/errore): emetti NULL così il guard cade
-  // sul ramo conservativo (review piena), mai uno skip su fingerprint inaffidabile.
-  process.stdout.write('NULL\n');
+  // null = incertezza (compare troncato/errore): emetti UNKNOWN così il guard
+  // può distinguere esplicitamente il degrado da un fingerprint valido, mai uno
+  // skip su un valore inaffidabile.
+  process.stdout.write('UNKNOWN\n');
 } else {
   process.stdout.write(createHash('sha256').update(fp).digest('hex') + '\n');
 }

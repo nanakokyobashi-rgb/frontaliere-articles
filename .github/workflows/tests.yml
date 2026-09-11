@@ -301,10 +301,14 @@ jobs:
           # code-only): se e' invariato, la PR non ha cambiato il proprio codice
           # → skip. Stessa funzione che usa il review gate per il carry-forward
           # → niente drift.
-          fpHead=$(node scripts/ci/pr-contribution-fingerprint.mjs "$HEAD_SHA" 2>/dev/null || echo NULL)
-          fpLast=$(node scripts/ci/pr-contribution-fingerprint.mjs "$last" 2>/dev/null || echo NULL)
-          if [ -n "$fpHead" ] && [ "$fpHead" != "NULL" ] \
-             && [ -n "$fpLast" ] && [ "$fpLast" != "NULL" ] \
+          # UNKNOWN è un fallback esplicito: un errore transitorio, un output
+          # parziale o un hash malformato non può mai diventare un no-op solo
+          # perché HEAD e last-LGTM hanno ricevuto lo stesso fallback.
+          fpHead=$(node scripts/ci/pr-contribution-fingerprint.mjs "$HEAD_SHA" 2>/dev/null) || fpHead=UNKNOWN
+          fpLast=$(node scripts/ci/pr-contribution-fingerprint.mjs "$last" 2>/dev/null) || fpLast=UNKNOWN
+          if ! printf '%s' "$fpHead" | grep -qE '^[a-f0-9]{64}$'; then fpHead=UNKNOWN; fi
+          if ! printf '%s' "$fpLast" | grep -qE '^[a-f0-9]{64}$'; then fpLast=UNKNOWN; fi
+          if [ "$fpHead" != 'UNKNOWN' ] && [ "$fpLast" != 'UNKNOWN' ] \
              && [ "$fpHead" = "$fpLast" ]; then
             echo "skip=true" >> "$GITHUB_OUTPUT"
             echo "Contributo CODE invariato dall'ultima LGTM (fingerprint $fpHead) → skip Claude."
@@ -681,6 +685,28 @@ jobs:
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
           CODEX_FALLBACK_EVIDENCE_FILE: ${{ steps.claude_review.outputs.fallback_evidence_file }}
         run: node scripts/ci/review-gate.mjs
+
+      # La Jobs API espone solo la conclusion del review gate, non la ragione
+      # che lo ha fatto uscire 1. Il processo scrive failure_kind su
+      # GITHUB_OUTPUT: questo step trasforma un verdetto esplicito in una
+      # conclusione failure e lascia success un errore API/rate-limit o uno
+      # stato sconosciuto. E' non-gating per `vitestFailureIsReviewGate`, ma il
+      # suo stato e' il discriminante di `reviewSkippedByGuard`.
+      - name: Classify review gate failure
+        id: review_gate_failure
+        if: >-
+          ${{ steps.body_contract.outcome != 'failure' && always() &&
+          steps.resolve.outputs.should_review == 'true' &&
+          steps.review_gate.outcome == 'failure' }}
+        env:
+          FAILURE_KIND: ${{ steps.review_gate.outputs.failure_kind }}
+        run: |
+          set -u
+          if [ "${FAILURE_KIND:-}" = 'verdict' ]; then
+            echo "Review gate failure classificato come verdetto (LGTM mancante o finding Important)."
+            exit 1
+          fi
+          echo "::warning::Review gate failure senza verdetto esplicito (failure_kind=${FAILURE_KIND:-unknown}): il prossimo autorebase conserva il one-shot."
 
       # GitHub tratta un check richiesto `skipped` come verde. Se il gate non
       # viene valutato, pero', non esiste alcun verdetto da portare avanti:

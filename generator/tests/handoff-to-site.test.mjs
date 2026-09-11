@@ -40,6 +40,10 @@ const MIRROR_BODY = 'Root cause nota: il JSDoc bugiardo vive in `scripts/create-
   + 'del repo **`valerielinc-ops/frontaliere-si-o-no`**, non in questo repo. '
   + 'Confermato: `generator/scripts/create-article.mjs` qui è diverso.';
 
+const SINGLE_MIRROR_BODY = 'Root cause nota: `scripts/ci/followup-resolution-match.mjs` è '
+  + '`mode: identical` nel repo **`valerielinc-ops/frontaliere-si-o-no`**; '
+  + 'scriverlo qui verrebbe sovrascritto al mirror successivo.';
+
 test('instrada il caso mirror: verdetto + repo del sito + path', () => {
   const d = handoffDecision({ verdict: 'blocked-admin-settings', body: MIRROR_BODY });
   assert.equal(d.handoff, true);
@@ -203,7 +207,7 @@ test('nessun residuo quando tutto ciò che è citato scende col mirror', () => {
   assert.deepEqual(handoffDecision({ verdict: 'no-root-cause', body: solo, lockedPaths: LOCKED }).residual, []);
   // I `blocked-*` non cambiano: la forma misurata 4 su 4 è «un solo file, e vive
   // sul sito», quindi niente residuo e la chiusura resta quella di sempre.
-  assert.deepEqual(handoffDecision({ verdict: 'blocked-admin-settings', body: MIRROR_BODY }).residual, []);
+  assert.deepEqual(handoffDecision({ verdict: 'blocked-admin-settings', body: SINGLE_MIRROR_BODY }).residual, []);
 });
 
 // --- #972 item 1: `identical` da solo è troppo largo (funnel-critical) ---
@@ -284,7 +288,7 @@ test('`no-root-cause` consegna ma NON chiude, nemmeno senza residuo', () => {
 });
 
 test('i `blocked-*` continuano a chiudere: la loro diagnosi è esplicita', () => {
-  const d = handoffDecision({ verdict: 'blocked-admin-settings', body: MIRROR_BODY });
+  const d = handoffDecision({ verdict: 'blocked-admin-settings', body: SINGLE_MIRROR_BODY });
   assert.equal(d.handoff, true);
   assert.equal(d.close, true);
 });
@@ -507,6 +511,16 @@ test('#972: il ramo close chiude e NON tocca le label di routing', () => {
   ]);
 });
 
+test('#1142: originWriteSteps del blocked-workflows-scope rimuove entrambe le label di routing', () => {
+  const steps = originWriteSteps({ issue: '1142', repo: 'o/r', close: false, comment: 'consegnata' });
+  const states = steps.filter((s) => s.kind === 'state');
+  assert.ok(states.some((s) => s.args.includes('--add-label') && s.args.includes('needs-human')));
+  assert.deepEqual(
+    states.filter((s) => s.args.includes('--remove-label')).map((s) => s.args.at(-1)),
+    ['agent:fix', 'agent:fix-queued'],
+  );
+});
+
 test('#972: senza commento restano i soli passi idempotenti (ramo dedup)', () => {
   // E' cio' che il dedup ri-applica: ri-mettere una label che c\'e\' gia\' non e\'
   // niente, ri-postare il commento a ogni giro sarebbe rumore.
@@ -589,13 +603,13 @@ test('#972: i gemelli che nessun trasporto porta giù sono quelli che il traspor
   for (const p of stuck) assert.ok(!p.startsWith('engine/'), p);
 });
 
-test('#972: descentBlock separa «condiviso» da «scende», e il fixture è un no prudente', () => {
+test('#1142: descentBlock usa la stessa regola fixture del trasporto', () => {
   assert.equal(descentBlock({ path: 'scripts/ci/followup-drainer.mjs', mode: 'identical' }), null);
   assert.match(descentBlock({ path: '.github/workflows/translate-pending.yml', mode: 'identical' }), /workflows/);
-  // Un fixture è INCERTO, non trasportabile: il trasporto lo copia solo se i
-  // suoi accoppiamenti locali sono `identical`, e quella domanda vuole l'albero
-  // del repo. Si sbaglia verso il parcheggio, che ha una porta di rientro.
-  assert.match(descentBlock({ path: 'host/tests/shell-contract-functions.golden.json', mode: 'identical' }), /fixture/);
+  const fixture = { path: 'host/tests/shell-contract-functions.golden.json', mode: 'identical' };
+  assert.equal(descentBlock(fixture, { couplings: [] }), null, 'fixture senza blocchi di coupling segue il trasporto');
+  assert.match(descentBlock(fixture, { couplings: [{ path: 'scripts/ci/followup-drainer.mjs', mode: 'corpus-only' }] }), /fixture accoppiato/);
+  assert.match(descentBlock(fixture, { couplings: [{ path: 'tests/opaque.bin', mode: 'illeggibile', unreadable: 'EACCES' }] }), /non leggibili/);
 });
 
 test('#972: un `blocked-*` su un gemello che non scenderà mai consegna ma NON chiude', () => {
@@ -615,9 +629,28 @@ test('#972: un `blocked-*` su un gemello che non scenderà mai consegna ma NON c
 test('#972: un `blocked-*` su un gemello che scende chiude come prima', () => {
   // Nessuna regressione sui 4 casi su 4 misurati: il blocco è mirato ai soli
   // path che il trasporto rifiuta per sempre, non a tutti gli `identical`.
-  const d = handoffDecision({ verdict: 'blocked-admin-settings', body: MIRROR_BODY });
+  const d = handoffDecision({ verdict: 'blocked-admin-settings', body: SINGLE_MIRROR_BODY });
   assert.equal(d.close, true);
   assert.deepEqual(d.residual, []);
+});
+
+test('#1142: il blocked-* unisce i path fermi agli altri path citati', () => {
+  const workflow = '.github/workflows/translate-pending.yml';
+  const local = 'scripts/ci/followup-drainer.mjs';
+  const body = 'Root cause: `'+workflow+'` e `'+local+'` sono `mode: identical` sul repo '
+    + '`valerielinc-ops/frontaliere-si-o-no` e verrebbero sovrascritti al mirror successivo.';
+  const d = handoffDecision({
+    verdict: 'blocked-workflows-scope',
+    body,
+    manifestSnapshot: {
+      absent: new Set(),
+      locked: new Map([[workflow, workflow]]),
+      names: new Map([[workflow, workflow], [local, local]]),
+      stranded: new Set([workflow]),
+    },
+  });
+  assert.equal(d.close, false);
+  assert.deepEqual(d.residual, [workflow, local]);
 });
 
 test('#972: un `no-root-cause` su un gemello fermo lascia il residuo, non lo assorbe', () => {
@@ -632,9 +665,18 @@ test('#972: un `no-root-cause` su un gemello fermo lascia il residuo, non lo ass
   assert.deepEqual(d.residual, ['.github/workflows/translate-pending.yml']);
 });
 
-test('#972: manifest illeggibile → nessun blocco alla chiusura, cioè il comportamento di prima', () => {
+test('#972: stranded vuoto → nessun blocco alla chiusura, cioè il comportamento di prima', () => {
   assert.equal(strandedTwinPaths('/dev/null/manifest-che-non-esiste.json').size, 0);
-  const d = handoffDecision({ verdict: 'blocked-admin-settings', body: MIRROR_BODY, stranded: new Set() });
+  const d = handoffDecision({
+    verdict: 'blocked-admin-settings',
+    body: SINGLE_MIRROR_BODY,
+    manifestSnapshot: {
+      absent: new Set(),
+      locked: new Map([['scripts/ci/followup-resolution-match.mjs', 'scripts/ci/followup-resolution-match.mjs']]),
+      names: new Map([['scripts/ci/followup-resolution-match.mjs', 'scripts/ci/followup-resolution-match.mjs']]),
+      stranded: new Set(),
+    },
+  });
   assert.equal(d.close, true);
 });
 
@@ -684,7 +726,7 @@ test('#1184: il dedup cerca body + stato e i verdetti leggono commenti REST pagi
 });
 
 test('#972: consegnata e senza residuo → il secondo giro non paga Claude', () => {
-  const decision = handoffDecision({ verdict: 'blocked-admin-settings', body: MIRROR_BODY });
+  const decision = handoffDecision({ verdict: 'blocked-admin-settings', body: SINGLE_MIRROR_BODY });
   assert.equal(decision.handoff, true);
   assert.deepEqual(decision.residual, [], 'precondizione: tutto ciò che la diagnosi nomina scende col mirror');
 
@@ -698,7 +740,7 @@ test('#972: `close` viaggia con la decisione, il corto-circuito non lo inventa',
   // andata a fondo: il passo giusto resta la chiusura, non il parcheggio. E un
   // `no-root-cause` — che copre anche il vicolo cieco vero — non deve diventare
   // una chiusura per il fatto di ripassare di qui.
-  const closes = handoffDecision({ verdict: 'blocked-admin-settings', body: MIRROR_BODY });
+  const closes = handoffDecision({ verdict: 'blocked-admin-settings', body: SINGLE_MIRROR_BODY });
   assert.equal(redeliveryDecision({ decision: closes, deliveredUrl: DELIVERED }).close, true);
 
   const parks = handoffDecision({

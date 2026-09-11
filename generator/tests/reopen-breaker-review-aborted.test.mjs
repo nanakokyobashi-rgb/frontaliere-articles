@@ -38,6 +38,7 @@ import {
   REVIEW_GATE_STEP_NAME,
   CLAUDE_REVIEW_STEP_NAME,
   REVIEW_ABORT_STEP_NAME,
+  REVIEW_GATE_FAILURE_STEP_NAME,
   reviewAbortedWithoutVerdict,
   reviewSkippedByGuard,
   vitestFailureIsReviewGate,
@@ -69,6 +70,7 @@ const reviewDied = (claudeStepConclusion) => [
   step(CLAUDE_REVIEW_STEP_NAME, claudeStepConclusion),
   step(REVIEW_ABORT_STEP_NAME, 'failure'),
   step(REVIEW_GATE_STEP_NAME, 'failure'),
+  step(REVIEW_GATE_FAILURE_STEP_NAME, 'failure'),
 ];
 const REVIEW_DIED = reviewDied('success');
 /** Rosso di gate puro: la review e' girata, il verdetto e' negativo. */
@@ -77,6 +79,7 @@ const GATE_ONLY = [
   step(CLAUDE_REVIEW_STEP_NAME, 'success'),
   step(REVIEW_ABORT_STEP_NAME, 'success'),
   step(REVIEW_GATE_STEP_NAME, 'failure'),
+  step(REVIEW_GATE_FAILURE_STEP_NAME, 'failure'),
 ];
 /** Gate rosso + `Generator CI gate` rosso: li' sotto c'e' codice rotto. */
 const GATE_PLUS_GENERATOR_CI = [
@@ -103,6 +106,9 @@ describe('il segnale: due step rossi, un rosso solo', () => {
   test('rosso di gate puro → nessun abort da nominare', () => {
     assert.equal(vitestFailureIsReviewGate(GATE_ONLY), true);
     assert.equal(reviewAbortedWithoutVerdict(GATE_ONLY), false);
+    // Il ramo 429 lascia l'abort verde per non amplificare il rate-limit:
+    // non e' uno skip del guard e il one-shot resta concesso.
+    assert.equal(reviewSkippedByGuard(GATE_ONLY), false);
   });
 
   test('fail-CLOSED: qualunque ALTRO secondo step rosso nega ancora', () => {
@@ -148,6 +154,15 @@ describe('la decisione: il one-shot si concede, e la causa e nominata', () => {
     assert.equal(d.action, 'reopen');
     assert.equal(d.cause, 'review-gate-aborted');
     assert.match(d.reason, /morta senza postare/);
+  });
+
+  test('rate-limit con abort verde → one-shot concesso, non review-gate-skipped', () => {
+    const d = decideReopen({
+      vitestConclusion: 'failure', fingerprint: redFp, prior: null,
+      failureNotAttributable: 'review-gate', reviewGateFailure: true,
+    });
+    assert.equal(d.action, 'reopen');
+    assert.equal(d.cause, 'review-gate');
   });
 
   test('one-shot gia speso → niente riciclo, ma il messaggio resta vero', () => {
