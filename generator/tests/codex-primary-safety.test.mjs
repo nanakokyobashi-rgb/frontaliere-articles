@@ -217,6 +217,12 @@ test('il bridge corpus resta host-side anche quando il PAT arriva da GITHUB_ENV'
 test('the corpus review loads its host-side PAT before invoking Codex', () => {
   const reviewStep = workflowStep(testsWorkflow, 'Run Claude review');
   const followupStep = workflowStep(followupWorkflow, 'Run Claude follow-up triage (batch)');
+  const firebaseStep = workflowStep(followupWorkflow, 'Prepare Firebase credentials for follow-up routing');
+  const credentialsStep = workflowStep(followupWorkflow, 'Load cross-repo follow-up credentials');
+  assert.match(firebaseStep, /if: always\(\)/,
+    'il recovery dei gate deve poter ripristinare il routing anche con batch_count=0');
+  assert.match(credentialsStep, /if: always\(\)/,
+    'il PAT cross-repo deve essere disponibile anche nel percorso di recovery');
   assert.match(testsWorkflow, /Prepare Firebase credentials for Codex review/);
   assert.match(testsWorkflow, /Load cross-repo Codex credentials/);
   assert.match(testsWorkflow, /node generator\/scripts\/load-rc-env\.mjs/);

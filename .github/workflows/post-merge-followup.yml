@@ -126,11 +126,12 @@ jobs:
       # Il follow-up puo' trovare un file che appartiene al producer del corpus,
       # anche quando la PR sorgente e' nel sito. In quel caso l'issue deve nascere
       # su nanako: il GITHUB_TOKEN del sito e' scoped al solo repo corrente.
-      # Carichiamo il PAT Valerie cross-repo solo quando esiste davvero un batch, cosi'
-      # una finestra vuota non paga ne' Firebase ne' il caricamento RC.
+      # Carichiamo il PAT Valerie cross-repo anche senza un batch: i gate finali
+      # fanno recovery di bucket gia' coniati e devono poterli sigillare nella
+      # finestra successiva, senza dipendere da una nuova PR raccolta.
 
       - name: Prepare Firebase credentials for follow-up routing
-        if: steps.collect.outputs.batch_count != '0' && steps.collect.outputs.batch_count != ''
+        if: always()
         env:
           FIREBASE_SERVICE_ACCOUNT_JSON: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}
         run: |
@@ -142,7 +143,7 @@ jobs:
           fi
 
       - name: Load cross-repo follow-up credentials
-        if: steps.collect.outputs.batch_count != '0' && steps.collect.outputs.batch_count != ''
+        if: always()
         continue-on-error: true
         run: node generator/scripts/load-rc-env.mjs
 
