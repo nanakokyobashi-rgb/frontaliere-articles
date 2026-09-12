@@ -30,6 +30,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
+import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 
 import {
@@ -154,13 +155,19 @@ test('il modello non conta la directory del gate e rifiuta un riferimento assent
     fs.writeFileSync(path.join(content, 'blog-body', 'it', 'extra.ts'), 'export default ``;');
     fs.writeFileSync(path.join(content, 'blog-articles-data.ts'), "id: 'a'\nid: 'b'\n");
     fs.writeFileSync(path.join(content, 'swiss-articles-data.ts'), "id: 's'\n");
-    fs.writeFileSync(path.join(content, 'blog-meta-it.ts'), '// locale');
-    fs.writeFileSync(path.join(content, 'blog-meta-en.ts'), '// locale');
-    fs.writeFileSync(path.join(content, 'blog-meta-ch-it.ts'), '// locale');
-    fs.writeFileSync(path.join(content, 'blog-meta-ch-en.ts'), '// locale');
+    for (const locale of ['it', 'en', 'de', 'fr']) {
+      fs.writeFileSync(
+        path.join(content, `blog-meta-${locale}.ts`),
+        "'blog.article.a.title': 'A',\n'blog.article.b.title': 'B',\n",
+      );
+      fs.writeFileSync(
+        path.join(content, `blog-meta-ch-${locale}.ts`),
+        "'blog.article.s.title': 'S',\n",
+      );
+    }
 
     const model = deriveFloorModel(dir);
-    assert.deepEqual(model.perRoot.map((r) => r.expectedFiles), [4, 2]);
+    assert.deepEqual(model.perRoot.map((r) => r.expectedFiles), [8, 4]);
 
     const missing = fs.mkdtempSync(path.join(os.tmpdir(), 'blog-body-floor-missing-'));
     try {
@@ -173,6 +180,78 @@ test('il modello non conta la directory del gate e rifiuta un riferimento assent
     } finally {
       fs.rmSync(missing, { recursive: true, force: true });
     }
+  } finally {
+    fs.rmSync(dir, { recursive: true, force: true });
+  }
+});
+
+test('un registro troncato viene confrontato con il high-water della revisione precedente', () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'blog-body-floor-history-'));
+  const git = (...args) => execFileSync('git', ['-C', dir, ...args], { stdio: 'ignore' });
+  const writeCorpus = (frontIds, swissIds) => {
+    fs.writeFileSync(
+      path.join(dir, 'content', 'blog-articles-data.ts'),
+      frontIds.map((id) => `id: '${id}'`).join('\n') + '\n',
+    );
+    fs.writeFileSync(
+      path.join(dir, 'content', 'swiss-articles-data.ts'),
+      swissIds.map((id) => `id: '${id}'`).join('\n') + '\n',
+    );
+    for (const locale of ['it', 'en', 'de', 'fr']) {
+      fs.writeFileSync(
+        path.join(dir, 'content', `blog-meta-${locale}.ts`),
+        frontIds.map((id) => `'blog.article.${id}.title': 'A',`).join('\n') + '\n',
+      );
+      fs.writeFileSync(
+        path.join(dir, 'content', `blog-meta-ch-${locale}.ts`),
+        swissIds.map((id) => `'blog.article.${id}.title': 'S',`).join('\n') + '\n',
+      );
+    }
+  };
+
+  try {
+    fs.mkdirSync(path.join(dir, 'content'), { recursive: true });
+    git('init', '-q');
+    git('config', 'user.email', 'test@example.invalid');
+    git('config', 'user.name', 'test');
+    writeCorpus(Array.from({ length: 10 }, (_, i) => `front-${i}`), ['swiss-0']);
+    git('add', 'content');
+    git('commit', '-qm', 'complete corpus');
+    writeCorpus(Array.from({ length: 5 }, (_, i) => `front-${i}`), ['swiss-0']);
+    git('add', 'content');
+    git('commit', '-qm', 'truncated corpus');
+
+    assert.throws(
+      () => deriveFloorModel(dir),
+      (error) => /registro troncato/.test(error.message) && /10 nella revisione Git precedente/.test(error.message),
+    );
+  } finally {
+    fs.rmSync(dir, { recursive: true, force: true });
+  }
+});
+
+test('una meta con cardinalità plausibile ma ID sostituito viene rifiutata', () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'blog-body-floor-meta-identity-'));
+  try {
+    const content = path.join(dir, 'content');
+    fs.mkdirSync(content, { recursive: true });
+    fs.writeFileSync(path.join(content, 'blog-articles-data.ts'), "id: 'a'\nid: 'b'\n");
+    fs.writeFileSync(path.join(content, 'swiss-articles-data.ts'), "id: 's'\n");
+    for (const locale of ['it', 'en', 'de', 'fr']) {
+      fs.writeFileSync(
+        path.join(content, `blog-meta-${locale}.ts`),
+        locale === 'en'
+          ? "'blog.article.a.title': 'A',\n'blog.article.replacement.title': 'X',\n"
+          : "'blog.article.a.title': 'A',\n'blog.article.b.title': 'B',\n",
+      );
+      fs.writeFileSync(path.join(content, `blog-meta-ch-${locale}.ts`), "'blog.article.s.title': 'S',\n");
+    }
+
+    assert.throws(
+      () => deriveFloorModel(dir),
+      (error) => /blog-meta-en\.ts: meta incompleta/.test(error.message)
+        && /mancano 1: b/.test(error.message),
+    );
   } finally {
     fs.rmSync(dir, { recursive: true, force: true });
   }

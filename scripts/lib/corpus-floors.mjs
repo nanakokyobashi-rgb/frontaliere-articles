@@ -28,6 +28,7 @@
  */
 import fs from 'node:fs';
 import path from 'node:path';
+import { execFileSync } from 'node:child_process';
 import { findAllSeoEntryMatches } from './seo-entry.mjs';
 
 /**
@@ -204,6 +205,12 @@ export const SECTION_META_PREFIXES = {
   svizzera: 'blog-meta-ch-',
 };
 
+/** Locali che build-api.mjs carica per ogni sezione. */
+export const SECTION_META_LOCALES = Object.freeze(['it', 'en', 'de', 'fr']);
+
+const REGISTRY_ENTRY_RE = /^\s*id:\s*(?:'([^']+)'|"([^"]+)")/gm;
+const META_TITLE_KEY_RE = /['"]blog\.article\.([^'"]+)\.title['"]\s*:/g;
+
 /** Quante immagini hero questo repo tiene davvero (sorgente di `images-manifest.json`). */
 export const IMAGE_SOURCE_DIR = path.join('public', 'images', 'blog');
 
@@ -247,14 +254,77 @@ function readReference(root, rel, what) {
   }
 }
 
-/** Quante entry articolo dichiara il registro sorgente della sezione. */
-export function countRegistryArticles(root, section) {
+function registryDataFromSource(source, rel, what) {
+  const entries = [...source.matchAll(REGISTRY_ENTRY_RE)];
+  if (entries.length === 0) throw missingReference(what, rel);
+  return {
+    count: entries.length,
+    ids: new Set(entries.map((match) => match[1] ?? match[2])),
+  };
+}
+
+function readRegistryData(root, section) {
   const rel = SECTION_REGISTRY_FILES[section];
   if (!rel) throw new Error(`unknown corpus section: ${section}`);
   const source = readReference(root, rel, `${section} registry`);
-  const entries = source.match(/^\s*id:\s*(?:'[^']+'|"[^"]+")/gm) || [];
-  if (entries.length === 0) throw missingReference(`${section} registry`, rel);
-  return entries.length;
+  return { ...registryDataFromSource(source, rel, `${section} registry`), rel };
+}
+
+function readGit(root, args) {
+  try {
+    return execFileSync('git', ['-C', root, ...args], {
+      encoding: 'utf8',
+      stdio: ['ignore', 'pipe', 'ignore'],
+      maxBuffer: 64 * 1024 * 1024,
+    }).trim();
+  } catch {
+    return null;
+  }
+}
+
+function previousCorpusRevision(root) {
+  if (readGit(root, ['rev-parse', '--is-inside-work-tree']) !== 'true') return null;
+  if (readGit(root, ['rev-parse', '--is-shallow-repository']) === 'true') {
+    const error = new Error(
+      'storia del corpus non verificabile: il checkout Git e\' shallow, quindi il high-water precedente non e\' disponibile',
+    );
+    error.code = 'MISSING_CORPUS_HISTORY';
+    throw error;
+  }
+  return readGit(root, ['rev-parse', 'HEAD^']);
+}
+
+function previousRegistryData(root, section, revision) {
+  const rel = SECTION_REGISTRY_FILES[section];
+  try {
+    const source = execFileSync('git', ['-C', root, 'show', `${revision}:${rel}`], {
+      encoding: 'utf8',
+      stdio: ['ignore', 'pipe', 'ignore'],
+      maxBuffer: 64 * 1024 * 1024,
+    });
+    if (!source.trim()) return null;
+    return registryDataFromSource(source, rel, `${section} registry storico`);
+  } catch (error) {
+    if (error?.status !== undefined) return null;
+    throw error;
+  }
+}
+
+function registryHighWater(root, section, current) {
+  const revision = previousCorpusRevision(root);
+  if (!revision) return current.count;
+  const previous = previousRegistryData(root, section, revision);
+  return Math.max(current.count, previous?.count ?? 0);
+}
+
+function truncatedRegistryError(section, current, highWater) {
+  const floor = floorFrom(highWater);
+  const error = new Error(
+    `${current.rel}: ${current.count} entry contro ${highWater} nella revisione Git precedente ` +
+      `(pavimento ${floor}) — registro troncato, rifiuto il floor derivato dal solo registro corrente`,
+  );
+  error.code = 'TRUNCATED_CORPUS';
+  return error;
 }
 
 /** Quanti file-meta locali sono presenti per la sezione. */
@@ -271,10 +341,39 @@ export function countPresentLocales(root, section) {
     }
     throw error;
   }
-  const pattern = new RegExp(`^${prefix.replace(/[.*+?^${}()|[\\]\\]/g, '\\$&')}[a-z]{2}\\.ts$`);
-  const count = names.filter((name) => pattern.test(name)).length;
-  if (count === 0) throw missingReference(`${section} locale metadata`, rel);
-  return count;
+  const missing = SECTION_META_LOCALES
+    .map((locale) => `${prefix}${locale}.ts`)
+    .filter((name) => !names.includes(name));
+  if (missing.length) {
+    throw missingReference(
+      `${section} locale metadata (${missing.join(', ')})`,
+      rel,
+    );
+  }
+  return SECTION_META_LOCALES.length;
+}
+
+function metadataArticleIds(source) {
+  return new Set([...source.matchAll(META_TITLE_KEY_RE)].map((match) => match[1]));
+}
+
+/** Ogni locale deve esporre tutti gli ID del registro, non solo un file. */
+export function validateLocaleMetadata(root, section, registryIds) {
+  const prefix = SECTION_META_PREFIXES[section];
+  if (!prefix) throw new Error(`unknown corpus section: ${section}`);
+  for (const locale of SECTION_META_LOCALES) {
+    const rel = path.join('content', `${prefix}${locale}.ts`);
+    const ids = metadataArticleIds(readReference(root, rel, `${section} locale metadata`));
+    const missing = [...registryIds].filter((id) => !ids.has(id));
+    if (missing.length) {
+      const error = new Error(
+        `${rel}: meta incompleta — ${ids.size} ID title, ${registryIds.size} richiesti; ` +
+          `mancano ${missing.length}: ${missing.slice(0, 5).join(', ')}`,
+      );
+      error.code = 'INCOMPLETE_CORPUS';
+      throw error;
+    }
+  }
 }
 
 /**
@@ -286,7 +385,19 @@ export function countPresentLocales(root, section) {
  * pavimento a zero.
  */
 export function expectedBodyFiles(root, section) {
-  return countRegistryArticles(root, section) * countPresentLocales(root, section);
+  const registry = readRegistryData(root, section);
+  const highWater = registryHighWater(root, section, registry);
+  if (registry.count < floorFrom(highWater)) {
+    throw truncatedRegistryError(section, registry, highWater);
+  }
+  const locales = countPresentLocales(root, section);
+  validateLocaleMetadata(root, section, registry.ids);
+  return highWater * locales;
+}
+
+/** Quante entry articolo dichiara il registro sorgente della sezione. */
+export function countRegistryArticles(root, section) {
+  return readRegistryData(root, section).count;
 }
 
 /** Quanti articoli sorgente ha la sezione, contati sui file di corpo. */
