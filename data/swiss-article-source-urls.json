@@ -1,5 +1,4 @@
 {
-  "https://www.rsi.ch/s/3991236": "investimenti-elettricit-svizzera",
   "https://www.tio.ch/svizzera/cronaca/1944158/donna-pericolo-ospedale-rega-gallo": "incidente-bici-rapperswil-jona",
   "https://www.swissinfo.ch/ita/basilea%3a-delegate-a-studenti-diagnosi-adhd-in-una-clinica/91906036": "basilea-diagnosi-adhd-studenti",
   "https://www.tio.ch/people/people/1944215/ospedale-attore-boldi-massimo-caduta": "massimo-boldi-ospedale",
@@ -2321,6 +2320,11 @@
   "https://www.tio.ch/svizzera/economia/1949537/ospedali-costi-rimane-situazione-cure": {
     "articleId": "finanze-ospedali-svizzera-2025",
     "ts": "2026-09-12T01:14:48.516Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/economia/1949562/azienda-bitcoin-suisse-svizzera-lavoro-posti-taglia": {
+    "articleId": "bitcoin-suisse-taglio-posti-zugo",
+    "ts": "2026-09-12T01:23:23.638Z",
     "keyForm": 2
   }
 }
