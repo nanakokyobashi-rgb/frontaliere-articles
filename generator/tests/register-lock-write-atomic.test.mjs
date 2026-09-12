@@ -121,7 +121,7 @@ test('writeJsonAtomic forza temp e directory prima di dare per committato il mar
 });
 
 test('un errore nel fsync della directory non annulla una scrittura gia\' committata', () => {
-  for (const code of ['EINVAL', 'EACCES']) {
+  for (const code of ['EINVAL', 'EACCES', 'EIO', 'EPERM']) {
     const root = sandbox();
     const target = path.join(root, 'nested', 'marker.json');
     const originalFsync = fs.fsyncSync;

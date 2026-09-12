@@ -39,8 +39,15 @@ test('il titolo digest ambiguo non viene risolto scegliendo il primo risultato',
   assert.doesNotMatch(step, /gh search issues/, 'la ricerca non deve avere il cap implicito di gh search');
   assert.match(step, /if \[ -z "\$\{N:-\}" \]; then[\s\S]*?exit 1/, 'zero digest deve essere un errore esplicito');
   assert.match(step, /DIGEST_SEARCH_RC=\$\?/, 'un errore della ricerca deve riportare il codice di uscita della CLI');
-  const search = step.slice(step.indexOf('if DIGEST_MATCHES='), step.indexOf('DIGEST_MATCH_COUNT='));
+  const searchAt = step.indexOf('if DIGEST_MATCHES=');
+  const search = step.slice(searchAt, step.indexOf('DIGEST_MATCH_COUNT=', searchAt));
+  assert.ok(searchAt !== -1, 'la ricerca del digest deve essere un comando reale, non solo un token in prosa');
   assert.doesNotMatch(search, /2>\/dev\/null/, 'gli errori della ricerca non devono essere soppressi');
+  assert.match(
+    search,
+    /\n          else\n[\s\S]*?DIGEST_SEARCH_RC=\$\?/,
+    'il codice di uscita deve essere letto nel ramo che rende raggiungibile il fallimento sotto errexit',
+  );
   assert.match(
     step,
     /DIGEST_MATCH_COUNT=.*(?:wc -l|length)/,
@@ -103,6 +110,9 @@ test('il valore del titolo digest è validato prima del prompt Claude e passato 
   assert.ok(validationGuard, 'il verdetto finale deve avere un guard sulla validazione del titolo');
   assert.match(validationGuard[1], /exit 1/, 'una validazione fallita deve lasciare rosso anche il verdetto finale');
   const validationGuardAt = outcome.indexOf('if [ "$DIGEST_TITLE_VALIDATION"');
-  const searchAt = outcome.indexOf('DIGEST_MATCHES=');
-  assert.ok(validationGuardAt !== -1 && searchAt !== -1 && validationGuardAt < searchAt, 'il verdetto deve verificare il titolo prima di interrogare GitHub');
+  const searchCommandAt = outcome.indexOf('if DIGEST_MATCHES=');
+  assert.ok(
+    validationGuardAt !== -1 && searchCommandAt !== -1 && validationGuardAt < searchCommandAt,
+    'il verdetto deve verificare il titolo prima del comando che interroga GitHub',
+  );
 });
