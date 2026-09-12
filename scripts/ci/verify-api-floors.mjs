@@ -87,6 +87,11 @@ function feedNames(section) {
   return names;
 }
 
+/** I nomi di tutti i feed che la tabella RSS promette di pubblicare. */
+export function expectedFeedNames(sections = RSS_SECTIONS) {
+  return [...new Set(sections.flatMap((section) => [...feedNames(section)]))];
+}
+
 export function feedSection(fileName, sections = RSS_SECTIONS) {
   return sections.find((section) => feedNames(section).has(fileName))?.id ?? null;
 }
@@ -198,7 +203,7 @@ function feedPopulationReference(expected, section) {
  * Il nucleo puro: date le misure, quali pavimenti sono sfondati.
  *
  * @param {{articleCounts: Record<string, number>, feeds: {name: string, items: number, latestPublication?: {datePublished: string, timestamp: number}|null}[],
- *          images: number|null, imageErrors?: string[]}} measured  cio' che l'artefatto dichiara
+ *          missingFeeds?: string[], images: number|null, imageErrors?: string[]}} measured  cio' che l'artefatto dichiara
  * @param {{sourceArticles: Record<string, number>, feedSources: Record<string, number>,
  *          previousFeedSources?: Record<string, number|null>, sourceImages: number|null,
  *          latestSeoPublications?: Record<string, {articleId: string, datePublished: string, timestamp: number}|null>,
@@ -210,6 +215,10 @@ function feedPopulationReference(expected, section) {
 export function floorViolations(measured, expected, retention = undefined) {
   const violations = [...(measured.imageErrors ?? [])];
   const floor = (n) => floorFrom(n, retention);
+
+  for (const feedName of measured.missingFeeds ?? []) {
+    violations.push(`${feedName}: feed RSS atteso da RSS_SECTIONS assente o non è un documento RSS`);
+  }
 
   for (const [section, counter] of Object.entries(SECTION_COUNTERS)) {
     const source = expected.sourceArticles[section] ?? 0;
@@ -457,24 +466,30 @@ function latestFeedPublication(xml) {
   return latest;
 }
 
+function isRssDocument(xml) {
+  return countXmlTags(xml, 'rss') > 0;
+}
+
 /** Legge dall'artefatto su disco le misure che il nucleo puro confronta. */
 export function measureDist(distDir) {
   const readOut = (name) => fs.readFileSync(path.join(distDir, name), 'utf-8');
   const manifest = JSON.parse(readOut('manifest.json'));
 
-  // I feed si riconoscono dal DOCUMENTO, non dal nome: una lista di nomi qui
-  // sarebbe una seconda copia di quella dello YAML, e un feed aggiunto domani
-  // resterebbe fuori dal gate senza che nulla lo segnali.
+  // I feed si riconoscono dal DOCUMENTO, non dal nome: i nomi attesi sono
+  // comunque derivati dalla tabella del producer, così un file atteso assente
+  // o non-RSS non sparisce semplicemente dalla lista delle misure.
   const feeds = fs
     .readdirSync(distDir)
     .filter((f) => f.endsWith('.xml'))
     .map((name) => ({ name, xml: readOut(name) }))
-    .filter(({ xml }) => xml.includes('<rss'))
+    .filter(({ xml }) => isRssDocument(xml))
     .map(({ name, xml }) => ({
       name,
       items: countXmlTags(xml, 'item'),
       latestPublication: latestFeedPublication(xml),
     }));
+  const presentFeedNames = new Set(feeds.map(({ name }) => name));
+  const missingFeeds = expectedFeedNames().filter((name) => !presentFeedNames.has(name));
 
   const imageManifest = path.join(distDir, 'images-manifest.json');
   let images = null;
@@ -492,7 +507,7 @@ export function measureDist(distDir) {
     }
   }
 
-  return { articleCounts: manifest.counts ?? {}, feeds, images, imageErrors };
+  return { articleCounts: manifest.counts ?? {}, feeds, missingFeeds, images, imageErrors };
 }
 
 /** Riconta il corpus sorgente, che e' il riferimento esterno all'artefatto. */

@@ -290,11 +290,16 @@ export function collectSeoEntryMetadata(src, into = new Map()) {
     // Match parseSeoBlogs: a successor is the exact boundary and the final
     // entry runs to the end of the source, with no fixed truncation.
     const block = src.slice(start, end);
-    into.set(id, {
+    const metadata = {
       keywords: block.match(/keywords:\s*'((?:[^'\\]|\\.)*)'/)?.[1],
       headline: block.match(/"headline":\s*"((?:[^"\\]|\\.)*)"/)?.[1],
       datePublished: block.match(/"datePublished":\s*"([^"]+)"/)?.[1],
-    });
+    };
+    // Come `parseSeoBlogs`, una voce senza headline o data non viene messa
+    // nella Map: non deve cancellare una voce valida precedente con lo stesso
+    // articleId nello stesso chunk.
+    if (!metadata.headline || !metadata.datePublished) continue;
+    into.set(id, metadata);
   }
   return into;
 }
@@ -334,9 +339,24 @@ export function countSeoEntries(root, seoFiles, seoDir = SEO_CHUNK_DIR) {
  *
  * Il valore viene misurato sugli stessi blocchi e con gli stessi campi che
  * `collectSeoEntryIds` consegna al produttore dei feed: il pavimento e la
- * guardia di freschezza non devono usare due popolazioni diverse.
+ * guardia di freschezza non devono usare due popolazioni diverse. Qui la lista
+ * dichiarata e' un riferimento canonico: se manca anche un solo chunk, il
+ * corpus e' incompleto e la funzione fallisce prima che il gate possa derivare
+ * un floor piu' basso. Eventuali eccezioni cross-repo vanno risolte dal
+ * chiamante prima di passare la lista al producer.
  */
 export function latestSeoPublication(root, seoFiles, seoDir = SEO_CHUNK_DIR) {
+  const missing = seoFiles.filter((file) => !fs.existsSync(path.join(root, seoDir, file)));
+  if (missing.length) {
+    const error = new Error(
+      missing
+        .map((file) => missingCorpusMessage('la freschezza dei feed', path.join(root, seoDir, file)))
+        .join('\n'),
+    );
+    error.code = 'MISSING_CORPUS';
+    throw error;
+  }
+
   // `parseSeoBlogs` usa una sola Map attraversando i chunk nell'ordine della
   // sezione: un id ripetuto viene quindi sostituito dall'ultima voce valida.
   // Replicare quella semantica prima di cercare il massimo evita che una data
@@ -345,11 +365,9 @@ export function latestSeoPublication(root, seoFiles, seoDir = SEO_CHUNK_DIR) {
   const entries = new Map();
   for (const file of seoFiles) {
     const filePath = path.join(root, seoDir, file);
-    if (!fs.existsSync(filePath)) continue;
     for (const [articleId, metadata] of collectSeoEntryMetadata(fs.readFileSync(filePath, 'utf-8'))) {
-      // Una voce non emettibile non sostituisce quella valida precedente:
-      // `parseSeoBlogs` fa `continue` prima del proprio `Map.set`.
-      if (!metadata.headline || !metadata.datePublished) continue;
+      // `collectSeoEntryMetadata` filtra prima del Map.set: una voce non
+      // emettibile non sostituisce quella valida precedente.
       entries.set(articleId, metadata);
     }
   }
