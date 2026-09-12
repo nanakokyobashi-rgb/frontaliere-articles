@@ -876,6 +876,22 @@ test('rapporto fra preallarme e gate: warning, nessuna violazione', () => {
   assert.match(advisories[0], /preallarme/);
 });
 
+test('il preallarme osserva anche una sitemap erosa senza anticipare il gate', () => {
+  const { measured, expected } = healthy();
+  const eroded = {
+    ...measured,
+    sitemaps: {
+      ...measured.sitemaps,
+      'sitemap-blog.xml': Math.round(3785 * 0.95),
+    },
+  };
+
+  assert.deepEqual(floorViolations(eroded, expected), []);
+  const advisories = retentionAdvisories(retentionReport(eroded, expected));
+  assert.equal(advisories.length, 1);
+  assert.match(advisories[0], /sitemap-blog\.xml/);
+});
+
 test('il warning usa lo stesso pavimento intero del gate sul bordo', () => {
   // 3432/3814 = 89,984%, ma floor(3814 * 0,9) = 3432: il gate passa sul
   // bordo e il preallarme deve restare osservabile.
@@ -909,12 +925,14 @@ test('il report copre ogni rapporto che un pavimento sorveglia, coi riferimenti 
   const byLabel = Object.fromEntries(rows.map((r) => [r.label, r]));
   assert.equal(byLabel['manifest.counts.articles'].source, 3785, 'il riferimento dei corpi, non dei chunk SEO');
   assert.equal(byLabel['manifest.counts.swissArticles'].source, 1850);
+  assert.equal(byLabel['sitemap-blog.xml'].source, 3785);
+  assert.equal(byLabel['sitemap-blog-ch.xml'].source, 1850);
   // Un feed e' tagliato a RSS_MAX_ITEMS: il suo 100% e' 50 item, non 3750,
   // altrimenti ogni feed sano sembrerebbe eroso all'1%.
   assert.equal(byLabel['rss.xml'].source, Math.min(expected.rssMaxItems, expected.feedSources.frontaliere));
   assert.equal(byLabel['rss-svizzera.xml'].source, Math.min(expected.rssMaxItems, expected.feedSources.svizzera));
   assert.equal(byLabel['images-manifest.json'].source, 1990);
-  assert.equal(rows.length, 2 + 2 + measured.feeds.length + 1);
+  assert.equal(rows.length, 2 + 2 + 2 + measured.feeds.length + 1);
   assert.ok(rows.some((r) => r.label === 'chunk SEO frontaliere/run precedente'));
   assert.ok(rows.some((r) => r.label === 'chunk SEO svizzera/run precedente'));
 
@@ -982,7 +1000,7 @@ test('il report tace dove il riferimento manca: quello e\' una violazione, non u
   assert.equal(retentionRatio(10, 0), null, 'sorgente a zero non e\' un rapporto zero: e\' assenza di riferimento');
 });
 
-test('le righe stampate: i due rapporti del manifest, le immagini, e il feed piu\' magro', () => {
+test('le righe stampate: manifest, sitemap, immagini e il feed piu\' magro', () => {
   const { measured, expected } = healthy();
   const uneven = {
     ...measured,
@@ -995,9 +1013,11 @@ test('le righe stampate: i due rapporti del manifest, le immagini, e il feed piu
   };
   const lines = retentionLines(retentionReport(uneven, expected));
 
-  assert.equal(lines.length, 6, `2 manifest + 2 popolazioni + 1 feed rappresentativo + 1 immagini, ricevute: ${lines.join(' | ')}`);
+  assert.equal(lines.length, 8, `2 manifest + 2 sitemap + 2 popolazioni + 1 feed rappresentativo + 1 immagini, ricevute: ${lines.join(' | ')}`);
   assert.ok(lines.some((l) => l.startsWith('manifest.counts.articles:')));
   assert.ok(lines.some((l) => l.startsWith('manifest.counts.swissArticles:')));
+  assert.ok(lines.some((l) => l.startsWith('sitemap-blog.xml:')));
+  assert.ok(lines.some((l) => l.startsWith('sitemap-blog-ch.xml:')));
   assert.ok(lines.some((l) => l.startsWith('chunk SEO frontaliere/run precedente:')));
   assert.ok(lines.some((l) => l.startsWith('chunk SEO svizzera/run precedente:')));
   assert.ok(lines.some((l) => l.includes('rss-it.xml') && l.includes('piu\' magro')), 'il rappresentante e\' il minimo');

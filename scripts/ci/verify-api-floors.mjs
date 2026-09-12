@@ -375,9 +375,10 @@ export function floorViolations(measured, expected, retention = undefined) {
  * rapporto osservabile PRIMA che diventi un fallimento.
  *
  * Le righe le produce lo stesso attraversamento di `floorViolations`, con gli
- * stessi riferimenti — i corpi per `manifest.counts`, i chunk SEO (tagliati a
- * `RSS_MAX_ITEMS`) per i feed, le hero per le immagini: un secondo criterio
- * qui misurerebbe qualcosa che il gate non gata, che e' peggio di non misurare.
+ * stessi riferimenti — i corpi per `manifest.counts`, le sitemap articolo, i
+ * chunk SEO (tagliati a `RSS_MAX_ITEMS`) per i feed, le hero per le immagini:
+ * un secondo criterio qui misurerebbe qualcosa che il gate non gata, che e'
+ * peggio di non misurare.
  *
  * Le righe SENZA riferimento non compaiono: sorgente a zero non e' un rapporto
  * basso, e' l'assenza del riferimento, ed e' gia' una violazione bloccante.
@@ -392,6 +393,15 @@ export function retentionReport(measured, expected) {
     const declared = measured.articleCounts[counter];
     if (source <= 0 || typeof declared !== 'number') continue;
     rows.push({ kind: 'manifest', label: `manifest.counts.${counter}`, declared, source });
+  }
+
+  if (measured.sitemaps) {
+    for (const [section, file] of Object.entries(SECTION_SITEMAPS)) {
+      const source = expected.sourceArticles[section] ?? 0;
+      const declared = measured.sitemaps[file];
+      if (source <= 0 || typeof declared !== 'number') continue;
+      rows.push({ kind: 'sitemap', label: file, declared, source });
+    }
   }
 
   // Il feed e' capato a RSS_MAX_ITEMS, ma la sua popolazione sorgente non lo
@@ -455,9 +465,9 @@ export function retentionAdvisories(rows, retention = FLOOR_RETENTION, warn = FL
 }
 
 /**
- * Le righe da stampare a ogni run: i due rapporti del manifest, le popolazioni
- * dei chunk SEO, quello delle immagini, e — per i feed — il PIU' MAGRO della
- * sezione.
+ * Le righe da stampare a ogni run: i rapporti del manifest, le due sitemap, le
+ * popolazioni dei chunk SEO, quello delle immagini, e — per i feed — il PIU'
+ * MAGRO della sezione.
  *
  * I dieci feed condividono il riferimento della loro sezione e stanno quasi
  * sempre tutti al tetto: stamparli tutti annegherebbe le due righe che contano
