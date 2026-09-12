@@ -49,6 +49,8 @@ const HERE = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(HERE, '../..');
 const GATE = path.join(ROOT, 'scripts/ci/check-blog-body-syntax.mjs');
 const WORKFLOW = path.join(ROOT, '.github/workflows/publish-api.yml');
+const GENERATOR_WORKFLOW = path.join(ROOT, '.github/workflows/generator-ci.yml');
+const CONTENT_GATES_WORKFLOW = path.join(ROOT, '.github/workflows/content-gates-main.yml');
 
 // Questa e' la forma unica della guardia: deve riconoscere import/export
 // statici, anche braced su piu' righe, ma non una stringa `esbuild` in coda a
@@ -166,7 +168,9 @@ test('il modello non conta la directory del gate e rifiuta un riferimento assent
       );
     }
 
-    const model = deriveFloorModel(dir);
+    const model = deriveFloorModel(dir, {
+      previousRegistryCounts: { frontaliere: 2, svizzera: 1 },
+    });
     assert.deepEqual(model.perRoot.map((r) => r.expectedFiles), [8, 4]);
 
     const missing = fs.mkdtempSync(path.join(os.tmpdir(), 'blog-body-floor-missing-'));
@@ -230,6 +234,44 @@ test('un registro troncato viene confrontato con il high-water della revisione p
   }
 });
 
+test('un checkout shallow e una storia assente restano fail-closed', () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'blog-body-floor-shallow-'));
+  const git = (...args) => execFileSync('git', ['-C', dir, ...args], { encoding: 'utf8' }).trim();
+  try {
+    const content = path.join(dir, 'content');
+    fs.mkdirSync(content, { recursive: true });
+    fs.writeFileSync(path.join(content, 'blog-articles-data.ts'), "id: 'front-0'\n");
+    fs.writeFileSync(path.join(content, 'swiss-articles-data.ts'), "id: 'swiss-0'\n");
+    for (const locale of ['it', 'en', 'de', 'fr']) {
+      fs.writeFileSync(path.join(content, `blog-meta-${locale}.ts`), "'blog.article.front-0.title': 'A',\n");
+      fs.writeFileSync(path.join(content, `blog-meta-ch-${locale}.ts`), "'blog.article.swiss-0.title': 'S',\n");
+    }
+    git('init', '-q');
+    git('config', 'user.email', 'test@example.invalid');
+    git('config', 'user.name', 'test');
+    git('add', 'content');
+    git('commit', '-qm', 'complete corpus');
+    fs.writeFileSync(path.join(dir, '.git', 'shallow'), `${git('rev-parse', 'HEAD')}\n`);
+
+    assert.throws(
+      () => deriveFloorModel(dir),
+      (error) => error.code === 'MISSING_CORPUS_HISTORY' && /shallow/.test(error.message),
+    );
+  } finally {
+    fs.rmSync(dir, { recursive: true, force: true });
+  }
+});
+
+test('i gate realistici fanno checkout della storia completa richiesta dal floor', () => {
+  for (const workflow of [GENERATOR_WORKFLOW, CONTENT_GATES_WORKFLOW]) {
+    assert.match(
+      fs.readFileSync(workflow, 'utf8'),
+      /uses: actions\/checkout@v5\s+with:\s+(?:#.*\n\s*)*fetch-depth:\s*0/,
+      `${path.basename(workflow)} deve rendere verificabile la revisione precedente`,
+    );
+  }
+});
+
 test('una meta con cardinalità plausibile ma ID sostituito viene rifiutata', () => {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'blog-body-floor-meta-identity-'));
   try {
@@ -249,6 +291,12 @@ test('una meta con cardinalità plausibile ma ID sostituito viene rifiutata', ()
 
     assert.throws(
       () => deriveFloorModel(dir),
+      (error) => error.code === 'MISSING_CORPUS_HISTORY' && /non e' un checkout Git/.test(error.message),
+    );
+    assert.throws(
+      () => deriveFloorModel(dir, {
+        previousRegistryCounts: { frontaliere: 2, svizzera: 1 },
+      }),
       (error) => /blog-meta-en\.ts: meta incompleta/.test(error.message)
         && /mancano 1: b/.test(error.message),
     );

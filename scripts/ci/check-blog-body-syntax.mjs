@@ -118,11 +118,13 @@ export const BLOG_BODY_ROOTS = [
 ];
 
 /** Deriva i riferimenti dei due pavimenti senza contare la directory del gate. */
-export function deriveFloorModel(root = ROOT) {
+export function deriveFloorModel(root = ROOT, { previousRegistryCounts } = {}) {
   const perRoot = BLOG_BODY_ROOTS.map(({ rel, section }) => ({
     rel,
     section,
-    expectedFiles: expectedBodyFiles(root, section),
+    expectedFiles: expectedBodyFiles(root, section, {
+      previousRegistryCount: previousRegistryCounts?.[section],
+    }),
   }));
   return {
     perRoot,
@@ -157,7 +159,7 @@ export function collectTypeScriptFiles(dir) {
  * gli eventuali consumer strutturali (es. `content/seo`) possono ancora passare
  * `minFiles`, senza entrare nel totale derivato dei corpi.
  */
-export function floorViolations(perRoot, { root, retention = undefined } = {}) {
+export function floorViolations(perRoot, { root, retention = undefined, previousRegistryCounts } = {}) {
   const violations = [];
   let total = 0;
   let expectedTotal = 0;
@@ -172,7 +174,9 @@ export function floorViolations(perRoot, { root, retention = undefined } = {}) {
         continue;
       }
       try {
-        expectedFiles = expectedBodyFiles(root, section);
+        expectedFiles = expectedBodyFiles(root, section, {
+          previousRegistryCount: previousRegistryCounts?.[section],
+        });
       } catch (error) {
         violations.push(error?.message || String(error));
         missingReferenceCount += 1;
@@ -303,10 +307,16 @@ export function loadEsbuild(dir = process.env.PREFLIGHT_ESBUILD_DIR) {
  */
 const BATCH = 500;
 
-export async function run({ log = console.log, error = console.error, env = process.env, root = ROOT } = {}) {
+export async function run({
+  log = console.log,
+  error = console.error,
+  env = process.env,
+  root = ROOT,
+  previousRegistryCounts,
+} = {}) {
   let model;
   try {
-    model = deriveFloorModel(root);
+    model = deriveFloorModel(root, { previousRegistryCounts });
   } catch (err) {
     error(`::error::preflight blog-body — ${err?.message || String(err)}`);
     return 1;
@@ -320,7 +330,7 @@ export async function run({ log = console.log, error = console.error, env = proc
 
   // I pavimenti restano sull'intero corpus (perRoot sopra), a prescindere
   // dallo scan mode: e' l'anti-falso-verde e non deve dipendere da un diff.
-  const violations = floorViolations(perRoot);
+  const violations = floorViolations(perRoot, { previousRegistryCounts });
   if (violations.length) {
     for (const v of violations) error(`::error::preflight blog-body — ${v}`);
     return 1;

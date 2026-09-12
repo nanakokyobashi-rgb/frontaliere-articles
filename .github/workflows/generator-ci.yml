@@ -59,6 +59,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
+        with:
+          # The body floor rejects a registry truncation only when the previous
+          # corpus revision is locally verifiable.
+          fetch-depth: 0
 
       - uses: actions/setup-node@v5
         with:

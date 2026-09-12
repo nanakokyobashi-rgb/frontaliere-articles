@@ -64,7 +64,9 @@ jobs:
     steps:
       - uses: actions/checkout@v5
         with:
-          fetch-depth: 1
+          # corpus-floors.mjs compares the live registry with the previous
+          # revision before the content gate publishes its verdict.
+          fetch-depth: 0
 
       - uses: actions/setup-node@v5
         with:

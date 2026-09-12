@@ -282,16 +282,26 @@ function readGit(root, args) {
   }
 }
 
+function missingHistoryError(message) {
+  const error = new Error(`storia del corpus non verificabile: ${message}`);
+  error.code = 'MISSING_CORPUS_HISTORY';
+  return error;
+}
+
 function previousCorpusRevision(root) {
-  if (readGit(root, ['rev-parse', '--is-inside-work-tree']) !== 'true') return null;
-  if (readGit(root, ['rev-parse', '--is-shallow-repository']) === 'true') {
-    const error = new Error(
-      'storia del corpus non verificabile: il checkout Git e\' shallow, quindi il high-water precedente non e\' disponibile',
-    );
-    error.code = 'MISSING_CORPUS_HISTORY';
-    throw error;
+  if (readGit(root, ['rev-parse', '--is-inside-work-tree']) !== 'true') {
+    throw missingHistoryError('la radice non e\' un checkout Git');
   }
-  return readGit(root, ['rev-parse', 'HEAD^']);
+  if (readGit(root, ['rev-parse', '--is-shallow-repository']) === 'true') {
+    throw missingHistoryError(
+      'il checkout Git e\' shallow, quindi il high-water precedente non e\' disponibile',
+    );
+  }
+  const revision = readGit(root, ['rev-parse', 'HEAD^']);
+  if (!revision) {
+    throw missingHistoryError('la revisione Git precedente non e\' disponibile');
+  }
+  return revision;
 }
 
 function previousRegistryData(root, section, revision) {
@@ -310,9 +320,19 @@ function previousRegistryData(root, section, revision) {
   }
 }
 
-function registryHighWater(root, section, current) {
+function registryHighWater(root, section, current, previousRegistryCount) {
+  if (previousRegistryCount !== undefined) {
+    if (!Number.isSafeInteger(previousRegistryCount) || previousRegistryCount < 0) {
+      const error = new Error(
+        `${section}: previousRegistryCount non valido (${previousRegistryCount}); ` +
+          'la storia iniettata deve essere un intero non negativo',
+      );
+      error.code = 'INVALID_CORPUS_HISTORY';
+      throw error;
+    }
+    return Math.max(current.count, previousRegistryCount);
+  }
   const revision = previousCorpusRevision(root);
-  if (!revision) return current.count;
   const previous = previousRegistryData(root, section, revision);
   return Math.max(current.count, previous?.count ?? 0);
 }
@@ -381,12 +401,14 @@ export function validateLocaleMetadata(root, section, registryIds) {
  *
  * Il riferimento non e' la directory che il gate deve scandire: e' la coppia
  * di registri e metadati che il sito usa per pubblicare gli articoli. Se uno
- * dei due riferimenti manca, lancia invece di trasformare l'assenza in un
- * pavimento a zero.
+ * dei due riferimenti manca, o se la storia necessaria al high-water non e'
+ * leggibile, lancia invece di trasformare l'assenza in un pavimento a zero.
+ * I fake root possono fornire `previousRegistryCount` solo quando la storia
+ * e' stata verificata dal test che li costruisce.
  */
-export function expectedBodyFiles(root, section) {
+export function expectedBodyFiles(root, section, { previousRegistryCount } = {}) {
   const registry = readRegistryData(root, section);
-  const highWater = registryHighWater(root, section, registry);
+  const highWater = registryHighWater(root, section, registry, previousRegistryCount);
   if (registry.count < floorFrom(highWater)) {
     throw truncatedRegistryError(section, registry, highWater);
   }

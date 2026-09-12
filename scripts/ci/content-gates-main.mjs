@@ -318,14 +318,15 @@ export const SEO_ROOT = { rel: 'content/seo', minFiles: 4 };
  * puntare su un albero finto.
  *
  * @param {string} [root]
+ * @param {{previousRegistryCounts?: Record<string, number>}} [options]
  * @returns {{ ok: boolean, violations: string[], perRoot: {rel:string,count:number}[] }}
  */
-export function preflight(root = ROOT) {
+export function preflight(root = ROOT, { previousRegistryCounts } = {}) {
   const perRoot = [...BLOG_BODY_ROOTS, SEO_ROOT].map((r) => ({
     ...r,
     count: collectTypeScriptFiles(path.join(root, r.rel)).length,
   }));
-  const violations = floorViolations(perRoot, { root });
+  const violations = floorViolations(perRoot, { root, previousRegistryCounts });
   for (const rel of REQUIRED_FILES) {
     if (!fs.existsSync(path.join(root, rel))) {
       violations.push(
