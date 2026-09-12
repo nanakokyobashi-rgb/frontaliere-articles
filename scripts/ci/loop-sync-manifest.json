@@ -3814,7 +3814,7 @@
       "reason": "Consumer zero-Claude che riattiva le run PR differite dal lease condiviso, verificando HEAD, ruolo e workflow sorgente prima del rerun. E' un percorso del ciclo Claude del corpus; il sito non possiede questo lease condiviso ne' il relativo consumer, quindi non c'e' un gemello da portare e la classificazione e' `corpus-only` per costruzione.",
       "baseline": {
         "site": null,
-        "corpus": "f458e9389e2af77f",
+        "corpus": "d947d5b8118c4a21",
         "alignedAt": "2026-09-12"
       }
     }
