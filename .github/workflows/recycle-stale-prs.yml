@@ -158,6 +158,7 @@ jobs:
             TITLE=$(printf '%s' "$pr" | jq -r '.title')
             BODY=$(printf '%s' "$pr" | jq -r '.body // ""')
             CREATED=$(printf '%s' "$pr" | jq -r '.createdAt')
+            HAS_AUTOFIX=$(printf '%s' "$pr" | jq -r 'if any(.labels[]?.name; . == "agent:autofix") then "true" else "false" end')
 
             # Gate 0 — head ref protetto. PRIMO di tutti: gli altri gate
             # decidono SE riciclare, questo decide se e' lecito farlo. Una PR
@@ -180,6 +181,13 @@ jobs:
             LASTCOMMIT=$(printf '%s' "$PRMETA" | jq -r '[.commits[]?.committedDate | select(type == "string" and length > 0)] | max // empty' 2>/dev/null || true)
             HEADREF=$(printf '%s' "$PRMETA" | jq -r '.headRefName // empty' 2>/dev/null || true)
             HEADSHA=$(printf '%s' "$PRMETA" | jq -r '.headRefOid // empty' 2>/dev/null || true)
+            # Il recycle è distruttivo (chiude la PR e cancella il branch):
+            # richiede la provenienza autonoma esplicita. `fix/*` conserva la
+            # compatibilità con le PR storiche; le PR owner-authored nuove
+            # arrivano con `agent:autofix` applicato dal fixer.
+            if [ "$HAS_AUTOFIX" != "true" ] && ! printf '%s' "$HEADREF" | grep -q '^fix/'; then
+              echo "PR #$N senza agent:autofix e branch non fix/* — skip recycle (solo PR autonome)"; continue
+            fi
             # LASTCOMMIT vuoto = PR senza commit o head fork inaccessibile: NON
             # ricicliamo (il close --delete-branch su un head fork può fallire
             # silenziosamente lasciando il ref, e "0 commit" non è il lavoro

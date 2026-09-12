@@ -5,8 +5,25 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { beaconCandidates, mergeBeaconCandidates } from '../../scripts/ci/check-quota-backoff.mjs';
+import { quotaPromotionDecision } from '../../scripts/ci/followup-drainer.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
+
+test('il drainer non congela la coda quando il fixer ha Codex fallback', () => {
+  const nowSec = 1_800_000_000;
+  assert.deepEqual(
+    quotaPromotionDecision(nowSec + 600, { nowSec, codexFallbackMode: false }),
+    { active: true, quotaBlocked: true, codexFallback: false },
+  );
+  assert.deepEqual(
+    quotaPromotionDecision(nowSec + 600, { nowSec, codexFallbackMode: true }),
+    { active: true, quotaBlocked: false, codexFallback: true },
+  );
+  assert.deepEqual(
+    quotaPromotionDecision(nowSec - 1, { nowSec, codexFallbackMode: true }),
+    { active: false, quotaBlocked: false, codexFallback: false },
+  );
+});
 
 test('#984: i candidati del beacon comprendono issue e PR del peer senza duplicati', () => {
   const now = Date.parse('2026-09-08T12:00:00Z');

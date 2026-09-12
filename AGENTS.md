@@ -131,10 +131,21 @@ faccia scattare `publish-api.yml`. I workflow che falliscono aprono una
 issue (`workflow-failure-issues`), che viene classificata e instradata
 (`issue-triage`) e infine lavorata dal fixer (`issue-fix`), una alla volta.
 
+Il claim `agent:in-progress` è accompagnato dal proprietario: `agent:remote`
+per `issue-fix` e `agent:local` per una sessione locale. Il claim gate è
+fail-closed se GitHub non è leggibile; il fixer remoto rilascia solo il proprio
+claim, mentre il detector stale non rimuove un claim locale perché una sessione
+locale non ha un heartbeat CI affidabile. Le PR create dal loop ricevono
+`agent:autofix`, che è la prova esplicita usata dai fixer e dai rescuer per
+distinguere una PR automatica owner-authored da una PR umana.
+
 **La quota Claude è condivisa con il ciclo del sito.** Questo repo ha
 precedenza inferiore per costruzione: i suoi workflow Claude leggono anche il
 beacon di rate-limit del sito e cedono, mentre il sito non legge mai il nostro.
 Non è una gentilezza, è un invariante — vedi `scripts/ci/check-quota-backoff.mjs`.
+Codex è il provider primario: con `FOLLOWUP_CODEX_FALLBACK_MODE=1` il drainer
+non sospende la coda per un beacon Claude attivo, perché il fixer decide se il
+fallback è necessario dopo la promozione.
 
 Il ciclo è tenuto allineato a quello del sito da
 `scripts/ci/loop-drift-check.mjs`, che confronta i due lati **contro la

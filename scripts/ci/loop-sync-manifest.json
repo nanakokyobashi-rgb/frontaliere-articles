@@ -1110,9 +1110,9 @@
       "path": "scripts/ci/stale-claim-detector.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "05cef42b82dc86bf",
-        "corpus": "05cef42b82dc86bf",
-        "alignedAt": "2026-09-01"
+        "site": "71dac35db23d0a61",
+        "corpus": "71dac35db23d0a61",
+        "alignedAt": "2026-09-12"
       }
     },
     {
