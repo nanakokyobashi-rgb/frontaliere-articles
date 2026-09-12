@@ -210,6 +210,17 @@ test('una superficie obbligatoria mancante fallisce esplicitamente', () => {
   }
 });
 
+test('retire-article fa il preflight delle superfici obbligatorie prima di ogni write', () => {
+  const src = readFileSync(path.join(ROOT, 'scripts/retire-article.mjs'), 'utf8');
+  const sectionAt = src.indexOf('const section = findSection(id);');
+  const preflightAt = src.indexOf('requiredSurfaceFilesFor(section);');
+  const firstWriteAt = src.indexOf('for (const [file, text] of writes) write(file, text);');
+  const dryRunAt = src.indexOf('if (dryRun)');
+  assert.ok(sectionAt >= 0 && preflightAt > sectionAt, 'il preflight deve seguire la risoluzione della sezione');
+  assert.ok(preflightAt < firstWriteAt, 'le superfici mancanti devono fallire prima delle scritture');
+  assert.ok(preflightAt < dryRunAt, 'anche --dry-run deve validare le superfici obbligatorie');
+});
+
 test('retire-article rifiuta un id mancante, vuoto o fatto di spazi prima di scrivere', () => {
   const script = path.join(ROOT, 'scripts/retire-article.mjs');
   for (const args of [[], [''], ['   ']]) {
