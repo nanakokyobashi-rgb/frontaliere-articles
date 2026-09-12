@@ -24,6 +24,8 @@ import {
   referencedIssueNumbers,
   DEFAULT_STALE_CLAIM_HOURS,
   claimOwner,
+  hasClaimLabel,
+  removeLabelArgs,
 } from '../../scripts/ci/stale-claim-detector.mjs';
 
 const NOW = Date.parse('2026-08-08T12:00:00Z');
@@ -50,6 +52,20 @@ test('un claim remoto vecchio resta liberabile dal detector', () => {
   const issues = [{ number: 4248, labels: REMOTE_CLAIM, updatedAt: hoursAgo(30) }];
   assert.equal(claimOwner(REMOTE_CLAIM), 'remote');
   assert.deepEqual(nums(selectStaleClaims(issues, new Set(), NOW)), [4248]);
+});
+
+test('un owner-only remoto è visibile e resta liberabile dopo una scrittura parziale', () => {
+  const ownerOnly = [{ name: 'agent:remote' }];
+  const issues = [{ number: 4248, labels: ownerOnly, updatedAt: hoursAgo(30) }];
+  assert.equal(hasClaimLabel(ownerOnly), true);
+  assert.deepEqual(nums(selectStaleClaims(issues, new Set(), NOW)), [4248]);
+});
+
+test('un owner-only locale resta protetto anche senza il mutex base', () => {
+  const ownerOnly = [{ name: 'agent:local' }];
+  const issues = [{ number: 4248, labels: ownerOnly, updatedAt: hoursAgo(30) }];
+  assert.equal(claimOwner(ownerOnly), 'local');
+  assert.deepEqual(nums(selectStaleClaims(issues, new Set(), NOW)), []);
 });
 
 test('un claim con due owner è conteso e non viene mutato', () => {
@@ -186,6 +202,15 @@ test('la lettura di produzione usa REST paginato per entrambe le liste e non un 
   assert.match(SOURCE, /\['api', apiPath, '--paginate', '--slurp'\]/);
   assert.match(SOURCE, /issue claim response missing required fields/);
   assert.match(SOURCE, /open PR response missing required fields/);
+  assert.match(SOURCE, /CLAIM_SCAN_LABELS\.flatMap/);
+  assert.match(SOURCE, /removeLabelArgs\(removeLabels\)/);
   assert.doesNotMatch(SOURCE, /\['issue', 'list'/);
   assert.doesNotMatch(SOURCE, /\['pr', 'list'/);
+});
+
+test('ripete il flag per ogni label rimossa, senza affidarsi a una variadica ambigua', () => {
+  assert.deepEqual(removeLabelArgs(['agent:in-progress', 'agent:remote']), [
+    '--remove-label', 'agent:in-progress',
+    '--remove-label', 'agent:remote',
+  ]);
 });
