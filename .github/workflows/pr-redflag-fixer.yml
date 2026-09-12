@@ -306,6 +306,29 @@ jobs:
           GH_REPO: ${{ github.repository }}
         run: node scripts/ci/alert-pat-down.mjs --workflow "${{ github.workflow }}" --run-url "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
 
+      - name: Acquire shared Claude quota lease (redflag residual)
+        id: quota_lease
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+          QUOTA_LEASE_ACTION: acquire
+          QUOTA_LEASE_ROLE: redflag
+          QUOTA_LEASE_OWNER: redflag-fixer
+          QUOTA_LEASE_TARGET_TYPE: pr
+          QUOTA_LEASE_TARGET: ${{ github.event.pull_request.number }}
+          QUOTA_LEASE_TTL_SEC: '3600'
+        run: node scripts/ci/check-quota-backoff.mjs
+
+      - name: Shared Claude quota lease unavailable (expected skip)
+        if: steps.quota_lease.outputs.lease_allowed != 'true'
+        run: |
+          if [ "${{ steps.quota_lease.outputs.lease_error }}" = 'true' ]; then
+            echo "::error::Lease quota condiviso illeggibile o non verificabile → redflag fixer saltato fail-closed."
+            exit 1
+          fi
+          echo "::warning::Lease quota condiviso negato (${{ steps.quota_lease.outputs.lease_reason }}) → redflag fixer saltato senza consumare quota."
+
       # ── Round cap + capability guard (deterministico, prima di Claude) ────
       # Conta i marker `<!-- REDFLAG_FIX_ROUND: N -->` già sulla PR. A N>=2 →
       # escalation a needs-human, STOP senza Claude. Altrimenti incrementa.
@@ -326,6 +349,7 @@ jobs:
       # tenuti in disaccordo.
       - name: Round cap + capability guard + tier
         id: guard
+        if: steps.quota_lease.outputs.lease_allowed == 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REPO: ${{ github.repository }}
@@ -492,6 +516,9 @@ jobs:
         if: steps.guard.outputs.proceed == 'true'
         uses: ./.github/actions/setup-headroom
 
+      # Il beacon resta telemetria: il lease condiviso sopra decide l'ammissione
+      # al turno, mentre questo probe conserva il segnale quota storico e il
+      # fallback Codex-primary senza introdurre un secondo veto.
       - name: Pre-flight — Claude quota telemetry (Codex primary)
         id: quota
         if: steps.guard.outputs.proceed == 'true'
@@ -644,3 +671,17 @@ jobs:
           fi
           echo "Nessun push ma Claude terminato pulito ('$CLAUDE_OUTCOME') → terminale legittimo (es. non auto-fixabile). Job verde."
           exit 0
+
+      - name: Release shared Claude quota lease
+        if: always() && steps.quota_lease.outputs.lease_acquired == 'true'
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+          QUOTA_LEASE_ACTION: release
+          QUOTA_LEASE_ROLE: redflag
+          QUOTA_LEASE_OWNER: redflag-fixer
+          QUOTA_LEASE_TARGET_TYPE: pr
+          QUOTA_LEASE_TARGET: ${{ github.event.pull_request.number }}
+          QUOTA_LEASE_TOKEN: ${{ steps.quota_lease.outputs.lease_token }}
+        run: node scripts/ci/check-quota-backoff.mjs

@@ -158,6 +158,11 @@ jobs:
           # mentre la quota condivisa è esaurita significa bruciare lo slot per
           # una run che morirà su 429 al primo turno.
           QUOTA_BEACON_PEER_REPO: valerielinc-ops/frontaliere-si-o-no
+          # Il drainer riserva lo slot issue-fix prima della mutazione label;
+          # il lease è durevole abbastanza da coprire la registrazione della
+          # run promossa, ma bounded e rileggibile senza store esterno.
+          FOLLOWUP_QUOTA_LEASE_TTL_SEC: '1800'
+          FOLLOWUP_QUOTA_LEASE_SCAN_MAX: '8'
           # issue-fix usa Codex come provider primario e Claude solo come
           # fallback: un beacon Claude non deve congelare la coda del drainer.
           FOLLOWUP_CODEX_FALLBACK_MODE: '1'
