@@ -65,6 +65,18 @@ test('#826: una follow-up normale resta promuovibile (nessun over-block)', () =>
   assert.equal(isDrainPromotable({}), true); // issue senza label → nessun blocco
 });
 
+test('#1084: un conflitto fresco non viene ripromosso nello stesso tick', () => {
+  assert.equal(isDrainPromotable(iss('agent:fix', 'agent:fix-queued')), false);
+  assert.equal(isDrainPromotable(iss('agent:fix-queued', 'follow-up')), true);
+
+  const drainBlock = SRC.slice(
+    SRC.indexOf('const pool = listIssues(LBL_QUEUED)'),
+    SRC.indexOf('let queued = pool'),
+  );
+  assert.match(drainBlock, /if \(has\(iss, LBL_FIX\)\) \{/);
+  assert.match(drainBlock, /DRAIN-SKIP/);
+});
+
 test('#826: `decomposed:1` è escluso da TUTTI gli stadi, DRAIN incluso', () => {
   // L'invariante di classe: il difetto non era il singolo filtro mancante, era
   // che un solo stadio su cinque leggesse la label in modo diverso dagli altri.
