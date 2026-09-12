@@ -318,6 +318,14 @@ test('una superficie coerente passa', () => {
   assert.deepEqual(validateAnnouncedSurface(goodSurface()), []);
 });
 
+test('un riferimento sorgente mancante blocca la riconciliazione invece di azzerare il floor', () => {
+  const s = goodSurface();
+  delete s.sourceCounts;
+  const errors = validateAnnouncedSurface(s);
+  assert.equal(errors.length, 2);
+  assert.match(errors.join('\n'), /riferimento del pavimento assente/);
+});
+
 test('slugs troncato rispetto al manifest viene rifiutato', () => {
   const s = goodSurface();
   delete s.slugs.blog.id0;
