@@ -170,12 +170,27 @@ test('la riconciliazione non usa il PAT: rimuove una label, non deve svegliare n
 });
 
 test('`--issue` accetta solo interi positivi e rifiuta `0` prima di leggere GitHub', () => {
-  const result = spawnSync(process.execPath, [ROUTER, '--issue', '0'], {
-    encoding: 'utf8',
-    env: { ...process.env, GH_REPO: 'nanakokyobashi-rgb/frontaliere-articles' },
-  });
-  assert.equal(result.status, 1, `${result.stdout}\n${result.stderr}`);
-  assert.match(result.stderr, /--issue richiede un numero intero positivo/);
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'reconcile-routing-arg-'));
+  const bin = path.join(dir, 'bin');
+  const touched = path.join(dir, 'gh-invocato');
+  fs.mkdirSync(bin);
+  fs.writeFileSync(path.join(bin, 'gh'), '#!/bin/sh\ntouch "$ROUTER_GH_SENTINEL"\nexit 99\n', { mode: 0o755 });
+  try {
+    const result = spawnSync(process.execPath, [ROUTER, '--issue', '0'], {
+      encoding: 'utf8',
+      env: {
+        ...process.env,
+        GH_REPO: 'nanakokyobashi-rgb/frontaliere-articles',
+        PATH: `${bin}:${process.env.PATH}`,
+        ROUTER_GH_SENTINEL: touched,
+      },
+    });
+    assert.equal(result.status, 1, `${result.stdout}\n${result.stderr}`);
+    assert.match(result.stderr, /--issue richiede un numero intero positivo/);
+    assert.equal(fs.existsSync(touched), false, '`--issue 0` non deve invocare gh né avviare una scansione globale');
+  } finally {
+    fs.rmSync(dir, { recursive: true, force: true });
+  }
 });
 
 test('il riepilogo distingue successi/fallimenti e il writer decompose e\' atomico', () => {

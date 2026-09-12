@@ -408,6 +408,13 @@ test('(g) il verdetto osservabile distingue merged contenuto, closed-unmerged, s
   assert.doesNotMatch(missingApiTimestamp.stdout, /gia' contenuto nella head storica/);
   assert.equal(missingApiTimestamp.comment, '', 'timestamp API mancante sospende il verdetto, non lo trasforma in un non-orphano');
 
+  const malformedOpenList = runWorkflow({
+    ORPHAN_TEST_OPEN: 'not-json',
+  });
+  assert.equal(malformedOpenList.status, 0);
+  assert.match(malformedOpenList.stdout, /Elenco delle PR aperte non parseabile/);
+  assert.equal(malformedOpenList.comment, '', 'una risposta API malformata sospende il verdetto senza commentare');
+
   const reallyOrphan = runWorkflow({
     ORPHAN_TEST_TARGET: '{}',
   });
