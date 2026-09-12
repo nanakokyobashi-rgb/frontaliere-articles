@@ -11,6 +11,7 @@ import { readFileSync, writeFileSync, unlinkSync, renameSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { corpusPath } from './corpus-paths.mjs';
+import { findSeoEntryMatches } from '../../../scripts/lib/seo-entry.mjs';
 import { sanitizeText } from '../../../scripts/lib/sanitize-control-chars.mjs';
 import { reportStrippedControlChars } from './control-char-write-report.mjs';
 
@@ -53,12 +54,6 @@ function writeCorpusFile(file, content) {
     try { unlinkSync(tmp); } catch { /* best-effort cleanup */ }
     throw err;
   }
-}
-
-function findSeoEntryMatches(src, id) {
-  const escapedId = id.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-  const entryRe = new RegExp("^  'blog-" + escapedId + "':\\s*\\{", 'gm');
-  return [...src.matchAll(entryRe)];
 }
 
 /** Bump (or insert) `updatedAt` on the ARTICLES entry so sitemap lastmod reflects the refresh. */
@@ -117,14 +112,12 @@ export function bumpDateModified(
       'refresh rifiutato prima della scrittura.',
     );
   }
-  const startIdx = entries[0]?.index ?? -1;
-  if (startIdx < 0) return false;
-  // Scope the rewrite to THIS entry's block (stop at the next top-level entry
-  // key) so a future nested object can never make us touch a sibling's date.
-  const after = src.slice(startIdx);
-  const nextKey = after.slice(1).search(/\n {2}'[^']+':\s*\{/);
-  const blockEnd = nextKey < 0 ? after.length : nextKey + 1;
-  const block = after.slice(0, blockEnd);
+  const entry = entries[0];
+  if (!entry) return false;
+  // Scope the rewrite to THIS entry's balanced object so indentation changes
+  // cannot make us touch a sibling's date.
+  const { index: startIdx, closeIdx } = entry;
+  const block = src.slice(startIdx, closeIdx + 1);
   const dmRe = /"dateModified":\s*"[^"]*"/;
   if (!dmRe.test(block)) return false;
   // dateModified must never precede datePublished: on the publish day a fixed
@@ -133,7 +126,7 @@ export function bumpDateModified(
   const pub = block.match(/"datePublished":\s*"([^"]*)"/);
   const effective = pub && Date.parse(pub[1]) > Date.parse(isoDateTime) ? pub[1] : isoDateTime;
   const replaced = block.replace(dmRe, `"dateModified": "${effective}"`);
-  writeCorpusFile(file, src.slice(0, startIdx) + replaced + after.slice(blockEnd));
+  writeCorpusFile(file, src.slice(0, startIdx) + replaced + src.slice(closeIdx + 1));
   return true;
 }
 

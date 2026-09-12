@@ -9,6 +9,41 @@
 
 import { matchingDelimiter } from './ts-literals.mjs';
 
+const escapeRegex = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
+/**
+ * Locate every real `blog-<id>` object entry, regardless of indentation.
+ * The key must occupy its own line; matchingDelimiter then scopes each result
+ * to its own balanced object instead of guessing from the next line's
+ * whitespace.
+ *
+ * @param {string} source
+ * @param {string} id
+ * @param {string} [file='SEO source'] used in diagnostics
+ * @returns {{index: number, openIdx: number, closeIdx: number}[]}
+ */
+export function findSeoEntryMatches(source, id, file = 'SEO source') {
+  if (typeof id !== 'string' || id.length === 0) {
+    throw new Error(`${file}: article id must be a non-empty string`);
+  }
+
+  const src = String(source);
+  const escaped = escapeRegex(id);
+  const entryRe = new RegExp(`^[\\t ]*(?:'blog-${escaped}'|"blog-${escaped}")\\s*:\\s*\\{`, 'gm');
+  const matches = [];
+  for (const match of src.matchAll(entryRe)) {
+    const openIdx = match.index + match[0].length - 1;
+    const closeIdx = matchingDelimiter(src, openIdx);
+    if (closeIdx === -1) throw new Error(`${file}: graffe sbilanciate attorno a blog-${id}`);
+    matches.push({
+      index: match.index + match[0].search(/[\'"]blog-/),
+      openIdx,
+      closeIdx,
+    });
+  }
+  return matches;
+}
+
 /**
  * Remove every `'blog-<id>': { ... },` block from `source`.
  *

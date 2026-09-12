@@ -71,6 +71,7 @@ import { readFileSync, writeFileSync, unlinkSync, renameSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { corpusPath } from './corpus-paths.mjs';
+import { findSeoEntryMatches } from '../../../scripts/lib/seo-entry.mjs';
 import { sanitizeText } from '../../../scripts/lib/sanitize-control-chars.mjs';
 import { reportStrippedControlChars } from './control-char-write-report.mjs';
 import { escapeForSingleQuoteTS } from './article-meta-block.mjs';
@@ -165,19 +166,18 @@ function escapeRegex(s) {
   return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
 
-function findUniqueSeoEntryStart(src, id) {
-  const entryRe = new RegExp("^  'blog-" + escapeRegex(id) + "':\\s*\\{", 'gm');
-  const matches = [...src.matchAll(entryRe)];
-  if (matches.length === 0) {
+function findUniqueSeoEntry(src, id) {
+  const entries = findSeoEntryMatches(src, id);
+  if (entries.length === 0) {
     throw new Error("upsertSeoDescriptionBlock: nessuna entry 'blog-" + id + "' trovata in questo file.");
   }
-  if (matches.length > 1) {
+  if (entries.length > 1) {
     throw new Error(
-      "upsertSeoDescriptionBlock: entry 'blog-" + id + "' duplicata (" + matches.length + " occorrenze); " +
+      "upsertSeoDescriptionBlock: entry 'blog-" + id + "' duplicata (" + entries.length + " occorrenze); " +
       'refresh rifiutato prima della scrittura.',
     );
   }
-  return matches[0].index;
+  return entries[0];
 }
 
 /**
@@ -239,11 +239,11 @@ export function upsertLocaleMetaFields(src, id, fields) {
 
 /**
  * Update the `description` / `ogDescription` / `structuredData.description`
- * fields of one `blog-<id>` SEO entry, scoped to that entry's block only —
- * same next-top-level-key scoping `bumpDateModified` uses, so this can never
- * bleed into a sibling entry. Duplicate keys are rejected before the caller
- * can write anything, rather than choosing an ambiguous first/last winner. A
- * field already at the target value is left untouched.
+ * fields of one `blog-<id>` SEO entry, scoped to the unique balanced block
+ * returned by the shared SEO-entry locator, so this can never bleed into a
+ * sibling entry. Duplicate keys are rejected before the caller can write
+ * anything, rather than choosing an ambiguous first/last winner. A field
+ * already at the target value is left untouched.
  *
  * @param {string} src - the SEO file's current content
  * @param {string} id
@@ -251,11 +251,8 @@ export function upsertLocaleMetaFields(src, id, fields) {
  * @returns {string} the new content (`=== src` when nothing changed)
  */
 export function upsertSeoDescriptionBlock(src, id, seo) {
-  const startIdx = findUniqueSeoEntryStart(src, id);
-  const after = src.slice(startIdx);
-  const nextKey = after.slice(1).search(/\n {2}'[^']+':\s*\{/);
-  const blockEnd = nextKey < 0 ? after.length : nextKey + 1;
-  const original = after.slice(0, blockEnd);
+  const { index: startIdx, closeIdx } = findUniqueSeoEntry(src, id);
+  const original = src.slice(startIdx, closeIdx + 1);
   let block = original;
 
   if (typeof seo.description === 'string' && seo.description.trim() !== '') {
@@ -283,7 +280,7 @@ export function upsertSeoDescriptionBlock(src, id, seo) {
   }
 
   if (block === original) return src;
-  return src.slice(0, startIdx) + block + after.slice(blockEnd);
+  return src.slice(0, startIdx) + block + src.slice(closeIdx + 1);
 }
 
 /**

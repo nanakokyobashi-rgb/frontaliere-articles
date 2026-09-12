@@ -80,10 +80,19 @@ export function drainStdio(timeoutMs = DEFAULT_DRAIN_TIMEOUT_MS) {
         cleanup();
         finishOne();
       };
+      const fail = () => {
+        if (done) return;
+        done = true;
+        cleanup();
+        // A synchronous throw means this write was never accepted by the
+        // stream; unlike an async error/close, no callback can still confirm
+        // delivery, so it is safe to release this stream's pending slot.
+        finishOne();
+      };
       try {
         stream.write('', finish);
       } catch {
-        consumerFailed = true;
+        fail();
       }
     }
   });

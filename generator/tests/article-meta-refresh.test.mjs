@@ -152,10 +152,10 @@ const SEO_FIXTURE =
   "  },\n" +
   "};\nexport default BLOG_SEO_METADATA_5;\n";
 
-function withDuplicateSeoEntry(src) {
+function withDuplicateSeoEntry(src, indent = '    ') {
   return src.replace(
     '\n};\nexport default',
-    "\n  'blog-demo-id': {\n" +
+    "\n" + indent + "'blog-demo-id': {\n" +
       "    title: 'Duplicate',\n" +
       "    description: 'Duplicate desc',\n" +
       "    ogDescription: 'Duplicate og',\n" +
@@ -210,6 +210,13 @@ test('upsertSeoDescriptionBlock: entry assente — errore esplicito', () => {
 test('upsertSeoDescriptionBlock: entry duplicata — rifiuta il first-match ambiguo', () => {
   assert.throws(
     () => upsertSeoDescriptionBlock(DUPLICATE_SEO_FIXTURE, 'demo-id', { description: 'x' }),
+    /duplicata.*refresh rifiutato/,
+  );
+});
+
+test('upsertSeoDescriptionBlock: entry duplicata — rileva indentazione tab', () => {
+  assert.throws(
+    () => upsertSeoDescriptionBlock(withDuplicateSeoEntry(SEO_FIXTURE, '\t'), 'demo-id', { description: 'x' }),
     /duplicata.*refresh rifiutato/,
   );
 });
@@ -275,21 +282,23 @@ test('refreshDescriptiveTexts: entry SEO duplicata — rifiuta prima di scrivere
 });
 
 test('bumpDateModified: entry SEO duplicata — rifiuta prima della scrittura', () => {
-  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'evergreen-refresh-'));
-  try {
-    const seoDir = path.join(root, 'content', 'seo');
-    fs.mkdirSync(seoDir, { recursive: true });
-    const seoPath = path.join(seoDir, 'seo-blog-5.ts');
-    fs.writeFileSync(seoPath, DUPLICATE_SEO_FIXTURE);
-    const before = fs.readFileSync(seoPath, 'utf-8');
+  for (const duplicate of [DUPLICATE_SEO_FIXTURE, withDuplicateSeoEntry(SEO_FIXTURE, '\t')]) {
+    const root = fs.mkdtempSync(path.join(os.tmpdir(), 'evergreen-refresh-'));
+    try {
+      const seoDir = path.join(root, 'content', 'seo');
+      fs.mkdirSync(seoDir, { recursive: true });
+      const seoPath = path.join(seoDir, 'seo-blog-5.ts');
+      fs.writeFileSync(seoPath, duplicate);
+      const before = fs.readFileSync(seoPath, 'utf-8');
 
-    assert.throws(
-      () => bumpDateModified('demo-id', '2026-09-12T00:00:00Z', root),
-      /duplicata.*refresh rifiutato/,
-    );
-    assert.equal(fs.readFileSync(seoPath, 'utf-8'), before);
-  } finally {
-    fs.rmSync(root, { recursive: true, force: true });
+      assert.throws(
+        () => bumpDateModified('demo-id', '2026-09-12T00:00:00Z', root),
+        /duplicata.*refresh rifiutato/,
+      );
+      assert.equal(fs.readFileSync(seoPath, 'utf-8'), before);
+    } finally {
+      fs.rmSync(root, { recursive: true, force: true });
+    }
   }
 });
 
