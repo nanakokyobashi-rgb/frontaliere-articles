@@ -61,8 +61,9 @@
  * disponibile; la funzione pura ricade su `updatedAt` per le risposte legacy,
  * mentre il percorso runtime salta in modo fail-safe se la timeline non e'
  * leggibile.
- * Un conflitto lasciato in piedi costa una run in piu' al giro successivo; una
- * rimozione sbagliata cancella l'instradamento di una issue.
+ * Un conflitto fresco resta fuori dal DRAIN nello stesso tick e viene
+ * rivalutato al giro successivo; una rimozione sbagliata cancella
+ * l'instradamento di una issue.
  *
  * Env:
  *   GH_TOKEN     richiesto. Deliberatamente il GITHUB_TOKEN e non il PAT: qui
