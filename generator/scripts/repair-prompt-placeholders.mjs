@@ -492,11 +492,10 @@ function seoIdAt(entries, offset) {
 
 for (const f of fs.readdirSync(seoDir).filter((x) => /^seo-blog.*\.ts$/.test(x))) {
   const rel = path.join('content', 'seo', f);
-  const whole = fs.readFileSync(path.join(ROOT, rel), 'utf-8');
   // Resolve every real, balanced entry before either sweep can write this
   // file. A malformed object therefore fails closed without a partial SEO
   // repair; comments, strings and templates cannot claim an article id.
-  const seoEntries = findAllSeoEntryMatches(whole, rel);
+  let seoEntries = findAllSeoEntryMatches(fs.readFileSync(path.join(ROOT, rel), 'utf-8'), rel);
   total += sweep(rel, new RegExp(`(\\n\\s*(?:${SEO_TS_FIELDS.join('|')}):\\s*')((?:\\\\'|[^'])*)(')`, 'g'), {
     unescape: unescapeTs,
     escape: escapeTs,
@@ -511,6 +510,9 @@ for (const f of fs.readdirSync(seoDir).filter((x) => /^seo-blog.*\.ts$/.test(x))
       return id ? rebuildExcerpt(id, 'it') : null;
     },
   });
+  // The TypeScript sweep may have changed the file length before the JSON
+  // sweep. Resolve offsets from the current source, never from a stale snapshot.
+  seoEntries = findAllSeoEntryMatches(fs.readFileSync(path.join(ROOT, rel), 'utf-8'), rel);
   total += sweep(rel, new RegExp(`("(?:${SEO_JSON_FIELDS.join('|')})":\\s*")((?:\\\\"|[^"])*)(")`, 'g'), {
     unescape: unescapeJson,
     escape: escapeJson,

@@ -150,14 +150,16 @@ function isRealSeoKey(src, start, end) {
   }
   if (!/^[\t ]*$/.test(src.slice(lineStart, start))) return false;
   const key = src.slice(start + 1, end);
-  return /^blog-[^'\\\r\n]+$/.test(key) && src.startsWith(': {', end + 1);
+  return /^blog-[^'\\\r\n]+$/.test(key) && /^:\s*\{/.test(src.slice(end + 1));
 }
 
 /**
  * Mask comments and literal contents without changing UTF-16 offsets.
  * Canonical single-quoted SEO keys are deliberately kept visible.
+ * Unclosed tokens are rejected instead of turning the remainder into an
+ * apparently valid prefix.
  */
-export function maskSeoSource(source) {
+export function maskSeoSource(source, file = 'SEO source') {
   const src = String(source);
   const masked = new Array(src.length);
   for (let i = 0; i < src.length; i += 1) {
@@ -173,21 +175,23 @@ export function maskSeoSource(source) {
     }
     if (ch === '/' && src[i + 1] === '*') {
       const end = src.indexOf('*/', i + 2);
-      i = (end === -1 ? src.length : end + 2) - 1;
+      if (end === -1) throw new Error(`${file}: commento multilinea non chiuso`);
+      i = end + 1;
       continue;
     }
     if (ch === '`') {
       const end = templateEnd(src, i);
-      i = (end === -1 ? src.length : end + 1) - 1;
+      if (end === -1) throw new Error(`${file}: template literal non chiuso`);
+      i = end;
       continue;
     }
     if (ch === "'" || ch === '"') {
       const end = quotedEnd(src, i, ch);
-      const stop = end === -1 ? src.length - 1 : end;
+      if (end === -1) throw new Error(`${file}: stringa ${ch} non chiusa`);
       if (ch === "'" && end !== -1 && isRealSeoKey(src, i, end)) {
         for (let j = i; j <= end; j += 1) masked[j] = src[j];
       }
-      i = stop;
+      i = end;
       continue;
     }
     masked[i] = ch;
@@ -197,7 +201,7 @@ export function maskSeoSource(source) {
 
 function locateSeoEntryMatches(source, entryRe, file) {
   const src = String(source);
-  const masked = maskSeoSource(src);
+  const masked = maskSeoSource(src, file);
   const matches = [];
   for (const match of masked.matchAll(entryRe)) {
     const keyOffset = match[0].indexOf("'blog-");
@@ -227,13 +231,13 @@ export function findSeoEntryMatches(source, id, file = 'SEO source') {
   }
 
   const escaped = escapeRegex(id);
-  const entryRe = new RegExp(`^[\\t ]*'blog-(${escaped})': \\{`, 'gm');
+  const entryRe = new RegExp(`^[\\t ]*'blog-(${escaped})':\\s*\\{`, 'gm');
   return locateSeoEntryMatches(source, entryRe, file);
 }
 
 /** Locate all real SEO entries for consumers that need the whole chunk. */
 export function findAllSeoEntryMatches(source, file = 'SEO source') {
-  return locateSeoEntryMatches(source, /^[\t ]*'blog-([^']+)': \{/gm, file);
+  return locateSeoEntryMatches(source, /^[\t ]*'blog-([^']+)':\s*\{/gm, file);
 }
 
 /** Remove every `'blog-<id>': { ... },` block from `source`. */

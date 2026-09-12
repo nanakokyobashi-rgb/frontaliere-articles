@@ -111,3 +111,97 @@ test('la scansione ignora entry-like nei commenti multilinea e nei template lite
   assert.match(result.src, /finta nel commento/);
   assert.equal(findSeoEntryMatches(result.src, id, 'fixture.ts').length, 0);
 });
+
+test('la scansione fallisce esplicitamente su stringa, template e commento non chiusi', () => {
+  const quoteSource = [
+    'export const SEO = {',
+    "  'blog-ok': { title: 'ok' },",
+    "  const broken = 'unterminated",
+    '};',
+  ].join('\n');
+  assert.throws(
+    () => findAllSeoEntryMatches(quoteSource, 'quote.ts'),
+    /quote\.ts: stringa ' non chiusa/,
+  );
+
+  const templateSource = [
+    'export const SEO = {',
+    "  'blog-ok': { title: 'ok' },",
+    '  const broken = `unterminated',
+    "  'blog-fake': { title: 'fake' },",
+    '};',
+  ].join('\n');
+  assert.throws(
+    () => findAllSeoEntryMatches(templateSource, 'template.ts'),
+    /template\.ts: template literal non chiuso/,
+  );
+
+  const commentSource = [
+    'export const SEO = {',
+    "  'blog-ok': { title: 'ok' },",
+    '  /* unterminated',
+    "  'blog-fake': { title: 'fake' },",
+    '};',
+  ].join('\n');
+  assert.throws(
+    () => findAllSeoEntryMatches(commentSource, 'comment.ts'),
+    /comment\.ts: commento multilinea non chiuso/,
+  );
+});
+
+test('accetta tab e newline tra chiave, due punti e graffa', () => {
+  const source = [
+    'export const SEO = {',
+    "\t'blog-tab':\t{ title: 'tab' },",
+    "    'blog-newline':",
+    "      { title: 'newline' },",
+    '};',
+  ].join('\n');
+
+  const found = findAllSeoEntryMatches(source, 'whitespace.ts');
+  assert.deepEqual(found.map(({ id }) => id), ['tab', 'newline']);
+  assert.ok(found.every(({ closeIdx }) => closeIdx > 0));
+});
+
+test('il repair ricalcola gli span dopo una sostituzione che cambia lunghezza', () => {
+  const source = [
+    'export const SEO = {',
+    "  'blog-primo': {",
+    "    description: 'placeholder',",
+    '    structuredData: { "description": "placeholder" },',
+    '  },',
+    "  'blog-secondo': {",
+    "    description: 'placeholder',",
+    '    structuredData: { "description": "placeholder" },',
+    '  },',
+    '};',
+  ].join('\n');
+  const expanded = source.replace(
+    "description: 'placeholder'",
+    `description: '${'x'.repeat(400)}'`,
+  );
+  const secondOffset = expanded.indexOf(
+    '"description": "placeholder"',
+    expanded.indexOf("'blog-secondo'"),
+  );
+  const before = findAllSeoEntryMatches(source, 'before.ts');
+  const after = findAllSeoEntryMatches(expanded, 'after.ts');
+  const idAt = (entries, offset) => entries.find(({ index, closeIdx }) => index <= offset && offset <= closeIdx)?.id || '';
+
+  assert.equal(idAt(before, secondOffset), '', 'uno span congelato non copre il secondo JSON spostato');
+  assert.equal(idAt(after, secondOffset), 'secondo');
+
+  const repairSource = fs.readFileSync(
+    new URL('../../generator/scripts/repair-prompt-placeholders.mjs', import.meta.url),
+    'utf8',
+  );
+  const seoLoop = repairSource.slice(
+    repairSource.indexOf('for (const f of fs.readdirSync(seoDir)'),
+    repairSource.indexOf('// ── Esito'),
+  );
+  assert.equal(
+    (seoLoop.match(/findAllSeoEntryMatches\(/g) || []).length,
+    2,
+    'gli span devono essere risolti prima di entrambe le sweep',
+  );
+});
