@@ -64,21 +64,23 @@ function hasExpectedRepoMarker(root) {
 
 /**
  * La radice del workspace arriva dal runner quando disponibile. Il fallback
- * dalla posizione del modulo resta utile in locale, ma viene accettato solo se
- * punta davvero al corpus: copiare/spostare questo file in una directory
- * temporanea non deve silenziosamente proteggere una radice sbagliata.
+ * dalla posizione del modulo resta utile in locale; entrambe le fonti vengono
+ * accettate solo se puntano davvero al corpus: copiare/spostare questo file in
+ * una directory temporanea non deve silenziosamente proteggere una radice
+ * sbagliata.
  */
 function resolveWorkspaceRoot() {
   const configured = process.env.GITHUB_WORKSPACE?.trim();
-  if (configured) return path.resolve(configured);
-
-  const fallback = path.resolve(import.meta.dirname, '..', '..', '..');
-  if (!hasExpectedRepoMarker(fallback)) {
+  const root = configured
+    ? path.resolve(configured)
+    : path.resolve(import.meta.dirname, '..', '..', '..');
+  if (!hasExpectedRepoMarker(root)) {
+    const source = configured ? 'GITHUB_WORKSPACE' : 'workspace fallback';
     throw new Error(
-      `run card: workspace fallback inattendibile (${fallback}), manca il marcatore repo ${REPO_MARKER}`,
+      `run card: ${source} inattendibile (${root}), manca il marcatore repo ${REPO_MARKER}`,
     );
   }
-  return fallback;
+  return root;
 }
 
 /**

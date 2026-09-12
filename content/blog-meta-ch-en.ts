@@ -6295,6 +6295,12 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.svizzera-siccita-faldeg-acque.title': 'Drought in Switzerland: 80% of groundwater at risk',
     'blog.article.svizzera-siccita-faldeg-acque.excerpt': 'SCNAT warns: springs dry up in the Jura and the Alps. Monitoring and renaturalization are needed to protect the groundwater.',
     'blog.article.svizzera-siccita-faldeg-acque.imageAlt': 'Swiss alpine river with low water levels, illustrating the impact of drought on groundwater reserves.',
+    'blog.article.stagionali-turismo-spese-alloggio.title': 'Seasonal in Tourism: Featured Accommodation Expenses',
+    'blog.article.stagionali-turismo-spese-alloggio.excerpt': 'A study by the University of Lausanne commissioned by the Federal Office of Housing analyzes the housing difficulties of seasonal workers.',
+    'blog.article.stagionali-turismo-spese-alloggio.imageAlt': 'Seasonal workers in Swiss tourism and housing challenges',
+    'blog.article.giovani-ticino-demografia-ustat.title': 'Young people in Ticino: demographic analysis and USTAT flows',
+    'blog.article.giovani-ticino-demografia-ustat.excerpt': 'USTAT demographic analysis on young people in Ticino: negative intercantonal balance towards other cantons but offset by new arrivals from abroad.',
+    'blog.article.giovani-ticino-demografia-ustat.imageAlt': 'Young people in Ticino and migration flows according to Ustat data',
 };
 
 export default blogMetaChEn;

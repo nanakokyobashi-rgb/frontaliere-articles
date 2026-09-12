@@ -578,6 +578,34 @@ test('la fixture del registro si parsa: sei righe, tutte con almeno un riferimen
   for (const r of REGISTRY) assert.ok(r.refs.length > 0, `riga senza riferimenti: ${r.decision}`);
 });
 
+test('#8041: il registro continua dopo una sezione Markdown successiva', () => {
+  const rows = parseVisionRegistry(`## Decisioni del proprietario già prese
+
+| Data | Decisione | Fonte |
+|---|---|---|
+| 2026-09-12 | #8041: **SÌ, procedi** | sessione 12-09 |
+
+## Note
+
+| Data | Decisione | Fonte |
+|---|---|---|
+| 2026-09-12 | nanakokyobashi-rgb/frontaliere-articles#8040: **SÌ, procedi** | sessione 12-09 |
+`);
+  assert.deepEqual(rows.map((row) => row.refs), [[8041], [8040]]);
+});
+
+test('#8041: una riga tabella malformata fa fallire il parse invece di sparire', () => {
+  assert.throws(
+    () => parseVisionRegistry(`## Decisioni del proprietario già prese
+
+| Data | Decisione | Fonte |
+|---|---|---|
+| 2026-09-12 | #8041 |
+`),
+    /registro decisioni incompleto: riconosciute 0\/1 righe tabella/,
+  );
+});
+
 test('#6280 «SÌ, procedi» e un si pieno -> SBLOCCA', () => {
   assert.equal(verdictFor(6280), 'sblocca');
 });

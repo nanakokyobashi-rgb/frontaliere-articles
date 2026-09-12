@@ -89695,6 +89695,84 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-assunzioni-alto-piemonte-settembre-2026': {
+    title: 'Alto Piemonte: 6.470 assunzioni previste a settembre 2026',
+    description: 'Scopri i dati di Unioncamere sulle 6.470 assunzioni programmate a settembre 2026 nell\'Alto Piemonte tra Biella, Novara, Verbano Cusio Ossola e Vercelli.',
+    keywords: 'frontalieri, ticino, svizzera, italia, alto, piemonte, assunzioni, previste',
+    ogTitle: 'Assunzioni Alto Piemonte settembre 2026: 6.470 contratti previsti',
+    ogDescription: 'Analisi delle previsioni di assunzione per il mese di settembre 2026 nell\'Alto Piemonte. Scopri i dati suddivisi per provincia, tipologia contrattuale e le principali criticità nel reperimento del personale secondo il sistema Excelsior.',
+    canonicalPath: '/articoli-frontaliere/assunzioni-alto-piemonte-settembre-2026',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Alto Piemonte: 6.470 assunzioni previste a settembre 2026",
+      "description": "Scopri i dati di Unioncamere sulle 6.470 assunzioni programmate a settembre 2026 nell'Alto Piemonte tra Biella, Novara, Verbano Cusio Ossola e Vercelli.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/assunzioni-alto-piemonte-settembre-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Previsioni assunzioni nell'Alto Piemonte per settembre"
+      },
+      "datePublished": "2026-09-12T04:26:11+00:00",
+      "dateModified": "2026-09-12T04:26:11+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/assunzioni-alto-piemonte-settembre-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-imprese-culturali-svizzera-2024': {
+    title: 'Cultura in Svizzera, record di imprese ma calano gli impieghi',
+    description: 'Nel 2024 le imprese culturali in Svizzera toccano il record di 69\'441 unità. Crescita aziendale ma calano gli impieghi e le dimensioni medie. Dati aggiornati',
+    keywords: 'frontalieri, ticino, svizzera, italia, cultura, record, imprese, calano',
+    ogTitle: 'Cultura in Svizzera: record di imprese ma calano gli impieghi nel 2024',
+    ogDescription: 'Il settore culturale svizzero segna un record di 69\'441 imprese nel 2024, superando la crescita dell\'economia totale. Tuttavia, si registra una flessione dei posti di lavoro e una riduzione delle dimensioni aziendali secondo i dati dell\'Ufficio',
+    canonicalPath: '/articoli-frontaliere/imprese-culturali-svizzera-2024',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Cultura in Svizzera, record di imprese ma calano gli impieghi",
+      "description": "Nel 2024 le imprese culturali in Svizzera toccano il record di 69'441 unità. Crescita aziendale ma calano gli impieghi e le dimensioni medie. Dati aggiornati",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/imprese-culturali-svizzera-2024.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Imprese culturali in Svizzera nel 2024"
+      },
+      "datePublished": "2026-09-12T04:52:17+00:00",
+      "dateModified": "2026-09-12T04:52:17+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/imprese-culturali-svizzera-2024/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

@@ -18883,6 +18883,24 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'stagionali-turismo-spese-alloggio',
+    category: 'pratico',
+    date: '2026-09-12T03:37:28.948Z',
+    image: '/images/blog/stagionali-turismo-spese-alloggio.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
+   {
+    id: 'giovani-ticino-demografia-ustat',
+    category: 'novita',
+    date: '2026-09-12T04:19:56.774Z',
+    image: '/images/blog/giovani-ticino-demografia-ustat.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the
