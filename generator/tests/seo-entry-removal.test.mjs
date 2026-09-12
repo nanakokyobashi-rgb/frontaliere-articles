@@ -153,8 +153,8 @@ test('accetta tab e newline tra chiave, due punti e graffa', () => {
   const source = [
     'export const SEO = {',
     "\t'blog-tab':\t{ title: 'tab' },",
-    "    'blog-newline':",
-    "      { title: 'newline' },",
+    "    'blog-newline' ",
+    "      :\n      { title: 'newline' },",
     '};',
   ].join('\n');
 

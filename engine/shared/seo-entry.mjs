@@ -150,7 +150,7 @@ function isRealSeoKey(src, start, end) {
   }
   if (!/^[\t ]*$/.test(src.slice(lineStart, start))) return false;
   const key = src.slice(start + 1, end);
-  return /^blog-[^'\\\r\n]+$/.test(key) && /^:\s*\{/.test(src.slice(end + 1));
+  return /^blog-[^'\\\r\n]+$/.test(key) && /^\s*:\s*\{/.test(src.slice(end + 1));
 }
 
 /**
@@ -231,13 +231,13 @@ export function findSeoEntryMatches(source, id, file = 'SEO source') {
   }
 
   const escaped = escapeRegex(id);
-  const entryRe = new RegExp(`^[\\t ]*'blog-(${escaped})':\\s*\\{`, 'gm');
+  const entryRe = new RegExp(`^[\\t ]*'blog-(${escaped})'\\s*:\\s*\\{`, 'gm');
   return locateSeoEntryMatches(source, entryRe, file);
 }
 
 /** Locate all real SEO entries for consumers that need the whole chunk. */
 export function findAllSeoEntryMatches(source, file = 'SEO source') {
-  return locateSeoEntryMatches(source, /^[\t ]*'blog-([^']+)':\s*\{/gm, file);
+  return locateSeoEntryMatches(source, /^[\t ]*'blog-([^']+)'\s*:\s*\{/gm, file);
 }
 
 /** Remove every `'blog-<id>': { ... },` block from `source`. */

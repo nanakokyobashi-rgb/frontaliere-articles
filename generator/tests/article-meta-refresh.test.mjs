@@ -258,9 +258,11 @@ test('upsertSeoDescriptionBlock: aggiorna anche i campi top-level con indentazio
 test('upsertSeoDescriptionBlock: restringe la chiave alla sintassi consumata dai reader', () => {
   const doubleQuoted = SEO_FIXTURE.replace("  'blog-demo-id': {", '  "blog-demo-id": {');
   const spacedColon = SEO_FIXTURE.replace("  'blog-demo-id': {", "  'blog-demo-id' : {");
-  for (const source of [doubleQuoted, spacedColon]) {
-    assert.throws(() => upsertSeoDescriptionBlock(source, 'demo-id', { description: 'x' }), /nessuna entry/);
-  }
+  assert.throws(() => upsertSeoDescriptionBlock(doubleQuoted, 'demo-id', { description: 'x' }), /nessuna entry/);
+  assert.match(
+    upsertSeoDescriptionBlock(spacedColon, 'demo-id', { description: 'x' }),
+    /description: 'x'/,
+  );
 });
 
 // ── 2. refreshDescriptiveTexts — la scrittura su un albero sintetico ────────
