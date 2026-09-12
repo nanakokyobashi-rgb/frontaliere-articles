@@ -1911,6 +1911,7 @@ const RUN_REPORT = {
     relocalized: 0,          // provvisorio IT promosso a localizzato dopo la traduzione
     itFallback: 0,           // ripiego sull'italiano RIMASTO tale a fine pipeline
     itFallbackDetail: [],    // `${locale}:${causa}` per ciascuno
+    itFallbackRecords: [],    // id/locale/source/reason persistibili accanto alla mappa
   },
   translation: createFreeMtRecoveryReport(),
   selectionUsage: {
@@ -3085,6 +3086,7 @@ export const ARTICLE_SECTION_CONFIGS = {
     registryArrayName: 'ARTICLES',
     slugDataFile: ARTICLE_SECTION_CORE.frontaliere.slugDataFile,
     slugsConstName: ARTICLE_SECTION_CORE.frontaliere.slugConst,
+    fallbackReasonsConstName: 'BLOG_SLUG_FALLBACK_REASONS',
     allIdsConstName: 'ALL_BLOG_ARTICLE_IDS',
     // frontaliere also maintains the BlogArticleId union in router.ts
     updateRouterUnion: true,
@@ -3111,6 +3113,7 @@ export const ARTICLE_SECTION_CONFIGS = {
     registryArrayName: 'SWISS_ARTICLES',
     slugDataFile: ARTICLE_SECTION_CORE.svizzera.slugDataFile,
     slugsConstName: ARTICLE_SECTION_CORE.svizzera.slugConst,
+    fallbackReasonsConstName: 'SWISS_SLUG_FALLBACK_REASONS',
     allIdsConstName: 'ALL_SWISS_ARTICLE_IDS',
     // svizzera ids are loose strings — no BlogArticleId union to touch.
     updateRouterUnion: false,
@@ -12913,6 +12916,48 @@ function modifyRouterTs(data) {
     blogSrc = replaceCaptureSafe(blogSrc, lastEntryRe, (_m, g1) => `${g1}\n${newSlugEntry}`);
   }
 
+  // Persist the provenance of a new Italian-slug fallback beside the routing
+  // map. The map is part of the same atomic write as the slug entry, so a
+  // successful registration cannot publish an unlabelled fallback. Historical
+  // entries intentionally remain absent: only fallbacks observed by this
+  // writer have a trustworthy cause (#1092 items 1 and 3).
+  const fallbackRecords = Array.isArray(data._slugI18nFallbacks)
+    ? data._slugI18nFallbacks
+    : [];
+  if (fallbackRecords.length > 0) {
+    const fallbackMapRe = new RegExp(
+      `(export const ${SECTION.fallbackReasonsConstName}\\s*:[^=]*=\\s*\\{)([\\s\\S]*?)(\\n\\};)`,
+    );
+    const fallbackMapMatch = fallbackMapRe.exec(blogSrc);
+    if (!fallbackMapMatch) {
+      throw new Error(
+        `modifyRouterTs: cannot find ${SECTION.fallbackReasonsConstName} map in ${corpusPath(blogDataFile)}`,
+      );
+    }
+    const existingFallbackIdRe = new RegExp(`['"]${escapeRegex(data.id)}['"]\\s*:`);
+    if (existingFallbackIdRe.test(fallbackMapMatch[2])) {
+      throw new Error(
+        `modifyRouterTs: fallback provenance for article "${data.id}" already exists in ` +
+          `${corpusPath(blogDataFile)}`,
+      );
+    }
+    const fallbackByLocale = new Map(
+      fallbackRecords
+        .filter((record) => record && ['en', 'de', 'fr'].includes(record.locale))
+        .map((record) => [record.locale, record]),
+    );
+    const fallbackFields = ['en', 'de', 'fr']
+      .filter((locale) => fallbackByLocale.has(locale))
+      .map((locale) => {
+        const record = fallbackByLocale.get(locale);
+        return `${locale}: { source: '${escapeForSingleQuoteTS(record.source || 'it-slug')}', reason: '${escapeForSingleQuoteTS(record.reasonCode || 'unknown')}' }`;
+      });
+    if (fallbackFields.length > 0) {
+      const fallbackEntry = `  '${escapeForSingleQuoteTS(data.id)}': { ${fallbackFields.join(', ')} },`;
+      blogSrc = replaceCaptureSafe(blogSrc, fallbackMapRe, (_m, g1, g2, g3) => `${g1}${g2}\n${fallbackEntry}${g3}`);
+    }
+  }
+
   // Regenerate the literal ALL_*_ARTICLE_IDS array ONLY when the file declares
   // it as a literal (`= [...]`). The svizzera section derives it via
   // `Object.keys(SWISS_SLUGS)`, so no array edit is needed there — and that is
@@ -15810,10 +15855,17 @@ async function generateAndValidateArticle(url, sourceContext = null) {
   // modifyRouterTs/modifyBlogArticlesTsx), quindi la rilocalizzazione dentro
   // `deriveAndSanitizeArticleSlugs()` non lo copre: va invocata anche qui, ed
   // e' la stessa forma del difetto #3209 (una derivazione per produttore).
-  relocalizeSlugsAfterTranslation(data, {
+  const slugI18n = relocalizeSlugsAfterTranslation(data, {
     isTaken: sectionLocaleSlugTaken,
     onEvent: reportSlugI18nEvent,
   });
+  data._slugI18nFallbacks = slugI18n.stillItalian;
+  assertSlugFallbackRunBudget();
+  // `validate()` checked the provisional values before translation. Recheck
+  // the final translated/fallback values before the primary writer touches
+  // any file, otherwise a fallback branch could reintroduce a same-locale
+  // collision after the earlier check (#1092 item 4).
+  checkTranslatedSlugCollisions(data);
 
   // Step 3b.1: Fabricated-institution check on the EN/DE/FR translations —
   // BLOCKING. assertNoFabricatedReferences() (Step 3a.0b, above) only ever
@@ -16322,11 +16374,19 @@ export function relocalizeSlugsAfterTranslation(data, opts = {}) {
 
   const itSlug = String(data.slugs.it || '');
   const provisional = Array.isArray(data[PROVISIONAL_IT_SLUG_FIELD]) ? data[PROVISIONAL_IT_SLUG_FIELD] : [];
+  const previousFallbacks = Array.isArray(data._slugI18nFallbacks) ? data._slugI18nFallbacks : [];
 
   for (const locale of ['en', 'de', 'fr']) {
     const current = String(data.slugs[locale] || '');
     const needsWork = provisional.includes(locale) || !current || current === itSlug;
     if (!needsWork) continue;
+
+    // Un articolo gia' servito puo' avere ancora lo slug IT per ragioni
+    // storiche. `isTaken()` vede proprio quella URL nella mappa pubblicata:
+    // in quel caso lo slug non e' piu' provvisorio, anche se il titolo tradotto
+    // e' cambiato. Promuoverlo qui cambierebbe una URL viva senza il bridge di
+    // redirect che appartiene al sito (#1095 item 2).
+    if (current && current === itSlug && isTaken(locale, current)) continue;
 
     const localizedTitle = String(data.content?.[locale]?.title || '').trim();
     // `inspectSlugForPromptPlaceholder` e non `slugifySlugPart` nudo: e' il
@@ -16361,6 +16421,8 @@ export function relocalizeSlugsAfterTranslation(data, opts = {}) {
     // buono non si butta per uno slug. Ma nessuna e' piu' silenziosa — ognuna
     // porta la propria causa, ed e' la causa che dice se il difetto sia il
     // traduttore, il titolo o una collisione.
+    const fallbackSlug = current || itSlug;
+    const fallbackIsTaken = Boolean(fallbackSlug) && isTaken(locale, fallbackSlug);
     const reason = !localizedTitle
       ? 'titolo tradotto assente'
       : floorMiss
@@ -16370,12 +16432,55 @@ export function relocalizeSlugsAfterTranslation(data, opts = {}) {
           : candidate === itSlug
             ? 'titolo tradotto identico all\'italiano'
             : 'slug localizzato gia\' occupato nella sezione';
-    data.slugs[locale] = current || itSlug;
-    out.stillItalian.push({ locale, slug: data.slugs[locale], reason });
-    onEvent({ kind: 'it-fallback', locale, slug: data.slugs[locale], reason });
+    const reasonCode = fallbackIsTaken
+      ? 'fallback-slug-occupied'
+      : !localizedTitle
+        ? 'missing-translated-title'
+        : floorMiss
+          ? 'title-below-plausibility-floor'
+          : !candidate
+          ? 'translated-title-not-slugifiable'
+          : candidate === itSlug
+              ? 'translated-title-identical-to-italian'
+              : 'localized-slug-occupied';
+    if (fallbackIsTaken) {
+      const err = new Error(
+        `slug-i18n fallback occupied: ${locale} "${fallbackSlug}" is already served in the active section`,
+      );
+      err.slugCollision = true;
+      throw err;
+    }
+    data.slugs[locale] = fallbackSlug;
+    const fallback = {
+      locale,
+      slug: data.slugs[locale],
+      reason,
+      reasonCode,
+      source: 'it-slug',
+    };
+    out.stillItalian.push(fallback);
+    const alreadyReported = previousFallbacks.some((previous) =>
+      previous?.locale === locale
+      && previous?.slug === fallback.slug
+      && previous?.reasonCode === fallback.reasonCode,
+    );
+    if (!alreadyReported) {
+      onEvent({
+        kind: 'it-fallback',
+        articleId: data.id || null,
+        locale,
+        slug: data.slugs[locale],
+        reason,
+        fallbackReason: reasonCode,
+        fallbackSource: 'it-slug',
+      });
+    }
   }
   return out;
 }
+
+const MAX_SLUG_FALLBACKS_PER_RUN = 3;
+const SLUG_FALLBACK_HEADROOM_REASON = 'title-below-plausibility-floor';
 
 /** Ponte fra gli eventi puri di sopra e le due tracce che devono restare: log e RUN_REPORT. */
 function reportSlugI18nEvent(event) {
@@ -16386,11 +16491,70 @@ function reportSlugI18nEvent(event) {
   }
   RUN_REPORT.slugs.itFallback += 1;
   RUN_REPORT.slugs.itFallbackDetail.push(`${event.locale}:${event.reason}`);
+  RUN_REPORT.slugs.itFallbackRecords.push({
+    id: event.articleId || RUN_REPORT.article?.id || null,
+    locale: event.locale,
+    slug: event.slug,
+    source: event.fallbackSource || 'it-slug',
+    reason: event.fallbackReason || 'unknown',
+  });
   console.error(
     `  ❌ [slug-i18n] Lo slug ${event.locale} resta l'URL ITALIANO ("${event.slug}") — ${event.reason}. ` +
       'Il locale servira\' lo stesso indirizzo dell\'italiano: e\' un ripiego, non una scelta. ' +
       'Se ricorre, il difetto e\' a monte (traduzione del titolo), non qui.',
   );
+}
+
+/**
+ * The fallback budget is checked before any registration writer runs. The
+ * three deterministic producers share this module, so a process that ever
+ * handles more than the declared margin fails before its next article can
+ * touch the corpus instead of discovering the excess in the API preflight
+ * after content was committed (#1095 item 3).
+ */
+export function assertSlugFallbackRunBudget() {
+  const details = Array.isArray(RUN_REPORT?.slugs?.itFallbackDetail)
+    ? RUN_REPORT.slugs.itFallbackDetail
+    : [];
+  const records = Array.isArray(RUN_REPORT?.slugs?.itFallbackRecords)
+    ? RUN_REPORT.slugs.itFallbackRecords
+    : [];
+  if (records.length !== details.length) {
+    const err = new Error(
+      `slug-i18n fallback provenance incomplete: ${records.length} records for ${details.length} fallbacks; `
+        + 'refusing publication before the writer can touch the corpus.',
+    );
+    err.qualityReject = true;
+    throw err;
+  }
+  const unratcheted = records.filter((record) => record?.reason !== SLUG_FALLBACK_HEADROOM_REASON);
+  if (unratcheted.length > 0) {
+    const detail = unratcheted
+      .map((record) => `${record?.id || 'unknown'}:${record?.locale || 'unknown'}:${record?.reason || 'unknown'}`)
+      .join(' | ');
+    const err = new Error(
+      `slug-i18n fallback reason not admitted for run headroom: ${detail}. `
+        + `Only ${SLUG_FALLBACK_HEADROOM_REASON} may use the fallback margin; refusing publication before the writer.`,
+    );
+    err.qualityReject = true;
+    throw err;
+  }
+  if (details.length <= MAX_SLUG_FALLBACKS_PER_RUN) return;
+  const err = new Error(
+    `slug-i18n fallback budget exceeded: ${details.length} > ${MAX_SLUG_FALLBACKS_PER_RUN} ` +
+      `in one run (${details.join(' | ')}). Refusing further publication; repair the translated titles.`,
+  );
+  err.qualityReject = true;
+  throw err;
+}
+
+/** Small read-only projection for producer guards and diagnostics. */
+export function getSlugFallbackRunSummary() {
+  return {
+    count: RUN_REPORT.slugs.itFallbackDetail.length,
+    detail: [...RUN_REPORT.slugs.itFallbackDetail],
+    records: RUN_REPORT.slugs.itFallbackRecords.map((record) => ({ ...record })),
+  };
 }
 
 /** Lo slug e' gia' occupato da un altro articolo della sezione? Non lancia: e' una sonda. */
@@ -16520,10 +16684,11 @@ export function deriveAndSanitizeArticleSlugs(data) {
   // (issue #191): qualunque slug en/de/fr sia rimasto uguale all'italiano viene
   // ricavato dal titolo tradotto, se un titolo tradotto c'e'. Se non c'e',
   // l'italiano resta — ma lo dice, e si conta.
-  relocalizeSlugsAfterTranslation(data, {
+  const slugI18n = relocalizeSlugsAfterTranslation(data, {
     isTaken: sectionLocaleSlugTaken,
     onEvent: reportSlugI18nEvent,
   });
+  data._slugI18nFallbacks = slugI18n.stillItalian;
   return data.slugs;
 }
 
@@ -16720,6 +16885,12 @@ export async function registerArticleFiles(data, opts = {}) {
   assertArticlePassesFactualityGates(data);
   clampSeoDescriptions(data);
   const slugs = deriveAndSanitizeArticleSlugs(data);
+  assertSlugFallbackRunBudget();
+  // The registrar is the write path of the three deterministic generators and
+  // the journalist importer. Keep the final collision check here as well as
+  // in the primary AI path: `deriveAndSanitizeArticleSlugs()` can intentionally
+  // retain an Italian fallback when a translated candidate is unusable.
+  checkTranslatedSlugCollisions(data);
   beginRegisterLock(data.id);
   modifyRouterTs(data);
   modifyBlogArticlesTsx(data);

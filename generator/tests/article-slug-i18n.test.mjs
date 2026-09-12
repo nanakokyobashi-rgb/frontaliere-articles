@@ -203,9 +203,14 @@ describe('relocalizeSlugsAfterTranslation — lo slug di un locale non e’ l’
       // Il titolo tradotto che slugifica esattamente sull'italiano: succede con
       // i titoli fatti di soli nomi propri ("Gaggiolo", "Chiasso").
       { mutate: (d) => { d.content.en = { title: d.slugs.it.replace(/-/g, ' ') }; }, reason: 'titolo tradotto identico all\'italiano' },
-      { mutate: () => {}, reason: 'slug localizzato gia\' occupato nella sezione', isTaken: () => true },
+      {
+        mutate: () => {},
+        reason: 'slug localizzato gia\' occupato nella sezione',
+        reasonCode: 'localized-slug-occupied',
+        isTaken: (locale, slug) => locale === 'en' && slug === slugifySlugPart(LOCALIZED_TITLES.en),
+      },
     ];
-    for (const { mutate, reason, isTaken } of cases) {
+    for (const { mutate, reason, reasonCode, isTaken } of cases) {
       const data = articleFixture();
       data.content.de = {};
       data.content.fr = {};
@@ -217,6 +222,13 @@ describe('relocalizeSlugsAfterTranslation — lo slug di un locale non e’ l’
       assert.ok(en, `nessun evento emesso per en (causa attesa: ${reason})`);
       assert.equal(en.kind, 'it-fallback');
       assert.equal(en.reason.normalize('NFC'), reason.normalize('NFC'));
+      assert.equal(en.fallbackSource, 'it-slug');
+      assert.equal(en.fallbackReason, reasonCode ?? {
+        'titolo tradotto assente': 'missing-translated-title',
+        'titolo tradotto non slugificabile': 'translated-title-not-slugifiable',
+        'titolo tradotto sotto il floor di plausibilita\' (title<12)': 'title-below-plausibility-floor',
+        'titolo tradotto identico all\'italiano': 'translated-title-identical-to-italian',
+      }[reason]);
     }
   });
 
@@ -227,6 +239,57 @@ describe('relocalizeSlugsAfterTranslation — lo slug di un locale non e’ l’
     const taken = slugifySlugPart(LOCALIZED_TITLES.en);
     relocalizeSlugsAfterTranslation(data, { isTaken: (locale, slug) => locale === 'en' && slug === taken });
     assert.equal(data.slugs.en, data.slugs.it, 'meglio l’URL italiano dichiarato che due articoli sullo stesso URL');
+  });
+
+  it('conserva uno slug italiano gia’ servito invece di cambiare una URL viva', () => {
+    const data = articleFixture();
+    data.slugs.en = data.slugs.it;
+    data.slugs.de = slugifySlugPart(LOCALIZED_TITLES.de);
+    data.slugs.fr = slugifySlugPart(LOCALIZED_TITLES.fr);
+    const events = [];
+
+    const out = relocalizeSlugsAfterTranslation(data, {
+      isTaken: (locale, slug) => locale === 'en' && slug === data.slugs.it,
+      onEvent: (event) => events.push(event),
+    });
+
+    assert.equal(data.slugs.en, data.slugs.it);
+    assert.deepEqual(out.relocalized, []);
+    assert.deepEqual(out.stillItalian, []);
+    assert.deepEqual(events, [], 'la conservazione di una URL pubblicata non e’ un nuovo fallback');
+  });
+
+  it('sonda anche l’occupazione del ripiego quando manca lo slug corrente', () => {
+    const data = articleFixture();
+    data.slugs.en = '';
+    markProvisionalItSlug(data, 'en');
+    const candidate = slugifySlugPart(LOCALIZED_TITLES.en);
+
+    assert.throws(
+      () => relocalizeSlugsAfterTranslation(data, {
+        isTaken: (locale, slug) => locale === 'en' && (slug === candidate || slug === data.slugs.it),
+      }),
+      /slug-i18n fallback occupied: en/,
+      'un fallback occupato va rifiutato prima dell’assegnamento',
+    );
+    assert.equal(data.slugs.en, '', 'lo slug occupato non deve essere assegnato');
+  });
+
+  it('non conta due volte lo stesso fallback quando il percorso di scrittura rilancia la derivazione', () => {
+    const data = articleFixture();
+    data.slugs.en = data.slugs.it;
+    data.slugs.de = slugifySlugPart(LOCALIZED_TITLES.de);
+    data.slugs.fr = slugifySlugPart(LOCALIZED_TITLES.fr);
+    data.content.en = {};
+    const events = [];
+
+    const first = relocalizeSlugsAfterTranslation(data, { onEvent: (event) => events.push(event) });
+    data._slugI18nFallbacks = first.stillItalian;
+    const second = relocalizeSlugsAfterTranslation(data, { onEvent: (event) => events.push(event) });
+
+    assert.equal(first.stillItalian.length, 1);
+    assert.equal(second.stillItalian.length, 1);
+    assert.equal(events.length, 1, 'la seconda derivazione deve essere osservabile ma non duplicare il conteggio');
   });
 });
 
@@ -279,6 +342,26 @@ describe('cablaggio in create-article.mjs', () => {
     assert.match(SRC, /function reportSlugI18nEvent\(event\)/);
     assert.match(SRC, /RUN_REPORT\.slugs\.itFallback \+= 1;/);
     assert.match(SRC, /slugs: \{[\s\S]{0,600}?itFallbackDetail: \[\],/);
+    assert.match(SRC, /itFallbackRecords: \[\],/);
+    assert.match(SRC, /fallbackReason: reasonCode/);
+    assert.match(SRC, /assertSlugFallbackRunBudget\(\);/);
+  });
+
+  it('la headroom del ratchet ammette solo il reason code del floor e blocca il resto prima del writer', () => {
+    assert.match(SRC, /const SLUG_FALLBACK_HEADROOM_REASON = 'title-below-plausibility-floor';/);
+    assert.match(SRC, /const unratcheted = records\.filter\(\(record\) => record\?\.reason !== SLUG_FALLBACK_HEADROOM_REASON\);/);
+    assert.match(SRC, /refusing publication before the writer/);
+  });
+
+  it('persiste la causa nel router e la espone sulla superficie HTTP', () => {
+    assert.match(SRC, /fallbackReasonsConstName: 'BLOG_SLUG_FALLBACK_REASONS'/);
+    assert.match(SRC, /fallbackReasonsConstName: 'SWISS_SLUG_FALLBACK_REASONS'/);
+    assert.match(SRC, /const fallbackMapRe = new RegExp\(/);
+    assert.match(SRC, /data\._slugI18nFallbacks/);
+    const api = fs.readFileSync(path.join(ROOT, 'scripts', 'build-api.mjs'), 'utf-8');
+    assert.match(api, /fallbackReasons:/);
+    assert.match(api, /BLOG_SLUG_FALLBACK_REASONS/);
+    assert.match(api, /SWISS_SLUG_FALLBACK_REASONS/);
   });
 });
 
@@ -304,8 +387,45 @@ function readSlugRegistries() {
   return out;
 }
 
+const FALLBACK_MAPS = {
+  'routerBlogData.ts': 'BLOG_SLUG_FALLBACK_REASONS',
+  'routerSwissData.ts': 'SWISS_SLUG_FALLBACK_REASONS',
+};
+const FALLBACK_FIELD_RE =
+  /\b(en|de|fr)\s*:\s*\{\s*source\s*:\s*'([^']+)'\s*,\s*reason\s*:\s*'([^']+)'\s*\}/g;
+
+function readSlugFallbackProvenance() {
+  const out = [];
+  for (const [file, constName] of Object.entries(FALLBACK_MAPS)) {
+    const full = path.join(ROOT, 'content', file);
+    if (!fs.existsSync(full)) continue;
+    const src = fs.readFileSync(full, 'utf-8');
+    const declaration = `export const ${constName}`;
+    const start = src.indexOf(declaration);
+    assert.notEqual(start, -1, `${constName} non dichiarata in ${file}`);
+    const open = src.indexOf('{', start);
+    const close = src.indexOf('\n};', open);
+    assert.ok(open > start && close > open, `${constName} non ha una mappa chiusa in ${file}`);
+    const body = src.slice(open + 1, close);
+    const entryRe = /^\s*'([A-Za-z0-9._-]+)'\s*:\s*\{\s*(.*?)\s*\},?\s*$/gm;
+    let entry;
+    while ((entry = entryRe.exec(body)) !== null) {
+      FALLBACK_FIELD_RE.lastIndex = 0;
+      let field;
+      let fieldCount = 0;
+      while ((field = FALLBACK_FIELD_RE.exec(entry[2])) !== null) {
+        out.push({ file, id: entry[1], locale: field[1], source: field[2], reason: field[3] });
+        fieldCount += 1;
+      }
+      assert.ok(fieldCount > 0, `provenienza senza locali per ${file}:${entry[1]}`);
+    }
+  }
+  return out;
+}
+
 describe('corpus pubblicato — ratchet sugli slug non localizzati', () => {
   const entries = readSlugRegistries();
+  const fallbackRecords = readSlugFallbackProvenance();
 
   it('i registri sono leggibili e non vuoti', () => {
     // Un worktree sparse non materializza content/: un gate che passa su zero
@@ -321,84 +441,103 @@ describe('corpus pubblicato — ratchet sugli slug non localizzati', () => {
   // #191 vale se non ne nascono di nuovi.
   //
   // Le tre restano il NUMERO MISURATO sul corpus (5.876 voci: 217 / 169 / 55),
-  // non il tetto: il margine del floor sta nelle costanti qui sotto, sommato
-  // una volta sola. Portarlo dentro la baseline lo renderebbe invisibile e —
-  // sommato al margine esplicito — doppio.
+  // non un tetto che si auto-allarga. La sola eccezione ammessa viene dai
+  // record di provenienza scritti insieme allo slug: senza record, un nuovo
+  // fallback e’ un errore e il ratchet resta a margine zero (#1092 item 1).
   const IT_URL_ACROSS_LOCALES_BASELINE = 217;
   const ALL_THREE_IDENTICAL_BASELINE = 169;
   const LONG_SLUG_BASELINE = 55;
 
-  // Margine DICHIARATO, non allargamento del gate (#798). Il floor di
-  // plausibilita' del titolo aggiunge una causa NUOVA di ripiego sull'URL
-  // italiano — `titolo tradotto sotto il floor di plausibilita'` in
-  // `relocalizeSlugsAfterTranslation()` — e le tre baseline qui sotto sono
-  // misurate a margine ZERO su questo checkout (5.876 voci: 217 / 169 / 55).
-  // Senza margine il PRIMO articolo che ci cade fa fallire questo file, che
-  // gira come Preflight in publish-api.yml e generate-article.yml: non «un URL
-  // italiano in piu'», ma la pubblicazione ferma per l'intera superficie dati.
-  // Dimensionato sul costo misurato del floor: 3 `title` di articoli. Non e'
-  // un permesso a crescere: se il consumo si avvicina al margine, la causa da leggere e'
-  // `RUN_REPORT.slugs.itFallbackDetail` (le voci `…:titolo tradotto sotto il
-  // floor…`), e la risposta e' riparare la traduzione del titolo, non alzare
-  // ancora questo numero.
-  const FLOOR_IT_FALLBACK_HEADROOM = 3;
-  // Il margine vale su TUTTI E TRE i conteggi, e non e' una concessione: e' la
-  // stessa causa misurata, letta sui tre modi in cui si manifesta.
-  //
-  // Un articolo NUOVO i cui tre titoli tradotti cadono sotto il floor di
-  // plausibilita' ripiega sull'URL italiano in en, de E fr: e' un caso
-  // ALL_THREE nuovo di zecca, non uno storico. Portare quel cap a margine zero
-  // significa che il primo articolo cosi' non fa «un URL italiano in piu'», fa
-  // fallire il Preflight di publish-api.yml — la pubblicazione ferma per
-  // l'intera superficie dati, con la causa che sta in una traduzione di titolo.
-  //
-  // Lo stesso ripiego copia lo STESSO slug italiano su fino a tre locali, e il
-  // ratchet degli slug lunghi conta PER LOCALE: un solo ripiego su uno slug
-  // >= 80 caratteri ne aggiunge tre in un colpo. Da qui il fattore 3.
-  const FLOOR_LONG_SLUG_HEADROOM = FLOOR_IT_FALLBACK_HEADROOM * 3;
+  it('ogni provenienza e’ per un fallback reale e ha una causa ammessa', () => {
+    const byKey = new Map(entries.map((entry) => [`${entry.file}:${entry.id}`, entry]));
+    const seen = new Set();
+    const allowedReasons = new Set([
+      'missing-translated-title',
+      'title-below-plausibility-floor',
+      'translated-title-not-slugifiable',
+      'translated-title-identical-to-italian',
+      'localized-slug-occupied',
+      'fallback-slug-occupied',
+    ]);
+    for (const record of fallbackRecords) {
+      const key = `${record.file}:${record.id}`;
+      const slug = byKey.get(key);
+      assert.ok(slug, `provenienza per articolo assente dal registro slug: ${key}`);
+      assert.ok(['en', 'de', 'fr'].includes(record.locale), `locale fallback non ammesso: ${record.locale}`);
+      assert.equal(slug[record.locale], slug.it, `${key}/${record.locale} non serve davvero lo slug IT`);
+      assert.equal(record.source, 'it-slug', `${key}/${record.locale} ha una sorgente non tracciabile`);
+      assert.ok(allowedReasons.has(record.reason), `${key}/${record.locale} ha una causa sconosciuta: ${record.reason}`);
+      const unique = `${key}:${record.locale}`;
+      assert.equal(seen.has(unique), false, `provenienza duplicata: ${unique}`);
+      seen.add(unique);
+    }
+  });
 
-  const IT_URL_ACROSS_LOCALES_CAP = IT_URL_ACROSS_LOCALES_BASELINE + FLOOR_IT_FALLBACK_HEADROOM;
-  const ALL_THREE_IDENTICAL_CAP = ALL_THREE_IDENTICAL_BASELINE + FLOOR_IT_FALLBACK_HEADROOM;
-  const LONG_SLUG_CAP = LONG_SLUG_BASELINE + FLOOR_LONG_SLUG_HEADROOM;
+  const floorRecords = fallbackRecords.filter((record) => record.reason === 'title-below-plausibility-floor');
+  const floorArticleKeys = new Set(floorRecords.map((record) => `${record.file}:${record.id}`));
+  const floorLocalesByArticle = new Map();
+  for (const record of floorRecords) {
+    const key = `${record.file}:${record.id}`;
+    const locales = floorLocalesByArticle.get(key) ?? new Set();
+    locales.add(record.locale);
+    floorLocalesByArticle.set(key, locales);
+  }
+  const floorAllThreeKeys = new Set(
+    [...floorLocalesByArticle.entries()]
+      .filter(([, locales]) => locales.has('en') && locales.has('de') && locales.has('fr'))
+      .map(([key]) => key),
+  );
+  const slugByKey = new Map(entries.map((entry) => [`${entry.file}:${entry.id}`, entry]));
+  const floorLongLocaleCount = floorRecords.filter((record) => {
+    const entry = slugByKey.get(`${record.file}:${record.id}`);
+    return entry && entry[record.locale].length >= 80;
+  }).length;
+  const unratchetedReasons = fallbackRecords.filter((record) => record.reason !== 'title-below-plausibility-floor');
+  const IT_URL_ACROSS_LOCALES_CAP = IT_URL_ACROSS_LOCALES_BASELINE + floorArticleKeys.size;
+  const ALL_THREE_IDENTICAL_CAP = ALL_THREE_IDENTICAL_BASELINE + floorAllThreeKeys.size;
+  const LONG_SLUG_CAP = LONG_SLUG_BASELINE + floorLongLocaleCount;
+
+  it('non concede headroom a cause diversa dal floor misurato', () => {
+    assert.deepEqual(
+      unratchetedReasons,
+      [],
+      'un fallback persistito senza causa di floor deve fermare il run, non allargare il ratchet',
+    );
+  });
 
   it(`gli articoli che servono l'URL italiano su en/de/fr non superano ${IT_URL_ACROSS_LOCALES_CAP}`, () => {
     const offenders = entries.filter((e) => e.en === e.it || e.de === e.it || e.fr === e.it);
     assert.ok(
       offenders.length <= IT_URL_ACROSS_LOCALES_CAP,
       `${offenders.length} articoli servono l'URL italiano in almeno un locale ` +
-        `(baseline ${IT_URL_ACROSS_LOCALES_BASELINE} + ${FLOOR_IT_FALLBACK_HEADROOM} di margine per il floor del titolo).\n` +
-        `Nuovi rispetto alla baseline: ${offenders.length - IT_URL_ACROSS_LOCALES_BASELINE}.\n` +
+        `(baseline ${IT_URL_ACROSS_LOCALES_BASELINE} + ${floorArticleKeys.size} record di floor).\n` +
+        `Nuovi rispetto alla baseline: ${offenders.length - IT_URL_ACROSS_LOCALES_BASELINE}; ` +
+        `record di cause non ratchettabili: ${unratchetedReasons.length}.\n` +
         `Primi dieci: ${offenders.slice(0, 10).map((e) => e.id).join(', ')}\n` +
         'Se la fix di #191 e’ in piedi questo numero non puo’ salire: un articolo nuovo ricava lo slug dal titolo tradotto.\n' +
-        'L’unica crescita prevista e’ il ripiego «titolo tradotto sotto il floor di plausibilita’» (#798): ' +
-        'verificalo in `RUN_REPORT.slugs.itFallbackDetail`. Se la causa e’ quella, il difetto e’ la traduzione del titolo.',
+        'Solo un record persistito con causa `title-below-plausibility-floor` autorizza crescita: ' +
+        'ogni altra causa deve fermare la pubblicazione.',
     );
   });
 
   it(`gli articoli con TUTTI E TRE i locali sull'URL italiano non superano ${ALL_THREE_IDENTICAL_CAP}`, () => {
-    assert.ok(ALL_THREE_IDENTICAL_CAP > ALL_THREE_IDENTICAL_BASELINE,
-      'il cap ALL_THREE_IDENTICAL deve tenere almeno un margine sopra la baseline: '
-      + 'a margine zero il primo ripiego del floor ferma la pubblicazione');
     // E' il numero misurato oggi (169, blog 126 + swiss 43): un articolo
     // che serve lo stesso indirizzo in quattro lingue non ha localizzazione
-    // affatto, ed e' il caso peggiore della famiglia. Il margine e' lo stesso
-    // di sopra: un titolo tradotto sotto il floor in tutti e tre i locali cade
-    // qui, non solo nel conteggio largo.
+    // affatto, ed e' il caso peggiore della famiglia. Un titolo tradotto sotto
+    // il floor in tutti e tre i locali puo' crescere il cap solo se la mappa di
+    // provenienza nomina tutti e tre i fallback.
     const offenders = entries.filter((e) => e.en === e.it && e.de === e.it && e.fr === e.it);
     assert.ok(
       offenders.length <= ALL_THREE_IDENTICAL_CAP,
       `${offenders.length} articoli servono l'URL italiano su en, de E fr ` +
-        `(baseline ${ALL_THREE_IDENTICAL_BASELINE} + ${FLOOR_IT_FALLBACK_HEADROOM} di margine per il floor del titolo).\n` +
+        `(baseline ${ALL_THREE_IDENTICAL_BASELINE} + ${floorAllThreeKeys.size} record di floor).\n` +
         `Primi dieci: ${offenders.slice(0, 10).map((e) => e.id).join(', ')}`,
     );
   });
 
   it(`gli slug lunghi >= 80 caratteri non superano ${LONG_SLUG_CAP}`, () => {
-    assert.ok(LONG_SLUG_CAP >= LONG_SLUG_BASELINE + 3,
-      'il ratchet degli slug lunghi conta per locale: il margine deve coprire '
-      + 'almeno un ripiego, che vale tre locali');
-    // Il ripiego lo tocca tre volte: lo slug italiano copiato su en/de/fr
-    // conta una volta per locale se e' lungo.
+    // Il ratchet conta per locale e ammette solo i locali nominati da un record
+    // persistito per il floor: non esiste piu' un +9 cieco.
     const long = [];
     for (const e of entries) {
       for (const locale of ['it', 'en', 'de', 'fr']) {
@@ -408,7 +547,7 @@ describe('corpus pubblicato — ratchet sugli slug non localizzati', () => {
     assert.ok(
       long.length <= LONG_SLUG_CAP,
       `${long.length} slug >= 80 caratteri ` +
-        `(baseline ${LONG_SLUG_BASELINE} + ${FLOOR_LONG_SLUG_HEADROOM} di margine per il floor del titolo): ` +
+        `(baseline ${LONG_SLUG_BASELINE} + ${floorLongLocaleCount} record di floor): ` +
         `${long.slice(0, 10).join(', ')}`,
     );
   });
