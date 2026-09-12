@@ -51,6 +51,7 @@ import {
   latestFixOutcomeEntryFromComments,
   outcomeForCurrentPromotion,
   recoverableFixDecision,
+  isRecoverableQueueManaged,
 } from '../../scripts/ci/followup-drainer.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
@@ -146,6 +147,38 @@ test('recoverableFixDecision: il backoff quota conserva il beacon WIP', () => {
   const d = recoverableFixDecision({ outcome: 'max-turns', hasBranchWork: true, attempt: 1, quotaBackoffActive: true });
   assert.equal(d.action, 'hold-quota');
   assert.equal(d.nextAttempt, 1);
+});
+
+test('recoverableFixDecision: PR chiusa senza merge riprende il checkpoint, PR mergiata no', () => {
+  const closed = recoverableFixDecision({
+    outcome: 'pr-created', hasBranchWork: true, hasMergedFix: false, attempt: 0,
+  });
+  assert.equal(closed.action, 'requeue');
+  assert.equal(closed.nextAttempt, 1);
+
+  const merged = recoverableFixDecision({
+    outcome: 'pr-created', hasBranchWork: true, hasMergedFix: true, attempt: 0,
+  });
+  assert.equal(merged.action, 'none');
+  assert.equal(merged.nextAttempt, 0);
+});
+
+test('isRecoverableQueueManaged: needs-human non nasconde un WIP, gli altri veto restano', () => {
+  const labels = (...names) => names.map((name) => ({ name }));
+  const issue = { title: 'follow-up(#1234): checkpoint del fixer' };
+
+  assert.equal(
+    isRecoverableQueueManaged({ ...issue, labels: labels('follow-up', 'fu-parked', 'needs-human') }),
+    true,
+  );
+  assert.equal(
+    isRecoverableQueueManaged({ ...issue, labels: labels('follow-up', 'fu-parked', 'needs-human', 'backlog') }),
+    false,
+  );
+  assert.equal(
+    isRecoverableQueueManaged({ ...issue, labels: labels('follow-up', 'fu-parked', 'needs-human', 'crawler-transient') }),
+    false,
+  );
 });
 
 test('crawlerFixDecision: una promozione fresca non cede un branch WIP', () => {
@@ -304,7 +337,7 @@ test('il ramo DELIVERED del rescue queue-managed è qualificato da isDeliveredTh
   // Le due letture restano quelle, comunque siano legate al gate (dal #973
   // passano da una const, perché servono anche al warning sul writer
   // concorrente di `agent:fix`): a contare è la SORGENTE, non la forma.
-  assert.match(branch[1], /mergedAt = mergedFixPrAt\(/, 'gate sul merge reale, non sull assenza di PR aperte');
+  assert.match(queue, /const mergedAt = outcome === 'pr-created' \? mergedFixPrAt\(/, 'gate sul merge reale, non sull assenza di PR aperte');
   assert.match(queue, /const promotion = !hasPR && rawOutcome !== null/, 'gate sulla promozione della run corrente');
   assert.match(branch[1], /promotedAt: promotion\.at/, 'la promozione entra nel gate');
 });
@@ -316,7 +349,9 @@ test('PARKED-WIP viene recuperato prima dell AGE-OUT e non può essere chiuso', 
   assert.ok(ageOutAt >= 0, 'lo stadio AGE-OUT deve restare riconoscibile');
   const preAgeOut = run.slice(0, ageOutAt);
   assert.match(preAgeOut, /const parkedForWip = listIssues\(LBL_PARKED\)/);
+  assert.match(preAgeOut, /isRecoverableQueueManaged/);
   assert.match(preAgeOut, /const recoverable = recoverableFixBranch\(iss\.number\)/);
+  assert.match(preAgeOut, /recoverable\?\.state === 'unknown'/);
   assert.match(preAgeOut, /RE-QUEUE PARKED-WIP/);
   assert.match(preAgeOut, /add = \[LBL_QUEUED/);
   assert.match(preAgeOut, /remove = \[LBL_PARKED, 'needs-human'/);
@@ -324,5 +359,6 @@ test('PARKED-WIP viene recuperato prima dell AGE-OUT e non può essere chiuso', 
   const parentAt = run.indexOf('// --- PARENT-CLOSE:');
   const ageOut = run.slice(ageOutAt, parentAt);
   assert.match(ageOut, /const liveWip = recoverableFixBranch\(iss\.number\)/);
+  assert.match(ageOut, /liveWip\?\.state === 'unknown'/);
   assert.match(ageOut, /AGE-OUT skip #\$\{iss\.number\}: checkpoint WIP live/);
 });
