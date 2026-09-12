@@ -456,14 +456,19 @@ export function isDecomposedParent(iss) {
 }
 
 /**
- * Il DRAIN può promuovere questa issue a `agent:fix`? Una issue già nello
- * stadio decompose o un padre decomposto è lavoro assegnato altrove, non un
- * candidato del fixer. Il predicato resta puro per poter difendere
+ * Il DRAIN può promuovere questa issue a `agent:fix`? Una issue già attiva,
+ * nello stadio decompose o un padre decomposto è lavoro assegnato altrove,
+ * non un candidato del fixer. Il predicato resta puro per poter difendere
  * l'invariante nei test e nei call-site del DRAIN.
  * @param {{labels?: Array<{name:string}>}} iss
  */
 export function isDrainPromotable(iss) {
   if (has(iss, LBL_PARKED)) return false;
+  // La riconciliazione può aver già visto il conflitto durante la finestra
+  // non atomica di `gh issue edit`. Lasciarlo fuori evita una seconda
+  // promozione nello stesso tick; il prossimo giro rimuoverà la coda quando
+  // il conflitto avrà superato la finestra di sicurezza.
+  if (has(iss, LBL_FIX)) return false;
   if (has(iss, LBL_DECOMP_QUEUED) || has(iss, LBL_DECOMP) || has(iss, LBL_DECOMPOSED)) return false;
   return true;
 }
@@ -4219,11 +4224,17 @@ export function runDrain() {
 
   const pool = listIssues(LBL_QUEUED).filter((i) => !has(i, LBL_PARKED));
 
-  // Pre-flight zero-Claude: ciò che `isDrainPromotable` esclude va tolto dalla
-  // coda, non soltanto saltato. Altrimenti una label stantia resta in
-  // `agent:fix-queued` e il candidato viene rivalutato a ogni tick.
+  // Pre-flight zero-Claude: gli stati non promuovibili vanno tolti dalla coda,
+  // salvo un conflitto di routing fresco: la sua `agent:fix-queued` va lasciata
+  // intatta finché la riconciliazione non supera la finestra di sicurezza.
+  // Gli altri stati esclusi da `isDrainPromotable` vanno tolti, non soltanto
+  // saltati; altrimenti una label stantia continua a essere riletta a ogni run.
   for (const iss of pool.filter((i) => !isDrainPromotable(i))) {
     if (!budget.take(`#${iss.number} (drain pre-flight)`, ITEM_COST_MS)) break;
+    if (has(iss, LBL_FIX)) {
+      console.log(`DRAIN-SKIP #${iss.number} (agent:fix + agent:fix-queued: conflitto fresco) → lascio decidere alla riconciliazione nel prossimo tick`);
+      continue;
+    }
     if (!has(iss, LBL_DECOMPOSED)) {
       console.log(`DEQUEUE #${iss.number} (già nello stadio decompose) → tolgo ${LBL_QUEUED}, la promozione la fa il drain decompose`);
       if (!DRY) edit(iss.number, { remove: [LBL_QUEUED] });

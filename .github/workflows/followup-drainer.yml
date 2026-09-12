@@ -129,9 +129,12 @@ jobs:
       # E' lo stato che la chiave di concorrenza per-issue (#908) ha reso
       # possibile fra lo sweep del triage e la run event-driven.
       #
-      # Sta qui e non in `followup-drainer.mjs` perche' quello e' `mode:
-      # identical` nel manifest. Non bloccante e con GITHUB_TOKEN: rimuove una
-      # label, e nessun workflow ascolta `unlabeled`.
+      # Sta qui come passaggio separato dalla promozione. Il drainer è `mode:
+      # adapted` nel manifest e ha un guard gemello: se la vista cattura ancora
+      # entrambe le label dopo questa riconciliazione, non promuove nello stesso
+      # tick e lascia che la finestra di sicurezza si chiuda al giro seguente.
+      # Non bloccante e con GITHUB_TOKEN: rimuove una label, e nessun workflow
+      # ascolta `unlabeled`.
       - name: Reconcile double routing (deterministic, no Claude)
         continue-on-error: true
         env:
