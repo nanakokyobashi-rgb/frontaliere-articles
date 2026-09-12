@@ -62,3 +62,27 @@ test('usa il successore e la fine del sorgente per preservare una coda SEO lunga
     fs.rmSync(root, { recursive: true, force: true });
   }
 });
+
+test('i pavimenti leggono solo entry reali e il loro span bilanciato', () => {
+  const source = [
+    'const esempio = `',
+    "  'blog-finto': { \"headline\": \"fake template\", \"datePublished\": \"1900-01-01\" },",
+    '`;',
+    'export const SEO = {',
+    '  /*',
+    "    'blog-commento': { \"headline\": \"fake comment\", \"datePublished\": \"1900-01-01\" },",
+    '  */',
+    "  'blog-reale': {",
+    '    nested: { braces: true },',
+    '    "headline": "Headline reale",',
+    '    "datePublished": "2026-09-12T10:00:00+00:00",',
+    '  },',
+    '};',
+    '',
+  ].join('\n');
+
+  const metadata = collectSeoEntryMetadata(source);
+  assert.deepEqual([...metadata.keys()], ['reale']);
+  assert.equal(metadata.get('reale')?.headline, 'Headline reale');
+  assert.equal(metadata.get('reale')?.datePublished, '2026-09-12T10:00:00+00:00');
+});

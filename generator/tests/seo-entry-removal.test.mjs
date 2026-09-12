@@ -1,7 +1,11 @@
 /** Regression tests for the all-or-nothing SEO-entry removal used by retire. */
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { removeSeoEntriesFromSource } from '../../scripts/lib/seo-entry.mjs';
+import {
+  findAllSeoEntryMatches,
+  findSeoEntryMatches,
+  removeSeoEntriesFromSource,
+} from '../../scripts/lib/seo-entry.mjs';
 
 test('rimuove tutte le occorrenze SEO duplicate prima che il caller scriva', () => {
   const source = `export const SEO = {
@@ -42,4 +46,36 @@ test('un id assente non altera il file', () => {
     src: source,
     removed: 0,
   });
+});
+
+test('la scansione ignora entry-like nei commenti multilinea e nei template literal', () => {
+  const id = 'ritiro-2026';
+  const source = [
+    'export const esempio = `',
+    `  'blog-${id}': {`,
+    '    title: \'finta nel template\',',
+    '  },',
+    '`;',
+    'export const SEO = {',
+    '  /*',
+    `    'blog-${id}': {`,
+    '      title: \'finta nel commento\',',
+    '    },',
+    '  */',
+    `  'blog-${id}': {`,
+    '    title: \'entry reale\',',
+    '    nested: { braces: true },',
+    '  },',
+    '};',
+    '',
+  ].join('\n');
+
+  assert.equal(findSeoEntryMatches(source, id, 'fixture.ts').length, 1);
+  assert.deepEqual(findAllSeoEntryMatches(source, 'fixture.ts').map(({ id: found }) => found), [id]);
+
+  const result = removeSeoEntriesFromSource(source, id, 'fixture.ts');
+  assert.equal(result.removed, 1);
+  assert.match(result.src, /finta nel template/);
+  assert.match(result.src, /finta nel commento/);
+  assert.equal(findSeoEntryMatches(result.src, id, 'fixture.ts').length, 0);
 });
