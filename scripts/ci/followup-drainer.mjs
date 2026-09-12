@@ -168,6 +168,34 @@ export function flattenPaginatedOpenPrs(raw) {
     : null;
 }
 
+/**
+ * Identity of the head returned by the REST open-PR endpoint, or null when
+ * the response is partial. Group mutexes must qualify a branch with the
+ * repository that owns it: a fork can use the same `fix/issue-N` ref.
+ *
+ * @param {{head?: {ref?: unknown, repo?: {full_name?: unknown}|null}}} pr
+ * @returns {{ref: string, repository: string}|null}
+ */
+export function openPrHeadIdentity(pr) {
+  const ref = pr?.head?.ref;
+  const repository = pr?.head?.repo?.full_name;
+  if (typeof ref !== 'string' || !ref.trim()) return null;
+  if (typeof repository !== 'string' || !repository.trim()) return null;
+  return { ref, repository };
+}
+
+/**
+ * Complete, paginated open-PR scan for the B19 group mutex. Unlike the daily
+ * item scan below, this consumer needs the head repository as well as the ref.
+ *
+ * @param {unknown} raw
+ * @returns {Array<object>|null}
+ */
+export function parseOpenGroupPrs(raw) {
+  const prs = flattenPaginatedOpenPrs(raw);
+  return prs && prs.every((pr) => openPrHeadIdentity(pr) !== null) ? prs : null;
+}
+
 /** Fail-closed decision for the daily item-level PR mutex. */
 export function dailyMutexDecision(itemId, scan) {
   if (!scan || scan.ok !== true || !Array.isArray(scan.prs)) {
@@ -2616,12 +2644,18 @@ export function issueGroupInstanceLabels(issue) {
  * le label rimaste sui membri in coda da sole non sono prova di lavoro in volo.
  * `openPrs === null` rappresenta una scansione fallita e il chiamante blocca il
  * grouping per non trasformare un glitch API in una seconda PR.
+ *
+ * @param {Array<object>} issues
+ * @param {Array<object>} openPrs
+ * @param {{repository?: string}} [opts]
  */
-export function activeGroupDigests(issues, openPrs = []) {
+export function activeGroupDigests(issues, openPrs = [], { repository = REPO } = {}) {
+  const currentRepository = String(repository).trim().toLocaleLowerCase('en-US');
   const openBranches = new Set(
     (Array.isArray(openPrs) ? openPrs : [])
-      .map((pr) => pr?.headRefName ?? pr?.head?.ref)
-      .filter((ref) => typeof ref === 'string'),
+      .map(openPrHeadIdentity)
+      .filter((head) => head && head.repository.toLocaleLowerCase('en-US') === currentRepository)
+      .map((head) => head.ref),
   );
   const digests = new Set();
   for (const issue of issues || []) {
@@ -3259,7 +3293,7 @@ function quotaResetsAt(num) {
 function loadOpenGroupPrs() {
   try {
     const raw = gh(['api', `repos/${REPO}/pulls?state=open&per_page=100`, '--paginate', '--slurp']);
-    return flattenPaginatedOpenPrs(raw);
+    return parseOpenGroupPrs(raw);
   } catch {
     return null;
   }
@@ -4700,7 +4734,7 @@ export function runDrain() {
   ];
   const openGroupPrs = loadOpenGroupPrs();
   const groupScanAvailable = openGroupPrs !== null;
-  const activeGroupDigestsSet = activeGroupDigests(groupIssues, openGroupPrs);
+  const activeGroupDigestsSet = activeGroupDigests(groupIssues, openGroupPrs, { repository: REPO });
   if (queuedWithBodies !== null && groupScanAvailable) {
     const groupable = queuedWithBodies
       .filter((i) => queuedNumbers.has(Number(i.number)))
