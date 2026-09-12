@@ -113,6 +113,33 @@ test('il guard analizza il codice dentro le interpolazioni dei template', () => 
   assert.deepEqual(specifiers(src), ['./template-dep.mjs']);
 });
 
+test('il testo emesso da un template non e\u2019 uno specificatore', () => {
+  const src = [
+    'const generated = `',
+    'import { emitted } from "./emitted.mjs";',
+    '`;',
+  ].join('\n');
+  assert.deepEqual(specifiers(src), []);
+});
+
+test('l\u2019import vero dopo la chiusura del template resta visibile', () => {
+  const src = [
+    'const generated = `',
+    'import { emitted } from "./emitted.mjs";',
+    '`;',
+    'import actual from "./actual.mjs";',
+  ].join('\n');
+  assert.deepEqual(specifiers(src), ['./actual.mjs']);
+});
+
+test('un backtick escapato in una stringa non apre un template', () => {
+  const src = [
+    "const note = 'backtick: \\`';",
+    "import actual from './after-string.mjs';",
+  ].join('\n');
+  assert.deepEqual(specifiers(src), ['./after-string.mjs']);
+});
+
 test("un commento inline non apre un prefisso di import dinamico", () => {
   const src = "const x = /* import('./not-a-module.mjs') */ true;\n";
   assert.deepEqual(specifiers(src), []);

@@ -28,6 +28,7 @@
  */
 import fs from 'node:fs';
 import path from 'node:path';
+import { execFileSync } from 'node:child_process';
 import { findAllSeoEntryMatches } from './seo-entry.mjs';
 
 /**
@@ -193,6 +194,23 @@ export const SECTION_BODY_DIRS = {
   svizzera: path.join('content', 'blog-body-ch', 'it'),
 };
 
+/** Registro e metadati che definiscono l'atteso dei corpi, per sezione. */
+export const SECTION_REGISTRY_FILES = {
+  frontaliere: path.join('content', 'blog-articles-data.ts'),
+  svizzera: path.join('content', 'swiss-articles-data.ts'),
+};
+
+export const SECTION_META_PREFIXES = {
+  frontaliere: 'blog-meta-',
+  svizzera: 'blog-meta-ch-',
+};
+
+/** Locali che build-api.mjs carica per ogni sezione. */
+export const SECTION_META_LOCALES = Object.freeze(['it', 'en', 'de', 'fr']);
+
+const REGISTRY_ENTRY_RE = /^\s*id:\s*(?:'([^']+)'|"([^"]+)")/gm;
+const META_TITLE_KEY_RE = /['"]blog\.article\.([^'"]+)\.title['"]\s*:/g;
+
 /** Quante immagini hero questo repo tiene davvero (sorgente di `images-manifest.json`). */
 export const IMAGE_SOURCE_DIR = path.join('public', 'images', 'blog');
 
@@ -214,6 +232,257 @@ function countCorpusFiles(root, rel, ext, what) {
     }
     throw error;
   }
+}
+
+function missingReference(what, rel, cause) {
+  const error = new Error(missingCorpusMessage(what, rel), cause ? { cause } : undefined);
+  error.code = 'MISSING_CORPUS';
+  return error;
+}
+
+function readReference(root, rel, what) {
+  try {
+    const source = fs.readFileSync(path.join(root, rel), 'utf8');
+    if (!source.trim()) throw missingReference(what, rel);
+    return source;
+  } catch (error) {
+    if (error?.code === 'MISSING_CORPUS') throw error;
+    if (['EACCES', 'EISDIR', 'ELOOP', 'ENOENT'].includes(error?.code)) {
+      throw missingReference(what, rel, error);
+    }
+    throw error;
+  }
+}
+
+function registryDataFromSource(source, rel, what) {
+  const entries = [...source.matchAll(REGISTRY_ENTRY_RE)];
+  if (entries.length === 0) throw missingReference(what, rel);
+  return {
+    count: entries.length,
+    ids: new Set(entries.map((match) => match[1] ?? match[2])),
+  };
+}
+
+function readRegistryData(root, section) {
+  const rel = SECTION_REGISTRY_FILES[section];
+  if (!rel) throw new Error(`unknown corpus section: ${section}`);
+  const source = readReference(root, rel, `${section} registry`);
+  return { ...registryDataFromSource(source, rel, `${section} registry`), rel };
+}
+
+function readGit(root, args) {
+  try {
+    return execFileSync('git', ['-C', root, ...args], {
+      encoding: 'utf8',
+      stdio: ['ignore', 'pipe', 'ignore'],
+      maxBuffer: 64 * 1024 * 1024,
+    }).trim();
+  } catch {
+    return null;
+  }
+}
+
+function missingHistoryError(message) {
+  const error = new Error(`storia del corpus non verificabile: ${message}`);
+  error.code = 'MISSING_CORPUS_HISTORY';
+  return error;
+}
+
+const ZERO_REVISION_RE = /^0+$/;
+
+function normalizeConfiguredRevision(value) {
+  const revision = String(value ?? '').trim();
+  if (!revision || ZERO_REVISION_RE.test(revision)) return null;
+  return revision;
+}
+
+/**
+ * Sceglie la base storica in base all'evento che sta eseguendo il gate.
+ *
+ * Un push puo' contenere piu' commit: `HEAD^` sarebbe allora solo il commit
+ * intermedio piu' recente, non lo stato pubblicato prima del push. Le PR
+ * usano invece la base dichiarata dall'evento. `undefined` e' riservato a
+ * workflow_dispatch e uso locale, dove il fallback a `HEAD^` resta esplicito;
+ * `null` significa che un evento push/PR ha dichiarato una base assente e deve
+ * quindi restare fail-closed.
+ */
+export function historyRevisionFromEnv(env = process.env) {
+  const event = String(env.PREFLIGHT_EVENT_NAME ?? env.GITHUB_EVENT_NAME ?? '').trim();
+  if (event === 'push') {
+    return normalizeConfiguredRevision(
+      env.PREFLIGHT_PUSH_BASE_REVISION ?? env.PREFLIGHT_BASE_REVISION ?? env.GITHUB_EVENT_BEFORE,
+    );
+  }
+  if (event === 'pull_request') {
+    return normalizeConfiguredRevision(
+      env.PREFLIGHT_PR_BASE_REVISION ?? env.PREFLIGHT_BASE_REVISION ?? env.GITHUB_BASE_SHA,
+    );
+  }
+  if (Object.prototype.hasOwnProperty.call(env, 'PREFLIGHT_BASE_REVISION')) {
+    return normalizeConfiguredRevision(env.PREFLIGHT_BASE_REVISION);
+  }
+  return undefined;
+}
+
+function previousCorpusRevision(root, configuredRevision = historyRevisionFromEnv()) {
+  if (readGit(root, ['rev-parse', '--is-inside-work-tree']) !== 'true') {
+    throw missingHistoryError('la radice non e\' un checkout Git');
+  }
+  if (readGit(root, ['rev-parse', '--is-shallow-repository']) === 'true') {
+    throw missingHistoryError(
+      'il checkout Git e\' shallow, quindi il high-water precedente non e\' disponibile',
+    );
+  }
+  if (configuredRevision !== undefined) {
+    const configured = normalizeConfiguredRevision(configuredRevision);
+    if (configured === null) {
+      throw missingHistoryError('la revisione base dell\'evento non e\' disponibile');
+    }
+    const revision = readGit(root, ['rev-parse', '--verify', `${configured}^{commit}`]);
+    if (!revision) {
+      throw missingHistoryError(
+        `la revisione base ${configured} non e\' disponibile nel checkout`,
+      );
+    }
+    return revision;
+  }
+  const revision = readGit(root, ['rev-parse', 'HEAD^']);
+  if (!revision) {
+    throw missingHistoryError('la revisione Git precedente non e\' disponibile');
+  }
+  return revision;
+}
+
+function previousRegistryData(root, section, revision) {
+  const rel = SECTION_REGISTRY_FILES[section];
+  try {
+    const source = execFileSync('git', ['-C', root, 'show', `${revision}:${rel}`], {
+      encoding: 'utf8',
+      stdio: ['ignore', 'pipe', 'ignore'],
+      maxBuffer: 64 * 1024 * 1024,
+    });
+    if (!source.trim()) return null;
+    return registryDataFromSource(source, rel, `${section} registry storico`);
+  } catch (error) {
+    if (error?.status !== undefined) return null;
+    throw error;
+  }
+}
+
+function registryHighWater(
+  root,
+  section,
+  current,
+  { previousRegistryCount, previousRevision } = {},
+) {
+  if (previousRegistryCount !== undefined) {
+    if (!Number.isSafeInteger(previousRegistryCount) || previousRegistryCount < 0) {
+      const error = new Error(
+        `${section}: previousRegistryCount non valido (${previousRegistryCount}); ` +
+          'la storia iniettata deve essere un intero non negativo',
+      );
+      error.code = 'INVALID_CORPUS_HISTORY';
+      throw error;
+    }
+    return Math.max(current.count, previousRegistryCount);
+  }
+  const revision = previousCorpusRevision(root, previousRevision);
+  const previous = previousRegistryData(root, section, revision);
+  return Math.max(current.count, previous?.count ?? 0);
+}
+
+function truncatedRegistryError(section, current, highWater) {
+  const floor = floorFrom(highWater);
+  const error = new Error(
+    `${current.rel}: ${current.count} entry contro ${highWater} nella revisione Git precedente ` +
+      `(pavimento ${floor}) — registro troncato, rifiuto il floor derivato dal solo registro corrente`,
+  );
+  error.code = 'TRUNCATED_CORPUS';
+  return error;
+}
+
+/** Quanti file-meta locali sono presenti per la sezione. */
+export function countPresentLocales(root, section) {
+  const prefix = SECTION_META_PREFIXES[section];
+  if (!prefix) throw new Error(`unknown corpus section: ${section}`);
+  const rel = path.join('content', `${prefix}*.ts`);
+  let names;
+  try {
+    names = fs.readdirSync(path.join(root, 'content'));
+  } catch (error) {
+    if (['EACCES', 'ELOOP', 'ENOENT'].includes(error?.code)) {
+      throw missingReference(`${section} locale metadata`, rel, error);
+    }
+    throw error;
+  }
+  const missing = SECTION_META_LOCALES
+    .map((locale) => `${prefix}${locale}.ts`)
+    .filter((name) => !names.includes(name));
+  if (missing.length) {
+    throw missingReference(
+      `${section} locale metadata (${missing.join(', ')})`,
+      rel,
+    );
+  }
+  return SECTION_META_LOCALES.length;
+}
+
+function metadataArticleIds(source) {
+  return new Set([...source.matchAll(META_TITLE_KEY_RE)].map((match) => match[1]));
+}
+
+/** Ogni locale deve esporre tutti gli ID del registro, non solo un file. */
+export function validateLocaleMetadata(root, section, registryIds) {
+  const prefix = SECTION_META_PREFIXES[section];
+  if (!prefix) throw new Error(`unknown corpus section: ${section}`);
+  for (const locale of SECTION_META_LOCALES) {
+    const rel = path.join('content', `${prefix}${locale}.ts`);
+    const ids = metadataArticleIds(readReference(root, rel, `${section} locale metadata`));
+    const missing = [...registryIds].filter((id) => !ids.has(id));
+    if (missing.length) {
+      const error = new Error(
+        `${rel}: meta incompleta — ${ids.size} ID title, ${registryIds.size} richiesti; ` +
+          `mancano ${missing.length}: ${missing.slice(0, 5).join(', ')}`,
+      );
+      error.code = 'INCOMPLETE_CORPUS';
+      throw error;
+    }
+  }
+}
+
+/**
+ * Atteso dei corpi: entry del registro × locali-meta presenti.
+ *
+ * Il riferimento non e' la directory che il gate deve scandire: e' la coppia
+ * di registri e metadati che il sito usa per pubblicare gli articoli. Se uno
+ * dei due riferimenti manca, o se la storia necessaria al high-water non e'
+ * leggibile, lancia invece di trasformare l'assenza in un pavimento a zero.
+ * I fake root possono fornire `previousRegistryCount` solo quando la storia
+ * e' stata verificata dal test che li costruisce. `previousRevision` e' la
+ * revisione base esplicita del push/PR; senza questa opzione la selezione
+ * dell'evento usa l'ambiente e solo l'uso locale/dispatch ricade su `HEAD^`.
+ */
+export function expectedBodyFiles(
+  root,
+  section,
+  { previousRegistryCount, previousRevision } = {},
+) {
+  const registry = readRegistryData(root, section);
+  const highWater = registryHighWater(root, section, registry, {
+    previousRegistryCount,
+    previousRevision,
+  });
+  if (registry.count < floorFrom(highWater)) {
+    throw truncatedRegistryError(section, registry, highWater);
+  }
+  const locales = countPresentLocales(root, section);
+  validateLocaleMetadata(root, section, registry.ids);
+  return highWater * locales;
+}
+
+/** Quante entry articolo dichiara il registro sorgente della sezione. */
+export function countRegistryArticles(root, section) {
+  return readRegistryData(root, section).count;
 }
 
 /** Quanti articoli sorgente ha la sezione, contati sui file di corpo. */

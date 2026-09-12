@@ -64,7 +64,9 @@ jobs:
     steps:
       - uses: actions/checkout@v5
         with:
-          fetch-depth: 1
+          # corpus-floors.mjs compares the live registry with the previous
+          # revision before the content gate publishes its verdict.
+          fetch-depth: 0
 
       - uses: actions/setup-node@v5
         with:
@@ -98,6 +100,10 @@ jobs:
           GH_TOKEN: ${{ env.GITHUB_PAT_NANAKO || secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
           GITHUB_SHA: ${{ github.sha }}
+          # Su un push multi-commit il precedente stato pubblicato è
+          # `github.event.before`, non `HEAD^`.
+          PREFLIGHT_EVENT_NAME: ${{ github.event_name }}
+          PREFLIGHT_PUSH_BASE_REVISION: ${{ github.event.before }}
         run: node scripts/ci/content-gates-main.mjs
 
       - name: Cleanup Firebase credentials

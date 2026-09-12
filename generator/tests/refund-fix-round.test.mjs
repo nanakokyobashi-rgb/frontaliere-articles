@@ -188,10 +188,12 @@ for (const { file, marker } of FIXERS) {
 
     // Il marker viene prima della telemetry: il round è già riservato, poi il
     // beacon osserva la quota e infine l'action tenta Codex.
-    const quotaAt = yaml.indexOf('check-quota-backoff.mjs');
+    const quotaAt = yaml.indexOf('Pre-flight — Claude quota telemetry (Codex primary)');
     const markerAt = yaml.indexOf(`<!-- ${marker}: %s -->`);
     const actionAt = yaml.indexOf('- name: Run Claude');
-    assert.notEqual(quotaAt, -1, `${file} non consulta il beacon di quota prima del round`);
+    assert.notEqual(quotaAt, -1, `${file} non conserva il probe storico del beacon di quota`);
+    assert.match(yaml.slice(quotaAt, actionAt), /check-quota-backoff\.mjs/,
+      `${file} il probe quota storico non invoca piu' il suo helper`);
     assert.notEqual(markerAt, -1, `${file} non posta piu' il marker di round`);
     assert.notEqual(actionAt, -1, `${file} non invoca l'action Codex/Claude`);
     assert.ok(markerAt < quotaAt && quotaAt < actionAt,

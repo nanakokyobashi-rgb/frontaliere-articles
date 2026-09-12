@@ -98,6 +98,12 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { createRequire } from 'node:module';
 import { fileURLToPath } from 'node:url';
+import {
+  expectedBodyFiles,
+  floorFrom,
+  historyRevisionFromEnv,
+  missingCorpusMessage,
+} from '../lib/corpus-floors.mjs';
 
 export const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 
@@ -108,25 +114,28 @@ export const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '
  * sotto `services/locales/`).
  */
 export const BLOG_BODY_ROOTS = [
-  { rel: 'content/blog-body', minFiles: 3000 },
-  { rel: 'content/blog-body-ch', minFiles: 1000 },
+  { rel: 'content/blog-body', section: 'frontaliere' },
+  { rel: 'content/blog-body-ch', section: 'svizzera' },
 ];
 
-/**
- * Pavimento TOTALE, in aggiunta ai pavimenti per radice.
- *
- * I due pavimenti non sono ridondanti, coprono due modi di fallire diversi:
- *  - il TOTALE prende il caso «il gate ha scandito quasi niente» — in un
- *    worktree sparse `content/` non esiste affatto, e un gate che passa su zero
- *    file e' il falso verde piu' facile da produrre su questo repo;
- *  - il PER-RADICE prende il caso che il totale NON vede, ed e' il piu'
- *    insidioso: `blog-body` da solo fa 12.544 file, quindi una soglia sul totale
- *    resta soddisfatta anche se `blog-body-ch` risolve a zero (cartella
- *    rinominata, symlink orfano). Sarebbe il buco del 2026-07-29 riaperto dal
- *    guard che esiste per chiuderlo. Ogni corpus deve dimostrare di essere stato
- *    guardato.
- */
-export const MIN_FILES_TOTAL = 3000;
+/** Deriva i riferimenti dei due pavimenti senza contare la directory del gate. */
+export function deriveFloorModel(
+  root = ROOT,
+  { previousRegistryCounts, previousRevision = historyRevisionFromEnv() } = {},
+) {
+  const perRoot = BLOG_BODY_ROOTS.map(({ rel, section }) => ({
+    rel,
+    section,
+    expectedFiles: expectedBodyFiles(root, section, {
+      previousRegistryCount: previousRegistryCounts?.[section],
+      previousRevision,
+    }),
+  }));
+  return {
+    perRoot,
+    expectedTotal: perRoot.reduce((sum, r) => sum + r.expectedFiles, 0),
+  };
+}
 
 /** Raccoglie ricorsivamente i `.ts` sotto `dir`. Directory assente -> []. */
 export function collectTypeScriptFiles(dir) {
@@ -151,15 +160,62 @@ export function collectTypeScriptFiles(dir) {
 
 /**
  * Applica i pavimenti. Ritorna la lista dei messaggi di violazione (vuota = ok).
- * Pura e senza I/O sulle soglie: e' la meta' che il test in `generator/tests/`
- * puo' esercitare senza esbuild e senza `content/`.
+ * Le radici dei corpi usano `expectedFiles`, derivato dai registri e dai meta;
+ * gli eventuali consumer strutturali (es. `content/seo`) possono ancora passare
+ * `minFiles`, senza entrare nel totale derivato dei corpi.
  */
-export function floorViolations(perRoot, { minTotal = MIN_FILES_TOTAL } = {}) {
+export function floorViolations(
+  perRoot,
+  {
+    root,
+    retention = undefined,
+    previousRegistryCounts,
+    previousRevision = historyRevisionFromEnv(),
+  } = {},
+) {
   const violations = [];
   let total = 0;
-  for (const { rel, minFiles, count } of perRoot) {
-    total += count;
-    if (count <= minFiles) {
+  let expectedTotal = 0;
+  let missingReferenceCount = 0;
+  for (const item of perRoot) {
+    const { rel, minFiles, count, section } = item;
+    let expectedFiles = item.expectedFiles;
+    if (expectedFiles === undefined && section) {
+      if (!root) {
+        violations.push(missingCorpusMessage('blog-body', rel));
+        missingReferenceCount += 1;
+        continue;
+      }
+      try {
+        expectedFiles = expectedBodyFiles(root, section, {
+          previousRegistryCount: previousRegistryCounts?.[section],
+          previousRevision,
+        });
+      } catch (error) {
+        violations.push(error?.message || String(error));
+        missingReferenceCount += 1;
+        continue;
+      }
+    }
+    if (expectedFiles !== undefined) {
+      if (!Number.isFinite(expectedFiles) || expectedFiles <= 0) {
+        violations.push(missingCorpusMessage('blog-body', rel));
+        missingReferenceCount += 1;
+        continue;
+      }
+      total += count;
+      expectedTotal += expectedFiles;
+      const floor = floorFrom(expectedFiles, retention);
+      if (count < floor) {
+        violations.push(
+          `${rel}: ${count} file scanditi contro ${expectedFiles} attesi (pavimento ${floor}). ` +
+            `La radice non e' stata guardata per intero (checkout sparse? un locale rinominato?) — ` +
+            `un gate che passa senza guardare e' peggio di nessun gate.`,
+        );
+      }
+      continue;
+    }
+    if (Number.isFinite(minFiles) && count <= minFiles) {
       violations.push(
         `${rel}: ${count} file scanditi, soglia > ${minFiles}. ` +
           `La radice non e' stata guardata (checkout sparse? cartella rinominata?) — ` +
@@ -167,10 +223,15 @@ export function floorViolations(perRoot, { minTotal = MIN_FILES_TOTAL } = {}) {
       );
     }
   }
-  if (total <= minTotal) {
+  if (expectedTotal > 0 && total < floorFrom(expectedTotal, retention)) {
     violations.push(
-      `TOTALE: ${total} file scanditi, soglia > ${minTotal}. ` +
+      `TOTALE: ${total} file scanditi contro ${expectedTotal} attesi ` +
+        `(pavimento ${floorFrom(expectedTotal, retention)}). ` +
         `In un checkout sparse content/ non esiste affatto: questo e' il falso verde da non produrre.`,
+    );
+  } else if (missingReferenceCount > 0 && expectedTotal === 0) {
+    violations.push(
+      `TOTALE: ${missingCorpusMessage('blog-body', 'content/blog-articles-data.ts / content/swiss-articles-data.ts')}`,
     );
   }
   return violations;
@@ -260,9 +321,23 @@ export function loadEsbuild(dir = process.env.PREFLIGHT_ESBUILD_DIR) {
  */
 const BATCH = 500;
 
-export async function run({ log = console.log, error = console.error, env = process.env } = {}) {
-  const perRoot = BLOG_BODY_ROOTS.map((r) => {
-    const files = collectTypeScriptFiles(path.join(ROOT, r.rel));
+export async function run({
+  log = console.log,
+  error = console.error,
+  env = process.env,
+  root = ROOT,
+  previousRegistryCounts,
+  previousRevision = historyRevisionFromEnv(env),
+} = {}) {
+  let model;
+  try {
+    model = deriveFloorModel(root, { previousRegistryCounts, previousRevision });
+  } catch (err) {
+    error(`::error::preflight blog-body — ${err?.message || String(err)}`);
+    return 1;
+  }
+  const perRoot = model.perRoot.map((r) => {
+    const files = collectTypeScriptFiles(path.join(root, r.rel));
     return { ...r, count: files.length, files };
   });
 
@@ -270,7 +345,11 @@ export async function run({ log = console.log, error = console.error, env = proc
 
   // I pavimenti restano sull'intero corpus (perRoot sopra), a prescindere
   // dallo scan mode: e' l'anti-falso-verde e non deve dipendere da un diff.
-  const violations = floorViolations(perRoot);
+  const violations = floorViolations(perRoot, {
+    root,
+    previousRegistryCounts,
+    previousRevision,
+  });
   if (violations.length) {
     for (const v of violations) error(`::error::preflight blog-body — ${v}`);
     return 1;

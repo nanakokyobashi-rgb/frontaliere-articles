@@ -77,7 +77,7 @@
  * Senza `--apply` non scrive niente: la modalità di default è il dry-run.
  *
  * La baseline che `--apply` registra è però quella dei byte SCARICATI, scritta
- * prima che il commit esista (issue #852). A chiuderla è `--realign=<lista>`,
+ * prima che il commit esista (issue #852). A chiuderla è `--realign=<lista.tsv>`,
  * un passaggio distinto che gira sul commit appena creato e confronta la
  * baseline con i byte che ci sono finiti davvero: la riallinea dove questo
  * ricostruisce l'invariante di `classify()`, ed esce ROSSO — prima del push —
@@ -89,10 +89,10 @@
  *   node scripts/ci/transport-identical-twins.mjs            # dry-run, report
  *   node scripts/ci/transport-identical-twins.mjs --json     # dry-run, JSON
  *   node scripts/ci/transport-identical-twins.mjs --apply    # scrive + baseline
- *   node scripts/ci/transport-identical-twins.mjs --realign=<lista>
+ *   node scripts/ci/transport-identical-twins.mjs --realign=<lista.tsv>
  *                                                           # dopo il commit:
- *                                                           # riallinea la
- *                                                           # baseline dai byte
+ *                                                           # path<TAB>site hash
+ *                                                           # riallinea dai byte
  *                                                           # COMMITTATI
  *
  * Env:
@@ -1092,6 +1092,52 @@ export function localCouplings(rel, modeOf) {
   return couplings;
 }
 
+/**
+ * Canonical form of the coupling graph stored in the manifest.
+ *
+ * The graph is derived from source text, so the order returned by a directory
+ * walk must not become a false change in the persisted snapshot. Keep only
+ * the fields that affect transport and sort by path/mode/reason.
+ */
+export function couplingSnapshot(couplings = []) {
+  return [...couplings]
+    .map((coupling) => ({
+      path: coupling.path,
+      mode: coupling.mode,
+      ...(coupling.unreadable ? { unreadable: coupling.unreadable } : {}),
+    }))
+    .sort((a, b) => (
+      a.path.localeCompare(b.path)
+      || a.mode.localeCompare(b.mode)
+      || String(a.unreadable || '').localeCompare(String(b.unreadable || ''))
+    ));
+}
+
+/**
+ * Compare the current coupling graph with the previous applied pass.
+ *
+ * `null` means that no prior observation exists yet: it is reported as an
+ * initialization, not hidden behind a zero delta. This is what makes the
+ * first persisted measurement explicit and makes later comment-only rewrites
+ * visible in the dry-run/report.
+ */
+export function couplingDiff(previous, current) {
+  const after = couplingSnapshot(current);
+  const before = Array.isArray(previous) ? couplingSnapshot(previous) : null;
+  const beforeByPath = new Map((before || []).map((entry) => [entry.path, entry]));
+  const afterByPath = new Map(after.map((entry) => [entry.path, entry]));
+  const added = after.filter((entry) => !beforeByPath.has(entry.path)
+    || JSON.stringify(beforeByPath.get(entry.path)) !== JSON.stringify(entry));
+  const removed = (before || []).filter((entry) => !afterByPath.has(entry.path)
+    || JSON.stringify(afterByPath.get(entry.path)) !== JSON.stringify(entry));
+  return {
+    initialized: before === null,
+    changed: before === null || added.length > 0 || removed.length > 0,
+    added,
+    removed,
+  };
+}
+
 
 /** Hash del file locale, o null se non esiste. */
 function localHash(rel) {
@@ -1144,23 +1190,230 @@ function localHash(rel) {
  * davvero l'invariante di `classify()`: `committed === baseline.site` su un
  * `identical`, o una voce di modo diverso, dove i due lati POSSONO differire.
  *
- *   manifest        il manifest parsato (mutato in place).
- *   paths           i path trasportati in questa passata: le sole voci su cui
- *                   un disallineamento e' un errore di REGISTRAZIONE e non una
- *                   divergenza locale legittima da leggere a mano.
+ *   manifest        il manifest parsato (mutato in place solo se tutto e'
+ *                   verificabile).
+ *   paths           oggetti `{ path, site }` prodotti dalla passata di copia:
+ *                   `site` e' l'hash dei byte scaricati nella stessa passata.
+ *                   Il dato impedisce a un chiamante posticipato di trattare
+ *                   una baseline del sito vecchia come se fosse fresca.
  *   readCommitted   (rel) => Buffer dei byte committati; lancia se il path non
  *                   e' nel commit.
  *
- * Ritorna `{ corrections, mismatched, unreadable }`.
+ * Ritorna `{ corrections, mismatched, normalization, unreadable }`.
  */
-export function realignFromCommitted(manifest, paths, readCommitted) {
-  const wanted = new Set(paths);
+const REALIGN_HASH_RE = /^[0-9a-f]{16}$/;
+const NORMALIZATION_ATTRIBUTES = new Set([
+  'eol',
+  'filter',
+  'ident',
+  'text',
+  'working-tree-encoding',
+]);
+
+/** Parse the path + fresh site hash contract consumed by `--realign`. */
+export function parseRealignList(text) {
+  const paths = [];
+  const errors = [];
+  for (const [index, original] of String(text || '').split('\n').entries()) {
+    const line = original.replace(/\r$/, '');
+    if (!line.trim()) continue;
+    const separator = line.indexOf('\t');
+    if (separator <= 0 || line.indexOf('\t', separator + 1) >= 0) {
+      errors.push({
+        path: line.trim() || `<riga ${index + 1}>`,
+        reason: 'lista realign non valida: atteso `path<TAB>hash site`',
+      });
+      continue;
+    }
+    paths.push({
+      path: line.slice(0, separator),
+      site: line.slice(separator + 1).trim(),
+    });
+  }
+  return { paths, errors };
+}
+
+/** Parse `git check-attr --all` and retain attributes that can rewrite bytes. */
+export function parseGitAttributes(text) {
+  const found = new Map();
+  for (const line of String(text || '').split('\n')) {
+    const match = /^(.*): ([^:]+): (.*)$/.exec(line.replace(/\r$/, ''));
+    if (!match) continue;
+    const [, rel, name, value] = match;
+    if (!NORMALIZATION_ATTRIBUTES.has(name) || value === 'unset' || value === 'unspecified') continue;
+    if (!found.has(rel)) found.set(rel, []);
+    found.get(rel).push({ name, value });
+  }
+  return [...found.entries()]
+    .sort(([a], [b]) => a.localeCompare(b))
+    .map(([pathName, attributes]) => ({
+      path: pathName,
+      attributes: attributes.sort((a, b) => a.name.localeCompare(b.name)),
+    }));
+}
+
+/** Parse repo/user Git settings that can normalize the working tree on add. */
+export function parseGitNormalizationConfig(text) {
+  const unsafe = [];
+  for (const line of String(text || '').split('\n')) {
+    const match = /^core\.(autocrlf|eol)\s+(.+)$/.exec(line.replace(/\r$/, '').trim());
+    if (!match) continue;
+    const [, name, rawValue] = match;
+    const value = rawValue.trim().toLowerCase();
+    const safe = name === 'autocrlf'
+      ? new Set(['false', '0', 'off'])
+      : new Set(['native', 'lf']);
+    if (!safe.has(value)) unsafe.push({ name: `core.${name}`, value: rawValue.trim() });
+  }
+  return unsafe;
+}
+
+function gitNormalizationConfig() {
+  try {
+    return parseGitNormalizationConfig(
+      execFileSync('git', ['config', '--get-regexp', '^core\\.(autocrlf|eol)$'], { cwd: ROOT }).toString('utf8'),
+    );
+  } catch (e) {
+    // `git config --get-regexp` exits 1 when there is no matching setting;
+    // that is the safe, ordinary case, not a failed probe.
+    if (e && e.status === 1) return [];
+    throw e;
+  }
+}
+
+function normalizeRealignPath(value) {
+  const raw = value && typeof value === 'object' ? value.path : value;
+  if (typeof raw !== 'string') {
+    return { path: null, raw: String(raw ?? ''), reason: 'path realign non testuale' };
+  }
+  const trimmed = raw.replace(/^\uFEFF/, '').trim();
+  if (!trimmed) return { path: null, raw, reason: 'path realign vuoto' };
+  if (trimmed.includes('\\') || path.posix.isAbsolute(trimmed) || /^[A-Za-z]:\//.test(trimmed)) {
+    return { path: null, raw: trimmed, reason: 'path realign non POSIX o assoluto' };
+  }
+  if (trimmed.split('/').includes('..')) {
+    return { path: null, raw: trimmed, reason: 'path realign risalente' };
+  }
+  const normalized = path.posix.normalize(trimmed.normalize('NFC'));
+  if (normalized === '.') return { path: null, raw: trimmed, reason: 'path realign vuoto' };
+  return { path: normalized, raw: trimmed, reason: null };
+}
+
+function resolveRealignRequests(manifest, paths) {
+  const entries = manifest.files || [];
+  const byExact = new Map(entries.map((entry) => [entry.path, entry]));
+  const byNormalized = new Map();
+  const byFolded = new Map();
+  for (const entry of entries) {
+    const normalized = normalizeRealignPath(entry.path).path;
+    if (!byNormalized.has(normalized)) byNormalized.set(normalized, []);
+    byNormalized.get(normalized).push(entry);
+    const folded = normalized.toLocaleLowerCase('und');
+    if (!byFolded.has(folded)) byFolded.set(folded, []);
+    byFolded.get(folded).push(entry);
+  }
+
+  const requests = new Map();
+  const unreadable = [];
+  for (const value of paths) {
+    const parsed = normalizeRealignPath(value);
+    if (!parsed.path) {
+      unreadable.push({ path: parsed.raw, reason: parsed.reason });
+      continue;
+    }
+    const suppliedSite = value && typeof value === 'object'
+      ? (value.site ?? value.siteHash ?? value.expectedSite ?? null)
+      : null;
+    if (suppliedSite !== null && !REALIGN_HASH_RE.test(String(suppliedSite))) {
+      unreadable.push({ path: parsed.path, reason: `hash site non valida: ${String(suppliedSite)}` });
+      continue;
+    }
+    let matches = byExact.has(parsed.path) ? [byExact.get(parsed.path)] : (byNormalized.get(parsed.path) || []);
+    let resolution = 'normalizzato';
+    if (!byExact.has(parsed.path) && matches.length === 0) {
+      matches = byFolded.get(parsed.path.toLocaleLowerCase('und')) || [];
+      resolution = 'case-insensitive';
+    }
+    if (matches.length === 0) {
+      unreadable.push({
+        path: parsed.path,
+        reason: `path non risolto nel manifest (forma ricevuta: ${parsed.raw})`,
+      });
+      continue;
+    }
+    if (matches.length > 1) {
+      unreadable.push({
+        path: parsed.path,
+        reason: `path ambiguo nel manifest dopo normalizzazione (${matches.map((entry) => entry.path).join(', ')})`,
+      });
+      continue;
+    }
+    const entry = matches[0];
+    const site = suppliedSite === null ? null : String(suppliedSite);
+    if (requests.has(entry.path)) {
+      const previous = requests.get(entry.path);
+      if (previous.site !== site) {
+        unreadable.push({ path: entry.path, reason: 'path duplicato nella lista con hash site diversi' });
+      }
+      continue;
+    }
+    requests.set(entry.path, { entry, path: entry.path, site, resolution });
+  }
+  return { requests, unreadable };
+}
+
+function normalizationFor(requests, attributes) {
+  const paths = new Set([...requests.values()].map((request) => request.path));
+  const byPath = new Map();
+  for (const item of attributes) {
+    const normalized = normalizeRealignPath(item.path).path;
+    if (!paths.has(normalized)) continue;
+    const resolved = requests.get(normalized)?.path || item.path;
+    const current = byPath.get(resolved) || [];
+    const seen = new Set(current.map((attribute) => `${attribute.name}=${attribute.value}`));
+    byPath.set(resolved, [
+      ...current,
+      ...item.attributes.filter((attribute) => !seen.has(`${attribute.name}=${attribute.value}`)),
+    ]);
+  }
+  return [...byPath.entries()]
+    .sort(([a], [b]) => a.localeCompare(b))
+    .map(([pathName, itemAttributes]) => ({
+      path: pathName,
+      attributes: itemAttributes.sort((a, b) => a.name.localeCompare(b.name)),
+    }));
+}
+
+export function realignFromCommitted(
+  manifest,
+  paths,
+  readCommitted,
+  { requireFreshSite = false, normalizationAttributes = [] } = {},
+) {
+  const resolved = resolveRealignRequests(manifest, paths);
+  const requested = resolved.requests;
   const corrections = [];
   const mismatched = [];
-  const unreadable = [];
+  const unreadable = [...resolved.unreadable];
+  const normalization = normalizationFor(requested, normalizationAttributes);
+  const normalizationPaths = new Set(normalization.map((item) => item.path));
+  const updates = [];
 
-  for (const entry of manifest.files || []) {
-    if (!wanted.has(entry.path)) continue;
+  for (const request of requested.values()) {
+    const { entry } = request;
+    if (requireFreshSite && request.site === null) {
+      unreadable.push({ path: entry.path, reason: 'hash site assente: la freschezza della baseline non e\u2019 attestata' });
+      continue;
+    }
+    const base = entry.baseline || {};
+    if (request.site !== null && base.site !== request.site) {
+      unreadable.push({
+        path: entry.path,
+        reason: `baseline.site ${base.site ?? 'assente'} diversa dalla site hash attestata ${request.site}`,
+      });
+      continue;
+    }
+    if (normalizationPaths.has(entry.path)) continue;
     let bytes;
     try {
       bytes = readCommitted(entry.path);
@@ -1173,7 +1426,6 @@ export function realignFromCommitted(manifest, paths, readCommitted) {
       continue;
     }
     const committed = sha256(bytes);
-    const base = entry.baseline || {};
     if (base.corpus === committed) continue;
     // Un `identical` i cui byte committati non sono quelli serviti dal sito non
     // e' un gemello: scrivere qui la baseline lo consegnerebbe al drift check
@@ -1184,16 +1436,16 @@ export function realignFromCommitted(manifest, paths, readCommitted) {
       continue;
     }
     corrections.push({ path: entry.path, from: base.corpus ?? null, to: committed });
-    entry.baseline = { ...base, corpus: committed };
+    updates.push({ entry, baseline: { ...base, corpus: committed } });
   }
 
-  // Un path trasportato che non e' leggibile dal commit e' la meta' PEGGIORE
-  // del buco: la baseline lo dichiara allineato e il file non c'e'. Non e' un
-  // rinvio, quindi non puo' uscire verde.
-  const missingWanted = [...wanted].filter((rel) => !(manifest.files || []).some((e) => e.path === rel));
-  for (const rel of missingWanted) unreadable.push({ path: rel, reason: 'path trasportato assente dal manifest' });
+  // L'operazione e' atomica anche per il chiamante in memoria: un mismatch o
+  // un path non verificabile non deve lasciare meta' delle baseline aggiornate.
+  if (!mismatched.length && !unreadable.length && !normalization.length) {
+    for (const update of updates) update.entry.baseline = update.baseline;
+  }
 
-  return { corrections, mismatched, unreadable };
+  return { corrections, mismatched, normalization, unreadable };
 }
 
 /** I byte committati di un path, letti da `HEAD` invece che dal working tree. */
@@ -1202,27 +1454,65 @@ function committedBytes(rel) {
 }
 
 function realignMain(listFile) {
-  const paths = fs
-    .readFileSync(listFile, 'utf8')
-    .split('\n')
-    .map((x) => x.trim())
-    .filter(Boolean);
+  const parsed = parseRealignList(fs.readFileSync(listFile, 'utf8'));
+  const paths = parsed.paths;
   const manifest = JSON.parse(fs.readFileSync(MANIFEST_PATH, 'utf8'));
-  const { corrections, mismatched, unreadable } = realignFromCommitted(manifest, paths, committedBytes);
-
-  if (corrections.length) fs.writeFileSync(MANIFEST_PATH, `${JSON.stringify(manifest, null, 2)}\n`);
+  const resolved = resolveRealignRequests(manifest, paths);
+  let attributes = [];
+  let attributeProbeError = null;
+  if (resolved.requests.size) {
+    try {
+      const output = execFileSync(
+        'git',
+        ['check-attr', '--all', '--', ...resolved.requests.keys()],
+        { cwd: ROOT, maxBuffer: 8 * 1024 * 1024 },
+      ).toString('utf8');
+      attributes = parseGitAttributes(output);
+      const config = gitNormalizationConfig();
+      if (config.length) {
+        for (const pathName of resolved.requests.keys()) attributes.push({ path: pathName, attributes: config });
+      }
+    } catch (e) {
+      attributeProbeError = String(e.message || e).slice(0, 160);
+    }
+  }
+  const result = realignFromCommitted(manifest, paths, committedBytes, {
+    requireFreshSite: true,
+    normalizationAttributes: attributes,
+  });
+  const corrections = result.corrections;
+  const mismatched = result.mismatched;
+  const normalization = result.normalization;
+  const unreadable = [
+    ...parsed.errors,
+    ...result.unreadable,
+    ...(attributeProbeError ? [{ path: '<git check-attr>', reason: attributeProbeError }] : []),
+  ];
 
   if (AS_JSON) {
-    console.log(JSON.stringify({ realign: true, paths: paths.length, corrections, mismatched, unreadable }, null, 2));
+    console.log(JSON.stringify({
+      realign: true,
+      paths: paths.length,
+      corrections,
+      mismatched,
+      normalization,
+      unreadable,
+    }, null, 2));
   } else {
     console.log(`transport-identical-twins (realign): ${paths.length} voci verificate sul commit, ${corrections.length} baseline corrette`);
     for (const c of corrections) console.log(`  ✎ ${c.path}: baseline.corpus ${c.from} → ${c.to} (byte committati)`);
     for (const m of mismatched) console.error(`  ✖ ${m.path}: i byte COMMITTATI (${m.committed}) non sono quelli serviti dal sito (${m.site}) — non e’ un gemello byte-identico`);
+    for (const n of normalization) console.error(`  ✖ ${n.path}: attributi Git che possono riscrivere i byte (${n.attributes.map((a) => `${a.name}=${a.value}`).join(', ')}) — realign bloccato`);
     for (const u of unreadable) console.error(`  ⚠ ${u.path}: ${u.reason}`);
   }
 
+  if (normalization.length) {
+    console.error(`transport-identical-twins: ${normalization.length} path trasportati hanno attributi Git che possono riscrivere i byte; il realign è bloccato finché la normalizzazione non viene resa esplicita o rimossa`);
+  }
   if (mismatched.length) {
     console.error(`transport-identical-twins: ${mismatched.length} path trasportati sono stati committati con byte diversi da quelli del sito. Registrarli come baseline darebbe ‘undeclared-drift’ permanente al drift check e li escluderebbe dal trasporto: correggi la copia (normalizzazione, filtro ‘clean’, staging), oppure degrada la voce a ‘adapted’ con la sua ‘reason’.`);
+  }
+  if (mismatched.length || normalization.length) {
     return 1;
   }
 
@@ -1230,16 +1520,17 @@ function realignMain(listFile) {
     console.error(`transport-identical-twins: ${unreadable.length} path trasportati non verificabili sul commit — la baseline resterebbe registrata su byte che nessuno ha committato`);
     return 1;
   }
+  if (corrections.length) fs.writeFileSync(MANIFEST_PATH, `${JSON.stringify(manifest, null, 2)}\n`);
   return 0;
 }
 
 async function main() {
-  // `--realign lista.txt` (con lo spazio) e `--realign=` vuoto lascerebbero
+  // `--realign lista.tsv` (con lo spazio) e `--realign=` vuoto lascerebbero
   // `REALIGN_FILE` a `null`: si cadrebbe qui sotto nel dry-run di rete — exit
   // 0, baseline mai verificata, step VERDE. Un no-op silenzioso su questo
   // passaggio e' indistinguibile dal successo, quindi e' un errore.
   if (RAW_ARGS.some((a) => a === '--realign' || a === '--realign=')) {
-    console.error('transport-identical-twins: --realign vuole la forma --realign=<file> (un path per riga)');
+    console.error('transport-identical-twins: --realign vuole la forma --realign=<file.tsv> (path<TAB>hash site per riga)');
     return 1;
   }
   if (REALIGN_FILE) return realignMain(REALIGN_FILE);
@@ -1253,8 +1544,10 @@ async function main() {
   const failed = [];
   const manual = [];
   const couplingGraph = [];
+  const couplingDelta = [];
   const alignedPaths = new Set();
   const blockedForever = new Set();
+  let couplingSnapshotChanged = false;
   let attempted = 0;
   let missingOnSite = 0;
 
@@ -1264,7 +1557,17 @@ async function main() {
     const sitePath = entry.sitePath || rel;
     const base = entry.baseline || { site: null, corpus: null };
 
-    const couplings = isFixture(rel) ? localCouplings(rel, modeOf) : [];
+    const fixture = isFixture(rel);
+    const couplings = fixture ? localCouplings(rel, modeOf) : [];
+    if (fixture) {
+      const currentSnapshot = couplingSnapshot(couplings);
+      const diff = couplingDiff(entry.couplingSnapshot, currentSnapshot);
+      if (diff.changed) couplingDelta.push({ path: rel, ...diff });
+      if (APPLY && diff.changed) {
+        entry.couplingSnapshot = currentSnapshot;
+        couplingSnapshotChanged = true;
+      }
+    }
     // Raccolto per OGNI fixture, non solo per i candidati: e' la mappa inversa
     // di cui il tetto ha bisogno per non copiare un file lasciando indietro il
     // golden che lo pinna (il fixture puo' essere stato escluso prima).
@@ -1346,7 +1649,7 @@ async function main() {
       // commit non esiste ancora: se i byte committati differiranno (line
       // ending normalizzati, filtro `clean`, staging incompleto) questa riga
       // registra una baseline che non descrive nessuno dei due lati. È per
-      // quello che `--realign=<lista>` gira DOPO il commit — vedi
+      // quello che `--realign=<lista.tsv>` gira DOPO il commit — vedi
       // `realignFromCommitted`, che è l'unico posto in cui i byte committati
       // sono leggibili.
       entry.baseline = { site: now.site, corpus: now.site, alignedAt: today };
@@ -1354,7 +1657,8 @@ async function main() {
     transported.push({ path: rel, sitePath, from: base.site, to: now.site });
   }
 
-  if (APPLY && transported.length) {
+  const manifestChanged = APPLY && (transported.length > 0 || couplingSnapshotChanged);
+  if (APPLY && manifestChanged) {
     fs.writeFileSync(MANIFEST_PATH, `${JSON.stringify(manifest, null, 2)}\n`);
   }
 
@@ -1365,11 +1669,28 @@ async function main() {
   const dark = fetchFailureVerdict(attempted, failed.length, { maxRatio: MAX_FAILURE_RATIO, missing: missingOnSite });
 
   if (AS_JSON) {
-    console.log(JSON.stringify({ apply: APPLY, transported, capped, failed, missingOnSite, manual, skipped, dark }, null, 2));
+    console.log(JSON.stringify({
+      apply: APPLY,
+      manifestChanged,
+      transported,
+      capped,
+      couplingDelta,
+      failed,
+      missingOnSite,
+      manual,
+      skipped,
+      dark,
+    }, null, 2));
   } else {
     const mode = APPLY ? 'APPLY' : 'dry-run';
     console.log(`transport-identical-twins (${mode}): ${transported.length} da portare, ${skipped.length} fermi, ${failed.length} non verificati`);
     for (const t of transported) console.log(`  ⬇ ${t.path}  ←  ${t.sitePath}  (${t.from} → ${t.to})`);
+    for (const d of couplingDelta) {
+      const prefix = d.initialized ? 'inizializzato' : 'cambiato';
+      console.log(`  🔗 accoppiamenti ${prefix}: ${d.path} (+${d.added.length}/-${d.removed.length})`);
+      for (const c of d.added) console.log(`     + ${c.path} (${c.mode})`);
+      for (const c of d.removed) console.log(`     - ${c.path} (${c.mode})`);
+    }
     if (capped) console.log(`  ⏸ altri ${capped} candidati non copiati oggi (tetto di ${MAX_FILES} file, più le metà che il taglio avrebbe separato): restano al prossimo giro`);
     for (const f of failed) console.log(`  ⚠ ${f.path}: ${f.reason}`);
     for (const m of manual) console.log(`  ⛔ ${m.path}: ${m.reason}`);

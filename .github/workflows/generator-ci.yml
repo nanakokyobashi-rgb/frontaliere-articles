@@ -57,8 +57,18 @@ concurrency:
 jobs:
   test:
     runs-on: ubuntu-latest
+    env:
+      # I test del floor devono usare la base dell'evento: `HEAD^` non è la
+      # revisione pubblicata quando un push contiene più commit.
+      PREFLIGHT_EVENT_NAME: ${{ github.event_name }}
+      PREFLIGHT_PUSH_BASE_REVISION: ${{ github.event.before }}
+      PREFLIGHT_PR_BASE_REVISION: ${{ github.event.pull_request.base.sha }}
     steps:
       - uses: actions/checkout@v5
+        with:
+          # The body floor rejects a registry truncation only when the previous
+          # corpus revision is locally verifiable.
+          fetch-depth: 0
 
       - uses: actions/setup-node@v5
         with:

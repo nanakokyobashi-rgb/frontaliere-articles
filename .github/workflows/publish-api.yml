@@ -197,6 +197,11 @@ jobs:
           PREFLIGHT_ESBUILD_DIR: ${{ runner.temp }}/preflight
           PREFLIGHT_SCAN_MODE: ${{ steps.changed-bodies.outputs.scan-mode }}
           PREFLIGHT_CHANGED_FILES: ${{ steps.changed-bodies.outputs.changed-files }}
+          # Il floor storico deve coprire l'intero push, non il suo ultimo
+          # commit intermedio. `workflow_dispatch` non ha una base e resta sul
+          # fallback locale esplicito del modulo.
+          PREFLIGHT_EVENT_NAME: ${{ github.event_name }}
+          PREFLIGHT_PUSH_BASE_REVISION: ${{ github.event.before }}
         run: node scripts/ci/check-blog-body-syntax.mjs
 
       # ── LA RETE DI SICUREZZA CHE MANCAVA (issue #267, #245 item 2) ──────────
