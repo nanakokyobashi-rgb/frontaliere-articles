@@ -1,20 +1,19 @@
 /**
  * followup-drainer.mjs — gestore coda follow-up (zero-Claude, deterministico).
  *
- * Risolve la STARVATION osservata 2026-06-04: `issue-fix.yml` ha un solo slot
- * concurrency globale (`group: issue-fix`, `cancel-in-progress: false`). GitHub
- * con cancel=false CANCELLA le run PENDING tenendo solo l'in-progress + l'ultima
- * queued. In un burst di follow-up auto-routati a agent:fix → 60% delle fix-run
- * cancellate-in-coda, mai ri-tentate (nessun nuovo evento `labeled`), ~20 issue
- * bloccate `agent:fix` ma non lavorate.
+ * Risolve la STARVATION misurata il 2026-06-04, quando `issue-fix.yml` aveva un
+ * solo slot concurrency globale (`group: issue-fix`, `cancel-in-progress: false`):
+ * GitHub con cancel=false cancellava le run PENDING tenendo solo l'in-progress
+ * e l'ultima queued. Ora il workflow è per-issue e questo drainer mantiene un
+ * cap bounded, così un burst non crea sfratti tra issue diverse.
  *
  * Design (vedi AUTONOMOUS-LOOP-DESIGN): i follow-up non ricevono più `agent:fix`
  * diretto da triage ma `agent:fix-queued`. Questo drainer (cron ~20min +
- * dispatch manuale) promuove UNO alla volta a `agent:fix`, e SOLO quando lo
- * slot issue-fix è libero → la run promossa è l'unica pending → non viene mai
- * cancellata. Il cron è il trigger automatico durevole: il fan-out
- * `workflow_run` è stato rimosso perché creava burst concorrenti che GitHub
- * cancellava sul gruppo serializzato. Starvation eliminata per costruzione.
+ * dispatch manuale) riempie fino al cap gli slot `agent:fix` per issue diverse;
+ * la chiave per-issue del workflow evita gli sfratti fra candidati distinti,
+ * mentre lo stesso numero resta serializzato. Il cron è il trigger automatico
+ * durevole: il fan-out `workflow_run` è stato rimosso perché creava burst
+ * concorrenti che GitHub cancellava sul gruppo serializzato.
  *
  * Termina autonomamente (no human): un follow-up promosso che non produce PR
  * (run cancellata/error_max_turns) viene rilevato come orfano e RI-ACCODATO con
@@ -279,11 +278,11 @@ const ORPHAN_MIN_AGE_MIN = 30;
 const SETTLE_MIN = intFromEnv('FOLLOWUP_SETTLE_MIN', 3);
 
 // Quante run `issue-fix` possono essere vive insieme. Era 1 hard-coded — un
-// mutex, non un cap — poi alzato a 3 (2026-09-04). Dal 2026-09-06 il default
-// e' di nuovo 1: tre fixer paralleli consumano troppi token. Override:
-// `FOLLOWUP_MAX_INFLIGHT_FIX=3` ripristina il parallelismo precedente, senza
-// toccare il codice (VISION.md D4: cap, kill-switch, telemetria — la riga
-// `in-flight=N/M` nel log di ogni run).
+// mutex, non un cap — poi alzato a 3 (2026-09-04). Il default 5 è il massimo
+// misurato come stabile dalla flotta locale senza avvicinarsi al limite disco;
+// il pool remoto resta bounded e usa la stessa quota Codex-primary. Override:
+// `FOLLOWUP_MAX_INFLIGHT_FIX=N` conserva il kill-switch e la telemetria — la
+// riga `in-flight=N/M` nel log di ogni run.
 //
 // `fixQueueDepth()` clampa questo numero alla profondita' vera della coda di
 // `issue-fix.yml`. Con la chiave per-issue il clamp non morde; se qualcuno
@@ -306,7 +305,7 @@ const SETTLE_MIN = intFromEnv('FOLLOWUP_SETTLE_MIN', 3);
 const RAW_MAX_INFLIGHT_FIX = Number(process.env.FOLLOWUP_MAX_INFLIGHT_FIX);
 const REQUESTED_MAX_INFLIGHT_FIX = Number.isFinite(RAW_MAX_INFLIGHT_FIX)
   ? Math.max(1, Math.floor(RAW_MAX_INFLIGHT_FIX))
-  : 1;
+  : 5;
 
 /**
  * Quante promozioni `agent:fix` puo' reggere DAVVERO la coda di `issue-fix.yml`.
@@ -315,14 +314,11 @@ const REQUESTED_MAX_INFLIGHT_FIX = Number.isFinite(RAW_MAX_INFLIGHT_FIX)
  * quelle che GitHub accetta di tenere. Le due cose sono diverse e il 2026-09-04
  * ha misurato quanto costa confonderle.
  *
- * `issue-fix.yml` ha `concurrency: { group: issue-fix, cancel-in-progress:
- * false }` — un gruppo COSTANTE, uguale per ogni issue. L'header di quel file
- * lo dice per esteso: «GitHub tiene **una sola** run pending per gruppo, e ogni
- * nuova pending SFRATTA (`cancelled`) la precedente. La profondita' della coda
- * e' 1, non N». E poiche' `on: issues:[labeled]` e' one-shot, l'evento della
- * run sfrattata e' consumato: la label `agent:fix` resta sulla issue e NIENTE
- * la ri-arma. Il RESCUE piu' sotto la ritrova orfana e le addebita un
- * `fu-attempt` — per una run che non e' mai partita.
+ * `issue-fix.yml` usa una chiave per-issue: GitHub serializza gli eventi dello
+ * stesso numero, ma issue diverse hanno gruppi distinti. Il cap e il lease
+ * bounded decidono quindi quante run Codex-primary possono partire insieme;
+ * se qualcuno rende di nuovo costante il `group:`, la profondita' torna 1 e
+ * il clamp evita di sfrattare le pending.
  *
  * Misurato sul sito (2026-09-05), dopo che il cap era passato da 1 a 3 il
  * 2026-09-04 alle 09:05Z:
@@ -335,13 +331,11 @@ const REQUESTED_MAX_INFLIGHT_FIX = Number.isFinite(RAW_MAX_INFLIGHT_FIX)
  * Il backlog aperto e' cresciuto di 82 issue nette in 15 giorni: quelle 88
  * parcheggiate senza un solo tentativo reale lo spiegano per intero.
  *
- * Percio' il cap non e' piu' un numero libero: viene CLAMPATO alla profondita'
- * dichiarata dal workflow. Con un `group:` costante la profondita' e' 1 —
- * promuovere una seconda issue nello stesso tick non riempie uno slot, ne
- * distrugge una. Con un `group:` che contiene un'espressione per-issue
- * (`${{ github.event.issue.number }}`) le run sono davvero indipendenti e il
- * cap torna a valere per quello che e': quello, e non un numero piu' alto qui,
- * e' il modo di alzare la parallelizzazione.
+ * Percio' il cap viene CLAMPATO alla profondita' dichiarata dal workflow. Con
+ * un `group:` costante la profondita' e' 1 — promuovere una seconda issue nello
+ * stesso tick non riempie uno slot, ne distrugge una. Con un `group:` che
+ * contiene un'espressione per-issue (`${{ github.event.issue.number }}`) le run
+ * sono indipendenti e il cap torna a valere per intero.
  *
  * File illeggibile o `concurrency:` assente → si sceglie il verso sicuro
  * (1 e Infinity rispettivamente): mai promuovere piu' di quanto si sappia
@@ -392,7 +386,7 @@ const FIX_QUEUE_DEPTH = (() => {
 const MAX_INFLIGHT_FIX = Math.min(REQUESTED_MAX_INFLIGHT_FIX, FIX_QUEUE_DEPTH);
 if (MAX_INFLIGHT_FIX < REQUESTED_MAX_INFLIGHT_FIX) {
   // Telemetria: senza questa riga il clamp e' invisibile e chi ha alzato il cap
-  // crede di avere 3 slot mentre ne ha 1 — che e' esattamente come e' nato il
+  // crede di avere piu' slot mentre ne ha 1 — che e' esattamente come e' nato il
   // difetto del 2026-09-04.
   console.log(`cap issue-fix richiesto ${REQUESTED_MAX_INFLIGHT_FIX} → clampato a ${FIX_QUEUE_DEPTH}: la profondita' della coda di issue-fix.yml (concurrency group costante) e' ${FIX_QUEUE_DEPTH}; promuoverne di piu' sfratterebbe le pending invece di riempire slot. Per alzarlo davvero, rendi il gruppo per-issue in issue-fix.yml.`);
 }
@@ -400,6 +394,14 @@ if (MAX_INFLIGHT_FIX < REQUESTED_MAX_INFLIGHT_FIX) {
 const LBL_QUEUED = 'agent:fix-queued';
 const LBL_FIX = 'agent:fix';
 const LBL_PARKED = 'fu-parked';
+// Claim condiviso con `/fix-issue` locale e con i fixer remoti. Il drainer
+// legge la presenza di una qualunque label di claim come lavoro assegnato:
+// anche un owner label senza `agent:in-progress` va protetto, perché è uno
+// stato transitorio che il prossimo reread del fixer deve poter sanare senza
+// che il drainer gli strappi l'issue da sotto.
+const LBL_IN_PROGRESS = 'agent:in-progress';
+const LBL_LOCAL = 'agent:local';
+const LBL_REMOTE = 'agent:remote';
 // Issue-contatore/tracker permanenti (#5615): il ledger crawler-transient e il
 // tracker loop-health sono queue-managed (category='other' → route='queue',
 // nessuna regex di categoria li riconosce), quindi altrimenti eleggibili
@@ -470,7 +472,8 @@ export function isDecomposeEligible(iss) {
   const ls = names(iss);
   return !ls.includes(LBL_DECOMPOSED) && !ls.includes(LBL_FROM_DECOMP)
     && !ls.includes(LBL_DECOMP_QUEUED) && !ls.includes(LBL_DECOMP)
-    && !ls.includes(LBL_MAYBE_RESOLVED) && !ls.includes(LBL_DECOMP_RETRIED);
+    && !ls.includes(LBL_MAYBE_RESOLVED) && !ls.includes(LBL_DECOMP_RETRIED)
+    && !hasActiveAgentClaim(iss);
 }
 
 /**
@@ -509,6 +512,7 @@ export function isDecomposedParent(iss) {
  */
 export function isDrainPromotable(iss) {
   if (has(iss, LBL_PARKED)) return false;
+  if (hasActiveAgentClaim(iss)) return false;
   // La riconciliazione può aver già visto il conflitto durante la finestra
   // non atomica di `gh issue edit`. Lasciarlo fuori evita una seconda
   // promozione nello stesso tick; il prossimo giro rimuoverà la coda quando
@@ -1792,6 +1796,7 @@ export function isRecoverableQueueManaged(iss) {
  */
 export function isStuckFixRescueCandidate(iss) {
   return isQueueManaged(iss)
+    && !hasActiveAgentClaim(iss)
     && !has(iss, LBL_QUEUED)
     && !has(iss, LBL_PARKED)
     && !isDecomposedParent(iss);
@@ -2205,6 +2210,17 @@ function listAllOpenIssues() {
 
 const names = (iss) => (iss.labels || []).map((l) => l.name);
 const has = (iss, n) => names(iss).includes(n);
+/**
+ * Un claim locale o remoto rende l'issue di proprietà di un altro worker.
+ * Fail-closed: anche un owner label senza il marker base viene considerato
+ * occupato, così una scrittura parziale non diventa un varco per il drainer.
+ * Pura → testabile.
+ * @param {{labels?: Array<{name:string}>}} iss
+ */
+export function hasActiveAgentClaim(iss) {
+  const ls = names(iss);
+  return ls.includes(LBL_IN_PROGRESS) || ls.includes(LBL_LOCAL) || ls.includes(LBL_REMOTE);
+}
 const attemptOf = (iss) => {
   const m = names(iss).map((n) => /^fu-attempt:(\d+)$/.exec(n)).find(Boolean);
   return m ? parseInt(m[1], 10) : 0;
@@ -2308,6 +2324,7 @@ const reparkGenOf = (iss) => {
  */
 export function isReparkableCandidate(iss) {
   if (!isQueueManaged(iss)) return false;
+  if (hasActiveAgentClaim(iss)) return false;
   if (has(iss, LBL_FIX) || has(iss, LBL_QUEUED)) return false; // già in lavoro/coda
   if (has(iss, LBL_DECOMP_QUEUED) || has(iss, LBL_DECOMP) || has(iss, LBL_DECOMPOSED)) return false; // nello stadio decompose
   if (has(iss, 'needs-human')) return false;                   // già escalato (too-large)
@@ -2330,6 +2347,7 @@ export function isReparkableCandidate(iss) {
  * @param {{number?: number, title?: string, labels?: Array<{name:string}>}} iss
  */
 export function isCrawlerRescueCandidate(iss) {
+  if (hasActiveAgentClaim(iss)) return false;
   if (isQueueManaged(iss)) return false;      // quelli li prende `stuckFix`
   if (isFixerExempt(names(iss))) return false; // pin fuori dal ciclo (#7648)
   if (has(iss, LBL_QUEUED) || has(iss, LBL_PARKED) || has(iss, 'needs-human')) return false;
@@ -2524,6 +2542,7 @@ export function isIssueGroupable(issue, {
   const title = String(issue?.title || '');
   const body = String(issue?.body || '');
   if (!issueGroupingKey(issue, { repository })) return false;
+  if (hasActiveAgentClaim(issue)) return false;
   if (isFixerExempt(names(issue))) return false;
   if (has(issue, LBL_FIX) || has(issue, LBL_PARKED) || has(issue, 'needs-human') || has(issue, LBL_PROOF)) return false;
   if (isDecomposedParent(issue) || has(issue, LBL_DECOMP_QUEUED) || has(issue, LBL_DECOMP)) return false;
@@ -2592,6 +2611,7 @@ function reserveQuotaLease(issueNumber, role) {
     target: String(issueNumber),
     ttlSec: intFromEnv('FOLLOWUP_QUOTA_LEASE_TTL_SEC', 30 * 60),
     scanMax: intFromEnv('FOLLOWUP_QUOTA_LEASE_SCAN_MAX', QUOTA_SCAN_MAX),
+    maxIssueFixLeases: MAX_INFLIGHT_FIX,
     runId: process.env.GITHUB_RUN_ID || 'followup-drainer',
     writeOutput: false,
     dryRun: DRY,
@@ -2680,8 +2700,10 @@ function prepareIssueGroup(group) {
   const leader = group?.issues?.[0]?.number;
   const label = issueGroupLabel(group?.key, leader);
   if (!label || !Array.isArray(group?.issues) || group.issues.length < 2) return null;
+  if (group.issues.some(hasActiveAgentClaim)) return null;
   ensureLabel(label, '5319e7', `Gruppo issue B19: chiave condivisa, massimo ${ISSUE_GROUP_MAX_SIZE} issue nella PR`);
   for (const issue of group.issues) {
+    if (hasActiveAgentClaim(issue)) return null;
     const stale = issueGroupInstanceLabels(issue).filter((name) => name !== label);
     if (!editChecked(issue.number, { add: [label], remove: stale })) return null;
   }
@@ -3589,6 +3611,10 @@ export function runDrain() {
     });
     let examined = 0;
     for (const p of rotatedParents) {
+      if (hasActiveAgentClaim(p)) {
+        console.log(`CLAIM-SKIP #${p.number} (agent claim presente: ${names(p).filter((name) => [LBL_IN_PROGRESS, LBL_LOCAL, LBL_REMOTE].includes(name)).join(', ') || 'stato claim incompleto'}) → nessun parent-close sulla flotta locale/remota`);
+        continue;
+      }
       if (examined >= PARENT_CLOSE_MAX_PER_RUN) {
         console.log(`parent-close: cap ${PARENT_CLOSE_MAX_PER_RUN}/run raggiunto, ${parents.length - examined} padri rinviati al prossimo tick (no silent cap).`);
         break;
@@ -4099,7 +4125,8 @@ export function runDrain() {
 
   // Tutto (rescue + drain) gira SOLO a slot issue-fix libero: così il rescue non
   // può mai toccare la issue di una run viva (evita di togliere agent:fix mentre
-  // il fix è in corso), e la promozione resta l'unica pending → mai cancellata.
+  // il fix è in corso). Il drain riempie poi gli slot liberi fino al cap; la
+  // chiave per-issue mantiene una sola pending per ciascun numero.
   //
   // #5524 item 2: quel `return` precedeva ogni ramo che usa `DRY` per stampare
   // "cosa farei" (RESCUE+PARK, CRAWLER RESCUE, DRAIN sono tutti SOTTO questa
@@ -4568,7 +4595,8 @@ export function runDrain() {
   // ma condivide la quota Claude: per questo sta QUI, dopo il gate dello slot
   // issue-fix e la scansione del beacon — promuovere un decompose mentre un fix
   // gira raddoppierebbe il ritmo di consumo della quota, che è LA risorsa
-  // scarsa. Serializzare (al più un run Claude del ciclo alla volta) è voluto.
+  // scarsa. Il decompose resta quindi serializzato e non entra nel pool
+  // issue-fix Codex-primary: al più un run di scorporo del ciclo alla volta.
   //
   // RESCUE: una run issue-decompose morta (sfratto in coda concurrency, crash,
   // 429) lascia `agent:decompose` senza esito né figlie — lo stesso stato
@@ -4634,7 +4662,7 @@ export function runDrain() {
     }
   }
 
-  // --- DRAIN: promuovi 1 queued a agent:fix (slot già verificato libero) -------
+  // --- DRAIN: promuovi queued a agent:fix fino al cap (slot verificati liberi) -
   // Guard QUOTA (misurato 2026-08-05): lo slot può essere libero e la coda piena
   // e comunque promuovere è dannoso, perché il collo di bottiglia non è lo slot
   // ma la quota Max condivisa. Con la finestra 429 aperta, ogni promozione è una
@@ -4673,6 +4701,10 @@ export function runDrain() {
   // Gli altri stati esclusi da `isDrainPromotable` vanno tolti, non soltanto
   // saltati; altrimenti una label stantia continua a essere riletta a ogni run.
   for (const iss of pool.filter((i) => !isDrainPromotable(i))) {
+    if (hasActiveAgentClaim(iss)) {
+      console.log(`CLAIM-SKIP #${iss.number} (agent claim presente: ${names(iss).filter((name) => [LBL_IN_PROGRESS, LBL_LOCAL, LBL_REMOTE].includes(name)).join(', ') || 'stato claim incompleto'}) → lascio intatta la coda per la flotta locale/remota`);
+      continue;
+    }
     if (!budget.take(`#${iss.number} (drain pre-flight)`, ITEM_COST_MS)) break;
     if (has(iss, LBL_FIX)) {
       console.log(`DRAIN-SKIP #${iss.number} (agent:fix + agent:fix-queued: conflitto fresco) → lascio decidere alla riconciliazione nel prossimo tick`);
@@ -4804,6 +4836,10 @@ export function runDrain() {
   // Park preemptivo = stesso esito del NON_RETRYABLE post-hoc, senza il run. Il
   // body serve solo per i candidati realmente considerati → fetch lazy, 1 alla volta.
   for (const cand of queued) {
+    if (hasActiveAgentClaim(cand)) {
+      console.log(`CLAIM-SKIP #${cand.number} (agent claim presente: ${names(cand).filter((name) => [LBL_IN_PROGRESS, LBL_LOCAL, LBL_REMOTE].includes(name)).join(', ') || 'stato claim incompleto'}) → lascio intatta la coda per la flotta locale/remota`);
+      continue;
+    }
     const plannedGroup = groupsByMember.get(Number(cand.number));
     const candidateGroupLabels = issueGroupInstanceLabels(cand);
     const candidateGroupDigests = candidateGroupLabels

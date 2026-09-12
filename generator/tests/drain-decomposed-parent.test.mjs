@@ -22,10 +22,12 @@ import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import {
   isDrainPromotable,
+  hasActiveAgentClaim,
   isAgeOutCandidate,
   isReparkableCandidate,
   isDecomposeEligible,
   isStuckFixRescueCandidate,
+  isIssueGroupable,
   staleFixRescueGate,
 } from '../../scripts/ci/followup-drainer.mjs';
 
@@ -127,4 +129,26 @@ test('#1076: il rescue vede agent:fix senza PR/beacon e non tocca i concorrenti'
     staleFixRescueGate({ outcome: null, ageMin: 31, hasPR: false, orphanMinAgeMin: 30 }).action,
     'rearm',
   );
+});
+
+test('#1360: un claim locale o remoto esclude ogni via di mutazione del drainer', () => {
+  for (const owner of ['agent:in-progress', 'agent:local', 'agent:remote']) {
+    const queued = iss('agent:fix-queued', owner, 'follow-up');
+    const parked = iss('fu-parked', owner, 'follow-up');
+    const grouped = {
+      title: 'Follow-up con target condiviso',
+      body: 'Suggested action: `scripts/ci/followup-drainer.mjs`',
+      labels: [{ name: owner }],
+    };
+    assert.equal(hasActiveAgentClaim(queued), true, owner);
+    assert.equal(isDrainPromotable(queued), false, owner);
+    assert.equal(isDecomposeEligible(queued), false, owner);
+    assert.equal(isStuckFixRescueCandidate({
+      title: 'follow-up(#1360): rescue',
+      labels: [{ name: 'agent:fix' }, { name: owner }],
+    }), false, owner);
+    assert.equal(isReparkableCandidate(parked), false, owner);
+    assert.equal(isIssueGroupable(grouped, { repository: 'owner/repo', canPushWorkflows: true }), false, owner);
+  }
+  assert.match(SRC, /CLAIM-SKIP/);
 });
