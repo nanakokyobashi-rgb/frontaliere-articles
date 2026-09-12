@@ -362,7 +362,7 @@ describe('free-MT recovery — il degrado e’ misurato e limitato per run', () 
     assert.equal(report.llmFallbacks, 4, 'body4 deve ricevere il quarto retry prima del fallback IT');
   });
 
-  test('#1320 FU-035 — il cap globale riserva un claim ai locali successivi', () => {
+  test('#1320 FU-035 — il cap globale ripartisce i claim fra i locali', () => {
     const report = createFreeMtRecoveryReport({ faqCount: 2 });
     const spesi = Object.fromEntries(FREE_MT_LLM_FALLBACK_LOCALES.map((l) => [l, 0]));
     const faqFields = [
@@ -380,14 +380,38 @@ describe('free-MT recovery — il degrado e’ misurato e limitato per run', () 
       }
     }
     assert.ok(spesi.fr >= 1, `fr deve ricevere un claim riservato: ${JSON.stringify(spesi)}`);
-    assert.deepEqual(spesi, { en: 4, de: 2, fr: 1 });
+    assert.deepEqual(spesi, { en: 3, de: 2, fr: 2 });
     assert.equal(report.llmFallbacks, MAX_FREE_MT_LLM_FALLBACKS_PER_RUN);
     assert.ok(spesi.en <= maxFreeMtLlmFallbacksPerLocale(2));
     assert.ok(spesi.de <= maxFreeMtLlmFallbacksPerLocale(2));
     assert.ok(spesi.fr <= maxFreeMtLlmFallbacksPerLocale(2));
   });
 
-  test('#1320 FU-036 — la riserva considera solo i locali con campi rifiutati', () => {
+  test('#1320 FU-038 — il cap dinamico non affama i locali successivi', () => {
+    const report = createFreeMtRecoveryReport({ faqCount: 3, bodyFieldCount: 3 });
+    const fields = [
+      'title', 'excerpt', 'body1', 'body2', 'body3',
+      'faq.q[0]', 'faq.a[0]', 'faq.q[1]', 'faq.a[1]', 'faq.q[2]', 'faq.a[2]',
+    ];
+    const spesi = Object.fromEntries(FREE_MT_LLM_FALLBACK_LOCALES.map((locale) => [locale, 0]));
+    for (const locale of FREE_MT_LLM_FALLBACK_LOCALES) {
+      for (const field of fields) {
+        recordFreeMtUnusableOutput(report, { reason: 'unusable-text', targetLang: locale, field });
+      }
+    }
+
+    for (const locale of FREE_MT_LLM_FALLBACK_LOCALES) {
+      for (let i = 0; i < fields.length; i += 1) {
+        if (claimFreeMtLlmFallback(report, locale)) spesi[locale] += 1;
+      }
+    }
+
+    assert.equal(maxFreeMtLlmFallbacksPerLocale(3, 3), 5);
+    assert.deepEqual(spesi, { en: 3, de: 2, fr: 2 });
+    assert.equal(report.llmFallbacks, MAX_FREE_MT_LLM_FALLBACKS_PER_RUN);
+  });
+
+  test('#1320 FU-036 — il cap considera solo i locali con campi rifiutati', () => {
     const report = createFreeMtRecoveryReport({ faqCount: 2 });
     const faqFields = [
       'title', 'excerpt', 'body1', 'body2', 'body3',

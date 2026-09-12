@@ -31,14 +31,15 @@ export const FREE_MT_LLM_FALLBACK_LOCALES = ['en', 'de', 'fr'];
  * ITALIANA in `content/`, in `meta-<locale>.json` e nei feed RSS — cioe' il
  * difetto #831 che questa catena esiste per chiudere, live senza rebuild del
  * sito. Nel caso storico (body1..body3 e una coppia FAQ) i candidati sono 7
- * per locale, quindi la quota per locale è 3: `en` 3, `de` 3, a `fr` resta
- * sempre almeno 1. Il report amplia il conteggio per body4+ e FAQ aggiuntive.
+ * per locale. Il report amplia il conteggio per body4+ e FAQ aggiuntive; il
+ * cap globale viene comunque ripartito fra i locali con recovery pendente
+ * prima di concedere a uno solo la quota dinamica maggiore.
  *
- * Con la quota nessun locale puo' affamare gli altri: `en` ne prende al
- * massimo 3, `de` 3, quindi a `fr` ne resta sempre almeno 1 (7 - 3 - 3). E' la
- * stessa correzione gia' applicata al budget undated dello scan news (#190
- * punto 1, `selectUndatedBySourceQuota`), dove un budget globale riempito
- * nell'ordine della lista lasciava a zero ogni fonte dopo la prima.
+ * Con tre locali pendenti la ripartizione e' `en:3`, `de:2`, `fr:2`; con due
+ * locali e' `4,3`. E' la stessa correzione gia' applicata al budget undated
+ * dello scan news (#190 punto 1, `selectUndatedBySourceQuota`), dove un budget
+ * globale riempito nell'ordine della lista lasciava a zero ogni fonte dopo la
+ * prima.
  */
 export const MAX_FREE_MT_LLM_FALLBACKS_PER_LOCALE = Math.ceil(
   MAX_FREE_MT_LLM_FALLBACKS_PER_RUN / FREE_MT_LLM_FALLBACK_LOCALES.length,
@@ -163,9 +164,9 @@ export function wasFreeMtUnusable(report, targetLang, field) {
 }
 
 /**
- * Reserve one focused LLM retry FOR `locale`. Returns false once either the
- * per-locale quota or the run cap is reached. The state is mutated so the same
- * function is the only counter/decision point used by the generator.
+ * Reserve one focused LLM retry FOR `locale`. Returns false once the effective
+ * per-locale allocation or the run cap is reached. The state is mutated so the
+ * same function is the only counter/decision point used by the generator.
  *
  * Vedi `MAX_FREE_MT_LLM_FALLBACKS_PER_LOCALE`: il `locale` non e' opzionale
  * nella sostanza — senza, tutti i claim finirebbero nello stesso secchio e la
@@ -186,25 +187,30 @@ export function claimFreeMtLlmFallback(
   const key = locale || '?';
   const usedHere = report.llmFallbacksByLocale[key] || 0;
   const localeLimit = maxFreeMtLlmFallbacksPerLocale(faqCount, bodyFieldCount);
-  // Keep one claim in reserve only for another supported locale that has an
-  // actually rejected field still waiting for recovery. Reserving blindly for
-  // every locale at zero wastes the fixed run cap when, for example, only en
-  // and de have free-MT failures: with faqCount=2 it used to yield en=4,
-  // de=2, fr=0 instead of leaving de its third claim.
   const rejectedFieldKeys = Object.keys(report.unusableFields || {});
-  const currentLocaleIndex = FREE_MT_LLM_FALLBACK_LOCALES.indexOf(key);
   const rejectedFieldsByLocale = Object.fromEntries(
     FREE_MT_LLM_FALLBACK_LOCALES.map((candidate) => [
       candidate,
       rejectedFieldKeys.filter((fieldKey) => fieldKey.startsWith(`${candidate}:`)).length,
     ]),
   );
-  const reserveForOtherLocales = FREE_MT_LLM_FALLBACK_LOCALES
-    .filter((candidate, candidateIndex) => candidateIndex > currentLocaleIndex
-      && rejectedFieldsByLocale[candidate] > (report.llmFallbacksByLocale[candidate] || 0))
-    .length;
-  if (usedHere >= localeLimit
-    || (report.llmFallbacks || 0) + reserveForOtherLocales >= MAX_FREE_MT_LLM_FALLBACKS_PER_RUN) {
+  // Allocate the global cap before allowing a dynamic locale cap to dominate:
+  // with all three locales pending, the seven claims become 3/2/2 instead of
+  // 5/1/1 for an article with three body fields and three FAQ pairs. A report
+  // without rejected fields is only used by direct callers/tests; keep its
+  // historical single-locale behavior, since production calls this function
+  // only for a field recorded by free-MT.
+  const pendingLocales = rejectedFieldKeys.length > 0
+    ? FREE_MT_LLM_FALLBACK_LOCALES.filter((candidate) =>
+      rejectedFieldsByLocale[candidate] > (report.llmFallbacksByLocale[candidate] || 0))
+    : [key];
+  const pendingLocaleIndex = pendingLocales.indexOf(key);
+  const fairLocaleLimit = pendingLocaleIndex === -1
+    ? localeLimit
+    : Math.floor(MAX_FREE_MT_LLM_FALLBACKS_PER_RUN / pendingLocales.length)
+      + (pendingLocaleIndex < MAX_FREE_MT_LLM_FALLBACKS_PER_RUN % pendingLocales.length ? 1 : 0);
+  if (usedHere >= Math.min(localeLimit, fairLocaleLimit)
+    || (report.llmFallbacks || 0) >= MAX_FREE_MT_LLM_FALLBACKS_PER_RUN) {
     report.llmFallbackCapped = true;
     return false;
   }

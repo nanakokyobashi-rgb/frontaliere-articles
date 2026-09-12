@@ -10487,12 +10487,12 @@ ${terminologyByLang[targetLang] || ''}`;
       // difetto #831, live senza rebuild del sito. Il free-MT segnala la coppia
       // (locale, campo) che ha rifiutato (`onUnusableOutput`), e solo quella
       // paga il cap; per tutti gli altri campi il retry mirato resta intatto.
-      // Il claim e' per LOCALE: questo loop scorre `en` prima di `de` e `fr`, e
-      // un budget unico per run si esaurirebbe tutto su `en` proprio nella run
-      // in cui il free-MT degrada su tutti i campi — `/en/` recuperato, `/de/`
-      // e `/fr/` pubblicati in italiano, cioe' di nuovo #831. Vedi
-      // `maxFreeMtLlmFallbacksPerLocale()` dimensiona il cap sui bodyN e sui
-      // campi FAQ realmente indicizzati nell'articolo, non sul solo caso base.
+      // Il claim e' per LOCALE: questo loop scorre `en` prima di `de` e `fr`,
+      // quindi il cap globale viene ripartito tra i locali con recovery
+      // pendente prima di concedere a uno solo la quota dinamica maggiore.
+      // Vedi `maxFreeMtLlmFallbacksPerLocale()`: dimensiona il cap sui bodyN e
+      // sui campi FAQ realmente indicizzati nell'articolo, non sul solo caso
+      // base.
       const capBloccaIlRetry = ARTICLE_TRANSLATE_FREE_MT
         && wasFreeMtUnusable(RUN_REPORT.translation, locale, recoveryField)
         && !claimFreeMtLlmFallback(RUN_REPORT.translation, locale);
