@@ -155,6 +155,8 @@ import {
 } from './lib/free-mt-recovery.mjs';
 import { isReservedPublishedSlug } from '../../scripts/lib/published-slug-guard.mjs';
 import { AI_SEARCH_PROMPT_BLOCK_IT } from './lib/ai-search-template.mjs';
+import { stripVacuousFacts } from './lib/key-facts-specificity.mjs';
+import { checkCantonToponymConsistency } from './lib/cantone-toponimi-coerenza.mjs';
 import { tokenizeIt, jaccardSim, containmentSim, normalizeItWord, STOP_WORDS_IT } from './lib/it-text-similarity.mjs';
 import { fixMicrocopy } from './lib/it-microcopy-guard.mjs';
 import { DOMAIN_DUP_STOPLIST, filterDistinctive } from './lib/dup-stoplist.mjs';
@@ -4777,6 +4779,82 @@ function validateItalianPayload(contentIt, locale = 'it') {
       err.qualityReject = true;
       throw err;
     }
+  }
+}
+
+function qualityRejectError(message) {
+  const error = new Error(message);
+  error.qualityReject = true;
+  return error;
+}
+
+function bodyFieldsForQuality(content) {
+  return Object.keys(content || {})
+    .filter((field) => /^body\d+$/.test(field))
+    .sort((a, b) => Number(a.slice(4)) - Number(b.slice(4)));
+}
+
+function bodyTextForQuality(content) {
+  return bodyFieldsForQuality(content)
+    .map((field) => content[field])
+    .join('\n\n');
+}
+
+/**
+ * Gate comune per i payload appena generati, prima di traduzioni, immagini e
+ * scritture. Le coppie `placeholder-value` vengono tolte solo quando la lista
+ * conserva almeno tre fatti; una lista sotto soglia e una guida con toponimi
+ * di un altro cantone fanno fallire l'headline corrente come qualityReject.
+ */
+function assertGeneratedArticleQuality(data, { cantonBody = null } = {}) {
+  const content = data?.content;
+  if (!content || typeof content !== 'object') return;
+
+  for (const [locale, localeContent] of Object.entries(content)) {
+    if (!localeContent || typeof localeContent !== 'object') continue;
+    if (typeof localeContent.body1 !== 'string') continue;
+    const result = stripVacuousFacts(localeContent.body1);
+    if (result.rejected) {
+      const sections = result.rejectedSections.join(', ');
+      throw qualityRejectError(
+        `[key-facts-specificity] ${data.id || '(id mancante)'} `
+        + `${locale}: sezione ${sections || 'Fatti chiave'} sotto la soglia di 3 fatti dopo la rimozione dei non-valori`,
+      );
+    }
+    if (result.changed) {
+      localeContent.body1 = result.value;
+      console.error(
+        `  🧹 [key-facts-specificity] ${data.id || '(id mancante)'} ${locale}: `
+        + `rimosse ${result.dropped.length} coppie senza valore`,
+      );
+    }
+  }
+
+  const contentIt = content.it || content;
+  const bodyIt = bodyTextForQuality(contentIt);
+  // validateAndEnforceCTA() records the Italian body before it appends the
+  // generic navigation CTA. The shared registrar runs after that mutation;
+  // use the snapshot there so a CTA mentioning Ticino cannot become a false
+  // foreign-toponym hit for a Grigioni/Vallese guide.
+  const cantonBodyIt = typeof cantonBody === 'string'
+    ? cantonBody
+    : typeof data._cantonGuardBodyBeforeCta === 'string'
+      ? data._cantonGuardBodyBeforeCta
+      : bodyIt;
+  const cantonVerdict = checkCantonToponymConsistency({
+    articleId: data.id,
+    slug: data.slugs?.it || data.id,
+    title: contentIt.title,
+    body: cantonBodyIt,
+  });
+  if (!cantonVerdict.ok) {
+    const details = cantonVerdict.matches
+      .map((match) => `${match.toponym} (${match.canton})`)
+      .join(', ');
+    throw qualityRejectError(
+      `[canton-toponym] ${data.id || '(id mancante)'} dichiara ${cantonVerdict.declaredCanton} `
+      + `ma contiene toponimi di un altro cantone: ${details}`,
+    );
   }
 }
 
@@ -11364,6 +11442,10 @@ function pickDefaultCTA(articleCategory) {
 const DEFAULT_CTA = CTA_POOL[0];
 
 function validateAndEnforceCTA(data) {
+  const contentIt = data?.content?.it || data?.content;
+  if (contentIt && typeof data._cantonGuardBodyBeforeCta !== 'string') {
+    data._cantonGuardBodyBeforeCta = bodyTextForQuality(contentIt);
+  }
   const localeKeywords = { it: CTA_KEYWORDS_IT, en: CTA_KEYWORDS_EN, de: CTA_KEYWORDS_DE, fr: CTA_KEYWORDS_FR };
   const cta = pickDefaultCTA(data.category);
 
@@ -15220,6 +15302,11 @@ async function generateAndValidateArticle(url, sourceContext = null) {
       }
       throw validationErr;
     }
+    // Step 3a.0-specificity: reject/repair vacuous key facts and reject a
+    // cross-canton guide before spending translation, image or write budget.
+    // The same helper is called again after translations below because this
+    // primary path does not enter registerArticleFiles().
+    assertGeneratedArticleQuality(data);
     optimizeSeoMetadata(data);
 
     // Step 3a.0-skip: bail early when the chosen source has zero frontaliere
@@ -15910,6 +15997,31 @@ async function generateAndValidateArticle(url, sourceContext = null) {
     }
   }
 
+  // Step 3a.1: Reject/repair prompt-schema placeholders leaked into any
+  // published field (title/excerpt/body1-3/imageAlt/seo.*), same guard
+  // registerArticleFiles() runs for the four secondary producers. This IS
+  // the primary flow's write path — it writes files directly below
+  // (modifyRouterTs/modifyBlogArticlesTsx) and never calls
+  // registerArticleFiles(), so without this call a placeholder leaking here
+  // (e.g. via translateArticle() echoing the schema into en/de/fr) shipped
+  // unguarded. After translateArticle() so it also sees translation-introduced
+  // leaks, before image generation so a doomed article doesn't spend an image
+  // call first. Tagged qualityReject like every other throw in this function:
+  // a placeholder is a per-headline generation failure, not an infra error —
+  // the retry loop should rotate to the next headline, not crash the run.
+  try {
+    sanitizePromptPlaceholders(data);
+  } catch (e) {
+    e.qualityReject = true;
+    throw e;
+  }
+
+  // Run the canton guard after translation/sanitization but BEFORE CTA and
+  // internal-link injection. CTA_POOL contains generic Ticino copy; checking
+  // after that mutation would reject a valid Grigioni/Vallese guide because
+  // of the site's own navigation copy rather than the generated article.
+  assertGeneratedArticleQuality(data);
+
   // Step 3d: Enforce CTA / internal links (all 4 locales)
   console.error('🔗 Verifica CTA e link interni:');
   validateAndEnforceCTA(data);
@@ -15943,25 +16055,6 @@ async function generateAndValidateArticle(url, sourceContext = null) {
   console.error(`   Slug IT: ${data.slugs.it}`);
   console.error('');
 
-  // Step 3a.1: Reject/repair prompt-schema placeholders leaked into any
-  // published field (title/excerpt/body1-3/imageAlt/seo.*), same guard
-  // registerArticleFiles() runs for the four secondary producers. This IS
-  // the primary flow's write path — it writes files directly below
-  // (modifyRouterTs/modifyBlogArticlesTsx) and never calls
-  // registerArticleFiles(), so without this call a placeholder leaking here
-  // (e.g. via translateArticle() echoing the schema into en/de/fr) shipped
-  // unguarded. After translateArticle() so it also sees translation-introduced
-  // leaks, before image generation so a doomed article doesn't spend an image
-  // call first. Tagged qualityReject like every other throw in this function:
-  // a placeholder is a per-headline generation failure, not an infra error —
-  // the retry loop should rotate to the next headline, not crash the run.
-  try {
-    sanitizePromptPlaceholders(data);
-  } catch (e) {
-    e.qualityReject = true;
-    throw e;
-  }
-
   // This is the last metadata mutation before the primary write path. The
   // placeholder guard may replace a localized imageAlt wholesale with its IT
   // fallback; restore municipality names only after that replacement, or a
@@ -15969,10 +16062,10 @@ async function generateAndValidateArticle(url, sourceContext = null) {
   preserveMunicipalityNamesInMetadata(data);
 
   // Step 3a.2: gate deterministico sui body tradotti — BLOCCANTE (#5661).
-  // Stesso punto e stessa ragione dello Step 3a.1 qui sopra: e' dopo tutte le
-  // mutazioni del testo (3c strip, 3d CTA/link, 3e citazione) e prima di
-  // qualunque scrittura, quindi giudica esattamente cio' che finira' su disco.
-  // Vedi il commento della funzione per la misura che lo motiva.
+  // Questo gate resta dopo tutte le mutazioni del testo (3d CTA/link, 3e
+  // citazione) e prima di qualunque scrittura, quindi giudica esattamente cio'
+  // che finira' su disco. Il guard specificita'/cantoni sopra deve invece
+  // precedere l'iniezione di CTA generiche.
   assertArticlePassesFactualityGates(data);
 
   // Step 3b: Generate article image via Gemini native image generation
@@ -16872,6 +16965,11 @@ export async function registerArticleFiles(data, opts = {}) {
   // Prima di clampSeoDescriptions: troncare a 160 caratteri un campo che e' il
   // segnaposto lo renderebbe solo un segnaposto piu' corto.
   sanitizePromptPlaceholders(data);
+  // Secondary producers enter this shared writer directly, so they need the
+  // same pre-write specificity/canton gate as the primary AI path.
+  assertGeneratedArticleQuality(data, {
+    cantonBody: data._cantonGuardBodyBeforeCta,
+  });
   // La postcondizione sui nomi propri deve coprire anche i producer secondari
   // che entrano direttamente qui: free-MT rifiutato e fallback LLM possono
   // perdere un comune dall'excerpt, e l'imageAlt del giornalista non passa dal
@@ -16931,7 +17029,7 @@ export { buildBodyFile };
 // own en/de/fr slugs (deriveLocaleSlugs()) but, before this fix, never
 // validated them against the registry — the same gap that historically only
 // existed for the IT slug in the AI path.
-export { translateArticle, enforceStrongInternalLinks, findBestFallbackImage, pickAuthorForTopic, getAuthorByUid, sanitizeBoldFormatting, validateAndEnforceCTA, optimizeSeoMetadata, checkTranslatedSlugCollisions, assertNoFabricatedReferences, assertNoFabricatedLaborOfficeCrossLocale };
+export { translateArticle, enforceStrongInternalLinks, findBestFallbackImage, pickAuthorForTopic, getAuthorByUid, sanitizeBoldFormatting, validateAndEnforceCTA, optimizeSeoMetadata, checkTranslatedSlugCollisions, assertNoFabricatedReferences, assertNoFabricatedLaborOfficeCrossLocale, assertGeneratedArticleQuality };
 
 // Redazione redesign (issue #3174 follow-up): the journalist now authors only
 // {title, body}; these derive the title-casing/excerpt/body1-3/cover-image
