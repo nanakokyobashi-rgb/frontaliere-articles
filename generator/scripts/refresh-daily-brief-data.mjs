@@ -13,10 +13,12 @@
  * lib/google-service-account-token.mjs — NOT firebase-admin: this repo has no
  * node_modules by design and the REST path is the supported one (same as
  * load-rc-env.mjs). Every source degrades per block (see lib/daily-brief-data);
- * only zero available blocks skips the write, and still exits 0 — a day
- * without data must not break the cron (the article generator then refuses the
- * stale snapshot on its own dateIso check). The degradation streaks are kept
- * OUT of that skipped write, in `data/daily-brief-degradation.json`, so a total
+ * source degradation itself does not fail the refresh, and only zero available
+ * blocks skips the write — a day without data must not break the cron (the
+ * article generator then refuses the stale snapshot on its own dateIso check).
+ * An Actions output-channel failure is different: it fails this step before
+ * the advanced streak can be committed. The degradation streaks are kept OUT
+ * of that skipped write, in `data/daily-brief-degradation.json`, so a total
  * blackout still counts its days (#885).
  *
  * Usage:
@@ -275,14 +277,21 @@ function printPlan(brief) {
  * bulletin gone as well. A `workflow_dispatch` cannot break the loop either: it
  * checks out the COMMITTED file, not the one the failed run left behind.
  *
- * So the alarm's job is to be impossible to miss, not to be fatal HERE: an
- * `::error::` annotation on the run plus a block in `$GITHUB_STEP_SUMMARY`,
- * while the streak keeps advancing inside a snapshot that actually gets
- * committed. The red itself is spent by a verdict step placed AFTER
- * `Commit and push` in `generate-daily-brief.yml`, which reads the crossing off
- * `DEGRADATION_CROSSED_OUTPUT`: today's edition is pushed first, the streak
- * reaches `main`, tomorrow reads `previous >= threshold` and is green again —
- * the red is spent once, on the crossing edition, without costing a bulletin.
+ * So the alarm's job is to be impossible to miss, not to be fatal HERE when
+ * its output channel is healthy: an `::error::` annotation on the run plus a
+ * block in `$GITHUB_STEP_SUMMARY`, while the streak keeps advancing inside a
+ * snapshot that actually gets committed. The red itself is spent by a verdict
+ * step placed AFTER `Commit and push` in `generate-daily-brief.yml`, which
+ * reads the crossing off `DEGRADATION_CROSSED_OUTPUT`: today's edition is
+ * pushed first, the streak reaches `main`, tomorrow reads
+ * `previous >= threshold` and is green again — the red is spent once, on the
+ * crossing edition, without costing a bulletin.
+ *
+ * The exception is a failed append to either required Actions output. Both
+ * writes are attempted, then the refresh marks itself non-zero. Because this
+ * happens after the local snapshot write but before the workflow's `Commit and
+ * push`, the advanced streak cannot reach `main` and the crossing is not
+ * consumed while its failure remains unambiguous.
  *
  * A crossing this run will NOT record (`persisted: false` — the dry self-test,
  * which writes nothing at all) is announced and never turned into a verdict:
@@ -301,16 +310,16 @@ function printPlan(brief) {
 export const DEGRADATION_CROSSED_OUTPUT = 'degradation_crossed';
 export const DEGRADATION_BLOCKS_OUTPUT = 'degradation_blocks';
 
-/** Append `key=value` to `$GITHUB_OUTPUT`; a no-op outside Actions. */
+/** Append `key=value` to `$GITHUB_OUTPUT`; return whether the write succeeded. */
 function publishStepOutput(key, value) {
   const file = process.env.GITHUB_OUTPUT;
-  if (!file) return;
+  if (!file) return true;
   try {
     appendFileSync(file, `${key}=${value}\n`);
+    return true;
   } catch (err) {
-    // The crossing is already an ::error:: annotation and a summary block:
-    // losing the channel to the gate step must not also lose today's edition.
     console.warn(`⚠️  could not write ${key} to GITHUB_OUTPUT: ${err.message}`);
+    return false;
   }
 }
 
@@ -354,8 +363,14 @@ export function reportDegradationAlarms(brief, { dryRun, previous = null, persis
     console.warn(`⚠️  this run writes no snapshot, so the crossing is not recorded — announced only, never a verdict: it would repeat identically tomorrow.`);
     return;
   }
-  publishStepOutput(DEGRADATION_CROSSED_OUTPUT, 'true');
-  publishStepOutput(DEGRADATION_BLOCKS_OUTPUT, crossed.map((a) => a.block).join(', '));
+  const outputsPublished = [
+    publishStepOutput(DEGRADATION_CROSSED_OUTPUT, 'true'),
+    publishStepOutput(DEGRADATION_BLOCKS_OUTPUT, crossed.map((a) => a.block).join(', ')),
+  ].every(Boolean);
+  if (!outputsPublished) {
+    console.error('❌ could not publish the degradation verdict to GITHUB_OUTPUT — failing this step so the advanced streak is not committed');
+    process.exitCode = 1;
+  }
 }
 
 async function main() {
@@ -388,9 +403,10 @@ async function main() {
   writeJsonAtomic(OUTPUT_PATH, brief);
   writeDegradationState(brief);
   console.log(`✅ wrote ${path.relative(REPO_ROOT, OUTPUT_PATH)} (${brief.counts.availableBlocks}/4 blocks).`);
-  // After the write, never before: the alarm sets a non-zero exit code, and the
-  // snapshot must still land so the streak advances and the edition remains
-  // renderable from it.
+  // After the write, never before: a healthy output channel keeps this step
+  // green so the snapshot lands and the gate spends the red after the commit.
+  // A failed output append marks this step non-zero, so the workflow leaves the
+  // advanced streak uncommitted instead of consuming an unreadable crossing.
   reportDegradationAlarms(brief, { dryRun, previous });
 }
 
