@@ -58,6 +58,8 @@ import {
   latestSeoPublication,
   listedFloor,
   countSourceSitemapEntries,
+  countSourceArchiveSitemapUrls,
+  ARCHIVE_SITEMAP,
   sectionFloor,
 } from '../../scripts/lib/corpus-floors.mjs';
 import {
@@ -116,6 +118,9 @@ function writeHealthyFeeds(dir) {
     const count = countSourceArticles(ROOT, section);
     fs.writeFileSync(join(dir, file), `<urlset>${'<url>x</url>'.repeat(count)}</urlset>`);
   }
+  const archiveCount = ['frontaliere', 'svizzera']
+    .reduce((total, section) => total + countSourceArchiveSitemapUrls(ROOT, section), 0);
+  fs.writeFileSync(join(dir, ARCHIVE_SITEMAP), `<urlset>${'<url>x</url>'.repeat(archiveCount)}</urlset>`);
 }
 
 test('floorFrom scala col valore atteso e non produce mai un pavimento negativo', () => {
@@ -183,6 +188,36 @@ test('il floor sitemap conta una sola volta le entry IT effettivamente emesse', 
   );
 });
 
+test('il denominatore sitemap non si abbassa insieme a una slug map troncata', () => {
+  const dir = fs.mkdtempSync(join(os.tmpdir(), 'api-floors-sitemap-source-'));
+  try {
+    fs.mkdirSync(join(dir, 'content'), { recursive: true });
+    fs.mkdirSync(join(dir, 'engine', 'shared'), { recursive: true });
+    fs.writeFileSync(
+      join(dir, 'content', 'blog-articles-data.ts'),
+      "export const ARTICLES = [\n  {\n    id: 'kept',\n  },\n  {\n    id: 'shadowed',\n  },\n  {\n    id: 'missing-slug',\n  },\n];\n",
+    );
+    fs.writeFileSync(
+      join(dir, 'content', 'routerBlogData.ts'),
+      "export const BLOG_SLUGS = {\n" +
+        "  'kept': { it: 'kept', en: 'kept-en', de: 'kept-de', fr: 'kept-fr' },\n" +
+        "  'shadowed': { it: 'shadowed', en: 'shadowed-en', de: 'shadowed-de', fr: 'shadowed-fr' },\n" +
+        '};\n',
+    );
+    fs.writeFileSync(
+      join(dir, 'engine', 'shared', 'frontaliere-article-canonical-overrides.json'),
+      JSON.stringify({ overrides: { shadowed: 'https://example.test/winner/' } }),
+    );
+
+    // Il vecchio conteggio builder-based avrebbe restituito 1 (kept): il
+    // riferimento deve invece restare a 2, cosi' l'entry senza slug abbassa
+    // l'artefatto ma non il suo floor.
+    assert.equal(countSourceSitemapEntries(dir, 'frontaliere'), 2);
+  } finally {
+    fs.rmSync(dir, { recursive: true, force: true });
+  }
+});
+
 test("la superficie reale del 2026-09-05 passa: il pavimento non e' stretto", () => {
   const { measured, expected } = healthy();
   assert.deepEqual(floorViolations(measured, expected), []);
@@ -221,6 +256,25 @@ test('le sitemap articolo hanno un pavimento derivato e non possono sparire dall
   assert.equal(missing.length, 2);
   assert.match(missing.join('\n'), /sitemap-blog\.xml assente/);
   assert.match(missing.join('\n'), /sitemap-blog-ch\.xml assente/);
+});
+
+test('la sitemap archive viene misurata e ha un floor indipendente', () => {
+  const { measured, expected } = healthy();
+  const withArchiveSource = {
+    ...expected,
+    sourceArchiveSitemapUrls: { frontaliere: 100, svizzera: 100 },
+  };
+  const short = {
+    ...measured,
+    sitemaps: { ...measured.sitemaps, [ARCHIVE_SITEMAP]: 179 },
+  };
+  const violations = floorViolations(short, withArchiveSource);
+  assert.equal(violations.length, 1);
+  assert.match(violations[0], /sitemap-articles-archive\.xml: 179 url contro 200/);
+
+  const missing = floorViolations(measured, withArchiveSource);
+  assert.equal(missing.length, 1);
+  assert.match(missing[0], /sitemap-articles-archive\.xml assente/);
 });
 
 test("un contatore mancante e' una violazione, non un pass silenzioso", () => {
@@ -621,6 +675,10 @@ test("il corpus di questo checkout e' la verita' di terra, e regge i due contato
   assert.ok(expected.sourceArticles.svizzera > 500, `svizzera: ${expected.sourceArticles.svizzera}`);
   assert.equal(expected.rssMaxItems, 50, 'RSS_MAX_ITEMS arriva da engine/rssFeeds.mjs, non da una copia');
   assert.equal(expected.sourceArticles.frontaliere, countSourceArticles(ROOT, 'frontaliere'));
+  assert.deepEqual(expected.sourceArchiveSitemapUrls, {
+    frontaliere: countSourceArchiveSitemapUrls(ROOT, 'frontaliere'),
+    svizzera: countSourceArchiveSitemapUrls(ROOT, 'svizzera'),
+  });
 });
 
 test('i feed di questo checkout sono gatati contro i chunk che li generano', async () => {
@@ -842,12 +900,16 @@ test('build-api usa il parser SEO condiviso, non una terza finestra locale', () 
   assert.match(build, /collectSeoEntryMetadata/);
   assert.doesNotMatch(build, /const entryRe = \/'blog-\(\[\^'\]\+\):\\s\*\\{\/g/);
   assert.doesNotMatch(build, /start \+ 4000/);
-  assert.match(build, /countSitemapEntries\(ARTICLES/);
-  assert.match(build, /countSitemapEntries\(SWISS_ARTICLES/);
+  assert.match(build, /countSourceSitemapEntries\(ROOT, 'frontaliere'\)/);
+  assert.match(build, /countSourceSitemapEntries\(ROOT, 'svizzera'\)/);
+  assert.doesNotMatch(build, /countSitemapEntries\(ARTICLES/);
+  assert.doesNotMatch(build, /countSitemapEntries\(SWISS_ARTICLES/);
   assert.match(build, /const floor = sectionFloor\(ROOT, section\)/);
   assert.match(build, /if \(total < floor\)/);
   assert.match(build, /sectionFloor\(ROOT, section\)/);
   assert.match(build, /ARTICLES_PAGE_SIZE/);
+  assert.match(build, /sitemapArchiveUrls: sitemapCounts\.archive/);
+  assert.match(build, /sitemapArchiveUrls: sitemapUrls\(ARCHIVE_SITEMAP\)/);
   assert.doesNotMatch(build, /sitemapCounts\.blog < 100/);
   assert.doesNotMatch(build, /sitemapCounts\.archive < 8/);
   assert.doesNotMatch(build, /archiveFloor/);
@@ -878,6 +940,11 @@ test("publish-api.yml non porta piu' un pavimento assoluto scritto a mano", () =
     WORKFLOW,
     /^      - 'scripts\/lib\/corpus-floors\.mjs'$/m,
     'la sorgente dei floor deve rilanciare il publisher quando cambia',
+  );
+  assert.match(
+    WORKFLOW,
+    /^      - 'scripts\/lib\/build-sitemap\.mjs'$/m,
+    'l\'emitter sitemap deve rilanciare il publisher quando cambia',
   );
 });
 

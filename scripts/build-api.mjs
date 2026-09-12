@@ -76,7 +76,7 @@ import {
 // Pure XML builder, no .ts imports on purpose (see that file's header): lets
 // generator/tests/frontaliere-sitemap-shadow.test.mjs exercise it directly
 // under plain `node --test`, without a tsx subprocess.
-import { SITE, xmlEsc, SECTION_PATHS, buildSitemap, countSitemapEntries } from './lib/build-sitemap.mjs';
+import { SITE, xmlEsc, SECTION_PATHS, buildSitemap } from './lib/build-sitemap.mjs';
 import { isReservedPublishedSlug } from './lib/published-slug-guard.mjs';
 // Detection (not filtering — see its header) for issue #166: surfaces a
 // same-day canonical-override landing on a still-in-window ticker article.
@@ -88,7 +88,9 @@ import { countXmlTags } from './lib/count-xml-tags.mjs';
 import {
   collectSeoEntryMetadata,
   floorFrom,
+  ARCHIVE_SITEMAP,
   SECTION_SITEMAPS,
+  countSourceSitemapEntries,
   sectionFloor,
 } from './lib/corpus-floors.mjs';
 
@@ -304,14 +306,16 @@ const sitemapCounts = {
     buildSitemap(SWISS_ARTICLES, 'svizzera', swissSlugs.SWISS_SLUGS, metaChIt, shadowedSwissSlugs),
   ),
 };
-// I pavimenti sono relativi alle entry IT che il builder puo' davvero emettere,
-// non a `registry.length - shadowed.size`: gli override hanno una chiave per
+// I pavimenti sono relativi al registro IT meno le esclusioni esplicite già
+// validate (canonical override e daily edition ritirate), non al predicato del
+// builder: un filtro nuovo o una slug map troncata deve far scattare il floor,
+// non abbassarlo insieme alla sitemap. Gli override hanno una chiave per
 // locale, mentre questa sitemap ha una sola URL per articolo. Il vecchio `< 100`
 // proteggeva il 2,6% del corpus frontaliere e non proteggeva affatto la sitemap
 // svizzera; un parse troncato restava quindi pubblicabile senza errori.
 const sitemapSources = {
-  blog: countSitemapEntries(ARTICLES, blogSlugs.BLOG_SLUGS, frontaliereSitemapShadow),
-  blogCh: countSitemapEntries(SWISS_ARTICLES, swissSlugs.SWISS_SLUGS, shadowedSwissSlugs),
+  blog: countSourceSitemapEntries(ROOT, 'frontaliere'),
+  blogCh: countSourceSitemapEntries(ROOT, 'svizzera'),
 };
 for (const [key, file] of [
   ['blog', SECTION_SITEMAPS.frontaliere],
@@ -404,9 +408,9 @@ function buildArchiveSitemap() {
   };
 }
 
-sitemapCounts.archive = writeXml('sitemap-articles-archive.xml', buildArchiveSitemap());
+sitemapCounts.archive = writeXml(ARCHIVE_SITEMAP, buildArchiveSitemap());
 console.log(
-  `[build-api] sitemap-articles-archive.xml: ${sitemapCounts.archive} urls ` +
+  `[build-api] ${ARCHIVE_SITEMAP}: ${sitemapCounts.archive} urls ` +
     `(pages derived from ${Object.entries(archiveSources)
       .map(([section, { total, floor, pages }]) => `${section}=${total} entries/${floor} floor/${pages} pages`)
       .join(', ')})`,
@@ -858,6 +862,7 @@ write('manifest.json', {
     swissArticles: SWISS_ARTICLES.length,
     sitemapBlogUrls: sitemapCounts.blog,
     sitemapBlogChUrls: sitemapCounts.blogCh,
+    sitemapArchiveUrls: sitemapCounts.archive,
     rssFeeds: rssFeedCount,
     rssItems: rssItemTotal,
     tickerArticles: tickerArticles.length,
@@ -1010,6 +1015,7 @@ console.log(`[build-api] wrote ${Object.keys(written).length} files to dist/api`
     swissArticles: derivedAlways('swiss-articles.json', () => jsonOut('swiss-articles.json').length),
     sitemapBlogUrls: sitemapUrls(SECTION_SITEMAPS.frontaliere),
     sitemapBlogChUrls: sitemapUrls(SECTION_SITEMAPS.svizzera),
+    sitemapArchiveUrls: sitemapUrls(ARCHIVE_SITEMAP),
     rssFeeds: feeds.length,
     rssItems: feeds.reduce((total, xml) => total + countXmlTags(xml, 'item'), 0),
     tickerArticles: derivedAlways('news-ticker-live.json', () => jsonOut('news-ticker-live.json').articles.length),

@@ -30,7 +30,6 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { execFileSync } from 'node:child_process';
 import { findAllSeoEntryMatches } from './seo-entry.mjs';
-import { countSitemapEntries } from './build-sitemap.mjs';
 import { selectRetiredDailyEditions } from '../../generator/scripts/lib/daily-brief-content.mjs';
 
 /**
@@ -207,6 +206,9 @@ export const SECTION_SITEMAPS = {
   frontaliere: 'sitemap-blog.xml',
   svizzera: 'sitemap-blog-ch.xml',
 };
+
+export const ARCHIVE_SITEMAP = 'sitemap-articles-archive.xml';
+export const ARCHIVE_PAGE_SIZE = 100;
 
 /** Slug maps read by the runtime sitemap writer, per section. */
 const SECTION_SLUG_FILES = {
@@ -555,14 +557,13 @@ export function countSourceArticles(root, section) {
 }
 
 /**
- * Quante entry IT promette davvero la sitemap, usando gli stessi input e la
- * stessa regola di emissione del writer.
+ * Quante entry IT promette il corpus alla sitemap.
  *
- * Il file degli override ha una chiave per locale; il writer invece emette un
- * solo `<url>` per articolo e controlla solo lo slug IT. Derivare il floor da
- * `Object.keys(overrides).length` sottrae quindi quattro volte gli articoli
- * shadowed. Questa funzione fa passare entrambi i lati dalla stessa
- * cardinalità effettiva, inclusa la retention delle daily edition.
+ * Il denominatore parte dal registro, non dal predicato del writer: un nuovo
+ * filtro o una mappa slug troncata deve far scattare il floor, non abbassarlo
+ * insieme all'artefatto. Si sottraggono solo le esclusioni già dichiarate nei
+ * dati di canonical override o nella retention delle daily edition, mappate
+ * esplicitamente allo slug IT di una entry del registro.
  */
 export function countSourceSitemapEntries(root, section) {
   const registry = readRegistryData(root, section);
@@ -576,11 +577,22 @@ export function countSourceSitemapEntries(root, section) {
     }
   }
 
-  return countSitemapEntries(
-    registry.entryIds.map((id) => ({ id })),
-    slugMap,
-    shadowed,
-  );
+  return registry.entryIds.filter((id) => !shadowed.has(slugMap[id]?.it)).length;
+}
+
+/**
+ * Cardinalità attesa dell'archive sitemap, derivata dai due input che il
+ * writer TS unisce: meta title-keys IT e chiavi della slug map. Il conteggio
+ * resta indipendente dal documento XML scritto, così la verifica può
+ * distinguere un corpus corto da una serializzazione corta.
+ */
+export function countSourceArchiveSitemapUrls(root, section) {
+  const metaRel = path.join('content', `${SECTION_META_PREFIXES[section]}it.ts`);
+  const metaIds = metadataArticleIds(readReference(root, metaRel, `${section} Italian metadata`));
+  const slugMap = readSlugMap(root, section);
+  const unionSize = new Set([...metaIds, ...Object.keys(slugMap)]).size;
+  const pages = Math.max(1, Math.ceil(unionSize / ARCHIVE_PAGE_SIZE));
+  return pages * SECTION_META_LOCALES.length;
 }
 
 /** Quante immagini hero ci sono in sorgente. */

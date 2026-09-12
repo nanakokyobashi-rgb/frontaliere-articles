@@ -33,6 +33,9 @@ on:
       # this path, changing retention or the source-count logic leaves the
       # public API on the previous build until an unrelated input changes.
       - 'scripts/lib/corpus-floors.mjs'
+      # The shared sitemap emitter is also a publisher input: changing its
+      # filtering or XML shape must republish the API immediately.
+      - 'scripts/lib/build-sitemap.mjs'
       # Same argument, one level down. build-blog-index.mjs runs in this job and
       # emits the runtime list index; sanitize-control-chars.mjs is the output
       # boundary both it and build-api.mjs pass every byte through. Watching the

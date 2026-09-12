@@ -48,7 +48,9 @@ import {
   SECTION_BODY_DIRS,
   SECTION_COUNTERS,
   SECTION_SITEMAPS,
+  ARCHIVE_SITEMAP,
   countSourceSitemapEntries,
+  countSourceArchiveSitemapUrls,
   SEO_CHUNK_DIR,
   IMAGE_SOURCE_DIR,
 } from '../lib/corpus-floors.mjs';
@@ -62,7 +64,7 @@ export const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '
 
 // Re-export per i consumer del verifier: la definizione condivisa vive nel
 // modulo dei floor, così writer e gate non possono divergere sui nomi.
-export { SECTION_COUNTERS, SECTION_SITEMAPS };
+export { SECTION_COUNTERS, SECTION_SITEMAPS, ARCHIVE_SITEMAP };
 
 /** La popolazione dei chunk ha un preallarme proprio: 90% di una run precedente.
  * Il 97% della retention degli articoli sarebbe rumore permanente per il
@@ -198,6 +200,12 @@ function sitemapSourceFloor(expected, section) {
   return expected.sourceSitemaps?.[section] ?? expected.sourceArticles?.[section] ?? 0;
 }
 
+function archiveSitemapSource(expected) {
+  return Object.values(expected.sourceArchiveSitemapUrls ?? {})
+    .filter((count) => Number.isFinite(count) && count > 0)
+    .reduce((sum, count) => sum + count, 0);
+}
+
 function feedPopulationReference(expected, section) {
   const current = expected.feedSources?.[section] ?? 0;
   const previous = expected.previousFeedSources?.[section];
@@ -269,6 +277,22 @@ export function floorViolations(measured, expected, retention = undefined) {
         violations.push(
           `${file}: ${declared} url contro ${source} articoli sorgente (pavimento ${min}) — sitemap troncata`,
         );
+      }
+    }
+
+    const archiveSource = archiveSitemapSource(expected);
+    if (archiveSource > 0) {
+      const declared = measured.sitemaps[ARCHIVE_SITEMAP];
+      if (typeof declared !== 'number') {
+        violations.push(`${ARCHIVE_SITEMAP} assente: il corpus sorgente ne richiede ${archiveSource} url`);
+      } else {
+        const min = floor(archiveSource);
+        if (declared < min) {
+          violations.push(
+            `${ARCHIVE_SITEMAP}: ${declared} url contro ${archiveSource} url sorgente ` +
+              `(pavimento ${min}) — sitemap archive troncata`,
+          );
+        }
       }
     }
   }
@@ -400,6 +424,12 @@ export function retentionReport(measured, expected) {
       const declared = measured.sitemaps[file];
       if (source <= 0 || typeof declared !== 'number') continue;
       rows.push({ kind: 'sitemap', label: file, declared, source });
+    }
+
+    const archiveSource = archiveSitemapSource(expected);
+    const declared = measured.sitemaps[ARCHIVE_SITEMAP];
+    if (archiveSource > 0 && typeof declared === 'number') {
+      rows.push({ kind: 'sitemap', label: ARCHIVE_SITEMAP, declared, source: archiveSource });
     }
   }
 
@@ -539,7 +569,7 @@ export function measureDist(distDir) {
   const missingFeeds = expectedFeedNames().filter((name) => !presentFeedNames.has(name));
 
   const sitemaps = {};
-  for (const file of Object.values(SECTION_SITEMAPS)) {
+  for (const file of [...Object.values(SECTION_SITEMAPS), ARCHIVE_SITEMAP]) {
     const absolute = path.join(distDir, file);
     if (fs.existsSync(absolute)) sitemaps[file] = countXmlTags(readOut(file), 'url');
   }
@@ -585,9 +615,11 @@ export async function expectFromCorpus(root) {
     previousFeedSources[section.id] = countSeoEntriesAtRevision(root, revision, historicalPopulationFiles);
   }
   const sourceSitemaps = {};
+  const sourceArchiveSitemapUrls = {};
   for (const section of Object.keys(SECTION_COUNTERS)) {
     try {
       sourceSitemaps[section] = countSourceSitemapEntries(root, section);
+      sourceArchiveSitemapUrls[section] = countSourceArchiveSitemapUrls(root, section);
     } catch (error) {
       // Some unit fixtures model only the body/SEO corpus because they never
       // invoke the sitemap writer. A real publish checkout has these inputs —
@@ -602,6 +634,7 @@ export async function expectFromCorpus(root) {
       svizzera: countSourceArticles(root, 'svizzera'),
     },
     ...(Object.keys(sourceSitemaps).length ? { sourceSitemaps } : {}),
+    ...(Object.keys(sourceArchiveSitemapUrls).length ? { sourceArchiveSitemapUrls } : {}),
     feedSources,
     previousFeedSources,
     latestSeoPublications,
