@@ -49,6 +49,7 @@ import {
   isDeliveredThisRun,
   lastLabelEventAt,
   latestFixOutcomeEntryFromComments,
+  outcomeForCurrentPromotion,
   recoverableFixDecision,
 } from '../../scripts/ci/followup-drainer.mjs';
 
@@ -153,9 +154,34 @@ test('crawlerFixDecision: una promozione fresca non cede un branch WIP', () => {
 });
 
 test('crawlerFixDecision: il crawler usa il checkpoint per ri-accodare max-turns', () => {
-  const d = crawlerFixDecision({ outcome: 'max-turns', ageMin: 1, hasBranchWork: true, attempt: 0 });
+  const d = crawlerFixDecision({
+    outcome: 'max-turns',
+    outcomeAt: T0 + MIN,
+    promotedAt: T0,
+    ageMin: 1,
+    hasBranchWork: true,
+    attempt: 0,
+  });
   assert.equal(d.action, 'requeue');
   assert.equal(d.nextAttempt, 1);
+});
+
+test('crawlerFixDecision: max-turns storico non recupera WIP durante una nuova promozione', () => {
+  const d = crawlerFixDecision({
+    outcome: 'max-turns',
+    outcomeAt: T0,
+    promotedAt: T0 + MIN,
+    ageMin: 1,
+    hasBranchWork: true,
+    attempt: 0,
+  });
+  assert.equal(d.action, 'settling');
+});
+
+test('outcomeForCurrentPromotion: marker precedente o date mancanti sono fail-closed', () => {
+  assert.equal(outcomeForCurrentPromotion({ outcome: 'max-turns', outcomeAt: T0, promotedAt: T0 + MIN }), null);
+  assert.equal(outcomeForCurrentPromotion({ outcome: 'max-turns', outcomeAt: T0 + MIN, promotedAt: T0 }), 'max-turns');
+  assert.equal(outcomeForCurrentPromotion({ outcome: 'max-turns', outcomeAt: T0 }), null);
 });
 
 test('il rescue queue-managed ha lo stesso ramo del gemello crawler', () => {
