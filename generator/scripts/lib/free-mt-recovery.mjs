@@ -164,9 +164,48 @@ export function wasFreeMtUnusable(report, targetLang, field) {
 }
 
 /**
- * Reserve one focused LLM retry FOR `locale`. Returns false once the effective
- * per-locale allocation or the run cap is reached. The state is mutated so the
- * same function is the only counter/decision point used by the generator.
+ * Ripartisce il cap globale in modo deterministico, usando solo i locali che
+ * hanno davvero campi rifiutati. La capacita' di un locale e' il minimo fra
+ * il suo cap dinamico e i campi rifiutati: cosi' un locale con due soli campi
+ * non trattiene una quota inutilizzata che il locale successivo non potrebbe
+ * piu' recuperare nel loop `en` → `de` → `fr`.
+ */
+function fairFreeMtFallbackAllocations(report, faqCount, bodyFieldCount) {
+  const rejectedFieldKeys = Object.keys(report.unusableFields || {});
+  const pendingLocales = FREE_MT_LLM_FALLBACK_LOCALES.filter((candidate) => {
+    const rejectedCount = rejectedFieldKeys.filter((fieldKey) => fieldKey.startsWith(`${candidate}:`)).length;
+    return rejectedCount > 0;
+  });
+  if (pendingLocales.length === 0) return null;
+
+  const capacities = Object.fromEntries(pendingLocales.map((locale) => {
+    const rejectedCount = rejectedFieldKeys.filter((fieldKey) => fieldKey.startsWith(`${locale}:`)).length;
+    return [
+      locale,
+      Math.min(rejectedCount, maxFreeMtLlmFallbacksPerLocale(faqCount, bodyFieldCount)),
+    ];
+  }));
+  const allocations = Object.fromEntries(pendingLocales.map((locale) => [locale, 0]));
+  let remainingBudget = MAX_FREE_MT_LLM_FALLBACKS_PER_RUN;
+  while (remainingBudget > 0) {
+    let allocatedThisRound = false;
+    for (const locale of pendingLocales) {
+      if (remainingBudget === 0) break;
+      if (allocations[locale] >= capacities[locale]) continue;
+      allocations[locale] += 1;
+      remainingBudget -= 1;
+      allocatedThisRound = true;
+    }
+    if (!allocatedThisRound) break;
+  }
+  return allocations;
+}
+
+/**
+ * Riserva un retry LLM mirato per `locale`. Le assegnazioni vengono calcolate
+ * sul set completo dei campi rifiutati a ogni chiamata, quindi restano stabili
+ * durante il loop e trasferiscono subito il budget non utilizzabile da un
+ * locale ai locali successivi. Lo stato viene mutato in un solo punto.
  *
  * Vedi `MAX_FREE_MT_LLM_FALLBACKS_PER_LOCALE`: il `locale` non e' opzionale
  * nella sostanza — senza, tutti i claim finirebbero nello stesso secchio e la
@@ -187,28 +226,15 @@ export function claimFreeMtLlmFallback(
   const key = locale || '?';
   const usedHere = report.llmFallbacksByLocale[key] || 0;
   const localeLimit = maxFreeMtLlmFallbacksPerLocale(faqCount, bodyFieldCount);
-  const rejectedFieldKeys = Object.keys(report.unusableFields || {});
-  const rejectedFieldsByLocale = Object.fromEntries(
-    FREE_MT_LLM_FALLBACK_LOCALES.map((candidate) => [
-      candidate,
-      rejectedFieldKeys.filter((fieldKey) => fieldKey.startsWith(`${candidate}:`)).length,
-    ]),
-  );
-  // Allocate the global cap before allowing a dynamic locale cap to dominate:
-  // with all three locales pending, the seven claims become 3/2/2 instead of
-  // 5/1/1 for an article with three body fields and three FAQ pairs. A report
-  // without rejected fields is only used by direct callers/tests; keep its
-  // historical single-locale behavior, since production calls this function
-  // only for a field recorded by free-MT.
-  const pendingLocales = rejectedFieldKeys.length > 0
-    ? FREE_MT_LLM_FALLBACK_LOCALES.filter((candidate) =>
-      rejectedFieldsByLocale[candidate] > (report.llmFallbacksByLocale[candidate] || 0))
-    : [key];
-  const pendingLocaleIndex = pendingLocales.indexOf(key);
-  const fairLocaleLimit = pendingLocaleIndex === -1
-    ? localeLimit
-    : Math.floor(MAX_FREE_MT_LLM_FALLBACKS_PER_RUN / pendingLocales.length)
-      + (pendingLocaleIndex < MAX_FREE_MT_LLM_FALLBACKS_PER_RUN % pendingLocales.length ? 1 : 0);
+  // Con tre locali e capacita' sufficiente il round-robin produce `3,2,2`.
+  // Se `en` ha solo due campi, la sua capacita' e' due e il budget residuo
+  // diventa subito disponibile: `2,3,2`, non `2,4,1`. Un report senza campi
+  // rifiutati e' usato solo da chiamanti/test legacy e conserva il limite
+  // dinamico del singolo locale.
+  const fairAllocations = fairFreeMtFallbackAllocations(report, faqCount, bodyFieldCount);
+  const fairLocaleLimit = fairAllocations
+    ? (Object.prototype.hasOwnProperty.call(fairAllocations, key) ? fairAllocations[key] : 0)
+    : localeLimit;
   if (usedHere >= Math.min(localeLimit, fairLocaleLimit)
     || (report.llmFallbacks || 0) >= MAX_FREE_MT_LLM_FALLBACKS_PER_RUN) {
     report.llmFallbackCapped = true;

@@ -473,9 +473,23 @@ function reportConCapEsaurito(coppieRifiutate = [], localiEsauriti = ['de']) {
   }
   // La quota e' PER LOCALE (#831: un budget globale si svuotava tutto su `en`
   // e lasciava `de`/`fr` senza recovery), quindi va esaurita sul locale che il
-  // test esercita, non con N claim anonimi.
+  // test esercita, con campi rifiutati reali e non con claim anonimi. `body1`
+  // resta libero per il test che verifica il campo NON rifiutato dal free-MT.
+  const quotaProbeFields = ['title', 'excerpt', 'body2', 'body3'];
   for (const locale of localiEsauriti) {
-    for (let i = 0; i < MAX_FREE_MT_LLM_FALLBACKS_PER_LOCALE; i += 1) claimFreeMtLlmFallback(report, locale);
+    const alreadyRejected = new Set(
+      Object.keys(report.unusableFields || {}).filter((key) => key.startsWith(`${locale}:`)),
+    );
+    for (const field of quotaProbeFields) {
+      const fieldKey = `${locale}:${field}`;
+      if (alreadyRejected.has(fieldKey)) continue;
+      recordFreeMtUnusableOutput(report, { reason: 'unusable-text', targetLang: locale, field });
+      alreadyRejected.add(fieldKey);
+      if (alreadyRejected.size >= MAX_FREE_MT_LLM_FALLBACKS_PER_LOCALE) break;
+    }
+    for (let i = 0; i < MAX_FREE_MT_LLM_FALLBACKS_PER_LOCALE; i += 1) {
+      claimFreeMtLlmFallback(report, locale);
+    }
   }
   return report;
 }

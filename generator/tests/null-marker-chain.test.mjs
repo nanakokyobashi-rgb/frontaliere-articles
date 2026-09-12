@@ -411,6 +411,33 @@ describe('free-MT recovery — il degrado e’ misurato e limitato per run', () 
     assert.equal(report.llmFallbacks, MAX_FREE_MT_LLM_FALLBACKS_PER_RUN);
   });
 
+  test('#1320 FU-039 — il budget residuo passa al locale successivo senza sbilanciarlo', () => {
+    const report = createFreeMtRecoveryReport({ faqCount: 3, bodyFieldCount: 3 });
+    const fieldsByLocale = {
+      en: ['title', 'excerpt'],
+      de: ['title', 'excerpt', 'body1', 'body2', 'body3', 'faq.q[0]', 'faq.a[0]'],
+      fr: ['title', 'excerpt', 'body1', 'body2', 'body3', 'faq.q[0]', 'faq.a[0]'],
+    };
+    const spesi = Object.fromEntries(FREE_MT_LLM_FALLBACK_LOCALES.map((locale) => [locale, 0]));
+    for (const [locale, fields] of Object.entries(fieldsByLocale)) {
+      for (const field of fields) {
+        recordFreeMtUnusableOutput(report, { reason: 'unusable-text', targetLang: locale, field });
+      }
+    }
+
+    // Il loop reale consuma en prima: i suoi due soli rifiuti devono liberare
+    // una claim per de/fr, non lasciare il residuo a una ripartizione 4/1.
+    for (const locale of FREE_MT_LLM_FALLBACK_LOCALES) {
+      for (const field of fieldsByLocale[locale]) {
+        if (claimFreeMtLlmFallback(report, locale)) spesi[locale] += 1;
+      }
+    }
+
+    assert.equal(maxFreeMtLlmFallbacksPerLocale(3, 3), 5);
+    assert.deepEqual(spesi, { en: 2, de: 3, fr: 2 });
+    assert.equal(report.llmFallbacks, MAX_FREE_MT_LLM_FALLBACKS_PER_RUN);
+  });
+
   test('#1320 FU-036 — il cap considera solo i locali con campi rifiutati', () => {
     const report = createFreeMtRecoveryReport({ faqCount: 2 });
     const faqFields = [
