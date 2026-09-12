@@ -307,6 +307,7 @@ function goodSurface() {
   }
   return {
     manifest: { counts: { articles: 150, swissArticles: 1 } },
+    sourceCounts: { frontaliere: 150, svizzera: 1 },
     slugs: { blog, swiss: { sw1: { it: 'sw1' } } },
     articles,
     swissArticles: [{ id: 'sw1', date: '2026-01-01' }],
@@ -315,6 +316,14 @@ function goodSurface() {
 
 test('una superficie coerente passa', () => {
   assert.deepEqual(validateAnnouncedSurface(goodSurface()), []);
+});
+
+test('un riferimento sorgente mancante blocca la riconciliazione invece di azzerare il floor', () => {
+  const s = goodSurface();
+  delete s.sourceCounts;
+  const errors = validateAnnouncedSurface(s);
+  assert.equal(errors.length, 2);
+  assert.match(errors.join('\n'), /riferimento del pavimento assente/);
 });
 
 test('slugs troncato rispetto al manifest viene rifiutato', () => {
@@ -346,11 +355,12 @@ test('lo stesso vale per la sezione svizzera', () => {
   assert.ok(errors.some((e) => e.includes('slugs.swiss')), errors.join('; '));
 });
 
-test('un registro sotto il floor dei 100 articoli viene rifiutato', () => {
+test('una superficie sotto il pavimento derivato viene rifiutata anche sopra il vecchio 100', () => {
   const s = goodSurface();
-  s.manifest.counts.articles = 42;
+  s.sourceCounts.frontaliere = 200;
+  s.manifest.counts.articles = 150;
   const errors = validateAnnouncedSurface(s);
-  assert.ok(errors.some((e) => e.includes('42')), errors.join('; '));
+  assert.ok(errors.some((e) => e.includes('150 contro 200') && e.includes('pavimento 180')), errors.join('; '));
 });
 
 test('un registro con id duplicati o mancanti viene rifiutato prima del confronto per insieme', () => {

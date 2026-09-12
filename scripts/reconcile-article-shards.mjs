@@ -62,6 +62,13 @@ import os from 'node:os';
 import path from 'node:path';
 import { execFileSync } from 'node:child_process';
 import { fileURLToPath, pathToFileURL } from 'node:url';
+import {
+  countSourceArticles,
+  floorFrom,
+  missingCorpusMessage,
+  SECTION_COUNTERS,
+  SECTION_BODY_DIRS,
+} from './lib/corpus-floors.mjs';
 
 const ROOT_DIR = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 
@@ -90,17 +97,33 @@ export function expectedShardPath(baseSlug, locale, slug) {
  * Rifiuta una superficie annunciata troncata PRIMA di usarla. Un fetch
  * parziale di slugs.json che perdesse metà delle chiavi non deve produrre
  * né falsi «tutto presente» né (peggio) una lista di mancanti sbagliata.
+ * `sourceCounts` e' il riferimento indipendente ricontato dal checkout che
+ * esegue la riconciliazione: il manifest e le tre liste dell'API potrebbero
+ * essere tutte coerentemente troncate nello stesso fetch.
+ *
  * Ritorna la lista dei problemi; vuota = superficie coerente.
  */
-export function validateAnnouncedSurface({ manifest, slugs, articles, swissArticles }) {
+export function validateAnnouncedSurface({ manifest, slugs, articles, swissArticles, sourceCounts }) {
   const errors = [];
   const counts = manifest && manifest.counts;
   if (!counts || typeof counts.articles !== 'number' || typeof counts.swissArticles !== 'number') {
     errors.push('manifest.json senza counts.articles/counts.swissArticles');
     return errors;
   }
-  // Stesso floor di publish-api.yml («refusing to publish» sotto 100).
-  if (counts.articles < 100) errors.push(`manifest riporta solo ${counts.articles} articoli`);
+  for (const [section, counter] of Object.entries(SECTION_COUNTERS)) {
+    const source = sourceCounts?.[section];
+    if (!Number.isFinite(source) || source <= 0) {
+      errors.push(missingCorpusMessage(`manifest.counts.${counter}`, SECTION_BODY_DIRS[section]));
+      continue;
+    }
+    const minimum = floorFrom(source);
+    if (counts[counter] < minimum) {
+      errors.push(
+        `manifest.counts.${counter}: ${counts[counter]} contro ${source} articoli sorgente ` +
+          `(pavimento ${minimum}) — superficie annunciata troncata`,
+      );
+    }
+  }
   const blogKeys = slugs && slugs.blog ? Object.keys(slugs.blog).length : 0;
   const swissKeys = slugs && slugs.swiss ? Object.keys(slugs.swiss).length : 0;
   if (blogKeys !== counts.articles) {
@@ -332,7 +355,10 @@ async function main() {
   const articles = await fetchJson(`${apiBase}/articles.json`);
   const swissArticles = await fetchJson(`${apiBase}/swiss-articles.json`);
 
-  const surfaceErrors = validateAnnouncedSurface({ manifest, slugs, articles, swissArticles });
+  const sourceCounts = Object.fromEntries(
+    SECTIONS.map(({ section }) => [section, countSourceArticles(ROOT_DIR, section)]),
+  );
+  const surfaceErrors = validateAnnouncedSurface({ manifest, slugs, articles, swissArticles, sourceCounts });
   if (surfaceErrors.length > 0) {
     for (const e of surfaceErrors) console.error(`::error::[reconcile] superficie annunciata incoerente: ${e}`);
     process.exit(1);

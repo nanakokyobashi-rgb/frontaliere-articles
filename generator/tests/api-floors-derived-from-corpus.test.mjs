@@ -13,6 +13,9 @@
  * non c'era pavimento affatto. Stesso difetto, stessa classe, in
  * `scripts/build-blog-index.mjs`: `MIN_ENTRIES = 50` contro le stesse due
  * sezioni da 3785 e 1850 file di corpo.
+ * La stessa classe era rimasta in due writer di sitemap: `sitemap-blog.xml`
+ * controllava solo una soglia assoluta di 100 e la sitemap svizzera non aveva
+ * alcun controllo; il verifier non misurava neppure quei due output.
  *
  * LA ROOT CAUSE NON E' IL NUMERO. E' che il numero e' ASSOLUTO: tarato una
  * volta contro il corpus di quel giorno, non si muove piu' mentre il corpus
@@ -52,10 +55,12 @@ import {
   collectSeoFeedEntryMetadata,
   unescapeQuoted,
   latestSeoPublication,
+  listedFloor,
   sectionFloor,
 } from '../../scripts/lib/corpus-floors.mjs';
 import {
   SECTION_COUNTERS,
+  SECTION_SITEMAPS,
   feedSection,
   expectedFeedNames,
   floorViolations,
@@ -93,6 +98,7 @@ function healthy() {
       { name: 'rss-svizzera.xml', items: 50 },
       { name: 'rss-svizzera-de.xml', items: 50 },
     ],
+    sitemaps: { 'sitemap-blog.xml': 3782, 'sitemap-blog-ch.xml': 1850 },
     images: 1990,
   };
   return { measured, expected };
@@ -103,6 +109,10 @@ function writeHealthyFeeds(dir) {
   const item = `<item><pubDate>${pubDate}</pubDate></item>`;
   const xml = `<rss><channel>${item.repeat(50)}</channel></rss>`;
   for (const name of expectedFeedNames(RSS_SECTIONS)) fs.writeFileSync(join(dir, name), xml);
+  for (const [section, file] of Object.entries(SECTION_SITEMAPS)) {
+    const count = countSourceArticles(ROOT, section);
+    fs.writeFileSync(join(dir, file), `<urlset>${'<url>x</url>'.repeat(count)}</urlset>`);
+  }
 }
 
 test('floorFrom scala col valore atteso e non produce mai un pavimento negativo', () => {
@@ -112,6 +122,12 @@ test('floorFrom scala col valore atteso e non produce mai un pavimento negativo'
   assert.equal(floorFrom(Number.NaN), 0);
   // Il punto della fix: il pavimento cresce col corpus invece di restare fermo.
   assert.ok(floorFrom(3785) > floorFrom(100));
+});
+
+test('listedFloor scala con il registro dopo le esclusioni legittime', () => {
+  assert.equal(listedFloor(1000, 10), floorFrom(990));
+  assert.equal(listedFloor(1000, 2000), 0);
+  assert.throws(() => listedFloor(0), /registro degli articoli/);
 });
 
 test("la superficie reale del 2026-09-05 passa: il pavimento non e' stretto", () => {
@@ -135,6 +151,23 @@ test('swissArticles ha un pavimento, che prima mancava del tutto', () => {
   const violations = floorViolations(truncated, expected);
   assert.equal(violations.length, 1);
   assert.match(violations[0], /counts\.swissArticles: 40 contro 1850/);
+});
+
+test('le sitemap articolo hanno un pavimento derivato e non possono sparire dalla misura', () => {
+  const { measured, expected } = healthy();
+  const truncated = {
+    ...measured,
+    sitemaps: { 'sitemap-blog.xml': 500, 'sitemap-blog-ch.xml': 40 },
+  };
+  const violations = floorViolations(truncated, expected);
+  assert.equal(violations.length, 2);
+  assert.match(violations.join('\n'), /sitemap-blog\.xml: 500 url contro 3785/);
+  assert.match(violations.join('\n'), /sitemap-blog-ch\.xml: 40 url contro 1850/);
+
+  const missing = floorViolations({ ...measured, sitemaps: {} }, expected);
+  assert.equal(missing.length, 2);
+  assert.match(missing.join('\n'), /sitemap-blog\.xml assente/);
+  assert.match(missing.join('\n'), /sitemap-blog-ch\.xml assente/);
 });
 
 test("un contatore mancante e' una violazione, non un pass silenzioso", () => {
@@ -471,6 +504,8 @@ test('measureDist riconosce i feed dal documento, non dal nome del file', () => 
   assert.ok(measured.missingFeeds.includes('rss-de.xml'), 'un feed atteso assente deve risultare mancante');
   assert.equal(measured.images, null, 'images-manifest.json assente ⇒ null, che e\' un caso valido');
   assert.equal(measured.articleCounts.articles, 7);
+  assert.equal(measured.sitemaps['sitemap-blog.xml'], 1);
+  assert.equal(measured.sitemaps['sitemap-blog-ch.xml'], undefined);
   fs.rmSync(dir, { recursive: true, force: true });
 });
 
@@ -754,6 +789,11 @@ test('build-api usa il parser SEO condiviso, non una terza finestra locale', () 
   assert.match(build, /collectSeoEntryMetadata/);
   assert.doesNotMatch(build, /const entryRe = \/'blog-\(\[\^'\]\+\):\\s\*\\{\/g/);
   assert.doesNotMatch(build, /start \+ 4000/);
+  assert.match(build, /listedFloor\(registry\.length, shadowed\.size\)/);
+  assert.match(build, /sectionFloor\(ROOT, section\)/);
+  assert.match(build, /ARTICLES_PAGE_SIZE/);
+  assert.doesNotMatch(build, /sitemapCounts\.blog < 100/);
+  assert.doesNotMatch(build, /sitemapCounts\.archive < 8/);
 });
 
 test("publish-api.yml non porta piu' un pavimento assoluto scritto a mano", () => {
@@ -836,6 +876,22 @@ test('rapporto fra preallarme e gate: warning, nessuna violazione', () => {
   assert.match(advisories[0], /preallarme/);
 });
 
+test('il preallarme osserva anche una sitemap erosa senza anticipare il gate', () => {
+  const { measured, expected } = healthy();
+  const eroded = {
+    ...measured,
+    sitemaps: {
+      ...measured.sitemaps,
+      'sitemap-blog.xml': Math.round(3785 * 0.95),
+    },
+  };
+
+  assert.deepEqual(floorViolations(eroded, expected), []);
+  const advisories = retentionAdvisories(retentionReport(eroded, expected));
+  assert.equal(advisories.length, 1);
+  assert.match(advisories[0], /sitemap-blog\.xml/);
+});
+
 test('il warning usa lo stesso pavimento intero del gate sul bordo', () => {
   // 3432/3814 = 89,984%, ma floor(3814 * 0,9) = 3432: il gate passa sul
   // bordo e il preallarme deve restare osservabile.
@@ -869,12 +925,14 @@ test('il report copre ogni rapporto che un pavimento sorveglia, coi riferimenti 
   const byLabel = Object.fromEntries(rows.map((r) => [r.label, r]));
   assert.equal(byLabel['manifest.counts.articles'].source, 3785, 'il riferimento dei corpi, non dei chunk SEO');
   assert.equal(byLabel['manifest.counts.swissArticles'].source, 1850);
+  assert.equal(byLabel['sitemap-blog.xml'].source, 3785);
+  assert.equal(byLabel['sitemap-blog-ch.xml'].source, 1850);
   // Un feed e' tagliato a RSS_MAX_ITEMS: il suo 100% e' 50 item, non 3750,
   // altrimenti ogni feed sano sembrerebbe eroso all'1%.
   assert.equal(byLabel['rss.xml'].source, Math.min(expected.rssMaxItems, expected.feedSources.frontaliere));
   assert.equal(byLabel['rss-svizzera.xml'].source, Math.min(expected.rssMaxItems, expected.feedSources.svizzera));
   assert.equal(byLabel['images-manifest.json'].source, 1990);
-  assert.equal(rows.length, 2 + 2 + measured.feeds.length + 1);
+  assert.equal(rows.length, 2 + 2 + 2 + measured.feeds.length + 1);
   assert.ok(rows.some((r) => r.label === 'chunk SEO frontaliere/run precedente'));
   assert.ok(rows.some((r) => r.label === 'chunk SEO svizzera/run precedente'));
 
@@ -942,7 +1000,7 @@ test('il report tace dove il riferimento manca: quello e\' una violazione, non u
   assert.equal(retentionRatio(10, 0), null, 'sorgente a zero non e\' un rapporto zero: e\' assenza di riferimento');
 });
 
-test('le righe stampate: i due rapporti del manifest, le immagini, e il feed piu\' magro', () => {
+test('le righe stampate: manifest, sitemap, immagini e il feed piu\' magro', () => {
   const { measured, expected } = healthy();
   const uneven = {
     ...measured,
@@ -955,9 +1013,11 @@ test('le righe stampate: i due rapporti del manifest, le immagini, e il feed piu
   };
   const lines = retentionLines(retentionReport(uneven, expected));
 
-  assert.equal(lines.length, 6, `2 manifest + 2 popolazioni + 1 feed rappresentativo + 1 immagini, ricevute: ${lines.join(' | ')}`);
+  assert.equal(lines.length, 8, `2 manifest + 2 sitemap + 2 popolazioni + 1 feed rappresentativo + 1 immagini, ricevute: ${lines.join(' | ')}`);
   assert.ok(lines.some((l) => l.startsWith('manifest.counts.articles:')));
   assert.ok(lines.some((l) => l.startsWith('manifest.counts.swissArticles:')));
+  assert.ok(lines.some((l) => l.startsWith('sitemap-blog.xml:')));
+  assert.ok(lines.some((l) => l.startsWith('sitemap-blog-ch.xml:')));
   assert.ok(lines.some((l) => l.startsWith('chunk SEO frontaliere/run precedente:')));
   assert.ok(lines.some((l) => l.startsWith('chunk SEO svizzera/run precedente:')));
   assert.ok(lines.some((l) => l.includes('rss-it.xml') && l.includes('piu\' magro')), 'il rappresentante e\' il minimo');
