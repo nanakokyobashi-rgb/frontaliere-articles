@@ -58,3 +58,10 @@ test('il push guard controlla il token che il push remote usa davvero', () => {
   assert.match(block, /env\.APP_TOKEN != '' \|\| env\.GITHUB_PAT_NANAKO != ''/);
   assert.doesNotMatch(block, /env\.GITHUB_PAT != ''/);
 });
+
+test('il job redflag-fix conserva il checkout completo senza fetch shallow della base', () => {
+  const fixerJob = src.match(/\n  redflag-fix:\n([\s\S]*?)(?=\n  [a-z][\w-]*:\n|$)/)?.[1] ?? '';
+  assert.notEqual(fixerJob, '', 'job redflag-fix non trovato');
+  assert.match(fixerJob, /fetch-depth: 0/);
+  assert.doesNotMatch(fixerJob, /git fetch[^\n]*--depth=1/);
+});
