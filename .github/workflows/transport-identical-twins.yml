@@ -334,7 +334,7 @@ jobs:
             const workflowsBlocked = process.env.PAT_WORKFLOWS_SCOPE !== "true";
             const deferred = workflowsBlocked
               ? "- Le voci `adapted` restano escluse per costruzione; i gemelli sotto `.github/workflows/` richiedono lo scope `workflows`: blocked: PAT_WORKFLOWS_SCOPE non è true per questa identità."
-              : "- Le voci `adapted` restano escluse per costruzione; i gemelli sotto `.github/workflows/` non sono bloccati dallo scope in questa passata e, se `site-ahead`, sono eleggibili al trasporto in questa PR.";
+              : "- Le voci `adapted` restano escluse per scelta; i gemelli sotto `.github/workflows/` non sono bloccati dallo scope in questa passata e vengono valutati solo se dichiarati `identical` e `site-ahead`.";
             fs.writeFileSync("/tmp/pr-body.md", [
               "## Implementato",
               "- Copia automatica dei gemelli dichiarati `mode: identical` in `scripts/ci/loop-sync-manifest.json` che il sito ha portato avanti mentre questo lato restava fermo sulla baseline (stato `site-ahead`), con riallineamento della baseline ai byte committati solo per i path verificati. Aperta da `.github/workflows/transport-identical-twins.yml` (issue #331).",

@@ -164,10 +164,17 @@ test('il job post-merge usa hash site freschi e committa solo il manifest su mai
   assert.match(yml, /pull_request:\n\s+types: \[closed\]/);
   assert.match(yml, /github\.event\.pull_request\.merged == true/);
   assert.match(yml, /github\.event\.pull_request\.head\.repo\.full_name == github\.repository/);
+  assert.match(yml, /group: transport-identical-twins-realign-main/);
+  assert.doesNotMatch(yml, /group: transport-identical-twins-realign-\$\{\{ github\.event\.pull_request\.number \}\}/);
   assert.match(yml, /site sha256/);
   assert.match(yml, /ref: main[\s\S]{0,100}fetch-depth: 0/);
+  assert.match(yml, /const expected = \[\.\.\.changed\]/);
+  assert.match(yml, /const missing = expected\.filter/);
+  assert.match(yml, /non cit[aà] tutti i file trasportati/);
   assert.match(yml, /--realign="\$RUNNER_TEMP\/transport-realign\.tsv" --json/);
   assert.match(yml, /git push origin HEAD:main/);
+  assert.match(yml, /for attempt in 1 2 3/);
+  assert.match(yml, /if git push origin HEAD:main; then/);
   assert.match(yml, /baseline\.corpus/);
 });
 
@@ -175,6 +182,7 @@ test('il body del trasporto descrive lo scope workflow osservato, non uno stato 
   const yml = read(WORKFLOW);
   assert.match(yml, /const workflowsBlocked = process\.env\.PAT_WORKFLOWS_SCOPE !== "true";/);
   assert.match(yml, /blocked: PAT_WORKFLOWS_SCOPE non è true/);
+  assert.match(yml, /restano escluse per scelta/);
   assert.match(yml, /non sono bloccati dallo scope in questa passata/);
   assert.doesNotMatch(
     yml,
