@@ -13,6 +13,9 @@
  * non c'era pavimento affatto. Stesso difetto, stessa classe, in
  * `scripts/build-blog-index.mjs`: `MIN_ENTRIES = 50` contro le stesse due
  * sezioni da 3785 e 1850 file di corpo.
+ * La stessa classe era rimasta in due writer di sitemap: `sitemap-blog.xml`
+ * controllava solo una soglia assoluta di 100 e la sitemap svizzera non aveva
+ * alcun controllo; il verifier non misurava neppure quei due output.
  *
  * LA ROOT CAUSE NON E' IL NUMERO. E' che il numero e' ASSOLUTO: tarato una
  * volta contro il corpus di quel giorno, non si muove piu' mentre il corpus
@@ -52,10 +55,12 @@ import {
   collectSeoFeedEntryMetadata,
   unescapeQuoted,
   latestSeoPublication,
+  listedFloor,
   sectionFloor,
 } from '../../scripts/lib/corpus-floors.mjs';
 import {
   SECTION_COUNTERS,
+  SECTION_SITEMAPS,
   feedSection,
   expectedFeedNames,
   floorViolations,
@@ -93,6 +98,7 @@ function healthy() {
       { name: 'rss-svizzera.xml', items: 50 },
       { name: 'rss-svizzera-de.xml', items: 50 },
     ],
+    sitemaps: { 'sitemap-blog.xml': 3782, 'sitemap-blog-ch.xml': 1850 },
     images: 1990,
   };
   return { measured, expected };
@@ -103,6 +109,10 @@ function writeHealthyFeeds(dir) {
   const item = `<item><pubDate>${pubDate}</pubDate></item>`;
   const xml = `<rss><channel>${item.repeat(50)}</channel></rss>`;
   for (const name of expectedFeedNames(RSS_SECTIONS)) fs.writeFileSync(join(dir, name), xml);
+  for (const [section, file] of Object.entries(SECTION_SITEMAPS)) {
+    const count = countSourceArticles(ROOT, section);
+    fs.writeFileSync(join(dir, file), `<urlset>${'<url>x</url>'.repeat(count)}</urlset>`);
+  }
 }
 
 test('floorFrom scala col valore atteso e non produce mai un pavimento negativo', () => {
@@ -112,6 +122,12 @@ test('floorFrom scala col valore atteso e non produce mai un pavimento negativo'
   assert.equal(floorFrom(Number.NaN), 0);
   // Il punto della fix: il pavimento cresce col corpus invece di restare fermo.
   assert.ok(floorFrom(3785) > floorFrom(100));
+});
+
+test('listedFloor scala con il registro dopo le esclusioni legittime', () => {
+  assert.equal(listedFloor(1000, 10), floorFrom(990));
+  assert.equal(listedFloor(1000, 2000), 0);
+  assert.throws(() => listedFloor(0), /registro degli articoli/);
 });
 
 test("la superficie reale del 2026-09-05 passa: il pavimento non e' stretto", () => {
@@ -135,6 +151,23 @@ test('swissArticles ha un pavimento, che prima mancava del tutto', () => {
   const violations = floorViolations(truncated, expected);
   assert.equal(violations.length, 1);
   assert.match(violations[0], /counts\.swissArticles: 40 contro 1850/);
+});
+
+test('le sitemap articolo hanno un pavimento derivato e non possono sparire dalla misura', () => {
+  const { measured, expected } = healthy();
+  const truncated = {
+    ...measured,
+    sitemaps: { 'sitemap-blog.xml': 500, 'sitemap-blog-ch.xml': 40 },
+  };
+  const violations = floorViolations(truncated, expected);
+  assert.equal(violations.length, 2);
+  assert.match(violations.join('\n'), /sitemap-blog\.xml: 500 contro 3785/);
+  assert.match(violations.join('\n'), /sitemap-blog-ch\.xml: 40 contro 1850/);
+
+  const missing = floorViolations({ ...measured, sitemaps: {} }, expected);
+  assert.equal(missing.length, 2);
+  assert.match(missing.join('\n'), /sitemap-blog\.xml assente/);
+  assert.match(missing.join('\n'), /sitemap-blog-ch\.xml assente/);
 });
 
 test("un contatore mancante e' una violazione, non un pass silenzioso", () => {
@@ -471,6 +504,8 @@ test('measureDist riconosce i feed dal documento, non dal nome del file', () => 
   assert.ok(measured.missingFeeds.includes('rss-de.xml'), 'un feed atteso assente deve risultare mancante');
   assert.equal(measured.images, null, 'images-manifest.json assente ⇒ null, che e\' un caso valido');
   assert.equal(measured.articleCounts.articles, 7);
+  assert.equal(measured.sitemaps['sitemap-blog.xml'], 1);
+  assert.equal(measured.sitemaps['sitemap-blog-ch.xml'], undefined);
   fs.rmSync(dir, { recursive: true, force: true });
 });
 
@@ -754,6 +789,11 @@ test('build-api usa il parser SEO condiviso, non una terza finestra locale', () 
   assert.match(build, /collectSeoEntryMetadata/);
   assert.doesNotMatch(build, /const entryRe = \/'blog-\(\[\^'\]\+\):\\s\*\\{\/g/);
   assert.doesNotMatch(build, /start \+ 4000/);
+  assert.match(build, /listedFloor\(registry\.length, shadowed\.size\)/);
+  assert.match(build, /sectionFloor\(ROOT, section\)/);
+  assert.match(build, /ARTICLES_PAGE_SIZE/);
+  assert.doesNotMatch(build, /sitemapCounts\.blog < 100/);
+  assert.doesNotMatch(build, /sitemapCounts\.archive < 8/);
 });
 
 test("publish-api.yml non porta piu' un pavimento assoluto scritto a mano", () => {

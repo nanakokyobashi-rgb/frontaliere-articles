@@ -248,6 +248,26 @@ export function sectionFloor(root, section, retention = FLOOR_RETENTION) {
 }
 
 /**
+ * Il pavimento di un elenco derivato dal registro, come una sitemap articolo.
+ *
+ * Il registro è il riferimento corretto per il contenuto che la sitemap prova
+ * a elencare; le voci `shadowed` sono escluse legittimamente perché puntano a
+ * un canonical diverso. Il risultato resta relativo al numero corrente, così
+ * non ricrea il vecchio pavimento assoluto che si è svuotato mentre il corpus
+ * cresceva.
+ *
+ * Un registro assente o vuoto non vale come pavimento a zero: è l'assenza del
+ * riferimento e va rifiutata dal writer.
+ */
+export function listedFloor(registryCount, shadowed = 0, retention = FLOOR_RETENTION) {
+  if (!Number.isFinite(registryCount) || registryCount <= 0) {
+    throw new Error(missingCorpusMessage('un elenco derivato dal registro', 'il registro degli articoli'));
+  }
+  const expected = Math.max(0, registryCount - Math.max(0, shadowed));
+  return floorFrom(expected, retention);
+}
+
+/**
  * Dove vivono i chunk SEO in QUESTO repo. Il layout del sito e'
  * `services/seo`; `build-api.mjs` passa `seoDir: 'content/seo'` a
  * `buildAllRssFeeds`, ed e' quello il parametro che vale qui.

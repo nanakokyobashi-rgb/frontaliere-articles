@@ -63,6 +63,12 @@ export const SECTION_COUNTERS = {
   svizzera: 'swissArticles',
 };
 
+/** Le sitemap articolo che devono conservare la cardinalita' del corpus. */
+export const SECTION_SITEMAPS = {
+  frontaliere: 'sitemap-blog.xml',
+  svizzera: 'sitemap-blog-ch.xml',
+};
+
 /** La popolazione dei chunk ha un preallarme proprio: 90% di una run precedente.
  * Il 97% della retention degli articoli sarebbe rumore permanente per il
  * rapporto chunk/corrente, mentre il 90% segnala una contrazione sostanziale. */
@@ -202,7 +208,7 @@ function feedPopulationReference(expected, section) {
 /**
  * Il nucleo puro: date le misure, quali pavimenti sono sfondati.
  *
- * @param {{articleCounts: Record<string, number>, feeds: {name: string, items: number, latestPublication?: {datePublished: string, timestamp: number}|null}[],
+ * @param {{articleCounts: Record<string, number>, sitemaps?: Record<string, number>, feeds: {name: string, items: number, latestPublication?: {datePublished: string, timestamp: number}|null}[],
  *          missingFeeds?: string[], images: number|null, imageErrors?: string[]}} measured  cio' che l'artefatto dichiara
  * @param {{sourceArticles: Record<string, number>, feedSources: Record<string, number>,
  *          previousFeedSources?: Record<string, number|null>, sourceImages: number|null,
@@ -242,6 +248,29 @@ export function floorViolations(measured, expected, retention = undefined) {
       violations.push(
         `manifest.counts.${counter}: ${declared} contro ${source} articoli sorgente (pavimento ${min}) — set troncato`,
       );
+    }
+  }
+
+  // Le sitemap articolo sono un secondo punto di uscita del corpus: il
+  // manifest puo' essere intatto mentre una sitemap viene serializzata a
+  // meta'. `measureDist` fornisce sempre questa mappa per l'artefatto reale;
+  // il guard conserva compatibilita' con i fixture puramente manifest/feed
+  // dei consumer del nucleo.
+  if (measured.sitemaps) {
+    for (const [section, file] of Object.entries(SECTION_SITEMAPS)) {
+      const source = expected.sourceArticles[section] ?? 0;
+      if (source === 0) continue;
+      const declared = measured.sitemaps[file];
+      if (typeof declared !== 'number') {
+        violations.push(`${file} assente: il corpus sorgente ne tiene ${source} articoli`);
+        continue;
+      }
+      const min = floor(source);
+      if (declared < min) {
+        violations.push(
+          `${file}: ${declared} url contro ${source} articoli sorgente (pavimento ${min}) — sitemap troncata`,
+        );
+      }
     }
   }
 
@@ -500,6 +529,12 @@ export function measureDist(distDir) {
   const presentFeedNames = new Set(feeds.map(({ name }) => name));
   const missingFeeds = expectedFeedNames().filter((name) => !presentFeedNames.has(name));
 
+  const sitemaps = {};
+  for (const file of Object.values(SECTION_SITEMAPS)) {
+    const absolute = path.join(distDir, file);
+    if (fs.existsSync(absolute)) sitemaps[file] = countXmlTags(readOut(file), 'url');
+  }
+
   const imageManifest = path.join(distDir, 'images-manifest.json');
   let images = null;
   const imageErrors = [];
@@ -516,7 +551,7 @@ export function measureDist(distDir) {
     }
   }
 
-  return { articleCounts: manifest.counts ?? {}, feeds, missingFeeds, images, imageErrors };
+  return { articleCounts: manifest.counts ?? {}, sitemaps, feeds, missingFeeds, images, imageErrors };
 }
 
 /** Riconta il corpus sorgente, che e' il riferimento esterno all'artefatto. */
@@ -584,6 +619,11 @@ async function main() {
     `[api-floors] manifest: articles=${measured.articleCounts.articles}, ` +
       `swissArticles=${measured.articleCounts.swissArticles}, ` +
       `feeds=${measured.feeds.length}, images=${measured.images ?? 'non emesso'}`,
+  );
+  console.log(
+    `[api-floors] sitemap: ${Object.values(SECTION_SITEMAPS)
+      .map((file) => `${file}=${measured.sitemaps[file] ?? 'assente'}`)
+      .join(', ')}`,
   );
 
   // La telemetria del rapporto viene PRIMA del verdetto, e viene stampata anche

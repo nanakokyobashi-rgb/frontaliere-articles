@@ -85,7 +85,11 @@ import { findShadowedTickerArticles } from './lib/ticker-shadow-check.mjs';
 // il markup, non il testo: una description RSS in CDATA che cita `<item>`
 // gonfiava identicamente il dichiarato e il ri-derivato (vedi il suo header).
 import { countXmlTags } from './lib/count-xml-tags.mjs';
-import { collectSeoEntryMetadata } from './lib/corpus-floors.mjs';
+import {
+  collectSeoEntryMetadata,
+  listedFloor,
+  sectionFloor,
+} from './lib/corpus-floors.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const OUT = path.join(ROOT, 'dist', 'api');
@@ -296,8 +300,21 @@ const sitemapCounts = {
     buildSitemap(SWISS_ARTICLES, 'svizzera', swissSlugs.SWISS_SLUGS, metaChIt, shadowedSwissSlugs),
   ),
 };
-if (sitemapCounts.blog < 100) {
-  throw new Error(`sitemap-blog.xml has only ${sitemapCounts.blog} urls — refusing to publish`);
+// I pavimenti sono relativi al registro, non costanti assolute. Il vecchio
+// `< 100` proteggeva il 2,6% del corpus frontaliere e non proteggeva affatto la
+// sitemap svizzera; un parse troncato restava quindi pubblicabile senza errori.
+for (const [key, file, registry, shadowed] of [
+  ['blog', 'sitemap-blog.xml', ARTICLES, frontaliereSitemapShadow],
+  ['blogCh', 'sitemap-blog-ch.xml', SWISS_ARTICLES, shadowedSwissSlugs],
+]) {
+  const floor = listedFloor(registry.length, shadowed.size);
+  if (sitemapCounts[key] < floor) {
+    throw new Error(
+      `${file} has only ${sitemapCounts[key]} urls against ${registry.length} registry entries ` +
+        `(${shadowed.size} de-listed on purpose, floor ${floor}) — refusing to publish a truncated sitemap`,
+    );
+  }
+  console.log(`[build-api] ${file}: ${sitemapCounts[key]} urls (floor ${floor}, derived from the registry)`);
 }
 
 // ── Archive pages (issue #4974) ───────────────────────────────────────────
@@ -311,15 +328,12 @@ if (sitemapCounts.blog < 100) {
 //
 // Page count comes from the SAME union the emitter paginates
 // (`readArticleArchiveUnionSlugs`), so this file cannot list a page the
-// archive does not have. The page size is spelled out rather than read from
-// the site shell, which does not exist in this process — see the ticker call
-// below for the same reason. It must track ARTICLES_PAGE_SIZE in
-// `build-plugins/seoHubsData.ts`; the count assertion below is what catches a
-// drift.
+// archive does not have. The page size comes from the host's single source,
+// which is the value wired into the engine's SiteShellContract.
 const ARCHIVE_ALL_SLUG = { it: 'tutti', en: 'all', de: 'alle', fr: 'tous' };
-const ARCHIVE_PAGE_SIZE = 100;
 const { readArticleArchiveUnionSlugs } = await load('engine/shared/articleArchiveUnion.ts');
 const { ARTICLE_SECTIONS } = await load('articleSections.ts');
+const { ARTICLES_PAGE_SIZE } = await load('host/seoHubsData.ts');
 
 function archiveBase(section, locale) {
   const prefix = locale === 'it' ? '' : `/${locale}`;
@@ -330,7 +344,7 @@ function buildArchiveSitemap() {
   const urls = [];
   for (const section of ['frontaliere', 'svizzera']) {
     const total = readArticleArchiveUnionSlugs(fs, path, ROOT, section).size;
-    const pages = Math.max(1, Math.ceil(total / ARCHIVE_PAGE_SIZE));
+    const pages = Math.max(1, Math.ceil(total / ARTICLES_PAGE_SIZE));
     for (const locale of LOCALES) {
       for (let page = 1; page <= pages; page++) {
         const base = archiveBase(section, locale);
@@ -369,13 +383,24 @@ function buildArchiveSitemap() {
 
 sitemapCounts.archive = writeXml('sitemap-articles-archive.xml', buildArchiveSitemap());
 // Two sections x four locales, so the count is 4 x (frontalierePages +
-// svizzeraPages) — under 8 means a section resolved to a single empty page,
-// which is the shape a broken registry parse takes.
-if (sitemapCounts.archive < 8) {
+// svizzeraPages). Derive the minimum from the independent body corpus: a
+// truncated archive union must not be allowed to make its own floor disappear.
+const archiveFloor =
+  LOCALES.length *
+  ['frontaliere', 'svizzera'].reduce(
+    (pages, section) => pages + Math.max(1, Math.ceil(sectionFloor(ROOT, section) / ARTICLES_PAGE_SIZE)),
+    0,
+  );
+if (sitemapCounts.archive < archiveFloor) {
   throw new Error(
-    `sitemap-articles-archive.xml has only ${sitemapCounts.archive} urls — refusing to publish`,
+    `sitemap-articles-archive.xml has only ${sitemapCounts.archive} urls (floor ${archiveFloor}, ` +
+      `derived from the corpus on disk) — refusing to publish a truncated archive sitemap`,
   );
 }
+console.log(
+  `[build-api] sitemap-articles-archive.xml: ${sitemapCounts.archive} urls ` +
+    `(floor ${archiveFloor}, derived from the corpus)`,
+);
 
 // ── RSS feeds ─────────────────────────────────────────────────────
 //
