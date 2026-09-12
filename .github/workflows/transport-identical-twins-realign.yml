@@ -1,0 +1,124 @@
+name: Transport identical twins (post-merge realign)
+
+# La PR di trasporto verifica i byte prima del push, ma una persona può
+# correggere uno dei file nella PR prima del merge. Questo job rilegge la
+# provenienza dal body della PR e il commit di main dopo il merge, quindi
+# aggiorna solo `baseline.corpus` quando i byte committati sono ancora quelli
+# scaricati. Un mismatch resta rosso: non inventa una baseline locale.
+on:
+  pull_request:
+    types: [closed]
+
+permissions:
+  contents: write
+  pull-requests: read
+
+concurrency:
+  group: transport-identical-twins-realign-${{ github.event.pull_request.number }}
+  cancel-in-progress: false
+
+jobs:
+  realign:
+    if: >-
+      github.event.pull_request.merged == true &&
+      github.event.pull_request.base.ref == 'main' &&
+      github.event.pull_request.head.repo.full_name == github.repository &&
+      startsWith(github.event.pull_request.head.ref, 'transport/identical-twins-')
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout main dopo il merge
+        uses: actions/checkout@v5
+        with:
+          ref: main
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: '22'
+
+      - name: Prepara lista dal body e dai file della PR
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+        run: |
+          set -euo pipefail
+          gh api --paginate "repos/$REPO/pulls/$PR_NUMBER" --jq '.body // ""' > "$RUNNER_TEMP/transport-body.md"
+          gh api --paginate "repos/$REPO/pulls/$PR_NUMBER/files?per_page=100" --jq '.[].filename' > "$RUNNER_TEMP/transport-files.txt"
+          # shellcheck disable=SC2016
+          node -e '
+            const fs = require("fs");
+            const body = fs.readFileSync(process.env.RUNNER_TEMP + "/transport-body.md", "utf8");
+            const changed = new Set(fs.readFileSync(process.env.RUNNER_TEMP + "/transport-files.txt", "utf8").split(/\r?\n/).filter(Boolean));
+            const found = [];
+            const re = /^- `([^`\n]+)` .*?\(site sha256 `([0-9a-f]{16})`\)\s*$/gm;
+            for (const match of body.matchAll(re)) {
+              if (!changed.has(match[1])) throw new Error("il body cita un path non presente nei file della PR: " + match[1]);
+              found.push(match[1] + "\t" + match[2]);
+            }
+            const unique = [...new Set(found)].sort();
+            fs.writeFileSync(process.env.RUNNER_TEMP + "/transport-realign.tsv", unique.length ? unique.join("\n") + "\n" : "");
+            console.log("Path realign post-merge: " + unique.length);
+          '
+
+      # Il PAT corpus-owned permette il push sul branch protetto quando le
+      # regole lo consentono; senza caricarlo il job non può materializzare la
+      # correzione del solo manifest.
+      - name: Write Firebase SA (se presente)
+        continue-on-error: true
+        env:
+          FIREBASE_SERVICE_ACCOUNT_JSON: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}
+        run: |
+          set -uo pipefail
+          if [ -n "${FIREBASE_SERVICE_ACCOUNT_JSON:-}" ]; then
+            printf '%s' "$FIREBASE_SERVICE_ACCOUNT_JSON" > "$RUNNER_TEMP/firebase-sa.json"
+            echo "GOOGLE_APPLICATION_CREDENTIALS=$RUNNER_TEMP/firebase-sa.json" >> "$GITHUB_ENV"
+          fi
+
+      - name: Load secrets from Remote Config
+        continue-on-error: true
+        run: node generator/scripts/load-rc-env.mjs
+
+      - name: Riallinea e committa la baseline su main
+        if: env.GITHUB_PAT_NANAKO != ''
+        env:
+          GH_TOKEN: ${{ env.GITHUB_PAT_NANAKO }}
+          REPO: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+          if [ ! -s "$RUNNER_TEMP/transport-realign.tsv" ]; then
+            echo "Nessun file trasportato nel body: niente riallineamento post-merge."
+            exit 0
+          fi
+          git fetch origin main --prune
+          git checkout --detach origin/main
+          rc=0
+          node scripts/ci/transport-identical-twins.mjs --realign="$RUNNER_TEMP/transport-realign.tsv" --json > "$RUNNER_TEMP/realign.json" || rc=$?
+          cat "$RUNNER_TEMP/realign.json"
+          if [ "$rc" != "0" ]; then
+            echo "Il realign post-merge non è certificabile: nessun commit automatico della baseline."
+            exit "$rc"
+          fi
+          if git diff --quiet -- scripts/ci/loop-sync-manifest.json; then
+            echo "Baseline già allineata: niente commit post-merge."
+            exit 0
+          fi
+          if [ -n "$(git diff --name-only)" ] && [ "$(git diff --name-only)" != "scripts/ci/loop-sync-manifest.json" ]; then
+            echo "::error::Il realign ha modificato file oltre il manifest."
+            exit 1
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          git remote set-url origin "https://x-access-token:${GH_TOKEN}@github.com/${REPO}.git"
+          git add -- scripts/ci/loop-sync-manifest.json
+          git commit -m "chore(loop): riallinea baseline dopo trasporto"
+          git push origin HEAD:main
+
+      - name: PAT assente — segnala il blocco
+        if: env.GITHUB_PAT_NANAKO == '' && hashFiles('.github/workflows/transport-identical-twins-realign.yml') != ''
+        run: |
+          echo "::error::GITHUB_PAT_NANAKO assente: la correzione post-merge del manifest è blocked: credenziale Remote Config non disponibile."
+          exit 1

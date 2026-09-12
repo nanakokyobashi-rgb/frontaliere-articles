@@ -2843,7 +2843,13 @@
         "site": "c584aaf489c71a41",
         "corpus": "c584aaf489c71a41",
         "alignedAt": "2026-08-09"
-      }
+      },
+      "couplingSnapshot": [
+        {
+          "path": "host/tests/shell-contract-functions.test.mjs",
+          "mode": "corpus-only"
+        }
+      ]
     },
     {
       "path": "host/tests/shell-contract-functions.test.mjs",
@@ -3361,7 +3367,29 @@
         "site": "dcaceb4ce558cef9",
         "corpus": "dcaceb4ce558cef9",
         "alignedAt": "2026-09-11"
-      }
+      },
+      "couplingSnapshot": [
+        {
+          "path": "data/jobs/by-crawler/guess-europe.json",
+          "mode": "non registrato"
+        },
+        {
+          "path": "data/jobs/by-crawler/vf-international-the-north-face-timberland.json",
+          "mode": "non registrato"
+        },
+        {
+          "path": "generator/data/crawler-cross-repo-contract.json",
+          "mode": "identical"
+        },
+        {
+          "path": "scripts/ci/close-recovered-failure-issues.mjs",
+          "mode": "identical"
+        },
+        {
+          "path": "scripts/ci/loop-sync-manifest.json",
+          "mode": "corpus-only"
+        }
+      ]
     },
     {
       "path": ".github/workflows/crawler-generation-observer-shadow.yml",

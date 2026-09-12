@@ -180,11 +180,12 @@ jobs:
           SITE_REF: main
         run: |
           set -euo pipefail
+          : > "$RUNNER_TEMP/transport-realign-rc"
           # `rc=2` (blocchi permanenti con divergenza reale) non ferma la copia:
           # il report e' gia' scritto, gli altri gemelli partono, e il codice si
-          # ripropaga all'ULTIMA riga di questo step — cosi' il workflow esce
-          # rosso e `scan-failed-runs.mjs` apre la sua issue, ma la PR di oggi
-          # e' stata aperta lo stesso. Ogni altro codice resta bloccante.
+          # ripropaga al verdetto finale — cosi' il workflow esce rosso e
+          # `scan-failed-runs.mjs` apre la sua issue, ma la PR di oggi e' stata
+          # aperta lo stesso. Ogni altro codice resta bloccante.
           rc=0
           node scripts/ci/transport-identical-twins.mjs --apply --json > /tmp/transport.json || rc=$?
           previous_rc="$(cat "$RUNNER_TEMP/transport-rc" 2>/dev/null || echo 0)"
@@ -203,33 +204,11 @@ jobs:
           [ "$previous_rc" -gt "$rc" ] && rc="$previous_rc"
           echo "$rc" > "$RUNNER_TEMP/transport-rc"
           PORTED=$(node -e 'console.log(require("/tmp/transport.json").transported.length)')
-          if [ "$PORTED" = "0" ]; then
-            echo "Nessun gemello da portare: niente PR."
+          MANIFEST_CHANGED=$(node -e 'console.log(require("/tmp/transport.json").manifestChanged ? "true" : "false")')
+          if [ "$MANIFEST_CHANGED" != "true" ]; then
+            echo "Nessun gemello o snapshot da registrare: niente PR."
             exit 0
           fi
-          # Il corpo si scrive da Node su file: un heredoc dentro un blocco
-          # `run:` indentato porterebbe la sua indentazione DENTRO il markdown,
-          # e `## Implementato` rientrato non e' piu' un heading — il contratto
-          # del body (`pr-body-contract`) lo leggerebbe come assente.
-          node -e '
-            const fs = require("fs");
-            const r = require("/tmp/transport.json");
-            const list = r.transported.map((t) => "- `" + t.path + "` \u2190 `" + t.sitePath + "` del sito").join("\n");
-            const workflowsBlocked = process.env.PAT_WORKFLOWS_SCOPE !== "true";
-            const deferred = workflowsBlocked
-              ? "- Le voci `adapted` restano escluse per costruzione; i gemelli sotto `.github/workflows/` richiedono lo scope `workflows`: blocked: PAT_WORKFLOWS_SCOPE non è true per questa identità."
-              : "- Le voci `adapted` restano escluse per costruzione; i gemelli sotto `.github/workflows/` non sono bloccati dallo scope in questa passata e, se `site-ahead`, sono eleggibili al trasporto in questa PR.";
-            fs.writeFileSync("/tmp/pr-body.md", [
-              "## Implementato",
-              "- Copia automatica dei gemelli dichiarati `mode: identical` in `scripts/ci/loop-sync-manifest.json` che il sito ha portato avanti mentre questo lato restava fermo sulla baseline (stato `site-ahead`), piu\u2019 la baseline riallineata per le sole voci copiate. Aperta da `.github/workflows/transport-identical-twins.yml` (issue #331).",
-              "",
-              list,
-              "",
-              "## Non implementato (ancora)",
-              deferred,
-              "",
-            ].join("\n"));
-          '
           BRANCH="transport/identical-twins-${GITHUB_RUN_ID}"
           git config user.name 'github-actions[bot]'
           git config user.email 'github-actions[bot]@users.noreply.github.com'
@@ -241,14 +220,15 @@ jobs:
           # qualunque residuo di uno step precedente entrerebbe in una PR che
           # passa dall'auto-merge nativo, elencando nel body solo i file
           # trasportati.
+          # shellcheck disable=SC2016
           node -e '
             const fs = require("fs");
             const r = require("/tmp/transport.json");
-            fs.writeFileSync("/tmp/transport-paths.txt", r.transported.map((t) => t.path).join("\n") + "\n");
+            fs.writeFileSync("/tmp/transport-paths.tsv", r.transported.map((t) => t.path + "\t" + t.to).join("\n") + (r.transported.length ? "\n" : ""));
           '
-          xargs -r -d '\n' -a /tmp/transport-paths.txt git add --
+          cut -f1 /tmp/transport-paths.tsv | xargs -r -d '\n' git add --
           git add -- scripts/ci/loop-sync-manifest.json
-          echo "Staged:"; git diff --cached --name-only
+          git diff --cached --name-only
           git commit -m "chore(loop): porta ${PORTED} gemelli identical dal sito"
           # La baseline che `--apply` ha scritto e' l'hash dei byte SCARICATI,
           # calcolato prima che il commit esistesse (issue #852). Qui il commit
@@ -256,28 +236,124 @@ jobs:
           # baseline si verifica contro di loro PRIMA del push, con `--amend`
           # dove va corretta per non lasciare due commit sullo stesso atto.
           #
-          # Lo step esce ROSSO in due casi, entrambi «la baseline descriverebbe
-          # byte che nessuno ha». Un path trasportato non leggibile dal commit:
-          # la baseline lo dichiarerebbe allineato e nel commit non c'e'.
-          # Oppure byte committati diversi da quelli del sito (line ending
-          # normalizzati, filtro `clean`, staging incompleto): quella voce non
-          # e' un gemello byte-identico, e registrarla darebbe al drift check
-          # un `undeclared-drift` permanente e al trasporto una voce che non si
-          # copia piu'. In entrambi i casi la PR non viene aperta e il
-          # fallimento del workflow apre la sua issue: la decisione (correggere
-          # la copia, o degradare la voce ad `adapted`) vuole il contesto che
-          # questo step non ha.
-          node scripts/ci/transport-identical-twins.mjs --realign=/tmp/transport-paths.txt
+          # Un mismatch appartiene alla singola voce, non all'intero batch:
+          # raccogli il verdetto, togli quella voce dal commit e riallinea di
+          # nuovo le sole voci sane. Il rosso resta nel file di stato letto
+          # dall'ultimo step, quindi il canale prosegue senza assolversi.
+          realign_rc=0
+          if [ "$PORTED" != "0" ]; then
+            node scripts/ci/transport-identical-twins.mjs --realign=/tmp/transport-paths.tsv --json > /tmp/realign.json || realign_rc=$?
+          else
+            printf '%s\n' '{"mismatched":[],"normalization":[],"unreadable":[]}' > /tmp/realign.json
+          fi
+          case "$realign_rc" in
+            0) ;;
+            1)
+              BAD_COUNT=$(node -e 'const r=require("/tmp/realign.json"); console.log((r.mismatched||[]).length+(r.normalization||[]).length)')
+              UNREADABLE_COUNT=$(node -e 'console.log((require("/tmp/realign.json").unreadable||[]).length)')
+              if [ "$BAD_COUNT" = "0" ] || [ "$UNREADABLE_COUNT" != "0" ]; then
+                echo "1" > "$RUNNER_TEMP/transport-realign-rc"
+                exit 1
+              fi
+              echo "1" > "$RUNNER_TEMP/transport-realign-rc"
+              node -e '
+                const fs = require("fs");
+                const r = require("/tmp/transport.json");
+                const a = require("/tmp/realign.json");
+                const bad = new Set([...(a.mismatched || []), ...(a.normalization || [])].map((x) => x.path));
+                r.transported = r.transported.filter((x) => !bad.has(x.path));
+                r.realignExcluded = [...bad].sort();
+                fs.writeFileSync("/tmp/transport.json", JSON.stringify(r, null, 2));
+              '
+              node -e '
+                const fs = require("fs");
+                const { execFileSync } = require("child_process");
+                const current = JSON.parse(fs.readFileSync("scripts/ci/loop-sync-manifest.json", "utf8"));
+                const previous = JSON.parse(execFileSync("git", ["show", "HEAD^:scripts/ci/loop-sync-manifest.json"]));
+                const bad = new Set(require("/tmp/realign.json").mismatched.map((x) => x.path).concat(require("/tmp/realign.json").normalization.map((x) => x.path)));
+                for (const rel of bad) {
+                  const now = current.files.find((x) => x.path === rel);
+                  const old = previous.files.find((x) => x.path === rel);
+                  if (now && old) {
+                    now.baseline = old.baseline;
+                    if (Object.prototype.hasOwnProperty.call(old, "couplingSnapshot")) now.couplingSnapshot = old.couplingSnapshot;
+                    else delete now.couplingSnapshot;
+                  }
+                }
+                fs.writeFileSync("scripts/ci/loop-sync-manifest.json", JSON.stringify(current, null, 2) + "\n");
+              '
+              node -e '
+                const fs = require("fs");
+                for (const item of ["mismatched", "normalization"]) {
+                  for (const x of require("/tmp/realign.json")[item] || []) process.stdout.write(x.path + "\n");
+                }
+              ' | while IFS= read -r rel; do
+                [ -z "$rel" ] || git restore --source=HEAD^ --staged --worktree -- "$rel"
+              done
+              git add -- scripts/ci/loop-sync-manifest.json
+              git commit --amend --no-edit
+              node -e '
+                const fs = require("fs");
+                const r = require("/tmp/transport.json");
+                fs.writeFileSync("/tmp/transport-paths.tsv", r.transported.map((t) => t.path + "\t" + t.to).join("\n") + (r.transported.length ? "\n" : ""));
+              '
+              if [ "$PORTED" != "0" ]; then
+                realign_rc=0
+                node scripts/ci/transport-identical-twins.mjs --realign=/tmp/transport-paths.tsv --json > /tmp/realign-safe.json || realign_rc=$?
+                if [ "$realign_rc" != "0" ]; then
+                  echo "1" > "$RUNNER_TEMP/transport-realign-rc"
+                  exit 1
+                fi
+              fi
+              ;;
+            *)
+              echo "1" > "$RUNNER_TEMP/transport-realign-rc"
+              exit "$realign_rc"
+              ;;
+          esac
+          PORTED=$(node -e 'console.log(require("/tmp/transport.json").transported.length)')
           if ! git diff --quiet -- scripts/ci/loop-sync-manifest.json; then
             git add -- scripts/ci/loop-sync-manifest.json
             git commit --amend --no-edit
           fi
+          if git diff --quiet HEAD^ HEAD; then
+            echo "Tutti i path trasportati avevano un mismatch: nessuna PR apribile, il rosso resta registrato."
+            exit 0
+          fi
+          # Il corpo si scrive da Node su file: un heredoc dentro un blocco
+          # `run:` indentato porterebbe la sua indentazione DENTRO il markdown,
+          # e `## Implementato` rientrato non e' piu' un heading — il contratto
+          # del body (`pr-body-contract`) lo leggerebbe come assente.
+          # shellcheck disable=SC2016
+          node -e '
+            const fs = require("fs");
+            const r = require("/tmp/transport.json");
+            const list = r.transported.map((t) => "- `" + t.path + "` \u2190 `" + t.sitePath + "` del sito (site sha256 `" + t.to + "`)").join("\n");
+            const deltas = (r.couplingDelta || []).map((d) => "- Snapshot accoppiamenti per `" + d.path + "`: +" + d.added.length + "/-" + d.removed.length + (d.initialized ? " (prima osservazione)" : " (delta dalla passata precedente)" ) + ".").join("\n");
+            const excluded = (r.realignExcluded || []).map((p) => "- `" + p + "` escluso dal commit per mismatch/normalizzazione dei byte; blocked: diagnosi realign da correggere a mano.").join("\n");
+            const workflowsBlocked = process.env.PAT_WORKFLOWS_SCOPE !== "true";
+            const deferred = workflowsBlocked
+              ? "- Le voci `adapted` restano escluse per costruzione; i gemelli sotto `.github/workflows/` richiedono lo scope `workflows`: blocked: PAT_WORKFLOWS_SCOPE non è true per questa identità."
+              : "- Le voci `adapted` restano escluse per costruzione; i gemelli sotto `.github/workflows/` non sono bloccati dallo scope in questa passata e, se `site-ahead`, sono eleggibili al trasporto in questa PR.";
+            fs.writeFileSync("/tmp/pr-body.md", [
+              "## Implementato",
+              "- Copia automatica dei gemelli dichiarati `mode: identical` in `scripts/ci/loop-sync-manifest.json` che il sito ha portato avanti mentre questo lato restava fermo sulla baseline (stato `site-ahead`), con riallineamento della baseline ai byte committati solo per i path verificati. Aperta da `.github/workflows/transport-identical-twins.yml` (issue #331).",
+              list,
+              deltas,
+              "",
+              "## Non implementato (ancora)",
+              excluded,
+              deferred,
+              "",
+            ].join("\n"));
+          '
           git push -u origin "$BRANCH"
           gh pr create --base main --head "$BRANCH" \
             --title "chore(loop): trasporto di ${PORTED} gemelli \`identical\` dal sito" \
             --body-file /tmp/pr-body.md
 
-      # Il rosso dei blocchi permanenti vive QUI e non dentro uno dei due rami.
+      # Il rosso dei blocchi permanenti e dei mismatch vive QUI e non dentro
+      # uno dei due rami.
       #
       # Lo step di apply e' gatato su `env.GITHUB_PAT_NANAKO != ''`, e il passo
       # che popola quel PAT (`Load secrets from Remote Config`) e'
@@ -293,6 +369,11 @@ jobs:
         run: |
           set -uo pipefail
           rc="$(cat "$RUNNER_TEMP/transport-rc" 2>/dev/null || echo 0)"
+          realign_rc="$(cat "$RUNNER_TEMP/transport-realign-rc" 2>/dev/null || echo 0)"
+          if [ "$realign_rc" = "1" ]; then
+            echo "::error::Il realign ha escluso uno o piu' path dal batch: il rosso resta aperto per la diagnosi dei byte committati, mentre i path sani sono stati pubblicati."
+            exit 1
+          fi
           [ "$rc" = "2" ] || exit 0
           echo "::error::Gemelli \`identical\` in \`site-ahead\` bloccati per SEMPRE: nessun giro di questo canale li portera', serve una copia a mano. Le righe \`⛔\` del dry-run qui sopra dicono quali e perche'."
           exit 1
