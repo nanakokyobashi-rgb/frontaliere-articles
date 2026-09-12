@@ -2140,7 +2140,7 @@
       "reason": "Testa la misura #1054, il parser nelle quattro lingue e la regola #1055 che rimuove i fatti vuoti sopra soglia e rifiuta quelli sotto soglia. E' una suite node:test del generatore del corpus, senza gemello operativo sul sito.",
       "baseline": {
         "site": null,
-        "corpus": "ba6d35d0c989cf4138d84bb2fb9f924c7bb13d8e",
+        "corpus": "d27fde4ea91a493a",
         "alignedAt": "2026-09-12"
       }
     },
