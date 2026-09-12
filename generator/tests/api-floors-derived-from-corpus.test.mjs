@@ -473,6 +473,40 @@ test('measureDist riconosce i feed dal documento, non dal nome del file', () => 
   fs.rmSync(dir, { recursive: true, force: true });
 });
 
+test('measureDist rifiuta un feed con una pubDate mancante o invalida anche se un’altra è valida', () => {
+  const dir = fs.mkdtempSync(join(os.tmpdir(), 'api-floors-pubdate-'));
+  fs.writeFileSync(join(dir, 'manifest.json'), JSON.stringify({ counts: { articles: 7, swissArticles: 2 } }));
+  const validItem = '<item><pubDate>Wed, 10 Sep 2026 00:00:00 GMT</pubDate></item>';
+  const expected = {
+    sourceArticles: { frontaliere: 7, svizzera: 2 },
+    feedSources: { frontaliere: 2, svizzera: 2 },
+    sourceImages: null,
+    latestSeoPublications: {
+      frontaliere: {
+        articleId: 'newest',
+        datePublished: '2026-09-11T00:00:00Z',
+        timestamp: Date.parse('2026-09-11T00:00:00Z'),
+      },
+    },
+    rssMaxItems: 50,
+  };
+
+  for (const [label, malformedItem] of [
+    ['pubDate non parseabile', '<item><pubDate>not-a-date</pubDate></item>'],
+    ['pubDate mancante', '<item><title>senza data</title></item>'],
+  ]) {
+    fs.writeFileSync(join(dir, 'rss.xml'), `<rss>${validItem}${malformedItem}</rss>`);
+    const measured = measureDist(dir);
+    assert.equal(measured.feeds[0].items, 2, label);
+    assert.equal(measured.feeds[0].latestPublication, null, label);
+    assert.ok(
+      floorViolations(measured, expected).some((line) => line === "rss.xml: nessun <pubDate> valido nell'artefatto RSS"),
+      label,
+    );
+  }
+  fs.rmSync(dir, { recursive: true, force: true });
+});
+
 test('measureDist trasforma un images-manifest malformato in una violazione esplicita', () => {
   const dir = fs.mkdtempSync(join(os.tmpdir(), 'api-floors-images-shape-'));
   fs.writeFileSync(join(dir, 'manifest.json'), JSON.stringify({ counts: { articles: 7, swissArticles: 2 } }));

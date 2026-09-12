@@ -456,11 +456,20 @@ export function retentionLines(rows, retention = FLOOR_RETENTION) {
 }
 
 function latestFeedPublication(xml) {
+  const markup = stripNonMarkup(xml);
+  const items = [...markup.matchAll(/<item(?:\s[^>]*)?>([\s\S]*?)<\/item>/g)];
+  // Un latest valido non basta: ogni item che il floor conta deve avere
+  // esattamente una data parseabile, altrimenti la superficie pubblicata e'
+  // parzialmente corrotta anche se un altro item e' fresco.
+  if (items.length !== countXmlTags(markup, 'item')) return null;
+
   let latest = null;
-  for (const match of stripNonMarkup(xml).matchAll(/<pubDate>\s*([^<]*?)\s*<\/pubDate>/g)) {
-    const datePublished = match[1].trim();
+  for (const [, item] of items) {
+    const dates = [...item.matchAll(/<pubDate(?:\s[^>]*)?>\s*([^<]*?)\s*<\/pubDate>/g)];
+    if (dates.length !== 1) return null;
+    const datePublished = dates[0][1].trim();
     const timestamp = Date.parse(datePublished);
-    if (!Number.isFinite(timestamp)) continue;
+    if (!Number.isFinite(timestamp)) return null;
     if (!latest || timestamp > latest.timestamp) latest = { datePublished, timestamp };
   }
   return latest;
