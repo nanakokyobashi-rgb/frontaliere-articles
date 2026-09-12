@@ -313,6 +313,15 @@ jobs:
 
           git commit -m "$COMMIT_MESSAGE"
 
+          if [ "$PRODUCER_OUTCOME" != "success" ] && [ -n "$(git status --porcelain)" ]; then
+            # The failure checkpoint intentionally commits only the marker;
+            # partial producer files must not make the retry worktree dirty.
+            # A dirty tree makes the following pull --rebase refuse to start,
+            # so a push race would lose the marker evidence as well.
+            git stash push -u -m "discard-partial-producer-output-before-retry"
+            git stash drop stash@{0}
+          fi
+
           TARGET="${{ github.ref_name }}"
           REMOTE="https://x-access-token:${GITHUB_PAT}@github.com/${{ github.repository }}.git"
           PUSH_LOG="$(mktemp)"

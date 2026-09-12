@@ -224,6 +224,28 @@ test('ogni retry pusha da una base fresca: backoff prima del rebase, nessun reba
   }
 });
 
+test('i checkpoint marker-only puliscono il worktree prima dei retry del push', () => {
+  const checkpointFiles = new Set([
+    'generate-border-wait-ranking-weekly.yml',
+    'generate-daily-brief.yml',
+    'publish-journalist-articles.yml',
+    'refresh-events-digest.yml',
+  ]);
+  for (const w of workflows.filter(({ file }) => checkpointFiles.has(file))) {
+    const commitAt = w.active.indexOf('git commit -m "$COMMIT_MESSAGE"');
+    const retryAt = w.active.indexOf('for attempt in', commitAt);
+    const stashAt = w.active.indexOf('git stash push -u -m "discard-partial-producer-output-before-retry"', commitAt);
+    const dropAt = w.active.indexOf('git stash drop stash@{0}', stashAt);
+    assert.ok(commitAt >= 0, `${w.file}: commit del checkpoint non trovato`);
+    assert.ok(stashAt > commitAt && stashAt < retryAt,
+      `${w.file}: l output parziale resta dirty tra commit marker-only e retry`);
+    assert.ok(dropAt > stashAt && dropAt < retryAt,
+      `${w.file}: il worktree non viene ripulito prima del pull --rebase`);
+    assert.match(w.active.slice(commitAt, stashAt), /PRODUCER_OUTCOME/,
+      `${w.file}: il cleanup deve restare limitato al ramo producer fallito`);
+  }
+});
+
 test('il backoff fra i tentativi cresce con $attempt, in OGNI workflow che ritenta il push', () => {
   // Follow-up #659 di #644: il riordino aveva pinnato l'ORDINE (backoff prima
   // del rebase) ma non la FORMA del backoff, e due produttori su sette erano
