@@ -32,7 +32,7 @@
  * app icon in the feed.
  */
 import { ARTICLE_SECTION_CORE } from './shared/articleSectionCore.mjs';
-import { findAllSeoEntryMatches } from '../scripts/lib/seo-entry.mjs';
+import { findAllSeoEntryMatches } from './shared/seo-entry.mjs';
 
 export const BASE_URL = 'https://frontaliereticino.ch';
 export const RSS_LOCALES = ['it', 'en', 'de', 'fr'];

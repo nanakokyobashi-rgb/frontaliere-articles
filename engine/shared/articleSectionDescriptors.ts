@@ -45,7 +45,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { ARTICLE_SECTION_CORE } from './articleSectionCore.mjs';
 import { CANONICAL_OVERRIDE_FILES } from './canonicalOverrideFiles.mjs';
-import { findAllSeoEntryMatches } from '../../scripts/lib/seo-entry.mjs';
+import { findAllSeoEntryMatches } from './seo-entry.mjs';
 
 function isMissingPathError(error: unknown): boolean {
  return (error as NodeJS.ErrnoException).code === 'ENOENT';

@@ -1,11 +1,43 @@
 /** Regression tests for the all-or-nothing SEO-entry removal used by retire. */
+import fs from 'node:fs';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import {
+import * as engineSeoEntry from '../../engine/shared/seo-entry.mjs';
+import * as corpusSeoEntry from '../../scripts/lib/seo-entry.mjs';
+
+const {
+  maskSeoSource,
   findAllSeoEntryMatches,
   findSeoEntryMatches,
   removeSeoEntriesFromSource,
-} from '../../scripts/lib/seo-entry.mjs';
+} = corpusSeoEntry;
+
+test('il resolver corpus è lo stesso modulo trasportato con l engine', () => {
+  for (const name of [
+    'maskSeoSource',
+    'findSeoEntryMatches',
+    'findAllSeoEntryMatches',
+    'removeSeoEntriesFromSource',
+  ]) {
+    assert.strictEqual(
+      engineSeoEntry[name],
+      corpusSeoEntry[name],
+      `${name} deve provenire dalla sorgente engine mirrorata`,
+    );
+  }
+
+  const engineSource = fs.readFileSync(new URL('../../engine/shared/seo-entry.mjs', import.meta.url), 'utf8');
+  const shimSource = fs.readFileSync(new URL('../../scripts/lib/seo-entry.mjs', import.meta.url), 'utf8');
+  const rssSource = fs.readFileSync(new URL('../../engine/rssFeeds.mjs', import.meta.url), 'utf8');
+  const descriptorSource = fs.readFileSync(new URL('../../engine/shared/articleSectionDescriptors.ts', import.meta.url), 'utf8');
+
+  assert.doesNotMatch(engineSource, /(?:from|import\s*\()\s*['"][^'"]*scripts\//);
+  assert.match(shimSource, /from ['"]\.\.\/\.\.\/engine\/shared\/seo-entry\.mjs['"]/);
+  assert.match(rssSource, /from ['"]\.\/shared\/seo-entry\.mjs['"]/);
+  assert.match(descriptorSource, /from ['"]\.\/seo-entry\.mjs['"]/);
+  assert.doesNotMatch(rssSource, /scripts\/lib\/seo-entry/);
+  assert.doesNotMatch(descriptorSource, /scripts\/lib\/seo-entry/);
+});
 
 test('rimuove tutte le occorrenze SEO duplicate prima che il caller scriva', () => {
   const source = `export const SEO = {
