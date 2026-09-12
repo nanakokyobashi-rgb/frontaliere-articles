@@ -1533,7 +1533,7 @@
       "reason": "La sorgente unica dei pavimenti anti-troncamento, condivisa fra verify-api-floors.mjs e build-blog-index.mjs. Corpus-only per lo stesso motivo: i pavimenti sono derivati dai file sorgente degli articoli, che esistono solo in questo repo.",
       "baseline": {
         "site": null,
-        "corpus": "dcc66cdb1e1eb725",
+        "corpus": "fd0d82ac848e9980",
         "alignedAt": "2026-09-12"
       }
     },
