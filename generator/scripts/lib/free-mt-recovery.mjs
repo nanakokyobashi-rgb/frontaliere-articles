@@ -48,10 +48,13 @@ export const FREE_MT_BASE_FIELDS_PER_LOCALE = 5;
 export const FREE_MT_FIELDS_PER_FAQ_PAIR = 2;
 export const FREE_MT_QUOTA_REFERENCE_FIELDS = 7;
 const FREE_MT_CAP_REASONS = new Set([
+  'error',
   'unusable-text',
   'non-string',
   'passthrough',
   'mangled-nav-link',
+  'mangled-municipality-name',
+  'lone-surrogate',
 ]);
 
 function normalizeFaqCount(value) {
@@ -155,8 +158,16 @@ export function claimFreeMtLlmFallback(report, locale, faqCount = report?.faqCou
   const key = locale || '?';
   const usedHere = report.llmFallbacksByLocale[key] || 0;
   const localeLimit = maxFreeMtLlmFallbacksPerLocale(faqCount);
+  // Keep one claim in reserve for every other supported locale that has not
+  // claimed yet. Without this reserve, a larger FAQ set raises the per-locale
+  // quota above the fixed run cap and the loop order can leave the last locale
+  // with zero recovery attempts (e.g. en=4, de=3, fr=0 at faqCount=2).
+  const reserveForOtherLocales = FREE_MT_LLM_FALLBACK_LOCALES
+    .filter((candidate) => candidate !== key
+      && (report.llmFallbacksByLocale[candidate] || 0) === 0)
+    .length;
   if (usedHere >= localeLimit
-    || (report.llmFallbacks || 0) >= MAX_FREE_MT_LLM_FALLBACKS_PER_RUN) {
+    || (report.llmFallbacks || 0) + reserveForOtherLocales >= MAX_FREE_MT_LLM_FALLBACKS_PER_RUN) {
     report.llmFallbackCapped = true;
     return false;
   }

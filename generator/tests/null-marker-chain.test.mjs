@@ -343,18 +343,36 @@ describe('free-MT recovery — il degrado e’ misurato e limitato per run', () 
     }
   });
 
-  test('#1320 FU-034 — passthrough e sentinel markdown corrotti addebitano il campo', () => {
+  test('#1320 FU-035 — il cap globale riserva un claim ai locali successivi', () => {
+    const report = createFreeMtRecoveryReport({ faqCount: 2 });
+    const spesi = Object.fromEntries(FREE_MT_LLM_FALLBACK_LOCALES.map((l) => [l, 0]));
+    for (const locale of FREE_MT_LLM_FALLBACK_LOCALES) {
+      for (let i = 0; i < 9; i += 1) {
+        if (claimFreeMtLlmFallback(report, locale)) spesi[locale] += 1;
+      }
+    }
+    assert.ok(spesi.fr >= 1, `fr deve ricevere un claim riservato: ${JSON.stringify(spesi)}`);
+    assert.deepEqual(spesi, { en: 4, de: 2, fr: 1 });
+    assert.equal(report.llmFallbacks, MAX_FREE_MT_LLM_FALLBACKS_PER_RUN);
+    assert.ok(spesi.en <= maxFreeMtLlmFallbacksPerLocale(2));
+    assert.ok(spesi.de <= maxFreeMtLlmFallbacksPerLocale(2));
+    assert.ok(spesi.fr <= maxFreeMtLlmFallbacksPerLocale(2));
+  });
+
+  test('#1320 FU-034 — ogni uscita free-MT rifiutata addebita il campo', () => {
     const report = createFreeMtRecoveryReport();
     recordFreeMtUnusableOutput(report, { targetLang: 'de', fieldName: 'title', reason: 'error' });
     recordFreeMtUnusableOutput(report, { targetLang: 'de', fieldName: 'excerpt', reason: 'mangled-nav-link' });
-    recordFreeMtUnusableOutput(report, { targetLang: 'de', fieldName: 'body1', reason: 'passthrough' });
+    recordFreeMtUnusableOutput(report, { targetLang: 'de', fieldName: 'body1', reason: 'mangled-municipality-name' });
+    recordFreeMtUnusableOutput(report, { targetLang: 'de', fieldName: 'body2', reason: 'lone-surrogate' });
+    recordFreeMtUnusableOutput(report, { targetLang: 'de', fieldName: 'body3', reason: 'passthrough' });
 
-    assert.equal(report.unusableOutputs, 3);
-    assert.deepEqual(report.unusableByLocale, { de: 3 });
+    assert.equal(report.unusableOutputs, 5);
+    assert.deepEqual(report.unusableByLocale, { de: 5 });
     assert.deepEqual(
       report.unusableFields,
-      { 'de:excerpt': 1, 'de:body1': 1 },
-      'passthrough e sentinel corrotto devono pagare il cap del campo',
+      { 'de:title': 1, 'de:excerpt': 1, 'de:body1': 1, 'de:body2': 1, 'de:body3': 1 },
+      'ogni rifiuto free-MT deve pagare il cap del campo',
     );
   });
 });
