@@ -155,6 +155,8 @@ import {
 } from './lib/free-mt-recovery.mjs';
 import { isReservedPublishedSlug } from '../../scripts/lib/published-slug-guard.mjs';
 import { AI_SEARCH_PROMPT_BLOCK_IT } from './lib/ai-search-template.mjs';
+import { stripVacuousFacts } from './lib/key-facts-specificity.mjs';
+import { checkCantonToponymConsistency } from './lib/cantone-toponimi-coerenza.mjs';
 import { tokenizeIt, jaccardSim, containmentSim, normalizeItWord, STOP_WORDS_IT } from './lib/it-text-similarity.mjs';
 import { fixMicrocopy } from './lib/it-microcopy-guard.mjs';
 import { DOMAIN_DUP_STOPLIST, filterDistinctive } from './lib/dup-stoplist.mjs';
@@ -4777,6 +4779,69 @@ function validateItalianPayload(contentIt, locale = 'it') {
       err.qualityReject = true;
       throw err;
     }
+  }
+}
+
+function qualityRejectError(message) {
+  const error = new Error(message);
+  error.qualityReject = true;
+  return error;
+}
+
+function bodyFieldsForQuality(content) {
+  return Object.keys(content || {})
+    .filter((field) => /^body\d+$/.test(field))
+    .sort((a, b) => Number(a.slice(4)) - Number(b.slice(4)));
+}
+
+/**
+ * Gate comune per i payload appena generati, prima di traduzioni, immagini e
+ * scritture. Le coppie `placeholder-value` vengono tolte solo quando la lista
+ * conserva almeno tre fatti; una lista sotto soglia e una guida con toponimi
+ * di un altro cantone fanno fallire l'headline corrente come qualityReject.
+ */
+function assertGeneratedArticleQuality(data) {
+  const content = data?.content;
+  if (!content || typeof content !== 'object') return;
+
+  for (const [locale, localeContent] of Object.entries(content)) {
+    if (!localeContent || typeof localeContent !== 'object') continue;
+    if (typeof localeContent.body1 !== 'string') continue;
+    const result = stripVacuousFacts(localeContent.body1);
+    if (result.rejected) {
+      const sections = result.rejectedSections.join(', ');
+      throw qualityRejectError(
+        `[key-facts-specificity] ${data.id || '(id mancante)'} `
+        + `${locale}: sezione ${sections || 'Fatti chiave'} sotto la soglia di 3 fatti dopo la rimozione dei non-valori`,
+      );
+    }
+    if (result.changed) {
+      localeContent.body1 = result.value;
+      console.error(
+        `  🧹 [key-facts-specificity] ${data.id || '(id mancante)'} ${locale}: `
+        + `rimosse ${result.dropped.length} coppie senza valore`,
+      );
+    }
+  }
+
+  const contentIt = content.it || content;
+  const bodyIt = bodyFieldsForQuality(contentIt)
+    .map((field) => contentIt[field])
+    .join('\n\n');
+  const cantonVerdict = checkCantonToponymConsistency({
+    articleId: data.id,
+    slug: data.slugs?.it || data.id,
+    title: contentIt.title,
+    body: bodyIt,
+  });
+  if (!cantonVerdict.ok) {
+    const details = cantonVerdict.matches
+      .map((match) => `${match.toponym} (${match.canton})`)
+      .join(', ');
+    throw qualityRejectError(
+      `[canton-toponym] ${data.id || '(id mancante)'} dichiara ${cantonVerdict.declaredCanton} `
+      + `ma contiene toponimi di un altro cantone: ${details}`,
+    );
   }
 }
 
@@ -15220,6 +15285,11 @@ async function generateAndValidateArticle(url, sourceContext = null) {
       }
       throw validationErr;
     }
+    // Step 3a.0-specificity: reject/repair vacuous key facts and reject a
+    // cross-canton guide before spending translation, image or write budget.
+    // The same helper is called again after translations below because this
+    // primary path does not enter registerArticleFiles().
+    assertGeneratedArticleQuality(data);
     optimizeSeoMetadata(data);
 
     // Step 3a.0-skip: bail early when the chosen source has zero frontaliere
@@ -15961,6 +16031,11 @@ async function generateAndValidateArticle(url, sourceContext = null) {
     e.qualityReject = true;
     throw e;
   }
+
+  // Translations are generated after the first specificity gate. Re-run the
+  // pure repair here so a localized non-value cannot reach the writer through
+  // the primary path, which deliberately bypasses registerArticleFiles().
+  assertGeneratedArticleQuality(data);
 
   // This is the last metadata mutation before the primary write path. The
   // placeholder guard may replace a localized imageAlt wholesale with its IT
@@ -16872,6 +16947,9 @@ export async function registerArticleFiles(data, opts = {}) {
   // Prima di clampSeoDescriptions: troncare a 160 caratteri un campo che e' il
   // segnaposto lo renderebbe solo un segnaposto piu' corto.
   sanitizePromptPlaceholders(data);
+  // Secondary producers enter this shared writer directly, so they need the
+  // same pre-write specificity/canton gate as the primary AI path.
+  assertGeneratedArticleQuality(data);
   // La postcondizione sui nomi propri deve coprire anche i producer secondari
   // che entrano direttamente qui: free-MT rifiutato e fallback LLM possono
   // perdere un comune dall'excerpt, e l'imageAlt del giornalista non passa dal

@@ -1339,6 +1339,16 @@
       }
     },
     {
+      "path": "generator/scripts/scan-vacuous-key-facts.mjs",
+      "mode": "corpus-only",
+      "reason": "Scanner read-only della baseline dei fatti chiave vacui (#1054): stampa file-locale, articoli distinti e locale senza modificare `content/**` e senza avere un gemello operativo sul sito.",
+      "baseline": {
+        "site": null,
+        "corpus": "7bf9d3781b68905e",
+        "alignedAt": "2026-09-12"
+      }
+    },
+    {
       "path": "host/shared/clauseTail.mjs",
       "sitePath": "build-plugins/shared/clauseTail.mjs",
       "mode": "identical",
@@ -1822,6 +1832,26 @@
       }
     },
     {
+      "path": "generator/scripts/lib/key-facts-specificity.mjs",
+      "mode": "corpus-only",
+      "reason": "Rilevatore puro dei fatti chiave senza valore nelle quattro lingue. Lo scanner di #1054 usa la forma di riferimento per misurare 53 file-locale/29 articoli; il gate di #1055 rimuove una coppia solo se restano almeno tre fatti e rifiuta il payload sotto soglia. E' una libreria del generatore del corpus e non ha gemello sul sito.",
+      "baseline": {
+        "site": null,
+        "corpus": "261595c0ccfc778b",
+        "alignedAt": "2026-09-12"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/cantone-toponimi-coerenza.mjs",
+      "mode": "corpus-only",
+      "reason": "Guard puro della coerenza fra cantone nello slug e toponimi nel testo (#1053). Blocca i nuovi offender della classe Grigioni/Vallese con riferimenti ticinesi e conserva come baseline esplicita i 32 articoli storici misurati. La generazione vive nel corpus e non esiste un gemello operativo sul sito.",
+      "baseline": {
+        "site": null,
+        "corpus": "ff39f0f302190ec5",
+        "alignedAt": "2026-09-12"
+      }
+    },
+    {
       "path": "generator/scripts/lib/decode-html-entities.mjs",
       "sitePath": "scripts/lib/decode-html-entities.mjs",
       "mode": "identical",
@@ -2102,6 +2132,26 @@
         "site": null,
         "corpus": "a9c8621700234446",
         "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "generator/tests/key-facts-specificity.test.mjs",
+      "mode": "corpus-only",
+      "reason": "Testa la misura #1054, il parser nelle quattro lingue e la regola #1055 che rimuove i fatti vuoti sopra soglia e rifiuta quelli sotto soglia. E' una suite node:test del generatore del corpus, senza gemello operativo sul sito.",
+      "baseline": {
+        "site": null,
+        "corpus": "96c7e00e5a41725c",
+        "alignedAt": "2026-09-12"
+      }
+    },
+    {
+      "path": "generator/tests/cantone-toponimi-coerenza.test.mjs",
+      "mode": "corpus-only",
+      "reason": "Testa il guard #1053 con l offender Courmayeur/Vallese, la guida legittima di Carate Urio/Ticino e la baseline storica dei 32 casi. Suite node:test specifica del generatore del corpus, senza gemello sul sito.",
+      "baseline": {
+        "site": null,
+        "corpus": "16f7feecc3146b93",
+        "alignedAt": "2026-09-12"
       }
     },
     {

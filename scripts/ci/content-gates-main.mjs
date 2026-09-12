@@ -147,6 +147,7 @@ export const CONTENT_GATES = [
   'generator/tests/faq-locale-consistency.test.mjs',
   'generator/tests/frontaliere-sitemap-shadow.test.mjs',
   'generator/tests/it-microcopy-guard.test.mjs',
+  'generator/tests/key-facts-specificity.test.mjs',
   'generator/tests/meta-localized-seo-description.test.mjs',
   'generator/tests/prompt-placeholder-guard.test.mjs',
   // Osservatore del tetto `TESTIMONE_GIRI_MAX` (#404): non giudica il corpus,
