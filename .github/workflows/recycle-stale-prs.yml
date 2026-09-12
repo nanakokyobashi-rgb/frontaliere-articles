@@ -411,6 +411,17 @@ jobs:
             Crawler transient failures (rolling ledger)
         run: |
           set -uo pipefail
+          # Il digest puo' essere appena creato o riaperto dopo il fetch che
+          # classifica il backlog. Per chiudere e per riallineare il body serve
+          # quindi una risoluzione fresca, sempre per titolo ESATTO e senza
+          # filtro label: il digest nasce con `automation`, non con
+          # `needs-human`.
+          resolve_dedup_number() {
+            local matches
+            matches=$(gh api --paginate "repos/$GH_REPO/issues?state=open&per_page=100" \
+              --jq 'first(.[] | select(.pull_request | not) | select(.title == env.DEDUP_TITLE) | .number)') || return 1
+            printf '%s\n' "$matches" | head -n 1
+          }
           # L'ESITO della query paginata e delle sue due partizioni, non solo il
           # loro output. `set -e` non e' attivo (i rami sotto decidono da soli),
           # quindi un `gh` non-zero — jq su una forma inattesa, rate-limit,
@@ -580,18 +591,13 @@ jobs:
             # altri chiamanti. Qui apertura, esclusione e chiusura tornano a
             # usare UNA sola forma della chiave.
             #
-            # La risposta unica e' gia' arrivata con `gh api --paginate`: non
-            # si ripete una query sull'endpoint solo per trovare il dedup, e
-            # non si usa `gh issue list --limit N`, che tronca IN SILENZIO. Il
-            # digest oltre il cap non verrebbe trovato — qui vuol dire «non
-            # chiudo» (innocuo), ma con un cap piu' basso della realta' e' la
-            # stessa bugia silenziosa.
-            # Il numero arriva dalla risposta unica delle issue aperte: il
-            # dedup viene classificato per titolo esatto in `gh api --jq`,
-            # anche se nasce con `automation` e non porta `needs-human`.
+            # Il numero va risolto di nuovo: il digest puo' essere stato chiuso
+            # da un run precedente e la risposta iniziale non contiene issue
+            # che si riaprono dopo il fetch. La funzione condivisa usa la stessa
+            # uguaglianza esatta della classificazione, pagina senza cap e
+            # distingue una PR da un'issue anche se la label e' cambiata.
             echo "Niente needs-human aperto (ne PR ne issue): richiudo l'issue dedup, se aperta."
-            DEDUP_NUMBER=$(printf '%s\n' "$OPEN_ISSUES_ITEMS" \
-              | jq -r '[.[] | select(.dedup) | .number] | first // empty')
+            DEDUP_NUMBER=$(resolve_dedup_number)
             DEDUP_RC=$?
             if [ "$DEDUP_RC" -ne 0 ]; then
               # Stesso principio del guard sopra: query fallita non e' «nessun
@@ -619,6 +625,35 @@ jobs:
             --priority 2 \
             --label automation \
             --workflow "Recycle stale PRs"
+
+          PUBLISH_RC=$?
+          if [ "$PUBLISH_RC" -ne 0 ]; then
+            echo "::error::Pubblicazione del digest non persistita (rc=$PUBLISH_RC): il body non viene riallineato."
+            exit "$PUBLISH_RC"
+          fi
+
+          # `createGithubIssue` aggiorna il body solo alla prima creazione; su
+          # recurrence e reopen scrive un commento e conserva il body. Risolvo
+          # il numero dopo la scrittura e sostituisco il body con le liste di
+          # questo run, cosi' il testo visibile e l'ultimo commento restano
+          # sulla stessa fotografia (#1004).
+          DEDUP_NUMBER=$(resolve_dedup_number)
+          DEDUP_RC=$?
+          if [ "$DEDUP_RC" -ne 0 ]; then
+            echo "::error::Query dell'issue dedup fallita (rc=$DEDUP_RC): il body puo' essere rimasto quello precedente."
+            exit 1
+          fi
+          if [ -z "$DEDUP_NUMBER" ]; then
+            echo "::error::Digest pubblicato ma issue dedup non trovata con titolo esatto: body non riallineato."
+            exit 1
+          fi
+          echo "Riallineo il body dell'issue dedup #$DEDUP_NUMBER alle liste di questo run."
+          gh issue edit "$DEDUP_NUMBER" --body "$DESC"
+          EDIT_RC=$?
+          if [ "$EDIT_RC" -ne 0 ]; then
+            echo "::error::Riallineamento del body dell'issue dedup fallito (rc=$EDIT_RC)."
+            exit 1
+          fi
 
       # `continue-on-error` sul produttore protegge il resto del recycle, ma da
       # solo renderebbe un errore persistente indistinguibile da un digest sano.

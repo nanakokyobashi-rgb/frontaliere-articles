@@ -122,13 +122,19 @@ jobs:
       # asset. Sorgente unica: re-review guard e tier-decision leggono questa
       # var, mai una regex duplicata.
       NONCODE_RE: '^(content/|data/|dist/|public/)|(^|/)(package-lock\.json)$|\.(snap|png|jpe?g|webp|gif|svg|ico|woff2?)$'
+      # I test realistici del floor seguono la stessa semantica dei gate:
+      # `before` per push su main, base.sha per una PR; solo dispatch/locale
+      # ricade sul fallback HEAD^ del modulo.
+      PREFLIGHT_EVENT_NAME: ${{ github.event_name }}
+      PREFLIGHT_PUSH_BASE_REVISION: ${{ github.event.before }}
+      PREFLIGHT_PR_BASE_REVISION: ${{ github.event.pull_request.base.sha }}
     steps:
       - uses: actions/checkout@v5
         with:
-          # Il reviewer non usa la git-history (lavora sul bundle prefetchato +
-          # Read/Grep sul working tree) e `content/` pesa: depth 1. Il
-          # fingerprint del contributo passa dalla compare API, non da git.
-          fetch-depth: 1
+          # I gate dei body usano il high-water della revisione precedente per
+          # rifiutare un registro troncato; il checkout deve quindi esporre la
+          # storia completa anche quando la PR non modifica `content/`.
+          fetch-depth: 0
 
       - uses: actions/setup-node@v5
         with:

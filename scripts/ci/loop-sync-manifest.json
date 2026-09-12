@@ -159,8 +159,8 @@
       "reason": "Preflight di sintassi TypeScript sui corpi. Gemello di tests/blog-body-typescript-syntax.test.ts del sito: stessa validazione (esbuild transform, loader ts, solo sintassi), adattata al percorso di PUBBLICAZIONE invece che alle PR — la' e' un test su pull_request, qui gli articoli atterrano per push diretto su main, quindi un gate sulle PR non ne vedrebbe mai uno. Registrato 'adapted' e non 'corpus-only': il file sul sito ESISTE, e dichiararlo assente renderebbe loop-drift-check cieco proprio alla divergenza fra i due — il caso peggiore descritto in CLAUDE.md.",
       "baseline": {
         "site": "82a682cdf5586ce4",
-        "corpus": "f42a7f15c4fdfae2",
-        "alignedAt": "2026-08-18"
+        "corpus": "a2753413d81077de",
+        "alignedAt": "2026-09-12"
       }
     },
     {
@@ -305,8 +305,8 @@
       "reason": "Fa girare su `main` il sottoinsieme MISURATO dei gate che leggono `content/**`, e su offender apre UNA issue deduplicata sul titolo invece di rendere rossa una run. Non ha gemello sul sito e non puo' averlo: il difetto che chiude e' la scrittura diretta su `main` dei produttori di QUESTO repo (`generate-article.yml` e i suoi fratelli fanno `git push HEAD:main` — 88 articoli nelle ultime 24h), mentre sul sito il contenuto non e' versionato e nessun bot scrive su `main`. Anche la lista `CONTENT_GATES` e' topologia locale: sono file sotto `generator/tests/`, cartella che sul sito non esiste. Non e' `corpus-only-pending` — non c'e' niente da portare di la'.",
       "baseline": {
         "site": null,
-        "corpus": "23f28a70e0f93b4e",
-        "alignedAt": "2026-08-18"
+        "corpus": "23f73267fded62af",
+        "alignedAt": "2026-09-12"
       }
     },
     {
@@ -551,12 +551,11 @@
     {
       "path": ".github/workflows/tests.yml",
       "mode": "adapted",
-      "reason": "Un solo check obbligatorio per codice, test e review in entrambi i repo; gli edit del body sono gestiti dal recupero selettivo esterno. Il sito usa Vitest e un contratto API prima del checkout; il corpus usa node:test e i propri validatori modulari del body dopo il checkout. Il corpus conserva il gate generator-ci path-scoped, le esclusioni draft/engine-lockstep-auto e la review senza proxy Headroom. RICONCILIATO 2026-09-10 (#1060): baseline attestata dopo il merge della PR sito 8200, con preflight e selezione del recupero coerenti con i gate propri del corpus.",
+      "reason": "Un solo check obbligatorio per codice, test e review in entrambi i repo; gli edit del body sono gestiti dal recupero selettivo esterno. Il sito usa Vitest e un contratto API prima del checkout; il corpus usa node:test e i propri validatori modulari del body dopo il checkout. Il corpus conserva il gate generator-ci path-scoped, le esclusioni draft/engine-lockstep-auto e la review senza proxy Headroom. RICONCILIATO 2026-09-12 (#1060): baseline riattestata dopo l'aggiornamento del checkout corpus a storia completa, con preflight e selezione del recupero coerenti con i gate propri del corpus.",
       "baseline": {
-        "site": "02a2db85e3004622",
-        "corpus": "3cdc0cb253798b27",
-        "alignedAt": "2026-09-10",
-        "forcedAt": "2026-09-10T12:33:10.945Z"
+        "site": "52c9ae3d4a8612f8",
+        "corpus": "dc889bd503a59e25",
+        "alignedAt": "2026-09-12"
       }
     },
     {
@@ -964,8 +963,8 @@
       "reason": "Niente npm ci, ponte RC del corpus, identita' GITHUB_PAT_NANAKO, cron 50 6 sfasato dal 40 6 del sito. In piu' il Gate 0 su `autorebase-reopen-failed`, che il sito non ha e non gli serve: quella label dice \"non cancellare questo head ref\", e il suo lettore dev'essere il workflow che cancella branch. Sul sito lo fa `worktree-branch-janitor.yml`; qui quel workflow non esiste e l'unico che cancella branch e' questo, quindi e' qui che la label deve avere effetto. Sostituzione dichiarata anche in generator/tests/loop-references-exist.test.mjs, che sorveglia la citazione del janitor in pr-autorebase.mjs. ADATTAMENTO 2026-09-04 (issue #733): la lista `needs-human` dello step \"Surface needs-human PRs and issues\" esclude l'issue dedup di quello stesso step, filtrando sulla chiave di dedup (`DEDUP_TITLE`, unica sorgente del titolo, letta anche da --title). Lo step assumeva di non poter comparire nella propria lista perche' creato con `automation` e non con `needs-human`; il followup-drainer ha aggiunto `needs-human` alla issue #733 il 2026-09-02T13:39:50Z e da li' il report si auto-elenca, rendendo irraggiungibile la condizione di chiusura che scrive nel proprio corpo. Coperto da generator/tests/needs-human-digest-self-listing.test.mjs. E' un MIGLIORAMENTO del meccanismo, non un adattamento al corpus: candidato a risalire al sito, dove lo stesso step porta la stessa assunzione. ADATTAMENTO 2026-09-05 (issue #733, secondo giro): a liste entrambe vuote lo step non si limita piu' a `exit 0` — richiude l'issue dedup con `--resolve` sulla stessa `DEDUP_TITLE`. Raggiungere la condizione di chiusura non bastava: nessun altro processo chiude questo titolo (close-recovered-failure-issues.mjs copre le famiglie `Workflow Failure:` / `Crawler Failure:`), quindi il digest sarebbe rimasto aperto con un elenco ormai falso. Stessa via gia' usata da ticker-shadow-alert.mjs e lockstep-stall-watch.mjs via resolveGithubIssue. Coperto dallo stesso test. Anche questo e' un MIGLIORAMENTO, candidato a risalire al sito. ADATTAMENTO 2026-09-06 (issue #981, item 1): lo step \"Surface needs-human PRs and issues\" cattura l'exit status delle due query `gh` e salta il ramo di chiusura quando una e' fallita. Girando sotto `set -uo pipefail` senza `set -e`, un `gh` non-zero (jq su forma inattesa, rate-limit, token scaduto) lasciava le variabili vuote e indistinguibili da «nessun residuo»: con entrambe rotte dalla stessa causa lo step richiudeva il digest con `--resolve` mentre il backlog needs-human era pieno, senza fallire e sotto `continue-on-error: true`. E' la stessa subordinazione che i gemelli con `--resolve` (reconcile-article-shards.yml, republish-dirty-content.yml) esprimono gia' come `steps.detect.outcome == 'success'`, qui espressa in-step perche' produttore e consumatore sono lo stesso script. Coperto da generator/tests/needs-human-digest-self-listing.test.mjs. MIGLIORAMENTO del meccanismo, non adattamento al corpus: `corpus-ahead`, candidato a risalire al sito, dove lo stesso step ha lo stesso difetto. ADATTAMENTO 2026-09-07 (issue #1003, item 1 di #920): a liste entrambe vuote lo step non chiude piu' con `--resolve`, ma risolve da se' il NUMERO dell'issue dedup con la stessa uguaglianza esatta con cui la lista la esclude (`select(.title == env.DEDUP_TITLE)` su `gh api --paginate`, senza filtro per label perche' il digest nasce con `automation`) e chiude quel numero con `gh issue close`. `resolveGithubIssue` chiude la prima issue aperta il cui titolo `startsWith` il prefisso sanitizzato a 60 char: `DEDUP_TITLE` ne ha 52, quindi qualunque issue aperta il cui titolo comincia con la chiave e prosegue veniva chiusa AL POSTO del digest — e non portando `needs-human` non compariva in nessuna delle due liste, che restavano vuote a ogni run. Apertura, esclusione e chiusura tornano a usare UNA forma della chiave; `scripts/lib/github-issue-creator.mjs` non e' toccato (il match per prefisso li' e' deliberato e condiviso dagli altri chiamanti). La risoluzione ha il suo guard sull'exit status, come le due query sopra. Coperto da generator/tests/needs-human-digest-self-listing.test.mjs. MIGLIORAMENTO del meccanismo, non adattamento al corpus: `corpus-ahead`, candidato a risalire al sito, dove lo stesso step ha lo stesso difetto.",
       "baseline": {
         "site": "8e2799b49ef8ad31",
-        "corpus": "4f703b4f03d50815",
-        "alignedAt": "2026-09-04"
+        "corpus": "0670a7771189e338",
+        "alignedAt": "2026-09-12"
       }
     },
     {
@@ -1533,8 +1532,8 @@
       "reason": "La sorgente unica dei pavimenti anti-troncamento, condivisa fra verify-api-floors.mjs e build-blog-index.mjs. Corpus-only per lo stesso motivo: i pavimenti sono derivati dai file sorgente degli articoli, che esistono solo in questo repo.",
       "baseline": {
         "site": null,
-        "corpus": "c267355a8a44d5f3",
-        "alignedAt": "2026-09-05"
+        "corpus": "12927d8ee556aac7",
+        "alignedAt": "2026-09-12"
       }
     },
     {
