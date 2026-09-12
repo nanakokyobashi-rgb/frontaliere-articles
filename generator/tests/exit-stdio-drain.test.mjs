@@ -116,6 +116,26 @@ function errorConsumer() {
   return stream;
 }
 
+function failureBeforeCallbackConsumer() {
+  const stream = consumerSkeleton();
+  stream.write = (_chunk, callback) => {
+    stream.emit('close');
+    stream.emit('error', Object.assign(new Error('consumer closed first'), { code: 'EPIPE' }));
+    queueMicrotask(() => callback());
+    return false;
+  };
+  return stream;
+}
+
+function callbackErrorConsumer() {
+  const stream = consumerSkeleton();
+  stream.write = (_chunk, callback) => {
+    callback(new Error('write failed'));
+    return false;
+  };
+  return stream;
+}
+
 function completedConsumer() {
   const stream = consumerSkeleton();
   stream.write = (_chunk, callback) => callback();
@@ -135,6 +155,17 @@ function idleConsumer() {
   const stream = consumerSkeleton();
   stream.writableLength = 0;
   stream.writableNeedDrain = false;
+  return stream;
+}
+
+function controlledConsumer() {
+  const stream = consumerSkeleton();
+  let release;
+  stream.write = (_chunk, callback) => {
+    release = callback;
+    return false;
+  };
+  stream.release = () => release?.();
   return stream;
 }
 
@@ -204,6 +235,44 @@ test('error senza callback non conferma il flush: resta il timeout bounded', asy
   }
 });
 
+test('close/error prima della callback non confermano il flush', async () => {
+  const stdoutDescriptor = Object.getOwnPropertyDescriptor(process, 'stdout');
+  const stderrDescriptor = Object.getOwnPropertyDescriptor(process, 'stderr');
+  Object.defineProperty(process, 'stdout', { configurable: true, enumerable: true, value: failureBeforeCallbackConsumer() });
+  Object.defineProperty(process, 'stderr', { configurable: true, enumerable: true, value: failureBeforeCallbackConsumer() });
+
+  try {
+    const { drainStdio } = await import('../scripts/lib/drain-stdio.mjs');
+    const startedAt = Date.now();
+    await drainStdio(50);
+    const elapsedMs = Date.now() - startedAt;
+    assert.ok(elapsedMs >= 35, 'close/error prima della callback ha confermato il drain: ' + elapsedMs + 'ms');
+    assert.ok(elapsedMs < 500, 'timeout non bounded dopo close/error prima della callback: ' + elapsedMs + 'ms');
+  } finally {
+    Object.defineProperty(process, 'stdout', stdoutDescriptor);
+    Object.defineProperty(process, 'stderr', stderrDescriptor);
+  }
+});
+
+test('callback con errore senza close non rigetta e conserva il pending fino al timeout', async () => {
+  const stdoutDescriptor = Object.getOwnPropertyDescriptor(process, 'stdout');
+  const stderrDescriptor = Object.getOwnPropertyDescriptor(process, 'stderr');
+  Object.defineProperty(process, 'stdout', { configurable: true, enumerable: true, value: callbackErrorConsumer() });
+  Object.defineProperty(process, 'stderr', { configurable: true, enumerable: true, value: idleConsumer() });
+
+  try {
+    const { drainStdio } = await import('../scripts/lib/drain-stdio.mjs');
+    const startedAt = Date.now();
+    await drainStdio(50);
+    const elapsedMs = Date.now() - startedAt;
+    assert.ok(elapsedMs >= 35, 'callback con errore ha chiuso il pending in anticipo: ' + elapsedMs + 'ms');
+    assert.ok(elapsedMs < 500, 'timeout non bounded dopo callback con errore: ' + elapsedMs + 'ms');
+  } finally {
+    Object.defineProperty(process, 'stdout', stdoutDescriptor);
+    Object.defineProperty(process, 'stderr', stderrDescriptor);
+  }
+});
+
 test('write che lancia dopo l altro stream completato libera il proprio slot', async () => {
   const stdoutDescriptor = Object.getOwnPropertyDescriptor(process, 'stdout');
   const stderrDescriptor = Object.getOwnPropertyDescriptor(process, 'stderr');
@@ -216,6 +285,28 @@ test('write che lancia dopo l altro stream completato libera il proprio slot', a
     await drainStdio(50);
     const elapsedMs = Date.now() - startedAt;
     assert.ok(elapsedMs < 35, 'write lanciata ha lasciato il drain in attesa del timeout: ' + elapsedMs + 'ms');
+  } finally {
+    Object.defineProperty(process, 'stdout', stdoutDescriptor);
+    Object.defineProperty(process, 'stderr', stderrDescriptor);
+  }
+});
+
+test('write sincrona lanciata non anticipa la callback positiva dell altro stream', async () => {
+  const stdoutDescriptor = Object.getOwnPropertyDescriptor(process, 'stdout');
+  const stderrDescriptor = Object.getOwnPropertyDescriptor(process, 'stderr');
+  const positive = controlledConsumer();
+  Object.defineProperty(process, 'stdout', { configurable: true, enumerable: true, value: throwingConsumer() });
+  Object.defineProperty(process, 'stderr', { configurable: true, enumerable: true, value: positive });
+
+  try {
+    const { drainStdio } = await import('../scripts/lib/drain-stdio.mjs');
+    let settled = false;
+    const drained = drainStdio(50).then(() => { settled = true; });
+    await new Promise((resolve) => setImmediate(resolve));
+    assert.equal(settled, false, 'il throw non deve sostituire la conferma positiva dell altro stream');
+    positive.release();
+    await drained;
+    assert.equal(settled, true);
   } finally {
     Object.defineProperty(process, 'stdout', stdoutDescriptor);
     Object.defineProperty(process, 'stderr', stderrDescriptor);

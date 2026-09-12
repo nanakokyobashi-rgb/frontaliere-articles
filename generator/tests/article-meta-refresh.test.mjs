@@ -122,6 +122,18 @@ test('upsertLocaleMetaFields: id non registrato in questo file — errore esplic
   );
 });
 
+test('upsertLocaleMetaFields: campo duplicato — rifiuta prima di aggiornare', () => {
+  const duplicate = META_FIXTURE.replace(
+    "    'blog.article.demo-id.imageAlt': 'Alt demo',\n",
+    "    'blog.article.demo-id.imageAlt': 'Alt demo',\n" +
+      "    'blog.article.demo-id.excerpt': 'Secondo excerpt',\n",
+  );
+  assert.throws(
+    () => upsertLocaleMetaFields(duplicate, 'demo-id', { excerpt: 'Nuovo excerpt' }),
+    /field 'excerpt' duplicato.*refresh rifiutato/,
+  );
+});
+
 // ── 1b. upsertSeoDescriptionBlock ───────────────────────────────────────────
 
 const SEO_FIXTURE =
@@ -165,6 +177,18 @@ function withDuplicateSeoEntry(src, indent = '    ') {
 }
 
 const DUPLICATE_SEO_FIXTURE = withDuplicateSeoEntry(SEO_FIXTURE);
+
+const INDENTED_SEO_FIXTURE =
+  "const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {\n" +
+  "\t'blog-demo-id': {\n" +
+  "\t\ttitle: 'Demo',\n" +
+  "\t\tdescription: 'Corto',\n" +
+  "\t\togDescription: 'Corto',\n" +
+  "\t\tstructuredData: {\n" +
+  "\t\t\t\"description\": \"Corto\"\n" +
+  "\t\t}\n" +
+  "\t},\n" +
+  "};\nexport default BLOG_SEO_METADATA_5;\n";
 
 test('upsertSeoDescriptionBlock: aggiorna description/ogDescription e il gemello structuredData, scoped al solo id', () => {
   const out = upsertSeoDescriptionBlock(SEO_FIXTURE, 'demo-id', {
@@ -219,6 +243,24 @@ test('upsertSeoDescriptionBlock: entry duplicata — rileva indentazione tab', (
     () => upsertSeoDescriptionBlock(withDuplicateSeoEntry(SEO_FIXTURE, '\t'), 'demo-id', { description: 'x' }),
     /duplicata.*refresh rifiutato/,
   );
+});
+
+test('upsertSeoDescriptionBlock: aggiorna anche i campi top-level con indentazione tab', () => {
+  const out = upsertSeoDescriptionBlock(INDENTED_SEO_FIXTURE, 'demo-id', {
+    description: 'Descrizione tab.',
+    ogDescription: 'Social tab.',
+  });
+  assert.ok(out.includes("\t\tdescription: 'Descrizione tab.',"));
+  assert.ok(out.includes("\t\togDescription: 'Social tab.',"));
+  assert.ok(out.includes('\t\t\t"description": "Descrizione tab."'));
+});
+
+test('upsertSeoDescriptionBlock: restringe la chiave alla sintassi consumata dai reader', () => {
+  const doubleQuoted = SEO_FIXTURE.replace("  'blog-demo-id': {", '  "blog-demo-id": {');
+  const spacedColon = SEO_FIXTURE.replace("  'blog-demo-id': {", "  'blog-demo-id' : {");
+  for (const source of [doubleQuoted, spacedColon]) {
+    assert.throws(() => upsertSeoDescriptionBlock(source, 'demo-id', { description: 'x' }), /nessuna entry/);
+  }
 });
 
 // ── 2. refreshDescriptiveTexts — la scrittura su un albero sintetico ────────
@@ -276,6 +318,35 @@ test('refreshDescriptiveTexts: entry SEO duplicata — rifiuta prima di scrivere
     );
     assert.equal(fs.readFileSync(metaPath, 'utf-8'), metaBefore, 'il preflight SEO deve precedere ogni scrittura locale');
     assert.equal(fs.readFileSync(seoPath, 'utf-8'), duplicate, 'il file SEO ambiguo deve restare intatto');
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('refreshDescriptiveTexts: campo meta duplicato — preflighta tutte le locali prima di scrivere', () => {
+  const root = syntheticCorpus();
+  try {
+    const enPath = path.join(root, 'content', 'blog-meta-en.ts');
+    const enDuplicate = fs.readFileSync(enPath, 'utf-8').replace(
+      "    'blog.article.demo-id.imageAlt': 'Alt en',\n",
+      "    'blog.article.demo-id.imageAlt': 'Alt en',\n" +
+        "    'blog.article.demo-id.excerpt': 'Secondo excerpt',\n",
+    );
+    fs.writeFileSync(enPath, enDuplicate);
+    const itPath = path.join(root, 'content', 'blog-meta-it.ts');
+    const itBefore = fs.readFileSync(itPath, 'utf-8');
+
+    assert.throws(
+      () => refreshDescriptiveTexts(
+        'demo-id',
+        { it: { excerpt: 'Nuovo it' }, en: { excerpt: 'Nuovo en' } },
+        undefined,
+        { repoRoot: root },
+      ),
+      /field 'excerpt' duplicato.*refresh rifiutato/,
+    );
+    assert.equal(fs.readFileSync(itPath, 'utf-8'), itBefore, 'nessuna locale deve essere scritta prima del preflight completo');
+    assert.equal(fs.readFileSync(enPath, 'utf-8'), enDuplicate, 'il file ambiguo deve restare intatto');
   } finally {
     fs.rmSync(root, { recursive: true, force: true });
   }
