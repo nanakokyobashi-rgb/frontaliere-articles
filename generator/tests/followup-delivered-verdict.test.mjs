@@ -188,6 +188,23 @@ test('isRecoverableQueueManaged: needs-human non nasconde un WIP, gli altri veto
   );
 });
 
+test('isRecoverableQueueManaged: il WIP publish diretto supera needs-human, non i veto', () => {
+  const labels = (...names) => names.map((name) => ({ name }));
+  const issue = { title: 'Workflow Failure: publish-api' };
+  assert.equal(
+    isRecoverableQueueManaged({ ...issue, labels: labels('fu-parked', 'needs-human') }),
+    true,
+  );
+  assert.equal(
+    isRecoverableQueueManaged({ ...issue, labels: labels('fu-parked', 'needs-human', 'backlog') }),
+    false,
+  );
+  assert.equal(
+    isRecoverableQueueManaged({ ...issue, labels: labels('fu-parked', 'needs-human', 'crawler-transient') }),
+    false,
+  );
+});
+
 test('crawlerFixDecision: una promozione fresca non cede un branch WIP', () => {
   const d = crawlerFixDecision({ outcome: null, ageMin: 1, hasBranchWork: true, attempt: 0 });
   assert.equal(d.action, 'settling');

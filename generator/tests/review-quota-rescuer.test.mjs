@@ -11,6 +11,7 @@ import {
   deferredReviewCandidate,
   hasReviewQuotaRetry,
   latestReviewQuotaDeferred,
+  latestReviewQuotaRetry,
   parseReviewQuotaRetryMarker,
   reviewQuotaRetryBody,
   sourceWorkflowForRole,
@@ -65,6 +66,25 @@ test('un retry già richiesto non viene duplicato, un nuovo run di deferral sì'
   );
 });
 
+test('il marker retry è riconciliabile: requested/confirmed bloccano, failed riapre', () => {
+  const fields = {
+    head: HEAD,
+    role: 'review',
+    deferredRunId: 'tests-1',
+    sourceRunId: '42',
+    runId: 'rescuer-1',
+  };
+  const requested = reviewQuotaRetryBody({ ...fields, state: 'requested' });
+  const failed = reviewQuotaRetryBody({ ...fields, state: 'failed' });
+  const confirmed = reviewQuotaRetryBody({ ...fields, state: 'confirmed' });
+  const key = { head: HEAD, role: 'review', deferredRunId: 'tests-1' };
+  assert.equal(hasReviewQuotaRetry([{ body: requested }], key), true);
+  assert.equal(hasReviewQuotaRetry([{ body: requested }, { body: failed }], key), false);
+  assert.equal(hasReviewQuotaRetry([{ body: requested }, { body: failed }, { body: confirmed }], key), true);
+  assert.equal(latestReviewQuotaRetry([{ body: requested }, { body: failed }], key).state, 'failed');
+  assert.equal(parseReviewQuotaRetryMarker(requested).state, 'requested');
+});
+
 test('il rescuer usa la run sorgente corretta per ogni consumer PR', () => {
   assert.equal(sourceWorkflowForRole('review'), 'tests');
   assert.equal(sourceWorkflowForRole('redflag'), 'PR 🔴 fixer (bounded loop-closure on bot PRs)');
@@ -87,4 +107,9 @@ test('il wiring reagisce al completamento dei consumer e rilascia reservation es
   assert.match(redcheck, /HEAD_SHA: \$\{\{ needs\.preflight\.outputs\.head_sha \}\}/);
   assert.match(redflag, /steps\.quota_lease\.outputs\.lease_allowed == 'true'[\s\S]*steps\.quota_lease\.outputs\.lease_token != ''/);
   assert.match(redcheck, /steps\.quota_lease\.outputs\.lease_allowed == 'true'[\s\S]*steps\.quota_lease\.outputs\.lease_token != ''/);
+  const rescuer = fs.readFileSync(path.join(ROOT, 'scripts/ci/review-quota-rescuer.mjs'), 'utf8');
+  assert.match(rescuer, /state: 'requested'/);
+  assert.match(rescuer, /if \(!postRetryComment\(number, requestedBody\)\)/);
+  assert.match(rescuer, /state: 'failed'/);
+  assert.match(rescuer, /state: 'confirmed'/);
 });

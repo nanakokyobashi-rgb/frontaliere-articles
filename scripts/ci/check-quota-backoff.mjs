@@ -557,6 +557,19 @@ export function runQuotaLease({
         ...own, state: 'released', owner, role, issuedAt: nowSec,
         expiresAt: Math.max(nowSec, Number(own.expiresAt)),
       });
+      // La contesa nasce DOPO la decisione iniziale: senza questo marker il
+      // perdente diventa un review gate rosso senza candidato per il rescuer.
+      // Il lease è già stato ritirato; il marker è solo il passaggio durevole
+      // al retry zero-Claude e non consuma quota.
+      if (emitReviewDeferredMarker && targetType === 'pr' && PR_QUOTA_CONSUMER_ROLES.has(role)) {
+        postReviewQuotaDeferred(
+          repo,
+          target,
+          role,
+          'shared-quota-lease-contention',
+          runId || process.env.GITHUB_RUN_ID,
+        );
+      }
       throw new Error(`contesa lease: ${liveAfter.length} lease attivi`);
     }
     return writeLeaseOutputs({

@@ -21,6 +21,8 @@ import {
 export const REVIEW_QUOTA_RETRY_MARKER = '<!-- REVIEW_QUOTA_RETRY:';
 const REVIEW_QUOTA_RETRY_RE = /<!-- REVIEW_QUOTA_RETRY:\s*(\{[\s\S]*?\})\s*-->/;
 const PR_QUOTA_ROLES = new Set(['review', 'redflag', 'redcheck']);
+const REVIEW_QUOTA_RETRY_STATES = new Set(['requested', 'confirmed', 'failed']);
+const REVIEW_QUOTA_RETRY_ACTIVE_STATES = new Set(['requested', 'confirmed']);
 const SOURCE_WORKFLOW_BY_ROLE = Object.freeze({
   review: 'tests',
   redflag: 'PR 🔴 fixer (bounded loop-closure on bot PRs)',
@@ -106,12 +108,17 @@ export function parseReviewQuotaRetryMarker(body) {
   if (!match) return null;
   let event;
   try { event = JSON.parse(match[1]); } catch { return null; }
+  // I marker v1 emessi prima della riconciliazione non avevano `state`: erano
+  // scritti dopo un rerun riuscito, quindi il valore retrocompatibile è
+  // `confirmed`.
+  const state = String(event?.state || 'confirmed');
   if (!event || event.version !== 1
       || !/^[a-f0-9]{40}$/i.test(String(event.head || ''))
       || !PR_QUOTA_ROLES.has(String(event.role || ''))
       || !String(event.deferredRunId || '')
       || !String(event.sourceRunId || '')
-      || !String(event.runId || '')) return null;
+      || !String(event.runId || '')
+      || !REVIEW_QUOTA_RETRY_STATES.has(state)) return null;
   return {
     ...event,
     head: String(event.head),
@@ -119,19 +126,37 @@ export function parseReviewQuotaRetryMarker(body) {
     deferredRunId: String(event.deferredRunId),
     sourceRunId: String(event.sourceRunId),
     runId: String(event.runId),
+    state,
   };
 }
 
-/** True when this exact deferral has already been given a retry. Pure. */
-export function hasReviewQuotaRetry(comments = [], { head = '', role = '', deferredRunId = '' } = {}) {
-  return (comments || []).some((comment) => {
-    if (!isTrustedAutomationComment(comment)) return false;
+/** Ultimo stato del retry per questa deferral. Pure e append-only. */
+export function latestReviewQuotaRetry(
+  comments = [],
+  { head = '', role = '', deferredRunId = '' } = {},
+) {
+  let best = null;
+  let bestRank = [0, 0, -1];
+  for (const [index, comment] of (comments || []).entries()) {
+    if (!isTrustedAutomationComment(comment)) continue;
     const event = parseReviewQuotaRetryMarker(comment?.body);
-    return event
-      && event.head === String(head)
-      && (!role || event.role === String(role))
-      && event.deferredRunId === String(deferredRunId);
-  });
+    if (!event
+        || event.head !== String(head)
+        || (role && event.role !== String(role))
+        || event.deferredRunId !== String(deferredRunId)) continue;
+    const rank = commentRank(comment, index);
+    if (laterRank(bestRank, rank) === rank) {
+      best = event;
+      bestRank = rank;
+    }
+  }
+  return best;
+}
+
+/** True when this exact deferral has an active/confirmed retry. Pure. */
+export function hasReviewQuotaRetry(comments = [], options = {}) {
+  const latest = latestReviewQuotaRetry(comments, options);
+  return !!latest && REVIEW_QUOTA_RETRY_ACTIVE_STATES.has(latest.state);
 }
 
 /** Return a retry candidate or null. Pure and head-pinned. */
@@ -146,7 +171,9 @@ export function deferredReviewCandidate({ head = '', comments = [] } = {}) {
   return deferred;
 }
 
-export function reviewQuotaRetryBody({ head, deferredRunId, role, sourceRunId, runId }) {
+export function reviewQuotaRetryBody({
+  head, deferredRunId, role, sourceRunId, runId, state = 'confirmed',
+}) {
   const event = {
     version: 1,
     head: String(head),
@@ -154,6 +181,7 @@ export function reviewQuotaRetryBody({ head, deferredRunId, role, sourceRunId, r
     deferredRunId: String(deferredRunId),
     sourceRunId: String(sourceRunId),
     runId: String(runId),
+    state: String(state),
   };
   return `${REVIEW_QUOTA_RETRY_MARKER} ${JSON.stringify(event)} -->\n`
     + `_Review quota rescuer zero-Claude: rilancio della run ${event.role} #${event.sourceRunId} `
@@ -271,24 +299,45 @@ function main() {
       continue;
     }
 
+    const retryFields = {
+      head: candidate.head,
+      role: candidate.deferred.role,
+      deferredRunId: candidate.deferred.runId,
+      sourceRunId: run.databaseId,
+      runId: process.env.GITHUB_RUN_ID || 'review-quota-rescuer',
+    };
+
+    // Due operazioni remote non possono essere atomiche. Il marker `requested`
+    // è quindi un fence durevole scritto PRIMA del rerun: se la conferma dopo
+    // il rerun fallisce, il fence impedisce un doppio Claude; se il rerun fallisce
+    // possiamo appendere `failed` e rendere la deferral nuovamente eleggibile.
+    const requestedBody = reviewQuotaRetryBody({ ...retryFields, state: 'requested' });
+    if (!postRetryComment(number, requestedBody)) {
+      releaseLease(number, candidate.deferred.role, lease.token, retryFields.runId);
+      console.log(`::warning::PR #${number}: marker retry non verificabile → rerun non richiesto, nessun retry contabilizzato.`);
+      continue;
+    }
+
     let rerunRequested = false;
     try {
       gh(['run', 'rerun', String(run.databaseId), '--repo', REPO]);
       rerunRequested = true;
     } catch (error) {
       console.log(`::warning::rerun ${candidate.deferred.role} #${run.databaseId} fallito per PR #${number}: ${String(error?.message || error).slice(0, 180)}`);
-      releaseLease(number, candidate.deferred.role, lease.token, process.env.GITHUB_RUN_ID || 'review-quota-rescuer');
+      const failedBody = reviewQuotaRetryBody({ ...retryFields, state: 'failed' });
+      if (!postRetryComment(number, failedBody)) {
+        console.log(`::warning::PR #${number}: impossibile riconciliare il marker failed; il marker requested resta come fence anti-duplicato.`);
+      }
+      releaseLease(number, candidate.deferred.role, lease.token, retryFields.runId);
     }
     if (!rerunRequested) continue;
 
-    const body = reviewQuotaRetryBody({
-      head: candidate.head,
-      role: candidate.deferred.role,
-      deferredRunId: candidate.deferred.runId,
-      sourceRunId: run.databaseId,
-      runId: process.env.GITHUB_RUN_ID || 'review-quota-rescuer',
-    });
-    postRetryComment(number, body);
+    const confirmedBody = reviewQuotaRetryBody({ ...retryFields, state: 'confirmed' });
+    if (!postRetryComment(number, confirmedBody)) {
+      // `requested` è già durevole e hasReviewQuotaRetry() lo considera attivo:
+      // il prossimo tick non può rilanciare lo stesso source run due volte.
+      console.log(`::warning::PR #${number}: conferma marker retry non pubblicata; il fence requested impedisce duplicati.`);
+    }
     console.log(`PR #${number}: ${candidate.deferred.role} #${run.databaseId} rilanciato sulla HEAD ${candidate.head.slice(0, 12)}.`);
     retried += 1;
   }

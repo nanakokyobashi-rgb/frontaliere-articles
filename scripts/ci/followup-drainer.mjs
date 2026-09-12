@@ -1742,10 +1742,16 @@ export function isQueueManaged(iss) {
 export function isRecoverableQueueManaged(iss) {
   const labels = (iss?.labels || []).map((label) => label?.name).filter(Boolean);
   if (!labels.includes('needs-human')) return isQueueManaged(iss);
-  return classifyIssue(
+  const classification = classifyIssue(
     iss?.title,
     labels.filter((label) => label !== 'needs-human'),
-  ).route === 'queue';
+  );
+  // `publish` è l'unica categoria con route diretto `fix`: un crawler-fix può
+  // parcheggiare anche questa issue dopo aver già pushato il checkpoint. Il
+  // branch live rende recuperabile il checkpoint, ma solo per questo route
+  // esplicito; `backlog` e `crawler-transient` restano veto (`route: none`).
+  return classification.route === 'queue'
+    || (classification.category === 'publish' && classification.route === 'fix');
 }
 
 /**

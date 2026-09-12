@@ -205,3 +205,11 @@ test('#8365: il percorso CLI del lease è fail-closed e non altera il manifest',
   assert.match(src, /api', '--paginate', '--slurp/);
   assert.doesNotMatch(src, /dist\/api\/manifest\.json.*write|write.*dist\/api\/manifest\.json/s);
 });
+
+test('#8365: una contesa dopo la rilettura lascia il marker per il rescuer PR', () => {
+  const src = fs.readFileSync(path.join(ROOT, 'scripts/ci/check-quota-backoff.mjs'), 'utf8');
+  const contention = src.slice(src.indexOf('if (!existing && liveAfter.length !== 1)'));
+  assert.match(contention, /postReviewQuotaDeferred\(/,
+    'il perdente della contesa non deve sparire senza deferral head-pinned');
+  assert.match(contention, /shared-quota-lease-contention/);
+});
