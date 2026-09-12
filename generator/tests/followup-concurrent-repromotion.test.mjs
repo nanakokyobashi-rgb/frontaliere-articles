@@ -29,6 +29,7 @@ import {
   lastFixPromotion,
   isConcurrentRepromotion,
   isDeliveredThisRun,
+  mergeAfterFixOutcomeAt,
   selectLatestMergedFixPr,
 } from '../../scripts/ci/followup-drainer.mjs';
 
@@ -58,6 +59,15 @@ test('la consegna cerca le PR collegate all issue, anche con branch rinominato',
     files: ['new.mjs'],
     filesKnown: true,
   });
+});
+
+test('un merge conta solo se successivo all\'ultimo verdetto FIX_OUTCOME', () => {
+  const outcomeAt = T0 + 30 * MIN;
+  const mergedAt = T0 + 40 * MIN;
+  assert.equal(mergeAfterFixOutcomeAt(mergedAt, outcomeAt), mergedAt);
+  assert.equal(mergeAfterFixOutcomeAt(outcomeAt, outcomeAt), null);
+  assert.equal(mergeAfterFixOutcomeAt(outcomeAt - MIN, outcomeAt), null);
+  assert.equal(mergeAfterFixOutcomeAt(mergedAt, null), null);
 });
 
 // La promozione del DRAIN: `edit(cand, { add: [LBL_FIX], remove: [LBL_QUEUED] })`

@@ -2613,6 +2613,15 @@ function latestFixOutcomeEntry(num) {
   return latestFixOutcomeEntryFromComments(issueComments(num) || []);
 }
 
+/** Una PR può sbloccare il re-queue solo se il merge è successivo all'ultimo
+ * verdetto FIX_OUTCOME. Un merge precedente non prova che abbia consegnato il
+ * lavoro dell'ultimo tentativo: potrebbe essere una PR stantia riusata dopo un
+ * fallimento, e considerarla nuova renderebbe gratuito un retry fallito. */
+export function mergeAfterFixOutcomeAt(mergedAt, outcomeAt) {
+  if (!Number.isFinite(mergedAt) || !Number.isFinite(outcomeAt)) return null;
+  return mergedAt > outcomeAt ? mergedAt : null;
+}
+
 /** ULTIMA promozione (`agent:fix` aggiunta) di questa issue con la sua
  * attribuzione (`{at, byDrainer}`), `{at: null}` su errore gh / evento assente.
  * `at` null è fail-CLOSED per il ramo DELIVERED: senza sapere quando è iniziata
@@ -2635,7 +2644,9 @@ function fixPromotion(num) {
  * anche branch rinominati o creati manualmente; la query sul vecchio branch
  * resta come fallback per i dati storici senza evento di cross-reference. */
 function mergedFixPrAt(num) {
-  return mergedFixPr(num)?.mergedAt ?? null;
+  const mergedAt = mergedFixPr(num)?.mergedAt ?? null;
+  const outcomeAt = latestFixOutcomeEntry(num)?.at ?? null;
+  return mergeAfterFixOutcomeAt(mergedAt, outcomeAt);
 }
 
 // `gh pr list --json files` risolve `files(first: 100)`: oltre quella soglia la
