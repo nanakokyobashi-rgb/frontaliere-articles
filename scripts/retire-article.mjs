@@ -53,7 +53,8 @@ import { ledgerArticleId } from '../generator/scripts/lib/source-url-ledger.mjs'
 import { writeJsonAtomic } from '../generator/scripts/lib/atomic-write-json.mjs';
 import {
   SECTIONS, LOCALES, IMAGES_LEDGER, IMAGE_CATALOG, RETIRED_LEDGER,
-  seoFilesFor, leftoverSurfacesFor, surfaceArticleIdStatus, SURFACE_ARTICLE_ID_STATUS,
+  seoFilesFor, leftoverSurfacesFor, requiredSurfaceFilesFor,
+  surfaceArticleIdStatus, SURFACE_ARTICLE_ID_STATUS,
 } from './lib/article-surfaces.mjs';
 // La localizzazione dei letterali TS (span dell'array piatto degli id, e la
 // parentesi che chiude davvero quella di apertura) vive in un modulo condiviso:
@@ -236,6 +237,11 @@ function main() {
 
   const section = findSection(id);
   const cfg = SECTIONS[section];
+  // Missing registry/slug/meta surfaces must stop before any retirement
+  // planning can become a partial write. Keep this preflight before the
+  // dry-run branch too: --dry-run must validate the same required inputs as a
+  // real retirement, not merely avoid persisting an already-invalid plan.
+  requiredSurfaceFilesFor(section);
   const winnerSection = findSection(winner); // esiste? altrimenti throw: mai ritirare verso il nulla
   console.log(`ritiro '${id}' (${section}) → vincitore '${winner}' (${winnerSection})${dryRun ? '  [DRY RUN]' : ''}`);
 
