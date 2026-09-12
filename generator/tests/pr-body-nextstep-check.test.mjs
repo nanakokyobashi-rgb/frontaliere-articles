@@ -177,6 +177,15 @@ test('#140: una PR concatenata al plurale senza numero resta non tracciabile', (
   assert.equal(blockingNextStepFindings(res).length, 1);
 });
 
+test('#140: ogni menzione plurale di PR concatenata deve avere il proprio numero', () => {
+  assert.equal(invalidPluralChainedPrState('PR concatenate #1365 restano tracciate.'), false);
+  const text = 'PR concatenate #1365 e altre PR concatenate successive restano da lavorare.';
+  assert.equal(invalidPluralChainedPrState(text), true);
+  const res = checkNextStepStates(withSection([`- ${text}`]));
+  assert.equal(res.ok, false);
+  assert.equal(res.violations[0].type, 'chained-pr-no-number');
+});
+
 test('#140: blocked per daily sequencing non equivale a un blocker esterno', () => {
   const text = 'Gli item restanti sono blocked: daily bucket richiede le restanti PR item-per-item.';
   assert.equal(invalidBlockedCauseIn(text), true);
@@ -185,6 +194,13 @@ test('#140: blocked per daily sequencing non equivale a un blocker esterno', () 
   assert.equal(res.ok, false);
   assert.equal(res.violations[0].type, 'blocked-internal-sequencing');
   assert.equal(blockingNextStepFindings(res).length, 1);
+});
+
+test('#140: un blocker esterno resta stato anche se cita item residui dopo la causa', () => {
+  const text = 'Stato: blocked: autorizzazione legale pendente; remaining items restano tracciati.';
+  assert.equal(invalidBlockedCauseIn(text), false);
+  assert.equal(bulletState(text)?.id, 'blocked');
+  assert.equal(checkNextStepStates(withSection([`- ${text}`])).ok, true);
 });
 
 test('«non in questa PR» è la negazione, non lo stato (#862)', () => {

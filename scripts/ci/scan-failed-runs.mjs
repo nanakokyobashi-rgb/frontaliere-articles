@@ -214,7 +214,12 @@ export function isDeclaredSkipOnly(jobs) {
 // (#1025). Il rosso del classifier resta intatto per drainer e health report.
 export const ISSUE_FIX_WORKFLOW_NAME = 'Issue fix (Claude → PR)';
 export const ISSUE_FIX_CLASSIFIER_STEP_RE = /^Classify outcome \(work-done, not CLI exit\)$/;
-export const ISSUE_FIX_NON_DELIVERY_RE = /nessuna PR aperta\/mergiata e la CLI .*non-delivery reale/i;
+// `gh run view --log-failed` include anche il sorgente dello shell step. La
+// firma deve quindi richiedere la riga runtime `::error::issue-fix #<N>:`;
+// altrimenti il semplice `echo "...#$ISSUE..."` del workflow puo' bastare a
+// sopprimere un errore diverso del classifier.
+export const ISSUE_FIX_NON_DELIVERY_RE =
+  /(?:^|\n)[^\n]*::error::issue-fix #\d+:\s+nessuna PR aperta\/mergiata e la CLI [^;\n]*?-> non-delivery reale\./i;
 
 /**
  * True solo per l'esito di non-consegna gia' posseduto dal ciclo issue-fix.

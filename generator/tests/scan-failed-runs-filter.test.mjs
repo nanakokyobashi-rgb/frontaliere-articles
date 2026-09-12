@@ -363,6 +363,8 @@ test('#170: il filtro NON e\' un allowlist di workflow — il nome dello step e\
 
 const ISSUE_FIX_FAILURE_LOG =
   "::error::issue-fix #1025: nessuna PR aperta/mergiata e la CLI e' fallita ('failure') -> non-delivery reale.";
+const ISSUE_FIX_COMMAND_LOG =
+  'echo "::error::issue-fix #$ISSUE: nessuna PR aperta/mergiata e la CLI e\' fallita (\'failure\') -> non-delivery reale."';
 const classifierJob = (step = 'Classify outcome (work-done, not CLI exit)') => ({
   name: 'fix',
   step,
@@ -376,6 +378,11 @@ test('#1025: la non-consegna dichiarata del classificatore non apre una issue ri
     isExpectedIssueFixNonDelivery(ISSUE_FIX_WORKFLOW_NAME, [classifierJob()], ISSUE_FIX_FAILURE_LOG),
     true,
   );
+});
+
+test('#1025: il sorgente echo del workflow non vale come prova runtime', () => {
+  assert.equal(ISSUE_FIX_NON_DELIVERY_RE.test(ISSUE_FIX_COMMAND_LOG), false);
+  assert.equal(ISSUE_FIX_NON_DELIVERY_RE.test(`fix 2026-09-12Z ${ISSUE_FIX_FAILURE_LOG}`), true);
 });
 
 test('#1025: un errore diverso nello stesso workflow resta segnalabile', () => {

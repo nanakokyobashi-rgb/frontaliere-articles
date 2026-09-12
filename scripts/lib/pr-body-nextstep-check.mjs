@@ -155,21 +155,35 @@ export const STATE_FORMS = [
 // `pr-body-sections-check.mjs` copre la forma singolare; qui teniamo anche il
 // plurale perché questo modulo è il gate corpus-only che vede le ricorrenze del
 // daily bucket (#1365/#1367).
-const PLURAL_CHAINED_PR_MENTION_RE = /\bPR\s+concatenat[ei]\b/i;
-const PLURAL_CHAINED_PR_STATE_RE = /\bPR\s+concatenat[ei]\s*#\s*\d+/i;
+const PLURAL_CHAINED_PR_MENTION_RE = /\bPR\s+concatenat[ei]\b/gi;
+const PLURAL_CHAINED_PR_STATE_RE = /^\s*#\s*\d+/i;
 
 // `blocked:` è uno stato solo quando la causa è esterna. Queste formule sono
 // il pattern ricorrente dei body daily: dichiarano una coda interna, non un
 // impedimento operativo che richieda una issue o una decisione del proprietario.
-const INTERNAL_BLOCKED_SEQUENCE_RE = /\b(?:blocked|bloccato|bloccata|bloccati|bloccate)\s*[:—–-]\s*[^.!?\n]{0,180}\b(?:daily\s+bucket|bucket\s+giornalier[oa]|item[-\s]+per[-\s]+item|(?:restant[ie]|remaining)\s+(?:item|items|PR|PRs)|(?:PR|item|items)\s+(?:successiv[ae]|successive|following|future))\b/i;
+const INTERNAL_BLOCKED_SEQUENCE_RE =
+  /\b(?:daily\s+bucket|bucket\s+giornalier[oa]|item[-\s]+per[-\s]+item|(?:restant[ie]|remaining)\s+(?:item|items|PR|PRs)|(?:PR|item|items)\s+(?:successiv[ae]|successive|following|future))\b/i;
+const BLOCKED_CAUSE_RE =
+  /\b(?:blocked|bloccato|bloccata|bloccati|bloccate)\s*[:—–-]\s*([^\n]*)/i;
 
 export function invalidPluralChainedPrState(text) {
   const s = stripEmphasis(String(text ?? ''));
-  return PLURAL_CHAINED_PR_MENTION_RE.test(s) && !PLURAL_CHAINED_PR_STATE_RE.test(s);
+  const mentions = [...s.matchAll(PLURAL_CHAINED_PR_MENTION_RE)];
+  return mentions.some((mention) => {
+    const afterMention = s.slice(mention.index + mention[0].length);
+    return !PLURAL_CHAINED_PR_STATE_RE.test(afterMention);
+  });
 }
 
 export function invalidBlockedCauseIn(text) {
-  return INTERNAL_BLOCKED_SEQUENCE_RE.test(stripEmphasis(String(text ?? '')));
+  const s = stripEmphasis(String(text ?? ''));
+  const match = s.match(BLOCKED_CAUSE_RE);
+  if (!match) return false;
+  // Un blocker esterno puo' citare i residui in una clausola successiva. Si
+  // classifica solo la prima clausola della causa, prima di punteggiatura che
+  // introduce altro contesto, cosi' non si perde lo stato esterno legittimo.
+  const firstClause = match[1].split(/[.!?,;]/, 1)[0];
+  return INTERNAL_BLOCKED_SEQUENCE_RE.test(firstClause);
 }
 
 /**
