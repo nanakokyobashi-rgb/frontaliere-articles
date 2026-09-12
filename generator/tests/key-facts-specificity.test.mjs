@@ -148,13 +148,13 @@ test('i bullet sulla stessa riga non fanno perdere il conteggio', () => {
   assert.ok(result.value.includes('* Dove: Zugo'));
 });
 
-test('lo scanner riproduce la baseline 53 file-locale e 29 articoli', { skip: !fs.existsSync(CONTENT_PATH) }, () => {
+test('lo scanner riproduce la baseline corrente senza fatti vacui', { skip: !fs.existsSync(CONTENT_PATH) }, () => {
   const report = scanCorpus(ROOT);
-  assert.equal(report.files.length, 53);
-  assert.equal(report.articles.length, 29);
+  assert.equal(report.files.length, 0);
+  assert.equal(report.articles.length, 0);
   assert.deepEqual(
     Object.fromEntries(Object.entries(report.byLocale).map(([locale, value]) => [locale, value.files.length])),
-    { it: 25, en: 23, de: 5, fr: 0 },
+    { it: 0, en: 0, de: 0, fr: 0 },
   );
 });
 
