@@ -158,13 +158,22 @@ export function claimFreeMtLlmFallback(report, locale, faqCount = report?.faqCou
   const key = locale || '?';
   const usedHere = report.llmFallbacksByLocale[key] || 0;
   const localeLimit = maxFreeMtLlmFallbacksPerLocale(faqCount);
-  // Keep one claim in reserve for every other supported locale that has not
-  // claimed yet. Without this reserve, a larger FAQ set raises the per-locale
-  // quota above the fixed run cap and the loop order can leave the last locale
-  // with zero recovery attempts (e.g. en=4, de=3, fr=0 at faqCount=2).
+  // Keep one claim in reserve only for another supported locale that has an
+  // actually rejected field still waiting for recovery. Reserving blindly for
+  // every locale at zero wastes the fixed run cap when, for example, only en
+  // and de have free-MT failures: with faqCount=2 it used to yield en=4,
+  // de=2, fr=0 instead of leaving de its third claim.
+  const rejectedFieldKeys = Object.keys(report.unusableFields || {});
+  const currentLocaleIndex = FREE_MT_LLM_FALLBACK_LOCALES.indexOf(key);
+  const rejectedFieldsByLocale = Object.fromEntries(
+    FREE_MT_LLM_FALLBACK_LOCALES.map((candidate) => [
+      candidate,
+      rejectedFieldKeys.filter((fieldKey) => fieldKey.startsWith(`${candidate}:`)).length,
+    ]),
+  );
   const reserveForOtherLocales = FREE_MT_LLM_FALLBACK_LOCALES
-    .filter((candidate) => candidate !== key
-      && (report.llmFallbacksByLocale[candidate] || 0) === 0)
+    .filter((candidate, candidateIndex) => candidateIndex > currentLocaleIndex
+      && rejectedFieldsByLocale[candidate] > (report.llmFallbacksByLocale[candidate] || 0))
     .length;
   if (usedHere >= localeLimit
     || (report.llmFallbacks || 0) + reserveForOtherLocales >= MAX_FREE_MT_LLM_FALLBACKS_PER_RUN) {
