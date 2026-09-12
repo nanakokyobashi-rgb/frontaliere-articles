@@ -279,9 +279,35 @@ export function reviewQuotaRetryBody({
 }
 
 function listOpenPullRequests() {
-  return apiPages(`repos/${REPO}/pulls?state=open&per_page=100`)
+  const all = apiPages(`repos/${REPO}/pulls?state=open&per_page=100`)
     .filter((pr) => pr && pr.number && !pr.draft)
-    .slice(0, MAX_PRS);
+  const cursor = nonNegativeInt(
+    process.env.REVIEW_QUOTA_RESCUER_CURSOR ?? process.env.GITHUB_RUN_NUMBER,
+    0,
+  );
+  const selection = roundRobinWindow(all, { limit: MAX_PRS, cursor });
+  if (selection.items.length < all.length) {
+    console.log(
+      `review-quota-rescuer: pool PR=${all.length}, finestra=${selection.items.length}, `
+      + `round=${cursor}, start=${selection.start}; il prossimo run osserva una finestra diversa.`,
+    );
+  }
+  return selection.items;
+}
+
+function nonNegativeInt(value, fallback = 0) {
+  const n = Number(value);
+  return Number.isSafeInteger(n) && n >= 0 ? n : fallback;
+}
+
+export function roundRobinWindow(items, { limit = MAX_PRS, cursor = 0 } = {}) {
+  const values = Array.isArray(items) ? items : [];
+  const cap = positiveInt(limit, values.length || 1);
+  if (values.length <= cap) return { items: values.slice(), start: 0 };
+  const position = nonNegativeInt(cursor, 0);
+  const start = ((position % values.length) * cap) % values.length;
+  const rotated = values.slice(start).concat(values.slice(0, start));
+  return { items: rotated.slice(0, cap), start };
 }
 
 function commentsForPr(number) {
@@ -298,18 +324,32 @@ function sourceRunForCandidate(candidate, { completedOnly = true } = {}) {
   if (!/^\d+$/.test(sourceRunId) || !expectedWorkflow) return null;
   const raw = gh([
     'run', 'view', sourceRunId, '--repo', REPO,
-    '--json', 'databaseId,headSha,status,workflowName,headBranch,event,attempt',
+    '--json', 'databaseId,headSha,status,workflowName,headBranch,event,attempt,conclusion',
   ], { allowFail: true });
   const run = parseJson(raw, null);
   if (!run
       || (completedOnly && run.status !== 'completed')
       || run.headSha !== candidate.head
       || run.workflowName !== expectedWorkflow) return null;
+  const attempt = Number(run.attempt);
+  if (!Number.isSafeInteger(attempt) || attempt < 1) return null;
   return {
     ...run,
     databaseId: String(run.databaseId || sourceRunId),
-    attempt: Number(run.attempt),
+    attempt,
   };
+}
+
+/** Pure: an autonomous rerun or a successful current gate closes the fence. */
+export function sourceRunAlreadyHandled(candidate, run) {
+  const deferredAttempt = Number(candidate?.deferred?.sourceAttempt);
+  const runAttempt = Number(run?.attempt);
+  const hasDeferredAttempt = Number.isSafeInteger(deferredAttempt) && deferredAttempt > 0;
+  const autonomousAttempt = Number.isSafeInteger(runAttempt)
+    && runAttempt > 0
+    && (hasDeferredAttempt ? runAttempt > deferredAttempt : runAttempt > 1);
+  return autonomousAttempt
+    || (run?.status === 'completed' && run?.conclusion === 'success');
 }
 
 function releaseLease(prNumber, role, token, runId) {
@@ -328,6 +368,10 @@ function releaseLease(prNumber, role, token, runId) {
 }
 
 function postRetryComment(number, body) {
+  if (DRY_RUN) {
+    console.log(`[dry] PR #${number}: non pubblicherei il marker retry.`);
+    return false;
+  }
   try {
     gh(['pr', 'comment', String(number), '--repo', REPO, '--body', body]);
     return true;
@@ -368,6 +412,26 @@ function retryFieldsForCandidate(candidate, run, { preserveRetry = false } = {})
 function retryCommentAgeMs(retry) {
   const createdAtMs = Number(retry?.rank?.[0]) || 0;
   return createdAtMs > 0 ? Math.max(0, Date.now() - createdAtMs) : null;
+}
+
+function closeAlreadyHandledDeferral(candidate, run, number) {
+  const body = reviewQuotaRetryBody({
+    ...retryFieldsForCandidate(candidate, run),
+    sourceAttempt: run.attempt,
+    state: 'confirmed',
+  });
+  if (postRetryComment(number, body)) {
+    console.log(
+      `PR #${number}: deferral ${candidate.deferred.role} chiusa senza quota; `
+      + `run sorgente già avanzata/successful (attempt ${run.attempt}).`,
+    );
+    return true;
+  }
+  console.log(
+    `::warning::PR #${number}: run sorgente già gestita (attempt ${run.attempt}), `
+    + 'ma il marker confirmed non è pubblicabile; nessun rerun viene richiesto.',
+  );
+  return false;
 }
 
 function reconcileRequestedRetry(candidate, number) {
@@ -456,13 +520,29 @@ function main() {
     if (retried >= MAX_RETRIES) break;
     const number = Number(candidate.pr.number);
     if (candidate.retry?.event?.state === 'requested') {
-      reconcileRequestedRetry(candidate, number);
+      if (DRY_RUN) {
+        console.log(`[dry] PR #${number}: riconciliazione del marker requested saltata.`);
+      } else {
+        reconcileRequestedRetry(candidate, number);
+      }
       continue;
     }
 
     const run = sourceRunForCandidate(candidate);
     if (!run) {
       console.log(`PR #${number}: deferral ${candidate.deferred.role} sulla HEAD ${candidate.head.slice(0, 12)}, run sorgente non verificabile/completata.`);
+      continue;
+    }
+
+    if (sourceRunAlreadyHandled(candidate, run)) {
+      if (DRY_RUN) {
+        console.log(
+          `[dry] PR #${number}: non rilancerei ${candidate.deferred.role} `
+          + `#${run.databaseId}; run sorgente già gestita (attempt ${run.attempt}).`,
+        );
+      } else {
+        closeAlreadyHandledDeferral(candidate, run, number);
+      }
       continue;
     }
 

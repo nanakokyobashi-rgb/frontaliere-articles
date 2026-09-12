@@ -17,10 +17,33 @@ import {
   reviewQuotaDeferredCandidates,
   collectReviewQuotaCandidates,
   sourceWorkflowForRole,
+  roundRobinWindow,
+  sourceRunAlreadyHandled,
 } from '../../scripts/ci/review-quota-rescuer.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const HEAD = 'a'.repeat(40);
+
+test('la scansione PR è round-robin quando il pool supera il cap', () => {
+  const prs = Array.from({ length: 250 }, (_, index) => index + 1);
+  assert.deepEqual(roundRobinWindow(prs, { limit: 100, cursor: 0 }).items, prs.slice(0, 100));
+  assert.deepEqual(roundRobinWindow(prs, { limit: 100, cursor: 1 }).items, prs.slice(100, 200));
+  assert.deepEqual(
+    roundRobinWindow(prs, { limit: 100, cursor: 2 }).items,
+    prs.slice(200, 250).concat(prs.slice(0, 50)),
+  );
+  assert.deepEqual(roundRobinWindow(prs, { limit: 100, cursor: 3 }).items, prs.slice(50, 150));
+  assert.deepEqual(roundRobinWindow([1, 2], { limit: 100, cursor: 9 }), { items: [1, 2], start: 0 });
+});
+
+test('una run sorgente avanzata o un gate riuscito non consuma un nuovo retry', () => {
+  const candidate = { deferred: { sourceAttempt: 2 } };
+  assert.equal(sourceRunAlreadyHandled(candidate, { attempt: 3, status: 'completed', conclusion: 'failure' }), true);
+  assert.equal(sourceRunAlreadyHandled(candidate, { attempt: 2, status: 'completed', conclusion: 'success' }), true);
+  assert.equal(sourceRunAlreadyHandled(candidate, { attempt: 2, status: 'completed', conclusion: 'failure' }), false);
+  assert.equal(sourceRunAlreadyHandled({ deferred: {} }, { attempt: 2, status: 'completed', conclusion: 'failure' }), true);
+  assert.equal(sourceRunAlreadyHandled({ deferred: {} }, { attempt: 1, status: 'completed', conclusion: 'success' }), true);
+});
 
 test('il rescuer seleziona solo una deferral sulla HEAD corrente', () => {
   const deferredBody = reviewQuotaDeferredBody({
@@ -215,7 +238,15 @@ test('il wiring reagisce al completamento dei consumer e rilascia reservation es
   assert.match(rescuer, /if \(!postRetryComment\(number, requestedBody\)\)/);
   assert.match(rescuer, /state: 'failed'/);
   assert.match(rescuer, /state: 'confirmed'/);
-  assert.match(rescuer, /--json', 'databaseId,headSha,status,workflowName,headBranch,event,attempt'/);
+  assert.match(rescuer, /--json', 'databaseId,headSha,status,workflowName,headBranch,event,attempt,conclusion'/);
   assert.match(rescuer, /includeRequested: true/);
   assert.match(rescuer, /sourceAttempt/);
+  assert.match(rescuer, /REVIEW_QUOTA_RESCUER_CURSOR/);
+  assert.match(rescuer, /roundRobinWindow/);
+  assert.match(rescuer, /if \(DRY_RUN\)[\s\S]*riconciliazione del marker requested saltata/);
+  const manifest = JSON.parse(fs.readFileSync(path.join(ROOT, 'scripts/ci/loop-sync-manifest.json'), 'utf8'));
+  assert.equal(
+    manifest.files.find((entry) => entry.path === '.github/workflows/review-quota-rescuer.yml')?.mode,
+    'corpus-only',
+  );
 });

@@ -3817,6 +3817,16 @@
         "corpus": "edbae72518bc0a82",
         "alignedAt": "2026-09-12"
       }
+    },
+    {
+      "path": ".github/workflows/review-quota-rescuer.yml",
+      "mode": "corpus-only",
+      "reason": "Workflow zero-Claude che osserva la fine dei consumer e il cron per riattivare le review PR differite dal lease condiviso. Il sito non possiede questo lease ne' questo consumer, quindi non esiste un gemello da portare.",
+      "baseline": {
+        "site": null,
+        "corpus": "ae9dda84d95be040",
+        "alignedAt": "2026-09-12"
+      }
     }
   ]
 }

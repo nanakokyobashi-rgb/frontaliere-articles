@@ -170,6 +170,17 @@ test('#8365: il marker di deferral è head-pinned e porta il consumer sorgente',
   assert.equal(parseReviewQuotaDeferredMarker(body.replace('redcheck', 'unknown')), null);
 });
 
+test('#8365: il marker di deferral registra l’attempt sorgente quando disponibile', () => {
+  const body = reviewQuotaDeferredBody({
+    head: 'a'.repeat(40), runId: '123', role: 'review', reason: 'floor', sourceAttempt: 4,
+  });
+  assert.equal(parseReviewQuotaDeferredMarker(body).sourceAttempt, 4);
+  assert.equal(
+    parseReviewQuotaDeferredMarker(body.replace('"sourceAttempt":4', '"sourceAttempt":0')),
+    null,
+  );
+});
+
 test('#8365: lease scaduto o rilasciato non blocca il tick successivo', () => {
   const nowSec = 1_800_000_000;
   const expired = {

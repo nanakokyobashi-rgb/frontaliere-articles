@@ -173,9 +173,11 @@ export function quotaLeaseEvents(comments = []) {
  * Body idempotente che rende osservabile una review differita per contesa del
  * lease. Il rescuer zero-Claude usa `head` + `runId` come chiave per rilanciare
  * esattamente la run giusta dopo il rilascio, senza inventare un commit vuoto.
- * @param {{head?: string, runId?: string|number, role?: string, reason?: string}} event
+ * @param {{head?: string, runId?: string|number, role?: string, reason?: string, sourceAttempt?: string|number}} event
  */
-export function reviewQuotaDeferredBody({ head = '', runId = '', role = 'review', reason = '' } = {}) {
+export function reviewQuotaDeferredBody({
+  head = '', runId = '', role = 'review', reason = '', sourceAttempt,
+} = {}) {
   const event = {
     version: 1,
     head: String(head),
@@ -183,6 +185,12 @@ export function reviewQuotaDeferredBody({ head = '', runId = '', role = 'review'
     role: String(role),
     reason: String(reason || 'shared-quota-lease-unavailable'),
   };
+  const parsedAttempt = sourceAttempt === undefined || sourceAttempt === null
+    ? undefined
+    : Number(sourceAttempt);
+  if (Number.isSafeInteger(parsedAttempt) && parsedAttempt > 0) {
+    event.sourceAttempt = parsedAttempt;
+  }
   return `${REVIEW_QUOTA_DEFERRED_MARKER} ${JSON.stringify(event)} -->\n`
     + `_Review differita senza consumare quota Claude: lease condiviso negato (${event.reason})._`;
 }
@@ -198,12 +206,18 @@ export function parseReviewQuotaDeferredMarker(body) {
       || !String(event.runId || '')
       || !PR_QUOTA_CONSUMER_ROLES.has(String(event.role || ''))
       || !String(event.reason || '')) return null;
+  const sourceAttempt = event.sourceAttempt === undefined
+    ? undefined
+    : Number(event.sourceAttempt);
+  if (sourceAttempt !== undefined
+      && (!Number.isSafeInteger(sourceAttempt) || sourceAttempt < 1)) return null;
   return {
     ...event,
     head: String(event.head),
     runId: String(event.runId),
     role: String(event.role),
     reason: String(event.reason),
+    ...(sourceAttempt === undefined ? {} : { sourceAttempt }),
   };
 }
 
@@ -428,7 +442,13 @@ function postReviewQuotaDeferred(repo, target, role, reason, runId) {
   try {
     leaseGh([
       'pr', 'comment', String(target), '--repo', repo,
-      '--body', reviewQuotaDeferredBody({ head, runId, role, reason }),
+      '--body', reviewQuotaDeferredBody({
+        head,
+        runId,
+        role,
+        reason,
+        sourceAttempt: process.env.GITHUB_RUN_ATTEMPT,
+      }),
     ]);
   } catch (error) {
     // La telemetria non deve trasformare un rifiuto corretto in un errore di
