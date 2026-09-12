@@ -3,7 +3,8 @@
  *
  * This is the module that replaced main's `resolve-git-add-path.mjs`, so the
  * cases below are as much about what it must NOT do (relocate the generator's
- * own state files, resolve symlinks that do not exist here) as what it must.
+ * own state files, follow legacy aliases instead of staging real targets) as
+ * what it must.
  */
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
@@ -197,7 +198,9 @@ test('no source file builds a corpus path without going through corpusPath()', a
 });
 
 test('the published content tree has no symlinks, so the resolver stays dropped', async () => {
-  // If this ever fails, main's realpath-based resolve-git-add-path.mjs becomes
+  // The checkout may still expose legacy aliases under data/ and services/;
+  // this assertion is specifically about the real targets under content/.
+  // If it ever fails, main's realpath-based resolve-git-add-path.mjs becomes
   // relevant again for corpus targets, and corpus-paths.mjs's header is no
   // longer true.
   const fs = await import('node:fs');
@@ -215,4 +218,49 @@ test('the published content tree has no symlinks, so the resolver stays dropped'
   };
   walk(path.join(repoRoot, 'content'));
   assert.deepEqual(found, []);
+});
+
+test('git-add helpers bypass legacy symlink aliases and stage real targets', async () => {
+  const fs = await import('node:fs');
+  const os = await import('node:os');
+  const path = await import('node:path');
+  const { execFileSync } = await import('node:child_process');
+  const repoRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'corpus-paths-git-add-'));
+
+  try {
+    fs.mkdirSync(path.join(repoRoot, 'content/blog-body/it'), { recursive: true });
+    fs.mkdirSync(path.join(repoRoot, 'services/locales'), { recursive: true });
+    fs.mkdirSync(path.join(repoRoot, 'data'), { recursive: true });
+    fs.writeFileSync(path.join(repoRoot, 'content/blog-body/it/article.ts'), 'export const body = 1;\n');
+    fs.writeFileSync(path.join(repoRoot, 'content/blog-articles-data.ts'), 'export const data = 1;\n');
+    fs.symlinkSync('../../content/blog-body', path.join(repoRoot, 'services/locales/blog-body'), 'dir');
+    fs.symlinkSync('../content/blog-articles-data.ts', path.join(repoRoot, 'data/blog-articles-data.ts'), 'file');
+    execFileSync('git', ['init', '--quiet'], { cwd: repoRoot });
+
+    const sourcePaths = [
+      'services/locales/blog-body/it/article.ts',
+      'data/blog-articles-data.ts',
+    ];
+    const resolved = resolveGitAddPaths(repoRoot, sourcePaths);
+    assert.deepEqual(resolved, [
+      'content/blog-body/it/article.ts',
+      'content/blog-articles-data.ts',
+    ]);
+    for (const rel of resolved) {
+      assert.equal(
+        fs.lstatSync(path.join(repoRoot, rel)).isSymbolicLink(),
+        false,
+        `${rel} deve essere il target reale, non un alias symlink`,
+      );
+    }
+
+    execFileSync('git', ['add', '--', ...resolved], { cwd: repoRoot });
+    const staged = execFileSync('git', ['diff', '--cached', '--name-only'], {
+      cwd: repoRoot,
+      encoding: 'utf8',
+    }).trim().split('\n').filter(Boolean).sort();
+    assert.deepEqual(staged, [...resolved].sort());
+  } finally {
+    fs.rmSync(repoRoot, { recursive: true, force: true });
+  }
 });
