@@ -270,14 +270,17 @@ test('la sorgente raggiungibile segue anche un import dinamico', () => {
 test('reachableSource attraversa TS e lo stripper conserva import type, generici e choke-point', () => {
   const dir = mkTree({
     'root.ts': [
-      "import type { Payload } from './payload';",
+      "import type { Payload } from './types';",
       "import { build } from './payload';",
       'const value = build<Payload>({ id: \'ok\' });',
       '// commento TS da togliere: dist/api/comment-only',
       'const write = (file) => writeFileSync(file, distTarget);',
     ].join('\n'),
-    'payload.ts': [
+    'types.ts': [
       'export type Payload = { id: string };',
+      "export const typeOnlyMarker = 'dist/api/type-only.json';",
+    ].join('\n'),
+    'payload.ts': [
       'export const build = <T extends Payload>(value: T): T => value;',
       "export const distTarget = 'dist/api/manifest.json';",
     ].join('\n'),
@@ -291,7 +294,9 @@ test('reachableSource attraversa TS e lo stripper conserva import type, generici
 
     const reachable = createReachableSource();
     const PUBLISHED = /dist\/api/;
-    assert.match(reachable(rootTs), PUBLISHED, 'un root TS deve raggiungere il payload TS');
+    const reachableTs = reachable(rootTs);
+    assert.match(reachableTs, /dist\/api\/type-only\.json/, 'un import type deve restare osservabile nel censimento');
+    assert.match(reachableTs, /dist\/api\/manifest\.json/, 'un root TS deve raggiungere il payload TS');
     assert.doesNotMatch(
       reachable(path.join(dir, 'root.mjs')),
       PUBLISHED,
