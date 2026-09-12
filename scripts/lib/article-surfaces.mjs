@@ -52,6 +52,7 @@ function canonicalSurfaces(core) {
 export const SECTIONS = {
   frontaliere: {
     ...canonicalSurfaces(ARTICLE_SECTION_CORE.frontaliere),
+    fallbackReasonsConstName: 'BLOG_SLUG_FALLBACK_REASONS',
     // `ALL_BLOG_ARTICLE_IDS` è un array letterale indipendente, non derivato
     // da `BLOG_SLUGS`: rimuovere la riga slug non lo tocca. `routerSwissData.ts`
     // non ha bisogno del suo equivalente qui perché lì è
@@ -69,6 +70,7 @@ export const SECTIONS = {
   },
   svizzera: {
     ...canonicalSurfaces(ARTICLE_SECTION_CORE.svizzera),
+    fallbackReasonsConstName: 'SWISS_SLUG_FALLBACK_REASONS',
     idListVar: null,
     // `create-article.mjs`: la sezione svizzera NON mantiene la union
     // (`updateRouterUnion` falso), gli id sono stringhe libere.

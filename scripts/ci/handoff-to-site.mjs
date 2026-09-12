@@ -488,7 +488,7 @@ export function citedAsMirrorBlocked(body, path) {
  * parcheggio non ri-paga run e `needs-human-sweep.yml` e' la porta di rientro,
  * mentre la chiusura sbagliata non ha porta di rientro affatto.
  *
- * @returns {{handoff: boolean, paths: string[], residual: string[], close: boolean, reason: string}}
+ * @returns {{handoff: boolean, paths: string[], residual: string[], close: boolean, pinned?: boolean, reason: string}}
  */
 export function handoffDecision({
   verdict,
@@ -657,6 +657,7 @@ export function handoffDecision({
       paths: sitePaths,
       residual: [pinnedEntry],
       close: false,
+      pinned: true,
       reason: `diagnosi con ${sitePaths.length} path del sito, ma questa issue e' il \`trackingIssue\` della voce \`corpus-only-pending\` ${pinnedEntry}: resta aperta finche' il gemello non atterra`,
     };
   }
@@ -689,7 +690,13 @@ export function handoffDecision({
  * discesa porta giù — lavoro di QUESTO repo — e un secondo giro può davvero
  * farlo: quella è la ragione per cui la issue è stata parcheggiata invece che
  * chiusa, e corto-circuitarla la trasformerebbe in uno stato assorbente. Quindi
- * il corto-circuito vuole la CONGIUNZIONE: consegnata **e** senza residuo.
+ * il corto-circuito vuole la CONGIUNZIONE: consegnata **e** senza residuo
+ * operativo, oppure consegnata con un pin di manifest esplicitamente
+ * parcheggiato.
+ *
+ * Un pin del manifest resta in `residual` per la tracciabilità della voce, ma non
+ * è lavoro che un secondo giro possa svolgere qui: `pinned: true` lo distingue
+ * dai residui reali e permette il parcheggio zero-Claude.
  *
  * `close` viaggia con la decisione perché una consegna `blocked-*` autorizzata a
  * chiudere che ci ritrova qui è una chiusura non andata a fondo: il passo giusto
@@ -726,6 +733,13 @@ export function redeliveryDecision({ decision, deliveredUrl, deliveredIssue } = 
     };
   }
   const residual = d.residual || [];
+  if (d.pinned) {
+    return {
+      skip: true,
+      close: false,
+      reason: `già consegnata a ${url}, ma la issue è tenuta aperta dal manifest: ${d.reason || 'pin senza motivo'}`,
+    };
+  }
   if (residual.length) {
     return {
       skip: false,
@@ -985,7 +999,7 @@ function main() {
   // la issue d'origine.
   const existing = deliveredUrlFor(token);
   if (existing?.url) {
-    console.log(`handoff-to-site: #${ISSUE} già consegnata → ${existing.url}. Niente doppioni.`);
+    console.log(`handoff-to-site: #${ISSUE} già consegnata → ${existing.url}. Niente doppioni. Motivo: ${d.reason}`);
     // La transizione di stato del giro precedente può essere rimasta a metà;
     // il commento invece non va duplicato. Se il marker dice che la issue era
     // già parcheggiata, una riapertura manuale non autorizza a riparcheggiarla.

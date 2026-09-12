@@ -49,11 +49,14 @@ import {
   countSeoEntries,
   collectSeoEntryIds,
   collectSeoEntryMetadata,
+  collectSeoFeedEntryMetadata,
+  latestSeoPublication,
   sectionFloor,
 } from '../../scripts/lib/corpus-floors.mjs';
 import {
   SECTION_COUNTERS,
   feedSection,
+  expectedFeedNames,
   floorViolations,
   retentionReport,
   retentionAdvisories,
@@ -61,9 +64,11 @@ import {
   measureDist,
   expectFromCorpus,
   FEED_POPULATION_WARN_RETENTION,
+  FEED_FRESHNESS_MAX_LAG_HOURS,
   feedSourceFloor,
   previousRevision,
 } from '../../scripts/ci/verify-api-floors.mjs';
+import { RSS_SECTIONS } from '../../engine/rssFeeds.mjs';
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
 const WORKFLOW = fs.readFileSync(join(ROOT, '.github/workflows/publish-api.yml'), 'utf-8');
 const BLOG_INDEX = fs.readFileSync(join(ROOT, 'scripts/build-blog-index.mjs'), 'utf-8');
@@ -90,6 +95,13 @@ function healthy() {
     images: 1990,
   };
   return { measured, expected };
+}
+
+function writeHealthyFeeds(dir) {
+  const pubDate = new Date(Date.now() + FEED_FRESHNESS_MAX_LAG_HOURS * 60 * 60 * 1000).toUTCString();
+  const item = `<item><pubDate>${pubDate}</pubDate></item>`;
+  const xml = `<rss><channel>${item.repeat(50)}</channel></rss>`;
+  for (const name of expectedFeedNames(RSS_SECTIONS)) fs.writeFileSync(join(dir, name), xml);
 }
 
 test('floorFrom scala col valore atteso e non produce mai un pavimento negativo', () => {
@@ -387,20 +399,111 @@ test('feedSection separa le due sezioni dai nomi che RSS_SECTIONS genera', () =>
   assert.equal(feedSection('rss-svizzera-fr.xml'), 'svizzera');
   assert.equal(feedSection('rss.xml'), 'frontaliere');
   assert.equal(feedSection('rss-de.xml'), 'frontaliere');
+  assert.equal(feedSection('rss-future.xml'), null, 'un feed non censito non deve ricadere su frontaliere');
+  assert.equal(
+    feedSection('rss-nuova-de.xml', [
+      { id: 'nuova', mainFeed: 'rss-nuova.xml', feedFile: (locale) => `rss-nuova-${locale}.xml` },
+    ]),
+    'nuova',
+  );
   assert.deepEqual(Object.keys(SECTION_COUNTERS).sort(), ['frontaliere', 'svizzera']);
+});
+
+test('feedSection rispetta il primo match e riconosce anche una sezione senza feedFile', () => {
+  const sections = [
+    { id: 'prima', mainFeed: 'rss-duplicato.xml', feedFile: () => 'rss-duplicato.xml' },
+    { id: 'seconda', mainFeed: 'rss-duplicato.xml' },
+    { id: 'solo-main', mainFeed: 'rss-solo-main.xml' },
+  ];
+
+  assert.equal(feedSection('rss-duplicato.xml', sections), 'prima');
+  assert.equal(feedSection('rss-solo-main.xml', sections), 'solo-main');
+  assert.equal(feedSection('rss-non-censito.xml', sections), null);
+});
+
+test('un feed non mappato produce una violazione esplicita', () => {
+  const { measured, expected } = healthy();
+  const violations = floorViolations(
+    { ...measured, feeds: [{ name: 'rss-future.xml', items: 50 }] },
+    expected,
+  );
+  assert.equal(violations.length, 1);
+  assert.match(violations[0], /rss-future\.xml: nessuna sezione RSS_SECTIONS corrispondente/);
+});
+
+test('un feed RSS atteso assente o non RSS produce una violazione esplicita', () => {
+  const { measured, expected } = healthy();
+  const violations = floorViolations(
+    { ...measured, missingFeeds: ['rss-it.xml', 'rss-svizzera-fr.xml'] },
+    expected,
+  );
+  assert.equal(violations.length, 2);
+  assert.match(violations.join('\n'), /rss-it\.xml: feed RSS atteso da RSS_SECTIONS assente o non è un documento RSS/);
+  assert.match(violations.join('\n'), /rss-svizzera-fr\.xml: feed RSS atteso da RSS_SECTIONS assente o non è un documento RSS/);
 });
 
 test('measureDist riconosce i feed dal documento, non dal nome del file', () => {
   const dir = fs.mkdtempSync(join(os.tmpdir(), 'api-floors-'));
   fs.writeFileSync(join(dir, 'manifest.json'), JSON.stringify({ counts: { articles: 7, swissArticles: 2 } }));
-  fs.writeFileSync(join(dir, 'rss.xml'), '<rss><item>a</item><item>b</item></rss>');
+  fs.writeFileSync(
+    join(dir, 'rss.xml'),
+    '<rss><description><![CDATA[<pubDate>Fri, 11 Sep 2026 00:00:00 GMT</pubDate>]]></description>' +
+      '<!-- <pubDate>Sat, 12 Sep 2026 00:00:00 GMT</pubDate> -->' +
+      '<item><pubDate>Tue, 09 Sep 2026 00:00:00 GMT</pubDate></item>' +
+      '<item><pubDate>Wed, 10 Sep 2026 00:00:00 GMT</pubDate></item></rss>',
+  );
+  fs.writeFileSync(join(dir, 'rss-it.xml'), '<urlset><url>x</url></urlset>');
   // Una sitemap e' <urlset>, non <rss>: non deve entrare nel conteggio dei feed.
   fs.writeFileSync(join(dir, 'sitemap-blog.xml'), '<urlset><url>x</url></urlset>');
 
   const measured = measureDist(dir);
-  assert.deepEqual(measured.feeds, [{ name: 'rss.xml', items: 2 }]);
+  assert.deepEqual(measured.feeds, [{
+    name: 'rss.xml',
+    items: 2,
+    latestPublication: {
+      datePublished: 'Wed, 10 Sep 2026 00:00:00 GMT',
+      timestamp: Date.parse('Wed, 10 Sep 2026 00:00:00 GMT'),
+    },
+  }]);
+  assert.equal(measured.missingFeeds.length, expectedFeedNames().length - 1);
+  assert.ok(measured.missingFeeds.includes('rss-it.xml'), 'un feed atteso non-RSS deve risultare mancante');
+  assert.ok(measured.missingFeeds.includes('rss-de.xml'), 'un feed atteso assente deve risultare mancante');
   assert.equal(measured.images, null, 'images-manifest.json assente ⇒ null, che e\' un caso valido');
   assert.equal(measured.articleCounts.articles, 7);
+  fs.rmSync(dir, { recursive: true, force: true });
+});
+
+test('measureDist rifiuta un feed con una pubDate mancante o invalida anche se un’altra è valida', () => {
+  const dir = fs.mkdtempSync(join(os.tmpdir(), 'api-floors-pubdate-'));
+  fs.writeFileSync(join(dir, 'manifest.json'), JSON.stringify({ counts: { articles: 7, swissArticles: 2 } }));
+  const validItem = '<item><pubDate>Wed, 10 Sep 2026 00:00:00 GMT</pubDate></item>';
+  const expected = {
+    sourceArticles: { frontaliere: 7, svizzera: 2 },
+    feedSources: { frontaliere: 2, svizzera: 2 },
+    sourceImages: null,
+    latestSeoPublications: {
+      frontaliere: {
+        articleId: 'newest',
+        datePublished: '2026-09-11T00:00:00Z',
+        timestamp: Date.parse('2026-09-11T00:00:00Z'),
+      },
+    },
+    rssMaxItems: 50,
+  };
+
+  for (const [label, malformedItem] of [
+    ['pubDate non parseabile', '<item><pubDate>not-a-date</pubDate></item>'],
+    ['pubDate mancante', '<item><title>senza data</title></item>'],
+  ]) {
+    fs.writeFileSync(join(dir, 'rss.xml'), `<rss>${validItem}${malformedItem}</rss>`);
+    const measured = measureDist(dir);
+    assert.equal(measured.feeds[0].items, 2, label);
+    assert.equal(measured.feeds[0].latestPublication, null, label);
+    assert.ok(
+      floorViolations(measured, expected).some((line) => line === "rss.xml: nessun <pubDate> valido nell'artefatto RSS"),
+      label,
+    );
+  }
   fs.rmSync(dir, { recursive: true, force: true });
 });
 
@@ -408,13 +511,14 @@ test('measureDist trasforma un images-manifest malformato in una violazione espl
   const dir = fs.mkdtempSync(join(os.tmpdir(), 'api-floors-images-shape-'));
   fs.writeFileSync(join(dir, 'manifest.json'), JSON.stringify({ counts: { articles: 7, swissArticles: 2 } }));
   fs.writeFileSync(join(dir, 'images-manifest.json'), JSON.stringify({ images: { length: 7 } }));
+  writeHealthyFeeds(dir);
 
   const measured = measureDist(dir);
   assert.equal(measured.images, null);
   assert.deepEqual(measured.imageErrors, ['images-manifest.json: campo "images" assente o non è un array']);
   const violations = floorViolations(measured, {
     sourceArticles: { frontaliere: 7, svizzera: 2 },
-    feedSources: { frontaliere: 0, svizzera: 0 },
+    feedSources: { frontaliere: 10, svizzera: 10 },
     sourceImages: 10,
     rssMaxItems: 50,
   });
@@ -431,7 +535,6 @@ test("il corpus di questo checkout e' la verita' di terra, e regge i due contato
 });
 
 test('i feed di questo checkout sono gatati contro i chunk che li generano', async () => {
-  const { RSS_SECTIONS } = await import('../../engine/rssFeeds.mjs');
   const expected = await expectFromCorpus(ROOT);
   for (const section of RSS_SECTIONS) {
     assert.equal(
@@ -468,6 +571,174 @@ test('countSeoEntries conta le voci come le conta parseSeoBlogs', () => {
   const metadata = collectSeoEntryMetadata(entry('long'));
   assert.equal(metadata.get('long').headline, 'T long');
   fs.rmSync(dir, { recursive: true, force: true });
+});
+
+test('il collector completo conserva keyword e SEO incompleto della sitemap, quello RSS filtra prima del dedupe', () => {
+  const source =
+    `'blog-date-only': { keywords: 'fisco', "headline": "", "datePublished": "2026-01-02T00:00:00Z" },\n` +
+    `'blog-headline-only': { keywords: 'pensione', "headline": "Headline", "datePublished": "" },\n` +
+    `'blog-keep': { keywords: 'Keep', "headline": "Keep", "datePublished": "2026-01-03T00:00:00Z" },\n` +
+    `'blog-keep': { keywords: 'Keep', "headline": "", "datePublished": "" },\n`;
+  const complete = collectSeoEntryMetadata(source);
+  const metadata = collectSeoFeedEntryMetadata(source);
+  assert.deepEqual(complete.get('date-only'), {
+    keywords: 'fisco',
+    headline: '',
+    datePublished: '2026-01-02T00:00:00Z',
+  });
+  assert.deepEqual(complete.get('headline-only'), {
+    keywords: 'pensione',
+    headline: 'Headline',
+    datePublished: undefined,
+  });
+  assert.equal(complete.get('keep').headline, '');
+  assert.equal(complete.get('keep').keywords, 'Keep');
+  assert.equal(metadata.has('date-only'), false);
+  assert.equal(metadata.has('headline-only'), false);
+  assert.equal(metadata.get('keep').headline, 'Keep');
+  assert.equal(metadata.get('keep').datePublished, '2026-01-03T00:00:00Z');
+});
+
+test('collectSeoEntryIds non perde una voce valida prima di un duplicato invalido', () => {
+  const ids = collectSeoEntryIds(
+    `'blog-keep': { "headline": "Keep", "datePublished": "2026-01-02T00:00:00Z" },\n` +
+      `'blog-keep': { "headline": "", "datePublished": "" },\n`,
+  );
+  assert.deepEqual([...ids], ['keep']);
+});
+
+test('latestSeoPublication prende la data piu\' recente dai chunk che alimentano la sezione', () => {
+  const dir = fs.mkdtempSync(join(os.tmpdir(), 'seo-latest-'));
+  const seoDir = join(dir, 'content', 'seo');
+  fs.mkdirSync(seoDir, { recursive: true });
+  fs.writeFileSync(
+    join(seoDir, 'older.ts'),
+    `'blog-old': { "headline": "Old", "datePublished": "2026-01-01T00:00:00Z" },\n` +
+      `'blog-duplicato': { "headline": "Old duplicate", "datePublished": "2026-04-01T00:00:00Z" },\n`,
+  );
+  fs.writeFileSync(
+    join(seoDir, 'newer.ts'),
+    `'blog-new': { "headline": "New", "datePublished": "2026-02-03T04:05:06Z" },\n` +
+      `'blog-duplicato': { "headline": "New duplicate", "datePublished": "2026-01-01T00:00:00Z" },\n`,
+  );
+
+  assert.deepEqual(latestSeoPublication(dir, ['older.ts', 'newer.ts']), {
+    articleId: 'new',
+    datePublished: '2026-02-03T04:05:06Z',
+    timestamp: Date.parse('2026-02-03T04:05:06Z'),
+  });
+  fs.rmSync(dir, { recursive: true, force: true });
+});
+
+test('latestSeoPublication rifiuta un chunk SEO dichiarato ma assente', () => {
+  const dir = fs.mkdtempSync(join(os.tmpdir(), 'seo-missing-'));
+  const seoDir = join(dir, 'content', 'seo');
+  fs.mkdirSync(seoDir, { recursive: true });
+  fs.writeFileSync(
+    join(seoDir, 'present.ts'),
+    `'blog-present': { "headline": "Present", "datePublished": "2026-01-01T00:00:00Z" },\n`,
+  );
+
+  assert.throws(
+    () => latestSeoPublication(dir, ['present.ts', 'missing.ts']),
+    (error) => error.code === 'MISSING_CORPUS' && /missing\.ts/.test(error.message),
+  );
+  fs.rmSync(dir, { recursive: true, force: true });
+});
+
+test('expectFromCorpus legge davvero un root alternativo e non il checkout del test', async () => {
+  const root = fs.mkdtempSync(join(os.tmpdir(), 'api-floors-root-'));
+  try {
+    fs.mkdirSync(join(root, 'content', 'blog-body', 'it'), { recursive: true });
+    fs.mkdirSync(join(root, 'content', 'blog-body-ch', 'it'), { recursive: true });
+    fs.mkdirSync(join(root, 'content', 'seo'), { recursive: true });
+    fs.mkdirSync(join(root, 'public', 'images', 'blog'), { recursive: true });
+    fs.writeFileSync(join(root, 'content', 'blog-body', 'it', 'frontaliere.ts'), 'export {};');
+    fs.writeFileSync(join(root, 'content', 'blog-body-ch', 'it', 'svizzera.ts'), 'export {};');
+    for (const section of RSS_SECTIONS) {
+      for (const [index, file] of section.seoFiles.entries()) {
+        const source = section.id === 'frontaliere' && index === 0
+          ? `'blog-alt': { "headline": "Alt", "datePublished": "2026-02-03T04:05:06Z" },\n`
+          : section.id === 'svizzera' && index === 0
+            ? `'blog-alt-ch': { "headline": "Alt CH", "datePublished": "2026-02-04T04:05:06Z" },\n`
+            : '';
+        fs.writeFileSync(join(root, 'content', 'seo', file), source);
+      }
+    }
+    fs.writeFileSync(join(root, 'public', 'images', 'blog', 'alt.webp'), 'image');
+
+    const configuredRevision = process.env.API_FLOOR_BASE_REVISION;
+    process.env.API_FLOOR_BASE_REVISION = '0000000000000000000000000000000000000000';
+    let expected;
+    try {
+      expected = await expectFromCorpus(root);
+    } finally {
+      if (configuredRevision === undefined) delete process.env.API_FLOOR_BASE_REVISION;
+      else process.env.API_FLOOR_BASE_REVISION = configuredRevision;
+    }
+    assert.deepEqual(expected.sourceArticles, { frontaliere: 1, svizzera: 1 });
+    assert.deepEqual(expected.feedSources, { frontaliere: 1, svizzera: 1 });
+    assert.deepEqual(expected.latestSeoPublications.frontaliere, {
+      articleId: 'alt',
+      datePublished: '2026-02-03T04:05:06Z',
+      timestamp: Date.parse('2026-02-03T04:05:06Z'),
+    });
+    assert.equal(expected.sourceImages, 1);
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('un feed oltre la soglia di freschezza viene rifiutato rispetto ai chunk SEO', () => {
+  const { measured, expected } = healthy();
+  const sourceDate = '2026-09-10T00:00:00Z';
+  const staleDate = '2026-09-06T00:00:00Z';
+  const expectedWithFreshness = {
+    ...expected,
+    latestSeoPublications: {
+      frontaliere: {
+        articleId: 'newest',
+        datePublished: sourceDate,
+        timestamp: Date.parse(sourceDate),
+      },
+    },
+  };
+  const stale = floorViolations(
+    {
+      ...measured,
+      feeds: [{
+        ...measured.feeds[0],
+        latestPublication: { datePublished: staleDate, timestamp: Date.parse(staleDate) },
+      }],
+    },
+    expectedWithFreshness,
+  );
+  assert.equal(stale.length, 1);
+  assert.match(stale[0], /feed stantio/);
+  assert.match(stale[0], /96\.0h/);
+  assert.match(stale[0], new RegExp(`${FEED_FRESHNESS_MAX_LAG_HOURS}h`));
+
+  const freshDate = '2026-09-07T01:00:00Z';
+  assert.deepEqual(
+    floorViolations(
+      {
+        ...measured,
+        feeds: [{
+          ...measured.feeds[0],
+          latestPublication: { datePublished: freshDate, timestamp: Date.parse(freshDate) },
+        }],
+      },
+      expectedWithFreshness,
+    ),
+    [],
+  );
+
+  const missingDate = floorViolations(
+    { ...measured, feeds: [{ ...measured.feeds[0], latestPublication: null }] },
+    expectedWithFreshness,
+  );
+  assert.equal(missingDate.length, 1);
+  assert.match(missingDate[0], /nessun <pubDate> valido/);
 });
 
 test('build-api usa il parser SEO condiviso, non una terza finestra locale', () => {
@@ -693,7 +964,7 @@ test('end-to-end: un rapporto eroso stampa ::warning:: ed esce 0', () => {
   const dir = fs.mkdtempSync(join(os.tmpdir(), 'api-floors-warn-'));
   const source = countSourceArticles(ROOT, 'frontaliere');
   const sourceImages = countSourceImages(ROOT);
-  // Niente feed nel dist: qui si misura il livello advisory sul manifest. Le
+  // I feed sono completi per isolare il livello advisory sul manifest. Le
   // immagini attese vanno invece dichiarate, altrimenti il nuovo floor
   // segnala correttamente un manifest assente.
   fs.writeFileSync(
@@ -706,6 +977,7 @@ test('end-to-end: un rapporto eroso stampa ::warning:: ed esce 0', () => {
     }),
   );
   fs.writeFileSync(join(dir, 'images-manifest.json'), JSON.stringify({ images: Array(sourceImages).fill('image') }));
+  writeHealthyFeeds(dir);
 
   const run = spawnSync(process.execPath, [join(ROOT, 'scripts/ci/verify-api-floors.mjs'), '--dist', dir], {
     encoding: 'utf-8',
@@ -734,6 +1006,7 @@ test('end-to-end: una run rossa conserva gli advisory degli altri rapporti', () 
     }),
   );
   fs.writeFileSync(join(dir, 'images-manifest.json'), JSON.stringify({ images: Array(sourceImages).fill('image') }));
+  writeHealthyFeeds(dir);
 
   const run = spawnSync(process.execPath, [join(ROOT, 'scripts/ci/verify-api-floors.mjs'), '--dist', dir], {
     encoding: 'utf-8',

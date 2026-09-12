@@ -107,6 +107,36 @@ function removeSlugRow(file, id) {
   return { changed: true, src: src.replace(rx, ''), slugs };
 }
 
+/** Rimuove la provenienza dello slug per lo stesso id dalla mappa del router. */
+function removeFallbackProvenanceRow(src, file, constName, id) {
+  const declarationAt = src.indexOf(`export const ${constName}`);
+  if (declarationAt === -1) {
+    throw new Error(`${file}: mappa ${constName} non dichiarata`);
+  }
+  const equalsAt = src.indexOf('=', declarationAt);
+  const open = src.indexOf('{', equalsAt);
+  if (equalsAt === -1 || open === -1) {
+    throw new Error(`${file}: mappa ${constName} senza apertura leggibile`);
+  }
+  const close = matchingDelimiter(src, open);
+  if (close === -1) throw new Error(`${file}: graffe sbilanciate nella mappa ${constName}`);
+
+  const bodyStart = open + 1;
+  const body = src.slice(bodyStart, close);
+  const escaped = id.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const entry = new RegExp(`^[ \\t]*'${escaped}'\\s*:\\s*\\{`, 'm').exec(body);
+  if (!entry) return { changed: false, src };
+
+  const entryStart = bodyStart + entry.index;
+  const entryOpen = bodyStart + entry.index + entry[0].lastIndexOf('{');
+  const entryClose = matchingDelimiter(src, entryOpen);
+  if (entryClose === -1) throw new Error(`${file}: graffe sbilanciate nella provenienza di ${id}`);
+  let end = entryClose + 1;
+  if (src[end] === ',') end += 1;
+  if (src[end] === '\n') end += 1;
+  return { changed: true, src: src.slice(0, entryStart) + src.slice(end) };
+}
+
 /**
  * Rimuove `'<id>'` da una union di literal spezzata in alias
  * (`type _BlogIdN = 'a' | 'b' | …;`), come `content/blogArticleIds.ts`.
@@ -222,6 +252,20 @@ function main() {
   if (!slugRow.changed) throw new Error(`${cfg.slugDataFile}: nessuna riga per '${id}' — mappa slug già incoerente col registro`);
   let slugDataSrc = slugRow.src;
   planned.push({ file: cfg.slugDataFile, what: `riga slug (${LOCALES.map((l) => slugRow.slugs[l]).join(', ')})` });
+
+  // La provenienza vive accanto alla mappa slug e deve uscire nello stesso
+  // buffer, altrimenti build-api.mjs la pubblica come residuo fantasma dopo
+  // il retirement dell'articolo.
+  const fallbackRow = removeFallbackProvenanceRow(
+    slugDataSrc,
+    cfg.slugDataFile,
+    cfg.fallbackReasonsConstName,
+    id,
+  );
+  if (fallbackRow.changed) {
+    slugDataSrc = fallbackRow.src;
+    planned.push({ file: cfg.slugDataFile, what: 'provenienza fallback slug' });
+  }
 
   // 1b. array letterale piatto degli id (es. `ALL_BLOG_ARTICLE_IDS`), se la
   //     sezione ne ha uno indipendente dalla mappa slug appena ripulita.
