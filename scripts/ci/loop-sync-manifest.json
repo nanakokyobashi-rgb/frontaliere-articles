@@ -3273,9 +3273,9 @@
       "sitePath": ".github/corpus-workflows/translate-pending.yml",
       "mode": "identical",
       "baseline": {
-        "site": "421e29c4b786ca57",
-        "corpus": "421e29c4b786ca57",
-        "alignedAt": "2026-09-11"
+        "site": "4d26a0350a02954f",
+        "corpus": "4d26a0350a02954f",
+        "alignedAt": "2026-09-12"
       }
     },
     {
@@ -3283,9 +3283,9 @@
       "sitePath": ".github/corpus-workflows/contract.json",
       "mode": "identical",
       "baseline": {
-        "site": "8852d1940b0a2bed",
-        "corpus": "8852d1940b0a2bed",
-        "alignedAt": "2026-09-11"
+        "site": "be9c15bfe4bf1921",
+        "corpus": "be9c15bfe4bf1921",
+        "alignedAt": "2026-09-12"
       }
     },
     {
