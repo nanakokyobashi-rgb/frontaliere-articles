@@ -48,6 +48,7 @@ import {
   SECTION_BODY_DIRS,
   SECTION_COUNTERS,
   SECTION_SITEMAPS,
+  countSourceSitemapEntries,
   SEO_CHUNK_DIR,
   IMAGE_SOURCE_DIR,
 } from '../lib/corpus-floors.mjs';
@@ -193,6 +194,10 @@ export function feedSourceFloor(expected, section) {
   return Number.isFinite(previous) ? Math.max(current, previous) : current;
 }
 
+function sitemapSourceFloor(expected, section) {
+  return expected.sourceSitemaps?.[section] ?? expected.sourceArticles?.[section] ?? 0;
+}
+
 function feedPopulationReference(expected, section) {
   const current = expected.feedSources?.[section] ?? 0;
   const previous = expected.previousFeedSources?.[section];
@@ -204,7 +209,7 @@ function feedPopulationReference(expected, section) {
  *
  * @param {{articleCounts: Record<string, number>, sitemaps?: Record<string, number>, feeds: {name: string, items: number, latestPublication?: {datePublished: string, timestamp: number}|null}[],
  *          missingFeeds?: string[], images: number|null, imageErrors?: string[]}} measured  cio' che l'artefatto dichiara
- * @param {{sourceArticles: Record<string, number>, feedSources: Record<string, number>,
+ * @param {{sourceArticles: Record<string, number>, sourceSitemaps?: Record<string, number>, feedSources: Record<string, number>,
  *          previousFeedSources?: Record<string, number|null>, sourceImages: number|null,
  *          latestSeoPublications?: Record<string, {articleId: string, datePublished: string, timestamp: number}|null>,
  *          rssMaxItems: number}} expected   cio' che il corpus
@@ -252,7 +257,7 @@ export function floorViolations(measured, expected, retention = undefined) {
   // dei consumer del nucleo.
   if (measured.sitemaps) {
     for (const [section, file] of Object.entries(SECTION_SITEMAPS)) {
-      const source = expected.sourceArticles[section] ?? 0;
+      const source = sitemapSourceFloor(expected, section);
       if (source === 0) continue;
       const declared = measured.sitemaps[file];
       if (typeof declared !== 'number') {
@@ -391,7 +396,7 @@ export function retentionReport(measured, expected) {
 
   if (measured.sitemaps) {
     for (const [section, file] of Object.entries(SECTION_SITEMAPS)) {
-      const source = expected.sourceArticles[section] ?? 0;
+      const source = sitemapSourceFloor(expected, section);
       const declared = measured.sitemaps[file];
       if (source <= 0 || typeof declared !== 'number') continue;
       rows.push({ kind: 'sitemap', label: file, declared, source });
@@ -579,11 +584,24 @@ export async function expectFromCorpus(root) {
     const historicalPopulationFiles = [...new Set([...section.seoFiles, ...previousSeoFiles])];
     previousFeedSources[section.id] = countSeoEntriesAtRevision(root, revision, historicalPopulationFiles);
   }
+  const sourceSitemaps = {};
+  for (const section of Object.keys(SECTION_COUNTERS)) {
+    try {
+      sourceSitemaps[section] = countSourceSitemapEntries(root, section);
+    } catch (error) {
+      // Some unit fixtures model only the body/SEO corpus because they never
+      // invoke the sitemap writer. A real publish checkout has these inputs —
+      // build-api.mjs reads them unconditionally — so keep those minimal roots
+      // on the old body fallback while preserving the precise source in CI.
+      if (error?.code !== 'MISSING_CORPUS') throw error;
+    }
+  }
   return {
     sourceArticles: {
       frontaliere: countSourceArticles(root, 'frontaliere'),
       svizzera: countSourceArticles(root, 'svizzera'),
     },
+    ...(Object.keys(sourceSitemaps).length ? { sourceSitemaps } : {}),
     feedSources,
     previousFeedSources,
     latestSeoPublications,

@@ -76,7 +76,7 @@ import {
 // Pure XML builder, no .ts imports on purpose (see that file's header): lets
 // generator/tests/frontaliere-sitemap-shadow.test.mjs exercise it directly
 // under plain `node --test`, without a tsx subprocess.
-import { SITE, xmlEsc, SECTION_PATHS, buildSitemap } from './lib/build-sitemap.mjs';
+import { SITE, xmlEsc, SECTION_PATHS, buildSitemap, countSitemapEntries } from './lib/build-sitemap.mjs';
 import { isReservedPublishedSlug } from './lib/published-slug-guard.mjs';
 // Detection (not filtering — see its header) for issue #166: surfaces a
 // same-day canonical-override landing on a still-in-window ticker article.
@@ -87,7 +87,7 @@ import { findShadowedTickerArticles } from './lib/ticker-shadow-check.mjs';
 import { countXmlTags } from './lib/count-xml-tags.mjs';
 import {
   collectSeoEntryMetadata,
-  listedFloor,
+  floorFrom,
   SECTION_SITEMAPS,
   sectionFloor,
 } from './lib/corpus-floors.mjs';
@@ -287,10 +287,13 @@ const metaChIt = (await load('content/blog-meta-ch-it.ts')).default;
 // retired set plugs straight into buildSitemap's shadowed parameter.
 const retiredDailyEditions = selectRetiredDailyEditions(ARTICLES.map((a) => a.id));
 console.log(`[build-api] retired daily editions de-listed from sitemap: ${retiredDailyEditions.size}`);
+const retiredDailyEditionSlugs = new Set(
+  [...retiredDailyEditions].map((id) => blogSlugs.BLOG_SLUGS?.[id]?.it ?? id),
+);
 // buildSitemap takes a single `shadowed` set, so the frontaliere call unions
 // the two de-listing reasons — retired daily editions and canonical-shadowed
 // duplicates — the same way the svizzera call already gets its own dedicated set.
-const frontaliereSitemapShadow = new Set([...retiredDailyEditions, ...shadowedFrontaliereSlugs]);
+const frontaliereSitemapShadow = new Set([...retiredDailyEditionSlugs, ...shadowedFrontaliereSlugs]);
 const sitemapCounts = {
   blog: writeXml(
     SECTION_SITEMAPS.frontaliere,
@@ -301,21 +304,31 @@ const sitemapCounts = {
     buildSitemap(SWISS_ARTICLES, 'svizzera', swissSlugs.SWISS_SLUGS, metaChIt, shadowedSwissSlugs),
   ),
 };
-// I pavimenti sono relativi al registro, non costanti assolute. Il vecchio
-// `< 100` proteggeva il 2,6% del corpus frontaliere e non proteggeva affatto la
-// sitemap svizzera; un parse troncato restava quindi pubblicabile senza errori.
-for (const [key, file, registry, shadowed] of [
-  ['blog', SECTION_SITEMAPS.frontaliere, ARTICLES, frontaliereSitemapShadow],
-  ['blogCh', SECTION_SITEMAPS.svizzera, SWISS_ARTICLES, shadowedSwissSlugs],
+// I pavimenti sono relativi alle entry IT che il builder puo' davvero emettere,
+// non a `registry.length - shadowed.size`: gli override hanno una chiave per
+// locale, mentre questa sitemap ha una sola URL per articolo. Il vecchio `< 100`
+// proteggeva il 2,6% del corpus frontaliere e non proteggeva affatto la sitemap
+// svizzera; un parse troncato restava quindi pubblicabile senza errori.
+const sitemapSources = {
+  blog: countSitemapEntries(ARTICLES, blogSlugs.BLOG_SLUGS, frontaliereSitemapShadow),
+  blogCh: countSitemapEntries(SWISS_ARTICLES, swissSlugs.SWISS_SLUGS, shadowedSwissSlugs),
+};
+for (const [key, file] of [
+  ['blog', SECTION_SITEMAPS.frontaliere],
+  ['blogCh', SECTION_SITEMAPS.svizzera],
 ]) {
-  const floor = listedFloor(registry.length, shadowed.size);
+  const source = sitemapSources[key];
+  if (source <= 0) {
+    throw new Error(`${file} has no emittable IT registry entries — refusing to publish an empty sitemap`);
+  }
+  const floor = floorFrom(source);
   if (sitemapCounts[key] < floor) {
     throw new Error(
-      `${file} has only ${sitemapCounts[key]} urls against ${registry.length} registry entries ` +
-        `(${shadowed.size} de-listed on purpose, floor ${floor}) — refusing to publish a truncated sitemap`,
+      `${file} has only ${sitemapCounts[key]} urls against ${source} emittable IT registry entries ` +
+        `(floor ${floor}) — refusing to publish a truncated sitemap`,
     );
   }
-  console.log(`[build-api] ${file}: ${sitemapCounts[key]} urls (floor ${floor}, derived from the registry)`);
+  console.log(`[build-api] ${file}: ${sitemapCounts[key]} urls (floor ${floor}, derived from emitted IT entries)`);
 }
 
 // ── Archive pages (issue #4974) ───────────────────────────────────────────
@@ -341,11 +354,20 @@ function archiveBase(section, locale) {
   return `${prefix}/${ARTICLE_SECTIONS[section].indexSlug[locale]}/${ARCHIVE_ALL_SLUG[locale]}/`;
 }
 
+const archiveSources = {};
 function buildArchiveSitemap() {
   const urls = [];
   for (const section of ['frontaliere', 'svizzera']) {
     const total = readArticleArchiveUnionSlugs(fs, path, ROOT, section).size;
+    const floor = sectionFloor(ROOT, section);
+    if (total < floor) {
+      throw new Error(
+        `${section} archive has only ${total} entries against ${floor} required by the corpus floor ` +
+          `— refusing to publish a truncated archive sitemap`,
+      );
+    }
     const pages = Math.max(1, Math.ceil(total / ARTICLES_PAGE_SIZE));
+    archiveSources[section] = { total, floor, pages };
     for (const locale of LOCALES) {
       for (let page = 1; page <= pages; page++) {
         const base = archiveBase(section, locale);
@@ -383,24 +405,11 @@ function buildArchiveSitemap() {
 }
 
 sitemapCounts.archive = writeXml('sitemap-articles-archive.xml', buildArchiveSitemap());
-// Two sections x four locales, so the count is 4 x (frontalierePages +
-// svizzeraPages). Derive the minimum from the independent body corpus: a
-// truncated archive union must not be allowed to make its own floor disappear.
-const archiveFloor =
-  LOCALES.length *
-  ['frontaliere', 'svizzera'].reduce(
-    (pages, section) => pages + Math.max(1, Math.ceil(sectionFloor(ROOT, section) / ARTICLES_PAGE_SIZE)),
-    0,
-  );
-if (sitemapCounts.archive < archiveFloor) {
-  throw new Error(
-    `sitemap-articles-archive.xml has only ${sitemapCounts.archive} urls (floor ${archiveFloor}, ` +
-      `derived from the corpus on disk) — refusing to publish a truncated archive sitemap`,
-  );
-}
 console.log(
   `[build-api] sitemap-articles-archive.xml: ${sitemapCounts.archive} urls ` +
-    `(floor ${archiveFloor}, derived from the corpus)`,
+    `(pages derived from ${Object.entries(archiveSources)
+      .map(([section, { total, floor, pages }]) => `${section}=${total} entries/${floor} floor/${pages} pages`)
+      .join(', ')})`,
 );
 
 // ── RSS feeds ─────────────────────────────────────────────────────

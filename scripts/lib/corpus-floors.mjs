@@ -30,6 +30,8 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { execFileSync } from 'node:child_process';
 import { findAllSeoEntryMatches } from './seo-entry.mjs';
+import { countSitemapEntries } from './build-sitemap.mjs';
+import { selectRetiredDailyEditions } from '../../generator/scripts/lib/daily-brief-content.mjs';
 
 /**
  * Quanta parte del corpus sorgente deve sopravvivere fino all'artefatto.
@@ -148,7 +150,8 @@ export function populationWarning(label, declared, source, warn = FLOOR_WARN_RET
 }
 
 /**
- * Il pavimento per un valore atteso. Mai negativo, e 0 atteso ⇒ 0.
+ * Il pavimento per un valore atteso. Un atteso positivo ha sempre almeno un
+ * elemento; solo un riferimento davvero assente/non positivo produce 0.
  *
  * ATTENZIONE, ed e' il punto piu' delicato di questo modulo: `floorFrom(0)` e'
  * 0, e un pavimento a 0 non e' un pavimento — `x < 0` e' falso per qualunque
@@ -161,7 +164,7 @@ export function populationWarning(label, declared, source, warn = FLOOR_WARN_RET
  */
 export function floorFrom(expected, retention = FLOOR_RETENTION) {
   if (!Number.isFinite(expected) || expected <= 0) return 0;
-  return Math.floor(expected * retention);
+  return Math.max(1, Math.floor(expected * retention));
 }
 
 /**
@@ -205,6 +208,23 @@ export const SECTION_SITEMAPS = {
   svizzera: 'sitemap-blog-ch.xml',
 };
 
+/** Slug maps read by the runtime sitemap writer, per section. */
+const SECTION_SLUG_FILES = {
+  frontaliere: path.join('content', 'routerBlogData.ts'),
+  svizzera: path.join('content', 'routerSwissData.ts'),
+};
+
+const SECTION_SLUG_EXPORTS = {
+  frontaliere: 'BLOG_SLUGS',
+  svizzera: 'SWISS_SLUGS',
+};
+
+/** Canonical-override maps read by the runtime sitemap writer, per section. */
+const SECTION_CANONICAL_OVERRIDE_FILES = {
+  frontaliere: path.join('engine', 'shared', 'frontaliere-article-canonical-overrides.json'),
+  svizzera: path.join('content', 'swiss-article-canonical-overrides.json'),
+};
+
 /** Registro e metadati che definiscono l'atteso dei corpi, per sezione. */
 export const SECTION_REGISTRY_FILES = {
   frontaliere: path.join('content', 'blog-articles-data.ts'),
@@ -220,6 +240,7 @@ export const SECTION_META_PREFIXES = {
 export const SECTION_META_LOCALES = Object.freeze(['it', 'en', 'de', 'fr']);
 
 const REGISTRY_ENTRY_RE = /^\s*id:\s*(?:'([^']+)'|"([^"]+)")/gm;
+const SLUG_MAP_ENTRY_RE = /['"]([^'"]+)['"]\s*:\s*\{\s*it:\s*['"]([^'"]+)['"]\s*,\s*en:\s*['"]([^'"]+)['"]\s*,\s*de:\s*['"]([^'"]+)['"]\s*,\s*fr:\s*['"]([^'"]+)['"]/g;
 const META_TITLE_KEY_RE = /['"]blog\.article\.([^'"]+)\.title['"]\s*:/g;
 /** Quante immagini hero questo repo tiene davvero (sorgente di `images-manifest.json`). */
 export const IMAGE_SOURCE_DIR = path.join('public', 'images', 'blog');
@@ -267,9 +288,11 @@ function readReference(root, rel, what) {
 function registryDataFromSource(source, rel, what) {
   const entries = [...source.matchAll(REGISTRY_ENTRY_RE)];
   if (entries.length === 0) throw missingReference(what, rel);
+  const entryIds = entries.map((match) => match[1] ?? match[2]);
   return {
     count: entries.length,
-    ids: new Set(entries.map((match) => match[1] ?? match[2])),
+    ids: new Set(entryIds),
+    entryIds,
   };
 }
 
@@ -278,6 +301,35 @@ function readRegistryData(root, section) {
   if (!rel) throw new Error(`unknown corpus section: ${section}`);
   const source = readReference(root, rel, `${section} registry`);
   return { ...registryDataFromSource(source, rel, `${section} registry`), rel };
+}
+
+function readSlugMap(root, section) {
+  const rel = SECTION_SLUG_FILES[section];
+  const slugConst = SECTION_SLUG_EXPORTS[section];
+  if (!rel || !slugConst) throw new Error(`unknown corpus section: ${section}`);
+  const source = readReference(root, rel, `${section} slug map`);
+  const block = source.match(new RegExp(`const ${slugConst}[\\s\\S]*?\\n\\};`, 'm'))?.[0];
+  if (!block) throw missingReference(`${section} slug map`, rel);
+
+  const slugs = {};
+  for (const match of block.matchAll(SLUG_MAP_ENTRY_RE)) {
+    slugs[match[1]] = { it: match[2], en: match[3], de: match[4], fr: match[5] };
+  }
+  if (Object.keys(slugs).length === 0) throw missingReference(`${section} slug map`, rel);
+  return slugs;
+}
+
+function readCanonicalOverrideSlugs(root, section) {
+  const rel = SECTION_CANONICAL_OVERRIDE_FILES[section];
+  if (!rel) throw new Error(`unknown corpus section: ${section}`);
+  let parsed;
+  try {
+    parsed = JSON.parse(readReference(root, rel, `${section} canonical overrides`));
+  } catch (error) {
+    if (error?.code === 'MISSING_CORPUS') throw error;
+    throw new Error(`${rel}: canonical overrides non sono JSON leggibile`, { cause: error });
+  }
+  return new Set(Object.keys(parsed?.overrides ?? {}));
 }
 
 function readGit(root, args) {
@@ -500,6 +552,35 @@ export function countSourceArticles(root, section) {
   const rel = SECTION_BODY_DIRS[section];
   if (!rel) throw new Error(`unknown corpus section: ${section}`);
   return countCorpusFiles(root, rel, '.ts', section);
+}
+
+/**
+ * Quante entry IT promette davvero la sitemap, usando gli stessi input e la
+ * stessa regola di emissione del writer.
+ *
+ * Il file degli override ha una chiave per locale; il writer invece emette un
+ * solo `<url>` per articolo e controlla solo lo slug IT. Derivare il floor da
+ * `Object.keys(overrides).length` sottrae quindi quattro volte gli articoli
+ * shadowed. Questa funzione fa passare entrambi i lati dalla stessa
+ * cardinalità effettiva, inclusa la retention delle daily edition.
+ */
+export function countSourceSitemapEntries(root, section) {
+  const registry = readRegistryData(root, section);
+  const slugMap = readSlugMap(root, section);
+  const shadowed = readCanonicalOverrideSlugs(root, section);
+
+  if (section === 'frontaliere') {
+    for (const id of selectRetiredDailyEditions([...registry.ids])) {
+      const slug = slugMap[id]?.it;
+      if (slug) shadowed.add(slug);
+    }
+  }
+
+  return countSitemapEntries(
+    registry.entryIds.map((id) => ({ id })),
+    slugMap,
+    shadowed,
+  );
 }
 
 /** Quante immagini hero ci sono in sorgente. */

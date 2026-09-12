@@ -45,6 +45,22 @@ export const SECTION_PATHS = {
   },
 };
 
+function sitemapEntryIsEmitted(article, slugMap, shadowed) {
+  const slug = slugMap?.[article.id]?.it;
+  return Boolean(slug) && !isReservedPublishedSlug(slug) && !shadowed.has(slug);
+}
+
+/**
+ * Count the IT entries the sitemap builder can actually emit.
+ *
+ * This is deliberately the same predicate used by `buildSitemap`, rather than
+ * `registry.length - shadowed.size`: canonical override files contain one key
+ * per locale, while the article sitemap emits one IT `<url>` per article.
+ */
+export function countSitemapEntries(entries, slugMap, shadowed = new Set()) {
+  return (entries ?? []).filter((article) => sitemapEntryIsEmitted(article, slugMap, shadowed)).length;
+}
+
 /**
  * @param entries article registry entries ({ id, image?, updatedAt?, date? }[])
  * @param section 'frontaliere' | 'svizzera'
@@ -63,7 +79,7 @@ export function buildSitemap(entries, section, slugMap, meta, shadowed = new Set
   const urls = [];
   for (const a of entries) {
     const slug = slugMap?.[a.id]?.it;
-    if (!slug || isReservedPublishedSlug(slug)) continue;
+    if (!sitemapEntryIsEmitted(a, slugMap, shadowed)) continue;
     // A canonical-overridden ("shadowed") article points its canonical at a
     // different winner URL, so listing it here — as <loc> OR as an hreflang
     // alternate — contradicts the self-canonical gate the consumer enforces

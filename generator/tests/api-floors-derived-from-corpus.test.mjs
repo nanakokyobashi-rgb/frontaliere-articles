@@ -56,6 +56,7 @@ import {
   unescapeQuoted,
   latestSeoPublication,
   listedFloor,
+  countSourceSitemapEntries,
   sectionFloor,
 } from '../../scripts/lib/corpus-floors.mjs';
 import {
@@ -117,6 +118,7 @@ function writeHealthyFeeds(dir) {
 
 test('floorFrom scala col valore atteso e non produce mai un pavimento negativo', () => {
   assert.equal(floorFrom(1000), Math.floor(1000 * FLOOR_RETENTION));
+  assert.equal(floorFrom(1), 1, 'un riferimento positivo non puo\' trasformarsi in un floor a zero');
   assert.equal(floorFrom(0), 0);
   assert.equal(floorFrom(-5), 0);
   assert.equal(floorFrom(Number.NaN), 0);
@@ -128,6 +130,25 @@ test('listedFloor scala con il registro dopo le esclusioni legittime', () => {
   assert.equal(listedFloor(1000, 10), floorFrom(990));
   assert.equal(listedFloor(1000, 2000), 0);
   assert.throws(() => listedFloor(0), /registro degli articoli/);
+});
+
+test('il floor sitemap conta una sola volta le entry IT effettivamente emesse', () => {
+  assert.equal(countSourceSitemapEntries(ROOT, 'frontaliere'), 3863);
+  assert.equal(countSourceSitemapEntries(ROOT, 'svizzera'), 2097);
+
+  const { measured, expected } = healthy();
+  const withEffectiveSitemapSource = {
+    ...expected,
+    sourceSitemaps: { frontaliere: 3863, svizzera: 2097 },
+  };
+  const measuredNearOldFloor = {
+    ...measured,
+    sitemaps: { 'sitemap-blog.xml': 3407, 'sitemap-blog-ch.xml': 1700 },
+  };
+  const violations = floorViolations(measuredNearOldFloor, withEffectiveSitemapSource);
+  assert.equal(violations.length, 2);
+  assert.match(violations.join('\n'), /sitemap-blog\.xml: 3407 url contro 3863/);
+  assert.match(violations.join('\n'), /sitemap-blog-ch\.xml: 1700 url contro 2097/);
 });
 
 test("la superficie reale del 2026-09-05 passa: il pavimento non e' stretto", () => {
@@ -789,11 +810,15 @@ test('build-api usa il parser SEO condiviso, non una terza finestra locale', () 
   assert.match(build, /collectSeoEntryMetadata/);
   assert.doesNotMatch(build, /const entryRe = \/'blog-\(\[\^'\]\+\):\\s\*\\{\/g/);
   assert.doesNotMatch(build, /start \+ 4000/);
-  assert.match(build, /listedFloor\(registry\.length, shadowed\.size\)/);
+  assert.match(build, /countSitemapEntries\(ARTICLES/);
+  assert.match(build, /countSitemapEntries\(SWISS_ARTICLES/);
+  assert.match(build, /const floor = sectionFloor\(ROOT, section\)/);
+  assert.match(build, /if \(total < floor\)/);
   assert.match(build, /sectionFloor\(ROOT, section\)/);
   assert.match(build, /ARTICLES_PAGE_SIZE/);
   assert.doesNotMatch(build, /sitemapCounts\.blog < 100/);
   assert.doesNotMatch(build, /sitemapCounts\.archive < 8/);
+  assert.doesNotMatch(build, /archiveFloor/);
 });
 
 test("publish-api.yml non porta piu' un pavimento assoluto scritto a mano", () => {
@@ -815,6 +840,12 @@ test("publish-api.yml non porta piu' un pavimento assoluto scritto a mano", () =
     WORKFLOW,
     /imgs" -lt 1\b/,
     'il pavimento `-lt 1` sulle immagini accettava 1990 immagini ridotte a una',
+  );
+  assert.match(WORKFLOW, /^      - 'host\/\*\*'$/m, 'host/ e\' un input runtime del publisher');
+  assert.match(
+    WORKFLOW,
+    /^      - 'scripts\/lib\/corpus-floors\.mjs'$/m,
+    'la sorgente dei floor deve rilanciare il publisher quando cambia',
   );
 });
 

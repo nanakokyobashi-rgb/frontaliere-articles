@@ -25,7 +25,14 @@ on:
       # Found the hard way: the fix that unfroze a three-month-stale RSS feed
       # landed here and changed nothing, because only content/ was watched.
       - 'engine/**'
+      # build-api.mjs imports runtime host data (for example the archive page
+      # size); a change there changes the emitted sitemap and must republish it.
+      - 'host/**'
       - 'scripts/build-api.mjs'
+      # The derived floors are part of the publisher's runtime input. Without
+      # this path, changing retention or the source-count logic leaves the
+      # public API on the previous build until an unrelated input changes.
+      - 'scripts/lib/corpus-floors.mjs'
       # Same argument, one level down. build-blog-index.mjs runs in this job and
       # emits the runtime list index; sanitize-control-chars.mjs is the output
       # boundary both it and build-api.mjs pass every byte through. Watching the
