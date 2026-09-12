@@ -1367,12 +1367,12 @@ describe('callLLM — il contatore dei flap del resolver (#818)', () => {
     assert.equal(b.persistent, 1, 'il vocabolario persistente deve leggere la causa completa');
   });
 
-  it('confronta cause quando il transitorio è nella finestra mostrata', () => {
-    const body = `${'x'.repeat(150)} temporarily unavailable ${'x'.repeat(60)} HTTP 403 insufficient credits`;
+  it('confronta cause oltre la finestra nella stessa coordinata', () => {
+    const body = `${'x'.repeat(220)} temporarily unavailable ${'x'.repeat(20)} HTTP 403 insufficient credits`;
     const b = classifyExhaustionCause([
       { reason: `gh/m1: ${body}`, authoritative: null, transientWindow: 200 },
     ]);
-    assert.equal(b.transient, 1, 'un transitorio visibile prima del persistente deve prevalere');
+    assert.equal(b.transient, 1, 'un transitorio prima del persistente deve prevalere anche oltre il taglio');
     assert.equal(b.persistent, 0);
   });
 
