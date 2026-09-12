@@ -610,8 +610,14 @@ jobs:
               exit 0
             fi
             echo "Chiudo l'issue dedup #$DEDUP_NUMBER."
-            gh issue close "$DEDUP_NUMBER" \
+            node scripts/ci/resolve-issue-verified.mjs \
+              --number "$DEDUP_NUMBER" \
               --comment "Chiusa da \`Recycle stale PRs\`: nessun oggetto \`needs-human\` aperto (ne PR ne issue), la condizione di chiusura scritta nel corpo e soddisfatta. Il prossimo residuo riapre un'issue nuova con lo stesso titolo."
+            RESOLVE_RC=$?
+            if [ "$RESOLVE_RC" -ne 0 ]; then
+              echo "::error::Chiusura dell'issue dedup non verificata (rc=$RESOLVE_RC): il digest resta aperto e va riprovato."
+              exit "$RESOLVE_RC"
+            fi
             exit 0
           fi
           echo "needs-human aperti: $PR_COUNT PR, $ISSUE_COUNT issue"

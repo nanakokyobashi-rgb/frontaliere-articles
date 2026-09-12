@@ -219,9 +219,10 @@ test('a liste vuote lo step richiude l issue dedup, non si limita a uscire', () 
   const emptyBranch = emptyListsBranch(step);
   assert.match(
     emptyBranch,
-    /\n\s+gh issue close "\$DEDUP_NUMBER"/,
-    'a liste vuote lo step deve chiudere l issue dedup, non limitarsi a uscire',
+    /\n\s+node scripts\/ci\/resolve-issue-verified\.mjs[\s\S]*?--number "\$DEDUP_NUMBER"/,
+    'a liste vuote lo step deve passare dal closer verificato con il numero esatto',
   );
+  assert.doesNotMatch(withoutComments(emptyBranch), /gh issue close/, 'il close deve essere verificato dal wrapper');
 });
 
 /**
@@ -266,9 +267,15 @@ test('la chiusura risolve l issue con la stessa uguaglianza esatta con cui la li
   assert.doesNotMatch(resolve[1], /labels=/, 'la ricerca dell issue dedup non deve filtrare per label: la chiave e il titolo');
   assert.match(step, /OPEN_ISSUES_API/, 'la risoluzione deve usare lo stesso endpoint delle issue aperte');
 
-  // La chiusura passa per il NUMERO risolto, e il match per prefisso di
-  // `--resolve` sparisce da questo ramo.
-  assert.match(emptyBranch, /\n\s+gh issue close "\$DEDUP_NUMBER"/, 'si chiude il numero risolto');
+  // La chiusura passa per il NUMERO risolto e il wrapper verifica la
+  // post-condizione; il match per prefisso della CLI `--resolve` sparisce da
+  // questo ramo.
+  assert.match(
+    emptyBranch,
+    /\n\s+node scripts\/ci\/resolve-issue-verified\.mjs[\s\S]*?--number "\$DEDUP_NUMBER"/,
+    'si chiude il numero risolto tramite il closer verificato',
+  );
+  assert.doesNotMatch(withoutComments(emptyBranch), /gh issue close/, 'il workflow non deve chiudere senza verificare');
   // Sul CODICE, non sui commenti: il ramo spiega per esteso perche' `--resolve`
   // non va bene qui, e citarlo non e' usarlo.
   assert.doesNotMatch(
@@ -290,12 +297,46 @@ test('la chiusura risolve l issue con la stessa uguaglianza esatta con cui la li
   assert.match(rcGuard[1], /\n\s+exit 1/, 'una risoluzione fallita deve far fallire lo step, non chiudere a caso');
   assert.doesNotMatch(rcGuard[1], /gh issue close/, 'il ramo di errore non deve chiudere niente');
 
+  assert.match(
+    emptyBranch,
+    /node scripts\/ci\/resolve-issue-verified\.mjs[\s\S]*?\n\s+RESOLVE_RC=\$\?/,
+    'l esito del closer verificato va catturato per rendere visibile un close respinto',
+  );
+  const resolveGuard = /RESOLVE_RC=\$\?[\s\S]*?if \[ "\$RESOLVE_RC" -ne 0 \]; then([\s\S]*?)\n\s+fi\n/.exec(emptyBranch);
+  assert.ok(resolveGuard, 'manca il guard sull esito del closer verificato');
+  assert.match(resolveGuard[1], /::error::/);
+  assert.match(resolveGuard[1], /exit "\$RESOLVE_RC"/);
+
   // Nessun match = nessuna issue dedup aperta: e un no-op, non un errore.
   assert.match(
     emptyBranch,
     /if \[ -z "\$DEDUP_NUMBER" \]; then[\s\S]*?exit 0/,
     'senza issue dedup aperta lo step esce pulito senza chiudere niente',
   );
+});
+
+test('ogni call-site del close usa la stessa verifica post-condizione', () => {
+  const steps = [
+    ['.github/workflows/recycle-stale-prs.yml', 'Surface needs-human PRs and issues'],
+    ['.github/workflows/reconcile-article-shards.yml', 'Close ghost-articles issue (coda drenata)'],
+    ['.github/workflows/republish-dirty-content.yml', 'Close dirty-content issue (coda drenata)'],
+  ];
+
+  for (const [file, name] of steps) {
+    const source = readFileSync(path.join(ROOT, file), 'utf8');
+    const start = source.indexOf(`- name: ${name}`);
+    assert.ok(start >= 0, `${file}: step ${name} non trovato`);
+    const rest = source.slice(start);
+    const next = rest.indexOf('\n      - name: ');
+    const step = next === -1 ? rest : rest.slice(0, next);
+    const executable = withoutComments(step);
+
+    assert.match(step, /continue-on-error:\s*true/, `${file}: il job deve conservare il comportamento best-effort`);
+    assert.match(executable, /node scripts\/ci\/resolve-issue-verified\.mjs/,
+      `${file}: manca il closer che verifica la post-condizione`);
+    assert.doesNotMatch(executable, /github-issue-creator\.mjs[\s\S]*--resolve/,
+      `${file}: il percorso CLI best-effort resta non verificato`);
+  }
 });
 
 test('a liste non vuote il body segue la create/reopen e il publisher strict', () => {
