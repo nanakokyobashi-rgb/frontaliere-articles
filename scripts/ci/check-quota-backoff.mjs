@@ -587,8 +587,31 @@ export function runQuotaLease({
     }
     if (existing && liveAfter.length !== 1) {
       // Una reservation adottabile non è un lasciapassare per una seconda run:
-      // se nel frattempo è comparso un altro lease, questa run non spende quota
-      // e non rilascia il token condiviso che potrebbe appartenere al vincitore.
+      // se nel frattempo è comparso un altro lease, questa run non spende quota.
+      // La reservation è però head/run-bound a questa stessa run: la ritiriamo
+      // qui, altrimenti il rerun fallito la terrebbe viva fino al TTL e il
+      // nuovo marker di deferral non avrebbe uno slot da far riprovare.
+      const ownsReservation = own.state === 'reserved'
+        && SHA1_RE.test(String(headSha || ''))
+        && String(own.headSha || '').toLowerCase() === String(headSha).toLowerCase()
+        && String(own.reservationRunId || '') === String(reservationRunId || runId || '');
+      try {
+        if (!ownsReservation) throw new Error('reservation non più bound alla run corrente');
+        postLeaseEvent(repo, {
+          ...own,
+          state: 'released',
+          owner,
+          role,
+          issuedAt: nowSec,
+          expiresAt: Math.max(nowSec, Number(own.expiresAt)),
+          runId: String(runId || process.env.GITHUB_RUN_ID || ''),
+        });
+        const afterRelease = quotaLeaseEvents(leaseComments(repo, targetType, target));
+        const released = latestLeaseForToken(afterRelease, chosenToken);
+        if (!released || released.state !== 'released') throw new Error('reservation release non verificabile');
+      } catch (error) {
+        console.log(`::warning::reservation lease contesa non rilasciata: ${String(error?.message || error).slice(0, 180)}`);
+      }
       if (emitReviewDeferredMarker && targetType === 'pr' && PR_QUOTA_CONSUMER_ROLES.has(role)) {
         postReviewQuotaDeferred(
           repo,

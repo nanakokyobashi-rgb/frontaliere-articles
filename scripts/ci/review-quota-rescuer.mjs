@@ -130,8 +130,8 @@ export function parseReviewQuotaRetryMarker(body) {
   };
 }
 
-/** Ultimo stato del retry per questa deferral. Pure e append-only. */
-export function latestReviewQuotaRetry(
+/** Ultimo stato del retry per questa deferral, con il rank del commento. */
+function latestReviewQuotaRetryEntry(
   comments = [],
   { head = '', role = '', deferredRunId = '' } = {},
 ) {
@@ -146,17 +146,34 @@ export function latestReviewQuotaRetry(
         || event.deferredRunId !== String(deferredRunId)) continue;
     const rank = commentRank(comment, index);
     if (laterRank(bestRank, rank) === rank) {
-      best = event;
+      best = { event, rank };
       bestRank = rank;
     }
   }
   return best;
 }
 
-/** True when this exact deferral has an active/confirmed retry. Pure. */
+/** Ultimo stato del retry per questa deferral. Pure e append-only. */
+export function latestReviewQuotaRetry(comments = [], options = {}) {
+  return latestReviewQuotaRetryEntry(comments, options)?.event || null;
+}
+
+function rankAfter(a, b) {
+  for (let i = 0; i < Math.max(a?.length || 0, b?.length || 0); i += 1) {
+    const av = Number(a?.[i]) || 0;
+    const bv = Number(b?.[i]) || 0;
+    if (av !== bv) return av > bv ? 1 : -1;
+  }
+  return 0;
+}
+
+/** True when this exact deferral has a newer active/confirmed retry. Pure. */
 export function hasReviewQuotaRetry(comments = [], options = {}) {
-  const latest = latestReviewQuotaRetry(comments, options);
-  return !!latest && REVIEW_QUOTA_RETRY_ACTIVE_STATES.has(latest.state);
+  const latest = latestReviewQuotaRetryEntry(comments, options);
+  const deferredRank = options?.deferredRank;
+  return !!latest
+    && REVIEW_QUOTA_RETRY_ACTIVE_STATES.has(latest.event.state)
+    && (!Array.isArray(deferredRank) || rankAfter(latest.rank, deferredRank) > 0);
 }
 
 /**
@@ -187,10 +204,11 @@ export function reviewQuotaDeferredCandidates({ head = '', comments = [] } = {})
     }
   }
   return [...grouped.values()]
-    .filter(({ deferred }) => !hasReviewQuotaRetry(comments, {
+    .filter(({ deferred, rank }) => !hasReviewQuotaRetry(comments, {
       head,
       role: deferred.role,
       deferredRunId: deferred.runId,
+      deferredRank: rank,
     }))
     .sort((a, b) => {
       const at = a.rank[0] || 0;

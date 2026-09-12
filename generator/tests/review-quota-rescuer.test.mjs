@@ -90,6 +90,34 @@ test('una deferral di un consumer non nasconde quella pendente di un altro consu
   assert.equal(deferredReviewCandidate({ head: HEAD, comments }).runId, 'review-1');
 });
 
+test('una nuova deferral dopo il retry dello stesso run riapre il candidato', () => {
+  const fields = {
+    head: HEAD,
+    role: 'review',
+    deferredRunId: 'tests-1',
+    sourceRunId: '42',
+    runId: 'rescuer-1',
+  };
+  const comments = [
+    {
+      id: 20,
+      created_at: '2026-09-12T13:00:00Z',
+      body: reviewQuotaDeferredBody({ head: HEAD, runId: 'tests-1', role: 'review', reason: 'floor' }),
+    },
+    {
+      id: 21,
+      created_at: '2026-09-12T13:01:00Z',
+      body: reviewQuotaRetryBody(fields),
+    },
+    {
+      id: 22,
+      created_at: '2026-09-12T13:02:00Z',
+      body: reviewQuotaDeferredBody({ head: HEAD, runId: 'tests-1', role: 'review', reason: 'shared-quota-lease-reservation-contended' }),
+    },
+  ];
+  assert.equal(deferredReviewCandidate({ head: HEAD, comments }).runId, 'tests-1');
+});
+
 test('il marker retry è riconciliabile: requested/confirmed bloccano, failed riapre', () => {
   const fields = {
     head: HEAD,
