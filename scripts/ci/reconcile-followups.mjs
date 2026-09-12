@@ -162,10 +162,11 @@ function stripFencedBlocks(text) {
   }
 
   const visible = fence ? [...out, ...lines.slice(fenceStart)].join('\n') : out.join('\n');
-  // Inline code is quoted evidence too. A filename such as
-  // `triage-sweep.mjs` must not turn a single-item follow-up into an aggregate
-  // merely because the path contains the word "sweep" (#1320/FU-028).
-  return visible.replace(/(`+)([^`\n]*?)\1/g, (span) => span.replace(/[^\n]/g, ' '));
+  return visible;
+}
+
+function maskInlineCodeSpans(text) {
+  return String(text || '').replace(/(`+)([^`\n]*?)\1/g, (span) => span.replace(/[^\n]/g, ' '));
 }
 
 function isBoldTitleLead(rest, lines = [], start = 0) {
@@ -207,8 +208,8 @@ export function hasEnumeratedItems(body) {
  * @returns {boolean}
  */
 export function isAggregateTitle(title = '', body = '') {
-  const t = stripFencedBlocks(title);
-  const bodyText = stripFencedBlocks(body);
+  const t = maskInlineCodeSpans(stripFencedBlocks(title));
+  const bodyText = maskInlineCodeSpans(stripFencedBlocks(body));
   const m = t.match(/\b(\d+)\s+items?\s+(?:deferred|deferit[oi])\b/i);
   // An explicit count is authoritative once present — trust it fully instead
   // of falling through to the keyword fallback below, which exists ONLY for
@@ -218,7 +219,7 @@ export function isAggregateTitle(title = '', body = '') {
   // aggregate despite explicitly saying "1 item" (#3378).
   if (m) return Number(m[1]) >= 2;
   if (/\b(?:sweep|batch|bulk)\b/i.test(`${t}\n${bodyText}`)) return true;
-  return hasEnumeratedItems(bodyText);
+  return hasEnumeratedItems(body);
 }
 
 const TECHNICAL_LABELS = new Set([UNCLASSIFIABLE_LABEL, LABEL, CLOSED_LABEL]);

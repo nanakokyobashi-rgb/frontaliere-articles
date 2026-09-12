@@ -9193,13 +9193,7 @@ export function classifyExhaustionCause(errors, { authoritative } = {}) {
     const authoritativeBucket = authoritativeCauseBucket(entryAuthoritative);
     const persistentText = text;
     const persistentAt = causeIndex(PERSISTENT_EXHAUSTION_RE, persistentText);
-    // If the persistent cause is beyond the displayed window, the transient
-    // cause must be searched in the full string too: otherwise their offsets
-    // live in different coordinate systems and a transient cause between the
-    // window and the persistent cause is silently discarded.
-    const transientAt = persistentAt >= transientWindow
-      ? causeIndex(transientRe, text)
-      : causeIndex(transientRe, transientText);
+    const transientAt = causeIndex(transientRe, transientText);
     const isTransient = authoritativeBucket === 'transient'
       || (authoritativeBucket === null && transientAt >= 0 && (persistentAt < 0 || transientAt <= persistentAt));
     const isPersistent = authoritativeBucket === 'persistent'

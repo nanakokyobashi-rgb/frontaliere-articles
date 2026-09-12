@@ -160,6 +160,7 @@ export const CONTENT_GATES = [
   'generator/tests/seo-digit-residue-guard.test.mjs',
   'generator/tests/slug-placeholder-guard.test.mjs',
   'generator/tests/telelavoro-frontalieri-normative-citations.test.mjs',
+  'generator/tests/vacant-key-facts.test.mjs',
   'generator/tests/wrong-latin-language-adoption.test.mjs',
 ];
 
