@@ -32,7 +32,6 @@
  * app icon in the feed.
  */
 import { ARTICLE_SECTION_CORE } from './shared/articleSectionCore.mjs';
-import { findAllSeoEntryMatches } from './shared/seo-entry.mjs';
 
 export const BASE_URL = 'https://frontaliereticino.ch';
 export const RSS_LOCALES = ['it', 'en', 'de', 'fr'];
@@ -154,17 +153,18 @@ function parseSeoBlogs(fs, path, rootDir, seoDir, seoFiles) {
     if (!fs.existsSync(filePath)) continue;
     const src = fs.readFileSync(filePath, 'utf-8');
 
-    // Split into per-entry blocks using the same lexical, balanced resolver as
-    // the corpus floor. Key-shaped text in comments/templates is not an entry.
-    const entryPositions = findAllSeoEntryMatches(src, filePath).map(({ id, index, closeIdx }) => ({
-      articleId: id,
-      start: index,
-      end: closeIdx + 1,
-    }));
+    // Split into per-entry blocks: each starts with 'blog-{id}': {
+    const entryRe = /'blog-([^']+)':\s*\{/g;
+    let match;
+    const entryPositions = [];
+    while ((match = entryRe.exec(src)) !== null) {
+      entryPositions.push({ articleId: match[1], start: match.index });
+    }
 
     for (let i = 0; i < entryPositions.length; i++) {
-      const { articleId, start, end } = entryPositions[i];
-      const block = src.slice(start, end);
+      const { articleId, start } = entryPositions[i];
+      const end = i + 1 < entryPositions.length ? entryPositions[i + 1].start : start + 4000;
+      const block = src.slice(start, Math.min(end, start + 4000));
 
       // `(?:[^"\\]|\\.)*`, not `[^"]+`: create-article escapes literal quotes in
       // these values (`.replace(/"/g, '\\"')`), and the naive class stops at the

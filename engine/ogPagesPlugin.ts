@@ -562,7 +562,7 @@ export async function renderArticlePages(opts: RenderArticlePagesOptions): Promi
  const s = pos[i].start;
  const key = pos[i].key;
  const articleId = blogKeyToArticleId(key);
- const e = pos[i].end;
+ const e = i + 1 < pos.length ? pos[i + 1].start : Math.min(s + 3000, seoSrc.length);
  const b = seoSrc.substring(s, e);
 
  // Match title/desc/og* allowing escaped quotes, trying single-quoted first
