@@ -284,11 +284,12 @@ jobs:
       # fixer. Stessa cadenza, stessa superficie, stesso permesso `issues: write`.
       #
       # `agent:in-progress` non e' uno stato, e' mutua esclusione: `issue-fix.yml`
-      # lo mette come primo pre-flight e salta tutto se lo trova. Un run morto in
-      # modo non grazioso — o una sessione interattiva finita male — lo lascia
-      # appeso, e su una issue APERTA quel lock la esclude dal fixer per sempre e
-      # in silenzio. Nessun allarme, nessuna scadenza (osservato sulla #4248 del
-      # sito, `priority:high`).
+      # lo mette come primo pre-flight e salta tutto se lo trova. Il claim porta
+      # anche `agent:remote` o `agent:local`, così il detector distingue il lock
+      # del fixer CI da una sessione locale; gli errori di lettura sono
+      # fail-closed e i claim locali non vengono rimossi automaticamente.
+      # Un run remoto morto senza owner release resta comunque osservabile e
+      # recuperabile dal detector stale (soglia 12h).
       #
       # `pull-requests: read` e' load-bearing: il detector rilascia solo i claim
       # SENZA una PR aperta che li giustifichi. Senza quel permesso l'elenco

@@ -17,13 +17,15 @@ const scope = workflow.match(/\n  scope:\n([\s\S]*?)\n  redflag-fix:\n/)?.[1];
 
 assert.ok(preflight, 'preflight job not found');
 
-test('the autonomous fixer is limited to bots or fix/* branches in preflight', () => {
+test('the autonomous fixer is limited to bots, fix/*, or explicit agent:autofix in preflight', () => {
   const jobIf = preflight.match(/\n    if: \|\n([\s\S]*?)\n    runs-on:/)?.[1] ?? '';
 
   assert.ok(jobIf, 'job-level if: not found');
   assert.doesNotMatch(jobIf, /github\.event\.pull_request\.user\.type/);
   assert.doesNotMatch(jobIf, /github\.event\.pull_request\.head\.ref/);
   assert.match(preflight, /PR_AUTHOR_TYPE: \$\{\{ github\.event\.pull_request\.user\.type \}\}/);
+  assert.match(preflight, /agent:autofix/);
+  assert.match(preflight, /PR_AUTOFIX=/);
   assert.match(preflight, /PR con autore non Bot, branch non/);
   assert.match(
     preflight,

@@ -331,11 +331,16 @@ jobs:
       - name: Pre-flight — in-progress claim gate (zero-Claude, mutex)
         id: claim
         if: steps.preflight.outputs.already_resolved != 'true' && steps.stale.outputs.stale_dispatch != 'true' && steps.scope_guard.outputs.workflows_blocked != 'true'
+        # FAIL-CLOSED: il claim script emette `in_flight=true` su un errore di
+        # lettura/scrittura o verifica; non lasciare che una mutex illeggibile
+        # arrivi al fixer.
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_REPO: ${{ github.repository }}
           ISSUE_NUMBER: ${{ github.event.issue.number }}
           ISSUE_NUMBERS: ${{ steps.group.outputs.group_numbers }}
+          CLAIM_ACTION: acquire
+          CLAIM_OWNER: remote
         run: node scripts/ci/claim-issue-group-in-flight.mjs
 
       # ── Pre-flight 6: diagnosi gia' consegnata al sito (zero-Claude) ───────
@@ -737,6 +742,29 @@ jobs:
             echo "::warning::wip-salvage: push di $BRANCH fallito — il lavoro resta solo nel container e andra' perso."
           fi
 
+      - name: Mark autonomous PR provenance (zero-Claude)
+        if: always() && steps.claim.outputs.claim_acquired == 'true'
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ env.GITHUB_PAT_NANAKO || secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          ISSUE: ${{ github.event.issue.number }}
+        run: |
+          set -uo pipefail
+          BRANCH="fix/issue-$ISSUE"
+          PR_NUMBER=$(gh pr list --repo "$REPO" --head "$BRANCH" --state open --json number \
+            --jq '.[0].number // empty' 2>/dev/null || true)
+          if [ -z "$PR_NUMBER" ]; then
+            echo "provenance: nessuna PR aperta su $BRANCH — skip"
+            exit 0
+          fi
+          gh label create agent:autofix --repo "$REPO" --color 1d76db \
+            --description "PR prodotta dal loop autonomo: abilita i fixer bounded" --force \
+            2>/dev/null || true
+          gh pr edit "$PR_NUMBER" --repo "$REPO" --add-label agent:autofix \
+            && echo "provenance: PR #$PR_NUMBER marcata agent:autofix" \
+            || echo "::warning::provenance: label agent:autofix non applicata alla PR #$PR_NUMBER"
+
       - name: Claude usage metrics
         if: always() && steps.claude_fix.outputs.claude_used == 'true' && steps.preflight.outputs.already_resolved != 'true' && steps.stale.outputs.stale_dispatch != 'true' && steps.scope_guard.outputs.workflows_blocked != 'true' && steps.claim.outputs.in_flight != 'true' && steps.handoff_pre.outputs.handoff_delivered != 'true'
         continue-on-error: true
@@ -915,19 +943,16 @@ jobs:
           echo "Nessuna PR ma la CLI e' uscita pulita ('$CLAUDE_OUTCOME') -> terminale legittimo (blocked/already-fixed/no-root-cause). Job verde."
 
       - name: Release in-progress claim (zero-Claude, mutex)
-        if: always() && steps.claim.outcome != 'skipped' && steps.claim.outputs.in_flight != 'true'
+        if: always() && steps.claim.outputs.claim_acquired == 'true'
         continue-on-error: true
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+          ISSUE_NUMBER: ''
           CLAIMED_NUMBERS: ${{ steps.claim.outputs.claimed_numbers }}
-        run: |
-          set -uo pipefail
-          IFS=',' read -r -a claimed <<< "${CLAIMED_NUMBERS:-}"
-          for issue in "${claimed[@]}"; do
-            [ -n "$issue" ] || continue
-            gh issue edit "$issue" --repo "${{ github.repository }}" --remove-label agent:in-progress 2>/dev/null || true
-            echo "Rilasciato agent:in-progress su #$issue (best-effort)."
-          done
+          CLAIM_ACTION: release
+          CLAIM_OWNER: remote
+        run: node scripts/ci/claim-issue-group-in-flight.mjs
 
       - name: Cleanup Firebase credentials
         if: always()

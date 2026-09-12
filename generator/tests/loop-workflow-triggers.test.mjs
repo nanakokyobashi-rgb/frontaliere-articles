@@ -46,6 +46,14 @@ const active = (src) =>
 
 const TESTS = active(read('.github/workflows/tests.yml'));
 const GA = active(read('.github/workflows/generate-article.yml'));
+const FOLLOWUP_DRAINER = read('.github/workflows/followup-drainer.yml');
+
+test('followup-drainer: cron durevole, niente fan-out workflow_run e fallback Codex', () => {
+  assert.match(FOLLOWUP_DRAINER, /schedule:\s*\n\s*- cron: ['"]5,30,55 \* \* \* \*['"]/);
+  assert.doesNotMatch(FOLLOWUP_DRAINER, /\n  workflow_run:/);
+  assert.match(FOLLOWUP_DRAINER, /workflow_dispatch:/);
+  assert.match(FOLLOWUP_DRAINER, /FOLLOWUP_CODEX_FALLBACK_MODE:\s*['"]1['"]/);
+});
 
 /** Il blocco di un job: da `\n  <nome>:` al job successivo allo stesso livello. */
 function jobBlock(src, name) {

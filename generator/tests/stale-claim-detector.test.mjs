@@ -17,20 +17,45 @@
  */
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import path from 'node:path';
 import {
   selectStaleClaims,
   referencedIssueNumbers,
   DEFAULT_STALE_CLAIM_HOURS,
+  claimOwner,
 } from '../../scripts/ci/stale-claim-detector.mjs';
 
 const NOW = Date.parse('2026-08-08T12:00:00Z');
 const hoursAgo = (h) => new Date(NOW - h * 3600 * 1000).toISOString();
 const CLAIM = [{ name: 'agent:in-progress' }];
+const LOCAL_CLAIM = [{ name: 'agent:in-progress' }, { name: 'agent:local' }];
+const REMOTE_CLAIM = [{ name: 'agent:in-progress' }, { name: 'agent:remote' }];
+const CONTENDED_CLAIM = [...LOCAL_CLAIM, { name: 'agent:remote' }];
+const SOURCE = fs.readFileSync(path.join(path.dirname(new URL(import.meta.url).pathname), '../../scripts/ci/stale-claim-detector.mjs'), 'utf8');
 const nums = (xs) => xs.map((x) => x.number);
 
 test('un claim vecchio senza PR aperta è stale', () => {
   const issues = [{ number: 4248, labels: CLAIM, updatedAt: hoursAgo(30) }];
   assert.deepEqual(nums(selectStaleClaims(issues, new Set(), NOW)), [4248]);
+});
+
+test('un claim locale vecchio NON viene rilasciato automaticamente', () => {
+  const issues = [{ number: 4248, labels: LOCAL_CLAIM, updatedAt: hoursAgo(30) }];
+  assert.equal(claimOwner(LOCAL_CLAIM), 'local');
+  assert.deepEqual(nums(selectStaleClaims(issues, new Set(), NOW)), []);
+});
+
+test('un claim remoto vecchio resta liberabile dal detector', () => {
+  const issues = [{ number: 4248, labels: REMOTE_CLAIM, updatedAt: hoursAgo(30) }];
+  assert.equal(claimOwner(REMOTE_CLAIM), 'remote');
+  assert.deepEqual(nums(selectStaleClaims(issues, new Set(), NOW)), [4248]);
+});
+
+test('un claim con due owner è conteso e non viene mutato', () => {
+  const issues = [{ number: 4248, labels: CONTENDED_CLAIM, updatedAt: hoursAgo(30) }];
+  assert.equal(claimOwner(CONTENDED_CLAIM), 'contended');
+  assert.deepEqual(nums(selectStaleClaims(issues, new Set(), NOW)), []);
 });
 
 test('un claim vecchio CON una PR aperta NON è stale — è la trappola del punto 6', () => {
@@ -104,7 +129,7 @@ test('sceglie solo gli stale da un elenco misto', () => {
   assert.deepEqual(nums(selectStaleClaims(issues, new Set([2]), NOW)), [1]);
 });
 
-// ── referencedIssueNumbers: i tre canali con cui una PR dice "sto su #N" ──────
+// ── referencedIssueNumbers: i quattro canali con cui una PR dice "sto su #N" ──
 
 test('il branch deterministico fix/issue-N è riconosciuto', () => {
   assert.deepEqual([...referencedIssueNumbers([{ headRefName: 'fix/issue-4248' }])], [4248]);
@@ -117,6 +142,11 @@ test('(#N) nel titolo è riconosciuto', () => {
 test('Closes/Fixes/Resolves #N nel body sono riconosciuti, in ogni forma e caso', () => {
   const prs = [{ body: 'Closes #1\nfixes #2\nRESOLVED: #3\nFixed #4' }];
   assert.deepEqual([...referencedIssueNumbers(prs)].sort((a, b) => a - b), [1, 2, 3, 4]);
+});
+
+test('Addresses ... #N nelle PR aggregate protegge il claim anche senza chiudere la issue', () => {
+  const prs = [{ body: 'Addresses item 1 e item 2 di #8039\nAddresses #12' }];
+  assert.deepEqual([...referencedIssueNumbers(prs)].sort((a, b) => a - b), [12, 8039]);
 });
 
 test('un branch che somiglia ma non combacia NON conta', () => {
@@ -145,4 +175,12 @@ test('più canali sulla stessa PR convergono senza duplicare', () => {
 test('input non-array o entry nulle → Set vuoto, niente eccezioni', () => {
   assert.equal(referencedIssueNumbers(undefined).size, 0);
   assert.equal(referencedIssueNumbers([null, undefined]).size, 0);
+});
+
+test('la lettura di produzione usa REST paginato per entrambe le liste e non un cap silenzioso', () => {
+  assert.match(SOURCE, /\['api', apiPath, '--paginate', '--slurp'\]/);
+  assert.match(SOURCE, /issue claim response missing required fields/);
+  assert.match(SOURCE, /open PR response missing required fields/);
+  assert.doesNotMatch(SOURCE, /\['issue', 'list'/);
+  assert.doesNotMatch(SOURCE, /\['pr', 'list'/);
 });

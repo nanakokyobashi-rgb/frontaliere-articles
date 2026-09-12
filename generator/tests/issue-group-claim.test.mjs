@@ -22,7 +22,9 @@ test('issue-fix carica il contesto B19 prima del claim e rilascia solo i numeri 
   assert.match(WORKFLOW.slice(claimIndex, claimIndex + 900), /ISSUE_NUMBERS: \$\{\{ steps\.group\.outputs\.group_numbers \}\}/);
   assert.match(WORKFLOW.slice(claimIndex, claimIndex + 1200), /claim-issue-group-in-flight\.mjs/);
   assert.match(WORKFLOW, /CLAIMED_NUMBERS: \$\{\{ steps\.claim\.outputs\.claimed_numbers \}\}/);
-  assert.match(WORKFLOW, /gh issue edit "\$issue" .*--remove-label agent:in-progress/);
+  assert.match(WORKFLOW, /steps\.claim\.outputs\.claim_acquired == 'true'/);
+  assert.match(WORKFLOW, /CLAIM_ACTION: release[\s\S]*CLAIM_OWNER: remote/);
+  assert.match(WORKFLOW, /run: node scripts\/ci\/claim-issue-group-in-flight\.mjs/);
 });
 
 test('il claim di gruppo è all-or-nothing rispetto a una label già presente', () => {
@@ -47,11 +49,11 @@ if (args[0] === 'issue' && args[1] === 'view') {
   process.stdout.write(JSON.stringify({ labels: (state[issue] || { labels: [] }).labels.map((name) => ({ name })) }));
 } else if (args[0] === 'issue' && args[1] === 'edit') {
   const issue = args[2];
-  const value = args[args.indexOf('--add-label') + 1] || args[args.indexOf('--remove-label') + 1];
-  const adding = args.includes('--add-label');
   const labels = state[issue].labels;
-  if (adding && !labels.includes(value)) labels.push(value);
-  if (!adding) state[issue].labels = labels.filter((name) => name !== value);
+  for (let i = 0; i < args.length - 1; i++) {
+    if (args[i] === '--add-label' && !labels.includes(args[i + 1])) labels.push(args[i + 1]);
+    if (args[i] === '--remove-label') state[issue].labels = state[issue].labels.filter((name) => name !== args[i + 1]);
+  }
 }
 fs.writeFileSync(file, JSON.stringify(state));
 `);
@@ -74,10 +76,13 @@ fs.writeFileSync(file, JSON.stringify(state));
     const first = run();
     assert.equal(first.status, 0, first.stderr);
     let state = JSON.parse(fs.readFileSync(stateFile, 'utf8'));
-    assert.deepEqual(state['1'].labels, ['agent:in-progress']);
-    assert.deepEqual(state['2'].labels, ['agent:in-progress']);
+    assert.deepEqual(state['1'].labels, ['agent:in-progress', 'agent:remote']);
+    assert.deepEqual(state['2'].labels, ['agent:in-progress', 'agent:remote']);
     assert.match(first.stdout, /in_flight=false/);
     assert.match(first.stdout, /claimed_numbers=1,2/);
+    assert.match(first.stdout, /claim_acquired=true/);
+    assert.match(first.stdout, /claim_owner=remote/);
+    assert.match(first.stdout, /claim_error=false/);
 
     const second = run();
     assert.equal(second.status, 0, second.stderr);
@@ -85,8 +90,68 @@ fs.writeFileSync(file, JSON.stringify(state));
     assert.match(second.stdout, /in_flight=true/);
     assert.match(second.stdout, /claimed_numbers=\n/);
     assert.equal(state['1'].labels[0], 'agent:in-progress');
+    assert.equal(state['1'].labels[1], 'agent:remote');
     assert.equal(state['2'].labels[0], 'agent:in-progress');
+    assert.equal(state['2'].labels[1], 'agent:remote');
   } finally {
     fs.rmSync(temp, { recursive: true, force: true });
   }
+});
+
+test('il release remoto rimuove solo il proprio owner e il mutex, non un claim locale', () => {
+  const temp = fs.mkdtempSync(path.join(os.tmpdir(), 'issue-group-release-test-'));
+  try {
+    const fakeGh = path.join(temp, 'gh');
+    const stateFile = path.join(temp, 'state.json');
+    fs.writeFileSync(stateFile, JSON.stringify({
+      '1': { labels: ['agent:in-progress', 'agent:remote'] },
+      '2': { labels: ['agent:in-progress', 'agent:local'] },
+      calls: [],
+    }));
+    fs.writeFileSync(fakeGh, `#!/usr/bin/env node
+const fs = require('node:fs');
+const args = process.argv.slice(2);
+const file = process.env.FAKE_GH_STATE;
+const state = JSON.parse(fs.readFileSync(file, 'utf8'));
+if (args[0] === 'issue' && args[1] === 'view') {
+  const issue = args[2];
+  process.stdout.write(JSON.stringify({ labels: state[issue].labels.map((name) => ({ name })) }));
+} else if (args[0] === 'issue' && args[1] === 'edit') {
+  const issue = args[2];
+  for (let i = 0; i < args.length - 1; i++) {
+    if (args[i] === '--remove-label') state[issue].labels = state[issue].labels.filter((name) => name !== args[i + 1]);
+  }
+}
+fs.writeFileSync(file, JSON.stringify(state));
+`);
+    fs.chmodSync(fakeGh, 0o755);
+    const run = spawnSync(process.execPath, [SCRIPT], {
+      cwd: ROOT,
+      encoding: 'utf8',
+      env: {
+        ...process.env,
+        PATH: `${temp}:${process.env.PATH || ''}`,
+        FAKE_GH_STATE: stateFile,
+        GH_REPO: 'owner/repo',
+        ISSUE_NUMBER: '',
+        ISSUE_NUMBERS: '',
+        CLAIMED_NUMBERS: '1,2',
+        CLAIM_ACTION: 'release',
+        CLAIM_OWNER: 'remote',
+      },
+    });
+    assert.equal(run.status, 0, run.stderr);
+    const state = JSON.parse(fs.readFileSync(stateFile, 'utf8'));
+    assert.deepEqual(state['1'].labels, []);
+    assert.deepEqual(state['2'].labels, ['agent:in-progress', 'agent:local']);
+    assert.match(run.stdout, /claim_owner=remote/);
+  } finally {
+    fs.rmSync(temp, { recursive: true, force: true });
+  }
+});
+
+test('il workflow del fixer marca la provenienza autonoma della PR', () => {
+  assert.match(WORKFLOW, /name: Mark autonomous PR provenance/);
+  assert.match(WORKFLOW, /gh pr edit "\$PR_NUMBER" --repo "\$REPO" --add-label agent:autofix/);
+  assert.match(WORKFLOW, /CLAIM_ACTION: release[\s\S]*CLAIM_OWNER: remote/);
 });

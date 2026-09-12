@@ -63,6 +63,7 @@ import {
   latestFixOutcomeFromComments,
   maxQuotaResetsAt,
 } from './claude-rate-limit.mjs';
+import { quotaFallbackDecision } from './check-quota-backoff.mjs';
 import { FIX_OUTCOME_RE } from './close-recovered-failure-issues.mjs';
 import { runBudgetFromEnv } from './lib/run-budget.mjs';
 import { parsePositiveNum } from '../lib/parse-positive-num.mjs';
@@ -191,6 +192,18 @@ const ITEM_COST_MS = intFromEnv('FOLLOWUP_ITEM_COST_MS', 8_000);
 
 const DRY = process.argv.includes('--dry-run');
 const REPO = process.env.GITHUB_REPOSITORY || '';
+// issue-fix.yml usa Codex come provider primario e Claude solo come fallback.
+// Il drainer deve applicare lo stesso contratto: un beacon Claude non congela
+// la coda quando il provider primario può ancora fare un tentativo.
+const CODEX_FALLBACK_MODE = process.env.FOLLOWUP_CODEX_FALLBACK_MODE === '1';
+
+/** Proiezione pura del beacon quota sul contratto di fallback del fixer. */
+export function quotaPromotionDecision(resetsAt, {
+  nowSec = Math.floor(Date.now() / 1000),
+  codexFallbackMode = false,
+} = {}) {
+  return quotaFallbackDecision({ resetsAt, nowSec, codexFallbackMode });
+}
 
 function manifestPinFor(issueNumber) {
   return pinnedBy(issueNumber, REPO);
@@ -3843,8 +3856,17 @@ export function runDrain() {
   }
   if (quotaBackoffUntil !== null) {
     const when = new Date(quotaBackoffUntil * 1000).toISOString();
-    console.log(`QUOTA BACKOFF attivo fino a ${when} — nessuna promozione e nessun tentativo consumato in questo tick.`);
+    if (CODEX_FALLBACK_MODE) {
+      console.log(`QUOTA Claude attiva fino a ${when}, ma Codex fallback è abilitato — il drainer non congela la coda; ogni promozione prova il provider primario una sola volta.`);
+    } else {
+      console.log(`QUOTA BACKOFF attivo fino a ${when} — nessuna promozione e nessun tentativo consumato in questo tick.`);
+    }
   }
+  const quotaDecision = quotaPromotionDecision(quotaBackoffUntil, {
+    nowSec: Math.floor(Date.now() / 1000),
+    codexFallbackMode: CODEX_FALLBACK_MODE,
+  });
+  const quotaBlocksPromotions = quotaDecision.quotaBlocked;
 
   // --- FAIRNESS DI QUOTA (peer repo, opt-in via env) --------------------------
   // La quota Claude è UNA per i due repo, e il beacon peer è a senso unico: il
@@ -3863,7 +3885,7 @@ export function runDrain() {
     const fairnessPeer = process.env.FAIRNESS_PEER_REPO || '';
     const fairnessHours = String(process.env.FAIRNESS_HOURS_UTC || '')
       .split(',').map((s) => parseInt(s, 10)).filter(Number.isInteger);
-    if (fairnessPeer && quotaBackoffUntil === null && fairnessHours.includes(new Date().getUTCHours())) {
+    if (fairnessPeer && !quotaBlocksPromotions && fairnessHours.includes(new Date().getUTCHours())) {
       try {
         const pq = gh(['issue', 'list', '--repo', fairnessPeer, '--state', 'open', '--label', LBL_QUEUED, '--json', 'number', '--limit', '50']);
         const minQ = intFromEnv('FAIRNESS_PEER_QUEUE_MIN', 10);
@@ -3933,13 +3955,13 @@ export function runDrain() {
     // Un padre decomposto non deve rientrare nel fixer: il suo scope vive nelle
     // figlie e PARENT-CLOSE chiude il tracker. Sotto backoff quota lo lasciamo
     // come beacon, perché quotaScanPool cerca il reset sulla label agent:fix.
-    if (has(iss, LBL_DECOMPOSED) && quotaBackoffUntil === null) {
+    if (has(iss, LBL_DECOMPOSED) && !quotaBlocksPromotions) {
       console.log(`PARK #${iss.number} (padre ${LBL_DECOMPOSED} senza PR) → no re-queue: lo scope è nelle figlie, lo chiude il PARENT-CLOSE`);
       edit(iss.number, { add: [LBL_PARKED], remove: [LBL_FIX, LBL_QUEUED] });
       continue;
     }
     if (outcome && ZERO_WORK.has(outcome)) {
-      if (quotaBackoffUntil !== null) {
+      if (quotaBlocksPromotions) {
         console.log(`HOLD #${iss.number} (${outcome}, finestra quota ancora aperta) → resta agent:fix come beacon, nessun tentativo consumato`);
         continue;
       }
@@ -4074,7 +4096,7 @@ export function runDrain() {
       ageMin: minutesSince(iss.updatedAt),
       attempt,
       hasPR,
-      quotaBackoffActive: quotaBackoffUntil !== null,
+      quotaBackoffActive: quotaBlocksPromotions,
       decomposeEligible: DECOMPOSE_ENABLED && isDecomposeEligible(iss),
     });
     const tag = `#${iss.number} — "${iss.title?.slice(0, 50)}"`;
@@ -4140,7 +4162,7 @@ export function runDrain() {
   // orfano di `agent:fix` (#5514). Ri-arma UNA volta (`decompose-retried`),
   // alla seconda morte park+needs-human: bounded, niente loop. Il guard
   // `inFlightDecomposeCount()==0` impedisce di yankare la label da una run VIVA.
-  if (DECOMPOSE_ENABLED && quotaBackoffUntil === null) {
+  if (DECOMPOSE_ENABLED && !quotaBlocksPromotions) {
     const decompInFlight = inFlightDecomposeCount();
     if (decompInFlight === 0) {
       // Il RESCUE gira anche sotto fairness-hold: non consuma quota (sole
@@ -4201,7 +4223,7 @@ export function runDrain() {
   // condizione DETERMINISTICA, non un'euristica: si aspetta la scadenza
   // dichiarata dal server. Il beacon resta sulla issue in `agent:fix`, quindi il
   // tick successivo lo rilegge senza bisogno di alcuno store esterno.
-  if (quotaBackoffUntil !== null) {
+  if (quotaBlocksPromotions) {
     const mins = Math.max(1, Math.round((quotaBackoffUntil - Math.floor(Date.now() / 1000)) / 60));
     console.log(`DRAIN sospeso: quota Claude esaurita per altri ~${mins} min (reset ${new Date(quotaBackoffUntil * 1000).toISOString()}). Nessuna promozione — evito run che morirebbero a turno 1.`);
     return;
