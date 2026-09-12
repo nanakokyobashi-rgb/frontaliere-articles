@@ -225,55 +225,55 @@ function readMeta(metaPrefix, locale) {
   return out;
 }
 
-fs.mkdirSync(OUT, { recursive: true });
 let failed = false;
+const preparedSections = [];
 
+// Fase 1: valida e prepara tutti gli shard senza creare la directory di output.
+// Nessuna sezione parziale deve poter lasciare artefatti se una sezione successiva
+// e' assente o troncata.
 for (const section of SECTIONS) {
   const registry = readRegistry(section.registry);
   let registryFloor;
   try {
     registryFloor = sectionEntryFloor(section.name);
   } catch (err) {
-    console.error(`[blog-index] ${section.name}: ${err.message} — refusing to publish`);
+    console.error('[blog-index] ' + section.name + ': ' + err.message + ' — refusing to publish');
     failed = true;
     continue;
   }
   if (registry.length < registryFloor) {
-    console.error(`[blog-index] ${section.name}: registry parsed to ${registry.length} entries (< ${registryFloor}, derived from the corpus on disk) — refusing to publish a truncated index`);
+    console.error(
+      '[blog-index] ' + section.name + ': registry parsed to ' + registry.length +
+      ' entries (< ' + registryFloor + ', derived from the corpus on disk) — refusing to publish a truncated index',
+    );
     failed = true;
     continue;
   }
-  // Il pavimento regge, ma REGGERE non e' una misura: registro e corpi contano
-  // cose diverse, e ogni corpo lasciato senza voce (orfani, ritiri a meta',
-  // import parziali) erode il rapporto in modo monotono. Stesso livello
-  // advisory del gate di pubblicazione, stessa sorgente unica — qui il primo
-  // sintomo sarebbe un indice che si rifiuta di pubblicarsi.
+
   const sourceBodies = countSourceArticles(ROOT, section.name);
-  console.log(`[blog-index] ${retentionLine(`${section.name} registry/corpus`, registry.length, sourceBodies)}`);
-  const registryWarning = retentionWarning(`${section.name} registry/corpus`, registry.length, sourceBodies);
-  if (registryWarning) console.warn(`::warning::[blog-index] ${registryWarning}`);
-  // Second gate, on the values rather than the count: a surviving
-  // `/images/blog/` path is a hero that 404s on the apex, and a card with a
-  // broken image is the failure this index existed to prevent. Cheap enough to
-  // assert every time, and it fails loudly instead of publishing dead art.
+  console.log('[blog-index] ' + retentionLine(section.name + ' registry/corpus', registry.length, sourceBodies));
+  const registryWarning = retentionWarning(section.name + ' registry/corpus', registry.length, sourceBodies);
+  if (registryWarning) console.warn('::warning::[blog-index] ' + registryWarning);
+
   const leaks = registry.filter((a) => /^\/images\/blog\//.test(a.image));
   if (leaks.length > 0) {
-    console.error(`[blog-index] ${section.name}: ${leaks.length} entries still carry a same-origin /images/blog/ hero after the CDN rewrite (e.g. ${leaks[0].id} → ${leaks[0].image}) — refusing to publish 404 images`);
+    console.error(
+      '[blog-index] ' + section.name + ': ' + leaks.length +
+      ' entries still carry a same-origin /images/blog/ hero after the CDN rewrite ' +
+      '(e.g. ' + leaks[0].id + ' → ' + leaks[0].image + ') — refusing to publish 404 images',
+    );
     failed = true;
     continue;
   }
 
   const itMeta = readMeta(section.metaPrefix, 'it');
-
+  const locales = [];
   for (const locale of LOCALES) {
     const meta = locale === 'it' ? itMeta : readMeta(section.metaPrefix, locale);
     const entries = [];
     for (const a of registry) {
-      // Fall back to the Italian title so a locale whose translation has not
-      // landed yet still LISTS the article rather than hiding it — the same
-      // union-not-intersection rule the archive renderer uses.
       const title = meta.get(a.id)?.title ?? itMeta.get(a.id)?.title;
-      if (!title) continue; // no title anywhere: nothing a list cell could show
+      if (!title) continue;
       entries.push({
         id: a.id,
         title,
@@ -286,66 +286,76 @@ for (const section of SECTIONS) {
         authorSlug: a.authorSlug,
       });
     }
-    // Per locale il riferimento e' il registro appena validato, non il corpus:
-    // una lingua puo' legittimamente perdere le voci senza titolo da nessuna
-    // parte, ma non puo' perderne la maggior parte.
     const localeFloor = floorFrom(registry.length);
     if (entries.length < localeFloor) {
-      console.error(`[blog-index] ${section.name}/${locale}: only ${entries.length} entries (< ${localeFloor}) — refusing`);
+      console.error(
+        '[blog-index] ' + section.name + '/' + locale + ': only ' + entries.length +
+        ' entries (< ' + localeFloor + ') — refusing',
+      );
       failed = true;
       continue;
     }
-    const localeWarning = retentionWarning(`${section.name}/${locale}`, entries.length, registry.length);
-    if (localeWarning) console.warn(`::warning::[blog-index] ${localeWarning}`);
-    // Newest first: this index feeds LISTS, and a list is read from the top.
+    const localeWarning = retentionWarning(section.name + '/' + locale, entries.length, registry.length);
+    if (localeWarning) console.warn('::warning::[blog-index] ' + localeWarning);
     entries.sort((a, b) => String(b.date).localeCompare(String(a.date)));
+    locales.push({ locale, entries });
+  }
+  preparedSections.push({ section, locales });
+}
 
-    // Two files, and the split is the point.
-    //
-    // The capped one is a FAST PATH, not the contract. Its original comment
-    // said RECENT_LIMIT "covers weeks between site deploys" — true only while
-    // the site keeps deploying. When deploys stalled (2026-08-03 → 04, and the
-    // hub had been frozen since 2026-07-29) the bundle stopped advancing while
-    // articles kept publishing, and a cap sized against deploy cadence turns
-    // into a silent cliff: articles older than the window and newer than the
-    // bundle are in NEITHER, so they exist, are live at their own URL, and are
-    // invisible in every list. Nothing reports that.
-    //
-    // So the full set is published alongside it. The consumer reads the capped
-    // file first and escalates to the full one only when `total` says it is
-    // still missing something — no extra bytes on the common path, and no
-    // window to fall through on the uncommon one.
-    const capped = entries.slice(0, RECENT_LIMIT);
-    const file = path.join(OUT, `blog-index-${section.name}-${locale}.json`);
-    const payload = {
-      version: 1, section: section.name, locale,
-      count: capped.length, total: entries.length, articles: capped,
-      // Lets a consumer tell "the window covers my gap" from "it does not"
-      // without fetching the full file to find out.
-      oldest: capped[capped.length - 1]?.date ?? null,
-      full: `blog-index-${section.name}-${locale}-full.json`,
-    };
-    const cleanPayload = sanitizeDeep(payload);
-    reportStrippedControlCharsDeep(file, payload, cleanPayload);
-    const text = JSON.stringify(cleanPayload) + '\n';
-    fs.writeFileSync(file, text);
-    writtenShards[path.relative(API_ROOT, file)] = byteSize(text);
-    const kb = Math.round(fs.statSync(file).size / 1024);
-    console.log(`[blog-index] ${path.basename(file)} — ${capped.length}/${entries.length} articles, ${kb} KB, newest ${capped[0].date}`);
+if (!failed) {
+  fs.mkdirSync(OUT, { recursive: true });
 
-    const fullFile = path.join(OUT, `blog-index-${section.name}-${locale}-full.json`);
-    const fullPayload = {
-      version: 1, section: section.name, locale,
-      count: entries.length, total: entries.length, articles: entries,
-      oldest: entries[entries.length - 1]?.date ?? null,
-    };
-    const cleanFullPayload = sanitizeDeep(fullPayload);
-    reportStrippedControlCharsDeep(fullFile, fullPayload, cleanFullPayload);
-    const fullText = JSON.stringify(cleanFullPayload) + '\n';
-    fs.writeFileSync(fullFile, fullText);
-    writtenShards[path.relative(API_ROOT, fullFile)] = byteSize(fullText);
-    const fullKb = Math.round(fs.statSync(fullFile).size / 1024);
-    console.log(`[blog-index] ${path.basename(fullFile)} — ${entries.length} articles, ${fullKb} KB`);
+  // Fase 2: la validazione e' completa; da qui in poi si scrive il set preparato.
+  for (const { section, locales } of preparedSections) {
+    for (const { locale, entries } of locales) {
+      // Two files, and the split is the point.
+      //
+      // The capped one is a FAST PATH, not the contract. Its original comment
+      // said RECENT_LIMIT "covers weeks between site deploys" — true only while
+      // the site keeps deploying. When deploys stalled (2026-08-03 → 04, and the
+      // hub had been frozen since 2026-07-29) the bundle stopped advancing while
+      // articles kept publishing, and a cap sized against deploy cadence turns
+      // into a silent cliff: articles older than the window and newer than the
+      // bundle are in NEITHER, so they exist, are live at their own URL, and are
+      // invisible in every list. Nothing reports that.
+      //
+      // So the full set is published alongside it. The consumer reads the capped
+      // file first and escalates to the full one only when `total` says it is
+      // still missing something — no extra bytes on the common path, and no
+      // window to fall through on the uncommon one.
+      const capped = entries.slice(0, RECENT_LIMIT);
+      const file = path.join(OUT, `blog-index-${section.name}-${locale}.json`);
+      const payload = {
+        version: 1, section: section.name, locale,
+        count: capped.length, total: entries.length, articles: capped,
+        // Lets a consumer tell "the window covers my gap" from "it does not"
+        // without fetching the full file to find out.
+        oldest: capped[capped.length - 1]?.date ?? null,
+        full: `blog-index-${section.name}-${locale}-full.json`,
+      };
+      const cleanPayload = sanitizeDeep(payload);
+      reportStrippedControlCharsDeep(file, payload, cleanPayload);
+      const text = JSON.stringify(cleanPayload) + '\n';
+      fs.writeFileSync(file, text);
+      writtenShards[path.relative(API_ROOT, file)] = byteSize(text);
+      const kb = Math.round(fs.statSync(file).size / 1024);
+      console.log(`[blog-index] ${path.basename(file)} — ${capped.length}/${entries.length} articles, ${kb} KB, newest ${capped[0].date}`);
+
+      const fullFile = path.join(OUT, `blog-index-${section.name}-${locale}-full.json`);
+      const fullPayload = {
+        version: 1, section: section.name, locale,
+        count: entries.length, total: entries.length, articles: entries,
+        oldest: entries[entries.length - 1]?.date ?? null,
+      };
+      const cleanFullPayload = sanitizeDeep(fullPayload);
+      reportStrippedControlCharsDeep(fullFile, fullPayload, cleanFullPayload);
+      const fullText = JSON.stringify(cleanFullPayload) + '\n';
+      fs.writeFileSync(fullFile, fullText);
+      writtenShards[path.relative(API_ROOT, fullFile)] = byteSize(fullText);
+      const fullKb = Math.round(fs.statSync(fullFile).size / 1024);
+      console.log(`[blog-index] ${path.basename(fullFile)} — ${entries.length} articles, ${fullKb} KB`);
+    }
   }
 }
 

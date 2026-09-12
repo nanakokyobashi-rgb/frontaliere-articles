@@ -40,18 +40,15 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { relativeImportSpecifiers } from '../../scripts/ci/lib/import-specifiers.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const WORKFLOW = '.github/workflows/needs-human-sweep.yml';
 const ENTRY = 'scripts/ci/needs-human-prepass.mjs';
 
-/** Ogni specificatore relativo `from '...'`, import ed export riesportante. */
-const REL_IMPORT_RE = /(?:^|\n)\s*(?:import|export)(?:\s|(?=[{*]))[^'";]*?[\s}*]from\s*['"](\.[^'"]+)['"]/g;
-
 /**
- * La chiusura transitiva degli import RELATIVI a partire da `entry`, in path
- * relativi alla radice del repo. I builtin (`node:*`) e i pacchetti non
- * compaiono: non stanno nell'albero e non c'entrano con la sparsità.
+ * Chiusura transitiva degli import relativi statici, dinamici o di solo effetto,
+ * in path relativi alla radice del repo.
  */
 export function importClosure(entry, { root = ROOT } = {}) {
   const seen = new Set();
@@ -68,8 +65,8 @@ export function importClosure(entry, { root = ROOT } = {}) {
       missing.push(rel);
       continue;
     }
-    for (const m of src.matchAll(REL_IMPORT_RE)) {
-      stack.push(path.normalize(path.join(path.dirname(rel), m[1])));
+    for (const spec of relativeImportSpecifiers(src)) {
+      stack.push(path.normalize(path.join(path.dirname(rel), spec)));
     }
   }
   return { files: [...seen].sort(), missing };

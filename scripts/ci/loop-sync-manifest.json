@@ -422,6 +422,16 @@
       }
     },
     {
+      "path": "scripts/ci/lib/import-specifiers.mjs",
+      "mode": "corpus-only",
+      "reason": "Sorgente unica dell'estrattore lessicale degli import usato dai guard di chiusura del ciclo e dai loro test (#1029). Il modulo vive solo nel publisher del corpus: il sito consuma la superficie pubblicata via HTTP e non deve importare la logica dei guard del corpus.",
+      "baseline": {
+        "site": null,
+        "corpus": "057284b74ffc454d",
+        "alignedAt": "2026-09-12"
+      }
+    },
+    {
       "path": "scripts/lib/github-issue-creator.mjs",
       "mode": "identical",
       "baseline": {

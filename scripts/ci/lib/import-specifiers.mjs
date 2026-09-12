@@ -1,12 +1,24 @@
 /**
- * Extract static and dynamic JavaScript import specifiers without treating
- * comments, strings, JSDoc, or `registry.import(...)` as dependencies.
+ * Estrae gli specificatori importati da sorgenti JavaScript senza trattare
+ * commenti, stringhe o registry.import(...) come dipendenze.
  *
- * This is deliberately a tiny lexical scanner, not a JavaScript parser: the
- * closure guards only need the string literal that follows an import token.
- * Keeping the state here makes both guards use the same prefix rules and,
- * unlike a global regex, lets the scan see every dynamic import on a line.
+ * Il modulo e' volutamente un piccolo scanner lessicale, non un parser: i
+ * guard devono sapere quali file seguire senza eseguire il grafo dei moduli.
+ * Tutti i consumer del ciclo usano questa sorgente unica (#1029).
  */
+
+/**
+ * Sorgenti regex per i consumer che devono ispezionare una forma specifica.
+ * Le factory, invece di un literal globale /g, evitano di condividere
+ * lastIndex fra scansioni indipendenti.
+ */
+export const STATIC_IMPORT_SOURCE =
+  "^[ \\t]*(?:import\\b\\s*(?:[^'\";]*?\\bfrom\\s*)?|export\\b[^'\";]*?\\bfrom\\s*)(['\"])([^'\"]+)\\1";
+export const DYNAMIC_IMPORT_SOURCE =
+  "(?<![\\p{L}\\p{N}_$.])import\\s*\\(\\s*(['\"])([^'\"]+)\\1";
+
+export const staticImportRe = () => new RegExp(STATIC_IMPORT_SOURCE, 'gmu');
+export const dynamicImportRe = () => new RegExp(DYNAMIC_IMPORT_SOURCE, 'gu');
 
 const IDENT = /[\p{L}\p{N}_$]/u;
 
@@ -62,7 +74,7 @@ function staticSpecifier(src, at) {
       i = end < 0 ? src.length : end + 1;
       continue;
     }
-    if (src[i] === "'" || src[i] === '"' || src[i] === '`') {
+    if (src[i] === "'" || src[i] === '"' || src[i] === String.fromCharCode(96)) {
       i = skipQuoted(src, i, src[i]) - 1;
       continue;
     }
@@ -75,6 +87,10 @@ function staticSpecifier(src, at) {
   return null;
 }
 
+/**
+ * Restituisce tutti gli specificatori statici e dinamici, nell'ordine in cui
+ * compaiono e con i duplicati conservati.
+ */
 export function importSpecifiers(source) {
   const src = String(source || '');
   const found = [];
@@ -89,7 +105,7 @@ export function importSpecifiers(source) {
       i = end < 0 ? src.length : end + 2;
       continue;
     }
-    if (src[i] === "'" || src[i] === '"' || src[i] === '`') {
+    if (src[i] === "'" || src[i] === '"' || src[i] === String.fromCharCode(96)) {
       i = skipQuoted(src, i, src[i]);
       continue;
     }
@@ -114,3 +130,7 @@ export function importSpecifiers(source) {
   }
   return found.sort((a, b) => a.at - b.at).map(({ specifier }) => specifier);
 }
+
+/** Solo gli specificatori relativi: pacchetti e builtin non stanno nell'albero. */
+export const relativeImportSpecifiers = (source) =>
+  importSpecifiers(source).filter((specifier) => specifier.startsWith('.'));
