@@ -96,6 +96,38 @@ const HEAD_SHA = 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa';
 const OLD_SHA = 'bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb';
 
 const isoAgo = (hours) => new Date(Date.now() - hours * 3600_000).toISOString().replace(/\.\d+Z$/, 'Z');
+const quotaDeferredComment = ({ head = HEAD_SHA, role = 'review', runId = 'tests-1' } = {}) => ({
+  id: 300,
+  created_at: isoAgo(4),
+  body: `<!-- REVIEW_QUOTA_DEFERRED: ${JSON.stringify({
+    version: 1,
+    head,
+    role,
+    runId,
+    reason: 'shared-quota-lease-active',
+  })} -->`,
+});
+const quotaRetryComment = ({
+  head = HEAD_SHA,
+  role = 'review',
+  deferredRunId = 'tests-1',
+  sourceRunId = '42',
+  sourceAttempt = 1,
+  state = 'confirmed',
+} = {}) => ({
+  id: 301,
+  created_at: isoAgo(3),
+  body: `<!-- REVIEW_QUOTA_RETRY: ${JSON.stringify({
+    version: 1,
+    head,
+    role,
+    deferredRunId,
+    sourceRunId,
+    sourceAttempt,
+    runId: 'rescuer-1',
+    state,
+  })} -->`,
+});
 
 /** check-runs con UNA conclusione completata (o niente, con `concl: null`). */
 function checkRuns({ concl = 'success', pending = 0 } = {}) {
@@ -324,6 +356,26 @@ const only = (r) => {
 };
 
 const opts = { skip: HAS_JQ ? false : 'jq non disponibile: la catena del rescuer lo usa per leggere le tre risposte gh' };
+
+test('una deferral pending delega al rescuer, una retry più recente lascia proseguire lo scan', opts, () => {
+  const pending = runScan({
+    prs: staleLabelled(),
+    checks: checkRuns({ concl: 'success' }),
+    reviews: reviews({ commit: HEAD_SHA, body: 'tutto a posto\n\n## LGTM' }),
+    comments: [quotaDeferredComment()],
+  });
+  assert.deepEqual(pending.comments, [], pending.stdout);
+  assert.deepEqual(pending.unlabeled, [], pending.stdout);
+
+  const reconciled = runScan({
+    prs: staleLabelled(),
+    checks: checkRuns({ concl: 'success' }),
+    reviews: reviews({ commit: HEAD_SHA, body: 'tutto a posto\n\n## LGTM' }),
+    comments: [quotaDeferredComment(), quotaRetryComment()],
+  });
+  assert.deepEqual(reconciled.comments, [], reconciled.stdout);
+  assert.deepEqual(reconciled.unlabeled, [901], reconciled.stdout);
+});
 
 // ── 1. La classe D esiste, scatta, e consegna il rimedio giusto ─────────────
 //
