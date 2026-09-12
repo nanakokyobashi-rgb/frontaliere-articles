@@ -31,6 +31,9 @@ test('il resolver ammette solo prefissi di sistema e mantiene il controllo dei c
   assert.match(RUNTIME, /\(\( \(8#\$mode & 022\) == 0 \)\)/);
   assert.match(RUNTIME, /if \[ "\$owner" = '0' \]; then/);
   assert.match(RUNTIME, /\(\( \(8#\$mode & 0200\) == 0 \)\)/);
+  assert.match(RUNTIME, /harden_toolchain_path/);
+  assert.match(RUNTIME, /chmod_cmd=/);
+  assert.match(RUNTIME, /harden_runtime_candidates\n\s*report_runtime_candidates/);
 });
 
 test('workspace, home del runner, /tmp e RUNNER_TEMP restano percorsi vietati', () => {
@@ -61,7 +64,7 @@ test('nessuna coppia attestabile disattiva Haiku senza aggirare il controllo', (
   assert.match(RUNTIME, /printf 'available=false\\n' >> "\$GITHUB_OUTPUT"/);
   assert.match(
     RUNTIME,
-    /printf 'HAIKU_FALLBACK_GATE=0\\nENABLE_HAIKU_ARTICLE_FALLBACK=0\\n' >> "\$GITHUB_ENV"/,
+    /printf 'HAIKU_FALLBACK_GATE=0\\nENABLE_HAIKU_ARTICLE_FALLBACK=0\\nENABLE_CODEX_ARTICLE_FALLBACK=0\\n' >> "\$GITHUB_ENV"/,
   );
 });
 
@@ -71,5 +74,15 @@ test('anche una CLI Haiku non installabile lascia disponibile la cascata normale
   assert.match(CLAUDE, /printf 'available=true\\n' >> "\$GITHUB_OUTPUT"/);
   assert.match(CLAUDE, /printf 'available=false\\n' >> "\$GITHUB_OUTPUT"/);
   assert.match(CLAUDE, /Haiku fallback disabled|Haiku setup unavailable/);
-  assert.match(CLAUDE, /steps\.setup_claude_cli\.outputs\.available == 'true'/);
+  assert.match(CLAUDE, /steps\.trusted_toolchain\.outputs\.available == 'true'/);
+});
+
+test('la CLI Haiku viene installata in un prefisso attestato e passa il suo path al consumer', () => {
+  assert.match(CLAUDE, /claude_prefix=.*\/opt\/runner\/claude-haiku-cli/);
+  assert.match(CLAUDE, /NPM_CONFIG_PREFIX="\$claude_prefix"/);
+  assert.match(CLAUDE, /claude_cli_bin=/);
+  assert.match(CLAUDE, /claude_cli_sha256=/);
+  assert.match(CLAUDE, /CLAUDE_CLI_BIN=/);
+  assert.match(CLAUDE, /CLAUDE_CLI_SHA256=/);
+  assert.match(CLAUDE, /root-owned Claude CLI prefix/);
 });

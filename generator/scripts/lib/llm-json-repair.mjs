@@ -1,7 +1,7 @@
 /**
  * Shared JSON-repair helpers for cleaning up common LLM JSON output quirks
  * (markdown fences, literal newlines inside strings, unescaped inner quotes,
- * stray markdown-bold asterisks). Used by every script that JSON.parse()s an
+ * stray markdown-bold asterisks, and omitted commas after nested values). Used by every script that JSON.parse()s an
  * LLM response so a fix to the repair logic lands once instead of drifting
  * across independent copies (create-article.mjs repairLlmJson,
  * batch-add-faq-to-articles.mjs repairJsonArray both had this inlined).
@@ -592,22 +592,161 @@ export function fixJsonStringBody(input, { fixAsterisks = false } = {}) {
 // il comportamento era RICOPIARLA nel test — e una copia non ha modo di
 // accorgersi che l'originale e' cambiata. Le sue tre primitive erano gia' tutte
 // in questo file: il trasloco riunisce la funzione alle sue parti.
+/**
+ * Add the comma most often omitted between two object properties when the
+ * first value is itself an object/array. This is deliberately narrow: scalar
+ * comma insertion needs a full JSON lexer and guessing there would be more
+ * likely to alter prose inside a string than to repair a payload.
+ */
+function insertMissingPropertyCommas(input) {
+  const hasContainerPropertyAfterComma = (quoteIdx) => {
+    let separator = quoteIdx + 1;
+    while (separator < input.length && /\s/.test(input[separator])) separator++;
+    if (input[separator] !== ',') return false;
+
+    let keyStart = separator + 1;
+    while (keyStart < input.length && /\s/.test(input[keyStart])) keyStart++;
+    if (input[keyStart] !== '"') return false;
+
+    const keyEnd = scanKeyEnd(input, keyStart);
+    if (keyEnd === -1) return false;
+    let colon = keyEnd;
+    while (colon < input.length && /\s/.test(input[colon])) colon++;
+    if (input[colon] !== ':') return false;
+
+    let valueStart = colon + 1;
+    while (valueStart < input.length && /\s/.test(input[valueStart])) valueStart++;
+    return input[valueStart] === '{' || input[valueStart] === '[';
+  };
+
+  let out = '';
+  let inString = false;
+  let escaped = false;
+
+  for (let i = 0; i < input.length; i++) {
+    const ch = input[i];
+    out += ch;
+
+    if (inString) {
+      if (escaped) escaped = false;
+      else if (ch === '\\') escaped = true;
+      else if (ch === '"' && (
+        decideQuoteCloses(input, i, true)
+        || hasContainerPropertyAfterComma(i)
+      )) inString = false;
+      continue;
+    }
+
+    if (ch === '"') {
+      inString = true;
+      continue;
+    }
+    if (ch !== '}' && ch !== ']') continue;
+
+    let keyStart = i + 1;
+    while (keyStart < input.length && /\s/.test(input[keyStart])) keyStart++;
+    if (input[keyStart] !== '"') continue;
+
+    let keyEnd = keyStart + 1;
+    let keyEscaped = false;
+    for (; keyEnd < input.length; keyEnd++) {
+      const keyCh = input[keyEnd];
+      if (keyEscaped) {
+        keyEscaped = false;
+      } else if (keyCh === '\\') {
+        keyEscaped = true;
+      } else if (keyCh === '"') {
+        break;
+      }
+    }
+    if (keyEnd >= input.length) continue;
+
+    let colon = keyEnd + 1;
+    while (colon < input.length && /\s/.test(input[colon])) colon++;
+    if (input[colon] === ':') out += ',';
+  }
+
+  return out;
+}
+
+function normalizeJsonCandidate(input) {
+  const out = fixJsonStringBody(input, { fixAsterisks: true });
+  return insertMissingPropertyCommas(out)
+    .replace(/,(\s*,)+/g, ',')
+    .replace(/,(\s*[}\]])/g, '$1');
+}
+
 export function repairLlmJson(raw) {
-  let c = stripCodeFences(raw);
+  const c = insertMissingPropertyCommas(stripCodeFences(raw));
   const start = c.indexOf('{');
-  if (start !== -1) {
+  if (start === -1) return normalizeJsonCandidate(c);
+
+  const candidates = [];
+  const addCandidate = (candidateStart, candidateEnd, balanced) => {
+    candidates.push({
+      start: candidateStart,
+      end: candidateEnd,
+      balanced,
+      input: c.slice(candidateStart, candidateEnd + 1),
+    });
+  };
+  const firstCloseIdx = findMatchingClose(c, start, true);
+  if (firstCloseIdx !== -1) {
+    addCandidate(start, firstCloseIdx, true);
+  } else {
     // Bracket-balanced extraction (mirrors repairJsonArray in batch-add-faq-to-articles.mjs)
     // so trailing LLM prose or a foreign '}' from an interior nested object does not
     // pull in the wrong boundary via lastIndexOf. Falls back to lastIndexOf when
     // findMatchingClose returns -1 (e.g. raw truncated inside a string literal).
-    const closeIdx = findMatchingClose(c, start, true);
-    if (closeIdx !== -1) {
-      c = c.slice(start, closeIdx + 1);
-    } else {
-      const end = c.lastIndexOf('}');
-      if (end > start) c = c.slice(start, end + 1);
+    const end = c.lastIndexOf('}');
+    if (end > start) addCandidate(start, end, false);
+    else addCandidate(start, c.length - 1, false);
+  }
+
+  // A prose preamble can contain an example JSON object before the actual
+  // answer. Search a bounded number of later object starts only in that case;
+  // for a payload that starts at index 0, preserving the first/truncated
+  // candidate is important because a nested object is not a replacement for
+  // the missing outer payload.
+  if (start > 0) {
+    let nextStart = c.indexOf('{', start + 1);
+    let examined = 0;
+    while (nextStart !== -1 && examined < 24) {
+      examined++;
+      const nextCloseIdx = findMatchingClose(c, nextStart, true);
+      if (nextCloseIdx !== -1) {
+        addCandidate(nextStart, nextCloseIdx, true);
+      }
+      nextStart = c.indexOf('{', nextStart + 1);
     }
   }
-  const out = fixJsonStringBody(c, { fixAsterisks: true });
-  return out.replace(/,(\s*,)+/g, ',').replace(/,(\s*[}\]])/g, '$1');
+
+  const parseable = [];
+  for (const candidate of candidates) {
+    const repaired = normalizeJsonCandidate(candidate.input);
+    try {
+      JSON.parse(repaired);
+      parseable.push({ ...candidate, repaired });
+    } catch {
+      // Callers still receive the repaired candidate below so their existing
+      // retry/diagnostic path remains unchanged for genuinely truncated JSON.
+    }
+  }
+
+  // A prose preamble may contain an example JSON object that is longer than
+  // the real answer. Prefer the last parseable top-level candidate instead
+  // of guessing by byte length; nested candidates are excluded by range.
+  const balanced = parseable.filter((candidate) => candidate.balanced);
+  const pool = balanced.length > 0 ? balanced : parseable;
+  const topLevel = pool.filter((candidate) => !pool.some((other) => (
+    other.start < candidate.start && other.end >= candidate.end
+  )));
+  const best = topLevel.reduce((current, candidate) => {
+    if (current === null || candidate.start > current.start) return candidate;
+    if (candidate.start === current.start && candidate.end > current.end) return candidate;
+    return current;
+  }, null);
+
+  if (best !== null) return best.repaired;
+  return normalizeJsonCandidate(candidates[0]?.input ?? c);
 }

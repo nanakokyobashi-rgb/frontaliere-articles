@@ -689,6 +689,7 @@ const EVERGREEN_NONE_RE = /Nessuna keyword evergreen disponibile/;
  * @param {string} text log completo della run
  * @returns {{
  *   section: string|null, event: string|null, chain: boolean|null, dryRun: boolean|null,
+ *   outcomes: Array<{kind: string, reason: string|null, section: string|null}>,
  *   gates: Array<{emptied: boolean, recovered: string, before: number, kept: number, status: string, section: string}>,
  *   totalRejections: Array<{before: number, classifierCalls: number, anchorCandidates: number, restored: number, backstop: string|null, keptAfter: number, section: string}>,
  *   evergreenSaturated: boolean, evergreenNone: boolean,
@@ -732,6 +733,12 @@ export function parseRunLog(text) {
     // `dry == 'true'`, quindi la sua presenza è di per sé la prova che il run non
     // era dry — utile sui log in cui la riga `event=… dry_run=…` non è leggibile.
     dryRun: mode ? mode[4] === 'true' : (targetM ? false : null),
+    outcomes: parseMarkerRecords(t, 'GENERATION_OUTCOME', ['kind'])
+      .map((f) => ({
+        kind: f.kind,
+        reason: f.reason ?? null,
+        section: f.section ?? null,
+      })),
     gates,
     // `backstop` è letto se c'è e vale `null` se non c'è: i log ancora in
     // retention emessi PRIMA di #185 non lo hanno, e restano leggibili.
@@ -877,9 +884,35 @@ export function summarizeRuns(runs) {
   const modelsTouched = new Set();
   const retiredIn = new Map();
   const billingIn = new Map();
+  const outcomes = {
+    total: 0,
+    generated: 0,
+    noArticle: 0,
+    timeout: 0,
+    skipped: 0,
+    error: 0,
+    unknown: 0,
+    byReason: {},
+  };
+  const outcomeFields = {
+    generated: 'generated',
+    'no-article': 'noArticle',
+    timeout: 'timeout',
+    skipped: 'skipped',
+    error: 'error',
+  };
 
   for (const r of runs || []) {
-    if (!r || r.dryRun === true) continue;
+    if (!r) continue;
+    for (const outcome of r.outcomes || []) {
+      outcomes.total++;
+      const field = outcomeFields[outcome.kind];
+      if (field) outcomes[field]++;
+      else outcomes.unknown++;
+      const reason = outcome.reason || 'unknown';
+      outcomes.byReason[reason] = (outcomes.byReason[reason] || 0) + 1;
+    }
+    if (r.dryRun === true) continue;
 
     rosterRuns++;
     for (const model of r.modelsTouched || []) modelsTouched.add(model);
@@ -961,6 +994,7 @@ export function summarizeRuns(runs) {
 
   return {
     bySection,
+    outcomes,
     oversize: {
       runs: oversizeRuns,
       generatedRuns: oversizeGenerated,
@@ -1885,6 +1919,7 @@ export async function collectRunLogs(repo, { maxRuns, lookbackHours, concurrency
     logFailures: failures,
     spanHours: times.length > 1 ? (Math.max(...times) - Math.min(...times)) / 3_600_000 : 0,
     bySection: summary.bySection,
+    outcomes: summary.outcomes,
     oversize: summary.oversize,
     roster: summary.roster,
   };
@@ -2029,6 +2064,14 @@ async function main() {
     + ` corpus=${measurements.corpus.available ? measurements.corpus.total : 'n/d'}`
     + `${dryRun ? ' (dry-run)' : ''}`,
   );
+  if (measurements.runs.available && measurements.runs.outcomes) {
+    const o = measurements.runs.outcomes;
+    console.log(
+      `[generation-health] outcomes total=${o.total} generated=${o.generated}`
+      + ` no-article=${o.noArticle} timeout=${o.timeout} skipped=${o.skipped}`
+      + ` error=${o.error} unknown=${o.unknown} reasons=${JSON.stringify(o.byReason)}`,
+    );
+  }
 
   const verdicts = evaluateConditions(measurements);
   for (const v of verdicts) {

@@ -51,11 +51,33 @@ import { fileURLToPath } from 'node:url';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const MOD = path.resolve(HERE, '../scripts/lib/llm-json-repair.mjs');
-const { fixJsonStringBody, findMatchingClose } = await import(MOD);
+const { fixJsonStringBody, findMatchingClose, repairLlmJson } = await import(MOD);
 
 /** La forma esatta che fa esplodere la ricorsione: catena di coppie
  *  chiave/valore con virgolette non escapate, dentro un valore di prosa. */
 const pseudoJsonInProse = (n) => `{"body1":"${'"chiave": "valore", '.repeat(n)}fine"}`;
+
+test('la riparazione completa una virgola mancante dopo un oggetto annidato', () => {
+  const raw = '{"id":"x","imageAlt":{"it":"it","en":"en","de":"de","fr":"fr"}"slugs":{"it":"x","en":"x","de":"de","fr":"fr"},"content":{"it":{"title":"T","body1":"B"}}}';
+  const parsed = JSON.parse(repairLlmJson(raw));
+  assert.equal(parsed.id, 'x');
+  assert.equal(parsed.slugs.it, 'x');
+  assert.equal(parsed.content.it.body1, 'B');
+});
+
+test('con un preambolo seleziona il payload JSON finale, non quello piu\' lungo', () => {
+  const raw = 'Ecco un esempio: {"id":"example","content":{"it":{"title":"E","body1":"B","body2":"C","body3":"D"}},"slugs":{"it":"example"},"extra":"non usare"}. Risposta finale: {"id":"final","slugs":{"it":"final"}}';
+  const parsed = JSON.parse(repairLlmJson(raw));
+  assert.equal(parsed.id, 'final');
+  assert.equal(parsed.slugs.it, 'final');
+});
+
+test('non inserisce una virgola dentro una stringa con virgolette non escapate', () => {
+  const raw = '{"body1":"prosa "quoted } "key": testo","next":"ok"}';
+  const parsed = JSON.parse(repairLlmJson(raw));
+  assert.equal(parsed.body1, 'prosa "quoted } "key": testo');
+  assert.equal(parsed.next, 'ok');
+});
 
 function millis(fn) {
   const t0 = performance.now();
