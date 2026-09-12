@@ -517,9 +517,10 @@ test('writeRunCard richiede containment positivo in RUNNER_TEMP e rifiuta un ass
   }
 });
 
-test('un run-card spostato/copiato usa GITHUB_WORKSPACE e il fallback richiede il marcatore repo (#1209)', () => {
+test('un run-card spostato/copiato usa GITHUB_WORKSPACE e il fallback richiede il marcatore repo (#1209, #1079)', () => {
   const fixture = fs.mkdtempSync(path.join(os.tmpdir(), 'run-card-moved-'));
   const workspace = fs.mkdtempSync(path.join(os.tmpdir(), 'run-card-workspace-'));
+  const invalidWorkspace = fs.mkdtempSync(path.join(os.tmpdir(), 'run-card-invalid-workspace-'));
   const copiedLib = path.join(fixture, 'moved', 'generator', 'scripts', 'lib');
   fs.mkdirSync(copiedLib, { recursive: true });
   fs.writeFileSync(
@@ -547,6 +548,15 @@ test('un run-card spostato/copiato usa GITHUB_WORKSPACE e il fallback richiede i
   assert.match(withWorkspace.stderr, /dentro il workspace/);
   assert.ok(!fs.existsSync(target), 'il guard GITHUB_WORKSPACE non deve creare il target');
 
+  const invalidTarget = path.join(invalidWorkspace, 'diagnostics', 'run-card.json');
+  const withInvalidWorkspace = spawnSync(process.execPath, ['--input-type=module', '-e', childCode.replace(target, invalidTarget)], {
+    encoding: 'utf8',
+    env: { ...process.env, GITHUB_WORKSPACE: invalidWorkspace, RUNNER_TEMP: '' },
+  });
+  assert.notEqual(withInvalidWorkspace.status, 0, 'una workspace configurata senza il marcatore repo deve fallire presto');
+  assert.match(withInvalidWorkspace.stderr, /GITHUB_WORKSPACE.*marcatore repo package\.json/);
+  assert.ok(!fs.existsSync(invalidTarget), 'una workspace configurata ma invalida non deve accettare il target');
+
   const withoutWorkspace = spawnSync(process.execPath, ['--input-type=module', '-e', childCode], {
     encoding: 'utf8',
     env: (() => {
@@ -560,6 +570,7 @@ test('un run-card spostato/copiato usa GITHUB_WORKSPACE e il fallback richiede i
 
   fs.rmSync(fixture, { recursive: true, force: true });
   fs.rmSync(workspace, { recursive: true, force: true });
+  fs.rmSync(invalidWorkspace, { recursive: true, force: true });
 });
 
 test('il commento di writeRunCard non e piu la sola sede dell invariante (#922)', () => {
