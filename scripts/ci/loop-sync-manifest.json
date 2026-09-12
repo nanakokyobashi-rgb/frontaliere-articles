@@ -1344,7 +1344,7 @@
       "reason": "Scanner read-only della baseline dei fatti chiave vacui (#1054): stampa file-locale, articoli distinti e locale senza modificare `content/**` e senza avere un gemello operativo sul sito.",
       "baseline": {
         "site": null,
-        "corpus": "d4d0eb2d12ac9f00",
+        "corpus": "991427b316f1f8ea",
         "alignedAt": "2026-09-12"
       }
     },
@@ -1847,7 +1847,7 @@
       "reason": "Guard puro della coerenza fra cantone nello slug e toponimi nel testo (#1053). Blocca i nuovi offender della classe Grigioni/Vallese con riferimenti ticinesi e conserva come baseline esplicita i 32 articoli storici misurati. La generazione vive nel corpus e non esiste un gemello operativo sul sito.",
       "baseline": {
         "site": null,
-        "corpus": "938b224a30f64437",
+        "corpus": "dc6b0f8cf71defb9",
         "alignedAt": "2026-09-12"
       }
     },
@@ -2140,7 +2140,7 @@
       "reason": "Testa la misura #1054, il parser nelle quattro lingue e la regola #1055 che rimuove i fatti vuoti sopra soglia e rifiuta quelli sotto soglia. E' una suite node:test del generatore del corpus, senza gemello operativo sul sito.",
       "baseline": {
         "site": null,
-        "corpus": "96c7e00e5a41725c",
+        "corpus": "8c4e9bbe579c0651",
         "alignedAt": "2026-09-12"
       }
     },
@@ -2150,7 +2150,7 @@
       "reason": "Testa il guard #1053 con l offender Courmayeur/Vallese, la guida legittima di Carate Urio/Ticino e la baseline storica dei 32 casi. Suite node:test specifica del generatore del corpus, senza gemello sul sito.",
       "baseline": {
         "site": null,
-        "corpus": "b2b98601d3c4fe67",
+        "corpus": "998f984af04aa356",
         "alignedAt": "2026-09-12"
       }
     },

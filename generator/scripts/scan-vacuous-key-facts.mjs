@@ -23,18 +23,38 @@ import {
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
 const BODY_DIRS = ['blog-body', 'blog-body-ch'];
 
-/** Inverso sufficiente per i literal TS emessi dal generatore. */
+/** Inverso per i literal TS emessi dal generatore, comprese \u/\x escapate. */
 export function unescapeTs(value) {
-  return value.replace(/\\(.)/gs, (_, character) => ({
-    n: '\n',
-    r: '\r',
-    t: '\t',
-    '\\': '\\',
-    "'": "'",
-  }[character] ?? character));
+  return value.replace(
+    /\\u\{([0-9a-f]{1,6})\}|\\u([0-9a-f]{4})|\\x([0-9a-f]{2})|\\(?:\r\n|\r|\n)|\\(.)/giu,
+    (match, codePoint, unicode, hex, character) => {
+      if (codePoint) {
+        const valuePoint = Number.parseInt(codePoint, 16);
+        return valuePoint <= 0x10ffff ? String.fromCodePoint(valuePoint) : match;
+      }
+      if (unicode) return String.fromCharCode(Number.parseInt(unicode, 16));
+      if (hex) return String.fromCharCode(Number.parseInt(hex, 16));
+      return {
+        b: '\b',
+        f: '\f',
+        n: '\n',
+        r: '\r',
+        t: '\t',
+        v: '\v',
+        '0': '\0',
+        '\\': '\\',
+        "'": "'",
+        '"': '"',
+        '`': '`',
+      }[character] ?? character ?? match;
+    },
+  );
 }
 
-const BODY_LITERAL_RX = /'blog\.article\.([^']+)\.(body\d+)'\s*:\s*'((?:[^'\\]|\\.)*)'/g;
+// Support all static TS string delimiters. The value is still ignored when it
+// contains `${...}` because evaluating an interpolated template would require
+// executing corpus code; the scanner must remain read-only and deterministic.
+const BODY_LITERAL_RX = /(['"`])blog\.article\.([^'"`]+)\.(body\d+)\1\s*:\s*(['"`])((?:\\[\s\S]|(?!\4)[\s\S])*)\4/gu;
 
 function* iterateBodies(root) {
   for (const directory of BODY_DIRS) {
@@ -46,12 +66,13 @@ function* iterateBodies(root) {
         const absoluteFile = path.join(absoluteDirectory, file);
         const source = fs.readFileSync(absoluteFile, 'utf8');
         for (const match of source.matchAll(BODY_LITERAL_RX)) {
+          if (match[5].includes('${')) continue;
           yield {
             rel: path.join('content', directory, locale, file),
-            id: match[1],
-            field: match[2],
+            id: match[2],
+            field: match[3],
             locale,
-            value: unescapeTs(match[3]),
+            value: unescapeTs(match[5]),
           };
         }
       }

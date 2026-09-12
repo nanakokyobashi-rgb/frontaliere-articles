@@ -20,7 +20,7 @@ import {
   stripVacuousFacts,
 } from '../scripts/lib/key-facts-specificity.mjs';
 import { buildAiSearchMarkdown, getKeyFactsHeading } from '../scripts/lib/ai-search-template.mjs';
-import { scanCorpus } from '../scripts/scan-vacuous-key-facts.mjs';
+import { scanCorpus, unescapeTs } from '../scripts/scan-vacuous-key-facts.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const CREATE_ARTICLE_PATH = path.join(ROOT, 'generator/scripts/create-article.mjs');
@@ -81,6 +81,10 @@ test('la forma di riferimento dell issue conta quattro varianti e non i fatti sp
 test('il valore di un fatto e\' cio\' che segue l ultimo due punti', () => {
   assert.equal(factValueOf('- **Chi**: Ente competente: non specificato.'), 'non specificato.');
   assert.equal(factValueOf('- **Dove**: Cantone di Zugo'), 'Cantone di Zugo');
+});
+
+test('lo scanner decodifica gli escape Unicode e hexadecimal dei literal TS', () => {
+  assert.equal(unescapeTs('\\u0043ittino \\x2d \\u{1F30D}'), 'Cittino - 🌍');
 });
 
 test('le intestazioni emesse dal serializzatore sono tutte leggibili', () => {
@@ -166,4 +170,10 @@ test('create-article applica il gate dopo validate e marca il rifiuto come quali
     (source.match(/assertGeneratedArticleQuality\(data\);/g) || []).length >= 3,
     'il gate non copre il percorso primario e quello di scrittura condiviso',
   );
+  const translatedGate = source.indexOf(
+    'assertGeneratedArticleQuality(data);',
+    source.indexOf('// Step 3a.1: Reject/repair prompt-schema placeholders'),
+  );
+  const cta = source.indexOf('validateAndEnforceCTA(data);');
+  assert.ok(translatedGate > -1 && translatedGate < cta, 'il guard post-traduzione deve precedere l\'iniezione CTA');
 });

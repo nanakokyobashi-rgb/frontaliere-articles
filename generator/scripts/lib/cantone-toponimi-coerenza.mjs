@@ -115,6 +115,38 @@ function containsWholeTerm(text, term, { caseSensitive = false } = {}) {
   ).test(matchedText);
 }
 
+const WORK_CLAUSE_RX = /\b(?:lavor\w*|work\w*|arbeit\w*|beschaft\w*|travaill\w*|emploi\w*)\b/giu;
+
+function cantonMentions(text) {
+  const foldedText = fold(text);
+  const mentions = [];
+  for (const [canton, toponyms] of Object.entries(CANTON_TOPONYMS)) {
+    for (const toponym of toponyms) {
+      const foldedTerm = fold(toponym).trim();
+      const termPattern = foldedTerm.split(/\s+/u).map(escapeRegex).join('\\s+');
+      const match = new RegExp(
+        `(?<![\\p{L}\\p{N}])${termPattern}(?![\\p{L}\\p{N}])`,
+        'u',
+      ).exec(foldedText);
+      if (match) mentions.push({ canton, toponym, index: match.index });
+    }
+  }
+  return mentions.sort((a, b) => a.index - b.index);
+}
+
+/**
+ * In a couple slug the residence commonly names Ticino before the destination:
+ * `vivere-a-lugano-e-lavorare-vallese`. Prefer the first canton in the
+ * `lavorare-*` clause so the residence does not make the slug ambiguous.
+ */
+function cantonFromWorkClause(text) {
+  const foldedText = fold(text);
+  const markers = [...foldedText.matchAll(WORK_CLAUSE_RX)];
+  const marker = markers.at(-1);
+  if (!marker) return null;
+  return cantonMentions(foldedText.slice(marker.index + marker[0].length))[0]?.canton || null;
+}
+
 function matchesCantonInText(text, canton) {
   return CANTON_TOPONYMS[canton].some((toponym) => containsWholeTerm(text, toponym));
 }
@@ -128,6 +160,10 @@ function cantonsMentionedIn(text) {
  * fallback per producer che non hanno ancora uno slug localizzato.
  */
 export function detectDeclaredCanton(slug, title = '') {
+  const fromSlugWorkClause = cantonFromWorkClause(slug);
+  if (fromSlugWorkClause) return fromSlugWorkClause;
+  const fromTitleWorkClause = cantonFromWorkClause(title);
+  if (fromTitleWorkClause) return fromTitleWorkClause;
   const fromSlug = cantonsMentionedIn(slug);
   if (fromSlug.length === 1) return fromSlug[0];
   if (fromSlug.length > 1) return null;

@@ -36,6 +36,23 @@ test('la guida legittima del Ticino conserva i propri toponimi', () => {
   assert.deepEqual(result.matches, []);
 });
 
+test('la clausola lavorare distingue la destinazione dalla residenza ticinese', () => {
+  assert.equal(
+    detectDeclaredCanton('vivere-a-lugano-e-lavorare-vallese'),
+    'vallese',
+  );
+  const result = checkCantonToponymConsistency({
+    articleId: 'nuova-guida-lugano-vallese',
+    slug: 'vivere-a-lugano-e-lavorare-vallese',
+    body: 'La guida cita Lugano come residenza e Bellinzona come confronto.',
+  });
+  assert.equal(result.status, 'reject');
+  assert.deepEqual(
+    result.matches.map((match) => match.toponym),
+    ['lugano', 'bellinzona'],
+  );
+});
+
 test('i 32 casi storici sono una baseline esplicita e non bloccano il corpus esistente', () => {
   assert.equal(KNOWN_BASELINE_CROSS_CANTON_ARTICLE_IDS.length, 32);
   assert.equal(new Set(KNOWN_BASELINE_CROSS_CANTON_ARTICLE_IDS).size, 32);

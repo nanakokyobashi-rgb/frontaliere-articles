@@ -15980,6 +15980,31 @@ async function generateAndValidateArticle(url, sourceContext = null) {
     }
   }
 
+  // Step 3a.1: Reject/repair prompt-schema placeholders leaked into any
+  // published field (title/excerpt/body1-3/imageAlt/seo.*), same guard
+  // registerArticleFiles() runs for the four secondary producers. This IS
+  // the primary flow's write path — it writes files directly below
+  // (modifyRouterTs/modifyBlogArticlesTsx) and never calls
+  // registerArticleFiles(), so without this call a placeholder leaking here
+  // (e.g. via translateArticle() echoing the schema into en/de/fr) shipped
+  // unguarded. After translateArticle() so it also sees translation-introduced
+  // leaks, before image generation so a doomed article doesn't spend an image
+  // call first. Tagged qualityReject like every other throw in this function:
+  // a placeholder is a per-headline generation failure, not an infra error —
+  // the retry loop should rotate to the next headline, not crash the run.
+  try {
+    sanitizePromptPlaceholders(data);
+  } catch (e) {
+    e.qualityReject = true;
+    throw e;
+  }
+
+  // Run the canton guard after translation/sanitization but BEFORE CTA and
+  // internal-link injection. CTA_POOL contains generic Ticino copy; checking
+  // after that mutation would reject a valid Grigioni/Vallese guide because
+  // of the site's own navigation copy rather than the generated article.
+  assertGeneratedArticleQuality(data);
+
   // Step 3d: Enforce CTA / internal links (all 4 locales)
   console.error('🔗 Verifica CTA e link interni:');
   validateAndEnforceCTA(data);
@@ -16013,30 +16038,6 @@ async function generateAndValidateArticle(url, sourceContext = null) {
   console.error(`   Slug IT: ${data.slugs.it}`);
   console.error('');
 
-  // Step 3a.1: Reject/repair prompt-schema placeholders leaked into any
-  // published field (title/excerpt/body1-3/imageAlt/seo.*), same guard
-  // registerArticleFiles() runs for the four secondary producers. This IS
-  // the primary flow's write path — it writes files directly below
-  // (modifyRouterTs/modifyBlogArticlesTsx) and never calls
-  // registerArticleFiles(), so without this call a placeholder leaking here
-  // (e.g. via translateArticle() echoing the schema into en/de/fr) shipped
-  // unguarded. After translateArticle() so it also sees translation-introduced
-  // leaks, before image generation so a doomed article doesn't spend an image
-  // call first. Tagged qualityReject like every other throw in this function:
-  // a placeholder is a per-headline generation failure, not an infra error —
-  // the retry loop should rotate to the next headline, not crash the run.
-  try {
-    sanitizePromptPlaceholders(data);
-  } catch (e) {
-    e.qualityReject = true;
-    throw e;
-  }
-
-  // Translations are generated after the first specificity gate. Re-run the
-  // pure repair here so a localized non-value cannot reach the writer through
-  // the primary path, which deliberately bypasses registerArticleFiles().
-  assertGeneratedArticleQuality(data);
-
   // This is the last metadata mutation before the primary write path. The
   // placeholder guard may replace a localized imageAlt wholesale with its IT
   // fallback; restore municipality names only after that replacement, or a
@@ -16044,10 +16045,10 @@ async function generateAndValidateArticle(url, sourceContext = null) {
   preserveMunicipalityNamesInMetadata(data);
 
   // Step 3a.2: gate deterministico sui body tradotti — BLOCCANTE (#5661).
-  // Stesso punto e stessa ragione dello Step 3a.1 qui sopra: e' dopo tutte le
-  // mutazioni del testo (3c strip, 3d CTA/link, 3e citazione) e prima di
-  // qualunque scrittura, quindi giudica esattamente cio' che finira' su disco.
-  // Vedi il commento della funzione per la misura che lo motiva.
+  // Questo gate resta dopo tutte le mutazioni del testo (3d CTA/link, 3e
+  // citazione) e prima di qualunque scrittura, quindi giudica esattamente cio'
+  // che finira' su disco. Il guard specificita'/cantoni sopra deve invece
+  // precedere l'iniezione di CTA generiche.
   assertArticlePassesFactualityGates(data);
 
   // Step 3b: Generate article image via Gemini native image generation
@@ -17009,7 +17010,7 @@ export { buildBodyFile };
 // own en/de/fr slugs (deriveLocaleSlugs()) but, before this fix, never
 // validated them against the registry — the same gap that historically only
 // existed for the IT slug in the AI path.
-export { translateArticle, enforceStrongInternalLinks, findBestFallbackImage, pickAuthorForTopic, getAuthorByUid, sanitizeBoldFormatting, validateAndEnforceCTA, optimizeSeoMetadata, checkTranslatedSlugCollisions, assertNoFabricatedReferences, assertNoFabricatedLaborOfficeCrossLocale };
+export { translateArticle, enforceStrongInternalLinks, findBestFallbackImage, pickAuthorForTopic, getAuthorByUid, sanitizeBoldFormatting, validateAndEnforceCTA, optimizeSeoMetadata, checkTranslatedSlugCollisions, assertNoFabricatedReferences, assertNoFabricatedLaborOfficeCrossLocale, assertGeneratedArticleQuality };
 
 // Redazione redesign (issue #3174 follow-up): the journalist now authors only
 // {title, body}; these derive the title-casing/excerpt/body1-3/cover-image
