@@ -318,6 +318,7 @@ jobs:
           QUOTA_LEASE_TARGET_TYPE: pr
           QUOTA_LEASE_TARGET: ${{ github.event.pull_request.number }}
           QUOTA_LEASE_TTL_SEC: '3600'
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
         run: node scripts/ci/check-quota-backoff.mjs
 
       - name: Shared Claude quota lease unavailable (expected skip)
@@ -673,7 +674,7 @@ jobs:
           exit 0
 
       - name: Release shared Claude quota lease
-        if: always() && steps.quota_lease.outputs.lease_acquired == 'true'
+        if: always() && steps.quota_lease.outputs.lease_allowed == 'true' && steps.quota_lease.outputs.lease_token != ''
         continue-on-error: true
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

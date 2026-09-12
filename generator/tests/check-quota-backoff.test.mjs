@@ -9,6 +9,8 @@ import {
   beaconCandidates,
   mergeBeaconCandidates,
   quotaLeaseDecision,
+  reviewQuotaDeferredBody,
+  parseReviewQuotaDeferredMarker,
 } from '../../scripts/ci/check-quota-backoff.mjs';
 import { quotaPromotionDecision } from '../../scripts/ci/followup-drainer.mjs';
 
@@ -103,6 +105,49 @@ test('#8365: il lease riserva il floor issue-fix e nega il consumer concorrente'
   );
 });
 
+test('#8365: il workflow rilanciato può adottare la reservation della stessa PR', () => {
+  const nowSec = 1_800_000_000;
+  const reserved = {
+    token: 'quota-review-rescue', role: 'review', targetType: 'pr', target: '99',
+    state: 'reserved', issuedAt: nowSec - 10, expiresAt: nowSec + 600,
+  };
+  assert.deepEqual(
+    quotaLeaseDecision({
+      action: 'acquire', role: 'review', targetType: 'pr', target: '99',
+      activeLeases: [reserved], queueDepth: 51, nowSec,
+    }),
+    {
+      allowed: true,
+      existing: true,
+      token: 'quota-review-rescue',
+      state: 'reserved',
+      reason: 'shared-quota-lease-reserved-for-target',
+    },
+  );
+  assert.equal(
+    quotaLeaseDecision({
+      action: 'acquire', role: 'review', targetType: 'pr', target: '99',
+      activeLeases: [{ ...reserved, state: 'active' }], queueDepth: 51, nowSec,
+    }).allowed,
+    false,
+    'un lease active non può essere adottato da una seconda run',
+  );
+});
+
+test('#8365: il marker di deferral è head-pinned e porta il consumer sorgente', () => {
+  const body = reviewQuotaDeferredBody({
+    head: 'a'.repeat(40), runId: '123', role: 'redcheck', reason: 'shared-quota-lease-active',
+  });
+  assert.deepEqual(parseReviewQuotaDeferredMarker(body), {
+    version: 1,
+    head: 'a'.repeat(40),
+    runId: '123',
+    role: 'redcheck',
+    reason: 'shared-quota-lease-active',
+  });
+  assert.equal(parseReviewQuotaDeferredMarker(body.replace('redcheck', 'unknown')), null);
+});
+
 test('#8365: lease scaduto o rilasciato non blocca il tick successivo', () => {
   const nowSec = 1_800_000_000;
   const expired = {
@@ -117,15 +162,36 @@ test('#8365: lease scaduto o rilasciato non blocca il tick successivo', () => {
   assert.deepEqual(activeQuotaLeases([expired, active, released], { nowSec }), []);
   assert.equal(
     quotaLeaseDecision({
-      action: 'acquire', role: 'review', targetType: 'pr', target: '99',
+      action: 'acquire', role: 'issue-decompose', targetType: 'issue', target: '99',
       activeLeases: [], queueDepth: 0, nowSec,
     }).allowed,
     true,
   );
   assert.equal(
     quotaLeaseDecision({
-      action: 'acquire', role: 'review', targetType: 'pr', target: '99',
+      action: 'acquire', role: 'issue-decompose', targetType: 'issue', target: '99',
       activeLeases: [], queueDepth: 1, nowSec,
+    }).reason,
+    'issue-fix-floor-unreserved',
+  );
+});
+
+test('#8365: review e fixer PR non restano affamati dalla coda issue', () => {
+  const nowSec = 1_800_000_000;
+  for (const role of ['review', 'redflag', 'redcheck']) {
+    assert.equal(
+      quotaLeaseDecision({
+        action: 'acquire', role, targetType: 'pr', target: '99',
+        activeLeases: [], queueDepth: 51, nowSec,
+      }).allowed,
+      true,
+      `${role} deve poter contendere lo slot quando la coda issue è non vuota`,
+    );
+  }
+  assert.equal(
+    quotaLeaseDecision({
+      action: 'acquire', role: 'unknown-consumer', targetType: 'pr', target: '99',
+      activeLeases: [], queueDepth: 51, nowSec,
     }).reason,
     'issue-fix-floor-unreserved',
   );
