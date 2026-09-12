@@ -48,6 +48,7 @@ import {
   retentionWarning,
   floorFrom,
   countSourceArticles,
+  countRegistryArticles,
   countSourceImages,
   countSeoEntries,
   collectSeoEntryIds,
@@ -76,6 +77,7 @@ import {
   previousRevision,
 } from '../../scripts/ci/verify-api-floors.mjs';
 import { RSS_SECTIONS } from '../../engine/rssFeeds.mjs';
+import { selectRetiredDailyEditions } from '../../generator/scripts/lib/daily-brief-content.mjs';
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
 const WORKFLOW = fs.readFileSync(join(ROOT, '.github/workflows/publish-api.yml'), 'utf-8');
 const BLOG_INDEX = fs.readFileSync(join(ROOT, 'scripts/build-blog-index.mjs'), 'utf-8');
@@ -133,22 +135,52 @@ test('listedFloor scala con il registro dopo le esclusioni legittime', () => {
 });
 
 test('il floor sitemap conta una sola volta le entry IT effettivamente emesse', () => {
-  assert.equal(countSourceSitemapEntries(ROOT, 'frontaliere'), 3863);
-  assert.equal(countSourceSitemapEntries(ROOT, 'svizzera'), 2097);
+  const registryIds = (file) =>
+    [...readFileSync(join(ROOT, 'content', file), 'utf8').matchAll(/^\s*id:\s*['"]([^'"]+)/gm)].map(
+      (match) => match[1],
+    );
+  const overrideRows = (file) =>
+    Object.keys(JSON.parse(readFileSync(join(ROOT, file), 'utf8')).overrides ?? {});
+  const effectiveSource = {
+    frontaliere:
+      countRegistryArticles(ROOT, 'frontaliere') -
+      overrideRows('engine/shared/frontaliere-article-canonical-overrides.json').length / 4 -
+      selectRetiredDailyEditions(registryIds('blog-articles-data.ts')).size,
+    svizzera:
+      countRegistryArticles(ROOT, 'svizzera') -
+      overrideRows('content/swiss-article-canonical-overrides.json').length / 4,
+  };
+  assert.equal(countSourceSitemapEntries(ROOT, 'frontaliere'), effectiveSource.frontaliere);
+  assert.equal(countSourceSitemapEntries(ROOT, 'svizzera'), effectiveSource.svizzera);
 
   const { measured, expected } = healthy();
   const withEffectiveSitemapSource = {
     ...expected,
-    sourceSitemaps: { frontaliere: 3863, svizzera: 2097 },
+    sourceSitemaps: effectiveSource,
   };
+  const nearOldFloor = {
+    frontaliere: floorFrom(expected.sourceArticles.frontaliere) + 1,
+    svizzera: floorFrom(expected.sourceArticles.svizzera) + 1,
+  };
+  assert.ok(
+    floorFrom(effectiveSource.frontaliere) > nearOldFloor.frontaliere &&
+      floorFrom(effectiveSource.svizzera) > nearOldFloor.svizzera,
+    'la sorgente sitemap effettiva deve essere abbastanza distinta dal vecchio floor dei corpi',
+  );
   const measuredNearOldFloor = {
     ...measured,
-    sitemaps: { 'sitemap-blog.xml': 3407, 'sitemap-blog-ch.xml': 1700 },
+    sitemaps: { 'sitemap-blog.xml': nearOldFloor.frontaliere, 'sitemap-blog-ch.xml': nearOldFloor.svizzera },
   };
   const violations = floorViolations(measuredNearOldFloor, withEffectiveSitemapSource);
   assert.equal(violations.length, 2);
-  assert.match(violations.join('\n'), /sitemap-blog\.xml: 3407 url contro 3863/);
-  assert.match(violations.join('\n'), /sitemap-blog-ch\.xml: 1700 url contro 2097/);
+  assert.match(
+    violations.join('\n'),
+    new RegExp(`sitemap-blog\\.xml: ${nearOldFloor.frontaliere} url contro ${effectiveSource.frontaliere}`),
+  );
+  assert.match(
+    violations.join('\n'),
+    new RegExp(`sitemap-blog-ch\\.xml: ${nearOldFloor.svizzera} url contro ${effectiveSource.svizzera}`),
+  );
 });
 
 test("la superficie reale del 2026-09-05 passa: il pavimento non e' stretto", () => {
