@@ -16480,6 +16480,7 @@ export function relocalizeSlugsAfterTranslation(data, opts = {}) {
 }
 
 const MAX_SLUG_FALLBACKS_PER_RUN = 3;
+const SLUG_FALLBACK_HEADROOM_REASON = 'title-below-plausibility-floor';
 
 /** Ponte fra gli eventi puri di sopra e le due tracce che devono restare: log e RUN_REPORT. */
 function reportSlugI18nEvent(event) {
@@ -16515,6 +16516,29 @@ export function assertSlugFallbackRunBudget() {
   const details = Array.isArray(RUN_REPORT?.slugs?.itFallbackDetail)
     ? RUN_REPORT.slugs.itFallbackDetail
     : [];
+  const records = Array.isArray(RUN_REPORT?.slugs?.itFallbackRecords)
+    ? RUN_REPORT.slugs.itFallbackRecords
+    : [];
+  if (records.length !== details.length) {
+    const err = new Error(
+      `slug-i18n fallback provenance incomplete: ${records.length} records for ${details.length} fallbacks; `
+        + 'refusing publication before the writer can touch the corpus.',
+    );
+    err.qualityReject = true;
+    throw err;
+  }
+  const unratcheted = records.filter((record) => record?.reason !== SLUG_FALLBACK_HEADROOM_REASON);
+  if (unratcheted.length > 0) {
+    const detail = unratcheted
+      .map((record) => `${record?.id || 'unknown'}:${record?.locale || 'unknown'}:${record?.reason || 'unknown'}`)
+      .join(' | ');
+    const err = new Error(
+      `slug-i18n fallback reason not admitted for run headroom: ${detail}. `
+        + `Only ${SLUG_FALLBACK_HEADROOM_REASON} may use the fallback margin; refusing publication before the writer.`,
+    );
+    err.qualityReject = true;
+    throw err;
+  }
   if (details.length <= MAX_SLUG_FALLBACKS_PER_RUN) return;
   const err = new Error(
     `slug-i18n fallback budget exceeded: ${details.length} > ${MAX_SLUG_FALLBACKS_PER_RUN} ` +

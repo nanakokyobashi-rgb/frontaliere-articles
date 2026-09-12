@@ -130,6 +130,14 @@ test('il ledger dei ritirati usa lo stesso writer atomico del resto della catena
   assert.match(src, /writeJsonAtomic\(ledgerPath, ledger\)/);
 });
 
+test('il retirement rimuove anche la provenienza dello slug nello stesso buffer della mappa', () => {
+  const src = readFileSync(path.join(ROOT, 'scripts/retire-article.mjs'), 'utf-8');
+  assert.match(src, /function removeFallbackProvenanceRow\(/);
+  assert.match(src, /cfg\.fallbackReasonsConstName/);
+  assert.match(src, /fallbackRow = removeFallbackProvenanceRow\(/);
+  assert.match(src, /slugDataSrc = fallbackRow\.src/);
+});
+
 test('un id vuoto non coincide con ogni superficie', () => {
   assert.equal(mentionsId('id: altro-articolo', ''), false);
 });

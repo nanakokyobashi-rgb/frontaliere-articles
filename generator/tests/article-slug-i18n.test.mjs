@@ -347,6 +347,12 @@ describe('cablaggio in create-article.mjs', () => {
     assert.match(SRC, /assertSlugFallbackRunBudget\(\);/);
   });
 
+  it('la headroom del ratchet ammette solo il reason code del floor e blocca il resto prima del writer', () => {
+    assert.match(SRC, /const SLUG_FALLBACK_HEADROOM_REASON = 'title-below-plausibility-floor';/);
+    assert.match(SRC, /const unratcheted = records\.filter\(\(record\) => record\?\.reason !== SLUG_FALLBACK_HEADROOM_REASON\);/);
+    assert.match(SRC, /refusing publication before the writer/);
+  });
+
   it('persiste la causa nel router e la espone sulla superficie HTTP', () => {
     assert.match(SRC, /fallbackReasonsConstName: 'BLOG_SLUG_FALLBACK_REASONS'/);
     assert.match(SRC, /fallbackReasonsConstName: 'SWISS_SLUG_FALLBACK_REASONS'/);
