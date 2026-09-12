@@ -539,7 +539,7 @@ async function processPair(pair, { CONTENT_ROOT, APPLY }) {
   if (!verdict.write || !APPLY) return row;
 
   for (const f of Object.keys(newSections)) {
-    const next = replaceBodyField(trSrc, pair.id, f, newSections[f]);
+    const next = replaceBodyField(trSrc, pair.id, f, checkedSections[f]);
     if (next === null) return { ...row, reason: `chiave-assente: ${f}` };
     trSrc = next;
   }

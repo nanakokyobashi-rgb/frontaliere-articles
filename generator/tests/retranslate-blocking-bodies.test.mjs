@@ -136,9 +136,10 @@ test('la guardia dei fatti chiave sta prima del gate e della scrittura atomica',
   );
   const guard = source.indexOf('guardTranslatedKeyFacts(newSections)');
   const gate = source.indexOf('runFactualityGates({ sections: checkedSections');
+  const filteredWrite = source.indexOf('replaceBodyField(trSrc, pair.id, f, checkedSections[f])');
   const write = source.indexOf('writeAtomic(trPath, trSrc)');
   assert.ok(guard >= 0 && guard < gate, 'la factuality gate deve ricevere il payload gia\' guardato');
-  assert.ok(gate < write, 'la scrittura deve restare dopo tutti i gate');
+  assert.ok(gate < filteredWrite && filteredWrite < write, 'la scrittura deve persistere il payload gia\' guardato dopo tutti i gate');
 });
 
 test('replaceBodyField col valore attuale e un no-op byte per byte', () => {

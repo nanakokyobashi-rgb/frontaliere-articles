@@ -22,6 +22,7 @@ import {
   ISSUE_FIX_CLASSIFIER_STEP_RE,
   ISSUE_FIX_NON_DELIVERY_RE,
   isExpectedIssueFixNonDelivery,
+  selectIssueFixCandidate,
   DEFAULT_RUN_QUERY_HORIZON_MIN,
   parseHorizonMin,
   parsePositiveNum,
@@ -398,6 +399,24 @@ test('#1025: un errore diverso nello stesso workflow resta segnalabile', () => {
     isExpectedIssueFixNonDelivery('tests', [classifierJob()], ISSUE_FIX_FAILURE_LOG),
     false,
   );
+});
+
+test('#1025: una non-consegna recente non nasconde una failure precedente reale', () => {
+  const newer = {
+    databaseId: 101,
+    createdAt: '2026-09-12T10:00:00Z',
+    updatedAt: '2026-09-12T10:01:00Z',
+  };
+  const older = {
+    databaseId: 100,
+    createdAt: '2026-09-12T09:00:00Z',
+    updatedAt: '2026-09-12T09:01:00Z',
+  };
+  const selected = selectIssueFixCandidate([older, newer], {
+    getFailedJobs: () => [classifierJob()],
+    getLog: (runId) => runId === newer.databaseId ? ISSUE_FIX_FAILURE_LOG : 'TypeError: classifier crashed',
+  });
+  assert.equal(selected?.run.databaseId, older.databaseId);
 });
 
 /**

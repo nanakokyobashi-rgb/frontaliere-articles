@@ -966,8 +966,14 @@ jobs:
           # un ordine che `gh` non documenta, e il numero stampato qui sotto punterebbe
           # al lavoro sbagliato. Stesso predicato di `deliveredPrNumber()` in
           # `scripts/ci/mark-claude-terminal-outcome.mjs` (AGENTS.md #6).
-          PR_STATE=$(gh pr list --repo "$REPO" --head "fix/issue-$ISSUE" --state all --json number,state,createdAt \
-            --jq '[.[] | select(.state=="OPEN" or .state=="MERGED")] | sort_by(.createdAt) | last | .number // empty' 2>/dev/null || true)
+          if PR_STATE=$(gh pr list --repo "$REPO" --head "fix/issue-$ISSUE" --state all --json number,state,createdAt \
+            --jq '[.[] | select(.state=="OPEN" or .state=="MERGED")] | sort_by(.createdAt) | last | .number // empty'); then
+            :
+          else
+            PR_LOOKUP_RC=$?
+            echo "::error::issue-fix #$ISSUE: impossibile verificare le PR consegnate (gh pr list rc=$PR_LOOKUP_RC); non classifico la CLI come non-delivery."
+            exit 1
+          fi
           echo "issue=$ISSUE pr(head fix/issue-$ISSUE, open|merged)=${PR_STATE:-<none>} claude=$CLAUDE_OUTCOME"
           if [ -n "${PR_STATE:-}" ]; then
             echo "PR #$PR_STATE esiste (open/merged) per la issue -> run SUCCESS. Job verde anche se la CLI e' uscita '$CLAUDE_OUTCOME' (falso-fallimento: lavoro consegnato)."
