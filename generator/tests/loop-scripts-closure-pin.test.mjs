@@ -1,41 +1,41 @@
 /**
  * loop-scripts-closure-pin.test.mjs — pinna su fixture l'estrattore di import
- * di `loop-scripts-closure.test.mjs`.
+ * condiviso dai guard del ciclo.
  *
  * ## Perché esiste
  *
- * I due test del guard girano sull'albero REALE, e sull'albero reale una
- * regressione dell'estrattore non fa fallire niente: se la regex tornasse
- * per-riga (`.*?`, che non attraversa i newline), gli import braced su più
- * righe tornerebbero invisibili — ma i loro target ESISTONO, quindi il guard
- * resterebbe 2/2 verde. Vacuo, esattamente com'era prima dell'indurimento, e
- * senza che nessun test lo dica: la mutazione che ha motivato la fix
- * (`reopen-breaker.mjs` rimosso dall'albero → guard verde) era stata provata
- * a mano e sarebbe rimasta non codificata. Questi casi la codificano:
- * falliscono se l'estrattore torna cieco, qualunque sia lo stato dell'albero.
+ * I guard girano sull'albero REALE, e sull'albero reale una regressione
+ * dell'estrattore non fa fallire niente: se il parser tornasse cieco, gli
+ * import dei file già presenti resterebbero risolti e il guard sarebbe verde.
+ * Le fixture qui sotto codificano le forme che hanno già prodotto questo buco:
+ * import braced su più righe, side-effect, dinamici, no-space e export-from.
  *
- * ## Perché un file separato, e perché legge il sorgente
+ * ## Perché legge il modulo condiviso
  *
- * Il guard è `corpus-only` nel manifest del ciclo, con una baseline sui suoi
- * byte: ogni ritocco al suo file muove la baseline, e un pin interno la
- * muoverebbe di nuovo — dentro una catena di PR già aperta, questo produce
- * esattamente il conflitto a tre vie sul manifest che lo squash-merge non sa
- * risolvere. Da qui si pinna la regex REALE — estratta dal sorgente del
- * guard, non una copia che può scollarsi in silenzio — senza toccare i byte
- * sorvegliati. Se la definizione viene rinominata o spostata, l'estrazione
- * fallisce e il pin diventa rosso: l'attenzione è richiesta, mai elusa.
+ * Il modulo è la sorgente unica per cinque consumer: il test di chiusura del
+ * generatore, quello degli script del ciclo, la chiusura dello sparse checkout,
+ * il contratto REWIRE e il drift checker. Il pin controlla sia l'API regex sia
+ * l'import effettivo dei consumer; una copia locale o una divergenza diventa
+ * rossa nel test, prima di poter indebolire un gate.
  */
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { importSpecifiers } from './lib/relative-import-specifiers.mjs';
+import {
+  dynamicImportRe,
+  importSpecifiers,
+  staticImportRe,
+} from '../../scripts/ci/lib/import-specifiers.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const GUARDS = [
   path.join(HERE, 'loop-scripts-closure.test.mjs'),
   path.join(HERE, 'import-closure.test.mjs'),
+  path.join(HERE, 'needs-human-prepass-sparse-closure.test.mjs'),
+  path.join(HERE, 'rewire-json-contracts.test.mjs'),
+  path.resolve(HERE, '../../scripts/ci/loop-drift-check.mjs'),
 ];
 const specifiers = importSpecifiers;
 
@@ -85,6 +85,32 @@ test("il guard vede l'import DINAMICO, che non è mai a inizio riga", () => {
 test("il guard vede tutti gli import dinamici nella stessa espressione", () => {
   const src = "await Promise.all([import('./a.mjs'), import('./b.mjs')]);\n";
   assert.deepEqual(specifiers(src), ['./a.mjs', './b.mjs']);
+});
+
+test('il guard attraversa i commenti tra import dinamico, parentesi e literal', () => {
+  const src = [
+    'const a = await import /* dopo keyword */ ( /* dopo parentesi */',
+    "  './dynamic-commented.mjs'",
+    ');',
+  ].join('\n');
+  assert.deepEqual(specifiers(src), ['./dynamic-commented.mjs']);
+});
+
+test('il guard attraversa i commenti prima del literal dopo from', () => {
+  const src = [
+    "import /* dopo keyword */ { value } /* prima di from */",
+    "  from /* dopo from */ './static-commented.mjs';",
+  ].join('\n');
+  assert.deepEqual(specifiers(src), ['./static-commented.mjs']);
+});
+
+test('il guard analizza il codice dentro le interpolazioni dei template', () => {
+  const src = [
+    'const label = `testo che cita import("./ignored.mjs") ${',
+    '  ({ value: import(/* dentro expression */ "./template-dep.mjs") }).value',
+    '}`;',
+  ].join('\n');
+  assert.deepEqual(specifiers(src), ['./template-dep.mjs']);
 });
 
 test("un commento inline non apre un prefisso di import dinamico", () => {
@@ -145,9 +171,18 @@ test('`export default` di una stringa non è uno specificatore', () => {
   assert.deepEqual(specifiers("import xfrom'./y.mjs';\n"), []);
 });
 
-test('le due copie della clausola non divergono', () => {
+test('le factory regex condivise riconoscono le due forme senza stato condiviso', () => {
+  const staticMatch = staticImportRe().exec("import x from './static.mjs';");
+  const dynamicMatch = dynamicImportRe().exec("await import('./dynamic.mjs');");
+  assert.equal(staticMatch?.[2], './static.mjs');
+  assert.equal(dynamicMatch?.[2], './dynamic.mjs');
+  assert.equal(dynamicImportRe().test("registry.import('./not-a-module.mjs');"), false);
+  assert.equal(dynamicImportRe().lastIndex, 0);
+});
+
+test("tutti i guard usano la sorgente unica dell'estrattore", () => {
   for (const file of GUARDS) {
     const src = fs.readFileSync(file, 'utf8');
-    assert.match(src, /import \{ importSpecifiers \} from '\.\/lib\/relative-import-specifiers\.mjs'/);
+    assert.match(src, /from ['"][^'"]*import-specifiers\.mjs['"]/);
   }
 });

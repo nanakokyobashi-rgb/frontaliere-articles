@@ -337,7 +337,7 @@ test('the workflow spends the red on that verdict, and only as the LAST step', (
   assert.ok(yml.includes(`steps.refresh.outputs.${DEGRADATION_BLOCKS_OUTPUT}`), 'the summary names the blocks from the same source');
   assert.match(yml, /^\s+id: refresh$/m, 'the refresh step must keep the id the gate refers to');
 
-  const steps = [...yml.matchAll(/^ {6}- name: (.+)$/gm)].map((m) => ({ name: m[1].trim(), at: m.index }));
+  const steps = [...yml.matchAll(/^ {6}- (?:name|uses): (.+)$/gm)].map((m) => ({ name: m[1].trim(), at: m.index }));
   const gateAt = yml.indexOf(`steps.refresh.outputs.${DEGRADATION_CROSSED_OUTPUT}`);
   const gate = [...steps].reverse().find((step) => step.at < gateAt);
   assert.ok(gate, 'the gate must live inside a named step');

@@ -12,9 +12,9 @@
  * any test that imports the module under test. It has to be checked statically,
  * which is what this does.
  *
- * Deliberately regex-based rather than an actual resolver: the point is to
- * check the FILES exist, and a resolver would need the module graph to load,
- * which is the thing that is broken when this fails.
+ * Deliberately lexical rather than an actual resolver: the point is to check
+ * the FILES exist, and a resolver would need the module graph to load, which
+ * is the thing that is broken when this fails.
  */
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
@@ -22,7 +22,7 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { importSpecifiers } from './lib/relative-import-specifiers.mjs';
+import { importSpecifiers } from '../../scripts/ci/lib/import-specifiers.mjs';
 
 const GENERATOR_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 
