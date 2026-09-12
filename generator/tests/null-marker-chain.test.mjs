@@ -343,6 +343,25 @@ describe('free-MT recovery — il degrado e’ misurato e limitato per run', () 
     }
   });
 
+  test('#1320 FU-037 — il cap segue i bodyN realmente tradotti insieme alle FAQ', () => {
+    const report = createFreeMtRecoveryReport({ faqCount: 1, bodyFieldCount: 4 });
+    const fields = [
+      'title', 'excerpt', 'body1', 'body2', 'body3', 'body4',
+      'faq.q[0]', 'faq.a[0]',
+    ];
+    for (const field of fields) {
+      recordFreeMtUnusableOutput(report, { reason: 'unusable-text', targetLang: 'en', field });
+    }
+
+    assert.equal(report.bodyFieldCount, 4);
+    assert.equal(freeMtCandidateFieldCount(report.faqCount, report.bodyFieldCount), 8);
+    assert.equal(maxFreeMtLlmFallbacksPerLocale(report.faqCount, report.bodyFieldCount), 4);
+    for (let i = 0; i < 4; i += 1) {
+      assert.equal(claimFreeMtLlmFallback(report, 'en'), true, `fallback body4 en ${i + 1}`);
+    }
+    assert.equal(report.llmFallbacks, 4, 'body4 deve ricevere il quarto retry prima del fallback IT');
+  });
+
   test('#1320 FU-035 — il cap globale riserva un claim ai locali successivi', () => {
     const report = createFreeMtRecoveryReport({ faqCount: 2 });
     const spesi = Object.fromEntries(FREE_MT_LLM_FALLBACK_LOCALES.map((l) => [l, 0]));

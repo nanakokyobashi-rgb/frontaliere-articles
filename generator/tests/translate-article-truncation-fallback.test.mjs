@@ -556,8 +556,10 @@ test("recovery FAQ indicizzata: un rifiuto non contagia le coppie gia' usabili",
 test('il report di recovery si resetta per articolo e separa gli addebiti del cap', () => {
   const translateStart = src.indexOf('async function translateArticle(data) {');
   assert.notEqual(translateStart, -1);
-  const afterStart = src.slice(translateStart, translateStart + 500);
-  assert.match(afterStart, /RUN_REPORT\.translation = createFreeMtRecoveryReport\(\{ faqCount \}\)/);
+  const afterStart = src.slice(translateStart, translateStart + 700);
+  assert.match(afterStart, /const bodyFieldCount = Object\.keys\(collectBodySections\(data\?\.content\?\.it\)\)\.length;/);
+  assert.match(afterStart, /RUN_REPORT\.translation = createFreeMtRecoveryReport\(\{ faqCount, bodyFieldCount \}\)/);
+  assert.match(src, /body_fields=\$\{recovery\.bodyFieldCount\}/);
   assert.match(src, /return \{ q: q \|\| '', a: a \|\| '' \}/);
   assert.match(src, /unusable_fields=\$\{JSON\.stringify\(recovery\.unusableFields \|\| \{\}\)\}/);
 });

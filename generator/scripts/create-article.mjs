@@ -2211,6 +2211,7 @@ function finalizeRunReport(status, extra = {}) {
     console.error(
       `FREE_MT_RECOVERY_OUTCOME unusable=${recovery.unusableOutputs}`
       + ` non_string=${recovery.nonStringOutputs}`
+      + ` body_fields=${recovery.bodyFieldCount}`
       + ` unusable_by_locale=${JSON.stringify(recovery.unusableByLocale)}`
       + ` unusable_fields=${JSON.stringify(recovery.unusableFields || {})}`
       + ` llm_fallbacks=${recovery.llmFallbacks}`
@@ -10086,7 +10087,8 @@ async function translateArticle(data) {
   // lungo del funnel: senza reset, un secondo articolo erediterebbe i campi
   // rifiutati e i claim già spesi dal primo (issue #1244).
   const faqCount = Array.isArray(data?.content?.it?.faq) ? data.content.it.faq.length : 0;
-  RUN_REPORT.translation = createFreeMtRecoveryReport({ faqCount });
+  const bodyFieldCount = Object.keys(collectBodySections(data?.content?.it)).length;
+  RUN_REPORT.translation = createFreeMtRecoveryReport({ faqCount, bodyFieldCount });
 
   async function callWithRetry(prompt, maxTokens, label) {
     const safePrompt = `${prompt}\n\n${JSON_QUOTE_SAFETY_RULE_IT}`;
@@ -10475,8 +10477,9 @@ ${terminologyByLang[targetLang] || ''}`;
       );
       // IL CAP E' SCOPATO AI SOLI CAMPI CHE IL FREE-MT HA DAVVERO RIFIUTATO,
       // ED E' UNA QUOTA PER LOCALE.
-      // Il budget e' 7 per RUN, i campi candidati 21 per articolo (3 locali x 7
-      // campi, inclusi faq.q/faq.a): addebitarlo a OGNI ingresso nel loop — un floor-miss, un campo
+      // Il budget e' 7 per RUN; i campi candidati per locale derivano dai
+      // bodyN realmente tradotti piu' title/excerpt e faq.q/faq.a. Addebitarlo
+      // a OGNI ingresso nel loop — un floor-miss, un campo
       // vuoto per cause estranee al free-MT — lo esaurisce con un solo articolo
       // e da li' in poi ogni campo salta il retry mirato e cade su `itValue`,
       // cioe' pubblica prosa ITALIANA sotto `/en/`, `/de/`, `/fr/` in
@@ -10488,15 +10491,18 @@ ${terminologyByLang[targetLang] || ''}`;
       // un budget unico per run si esaurirebbe tutto su `en` proprio nella run
       // in cui il free-MT degrada su tutti i campi — `/en/` recuperato, `/de/`
       // e `/fr/` pubblicati in italiano, cioe' di nuovo #831. Vedi
-      // `maxFreeMtLlmFallbacksPerLocale()` dimensiona il cap sui campi FAQ
-      // realmente indicizzati nell'articolo, non sul solo caso base.
+      // `maxFreeMtLlmFallbacksPerLocale()` dimensiona il cap sui bodyN e sui
+      // campi FAQ realmente indicizzati nell'articolo, non sul solo caso base.
       const capBloccaIlRetry = ARTICLE_TRANSLATE_FREE_MT
         && wasFreeMtUnusable(RUN_REPORT.translation, locale, recoveryField)
-        && !claimFreeMtLlmFallback(RUN_REPORT.translation, locale, RUN_REPORT.translation.faqCount);
+        && !claimFreeMtLlmFallback(RUN_REPORT.translation, locale);
       if (capBloccaIlRetry) {
         console.error(
           `  ⚠️  Recupero LLM per ${field} (${locale}) saltato: raggiunta la quota di `
-          + `${maxFreeMtLlmFallbacksPerLocale(RUN_REPORT.translation.faqCount)} fallback free-MT per locale `
+          + `${maxFreeMtLlmFallbacksPerLocale(
+            RUN_REPORT.translation.faqCount,
+            RUN_REPORT.translation.bodyFieldCount,
+          )} fallback free-MT per locale `
           + `(cap ${MAX_FREE_MT_LLM_FALLBACKS_PER_RUN} per run) — `
           + `${ultimaRisorsa ? 'valore tradotto mantenuto' : 'fallback al valore italiano'}`,
         );

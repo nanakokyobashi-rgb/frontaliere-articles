@@ -7,9 +7,10 @@
  * LLM quota sink.
  */
 
-// La superficie del loop missing-field e' 5 campi fissi piu' due chiavi per
-// ogni coppia FAQ indicizzata (`faq.q[n]`/`faq.a[n]`). Il cap per locale deve
-// quindi seguire l'articolo, non una costante tarata sul caso senza FAQ.
+// La superficie del loop missing-field e' composta dai due campi meta, dai
+// bodyN realmente presenti e da due chiavi per ogni coppia FAQ indicizzata
+// (`faq.q[n]`/`faq.a[n]`). Il cap per locale deve quindi seguire l'articolo,
+// non una costante tarata sul caso senza FAQ o sui soli body1..body3.
 export const MAX_FREE_MT_LLM_FALLBACKS_PER_RUN = 7;
 
 /**
@@ -23,16 +24,15 @@ export const FREE_MT_LLM_FALLBACK_LOCALES = ['en', 'de', 'fr'];
  * QUOTA PER LOCALE, non budget globale consumato nell'ordine del loop.
  *
  * Il loop missing-field scorre `['en','de','fr']` × `['title','excerpt',
- * 'body1','body2','body3','faq.q','faq.a']`: con un solo contatore per run, in
- * una run in cui il free-MT degrada su tutti i campi i 7 claim finiscono TUTTI
- * su `en`, e da
+ * 'bodyN','faq.q','faq.a']`: con un solo contatore per run, in una run in cui
+ * il free-MT degrada su tutti i campi i 7 claim finiscono TUTTI su `en`, e da
  * `de:title` in poi ogni campo salta il retry mirato e cade sul valore
  * italiano. Risultato: `/en/` recuperato, `/de/` e `/fr/` pubblicati con prosa
  * ITALIANA in `content/`, in `meta-<locale>.json` e nei feed RSS — cioe' il
  * difetto #831 che questa catena esiste per chiudere, live senza rebuild del
- * sito. Oggi i candidati sono 7 per locale (21 complessivi), quindi il
- * tetto proporzionale è 7 e la quota per locale è 3: `en` 3, `de` 3, a `fr`
- * resta sempre almeno 1.
+ * sito. Nel caso storico (body1..body3 e una coppia FAQ) i candidati sono 7
+ * per locale, quindi la quota per locale è 3: `en` 3, `de` 3, a `fr` resta
+ * sempre almeno 1. Il report amplia il conteggio per body4+ e FAQ aggiuntive.
  *
  * Con la quota nessun locale puo' affamare gli altri: `en` ne prende al
  * massimo 3, `de` 3, quindi a `fr` ne resta sempre almeno 1 (7 - 3 - 3). E' la
@@ -44,9 +44,17 @@ export const MAX_FREE_MT_LLM_FALLBACKS_PER_LOCALE = Math.ceil(
   MAX_FREE_MT_LLM_FALLBACKS_PER_RUN / FREE_MT_LLM_FALLBACK_LOCALES.length,
 );
 
-export const FREE_MT_BASE_FIELDS_PER_LOCALE = 5;
+export const FREE_MT_FIXED_FIELDS_PER_LOCALE = 2;
+export const FREE_MT_DEFAULT_BODY_FIELDS = 3;
+// Compatibilita' per i consumatori che usavano il totale storico dei campi
+// senza FAQ: il calcolo effettivo sotto riceve il numero dei bodyN dal report.
+export const FREE_MT_BASE_FIELDS_PER_LOCALE =
+  FREE_MT_FIXED_FIELDS_PER_LOCALE + FREE_MT_DEFAULT_BODY_FIELDS;
 export const FREE_MT_FIELDS_PER_FAQ_PAIR = 2;
-export const FREE_MT_QUOTA_REFERENCE_FIELDS = 7;
+export const FREE_MT_QUOTA_REFERENCE_FIELDS =
+  FREE_MT_FIXED_FIELDS_PER_LOCALE
+  + FREE_MT_DEFAULT_BODY_FIELDS
+  + FREE_MT_FIELDS_PER_FAQ_PAIR;
 const FREE_MT_CAP_REASONS = new Set([
   'error',
   'unusable-text',
@@ -61,21 +69,32 @@ function normalizeFaqCount(value) {
   return Number.isInteger(value) && value >= 0 ? value : 0;
 }
 
-export function freeMtCandidateFieldCount(faqCount = 0) {
-  return FREE_MT_BASE_FIELDS_PER_LOCALE
+function normalizeBodyFieldCount(value) {
+  return Number.isInteger(value) && value >= 0 ? value : FREE_MT_DEFAULT_BODY_FIELDS;
+}
+
+export function freeMtCandidateFieldCount(
+  faqCount = 0,
+  bodyFieldCount = FREE_MT_DEFAULT_BODY_FIELDS,
+) {
+  return FREE_MT_FIXED_FIELDS_PER_LOCALE
+    + normalizeBodyFieldCount(bodyFieldCount)
     + FREE_MT_FIELDS_PER_FAQ_PAIR * normalizeFaqCount(faqCount);
 }
 
 /**
  * Cap proporzionale al numero di campi che il locale deve davvero tradurre.
- * Il caso di riferimento e' un articolo con una coppia FAQ: sette campi e
- * tre retry, cioe' il cap storico; con sette coppie i 19 campi indicizzati
- * ricevono nove tentativi prima del tetto globale della run.
+ * Il caso di riferimento e' un articolo con body1..body3 e una coppia FAQ:
+ * sette campi e tre retry, cioe' il cap storico; body4+ e FAQ aggiuntive
+ * ampliano la quota locale prima del tetto globale della run.
  */
-export function maxFreeMtLlmFallbacksPerLocale(faqCount = 1) {
+export function maxFreeMtLlmFallbacksPerLocale(
+  faqCount = 1,
+  bodyFieldCount = FREE_MT_DEFAULT_BODY_FIELDS,
+) {
   return Math.max(1, Math.ceil(
     MAX_FREE_MT_LLM_FALLBACKS_PER_LOCALE
-      * freeMtCandidateFieldCount(faqCount)
+      * freeMtCandidateFieldCount(faqCount, bodyFieldCount)
       / FREE_MT_QUOTA_REFERENCE_FIELDS,
   ));
 }
@@ -90,9 +109,13 @@ export function freeMtFieldKey(targetLang, field) {
   return `${targetLang || '?'}:${field || '?'}`;
 }
 
-export function createFreeMtRecoveryReport({ faqCount = 0 } = {}) {
+export function createFreeMtRecoveryReport({
+  faqCount = 0,
+  bodyFieldCount = FREE_MT_DEFAULT_BODY_FIELDS,
+} = {}) {
   return {
     faqCount: normalizeFaqCount(faqCount),
+    bodyFieldCount: normalizeBodyFieldCount(bodyFieldCount),
     unusableOutputs: 0,
     nonStringOutputs: 0,
     unusableByLocale: {},
@@ -150,14 +173,19 @@ export function wasFreeMtUnusable(report, targetLang, field) {
  * `?`, che ha la sua quota e quindi non puo' comunque svuotare il budget dei
  * locali veri.
  */
-export function claimFreeMtLlmFallback(report, locale, faqCount = report?.faqCount ?? 0) {
+export function claimFreeMtLlmFallback(
+  report,
+  locale,
+  faqCount = report?.faqCount ?? 0,
+  bodyFieldCount = report?.bodyFieldCount ?? FREE_MT_DEFAULT_BODY_FIELDS,
+) {
   if (!report || typeof report !== 'object') return false;
   if (!report.llmFallbacksByLocale || typeof report.llmFallbacksByLocale !== 'object') {
     report.llmFallbacksByLocale = {};
   }
   const key = locale || '?';
   const usedHere = report.llmFallbacksByLocale[key] || 0;
-  const localeLimit = maxFreeMtLlmFallbacksPerLocale(faqCount);
+  const localeLimit = maxFreeMtLlmFallbacksPerLocale(faqCount, bodyFieldCount);
   // Keep one claim in reserve only for another supported locale that has an
   // actually rejected field still waiting for recovery. Reserving blindly for
   // every locale at zero wastes the fixed run cap when, for example, only en
