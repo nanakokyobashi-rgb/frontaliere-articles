@@ -3807,6 +3807,16 @@
         "corpus": "3be8a132bc5de01a",
         "alignedAt": "2026-09-11"
       }
+    },
+    {
+      "path": "scripts/ci/review-quota-rescuer.mjs",
+      "mode": "corpus-only",
+      "reason": "Consumer zero-Claude che riattiva le run PR differite dal lease condiviso, verificando HEAD, ruolo e workflow sorgente prima del rerun. E' un percorso del ciclo Claude del corpus; il sito non possiede questo lease condiviso ne' il relativo consumer, quindi non c'e' un gemello da portare e la classificazione e' `corpus-only` per costruzione.",
+      "baseline": {
+        "site": null,
+        "corpus": "f458e9389e2af77f",
+        "alignedAt": "2026-09-12"
+      }
     }
   ]
 }
