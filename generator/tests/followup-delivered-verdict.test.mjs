@@ -51,6 +51,8 @@ import {
   latestFixOutcomeEntryFromComments,
   outcomeForCurrentPromotion,
   recoverableFixDecision,
+  isRecoverableQueueManaged,
+  isGithubNotFoundError,
 } from '../../scripts/ci/followup-drainer.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
@@ -146,6 +148,67 @@ test('recoverableFixDecision: il backoff quota conserva il beacon WIP', () => {
   const d = recoverableFixDecision({ outcome: 'max-turns', hasBranchWork: true, attempt: 1, quotaBackoffActive: true });
   assert.equal(d.action, 'hold-quota');
   assert.equal(d.nextAttempt, 1);
+});
+
+test('recoverableFixDecision: PR chiusa senza merge riprende il checkpoint, PR mergiata no', () => {
+  const closed = recoverableFixDecision({
+    outcome: 'pr-created', hasBranchWork: true, hasMergedFix: false, attempt: 0,
+  });
+  assert.equal(closed.action, 'requeue');
+  assert.equal(closed.nextAttempt, 1);
+
+  const merged = recoverableFixDecision({
+    outcome: 'pr-created', hasBranchWork: true, hasMergedFix: true, attempt: 0,
+  });
+  assert.equal(merged.action, 'none');
+  assert.equal(merged.nextAttempt, 0);
+});
+
+test('isGithubNotFoundError: il branch assente è distinto da un errore API', () => {
+  const notFound = { stderr: 'gh: Not Found (HTTP 404)' };
+  assert.equal(isGithubNotFoundError(notFound), false,
+    'un 404 generico del compare non prova che il branch sia assente');
+  assert.equal(isGithubNotFoundError(notFound, { resource: 'branch', repoReadable: true }), true,
+    'il probe del ref può interpretare il 404 dopo la prova di leggibilità del repo');
+  assert.equal(isGithubNotFoundError(notFound, { resource: 'branch', repoReadable: false }), false,
+    'un 404 sul primo probe non distingue repo invisibile da branch assente');
+  assert.equal(isGithubNotFoundError({ stderr: '{"message":"Server Error","status":"500"}' }), false);
+  assert.equal(isGithubNotFoundError({ message: 'timeout contacting GitHub' }), false);
+});
+
+test('isRecoverableQueueManaged: needs-human non nasconde un WIP, gli altri veto restano', () => {
+  const labels = (...names) => names.map((name) => ({ name }));
+  const issue = { title: 'follow-up(#1234): checkpoint del fixer' };
+
+  assert.equal(
+    isRecoverableQueueManaged({ ...issue, labels: labels('follow-up', 'fu-parked', 'needs-human') }),
+    true,
+  );
+  assert.equal(
+    isRecoverableQueueManaged({ ...issue, labels: labels('follow-up', 'fu-parked', 'needs-human', 'backlog') }),
+    false,
+  );
+  assert.equal(
+    isRecoverableQueueManaged({ ...issue, labels: labels('follow-up', 'fu-parked', 'needs-human', 'crawler-transient') }),
+    false,
+  );
+});
+
+test('isRecoverableQueueManaged: il WIP publish diretto supera needs-human, non i veto', () => {
+  const labels = (...names) => names.map((name) => ({ name }));
+  const issue = { title: 'Workflow Failure: publish-api' };
+  assert.equal(
+    isRecoverableQueueManaged({ ...issue, labels: labels('fu-parked', 'needs-human') }),
+    true,
+  );
+  assert.equal(
+    isRecoverableQueueManaged({ ...issue, labels: labels('fu-parked', 'needs-human', 'backlog') }),
+    false,
+  );
+  assert.equal(
+    isRecoverableQueueManaged({ ...issue, labels: labels('fu-parked', 'needs-human', 'crawler-transient') }),
+    false,
+  );
 });
 
 test('crawlerFixDecision: una promozione fresca non cede un branch WIP', () => {
@@ -304,7 +367,35 @@ test('il ramo DELIVERED del rescue queue-managed è qualificato da isDeliveredTh
   // Le due letture restano quelle, comunque siano legate al gate (dal #973
   // passano da una const, perché servono anche al warning sul writer
   // concorrente di `agent:fix`): a contare è la SORGENTE, non la forma.
-  assert.match(branch[1], /mergedAt = mergedFixPrAt\(/, 'gate sul merge reale, non sull assenza di PR aperte');
+  assert.match(queue, /const mergedAt = outcome === 'pr-created' \? mergedFixPrAt\(/, 'gate sul merge reale, non sull assenza di PR aperte');
   assert.match(queue, /const promotion = !hasPR && rawOutcome !== null/, 'gate sulla promozione della run corrente');
   assert.match(branch[1], /promotedAt: promotion\.at/, 'la promozione entra nel gate');
+});
+
+test('PARKED-WIP viene recuperato prima dell AGE-OUT e non può essere chiuso', () => {
+  const src = fs.readFileSync(DRAINER, 'utf8');
+  const run = src.slice(src.indexOf('export function runDrain()'));
+  const ageOutAt = run.indexOf('// --- AGE-OUT CLOSE:');
+  assert.ok(ageOutAt >= 0, 'lo stadio AGE-OUT deve restare riconoscibile');
+  const preAgeOut = run.slice(0, ageOutAt);
+  assert.match(preAgeOut, /const parkedForWip = listIssues\(LBL_PARKED\)/);
+  assert.match(preAgeOut, /const parkedWipOrder = rotateForScan\(parkedForWip/);
+  assert.match(preAgeOut, /PARKED_WIP_MAX_PER_RUN/);
+  assert.match(preAgeOut, /budget\.take\(`#\$\{iss\.number\} \(parked-wip\)/);
+  assert.match(preAgeOut, /isRecoverableQueueManaged/);
+  assert.match(preAgeOut, /const recoverable = recoverableFixBranch\(iss\.number\)/);
+  assert.match(src, /branchRefState\('main'\) === 'present'/,
+    'il compare 404 deve verificare prima che il repository/main sia leggibile');
+  assert.match(src, /branchRefState\(branch, \{ repoReadable: true \}\) === 'absent'/,
+    'solo un ref probe esplicito può trasformare il 404 in branch assente');
+  assert.match(preAgeOut, /recoverable\?\.state === 'unknown'/);
+  assert.match(preAgeOut, /RE-QUEUE PARKED-WIP/);
+  assert.match(preAgeOut, /add = \[LBL_QUEUED/);
+  assert.match(preAgeOut, /remove = \[LBL_PARKED, 'needs-human'/);
+
+  const parentAt = run.indexOf('// --- PARENT-CLOSE:');
+  const ageOut = run.slice(ageOutAt, parentAt);
+  assert.match(ageOut, /const liveWip = recoverableFixBranch\(iss\.number\)/);
+  assert.match(ageOut, /liveWip\?\.state === 'unknown'/);
+  assert.match(ageOut, /AGE-OUT skip #\$\{iss\.number\}: checkpoint WIP live/);
 });

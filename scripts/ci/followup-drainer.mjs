@@ -1730,6 +1730,31 @@ export function isQueueManaged(iss) {
 }
 
 /**
+ * Candidate per il solo recovery di un checkpoint WIP parcheggiato.
+ *
+ * `classifyIssue` tratta `needs-human` come veto assorbente per il routing
+ * normale. Qui il branch live è una prova più forte del veto: togliamo SOLO
+ * quella label dalla classificazione e conserviamo gli altri pin
+ * (`backlog`, `crawler-transient`, ...), che continuano a escludere il lavoro
+ * dal ciclo automatico.
+ * @param {{title?: string, labels?: Array<{name:string}>}} iss
+ */
+export function isRecoverableQueueManaged(iss) {
+  const labels = (iss?.labels || []).map((label) => label?.name).filter(Boolean);
+  if (!labels.includes('needs-human')) return isQueueManaged(iss);
+  const classification = classifyIssue(
+    iss?.title,
+    labels.filter((label) => label !== 'needs-human'),
+  );
+  // `publish` è l'unica categoria con route diretto `fix`: un crawler-fix può
+  // parcheggiare anche questa issue dopo aver già pushato il checkpoint. Il
+  // branch live rende recuperabile il checkpoint, ma solo per questo route
+  // esplicito; `backlog` e `crawler-transient` restano veto (`route: none`).
+  return classification.route === 'queue'
+    || (classification.category === 'publish' && classification.route === 'fix');
+}
+
+/**
  * Candidate del rescue `stuckFix`: `agent:fix` senza una coda/parcheggio
  * concorrente e senza un padre gia' decomposto. La PR, il verdetto e il beacon
  * di quota vengono verificati dal ciclo dopo l'ammissione; non devono escludere
@@ -2069,6 +2094,11 @@ function inFlightFixCount() {
 // avrebbe mai potuto vedere, e senza una riga di log a dirlo. Un silent cap in
 // senso proprio, contro la regola esplicita di AGENTS.md.
 const ISSUE_LIST_LIMIT = intFromEnv('FOLLOWUP_ISSUE_LIST_LIMIT', 300);
+// Il pass PARKED-WIP può fare fino a quattro letture/mutazioni per candidato
+// (compare, PR aperta, commenti, merge) e non deve consumare l'intero tick prima
+// del rescue ordinario. Il cap è indipendente dal deadline-budget: protegge
+// anche i run locali o i workflow che non esportano una deadline.
+const PARKED_WIP_MAX_PER_RUN = intFromEnv('FOLLOWUP_PARKED_WIP_MAX_PER_RUN', 25);
 
 /** Elenco issue con tetto DICHIARATO: se il tetto è stato raggiunto lo dice,
  * invece di restituire in silenzio una vista parziale che sembra completa. */
@@ -2669,6 +2699,47 @@ function hasFixPREver(num) {
   } catch { return true; }
 }
 
+/** Riconosce un HTTP 404 nella diagnostica di `gh`, senza attribuirgli ancora
+ * il significato «branch assente»: GitHub usa lo stesso codice anche quando
+ * repo o permessi non sono leggibili. Pura → testabile senza chiamare GitHub.
+ */
+function isHttpNotFoundError(error) {
+  if (Number(error?.status) === 404) return true;
+  const details = [error?.stderr, error?.stdout, error?.message]
+    .map((value) => String(value || ''))
+    .join('\n');
+  return /\bHTTP\s+404\b/i.test(details)
+    || /["']?status["']?\s*[:=]\s*["']?404["']?(?:\D|$)/i.test(details);
+}
+
+/**
+ * Un 404 può essere trattato come branch assente solo dopo aver verificato che
+ * il repository sia leggibile e che la richiesta riguardi davvero un ref.
+ * Senza questo contesto il valore è deliberatamente `false`: il chiamante deve
+ * restare su `unknown` e non chiudere/riarmare issue al buio.
+ */
+export function isGithubNotFoundError(error, { resource = '', repoReadable = false } = {}) {
+  return resource === 'branch' && repoReadable === true && isHttpNotFoundError(error);
+}
+
+/** Prova un ref branch con il contesto minimo necessario per interpretare un
+ * eventuale 404. `repoReadable=false` è obbligatorio per il primo probe:
+ * un 404 su `main` potrebbe essere il repository invisibile, non un branch
+ * mancante. Pura rispetto alla policy; l'I/O resta nel solo helper `gh`.
+ */
+function branchRefState(branch, { repoReadable = false } = {}) {
+  try {
+    const ref = gh([
+      'api', `repos/${REPO}/git/ref/heads/${encodeURIComponent(branch)}`,
+    ]);
+    return ref?.ref === `refs/heads/${branch}` ? 'present' : 'unknown';
+  } catch (error) {
+    return isGithubNotFoundError(error, { resource: 'branch', repoReadable })
+      ? 'absent'
+      : 'unknown';
+  }
+}
+
 /**
  * Un checkpoint WIP remoto è lavoro recuperabile finché il branch canonico
  * contiene commit che non sono in `main`. La query live evita di fidarsi di un
@@ -2676,7 +2747,7 @@ function hasFixPREver(num) {
  * branch. Fail-safe: errore GitHub → nessun override del rescue bounded.
  *
  * @param {number} num
- * @returns {{branch: string, aheadBy: number}|null}
+ * @returns {{state: 'live', branch: string, aheadBy: number}|{state: 'unknown', branch: string}|null}
  */
 function recoverableFixBranch(num) {
   const branch = `fix/issue-${num}`;
@@ -2685,10 +2756,23 @@ function recoverableFixBranch(num) {
       'api', `repos/${REPO}/compare/main...${encodeURIComponent(branch)}`,
       '--jq', '{ahead_by: .ahead_by}',
     ]);
+    if (comparison?.ahead_by === undefined || comparison?.ahead_by === null) {
+      return { state: 'unknown', branch };
+    }
     const aheadBy = Number(comparison?.ahead_by);
-    return Number.isSafeInteger(aheadBy) && aheadBy > 0 ? { branch, aheadBy } : null;
-  } catch {
-    return null;
+    if (!Number.isSafeInteger(aheadBy)) return { state: 'unknown', branch };
+    return aheadBy > 0 ? { state: 'live', branch, aheadBy } : null;
+  } catch (error) {
+    // Il compare endpoint restituisce un 404 sia per un ref inesistente sia
+    // per repo/permessi non leggibili. Verifichiamo prima `main` (prova che il
+    // repo è leggibile), poi il ref candidato: solo il secondo 404 è l'assenza
+    // esplicita del branch canonico. Ogni risposta ambigua resta `unknown`.
+    if (isHttpNotFoundError(error)
+        && branchRefState('main') === 'present'
+        && branchRefState(branch, { repoReadable: true }) === 'absent') {
+      return null;
+    }
+    return { state: 'unknown', branch };
   }
 }
 
@@ -2696,23 +2780,27 @@ function recoverableFixBranch(num) {
  * Decide how to handle a stale fixer run that left a non-empty WIP branch.
  * The branch is explicitly resumable, so `max-turns` must not route an
  * already-partial fix straight to a terminal park (especially for a
- * `from-decompose` issue). The retry still consumes the normal bounded attempt;
- * an active quota backoff keeps the issue as beacon without mutating it.
+ * `from-decompose` issue). A `pr-created` marker is resumable too when its PR
+ * was closed without a merge. The retry still consumes the normal bounded
+ * attempt; an active quota backoff keeps the issue as beacon without mutating
+ * it.
  * Pura → testabile.
  *
- * @param {{outcome?: string|null, hasBranchWork?: boolean, attempt?: number,
- *          maxAttempts?: number, quotaBackoffActive?: boolean}} args
+ * @param {{outcome?: string|null, hasBranchWork?: boolean, hasMergedFix?: boolean,
+ *          attempt?: number, maxAttempts?: number, quotaBackoffActive?: boolean}} args
  * @returns {{action: 'none'|'hold-quota'|'requeue'|'park-attempts', nextAttempt: number, reason: string}}
  */
 export function recoverableFixDecision({
   outcome = null,
   hasBranchWork = false,
+  hasMergedFix = false,
   attempt = 0,
   maxAttempts = MAX_ATTEMPTS,
   quotaBackoffActive = false,
 } = {}) {
   const none = { action: 'none', nextAttempt: attempt, reason: 'nessun checkpoint WIP live' };
-  if (!hasBranchWork || (outcome !== null && outcome !== 'max-turns')) return none;
+  const isClosedUnmergedPr = outcome === 'pr-created' && !hasMergedFix;
+  if (!hasBranchWork || !(outcome === null || outcome === 'max-turns' || isClosedUnmergedPr)) return none;
   if (quotaBackoffActive) {
     return { action: 'hold-quota', nextAttempt: attempt, reason: 'checkpoint WIP presente, ma la finestra quota è ancora aperta' };
   }
@@ -3070,6 +3158,7 @@ export function crawlerFixDecision({
     // Il crawler può cedere il beacon solo dopo la finestra di settling/orfano;
     // `max-turns` è invece un esito terminale già osservabile.
     hasBranchWork: hasBranchWork && (currentOutcome === 'max-turns' || ageMin >= orphanMinAgeMin),
+    hasMergedFix: mergedAt !== null,
     attempt,
     maxAttempts,
     quotaBackoffActive,
@@ -3222,6 +3311,100 @@ export function runDrain() {
     console.log(`budget di run: ${Math.round(budget.remainingMs() / 1000)}s utilizzabili prima della deadline del job.`);
   }
 
+  // --- PARKED-WIP: salva i checkpoint prima dell'AGE-OUT ---------------------
+  // Un fixer può aver pushato `fix/issue-N` e poi essere morto su max-turns o
+  // senza marker. Se il rescue ha già parcheggiato la issue, `agent:fix` non è
+  // più presente e il vecchio age-out la vedeva come «mai entrata in
+  // lavorazione»: la chiudeva prima che il rescue potesse leggere il branch.
+  // Il branch live è la prova più forte del contrario. Ri-accodare con
+  // `agent:fix-queued` non consuma quota e lascia al DRAIN la promozione
+  // serializzata; quindi è sicuro anche durante un backoff quota.
+  //
+  // Il pass è prima dell'AGE-OUT anche per `--dry-run`: la preview non deve
+  // suggerire una chiusura che la modalità reale non può fare.
+  const parkedForWip = listIssues(LBL_PARKED)
+    .filter((iss) => isRecoverableQueueManaged(iss))
+    .filter((iss) => !has(iss, LBL_FIX) && !has(iss, LBL_QUEUED))
+    .filter((iss) => !isDecomposedParent(iss));
+  const parkedWipOrder = rotateForScan(parkedForWip, {
+    scanMax: PARKED_WIP_MAX_PER_RUN, now: Date.now(), periodMs: SCAN_ROTATION_PERIOD_MS,
+  });
+  let parkedWipFound = 0;
+  let parkedWipRequeued = 0;
+  let parkedWipDeferredByCap = 0;
+  let parkedWipDeferredByBudget = 0;
+  for (let parkedIndex = 0; parkedIndex < parkedWipOrder.length; parkedIndex += 1) {
+    const iss = parkedWipOrder[parkedIndex];
+    if (parkedIndex >= PARKED_WIP_MAX_PER_RUN) {
+      parkedWipDeferredByCap = parkedWipOrder.length - parkedIndex;
+      break;
+    }
+    // Il confronto del branch è una lettura remota per candidata e le letture
+    // successive possono essere ancora più costose. Prenotiamo il candidato
+    // prima di iniziare: se il budget non basta, non tocchiamo nulla e il
+    // prossimo tick riparte dalla stessa finestra ruotata.
+    if (!budget.take(`#${iss.number} (parked-wip)`, ITEM_COST_MS)) {
+      parkedWipDeferredByBudget = parkedWipOrder.length - parkedIndex;
+      if (parkedWipDeferredByBudget > 1) {
+        budget.defer(`parked-wip: altre ${parkedWipDeferredByBudget - 1} candidate`);
+      }
+      break;
+    }
+    const recoverable = recoverableFixBranch(iss.number);
+    if (recoverable?.state === 'unknown') {
+      console.log(`::warning::PARKED-WIP #${iss.number}: confronto ${recoverable.branch} con main non verificabile → nessuna mutazione, resta aperta per il prossimo tick.`);
+      continue;
+    }
+    if (!recoverable) continue;
+    parkedWipFound++;
+    if (hasFixPR(iss.number)) {
+      console.log(`PARKED-WIP #${iss.number} ignorato: esiste già una PR fix aperta (branch ${recoverable.branch} ahead=${recoverable.aheadBy}).`);
+      continue;
+    }
+    const outcome = latestFixOutcomeEntry(iss.number).outcome;
+    const mergedAt = outcome === 'pr-created' ? mergedFixPrAt(iss.number) : null;
+    const decision = recoverableFixDecision({
+      outcome,
+      hasBranchWork: true,
+      hasMergedFix: mergedAt !== null,
+      attempt: attemptOf(iss),
+      // L'operazione qui è solo queueing: non avvia Claude e non deve essere
+      // bloccata dal backoff globale, che verrà rispettato dal DRAIN.
+      quotaBackoffActive: false,
+    });
+    if (decision.action === 'none') {
+      console.log(`::warning::PARKED-WIP #${iss.number}: branch ${recoverable.branch} ahead=${recoverable.aheadBy}, ma il marker ${outcome || 'assente'} non è compatibile con il recovery automatico.`);
+      continue;
+    }
+    if (decision.action === 'park-attempts') {
+      console.log(`PARKED-WIP #${iss.number} resta parked: ${decision.reason}, branch ${recoverable.branch} ahead=${recoverable.aheadBy}.`);
+      continue;
+    }
+    const previousAttempt = attemptOf(iss);
+    const previousAttemptLabel = previousAttempt ? `fu-attempt:${previousAttempt}` : null;
+    const add = [LBL_QUEUED, `fu-attempt:${decision.nextAttempt}`];
+    const remove = [LBL_PARKED, 'needs-human', previousAttemptLabel].filter(Boolean);
+    if (DRY) {
+      console.log(`[dry] RE-QUEUE PARKED-WIP #${iss.number} (${decision.reason}, branch ${recoverable.branch} ahead=${recoverable.aheadBy}) → agent:fix-queued`);
+      parkedWipRequeued++;
+      continue;
+    }
+    if (edit(iss.number, { add, remove })) {
+      console.log(`RE-QUEUE PARKED-WIP #${iss.number} (${decision.reason}, branch ${recoverable.branch} ahead=${recoverable.aheadBy}) → agent:fix-queued`);
+      parkedWipRequeued++;
+    }
+  }
+  if (parkedWipFound || parkedWipDeferredByCap || parkedWipDeferredByBudget) {
+    const capNote = parkedWipDeferredByCap
+      ? `${parkedWipDeferredByCap} rinviate per cap ${PARKED_WIP_MAX_PER_RUN}/run`
+      : '';
+    const budgetNote = parkedWipDeferredByBudget
+      ? `${parkedWipDeferredByBudget} rinviate per budget`
+      : '';
+    const deferredNote = [capNote, budgetNote].filter(Boolean).join('; ');
+    console.log(`parked-wip: ${parkedWipFound} checkpoint live individuati, ${parkedWipRequeued} ri-accodati prima dell'age-out${deferredNote ? `; ${deferredNote} al prossimo tick (no silent cap)` : ''}.`);
+  }
+
   // --- AGE-OUT CLOSE: drena il ratchet delle issue queue-managed mai chiuse ---
   // Ortogonale allo slot issue-fix (chiudere non tocca il fixer) → gira sempre.
   if (AGEOUT_DAYS > 0) {
@@ -3287,6 +3470,19 @@ export function runDrain() {
       console.log(`age-out: ${candidates.length} eleggibili, cap ${AGEOUT_MAX_PER_RUN}/run → ${candidates.length - toClose.length} rinviate al prossimo tick (no silent cap).`);
     }
     for (const iss of toClose) {
+      // Difesa anche dopo il pass PARKED-WIP: un edit può fallire, la lista
+      // open può essere stata letta prima della mutazione, oppure `--dry-run`
+      // non cambia le label. Un branch avanti a main prova che la issue è
+      // entrata in lavorazione: non chiuderla mai per age-out.
+      const liveWip = recoverableFixBranch(iss.number);
+      if (liveWip?.state === 'unknown') {
+        console.log(`::warning::AGE-OUT skip #${iss.number}: confronto ${liveWip.branch} con main non verificabile → resta aperta, nessuna chiusura al buio.`);
+        continue;
+      }
+      if (liveWip?.state === 'live') {
+        console.log(`AGE-OUT skip #${iss.number}: checkpoint WIP live (${liveWip.branch} ahead=${liveWip.aheadBy}) → resta aperta/da recuperare.`);
+        continue;
+      }
       const pinnedPath = manifestPinFor(iss.number);
       if (pinnedPath) {
         console.log(`📌 age-out: #${iss.number} tenuta aperta dal manifest (${pinnedPath}).`);
@@ -4059,12 +4255,19 @@ export function runDrain() {
     // run vuota. Prima del checkpoint deterministico questo lavoro restava
     // invisibile; ora il rescue deve riaccodarlo in modo resume-aware anche se
     // il vecchio marker è `max-turns` e l'issue è già `from-decompose`.
+    const mergedAt = outcome === 'pr-created' ? mergedFixPrAt(iss.number) : null;
     const recoverable = outcome === null || outcome === 'max-turns'
+      || (outcome === 'pr-created' && mergedAt === null)
       ? recoverableFixBranch(iss.number)
       : null;
+    if (recoverable?.state === 'unknown') {
+      console.log(`::warning::RESCUE-SKIP #${iss.number}: confronto ${recoverable.branch} con main non verificabile → nessuna mutazione, resta agent:fix.`);
+      continue;
+    }
     const recoverableDecision = recoverableFixDecision({
       outcome,
-      hasBranchWork: recoverable !== null,
+      hasBranchWork: recoverable?.state === 'live',
+      hasMergedFix: mergedAt !== null,
       attempt: attemptOf(iss),
       quotaBackoffActive: quotaBlocksPromotions,
     });
@@ -4151,7 +4354,6 @@ export function runDrain() {
       // PR chiusa SENZA merge otterrebbe il re-queue di una consegna che non
       // c'è stata. Se manca anche solo una, si prosegue verso i rami sotto,
       // che il tentativo lo consumano — cioè il comportamento bounded di prima.
-      const mergedAt = mergedFixPrAt(iss.number);
       if (isDeliveredThisRun({
         outcome,
         outcomeAt: outcomeEntry.at,
@@ -4245,17 +4447,19 @@ export function runDrain() {
       outcomeAt: entry.at,
       promotedAt: promotion.at,
     });
-    const recoverableBranch = (outcome === 'max-turns'
-      || (outcome === null && ageMin >= ORPHAN_MIN_AGE_MIN))
-      ? recoverableFixBranch(iss.number)
-      : null;
-    const attempt = attemptOf(iss);
-    const prevAttemptLabel = attempt ? `fu-attempt:${attempt}` : null;
-    // La seconda lettura (`fixPromotion`) è necessaria per scartare marker
-    // persistenti anche quando l'esito è un verdetto terminale, non solo per
-    // qualificare il ramo DELIVERED.
     const delivered = rawOutcome !== null && DELIVERED.has(rawOutcome);
     const mergedAt = delivered ? mergedFixPrAt(iss.number) : null;
+    const recoverableBranch = (outcome === 'max-turns'
+      || (outcome === null && ageMin >= ORPHAN_MIN_AGE_MIN)
+      || (outcome === 'pr-created' && mergedAt === null))
+      ? recoverableFixBranch(iss.number)
+      : null;
+    if (recoverableBranch?.state === 'unknown') {
+      console.log(`::warning::CRAWLER-SKIP #${iss.number}: confronto ${recoverableBranch.branch} con main non verificabile → nessuna mutazione, resta agent:fix.`);
+      continue;
+    }
+    const attempt = attemptOf(iss);
+    const prevAttemptLabel = attempt ? `fu-attempt:${attempt}` : null;
     // Gemello del warning del rescue queue-managed: stessa causa (writer
     // concorrente di `agent:fix`), stesso fail-closed, stesso bisogno di non
     // essere silenzioso.
@@ -4270,7 +4474,7 @@ export function runDrain() {
       ageMin,
       attempt,
       hasPR,
-      hasBranchWork: recoverableBranch !== null,
+      hasBranchWork: recoverableBranch?.state === 'live',
       quotaBackoffActive: quotaBlocksPromotions,
       decomposeEligible: DECOMPOSE_ENABLED && isDecomposeEligible(iss),
     });
