@@ -125,10 +125,10 @@ jobs:
     steps:
       - uses: actions/checkout@v5
         with:
-          # Il reviewer non usa la git-history (lavora sul bundle prefetchato +
-          # Read/Grep sul working tree) e `content/` pesa: depth 1. Il
-          # fingerprint del contributo passa dalla compare API, non da git.
-          fetch-depth: 1
+          # I gate dei body usano il high-water della revisione precedente per
+          # rifiutare un registro troncato; il checkout deve quindi esporre la
+          # storia completa anche quando la PR non modifica `content/`.
+          fetch-depth: 0
 
       - uses: actions/setup-node@v5
         with:
