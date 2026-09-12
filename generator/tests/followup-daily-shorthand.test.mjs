@@ -39,4 +39,12 @@ test('il gate recupera un daily shorthand e apre gli item senza State', () => {
   assert.equal(bucketState(decision.body), 'sealed');
   assert.equal(parseFollowupItems(decision.body).every((item) => item.state === 'open'), true);
   assert.equal(selectFirstOpenItem(decision.body)?.id, `FU-${DAY}-001`);
+
+  const fencedExample = BODY.replace(
+    '- Suggested action: verificare `firstGuard()` in scripts/example.mjs',
+    '- Suggested action: verificare `firstGuard()` in scripts/example.mjs\n```md\n- State: blocked\n```',
+  );
+  const fencedDecision = decideDailyMintGate({ title: TITLE, body: fencedExample }, { triageComplete: true });
+  assert.equal(fencedDecision.action, 'seal');
+  assert.equal(selectFirstOpenItem(fencedDecision.body)?.id, `FU-${DAY}-001`);
 });
