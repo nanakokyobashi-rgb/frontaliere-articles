@@ -150,8 +150,10 @@ test('i bullet sulla stessa riga non fanno perdere il conteggio', () => {
 
 test('lo scanner riproduce la baseline corrente senza fatti vacui', { skip: !fs.existsSync(CONTENT_PATH) }, () => {
   const report = scanCorpus(ROOT);
+  assert.ok(report.fieldsScanned > 0, 'la baseline non puo\' essere calcolata senza scandire il corpus');
   assert.equal(report.files.length, 0);
   assert.equal(report.articles.length, 0);
+  assert.equal(report.hits.length, 0);
   assert.deepEqual(
     Object.fromEntries(Object.entries(report.byLocale).map(([locale, value]) => [locale, value.files.length])),
     { it: 0, en: 0, de: 0, fr: 0 },
