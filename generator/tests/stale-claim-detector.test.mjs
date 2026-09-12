@@ -150,8 +150,8 @@ test('Closes/Fixes/Resolves #N nel body sono riconosciuti, in ogni forma e caso'
 });
 
 test('Addresses ... #N nelle PR aggregate protegge il claim anche senza chiudere la issue', () => {
-  const prs = [{ body: 'Addresses item 1 e item 2 di #8039\nAddresses #12' }];
-  assert.deepEqual([...referencedIssueNumbers(prs)].sort((a, b) => a - b), [12, 8039]);
+  const prs = [{ body: 'Addresses item 1 e item 2 di #8039\nAddresses #12 e #13' }];
+  assert.deepEqual([...referencedIssueNumbers(prs)].sort((a, b) => a - b), [12, 13, 8039]);
 });
 
 test('un branch che somiglia ma non combacia NON conta', () => {
