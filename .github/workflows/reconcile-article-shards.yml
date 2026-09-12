@@ -127,16 +127,16 @@ jobs:
       # `resolveGithubIssue` (già usata da `--resolve` altrove nel creator, mai
       # cablata qui) è il no-op sicuro quando non c'è niente da chiudere.
       - name: Close ghost-articles issue (coda drenata)
+        continue-on-error: true
         if: steps.detect.outcome == 'success' && steps.detect.outputs.missing == '0'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
         run: |
-          node scripts/lib/github-issue-creator.mjs \
+          node scripts/ci/resolve-issue-verified.mjs \
             --title "Articoli fantasma: annunciati senza pagina sugli shard" \
             --workflow "reconcile-article-shards" \
-            --run-url "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" \
-            --resolve
+            --run-url "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
 
       # Il dispatch è consentito solo quando l'innesco non era a sua volta un
       # dispatch (anti-catena, vedi intestazione) e il run non è un dry run
