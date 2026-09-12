@@ -36,13 +36,14 @@ test('la scansione PR è round-robin quando il pool supera il cap', () => {
   assert.deepEqual(roundRobinWindow([1, 2], { limit: 100, cursor: 9 }), { items: [1, 2], start: 0 });
 });
 
-test('una run sorgente avanzata o un gate riuscito non consuma un nuovo retry', () => {
+test('solo una run sorgente avanzata non consuma un nuovo retry', () => {
   const candidate = { deferred: { sourceAttempt: 2 } };
   assert.equal(sourceRunAlreadyHandled(candidate, { attempt: 3, status: 'completed', conclusion: 'failure' }), true);
-  assert.equal(sourceRunAlreadyHandled(candidate, { attempt: 2, status: 'completed', conclusion: 'success' }), true);
+  assert.equal(sourceRunAlreadyHandled(candidate, { attempt: 2, status: 'completed', conclusion: 'success' }), false,
+    'un workflow verde può aver saltato il consumer per lease negato');
   assert.equal(sourceRunAlreadyHandled(candidate, { attempt: 2, status: 'completed', conclusion: 'failure' }), false);
   assert.equal(sourceRunAlreadyHandled({ deferred: {} }, { attempt: 2, status: 'completed', conclusion: 'failure' }), true);
-  assert.equal(sourceRunAlreadyHandled({ deferred: {} }, { attempt: 1, status: 'completed', conclusion: 'success' }), true);
+  assert.equal(sourceRunAlreadyHandled({ deferred: {} }, { attempt: 1, status: 'completed', conclusion: 'success' }), false);
 });
 
 test('il rescuer seleziona solo una deferral sulla HEAD corrente', () => {

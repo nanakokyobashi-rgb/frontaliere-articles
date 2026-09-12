@@ -340,7 +340,7 @@ function sourceRunForCandidate(candidate, { completedOnly = true } = {}) {
   };
 }
 
-/** Pure: an autonomous rerun or a successful current gate closes the fence. */
+/** Pure: only an autonomous rerun closes the fence; a lease-skip may be green. */
 export function sourceRunAlreadyHandled(candidate, run) {
   const deferredAttempt = Number(candidate?.deferred?.sourceAttempt);
   const runAttempt = Number(run?.attempt);
@@ -348,8 +348,7 @@ export function sourceRunAlreadyHandled(candidate, run) {
   const autonomousAttempt = Number.isSafeInteger(runAttempt)
     && runAttempt > 0
     && (hasDeferredAttempt ? runAttempt > deferredAttempt : runAttempt > 1);
-  return autonomousAttempt
-    || (run?.status === 'completed' && run?.conclusion === 'success');
+  return autonomousAttempt;
 }
 
 function releaseLease(prNumber, role, token, runId) {
@@ -423,7 +422,7 @@ function closeAlreadyHandledDeferral(candidate, run, number) {
   if (postRetryComment(number, body)) {
     console.log(
       `PR #${number}: deferral ${candidate.deferred.role} chiusa senza quota; `
-      + `run sorgente già avanzata/successful (attempt ${run.attempt}).`,
+      + `run sorgente già avanzata (attempt ${run.attempt}).`,
     );
     return true;
   }
