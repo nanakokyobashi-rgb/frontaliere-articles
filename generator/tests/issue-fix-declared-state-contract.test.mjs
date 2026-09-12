@@ -18,3 +18,10 @@ test('issue-fix legge qualunque PR d’origine e riconosce owner decision', () =
   );
   assert.match(PROMPT, /blocked: decisione del proprietario.*blocked: owner decision/i);
 });
+
+test('#8041 adapted: il workflow corpus non inietta un registro decisioni vuoto', () => {
+  // Il difetto dell’item sul sito nasce da `steps.tier.outputs.decision_registry`.
+  // Questa variante adattata non produce né inietta quell’output: la sua
+  // assenza è il contratto che impedisce di presentare un heading vuoto al fixer.
+  assert.doesNotMatch(WORKFLOW, /decision_registry/);
+});

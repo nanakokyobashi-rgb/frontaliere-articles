@@ -352,7 +352,9 @@ export function citedRefs(text, { repo = '', repos = null, requireRepo = false }
 }
 
 /**
- * Le righe della tabella «Decisioni del proprietario già prese» di `VISION.md`.
+ * Le righe delle tabelle dopo «Decisioni del proprietario già prese» di
+ * `VISION.md`. Il registro può avere altre sezioni dopo la tabella principale:
+ * fermarsi al prossimo heading farebbe sparire le righe aggiunte più sotto.
  *
  * Parsing a righe e non con un parser Markdown per la stessa ragione per cui
  * `needs-human-prepass-sparse-closure.test.ts` non usa un parser YAML: è
@@ -368,17 +370,25 @@ export function parseVisionRegistry(md = '') {
   const head = REGISTRY_HEADING_RE.exec(text);
   if (!head) return [];
   const rest = text.slice(head.index + head[0].length);
-  const end = /\n## /.exec(rest);
-  const table = end ? rest.slice(0, end.index) : rest;
 
   const rows = [];
-  for (const raw of table.split('\n')) {
+  let tableRowCount = 0;
+  let recognizedRowCount = 0;
+  for (const raw of rest.split('\n')) {
     const line = raw.trim();
     if (!line.startsWith('|')) continue;
     const cells = line.replace(/^\|/, '').replace(/\|$/, '').split('|').map((c) => c.trim());
-    if (cells.length < 3) continue;
+    if (cells.length < 3) {
+      tableRowCount++;
+      continue;
+    }
     const [date, decision, ...restCells] = cells;
     if (/^[-:\s]+$/.test(date) || date === 'Data') continue; // separatore / intestazione
+    tableRowCount++;
+    // Una riga con almeno le tre celle del formato è riconosciuta anche se
+    // non cita un issue di uno dei due repo: quelle righe restano filtrate dal
+    // risultato, ma non possono falsare il controllo di completezza.
+    recognizedRowCount++;
     const source = restCells.join(' | ');
     const body = `${decision} | ${source}`;
     // I DUE slug del ciclo, esplicitamente: il registro decide su entrambi i
@@ -388,6 +398,9 @@ export function parseVisionRegistry(md = '') {
     const refs = [...citedRefs(body, { repos: Object.values(REPO_SLUGS) })];
     if (!refs.length) continue; // una riga che non nomina nessuna issue non è agganciabile
     rows.push({ date, decision, source, refs, scope: registryRowScope(body), ...registryRowState(body) });
+  }
+  if (recognizedRowCount < tableRowCount) {
+    throw new Error(`registro decisioni incompleto: riconosciute ${recognizedRowCount}/${tableRowCount} righe tabella`);
   }
   return rows;
 }
