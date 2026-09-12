@@ -2699,18 +2699,45 @@ function hasFixPREver(num) {
   } catch { return true; }
 }
 
-/** Distingue il 404 «branch fix/issue-N assente» da un errore API generico.
- * Il primo è uno stato normale del ciclo e significa «nessun checkpoint»; il
- * secondo deve restare fail-closed, perché non abbiamo potuto verificare il
- * branch. Pura → testabile senza chiamare GitHub.
+/** Riconosce un HTTP 404 nella diagnostica di `gh`, senza attribuirgli ancora
+ * il significato «branch assente»: GitHub usa lo stesso codice anche quando
+ * repo o permessi non sono leggibili. Pura → testabile senza chiamare GitHub.
  */
-export function isGithubNotFoundError(error) {
+function isHttpNotFoundError(error) {
   if (Number(error?.status) === 404) return true;
   const details = [error?.stderr, error?.stdout, error?.message]
     .map((value) => String(value || ''))
     .join('\n');
   return /\bHTTP\s+404\b/i.test(details)
     || /["']?status["']?\s*[:=]\s*["']?404["']?(?:\D|$)/i.test(details);
+}
+
+/**
+ * Un 404 può essere trattato come branch assente solo dopo aver verificato che
+ * il repository sia leggibile e che la richiesta riguardi davvero un ref.
+ * Senza questo contesto il valore è deliberatamente `false`: il chiamante deve
+ * restare su `unknown` e non chiudere/riarmare issue al buio.
+ */
+export function isGithubNotFoundError(error, { resource = '', repoReadable = false } = {}) {
+  return resource === 'branch' && repoReadable === true && isHttpNotFoundError(error);
+}
+
+/** Prova un ref branch con il contesto minimo necessario per interpretare un
+ * eventuale 404. `repoReadable=false` è obbligatorio per il primo probe:
+ * un 404 su `main` potrebbe essere il repository invisibile, non un branch
+ * mancante. Pura rispetto alla policy; l'I/O resta nel solo helper `gh`.
+ */
+function branchRefState(branch, { repoReadable = false } = {}) {
+  try {
+    const ref = gh([
+      'api', `repos/${REPO}/git/ref/heads/${encodeURIComponent(branch)}`,
+    ]);
+    return ref?.ref === `refs/heads/${branch}` ? 'present' : 'unknown';
+  } catch (error) {
+    return isGithubNotFoundError(error, { resource: 'branch', repoReadable })
+      ? 'absent'
+      : 'unknown';
+  }
 }
 
 /**
@@ -2736,7 +2763,15 @@ function recoverableFixBranch(num) {
     if (!Number.isSafeInteger(aheadBy)) return { state: 'unknown', branch };
     return aheadBy > 0 ? { state: 'live', branch, aheadBy } : null;
   } catch (error) {
-    if (isGithubNotFoundError(error)) return null;
+    // Il compare endpoint restituisce un 404 sia per un ref inesistente sia
+    // per repo/permessi non leggibili. Verifichiamo prima `main` (prova che il
+    // repo è leggibile), poi il ref candidato: solo il secondo 404 è l'assenza
+    // esplicita del branch canonico. Ogni risposta ambigua resta `unknown`.
+    if (isHttpNotFoundError(error)
+        && branchRefState('main') === 'present'
+        && branchRefState(branch, { repoReadable: true }) === 'absent') {
+      return null;
+    }
     return { state: 'unknown', branch };
   }
 }

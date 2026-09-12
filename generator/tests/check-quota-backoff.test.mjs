@@ -107,30 +107,52 @@ test('#8365: il lease riserva il floor issue-fix e nega il consumer concorrente'
 
 test('#8365: il workflow rilanciato può adottare la reservation della stessa PR', () => {
   const nowSec = 1_800_000_000;
+  const headSha = 'a'.repeat(40);
   const reserved = {
     token: 'quota-review-rescue', role: 'review', targetType: 'pr', target: '99',
     state: 'reserved', issuedAt: nowSec - 10, expiresAt: nowSec + 600,
+    headSha, reservationRunId: 'source-run-99',
   };
   assert.deepEqual(
     quotaLeaseDecision({
       action: 'acquire', role: 'review', targetType: 'pr', target: '99',
       activeLeases: [reserved], queueDepth: 51, nowSec,
+      headSha, runId: 'source-run-99',
     }),
     {
       allowed: true,
       existing: true,
       token: 'quota-review-rescue',
       state: 'reserved',
-      reason: 'shared-quota-lease-reserved-for-target',
+      reason: 'shared-quota-lease-reserved-for-head-run',
     },
   );
   assert.equal(
     quotaLeaseDecision({
       action: 'acquire', role: 'review', targetType: 'pr', target: '99',
       activeLeases: [{ ...reserved, state: 'active' }], queueDepth: 51, nowSec,
+      headSha, runId: 'source-run-99',
     }).allowed,
     false,
     'un lease active non può essere adottato da una seconda run',
+  );
+  assert.equal(
+    quotaLeaseDecision({
+      action: 'acquire', role: 'review', targetType: 'pr', target: '99',
+      activeLeases: [reserved], queueDepth: 51, nowSec,
+      headSha: 'b'.repeat(40), runId: 'source-run-99',
+    }).allowed,
+    false,
+    'una reservation di un’altra HEAD non può essere adottata',
+  );
+  assert.deepEqual(
+    quotaLeaseDecision({
+      action: 'acquire', role: 'review', targetType: 'pr', target: '99',
+      activeLeases: [reserved, { ...reserved, token: 'other', target: '100' }],
+      queueDepth: 51, nowSec, headSha, runId: 'source-run-99',
+    }),
+    { allowed: false, error: false, reason: 'shared-quota-lease-reservation-contended' },
+    'la reservation non è un lasciapassare se un altro lease è live',
   );
 });
 

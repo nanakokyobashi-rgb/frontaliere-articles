@@ -14,6 +14,7 @@ import {
   latestReviewQuotaRetry,
   parseReviewQuotaRetryMarker,
   reviewQuotaRetryBody,
+  reviewQuotaDeferredCandidates,
   sourceWorkflowForRole,
 } from '../../scripts/ci/review-quota-rescuer.mjs';
 
@@ -64,6 +65,29 @@ test('un retry già richiesto non viene duplicato, un nuovo run di deferral sì'
     deferredReviewCandidate({ head: HEAD, comments: [...comments, { body: nextDeferral }] }).runId,
     'tests-2',
   );
+});
+
+test('una deferral di un consumer non nasconde quella pendente di un altro consumer', () => {
+  const review = reviewQuotaDeferredBody({
+    head: HEAD, runId: 'review-1', role: 'review', reason: 'shared-quota-lease-active',
+  });
+  const redcheck = reviewQuotaDeferredBody({
+    head: HEAD, runId: 'redcheck-1', role: 'redcheck', reason: 'shared-quota-lease-contention',
+  });
+  const redcheckRetry = reviewQuotaRetryBody({
+    head: HEAD,
+    role: 'redcheck',
+    deferredRunId: 'redcheck-1',
+    sourceRunId: '42',
+    runId: 'rescuer-1',
+  });
+  const comments = [
+    { id: 10, created_at: '2026-09-12T13:00:00Z', body: review },
+    { id: 11, created_at: '2026-09-12T13:01:00Z', body: redcheck },
+    { id: 12, created_at: '2026-09-12T13:02:00Z', body: redcheckRetry },
+  ];
+  assert.deepEqual(reviewQuotaDeferredCandidates({ head: HEAD, comments }).map((x) => x.runId), ['review-1']);
+  assert.equal(deferredReviewCandidate({ head: HEAD, comments }).runId, 'review-1');
 });
 
 test('il marker retry è riconciliabile: requested/confirmed bloccano, failed riapre', () => {

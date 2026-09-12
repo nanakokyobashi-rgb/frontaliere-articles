@@ -108,6 +108,7 @@ const REVIEW_QUOTA_DEFERRED_RE = /<!-- REVIEW_QUOTA_DEFERRED:\s*(\{[\s\S]*?\})\s
 const QUOTA_LEASE_DEFAULT_TTL_SEC = 60 * 60;
 const QUOTA_LEASE_DEFAULT_SCAN_MAX = 20;
 const PR_QUOTA_CONSUMER_ROLES = new Set(['review', 'redflag', 'redcheck']);
+const SHA1_RE = /^[a-f0-9]{40}$/i;
 
 // Una review o un fixer di PR sono consumatori del canale di riparazione delle
 // PR: lasciarli dietro una coda issue non vuota crea starvation (la PR non può
@@ -126,17 +127,23 @@ export function parseQuotaLeaseMarker(body) {
   if (!match) return null;
   let event;
   try { event = JSON.parse(match[1]); } catch { return null; }
+  const headSha = event?.headSha;
+  const reservationRunId = event?.reservationRunId;
   if (!event || event.version !== 1 || typeof event.token !== 'string' || !event.token
       || typeof event.role !== 'string' || !event.role
       || !QUOTA_LEASE_STATES.has(event.state)
       || !validLeaseTarget(event.targetType, event.target)
       || !Number.isFinite(Number(event.issuedAt))
-      || !Number.isFinite(Number(event.expiresAt))) return null;
+      || !Number.isFinite(Number(event.expiresAt))
+      || (headSha !== undefined && !SHA1_RE.test(String(headSha)))
+      || (reservationRunId !== undefined && !String(reservationRunId))) return null;
   return {
     ...event,
     target: String(event.target),
     issuedAt: Number(event.issuedAt),
     expiresAt: Number(event.expiresAt),
+    ...(headSha !== undefined ? { headSha: String(headSha).toLowerCase() } : {}),
+    ...(reservationRunId !== undefined ? { reservationRunId: String(reservationRunId) } : {}),
   };
 }
 
@@ -248,6 +255,8 @@ export function quotaLeaseDecision({
   activeLeases = [],
   queueDepth = 0,
   nowSec = Math.floor(Date.now() / 1000),
+  headSha = '',
+  runId = '',
 } = {}) {
   if (!validLeaseTarget(targetType, target)) {
     return { allowed: false, error: true, reason: 'invalid-lease-target' };
@@ -260,22 +269,29 @@ export function quotaLeaseDecision({
 
   // Il rescuer zero-Claude prenota lo slot prima di rilanciare il workflow
   // sorgente. Il primo step di quel workflow usa `acquire`, quindi deve poter
-  // adottare SOLO una reservation dello stesso ruolo e target; un lease active
-  // di un altro run resta invece un veto normale.
+  // adottare SOLO una reservation dello stesso ruolo, target, HEAD e run
+  // sorgente; un lease active di un altro run resta invece un veto normale.
   if (action === 'acquire') {
-    const reservedForTarget = live.find((lease) =>
+    const reservedForRun = live.find((lease) =>
       lease.state === 'reserved'
       && lease.role === role
       && lease.targetType === targetType
       && String(lease.target) === String(target),
     );
-    if (reservedForTarget) {
+    const boundReservation = reservedForRun
+      && SHA1_RE.test(String(headSha || ''))
+      && String(reservedForRun.headSha || '').toLowerCase() === String(headSha).toLowerCase()
+      && String(reservedForRun.reservationRunId || '') === String(runId || '');
+    if (boundReservation && live.length !== 1) {
+      return { allowed: false, error: false, reason: 'shared-quota-lease-reservation-contended' };
+    }
+    if (boundReservation) {
       return {
         allowed: true,
         existing: true,
-        token: reservedForTarget.token,
-        state: reservedForTarget.state,
-        reason: 'shared-quota-lease-reserved-for-target',
+        token: reservedForRun.token,
+        state: reservedForRun.state,
+        reason: 'shared-quota-lease-reserved-for-head-run',
       };
     }
   }
@@ -286,6 +302,9 @@ export function quotaLeaseDecision({
       && lease.targetType === targetType
       && String(lease.target) === String(target),
     );
+    if (reservedForTarget && live.length !== 1) {
+      return { allowed: false, error: false, reason: 'shared-quota-lease-reservation-contended' };
+    }
     if (reservedForTarget) {
       return {
         allowed: true,
@@ -473,6 +492,8 @@ export function runQuotaLease({
   ttlSec = Number(process.env.QUOTA_LEASE_TTL_SEC || QUOTA_LEASE_DEFAULT_TTL_SEC),
   scanMax = Number(process.env.QUOTA_LEASE_SCAN_MAX || QUOTA_LEASE_DEFAULT_SCAN_MAX),
   runId = process.env.GITHUB_RUN_ID || '',
+  headSha = process.env.HEAD_SHA || '',
+  reservationRunId = process.env.QUOTA_LEASE_RESERVATION_RUN_ID || '',
   writeOutput = true,
   dryRun = process.env.DRY_RUN === '1',
   emitReviewDeferredMarker = true,
@@ -515,7 +536,17 @@ export function runQuotaLease({
 
     const scan = scanQuotaLeases(repo, targetType, target, max, nowSec);
     const queueDepth = leaseIssueRows(repo, 'agent:fix-queued', max).length;
-    const decision = quotaLeaseDecision({ action, role, targetType, target, activeLeases: scan.active, queueDepth, nowSec });
+    const decision = quotaLeaseDecision({
+      action,
+      role,
+      targetType,
+      target,
+      activeLeases: scan.active,
+      queueDepth,
+      nowSec,
+      headSha,
+      runId: reservationRunId || runId,
+    });
     if (!decision.allowed) {
       if (emitReviewDeferredMarker && !decision.error && targetType === 'pr' && PR_QUOTA_CONSUMER_ROLES.has(role)) {
         postReviewQuotaDeferred(repo, target, role, decision.reason, runId || process.env.GITHUB_RUN_ID);
@@ -538,6 +569,8 @@ export function runQuotaLease({
         issuedAt: nowSec,
         expiresAt: nowSec + ttl,
         runId: String(runId || process.env.GITHUB_RUN_ID || ''),
+        ...(SHA1_RE.test(String(headSha || '')) ? { headSha: String(headSha).toLowerCase() } : {}),
+        ...(reservationRunId ? { reservationRunId: String(reservationRunId) } : {}),
       };
       postLeaseEvent(repo, event);
     }
@@ -551,6 +584,28 @@ export function runQuotaLease({
     if (!own || !QUOTA_LEASE_LIVE_STATES.has(own.state)
         || !liveAfter.some((lease) => lease.token === chosenToken)) {
       throw new Error('lease scritto ma non rileggibile');
+    }
+    if (existing && liveAfter.length !== 1) {
+      // Una reservation adottabile non è un lasciapassare per una seconda run:
+      // se nel frattempo è comparso un altro lease, questa run non spende quota
+      // e non rilascia il token condiviso che potrebbe appartenere al vincitore.
+      if (emitReviewDeferredMarker && targetType === 'pr' && PR_QUOTA_CONSUMER_ROLES.has(role)) {
+        postReviewQuotaDeferred(
+          repo,
+          target,
+          role,
+          'shared-quota-lease-reservation-contended',
+          runId || process.env.GITHUB_RUN_ID,
+        );
+      }
+      return writeLeaseOutputs({
+        allowed: false,
+        error: false,
+        token: chosenToken,
+        state: own.state,
+        expiresAt: own.expiresAt,
+        reason: 'shared-quota-lease-reservation-contended',
+      }, { writeOutput });
     }
     if (!existing && liveAfter.length !== 1) {
       postLeaseEvent(repo, {

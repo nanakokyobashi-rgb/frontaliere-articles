@@ -165,7 +165,13 @@ test('recoverableFixDecision: PR chiusa senza merge riprende il checkpoint, PR m
 });
 
 test('isGithubNotFoundError: il branch assente è distinto da un errore API', () => {
-  assert.equal(isGithubNotFoundError({ stderr: 'gh: Not Found (HTTP 404)' }), true);
+  const notFound = { stderr: 'gh: Not Found (HTTP 404)' };
+  assert.equal(isGithubNotFoundError(notFound), false,
+    'un 404 generico del compare non prova che il branch sia assente');
+  assert.equal(isGithubNotFoundError(notFound, { resource: 'branch', repoReadable: true }), true,
+    'il probe del ref può interpretare il 404 dopo la prova di leggibilità del repo');
+  assert.equal(isGithubNotFoundError(notFound, { resource: 'branch', repoReadable: false }), false,
+    'un 404 sul primo probe non distingue repo invisibile da branch assente');
   assert.equal(isGithubNotFoundError({ stderr: '{"message":"Server Error","status":"500"}' }), false);
   assert.equal(isGithubNotFoundError({ message: 'timeout contacting GitHub' }), false);
 });
@@ -378,6 +384,10 @@ test('PARKED-WIP viene recuperato prima dell AGE-OUT e non può essere chiuso', 
   assert.match(preAgeOut, /budget\.take\(`#\$\{iss\.number\} \(parked-wip\)/);
   assert.match(preAgeOut, /isRecoverableQueueManaged/);
   assert.match(preAgeOut, /const recoverable = recoverableFixBranch\(iss\.number\)/);
+  assert.match(src, /branchRefState\('main'\) === 'present'/,
+    'il compare 404 deve verificare prima che il repository/main sia leggibile');
+  assert.match(src, /branchRefState\(branch, \{ repoReadable: true \}\) === 'absent'/,
+    'solo un ref probe esplicito può trasformare il 404 in branch assente');
   assert.match(preAgeOut, /recoverable\?\.state === 'unknown'/);
   assert.match(preAgeOut, /RE-QUEUE PARKED-WIP/);
   assert.match(preAgeOut, /add = \[LBL_QUEUED/);

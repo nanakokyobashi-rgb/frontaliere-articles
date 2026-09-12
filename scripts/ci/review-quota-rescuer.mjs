@@ -159,16 +159,50 @@ export function hasReviewQuotaRetry(comments = [], options = {}) {
   return !!latest && REVIEW_QUOTA_RETRY_ACTIVE_STATES.has(latest.state);
 }
 
-/** Return a retry candidate or null. Pure and head-pinned. */
+/**
+ * Return every still-pending deferral on the current HEAD, one per
+ * `(head, role, runId)`. A PR can have independent deferrals for review,
+ * redflag and redcheck; looking only at the newest comment for the whole PR
+ * would let a reconciled consumer hide an older one forever.
+ * Pure and head-pinned.
+ */
+export function reviewQuotaDeferredCandidates({ head = '', comments = [] } = {}) {
+  const grouped = new Map();
+  for (const [index, comment] of (comments || []).entries()) {
+    if (!isTrustedAutomationComment(comment)) continue;
+    const event = parseReviewQuotaDeferredMarker(comment?.body);
+    if (!event || event.head !== String(head)) continue;
+    const rank = commentRank(comment, index);
+    const key = `${event.head.toLowerCase()}\u0000${event.role}\u0000${event.runId}`;
+    const previous = grouped.get(key);
+    if (!previous || laterRank(previous.rank, rank) === rank) {
+      grouped.set(key, {
+        rank,
+        deferred: {
+          ...event,
+          commentId: Number(comment?.id) || null,
+          createdAt: comment?.created_at ?? comment?.createdAt ?? '',
+        },
+      });
+    }
+  }
+  return [...grouped.values()]
+    .filter(({ deferred }) => !hasReviewQuotaRetry(comments, {
+      head,
+      role: deferred.role,
+      deferredRunId: deferred.runId,
+    }))
+    .sort((a, b) => {
+      const at = a.rank[0] || 0;
+      const bt = b.rank[0] || 0;
+      return at - bt || (a.rank[1] || 0) - (b.rank[1] || 0) || (a.rank[2] || 0) - (b.rank[2] || 0);
+    })
+    .map(({ deferred }) => deferred);
+}
+
+/** Return the oldest pending retry candidate or null. Pure and head-pinned. */
 export function deferredReviewCandidate({ head = '', comments = [] } = {}) {
-  const deferred = latestReviewQuotaDeferred(comments);
-  if (!deferred || deferred.head !== String(head)) return null;
-  if (hasReviewQuotaRetry(comments, {
-    head,
-    role: deferred.role,
-    deferredRunId: deferred.runId,
-  })) return null;
-  return deferred;
+  return reviewQuotaDeferredCandidates({ head, comments })[0] || null;
 }
 
 export function reviewQuotaRetryBody({
@@ -286,6 +320,8 @@ function main() {
       ttlSec: positiveInt(process.env.REVIEW_QUOTA_LEASE_TTL_SEC, 60 * 60),
       scanMax: positiveInt(process.env.QUOTA_LEASE_SCAN_MAX, 20),
       runId: process.env.GITHUB_RUN_ID || 'review-quota-rescuer',
+      headSha: candidate.head,
+      reservationRunId: run.databaseId,
       writeOutput: false,
       dryRun: DRY_RUN,
       emitReviewDeferredMarker: false,
