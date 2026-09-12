@@ -4794,13 +4794,19 @@ function bodyFieldsForQuality(content) {
     .sort((a, b) => Number(a.slice(4)) - Number(b.slice(4)));
 }
 
+function bodyTextForQuality(content) {
+  return bodyFieldsForQuality(content)
+    .map((field) => content[field])
+    .join('\n\n');
+}
+
 /**
  * Gate comune per i payload appena generati, prima di traduzioni, immagini e
  * scritture. Le coppie `placeholder-value` vengono tolte solo quando la lista
  * conserva almeno tre fatti; una lista sotto soglia e una guida con toponimi
  * di un altro cantone fanno fallire l'headline corrente come qualityReject.
  */
-function assertGeneratedArticleQuality(data) {
+function assertGeneratedArticleQuality(data, { cantonBody = null } = {}) {
   const content = data?.content;
   if (!content || typeof content !== 'object') return;
 
@@ -4825,14 +4831,21 @@ function assertGeneratedArticleQuality(data) {
   }
 
   const contentIt = content.it || content;
-  const bodyIt = bodyFieldsForQuality(contentIt)
-    .map((field) => contentIt[field])
-    .join('\n\n');
+  const bodyIt = bodyTextForQuality(contentIt);
+  // validateAndEnforceCTA() records the Italian body before it appends the
+  // generic navigation CTA. The shared registrar runs after that mutation;
+  // use the snapshot there so a CTA mentioning Ticino cannot become a false
+  // foreign-toponym hit for a Grigioni/Vallese guide.
+  const cantonBodyIt = typeof cantonBody === 'string'
+    ? cantonBody
+    : typeof data._cantonGuardBodyBeforeCta === 'string'
+      ? data._cantonGuardBodyBeforeCta
+      : bodyIt;
   const cantonVerdict = checkCantonToponymConsistency({
     articleId: data.id,
     slug: data.slugs?.it || data.id,
     title: contentIt.title,
-    body: bodyIt,
+    body: cantonBodyIt,
   });
   if (!cantonVerdict.ok) {
     const details = cantonVerdict.matches
@@ -11429,6 +11442,10 @@ function pickDefaultCTA(articleCategory) {
 const DEFAULT_CTA = CTA_POOL[0];
 
 function validateAndEnforceCTA(data) {
+  const contentIt = data?.content?.it || data?.content;
+  if (contentIt && typeof data._cantonGuardBodyBeforeCta !== 'string') {
+    data._cantonGuardBodyBeforeCta = bodyTextForQuality(contentIt);
+  }
   const localeKeywords = { it: CTA_KEYWORDS_IT, en: CTA_KEYWORDS_EN, de: CTA_KEYWORDS_DE, fr: CTA_KEYWORDS_FR };
   const cta = pickDefaultCTA(data.category);
 
@@ -16950,7 +16967,9 @@ export async function registerArticleFiles(data, opts = {}) {
   sanitizePromptPlaceholders(data);
   // Secondary producers enter this shared writer directly, so they need the
   // same pre-write specificity/canton gate as the primary AI path.
-  assertGeneratedArticleQuality(data);
+  assertGeneratedArticleQuality(data, {
+    cantonBody: data._cantonGuardBodyBeforeCta,
+  });
   // La postcondizione sui nomi propri deve coprire anche i producer secondari
   // che entrano direttamente qui: free-MT rifiutato e fallback LLM possono
   // perdere un comune dall'excerpt, e l'imageAlt del giornalista non passa dal

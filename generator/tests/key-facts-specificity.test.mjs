@@ -167,7 +167,7 @@ test('create-article applica il gate dopo validate e marca il rifiuto come quali
   const gate = source.indexOf('assertGeneratedArticleQuality(data);', validated);
   assert.ok(validated >= 0 && gate > validated, 'il gate non e\' nel percorso post-validate');
   assert.ok(
-    (source.match(/assertGeneratedArticleQuality\(data\);/g) || []).length >= 3,
+    (source.match(/^\s*assertGeneratedArticleQuality\(data(?:,|\);)/gm) || []).length >= 3,
     'il gate non copre il percorso primario e quello di scrittura condiviso',
   );
   const translatedGate = source.indexOf(
@@ -176,4 +176,8 @@ test('create-article applica il gate dopo validate e marca il rifiuto come quali
   );
   const cta = source.indexOf('validateAndEnforceCTA(data);');
   assert.ok(translatedGate > -1 && translatedGate < cta, 'il guard post-traduzione deve precedere l\'iniezione CTA');
+  const registrar = source.indexOf('export async function registerArticleFiles');
+  const registrarCantonGate = source.indexOf('cantonBody: data._cantonGuardBodyBeforeCta', registrar);
+  assert.ok(registrar > -1 && registrarCantonGate > registrar, 'il registrar deve riusare il body cantonale pre-CTA');
+  assert.match(source, /data\._cantonGuardBodyBeforeCta = bodyTextForQuality\(contentIt\)/);
 });

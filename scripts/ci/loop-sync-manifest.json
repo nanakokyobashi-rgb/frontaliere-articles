@@ -1847,7 +1847,7 @@
       "reason": "Guard puro della coerenza fra cantone nello slug e toponimi nel testo (#1053). Blocca i nuovi offender della classe Grigioni/Vallese con riferimenti ticinesi e conserva come baseline esplicita i 32 articoli storici misurati. La generazione vive nel corpus e non esiste un gemello operativo sul sito.",
       "baseline": {
         "site": null,
-        "corpus": "dc6b0f8cf71defb9",
+        "corpus": "51e01832939d40b6",
         "alignedAt": "2026-09-12"
       }
     },
@@ -2150,7 +2150,7 @@
       "reason": "Testa il guard #1053 con l offender Courmayeur/Vallese, la guida legittima di Carate Urio/Ticino e la baseline storica dei 32 casi. Suite node:test specifica del generatore del corpus, senza gemello sul sito.",
       "baseline": {
         "site": null,
-        "corpus": "998f984af04aa356",
+        "corpus": "222d40c75ffd5d1a",
         "alignedAt": "2026-09-12"
       }
     },

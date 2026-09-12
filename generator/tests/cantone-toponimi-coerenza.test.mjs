@@ -6,6 +6,7 @@ import {
   checkCantonToponymConsistency,
   detectDeclaredCanton,
   findForeignCantonToponyms,
+  isCantonGuideCandidate,
   KNOWN_BASELINE_CROSS_CANTON_ARTICLE_IDS,
 } from '../scripts/lib/cantone-toponimi-coerenza.mjs';
 
@@ -83,4 +84,22 @@ test('uno slug ambiguo resta non classificato per evitare falsi positivi', () =>
   });
   assert.equal(result.status, 'unscoped');
   assert.equal(result.ok, true);
+});
+
+test('il digest multi-cantone resta fuori dal guard guida/lavoro', () => {
+  const result = checkCantonToponymConsistency({
+    articleId: 'eventi-weekend-ticino',
+    slug: 'eventi-weekend-ticino',
+    title: 'Eventi in Ticino e altri cantoni',
+    body: 'La sezione altri cantoni cita Grigioni e Vallese per gli eventi del weekend.',
+  });
+  assert.equal(isCantonGuideCandidate({
+    articleId: 'eventi-weekend-ticino',
+    slug: 'eventi-weekend-ticino',
+    title: 'Eventi in Ticino e altri cantoni',
+  }), false);
+  assert.equal(result.status, 'unscoped');
+  assert.equal(result.ok, true);
+  assert.equal(result.declaredCanton, 'ticino');
+  assert.deepEqual(result.matches, []);
 });

@@ -85,6 +85,7 @@ export const KNOWN_BASELINE_CROSS_CANTON_ARTICLE_IDS = Object.freeze([
 ]);
 
 const BASELINE_IDS = new Set(KNOWN_BASELINE_CROSS_CANTON_ARTICLE_IDS);
+const GUIDE_WORK_SCOPE_RX = /\b(?:vivere|guida|lavor\w*)\b/iu;
 
 function fold(value) {
   return String(value || '')
@@ -172,6 +173,21 @@ export function detectDeclaredCanton(slug, title = '') {
 }
 
 /**
+ * Il controllo riguarda le guide e i percorsi di lavoro, non ogni contenuto
+ * che per ragioni editoriali nomina piu' cantoni. In particolare il digest
+ * eventi dichiara Ticino ma include una sezione "altri cantoni" per progetto.
+ *
+ * Il cantone resta ricavato dallo slug/titolo, mentre il pattern guida/lavoro
+ * delimita il tipo di articolo su cui il rilievo di un toponimo e' azionabile.
+ */
+export function isCantonGuideCandidate({ articleId = '', slug = '', title = '' } = {}) {
+  const slugOrId = slug || articleId;
+  const declaredCanton = detectDeclaredCanton(slugOrId, title);
+  if (!declaredCanton) return false;
+  return GUIDE_WORK_SCOPE_RX.test(`${articleId} ${slugOrId} ${title}`);
+}
+
+/**
  * Restituisce i toponimi appartenenti a un altro cantone rispetto a quello
  * dichiarato. Un singolo risultato e' sufficiente a far scattare il gate.
  */
@@ -207,9 +223,9 @@ export function checkCantonToponymConsistency({
 } = {}) {
   const id = String(articleId || slug || '').replace(/\.ts$/u, '');
   const declaredCanton = detectDeclaredCanton(slug || id, title);
-  const matches = findForeignCantonToponyms({ declaredCanton, slug: slug || id, title, body });
 
   if (BASELINE_IDS.has(id)) {
+    const matches = findForeignCantonToponyms({ declaredCanton, slug: slug || id, title, body });
     return {
       ok: true,
       status: 'baseline',
@@ -218,15 +234,16 @@ export function checkCantonToponymConsistency({
       matches,
     };
   }
-  if (!declaredCanton) {
+  if (!isCantonGuideCandidate({ articleId: id, slug: slug || id, title })) {
     return {
       ok: true,
       status: 'unscoped',
       articleId: id,
-      declaredCanton: null,
+      declaredCanton,
       matches: [],
     };
   }
+  const matches = findForeignCantonToponyms({ declaredCanton, slug: slug || id, title, body });
   return {
     ok: matches.length === 0,
     status: matches.length === 0 ? 'pass' : 'reject',
@@ -241,6 +258,7 @@ export default {
   CANTON_ALIASES,
   KNOWN_BASELINE_CROSS_CANTON_ARTICLE_IDS,
   detectDeclaredCanton,
+  isCantonGuideCandidate,
   findForeignCantonToponyms,
   checkCantonToponymConsistency,
 };
