@@ -19,6 +19,13 @@ test('issue-fix legge qualunque PR d’origine e riconosce owner decision', () =
   assert.match(PROMPT, /blocked: decisione del proprietario.*blocked: owner decision/i);
 });
 
+test('#140: issue-fix riceve il contratto strutturale del body, inclusi i casi ricorrenti', () => {
+  assert.match(PROMPT, /## Implementato[\s\S]*solo comportamento, file e conteggi dimostrabili nella diff/i);
+  assert.match(PROMPT, /## Non implementato \(ancora\)[\s\S]*- Nessuno[\s\S]*quando non resta lavoro dovuto/i);
+  assert.match(PROMPT, /`PR concatenata` senza `#N` non è tracciabile/i);
+  assert.match(PROMPT, /blocked:[^\n]*daily bucket[^\n]*item/i);
+});
+
 test('#8041 adapted: il workflow corpus non inietta un registro decisioni vuoto', () => {
   // Il difetto dell’item sul sito nasce da `steps.tier.outputs.decision_registry`.
   // Questa variante adattata non produce né inietta quell’output: la sua

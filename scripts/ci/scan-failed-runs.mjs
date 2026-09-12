@@ -206,6 +206,29 @@ export function isDeclaredSkipOnly(jobs) {
   return jobs.every((j) => typeof j?.step === 'string' && DECLARED_SKIP_STEP_RE.test(j.step));
 }
 
+// `issue-fix.yml` usa deliberatamente un classificatore rosso quando la CLI
+// fallisce senza aver consegnato una PR. Il marker `FIX_OUTCOME`/il drainer
+// tiene gia' quel segnale sulla issue di lavoro; farlo riaprire da questo
+// scanner come `Workflow Failure: Issue fix (Claude → PR)` crea una seconda
+// issue per lo stesso tentativo e riavvia il workflow sul proprio allarme
+// (#1025). Il rosso del classifier resta intatto per drainer e health report.
+export const ISSUE_FIX_WORKFLOW_NAME = 'Issue fix (Claude → PR)';
+export const ISSUE_FIX_CLASSIFIER_STEP_RE = /^Classify outcome \(work-done, not CLI exit\)$/;
+export const ISSUE_FIX_NON_DELIVERY_RE = /nessuna PR aperta\/mergiata e la CLI .*non-delivery reale/i;
+
+/**
+ * True solo per l'esito di non-consegna gia' posseduto dal ciclo issue-fix.
+ *
+ * Il log e' richiesto come prova del ramo preciso: un errore diverso nello
+ * stesso step non viene nascosto. Un log non disponibile produce `false`,
+ * quindi il default dello scanner resta segnalare in dubbio.
+ */
+export function isExpectedIssueFixNonDelivery(workflowName, jobs, log = '') {
+  if (workflowName !== ISSUE_FIX_WORKFLOW_NAME || !Array.isArray(jobs) || jobs.length === 0) return false;
+  if (!jobs.every((j) => ISSUE_FIX_CLASSIFIER_STEP_RE.test(String(j?.step || '')))) return false;
+  return ISSUE_FIX_NON_DELIVERY_RE.test(String(log || ''));
+}
+
 /**
  * Un job che il detector timeout/host-kill deve possedere in esclusiva.
  *
@@ -955,6 +978,20 @@ async function main() {
     // prima del rilevatore ricco: non c'e' niente da arricchire.
     if (isDeclaredSkipOnly(jobs)) {
       console.log(`[scan-failed-runs] ${name}: run ${run.databaseId} rossa solo per skip dichiarato (${jobs.map((j) => j.step).join(', ')}) → nessuna issue.`);
+      continue;
+    }
+
+    // La non-consegna del fixer e' gia' un esito della issue originaria, non
+    // un guasto indipendente del workflow scannerizzato. Si legge il log solo
+    // per questo candidato: la firma completa evita di sopprimere un errore
+    // diverso del classificatore, e un fallimento della lettura resta
+    // segnalabile per default.
+    const issueFixLog = name === ISSUE_FIX_WORKFLOW_NAME
+      && jobs.every((j) => ISSUE_FIX_CLASSIFIER_STEP_RE.test(String(j?.step || '')))
+      ? gh(['run', 'view', String(run.databaseId), '--repo', REPO, '--log-failed'], '')
+      : '';
+    if (isExpectedIssueFixNonDelivery(name, jobs, issueFixLog)) {
+      console.log(`[scan-failed-runs] ${name}: run ${run.databaseId} ha un esito di non-consegna già gestito dal ciclo → nessuna issue duplicata.`);
       continue;
     }
 

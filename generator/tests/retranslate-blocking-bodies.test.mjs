@@ -49,6 +49,7 @@ import {
   stratify,
   blockingPairsFromAudit,
   criticalCodes,
+  guardTranslatedKeyFacts,
 } from '../scripts/retranslate-blocking-bodies.mjs';
 // Dal modulo corpus-only, NON da `lib/article-sanitizers.mjs`: quello e'
 // `identical` nel manifest del ciclo e un export aggiunto dal corpus lo
@@ -94,6 +95,50 @@ test('shouldWrite non tocca una pagina che la guardia gia accetta', () => {
 test('shouldWrite scrive solo bloccante-prima e pulita-dopo', () => {
   const v = shouldWrite({ oldCodes: ['truncated-bold'], newCodes: [], missingField: null });
   assert.deepEqual(v, { write: true, reason: 'pulita' });
+});
+
+test('la ri-traduzione rifiuta i fatti chiave vacui sotto soglia', () => {
+  const body1 = [
+    '## Fatti chiave',
+    '- **Cosa**: assegno familiare.',
+    '- **Quando**: non specificato.',
+    '- **Dove**: Cantone di Zugo.',
+  ].join('\n');
+  const guarded = guardTranslatedKeyFacts({ body1, body2: 'testo' });
+  assert.equal(guarded.changed, false);
+  assert.equal(guarded.sections.body1, body1);
+  assert.match(guarded.issue, /key-facts-specificity/);
+  assert.equal(
+    shouldWrite({ oldCodes: ['truncated-bold'], newCodes: [], missingField: null, qualityIssue: guarded.issue }).write,
+    false,
+  );
+});
+
+test('la ri-traduzione può togliere un fatto vuoto se restano tre superstiti', () => {
+  const body1 = [
+    '## Fatti chiave',
+    '- **Cosa**: assegno familiare.',
+    '- **Quando**: non specificato.',
+    '- **Dove**: Cantone di Zugo.',
+    '- **Chi**: cittadini residenti.',
+    '- **Importo**: CHF 200-300 al mese.',
+  ].join('\n');
+  const guarded = guardTranslatedKeyFacts({ body1 });
+  assert.equal(guarded.issue, null);
+  assert.equal(guarded.changed, true);
+  assert.doesNotMatch(guarded.sections.body1, /non specificato/i);
+});
+
+test('la guardia dei fatti chiave sta prima del gate e della scrittura atomica', () => {
+  const source = fs.readFileSync(
+    new URL('../scripts/retranslate-blocking-bodies.mjs', import.meta.url),
+    'utf8',
+  );
+  const guard = source.indexOf('guardTranslatedKeyFacts(newSections)');
+  const gate = source.indexOf('runFactualityGates({ sections: checkedSections');
+  const write = source.indexOf('writeAtomic(trPath, trSrc)');
+  assert.ok(guard >= 0 && guard < gate, 'la factuality gate deve ricevere il payload gia\' guardato');
+  assert.ok(gate < write, 'la scrittura deve restare dopo tutti i gate');
 });
 
 test('replaceBodyField col valore attuale e un no-op byte per byte', () => {
