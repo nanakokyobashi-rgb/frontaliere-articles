@@ -129,7 +129,7 @@ test('sceglie solo gli stale da un elenco misto', () => {
   assert.deepEqual(nums(selectStaleClaims(issues, new Set([2]), NOW)), [1]);
 });
 
-// ── referencedIssueNumbers: i quattro canali con cui una PR dice "sto su #N" ──
+// ── referencedIssueNumbers: i cinque canali con cui una PR dice "sto su #N" ──
 
 test('il branch deterministico fix/issue-N è riconosciuto', () => {
   assert.deepEqual([...referencedIssueNumbers([{ headRefName: 'fix/issue-4248' }])], [4248]);
@@ -137,6 +137,11 @@ test('il branch deterministico fix/issue-N è riconosciuto', () => {
 
 test('(#N) nel titolo è riconosciuto', () => {
   assert.deepEqual([...referencedIssueNumbers([{ title: 'Qualcosa di utile (#1234)' }])], [1234]);
+});
+
+test('titolo aggregato e Ref(s) nel body proteggono tutti i riferimenti', () => {
+  const prs = [{ title: 'fix follow-up (#1 #2, #3)' }, { body: 'Ref #4\nRefs #5 #6' }];
+  assert.deepEqual([...referencedIssueNumbers(prs)].sort((a, b) => a - b), [1, 2, 3, 4, 5, 6]);
 });
 
 test('Closes/Fixes/Resolves #N nel body sono riconosciuti, in ogni forma e caso', () => {
