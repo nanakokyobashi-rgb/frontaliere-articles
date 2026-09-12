@@ -44,6 +44,7 @@ import {
   parseChangedFiles,
   run,
 } from '../../scripts/ci/check-blog-body-syntax.mjs';
+import { historyRevisionFromEnv } from '../../scripts/lib/corpus-floors.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(HERE, '../..');
@@ -51,6 +52,7 @@ const GATE = path.join(ROOT, 'scripts/ci/check-blog-body-syntax.mjs');
 const WORKFLOW = path.join(ROOT, '.github/workflows/publish-api.yml');
 const GENERATOR_WORKFLOW = path.join(ROOT, '.github/workflows/generator-ci.yml');
 const CONTENT_GATES_WORKFLOW = path.join(ROOT, '.github/workflows/content-gates-main.yml');
+const TESTS_WORKFLOW = path.join(ROOT, '.github/workflows/tests.yml');
 
 // Questa e' la forma unica della guardia: deve riconoscere import/export
 // statici, anche braced su piu' righe, ma non una stringa `esbuild` in coda a
@@ -191,7 +193,10 @@ test('il modello non conta la directory del gate e rifiuta un riferimento assent
 
 test('un registro troncato viene confrontato con il high-water della revisione precedente', () => {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'blog-body-floor-history-'));
-  const git = (...args) => execFileSync('git', ['-C', dir, ...args], { stdio: 'ignore' });
+  const git = (...args) => execFileSync('git', ['-C', dir, ...args], {
+    encoding: 'utf8',
+    stdio: ['ignore', 'pipe', 'ignore'],
+  }).trim();
   const writeCorpus = (frontIds, swissIds) => {
     fs.writeFileSync(
       path.join(dir, 'content', 'blog-articles-data.ts'),
@@ -221,17 +226,108 @@ test('un registro troncato viene confrontato con il high-water della revisione p
     writeCorpus(Array.from({ length: 10 }, (_, i) => `front-${i}`), ['swiss-0']);
     git('add', 'content');
     git('commit', '-qm', 'complete corpus');
+    const previous = git('rev-parse', 'HEAD');
     writeCorpus(Array.from({ length: 5 }, (_, i) => `front-${i}`), ['swiss-0']);
     git('add', 'content');
     git('commit', '-qm', 'truncated corpus');
 
     assert.throws(
-      () => deriveFloorModel(dir),
+      () => deriveFloorModel(dir, { previousRevision: previous }),
       (error) => /registro troncato/.test(error.message) && /10 nella revisione Git precedente/.test(error.message),
     );
   } finally {
     fs.rmSync(dir, { recursive: true, force: true });
   }
+});
+
+test('un push multi-commit usa la base dell\'evento, non il commit intermedio', () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'blog-body-floor-multi-push-'));
+  const git = (...args) => execFileSync('git', ['-C', dir, ...args], { encoding: 'utf8' }).trim();
+  const writeCorpus = (frontIds, swissIds) => {
+    fs.writeFileSync(
+      path.join(dir, 'content', 'blog-articles-data.ts'),
+      frontIds.map((id) => `id: '${id}'`).join('\n') + '\n',
+    );
+    fs.writeFileSync(
+      path.join(dir, 'content', 'swiss-articles-data.ts'),
+      swissIds.map((id) => `id: '${id}'`).join('\n') + '\n',
+    );
+    for (const locale of ['it', 'en', 'de', 'fr']) {
+      fs.writeFileSync(
+        path.join(dir, 'content', `blog-meta-${locale}.ts`),
+        frontIds.map((id) => `'blog.article.${id}.title': 'A',`).join('\n') + '\n',
+      );
+      fs.writeFileSync(
+        path.join(dir, 'content', `blog-meta-ch-${locale}.ts`),
+        swissIds.map((id) => `'blog.article.${id}.title': 'S',`).join('\n') + '\n',
+      );
+    }
+  };
+
+  try {
+    fs.mkdirSync(path.join(dir, 'content'), { recursive: true });
+    git('init', '-q');
+    git('config', 'user.email', 'test@example.invalid');
+    git('config', 'user.name', 'test');
+
+    writeCorpus(Array.from({ length: 10 }, (_, i) => `front-${i}`), ['swiss-0']);
+    git('add', 'content');
+    git('commit', '-qm', 'published base');
+    const pushBase = git('rev-parse', 'HEAD');
+
+    writeCorpus(Array.from({ length: 5 }, (_, i) => `front-${i}`), ['swiss-0']);
+    git('add', 'content');
+    git('commit', '-qm', 'intermediate truncated corpus');
+    const intermediate = git('rev-parse', 'HEAD');
+
+    // Confrontare con l'intermedio e' il bug che il push multi-commit rendeva
+    // possibile: la superficie finale sembra coerente con quella già ridotta.
+    git('commit', '--allow-empty', '-qm', 'finalize push');
+    assert.doesNotThrow(() => deriveFloorModel(dir, { previousRevision: intermediate }));
+
+    // `github.event.before` punta invece alla base pubblicata prima dell'intero
+    // push, quindi il troncamento intermedio resta visibile e bloccante.
+    assert.throws(
+      () => deriveFloorModel(dir, { previousRevision: pushBase }),
+      (error) => error.code === 'TRUNCATED_CORPUS'
+        && /10 nella revisione Git precedente/.test(error.message),
+    );
+  } finally {
+    fs.rmSync(dir, { recursive: true, force: true });
+  }
+});
+
+test('la base storica seleziona esplicitamente push, PR e dispatch', () => {
+  assert.equal(
+    historyRevisionFromEnv({
+      PREFLIGHT_EVENT_NAME: 'push',
+      PREFLIGHT_PUSH_BASE_REVISION: 'push-base',
+    }),
+    'push-base',
+  );
+  assert.equal(
+    historyRevisionFromEnv({
+      PREFLIGHT_EVENT_NAME: 'pull_request',
+      PREFLIGHT_PR_BASE_REVISION: 'pr-base',
+    }),
+    'pr-base',
+  );
+  assert.equal(
+    historyRevisionFromEnv({
+      PREFLIGHT_EVENT_NAME: 'push',
+      PREFLIGHT_PUSH_BASE_REVISION: '0'.repeat(40),
+    }),
+    null,
+    'una base push nulla resta esplicita e non ricade su HEAD^',
+  );
+  assert.equal(
+    historyRevisionFromEnv({
+      PREFLIGHT_EVENT_NAME: 'workflow_dispatch',
+      PREFLIGHT_PUSH_BASE_REVISION: 'ignored',
+    }),
+    undefined,
+    'solo dispatch/uso locale autorizza il fallback locale a HEAD^',
+  );
 });
 
 test('un checkout shallow e una storia assente restano fail-closed', () => {
@@ -263,12 +359,29 @@ test('un checkout shallow e una storia assente restano fail-closed', () => {
 });
 
 test('i gate realistici fanno checkout della storia completa richiesta dal floor', () => {
-  for (const workflow of [GENERATOR_WORKFLOW, CONTENT_GATES_WORKFLOW]) {
+  for (const workflow of [GENERATOR_WORKFLOW, CONTENT_GATES_WORKFLOW, TESTS_WORKFLOW]) {
     assert.match(
       fs.readFileSync(workflow, 'utf8'),
       /uses: actions\/checkout@v5\s+with:\s+(?:#.*\n\s*)*fetch-depth:\s*0/,
       `${path.basename(workflow)} deve rendere verificabile la revisione precedente`,
     );
+  }
+});
+
+test('i workflow passano al preflight la base dell\'evento', () => {
+  const publish = fs.readFileSync(WORKFLOW, 'utf8');
+  assert.match(publish, /PREFLIGHT_EVENT_NAME:\s*\$\{\{\s*github\.event_name\s*\}\}/);
+  assert.match(publish, /PREFLIGHT_PUSH_BASE_REVISION:\s*\$\{\{\s*github\.event\.before\s*\}\}/);
+
+  const contentGates = fs.readFileSync(CONTENT_GATES_WORKFLOW, 'utf8');
+  assert.match(contentGates, /PREFLIGHT_EVENT_NAME:\s*\$\{\{\s*github\.event_name\s*\}\}/);
+  assert.match(contentGates, /PREFLIGHT_PUSH_BASE_REVISION:\s*\$\{\{\s*github\.event\.before\s*\}\}/);
+
+  for (const workflow of [GENERATOR_WORKFLOW, TESTS_WORKFLOW]) {
+    const src = fs.readFileSync(workflow, 'utf8');
+    assert.match(src, /PREFLIGHT_EVENT_NAME:\s*\$\{\{\s*github\.event_name\s*\}\}/);
+    assert.match(src, /PREFLIGHT_PUSH_BASE_REVISION:\s*\$\{\{\s*github\.event\.before\s*\}\}/);
+    assert.match(src, /PREFLIGHT_PR_BASE_REVISION:\s*\$\{\{\s*github\.event\.pull_request\.base\.sha\s*\}\}/);
   }
 });
 
@@ -509,6 +622,11 @@ test('publish-api.yml scopa il preflight ai corpi toccati, con fallback esplicit
     src,
     /PREFLIGHT_CHANGED_FILES:\s*\$\{\{\s*steps\.changed-bodies\.outputs\.changed-files\s*\}\}/,
     'il preflight non riceve la lista dei corpi cambiati calcolata dallo step precedente',
+  );
+  assert.match(
+    src,
+    /PREFLIGHT_PUSH_BASE_REVISION:\s*\$\{\{\s*github\.event\.before\s*\}\}/,
+    'il preflight deve confrontare l\'intero push con la base pubblicata',
   );
 
   // Il fallback su scansione piena, mai su lista vuota, e' l'invariante che

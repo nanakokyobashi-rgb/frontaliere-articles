@@ -88,6 +88,7 @@ import {
   collectTypeScriptFiles,
   floorViolations,
 } from './check-blog-body-syntax.mjs';
+import { historyRevisionFromEnv } from '../lib/corpus-floors.mjs';
 import { createGithubIssue, resolveGithubIssue } from '../lib/github-issue-creator.mjs';
 
 export const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
@@ -318,15 +319,22 @@ export const SEO_ROOT = { rel: 'content/seo', minFiles: 4 };
  * puntare su un albero finto.
  *
  * @param {string} [root]
- * @param {{previousRegistryCounts?: Record<string, number>}} [options]
+ * @param {{previousRegistryCounts?: Record<string, number>, previousRevision?: string|null}} [options]
  * @returns {{ ok: boolean, violations: string[], perRoot: {rel:string,count:number}[] }}
  */
-export function preflight(root = ROOT, { previousRegistryCounts } = {}) {
+export function preflight(
+  root = ROOT,
+  { previousRegistryCounts, previousRevision = historyRevisionFromEnv() } = {},
+) {
   const perRoot = [...BLOG_BODY_ROOTS, SEO_ROOT].map((r) => ({
     ...r,
     count: collectTypeScriptFiles(path.join(root, r.rel)).length,
   }));
-  const violations = floorViolations(perRoot, { root, previousRegistryCounts });
+  const violations = floorViolations(perRoot, {
+    root,
+    previousRegistryCounts,
+    previousRevision,
+  });
   for (const rel of REQUIRED_FILES) {
     if (!fs.existsSync(path.join(root, rel))) {
       violations.push(

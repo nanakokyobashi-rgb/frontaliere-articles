@@ -288,7 +288,43 @@ function missingHistoryError(message) {
   return error;
 }
 
-function previousCorpusRevision(root) {
+const ZERO_REVISION_RE = /^0+$/;
+
+function normalizeConfiguredRevision(value) {
+  const revision = String(value ?? '').trim();
+  if (!revision || ZERO_REVISION_RE.test(revision)) return null;
+  return revision;
+}
+
+/**
+ * Sceglie la base storica in base all'evento che sta eseguendo il gate.
+ *
+ * Un push puo' contenere piu' commit: `HEAD^` sarebbe allora solo il commit
+ * intermedio piu' recente, non lo stato pubblicato prima del push. Le PR
+ * usano invece la base dichiarata dall'evento. `undefined` e' riservato a
+ * workflow_dispatch e uso locale, dove il fallback a `HEAD^` resta esplicito;
+ * `null` significa che un evento push/PR ha dichiarato una base assente e deve
+ * quindi restare fail-closed.
+ */
+export function historyRevisionFromEnv(env = process.env) {
+  const event = String(env.PREFLIGHT_EVENT_NAME ?? env.GITHUB_EVENT_NAME ?? '').trim();
+  if (event === 'push') {
+    return normalizeConfiguredRevision(
+      env.PREFLIGHT_PUSH_BASE_REVISION ?? env.PREFLIGHT_BASE_REVISION ?? env.GITHUB_EVENT_BEFORE,
+    );
+  }
+  if (event === 'pull_request') {
+    return normalizeConfiguredRevision(
+      env.PREFLIGHT_PR_BASE_REVISION ?? env.PREFLIGHT_BASE_REVISION ?? env.GITHUB_BASE_SHA,
+    );
+  }
+  if (Object.prototype.hasOwnProperty.call(env, 'PREFLIGHT_BASE_REVISION')) {
+    return normalizeConfiguredRevision(env.PREFLIGHT_BASE_REVISION);
+  }
+  return undefined;
+}
+
+function previousCorpusRevision(root, configuredRevision = historyRevisionFromEnv()) {
   if (readGit(root, ['rev-parse', '--is-inside-work-tree']) !== 'true') {
     throw missingHistoryError('la radice non e\' un checkout Git');
   }
@@ -296,6 +332,19 @@ function previousCorpusRevision(root) {
     throw missingHistoryError(
       'il checkout Git e\' shallow, quindi il high-water precedente non e\' disponibile',
     );
+  }
+  if (configuredRevision !== undefined) {
+    const configured = normalizeConfiguredRevision(configuredRevision);
+    if (configured === null) {
+      throw missingHistoryError('la revisione base dell\'evento non e\' disponibile');
+    }
+    const revision = readGit(root, ['rev-parse', '--verify', `${configured}^{commit}`]);
+    if (!revision) {
+      throw missingHistoryError(
+        `la revisione base ${configured} non e\' disponibile nel checkout`,
+      );
+    }
+    return revision;
   }
   const revision = readGit(root, ['rev-parse', 'HEAD^']);
   if (!revision) {
@@ -320,7 +369,12 @@ function previousRegistryData(root, section, revision) {
   }
 }
 
-function registryHighWater(root, section, current, previousRegistryCount) {
+function registryHighWater(
+  root,
+  section,
+  current,
+  { previousRegistryCount, previousRevision } = {},
+) {
   if (previousRegistryCount !== undefined) {
     if (!Number.isSafeInteger(previousRegistryCount) || previousRegistryCount < 0) {
       const error = new Error(
@@ -332,7 +386,7 @@ function registryHighWater(root, section, current, previousRegistryCount) {
     }
     return Math.max(current.count, previousRegistryCount);
   }
-  const revision = previousCorpusRevision(root);
+  const revision = previousCorpusRevision(root, previousRevision);
   const previous = previousRegistryData(root, section, revision);
   return Math.max(current.count, previous?.count ?? 0);
 }
@@ -404,11 +458,20 @@ export function validateLocaleMetadata(root, section, registryIds) {
  * dei due riferimenti manca, o se la storia necessaria al high-water non e'
  * leggibile, lancia invece di trasformare l'assenza in un pavimento a zero.
  * I fake root possono fornire `previousRegistryCount` solo quando la storia
- * e' stata verificata dal test che li costruisce.
+ * e' stata verificata dal test che li costruisce. `previousRevision` e' la
+ * revisione base esplicita del push/PR; senza questa opzione la selezione
+ * dell'evento usa l'ambiente e solo l'uso locale/dispatch ricade su `HEAD^`.
  */
-export function expectedBodyFiles(root, section, { previousRegistryCount } = {}) {
+export function expectedBodyFiles(
+  root,
+  section,
+  { previousRegistryCount, previousRevision } = {},
+) {
   const registry = readRegistryData(root, section);
-  const highWater = registryHighWater(root, section, registry, previousRegistryCount);
+  const highWater = registryHighWater(root, section, registry, {
+    previousRegistryCount,
+    previousRevision,
+  });
   if (registry.count < floorFrom(highWater)) {
     throw truncatedRegistryError(section, registry, highWater);
   }
