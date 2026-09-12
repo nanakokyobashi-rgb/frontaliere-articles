@@ -551,7 +551,7 @@
     {
       "path": ".github/workflows/tests.yml",
       "mode": "adapted",
-      "reason": "Un solo check obbligatorio per codice, test e review in entrambi i repo; gli edit del body sono gestiti dal recupero selettivo esterno. Il sito usa Vitest e un contratto API prima del checkout; il corpus usa node:test e i propri validatori modulari del body dopo il checkout. Il corpus conserva il gate generator-ci path-scoped, le esclusioni draft/engine-lockstep-auto e la review senza proxy Headroom. RICONCILIATO 2026-09-10 (#1060): baseline attestata dopo il merge della PR sito 8200, con preflight e selezione del recupero coerenti con i gate propri del corpus.",
+      "reason": "Un solo check obbligatorio per codice, test e review in entrambi i repo; gli edit del body sono gestiti dal recupero selettivo esterno. Il sito usa Vitest e un contratto API prima del checkout; il corpus usa node:test e i propri validatori modulari del body dopo il checkout. Il corpus conserva il gate generator-ci path-scoped, le esclusioni draft/engine-lockstep-auto e la review senza proxy Headroom. RICONCILIATO 2026-09-12 (#1060): baseline riattestata dopo l'aggiornamento del checkout corpus a storia completa, con preflight e selezione del recupero coerenti con i gate propri del corpus.",
       "baseline": {
         "site": "52c9ae3d4a8612f8",
         "corpus": "521835920db39ed5",
