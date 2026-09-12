@@ -88,10 +88,9 @@ test('guid survives a slug rename (built from articleId, not slug)', () => {
 });
 
 test('guid and link escape XML special characters in articleId and slug (issue #182)', () => {
-  // parseSeoBlogs's extraction regex (/'blog-([^']+)':\s*\{/g) accepts any
-  // character except an apostrophe, so an articleId or slug carrying '&' or
-  // '<' reaches renderFeed verbatim — unescaped, that breaks the published
-  // feed's XML.
+  // The shared SEO resolver preserves an articleId or slug carrying '&' or
+  // '<' all the way to renderFeed; XML escaping must still happen there or it
+  // would break the published feed.
   const xml = buildFeedXml('art&id<x', 'slug&rename<x');
 
   const guid = xml.match(/<guid[^>]*>([^<]+)<\/guid>/)[1];
