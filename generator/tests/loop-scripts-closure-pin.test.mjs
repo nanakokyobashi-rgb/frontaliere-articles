@@ -87,6 +87,23 @@ test("il guard vede tutti gli import dinamici nella stessa espressione", () => {
   assert.deepEqual(specifiers(src), ['./a.mjs', './b.mjs']);
 });
 
+test('il guard attraversa i commenti tra import dinamico, parentesi e literal', () => {
+  const src = [
+    'const a = await import /* dopo keyword */ ( /* dopo parentesi */',
+    "  './dynamic-commented.mjs'",
+    ');',
+  ].join('\n');
+  assert.deepEqual(specifiers(src), ['./dynamic-commented.mjs']);
+});
+
+test('il guard attraversa i commenti prima del literal dopo from', () => {
+  const src = [
+    "import /* dopo keyword */ { value } /* prima di from */",
+    "  from /* dopo from */ './static-commented.mjs';",
+  ].join('\n');
+  assert.deepEqual(specifiers(src), ['./static-commented.mjs']);
+});
+
 test("un commento inline non apre un prefisso di import dinamico", () => {
   const src = "const x = /* import('./not-a-module.mjs') */ true;\n";
   assert.deepEqual(specifiers(src), []);

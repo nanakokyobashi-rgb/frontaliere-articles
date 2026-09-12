@@ -57,8 +57,21 @@ function quotedValue(src, at) {
   return null;
 }
 
-function skipSpace(src, at) {
-  while (at < src.length && /\s/u.test(src[at])) at += 1;
+function skipTrivia(src, at) {
+  while (at < src.length) {
+    while (at < src.length && /\s/u.test(src[at])) at += 1;
+    if (src.startsWith('//', at)) {
+      const nl = src.indexOf('\n', at + 2);
+      at = nl < 0 ? src.length : nl + 1;
+      continue;
+    }
+    if (src.startsWith('/*', at)) {
+      const end = src.indexOf('*/', at + 2);
+      at = end < 0 ? src.length : end + 2;
+      continue;
+    }
+    break;
+  }
   return at;
 }
 
@@ -80,7 +93,7 @@ function staticSpecifier(src, at) {
     }
     if (src[i] === ';') return null;
     if (wordAt(src, i, 'from')) {
-      return quotedValue(src, skipSpace(src, i + 4));
+      return quotedValue(src, skipTrivia(src, i + 4));
     }
     if (wordAt(src, i, 'import') || wordAt(src, i, 'export')) return null;
   }
@@ -115,9 +128,9 @@ export function importSpecifiers(source) {
     else if (wordAt(src, i, 'export')) keyword = 'export';
     if (!keyword) { i += 1; continue; }
 
-    const next = skipSpace(src, i + keyword.length);
+    const next = skipTrivia(src, i + keyword.length);
     if (keyword === 'import' && src[next] === '(') {
-      const value = quotedValue(src, skipSpace(src, next + 1));
+      const value = quotedValue(src, skipTrivia(src, next + 1));
       if (value) found.push({ at: i, specifier: value.value });
     } else if (keyword === 'import' && (src[next] === "'" || src[next] === '"')) {
       const value = quotedValue(src, next);
