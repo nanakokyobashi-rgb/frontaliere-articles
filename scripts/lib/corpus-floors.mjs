@@ -254,7 +254,7 @@ export function sectionFloor(root, section, retention = FLOOR_RETENTION) {
 export const SEO_CHUNK_DIR = path.join('content', 'seo');
 
 /**
- * Le voci di un chunk SEO che diventano davvero `<item>`, aggiunte a `into`.
+ * I metadati completi delle voci di un chunk SEO, aggiunti a `into`.
  *
  * PERCHE' UN CONTEGGIO A PARTE dai file di corpo. Gli `<item>` di un feed non
  * nascono dai corpi: `buildSectionFeeds` li costruisce da `parseSeoBlogs` sui
@@ -265,18 +265,17 @@ export const SEO_CHUNK_DIR = path.join('content', 'seo');
  * un feed legittimamente corto — e la lista dei chunk si e' gia' rivelata
  * capace di muoversi da sola (due su sette letti, feed fermo tre mesi).
  *
- * I criteri ricalcano quelli di `parseSeoBlogs`, che e' il produttore: stesso
+ * Il collector resta completo per i consumer che usano anche il testo SEO
+ * opzionale, come la whitelist della sitemap news in `build-api.mjs`. Il
+ * collector filtrato per RSS qui sotto ricalca invece `parseSeoBlogs`: stesso
  * regex di inizio voce, stessi campi obbligatori e lo stesso confine, cioe'
  * l'inizio della voce successiva o la fine del sorgente per l'ultima voce.
- * Cosi' il pavimento conta esattamente cio' che il feed puo' leggere. L'insieme e' un Set di articleId perche' la',
- * un livello sopra, le voci finiscono in una Map chiavata per articleId: due
- * chunk che citano lo stesso id producono UN item, non due.
  *
  * Restano un parse in piu' — l'engine non esporta il suo — ma la LISTA dei
  * chunk no: quella si importa da `RSS_SECTIONS` (AGENTS.md #6), ed e' la parte
  * che e' gia' andata alla deriva una volta.
  */
-export function collectSeoEntryMetadata(src, into = new Map()) {
+function collectSeoEntryMetadataInternal(src, into, feedOnly) {
   const entryRe = /'blog-([^']+)':\s*\{/g;
   const positions = [];
   let match;
@@ -295,20 +294,26 @@ export function collectSeoEntryMetadata(src, into = new Map()) {
       headline: block.match(/"headline":\s*"((?:[^"\\]|\\.)*)"/)?.[1],
       datePublished: block.match(/"datePublished":\s*"([^"]+)"/)?.[1],
     };
-    // Come `parseSeoBlogs`, una voce senza headline o data non viene messa
-    // nella Map: non deve cancellare una voce valida precedente con lo stesso
-    // articleId nello stesso chunk.
-    if (!metadata.headline || !metadata.datePublished) continue;
+    // Solo il percorso RSS applica la validita' del producer prima del dedupe;
+    // il collector completo deve conservare anche i campi opzionali per la
+    // sitemap news.
+    if (feedOnly && (!metadata.headline || !metadata.datePublished)) continue;
     into.set(id, metadata);
   }
   return into;
 }
 
+export function collectSeoEntryMetadata(src, into = new Map()) {
+  return collectSeoEntryMetadataInternal(src, into, false);
+}
+
+/** Metadati delle sole voci che `parseSeoBlogs` puo' emettere come `<item>`. */
+export function collectSeoFeedEntryMetadata(src, into = new Map()) {
+  return collectSeoEntryMetadataInternal(src, into, true);
+}
+
 export function collectSeoEntryIds(src, into = new Set()) {
-  for (const [id, metadata] of collectSeoEntryMetadata(src)) {
-    // Non-vuoti, come li vuole il produttore: `"headline": ""` e' falsy la', e
-    // contarlo qui alzerebbe il pavimento sopra cio' che il feed puo' emettere.
-    if (!metadata.headline || !metadata.datePublished) continue;
+  for (const id of collectSeoFeedEntryMetadata(src).keys()) {
     into.add(id);
   }
   return into;
@@ -365,9 +370,9 @@ export function latestSeoPublication(root, seoFiles, seoDir = SEO_CHUNK_DIR) {
   const entries = new Map();
   for (const file of seoFiles) {
     const filePath = path.join(root, seoDir, file);
-    for (const [articleId, metadata] of collectSeoEntryMetadata(fs.readFileSync(filePath, 'utf-8'))) {
-      // `collectSeoEntryMetadata` filtra prima del Map.set: una voce non
-      // emettibile non sostituisce quella valida precedente.
+    for (const [articleId, metadata] of collectSeoFeedEntryMetadata(fs.readFileSync(filePath, 'utf-8'))) {
+      // Il collector RSS filtra prima del Map.set: una voce non emettibile non
+      // sostituisce quella valida precedente.
       entries.set(articleId, metadata);
     }
   }

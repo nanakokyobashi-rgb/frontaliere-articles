@@ -49,6 +49,7 @@ import {
   countSeoEntries,
   collectSeoEntryIds,
   collectSeoEntryMetadata,
+  collectSeoFeedEntryMetadata,
   latestSeoPublication,
   sectionFloor,
 } from '../../scripts/lib/corpus-floors.mjs';
@@ -538,13 +539,38 @@ test('countSeoEntries conta le voci come le conta parseSeoBlogs', () => {
   fs.rmSync(dir, { recursive: true, force: true });
 });
 
-test('collectSeoEntryMetadata filtra prima del dedupe una voce successiva invalida', () => {
-  const metadata = collectSeoEntryMetadata(
+test('il collector completo conserva keyword e SEO incompleto della sitemap, quello RSS filtra prima del dedupe', () => {
+  const source =
+    `'blog-date-only': { keywords: 'fisco', "headline": "", "datePublished": "2026-01-02T00:00:00Z" },\n` +
+    `'blog-headline-only': { keywords: 'pensione', "headline": "Headline", "datePublished": "" },\n` +
+    `'blog-keep': { keywords: 'Keep', "headline": "Keep", "datePublished": "2026-01-03T00:00:00Z" },\n` +
+    `'blog-keep': { keywords: 'Keep', "headline": "", "datePublished": "" },\n`;
+  const complete = collectSeoEntryMetadata(source);
+  const metadata = collectSeoFeedEntryMetadata(source);
+  assert.deepEqual(complete.get('date-only'), {
+    keywords: 'fisco',
+    headline: '',
+    datePublished: '2026-01-02T00:00:00Z',
+  });
+  assert.deepEqual(complete.get('headline-only'), {
+    keywords: 'pensione',
+    headline: 'Headline',
+    datePublished: undefined,
+  });
+  assert.equal(complete.get('keep').headline, '');
+  assert.equal(complete.get('keep').keywords, 'Keep');
+  assert.equal(metadata.has('date-only'), false);
+  assert.equal(metadata.has('headline-only'), false);
+  assert.equal(metadata.get('keep').headline, 'Keep');
+  assert.equal(metadata.get('keep').datePublished, '2026-01-03T00:00:00Z');
+});
+
+test('collectSeoEntryIds non perde una voce valida prima di un duplicato invalido', () => {
+  const ids = collectSeoEntryIds(
     `'blog-keep': { "headline": "Keep", "datePublished": "2026-01-02T00:00:00Z" },\n` +
       `'blog-keep': { "headline": "", "datePublished": "" },\n`,
   );
-  assert.equal(metadata.get('keep').headline, 'Keep');
-  assert.equal(metadata.get('keep').datePublished, '2026-01-02T00:00:00Z');
+  assert.deepEqual([...ids], ['keep']);
 });
 
 test('latestSeoPublication prende la data piu\' recente dai chunk che alimentano la sezione', () => {
