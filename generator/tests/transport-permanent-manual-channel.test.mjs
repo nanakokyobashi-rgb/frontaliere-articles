@@ -138,6 +138,18 @@ test('il workflow non lascia che il no permanente fermi la copia', () => {
   );
 });
 
+test('il body del trasporto descrive lo scope workflow osservato, non uno stato inventato', () => {
+  const yml = read(WORKFLOW);
+  assert.match(yml, /const workflowsBlocked = process\.env\.PAT_WORKFLOWS_SCOPE !== "true";/);
+  assert.match(yml, /blocked: PAT_WORKFLOWS_SCOPE non è true/);
+  assert.match(yml, /non sono bloccati dallo scope in questa passata/);
+  assert.doesNotMatch(
+    yml,
+    /i gemelli sotto `\.github\/workflows\/`: fuori dall.*token.*non ha lo scope/,
+    'il body non deve dichiarare sempre il blocco: la sonda può aver concesso lo scope',
+  );
+});
+
 /**
  * Il rosso non puo` vivere dentro lo step di apply.
  *

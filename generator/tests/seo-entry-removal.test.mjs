@@ -1,7 +1,43 @@
 /** Regression tests for the all-or-nothing SEO-entry removal used by retire. */
+import fs from 'node:fs';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { removeSeoEntriesFromSource } from '../../scripts/lib/seo-entry.mjs';
+import * as engineSeoEntry from '../../engine/shared/seo-entry.mjs';
+import * as corpusSeoEntry from '../../scripts/lib/seo-entry.mjs';
+
+const {
+  maskSeoSource,
+  findAllSeoEntryMatches,
+  findSeoEntryMatches,
+  removeSeoEntriesFromSource,
+} = corpusSeoEntry;
+
+test('il resolver corpus è lo stesso modulo trasportato con l engine', () => {
+  for (const name of [
+    'maskSeoSource',
+    'findSeoEntryMatches',
+    'findAllSeoEntryMatches',
+    'removeSeoEntriesFromSource',
+  ]) {
+    assert.strictEqual(
+      engineSeoEntry[name],
+      corpusSeoEntry[name],
+      `${name} deve provenire dalla sorgente engine mirrorata`,
+    );
+  }
+
+  const engineSource = fs.readFileSync(new URL('../../engine/shared/seo-entry.mjs', import.meta.url), 'utf8');
+  const shimSource = fs.readFileSync(new URL('../../scripts/lib/seo-entry.mjs', import.meta.url), 'utf8');
+  const rssSource = fs.readFileSync(new URL('../../engine/rssFeeds.mjs', import.meta.url), 'utf8');
+  const descriptorSource = fs.readFileSync(new URL('../../engine/shared/articleSectionDescriptors.ts', import.meta.url), 'utf8');
+
+  assert.doesNotMatch(engineSource, /(?:from|import\s*\()\s*['"][^'"]*scripts\//);
+  assert.match(shimSource, /from ['"]\.\.\/\.\.\/engine\/shared\/seo-entry\.mjs['"]/);
+  assert.match(rssSource, /from ['"]\.\/shared\/seo-entry\.mjs['"]/);
+  assert.match(descriptorSource, /from ['"]\.\/seo-entry\.mjs['"]/);
+  assert.doesNotMatch(rssSource, /scripts\/lib\/seo-entry/);
+  assert.doesNotMatch(descriptorSource, /scripts\/lib\/seo-entry/);
+});
 
 test('rimuove tutte le occorrenze SEO duplicate prima che il caller scriva', () => {
   const source = `export const SEO = {
@@ -42,4 +78,130 @@ test('un id assente non altera il file', () => {
     src: source,
     removed: 0,
   });
+});
+
+test('la scansione ignora entry-like nei commenti multilinea e nei template literal', () => {
+  const id = 'ritiro-2026';
+  const source = [
+    'export const esempio = `',
+    `  'blog-${id}': {`,
+    '    title: \'finta nel template\',',
+    '  },',
+    '`;',
+    'export const SEO = {',
+    '  /*',
+    `    'blog-${id}': {`,
+    '      title: \'finta nel commento\',',
+    '    },',
+    '  */',
+    `  'blog-${id}': {`,
+    '    title: \'entry reale\',',
+    '    nested: { braces: true },',
+    '  },',
+    '};',
+    '',
+  ].join('\n');
+
+  assert.equal(findSeoEntryMatches(source, id, 'fixture.ts').length, 1);
+  assert.deepEqual(findAllSeoEntryMatches(source, 'fixture.ts').map(({ id: found }) => found), [id]);
+
+  const result = removeSeoEntriesFromSource(source, id, 'fixture.ts');
+  assert.equal(result.removed, 1);
+  assert.match(result.src, /finta nel template/);
+  assert.match(result.src, /finta nel commento/);
+  assert.equal(findSeoEntryMatches(result.src, id, 'fixture.ts').length, 0);
+});
+
+test('la scansione fallisce esplicitamente su stringa, template e commento non chiusi', () => {
+  const quoteSource = [
+    'export const SEO = {',
+    "  'blog-ok': { title: 'ok' },",
+    "  const broken = 'unterminated",
+    '};',
+  ].join('\n');
+  assert.throws(
+    () => findAllSeoEntryMatches(quoteSource, 'quote.ts'),
+    /quote\.ts: stringa ' non chiusa/,
+  );
+
+  const templateSource = [
+    'export const SEO = {',
+    "  'blog-ok': { title: 'ok' },",
+    '  const broken = `unterminated',
+    "  'blog-fake': { title: 'fake' },",
+    '};',
+  ].join('\n');
+  assert.throws(
+    () => findAllSeoEntryMatches(templateSource, 'template.ts'),
+    /template\.ts: template literal non chiuso/,
+  );
+
+  const commentSource = [
+    'export const SEO = {',
+    "  'blog-ok': { title: 'ok' },",
+    '  /* unterminated',
+    "  'blog-fake': { title: 'fake' },",
+    '};',
+  ].join('\n');
+  assert.throws(
+    () => findAllSeoEntryMatches(commentSource, 'comment.ts'),
+    /comment\.ts: commento multilinea non chiuso/,
+  );
+});
+
+test('accetta tab e newline tra chiave, due punti e graffa', () => {
+  const source = [
+    'export const SEO = {',
+    "\t'blog-tab':\t{ title: 'tab' },",
+    "    'blog-newline' ",
+    "      :\n      { title: 'newline' },",
+    '};',
+  ].join('\n');
+
+  const found = findAllSeoEntryMatches(source, 'whitespace.ts');
+  assert.deepEqual(found.map(({ id }) => id), ['tab', 'newline']);
+  assert.ok(found.every(({ closeIdx }) => closeIdx > 0));
+});
+
+test('il repair ricalcola gli span dopo una sostituzione che cambia lunghezza', () => {
+  const source = [
+    'export const SEO = {',
+    "  'blog-primo': {",
+    "    description: 'placeholder',",
+    '    structuredData: { "description": "placeholder" },',
+    '  },',
+    "  'blog-secondo': {",
+    "    description: 'placeholder',",
+    '    structuredData: { "description": "placeholder" },',
+    '  },',
+    '};',
+  ].join('\n');
+  const expanded = source.replace(
+    "description: 'placeholder'",
+    `description: '${'x'.repeat(400)}'`,
+  );
+  const secondOffset = expanded.indexOf(
+    '"description": "placeholder"',
+    expanded.indexOf("'blog-secondo'"),
+  );
+  const before = findAllSeoEntryMatches(source, 'before.ts');
+  const after = findAllSeoEntryMatches(expanded, 'after.ts');
+  const idAt = (entries, offset) => entries.find(({ index, closeIdx }) => index <= offset && offset <= closeIdx)?.id || '';
+
+  assert.equal(idAt(before, secondOffset), '', 'uno span congelato non copre il secondo JSON spostato');
+  assert.equal(idAt(after, secondOffset), 'secondo');
+
+  const repairSource = fs.readFileSync(
+    new URL('../../generator/scripts/repair-prompt-placeholders.mjs', import.meta.url),
+    'utf8',
+  );
+  const seoLoop = repairSource.slice(
+    repairSource.indexOf('for (const f of fs.readdirSync(seoDir)'),
+    repairSource.indexOf('// ── Esito'),
+  );
+  assert.equal(
+    (seoLoop.match(/findAllSeoEntryMatches\(/g) || []).length,
+    2,
+    'gli span devono essere risolti prima di entrambe le sweep',
+  );
 });

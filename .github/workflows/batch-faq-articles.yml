@@ -169,17 +169,22 @@ jobs:
 
       - name: Run batch FAQ generation
         id: faq
+        env:
+          FAQ_LIMIT: ${{ inputs.limit || '200' }}
+          FAQ_CONCURRENCY: ${{ inputs.concurrency || '1' }}
+          FAQ_SKIP_TRANSLATE: ${{ inputs.skip_translate }}
+          FAQ_DRY_RUN: ${{ steps.mode.outputs.dry }}
         run: |
           set -euo pipefail
-          ARGS="--limit ${{ inputs.limit || '200' }} --concurrency ${{ inputs.concurrency || '1' }}"
-          if [ "${{ inputs.skip_translate }}" = "true" ]; then
-            ARGS="$ARGS --skip-translate"
+          ARGS=(--limit "$FAQ_LIMIT" --concurrency "$FAQ_CONCURRENCY")
+          if [ "$FAQ_SKIP_TRANSLATE" = "true" ]; then
+            ARGS+=(--skip-translate)
           fi
-          if [ "${{ steps.mode.outputs.dry }}" = "true" ]; then
-            ARGS="$ARGS --dry-run"
+          if [ "$FAQ_DRY_RUN" = "true" ]; then
+            ARGS+=(--dry-run)
           fi
-          echo "running: node generator/scripts/batch-add-faq-to-articles.mjs $ARGS"
-          node generator/scripts/batch-add-faq-to-articles.mjs $ARGS
+          echo "running: node generator/scripts/batch-add-faq-to-articles.mjs ${ARGS[*]}"
+          node generator/scripts/batch-add-faq-to-articles.mjs "${ARGS[@]}"
 
       - name: Fix FAQ locales (translate missing/wrong-locale FAQs)
         if: steps.mode.outputs.dry != 'true'

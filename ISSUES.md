@@ -176,10 +176,24 @@ automatico **senza che nessun agent l'avesse mai letta**.
 
 ## Il lock `agent:in-progress`
 
-È **mutua esclusione, non stato**. Viene apposto dal claim gate e rilasciato su
-ogni percorso terminale. Se resta appeso su una issue aperta, quella issue è
-esclusa dal fixer **per sempre** — non con un errore: semplicemente non viene
-più presa. Se ne trovi uno orfano su una issue senza run attive, va rimosso.
+È **mutua esclusione, non stato**. Il claim gate appone sempre
+`agent:in-progress` insieme a uno dei due proprietari:
+
+- `agent:remote`: claim del fixer CI, rilasciabile solo dal fixer remoto;
+- `agent:local`: claim di una sessione locale, protetto dal detector stale
+  automatico perché una sessione locale non espone un heartbeat affidabile.
+
+Il gate è fail-closed sulle letture GitHub: se non riesce a leggere le label non
+acquisisce il lavoro e non rilascia il claim di qualcun altro. Ogni run remota
+rilascia il proprio claim solo se l'acquisizione è stata confermata. Una
+sessione locale deve usare il claim gate con `CLAIM_OWNER=local`; non deve
+aggiungere o rimuovere `agent:in-progress` a mano. Un claim locale orfano va
+verificato e rilasciato esplicitamente da una sessione locale, non dal cron.
+
+Le PR create dal loop ricevono anche `agent:autofix`. È la prova di provenienza
+che consente ai fixer redflag/redcheck, al rescuer e al recycle di operare sulle
+PR owner-authored senza trattare ogni PR dell'owner come automatica. `fix/*`
+resta compatibile con le PR storiche.
 
 ## La quota è condivisa col sito
 
@@ -187,6 +201,12 @@ Ogni run del fixer compete con il ciclo di `frontaliereticino.ch` sulla stessa
 quota Claude. Questo repo ha **precedenza inferiore per costruzione**: il gate
 di quota legge anche il beacon del sito e cede, mentre il sito non legge mai il
 nostro (`QUOTA_BEACON_PEER_REPO`).
+
+Il beacon Claude resta osservabile, ma `issue-fix` e il drainer usano Codex come
+provider primario e Claude come fallback. Per questo il drainer non congela la
+coda quando è attivo `FOLLOWUP_CODEX_FALLBACK_MODE=1`: promuove il prossimo
+lavoro e lascia al fixer la decisione di usare il fallback. Il blocco
+deterministico resta disponibile quando il fallback è disabilitato.
 
 Quando il gate blocca, la issue viene ri-accodata **senza consumare un
 tentativo**: una run che non ha nemmeno letto la issue non è un fallimento del

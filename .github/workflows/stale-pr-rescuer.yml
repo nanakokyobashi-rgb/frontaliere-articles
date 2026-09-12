@@ -143,7 +143,20 @@ jobs:
             HEAD=$(echo "$pr" | jq -r '.headRefOid')
             UPD=$(echo "$pr" | jq -r '.updatedAt')
             HAS_LABEL=$(echo "$pr" | jq -r '[.labels[].name] | index("stale-review") // empty')
+            HAS_AUTOFIX=$(echo "$pr" | jq -r 'if any(.labels[]?.name; . == "agent:autofix") then "true" else "false" end')
             IS_DRAFT=$(echo "$pr" | jq -r '.isDraft')
+
+            # Il rescuer e il recycle operano solo sulle PR del loop autonomo.
+            # `fix/*` copre i branch storici; `agent:autofix` copre le PR
+            # owner-authored create dal fixer senza fidarsi dell'autore.
+            IS_AUTOFIX=false
+            case "$BRANCH" in
+              fix/*) IS_AUTOFIX=true ;;
+              *) [ "$HAS_AUTOFIX" = "true" ] && IS_AUTOFIX=true ;;
+            esac
+            if [ "$IS_AUTOFIX" != "true" ]; then
+              echo "PR #$N senza agent:autofix e branch non fix/* — skip (solo PR autonome)"; continue
+            fi
 
             # NOTA: qui NON si salta più la PR che ha già `stale-review`.
             # L'idempotenza si è spostata a valle, sull'AZIONE. Vedi il blocco
@@ -231,7 +244,7 @@ jobs:
             elif [ "$TESTS_PENDING" = "0" ] && [ "$TESTS_CONCL" != "success" ]; then
               CLASS="C"
               REASON="check \`$CI_CHECK_NAME\` = \`$TESTS_CONCL\` sull'head da >2h, nessun run in volo e nessun segnale a valle (il reviewer gira solo su test verdi) — stallo silenzioso"
-              RESCUE="etichettata \`stale-review\` per riaprire il grafo: \`pr-autorebase\` ora la considera near-merge, la rebasa su main e ri-dispatcha i test. Se il rosso è REALE va fixato a mano sul branch \`$BRANCH\` — la label non lo nasconde, lo rende visibile."
+              RESCUE="etichettata \`stale-review\` e rieseguito/ri-dispatchato \`tests.yml\` per riaprire il grafo di review. Se il rosso è REALE va fixato a mano sul branch \`$BRANCH\` — la label non lo nasconde, lo rende visibile."
             else
               echo "PR #$N nessuno stallo noto (check=$TESTS_CONCL pending=$TESTS_PENDING) — skip"
               # L'altra metà della #314. `stale-review` non veniva TOLTA da

@@ -77,6 +77,9 @@ export function normalizeFaqLimit(value) {
   if (value === undefined) return Infinity;
   const raw = String(value).trim();
   if (!raw) throw new RangeError('--limit richiede un intero >= 0');
+  if (!/^\d+$/.test(raw)) {
+    throw new RangeError(`--limit richiede una notazione decimale intera >= 0; ricevuto ${String(value)}`);
+  }
   const parsed = parsePositiveNum(raw, Number.NaN, {
     label: '--limit',
     integer: true,
@@ -88,20 +91,28 @@ export function normalizeFaqLimit(value) {
 }
 
 export function parseFaqLimitArgs(argv) {
+  let value = Infinity;
+  let seen = false;
   for (let idx = 0; idx < argv.length; idx++) {
     const arg = argv[idx];
     if (arg.startsWith('--limit=')) {
-      return normalizeFaqLimit(arg.slice('--limit='.length));
+      if (seen) throw new RangeError('--limit può essere specificato una sola volta');
+      seen = true;
+      value = normalizeFaqLimit(arg.slice('--limit='.length));
+      continue;
     }
     if (arg === '--limit') {
-      const value = argv[idx + 1];
-      if (value === undefined || value.startsWith('--')) {
+      if (seen) throw new RangeError('--limit può essere specificato una sola volta');
+      seen = true;
+      const next = argv[idx + 1];
+      if (next === undefined || next.startsWith('--')) {
         throw new RangeError('--limit richiede un valore intero >= 0');
       }
-      return normalizeFaqLimit(value);
+      value = normalizeFaqLimit(next);
+      idx++;
     }
   }
-  return Infinity;
+  return value;
 }
 
 async function parseFaqLimitOrExit(argv) {

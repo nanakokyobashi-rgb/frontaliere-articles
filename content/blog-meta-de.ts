@@ -9689,8 +9689,8 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.abort-topical-relevance-pre-saint-didier.title': 'Wohnen in Pré-Saint-Didier und Arbeiten im Wallis',
     'blog.article.abort-topical-relevance-pre-saint-didier.excerpt': 'Analyse des Wohnsitzes in Pré-Saint-Didier für Arbeitnehmer in der Schweiz und der geografischen Einschränkungen im Zusammenhang mit dem Grenzgängerstatus.',
     'blog.article.abort-topical-relevance-pre-saint-didier.imageAlt': 'Alpenlandschaft an der Schweizer Grenze',
-    'blog.article.vivere-courmayeur-e-lavorare-vallese-da-frontaliere.title': 'Grenzgänger Tessin: Arbeiten im Wallis bei Courmayeur',
-    'blog.article.vivere-courmayeur-e-lavorare-vallese-da-frontaliere.excerpt': 'Konkrete Informationen für Grenzgänger zum Pendeln Courmayeur-Wallis und zur empfohlenen Gegend.',
+    'blog.article.vivere-courmayeur-e-lavorare-vallese-da-frontaliere.title': 'Courmayeur: Im Wallis arbeiten und im Aostatal leben',
+    'blog.article.vivere-courmayeur-e-lavorare-vallese-da-frontaliere.excerpt': 'Wie Sie das Pendeln zwischen Courmayeur und dem Wallis prüfen: Strecke, Wohnsitz und wichtige Abklärungen vor einer Zusage.',
     'blog.article.vivere-courmayeur-e-lavorare-vallese-da-frontaliere.imageAlt': 'Ein Grenzgänger erwägt die Region Courmayeur und Vallese für Arbeit und Wohnen.',
     'blog.article.vivere-valpelline-lavorare-vallese.title': 'Leben in Valpelline und Arbeiten im Wallis: Regeln und Besteuerung',
     'blog.article.vivere-valpelline-lavorare-vallese.excerpt': 'Operativer Leitfaden zum neuen Steuerabkommen, Einkommensmanagement und Vorsorgepflichten für Grenzgänger in der Schweiz.',
@@ -11680,6 +11680,14 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.imprese-culturali-svizzera-2024.title': 'Kultur in der Schweiz, Unternehmensrekord, aber sinkende Beschäftigung',
     'blog.article.imprese-culturali-svizzera-2024.excerpt': 'Im Jahr 2024 erreichten die Kulturunternehmen in der Schweiz mit 69\'441 einen Rekordstand, aber die Zahl der Arbeitsplätze und die Unternehmensgrösse gingen zurück.',
     'blog.article.imprese-culturali-svizzera-2024.imageAlt': 'Kulturunternehmen in der Schweiz im Jahr 2024',
+    'blog.article.benzina-riserve-svizzera-frontalieri.title': 'Benzin in der Schweiz: Reserven offen, Preiseffekte',
+    'blog.article.benzina-riserve-svizzera-frontalieri.excerpt': 'Offener Pflichtbestand für Benzin und Diesel. Vom 8. bis 20. September 2026 Entnahme bis 30.000 m³. Raffinerie Cressier und Reno auf niedrigem Niveau.',
+    'blog.article.benzina-riserve-svizzera-frontalieri.imageAlt': 'Auto an einer Tankstelle in Mendrisio mit den Alpen im Hintergrund',
+    'blog.article.bollettino-frontaliere-2026-09-12.title': 'Grenzgänger-Tagesbulletin – 12. September 2026: 1\'802 neue Stellenangebote gestern',
+    'blog.article.bollettino-frontaliere-2026-09-12.excerpt': 'Die Zahlen von heute, 12. September 2026, für Grenzgänger: die heute Morgen gemessenen Wartezeiten an den Übergängen, die Gemeinden mit dem günstigsten Benzin, der Franken-Euro-Kurs vom Schlusskurs und die neu ausgeschriebenen Stellen in der Schweiz. Täglich aus unserem Monitoring.',
+    'blog.article.bollettino-frontaliere-2026-09-12.imageAlt': 'Die Zahlen des Tages für Grenzgänger – 12. September 2026: Wartezeiten, Benzinpreise, CHF-EUR-Kurs und Stellenangebote',
+    'blog.article.bollettino-frontaliere-2026-09-12.seoDescription': 'Grenzgänger-Bulletin vom 12. September 2026: Wartezeiten an den Grenzübergängen, günstigstes Benzin, Franken-Euro-Kurs und neue Stellenangebote in der Schweiz.',
+    'blog.article.bollettino-frontaliere-2026-09-12.ogDescription': 'Die Zahlen vom 12. September 2026 für Grenzgänger: wie lange man heute Morgen an jedem Übergang wartet, in welchen Gemeinden das Benzin am günstigsten ist, was der Franken heute wert ist und wie viele Stellen neu dazugekommen sind.',
 };
 
 export default blogMetaDe;

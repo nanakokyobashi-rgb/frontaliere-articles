@@ -7,7 +7,8 @@
  *
  * Il corpus è nato con le sole label di default di GitHub. Le label di
  * ROUTING del ciclo — `agent:fix`, `agent:fix-queued`, `agent:triaged`,
- * `agent:in-progress`, `fu-prio:*` — non esistevano.
+ * `agent:in-progress`, i flag owner `agent:local`/`agent:remote`, la
+ * provenienza PR `agent:autofix` e `fu-prio:*` — non esistevano.
  *
  * `gh issue edit --add-label <nome>` NON crea la label: fallisce. E nei
  * workflow quel fallimento è gestito con un warning non bloccante (di
@@ -46,6 +47,9 @@ export const LABELS = [
   ['agent:fix', '0e8a16', 'In carico al fixer. Al verdetto il drainer la sostituisce con fu-parked'],
   ['agent:fix-queued', 'fbca04', 'In coda: il drainer la promuove a slot libero'],
   ['agent:in-progress', 'd93f0b', 'MUTEX del fixer, non stato: se resta appesa senza run attive, va rimossa o la issue non verra presa'],
+  ['agent:local', '1d76db', 'Claim di una sessione locale: il detector stale non lo rimuove automaticamente'],
+  ['agent:remote', '5319e7', 'Claim del fixer remoto CI: il detector stale lo rimuove se resta senza run o PR'],
+  ['agent:autofix', '1d76db', 'PR prodotta dal loop autonomo: abilita i fixer bounded anche su branch non fix/*'],
   ['fu-prio:high', 'b60205', 'Drenata prima dalla coda'],
   ['fu-prio:low', 'c2e0c6', 'Drenata dopo'],
   ['fu-parked', '5319e7', 'Fuori dalla coda attiva dopo troppi tentativi'],

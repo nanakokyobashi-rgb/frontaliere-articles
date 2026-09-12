@@ -50,6 +50,7 @@ import {
   collectSeoEntryIds,
   collectSeoEntryMetadata,
   collectSeoFeedEntryMetadata,
+  unescapeQuoted,
   latestSeoPublication,
   sectionFloor,
 } from '../../scripts/lib/corpus-floors.mjs';
@@ -597,6 +598,13 @@ test('il collector completo conserva keyword e SEO incompleto della sitemap, que
   assert.equal(metadata.has('headline-only'), false);
   assert.equal(metadata.get('keep').headline, 'Keep');
   assert.equal(metadata.get('keep').datePublished, '2026-01-03T00:00:00Z');
+});
+
+test('il collector SEO decodifica apostrofi e backslash nelle keyword', () => {
+  const source = String.raw`'blog-escaped': { keywords: 'l\'estate\\2026', "headline": "Escaped", "datePublished": "2026-01-04T00:00:00Z" },`;
+  const metadata = collectSeoEntryMetadata(source).get('escaped');
+  assert.equal(metadata.keywords, "l'estate\\2026");
+  assert.equal(unescapeQuoted(String.raw`l\'estate\\2026`), "l'estate\\2026");
 });
 
 test('collectSeoEntryIds non perde una voce valida prima di un duplicato invalido', () => {

@@ -55,6 +55,8 @@ import {
   MAX_FREE_MT_LLM_FALLBACKS_PER_RUN,
   MAX_FREE_MT_LLM_FALLBACKS_PER_LOCALE,
   FREE_MT_LLM_FALLBACK_LOCALES,
+  freeMtCandidateFieldCount,
+  maxFreeMtLlmFallbacksPerLocale,
 } from '../scripts/lib/free-mt-recovery.mjs';
 import { isReservedPublishedSlug } from '../../scripts/lib/published-slug-guard.mjs';
 import { buildSitemap } from '../../scripts/lib/build-sitemap.mjs';
@@ -327,14 +329,153 @@ describe('free-MT recovery — il degrado e’ misurato e limitato per run', () 
     assert.deepEqual(report.llmFallbacksByLocale, spesi);
   });
 
-  test('errori di trasporto e sentinel markdown corrotti sono telemetria, non campi da addebitare', () => {
+  test('#1320 FU-033 — il cap per locale segue il numero reale di coppie FAQ', () => {
+    assert.equal(freeMtCandidateFieldCount(0), 5);
+    assert.equal(freeMtCandidateFieldCount(1), 7);
+    assert.equal(freeMtCandidateFieldCount(7), 19);
+    assert.equal(maxFreeMtLlmFallbacksPerLocale(1), MAX_FREE_MT_LLM_FALLBACKS_PER_LOCALE);
+    assert.ok(maxFreeMtLlmFallbacksPerLocale(7) > MAX_FREE_MT_LLM_FALLBACKS_PER_LOCALE);
+
+    const report = createFreeMtRecoveryReport({ faqCount: 7 });
+    assert.equal(report.faqCount, 7);
+    for (let i = 0; i < MAX_FREE_MT_LLM_FALLBACKS_PER_LOCALE + 1; i += 1) {
+      assert.equal(claimFreeMtLlmFallback(report, 'en'), true, `fallback FAQ en ${i + 1}`);
+    }
+  });
+
+  test('#1320 FU-037 — il cap segue i bodyN realmente tradotti insieme alle FAQ', () => {
+    const report = createFreeMtRecoveryReport({ faqCount: 1, bodyFieldCount: 4 });
+    const fields = [
+      'title', 'excerpt', 'body1', 'body2', 'body3', 'body4',
+      'faq.q[0]', 'faq.a[0]',
+    ];
+    for (const field of fields) {
+      recordFreeMtUnusableOutput(report, { reason: 'unusable-text', targetLang: 'en', field });
+    }
+
+    assert.equal(report.bodyFieldCount, 4);
+    assert.equal(freeMtCandidateFieldCount(report.faqCount, report.bodyFieldCount), 8);
+    assert.equal(maxFreeMtLlmFallbacksPerLocale(report.faqCount, report.bodyFieldCount), 4);
+    for (let i = 0; i < 4; i += 1) {
+      assert.equal(claimFreeMtLlmFallback(report, 'en'), true, `fallback body4 en ${i + 1}`);
+    }
+    assert.equal(report.llmFallbacks, 4, 'body4 deve ricevere il quarto retry prima del fallback IT');
+  });
+
+  test('#1320 FU-035 — il cap globale ripartisce i claim fra i locali', () => {
+    const report = createFreeMtRecoveryReport({ faqCount: 2 });
+    const spesi = Object.fromEntries(FREE_MT_LLM_FALLBACK_LOCALES.map((l) => [l, 0]));
+    const faqFields = [
+      'title', 'excerpt', 'body1', 'body2', 'body3',
+      'faq.q[0]', 'faq.a[0]', 'faq.q[1]', 'faq.a[1]',
+    ];
+    for (const locale of FREE_MT_LLM_FALLBACK_LOCALES) {
+      for (const field of faqFields) {
+        recordFreeMtUnusableOutput(report, { reason: 'unusable-text', targetLang: locale, field });
+      }
+    }
+    for (const locale of FREE_MT_LLM_FALLBACK_LOCALES) {
+      for (let i = 0; i < 9; i += 1) {
+        if (claimFreeMtLlmFallback(report, locale)) spesi[locale] += 1;
+      }
+    }
+    assert.ok(spesi.fr >= 1, `fr deve ricevere un claim riservato: ${JSON.stringify(spesi)}`);
+    assert.deepEqual(spesi, { en: 3, de: 2, fr: 2 });
+    assert.equal(report.llmFallbacks, MAX_FREE_MT_LLM_FALLBACKS_PER_RUN);
+    assert.ok(spesi.en <= maxFreeMtLlmFallbacksPerLocale(2));
+    assert.ok(spesi.de <= maxFreeMtLlmFallbacksPerLocale(2));
+    assert.ok(spesi.fr <= maxFreeMtLlmFallbacksPerLocale(2));
+  });
+
+  test('#1320 FU-038 — il cap dinamico non affama i locali successivi', () => {
+    const report = createFreeMtRecoveryReport({ faqCount: 3, bodyFieldCount: 3 });
+    const fields = [
+      'title', 'excerpt', 'body1', 'body2', 'body3',
+      'faq.q[0]', 'faq.a[0]', 'faq.q[1]', 'faq.a[1]', 'faq.q[2]', 'faq.a[2]',
+    ];
+    const spesi = Object.fromEntries(FREE_MT_LLM_FALLBACK_LOCALES.map((locale) => [locale, 0]));
+    for (const locale of FREE_MT_LLM_FALLBACK_LOCALES) {
+      for (const field of fields) {
+        recordFreeMtUnusableOutput(report, { reason: 'unusable-text', targetLang: locale, field });
+      }
+    }
+
+    for (const locale of FREE_MT_LLM_FALLBACK_LOCALES) {
+      for (let i = 0; i < fields.length; i += 1) {
+        if (claimFreeMtLlmFallback(report, locale)) spesi[locale] += 1;
+      }
+    }
+
+    assert.equal(maxFreeMtLlmFallbacksPerLocale(3, 3), 5);
+    assert.deepEqual(spesi, { en: 3, de: 2, fr: 2 });
+    assert.equal(report.llmFallbacks, MAX_FREE_MT_LLM_FALLBACKS_PER_RUN);
+  });
+
+  test('#1320 FU-039 — il budget residuo passa al locale successivo senza sbilanciarlo', () => {
+    const report = createFreeMtRecoveryReport({ faqCount: 3, bodyFieldCount: 3 });
+    const fieldsByLocale = {
+      en: ['title', 'excerpt'],
+      de: ['title', 'excerpt', 'body1', 'body2', 'body3', 'faq.q[0]', 'faq.a[0]'],
+      fr: ['title', 'excerpt', 'body1', 'body2', 'body3', 'faq.q[0]', 'faq.a[0]'],
+    };
+    const spesi = Object.fromEntries(FREE_MT_LLM_FALLBACK_LOCALES.map((locale) => [locale, 0]));
+    for (const [locale, fields] of Object.entries(fieldsByLocale)) {
+      for (const field of fields) {
+        recordFreeMtUnusableOutput(report, { reason: 'unusable-text', targetLang: locale, field });
+      }
+    }
+
+    // Il loop reale consuma en prima: i suoi due soli rifiuti devono liberare
+    // una claim per de/fr, non lasciare il residuo a una ripartizione 4/1.
+    for (const locale of FREE_MT_LLM_FALLBACK_LOCALES) {
+      for (const field of fieldsByLocale[locale]) {
+        if (claimFreeMtLlmFallback(report, locale)) spesi[locale] += 1;
+      }
+    }
+
+    assert.equal(maxFreeMtLlmFallbacksPerLocale(3, 3), 5);
+    assert.deepEqual(spesi, { en: 2, de: 3, fr: 2 });
+    assert.equal(report.llmFallbacks, MAX_FREE_MT_LLM_FALLBACKS_PER_RUN);
+  });
+
+  test('#1320 FU-036 — il cap considera solo i locali con campi rifiutati', () => {
+    const report = createFreeMtRecoveryReport({ faqCount: 2 });
+    const faqFields = [
+      'title', 'excerpt', 'body1', 'body2', 'body3',
+      'faq.q[0]', 'faq.a[0]', 'faq.q[1]', 'faq.a[1]',
+    ];
+    for (const locale of ['en', 'de']) {
+      for (const field of faqFields) {
+        recordFreeMtUnusableOutput(report, { reason: 'unusable-text', targetLang: locale, field });
+      }
+    }
+
+    const spesi = { en: 0, de: 0, fr: 0 };
+    for (const locale of ['en', 'de', 'fr']) {
+      for (let i = 0; i < faqFields.length; i += 1) {
+        if (claimFreeMtLlmFallback(report, locale)) spesi[locale] += 1;
+      }
+    }
+
+    assert.deepEqual(spesi, { en: 4, de: 3, fr: 0 });
+    assert.equal(report.llmFallbacks, MAX_FREE_MT_LLM_FALLBACKS_PER_RUN);
+  });
+
+  test('#1320 FU-034 — ogni uscita free-MT rifiutata addebita il campo', () => {
     const report = createFreeMtRecoveryReport();
     recordFreeMtUnusableOutput(report, { targetLang: 'de', fieldName: 'title', reason: 'error' });
     recordFreeMtUnusableOutput(report, { targetLang: 'de', fieldName: 'excerpt', reason: 'mangled-nav-link' });
+    recordFreeMtUnusableOutput(report, { targetLang: 'de', fieldName: 'body1', reason: 'mangled-municipality-name' });
+    recordFreeMtUnusableOutput(report, { targetLang: 'de', fieldName: 'body2', reason: 'lone-surrogate' });
+    recordFreeMtUnusableOutput(report, { targetLang: 'de', fieldName: 'body3', reason: 'passthrough' });
 
-    assert.equal(report.unusableOutputs, 2);
-    assert.deepEqual(report.unusableByLocale, { de: 2 });
-    assert.deepEqual(report.unusableFields, {}, 'solo output testualmente inutilizzabile o non-stringa paga il cap');
+    assert.equal(report.unusableOutputs, 5);
+    assert.deepEqual(report.unusableByLocale, { de: 5 });
+    assert.deepEqual(
+      report.unusableFields,
+      { 'de:title': 1, 'de:excerpt': 1, 'de:body1': 1, 'de:body2': 1, 'de:body3': 1 },
+      'ogni rifiuto free-MT deve pagare il cap del campo',
+    );
   });
 });
 

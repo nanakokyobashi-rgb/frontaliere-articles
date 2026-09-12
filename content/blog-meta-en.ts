@@ -9690,8 +9690,8 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.abort-topical-relevance-pre-saint-didier.title': 'Living in Pré-Saint-Didier and working in Valais',
     'blog.article.abort-topical-relevance-pre-saint-didier.excerpt': 'Analysis of residence in Pré-Saint-Didier for workers in Switzerland and the geographical constraints related to border status.',
     'blog.article.abort-topical-relevance-pre-saint-didier.imageAlt': 'Alpine landscape at the Swiss border',
-    'blog.article.vivere-courmayeur-e-lavorare-vallese-da-frontaliere.title': 'Ticino border worker: working in Valais from Courmayeur',
-    'blog.article.vivere-courmayeur-e-lavorare-vallese-da-frontaliere.excerpt': 'Concrete information for border crossers on Courmayeur-Vallese commuting and the recommended area.',
+    'blog.article.vivere-courmayeur-e-lavorare-vallese-da-frontaliere.title': 'Courmayeur: working in Valais while living in Aosta Valley',
+    'blog.article.vivere-courmayeur-e-lavorare-vallese-da-frontaliere.excerpt': 'How to assess cross-border commuting between Courmayeur and Valais, including routes, residence and checks before accepting a job.',
     'blog.article.vivere-courmayeur-e-lavorare-vallese-da-frontaliere.imageAlt': 'A cross-border worker considers the Courmayeur and Vallese area for work and residence.',
     'blog.article.vivere-valpelline-lavorare-vallese.title': 'Living in Valpelline and working in Valais: rules and taxation',
     'blog.article.vivere-valpelline-lavorare-vallese.excerpt': 'Operational guidance on the new tax agreement, income management and social security obligations for frontier workers in Switzerland.',
@@ -11681,6 +11681,14 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.imprese-culturali-svizzera-2024.title': 'Culture in Switzerland, record number of companies but jobs fall',
     'blog.article.imprese-culturali-svizzera-2024.excerpt': 'In 2024, cultural enterprises in Switzerland reach 69,441, setting a record, but jobs and company size fall.',
     'blog.article.imprese-culturali-svizzera-2024.imageAlt': 'Cultural enterprises in Switzerland in 2024',
+    'blog.article.benzina-riserve-svizzera-frontalieri.title': 'Gasoline in Switzerland: reserves open, effects on prices',
+    'blog.article.benzina-riserve-svizzera-frontalieri.excerpt': 'Mandatory open stocks for petrol and diesel. From 8 to 20 September 2026 withdrawal up to 30,000 m³. Low-level Cressier and Reno refinery shutdown.',
+    'blog.article.benzina-riserve-svizzera-frontalieri.imageAlt': 'Car at a petrol station in Mendrisio with the Alps in the background',
+    'blog.article.bollettino-frontaliere-2026-09-12.title': 'Cross-border daily brief – September 12, 2026: 1\'802 new job listings yesterday',
+    'blog.article.bollettino-frontaliere-2026-09-12.excerpt': 'Today\'s numbers, September 12, 2026, for cross-border commuters: the waits measured at every crossing this morning, the municipalities where fuel is cheapest, the franc-euro rate at yesterday\'s close and the jobs newly posted in Switzerland. Measured daily by our own monitoring.',
+    'blog.article.bollettino-frontaliere-2026-09-12.imageAlt': 'The day\'s numbers for cross-border commuters – September 12, 2026: border waits, fuel prices, CHF-EUR rate and job listings',
+    'blog.article.bollettino-frontaliere-2026-09-12.seoDescription': 'Cross-border brief, September 12, 2026: queues at the crossings this morning, where fuel is cheapest, the franc-euro rate and new job postings in Switzerland.',
+    'blog.article.bollettino-frontaliere-2026-09-12.ogDescription': 'The numbers for September 12, 2026, for cross-border commuters: how long the queue is at each crossing this morning, which towns have the cheapest fuel, what the franc is worth today and how many Swiss jobs went up.',
 };
 
 export default blogMetaEn;

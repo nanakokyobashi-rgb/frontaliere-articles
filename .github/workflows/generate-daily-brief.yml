@@ -517,7 +517,7 @@ jobs:
       # si ripete ogni mattina — il verdetto va speso su un attraversamento
       # durevole, o non va speso.
       - name: Degradation alarm — un blocco degradato da tre edizioni di fila
-        if: steps.mode.outputs.dry != 'true' && steps.refresh.outputs.degradation_crossed == 'true' && steps.commit.outputs.pushed != 'ledger-lost'
+        if: ${{ !cancelled() && steps.mode.outputs.dry != 'true' && steps.refresh.outputs.degradation_crossed == 'true' && steps.commit.outputs.pushed != 'ledger-lost' }}
         run: |
           set -euo pipefail
           BLOCKS='${{ steps.refresh.outputs.degradation_blocks }}'

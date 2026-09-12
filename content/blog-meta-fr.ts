@@ -9692,8 +9692,8 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.abort-topical-relevance-pre-saint-didier.title': 'Vivre à Pré-Saint-Didier et travailler en Valais',
     'blog.article.abort-topical-relevance-pre-saint-didier.excerpt': 'Analyse de la résidence à Pré-Saint-Didier pour les travailleurs en Suisse et des contraintes géographiques liées au statut de frontalier.',
     'blog.article.abort-topical-relevance-pre-saint-didier.imageAlt': 'Paysage alpin à la frontière suisse',
-    'blog.article.vivere-courmayeur-e-lavorare-vallese-da-frontaliere.title': 'Frontalier Tessin : travailler en Valais depuis Courmayeur',
-    'blog.article.vivere-courmayeur-e-lavorare-vallese-da-frontaliere.excerpt': 'Informations concrètes pour les frontaliers sur le trajet Courmayeur-Valais et sur la zone conseillée.',
+    'blog.article.vivere-courmayeur-e-lavorare-vallese-da-frontaliere.title': 'Courmayeur : travailler en Valais en vivant dans la Vallée d’Aoste',
+    'blog.article.vivere-courmayeur-e-lavorare-vallese-da-frontaliere.excerpt': 'Comment évaluer le trajet transfrontalier entre Courmayeur et le Valais, le logement et les vérifications avant d’accepter un emploi.',
     'blog.article.vivere-courmayeur-e-lavorare-vallese-da-frontaliere.imageAlt': 'Un travailleur frontalier envisage la région de Courmayeur et Vallese pour son travail et son logement.',
     'blog.article.vivere-valpelline-lavorare-vallese.title': 'Vivre à Valpelline et travailler en Valais : règles et fiscalité',
     'blog.article.vivere-valpelline-lavorare-vallese.excerpt': 'Guide opérationnel sur le nouvel accord fiscal, la gestion des revenus et les obligations de sécurité sociale pour les travailleurs frontaliers en Suisse.',
@@ -11683,6 +11683,14 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.imprese-culturali-svizzera-2024.title': 'Culture en Suisse, records d\'entreprises mais baisse des emplois',
     'blog.article.imprese-culturali-svizzera-2024.excerpt': 'En 2024, les entreprises culturelles en Suisse atteignent 69\'441 en établissant un record, mais les emplois et la taille de l\'entreprise diminuent.',
     'blog.article.imprese-culturali-svizzera-2024.imageAlt': 'Entreprises culturelles en Suisse en 2024',
+    'blog.article.benzina-riserve-svizzera-frontalieri.title': 'Essence en Suisse : ouverture des réserves, effets sur les prix',
+    'blog.article.benzina-riserve-svizzera-frontalieri.excerpt': 'Stocks obligatoires ouverts pour l\'essence et le diesel. Du 8 au 20 septembre 2026 prélèvement jusqu\'à 30 000 m³. Fermo raffinerie Cressier et Rhin de bas niveau.',
+    'blog.article.benzina-riserve-svizzera-frontalieri.imageAlt': 'Voiture à une station-service à Mendrisio avec les Alpes en arrière-plan',
+    'blog.article.bollettino-frontaliere-2026-09-12.title': 'Bulletin du frontalier – 12 septembre 2026 : 1 802 nouvelles offres d\'emploi hier',
+    'blog.article.bollettino-frontaliere-2026-09-12.excerpt': 'Les chiffres du jour, 12 septembre 2026, pour les frontaliers : les attentes relevées ce matin à chaque douane, les communes où l\'essence coûte le moins cher, le taux franc-euro à la clôture et les offres d\'emploi parues en Suisse. Des données de notre suivi, relevées chaque jour.',
+    'blog.article.bollettino-frontaliere-2026-09-12.imageAlt': 'Les chiffres du jour pour les frontaliers – 12 septembre 2026 : attentes aux douanes, prix de l\'essence, taux CHF-EUR et offres d\'emploi',
+    'blog.article.bollettino-frontaliere-2026-09-12.seoDescription': 'Bulletin du frontalier du 12 septembre 2026 : les files aux douanes ce matin, l\'essence la moins chère, taux franc-euro et nouvelles offres d\'emploi en Suisse.',
+    'blog.article.bollettino-frontaliere-2026-09-12.ogDescription': 'Les chiffres du 12 septembre 2026 pour les frontaliers : combien de temps on attend ce matin à chaque douane, où l\'essence coûte le moins cher, ce que vaut le franc aujourd\'hui et combien d\'offres d\'emploi sont parues en Suisse.',
 };
 
 export default blogMetaFr;

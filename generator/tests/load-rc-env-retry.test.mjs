@@ -18,12 +18,14 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import {
   ALLOW_EMPTY_RC_KEYS,
+  EXPECTED_ABSENT_RC_KEYS,
   extractGoogleErrorReason,
   formatMissingRcKeys,
   isRetryableRcFetchStatus,
   rcFetchBackoffMs,
   RC_FETCH_TIMEOUT_MS,
   shouldExportRcValue,
+  rcValueState,
 } from '../scripts/load-rc-env.mjs';
 import { TOKEN_EXCHANGE_TIMEOUT_MS, extractOAuthErrorReason, isRetryableTokenExchangeStatus } from '../scripts/lib/google-service-account-token.mjs';
 import { sliceBetween, sliceFrom } from './lib/anchored-slice.mjs';
@@ -76,6 +78,16 @@ test('il loader nomina i parametri RC irrisolti senza loggare valori', () => {
     '⚠️ Remote Config keys not resolved: JOB_EMAIL_RANKING_SHRINK_K, JOB_EMAIL_RANKING_MAX_CONSECUTIVE_EXPOSURES',
   );
   assert.equal(formatMissingRcKeys([]), '');
+});
+
+test('il loader separa assenza prevista, assenza inattesa ed empty esplicito', () => {
+  assert.equal(EXPECTED_ABSENT_RC_KEYS.has('TELEGRAM_BOT_TOKEN'), true);
+  assert.equal(rcValueState(null, 'TELEGRAM_BOT_TOKEN'), 'expected-absent');
+  assert.equal(rcValueState(null, 'GEMINI_API_KEY'), 'missing');
+  assert.equal(rcValueState('', 'OMNIROUTE_PROVIDER_ALLOWLIST'), 'export');
+  assert.equal(rcValueState('', 'GEMINI_API_KEY'), 'empty');
+  assert.equal(shouldExportRcValue(null, 'TELEGRAM_BOT_TOKEN'), false);
+  assert.equal(shouldExportRcValue('', 'OMNIROUTE_PROVIDER_ALLOWLIST'), true);
 });
 
 // #199: né fetchTemplateViaRest né exchangeAssertionForToken avevano un

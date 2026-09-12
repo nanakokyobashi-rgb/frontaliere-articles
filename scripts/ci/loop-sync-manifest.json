@@ -422,6 +422,16 @@
       }
     },
     {
+      "path": "scripts/ci/lib/import-specifiers.mjs",
+      "mode": "corpus-only",
+      "reason": "Sorgente unica dell'estrattore lessicale degli import usato dai guard di chiusura del ciclo e dai loro test (#1029). Il modulo vive solo nel publisher del corpus: il sito consuma la superficie pubblicata via HTTP e non deve importare la logica dei guard del corpus.",
+      "baseline": {
+        "site": null,
+        "corpus": "7d8990ce9bc61b10",
+        "alignedAt": "2026-09-12"
+      }
+    },
+    {
       "path": "scripts/lib/github-issue-creator.mjs",
       "mode": "identical",
       "baseline": {
@@ -481,7 +491,7 @@
     {
       "path": "scripts/lib/seo-entry.mjs",
       "mode": "corpus-only",
-      "reason": "Helper fail-closed per rimuovere atomicamente tutte le entry SEO duplicate durante il ritiro di un articolo (#1130). Il sito non ha questo percorso di pubblicazione corpus-side e non deve ricevere una copia con assunzioni diverse sul formato dei chunk SEO.",
+      "reason": "Shim corpus-only per i generatori che re-esporta il resolver SEO canonico da `engine/shared/seo-entry.mjs`. L'implementazione viaggia con il subtree engine mirrorato; sul sito non esiste questo entry point di pubblicazione corpus-side e non va aggiunta una seconda copia con assunzioni diverse sul formato dei chunk SEO.",
       "baseline": {
         "site": null,
         "corpus": "f5c10340550b94f3",
@@ -1110,9 +1120,9 @@
       "path": "scripts/ci/stale-claim-detector.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "05cef42b82dc86bf",
-        "corpus": "05cef42b82dc86bf",
-        "alignedAt": "2026-09-01"
+        "site": "71dac35db23d0a61",
+        "corpus": "71dac35db23d0a61",
+        "alignedAt": "2026-09-12"
       }
     },
     {
@@ -1336,6 +1346,16 @@
         "site": "44b4dcb727b012ea",
         "corpus": "e48b58a762604895",
         "alignedAt": "2026-08-14"
+      }
+    },
+    {
+      "path": "generator/scripts/scan-vacuous-key-facts.mjs",
+      "mode": "corpus-only",
+      "reason": "Scanner read-only della baseline dei fatti chiave vacui (#1054): stampa file-locale, articoli distinti e locale senza modificare `content/**` e senza avere un gemello operativo sul sito.",
+      "baseline": {
+        "site": null,
+        "corpus": "991427b316f1f8ea",
+        "alignedAt": "2026-09-12"
       }
     },
     {
@@ -1822,6 +1842,26 @@
       }
     },
     {
+      "path": "generator/scripts/lib/key-facts-specificity.mjs",
+      "mode": "corpus-only",
+      "reason": "Rilevatore puro dei fatti chiave senza valore nelle quattro lingue. Lo scanner di #1054 usa la forma di riferimento per misurare 53 file-locale/29 articoli; il gate di #1055 rimuove una coppia solo se restano almeno tre fatti e rifiuta il payload sotto soglia. E' una libreria del generatore del corpus e non ha gemello sul sito.",
+      "baseline": {
+        "site": null,
+        "corpus": "261595c0ccfc778b",
+        "alignedAt": "2026-09-12"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/cantone-toponimi-coerenza.mjs",
+      "mode": "corpus-only",
+      "reason": "Guard puro della coerenza fra cantone nello slug e toponimi nel testo (#1053). Blocca i nuovi offender della classe Grigioni/Vallese con riferimenti ticinesi e conserva come baseline esplicita i 32 articoli storici misurati. La generazione vive nel corpus e non esiste un gemello operativo sul sito.",
+      "baseline": {
+        "site": null,
+        "corpus": "51e01832939d40b6",
+        "alignedAt": "2026-09-12"
+      }
+    },
+    {
       "path": "generator/scripts/lib/decode-html-entities.mjs",
       "sitePath": "scripts/lib/decode-html-entities.mjs",
       "mode": "identical",
@@ -2102,6 +2142,26 @@
         "site": null,
         "corpus": "a9c8621700234446",
         "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "generator/tests/key-facts-specificity.test.mjs",
+      "mode": "corpus-only",
+      "reason": "Testa la misura #1054, il parser nelle quattro lingue e la regola #1055 che rimuove i fatti vuoti sopra soglia e rifiuta quelli sotto soglia. E' una suite node:test del generatore del corpus, senza gemello operativo sul sito.",
+      "baseline": {
+        "site": null,
+        "corpus": "d27fde4ea91a493a",
+        "alignedAt": "2026-09-12"
+      }
+    },
+    {
+      "path": "generator/tests/cantone-toponimi-coerenza.test.mjs",
+      "mode": "corpus-only",
+      "reason": "Testa il guard #1053 con l offender Courmayeur/Vallese, la guida legittima di Carate Urio/Ticino e la baseline storica dei 32 casi. Suite node:test specifica del generatore del corpus, senza gemello sul sito.",
+      "baseline": {
+        "site": null,
+        "corpus": "222d40c75ffd5d1a",
+        "alignedAt": "2026-09-12"
       }
     },
     {
@@ -2516,11 +2576,12 @@
       "path": "host/constants.ts",
       "sitePath": "build-plugins/constants.ts",
       "mode": "adapted",
-      "reason": "Costanti del sito che l'engine legge via SiteShellContract. E' un ESTRATTO PER CHIUSURA di build-plugins/constants.ts (850 righe la': solo le ~15 dichiarazioni che il contratto raggiunge, 177 righe qui), quindi non potra' mai essere byte-identico e adapted e' il mode giusto. Per questa sola entry scalarFingerprint confronta i 22 scalari authoritative: cambiamenti del sorgente fuori dalla chiusura restano stable, ma un digest diverso, mancante, malformato o non dichiarato non puo' mai essere stable. I comportamenti del contratto restano coperti dai fingerprint test esistenti; host/host-drift.test.mjs non esiste e non e' una guardia. Il follow-up corpus prepara il lato host al cambio della PR sito #8299: il gate statico passa dalla scansione arbitraria del namespace firebase:authUser: al marker esplicito frontaliere:auth-session, mentre il codice runtime conserva il match sulla chiave Firebase esatta. Il digest 22b3b2bf… e' la destinazione verificata del contratto dopo l'allineamento delle due PR, non una dichiarazione di parita' gia' presente sui branch main. Durante la finestra la divergenza e' intenzionale e va ricontrollata dopo #8299; il digest non dipende da segreti o variabili di ambiente del runner.",
+      "reason": "Costanti del sito che l'engine legge via SiteShellContract. E' un ESTRATTO PER CHIUSURA di build-plugins/constants.ts (850 righe la': solo le ~15 dichiarazioni che il contratto raggiunge, 177 righe qui), quindi non potra' mai essere byte-identico e adapted e' il mode giusto. Per questa sola entry scalarFingerprint confronta i 22 scalari authoritative: cambiamenti del sorgente fuori dalla chiusura restano stable, ma un digest diverso, mancante, malformato o non dichiarato non puo' mai essere stable. I comportamenti del contratto restano coperti dai fingerprint test esistenti; host/host-drift.test.mjs non esiste e non e' una guardia. Il lato sito della PR #8299 e' ora su main; questa baseline registra l'osservazione verificata dei due lati dopo l'allineamento del marker frontaliere:auth-session, mentre il codice runtime conserva il match sulla chiave Firebase esatta. Il digest 22b3b2bf… resta il fingerprint scalar del contratto e non dipende da segreti o variabili di ambiente del runner.",
       "baseline": {
-        "site": "8318a415439ca0d0",
-        "corpus": "7c8c22b48ee255aa",
-        "alignedAt": "2026-09-01"
+        "site": "5bedfc2a3453a9f5",
+        "corpus": "db9e22109da26397",
+        "alignedAt": "2026-09-12",
+        "forcedAt": "2026-09-12T04:17:23.514Z"
       },
       "scalarFingerprint": {
         "sitePath": "tests/articles-shell-contract-fingerprint.json",
