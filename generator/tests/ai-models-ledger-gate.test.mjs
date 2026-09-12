@@ -1569,6 +1569,22 @@ describe('restore di exhaustedUntil: tetto sulla distanza nel futuro', () => {
     assert.deepEqual(_restorableExhaustUntil(serialized, now), { until, reason: 'restore' });
   });
 
+  it('non tratta coercioni non numeriche come Timestamp serializzati validi', () => {
+    const malformed = [
+      { _seconds: '', _nanoseconds: 0 },
+      { _seconds: true, _nanoseconds: 0 },
+      { _seconds: 1_000, _nanoseconds: '' },
+      { _seconds: 1_000, _nanoseconds: false },
+    ];
+    for (const value of malformed) {
+      assert.equal(
+        _restorableExhaustUntil(value, now).reason,
+        'unparsable',
+        `il valore ${JSON.stringify(value)} non deve diventare una data valida`,
+      );
+    }
+  });
+
   it('un Timestamp con toDate() difettoso diventa unparsable senza lanciare', () => {
     assert.doesNotThrow(() => _restorableExhaustUntil({ toDate: () => { throw new Error('bad timestamp'); } }, now));
     assert.equal(_restorableExhaustUntil({ toDate: () => { throw new Error('bad timestamp'); } }, now).reason, 'unparsable');
