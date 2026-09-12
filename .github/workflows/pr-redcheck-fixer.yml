@@ -79,6 +79,7 @@ jobs:
       head_ref: ${{ steps.pre.outputs.head_ref }}
       failed_run_id: ${{ steps.pre.outputs.failed_run_id }}
       head_sha: ${{ steps.pre.outputs.head_sha }}
+      failed_check_key: ${{ steps.pre.outputs.failed_check_key }}
     steps:
       - name: Checkout dell'helper del prefilter (solo `scripts/ci/`)
         uses: actions/checkout@v5
@@ -243,6 +244,7 @@ jobs:
             echo "head_ref=$head_ref"
             echo "failed_run_id=$RUN_ID"
             echo "head_sha=$head_sha"
+            echo "failed_check_key=$rollup"
           } >> "$GITHUB_OUTPUT"
 
   redcheck-fix:
@@ -324,6 +326,50 @@ jobs:
           GH_REPO: ${{ github.repository }}
         run: node scripts/ci/alert-pat-down.mjs --workflow "${{ github.workflow }}" --run-url "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
 
+      - name: Claim redcheck PR + HEAD + failed check (zero-Claude)
+        id: claim
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+          CLAIM_ACTION: acquire
+          PR_NUMBER: ${{ needs.preflight.outputs.pr_number }}
+          HEAD_SHA: ${{ needs.preflight.outputs.head_sha }}
+          CHECK_FAILURE_KEY: ${{ needs.preflight.outputs.failed_check_key }}
+          CLAIM_TTL_SEC: '3600'
+          GITHUB_RUN_ID: ${{ github.run_id }}
+        run: node scripts/ci/redcheck-review-prefilter.mjs --claim
+
+      - name: Fail closed when redcheck claim is unreadable
+        if: steps.claim.outputs.claim_error == 'true'
+        run: |
+          echo "::error::Claim redcheck PR+HEAD+failure illeggibile o non verificabile → nessun fixer Claude."
+          exit 1
+
+      - name: Acquire shared Claude quota lease (redcheck residual)
+        id: quota_lease
+        if: steps.claim.outputs.claim_allowed == 'true'
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+          QUOTA_LEASE_ACTION: acquire
+          QUOTA_LEASE_ROLE: redcheck
+          QUOTA_LEASE_OWNER: redcheck-fixer
+          QUOTA_LEASE_TARGET_TYPE: pr
+          QUOTA_LEASE_TARGET: ${{ needs.preflight.outputs.pr_number }}
+          QUOTA_LEASE_TTL_SEC: '3600'
+        run: node scripts/ci/check-quota-backoff.mjs
+
+      - name: Shared Claude quota lease unavailable (expected skip)
+        if: steps.claim.outputs.claim_allowed == 'true' && steps.quota_lease.outputs.lease_allowed != 'true'
+        run: |
+          if [ "${{ steps.quota_lease.outputs.lease_error }}" = 'true' ]; then
+            echo "::error::Lease quota condiviso illeggibile o non verificabile → redcheck fixer saltato fail-closed."
+            exit 1
+          fi
+          echo "::warning::Lease quota condiviso negato (${{ steps.quota_lease.outputs.lease_reason }}) → redcheck fixer saltato senza consumare quota."
+
       # ── Round cap + capability guard + tier (deterministico, prima di Claude)
       # Conta i marker `<!-- REDCHECK_FIX_ROUND: N -->` gia' sulla PR. A N>=2 →
       # escalation a `needs-human`, STOP senza Claude. Il capability guard:
@@ -332,6 +378,7 @@ jobs:
       # — cioe' un run intero speso e buttato.
       - name: Round cap + capability guard + tier
         id: guard
+        if: steps.claim.outputs.claim_allowed == 'true' && steps.quota_lease.outputs.lease_allowed == 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REPO: ${{ github.repository }}
@@ -707,6 +754,48 @@ jobs:
           WORKFLOW: pr-redcheck-fixer
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
         run: node scripts/ci/refund-fix-round.mjs
+
+
+      - name: Finalize redcheck PR + HEAD + failed check claim
+        if: always() && steps.claim.outputs.claim_acquired == 'true'
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+          CLAIM_ACTION: finalize
+          CLAIM_TOKEN: ${{ steps.claim.outputs.claim_token }}
+          PR_NUMBER: ${{ needs.preflight.outputs.pr_number }}
+          HEAD_SHA: ${{ needs.preflight.outputs.head_sha }}
+          CHECK_FAILURE_KEY: ${{ needs.preflight.outputs.failed_check_key }}
+          GITHUB_RUN_ID: ${{ github.run_id }}
+        run: |
+          if [ "${{ steps.guard.outputs.proceed }}" != 'true' ]; then
+            CLAIM_STATUS=released
+          elif [ "${{ steps.claude_review.outcome }}" = 'cancelled' ]; then
+            CLAIM_STATUS=failed-transient
+          elif [ "${{ steps.claude_review.outcome }}" = 'skipped' ]; then
+            CLAIM_STATUS=failed-transient
+          elif [ "${{ steps.claude_review.outcome }}" = 'failure' ]; then
+            CLAIM_STATUS=failed-terminal
+          else
+            CLAIM_STATUS=completed
+          fi
+          export CLAIM_STATUS
+          node scripts/ci/redcheck-review-prefilter.mjs --claim
+
+      - name: Release shared Claude quota lease
+        if: always() && steps.quota_lease.outputs.lease_acquired == 'true'
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+          QUOTA_LEASE_ACTION: release
+          QUOTA_LEASE_ROLE: redcheck
+          QUOTA_LEASE_OWNER: redcheck-fixer
+          QUOTA_LEASE_TARGET_TYPE: pr
+          QUOTA_LEASE_TARGET: ${{ needs.preflight.outputs.pr_number }}
+          QUOTA_LEASE_TOKEN: ${{ steps.quota_lease.outputs.lease_token }}
+        run: node scripts/ci/check-quota-backoff.mjs
 
       - name: Cleanup Firebase credentials
         if: always()
