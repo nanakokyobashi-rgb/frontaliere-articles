@@ -41,6 +41,7 @@ import {
 } from '../scripts/lib/article-meta-refresh.mjs';
 import { buildDescriptiveTexts, buildDailyBriefArticle } from '../scripts/lib/daily-brief-content.mjs';
 import { sanitizePromptPlaceholders } from '../scripts/lib/prompt-placeholder-guard.mjs';
+import { bumpDateModified } from '../scripts/lib/evergreen-article-refresh.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const GENERATE_SCRIPT = path.join(HERE, '..', 'scripts', 'generate-daily-brief-article.mjs');
@@ -151,6 +152,20 @@ const SEO_FIXTURE =
   "  },\n" +
   "};\nexport default BLOG_SEO_METADATA_5;\n";
 
+function withDuplicateSeoEntry(src) {
+  return src.replace(
+    '\n};\nexport default',
+    "\n  'blog-demo-id': {\n" +
+      "    title: 'Duplicate',\n" +
+      "    description: 'Duplicate desc',\n" +
+      "    ogDescription: 'Duplicate og',\n" +
+      "  },\n" +
+      '};\nexport default',
+  );
+}
+
+const DUPLICATE_SEO_FIXTURE = withDuplicateSeoEntry(SEO_FIXTURE);
+
 test('upsertSeoDescriptionBlock: aggiorna description/ogDescription e il gemello structuredData, scoped al solo id', () => {
   const out = upsertSeoDescriptionBlock(SEO_FIXTURE, 'demo-id', {
     description: 'Descrizione nuova per la SERP.',
@@ -192,6 +207,13 @@ test('upsertSeoDescriptionBlock: entry assente — errore esplicito', () => {
   assert.throws(() => upsertSeoDescriptionBlock(SEO_FIXTURE, 'non-esiste', { description: 'x' }), /nessuna entry/);
 });
 
+test('upsertSeoDescriptionBlock: entry duplicata — rifiuta il first-match ambiguo', () => {
+  assert.throws(
+    () => upsertSeoDescriptionBlock(DUPLICATE_SEO_FIXTURE, 'demo-id', { description: 'x' }),
+    /duplicata.*refresh rifiutato/,
+  );
+});
+
 // ── 2. refreshDescriptiveTexts — la scrittura su un albero sintetico ────────
 
 /** Un albero minimo che imita il layout `content/` del corpus, cosi' il test
@@ -226,6 +248,50 @@ function syntheticCorpus() {
   );
   return root;
 }
+
+test('refreshDescriptiveTexts: entry SEO duplicata — rifiuta prima di scrivere le locali', () => {
+  const root = syntheticCorpus();
+  try {
+    const seoPath = path.join(root, 'content', 'seo', 'seo-blog-5.ts');
+    const duplicate = withDuplicateSeoEntry(fs.readFileSync(seoPath, 'utf-8'));
+    fs.writeFileSync(seoPath, duplicate);
+    const metaPath = path.join(root, 'content', 'blog-meta-it.ts');
+    const metaBefore = fs.readFileSync(metaPath, 'utf-8');
+
+    assert.throws(
+      () => refreshDescriptiveTexts(
+        'demo-id',
+        { it: { excerpt: 'Nuovo excerpt' } },
+        { description: 'Nuova description' },
+        { repoRoot: root },
+      ),
+      /duplicata.*refresh rifiutato/,
+    );
+    assert.equal(fs.readFileSync(metaPath, 'utf-8'), metaBefore, 'il preflight SEO deve precedere ogni scrittura locale');
+    assert.equal(fs.readFileSync(seoPath, 'utf-8'), duplicate, 'il file SEO ambiguo deve restare intatto');
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('bumpDateModified: entry SEO duplicata — rifiuta prima della scrittura', () => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'evergreen-refresh-'));
+  try {
+    const seoDir = path.join(root, 'content', 'seo');
+    fs.mkdirSync(seoDir, { recursive: true });
+    const seoPath = path.join(seoDir, 'seo-blog-5.ts');
+    fs.writeFileSync(seoPath, DUPLICATE_SEO_FIXTURE);
+    const before = fs.readFileSync(seoPath, 'utf-8');
+
+    assert.throws(
+      () => bumpDateModified('demo-id', '2026-09-12T00:00:00Z', root),
+      /duplicata.*refresh rifiutato/,
+    );
+    assert.equal(fs.readFileSync(seoPath, 'utf-8'), before);
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
 
 test('refreshDescriptiveTexts: scrive tutte e 4 le locali + il file SEO, e riporta i file toccati', () => {
   const root = syntheticCorpus();

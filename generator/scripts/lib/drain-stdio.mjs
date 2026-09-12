@@ -8,6 +8,8 @@
  *
  * Il drain e' best-effort: un consumer fermo, chiuso o in errore non deve mai
  * trasformare un'uscita gia' decisa in un processo appeso o in un'eccezione.
+ * close/error non confermano la consegna: in quei casi resta valido solo il
+ * timeout bounded, mentre la callback di write e' l'unica conferma positiva.
  */
 
 const DEFAULT_DRAIN_TIMEOUT_MS = 2_000;
@@ -38,38 +40,50 @@ export function drainStdio(timeoutMs = DEFAULT_DRAIN_TIMEOUT_MS) {
   return new Promise((resolve) => {
     let pending = streams.length;
     let settled = false;
-    const timer = setTimeout(() => {
+    const cleanups = [];
+    const settle = () => {
       if (settled) return;
       settled = true;
+      clearTimeout(timer);
+      for (const cleanup of cleanups) cleanup();
       resolve();
-    }, boundedTimeout);
+    };
+    const timer = setTimeout(settle, boundedTimeout);
 
     const finishOne = () => {
       if (settled) return;
       pending -= 1;
       if (pending > 0) return;
-      settled = true;
-      clearTimeout(timer);
-      resolve();
+      settle();
     };
 
     for (const stream of streams) {
+      if (settled) break;
       let done = false;
-      const finish = () => {
-        if (done) return;
+      let consumerFailed = false;
+      const observeFailure = () => {
+        // A closed/errored consumer proves only that the barrier could not be
+        // confirmed. Keep the listener until callback or timeout so the error
+        // is absorbed without treating it as a successful flush.
+        consumerFailed = true;
+      };
+      const cleanup = () => {
+        stream.off?.('error', observeFailure);
+        stream.off?.('close', observeFailure);
+      };
+      cleanups.push(cleanup);
+      stream.on?.('error', observeFailure);
+      stream.on?.('close', observeFailure);
+      const finish = (error) => {
+        if (done || error || consumerFailed) return;
         done = true;
-        stream.off?.('error', finish);
-        stream.off?.('close', finish);
+        cleanup();
         finishOne();
       };
-      // EPIPE/close puo' arrivare asincrono: assorbirlo qui mantiene il
-      // contratto "best-effort" senza installare un listener permanente.
-      stream.once?.('error', finish);
-      stream.once?.('close', finish);
       try {
         stream.write('', finish);
       } catch {
-        finish();
+        consumerFailed = true;
       }
     }
   });

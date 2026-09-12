@@ -55,6 +55,12 @@ function writeCorpusFile(file, content) {
   }
 }
 
+function findSeoEntryMatches(src, id) {
+  const escapedId = id.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const entryRe = new RegExp("^  'blog-" + escapedId + "':\\s*\\{", 'gm');
+  return [...src.matchAll(entryRe)];
+}
+
 /** Bump (or insert) `updatedAt` on the ARTICLES entry so sitemap lastmod reflects the refresh. */
 export function bumpUpdatedAt(id, todayIso, repoRoot = DEFAULT_REPO_ROOT) {
   const file = path.join(repoRoot, corpusPath('data/blog-articles-data.ts'));
@@ -88,7 +94,8 @@ export function bumpUpdatedAt(id, todayIso, repoRoot = DEFAULT_REPO_ROOT) {
 /**
  * Bump the NewsArticle `dateModified` on the article's blog-SEO entry so the
  * freshness signal tracks the periodic body refresh (datePublished is left at
- * the original publish date). Scoped to this article's block only.
+ * the original publish date). Scoped to this article's unique block; duplicate
+ * keys are rejected before the file can be written.
  *
  * `seoFile` defaults to the "frontaliere" section's active SEO shard — must
  * match `SECTION.seoFile` in create-article.mjs for whichever section the
@@ -103,7 +110,14 @@ export function bumpDateModified(
 ) {
   const file = path.join(repoRoot, corpusPath(seoFile));
   const src = readFileSync(file, 'utf-8');
-  const startIdx = src.indexOf(`'blog-${id}':`);
+  const entries = findSeoEntryMatches(src, id);
+  if (entries.length > 1) {
+    throw new Error(
+      "bumpDateModified: entry 'blog-" + id + "' duplicata (" + entries.length + " occorrenze); " +
+      'refresh rifiutato prima della scrittura.',
+    );
+  }
+  const startIdx = entries[0]?.index ?? -1;
   if (startIdx < 0) return false;
   // Scope the rewrite to THIS entry's block (stop at the next top-level entry
   // key) so a future nested object can never make us touch a sibling's date.

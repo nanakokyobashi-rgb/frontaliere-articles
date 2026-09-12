@@ -9,6 +9,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { spawn } from 'node:child_process';
+import { EventEmitter } from 'node:events';
 import { mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
@@ -84,6 +85,21 @@ function runBlockedChild() {
   });
 }
 
+function closedConsumer() {
+  const stream = new EventEmitter();
+  stream.writableEnded = false;
+  stream.destroyed = false;
+  stream.writableLength = 1;
+  stream.writableNeedDrain = true;
+  stream.write = () => {
+    stream.emit('close');
+    stream.emit('error', Object.assign(new Error('consumer closed'), { code: 'EPIPE' }));
+    // No write callback: close/error are not delivery confirmation.
+    return false;
+  };
+  return stream;
+}
+
 test('senza drain la coda delle pipe si perde, con drain arrivano entrambi gli stream', async () => {
   const lost = await runChild({ drain: false });
   assert.ok(lost.stdout.length < PAYLOAD_BYTES + OUT_TAIL.length, 'stdout non risulta troncato nel caso senza drain');
@@ -110,6 +126,25 @@ test('un consumer bloccato non supera il timeout e non cambia l\'exit code', asy
   const result = await runBlockedChild();
   assert.equal(result.code, 9);
   assert.ok(result.elapsedMs < 1_000, `timeout non bounded: ${result.elapsedMs}ms`);
+});
+
+test('close/error del consumer non confermano il flush: resta il timeout bounded', async () => {
+  const stdoutDescriptor = Object.getOwnPropertyDescriptor(process, 'stdout');
+  const stderrDescriptor = Object.getOwnPropertyDescriptor(process, 'stderr');
+  Object.defineProperty(process, 'stdout', { configurable: true, enumerable: true, value: closedConsumer() });
+  Object.defineProperty(process, 'stderr', { configurable: true, enumerable: true, value: closedConsumer() });
+
+  try {
+    const { drainStdio } = await import('../scripts/lib/drain-stdio.mjs');
+    const startedAt = Date.now();
+    await drainStdio(50);
+    const elapsedMs = Date.now() - startedAt;
+    assert.ok(elapsedMs >= 35, 'close/error ha concluso prematuramente il drain: ' + elapsedMs + 'ms');
+    assert.ok(elapsedMs < 500, 'timeout non bounded dopo close/error: ' + elapsedMs + 'ms');
+  } finally {
+    Object.defineProperty(process, 'stdout', stdoutDescriptor);
+    Object.defineProperty(process, 'stderr', stderrDescriptor);
+  }
 });
 
 test('create-article drena dopo il ledger e prima dell\'unico process.exit nudo', () => {
