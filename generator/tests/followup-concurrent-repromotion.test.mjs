@@ -25,9 +25,11 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import {
   PROMOTION_PAIR_WINDOW_SEC,
+  linkedPullRequestNumbers,
   lastFixPromotion,
   isConcurrentRepromotion,
   isDeliveredThisRun,
+  selectLatestMergedFixPr,
 } from '../../scripts/ci/followup-drainer.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
@@ -38,6 +40,25 @@ const T0 = Date.parse('2026-09-06T09:00:00Z');
 const MIN = 60_000;
 const labeled = (name, at) => ({ event: 'labeled', label: { name }, created_at: iso(at) });
 const unlabeled = (name, at) => ({ event: 'unlabeled', label: { name }, created_at: iso(at) });
+
+test('la consegna cerca le PR collegate all issue, anche con branch rinominato', () => {
+  assert.deepEqual(linkedPullRequestNumbers([
+    [{ event: 'cross-referenced', source: { issue: { number: 7908, pull_request: {} } } }],
+    { event: 'referenced', source: { issue: { number: 99, pull_request: {} } } },
+    { event: 'cross-referenced', source: { issue: { number: 7908, pull_request: {} } } },
+    { event: 'cross-referenced', source: { issue: { number: 7909 } } },
+  ]), [7908]);
+
+  assert.deepEqual(selectLatestMergedFixPr([
+    { mergedAt: '2026-09-07T06:50:44Z', files: [{ path: 'old.mjs' }], mergeCommit: { oid: 'old' } },
+    { mergedAt: '2026-09-08T06:50:44Z', files: [{ path: 'new.mjs' }], mergeCommit: { oid: 'new' } },
+  ]), {
+    mergedAt: Date.parse('2026-09-08T06:50:44Z'),
+    mergeSha: 'new',
+    files: ['new.mjs'],
+    filesKnown: true,
+  });
+});
 
 // La promozione del DRAIN: `edit(cand, { add: [LBL_FIX], remove: [LBL_QUEUED] })`
 // → i due eventi arrivano dalla stessa chiamata, a un secondo di distanza.
@@ -139,4 +160,13 @@ test('entrambi i rescue (queue-managed e crawler) segnalano il caso, non solo un
   assert.equal(hits.length, 2, 'il predicato va usato in entrambi i rescue');
   const warns = src.match(/::warning::.*writer concorrente/g) || [];
   assert.equal(warns.length, 2, 'ogni rescue emette il proprio warning');
+});
+
+test('triage-sweep non rimuove agent:fix-queued quando aggiunge agent:fix', () => {
+  const triage = fs.readFileSync(path.join(ROOT, 'scripts/ci/triage-sweep.mjs'), 'utf8');
+  const directRoutes = [...triage.matchAll(/--add-label', 'agent:fix'[\s\S]{0,160}?\);/g)];
+  assert.equal(directRoutes.length, 2);
+  for (const route of directRoutes) {
+    assert.doesNotMatch(route[0], /--remove-label', 'agent:fix-queued'/);
+  }
 });
