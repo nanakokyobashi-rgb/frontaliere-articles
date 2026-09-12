@@ -964,7 +964,7 @@ console.log(`[build-api] wrote ${Object.keys(written).length} files to dist/api`
     .readdirSync(OUT)
     .filter((f) => f.endsWith('.xml'))
     .map((f) => readOut(f))
-    .filter((xml) => xml.includes('<rss'));
+    .filter((xml) => countXmlTags(xml, 'rss') > 0);
 
   const derived = {
     articles: derivedAlways('articles.json', () => jsonOut('articles.json').length),
