@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 import {
   buildSectionFeeds,
@@ -14,6 +15,7 @@ import {
 } from '../../scripts/lib/corpus-floors.mjs';
 
 const LATEST_ID = 'uss-stipendi-minimo-2027';
+const REPO_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
 
 function longEntry(id, date) {
   return [
@@ -162,4 +164,26 @@ test('RSS e floor falliscono chiusi su una entry reale con graffe sbilanciate', 
   } finally {
     fs.rmSync(root, { recursive: true, force: true });
   }
+});
+
+test('validator e renderer leggono fino alla chiusura bilanciata della entry SEO', () => {
+  const createArticle = fs.readFileSync(
+    path.join(REPO_ROOT, 'generator', 'scripts', 'create-article.mjs'),
+    'utf8',
+  );
+  const ogRenderer = fs.readFileSync(
+    path.join(REPO_ROOT, 'engine', 'ogPagesPlugin.ts'),
+    'utf8',
+  );
+  const descriptors = fs.readFileSync(
+    path.join(REPO_ROOT, 'engine', 'shared', 'articleSectionDescriptors.ts'),
+    'utf8',
+  );
+
+  assert.match(createArticle, /findSeoEntryMatches\(src, data\.id, corpusPath\(seoFile\)\)/);
+  assert.match(createArticle, /src\.slice\(index, closeIdx \+ 1\)/);
+  assert.doesNotMatch(createArticle, /Math\.min\(start \+ 3000/);
+  assert.match(ogRenderer, /const e = pos\[i\]\.end;/);
+  assert.doesNotMatch(ogRenderer, /Math\.min\(s \+ 3000/);
+  assert.match(descriptors, /end: closeIdx \+ 1/);
 });
