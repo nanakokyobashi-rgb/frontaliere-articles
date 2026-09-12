@@ -87,6 +87,7 @@ import { fileURLToPath } from 'node:url';
 import { translateFieldFreeMt } from './lib/article-free-mt.mjs';
 import { freeTranslateWithRetry, balanceMarkdownMarkers } from './lib/free-translate.mjs';
 import { runFactualityGates } from './lib/article-factuality-gates.mjs';
+import { MIN_FACTS_PER_SECTION, stripVacuousFacts } from './lib/key-facts-specificity.mjs';
 import { unescapeTsString } from './lib/unescape-ts-string.mjs';
 import { escapeForSingleQuoteTS } from './lib/article-meta-block.mjs';
 import { sanitizeBodyText } from './lib/sanitize-body-braces.mjs';
@@ -202,13 +203,45 @@ export function criticalCodes(gateResult) {
 }
 
 /**
+ * Applica alla ri-traduzione la stessa guardia dei nuovi articoli.
+ *
+ * `runFactualityGates()` non controlla la specificita' dei fatti chiave: una
+ * ri-traduzione che trasformi tre fatti in `not specified` puo' quindi avere
+ * zero `critical` e arrivare alla scrittura. Il guard e' volutamente
+ * fail-closed: rimuove i fatti vacui solo se restano almeno tre superstiti,
+ * altrimenti lascia il payload immutato e restituisce un motivo di rifiuto.
+ *
+ * @param {Record<string, string>} sections
+ * @returns {{sections: Record<string, string>, issue: string|null, changed: boolean, result: object|null}}
+ */
+export function guardTranslatedKeyFacts(sections) {
+  const body1 = sections?.body1;
+  if (typeof body1 !== 'string' || body1.length === 0) {
+    return { sections, issue: null, changed: false, result: null };
+  }
+
+  const result = stripVacuousFacts(body1);
+  if (result.rejected) {
+    return {
+      sections,
+      issue: `[key-facts-specificity] body1 sotto la soglia di ${MIN_FACTS_PER_SECTION} fatti dopo la ri-traduzione`,
+      changed: false,
+      result,
+    };
+  }
+  if (!result.changed) return { sections, issue: null, changed: false, result };
+  return { sections: { ...sections, body1: result.value }, issue: null, changed: true, result };
+}
+
+/**
  * Decide se la nuova traduzione va scritta.
  *
  * E' il cuore del vincolo "mai peggiorare, mai riscrivere a mano", isolato in
  * una funzione pura proprio per essere testabile senza toccare la rete.
  */
-export function shouldWrite({ oldCodes, newCodes, missingField, sanity = null }) {
+export function shouldWrite({ oldCodes, newCodes, missingField, sanity = null, qualityIssue = null }) {
   if (missingField) return { write: false, reason: 'campo-vuoto-dalla-cascata' };
+  if (qualityIssue) return { write: false, reason: qualityIssue };
   if (oldCodes.length === 0) return { write: false, reason: 'vecchia-gia-pulita' };
   if (newCodes.length > 0) return { write: false, reason: `ri-fallita: ${newCodes.join(',')}` };
   if (sanity) return { write: false, reason: sanity };
@@ -481,14 +514,27 @@ async function processPair(pair, { CONTENT_ROOT, APPLY }) {
     newSections[f] = sanitizeBodyText(out);
   }
 
+  // La guardia dei fatti chiave deve precedere factuality e writeAtomic: il
+  // primo puo' vedere zero `critical` anche quando il secondo non deve mai
+  // ricevere una sezione fatta solo di placeholder.
+  const keyFactsGuard = missingField
+    ? { sections: newSections, issue: null }
+    : guardTranslatedKeyFacts(newSections);
+  const checkedSections = keyFactsGuard.sections;
   const newCodes = missingField
     ? []
-    : criticalCodes(runFactualityGates({ sections: newSections, locale: pair.locale, italianSections }));
+    : criticalCodes(runFactualityGates({ sections: checkedSections, locale: pair.locale, italianSections }));
 
   const sanity = missingField
     ? null
-    : translationSanityIssue({ oldSections, newSections, italianSections, locale: pair.locale });
-  const verdict = shouldWrite({ oldCodes, newCodes, missingField, sanity });
+    : translationSanityIssue({ oldSections, newSections: checkedSections, italianSections, locale: pair.locale });
+  const verdict = shouldWrite({
+    oldCodes,
+    newCodes,
+    missingField,
+    sanity,
+    qualityIssue: keyFactsGuard.issue,
+  });
   const row = { ...base, oldCodes, newCodes, missingField, written: false, reason: verdict.reason };
   if (!verdict.write || !APPLY) return row;
 

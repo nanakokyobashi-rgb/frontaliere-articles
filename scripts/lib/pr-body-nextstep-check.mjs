@@ -34,6 +34,11 @@
  * nudo è una soglia conservativa misurata sui body reali, non una nuova forma
  * di stato.
  *
+ * Due forme ricorrenti non possono più passare come stato: `PR concatenate`
+ * senza numero (anche quando il numero è citato altrove) e `blocked:` usato
+ * per descrivere la coda interna di un daily bucket o di item successivi. Sono
+ * formule di sequencing, non un piano tracciabile o un blocker esterno.
+ *
  * La misura aggiornata, eseguita il 2026-09-08 sui 310 body mergiati dal
  * 2026-08-25 al 2026-09-08, conta 595 `no-literal-state`: 462 non contengono
  * nemmeno un `#N` nudo. Il runner blocca quindi 462/595 finding senza
@@ -129,12 +134,9 @@ export const STATE_FORMS = [
     label: '`tracciata in #N`',
     re: /\b(?:tracciat[oa]|tracked|apert[oa]|apre|segue|seguita|copert[oa])\s+(?:in|da|con|su|come)?\s*[*_`]*#\d+/i,
   },
-  // `PR concatenata` senza numero adiacente: il body di #108 la usa cosi', col
-  // ref in una clausola successiva. Accettata: e' la forma letterale del
-  // contratto.
-  { id: 'pr-concatenata', label: '`PR concatenata #N`', re: /\bPR\s+concatenat[ao]\b/i },
   // REVIEW.md, forma 3 — bloccato da una causa esterna reale. Il due punti (o
-  // il trattino) e' richiesto: `blocked` da solo non e' una causa.
+  // il trattino) e' richiesto: `blocked` da solo non e' una causa. Le formule
+  // di sequencing interno vengono rifiutate da `checkNextStepStates()`.
   { id: 'blocked', label: '`blocked: <causa>`', re: /\b(?:blocked|bloccat[oa])\s*[:—–-]\s*\S/i },
   // Stato terminale esplicito: non e' lavoro dovuto, e lo dice. Whitelist
   // STRETTA di proposito — un generico `\bnessun\b` catturerebbe «Nessun
@@ -146,6 +148,29 @@ export const STATE_FORMS = [
     re: /\bnessun(?:o|a)?\s+(?:lavoro\s+dovuto|azione(?:\s+(?:dovuta|richiesta))?|intervento\s+dovuto)\b|\bniente\s+da\s+fare\b/i,
   },
 ];
+
+// Il contratto ammette solo una PR concatenata tracciabile direttamente: il
+// plurale non e' una ragione per concedere una clausola senza numero, specie
+// quando la stessa voce porta riferimenti nudi ad altre PR. Il gemello
+// `pr-body-sections-check.mjs` copre la forma singolare; qui teniamo anche il
+// plurale perché questo modulo è il gate corpus-only che vede le ricorrenze del
+// daily bucket (#1365/#1367).
+const PLURAL_CHAINED_PR_MENTION_RE = /\bPR\s+concatenat[ei]\b/i;
+const PLURAL_CHAINED_PR_STATE_RE = /\bPR\s+concatenat[ei]\s*#\s*\d+/i;
+
+// `blocked:` è uno stato solo quando la causa è esterna. Queste formule sono
+// il pattern ricorrente dei body daily: dichiarano una coda interna, non un
+// impedimento operativo che richieda una issue o una decisione del proprietario.
+const INTERNAL_BLOCKED_SEQUENCE_RE = /\b(?:blocked|bloccato|bloccata|bloccati|bloccate)\s*[:—–-]\s*[^.!?\n]{0,180}\b(?:daily\s+bucket|bucket\s+giornalier[oa]|item[-\s]+per[-\s]+item|(?:restant[ie]|remaining)\s+(?:item|items|PR|PRs)|(?:PR|item|items)\s+(?:successiv[ae]|successive|following|future))\b/i;
+
+export function invalidPluralChainedPrState(text) {
+  const s = stripEmphasis(String(text ?? ''));
+  return PLURAL_CHAINED_PR_MENTION_RE.test(s) && !PLURAL_CHAINED_PR_STATE_RE.test(s);
+}
+
+export function invalidBlockedCauseIn(text) {
+  return INTERNAL_BLOCKED_SEQUENCE_RE.test(stripEmphasis(String(text ?? '')));
+}
 
 /**
  * Le scappatoie: `out of scope` e `posposto` sono quelle che `REVIEW.md`
@@ -238,6 +263,7 @@ export function bulletState(text) {
   // prendere). Stessa classe della guardia di `pr-body-closes-check.mjs`, da
   // cui il normalizzatore arriva: una sola sorgente.
   const s = stripEmphasis(String(text ?? ''));
+  if (invalidBlockedCauseIn(s)) return null;
   for (const f of STATE_FORMS) if (f.re.test(s)) return { id: f.id, label: f.label };
   return null;
 }
@@ -291,6 +317,34 @@ export function checkNextStepStates(body = '') {
   const violations = [];
   const advisories = [];
   for (const b of topLevelBullets(section)) {
+    if (invalidPluralChainedPrState(b.text)) {
+      violations.push({
+        type: 'chained-pr-no-number',
+        section: 'Non implementato (ancora)',
+        index: b.index,
+        text: b.text,
+        snippet: snippetOf(b.text),
+        message:
+          `Voce ${b.index} («${snippetOf(b.text, 55)}») usa una menzione plurale di ` +
+          '`PR concatenate` senza un `#N` adiacente. Ogni PR concatenata deve ' +
+          'essere tracciabile come `PR concatenata #N`.',
+      });
+      continue;
+    }
+    if (invalidBlockedCauseIn(b.text)) {
+      violations.push({
+        type: 'blocked-internal-sequencing',
+        section: 'Non implementato (ancora)',
+        index: b.index,
+        text: b.text,
+        snippet: snippetOf(b.text),
+        message:
+          `Voce ${b.index} («${snippetOf(b.text, 55)}») usa ` +
+          '`blocked:` per una coda interna di item/PR, non per un blocker esterno. ' +
+          'Traccia il lavoro con `PR concatenata #N` oppure indica la causa esterna reale.',
+      });
+      continue;
+    }
     if (bulletState(b.text)) continue;
     const hatch = escapeHatchIn(b.text);
     // Normalizzata come la scappatoia, non a caso: se `escapeHatchIn` vede
