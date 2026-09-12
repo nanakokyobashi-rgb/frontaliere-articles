@@ -539,6 +539,8 @@ test('#972: il dedup ripara lo stato invece di uscire', async () => {
   const at = src.indexOf('Niente doppioni.');
   assert.ok(at > 0, 'il ramo di dedup del post-step non esiste piu\': aggiornare questo test');
   const dedup = src.slice(at, at + 1400);
+  assert.match(dedup, /Niente doppioni\. Motivo: \$\{d\.reason\}/,
+    'il ramo dedup deve lasciare nel log la causa della chiusura soppressa');
   assert.match(dedup, /runOriginSteps\(originWriteSteps\(/,
     'il ramo di dedup e\' il solo punto in cui il mezzo-stato del giro precedente e\' osservabile: '
     + 'uscirne con un `return` secco lo rende definitivo');

@@ -81,6 +81,24 @@ test('senza repo, o su manifest illeggibile, non si pinna niente (direzione sicu
   assert.equal(manifestPinnedIssues(path.join(tmp, 'assente.json')).size, 0);
 });
 
+test('il lookup dei pin normalizza il case del repository', () => {
+  const pinned = new Map([['owner/repo#42', 'scripts/ci/example.mjs']]);
+  assert.equal(pinnedBy(42, 'OWNER/REPO', pinned), 'scripts/ci/example.mjs');
+});
+
+test('un miss con pin caricati lascia una traccia diagnostica', () => {
+  const lines = [];
+  const original = console.log;
+  console.log = (...args) => lines.push(args.join(' '));
+  try {
+    assert.equal(pinnedBy(43, 'owner/repo', new Map([['owner/repo#42', 'x.mjs']])), null);
+  } finally {
+    console.log = original;
+  }
+  assert.match(lines.join('\n'), /manifest pin lookup: nessun pin per owner\/repo#43/);
+  assert.match(lines.join('\n'), /1 voce\/i corpus-only-pending/);
+});
+
 /**
  * Il caso misurato: un gemello `identical` trasportabile resta spedibile e non
  * `stranded` — il ramo `blocked-*` torna `close: true`. Il test usa proprio
@@ -109,17 +127,35 @@ test('handoff: una issue pinnata si consegna ma NON si chiude', () => {
 });
 
 /**
- * `redeliveryDecision` legge `residual` per decidere se un secondo giro ha
- * ancora qualcosa da fare qui. Un residuo vuoto corto-circuiterebbe la issue
- * pinnata — e con `close` a false la parcheggerebbe senza mai rientrare.
+ * `redeliveryDecision` distingue il residuo operativo dal pin del manifest:
+ * quest'ultimo resta tracciato, ma il secondo giro non può fare nulla finché
+ * il gemello non atterra sul sito. Deve quindi parcheggiare senza Claude.
  */
-test('handoff: il pin non produce un corto-circuito senza residuo', async () => {
+test('handoff: il pin produce un corto-circuito di parcheggio senza Claude', async () => {
   const { redeliveryDecision } = await import('../../scripts/ci/handoff-to-site.mjs');
-  const body = 'valerielinc-ops/frontaliere-si-o-no: `.github/workflows/issue-fix.yml`';
+  const body = 'valerielinc-ops/frontaliere-si-o-no: `scripts/ci/followup-resolution-match.mjs`';
   const held = handoffDecision({ verdict: 'blocked-admin-settings', body, pinnedEntry: 'scripts/ci/detect-aggregate.mjs' });
   const r = redeliveryDecision({ decision: held, deliveredUrl: 'https://github.com/x/y/issues/1' });
-  assert.equal(r.skip, false, 'con un residuo il giro successivo deve poter ancora agire qui');
+  assert.equal(held.pinned, true);
+  assert.equal(r.skip, true, 'il pin non e\' lavoro locale: il giro successivo va parcheggiato a costo zero');
   assert.equal(r.close, false);
+  assert.match(r.reason, /manifest/);
+});
+
+test('i workflow dei due closer espongono il kill-switch senza modificare il gemello mirror-locked', () => {
+  const steps = [
+    ['.github/workflows/followup-drainer.yml', 'Drain follow-up queue (deterministic, no Claude)'],
+    ['.github/workflows/lessons-harvester.yml', 'Aggregate recurring patterns (deterministic, zero Claude)'],
+  ];
+  for (const [file, name] of steps) {
+    const src = fs.readFileSync(path.join(ROOT, file), 'utf8');
+    const start = src.indexOf(`- name: ${name}`);
+    assert.ok(start >= 0, `${file}: step ${name} assente`);
+    const next = src.indexOf('\n      - name: ', start + 1);
+    const step = src.slice(start, next < 0 ? src.length : next);
+    assert.match(step, /FOLLOWUP_NO_AUTOCLOSE:\s*['"]1['"]/,
+      `${file}: il closer non riceve FOLLOWUP_NO_AUTOCLOSE=1`);
+  }
 });
 
 /**
