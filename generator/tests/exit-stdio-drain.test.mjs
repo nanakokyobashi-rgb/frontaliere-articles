@@ -17,7 +17,9 @@ import { fileURLToPath } from 'node:url';
 
 const LIB = fileURLToPath(new URL('../scripts/lib/drain-stdio.mjs', import.meta.url));
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const PAYLOAD_BYTES = 200_001;
+// Stay above the largest POSIX pipe capacity used by the CI runners: the
+// no-drain branch must have bytes pending when it calls process.exit().
+const PAYLOAD_BYTES = 2_000_001;
 const OUT_TAIL = 'STDOUT-TELEMETRY-TAIL';
 const ERR_TAIL = 'STDERR-TELEMETRY-TAIL';
 
