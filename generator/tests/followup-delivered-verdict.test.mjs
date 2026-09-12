@@ -52,6 +52,7 @@ import {
   outcomeForCurrentPromotion,
   recoverableFixDecision,
   isRecoverableQueueManaged,
+  isGithubNotFoundError,
 } from '../../scripts/ci/followup-drainer.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
@@ -161,6 +162,12 @@ test('recoverableFixDecision: PR chiusa senza merge riprende il checkpoint, PR m
   });
   assert.equal(merged.action, 'none');
   assert.equal(merged.nextAttempt, 0);
+});
+
+test('isGithubNotFoundError: il branch assente è distinto da un errore API', () => {
+  assert.equal(isGithubNotFoundError({ stderr: 'gh: Not Found (HTTP 404)' }), true);
+  assert.equal(isGithubNotFoundError({ stderr: '{"message":"Server Error","status":"500"}' }), false);
+  assert.equal(isGithubNotFoundError({ message: 'timeout contacting GitHub' }), false);
 });
 
 test('isRecoverableQueueManaged: needs-human non nasconde un WIP, gli altri veto restano', () => {
@@ -349,6 +356,9 @@ test('PARKED-WIP viene recuperato prima dell AGE-OUT e non può essere chiuso', 
   assert.ok(ageOutAt >= 0, 'lo stadio AGE-OUT deve restare riconoscibile');
   const preAgeOut = run.slice(0, ageOutAt);
   assert.match(preAgeOut, /const parkedForWip = listIssues\(LBL_PARKED\)/);
+  assert.match(preAgeOut, /const parkedWipOrder = rotateForScan\(parkedForWip/);
+  assert.match(preAgeOut, /PARKED_WIP_MAX_PER_RUN/);
+  assert.match(preAgeOut, /budget\.take\(`#\$\{iss\.number\} \(parked-wip\)/);
   assert.match(preAgeOut, /isRecoverableQueueManaged/);
   assert.match(preAgeOut, /const recoverable = recoverableFixBranch\(iss\.number\)/);
   assert.match(preAgeOut, /recoverable\?\.state === 'unknown'/);
