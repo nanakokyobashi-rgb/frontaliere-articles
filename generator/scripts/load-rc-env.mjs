@@ -297,6 +297,35 @@ export const ALLOW_EMPTY_RC_KEYS = new Set([
 ]);
 
 /**
+ * RC parameters whose absence is the documented default. They remain mapped
+ * so adding the parameter later needs no code change, but an unset optional
+ * switch must not drown a real configuration drift in the warning list.
+ */
+export const EXPECTED_ABSENT_RC_KEYS = new Set([
+  'GITHUB_PAT_NANAKO',
+  ...Array.from({ length: 8 }, (_, index) => `GH_MODELS_PAT_${index + 2}`),
+  'FIREBASE_API_KEY',
+  'MAILEROO_ACCOUNT_API_KEY',
+  'TELEGRAM_BOT_TOKEN',
+  'TELEGRAM_CHANNEL_ID',
+  'TELEGRAM_CHANNEL_URL',
+  'PER_USER_SEND_TIME',
+  'NEAR_DUP_COSINE',
+  'ENABLE_HAIKU_ARTICLE_FALLBACK',
+  'OMNIROUTE_PROVIDER_ALLOWLIST',
+  'ENABLE_OMNIROUTE_FALLBACK',
+]);
+
+export function rcValueState(value, rcKey) {
+  if (value === null || value === undefined) {
+    return EXPECTED_ABSENT_RC_KEYS.has(rcKey) ? 'expected-absent' : 'missing';
+  }
+  if (value === '' && ALLOW_EMPTY_RC_KEYS.has(rcKey)) return 'export';
+  if (value === '') return 'empty';
+  return 'export';
+}
+
+/**
  * Whether an RC value should be written to the environment.
  *
  * Exported and used by the load loop (rather than inlined there) so the rule
@@ -310,8 +339,7 @@ export const ALLOW_EMPTY_RC_KEYS = new Set([
  * @param {string} rcKey
  */
 export function shouldExportRcValue(value, rcKey) {
-  if (value) return true;
-  return value === '' && ALLOW_EMPTY_RC_KEYS.has(rcKey);
+  return rcValueState(value, rcKey) === 'export';
 }
 
 /**
@@ -556,6 +584,7 @@ async function main() {
   let loaded = 0;
   let skipped = 0;
   let missing = 0;
+  let expectedAbsent = 0;
   const missingKeys = [];
   const lines = []; // For GITHUB_ENV or stdout
 
@@ -565,7 +594,12 @@ async function main() {
     // See shouldExportRcValue: getRcValue() already distinguishes "absent" (null)
     // from "present but empty" (''), and collapsing the two hid an RC key whose
     // empty value carries meaning.
-    if (!shouldExportRcValue(value, rcKey)) {
+    const state = rcValueState(value, rcKey);
+    if (state !== 'export') {
+      if (state === 'expected-absent') {
+        expectedAbsent++;
+        continue;
+      }
       missing++;
       missingKeys.push(rcKey);
       continue;
@@ -610,7 +644,7 @@ async function main() {
 
   const missingMessage = formatMissingRcKeys(missingKeys);
   if (missingMessage) statusLog(missingMessage);
-  statusLog(`✅ RC secrets loaded: ${loaded} set, ${skipped} already in env, ${missing} not in RC`);
+  statusLog(`✅ RC secrets loaded: ${loaded} set, ${skipped} already in env, ${missing} not in RC, ${expectedAbsent} absent by design`);
 }
 
 // Only run when executed directly (not when imported by tests).

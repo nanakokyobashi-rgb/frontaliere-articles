@@ -160,6 +160,51 @@ test('#1264 — il dispatch bash accetta `==` e ignora gli esempi nei commenti',
   assert.equal(isRuntimeFlagSupported(commented, '--slice-only'), false);
 });
 
+test('#1320 FU-006 — il matcher case non accetta commenti in coda o stringhe di help', () => {
+  const dispatch = Buffer.from(
+    'case "${1:-}" in\n' +
+    '  --slice-only|--extra-only) shift ;;\n' +
+    'esac\n',
+  );
+  const trailingComment = Buffer.from('run_it # --slice-only) legacy\n');
+  const helpString = Buffer.from('echo "modes: --slice-only) or plain"\n');
+  const unrelatedCommand = Buffer.from('run_it --slice-only)\n');
+  assert.equal(isRuntimeFlagSupported(dispatch, '--slice-only'), true);
+  assert.equal(isRuntimeFlagSupported(dispatch, '--extra-only'), true);
+  assert.equal(isRuntimeFlagSupported(trailingComment, '--slice-only'), false);
+  assert.equal(isRuntimeFlagSupported(helpString, '--slice-only'), false);
+  assert.equal(isRuntimeFlagSupported(unrelatedCommand, '--slice-only'), false);
+});
+
+test('#1320 FU-007 — un artifact senza invocazioni resta nel piano come unobserved', () => {
+  const contract = { siteRuntimePaths: [CRAWLER_COMMIT_RUNTIME_PATH] };
+  const artifacts = [
+    {
+      file: 'crawler-group-01.yml',
+      text: 'run: bash scripts/lib/git-commit-data.sh --extra-only "extra"\n',
+    },
+    {
+      file: 'crawler-group-02.yml',
+      text: 'run: ./scripts/lib/git-commit-data.sh --renamed-form "extra"\n',
+    },
+  ];
+  const checks = planRuntimeFlagChecks(contract, artifacts);
+  const zero = checks.find((check) => check.artifactFiles.includes('crawler-group-02.yml'));
+  assert.ok(zero);
+  assert.equal(zero.field, 'crawler-group-02.yml#runtime');
+  assert.equal(zero.flag, null);
+  assert.equal(zero.unobservedArtifact, true);
+
+  const runtimeSource = Buffer.from('if [[ "${1:-}" == "--extra-only" ]]; then\n');
+  const observed = new Map([
+    [checks.find((check) => check.flag === '--extra-only').field, { sha256: HASH, bytes: runtimeSource }],
+  ]);
+  const verdict = evaluateRuntimeFlagChecks(checks, observed);
+  assert.equal(verdict.counts.unobserved, 1);
+  assert.equal(verdict.results.find((result) => result.unobservedArtifact).state, 'unobserved');
+  assert.equal(verdict.red, false, 'un artifact isolato non deve oscurare gli altri controlli osservati');
+});
+
 test('#1264 — la provenienza runtime distingue 404, rete e path non dichiarato', () => {
   const contract = { siteRuntimePaths: [CRAWLER_COMMIT_RUNTIME_PATH] };
   const artifacts = [{

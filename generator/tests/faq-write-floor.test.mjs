@@ -53,11 +53,15 @@ test('il limite FAQ assente resta illimitato, gli input invalidi falliscono chiu
   assert.equal(normalizeFaqLimit('0'), 0);
   assert.equal(normalizeFaqLimit('2'), 2);
   assert.equal(parseFaqLimitArgs(['--limit=3']), 3);
-  assert.throws(() => normalizeFaqLimit('non-numerico'), /intero >= 0/);
-  assert.throws(() => normalizeFaqLimit('-1'), /intero >= 0/);
-  assert.throws(() => parseFaqLimitArgs(['--limit=non-numerico']), /intero >= 0/);
+  assert.throws(() => normalizeFaqLimit('non-numerico'), /intera >= 0/);
+  assert.throws(() => normalizeFaqLimit('-1'), /intera >= 0/);
+  assert.throws(() => normalizeFaqLimit('0x10'), /notazione decimale/);
+  assert.throws(() => normalizeFaqLimit('2e1'), /notazione decimale/);
+  assert.throws(() => parseFaqLimitArgs(['--limit=non-numerico']), /intera >= 0/);
   assert.throws(() => parseFaqLimitArgs(['--limit']), /richiede un valore/);
   assert.throws(() => parseFaqLimitArgs(['--limit', '--dry-run']), /richiede un valore/);
+  assert.throws(() => parseFaqLimitArgs(['--limit', '2', '--limit=3']), /una sola volta/);
+  assert.throws(() => parseFaqLimitArgs(['--limit=2', '--limit', '3']), /una sola volta/);
 });
 
 test('i due entry point rifiutano --limit invalido con exit code 2', () => {
@@ -272,6 +276,11 @@ test('il fix-faq rende osservabile il deficit e persiste il blocco di ritraduzio
   assert.match(workflow, /data\/faq-locale-rejections\.json/);
   assert.match(workflow, /git status --porcelain=v1/);
   assert.match(workflow, /git add -f data\/faq-locale-rejections\.json/);
+  assert.match(workflow, /ARGS=\(--limit "\$FAQ_LIMIT" --concurrency "\$FAQ_CONCURRENCY"\)/);
+  assert.match(workflow, /ARGS\+=\(--skip-translate\)/);
+  assert.match(workflow, /ARGS\+=\(--dry-run\)/);
+  assert.match(workflow, /batch-add-faq-to-articles\.mjs "\$\{ARGS\[@\]\}"/);
+  assert.doesNotMatch(workflow, /batch-add-faq-to-articles\.mjs \$ARGS/);
 });
 
 test('MIN_FAQ_PAIRS ha UNA sorgente sola', () => {

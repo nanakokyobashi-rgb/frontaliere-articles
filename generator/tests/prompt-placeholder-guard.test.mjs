@@ -58,6 +58,14 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '.
 const CREATE_ARTICLE = path.join(ROOT, 'generator', 'scripts', 'create-article.mjs');
 const createArticleSrc = fs.readFileSync(CREATE_ARTICLE, 'utf-8');
 
+it('precompila una variante globale per ogni regola RegExp', () => {
+  for (const rule of PLACEHOLDER_RULES) {
+    if (!(rule.rx instanceof RegExp)) continue;
+    assert.ok(rule.scanRx instanceof RegExp, `${rule.id}: scanRx assente`);
+    assert.equal(rule.scanRx.global, true, `${rule.id}: scanRx non globale`);
+  }
+});
+
 // ═══════════════════════════════════════════════════════════════════════════
 // 1. UNIT — i segnaposto veri, usciti in produzione
 // ═══════════════════════════════════════════════════════════════════════════

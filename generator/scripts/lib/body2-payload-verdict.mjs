@@ -118,6 +118,11 @@ export const META_ONLY_FIELDS = ['title', 'excerpt'];
 export const META_FIELD_PLAUSIBILITY_FLOORS = {
   title: { minChars: 12, minWords: 2 },
   excerpt: { minChars: 25, minWords: 3 },
+  // FAQ q/a passano dallo stesso retry per-campo dei meta: le soglie
+  // rispecchiano quelle strutturali di cleanFaqPairs, con in piu' il floor
+  // sulle parole che intercetta una singola parola lunga.
+  'faq.q': { minChars: 10, minWords: 2 },
+  'faq.a': { minChars: 20, minWords: 2 },
 };
 
 /**
@@ -126,8 +131,8 @@ export const META_FIELD_PLAUSIBILITY_FLOORS = {
  *
  * Un campo VUOTO torna `null` di proposito: l'assenza e' gia' segnalata a
  * monte come `missing: [field]`, e duplicarla nasconderebbe il motivo vero.
- * Un campo che non ha floor (i body, `faq`, qualunque cosa arrivi domani)
- * torna `null`: qui si giudica solo cio' che e' stato dimensionato.
+ * Un campo che non ha floor (i body, qualunque cosa arrivi domani) torna
+ * `null`: qui si giudica solo cio' che e' stato dimensionato.
  *
  * Vive qui, accanto al verdetto, perche' e' la stessa soglia che serve al
  * gate a valle (`validateItalianPayload` in create-article.mjs, sull'articolo
@@ -990,9 +995,9 @@ export function classifyBody2Payload({
   // controllo passerebbe comunque, ma tenerlo legato ai campi attesi dice
   // perche' — non e' un caso fortunato, e' il contratto.
   if (expectedFields.includes('body2') && itContent.body2 && itContent.body2.trim().length < 40) missing.push('body2<40');
-  // Lo stesso floor, sui campi meta. `metaFieldPlausibilityMiss` conosce solo
-  // `title` ed `excerpt`, quindi l'intersezione con `expectedFields` e' gia'
-  // implicita: sulla meta' `body` dello split non scatta niente.
+  // Lo stesso floor sui campi meta e sulle FAQ ripetute. L'intersezione con
+  // `expectedFields` resta implicita: sulla meta' `body` dello split non
+  // scatta niente, mentre il retry di `faq.q`/`faq.a` usa lo stesso helper.
   for (const field of expectedFields) {
     const sottoSoglia = metaFieldPlausibilityMiss(field, itContent?.[field]);
     if (sottoSoglia) missing.push(sottoSoglia);
