@@ -115,10 +115,11 @@ export const ARTICLE_SECTION_DESCRIPTORS: OgSection[] = [
  * `blogKeyToArticleId` below). One lexical, balanced resolver, not two scans
  * that could silently diverge if the `blog-` key convention ever changed.
  */
-export function extractBlogEntryPositions(source: string): Array<{ key: string; start: number }> {
- return findAllSeoEntryMatches(source).map(({ id, index }) => ({
+export function extractBlogEntryPositions(source: string): Array<{ key: string; start: number; end: number }> {
+ return findAllSeoEntryMatches(source).map(({ id, index, closeIdx }) => ({
   key: `blog-${id}`,
   start: index,
+  end: closeIdx + 1,
  }));
 }
 

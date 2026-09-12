@@ -97,6 +97,19 @@ const EXCHANGE_WINDOW_DAYS = EXCHANGE_MAX_AGE_DAYS + 7;
  * A block degraded for this many editions in a row is not a source outage: it
  * is a contract that changed upstream and nobody noticed. See
  * `degradationAlarms`.
+ *
+ * Taratura osservata (misurata il 2026-09-12 sulla storia disponibile fino al
+ * 2026-09-11): 35 snapshot commit, 32 date `dateIso` distinte, finestra
+ * 2026-08-08…2026-09-11. `borderWait` ha 1 sequenza consecutiva di 20
+ * `available:false` e 0 sequenze isolate/alternate; `jobs` ha 0 sequenze
+ * consecutive e 1 sequenza isolata/alternata (2026-09-11); `fuel` ed
+ * `exchange` hanno 0/0. Il run osservato e ripetuto è quindi consecutivo:
+ * la soglia 3 è confermata dal dato e non viene cambiata. L'unico evento
+ * isolato di `jobs` non è una distribuzione alternata sufficiente per tarare
+ * una finestra scorrevole.
+ *
+ * Riproduzione della finestra e degli stati (dal repository):
+ * for c in $(git log --before=2026-09-12 --format=%H -- public/data/daily-brief.json); do git show $c:public/data/daily-brief.json 2>/dev/null | python3 -c "import json,sys;d=json.load(sys.stdin);print(d.get('dateIso'),{k:v.get('available') for k,v in d.get('blocks',{}).items()})"; done
  */
 export const MAX_CONSECUTIVE_DEGRADED_EDITIONS = 3;
 

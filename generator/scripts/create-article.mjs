@@ -243,6 +243,7 @@ import { detectBodyRepetition, dedupeRepeatedParagraphs, stripDuplicateTitleFrom
 import { loadEmbeddingStore, loadEmbeddingMeta } from './lib/scoring/embeddingMatcher.mjs';
 import { appendCatalogEntry } from './generate-journalist-image-catalog.mjs';
 import { ARTICLE_SECTION_CORE } from '../../engine/shared/articleSectionCore.mjs';
+import { findSeoEntryMatches } from '../../engine/shared/seo-entry.mjs';
 import { truncateToClause, truncateToClauseNonEmpty } from '../../host/shared/clauseTail.mjs';
 import { buildStructuralEvergreenTopics } from './lib/evergreen-topic-generator.mjs';
 import { corpusPath, resolveGitAddPaths } from './lib/corpus-paths.mjs';
@@ -13457,25 +13458,29 @@ function modifySeoService(data) {
 
 /**
  * Post-write validation: re-reads seo-blog-5.ts, extracts the new article's
- * SEO entry using the SAME regex ogPagesPlugin uses at build time, then builds and
- * parses the JSON-LD object. This catches escaping issues before they reach production.
+ * SEO entry using the SAME lexical, balanced resolver used by the render-time
+ * consumers, then builds and parses the JSON-LD object. This catches escaping
+ * and truncated-entry issues before they reach production.
  */
 function validateStructuredData(data) {
   const seoFile = SECTION.seoFile;
   const src = read(seoFile);
   const entryKey = `'blog-${data.id}'`;
 
-  // 1. Verify the entry exists
-  if (!src.includes(entryKey)) {
+  // 1. Resolve the complete object, not a fixed-size prefix. The resolver
+  // ignores comments/templates and closes nested objects before the fields
+  // below are read.
+
+  // 2. Read fields only from that complete, balanced object.
+  const entryMatches = findSeoEntryMatches(src, data.id, corpusPath(seoFile));
+  if (entryMatches.length === 0) {
     throw new Error(`[validate-ld] SEO entry ${entryKey} not found in ${corpusPath(seoFile)}`);
   }
-
-  // 2. Extract using the same regex ogPagesPlugin uses
-  const keyRx = new RegExp(`'blog-${data.id.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}':\\s*\\{`);
-  const km = src.match(keyRx);
-  if (!km) throw new Error(`[validate-ld] Could not match entry ${entryKey}`);
-  const start = km.index;
-  const block = src.substring(start, Math.min(start + 3000, src.length));
+  if (entryMatches.length > 1) {
+    throw new Error(`[validate-ld] Multiple SEO entries found for ${entryKey} in ${corpusPath(seoFile)}`);
+  }
+  const { index, closeIdx } = entryMatches[0];
+  const block = src.slice(index, closeIdx + 1);
 
   // Match single-quoted strings (same logic as ogPagesPlugin matchStr)
   const matchStr = (key) => {

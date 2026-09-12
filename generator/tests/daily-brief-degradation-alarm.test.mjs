@@ -47,6 +47,19 @@ import { sliceBetween, sliceFrom, sliceUntil } from './lib/anchored-slice.mjs';
 const REPO_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
 const WORKFLOW_PATH = path.join(REPO_ROOT, '.github', 'workflows', 'generate-daily-brief.yml');
 
+test('la soglia conserva la misura storica che la tara', () => {
+  const source = readFileSync(
+    path.join(REPO_ROOT, 'generator', 'scripts', 'lib', 'daily-brief-data.mjs'),
+    'utf8',
+  );
+
+  assert.ok(source.includes('35 snapshot commit, 32 date `dateIso` distinte'));
+  assert.ok(source.includes('`borderWait` ha 1 sequenza consecutiva di 20'));
+  assert.match(source, /`jobs` ha 0 sequenze\s+\* consecutive e 1 sequenza isolata\/alternata/);
+  assert.ok(source.includes('la soglia 3 è confermata dal dato e non viene cambiata'));
+  assert.ok(source.includes('git log --before=2026-09-12 --format=%H -- public/data/daily-brief.json'));
+});
+
 /** Alternatives the commit-step grep must treat as a permanent push rejection. */
 const PERMANENT_REJECTION_SIGNS = [
   'denied',
