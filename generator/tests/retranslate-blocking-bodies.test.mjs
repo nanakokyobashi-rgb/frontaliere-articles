@@ -129,6 +129,35 @@ test('la ri-traduzione può togliere un fatto vuoto se restano tre superstiti', 
   assert.doesNotMatch(guarded.sections.body1, /non specificato/i);
 });
 
+test('la ri-traduzione rifiuta una sezione Fatti chiave eliminata o rinominata', () => {
+  const guarded = guardTranslatedKeyFacts({
+    body1: [
+      '## Informazioni importanti',
+      '- **Cosa**: assegno familiare.',
+      '- **Quando**: 2026.',
+      '- **Dove**: Cantone di Zugo.',
+    ].join('\n'),
+  });
+  assert.equal(guarded.changed, false);
+  assert.match(guarded.issue, /sezione Fatti chiave riconosciuta/);
+  assert.equal(
+    shouldWrite({ oldCodes: ['truncated-bold'], newCodes: [], missingField: null, qualityIssue: guarded.issue }).write,
+    false,
+  );
+});
+
+test('la ri-traduzione rifiuta una sezione riconosciuta sotto la soglia minima', () => {
+  const guarded = guardTranslatedKeyFacts({
+    body1: [
+      '## Fatti chiave',
+      '- **Cosa**: assegno familiare.',
+      '- **Dove**: Cantone di Zugo.',
+    ].join('\n'),
+  });
+  assert.equal(guarded.changed, false);
+  assert.match(guarded.issue, /almeno 3 fatti/);
+});
+
 test('la guardia dei fatti chiave sta prima del gate e della scrittura atomica', () => {
   const source = fs.readFileSync(
     new URL('../scripts/retranslate-blocking-bodies.mjs', import.meta.url),

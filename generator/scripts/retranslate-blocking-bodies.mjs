@@ -87,7 +87,11 @@ import { fileURLToPath } from 'node:url';
 import { translateFieldFreeMt } from './lib/article-free-mt.mjs';
 import { freeTranslateWithRetry, balanceMarkdownMarkers } from './lib/free-translate.mjs';
 import { runFactualityGates } from './lib/article-factuality-gates.mjs';
-import { MIN_FACTS_PER_SECTION, stripVacuousFacts } from './lib/key-facts-specificity.mjs';
+import {
+  MIN_FACTS_PER_SECTION,
+  parseAiSearchSections,
+  stripVacuousFacts,
+} from './lib/key-facts-specificity.mjs';
 import { unescapeTsString } from './lib/unescape-ts-string.mjs';
 import { escapeForSingleQuoteTS } from './lib/article-meta-block.mjs';
 import { sanitizeBodyText } from './lib/sanitize-body-braces.mjs';
@@ -225,6 +229,15 @@ export function guardTranslatedKeyFacts(sections) {
     return {
       sections,
       issue: `[key-facts-specificity] body1 sotto la soglia di ${MIN_FACTS_PER_SECTION} fatti dopo la ri-traduzione`,
+      changed: false,
+      result,
+    };
+  }
+  const recognizedSections = parseAiSearchSections(result.value);
+  if (!recognizedSections.some((section) => section.bullets.length >= MIN_FACTS_PER_SECTION)) {
+    return {
+      sections,
+      issue: `[key-facts-specificity] la ri-traduzione non conserva una sezione Fatti chiave riconosciuta con almeno ${MIN_FACTS_PER_SECTION} fatti`,
       changed: false,
       result,
     };

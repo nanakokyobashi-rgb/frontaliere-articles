@@ -162,7 +162,7 @@ const PLURAL_CHAINED_PR_STATE_RE = /^\s*#\s*\d+/i;
 // il pattern ricorrente dei body daily: dichiarano una coda interna, non un
 // impedimento operativo che richieda una issue o una decisione del proprietario.
 const INTERNAL_BLOCKED_SEQUENCE_RE =
-  /\b(?:daily\s+bucket|bucket\s+giornalier[oa]|item[-\s]+per[-\s]+item|(?:restant[ie]|remaining)\s+(?:item|items|PR|PRs)|(?:PR|item|items)\s+(?:successiv[ae]|successive|following|future))\b/i;
+  /\b(?:daily\s+bucket|bucket\s+giornalier[oa]|item[-\s]+per[-\s]+item|(?:restant[ie]|remaining)\s+(?:item|items|PR|PRs)|(?:item|items|PR|PRs)\s+(?:restant[ie]|remaining)|(?:PR|item|items)\s+(?:successiv[oaie]|following|future)|prossim[oaie]\s+(?:PR|item|items)|(?:next|upcoming)\s+(?:PR|item|items))\b/i;
 const BLOCKED_CAUSE_RE =
   /\b(?:blocked|bloccato|bloccata|bloccati|bloccate)\s*[:—–-]\s*([^\n]*)/i;
 

@@ -77,9 +77,43 @@ const MAX_PR_BODY_BYTES = 512 * 1024;
 const IMPLEMENTED_HEADER_RE = /^[ \t]{0,3}#{2,3}[ \t]+Implementato\b/im;
 const NON_IMPLEMENTED_HEADER_RE = /^[ \t]{0,3}#{2,3}[ \t]+Non[ \t]+implementato[^\n]*\(ancora\)/im;
 const NON_IMPLEMENTED_ANY_HEADER_RE = /^[ \t]{0,3}#{2,3}[ \t]+Non[ \t]+implementato\b/im;
-const CHAINED_PR_RE = /\bPR\s+concatenat[ao]\b/i;
-const CHAINED_PR_NUMBER_RE = /\bPR\s+concatenat[ao]\s*#\s*\d+/i;
-const BODY_STATE_RE = /\bin\s+questa\s+PR\b|\bPR\s+concatenat[ao]\s*#\s*\d+\b|\bper\s+scelta\b|\bby\s+construction\b|\bblocked\s*:\s*\S|\bfalso\s+positivo\b/i;
+const CHAINED_PR_MENTION_RE = /\bPR\s+concatenat[aoei]\b/gi;
+const CHAINED_PR_NUMBER_RE = /^\s*#\s*\d+/i;
+const BODY_STATE_RE = /\bin\s+questa\s+PR\b|\bPR\s+concatenat[aoei]\s*#\s*\d+\b|\bper\s+scelta\b|\bby\s+construction\b|\bblocked\s*:\s*\S|\bfalso\s+positivo\b/i;
+
+// Keep the bridge's standalone snapshot aligned with the corpus-only body
+// validator. The action copies this file without `scripts/lib/`, so importing
+// the canonical module here would make the fallback fail before it can validate
+// a body. These are the same conservative sequencing forms and emphasis rules.
+const EMPHASIS_RUN_RE = /[*_`]+/g;
+const WORD_CHAR_RE = /[\p{L}\p{N}]/u;
+function stripBodyEmphasis(value) {
+  return String(value || '').replace(EMPHASIS_RUN_RE, (run, at, whole) => {
+    const prev = whole[at - 1];
+    const next = whole[at + run.length];
+    return /^_+$/.test(run) && prev && next && WORD_CHAR_RE.test(prev) && WORD_CHAR_RE.test(next) ? '' : ' ';
+  }).replace(/[^\S\n]+/g, ' ');
+}
+
+const INTERNAL_BLOCKED_SEQUENCE_RE =
+  /\b(?:daily\s+bucket|bucket\s+giornalier[oa]|item[-\s]+per[-\s]+item|(?:restant[ie]|remaining)\s+(?:item|items|PR|PRs)|(?:item|items|PR|PRs)\s+(?:restant[ie]|remaining)|(?:PR|item|items)\s+(?:successiv[oaie]|following|future)|prossim[oaie]\s+(?:PR|item|items)|(?:next|upcoming)\s+(?:PR|item|items))\b/i;
+const BLOCKED_CAUSE_RE =
+  /\b(?:blocked|bloccato|bloccata|bloccati|bloccate)\s*[:—–-]\s*([^\n]*)/i;
+
+function invalidChainedPrState(text) {
+  const s = stripBodyEmphasis(text);
+  const mentions = [...s.matchAll(CHAINED_PR_MENTION_RE)];
+  return mentions.some((mention) => !CHAINED_PR_NUMBER_RE.test(
+    s.slice(mention.index + mention[0].length),
+  ));
+}
+
+function invalidBlockedCauseIn(text) {
+  const match = stripBodyEmphasis(text).match(BLOCKED_CAUSE_RE);
+  if (!match) return false;
+  const firstClause = match[1].split(/[.!?,;]/, 1)[0];
+  return INTERNAL_BLOCKED_SEQUENCE_RE.test(firstClause);
+}
 
 function realRoot(value) {
   try { return fs.realpathSync(value); } catch { return ''; }
@@ -472,8 +506,11 @@ export function validatePrBodyContract(body) {
     if (!hasNessuno && !bodyHasMeaningfulContent(section)) {
       violations.push('empty ## Non implementato (ancora)');
     }
-    if (bullets.some((bullet) => CHAINED_PR_RE.test(bullet) && !CHAINED_PR_NUMBER_RE.test(bullet))) {
+    if (bullets.some((bullet) => invalidChainedPrState(bullet))) {
       violations.push('PR concatenata requires a #N');
+    }
+    if (bullets.some((bullet) => invalidBlockedCauseIn(bullet))) {
+      violations.push('blocked internal sequencing is not an external cause');
     }
     if (bullets.some((bullet) => !BODY_STATE_RE.test(bullet))) {
       violations.push('every residual bullet requires a literal state');

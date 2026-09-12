@@ -196,6 +196,17 @@ test('#140: blocked per daily sequencing non equivale a un blocker esterno', () 
   assert.equal(blockingNextStepFindings(res).length, 1);
 });
 
+test('#140: le varianti di ordine e genere restano sequencing interno', () => {
+  for (const text of [
+    'Stato: blocked: item successivi',
+    'Stato: blocked: item restanti',
+    'Stato: blocked: prossima PR',
+  ]) {
+    assert.equal(invalidBlockedCauseIn(text), true, `sequencing non rilevato: ${text}`);
+    assert.equal(bulletState(text), null, `sequencing classificato come blocker: ${text}`);
+  }
+});
+
 test('#140: un blocker esterno resta stato anche se cita item residui dopo la causa', () => {
   const text = 'Stato: blocked: autorizzazione legale pendente; remaining items restano tracciati.';
   assert.equal(invalidBlockedCauseIn(text), false);
