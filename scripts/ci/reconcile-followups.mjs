@@ -161,7 +161,11 @@ function stripFencedBlocks(text) {
     out.push(line);
   }
 
-  return fence ? [...out, ...lines.slice(fenceStart)].join('\n') : out.join('\n');
+  const visible = fence ? [...out, ...lines.slice(fenceStart)].join('\n') : out.join('\n');
+  // Inline code is quoted evidence too. A filename such as
+  // `triage-sweep.mjs` must not turn a single-item follow-up into an aggregate
+  // merely because the path contains the word "sweep" (#1320/FU-028).
+  return visible.replace(/(`+)([^`\n]*?)\1/g, (span) => span.replace(/[^\n]/g, ' '));
 }
 
 function isBoldTitleLead(rest, lines = [], start = 0) {
@@ -203,7 +207,8 @@ export function hasEnumeratedItems(body) {
  * @returns {boolean}
  */
 export function isAggregateTitle(title = '', body = '') {
-  const t = String(title);
+  const t = stripFencedBlocks(title);
+  const bodyText = stripFencedBlocks(body);
   const m = t.match(/\b(\d+)\s+items?\s+(?:deferred|deferit[oi])\b/i);
   // An explicit count is authoritative once present — trust it fully instead
   // of falling through to the keyword fallback below, which exists ONLY for
@@ -212,8 +217,8 @@ export function isAggregateTitle(title = '', body = '') {
   // (e.g. "1 item deferred ... batch backfill...") is misclassified as an
   // aggregate despite explicitly saying "1 item" (#3378).
   if (m) return Number(m[1]) >= 2;
-  if (/\b(?:sweep|batch|bulk)\b/i.test(t)) return true;
-  return hasEnumeratedItems(body);
+  if (/\b(?:sweep|batch|bulk)\b/i.test(`${t}\n${bodyText}`)) return true;
+  return hasEnumeratedItems(bodyText);
 }
 
 const TECHNICAL_LABELS = new Set([UNCLASSIFIABLE_LABEL, LABEL, CLOSED_LABEL]);
@@ -468,6 +473,8 @@ export function negativeAcceptanceTokens(itemText) {
         || /(?:\bnessun\s*|\b(?:non|no|not)\s+(?:resti|rimanga|remain|rest|stay)?\s*)[`'"({]*$/i.test(beforeShort);
       const negativeAfter = /(?:\bsmettere\s+di\b|\bmust\s+not\b|\bnot\s+remain\b|\brimuov[ioa]\b|\belimin[ia]\b|\bsparit[oa]\b)/i.test(afterShort);
       const negativeWindow = negativeBefore || negativeAfter;
+      const prescriptiveMarker = /(?:\binvece\s+di\b|\binstead\s+of\b|\bsmettere\s+di\b|\bsostituisci\b|\breplace\b|\bmust\s+not\b|\bnot\s+remain\b)/i
+        .test(`${beforeShort} ${afterShort}`);
       // A few legacy cards describe a stale guard semantically instead of using
       // `sostituisci X con Y`: the length check and the whitespace-bearing input
       // literal are the old acceptance, while the validator call is the new one.
@@ -475,9 +482,10 @@ export function negativeAcceptanceTokens(itemText) {
       // arbitrary quoted string or `.length` expression into negative evidence.
       const semanticNormalization = /\b(?:normalizz\w*|trimm?at\w*|whitespace|spazi\w*|quot\w*|input|literal|valore)\b/i
         .test(`${beforeShort} ${afterShort}`);
-      const staleLengthGuard = semanticNormalization && /\.length\s*[<>=!]/.test(token);
+      const staleLengthGuard = prescriptiveMarker && semanticNormalization && /\.length\s*[<>=!]/.test(token);
       const tokenText = token.trim();
       const staleWhitespaceLiteral = semanticNormalization
+        && prescriptiveMarker
         && /^(['"]).*\1$/.test(tokenText)
         && /\s/.test(tokenText.slice(1, -1));
       if (replacementBefore || negativeWindow || staleLengthGuard || staleWhitespaceLiteral) {
@@ -769,10 +777,17 @@ function isRecognizableTransportPr(pr) {
   return /\b(?:lockstep|transport|trasporto)\b/i.test(identity);
 }
 
-function targetFileInAddressedProvenance(pr, targetFile) {
+function transportAddressesIssue(pr, issueNumber) {
+  const issue = Number(issueNumber);
+  return Number.isInteger(issue) && issue > 0
+    && new RegExp(`\\bAddresses\\s+#${issue}\\b`, 'i').test(String(pr?.body || ''));
+}
+
+function targetFileInAddressedProvenance(pr, targetFile, issueNumber) {
   if (normalizedPrFiles(pr).has(targetFile)) return { pr, viaTransport: false };
   const transportPr = (Array.isArray(pr?.supportingPrs) ? pr.supportingPrs : [])
     .find((candidate) => isRecognizableTransportPr(candidate)
+      && transportAddressesIssue(candidate, issueNumber)
       && normalizedPrFiles(candidate).has(targetFile));
   return transportPr ? { pr: transportPr, viaTransport: true } : null;
 }
@@ -815,7 +830,7 @@ export function legacyAddressEvidence(itemText, issueNumber, io, addressedPrs = 
       let targetProvenance = null;
       let provenancePr = null;
       for (const candidate of addressed) {
-        const candidateProvenance = targetFileInAddressedProvenance(candidate, targetFile);
+        const candidateProvenance = targetFileInAddressedProvenance(candidate, targetFile, issue);
         if (candidateProvenance) {
           targetProvenance = candidateProvenance;
           provenancePr = candidate;
@@ -889,6 +904,11 @@ export function legacyResolutionContext(issueNumber, body, io, addressedPrs = []
     byItem,
     validItems,
   };
+}
+
+export function hasStrongLegacyEvidence(evidence) {
+  return (Array.isArray(evidence) ? evidence : [])
+    .some((entry) => entry?.kind === 'legacy-negative');
 }
 
 /**
@@ -1147,10 +1167,9 @@ export function addressedMergedRows(issueNumber, searchedRows = [], fallbackRows
   if (!Number.isInteger(n) || n <= 0) return [];
   const addressed = new RegExp(`\\bAddresses\\s+#${n}\\b`, 'i');
   const seen = new Set();
-  const rows = [
-    ...(Array.isArray(searchedRows) ? searchedRows : []),
-    ...(Array.isArray(fallbackRows) ? fallbackRows : []),
-  ];
+  const rows = Array.isArray(searchedRows) && searchedRows.length > 0
+    ? searchedRows
+    : (Array.isArray(fallbackRows) ? fallbackRows : []);
   return rows.filter((row) => {
     const number = Number(row?.number);
     if (!Number.isInteger(number) || number <= 0 || seen.has(number)) return false;
@@ -1199,7 +1218,12 @@ function mergedAddressedPrs(issueNumber) {
   const addressedRows = addressedMergedRows(n, mergedAddressedListCache.get(n), mergedPrListCache);
   for (const listed of addressedRows) {
     const detail = mergedPrDetails(listed.number);
-    if (detail) candidates.push({ ...detail, supportingPrs: transportPrs });
+    if (detail) {
+      candidates.push({
+        ...detail,
+        supportingPrs: transportPrs.filter((transport) => transportAddressesIssue(transport, n)),
+      });
+    }
   }
   mergedAddressedPrCache.set(n, candidates);
   return candidates;
@@ -1426,7 +1450,7 @@ function main() {
       commentLookupFailed++;
       console.log(`::warning::reconcile-followups: impossibile leggere i commenti di #${iss.number}; flag/chiusura non determinabili, issue lasciata nel ciclo`);
     }
-    const legacyStrongEvidence = evidence.some((e) => e.kind === 'legacy-content');
+    const legacyStrongEvidence = hasStrongLegacyEvidence(evidence);
     const strongEvidence = isStrongAutoCloseEvidence(evidence.map((e) => e.tok)) || legacyStrongEvidence;
     const action = decideReconcileAction({
       resolved, hasMaybeResolved, hasPriorFlag, isAggregate, blocked, noAutoclose: NO_AUTOCLOSE, strongEvidence,

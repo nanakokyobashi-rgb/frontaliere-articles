@@ -41,6 +41,7 @@ import {
   claimFreeMtLlmFallback,
   recordFreeMtUnusableOutput,
   wasFreeMtUnusable,
+  maxFreeMtLlmFallbacksPerLocale,
   MAX_FREE_MT_LLM_FALLBACKS_PER_RUN,
   MAX_FREE_MT_LLM_FALLBACKS_PER_LOCALE,
 } from '../scripts/lib/free-mt-recovery.mjs';
@@ -113,13 +114,13 @@ async function runMissingFieldLoop({ data, itContent, callWithRetry, detectTrunc
   const RUN_REPORT = { translation: translationReport || createFreeMtRecoveryReport() };
   const fn = new Function(
     'data', 'itContent', 'callWithRetry', 'translatedStringOrNull', 'hasUsableTranslatedText', 'metaFieldPlausibilityMiss', 'detectTruncation', 'console',
-    'ARTICLE_TRANSLATE_FREE_MT', 'claimFreeMtLlmFallback', 'wasFreeMtUnusable', 'RUN_REPORT', 'MAX_FREE_MT_LLM_FALLBACKS_PER_RUN', 'MAX_FREE_MT_LLM_FALLBACKS_PER_LOCALE',
+    'ARTICLE_TRANSLATE_FREE_MT', 'claimFreeMtLlmFallback', 'wasFreeMtUnusable', 'maxFreeMtLlmFallbacksPerLocale', 'RUN_REPORT', 'MAX_FREE_MT_LLM_FALLBACKS_PER_RUN', 'MAX_FREE_MT_LLM_FALLBACKS_PER_LOCALE',
     `return (async () => { ${MISSING_FIELD_LOOP_SRC} })();`,
   );
   // `metaFieldPlausibilityMiss` e' il floor VERO (#798), non un mock: il ramo
   // floor-miss del loop tiene il valore tradotto invece di cadere sul fallback
   // IT, e un mock qui non proverebbe quel comportamento.
-  await fn(data, itContent, callWithRetry, translatedStringOrNull, hasUsableTranslatedText, metaFieldPlausibilityMiss, detectTruncation || (() => []), capturingConsole, true, claimFreeMtLlmFallback, wasFreeMtUnusable, RUN_REPORT, MAX_FREE_MT_LLM_FALLBACKS_PER_RUN, MAX_FREE_MT_LLM_FALLBACKS_PER_LOCALE);
+  await fn(data, itContent, callWithRetry, translatedStringOrNull, hasUsableTranslatedText, metaFieldPlausibilityMiss, detectTruncation || (() => []), capturingConsole, true, claimFreeMtLlmFallback, wasFreeMtUnusable, maxFreeMtLlmFallbacksPerLocale, RUN_REPORT, MAX_FREE_MT_LLM_FALLBACKS_PER_RUN, MAX_FREE_MT_LLM_FALLBACKS_PER_LOCALE);
 }
 
 /**
@@ -460,11 +461,11 @@ test('translatedStringOrNull: rifiuta la serializzazione letterale di null, non 
 
 // ── Il cap free-MT e' scopato ai campi che il free-MT ha rifiutato ─────────
 //
-// Il budget e' 7 per RUN, i campi candidati 21 per articolo. Addebitarlo a
-// ogni ingresso nel loop lo esaurisce con un articolo solo, e da li' in poi
-// OGNI campo mancante salta il retry mirato e cade sul valore italiano: prosa
-// IT sotto `/en/`, `/de/`, `/fr/`, cioe' il difetto #831 che la catena
-// dovrebbe chiudere.
+// Il budget e' proporzionato ai campi indicizzati per articolo, con un tetto
+// globale per run. Addebitarlo a ogni ingresso nel loop lo esaurirebbe con un
+// articolo solo, e da li' in poi OGNI campo mancante salta il retry mirato e
+// cade sul valore italiano: prosa IT sotto i locali tradotti, cioe' il difetto
+// #831 che la catena dovrebbe chiudere.
 function reportConCapEsaurito(coppieRifiutate = [], localiEsauriti = ['de']) {
   const report = createFreeMtRecoveryReport();
   for (const [targetLang, field] of coppieRifiutate) {
@@ -504,14 +505,14 @@ test('ramo missing-field: faq.q e faq.a rifiutati ottengono il retry anche se il
   const callWithRetry = async (_prompt, _tokens, label) => {
     calls.push(label);
     const part = label.includes('.q[') ? 'q' : 'a';
-    return { faq: [{ [part]: part === 'q' ? 'Question in English.' : 'Answer in English.' }] };
+    return { faq: [{ [part]: part === 'q' ? 'Question in English, repaired.' : 'Answer in English, repaired.' }] };
   };
 
   await runMissingFieldLoop({ data, itContent, callWithRetry, translationReport: report });
 
   assert.deepEqual(calls, ['en:faq.q[0]-missing-retry', 'en:faq.a[0]-missing-retry']);
-  assert.equal(data.content.en.faq[0].q, 'Question in English.');
-  assert.equal(data.content.en.faq[0].a, 'Answer in English.');
+  assert.equal(data.content.en.faq[0].q, 'Question in English, repaired.');
+  assert.equal(data.content.en.faq[0].a, 'Answer in English, repaired.');
 });
 
 test("recovery FAQ indicizzata: un rifiuto non contagia le coppie gia' usabili", async () => {
@@ -556,7 +557,7 @@ test('il report di recovery si resetta per articolo e separa gli addebiti del ca
   const translateStart = src.indexOf('async function translateArticle(data) {');
   assert.notEqual(translateStart, -1);
   const afterStart = src.slice(translateStart, translateStart + 500);
-  assert.match(afterStart, /RUN_REPORT\.translation = createFreeMtRecoveryReport\(\)/);
+  assert.match(afterStart, /RUN_REPORT\.translation = createFreeMtRecoveryReport\(\{ faqCount \}\)/);
   assert.match(src, /return \{ q: q \|\| '', a: a \|\| '' \}/);
   assert.match(src, /unusable_fields=\$\{JSON\.stringify\(recovery\.unusableFields \|\| \{\}\)\}/);
 });

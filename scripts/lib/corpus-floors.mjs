@@ -275,6 +275,23 @@ export const SEO_CHUNK_DIR = path.join('content', 'seo');
  * chunk no: quella si importa da `RSS_SECTIONS` (AGENTS.md #6), ed e' la parte
  * che e' gia' andata alla deriva una volta.
  */
+/**
+ * Decode the quoted value used by the TypeScript SEO literals.
+ *
+ * The source string is read before TypeScript evaluates it, so an escaped
+ * quote and an escaped backslash must be decoded in the same order as the
+ * producer. The placeholder keeps a literal pair of backslashes from being
+ * mistaken for the beginning of another escape.
+ */
+export function unescapeQuoted(value, quote = "'") {
+  if (value === undefined) return undefined;
+  return String(value)
+    .split('\\\\').join('\u0000')
+    .split(`\\${quote}`).join(quote)
+    .split('\\n').join('\n')
+    .split('\u0000').join('\\');
+}
+
 function collectSeoEntryMetadataInternal(src, into, feedOnly) {
   const entryRe = /'blog-([^']+)':\s*\{/g;
   const positions = [];
@@ -289,8 +306,9 @@ function collectSeoEntryMetadataInternal(src, into, feedOnly) {
     // Match parseSeoBlogs: a successor is the exact boundary and the final
     // entry runs to the end of the source, with no fixed truncation.
     const block = src.slice(start, end);
+    const keywordMatch = block.match(/keywords:\s*'((?:[^'\\]|\\.)*)'/);
     const metadata = {
-      keywords: block.match(/keywords:\s*'((?:[^'\\]|\\.)*)'/)?.[1],
+      keywords: unescapeQuoted(keywordMatch?.[1]),
       headline: block.match(/"headline":\s*"((?:[^"\\]|\\.)*)"/)?.[1],
       datePublished: block.match(/"datePublished":\s*"([^"]+)"/)?.[1],
     };

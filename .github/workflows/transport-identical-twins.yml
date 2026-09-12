@@ -215,6 +215,10 @@ jobs:
             const fs = require("fs");
             const r = require("/tmp/transport.json");
             const list = r.transported.map((t) => "- `" + t.path + "` \u2190 `" + t.sitePath + "` del sito").join("\n");
+            const workflowsBlocked = process.env.PAT_WORKFLOWS_SCOPE !== "true";
+            const deferred = workflowsBlocked
+              ? "- Le voci `adapted` restano escluse per costruzione; i gemelli sotto `.github/workflows/` richiedono lo scope `workflows`: blocked: PAT_WORKFLOWS_SCOPE non è true per questa identità."
+              : "- Le voci `adapted` restano escluse per costruzione; i gemelli sotto `.github/workflows/` non sono bloccati dallo scope in questa passata e, se `site-ahead`, sono eleggibili al trasporto in questa PR.";
             fs.writeFileSync("/tmp/pr-body.md", [
               "## Implementato",
               "- Copia automatica dei gemelli dichiarati `mode: identical` in `scripts/ci/loop-sync-manifest.json` che il sito ha portato avanti mentre questo lato restava fermo sulla baseline (stato `site-ahead`), piu\u2019 la baseline riallineata per le sole voci copiate. Aperta da `.github/workflows/transport-identical-twins.yml` (issue #331).",
@@ -222,7 +226,7 @@ jobs:
               list,
               "",
               "## Non implementato (ancora)",
-              "- Le voci `adapted` e i gemelli sotto `.github/workflows/`: fuori dall\u2019insieme di partenza per costruzione \u2014 le prime perche\u2019 differiscono apposta, i secondi perche\u2019 il token del ciclo non ha lo scope `workflows`. Restano una copia a mano, e il drift check continua a datarle: in questa PR, blocked.",
+              deferred,
               "",
             ].join("\n"));
           '

@@ -10,8 +10,10 @@ import {
   addressedMergedRows,
   aggregateCloseGate,
   declaredTargetFiles,
+  hasStrongLegacyEvidence,
   legacyAddressEvidence,
   negativeAcceptanceTokens,
+  isAggregateTitle,
   stripJavaScriptComments,
 } from '../../scripts/ci/reconcile-followups.mjs';
 import { detectAlreadyResolved } from '../../scripts/ci/followup-resolution-match.mjs';
@@ -62,6 +64,14 @@ test('negative acceptance marca solo la forma sostituita, non la forma nuova', (
     '- Suggested action: sostituisci `oldThing.exec(r.text)` con `[...r.text.matchAll(...)]`.',
   ].join('\n');
   assert.deepEqual(negativeAcceptanceTokens(item), ['oldThing.exec(r.text)']);
+  assert.deepEqual(
+    negativeAcceptanceTokens([
+      '- Target file: scripts/ci/example.mjs',
+      '- Suggested action: il gate deve accettare solo `input.length > 0`.',
+    ].join('\n')),
+    [],
+    'una acceptance positiva non deve diventare un token da rimuovere',
+  );
 });
 
 test('absence check ignora commenti ma conserva stringhe eseguibili', () => {
@@ -71,6 +81,12 @@ test('absence check ignora commenti ma conserva stringhe eseguibili', () => {
   ].join('\n'));
   assert.doesNotMatch(stripped, /`--jq`, `length`/);
   assert.match(stripped, /"--jq", "length"/);
+});
+
+test('isAggregateTitle allinea titolo e corpo ignorando gli span inline', () => {
+  assert.equal(isAggregateTitle('follow-up(#10): `triage-sweep.mjs` cleanup', 'single item'), false);
+  assert.equal(isAggregateTitle('follow-up(#10): cleanup', 'single item cites `needs-human-sweep.yml`'), false);
+  assert.equal(isAggregateTitle('follow-up(#10): cleanup', 'This batch contains multiple items'), true);
 });
 
 test('la provenienza Addresses ricade sulla lista merged quando la search è vuota', () => {
@@ -287,6 +303,7 @@ test('il trasporto richiede identità riconoscibile e target nei suoi files', ()
       number: 1333,
       mergedAt: '2026-09-11T03:14:48Z',
       title: 'Lockstep crawler workflows with the site',
+      body: '## Implementato\n\nAddresses #1259',
       headRefName: 'crawler-workflows-lockstep-test',
       files: [{ path: TARGET }],
     }],
@@ -294,12 +311,28 @@ test('il trasporto richiede identità riconoscibile e target nei suoi files', ()
   const result = legacyAddressEvidence(item, 1259, io, transported);
   assert.equal(result.resolved, true);
   assert.equal(result.evidence.find((entry) => entry.kind === 'legacy-address').transportPr, 1333);
+  assert.equal(hasStrongLegacyEvidence(result.evidence), true);
   assert.equal(legacyAddressEvidence(item, 1259, io, [{
     number: 1335,
     mergedAt: '2026-09-11T03:28:43Z',
     body: 'Addresses #1259 — sync',
     files: [],
   }]).resolved, false);
+  assert.equal(
+    hasStrongLegacyEvidence(legacyAddressEvidence(item, 1259, io, [{
+      number: 1335,
+      mergedAt: '2026-09-11T03:28:43Z',
+      body: 'Addresses #1259 — sync',
+      files: [],
+      supportingPrs: [{
+        number: 1333,
+        mergedAt: '2026-09-11T03:14:48Z',
+        body: '## Implementato\n\nAddresses #9999',
+        files: [{ path: TARGET }],
+      }],
+    }]).evidence),
+    false,
+  );
 });
 
 test('legacy deriva il target dal PR Addresses quando manca Target file', () => {

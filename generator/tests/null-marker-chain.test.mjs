@@ -55,6 +55,8 @@ import {
   MAX_FREE_MT_LLM_FALLBACKS_PER_RUN,
   MAX_FREE_MT_LLM_FALLBACKS_PER_LOCALE,
   FREE_MT_LLM_FALLBACK_LOCALES,
+  freeMtCandidateFieldCount,
+  maxFreeMtLlmFallbacksPerLocale,
 } from '../scripts/lib/free-mt-recovery.mjs';
 import { isReservedPublishedSlug } from '../../scripts/lib/published-slug-guard.mjs';
 import { buildSitemap } from '../../scripts/lib/build-sitemap.mjs';
@@ -327,14 +329,33 @@ describe('free-MT recovery — il degrado e’ misurato e limitato per run', () 
     assert.deepEqual(report.llmFallbacksByLocale, spesi);
   });
 
-  test('errori di trasporto e sentinel markdown corrotti sono telemetria, non campi da addebitare', () => {
+  test('#1320 FU-033 — il cap per locale segue il numero reale di coppie FAQ', () => {
+    assert.equal(freeMtCandidateFieldCount(0), 5);
+    assert.equal(freeMtCandidateFieldCount(1), 7);
+    assert.equal(freeMtCandidateFieldCount(7), 19);
+    assert.equal(maxFreeMtLlmFallbacksPerLocale(1), MAX_FREE_MT_LLM_FALLBACKS_PER_LOCALE);
+    assert.ok(maxFreeMtLlmFallbacksPerLocale(7) > MAX_FREE_MT_LLM_FALLBACKS_PER_LOCALE);
+
+    const report = createFreeMtRecoveryReport({ faqCount: 7 });
+    assert.equal(report.faqCount, 7);
+    for (let i = 0; i < MAX_FREE_MT_LLM_FALLBACKS_PER_LOCALE + 1; i += 1) {
+      assert.equal(claimFreeMtLlmFallback(report, 'en'), true, `fallback FAQ en ${i + 1}`);
+    }
+  });
+
+  test('#1320 FU-034 — passthrough e sentinel markdown corrotti addebitano il campo', () => {
     const report = createFreeMtRecoveryReport();
     recordFreeMtUnusableOutput(report, { targetLang: 'de', fieldName: 'title', reason: 'error' });
     recordFreeMtUnusableOutput(report, { targetLang: 'de', fieldName: 'excerpt', reason: 'mangled-nav-link' });
+    recordFreeMtUnusableOutput(report, { targetLang: 'de', fieldName: 'body1', reason: 'passthrough' });
 
-    assert.equal(report.unusableOutputs, 2);
-    assert.deepEqual(report.unusableByLocale, { de: 2 });
-    assert.deepEqual(report.unusableFields, {}, 'solo output testualmente inutilizzabile o non-stringa paga il cap');
+    assert.equal(report.unusableOutputs, 3);
+    assert.deepEqual(report.unusableByLocale, { de: 3 });
+    assert.deepEqual(
+      report.unusableFields,
+      { 'de:excerpt': 1, 'de:body1': 1 },
+      'passthrough e sentinel corrotto devono pagare il cap del campo',
+    );
   });
 });
 

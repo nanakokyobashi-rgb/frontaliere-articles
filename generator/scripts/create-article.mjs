@@ -150,8 +150,8 @@ import {
   recordFreeMtUnusableOutput,
   claimFreeMtLlmFallback,
   wasFreeMtUnusable,
+  maxFreeMtLlmFallbacksPerLocale,
   MAX_FREE_MT_LLM_FALLBACKS_PER_RUN,
-  MAX_FREE_MT_LLM_FALLBACKS_PER_LOCALE,
 } from './lib/free-mt-recovery.mjs';
 import { isReservedPublishedSlug } from '../../scripts/lib/published-slug-guard.mjs';
 import { AI_SEARCH_PROMPT_BLOCK_IT } from './lib/ai-search-template.mjs';
@@ -10007,7 +10007,8 @@ async function translateArticle(data) {
   // Il report di recovery è una quota PER ARTICOLO. RUN_REPORT vive più a
   // lungo del funnel: senza reset, un secondo articolo erediterebbe i campi
   // rifiutati e i claim già spesi dal primo (issue #1244).
-  RUN_REPORT.translation = createFreeMtRecoveryReport();
+  const faqCount = Array.isArray(data?.content?.it?.faq) ? data.content.it.faq.length : 0;
+  RUN_REPORT.translation = createFreeMtRecoveryReport({ faqCount });
 
   async function callWithRetry(prompt, maxTokens, label) {
     const safePrompt = `${prompt}\n\n${JSON_QUOTE_SAFETY_RULE_IT}`;
@@ -10409,14 +10410,15 @@ ${terminologyByLang[targetLang] || ''}`;
       // un budget unico per run si esaurirebbe tutto su `en` proprio nella run
       // in cui il free-MT degrada su tutti i campi — `/en/` recuperato, `/de/`
       // e `/fr/` pubblicati in italiano, cioe' di nuovo #831. Vedi
-      // `MAX_FREE_MT_LLM_FALLBACKS_PER_LOCALE`.
+      // `maxFreeMtLlmFallbacksPerLocale()` dimensiona il cap sui campi FAQ
+      // realmente indicizzati nell'articolo, non sul solo caso base.
       const capBloccaIlRetry = ARTICLE_TRANSLATE_FREE_MT
         && wasFreeMtUnusable(RUN_REPORT.translation, locale, recoveryField)
-        && !claimFreeMtLlmFallback(RUN_REPORT.translation, locale);
+        && !claimFreeMtLlmFallback(RUN_REPORT.translation, locale, RUN_REPORT.translation.faqCount);
       if (capBloccaIlRetry) {
         console.error(
           `  ⚠️  Recupero LLM per ${field} (${locale}) saltato: raggiunta la quota di `
-          + `${MAX_FREE_MT_LLM_FALLBACKS_PER_LOCALE} fallback free-MT per locale `
+          + `${maxFreeMtLlmFallbacksPerLocale(RUN_REPORT.translation.faqCount)} fallback free-MT per locale `
           + `(cap ${MAX_FREE_MT_LLM_FALLBACKS_PER_RUN} per run) — `
           + `${ultimaRisorsa ? 'valore tradotto mantenuto' : 'fallback al valore italiano'}`,
         );

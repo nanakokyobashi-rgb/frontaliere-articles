@@ -30,7 +30,7 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { reconciliations, ROUTE_CONFLICTS } from '../../scripts/ci/reconcile-routing-labels.mjs';
+import { parseMinAgeSec, reconciliations, ROUTE_CONFLICTS } from '../../scripts/ci/reconcile-routing-labels.mjs';
 import { staleFixRescueGate } from '../../scripts/ci/followup-drainer.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
@@ -43,6 +43,15 @@ const iss = (number, labels, ageSec = 600) => ({
   number,
   labels: labels.map((name) => ({ name })),
   updatedAt: agoSec(ageSec),
+});
+
+test('MIN_AGE_SEC accetta solo un intero positivo e ricade sul default', () => {
+  assert.equal(parseMinAgeSec('1'), 1);
+  assert.equal(parseMinAgeSec('120'), 120);
+  assert.equal(parseMinAgeSec('0'), 120);
+  assert.equal(parseMinAgeSec('-5'), 120);
+  assert.equal(parseMinAgeSec('1.5'), 120);
+  assert.equal(parseMinAgeSec('non-numerico'), 120);
 });
 
 test('doppio instradamento fermo: vince la label attiva, cade quella di coda', () => {

@@ -7,10 +7,9 @@
  * LLM quota sink.
  */
 
-// La superficie del loop missing-field è passata da 15 a 21 candidati per
-// articolo (5 → 7 campi per ciascuno dei 3 locali, includendo faq.q/faq.a).
-// Manteniamo la stessa proporzione di recovery (un fallback ogni tre campi)
-// senza lasciare le FAQ fuori dalla quota osservata.
+// La superficie del loop missing-field e' 5 campi fissi piu' due chiavi per
+// ogni coppia FAQ indicizzata (`faq.q[n]`/`faq.a[n]`). Il cap per locale deve
+// quindi seguire l'articolo, non una costante tarata sul caso senza FAQ.
 export const MAX_FREE_MT_LLM_FALLBACKS_PER_RUN = 7;
 
 /**
@@ -45,6 +44,39 @@ export const MAX_FREE_MT_LLM_FALLBACKS_PER_LOCALE = Math.ceil(
   MAX_FREE_MT_LLM_FALLBACKS_PER_RUN / FREE_MT_LLM_FALLBACK_LOCALES.length,
 );
 
+export const FREE_MT_BASE_FIELDS_PER_LOCALE = 5;
+export const FREE_MT_FIELDS_PER_FAQ_PAIR = 2;
+export const FREE_MT_QUOTA_REFERENCE_FIELDS = 7;
+const FREE_MT_CAP_REASONS = new Set([
+  'unusable-text',
+  'non-string',
+  'passthrough',
+  'mangled-nav-link',
+]);
+
+function normalizeFaqCount(value) {
+  return Number.isInteger(value) && value >= 0 ? value : 0;
+}
+
+export function freeMtCandidateFieldCount(faqCount = 0) {
+  return FREE_MT_BASE_FIELDS_PER_LOCALE
+    + FREE_MT_FIELDS_PER_FAQ_PAIR * normalizeFaqCount(faqCount);
+}
+
+/**
+ * Cap proporzionale al numero di campi che il locale deve davvero tradurre.
+ * Il caso di riferimento e' un articolo con una coppia FAQ: sette campi e
+ * tre retry, cioe' il cap storico; con sette coppie i 19 campi indicizzati
+ * ricevono nove tentativi prima del tetto globale della run.
+ */
+export function maxFreeMtLlmFallbacksPerLocale(faqCount = 1) {
+  return Math.max(1, Math.ceil(
+    MAX_FREE_MT_LLM_FALLBACKS_PER_LOCALE
+      * freeMtCandidateFieldCount(faqCount)
+      / FREE_MT_QUOTA_REFERENCE_FIELDS,
+  ));
+}
+
 /**
  * Chiave di un campo rifiutato: `<locale>:<campo>`, dove `<campo>` e' il nome
  * del campo di contenuto (`title`, `excerpt`, `body1`...), NON il `fieldType`
@@ -55,8 +87,9 @@ export function freeMtFieldKey(targetLang, field) {
   return `${targetLang || '?'}:${field || '?'}`;
 }
 
-export function createFreeMtRecoveryReport() {
+export function createFreeMtRecoveryReport({ faqCount = 0 } = {}) {
   return {
+    faqCount: normalizeFaqCount(faqCount),
     unusableOutputs: 0,
     nonStringOutputs: 0,
     unusableByLocale: {},
@@ -82,7 +115,7 @@ export function recordFreeMtUnusableOutput(report, { reason, targetLang, field, 
   if (reason === 'non-string') {
     report.nonStringOutputs = (report.nonStringOutputs || 0) + 1;
   }
-  const countsTowardCap = reason === 'unusable-text' || reason === 'non-string';
+  const countsTowardCap = FREE_MT_CAP_REASONS.has(reason);
   const fieldKey = field || fieldName;
   if (countsTowardCap && targetLang && fieldKey) {
     if (!report.unusableFields || typeof report.unusableFields !== 'object') report.unusableFields = {};
@@ -114,14 +147,15 @@ export function wasFreeMtUnusable(report, targetLang, field) {
  * `?`, che ha la sua quota e quindi non puo' comunque svuotare il budget dei
  * locali veri.
  */
-export function claimFreeMtLlmFallback(report, locale) {
+export function claimFreeMtLlmFallback(report, locale, faqCount = report?.faqCount ?? 0) {
   if (!report || typeof report !== 'object') return false;
   if (!report.llmFallbacksByLocale || typeof report.llmFallbacksByLocale !== 'object') {
     report.llmFallbacksByLocale = {};
   }
   const key = locale || '?';
   const usedHere = report.llmFallbacksByLocale[key] || 0;
-  if (usedHere >= MAX_FREE_MT_LLM_FALLBACKS_PER_LOCALE
+  const localeLimit = maxFreeMtLlmFallbacksPerLocale(faqCount);
+  if (usedHere >= localeLimit
     || (report.llmFallbacks || 0) >= MAX_FREE_MT_LLM_FALLBACKS_PER_RUN) {
     report.llmFallbackCapped = true;
     return false;

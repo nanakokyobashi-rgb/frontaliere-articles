@@ -2516,11 +2516,12 @@
       "path": "host/constants.ts",
       "sitePath": "build-plugins/constants.ts",
       "mode": "adapted",
-      "reason": "Costanti del sito che l'engine legge via SiteShellContract. E' un ESTRATTO PER CHIUSURA di build-plugins/constants.ts (850 righe la': solo le ~15 dichiarazioni che il contratto raggiunge, 177 righe qui), quindi non potra' mai essere byte-identico e adapted e' il mode giusto. Per questa sola entry scalarFingerprint confronta i 22 scalari authoritative: cambiamenti del sorgente fuori dalla chiusura restano stable, ma un digest diverso, mancante, malformato o non dichiarato non puo' mai essere stable. I comportamenti del contratto restano coperti dai fingerprint test esistenti; host/host-drift.test.mjs non esiste e non e' una guardia. Il follow-up corpus prepara il lato host al cambio della PR sito #8299: il gate statico passa dalla scansione arbitraria del namespace firebase:authUser: al marker esplicito frontaliere:auth-session, mentre il codice runtime conserva il match sulla chiave Firebase esatta. Il digest 22b3b2bf… e' la destinazione verificata del contratto dopo l'allineamento delle due PR, non una dichiarazione di parita' gia' presente sui branch main. Durante la finestra la divergenza e' intenzionale e va ricontrollata dopo #8299; il digest non dipende da segreti o variabili di ambiente del runner.",
+      "reason": "Costanti del sito che l'engine legge via SiteShellContract. E' un ESTRATTO PER CHIUSURA di build-plugins/constants.ts (850 righe la': solo le ~15 dichiarazioni che il contratto raggiunge, 177 righe qui), quindi non potra' mai essere byte-identico e adapted e' il mode giusto. Per questa sola entry scalarFingerprint confronta i 22 scalari authoritative: cambiamenti del sorgente fuori dalla chiusura restano stable, ma un digest diverso, mancante, malformato o non dichiarato non puo' mai essere stable. I comportamenti del contratto restano coperti dai fingerprint test esistenti; host/host-drift.test.mjs non esiste e non e' una guardia. Il lato sito della PR #8299 e' ora su main; questa baseline registra l'osservazione verificata dei due lati dopo l'allineamento del marker frontaliere:auth-session, mentre il codice runtime conserva il match sulla chiave Firebase esatta. Il digest 22b3b2bf… resta il fingerprint scalar del contratto e non dipende da segreti o variabili di ambiente del runner.",
       "baseline": {
-        "site": "8318a415439ca0d0",
-        "corpus": "7c8c22b48ee255aa",
-        "alignedAt": "2026-09-01"
+        "site": "5bedfc2a3453a9f5",
+        "corpus": "db9e22109da26397",
+        "alignedAt": "2026-09-12",
+        "forcedAt": "2026-09-12T04:17:23.514Z"
       },
       "scalarFingerprint": {
         "sitePath": "tests/articles-shell-contract-fingerprint.json",
