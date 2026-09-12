@@ -66,7 +66,7 @@ import {
   latestFixOutcomeFromComments,
   maxQuotaResetsAt,
 } from './claude-rate-limit.mjs';
-import { quotaFallbackDecision } from './check-quota-backoff.mjs';
+import { quotaFallbackDecision, runQuotaLease } from './check-quota-backoff.mjs';
 import { FIX_OUTCOME_RE } from './close-recovered-failure-issues.mjs';
 import { runBudgetFromEnv } from './lib/run-budget.mjs';
 import { parsePositiveNum } from '../lib/parse-positive-num.mjs';
@@ -2525,6 +2525,37 @@ function editChecked(num, { add = [], remove = [] }) {
   }
 }
 
+function reserveQuotaLease(issueNumber, role) {
+  return runQuotaLease({
+    action: 'reserve',
+    role,
+    owner: 'followup-drainer',
+    targetType: 'issue',
+    target: String(issueNumber),
+    ttlSec: intFromEnv('FOLLOWUP_QUOTA_LEASE_TTL_SEC', 30 * 60),
+    scanMax: intFromEnv('FOLLOWUP_QUOTA_LEASE_SCAN_MAX', QUOTA_SCAN_MAX),
+    runId: process.env.GITHUB_RUN_ID || 'followup-drainer',
+    writeOutput: false,
+    dryRun: DRY,
+  });
+}
+
+function releaseQuotaLease(issueNumber, role, token) {
+  if (!token || DRY) return;
+  runQuotaLease({
+    action: 'release',
+    role,
+    owner: 'followup-drainer',
+    targetType: 'issue',
+    target: String(issueNumber),
+    token,
+    scanMax: intFromEnv('FOLLOWUP_QUOTA_LEASE_SCAN_MAX', QUOTA_SCAN_MAX),
+    runId: process.env.GITHUB_RUN_ID || 'followup-drainer',
+    writeOutput: false,
+    dryRun: DRY,
+  });
+}
+
 function groupLabelInfo(label) {
   const value = String(label || '');
   if (!ISSUE_GROUP_LABEL_RE.test(value)) return null;
@@ -4342,13 +4373,21 @@ export function runDrain() {
         const settling = decomposing.filter((i) => minutesSince(i.updatedAt) < ORPHAN_MIN_AGE_MIN);
         if (settling.length) {
           console.log(`decompose: promozione in assestamento (${settling.map((i) => `#${i.number}`).join(', ')}) → nessuna promozione decompose in questo tick.`);
-        } else {
-          const dq = listIssues(LBL_DECOMP_QUEUED)
-            .filter((i) => !has(i, LBL_PARKED))
-            .sort((a, b) => prioRank(a) - prioRank(b) || Date.parse(a.createdAt) - Date.parse(b.createdAt));
+          } else {
+            const dq = listIssues(LBL_DECOMP_QUEUED)
+              .filter((i) => !has(i, LBL_PARKED))
+              .sort((a, b) => prioRank(a) - prioRank(b) || Date.parse(a.createdAt) - Date.parse(b.createdAt));
           if (dq.length && budget.take(`#${dq[0].number} (decompose-drain)`, ITEM_COST_MS)) {
-            console.log(`PROMUOVO DECOMPOSE #${dq[0].number} (${has(dq[0], 'fu-prio:high') ? 'high' : 'low'}) → ${LBL_DECOMP} — "${dq[0].title?.slice(0, 50)}"`);
-            edit(dq[0].number, { add: [LBL_DECOMP], remove: [LBL_DECOMP_QUEUED] });
+            const decomposeLease = reserveQuotaLease(dq[0].number, 'issue-decompose');
+            if (!decomposeLease.allowed) {
+              console.log(`DECOMPOSE DRAIN sospeso: lease quota non ottenibile per #${dq[0].number} (${decomposeLease.reason || 'errore'}${decomposeLease.error ? ', fail-closed' : ''}).`);
+            } else {
+              console.log(`PROMUOVO DECOMPOSE #${dq[0].number} (${has(dq[0], 'fu-prio:high') ? 'high' : 'low'}) → ${LBL_DECOMP} — "${dq[0].title?.slice(0, 50)}"`);
+              if (!edit(dq[0].number, { add: [LBL_DECOMP], remove: [LBL_DECOMP_QUEUED] })) {
+                releaseQuotaLease(dq[0].number, 'issue-decompose', decomposeLease.token);
+                console.log(`::warning::DECOMPOSE-SKIP #${dq[0].number}: promozione fallita, lease quota rilasciato.`);
+              }
+            }
           }
         }
       }
@@ -4827,15 +4866,23 @@ export function runDrain() {
       }
     }
 
+    const quotaLease = reserveQuotaLease(cand.number, 'issue-fix');
+    if (!quotaLease.allowed) {
+      console.log(`DRAIN sospeso: lease quota non ottenibile per #${cand.number} (${quotaLease.reason || 'errore'}${quotaLease.error ? ', fail-closed' : ''}) → nessuna promozione in questo tick.`);
+      return;
+    }
+
     if (plannedGroup
       && Number(cand.number) === Number(plannedGroup.issues[0]?.number)
       && groupStates.get(plannedGroup.label) === 'failed') {
       const groupLabel = prepareIssueGroup(plannedGroup);
       if (!groupLabel) {
+        releaseQuotaLease(cand.number, 'issue-fix', quotaLease.token);
         console.log(`::warning::GROUP-SKIP #${cand.number}: applicazione della label di gruppo fallita, membri lasciati in coda per il retry; nessuna promozione parziale.`);
         continue;
       }
       if (!editChecked(cand.number, { add: [LBL_FIX], remove: [LBL_QUEUED] })) {
+        releaseQuotaLease(cand.number, 'issue-fix', quotaLease.token);
         console.log(`::warning::GROUP-SKIP #${cand.number}: promozione del leader fallita, membri lasciati in coda.`);
         groupStates.set(groupLabel, 'failed');
         continue;
@@ -4844,7 +4891,11 @@ export function runDrain() {
       console.log(`PROMUOVO GRUPPO ${groupLabel} (${plannedGroup.issues.length} issue, chiave ${plannedGroup.source}) → leader #${cand.number} [${promoted + 1}/${promoteBudget}]`);
     } else {
       console.log(`PROMUOVO #${cand.number} (${has(cand, 'fu-prio:high') ? 'high' : 'low'}) → ${LBL_FIX} [${promoted + 1}/${promoteBudget}]`);
-      edit(cand.number, { add: [LBL_FIX], remove: [LBL_QUEUED] });
+      if (!edit(cand.number, { add: [LBL_FIX], remove: [LBL_QUEUED] })) {
+        releaseQuotaLease(cand.number, 'issue-fix', quotaLease.token);
+        console.log(`::warning::DRAIN-SKIP #${cand.number}: promozione fallita, lease quota rilasciato.`);
+        continue;
+      }
     }
     promoted += 1;
     // Si riempiono gli slot liberi calcolati in cima, non uno solo. Il conteggio
