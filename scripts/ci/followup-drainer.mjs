@@ -4005,7 +4005,19 @@ export function runDrain() {
     // marker per scoparlo alla run corrente — il marker e' uno stato PERSISTENTE
     // della issue e sopravvive a ogni run successiva.
     const outcomeEntry = latestFixOutcomeEntry(iss.number);
-    const outcome = outcomeEntry.outcome;
+    const rawOutcome = outcomeEntry.outcome;
+    // Anche il rescue queue-managed deve scartare i marker persistenti della
+    // promozione precedente: una nuova label `agent:fix` può infatti lasciare
+    // il vecchio `max-turns` visibile mentre la run corrente non ha ancora
+    // scritto il proprio marker.
+    const promotion = !hasPR && rawOutcome !== null
+      ? fixPromotion(iss.number)
+      : { at: null, byDrainer: false };
+    const outcome = outcomeForCurrentPromotion({
+      outcome: rawOutcome,
+      outcomeAt: outcomeEntry.at,
+      promotedAt: promotion.at,
+    });
     const rescueGate = staleFixRescueGate({
       outcome, ageMin, hasPR, settleMin: SETTLE_MIN, orphanMinAgeMin: ORPHAN_MIN_AGE_MIN,
     });
@@ -4109,7 +4121,6 @@ export function runDrain() {
       // c'è stata. Se manca anche solo una, si prosegue verso i rami sotto,
       // che il tentativo lo consumano — cioè il comportamento bounded di prima.
       const mergedAt = mergedFixPrAt(iss.number);
-      const promotion = fixPromotion(iss.number);
       if (isDeliveredThisRun({
         outcome,
         outcomeAt: outcomeEntry.at,

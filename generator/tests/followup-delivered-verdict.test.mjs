@@ -203,6 +203,17 @@ test('il rescue queue-managed ha lo stesso ramo del gemello crawler', () => {
   );
 });
 
+test('il rescue queue-managed scarta i marker della promozione precedente', () => {
+  const src = fs.readFileSync(DRAINER, 'utf8');
+  const start = src.indexOf('for (const iss of stuckFix) {');
+  const end = src.indexOf('for (const iss of crawlerFix) {', start);
+  const queue = src.slice(start, end);
+  assert.match(queue, /const rawOutcome = outcomeEntry\.outcome/);
+  assert.match(queue, /const promotion = !hasPR && rawOutcome !== null/);
+  assert.match(queue, /const outcome = outcomeForCurrentPromotion\(\{/);
+  assert.match(queue, /promotedAt: promotion\.at/);
+});
+
 test('il commento che dichiarava `pr-created` irraggiungibile non sopravvive alla sua falsificazione', () => {
   const src = fs.readFileSync(DRAINER, 'utf8');
   assert.doesNotMatch(
@@ -283,6 +294,10 @@ test('il ramo DELIVERED del rescue queue-managed è qualificato da isDeliveredTh
   // o quello non toccato riapre il buco al giro dopo.
   const src = fs.readFileSync(DRAINER, 'utf8');
   const stuck = src.slice(src.indexOf('for (const iss of stuckFix) {'));
+  const queue = src.slice(
+    src.indexOf('for (const iss of stuckFix) {'),
+    src.indexOf('for (const iss of crawlerFix) {'),
+  );
   const branch = /if \(outcome && DELIVERED\.has\(outcome\)\) \{([\s\S]*?)\n {4}\}/.exec(stuck);
   assert.ok(branch, 'il rescue queue-managed deve avere il ramo DELIVERED');
   assert.match(branch[1], /isDeliveredThisRun\(\{/, 'il re-queue gratuito passa dal gate sulla run corrente');
@@ -290,6 +305,6 @@ test('il ramo DELIVERED del rescue queue-managed è qualificato da isDeliveredTh
   // passano da una const, perché servono anche al warning sul writer
   // concorrente di `agent:fix`): a contare è la SORGENTE, non la forma.
   assert.match(branch[1], /mergedAt = mergedFixPrAt\(/, 'gate sul merge reale, non sull assenza di PR aperte');
-  assert.match(branch[1], /promotion = fixPromotion\(/, 'gate sulla promozione della run corrente');
+  assert.match(queue, /const promotion = !hasPR && rawOutcome !== null/, 'gate sulla promozione della run corrente');
   assert.match(branch[1], /promotedAt: promotion\.at/, 'la promozione entra nel gate');
 });
