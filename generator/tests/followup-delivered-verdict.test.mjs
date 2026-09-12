@@ -308,3 +308,21 @@ test('il ramo DELIVERED del rescue queue-managed è qualificato da isDeliveredTh
   assert.match(queue, /const promotion = !hasPR && rawOutcome !== null/, 'gate sulla promozione della run corrente');
   assert.match(branch[1], /promotedAt: promotion\.at/, 'la promozione entra nel gate');
 });
+
+test('PARKED-WIP viene recuperato prima dell AGE-OUT e non può essere chiuso', () => {
+  const src = fs.readFileSync(DRAINER, 'utf8');
+  const run = src.slice(src.indexOf('export function runDrain()'));
+  const ageOutAt = run.indexOf('// --- AGE-OUT CLOSE:');
+  assert.ok(ageOutAt >= 0, 'lo stadio AGE-OUT deve restare riconoscibile');
+  const preAgeOut = run.slice(0, ageOutAt);
+  assert.match(preAgeOut, /const parkedForWip = listIssues\(LBL_PARKED\)/);
+  assert.match(preAgeOut, /const recoverable = recoverableFixBranch\(iss\.number\)/);
+  assert.match(preAgeOut, /RE-QUEUE PARKED-WIP/);
+  assert.match(preAgeOut, /add = \[LBL_QUEUED/);
+  assert.match(preAgeOut, /remove = \[LBL_PARKED, 'needs-human'/);
+
+  const parentAt = run.indexOf('// --- PARENT-CLOSE:');
+  const ageOut = run.slice(ageOutAt, parentAt);
+  assert.match(ageOut, /const liveWip = recoverableFixBranch\(iss\.number\)/);
+  assert.match(ageOut, /AGE-OUT skip #\$\{iss\.number\}: checkpoint WIP live/);
+});
