@@ -29,7 +29,8 @@
 import fs from 'node:fs';
 import { execFileSync } from 'node:child_process';
 import path from 'node:path';
-import { fileURLToPath, pathToFileURL } from 'node:url';
+import { fileURLToPath } from 'node:url';
+import { RSS_LOCALES, RSS_MAX_ITEMS, RSS_SECTIONS } from '../../engine/rssFeeds.mjs';
 import {
   floorFrom,
   retentionLine,
@@ -43,6 +44,7 @@ import {
   missingCorpusMessage,
   countSeoEntries,
   collectSeoEntryIds,
+  latestSeoPublication,
   SECTION_BODY_DIRS,
   SEO_CHUNK_DIR,
   IMAGE_SOURCE_DIR,
@@ -51,6 +53,7 @@ import {
 // `<item>` citato dentro un CDATA non e' un elemento del feed, e contarlo qui
 // alzerebbe la misura sopra il pavimento mascherando un feed troncato.
 import { countXmlTags } from '../lib/count-xml-tags.mjs';
+import { stripNonMarkup } from '../lib/count-xml-tags.mjs';
 
 export const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
 
@@ -65,14 +68,32 @@ export const SECTION_COUNTERS = {
  * rapporto chunk/corrente, mentre il 90% segnala una contrazione sostanziale. */
 export const FEED_POPULATION_WARN_RETENTION = 0.9;
 
+/** La massima anzianità ammessa dell'ultimo item rispetto al corpus SEO. */
+export const FEED_FRESHNESS_MAX_LAG_HOURS = 72;
+const FEED_FRESHNESS_MAX_LAG_MS = FEED_FRESHNESS_MAX_LAG_HOURS * 60 * 60 * 1000;
+
 /**
  * A quale sezione appartiene un feed, dal nome del file.
  *
- * `rss-svizzera*.xml` e' la sezione svizzera, tutto il resto e' frontaliere —
- * e' la stessa convenzione che `RSS_SECTIONS` usa per generarli.
+ * Il nome viene risolto dalla stessa `RSS_SECTIONS` che genera i feed. Un nome
+ * sconosciuto non viene assegnato per default a frontaliere: e' un errore di
+ * censimento che il gate deve rendere visibile.
  */
-export function feedSection(fileName) {
-  return /^rss-svizzera/.test(fileName) ? 'svizzera' : 'frontaliere';
+function feedNames(section) {
+  const names = new Set([section.mainFeed]);
+  if (typeof section.feedFile === 'function') {
+    for (const locale of RSS_LOCALES) names.add(section.feedFile(locale));
+  }
+  return names;
+}
+
+/** I nomi di tutti i feed che la tabella RSS promette di pubblicare. */
+export function expectedFeedNames(sections = RSS_SECTIONS) {
+  return [...new Set(sections.flatMap((section) => [...feedNames(section)]))];
+}
+
+export function feedSection(fileName, sections = RSS_SECTIONS) {
+  return sections.find((section) => feedNames(section).has(fileName))?.id ?? null;
 }
 
 const ZERO_REVISION_RE = /^0+$/;
@@ -181,10 +202,11 @@ function feedPopulationReference(expected, section) {
 /**
  * Il nucleo puro: date le misure, quali pavimenti sono sfondati.
  *
- * @param {{articleCounts: Record<string, number>, feeds: {name: string, items: number}[],
- *          images: number|null, imageErrors?: string[]}} measured  cio' che l'artefatto dichiara
+ * @param {{articleCounts: Record<string, number>, feeds: {name: string, items: number, latestPublication?: {datePublished: string, timestamp: number}|null}[],
+ *          missingFeeds?: string[], images: number|null, imageErrors?: string[]}} measured  cio' che l'artefatto dichiara
  * @param {{sourceArticles: Record<string, number>, feedSources: Record<string, number>,
  *          previousFeedSources?: Record<string, number|null>, sourceImages: number|null,
+ *          latestSeoPublications?: Record<string, {articleId: string, datePublished: string, timestamp: number}|null>,
  *          rssMaxItems: number}} expected   cio' che il corpus
  *          sorgente promette: `sourceArticles` sono i file di corpo (il riferimento di
  *          `manifest.counts`), `feedSources` le voci dei chunk SEO (quello dei feed)
@@ -193,6 +215,10 @@ function feedPopulationReference(expected, section) {
 export function floorViolations(measured, expected, retention = undefined) {
   const violations = [...(measured.imageErrors ?? [])];
   const floor = (n) => floorFrom(n, retention);
+
+  for (const feedName of measured.missingFeeds ?? []) {
+    violations.push(`${feedName}: feed RSS atteso da RSS_SECTIONS assente o non è un documento RSS`);
+  }
 
   for (const [section, counter] of Object.entries(SECTION_COUNTERS)) {
     const source = expected.sourceArticles[section] ?? 0;
@@ -233,6 +259,10 @@ export function floorViolations(measured, expected, retention = undefined) {
   const missingSeo = new Set();
   for (const feed of measured.feeds) {
     const section = feedSection(feed.name);
+    if (section === null) {
+      violations.push(`${feed.name}: nessuna sezione RSS_SECTIONS corrispondente — feed non mappato`);
+      continue;
+    }
     const current = expected.feedSources?.[section] ?? 0;
     // Stessa regola dei corpi, un riferimento diverso: zero voci nei chunk non
     // e' «feed legittimamente vuoto», e' la lista dei chunk che non risolve —
@@ -255,6 +285,25 @@ export function floorViolations(measured, expected, retention = undefined) {
         `${feed.name}: ${feed.items} <item> contro ${min} attesi ` +
           `(${current} voci nei chunk SEO di ${section}; riferimento storico/floor ${source}) — feed troncato`,
       );
+    }
+
+    if (expected.latestSeoPublications) {
+      const sourcePublication = expected.latestSeoPublications[section];
+      if (!sourcePublication) {
+        violations.push(`${feed.name}: nessuna datePublished valida nei chunk SEO di ${section}`);
+      } else if (!feed.latestPublication) {
+        violations.push(`${feed.name}: nessun <pubDate> valido nell'artefatto RSS`);
+      } else {
+        const lagMs = sourcePublication.timestamp - feed.latestPublication.timestamp;
+        if (lagMs > FEED_FRESHNESS_MAX_LAG_MS) {
+          const lagHours = (lagMs / (60 * 60 * 1000)).toFixed(1);
+          violations.push(
+            `${feed.name}: ultima <pubDate> ${feed.latestPublication.datePublished} è ${lagHours}h ` +
+              `più vecchia dell'ultima datePublished ${sourcePublication.datePublished} nei chunk SEO di ` +
+              `${section} (soglia ${FEED_FRESHNESS_MAX_LAG_HOURS}h) — feed stantio`,
+          );
+        }
+      }
     }
   }
 
@@ -329,7 +378,9 @@ export function retentionReport(measured, expected) {
   }
 
   for (const feed of measured.feeds) {
-    const source = feedSourceFloor(expected, feedSection(feed.name));
+    const section = feedSection(feed.name);
+    if (section === null) continue;
+    const source = feedSourceFloor(expected, section);
     if (source <= 0) continue;
     // Lo stesso atteso del pavimento: un feed e' tagliato a RSS_MAX_ITEMS,
     // quindi su una sezione grande il 100% e' 50 item, non 3750.
@@ -404,20 +455,50 @@ export function retentionLines(rows, retention = FLOOR_RETENTION) {
     );
 }
 
+function latestFeedPublication(xml) {
+  const markup = stripNonMarkup(xml);
+  const items = [...markup.matchAll(/<item(?:\s[^>]*)?>([\s\S]*?)<\/item>/g)];
+  // Un latest valido non basta: ogni item che il floor conta deve avere
+  // esattamente una data parseabile, altrimenti la superficie pubblicata e'
+  // parzialmente corrotta anche se un altro item e' fresco.
+  if (items.length !== countXmlTags(markup, 'item')) return null;
+
+  let latest = null;
+  for (const [, item] of items) {
+    const dates = [...item.matchAll(/<pubDate(?:\s[^>]*)?>\s*([^<]*?)\s*<\/pubDate>/g)];
+    if (dates.length !== 1) return null;
+    const datePublished = dates[0][1].trim();
+    const timestamp = Date.parse(datePublished);
+    if (!Number.isFinite(timestamp)) return null;
+    if (!latest || timestamp > latest.timestamp) latest = { datePublished, timestamp };
+  }
+  return latest;
+}
+
+function isRssDocument(xml) {
+  return countXmlTags(xml, 'rss') > 0;
+}
+
 /** Legge dall'artefatto su disco le misure che il nucleo puro confronta. */
 export function measureDist(distDir) {
   const readOut = (name) => fs.readFileSync(path.join(distDir, name), 'utf-8');
   const manifest = JSON.parse(readOut('manifest.json'));
 
-  // I feed si riconoscono dal DOCUMENTO, non dal nome: una lista di nomi qui
-  // sarebbe una seconda copia di quella dello YAML, e un feed aggiunto domani
-  // resterebbe fuori dal gate senza che nulla lo segnali.
+  // I feed si riconoscono dal DOCUMENTO, non dal nome: i nomi attesi sono
+  // comunque derivati dalla tabella del producer, così un file atteso assente
+  // o non-RSS non sparisce semplicemente dalla lista delle misure.
   const feeds = fs
     .readdirSync(distDir)
     .filter((f) => f.endsWith('.xml'))
     .map((name) => ({ name, xml: readOut(name) }))
-    .filter(({ xml }) => xml.includes('<rss'))
-    .map(({ name, xml }) => ({ name, items: countXmlTags(xml, 'item') }));
+    .filter(({ xml }) => isRssDocument(xml))
+    .map(({ name, xml }) => ({
+      name,
+      items: countXmlTags(xml, 'item'),
+      latestPublication: latestFeedPublication(xml),
+    }));
+  const presentFeedNames = new Set(feeds.map(({ name }) => name));
+  const missingFeeds = expectedFeedNames().filter((name) => !presentFeedNames.has(name));
 
   const imageManifest = path.join(distDir, 'images-manifest.json');
   let images = null;
@@ -435,7 +516,7 @@ export function measureDist(distDir) {
     }
   }
 
-  return { articleCounts: manifest.counts ?? {}, feeds, images, imageErrors };
+  return { articleCounts: manifest.counts ?? {}, feeds, missingFeeds, images, imageErrors };
 }
 
 /** Riconta il corpus sorgente, che e' il riferimento esterno all'artefatto. */
@@ -444,14 +525,13 @@ export async function expectFromCorpus(root) {
   // sezione hanno una sorgente sola, ed e' quella che genera davvero i feed.
   // Una seconda lista qui sarebbe il difetto che ha congelato rss.xml per tre
   // mesi, spostato di un file (AGENTS.md #6).
-  const { RSS_MAX_ITEMS, RSS_SECTIONS } = await import(
-    pathToFileURL(path.join(root, 'engine', 'rssFeeds.mjs')).href
-  );
   const feedSources = {};
   const previousFeedSources = {};
+  const latestSeoPublications = {};
   const revision = previousRevision(root);
   for (const section of RSS_SECTIONS) {
     feedSources[section.id] = countSeoEntries(root, section.seoFiles);
+    latestSeoPublications[section.id] = latestSeoPublication(root, section.seoFiles);
     if (revision === null) {
       previousFeedSources[section.id] = null;
       continue;
@@ -467,6 +547,7 @@ export async function expectFromCorpus(root) {
     },
     feedSources,
     previousFeedSources,
+    latestSeoPublications,
     sourceImages: countSourceImages(root),
     rssMaxItems: RSS_MAX_ITEMS,
   };

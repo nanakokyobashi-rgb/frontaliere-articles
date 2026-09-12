@@ -6280,6 +6280,21 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.economiesuisse-silvan-wildhaber.title': 'Economiesuisse: Silvan Wildhaber è il nuovo presidente',
     'blog.article.economiesuisse-silvan-wildhaber.excerpt': 'Passaggio di presidenza a Economiesuisse: Silvan Wildhaber succede a Christoph Mäder con un sostegno totale agli accordi bilaterali III.',
     'blog.article.economiesuisse-silvan-wildhaber.imageAlt': 'Palazzo federale a Berna sede della giornata dell\'economia di Economiesuisse',
+    'blog.article.finanze-ospedali-svizzera-2025.title': 'Ospedali svizzeri: finanze in lieve miglioramento',
+    'blog.article.finanze-ospedali-svizzera-2025.excerpt': 'Situazione finanziaria in lieve miglioramento per gli ospedali elvetici, ma oltre l\'80% delle strutture resta sotto il margine necessario.',
+    'blog.article.finanze-ospedali-svizzera-2025.imageAlt': 'Struttura ospedaliera svizzera con panorama urbano',
+    'blog.article.bitcoin-suisse-taglio-posti-zugo.title': 'Bitcoin Suisse taglia fino a 60 posti a Zugo',
+    'blog.article.bitcoin-suisse-taglio-posti-zugo.excerpt': 'Il fornitore di servizi cripto Bitcoin Suisse avvia una riorganizzazione a Zugo che prevede il taglio di un massimo di 60 posti su 120 dipendenti in Svizzera.',
+    'blog.article.bitcoin-suisse-taglio-posti-zugo.imageAlt': 'Sede di un fornitore di servizi finanziari in Svizzera',
+    'blog.article.costi-nidi-servizi-infanzia-canton-sg.title': 'Costi asili nido e custodia nel Canton San Gallo',
+    'blog.article.costi-nidi-servizi-infanzia-canton-sg.excerpt': 'Guida alle rette per nidi, famiglie diurne e doposcuola nel Cantone di San Gallo: tariffe su reddito, sussidi comunali e sgravi fiscali.',
+    'blog.article.costi-nidi-servizi-infanzia-canton-sg.imageAlt': 'Spazio giochi luminoso in una struttura di custodia per l\'infanzia nel Cantone di San Gallo',
+    'blog.article.svizzeri-spesa-crescita-rallenta.title': 'Svizzeri spendono di più, ma la crescita rallenta',
+    'blog.article.svizzeri-spesa-crescita-rallenta.excerpt': 'In agosto l\'indicatore dei consumi calcolato da PostFinance segna un incremento dello 0,8%. Il ritmo frena rispetto ai mesi precedenti.',
+    'blog.article.svizzeri-spesa-crescita-rallenta.imageAlt': 'Indicatori dei consumi in Svizzera e pagamenti con carta',
+    'blog.article.svizzera-siccita-faldeg-acque.title': 'Siccità in Svizzera: a rischio l\'80% delle acque sotterranee',
+    'blog.article.svizzera-siccita-faldeg-acque.excerpt': 'La SCNAT avverte: le sorgenti si prosciugano nel Giura e nelle Alpi. Serve monitoraggio e rinaturalizzazione per proteggere le falde.',
+    'blog.article.svizzera-siccita-faldeg-acque.imageAlt': 'Fiume alpino svizzero con livello dell\'acqua basso, illustrando le conseguenze della siccità sulle falde acquifere.',
 };
 
 export default blogMetaChIt;

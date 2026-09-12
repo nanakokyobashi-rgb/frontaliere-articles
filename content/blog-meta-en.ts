@@ -11657,6 +11657,21 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.vivere-pigra-lavorare-ticino-frontaliere.title': 'Living in Pigra, working in Ticino: the guide',
     'blog.article.vivere-pigra-lavorare-ticino-frontaliere.excerpt': 'Discover the connections, journey times and cost of living for border crossers who choose Pigra to live and work in Ticino.',
     'blog.article.vivere-pigra-lavorare-ticino-frontaliere.imageAlt': 'View of Pigra and Lake Lugano with the alpine panorama of Ticino.',
+    'blog.article.frontaliere-laveno-mombello-ticino.title': 'Frontier workers in Laveno-Mombello: driving and tax in Ticino',
+    'blog.article.frontaliere-laveno-mombello-ticino.excerpt': 'Living in Laveno-Mombello and working in Ticino: connections, taxes at source, deductibles and pension for frontier workers.',
+    'blog.article.frontaliere-laveno-mombello-ticino.imageAlt': 'View of Lake Maggiore near Laveno-Mombello for cross-border workers in Ticino',
+    'blog.article.indice-rischio-geopolitico-ticino.title': 'Ticino measures geopolitical risk with a new index',
+    'blog.article.indice-rischio-geopolitico-ticino.excerpt': 'A new 54-page document assesses global tensions and the impact on the Ticino economy, offering analysis and forecasts for businesses.',
+    'blog.article.indice-rischio-geopolitico-ticino.imageAlt': 'View of Lugano and lake under cloudy sky',
+    'blog.article.guasto-ferrovia-melegnano-settembre.title': 'Railway failure in Melegnano: delays and variations',
+    'blog.article.guasto-ferrovia-melegnano-settembre.excerpt': 'A breakdown of the circulation systems in the Melegnano station causes average delays of about thirty minutes and inconvenience on the suburban lines S1 and S12.',
+    'blog.article.guasto-ferrovia-melegnano-settembre.imageAlt': 'Regional train stopped at railway station due to technical failure',
+    'blog.article.traffico-merci-alpi-ferrovia-camion.title': 'Freight traffic in the Alps: the train goes backwards and the trucks grow',
+    'blog.article.traffico-merci-alpi-ferrovia-camion.excerpt': 'The Federal Office of Transport records a growth in road transport equal to twice that of rail transport along the Alps.',
+    'blog.article.traffico-merci-alpi-ferrovia-camion.imageAlt': 'Goods and truck traffic along alpine passes in Switzerland',
+    'blog.article.voto-pecc-gran-consiglio-ticino.title': 'Vote on Pecc in the Grand Council: the economic choice',
+    'blog.article.voto-pecc-gran-consiglio-ticino.excerpt': 'Appeal of economic and environmental organizations to the Grand Council of Ticino for the vote on the Cantonal Energy and Climate Plan.',
+    'blog.article.voto-pecc-gran-consiglio-ticino.imageAlt': 'Bellinzona castle in Ticino',
 };
 
 export default blogMetaEn;

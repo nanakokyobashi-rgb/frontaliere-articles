@@ -680,5 +680,25 @@
     "articleId": "avs-2030-riforma-previdenza",
     "ts": "2026-09-12T00:03:42.169Z",
     "keyForm": 2
+  },
+  "https://www.rsi.ch/info/ticino-grigioni-e-insubria/il-mondo-si-fa-pi%c3%b9-instabile-e-il-ticino-misura-il-rischio--4074538.html": {
+    "articleId": "indice-rischio-geopolitico-ticino",
+    "ts": "2026-09-12T01:19:13.505Z",
+    "keyForm": 2
+  },
+  "https://www.varesenews.it/2026/09/guasto-alla-linea-ferroviaria-a-melegnano-sulla-saronno-lodi-ritardi-fino-a-30-minuti/2675884": {
+    "articleId": "guasto-ferrovia-melegnano-settembre",
+    "ts": "2026-09-12T01:27:53.949Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/s/4074187": {
+    "articleId": "traffico-merci-alpi-ferrovia-camion",
+    "ts": "2026-09-12T02:10:13.481Z",
+    "keyForm": 2
+  },
+  "https://www.laregione.ch/cantone/ticino/1949361/cari-deputati-votate-il-pecc-e-anche-una-scelta-economica": {
+    "articleId": "voto-pecc-gran-consiglio-ticino",
+    "ts": "2026-09-12T02:18:53.034Z",
+    "keyForm": 2
   }
 }

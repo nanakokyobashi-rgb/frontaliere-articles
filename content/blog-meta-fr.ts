@@ -11659,6 +11659,21 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.vivere-pigra-lavorare-ticino-frontaliere.title': 'Vivre à Pigra, travailler au Tessin : le guide',
     'blog.article.vivere-pigra-lavorare-ticino-frontaliere.excerpt': 'Découvrez les connexions, les temps de trajet et le coût de la vie pour les frontaliers qui choisissent Pigra pour vivre et travailler au Tessin.',
     'blog.article.vivere-pigra-lavorare-ticino-frontaliere.imageAlt': 'Vue de Pigra et du lac de Lugano avec le panorama alpin du Tessin.',
+    'blog.article.frontaliere-laveno-mombello-ticino.title': 'Frontaliers à Laveno-Mombello : guide et fiscalité au Tessin',
+    'blog.article.frontaliere-laveno-mombello-ticino.excerpt': 'Vivre à Laveno-Mombello et travailler au Tessin : liens, impôts à la source, franchises et prévoyance pour les travailleurs frontaliers.',
+    'blog.article.frontaliere-laveno-mombello-ticino.imageAlt': 'Vue du lac Majeur près de Laveno-Mombello pour les frontaliers au Tessin',
+    'blog.article.indice-rischio-geopolitico-ticino.title': 'Le Tessin mesure le risque géopolitique avec un nouvel indice',
+    'blog.article.indice-rischio-geopolitico-ticino.excerpt': 'Un nouveau document de 54 pages évalue les tensions mondiales et l\'impact sur l\'économie tessinoise, offrant des analyses et des prévisions pour les entreprises.',
+    'blog.article.indice-rischio-geopolitico-ticino.imageAlt': 'Vue de Lugano et du lac sous un ciel nuageux',
+    'blog.article.guasto-ferrovia-melegnano-settembre.title': 'Panne ferroviaire à Melegnano : retards et variations',
+    'blog.article.guasto-ferrovia-melegnano-settembre.excerpt': 'Une défaillance des systèmes de circulation dans la gare de Melegnano provoque des retards moyens d\'environ trente minutes et des désagréments sur les lignes de banlieue S1 et S12.',
+    'blog.article.guasto-ferrovia-melegnano-settembre.imageAlt': 'Train régional arrêté en gare en raison d\'une panne technique',
+    'blog.article.traffico-merci-alpi-ferrovia-camion.title': 'Trafic marchandises dans les Alpes : le train recule et les camions grandissent',
+    'blog.article.traffico-merci-alpi-ferrovia-camion.excerpt': 'L\'Office fédéral des transports enregistre une croissance du transport routier deux fois supérieure à celle du transport ferroviaire le long des Alpes.',
+    'blog.article.traffico-merci-alpi-ferrovia-camion.imageAlt': 'Trafic de marchandises et de camions le long des cols alpins en Suisse',
+    'blog.article.voto-pecc-gran-consiglio-ticino.title': 'Vote sur le Pecc au Grand Conseil : le choix économique',
+    'blog.article.voto-pecc-gran-consiglio-ticino.excerpt': 'Appel des organisations économiques et environnementales au Grand Conseil tessinois pour le vote sur le Plan énergétique et climatique cantonal.',
+    'blog.article.voto-pecc-gran-consiglio-ticino.imageAlt': 'Chateau de Bellinzone au Tessin',
 };
 
 export default blogMetaFr;
