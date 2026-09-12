@@ -193,6 +193,17 @@ export const SECTION_BODY_DIRS = {
   svizzera: path.join('content', 'blog-body-ch', 'it'),
 };
 
+/** Le chiavi del manifest e i file della sitemap delle due sezioni. */
+export const SECTION_COUNTERS = {
+  frontaliere: 'articles',
+  svizzera: 'swissArticles',
+};
+
+export const SECTION_SITEMAPS = {
+  frontaliere: 'sitemap-blog.xml',
+  svizzera: 'sitemap-blog-ch.xml',
+};
+
 /** Quante immagini hero questo repo tiene davvero (sorgente di `images-manifest.json`). */
 export const IMAGE_SOURCE_DIR = path.join('public', 'images', 'blog');
 

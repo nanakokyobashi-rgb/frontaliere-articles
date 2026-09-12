@@ -66,6 +66,7 @@ import {
   countSourceArticles,
   floorFrom,
   missingCorpusMessage,
+  SECTION_COUNTERS,
   SECTION_BODY_DIRS,
 } from './lib/corpus-floors.mjs';
 
@@ -109,7 +110,7 @@ export function validateAnnouncedSurface({ manifest, slugs, articles, swissArtic
     errors.push('manifest.json senza counts.articles/counts.swissArticles');
     return errors;
   }
-  for (const [section, counter] of Object.entries({ frontaliere: 'articles', svizzera: 'swissArticles' })) {
+  for (const [section, counter] of Object.entries(SECTION_COUNTERS)) {
     const source = sourceCounts?.[section];
     if (!Number.isFinite(source) || source <= 0) {
       errors.push(missingCorpusMessage(`manifest.counts.${counter}`, SECTION_BODY_DIRS[section]));

@@ -46,6 +46,8 @@ import {
   collectSeoEntryIds,
   latestSeoPublication,
   SECTION_BODY_DIRS,
+  SECTION_COUNTERS,
+  SECTION_SITEMAPS,
   SEO_CHUNK_DIR,
   IMAGE_SOURCE_DIR,
 } from '../lib/corpus-floors.mjs';
@@ -57,17 +59,9 @@ import { stripNonMarkup } from '../lib/count-xml-tags.mjs';
 
 export const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
 
-/** Le due sezioni, col contatore del manifest che ciascuna alimenta. */
-export const SECTION_COUNTERS = {
-  frontaliere: 'articles',
-  svizzera: 'swissArticles',
-};
-
-/** Le sitemap articolo che devono conservare la cardinalita' del corpus. */
-export const SECTION_SITEMAPS = {
-  frontaliere: 'sitemap-blog.xml',
-  svizzera: 'sitemap-blog-ch.xml',
-};
+// Re-export per i consumer del verifier: la definizione condivisa vive nel
+// modulo dei floor, così writer e gate non possono divergere sui nomi.
+export { SECTION_COUNTERS, SECTION_SITEMAPS };
 
 /** La popolazione dei chunk ha un preallarme proprio: 90% di una run precedente.
  * Il 97% della retention degli articoli sarebbe rumore permanente per il

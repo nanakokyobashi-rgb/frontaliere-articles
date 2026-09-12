@@ -88,6 +88,7 @@ import { countXmlTags } from './lib/count-xml-tags.mjs';
 import {
   collectSeoEntryMetadata,
   listedFloor,
+  SECTION_SITEMAPS,
   sectionFloor,
 } from './lib/corpus-floors.mjs';
 
@@ -292,11 +293,11 @@ console.log(`[build-api] retired daily editions de-listed from sitemap: ${retire
 const frontaliereSitemapShadow = new Set([...retiredDailyEditions, ...shadowedFrontaliereSlugs]);
 const sitemapCounts = {
   blog: writeXml(
-    'sitemap-blog.xml',
+    SECTION_SITEMAPS.frontaliere,
     buildSitemap(ARTICLES, 'frontaliere', blogSlugs.BLOG_SLUGS, metaIt, frontaliereSitemapShadow),
   ),
   blogCh: writeXml(
-    'sitemap-blog-ch.xml',
+    SECTION_SITEMAPS.svizzera,
     buildSitemap(SWISS_ARTICLES, 'svizzera', swissSlugs.SWISS_SLUGS, metaChIt, shadowedSwissSlugs),
   ),
 };
@@ -304,8 +305,8 @@ const sitemapCounts = {
 // `< 100` proteggeva il 2,6% del corpus frontaliere e non proteggeva affatto la
 // sitemap svizzera; un parse troncato restava quindi pubblicabile senza errori.
 for (const [key, file, registry, shadowed] of [
-  ['blog', 'sitemap-blog.xml', ARTICLES, frontaliereSitemapShadow],
-  ['blogCh', 'sitemap-blog-ch.xml', SWISS_ARTICLES, shadowedSwissSlugs],
+  ['blog', SECTION_SITEMAPS.frontaliere, ARTICLES, frontaliereSitemapShadow],
+  ['blogCh', SECTION_SITEMAPS.svizzera, SWISS_ARTICLES, shadowedSwissSlugs],
 ]) {
   const floor = listedFloor(registry.length, shadowed.size);
   if (sitemapCounts[key] < floor) {
@@ -998,8 +999,8 @@ console.log(`[build-api] wrote ${Object.keys(written).length} files to dist/api`
   const derived = {
     articles: derivedAlways('articles.json', () => jsonOut('articles.json').length),
     swissArticles: derivedAlways('swiss-articles.json', () => jsonOut('swiss-articles.json').length),
-    sitemapBlogUrls: sitemapUrls('sitemap-blog.xml'),
-    sitemapBlogChUrls: sitemapUrls('sitemap-blog-ch.xml'),
+    sitemapBlogUrls: sitemapUrls(SECTION_SITEMAPS.frontaliere),
+    sitemapBlogChUrls: sitemapUrls(SECTION_SITEMAPS.svizzera),
     rssFeeds: feeds.length,
     rssItems: feeds.reduce((total, xml) => total + countXmlTags(xml, 'item'), 0),
     tickerArticles: derivedAlways('news-ticker-live.json', () => jsonOut('news-ticker-live.json').articles.length),
