@@ -220,3 +220,13 @@ test('429 e cause non riattivabili viaggiano come segnali distinti', async () =>
     'la causa permanente non deve essere trattata dal consumer come abort retryable',
   );
 });
+
+test('il rescue stale del corpus non dipende da un esito review_abort', () => {
+  // `tests.yml` è un gemello adattato: sul sito contiene anche il ramo inline
+  // che invoca l autorebase, mentre qui lo sweep è nel workflow corpus-only
+  // separato. Questo assetto è già fail-safe per uno `skipped`: non esiste una
+  // guardia `steps.review_abort.outcome` che possa rendere muto il rescue.
+  const autorebase = fs.readFileSync(path.join(ROOT, '.github/workflows/pr-autorebase.yml'), 'utf8');
+  assert.match(autorebase, /node scripts\/ci\/pr-autorebase\.mjs/);
+  assert.doesNotMatch(autorebase, /steps\.review_abort\.outcome\s*==\s*['"]success['"]/);
+});
