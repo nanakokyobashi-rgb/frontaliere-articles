@@ -325,7 +325,7 @@ export function preflight(root = ROOT) {
     ...r,
     count: collectTypeScriptFiles(path.join(root, r.rel)).length,
   }));
-  const violations = floorViolations(perRoot);
+  const violations = floorViolations(perRoot, { root });
   for (const rel of REQUIRED_FILES) {
     if (!fs.existsSync(path.join(root, rel))) {
       violations.push(

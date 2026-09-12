@@ -193,6 +193,17 @@ export const SECTION_BODY_DIRS = {
   svizzera: path.join('content', 'blog-body-ch', 'it'),
 };
 
+/** Registro e metadati che definiscono l'atteso dei corpi, per sezione. */
+export const SECTION_REGISTRY_FILES = {
+  frontaliere: path.join('content', 'blog-articles-data.ts'),
+  svizzera: path.join('content', 'swiss-articles-data.ts'),
+};
+
+export const SECTION_META_PREFIXES = {
+  frontaliere: 'blog-meta-',
+  svizzera: 'blog-meta-ch-',
+};
+
 /** Quante immagini hero questo repo tiene davvero (sorgente di `images-manifest.json`). */
 export const IMAGE_SOURCE_DIR = path.join('public', 'images', 'blog');
 
@@ -214,6 +225,68 @@ function countCorpusFiles(root, rel, ext, what) {
     }
     throw error;
   }
+}
+
+function missingReference(what, rel, cause) {
+  const error = new Error(missingCorpusMessage(what, rel), cause ? { cause } : undefined);
+  error.code = 'MISSING_CORPUS';
+  return error;
+}
+
+function readReference(root, rel, what) {
+  try {
+    const source = fs.readFileSync(path.join(root, rel), 'utf8');
+    if (!source.trim()) throw missingReference(what, rel);
+    return source;
+  } catch (error) {
+    if (error?.code === 'MISSING_CORPUS') throw error;
+    if (['EACCES', 'EISDIR', 'ELOOP', 'ENOENT'].includes(error?.code)) {
+      throw missingReference(what, rel, error);
+    }
+    throw error;
+  }
+}
+
+/** Quante entry articolo dichiara il registro sorgente della sezione. */
+export function countRegistryArticles(root, section) {
+  const rel = SECTION_REGISTRY_FILES[section];
+  if (!rel) throw new Error(`unknown corpus section: ${section}`);
+  const source = readReference(root, rel, `${section} registry`);
+  const entries = source.match(/^\s*id:\s*(?:'[^']+'|"[^"]+")/gm) || [];
+  if (entries.length === 0) throw missingReference(`${section} registry`, rel);
+  return entries.length;
+}
+
+/** Quanti file-meta locali sono presenti per la sezione. */
+export function countPresentLocales(root, section) {
+  const prefix = SECTION_META_PREFIXES[section];
+  if (!prefix) throw new Error(`unknown corpus section: ${section}`);
+  const rel = path.join('content', `${prefix}*.ts`);
+  let names;
+  try {
+    names = fs.readdirSync(path.join(root, 'content'));
+  } catch (error) {
+    if (['EACCES', 'ELOOP', 'ENOENT'].includes(error?.code)) {
+      throw missingReference(`${section} locale metadata`, rel, error);
+    }
+    throw error;
+  }
+  const pattern = new RegExp(`^${prefix.replace(/[.*+?^${}()|[\\]\\]/g, '\\$&')}[a-z]{2}\\.ts$`);
+  const count = names.filter((name) => pattern.test(name)).length;
+  if (count === 0) throw missingReference(`${section} locale metadata`, rel);
+  return count;
+}
+
+/**
+ * Atteso dei corpi: entry del registro × locali-meta presenti.
+ *
+ * Il riferimento non e' la directory che il gate deve scandire: e' la coppia
+ * di registri e metadati che il sito usa per pubblicare gli articoli. Se uno
+ * dei due riferimenti manca, lancia invece di trasformare l'assenza in un
+ * pavimento a zero.
+ */
+export function expectedBodyFiles(root, section) {
+  return countRegistryArticles(root, section) * countPresentLocales(root, section);
 }
 
 /** Quanti articoli sorgente ha la sezione, contati sui file di corpo. */

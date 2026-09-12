@@ -34,13 +34,14 @@ import { fileURLToPath } from 'node:url';
 
 import {
   BLOG_BODY_ROOTS,
-  MIN_FILES_TOTAL,
   collectTypeScriptFiles,
+  deriveFloorModel,
   filesToScan,
   floorViolations,
   formatOffender,
   loadEsbuild,
   parseChangedFiles,
+  run,
 } from '../../scripts/ci/check-blog-body-syntax.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
@@ -94,53 +95,87 @@ function collectLocalModuleSources(entry) {
 // ── I pavimenti ─────────────────────────────────────────────────────────────
 
 test('conteggi realistici non producono violazioni', () => {
-  // I numeri misurati su origin/main il 2026-08-09.
-  const perRoot = [
-    { rel: 'content/blog-body', minFiles: 3000, count: 12548 },
-    { rel: 'content/blog-body-ch', minFiles: 1000, count: 2596 },
-  ];
+  const model = deriveFloorModel(ROOT);
+  const perRoot = model.perRoot.map((r) => ({ ...r, count: r.expectedFiles }));
   assert.deepEqual(floorViolations(perRoot), []);
 });
 
 test('un checkout sparse (zero file ovunque) fa fallire il gate', () => {
   // In un worktree sparse `content/` non esiste affatto. E' il falso verde piu'
   // facile da produrre su questo repo, e il gate deve rifiutarsi di dirsi verde.
-  const perRoot = BLOG_BODY_ROOTS.map((r) => ({ ...r, count: 0 }));
+  const model = deriveFloorModel(ROOT);
+  const perRoot = model.perRoot.map((r) => ({ ...r, count: 0 }));
   const v = floorViolations(perRoot);
   assert.equal(v.length, 3, 'due radici a zero + il totale a zero');
   assert.ok(v.some((m) => m.startsWith('TOTALE:')), 'il pavimento totale deve scattare');
 });
 
 test('UNA sola radice a zero fa fallire, anche se il totale abbonda', () => {
-  // È l'asserzione che il pavimento sul totale NON puo' fare, ed e' esattamente
-  // il buco del 2026-07-29: blog-body da solo fa 12.5k file, quindi qualunque
-  // soglia sul totale resta soddisfatta anche se blog-body-ch risolve a zero —
-  // cartella rinominata, symlink orfano — e la sezione svizzera tornerebbe
-  // scoperta con la CI verde.
-  const perRoot = [
-    { rel: 'content/blog-body', minFiles: 3000, count: 12548 },
-    { rel: 'content/blog-body-ch', minFiles: 1000, count: 0 },
-  ];
+  // Il pavimento per radice deve vedere la sezione svizzera sparire anche se
+  // l'altra radice resta piena; il totale derivato deve inoltre vedere che la
+  // fotografia complessiva e' incompleta.
+  const model = deriveFloorModel(ROOT);
+  const perRoot = model.perRoot.map((r, index) => ({
+    ...r,
+    count: index === 0 ? r.expectedFiles : 0,
+  }));
   const v = floorViolations(perRoot);
-  assert.equal(v.length, 1);
-  assert.match(v[0], /^content\/blog-body-ch: 0 file scanditi/);
+  assert.equal(v.length, 2);
+  assert.ok(v.some((m) => /^content\/blog-body-ch: 0 file scanditi/.test(m)));
   assert.ok(
-    !v.some((m) => m.startsWith('TOTALE:')),
-    'il totale qui e\' soddisfatto: e\' proprio il motivo per cui il pavimento per radice esiste',
+    v.some((m) => m.startsWith('TOTALE:')),
+    'il totale derivato deve scattare quando manca una sezione intera',
   );
 });
 
-test('il pavimento totale e\' almeno 3000 e ogni radice ne ha uno', () => {
-  assert.ok(MIN_FILES_TOTAL >= 3000, `pavimento totale ${MIN_FILES_TOTAL}: troppo basso`);
-  assert.ok(BLOG_BODY_ROOTS.length >= 2, 'entrambe le radici devono essere sorvegliate');
-  for (const r of BLOG_BODY_ROOTS) {
-    assert.ok(r.minFiles > 0, `${r.rel}: un pavimento a 0 non e\' un pavimento`);
-  }
+test('i pavimenti derivano dai registri moltiplicati per i locali presenti', () => {
+  assert.equal(BLOG_BODY_ROOTS.length, 2, 'entrambe le radici devono essere sorvegliate');
   assert.deepEqual(
     BLOG_BODY_ROOTS.map((r) => r.rel).sort(),
     ['content/blog-body', 'content/blog-body-ch'],
     'le due radici dei corpi di questo repo',
   );
+  assert.ok(BLOG_BODY_ROOTS.every((r) => r.section), 'ogni radice deve avere una sezione derivabile');
+  const model = deriveFloorModel(ROOT);
+  assert.ok(model.perRoot.every((r) => r.expectedFiles > 0));
+  assert.equal(
+    model.expectedTotal,
+    model.perRoot.reduce((sum, r) => sum + r.expectedFiles, 0),
+  );
+  const source = fs.readFileSync(GATE, 'utf8');
+  assert.doesNotMatch(source, /MIN_FILES_TOTAL|\bminFiles\s*:/, 'il gate non deve contenere soglie assolute');
+});
+
+test('il modello non conta la directory del gate e rifiuta un riferimento assente', async () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'blog-body-floor-reference-'));
+  try {
+    const content = path.join(dir, 'content');
+    fs.mkdirSync(path.join(content, 'blog-body', 'it'), { recursive: true });
+    fs.writeFileSync(path.join(content, 'blog-body', 'it', 'extra.ts'), 'export default ``;');
+    fs.writeFileSync(path.join(content, 'blog-articles-data.ts'), "id: 'a'\nid: 'b'\n");
+    fs.writeFileSync(path.join(content, 'swiss-articles-data.ts'), "id: 's'\n");
+    fs.writeFileSync(path.join(content, 'blog-meta-it.ts'), '// locale');
+    fs.writeFileSync(path.join(content, 'blog-meta-en.ts'), '// locale');
+    fs.writeFileSync(path.join(content, 'blog-meta-ch-it.ts'), '// locale');
+    fs.writeFileSync(path.join(content, 'blog-meta-ch-en.ts'), '// locale');
+
+    const model = deriveFloorModel(dir);
+    assert.deepEqual(model.perRoot.map((r) => r.expectedFiles), [4, 2]);
+
+    const missing = fs.mkdtempSync(path.join(os.tmpdir(), 'blog-body-floor-missing-'));
+    try {
+      fs.mkdirSync(path.join(missing, 'content'), { recursive: true });
+      const errors = [];
+      const status = await run({ root: missing, log() {}, error: (message) => errors.push(message), env: {} });
+      assert.equal(status, 1);
+      assert.match(errors.join('\n'), /riferimento del pavimento assente/);
+      assert.throws(() => deriveFloorModel(missing), /content\/blog-articles-data\.ts/);
+    } finally {
+      fs.rmSync(missing, { recursive: true, force: true });
+    }
+  } finally {
+    fs.rmSync(dir, { recursive: true, force: true });
+  }
 });
 
 // ── La raccolta dei file ────────────────────────────────────────────────────
@@ -385,8 +420,17 @@ test('scansione reale dei corpi (solo se PREFLIGHT_ESBUILD_DIR e\' impostata)', 
     return;
   }
   const esbuild = loadEsbuild();
-  const files = BLOG_BODY_ROOTS.flatMap((r) => collectTypeScriptFiles(path.join(ROOT, r.rel)));
-  assert.ok(files.length > MIN_FILES_TOTAL, `solo ${files.length} corpi trovati`);
+  const model = deriveFloorModel(ROOT);
+  const perRoot = model.perRoot.map((r) => ({
+    ...r,
+    files: collectTypeScriptFiles(path.join(ROOT, r.rel)),
+  }));
+  const files = perRoot.flatMap((r) => r.files);
+  assert.deepEqual(
+    floorViolations(perRoot.map((r) => ({ ...r, count: r.files.length }))),
+    [],
+    `pavimenti derivati non soddisfatti: ${files.length} corpi trovati`,
+  );
 
   const failures = [];
   for (let i = 0; i < files.length; i += 500) {
