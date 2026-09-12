@@ -2547,14 +2547,26 @@ export function isIssueGroupable(issue, {
  * verrebbe mai applicata e nessuno se ne accorgerebbe. Le label introdotte da
  * questo file (`sibling-debt`, `fu-data-pending`) non sono create da nessun
  * altro workflow e vivono su DUE repo (`mode: identical`), quindi crearle a
- * mano da un lato solo sarebbe drift garantito. Best-effort, stesso pattern di
- * `loop-health-report.mjs`: se esiste già, `gh` esce non-zero e va bene così. */
-function ensureLabel(name, color, description) {
-  if (DRY) return;
+ * mano da un lato solo sarebbe drift garantito. `gh label create` fallisce
+ * anche quando la label esiste già: in quel caso il fallback `label edit`
+ * riallinea sempre colore e description, compresa una description live ormai
+ * obsoleta. */
+export function ensureLabel(name, color, description, { run = gh, dry = DRY } = {}) {
+  if (dry) return 'dry';
+  const args = ['label', 'create', name, '--repo', REPO, '--color', color, '--description', description];
   try {
-    gh(['label', 'create', name, '--repo', REPO, '--color', color, '--description', description],
-      { json: false });
-  } catch { /* già esistente (o repo senza permessi label): l'edit sotto dirà la verità */ }
+    run(args, { json: false });
+    return 'created';
+  } catch {
+    try {
+      run(['label', 'edit', name, '--repo', REPO, '--color', color, '--description', description],
+        { json: false });
+      return 'updated';
+    } catch (error) {
+      console.log(`::warning::label "${name}" non creata/aggiornata: ${String(error).slice(0, 160)}`);
+      return 'failed';
+    }
+  }
 }
 
 function edit(num, { add = [], remove = [] }) {
