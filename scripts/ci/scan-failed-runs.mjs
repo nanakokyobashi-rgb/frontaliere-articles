@@ -206,6 +206,34 @@ export function isDeclaredSkipOnly(jobs) {
   return jobs.every((j) => typeof j?.step === 'string' && DECLARED_SKIP_STEP_RE.test(j.step));
 }
 
+// `issue-fix.yml` usa deliberatamente un classificatore rosso quando la CLI
+// fallisce senza aver consegnato una PR. Il marker `FIX_OUTCOME`/il drainer
+// tiene gia' quel segnale sulla issue di lavoro; farlo riaprire da questo
+// scanner come `Workflow Failure: Issue fix (Claude → PR)` crea una seconda
+// issue per lo stesso tentativo e riavvia il workflow sul proprio allarme
+// (#1025). Il rosso del classifier resta intatto per drainer e health report.
+export const ISSUE_FIX_WORKFLOW_NAME = 'Issue fix (Claude → PR)';
+export const ISSUE_FIX_CLASSIFIER_STEP_RE = /^Classify outcome \(work-done, not CLI exit\)$/;
+// `gh run view --log-failed` include anche il sorgente dello shell step. La
+// firma deve quindi richiedere la riga runtime `::error::issue-fix #<N>:`;
+// altrimenti il semplice `echo "...#$ISSUE..."` del workflow puo' bastare a
+// sopprimere un errore diverso del classifier.
+export const ISSUE_FIX_NON_DELIVERY_RE =
+  /(?:^|\n)[^\n]*::error::issue-fix #\d+:\s+nessuna PR aperta\/mergiata e la CLI [^;\n]*?-> non-delivery reale\./i;
+
+/**
+ * True solo per l'esito di non-consegna gia' posseduto dal ciclo issue-fix.
+ *
+ * Il log e' richiesto come prova del ramo preciso: un errore diverso nello
+ * stesso step non viene nascosto. Un log non disponibile produce `false`,
+ * quindi il default dello scanner resta segnalare in dubbio.
+ */
+export function isExpectedIssueFixNonDelivery(workflowName, jobs, log = '') {
+  if (workflowName !== ISSUE_FIX_WORKFLOW_NAME || !Array.isArray(jobs) || jobs.length === 0) return false;
+  if (!jobs.every((j) => ISSUE_FIX_CLASSIFIER_STEP_RE.test(String(j?.step || '')))) return false;
+  return ISSUE_FIX_NON_DELIVERY_RE.test(String(log || ''));
+}
+
 /**
  * Un job che il detector timeout/host-kill deve possedere in esclusiva.
  *
@@ -650,6 +678,41 @@ function failedJobs(runId) {
   }
 }
 
+/**
+ * Sceglie il piu' recente candidato issue-fix che non sia una non-consegna gia'
+ * gestita dal ciclo originario.
+ *
+ * Il raggruppamento per workflow deve restare uno: aprire una issue per ogni
+ * tentativo riporterebbe il doppio segnale che questo filtro deve evitare. Ma
+ * scartare a priori la run piu' recente e' altrettanto pericoloso: una
+ * non-consegna del fixer puo' precedere, nella stessa finestra, una failure
+ * reale del classifier. In quel caso si scorre il gruppo verso la run piu'
+ * recente che non ha la firma gestita; se tutte le run hanno quella firma, il
+ * workflow non produce nessuna issue.
+ *
+ * `candidates` deve contenere le run dello stesso workflow. L'ordinamento qui
+ * e' esplicito per non dipendere dall'ordine restituito da una bisezione.
+ */
+export function selectIssueFixCandidate(candidates, { getFailedJobs, getLog } = {}) {
+  if (!Array.isArray(candidates) || typeof getFailedJobs !== 'function' || typeof getLog !== 'function') return null;
+  const runTime = (run) => {
+    const timestamp = Date.parse(run?.updatedAt || run?.createdAt || '');
+    return Number.isFinite(timestamp) ? timestamp : -1;
+  };
+  const ordered = [...candidates].sort((a, b) => runTime(b) - runTime(a));
+  for (const run of ordered) {
+    const allFailedJobs = getFailedJobs(run.databaseId, run);
+    const { ordinary: jobs } = partitionFailedJobsByOwner(allFailedJobs);
+    const isClassifierOnly = jobs.length > 0
+      && jobs.every((j) => ISSUE_FIX_CLASSIFIER_STEP_RE.test(String(j?.step || '')));
+    const issueFixLog = isClassifierOnly ? getLog(run.databaseId, run) : '';
+    if (!isExpectedIssueFixNonDelivery(ISSUE_FIX_WORKFLOW_NAME, jobs, issueFixLog)) {
+      return { run, allFailedJobs, issueFixLog };
+    }
+  }
+  return null;
+}
+
 /* ─────────────────────────────────────────────────────────────────────────────
  * Rilevatore: "articolo generato e perso" (issue #225)
  *
@@ -916,25 +979,47 @@ async function main() {
     return 0;
   }
 
-  // Una issue per WORKFLOW, non per run: se lo stesso workflow è fallito tre
-  // volte nella finestra, il segnale resta uno solo. Si tiene la piu' recente.
-  const byWorkflow = new Map();
+  // Una issue per WORKFLOW, non per run: se lo stesso workflow e' fallito tre
+  // volte nella finestra, il segnale resta uno solo. Per Issue fix si tiene la
+  // piu' recente run NON soppressa: una non-consegna riconosciuta nella run
+  // piu' recente non deve nascondere una failure diversa ancora nella finestra.
+  const candidatesByWorkflow = new Map();
   for (const r of runs) {
-    const prev = byWorkflow.get(r.workflowName);
-    if (!prev || (r.updatedAt || r.createdAt) > (prev.updatedAt || prev.createdAt)) byWorkflow.set(r.workflowName, r);
+    const candidates = candidatesByWorkflow.get(r.workflowName) || [];
+    candidates.push(r);
+    candidatesByWorkflow.set(r.workflowName, candidates);
   }
 
-  console.log(`[scan-failed-runs] ${runs.length} run fallite → ${byWorkflow.size} workflow distinti${DRY_RUN ? ' (dry-run)' : ''}.`);
+  const byWorkflow = new Map();
+  for (const [name, candidates] of candidatesByWorkflow) {
+    if (name === ISSUE_FIX_WORKFLOW_NAME) {
+      const selected = selectIssueFixCandidate(candidates, {
+        getFailedJobs: (runId) => failedJobs(runId),
+        getLog: (runId) => gh(['run', 'view', String(runId), '--repo', REPO, '--log-failed'], ''),
+      });
+      if (selected) byWorkflow.set(name, selected);
+      continue;
+    }
+    const [run] = [...candidates].sort((a, b) => {
+      const aTime = Date.parse(a?.updatedAt || a?.createdAt || '');
+      const bTime = Date.parse(b?.updatedAt || b?.createdAt || '');
+      return (Number.isFinite(bTime) ? bTime : -1) - (Number.isFinite(aTime) ? aTime : -1);
+    });
+    byWorkflow.set(name, { run, allFailedJobs: null, issueFixLog: null });
+  }
+
+  console.log(`[scan-failed-runs] ${runs.length} run fallite → ${candidatesByWorkflow.size} workflow distinti${DRY_RUN ? ' (dry-run)' : ''}.`);
 
   let opened = 0;
-  for (const [name, run] of byWorkflow) {
+  for (const [name, selected] of byWorkflow) {
+    const run = selected.run;
     if (opened >= MAX_ISSUES) {
       // Un cap che tronca in silenzio si legge come "tutto coperto". Lo diciamo.
       console.warn(`::warning::[scan-failed-runs] Cap di ${MAX_ISSUES} issue raggiunto — ${byWorkflow.size - opened} workflow falliti NON segnalati in questa passata: ${[...byWorkflow.keys()].slice(opened).join(', ')}. Verranno ripresi alla prossima scansione.`);
       break;
     }
 
-    const allFailedJobs = failedJobs(run.databaseId);
+    const allFailedJobs = selected.allFailedJobs ?? failedJobs(run.databaseId);
     const { ordinary: jobs, timeoutScanner: timeoutOwnedJobs } = partitionFailedJobsByOwner(allFailedJobs);
 
     if (timeoutOwnedJobs.length > 0) {
@@ -955,6 +1040,20 @@ async function main() {
     // prima del rilevatore ricco: non c'e' niente da arricchire.
     if (isDeclaredSkipOnly(jobs)) {
       console.log(`[scan-failed-runs] ${name}: run ${run.databaseId} rossa solo per skip dichiarato (${jobs.map((j) => j.step).join(', ')}) → nessuna issue.`);
+      continue;
+    }
+
+    // La non-consegna del fixer e' gia' un esito della issue originaria, non
+    // un guasto indipendente del workflow scannerizzato. Si legge il log solo
+    // per questo candidato: la firma completa evita di sopprimere un errore
+    // diverso del classificatore, e un fallimento della lettura resta
+    // segnalabile per default.
+    const issueFixLog = selected.issueFixLog ?? (name === ISSUE_FIX_WORKFLOW_NAME
+      && jobs.every((j) => ISSUE_FIX_CLASSIFIER_STEP_RE.test(String(j?.step || '')))
+      ? gh(['run', 'view', String(run.databaseId), '--repo', REPO, '--log-failed'], '')
+      : '');
+    if (isExpectedIssueFixNonDelivery(name, jobs, issueFixLog)) {
+      console.log(`[scan-failed-runs] ${name}: run ${run.databaseId} ha un esito di non-consegna già gestito dal ciclo → nessuna issue duplicata.`);
       continue;
     }
 

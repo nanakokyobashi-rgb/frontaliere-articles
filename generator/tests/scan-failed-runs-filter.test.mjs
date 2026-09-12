@@ -18,6 +18,11 @@ import {
   buildLostArticleReport,
   isDeclaredSkipOnly,
   DECLARED_SKIP_STEP_RE,
+  ISSUE_FIX_WORKFLOW_NAME,
+  ISSUE_FIX_CLASSIFIER_STEP_RE,
+  ISSUE_FIX_NON_DELIVERY_RE,
+  isExpectedIssueFixNonDelivery,
+  selectIssueFixCandidate,
   DEFAULT_RUN_QUERY_HORIZON_MIN,
   parseHorizonMin,
   parsePositiveNum,
@@ -352,6 +357,66 @@ test('#170: il filtro NON e\' un allowlist di workflow — il nome dello step e\
   assert.equal(DECLARED_SKIP_STEP_RE.test('Post-merge follow-up triage'), false);
   assert.equal(DECLARED_SKIP_STEP_RE.test('Pre-flight — quota backoff gate (zero-Claude)'), false,
     'il pre-flight e\' PROCEED-SAFE (continue-on-error) e non fallisce mai: non deve entrare nel filtro');
+});
+
+// ───────────────────────────────────────────────────────────────────────────
+// issue #1025 — il classificatore rosso non deve auto-segnalare il workflow
+
+const ISSUE_FIX_FAILURE_LOG =
+  "::error::issue-fix #1025: nessuna PR aperta/mergiata e la CLI e' fallita ('failure') -> non-delivery reale.";
+const ISSUE_FIX_COMMAND_LOG =
+  'echo "::error::issue-fix #$ISSUE: nessuna PR aperta/mergiata e la CLI e\' fallita (\'failure\') -> non-delivery reale."';
+const classifierJob = (step = 'Classify outcome (work-done, not CLI exit)') => ({
+  name: 'fix',
+  step,
+  url: 'https://example.invalid/job',
+});
+
+test('#1025: la non-consegna dichiarata del classificatore non apre una issue ricorsiva', () => {
+  assert.equal(ISSUE_FIX_CLASSIFIER_STEP_RE.test(classifierJob().step), true);
+  assert.equal(ISSUE_FIX_NON_DELIVERY_RE.test(ISSUE_FIX_FAILURE_LOG), true);
+  assert.equal(
+    isExpectedIssueFixNonDelivery(ISSUE_FIX_WORKFLOW_NAME, [classifierJob()], ISSUE_FIX_FAILURE_LOG),
+    true,
+  );
+});
+
+test('#1025: il sorgente echo del workflow non vale come prova runtime', () => {
+  assert.equal(ISSUE_FIX_NON_DELIVERY_RE.test(ISSUE_FIX_COMMAND_LOG), false);
+  assert.equal(ISSUE_FIX_NON_DELIVERY_RE.test(`fix 2026-09-12Z ${ISSUE_FIX_FAILURE_LOG}`), true);
+});
+
+test('#1025: un errore diverso nello stesso workflow resta segnalabile', () => {
+  assert.equal(
+    isExpectedIssueFixNonDelivery(ISSUE_FIX_WORKFLOW_NAME, [classifierJob()], 'TypeError: classifier crashed'),
+    false,
+  );
+  assert.equal(
+    isExpectedIssueFixNonDelivery(ISSUE_FIX_WORKFLOW_NAME, [classifierJob('Run Claude fix')], ISSUE_FIX_FAILURE_LOG),
+    false,
+  );
+  assert.equal(
+    isExpectedIssueFixNonDelivery('tests', [classifierJob()], ISSUE_FIX_FAILURE_LOG),
+    false,
+  );
+});
+
+test('#1025: una non-consegna recente non nasconde una failure precedente reale', () => {
+  const newer = {
+    databaseId: 101,
+    createdAt: '2026-09-12T10:00:00Z',
+    updatedAt: '2026-09-12T10:01:00Z',
+  };
+  const older = {
+    databaseId: 100,
+    createdAt: '2026-09-12T09:00:00Z',
+    updatedAt: '2026-09-12T09:01:00Z',
+  };
+  const selected = selectIssueFixCandidate([older, newer], {
+    getFailedJobs: () => [classifierJob()],
+    getLog: (runId) => runId === newer.databaseId ? ISSUE_FIX_FAILURE_LOG : 'TypeError: classifier crashed',
+  });
+  assert.equal(selected?.run.databaseId, older.databaseId);
 });
 
 /**

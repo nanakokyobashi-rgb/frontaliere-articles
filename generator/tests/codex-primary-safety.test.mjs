@@ -7,6 +7,7 @@ import {
   CORPUS_REPOSITORY,
   isMutatingGhArgs,
   resolveGhScope,
+  validatePrBodyContract,
   validateGhArgs,
 } from '../../.github/actions/claude-codex-fallback/gh-bridge-server.mjs';
 import { isMutatingGitArgs } from '../../.github/actions/claude-codex-fallback/git-bridge-server.mjs';
@@ -83,6 +84,29 @@ test('the corpus bridge permits read-only API metadata without permitting mutati
     ),
     /mutations/,
   );
+});
+
+test('the fallback bridge follows the body-state variants of the canonical validator', () => {
+  const plural = [
+    '## Implementato',
+    '',
+    '- fix concreto',
+    '',
+    '## Non implementato (ancora)',
+    '',
+    '- Stato: PR concatenate #1365 e PR concatenate #1367.',
+  ].join('\n');
+  assert.equal(validatePrBodyContract(plural).ok, true);
+
+  for (const cause of ['item successivi', 'item restanti', 'prossima PR']) {
+    const internal = plural.replace(
+      '- Stato: PR concatenate #1365 e PR concatenate #1367.',
+      `- Stato: blocked: ${cause}`,
+    );
+    const result = validatePrBodyContract(internal);
+    assert.equal(result.ok, false, `sequencing accettato dal bridge: ${cause}`);
+    assert.ok(result.violations.includes('blocked internal sequencing is not an external cause'));
+  }
 });
 
 test('the corpus checkout keeps current calls on the runner and routes explicit cross-repo targets', () => {
