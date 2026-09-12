@@ -395,13 +395,13 @@ jobs:
         run: node scripts/ci/review-claim.mjs --claim
 
       - name: Fail closed when review claim is unreadable
-        if: steps.review_claim.outputs.claim_error == 'true'
+        if: steps.body_contract.outcome != 'failure' && steps.review_claim.outputs.claim_error == 'true'
         run: |
           echo "::error::Claim review PR+HEAD+contribution illeggibile o non verificabile → nessun nuovo Claude."
           exit 1
 
       - name: Skip already-consumed review contribution (zero-Claude)
-        if: steps.review_claim.outputs.claim_allowed != 'true' && steps.review_claim.outputs.claim_error != 'true'
+        if: steps.body_contract.outcome != 'failure' && steps.review_claim.outputs.claim_allowed != 'true' && steps.review_claim.outputs.claim_error != 'true'
         run: echo "Review già acquisita per questa PR+HEAD+contribution → nessun secondo Claude."
 
       - name: Determine review tier
@@ -1015,7 +1015,7 @@ jobs:
           exit 1
 
       - name: Finalize review PR + HEAD + contribution claim
-        if: always() && steps.review_claim.outputs.claim_acquired == 'true'
+        if: always() && steps.body_contract.outcome != 'failure' && steps.review_claim.outputs.claim_acquired == 'true'
         continue-on-error: true
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

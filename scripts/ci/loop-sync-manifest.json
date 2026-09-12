@@ -3542,6 +3542,16 @@
       }
     },
     {
+      "path": "scripts/ci/review-claim.mjs",
+      "mode": "corpus-only",
+      "reason": "Registro persistito e fail-closed del review Claude generale per #8364: la chiave lega PR, HEAD, evento e fingerprint del contributo, e il workflow tests.yml di questo repo ne possiede il consumer. Non esiste un gemello site-owned di questo helper; i fixer site-owned restano nel repository sito e il loro residuo adattato è gestito nella PR sito concatenata #8420.",
+      "baseline": {
+        "site": null,
+        "corpus": "f646797b6f09660a",
+        "alignedAt": "2026-09-12"
+      }
+    },
+    {
       "path": "scripts/ci/generator-ci-gate.mjs",
       "mode": "corpus-only",
       "reason": "Porta il gate condizionale su generator-ci.yml (ex gate 4 di auto-merge-eval) dentro il job che produce il check richiesto dal ruleset: il ruleset puo' richiedere solo contesti presenti su OGNI PR, e generator-ci.yml e' path-scoped. Non ha e non puo' avere un gemello: generator-ci.yml esiste solo qui.",
