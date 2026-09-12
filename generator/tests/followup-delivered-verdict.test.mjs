@@ -49,6 +49,7 @@ import {
   isDeliveredThisRun,
   lastLabelEventAt,
   latestFixOutcomeEntryFromComments,
+  recoverableFixDecision,
 } from '../../scripts/ci/followup-drainer.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
@@ -117,6 +118,42 @@ test('crawlerFixDecision: senza verdetto la run orfana consuma ancora un tentati
   // rescue delle run davvero morte, che è ciò che `fu-attempt` esiste per
   // contare.
   const d = crawlerFixDecision({ outcome: null, ageMin: 600, attempt: 0, hasPR: false });
+  assert.equal(d.action, 'requeue');
+  assert.equal(d.nextAttempt, 1);
+});
+
+test('recoverableFixDecision: un checkpoint WIP ri-accoda il run bounded', () => {
+  const d = recoverableFixDecision({ outcome: 'max-turns', hasBranchWork: true, attempt: 0, maxAttempts: MAX_ATTEMPTS });
+  assert.equal(d.action, 'requeue');
+  assert.equal(d.nextAttempt, 1);
+  assert.match(d.reason, /checkpoint WIP recuperabile/);
+});
+
+test('recoverableFixDecision: il checkpoint raggiunge il park al tetto', () => {
+  const d = recoverableFixDecision({ outcome: null, hasBranchWork: true, attempt: MAX_ATTEMPTS - 1, maxAttempts: MAX_ATTEMPTS });
+  assert.equal(d.action, 'park-attempts');
+  assert.equal(d.nextAttempt, MAX_ATTEMPTS);
+});
+
+test('recoverableFixDecision: un verdetto fermo prevale sul checkpoint', () => {
+  const d = recoverableFixDecision({ outcome: 'no-root-cause', hasBranchWork: true, attempt: 0 });
+  assert.equal(d.action, 'none');
+  assert.equal(d.nextAttempt, 0);
+});
+
+test('recoverableFixDecision: il backoff quota conserva il beacon WIP', () => {
+  const d = recoverableFixDecision({ outcome: 'max-turns', hasBranchWork: true, attempt: 1, quotaBackoffActive: true });
+  assert.equal(d.action, 'hold-quota');
+  assert.equal(d.nextAttempt, 1);
+});
+
+test('crawlerFixDecision: una promozione fresca non cede un branch WIP', () => {
+  const d = crawlerFixDecision({ outcome: null, ageMin: 1, hasBranchWork: true, attempt: 0 });
+  assert.equal(d.action, 'settling');
+});
+
+test('crawlerFixDecision: il crawler usa il checkpoint per ri-accodare max-turns', () => {
+  const d = crawlerFixDecision({ outcome: 'max-turns', ageMin: 1, hasBranchWork: true, attempt: 0 });
   assert.equal(d.action, 'requeue');
   assert.equal(d.nextAttempt, 1);
 });
