@@ -9,6 +9,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { spawn } from 'node:child_process';
+import { EventEmitter } from 'node:events';
 import { mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
@@ -16,7 +17,9 @@ import { fileURLToPath } from 'node:url';
 
 const LIB = fileURLToPath(new URL('../scripts/lib/drain-stdio.mjs', import.meta.url));
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const PAYLOAD_BYTES = 200_001;
+// Stay above the largest POSIX pipe capacity used by the CI runners: the
+// no-drain branch must have bytes pending when it calls process.exit().
+const PAYLOAD_BYTES = 2_000_001;
 const OUT_TAIL = 'STDOUT-TELEMETRY-TAIL';
 const ERR_TAIL = 'STDERR-TELEMETRY-TAIL';
 
@@ -84,6 +87,88 @@ function runBlockedChild() {
   });
 }
 
+function consumerSkeleton() {
+  const stream = new EventEmitter();
+  stream.writableEnded = false;
+  stream.destroyed = false;
+  stream.writableLength = 1;
+  stream.writableNeedDrain = true;
+  return stream;
+}
+
+function closedConsumer() {
+  const stream = consumerSkeleton();
+  stream.write = () => {
+    stream.emit('close');
+    stream.emit('error', Object.assign(new Error('consumer closed'), { code: 'EPIPE' }));
+    // No write callback: close/error are not delivery confirmation.
+    return false;
+  };
+  return stream;
+}
+
+function errorConsumer() {
+  const stream = consumerSkeleton();
+  stream.write = () => {
+    queueMicrotask(() => stream.emit('error', Object.assign(new Error('consumer failed'), { code: 'EPIPE' })));
+    return false;
+  };
+  return stream;
+}
+
+function failureBeforeCallbackConsumer() {
+  const stream = consumerSkeleton();
+  stream.write = (_chunk, callback) => {
+    stream.emit('close');
+    stream.emit('error', Object.assign(new Error('consumer closed first'), { code: 'EPIPE' }));
+    queueMicrotask(() => callback());
+    return false;
+  };
+  return stream;
+}
+
+function callbackErrorConsumer() {
+  const stream = consumerSkeleton();
+  stream.write = (_chunk, callback) => {
+    callback(new Error('write failed'));
+    return false;
+  };
+  return stream;
+}
+
+function completedConsumer() {
+  const stream = consumerSkeleton();
+  stream.write = (_chunk, callback) => callback();
+  return stream;
+}
+
+function throwingConsumer(stateFlag) {
+  const stream = consumerSkeleton();
+  stream.write = () => {
+    if (stateFlag) stream[stateFlag] = true;
+    throw new Error('write rejected');
+  };
+  return stream;
+}
+
+function idleConsumer() {
+  const stream = consumerSkeleton();
+  stream.writableLength = 0;
+  stream.writableNeedDrain = false;
+  return stream;
+}
+
+function controlledConsumer() {
+  const stream = consumerSkeleton();
+  let release;
+  stream.write = (_chunk, callback) => {
+    release = callback;
+    return false;
+  };
+  stream.release = () => release?.();
+  return stream;
+}
+
 test('senza drain la coda delle pipe si perde, con drain arrivano entrambi gli stream', async () => {
   const lost = await runChild({ drain: false });
   assert.ok(lost.stdout.length < PAYLOAD_BYTES + OUT_TAIL.length, 'stdout non risulta troncato nel caso senza drain');
@@ -111,6 +196,142 @@ test('un consumer bloccato non supera il timeout e non cambia l\'exit code', asy
   assert.equal(result.code, 9);
   assert.ok(result.elapsedMs < 1_000, `timeout non bounded: ${result.elapsedMs}ms`);
 });
+
+test('close/error del consumer non confermano il flush: resta il timeout bounded', async () => {
+  const stdoutDescriptor = Object.getOwnPropertyDescriptor(process, 'stdout');
+  const stderrDescriptor = Object.getOwnPropertyDescriptor(process, 'stderr');
+  Object.defineProperty(process, 'stdout', { configurable: true, enumerable: true, value: closedConsumer() });
+  Object.defineProperty(process, 'stderr', { configurable: true, enumerable: true, value: closedConsumer() });
+
+  try {
+    const { drainStdio } = await import('../scripts/lib/drain-stdio.mjs');
+    const startedAt = Date.now();
+    await drainStdio(50);
+    const elapsedMs = Date.now() - startedAt;
+    assert.ok(elapsedMs >= 35, 'close/error ha concluso prematuramente il drain: ' + elapsedMs + 'ms');
+    assert.ok(elapsedMs < 500, 'timeout non bounded dopo close/error: ' + elapsedMs + 'ms');
+  } finally {
+    Object.defineProperty(process, 'stdout', stdoutDescriptor);
+    Object.defineProperty(process, 'stderr', stderrDescriptor);
+  }
+});
+
+test('error senza callback non conferma il flush: resta il timeout bounded', async () => {
+  const stdoutDescriptor = Object.getOwnPropertyDescriptor(process, 'stdout');
+  const stderrDescriptor = Object.getOwnPropertyDescriptor(process, 'stderr');
+  Object.defineProperty(process, 'stdout', { configurable: true, enumerable: true, value: errorConsumer() });
+  Object.defineProperty(process, 'stderr', { configurable: true, enumerable: true, value: errorConsumer() });
+
+  try {
+    const { drainStdio } = await import('../scripts/lib/drain-stdio.mjs');
+    const startedAt = Date.now();
+    await drainStdio(50);
+    const elapsedMs = Date.now() - startedAt;
+    assert.ok(elapsedMs >= 35, 'error senza callback ha concluso prematuramente il drain: ' + elapsedMs + 'ms');
+    assert.ok(elapsedMs < 500, 'timeout non bounded dopo error senza callback: ' + elapsedMs + 'ms');
+  } finally {
+    Object.defineProperty(process, 'stdout', stdoutDescriptor);
+    Object.defineProperty(process, 'stderr', stderrDescriptor);
+  }
+});
+
+test('close/error prima della callback non confermano il flush', async () => {
+  const stdoutDescriptor = Object.getOwnPropertyDescriptor(process, 'stdout');
+  const stderrDescriptor = Object.getOwnPropertyDescriptor(process, 'stderr');
+  Object.defineProperty(process, 'stdout', { configurable: true, enumerable: true, value: failureBeforeCallbackConsumer() });
+  Object.defineProperty(process, 'stderr', { configurable: true, enumerable: true, value: failureBeforeCallbackConsumer() });
+
+  try {
+    const { drainStdio } = await import('../scripts/lib/drain-stdio.mjs');
+    const startedAt = Date.now();
+    await drainStdio(50);
+    const elapsedMs = Date.now() - startedAt;
+    assert.ok(elapsedMs >= 35, 'close/error prima della callback ha confermato il drain: ' + elapsedMs + 'ms');
+    assert.ok(elapsedMs < 500, 'timeout non bounded dopo close/error prima della callback: ' + elapsedMs + 'ms');
+  } finally {
+    Object.defineProperty(process, 'stdout', stdoutDescriptor);
+    Object.defineProperty(process, 'stderr', stderrDescriptor);
+  }
+});
+
+test('callback con errore senza close non rigetta e conserva il pending fino al timeout', async () => {
+  const stdoutDescriptor = Object.getOwnPropertyDescriptor(process, 'stdout');
+  const stderrDescriptor = Object.getOwnPropertyDescriptor(process, 'stderr');
+  Object.defineProperty(process, 'stdout', { configurable: true, enumerable: true, value: callbackErrorConsumer() });
+  Object.defineProperty(process, 'stderr', { configurable: true, enumerable: true, value: idleConsumer() });
+
+  try {
+    const { drainStdio } = await import('../scripts/lib/drain-stdio.mjs');
+    const startedAt = Date.now();
+    await drainStdio(50);
+    const elapsedMs = Date.now() - startedAt;
+    assert.ok(elapsedMs >= 35, 'callback con errore ha chiuso il pending in anticipo: ' + elapsedMs + 'ms');
+    assert.ok(elapsedMs < 500, 'timeout non bounded dopo callback con errore: ' + elapsedMs + 'ms');
+  } finally {
+    Object.defineProperty(process, 'stdout', stdoutDescriptor);
+    Object.defineProperty(process, 'stderr', stderrDescriptor);
+  }
+});
+
+test('write che lancia dopo l altro stream completato libera il proprio slot', async () => {
+  const stdoutDescriptor = Object.getOwnPropertyDescriptor(process, 'stdout');
+  const stderrDescriptor = Object.getOwnPropertyDescriptor(process, 'stderr');
+  Object.defineProperty(process, 'stdout', { configurable: true, enumerable: true, value: completedConsumer() });
+  Object.defineProperty(process, 'stderr', { configurable: true, enumerable: true, value: throwingConsumer() });
+
+  try {
+    const { drainStdio } = await import('../scripts/lib/drain-stdio.mjs');
+    const startedAt = Date.now();
+    await drainStdio(50);
+    const elapsedMs = Date.now() - startedAt;
+    assert.ok(elapsedMs < 35, 'write lanciata ha lasciato il drain in attesa del timeout: ' + elapsedMs + 'ms');
+  } finally {
+    Object.defineProperty(process, 'stdout', stdoutDescriptor);
+    Object.defineProperty(process, 'stderr', stderrDescriptor);
+  }
+});
+
+test('write sincrona lanciata non anticipa la callback positiva dell altro stream', async () => {
+  const stdoutDescriptor = Object.getOwnPropertyDescriptor(process, 'stdout');
+  const stderrDescriptor = Object.getOwnPropertyDescriptor(process, 'stderr');
+  const positive = controlledConsumer();
+  Object.defineProperty(process, 'stdout', { configurable: true, enumerable: true, value: throwingConsumer() });
+  Object.defineProperty(process, 'stderr', { configurable: true, enumerable: true, value: positive });
+
+  try {
+    const { drainStdio } = await import('../scripts/lib/drain-stdio.mjs');
+    let settled = false;
+    const drained = drainStdio(50).then(() => { settled = true; });
+    await new Promise((resolve) => setImmediate(resolve));
+    assert.equal(settled, false, 'il throw non deve sostituire la conferma positiva dell altro stream');
+    positive.release();
+    await drained;
+    assert.equal(settled, true);
+  } finally {
+    Object.defineProperty(process, 'stdout', stdoutDescriptor);
+    Object.defineProperty(process, 'stderr', stderrDescriptor);
+  }
+});
+
+for (const stateFlag of ['writableEnded', 'destroyed']) {
+  test(`stream ${stateFlag} prima di write: il drain resta bounded`, async () => {
+    const stdoutDescriptor = Object.getOwnPropertyDescriptor(process, 'stdout');
+    const stderrDescriptor = Object.getOwnPropertyDescriptor(process, 'stderr');
+    Object.defineProperty(process, 'stdout', { configurable: true, enumerable: true, value: throwingConsumer(stateFlag) });
+    Object.defineProperty(process, 'stderr', { configurable: true, enumerable: true, value: idleConsumer() });
+
+    try {
+      const { drainStdio } = await import('../scripts/lib/drain-stdio.mjs');
+      const startedAt = Date.now();
+      await drainStdio(50);
+      const elapsedMs = Date.now() - startedAt;
+      assert.ok(elapsedMs < 35, `${stateFlag} prima di write ha lasciato il drain in attesa: ${elapsedMs}ms`);
+    } finally {
+      Object.defineProperty(process, 'stdout', stdoutDescriptor);
+      Object.defineProperty(process, 'stderr', stderrDescriptor);
+    }
+  });
+}
 
 test('create-article drena dopo il ledger e prima dell\'unico process.exit nudo', () => {
   const source = sourceOf('scripts/create-article.mjs');

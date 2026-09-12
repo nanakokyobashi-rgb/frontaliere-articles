@@ -481,7 +481,7 @@
     {
       "path": "scripts/lib/seo-entry.mjs",
       "mode": "corpus-only",
-      "reason": "Helper fail-closed per rimuovere atomicamente tutte le entry SEO duplicate durante il ritiro di un articolo (#1130). Il sito non ha questo percorso di pubblicazione corpus-side e non deve ricevere una copia con assunzioni diverse sul formato dei chunk SEO.",
+      "reason": "Shim corpus-only per i generatori che re-esporta il resolver SEO canonico da `engine/shared/seo-entry.mjs`. L'implementazione viaggia con il subtree engine mirrorato; sul sito non esiste questo entry point di pubblicazione corpus-side e non va aggiunta una seconda copia con assunzioni diverse sul formato dei chunk SEO.",
       "baseline": {
         "site": null,
         "corpus": "f5c10340550b94f3",
@@ -1339,6 +1339,16 @@
       }
     },
     {
+      "path": "generator/scripts/scan-vacuous-key-facts.mjs",
+      "mode": "corpus-only",
+      "reason": "Scanner read-only della baseline dei fatti chiave vacui (#1054): stampa file-locale, articoli distinti e locale senza modificare `content/**` e senza avere un gemello operativo sul sito.",
+      "baseline": {
+        "site": null,
+        "corpus": "991427b316f1f8ea",
+        "alignedAt": "2026-09-12"
+      }
+    },
+    {
       "path": "host/shared/clauseTail.mjs",
       "sitePath": "build-plugins/shared/clauseTail.mjs",
       "mode": "identical",
@@ -1822,6 +1832,26 @@
       }
     },
     {
+      "path": "generator/scripts/lib/key-facts-specificity.mjs",
+      "mode": "corpus-only",
+      "reason": "Rilevatore puro dei fatti chiave senza valore nelle quattro lingue. Lo scanner di #1054 usa la forma di riferimento per misurare 53 file-locale/29 articoli; il gate di #1055 rimuove una coppia solo se restano almeno tre fatti e rifiuta il payload sotto soglia. E' una libreria del generatore del corpus e non ha gemello sul sito.",
+      "baseline": {
+        "site": null,
+        "corpus": "261595c0ccfc778b",
+        "alignedAt": "2026-09-12"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/cantone-toponimi-coerenza.mjs",
+      "mode": "corpus-only",
+      "reason": "Guard puro della coerenza fra cantone nello slug e toponimi nel testo (#1053). Blocca i nuovi offender della classe Grigioni/Vallese con riferimenti ticinesi e conserva come baseline esplicita i 32 articoli storici misurati. La generazione vive nel corpus e non esiste un gemello operativo sul sito.",
+      "baseline": {
+        "site": null,
+        "corpus": "51e01832939d40b6",
+        "alignedAt": "2026-09-12"
+      }
+    },
+    {
       "path": "generator/scripts/lib/decode-html-entities.mjs",
       "sitePath": "scripts/lib/decode-html-entities.mjs",
       "mode": "identical",
@@ -2102,6 +2132,26 @@
         "site": null,
         "corpus": "a9c8621700234446",
         "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "generator/tests/key-facts-specificity.test.mjs",
+      "mode": "corpus-only",
+      "reason": "Testa la misura #1054, il parser nelle quattro lingue e la regola #1055 che rimuove i fatti vuoti sopra soglia e rifiuta quelli sotto soglia. E' una suite node:test del generatore del corpus, senza gemello operativo sul sito.",
+      "baseline": {
+        "site": null,
+        "corpus": "8c4e9bbe579c0651",
+        "alignedAt": "2026-09-12"
+      }
+    },
+    {
+      "path": "generator/tests/cantone-toponimi-coerenza.test.mjs",
+      "mode": "corpus-only",
+      "reason": "Testa il guard #1053 con l offender Courmayeur/Vallese, la guida legittima di Carate Urio/Ticino e la baseline storica dei 32 casi. Suite node:test specifica del generatore del corpus, senza gemello sul sito.",
+      "baseline": {
+        "site": null,
+        "corpus": "222d40c75ffd5d1a",
+        "alignedAt": "2026-09-12"
       }
     },
     {

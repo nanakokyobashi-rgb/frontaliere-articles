@@ -36,6 +36,7 @@ import {
   registerArticleFiles,
   checkArticleIdExists,
   assertArticlePassesFactualityGates,
+  assertGeneratedArticleQuality,
   resolveRegisterLockAtStartup,
   buildBodyFile,
 } from './create-article.mjs';
@@ -81,6 +82,9 @@ export function refreshBodyFiles(data, repoRoot = REPO_ROOT, log = console.log) 
   // Fail-closed come nel registrar: `sanitizePromptPlaceholders` ripara cio'
   // che e' riparabile e LANCIA sul primo campo che non lo e'.
   sanitizePromptPlaceholders(data);
+  // This rerun writes body files directly and bypasses registerArticleFiles().
+  // Keep the generation quality gate on both sides of the shared writer.
+  assertGeneratedArticleQuality(data);
   assertArticlePassesFactualityGates(data);
   for (const locale of LOCALES) {
     const dir = path.join(repoRoot, corpusPath('services/locales/blog-body'), locale);
