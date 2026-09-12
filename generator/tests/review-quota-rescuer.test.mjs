@@ -15,6 +15,7 @@ import {
   parseReviewQuotaRetryMarker,
   reviewQuotaRetryBody,
   reviewQuotaDeferredCandidates,
+  collectReviewQuotaCandidates,
   sourceWorkflowForRole,
 } from '../../scripts/ci/review-quota-rescuer.mjs';
 
@@ -90,6 +91,39 @@ test('una deferral di un consumer non nasconde quella pendente di un altro consu
   assert.equal(deferredReviewCandidate({ head: HEAD, comments }).runId, 'review-1');
 });
 
+test('collect restituisce ogni ruolo pending, compreso un requested da riconciliare', () => {
+  const comments = ['review', 'redflag', 'redcheck'].map((role, index) => ({
+    id: 30 + index,
+    created_at: `2026-09-12T13:0${index}:00Z`,
+    body: reviewQuotaDeferredBody({
+      head: HEAD,
+      runId: `${role}-1`,
+      role,
+      reason: 'shared-quota-lease-active',
+    }),
+  }));
+  comments.push({
+    id: 40,
+    created_at: '2026-09-12T13:03:00Z',
+    body: reviewQuotaRetryBody({
+      head: HEAD,
+      role: 'review',
+      deferredRunId: 'review-1',
+      sourceRunId: '42',
+      sourceAttempt: 1,
+      runId: 'rescuer-1',
+      state: 'requested',
+    }),
+  });
+
+  const candidates = collectReviewQuotaCandidates(
+    [{ number: 99, head: { sha: HEAD } }],
+    new Map([[99, comments]]),
+  );
+  assert.deepEqual(candidates.map((candidate) => candidate.deferred.role), ['review', 'redflag', 'redcheck']);
+  assert.equal(candidates.find((candidate) => candidate.deferred.role === 'review').retry.event.state, 'requested');
+});
+
 test('una nuova deferral dopo il retry dello stesso run riapre il candidato', () => {
   const fields = {
     head: HEAD,
@@ -137,6 +171,23 @@ test('il marker retry è riconciliabile: requested/confirmed bloccano, failed ri
   assert.equal(parseReviewQuotaRetryMarker(requested).state, 'requested');
 });
 
+test('il marker retry conserva e valida sourceAttempt', () => {
+  const body = reviewQuotaRetryBody({
+    head: HEAD,
+    role: 'review',
+    deferredRunId: 'tests-1',
+    sourceRunId: '42',
+    sourceAttempt: 3,
+    runId: 'rescuer-1',
+    state: 'requested',
+  });
+  assert.equal(parseReviewQuotaRetryMarker(body).sourceAttempt, 3);
+  assert.equal(
+    parseReviewQuotaRetryMarker(body.replace('"sourceAttempt":3', '"sourceAttempt":0')),
+    null,
+  );
+});
+
 test('il rescuer usa la run sorgente corretta per ogni consumer PR', () => {
   assert.equal(sourceWorkflowForRole('review'), 'tests');
   assert.equal(sourceWorkflowForRole('redflag'), 'PR 🔴 fixer (bounded loop-closure on bot PRs)');
@@ -164,4 +215,7 @@ test('il wiring reagisce al completamento dei consumer e rilascia reservation es
   assert.match(rescuer, /if \(!postRetryComment\(number, requestedBody\)\)/);
   assert.match(rescuer, /state: 'failed'/);
   assert.match(rescuer, /state: 'confirmed'/);
+  assert.match(rescuer, /--json', 'databaseId,headSha,status,workflowName,headBranch,event,attempt'/);
+  assert.match(rescuer, /includeRequested: true/);
+  assert.match(rescuer, /sourceAttempt/);
 });
