@@ -276,7 +276,8 @@ jobs:
       # poteva invocare Claude di nuovo. Su una HEAD nuova si conserva invece
       # il percorso incrementale: si guarda il delta dal contributo della
       # review piu' recente e si fa carry-forward solo quando il codice PR e'
-      # invariato. Conservativo: API illeggibile o compare vuoto → review piena.
+      # invariato. Una risposta API illeggibile è un errore: senza prova del
+      # ledger non si può spendere un altro turno Claude in sicurezza.
       - name: Re-review guard (skip Claude when no code changed since last LGTM)
         id: guard
         if: steps.body_contract.outcome != 'failure' && steps.resolve.outputs.should_review == 'true'
@@ -289,14 +290,12 @@ jobs:
         run: |
           set -euo pipefail
           if ! reviews=$(gh api "repos/$REPO/pulls/$PR_NUMBER/reviews" --paginate --slurp 2>/dev/null); then
-            echo "skip=false" >> "$GITHUB_OUTPUT"
-            echo "Reviews API illeggibile → review piena (conservativo)."
-            exit 0
+            echo "::error::Reviews API illeggibile → claim review fail-closed, nessun nuovo Claude."
+            exit 1
           fi
           if ! printf '%s' "$reviews" | jq -e 'type == "array" and all(.[]; type == "array")' >/dev/null 2>&1; then
-            echo "skip=false" >> "$GITHUB_OUTPUT"
-            echo "Risposta Reviews API malformata → review piena (conservativo)."
-            exit 0
+            echo "::error::Risposta Reviews API malformata → claim review fail-closed, nessun nuovo Claude."
+            exit 1
           fi
           # Conta ogni review terminale del reviewer, non solo `## LGTM`:
           # un Important, una domanda o un nit senza LGTM e' comunque un
@@ -304,6 +303,7 @@ jobs:
           # strutturale che il review-gate richiede per quel bot.
           same_head=$(printf '%s' "$reviews" | jq --arg head "$HEAD_SHA" '
             [flatten[]
+             | select((.state // "") != "PENDING")
              | select(.user.type == "Bot")
              | select(
                  ((.user.login // "") | test("^(claude|frontaliere-automation)"; "i"))
@@ -317,8 +317,19 @@ jobs:
             echo "Esiste gia' una review terminale del reviewer sulla HEAD $HEAD_SHA → nessuna seconda review per lo stesso contributo."
             exit 0
           fi
+
+          set_fingerprint() {
+            fpHead=$(node scripts/ci/pr-contribution-fingerprint.mjs "$HEAD_SHA" 2>/dev/null) || fpHead=UNKNOWN
+            if ! printf '%s' "$fpHead" | grep -qE '^[a-f0-9]{64}$'; then
+              echo "::error::Fingerprint del contributo HEAD non verificabile → review claim fail-closed."
+              exit 1
+            fi
+            echo "contribution_fingerprint=$fpHead" >> "$GITHUB_OUTPUT"
+          }
+
           last=$(printf '%s' "$reviews" | jq -r '
             [flatten[]
+             | select((.state // "") != "PENDING")
              | select(.user.type == "Bot")
              | select(
                  ((.user.login // "") | test("^(claude|frontaliere-automation)"; "i"))
@@ -327,11 +338,16 @@ jobs:
                )
             ] | sort_by(.id // 0) | last | .commit_id // empty' 2>/dev/null || true)
           if [ -z "$last" ]; then
+            set_fingerprint
             echo "skip=false" >> "$GITHUB_OUTPUT"; echo "Nessuna review terminale precedente → review piena."; exit 0
           fi
-          changed=$(gh api "repos/$REPO/compare/$last...$HEAD_SHA" --jq '.files[] | .filename, (.previous_filename // empty)' 2>/dev/null || true)
+          if ! changed=$(gh api "repos/$REPO/compare/$last...$HEAD_SHA" --jq '.files[] | .filename, (.previous_filename // empty)' 2>/dev/null); then
+            set_fingerprint
+            echo "skip=false" >> "$GITHUB_OUTPUT"; echo "Compare illeggibile → review piena con claim (conservativo)."; exit 0
+          fi
           if [ -z "$changed" ]; then
-            echo "skip=false" >> "$GITHUB_OUTPUT"; echo "Compare vuoto/errore → review piena (conservativo)."; exit 0
+            set_fingerprint
+            echo "skip=false" >> "$GITHUB_OUTPUT"; echo "Compare vuoto → review piena con claim (conservativo)."; exit 0
           fi
           code=$(echo "$changed" | node scripts/ci/review-test-policy.mjs filter | grep -vE "$NONCODE_RE" || true)
           if [ -z "$code" ]; then
@@ -345,6 +361,7 @@ jobs:
           # code-only): se e' invariato, la PR non ha cambiato il proprio codice
           # → skip. Stessa funzione che usa il review gate per il carry-forward
           # → niente drift.
+          set_fingerprint
           # UNKNOWN è un fallback esplicito: un errore transitorio, un output
           # parziale o un hash malformato non può mai diventare un no-op solo
           # perché HEAD e l'ultima review terminale hanno ricevuto lo stesso fallback.
@@ -360,9 +377,36 @@ jobs:
             echo "skip=false" >> "$GITHUB_OUTPUT"; echo "Code del contributo cambiato (fpHead=$fpHead fpLast=$fpLast) → review piena."
           fi
 
+      - name: Claim review PR + HEAD + contribution (zero-Claude)
+        id: review_claim
+        if: steps.body_contract.outcome != 'failure' && steps.resolve.outputs.should_review == 'true' && steps.guard.outputs.skip != 'true'
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+          CLAIM_ACTION: acquire
+          CLAIM_KIND: review
+          PR_NUMBER: ${{ steps.resolve.outputs.pr_number }}
+          HEAD_SHA: ${{ steps.resolve.outputs.head_sha }}
+          EVENT_KEY: run:${{ github.run_id }}
+          CONTRIBUTION_FINGERPRINT: ${{ steps.guard.outputs.contribution_fingerprint }}
+          CLAIM_TTL_SEC: '3600'
+          GITHUB_RUN_ID: ${{ github.run_id }}
+        run: node scripts/ci/review-claim.mjs --claim
+
+      - name: Fail closed when review claim is unreadable
+        if: steps.review_claim.outputs.claim_error == 'true'
+        run: |
+          echo "::error::Claim review PR+HEAD+contribution illeggibile o non verificabile → nessun nuovo Claude."
+          exit 1
+
+      - name: Skip already-consumed review contribution (zero-Claude)
+        if: steps.review_claim.outputs.claim_allowed != 'true' && steps.review_claim.outputs.claim_error != 'true'
+        run: echo "Review già acquisita per questa PR+HEAD+contribution → nessun secondo Claude."
+
       - name: Determine review tier
         id: tier
-        if: steps.body_contract.outcome != 'failure' && steps.resolve.outputs.should_review == 'true' && steps.guard.outputs.skip != 'true'
+        if: steps.body_contract.outcome != 'failure' && steps.resolve.outputs.should_review == 'true' && steps.guard.outputs.skip != 'true' && steps.review_claim.outputs.claim_allowed == 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PR_NUMBER: ${{ steps.resolve.outputs.pr_number }}
@@ -493,7 +537,7 @@ jobs:
       # il `gh pr diff`, che su una PR di corpus puo' essere enorme.
       - name: Prefetch review context (zero-Claude, saves turns)
         id: prefetch
-        if: steps.body_contract.outcome != 'failure' && steps.tier.outputs.tier != 'tests-only' && steps.resolve.outputs.should_review == 'true' && steps.guard.outputs.skip != 'true'
+        if: steps.body_contract.outcome != 'failure' && steps.tier.outputs.tier != 'tests-only' && steps.resolve.outputs.should_review == 'true' && steps.guard.outputs.skip != 'true' && steps.review_claim.outputs.claim_allowed == 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PR_NUMBER: ${{ steps.resolve.outputs.pr_number }}
@@ -567,7 +611,7 @@ jobs:
       # possiede lo slot condiviso. Codex resta il provider primario.
       - name: Pre-flight — Claude quota telemetry (Codex primary)
         id: quota
-        if: steps.body_contract.outcome != 'failure' && steps.tier.outputs.tier != 'tests-only' && steps.resolve.outputs.should_review == 'true' && steps.guard.outputs.skip != 'true'
+        if: steps.body_contract.outcome != 'failure' && steps.tier.outputs.tier != 'tests-only' && steps.resolve.outputs.should_review == 'true' && steps.guard.outputs.skip != 'true' && steps.review_claim.outputs.claim_allowed == 'true'
         continue-on-error: true
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -582,7 +626,7 @@ jobs:
         run: node scripts/ci/check-quota-backoff.mjs
 
       - name: Shared Claude quota lease unavailable (expected skip)
-        if: steps.body_contract.outcome != 'failure' && steps.tier.outputs.tier != 'tests-only' && steps.resolve.outputs.should_review == 'true' && steps.guard.outputs.skip != 'true' && steps.quota.outputs.lease_allowed != 'true'
+        if: steps.body_contract.outcome != 'failure' && steps.tier.outputs.tier != 'tests-only' && steps.resolve.outputs.should_review == 'true' && steps.guard.outputs.skip != 'true' && steps.review_claim.outputs.claim_allowed == 'true' && steps.quota.outputs.lease_allowed != 'true'
         run: |
           if [ "${{ steps.quota.outputs.lease_error }}" = 'true' ]; then
             echo "::error::Lease quota condiviso illeggibile o non verificabile → review Claude saltata fail-closed; il review gate resta bloccante."
@@ -592,7 +636,7 @@ jobs:
 
       - name: Publish automatic LGTM for a tests-only PR
         id: test_only_review
-        if: ${{ steps.body_contract.outcome != 'failure' && success() && steps.resolve.outputs.should_review == 'true' && steps.guard.outputs.skip != 'true' && steps.tier.outputs.tier == 'tests-only' }}
+        if: ${{ steps.body_contract.outcome != 'failure' && success() && steps.resolve.outputs.should_review == 'true' && steps.guard.outputs.skip != 'true' && steps.tier.outputs.tier == 'tests-only' && steps.review_claim.outputs.claim_allowed == 'true' }}
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REPO: ${{ github.repository }}
@@ -601,7 +645,7 @@ jobs:
         run: node scripts/ci/review-test-policy.mjs post
 
       - name: Prepare Firebase credentials for Codex review
-        if: steps.body_contract.outcome != 'failure' && steps.tier.outputs.tier != 'tests-only' && steps.resolve.outputs.should_review == 'true' && steps.guard.outputs.skip != 'true' && steps.quota.outputs.lease_allowed == 'true'
+        if: steps.body_contract.outcome != 'failure' && steps.tier.outputs.tier != 'tests-only' && steps.resolve.outputs.should_review == 'true' && steps.guard.outputs.skip != 'true' && steps.review_claim.outputs.claim_allowed == 'true' && steps.quota.outputs.lease_allowed == 'true'
         env:
           FIREBASE_SERVICE_ACCOUNT_JSON: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}
         run: |
@@ -613,7 +657,7 @@ jobs:
           fi
 
       - name: Load cross-repo Codex credentials
-        if: steps.body_contract.outcome != 'failure' && steps.tier.outputs.tier != 'tests-only' && steps.resolve.outputs.should_review == 'true' && steps.guard.outputs.skip != 'true' && steps.quota.outputs.lease_allowed == 'true'
+        if: steps.body_contract.outcome != 'failure' && steps.tier.outputs.tier != 'tests-only' && steps.resolve.outputs.should_review == 'true' && steps.guard.outputs.skip != 'true' && steps.review_claim.outputs.claim_allowed == 'true' && steps.quota.outputs.lease_allowed == 'true'
         continue-on-error: true
         run: node generator/scripts/load-rc-env.mjs
 
@@ -629,7 +673,7 @@ jobs:
         # tinge il job di rosso, lo lascia classificare al guard.
         timeout-minutes: 45
         id: claude_review
-        if: steps.body_contract.outcome != 'failure' && steps.tier.outputs.tier != 'tests-only' && steps.resolve.outputs.should_review == 'true' && steps.guard.outputs.skip != 'true' && steps.quota.outputs.lease_allowed == 'true'
+        if: steps.body_contract.outcome != 'failure' && steps.tier.outputs.tier != 'tests-only' && steps.resolve.outputs.should_review == 'true' && steps.guard.outputs.skip != 'true' && steps.review_claim.outputs.claim_allowed == 'true' && steps.quota.outputs.lease_allowed == 'true'
         # Un fallimento dell'action non deve abortire il job prima che il guard
         # sotto possa classificarlo: e' il guard a decidere se fallire forte.
         continue-on-error: true
@@ -697,7 +741,7 @@ jobs:
       # ma la PR si ferma in silenzio. Si classifica dal log di esecuzione.
       - name: Fail on transient API error (no review posted)
         id: review_abort
-        if: steps.body_contract.outcome != 'failure' && steps.tier.outputs.tier != 'tests-only' && always() && steps.resolve.outputs.should_review == 'true' && steps.guard.outputs.skip != 'true' && steps.quota.outputs.lease_allowed == 'true' && steps.claude_review.outputs.primary_success != 'true'
+        if: steps.body_contract.outcome != 'failure' && steps.tier.outputs.tier != 'tests-only' && always() && steps.resolve.outputs.should_review == 'true' && steps.guard.outputs.skip != 'true' && steps.review_claim.outputs.claim_allowed == 'true' && steps.quota.outputs.lease_allowed == 'true' && steps.claude_review.outputs.primary_success != 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REPO: ${{ github.repository }}
@@ -906,7 +950,7 @@ jobs:
       # review gate. Il gate sotto gira comunque con always() e conserva il suo
       # verdetto separato.
       - name: Fail on non-retryable review action error (no automatic retry)
-        if: steps.body_contract.outcome != 'failure' && steps.tier.outputs.tier != 'tests-only' && always() && steps.resolve.outputs.should_review == 'true' && steps.guard.outputs.skip != 'true' && steps.quota.outputs.lease_allowed == 'true' && steps.review_abort.outputs.permanent_failure == 'true'
+        if: steps.body_contract.outcome != 'failure' && steps.tier.outputs.tier != 'tests-only' && always() && steps.resolve.outputs.should_review == 'true' && steps.guard.outputs.skip != 'true' && steps.review_claim.outputs.claim_allowed == 'true' && steps.quota.outputs.lease_allowed == 'true' && steps.review_abort.outputs.permanent_failure == 'true'
         env:
           REVIEW_ABORT_CAUSE: ${{ steps.review_abort.outputs.review_abort_cause }}
         run: |
@@ -970,14 +1014,37 @@ jobs:
           echo "::error::Required review gate was skipped on a pull request; no approving review verdict was evaluated."
           exit 1
 
+      - name: Finalize review PR + HEAD + contribution claim
+        if: always() && steps.review_claim.outputs.claim_acquired == 'true'
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+          CLAIM_ACTION: finalize
+          CLAIM_KIND: review
+          PR_NUMBER: ${{ steps.resolve.outputs.pr_number }}
+          HEAD_SHA: ${{ steps.resolve.outputs.head_sha }}
+          EVENT_KEY: run:${{ github.run_id }}
+          CONTRIBUTION_FINGERPRINT: ${{ steps.guard.outputs.contribution_fingerprint }}
+          CLAIM_TOKEN: ${{ steps.review_claim.outputs.claim_token }}
+          PROCEED: ${{ steps.tier.outputs.tier == 'tests-only' || steps.quota.outputs.lease_allowed == 'true' }}
+          CLAUDE_OUTCOME: ${{ steps.claude_review.outcome }}
+          EXEC_FILE: ${{ steps.claude_review.outputs.execution_file }}
+          RETRYABLE_FAILURE: ${{ steps.review_abort.outputs.retryable_failure }}
+          PERMANENT_FAILURE: ${{ steps.review_abort.outputs.permanent_failure }}
+          REVIEW_ABORT_CAUSE: ${{ steps.review_abort.outputs.review_abort_cause }}
+          REVIEW_POSTED: ${{ steps.test_only_review.outcome == 'success' }}
+          GITHUB_RUN_ID: ${{ github.run_id }}
+        run: node scripts/ci/review-claim.mjs --claim
+
       - name: Claude usage metrics
         # Solo se la review e' effettivamente girata: a review skippata non c'e'
         # execution_file da riassumere. Best-effort, non fallisce mai il job.
-        if: steps.body_contract.outcome != 'failure' && steps.tier.outputs.tier != 'tests-only' && always() && steps.resolve.outputs.should_review == 'true' && steps.guard.outputs.skip != 'true' && steps.quota.outputs.lease_allowed == 'true' && steps.claude_review.outputs.claude_used == 'true'
+        if: steps.body_contract.outcome != 'failure' && steps.tier.outputs.tier != 'tests-only' && always() && steps.resolve.outputs.should_review == 'true' && steps.guard.outputs.skip != 'true' && steps.review_claim.outputs.claim_allowed == 'true' && steps.quota.outputs.lease_allowed == 'true' && steps.claude_review.outputs.claude_used == 'true'
         run: node scripts/ci/claude-usage-summary.mjs "${{ steps.claude_review.outputs.execution_file }}" "pr-review"
 
       - name: Release shared Claude quota lease
-        if: always() && steps.body_contract.outcome != 'failure' && steps.quota.outputs.lease_allowed == 'true' && steps.quota.outputs.lease_token != ''
+        if: always() && steps.body_contract.outcome != 'failure' && steps.review_claim.outputs.claim_allowed == 'true' && steps.quota.outputs.lease_allowed == 'true' && steps.quota.outputs.lease_token != ''
         continue-on-error: true
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
