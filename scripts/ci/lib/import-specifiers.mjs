@@ -1,6 +1,8 @@
 /**
  * Estrae gli specificatori importati da sorgenti JavaScript senza trattare
- * commenti, stringhe o registry.import(...) come dipendenze.
+ * commenti, stringhe, segmenti testuali dei template o registry.import(...)
+ * come dipendenze. Le espressioni `${...}` dei template restano invece codice
+ * e vengono percorse.
  *
  * Il modulo e' volutamente un piccolo scanner lessicale, non un parser: i
  * guard devono sapere quali file seguire senza eseguire il grafo dei moduli.
@@ -100,14 +102,28 @@ function staticSpecifier(src, at) {
   return null;
 }
 
+/** Salta la parte testuale di un template, scandendo solo le sue espressioni. */
+function skipTemplate(src, at, found) {
+  for (let i = at + 1; i < src.length;) {
+    if (src[i] === '\\') { i += 2; continue; }
+    if (src[i] === String.fromCharCode(96)) return i + 1;
+    if (src[i] === '$' && src[i + 1] === '{') {
+      i = scanCode(src, i + 2, found, true);
+      continue;
+    }
+    i += 1;
+  }
+  return src.length;
+}
+
 /**
- * Restituisce tutti gli specificatori statici e dinamici, nell'ordine in cui
- * compaiono e con i duplicati conservati.
+ * Scandisce codice JavaScript fino alla fine del sorgente o della graffa che
+ * chiude un'interpolazione `${...}`. Le graffe annidate impediscono a un
+ * oggetto nell'espressione di chiudere il template troppo presto.
  */
-export function importSpecifiers(source) {
-  const src = String(source || '');
-  const found = [];
-  for (let i = 0; i < src.length;) {
+function scanCode(src, at, found, stopAtClosingBrace = false) {
+  let braceDepth = 0;
+  for (let i = at; i < src.length;) {
     if (src.startsWith('//', i)) {
       const nl = src.indexOf('\n', i + 2);
       i = nl < 0 ? src.length : nl + 1;
@@ -118,8 +134,23 @@ export function importSpecifiers(source) {
       i = end < 0 ? src.length : end + 2;
       continue;
     }
-    if (src[i] === "'" || src[i] === '"' || src[i] === String.fromCharCode(96)) {
+    if (src[i] === "'" || src[i] === '"') {
       i = skipQuoted(src, i, src[i]);
+      continue;
+    }
+    if (src[i] === String.fromCharCode(96)) {
+      i = skipTemplate(src, i, found);
+      continue;
+    }
+    if (stopAtClosingBrace && src[i] === '}' && braceDepth === 0) return i + 1;
+    if (src[i] === '{') {
+      braceDepth += 1;
+      i += 1;
+      continue;
+    }
+    if (src[i] === '}' && braceDepth > 0) {
+      braceDepth -= 1;
+      i += 1;
       continue;
     }
 
@@ -141,6 +172,17 @@ export function importSpecifiers(source) {
     }
     i += keyword.length;
   }
+  return src.length;
+}
+
+/**
+ * Restituisce tutti gli specificatori statici e dinamici, nell'ordine in cui
+ * compaiono e con i duplicati conservati.
+ */
+export function importSpecifiers(source) {
+  const src = String(source || '');
+  const found = [];
+  scanCode(src, 0, found);
   return found.sort((a, b) => a.at - b.at).map(({ specifier }) => specifier);
 }
 

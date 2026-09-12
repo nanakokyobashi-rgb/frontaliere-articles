@@ -104,6 +104,15 @@ test('il guard attraversa i commenti prima del literal dopo from', () => {
   assert.deepEqual(specifiers(src), ['./static-commented.mjs']);
 });
 
+test('il guard analizza il codice dentro le interpolazioni dei template', () => {
+  const src = [
+    'const label = `testo che cita import("./ignored.mjs") ${',
+    '  ({ value: import(/* dentro expression */ "./template-dep.mjs") }).value',
+    '}`;',
+  ].join('\n');
+  assert.deepEqual(specifiers(src), ['./template-dep.mjs']);
+});
+
 test("un commento inline non apre un prefisso di import dinamico", () => {
   const src = "const x = /* import('./not-a-module.mjs') */ true;\n";
   assert.deepEqual(specifiers(src), []);
