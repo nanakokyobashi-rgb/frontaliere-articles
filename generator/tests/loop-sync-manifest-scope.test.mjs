@@ -174,6 +174,17 @@ test('files: ogni mode diverso da identical porta una ragione', () => {
   }
 });
 
+test('files: ogni `adapted` allineato indica l issue che governa l adattamento', () => {
+  for (const f of manifest.files) {
+    if (f.mode !== 'adapted' || f.baseline?.site !== f.baseline?.corpus) continue;
+    assert.match(
+      f.adaptationIssue || '',
+      TRACKING_ISSUE_RE,
+      `${f.path}: adaptationIssue mancante per baseline allineato`,
+    );
+  }
+});
+
 test('followup-drainer: la baseline post-B19 non dichiara piu\' una falsa identita\'', () => {
   const entry = byPath.get('scripts/ci/followup-drainer.mjs');
   assert.ok(entry, 'followup-drainer.mjs deve restare censito');

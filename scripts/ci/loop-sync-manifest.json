@@ -8,7 +8,7 @@
     "",
     "mode:",
     "  identical            — deve restare byte-identico al sito; una modifica la' e' copiabile qui.",
-    "  adapted              — differisce di proposito; `reason` spiega perche'. Resta sorvegliato:",
+    "  adapted              — differisce di proposito; `reason` spiega perche'. Se la baseline e' allineata, `adaptationIssue` indica la issue che governa l'adattamento. Resta sorvegliato:",
     "                         e' proprio sui file adattati che una modifica del sito si perde,",
     "                         perche' 'tanto e' diverso apposta'.",
     "  corpus-only          — non esiste sul sito, ED E' GIUSTO COSI': niente da portare (script",
@@ -1607,6 +1607,7 @@
       "path": "generator/scripts/lib/ai-models.mjs",
       "sitePath": "scripts/lib/ai-models.mjs",
       "mode": "adapted",
+      "adaptationIssue": "https://github.com/nanakokyobashi-rgb/frontaliere-articles/issues/787",
       "reason": "DIVERGENTE dal 2026-08-18, rimisurato il 2026-09-04 su `origin/main` dei due repo: sito `615eb909aef5dc12` (361.252 byte), qui `fcb9ec8865bc6bf6` (393.684 byte). La voce era `identical` con baseline `5dbca2532ac754ab` per lato (la riconciliazione di `AI_MODELS_PREFER` del 2026-08-18, `valerielinc-ops#6004` + `#418`), ma da allora ENTRAMBI i lati si sono mossi in modo indipendente e quel `mode` e' diventato una bugia di INSTRADAMENTO: `identical` promette «la fix si fa sul sito e scende copiabile qui», e non e' piu' vero in nessuna delle due direzioni. Qui vive, e sul sito NON esiste, tutta la classificazione dell'host irraggiungibile con il cooldown a causa persistente — `classifyHostUnreachable`, `HOST_UNREACHABLE_CODES`, `_isHostUnreachableExempt`, `classifyTransientResolver` / `RESOLVER_FLAP_*`, `COOLDOWN_SEVERITY` / `PROVIDER_COOLDOWN_*`, l'opt-out di `recordScore` (issue #475, #630, #767, #769, #770, #781, #783, #802, #803): il tag `hostUnreachable` compare 15 volte qui e ZERO nella copia del sito. Dal lato opposto il sito ha il ledger delle correzioni di ranking (`_rankingCorrections`, `_consumeUnvalidatedSuccess`) e i segmenti di testo dell'assistant, che qui non ci sono. Le due conseguenze del mode sbagliato sono opposte e tutte e due costose: una fix su questo ramo instradata «sul sito» non troverebbe la' nemmeno il codice da toccare, e un mirror sito->corpus che applicasse la voce alla lettera riporterebbe indietro il file cancellando #475 e #767. `adapted` e' la dichiarazione onesta finche' i due lati non vengono riconciliati (parent #787), e non abbassa niente: la baseline del 2026-08-18 NON viene rigenerata — `--init` riscriverebbe TUTTE le voci del manifest dichiarando allineato cio' che nessuno ha letto — quindi `loop-drift-check` continua a emettere `both-moved` / `actionable: true` su questa voce, e un `site-ahead` futuro chiedera' di rileggere e riapplicare a mano invece di copiare sopra.",
       "baseline": {
         "site": "5dbca2532ac754ab",
@@ -1658,6 +1659,7 @@
       "path": "generator/scripts/lib/article-free-mt.mjs",
       "sitePath": "scripts/lib/article-free-mt.mjs",
       "mode": "adapted",
+      "adaptationIssue": "https://github.com/nanakokyobashi-rgb/frontaliere-articles/issues/831",
       "reason": "NON e' piu' `identical` dal 2026-09-05 (#892): dopo #878 questo file importa `hasUsableTranslatedText`/`hasUsableContentText` da `generator/scripts/lib/body2-payload-verdict.mjs`, che e' `corpus-only` e sul sito NON esiste (404 su `scripts/lib/body2-payload-verdict.mjs`). Il mirror non e' \"da fare\": e' impossibile — copiare il file verbatim porterebbe sul sito un `import` che non risolve, rompendo con `ERR_MODULE_NOT_FOUND` i suoi due consumer reali la', `scripts/repair-object-object-bodies.mjs` e `tests/scripts/article-free-mt.test.ts`. Misura del 2026-09-05 su `origin` dei due lati: 190 righe qui, 159 sul sito, 36 solo-corpus e 5 SOLO-SITO — quindi nemmeno una copia nell'altro verso e' innocua. La divergenza e' la fix di #831/#868 item 4 (il marker di fallimento `Null`/`null` letto come prosa e pubblicato): il sito ne resta senza, e se `repair-object-object-bodies.mjs` tratta output di motori MT gratuiti ha la stessa classe di bug, da verificare separatamente sul suo repo. Il ritorno a `identical` passa da una delle due uscite che spostano il confine fra i repo — portare `body2-payload-verdict.mjs` sul sito, o estrarre i due predicati in un modulo terzo dependency-free `identical` da entrambi i lati — e nessuna delle due si decide qui. La baseline NON viene rigenerata: con la baseline intatta il drift check continua a dire che i due lati sono divergenti invece di dichiarare allineato uno stato che non lo e'.",
       "baseline": {
         "site": "0f3dd9cefcb52b17",
