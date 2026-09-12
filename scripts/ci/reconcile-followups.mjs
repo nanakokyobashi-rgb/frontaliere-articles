@@ -1105,6 +1105,18 @@ function parseIssueJson(raw) {
   }
 }
 
+/**
+ * Parse the comments response while preserving the transport distinction:
+ * null means that `gh` could not invoke/read the endpoint, whereas an empty
+ * successful stdout is a valid issue with no comments and must become [].
+ */
+export function parseIssueCommentsResponse(raw) {
+  if (raw === null || typeof raw !== 'string') return null;
+  if (!raw.trim()) return [];
+  const parsed = parseIssueJson(raw);
+  return Array.isArray(parsed?.comments) ? parsed.comments : null;
+}
+
 // Matcher (isDistinctiveToken / citedFiles / citedTokens / detectAlreadyResolved) lives
 // in ./followup-resolution-match.mjs — shared verbatim with the issue-fix.yml pre-flight
 // gate (check-issue-already-resolved.mjs) so the two can never drift on what counts as
@@ -1208,19 +1220,9 @@ function mergedAddressedPrs(issueNumber) {
 function readIssueComments(number) {
   if (issueCommentCache.has(number)) return issueCommentCache.get(number);
   const out = gh(['issue', 'view', String(number), ...repoArgs, '--json', 'comments'], { allowFail: true });
-  if (!out) {
-    issueCommentCache.set(number, null);
-    return null;
-  }
-  try {
-    const comments = JSON.parse(out).comments;
-    const result = Array.isArray(comments) ? comments : null;
-    issueCommentCache.set(number, result);
-    return result;
-  } catch {
-    issueCommentCache.set(number, null);
-    return null;
-  }
+  const result = parseIssueCommentsResponse(out);
+  issueCommentCache.set(number, result);
+  return result;
 }
 
 function alreadyCommented(number, comments = undefined) {
