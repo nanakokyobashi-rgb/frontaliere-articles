@@ -488,7 +488,9 @@ export function summariseRunCards(cards) {
     // pavimento senza mai arrivare al confronto — contarla come «pareggio»
     // gonfierebbe il numeratore con le cascate su cui la soglia non decide.
     const votedTransient = num(inputCapDecision.votedTransient ?? share.votedTransient) ?? netTransient;
-    const votedPersistent = num(inputCapDecision.persistent ?? share.persistent) ?? netPersistent;
+    const votedPersistent = num(inputCapDecision.votedPersistent ?? share.votedPersistent)
+      ?? num(inputCapDecision.persistent ?? share.persistent)
+      ?? netPersistent;
     if (votedTransient + votedPersistent > 0 && Math.abs(votedTransient - votedPersistent) <= 1) {
       out.nearMajorityTie += 1;
     }

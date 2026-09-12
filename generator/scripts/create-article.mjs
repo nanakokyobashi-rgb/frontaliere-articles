@@ -257,6 +257,7 @@ import {
   EXIT_NO_ARTICLE_DECLARED,
   isInputCapDeferralVeto,
   inputCapVetoSummary,
+  providerCooldownEchoOnlySummary,
   isLegitimateQuotaDeferral,
   quotaDeferralShare,
   // Issue #452 — l'uscita anticipata quando il bersaglio e' sotto il pavimento
@@ -17150,14 +17151,17 @@ if (invokedDirectly) {
   // Il try/catch e' la stessa regola di `writeRunCard`: una sonda diagnostica
   // non puo' diventare la causa di un esito perso, e questo e' il percorso
   // d'errore.
+  let providerCooldownEchoOnly = null;
   try {
-    if (isQuotaExhaustedError(e) && RUN_REPORT?.rareEvents) {
+    providerCooldownEchoOnly = providerCooldownEchoOnlySummary(e);
+    if ((isQuotaExhaustedError(e) || providerCooldownEchoOnly) && RUN_REPORT?.rareEvents) {
       RUN_REPORT.rareEvents.quotaDeferral = {
         breakdown: (e && typeof e.exhaustionBreakdown === 'object' && e.exhaustionBreakdown) || null,
         share: quotaDeferralShare(e),
         verdict: isLegitimateQuotaDeferral(e),
         inputCapVeto: isInputCapDeferralVeto(e),
         inputCapDecision: inputCapVetoSummary(e),
+        providerCooldownEchoOnly,
       };
     }
   } catch (probeErr) {
@@ -17228,6 +17232,40 @@ if (invokedDirectly) {
     );
     console.error(`::error::roster-cannot-serve-prompt: est=${cap.estimatedRequestTokens} best_cap=${cap.maxSkippedReqLimit} over=${over} refusals=${cap.count}`);
     await exitAfterFlush(EXIT_ROSTER_CANNOT_SERVE_PROMPT);
+  }
+  // #938 item 1 — una cascata composta soltanto da echi di cooldown non ha
+  // prove indipendenti su cui basare un differimento. Il voto generico la
+  // tratta correttamente come pavimento, ma `transientExhaustion` diventa
+  // falso e il catch perderebbe il canale rosso insieme alla causa dichiarata.
+  // Il verdetto strutturale viene prima del ramo quota: qui non si inventano
+  // valori e non si attribuisce l'eco a un secchio che il produttore non ha
+  // marcato.
+  if (providerCooldownEchoOnly) {
+    const {
+      cause,
+      echoes,
+      total,
+      transientEchoes,
+      persistentEchoes,
+      unclassifiedEchoes,
+    } = providerCooldownEchoOnly;
+    finalizeRunReport('error', {
+      notes: [
+        ...RUN_REPORT.notes,
+        `Roster down, not deferrable (${cause}; ${echoes}/${total} rows are cooldown echoes): ${e.message}`,
+      ],
+    });
+    console.error(
+      `\n❌ NON differibile: la cascata contiene solo ${echoes} echi di cooldown, senza prove indipendenti. `
+      + `Causa=${cause}; transitori=${transientEchoes}, persistenti=${persistentEchoes}, non classificati=${unclassifiedEchoes}. `
+      + `Il prossimo run deve rivalutare il provider, non dichiarare una quota legittima. ${e.message}`,
+    );
+    console.error(
+      `::error::roster-down-not-deferrable: cause=${cause} echoes=${echoes} total=${total}`
+      + ` transient_echoes=${transientEchoes} persistent_echoes=${persistentEchoes}`
+      + ` unclassified_echoes=${unclassifiedEchoes}`,
+    );
+    await exitAfterFlush(1);
   }
   // ISSUE #313 / #348 — «tutti i modelli sono temporaneamente esauriti» va
   // DIMOSTRATO, non asserito. La condizione ha due meta' ora: il ramo di

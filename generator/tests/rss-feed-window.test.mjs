@@ -13,6 +13,7 @@ import {
   collectSeoEntryIds,
   collectSeoEntryMetadata,
 } from '../../scripts/lib/corpus-floors.mjs';
+import { findSeoEntryMatches } from '../../engine/shared/seo-entry.mjs';
 
 const LATEST_ID = 'uss-stipendi-minimo-2027';
 const REPO_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
@@ -87,6 +88,32 @@ test('i pavimenti leggono solo entry reali e il loro span bilanciato', () => {
   assert.deepEqual([...metadata.keys()], ['reale']);
   assert.equal(metadata.get('reale')?.headline, 'Headline reale');
   assert.equal(metadata.get('reale')?.datePublished, '2026-09-12T10:00:00+00:00');
+});
+
+test('il resolver mantiene la chiusura bilanciata oltre la finestra storica', () => {
+  const source = [
+    'const esempio = `',
+    "  'blog-finto-template': { nested: { fake: true } },",
+    '`;',
+    'export const SEO = {',
+    '  /*',
+    "    'blog-finto-commento': { nested: { fake: true } },",
+    '  */',
+    "  'blog-reale-completo': {",
+    '    nested: { braces: { still: true } },',
+    `    padding: "${'x'.repeat(7000)}",`,
+    '  },',
+    '};',
+    '',
+  ].join('\n');
+
+  const [match] = findSeoEntryMatches(source, 'reale-completo');
+  assert.ok(match);
+  const block = source.slice(match.index, match.closeIdx + 1);
+  assert.match(block, /padding/);
+  assert.ok(block.length > 7000, 'lo span non deve fermarsi alla finestra storica di 3000 caratteri');
+  assert.equal(source[match.closeIdx], '}');
+  assert.equal(source.slice(match.closeIdx + 1), ',\n};\n');
 });
 
 test('il producer RSS usa gli stessi span lessicali e bilanciati del floor', () => {

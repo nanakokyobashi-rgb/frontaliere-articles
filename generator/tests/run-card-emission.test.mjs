@@ -226,6 +226,21 @@ test('summariseRunCards conta prompt-floor e verdetti decisi dal margine (#1072)
   assert.equal(s.samples.find((sample) => sample.decidedBy === 'margin').promptFloor, null);
 });
 
+test('summariseRunCards usa il margine persistente attribuito, non il secchio grezzo (#938)', () => {
+  const card = cardWith(12, 106, 53, { transient: 6, persistent: 6 });
+  card.quotaDeferral.inputCapVeto = true;
+  card.quotaDeferral.inputCapDecision = {
+    votedTransient: 46,
+    votedPersistent: 48,
+    // Campo legacy volutamente in conflitto: il reader deve preferire il
+    // numero che il verdetto ha davvero confrontato.
+    persistent: 46,
+  };
+  const s = summariseRunCards([card]);
+  assert.equal(s.nearMajorityTie, 0,
+    '46 contro 48 non e\' un quasi-pareggio, anche se il secchio legacy dice 46');
+});
+
 test('summariseRunCards non fa sparire una card di schema ignoto', () => {
   const s = summariseRunCards([{ schema: 'run-card/99', rebracket: { calls: 3 } }, cardWith(0, 10, 5)]);
   assert.equal(s.unknownSchema, 1);

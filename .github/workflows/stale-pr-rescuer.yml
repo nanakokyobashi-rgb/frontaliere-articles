@@ -207,6 +207,56 @@ jobs:
             LAST_BODY=$(echo "$reviews" | jq -rs '[.[][]? | select(.user.login|test("^(claude|frontaliere-automation)";"i"))] | last | .body // ""')
             LAST_CID=$(echo "$reviews" | jq -rs '[.[][]? | select(.user.login|test("^(claude|frontaliere-automation)";"i"))] | last | .commit_id // ""')
 
+            # Una deferral per il lease non è una classe C: il check è stato
+            # eseguito, ma il reviewer non è stato ammesso per contesa lecita.
+            # Il rescuer dedicato osserva il marker e rilancia appena lo slot è
+            # libero; se questo scan generico lo trattasse come rosso normale,
+            # potrebbe duplicare il rerun o consumare il lease sbagliato.
+            deferred_comments=$(gh api --paginate --slurp "repos/$REPO/issues/$N/comments?per_page=100" 2>/dev/null || echo '[]')
+            DEFERRED_FOR_HEAD=$(echo "$deferred_comments" | jq -r --arg head "$HEAD" '
+              def trusted:
+                ((.user.login // "") == ""
+                  or ((.user.login // "") | test("^(github-actions\\[bot\\]|frontaliere-automation(\\[bot\\])?|claude(\\[bot\\])?|nanakokyobashi-rgb|valerielinc-ops)$"; "i")));
+              def rank:
+                [(.created_at // ""), ((.id // 0) | tonumber? // 0)];
+              def newer($a; $b):
+                ($a[0] > $b[0]) or ($a[0] == $b[0] and $a[1] > $b[1]);
+              def deferred:
+                (.body // "")
+                | try (capture("REVIEW_QUOTA_DEFERRED: (?<payload>\\{[^\\n]*\\})").payload | fromjson) catch null;
+              def retry:
+                (.body // "")
+                | try (capture("REVIEW_QUOTA_RETRY: (?<payload>\\{[^\\n]*\\})").payload | fromjson) catch null;
+              [ .[]? | if type == "array" then .[]? else . end ] as $comments
+              | [
+                  $comments[] as $comment
+                  | select($comment | trusted)
+                  | ($comment | deferred) as $event
+                  | select($event != null
+                    and ($event.head // "") == $head
+                    and (($event.role // "") | test("^(review|redflag|redcheck)$"))
+                    and ($event.runId // "") != "")
+                  | {event: $event, rank: ($comment | rank)}
+                  | . as $candidate
+                  | ([
+                      $comments[] as $retry_comment
+                      | select($retry_comment | trusted)
+                      | ($retry_comment | retry) as $retry_event
+                      | select($retry_event != null
+                        and ($retry_event.head // "") == ($candidate.event.head // "")
+                        and ($retry_event.role // "") == ($candidate.event.role // "")
+                        and ($retry_event.deferredRunId // "") == ($candidate.event.runId // "")
+                        and (($retry_event.state // "confirmed") | test("^(requested|confirmed)$")))
+                      | {rank: ($retry_comment | rank)}
+                    ] | sort_by(.rank) | last) as $last_retry
+                  | select($last_retry == null or (newer($last_retry.rank; $candidate.rank) | not))
+                ] | length
+            ' 2>/dev/null || echo 0)
+            if [ "${DEFERRED_FOR_HEAD:-0}" != "0" ]; then
+              echo "PR #$N: review differita per lease sulla head ${HEAD:0:7} — delego al review-quota-rescuer"
+              continue
+            fi
+
             # `case` e non `grep`: `echo "$X" | grep -q` chiude la pipe al primo
             # match, e sotto `pipefail` un EPIPE sul lato scrivente farebbe
             # tornare 141 alla pipeline — cioè il contrario di ciò che il test

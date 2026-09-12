@@ -9,6 +9,8 @@ import {
   isIssueGroupable,
   issueGroupInstanceLabels,
   issueGroupingKey,
+  openPrHeadIdentity,
+  parseOpenGroupPrs,
 } from '../../scripts/ci/followup-drainer.mjs';
 
 const DRAINER_SOURCE = readFileSync(
@@ -111,18 +113,56 @@ test('un gruppo resta attivo finché la PR del leader è aperta, anche senza age
   };
 
   assert.deepEqual(
-    [...activeGroupDigests([member], [{ head: { ref: 'fix/issue-42' } }])],
+    [...activeGroupDigests([member], [{
+      head: { ref: 'fix/issue-42', repo: { full_name: 'owner/repo' } },
+    }], { repository: 'owner/repo' })],
     [digest],
   );
-  assert.deepEqual([...activeGroupDigests([member], [])], []);
+  assert.deepEqual([...activeGroupDigests([member], [], { repository: 'owner/repo' })], []);
   assert.deepEqual(
-    [...activeGroupDigests([{ ...member, labels: [{ name: instanceLabel }, { name: 'agent:fix' }] }], [])],
+    [...activeGroupDigests(
+      [{ ...member, labels: [{ name: instanceLabel }, { name: 'agent:fix' }] }],
+      [],
+      { repository: 'owner/repo' },
+    )],
     [digest],
   );
   assert.deepEqual(
     issueGroupInstanceLabels({ labels: [{ name: instanceLabel }, { name: 'agent:fix-group:malformed' }] }),
     [instanceLabel, 'agent:fix-group:malformed'],
   );
+});
+
+test('il mutex B19 qualifica ref e repository head, rifiutando fork e risposta parziale', () => {
+  const digest = '0123456789ab';
+  const instanceLabel = `agent:fix-group:${digest}-42`;
+  const member = {
+    ...targetIssue(2),
+    labels: [{ name: instanceLabel }],
+  };
+  const localPr = {
+    head: { ref: 'fix/issue-42', repo: { full_name: 'owner/repo' } },
+  };
+  const forkPr = {
+    head: { ref: 'fix/issue-42', repo: { full_name: 'someone/fork' } },
+  };
+
+  assert.deepEqual(
+    [...activeGroupDigests([member], [localPr], { repository: 'owner/repo' })],
+    [digest],
+  );
+  assert.deepEqual(
+    [...activeGroupDigests([member], [forkPr], { repository: 'owner/repo' })],
+    [],
+    'un fork con lo stesso branch non può trattenere il gruppo del repository corrente',
+  );
+  assert.equal(openPrHeadIdentity({ head: { ref: 'fix/issue-42' } }), null);
+  assert.equal(
+    parseOpenGroupPrs([[localPr], [{ head: { ref: 'fix/issue-43', repo: null } }]]),
+    null,
+    'una risposta REST senza identità completa del head deve rendere indisponibile la scansione',
+  );
+  assert.deepEqual(parseOpenGroupPrs([[localPr]]), [localPr]);
 });
 
 test('il rescue rimuove i marker B19 prima di ogni riarmo o park', () => {

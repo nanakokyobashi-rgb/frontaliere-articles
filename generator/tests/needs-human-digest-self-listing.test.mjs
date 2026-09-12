@@ -248,17 +248,23 @@ test('la chiusura risolve l issue con la stessa uguaglianza esatta con cui la li
   const step = surfaceStep();
   const emptyBranch = emptyListsBranch(step);
 
-  const resolve = /DEDUP_NUMBER=\$\(printf[\s\S]*?jq -r '([^']+)'\)/.exec(emptyBranch);
-  assert.ok(resolve, 'il ramo a liste vuote deve selezionare il numero dal risultato gia fetchato');
-  assert.match(resolve[1], /select\(\.dedup\)/, 'la chiusura usa la stessa chiave dedup materializzata dal fetch');
-  assert.match(resolve[1], /\.number/, 'dalla risoluzione deve uscire il NUMERO, che e cio che si chiude');
+  const resolve = /resolve_dedup_number\(\) \{[\s\S]*?gh api --paginate "([^"]+)"[\s\S]*?--jq '([^']+)'\)/.exec(step);
+  assert.ok(resolve, 'lo step deve risolvere il numero dell issue dedup da se');
+  assert.match(
+    emptyBranch,
+    /DEDUP_NUMBER=\$\(resolve_dedup_number\)/,
+    'il ramo a liste vuote deve passare dalla risoluzione condivisa, non da una copia della query',
+  );
+  assert.match(resolve[2], /select\(\.title == env\.DEDUP_TITLE\)/, 'la chiusura deve selezionare per titolo ESATTO');
+  assert.match(resolve[2], /select\(\.pull_request \| not\)/, 'la risoluzione deve ignorare le PR omonime');
+  assert.match(resolve[2], /\.number/, 'dalla risoluzione deve uscire il NUMERO, che e cio che si chiude');
   assert.doesNotMatch(withoutComments(emptyBranch), /gh api --paginate/, 'la risposta paginata non va richiesta una seconda volta');
   // Il perimetro NON puo' essere quello delle due liste: l'issue dedup nasce
   // con `automation`, non con `needs-human` — cercarla fra le sole
   // `needs-human` la troverebbe solo nei run in cui qualcuno gliel'ha
   // aggiunta, che e' esattamente l'accidente di #733.
   assert.doesNotMatch(resolve[1], /labels=/, 'la ricerca dell issue dedup non deve filtrare per label: la chiave e il titolo');
-  assert.match(emptyBranch, /OPEN_ISSUES/, 'la chiusura deve consumare la risposta unica delle issue aperte');
+  assert.match(step, /OPEN_ISSUES_API/, 'la risoluzione deve usare lo stesso endpoint delle issue aperte');
 
   // La chiusura passa per il NUMERO risolto, e il match per prefisso di
   // `--resolve` sparisce da questo ramo.
@@ -276,8 +282,8 @@ test('la chiusura risolve l issue con la stessa uguaglianza esatta con cui la li
   // la variabile vuota e lo step uscirebbe verde senza chiudere niente.
   assert.match(
     emptyBranch,
-    /DEDUP_NUMBER=\$\(printf[\s\S]*?\n\s+DEDUP_RC=\$\?/,
-    'l exit status della risoluzione locale va catturato subito dopo l assegnazione',
+    /DEDUP_NUMBER=\$\(resolve_dedup_number\)\n\s+DEDUP_RC=\$\?/,
+    'l exit status della risoluzione condivisa va catturato subito dopo l assegnazione',
   );
   const rcGuard = /if \[ "\$DEDUP_RC" -ne 0 \]; then([\s\S]*?)\n\s+fi\n/.exec(emptyBranch);
   assert.ok(rcGuard, 'manca il guard sull esito della risoluzione');
@@ -289,6 +295,44 @@ test('la chiusura risolve l issue con la stessa uguaglianza esatta con cui la li
     emptyBranch,
     /if \[ -z "\$DEDUP_NUMBER" \]; then[\s\S]*?exit 0/,
     'senza issue dedup aperta lo step esce pulito senza chiudere niente',
+  );
+});
+
+test('a liste non vuote il body segue la create/reopen e il publisher strict', () => {
+  const step = withoutComments(surfaceStep());
+  const branchEnd = step.indexOf('PR_COUNT=0');
+  assert.notEqual(branchEnd, -1, 'ramo "liste non vuote" non trovato');
+  const tail = step.slice(branchEnd);
+  const publisherAt = tail.indexOf('node scripts/ci/publish-needs-human-digest.mjs');
+  const publishRcAt = tail.indexOf('PUBLISH_RC=$?');
+  const resolveAt = tail.indexOf('DEDUP_NUMBER=$(resolve_dedup_number)', publishRcAt);
+  const editAt = tail.indexOf('gh issue edit "$DEDUP_NUMBER" --body "$DESC"', resolveAt);
+  assert.ok(publisherAt >= 0, 'il publisher strict del digest non e piu nel ramo non vuoto');
+  assert.ok(publishRcAt > publisherAt, 'l esito del publisher deve essere catturato subito dopo la scrittura');
+  assert.ok(resolveAt > publishRcAt, 'il numero va risolto dopo create/reopen');
+  assert.ok(editAt > resolveAt, 'il body va riallineato dopo la risoluzione del numero');
+  assert.match(tail, /--fail-on-write/);
+  assert.match(tail, /if \[ "\$PUBLISH_RC" -ne 0 \]; then[\s\S]*?exit "\$PUBLISH_RC"/);
+  assert.match(tail, /gh issue edit "\$DEDUP_NUMBER" --body "\$DESC"/);
+  assert.match(tail, /if \[ "\$EDIT_RC" -ne 0 \]; then[\s\S]*?exit 1/);
+});
+
+test('la risoluzione del numero dell issue dedup ha una sola implementazione', () => {
+  const step = withoutComments(surfaceStep());
+  assert.equal(
+    [...step.matchAll(/^\s*resolve_dedup_number\(\) \{/gm)].length,
+    1,
+    'resolve_dedup_number deve essere definita una volta sola nello step',
+  );
+  assert.equal(
+    [...step.matchAll(/\$\(resolve_dedup_number\)/g)].length,
+    2,
+    'entrambi i rami devono passare dalla stessa funzione',
+  );
+  assert.equal(
+    [...step.matchAll(/select\(\.title == env\.DEDUP_TITLE\) \| \.number/g)].length,
+    1,
+    'la query che risolve il numero del digest e duplicata',
   );
 });
 
@@ -318,7 +362,7 @@ test('la lista issue esclude i tracker permanenti per titolo, non per label', ()
     'la lista viene dall endpoint `issues`, che filtra per label e restituisce `title`: senza, il filtro non ha su cosa lavorare',
   );
   const executable = withoutComments(step);
-  assert.equal((executable.match(/gh api --paginate/g) || []).length, 1, 'la risposta dell endpoint deve essere paginata una sola volta');
+  assert.equal((executable.match(/gh api --paginate/g) || []).length, 2, 'un fetch alimenta le liste e uno fresco risolve il digest');
   assert.match(
     issueQuery[1],
     /\.permanent_tracker \| not/,

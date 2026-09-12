@@ -40,6 +40,7 @@ const read = (rel) => fs.readFileSync(path.join(ROOT, rel), 'utf8');
 
 const SCRIPT = 'scripts/ci/transport-identical-twins.mjs';
 const WORKFLOW = '.github/workflows/transport-identical-twins.yml';
+const REALIGN_WORKFLOW = '.github/workflows/transport-identical-twins-realign.yml';
 
 test('--files= vuoto è un errore prima del no-op e non produce un falso successo', () => {
   const src = read('scripts/cf-purge-cache.mjs');
@@ -138,10 +139,50 @@ test('il workflow non lascia che il no permanente fermi la copia', () => {
   );
 });
 
+test('il realign scrive il manifest solo dopo tutti i gate di verifica', () => {
+  const src = read(SCRIPT);
+  const gate = src.indexOf('if (mismatched.length || normalization.length)');
+  const unreadable = src.indexOf('if (unreadable.length)', gate);
+  const write = src.indexOf('if (corrections.length) fs.writeFileSync', unreadable);
+  assert.ok(gate >= 0);
+  assert.ok(unreadable > gate);
+  assert.ok(write > unreadable, 'la scrittura deve avvenire dopo mismatch e path non verificabili');
+});
+
+test('un mismatch del batch viene escluso, mentre i path sani vengono riallineati', () => {
+  const yml = read(WORKFLOW);
+  assert.match(yml, /--realign=\/tmp\/transport-paths\.tsv --json/);
+  assert.match(yml, /git restore --source=HEAD\^ --staged --worktree --/);
+  assert.match(yml, /transport-realign-rc/);
+  assert.match(yml, /--realign=\/tmp\/transport-paths\.tsv --json[\s\S]{0,5000}realign-safe\.json/);
+  assert.match(yml, /r\.transported = r\.transported\.filter/);
+  assert.match(yml, /old\.couplingSnapshot/);
+});
+
+test('il job post-merge usa hash site freschi e committa solo il manifest su main', () => {
+  const yml = read(REALIGN_WORKFLOW);
+  assert.match(yml, /pull_request:\n\s+types: \[closed\]/);
+  assert.match(yml, /github\.event\.pull_request\.merged == true/);
+  assert.match(yml, /github\.event\.pull_request\.head\.repo\.full_name == github\.repository/);
+  assert.match(yml, /group: transport-identical-twins-realign-main/);
+  assert.doesNotMatch(yml, /group: transport-identical-twins-realign-\$\{\{ github\.event\.pull_request\.number \}\}/);
+  assert.match(yml, /site sha256/);
+  assert.match(yml, /ref: main[\s\S]{0,100}fetch-depth: 0/);
+  assert.match(yml, /const expected = \[\.\.\.changed\]/);
+  assert.match(yml, /const missing = expected\.filter/);
+  assert.match(yml, /non cit[aà] tutti i file trasportati/);
+  assert.match(yml, /--realign="\$RUNNER_TEMP\/transport-realign\.tsv" --json/);
+  assert.match(yml, /git push origin HEAD:main/);
+  assert.match(yml, /for attempt in 1 2 3/);
+  assert.match(yml, /if git push origin HEAD:main; then/);
+  assert.match(yml, /baseline\.corpus/);
+});
+
 test('il body del trasporto descrive lo scope workflow osservato, non uno stato inventato', () => {
   const yml = read(WORKFLOW);
   assert.match(yml, /const workflowsBlocked = process\.env\.PAT_WORKFLOWS_SCOPE !== "true";/);
   assert.match(yml, /blocked: PAT_WORKFLOWS_SCOPE non è true/);
+  assert.match(yml, /restano escluse per scelta/);
   assert.match(yml, /non sono bloccati dallo scope in questa passata/);
   assert.doesNotMatch(
     yml,

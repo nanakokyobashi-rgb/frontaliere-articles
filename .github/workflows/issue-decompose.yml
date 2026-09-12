@@ -17,8 +17,8 @@ name: Issue decompose (Claude → sub-issues)
 #    all'agente, così le sub-issue create TRIGGERANO issue-triage.
 #  - Niente `npm ci` (gli script del ciclo sono zero-dep); ponte RC in
 #    `generator/scripts/load-rc-env.mjs`.
-#  - Telemetry quota col beacon peer: osserviamo la quota del sito senza
-#    bloccare il tentativo Codex-primary.
+#  - Beacon quota col peer: osserviamo la quota del sito; il lease locale
+#    serializza inoltre l'unico consumer Claude residuo del ciclo.
 #  - Prompt sul dominio di QUESTO repo (generator/engine/content, gemelli sul
 #    sito, `node --test`).
 
@@ -124,13 +124,43 @@ jobs:
           STAGE: decompose
         run: node scripts/ci/check-stale-issue-dispatch.mjs
 
+      - name: Consume shared Claude quota lease (issue-decompose slot)
+        id: quota_lease
+        if: always()
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+          QUOTA_LEASE_ACTION: consume
+          QUOTA_LEASE_ROLE: issue-decompose
+          QUOTA_LEASE_OWNER: issue-decompose
+          QUOTA_LEASE_TARGET_TYPE: issue
+          QUOTA_LEASE_TARGET: ${{ github.event.issue.number }}
+          QUOTA_LEASE_TTL_SEC: '21600'
+          GITHUB_RUN_ID: ${{ github.run_id }}
+        run: node scripts/ci/check-quota-backoff.mjs
+
+      - name: Shared Claude quota lease unavailable (requeue zero-Claude)
+        if: always() && steps.stale.outputs.stale_dispatch != 'true' && steps.quota_lease.outputs.lease_allowed != 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+          ISSUE: ${{ github.event.issue.number }}
+        run: |
+          if [ "${{ steps.quota_lease.outputs.lease_error }}" = 'true' ]; then
+            echo "::error::Lease quota condiviso illeggibile o non verificabile → issue-decompose fermato fail-closed."
+            exit 1
+          fi
+          gh issue edit "$ISSUE" --repo "$GH_REPO" --add-label agent:decompose-queued --remove-label agent:decompose
+          echo "::warning::Lease quota condiviso negato (${{ steps.quota_lease.outputs.lease_reason }}) → issue #$ISSUE ri-accodata senza consumare quota Claude."
+
       - name: Setup Headroom compression proxy
-        if: always() && steps.stale.outputs.stale_dispatch != 'true'
+        if: always() && steps.stale.outputs.stale_dispatch != 'true' && steps.quota_lease.outputs.lease_allowed == 'true'
         uses: ./.github/actions/setup-headroom
 
       - name: Run Claude decompose
         id: claude_decompose
-        if: always() && steps.stale.outputs.stale_dispatch != 'true'
+        if: always() && steps.stale.outputs.stale_dispatch != 'true' && steps.quota_lease.outputs.lease_allowed == 'true'
         continue-on-error: true
         uses: ./.github/actions/claude-codex-fallback
         env:
@@ -191,11 +221,11 @@ jobs:
             - L'ULTIMO commento sul padre porta SEMPRE `<!-- DECOMPOSE_OUTCOME: <code> -->` con `<code>` ∈ `decomposed-K` · `atomic-requeue` · `needs-human-decision` · `already-resolved` · `stale-dispatch`.
 
       - name: Claude usage metrics
-        if: always() && steps.claude_decompose.outputs.claude_used == 'true' && steps.stale.outputs.stale_dispatch != 'true'
+        if: always() && steps.claude_decompose.outputs.claude_used == 'true' && steps.stale.outputs.stale_dispatch != 'true' && steps.quota_lease.outputs.lease_allowed == 'true'
         run: node scripts/ci/claude-usage-summary.mjs "${{ steps.claude_decompose.outputs.execution_file }}" "issue-decompose"
 
       - name: Mark Claude terminal outcome (granular telemetry)
-        if: always() && steps.claude_decompose.outputs.claude_used == 'true' && steps.stale.outputs.stale_dispatch != 'true' && steps.claude_decompose.outcome == 'failure'
+        if: always() && steps.claude_decompose.outputs.claude_used == 'true' && steps.stale.outputs.stale_dispatch != 'true' && steps.quota_lease.outputs.lease_allowed == 'true' && steps.claude_decompose.outcome == 'failure'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_REPO: ${{ github.repository }}
@@ -206,7 +236,7 @@ jobs:
         run: node scripts/ci/mark-claude-terminal-outcome.mjs
 
       - name: Emit DECOMPOSE_OUTCOME telemetry (deterministic backstop)
-        if: always() && steps.stale.outputs.stale_dispatch != 'true'
+        if: always() && steps.stale.outputs.stale_dispatch != 'true' && steps.quota_lease.outputs.lease_allowed == 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ISSUE: ${{ github.event.issue.number }}
@@ -220,7 +250,7 @@ jobs:
           gh issue comment "$ISSUE" --body "$(printf '<!-- DECOMPOSE_OUTCOME: no-outcome -->\n_Outcome rilevato dal post-step deterministico (run morta senza verdetto): il rescue del drainer ri-armerà o parcheggerà._')" || true
 
       - name: Classify outcome (work-done, not CLI exit)
-        if: always() && steps.stale.outputs.stale_dispatch != 'true'
+        if: always() && steps.stale.outputs.stale_dispatch != 'true' && steps.quota_lease.outputs.lease_allowed == 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ISSUE: ${{ github.event.issue.number }}
@@ -238,6 +268,21 @@ jobs:
             exit 1
           fi
           echo "CLI uscita pulita senza verdetto esplicito — il backstop ha marcato no-outcome. Job verde."
+
+      - name: Release shared Claude quota lease
+        if: always() && steps.quota_lease.outputs.lease_consumed == 'true'
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+          QUOTA_LEASE_ACTION: release
+          QUOTA_LEASE_ROLE: issue-decompose
+          QUOTA_LEASE_OWNER: issue-decompose
+          QUOTA_LEASE_TARGET_TYPE: issue
+          QUOTA_LEASE_TARGET: ${{ github.event.issue.number }}
+          QUOTA_LEASE_TOKEN: ${{ steps.quota_lease.outputs.lease_token }}
+          GITHUB_RUN_ID: ${{ github.run_id }}
+        run: node scripts/ci/check-quota-backoff.mjs
 
       - name: Cleanup Firebase credentials
         if: always()

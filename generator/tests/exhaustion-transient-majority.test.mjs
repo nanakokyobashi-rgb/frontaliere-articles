@@ -26,6 +26,7 @@ import {
   inputCapVetoSummary,
   isInputCapDeferralVeto,
   isTransientMajority,
+  providerCooldownEchoOnlySummary,
   quotaDeferralShare,
 } from '../scripts/lib/exhaustion-disposition.mjs';
 
@@ -269,14 +270,15 @@ test('un `echo.total` sopra le righe che esistono non compra `echoDominated` (#9
     'un campo gonfiato non nomina un ramo diverso da quello veritiero');
 });
 
-test('il limite NON risale alla sorgente: l\'eccedenza resta addebitata al vincitore (#932)', () => {
+test('il limite NON risale alla sorgente: l\'eccedenza resta nel dato grezzo (#932, #938)', () => {
   // Clampare `echoTotalReported` dentro `echoBuckets` avrebbe servito il
   // guardrail indebolendo gli altri due lettori. Questa forma e' il caso
   // minimo: due echi dichiarati su UNA riga sola. Col campo grezzo il margine
-  // toglie l'eccedenza al vincitore e il transitorio non e' maggioranza →
-  // veto. Con un clamp alla sorgente `voted` tornerebbe 0 >= 0 e il veto
-  // sparirebbe: un campo che contraddice il breakdown comprerebbe il
-  // differimento silenzioso che #313 e' costato.
+  // toglie l'eccedenza al vincitore e il transitorio non e' maggioranza.
+  // Il predicato generico continua a non considerarlo una prova transitoria;
+  // il consumatore input-cap, pero', attribuisce esplicitamente il margine alla
+  // causa persistente dichiarata, senza trasformare un dato corrotto in un veto
+  // transitorio inventato.
   const contraddittorio = {
     transient: 1,
     persistent: 0,
@@ -284,12 +286,15 @@ test('il limite NON risale alla sorgente: l\'eccedenza resta addebitata al vinci
     providerCooldownSkips: { total: 2 },
   };
   assert.deepEqual(bothTies(contraddittorio), { transient: false, persistent: false });
-  assert.equal(vote(contraddittorio).decidedBy, 'margin');
-  assert.equal(isInputCapDeferralVeto({
+  assert.equal(vote(contraddittorio).decidedBy, 'net');
+  const inputCap = {
     code: 'ALL_MODELS_EXHAUSTED',
     inputCapReport: { count: 1, estimatedRequestTokens: 9, maxSkippedReqLimit: 4 },
     exhaustionBreakdown: contraddittorio,
-  }), true, 'il veto regge: l\'eccedenza si addebita al vincitore, come prima');
+  };
+  assert.equal(inputCapVetoSummary(inputCap).marginAttribution, 'persistent');
+  assert.equal(isInputCapDeferralVeto(inputCap), false,
+    'il dato grezzo non viene clampato, ma il margine non puo\' falsificare la causa dichiarata');
 });
 
 test('la popolazione e\' `max(total, secchi)`: un `total` incoerente non fa da metro (#932)', () => {
@@ -341,4 +346,64 @@ test('`echoDominated` non puo\' affermare piu\' righe di quante il breakdown ne 
     }
   }
   assert.ok(controllate > 500, 'la griglia deve essere abbastanza larga da mordere');
+});
+
+test('il margine del veto viene attribuito alla causa dichiarata (#938)', () => {
+  // Due echi non attribuiti sono gia' dentro i secchi: la quota resta la causa
+  // netta dominante (54 contro 53), ma il vecchio calcolo li toglieva sempre
+  // dal transitorio e trasformava 54/53 in 52/53, un veto input-cap falso.
+  const breakdown = {
+    transient: 54,
+    persistent: 53,
+    total: 107,
+    providerCooldownSkips: { total: 2, transient: 0, persistent: 0 },
+  };
+  const err = {
+    code: 'ALL_MODELS_EXHAUSTED',
+    inputCapReport: { count: 1, estimatedRequestTokens: 9, maxSkippedReqLimit: 4 },
+    exhaustionBreakdown: breakdown,
+  };
+  const summary = inputCapVetoSummary(err);
+  assert.equal(isInputCapDeferralVeto(err), false,
+    'la quota dichiarata dominante non deve diventare un falso veto di taglia');
+  assert.equal(summary.marginAttribution, 'persistent');
+  assert.equal(summary.votedTransient, 54);
+  assert.equal(summary.votedPersistent, 51);
+  assert.equal(summary.decidedBy, 'net');
+});
+
+test('riconosce una cascata composta solo da echi di cooldown senza inventare dati (#938)', () => {
+  const allEcho = {
+    code: 'ALL_MODELS_EXHAUSTED',
+    exhaustionBreakdown: {
+      transient: 5,
+      persistent: 0,
+      total: 5,
+      providerCooldownSkips: { total: 5, transient: 5, persistent: 0 },
+    },
+  };
+  assert.deepEqual(providerCooldownEchoOnlySummary(allEcho), {
+    cause: 'provider-cooldown-echo-only',
+    echoes: 5,
+    total: 5,
+    transientEchoes: 5,
+    persistentEchoes: 0,
+    unclassifiedEchoes: 0,
+  });
+
+  const mixed = structuredClone(allEcho);
+  mixed.exhaustionBreakdown.transient = 6;
+  mixed.exhaustionBreakdown.total = 6;
+  assert.equal(providerCooldownEchoOnlySummary(mixed), null,
+    'una riga indipendente deve restare una cascata normale');
+
+  const malformed = structuredClone(allEcho);
+  delete malformed.exhaustionBreakdown.persistent;
+  assert.equal(providerCooldownEchoOnlySummary(malformed), null,
+    'un contatore mancante non autorizza una causa inventata');
+
+  const malformedEcho = structuredClone(allEcho);
+  malformedEcho.exhaustionBreakdown.providerCooldownSkips.transient = 'unknown';
+  assert.equal(providerCooldownEchoOnlySummary(malformedEcho), null,
+    'un secchio echo illeggibile non autorizza una causa inventata');
 });

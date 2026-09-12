@@ -3664,12 +3664,19 @@ function _persistedTimestampDate(raw) {
   try {
     if (raw && typeof raw.toDate === 'function') return raw.toDate();
     if (raw && typeof raw === 'object' && !Array.isArray(raw)) {
-      const hasSeconds = Object.prototype.hasOwnProperty.call(raw, '_seconds') ||
-        Object.prototype.hasOwnProperty.call(raw, 'seconds');
+      const hasSerializedSeconds = Object.prototype.hasOwnProperty.call(raw, '_seconds');
+      const hasPublicSeconds = Object.prototype.hasOwnProperty.call(raw, 'seconds');
+      const hasSeconds = hasSerializedSeconds || hasPublicSeconds;
       if (hasSeconds) {
-        const seconds = Number(raw._seconds ?? raw.seconds);
-        const nanoseconds = Number(raw._nanoseconds ?? raw.nanoseconds ?? 0);
-        if (!Number.isFinite(seconds) || !Number.isFinite(nanoseconds) || nanoseconds < 0 || nanoseconds >= 1e9) {
+        const seconds = hasSerializedSeconds ? raw._seconds : raw.seconds;
+        const hasSerializedNanoseconds = Object.prototype.hasOwnProperty.call(raw, '_nanoseconds');
+        const hasPublicNanoseconds = Object.prototype.hasOwnProperty.call(raw, 'nanoseconds');
+        const nanoseconds = hasSerializedNanoseconds
+          ? raw._nanoseconds
+          : hasPublicNanoseconds ? raw.nanoseconds : 0;
+        if (typeof seconds !== 'number' || !Number.isFinite(seconds)
+          || typeof nanoseconds !== 'number' || !Number.isFinite(nanoseconds)
+          || nanoseconds < 0 || nanoseconds >= 1e9) {
           return null;
         }
         return new Date(seconds * 1000 + nanoseconds / 1e6);

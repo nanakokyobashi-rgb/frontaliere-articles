@@ -41,12 +41,17 @@ import { fileURLToPath } from 'node:url';
 import crypto from 'node:crypto';
 import {
   closeTransportSet,
+  couplingDiff,
   couplingBlockers,
+  couplingSnapshot,
   fetchFailureVerdict,
   isFixture,
   localCouplings,
   manualTransportReason,
   namedIsCoupling,
+  parseGitAttributes,
+  parseGitNormalizationConfig,
+  parseRealignList,
   readsContentOf,
   parseRatio,
   permanentBlock,
@@ -563,6 +568,62 @@ test('il manifest NOMINATO in prosa non e\u2019 un accoppiamento; LETTO lo resta
   );
 });
 
+test('il delta degli accoppiamenti distingue inizializzazione, aggiunte e rimozioni', () => {
+  const previous = [
+    { path: 'z.mjs', mode: 'identical' },
+    { path: 'a.mjs', mode: 'corpus-only' },
+  ];
+  const current = [
+    { path: 'a.mjs', mode: 'corpus-only' },
+    { path: 'b.mjs', mode: 'identical' },
+  ];
+  const diff = couplingDiff(previous, current);
+  assert.equal(diff.initialized, false);
+  assert.equal(diff.changed, true);
+  assert.deepEqual(diff.added, [{ path: 'b.mjs', mode: 'identical' }]);
+  assert.deepEqual(diff.removed, [{ path: 'z.mjs', mode: 'identical' }]);
+  assert.deepEqual(couplingSnapshot(current), [
+    { path: 'a.mjs', mode: 'corpus-only' },
+    { path: 'b.mjs', mode: 'identical' },
+  ]);
+  const first = couplingDiff(undefined, current);
+  assert.equal(first.initialized, true);
+  assert.deepEqual(first.added, current);
+});
+
+test('la lista realign trasporta anche l\u2019hash site della stessa passata', () => {
+  assert.deepEqual(
+    parseRealignList('host/x.ts\t0123456789abcdef\r\n\n'),
+    { paths: [{ path: 'host/x.ts', site: '0123456789abcdef' }], errors: [] },
+  );
+  assert.match(parseRealignList('host/x.ts\n').errors[0].reason, /path<TAB>hash site/);
+});
+
+test('gli attributi Git che possono normalizzare byte sono osservabili', () => {
+  assert.deepEqual(
+    parseGitAttributes(
+      'a.ts: text: auto\n'
+      + 'a.ts: eol: lf\n'
+      + 'a.ts: custom: value\n'
+      + 'b.ts: filter: unspecified\n',
+    ),
+    [{
+      path: 'a.ts',
+      attributes: [
+        { name: 'eol', value: 'lf' },
+        { name: 'text', value: 'auto' },
+      ],
+    }],
+  );
+  assert.deepEqual(
+    parseGitNormalizationConfig('core.autocrlf input\ncore.eol crlf\ncore.eol lf\n'),
+    [
+      { name: 'core.autocrlf', value: 'input' },
+      { name: 'core.eol', value: 'crlf' },
+    ],
+  );
+});
+
 test('readsContentOf distingue il literal letto — annidato o via alias — dalla citazione', () => {
   const rel = 'scripts/ci/loop-sync-manifest.json';
   // L'argomento annidato in un `path.join(ROOT, ...)`: la forma reale, il
@@ -1049,4 +1110,83 @@ test('un path trasportato assente dal manifest non passa in silenzio', () => {
   const manifest = transported();
   const { unreadable } = realignFromCommitted(manifest, ['host/mai-registrato.ts'], () => Buffer.from('x'));
   assert.deepEqual(unreadable.map((u) => u.path), ['host/mai-registrato.ts']);
+});
+
+test('un mismatch in mezzo al batch non lascia una correzione parziale in memoria', () => {
+  const first = transported({
+    baseline: { site: hash16('scaricato\r\n'), corpus: 'stale00000000000' },
+  }).files[0];
+  const second = {
+    path: 'scripts/ci/alert-pat-up.mjs',
+    mode: 'identical',
+    baseline: { site: hash16('altro\n'), corpus: 'stale00000000000' },
+  };
+  const manifest = { files: [first, second] };
+  const before = structuredClone(manifest);
+  const { corrections, mismatched } = realignFromCommitted(
+    manifest,
+    [
+      { path: first.path, site: first.baseline.site },
+      { path: second.path, site: second.baseline.site },
+    ],
+    (rel) => rel === first.path ? Buffer.from('scaricato\r\n') : Buffer.from('diverso\n'),
+  );
+  assert.equal(corrections.length, 1);
+  assert.equal(mismatched.length, 1);
+  assert.deepEqual(manifest, before, 'un errore rende atomico anche l\u2019aggiornamento in memoria');
+});
+
+test('un realign posticipato rifiuta una baseline.site non fresca', () => {
+  const manifest = transported();
+  const before = structuredClone(manifest);
+  const { corrections, unreadable } = realignFromCommitted(
+    manifest,
+    [{ path: manifest.files[0].path, site: hash16('site-di-ieri\n') }],
+    () => Buffer.from('scaricato\r\n'),
+    { requireFreshSite: true },
+  );
+  assert.deepEqual(corrections, []);
+  assert.equal(unreadable.length, 1);
+  assert.match(unreadable[0].reason, /baseline\.site/);
+  assert.deepEqual(manifest, before);
+});
+
+test('il path realign tollera CR, slash ridondanti e case diverso senza perdere la diagnosi', () => {
+  const manifest = transported({
+    baseline: { site: hash16('scaricato\r\n'), corpus: 'stale00000000000' },
+  });
+  const { corrections, unreadable } = realignFromCommitted(
+    manifest,
+    [{ path: 'SCRIPTS//CI/ALERT-PAT-DOWN.MJS\r', site: manifest.files[0].baseline.site }],
+    (rel) => {
+      assert.equal(rel, manifest.files[0].path);
+      return Buffer.from('scaricato\r\n');
+    },
+    { requireFreshSite: true },
+  );
+  assert.equal(unreadable.length, 0);
+  assert.equal(corrections.length, 1);
+  assert.equal(manifest.files[0].baseline.corpus, manifest.files[0].baseline.site);
+});
+
+test('un attributo Git di normalizzazione blocca il realign prima della baseline', () => {
+  const manifest = transported({
+    baseline: { site: hash16('scaricato\r\n'), corpus: 'stale00000000000' },
+  });
+  const before = structuredClone(manifest);
+  const result = realignFromCommitted(
+    manifest,
+    [{ path: manifest.files[0].path, site: manifest.files[0].baseline.site }],
+    () => Buffer.from('scaricato\r\n'),
+    {
+      requireFreshSite: true,
+      normalizationAttributes: [{
+        path: manifest.files[0].path,
+        attributes: [{ name: 'text', value: 'auto' }],
+      }],
+    },
+  );
+  assert.equal(result.normalization.length, 1);
+  assert.deepEqual(result.corrections, []);
+  assert.deepEqual(manifest, before);
 });

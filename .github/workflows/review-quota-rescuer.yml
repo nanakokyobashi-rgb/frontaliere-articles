@@ -1,0 +1,59 @@
+name: Review quota rescuer (zero-Claude)
+
+# Un run `tests` può essere verde nei test ma rosso nel review gate perché il
+# lease condiviso era occupato dal fixer issue. Questo workflow riapre quel
+# solo arco del grafo quando il consumer termina: non crea commit, non invoca
+# Claude e non tocca PR senza il marker deterministico emesso dal pre-flight.
+on:
+  workflow_run:
+    workflows:
+      - tests
+      - Issue fix (Claude → PR)
+      - Issue decompose (Claude → sub-issues)
+      - PR 🔴 fixer (bounded loop-closure on bot PRs)
+      - PR ❌ check fixer (bounded, check richiesto rosso su PR bot)
+      - Follow-up drainer (queue → agent:fix, no-Claude)
+    types: [completed]
+  schedule:
+    - cron: '7,22,37,52 * * * *'
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Solo log, nessun rerun o commento'
+        required: false
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+  actions: write
+  pull-requests: write
+  issues: write
+
+concurrency:
+  group: review-quota-rescuer
+  cancel-in-progress: false
+
+jobs:
+  rescue:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout loop scripts
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 1
+          sparse-checkout: |
+            scripts/ci
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: '22'
+
+      - name: Retry deferred reviews (deterministic, zero-Claude)
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+          DRY_RUN: ${{ github.event.inputs.dry_run }}
+        run: node scripts/ci/review-quota-rescuer.mjs

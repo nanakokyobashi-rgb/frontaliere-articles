@@ -9,8 +9,11 @@
  * cadrebbe su uno stato instabile.
  *
  * Misurato il 2026-09-06 su tutto `scripts/ci/**` e `.github/workflows/**`:
- * NESSUNO stadio riscrive il corpo di una issue. Ogni `gh issue edit` del ciclo è
- * solo `--add-label` / `--remove-label`; le uniche PATCH sono su
+ * NESSUNO stadio che gestisce le `follow-up` riscrive il corpo di una issue.
+ * L'unica eccezione ammessa è il digest `needs-human` di
+ * `recycle-stale-prs.yml`, che deve riallineare il body alla fotografia
+ * corrente dopo una recurrence/reopen (#1004). Ogni altro `gh issue edit` del
+ * ciclo è solo `--add-label` / `--remove-label`; le uniche PATCH sono su
  * `repos/…/issues/comments/…` (`pr-body-contract.mjs`, `lib/prComments.mjs`), che
  * sono COMMENTI, non il body. Il verdetto è quindi stabile per costruzione, e
  * congelarlo sarebbe stato un meccanismo senza causa.
@@ -45,6 +48,10 @@ const FILES = [
   ...walk(path.join(ROOT, '.github/workflows'), ['.yml', '.yaml']),
 ];
 
+const BODY_REWRITE_EXCEPTIONS = new Map([
+  ['gh issue edit "$DEDUP_NUMBER" --body "$DESC"', '.github/workflows/recycle-stale-prs.yml'],
+]);
+
 /** Ricompone una continuazione shell mantenendo gli a capo reali delle altre righe. */
 function joinShellContinuations(source) {
   return String(source).replace(/\\[ \t]*\r?\n/g, ' ');
@@ -66,7 +73,13 @@ test('nessuno stadio del ciclo riscrive il CORPO di una issue (#926)', () => {
     lines.forEach((line, i) => {
       const where = `${rel}:${i + 1}`;
       // `gh issue edit … --body` / `--body-file`: riscrittura diretta del corpo.
-      if (/\bissue\s+edit\b/.test(line) && /--body(-file)?\b/.test(line)) offenders.push(where);
+      // L'eccezione è una singola riga, sul digest needs-human, non una deroga
+      // all'intero workflow o a una forma di comando.
+      if (
+        /\bissue\s+edit\b/.test(line) &&
+        /--body(-file)?\b/.test(line) &&
+        BODY_REWRITE_EXCEPTIONS.get(line.trim()) !== rel
+      ) offenders.push(where);
       // PATCH sull'oggetto issue. `issues/comments/<id>` è un COMMENTO: consentito.
       if (/PATCH/.test(line) && /issues\//.test(line) && !/issues\/comments\//.test(line)) {
         offenders.push(where);
@@ -79,4 +92,19 @@ test('nessuno stadio del ciclo riscrive il CORPO di una issue (#926)', () => {
     'un body riscritto rende instabile il verdetto di aggregazione su cui reconcile ' +
     'auto-chiude: congelare il verdetto alla creazione, o rifiutare l\'auto-chiusura ' +
     'quando il body è cambiato dopo la creazione (#926 item 3)');
+});
+
+test('il riallineamento del digest non apre una deroga per le follow-up (#1004)', () => {
+  const workflow = readFileSync(path.join(ROOT, '.github/workflows/recycle-stale-prs.yml'), 'utf8');
+  const line = 'gh issue edit "$DEDUP_NUMBER" --body "$DESC"';
+  assert.equal(BODY_REWRITE_EXCEPTIONS.get(line), '.github/workflows/recycle-stale-prs.yml');
+  assert.match(workflow, new RegExp(line.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')));
+  assert.match(
+    workflow,
+    /publish-needs-human-digest\.mjs[\s\S]{0,260}--label automation/,
+    'il digest deve restare nel canale automation, separato dalle follow-up',
+  );
+
+  const reconcile = readFileSync(path.join(ROOT, 'scripts/ci/reconcile-followups.mjs'), 'utf8');
+  assert.match(reconcile, /issue', 'list', '--label', 'follow-up'/);
 });

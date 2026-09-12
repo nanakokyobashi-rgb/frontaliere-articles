@@ -6,7 +6,10 @@
  *
  * Il modulo e' volutamente un piccolo scanner lessicale, non un parser: i
  * guard devono sapere quali file seguire senza eseguire il grafo dei moduli.
- * Tutti i consumer del ciclo usano questa sorgente unica (#1029).
+ * La scelta e' fail-open: se un literal non si puo' distinguere con certezza
+ * dal codice, il suo testo non conta come specificatore; le interpolazioni
+ * `${...}` restano invece codice e vengono percorse. Tutti i consumer del
+ * ciclo usano questa sorgente unica (#1029, #1033).
  */
 
 /**

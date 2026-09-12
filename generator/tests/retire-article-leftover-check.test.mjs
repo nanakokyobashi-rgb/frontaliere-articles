@@ -38,6 +38,7 @@ import { mkdtempSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'nod
 import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { codeOnly } from './lib/reachable-source.mjs';
 import { mentionsId } from '../../scripts/lib/mentions-id.mjs';
 import {
   IMAGES_LEDGER,
@@ -105,19 +106,20 @@ test('la regola ha una sorgente sola: nessun chiamante se la ri-scrive', () => {
   // Una copia locale in uno dei due li scollegherebbe in silenzio.
   for (const { rel, symbol } of CALLERS) {
     const src = readFileSync(path.join(ROOT, rel), 'utf-8');
+    const code = codeOnly(src);
     assert.match(
-      src,
-      new RegExp(`import\\s*\\{[^}]*\\b${symbol}\\b[^}]*\\}\\s*from\\s*'[^']*lib/article-surfaces\\.mjs'`, 's'),
-      `${rel}: non importa ${symbol} dal modulo delle superfici`,
+      code,
+      new RegExp(`^[ \\t]*import[ \\t]*\\{[^}]*\\b${symbol}\\b[^}]*\\}[ \\t]*from[ \\t]*'[^']*lib/article-surfaces\\.mjs'`, 'ms'),
+      `${rel}: non importa ${symbol} dal modulo delle superfici nel codice eseguibile`,
     );
     assert.doesNotMatch(
-      src,
+      code,
       /function mentionsId\s*\(/,
       `${rel}: ri-definisce mentionsId invece di importarla — due copie della `
       + 'stessa regola divergono, ed è esattamente il difetto per cui il modulo esiste.',
     );
     assert.doesNotMatch(
-      src,
+      code,
       /readSurface\([^)]*\)\.includes\(id\)|\bread\(f\)\.includes\(id\)/,
       `${rel}: includes(id) nudo su una superficie — un id annidato inventa un residuo.`,
     );
@@ -128,6 +130,14 @@ test('il ledger dei ritirati usa lo stesso writer atomico del resto della catena
   const src = readFileSync(path.join(ROOT, 'scripts/retire-article.mjs'), 'utf-8');
   assert.match(src, /import\s+\{\s*writeJsonAtomic\s*\}\s+from\s+'\.\.\/generator\/scripts\/lib\/atomic-write-json\.mjs'/);
   assert.match(src, /writeJsonAtomic\(ledgerPath, ledger\)/);
+});
+
+test('il controllo finale distingue residui reali da superfici illeggibili', () => {
+  const src = codeOnly(readFileSync(path.join(ROOT, 'scripts/retire-article.mjs'), 'utf-8'));
+  assert.match(src, /status === SURFACE_ARTICLE_ID_STATUS\.PRESENT\) leftovers\.push/);
+  assert.match(src, /status === SURFACE_ARTICLE_ID_STATUS\.UNREADABLE\) unreadable\.push/);
+  assert.match(src, /RIMOZIONE PARZIALE/);
+  assert.match(src, /VERIFICA INCOMPLETA/);
 });
 
 test('il retirement rimuove anche la provenienza dello slug nello stesso buffer della mappa', () => {
