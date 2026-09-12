@@ -112,7 +112,7 @@ test('#826: le due porte di rientro parkano il padre invece di ri-accodarlo', ()
   // Il rescue di `agent:fix` (ZERO_WORK + orfano) rimetteva in coda senza
   // guardare la label: senza questo ramo il padre farebbe ping-pong fra
   // `agent:fix-queued` e `fu-parked` a ogni tick.
-  assert.match(SRC, /has\(iss, LBL_DECOMPOSED\) && quotaBackoffUntil === null/);
+  assert.match(SRC, /has\(iss, LBL_DECOMPOSED\) && !quotaBlocksPromotions/);
 });
 
 test('#1076: il rescue vede agent:fix senza PR/beacon e non tocca i concorrenti', () => {

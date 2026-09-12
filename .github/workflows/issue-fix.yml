@@ -752,8 +752,8 @@ jobs:
         run: |
           set -uo pipefail
           BRANCH="fix/issue-$ISSUE"
-          PR_NUMBER=$(gh pr list --repo "$REPO" --head "$BRANCH" --state open --json number \
-            --jq '.[0].number // empty' 2>/dev/null || true)
+          PR_NUMBER=$(gh pr list --repo "$REPO" --head "$BRANCH" --state open --json number,createdAt \
+            --jq 'sort_by(.createdAt) | last | .number // empty' 2>/dev/null || true)
           if [ -z "$PR_NUMBER" ]; then
             echo "provenance: nessuna PR aperta su $BRANCH — skip"
             exit 0
