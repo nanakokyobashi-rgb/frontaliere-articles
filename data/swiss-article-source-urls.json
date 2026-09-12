@@ -1,5 +1,4 @@
 {
-  "https://www.swissinfo.ch/ita/basilea%3a-delegate-a-studenti-diagnosi-adhd-in-una-clinica/91906036": "basilea-diagnosi-adhd-studenti",
   "https://www.tio.ch/people/people/1944215/ospedale-attore-boldi-massimo-caduta": "massimo-boldi-ospedale",
   "https://www.tio.ch/ticino/cronaca/1944212/gambarogno-incendio-monte-pompieri-autorita": "incendio-monte-gambarogno",
   "https://www.tio.ch/rubriche/ospite/1944217/maccabi-guerra-lugano-mobilitazione-agosto-aviv-tel-noseda-alessandra-riguardo": "maccabi-lugano-mobilitazione",
@@ -2329,6 +2328,11 @@
   "https://www.swissinfo.ch/ita/svizzeri-spendono-di-pi%c3%b9%2c-ma-la-crescita-rallenta/92044743": {
     "articleId": "svizzeri-spesa-crescita-rallenta",
     "ts": "2026-09-12T02:13:17.714Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/attualita/1949372/svizzera-siccita-acqua-esperti-acque": {
+    "articleId": "svizzera-siccita-faldeg-acque",
+    "ts": "2026-09-12T02:50:23.430Z",
     "keyForm": 2
   }
 }
