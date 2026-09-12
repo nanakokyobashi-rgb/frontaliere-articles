@@ -201,9 +201,11 @@ function sitemapSourceFloor(expected, section) {
 }
 
 function archiveSitemapSource(expected) {
-  return Object.values(expected.sourceArchiveSitemapUrls ?? {})
+  const errors = Object.entries(expected.sourceArchiveSitemapErrors ?? {});
+  const total = Object.values(expected.sourceArchiveSitemapUrls ?? {})
     .filter((count) => Number.isFinite(count) && count > 0)
     .reduce((sum, count) => sum + count, 0);
+  return { errors, total };
 }
 
 function feedPopulationReference(expected, section) {
@@ -217,7 +219,7 @@ function feedPopulationReference(expected, section) {
  *
  * @param {{articleCounts: Record<string, number>, sitemaps?: Record<string, number>, feeds: {name: string, items: number, latestPublication?: {datePublished: string, timestamp: number}|null}[],
  *          missingFeeds?: string[], images: number|null, imageErrors?: string[]}} measured  cio' che l'artefatto dichiara
- * @param {{sourceArticles: Record<string, number>, sourceSitemaps?: Record<string, number>, feedSources: Record<string, number>,
+ * @param {{sourceArticles: Record<string, number>, sourceSitemaps?: Record<string, number>, sourceArchiveSitemapUrls?: Record<string, number>, sourceArchiveSitemapErrors?: Record<string, string>, feedSources: Record<string, number>,
  *          previousFeedSources?: Record<string, number|null>, sourceImages: number|null,
  *          latestSeoPublications?: Record<string, {articleId: string, datePublished: string, timestamp: number}|null>,
  *          rssMaxItems: number}} expected   cio' che il corpus
@@ -280,8 +282,13 @@ export function floorViolations(measured, expected, retention = undefined) {
       }
     }
 
-    const archiveSource = archiveSitemapSource(expected);
-    if (archiveSource > 0) {
+    const { errors: archiveSourceErrors, total: archiveSource } = archiveSitemapSource(expected);
+    for (const [section, message] of archiveSourceErrors) {
+      violations.push(
+        `${ARCHIVE_SITEMAP}: riferimento sorgente ${section} non verificabile — ${message}`,
+      );
+    }
+    if (archiveSourceErrors.length === 0 && archiveSource > 0) {
       const declared = measured.sitemaps[ARCHIVE_SITEMAP];
       if (typeof declared !== 'number') {
         violations.push(`${ARCHIVE_SITEMAP} assente: il corpus sorgente ne richiede ${archiveSource} url`);
@@ -426,9 +433,9 @@ export function retentionReport(measured, expected) {
       rows.push({ kind: 'sitemap', label: file, declared, source });
     }
 
-    const archiveSource = archiveSitemapSource(expected);
+    const { errors: archiveSourceErrors, total: archiveSource } = archiveSitemapSource(expected);
     const declared = measured.sitemaps[ARCHIVE_SITEMAP];
-    if (archiveSource > 0 && typeof declared === 'number') {
+    if (archiveSourceErrors.length === 0 && archiveSource > 0 && typeof declared === 'number') {
       rows.push({ kind: 'sitemap', label: ARCHIVE_SITEMAP, declared, source: archiveSource });
     }
   }
@@ -616,16 +623,22 @@ export async function expectFromCorpus(root) {
   }
   const sourceSitemaps = {};
   const sourceArchiveSitemapUrls = {};
+  const sourceArchiveSitemapErrors = {};
   for (const section of Object.keys(SECTION_COUNTERS)) {
     try {
       sourceSitemaps[section] = countSourceSitemapEntries(root, section);
-      sourceArchiveSitemapUrls[section] = countSourceArchiveSitemapUrls(root, section);
     } catch (error) {
       // Some unit fixtures model only the body/SEO corpus because they never
       // invoke the sitemap writer. A real publish checkout has these inputs —
       // build-api.mjs reads them unconditionally — so keep those minimal roots
       // on the old body fallback while preserving the precise source in CI.
       if (error?.code !== 'MISSING_CORPUS') throw error;
+    }
+    try {
+      sourceArchiveSitemapUrls[section] = countSourceArchiveSitemapUrls(root, section);
+    } catch (error) {
+      if (error?.code !== 'MISSING_CORPUS') throw error;
+      sourceArchiveSitemapErrors[section] = error.message;
     }
   }
   return {
@@ -635,6 +648,7 @@ export async function expectFromCorpus(root) {
     },
     ...(Object.keys(sourceSitemaps).length ? { sourceSitemaps } : {}),
     ...(Object.keys(sourceArchiveSitemapUrls).length ? { sourceArchiveSitemapUrls } : {}),
+    ...(Object.keys(sourceArchiveSitemapErrors).length ? { sourceArchiveSitemapErrors } : {}),
     feedSources,
     previousFeedSources,
     latestSeoPublications,

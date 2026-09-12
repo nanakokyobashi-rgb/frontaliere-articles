@@ -31,6 +31,8 @@ import path from 'node:path';
 import { execFileSync } from 'node:child_process';
 import { findAllSeoEntryMatches } from './seo-entry.mjs';
 import { selectRetiredDailyEditions } from '../../generator/scripts/lib/daily-brief-content.mjs';
+import { parseArticleUrlSlugs } from '../../engine/shared/articleReaderSource.mjs';
+import { ARTICLES_PAGE_SIZE } from '../../engine/shared/articleArchiveConfig.mjs';
 
 /**
  * Quanta parte del corpus sorgente deve sopravvivere fino all'artefatto.
@@ -208,7 +210,7 @@ export const SECTION_SITEMAPS = {
 };
 
 export const ARCHIVE_SITEMAP = 'sitemap-articles-archive.xml';
-export const ARCHIVE_PAGE_SIZE = 100;
+export { ARTICLES_PAGE_SIZE as ARCHIVE_PAGE_SIZE };
 
 /** Slug maps read by the runtime sitemap writer, per section. */
 const SECTION_SLUG_FILES = {
@@ -242,7 +244,6 @@ export const SECTION_META_PREFIXES = {
 export const SECTION_META_LOCALES = Object.freeze(['it', 'en', 'de', 'fr']);
 
 const REGISTRY_ENTRY_RE = /^\s*id:\s*(?:'([^']+)'|"([^"]+)")/gm;
-const SLUG_MAP_ENTRY_RE = /['"]([^'"]+)['"]\s*:\s*\{\s*it:\s*['"]([^'"]+)['"]\s*,\s*en:\s*['"]([^'"]+)['"]\s*,\s*de:\s*['"]([^'"]+)['"]\s*,\s*fr:\s*['"]([^'"]+)['"]/g;
 const META_TITLE_KEY_RE = /['"]blog\.article\.([^'"]+)\.title['"]\s*:/g;
 /** Quante immagini hero questo repo tiene davvero (sorgente di `images-manifest.json`). */
 export const IMAGE_SOURCE_DIR = path.join('public', 'images', 'blog');
@@ -310,13 +311,7 @@ function readSlugMap(root, section) {
   const slugConst = SECTION_SLUG_EXPORTS[section];
   if (!rel || !slugConst) throw new Error(`unknown corpus section: ${section}`);
   const source = readReference(root, rel, `${section} slug map`);
-  const block = source.match(new RegExp(`const ${slugConst}[\\s\\S]*?\\n\\};`, 'm'))?.[0];
-  if (!block) throw missingReference(`${section} slug map`, rel);
-
-  const slugs = {};
-  for (const match of block.matchAll(SLUG_MAP_ENTRY_RE)) {
-    slugs[match[1]] = { it: match[2], en: match[3], de: match[4], fr: match[5] };
-  }
+  const slugs = parseArticleUrlSlugs(source, slugConst);
   if (Object.keys(slugs).length === 0) throw missingReference(`${section} slug map`, rel);
   return slugs;
 }
@@ -591,7 +586,7 @@ export function countSourceArchiveSitemapUrls(root, section) {
   const metaIds = metadataArticleIds(readReference(root, metaRel, `${section} Italian metadata`));
   const slugMap = readSlugMap(root, section);
   const unionSize = new Set([...metaIds, ...Object.keys(slugMap)]).size;
-  const pages = Math.max(1, Math.ceil(unionSize / ARCHIVE_PAGE_SIZE));
+  const pages = Math.max(1, Math.ceil(unionSize / ARTICLES_PAGE_SIZE));
   return pages * SECTION_META_LOCALES.length;
 }
 

@@ -79,10 +79,14 @@ import {
   previousRevision,
 } from '../../scripts/ci/verify-api-floors.mjs';
 import { RSS_SECTIONS } from '../../engine/rssFeeds.mjs';
+import { parseArticleUrlSlugs } from '../../engine/shared/articleReaderSource.mjs';
 import { selectRetiredDailyEditions } from '../../generator/scripts/lib/daily-brief-content.mjs';
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
 const WORKFLOW = fs.readFileSync(join(ROOT, '.github/workflows/publish-api.yml'), 'utf-8');
 const BLOG_INDEX = fs.readFileSync(join(ROOT, 'scripts/build-blog-index.mjs'), 'utf-8');
+const HOST_SEO_HUBS = fs.readFileSync(join(ROOT, 'host/seoHubsData.ts'), 'utf-8');
+const ARTICLE_READERS = fs.readFileSync(join(ROOT, 'engine/shared/articleReaders.ts'), 'utf-8');
+const CORPUS_FLOORS = fs.readFileSync(join(ROOT, 'scripts/lib/corpus-floors.mjs'), 'utf-8');
 
 /** Una superficie sana su un corpus della taglia di quello reale. */
 function healthy() {
@@ -218,6 +222,18 @@ test('il denominatore sitemap non si abbassa insieme a una slug map troncata', (
   }
 });
 
+test('il parser della slug map e condiviso fra engine e floor del corpus', () => {
+  const source = `const BLOG_SLUGS = {
+  "articolo": { it: "articolo-it", en: "article-en", de: "artikel-de", fr: "article-fr" },
+};\n`;
+  assert.deepEqual(parseArticleUrlSlugs(source, 'BLOG_SLUGS'), {
+    articolo: { it: 'articolo-it', en: 'article-en', de: 'artikel-de', fr: 'article-fr' },
+  });
+  assert.match(ARTICLE_READERS, /parseArticleUrlSlugs/);
+  assert.doesNotMatch(ARTICLE_READERS, /const rx = \/\["'\]/);
+  assert.doesNotMatch(CORPUS_FLOORS, /SLUG_MAP_ENTRY_RE/);
+});
+
 test("la superficie reale del 2026-09-05 passa: il pavimento non e' stretto", () => {
   const { measured, expected } = healthy();
   assert.deepEqual(floorViolations(measured, expected), []);
@@ -275,6 +291,22 @@ test('la sitemap archive viene misurata e ha un floor indipendente', () => {
   const missing = floorViolations(measured, withArchiveSource);
   assert.equal(missing.length, 1);
   assert.match(missing[0], /sitemap-articles-archive\.xml assente/);
+});
+
+test('una sezione archive senza riferimento resta una violazione fail-closed', () => {
+  const { measured, expected } = healthy();
+  const archiveMeasured = {
+    ...measured,
+    sitemaps: { ...measured.sitemaps, [ARCHIVE_SITEMAP]: 100 },
+  };
+  const partialSource = {
+    ...expected,
+    sourceArchiveSitemapUrls: { svizzera: 100 },
+    sourceArchiveSitemapErrors: { frontaliere: 'metadati italiani assenti' },
+  };
+  const violations = floorViolations(archiveMeasured, partialSource);
+  assert.equal(violations.length, 1);
+  assert.match(violations[0], /riferimento sorgente frontaliere non verificabile/);
 });
 
 test("un contatore mancante e' una violazione, non un pass silenzioso", () => {
@@ -838,6 +870,7 @@ test('expectFromCorpus legge davvero un root alternativo e non il checkout del t
       timestamp: Date.parse('2026-02-03T04:05:06Z'),
     });
     assert.equal(expected.sourceImages, 1);
+    assert.deepEqual(Object.keys(expected.sourceArchiveSitemapErrors), ['frontaliere', 'svizzera']);
   } finally {
     fs.rmSync(root, { recursive: true, force: true });
   }
@@ -946,6 +979,26 @@ test("publish-api.yml non porta piu' un pavimento assoluto scritto a mano", () =
     /^      - 'scripts\/lib\/build-sitemap\.mjs'$/m,
     'l\'emitter sitemap deve rilanciare il publisher quando cambia',
   );
+  for (const dependency of [
+    'articleSections.ts',
+    'scripts/lib/count-xml-tags.mjs',
+    'scripts/lib/ticker-shadow-check.mjs',
+    'scripts/lib/published-slug-guard.mjs',
+    'scripts/lib/parse-positive-num.mjs',
+    'scripts/lib/api-manifest.mjs',
+    'generator/data/news-sitemap-whitelist.mjs',
+    'generator/scripts/lib/daily-brief-content.mjs',
+    'generator/scripts/lib/control-char-write-report.mjs',
+    'generator/scripts/lib/meta-field-regex.mjs',
+    'generator/scripts/lib/unescape-ts-string.mjs',
+  ]) {
+    assert.match(
+      WORKFLOW,
+      new RegExp(`^      - '${dependency.replace(/[.*+?^${}()|[\\]\\\\]/g, '\\\\$&')}'$`, 'm'),
+      `${dependency} e' una dipendenza runtime del publisher`,
+    );
+  }
+  assert.match(HOST_SEO_HUBS, /articleArchiveConfig\.mjs/);
 });
 
 test('il floor storico usa github.event.before e conserva un fallback esplicito', () => {

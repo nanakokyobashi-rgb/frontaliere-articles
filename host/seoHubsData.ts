@@ -10,6 +10,8 @@
  * eight strings.
  */
 
+import { ARTICLES_PAGE_SIZE as SHARED_ARTICLES_PAGE_SIZE } from '../engine/shared/articleArchiveConfig.mjs';
+
 export type HubLocale = 'it' | 'en' | 'de' | 'fr';
 export type HubKind = 'tutti' | 'settori' | 'aziende';
 
@@ -33,7 +35,7 @@ export const HUB_SLUG_BY_LOCALE: Record<HubLocale, Record<HubKind, string>> = {
 
 export const HUB_LOCALES: readonly HubLocale[] = ['it', 'en', 'de', 'fr'] as const;
 
-export const ARTICLES_PAGE_SIZE = 100;
+export const ARTICLES_PAGE_SIZE = SHARED_ARTICLES_PAGE_SIZE;
 /** `SLUG_TABLES[locale].blog` — pinned copy, see header. */
 export const BLOG_INDEX_SLUGS: Record<HubLocale, string> = {
   it: 'articoli-frontaliere',
