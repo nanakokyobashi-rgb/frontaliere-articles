@@ -23,8 +23,28 @@ test('issue-fix carica il contesto B19 prima del claim e rilascia solo i numeri 
   assert.match(WORKFLOW.slice(claimIndex, claimIndex + 1200), /claim-issue-group-in-flight\.mjs/);
   assert.match(WORKFLOW, /CLAIMED_NUMBERS: \$\{\{ steps\.claim\.outputs\.claimed_numbers \}\}/);
   assert.match(WORKFLOW, /steps\.claim\.outputs\.claim_acquired == 'true'/);
+  assert.match(WORKFLOW, /SKIP_GROUP_MEMBER: \$\{\{ steps\.group\.outputs\.skip_member \|\| 'false' \}\}/);
   assert.match(WORKFLOW, /CLAIM_ACTION: release[\s\S]*CLAIM_OWNER: remote/);
   assert.match(WORKFLOW, /run: node scripts\/ci\/claim-issue-group-in-flight\.mjs/);
+});
+
+test('un membro B19 non reclama il proprio issue-fix per non correre col leader', () => {
+  const run = spawnSync(process.execPath, [SCRIPT], {
+    cwd: ROOT,
+    encoding: 'utf8',
+    env: {
+      ...process.env,
+      GH_REPO: 'owner/repo',
+      ISSUE_NUMBER: '2',
+      ISSUE_NUMBERS: '1,2',
+      SKIP_GROUP_MEMBER: 'true',
+    },
+  });
+  assert.equal(run.status, 0, run.stderr);
+  assert.match(run.stdout, /membro non-leader B19/);
+  assert.match(run.stdout, /in_flight=true/);
+  assert.match(run.stdout, /claim_acquired=false/);
+  assert.match(run.stdout, /claim_owner=group-member/);
 });
 
 test('il claim di gruppo è all-or-nothing rispetto a una label già presente', () => {

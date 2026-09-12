@@ -220,6 +220,7 @@ jobs:
             echo "is_group=false"
             echo "group_label="
             echo "group_numbers="
+            echo "skip_member=false"
           } >> "$GITHUB_OUTPUT"
           set -euo pipefail
           mkdir -p "$CTX_DIR"
@@ -227,6 +228,7 @@ jobs:
           group_is_group=false
           group_label_output=
           group_numbers_output=
+          group_skip_member=false
 
           load_group_context() {
             local leader_json group_label group_contract members valid numbers
@@ -266,9 +268,14 @@ jobs:
 
             # La label è assegnata a tutti i membri, ma solo il numero in coda
             # alla label può armare il run. Un membro etichettato per errore
-            # degrada al flusso singolo e non apre una seconda PR di gruppo.
+            # NON degrada al flusso singolo: il suo concurrency key è diverso
+            # dal leader e una fallback single-issue potrebbe correre insieme
+            # al claim B19. Lo segnaliamo al gate mutex, che chiude il job
+            # prima di ogni diagnosi/Claude senza scrivere un secondo claim.
             if [ "${group_label##*-}" != "$ISSUE_NUMBER" ]; then
-              echo "issue #$ISSUE_NUMBER: membro non-leader di $group_label → flusso singolo"
+              group_label_output=$group_label
+              group_skip_member=true
+              echo "issue #$ISSUE_NUMBER: membro non-leader di $group_label → skip senza fixer singolo"
               return 0
             fi
 
@@ -310,6 +317,7 @@ jobs:
             echo "is_group=$group_is_group"
             echo "group_label=$group_label_output"
             echo "group_numbers=$group_numbers_output"
+            echo "skip_member=$group_skip_member"
           } >> "$GITHUB_OUTPUT"
 
       - name: Validate issue group context file (zero-Claude)
@@ -339,6 +347,7 @@ jobs:
           GH_REPO: ${{ github.repository }}
           ISSUE_NUMBER: ${{ github.event.issue.number }}
           ISSUE_NUMBERS: ${{ steps.group.outputs.group_numbers }}
+          SKIP_GROUP_MEMBER: ${{ steps.group.outputs.skip_member || 'false' }}
           CLAIM_ACTION: acquire
           CLAIM_OWNER: remote
         run: node scripts/ci/claim-issue-group-in-flight.mjs

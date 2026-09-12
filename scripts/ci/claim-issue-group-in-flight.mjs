@@ -36,6 +36,7 @@ const CLAIM_ACTION = process.env.CLAIM_ACTION === 'release' ? 'release' : 'acqui
 const CLAIM_OWNER = process.env.CLAIM_OWNER === 'local' ? 'local' : 'remote';
 const OWNER_LABEL = OWNER_LABELS[CLAIM_OWNER];
 const repoArgs = process.env.GH_REPO ? ['--repo', process.env.GH_REPO] : [];
+const SKIP_GROUP_MEMBER = process.env.SKIP_GROUP_MEMBER === 'true';
 
 function gh(args, { allowFail = false } = {}) {
   try {
@@ -120,6 +121,18 @@ function main() {
     if (!DRY_RUN) release(numbers);
     console.log(`Released claim where owned on ${numbers.map((number) => `#${number}`).join(', ')}.`);
     writeOutputs(false, [], CLAIM_OWNER);
+    return;
+  }
+
+  // The B19 label is armed on every member so the group is visible, but only
+  // the deterministic leader may start issue-fix. A member event has its own
+  // per-issue Actions concurrency key; letting it fall back to a single-issue
+  // claim would race the leader's group claim. Report it as occupied without
+  // writing labels, so every downstream step already gated by `in_flight`
+  // exits before spending quota.
+  if (SKIP_GROUP_MEMBER) {
+    console.log(`Issue #${ISSUE}: membro non-leader B19 — skip senza claim concorrente.`);
+    writeOutputs(true, [], 'group-member', false, false);
     return;
   }
 
