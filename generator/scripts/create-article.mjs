@@ -16374,6 +16374,7 @@ export function relocalizeSlugsAfterTranslation(data, opts = {}) {
 
   const itSlug = String(data.slugs.it || '');
   const provisional = Array.isArray(data[PROVISIONAL_IT_SLUG_FIELD]) ? data[PROVISIONAL_IT_SLUG_FIELD] : [];
+  const previousFallbacks = Array.isArray(data._slugI18nFallbacks) ? data._slugI18nFallbacks : [];
 
   for (const locale of ['en', 'de', 'fr']) {
     const current = String(data.slugs[locale] || '');
@@ -16438,10 +16439,17 @@ export function relocalizeSlugsAfterTranslation(data, opts = {}) {
         : floorMiss
           ? 'title-below-plausibility-floor'
           : !candidate
-            ? 'translated-title-not-slugifiable'
-            : candidate === itSlug
+          ? 'translated-title-not-slugifiable'
+          : candidate === itSlug
               ? 'translated-title-identical-to-italian'
               : 'localized-slug-occupied';
+    if (fallbackIsTaken) {
+      const err = new Error(
+        `slug-i18n fallback occupied: ${locale} "${fallbackSlug}" is already served in the active section`,
+      );
+      err.slugCollision = true;
+      throw err;
+    }
     data.slugs[locale] = fallbackSlug;
     const fallback = {
       locale,
@@ -16451,15 +16459,22 @@ export function relocalizeSlugsAfterTranslation(data, opts = {}) {
       source: 'it-slug',
     };
     out.stillItalian.push(fallback);
-    onEvent({
-      kind: 'it-fallback',
-      articleId: data.id || null,
-      locale,
-      slug: data.slugs[locale],
-      reason,
-      fallbackReason: reasonCode,
-      fallbackSource: 'it-slug',
-    });
+    const alreadyReported = previousFallbacks.some((previous) =>
+      previous?.locale === locale
+      && previous?.slug === fallback.slug
+      && previous?.reasonCode === fallback.reasonCode,
+    );
+    if (!alreadyReported) {
+      onEvent({
+        kind: 'it-fallback',
+        articleId: data.id || null,
+        locale,
+        slug: data.slugs[locale],
+        reason,
+        fallbackReason: reasonCode,
+        fallbackSource: 'it-slug',
+      });
+    }
   }
   return out;
 }

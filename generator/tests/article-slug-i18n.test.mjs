@@ -265,13 +265,31 @@ describe('relocalizeSlugsAfterTranslation — lo slug di un locale non e’ l’
     markProvisionalItSlug(data, 'en');
     const candidate = slugifySlugPart(LOCALIZED_TITLES.en);
 
-    const out = relocalizeSlugsAfterTranslation(data, {
-      isTaken: (locale, slug) => locale === 'en' && (slug === candidate || slug === data.slugs.it),
-    });
+    assert.throws(
+      () => relocalizeSlugsAfterTranslation(data, {
+        isTaken: (locale, slug) => locale === 'en' && (slug === candidate || slug === data.slugs.it),
+      }),
+      /slug-i18n fallback occupied: en/,
+      'un fallback occupato va rifiutato prima dell’assegnamento',
+    );
+    assert.equal(data.slugs.en, '', 'lo slug occupato non deve essere assegnato');
+  });
 
-    assert.equal(data.slugs.en, data.slugs.it);
-    assert.equal(out.stillItalian.length, 1);
-    assert.equal(out.stillItalian[0].reasonCode, 'fallback-slug-occupied');
+  it('non conta due volte lo stesso fallback quando il percorso di scrittura rilancia la derivazione', () => {
+    const data = articleFixture();
+    data.slugs.en = data.slugs.it;
+    data.slugs.de = slugifySlugPart(LOCALIZED_TITLES.de);
+    data.slugs.fr = slugifySlugPart(LOCALIZED_TITLES.fr);
+    data.content.en = {};
+    const events = [];
+
+    const first = relocalizeSlugsAfterTranslation(data, { onEvent: (event) => events.push(event) });
+    data._slugI18nFallbacks = first.stillItalian;
+    const second = relocalizeSlugsAfterTranslation(data, { onEvent: (event) => events.push(event) });
+
+    assert.equal(first.stillItalian.length, 1);
+    assert.equal(second.stillItalian.length, 1);
+    assert.equal(events.length, 1, 'la seconda derivazione deve essere osservabile ma non duplicare il conteggio');
   });
 });
 
