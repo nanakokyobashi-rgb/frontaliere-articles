@@ -2123,6 +2123,14 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'bitcoin-suisse-taglio-posti-zugo': { it: 'bitcoin-suisse-taglio-posti-zugo', en: 'bitcoin-suisse-job-cuts-zug', de: 'bitcoin-suisse-stellenabbau-zug', fr: 'bitcoin-suisse-suppression-postes-zoug' },
 };
 
+/** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */
+export type SwissSlugFallbackReason = {
+  source: 'it-slug';
+  reason: string;
+};
+export const SWISS_SLUG_FALLBACK_REASONS: Record<string, Partial<Record<ArticleLocale, SwissSlugFallbackReason>>> = {
+};
+
 export const REVERSE_SWISS: Record<ArticleLocale, Record<string, string>> = (() => {
   const result = { it: {}, en: {}, de: {}, fr: {} } as Record<ArticleLocale, Record<string, string>>;
   for (const [articleId, locSlugs] of Object.entries(SWISS_SLUGS)) {

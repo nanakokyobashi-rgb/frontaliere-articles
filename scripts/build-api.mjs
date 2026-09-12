@@ -18,7 +18,7 @@
  *   swiss-articles.json the svizzera registry (SWISS_ARTICLES)
  *   meta-<locale>.json      title/excerpt/imageAlt per article, frontaliere
  *   meta-ch-<locale>.json   same, svizzera
- *   slugs.json         id -> per-locale slug, plus the reverse map
+ *   slugs.json         id -> per-locale slug, reverse map, and fallback provenance
  *   sitemap-blog.xml / sitemap-blog-ch.xml   article sitemaps, with hreflang
  *   rss*.xml           ten RSS feeds (two sections x four locales + main copy)
  *   news-ticker-live.json  the homepage ticker's five newest articles
@@ -202,6 +202,10 @@ if (reservedSlugEntries.length > 0) {
 write('slugs.json', {
   blog: blogSlugs.BLOG_SLUGS,
   blogReverse: blogSlugs.REVERSE_BLOG,
+  fallbackReasons: {
+    blog: blogSlugs.BLOG_SLUG_FALLBACK_REASONS ?? {},
+    swiss: swissSlugs.SWISS_SLUG_FALLBACK_REASONS ?? {},
+  },
   swiss: swissSlugs.SWISS_SLUGS ?? null,
   swissReverse: swissSlugs.REVERSE_SWISS ?? null,
 });
