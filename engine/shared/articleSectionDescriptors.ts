@@ -45,6 +45,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { ARTICLE_SECTION_CORE } from './articleSectionCore.mjs';
 import { CANONICAL_OVERRIDE_FILES } from './canonicalOverrideFiles.mjs';
+import { findAllSeoEntryMatches } from '../../scripts/lib/seo-entry.mjs';
 
 function isMissingPathError(error: unknown): boolean {
  return (error as NodeJS.ErrnoException).code === 'ENOENT';
@@ -111,15 +112,14 @@ export const ARTICLE_SECTION_DESCRIPTORS: OgSection[] = [
  * file. Shared (issue #4881 Fase 4, AGENTS.md #6) between `ogPagesPlugin.ts`'s
  * entries-building loop (the render-time, byte-identity-critical use) and the
  * corpus re-render driver's id-enumeration (a superset-safe use — see
- * `blogKeyToArticleId` below). One literal regex, not two copies that could
- * silently diverge if the `blog-` key convention ever changed.
+ * `blogKeyToArticleId` below). One lexical, balanced resolver, not two scans
+ * that could silently diverge if the `blog-` key convention ever changed.
  */
 export function extractBlogEntryPositions(source: string): Array<{ key: string; start: number }> {
- const keyRx = /'(blog-[^']+)':\s*\{/g;
- const out: Array<{ key: string; start: number }> = [];
- let m: RegExpExecArray | null;
- while ((m = keyRx.exec(source)) !== null) out.push({ key: m[1], start: m.index });
- return out;
+ return findAllSeoEntryMatches(source).map(({ id, index }) => ({
+  key: `blog-${id}`,
+  start: index,
+ }));
 }
 
 /** `'blog-<slug>'` -> `<slug>` (the `articleId` shape `renderArticlePages` uses everywhere: `onlyArticleId`, body filenames, write-loop filter). */

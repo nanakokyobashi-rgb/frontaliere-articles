@@ -63,7 +63,7 @@
  * are the same two numbers, kept in sync by
  * `article-meta-refresh.test.mjs`'s budget-sync test, per AGENTS.md #6 (a
  * value that cannot be imported gets the link covered by a test instead).
- * `truncateToClause` IS imported, from the same dependency-free module
+ * `truncateToClauseNonEmpty` IS imported, from the same dependency-free module
  * `clampSeoDescriptions` itself delegates to — the truncation ALGORITHM has
  * one source; only the two threshold numbers are duplicated, and covered.
  */
@@ -75,7 +75,7 @@ import { findSeoEntryMatches } from '../../../scripts/lib/seo-entry.mjs';
 import { sanitizeText } from '../../../scripts/lib/sanitize-control-chars.mjs';
 import { reportStrippedControlChars } from './control-char-write-report.mjs';
 import { escapeForSingleQuoteTS } from './article-meta-block.mjs';
-import { truncateToClause } from '../../../host/shared/clauseTail.mjs';
+import { truncateToClauseNonEmpty } from '../../../host/shared/clauseTail.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 // Two levels up from `generator/scripts/lib/` is `generator/`; one more is the
@@ -115,7 +115,7 @@ const SEO_ENTRY_DESCRIPTION_BUDGETS = {
 
 function clampField(value, maxLen) {
   if (typeof value !== 'string' || value.length <= maxLen) return value;
-  return truncateToClause(value, maxLen);
+  return truncateToClauseNonEmpty(value, maxLen);
 }
 
 /** Clamp only the budgeted fields of a per-locale `{excerpt, seoDescription,

@@ -489,6 +489,31 @@ test('refreshDescriptiveTexts: una ogDescription oltre il proprio budget (250) v
   }
 });
 
+test('refreshDescriptiveTexts: un primo token oltre il budget non lascia il vecchio valore fuori cap', () => {
+  const root = syntheticCorpus();
+  try {
+    const tooLongToken = 'x'.repeat(SEO_DESCRIPTION_MAX + 1);
+    refreshDescriptiveTexts(
+      'demo-id',
+      { it: { seoDescription: tooLongToken } },
+      { description: tooLongToken },
+      { repoRoot: root },
+    );
+
+    const meta = fs.readFileSync(path.join(root, 'content', 'blog-meta-it.ts'), 'utf-8');
+    const metaMatch = meta.match(/'blog\.article\.demo-id\.seoDescription': '([^']*)'/);
+    assert.ok(metaMatch, 'seoDescription non scritta');
+    assert.equal(metaMatch[1].length, SEO_DESCRIPTION_MAX);
+
+    const seo = fs.readFileSync(path.join(root, 'content', 'seo', 'seo-blog-5.ts'), 'utf-8');
+    const seoMatch = seo.match(/description: '([^']*)'/);
+    assert.ok(seoMatch, 'description non scritta');
+    assert.equal(seoMatch[1].length, SEO_DESCRIPTION_MAX);
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
 test('refreshDescriptiveTexts: un testo social entro budget social ma sopra quello SERP resta intatto sull\'ogDescription', () => {
   const root = syntheticCorpus();
   try {
