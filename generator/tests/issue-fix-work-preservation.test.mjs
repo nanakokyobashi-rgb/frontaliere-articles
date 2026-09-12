@@ -78,12 +78,35 @@ test('il backstop FIX_OUTCOME non sovrascrive il marker granulare dell\'agente',
   assert.ok(s, `step «${BACKSTOP}» assente: senza, un run senza marker e\' indistinguibile da uno morto.`);
   assert.match(
     s,
-    /select\(test\("<!-- FIX_OUTCOME:"\)\)/,
+    /select\(\(\.body \/\/ ""\) \| test\("<!-- FIX_OUTCOME:"\)\)/,
     'Il backstop non cerca un marker esistente prima di scriverne uno: sovrascriverebbe il verdetto\n' +
       'granulare dell\'agente con un `no-pr-unspecified` grezzo, avvelenando il segnale invece di\n' +
       'completarlo.',
   );
   assert.match(s, /continue-on-error: true/, 'la telemetria non deve mai far fallire il job');
+});
+
+test('il backstop considera solo marker creati dal run corrente', () => {
+  const s = step(BACKSTOP);
+  assert.match(
+    SRC,
+    /permissions:\n(?:  .*\n)*  actions: read\n/,
+    'Il workflow deve poter leggere la run corrente prima di delimitare la telemetria.',
+  );
+  assert.match(s, /RUN_STARTED_AT=\$\(gh api "repos\/\$REPO\/actions\/runs\/\$GITHUB_RUN_ID"/);
+  assert.match(s, /--jq '\.run_started_at \/\/ \.created_at'/);
+  assert.match(s, /--arg started "\$RUN_STARTED_AT"/);
+  assert.match(s, /\.createdAt \/\/ ""\) >= \$started/);
+  assert.match(
+    s,
+    /RUN_STARTED_AT non disponibile: backstop non emesso\.[\s\S]*?\n\s+exit 0\n\s+fi/,
+    'Se la timestamp della run non e\' leggibile, il backstop non deve invalidare un verdetto storico.',
+  );
+  assert.doesNotMatch(
+    s,
+    /--jq '\[\.comments\[\]\.body \| select\(test\("<!-- FIX_OUTCOME:"\)\)\] \| length'/,
+    'un marker storico non deve sopprimere il backstop del run corrente',
+  );
 });
 
 test('il classificatore PUO\' rendere rosso il job (nessun continue-on-error)', () => {

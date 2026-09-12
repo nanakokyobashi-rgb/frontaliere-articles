@@ -3,6 +3,7 @@ import { describe, it } from 'node:test';
 
 import {
   detectClaudeRateLimit,
+  latestFixRunOutcomeEntryFromComments,
   parseExecutionMessages,
   shouldRefundRateLimitedRound,
 } from '../../scripts/ci/claude-rate-limit.mjs';
@@ -79,6 +80,41 @@ describe('detectClaudeRateLimit', () => {
       rateLimited: true,
       resetsAt: resetSeconds,
       rateLimitType: 'five_hour',
+    });
+  });
+});
+
+describe('latestFixRunOutcomeEntryFromComments', () => {
+  it('un backstop generico piu\' recente invalida il verdetto storico', () => {
+    const comments = [
+      { body: '<!-- FIX_OUTCOME: max-turns -->', createdAt: '2026-09-01T00:00:00Z' },
+      { body: '<!-- FIX_OUTCOME: no-pr-unspecified -->\npost-step deterministico', createdAt: '2026-09-02T00:00:00Z' },
+    ];
+    assert.deepEqual(latestFixRunOutcomeEntryFromComments(comments), {
+      outcome: null,
+      at: Date.parse('2026-09-02T00:00:00Z'),
+    });
+  });
+
+  it('mantiene un backstop pr-created come esito di consegna', () => {
+    const comments = [
+      { body: '<!-- FIX_OUTCOME: max-turns -->', createdAt: '2026-09-01T00:00:00Z' },
+      { body: '<!-- FIX_OUTCOME: pr-created -->\npost-step deterministico', createdAt: '2026-09-02T00:00:00Z' },
+    ];
+    assert.deepEqual(latestFixRunOutcomeEntryFromComments(comments), {
+      outcome: 'pr-created',
+      at: Date.parse('2026-09-02T00:00:00Z'),
+    });
+  });
+
+  it('non scavalca un verdetto autentico successivo al backstop', () => {
+    const comments = [
+      { body: '<!-- FIX_OUTCOME: no-pr-unspecified -->\npost-step deterministico', createdAt: '2026-09-02T00:00:00Z' },
+      { body: '<!-- FIX_OUTCOME: no-root-cause -->', createdAt: '2026-09-03T00:00:00Z' },
+    ];
+    assert.deepEqual(latestFixRunOutcomeEntryFromComments(comments), {
+      outcome: 'no-root-cause',
+      at: Date.parse('2026-09-03T00:00:00Z'),
     });
   });
 });
