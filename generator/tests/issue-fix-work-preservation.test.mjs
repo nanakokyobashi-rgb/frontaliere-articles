@@ -88,10 +88,20 @@ test('il backstop FIX_OUTCOME non sovrascrive il marker granulare dell\'agente',
 
 test('il backstop considera solo marker creati dal run corrente', () => {
   const s = step(BACKSTOP);
+  assert.match(
+    SRC,
+    /permissions:\n(?:  .*\n)*  actions: read\n/,
+    'Il workflow deve poter leggere la run corrente prima di delimitare la telemetria.',
+  );
   assert.match(s, /RUN_STARTED_AT=\$\(gh api "repos\/\$REPO\/actions\/runs\/\$GITHUB_RUN_ID"/);
   assert.match(s, /--jq '\.run_started_at \/\/ \.created_at'/);
   assert.match(s, /--arg started "\$RUN_STARTED_AT"/);
   assert.match(s, /\.createdAt \/\/ ""\) >= \$started/);
+  assert.match(
+    s,
+    /RUN_STARTED_AT non disponibile: backstop non emesso\.[\s\S]*?\n\s+exit 0\n\s+fi/,
+    'Se la timestamp della run non e\' leggibile, il backstop non deve invalidare un verdetto storico.',
+  );
   assert.doesNotMatch(
     s,
     /--jq '\[\.comments\[\]\.body \| select\(test\("<!-- FIX_OUTCOME:"\)\)\] \| length'/,
