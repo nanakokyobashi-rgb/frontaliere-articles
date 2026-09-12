@@ -161,8 +161,8 @@ test('le sitemap articolo hanno un pavimento derivato e non possono sparire dall
   };
   const violations = floorViolations(truncated, expected);
   assert.equal(violations.length, 2);
-  assert.match(violations.join('\n'), /sitemap-blog\.xml: 500 contro 3785/);
-  assert.match(violations.join('\n'), /sitemap-blog-ch\.xml: 40 contro 1850/);
+  assert.match(violations.join('\n'), /sitemap-blog\.xml: 500 url contro 3785/);
+  assert.match(violations.join('\n'), /sitemap-blog-ch\.xml: 40 url contro 1850/);
 
   const missing = floorViolations({ ...measured, sitemaps: {} }, expected);
   assert.equal(missing.length, 2);
