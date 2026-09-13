@@ -241,19 +241,16 @@ export function findVacuousFacts(body) {
 }
 
 /**
- * Trova la forma canonica usata dal comando di riferimento dell'issue:
- * quattro valori letterali, senza distinguere maiuscole/minuscole, e fino a
- * due `*` fra termine e `:`. Non sostituire questa misura con
- * `findVacuousFacts()`: allargherebbe il baseline a sinonimi storici e a
- * prosa prudenziale che #1057 non chiede di riscrivere. Il confine dopo il
- * valore evita di contare un prefisso come `Not specified in the source`.
+ * Trova esattamente la forma usata dal comando di riferimento dell'issue:
+ * case-sensitive, quattro valori letterali e fino a due `*` fra termine e
+ * `:`. Non sostituire questa misura con `findVacuousFacts()`: allargherebbe il
+ * baseline a sinonimi storici e renderebbe il 53 non riproducibile.
  */
 export function findReferenceVacuousFacts(body) {
   if (typeof body !== 'string' || body.length === 0) return [];
   const terms = REFERENCE_FACT_TERMS.join('|');
   const values = REFERENCE_VACUOUS_VALUES.map((value) => value.replace(/\s+/gu, '\\s+')).join('|');
-  const valueBoundary = String.raw`(?=$|[.!?](?=\s|$)|\s+(?=[-*•]\s+)|\s*\r?\n)`;
-  const referenceRx = new RegExp(`(${terms})\\*{0,2}: ?(${values})${valueBoundary}`, 'giu');
+  const referenceRx = new RegExp(`(${terms})\\*{0,2}: ?(${values})`, 'g');
   return [...body.matchAll(referenceRx)].map((match) => ({
     term: match[1],
     value: match[2],

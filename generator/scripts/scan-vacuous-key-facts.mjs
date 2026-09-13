@@ -105,10 +105,9 @@ export function scanCorpus(root = ROOT) {
 
   for (const entry of iterateBodies(root)) {
     fieldsScanned += 1;
-    // Keep the metric anchored to #1054's reference labels and four values.
-    // Matching is case-insensitive so generated sentence-case variants cannot
-    // evade the historical cleanup; the broader `findVacuousFacts()` belongs
-    // to the prevention gate and is intentionally not used here.
+    // Keep the metric byte-for-byte comparable with #1054's reference grep.
+    // The broader `findVacuousFacts()` belongs to the prevention gate and is
+    // intentionally not used to recalculate this historical baseline.
     const entryHits = findReferenceVacuousFacts(entry.value);
     if (entryHits.length === 0) continue;
 
