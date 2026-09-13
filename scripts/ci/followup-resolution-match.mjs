@@ -78,6 +78,16 @@ export function isDailyBucketTitle(title = '') {
   return !!dailyBucketInfo(title);
 }
 
+// Aggregate grammar is shared by the pre-flight gate, the lessons harvester,
+// and the adapted reconciler. Keep the vocabulary/count regexes and inline
+// Markdown masking in this pure module so those callers cannot drift.
+export const AGGREGATE_ITEM_COUNT_RE = /\b(\d+)\s+items?\s+(?:deferred|deferit[oi])\b/i;
+export const AGGREGATE_KEYWORD_RE = /\b(?:sweep|batch|bulk)\b/i;
+
+export function maskInlineCodeSpans(text) {
+  return String(text || '').replace(/(`+)([^`\n]*?)\1/g, (span) => span.replace(/[^\n]/g, ' '));
+}
+
 /**
  * Normalize a fingerprint component without changing the acceptance oracle.
  * Punctuation meaningful to code tokens is retained; whitespace/case drift is not.
@@ -160,7 +170,7 @@ export function isDistinctiveToken(s) {
   // citation metadata, not prescribed code.  The file is already extracted by
   // `citedFiles()`; counting its `:Lnnn` suffix as a second token makes a
   // resolved item look unresolved whenever the issue includes a line anchor.
-  if (/^[\w./-]+\.[a-z0-9]{2,5}:L?\d+$/i.test(s) && s.includes('/')) return false;
+  if (/^[\w./-]+\.[a-z0-9]{2,5}:L?\d+(?:-L?\d+)?$/i.test(s) && s.includes('/')) return false;
   if (/^[\w./-]+$/.test(s) && /\.[a-z]{2,4}$/i.test(s)) return false; // bare file path
   if (/\s/.test(s.trim()) && !/[(){}'"`:=<>]|\.\w/.test(s)) return false; // prose phrase
   // ONLY code punctuation qualifies. A bare identifier (even a familiar field/helper name
@@ -189,45 +199,10 @@ export function mostSpecificToken(tokens) {
   return [...tokens].sort((a, b) => score(b) - score(a))[0];
 }
 
-const BACKTICKED_FILE_REFERENCE_RE = /`([\w./-]+\.[a-z]{2,5})(?::L?\d+(?:-L?\d+)?)?`/gi;
-const FILE_REFERENCE_RE = /(?:^|[\s(`'":=])([\w./-]+\/[\w./-]+\.[a-z]{2,5})(?::L?\d+(?:-L?\d+)?)?(?=$|[\s`'":,;)])/gim;
-
-function addExistingFileReference(out, candidate, fileExists) {
-  const path = String(candidate || '');
-  if (path.includes('/') && fileExists(path)) out.add(path);
-}
-
 /**
- * Legacy follow-ups put the source location inside a quoted `Original text`
- * block instead of a live `Target file` field. The quoted code remains excluded
- * from token extraction; only an explicitly backticked path is recovered as a
- * locator, and the acceptance token must still come from `Suggested action`.
- */
-function legacyOriginalText(body) {
-  const lines = String(body || '').split('\n');
-  const out = [];
-  let inOriginalText = false;
-  for (const line of lines) {
-    if (/^\s*-\s+Original text\s*:/i.test(line)) {
-      inOriginalText = true;
-      continue;
-    }
-    if (inOriginalText && !/^\s*>/.test(line) && isOriginalTextBoundary(line)) {
-      inOriginalText = false;
-      continue;
-    }
-    if (inOriginalText) out.push(line);
-  }
-  return out.join('\n');
-}
-
-/**
- * File paths in the body that exist according to `fileExists(path)`. Current
- * bodies use backticks or `Target file`; legacy bodies may cite the source path
- * in quoted `Original text`, while newer suggested actions sometimes write a
- * path as ordinary prose. Tokens remain restricted to `Suggested action`.
- * Strips a trailing `:Lnnn` / `:nnn` line or range suffix. Only paths containing
- * `/` are considered (avoids bare `package.json`-style ambiguity).
+ * Backticked file paths in the body that exist according to `fileExists(path)`.
+ * Strips a trailing `:Lnnn` / `:nnn` line suffix. Only paths containing `/` are
+ * considered (avoids bare `package.json`-style ambiguity flagging wrong files).
  *
  * @param {string} body
  * @param {(path: string) => boolean} fileExists
@@ -235,21 +210,21 @@ function legacyOriginalText(body) {
  */
 export function citedFiles(body, fileExists) {
   const out = new Set();
+  // A prose citation is context, not an actionable target.  Only explicit
+  // `Suggested action` regions may contribute backticked file references;
+  // `Target file:` remains live metadata for legacy bodies without that field.
+  const actionText = explicitSuggestedActionText(body);
   const unprotected = markdownRecords(body)
     .filter((record) => !record.protected)
     .map((record) => record.line)
     .join('\n');
-  for (const m of unprotected.matchAll(BACKTICKED_FILE_REFERENCE_RE)) {
-    addExistingFileReference(out, m[1], fileExists);
+  for (const m of actionText.matchAll(/`([\w./-]+\.[a-z]{2,5})(?::L?\d+(?:-L?\d+)?)?`/gi)) {
+    const p = m[1];
+    if (p.includes('/') && fileExists(p)) out.add(p);
   }
-  for (const m of suggestedActionText(body).matchAll(FILE_REFERENCE_RE)) {
-    addExistingFileReference(out, m[1], fileExists);
-  }
-  for (const m of legacyOriginalText(body).matchAll(BACKTICKED_FILE_REFERENCE_RE)) {
-    addExistingFileReference(out, m[1], fileExists);
-  }
-  for (const m of unprotected.matchAll(/(?:^|\n)\s*(?:[-*]\s*)?Target file:\s*([\w./-]+\.[a-z]{2,5})(?::L?\d+(?:-L?\d+)?)?\s*$/gim)) {
-    addExistingFileReference(out, m[1], fileExists);
+  for (const m of unprotected.matchAll(/(?:^|\n)\s*(?:[-*]\s*)?Target file:\s*`?([\w./-]+\.[a-z]{2,5})(?::L?\d+(?:-L?\d+)?)?`?\s*$/gim)) {
+    const p = m[1];
+    if (p.includes('/') && fileExists(p)) out.add(p);
   }
   return [...out];
 }
@@ -306,6 +281,16 @@ function acceptanceScopeText(body) {
  */
 export function suggestedActionText(body) {
   const scoped = acceptanceScopeText(body);
+  const regions = suggestedActionRegions(body, scoped);
+  return regions.length ? regions.join('\n') : scoped;
+}
+
+/** Return only explicit Suggested action regions; unlike `suggestedActionText`, never falls back. */
+function explicitSuggestedActionText(body) {
+  return suggestedActionRegions(body).join('\n');
+}
+
+function suggestedActionRegions(body, scoped = acceptanceScopeText(body)) {
   const lines = scoped.split('\n');
   const regions = [];
   for (let i = 0; i < lines.length; i++) {
@@ -318,7 +303,7 @@ export function suggestedActionText(body) {
       regions.push(buf.join('\n'));
     }
   }
-  return regions.length ? regions.join('\n') : scoped;
+  return regions;
 }
 
 /** Backticked spans inside the suggested-action region → distinctive tokens (capped, deduped). */
@@ -329,6 +314,33 @@ export function citedTokens(body) {
     if (isDistinctiveToken(t)) out.add(t);
   }
   return [...out].slice(0, 8);
+}
+
+/** Normalize the explicit acceptance token carried by a stable daily item. */
+export function normalizeAcceptanceToken(value) {
+  return String(value || '').trim().replace(/^`+|`+$/g, '').trim();
+}
+
+function escapedRegExp(value) {
+  return String(value).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+/**
+ * Match a prescribed zero-argument call token against a real invocation with
+ * arguments. The acceptance field names the callable (`foo()`), while the
+ * implementation may necessarily pass data (`foo(value)`). A declaration is
+ * not an invocation and must not satisfy this normalization.
+ */
+function codeTokenMatches(content, token) {
+  const emptyCall = /^([A-Za-z_$][\w$]*(?:\.[A-Za-z_$][\w$]*)*)\(\)$/u.exec(token);
+  if (!emptyCall) return content.includes(token);
+  const callRe = new RegExp(`(^|[^A-Za-z0-9_$])${escapedRegExp(emptyCall[1])}\\s*\\(`, 'gu');
+  for (const match of content.matchAll(callRe)) {
+    const callStart = (match.index ?? 0) + match[1].length;
+    if (/\bfunction\s*$/.test(content.slice(0, callStart))) continue;
+    return true;
+  }
+  return false;
 }
 
 /**
@@ -863,7 +875,7 @@ export function dailyKeyFromBucketBody(body) {
   if (values.length) return null;
 
   // The prompt has historically required the stable date in every item ID but
-  // did not always print a separate `Daily key` header. Recover that form only
+  // did not always print a separate `Daily key` header.  Recover that form only
   // when every parsed item carries one valid, identical date; mixed/malformed
   // IDs remain fail-closed.
   const itemKeys = parseFollowupItems(source).map((item) => followupItemDailyKey(item.id));
@@ -887,7 +899,7 @@ export function dailyBucketTargetRepository(body) {
   if (values.length) return null;
 
   // A bucket without a header is still safe to inspect when every item declares
-  // exactly one same target repository. Never infer an owner from only a subset
+  // exactly one same target repository.  Never infer an owner from only a subset
   // of items: that would let a mixed bucket cross the site/corpus boundary.
   const itemRepositories = parseFollowupItems(source).map((item) => {
     const declared = fieldValuesOutsideMarkdownProtection(item.text, 'Target repository');
@@ -1019,9 +1031,9 @@ export function followupItemMarkers(text) {
 // "issue") Italian prose puts between the verb and the `#N`, bounded to that
 // fixed word list so a real sentence boundary still breaks the run exactly
 // like the English case above.
-const IT_BRIDGE = '(?:anche\\s+)?(?:l[ae]\\s+)?(?:issue\\s+)?';
+const IT_BRIDGE = '(?:anche[ \\t]+)?(?:l[ae][ \\t]+)?(?:issue[ \\t]+)?';
 const CLOSE_KW_LIST = new RegExp(
-  `\\b(?:close[sd]?|fix(?:e[sd])?|resolve[sd]?|supersede[sd]?|chiud[eo]|risolv[eo]|super[ae])\\b\\s*:?\\s*${IT_BRIDGE}((?:#\\d+(?:[\\s,&]+(?:and\\s+)?)?)+)`,
+  `\\b(?:close[sd]?|fix(?:e[sd])?|resolve[sd]?|supersede[sd]?|chiud[eo]|risolv[eo]|super[ae])\\b[ \\t]*:?[ \\t]*${IT_BRIDGE}((?:#\\d+(?:[ \\t,&]+(?:and[ \\t]+)?)?)+)`,
   'ig',
 );
 
@@ -1072,8 +1084,9 @@ export function closingMergedPr(issueNumber, mergedPrs) {
  * worse than a wasted run):
  *   1. There is at least one distinctive cited token (code-punctuation-carrying — a bare
  *      field name like `previousSlugs` no longer qualifies); AND
- *   2. EVERY distinctive token from the prescribed `Suggested action` is present verbatim
- *      in a cited file. Requiring ALL of them — not merely *some* token, and not just the
+ *   2. EVERY token in the selected prescribed set is present in a cited file. Stable daily
+ *      items use their explicit `Acceptance token`; legacy bodies use every distinctive
+ *      token from `Suggested action`. Requiring ALL of them — not merely *some* token, and not just the
  *      heuristic "most-specific" one — means a single coincidental field-name hit can
  *      never alone flip `resolved` to true; the whole prescribed shape must be on main.
  *      (This is a strict superset of "most-specific token present", and unlike that test
@@ -1090,10 +1103,12 @@ export function closingMergedPr(issueNumber, mergedPrs) {
  * @param {object} io
  * @param {(path: string) => boolean} io.fileExists  true if the path resolves
  * @param {(path: string) => (string|null)} io.readFile  current file content, or null
+ * @param {{acceptanceToken?: string}} [options] explicit stable-item acceptance token;
+ *        when present it replaces the legacy Suggested-action token set
  * @returns {{ resolved: boolean, evidence: Array<{file:string, tok:string}>,
  *             files: string[], tokens: string[] }}
  */
-export function detectAlreadyResolved(body, io) {
+export function detectAlreadyResolved(body, io, options = {}) {
   const empty = { resolved: false, evidence: [], files: [], tokens: [] };
   try {
     const fileExists = io && typeof io.fileExists === 'function' ? io.fileExists : () => false;
@@ -1104,7 +1119,10 @@ export function detectAlreadyResolved(body, io) {
     // prescribed token. Keep it out of the token-resolution path entirely, while
     // preserving the free-form issue fallback for bodies with no sheet at all.
     const sheetOnly = COMMAND_CONDITION.holds(bodyText) && !ACCEPTANCE_CONDITION.holds(bodyText);
-    const tokens = sheetOnly ? [] : citedTokens(bodyText);
+    const acceptanceToken = normalizeAcceptanceToken(options?.acceptanceToken);
+    const tokens = acceptanceToken
+      ? (isDistinctiveToken(acceptanceToken) ? [acceptanceToken] : [])
+      : (sheetOnly ? [] : citedTokens(bodyText));
     const evidence = [];
     if (files.length && tokens.length) {
       const cache = new Map();
@@ -1113,7 +1131,10 @@ export function detectAlreadyResolved(body, io) {
         const content = cache.get(file);
         if (typeof content !== 'string') continue;
         for (const tok of tokens) {
-          if (content.includes(tok)) evidence.push({ file, tok });
+          const matched = acceptanceToken
+            ? codeTokenMatches(content, tok)
+            : content.includes(tok);
+          if (matched) evidence.push({ file, tok });
         }
       }
     }

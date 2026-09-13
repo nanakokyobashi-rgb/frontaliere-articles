@@ -312,9 +312,9 @@
       "path": "scripts/ci/followup-resolution-match.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "a7744e18a9fbdea8",
-        "corpus": "a7744e18a9fbdea8",
-        "alignedAt": "2026-09-11"
+        "site": "86098adda6c90970",
+        "corpus": "86098adda6c90970",
+        "alignedAt": "2026-09-13"
       }
     },
     {
