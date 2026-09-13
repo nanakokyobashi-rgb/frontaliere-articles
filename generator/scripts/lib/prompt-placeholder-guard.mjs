@@ -154,6 +154,20 @@ export const SCHEMA_PLACEHOLDER_LITERALS = Object.freeze([
 ]);
 
 /**
+ * Letterali di schema ritirati che possono essere ancora vivi nel corpus.
+ *
+ * Questa lista NON fa parte del lock col template corrente: il prompt nuovo
+ * deve restare libero dal contratto storico `5-8`/`Cosa…Importo`, ma il guard
+ * deve continuare a trovare un body1 pubblicato prima della migrazione. Se il
+ * matcher storico venisse derivato da `SCHEMA_PLACEHOLDER_LITERALS`, la
+ * sostituzione del literal cancellerebbe proprio la rete di sicurezza che
+ * serve alla bonifica dei residui già live.
+ */
+export const HISTORICAL_SCHEMA_PLACEHOLDER_LITERALS = Object.freeze([
+  "Inizia con '## In breve' (3-4 bullet TL;DR ≤80 char) + '## Fatti chiave' (5-8 coppie **Cosa/Quando/Dove/Chi/Importo**: valore). Poi il LEAD: FATTI dalla fonte (chi, cosa, dove, quando, perché). Solo cronaca verificabile. 300-400 parole (escluse TL;DR/Fatti chiave). Min 1 ### sotto-sezione.",
+]);
+
+/**
  * I letterali che NON producono un matcher testuale qui: non sono campi di
  * testo, e `inspectSlugForPromptPlaceholder()` in create-article.mjs li
  * classifica gia' — compresa la famiglia tradotta (`slug-inglese`) che una
@@ -478,6 +492,16 @@ export function leadOf(literal) {
 
 const escapeRx = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
+// Non mescolare questi matcher con quelli derivati dal template corrente:
+// sono compatibilità di lettura per gli schemi storici già pubblicati.
+const HISTORICAL_SCHEMA_RULES = HISTORICAL_SCHEMA_PLACEHOLDER_LITERALS.map((literal) => ({
+  id: 'legacy-schema-body1-fixed-key-facts',
+  kind: 'schema-echo',
+  rx: new RegExp(escapeRx(literal), 'i'),
+  why: 'Schema storico di body1 (`5-8` coppie fisse Cosa/Quando/Dove/Chi/Importo) ancora presente in un output pubblicato.',
+  literal,
+}));
+
 // ── `budget-parenthetical`, versione STRUTTURALE ────────────────────────────
 //
 // Porta da `frontaliere-si-o-no#5847` item 2 (`matchBudgetParenthetical`) il
@@ -590,6 +614,8 @@ const FAQ_LINE_PREFIX_RX = String.raw`(?:\d+[.)][ \t]*|[*#>\-–—]+[ \t]*)?`;
  *                       segue e' input, non articolo.
  */
 export const PLACEHOLDER_RULES = Object.freeze([
+  // ── Residui dello schema precedente: lettura, non contratto ─────────────
+  ...HISTORICAL_SCHEMA_RULES,
   // ── Forme che nessun letterale copre ────────────────────────────────────
   {
     id: 'budget-as-value',

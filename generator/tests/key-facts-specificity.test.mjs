@@ -84,11 +84,25 @@ test('la forma di riferimento dell issue conta quattro varianti e non i fatti sp
   assert.equal(findReferenceVacuousFacts('- Quando: 3 marzo 2026').length, 0);
 });
 
-test('il valore di un fatto e\' cio\' che segue l ultimo due punti', () => {
+test('il valore usa la freccia del contratto anche quando il termine contiene un colon', () => {
   assert.equal(factValueOf('- **Chi**: Ente competente: non specificato.'), 'non specificato.');
   assert.equal(factValueOf('- **Dove**: Cantone di Zugo'), 'Cantone di Zugo');
   assert.equal(factValueOf('- **Quando** → non specificato.'), 'non specificato.');
   assert.equal(factValueOf('- **Quando** -> non specificato.'), 'non specificato.');
+  assert.equal(factValueOf('- **Orario: apertura** → non specificato.'), 'non specificato.');
+  assert.equal(factValueOf('- **Orario: apertura** -> not specified.'), 'not specified.');
+});
+
+test('un termine con colon non lascia passare un valore vacuo nella sezione AI Search', () => {
+  const body = [
+    '## Fatti chiave',
+    '- **Orario: apertura** → non specificato',
+    '- Dove → Cantone di Zugo',
+    '- Requisiti → documento valido',
+  ].join('\n');
+  const [hit] = findVacuousFacts(body);
+  assert.equal(hit?.value, 'non specificato');
+  assert.equal(hit?.kind, 'placeholder-value');
 });
 
 test('lo scanner decodifica gli escape Unicode e hexadecimal dei literal TS', () => {
