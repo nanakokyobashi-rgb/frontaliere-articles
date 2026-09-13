@@ -152,3 +152,22 @@ test('#1360: un claim locale o remoto esclude ogni via di mutazione del drainer'
   }
   assert.match(SRC, /CLAIM-SKIP/);
 });
+
+test('#1360: i claim escludono anche age-out e mutazioni dopo la rilettura live', () => {
+  const old = new Date(Date.now() - 90 * 86_400_000).toISOString();
+  for (const owner of ['agent:in-progress', 'agent:local', 'agent:remote']) {
+    assert.equal(
+      isAgeOutCandidate(
+        { ...iss('follow-up', owner), createdAt: old, updatedAt: old },
+        { now: Date.now(), ageOutDays: 30 },
+      ),
+      false,
+      owner,
+    );
+  }
+  assert.match(SRC, /function liveIssueForClaim\(num\)/);
+  assert.match(SRC, /issue', 'view', String\(num\), '--repo', REPO, '--json', 'labels'/);
+  assert.match(SRC, /function closeChecked\(num/);
+  assert.match(SRC, /if \(!liveClaimAllowsMutation\(num\)\) return false;/);
+  assert.match(SRC, /liveClaimsAllowGroupMutation\(plannedGroup\.issues\)/);
+});
