@@ -369,8 +369,10 @@ test('un registro con id duplicati o mancanti viene rifiutato prima del confront
   s.manifest.counts.articles = 3;
   s.slugs.blog = { dup: { it: 'dup' } };
   const errors = validateAnnouncedSurface(s).join('\n');
-  assert.match(errors, /duplicat/i);
-  assert.match(errors, /undefined|mancant/i);
+  assert.match(errors, /articles\.json contiene id duplicati: dup/);
+  assert.match(errors, /articles\.json contiene 1 id mancanti/);
+  assert.doesNotMatch(errors, /0 id senza slug.*0 slug senza articolo/,
+    'un registro con duplicati non deve mascherare la causa con una diff vuota');
 });
 
 test('manifest senza counts viene rifiutato subito', () => {
