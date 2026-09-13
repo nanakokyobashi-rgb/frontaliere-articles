@@ -383,9 +383,9 @@ jobs:
           QUOTA_LEASE_TARGET: ${{ github.event.issue.number }}
           QUOTA_LEASE_TTL_SEC: '21600'
           # Il lease è un pool bounded di fixer Codex-primary, non più un
-          # mutex globale: la chiave per-issue del workflow rende reali i 5
+          # mutex globale: la chiave per-issue del workflow rende reali i 7
           # slot e il drainer impedisce il fan-out oltre il cap.
-          QUOTA_LEASE_MAX_INFLIGHT_FIX: '5'
+          QUOTA_LEASE_MAX_INFLIGHT_FIX: '7'
           GITHUB_RUN_ID: ${{ github.run_id }}
         run: node scripts/ci/check-quota-backoff.mjs
 
