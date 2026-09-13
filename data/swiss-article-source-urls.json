@@ -1,5 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/economia/1944241/kof-salari-dovrebbe-dovrebbero-inflazione": "salari-aumento-2027",
   "https://www.tio.ch/svizzera/attualita/1944267/cantoni-canton-lezioni-allievi-zurigo": "scolastico-in-svizzera",
   "https://www.admin.ch/it/newnsb/ivlg2suimpmkoleqstehk": "sorveglianza-mercato-est-2025",
   "https://www.rsi.ch/info/svizzera/travail.suisse-chiede-un-aumento-generalizzato-dei-salari--3992937.html": "salari-svizzera-aumentati-2026",
@@ -2349,6 +2348,11 @@
   "https://www.laregione.ch/economia/economia/1949608/crescono-in-svizzera-le-condanne-contro-le-banche": {
     "articleId": "condanne-banche-svizzera-corruzione",
     "ts": "2026-09-13T00:20:13.686Z",
+    "keyForm": 2
+  },
+  "https://www.admin.ch/it/newnsb/viwq1myakv3b": {
+    "articleId": "traffico-merci-alpi-semestre-2026",
+    "ts": "2026-09-13T01:07:46.995Z",
     "keyForm": 2
   }
 }
