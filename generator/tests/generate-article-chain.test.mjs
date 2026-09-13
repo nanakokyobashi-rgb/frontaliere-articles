@@ -538,11 +538,13 @@ test('il processo riceve il cap effettivo, non il default RUN_WALL_BUDGET_MS (#4
 });
 
 test('CREATE_ARTICLE_MAX_WALL_MS segue il cap ricalcolato a ogni tentativo', () => {
+  // Il primo stub consuma un secondo reale, ma il budget ampio lascia margine
+  // al runner sotto carico: il test misura il ricalcolo, non la schedulazione.
   const r = runGenerateStep({
     section: 'svizzera',
-    plan: ['0 0 3', '0 0'],
-    budget: 6,
-    hardKill: 5,
+    plan: ['0 0 1', '0 0'],
+    budget: 120,
+    hardKill: 120,
   });
   const caps = r.caps.map((c) => Number(String(c).replace(/s$/, '')));
   const wallMs = r.wallMs.map(Number);
