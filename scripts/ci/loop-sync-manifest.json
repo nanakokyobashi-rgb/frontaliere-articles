@@ -324,7 +324,7 @@
       "reason": "Il polling sincrono e il riconoscimento dei job conclusi sono il contratto condiviso dalla sorgente sito e da pr-autorebase, ma il corpus mantiene i propri nomi/check required e le proprie guardie review. La copia è quindi trasportata per contratto e non trattata come identica byte-per-byte.",
       "baseline": {
         "site": "c63b27c70d03615a",
-        "corpus": "2c783ff28a651001",
+        "corpus": "5669cdff2debe22c",
         "alignedAt": "2026-09-13"
       }
     },

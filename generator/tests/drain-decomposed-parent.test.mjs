@@ -22,10 +22,13 @@ import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import {
   isDrainPromotable,
+  hasActiveAgentClaim,
+  isRecoverableQueueManaged,
   isAgeOutCandidate,
   isReparkableCandidate,
   isDecomposeEligible,
   isStuckFixRescueCandidate,
+  isIssueGroupable,
   staleFixRescueGate,
 } from '../../scripts/ci/followup-drainer.mjs';
 
@@ -127,4 +130,65 @@ test('#1076: il rescue vede agent:fix senza PR/beacon e non tocca i concorrenti'
     staleFixRescueGate({ outcome: null, ageMin: 31, hasPR: false, orphanMinAgeMin: 30 }).action,
     'rearm',
   );
+});
+
+test('#1360: un claim locale o remoto esclude ogni via di mutazione del drainer', () => {
+  for (const owner of ['agent:in-progress', 'agent:local', 'agent:remote']) {
+    const queued = iss('agent:fix-queued', owner, 'follow-up');
+    const parked = iss('fu-parked', owner, 'follow-up');
+    const grouped = {
+      title: 'Follow-up con target condiviso',
+      body: 'Suggested action: `scripts/ci/followup-drainer.mjs`',
+      labels: [{ name: owner }],
+    };
+    assert.equal(hasActiveAgentClaim(queued), true, owner);
+    assert.equal(isDrainPromotable(queued), false, owner);
+    assert.equal(isDecomposeEligible(queued), false, owner);
+    assert.equal(isStuckFixRescueCandidate({
+      title: 'follow-up(#1360): rescue',
+      labels: [{ name: 'agent:fix' }, { name: owner }],
+    }), false, owner);
+    assert.equal(isReparkableCandidate(parked), false, owner);
+    assert.equal(isIssueGroupable(grouped, { repository: 'owner/repo', canPushWorkflows: true }), false, owner);
+  }
+  assert.match(SRC, /CLAIM-SKIP/);
+});
+
+test('#1455: i claim escludono anche recovery WIP, age-out e tutti i pass mutanti', () => {
+  const old = new Date(Date.now() - 90 * 86_400_000).toISOString();
+  for (const owner of ['agent:in-progress', 'agent:local', 'agent:remote']) {
+    const parked = iss('fu-parked', 'follow-up', owner);
+    assert.equal(isRecoverableQueueManaged(parked), false, `${owner}: parked-wip`);
+    assert.equal(isAgeOutCandidate({ ...parked, createdAt: old }, {
+      now: Date.now(), ageOutDays: 30,
+    }), false, `${owner}: age-out`);
+    assert.equal(isDrainPromotable(iss('agent:fix-queued', owner)), false, `${owner}: drain`);
+  }
+  assert.match(SRC, /\.filter\(\(iss\) => !hasActiveAgentClaim\(iss\)\)/,
+    'verdict-exit/too-large devono filtrare il claim prima della scansione');
+  assert.match(SRC, /parents\.filter\(\(x\) => !hasActiveAgentClaim\(x\)/,
+    'parent-dequeue deve filtrare i padri già assegnati');
+  assert.match(SRC, /function issueMutationAllowed\(/,
+    'ogni issue comment/edit/close deve avere una rilettura live fail-closed');
+  assert.match(SRC, /command === 'issue' && \['comment', 'close', 'edit'\]/,
+    'il wrapper gh deve proteggere anche i call-site legacy');
+});
+
+test('#1360: i claim escludono anche age-out e mutazioni dopo la rilettura live', () => {
+  const old = new Date(Date.now() - 90 * 86_400_000).toISOString();
+  for (const owner of ['agent:in-progress', 'agent:local', 'agent:remote']) {
+    assert.equal(
+      isAgeOutCandidate(
+        { ...iss('follow-up', owner), createdAt: old, updatedAt: old },
+        { now: Date.now(), ageOutDays: 30 },
+      ),
+      false,
+      owner,
+    );
+  }
+  assert.match(SRC, /function liveIssueForClaim\(num\)/);
+  assert.match(SRC, /issue', 'view', String\(num\), '--repo', REPO, '--json', 'labels'/);
+  assert.match(SRC, /function closeChecked\(num/);
+  assert.match(SRC, /if \(!liveClaimAllowsMutation\(num\)\) return false;/);
+  assert.match(SRC, /liveClaimsAllowGroupMutation\(plannedGroup\.issues\)/);
 });
