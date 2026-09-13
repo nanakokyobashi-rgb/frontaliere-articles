@@ -467,7 +467,7 @@ test('l’aggregata passa l acceptance token al matcher strutturale', () => {
   const body = [
     '### 1. Item con chiamata parametrizzata',
     '- Target file: scripts/ci/example.mjs',
-    '- Suggested action: verificare `runTask()` nel target.',
+    '- Suggested action: verificare `differentGuard()` nel target.',
     '- Acceptance token: `runTask()`',
   ].join('\n');
   const gate = aggregateCloseGate(body, {

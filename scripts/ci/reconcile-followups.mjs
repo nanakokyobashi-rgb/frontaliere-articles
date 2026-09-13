@@ -962,7 +962,7 @@ export function dailyBucketCloseGate(
   const unresolvedItems = [];
   const weakItems = [];
   for (const item of items) {
-    const result = detectAlreadyResolved(item.text, io, { acceptanceToken: item.acceptanceToken });
+    const result = detectParsedItemAlreadyResolved(item, io);
     evidenceById.set(item.id, result.evidence || []);
     if (item.state !== 'done' || !result.resolved) unresolvedItems.push(item);
     const itemEvidence = result.evidence || [];
@@ -1021,7 +1021,7 @@ export function reconcileDailyItems(
   const evidenceById = new Map();
   for (const item of items) {
     const result = hasFalsifiableAcceptance(item.text)
-      ? detectAlreadyResolved(item.text, io, { acceptanceToken: item.acceptanceToken })
+      ? detectParsedItemAlreadyResolved(item, io)
       : { resolved: false, evidence: [] };
     evidenceById.set(item.id, result.evidence || []);
     if (result.resolved && (item.state === 'open' || item.state === 'in-progress')) {
@@ -1077,7 +1077,7 @@ export function aggregateCloseGate(body, io, { legacyResolver = null } = {}) {
   const valid = items.filter((item) => hasFalsifiableAcceptance(item.text));
   if (!valid.length) return { blocks: true, reason: 'no-valid-item' };
   const allConfirmed = valid.every((item) => {
-    if (detectAlreadyResolved(item.text, io, { acceptanceToken: item.acceptanceToken }).resolved) return true;
+    if (detectParsedItemAlreadyResolved(item, io).resolved) return true;
     return legacyResults.get(item.text)?.resolved === true;
   });
   return allConfirmed ? { blocks: false, reason: null } : { blocks: true, reason: 'valid-item-unconfirmed' };
