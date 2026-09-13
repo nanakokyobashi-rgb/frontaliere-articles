@@ -1,5 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/cronaca/1944228/incidente-anni-moto-ospedale-giovane": "incidente-moto-amlikon-bissegg-18-anni",
   "https://www.tio.ch/svizzera/economia/1944241/kof-salari-dovrebbe-dovrebbero-inflazione": "salari-aumento-2027",
   "https://www.tio.ch/svizzera/attualita/1944267/cantoni-canton-lezioni-allievi-zurigo": "scolastico-in-svizzera",
   "https://www.admin.ch/it/newnsb/ivlg2suimpmkoleqstehk": "sorveglianza-mercato-est-2025",
@@ -2345,6 +2344,11 @@
   "https://www.tio.ch/ticino/attualita/1949745/banda-berna-iniziativa-legge-storni": {
     "articleId": "banda-larga-regioni-periferiche-berna",
     "ts": "2026-09-13T00:07:17.658Z",
+    "keyForm": 2
+  },
+  "https://www.laregione.ch/economia/economia/1949608/crescono-in-svizzera-le-condanne-contro-le-banche": {
+    "articleId": "condanne-banche-svizzera-corruzione",
+    "ts": "2026-09-13T00:20:13.686Z",
     "keyForm": 2
   }
 }
