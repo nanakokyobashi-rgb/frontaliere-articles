@@ -685,6 +685,7 @@ jobs:
           REPO: ${{ github.repository }}
           PR_NUMBER: ${{ steps.resolve.outputs.pr_number }}
           HEAD_SHA: ${{ steps.resolve.outputs.head_sha }}
+          REVIEW_REVISION: ${{ steps.review_input.outputs.review_revision }}
         run: node scripts/ci/review-test-policy.mjs post
 
       - name: Prepare Firebase credentials for Codex review
@@ -756,6 +757,7 @@ jobs:
             Test files are excluded from review by owner policy: do not read, probe or raise findings on tests, including during cross-file analysis.
             Report the exact workflow tier `${{ steps.tier.outputs.tier }}` in Scope; this classifies review scope, not model reasoning effort.
             Reviewer automatico PR #${{ steps.resolve.outputs.pr_number }} (HEAD ${{ steps.resolve.outputs.head_sha }}). Tier: ${{ steps.tier.outputs.tier }}.
+            Questa review vale esclusivamente per la revisione input `${{ steps.review_input.outputs.review_revision }}`. La review che posti DEVE contenere, come riga propria e senza modificarlo, il marker esatto `<!-- REVIEW_INPUT_REVISION: ${{ steps.review_input.outputs.review_revision }} -->`; senza quel marker il gate non può accettare alcun verdetto.
 
             Questo repo (`frontaliere-articles`) pubblica una superficie dati su HTTP che il sito consuma in produzione: `dist/api/` (manifest, articles.json, meta per locale, slugs, sitemap blog, dieci feed RSS, news-ticker). Un bug in cio' che la genera esce **live senza che il sito faccia un deploy** — non c'e' una build del sito a fare da rete.
 
@@ -797,6 +799,7 @@ jobs:
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
           REVIEW_TIER: ${{ steps.tier.outputs.tier }}
           REVIEW_MAX_TURNS: ${{ steps.tier.outputs.max_turns }}
+          REVIEW_REVISION: ${{ steps.review_input.outputs.review_revision }}
         run: |
           set -uo pipefail
           set_review_output() {
@@ -880,12 +883,13 @@ jobs:
                 sleep 2
                 continue
               fi
-              if [ -n "${REVIEWS:-}" ] && jq -e --arg head_sha "$HEAD_SHA" --arg run_started_at "$RUN_STARTED_AT" '
+              if [ -n "${REVIEWS:-}" ] && jq -e --arg head_sha "$HEAD_SHA" --arg run_started_at "$RUN_STARTED_AT" --arg review_revision "$REVIEW_REVISION" '
                 flatten | any(.[]?;
                   (.user.type == "Bot")
                   and ((.user.login // "") | test("^(claude|frontaliere-automation)"; "i"))
                   and .commit_id == $head_sha
                   and (.submitted_at // "") >= $run_started_at
+                  and ((.body // "") | contains("<!-- REVIEW_INPUT_REVISION: " + $review_revision + " -->"))
                 )
               ' <<<"$REVIEWS" >/dev/null 2>&1; then
                 set_review_output review_abort_cause verdict_posted
@@ -1022,6 +1026,7 @@ jobs:
           PR_NUMBER: ${{ steps.resolve.outputs.pr_number }}
           HEAD_SHA: ${{ steps.resolve.outputs.head_sha }}
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          REVIEW_REVISION: ${{ steps.review_input.outputs.review_revision }}
           CODEX_FALLBACK_EVIDENCE_FILE: ${{ steps.claude_review.outputs.fallback_evidence_file }}
         run: node scripts/ci/review-gate.mjs
 

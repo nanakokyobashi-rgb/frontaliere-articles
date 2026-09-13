@@ -15,6 +15,7 @@ import { execFileSync } from 'node:child_process';
 import { randomUUID } from 'node:crypto';
 import fs from 'node:fs';
 import { pathToFileURL } from 'node:url';
+import { reviewHasInputRevision } from './review-test-policy.mjs';
 
 export const REVIEW_CLAIM_MARKER = '<!-- PR_REVIEW_CLAIM:';
 export const REVIEW_CLAIM_STATES = Object.freeze([
@@ -267,8 +268,8 @@ function readComments(repo, prNumber) {
   return comments;
 }
 
-function reviewWasPosted(repo, prNumber, headSha) {
-  const raw = gh([
+export function reviewWasPosted(repo, prNumber, headSha, reviewRevision = '', ghFn = gh) {
+  const raw = ghFn([
     'api', '--paginate', '--slurp', `repos/${repo}/pulls/${prNumber}/reviews?per_page=100`,
   ]);
   let pages;
@@ -285,6 +286,7 @@ function reviewWasPosted(repo, prNumber, headSha) {
     && review.state !== 'PENDING'
     && review.commit_id === headSha
     && review.user?.type === 'Bot'
+    && reviewHasInputRevision(review.body, reviewRevision)
     && (CLAIM_ACTOR_RE.test(String(review.user?.login || ''))
       || (/^github-actions\[bot\]$/iu.test(String(review.user?.login || ''))
         && String(review.body || '').includes('<!-- CODEX_FALLBACK_REVIEW -->'))));
@@ -457,7 +459,7 @@ function finalizeClaim(base, repo) {
       permanentFailure: process.env.PERMANENT_FAILURE === 'true' || permanentCause,
       reviewPosted: process.env.REVIEW_POSTED === 'true',
     });
-  if (state === 'completed' && !reviewWasPosted(repo, base.prNumber, base.headSha)) {
+  if (state === 'completed' && !reviewWasPosted(repo, base.prNumber, base.headSha, base.reviewRevision)) {
     if (permanentCause) state = 'failed-terminal';
     else state = 'failed-transient';
   }

@@ -32,6 +32,8 @@ const SCRIPT = path.join(ROOT, 'scripts/ci/review-gate.mjs');
 
 const HEAD = 'a'.repeat(40);
 const OLD = 'b'.repeat(40);
+const BODY_REVISION = `body:${'d'.repeat(64)}`;
+const OLD_BODY_REVISION = `body:${'e'.repeat(64)}`;
 
 const GOOD_BODY = '## Implementato\n- una cosa vera\n\n## Non implementato (ancora)\n- Nessuno';
 
@@ -45,7 +47,8 @@ const GOOD_BODY = '## Implementato\n- una cosa vera\n\n## Non implementato (anco
  * cioe' un test verde su un gate che non vede piu' niente.
  */
 function runGate({ reviews = [], files = [], meta = null, compare = null,
-  checkRuns = [], checkRunPages = null, codexEvidence = null }) {
+  checkRuns = [], checkRunPages = null, codexEvidence = null,
+  reviewRevision = BODY_REVISION }) {
   const dir = mkdtempSync(path.join(tmpdir(), 'review-gate-'));
   try {
     const bin = path.join(dir, 'bin');
@@ -147,6 +150,7 @@ exit 0
         PR_NUMBER: '901',
         HEAD_SHA: HEAD,
         GH_TOKEN: 'stub',
+        REVIEW_REVISION: reviewRevision,
         CODEX_FALLBACK_EVIDENCE_FILE: codexEvidence === null ? '' : evidenceFile,
       },
     });
@@ -156,15 +160,30 @@ exit 0
   }
 }
 
-const botReview = (commit, body) => ({
+const botReview = (commit, body, { reviewRevision = BODY_REVISION, ...overrides } = {}) => ({
   user: { type: 'Bot', login: 'claude[bot]' },
   commit_id: commit,
-  body,
+  body: `${body}${reviewRevision ? `\n<!-- REVIEW_INPUT_REVISION: ${reviewRevision} -->` : ''}`,
+  ...overrides,
 });
 
 test('LGTM sulla head senza 🔴 → il check e\' verde', () => {
   const r = runGate({ reviews: [botReview(HEAD, 'tutto bene\n\n## LGTM')] });
   assert.equal(r.status, 0, r.stdout);
+});
+
+test('un LGTM della revisione body precedente non viene riusato sulla revisione corrente', () => {
+  const stale = runGate({
+    reviews: [botReview(HEAD, 'tutto bene\n\n## LGTM', { reviewRevision: OLD_BODY_REVISION })],
+    files: ['generator/scripts/create-article.mjs'],
+  });
+  assert.equal(stale.status, 1, stale.stdout);
+
+  const fresh = runGate({
+    reviews: [botReview(HEAD, 'tutto bene\n\n## LGTM', { reviewRevision: BODY_REVISION })],
+    files: ['generator/scripts/create-article.mjs'],
+  });
+  assert.equal(fresh.status, 0, fresh.stdout);
 });
 
 test('LGTM accanto a un 🔴 Important → il check e\' ROSSO', () => {
@@ -398,7 +417,7 @@ const codexEvidence = formatCodexFallbackEvidence({ trigger: 'runtime-429', stat
 const codexReview = (overrides = {}) => ({
   user: { type: 'Bot', login: 'github-actions[bot]' },
   commit_id: HEAD,
-  body: '<!-- CODEX_FALLBACK_REVIEW -->\n## LGTM',
+  body: `<!-- CODEX_FALLBACK_REVIEW -->\n## LGTM\n<!-- REVIEW_INPUT_REVISION: ${BODY_REVISION} -->`,
   ...overrides,
 });
 

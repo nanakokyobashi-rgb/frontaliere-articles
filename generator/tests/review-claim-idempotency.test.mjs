@@ -11,7 +11,12 @@ import {
   reviewClaimDecision,
   reviewClaimDedupeKey,
   reviewClaimKey,
+  reviewWasPosted,
 } from '../../scripts/ci/review-claim.mjs';
+import {
+  reviewHasInputRevision,
+  reviewInputRevisionMarker,
+} from '../../scripts/ci/review-test-policy.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const HEAD = 'a'.repeat(40);
@@ -200,6 +205,33 @@ test('classifies setup and provider failures without consuming a retryable claim
   assert.equal(claimStatusFromOutcome({ proceed: true, claudeOutcome: 'success' }), 'completed');
 });
 
+test('a review verdict must carry exactly the current trusted body revision', () => {
+  const fresh = `review\n${reviewInputRevisionMarker(BODY_REVISION)}`;
+  const stale = `review\n${reviewInputRevisionMarker(OTHER_BODY_REVISION)}`;
+
+  assert.equal(reviewHasInputRevision(fresh, BODY_REVISION), true);
+  assert.equal(reviewHasInputRevision(stale, BODY_REVISION), false);
+  assert.equal(
+    reviewHasInputRevision(`${fresh}\n${reviewInputRevisionMarker(OTHER_BODY_REVISION)}`, BODY_REVISION),
+    false,
+  );
+  assert.equal(reviewHasInputRevision('legacy review', ''), true);
+  assert.throws(() => reviewInputRevisionMarker('body:not-a-sha'), /Invalid review input revision/);
+});
+
+test('claim finalization does not accept an old-body review on the same HEAD', () => {
+  const review = (revision) => ({
+    state: 'COMMENTED',
+    commit_id: HEAD,
+    user: { type: 'Bot', login: 'claude[bot]' },
+    body: `## LGTM\n${reviewInputRevisionMarker(revision)}`,
+  });
+  const ghFn = (reviews) => () => JSON.stringify([[reviews]]);
+
+  assert.equal(reviewWasPosted('owner/repo', '8364', HEAD, BODY_REVISION, ghFn(review(OTHER_BODY_REVISION))), false);
+  assert.equal(reviewWasPosted('owner/repo', '8364', HEAD, BODY_REVISION, ghFn(review(BODY_REVISION))), true);
+});
+
 test('tests.yml claims before review work and finalizes without gating the required verdict', () => {
   const workflow = fs.readFileSync(path.join(ROOT, '.github/workflows/tests.yml'), 'utf8');
   assert.match(workflow, /actions:\s*read/);
@@ -214,6 +246,8 @@ test('tests.yml claims before review work and finalizes without gating the requi
   assert.match(workflow, /BODY_EDITED:/);
   assert.match(workflow, /review_revision=body:/);
   assert.match(workflow, /REVIEW_REVISION:/);
+  assert.match(workflow, /REVIEW_INPUT_REVISION:/);
+  assert.match(workflow, /contains\("<!-- REVIEW_INPUT_REVISION:/);
   assert.match(workflow, /steps\.review_claim\.outputs\.claim_allowed == 'true'/);
 
   const gateAt = workflow.indexOf('id: review_gate');
