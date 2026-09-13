@@ -201,8 +201,19 @@ export function mostSpecificToken(tokens) {
   return [...tokens].sort((a, b) => score(b) - score(a))[0];
 }
 
+// A path is a locator only when it has a repository separator and a short file
+// extension. The surrounding boundary keeps prose punctuation out of the match,
+// while the optional line suffix remains metadata rather than part of the path.
+const ACTION_FILE_LOCATOR_RE = /(?:^|[\s`'":=(\[{])((?:[\w.-]+\/)+[\w.-]+\.[a-z]{2,5})(?::L?\d+(?:-L?\d+)?)?(?=$|[\s`'":,;.)\]}])/gi;
+const QUOTED_FILE_LOCATOR_RE = /`((?:[\w.-]+\/)+[\w.-]+\.[a-z]{2,5})(?::L?\d+(?:-L?\d+)?)?`/gi;
+
 /**
- * Backticked file paths in the body that exist according to `fileExists(path)`.
+ * File locators in the body that exist according to `fileExists(path)`.
+ * Live `Suggested action` regions accept both backticked and plain paths.
+ * Legacy bodies may put a backticked source locator in a Markdown blockquote
+ * (often under `Original text`), so those citations remain usable as locators;
+ * the protected text is still excluded from `suggestedActionText()` and can
+ * never widen the acceptance-token scope. `Target file:` remains live metadata.
  * Strips a trailing `:Lnnn` / `:nnn` line suffix. Only paths containing `/` are
  * considered (avoids bare `package.json`-style ambiguity flagging wrong files).
  *
@@ -212,21 +223,25 @@ export function mostSpecificToken(tokens) {
  */
 export function citedFiles(body, fileExists) {
   const out = new Set();
-  // A prose citation is context, not an actionable target.  Only explicit
-  // `Suggested action` regions may contribute backticked file references;
-  // `Target file:` remains live metadata for legacy bodies without that field.
+  const addIfExisting = (path) => {
+    if (path.includes('/') && fileExists(path)) out.add(path);
+  };
   const actionText = explicitSuggestedActionText(body);
   const unprotected = markdownRecords(body)
     .filter((record) => !record.protected)
     .map((record) => record.line)
     .join('\n');
-  for (const m of actionText.matchAll(/`([\w./-]+\.[a-z]{2,5})(?::L?\d+(?:-L?\d+)?)?`/gi)) {
-    const p = m[1];
-    if (p.includes('/') && fileExists(p)) out.add(p);
+  for (const m of actionText.matchAll(ACTION_FILE_LOCATOR_RE)) {
+    addIfExisting(m[1]);
+  }
+  for (const record of markdownRecords(body)) {
+    if (!/^\s*>/.test(record.line)) continue;
+    for (const m of record.line.matchAll(QUOTED_FILE_LOCATOR_RE)) {
+      addIfExisting(m[1]);
+    }
   }
   for (const m of unprotected.matchAll(/(?:^|\n)\s*(?:[-*]\s*)?Target file:\s*`?([\w./-]+\.[a-z]{2,5})(?::L?\d+(?:-L?\d+)?)?`?\s*$/gim)) {
-    const p = m[1];
-    if (p.includes('/') && fileExists(p)) out.add(p);
+    addIfExisting(m[1]);
   }
   return [...out];
 }
