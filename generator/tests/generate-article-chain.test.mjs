@@ -381,6 +381,7 @@ test('un errore dopo una scrittura parziale resta vincolante per il commit', () 
   assert.equal(r.outputs.partial_failure, 'true');
   assert.equal(r.invocations.length, 1, 'un output parziale blocca il fallback, che erediterebbe gli stessi file');
   assert.equal(r.status, 1, 'la run deve restare rossa: il commit non puo\' partire');
+  assert.match(r.stdout, /GENERATION_OUTCOME kind=error reason=partial-failure section=frontaliere/);
   assert.match(r.stdout, /output parziale non pubblicabile/);
 });
 

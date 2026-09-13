@@ -1418,7 +1418,15 @@ jobs:
           # viene poi chiuso con exit 0/1. Il watchdog usa questi eventi per
           # separare articolo prodotto, no-op legittimo, timeout e rosso
           # tecnico; il solo risultato del job non contiene questa distinzione.
-          if [ "$produced" = "true" ]; then
+          # A partial transaction or a timeout is never a generated outcome:
+          # the body probe must not hide a red producer result in telemetry.
+          if [ "$partial_failure" = "true" ]; then
+            outcome_kind="error"
+            outcome_reason="partial-failure"
+            outcome_section="$effective"
+          elif [ "$outcome_kind" = "timeout" ]; then
+            :
+          elif [ "$produced" = "true" ]; then
             outcome_kind="generated"
             outcome_reason="article"
             outcome_section="$effective"
@@ -1464,12 +1472,9 @@ jobs:
           # Summary) leggono lo stesso verdetto che leggerebbero su una run
           # verde, quindi il fallimento non li rende ciechi.
           #
-          # `produced=true` CHIUDE LA QUESTIONE, sempre e per primo. Se una
-          # sezione ha scritto un corpo, il roster ha servito e la run e' un
-          # successo qualunque cosa sia successa all'altra sezione: fallirla
-          # getterebbe via un articolo buono, gia' pagato in LLM, traduzioni e
-          # immagine. E' la ragione per cui il roster_blocked di #357 era in
-          # congiunzione, e resta vera parola per parola qui.
+          # Un corpo scritto con exit non-zero resta una transazione parziale,
+          # e un timeout resta un timeout: nessuno dei due deve essere
+          # riclassificato come articolo generato dal probe del body.
           if [ "$partial_failure" = "true" ]; then
             exit 1
           fi

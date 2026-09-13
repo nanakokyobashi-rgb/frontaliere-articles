@@ -726,10 +726,10 @@ runs:
       run: |
         echo "ENABLE_HAIKU_ARTICLE_FALLBACK=${ENABLE_HAIKU_ARTICLE_FALLBACK:-<unset>} (raw RC value)"
         echo "HAIKU_FALLBACK_GATE=${HAIKU_FALLBACK_GATE:-<unset>} (resolved gate)"
-        if command -v claude >/dev/null 2>&1; then
-          echo "claude CLI: present ($(claude --version 2>&1 | head -1))"
+        if [ -n "${CLAUDE_CLI_BIN:-}" ] && [ -x "$CLAUDE_CLI_BIN" ]; then
+          echo "claude CLI: present at attested path $CLAUDE_CLI_BIN ($("$CLAUDE_CLI_BIN" --version 2>&1 | head -1))"
         else
-          echo "claude CLI: NOT on PATH — Haiku fallback will hit ENOENT if the runtime gate offers it this run"
+          echo "claude CLI: unavailable at the attested path — Haiku fallback remains disabled for this run"
         fi
         if [ -n "$CODEX_CLI_BIN" ]; then
           echo "codex CLI: attested at $CODEX_CLI_BIN (version 0.153.4)"
