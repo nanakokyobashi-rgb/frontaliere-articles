@@ -121,9 +121,16 @@ function codexReviewWasPreviouslyAccepted(review) {
   if (!/^[0-9a-f]{40}$/i.test(commit)) return false;
   try {
     const payload = gh([
-      'api', `repos/${REPO}/commits/${commit}/check-runs?per_page=100`,
+      // GitHub's default `latest` view replaces a successful earlier attempt
+      // when the same required check is rerun. Carry-forward needs the
+      // durable history, not only the currently failing attempt.
+      'api', '--paginate', '--slurp',
+      `repos/${REPO}/commits/${commit}/check-runs?per_page=100&filter=all`,
     ]);
-    const checks = Array.isArray(payload?.check_runs) ? payload.check_runs : [];
+    const pages = Array.isArray(payload) ? payload : [payload];
+    const checks = pages.flatMap((page) => (
+      Array.isArray(page?.check_runs) ? page.check_runs : []
+    ));
     return checks.some((check) => check?.name === VITEST_CHECK_NAME
       && check?.status === 'completed'
       && check?.conclusion === 'success');

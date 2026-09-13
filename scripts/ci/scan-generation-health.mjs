@@ -894,6 +894,21 @@ export function summarizeRuns(runs) {
     unknown: 0,
     byReason: {},
   };
+  // A global outcome count cannot tell `section-dry` what to inspect: a
+  // healthy `svizzera` run would be evidence for the wrong section. Keep a
+  // second, production-only tally keyed by the section declared by the
+  // marker. Missing/unknown sections stay out of this map; they are still
+  // visible in the global tally, but cannot be assigned by guessing.
+  const outcomesBySection = new Map(SECTIONS.map((section) => [section, {
+    total: 0,
+    generated: 0,
+    noArticle: 0,
+    timeout: 0,
+    skipped: 0,
+    error: 0,
+    unknown: 0,
+    byReason: {},
+  }]));
   const outcomeFields = {
     generated: 'generated',
     'no-article': 'noArticle',
@@ -901,16 +916,28 @@ export function summarizeRuns(runs) {
     skipped: 'skipped',
     error: 'error',
   };
+  const recordOutcome = (summary, outcome) => {
+    summary.total++;
+    const field = outcomeFields[outcome.kind];
+    if (field) summary[field]++;
+    else summary.unknown++;
+    const reason = outcome.reason || 'unknown';
+    summary.byReason[reason] = (summary.byReason[reason] || 0) + 1;
+  };
 
   for (const r of runs || []) {
     if (!r) continue;
     for (const outcome of r.outcomes || []) {
-      outcomes.total++;
-      const field = outcomeFields[outcome.kind];
-      if (field) outcomes[field]++;
-      else outcomes.unknown++;
-      const reason = outcome.reason || 'unknown';
-      outcomes.byReason[reason] = (outcomes.byReason[reason] || 0) + 1;
+      recordOutcome(outcomes, outcome);
+      // `dryRun` is deliberately included in the global diagnostic tally,
+      // preserving its existing contract, but it is not evidence that a
+      // production section attempted to publish. A section tally is useful to
+      // `section-dry` only when both the section and the production mode are
+      // known.
+      if (r.dryRun === false) {
+        const sectionOutcomes = outcomesBySection.get(outcome.section);
+        if (sectionOutcomes) recordOutcome(sectionOutcomes, outcome);
+      }
     }
     if (r.dryRun === true) continue;
 
@@ -995,6 +1022,7 @@ export function summarizeRuns(runs) {
   return {
     bySection,
     outcomes,
+    outcomesBySection,
     oversize: {
       runs: oversizeRuns,
       generatedRuns: oversizeGenerated,
@@ -1156,6 +1184,56 @@ const footer = (howToRemeasure) => [
   + ' **Si chiude da sola** alla prima passata in cui la condizione non è più vera:'
   + ' apertura e chiusura sono la stessa valutazione, non due script che possono divergere.',
 ].join('\n');
+
+/**
+ * Evidenza per-sezione allegata a `section-dry`.
+ *
+ * I commit restano la sorgente primaria: hanno retention permanente e sono
+ * cio' che decide la condizione. Gli esiti delle run sono una dimensione
+ * diagnostica piu' ricca, non un secondo gate: se i log sono assenti o non
+ * attribuibili, il corpo lo dichiara invece di trasformare uno zero in «nessun
+ * tentativo». In particolare, non usare mai il totale globale per descrivere
+ * la sezione: un `no-article` di `svizzera` non spiega `frontaliere`.
+ */
+function sectionDryEvidence(m, section, per) {
+  const commitAttempts = per.articles + per.rejected;
+  const lines = [
+    `- Tentativi registrati nei commit per \`${section}\`: **${commitAttempts}** (pubblicati ${per.articles}, rifiutati ${per.rejected}).`,
+  ];
+
+  const runOutcomes = m.runs?.available === true
+    && typeof m.runs.outcomesBySection?.get === 'function'
+    ? m.runs.outcomesBySection.get(section)
+    : null;
+  if (m.runs?.available !== true) {
+    lines.push('- Esiti delle run per sezione: **non misurati** (log non disponibili o campione non leggibile); questo zero non viene usato come salute.');
+  } else if (!m.runs.outcomesBySection || typeof m.runs.outcomesBySection.get !== 'function') {
+    lines.push('- Esiti delle run per sezione: **non disponibili** nel record letto; il watchdog non li interpreta come zero.');
+  } else if (!runOutcomes || runOutcomes.total === 0) {
+    lines.push(`- Esiti delle run per \`${section}\`: nessun marker attribuibile nella finestra; verificare il dispatch prima di concludere che non ci siano stati tentativi.`);
+  } else {
+    const reasons = Object.entries(runOutcomes.byReason || {})
+      .map(([reason, count]) => `\`${reason}\` ${count}`)
+      .join(', ');
+    lines.push(
+      `- Esiti delle run dichiarati da \`${section}\`: **${runOutcomes.total}** `
+        + `(generated ${runOutcomes.generated}, no-article ${runOutcomes.noArticle}, `
+        + `timeout ${runOutcomes.timeout}, error ${runOutcomes.error}, skipped ${runOutcomes.skipped}`
+        + `${runOutcomes.unknown ? `, unknown ${runOutcomes.unknown}` : ''}`
+        + `; motivi: ${reasons || '—'}).`,
+    );
+  }
+
+  const action = runOutcomes && (runOutcomes.timeout > 0 || runOutcomes.error > 0)
+    ? `Correlare i **${runOutcomes.timeout + runOutcomes.error}** esiti timeout/error di \`${section}\` con il log della run e con \`TARGET_SECTION\`; non classificarli come pausa globale.`
+    : (per.rejected > 0 || (runOutcomes && runOutcomes.noArticle > 0))
+      ? `Confrontare i **${per.rejected}** commit di candidati rifiutati e gli esiti \`no-article\` di \`${section}\` con la selezione/generazione della sezione; il conteggio è la prova da rimisurare al prossimo ciclo.`
+      : (!runOutcomes
+        ? `Verificare cron/dispatch e \`TARGET_SECTION\` di \`${section}\`; la telemetria mancante non autorizza a dichiarare sana la sezione.`
+        : `Verificare cron/dispatch e \`TARGET_SECTION\` di \`${section}\`, poi rimisurare gli esiti per sezione nel ciclo successivo.`);
+  lines.push('', '**Azione misurabile per questa sezione.**', action);
+  return lines;
+}
 
 export const CONDITIONS = [
   {
@@ -1601,6 +1679,8 @@ export const CONDITIONS = [
           `- Commit \`Record rejected topic candidates (${section} — …)\` nell'intervallo: ${per.rejected}`,
           `- Ultimo articolo di \`${other}\`: ${otherPer.lastArticleAt === null ? '—' : new Date(otherPer.lastArticleAt).toISOString()}`,
           '',
+          ...sectionDryEvidence(m, section, per),
+          '',
           '**La congiunzione è il punto.** Se l\'altra sezione produce, la pipeline, i provider LLM e la quota',
           'sono vivi: il guasto è DELLA SEZIONE, non globale. Una pausa globale è un\'altra condizione',
           '(`generation-idle`) e ha un\'altra causa.',
@@ -1920,6 +2000,7 @@ export async function collectRunLogs(repo, { maxRuns, lookbackHours, concurrency
     spanHours: times.length > 1 ? (Math.max(...times) - Math.min(...times)) / 3_600_000 : 0,
     bySection: summary.bySection,
     outcomes: summary.outcomes,
+    outcomesBySection: summary.outcomesBySection,
     oversize: summary.oversize,
     roster: summary.roster,
   };
