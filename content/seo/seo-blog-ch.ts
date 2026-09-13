@@ -82466,6 +82466,201 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-furto-apparecchiature-mediche-roma': {
+    title: 'Azienda svizzera derubata a Roma: ritrovata la strumentazione',
+    description: 'Apparecchiature mediche di un\'azienda svizzera rubate a Roma e ritrovate dalla polizia locale. L\'azienda ha completato la presentazione universitaria.',
+    keywords: 'frontalieri, ticino, svizzera, italia, azienda, derubata, roma, ritrovata',
+    ogTitle: 'Azienda svizzera derubata a Roma: ritrovate le apparecchiature',
+    ogDescription: 'Ritrovata a Roma la strumentazione medica di un\'azienda svizzera rubata da un furgone nel quartiere Aurelio. Intervento decisivo della polizia locale di Roma Capitale.',
+    canonicalPath: '/articoli-svizzera/furto-apparecchiature-mediche-roma/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Azienda svizzera derubata a Roma: ritrovata la strumentazione",
+      "description": "Apparecchiature mediche di un'azienda svizzera rubate a Roma e ritrovate dalla polizia locale. L'azienda ha completato la presentazione universitaria.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/furto-apparecchiature-mediche-roma.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Apparecchiature mediche di un'azienda svizzera ritrovate a Roma"
+      },
+      "datePublished": "2026-09-13T07:48:40+00:00",
+      "dateModified": "2026-09-13T07:48:40+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/furto-apparecchiature-mediche-roma/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-allarme-medici-frontalieri-ticino': {
+    title: 'Ticino, allarme medici: Denti chiede limiti ai frontalieri',
+    description: 'Il presidente dell\'Ordine dei medici ticinesi Franco Denti lancia l\'allarme sulla carenza di personale e chiede una riflessione etica sul reclutamento estero.',
+    keywords: 'frontalieri, ticino, svizzera, italia, allarme, medici, denti, chiede',
+    ogTitle: 'Ticino, allarme medici: Denti chiede limiti ai frontalieri',
+    ogDescription: 'Franco Denti, presidente dell\'Ordine dei medici ticinesi, evidenzia la disparità nel numero di medici tra Ticino e Como e invoca una riflessione etica sul reclutamento di sanitari frontalieri.',
+    canonicalPath: '/articoli-svizzera/allarme-medici-frontalieri-ticino/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Ticino, allarme medici: Denti chiede limiti ai frontalieri",
+      "description": "Il presidente dell'Ordine dei medici ticinesi Franco Denti lancia l'allarme sulla carenza di personale e chiede una riflessione etica sul reclutamento estero.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/allarme-medici-frontalieri-ticino.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Veduta di un centro medico nel Ticino con architettura moderna"
+      },
+      "datePublished": "2026-09-13T08:11:23+00:00",
+      "dateModified": "2026-09-13T08:11:23+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/allarme-medici-frontalieri-ticino/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-settimana-contro-lo-spreco-alimentare-svizzera': {
+    title: 'Spreco alimentare in Svizzera: al via la settimana nazionale',
+    description: 'Al via in Svizzera la settimana nazionale contro lo spreco alimentare: 30 milioni di pasti salvabili e dati su consumi e costi per le famiglie. Dati aggiornati',
+    keywords: 'frontalieri, ticino, svizzera, italia, spreco, alimentare, settimana, nazionale',
+    ogTitle: 'Spreco alimentare in Svizzera: al via la settimana nazionale',
+    ogDescription: 'Dal 12 al 20 settembre oltre 50 organizzazioni in Svizzera sensibilizzano contro lo spreco alimentare: 2,8 milioni di tonnellate perse ogni anno e 600 franchi sprecati pro capite.',
+    canonicalPath: '/articoli-svizzera/settimana-contro-lo-spreco-alimentare-svizzera/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Spreco alimentare in Svizzera: al via la settimana nazionale",
+      "description": "Al via in Svizzera la settimana nazionale contro lo spreco alimentare: 30 milioni di pasti salvabili e dati su consumi e costi per le famiglie. Dati aggiornati",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/settimana-contro-lo-spreco-alimentare-svizzera.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Settimana nazionale contro lo spreco alimentare in Svizzera"
+      },
+      "datePublished": "2026-09-13T08:29:13+00:00",
+      "dateModified": "2026-09-13T08:29:13+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/settimana-contro-lo-spreco-alimentare-svizzera/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-record-imprese-culturali-svizzera': {
+    title: 'Record di imprese culturali in Svizzera nel 2024',
+    description: 'Nel 2024 la Svizzera ha raggiunto 69 441 imprese culturali, +27% sul 2011. Dati statistici ufficiali UST su occupazione e settori. Dati aggiornati 2026',
+    keywords: 'frontalieri, ticino, svizzera, italia, record, imprese, culturali, registrato',
+    ogTitle: 'Record di imprese culturali in Svizzera nel 2024',
+    ogDescription: 'Nuovo record nel 2024 per le imprese culturali in Svizzera con 69 441 unità attive, in crescita del 27% rispetto al 2011. Tutti i dati della statistica dell\'Ufficio federale di statistica.',
+    canonicalPath: '/articoli-svizzera/record-imprese-culturali-svizzera/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Record di imprese culturali in Svizzera nel 2024",
+      "description": "Nel 2024 la Svizzera ha raggiunto 69 441 imprese culturali, +27% sul 2011. Dati statistici ufficiali UST su occupazione e settori. Dati aggiornati 2026",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/record-imprese-culturali-svizzera.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Imprese culturali in Svizzera secondo i dati UST"
+      },
+      "datePublished": "2026-09-13T08:54:06+00:00",
+      "dateModified": "2026-09-13T08:54:06+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/record-imprese-culturali-svizzera/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-forum-economico-ambientale-osce-praga': {
+    title: '32° Forum OSCE a Praga: focus su sicurezza e tecnologia',
+    description: 'Inaugurato a Praga il 32° Forum economico e ambientale dell\'OSCE sotto la guida della Presidenza svizzera del 2026. Scopri tutti i dettagli. Dati aggiornati',
+    keywords: 'frontalieri, ticino, svizzera, italia, forum, osce, praga, focus',
+    ogTitle: '32° Forum economico e ambientale OSCE a Praga',
+    ogDescription: 'Approfondimenti sul 32° Forum economico e ambientale dell\'OSCE a Praga guidato dalla Presidenza svizzera del 2026 con focus su tecnologia e sicurezza.',
+    canonicalPath: '/articoli-svizzera/forum-economico-ambientale-osce-praga/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "32° Forum OSCE a Praga: focus su sicurezza e tecnologia",
+      "description": "Inaugurato a Praga il 32° Forum economico e ambientale dell'OSCE sotto la guida della Presidenza svizzera del 2026. Scopri tutti i dettagli. Dati aggiornati",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/forum-economico-ambientale-osce-praga.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Sala conferenze del Forum economico e ambientale OSCE a Praga"
+      },
+      "datePublished": "2026-09-13T09:23:48+00:00",
+      "dateModified": "2026-09-13T09:23:48+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/forum-economico-ambientale-osce-praga/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

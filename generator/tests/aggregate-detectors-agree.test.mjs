@@ -48,12 +48,34 @@ const RECONCILE_SOURCE = readFileSync(
   new URL('../../scripts/ci/reconcile-followups.mjs', import.meta.url),
   'utf8',
 );
+const PREFLIGHT_SOURCE = readFileSync(
+  new URL('../../scripts/ci/check-issue-already-resolved.mjs', import.meta.url),
+  'utf8',
+);
+const DRAINER_SOURCE = readFileSync(
+  new URL('../../scripts/ci/followup-drainer.mjs', import.meta.url),
+  'utf8',
+);
+const HARVEST_SOURCE = readFileSync(
+  new URL('../../scripts/ci/harvest-agent-lessons.mjs', import.meta.url),
+  'utf8',
+);
 
 test('reconcile delega soglia e keyword al predicato aggregate condiviso (#1176)', () => {
   assert.match(RECONCILE_SOURCE, /isAggregate as sharedIsAggregate/);
   assert.match(RECONCILE_SOURCE, /return sharedIsAggregate\(/);
+  assert.match(RECONCILE_SOURCE, /maskInlineCodeSpans/);
+  assert.doesNotMatch(RECONCILE_SOURCE, /function maskAggregateKeywordsInCode/);
   assert.doesNotMatch(RECONCILE_SOURCE, /const m = t\.match/);
   assert.doesNotMatch(RECONCILE_SOURCE, /if \(\/\\b\(\?:sweep\|batch\|bulk\)/);
+});
+
+test('i consumer aggregate usano la grammatica condivisa, non regex locali', () => {
+  assert.match(PREFLIGHT_SOURCE, /AGGREGATE_ITEM_COUNT_RE/);
+  assert.match(PREFLIGHT_SOURCE, /AGGREGATE_KEYWORD_RE/);
+  assert.match(DRAINER_SOURCE, /AGGREGATE_ITEM_COUNT_RE as AGGREGATE_ITEMS_RE/);
+  assert.doesNotMatch(DRAINER_SOURCE, /const AGGREGATE_ITEMS_RE\s*=/);
+  assert.match(HARVEST_SOURCE, /isAggregateForAnalytics\s+} from ['"]\.\/check-issue-already-resolved\.mjs/);
 });
 
 /**

@@ -6352,6 +6352,21 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.dazi-usa-seco-commercio.title': 'New US Tariffs and SECO Agreements for Swiss Companies',
     'blog.article.dazi-usa-seco-commercio.excerpt': 'The United States introduces additional duties of up to 12.5% on Swiss goods. SECO monitors the impacts and evolution of production chains.',
     'blog.article.dazi-usa-seco-commercio.imageAlt': 'SECO headquarters in Switzerland',
+    'blog.article.furto-apparecchiature-mediche-roma.title': 'Swiss company robbed in Rome: instrumentation found',
+    'blog.article.furto-apparecchiature-mediche-roma.excerpt': 'The medical equipment of a Swiss company stolen on Thursday morning was found in Rome. The equipment was recovered by the local police.',
+    'blog.article.furto-apparecchiature-mediche-roma.imageAlt': 'Medical equipment of a Swiss company found in Rome',
+    'blog.article.allarme-medici-frontalieri-ticino.title': 'Ticino, medical alarm: Teeth ask border crossers for limits',
+    'blog.article.allarme-medici-frontalieri-ticino.excerpt': 'The president of the Order of Doctors of Ticino Franco Denti warns: Ticino has one doctor for every 900 inhabitants, at Como one for every 2,000. Ethical reflection is needed.',
+    'blog.article.allarme-medici-frontalieri-ticino.imageAlt': 'View of a medical center in Ticino with modern architecture',
+    'blog.article.settimana-contro-lo-spreco-alimentare-svizzera.title': 'Food waste in Switzerland: national week kicks off',
+    'blog.article.settimana-contro-lo-spreco-alimentare-svizzera.excerpt': 'A week of initiatives throughout Switzerland to reduce food waste is underway: the recovery of millions of meals is up for grabs.',
+    'blog.article.settimana-contro-lo-spreco-alimentare-svizzera.imageAlt': 'National food waste reduction week in Switzerland',
+    'blog.article.record-imprese-culturali-svizzera.title': 'Record number of cultural enterprises in Switzerland in 2024',
+    'blog.article.record-imprese-culturali-svizzera.excerpt': 'In 2024, Switzerland registered 69,441 active cultural enterprises, an increase of 27% compared to 2011, although employment has decreased.',
+    'blog.article.record-imprese-culturali-svizzera.imageAlt': 'Cultural enterprises in Switzerland according to FSO data',
+    'blog.article.forum-economico-ambientale-osce-praga.title': '32nd OSCE Forum in Prague: focus on security and technology',
+    'blog.article.forum-economico-ambientale-osce-praga.excerpt': 'The 32nd OSCE Economic and Environmental Forum was inaugurated in Prague under the leadership of the 2026 Swiss Presidency.',
+    'blog.article.forum-economico-ambientale-osce-praga.imageAlt': 'Conference hall at the OSCE Economic and Environmental Forum in Prague',
 };
 
 export default blogMetaChEn;

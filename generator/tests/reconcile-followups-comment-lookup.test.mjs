@@ -10,11 +10,23 @@ import { fileURLToPath } from 'node:url';
 import {
   decideReconcileAction,
   isCommentLookupDegraded,
+  isUnclassifiableAggregate,
   parseIssueCommentsResponse,
 } from '../../scripts/ci/reconcile-followups.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const SOURCE = fs.readFileSync(path.join(ROOT, 'scripts/ci/reconcile-followups.mjs'), 'utf8');
+
+test('#1176: unclassifiable aggregate usa il parser importato e non una copia rimossa', () => {
+  assert.equal(
+    isUnclassifiableAggregate('follow-up(#1210): 2 items deferred — corpus', 'testo senza heading di item'),
+    true,
+  );
+  assert.equal(
+    isUnclassifiableAggregate('follow-up(#1210): 2 items deferred — corpus', '### 1. item'),
+    false,
+  );
+});
 
 test('#1078 item 3: hasPriorFlag null non autorizza flag o chiusura', () => {
   assert.equal(decideReconcileAction({

@@ -63,10 +63,11 @@ import {
   hasStableItemIdsForDailyKey,
   hasUnterminatedMarkdownFence,
   isDailyBucketTitle,
+  maskInlineCodeSpans,
   parseFollowupItems,
+  FOLLOWUP_ITEM_ID_SINGLE_RE,
   suggestedActionText,
   updateFollowupItemState,
-  splitFollowupItems,
 } from './followup-resolution-match.mjs';
 import {
   hasEnumeratedItems,
@@ -118,11 +119,14 @@ function classifierVersion() {
   const source = [
     readClassifierSource(import.meta.url, 'scripts/ci/reconcile-followups.mjs'),
     readClassifierSource(new URL('./followup-resolution-match.mjs', import.meta.url), 'scripts/ci/followup-resolution-match.mjs'),
+    readClassifierSource(new URL('./check-issue-already-resolved.mjs', import.meta.url), 'scripts/ci/check-issue-already-resolved.mjs'),
   ];
   return createHash('sha256')
     .update(source[0])
     .update('\0')
     .update(source[1])
+    .update('\0')
+    .update(source[2])
     .digest('hex');
 }
 
@@ -169,32 +173,47 @@ function stripFencedBlocks(text) {
   return visible;
 }
 
-function maskInlineCodeSpans(text) {
-  return String(text || '').replace(/(`+)([^`\n]*?)\1/g, (span) => span.replace(/[^\n]/g, ' '));
-}
-
-function maskAggregateKeywordsInCode(text) {
-  return String(text || '').replace(/(`+)([^`\n]*?)\1/g, (span, fence, code) => (
-    `${fence}${code.replace(/\b(?:sweep|batch|bulk)\b/gi, (keyword) => ' '.repeat(keyword.length))}${fence}`
-  ));
-}
-
 // Keep the historical named export for callers while sharing the implementation.
 export { hasEnumeratedItems };
 
 /**
  * Compatibility adapter for the reconciler's historical export name. The
  * classification itself must come from the same predicate used by the
- * pre-flight/detect-aggregate path; only the reconciler's legacy Markdown
- * masking remains local so inline examples such as `triage-sweep.mjs` cannot
- * become aggregate keywords.
+ * pre-flight/detect-aggregate path. The reconciler keeps only its legacy
+ * fenced-block stripping local; the shared inline-code mask prevents examples
+ * such as `triage-sweep.mjs` from becoming aggregate keywords.
  * @param {string} title
  * @param {string} [body]
  * @returns {boolean}
  */
 export function isAggregateTitle(title = '', body = '') {
   const normalizedTitle = maskInlineCodeSpans(stripFencedBlocks(title));
-  return sharedIsAggregate(normalizedTitle, maskAggregateKeywordsInCode(body));
+  const normalizedBody = maskInlineCodeSpans(stripFencedBlocks(body));
+  // The shared predicate receives the masked body for its count/keyword path;
+  // enumeration must still inspect visible Markdown, because masking an inline
+  // token inside a bold lead would erase the lead before `hasEnumeratedItems`.
+  return sharedIsAggregate(normalizedTitle, normalizedBody)
+    || hasEnumeratedItems(stripFencedBlocks(body));
+}
+
+/**
+ * Resolve one parsed item with its explicit stable acceptance token only when
+ * it is a stable daily item. Legacy numbered items may carry an informative
+ * `Acceptance token`, but their historical Suggested-action token set remains
+ * authoritative so one token cannot hide another prescribed token.
+ */
+function detectParsedItemAlreadyResolved(item, io) {
+  const text = typeof item === 'string' ? item : item?.text || '';
+  const isStableDailyItem = typeof item === 'object'
+    && FOLLOWUP_ITEM_ID_SINGLE_RE.test(String(item.id || ''));
+  const acceptanceToken = isStableDailyItem
+    ? String(item.acceptanceToken || '').trim()
+    : '';
+  return detectAlreadyResolved(
+    text,
+    io,
+    acceptanceToken ? { acceptanceToken } : {},
+  );
 }
 
 const TECHNICAL_LABELS = new Set([UNCLASSIFIABLE_LABEL, LABEL, CLOSED_LABEL]);
@@ -274,7 +293,7 @@ function latestUnclassifiableMarker(comments) {
 }
 
 export function isUnclassifiableAggregate(title = '', body = '') {
-  return isAggregateTitle(title, body) && splitFollowupItems(body).length === 0;
+  return isAggregateTitle(title, body) && parseFollowupItems(body).length === 0;
 }
 
 export function unclassifiableMarker(issue, comments, {
@@ -317,6 +336,21 @@ export function isCurrentUnclassifiable(issue, comments, {
 export function isStrongAutoCloseEvidence(matchedTokens) {
   const uniq = [...new Set((matchedTokens || []).map((t) => String(t)))];
   return uniq.length >= 2;
+}
+
+/**
+ * A stable daily item carries one explicit acceptance token by design.  That
+ * token is already the complete falsifiable contract for the item, so requiring
+ * a second token would make every one-item bucket permanently ineligible for
+ * auto-close.  Multiple tokens remain the bar for legacy free-form items.
+ */
+export function hasStrongDailyAcceptanceEvidence(items, evidence) {
+  const parsedItems = Array.isArray(items) ? items : [];
+  const matched = new Set((Array.isArray(evidence) ? evidence : []).map((entry) => String(entry?.tok || '')));
+  return parsedItems.length > 0 && parsedItems.every((item) => {
+    const token = String(item?.acceptanceToken || '').trim().replace(/^`+|`+$/g, '').trim();
+    return token.length > 0 && matched.has(token);
+  });
 }
 
 /**
@@ -931,10 +965,12 @@ export function dailyBucketCloseGate(
   const unresolvedItems = [];
   const weakItems = [];
   for (const item of items) {
-    const result = detectAlreadyResolved(item.text, io);
+    const result = detectParsedItemAlreadyResolved(item, io);
     evidenceById.set(item.id, result.evidence || []);
     if (item.state !== 'done' || !result.resolved) unresolvedItems.push(item);
-    if (!isStrongAutoCloseEvidence((result.evidence || []).map((entry) => entry.tok))) weakItems.push(item);
+    const itemEvidence = result.evidence || [];
+    const strongStableToken = hasStrongDailyAcceptanceEvidence([item], itemEvidence);
+    if (!strongStableToken && !isStrongAutoCloseEvidence(itemEvidence.map((entry) => entry.tok))) weakItems.push(item);
   }
   if (unresolvedItems.length) {
     return { blocks: true, reason: 'valid-item-unconfirmed', validItems: items, unresolvedItems, evidenceById };
@@ -988,7 +1024,7 @@ export function reconcileDailyItems(
   const evidenceById = new Map();
   for (const item of items) {
     const result = hasFalsifiableAcceptance(item.text)
-      ? detectAlreadyResolved(item.text, io)
+      ? detectParsedItemAlreadyResolved(item, io)
       : { resolved: false, evidence: [] };
     evidenceById.set(item.id, result.evidence || []);
     if (result.resolved && (item.state === 'open' || item.state === 'in-progress')) {
@@ -1030,22 +1066,22 @@ export function reconcileDailyItems(
 export function aggregateCloseGate(body, io, { legacyResolver = null } = {}) {
   if (hasUnterminatedMarkdownFence(body)) return { blocks: true, reason: 'unterminated-markdown-fence' };
   if (bucketState(body) || hasStableItemIds(body)) return dailyBucketCloseGate(body, io);
-  const items = splitFollowupItems(body);
+  const items = parseFollowupItems(body);
   // Corpo senza struttura a item: non abbiamo riclassificato nulla, quindi
   // resta il veto storico. Mai interpretare «non so leggerlo» come «vuoto».
   if (!items.length) return { blocks: true, reason: 'aggregate-unparsed' };
   const legacyResults = new Map();
   if (typeof legacyResolver === 'function') {
-    for (const item of items) legacyResults.set(item, legacyResolver(item));
+    for (const item of items) legacyResults.set(item.text, legacyResolver(item.text));
   }
   // This must remain the shared validity predicate. Target-file metadata can
   // establish provenance for a real acceptance item, but cannot make prose-only
   // text a gating item.
-  const valid = items.filter((item) => hasFalsifiableAcceptance(item));
+  const valid = items.filter((item) => hasFalsifiableAcceptance(item.text));
   if (!valid.length) return { blocks: true, reason: 'no-valid-item' };
-  const allConfirmed = valid.every((s) => {
-    if (detectAlreadyResolved(s, io).resolved) return true;
-    return legacyResults.get(s)?.resolved === true;
+  const allConfirmed = valid.every((item) => {
+    if (detectParsedItemAlreadyResolved(item, io).resolved) return true;
+    return legacyResults.get(item.text)?.resolved === true;
   });
   return allConfirmed ? { blocks: false, reason: null } : { blocks: true, reason: 'valid-item-unconfirmed' };
 }
@@ -1429,7 +1465,11 @@ function main() {
       console.log(`::warning::reconcile-followups: impossibile leggere i commenti di #${iss.number}; flag/chiusura non determinabili, issue lasciata nel ciclo`);
     }
     const legacyStrongEvidence = hasStrongLegacyEvidence(evidence);
-    const strongEvidence = isStrongAutoCloseEvidence(evidence.map((e) => e.tok)) || legacyStrongEvidence;
+    const strongDailyEvidence = daily
+      && hasStrongDailyAcceptanceEvidence(parseFollowupItems(iss.body || ''), evidence);
+    const strongEvidence = strongDailyEvidence
+      || isStrongAutoCloseEvidence(evidence.map((e) => e.tok))
+      || legacyStrongEvidence;
     const action = decideReconcileAction({
       resolved, hasMaybeResolved, hasPriorFlag, isAggregate, blocked, noAutoclose: NO_AUTOCLOSE, strongEvidence,
     });

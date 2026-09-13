@@ -6352,6 +6352,21 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.dazi-usa-seco-commercio.title': 'Neue US-Zölle und SECO-VEREINBARUNGEN für Schweizer Unternehmen',
     'blog.article.dazi-usa-seco-commercio.excerpt': 'Die USA führen zusätzliche Zölle von bis zu 12,5% auf Schweizer Waren ein. Das SECO überwacht die Auswirkungen und die Entwicklung der Produktionsketten.',
     'blog.article.dazi-usa-seco-commercio.imageAlt': 'SECO Hauptsitz in der Schweiz',
+    'blog.article.furto-apparecchiature-mediche-roma.title': 'Schweizer Firma in Rom ausgeraubt: Instrumentierung gefunden',
+    'blog.article.furto-apparecchiature-mediche-roma.excerpt': 'Am Donnerstagmorgen wurden in Rom die medizinischen Geräte eines Schweizer Unternehmens gestohlen. Die Instrumente wurden von der örtlichen Polizei geborgen.',
+    'blog.article.furto-apparecchiature-mediche-roma.imageAlt': 'Medizinische Geräte eines Schweizer Unternehmens in Rom gefunden',
+    'blog.article.allarme-medici-frontalieri-ticino.title': 'Tessin, ärztlicher Alarm: Denti fordert Grenzüberschreitungen von Grenzgängern',
+    'blog.article.allarme-medici-frontalieri-ticino.excerpt': 'Der Präsident der Tessiner Ärztekammer Franco Denti warnt: Das Tessin hat einen Arzt pro 900 Einwohner, Como einen pro 2.000. Es bedarf einer ethischen Reflexion.',
+    'blog.article.allarme-medici-frontalieri-ticino.imageAlt': 'Ansicht eines medizinischen Zentrums im Tessin mit moderner Architektur',
+    'blog.article.settimana-contro-lo-spreco-alimentare-svizzera.title': 'Lebensmittelverschwendung in der Schweiz: Nationale Woche startet',
+    'blog.article.settimana-contro-lo-spreco-alimentare-svizzera.excerpt': 'Eine Woche voller Initiativen in der ganzen Schweiz zur Reduzierung der Lebensmittelverschwendung steht auf dem Programm: Die Verwertung von Millionen von Mahlzeiten steht auf dem Spiel.',
+    'blog.article.settimana-contro-lo-spreco-alimentare-svizzera.imageAlt': 'Nationale Woche gegen Lebensmittelverschwendung in der Schweiz',
+    'blog.article.record-imprese-culturali-svizzera.title': 'Kulturunternehmensrekord in der Schweiz im Jahr 2024',
+    'blog.article.record-imprese-culturali-svizzera.excerpt': 'Im Jahr 2024 verzeichnete die Schweiz 69 441 aktive Kulturunternehmen, ein Plus von 27% gegenüber 2011, obwohl die Beschäftigung zurückging.',
+    'blog.article.record-imprese-culturali-svizzera.imageAlt': 'Kulturunternehmen in der Schweiz gemäss BFS-Daten',
+    'blog.article.forum-economico-ambientale-osce-praga.title': '32. OSZE-Forum in Prag: Fokus auf Sicherheit und Technologie',
+    'blog.article.forum-economico-ambientale-osce-praga.excerpt': 'Das 32. Wirtschafts- und Umweltforum der OSZE unter der Leitung des Schweizer Vorsitzes von 2026 wurde in Prag eröffnet.',
+    'blog.article.forum-economico-ambientale-osce-praga.imageAlt': 'Konferenzsaal des OSCE Wirtschafts- und Umweltforums in Prag',
 };
 
 export default blogMetaChDe;

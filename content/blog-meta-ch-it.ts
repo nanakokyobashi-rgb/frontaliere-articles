@@ -6352,6 +6352,21 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.dazi-usa-seco-commercio.title': 'Nuovi dazi USA e accordi SECO per le aziende svizzere',
     'blog.article.dazi-usa-seco-commercio.excerpt': 'Gli Stati Uniti introducono dazi aggiuntivi fino al 12,5% sui beni svizzeri. La SECO monitora gli impatti e l\'evoluzione delle catene produttive.',
     'blog.article.dazi-usa-seco-commercio.imageAlt': 'Sede della SECO in Svizzera',
+    'blog.article.furto-apparecchiature-mediche-roma.title': 'Azienda svizzera derubata a Roma: ritrovata la strumentazione',
+    'blog.article.furto-apparecchiature-mediche-roma.excerpt': 'Ritrovate a Roma le apparecchiature mediche di un\'azienda svizzera rubate giovedì mattina. La strumentazione è stata recuperata dalla polizia locale.',
+    'blog.article.furto-apparecchiature-mediche-roma.imageAlt': 'Apparecchiature mediche di un\'azienda svizzera ritrovate a Roma',
+    'blog.article.allarme-medici-frontalieri-ticino.title': 'Ticino, allarme medici: Denti chiede limiti ai frontalieri',
+    'blog.article.allarme-medici-frontalieri-ticino.excerpt': 'Il presidente dell\'Ordine dei medici ticinesi Franco Denti avverte: il Ticino ha un medico ogni 900 abitanti, a Como uno ogni 2.000. Serve una riflessione etica.',
+    'blog.article.allarme-medici-frontalieri-ticino.imageAlt': 'Veduta di un centro medico nel Ticino con architettura moderna',
+    'blog.article.settimana-contro-lo-spreco-alimentare-svizzera.title': 'Spreco alimentare in Svizzera: al via la settimana nazionale',
+    'blog.article.settimana-contro-lo-spreco-alimentare-svizzera.excerpt': 'Al via una settimana di iniziative in tutta la Svizzera per ridurre lo spreco alimentare: in palio il recupero di milioni di pasti.',
+    'blog.article.settimana-contro-lo-spreco-alimentare-svizzera.imageAlt': 'Settimana nazionale contro lo spreco alimentare in Svizzera',
+    'blog.article.record-imprese-culturali-svizzera.title': 'Record di imprese culturali in Svizzera nel 2024',
+    'blog.article.record-imprese-culturali-svizzera.excerpt': 'Nel 2024 la Svizzera ha registrato 69 441 imprese culturali attive, segnando un aumento del 27% rispetto al 2011, sebbene gli impieghi siano diminuiti.',
+    'blog.article.record-imprese-culturali-svizzera.imageAlt': 'Imprese culturali in Svizzera secondo i dati UST',
+    'blog.article.forum-economico-ambientale-osce-praga.title': '32° Forum OSCE a Praga: focus su sicurezza e tecnologia',
+    'blog.article.forum-economico-ambientale-osce-praga.excerpt': 'Inaugurato a Praga il 32° Forum economico e ambientale dell\'OSCE sotto la guida della Presidenza svizzera del 2026.',
+    'blog.article.forum-economico-ambientale-osce-praga.imageAlt': 'Sala conferenze del Forum economico e ambientale OSCE a Praga',
 };
 
 export default blogMetaChIt;

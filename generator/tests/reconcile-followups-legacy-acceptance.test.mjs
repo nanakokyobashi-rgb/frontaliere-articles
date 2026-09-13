@@ -11,12 +11,13 @@ import {
   aggregateCloseGate,
   declaredTargetFiles,
   hasStrongLegacyEvidence,
+  hasStrongDailyAcceptanceEvidence,
   legacyAddressEvidence,
   negativeAcceptanceTokens,
   isAggregateTitle,
   stripJavaScriptComments,
 } from '../../scripts/ci/reconcile-followups.mjs';
-import { detectAlreadyResolved } from '../../scripts/ci/followup-resolution-match.mjs';
+import { detectAlreadyResolved, parseFollowupItems } from '../../scripts/ci/followup-resolution-match.mjs';
 
 const TARGET = 'scripts/ci/example.mjs';
 const io = {
@@ -87,6 +88,62 @@ test('isAggregateTitle allinea titolo e corpo ignorando gli span inline', () => 
   assert.equal(isAggregateTitle('follow-up(#10): `triage-sweep.mjs` cleanup', 'single item'), false);
   assert.equal(isAggregateTitle('follow-up(#10): cleanup', 'single item cites `needs-human-sweep.yml`'), false);
   assert.equal(isAggregateTitle('follow-up(#10): cleanup', 'This batch contains multiple items'), true);
+});
+
+test('un acceptance token stabile è evidenza forte per un daily item', () => {
+  const items = [{ acceptanceToken: '`runTask()`' }];
+  assert.equal(hasStrongDailyAcceptanceEvidence(items, [{ tok: 'runTask()' }]), true);
+  assert.equal(hasStrongDailyAcceptanceEvidence(items, [{ tok: 'otherTask()' }]), false);
+});
+
+test('un aggregate legacy non riduce Suggested action al solo Acceptance token', () => {
+  const body = [
+    '### 1. legacy item',
+    `- Target file: ${TARGET}`,
+    '- Suggested action: sostituire `firstGuard()` con `secondGuard()`.',
+    '- Acceptance token: `firstGuard()`',
+  ].join('\n');
+  const result = aggregateCloseGate(body, {
+    fileExists: (path) => path === TARGET,
+    readFile: () => 'firstGuard();',
+  });
+
+  assert.equal(parseFollowupItems(body)[0].id, null);
+  assert.equal(result.blocks, true);
+  assert.equal(result.reason, 'valid-item-unconfirmed');
+});
+
+test('il matcher ignora commenti, stringhe e dichiarazioni di metodi', () => {
+  const body = [
+    '- Target file: scripts/ci/example.mjs',
+    '- Suggested action: verificare `runTask()`.',
+    '- Acceptance token: `runTask()`',
+  ].join('\n');
+  const onlyNonCalls = [
+    '// runTask()',
+    'const prose = "runTask()";',
+    'const template = `runTask()`;',
+    'function runTask() {}',
+    'class Worker { runTask() {} }',
+    'const object = { runTask() {} };',
+  ].join('\n');
+  const io = {
+    fileExists: (path) => path === 'scripts/ci/example.mjs',
+    readFile: () => onlyNonCalls,
+  };
+  const options = { acceptanceToken: 'runTask()' };
+  assert.equal(detectAlreadyResolved(body, io, options).resolved, false);
+  assert.equal(detectAlreadyResolved(body, {
+    ...io,
+    readFile: () => `${onlyNonCalls}\nrunTask(input);`,
+  }, options).resolved, true);
+});
+
+test('isUnclassifiableAggregate mantiene il parser condiviso collegato', async () => {
+  const { isUnclassifiableAggregate } = await import('../../scripts/ci/reconcile-followups.mjs');
+  assert.equal(isUnclassifiableAggregate('follow-up(#10): sweep', 'no item headings'), true);
+  assert.equal(isUnclassifiableAggregate('follow-up(#10): sweep', '### 1. item'), false);
+  assert.equal(parseFollowupItems('### 1. item').length, 1);
 });
 
 test('la provenienza Addresses ricade sulla lista merged quando la search è vuota', () => {
@@ -421,4 +478,28 @@ test('l’aggregata non promuove un item solo-prosa con Target file a item di ga
       : legacyAddressEvidence(item, 1249, io, addressed),
   });
   assert.deepEqual(gate, { blocks: false, reason: null });
+});
+
+test('il daily aggregate passa l acceptance token al matcher strutturale', () => {
+  const body = [
+    'State: sealed',
+    '- Daily key: 2026-09-12',
+    '',
+    '### FU-2026-09-12-001 — Item con chiamata parametrizzata',
+    '- Target repository: owner/repo',
+    '- Target file: scripts/ci/example.mjs',
+    '- Suggested action: verificare `differentGuard()` nel target.',
+    '- Acceptance token: `runTask()`',
+    '- State: done',
+  ].join('\n');
+  const gate = aggregateCloseGate(body, {
+    fileExists: (path) => path === TARGET,
+    readFile: () => 'const result = runTask(input);',
+  });
+
+  assert.equal(gate.blocks, false);
+  assert.equal(gate.reason, null);
+  assert.deepEqual(gate.evidenceById.get('FU-2026-09-12-001'), [
+    { file: TARGET, tok: 'runTask()' },
+  ]);
 });
