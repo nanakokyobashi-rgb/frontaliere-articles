@@ -199,21 +199,44 @@ export function mostSpecificToken(tokens) {
   return [...tokens].sort((a, b) => score(b) - score(a))[0];
 }
 
-// A path is a locator only when it has a repository separator and a short file
-// extension. The surrounding boundary keeps prose punctuation out of the match,
-// while the optional line suffix remains metadata rather than part of the path.
-const ACTION_FILE_LOCATOR_RE = /(?:^|[\s`'":=(\[{])((?:[\w.-]+\/)+[\w.-]+\.[a-z]{2,5})(?::L?\d+(?:-L?\d+)?)?(?=$|[\s`'":,;.)\]}])/gi;
-const QUOTED_FILE_LOCATOR_RE = /`((?:[\w.-]+\/)+[\w.-]+\.[a-z]{2,5})(?::L?\d+(?:-L?\d+)?)?`/gi;
+const BACKTICKED_FILE_REFERENCE_RE = /`([\w./-]+\.[a-z]{2,5})(?::L?\d+(?:-L?\d+)?)?`/gi;
+const FILE_REFERENCE_RE = /(?:^|[\s(`'":=])([\w./-]+\/[\w./-]+\.[a-z]{2,5})(?::L?\d+(?:-L?\d+)?)?(?=$|[\s`'":,;.)\]}])/gim;
+
+function addExistingFileReference(out, candidate, fileExists) {
+  const path = String(candidate || '');
+  if (path.includes('/') && fileExists(path)) out.add(path);
+}
 
 /**
- * File locators in the body that exist according to `fileExists(path)`.
- * Live `Suggested action` regions accept both backticked and plain paths.
- * Legacy bodies may put a backticked source locator in a Markdown blockquote
- * (often under `Original text`), so those citations remain usable as locators;
- * the protected text is still excluded from `suggestedActionText()` and can
- * never widen the acceptance-token scope. `Target file:` remains live metadata.
- * Strips a trailing `:Lnnn` / `:nnn` line suffix. Only paths containing `/` are
- * considered (avoids bare `package.json`-style ambiguity flagging wrong files).
+ * Legacy follow-ups put the source location inside a quoted `Original text`
+ * block instead of a live `Target file` field. The quoted code remains excluded
+ * from token extraction; only an explicitly backticked path is recovered as a
+ * locator, and the acceptance token must still come from `Suggested action`.
+ */
+function legacyOriginalText(body) {
+  const lines = String(body || '').split('\n');
+  const out = [];
+  let inOriginalText = false;
+  for (const line of lines) {
+    if (/^\s*-\s+Original text\s*:/i.test(line)) {
+      inOriginalText = true;
+      continue;
+    }
+    if (inOriginalText && !/^\s*>/.test(line) && isOriginalTextBoundary(line)) {
+      inOriginalText = false;
+      continue;
+    }
+    if (inOriginalText) out.push(line);
+  }
+  return out.join('\n');
+}
+
+/**
+ * File paths in the body that exist according to `fileExists(path)`. Current
+ * bodies use explicit `Suggested action` or `Target file` metadata; legacy
+ * bodies may cite the source path in quoted `Original text`, while newer
+ * suggested actions sometimes write a path as ordinary prose. Tokens remain
+ * restricted to `Suggested action`.
  *
  * @param {string} body
  * @param {(path: string) => boolean} fileExists
@@ -221,25 +244,22 @@ const QUOTED_FILE_LOCATOR_RE = /`((?:[\w.-]+\/)+[\w.-]+\.[a-z]{2,5})(?::L?\d+(?:
  */
 export function citedFiles(body, fileExists) {
   const out = new Set();
-  const addIfExisting = (path) => {
-    if (path.includes('/') && fileExists(path)) out.add(path);
-  };
   const actionText = explicitSuggestedActionText(body);
   const unprotected = markdownRecords(body)
     .filter((record) => !record.protected)
     .map((record) => record.line)
     .join('\n');
-  for (const m of actionText.matchAll(ACTION_FILE_LOCATOR_RE)) {
-    addIfExisting(m[1]);
+  for (const m of actionText.matchAll(BACKTICKED_FILE_REFERENCE_RE)) {
+    addExistingFileReference(out, m[1], fileExists);
   }
-  for (const record of markdownRecords(body)) {
-    if (!/^\s*>/.test(record.line)) continue;
-    for (const m of record.line.matchAll(QUOTED_FILE_LOCATOR_RE)) {
-      addIfExisting(m[1]);
-    }
+  for (const m of actionText.matchAll(FILE_REFERENCE_RE)) {
+    addExistingFileReference(out, m[1], fileExists);
+  }
+  for (const m of legacyOriginalText(body).matchAll(BACKTICKED_FILE_REFERENCE_RE)) {
+    addExistingFileReference(out, m[1], fileExists);
   }
   for (const m of unprotected.matchAll(/(?:^|\n)\s*(?:[-*]\s*)?Target file:\s*`?([\w./-]+\.[a-z]{2,5})(?::L?\d+(?:-L?\d+)?)?`?\s*$/gim)) {
-    addIfExisting(m[1]);
+    addExistingFileReference(out, m[1], fileExists);
   }
   return [...out];
 }

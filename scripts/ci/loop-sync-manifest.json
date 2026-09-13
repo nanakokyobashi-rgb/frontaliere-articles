@@ -312,8 +312,8 @@
       "path": "scripts/ci/followup-resolution-match.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "86098adda6c90970",
-        "corpus": "86098adda6c90970",
+        "site": "2fc97767d9b96296",
+        "corpus": "2fc97767d9b96296",
         "alignedAt": "2026-09-13"
       }
     },
