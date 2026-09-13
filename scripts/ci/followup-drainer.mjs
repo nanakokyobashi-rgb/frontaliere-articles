@@ -81,6 +81,7 @@ import {
   followupItemMarkers,
   parseFollowupItems,
   selectFirstOpenItem,
+  AGGREGATE_ITEM_COUNT_RE as AGGREGATE_ITEMS_RE,
 } from './followup-resolution-match.mjs';
 
 // Il sito usa int-from-env.mjs; nel corpus l'helper equivalente riceve il
@@ -278,11 +279,11 @@ const ORPHAN_MIN_AGE_MIN = 30;
 const SETTLE_MIN = intFromEnv('FOLLOWUP_SETTLE_MIN', 3);
 
 // Quante run `issue-fix` possono essere vive insieme. Era 1 hard-coded — un
-// mutex, non un cap — poi alzato a 3 (2026-09-04). Il default 5 è il massimo
-// misurato come stabile dalla flotta locale senza avvicinarsi al limite disco:
-// 5 job Codex concorrenti hanno retto senza conflitti/ENOSPC, mentre a 7 il
-// disco è sceso da 25 GiB a 3,4 GiB in circa un'ora (14 worktree). Il pool
-// remoto resta bounded e usa la stessa quota Codex-primary. Override:
+// mutex, non un cap — poi alzato a 3 (2026-09-04). Il default locale resta 5:
+// è il massimo misurato come stabile dalla flotta locale. Il workflow remoto
+// configura esplicitamente 7 sui runner GitHub Actions; quel valore resta
+// bounded e protetto da claim/quota Codex, senza cambiare il fallback locale.
+// Override:
 // `FOLLOWUP_MAX_INFLIGHT_FIX=N` conserva il kill-switch e la telemetria — la
 // riga `in-flight=N/M` nel log di ogni run.
 //
@@ -1046,8 +1047,6 @@ export function productionProofDecision({
  * `detectWideScopeAggregate`, così le due letture non possono divergere.
  * `items?` opzionale: il titolo è LLM-generated e per N=1 dice «1 item».
  */
-export const AGGREGATE_ITEMS_RE = /\b(\d+)\s+items?\s+(?:deferred|deferit[oi])\b/i;
-
 /**
  * Vero se il body dell'issue è troppo corto/malformato per consentire al fixer
  * di operare senza bruciare turni in cerca di contesto inesistente. Pura → testabile.

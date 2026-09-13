@@ -50,6 +50,41 @@ test('plain paths in Suggested action are resolved as locators', () => {
   assert.equal(result.resolved, true);
 });
 
+test('acceptance token: solo una chiamata eseguibile conta, non commenti stringhe regex o metodi', () => {
+  const target = 'scripts/example.mjs';
+  const body = [
+    '### 1. Daily item',
+    `- Target file: ${target}`,
+    '- Suggested action: verificare `firstGuard()` nel target.',
+    '- Acceptance token: `firstGuard()`',
+  ].join('\n');
+  const resolve = (source) => detectAlreadyResolved(body, {
+    fileExists: (path) => path === target,
+    readFile: () => source,
+  }, { acceptanceToken: 'firstGuard()' });
+
+  for (const source of [
+    '// firstGuard()\nconst value = 1;',
+    'const text = "firstGuard()";',
+    'const text = `firstGuard()`;',
+    'const pattern = /firstGuard\\(\\)/;',
+    'return /* comment */ /firstGuard\\(\\)/;',
+    'if (ready) /firstGuard\\(\\)/;',
+    'const value = value / /firstGuard\\(\\)/;',
+    'if (ready) { return false; } /firstGuard\\(\\)/.test(value);',
+    'const value = {} / /firstGuard\\(\\)/;',
+    'function firstGuard() {}',
+    'function* firstGuard() {}',
+    'interface Handler { firstGuard(): void; }',
+    'type Handler = { firstGuard(); };',
+    'class Handler { firstGuard() {} }',
+    'const handler = { async firstGuard() {} };',
+  ]) {
+    assert.equal(resolve(source).resolved, false, `falso positivo: ${source}`);
+  }
+  assert.equal(resolve('const value = firstGuard(input);').resolved, true);
+});
+
 test('Italian "Chiude anche la issue #N" is recognized — the exact PR #418 shape', () => {
   const body = 'Chiude anche la issue #402, ferma con `agent:fix` e 6 run del fixer a vuoto.';
   assert.deepEqual(closedIssueRefs(body), [402]);

@@ -204,6 +204,20 @@ describe('content-gates-main: niente falso verde', () => {
     assert.ok(v.perRoot.every((r) => r.count > 0));
   });
 
+  test('una directory col nome di un REQUIRED_FILES non passa come registro', () => {
+    const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'content-gates-directory-'));
+    try {
+      fs.mkdirSync(path.join(dir, 'content/blog-articles-data.ts'), { recursive: true });
+      const v = preflight(dir);
+      assert.ok(
+        v.violations.some((m) => m.startsWith('content/blog-articles-data.ts:')),
+        'una directory con il nome del registro è stata accettata da existsSync',
+      );
+    } finally {
+      fs.rmSync(dir, { recursive: true, force: true });
+    }
+  });
+
   test('ogni file richiesto è dichiarato con un path sotto content/', () => {
     assert.ok(REQUIRED_FILES.length >= 12);
     assert.deepEqual(REQUIRED_FILES.filter((f) => !f.startsWith('content/')), []);

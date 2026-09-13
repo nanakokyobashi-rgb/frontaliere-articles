@@ -78,10 +78,11 @@ export function isDailyBucketTitle(title = '') {
   return !!dailyBucketInfo(title);
 }
 
-// Aggregate grammar shared with the identical pre-flight and lessons copies.
-// This adapted module keeps its corpus-specific locator/acceptance behavior,
-// but exposes the same pure contract so a transported identical caller cannot
-// fail at module linking time.
+// Aggregate grammar is shared by the pre-flight gate, the lessons harvester,
+// and the adapted reconciler. Keep the vocabulary/count regexes and inline
+// Markdown masking in this pure module so those callers cannot drift. The
+// corpus-specific locator/acceptance behavior remains in this module while
+// identical callers consume the same pure contract.
 export const AGGREGATE_ITEM_COUNT_RE = /\b(\d+)\s+items?\s+(?:deferred|deferit[oi])\b/i;
 export const AGGREGATE_KEYWORD_RE = /\b(?:sweep|batch|bulk)\b/i;
 
@@ -171,7 +172,7 @@ export function isDistinctiveToken(s) {
   // citation metadata, not prescribed code.  The file is already extracted by
   // `citedFiles()`; counting its `:Lnnn` suffix as a second token makes a
   // resolved item look unresolved whenever the issue includes a line anchor.
-  if (/^[\w./-]+\.[a-z0-9]{2,5}:L?\d+$/i.test(s) && s.includes('/')) return false;
+  if (/^[\w./-]+\.[a-z0-9]{2,5}:L?\d+(?:-L?\d+)?$/i.test(s) && s.includes('/')) return false;
   if (/^[\w./-]+$/.test(s) && /\.[a-z]{2,4}$/i.test(s)) return false; // bare file path
   if (/\s/.test(s.trim()) && !/[(){}'"`:=<>]|\.\w/.test(s)) return false; // prose phrase
   // ONLY code punctuation qualifies. A bare identifier (even a familiar field/helper name
@@ -201,7 +202,7 @@ export function mostSpecificToken(tokens) {
 }
 
 const BACKTICKED_FILE_REFERENCE_RE = /`([\w./-]+\.[a-z]{2,5})(?::L?\d+(?:-L?\d+)?)?`/gi;
-const FILE_REFERENCE_RE = /(?:^|[\s(`'":=])([\w./-]+\/[\w./-]+\.[a-z]{2,5})(?::L?\d+(?:-L?\d+)?)?(?=$|[\s`'":,;)])/gim;
+const FILE_REFERENCE_RE = /(?:^|[\s(`'":=])([\w./-]+\/[\w./-]+\.[a-z]{2,5})(?::L?\d+(?:-L?\d+)?)?(?=$|[\s`'":,;.)\]}])/gim;
 
 function addExistingFileReference(out, candidate, fileExists) {
   const path = String(candidate || '');
@@ -234,11 +235,10 @@ function legacyOriginalText(body) {
 
 /**
  * File paths in the body that exist according to `fileExists(path)`. Current
- * bodies use backticks or `Target file`; legacy bodies may cite the source path
- * in quoted `Original text`, while newer suggested actions sometimes write a
- * path as ordinary prose. Tokens remain restricted to `Suggested action`.
- * Strips a trailing `:Lnnn` / `:nnn` line or range suffix. Only paths containing
- * `/` are considered (avoids bare `package.json`-style ambiguity).
+ * bodies use explicit `Suggested action` or `Target file` metadata; legacy
+ * bodies may cite the source path in quoted `Original text`, while newer
+ * suggested actions sometimes write a path as ordinary prose. Tokens remain
+ * restricted to `Suggested action`.
  *
  * @param {string} body
  * @param {(path: string) => boolean} fileExists
@@ -246,20 +246,21 @@ function legacyOriginalText(body) {
  */
 export function citedFiles(body, fileExists) {
   const out = new Set();
+  const actionText = explicitSuggestedActionText(body);
   const unprotected = markdownRecords(body)
     .filter((record) => !record.protected)
     .map((record) => record.line)
     .join('\n');
-  for (const m of unprotected.matchAll(BACKTICKED_FILE_REFERENCE_RE)) {
+  for (const m of actionText.matchAll(BACKTICKED_FILE_REFERENCE_RE)) {
     addExistingFileReference(out, m[1], fileExists);
   }
-  for (const m of suggestedActionText(body).matchAll(FILE_REFERENCE_RE)) {
+  for (const m of actionText.matchAll(FILE_REFERENCE_RE)) {
     addExistingFileReference(out, m[1], fileExists);
   }
   for (const m of legacyOriginalText(body).matchAll(BACKTICKED_FILE_REFERENCE_RE)) {
     addExistingFileReference(out, m[1], fileExists);
   }
-  for (const m of unprotected.matchAll(/(?:^|\n)\s*(?:[-*]\s*)?Target file:\s*([\w./-]+\.[a-z]{2,5})(?::L?\d+(?:-L?\d+)?)?\s*$/gim)) {
+  for (const m of unprotected.matchAll(/(?:^|\n)\s*(?:[-*]\s*)?Target file:\s*`?([\w./-]+\.[a-z]{2,5})(?::L?\d+(?:-L?\d+)?)?`?\s*$/gim)) {
     addExistingFileReference(out, m[1], fileExists);
   }
   return [...out];
@@ -317,6 +318,16 @@ function acceptanceScopeText(body) {
  */
 export function suggestedActionText(body) {
   const scoped = acceptanceScopeText(body);
+  const regions = suggestedActionRegions(body, scoped);
+  return regions.length ? regions.join('\n') : scoped;
+}
+
+/** Return only explicit Suggested action regions; unlike `suggestedActionText`, never falls back. */
+function explicitSuggestedActionText(body) {
+  return suggestedActionRegions(body).join('\n');
+}
+
+function suggestedActionRegions(body, scoped = acceptanceScopeText(body)) {
   const lines = scoped.split('\n');
   const regions = [];
   for (let i = 0; i < lines.length; i++) {
@@ -329,7 +340,7 @@ export function suggestedActionText(body) {
       regions.push(buf.join('\n'));
     }
   }
-  return regions.length ? regions.join('\n') : scoped;
+  return regions;
 }
 
 /** Backticked spans inside the suggested-action region → distinctive tokens (capped, deduped). */
@@ -340,6 +351,218 @@ export function citedTokens(body) {
     if (isDistinctiveToken(t)) out.add(t);
   }
   return [...out].slice(0, 8);
+}
+
+/** Normalize the explicit acceptance token carried by a stable daily item. */
+export function normalizeAcceptanceToken(value) {
+  return String(value || '').trim().replace(/^`+|`+$/g, '').trim();
+}
+
+function escapedRegExp(value) {
+  return String(value).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+/**
+ * Mask JavaScript text that cannot contain an executable call.  The matcher is
+ * intentionally fail-closed: comments, quoted strings, template text and regex
+ * literals are replaced by spaces while line breaks are retained for diagnostics
+ * and for the surrounding token boundaries.  Template interpolations are masked
+ * as one string as well; that may miss a real call, but can never turn prose into
+ * completion evidence.
+ */
+function maskNonExecutableJavaScript(source) {
+  const text = String(source || '');
+  const out = text.split('');
+  let state = 'code';
+  let quote = '';
+  let escaped = false;
+  let regexClass = false;
+
+  const blank = (index) => {
+    if (text[index] !== '\n' && text[index] !== '\r') out[index] = ' ';
+  };
+  const previousSignificant = (index) => {
+    for (let i = index - 1; i >= 0; i -= 1) {
+      if (!/\s/.test(out[i])) return out[i];
+    }
+    return '';
+  };
+  const nextSignificant = (index) => {
+    for (let i = index + 1; i < text.length; i += 1) {
+      if (!/\s/.test(text[i])) return text[i];
+    }
+    return '';
+  };
+  const matchingParenStart = (closeIndex) => {
+    let depth = 0;
+    for (let i = closeIndex; i >= 0; i -= 1) {
+      if (out[i] === ')') depth += 1;
+      else if (out[i] === '(') {
+        depth -= 1;
+        if (depth === 0) return i;
+      }
+    }
+    return -1;
+  };
+  const regexCanStart = (index) => {
+    const previous = previousSignificant(index);
+    if (!previous) return true;
+    // A regex may follow a division operator: `value / /needle/`. The first
+    // slash is division (the previous token is an operand), while the second
+    // slash starts the literal. Treat `/` as an operator here so the literal
+    // is masked instead of exposing its text as executable code.
+    if (/[([{:;,=!?&|+*%^~<>\-/]/.test(previous)) return true;
+    if (previous === '}') {
+      // A closing brace can end either a block or an object expression. At
+      // this boundary we fail closed for a possible regex literal, except for
+      // the unambiguous `} / /regex/` division shape: leave its first slash in
+      // code so the second slash is recognized by the operator rule above.
+      return nextSignificant(index) !== '/';
+    }
+    if (previous === ')') {
+      const openIndex = matchingParenStart(index - 1);
+      const control = out.slice(0, openIndex).join('').match(/([A-Za-z_$][\w$]*)\s*$/u)?.[1];
+      if (/^(?:catch|for|if|switch|while|with)$/u.test(control || '')) return true;
+    }
+    const prefix = out.slice(0, index).join('').match(/([A-Za-z_$][\w$]*)\s*$/u)?.[1];
+    return /^(?:case|delete|do|else|in|of|return|throw|typeof|void|yield|await)$/u.test(prefix || '');
+  };
+
+  for (let i = 0; i < text.length; i += 1) {
+    const ch = text[i];
+    const next = text[i + 1];
+
+    if (state === 'line-comment') {
+      blank(i);
+      if (ch === '\n' || ch === '\r') state = 'code';
+      continue;
+    }
+    if (state === 'block-comment') {
+      blank(i);
+      if (ch === '*' && next === '/') {
+        blank(i + 1);
+        i += 1;
+        state = 'code';
+      }
+      continue;
+    }
+    if (state === 'string' || state === 'template' || state === 'regex') {
+      blank(i);
+      if (escaped) {
+        escaped = false;
+        continue;
+      }
+      if (ch === '\\') {
+        escaped = true;
+        continue;
+      }
+      if (state === 'regex') {
+        if (ch === '[') regexClass = true;
+        else if (ch === ']' && regexClass) regexClass = false;
+        else if (ch === '/' && !regexClass) {
+          state = 'code';
+          while (/[A-Za-z]/u.test(text[i + 1] || '')) {
+            i += 1;
+            blank(i);
+          }
+        }
+      } else if (ch === quote) {
+        state = 'code';
+        quote = '';
+      }
+      continue;
+    }
+
+    if (ch === '/' && next === '/') {
+      blank(i);
+      blank(i + 1);
+      i += 1;
+      state = 'line-comment';
+    } else if (ch === '/' && next === '*') {
+      blank(i);
+      blank(i + 1);
+      i += 1;
+      state = 'block-comment';
+    } else if (ch === '/' && regexCanStart(i)) {
+      blank(i);
+      state = 'regex';
+      regexClass = false;
+      escaped = false;
+    } else if (ch === "'" || ch === '"' || ch === '`') {
+      blank(i);
+      state = ch === '`' ? 'template' : 'string';
+      quote = ch;
+      escaped = false;
+    }
+  }
+  return out.join('');
+}
+
+function matchingParenEnd(source, openIndex) {
+  let depth = 0;
+  for (let i = openIndex; i < source.length; i += 1) {
+    if (source[i] === '(') depth += 1;
+    else if (source[i] === ')') {
+      depth -= 1;
+      if (depth === 0) return i;
+    }
+  }
+  return -1;
+}
+
+const TYPE_DECLARATION_BLOCK_RE = /\b(?:interface\s+[A-Za-z_$][\w$]*(?:\s+extends\s+[^{}]+)?|type\s+[A-Za-z_$][\w$]*(?:\s*<[^{}]*>)?\s*=\s*)\{/gu;
+
+function isInsideTypeDeclaration(source, index) {
+  for (const match of source.matchAll(TYPE_DECLARATION_BLOCK_RE)) {
+    const openIndex = (match.index ?? 0) + match[0].lastIndexOf('{');
+    let depth = 0;
+    for (let i = openIndex; i < index; i += 1) {
+      if (source[i] === '{') depth += 1;
+      else if (source[i] === '}') depth -= 1;
+    }
+    if (depth > 0) return true;
+  }
+  return false;
+}
+
+function isDeclarationCall(source, nameStart, closeIndex) {
+  const beforeName = source.slice(0, nameStart);
+  if (/\bfunction\s*\*?\s*$/u.test(beforeName)) return true;
+
+  // A class/object method has the same `name(...)` prefix as a call, but its
+  // parameter list is followed by the method body.  Include the common typed
+  // return annotation so a TS-shaped fixture cannot bypass this guard.
+  const afterCall = source.slice(closeIndex + 1);
+  // TypeScript interface/type-literal methods use a return annotation followed
+  // by `;` (or the end of the declaration). A valid invocation cannot have a
+  // colon immediately after its closing parenthesis, so fail closed here.
+  if (/^\s*:/u.test(afterCall)) return true;
+  // Some TypeScript method signatures omit the return annotation (`foo();`).
+  // Restrict that extra veto to an actual interface/type-literal block so a
+  // normal call statement in executable code remains valid evidence.
+  if (/^\s*;/u.test(afterCall) && isInsideTypeDeclaration(source, nameStart)) return true;
+  return /^\s*(?::\s*[^;{}=]*?)?\s*\{/u.test(afterCall);
+}
+
+/**
+ * Match a prescribed zero-argument call token against a real invocation with
+ * arguments. The acceptance field names the callable (`foo()`), while the
+ * implementation may necessarily pass data (`foo(value)`). A declaration is
+ * not an invocation and must not satisfy this normalization.
+ */
+function codeTokenMatches(content, token) {
+  const emptyCall = /^([A-Za-z_$][\w$]*(?:\.[A-Za-z_$][\w$]*)*)\(\)$/u.exec(token);
+  const executable = maskNonExecutableJavaScript(content);
+  if (!emptyCall) return executable.includes(token);
+  const callRe = new RegExp(`(^|[^A-Za-z0-9_$])${escapedRegExp(emptyCall[1])}\\s*\\(`, 'gu');
+  for (const match of executable.matchAll(callRe)) {
+    const callStart = (match.index ?? 0) + match[1].length;
+    const openIndex = (match.index ?? 0) + match[0].length - 1;
+    const closeIndex = matchingParenEnd(executable, openIndex);
+    if (closeIndex < 0 || isDeclarationCall(executable, callStart, closeIndex)) continue;
+    return true;
+  }
+  return false;
 }
 
 /**
@@ -874,7 +1097,7 @@ export function dailyKeyFromBucketBody(body) {
   if (values.length) return null;
 
   // The prompt has historically required the stable date in every item ID but
-  // did not always print a separate `Daily key` header. Recover that form only
+  // did not always print a separate `Daily key` header.  Recover that form only
   // when every parsed item carries one valid, identical date; mixed/malformed
   // IDs remain fail-closed.
   const itemKeys = parseFollowupItems(source).map((item) => followupItemDailyKey(item.id));
@@ -898,7 +1121,7 @@ export function dailyBucketTargetRepository(body) {
   if (values.length) return null;
 
   // A bucket without a header is still safe to inspect when every item declares
-  // exactly one same target repository. Never infer an owner from only a subset
+  // exactly one same target repository.  Never infer an owner from only a subset
   // of items: that would let a mixed bucket cross the site/corpus boundary.
   const itemRepositories = parseFollowupItems(source).map((item) => {
     const declared = fieldValuesOutsideMarkdownProtection(item.text, 'Target repository');
@@ -1030,9 +1253,9 @@ export function followupItemMarkers(text) {
 // "issue") Italian prose puts between the verb and the `#N`, bounded to that
 // fixed word list so a real sentence boundary still breaks the run exactly
 // like the English case above.
-const IT_BRIDGE = '(?:anche\\s+)?(?:l[ae]\\s+)?(?:issue\\s+)?';
+const IT_BRIDGE = '(?:anche[ \\t]+)?(?:l[ae][ \\t]+)?(?:issue[ \\t]+)?';
 const CLOSE_KW_LIST = new RegExp(
-  `\\b(?:close[sd]?|fix(?:e[sd])?|resolve[sd]?|supersede[sd]?|chiud[eo]|risolv[eo]|super[ae])\\b\\s*:?\\s*${IT_BRIDGE}((?:#\\d+(?:[\\s,&]+(?:and\\s+)?)?)+)`,
+  `\\b(?:close[sd]?|fix(?:e[sd])?|resolve[sd]?|supersede[sd]?|chiud[eo]|risolv[eo]|super[ae])\\b[ \\t]*:?[ \\t]*${IT_BRIDGE}((?:#\\d+(?:[ \\t,&]+(?:and[ \\t]+)?)?)+)`,
   'ig',
 );
 
@@ -1083,8 +1306,9 @@ export function closingMergedPr(issueNumber, mergedPrs) {
  * worse than a wasted run):
  *   1. There is at least one distinctive cited token (code-punctuation-carrying — a bare
  *      field name like `previousSlugs` no longer qualifies); AND
- *   2. EVERY distinctive token from the prescribed `Suggested action` is present verbatim
- *      in a cited file. Requiring ALL of them — not merely *some* token, and not just the
+ *   2. EVERY token in the selected prescribed set is present in a cited file. Stable daily
+ *      items use their explicit `Acceptance token`; legacy bodies use every distinctive
+ *      token from `Suggested action`. Requiring ALL of them — not merely *some* token, and not just the
  *      heuristic "most-specific" one — means a single coincidental field-name hit can
  *      never alone flip `resolved` to true; the whole prescribed shape must be on main.
  *      (This is a strict superset of "most-specific token present", and unlike that test
@@ -1101,10 +1325,12 @@ export function closingMergedPr(issueNumber, mergedPrs) {
  * @param {object} io
  * @param {(path: string) => boolean} io.fileExists  true if the path resolves
  * @param {(path: string) => (string|null)} io.readFile  current file content, or null
+ * @param {{acceptanceToken?: string}} [options] explicit stable-item acceptance token;
+ *        when present it replaces the legacy Suggested-action token set
  * @returns {{ resolved: boolean, evidence: Array<{file:string, tok:string}>,
  *             files: string[], tokens: string[] }}
  */
-export function detectAlreadyResolved(body, io) {
+export function detectAlreadyResolved(body, io, options = {}) {
   const empty = { resolved: false, evidence: [], files: [], tokens: [] };
   try {
     const fileExists = io && typeof io.fileExists === 'function' ? io.fileExists : () => false;
@@ -1115,7 +1341,10 @@ export function detectAlreadyResolved(body, io) {
     // prescribed token. Keep it out of the token-resolution path entirely, while
     // preserving the free-form issue fallback for bodies with no sheet at all.
     const sheetOnly = COMMAND_CONDITION.holds(bodyText) && !ACCEPTANCE_CONDITION.holds(bodyText);
-    const tokens = sheetOnly ? [] : citedTokens(bodyText);
+    const acceptanceToken = normalizeAcceptanceToken(options?.acceptanceToken);
+    const tokens = acceptanceToken
+      ? (isDistinctiveToken(acceptanceToken) ? [acceptanceToken] : [])
+      : (sheetOnly ? [] : citedTokens(bodyText));
     const evidence = [];
     if (files.length && tokens.length) {
       const cache = new Map();
@@ -1124,7 +1353,10 @@ export function detectAlreadyResolved(body, io) {
         const content = cache.get(file);
         if (typeof content !== 'string') continue;
         for (const tok of tokens) {
-          if (content.includes(tok)) evidence.push({ file, tok });
+          const matched = acceptanceToken
+            ? codeTokenMatches(content, tok)
+            : content.includes(tok);
+          if (matched) evidence.push({ file, tok });
         }
       }
     }

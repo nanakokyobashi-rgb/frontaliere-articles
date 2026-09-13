@@ -105,7 +105,7 @@ test('#8365: il lease riserva il floor issue-fix e nega il consumer concorrente'
   );
 });
 
-test('#1360: il lease ammette cinque fixer Codex-primary ma non il sesto', () => {
+test('#1360: il lease ammette sette fixer Codex-primary ma non l’ottavo', () => {
   const nowSec = 1_800_000_000;
   const lease = (number) => ({
     token: `quota-drainer-${number}`,
@@ -116,14 +116,14 @@ test('#1360: il lease ammette cinque fixer Codex-primary ma non il sesto', () =>
     issuedAt: nowSec - 10,
     expiresAt: nowSec + 600,
   });
-  const pool = [1, 2, 3, 4, 5].map(lease);
+  const pool = [1, 2, 3, 4, 5, 6, 7].map(lease);
 
-  for (let occupied = 0; occupied < 5; occupied += 1) {
+  for (let occupied = 0; occupied < 7; occupied += 1) {
     assert.equal(
       quotaLeaseDecision({
         action: 'reserve', role: 'issue-fix', targetType: 'issue', target: '99',
         activeLeases: pool.slice(0, occupied), queueDepth: 10, nowSec,
-        maxIssueFixLeases: 5,
+        maxIssueFixLeases: 7,
       }).allowed,
       true,
       `il fixer ${occupied + 1} deve entrare nel pool`,
@@ -132,14 +132,14 @@ test('#1360: il lease ammette cinque fixer Codex-primary ma non il sesto', () =>
   assert.deepEqual(
     quotaLeaseDecision({
       action: 'reserve', role: 'issue-fix', targetType: 'issue', target: '99',
-      activeLeases: pool, queueDepth: 10, nowSec, maxIssueFixLeases: 5,
+      activeLeases: pool, queueDepth: 10, nowSec, maxIssueFixLeases: 7,
     }),
     { allowed: false, error: false, reason: 'issue-fix-pool-full' },
   );
   assert.equal(
     quotaLeaseDecision({
       action: 'consume', role: 'issue-fix', targetType: 'issue', target: '3',
-      activeLeases: pool, queueDepth: 10, nowSec, maxIssueFixLeases: 5,
+      activeLeases: pool, queueDepth: 10, nowSec, maxIssueFixLeases: 7,
     }).allowed,
     true,
     'il fixer rilanciato deve adottare la reservation anche con gli altri slot vivi',
@@ -147,7 +147,7 @@ test('#1360: il lease ammette cinque fixer Codex-primary ma non il sesto', () =>
   assert.equal(
     quotaLeaseDecision({
       action: 'acquire', role: 'review', targetType: 'pr', target: '99',
-      activeLeases: pool, queueDepth: 0, nowSec, maxIssueFixLeases: 5,
+      activeLeases: pool, queueDepth: 0, nowSec, maxIssueFixLeases: 7,
     }).reason,
     'issue-fix-slot-active',
     'review e redcheck non possono aggiungersi al pool Codex issue-fix',

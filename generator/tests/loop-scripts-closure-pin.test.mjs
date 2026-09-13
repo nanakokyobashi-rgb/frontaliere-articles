@@ -140,9 +140,12 @@ test('un backtick escapato in una stringa non apre un template', () => {
   assert.deepEqual(specifiers(src), ['./after-string.mjs']);
 });
 
-test("un commento inline non apre un prefisso di import dinamico", () => {
-  const src = "const x = /* import('./not-a-module.mjs') */ true;\n";
-  assert.deepEqual(specifiers(src), []);
+test("un commento inline dopo codice non apre un prefisso di import dinamico", () => {
+  const src = [
+    "doThing(); /* await import('./not-a-module.mjs') */",
+    "const loaded = await import('./real-module.mjs');",
+  ].join('\n');
+  assert.deepEqual(specifiers(src), ['./real-module.mjs']);
 });
 
 test("un import dinamico su una continuazione con `*` resta codice, non JSDoc", () => {
