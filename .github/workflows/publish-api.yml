@@ -44,6 +44,7 @@ on:
       - 'scripts/lib/published-slug-guard.mjs'
       - 'scripts/lib/parse-positive-num.mjs'
       - 'scripts/lib/api-manifest.mjs'
+      - 'scripts/lib/plate-auction-editorial.mjs'
       - 'generator/data/news-sitemap-whitelist.mjs'
       - 'generator/scripts/lib/daily-brief-content.mjs'
       - 'generator/scripts/lib/control-char-write-report.mjs'
@@ -440,6 +441,36 @@ jobs:
           for f in articles.json slugs.json manifest.json; do
             test -s "dist/api/$f" || { echo "::error::dist/api/$f missing or empty"; exit 1; }
           done
+
+          # The plate-auction editorial companion is always emitted: it carries
+          # a durable guide even when the live catalogue is unavailable, and an
+          # explicit unavailable/insufficient-data state instead of invented
+          # weekly claims. Keep the artifact gate at the publisher boundary so
+          # the site never has to guess whether the corpus published it.
+          test -s dist/api/plate-auction-editorial.json || {
+            echo "::error::plate-auction-editorial.json missing or empty"; exit 1; }
+          node --input-type=module -e "
+            import { readFileSync } from 'node:fs';
+            const value = JSON.parse(readFileSync('dist/api/plate-auction-editorial.json', 'utf8'));
+            const locales = ['it', 'en', 'de', 'fr'];
+            if (value.schema !== 1 || !locales.every((locale) => value.evergreen?.[locale] && value.weekly?.[locale])) {
+              console.error('::error::plate-auction-editorial.json has an incomplete schema');
+              process.exit(1);
+            }
+            const forbidden = [];
+            const walk = (item) => {
+              if (Array.isArray(item)) item.forEach(walk);
+              else if (item && typeof item === 'object') Object.entries(item).forEach(([key, child]) => {
+                if (/bidder|winner/i.test(key)) forbidden.push(key);
+                walk(child);
+              });
+            };
+            walk(value);
+            if (forbidden.length > 0) {
+              console.error('::error::plate-auction-editorial.json contains a bidder/winner field');
+              process.exit(1);
+            }
+          "
 
           # The ten feeds and the ticker payload are consumed as live SEO/UI
           # surface, so gate them on the artifact too — not just on the builder
