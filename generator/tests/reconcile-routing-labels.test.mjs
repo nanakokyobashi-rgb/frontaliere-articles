@@ -228,12 +228,16 @@ test('#1211: agent:fix stale senza PR/beacon viene riarmato, gli stati vivi aspe
   );
 });
 
-test('una rimozione fallita non entra nel totale delle riconciliazioni', () => {
+test('la scansione paginata include tutte le pagine e non conta le rimozioni fallite', () => {
   const fakeBin = fs.mkdtempSync(path.join(os.tmpdir(), 'reconcile-gh-'));
   const fakeGh = path.join(fakeBin, 'gh');
   fs.writeFileSync(fakeGh, `#!/bin/sh
-if [ "$1" = "issue" ] && [ "$2" = "list" ]; then
-  printf '%s\\n' '[{"number":1,"labels":[{"name":"agent:fix"},{"name":"agent:fix-queued"}],"updatedAt":"1970-01-01T00:00:00Z"},{"number":2,"labels":[{"name":"agent:fix"},{"name":"agent:fix-queued"}],"updatedAt":"1970-01-01T00:00:00Z"}]'
+if [ "$1" = "api" ] && [ "$3" = "--paginate" ] && [ "$4" = "--slurp" ] && printf '%s' "$2" | grep -q 'labels=agent%3Afix'; then
+  printf '%s\\n' '[[{"number":1,"labels":[{"name":"agent:fix"},{"name":"agent:fix-queued"}],"updated_at":"1970-01-01T00:00:00Z"}],[{"number":2,"labels":[{"name":"agent:fix"},{"name":"agent:fix-queued"}],"updated_at":"1970-01-01T00:00:00Z"}]]'
+  exit 0
+fi
+if [ "$1" = "api" ] && [ "$3" = "--paginate" ] && [ "$4" = "--slurp" ] && printf '%s' "$2" | grep -q 'labels=agent%3Adecompose'; then
+  printf '%s\\n' '[]'
   exit 0
 fi
 if [ "$1" = "issue" ] && [ "$2" = "edit" ]; then

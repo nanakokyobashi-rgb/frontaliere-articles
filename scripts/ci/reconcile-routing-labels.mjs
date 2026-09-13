@@ -149,6 +149,30 @@ function gh(args, { json = true } = {}) {
   return json ? JSON.parse(out || '[]') : out;
 }
 
+/**
+ * Legge tutte le issue aperte per una label, non solo il primo migliaio.
+ * `gh issue list --limit 1000` tronca lo sguardo proprio quando il ciclo ha
+ * una coda grande; il gate finirebbe per stampare «nessun doppio» senza aver
+ * osservato le pagine successive. REST + `--paginate` mantiene il limite per
+ * pagina e `--slurp` ci consegna un array di pagine da appiattire.
+ */
+function fetchOpenIssuesForLabel(active) {
+  const repo = repoName() || '{owner}/{repo}';
+  const endpoint = `repos/${repo}/issues?state=open&labels=${encodeURIComponent(active)}&per_page=100`;
+  const pages = gh(['api', endpoint, '--paginate', '--slurp']);
+  const issues = Array.isArray(pages) ? pages.flat() : [];
+  return issues
+    // L'endpoint REST /issues include anche le pull request; il vecchio
+    // `gh issue list` le escludeva per noi.
+    .filter((iss) => iss && !iss.pull_request)
+    .map((iss) => ({
+      number: Number(iss.number),
+      labels: Array.isArray(iss.labels) ? iss.labels : [],
+      updatedAt: iss.updatedAt ?? iss.updated_at ?? '',
+    }))
+    .filter((iss) => Number.isInteger(iss.number) && iss.number > 0);
+}
+
 /** Usa la timeline REST per non confondere un commento con un evento di label. */
 function withLastRoutingLabelEvent(issues) {
   const repo = repoName();
@@ -193,8 +217,7 @@ function fetchCandidates(only) {
   const byNumber = new Map();
   for (const { active } of ROUTE_CONFLICTS) {
     try {
-      for (const iss of gh(['issue', 'list', ...repoArgs(), '--state', 'open', '--label', active,
-        '--limit', '1000', '--json', 'number,labels,updatedAt'])) {
+      for (const iss of fetchOpenIssuesForLabel(active)) {
         byNumber.set(iss.number, iss);
       }
     } catch (e) {
