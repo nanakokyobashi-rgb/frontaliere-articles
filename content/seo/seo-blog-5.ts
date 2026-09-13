@@ -90124,6 +90124,240 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-savoia-avanti-ticino-lavoro': {
+    title: 'Savoia candidato con Avanti Ticino e Lavoro | Frontaliere Ticino',
+    description: 'La candidatura di Sergio Savoia per Avanti con Ticino e Lavoro scatena polemiche e reazioni social. Scopri tutti i dettagli del dibattito politico nel cantone.',
+    keywords: 'frontalieri, ticino, svizzera, italia, savoia, candidato, avanti, lavoro',
+    ogTitle: 'Savoia candidato Avanti con Ticino e Lavoro',
+    ogDescription: 'La recente candidatura politica di Sergio Savoia per Avanti con Ticino e Lavoro ha scatenato reazioni e polemiche online nel Canton Ticino, portando a un chiarimento sulle critiche social e sullo status professionale del candidato.',
+    canonicalPath: '/articoli-frontaliere/savoia-avanti-ticino-lavoro',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Savoia candidato con Avanti Ticino e Lavoro",
+      "description": "La candidatura di Sergio Savoia per Avanti con Ticino e Lavoro scatena polemiche e reazioni social. Scopri tutti i dettagli del dibattito politico nel cantone.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/savoia-avanti-ticino-lavoro.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Candidatura politica di Sergio Savoia per Avanti con Ticino e Lavoro a Lugano"
+      },
+      "datePublished": "2026-09-13T06:38:21+00:00",
+      "dateModified": "2026-09-13T06:38:21+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/savoia-avanti-ticino-lavoro/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-verbania-lavori-ponte-san-giovanni': {
+    title: 'Verbania, lavori sul ponte San Giovanni: traffico modificato',
+    description: 'Lavori notturni sul ponte San Giovanni a Verbania dal 14 al 18 settembre: Acqua Novara.VCO sostituisce la rete idrica con senso unico alternato. Dati aggiornati',
+    keywords: 'frontalieri, ticino, svizzera, italia, verbania, lavori, ponte, giovanni',
+    ogTitle: 'Verbania: lavori notturni sul ponte San Giovanni',
+    ogDescription: 'Dal 14 al 18 settembre lavori notturni di Acqua Novara.VCO sul ponte San Giovanni a Verbania con senso unico alternato dalle 22 alle 6.',
+    canonicalPath: '/articoli-frontaliere/verbania-lavori-ponte-san-giovanni',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Verbania, lavori sul ponte San Giovanni: traffico modificato",
+      "description": "Lavori notturni sul ponte San Giovanni a Verbania dal 14 al 18 settembre: Acqua Novara.VCO sostituisce la rete idrica con senso unico alternato. Dati aggiornati",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/verbania-lavori-ponte-san-giovanni.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Lavori notturni e viabilità modificata sul ponte San Giovanni a Verbania"
+      },
+      "datePublished": "2026-09-13T06:46:31+00:00",
+      "dateModified": "2026-09-13T06:46:31+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/verbania-lavori-ponte-san-giovanni/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-stadler-rail-investimenti-kazakistan': {
+    title: 'Stadler Rail punta sul Kazakistan: 53 milioni di investimenti',
+    description: 'Stadler Rail investe 25 milioni nello stabilimento di Astana e punta a 53 milioni totali entro il 2031. Nuova produzione e 100 nuovi posti di lavoro.',
+    keywords: 'frontalieri, ticino, svizzera, italia, stadler, rail, punta, kazakistan',
+    ogTitle: 'Stadler Rail punta sul Kazakistan con nuovi investimenti ad Astana',
+    ogDescription: 'Il costruttore ferroviario turgoviese Stadler Rail investe 25 milioni di franchi nello stabilimento di Astana, creando 100 nuovi posti di lavoro e avviando la produzione di casse in alluminio.',
+    canonicalPath: '/articoli-frontaliere/stadler-rail-investimenti-kazakistan',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Stadler Rail punta sul Kazakistan: 53 milioni di investimenti",
+      "description": "Stadler Rail investe 25 milioni nello stabilimento di Astana e punta a 53 milioni totali entro il 2031. Nuova produzione e 100 nuovi posti di lavoro.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/stadler-rail-investimenti-kazakistan.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Stabilimento ferroviario di Stadler Rail con macchinari avanzati"
+      },
+      "datePublished": "2026-09-13T06:55:26+00:00",
+      "dateModified": "2026-09-13T06:55:26+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/stadler-rail-investimenti-kazakistan/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-inaugurazione-campus-smart-valley-daverio': {
+    title: 'Inaugurato a Daverio il campus Smart Valley per le imprese',
+    description: 'Inaugurato a Daverio il campus Smart Valley da oltre cinquemila metri quadri. Investimento da 4,5 milioni per la formazione e l\'innovazione industriale.',
+    keywords: 'frontalieri, ticino, svizzera, italia, inaugurato, daverio, campus, smart',
+    ogTitle: 'Inaugurato a Daverio il campus Smart Valley',
+    ogDescription: 'Scopri il nuovo campus Smart Valley a Daverio: oltre cinquemila metri quadrati dedicati alla formazione specialistica, laboratori avanzati e connessione con le imprese.',
+    canonicalPath: '/articoli-frontaliere/inaugurazione-campus-smart-valley-daverio',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Inaugurato a Daverio il campus Smart Valley per le imprese",
+      "description": "Inaugurato a Daverio il campus Smart Valley da oltre cinquemila metri quadri. Investimento da 4,5 milioni per la formazione e l'innovazione industriale.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/inaugurazione-campus-smart-valley-daverio.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Campus Smart Valley inaugurato nell'area industriale di Daverio"
+      },
+      "datePublished": "2026-09-13T07:02:10+00:00",
+      "dateModified": "2026-09-13T07:02:10+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/inaugurazione-campus-smart-valley-daverio/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-franchigia-frontalieri-casalzuigno': {
+    title: 'Nuova franchigia 10.000 € per frontalieri da Casalzuigno',
+    description: 'Dal 2024 i nuovi frontalieri da Casalzuigno beneficiano di una franchigia di 10.000 €. Scopri le differenze con il vecchio regime e la procedura fiscale.',
+    keywords: 'frontalieri, ticino, svizzera, italia, nuova, franchigia, casalzuigno, nuovo',
+    ogTitle: 'Nuova franchigia 10.000 € per frontalieri da Casalzuigno',
+    ogDescription: 'Il Nuovo Accordo Frontalieri in vigore dal 1° gennaio 2024 introduce una franchigia di 10.000 euro per i nuovi residenti in Italia. Analizziamo le regole fiscali per chi vive a Casalzuigno e lavora in Ticino.',
+    canonicalPath: '/articoli-frontaliere/franchigia-frontalieri-casalzuigno',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Nuova franchigia 10.000 € per frontalieri da Casalzuigno",
+      "description": "Dal 2024 i nuovi frontalieri da Casalzuigno beneficiano di una franchigia di 10.000 €. Scopri le differenze con il vecchio regime e la procedura fiscale.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/franchigia-frontalieri-casalzuigno.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Veduta di Casalzuigno vicino al confine con Mendrisio e il Ticino"
+      },
+      "datePublished": "2026-09-13T07:32:34+00:00",
+      "dateModified": "2026-09-13T07:32:34+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/franchigia-frontalieri-casalzuigno/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-ospedale-del-ponte-terzo-lotto': {
+    title: 'Ospedale Del Ponte: nessun blocco per il terzo lotto',
+    description: 'Asst Sette Laghi smentisce il blocco del terzo lotto dell\'Ospedale Del Ponte. Finanziamenti di 13,6 milioni già in cassa per il polo materno infantile.',
+    keywords: 'frontalieri, ticino, svizzera, italia, ospedale, ponte, nessun, blocco',
+    ogTitle: 'Ospedale Del Ponte, Asst Sette Laghi replica: nessun blocco del terzo lotto',
+    ogDescription: 'L\'azienda socio sanitaria territoriale Sette Laghi smentisce le voci sul blocco dei lavori all\'Ospedale Del Ponte di Varese confermando i fondi per 13,6 milioni.',
+    canonicalPath: '/articoli-frontaliere/ospedale-del-ponte-terzo-lotto',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Ospedale Del Ponte: nessun blocco per il terzo lotto",
+      "description": "Asst Sette Laghi smentisce il blocco del terzo lotto dell'Ospedale Del Ponte. Finanziamenti di 13,6 milioni già in cassa per il polo materno infantile.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/ospedale-del-ponte-terzo-lotto.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Ospedale Filippo Del Ponte a Varese"
+      },
+      "datePublished": "2026-09-13T07:44:00+00:00",
+      "dateModified": "2026-09-13T07:44:00+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/ospedale-del-ponte-terzo-lotto/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

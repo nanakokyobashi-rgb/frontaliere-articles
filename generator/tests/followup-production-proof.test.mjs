@@ -200,7 +200,7 @@ test('il commento arriva solo se la label è stata davvero rimossa', () => {
   const src = fs.readFileSync(DRAINER, 'utf8');
   const pass = src.slice(src.indexOf('// --- PRODUCTION-PROOF: constata la prova'));
   const iEdit = pass.indexOf('if (!edit(iss.number, { remove: [LBL_PROOF] }))');
-  const iComment = pass.indexOf("gh(['issue', 'comment', String(iss.number)");
+  const iComment = pass.indexOf('commentIssue(iss.number, note');
   assert.ok(iEdit > -1 && iComment > -1 && iEdit < iComment, 'la rimozione della label precede il commento');
   assert.match(pass.slice(iEdit, iComment), /continue;/, 'rimozione fallita → nessun commento, si riprova al tick dopo');
 });

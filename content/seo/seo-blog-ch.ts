@@ -82232,6 +82232,240 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-rischio-petrolio-hormuz-svizzera': {
+    title: 'Petrolio a 200 dollari e rischi per l\'economia globale',
+    description: 'Analisi di UBS sui rischi legati alla chiusura dello Stretto di Hormuz, petrolio a 200 dollari, recessione globale e segnali congiunturali in Svizzera.',
+    keywords: 'frontalieri, ticino, svizzera, italia, petrolio, dollari, rischi, economia',
+    ogTitle: 'Petrolio a 200 dollari e recessione globale: l\'analisi UBS',
+    ogDescription: 'Scopri l\'analisi di Alessandro Bee di UBS sui rischi geopolitici ed energetici legati alla chiusura dello Stretto di Hormuz e le prospettive congiunturali per l\'economia elvetica.',
+    canonicalPath: '/articoli-svizzera/rischio-petrolio-hormuz-svizzera/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Petrolio a 200 dollari e rischi per l'economia globale",
+      "description": "Analisi di UBS sui rischi legati alla chiusura dello Stretto di Hormuz, petrolio a 200 dollari, recessione globale e segnali congiunturali in Svizzera.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/rischio-petrolio-hormuz-svizzera.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Analisi economica e mercati finanziari in Svizzera"
+      },
+      "datePublished": "2026-09-13T06:31:08+00:00",
+      "dateModified": "2026-09-13T06:31:08+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/rischio-petrolio-hormuz-svizzera/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-parmelin-tag-der-wirtschaft': {
+    title: 'Tag der Wirtschaft: il discorso di Guy Parmelin a Lucerna',
+    description: 'Il consigliere federale Guy Parmelin interviene al Tag der Wirtschaft a Lucerna: focus su economia svizzera, PIL e accordi di libero scambio. Dati aggiornati',
+    keywords: 'frontalieri, ticino, svizzera, italia, wirtschaft, discorso, parmelin, lucerna',
+    ogTitle: 'Tag der Wirtschaft: il punto di Guy Parmelin',
+    ogDescription: 'Il capo del DFE Guy Parmelin interviene al Tag der Wirtschaft a Lucerna parlando di stabilità economica svizzera, crescita del PIL e rete di accordi di libero scambio.',
+    canonicalPath: '/articoli-svizzera/parmelin-tag-der-wirtschaft/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Tag der Wirtschaft: il discorso di Guy Parmelin a Lucerna",
+      "description": "Il consigliere federale Guy Parmelin interviene al Tag der Wirtschaft a Lucerna: focus su economia svizzera, PIL e accordi di libero scambio. Dati aggiornati",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/parmelin-tag-der-wirtschaft.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Consigliere federale Guy Parmelin al Tag der Wirtschaft"
+      },
+      "datePublished": "2026-09-13T06:41:53+00:00",
+      "dateModified": "2026-09-13T06:41:53+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/parmelin-tag-der-wirtschaft/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-f35a-prezzo-incerto-politica': {
+    title: 'F-35A: dubbi sul prezzo fisso e reazioni parlamentari',
+    description: 'Il rapporto sulla mancanza di un prezzo fisso per gli F-35A scuote il Parlamento. Verdi verso la CPI, mentre il centro-destra frena. Dati aggiornati 2026',
+    keywords: 'frontalieri, ticino, svizzera, italia, f-35a, dubbi, prezzo, fisso',
+    ogTitle: 'F-35A: dubbi sul prezzo fisso e reazioni parlamentari',
+    ogDescription: 'Il rapporto della Commissione della gestione del Consiglio nazionale sull\'acquisizione degli F-35A rivela l\'assenza di un prezzo fisso. Dibattito acceso tra CPI e crediti supplementari.',
+    canonicalPath: '/articoli-svizzera/f35a-prezzo-incerto-politica/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "F-35A: dubbi sul prezzo fisso e reazioni parlamentari",
+      "description": "Il rapporto sulla mancanza di un prezzo fisso per gli F-35A scuote il Parlamento. Verdi verso la CPI, mentre il centro-destra frena. Dati aggiornati 2026",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/f35a-prezzo-incerto-politica.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Palazzo federale a Berna, sede del Parlamento svizzero."
+      },
+      "datePublished": "2026-09-13T06:50:41+00:00",
+      "dateModified": "2026-09-13T06:50:41+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/f35a-prezzo-incerto-politica/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-licenziamento-crans-montana-falsificazione': {
+    title: 'Crans-Montana: licenziato dipendente per falsi edilizi',
+    description: 'Il Comune di Crans-Montana licenzia un impiegato dell\'Ufficio tecnico per falsificazione di documenti edilizi. Coinvolto anche nel caso Constellation.',
+    keywords: 'frontalieri, ticino, svizzera, italia, crans-montana, licenziato, dipendente, falsi',
+    ogTitle: 'Crans-Montana: licenziato dipendente per falsi edilizi',
+    ogDescription: 'Il Comune di Crans-Montana ha licenziato un dipendente dell\'Ufficio tecnico che aveva falsificato documenti per una terrazza, usurpando l\'identità di un ingegnere.',
+    canonicalPath: '/articoli-svizzera/licenziamento-crans-montana-falsificazione/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Crans-Montana: licenziato dipendente per falsi edilizi",
+      "description": "Il Comune di Crans-Montana licenzia un impiegato dell'Ufficio tecnico per falsificazione di documenti edilizi. Coinvolto anche nel caso Constellation.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/licenziamento-crans-montana-falsificazione.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Edificio comunale in Svizzera rappresentativo delle istituzioni"
+      },
+      "datePublished": "2026-09-13T06:58:29+00:00",
+      "dateModified": "2026-09-13T06:58:29+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/licenziamento-crans-montana-falsificazione/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-attacco-hacker-salt-dati-clienti': {
+    title: 'Salt: attacco informatico e furto dati clienti mobili',
+    description: 'L\'operatore Salt vittima di un attacco informatico in Svizzera. Sottratti dati personali di alcuni clienti mobili. Nessuna password o dato bancario compromesso.',
+    keywords: 'frontalieri, ticino, svizzera, italia, salt, attacco, informatico, furto',
+    ogTitle: 'Salt: attacco informatico e furto dati clienti mobili',
+    ogDescription: 'L\'operatore telefonico Salt è stato vittima di un attacco informatico in Svizzera che ha comportato il furto di dati personali di alcuni clienti mobili. Avvisato l\'Incaricato federale per la protezione dei dati.',
+    canonicalPath: '/articoli-svizzera/attacco-hacker-salt-dati-clienti/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Salt: attacco informatico e furto dati clienti mobili",
+      "description": "L'operatore Salt vittima di un attacco informatico in Svizzera. Sottratti dati personali di alcuni clienti mobili. Nessuna password o dato bancario compromesso.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/attacco-hacker-salt-dati-clienti.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Sede di un operatore di telefonia mobile in Svizzera coinvolto in un attacco informatico"
+      },
+      "datePublished": "2026-09-13T07:05:29+00:00",
+      "dateModified": "2026-09-13T07:05:29+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/attacco-hacker-salt-dati-clienti/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-dazi-usa-seco-commercio': {
+    title: 'Nuovi dazi USA e accordi SECO per le aziende svizzere',
+    description: 'Scopri i dettagli sui dazi aggiuntivi statunitensi fino al 12,5% per i beni svizzeri, la chiusura dei negoziati SECO e gli impatti sulle catene produttive.',
+    keywords: 'frontalieri, ticino, svizzera, italia, nuovi, dazi, accordi, seco',
+    ogTitle: 'Dazi USA e SECO: nuove regole per le aziende svizzere',
+    ogDescription: 'Analisi delle nuove misure doganali statunitensi sui beni svizzeri con aliquote fino al 12,5% e il ruolo della SECO nella gestione dei dossier commerciali e dei negoziati di libero scambio.',
+    canonicalPath: '/articoli-svizzera/dazi-usa-seco-commercio/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Nuovi dazi USA e accordi SECO per le aziende svizzere",
+      "description": "Scopri i dettagli sui dazi aggiuntivi statunitensi fino al 12,5% per i beni svizzeri, la chiusura dei negoziati SECO e gli impatti sulle catene produttive.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/dazi-usa-seco-commercio.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Sede della SECO in Svizzera"
+      },
+      "datePublished": "2026-09-13T07:38:12+00:00",
+      "dateModified": "2026-09-13T07:38:12+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/dazi-usa-seco-commercio/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

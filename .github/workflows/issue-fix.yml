@@ -40,9 +40,9 @@ on:
   issues:
     types: [labeled]
 
-# Un fixer alla volta. La coda `agent:fix-queued` esiste proprio perché questo
-# slot è serializzato: promuovere più issue insieme le farebbe morire
-# cancellate-in-coda.
+# Fino a 5 fixer remoti Codex-primary possono lavorare su issue diverse. La
+# chiave per-issue serializza solo eventi concorrenti sullo stesso numero; la
+# coda `agent:fix-queued` e il lease bounded tengono il pool sotto controllo.
 # Chiave PER-ISSUE. `concurrency` e' valutata a livello di WORKFLOW, cioe' PRIMA
 # dell'`if:` del job: con un `group:` costante OGNI evento issue del repo entra
 # in questa coda — anche quelli che l'`if:` scarta come `skipped` — e ogni nuova
@@ -382,6 +382,10 @@ jobs:
           QUOTA_LEASE_TARGET_TYPE: issue
           QUOTA_LEASE_TARGET: ${{ github.event.issue.number }}
           QUOTA_LEASE_TTL_SEC: '21600'
+          # Il lease è un pool bounded di fixer Codex-primary, non più un
+          # mutex globale: la chiave per-issue del workflow rende reali i 5
+          # slot e il drainer impedisce il fan-out oltre il cap.
+          QUOTA_LEASE_MAX_INFLIGHT_FIX: '5'
           GITHUB_RUN_ID: ${{ github.run_id }}
         run: node scripts/ci/check-quota-backoff.mjs
 
