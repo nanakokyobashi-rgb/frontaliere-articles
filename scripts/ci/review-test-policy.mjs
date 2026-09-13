@@ -7,7 +7,7 @@ import { fetchPrFiles } from './lib/fetchPrFiles.mjs';
 
 export const TEST_REVIEW_MARKER = '<!-- TEST_ONLY_AUTOMATIC_REVIEW -->';
 export const REVIEW_INPUT_REVISION_MARKER_RE = /<!--\s*REVIEW_INPUT_REVISION:\s*(body:[0-9a-f]{64})\s*-->/giu;
-const REVIEW_INPUT_REVISION_RE = /^body:[0-9a-f]{64}$/iu;
+export const REVIEW_INPUT_REVISION_RE = /^body:[0-9a-f]{64}$/iu;
 const TEST_EXTENSIONS = ['js', 'jsx', 'ts', 'tsx', 'mjs', 'cjs', 'mts', 'cts', 'd.ts', 'd.mts', 'd.cts'];
 export const TEST_PATH_RE = new RegExp('(?:^|/)(?:tests|__tests__)/|\\.(?:test|spec)\\.(?:'
   + TEST_EXTENSIONS.map(ext => ext.replaceAll('.', '\\.')).join('|') + ')$');
@@ -44,14 +44,14 @@ export function verifyTestOnlyHead(ghFn, repo, pr, head) {
   return onlyTests && after.state === 'open' && after.head?.sha === head && before.base?.sha === after.base?.sha;
 }
 
-function normalizedReviewRevision(reviewRevision) {
+export function normalizeReviewInputRevision(reviewRevision) {
   const revision = String(reviewRevision ?? '').trim().toLowerCase();
   return REVIEW_INPUT_REVISION_RE.test(revision) ? revision : revision ? null : '';
 }
 
 /** The review verdict must identify the exact trusted PR-body revision. */
 export function reviewInputRevisionMarker(reviewRevision = '') {
-  const revision = normalizedReviewRevision(reviewRevision);
+  const revision = normalizeReviewInputRevision(reviewRevision);
   if (revision === null) throw new Error('Invalid review input revision');
   return revision ? `<!-- REVIEW_INPUT_REVISION: ${revision} -->` : '';
 }
@@ -62,7 +62,7 @@ export function reviewInputRevisionMarker(reviewRevision = '') {
  * callers that do not run in the body-revision-aware workflow.
  */
 export function reviewHasInputRevision(body, expectedRevision = '') {
-  const expected = normalizedReviewRevision(expectedRevision);
+  const expected = normalizeReviewInputRevision(expectedRevision);
   if (expected === null) return false;
   if (!expected) return true;
   const markers = [...String(body ?? '').matchAll(REVIEW_INPUT_REVISION_MARKER_RE)]

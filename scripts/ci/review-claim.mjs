@@ -15,7 +15,7 @@ import { execFileSync } from 'node:child_process';
 import { randomUUID } from 'node:crypto';
 import fs from 'node:fs';
 import { pathToFileURL } from 'node:url';
-import { reviewHasInputRevision } from './review-test-policy.mjs';
+import { normalizeReviewInputRevision, reviewHasInputRevision } from './review-test-policy.mjs';
 
 export const REVIEW_CLAIM_MARKER = '<!-- PR_REVIEW_CLAIM:';
 export const REVIEW_CLAIM_STATES = Object.freeze([
@@ -32,7 +32,6 @@ const CLAIM_ACTOR_RE = /^(?:github-actions\[bot\]|frontaliere-automation(?:\[bot
 const SHA_RE = /^[0-9a-f]{40}$/iu;
 const PR_RE = /^[1-9][0-9]*$/u;
 const FINGERPRINT_RE = /^[0-9a-f]{64}$/iu;
-const REVIEW_REVISION_RE = /^body:[0-9a-f]{64}$/iu;
 
 function normalized(value) {
   return String(value ?? '').trim().replace(/\s+/gu, ' ');
@@ -44,12 +43,6 @@ function normalized(value) {
  * trusted PR body is accepted, so arbitrary caller input cannot create an
  * unbounded claim namespace.
  */
-function normalizedReviewRevision(value) {
-  const raw = normalized(value);
-  if (!raw) return '';
-  return REVIEW_REVISION_RE.test(raw) ? raw.toLowerCase() : null;
-}
-
 function validContext({ prNumber, headSha, eventKey, contributionFingerprint } = {}) {
   return PR_RE.test(String(prNumber || ''))
     && SHA_RE.test(String(headSha || ''))
@@ -58,7 +51,7 @@ function validContext({ prNumber, headSha, eventKey, contributionFingerprint } =
 }
 
 function revisionSuffix(reviewRevision) {
-  const revision = normalizedReviewRevision(reviewRevision);
+  const revision = normalizeReviewInputRevision(reviewRevision);
   if (revision === null) return null;
   return revision ? `|revision:${revision}` : '';
 }
@@ -127,7 +120,7 @@ export function parseReviewClaim(body) {
       || !Number.isFinite(Number(event.issuedAt))
       || !Number.isFinite(Number(event.expiresAt))) return null;
 
-  const reviewRevision = normalizedReviewRevision(event.reviewRevision);
+  const reviewRevision = normalizeReviewInputRevision(event.reviewRevision);
   if (reviewRevision === null) return null;
 
   const normalizedEvent = {

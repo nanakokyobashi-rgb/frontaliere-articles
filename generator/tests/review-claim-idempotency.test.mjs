@@ -14,6 +14,7 @@ import {
   reviewWasPosted,
 } from '../../scripts/ci/review-claim.mjs';
 import {
+  normalizeReviewInputRevision,
   reviewHasInputRevision,
   reviewInputRevisionMarker,
 } from '../../scripts/ci/review-test-policy.mjs';
@@ -206,6 +207,9 @@ test('classifies setup and provider failures without consuming a retryable claim
 });
 
 test('a review verdict must carry exactly the current trusted body revision', () => {
+  assert.equal(normalizeReviewInputRevision(` ${BODY_REVISION.toUpperCase()} `), BODY_REVISION);
+  assert.equal(normalizeReviewInputRevision('body:not-a-sha'), null);
+
   const fresh = `review\n${reviewInputRevisionMarker(BODY_REVISION)}`;
   const stale = `review\n${reviewInputRevisionMarker(OTHER_BODY_REVISION)}`;
 

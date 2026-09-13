@@ -50,7 +50,11 @@
  *       RUN_URL (opzionale)
  * Exit: 0 approvato · 1 non approvato (il check-run diventa rosso)
  */
-import { findTestOnlyApproval, reviewHasInputRevision } from './review-test-policy.mjs';
+import {
+  findTestOnlyApproval,
+  normalizeReviewInputRevision,
+  reviewHasInputRevision,
+} from './review-test-policy.mjs';
 import { execFileSync } from 'node:child_process';
 import { appendFileSync, readFileSync } from 'node:fs';
 import { parseCodexFallbackEvidence, FALLBACK_STATUS } from './claude-codex-fallback.mjs';
@@ -68,11 +72,10 @@ const REPO = process.env.GITHUB_REPOSITORY || '';
 const PR = process.env.PR_NUMBER || '';
 const HEAD_SHA = process.env.HEAD_SHA || '';
 const RUN_URL = process.env.RUN_URL || '';
-const REVIEW_REVISION = String(process.env.REVIEW_REVISION || '').trim().toLowerCase();
+const REVIEW_REVISION = normalizeReviewInputRevision(process.env.REVIEW_REVISION || '');
 const MARKER = '<!-- REVIEW_GATE_NO_LGTM -->';
 const CODEX_REVIEWER_LOGIN_RE = /^(?:github-actions\[bot\]|frontaliere-automation\[bot\])$/i;
 const CODEX_REVIEW_MARKER = '<!-- CODEX_FALLBACK_REVIEW -->';
-const REVIEW_REVISION_RE = /^body:[0-9a-f]{64}$/i;
 let gateFailureKind = 'verdict';
 
 /**
@@ -325,7 +328,7 @@ async function main() {
     console.log('::error::review-gate: GITHUB_REPOSITORY, PR_NUMBER e HEAD_SHA sono obbligatori.');
     process.exit(1);
   }
-  if (!REVIEW_REVISION_RE.test(REVIEW_REVISION)) {
+  if (!REVIEW_REVISION) {
     markTransientFailure();
     writeFailureKind();
     console.error('::error::review-gate: REVIEW_REVISION mancante o non valida; nessun verdetto precedente può essere riusato.');
