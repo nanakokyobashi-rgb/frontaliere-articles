@@ -387,6 +387,12 @@ function maskNonExecutableJavaScript(source) {
     }
     return '';
   };
+  const nextSignificant = (index) => {
+    for (let i = index + 1; i < text.length; i += 1) {
+      if (!/\s/.test(text[i])) return text[i];
+    }
+    return '';
+  };
   const matchingParenStart = (closeIndex) => {
     let depth = 0;
     for (let i = closeIndex; i >= 0; i -= 1) {
@@ -406,6 +412,13 @@ function maskNonExecutableJavaScript(source) {
     // slash starts the literal. Treat `/` as an operator here so the literal
     // is masked instead of exposing its text as executable code.
     if (/[([{:;,=!?&|+*%^~<>\-/]/.test(previous)) return true;
+    if (previous === '}') {
+      // A closing brace can end either a block or an object expression. At
+      // this boundary we fail closed for a possible regex literal, except for
+      // the unambiguous `} / /regex/` division shape: leave its first slash in
+      // code so the second slash is recognized by the operator rule above.
+      return nextSignificant(index) !== '/';
+    }
     if (previous === ')') {
       const openIndex = matchingParenStart(index - 1);
       const control = out.slice(0, openIndex).join('').match(/([A-Za-z_$][\w$]*)\s*$/u)?.[1];

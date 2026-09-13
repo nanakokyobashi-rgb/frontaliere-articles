@@ -71,6 +71,8 @@ test('acceptance token: solo una chiamata eseguibile conta, non commenti stringh
     'return /* comment */ /firstGuard\\(\\)/;',
     'if (ready) /firstGuard\\(\\)/;',
     'const value = value / /firstGuard\\(\\)/;',
+    'if (ready) { return false; } /firstGuard\\(\\)/.test(value);',
+    'const value = {} / /firstGuard\\(\\)/;',
     'function firstGuard() {}',
     'function* firstGuard() {}',
     'interface Handler { firstGuard(): void; }',
