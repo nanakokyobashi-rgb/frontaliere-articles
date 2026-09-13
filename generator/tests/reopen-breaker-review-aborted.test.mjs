@@ -81,6 +81,10 @@ const GATE_ONLY = [
   step(REVIEW_GATE_STEP_NAME, 'failure'),
   step(REVIEW_GATE_FAILURE_STEP_NAME, 'failure'),
 ];
+/** 429: stesso gate rosso, ma l'abort è proiettato come failure leggibile. */
+const RATE_LIMIT_ABORTED = GATE_ONLY.map((s) => s.name === REVIEW_ABORT_STEP_NAME
+  ? { ...s, conclusion: 'failure' }
+  : s);
 /** Gate rosso + `Generator CI gate` rosso: li' sotto c'e' codice rotto. */
 const GATE_PLUS_GENERATOR_CI = [
   step('Set up job', 'success'),
@@ -106,9 +110,25 @@ describe('il segnale: due step rossi, un rosso solo', () => {
   test('rosso di gate puro → nessun abort da nominare', () => {
     assert.equal(vitestFailureIsReviewGate(GATE_ONLY), true);
     assert.equal(reviewAbortedWithoutVerdict(GATE_ONLY), false);
-    // Il ramo 429 lascia l'abort verde per non amplificare il rate-limit:
-    // non e' uno skip del guard e il one-shot resta concesso.
+    // Un abort verde è il percorso ordinario senza causa transiente: non è
+    // uno skip del guard e il one-shot resta classificato come gate normale.
     assert.equal(reviewSkippedByGuard(GATE_ONLY), false);
+  });
+
+  test('rate-limit con abort esplicito → causa review-gate-aborted', () => {
+    assert.equal(vitestFailureIsReviewGate(RATE_LIMIT_ABORTED), true);
+    assert.equal(reviewAbortedWithoutVerdict(RATE_LIMIT_ABORTED), true);
+    const redFp = reopenFingerprint({
+      additions: 1, deletions: 0, changedFiles: 1,
+      vitestConclusion: 'failure', reviewCount: 0,
+    });
+    const d = decideReopen({
+      vitestConclusion: 'failure', fingerprint: redFp, prior: null,
+      failureNotAttributable: 'review-gate', reviewGateFailure: true,
+      reviewAborted: true,
+    });
+    assert.equal(d.action, 'reopen');
+    assert.equal(d.cause, 'review-gate-aborted');
   });
 
   test('fail-CLOSED: qualunque ALTRO secondo step rosso nega ancora', () => {
@@ -156,7 +176,7 @@ describe('la decisione: il one-shot si concede, e la causa e nominata', () => {
     assert.match(d.reason, /morta senza postare/);
   });
 
-  test('rate-limit con abort verde → one-shot concesso, non review-gate-skipped', () => {
+  test('gate senza abort esplicito → one-shot concesso, non review-gate-skipped', () => {
     const d = decideReopen({
       vitestConclusion: 'failure', fingerprint: redFp, prior: null,
       failureNotAttributable: 'review-gate', reviewGateFailure: true,

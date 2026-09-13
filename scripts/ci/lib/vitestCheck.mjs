@@ -485,7 +485,9 @@ export function reviewSkippedByGuard(steps) {
 
 /**
  * La review è partita ma è morta senza postare il proprio verdetto?
- * L'output esplicito dello step di abort è la prova disponibile al consumer.
+ * `tests.yml` proietta l'output esplicito dello step di abort nella sua
+ * `conclusion`: la Jobs API non espone `GITHUB_OUTPUT`, quindi una failure
+ * intenzionale è il segnale che il consumer può leggere senza log o euristiche.
  *
  * @param {Array<{name?: string, conclusion?: string}>} steps
  * @returns {boolean}
