@@ -52,6 +52,8 @@ const RECONCILE_SOURCE = readFileSync(
 test('reconcile delega soglia e keyword al predicato aggregate condiviso (#1176)', () => {
   assert.match(RECONCILE_SOURCE, /isAggregate as sharedIsAggregate/);
   assert.match(RECONCILE_SOURCE, /return sharedIsAggregate\(/);
+  assert.match(RECONCILE_SOURCE, /maskInlineCodeSpans/);
+  assert.doesNotMatch(RECONCILE_SOURCE, /function maskAggregateKeywordsInCode/);
   assert.doesNotMatch(RECONCILE_SOURCE, /const m = t\.match/);
   assert.doesNotMatch(RECONCILE_SOURCE, /if \(\/\\b\(\?:sweep\|batch\|bulk\)/);
 });

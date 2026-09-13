@@ -63,6 +63,7 @@ import {
   hasStableItemIdsForDailyKey,
   hasUnterminatedMarkdownFence,
   isDailyBucketTitle,
+  maskInlineCodeSpans,
   parseFollowupItems,
   suggestedActionText,
   updateFollowupItemState,
@@ -118,11 +119,14 @@ function classifierVersion() {
   const source = [
     readClassifierSource(import.meta.url, 'scripts/ci/reconcile-followups.mjs'),
     readClassifierSource(new URL('./followup-resolution-match.mjs', import.meta.url), 'scripts/ci/followup-resolution-match.mjs'),
+    readClassifierSource(new URL('./check-issue-already-resolved.mjs', import.meta.url), 'scripts/ci/check-issue-already-resolved.mjs'),
   ];
   return createHash('sha256')
     .update(source[0])
     .update('\0')
     .update(source[1])
+    .update('\0')
+    .update(source[2])
     .digest('hex');
 }
 
@@ -169,32 +173,27 @@ function stripFencedBlocks(text) {
   return visible;
 }
 
-function maskInlineCodeSpans(text) {
-  return String(text || '').replace(/(`+)([^`\n]*?)\1/g, (span) => span.replace(/[^\n]/g, ' '));
-}
-
-function maskAggregateKeywordsInCode(text) {
-  return String(text || '').replace(/(`+)([^`\n]*?)\1/g, (span, fence, code) => (
-    `${fence}${code.replace(/\b(?:sweep|batch|bulk)\b/gi, (keyword) => ' '.repeat(keyword.length))}${fence}`
-  ));
-}
-
 // Keep the historical named export for callers while sharing the implementation.
 export { hasEnumeratedItems };
 
 /**
  * Compatibility adapter for the reconciler's historical export name. The
  * classification itself must come from the same predicate used by the
- * pre-flight/detect-aggregate path; only the reconciler's legacy Markdown
- * masking remains local so inline examples such as `triage-sweep.mjs` cannot
- * become aggregate keywords.
+ * pre-flight/detect-aggregate path. The reconciler keeps only its legacy
+ * fenced-block stripping local; the shared inline-code mask prevents examples
+ * such as `triage-sweep.mjs` from becoming aggregate keywords.
  * @param {string} title
  * @param {string} [body]
  * @returns {boolean}
  */
 export function isAggregateTitle(title = '', body = '') {
   const normalizedTitle = maskInlineCodeSpans(stripFencedBlocks(title));
-  return sharedIsAggregate(normalizedTitle, maskAggregateKeywordsInCode(body));
+  const normalizedBody = maskInlineCodeSpans(stripFencedBlocks(body));
+  // The shared predicate receives the masked body for its count/keyword path;
+  // enumeration must still inspect visible Markdown, because masking an inline
+  // token inside a bold lead would erase the lead before `hasEnumeratedItems`.
+  return sharedIsAggregate(normalizedTitle, normalizedBody)
+    || hasEnumeratedItems(stripFencedBlocks(body));
 }
 
 const TECHNICAL_LABELS = new Set([UNCLASSIFIABLE_LABEL, LABEL, CLOSED_LABEL]);
