@@ -55,6 +55,7 @@ import {
   SECTIONS, LOCALES, IMAGES_LEDGER, IMAGE_CATALOG, RETIRED_LEDGER,
   seoFilesFor, leftoverSurfacesFor, requiredSurfaceFilesFor,
   surfaceArticleIdStatus, SURFACE_ARTICLE_ID_STATUS,
+  assertRegularFileIfPresent, requireRegularFile,
 } from './lib/article-surfaces.mjs';
 // La localizzazione dei letterali TS (span dell'array piatto degli id, e la
 // parentesi che chiude davvero quella di apertura) vive in un modulo condiviso:
@@ -68,6 +69,20 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const rel = (p) => path.join(ROOT, p);
 const read = (p) => readFileSync(rel(p), 'utf-8');
 const write = (p, s) => writeFileSync(rel(p), s, 'utf-8');
+
+/** Aggiunge un target opzionale solo se è davvero un file cancellabile. */
+function queueDeleteTarget(deletes, planned, file, what) {
+  if (!assertRegularFileIfPresent(ROOT, file, `target da cancellare (${what})`)) return;
+  deletes.push(file);
+  planned.push({ file, what });
+}
+
+/** Riesegue il controllo subito prima del primo write, chiudendo il TOCTOU. */
+function validateDeleteTargets(deletes) {
+  for (const file of deletes) {
+    requireRegularFile(ROOT, file, 'target da cancellare');
+  }
+}
 
 // Descrittori di sezione, costanti e l'elenco delle superfici: sorgente unica,
 // condivisa col gate di PR `generator/tests/retired-articles-fully-removed.test.mjs`
@@ -326,12 +341,12 @@ function main() {
   // 5. corpi per locale
   for (const loc of LOCALES) {
     const bodyFile = `${cfg.bodyDir}/${loc}/${id}.ts`;
-    if (existsSync(rel(bodyFile))) { deletes.push(bodyFile); planned.push({ file: bodyFile, what: 'corpo' }); }
+    queueDeleteTarget(deletes, planned, bodyFile, 'corpo');
   }
 
   // 6. sidecar
   const sidecar = `${cfg.sidecarDir}/${id}.json`;
-  if (existsSync(rel(sidecar))) { deletes.push(sidecar); planned.push({ file: sidecar, what: 'sidecar' }); }
+  queueDeleteTarget(deletes, planned, sidecar, 'sidecar');
 
   // 7. ledger URL→id della sezione
   const led = removeJsonByValue(cfg.sourceLedger, id);
@@ -354,10 +369,15 @@ function main() {
 
   // 10. asset immagine
   for (const asset of [`public/images/blog/${id}.webp`, `public/images/blog/thumbnails/${id}-480w.webp`]) {
-    if (existsSync(rel(asset))) { deletes.push(asset); planned.push({ file: asset, what: 'asset' }); }
+    queueDeleteTarget(deletes, planned, asset, 'asset');
   }
 
   for (const p of planned) console.log(`   - ${p.file}  (${p.what})`);
+
+  // Every delete target has been checked while planning; check again after
+  // planning so a directory/FIFO or a vanished file cannot slip in between
+  // validation and the first write.
+  validateDeleteTargets(deletes);
 
   if (dryRun) {
     console.log('\n[DRY RUN] niente scritto.');
