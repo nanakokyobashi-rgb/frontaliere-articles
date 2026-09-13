@@ -44,7 +44,8 @@ const GOOD_BODY = '## Implementato\n- una cosa vera\n\n## Non implementato (anco
  * cieco su `$1` leggerebbe `--paginate` come path e cadrebbe nel default,
  * cioe' un test verde su un gate che non vede piu' niente.
  */
-function runGate({ reviews = [], files = [], meta = null, compare = null, checkRuns = [], codexEvidence = null }) {
+function runGate({ reviews = [], files = [], meta = null, compare = null,
+  checkRuns = [], checkRunPages = null, codexEvidence = null }) {
   const dir = mkdtempSync(path.join(tmpdir(), 'review-gate-'));
   try {
     const bin = path.join(dir, 'bin');
@@ -63,7 +64,7 @@ function runGate({ reviews = [], files = [], meta = null, compare = null, checkR
     const fixCompare = path.join(dir, 'compare.json');
     writeFileSync(fixCompare, JSON.stringify(compare ?? {}));
     const fixCheckRuns = path.join(dir, 'check-runs.json');
-    writeFileSync(fixCheckRuns, JSON.stringify({ check_runs: checkRuns }));
+    writeFileSync(fixCheckRuns, JSON.stringify(checkRunPages ?? { check_runs: checkRuns }));
 
     writeFileSync(
       path.join(bin, 'gh'),
@@ -73,9 +74,12 @@ case "$sub" in
   api)
     p=""
     jq=""
+    paginate=0
+    slurp=0
     while [ $# -gt 0 ]; do
       case "$1" in
-        --paginate|--slurp) shift ;;
+        --paginate) paginate=1; shift ;;
+        --slurp) slurp=1; shift ;;
         --jq) jq="$2"; shift 2 ;;
         -H|-f|-F|-X) shift 2 ;;
         *) if [ -z "$p" ]; then p="$1"; fi; shift ;;
@@ -88,7 +92,12 @@ case "$sub" in
         node -e 'const c=require(process.argv[1]); process.stdout.write((c.mergeBase||"")+"\\n")' ${JSON.stringify(fixCompare)} ;;
       */compare/*)
         node -e 'const c=require(process.argv[1]); const k=process.argv[2].split("/compare/")[1]; process.stdout.write(JSON.stringify((c.byRange||{})[k]||{files:[]}))' ${JSON.stringify(fixCompare)} "$p" ;;
-      */commits/*/check-runs*) cat ${JSON.stringify(fixCheckRuns)} ;;
+      */commits/*/check-runs*)
+        if [[ "$p" == *'filter=all' && "$paginate" = 1 && "$slurp" = 1 ]]; then
+          cat ${JSON.stringify(fixCheckRuns)}
+        else
+          echo '{"check_runs":[]}'
+        fi ;;
       */issues/*/comments*) echo '[]' ;;
       */issues?*) echo '[]' ;;
       */git/trees/*)
@@ -422,6 +431,27 @@ test('Codex LGTM carry-forward usa il check richiesto verde come prova persisten
     reviews: [codexReview({ commit_id: OLD })],
     compare,
     checkRuns,
+  });
+  assert.equal(result.status, 0, result.stdout);
+  assert.match(result.stdout, /carry-forward/, result.stdout);
+});
+
+test('Codex LGTM carry-forward aggrega tutte le pagine della cronologia check-run', () => {
+  const checkRunPages = [
+    { check_runs: [{ name: 'tests (node --test)', status: 'completed', conclusion: 'failure' }] },
+    { check_runs: [{ name: 'tests (node --test)', status: 'completed', conclusion: 'success' }] },
+  ];
+  const compare = {
+    mergeBase: 'c'.repeat(40),
+    byRange: {
+      [`${'c'.repeat(40)}...${HEAD}`]: { files: [{ filename: 'engine/x.ts', status: 'modified', patch: '@@\n+uno' }] },
+      [`${'c'.repeat(40)}...${OLD}`]: { files: [{ filename: 'engine/x.ts', status: 'modified', patch: '@@\n+uno' }] },
+    },
+  };
+  const result = runGate({
+    reviews: [codexReview({ commit_id: OLD })],
+    compare,
+    checkRunPages,
   });
   assert.equal(result.status, 0, result.stdout);
   assert.match(result.stdout, /carry-forward/, result.stdout);

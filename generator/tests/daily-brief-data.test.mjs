@@ -131,13 +131,13 @@ const FUEL_META = {
   },
 };
 
-test('fuel: shapes rankings and summary from the metadata doc', () => {
+test('fuel: shapes rankings and suppresses a global Swiss station without route context', () => {
   const block = shapeFuel(FUEL_META, { nowMs: NOW });
   assert.equal(block.available, true);
   assert.equal(block.municipalityCount, 518);
   assert.equal(block.cheapestItaly[0].municipality, 'Livigno');
   assert.equal(block.bestSavings[0].saving50LEur, 25.25);
-  assert.equal(block.cheapestSwissStation.sp95PriceChf, 1.42);
+  assert.equal(block.cheapestSwissStation, null);
 });
 
 test('fuel: degrades on stale generatedAt and on missing doc', () => {

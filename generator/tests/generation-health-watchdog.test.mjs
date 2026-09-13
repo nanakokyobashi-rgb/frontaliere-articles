@@ -141,6 +141,7 @@ const LOG_DRY = [
 ].join('\n');
 
 const LOG_OUTCOMES = [
+  'generate\tResolve run mode and section\t2026-08-10T10:00:00.0Z event=schedule chain=false → section=frontaliere dry_run=false',
   'admit\tCheck generation concurrency\t2026-08-10T10:00:00.1Z GENERATION_OUTCOME kind=skipped reason=admit-in-flight section=unknown',
   'generate\tGenerate the article\t2026-08-10T10:01:00.1Z GENERATION_OUTCOME kind=generated reason=article section=frontaliere',
   'generate\tGenerate the article\t2026-08-10T10:02:00.1Z GENERATION_OUTCOME kind=no-article reason=declared section=svizzera',
@@ -397,6 +398,37 @@ describe('summarizeRuns — i denominatori', () => {
       },
     });
   });
+
+  test('scompone gli esiti per sezione solo quando la run e’ dichiarata non-dry', () => {
+    const dryWithOutcome = parseRunLog([
+      'generate\tResolve run mode and section\t2026-08-10T11:00:00.0Z event=push chain=false → section=frontaliere dry_run=true',
+      'generate\tGenerate the article\t2026-08-10T11:00:01.0Z GENERATION_OUTCOME kind=generated reason=article section=frontaliere',
+    ].join('\n'));
+    const s = summarizeRuns([parseRunLog(LOG_OUTCOMES), dryWithOutcome]);
+    assert.deepEqual(s.outcomesBySection.get('frontaliere'), {
+      total: 2,
+      generated: 1,
+      noArticle: 0,
+      timeout: 1,
+      skipped: 0,
+      error: 0,
+      unknown: 0,
+      byReason: { article: 1, 'hard-kill': 1 },
+    });
+    assert.deepEqual(s.outcomesBySection.get('svizzera'), {
+      total: 1,
+      generated: 0,
+      noArticle: 1,
+      timeout: 0,
+      skipped: 0,
+      error: 0,
+      unknown: 0,
+      byReason: { declared: 1 },
+    });
+    // Il dry-run non è evidenza per-sezione, anche se un log futuro dovesse
+    // emettere un marker con `section=`.
+    assert.equal(s.outcomesBySection.get('frontaliere').total, 2);
+  });
 });
 
 // ── 2. Le condizioni e le loro soglie ───────────────────────────────────────
@@ -639,6 +671,49 @@ describe('le condizioni sono ACCESE sui guasti realmente accaduti', () => {
     assert.equal(v.firing, true);
     assert.match(v.body, /17\.0h/);
     assert.match(v.body, /\*\*14\*\*/);
+  });
+
+  test('section-dry: frontaliere ferma mentre svizzera produce — misura e azione restano per-sezione', () => {
+    const m = healthy();
+    m.commits.perSection.frontaliere.lastArticleAt = NOW - 12 * H;
+    m.commits.perSection.frontaliere.articles = 0;
+    m.commits.perSection.frontaliere.rejected = 2;
+    m.commits.perSection.frontaliere.timestamps = [];
+    m.commits.perSection.svizzera.timestamps = Array.from({ length: 5 }, (_, i) => NOW - i * H);
+    m.runs.outcomesBySection = new Map([
+      ['frontaliere', {
+        total: 3, generated: 0, noArticle: 3, timeout: 0, error: 0, skipped: 0, unknown: 0,
+        byReason: { declared: 3 },
+      }],
+      ['svizzera', {
+        total: 4, generated: 4, noArticle: 0, timeout: 0, error: 0, skipped: 0, unknown: 0,
+        byReason: { article: 4 },
+      }],
+    ]);
+    const v = verdictFor(m, 'section-dry', 'frontaliere');
+    assert.equal(v.firing, true);
+    assert.match(v.body, /12\.0h/);
+    assert.match(v.body, /\*\*5\*\*/);
+    assert.match(v.body, /Tentativi registrati nei commit per `frontaliere`: \*\*2\*\*/);
+    assert.match(v.body, /Esiti delle run dichiarati da `frontaliere`: \*\*3\*\*/);
+    assert.match(v.body, /no-article 3/);
+    assert.match(v.body, /Azione misurabile per questa sezione/);
+    assert.match(v.body, /2\*\* commit di candidati rifiutati/);
+    assert.doesNotMatch(v.body, /generated 4/);
+  });
+
+  test('section-dry non inventa esiti quando i log non sono misurabili', () => {
+    const m = healthy();
+    m.commits.perSection.frontaliere.lastArticleAt = NOW - 12 * H;
+    m.commits.perSection.frontaliere.articles = 0;
+    m.commits.perSection.frontaliere.rejected = 2;
+    m.commits.perSection.frontaliere.timestamps = [];
+    m.commits.perSection.svizzera.timestamps = Array.from({ length: 5 }, (_, i) => NOW - i * H);
+    m.runs.available = false;
+    const v = verdictFor(m, 'section-dry', 'frontaliere');
+    assert.equal(v.firing, true);
+    assert.match(v.body, /Esiti delle run per sezione: \*\*non misurati\*\*/);
+    assert.doesNotMatch(v.body, /no-article 0/);
   });
 
   test('section-dry NON si accende se anche l\'altra sezione è ferma: quello è un guasto globale', () => {
