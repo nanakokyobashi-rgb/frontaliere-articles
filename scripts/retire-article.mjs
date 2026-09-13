@@ -56,7 +56,7 @@ import {
   seoFilesFor, leftoverSurfacesFor, requiredWritableSurfaceFilesFor,
   surfaceArticleIdStatus, SURFACE_ARTICLE_ID_STATUS,
   assertRegularFileIfPresent,
-  requireRegularFile, requireWritableRegularFile,
+  requireRegularFile, requireWritableDirectory, requireWritableRegularFile,
 } from './lib/article-surfaces.mjs';
 // La localizzazione dei letterali TS (span dell'array piatto degli id, e la
 // parentesi che chiude davvero quella di apertura) vive in un modulo condiviso:
@@ -87,6 +87,7 @@ function validateWriteTargets(writes) {
 /** Aggiunge un target opzionale solo se è davvero un file cancellabile. */
 function queueDeleteTarget(deletes, planned, file, what) {
   if (!assertRegularFileIfPresent(ROOT, file, `target da cancellare (${what})`)) return;
+  requireWritableDirectory(ROOT, path.dirname(file), `directory padre del target da cancellare (${what})`);
   deletes.push(file);
   planned.push({ file, what });
 }
@@ -95,6 +96,7 @@ function queueDeleteTarget(deletes, planned, file, what) {
 function validateDeleteTargets(deletes) {
   for (const file of deletes) {
     requireRegularFile(ROOT, file, 'target da cancellare');
+    requireWritableDirectory(ROOT, path.dirname(file), 'directory padre del target da cancellare');
   }
 }
 
@@ -424,6 +426,12 @@ function main() {
     RETIRED_LEDGER,
     'target da scrivere (ledger ritirati)',
   );
+  const retiredLedgerDirectory = path.dirname(RETIRED_LEDGER);
+  requireWritableDirectory(
+    ROOT,
+    retiredLedgerDirectory,
+    'directory padre del ledger ritirati',
+  );
   const ledgerPath = rel(RETIRED_LEDGER);
   const ledger = retiredLedgerPresent
     ? JSON.parse(readFileSync(ledgerPath, 'utf-8'))
@@ -450,6 +458,11 @@ function main() {
   // planning so a directory/FIFO or a vanished file cannot slip in between
   // validation and the first write.
   validateDeleteTargets(deletes);
+  requireWritableDirectory(
+    ROOT,
+    retiredLedgerDirectory,
+    'directory padre del ledger ritirati',
+  );
 
   if (dryRun) {
     console.log('\n[DRY RUN] niente scritto.');

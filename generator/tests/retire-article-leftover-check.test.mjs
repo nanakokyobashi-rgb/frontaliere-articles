@@ -64,6 +64,7 @@ import {
   isRegularFile,
   isWritableRegularFile,
   requireRegularFile,
+  requireWritableDirectory,
   requireWritableRegularFile,
   requiredWritableSurfaceFilesFor,
   seoFilesFor,
@@ -288,6 +289,25 @@ test('il preflight di scrittura distingue un file leggibile ma non scrivibile', 
   }
 });
 
+test('il preflight retirement blocca directory parent non scrivibili', () => {
+  const root = mkdtempSync(path.join(os.tmpdir(), 'article-writable-parent-'));
+  try {
+    const parent = path.join(root, 'content/blog/it');
+    mkdirSync(parent, { recursive: true });
+    chmodSync(parent, 0o555);
+    try {
+      assert.throws(
+        () => requireWritableDirectory(root, 'content/blog/it', 'directory parent'),
+        /directory parent[\s\S]*non scrivibile[\s\S]*W_OK\|X_OK/,
+      );
+    } finally {
+      chmodSync(parent, 0o755);
+    }
+  } finally {
+    rmSync(root, { recursive: true, force: true });
+  }
+});
+
 test('SEO distingue assenza da directory, FIFO e path illeggibile', () => {
   const fixtures = [
     {
@@ -446,10 +466,23 @@ test('retire-article valida tutti i target delete prima del primo write', () => 
   assert.match(src, /queueDeleteTarget\(deletes, planned, sidecar, 'sidecar'\)/);
   assert.match(src, /queueDeleteTarget\(deletes, planned, asset, 'asset'\)/);
   assert.match(src, /function validateDeleteTargets\(/);
+  assert.match(src, /queueDeleteTarget\([\s\S]*?requireWritableDirectory\(/);
+  assert.match(src, /validateDeleteTargets\([\s\S]*?requireWritableDirectory\(/);
   assert.ok(validateAt >= 0 && validateAt < firstWriteAt, 'i target delete devono fallire prima di ogni write');
   assert.doesNotMatch(src, /existsSync\(rel\(bodyFile\)\)/);
   assert.doesNotMatch(src, /existsSync\(rel\(sidecar\)\)/);
   assert.doesNotMatch(src, /existsSync\(rel\(asset\)\)/);
+});
+
+test('retire-article preflighta e ricontrolla la directory del ledger atomico', () => {
+  const src = codeOnly(readFileSync(path.join(ROOT, 'scripts/retire-article.mjs'), 'utf8'));
+  const firstWriteAt = src.indexOf('for (const [file, text] of writes) write(file, text);');
+  const ledgerPreflightAt = src.indexOf('const retiredLedgerDirectory = path.dirname(RETIRED_LEDGER);');
+  const ledgerRecheckAt = src.lastIndexOf("'directory padre del ledger ritirati'");
+  assert.match(src, /const retiredLedgerDirectory = path\.dirname\(RETIRED_LEDGER\);/);
+  assert.match(src, /requireWritableDirectory\(\s*ROOT,\s*retiredLedgerDirectory/);
+  assert.ok(ledgerPreflightAt >= 0 && ledgerPreflightAt < firstWriteAt, 'la directory del ledger va preflightata prima del primo write');
+  assert.ok(ledgerRecheckAt >= 0 && ledgerRecheckAt < firstWriteAt, 'la directory del ledger va ricontrollata prima del primo write');
 });
 
 test('retire-article rifiuta un id mancante, vuoto o fatto di spazi prima di scrivere', () => {

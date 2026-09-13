@@ -164,6 +164,23 @@ export function assertWritableRegularFileIfPresent(root, rel, label = 'superfici
   return true;
 }
 
+/** Richiede una directory esistente e utilizzabile per write/rename/unlink. */
+export function requireWritableDirectory(root, rel, label = 'directory') {
+  const status = surfacePathStatus(root, rel);
+  if (status !== SURFACE_PATH_STATUS.DIRECTORY) {
+    throw invalidDirectoryError(rel, status, label);
+  }
+  try {
+    accessSync(path.join(root, rel), fsConstants.W_OK | fsConstants.X_OK);
+  } catch {
+    throw new Error(
+      `${label}: '${rel}' è una directory non scrivibile (servono W_OK|X_OK); ` +
+      'il retirement si ferma prima del primo write.',
+    );
+  }
+  return true;
+}
+
 export const LOCALES = ['it', 'en', 'de', 'fr'];
 export const IMAGES_LEDGER = 'data/blog-images-used.json';
 export const IMAGE_CATALOG = 'public/data/journalist-image-catalog.json';
