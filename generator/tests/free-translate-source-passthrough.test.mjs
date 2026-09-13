@@ -231,6 +231,14 @@ describe('freeTranslate — guardia «uscita == sorgente»', () => {
     assert.match(summary, /Tier passthrough \(chunk/);
   });
 
+  test('documenta la soglia dei chunk con la misura del corpus che la sostiene (#1320/FU-025)', () => {
+    const source = readFileSync(new URL('../scripts/lib/free-translate.mjs', import.meta.url), 'utf8');
+    assert.match(source, /const MIN_SUBSTANTIVE_PASSTHROUGH_WORDS = 8;/);
+    assert.match(source, /blog-body:\s+15'476 file, 46'524 campi, 48'298 chunk/);
+    assert.match(source, /blog-body-ch:\s+8'388 file, 25'164 campi, 25'589 chunk/);
+    assert.match(source, /totale:\s+23'864 file, 71'688 campi, 73'887 chunk/);
+  });
+
   // ── IL VERSO INVERSO: cio' che NON deve cambiare ───────────────────────────
 
   test('lascia passare una traduzione vera e la conta come hit', async () => {
