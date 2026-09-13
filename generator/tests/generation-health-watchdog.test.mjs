@@ -1073,7 +1073,7 @@ describe('il cablaggio esiste davvero — non solo nei commenti', () => {
     // finestra e la soglia sono UN parametro solo, e questo test lega le due
     // metà che vivono in file diversi.
     const src = fs.readFileSync(WORKFLOW, 'utf8');
-    const m = /--run-lookback-hours \$\{\{ github\.event\.inputs\.run_lookback_hours \|\| '(\d+)' \}\}/.exec(src);
+    const m = /--run-lookback-hours\s+"?\$\{\{ github\.event\.inputs\.run_lookback_hours \|\| '(\d+)' \}\}"?/.exec(src);
     assert.ok(m, 'il workflow non passa --run-lookback-hours con un default leggibile');
     assert.equal(
       Number(m[1]),

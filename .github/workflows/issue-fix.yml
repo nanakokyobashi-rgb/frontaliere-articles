@@ -458,9 +458,11 @@ jobs:
           console.log('is_aggregate=true');
           NODE
           else
-            echo "is_daily_bucket=false" >> "$GITHUB_OUTPUT"
-            echo "daily_key=" >> "$GITHUB_OUTPUT"
-            echo "selected_item_id=" >> "$GITHUB_OUTPUT"
+            {
+              echo "is_daily_bucket=false"
+              echo "daily_key="
+              echo "selected_item_id="
+            } >> "$GITHUB_OUTPUT"
           fi
 
       - name: Validate daily bucket item selection (fail closed)

@@ -215,7 +215,6 @@ jobs:
 
           # ── Fase 3: promemoria di rotazione se la scadenza è vicina ───────
           NOW_EPOCH="$(date -u +%s)"
-          SHOULD_WARN=false
           WARN_REASON=""
           EXPIRY_DISPLAY="${EXPIRY:-sconosciuta}"
 

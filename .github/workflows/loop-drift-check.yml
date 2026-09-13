@@ -96,13 +96,13 @@ jobs:
           # divergenza col sito non è un difetto della PR in corso, e far
           # fallire il check bloccherebbe l'auto-merge per una ragione che non
           # riguarda chi l'ha aperta. Sullo schedule invece si apre la issue.
-          ARGS=""
+          args=()
           if [ "${{ github.event_name }}" = "schedule" ] || [ "${{ github.event.inputs.report_issue }}" = "true" ] || [ "${{ github.event.inputs.report_issue }}" = "1" ] || [ "${{ github.event.inputs.report_issue }}" = "True" ]; then
-            ARGS="--issue --strict"
+            args+=(--issue --strict)
           fi
           REPORT_LOG="$(mktemp)"
           set +e
-          node scripts/ci/loop-drift-check.mjs $ARGS >"$REPORT_LOG" 2>&1
+          node scripts/ci/loop-drift-check.mjs "${args[@]}" >"$REPORT_LOG" 2>&1
           DRIFT_STATUS=$?
           set -e
           cat "$REPORT_LOG"

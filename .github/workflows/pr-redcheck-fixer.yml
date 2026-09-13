@@ -772,11 +772,11 @@ jobs:
         run: |
           if [ "${{ steps.guard.outputs.proceed }}" != 'true' ]; then
             CLAIM_STATUS=released
-          elif [ "${{ steps.claude_review.outcome }}" = 'cancelled' ]; then
+          elif [ "${{ steps.claude_fix.outcome }}" = 'cancelled' ]; then
             CLAIM_STATUS=failed-transient
-          elif [ "${{ steps.claude_review.outcome }}" = 'skipped' ]; then
+          elif [ "${{ steps.claude_fix.outcome }}" = 'skipped' ]; then
             CLAIM_STATUS=failed-transient
-          elif [ "${{ steps.claude_review.outcome }}" = 'failure' ]; then
+          elif [ "${{ steps.claude_fix.outcome }}" = 'failure' ]; then
             CLAIM_STATUS=failed-terminal
           else
             CLAIM_STATUS=completed
