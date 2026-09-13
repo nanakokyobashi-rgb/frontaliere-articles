@@ -22,6 +22,8 @@
  *   sitemap-blog.xml / sitemap-blog-ch.xml   article sitemaps, with hreflang
  *   rss*.xml           ten RSS feeds (two sections x four locales + main copy)
  *   news-ticker-live.json  the homepage ticker's five newest articles
+ *   plate-auction-editorial.json  localized evergreen/weekly editorial blocks
+ *                      built from the public plate-auction API over HTTP
  *   sitemap-news-candidates.xml  Google News candidates (migration §7.2)
  *   images-manifest.json + images/blog/*.webp  hero images (migration §7.1),
  *                      emitted ONLY when this repo actually holds images
@@ -86,6 +88,10 @@ import { findShadowedTickerArticles } from './lib/ticker-shadow-check.mjs';
 // gonfiava identicamente il dichiarato e il ri-derivato (vedi il suo header).
 import { countXmlTags } from './lib/count-xml-tags.mjs';
 import {
+  buildPlateAuctionEditorial,
+  fetchPlateAuctionEditorialInput,
+} from './lib/plate-auction-editorial.mjs';
+import {
   collectSeoEntryMetadata,
   floorFrom,
   ARCHIVE_SITEMAP,
@@ -109,6 +115,8 @@ const IMAGE_MANIFEST = 'images-manifest.json';
 const BORDER_RANKING = 'border-wait-ranking.json';
 /** Daily-brief snapshot (Bollettino del Frontaliere) — same republish contract. */
 const DAILY_BRIEF = 'daily-brief.json';
+/** Localized editorial companion for the public plate-auction catalogue. */
+const PLATE_AUCTION_EDITORIAL = 'plate-auction-editorial.json';
 
 // Gli INPUT dei tre artefatti condizionali, in una sorgente sola perche' due
 // posti li leggono e devono leggere lo stesso: il ramo che decide se emettere,
@@ -124,6 +132,7 @@ let newsCandidateCount = 0;
 let imageCount = 0;
 let borderRankingEntries = 0;
 let dailyBriefBlocks = 0;
+let plateAuctionEditorialLocales = 0;
 
 const written = {};
 // Sanitised on the value, not on the serialised text: JSON.stringify ESCAPES a
@@ -852,6 +861,27 @@ write('news-ticker-live.json', { schema: 1, articles: tickerArticles });
   }
 }
 
+// Plate-auction editorial companion. The upstream catalogue belongs to the
+// site/API side of the boundary, so this publisher reads it over HTTP and never
+// imports a site file or copies its static fallback. An unavailable upstream
+// must not erase the evergreen guide or block the otherwise healthy article
+// publish: the weekly block records the unavailable state explicitly.
+{
+  const input = await fetchPlateAuctionEditorialInput();
+  const editorial = buildPlateAuctionEditorial({
+    snapshot: input.snapshot,
+    upstreamStatus: input.status,
+    generatedAt: new Date().toISOString(),
+  });
+  if (input.errorCode) editorial.source.errorCode = input.errorCode;
+  write(PLATE_AUCTION_EDITORIAL, editorial);
+  plateAuctionEditorialLocales = Object.keys(editorial.evergreen ?? {}).length;
+  console.log(
+    `[build-api] ${PLATE_AUCTION_EDITORIAL}: ${editorial.status}, ` +
+      `${plateAuctionEditorialLocales} evergreen locales`,
+  );
+}
+
 // Written last: it records the byte size of every other artifact.
 write('manifest.json', {
   schema: 1,
@@ -871,6 +901,7 @@ write('manifest.json', {
     images: imageCount,
     borderRankingEntries,
     dailyBriefBlocks,
+    plateAuctionEditorialLocales,
   },
   files: written,
 });
@@ -1052,6 +1083,10 @@ console.log(`[build-api] wrote ${Object.keys(written).length} files to dist/api`
       DAILY_BRIEF,
       fileInput(...DAILY_BRIEF_SRC),
       () => Object.values(jsonOut(DAILY_BRIEF).blocks ?? {}).filter((b) => b?.available).length,
+    ),
+    plateAuctionEditorialLocales: derivedAlways(
+      PLATE_AUCTION_EDITORIAL,
+      () => Object.keys(jsonOut(PLATE_AUCTION_EDITORIAL).evergreen ?? {}).length,
     ),
   };
 
