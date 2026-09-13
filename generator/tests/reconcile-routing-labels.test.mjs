@@ -231,13 +231,15 @@ test('#1211: agent:fix stale senza PR/beacon viene riarmato, gli stati vivi aspe
 test('la scansione paginata include tutte le pagine e non conta le rimozioni fallite', () => {
   const fakeBin = fs.mkdtempSync(path.join(os.tmpdir(), 'reconcile-gh-'));
   const fakeGh = path.join(fakeBin, 'gh');
+  const traceFile = path.join(fakeBin, 'trace');
   fs.writeFileSync(fakeGh, `#!/bin/sh
-if [ "$1" = "api" ] && [ "$3" = "--paginate" ] && [ "$4" = "--slurp" ] && printf '%s' "$2" | grep -q 'labels=agent%3Afix'; then
-  printf '%s\\n' '[[{"number":1,"labels":[{"name":"agent:fix"},{"name":"agent:fix-queued"}],"updated_at":"1970-01-01T00:00:00Z"}],[{"number":2,"labels":[{"name":"agent:fix"},{"name":"agent:fix-queued"}],"updated_at":"1970-01-01T00:00:00Z"}]]'
+printf 'FAKE_GH_ARGS:%s\\n' "$*" >> "$TRACE_FILE"
+if [ "$1" = "api" ] && [ "$3" = "--paginate" ] && [ "$4" = "--jq" ] && printf '%s' "$2" | grep -q 'labels=agent%3Afix'; then
+  printf '%s\\n' '{"number":1,"labels":["agent:fix","agent:fix-queued"],"updatedAt":"1970-01-01T00:00:00Z","isPullRequest":false}'
+  printf '%s\\n' '{"number":2,"labels":["agent:fix","agent:fix-queued"],"updatedAt":"1970-01-01T00:00:00Z","isPullRequest":false}'
   exit 0
 fi
-if [ "$1" = "api" ] && [ "$3" = "--paginate" ] && [ "$4" = "--slurp" ] && printf '%s' "$2" | grep -q 'labels=agent%3Adecompose'; then
-  printf '%s\\n' '[]'
+if [ "$1" = "api" ] && [ "$3" = "--paginate" ] && [ "$4" = "--jq" ] && printf '%s' "$2" | grep -q 'labels=agent%3Adecompose'; then
   exit 0
 fi
 if [ "$1" = "issue" ] && [ "$2" = "edit" ]; then
@@ -255,9 +257,17 @@ exit 0
       GH_REPO: '',
       GITHUB_REPOSITORY: '',
       MIN_AGE_SEC: '0',
+      TRACE_FILE: traceFile,
     },
   });
   assert.equal(result.status, 0, `${result.stdout}\n${result.stderr}`);
+  const trace = fs.readFileSync(traceFile, 'utf8');
+  assert.match(trace, /--paginate --jq/);
+  assert.match(trace, /number/);
+  assert.match(trace, /labels/);
+  assert.match(trace, /updated_at/);
+  assert.doesNotMatch(trace, /body/);
+  assert.doesNotMatch(trace, /--slurp/);
   assert.match(result.stdout, /Riconciliazioni: 1\./);
   assert.match(result.stdout, /Rimozioni riuscite: 1\./);
   assert.match(result.stdout, /Rimozioni fallite: 1\./);

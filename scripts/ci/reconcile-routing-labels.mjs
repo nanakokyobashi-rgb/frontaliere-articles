@@ -157,22 +157,37 @@ function gh(args, { json = true } = {}) {
  * Legge tutte le issue aperte per una label, non solo il primo migliaio.
  * `gh issue list --limit 1000` tronca lo sguardo proprio quando il ciclo ha
  * una coda grande; il gate finirebbe per stampare «nessun doppio» senza aver
- * osservato le pagine successive. REST + `--paginate` mantiene il limite per
- * pagina e `--slurp` ci consegna un array di pagine da appiattire.
+ * osservato le pagine successive. `gh api --paginate --jq` proietta ogni
+ * elemento prima che il processo Node lo legga: non usiamo `--slurp`, che la
+ * versione di gh in CI non accetta insieme a `--jq` e che accumulerebbe i
+ * body completi di tutte le pagine nel buffer del processo.
  */
 function fetchOpenIssuesForLabel(active) {
   const repo = repoName() || '{owner}/{repo}';
   const endpoint = `repos/${repo}/issues?state=open&labels=${encodeURIComponent(active)}&per_page=100`;
-  const pages = gh(['api', endpoint, '--paginate', '--slurp']);
-  const issues = Array.isArray(pages) ? pages.flat() : [];
+  const projected = gh([
+    'api',
+    endpoint,
+    '--paginate',
+    '--jq',
+    '.[] | {number, labels: [.labels[]?.name], updatedAt: (.updated_at // .updatedAt // ""), isPullRequest: (.pull_request != null)}',
+  ], { json: false });
+  const issues = projected
+    .split('\n')
+    .map((line) => line.trim())
+    .filter(Boolean)
+    .flatMap((line) => {
+      const value = JSON.parse(line);
+      return Array.isArray(value) ? value : [value];
+    });
   return issues
-    // L'endpoint REST /issues include anche le pull request; il vecchio
-    // `gh issue list` le escludeva per noi.
-    .filter((iss) => iss && !iss.pull_request)
+    // L'endpoint REST /issues include anche le pull request; la proiezione
+    // conserva solo il flag necessario per escluderle.
+    .filter((iss) => iss && !iss.isPullRequest)
     .map((iss) => ({
       number: Number(iss.number),
       labels: Array.isArray(iss.labels) ? iss.labels : [],
-      updatedAt: iss.updatedAt ?? iss.updated_at ?? '',
+      updatedAt: iss.updatedAt ?? '',
     }))
     .filter((iss) => Number.isInteger(iss.number) && iss.number > 0);
 }
