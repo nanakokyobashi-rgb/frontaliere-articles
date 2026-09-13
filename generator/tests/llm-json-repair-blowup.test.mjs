@@ -72,6 +72,21 @@ test('con un preambolo seleziona il payload JSON finale, non quello piu\' lungo'
   assert.equal(parsed.slugs.it, 'final');
 });
 
+test('raccoglie una risposta successiva anche quando il primo root parte a offset zero', () => {
+  const raw = '{"id":"example","slugs":{"it":"example"}} Risposta finale: {"id":"final","slugs":{"it":"final"}}';
+  const parsed = JSON.parse(repairLlmJson(raw));
+  assert.equal(parsed.id, 'final');
+  assert.equal(parsed.slugs.it, 'final');
+});
+
+test('un esempio iniziale non fa scegliere l\'esempio JSON della coda', () => {
+  const raw = 'Esempio: {"id":"example","slugs":{"it":"example"}} {"id":"real","slugs":{"it":"real"}} Nota: esempio {"id":"trailing","slugs":{"it":"trailing"},"extra":"piu lungo"}';
+  const parsed = JSON.parse(repairLlmJson(raw));
+  assert.equal(parsed.id, 'real');
+  assert.equal(parsed.slugs.it, 'real');
+  assert.equal('extra' in parsed, false);
+});
+
 test('il limite dei candidati ignora gli oggetti annidati nel preambolo', () => {
   let example = '{"root":';
   for (let i = 0; i < 30; i++) example += '{"level":';

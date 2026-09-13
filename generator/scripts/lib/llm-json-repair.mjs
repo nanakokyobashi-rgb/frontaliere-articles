@@ -744,7 +744,7 @@ function collectJsonCandidates(source, rootOpeners) {
   // which to distinguish later roots from nested salvage material. Keep the
   // historical truncated-payload fallback and fail closed rather than
   // guessing a later payload through that ambiguity.
-  if (start > 0 && firstCloseIdx !== -1) {
+  if (firstCloseIdx !== -1) {
     let nextStart = nextRootStart(source, firstCloseIdx + 1, rootOpeners);
     let examined = 0;
     while (nextStart !== -1 && examined < MAX_LATER_CANDIDATES) {
@@ -778,7 +778,7 @@ function selectJsonCandidate(source, parseable) {
   // candidate is the only plausible answer. In every other case the first
   // valid candidate wins, so trailing examples cannot overwrite a response.
   if (cueBefore(source, topLevel[0].start, EXAMPLE_CUE_RE)) {
-    return topLevel[topLevel.length - 1];
+    return topLevel[1] ?? topLevel[0];
   }
   return topLevel[0];
 }
