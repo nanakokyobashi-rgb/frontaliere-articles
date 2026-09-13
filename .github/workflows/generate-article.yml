@@ -620,6 +620,19 @@ jobs:
           set -euo pipefail
           EV="${{ github.event_name }}"
 
+          # `workflow_dispatch` è usato sia dagli umani sia dal successore
+          # auto-generato dalla catena. Il secondo deve conservare il fallback
+          # fra sezioni; il primo deve rispettare la sezione richiesta.
+          CHAIN_LINK=false
+          chain_depth=0
+          case "${{ inputs.chain_depth }}" in
+            ''|*[!0-9]*) ;;
+            *) chain_depth="${{ inputs.chain_depth }}" ;;
+          esac
+          if [ "$EV" = "workflow_dispatch" ] && [ "$chain_depth" -gt 0 ]; then
+            CHAIN_LINK=true
+          fi
+
           # A push is DRY unless it carried a corpus change — that is the chain
           # link. Editing this workflow or create-article.mjs must still only
           # ever self-test, never generate for real.
@@ -674,8 +687,9 @@ jobs:
             echo "dry=$DRY"
             echo "section=$SEC"
             echo "chain=$CHAIN"
+            echo "chain_link=$CHAIN_LINK"
           } >> "$GITHUB_OUTPUT"
-          echo "event=$EV chain=$CHAIN → section=$SEC dry_run=$DRY"
+          echo "event=$EV chain=$CHAIN chain_link=$CHAIN_LINK → section=$SEC dry_run=$DRY"
 
       - name: Setup Node.js
         uses: actions/setup-node@v5
@@ -834,6 +848,7 @@ jobs:
           TARGET_SECTION: ${{ steps.mode.outputs.section }}
           SOURCE_URL: ${{ inputs.url }}
           EVENT_NAME: ${{ github.event_name }}
+          CHAIN_LINK: ${{ steps.mode.outputs.chain_link }}
           # Issue #313 — la meta' che DEVE stare sul processo che chiama callLLM:
           # ai-models.mjs offre Codex quando il broker action-owned e' attivo,
           # e claude-cli/haiku solo se hasClaudeCodeOauthToken() e il relativo
@@ -890,9 +905,14 @@ jobs:
           # The attempt list, fixed before the loop — this is the termination
           # argument in code: one entry per section, never more.
           sections=("$TARGET_SECTION")
-          if [ "${EVENT_NAME:-}" != "workflow_dispatch" ] && [ -z "${SOURCE_URL:-}" ]; then
+          if [ -z "${SOURCE_URL:-}" ] && {
+            [ "${EVENT_NAME:-}" != "workflow_dispatch" ] ||
+            [ "${CHAIN_LINK:-false}" = "true" ]
+          }; then
             # A human who named a section (or handed over a URL, which is
-            # section-specific) gets that section and nothing else.
+            # section-specific) gets that section and nothing else. A chain
+            # link is also `workflow_dispatch`, but it is not human: it keeps
+            # the bounded fallback so one dry section cannot kill the baton.
             if [ "$TARGET_SECTION" = "svizzera" ]; then
               sections+=(frontaliere)
             else
