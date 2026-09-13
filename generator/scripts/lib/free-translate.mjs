@@ -416,6 +416,10 @@ export function isSourcePassthrough(sourceText, translatedText) {
 // Solo un segmento con abbastanza parole traducibili puo' quindi invalidare il
 // campo a chunk; l'eventuale eco breve resta nell'assemblato e viene giudicato
 // dal confronto sul campo intero in `tryTier`.
+// Misura corpus 2026-09-12 (content/blog-body{,-ch}):
+//   blog-body:    15'476 file, 46'524 campi, 48'298 chunk → 119 brevi / 48'179 sostanziosi
+//   blog-body-ch:  8'388 file, 25'164 campi, 25'589 chunk →  37 brevi / 25'552 sostanziosi
+//   totale:       23'864 file, 71'688 campi, 73'887 chunk → 156 brevi / 73'731 sostanziosi
 const MIN_SUBSTANTIVE_PASSTHROUGH_WORDS = 8;
 const TRANSLATABLE_WORD_RE = /[\p{L}\p{M}]+(?:['’\-][\p{L}\p{M}]+)*/gu;
 
