@@ -168,7 +168,8 @@ test('il job post-merge usa hash site freschi e committa solo il manifest su mai
   assert.doesNotMatch(yml, /group: transport-identical-twins-realign-\$\{\{ github\.event\.pull_request\.number \}\}/);
   assert.match(yml, /site sha256/);
   assert.match(yml, /ref: main[\s\S]{0,100}fetch-depth: 0/);
-  assert.match(yml, /const expected = \[\.\.\.changed\]/);
+  assert.match(yml, /const expected = \[\.\.\.changed\][\s\S]{0,180}identical\.has\(filename\)/);
+  assert.match(yml, /if \(!identical\.has\(match\[1\]\)\) continue;/);
   assert.match(yml, /const missing = expected\.filter/);
   assert.match(yml, /non cit[aà] tutti i file trasportati/);
   assert.match(yml, /--realign="\$RUNNER_TEMP\/transport-realign\.tsv" --json/);
