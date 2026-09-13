@@ -2230,6 +2230,35 @@ export function hasActiveAgentClaim(iss) {
   const ls = names(iss);
   return ls.includes(LBL_IN_PROGRESS) || ls.includes(LBL_LOCAL) || ls.includes(LBL_REMOTE);
 }
+const activeClaimNames = (iss) => names(iss).filter((name) =>
+  [LBL_IN_PROGRESS, LBL_LOCAL, LBL_REMOTE].includes(name));
+
+/**
+ * Rilegge i claim direttamente da GitHub prima di una mutazione.
+ *
+ * Le issue usate dai pass del drainer sono snapshot: fra `issue list` e il
+ * successivo `issue edit` un fixer locale/remoto può aver preso il lavoro.
+ * Una risposta senza `labels` o una lettura fallita è ambigua e quindi blocca
+ * la scrittura (fail-closed). In dry-run non serve la lettura: nessuna API
+ * mutante viene chiamata.
+ */
+function liveIssueForClaim(num) {
+  try {
+    const issue = gh(['issue', 'view', String(num), '--repo', REPO, '--json', 'labels']);
+    return issue && Array.isArray(issue.labels) ? issue : null;
+  } catch {
+    // Il chiamante aggiunge lo stage e applica il fail-closed uniforme.
+    return null;
+  }
+}
+
+function liveClaimsAllowGroupMutation(issues) {
+  if (DRY) return true;
+  for (const issue of issues || []) {
+    if (!liveClaimAllowsMutation(issue.number)) return false;
+  }
+  return true;
+}
 const attemptOf = (iss) => {
   const m = names(iss).map((n) => /^fu-attempt:(\d+)$/.exec(n)).find(Boolean);
   return m ? parseInt(m[1], 10) : 0;
@@ -2609,23 +2638,21 @@ export function ensureLabel(name, color, description, { run = gh, dry = DRY } = 
  */
 function issueMutationAllowed(num, stage) {
   if (DRY) return true;
-  try {
-    const live = gh(['issue', 'view', String(num), '--repo', REPO, '--json', 'labels']);
-    if (!live || !Array.isArray(live.labels)) {
-      console.log(`::warning::CLAIM-READ-FAIL #${num} (${stage}): label live non verificabile → nessuna mutazione.`);
-      return false;
-    }
-    if (hasActiveAgentClaim(live)) {
-      const claims = names(live)
-        .filter((name) => [LBL_IN_PROGRESS, LBL_LOCAL, LBL_REMOTE].includes(name));
-      console.log(`CLAIM-SKIP #${num} (${stage}; ${claims.join(', ') || 'stato claim incompleto'}) → lascio intatto il lavoro della flotta locale/remota`);
-      return false;
-    }
-    return true;
-  } catch (error) {
-    console.log(`::warning::CLAIM-READ-FAIL #${num} (${stage}): ${String(error).slice(0, 160)} → nessuna mutazione.`);
+  const live = liveIssueForClaim(num);
+  if (!live) {
+    console.log(`::warning::CLAIM-READ-FAIL #${num} (${stage}): label live non verificabile → nessuna mutazione.`);
     return false;
   }
+  if (hasActiveAgentClaim(live)) {
+    const claims = activeClaimNames(live);
+    console.log(`CLAIM-SKIP #${num} (${stage}; ${claims.join(', ') || 'stato claim incompleto'}) → lascio intatto il lavoro della flotta locale/remota`);
+    return false;
+  }
+  return true;
+}
+
+function liveClaimAllowsMutation(num) {
+  return issueMutationAllowed(num, 'claim pre-flight');
 }
 
 /** Commento protetto dalla rilettura del claim live. */
@@ -2657,6 +2684,7 @@ function edit(num, { add = [], remove = [] }) {
   for (const l of add) args.push('--add-label', l);
   for (const l of remove) args.push('--remove-label', l);
   if (DRY) { console.log(`[dry] edit #${num} +[${add}] -[${remove}]`); return true; }
+  if (!liveClaimAllowsMutation(num)) return false;
   try { gh(args, { json: false }); return true; }
   catch (e) { console.log(`::warning::edit #${num} fallito: ${String(e).slice(0, 120)}`); return false; }
 }
@@ -2669,11 +2697,30 @@ function editChecked(num, { add = [], remove = [] }) {
   for (const l of add) args.push('--add-label', l);
   for (const l of remove) args.push('--remove-label', l);
   if (DRY) { console.log(`[dry] edit checked #${num} +[${add}] -[${remove}]`); return true; }
+  if (!liveClaimAllowsMutation(num)) return false;
   try {
     gh(args, { json: false });
     return true;
   } catch (e) {
     console.log(`::warning::edit checked #${num} fallito: ${String(e).slice(0, 160)}`);
+    return false;
+  }
+}
+
+/** Close con la stessa rilettura live dei claim usata dagli edit. */
+function closeChecked(num, { reason = null } = {}) {
+  if (DRY) {
+    console.log(`[dry] close #${num}${reason ? ` (${reason})` : ''}`);
+    return true;
+  }
+  if (!liveClaimAllowsMutation(num)) return false;
+  const args = ['issue', 'close', String(num), '--repo', REPO];
+  if (reason) args.push('--reason', reason);
+  try {
+    gh(args, { json: false });
+    return true;
+  } catch (error) {
+    console.log(`::warning::close #${num} fallita: ${String(error).slice(0, 160)}`);
     return false;
   }
 }
@@ -2777,6 +2824,7 @@ function prepareIssueGroup(group) {
   const label = issueGroupLabel(group?.key, leader);
   if (!label || !Array.isArray(group?.issues) || group.issues.length < 2) return null;
   if (group.issues.some(hasActiveAgentClaim)) return null;
+  if (!liveClaimsAllowGroupMutation(group.issues)) return null;
   ensureLabel(label, '5319e7', `Gruppo issue B19: chiave condivisa, massimo ${ISSUE_GROUP_MAX_SIZE} issue nella PR`);
   for (const issue of group.issues) {
     if (hasActiveAgentClaim(issue)) return null;
@@ -2794,7 +2842,7 @@ function prepareIssueGroup(group) {
 function routeToDecompose(num, { remove = [], note }) {
   if (DRY) { console.log(`[dry] decompose-route #${num}`); return; }
   if (note) commentIssue(num, note, 'decompose-route');
-  edit(num, { add: [LBL_DECOMP_QUEUED], remove });
+  return edit(num, { add: [LBL_DECOMP_QUEUED], remove });
 }
 
 /** Esiste una PR fix APERTA per questa issue? (head fix/issue-N).
@@ -3468,6 +3516,7 @@ export function runDrain() {
       parkedWipDeferredByCap = parkedWipOrder.length - parkedIndex;
       break;
     }
+    if (!liveClaimAllowsMutation(iss.number)) continue;
     // Il confronto del branch è una lettura remota per candidata e le letture
     // successive possono essere ancora più costose. Prenotiamo il candidato
     // prima di iniziare: se il budget non basta, non tocchiamo nulla e il
@@ -3649,7 +3698,7 @@ export function runDrain() {
       commentIssue(p.number,
         `⏭️ **Pre-flight drainer (zero-Claude): padre decomposto fuori dalla coda del fixer.** Lo scope di questa issue vive nelle sub-issue dichiarate da \`DECOMPOSED_INTO\`, che entrano in coda per conto loro; qui non resta lavoro proprio, e un run del fixer non potrebbe che terminare senza PR (o duplicare una figlia). Rimuovo \`agent:fix\`/\`agent:fix-queued\`. La issue **resta aperta**: la chiude il PARENT-CLOSE quando tutte le figlie sono chiuse.`,
         'parent-dequeue comment');
-      edit(p.number, { remove: [LBL_FIX, LBL_QUEUED] });
+      if (!edit(p.number, { remove: [LBL_FIX, LBL_QUEUED] })) continue;
       console.log(`PARENT-DEQUEUE #${p.number} (decomposed:1, lavoro delegato alle figlie) — "${p.title?.slice(0, 50)}"`);
     }
     // Il cap di questo stadio conta le ESAMINATE, non le azioni — a differenza
@@ -3799,6 +3848,7 @@ export function runDrain() {
         console.log(`verdict-exit: cap ${VERDICT_EXIT_MAX_PER_RUN}/run raggiunto, ${parked.length - scanned} candidate rinviate al prossimo tick (no silent cap).`);
         break;
       }
+      if (!liveClaimAllowsMutation(iss.number)) continue;
       // Coppia non atomica (comment → close/edit): non si comincia se non c'è il
       // tempo di finire, o si resta con una issue commentata e non instradata
       // che al tick dopo viene ri-commentata.
@@ -3892,10 +3942,10 @@ export function runDrain() {
             ? `♻️ **Ri-accodata dal followup-drainer (zero-Claude): aveva consegnato, non fallito.**\n\nQuesta issue portava \`${LBL_PARKED}\` e \`fu-attempt:${attemptOf(iss) || '?'}\`, ma il suo ultimo \`FIX_OUTCOME\` è \`pr-created\` **e la PR di fix su \`fix/issue-${iss.number}\` risulta mergiata**. Il tentativo è stato addebitato dal RESCUE perché \`hasFixPR\` guarda solo le PR \`open\`, e una PR di fix mergia prima dei 30 minuti di \`ORPHAN_MIN_AGE_MIN\`: la consegna è stata letta come una run morta.\n\nTolgo \`${LBL_PARKED}\` e il contatore e la rimetto in coda con \`${LBL_QUEUED}\`. Se il lavoro è davvero finito, a chiuderla sarà il rilevatore di già-risolto al giro dopo: questo ramo non lo decide.`
             : `♻️ **Ri-accodata dal followup-drainer (zero-Claude): era parcheggiata senza un solo tentativo.**\n\nQuesta issue portava \`${LBL_PARKED}\` e \`fu-attempt:${attemptOf(iss) || '?'}\`, ma nei suoi commenti non c'è **nessun** \`FIX_OUTCOME\`: nessuna run del fixer l'ha mai lavorata. Il contatore dei tentativi è stato alzato dal RESCUE su promozioni che la coda di concorrenza di \`issue-fix.yml\` aveva sfrattato (\`cancelled\` prima di eseguire uno step), non su fix falliti.\n\nTolgo \`${LBL_PARKED}\` e il contatore e la rimetto in coda con \`${LBL_QUEUED}\`. Il primo giro vero comincia adesso.`;
         commentIssue(iss.number, unparkBody, 'unpark comment');
-        edit(iss.number, {
+        if (!edit(iss.number, {
           add: [LBL_QUEUED, LBL_UNPARKED],
           remove: [LBL_PARKED, ...names(iss).filter((n) => /^fu-attempt:\d+$/.test(n))],
-        });
+        })) continue;
         // La ragione va nel log di PRODUZIONE, non solo nel `--dry-run`: questa
         // riga e' l'unica traccia con cui si audita il drenaggio a posteriori, e
         // su un pool misto attribuirebbe la causa sbagliata a ogni unpark
@@ -3977,6 +4027,7 @@ export function runDrain() {
       .filter((iss) => !isWorkflowScoped(iss.number))
       .filter((iss) => !hasFixPREver(iss.number));
     for (const iss of tooLarge) {
+      if (!liveClaimAllowsMutation(iss.number)) continue;
       if (!budget.take(`#${iss.number} (too-large)`, ITEM_COST_MS)) break;
       // Too-large con lo stadio di decomposizione attivo NON è più un vicolo
       // cieco: "troppo grande per un run" è esattamente il caso d'uso dello
@@ -3992,7 +4043,7 @@ export function runDrain() {
         continue;
       }
       if (DRY) { console.log(`[dry] too-large #${iss.number} (gen ${reparkGenOf(iss)}, 0 PR) → needs-human`); continue; }
-      edit(iss.number, { add: ['needs-human'], remove: [] });
+      if (!edit(iss.number, { add: ['needs-human'], remove: [] })) continue;
       console.log(`TOO-LARGE #${iss.number} → needs-human (gen ${reparkGenOf(iss)}, mai una PR = error_max_turns/too-large; non eleggibile alla decomposizione) — "${iss.title?.slice(0, 45)}"`);
     }
     if (tooLarge.length) console.log(`too-large escalation: ${tooLarge.length} processate (decompose se eleggibili, altrimenti needs-human).`);
@@ -4026,6 +4077,7 @@ export function runDrain() {
       if (has(iss, LBL_SIBLING_DEBT)) continue; // idempotenza: la label È il marker
       const debt = detectSiblingDebt(`${iss.title}\n${iss.body || ''}`, REPO);
       if (!debt) continue;
+      if (!liveClaimAllowsMutation(iss.number)) continue;
       if (!budget.take(`#${iss.number} (sibling-debt)`, ITEM_COST_MS)) break;
       const fileList = debt.files.length
         ? debt.files.slice(0, 5).map((f) => `\`${f}\``).join(', ')
@@ -4145,6 +4197,7 @@ export function runDrain() {
       if (!budget.take(`#${iss.number} (parked-retry)`, ITEM_COST_MS)) break;
       // capability-guard → resta parked (WF-scope: push bloccato; secrets-scope: credenziali mai disponibili)
       if (isCapabilityScoped(iss)) { skippedWf++; continue; }
+      if (!liveClaimAllowsMutation(iss.number)) continue;
       // (too-large escalation gestita dal pass dedicato sopra, no cooldown)
       const gen = reparkGenOf(iss) + 1;
       const prevGen = reparkGenOf(iss) ? `fu-reparked:${reparkGenOf(iss)}` : null;
@@ -4154,10 +4207,10 @@ export function runDrain() {
       // bump. Reset attempts → il fixer migliorato ha tentativi freschi; se
       // rifallisce MAX_ATTEMPTS torna parked, ma a gen MAX_REPARK_GEN resta
       // parked stabile (no loop infinito).
-      edit(iss.number, {
+      if (!edit(iss.number, {
         add: [LBL_QUEUED, `fu-reparked:${gen}`],
         remove: [LBL_PARKED, prevGen, prevAttempt].filter(Boolean),
-      });
+      })) continue;
       console.log(`PARKED-RETRY #${iss.number} → agent:fix-queued (gen ${gen}/${MAX_REPARK_GEN}, attempts reset) — "${iss.title?.slice(0, 50)}"`);
       retried++;
     }
@@ -4327,6 +4380,7 @@ export function runDrain() {
     // Il rescue MUTA le label (re-queue/park). Fermarsi qui è sicuro: nessuna
     // issue non ancora esaminata è stata toccata, e il prossimo tick ricalcola
     // l'intero insieme da GitHub — non c'è cursore da riprendere.
+    if (!liveClaimAllowsMutation(iss.number)) continue;
     if (!budget.take(`#${iss.number} (rescue)`, ITEM_COST_MS)) break;
     const ageMin = minutesSince(iss.updatedAt);
     const hasPR = hasFixPR(iss.number);
@@ -4549,6 +4603,7 @@ export function runDrain() {
   //    visibile → due pending → sfratto. È lo stesso incidente del 2026-08-08,
   //    dove la sesta run cancellata alle 09:02 NON era un crawler.
   for (const iss of crawlerFix) {
+    if (!liveClaimAllowsMutation(iss.number)) continue;
     const hasPR = hasFixPR(iss.number);
     const entry = hasPR ? { outcome: null, at: null } : latestFixOutcomeEntry(iss.number);
     const rawOutcome = entry.outcome;
@@ -4670,6 +4725,7 @@ export function runDrain() {
       // toglierebbe la label su cui il beacon viene cercato.
       const decomposing = listIssues(LBL_DECOMP);
       for (const iss of decomposing) {
+        if (!liveClaimAllowsMutation(iss.number)) continue;
         if (!budget.take(`#${iss.number} (decompose-rescue)`, ITEM_COST_MS)) break;
         const ageMin = minutesSince(iss.updatedAt);
         if (ageMin < ORPHAN_MIN_AGE_MIN) continue; // run appena partita/registrata → aspetta
@@ -4699,14 +4755,18 @@ export function runDrain() {
               .filter((i) => !has(i, LBL_PARKED))
               .sort((a, b) => prioRank(a) - prioRank(b) || Date.parse(a.createdAt) - Date.parse(b.createdAt));
           if (dq.length && budget.take(`#${dq[0].number} (decompose-drain)`, ITEM_COST_MS)) {
-            const decomposeLease = reserveQuotaLease(dq[0].number, 'issue-decompose');
-            if (!decomposeLease.allowed) {
-              console.log(`DECOMPOSE DRAIN sospeso: lease quota non ottenibile per #${dq[0].number} (${decomposeLease.reason || 'errore'}${decomposeLease.error ? ', fail-closed' : ''}).`);
+            if (!liveClaimAllowsMutation(dq[0].number)) {
+              console.log(`DECOMPOSE-SKIP #${dq[0].number}: claim live → nessuna promozione e nessuna lease quota.`);
             } else {
-              console.log(`PROMUOVO DECOMPOSE #${dq[0].number} (${has(dq[0], 'fu-prio:high') ? 'high' : 'low'}) → ${LBL_DECOMP} — "${dq[0].title?.slice(0, 50)}"`);
-              if (!edit(dq[0].number, { add: [LBL_DECOMP], remove: [LBL_DECOMP_QUEUED] })) {
-                releaseQuotaLease(dq[0].number, 'issue-decompose', decomposeLease.token);
-                console.log(`::warning::DECOMPOSE-SKIP #${dq[0].number}: promozione fallita, lease quota rilasciato.`);
+              const decomposeLease = reserveQuotaLease(dq[0].number, 'issue-decompose');
+              if (!decomposeLease.allowed) {
+                console.log(`DECOMPOSE DRAIN sospeso: lease quota non ottenibile per #${dq[0].number} (${decomposeLease.reason || 'errore'}${decomposeLease.error ? ', fail-closed' : ''}).`);
+              } else {
+                console.log(`PROMUOVO DECOMPOSE #${dq[0].number} (${has(dq[0], 'fu-prio:high') ? 'high' : 'low'}) → ${LBL_DECOMP} — "${dq[0].title?.slice(0, 50)}"`);
+                if (!edit(dq[0].number, { add: [LBL_DECOMP], remove: [LBL_DECOMP_QUEUED] })) {
+                  releaseQuotaLease(dq[0].number, 'issue-decompose', decomposeLease.token);
+                  console.log(`::warning::DECOMPOSE-SKIP #${dq[0].number}: promozione fallita, lease quota rilasciato.`);
+                }
               }
             }
           }
@@ -4760,6 +4820,7 @@ export function runDrain() {
       console.log(`CLAIM-SKIP #${iss.number} (agent claim presente: ${names(iss).filter((name) => [LBL_IN_PROGRESS, LBL_LOCAL, LBL_REMOTE].includes(name)).join(', ') || 'stato claim incompleto'}) → lascio intatta la coda per la flotta locale/remota`);
       continue;
     }
+    if (!liveClaimAllowsMutation(iss.number)) continue;
     if (!budget.take(`#${iss.number} (drain pre-flight)`, ITEM_COST_MS)) break;
     if (has(iss, LBL_FIX)) {
       console.log(`DRAIN-SKIP #${iss.number} (agent:fix + agent:fix-queued: conflitto fresco) → lascio decidere alla riconciliazione nel prossimo tick`);
@@ -4894,6 +4955,7 @@ export function runDrain() {
       console.log(`CLAIM-SKIP #${cand.number} (agent claim presente: ${names(cand).filter((name) => [LBL_IN_PROGRESS, LBL_LOCAL, LBL_REMOTE].includes(name)).join(', ') || 'stato claim incompleto'}) → lascio intatta la coda per la flotta locale/remota`);
       continue;
     }
+    if (!liveClaimAllowsMutation(cand.number)) continue;
     const plannedGroup = groupsByMember.get(Number(cand.number));
     const candidateGroupLabels = issueGroupInstanceLabels(cand);
     const candidateGroupDigests = candidateGroupLabels
@@ -5196,10 +5258,21 @@ export function runDrain() {
     if (plannedGroup
       && Number(cand.number) === Number(plannedGroup.issues[0]?.number)
       && groupStates.get(plannedGroup.label) === 'failed') {
+      if (!liveClaimsAllowGroupMutation(plannedGroup.issues)) {
+        releaseQuotaLease(cand.number, 'issue-fix', quotaLease.token);
+        console.log(`GROUP-SKIP #${cand.number}: claim live su un membro, lease quota rilasciato e gruppo lasciato in coda.`);
+        continue;
+      }
       const groupLabel = prepareIssueGroup(plannedGroup);
       if (!groupLabel) {
         releaseQuotaLease(cand.number, 'issue-fix', quotaLease.token);
         console.log(`::warning::GROUP-SKIP #${cand.number}: applicazione della label di gruppo fallita, membri lasciati in coda per il retry; nessuna promozione parziale.`);
+        continue;
+      }
+      if (!liveClaimsAllowGroupMutation(plannedGroup.issues)) {
+        releaseQuotaLease(cand.number, 'issue-fix', quotaLease.token);
+        groupStates.set(groupLabel, 'failed');
+        console.log(`GROUP-SKIP #${cand.number}: claim live comparso su un membro dopo la preparazione, lease quota rilasciato.`);
         continue;
       }
       if (!editChecked(cand.number, { add: [LBL_FIX], remove: [LBL_QUEUED] })) {
