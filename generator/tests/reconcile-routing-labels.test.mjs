@@ -228,12 +228,32 @@ test('#1211: agent:fix stale senza PR/beacon viene riarmato, gli stati vivi aspe
   );
 });
 
-test('una rimozione fallita non entra nel totale delle riconciliazioni', () => {
+test('la scansione paginata include tutte le pagine e non conta le rimozioni fallite', () => {
   const fakeBin = fs.mkdtempSync(path.join(os.tmpdir(), 'reconcile-gh-'));
   const fakeGh = path.join(fakeBin, 'gh');
+  const traceFile = path.join(fakeBin, 'trace');
   fs.writeFileSync(fakeGh, `#!/bin/sh
-if [ "$1" = "issue" ] && [ "$2" = "list" ]; then
-  printf '%s\\n' '[{"number":1,"labels":[{"name":"agent:fix"},{"name":"agent:fix-queued"}],"updatedAt":"1970-01-01T00:00:00Z"},{"number":2,"labels":[{"name":"agent:fix"},{"name":"agent:fix-queued"}],"updatedAt":"1970-01-01T00:00:00Z"}]'
+printf 'FAKE_GH_ARGS:%s\\n' "$*" >> "$TRACE_FILE"
+if [ "$1" = "api" ] && [ "$3" = "--paginate" ] && [ "$4" = "--jq" ] && printf '%s' "$2" | grep -q 'labels=agent%3Afix'; then
+  if printf '%s' "$5" | grep -q 'body'; then
+    printf '%s\\n' 'projection must not request issue bodies' >&2
+    exit 97
+  fi
+  for field in number labels updated_at; do
+    if ! printf '%s' "$5" | grep -q "$field"; then
+      printf 'projection missing %s\\n' "$field" >&2
+      exit 98
+    fi
+  done
+  printf '%s\\n' 'not-json'
+  printf '%s\\n' 'null'
+  printf '%s\\n' '[{"number":99,"labels":["agent:fix","agent:fix-queued"],"updatedAt":"1970-01-01T00:00:00Z","isPullRequest":false}]'
+  printf '%s\\n' '{"number":1,"labels":["agent:fix","agent:fix-queued"],"updatedAt":"1970-01-01T00:00:00Z","isPullRequest":false}'
+  printf '%s\\n' '{"number":2,"labels":["agent:fix","agent:fix-queued"],"updatedAt":"1970-01-01T00:00:00Z","isPullRequest":false}'
+  printf '%s\\n' '{"number":3,"labels":["agent:fix","agent:fix-queued"],"updatedAt":"1970-01-01T00:00:00Z","isPullRequest":true}'
+  exit 0
+fi
+if [ "$1" = "api" ] && [ "$3" = "--paginate" ] && [ "$4" = "--jq" ] && printf '%s' "$2" | grep -q 'labels=agent%3Adecompose'; then
   exit 0
 fi
 if [ "$1" = "issue" ] && [ "$2" = "edit" ]; then
@@ -251,11 +271,24 @@ exit 0
       GH_REPO: '',
       GITHUB_REPOSITORY: '',
       MIN_AGE_SEC: '0',
+      TRACE_FILE: traceFile,
     },
   });
   assert.equal(result.status, 0, `${result.stdout}\n${result.stderr}`);
+  const trace = fs.readFileSync(traceFile, 'utf8');
+  assert.match(trace, /--paginate --jq/);
+  assert.match(trace, /number/);
+  assert.match(trace, /labels/);
+  assert.match(trace, /updated_at/);
+  assert.doesNotMatch(trace, /body/);
+  assert.doesNotMatch(trace, /--slurp/);
   assert.match(result.stdout, /Riconciliazioni: 1\./);
   assert.match(result.stdout, /Rimozioni riuscite: 1\./);
   assert.match(result.stdout, /Rimozioni fallite: 1\./);
   assert.match(result.stdout, /reconcile: 1 falliti su 2/);
+  assert.doesNotMatch(result.stdout, /#3/);
+  assert.doesNotMatch(result.stdout, /#99/);
+  assert.match(result.stdout, /record JSONL proiettato 1 illeggibile/);
+  assert.match(result.stdout, /record JSONL proiettato 2 non-object/);
+  assert.match(result.stdout, /record JSONL proiettato 3 non-object/);
 });
