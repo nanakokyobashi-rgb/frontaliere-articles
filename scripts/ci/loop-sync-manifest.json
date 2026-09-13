@@ -3848,6 +3848,26 @@
         "corpus": "ae9dda84d95be040",
         "alignedAt": "2026-09-12"
       }
+    },
+    {
+      "path": ".github/workflows/transport-identical-twins-realign.yml",
+      "mode": "corpus-only",
+      "reason": "Workflow post-merge che riallinea solo `baseline.corpus` per i gemelli `identical` trasportati; il sito non possiede il lato ricevente del manifest ne' il suo push sul main del corpus, quindi non esiste un gemello da portare.",
+      "baseline": {
+        "site": null,
+        "corpus": "28dfd467cdd33256",
+        "alignedAt": "2026-09-13"
+      }
+    },
+    {
+      "path": "generator/tests/transport-permanent-manual-channel.test.mjs",
+      "mode": "corpus-only",
+      "reason": "Regressione node:test del trasporto e del suo realign post-merge, che verifica i codici di ritorno e il confine di scrittura del manifest nel repository ricevente; il sito usa Vitest e non ha questo test corpus-only.",
+      "baseline": {
+        "site": null,
+        "corpus": "2a26ec605bb646bd",
+        "alignedAt": "2026-09-13"
+      }
     }
   ]
 }

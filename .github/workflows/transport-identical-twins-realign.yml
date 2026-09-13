@@ -59,12 +59,19 @@ jobs:
             const changed = new Set(fs.readFileSync(process.env.RUNNER_TEMP + "/transport-files.txt", "utf8").split(/\r?\n/).filter(Boolean));
             const manifestPath = "scripts/ci/loop-sync-manifest.json";
             const manifest = JSON.parse(fs.readFileSync(manifestPath, "utf8"));
+            const declared = new Set((manifest.files || []).map((entry) => entry.path));
             const identical = new Set((manifest.files || []).filter((entry) => entry.mode === "identical").map((entry) => entry.path));
+            const unknown = [...changed]
+              .filter((filename) => filename !== manifestPath && !declared.has(filename))
+              .sort();
+            if (unknown.length) {
+              throw new Error("file modificati dalla PR non dichiarati nel manifest: " + unknown.join(", "));
+            }
             const expected = [...changed]
               .filter((filename) => filename !== manifestPath && identical.has(filename))
               .sort();
             const excluded = [...changed]
-              .filter((filename) => filename !== manifestPath && !identical.has(filename))
+              .filter((filename) => filename !== manifestPath && declared.has(filename) && !identical.has(filename))
               .sort();
             if (excluded.length) {
               console.log("Path non-identical esclusi dal realign post-merge: " + excluded.join(", "));
