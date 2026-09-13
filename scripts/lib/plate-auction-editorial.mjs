@@ -180,6 +180,9 @@ function buildWeekly(locale, status, currentRows, finalSourceRows, generatedAt) 
   if (status === 'unavailable') {
     return { status, title: copy.weeklyTitle, excerpt: copy.weeklyUnavailable, paragraphs: [copy.weeklyUnavailable], highlights: [] };
   }
+  if (status !== 'ready') {
+    return { status: 'insufficient-data', title: copy.weeklyTitle, excerpt: copy.weeklyInsufficient, paragraphs: [copy.weeklyInsufficient], highlights: [] };
+  }
   if (current.length === 0 && finals.length === 0) {
     return { status: 'insufficient-data', title: copy.weeklyTitle, excerpt: copy.weeklyInsufficient, paragraphs: [copy.weeklyInsufficient], highlights: [] };
   }
@@ -197,7 +200,14 @@ export function buildPlateAuctionEditorial({ snapshot = null, upstreamStatus = '
   const rows = publicRows(snapshot?.auctions);
   const historyRows = publicRows(snapshot?.history);
   const allRows = historyRows.length ? [...rows, ...historyRows] : rows;
-  const status = upstreamStatus === 'ready' ? 'ready' : upstreamStatus === 'insufficient-data' ? 'insufficient-data' : 'unavailable';
+  const upstream = upstreamStatus === 'ready' ? 'ready' : upstreamStatus === 'insufficient-data' ? 'insufficient-data' : 'unavailable';
+  const weekly = Object.fromEntries(LOCALES.map((locale) => [locale, buildWeekly(locale, upstream, rows, allRows, generatedAt)]));
+  // Readiness must describe the same normalized, non-conflicting rows that
+  // the weekly builder can actually display. A raw array entry is not enough:
+  // it may be malformed, conflicting, or a non-final historical observation.
+  const status = upstream === 'ready'
+    ? (Object.values(weekly).some((block) => block.status === 'ready') ? 'ready' : 'insufficient-data')
+    : upstream;
   return {
     schema: PLATE_AUCTION_EDITORIAL_SCHEMA,
     generatedAt,
@@ -210,7 +220,7 @@ export function buildPlateAuctionEditorial({ snapshot = null, upstreamStatus = '
       cantons: new Set(rows.map((row) => row.canton).filter(Boolean)).size,
     },
     evergreen: Object.fromEntries(LOCALES.map((locale) => [locale, buildEvergreen(locale)])),
-    weekly: Object.fromEntries(LOCALES.map((locale) => [locale, buildWeekly(locale, status, rows, allRows, generatedAt)])),
+    weekly,
   };
 }
 
@@ -229,8 +239,11 @@ export async function fetchPlateAuctionEditorialInput({
     if (!isRecord(snapshot) || snapshot.schema !== 1 || !Array.isArray(snapshot.auctions)) {
       return { status: 'unavailable', snapshot: null, errorCode: 'invalid-snapshot' };
     }
-    const hasRows = snapshot.auctions.length > 0 || (Array.isArray(snapshot.history) && snapshot.history.length > 0);
-    return { status: hasRows ? 'ready' : 'insufficient-data', snapshot, errorCode: null };
+    const rows = publicRows(snapshot.auctions);
+    const historyRows = publicRows(snapshot.history);
+    const hasUsableRows = rows.some((row) => ['active', 'upcoming'].includes(row.status) && row.confidence !== 'conflicting')
+      || finalRows([...rows, ...historyRows]).length > 0;
+    return { status: hasUsableRows ? 'ready' : 'insufficient-data', snapshot, errorCode: null };
   } catch (error) {
     return { status: 'unavailable', snapshot: null, errorCode: error?.name === 'AbortError' ? 'timeout' : 'fetch-failed' };
   } finally {

@@ -59,6 +59,11 @@ on:
       - 'scripts/build-blog-index.mjs'
       - 'scripts/lib/sanitize-control-chars.mjs'
       - '.github/workflows/publish-api.yml'
+  # The editorial companion contains a weekly update even when no article or
+  # code push occurs. Rebuild it on a real weekly cadence so the HTTP surface
+  # cannot remain stale indefinitely between corpus changes.
+  schedule:
+    - cron: '17 3 * * 1'
   workflow_dispatch:
 
 # One publish at a time, and never cancel one in flight: a half-written data

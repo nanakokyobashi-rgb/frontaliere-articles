@@ -86,6 +86,26 @@ test('keeps an unavailable upstream explicit and preserves the evergreen guide',
   assert.ok(editorial.evergreen.it.paragraphs.length >= 3);
 });
 
+test('does not mark a raw conflicting-only snapshot as ready', async () => {
+  const snapshot = {
+    schema: 1,
+    generatedAt: '2026-09-13T12:00:00.000Z',
+    auctions: [{
+      id: 'gr-conflict',
+      canton: 'Grigioni',
+      normalizedPlate: 'GR 9',
+      auctionStatus: 'active',
+      dataConfidence: 'conflicting',
+    }],
+    history: [],
+  };
+  const editorial = buildPlateAuctionEditorial({ snapshot, upstreamStatus: 'ready' });
+  assert.equal(editorial.status, 'insufficient-data');
+  assert.equal(editorial.weekly.it.status, 'insufficient-data');
+  const input = await fetchPlateAuctionEditorialInput({ fetcher: async () => ({ ok: true, json: async () => snapshot }) });
+  assert.equal(input.status, 'insufficient-data');
+});
+
 test('fetches only the HTTP public snapshot contract and rejects malformed responses', async () => {
   const calls = [];
   const ok = await fetchPlateAuctionEditorialInput({
