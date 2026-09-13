@@ -32,6 +32,7 @@
  * app icon in the feed.
  */
 import { ARTICLE_SECTION_CORE } from './shared/articleSectionCore.mjs';
+import { parseArticleUrlSlugs } from './shared/articleReaderSource.mjs';
 import { findAllSeoEntryMatches } from './shared/seo-entry.mjs';
 
 export const BASE_URL = 'https://frontaliereticino.ch';
@@ -78,6 +79,7 @@ export const RSS_SECTIONS = [
     id: 'frontaliere',
     seoFiles: FRONTALIERE_SEO_CHUNKS,
     slugFile: ARTICLE_SECTION_CORE.frontaliere.slugDataFile,
+    slugConst: ARTICLE_SECTION_CORE.frontaliere.slugConst,
     metaFile: (locale) => `${ARTICLE_SECTION_CORE.frontaliere.metaPrefix}-${locale}.ts`,
     bodyDir: ARTICLE_SECTION_CORE.frontaliere.bodyDir,
     // Localized slug fallback: missing locale → IT slug → articleId.
@@ -95,6 +97,7 @@ export const RSS_SECTIONS = [
     id: 'svizzera',
     seoFiles: ['seo-blog-ch.ts'],
     slugFile: ARTICLE_SECTION_CORE.svizzera.slugDataFile,
+    slugConst: ARTICLE_SECTION_CORE.svizzera.slugConst,
     metaFile: (locale) => `${ARTICLE_SECTION_CORE.svizzera.metaPrefix}-${locale}.ts`,
     bodyDir: ARTICLE_SECTION_CORE.svizzera.bodyDir,
     // National slugs default to the article id per-locale (matches the
@@ -211,18 +214,14 @@ function parseSeoBlogs(fs, path, rootDir, seoDir, seoFiles) {
 }
 
 /** Parse the `BlogArticleId` → per-locale URL-slug map. */
-function parseBlogSlugs(fs, path, rootDir, slugFile) {
+function parseBlogSlugs(fs, path, rootDir, slugFile, slugConst) {
   const filePath = path.join(rootDir, slugFile);
   if (!fs.existsSync(filePath)) return new Map();
   const src = fs.readFileSync(filePath, 'utf-8');
 
-  const slugs = new Map(); // articleId → { it, en, de, fr }
-  const entryRe = /["']([^"']+)["']:\s*\{\s*it:\s*["']([^"']+)["'],\s*en:\s*["']([^"']+)["'],\s*de:\s*["']([^"']+)["'],\s*fr:\s*["']([^"']+)["']/g;
-  let match;
-  while ((match = entryRe.exec(src)) !== null) {
-    slugs.set(match[1], { it: match[2], en: match[3], de: match[4], fr: match[5] });
-  }
-  return slugs;
+  // Keep the RSS reader aligned with the OG/archive readers. In particular,
+  // the shared parser accepts formatting whitespace before `:` and `,`.
+  return new Map(Object.entries(parseArticleUrlSlugs(src, slugConst)));
 }
 
 function parseLocalizedField(fs, path, rootDir, localesDir, metaFileName, field) {
@@ -450,7 +449,13 @@ export function buildSectionFeeds({ fs, path, rootDir, section, registry = [], l
   const { seoDir, localesDir, slugDir } = { ...DEFAULT_LAYOUT, ...layout };
 
   const articles = parseSeoBlogs(fs, path, rootDir, seoDir, section.seoFiles);
-  const slugs = parseBlogSlugs(fs, path, rootDir, resolveSlugFile(path, section.slugFile, slugDir));
+  const slugs = parseBlogSlugs(
+    fs,
+    path,
+    rootDir,
+    resolveSlugFile(path, section.slugFile, slugDir),
+    section.slugConst,
+  );
   if (articles.size === 0) {
     return { id: section.id, articleCount: 0, slugCount: slugs.size, feeds: [] };
   }

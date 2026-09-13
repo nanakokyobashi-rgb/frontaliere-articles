@@ -2,14 +2,14 @@
   "frontaliere/ampliamento-parco-eolico-san-gottardo/de": {
     "source": "d167ecb9a04bbfc4",
     "sourceCount": 5,
-    "consecutive": 1,
+    "consecutive": 2,
     "prunedWrite": true,
     "keptPairs": 3
   },
   "frontaliere/ampliamento-parco-eolico-san-gottardo/en": {
     "source": "d167ecb9a04bbfc4",
     "sourceCount": 5,
-    "consecutive": 1,
+    "consecutive": 2,
     "prunedWrite": true,
     "keptPairs": 3
   },
@@ -21,7 +21,7 @@
   "frontaliere/aumento-dei-frontalieri-attivi-in-svizzera/de": {
     "source": "79d0a17e93a8f3ec",
     "sourceCount": 5,
-    "consecutive": 1,
+    "consecutive": 2,
     "prunedWrite": true,
     "keptPairs": 4
   },
@@ -73,14 +73,14 @@
   "frontaliere/disagi-tilo-sciopero-italia/de": {
     "source": "be77aab366cc2cbb",
     "sourceCount": 5,
-    "consecutive": 1,
+    "consecutive": 2,
     "prunedWrite": true,
     "keptPairs": 4
   },
   "frontaliere/elezioni-como-frontalieri-2026/fr": {
     "source": "29ab2b38e7cc5552",
     "sourceCount": 5,
-    "consecutive": 1,
+    "consecutive": 2,
     "prunedWrite": true,
     "keptPairs": 4
   },
@@ -97,7 +97,7 @@
   "frontaliere/frontaliers-sabotage-varese/de": {
     "source": "667f02679061923c",
     "sourceCount": 5,
-    "consecutive": 1,
+    "consecutive": 2,
     "prunedWrite": true,
     "keptPairs": 4
   },
@@ -234,21 +234,21 @@
   "frontaliere/slowup-strade-trasporti-limiti-2026/fr": {
     "source": "7b6e89c1d5a70ea1",
     "sourceCount": 6,
-    "consecutive": 1,
+    "consecutive": 2,
     "prunedWrite": true,
     "keptPairs": 5
   },
   "frontaliere/successo-farmaceutica-ticino/en": {
     "source": "8c4b877bbadfbc60",
     "sourceCount": 5,
-    "consecutive": 1,
+    "consecutive": 2,
     "prunedWrite": true,
     "keptPairs": 4
   },
   "frontaliere/traffico-rientro-ascensione-ticino/en": {
     "source": "6cdfd471c97980a7",
     "sourceCount": 5,
-    "consecutive": 1,
+    "consecutive": 2,
     "prunedWrite": true,
     "keptPairs": 4
   },
@@ -265,7 +265,7 @@
   "frontaliere/ucraini-in-ticino-aiuti-incognite/fr": {
     "source": "90927d4c1090ecc3",
     "sourceCount": 5,
-    "consecutive": 1,
+    "consecutive": 2,
     "prunedWrite": true,
     "keptPairs": 4
   },

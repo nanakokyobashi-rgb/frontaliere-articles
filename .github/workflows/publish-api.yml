@@ -25,7 +25,30 @@ on:
       # Found the hard way: the fix that unfroze a three-month-stale RSS feed
       # landed here and changed nothing, because only content/ was watched.
       - 'engine/**'
+      # build-api.mjs imports runtime host data (for example the archive page
+      # size); a change there changes the emitted sitemap and must republish it.
+      - 'host/**'
+      # The archive writer loads this section descriptor dynamically; it is an
+      # output dependency even though it lives at the package root.
+      - 'articleSections.ts'
       - 'scripts/build-api.mjs'
+      # The derived floors are part of the publisher's runtime input. Without
+      # this path, changing retention or the source-count logic leaves the
+      # public API on the previous build until an unrelated input changes.
+      - 'scripts/lib/corpus-floors.mjs'
+      # The shared sitemap emitter is also a publisher input: changing its
+      # filtering or XML shape must republish the API immediately.
+      - 'scripts/lib/build-sitemap.mjs'
+      - 'scripts/lib/count-xml-tags.mjs'
+      - 'scripts/lib/ticker-shadow-check.mjs'
+      - 'scripts/lib/published-slug-guard.mjs'
+      - 'scripts/lib/parse-positive-num.mjs'
+      - 'scripts/lib/api-manifest.mjs'
+      - 'generator/data/news-sitemap-whitelist.mjs'
+      - 'generator/scripts/lib/daily-brief-content.mjs'
+      - 'generator/scripts/lib/control-char-write-report.mjs'
+      - 'generator/scripts/lib/meta-field-regex.mjs'
+      - 'generator/scripts/lib/unescape-ts-string.mjs'
       # Same argument, one level down. build-blog-index.mjs runs in this job and
       # emits the runtime list index; sanitize-control-chars.mjs is the output
       # boundary both it and build-api.mjs pass every byte through. Watching the

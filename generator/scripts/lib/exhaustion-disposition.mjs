@@ -459,8 +459,11 @@ export function providerCooldownEchoOnlySummary(err) {
   if (![breakdown.transient, breakdown.persistent, breakdown.total, echo.total].every(isCount)) {
     return null;
   }
-  if (['transient', 'persistent'].some((key) => (
-    Object.hasOwn(echo, key) && !isCount(echo[key])
+  // These split counters were added with the live producer. A replay that
+  // only has the aggregate echo total is legacy data, not proof that every
+  // row was an echo: fail closed instead of manufacturing an all-echo cause.
+  if (!['transient', 'persistent'].every((key) => (
+    Object.hasOwn(echo, key) && isCount(echo[key])
   ))) {
     return null;
   }

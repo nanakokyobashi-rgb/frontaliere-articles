@@ -67,6 +67,31 @@ function buildFeedXml(articleId, itSlug) {
   return xml;
 }
 
+function buildFeedMap(articleId, slugText) {
+  const files = new Map([
+    [SEO_FILE, seoSource(articleId)],
+    [SLUG_FILE, slugText],
+  ]);
+  const fakeFs = {
+    existsSync: (p) => files.has(p),
+    readFileSync: (p) => {
+      if (!files.has(p)) throw new Error(`ENOENT: ${p}`);
+      return files.get(p);
+    },
+    readdirSync: () => [],
+  };
+
+  const { feeds } = buildSectionFeeds({
+    fs: fakeFs,
+    path,
+    rootDir: '',
+    section: SECTION,
+    registry: [],
+    repairSerpSnippet: (s) => s,
+  });
+  return new Map(feeds);
+}
+
 test('guid survives a slug rename (built from articleId, not slug)', () => {
   const before = buildFeedXml('my-article', 'slug-before-rename');
   const after = buildFeedXml('my-article', 'slug-after-rename');
@@ -99,4 +124,25 @@ test('guid and link escape XML special characters in articleId and slug (issue #
   assert.match(guid, /art&amp;id&lt;x/, 'guid must escape & and < from articleId');
   assert.match(link, /slug&amp;rename&lt;x/, 'link must escape & and < from slug');
   assert.doesNotMatch(xml, /art&id</, 'raw unescaped articleId must not appear in the feed');
+});
+
+test('RSS keeps localized slugs when the registry has spacing before colon and commas', () => {
+  const feeds = buildFeedMap('my-article', `export const BLOG_SLUGS = {
+  'my-article' : { it: 'slug-it' , en: 'slug-en' , de: 'slug-de' , fr: 'slug-fr' },
+};
+`);
+
+  const expectedLinks = [
+    ['rss-it.xml', '/articoli-frontaliere/slug-it/'],
+    ['rss-en.xml', '/en/cross-border-articles/slug-en/'],
+    ['rss-de.xml', '/de/grenzgaenger-artikel/slug-de/'],
+    ['rss-fr.xml', '/fr/articles-frontalier/slug-fr/'],
+  ];
+  for (const [feedName, suffix] of expectedLinks) {
+    assert.match(
+      feeds.get(feedName),
+      new RegExp(`<link>https://frontaliereticino\\.ch${suffix.replaceAll('/', '\\/')}</link>`),
+      `${feedName} should use its localized slug instead of articleId`,
+    );
+  }
 });

@@ -30,6 +30,9 @@ import {
   currentAttemptJobSteps,
   vitestFailureIsReviewGate,
   REVIEW_GATE_STEP_NAME,
+  pollUntil,
+  vitestCheckNeedsPolling,
+  vitestJobIsConcluded,
 } from '../../scripts/ci/lib/vitestCheck.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
@@ -130,6 +133,42 @@ test('input mancanti o non-array -> [] (la chiamata gh puo\' fallire)', () => {
   assert.deepEqual(
     currentAttemptJobSteps({ checkRun, jobId: '5678', jobs: [{ ...gateOnlyJob, steps: undefined }] }),
     []);
+});
+
+test('il polling ripete i check incompleti fino a un verdetto', () => {
+  const responses = [
+    [],
+    [{ ...checkRun, status: 'in_progress', conclusion: null, completed_at: null }],
+    [checkRun],
+  ];
+  const sleeps = [];
+  const result = pollUntil({
+    read: () => responses.shift(),
+    ready: (value) => !vitestCheckNeedsPolling(value),
+    attempts: 3,
+    delayMs: 1000,
+    sleep: (delay) => sleeps.push(delay),
+  });
+  assert.deepEqual(result, [checkRun]);
+  assert.deepEqual(sleeps, [1000, 1000]);
+});
+
+test('il polling dei job richiede un job concluso e propaga ok:false', () => {
+  const jobs = [
+    [],
+    [{ id: 5678, status: 'in_progress', conclusion: null }],
+    [{ id: 5678, status: 'completed', conclusion: 'failure' }],
+  ];
+  const result = pollUntil({
+    read: () => jobs.shift(),
+    ready: (value) => value.some((job) => vitestJobIsConcluded(job)),
+    attempts: 3,
+  });
+  assert.equal(result[0].conclusion, 'failure');
+  assert.throws(
+    () => pollUntil({ read: () => ({ ok: false, status: 429 }), ready: () => false }),
+    /HTTP 429/,
+  );
 });
 
 test('pr-autorebase chiede i job dell\'attempt corrente, non /actions/jobs/<id>', () => {

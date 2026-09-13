@@ -40,7 +40,8 @@ const MIRROR_BODY = 'Root cause nota: il JSDoc bugiardo vive in `scripts/create-
   + 'del repo **`valerielinc-ops/frontaliere-si-o-no`**, non in questo repo. '
   + 'Confermato: `generator/scripts/create-article.mjs` qui è diverso.';
 
-const SINGLE_MIRROR_BODY = 'Root cause nota: `scripts/ci/followup-resolution-match.mjs` è '
+const SINGLE_MIRROR_PATH = 'scripts/ci/check-issue-already-resolved.mjs';
+const SINGLE_MIRROR_BODY = 'Root cause nota: `' + SINGLE_MIRROR_PATH + '` è '
   + '`mode: identical` nel repo **`valerielinc-ops/frontaliere-si-o-no`**; '
   + 'scriverlo qui verrebbe sovrascritto al mirror successivo.';
 
@@ -151,7 +152,9 @@ test('mirrorLockedPaths legge il manifest reale, non un elenco ricopiato', () =>
   assert.deepEqual([...MIRROR_LOCKED_MODES], ['identical']);
   const locked = mirrorLockedPaths();
   assert.ok(locked.size > 0, 'il manifest dichiara dei file identical');
-  assert.ok(locked.has('scripts/ci/followup-resolution-match.mjs'), 'il manifest espone un gemello identical del ciclo');
+  assert.ok(locked.has(SINGLE_MIRROR_PATH), 'il manifest espone un gemello identical del ciclo');
+  assert.equal(locked.has('scripts/ci/followup-resolution-match.mjs'), false,
+    'il matcher del follow-up è adapted e non è mirror-locked');
   assert.equal(locked.has('scripts/ci/followup-drainer.mjs'), false, 'il drainer adapted è nostro da modificare');
   // Un `adapted` è nostro da modificare: non deve mai finire qui dentro.
   assert.equal(locked.has('scripts/lib/classify-issue.mjs'), false);
@@ -166,7 +169,7 @@ test('mirrorLockedPaths mappa sul `sitePath`, che nella maggior parte dei casi D
   const locked = mirrorLockedPaths();
   assert.equal(locked.get('host/shared/clauseTail.mjs'), 'build-plugins/shared/clauseTail.mjs');
   // Quando `sitePath` manca, i due lati coincidono: identità, non `undefined`.
-  assert.equal(locked.get('scripts/ci/followup-resolution-match.mjs'), 'scripts/ci/followup-resolution-match.mjs');
+  assert.equal(locked.get(SINGLE_MIRROR_PATH), SINGLE_MIRROR_PATH);
   for (const [corpusPath, sitePath] of locked) assert.ok(sitePath, `sitePath vuoto per ${corpusPath}`);
 });
 
@@ -715,8 +718,8 @@ test('#972: stranded vuoto → nessun blocco alla chiusura, cioè il comportamen
     body: SINGLE_MIRROR_BODY,
     manifestSnapshot: {
       absent: new Set(),
-      locked: new Map([['scripts/ci/followup-resolution-match.mjs', 'scripts/ci/followup-resolution-match.mjs']]),
-      names: new Map([['scripts/ci/followup-resolution-match.mjs', 'scripts/ci/followup-resolution-match.mjs']]),
+      locked: new Map([[SINGLE_MIRROR_PATH, SINGLE_MIRROR_PATH]]),
+      names: new Map([[SINGLE_MIRROR_PATH, SINGLE_MIRROR_PATH]]),
       stranded: new Set(),
     },
   });
