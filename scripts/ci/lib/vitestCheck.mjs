@@ -31,6 +31,61 @@ import {
 } from './constants.mjs';
 
 /**
+ * Ripete una lettura sincrona finché il dato è utilizzabile.
+ *
+ * Gli errori del reader e i payload ok:false restano errori: una risposta
+ * vuota è un dato transitorio, non una prova che l'head sia orfano.
+ *
+ * @template T
+ * @param {{read: () => T, ready: (value: T) => boolean, attempts?: number,
+ *          delayMs?: number, sleep?: (delayMs: number) => void}} options
+ * @returns {T}
+ */
+export function pollUntil({ read, ready, attempts = 3, delayMs = 0, sleep = () => {} } = {}) {
+  if (typeof read !== 'function' || typeof ready !== 'function') {
+    throw new TypeError('pollUntil richiede funzioni read e ready');
+  }
+  const maxAttempts = Math.max(1, Math.trunc(Number(attempts) || 1));
+  let value;
+  for (let attempt = 0; attempt < maxAttempts; attempt += 1) {
+    value = read();
+    if (value && typeof value === 'object' && value.ok === false) {
+      const status = value.status === undefined ? '' : ' (HTTP ' + value.status + ')';
+      const error = new Error('GitHub API ha restituito ok:false' + status);
+      if (value.status !== undefined) error.status = value.status;
+      throw error;
+    }
+    if (ready(value)) return value;
+    if (attempt + 1 < maxAttempts) sleep(delayMs);
+  }
+  return value;
+}
+
+/** Un check-run o job ha raggiunto un verdetto terminale. */
+export function vitestJobIsConcluded(job) {
+  return Boolean(job && job.status === 'completed' && job.conclusion);
+}
+
+/**
+ * Dice se la risposta dei check-run deve essere letta di nuovo.
+ * Lista vuota e run non conclusi non autorizzano a classificare l'head con
+ * dati vecchi.
+ */
+export function vitestCheckNeedsPolling(checkRuns) {
+  if (!Array.isArray(checkRuns)) return true;
+  const vitestRuns = checkRuns.filter(
+    (check) => check && (
+      check.name === VITEST_CHECK_NAME
+      || VITEST_SHARD_NAME_RE.test(check.name || '')
+    ),
+  );
+  if (vitestRuns.length === 0) return true;
+  return vitestRuns.some(
+    (check) => check.status !== 'completed' || !check.conclusion || !check.completed_at,
+  );
+}
+
+/**
  * @param {Array<{name?: string, status?: string, conclusion?: string, completed_at?: string}>} checkRuns
  *   L'array `.check_runs` della GitHub check-runs API.
  * @returns {string} La conclusion del check-run vitest COMPLETATO con verdetto

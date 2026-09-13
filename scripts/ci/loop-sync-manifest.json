@@ -310,11 +310,22 @@
     },
     {
       "path": "scripts/ci/followup-resolution-match.mjs",
-      "mode": "identical",
+      "mode": "adapted",
+      "reason": "Il corpus espone il contratto aggregate canonical ai consumer locali e conserva la propria risoluzione di locator sul percorso di pubblicazione; per questo la copia non è byte-identica al matcher sorgente del sito. La baseline registra separatamente i due blob e il trasporto successivo deve preservare l'adattamento, non sovrascriverlo con un mirror cieco.",
       "baseline": {
-        "site": "a7744e18a9fbdea8",
-        "corpus": "a7744e18a9fbdea8",
-        "alignedAt": "2026-09-11"
+        "site": "86098adda6c90970",
+        "corpus": "e6da0bfa1d35c132",
+        "alignedAt": "2026-09-13"
+      }
+    },
+    {
+      "path": "scripts/ci/lib/vitestCheck.mjs",
+      "mode": "adapted",
+      "reason": "Il polling sincrono e il riconoscimento dei job conclusi sono il contratto condiviso dalla sorgente sito e da pr-autorebase, ma il corpus mantiene i propri nomi/check required e le proprie guardie review. La copia è quindi trasportata per contratto e non trattata come identica byte-per-byte.",
+      "baseline": {
+        "site": "c63b27c70d03615a",
+        "corpus": "2c783ff28a651001",
+        "alignedAt": "2026-09-13"
       }
     },
     {
@@ -409,15 +420,6 @@
         "site": "a5fe209f91e8d29c",
         "corpus": "a5fe209f91e8d29c",
         "alignedAt": "2026-09-11"
-      }
-    },
-    {
-      "path": "scripts/ci/lib/vitestCheck.mjs",
-      "mode": "identical",
-      "baseline": {
-        "site": "70c2badbc0a09558",
-        "corpus": "70c2badbc0a09558",
-        "alignedAt": "2026-09-10"
       }
     },
     {
