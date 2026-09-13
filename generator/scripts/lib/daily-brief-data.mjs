@@ -321,7 +321,15 @@ export function shapeFuel(meta, { nowMs = Date.now() } = {}) {
   if (cheapestItaly.length === 0 && bestSavings.length === 0) {
     return unavailable('fuel rankings are empty');
   }
-  const cheapestSwiss = summary.cheapestSwissStation || null;
+  // `summary.cheapestSwissStation` is a global station ranking. Its
+  // `nearestMunicipality` is only a geographic label, not evidence that the
+  // station is on the same border route as the Italian municipality named in
+  // the surrounding daily brief. Publishing it made a Swiss-side outlier
+  // (for example a station near Curon Venosta) read like advice for the whole
+  // Ticino/Italy commute. Keep the nullable field for payload compatibility;
+  // a future route-aware ranking can opt in once it carries an explicit
+  // municipality/zone relationship and provenance.
+  const cheapestSwiss = null;
   return {
     available: true,
     generatedAt: meta.generatedAt,
