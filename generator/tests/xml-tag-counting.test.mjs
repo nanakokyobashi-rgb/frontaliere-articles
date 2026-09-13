@@ -58,6 +58,23 @@ test('<url> non collide con <urlset>, e gli attributi non fanno perdere il tag',
   assert.equal(countXmlTags(sitemap, 'urlset'), 1);
 });
 
+test('i gate News contano le occorrenze XML, non le righe né il CDATA', () => {
+  // I due blocchi sono sulla stessa riga: grep -c restituirebbe 1. Il secondo
+  // `<url>` contiene anche un testo che cita markup, ma quel testo non e' un
+  // elemento del documento. E' la forma concreta che publish-api.yml deve
+  // contare con la funzione condivisa.
+  const sitemap = [
+    '<urlset>',
+    '<url><news:publication_date>2026-09-01</news:publication_date>'
+      + '<description><![CDATA[cita <url> e <news:publication_date>fantasma</news:publication_date>]]></description></url>'
+      + '<url><news:publication_date>2026-09-02</news:publication_date></url>',
+    '</urlset>',
+  ].join('');
+  assert.equal(sitemap.split('\n').filter((line) => line.includes('<url>')).length, 1);
+  assert.equal(countXmlTags(sitemap, 'url'), 2);
+  assert.equal(countXmlTags(sitemap, 'news:publication_date'), 2);
+});
+
 test('un troncamento resta visibile: il conteggio segue gli elementi veri', () => {
   // La regressione che conta: due feed con lo stesso numero di `<item>`
   // testuali ma un elemento in meno devono dare numeri DIVERSI.
