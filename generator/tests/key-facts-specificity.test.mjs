@@ -81,6 +81,8 @@ test('la forma di riferimento dell issue conta quattro varianti e non i fatti sp
     '- Dove: 3 marzo 2026',
   ].join('\n');
   assert.equal(findReferenceVacuousFacts(body).length, 4);
+  assert.equal(findReferenceVacuousFacts('- **Quando**: Non Specificato.').length, 1);
+  assert.equal(findReferenceVacuousFacts('- When: Not specified in the source').length, 0);
   assert.equal(findReferenceVacuousFacts('- Quando: 3 marzo 2026').length, 0);
 });
 
@@ -229,6 +231,18 @@ test('lo scanner riproduce la baseline corrente senza fatti vacui', { skip: !fs.
   assert.deepEqual(
     Object.fromEntries(Object.entries(report.byLocale).map(([locale, value]) => [locale, value.files.length])),
     { it: 0, en: 0, de: 0, fr: 0 },
+  );
+  assert.deepEqual(
+    Object.fromEntries(Object.entries(report.byLocale).map(([locale, value]) => [locale, {
+      articles: value.articles.length,
+      hits: value.hits,
+    }])),
+    {
+      it: { articles: 0, hits: 0 },
+      en: { articles: 0, hits: 0 },
+      de: { articles: 0, hits: 0 },
+      fr: { articles: 0, hits: 0 },
+    },
   );
 });
 
