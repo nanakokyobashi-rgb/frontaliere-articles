@@ -3855,7 +3855,7 @@
       "reason": "Workflow post-merge che riallinea solo `baseline.corpus` per i gemelli `identical` trasportati; il sito non possiede il lato ricevente del manifest ne' il suo push sul main del corpus, quindi non esiste un gemello da portare.",
       "baseline": {
         "site": null,
-        "corpus": "28dfd467cdd33256",
+        "corpus": "8ce37a174b6cb6ea",
         "alignedAt": "2026-09-13"
       }
     },
@@ -3865,7 +3865,7 @@
       "reason": "Regressione node:test del trasporto e del suo realign post-merge, che verifica i codici di ritorno e il confine di scrittura del manifest nel repository ricevente; il sito usa Vitest e non ha questo test corpus-only.",
       "baseline": {
         "site": null,
-        "corpus": "2a26ec605bb646bd",
+        "corpus": "18325a5e1f3538c7",
         "alignedAt": "2026-09-13"
       }
     }
