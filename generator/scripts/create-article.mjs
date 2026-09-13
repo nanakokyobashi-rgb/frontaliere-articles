@@ -66,7 +66,7 @@ import { createInterface } from 'node:readline';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { callLLM as _aiCallLLM, AI_MODELS, DEFAULT_CHAIN, getPreferredModel, isLocalLlmEnabled, getStats as getAiStats, initScoreStore, flushScoresBeforeExit, recordModelContentFailure, recordModelContentSuccess, isQuotaExhaustedError, printRunSummary, estimateRequestTokens, getDeclaredRequestTokenLimit, isModelAvailable, isPerRunCallCapReached } from './lib/ai-models.mjs';
-import { drainStdio, exitAfterDrain } from './lib/drain-stdio.mjs';
+import { exitAfterDrain } from './lib/drain-stdio.mjs';
 
 // ── Il modello preferito per la SOLA generazione del corpo ──────────────────
 //
@@ -3046,7 +3046,12 @@ function registerLockTargets(id, sectionName = SECTION_NAME) {
 // written yet) is cleared and the run proceeds — otherwise one interrupted run
 // would brick every later run on a corpus that is in fact fine.
 export function resolveRegisterLockAtStartup() {
-  const outcome = resolveRegisterLockImpl(PROJECT_ROOT, registerLockTargets, SECTION_NAME);
+  const outcome = resolveRegisterLockImpl(
+    PROJECT_ROOT,
+    registerLockTargets,
+    SECTION_NAME,
+    Object.keys(ARTICLE_SECTION_CONFIGS),
+  );
   for (const r of outcome.resolved) {
     console.error(`  ♻️  ${r.file}: marker di registrazione lasciato da un run interrotto`);
     const perche = r.state === 'committed'
@@ -13992,13 +13997,7 @@ async function exitAfterFlush(code) {
     // flushScoresBeforeExit non lancia; il catch e' qui perche' l'uscita non
     // dipenda mai dal ledger, nemmeno se un domani cambiasse contratto.
   }
-  process.exitCode = code;
-  try {
-    await drainStdio();
-  } catch {
-    // Il drain e' best-effort: un errore dello stream non deve cambiare l'exit.
-  }
-  process.exit(code);
+  await exitAfterDrain(code);
 }
 
 async function main() {
