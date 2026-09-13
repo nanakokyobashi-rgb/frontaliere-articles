@@ -11722,6 +11722,12 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.inaugurazione-campus-smart-valley-daverio.title': 'Smart Valley campus for businesses inaugurated in Daverio',
     'blog.article.inaugurazione-campus-smart-valley-daverio.excerpt': 'The Smart Valley campus was inaugurated at Daverio, a space of five thousand square meters for specialized training and the connection between young people and companies.',
     'blog.article.inaugurazione-campus-smart-valley-daverio.imageAlt': 'Smart Valley campus inaugurated in the industrial area of Daverio',
+    'blog.article.franchigia-frontalieri-casalzuigno.title': 'New €10,000 deductible for border workers from Casalzuigno',
+    'blog.article.franchigia-frontalieri-casalzuigno.excerpt': 'The New Frontier Agreement in force since 2024 introduces a deductible of €10,000 for new residents in Italy working in Ticino.',
+    'blog.article.franchigia-frontalieri-casalzuigno.imageAlt': 'View of Casalzuigno near the border with Mendrisio and Ticino',
+    'blog.article.ospedale-del-ponte-terzo-lotto.title': 'Del Ponte Hospital: no block for the third batch',
+    'blog.article.ospedale-del-ponte-terzo-lotto.excerpt': 'Asst Seven Lakes denies the blockade of the third lot of the Del Ponte Hospital of Varese. Loans of 13.6 million already in cash and work started.',
+    'blog.article.ospedale-del-ponte-terzo-lotto.imageAlt': 'Filippo Del Ponte hospital in Varese',
 };
 
 export default blogMetaEn;

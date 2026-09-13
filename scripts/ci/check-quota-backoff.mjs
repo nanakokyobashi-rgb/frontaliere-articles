@@ -14,8 +14,8 @@
  * precedente**. Erano deterministicamente prevedibili — il payload del 429
  * dichiara `resetsAt`, l'epoch esatto in cui la quota torna — eppure il loop
  * continuava a promuovere una issue dopo l'altra ogni ~5 minuti contro un muro
- * noto, ognuna bruciando lo slot serializzato `concurrency: issue-fix` e
- * ritardando tutta la coda.
+ * noto, ognuna bruciando uno slot del pool `issue-fix` e ritardando tutta la
+ * coda.
  *
  * ## Come funziona il beacon (nessuno store esterno)
  *
@@ -255,11 +255,12 @@ export function activeQuotaLeases(events = [], { nowSec = Math.floor(Date.now() 
 }
 
 /**
- * Admission policy for the shared lease. The issue-fix floor still excludes
- * decomposition and unknown consumers, but review/redflag/redcheck are allowed
- * to contend for the same single slot: otherwise a non-empty issue queue can
- * starve every PR forever. The write+re-read below still makes concurrent
- * consumers fail closed.
+ * Admission policy for the shared lease. Issue-fix consumers can use a bounded
+ * pool of Codex-primary slots; review/redflag/redcheck still contend for one
+ * residual slot and are denied while the issue-fix pool is active. This keeps
+ * the backlog moving without allowing the less frequent PR consumers to starve
+ * the queue in the other direction. The write+re-read below still makes
+ * concurrent consumers fail closed.
  */
 export function quotaLeaseDecision({
   action = 'acquire',
@@ -271,6 +272,7 @@ export function quotaLeaseDecision({
   nowSec = Math.floor(Date.now() / 1000),
   headSha = '',
   runId = '',
+  maxIssueFixLeases = 1,
 } = {}) {
   if (!validLeaseTarget(targetType, target)) {
     return { allowed: false, error: true, reason: 'invalid-lease-target' };
@@ -279,6 +281,12 @@ export function quotaLeaseDecision({
     QUOTA_LEASE_LIVE_STATES.has(lease?.state)
     && Number(lease?.expiresAt) > Number(nowSec),
   );
+  const requestedPool = Number(maxIssueFixLeases);
+  const issueFixPool = Number.isFinite(requestedPool) && requestedPool > 0
+    ? Math.max(1, Math.floor(requestedPool))
+    : 1;
+  const issueFixLive = live.filter((lease) => lease.role === 'issue-fix');
+  const otherLive = live.filter((lease) => lease.role !== 'issue-fix');
   if (action === 'release') return { allowed: true, release: true, reason: 'release-request' };
 
   // Il rescuer zero-Claude prenota lo slot prima di rilanciare il workflow
@@ -296,7 +304,10 @@ export function quotaLeaseDecision({
       && SHA1_RE.test(String(headSha || ''))
       && String(reservedForRun.headSha || '').toLowerCase() === String(headSha).toLowerCase()
       && String(reservedForRun.reservationRunId || '') === String(runId || '');
-    if (boundReservation && live.length !== 1) {
+    const reservationContended = role === 'issue-fix'
+      ? otherLive.length > 0 || issueFixLive.length > issueFixPool
+      : live.length !== 1;
+    if (boundReservation && reservationContended) {
       return { allowed: false, error: false, reason: 'shared-quota-lease-reservation-contended' };
     }
     if (boundReservation) {
@@ -316,7 +327,8 @@ export function quotaLeaseDecision({
       && lease.targetType === targetType
       && String(lease.target) === String(target),
     );
-    if (reservedForTarget && live.length !== 1) {
+    if (reservedForTarget
+      && (otherLive.length > 0 || issueFixLive.length > issueFixPool)) {
       return { allowed: false, error: false, reason: 'shared-quota-lease-reservation-contended' };
     }
     if (reservedForTarget) {
@@ -328,12 +340,17 @@ export function quotaLeaseDecision({
         reason: 'issue-fix-slot-reserved-for-target',
       };
     }
+    if (role === 'issue-fix') {
+      if (otherLive.length) return { allowed: false, error: false, reason: 'shared-quota-lease-active' };
+      if (issueFixLive.length >= issueFixPool) {
+        return { allowed: false, error: false, reason: 'issue-fix-pool-full' };
+      }
+      // Direct agent:fix routes join the same bounded pool as queued fixes.
+      return { allowed: true, existing: false, state: 'active', reason: 'direct-issue-fix-pool-slot' };
+    }
     if (live.length) return { allowed: false, error: false, reason: 'shared-quota-lease-active' };
-    // Direct agent:fix routes are legitimate issue-fix work even when the
-    // queued follow-up pool is non-empty; they claim the same single slot and
-    // are therefore visible to every other consumer.
-    if (role === 'issue-fix' || QUEUE_FLOOR_BYPASS_ROLES.has(role)) {
-      return { allowed: true, existing: false, state: 'active', reason: role === 'issue-fix' ? 'direct-issue-fix-slot' : 'pr-consumer-slot' };
+    if (QUEUE_FLOOR_BYPASS_ROLES.has(role)) {
+      return { allowed: true, existing: false, state: 'active', reason: 'pr-consumer-slot' };
     }
     if (role === 'issue-decompose' && Number(queueDepth) === 0) {
       return { allowed: true, existing: false, state: 'active', reason: 'direct-issue-decompose-slot' };
@@ -341,6 +358,18 @@ export function quotaLeaseDecision({
     return { allowed: false, error: false, reason: 'issue-fix-floor-unreserved' };
   }
 
+  if (role === 'issue-fix') {
+    if (otherLive.length) return { allowed: false, error: false, reason: 'shared-quota-lease-active' };
+    if (issueFixLive.length >= issueFixPool) {
+      return { allowed: false, error: false, reason: 'issue-fix-pool-full' };
+    }
+    return {
+      allowed: true,
+      existing: false,
+      state: action === 'reserve' ? 'reserved' : 'active',
+      reason: action === 'reserve' ? 'issue-fix-pool-slot-reserved' : 'direct-issue-fix-pool-slot',
+    };
+  }
   if (live.length) {
     return {
       allowed: false,
@@ -511,6 +540,7 @@ export function runQuotaLease({
   token = process.env.QUOTA_LEASE_TOKEN || '',
   ttlSec = Number(process.env.QUOTA_LEASE_TTL_SEC || QUOTA_LEASE_DEFAULT_TTL_SEC),
   scanMax = Number(process.env.QUOTA_LEASE_SCAN_MAX || QUOTA_LEASE_DEFAULT_SCAN_MAX),
+  maxIssueFixLeases = Number(process.env.QUOTA_LEASE_MAX_INFLIGHT_FIX || 1),
   runId = process.env.GITHUB_RUN_ID || '',
   headSha = process.env.HEAD_SHA || '',
   reservationRunId = process.env.QUOTA_LEASE_RESERVATION_RUN_ID || '',
@@ -526,6 +556,10 @@ export function runQuotaLease({
   const nowSec = Math.floor(Date.now() / 1000);
   const ttl = Number.isFinite(ttlSec) && ttlSec > 0 ? Math.floor(ttlSec) : QUOTA_LEASE_DEFAULT_TTL_SEC;
   const max = Number.isFinite(scanMax) && scanMax > 0 ? Math.floor(scanMax) : QUOTA_LEASE_DEFAULT_SCAN_MAX;
+  const requestedPool = Number(maxIssueFixLeases);
+  const issueFixPool = Number.isFinite(requestedPool) && requestedPool > 0
+    ? Math.max(1, Math.floor(requestedPool))
+    : 1;
   if (!repo || !validLeaseTarget(targetType, target)) {
     return writeLeaseOutputs({ allowed: false, error: true, reason: 'invalid-lease-context' }, { writeOutput });
   }
@@ -566,6 +600,7 @@ export function runQuotaLease({
       nowSec,
       headSha,
       runId: reservationRunId || runId,
+      maxIssueFixLeases: issueFixPool,
     });
     if (!decision.allowed) {
       if (emitReviewDeferredMarker && !decision.error && targetType === 'pr' && PR_QUOTA_CONSUMER_ROLES.has(role)) {
@@ -605,7 +640,19 @@ export function runQuotaLease({
         || !liveAfter.some((lease) => lease.token === chosenToken)) {
       throw new Error('lease scritto ma non rileggibile');
     }
-    if (existing && liveAfter.length !== 1) {
+    if (role === 'issue-fix'
+      && (liveAfter.length > issueFixPool || liveAfter.some((lease) => lease.role !== 'issue-fix'))) {
+      try {
+        postLeaseEvent(repo, {
+          ...own, state: 'released', owner, role, issuedAt: nowSec,
+          expiresAt: Math.max(nowSec, Number(own.expiresAt)),
+        });
+      } catch (error) {
+        console.log(`::warning::lease issue-fix fuori pool non rilasciato: ${String(error?.message || error).slice(0, 180)}`);
+      }
+      throw new Error(`pool issue-fix conteso: ${liveAfter.length} lease attivi, cap ${issueFixPool}`);
+    }
+    if (existing && role !== 'issue-fix' && liveAfter.length !== 1) {
       // Una reservation adottabile non è un lasciapassare per una seconda run:
       // se nel frattempo è comparso un altro lease, questa run non spende quota.
       // La reservation è però head/run-bound a questa stessa run: la ritiriamo
@@ -650,7 +697,7 @@ export function runQuotaLease({
         reason: 'shared-quota-lease-reservation-contended',
       }, { writeOutput });
     }
-    if (!existing && liveAfter.length !== 1) {
+    if (!existing && role !== 'issue-fix' && liveAfter.length !== 1) {
       postLeaseEvent(repo, {
         ...own, state: 'released', owner, role, issuedAt: nowSec,
         expiresAt: Math.max(nowSec, Number(own.expiresAt)),
@@ -938,7 +985,7 @@ function main() {
       '',
       `⏳ **Pre-flight quota (zero-Claude)**: la quota Claude condivisa è esaurita fino alle **${when}**.`,
       'Non lancio la run Claude: morirebbe su HTTP 429 al primo turno senza leggere',
-      'la issue (0 turni, $0), occupando lo slot serializzato e ritardando la coda.',
+      'la issue (0 turni, $0), occupando uno slot del pool e ritardando la coda.',
       '',
       '**Nessun tentativo consumato** (`fu-attempt` invariato): la issue torna in',
       `\`${LBL_REQUEUE}\` e riparte da sola appena la finestra si chiude.`,

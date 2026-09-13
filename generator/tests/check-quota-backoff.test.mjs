@@ -105,6 +105,55 @@ test('#8365: il lease riserva il floor issue-fix e nega il consumer concorrente'
   );
 });
 
+test('#1360: il lease ammette cinque fixer Codex-primary ma non il sesto', () => {
+  const nowSec = 1_800_000_000;
+  const lease = (number) => ({
+    token: `quota-drainer-${number}`,
+    role: 'issue-fix',
+    targetType: 'issue',
+    target: String(number),
+    state: 'reserved',
+    issuedAt: nowSec - 10,
+    expiresAt: nowSec + 600,
+  });
+  const pool = [1, 2, 3, 4, 5].map(lease);
+
+  for (let occupied = 0; occupied < 5; occupied += 1) {
+    assert.equal(
+      quotaLeaseDecision({
+        action: 'reserve', role: 'issue-fix', targetType: 'issue', target: '99',
+        activeLeases: pool.slice(0, occupied), queueDepth: 10, nowSec,
+        maxIssueFixLeases: 5,
+      }).allowed,
+      true,
+      `il fixer ${occupied + 1} deve entrare nel pool`,
+    );
+  }
+  assert.deepEqual(
+    quotaLeaseDecision({
+      action: 'reserve', role: 'issue-fix', targetType: 'issue', target: '99',
+      activeLeases: pool, queueDepth: 10, nowSec, maxIssueFixLeases: 5,
+    }),
+    { allowed: false, error: false, reason: 'issue-fix-pool-full' },
+  );
+  assert.equal(
+    quotaLeaseDecision({
+      action: 'consume', role: 'issue-fix', targetType: 'issue', target: '3',
+      activeLeases: pool, queueDepth: 10, nowSec, maxIssueFixLeases: 5,
+    }).allowed,
+    true,
+    'il fixer rilanciato deve adottare la reservation anche con gli altri slot vivi',
+  );
+  assert.equal(
+    quotaLeaseDecision({
+      action: 'acquire', role: 'review', targetType: 'pr', target: '99',
+      activeLeases: pool, queueDepth: 0, nowSec, maxIssueFixLeases: 5,
+    }).reason,
+    'issue-fix-slot-active',
+    'review e redcheck non possono aggiungersi al pool Codex issue-fix',
+  );
+});
+
 test('#8365: il workflow rilanciato può adottare la reservation della stessa PR', () => {
   const nowSec = 1_800_000_000;
   const headSha = 'a'.repeat(40);
@@ -241,7 +290,7 @@ test('#8365: il percorso CLI del lease è fail-closed e non altera il manifest',
 
 test('#8365: una contesa dopo la rilettura lascia il marker per il rescuer PR', () => {
   const src = fs.readFileSync(path.join(ROOT, 'scripts/ci/check-quota-backoff.mjs'), 'utf8');
-  const contention = src.slice(src.indexOf('if (!existing && liveAfter.length !== 1)'));
+  const contention = src.slice(src.indexOf('if (!existing && role !== \'issue-fix\' && liveAfter.length !== 1)'));
   assert.match(contention, /postReviewQuotaDeferred\(/,
     'il perdente della contesa non deve sparire senza deferral head-pinned');
   assert.match(contention, /shared-quota-lease-contention/);
