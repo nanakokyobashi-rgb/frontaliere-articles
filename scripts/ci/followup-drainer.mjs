@@ -81,6 +81,7 @@ import {
   followupItemMarkers,
   parseFollowupItems,
   selectFirstOpenItem,
+  AGGREGATE_ITEM_COUNT_RE as AGGREGATE_ITEMS_RE,
 } from './followup-resolution-match.mjs';
 
 // Il sito usa int-from-env.mjs; nel corpus l'helper equivalente riceve il
@@ -1046,8 +1047,6 @@ export function productionProofDecision({
  * `detectWideScopeAggregate`, così le due letture non possono divergere.
  * `items?` opzionale: il titolo è LLM-generated e per N=1 dice «1 item».
  */
-export const AGGREGATE_ITEMS_RE = /\b(\d+)\s+items?\s+(?:deferred|deferit[oi])\b/i;
-
 /**
  * Vero se il body dell'issue è troppo corto/malformato per consentire al fixer
  * di operare senza bruciare turni in cerca di contesto inesistente. Pura → testabile.
