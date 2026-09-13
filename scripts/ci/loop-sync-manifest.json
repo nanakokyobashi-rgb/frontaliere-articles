@@ -176,8 +176,8 @@
       "path": "scripts/ci/detect-aggregate.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "33431babe76b377f",
-        "corpus": "33431babe76b377f",
+        "site": "b09919d1e788e369",
+        "corpus": "b09919d1e788e369",
         "alignedAt": "2026-09-13"
       },
       "reason": "Trasporto completato dopo il merge della sorgente sito (#8450): il detector importa `isAggregate()` e usa la stessa lettura del payload, fallback conservativo per issue illeggibili o vuote e propagazione non-zero quando `$GITHUB_OUTPUT` non e' scrivibile. Le due copie coincidono; la voce promossa da `corpus-only-pending` a `identical` per chiudere il tracking #986."
