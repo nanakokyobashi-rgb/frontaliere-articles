@@ -6358,6 +6358,12 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.allarme-medici-frontalieri-ticino.title': 'Ticino, medical alarm: Teeth ask border crossers for limits',
     'blog.article.allarme-medici-frontalieri-ticino.excerpt': 'The president of the Order of Doctors of Ticino Franco Denti warns: Ticino has one doctor for every 900 inhabitants, at Como one for every 2,000. Ethical reflection is needed.',
     'blog.article.allarme-medici-frontalieri-ticino.imageAlt': 'View of a medical center in Ticino with modern architecture',
+    'blog.article.settimana-contro-lo-spreco-alimentare-svizzera.title': 'Food waste in Switzerland: national week kicks off',
+    'blog.article.settimana-contro-lo-spreco-alimentare-svizzera.excerpt': 'A week of initiatives throughout Switzerland to reduce food waste is underway: the recovery of millions of meals is up for grabs.',
+    'blog.article.settimana-contro-lo-spreco-alimentare-svizzera.imageAlt': 'National food waste reduction week in Switzerland',
+    'blog.article.record-imprese-culturali-svizzera.title': 'Record number of cultural enterprises in Switzerland in 2024',
+    'blog.article.record-imprese-culturali-svizzera.excerpt': 'In 2024, Switzerland registered 69,441 active cultural enterprises, an increase of 27% compared to 2011, although employment has decreased.',
+    'blog.article.record-imprese-culturali-svizzera.imageAlt': 'Cultural enterprises in Switzerland according to FSO data',
 };
 
 export default blogMetaChEn;
