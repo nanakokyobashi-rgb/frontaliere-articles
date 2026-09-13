@@ -235,8 +235,19 @@ test('la scansione paginata include tutte le pagine e non conta le rimozioni fal
   fs.writeFileSync(fakeGh, `#!/bin/sh
 printf 'FAKE_GH_ARGS:%s\\n' "$*" >> "$TRACE_FILE"
 if [ "$1" = "api" ] && [ "$3" = "--paginate" ] && [ "$4" = "--jq" ] && printf '%s' "$2" | grep -q 'labels=agent%3Afix'; then
+  if printf '%s' "$5" | grep -q 'body'; then
+    printf '%s\\n' 'projection must not request issue bodies' >&2
+    exit 97
+  fi
+  for field in number labels updated_at; do
+    if ! printf '%s' "$5" | grep -q "$field"; then
+      printf 'projection missing %s\\n' "$field" >&2
+      exit 98
+    fi
+  done
   printf '%s\\n' '{"number":1,"labels":["agent:fix","agent:fix-queued"],"updatedAt":"1970-01-01T00:00:00Z","isPullRequest":false}'
   printf '%s\\n' '{"number":2,"labels":["agent:fix","agent:fix-queued"],"updatedAt":"1970-01-01T00:00:00Z","isPullRequest":false}'
+  printf '%s\\n' '{"number":3,"labels":["agent:fix","agent:fix-queued"],"updatedAt":"1970-01-01T00:00:00Z","isPullRequest":true}'
   exit 0
 fi
 if [ "$1" = "api" ] && [ "$3" = "--paginate" ] && [ "$4" = "--jq" ] && printf '%s' "$2" | grep -q 'labels=agent%3Adecompose'; then
@@ -272,4 +283,5 @@ exit 0
   assert.match(result.stdout, /Rimozioni riuscite: 1\./);
   assert.match(result.stdout, /Rimozioni fallite: 1\./);
   assert.match(result.stdout, /reconcile: 1 falliti su 2/);
+  assert.doesNotMatch(result.stdout, /#3/);
 });
