@@ -14066,7 +14066,13 @@ async function main() {
     // this check is unaffected by that promotion either way). Renaming would
     // be a pure identifier change with no behavior difference; left as-is as
     // a comment-only fix (2026-07-28) to keep this edit surgical.
-    const cloudOnlyChain = DEFAULT_CHAIN.filter((m) => m !== AI_MODELS.LOCAL_FALLBACK);
+    // Codex is intentionally absent from DEFAULT_CHAIN because it is reserved
+    // for the high-value article body. It is nevertheless a viable non-local
+    // writer here: omitting it makes this pre-scan misclassify a Codex-only
+    // runtime as local-only and skip the news scan before generation can use
+    // the preferred CLI lane.
+    const cloudOnlyChain = [...DEFAULT_CHAIN, AI_MODELS.CODEX_CLI_PRIMARY]
+      .filter((m) => m !== AI_MODELS.LOCAL_FALLBACK);
     const cloudCascadeExhausted = isLocalLlmEnabled() && !getPreferredModel({ chain: cloudOnlyChain });
     if (cloudCascadeExhausted) {
       console.error('🔀 Cascata cloud esaurita, solo local/fallback disponibile — route diretto a evergreen (grounding garantito).');

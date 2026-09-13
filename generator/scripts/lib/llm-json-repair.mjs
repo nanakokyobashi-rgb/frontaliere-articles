@@ -676,7 +676,7 @@ function normalizeJsonCandidate(input) {
     .replace(/,(\s*[}\]])/g, '$1');
 }
 
-/** Maximum number of later root openings inspected after the first one. */
+/** Maximum number of later top-level candidate roots inspected after the first one. */
 const MAX_LATER_CANDIDATES = 24;
 
 /**
@@ -734,17 +734,25 @@ function collectJsonCandidates(source, rootOpeners) {
   }
 
   // A later root can be the real response after an example in a prose
-  // preamble. Inspect only a bounded number of openings, and only when the
-  // first root was not the first character. A response that starts at offset
-  // zero therefore cannot be displaced by trailing JSON in closing prose.
-  if (start > 0) {
-    let nextStart = nextRootStart(source, start + 1, rootOpeners);
+  // preamble. Inspect only a bounded number of TOP-LEVEL roots. Advancing
+  // past each matching close is load-bearing: searching from `nextStart + 1`
+  // counted every nested object/array in the example against the 24-candidate
+  // budget, so a deeply structured example could consume the whole budget
+  // before the real response was ever considered.
+  //
+  // When the first root is unbalanced there is no trustworthy boundary from
+  // which to distinguish later roots from nested salvage material. Keep the
+  // historical truncated-payload fallback and fail closed rather than
+  // guessing a later payload through that ambiguity.
+  if (start > 0 && firstCloseIdx !== -1) {
+    let nextStart = nextRootStart(source, firstCloseIdx + 1, rootOpeners);
     let examined = 0;
     while (nextStart !== -1 && examined < MAX_LATER_CANDIDATES) {
       examined++;
       const nextCloseIdx = findMatchingClose(source, nextStart, true);
-      if (nextCloseIdx !== -1) addCandidate(nextStart, nextCloseIdx, true);
-      nextStart = nextRootStart(source, nextStart + 1, rootOpeners);
+      if (nextCloseIdx === -1) break;
+      addCandidate(nextStart, nextCloseIdx, true);
+      nextStart = nextRootStart(source, nextCloseIdx + 1, rootOpeners);
     }
   }
 

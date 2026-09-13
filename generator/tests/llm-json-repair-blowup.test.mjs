@@ -72,6 +72,17 @@ test('con un preambolo seleziona il payload JSON finale, non quello piu\' lungo'
   assert.equal(parsed.slugs.it, 'final');
 });
 
+test('il limite dei candidati ignora gli oggetti annidati nel preambolo', () => {
+  let example = '{"root":';
+  for (let i = 0; i < 30; i++) example += '{"level":';
+  example += '{"value":"example"}' + '}'.repeat(31);
+  const raw = `Esempio strutturato: ${example} Risposta finale: {"id":"final","slugs":{"it":"final"}}`;
+
+  const parsed = JSON.parse(repairLlmJson(raw));
+  assert.equal(parsed.id, 'final');
+  assert.equal(parsed.slugs.it, 'final');
+});
+
 test('un esempio JSON nella coda non sostituisce una risposta gia\' chiusa', () => {
   const raw = 'Risposta finale: {"id":"real","slugs":{"it":"real"}}. Nota: esempio da ignorare {"id":"example","slugs":{"it":"example"},"extra":"piu lungo"}';
   const parsed = JSON.parse(repairLlmJson(raw));

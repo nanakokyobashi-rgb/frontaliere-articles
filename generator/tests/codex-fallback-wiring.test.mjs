@@ -100,3 +100,12 @@ test('Codex primary keeps the pinned OAuth model and is ordered before Claude', 
   assert.match(broker, /CODEX_MODEL\s*=\s*['"]gpt-5\.6-luna['"]/);
   assert.match(broker, /CODEX_EFFORT\s*=\s*['"]medium['"]/);
 });
+
+test('il pre-scan local-only considera Codex come alternativa non-local', () => {
+  const createArticle = read('generator/scripts/create-article.mjs');
+  const probeStart = createArticle.indexOf('const cloudOnlyChain');
+  assert.ok(probeStart >= 0, 'probe della cascata cloud non trovato');
+  const probe = createArticle.slice(probeStart, probeStart + 260);
+  assert.match(probe, /\[\.\.\.DEFAULT_CHAIN,\s*AI_MODELS\.CODEX_CLI_PRIMARY\]/);
+  assert.match(probe, /m !== AI_MODELS\.LOCAL_FALLBACK/);
+});
