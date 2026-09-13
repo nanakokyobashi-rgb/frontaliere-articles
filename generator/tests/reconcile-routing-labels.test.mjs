@@ -245,6 +245,9 @@ if [ "$1" = "api" ] && [ "$3" = "--paginate" ] && [ "$4" = "--jq" ] && printf '%
       exit 98
     fi
   done
+  printf '%s\\n' 'not-json'
+  printf '%s\\n' 'null'
+  printf '%s\\n' '[{"number":99,"labels":["agent:fix","agent:fix-queued"],"updatedAt":"1970-01-01T00:00:00Z","isPullRequest":false}]'
   printf '%s\\n' '{"number":1,"labels":["agent:fix","agent:fix-queued"],"updatedAt":"1970-01-01T00:00:00Z","isPullRequest":false}'
   printf '%s\\n' '{"number":2,"labels":["agent:fix","agent:fix-queued"],"updatedAt":"1970-01-01T00:00:00Z","isPullRequest":false}'
   printf '%s\\n' '{"number":3,"labels":["agent:fix","agent:fix-queued"],"updatedAt":"1970-01-01T00:00:00Z","isPullRequest":true}'
@@ -284,4 +287,8 @@ exit 0
   assert.match(result.stdout, /Rimozioni fallite: 1\./);
   assert.match(result.stdout, /reconcile: 1 falliti su 2/);
   assert.doesNotMatch(result.stdout, /#3/);
+  assert.doesNotMatch(result.stdout, /#99/);
+  assert.match(result.stdout, /record JSONL proiettato 1 illeggibile/);
+  assert.match(result.stdout, /record JSONL proiettato 2 non-object/);
+  assert.match(result.stdout, /record JSONL proiettato 3 non-object/);
 });

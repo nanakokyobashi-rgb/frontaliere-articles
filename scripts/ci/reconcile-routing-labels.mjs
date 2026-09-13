@@ -56,8 +56,9 @@
  * che nessun edit atomico puo' produrre.
  *
  * Direzione dell'errore: non toccare nulla su qualunque dubbio. Input mancante,
- * `gh` illeggibile, JSON malformato, timestamp assente → si salta la issue e
- * si esce 0. Per l'eta' si preferisce l'ultimo evento di label, quando
+ * `gh` illeggibile, record JSONL malformato/non-object, timestamp assente → si
+ * salta il record o la issue e si esce 0. Per l'eta' si preferisce l'ultimo
+ * evento di label, quando
  * disponibile; la funzione pura ricade su `updatedAt` per le risposte legacy,
  * mentre il percorso runtime salta in modo fail-safe se la timeline non e'
  * leggibile.
@@ -172,14 +173,25 @@ function fetchOpenIssuesForLabel(active) {
     '--jq',
     '.[] | {number, labels: [.labels[]?.name], updatedAt: (.updated_at // .updatedAt // ""), isPullRequest: (.pull_request != null)}',
   ], { json: false });
-  const issues = projected
-    .split('\n')
-    .map((line) => line.trim())
-    .filter(Boolean)
-    .flatMap((line) => {
-      const value = JSON.parse(line);
-      return Array.isArray(value) ? value : [value];
-    });
+  // Ogni riga è un record indipendente: un JSONL rotto non deve nascondere
+  // l'intera label, e un array non va flattenato in candidati.
+  const issues = [];
+  for (const [index, rawLine] of String(projected ?? '').split('\n').entries()) {
+    const line = rawLine.trim();
+    if (!line) continue;
+    let value;
+    try {
+      value = JSON.parse(line);
+    } catch (e) {
+      console.log(`::warning::record JSONL proiettato ${index + 1} illeggibile (${String(e).slice(0, 120)}) → salto.`);
+      continue;
+    }
+    if (value === null || typeof value !== 'object' || Array.isArray(value)) {
+      console.log(`::warning::record JSONL proiettato ${index + 1} non-object → salto.`);
+      continue;
+    }
+    issues.push(value);
+  }
   return issues
     // L'endpoint REST /issues include anche le pull request; la proiezione
     // conserva solo il flag necessario per escluderle.
