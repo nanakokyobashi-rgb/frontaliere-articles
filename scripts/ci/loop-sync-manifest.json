@@ -1946,8 +1946,8 @@
       "sitePath": "scripts/lib/discovery/sources/googleSuggestSource.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "6cb7603f358908af",
-        "corpus": "6cb7603f358908af",
+        "site": "be18f36169abce51",
+        "corpus": "be18f36169abce51",
         "alignedAt": "2026-09-13"
       }
     },
