@@ -6337,6 +6337,21 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.rischio-petrolio-hormuz-svizzera.title': '$200 Oil and Risks to the Global Economy',
     'blog.article.rischio-petrolio-hormuz-svizzera.excerpt': 'UBS analysis of the potential closure of the Strait of Hormuz: from crude oil prices to the economic and economic outlook in Switzerland.',
     'blog.article.rischio-petrolio-hormuz-svizzera.imageAlt': 'Economic analysis and financial markets in Switzerland',
+    'blog.article.parmelin-tag-der-wirtschaft.title': 'Tag der Wirtschaft: Guy Parmelin\'s speech in Lucerne',
+    'blog.article.parmelin-tag-der-wirtschaft.excerpt': 'Federal Councillor Guy Parmelin speaks at the Tag der Wirtschaft in Lucerne, taking stock of Switzerland\'s economic resilience and free trade agreements.',
+    'blog.article.parmelin-tag-der-wirtschaft.imageAlt': 'Federal Councillor Guy Parmelin at Tag der Wirtschaft',
+    'blog.article.f35a-prezzo-incerto-politica.title': 'F-35A: Fixed Price Doubts and Parliamentary Reactions',
+    'blog.article.f35a-prezzo-incerto-politica.excerpt': 'The report on the lack of a fixed price for the F-35A shocks Parliament. Green toward the ICC, while the center-right brakes.',
+    'blog.article.f35a-prezzo-incerto-politica.imageAlt': 'Federal Palace in Bern, seat of the Swiss Parliament.',
+    'blog.article.licenziamento-crans-montana-falsificazione.title': 'Crans-Montana: fired employee for building fakes',
+    'blog.article.licenziamento-crans-montana-falsificazione.excerpt': 'The Municipality of Crans-Montana has dismissed a collaborator of the Technical Office for the falsification of documents relating to a terrace.',
+    'blog.article.licenziamento-crans-montana-falsificazione.imageAlt': 'Municipal building in Switzerland representing local institutions',
+    'blog.article.attacco-hacker-salt-dati-clienti.title': 'Salt: cyber attack and theft of mobile customer data',
+    'blog.article.attacco-hacker-salt-dati-clienti.excerpt': 'The Salt telephone operator victim of a cyber-attack. Personal data of some mobile customers in Switzerland was stolen. The Federal Appointee has been notified.',
+    'blog.article.attacco-hacker-salt-dati-clienti.imageAlt': 'Headquarters of a mobile telecommunication operator in Switzerland involved in a cyber attack',
+    'blog.article.dazi-usa-seco-commercio.title': 'New US Tariffs and SECO Agreements for Swiss Companies',
+    'blog.article.dazi-usa-seco-commercio.excerpt': 'The United States introduces additional duties of up to 12.5% on Swiss goods. SECO monitors the impacts and evolution of production chains.',
+    'blog.article.dazi-usa-seco-commercio.imageAlt': 'SECO headquarters in Switzerland',
 };
 
 export default blogMetaChEn;

@@ -11712,6 +11712,18 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.savoia-avanti-ticino-lavoro.title': 'Savoyen Kandidat mit Avanti Ticino und Lavoro',
     'blog.article.savoia-avanti-ticino-lavoro.excerpt': 'Die politische Kandidatur von Sergio Savoia für die Liste Avanti con Ticino e Lavoro in Lugano führt zu Online-Debatten, Kontroversen und Klärungen.',
     'blog.article.savoia-avanti-ticino-lavoro.imageAlt': 'Politische Kandidatur von Sergio Savoia für Avanti con Ticino e Lavoro in Lugano',
+    'blog.article.verbania-lavori-ponte-san-giovanni.title': 'Verbania, Arbeiten an der San Giovanni-Brücke: veränderter Verkehr',
+    'blog.article.verbania-lavori-ponte-san-giovanni.excerpt': 'Nächtliche Eingriffe von Acqua Novara.VCO auf der Brücke San Giovanni in Verbania vom 14. bis 18. September mit Einbahnstraße.',
+    'blog.article.verbania-lavori-ponte-san-giovanni.imageAlt': 'Nächtliche Bauarbeiten und Verkehrsänderungen an der San-Giovanni-Brücke in Verbania',
+    'blog.article.stadler-rail-investimenti-kazakistan.title': 'Stadler Rail setzt auf Kasachstan: 53 Millionen Investitionen',
+    'blog.article.stadler-rail-investimenti-kazakistan.excerpt': 'Der Thurgauer Hersteller Stadler Rail investiert 25 Millionen Franken in das Werk Astana, um mit der Produktion von Aluminiumgehäusen zu beginnen.',
+    'blog.article.stadler-rail-investimenti-kazakistan.imageAlt': 'Stadler Rail Bahnproduktionsanlage mit modernen Maschinen',
+    'blog.article.inaugurazione-campus-smart-valley-daverio.title': 'Smart Valley Campus für Unternehmen in Daverio eingeweiht',
+    'blog.article.inaugurazione-campus-smart-valley-daverio.excerpt': 'In Daverio wurde der Smart Valley-Campus eingeweiht, ein fünftausend Quadratmeter großer Raum für die Fachausbildung und die Verbindung zwischen jungen Menschen und Unternehmen.',
+    'blog.article.inaugurazione-campus-smart-valley-daverio.imageAlt': 'Smart Valley Campus im Industriegebiet von Daverio eingeweiht',
+    'blog.article.franchigia-frontalieri-casalzuigno.title': 'Neue Selbstbeteiligung 10.000 € für Grenzgänger aus Casalzuigno',
+    'blog.article.franchigia-frontalieri-casalzuigno.excerpt': 'Die neue Frontalieri-Vereinbarung, die seit 2024 in Kraft ist, führt eine Selbstbeteiligung von 10.000 € für neue Einwohner Italiens ein, die im Tessin arbeiten.',
+    'blog.article.franchigia-frontalieri-casalzuigno.imageAlt': 'Ansicht von Casalzuigno an der Grenze zu Mendrisio und Tessin',
 };
 
 export default blogMetaDe;

@@ -11713,6 +11713,18 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.savoia-avanti-ticino-lavoro.title': 'Savoy candidate with Avanti Ticino e Lavoro',
     'blog.article.savoia-avanti-ticino-lavoro.excerpt': 'Sergio Savoia\'s political candidacy for the Avanti con Ticino e Lavoro list in Lugano generates online debate, controversy and clarification.',
     'blog.article.savoia-avanti-ticino-lavoro.imageAlt': 'Political candidacy of Sergio Savoia for Avanti con Ticino e Lavoro in Lugano',
+    'blog.article.verbania-lavori-ponte-san-giovanni.title': 'Verbania, works on the San Giovanni bridge: modified traffic',
+    'blog.article.verbania-lavori-ponte-san-giovanni.excerpt': 'Night-time interventions by Acqua Novara.VCO on the San Giovanni bridge at Verbania from 14 to 18 September with one-way alternation.',
+    'blog.article.verbania-lavori-ponte-san-giovanni.imageAlt': 'Night roadworks and traffic changes on San Giovanni bridge in Verbania',
+    'blog.article.stadler-rail-investimenti-kazakistan.title': 'Stadler Rail focuses on Kazakhstan: 53 million investments',
+    'blog.article.stadler-rail-investimenti-kazakistan.excerpt': 'The Turgovian manufacturer Stadler Rail invests 25 million francs in the Astana plant to start the production of aluminium crates.',
+    'blog.article.stadler-rail-investimenti-kazakistan.imageAlt': 'Stadler Rail railway manufacturing plant with advanced machinery',
+    'blog.article.inaugurazione-campus-smart-valley-daverio.title': 'Smart Valley campus for businesses inaugurated in Daverio',
+    'blog.article.inaugurazione-campus-smart-valley-daverio.excerpt': 'The Smart Valley campus was inaugurated at Daverio, a space of five thousand square meters for specialized training and the connection between young people and companies.',
+    'blog.article.inaugurazione-campus-smart-valley-daverio.imageAlt': 'Smart Valley campus inaugurated in the industrial area of Daverio',
+    'blog.article.franchigia-frontalieri-casalzuigno.title': 'New €10,000 deductible for border workers from Casalzuigno',
+    'blog.article.franchigia-frontalieri-casalzuigno.excerpt': 'The New Frontier Agreement in force since 2024 introduces a deductible of €10,000 for new residents in Italy working in Ticino.',
+    'blog.article.franchigia-frontalieri-casalzuigno.imageAlt': 'View of Casalzuigno near the border with Mendrisio and Ticino',
 };
 
 export default blogMetaEn;

@@ -2138,6 +2138,11 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'difesa-droni-infrastrutture-berna': { it: 'difesa-droni-infrastrutture-berna', en: 'drone-defense-infrastructure-bern', de: 'drohnenabwehr-infrastruktur-bern', fr: 'defense-drones-infrastructure-berne' },
  'hormuz-petrolio-200-dollari': { it: 'hormuz-petrolio-200-dollari', en: 'hormuz-oil-200-dollars', de: 'hormuz-oel-200-dollar', fr: 'hormuz-petrole-200-dollars' },
  'rischio-petrolio-hormuz-svizzera': { it: 'rischio-petrolio-hormuz-svizzera', en: 'oil-risk-hormuz-switzerland', de: 'oel-risiko-hormus-schweiz', fr: 'risque-petrole-hormuz-suisse' },
+ 'parmelin-tag-der-wirtschaft': { it: 'parmelin-tag-der-wirtschaft', en: 'parmelin-tag-der-wirtschaft-en', de: 'parmelin-tag-der-wirtschaft-de', fr: 'parmelin-tag-der-wirtschaft-fr' },
+ 'f35a-prezzo-incerto-politica': { it: 'f35a-prezzo-incerto-politica', en: 'f35a-price-uncertainty-politics', de: 'f35a-preisunsicherheit-politik', fr: 'f35a-prix-incertain-politique' },
+ 'licenziamento-crans-montana-falsificazione': { it: 'licenziamento-crans-montana-falsificazione', en: 'crans-montana-employee-dismissal', de: 'entlassung-crans-montana-falschung', fr: 'licenciement-crans-montana-falsification' },
+ 'attacco-hacker-salt-dati-clienti': { it: 'attacco-hacker-salt-dati-clienti', en: 'salt-cyber-attack-customer-data', de: 'salt-cyberangriff-kundendaten', fr: 'cyberattaque-salt-donnees-clients' },
+ 'dazi-usa-seco-commercio': { it: 'dazi-usa-seco-commercio', en: 'us-tariffs-seco-trade', de: 'usa-zoelle-seco-handel', fr: 'tarifs-usa-seco-commerce' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

@@ -1,8 +1,4 @@
 {
-  "https://www.admin.ch/it/newnsb/u1_n41xyqrwrghn2vkvp8": "giornate-svizzere-statistica-2026",
-  "https://www.swissinfo.ch/ita/travail%2esuisse-chiede-aumenti-salariali-del-2%25%2c-usi-frena/91908551": "travailsuisse-aumenti-salariali-2026",
-  "https://www.tio.ch/svizzera/politica/1944305/svizzera-verdi-iniziativa-neutralita-sicurezza-mette": "independenza-svizzera-sicurezza",
-  "https://www.swissinfo.ch/ita/esti%3a-un-prodotto-elettrico-su-quattro-difettoso/91908490": "prodotti-elettrici-difettosi-est-i",
   "https://www.tio.ch/svizzera/politica/1944356/iniziativa-ingiustizia-vodese-vd-reddito": "scontro-tasse-vodese-2024",
   "https://www.tio.ch/ticino/attualita/1944322/pioggia-e-refrigerio-ci-siamo-quasi-ma-la-siccita-non-molla": "pioggia-ritorno-siccita-ticino",
   "https://www.swissinfo.ch/ita/iniziativa-neutralit%c3%a0%2c-un-testo-pro-putin-che-danneggia-il-paese/91909576": "neutralita-iniziativa-pro-putin",
@@ -1457,8 +1453,8 @@
     "keyForm": 2
   },
   "https://www.seco.admin.ch/it": {
-    "articleId": "dazi-usa-2026-accordo-libero-scambio",
-    "ts": "2026-09-08T07:27:12.632Z",
+    "articleId": "dazi-usa-seco-commercio",
+    "ts": "2026-09-13T07:38:13.012Z",
     "keyForm": 2
   },
   "https://www.admin.ch/it/newnsb/nsut8um5sbxj": {
@@ -2369,6 +2365,26 @@
   "https://www.rsi.ch/s/4074328": {
     "articleId": "hormuz-petrolio-200-dollari",
     "ts": "2026-09-13T06:00:40.586Z",
+    "keyForm": 2
+  },
+  "https://www.admin.ch/it/newnsb/okbegvco54lc": {
+    "articleId": "parmelin-tag-der-wirtschaft",
+    "ts": "2026-09-13T06:41:53.334Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/politica/1949590/verdi-f-35a-conseguenze-prezzo-stato": {
+    "articleId": "f35a-prezzo-incerto-politica",
+    "ts": "2026-09-13T06:50:41.352Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/s/4077866": {
+    "articleId": "licenziamento-crans-montana-falsificazione",
+    "ts": "2026-09-13T06:58:29.435Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/s/4077635": {
+    "articleId": "attacco-hacker-salt-dati-clienti",
+    "ts": "2026-09-13T07:05:29.317Z",
     "keyForm": 2
   }
 }

@@ -11715,6 +11715,18 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.savoia-avanti-ticino-lavoro.title': 'Savoie candidat avec Avanti Ticino e Lavoro',
     'blog.article.savoia-avanti-ticino-lavoro.excerpt': 'La candidature politique de Sergio Savoia pour la liste Avanti con Ticino e Lavoro à Lugano génère un débat en ligne, une polémique et des clarifications.',
     'blog.article.savoia-avanti-ticino-lavoro.imageAlt': 'Candidature politique de Sergio Savoia pour Avanti con Ticino e Lavoro à Lugano',
+    'blog.article.verbania-lavori-ponte-san-giovanni.title': 'Verbania, travaux sur le pont Saint-Jean : trafic modifié',
+    'blog.article.verbania-lavori-ponte-san-giovanni.excerpt': 'Interventions nocturnes d\'Acqua Novara.VCO sur le pont San Giovanni à Verbania du 14 au 18 septembre à sens unique alternatif.',
+    'blog.article.verbania-lavori-ponte-san-giovanni.imageAlt': 'Travaux de nuit et modifications de circulation sur le pont San Giovanni à Verbania',
+    'blog.article.stadler-rail-investimenti-kazakistan.title': 'Stadler Rail mise sur le Kazakhstan : 53 millions d\'investissements',
+    'blog.article.stadler-rail-investimenti-kazakistan.excerpt': 'Le constructeur thurgovien Stadler Rail investit 25 millions de francs dans l\'usine d\'Astana pour démarrer la production de caisses en aluminium.',
+    'blog.article.stadler-rail-investimenti-kazakistan.imageAlt': 'Usine de fabrication ferroviaire de Stadler Rail',
+    'blog.article.inaugurazione-campus-smart-valley-daverio.title': 'Inauguré à Daverio le campus Smart Valley pour les entreprises',
+    'blog.article.inaugurazione-campus-smart-valley-daverio.excerpt': 'Inauguré à Daverio, le campus Smart Valley, un espace de cinq mille mètres carrés pour la formation spécialisée et la connexion entre les jeunes et les entreprises.',
+    'blog.article.inaugurazione-campus-smart-valley-daverio.imageAlt': 'Campus Smart Valley inauguré dans la zone industrielle de Daverio',
+    'blog.article.franchigia-frontalieri-casalzuigno.title': 'Nouvelle franchise 10 000 € pour les frontaliers de Casalzuigno',
+    'blog.article.franchigia-frontalieri-casalzuigno.excerpt': 'Le nouvel accord frontalier en vigueur depuis 2024 introduit une franchise de 10 000 € pour les nouveaux résidents en Italie qui travaillent au Tessin.',
+    'blog.article.franchigia-frontalieri-casalzuigno.imageAlt': 'Vue de Casalzuigno près de la frontière avec Mendrisio et le Tessin',
 };
 
 export default blogMetaFr;

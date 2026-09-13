@@ -43,7 +43,7 @@ const GOOD_BODY = '## Implementato\n- una cosa vera\n\n## Non implementato (anco
  * cieco su `$1` leggerebbe `--paginate` come path e cadrebbe nel default,
  * cioe' un test verde su un gate che non vede piu' niente.
  */
-function runGate({ reviews = [], files = [], meta = null, compare = null, codexEvidence = null }) {
+function runGate({ reviews = [], files = [], meta = null, compare = null, checkRuns = [], codexEvidence = null }) {
   const dir = mkdtempSync(path.join(tmpdir(), 'review-gate-'));
   try {
     const bin = path.join(dir, 'bin');
@@ -61,6 +61,8 @@ function runGate({ reviews = [], files = [], meta = null, compare = null, codexE
     // «endpoint non stubbato»: il gate deve cadere sul ramo conservativo.
     const fixCompare = path.join(dir, 'compare.json');
     writeFileSync(fixCompare, JSON.stringify(compare ?? {}));
+    const fixCheckRuns = path.join(dir, 'check-runs.json');
+    writeFileSync(fixCheckRuns, JSON.stringify({ check_runs: checkRuns }));
 
     writeFileSync(
       path.join(bin, 'gh'),
@@ -85,6 +87,7 @@ case "$sub" in
         node -e 'const c=require(process.argv[1]); process.stdout.write((c.mergeBase||"")+"\\n")' ${JSON.stringify(fixCompare)} ;;
       */compare/*)
         node -e 'const c=require(process.argv[1]); const k=process.argv[2].split("/compare/")[1]; process.stdout.write(JSON.stringify((c.byRange||{})[k]||{files:[]}))' ${JSON.stringify(fixCompare)} "$p" ;;
+      */commits/*/check-runs*) cat ${JSON.stringify(fixCheckRuns)} ;;
       */issues/*/comments*) echo '[]' ;;
       */issues?*) echo '[]' ;;
       */git/trees/*)
@@ -380,6 +383,35 @@ test('Codex LGTM requires valid run evidence and exact HEAD', () => {
       files: ['.github/workflows/tests.yml'], meta: { assoc: 'OWNER', login: 'valerielinc-ops', body: GOOD_BODY } });
     assert.equal(result.status, 1, result.stdout);
   }
+});
+
+test('Codex LGTM carry-forward usa il check richiesto verde come prova persistente', () => {
+  const checkRuns = [{ name: 'tests (node --test)', status: 'completed', conclusion: 'success' }];
+  const compare = {
+    mergeBase: 'c'.repeat(40),
+    byRange: {
+      [`${'c'.repeat(40)}...${HEAD}`]: { files: [{ filename: 'engine/x.ts', status: 'modified', patch: '@@\n+uno' }] },
+      [`${'c'.repeat(40)}...${OLD}`]: { files: [{ filename: 'engine/x.ts', status: 'modified', patch: '@@\n+uno' }] },
+    },
+  };
+  const result = runGate({
+    reviews: [codexReview({ commit_id: OLD })],
+    compare,
+    checkRuns,
+  });
+  assert.equal(result.status, 0, result.stdout);
+  assert.match(result.stdout, /carry-forward/, result.stdout);
+});
+
+test('un marker Codex senza evidenza e senza check precedente non sblocca il gate', () => {
+  const result = runGate({ reviews: [codexReview({ commit_id: OLD })], compare: {
+    mergeBase: 'c'.repeat(40),
+    byRange: {
+      [`${'c'.repeat(40)}...${HEAD}`]: { files: [{ filename: 'engine/x.ts', status: 'modified', patch: '@@\n+uno' }] },
+      [`${'c'.repeat(40)}...${OLD}`]: { files: [{ filename: 'engine/x.ts', status: 'modified', patch: '@@\n+uno' }] },
+    },
+  } });
+  assert.equal(result.status, 1, result.stdout);
 });
 
 test('invalid or failed Codex evidence cannot reuse an approving Claude review', () => {

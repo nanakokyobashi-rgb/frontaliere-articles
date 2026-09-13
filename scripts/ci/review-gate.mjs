@@ -60,7 +60,7 @@ import {
   isTrustedDriftAuthor,
   prBodyContractOk,
 } from './auto-merge-eval.mjs';
-import { REDFLAG_IMPORTANT_RE, REVIEWER_BOT_LOGIN_RE } from './lib/constants.mjs';
+import { REDFLAG_IMPORTANT_RE, REVIEWER_BOT_LOGIN_RE, VITEST_CHECK_NAME } from './lib/constants.mjs';
 import { classifyAndMintReview } from './review-scope.mjs';
 
 const REPO = process.env.GITHUB_REPOSITORY || '';
@@ -68,6 +68,8 @@ const PR = process.env.PR_NUMBER || '';
 const HEAD_SHA = process.env.HEAD_SHA || '';
 const RUN_URL = process.env.RUN_URL || '';
 const MARKER = '<!-- REVIEW_GATE_NO_LGTM -->';
+const CODEX_REVIEWER_LOGIN_RE = /^(?:github-actions\[bot\]|frontaliere-automation\[bot\])$/i;
+const CODEX_REVIEW_MARKER = '<!-- CODEX_FALLBACK_REVIEW -->';
 let gateFailureKind = 'verdict';
 
 /**
@@ -98,6 +100,38 @@ function gh(args, { json = true } = {}) {
 function fingerprint(sha) {
   const fp = prContributionFingerprint(sha);
   return fp == null ? null : createHash('sha256').update(fp).digest('hex');
+}
+
+function isCodexFallbackReview(review) {
+  return review?.user?.type === 'Bot'
+    && CODEX_REVIEWER_LOGIN_RE.test(review.user.login || '')
+    && String(review.body || '').includes(CODEX_REVIEW_MARKER);
+}
+
+/**
+ * A Codex review has no durable evidence file: that file belongs to the
+ * runner attempt that posted the review and disappears before the next run.
+ * Accept a positive Codex review without a fresh file only when the same
+ * commit already passed the required tests check. That successful check is
+ * the durable proof that the review gate accepted the review with its
+ * validated evidence; a marker in untrusted prose alone is never enough.
+ */
+function codexReviewWasPreviouslyAccepted(review) {
+  const commit = String(review?.commit_id || '');
+  if (!/^[0-9a-f]{40}$/i.test(commit)) return false;
+  try {
+    const payload = gh([
+      'api', `repos/${REPO}/commits/${commit}/check-runs?per_page=100`,
+    ]);
+    const checks = Array.isArray(payload?.check_runs) ? payload.check_runs : [];
+    return checks.some((check) => check?.name === VITEST_CHECK_NAME
+      && check?.status === 'completed'
+      && check?.conclusion === 'success');
+  } catch (error) {
+    markTransientFailure();
+    console.log(`review-gate: check precedente del Codex illeggibile (${String(error).slice(0, 160)}).`);
+    return false;
+  }
 }
 
 /**
@@ -133,9 +167,9 @@ function lastBotReview() {
     if (!codex.length) throw new Error('Nessuna review Codex marcata sulla HEAD');
     return codex[codex.length - 1];
   }
-  const bots = reviews.filter(
-    (r) => r.user?.type === 'Bot' && REVIEWER_BOT_LOGIN_RE.test(r.user?.login || ''),
-  );
+  const bots = reviews.filter((r) =>
+    (r.user?.type === 'Bot' && REVIEWER_BOT_LOGIN_RE.test(r.user?.login || ''))
+    || isCodexFallbackReview(r));
   return bots.length ? bots[bots.length - 1] : null;
 }
 
@@ -230,6 +264,8 @@ async function main() {
     process.exit(1);
   }
   const last = lastBotReview();
+  const isCodexReview = isCodexFallbackReview(last);
+  const hasFreshCodexEvidence = Boolean(process.env.CODEX_FALLBACK_EVIDENCE_FILE);
 
   if (last) {
     const body = last.body || '';
@@ -262,7 +298,13 @@ async function main() {
     }
     const outsideOnlyApproved = Boolean(applies && hasRedflag && scope?.outsideOnly && scope?.minted);
     const approving = (body.includes('## LGTM') && !hasRedflag) || outsideOnlyApproved;
-    if (approving && applies) {
+    // The evidence file is ephemeral. On a rerun where the re-review guard
+    // correctly skips Claude, require the durable successful required-check
+    // proof before carrying a positive Codex review forward.
+    const codexCarryApproved = !isCodexReview
+      || hasFreshCodexEvidence
+      || codexReviewWasPreviouslyAccepted(last);
+    if (approving && applies && codexCarryApproved) {
       if (last.commit_id === HEAD_SHA) {
         console.log(`review-gate: review approvante sulla head ${HEAD_SHA}.`);
       } else {
@@ -271,6 +313,9 @@ async function main() {
         );
       }
       process.exit(0);
+    }
+    if (approving && isCodexReview && !codexCarryApproved) {
+      console.log(`review-gate: review Codex approvante su ${last.commit_id}, ma senza evidenza della run corrente o di un check richiesto verde precedente → resta bloccante.`);
     }
     if (!approving) {
       console.log(

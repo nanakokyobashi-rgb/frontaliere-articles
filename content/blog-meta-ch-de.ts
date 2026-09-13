@@ -6337,6 +6337,21 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.rischio-petrolio-hormuz-svizzera.title': '200-Dollar-Öl und Risiken für die Weltwirtschaft',
     'blog.article.rischio-petrolio-hormuz-svizzera.excerpt': 'UBS-Analyse zur möglichen Schliessung der Straße von Hormus: Von den Rohölpreisen zu den Konjunktur- und Wirtschaftsaussichten in der Schweiz.',
     'blog.article.rischio-petrolio-hormuz-svizzera.imageAlt': 'Wirtschaftliche Analyse und Finanzmärkte in der Schweiz',
+    'blog.article.parmelin-tag-der-wirtschaft.title': 'Tag der Wirtschaft: Guy Parmelins Luzerner Rede',
+    'blog.article.parmelin-tag-der-wirtschaft.excerpt': 'Bundesrat Guy Parmelin spricht auf dem Tag der Wirtschaft in Luzern und zieht Bilanz über die wirtschaftliche Widerstandsfähigkeit der Schweiz und die Freihandelsabkommen.',
+    'blog.article.parmelin-tag-der-wirtschaft.imageAlt': 'Bundesrat Guy Parmelin am Tag der Wirtschaft',
+    'blog.article.f35a-prezzo-incerto-politica.title': 'F-35A: Zweifel am Festpreis und parlamentarische Reaktionen',
+    'blog.article.f35a-prezzo-incerto-politica.excerpt': 'Der Bericht über das Fehlen eines Festpreises für F-35A erschüttert das Parlament. Grün in Richtung ICC, während die Mitte-rechts bremst.',
+    'blog.article.f35a-prezzo-incerto-politica.imageAlt': 'Bundeshaus in Bern, Sitz des Schweizer Parlaments.',
+    'blog.article.licenziamento-crans-montana-falsificazione.title': 'Crans-Montana: Mitarbeiter wegen falscher Bauten entlassen',
+    'blog.article.licenziamento-crans-montana-falsificazione.excerpt': 'Die Gemeinde Crans-Montana hat einen Mitarbeiter des Technischen Büros für die Fälschung von Dokumenten im Zusammenhang mit einer Terrasse entlassen.',
+    'blog.article.licenziamento-crans-montana-falsificazione.imageAlt': 'Gemeindegebäude in der Schweiz, das die lokalen Institutionen repräsentiert',
+    'blog.article.attacco-hacker-salt-dati-clienti.title': 'Salt: Cyberangriff und Diebstahl mobiler Kundendaten',
+    'blog.article.attacco-hacker-salt-dati-clienti.excerpt': 'Der Mobilfunkanbieter Salt wurde Opfer eines Cyberangriffs. Personendaten von einigen Mobilfunkkunden in der Schweiz gestohlen. Der Bundesbeauftragte wurde benachrichtigt.',
+    'blog.article.attacco-hacker-salt-dati-clienti.imageAlt': 'Sitz eines Mobilfunkanbieters in der Schweiz, der von einem Cyberangriff betroffen ist',
+    'blog.article.dazi-usa-seco-commercio.title': 'Neue US-Zölle und SECO-VEREINBARUNGEN für Schweizer Unternehmen',
+    'blog.article.dazi-usa-seco-commercio.excerpt': 'Die USA führen zusätzliche Zölle von bis zu 12,5% auf Schweizer Waren ein. Das SECO überwacht die Auswirkungen und die Entwicklung der Produktionsketten.',
+    'blog.article.dazi-usa-seco-commercio.imageAlt': 'SECO Hauptsitz in der Schweiz',
 };
 
 export default blogMetaChDe;

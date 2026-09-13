@@ -11714,6 +11714,18 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.savoia-avanti-ticino-lavoro.title': 'Savoia candidato con Avanti Ticino e Lavoro',
     'blog.article.savoia-avanti-ticino-lavoro.excerpt': 'La candidatura politica di Sergio Savoia per la lista Avanti con Ticino e Lavoro a Lugano genera dibattito online, polemiche e chiarimenti.',
     'blog.article.savoia-avanti-ticino-lavoro.imageAlt': 'Candidatura politica di Sergio Savoia per Avanti con Ticino e Lavoro a Lugano',
+    'blog.article.verbania-lavori-ponte-san-giovanni.title': 'Verbania, lavori sul ponte San Giovanni: traffico modificato',
+    'blog.article.verbania-lavori-ponte-san-giovanni.excerpt': 'Interventi notturni di Acqua Novara.VCO sul ponte San Giovanni a Verbania dal 14 al 18 settembre con senso unico alternato.',
+    'blog.article.verbania-lavori-ponte-san-giovanni.imageAlt': 'Lavori notturni e viabilità modificata sul ponte San Giovanni a Verbania',
+    'blog.article.stadler-rail-investimenti-kazakistan.title': 'Stadler Rail punta sul Kazakistan: 53 milioni di investimenti',
+    'blog.article.stadler-rail-investimenti-kazakistan.excerpt': 'Il costruttore turgoviese Stadler Rail investe 25 milioni di franchi nello stabilimento di Astana per avviare la produzione di casse in alluminio.',
+    'blog.article.stadler-rail-investimenti-kazakistan.imageAlt': 'Stabilimento ferroviario di Stadler Rail con macchinari avanzati',
+    'blog.article.inaugurazione-campus-smart-valley-daverio.title': 'Inaugurato a Daverio il campus Smart Valley per le imprese',
+    'blog.article.inaugurazione-campus-smart-valley-daverio.excerpt': 'Inaugurato a Daverio il campus Smart Valley, uno spazio di cinquemila metri quadri per la formazione specialistica e il collegamento tra giovani e imprese.',
+    'blog.article.inaugurazione-campus-smart-valley-daverio.imageAlt': 'Campus Smart Valley inaugurato nell\'area industriale di Daverio',
+    'blog.article.franchigia-frontalieri-casalzuigno.title': 'Nuova franchigia 10.000 € per frontalieri da Casalzuigno',
+    'blog.article.franchigia-frontalieri-casalzuigno.excerpt': 'Il Nuovo Accordo Frontalieri in vigore dal 2024 introduce una franchigia di 10.000 € per i nuovi residenti in Italia che lavorano in Ticino.',
+    'blog.article.franchigia-frontalieri-casalzuigno.imageAlt': 'Veduta di Casalzuigno vicino al confine con Mendrisio e il Ticino',
 };
 
 export default blogMetaIt;

@@ -6337,6 +6337,21 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.rischio-petrolio-hormuz-svizzera.title': 'Pétrole à 200 dollars et risques pour l\'économie mondiale',
     'blog.article.rischio-petrolio-hormuz-svizzera.excerpt': 'Analyse d\'UBS sur la fermeture potentielle du détroit d\'Ormuz : des prix du pétrole brut aux perspectives conjoncturelles et économiques en Suisse.',
     'blog.article.rischio-petrolio-hormuz-svizzera.imageAlt': 'Analyse économique et marchés financiers en Suisse',
+    'blog.article.parmelin-tag-der-wirtschaft.title': 'Tag der Wirtschaft : le discours de Guy Parmelin à Lucerne',
+    'blog.article.parmelin-tag-der-wirtschaft.excerpt': 'Le conseiller fédéral Guy Parmelin intervient au Tag der Wirtschaft de Lucerne, dressant un bilan sur la résilience économique suisse et les accords de libre-échange.',
+    'blog.article.parmelin-tag-der-wirtschaft.imageAlt': 'Le conseiller federal Guy Parmelin au Tag der Wirtschaft',
+    'blog.article.f35a-prezzo-incerto-politica.title': 'F-35A : doutes sur le prix fixe et réactions parlementaires',
+    'blog.article.f35a-prezzo-incerto-politica.excerpt': 'Le rapport sur l\'absence de prix fixe pour les F-35A secoue le Parlement. Verts vers la CPI, tandis que le centre-droit freine.',
+    'blog.article.f35a-prezzo-incerto-politica.imageAlt': 'Palais fédéral à Berne, siège du Parlement suisse.',
+    'blog.article.licenziamento-crans-montana-falsificazione.title': 'Crans-Montana : licencié salarié pour faux immeubles',
+    'blog.article.licenziamento-crans-montana-falsificazione.excerpt': 'La commune de Crans-Montana a licencié un collaborateur du bureau technique pour falsification de documents relatifs à une terrasse.',
+    'blog.article.licenziamento-crans-montana-falsificazione.imageAlt': 'Bâtiment municipal en Suisse représentant les institutions locales',
+    'blog.article.attacco-hacker-salt-dati-clienti.title': 'Salt : attaque informatique et vol de données clients mobiles',
+    'blog.article.attacco-hacker-salt-dati-clienti.excerpt': 'L\'opérateur téléphonique Salt victime d\'une cyberattaque. Soustractions de données personnelles de certains clients mobiles en Suisse. Averti le Préposé fédéral.',
+    'blog.article.attacco-hacker-salt-dati-clienti.imageAlt': 'Siège d\'un opérateur de téléphonie mobile en Suisse impliqué dans une cyberattaque',
+    'blog.article.dazi-usa-seco-commercio.title': 'Dazî USA e accordi SECO per le aziende svizzere',
+    'blog.article.dazi-usa-seco-commercio.excerpt': 'Les États-Unis introduisent des droits supplémentaires allant jusqu\'à 12,5 % sur les marchandises suisses. Le SECO surveille les impacts et l\'évolution des chaînes de production.',
+    'blog.article.dazi-usa-seco-commercio.imageAlt': 'Siege du SECO en Suisse',
 };
 
 export default blogMetaChFr;
