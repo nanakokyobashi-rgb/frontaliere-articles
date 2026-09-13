@@ -3868,6 +3868,16 @@
         "corpus": "7eb0c82546609329",
         "alignedAt": "2026-09-13"
       }
+    },
+    {
+      "path": "scripts/lib/plate-auction-editorial.mjs",
+      "mode": "corpus-only",
+      "reason": "Companion editoriale per il catalogo aste: legge il feed pubblico del sito solo via HTTP e pubblica guida e aggiornamento nel corpus; non esiste un gemello sul sito e non deve, per costruzione.",
+      "baseline": {
+        "site": null,
+        "corpus": "2f827dea4206945d",
+        "alignedAt": "2026-09-13"
+      }
     }
   ]
 }
