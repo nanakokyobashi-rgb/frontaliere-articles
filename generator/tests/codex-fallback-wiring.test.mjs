@@ -99,6 +99,8 @@ test('Codex primary keeps the pinned OAuth model and is ordered before Claude', 
   assert.doesNotMatch(action, /indirect Codex fallback/);
   assert.match(broker, /CODEX_MODEL\s*=\s*['"]gpt-5\.6-luna['"]/);
   assert.match(broker, /CODEX_EFFORT\s*=\s*['"]medium['"]/);
+  assert.match(broker, /const configPath = path\.join\(codexHome, ['"]config\.toml['"]\)/);
+  assert.doesNotMatch(broker, /['"]--profile['"]\s*,\s*CODEX_PROFILE/);
 });
 
 test('il pre-scan local-only considera Codex come alternativa non-local', () => {

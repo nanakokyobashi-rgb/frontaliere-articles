@@ -254,7 +254,10 @@ function runCodex({ authJson: credential, prompt, timeoutMs, schema }) {
   const codexWorkspace = path.join(runtimeRoot, 'workspace');
   const codexTmp = path.join(runtimeRoot, 'tmp');
   const authPath = path.join(codexHome, 'auth.json');
-  const configPath = path.join(codexHome, `${CODEX_PROFILE}.config.toml`);
+  // CODEX_HOME/config.toml is loaded by default. Keep the selected permission
+  // profile in that base config instead of relying on a separate --profile
+  // overlay whose file-loading contract differs across CLI versions.
+  const configPath = path.join(codexHome, 'config.toml');
   const outputPath = path.join(codexHome, 'last-message.txt');
   const schemaPath = path.join(codexHome, 'output-schema.json');
   let child = null;
@@ -293,7 +296,6 @@ function runCodex({ authJson: credential, prompt, timeoutMs, schema }) {
         '--ephemeral',
         '--strict-config',
         '--ignore-rules',
-        '--profile', CODEX_PROFILE,
         '--cd', codexWorkspace,
         '--skip-git-repo-check',
         '--model', CODEX_MODEL,
