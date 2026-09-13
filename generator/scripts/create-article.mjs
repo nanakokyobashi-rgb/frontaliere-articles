@@ -66,7 +66,7 @@ import { createInterface } from 'node:readline';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { callLLM as _aiCallLLM, AI_MODELS, DEFAULT_CHAIN, getPreferredModel, isLocalLlmEnabled, getStats as getAiStats, initScoreStore, flushScoresBeforeExit, recordModelContentFailure, recordModelContentSuccess, isQuotaExhaustedError, printRunSummary, estimateRequestTokens, getDeclaredRequestTokenLimit, isModelAvailable, isPerRunCallCapReached } from './lib/ai-models.mjs';
-import { drainStdio, exitAfterDrain } from './lib/drain-stdio.mjs';
+import { exitAfterDrain } from './lib/drain-stdio.mjs';
 
 // ── Il modello preferito per la SOLA generazione del corpo ──────────────────
 //
@@ -3046,7 +3046,12 @@ function registerLockTargets(id, sectionName = SECTION_NAME) {
 // written yet) is cleared and the run proceeds — otherwise one interrupted run
 // would brick every later run on a corpus that is in fact fine.
 export function resolveRegisterLockAtStartup() {
-  const outcome = resolveRegisterLockImpl(PROJECT_ROOT, registerLockTargets, SECTION_NAME);
+  const outcome = resolveRegisterLockImpl(
+    PROJECT_ROOT,
+    registerLockTargets,
+    SECTION_NAME,
+    Object.keys(ARTICLE_SECTION_CONFIGS),
+  );
   for (const r of outcome.resolved) {
     console.error(`  ♻️  ${r.file}: marker di registrazione lasciato da un run interrotto`);
     const perche = r.state === 'committed'
@@ -8334,7 +8339,7 @@ Genera JSON (no markdown, no code fences):
     "it": {${_isBody ? '' : `
       "title": "Titolo giornalistico con keyword (OBBLIGATORIO ≤ 60 caratteri totali, target 50-55. Il suffisso ' | Frontaliere Ticino' viene aggiunto automaticamente — NON includerlo nel title)",
       "excerpt": "Sottotitolo con dati concreti DALLA FONTE (max 160 chars)",`}${_isMeta ? '' : `
-      "body1": "Inizia con '## In breve' (3-4 bullet TL;DR ≤80 char) + '## Fatti chiave' (5-8 coppie **Cosa/Quando/Dove/Chi/Importo**: valore). Poi il LEAD: FATTI dalla fonte (chi, cosa, dove, quando, perché). Solo cronaca verificabile. 300-400 parole (escluse TL;DR/Fatti chiave). Min 1 ### sotto-sezione.",
+      "body1": "Inizia con '## In breve' (3-4 bullet TL;DR ≤80 char) + '## Fatti chiave' (3-8 coppie termine→valore presenti nella fonte; ometti campi assenti, niente placeholder). Poi il LEAD: FATTI dalla fonte (chi, cosa, dove, quando, perché). Solo cronaca verificabile. 300-400 parole (escluse TL;DR/Fatti chiave). Min 1 ### sotto-sezione.",
       "body2": "Analisi pratica: implicazioni, confronti, scenari. Contenuto DIVERSO da body1. 300-400 parole. Min 1 ### sotto-sezione.",
       "body3": "Azione: procedura step-by-step, scadenze, strumenti + CTA finale. NON riassumere body1/body2. 300-400 parole."${_isBody ? '' : ','}`}${_isBody ? '' : `
       "faq": [
@@ -13992,13 +13997,7 @@ async function exitAfterFlush(code) {
     // flushScoresBeforeExit non lancia; il catch e' qui perche' l'uscita non
     // dipenda mai dal ledger, nemmeno se un domani cambiasse contratto.
   }
-  process.exitCode = code;
-  try {
-    await drainStdio();
-  } catch {
-    // Il drain e' best-effort: un errore dello stream non deve cambiare l'exit.
-  }
-  process.exit(code);
+  await exitAfterDrain(code);
 }
 
 async function main() {

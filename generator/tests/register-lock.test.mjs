@@ -432,6 +432,47 @@ test('un marker per-sezione con sezione interna discordante non viene deferito',
   assert.equal(fs.existsSync(marker), true, 'la discordanza non deve cancellare l\'evidenza');
 });
 
+test('un marker legacy con sezione non configurata non viene deferito per sempre', () => {
+  const root = sandbox();
+  const legacy = path.join(root, LEGACY_REGISTER_LOCK_FILE);
+  fs.mkdirSync(path.dirname(legacy), { recursive: true });
+  fs.writeFileSync(
+    legacy,
+    JSON.stringify({ id: ARTICLE_ID, section: 'futura-sezione', pid: 4242 }),
+    'utf-8',
+  );
+
+  assert.throws(
+    () => resolveRegisterLock(root, () => [], SECTION, ['frontaliere', 'svizzera']),
+    (err) => isRegisterLockError(err)
+      && /unknown section "futura-sezione"/.test(err.message)
+      && /ARTICLE_SECTION_CONFIGS/.test(err.message),
+  );
+  assert.equal(fs.existsSync(legacy), true, 'un marker sconosciuto resta evidenza da ispezionare');
+});
+
+test('knownSections rifiuta input non validi prima di consultare il lock', () => {
+  const root = sandbox();
+  let buildCalls = 0;
+  const build = () => {
+    buildCalls += 1;
+    return [];
+  };
+  for (const knownSections of [
+    'frontaliere',
+    42,
+    ['frontaliere', '../svizzera'],
+    new Set(['frontaliere', 42]),
+  ]) {
+    assert.throws(
+      () => resolveRegisterLock(root, build, SECTION, knownSections),
+      (err) => isRegisterLockError(err) && /knownSections/.test(err.message),
+      `knownSections non rifiutato: ${String(knownSections)}`,
+    );
+  }
+  assert.equal(buildCalls, 0, 'un knownSections malformato non deve arrivare al confronto dei bersagli');
+});
+
 test('le chiavi di configurazione delle sezioni sono validate prima del primo run', () => {
   assert.doesNotThrow(() => assertSectionConfigKeys({ frontaliere: {}, 'svizzera-2': {} }));
   for (const bad of ['Frontaliere', '../svizzera', 'svizzera/ch', '', '-svizzera', '_svizzera']) {
@@ -450,6 +491,11 @@ test('le chiavi di configurazione delle sezioni sono validate prima del primo ru
   const parseAt = CREATE_ARTICLE_SRC.indexOf('function parseSectionArg', configStart);
   assert.ok(configStart !== -1 && configEnd !== -1 && validationAt > configEnd && validationAt < parseAt,
     'create-article deve validare la mappa prima di parsare la sezione e iniziare il lavoro');
+  assert.match(
+    CREATE_ARTICLE_SRC,
+    /resolveRegisterLockImpl\(\s*PROJECT_ROOT,\s*registerLockTargets,\s*SECTION_NAME,\s*Object\.keys\(ARTICLE_SECTION_CONFIGS\)/,
+    'il resolver deve conoscere lo spazio di chiavi per rifiutare marker legacy sconosciuti',
+  );
 });
 
 test('i tre workflow producer con staging esplicito includono il marker di registrazione', () => {
@@ -459,9 +505,9 @@ test('i tre workflow producer con staging esplicito includono il marker di regis
     '../../.github/workflows/generate-border-wait-ranking-weekly.yml',
   ]) {
     const src = fs.readFileSync(new URL(workflow, import.meta.url), 'utf-8');
-    assert.match(src, /generator\/data\/register-in-progress-\*\.json/,
+    assert.match(src, /generator\/data\/register-in-progress\*\.json/,
       `${workflow}: marker non presente nello staging esplicito`);
-    assert.match(src, /git status --porcelain -- 'generator\/data\/register-in-progress-\*\.json'/,
+    assert.match(src, /git status --porcelain -- 'generator\/data\/register-in-progress\*\.json'/,
       `${workflow}: un giorno senza marker deve restare un commit valido`);
     assert.match(src, /id: producer/, `${workflow}: il producer deve avere un outcome osservabile`);
     assert.match(src, /id: registration-checkpoint/, `${workflow}: checkpoint del marker assente`);
@@ -472,8 +518,13 @@ test('i tre workflow producer con staging esplicito includono il marker di regis
     assert.match(src, /if \[ "\$PRODUCER_OUTCOME" != "success" \]/,
       `${workflow}: manca il ramo di commit della registrazione interrotta`);
     assert.ok(
-      (src.match(/git add -A -- 'generator\/data\/register-in-progress-\*\.json'/g) ?? []).length >= 2,
+      (src.match(/git add -A -- 'generator\/data\/register-in-progress\*\.json'/g) ?? []).length >= 2,
       `${workflow}: il marker deve essere staged con -A sia al checkpoint sia nel commit`,
+    );
+    assert.doesNotMatch(
+      src,
+      /generator\/data\/register-in-progress-\*\.json/,
+      `${workflow}: il glob stretto perde il marker legacy senza trattino`,
     );
   }
 });
