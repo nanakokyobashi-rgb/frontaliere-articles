@@ -46,6 +46,11 @@ import {
   collectSeoEntryIds,
   latestSeoPublication,
   SECTION_BODY_DIRS,
+  SECTION_COUNTERS,
+  SECTION_SITEMAPS,
+  ARCHIVE_SITEMAP,
+  countSourceSitemapEntries,
+  countSourceArchiveSitemapUrls,
   SEO_CHUNK_DIR,
   IMAGE_SOURCE_DIR,
 } from '../lib/corpus-floors.mjs';
@@ -57,11 +62,9 @@ import { stripNonMarkup } from '../lib/count-xml-tags.mjs';
 
 export const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
 
-/** Le due sezioni, col contatore del manifest che ciascuna alimenta. */
-export const SECTION_COUNTERS = {
-  frontaliere: 'articles',
-  svizzera: 'swissArticles',
-};
+// Re-export per i consumer del verifier: la definizione condivisa vive nel
+// modulo dei floor, così writer e gate non possono divergere sui nomi.
+export { SECTION_COUNTERS, SECTION_SITEMAPS, ARCHIVE_SITEMAP };
 
 /** La popolazione dei chunk ha un preallarme proprio: 90% di una run precedente.
  * Il 97% della retention degli articoli sarebbe rumore permanente per il
@@ -193,6 +196,18 @@ export function feedSourceFloor(expected, section) {
   return Number.isFinite(previous) ? Math.max(current, previous) : current;
 }
 
+function sitemapSourceFloor(expected, section) {
+  return expected.sourceSitemaps?.[section] ?? expected.sourceArticles?.[section] ?? 0;
+}
+
+function archiveSitemapSource(expected) {
+  const errors = Object.entries(expected.sourceArchiveSitemapErrors ?? {});
+  const total = Object.values(expected.sourceArchiveSitemapUrls ?? {})
+    .filter((count) => Number.isFinite(count) && count > 0)
+    .reduce((sum, count) => sum + count, 0);
+  return { errors, total };
+}
+
 function feedPopulationReference(expected, section) {
   const current = expected.feedSources?.[section] ?? 0;
   const previous = expected.previousFeedSources?.[section];
@@ -202,9 +217,9 @@ function feedPopulationReference(expected, section) {
 /**
  * Il nucleo puro: date le misure, quali pavimenti sono sfondati.
  *
- * @param {{articleCounts: Record<string, number>, feeds: {name: string, items: number, latestPublication?: {datePublished: string, timestamp: number}|null}[],
+ * @param {{articleCounts: Record<string, number>, sitemaps?: Record<string, number>, feeds: {name: string, items: number, latestPublication?: {datePublished: string, timestamp: number}|null}[],
  *          missingFeeds?: string[], images: number|null, imageErrors?: string[]}} measured  cio' che l'artefatto dichiara
- * @param {{sourceArticles: Record<string, number>, feedSources: Record<string, number>,
+ * @param {{sourceArticles: Record<string, number>, sourceSitemaps?: Record<string, number>, sourceArchiveSitemapUrls?: Record<string, number>, sourceArchiveSitemapErrors?: Record<string, string>, feedSources: Record<string, number>,
  *          previousFeedSources?: Record<string, number|null>, sourceImages: number|null,
  *          latestSeoPublications?: Record<string, {articleId: string, datePublished: string, timestamp: number}|null>,
  *          rssMaxItems: number}} expected   cio' che il corpus
@@ -242,6 +257,50 @@ export function floorViolations(measured, expected, retention = undefined) {
       violations.push(
         `manifest.counts.${counter}: ${declared} contro ${source} articoli sorgente (pavimento ${min}) — set troncato`,
       );
+    }
+  }
+
+  // Le sitemap articolo sono un secondo punto di uscita del corpus: il
+  // manifest puo' essere intatto mentre una sitemap viene serializzata a
+  // meta'. `measureDist` fornisce sempre questa mappa per l'artefatto reale;
+  // il guard conserva compatibilita' con i fixture puramente manifest/feed
+  // dei consumer del nucleo.
+  if (measured.sitemaps) {
+    for (const [section, file] of Object.entries(SECTION_SITEMAPS)) {
+      const source = sitemapSourceFloor(expected, section);
+      if (source === 0) continue;
+      const declared = measured.sitemaps[file];
+      if (typeof declared !== 'number') {
+        violations.push(`${file} assente: il corpus sorgente ne tiene ${source} articoli`);
+        continue;
+      }
+      const min = floor(source);
+      if (declared < min) {
+        violations.push(
+          `${file}: ${declared} url contro ${source} articoli sorgente (pavimento ${min}) — sitemap troncata`,
+        );
+      }
+    }
+
+    const { errors: archiveSourceErrors, total: archiveSource } = archiveSitemapSource(expected);
+    for (const [section, message] of archiveSourceErrors) {
+      violations.push(
+        `${ARCHIVE_SITEMAP}: riferimento sorgente ${section} non verificabile — ${message}`,
+      );
+    }
+    if (archiveSourceErrors.length === 0 && archiveSource > 0) {
+      const declared = measured.sitemaps[ARCHIVE_SITEMAP];
+      if (typeof declared !== 'number') {
+        violations.push(`${ARCHIVE_SITEMAP} assente: il corpus sorgente ne richiede ${archiveSource} url`);
+      } else {
+        const min = floor(archiveSource);
+        if (declared < min) {
+          violations.push(
+            `${ARCHIVE_SITEMAP}: ${declared} url contro ${archiveSource} url sorgente ` +
+              `(pavimento ${min}) — sitemap archive troncata`,
+          );
+        }
+      }
     }
   }
 
@@ -346,9 +405,10 @@ export function floorViolations(measured, expected, retention = undefined) {
  * rapporto osservabile PRIMA che diventi un fallimento.
  *
  * Le righe le produce lo stesso attraversamento di `floorViolations`, con gli
- * stessi riferimenti — i corpi per `manifest.counts`, i chunk SEO (tagliati a
- * `RSS_MAX_ITEMS`) per i feed, le hero per le immagini: un secondo criterio
- * qui misurerebbe qualcosa che il gate non gata, che e' peggio di non misurare.
+ * stessi riferimenti — i corpi per `manifest.counts`, le sitemap articolo, i
+ * chunk SEO (tagliati a `RSS_MAX_ITEMS`) per i feed, le hero per le immagini:
+ * un secondo criterio qui misurerebbe qualcosa che il gate non gata, che e'
+ * peggio di non misurare.
  *
  * Le righe SENZA riferimento non compaiono: sorgente a zero non e' un rapporto
  * basso, e' l'assenza del riferimento, ed e' gia' una violazione bloccante.
@@ -363,6 +423,21 @@ export function retentionReport(measured, expected) {
     const declared = measured.articleCounts[counter];
     if (source <= 0 || typeof declared !== 'number') continue;
     rows.push({ kind: 'manifest', label: `manifest.counts.${counter}`, declared, source });
+  }
+
+  if (measured.sitemaps) {
+    for (const [section, file] of Object.entries(SECTION_SITEMAPS)) {
+      const source = sitemapSourceFloor(expected, section);
+      const declared = measured.sitemaps[file];
+      if (source <= 0 || typeof declared !== 'number') continue;
+      rows.push({ kind: 'sitemap', label: file, declared, source });
+    }
+
+    const { errors: archiveSourceErrors, total: archiveSource } = archiveSitemapSource(expected);
+    const declared = measured.sitemaps[ARCHIVE_SITEMAP];
+    if (archiveSourceErrors.length === 0 && archiveSource > 0 && typeof declared === 'number') {
+      rows.push({ kind: 'sitemap', label: ARCHIVE_SITEMAP, declared, source: archiveSource });
+    }
   }
 
   // Il feed e' capato a RSS_MAX_ITEMS, ma la sua popolazione sorgente non lo
@@ -426,9 +501,9 @@ export function retentionAdvisories(rows, retention = FLOOR_RETENTION, warn = FL
 }
 
 /**
- * Le righe da stampare a ogni run: i due rapporti del manifest, le popolazioni
- * dei chunk SEO, quello delle immagini, e — per i feed — il PIU' MAGRO della
- * sezione.
+ * Le righe da stampare a ogni run: i rapporti del manifest, le due sitemap, le
+ * popolazioni dei chunk SEO, quello delle immagini, e — per i feed — il PIU'
+ * MAGRO della sezione.
  *
  * I dieci feed condividono il riferimento della loro sezione e stanno quasi
  * sempre tutti al tetto: stamparli tutti annegherebbe le due righe che contano
@@ -500,6 +575,12 @@ export function measureDist(distDir) {
   const presentFeedNames = new Set(feeds.map(({ name }) => name));
   const missingFeeds = expectedFeedNames().filter((name) => !presentFeedNames.has(name));
 
+  const sitemaps = {};
+  for (const file of [...Object.values(SECTION_SITEMAPS), ARCHIVE_SITEMAP]) {
+    const absolute = path.join(distDir, file);
+    if (fs.existsSync(absolute)) sitemaps[file] = countXmlTags(readOut(file), 'url');
+  }
+
   const imageManifest = path.join(distDir, 'images-manifest.json');
   let images = null;
   const imageErrors = [];
@@ -516,7 +597,7 @@ export function measureDist(distDir) {
     }
   }
 
-  return { articleCounts: manifest.counts ?? {}, feeds, missingFeeds, images, imageErrors };
+  return { articleCounts: manifest.counts ?? {}, sitemaps, feeds, missingFeeds, images, imageErrors };
 }
 
 /** Riconta il corpus sorgente, che e' il riferimento esterno all'artefatto. */
@@ -540,11 +621,34 @@ export async function expectFromCorpus(root) {
     const historicalPopulationFiles = [...new Set([...section.seoFiles, ...previousSeoFiles])];
     previousFeedSources[section.id] = countSeoEntriesAtRevision(root, revision, historicalPopulationFiles);
   }
+  const sourceSitemaps = {};
+  const sourceArchiveSitemapUrls = {};
+  const sourceArchiveSitemapErrors = {};
+  for (const section of Object.keys(SECTION_COUNTERS)) {
+    try {
+      sourceSitemaps[section] = countSourceSitemapEntries(root, section);
+    } catch (error) {
+      // Some unit fixtures model only the body/SEO corpus because they never
+      // invoke the sitemap writer. A real publish checkout has these inputs —
+      // build-api.mjs reads them unconditionally — so keep those minimal roots
+      // on the old body fallback while preserving the precise source in CI.
+      if (error?.code !== 'MISSING_CORPUS') throw error;
+    }
+    try {
+      sourceArchiveSitemapUrls[section] = countSourceArchiveSitemapUrls(root, section);
+    } catch (error) {
+      if (error?.code !== 'MISSING_CORPUS') throw error;
+      sourceArchiveSitemapErrors[section] = error.message;
+    }
+  }
   return {
     sourceArticles: {
       frontaliere: countSourceArticles(root, 'frontaliere'),
       svizzera: countSourceArticles(root, 'svizzera'),
     },
+    ...(Object.keys(sourceSitemaps).length ? { sourceSitemaps } : {}),
+    ...(Object.keys(sourceArchiveSitemapUrls).length ? { sourceArchiveSitemapUrls } : {}),
+    ...(Object.keys(sourceArchiveSitemapErrors).length ? { sourceArchiveSitemapErrors } : {}),
     feedSources,
     previousFeedSources,
     latestSeoPublications,
@@ -584,6 +688,11 @@ async function main() {
     `[api-floors] manifest: articles=${measured.articleCounts.articles}, ` +
       `swissArticles=${measured.articleCounts.swissArticles}, ` +
       `feeds=${measured.feeds.length}, images=${measured.images ?? 'non emesso'}`,
+  );
+  console.log(
+    `[api-floors] sitemap: ${Object.values(SECTION_SITEMAPS)
+      .map((file) => `${file}=${measured.sitemaps[file] ?? 'assente'}`)
+      .join(', ')}`,
   );
 
   // La telemetria del rapporto viene PRIMA del verdetto, e viene stampata anche

@@ -85,7 +85,14 @@ import { findShadowedTickerArticles } from './lib/ticker-shadow-check.mjs';
 // il markup, non il testo: una description RSS in CDATA che cita `<item>`
 // gonfiava identicamente il dichiarato e il ri-derivato (vedi il suo header).
 import { countXmlTags } from './lib/count-xml-tags.mjs';
-import { collectSeoEntryMetadata } from './lib/corpus-floors.mjs';
+import {
+  collectSeoEntryMetadata,
+  floorFrom,
+  ARCHIVE_SITEMAP,
+  SECTION_SITEMAPS,
+  countSourceSitemapEntries,
+  sectionFloor,
+} from './lib/corpus-floors.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const OUT = path.join(ROOT, 'dist', 'api');
@@ -282,22 +289,50 @@ const metaChIt = (await load('content/blog-meta-ch-it.ts')).default;
 // retired set plugs straight into buildSitemap's shadowed parameter.
 const retiredDailyEditions = selectRetiredDailyEditions(ARTICLES.map((a) => a.id));
 console.log(`[build-api] retired daily editions de-listed from sitemap: ${retiredDailyEditions.size}`);
+const retiredDailyEditionSlugs = new Set(
+  [...retiredDailyEditions].map((id) => blogSlugs.BLOG_SLUGS?.[id]?.it ?? id),
+);
 // buildSitemap takes a single `shadowed` set, so the frontaliere call unions
 // the two de-listing reasons — retired daily editions and canonical-shadowed
 // duplicates — the same way the svizzera call already gets its own dedicated set.
-const frontaliereSitemapShadow = new Set([...retiredDailyEditions, ...shadowedFrontaliereSlugs]);
+const frontaliereSitemapShadow = new Set([...retiredDailyEditionSlugs, ...shadowedFrontaliereSlugs]);
 const sitemapCounts = {
   blog: writeXml(
-    'sitemap-blog.xml',
+    SECTION_SITEMAPS.frontaliere,
     buildSitemap(ARTICLES, 'frontaliere', blogSlugs.BLOG_SLUGS, metaIt, frontaliereSitemapShadow),
   ),
   blogCh: writeXml(
-    'sitemap-blog-ch.xml',
+    SECTION_SITEMAPS.svizzera,
     buildSitemap(SWISS_ARTICLES, 'svizzera', swissSlugs.SWISS_SLUGS, metaChIt, shadowedSwissSlugs),
   ),
 };
-if (sitemapCounts.blog < 100) {
-  throw new Error(`sitemap-blog.xml has only ${sitemapCounts.blog} urls — refusing to publish`);
+// I pavimenti sono relativi al registro IT meno le esclusioni esplicite già
+// validate (canonical override e daily edition ritirate), non al predicato del
+// builder: un filtro nuovo o una slug map troncata deve far scattare il floor,
+// non abbassarlo insieme alla sitemap. Gli override hanno una chiave per
+// locale, mentre questa sitemap ha una sola URL per articolo. Il vecchio `< 100`
+// proteggeva il 2,6% del corpus frontaliere e non proteggeva affatto la sitemap
+// svizzera; un parse troncato restava quindi pubblicabile senza errori.
+const sitemapSources = {
+  blog: countSourceSitemapEntries(ROOT, 'frontaliere'),
+  blogCh: countSourceSitemapEntries(ROOT, 'svizzera'),
+};
+for (const [key, file] of [
+  ['blog', SECTION_SITEMAPS.frontaliere],
+  ['blogCh', SECTION_SITEMAPS.svizzera],
+]) {
+  const source = sitemapSources[key];
+  if (source <= 0) {
+    throw new Error(`${file} has no emittable IT registry entries — refusing to publish an empty sitemap`);
+  }
+  const floor = floorFrom(source);
+  if (sitemapCounts[key] < floor) {
+    throw new Error(
+      `${file} has only ${sitemapCounts[key]} urls against ${source} emittable IT registry entries ` +
+        `(floor ${floor}) — refusing to publish a truncated sitemap`,
+    );
+  }
+  console.log(`[build-api] ${file}: ${sitemapCounts[key]} urls (floor ${floor}, derived from emitted IT entries)`);
 }
 
 // ── Archive pages (issue #4974) ───────────────────────────────────────────
@@ -311,26 +346,32 @@ if (sitemapCounts.blog < 100) {
 //
 // Page count comes from the SAME union the emitter paginates
 // (`readArticleArchiveUnionSlugs`), so this file cannot list a page the
-// archive does not have. The page size is spelled out rather than read from
-// the site shell, which does not exist in this process — see the ticker call
-// below for the same reason. It must track ARTICLES_PAGE_SIZE in
-// `build-plugins/seoHubsData.ts`; the count assertion below is what catches a
-// drift.
+// archive does not have. The page size comes from the host's single source,
+// which is the value wired into the engine's SiteShellContract.
 const ARCHIVE_ALL_SLUG = { it: 'tutti', en: 'all', de: 'alle', fr: 'tous' };
-const ARCHIVE_PAGE_SIZE = 100;
 const { readArticleArchiveUnionSlugs } = await load('engine/shared/articleArchiveUnion.ts');
 const { ARTICLE_SECTIONS } = await load('articleSections.ts');
+const { ARTICLES_PAGE_SIZE } = await load('host/seoHubsData.ts');
 
 function archiveBase(section, locale) {
   const prefix = locale === 'it' ? '' : `/${locale}`;
   return `${prefix}/${ARTICLE_SECTIONS[section].indexSlug[locale]}/${ARCHIVE_ALL_SLUG[locale]}/`;
 }
 
+const archiveSources = {};
 function buildArchiveSitemap() {
   const urls = [];
   for (const section of ['frontaliere', 'svizzera']) {
     const total = readArticleArchiveUnionSlugs(fs, path, ROOT, section).size;
-    const pages = Math.max(1, Math.ceil(total / ARCHIVE_PAGE_SIZE));
+    const floor = sectionFloor(ROOT, section);
+    if (total < floor) {
+      throw new Error(
+        `${section} archive has only ${total} entries against ${floor} required by the corpus floor ` +
+          `— refusing to publish a truncated archive sitemap`,
+      );
+    }
+    const pages = Math.max(1, Math.ceil(total / ARTICLES_PAGE_SIZE));
+    archiveSources[section] = { total, floor, pages };
     for (const locale of LOCALES) {
       for (let page = 1; page <= pages; page++) {
         const base = archiveBase(section, locale);
@@ -367,15 +408,13 @@ function buildArchiveSitemap() {
   };
 }
 
-sitemapCounts.archive = writeXml('sitemap-articles-archive.xml', buildArchiveSitemap());
-// Two sections x four locales, so the count is 4 x (frontalierePages +
-// svizzeraPages) — under 8 means a section resolved to a single empty page,
-// which is the shape a broken registry parse takes.
-if (sitemapCounts.archive < 8) {
-  throw new Error(
-    `sitemap-articles-archive.xml has only ${sitemapCounts.archive} urls — refusing to publish`,
-  );
-}
+sitemapCounts.archive = writeXml(ARCHIVE_SITEMAP, buildArchiveSitemap());
+console.log(
+  `[build-api] ${ARCHIVE_SITEMAP}: ${sitemapCounts.archive} urls ` +
+    `(pages derived from ${Object.entries(archiveSources)
+      .map(([section, { total, floor, pages }]) => `${section}=${total} entries/${floor} floor/${pages} pages`)
+      .join(', ')})`,
+);
 
 // ── RSS feeds ─────────────────────────────────────────────────────
 //
@@ -823,6 +862,7 @@ write('manifest.json', {
     swissArticles: SWISS_ARTICLES.length,
     sitemapBlogUrls: sitemapCounts.blog,
     sitemapBlogChUrls: sitemapCounts.blogCh,
+    sitemapArchiveUrls: sitemapCounts.archive,
     rssFeeds: rssFeedCount,
     rssItems: rssItemTotal,
     tickerArticles: tickerArticles.length,
@@ -973,8 +1013,9 @@ console.log(`[build-api] wrote ${Object.keys(written).length} files to dist/api`
   const derived = {
     articles: derivedAlways('articles.json', () => jsonOut('articles.json').length),
     swissArticles: derivedAlways('swiss-articles.json', () => jsonOut('swiss-articles.json').length),
-    sitemapBlogUrls: sitemapUrls('sitemap-blog.xml'),
-    sitemapBlogChUrls: sitemapUrls('sitemap-blog-ch.xml'),
+    sitemapBlogUrls: sitemapUrls(SECTION_SITEMAPS.frontaliere),
+    sitemapBlogChUrls: sitemapUrls(SECTION_SITEMAPS.svizzera),
+    sitemapArchiveUrls: sitemapUrls(ARCHIVE_SITEMAP),
     rssFeeds: feeds.length,
     rssItems: feeds.reduce((total, xml) => total + countXmlTags(xml, 'item'), 0),
     tickerArticles: derivedAlways('news-ticker-live.json', () => jsonOut('news-ticker-live.json').articles.length),

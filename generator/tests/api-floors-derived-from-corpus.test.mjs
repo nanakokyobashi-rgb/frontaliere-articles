@@ -13,6 +13,9 @@
  * non c'era pavimento affatto. Stesso difetto, stessa classe, in
  * `scripts/build-blog-index.mjs`: `MIN_ENTRIES = 50` contro le stesse due
  * sezioni da 3785 e 1850 file di corpo.
+ * La stessa classe era rimasta in due writer di sitemap: `sitemap-blog.xml`
+ * controllava solo una soglia assoluta di 100 e la sitemap svizzera non aveva
+ * alcun controllo; il verifier non misurava neppure quei due output.
  *
  * LA ROOT CAUSE NON E' IL NUMERO. E' che il numero e' ASSOLUTO: tarato una
  * volta contro il corpus di quel giorno, non si muove piu' mentre il corpus
@@ -45,6 +48,7 @@ import {
   retentionWarning,
   floorFrom,
   countSourceArticles,
+  countRegistryArticles,
   countSourceImages,
   countSeoEntries,
   collectSeoEntryIds,
@@ -52,10 +56,15 @@ import {
   collectSeoFeedEntryMetadata,
   unescapeQuoted,
   latestSeoPublication,
+  listedFloor,
+  countSourceSitemapEntries,
+  countSourceArchiveSitemapUrls,
+  ARCHIVE_SITEMAP,
   sectionFloor,
 } from '../../scripts/lib/corpus-floors.mjs';
 import {
   SECTION_COUNTERS,
+  SECTION_SITEMAPS,
   feedSection,
   expectedFeedNames,
   floorViolations,
@@ -70,9 +79,14 @@ import {
   previousRevision,
 } from '../../scripts/ci/verify-api-floors.mjs';
 import { RSS_SECTIONS } from '../../engine/rssFeeds.mjs';
+import { parseArticleUrlSlugs } from '../../engine/shared/articleReaderSource.mjs';
+import { selectRetiredDailyEditions } from '../../generator/scripts/lib/daily-brief-content.mjs';
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
 const WORKFLOW = fs.readFileSync(join(ROOT, '.github/workflows/publish-api.yml'), 'utf-8');
 const BLOG_INDEX = fs.readFileSync(join(ROOT, 'scripts/build-blog-index.mjs'), 'utf-8');
+const HOST_SEO_HUBS = fs.readFileSync(join(ROOT, 'host/seoHubsData.ts'), 'utf-8');
+const ARTICLE_READERS = fs.readFileSync(join(ROOT, 'engine/shared/articleReaders.ts'), 'utf-8');
+const CORPUS_FLOORS = fs.readFileSync(join(ROOT, 'scripts/lib/corpus-floors.mjs'), 'utf-8');
 
 /** Una superficie sana su un corpus della taglia di quello reale. */
 function healthy() {
@@ -93,6 +107,7 @@ function healthy() {
       { name: 'rss-svizzera.xml', items: 50 },
       { name: 'rss-svizzera-de.xml', items: 50 },
     ],
+    sitemaps: { 'sitemap-blog.xml': 3782, 'sitemap-blog-ch.xml': 1850 },
     images: 1990,
   };
   return { measured, expected };
@@ -103,15 +118,120 @@ function writeHealthyFeeds(dir) {
   const item = `<item><pubDate>${pubDate}</pubDate></item>`;
   const xml = `<rss><channel>${item.repeat(50)}</channel></rss>`;
   for (const name of expectedFeedNames(RSS_SECTIONS)) fs.writeFileSync(join(dir, name), xml);
+  for (const [section, file] of Object.entries(SECTION_SITEMAPS)) {
+    const count = countSourceArticles(ROOT, section);
+    fs.writeFileSync(join(dir, file), `<urlset>${'<url>x</url>'.repeat(count)}</urlset>`);
+  }
+  const archiveCount = ['frontaliere', 'svizzera']
+    .reduce((total, section) => total + countSourceArchiveSitemapUrls(ROOT, section), 0);
+  fs.writeFileSync(join(dir, ARCHIVE_SITEMAP), `<urlset>${'<url>x</url>'.repeat(archiveCount)}</urlset>`);
 }
 
 test('floorFrom scala col valore atteso e non produce mai un pavimento negativo', () => {
   assert.equal(floorFrom(1000), Math.floor(1000 * FLOOR_RETENTION));
+  assert.equal(floorFrom(1), 1, 'un riferimento positivo non puo\' trasformarsi in un floor a zero');
   assert.equal(floorFrom(0), 0);
   assert.equal(floorFrom(-5), 0);
   assert.equal(floorFrom(Number.NaN), 0);
   // Il punto della fix: il pavimento cresce col corpus invece di restare fermo.
   assert.ok(floorFrom(3785) > floorFrom(100));
+});
+
+test('listedFloor scala con il registro dopo le esclusioni legittime', () => {
+  assert.equal(listedFloor(1000, 10), floorFrom(990));
+  assert.equal(listedFloor(1000, 2000), 0);
+  assert.throws(() => listedFloor(0), /registro degli articoli/);
+});
+
+test('il floor sitemap conta una sola volta le entry IT effettivamente emesse', () => {
+  const registryIds = (file) =>
+    [...readFileSync(join(ROOT, 'content', file), 'utf8').matchAll(/^\s*id:\s*['"]([^'"]+)/gm)].map(
+      (match) => match[1],
+    );
+  const overrideRows = (file) =>
+    Object.keys(JSON.parse(readFileSync(join(ROOT, file), 'utf8')).overrides ?? {});
+  const effectiveSource = {
+    frontaliere:
+      countRegistryArticles(ROOT, 'frontaliere') -
+      overrideRows('engine/shared/frontaliere-article-canonical-overrides.json').length / 4 -
+      selectRetiredDailyEditions(registryIds('blog-articles-data.ts')).size,
+    svizzera:
+      countRegistryArticles(ROOT, 'svizzera') -
+      overrideRows('content/swiss-article-canonical-overrides.json').length / 4,
+  };
+  assert.equal(countSourceSitemapEntries(ROOT, 'frontaliere'), effectiveSource.frontaliere);
+  assert.equal(countSourceSitemapEntries(ROOT, 'svizzera'), effectiveSource.svizzera);
+
+  const { measured, expected } = healthy();
+  const withEffectiveSitemapSource = {
+    ...expected,
+    sourceSitemaps: effectiveSource,
+  };
+  const nearOldFloor = {
+    frontaliere: floorFrom(expected.sourceArticles.frontaliere) + 1,
+    svizzera: floorFrom(expected.sourceArticles.svizzera) + 1,
+  };
+  assert.ok(
+    floorFrom(effectiveSource.frontaliere) > nearOldFloor.frontaliere &&
+      floorFrom(effectiveSource.svizzera) > nearOldFloor.svizzera,
+    'la sorgente sitemap effettiva deve essere abbastanza distinta dal vecchio floor dei corpi',
+  );
+  const measuredNearOldFloor = {
+    ...measured,
+    sitemaps: { 'sitemap-blog.xml': nearOldFloor.frontaliere, 'sitemap-blog-ch.xml': nearOldFloor.svizzera },
+  };
+  const violations = floorViolations(measuredNearOldFloor, withEffectiveSitemapSource);
+  assert.equal(violations.length, 2);
+  assert.match(
+    violations.join('\n'),
+    new RegExp(`sitemap-blog\\.xml: ${nearOldFloor.frontaliere} url contro ${effectiveSource.frontaliere}`),
+  );
+  assert.match(
+    violations.join('\n'),
+    new RegExp(`sitemap-blog-ch\\.xml: ${nearOldFloor.svizzera} url contro ${effectiveSource.svizzera}`),
+  );
+});
+
+test('il denominatore sitemap non si abbassa insieme a una slug map troncata', () => {
+  const dir = fs.mkdtempSync(join(os.tmpdir(), 'api-floors-sitemap-source-'));
+  try {
+    fs.mkdirSync(join(dir, 'content'), { recursive: true });
+    fs.mkdirSync(join(dir, 'engine', 'shared'), { recursive: true });
+    fs.writeFileSync(
+      join(dir, 'content', 'blog-articles-data.ts'),
+      "export const ARTICLES = [\n  {\n    id: 'kept',\n  },\n  {\n    id: 'shadowed',\n  },\n  {\n    id: 'missing-slug',\n  },\n];\n",
+    );
+    fs.writeFileSync(
+      join(dir, 'content', 'routerBlogData.ts'),
+      "export const BLOG_SLUGS = {\n" +
+        "  'kept': { it: 'kept', en: 'kept-en', de: 'kept-de', fr: 'kept-fr' },\n" +
+        "  'shadowed': { it: 'shadowed', en: 'shadowed-en', de: 'shadowed-de', fr: 'shadowed-fr' },\n" +
+        '};\n',
+    );
+    fs.writeFileSync(
+      join(dir, 'engine', 'shared', 'frontaliere-article-canonical-overrides.json'),
+      JSON.stringify({ overrides: { shadowed: 'https://example.test/winner/' } }),
+    );
+
+    // Il vecchio conteggio builder-based avrebbe restituito 1 (kept): il
+    // riferimento deve invece restare a 2, cosi' l'entry senza slug abbassa
+    // l'artefatto ma non il suo floor.
+    assert.equal(countSourceSitemapEntries(dir, 'frontaliere'), 2);
+  } finally {
+    fs.rmSync(dir, { recursive: true, force: true });
+  }
+});
+
+test('il parser della slug map e condiviso fra engine e floor del corpus', () => {
+  const source = `const BLOG_SLUGS = {
+  "articolo": { it: "articolo-it", en: "article-en", de: "artikel-de", fr: "article-fr" },
+};\n`;
+  assert.deepEqual(parseArticleUrlSlugs(source, 'BLOG_SLUGS'), {
+    articolo: { it: 'articolo-it', en: 'article-en', de: 'artikel-de', fr: 'article-fr' },
+  });
+  assert.match(ARTICLE_READERS, /parseArticleUrlSlugs/);
+  assert.doesNotMatch(ARTICLE_READERS, /const rx = \/\["'\]/);
+  assert.doesNotMatch(CORPUS_FLOORS, /SLUG_MAP_ENTRY_RE/);
 });
 
 test("la superficie reale del 2026-09-05 passa: il pavimento non e' stretto", () => {
@@ -135,6 +255,58 @@ test('swissArticles ha un pavimento, che prima mancava del tutto', () => {
   const violations = floorViolations(truncated, expected);
   assert.equal(violations.length, 1);
   assert.match(violations[0], /counts\.swissArticles: 40 contro 1850/);
+});
+
+test('le sitemap articolo hanno un pavimento derivato e non possono sparire dalla misura', () => {
+  const { measured, expected } = healthy();
+  const truncated = {
+    ...measured,
+    sitemaps: { 'sitemap-blog.xml': 500, 'sitemap-blog-ch.xml': 40 },
+  };
+  const violations = floorViolations(truncated, expected);
+  assert.equal(violations.length, 2);
+  assert.match(violations.join('\n'), /sitemap-blog\.xml: 500 url contro 3785/);
+  assert.match(violations.join('\n'), /sitemap-blog-ch\.xml: 40 url contro 1850/);
+
+  const missing = floorViolations({ ...measured, sitemaps: {} }, expected);
+  assert.equal(missing.length, 2);
+  assert.match(missing.join('\n'), /sitemap-blog\.xml assente/);
+  assert.match(missing.join('\n'), /sitemap-blog-ch\.xml assente/);
+});
+
+test('la sitemap archive viene misurata e ha un floor indipendente', () => {
+  const { measured, expected } = healthy();
+  const withArchiveSource = {
+    ...expected,
+    sourceArchiveSitemapUrls: { frontaliere: 100, svizzera: 100 },
+  };
+  const short = {
+    ...measured,
+    sitemaps: { ...measured.sitemaps, [ARCHIVE_SITEMAP]: 179 },
+  };
+  const violations = floorViolations(short, withArchiveSource);
+  assert.equal(violations.length, 1);
+  assert.match(violations[0], /sitemap-articles-archive\.xml: 179 url contro 200/);
+
+  const missing = floorViolations(measured, withArchiveSource);
+  assert.equal(missing.length, 1);
+  assert.match(missing[0], /sitemap-articles-archive\.xml assente/);
+});
+
+test('una sezione archive senza riferimento resta una violazione fail-closed', () => {
+  const { measured, expected } = healthy();
+  const archiveMeasured = {
+    ...measured,
+    sitemaps: { ...measured.sitemaps, [ARCHIVE_SITEMAP]: 100 },
+  };
+  const partialSource = {
+    ...expected,
+    sourceArchiveSitemapUrls: { svizzera: 100 },
+    sourceArchiveSitemapErrors: { frontaliere: 'metadati italiani assenti' },
+  };
+  const violations = floorViolations(archiveMeasured, partialSource);
+  assert.equal(violations.length, 1);
+  assert.match(violations[0], /riferimento sorgente frontaliere non verificabile/);
 });
 
 test("un contatore mancante e' una violazione, non un pass silenzioso", () => {
@@ -471,6 +643,8 @@ test('measureDist riconosce i feed dal documento, non dal nome del file', () => 
   assert.ok(measured.missingFeeds.includes('rss-de.xml'), 'un feed atteso assente deve risultare mancante');
   assert.equal(measured.images, null, 'images-manifest.json assente ⇒ null, che e\' un caso valido');
   assert.equal(measured.articleCounts.articles, 7);
+  assert.equal(measured.sitemaps['sitemap-blog.xml'], 1);
+  assert.equal(measured.sitemaps['sitemap-blog-ch.xml'], undefined);
   fs.rmSync(dir, { recursive: true, force: true });
 });
 
@@ -533,6 +707,10 @@ test("il corpus di questo checkout e' la verita' di terra, e regge i due contato
   assert.ok(expected.sourceArticles.svizzera > 500, `svizzera: ${expected.sourceArticles.svizzera}`);
   assert.equal(expected.rssMaxItems, 50, 'RSS_MAX_ITEMS arriva da engine/rssFeeds.mjs, non da una copia');
   assert.equal(expected.sourceArticles.frontaliere, countSourceArticles(ROOT, 'frontaliere'));
+  assert.deepEqual(expected.sourceArchiveSitemapUrls, {
+    frontaliere: countSourceArchiveSitemapUrls(ROOT, 'frontaliere'),
+    svizzera: countSourceArchiveSitemapUrls(ROOT, 'svizzera'),
+  });
 });
 
 test('i feed di questo checkout sono gatati contro i chunk che li generano', async () => {
@@ -692,6 +870,7 @@ test('expectFromCorpus legge davvero un root alternativo e non il checkout del t
       timestamp: Date.parse('2026-02-03T04:05:06Z'),
     });
     assert.equal(expected.sourceImages, 1);
+    assert.deepEqual(Object.keys(expected.sourceArchiveSitemapErrors), ['frontaliere', 'svizzera']);
   } finally {
     fs.rmSync(root, { recursive: true, force: true });
   }
@@ -754,6 +933,19 @@ test('build-api usa il parser SEO condiviso, non una terza finestra locale', () 
   assert.match(build, /collectSeoEntryMetadata/);
   assert.doesNotMatch(build, /const entryRe = \/'blog-\(\[\^'\]\+\):\\s\*\\{\/g/);
   assert.doesNotMatch(build, /start \+ 4000/);
+  assert.match(build, /countSourceSitemapEntries\(ROOT, 'frontaliere'\)/);
+  assert.match(build, /countSourceSitemapEntries\(ROOT, 'svizzera'\)/);
+  assert.doesNotMatch(build, /countSitemapEntries\(ARTICLES/);
+  assert.doesNotMatch(build, /countSitemapEntries\(SWISS_ARTICLES/);
+  assert.match(build, /const floor = sectionFloor\(ROOT, section\)/);
+  assert.match(build, /if \(total < floor\)/);
+  assert.match(build, /sectionFloor\(ROOT, section\)/);
+  assert.match(build, /ARTICLES_PAGE_SIZE/);
+  assert.match(build, /sitemapArchiveUrls: sitemapCounts\.archive/);
+  assert.match(build, /sitemapArchiveUrls: sitemapUrls\(ARCHIVE_SITEMAP\)/);
+  assert.doesNotMatch(build, /sitemapCounts\.blog < 100/);
+  assert.doesNotMatch(build, /sitemapCounts\.archive < 8/);
+  assert.doesNotMatch(build, /archiveFloor/);
 });
 
 test("publish-api.yml non porta piu' un pavimento assoluto scritto a mano", () => {
@@ -776,6 +968,37 @@ test("publish-api.yml non porta piu' un pavimento assoluto scritto a mano", () =
     /imgs" -lt 1\b/,
     'il pavimento `-lt 1` sulle immagini accettava 1990 immagini ridotte a una',
   );
+  assert.match(WORKFLOW, /^      - 'host\/\*\*'$/m, 'host/ e\' un input runtime del publisher');
+  assert.match(
+    WORKFLOW,
+    /^      - 'scripts\/lib\/corpus-floors\.mjs'$/m,
+    'la sorgente dei floor deve rilanciare il publisher quando cambia',
+  );
+  assert.match(
+    WORKFLOW,
+    /^      - 'scripts\/lib\/build-sitemap\.mjs'$/m,
+    'l\'emitter sitemap deve rilanciare il publisher quando cambia',
+  );
+  for (const dependency of [
+    'articleSections.ts',
+    'scripts/lib/count-xml-tags.mjs',
+    'scripts/lib/ticker-shadow-check.mjs',
+    'scripts/lib/published-slug-guard.mjs',
+    'scripts/lib/parse-positive-num.mjs',
+    'scripts/lib/api-manifest.mjs',
+    'generator/data/news-sitemap-whitelist.mjs',
+    'generator/scripts/lib/daily-brief-content.mjs',
+    'generator/scripts/lib/control-char-write-report.mjs',
+    'generator/scripts/lib/meta-field-regex.mjs',
+    'generator/scripts/lib/unescape-ts-string.mjs',
+  ]) {
+    assert.match(
+      WORKFLOW,
+      new RegExp(`^      - '${dependency.replace(/[.*+?^${}()|[\\]\\\\]/g, '\\\\$&')}'$`, 'm'),
+      `${dependency} e' una dipendenza runtime del publisher`,
+    );
+  }
+  assert.match(HOST_SEO_HUBS, /articleArchiveConfig\.mjs/);
 });
 
 test('il floor storico usa github.event.before e conserva un fallback esplicito', () => {
@@ -836,6 +1059,22 @@ test('rapporto fra preallarme e gate: warning, nessuna violazione', () => {
   assert.match(advisories[0], /preallarme/);
 });
 
+test('il preallarme osserva anche una sitemap erosa senza anticipare il gate', () => {
+  const { measured, expected } = healthy();
+  const eroded = {
+    ...measured,
+    sitemaps: {
+      ...measured.sitemaps,
+      'sitemap-blog.xml': Math.round(3785 * 0.95),
+    },
+  };
+
+  assert.deepEqual(floorViolations(eroded, expected), []);
+  const advisories = retentionAdvisories(retentionReport(eroded, expected));
+  assert.equal(advisories.length, 1);
+  assert.match(advisories[0], /sitemap-blog\.xml/);
+});
+
 test('il warning usa lo stesso pavimento intero del gate sul bordo', () => {
   // 3432/3814 = 89,984%, ma floor(3814 * 0,9) = 3432: il gate passa sul
   // bordo e il preallarme deve restare osservabile.
@@ -869,12 +1108,14 @@ test('il report copre ogni rapporto che un pavimento sorveglia, coi riferimenti 
   const byLabel = Object.fromEntries(rows.map((r) => [r.label, r]));
   assert.equal(byLabel['manifest.counts.articles'].source, 3785, 'il riferimento dei corpi, non dei chunk SEO');
   assert.equal(byLabel['manifest.counts.swissArticles'].source, 1850);
+  assert.equal(byLabel['sitemap-blog.xml'].source, 3785);
+  assert.equal(byLabel['sitemap-blog-ch.xml'].source, 1850);
   // Un feed e' tagliato a RSS_MAX_ITEMS: il suo 100% e' 50 item, non 3750,
   // altrimenti ogni feed sano sembrerebbe eroso all'1%.
   assert.equal(byLabel['rss.xml'].source, Math.min(expected.rssMaxItems, expected.feedSources.frontaliere));
   assert.equal(byLabel['rss-svizzera.xml'].source, Math.min(expected.rssMaxItems, expected.feedSources.svizzera));
   assert.equal(byLabel['images-manifest.json'].source, 1990);
-  assert.equal(rows.length, 2 + 2 + measured.feeds.length + 1);
+  assert.equal(rows.length, 2 + 2 + 2 + measured.feeds.length + 1);
   assert.ok(rows.some((r) => r.label === 'chunk SEO frontaliere/run precedente'));
   assert.ok(rows.some((r) => r.label === 'chunk SEO svizzera/run precedente'));
 
@@ -942,7 +1183,7 @@ test('il report tace dove il riferimento manca: quello e\' una violazione, non u
   assert.equal(retentionRatio(10, 0), null, 'sorgente a zero non e\' un rapporto zero: e\' assenza di riferimento');
 });
 
-test('le righe stampate: i due rapporti del manifest, le immagini, e il feed piu\' magro', () => {
+test('le righe stampate: manifest, sitemap, immagini e il feed piu\' magro', () => {
   const { measured, expected } = healthy();
   const uneven = {
     ...measured,
@@ -955,9 +1196,11 @@ test('le righe stampate: i due rapporti del manifest, le immagini, e il feed piu
   };
   const lines = retentionLines(retentionReport(uneven, expected));
 
-  assert.equal(lines.length, 6, `2 manifest + 2 popolazioni + 1 feed rappresentativo + 1 immagini, ricevute: ${lines.join(' | ')}`);
+  assert.equal(lines.length, 8, `2 manifest + 2 sitemap + 2 popolazioni + 1 feed rappresentativo + 1 immagini, ricevute: ${lines.join(' | ')}`);
   assert.ok(lines.some((l) => l.startsWith('manifest.counts.articles:')));
   assert.ok(lines.some((l) => l.startsWith('manifest.counts.swissArticles:')));
+  assert.ok(lines.some((l) => l.startsWith('sitemap-blog.xml:')));
+  assert.ok(lines.some((l) => l.startsWith('sitemap-blog-ch.xml:')));
   assert.ok(lines.some((l) => l.startsWith('chunk SEO frontaliere/run precedente:')));
   assert.ok(lines.some((l) => l.startsWith('chunk SEO svizzera/run precedente:')));
   assert.ok(lines.some((l) => l.includes('rss-it.xml') && l.includes('piu\' magro')), 'il rappresentante e\' il minimo');
