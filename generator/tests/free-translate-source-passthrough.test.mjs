@@ -102,7 +102,11 @@ function stubCascade(myMemoryAnswer) {
 /** Delta dei contatori: sono globali di modulo e non c'e' un reset esportato. */
 function snapshot() {
   const s = getCascadeStats();
-  return { hits: s.tierHits.myMemory || 0, passthroughs: s.tierPassthroughs.myMemory || 0 };
+  return {
+    hits: s.tierHits.myMemory || 0,
+    passthroughs: s.tierPassthroughs.myMemory || 0,
+    chunks: s.tierPassthroughChunks.myMemory || 0,
+  };
 }
 
 describe('freeTranslate — guardia «uscita == sorgente»', () => {
@@ -130,6 +134,7 @@ describe('freeTranslate — guardia «uscita == sorgente»', () => {
     // La RAGIONE, non solo l'esito: il tier e' contato come passthrough e NON
     // come hit.
     assert.equal(after.passthroughs - before.passthroughs, 1);
+    assert.equal(after.chunks - before.chunks, 0);
     assert.equal(after.hits - before.hits, 0);
   });
 
@@ -141,6 +146,7 @@ describe('freeTranslate — guardia «uscita == sorgente»', () => {
 
     assert.equal(out, '');
     assert.equal(snapshot().passthroughs - before.passthroughs, 1);
+    assert.equal(snapshot().chunks - before.chunks, 0);
   });
 
   test('rifiuta il passthrough parziale nel ramo MyMemory a chunk', async () => {
@@ -163,6 +169,7 @@ describe('freeTranslate — guardia «uscita == sorgente»', () => {
     assert.equal(out, '');
     assert.ok(myMemoryCalls > 1);
     assert.equal(snapshot().passthroughs - before.passthroughs, 1);
+    assert.ok(snapshot().chunks - before.chunks > 0);
     assert.equal(snapshot().hits - before.hits, 0);
   });
 
@@ -190,12 +197,24 @@ describe('freeTranslate — guardia «uscita == sorgente»', () => {
     assert.match(out, /## FAQ/);
     assert.ok(myMemoryCalls > 2);
     assert.equal(snapshot().passthroughs - before.passthroughs, 1);
+    assert.ok(snapshot().chunks - before.chunks > 0);
     assert.equal(snapshot().hits - before.hits, 1);
   });
 
   test('nomina il passthrough nel sommario della cascata', async () => {
     stubCascade(IT);
     await freeTranslate({ text: IT, sourceLang: 'it', targetLang: 'fr', fieldType: 'description' });
+
+    const longText = Array.from({ length: 140 }, (_, i) => `Frase sommario numero ${i} con testo sufficiente.`).join(' ');
+    globalThis.fetch = async (url) => {
+      if (!String(url).includes('api.mymemory.translated.net')) throw new Error('offline nel test');
+      const query = new URL(url).searchParams.get('q') || '';
+      return {
+        ok: true,
+        json: async () => ({ responseData: { translatedText: query, match: 1 } }),
+      };
+    };
+    await freeTranslate({ text: longText, sourceLang: 'it', targetLang: 'fr', fieldType: 'description' });
 
     const lines = [];
     const realLog = console.log;
@@ -209,6 +228,15 @@ describe('freeTranslate — guardia «uscita == sorgente»', () => {
     const summary = lines.join('\n');
     assert.match(summary, /Tier passthrough/);
     assert.match(summary, /myMemory=\d+/);
+    assert.match(summary, /Tier passthrough \(chunk/);
+  });
+
+  test('documenta la soglia dei chunk con la misura del corpus che la sostiene (#1320/FU-025)', () => {
+    const source = readFileSync(new URL('../scripts/lib/free-translate.mjs', import.meta.url), 'utf8');
+    assert.match(source, /const MIN_SUBSTANTIVE_PASSTHROUGH_WORDS = 8;/);
+    assert.match(source, /blog-body:\s+15'476 file, 46'524 campi, 48'298 chunk/);
+    assert.match(source, /blog-body-ch:\s+8'388 file, 25'164 campi, 25'589 chunk/);
+    assert.match(source, /totale:\s+23'864 file, 71'688 campi, 73'887 chunk/);
   });
 
   // ── IL VERSO INVERSO: cio' che NON deve cambiare ───────────────────────────

@@ -411,17 +411,11 @@ jobs:
             Crawler transient failures (rolling ledger)
         run: |
           set -uo pipefail
-          # Il digest puo' essere appena creato o riaperto dopo il fetch che
-          # classifica il backlog. Per chiudere e per riallineare il body serve
-          # quindi una risoluzione fresca, sempre per titolo ESATTO e senza
-          # filtro label: il digest nasce con `automation`, non con
-          # `needs-human`.
-          resolve_dedup_number() {
-            local matches
-            matches=$(gh api --paginate "repos/$GH_REPO/issues?state=open&per_page=100" \
-              --jq 'first(.[] | select(.pull_request | not) | select(.title == env.DEDUP_TITLE) | .number)') || return 1
-            printf '%s\n' "$matches" | head -n 1
-          }
+          # Il fetch qui sotto alimenta tutte le decisioni dello step. Il
+          # numero dell'issue dedup viene quindi riusato da quel payload quando
+          # le liste sono vuote, oppure dal publisher quando create/reopen ha
+          # appena scritto il digest: nessuna seconda paginazione dello stesso
+          # endpoint e nessuna fotografia incoerente dopo una scrittura.
           # L'ESITO della query paginata e delle sue due partizioni, non solo il
           # loro output. `set -e` non e' attivo (i rami sotto decidono da soli),
           # quindi un `gh` non-zero — jq su una forma inattesa, rate-limit,
@@ -459,7 +453,8 @@ jobs:
           # comando paginato resta l'unico fetch, ma il parser di #1389 continua
           # a rifiutare JSON invalido, envelope con errors e forme troncate.
           OPEN_ISSUES_API="repos/$GH_REPO/issues?state=open&per_page=100"
-          # shellcheck disable=SC2016 # le variabili $ENV.* appartengono a jq, non alla shell
+          # Le variabili $ENV.* appartengono a jq, non alla shell.
+          # shellcheck disable=SC2016
           OPEN_ISSUES_LINES=$(gh api --paginate "$OPEN_ISSUES_API" --jq '.[] | . as $i | {
             number: $i.number,
             title: $i.title,
@@ -591,13 +586,11 @@ jobs:
             # altri chiamanti. Qui apertura, esclusione e chiusura tornano a
             # usare UNA sola forma della chiave.
             #
-            # Il numero va risolto di nuovo: il digest puo' essere stato chiuso
-            # da un run precedente e la risposta iniziale non contiene issue
-            # che si riaprono dopo il fetch. La funzione condivisa usa la stessa
-            # uguaglianza esatta della classificazione, pagina senza cap e
-            # distingue una PR da un'issue anche se la label e' cambiata.
+            # Il digest e' gia' nella fotografia iniziale quando e' aperto.
+            # Quando e' chiuso non c'e' nulla da chiudere; il ramo non vuoto,
+            # invece, usa il numero restituito da create/reopen dal publisher.
             echo "Niente needs-human aperto (ne PR ne issue): richiudo l'issue dedup, se aperta."
-            DEDUP_NUMBER=$(resolve_dedup_number)
+            DEDUP_NUMBER=$(printf '%s\n' "$OPEN_ISSUES_ITEMS" | jq -r 'first(.[] | select((.pull_request | not) and (.dedup == true)) | .number) // empty')
             DEDUP_RC=$?
             if [ "$DEDUP_RC" -ne 0 ]; then
               # Stesso principio del guard sopra: query fallita non e' «nessun
@@ -623,34 +616,31 @@ jobs:
           echo "needs-human aperti: $PR_COUNT PR, $ISSUE_COUNT issue"
           [ -n "$PRS" ] || PRS='_(nessuna)_'
           [ -n "$ISSUES" ] || ISSUES='_(nessuna)_'
+          # shellcheck disable=SC2016
           DESC=$(printf '%b\n\nNessun processo automatico sblocchera questi oggetti, e su `needs-human` la label e un filtro di ESCLUSIONE dalle code del drainer, non una segnalazione. Servono occhi umani.\n\n**PR** (%s) — il fixer dei red-flag ha raggiunto il round-cap e si e fermato (anti-loop), oppure sono draft parcheggiate, che ogni strato del ciclo salta by-design:\n\n%s\n\n**Issue** (%s) — escalate dal followup-drainer (too-large) o dal gate cronico di close-recovered-failure-issues.mjs (un guasto che ricorre oltre soglia). Restano fuori dal pool dei retry parcheggiati e dal rescue agent:fix dei crawler finche portano la label. Esclusi i tracker permanenti, riconosciuti per TITOLO (il digest dello sweep, il ledger transient): sono aperti per costruzione e non sono item da sbloccare. Escludere per label non sarebbe la stessa cosa — `agent:no-age-out` vuol dire «non scade», e nasconderebbe da qui una issue davvero bloccata:\n\n%s\n\n_Issue dedup giornaliera da recycle-stale-prs.yml (zero-Claude); si aggiorna con un commento di recurrence finche esiste qualcosa di needs-human, e si richiude da sola al primo run in cui entrambe le liste sono vuote (i tracker permanenti non contano come residuo)._' "$DIGEST_PREFIX" "$PR_COUNT" "$PRS" "$ISSUE_COUNT" "$ISSUES")
-          node scripts/ci/publish-needs-human-digest.mjs \
+          PUBLISH_OUTPUT=$(node scripts/ci/publish-needs-human-digest.mjs \
             --fail-on-write \
             --title "$DEDUP_TITLE" \
             --description "$DESC" \
             --priority 2 \
             --label automation \
-            --workflow "Recycle stale PRs"
+            --workflow "Recycle stale PRs" 2>&1)
 
           PUBLISH_RC=$?
+          printf '%s\n' "$PUBLISH_OUTPUT"
           if [ "$PUBLISH_RC" -ne 0 ]; then
             echo "::error::Pubblicazione del digest non persistita (rc=$PUBLISH_RC): il body non viene riallineato."
             exit "$PUBLISH_RC"
           fi
 
-          # `createGithubIssue` aggiorna il body solo alla prima creazione; su
-          # recurrence e reopen scrive un commento e conserva il body. Risolvo
-          # il numero dopo la scrittura e sostituisco il body con le liste di
-          # questo run, cosi' il testo visibile e l'ultimo commento restano
-          # sulla stessa fotografia (#1004).
-          DEDUP_NUMBER=$(resolve_dedup_number)
-          DEDUP_RC=$?
-          if [ "$DEDUP_RC" -ne 0 ]; then
-            echo "::error::Query dell'issue dedup fallita (rc=$DEDUP_RC): il body puo' essere rimasto quello precedente."
-            exit 1
-          fi
+          # `createGithubIssue` restituisce il numero della issue creata,
+          # riusata o riaperta. Il publisher lo espone con un marker stabile
+          # in stdout: lo stesso run riallinea il body senza una seconda
+          # paginazione, che consumerebbe rate-limit e potrebbe osservare una
+          # fotografia diversa (#1139).
+          DEDUP_NUMBER=$(printf '%s\n' "$PUBLISH_OUTPUT" | sed -n 's/^\[publish-needs-human-digest\] issue_number=\([1-9][0-9]*\)$/\1/p' | tail -n 1)
           if [ -z "$DEDUP_NUMBER" ]; then
-            echo "::error::Digest pubblicato ma issue dedup non trovata con titolo esatto: body non riallineato."
+            echo "::error::Digest pubblicato ma il publisher non ha restituito un issue_number valido: body non riallineato."
             exit 1
           fi
           echo "Riallineo il body dell'issue dedup #$DEDUP_NUMBER alle liste di questo run."

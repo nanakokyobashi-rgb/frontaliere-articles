@@ -167,21 +167,20 @@
       "path": "scripts/ci/check-issue-already-resolved.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "e45dab34842b950d",
-        "corpus": "e45dab34842b950d",
-        "alignedAt": "2026-09-11"
+        "site": "77c5698086384349",
+        "corpus": "77c5698086384349",
+        "alignedAt": "2026-09-13"
       }
     },
     {
       "path": "scripts/ci/detect-aggregate.mjs",
-      "mode": "corpus-only-pending",
-      "trackingIssue": "https://github.com/nanakokyobashi-rgb/frontaliere-articles/issues/986",
+      "mode": "identical",
       "baseline": {
-        "site": null,
-        "corpus": "304f762f2aafcb73",
-        "alignedAt": "2026-09-07"
+        "site": "b09919d1e788e369",
+        "corpus": "b09919d1e788e369",
+        "alignedAt": "2026-09-13"
       },
-      "reason": "Il ponte fra `issue-fix.yml` e il rilevatore di aggregati condiviso (issue #986). Il workflow decideva `is_aggregate` con una QUARTA copia del rilevatore, in shell (`grep -cE '^[[:space:]]*[-*][[:space:]]+'` sul corpo, soglia 4), accanto alle tre copie Node tenute identiche da `generator/tests/aggregate-detectors-agree.test.mjs`. Sbagliava in entrambi i versi: falso negativo sulla forma `- **Titolo.**` x3 (#466, coperta da `hasEnumeratedItems` dal #568) — tre item, `3 < 4`, il fixer scrive `Closes` e al merge il tracker si chiude con dentro gli item appena deferiti; falso positivo su un solo item il cui corpo elenca quattro path. Il modulo non reimplementa niente: importa `isAggregate()` da `check-issue-already-resolved.mjs` (AGENTS.md #6). E' `corpus-only-pending` e non `corpus-only` perche' il difetto e' operativo anche sul sito, dove `.github/workflows/issue-fix.yml` ha ancora la sua copia in shell — una terza implementazione ancora (conteggio `N items? deferred` nel TITOLO piu' fallback `sweep|batch|bulk`), che non vede gli item enumerati nel CORPO. Il gemello va portato di la', ed e' il lavoro tracciato da #986: quando atterra, la voce si promuove a `identical` e `trackingIssue` si toglie."
+      "reason": "Trasporto completato dopo il merge della sorgente sito (#8450): il detector importa `isAggregate()` e usa la stessa lettura del payload, fallback conservativo per issue illeggibili o vuote e propagazione non-zero quando `$GITHUB_OUTPUT` non e' scrivibile. Le due copie coincidono; la voce promossa da `corpus-only-pending` a `identical` per chiudere il tracking #986."
     },
     {
       "path": "scripts/ci/check-quota-backoff.mjs",
@@ -311,11 +310,22 @@
     },
     {
       "path": "scripts/ci/followup-resolution-match.mjs",
-      "mode": "identical",
+      "mode": "adapted",
+      "reason": "Il corpus espone il contratto aggregate canonical ai consumer locali e conserva la propria risoluzione di locator sul percorso di pubblicazione; per questo la copia non è byte-identica al matcher sorgente del sito. La baseline registra separatamente i due blob e il trasporto successivo deve preservare l'adattamento, non sovrascriverlo con un mirror cieco.",
       "baseline": {
-        "site": "a7744e18a9fbdea8",
-        "corpus": "a7744e18a9fbdea8",
-        "alignedAt": "2026-09-11"
+        "site": "86098adda6c90970",
+        "corpus": "e6da0bfa1d35c132",
+        "alignedAt": "2026-09-13"
+      }
+    },
+    {
+      "path": "scripts/ci/lib/vitestCheck.mjs",
+      "mode": "adapted",
+      "reason": "Il polling sincrono e il riconoscimento dei job conclusi sono il contratto condiviso dalla sorgente sito e da pr-autorebase, ma il corpus mantiene i propri nomi/check required e le proprie guardie review. La copia è quindi trasportata per contratto e non trattata come identica byte-per-byte.",
+      "baseline": {
+        "site": "c63b27c70d03615a",
+        "corpus": "2c783ff28a651001",
+        "alignedAt": "2026-09-13"
       }
     },
     {
@@ -351,9 +361,9 @@
       "path": "scripts/ci/pr-autorebase.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "4c6da30faffb631d",
-        "corpus": "4c6da30faffb631d",
-        "alignedAt": "2026-09-11"
+        "site": "3add6bcb19a0911b",
+        "corpus": "3add6bcb19a0911b",
+        "alignedAt": "2026-09-13"
       }
     },
     {
@@ -410,15 +420,6 @@
         "site": "a5fe209f91e8d29c",
         "corpus": "a5fe209f91e8d29c",
         "alignedAt": "2026-09-11"
-      }
-    },
-    {
-      "path": "scripts/ci/lib/vitestCheck.mjs",
-      "mode": "identical",
-      "baseline": {
-        "site": "70c2badbc0a09558",
-        "corpus": "70c2badbc0a09558",
-        "alignedAt": "2026-09-10"
       }
     },
     {
@@ -1052,9 +1053,9 @@
       "path": "scripts/ci/harvest-agent-lessons.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "02ffd48e42595ffa",
-        "corpus": "02ffd48e42595ffa",
-        "alignedAt": "2026-09-10"
+        "site": "e7021b48301afeae",
+        "corpus": "e7021b48301afeae",
+        "alignedAt": "2026-09-13"
       }
     },
     {
@@ -1895,9 +1896,9 @@
       "sitePath": "scripts/lib/discovery/discoveryScore.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "72f7e9d7f9843823",
-        "corpus": "72f7e9d7f9843823",
-        "alignedAt": "2026-08-09"
+        "site": "7a42d00a94b90c65",
+        "corpus": "7a42d00a94b90c65",
+        "alignedAt": "2026-09-13"
       }
     },
     {
@@ -1945,9 +1946,9 @@
       "sitePath": "scripts/lib/discovery/sources/googleSuggestSource.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "d324259ea4515cb6",
-        "corpus": "d324259ea4515cb6",
-        "alignedAt": "2026-08-09"
+        "site": "be18f36169abce51",
+        "corpus": "be18f36169abce51",
+        "alignedAt": "2026-09-13"
       }
     },
     {
@@ -2382,9 +2383,9 @@
       "sitePath": "scripts/lib/scoring/cascadedScore.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "2ed579228003fa3b",
-        "corpus": "2ed579228003fa3b",
-        "alignedAt": "2026-08-09"
+        "site": "584f848b25ed20fc",
+        "corpus": "584f848b25ed20fc",
+        "alignedAt": "2026-09-13"
       }
     },
     {
@@ -2392,9 +2393,9 @@
       "sitePath": "scripts/lib/scoring/constants.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "6dc91e985caa7eca",
-        "corpus": "6dc91e985caa7eca",
-        "alignedAt": "2026-08-09"
+        "site": "7534ad3be93b3488",
+        "corpus": "7534ad3be93b3488",
+        "alignedAt": "2026-09-13"
       }
     },
     {
@@ -3795,9 +3796,9 @@
       "path": "scripts/lib/int-from-env.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "be879e505710750e",
-        "corpus": "be879e505710750e",
-        "alignedAt": "2026-09-10"
+        "site": "f5700c5080b0a99c",
+        "corpus": "f5700c5080b0a99c",
+        "alignedAt": "2026-09-13"
       }
     },
     {
@@ -3834,8 +3835,8 @@
       "reason": "Consumer zero-Claude che riattiva le run PR differite dal lease condiviso, verificando HEAD, ruolo e workflow sorgente prima del rerun. E' un percorso del ciclo Claude del corpus; il sito non possiede questo lease condiviso ne' il relativo consumer, quindi non c'e' un gemello da portare e la classificazione e' `corpus-only` per costruzione.",
       "baseline": {
         "site": null,
-        "corpus": "edbae72518bc0a82",
-        "alignedAt": "2026-09-12"
+        "corpus": "7088f7d382ddebe4",
+        "alignedAt": "2026-09-13"
       }
     },
     {

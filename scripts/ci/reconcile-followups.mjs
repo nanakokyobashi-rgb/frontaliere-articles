@@ -68,6 +68,10 @@ import {
   updateFollowupItemState,
   splitFollowupItems,
 } from './followup-resolution-match.mjs';
+import {
+  hasEnumeratedItems,
+  isAggregate as sharedIsAggregate,
+} from './check-issue-already-resolved.mjs';
 import { parsePositiveNum } from '../lib/parse-positive-num.mjs';
 import { pinnedBy } from './manifest-pinned-issues.mjs';
 
@@ -169,57 +173,28 @@ function maskInlineCodeSpans(text) {
   return String(text || '').replace(/(`+)([^`\n]*?)\1/g, (span) => span.replace(/[^\n]/g, ' '));
 }
 
-function isBoldTitleLead(rest, lines = [], start = 0) {
-  const bold = /^\*\*(?![ \t])(?:[^*]|\*(?!\*))+\*\*/;
-  let candidate = String(rest || '');
-  if (bold.test(candidate)) return true;
-  for (let i = start; i < lines.length; i++) {
-    const line = lines[i];
-    if (/^[ \t]*(?:\d+[.)]|[-*])[ \t]+/.test(line)) break;
-    candidate += '\n' + line;
-    if (bold.test(candidate)) return true;
-  }
-  return false;
+function maskAggregateKeywordsInCode(text) {
+  return String(text || '').replace(/(`+)([^`\n]*?)\1/g, (span, fence, code) => (
+    `${fence}${code.replace(/\b(?:sweep|batch|bulk)\b/gi, (keyword) => ' '.repeat(keyword.length))}${fence}`
+  ));
 }
 
-export function hasEnumeratedItems(body) {
-  const b = stripFencedBlocks(body);
-  const numberedSections = (b.match(/^#{2,4}[ \t]*(?:Item[ \t]*)?\d+[ \t]*[.)—–](?=[ \t]|$)/gim) || []).length;
-  if (numberedSections >= 2) return true;
-  const lines = b.split('\n');
-  const orderedBoldItems = lines.reduce((count, line, index) => {
-    const match = /^[ \t]*\d+[.)][ \t]+(.*)$/.exec(line);
-    return count + (match && isBoldTitleLead(match[1], lines, index + 1) ? 1 : 0);
-  }, 0);
-  if (orderedBoldItems >= 2) return true;
-  const boldLeadBullets = lines.reduce((count, line, index) => {
-    const match = /^[-*][ \t]+(?:\[[ xX]\][ \t]*)?(.*)$/.exec(line);
-    return count + (match && isBoldTitleLead(match[1], lines, index + 1) ? 1 : 0);
-  }, 0);
-  return boldLeadBullets >= 2;
-}
+// Keep the historical named export for callers while sharing the implementation.
+export { hasEnumeratedItems };
 
 /**
- * A title like "follow-up(#X): 3 item deferred/deferiti — …" with N≥2 → multi-item aggregate.
- * The explicit count matches the pre-flight form; body enumeration is the conservative
- * fallback for titles that do not carry a count.
+ * Compatibility adapter for the reconciler's historical export name. The
+ * classification itself must come from the same predicate used by the
+ * pre-flight/detect-aggregate path; only the reconciler's legacy Markdown
+ * masking remains local so inline examples such as `triage-sweep.mjs` cannot
+ * become aggregate keywords.
  * @param {string} title
  * @param {string} [body]
  * @returns {boolean}
  */
 export function isAggregateTitle(title = '', body = '') {
-  const t = maskInlineCodeSpans(stripFencedBlocks(title));
-  const bodyText = maskInlineCodeSpans(stripFencedBlocks(body));
-  const m = t.match(/\b(\d+)\s+items?\s+(?:deferred|deferit[oi])\b/i);
-  // An explicit count is authoritative once present — trust it fully instead
-  // of falling through to the keyword fallback below, which exists ONLY for
-  // aggregates that never state a count. Otherwise a genuinely single-item
-  // follow-up whose title contains "batch"/"sweep"/"bulk" as an ordinary word
-  // (e.g. "1 item deferred ... batch backfill...") is misclassified as an
-  // aggregate despite explicitly saying "1 item" (#3378).
-  if (m) return Number(m[1]) >= 2;
-  if (/\b(?:sweep|batch|bulk)\b/i.test(`${t}\n${bodyText}`)) return true;
-  return hasEnumeratedItems(body);
+  const normalizedTitle = maskInlineCodeSpans(stripFencedBlocks(title));
+  return sharedIsAggregate(normalizedTitle, maskAggregateKeywordsInCode(body));
 }
 
 const TECHNICAL_LABELS = new Set([UNCLASSIFIABLE_LABEL, LABEL, CLOSED_LABEL]);

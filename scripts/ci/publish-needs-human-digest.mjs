@@ -44,6 +44,18 @@ try {
     console.error('[publish-needs-human-digest] write not persisted; watchdog must keep the previous digest visible');
     process.exit(1);
   }
+  const issueNumber = result && Number.isInteger(result.number) && result.number > 0
+    ? result.number
+    : null;
+  if (failOnWrite && issueNumber === null) {
+    console.error('[publish-needs-human-digest] write acknowledged without an issue number; watchdog cannot realign the digest body');
+    process.exit(1);
+  }
+  if (issueNumber !== null) {
+    // Machine-readable stdout lets the same workflow step reuse the number
+    // returned by create/reopen without issuing a second paginated lookup.
+    console.log(`[publish-needs-human-digest] issue_number=${issueNumber}`);
+  }
   console.log('[publish-needs-human-digest] digest write acknowledged');
   process.exit(0);
 } catch (error) {

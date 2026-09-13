@@ -30,6 +30,9 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { execFileSync } from 'node:child_process';
 import { findAllSeoEntryMatches } from './seo-entry.mjs';
+import { selectRetiredDailyEditions } from '../../generator/scripts/lib/daily-brief-content.mjs';
+import { parseArticleUrlSlugs } from '../../engine/shared/articleReaderSource.mjs';
+import { ARTICLES_PAGE_SIZE } from '../../engine/shared/articleArchiveConfig.mjs';
 
 /**
  * Quanta parte del corpus sorgente deve sopravvivere fino all'artefatto.
@@ -148,7 +151,8 @@ export function populationWarning(label, declared, source, warn = FLOOR_WARN_RET
 }
 
 /**
- * Il pavimento per un valore atteso. Mai negativo, e 0 atteso ⇒ 0.
+ * Il pavimento per un valore atteso. Un atteso positivo ha sempre almeno un
+ * elemento; solo un riferimento davvero assente/non positivo produce 0.
  *
  * ATTENZIONE, ed e' il punto piu' delicato di questo modulo: `floorFrom(0)` e'
  * 0, e un pavimento a 0 non e' un pavimento — `x < 0` e' falso per qualunque
@@ -161,7 +165,7 @@ export function populationWarning(label, declared, source, warn = FLOOR_WARN_RET
  */
 export function floorFrom(expected, retention = FLOOR_RETENTION) {
   if (!Number.isFinite(expected) || expected <= 0) return 0;
-  return Math.floor(expected * retention);
+  return Math.max(1, Math.floor(expected * retention));
 }
 
 /**
@@ -194,6 +198,37 @@ export const SECTION_BODY_DIRS = {
   svizzera: path.join('content', 'blog-body-ch', 'it'),
 };
 
+/** Le chiavi del manifest e i file della sitemap delle due sezioni. */
+export const SECTION_COUNTERS = {
+  frontaliere: 'articles',
+  svizzera: 'swissArticles',
+};
+
+export const SECTION_SITEMAPS = {
+  frontaliere: 'sitemap-blog.xml',
+  svizzera: 'sitemap-blog-ch.xml',
+};
+
+export const ARCHIVE_SITEMAP = 'sitemap-articles-archive.xml';
+export { ARTICLES_PAGE_SIZE as ARCHIVE_PAGE_SIZE };
+
+/** Slug maps read by the runtime sitemap writer, per section. */
+const SECTION_SLUG_FILES = {
+  frontaliere: path.join('content', 'routerBlogData.ts'),
+  svizzera: path.join('content', 'routerSwissData.ts'),
+};
+
+const SECTION_SLUG_EXPORTS = {
+  frontaliere: 'BLOG_SLUGS',
+  svizzera: 'SWISS_SLUGS',
+};
+
+/** Canonical-override maps read by the runtime sitemap writer, per section. */
+const SECTION_CANONICAL_OVERRIDE_FILES = {
+  frontaliere: path.join('engine', 'shared', 'frontaliere-article-canonical-overrides.json'),
+  svizzera: path.join('content', 'swiss-article-canonical-overrides.json'),
+};
+
 /** Registro e metadati che definiscono l'atteso dei corpi, per sezione. */
 export const SECTION_REGISTRY_FILES = {
   frontaliere: path.join('content', 'blog-articles-data.ts'),
@@ -210,7 +245,6 @@ export const SECTION_META_LOCALES = Object.freeze(['it', 'en', 'de', 'fr']);
 
 const REGISTRY_ENTRY_RE = /^\s*id:\s*(?:'([^']+)'|"([^"]+)")/gm;
 const META_TITLE_KEY_RE = /['"]blog\.article\.([^'"]+)\.title['"]\s*:/g;
-
 /** Quante immagini hero questo repo tiene davvero (sorgente di `images-manifest.json`). */
 export const IMAGE_SOURCE_DIR = path.join('public', 'images', 'blog');
 
@@ -257,9 +291,11 @@ function readReference(root, rel, what) {
 function registryDataFromSource(source, rel, what) {
   const entries = [...source.matchAll(REGISTRY_ENTRY_RE)];
   if (entries.length === 0) throw missingReference(what, rel);
+  const entryIds = entries.map((match) => match[1] ?? match[2]);
   return {
     count: entries.length,
-    ids: new Set(entries.map((match) => match[1] ?? match[2])),
+    ids: new Set(entryIds),
+    entryIds,
   };
 }
 
@@ -268,6 +304,29 @@ function readRegistryData(root, section) {
   if (!rel) throw new Error(`unknown corpus section: ${section}`);
   const source = readReference(root, rel, `${section} registry`);
   return { ...registryDataFromSource(source, rel, `${section} registry`), rel };
+}
+
+function readSlugMap(root, section) {
+  const rel = SECTION_SLUG_FILES[section];
+  const slugConst = SECTION_SLUG_EXPORTS[section];
+  if (!rel || !slugConst) throw new Error(`unknown corpus section: ${section}`);
+  const source = readReference(root, rel, `${section} slug map`);
+  const slugs = parseArticleUrlSlugs(source, slugConst);
+  if (Object.keys(slugs).length === 0) throw missingReference(`${section} slug map`, rel);
+  return slugs;
+}
+
+function readCanonicalOverrideSlugs(root, section) {
+  const rel = SECTION_CANONICAL_OVERRIDE_FILES[section];
+  if (!rel) throw new Error(`unknown corpus section: ${section}`);
+  let parsed;
+  try {
+    parsed = JSON.parse(readReference(root, rel, `${section} canonical overrides`));
+  } catch (error) {
+    if (error?.code === 'MISSING_CORPUS') throw error;
+    throw new Error(`${rel}: canonical overrides non sono JSON leggibile`, { cause: error });
+  }
+  return new Set(Object.keys(parsed?.overrides ?? {}));
 }
 
 function readGit(root, args) {
@@ -492,6 +551,45 @@ export function countSourceArticles(root, section) {
   return countCorpusFiles(root, rel, '.ts', section);
 }
 
+/**
+ * Quante entry IT promette il corpus alla sitemap.
+ *
+ * Il denominatore parte dal registro, non dal predicato del writer: un nuovo
+ * filtro o una mappa slug troncata deve far scattare il floor, non abbassarlo
+ * insieme all'artefatto. Si sottraggono solo le esclusioni già dichiarate nei
+ * dati di canonical override o nella retention delle daily edition, mappate
+ * esplicitamente allo slug IT di una entry del registro.
+ */
+export function countSourceSitemapEntries(root, section) {
+  const registry = readRegistryData(root, section);
+  const slugMap = readSlugMap(root, section);
+  const shadowed = readCanonicalOverrideSlugs(root, section);
+
+  if (section === 'frontaliere') {
+    for (const id of selectRetiredDailyEditions([...registry.ids])) {
+      const slug = slugMap[id]?.it;
+      if (slug) shadowed.add(slug);
+    }
+  }
+
+  return registry.entryIds.filter((id) => !shadowed.has(slugMap[id]?.it)).length;
+}
+
+/**
+ * Cardinalità attesa dell'archive sitemap, derivata dai due input che il
+ * writer TS unisce: meta title-keys IT e chiavi della slug map. Il conteggio
+ * resta indipendente dal documento XML scritto, così la verifica può
+ * distinguere un corpus corto da una serializzazione corta.
+ */
+export function countSourceArchiveSitemapUrls(root, section) {
+  const metaRel = path.join('content', `${SECTION_META_PREFIXES[section]}it.ts`);
+  const metaIds = metadataArticleIds(readReference(root, metaRel, `${section} Italian metadata`));
+  const slugMap = readSlugMap(root, section);
+  const unionSize = new Set([...metaIds, ...Object.keys(slugMap)]).size;
+  const pages = Math.max(1, Math.ceil(unionSize / ARTICLES_PAGE_SIZE));
+  return pages * SECTION_META_LOCALES.length;
+}
+
 /** Quante immagini hero ci sono in sorgente. */
 export function countSourceImages(root) {
   return countCorpusFiles(root, IMAGE_SOURCE_DIR, '.webp', 'images-manifest.json');
@@ -514,6 +612,26 @@ export function sectionFloor(root, section, retention = FLOOR_RETENTION) {
     throw new Error(missingCorpusMessage(section, path.join(root, SECTION_BODY_DIRS[section])));
   }
   return floorFrom(source, retention);
+}
+
+/**
+ * Il pavimento di un elenco derivato dal registro, come una sitemap articolo.
+ *
+ * Il registro è il riferimento corretto per il contenuto che la sitemap prova
+ * a elencare; le voci `shadowed` sono escluse legittimamente perché puntano a
+ * un canonical diverso. Il risultato resta relativo al numero corrente, così
+ * non ricrea il vecchio pavimento assoluto che si è svuotato mentre il corpus
+ * cresceva.
+ *
+ * Un registro assente o vuoto non vale come pavimento a zero: è l'assenza del
+ * riferimento e va rifiutata dal writer.
+ */
+export function listedFloor(registryCount, shadowed = 0, retention = FLOOR_RETENTION) {
+  if (!Number.isFinite(registryCount) || registryCount <= 0) {
+    throw new Error(missingCorpusMessage('un elenco derivato dal registro', 'il registro degli articoli'));
+  }
+  const expected = Math.max(0, registryCount - Math.max(0, shadowed));
+  return floorFrom(expected, retention);
 }
 
 /**

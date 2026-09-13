@@ -81959,6 +81959,317 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-banda-larga-regioni-periferiche-berna': {
+    title: 'Banda larga nelle regioni periferiche: 365 milioni da Berna',
+    description: 'Il Consiglio federale stanzia 365 milioni di franchi per la banda ultra larga nelle regioni periferiche della Svizzera. Leggi tutti i dettagli. Dati aggiornati',
+    keywords: 'frontalieri, ticino, svizzera, italia, banda, larga, nelle, regioni',
+    ogTitle: 'Banda larga nelle regioni periferiche: 365 milioni da Berna',
+    ogDescription: 'L\'iniziativa cantonale ticinese di Bruno Storni diventa una proposta di legge federale con 365 milioni di franchi stanziati per la banda ultra larga.',
+    canonicalPath: '/articoli-svizzera/banda-larga-regioni-periferiche-berna/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Banda larga nelle regioni periferiche: 365 milioni da Berna",
+      "description": "Il Consiglio federale stanzia 365 milioni di franchi per la banda ultra larga nelle regioni periferiche della Svizzera. Leggi tutti i dettagli. Dati aggiornati",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/banda-larga-regioni-periferiche-berna.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Palazzo federale a Berna dove si discutono le proposte di legge sulla banda larga"
+      },
+      "datePublished": "2026-09-13T00:07:17+00:00",
+      "dateModified": "2026-09-13T00:07:17+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/banda-larga-regioni-periferiche-berna/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-condanne-banche-svizzera-corruzione': {
+    title: 'Condanne contro le banche in Svizzera per corruzione',
+    description: 'Sei banche svizzere condannate dalla giustizia federale per corruzione e riciclaggio. Analisi della tendenza e impatto sul settore finanziario. Dati aggiornati',
+    keywords: 'frontalieri, ticino, svizzera, italia, condanne, contro, banche, corruzione',
+    ogTitle: 'Crescono le condanne contro le banche in Svizzera',
+    ogDescription: 'Analisi approfondita sulle recenti condanne emesse dalla giustizia federale contro sei banche svizzere per casi di corruzione e riciclaggio di denaro.',
+    canonicalPath: '/articoli-svizzera/condanne-banche-svizzera-corruzione/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Condanne contro le banche in Svizzera per corruzione",
+      "description": "Sei banche svizzere condannate dalla giustizia federale per corruzione e riciclaggio. Analisi della tendenza e impatto sul settore finanziario. Dati aggiornati",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/condanne-banche-svizzera-corruzione.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Edifici di banche svizzere in Svizzera"
+      },
+      "datePublished": "2026-09-13T00:20:13+00:00",
+      "dateModified": "2026-09-13T00:20:13+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/condanne-banche-svizzera-corruzione/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-traffico-merci-alpi-semestre-2026': {
+    title: 'Traffico merci transalpino: dati e crescita nel 2026',
+    description: 'Scopri l\'andamento del traffico merci transalpino in Svizzera nel primo semestre 2026: dati su ferrovia, autocarri, cantieri e FFS Cargo. Dati aggiornati 2026',
+    keywords: 'frontalieri, ticino, svizzera, italia, traffico, merci, transalpino, dati',
+    ogTitle: 'Traffico merci transalpino: dati e crescita nel primo semestre 2026',
+    ogDescription: 'Analisi dei rapporti semestrali dell\'Ufficio federale dei trasporti sul traffico merci transalpino in Svizzera per il primo semestre 2026 tra rotaia e strada.',
+    canonicalPath: '/articoli-svizzera/traffico-merci-alpi-semestre-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Traffico merci transalpino: dati e crescita nel 2026",
+      "description": "Scopri l'andamento del traffico merci transalpino in Svizzera nel primo semestre 2026: dati su ferrovia, autocarri, cantieri e FFS Cargo. Dati aggiornati 2026",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/traffico-merci-alpi-semestre-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Traffico merci su rotaia e strada attraverso le Alpi svizzere"
+      },
+      "datePublished": "2026-09-13T01:07:46+00:00",
+      "dateModified": "2026-09-13T01:07:46+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/traffico-merci-alpi-semestre-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-mercato-lavoro-seco-luglio-2026': {
+    title: 'Mercato del lavoro SECO: disoccupazione al 3% a luglio 2026',
+    description: 'Scopri i dati ufficiali SECO sul mercato del lavoro in Svizzera a luglio 2026: tasso di disoccupazione al 3%, posti vacanti e analisi per fasce d\'età.',
+    keywords: 'frontalieri, ticino, svizzera, italia, mercato, lavoro, seco, disoccupazione',
+    ogTitle: 'Mercato lavoro SECO: disoccupazione al 3% a luglio 2026',
+    ogDescription: 'Analisi ufficiale SECO del mercato del lavoro svizzero a luglio 2026. Dati su disoccupazione, fasce d\'età, posti vacanti negli URC e lavoro ridotto.',
+    canonicalPath: '/articoli-svizzera/mercato-lavoro-seco-luglio-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Mercato del lavoro SECO: disoccupazione al 3% a luglio 2026",
+      "description": "Scopri i dati ufficiali SECO sul mercato del lavoro in Svizzera a luglio 2026: tasso di disoccupazione al 3%, posti vacanti e analisi per fasce d'età.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/mercato-lavoro-seco-luglio-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Statistiche mercato del lavoro SECO in Svizzera a luglio 2026"
+      },
+      "datePublished": "2026-09-13T01:15:50+00:00",
+      "dateModified": "2026-09-13T01:15:50+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/mercato-lavoro-seco-luglio-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-esercito-polizia-berna-droni': {
+    title: 'Esercito e polizia allenano protezione infrastrutture',
+    description: 'Nel Canton Berna è in corso un\'esercitazione congiunta di quattro giorni tra polizia ed esercito svizzero focalizzata sulla protezione dai droni.',
+    keywords: 'frontalieri, ticino, svizzera, italia, esercito, polizia, allenano, protezione',
+    ogTitle: 'Esercito e polizia allenano protezione infrastrutture critiche a Berna',
+    ogDescription: 'Nel Canton Berna è in corso un\'esercitazione congiunta di quattro giorni tra la polizia cantonale e l\'esercito svizzero focalizzata sulla difesa delle infrastrutture critiche e sulla protezione contro la minaccia dei droni.',
+    canonicalPath: '/articoli-svizzera/esercito-polizia-berna-droni/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Esercito e polizia allenano protezione infrastrutture",
+      "description": "Nel Canton Berna è in corso un'esercitazione congiunta di quattro giorni tra polizia ed esercito svizzero focalizzata sulla protezione dai droni.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/esercito-polizia-berna-droni.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Esercitazione congiunta di polizia ed esercito contro i droni a Berna"
+      },
+      "datePublished": "2026-09-13T01:26:23+00:00",
+      "dateModified": "2026-09-13T01:26:23+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/esercito-polizia-berna-droni/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-difesa-droni-infrastrutture-berna': {
+    title: 'Difesa dai droni in Svizzera: al via l\'esercitazione a Berna',
+    description: 'Al via nel Canton Berna un\'esercitazione di quattro giorni sulla difesa dai droni e la protezione delle infrastrutture critiche ed energetiche. Dati aggiornati',
+    keywords: 'frontalieri, ticino, svizzera, italia, difesa, droni, esercitazione, berna',
+    ogTitle: 'Difesa dai droni in Svizzera: al via l\'esercitazione a Berna',
+    ogDescription: 'Partita una quattro-giorni di esercitazione congiunta nel Canton Berna per la protezione delle infrastrutture critiche e degli impianti energetici dai droni.',
+    canonicalPath: '/articoli-svizzera/difesa-droni-infrastrutture-berna/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Difesa dai droni in Svizzera: al via l'esercitazione a Berna",
+      "description": "Al via nel Canton Berna un'esercitazione di quattro giorni sulla difesa dai droni e la protezione delle infrastrutture critiche ed energetiche. Dati aggiornati",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/difesa-droni-infrastrutture-berna.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Torre di trasmissione sul Bantiger nel Canton Berna durante un esercizio di sicurezza"
+      },
+      "datePublished": "2026-09-13T02:08:49+00:00",
+      "dateModified": "2026-09-13T02:08:49+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/difesa-droni-infrastrutture-berna/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-hormuz-petrolio-200-dollari': {
+    title: 'Petrolio a 200 dollari: rischi per l\'economia e la Svizzera',
+    description: 'Rischio petrolio a 200 dollari se Hormuz resta chiuso: scenari globali, impatti sull\'economia elvetica e analisi dell\'economista UBS Alessandro Bee.',
+    keywords: 'frontalieri, ticino, svizzera, italia, petrolio, dollari, rischi, economia',
+    ogTitle: 'Petrolio a 200 dollari e mercati: l\'analisi UBS per la Svizzera',
+    ogDescription: 'Approfondimento economico sui rischi legati alla chiusura dello Stretto di Hormuz, le previsioni sul petrolio fino a 200 dollari e i segnali di ripresa per l\'economia svizzera secondo UBS.',
+    canonicalPath: '/articoli-svizzera/hormuz-petrolio-200-dollari/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Petrolio a 200 dollari: rischi per l'economia e la Svizzera",
+      "description": "Rischio petrolio a 200 dollari se Hormuz resta chiuso: scenari globali, impatti sull'economia elvetica e analisi dell'economista UBS Alessandro Bee.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/hormuz-petrolio-200-dollari.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Analista finanziario esamina i grafici del petrolio e dei mercati globali"
+      },
+      "datePublished": "2026-09-13T06:00:40+00:00",
+      "dateModified": "2026-09-13T06:00:40+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/hormuz-petrolio-200-dollari/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-rischio-petrolio-hormuz-svizzera': {
+    title: 'Petrolio a 200 dollari e rischi per l\'economia globale',
+    description: 'Analisi di UBS sui rischi legati alla chiusura dello Stretto di Hormuz, petrolio a 200 dollari, recessione globale e segnali congiunturali in Svizzera.',
+    keywords: 'frontalieri, ticino, svizzera, italia, petrolio, dollari, rischi, economia',
+    ogTitle: 'Petrolio a 200 dollari e recessione globale: l\'analisi UBS',
+    ogDescription: 'Scopri l\'analisi di Alessandro Bee di UBS sui rischi geopolitici ed energetici legati alla chiusura dello Stretto di Hormuz e le prospettive congiunturali per l\'economia elvetica.',
+    canonicalPath: '/articoli-svizzera/rischio-petrolio-hormuz-svizzera/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Petrolio a 200 dollari e rischi per l'economia globale",
+      "description": "Analisi di UBS sui rischi legati alla chiusura dello Stretto di Hormuz, petrolio a 200 dollari, recessione globale e segnali congiunturali in Svizzera.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/rischio-petrolio-hormuz-svizzera.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Analisi economica e mercati finanziari in Svizzera"
+      },
+      "datePublished": "2026-09-13T06:31:08+00:00",
+      "dateModified": "2026-09-13T06:31:08+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/rischio-petrolio-hormuz-svizzera/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
 };
 
 export default BLOG_CH_SEO_METADATA;

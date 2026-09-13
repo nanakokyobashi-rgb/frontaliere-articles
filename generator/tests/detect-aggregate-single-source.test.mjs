@@ -21,14 +21,17 @@
  */
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
+import { spawnSync } from 'node:child_process';
 import fs from 'node:fs';
+import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { detectAggregate } from '../../scripts/ci/detect-aggregate.mjs';
+import { detectAggregate, parseIssuePayload } from '../../scripts/ci/detect-aggregate.mjs';
 import { isAggregate } from '../../scripts/ci/check-issue-already-resolved.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const WORKFLOW = fs.readFileSync(path.join(ROOT, '.github/workflows/issue-fix.yml'), 'utf8');
+const TESTS_WORKFLOW = fs.readFileSync(path.join(ROOT, '.github/workflows/tests.yml'), 'utf8');
 
 /** La regola shell che questa PR rimuove, riprodotta per misurare il disaccordo. */
 const oldShellRule = (body) =>
@@ -103,6 +106,44 @@ test('issue illeggibile → aggregata, che e\' la direzione reversibile dell\'er
   // chiude il tracker con gli item deferiti dentro, e non si torna indietro.
 });
 
+test('payload gh vuoto → lettura degradata, non issue singola', () => {
+  const parsed = parseIssuePayload({ title: '  ', body: '\n' });
+  assert.equal(parsed.readable, false);
+  assert.deepEqual(detectAggregate(parsed), { aggregate: true, fallback: true });
+});
+
+test('GITHUB_OUTPUT non scrivibile → il CLI propaga il fallimento dopo il fallback', () => {
+  const sandbox = fs.mkdtempSync(path.join(tmpdir(), 'detect-aggregate-'));
+  try {
+    const fakeGh = path.join(sandbox, 'gh');
+    fs.writeFileSync(fakeGh, '#!/bin/sh\nprintf \'%s\' \'{"title":"fix: one item","body":"Suggested action: one change"}\'\n');
+    fs.chmodSync(fakeGh, 0o755);
+    const outputDirectory = path.join(sandbox, 'github-output');
+    fs.mkdirSync(outputDirectory);
+
+    const result = spawnSync(process.execPath, ['scripts/ci/detect-aggregate.mjs'], {
+      cwd: ROOT,
+      encoding: 'utf8',
+      env: {
+        ...process.env,
+        PATH: `${sandbox}:${process.env.PATH || ''}`,
+        REPO: 'owner/repo',
+        ISSUE_NUMBER: '1176',
+        GITHUB_OUTPUT: outputDirectory,
+      },
+    });
+
+    // stdout documenta la decisione conservativa, ma non valorizza
+    // `steps.tier.outputs`: il caller deve fallire invece di leggere un false
+    // implicito dall'output assente.
+    assert.notEqual(result.status, 0);
+    assert.match(result.stdout, /is_aggregate=true/);
+    assert.match(result.stderr, /errore non gestito/);
+  } finally {
+    fs.rmSync(sandbox, { recursive: true, force: true });
+  }
+});
+
 test('issue-fix.yml delega a scripts/ci/detect-aggregate.mjs', () => {
   assert.match(
     WORKFLOW,
@@ -121,6 +162,22 @@ test('issue-fix.yml non ricalcola l\'aggregazione per conto suo', () => {
       !trace.test(code),
       `\`${trace.source}\` e' tornata in issue-fix.yml: il verdetto si calcola in ` +
         '`detect-aggregate.mjs`, non nello YAML (AGENTS.md #6).',
+    );
+  }
+});
+
+test('tests.yml adattato non reintroduce il mirror inline di #8427', () => {
+  // Il finding del sito riguardava uno snippet inline che usava
+  // `stripFencedBlocks(body)` prima di `hasEnumeratedItems()`. Questo workflow
+  // e' adattato: il contratto del body e' un modulo corpus-only, quindi non
+  // deve contenere una seconda copia della grammatica da sincronizzare.
+  const code = TESTS_WORKFLOW.split('\n').filter((line) => !/^\s*#/.test(line)).join('\n');
+  assert.match(code, /node scripts\/ci\/pr-body-contract\.mjs/);
+  for (const trace of [/hasEnumeratedItems/, /maskInlineCodeSpans/, /stripFencedBlocks/, /agg_count/, /is_agg=/]) {
+    assert.doesNotMatch(
+      code,
+      trace,
+      `tests.yml ha reintrodotto ${trace.source}: il mirror adattato deve restare assente (#8427)`,
     );
   }
 });

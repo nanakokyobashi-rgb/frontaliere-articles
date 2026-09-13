@@ -29,6 +29,7 @@
  */
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
 import { isAggregate, hasEnumeratedItems as fromPreflight } from '../../scripts/ci/check-issue-already-resolved.mjs';
 import { isAggregateTitle, hasEnumeratedItems as fromReconcile } from '../../scripts/ci/reconcile-followups.mjs';
 import {
@@ -43,6 +44,17 @@ import {
 
 /** Le tre copie devono concordare: se divergono, il test dedicato sotto lo dice. */
 const hasEnumeratedItemsAll = (body) => fromPreflight(body);
+const RECONCILE_SOURCE = readFileSync(
+  new URL('../../scripts/ci/reconcile-followups.mjs', import.meta.url),
+  'utf8',
+);
+
+test('reconcile delega soglia e keyword al predicato aggregate condiviso (#1176)', () => {
+  assert.match(RECONCILE_SOURCE, /isAggregate as sharedIsAggregate/);
+  assert.match(RECONCILE_SOURCE, /return sharedIsAggregate\(/);
+  assert.doesNotMatch(RECONCILE_SOURCE, /const m = t\.match/);
+  assert.doesNotMatch(RECONCILE_SOURCE, /if \(\/\\b\(\?:sweep\|batch\|bulk\)/);
+});
 
 /**
  * Le forme reali osservate sulle issue di questo repo, non forme inventate.
