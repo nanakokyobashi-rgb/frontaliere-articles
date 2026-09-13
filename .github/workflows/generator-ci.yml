@@ -127,7 +127,7 @@ jobs:
       # argued in its own header.
       - name: Shell contract - transported values and behaviour have not drifted
         run: |
-          n=$(ls -1 host/tests/*.test.mjs 2>/dev/null | wc -l | tr -d '[:space:]')
+          n=$(find host/tests -maxdepth 1 -type f -name '*.test.mjs' -print | wc -l | tr -d '[:space:]')
           if [ "$n" -lt 2 ]; then
             echo "::error::found $n test file(s) under host/tests/, expected at least 2 — the glob stopped matching and this gate would have passed for free."
             exit 1

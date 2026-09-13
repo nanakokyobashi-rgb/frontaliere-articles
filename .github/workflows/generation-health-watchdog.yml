@@ -123,11 +123,15 @@ jobs:
           GH_TOKEN: ${{ env.GITHUB_PAT_NANAKO || secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
         run: |
-          ARGS="--max-log-runs ${{ github.event.inputs.max_log_runs || '60' }}"
-          ARGS="$ARGS --run-lookback-hours ${{ github.event.inputs.run_lookback_hours || '12' }}"
-          ARGS="$ARGS --commit-lookback-hours ${{ github.event.inputs.commit_lookback_hours || '48' }}"
-          if [ "${{ github.event.inputs.dry_run }}" = "true" ]; then ARGS="$ARGS --dry-run"; fi
-          node scripts/ci/scan-generation-health.mjs $ARGS
+          args=(
+            --max-log-runs "${{ github.event.inputs.max_log_runs || '60' }}"
+            --run-lookback-hours "${{ github.event.inputs.run_lookback_hours || '12' }}"
+            --commit-lookback-hours "${{ github.event.inputs.commit_lookback_hours || '48' }}"
+          )
+          if [ "${{ github.event.inputs.dry_run }}" = "true" ]; then
+            args+=(--dry-run)
+          fi
+          node scripts/ci/scan-generation-health.mjs "${args[@]}"
 
       - name: Cleanup Firebase credentials
         if: always()

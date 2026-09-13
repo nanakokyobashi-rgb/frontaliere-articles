@@ -198,7 +198,10 @@ jobs:
         if: ${{ steps.body_contract.outcome != 'failure' && !cancelled() }}
         run: |
           set -euo pipefail
+          # The file list is produced by a trusted repository script; keep the
+          # exact expansion consumed by the gate and silence SC2086 here.
           files=$(node scripts/ci/list-pr-gate-tests.mjs)
+          # shellcheck disable=SC2086
           node --test $files
 
       # Baseline del manifest del ciclo: diff-scoped, non un `node --test`.
@@ -425,9 +428,11 @@ jobs:
         run: |
           set -euo pipefail
           set_tier() {
-            echo "tier=$1" >> "$GITHUB_OUTPUT"
-            echo "model=$2" >> "$GITHUB_OUTPUT"
-            echo "max_turns=$3" >> "$GITHUB_OUTPUT"
+            {
+              echo "tier=$1"
+              echo "model=$2"
+              echo "max_turns=$3"
+            } >> "$GITHUB_OUTPUT"
             echo "Review tier: $1 ($2, max-turns $3)"
           }
           # `gh pr view --json files` TRONCA a 100 file senza dirlo, e su questo
@@ -855,6 +860,9 @@ jobs:
             set_review_output review_aborted true
             set_review_output review_abort_cause max_turns
             set_review_output retryable_failure true
+            # The Markdown backticks and literal shell text are intentional.
+            # ShellCheck otherwise treats them as an interpolated expression.
+            # shellcheck disable=SC2016
             BODY=$(printf '⚠️ **Review automatica fallita** (`terminal_reason=max_turns`, tier `%s`, cap %s turni, usati %s): Claude ha esaurito il budget prima di postare un verdetto. Nessuna review pubblicata — il check di questo job resta rosso e l auto-merge non puo scattare.\n\nLog: %s\n\nPer sbloccare: rilancia il run di `tests` piu recente di questa PR, oppure fai la review a mano col contratto di `REVIEW.md`.\n\nSe questa PR ha gia avuto una morte `max_turns`, un retry raramente basta: valuta di splittarla.' "${REVIEW_TIER:-?}" "${REVIEW_MAX_TURNS:-?}" "${NUM_TURNS:-?}" "$RUN_URL")
             gh pr comment "$PR_NUMBER" --body "$BODY" || echo "::warning::gh pr comment fallito (non bloccante)."
             echo "::error::Review Claude morta su max-turns (tier=${REVIEW_TIER:-?}, cap=${REVIEW_MAX_TURNS:-?}, turni=${NUM_TURNS:-?}) senza postare — rilancia, o splitta la PR se ricorre."

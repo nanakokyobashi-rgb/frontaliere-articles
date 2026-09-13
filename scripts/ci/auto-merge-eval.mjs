@@ -163,6 +163,12 @@ export function prContributionFingerprint(sha) {
 // cambiava il fingerprint e faceva ripartire una review a vuoto. La stessa
 // lista, nella forma corpus, sta in `NONCODE_RE` dentro `tests.yml`.
 export const NON_REVIEWABLE_FINGERPRINT_RE = /^(content|data|dist|public)\//;
+// I workflow crawler sono proiezioni generate dal sito: la compare API di
+// GitHub puo' elencarli senza `.patch` quando la PR contiene il batch completo.
+// Il generatore, il contratto e la logica restano code reviewabili; qui si
+// escludono solo gli artefatti YAML per non trasformare l'assenza di patch in
+// un falso `UNKNOWN` durante un rebase su main.
+export const GENERATED_CRAWLER_WORKFLOW_RE = /^\.github\/workflows\/crawler-group-\d+\.yml$/;
 
 /**
  * Costruisce il fingerprint del contributo CODE da `files` (l'array `.files`
@@ -175,7 +181,9 @@ export function codeContributionFingerprint(files) {
   if (!Array.isArray(files)) return null;
   const parts = [];
   for (const f of files) {
-    if ((isReviewTestPath(f.filename) && (!f.previous_filename || isReviewTestPath(f.previous_filename))) || NON_REVIEWABLE_FINGERPRINT_RE.test(f.filename || '')) continue; // dati/static: non è contributo CODE
+    if ((isReviewTestPath(f.filename) && (!f.previous_filename || isReviewTestPath(f.previous_filename)))
+      || NON_REVIEWABLE_FINGERPRINT_RE.test(f.filename || '')
+      || GENERATED_CRAWLER_WORKFLOW_RE.test(f.filename || '')) continue; // dati/static/generated: non è contributo CODE
     // `patch` assente (binario/troppo grande) su un file CODE modificato -> bail.
     if (f.patch === undefined && f.status !== 'removed' && f.status !== 'added') return null;
     // Tieni SOLO le righe di contenuto +/- (escludi header +++/--- e hunk @@):

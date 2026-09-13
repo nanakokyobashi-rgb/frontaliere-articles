@@ -247,6 +247,7 @@ jobs:
             # non uno stato sbagliato.
             run_id=""
             for i in $(seq 1 12); do
+              echo "dispatch lookup attempt $i/12"
               sleep 10
               run_id="$(gh api "repos/$GITHUB_REPOSITORY/actions/workflows/$WF/runs?event=workflow_dispatch&per_page=10" \
                 | jq -r --arg t "$before" '[.workflow_runs[] | select(.created_at >= $t)] | sort_by(.created_at) | last | .id // empty' || true)"

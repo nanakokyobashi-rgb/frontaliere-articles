@@ -670,9 +670,11 @@ jobs:
           fi
           [ "$SEC" = "svizzera" ] || SEC=frontaliere
 
-          echo "dry=$DRY" >> "$GITHUB_OUTPUT"
-          echo "section=$SEC" >> "$GITHUB_OUTPUT"
-          echo "chain=$CHAIN" >> "$GITHUB_OUTPUT"
+          {
+            echo "dry=$DRY"
+            echo "section=$SEC"
+            echo "chain=$CHAIN"
+          } >> "$GITHUB_OUTPUT"
           echo "event=$EV chain=$CHAIN → section=$SEC dry_run=$DRY"
 
       - name: Setup Node.js
@@ -1160,6 +1162,8 @@ jobs:
           watch_pid=""
           # Il watchdog non sopravvive mai allo step: muore col tentativo (qui
           # sotto) e comunque all'uscita, qualunque ramo la produca.
+          # The EXIT trap invokes this function indirectly.
+          # shellcheck disable=SC2329
           stall_atexit() {
             kill_tree KILL "${watch_pid:-}"
             # Il log del tentativo e la traiettoria si caricano solo quando
@@ -2025,7 +2029,7 @@ jobs:
           # L'ANELLO presume che valga la pena riprovare, e lo si concede solo a
           # un esito dichiarato. Il SOCCORSO non presume niente se non che il
           # muro possa non essere permanente, ed e' uno per catena (#459).
-          kind=link
+          kind='link'
           next_rescue="$rescue"
           if [ "${DECLARED:-}" != "true" ]; then
             kind=rescue
