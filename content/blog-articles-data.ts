@@ -34950,6 +34950,42 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'savoia-avanti-ticino-lavoro',
+ category: 'novita',
+ date: '2026-09-13T06:38:21.092Z',
+ image: '/images/blog/savoia-avanti-ticino-lavoro.webp',
+ hasCalculator: true,
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
+ {
+ id: 'verbania-lavori-ponte-san-giovanni',
+ category: 'pratico',
+ date: '2026-09-13T06:46:31.408Z',
+ image: '/images/blog/verbania-lavori-ponte-san-giovanni.webp',
+ hasCalculator: true,
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
+ {
+ id: 'stadler-rail-investimenti-kazakistan',
+ category: 'novita',
+ date: '2026-09-13T06:55:26.284Z',
+ image: '/images/blog/stadler-rail-investimenti-kazakistan.webp',
+ hasCalculator: true,
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
+ {
+ id: 'inaugurazione-campus-smart-valley-daverio',
+ category: 'novita',
+ date: '2026-09-13T07:02:10.626Z',
+ image: '/images/blog/inaugurazione-campus-smart-valley-daverio.webp',
+ hasCalculator: true,
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

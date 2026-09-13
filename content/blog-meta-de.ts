@@ -11709,6 +11709,18 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.inaugurazione-campus-smartt-valley.title': 'Daverio: Neuer Smartt VAlley Campus eingeweiht',
     'blog.article.inaugurazione-campus-smartt-valley.excerpt': 'Der 5000 m ² große Campus, der der Ausbildung und Innovation gewidmet ist, wurde in Daverio eröffnet. Investition von 4,5 Millionen Euro, um die Lücke zwischen Schule und Fabrik zu schließen.',
     'blog.article.inaugurazione-campus-smartt-valley.imageAlt': 'SMARTT VAlley Campus in Daverio',
+    'blog.article.savoia-avanti-ticino-lavoro.title': 'Savoyen Kandidat mit Avanti Ticino und Lavoro',
+    'blog.article.savoia-avanti-ticino-lavoro.excerpt': 'Die politische Kandidatur von Sergio Savoia für die Liste Avanti con Ticino e Lavoro in Lugano führt zu Online-Debatten, Kontroversen und Klärungen.',
+    'blog.article.savoia-avanti-ticino-lavoro.imageAlt': 'Politische Kandidatur von Sergio Savoia für Avanti con Ticino e Lavoro in Lugano',
+    'blog.article.verbania-lavori-ponte-san-giovanni.title': 'Verbania, Arbeiten an der San Giovanni-Brücke: veränderter Verkehr',
+    'blog.article.verbania-lavori-ponte-san-giovanni.excerpt': 'Nächtliche Eingriffe von Acqua Novara.VCO auf der Brücke San Giovanni in Verbania vom 14. bis 18. September mit Einbahnstraße.',
+    'blog.article.verbania-lavori-ponte-san-giovanni.imageAlt': 'Nächtliche Bauarbeiten und Verkehrsänderungen an der San-Giovanni-Brücke in Verbania',
+    'blog.article.stadler-rail-investimenti-kazakistan.title': 'Stadler Rail setzt auf Kasachstan: 53 Millionen Investitionen',
+    'blog.article.stadler-rail-investimenti-kazakistan.excerpt': 'Der Thurgauer Hersteller Stadler Rail investiert 25 Millionen Franken in das Werk Astana, um mit der Produktion von Aluminiumgehäusen zu beginnen.',
+    'blog.article.stadler-rail-investimenti-kazakistan.imageAlt': 'Stadler Rail Bahnproduktionsanlage mit modernen Maschinen',
+    'blog.article.inaugurazione-campus-smart-valley-daverio.title': 'Smart Valley Campus für Unternehmen in Daverio eingeweiht',
+    'blog.article.inaugurazione-campus-smart-valley-daverio.excerpt': 'In Daverio wurde der Smart Valley-Campus eingeweiht, ein fünftausend Quadratmeter großer Raum für die Fachausbildung und die Verbindung zwischen jungen Menschen und Unternehmen.',
+    'blog.article.inaugurazione-campus-smart-valley-daverio.imageAlt': 'Smart Valley Campus im Industriegebiet von Daverio eingeweiht',
 };
 
 export default blogMetaDe;

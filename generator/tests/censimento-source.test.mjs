@@ -197,6 +197,22 @@ test('codeOnly attiva il fail-safe anche con due backtick dentro literal regex',
     + 'quando la parita\' complessiva torna pari');
 });
 
+test('codeOnly mantiene il fail-safe per backtick escapati dentro una regex', () => {
+  // Anche un backtick escapato e' un carattere che questo scanner non puo'
+  // classificare con certezza: la barra inversa viene consumata prima che il
+  // literal regex possa essere provato da un parser. Senza il marker sticky,
+  // la coppia escapata lascia la pila apparentemente pari e il commento fuori
+  // dal template viene cancellato come se lo scan fosse affidabile.
+  const escapedTick = '\\' + BT;
+  const src = [
+    'const re = /[' + escapedTick + 'a' + escapedTick + ']/;',
+    'const body = ' + BT + 'testo' + BT + ';',
+    '// prosa esterna: dist/api',
+  ].join('\n');
+  assert.equal(codeOnly(src), src,
+    'un backtick escapato in una regex deve conservare il sorgente intero');
+});
+
 test('codeOnly non perde il marker di desincronizzazione prima di un commento in coda', () => {
   const src = [
     'const re = /a' + BT + 'b/; // la riga continua con un commento',
