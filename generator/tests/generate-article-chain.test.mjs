@@ -429,7 +429,13 @@ test('un dispatch della catena prova il fallback anche se l\'evento è workflow_
 
 test('il marker chain_link del mode arriva davvero allo step di generazione', () => {
   const mode = extractRun('Resolve run mode and section');
-  assert.match(mode, /chain_depth="\$\{\{ inputs\.chain_depth \}\}"/);
+  assert.match(mode, /CHAIN_LINK="\$\{\{ needs\.admit\.outputs\.chain_link \}\}"/);
+  assert.doesNotMatch(mode, /inputs\.chain_depth/, 'il parser del marker deve avere una sola sorgente');
+  assert.match(
+    WF,
+    /chain_link: \$\{\{ steps\.check\.outputs\.chain_link \}\}/,
+    'admit deve esportare il marker che ha già calcolato',
+  );
   assert.match(mode, /echo "chain_link=\$CHAIN_LINK"/);
   assert.match(
     WF,

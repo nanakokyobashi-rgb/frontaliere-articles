@@ -334,6 +334,7 @@ jobs:
       contents: read # il compare per distinguere il self-test dal chain link
     outputs:
       proceed: ${{ steps.check.outputs.proceed }}
+      chain_link: ${{ steps.check.outputs.chain_link }}
     steps:
       - name: Skip when a generation is already in flight
         id: check
@@ -382,6 +383,7 @@ jobs:
           if [ "$EVENT_NAME" = "workflow_dispatch" ] && [ "$chain_depth" -gt 0 ]; then
             is_link=true
           fi
+          echo "chain_link=$is_link" >> "$GITHUB_OUTPUT"
 
           if [ "$EVENT_NAME" = "workflow_dispatch" ] && [ "$is_link" != "true" ]; then
             echo "Dispatch manuale (chain_depth=$chain_depth) → si procede sempre."
@@ -397,11 +399,10 @@ jobs:
           # verrebbe saltata quasi sempre, perché una generazione è in volo
           # quasi sempre.
           #
-          # NB: NON è una seconda definizione del chain link. Quella resta una
-          # sola, nello step "Resolve run mode and section", che decide col
-          # `git diff` sul checkout. Qui la domanda è più stretta — «questo
-          # arrivo può scrivere?» — e nel dubbio (compare vuoto, `before`
-          # azzerato, errore API) si risponde di sì e si prosegue col
+          # NB: il marker del chain link viene calcolato una volta qui, nel gate,
+          # e trasportato come output del job. Questa domanda è più stretta —
+          # «questo arrivo può scrivere?» — e nel dubbio (compare vuoto,
+          # `before` azzerato, errore API) si risponde di sì e si prosegue col
           # ragionamento sotto, cioè si degrada al comportamento normale.
           if [ "$EVENT_NAME" = "push" ] && [ -n "${PUSH_BEFORE:-}" ]; then
             changed=$(gh api "repos/$REPO/compare/$PUSH_BEFORE...$PUSH_SHA" \
@@ -621,17 +622,10 @@ jobs:
           EV="${{ github.event_name }}"
 
           # `workflow_dispatch` è usato sia dagli umani sia dal successore
-          # auto-generato dalla catena. Il secondo deve conservare il fallback
-          # fra sezioni; il primo deve rispettare la sezione richiesta.
-          CHAIN_LINK=false
-          chain_depth=0
-          case "${{ inputs.chain_depth }}" in
-            ''|*[!0-9]*) ;;
-            *) chain_depth="${{ inputs.chain_depth }}" ;;
-          esac
-          if [ "$EV" = "workflow_dispatch" ] && [ "$chain_depth" -gt 0 ]; then
-            CHAIN_LINK=true
-          fi
+          # auto-generato dalla catena. Il gate `admit` distingue i due casi e
+          # passa qui il marker come output, così la decisione ha una sola fonte.
+          CHAIN_LINK="${{ needs.admit.outputs.chain_link }}"
+          [ "$CHAIN_LINK" = "true" ] || CHAIN_LINK=false
 
           # A push is DRY unless it carried a corpus change — that is the chain
           # link. Editing this workflow or create-article.mjs must still only
