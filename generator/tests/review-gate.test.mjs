@@ -18,6 +18,7 @@
  * passerebbe anche su un ramo irraggiungibile.
  */
 import { formatCodexFallbackEvidence } from '../../scripts/ci/claude-codex-fallback.mjs';
+import { codeContributionFingerprint } from '../../scripts/ci/auto-merge-eval.mjs';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
@@ -359,6 +360,29 @@ test('carry-forward: solo `content/` cambiato → verde (e\' la churn del corpus
     },
   });
   assert.equal(r.status, 0, `La churn di content/ non deve invalidare una LGTM.\n${r.stdout}`);
+});
+
+test('fingerprint: crawler generati senza `.patch` non rendono il contributo UNKNOWN', () => {
+  const generated = {
+    filename: '.github/workflows/crawler-group-07.yml',
+    status: 'modified',
+  };
+  const code = {
+    filename: 'scripts/ci/auto-merge-eval.mjs',
+    status: 'modified',
+    patch: '@@\n+una riga di codice',
+  };
+
+  assert.equal(codeContributionFingerprint([generated]), '');
+  assert.equal(
+    codeContributionFingerprint([generated, code]),
+    'scripts/ci/auto-merge-eval.mjs\tmodified\t+una riga di codice',
+  );
+  assert.equal(
+    codeContributionFingerprint([{ filename: '.github/workflows/tests.yml', status: 'modified' }]),
+    null,
+    'un workflow non generato resta conservativo se GitHub omette la patch',
+  );
 });
 
 const codexEvidence = formatCodexFallbackEvidence({ trigger: 'runtime-429', status: 'success' });

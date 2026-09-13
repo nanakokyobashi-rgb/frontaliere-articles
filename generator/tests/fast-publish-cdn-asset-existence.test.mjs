@@ -288,6 +288,9 @@ test('budget residuo frazionario: non avvia una HEAD da arrotondare a 1ms', asyn
   const res = await verifyCdnAssetRefs({
     urls: [`${CDN}/assets/quasi-scaduto.js`],
     budgetMs: 0.4,
+    // Freeze the preflight clock: a hosted runner can spend >0.4ms between
+    // entering verifyCdnAssetRefs and the residual-budget branch below.
+    now: () => 0,
     fetchImpl: async () => {
       calls += 1;
       return { ok: true, status: 200 };

@@ -74,6 +74,7 @@ jobs:
       - name: Resolve run mode
         id: mode
         run: |
+          # shellcheck disable=SC1083 # GitHub expressions are expanded before bash runs.
           set -euo pipefail
           if [ "${{ github.event_name }}" = "push" ]; then
             DRY=true
@@ -273,6 +274,7 @@ jobs:
             # A dirty tree makes the following pull --rebase refuse to start,
             # so a push race would lose the marker evidence as well.
             git stash push -u -m "discard-partial-producer-output-before-retry"
+            # shellcheck disable=SC1083
             git stash drop stash@{0}
           fi
 

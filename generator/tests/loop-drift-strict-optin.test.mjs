@@ -97,8 +97,9 @@ test('loop-drift-check: il report accetta anche `1` e `True` e il rosso gia\' ri
   assert.match(report, /grep -Fxq 'issue_reported=true' "\$GITHUB_OUTPUT"/);
   assert.match(report, /\[ "\$DRIFT_STATUS" -ne 0 \] && \[ "\$ISSUE_REPORTED" != "true" \]/);
   assert.doesNotMatch(report, /github-issue-creator|Created:|Commented on existing|Reopened #/);
-  assert.match(report, /node scripts\/ci\/loop-drift-check\.mjs \$ARGS >"\$REPORT_LOG" 2>&1/);
-  assert.match(report, /ARGS="--issue --strict"/);
+  assert.match(report, /node scripts\/ci\/loop-drift-check\.mjs "\$\{args\[@\]\}" >"\$REPORT_LOG" 2>&1/);
+  assert.match(report, /args=\(\)/);
+  assert.match(report, /args\+=\(--issue --strict\)/);
 
   const provenance = stepBlock(WORKFLOW, PROVENANCE);
   assert.match(provenance, /id: provenance_report/);
