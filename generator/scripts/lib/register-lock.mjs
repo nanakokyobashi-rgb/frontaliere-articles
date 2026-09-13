@@ -115,6 +115,33 @@ function assertSection(section, caller) {
   }
 }
 
+function normaliseKnownSections(knownSections) {
+  if (knownSections == null) return null;
+  if (typeof knownSections === 'string' || typeof knownSections[Symbol.iterator] !== 'function') {
+    throw new RegisterLockError(
+      `resolveRegisterLock() requires knownSections to be an iterable of article section names `
+        + `(got ${JSON.stringify(knownSections)}).`,
+    );
+  }
+  let sections;
+  try {
+    sections = [...knownSections];
+  } catch (err) {
+    throw new RegisterLockError(
+      `resolveRegisterLock() could not read knownSections as an iterable: ${err?.message || err}`,
+    );
+  }
+  const invalid = sections.filter((section) => typeof section !== 'string' || !SECTION_RE.test(section));
+  if (invalid.length > 0) {
+    throw new RegisterLockError(
+      `resolveRegisterLock() received invalid knownSections value(s): `
+        + `${invalid.map((section) => JSON.stringify(section)).join(', ')}; `
+        + 'section names must match /^[a-z0-9][a-z0-9-]*$/',
+    );
+  }
+  return new Set(sections);
+}
+
 /**
  * Validate the complete configuration key space before any registration starts.
  *
@@ -371,10 +398,16 @@ export function registrationTargetStatus(targets) {
  * current process was launched with: the two differ every time
  * `generate-article.yml` alternates sections in the same checkout, and
  * comparing an id against the other section's files would classify a split
- * corpus as untouched.
+ * corpus as untouched. `knownSections` is passed by the caller that owns the
+ * section configuration; it makes an unknown section in the legacy marker a
+ * hard error instead of a deferred marker that no future producer could ever
+ * own.
+ *
+ * @param {Iterable<string>|null} [knownSections]
  */
-export function resolveRegisterLock(projectRoot, buildTargets, section) {
+export function resolveRegisterLock(projectRoot, buildTargets, section, knownSections = null) {
   assertSection(section, 'resolveRegisterLock');
+  const knownSectionSet = normaliseKnownSections(knownSections);
   const deferred = [];
   const resolved = [];
   for (const relPath of [LEGACY_REGISTER_LOCK_FILE, registerLockFile(section)]) {
@@ -386,6 +419,13 @@ export function resolveRegisterLock(projectRoot, buildTargets, section) {
     // anomalo: non va trasformato in un defer silenzioso, ma verificato usando
     // la sezione dichiarata nel marker.
     if (relPath === LEGACY_REGISTER_LOCK_FILE && lock.section && lock.section !== section) {
+      if (knownSectionSet && !knownSectionSet.has(lock.section)) {
+        throw new RegisterLockError(
+          `legacy registration lock at ${relPath} declares unknown section "${lock.section}" `
+            + 'outside ARTICLE_SECTION_CONFIGS; refusing to defer evidence that no producer can own. '
+            + 'Inspect the marker and corpus by hand, then remove the lock file.',
+        );
+      }
       deferred.push({ file: relPath, id: lock.id, section: lock.section, runId: lock.runId, origin: describeLockOrigin(lock) });
       continue;
     }

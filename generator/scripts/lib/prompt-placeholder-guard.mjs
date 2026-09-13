@@ -135,7 +135,7 @@ export const SCHEMA_PLACEHOLDER_LITERALS = Object.freeze([
   '<<SLUG:fr>>',
   "Titolo giornalistico con keyword (OBBLIGATORIO ≤ 60 caratteri totali, target 50-55. Il suffisso ' | Frontaliere Ticino' viene aggiunto automaticamente — NON includerlo nel title)",
   'Sottotitolo con dati concreti DALLA FONTE (max 160 chars)',
-  "Inizia con '## In breve' (3-4 bullet TL;DR ≤80 char) + '## Fatti chiave' (5-8 coppie **Cosa/Quando/Dove/Chi/Importo**: valore). Poi il LEAD: FATTI dalla fonte (chi, cosa, dove, quando, perché). Solo cronaca verificabile. 300-400 parole (escluse TL;DR/Fatti chiave). Min 1 ### sotto-sezione.",
+  "Inizia con '## In breve' (3-4 bullet TL;DR ≤80 char) + '## Fatti chiave' (3-8 coppie termine→valore presenti nella fonte; ometti campi assenti, niente placeholder). Poi il LEAD: FATTI dalla fonte (chi, cosa, dove, quando, perché). Solo cronaca verificabile. 300-400 parole (escluse TL;DR/Fatti chiave). Min 1 ### sotto-sezione.",
   'Analisi pratica: implicazioni, confronti, scenari. Contenuto DIVERSO da body1. 300-400 parole. Min 1 ### sotto-sezione.',
   'Azione: procedura step-by-step, scadenze, strumenti + CTA finale. NON riassumere body1/body2. 300-400 parole.',
   "Domanda frequente 1 basata sui fatti dell'articolo?",
@@ -151,6 +151,20 @@ export const SCHEMA_PLACEHOLDER_LITERALS = Object.freeze([
   "OG desc per la card social — 200-250 caratteri, NON una copia della description: Facebook/LinkedIn/WhatsApp mostrano molto piu' di una SERP (HARD CAP: ≤ 250 caratteri)",
   'Headline JSON-LD',
   'Breadcrumb 2-3 parole',
+]);
+
+/**
+ * Letterali di schema ritirati che possono essere ancora vivi nel corpus.
+ *
+ * Questa lista NON fa parte del lock col template corrente: il prompt nuovo
+ * deve restare libero dal contratto storico `5-8`/`Cosa…Importo`, ma il guard
+ * deve continuare a trovare un body1 pubblicato prima della migrazione. Se il
+ * matcher storico venisse derivato da `SCHEMA_PLACEHOLDER_LITERALS`, la
+ * sostituzione del literal cancellerebbe proprio la rete di sicurezza che
+ * serve alla bonifica dei residui già live.
+ */
+export const HISTORICAL_SCHEMA_PLACEHOLDER_LITERALS = Object.freeze([
+  "Inizia con '## In breve' (3-4 bullet TL;DR ≤80 char) + '## Fatti chiave' (5-8 coppie **Cosa/Quando/Dove/Chi/Importo**: valore). Poi il LEAD: FATTI dalla fonte (chi, cosa, dove, quando, perché). Solo cronaca verificabile. 300-400 parole (escluse TL;DR/Fatti chiave). Min 1 ### sotto-sezione.",
 ]);
 
 /**
@@ -478,6 +492,16 @@ export function leadOf(literal) {
 
 const escapeRx = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
+// Non mescolare questi matcher con quelli derivati dal template corrente:
+// sono compatibilità di lettura per gli schemi storici già pubblicati.
+const HISTORICAL_SCHEMA_RULES = HISTORICAL_SCHEMA_PLACEHOLDER_LITERALS.map((literal) => ({
+  id: 'legacy-schema-body1-fixed-key-facts',
+  kind: 'schema-echo',
+  rx: new RegExp(escapeRx(literal), 'i'),
+  why: 'Schema storico di body1 (`5-8` coppie fisse Cosa/Quando/Dove/Chi/Importo) ancora presente in un output pubblicato.',
+  literal,
+}));
+
 // ── `budget-parenthetical`, versione STRUTTURALE ────────────────────────────
 //
 // Porta da `frontaliere-si-o-no#5847` item 2 (`matchBudgetParenthetical`) il
@@ -590,6 +614,8 @@ const FAQ_LINE_PREFIX_RX = String.raw`(?:\d+[.)][ \t]*|[*#>\-–—]+[ \t]*)?`;
  *                       segue e' input, non articolo.
  */
 export const PLACEHOLDER_RULES = Object.freeze([
+  // ── Residui dello schema precedente: lettura, non contratto ─────────────
+  ...HISTORICAL_SCHEMA_RULES,
   // ── Forme che nessun letterale copre ────────────────────────────────────
   {
     id: 'budget-as-value',

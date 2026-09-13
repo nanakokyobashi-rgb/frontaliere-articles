@@ -109,14 +109,22 @@ export function matchesVacuousValue(value) {
 }
 
 /**
- * Estrae il valore dopo l'ultimo `:`. Alcuni modelli scrivono, per esempio,
- * `Chi: Ente competente: non specificato`.
+ * Estrae il valore dopo il separatore del formato del prompt.
+ *
+ * La freccia e' il separatore del contratto corrente e vince sempre sul `:`:
+ * un termine puo' contenere un colon, per esempio `Orario: apertura → valore`.
+ * Solo in assenza della freccia si usa l'ultimo `:` per leggere il formato
+ * legacy (`Chi: Ente competente: non specificato`).
  */
 export function factValueOf(item) {
   const clean = String(item)
     .replace(/\*\*/gu, '')
     .replace(/^[\s>*•-]+/u, '')
     .trim();
+  const arrow = /\s*(?:→|->)\s*/u.exec(clean);
+  if (arrow) {
+    return clean.slice(arrow.index + arrow[0].length).trim();
+  }
   const lastColon = clean.lastIndexOf(':');
   return lastColon === -1 ? clean : clean.slice(lastColon + 1).trim();
 }

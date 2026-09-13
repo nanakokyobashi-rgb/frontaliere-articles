@@ -365,7 +365,7 @@ test('publish-journalist persiste il marker anche quando producer o guard fallis
     'Checkpoint — stage registration marker after producer failure',
   );
   assert.match(checkpoint, /PRODUCER_OUTCOME="\$\{\{ steps\.publish\.outcome \}\}"/);
-  assert.match(checkpoint, /git add -A -- 'generator\/data\/register-in-progress-\*\.json'/);
+  assert.match(checkpoint, /git add -A -- 'generator\/data\/register-in-progress\*\.json'/);
 
   const commit = extractRun(publisher.src, 'Commit and push registered articles');
   const failureBranch = commit.slice(
@@ -373,7 +373,7 @@ test('publish-journalist persiste il marker anche quando producer o guard fallis
     commit.indexOf('elif [ "$GUARD_OUTCOME" != "success" ]'),
   );
   assert.match(failureBranch, /COMMIT_MESSAGE="Checkpoint interrupted journalist registration"/);
-  assert.match(failureBranch, /git add -A -- 'generator\/data\/register-in-progress-\*\.json'/);
+  assert.match(failureBranch, /git add -A -- 'generator\/data\/register-in-progress\*\.json'/);
   assert.doesNotMatch(
     failureBranch,
     /git add -A\s*\n/,

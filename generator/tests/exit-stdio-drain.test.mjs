@@ -333,18 +333,18 @@ for (const stateFlag of ['writableEnded', 'destroyed']) {
   });
 }
 
-test('create-article drena dopo il ledger e prima dell\'unico process.exit nudo', () => {
+test('create-article drena tramite il helper dopo il ledger', () => {
   const source = sourceOf('scripts/create-article.mjs');
   const start = source.indexOf('async function exitAfterFlush(code) {');
   const end = source.indexOf('\n}\n', start);
   assert.ok(start >= 0 && end > start, 'exitAfterFlush non trovato');
   const body = source.slice(start, end);
   const flush = body.indexOf('flushScoresBeforeExit()');
-  const drain = body.indexOf('await drainStdio(');
+  const drain = body.indexOf('await exitAfterDrain(code)');
   const exit = body.indexOf('process.exit(');
-  assert.ok(flush >= 0 && flush < drain && drain < exit);
-  assert.match(body, /process\.exitCode\s*=\s*code/);
-  assert.equal((source.match(/^\s*process\.exit\(/gm) || []).length, 1);
+  assert.ok(flush >= 0 && flush < drain);
+  assert.equal(exit, -1, 'create-article non deve duplicare il process.exit del helper');
+  assert.equal((source.match(/^\s*process\.exit\(/gm) || []).length, 0);
   assert.match(source, /exitAfterDrain\(143\)/);
 });
 

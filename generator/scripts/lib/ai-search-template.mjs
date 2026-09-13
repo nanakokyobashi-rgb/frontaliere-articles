@@ -173,7 +173,8 @@ Rispondi SOLO con JSON valido in questo formato (no markdown fences):
   "tldr": ["bullet 1", "bullet 2", "bullet 3"],
   "keyFacts": [
     {"term": "Cosa", "value": "..."},
-    {"term": "Quando", "value": "..."}
+    {"term": "Quando", "value": "..."},
+    {"term": "Dove", "value": "..."}
   ]
 }`;
 }

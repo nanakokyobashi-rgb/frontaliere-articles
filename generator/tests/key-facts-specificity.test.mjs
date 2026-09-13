@@ -25,6 +25,7 @@ import {
   buildBackfillPrompt,
   getKeyFactsHeading,
 } from '../scripts/lib/ai-search-template.mjs';
+import { SCHEMA_PLACEHOLDER_LITERALS } from '../scripts/lib/prompt-placeholder-guard.mjs';
 import { scanCorpus, unescapeTs } from '../scripts/scan-vacuous-key-facts.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
@@ -83,9 +84,25 @@ test('la forma di riferimento dell issue conta quattro varianti e non i fatti sp
   assert.equal(findReferenceVacuousFacts('- Quando: 3 marzo 2026').length, 0);
 });
 
-test('il valore di un fatto e\' cio\' che segue l ultimo due punti', () => {
+test('il valore usa la freccia del contratto anche quando il termine contiene un colon', () => {
   assert.equal(factValueOf('- **Chi**: Ente competente: non specificato.'), 'non specificato.');
   assert.equal(factValueOf('- **Dove**: Cantone di Zugo'), 'Cantone di Zugo');
+  assert.equal(factValueOf('- **Quando** → non specificato.'), 'non specificato.');
+  assert.equal(factValueOf('- **Quando** -> non specificato.'), 'non specificato.');
+  assert.equal(factValueOf('- **Orario: apertura** → non specificato.'), 'non specificato.');
+  assert.equal(factValueOf('- **Orario: apertura** -> not specified.'), 'not specified.');
+});
+
+test('un termine con colon non lascia passare un valore vacuo nella sezione AI Search', () => {
+  const body = [
+    '## Fatti chiave',
+    '- **Orario: apertura** → non specificato',
+    '- Dove → Cantone di Zugo',
+    '- Requisiti → documento valido',
+  ].join('\n');
+  const [hit] = findVacuousFacts(body);
+  assert.equal(hit?.value, 'non specificato');
+  assert.equal(hit?.kind, 'placeholder-value');
 });
 
 test('lo scanner decodifica gli escape Unicode e hexadecimal dei literal TS', () => {
@@ -113,6 +130,7 @@ test('le intestazioni emesse dal serializzatore sono tutte leggibili', () => {
 test('il prompt AI Search ammette tutti i fatti presenti nella fonte senza placeholder', () => {
   assert.match(AI_SEARCH_PROMPT_BLOCK_IT, /3-8 coppie/);
   assert.doesNotMatch(AI_SEARCH_PROMPT_BLOCK_IT, /5-8 coppie/);
+  assert.match(AI_SEARCH_PROMPT_BLOCK_IT, /termine→valore/);
   assert.match(AI_SEARCH_PROMPT_BLOCK_IT, /dalla fonte/);
   assert.match(AI_SEARCH_PROMPT_BLOCK_IT, /qualsiasi termine utile/i);
   assert.match(AI_SEARCH_PROMPT_BLOCK_IT, /Scadenza.*Requisiti/);
@@ -129,6 +147,34 @@ test('il backfill AI Search mantiene il budget e i fatti source-backed', () => {
   assert.match(prompt, /dati presenti nell'articolo/i);
   assert.match(prompt, /campi assenti/i);
   assert.match(prompt, /niente placeholder/i);
+  assert.equal((prompt.match(/\{"term":/g) || []).length, 3);
+});
+
+test('lo schema body1 condivide il contratto AI Search e il literal del guard', () => {
+  const source = fs.readFileSync(CREATE_ARTICLE_PATH, 'utf8');
+  const body1 = source.match(/"body1": "([^"]+)"/)?.[1];
+  assert.ok(body1, 'literal body1 non trovato nello schema JSON del prompt');
+  assert.match(body1, /3-8 coppie termine→valore presenti nella fonte/);
+  assert.match(body1, /campi assenti, niente placeholder/);
+  assert.doesNotMatch(body1, /5-8 coppie/);
+  assert.doesNotMatch(body1, /\*\*Cosa\/Quando\/Dove\/Chi\/Importo\*\*/);
+  assert.ok(
+    SCHEMA_PLACEHOLDER_LITERALS.includes(body1),
+    'il literal body1 non e\' allineato alla copia usata dal prompt-placeholder guard',
+  );
+});
+
+test('il formato emesso dei fatti chiave viene interpretato dal gate', () => {
+  const body = [
+    '## Fatti chiave',
+    '- Quando → non specificato',
+    '- Dove → Cantone di Zugo',
+    '- Requisiti → documento valido',
+  ].join('\n');
+  const [hit] = findVacuousFacts(body);
+  assert.equal(hit?.value, 'non specificato');
+  assert.equal(hit?.kind, 'placeholder-value');
+  assert.equal(matchesVacuousValue(factValueOf('- Quando → non specificato')), true);
 });
 
 test('con almeno tre superstiti il fatto vuoto viene rimosso', () => {

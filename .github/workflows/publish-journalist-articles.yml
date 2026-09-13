@@ -177,11 +177,11 @@ jobs:
             echo "producer completed; the normal commit will stage marker changes"
             exit 0
           fi
-          if [ -z "$(git status --porcelain -- 'generator/data/register-in-progress-*.json')" ]; then
+          if [ -z "$(git status --porcelain -- 'generator/data/register-in-progress*.json')" ]; then
             echo "producer outcome: $PRODUCER_OUTCOME; no changed registration marker to checkpoint"
             exit 0
           fi
-          git add -A -- 'generator/data/register-in-progress-*.json'
+          git add -A -- 'generator/data/register-in-progress*.json'
           echo "staged registration marker checkpoint for producer outcome: $PRODUCER_OUTCOME"
 
       # ── La guardia sul percorso di scrittura (issue #275) ──────────────────
@@ -243,8 +243,8 @@ jobs:
           if [ "$PRODUCER_OUTCOME" != "success" ]; then
             # The checkpoint normally staged this already. Repeat the
             # deletion-aware add as a safety net if that step could not run.
-            if [ -n "$(git status --porcelain -- 'generator/data/register-in-progress-*.json')" ]; then
-              git add -A -- 'generator/data/register-in-progress-*.json'
+            if [ -n "$(git status --porcelain -- 'generator/data/register-in-progress*.json')" ]; then
+              git add -A -- 'generator/data/register-in-progress*.json'
             fi
             COMMIT_MESSAGE="Checkpoint interrupted journalist registration"
             echo "producer outcome: $PRODUCER_OUTCOME; committing registration evidence only; completed documents were re-queued"
