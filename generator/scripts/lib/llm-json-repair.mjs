@@ -676,10 +676,40 @@ function normalizeJsonCandidate(input) {
     .replace(/,(\s*[}\]])/g, '$1');
 }
 
-export function repairLlmJson(raw) {
-  const c = insertMissingPropertyCommas(stripCodeFences(raw));
-  const start = c.indexOf('{');
-  if (start === -1) return normalizeJsonCandidate(c);
+/** Maximum number of later root openings inspected after the first one. */
+const MAX_LATER_CANDIDATES = 24;
+
+/**
+ * The only safe reason to skip a valid first payload is an explicit response
+ * marker. Without this rule, a valid answer followed by a JSON example in the
+ * model's closing prose was silently replaced by that example (the old code
+ * always reduced to the candidate with the greatest `start`).
+ */
+const ANSWER_CUE_RE = /(?:^|\s)(?:risposta(?:\s+finale)?|final(?:\s+answer)?|answer|response|output)(?:\s+json)?\s*[:\-]\s*$/i;
+const EXAMPLE_CUE_RE = /\b(?:esempio|example|sample|e\.g\.|for example|ad esempio)\b[^\n]{0,120}$/i;
+
+function cueBefore(source, start, pattern) {
+  const prefix = source.slice(Math.max(0, start - 240), start).replace(/\s+/g, ' ');
+  return pattern.test(prefix);
+}
+
+function firstRootStart(source, rootOpeners) {
+  return rootOpeners.reduce((first, opener) => {
+    const start = source.indexOf(opener);
+    return start === -1 ? first : first === -1 ? start : Math.min(first, start);
+  }, -1);
+}
+
+function nextRootStart(source, from, rootOpeners) {
+  return rootOpeners.reduce((next, opener) => {
+    const start = source.indexOf(opener, from);
+    return start === -1 ? next : next === -1 ? start : Math.min(next, start);
+  }, -1);
+}
+
+function collectJsonCandidates(source, rootOpeners) {
+  const start = firstRootStart(source, rootOpeners);
+  if (start === -1) return { start, candidates: [] };
 
   const candidates = [];
   const addCandidate = (candidateStart, candidateEnd, balanced) => {
@@ -687,66 +717,99 @@ export function repairLlmJson(raw) {
       start: candidateStart,
       end: candidateEnd,
       balanced,
-      input: c.slice(candidateStart, candidateEnd + 1),
+      input: source.slice(candidateStart, candidateEnd + 1),
     });
   };
-  const firstCloseIdx = findMatchingClose(c, start, true);
+
+  const opener = source[start];
+  const firstCloseIdx = findMatchingClose(source, start, true);
   if (firstCloseIdx !== -1) {
     addCandidate(start, firstCloseIdx, true);
   } else {
-    // Bracket-balanced extraction (mirrors repairJsonArray in batch-add-faq-to-articles.mjs)
-    // so trailing LLM prose or a foreign '}' from an interior nested object does not
-    // pull in the wrong boundary via lastIndexOf. Falls back to lastIndexOf when
-    // findMatchingClose returns -1 (e.g. raw truncated inside a string literal).
-    const end = c.lastIndexOf('}');
-    if (end > start) addCandidate(start, end, false);
-    else addCandidate(start, c.length - 1, false);
+    // Keep the historical truncated-payload fallback: callers can still
+    // salvage complete leading FAQ pairs or retry with a larger token budget.
+    const closer = opener === '[' ? ']' : '}';
+    const end = source.lastIndexOf(closer);
+    addCandidate(start, end > start ? end : source.length - 1, false);
   }
 
-  // A prose preamble can contain an example JSON object before the actual
-  // answer. Search a bounded number of later object starts only in that case;
-  // for a payload that starts at index 0, preserving the first/truncated
-  // candidate is important because a nested object is not a replacement for
-  // the missing outer payload.
+  // A later root can be the real response after an example in a prose
+  // preamble. Inspect only a bounded number of openings, and only when the
+  // first root was not the first character. A response that starts at offset
+  // zero therefore cannot be displaced by trailing JSON in closing prose.
   if (start > 0) {
-    let nextStart = c.indexOf('{', start + 1);
+    let nextStart = nextRootStart(source, start + 1, rootOpeners);
     let examined = 0;
-    while (nextStart !== -1 && examined < 24) {
+    while (nextStart !== -1 && examined < MAX_LATER_CANDIDATES) {
       examined++;
-      const nextCloseIdx = findMatchingClose(c, nextStart, true);
-      if (nextCloseIdx !== -1) {
-        addCandidate(nextStart, nextCloseIdx, true);
-      }
-      nextStart = c.indexOf('{', nextStart + 1);
+      const nextCloseIdx = findMatchingClose(source, nextStart, true);
+      if (nextCloseIdx !== -1) addCandidate(nextStart, nextCloseIdx, true);
+      nextStart = nextRootStart(source, nextStart + 1, rootOpeners);
     }
   }
+
+  return { start, candidates };
+}
+
+function selectJsonCandidate(source, parseable) {
+  const balanced = parseable.filter((candidate) => candidate.balanced);
+  const pool = balanced.length > 0 ? balanced : parseable;
+  const topLevel = pool
+    .filter((candidate) => !pool.some((other) => (
+      other.start < candidate.start && other.end >= candidate.end
+    )))
+    .sort((a, b) => a.start - b.start || b.end - a.end);
+  if (!topLevel.length) return null;
+
+  // Prefer a candidate explicitly introduced as the answer. This preserves
+  // the useful "example ... Risposta finale: payload" recovery case.
+  const markedAnswers = topLevel.filter((candidate) => cueBefore(source, candidate.start, ANSWER_CUE_RE));
+  if (markedAnswers.length) return markedAnswers[markedAnswers.length - 1];
+
+  // If the first candidate is explicitly an example, a later top-level
+  // candidate is the only plausible answer. In every other case the first
+  // valid candidate wins, so trailing examples cannot overwrite a response.
+  if (cueBefore(source, topLevel[0].start, EXAMPLE_CUE_RE)) {
+    return topLevel[topLevel.length - 1];
+  }
+  return topLevel[0];
+}
+
+function repairJsonDocument(raw, { rootOpeners = ['{'], validateCandidate = null } = {}) {
+  const c = insertMissingPropertyCommas(stripCodeFences(raw));
+  const { start, candidates } = collectJsonCandidates(c, rootOpeners);
+  if (start === -1) return normalizeJsonCandidate(c);
 
   const parseable = [];
   for (const candidate of candidates) {
     const repaired = normalizeJsonCandidate(candidate.input);
     try {
-      JSON.parse(repaired);
+      const parsed = JSON.parse(repaired);
+      if (validateCandidate && !validateCandidate(parsed, candidate)) continue;
       parseable.push({ ...candidate, repaired });
     } catch {
-      // Callers still receive the repaired candidate below so their existing
-      // retry/diagnostic path remains unchanged for genuinely truncated JSON.
+      // Callers still receive the repaired first candidate below so their
+      // existing retry/diagnostic path remains unchanged for truncated JSON.
     }
   }
 
-  // A prose preamble may contain an example JSON object that is longer than
-  // the real answer. Prefer the last parseable top-level candidate instead
-  // of guessing by byte length; nested candidates are excluded by range.
-  const balanced = parseable.filter((candidate) => candidate.balanced);
-  const pool = balanced.length > 0 ? balanced : parseable;
-  const topLevel = pool.filter((candidate) => !pool.some((other) => (
-    other.start < candidate.start && other.end >= candidate.end
-  )));
-  const best = topLevel.reduce((current, candidate) => {
-    if (current === null || candidate.start > current.start) return candidate;
-    if (candidate.start === current.start && candidate.end > current.end) return candidate;
-    return current;
-  }, null);
-
+  const best = selectJsonCandidate(c, parseable);
   if (best !== null) return best.repaired;
   return normalizeJsonCandidate(candidates[0]?.input ?? c);
+}
+
+export function repairLlmJson(raw) {
+  return repairJsonDocument(raw);
+}
+
+/**
+ * Shared repair/extraction for array-shaped LLM responses. `validateCandidate`
+ * is intentionally supplied by the caller: the generic repair module cannot
+ * know whether an array is FAQ data, translations, or another contract.
+ */
+export function repairLlmJsonArray(raw, { validateCandidate = null } = {}) {
+  return repairJsonDocument(raw, {
+    rootOpeners: ['[', '{'],
+    validateCandidate,
+  });
 }

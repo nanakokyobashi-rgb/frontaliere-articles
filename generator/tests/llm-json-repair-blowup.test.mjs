@@ -72,6 +72,14 @@ test('con un preambolo seleziona il payload JSON finale, non quello piu\' lungo'
   assert.equal(parsed.slugs.it, 'final');
 });
 
+test('un esempio JSON nella coda non sostituisce una risposta gia\' chiusa', () => {
+  const raw = 'Risposta finale: {"id":"real","slugs":{"it":"real"}}. Nota: esempio da ignorare {"id":"example","slugs":{"it":"example"},"extra":"piu lungo"}';
+  const parsed = JSON.parse(repairLlmJson(raw));
+  assert.equal(parsed.id, 'real');
+  assert.equal(parsed.slugs.it, 'real');
+  assert.equal('extra' in parsed, false);
+});
+
 test('non inserisce una virgola dentro una stringa con virgolette non escapate', () => {
   const raw = '{"body1":"prosa "quoted } "key": testo","next":"ok"}';
   const parsed = JSON.parse(repairLlmJson(raw));
