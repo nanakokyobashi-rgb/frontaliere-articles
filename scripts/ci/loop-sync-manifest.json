@@ -314,7 +314,7 @@
       "reason": "Il corpus espone il contratto aggregate canonical ai consumer locali e conserva la propria risoluzione di locator sul percorso di pubblicazione; per questo la copia non è byte-identica al matcher sorgente del sito. La baseline registra separatamente i due blob e il trasporto successivo deve preservare l'adattamento, non sovrascriverlo con un mirror cieco.",
       "baseline": {
         "site": "2fc97767d9b96296",
-        "corpus": "69b1658c61e6a5fb",
+        "corpus": "cfdea7e5d69a861a",
         "alignedAt": "2026-09-13"
       }
     },

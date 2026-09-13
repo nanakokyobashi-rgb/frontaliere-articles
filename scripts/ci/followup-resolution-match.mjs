@@ -363,88 +363,145 @@ function escapedRegExp(value) {
 }
 
 /**
- * Replace comments and literal text with spaces while preserving line breaks
- * and the positions of executable characters.  A cited call inside a comment,
- * string, or template literal is documentation/data, not an invocation.
+ * Mask JavaScript text that cannot contain an executable call.  The matcher is
+ * intentionally fail-closed: comments, quoted strings, template text and regex
+ * literals are replaced by spaces while line breaks are retained for diagnostics
+ * and for the surrounding token boundaries.  Template interpolations are masked
+ * as one string as well; that may miss a real call, but can never turn prose into
+ * completion evidence.
  */
-function maskJavaScriptNonExecutable(source) {
+function maskNonExecutableJavaScript(source) {
   const text = String(source || '');
-  const out = [];
+  const out = text.split('');
   let state = 'code';
   let quote = '';
   let escaped = false;
+  let regexClass = false;
 
-  const blank = (ch) => (ch === '\n' ? '\n' : ' ');
+  const blank = (index) => {
+    if (text[index] !== '\n' && text[index] !== '\r') out[index] = ' ';
+  };
+  const previousSignificant = (index) => {
+    for (let i = index - 1; i >= 0; i -= 1) {
+      if (!/\s/.test(out[i])) return out[i];
+    }
+    return '';
+  };
+  const matchingParenStart = (closeIndex) => {
+    let depth = 0;
+    for (let i = closeIndex; i >= 0; i -= 1) {
+      if (out[i] === ')') depth += 1;
+      else if (out[i] === '(') {
+        depth -= 1;
+        if (depth === 0) return i;
+      }
+    }
+    return -1;
+  };
+  const regexCanStart = (index) => {
+    const previous = previousSignificant(index);
+    if (!previous) return true;
+    if (/[([{:;,=!?&|+*%^~<>\-]/.test(previous)) return true;
+    if (previous === ')') {
+      const openIndex = matchingParenStart(index - 1);
+      const control = out.slice(0, openIndex).join('').match(/([A-Za-z_$][\w$]*)\s*$/u)?.[1];
+      if (/^(?:catch|for|if|switch|while|with)$/u.test(control || '')) return true;
+    }
+    const prefix = out.slice(0, index).join('').match(/([A-Za-z_$][\w$]*)\s*$/u)?.[1];
+    return /^(?:case|delete|do|else|in|of|return|throw|typeof|void|yield|await)$/u.test(prefix || '');
+  };
+
   for (let i = 0; i < text.length; i += 1) {
     const ch = text[i];
     const next = text[i + 1];
+
     if (state === 'line-comment') {
-      out.push(blank(ch));
-      if (ch === '\n') state = 'code';
+      blank(i);
+      if (ch === '\n' || ch === '\r') state = 'code';
       continue;
     }
     if (state === 'block-comment') {
-      out.push(blank(ch));
+      blank(i);
       if (ch === '*' && next === '/') {
-        out.push(' ');
+        blank(i + 1);
         i += 1;
         state = 'code';
       }
       continue;
     }
-    if (state === 'literal') {
-      out.push(blank(ch));
-      if (escaped) escaped = false;
-      else if (ch === '\\') escaped = true;
-      else if (ch === quote) state = 'code';
+    if (state === 'string' || state === 'template' || state === 'regex') {
+      blank(i);
+      if (escaped) {
+        escaped = false;
+        continue;
+      }
+      if (ch === '\\') {
+        escaped = true;
+        continue;
+      }
+      if (state === 'regex') {
+        if (ch === '[') regexClass = true;
+        else if (ch === ']' && regexClass) regexClass = false;
+        else if (ch === '/' && !regexClass) {
+          state = 'code';
+          while (/[A-Za-z]/u.test(text[i + 1] || '')) {
+            i += 1;
+            blank(i);
+          }
+        }
+      } else if (ch === quote) {
+        state = 'code';
+        quote = '';
+      }
       continue;
     }
+
     if (ch === '/' && next === '/') {
-      out.push(' ', ' ');
+      blank(i);
+      blank(i + 1);
       i += 1;
       state = 'line-comment';
-      continue;
-    }
-    if (ch === '/' && next === '*') {
-      out.push(' ', ' ');
+    } else if (ch === '/' && next === '*') {
+      blank(i);
+      blank(i + 1);
       i += 1;
       state = 'block-comment';
-      continue;
-    }
-    if (ch === "'" || ch === '"' || ch === '`') {
-      out.push(' ');
+    } else if (ch === '/' && regexCanStart(i)) {
+      blank(i);
+      state = 'regex';
+      regexClass = false;
+      escaped = false;
+    } else if (ch === "'" || ch === '"' || ch === '`') {
+      blank(i);
+      state = ch === '`' ? 'template' : 'string';
       quote = ch;
       escaped = false;
-      state = 'literal';
-      continue;
     }
-    out.push(ch);
   }
   return out.join('');
 }
 
-function matchingCloseParen(content, openIndex) {
+function matchingParenEnd(source, openIndex) {
   let depth = 0;
-  for (let i = openIndex; i < content.length; i += 1) {
-    if (content[i] === '(') depth += 1;
-    else if (content[i] === ')' && --depth === 0) return i;
+  for (let i = openIndex; i < source.length; i += 1) {
+    if (source[i] === '(') depth += 1;
+    else if (source[i] === ')') {
+      depth -= 1;
+      if (depth === 0) return i;
+    }
   }
   return -1;
 }
 
-function isFunctionOrMethodDeclaration(content, callStart, openIndex) {
-  const prefix = content.slice(0, callStart).trimEnd();
-  if (/(?:^|[^A-Za-z0-9_$])(?:async\s+)?function\s*\*?\s*$/u.test(prefix)) return true;
+function isDeclarationCall(source, nameStart, closeIndex) {
+  const beforeName = source.slice(0, nameStart);
+  if (/\bfunction\s*\*?\s*$/u.test(beforeName)) return true;
 
-  const closeIndex = matchingCloseParen(content, openIndex);
-  if (closeIndex < 0 || !/^\s*\{/u.test(content.slice(closeIndex + 1))) return false;
-
-  const previous = prefix.at(-1) || '';
-  if (!/[{,;}:*]/u.test(previous)) {
-    const previousWord = /([A-Za-z_$][\w$]*)$/u.exec(prefix)?.[1] || '';
-    if (!/^(?:async|get|set|static)$/u.test(previousWord)) return false;
-  }
-  return true;
+  // A class/object method has the same `name(...)` prefix as a call, but its
+  // parameter list is followed by the method body.  Include the common typed
+  // return annotation so a TS-shaped fixture cannot bypass this guard.
+  const afterCall = source.slice(closeIndex + 1);
+  return /^\s*(?::\s*[^;{}=]*?)?\s*\{/u.test(afterCall);
 }
 
 /**
@@ -455,13 +512,14 @@ function isFunctionOrMethodDeclaration(content, callStart, openIndex) {
  */
 function codeTokenMatches(content, token) {
   const emptyCall = /^([A-Za-z_$][\w$]*(?:\.[A-Za-z_$][\w$]*)*)\(\)$/u.exec(token);
-  if (!emptyCall) return content.includes(token);
-  const executable = maskJavaScriptNonExecutable(content);
+  const executable = maskNonExecutableJavaScript(content);
+  if (!emptyCall) return executable.includes(token);
   const callRe = new RegExp(`(^|[^A-Za-z0-9_$])${escapedRegExp(emptyCall[1])}\\s*\\(`, 'gu');
   for (const match of executable.matchAll(callRe)) {
     const callStart = (match.index ?? 0) + match[1].length;
-    const openIndex = callStart + emptyCall[1].length + (executable.slice(callStart + emptyCall[1].length).match(/^\s*/u)?.[0].length || 0);
-    if (isFunctionOrMethodDeclaration(executable, callStart, openIndex)) continue;
+    const openIndex = (match.index ?? 0) + match[0].length - 1;
+    const closeIndex = matchingParenEnd(executable, openIndex);
+    if (closeIndex < 0 || isDeclarationCall(executable, callStart, closeIndex)) continue;
     return true;
   }
   return false;

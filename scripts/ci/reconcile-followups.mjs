@@ -65,7 +65,6 @@ import {
   isDailyBucketTitle,
   maskInlineCodeSpans,
   parseFollowupItems,
-  splitFollowupItems,
   suggestedActionText,
   updateFollowupItemState,
 } from './followup-resolution-match.mjs';
@@ -291,7 +290,7 @@ function latestUnclassifiableMarker(comments) {
 }
 
 export function isUnclassifiableAggregate(title = '', body = '') {
-  return isAggregateTitle(title, body) && splitFollowupItems(body).length === 0;
+  return isAggregateTitle(title, body) && parseFollowupItems(body).length === 0;
 }
 
 export function unclassifiableMarker(issue, comments, {

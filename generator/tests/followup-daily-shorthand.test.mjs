@@ -9,7 +9,11 @@ import {
   selectFirstOpenItem,
 } from '../../scripts/ci/followup-resolution-match.mjs';
 import { decideDailyMintGate } from '../../scripts/ci/gate-minted-followups.mjs';
-import { reconcileDailyItems } from '../../scripts/ci/reconcile-followups.mjs';
+import {
+  dailyBucketCloseGate,
+  hasStrongDailyAcceptanceEvidence,
+  reconcileDailyItems,
+} from '../../scripts/ci/reconcile-followups.mjs';
 
 const DAY = '2026-09-12';
 const TITLE = `follow-up(daily:${DAY}): 1 item — owner/repo`;
@@ -62,4 +66,14 @@ test('il reconciler usa l acceptance token strutturale del daily item', () => {
   assert.equal(result.changed, true);
   assert.equal(parseFollowupItems(result.body)[0].state, 'done');
   assert.deepEqual(result.changes[0].evidence, [{ file: 'scripts/example.mjs', tok: 'firstGuard()' }]);
+
+  const gate = dailyBucketCloseGate(result.body, {
+    fileExists: (path) => path === 'scripts/example.mjs',
+    readFile: () => 'const value = firstGuard(input);',
+  }, DAY, 'owner/repo', 1);
+  assert.equal(gate.blocks, false, 'un token Acceptance stabile è evidenza forte per l item');
+  assert.equal(
+    hasStrongDailyAcceptanceEvidence(parseFollowupItems(result.body), result.changes[0].evidence),
+    true,
+  );
 });
