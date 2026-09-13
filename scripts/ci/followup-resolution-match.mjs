@@ -78,10 +78,11 @@ export function isDailyBucketTitle(title = '') {
   return !!dailyBucketInfo(title);
 }
 
-// Aggregate grammar shared with the identical pre-flight and lessons copies.
-// This adapted module keeps its corpus-specific locator/acceptance behavior,
-// but exposes the same pure contract so a transported identical caller cannot
-// fail at module linking time.
+// Aggregate grammar is shared by the pre-flight gate, the lessons harvester,
+// and the adapted reconciler. Keep the vocabulary/count regexes and inline
+// Markdown masking in this pure module so those callers cannot drift. The
+// corpus-specific locator/acceptance behavior remains in this module while
+// identical callers consume the same pure contract.
 export const AGGREGATE_ITEM_COUNT_RE = /\b(\d+)\s+items?\s+(?:deferred|deferit[oi])\b/i;
 export const AGGREGATE_KEYWORD_RE = /\b(?:sweep|batch|bulk)\b/i;
 
