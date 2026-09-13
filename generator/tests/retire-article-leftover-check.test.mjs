@@ -36,6 +36,7 @@ import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
 import {
   mkdtempSync,
+  chmodSync,
   mkdirSync,
   readFileSync,
   rmSync,
@@ -59,9 +60,15 @@ import {
   surfaceArticleIdStatus,
   SURFACE_ARTICLE_ID_STATUS,
   assertRegularFileIfPresent,
+  assertWritableRegularFileIfPresent,
+  isRegularFile,
+  isWritableRegularFile,
   requireRegularFile,
+  requireWritableRegularFile,
+  requiredWritableSurfaceFilesFor,
   seoFilesFor,
   surfacePathStatus,
+  writableSurfacePathStatus,
   SURFACE_PATH_STATUS,
 } from '../../scripts/lib/article-surfaces.mjs';
 
@@ -242,6 +249,45 @@ test('una superficie obbligatoria mancante fallisce esplicitamente', () => {
   }
 });
 
+test('il preflight di scrittura distingue un file leggibile ma non scrivibile', () => {
+  const root = mkdtempSync(path.join(os.tmpdir(), 'article-writable-surface-'));
+  try {
+    const required = requiredSurfaceFilesFor('frontaliere', ROOT);
+    for (const rel of required) {
+      const abs = path.join(root, rel);
+      mkdirSync(path.dirname(abs), { recursive: true });
+      writeFileSync(abs, 'fixture\n', 'utf8');
+    }
+
+    const target = required[0];
+    const abs = path.join(root, target);
+    chmodSync(abs, 0o444);
+    try {
+      assert.equal(surfacePathStatus(root, target), SURFACE_PATH_STATUS.REGULAR);
+      assert.equal(writableSurfacePathStatus(root, target), SURFACE_PATH_STATUS.UNWRITABLE);
+      assert.equal(isRegularFile(root, target), true);
+      assert.equal(isWritableRegularFile(root, target), false);
+      assert.equal(assertWritableRegularFileIfPresent(root, 'missing.ts', 'target'), false);
+      assert.throws(
+        () => assertWritableRegularFileIfPresent(root, target, 'target'),
+        /non scrivibile/,
+      );
+      assert.throws(
+        () => requireWritableRegularFile(root, target, 'target'),
+        /non scrivibile/,
+      );
+      assert.throws(
+        () => requiredWritableSurfaceFilesFor('frontaliere', root),
+        /superfici obbligatorie non scrivibili.*content\/blog-articles-data\.ts/,
+      );
+    } finally {
+      chmodSync(abs, 0o644);
+    }
+  } finally {
+    rmSync(root, { recursive: true, force: true });
+  }
+});
+
 test('SEO distingue assenza da directory, FIFO e path illeggibile', () => {
   const fixtures = [
     {
@@ -371,12 +417,24 @@ test('la predicate dei target delete distingue assenza, inode non regolare e fil
 test('retire-article fa il preflight delle superfici obbligatorie prima di ogni write', () => {
   const src = readFileSync(path.join(ROOT, 'scripts/retire-article.mjs'), 'utf8');
   const sectionAt = src.indexOf('const section = findSection(id);');
-  const preflightAt = src.indexOf('requiredSurfaceFilesFor(section);');
+  const preflightAt = src.indexOf('requiredWritableSurfaceFilesFor(section);');
   const firstWriteAt = src.indexOf('for (const [file, text] of writes) write(file, text);');
   const dryRunAt = src.indexOf('if (dryRun)');
   assert.ok(sectionAt >= 0 && preflightAt > sectionAt, 'il preflight deve seguire la risoluzione della sezione');
   assert.ok(preflightAt < firstWriteAt, 'le superfici mancanti devono fallire prima delle scritture');
   assert.ok(preflightAt < dryRunAt, 'anche --dry-run deve validare le superfici obbligatorie');
+});
+
+test('retire-article valida i target opzionali prima di accodare i write', () => {
+  const src = codeOnly(readFileSync(path.join(ROOT, 'scripts/retire-article.mjs'), 'utf8'));
+  const firstWriteAt = src.indexOf('for (const [file, text] of writes) write(file, text);');
+  const validateAt = src.indexOf('validateWriteTargets(writes);');
+  assert.match(src, /function queueWriteTarget\([^)]*\)[\s\S]*?requireWritableRegularFile\(/);
+  assert.match(src, /assertRegularFileIfPresent\(\s*ROOT,\s*cfg\.idUnionFile/);
+  assert.match(src, /assertRegularFileIfPresent\(\s*ROOT,\s*cfg\.sourceLedger/);
+  assert.match(src, /assertRegularFileIfPresent\(\s*ROOT,\s*IMAGES_LEDGER/);
+  assert.match(src, /assertRegularFileIfPresent\(\s*ROOT,\s*IMAGE_CATALOG/);
+  assert.ok(validateAt >= 0 && validateAt < firstWriteAt, 'tutti i write target devono essere riverificati prima del primo write');
 });
 
 test('retire-article valida tutti i target delete prima del primo write', () => {

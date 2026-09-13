@@ -45,7 +45,7 @@
  * scrivere le voci edge dall'altro lato.
  */
 
-import { readFileSync, writeFileSync, existsSync, unlinkSync } from 'node:fs';
+import { readFileSync, writeFileSync, unlinkSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -53,9 +53,10 @@ import { ledgerArticleId } from '../generator/scripts/lib/source-url-ledger.mjs'
 import { writeJsonAtomic } from '../generator/scripts/lib/atomic-write-json.mjs';
 import {
   SECTIONS, LOCALES, IMAGES_LEDGER, IMAGE_CATALOG, RETIRED_LEDGER,
-  seoFilesFor, leftoverSurfacesFor, requiredSurfaceFilesFor,
+  seoFilesFor, leftoverSurfacesFor, requiredWritableSurfaceFilesFor,
   surfaceArticleIdStatus, SURFACE_ARTICLE_ID_STATUS,
-  assertRegularFileIfPresent, requireRegularFile,
+  assertRegularFileIfPresent,
+  requireRegularFile, requireWritableRegularFile,
 } from './lib/article-surfaces.mjs';
 // La localizzazione dei letterali TS (span dell'array piatto degli id, e la
 // parentesi che chiude davvero quella di apertura) vive in un modulo condiviso:
@@ -69,6 +70,19 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const rel = (p) => path.join(ROOT, p);
 const read = (p) => readFileSync(rel(p), 'utf-8');
 const write = (p, s) => writeFileSync(rel(p), s, 'utf-8');
+
+/** Accoda solo un target che il retirement può riscrivere davvero. */
+function queueWriteTarget(writes, file, text, what) {
+  requireWritableRegularFile(ROOT, file, `target da scrivere (${what})`);
+  writes.push([file, text]);
+}
+
+/** Riesegue il controllo sui target di write subito prima del primo write. */
+function validateWriteTargets(writes) {
+  for (const [file] of writes) {
+    requireWritableRegularFile(ROOT, file, 'target da scrivere');
+  }
+}
 
 /** Aggiunge un target opzionale solo se è davvero un file cancellabile. */
 function queueDeleteTarget(deletes, planned, file, what) {
@@ -256,7 +270,7 @@ function main() {
   // planning can become a partial write. Keep this preflight before the
   // dry-run branch too: --dry-run must validate the same required inputs as a
   // real retirement, not merely avoid persisting an already-invalid plan.
-  requiredSurfaceFilesFor(section);
+  requiredWritableSurfaceFilesFor(section);
   const winnerSection = findSection(winner); // esiste? altrimenti throw: mai ritirare verso il nulla
   console.log(`ritiro '${id}' (${section}) → vincitore '${winner}' (${winnerSection})${dryRun ? '  [DRY RUN]' : ''}`);
 
@@ -308,14 +322,18 @@ function main() {
       planned.push({ file: cfg.slugDataFile, what: `elenco flat ${cfg.idListVar}` });
     }
   }
-  writes.push([cfg.slugDataFile, slugDataSrc]);
+  queueWriteTarget(writes, cfg.slugDataFile, slugDataSrc, 'mappa slug');
 
   // 1c. union di literal degli id (`BlogArticleId`), che vive in un file
   //     separato dalla mappa slug e che solo questa sezione mantiene.
-  if (cfg.idUnionFile && existsSync(rel(cfg.idUnionFile))) {
+  if (cfg.idUnionFile && assertRegularFileIfPresent(
+    ROOT,
+    cfg.idUnionFile,
+    'target da scrivere (union BlogArticleId)',
+  )) {
     const union = removeFromIdUnion(read(cfg.idUnionFile), id);
     if (union.changed) {
-      writes.push([cfg.idUnionFile, union.src]);
+      queueWriteTarget(writes, cfg.idUnionFile, union.src, 'union BlogArticleId');
       planned.push({ file: cfg.idUnionFile, what: 'membro della union BlogArticleId' });
     }
   }
@@ -323,19 +341,25 @@ function main() {
   // 2. registro di sezione
   const reg = removeRegistryEntry(cfg.registryFile, id);
   if (!reg.changed) throw new Error(`${cfg.registryFile}: nessun blocco per '${id}'`);
-  writes.push([cfg.registryFile, reg.src]);
+  queueWriteTarget(writes, cfg.registryFile, reg.src, 'registro di sezione');
   planned.push({ file: cfg.registryFile, what: 'blocco di registro' });
 
   // 3. meta per locale
   for (const metaFile of cfg.metaFiles) {
     const r = removeMetaKeys(metaFile, id);
-    if (r.changed) { writes.push([metaFile, r.src]); planned.push({ file: metaFile, what: 'chiavi i18n' }); }
+    if (r.changed) {
+      queueWriteTarget(writes, metaFile, r.src, 'chiavi i18n');
+      planned.push({ file: metaFile, what: 'chiavi i18n' });
+    }
   }
 
   // 4. SEO
   for (const seoFile of seoFilesFor(section)) {
     const r = removeSeoEntry(seoFile, id);
-    if (r.changed) { writes.push([seoFile, r.src]); planned.push({ file: seoFile, what: 'blocco SEO' }); }
+    if (r.changed) {
+      queueWriteTarget(writes, seoFile, r.src, 'blocco SEO');
+      planned.push({ file: seoFile, what: 'blocco SEO' });
+    }
   }
 
   // 5. corpi per locale
@@ -349,22 +373,42 @@ function main() {
   queueDeleteTarget(deletes, planned, sidecar, 'sidecar');
 
   // 7. ledger URL→id della sezione
-  const led = removeJsonByValue(cfg.sourceLedger, id);
+  const sourceLedgerPresent = assertRegularFileIfPresent(
+    ROOT,
+    cfg.sourceLedger,
+    'target da scrivere (ledger URL)',
+  );
+  const led = sourceLedgerPresent
+    ? removeJsonByValue(cfg.sourceLedger, id)
+    : { changed: false, hits: [], text: null };
   let retiredSourceUrls = [];
   if (led.changed) {
     retiredSourceUrls = led.hits;
-    writes.push([cfg.sourceLedger, led.text]);
+    queueWriteTarget(writes, cfg.sourceLedger, led.text, 'ledger URL');
     planned.push({ file: cfg.sourceLedger, what: `${led.hits.length} URL di fonte` });
   }
 
   // 8. provenienza immagine
-  const img = removeJsonByKey(IMAGES_LEDGER, id);
-  if (img.changed) { writes.push([IMAGES_LEDGER, img.text]); planned.push({ file: IMAGES_LEDGER, what: 'provenienza immagine' }); }
+  const imageLedgerPresent = assertRegularFileIfPresent(
+    ROOT,
+    IMAGES_LEDGER,
+    'target da scrivere (ledger immagini)',
+  );
+  const img = imageLedgerPresent
+    ? removeJsonByKey(IMAGES_LEDGER, id)
+    : { changed: false, text: null };
+  if (img.changed) {
+    queueWriteTarget(writes, IMAGES_LEDGER, img.text, 'provenienza immagine');
+    planned.push({ file: IMAGES_LEDGER, what: 'provenienza immagine' });
+  }
 
   // 9. catalogo immagini del giornalista
-  if (existsSync(rel(IMAGE_CATALOG))) {
+  if (assertRegularFileIfPresent(ROOT, IMAGE_CATALOG, 'target da scrivere (catalogo immagini)')) {
     const cat = removeFromImageCatalog(IMAGE_CATALOG, id);
-    if (cat.changed) { writes.push([IMAGE_CATALOG, cat.text]); planned.push({ file: IMAGE_CATALOG, what: 'voce di catalogo' }); }
+    if (cat.changed) {
+      queueWriteTarget(writes, IMAGE_CATALOG, cat.text, 'catalogo immagini');
+      planned.push({ file: IMAGE_CATALOG, what: 'voce di catalogo' });
+    }
   }
 
   // 10. asset immagine
@@ -372,7 +416,35 @@ function main() {
     queueDeleteTarget(deletes, planned, asset, 'asset');
   }
 
+  // Il ledger dei ritirati è scritto atomicamente più avanti, ma va letto e
+  // validato ora: una directory, una symlink o un JSON rotto non devono poter
+  // interrompere il retirement dopo le scritture delle superfici principali.
+  const retiredLedgerPresent = assertRegularFileIfPresent(
+    ROOT,
+    RETIRED_LEDGER,
+    'target da scrivere (ledger ritirati)',
+  );
+  const ledgerPath = rel(RETIRED_LEDGER);
+  const ledger = retiredLedgerPresent
+    ? JSON.parse(readFileSync(ledgerPath, 'utf-8'))
+    : { _doc: '', retired: [] };
+  ledger.retired = ledger.retired.filter((e) => e.id !== id);
+  ledger.retired.push({
+    id,
+    section,
+    winnerId: winner,
+    winnerSection,
+    retiredOn: new Date().toISOString().slice(0, 10),
+    duplicateOf: retiredSourceUrls,
+    slugs: slugRow.slugs,
+  });
+  ledger.retired.sort((a, b) => a.id.localeCompare(b.id));
+
   for (const p of planned) console.log(`   - ${p.file}  (${p.what})`);
+
+  // Nessun target di write può cambiare tipo o permessi tra la pianificazione
+  // e il primo write; come per i delete, la verifica è fail-closed.
+  validateWriteTargets(writes);
 
   // Every delete target has been checked while planning; check again after
   // planning so a directory/FIFO or a vanished file cannot slip in between
@@ -389,19 +461,6 @@ function main() {
 
   // 11. ledger dei ritirati — gli slug localizzati non sono più derivabili da
   //     nessun registro dopo il passo 1, e servono all'altro repo per il 301.
-  const ledgerPath = rel(RETIRED_LEDGER);
-  const ledger = existsSync(ledgerPath) ? JSON.parse(readFileSync(ledgerPath, 'utf-8')) : { _doc: '', retired: [] };
-  ledger.retired = ledger.retired.filter((e) => e.id !== id);
-  ledger.retired.push({
-    id,
-    section,
-    winnerId: winner,
-    winnerSection,
-    retiredOn: new Date().toISOString().slice(0, 10),
-    duplicateOf: retiredSourceUrls,
-    slugs: slugRow.slugs,
-  });
-  ledger.retired.sort((a, b) => a.id.localeCompare(b.id));
   writeJsonAtomic(ledgerPath, ledger);
 
   // 12. verifica finale: l'id non deve più comparire da nessuna parte.

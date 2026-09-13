@@ -40,6 +40,7 @@ export const SURFACE_PATH_STATUS = Object.freeze({
   REGULAR: 'regular',
   NON_REGULAR: 'non-regular',
   UNREADABLE: 'unreadable',
+  UNWRITABLE: 'unwritable',
 });
 
 function statusForStatError(error) {
@@ -81,11 +82,41 @@ export function isRegularFile(root, rel) {
   return surfacePathStatus(root, rel) === SURFACE_PATH_STATUS.REGULAR;
 }
 
+/**
+ * Preflight separato per chi riscrive un file: i gate di contenuto devono solo
+ * poterlo leggere, mentre il retirement deve sapere che il writeFileSync
+ * potrà aprirlo prima di modificare qualunque altra superficie.
+ */
+export function writableSurfacePathStatus(root, rel) {
+  const status = surfacePathStatus(root, rel);
+  if (status !== SURFACE_PATH_STATUS.REGULAR) return status;
+  try {
+    accessSync(path.join(root, rel), fsConstants.W_OK);
+  } catch {
+    return SURFACE_PATH_STATUS.UNWRITABLE;
+  }
+  return SURFACE_PATH_STATUS.REGULAR;
+}
+
+export function isWritableRegularFile(root, rel) {
+  return writableSurfacePathStatus(root, rel) === SURFACE_PATH_STATUS.REGULAR;
+}
+
 function invalidRegularFileError(rel, status, label) {
   return new Error(
     `${label}: '${rel}' non è un file regolare leggibile (${status}); ` +
     'assenza e path non utilizzabile sono stati distinti fail-closed.',
   );
+}
+
+function invalidWritableRegularFileError(rel, status, label) {
+  if (status === SURFACE_PATH_STATUS.UNWRITABLE) {
+    return new Error(
+      `${label}: '${rel}' è un file regolare leggibile ma non scrivibile; ` +
+      'il retirement si ferma prima del primo write.',
+    );
+  }
+  return invalidRegularFileError(rel, status, label);
 }
 
 function invalidDirectoryError(rel, status, label) {
@@ -110,6 +141,25 @@ export function assertRegularFileIfPresent(root, rel, label = 'superficie') {
   if (status === SURFACE_PATH_STATUS.ABSENT) return false;
   if (status !== SURFACE_PATH_STATUS.REGULAR) {
     throw invalidRegularFileError(rel, status, label);
+  }
+  return true;
+}
+
+/** Richiede un file regolare che il retirement possa anche riscrivere. */
+export function requireWritableRegularFile(root, rel, label = 'file') {
+  const status = writableSurfacePathStatus(root, rel);
+  if (status !== SURFACE_PATH_STATUS.REGULAR) {
+    throw invalidWritableRegularFileError(rel, status, label);
+  }
+  return true;
+}
+
+/** Accetta l'assenza opzionale, ma non un target presente non riscrivibile. */
+export function assertWritableRegularFileIfPresent(root, rel, label = 'superficie') {
+  const status = writableSurfacePathStatus(root, rel);
+  if (status === SURFACE_PATH_STATUS.ABSENT) return false;
+  if (status !== SURFACE_PATH_STATUS.REGULAR) {
+    throw invalidWritableRegularFileError(rel, status, label);
   }
   return true;
 }
@@ -266,6 +316,24 @@ export function requiredSurfaceFilesFor(section, root = ROOT) {
   if (invalid.length > 0) {
     throw new Error(
       `superfici obbligatorie mancanti o non utilizzabili per la sezione '${section}': ` +
+      invalid.map(({ file, status }) => `${file} (${status})`).join(', '),
+    );
+  }
+  return required;
+}
+
+/**
+ * Preflight per il retirement: la tupla canonica deve essere leggibile e
+ * riscrivibile. `requiredSurfaceFilesFor` resta read-only per i content gate.
+ */
+export function requiredWritableSurfaceFilesFor(section, root = ROOT) {
+  const required = requiredSurfaceFilesFor(section, root);
+  const invalid = required
+    .map((file) => ({ file, status: writableSurfacePathStatus(root, file) }))
+    .filter(({ status }) => status !== SURFACE_PATH_STATUS.REGULAR);
+  if (invalid.length > 0) {
+    throw new Error(
+      `superfici obbligatorie non scrivibili per la sezione '${section}': ` +
       invalid.map(({ file, status }) => `${file} (${status})`).join(', '),
     );
   }
