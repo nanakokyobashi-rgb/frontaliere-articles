@@ -12,6 +12,13 @@ export const DEFAULT_PLATE_AUCTION_API_URL =
 
 const LOCALES = ['it', 'en', 'de', 'fr'];
 const FINAL_STATUSES = new Set(['closed', 'sold', 'unsold']);
+const WEEK_MS = 7 * 24 * 60 * 60 * 1000;
+const EVERGREEN_SLUGS = Object.freeze({
+  it: 'aste-targhe-svizzera-guida',
+  en: 'swiss-plate-auctions-guide',
+  de: 'leitfaden-schweizer-kontrollschildauktionen',
+  fr: 'guide-encheres-plaques-suisses',
+});
 
 const COPY = {
   it: {
@@ -96,12 +103,25 @@ function validDate(value) {
   return typeof value === 'string' && Number.isFinite(Date.parse(value)) ? value : undefined;
 }
 
+function nonEmptyString(value) {
+  return typeof value === 'string' && value.trim() ? value.trim() : undefined;
+}
+
+function rowCanton(row) {
+  return nonEmptyString(row.canton) ?? nonEmptyString(row.platePrefix);
+}
+
 function publicRows(value) {
   if (!Array.isArray(value)) return [];
-  return value.filter((row) => isRecord(row) && typeof row.id === 'string' && row.id && typeof row.normalizedPlate === 'string' && row.normalizedPlate)
+  return value.filter((row) => isRecord(row)
+    && typeof row.id === 'string'
+    && row.id
+    && typeof row.normalizedPlate === 'string'
+    && row.normalizedPlate
+    && rowCanton(row))
     .map((row) => ({
       id: row.id,
-      canton: typeof row.canton === 'string' ? row.canton : row.platePrefix,
+      canton: rowCanton(row),
       plate: row.normalizedPlate,
       listingType: typeof row.listingType === 'string' ? row.listingType : 'auction',
       status: typeof row.auctionStatus === 'string' ? row.auctionStatus : 'active',
@@ -136,6 +156,16 @@ function finalRows(rows) {
   return [...latest.values()];
 }
 
+function recentFinalRows(rows, referenceAt) {
+  const end = Date.parse(referenceAt);
+  if (!Number.isFinite(end)) return [];
+  const start = end - WEEK_MS;
+  return finalRows(rows).filter((row) => {
+    const verifiedAt = Date.parse(row.finalPriceVerifiedAt || '');
+    return Number.isFinite(verifiedAt) && verifiedAt >= start && verifiedAt <= end;
+  });
+}
+
 function displayDate(value, locale) {
   if (!value) return '—';
   return new Intl.DateTimeFormat(locale === 'it' ? 'it-CH' : locale === 'de' ? 'de-CH' : locale === 'fr' ? 'fr-CH' : 'en-CH', { dateStyle: 'medium', timeZone: 'Europe/Zurich' }).format(new Date(value));
@@ -149,7 +179,7 @@ function formatChf(value, locale) {
 function buildEvergreen(locale) {
   const copy = COPY[locale];
   return {
-    slug: 'aste-targhe-svizzera-guida',
+    slug: EVERGREEN_SLUGS[locale],
     title: copy.evergreenTitle,
     excerpt: copy.evergreenExcerpt,
     paragraphs: copy.evergreenParagraphs,
@@ -161,7 +191,7 @@ function buildEvergreen(locale) {
 function buildWeekly(locale, status, currentRows, finalSourceRows, generatedAt) {
   const copy = COPY[locale];
   const current = currentRows.filter((row) => (row.status === 'active' || row.status === 'upcoming') && row.confidence !== 'conflicting');
-  const finals = finalRows(finalSourceRows);
+  const finals = recentFinalRows(finalSourceRows, generatedAt);
   const cantons = new Set(current.map((row) => row.canton).filter(Boolean)).size;
   const highlights = [...current]
     .sort((left, right) => (Date.parse(left.endsAt || '') || Number.MAX_SAFE_INTEGER) - (Date.parse(right.endsAt || '') || Number.MAX_SAFE_INTEGER))

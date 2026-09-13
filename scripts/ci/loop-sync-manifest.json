@@ -3875,7 +3875,7 @@
       "reason": "Companion editoriale per il catalogo aste: legge il feed pubblico del sito solo via HTTP e pubblica guida e aggiornamento nel corpus; non esiste un gemello sul sito e non deve, per costruzione.",
       "baseline": {
         "site": null,
-        "corpus": "047892df7f165a67",
+        "corpus": "662b302a7622afca",
         "alignedAt": "2026-09-13"
       }
     }

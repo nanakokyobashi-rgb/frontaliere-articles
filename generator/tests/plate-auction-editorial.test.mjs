@@ -60,6 +60,15 @@ test('builds four localized editorial blocks without bidder or winner data', () 
   assert.equal(editorial.status, 'ready');
   assert.deepEqual(Object.keys(editorial.evergreen).sort(), ['de', 'en', 'fr', 'it']);
   assert.deepEqual(Object.keys(editorial.weekly).sort(), ['de', 'en', 'fr', 'it']);
+  assert.deepEqual(
+    Object.fromEntries(Object.entries(editorial.evergreen).map(([locale, block]) => [locale, block.slug])),
+    {
+      it: 'aste-targhe-svizzera-guida',
+      en: 'swiss-plate-auctions-guide',
+      de: 'leitfaden-schweizer-kontrollschildauktionen',
+      fr: 'guide-encheres-plaques-suisses',
+    },
+  );
   assert.equal(editorial.source.finalRows, 1);
   assert.equal(editorial.weekly.it.highlights.length, 1);
   assert.equal(editorial.weekly.it.highlights[0].plate, 'GR 7');
@@ -104,6 +113,66 @@ test('does not mark a raw conflicting-only snapshot as ready', async () => {
   assert.equal(editorial.weekly.it.status, 'insufficient-data');
   const input = await fetchPlateAuctionEditorialInput({ fetcher: async () => ({ ok: true, json: async () => snapshot }) });
   assert.equal(input.status, 'insufficient-data');
+});
+
+test('drops rows whose canton fallback is not a non-empty string', () => {
+  const editorial = buildPlateAuctionEditorial({
+    snapshot: {
+      schema: 1,
+      auctions: [
+        {
+          id: 'invalid-canton',
+          canton: { name: 'not public text' },
+          platePrefix: 44,
+          normalizedPlate: 'ZH 44',
+          auctionStatus: 'active',
+          dataConfidence: 'verified',
+        },
+        {
+          id: 'valid-canton',
+          platePrefix: 'ZH',
+          normalizedPlate: 'ZH 7',
+          auctionStatus: 'active',
+          dataConfidence: 'verified',
+        },
+      ],
+    },
+    upstreamStatus: 'ready',
+    generatedAt: '2026-09-13T12:00:00.000Z',
+  });
+  assert.equal(editorial.source.currentRows, 1);
+  assert.deepEqual(editorial.weekly.it.highlights.map((row) => row.plate), ['ZH 7']);
+  assert.equal(typeof editorial.weekly.it.highlights[0].canton, 'string');
+});
+
+test('limits weekly final results to the seven-day observation window', () => {
+  const editorial = buildPlateAuctionEditorial({
+    snapshot: {
+      schema: 1,
+      auctions: [{
+        id: 'recent-final',
+        canton: 'Grigioni',
+        normalizedPlate: 'GR 7',
+        auctionStatus: 'closed',
+        finalPriceChf: 700,
+        finalPriceVerifiedAt: '2026-09-12T10:00:00.000Z',
+        dataConfidence: 'verified',
+      }],
+      history: [{
+        id: 'old-final',
+        canton: 'Zurigo',
+        normalizedPlate: 'ZH 1',
+        auctionStatus: 'sold',
+        finalPriceChf: 1000,
+        finalPriceVerifiedAt: '2026-08-01T10:00:00.000Z',
+        dataConfidence: 'verified',
+      }],
+    },
+    upstreamStatus: 'ready',
+    generatedAt: '2026-09-13T12:00:00.000Z',
+  });
+  assert.equal(editorial.source.finalRows, 2);
+  assert.match(editorial.weekly.it.paragraphs[1], /1 risultati/);
 });
 
 test('fetches only the HTTP public snapshot contract and rejects malformed responses', async () => {
