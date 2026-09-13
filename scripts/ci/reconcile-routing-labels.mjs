@@ -145,7 +145,11 @@ const repoArgs = () => {
 };
 
 function gh(args, { json = true } = {}) {
-  const out = execFileSync('gh', args, { encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] });
+  const out = execFileSync('gh', args, {
+    encoding: 'utf8',
+    maxBuffer: 8 * 1024 * 1024,
+    stdio: ['ignore', 'pipe', 'pipe'],
+  });
   return json ? JSON.parse(out || '[]') : out;
 }
 
