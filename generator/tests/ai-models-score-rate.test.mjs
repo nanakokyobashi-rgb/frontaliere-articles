@@ -32,7 +32,7 @@ import {
 const BROKEN = AI_MODELS.CLAUDE_CLI_HAIKU;
 // Un secondo id di catena con provider key finta disponibile — stesso
 // espediente di ai-models-prefer-per-call.test.mjs.
-const RELIABLE = 'nvidia/meta/llama-3.1-8b-instruct';
+const RELIABLE = 'nvidia/nvidia/nemotron-3-super-120b-a12b';
 
 const ENV_KEYS = ['NVIDIA_API_KEY', 'CLAUDE_CODE_OAUTH_TOKEN', 'ENABLE_HAIKU_ARTICLE_FALLBACK'];
 let _envBackup = {};

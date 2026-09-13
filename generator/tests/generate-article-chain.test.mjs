@@ -303,6 +303,22 @@ test('`generated`, l\'output che diceva il falso, non esiste piu\'', () => {
   assert.ok(!/echo "generated=/.test(ACTIVE));
 });
 
+test('lo step emette un esito distinto per articolo, no-op dichiarato e timeout', () => {
+  const generated = runGenerateStep({ section: 'frontaliere', plan: ['0 1'] });
+  assert.match(generated.stdout, /GENERATION_OUTCOME kind=generated reason=article section=frontaliere/);
+
+  const noArticle = runGenerateStep({ section: 'svizzera', plan: ['4 0', '4 0'] });
+  assert.match(noArticle.stdout, /GENERATION_OUTCOME kind=no-article reason=declared section=svizzera/);
+
+  const timeout = runGenerateStep({
+    section: 'frontaliere',
+    plan: ['124 0'],
+    budget: 600,
+    hardKill: 5,
+  });
+  assert.match(timeout.stdout, /GENERATION_OUTCOME kind=timeout reason=hard-kill section=frontaliere/);
+});
+
 test('il summary non puo\' dire «generato» su un dry run', () => {
   const summary = extractRun('Summary');
   assert.match(summary, /DRY.*=.*"true"[\s\S]{0,200}dry run/);
@@ -365,6 +381,7 @@ test('un errore dopo una scrittura parziale resta vincolante per il commit', () 
   assert.equal(r.outputs.partial_failure, 'true');
   assert.equal(r.invocations.length, 1, 'un output parziale blocca il fallback, che erediterebbe gli stessi file');
   assert.equal(r.status, 1, 'la run deve restare rossa: il commit non puo\' partire');
+  assert.match(r.stdout, /GENERATION_OUTCOME kind=error reason=partial-failure section=frontaliere/);
   assert.match(r.stdout, /output parziale non pubblicabile/);
 });
 
