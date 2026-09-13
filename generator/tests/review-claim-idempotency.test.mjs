@@ -17,6 +17,8 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..')
 const HEAD = 'a'.repeat(40);
 const NEXT_HEAD = 'b'.repeat(40);
 const FINGERPRINT = 'c'.repeat(64);
+const BODY_REVISION = `body:${'d'.repeat(64)}`;
+const OTHER_BODY_REVISION = `body:${'e'.repeat(64)}`;
 
 function claim(overrides = {}) {
   const context = {
@@ -68,6 +70,48 @@ test('keys the exact PR + HEAD + event/verdict while coalescing one contribution
   assert.notEqual(otherHead, first);
   assert.notEqual(otherContribution, first);
   assert.equal(reviewClaimKey({ ...base, contributionFingerprint: '' }), '');
+});
+
+test('treats a corrected PR body as a new review revision without duplicating reruns', () => {
+  const base = {
+    prNumber: '8364',
+    headSha: HEAD,
+    eventKey: 'run:42',
+    contributionFingerprint: FINGERPRINT,
+  };
+  const first = reviewClaimDedupeKey({ ...base, reviewRevision: BODY_REVISION });
+  const retry = reviewClaimDedupeKey({ ...base, reviewRevision: BODY_REVISION });
+  const corrected = reviewClaimDedupeKey({ ...base, reviewRevision: OTHER_BODY_REVISION });
+
+  assert.equal(first, retry);
+  assert.notEqual(first, corrected);
+  assert.match(first, /revision:body:[a-f0-9]{64}$/);
+  assert.equal(reviewClaimDedupeKey(base), reviewClaimDedupeKey({ ...base, reviewRevision: '' }));
+});
+
+test('a terminal claim for the old body does not block the corrected body revision', () => {
+  const oldContext = {
+    prNumber: '8364',
+    headSha: HEAD,
+    eventKey: 'run:42',
+    contributionFingerprint: FINGERPRINT,
+    reviewRevision: BODY_REVISION,
+  };
+  const newContext = { ...oldContext, eventKey: 'run:43', reviewRevision: OTHER_BODY_REVISION };
+  assert.deepEqual(
+    reviewClaimDecision({
+      key: reviewClaimKey(newContext),
+      dedupeKey: reviewClaimDedupeKey(newContext),
+      claims: [{
+        ...claim({ state: 'failed-terminal' }),
+        key: reviewClaimKey(oldContext),
+        dedupeKey: reviewClaimDedupeKey(oldContext),
+        reviewRevision: BODY_REVISION,
+      }],
+      nowSec: 200,
+    }),
+    { allowed: true, exists: false, reason: 'same-pr-head-claim-retryable' },
+  );
 });
 
 test('rejects forged or malformed persisted markers', () => {
@@ -166,6 +210,10 @@ test('tests.yml claims before review work and finalizes without gating the requi
   assert.match(workflow, /CLAIM_ACTION: finalize/);
   assert.match(workflow, /CLAIM_KIND: review/);
   assert.match(workflow, /CONTRIBUTION_FINGERPRINT:/);
+  assert.match(workflow, /types: \[opened, synchronize, reopened, ready_for_review, edited\]/);
+  assert.match(workflow, /BODY_EDITED:/);
+  assert.match(workflow, /review_revision=body:/);
+  assert.match(workflow, /REVIEW_REVISION:/);
   assert.match(workflow, /steps\.review_claim\.outputs\.claim_allowed == 'true'/);
 
   const gateAt = workflow.indexOf('id: review_gate');

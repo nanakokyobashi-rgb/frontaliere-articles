@@ -31,8 +31,12 @@ async function recover(bodyConclusion, status = 'completed') {
   return reruns;
 }
 
-test('metadata edits do not start the code pipeline; recovery uses only trusted API calls', () => {
-  assert.doesNotMatch(tests.match(/types: \[[^\]]+\]/)[0], /edited|labeled/);
+test('body edits re-enter the code pipeline; recovery uses only trusted API calls', () => {
+  assert.match(tests.match(/types: \[[^\]]+\]/)[0], /edited/);
+  assert.match(tests, /BODY_EDITED:/);
+  assert.match(tests, /REVIEW_REVISION:/);
+  assert.match(tests, /Body della PR cambiato → review completa/);
+  assert.ok(tests.indexOf('Body della PR cambiato → review completa') < tests.indexOf('if [ -z "$changed" ]'));
   assert.match(recovery, /pull_request_target:\n    types: \[edited\]/);
   assert.doesNotMatch(recovery, /actions\/checkout|createCheckRun/);
 });

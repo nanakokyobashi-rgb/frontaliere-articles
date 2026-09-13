@@ -68,12 +68,12 @@ run-name: "Code checks and review · ${{ github.event.pull_request.number && for
 # (`.github/workflows/content-gates-main.yml`): li' gira il sottoinsieme dei
 # gate che leggono `content/**`, con gli offender in una issue.
 on:
-  # Body validation stays inside the code check; metadata edits do not rerun it.
-  # `ready_for_review` idem — finche' la PR e' draft la review non gira, e senza
-  # questo trigger una draft promossa non avrebbe piu' nessun evento che la
-  # faccia partire (`synchronize` fira sui push, non sul cambio di stato).
+  # Body edits must re-enter the code check: a corrected description is a new
+  # review input even when the code HEAD is unchanged. Title/other edit
+  # metadata may also produce a cheap rerun, but the guard below only re-arms
+  # review for an actual body edit.
   pull_request:
-    types: [opened, synchronize, reopened, ready_for_review]
+    types: [opened, synchronize, reopened, ready_for_review, edited]
   push:
     branches: [main]
   workflow_dispatch:
@@ -273,14 +273,40 @@ jobs:
           } >> "$GITHUB_OUTPUT"
           echo "Risolto PR #$PRN sulla head $HEAD_SHA."
 
+      # The body is an input to the reviewer, not executable content. Its
+      # trusted API hash gives the durable claim ledger a new revision when a
+      # body correction arrives on the same code HEAD.
+      - name: Resolve review input revision (zero-Claude)
+        id: review_input
+        if: steps.body_contract.outcome != 'failure' && steps.resolve.outputs.should_review == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          PR_NUMBER: ${{ steps.resolve.outputs.pr_number }}
+          BODY_FILE: ${{ runner.temp }}/review-body.txt
+        run: |
+          set -euo pipefail
+          if ! gh api "repos/$GITHUB_REPOSITORY/pulls/$PR_NUMBER" --jq '.body // ""' > "$BODY_FILE"; then
+            echo "::error::PR body illeggibile → review input revision fail-closed."
+            exit 1
+          fi
+          body_sha=$(sha256sum "$BODY_FILE" | awk '{print $1}')
+          if ! printf '%s' "$body_sha" | grep -qE '^[a-f0-9]{64}$'; then
+            echo "::error::Hash del review body non verificabile → review input revision fail-closed."
+            exit 1
+          fi
+          echo "review_revision=body:$body_sha" >> "$GITHUB_OUTPUT"
+          echo "Review input revision: body:$body_sha"
+
       # Re-review guard: una review terminale sulla STESSA HEAD e' gia' il
       # giudizio di questo contributo, anche se e' negativa o non contiene
-      # `## LGTM`. Senza questo controllo ogni rerun/retry dello stesso rosso
-      # poteva invocare Claude di nuovo. Su una HEAD nuova si conserva invece
-      # il percorso incrementale: si guarda il delta dal contributo della
-      # review piu' recente e si fa carry-forward solo quando il codice PR e'
-      # invariato. Una risposta API illeggibile è un errore: senza prova del
-      # ledger non si può spendere un altro turno Claude in sicurezza.
+      # `## LGTM`, salvo un body edit che introduce una nuova review revision.
+      # Senza questo controllo ogni rerun/retry dello stesso rosso poteva
+      # invocare Claude di nuovo. Su una HEAD nuova si conserva invece il
+      # percorso incrementale: si guarda il delta dal contributo della review
+      # piu' recente e si fa carry-forward solo quando il codice PR e' invariato.
+      # Una risposta API illeggibile è un errore: senza prova del ledger non si
+      # può spendere un altro turno Claude in sicurezza.
       - name: Re-review guard (skip Claude when no code changed since last LGTM)
         id: guard
         if: steps.body_contract.outcome != 'failure' && steps.resolve.outputs.should_review == 'true'
@@ -290,6 +316,7 @@ jobs:
           PR_NUMBER: ${{ steps.resolve.outputs.pr_number }}
           HEAD_SHA: ${{ steps.resolve.outputs.head_sha }}
           REPO: ${{ github.repository }}
+          BODY_EDITED: ${{ github.event_name == 'pull_request' && github.event.action == 'edited' && github.event.changes.body != null }}
         run: |
           set -euo pipefail
           if ! reviews=$(gh api "repos/$REPO/pulls/$PR_NUMBER/reviews" --paginate --slurp 2>/dev/null); then
@@ -304,6 +331,15 @@ jobs:
           # un Important, una domanda o un nit senza LGTM e' comunque un
           # giudizio gia' emesso. Il fallback Codex vale solo con il marker
           # strutturale che il review-gate richiede per quel bot.
+          set_fingerprint() {
+            fpHead=$(node scripts/ci/pr-contribution-fingerprint.mjs "$HEAD_SHA" 2>/dev/null) || fpHead=UNKNOWN
+            if ! printf '%s' "$fpHead" | grep -qE '^[a-f0-9]{64}$'; then
+              echo "::error::Fingerprint del contributo HEAD non verificabile → review claim fail-closed."
+              exit 1
+            fi
+            echo "contribution_fingerprint=$fpHead" >> "$GITHUB_OUTPUT"
+          }
+
           same_head=$(printf '%s' "$reviews" | jq --arg head "$HEAD_SHA" '
             [flatten[]
              | select((.state // "") != "PENDING")
@@ -315,20 +351,21 @@ jobs:
                )
              | select(.commit_id == $head)] | length'
           )
-          if [ "${same_head:-0}" -gt 0 ]; then
+          if [ "${same_head:-0}" -gt 0 ] && [ "${BODY_EDITED:-false}" != "true" ]; then
             echo "skip=true" >> "$GITHUB_OUTPUT"
             echo "Esiste gia' una review terminale del reviewer sulla HEAD $HEAD_SHA → nessuna seconda review per lo stesso contributo."
             exit 0
           fi
+          if [ "${same_head:-0}" -gt 0 ]; then
+            echo "Review terminale presente sulla HEAD, ma il body della PR è cambiato → nuova review ammessa con revisione distinta."
+          fi
 
-          set_fingerprint() {
-            fpHead=$(node scripts/ci/pr-contribution-fingerprint.mjs "$HEAD_SHA" 2>/dev/null) || fpHead=UNKNOWN
-            if ! printf '%s' "$fpHead" | grep -qE '^[a-f0-9]{64}$'; then
-              echo "::error::Fingerprint del contributo HEAD non verificabile → review claim fail-closed."
-              exit 1
-            fi
-            echo "contribution_fingerprint=$fpHead" >> "$GITHUB_OUTPUT"
-          }
+          if [ "${BODY_EDITED:-false}" = "true" ]; then
+            set_fingerprint
+            echo "skip=false" >> "$GITHUB_OUTPUT"
+            echo "Body della PR cambiato → review completa sulla nuova revisione del review input."
+            exit 0
+          fi
 
           last=$(printf '%s' "$reviews" | jq -r '
             [flatten[]
@@ -393,6 +430,7 @@ jobs:
           HEAD_SHA: ${{ steps.resolve.outputs.head_sha }}
           EVENT_KEY: run:${{ github.run_id }}
           CONTRIBUTION_FINGERPRINT: ${{ steps.guard.outputs.contribution_fingerprint }}
+          REVIEW_REVISION: ${{ steps.review_input.outputs.review_revision }}
           CLAIM_TTL_SEC: '3600'
           GITHUB_RUN_ID: ${{ github.run_id }}
         run: node scripts/ci/review-claim.mjs --claim
@@ -1035,6 +1073,7 @@ jobs:
           HEAD_SHA: ${{ steps.resolve.outputs.head_sha }}
           EVENT_KEY: run:${{ github.run_id }}
           CONTRIBUTION_FINGERPRINT: ${{ steps.guard.outputs.contribution_fingerprint }}
+          REVIEW_REVISION: ${{ steps.review_input.outputs.review_revision }}
           CLAIM_TOKEN: ${{ steps.review_claim.outputs.claim_token }}
           PROCEED: ${{ steps.tier.outputs.tier == 'tests-only' || steps.quota.outputs.lease_allowed == 'true' }}
           CLAUDE_OUTCOME: ${{ steps.claude_review.outcome }}

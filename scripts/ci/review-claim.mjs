@@ -6,7 +6,10 @@
  * The PR thread is the durable store already available to the workflow. Each
  * event is recorded with PR + HEAD + event + contribution fingerprint; the
  * stable PR + HEAD + fingerprint identity coalesces retries of one review.
- * Claims are append-only: the latest event for a token is its state.
+ * A trusted PR-body SHA is an optional review revision: it lets a corrected
+ * body receive a fresh verdict without making an unchanged rerun duplicate
+ * Claude work. Claims are append-only: the latest event for a token is its
+ * state.
  */
 import { execFileSync } from 'node:child_process';
 import { randomUUID } from 'node:crypto';
@@ -28,9 +31,22 @@ const CLAIM_ACTOR_RE = /^(?:github-actions\[bot\]|frontaliere-automation(?:\[bot
 const SHA_RE = /^[0-9a-f]{40}$/iu;
 const PR_RE = /^[1-9][0-9]*$/u;
 const FINGERPRINT_RE = /^[0-9a-f]{64}$/iu;
+const REVIEW_REVISION_RE = /^body:[0-9a-f]{64}$/iu;
 
 function normalized(value) {
   return String(value ?? '').trim().replace(/\s+/gu, ' ');
+}
+
+/**
+ * A body edit is a new review input even when the code contribution and HEAD
+ * are unchanged. Keep the revision deliberately narrow: only a SHA-256 of the
+ * trusted PR body is accepted, so arbitrary caller input cannot create an
+ * unbounded claim namespace.
+ */
+function normalizedReviewRevision(value) {
+  const raw = normalized(value);
+  if (!raw) return '';
+  return REVIEW_REVISION_RE.test(raw) ? raw.toLowerCase() : null;
 }
 
 function validContext({ prNumber, headSha, eventKey, contributionFingerprint } = {}) {
@@ -40,25 +56,33 @@ function validContext({ prNumber, headSha, eventKey, contributionFingerprint } =
     && normalized(eventKey) !== '';
 }
 
+function revisionSuffix(reviewRevision) {
+  const revision = normalizedReviewRevision(reviewRevision);
+  if (revision === null) return null;
+  return revision ? `|revision:${revision}` : '';
+}
+
 /** Exact identity retained in the comment ledger for audit and finalization. */
-export function reviewClaimKey({ prNumber, headSha, eventKey, contributionFingerprint } = {}) {
-  if (!validContext({ prNumber, headSha, eventKey, contributionFingerprint })) return '';
+export function reviewClaimKey({ prNumber, headSha, eventKey, contributionFingerprint, reviewRevision } = {}) {
+  const suffix = revisionSuffix(reviewRevision);
+  if (suffix === null || !validContext({ prNumber, headSha, eventKey, contributionFingerprint })) return '';
   return [
     `pr:${String(prNumber)}`,
     `head:${String(headSha).toLowerCase()}`,
     `event:${normalized(eventKey)}`,
     `contribution:${String(contributionFingerprint).toLowerCase()}`,
-  ].join('|');
+  ].join('|') + suffix;
 }
 
 /** Stable identity that deliberately excludes a rerun's event id. */
-export function reviewClaimDedupeKey({ prNumber, headSha, eventKey, contributionFingerprint } = {}) {
-  if (!validContext({ prNumber, headSha, eventKey, contributionFingerprint })) return '';
+export function reviewClaimDedupeKey({ prNumber, headSha, eventKey, contributionFingerprint, reviewRevision } = {}) {
+  const suffix = revisionSuffix(reviewRevision);
+  if (suffix === null || !validContext({ prNumber, headSha, eventKey, contributionFingerprint })) return '';
   return [
     `pr:${String(prNumber)}`,
     `head:${String(headSha).toLowerCase()}`,
     `contribution:${String(contributionFingerprint).toLowerCase()}`,
-  ].join('|');
+  ].join('|') + suffix;
 }
 
 function keyFromClaim(event) {
@@ -67,6 +91,7 @@ function keyFromClaim(event) {
     headSha: event?.headSha,
     eventKey: event?.eventKey,
     contributionFingerprint: event?.contributionFingerprint,
+    reviewRevision: event?.reviewRevision,
   });
 }
 
@@ -76,6 +101,7 @@ function dedupeKeyFromClaim(event) {
     headSha: event?.headSha,
     eventKey: event?.eventKey,
     contributionFingerprint: event?.contributionFingerprint,
+    reviewRevision: event?.reviewRevision,
   });
 }
 
@@ -100,6 +126,9 @@ export function parseReviewClaim(body) {
       || !Number.isFinite(Number(event.issuedAt))
       || !Number.isFinite(Number(event.expiresAt))) return null;
 
+  const reviewRevision = normalizedReviewRevision(event.reviewRevision);
+  if (reviewRevision === null) return null;
+
   const normalizedEvent = {
     ...event,
     prNumber: String(event.prNumber),
@@ -109,6 +138,7 @@ export function parseReviewClaim(body) {
     issuedAt: Number(event.issuedAt),
     expiresAt: Number(event.expiresAt),
   };
+  if (reviewRevision) normalizedEvent.reviewRevision = reviewRevision;
   if (normalizedEvent.key !== keyFromClaim(normalizedEvent)
       || normalizedEvent.dedupeKey !== dedupeKeyFromClaim(normalizedEvent)) return null;
   return normalizedEvent;
@@ -299,14 +329,23 @@ function contextFromEnv() {
   const prNumber = String(process.env.PR_NUMBER || '').trim();
   const headSha = String(process.env.HEAD_SHA || '').trim().toLowerCase();
   const eventKey = normalized(process.env.EVENT_KEY || '');
+  const reviewRevision = normalized(process.env.REVIEW_REVISION || '').toLowerCase();
   let fingerprint = normalized(process.env.CONTRIBUTION_FINGERPRINT || '').toLowerCase();
   if (!FINGERPRINT_RE.test(fingerprint)) {
     const verdict = normalized(process.env.VERDICT_KEY || '');
     fingerprint = verdict.replace(/^contribution:/iu, '').toLowerCase();
   }
-  const key = reviewClaimKey({ prNumber, headSha, eventKey, contributionFingerprint: fingerprint });
-  const dedupeKey = reviewClaimDedupeKey({ prNumber, headSha, eventKey, contributionFingerprint: fingerprint });
-  return { prNumber, headSha, eventKey, contributionFingerprint: fingerprint, key, dedupeKey };
+  const key = reviewClaimKey({ prNumber, headSha, eventKey, contributionFingerprint: fingerprint, reviewRevision });
+  const dedupeKey = reviewClaimDedupeKey({ prNumber, headSha, eventKey, contributionFingerprint: fingerprint, reviewRevision });
+  return {
+    prNumber,
+    headSha,
+    eventKey,
+    contributionFingerprint: fingerprint,
+    ...(reviewRevision ? { reviewRevision } : {}),
+    key,
+    dedupeKey,
+  };
 }
 
 function activeRunStates(repo, claims, nowSec) {
