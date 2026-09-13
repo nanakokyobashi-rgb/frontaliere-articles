@@ -29,6 +29,7 @@ import { isAggregate } from '../../scripts/ci/check-issue-already-resolved.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const WORKFLOW = fs.readFileSync(path.join(ROOT, '.github/workflows/issue-fix.yml'), 'utf8');
+const TESTS_WORKFLOW = fs.readFileSync(path.join(ROOT, '.github/workflows/tests.yml'), 'utf8');
 
 /** La regola shell che questa PR rimuove, riprodotta per misurare il disaccordo. */
 const oldShellRule = (body) =>
@@ -121,6 +122,22 @@ test('issue-fix.yml non ricalcola l\'aggregazione per conto suo', () => {
       !trace.test(code),
       `\`${trace.source}\` e' tornata in issue-fix.yml: il verdetto si calcola in ` +
         '`detect-aggregate.mjs`, non nello YAML (AGENTS.md #6).',
+    );
+  }
+});
+
+test('tests.yml adattato non reintroduce il mirror inline di #8427', () => {
+  // Il finding del sito riguardava uno snippet inline che usava
+  // `stripFencedBlocks(body)` prima di `hasEnumeratedItems()`. Questo workflow
+  // e' adattato: il contratto del body e' un modulo corpus-only, quindi non
+  // deve contenere una seconda copia della grammatica da sincronizzare.
+  const code = TESTS_WORKFLOW.split('\n').filter((line) => !/^\s*#/.test(line)).join('\n');
+  assert.match(code, /node scripts\/ci\/pr-body-contract\.mjs/);
+  for (const trace of [/hasEnumeratedItems/, /maskInlineCodeSpans/, /stripFencedBlocks/, /agg_count/, /is_agg=/]) {
+    assert.doesNotMatch(
+      code,
+      trace,
+      `tests.yml ha reintrodotto ${trace.source}: il mirror adattato deve restare assente (#8427)`,
     );
   }
 });
