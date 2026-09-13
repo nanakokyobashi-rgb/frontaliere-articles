@@ -11,12 +11,13 @@ import {
   aggregateCloseGate,
   declaredTargetFiles,
   hasStrongLegacyEvidence,
+  hasStrongDailyAcceptanceEvidence,
   legacyAddressEvidence,
   negativeAcceptanceTokens,
   isAggregateTitle,
   stripJavaScriptComments,
 } from '../../scripts/ci/reconcile-followups.mjs';
-import { detectAlreadyResolved } from '../../scripts/ci/followup-resolution-match.mjs';
+import { detectAlreadyResolved, parseFollowupItems } from '../../scripts/ci/followup-resolution-match.mjs';
 
 const TARGET = 'scripts/ci/example.mjs';
 const io = {
@@ -87,6 +88,45 @@ test('isAggregateTitle allinea titolo e corpo ignorando gli span inline', () => 
   assert.equal(isAggregateTitle('follow-up(#10): `triage-sweep.mjs` cleanup', 'single item'), false);
   assert.equal(isAggregateTitle('follow-up(#10): cleanup', 'single item cites `needs-human-sweep.yml`'), false);
   assert.equal(isAggregateTitle('follow-up(#10): cleanup', 'This batch contains multiple items'), true);
+});
+
+test('un acceptance token stabile è evidenza forte per un daily item', () => {
+  const items = [{ acceptanceToken: '`runTask()`' }];
+  assert.equal(hasStrongDailyAcceptanceEvidence(items, [{ tok: 'runTask()' }]), true);
+  assert.equal(hasStrongDailyAcceptanceEvidence(items, [{ tok: 'otherTask()' }]), false);
+});
+
+test('il matcher ignora commenti, stringhe e dichiarazioni di metodi', () => {
+  const body = [
+    '- Target file: scripts/ci/example.mjs',
+    '- Suggested action: verificare `runTask()`.',
+    '- Acceptance token: `runTask()`',
+  ].join('\n');
+  const onlyNonCalls = [
+    '// runTask()',
+    'const prose = "runTask()";',
+    'const template = `runTask()`;',
+    'function runTask() {}',
+    'class Worker { runTask() {} }',
+    'const object = { runTask() {} };',
+  ].join('\n');
+  const io = {
+    fileExists: (path) => path === 'scripts/ci/example.mjs',
+    readFile: () => onlyNonCalls,
+  };
+  const options = { acceptanceToken: 'runTask()' };
+  assert.equal(detectAlreadyResolved(body, io, options).resolved, false);
+  assert.equal(detectAlreadyResolved(body, {
+    ...io,
+    readFile: () => `${onlyNonCalls}\nrunTask(input);`,
+  }, options).resolved, true);
+});
+
+test('isUnclassifiableAggregate mantiene il parser condiviso collegato', async () => {
+  const { isUnclassifiableAggregate } = await import('../../scripts/ci/reconcile-followups.mjs');
+  assert.equal(isUnclassifiableAggregate('follow-up(#10): sweep', 'no item headings'), true);
+  assert.equal(isUnclassifiableAggregate('follow-up(#10): sweep', '### 1. item'), false);
+  assert.equal(parseFollowupItems('### 1. item').length, 1);
 });
 
 test('la provenienza Addresses ricade sulla lista merged quando la search è vuota', () => {

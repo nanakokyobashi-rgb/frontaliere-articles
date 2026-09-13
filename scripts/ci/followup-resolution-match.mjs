@@ -363,6 +363,91 @@ function escapedRegExp(value) {
 }
 
 /**
+ * Replace comments and literal text with spaces while preserving line breaks
+ * and the positions of executable characters.  A cited call inside a comment,
+ * string, or template literal is documentation/data, not an invocation.
+ */
+function maskJavaScriptNonExecutable(source) {
+  const text = String(source || '');
+  const out = [];
+  let state = 'code';
+  let quote = '';
+  let escaped = false;
+
+  const blank = (ch) => (ch === '\n' ? '\n' : ' ');
+  for (let i = 0; i < text.length; i += 1) {
+    const ch = text[i];
+    const next = text[i + 1];
+    if (state === 'line-comment') {
+      out.push(blank(ch));
+      if (ch === '\n') state = 'code';
+      continue;
+    }
+    if (state === 'block-comment') {
+      out.push(blank(ch));
+      if (ch === '*' && next === '/') {
+        out.push(' ');
+        i += 1;
+        state = 'code';
+      }
+      continue;
+    }
+    if (state === 'literal') {
+      out.push(blank(ch));
+      if (escaped) escaped = false;
+      else if (ch === '\\') escaped = true;
+      else if (ch === quote) state = 'code';
+      continue;
+    }
+    if (ch === '/' && next === '/') {
+      out.push(' ', ' ');
+      i += 1;
+      state = 'line-comment';
+      continue;
+    }
+    if (ch === '/' && next === '*') {
+      out.push(' ', ' ');
+      i += 1;
+      state = 'block-comment';
+      continue;
+    }
+    if (ch === "'" || ch === '"' || ch === '`') {
+      out.push(' ');
+      quote = ch;
+      escaped = false;
+      state = 'literal';
+      continue;
+    }
+    out.push(ch);
+  }
+  return out.join('');
+}
+
+function matchingCloseParen(content, openIndex) {
+  let depth = 0;
+  for (let i = openIndex; i < content.length; i += 1) {
+    if (content[i] === '(') depth += 1;
+    else if (content[i] === ')' && --depth === 0) return i;
+  }
+  return -1;
+}
+
+function isFunctionOrMethodDeclaration(content, callStart, openIndex) {
+  const prefix = content.slice(0, callStart).trimEnd();
+  if (/(?:^|[^A-Za-z0-9_$])(?:async\s+)?function\s*\*?\s*$/u.test(prefix)) return true;
+
+  const closeIndex = matchingCloseParen(content, openIndex);
+  if (closeIndex < 0 || !/^\s*\{/u.test(content.slice(closeIndex + 1))) return false;
+
+  const previous = prefix.at(-1) || '';
+  if (!/[{,;}:*]/u.test(previous)) {
+    const previousWord = /([A-Za-z_$][\w$]*)$/u.exec(prefix)?.[1] || '';
+    if (!/^(?:async|get|set|static)$/u.test(previousWord)) return false;
+  }
+  return true;
+}
+
+/**
  * Match a prescribed zero-argument call token against a real invocation with
  * arguments. The acceptance field names the callable (`foo()`), while the
  * implementation may necessarily pass data (`foo(value)`). A declaration is
@@ -371,10 +456,12 @@ function escapedRegExp(value) {
 function codeTokenMatches(content, token) {
   const emptyCall = /^([A-Za-z_$][\w$]*(?:\.[A-Za-z_$][\w$]*)*)\(\)$/u.exec(token);
   if (!emptyCall) return content.includes(token);
+  const executable = maskJavaScriptNonExecutable(content);
   const callRe = new RegExp(`(^|[^A-Za-z0-9_$])${escapedRegExp(emptyCall[1])}\\s*\\(`, 'gu');
-  for (const match of content.matchAll(callRe)) {
+  for (const match of executable.matchAll(callRe)) {
     const callStart = (match.index ?? 0) + match[1].length;
-    if (/\bfunction\s*$/.test(content.slice(0, callStart))) continue;
+    const openIndex = callStart + emptyCall[1].length + (executable.slice(callStart + emptyCall[1].length).match(/^\s*/u)?.[0].length || 0);
+    if (isFunctionOrMethodDeclaration(executable, callStart, openIndex)) continue;
     return true;
   }
   return false;

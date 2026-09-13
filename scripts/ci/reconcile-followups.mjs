@@ -65,6 +65,7 @@ import {
   isDailyBucketTitle,
   maskInlineCodeSpans,
   parseFollowupItems,
+  splitFollowupItems,
   suggestedActionText,
   updateFollowupItemState,
 } from './followup-resolution-match.mjs';
@@ -333,6 +334,21 @@ export function isCurrentUnclassifiable(issue, comments, {
 export function isStrongAutoCloseEvidence(matchedTokens) {
   const uniq = [...new Set((matchedTokens || []).map((t) => String(t)))];
   return uniq.length >= 2;
+}
+
+/**
+ * A stable daily item carries one explicit acceptance token by design.  That
+ * token is already the complete falsifiable contract for the item, so requiring
+ * a second token would make every one-item bucket permanently ineligible for
+ * auto-close.  Multiple tokens remain the bar for legacy free-form items.
+ */
+export function hasStrongDailyAcceptanceEvidence(items, evidence) {
+  const parsedItems = Array.isArray(items) ? items : [];
+  const matched = new Set((Array.isArray(evidence) ? evidence : []).map((entry) => String(entry?.tok || '')));
+  return parsedItems.length > 0 && parsedItems.every((item) => {
+    const token = String(item?.acceptanceToken || '').trim().replace(/^`+|`+$/g, '').trim();
+    return token.length > 0 && matched.has(token);
+  });
 }
 
 /**
@@ -950,7 +966,9 @@ export function dailyBucketCloseGate(
     const result = detectAlreadyResolved(item.text, io, { acceptanceToken: item.acceptanceToken });
     evidenceById.set(item.id, result.evidence || []);
     if (item.state !== 'done' || !result.resolved) unresolvedItems.push(item);
-    if (!isStrongAutoCloseEvidence((result.evidence || []).map((entry) => entry.tok))) weakItems.push(item);
+    const itemEvidence = result.evidence || [];
+    const strongStableToken = hasStrongDailyAcceptanceEvidence([item], itemEvidence);
+    if (!strongStableToken && !isStrongAutoCloseEvidence(itemEvidence.map((entry) => entry.tok))) weakItems.push(item);
   }
   if (unresolvedItems.length) {
     return { blocks: true, reason: 'valid-item-unconfirmed', validItems: items, unresolvedItems, evidenceById };
@@ -1445,7 +1463,11 @@ function main() {
       console.log(`::warning::reconcile-followups: impossibile leggere i commenti di #${iss.number}; flag/chiusura non determinabili, issue lasciata nel ciclo`);
     }
     const legacyStrongEvidence = hasStrongLegacyEvidence(evidence);
-    const strongEvidence = isStrongAutoCloseEvidence(evidence.map((e) => e.tok)) || legacyStrongEvidence;
+    const strongDailyEvidence = daily
+      && hasStrongDailyAcceptanceEvidence(parseFollowupItems(iss.body || ''), evidence);
+    const strongEvidence = strongDailyEvidence
+      || isStrongAutoCloseEvidence(evidence.map((e) => e.tok))
+      || legacyStrongEvidence;
     const action = decideReconcileAction({
       resolved, hasMaybeResolved, hasPriorFlag, isAggregate, blocked, noAutoclose: NO_AUTOCLOSE, strongEvidence,
     });
