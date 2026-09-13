@@ -140,8 +140,8 @@ export function readArticleExcerpts(
 
 /**
  * Read the `BlogArticleId` → per-locale URL-slug map from
- * `services/routerBlogData.ts` (the `BLOG_SLUGS` constant). Mirrors the
- * parser in `ogPagesPlugin`.
+ * `services/routerBlogData.ts` (the `BLOG_SLUGS` constant). Uses the shared
+ * parser in `articleReaderSource.mjs`, also consumed by the OG renderer.
  *
  * **Why this exists.** `blog-meta-{lang}.ts` keys are `BlogArticleId`s
  * (e.g. `stipendio-netto-2026`), but the canonical sitemap URL uses the
