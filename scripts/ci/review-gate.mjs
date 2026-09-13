@@ -112,6 +112,38 @@ function isCodexFallbackReview(review) {
 }
 
 /**
+ * A drift fallback cannot erase a finding merely because the old verdict is
+ * from another body revision (or predates revision markers). If the new
+ * review is missing, keep the old Important visible and require a fresh
+ * verdict instead of approving from the PR-body contract alone.
+ */
+function historicalImportantBlocksDriftFallback() {
+  let reviews;
+  try {
+    reviews = gh(['api', `repos/${REPO}/pulls/${PR}/reviews`, '--paginate']) || [];
+  } catch (error) {
+    markTransientFailure();
+    console.log(`drift-fallback: impossibile verificare i finding storici (${String(error).slice(0, 160)}) — no fallback.`);
+    return true;
+  }
+  const blockers = reviews.flat().filter((review) => {
+    const reviewer = review?.user?.type === 'Bot'
+      && (REVIEWER_BOT_LOGIN_RE.test(review.user?.login || '') || isCodexFallbackReview(review));
+    return reviewer
+      && review.state !== 'PENDING'
+      && REDFLAG_IMPORTANT_RE.test(String(review.body || ''))
+      && !reviewHasInputRevision(review.body, REVIEW_REVISION);
+  });
+  if (blockers.length) {
+    console.log(
+      `drift-fallback: ${blockers.length} finding Important storico senza verdetto per ${REVIEW_REVISION} — no fallback.`,
+    );
+    return true;
+  }
+  return false;
+}
+
+/**
  * A Codex review has no durable evidence file: that file belongs to the
  * runner attempt that posted the review and disappears before the next run.
  * Accept a positive Codex review without a fresh file only when the same
@@ -196,6 +228,7 @@ function lastBotReview() {
  * al posto del `## LGTM`. Un 🔴 che SI APPLICA alla head resta bloccante.
  */
 function driftFallbackApproves() {
+  if (historicalImportantBlocksDriftFallback()) return false;
   let files;
   try {
     files = gh(['api', `repos/${REPO}/pulls/${PR}/files`, '--paginate', '--jq', '.[].filename'], {

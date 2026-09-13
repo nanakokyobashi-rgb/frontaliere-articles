@@ -296,18 +296,17 @@ const DRIFT_META = {
   body: GOOD_BODY,
 };
 
-test('drift-fallback: 🔴 stantio (SHA vecchio, contributo cambiato) + tests.yml → verde', () => {
-  // #970: Claude posta 🔴 sulla prima HEAD, i commit dopo sistemano e toccano
-  // tests.yml, claude-code-action skippa 401 senza postare. Senza questo ramo
-  // il 🔴 vecchio tiene il check rosso per sempre.
+test('drift-fallback: 🔴 stantio senza revisione corrente + tests.yml → ROSSO', () => {
+  // Anche se il contributo è cambiato, un finding precedente non può essere
+  // cancellato dal solo fallback: serve un verdetto per il body revisionato.
   const r = runGate({
-    reviews: [botReview(OLD, '🔴 Important: collect jq ancora claude-only\n\n## LGTM')],
+    reviews: [botReview(OLD, '🔴 Important: collect jq ancora claude-only\n\n## LGTM', { reviewRevision: OLD_BODY_REVISION })],
     files: ['.github/workflows/tests.yml', 'scripts/ci/review-gate.mjs'],
     meta: DRIFT_META,
     compare: COMPARE_CHANGED,
   });
-  assert.equal(r.status, 0, `Un 🔴 che non si applica piu' alla head non deve bloccare il fallback.\n${r.stdout}`);
-  assert.match(r.stdout, /drift-fallback: APPROVATO/, r.stdout);
+  assert.equal(r.status, 1, `Un 🔴 storico non può essere scavalcato senza un verdetto sulla revisione corrente.\n${r.stdout}`);
+  assert.doesNotMatch(r.stdout, /drift-fallback: APPROVATO/, r.stdout);
 });
 
 test('drift-fallback: 🔴 su SHA vecchio ma contributo INVARIATO + tests.yml → ROSSO', () => {
