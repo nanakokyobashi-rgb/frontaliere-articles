@@ -316,6 +316,7 @@ jobs:
           PR_NUMBER: ${{ steps.resolve.outputs.pr_number }}
           HEAD_SHA: ${{ steps.resolve.outputs.head_sha }}
           REPO: ${{ github.repository }}
+          REVIEW_REVISION: ${{ steps.review_input.outputs.review_revision }}
           BODY_EDITED: ${{ github.event_name == 'pull_request' && github.event.action == 'edited' && github.event.changes.body != null }}
         run: |
           set -euo pipefail
@@ -340,7 +341,7 @@ jobs:
             echo "contribution_fingerprint=$fpHead" >> "$GITHUB_OUTPUT"
           }
 
-          same_head=$(printf '%s' "$reviews" | jq --arg head "$HEAD_SHA" '
+          same_head=$(printf '%s' "$reviews" | jq --arg head "$HEAD_SHA" --arg revision "$REVIEW_REVISION" '
             [flatten[]
              | select((.state // "") != "PENDING")
              | select(.user.type == "Bot")
@@ -348,6 +349,10 @@ jobs:
                  ((.user.login // "") | test("^(claude|frontaliere-automation)"; "i"))
                  or (((.user.login // "") | test("^github-actions\\[bot\\]$"; "i"))
                      and ((.body // "") | contains("<!-- CODEX_FALLBACK_REVIEW -->")))
+               )
+             | select(
+                 [((.body // "") | scan("<!--\\s*REVIEW_INPUT_REVISION:\\s*(body:[0-9a-f]{64})\\s*-->") | .[])]
+                 | unique == [$revision]
                )
              | select(.commit_id == $head)] | length'
           )

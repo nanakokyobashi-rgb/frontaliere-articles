@@ -248,6 +248,8 @@ test('tests.yml claims before review work and finalizes without gating the requi
   assert.match(workflow, /REVIEW_REVISION:/);
   assert.match(workflow, /REVIEW_INPUT_REVISION:/);
   assert.match(workflow, /contains\("<!-- REVIEW_INPUT_REVISION:/);
+  assert.match(workflow, /--arg revision \"\$REVIEW_REVISION\"/);
+  assert.match(workflow, /scan\("<!--\\\\s\*REVIEW_INPUT_REVISION:/);
   assert.match(workflow, /steps\.review_claim\.outputs\.claim_allowed == 'true'/);
 
   const gateAt = workflow.indexOf('id: review_gate');

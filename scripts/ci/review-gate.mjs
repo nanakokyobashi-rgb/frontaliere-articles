@@ -105,6 +105,18 @@ function fingerprint(sha) {
   return fp == null ? null : createHash('sha256').update(fp).digest('hex');
 }
 
+/** The workflow hashes the trusted PR body before asking for a review. */
+function currentReviewInputRevision() {
+  let body;
+  try {
+    body = gh(['api', `repos/${REPO}/pulls/${PR}`, '--jq', '.body // ""'], { json: false });
+  } catch (error) {
+    markTransientFailure();
+    throw new Error(`PR body illeggibile: ${String(error).slice(0, 160)}`);
+  }
+  return `body:${createHash('sha256').update(body).digest('hex')}`;
+}
+
 function isCodexFallbackReview(review) {
   return review?.user?.type === 'Bot'
     && CODEX_REVIEWER_LOGIN_RE.test(review.user.login || '')
@@ -317,6 +329,15 @@ async function main() {
     markTransientFailure();
     writeFailureKind();
     console.error('::error::review-gate: REVIEW_REVISION mancante o non valida; nessun verdetto precedente può essere riusato.');
+    process.exit(1);
+  }
+  const currentRevision = currentReviewInputRevision();
+  if (currentRevision !== REVIEW_REVISION) {
+    markTransientFailure();
+    writeFailureKind();
+    console.error(
+      `::error::review-gate: REVIEW_REVISION non corrisponde al body PR corrente (attesa=${REVIEW_REVISION}, corrente=${currentRevision}); nessun verdetto precedente può essere riusato.`,
+    );
     process.exit(1);
   }
   const last = lastBotReview();

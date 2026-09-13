@@ -22,6 +22,7 @@ import { codeContributionFingerprint } from '../../scripts/ci/auto-merge-eval.mj
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
+import { createHash } from 'node:crypto';
 import { mkdtempSync, mkdirSync, writeFileSync, chmodSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
@@ -32,10 +33,11 @@ const SCRIPT = path.join(ROOT, 'scripts/ci/review-gate.mjs');
 
 const HEAD = 'a'.repeat(40);
 const OLD = 'b'.repeat(40);
-const BODY_REVISION = `body:${'d'.repeat(64)}`;
 const OLD_BODY_REVISION = `body:${'e'.repeat(64)}`;
 
 const GOOD_BODY = '## Implementato\n- una cosa vera\n\n## Non implementato (ancora)\n- Nessuno';
+const bodyRevision = body => `body:${createHash('sha256').update(`${body}\n`).digest('hex')}`;
+const BODY_REVISION = bodyRevision(GOOD_BODY);
 
 /**
  * Esegue il gate vero con `gh` sostituito da uno stub che legge le sue
@@ -48,7 +50,9 @@ const GOOD_BODY = '## Implementato\n- una cosa vera\n\n## Non implementato (anco
  */
 function runGate({ reviews = [], files = [], meta = null, compare = null,
   checkRuns = [], checkRunPages = null, codexEvidence = null,
-  reviewRevision = BODY_REVISION }) {
+  reviewRevision: requestedReviewRevision = null, currentBody: requestedCurrentBody = null }) {
+  const currentBody = requestedCurrentBody ?? meta?.body ?? GOOD_BODY;
+  const reviewRevision = requestedReviewRevision ?? bodyRevision(currentBody);
   const dir = mkdtempSync(path.join(tmpdir(), 'review-gate-'));
   try {
     const bin = path.join(dir, 'bin');
@@ -60,7 +64,7 @@ function runGate({ reviews = [], files = [], meta = null, compare = null,
     writeFileSync(calls, '');
     writeFileSync(fixReviews, JSON.stringify(reviews));
     writeFileSync(fixFiles, files.join('\n') + (files.length ? '\n' : ''));
-    writeFileSync(fixMeta, JSON.stringify(meta ?? {}));
+    writeFileSync(fixMeta, JSON.stringify({ ...(meta ?? {}), body: meta?.body ?? currentBody }));
 
     // `compare` mappa sha → payload della compare API. Un `null` significa
     // «endpoint non stubbato»: il gate deve cadere sul ramo conservativo.
@@ -110,6 +114,8 @@ case "$sub" in
           node -e 'const m=require(process.argv[1]); process.stdout.write((m.base?.sha||"")+"\\n")' ${JSON.stringify(fixMeta)}
         elif [ "$jq" = ".head.sha" ]; then
           node -e 'const m=require(process.argv[1]); process.stdout.write((m.head?.sha||"")+"\\n")' ${JSON.stringify(fixMeta)}
+        elif [ "$jq" = '.body // ""' ]; then
+          node -e 'const m=require(process.argv[1]); process.stdout.write(String(m.body||"")+"\\n")' ${JSON.stringify(fixMeta)}
         else
           cat ${JSON.stringify(fixMeta)}
         fi ;;
@@ -184,6 +190,16 @@ test('un LGTM della revisione body precedente non viene riusato sulla revisione 
     files: ['generator/scripts/create-article.mjs'],
   });
   assert.equal(fresh.status, 0, fresh.stdout);
+});
+
+test('un body cambiato invalida una review che porta ancora l\'hash precedente', () => {
+  const r = runGate({
+    reviews: [botReview(HEAD, 'tutto bene\n\n## LGTM')],
+    currentBody: `${GOOD_BODY}\n- altra cosa`,
+    reviewRevision: BODY_REVISION,
+  });
+  assert.equal(r.status, 1, r.stdout);
+  assert.match(r.stdout, /non corrisponde al body PR corrente/i, r.stdout);
 });
 
 test('LGTM accanto a un 🔴 Important → il check e\' ROSSO', () => {
