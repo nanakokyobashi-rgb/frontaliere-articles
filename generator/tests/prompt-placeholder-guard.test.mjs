@@ -39,6 +39,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import {
   SCHEMA_PLACEHOLDER_LITERALS,
+  HISTORICAL_SCHEMA_PLACEHOLDER_LITERALS,
   SLUG_OWNED_LITERALS,
   PROMPT_SCAFFOLD_LABELS,
   SOURCE_ECHO_MARKERS,
@@ -805,6 +806,21 @@ describe('LOCK — se il template acquisisce un segnaposto, questo test diventa 
       assert.ok(literal.startsWith(lead), `lead non e' un prefisso di "${literal}"`);
       assert.equal(lead, leadOf(literal), 'non deterministica');
     }
+  });
+
+  it('il guard conserva separato il matcher dello schema storico di body1', () => {
+    const legacy = HISTORICAL_SCHEMA_PLACEHOLDER_LITERALS[0];
+    assert.ok(!SCHEMA_PLACEHOLDER_LITERALS.includes(legacy), 'lo schema ritirato non deve rientrare nel lock del prompt corrente');
+    const hits = findPromptPlaceholders(legacy);
+    assert.ok(
+      hits.some((hit) => hit.rule === 'legacy-schema-body1-fixed-key-facts'),
+      'un body1 prodotto col contratto 5-8/Cosa…Importo non viene piu\' riconosciuto',
+    );
+    assert.equal(
+      PLACEHOLDER_RULES.find((rule) => rule.id === 'legacy-schema-body1-fixed-key-facts')?.literal,
+      legacy,
+      'il matcher storico deve restare ancorato al literal ritirato, non al template corrente',
+    );
   });
 });
 

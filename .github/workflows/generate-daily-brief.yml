@@ -197,13 +197,13 @@ jobs:
             echo "producer completed; the normal commit will stage marker changes"
             exit 0
           fi
-          if [ -z "$(git status --porcelain -- 'generator/data/register-in-progress-*.json')" ]; then
+          if [ -z "$(git status --porcelain -- 'generator/data/register-in-progress*.json')" ]; then
             echo "producer outcome: $PRODUCER_OUTCOME; no changed registration marker to checkpoint"
             exit 0
           fi
           # -A is intentional here: it preserves additions, updates, and
           # deletions of the tracked marker set after an interrupted run.
-          git add -A -- 'generator/data/register-in-progress-*.json'
+          git add -A -- 'generator/data/register-in-progress*.json'
           echo "staged registration marker checkpoint for producer outcome: $PRODUCER_OUTCOME"
 
       # RC is loaded only when there is a commit to push (GITHUB_PAT) and
@@ -228,8 +228,8 @@ jobs:
           if [ "$PRODUCER_OUTCOME" != "success" ]; then
             # The checkpoint normally staged this already. Repeat the
             # deletion-aware add as a safety net if that step could not run.
-            if [ -n "$(git status --porcelain -- 'generator/data/register-in-progress-*.json')" ]; then
-              git add -A -- 'generator/data/register-in-progress-*.json'
+            if [ -n "$(git status --porcelain -- 'generator/data/register-in-progress*.json')" ]; then
+              git add -A -- 'generator/data/register-in-progress*.json'
             fi
             COMMIT_MESSAGE="Checkpoint interrupted daily edition registration"
             echo "producer outcome: $PRODUCER_OUTCOME; committing registration evidence only"
@@ -269,8 +269,8 @@ jobs:
             fi
             # Quote the pathspec so a missing file cannot expand into an
             # empty argument, and -A also stages marker deletions.
-            if [ -n "$(git status --porcelain -- 'generator/data/register-in-progress-*.json')" ]; then
-              git add -A -- 'generator/data/register-in-progress-*.json'
+            if [ -n "$(git status --porcelain -- 'generator/data/register-in-progress*.json')" ]; then
+              git add -A -- 'generator/data/register-in-progress*.json'
             fi
           fi
           if git diff --cached --quiet; then
