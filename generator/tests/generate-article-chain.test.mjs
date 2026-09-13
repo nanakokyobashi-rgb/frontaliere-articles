@@ -94,6 +94,7 @@ const GENERATE_RUN = extractRun('Generate the article');
 function runGenerateStep({
   section = 'frontaliere',
   event = 'push',
+  chainLink = false,
   url = '',
   plan = [],
   budget = null,
@@ -207,6 +208,7 @@ exit 0
         HOME: dir,
         TARGET_SECTION: section,
         EVENT_NAME: event,
+        CHAIN_LINK: chainLink ? 'true' : 'false',
         SOURCE_URL: url,
         GITHUB_OUTPUT: ghOutput,
         // Le diagnostiche dello step vanno sotto RUNNER_TEMP. Senza questa
@@ -409,6 +411,38 @@ test('una dispatch manuale ottiene la sezione che ha chiesto e nessun\'altra', (
   const r = runGenerateStep({ section: 'svizzera', event: 'workflow_dispatch', plan: ['0 0'] });
   assert.equal(r.invocations.length, 1);
   assert.match(r.invocations[0], /--section=svizzera/);
+});
+
+test('un dispatch della catena prova il fallback anche se l\'evento è workflow_dispatch', () => {
+  const r = runGenerateStep({
+    section: 'svizzera',
+    event: 'workflow_dispatch',
+    chainLink: true,
+    plan: ['0 0', '0 1'],
+  });
+  assert.equal(r.outputs.article, 'true');
+  assert.equal(r.outputs.section, 'frontaliere');
+  assert.equal(r.invocations.length, 2);
+  assert.match(r.invocations[0], /--section=svizzera/);
+  assert.match(r.invocations[1], /--section=frontaliere/);
+});
+
+test('il marker chain_link del mode arriva davvero allo step di generazione', () => {
+  const mode = extractRun('Resolve run mode and section');
+  assert.match(mode, /CHAIN_LINK="\$\{\{ needs\.admit\.outputs\.chain_link \}\}"/);
+  assert.doesNotMatch(mode, /inputs\.chain_depth/, 'il parser del marker deve avere una sola sorgente');
+  assert.match(
+    WF,
+    /chain_link: \$\{\{ steps\.check\.outputs\.chain_link \}\}/,
+    'admit deve esportare il marker che ha già calcolato',
+  );
+  assert.match(mode, /echo "chain_link=\$CHAIN_LINK"/);
+  assert.match(
+    WF,
+    /CHAIN_LINK: \$\{\{ steps\.mode\.outputs\.chain_link \}\}/,
+    'il fallback non puo\' distinguere un link da un dispatch umano se il marker non viene trasportato',
+  );
+  assert.match(GENERATE_RUN, /CHAIN_LINK:-false/);
 });
 
 test('con un URL esplicito non c\'e\' fallback: l\'URL e\' legato alla sezione', () => {

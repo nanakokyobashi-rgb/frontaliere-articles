@@ -334,6 +334,7 @@ jobs:
       contents: read # il compare per distinguere il self-test dal chain link
     outputs:
       proceed: ${{ steps.check.outputs.proceed }}
+      chain_link: ${{ steps.check.outputs.chain_link }}
     steps:
       - name: Skip when a generation is already in flight
         id: check
@@ -382,6 +383,7 @@ jobs:
           if [ "$EVENT_NAME" = "workflow_dispatch" ] && [ "$chain_depth" -gt 0 ]; then
             is_link=true
           fi
+          echo "chain_link=$is_link" >> "$GITHUB_OUTPUT"
 
           if [ "$EVENT_NAME" = "workflow_dispatch" ] && [ "$is_link" != "true" ]; then
             echo "Dispatch manuale (chain_depth=$chain_depth) → si procede sempre."
@@ -397,11 +399,10 @@ jobs:
           # verrebbe saltata quasi sempre, perché una generazione è in volo
           # quasi sempre.
           #
-          # NB: NON è una seconda definizione del chain link. Quella resta una
-          # sola, nello step "Resolve run mode and section", che decide col
-          # `git diff` sul checkout. Qui la domanda è più stretta — «questo
-          # arrivo può scrivere?» — e nel dubbio (compare vuoto, `before`
-          # azzerato, errore API) si risponde di sì e si prosegue col
+          # NB: il marker del chain link viene calcolato una volta qui, nel gate,
+          # e trasportato come output del job. Questa domanda è più stretta —
+          # «questo arrivo può scrivere?» — e nel dubbio (compare vuoto,
+          # `before` azzerato, errore API) si risponde di sì e si prosegue col
           # ragionamento sotto, cioè si degrada al comportamento normale.
           if [ "$EVENT_NAME" = "push" ] && [ -n "${PUSH_BEFORE:-}" ]; then
             changed=$(gh api "repos/$REPO/compare/$PUSH_BEFORE...$PUSH_SHA" \
@@ -620,6 +621,12 @@ jobs:
           set -euo pipefail
           EV="${{ github.event_name }}"
 
+          # `workflow_dispatch` è usato sia dagli umani sia dal successore
+          # auto-generato dalla catena. Il gate `admit` distingue i due casi e
+          # passa qui il marker come output, così la decisione ha una sola fonte.
+          CHAIN_LINK="${{ needs.admit.outputs.chain_link }}"
+          [ "$CHAIN_LINK" = "true" ] || CHAIN_LINK=false
+
           # A push is DRY unless it carried a corpus change — that is the chain
           # link. Editing this workflow or create-article.mjs must still only
           # ever self-test, never generate for real.
@@ -674,8 +681,9 @@ jobs:
             echo "dry=$DRY"
             echo "section=$SEC"
             echo "chain=$CHAIN"
+            echo "chain_link=$CHAIN_LINK"
           } >> "$GITHUB_OUTPUT"
-          echo "event=$EV chain=$CHAIN → section=$SEC dry_run=$DRY"
+          echo "event=$EV chain=$CHAIN chain_link=$CHAIN_LINK → section=$SEC dry_run=$DRY"
 
       - name: Setup Node.js
         uses: actions/setup-node@v5
@@ -834,6 +842,7 @@ jobs:
           TARGET_SECTION: ${{ steps.mode.outputs.section }}
           SOURCE_URL: ${{ inputs.url }}
           EVENT_NAME: ${{ github.event_name }}
+          CHAIN_LINK: ${{ steps.mode.outputs.chain_link }}
           # Issue #313 — la meta' che DEVE stare sul processo che chiama callLLM:
           # ai-models.mjs offre Codex quando il broker action-owned e' attivo,
           # e claude-cli/haiku solo se hasClaudeCodeOauthToken() e il relativo
@@ -890,9 +899,14 @@ jobs:
           # The attempt list, fixed before the loop — this is the termination
           # argument in code: one entry per section, never more.
           sections=("$TARGET_SECTION")
-          if [ "${EVENT_NAME:-}" != "workflow_dispatch" ] && [ -z "${SOURCE_URL:-}" ]; then
+          if [ -z "${SOURCE_URL:-}" ] && {
+            [ "${EVENT_NAME:-}" != "workflow_dispatch" ] ||
+            [ "${CHAIN_LINK:-false}" = "true" ]
+          }; then
             # A human who named a section (or handed over a URL, which is
-            # section-specific) gets that section and nothing else.
+            # section-specific) gets that section and nothing else. A chain
+            # link is also `workflow_dispatch`, but it is not human: it keeps
+            # the bounded fallback so one dry section cannot kill the baton.
             if [ "$TARGET_SECTION" = "svizzera" ]; then
               sections+=(frontaliere)
             else
