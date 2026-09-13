@@ -35,7 +35,7 @@ import { reportStrippedControlChars } from './lib/control-char-write-report.mjs'
 import { callLLM, callSingleModel, AI_MODELS, initScoreStore, getStats, flushScores, resetExhaustedModel, printRunSummary } from './lib/ai-models.mjs';
 import { exitAfterDrain } from './lib/drain-stdio.mjs';
 import { freeTranslateWithRetry, logCascadeSummary } from './lib/free-translate.mjs';
-import { stripCodeFences, findMatchingClose, fixJsonStringBody, JSON_QUOTE_SAFETY_RULE_IT, describeJsonParseError, describeRawForDiagnostics } from './lib/llm-json-repair.mjs';
+import { repairLlmJsonArray, JSON_QUOTE_SAFETY_RULE_IT, describeJsonParseError, describeRawForDiagnostics } from './lib/llm-json-repair.mjs';
 import {
   belowFaqFloor,
   filterWrongLocalePairs,
@@ -214,29 +214,27 @@ function escapeForSingleQuoteTS(s) {
   return String(s || '').replace(/\\/g, '\\\\').replace(/'/g, "\\'").replace(/\n/g, '\\n').replace(/\r/g, '');
 }
 
-/** Strip markdown fences and extract JSON array from LLM output.
- *  Bracket-balanced extraction + string repair live in ./lib/llm-json-repair.mjs
- *  (shared with create-article.mjs's repairLlmJson — same LLM-JSON quirks). */
-function repairJsonArray(s) {
-  let c = stripCodeFences(s);
-  // Bracket-balanced extraction so trailing prose (LLM "Note: ..." after the
-  // array) does not pull in a foreign ']' via lastIndexOf.
-  const arrStart = c.indexOf('[');
-  if (arrStart !== -1) {
-    const arrEnd = findMatchingClose(c, arrStart);
-    if (arrEnd !== -1) c = c.slice(arrStart, arrEnd + 1);
-    else {
-      const lastClose = c.lastIndexOf(']');
-      if (lastClose > arrStart) c = c.slice(arrStart, lastClose + 1);
-    }
-  } else {
-    const objStart = c.indexOf('{');
-    if (objStart !== -1) {
-      const objEnd = findMatchingClose(c, objStart);
-      if (objEnd !== -1) c = c.slice(objStart, objEnd + 1);
-    }
-  }
-  return fixJsonStringBody(c);
+/**
+ * Accept only parsed payloads made of FAQ pairs. The shared repair module
+ * supplies bounded candidate extraction; this caller supplies the semantic
+ * contract so a valid JSON example with unrelated fields cannot win merely by
+ * being parseable.
+ */
+function isFaqPayloadCandidate(parsed) {
+  const faq = extractFaqArray(parsed);
+  return Array.isArray(faq)
+    && faq.length > 0
+    && faq.every((pair) => (
+      pair
+      && typeof pair === 'object'
+      && typeof pair.q === 'string'
+      && typeof pair.a === 'string'
+    ));
+}
+
+/** Repair and extract a JSON FAQ payload through the shared LLM repair path. */
+export function repairJsonArray(s) {
+  return repairLlmJsonArray(s, { validateCandidate: isFaqPayloadCandidate });
 }
 
 /** Extract FAQ array from various LLM response shapes:
@@ -704,10 +702,9 @@ function discoverArticles(bodyDir) {
 // Preferred models for FAQ (Gemini free tier — reliable JSON output)
 const FAQ_MODELS = [
   AI_MODELS.GEMINI_FLASH,
-  // Era AI_MODELS.GEMINI_2_FLASH, ritirato da Google il 2026-08-14 (HTTP 404 "no
-  // longer available"). Resta in AI_MODELS perche' il matcher del 404 lo esaurisce
-  // da solo al primo tentativo, ma non ha senso metterlo QUI come preferenza: una
-  // catena di preferenza dovrebbe nominare modelli vivi.
+  // Il vecchio Gemini 2.0 fallback e' stato ritirato da Google il 2026-08-14
+  // (HTTP 404) e rimosso dal roster condiviso: una catena di preferenza deve
+  // nominare solo modelli vivi.
   AI_MODELS.GEMINI_FLASH_LITE_LATEST,
   AI_MODELS.GEMINI_FLASH_LITE,
 ];

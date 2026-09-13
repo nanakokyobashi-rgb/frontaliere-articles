@@ -140,6 +140,13 @@ const LOG_DRY = [
   'generate\tLoad the generator without running it (dry run)\t2026-08-10T14:27:50.1Z ok',
 ].join('\n');
 
+const LOG_OUTCOMES = [
+  'admit\tCheck generation concurrency\t2026-08-10T10:00:00.1Z GENERATION_OUTCOME kind=skipped reason=admit-in-flight section=unknown',
+  'generate\tGenerate the article\t2026-08-10T10:01:00.1Z GENERATION_OUTCOME kind=generated reason=article section=frontaliere',
+  'generate\tGenerate the article\t2026-08-10T10:02:00.1Z GENERATION_OUTCOME kind=no-article reason=declared section=svizzera',
+  'generate\tGenerate the article\t2026-08-10T10:03:00.1Z GENERATION_OUTCOME kind=timeout reason=hard-kill section=frontaliere',
+].join('\n');
+
 // ── 1. Parsing ──────────────────────────────────────────────────────────────
 
 describe('parseGenerationCommit — i due esiti che il workflow già distingue', () => {
@@ -274,10 +281,21 @@ describe('parseRunLog — i marker già emessi dalla pipeline', () => {
     assert.equal(r.section, 'frontaliere');
   });
 
+  test('legge gli esiti distinti della pipeline, inclusi gli skip dell\'admit', () => {
+    const r = parseRunLog(LOG_OUTCOMES);
+    assert.deepEqual(r.outcomes, [
+      { kind: 'skipped', reason: 'admit-in-flight', section: 'unknown' },
+      { kind: 'generated', reason: 'article', section: 'frontaliere' },
+      { kind: 'no-article', reason: 'declared', section: 'svizzera' },
+      { kind: 'timeout', reason: 'hard-kill', section: 'frontaliere' },
+    ]);
+  });
+
   test('un log vuoto o troncato non lancia, restituisce un record vuoto', () => {
     for (const t of ['', null, undefined, 'una riga qualsiasi']) {
       const r = parseRunLog(t);
       assert.equal(r.section, null);
+      assert.deepEqual(r.outcomes, []);
       assert.deepEqual(r.gates, []);
       assert.deepEqual(r.totalRejections, []);
       assert.deepEqual(r.tokenLimitSkips, []);
@@ -360,6 +378,25 @@ describe('summarizeRuns — i denominatori', () => {
     assert.equal(s.oversize.maxEstimated, 10930);
     assert.deepEqual(s.oversize.limitsCrossed, [3000, 4000, 6000, 8000]);
   });
+
+  test('somma gli esiti senza confondere no-article, timeout e skip', () => {
+    const s = summarizeRuns([parseRunLog(LOG_OUTCOMES)]);
+    assert.deepEqual(s.outcomes, {
+      total: 4,
+      generated: 1,
+      noArticle: 1,
+      timeout: 1,
+      skipped: 1,
+      error: 0,
+      unknown: 0,
+      byReason: {
+        'admit-in-flight': 1,
+        article: 1,
+        declared: 1,
+        'hard-kill': 1,
+      },
+    });
+  });
 });
 
 // ── 2. Le condizioni e le loro soglie ───────────────────────────────────────
@@ -417,6 +454,7 @@ function healthy() {
     },
     runs: {
       available: true, total: 60, logFailures: 0, spanHours: 12, bySection,
+      outcomes: { total: 0, generated: 0, noArticle: 0, timeout: 0, skipped: 0, error: 0, unknown: 0, byReason: {} },
       oversize: { runs: 0, maxEstimated: 0, limitsCrossed: [], distinctModels: 0, models: [] },
       // Lo stato "sano" del roster NON è zero modelli morti: è il livello del
       // censimento di nanako#380 (run 31823202761), 3 modelli ritirati su ~101

@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 /**
- * Host-side one-shot runner for the Claude -> Codex subscription fallback.
+ * Host-side one-shot runner for the Codex subscription primary in the article
+ * lane. Claude remains the caller's fallback when this request fails.
  *
  * The setup action passes CODEX_AUTH_JSON over stdin and never writes it to a
  * file or to GITHUB_ENV. This process keeps the credential in memory, serves
@@ -89,7 +90,7 @@ function permissionConfig() {
   return `default_permissions = "${CODEX_PROFILE}"
 
 [permissions.${CODEX_PROFILE}]
-description = "Read-only Codex fallback in an empty temporary workspace"
+description = "Read-only Codex primary in an empty temporary workspace"
 extends = ":read-only"
 
 [permissions.${CODEX_PROFILE}.network]
@@ -253,7 +254,10 @@ function runCodex({ authJson: credential, prompt, timeoutMs, schema }) {
   const codexWorkspace = path.join(runtimeRoot, 'workspace');
   const codexTmp = path.join(runtimeRoot, 'tmp');
   const authPath = path.join(codexHome, 'auth.json');
-  const configPath = path.join(codexHome, `${CODEX_PROFILE}.config.toml`);
+  // CODEX_HOME/config.toml is loaded by default. Keep the selected permission
+  // profile in that base config instead of relying on a separate --profile
+  // overlay whose file-loading contract differs across CLI versions.
+  const configPath = path.join(codexHome, 'config.toml');
   const outputPath = path.join(codexHome, 'last-message.txt');
   const schemaPath = path.join(codexHome, 'output-schema.json');
   let child = null;
@@ -292,7 +296,6 @@ function runCodex({ authJson: credential, prompt, timeoutMs, schema }) {
         '--ephemeral',
         '--strict-config',
         '--ignore-rules',
-        '--profile', CODEX_PROFILE,
         '--cd', codexWorkspace,
         '--skip-git-repo-check',
         '--model', CODEX_MODEL,
