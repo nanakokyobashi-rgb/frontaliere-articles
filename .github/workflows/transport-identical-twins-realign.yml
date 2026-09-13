@@ -59,16 +59,28 @@ jobs:
             const changed = new Set(fs.readFileSync(process.env.RUNNER_TEMP + "/transport-files.txt", "utf8").split(/\r?\n/).filter(Boolean));
             const manifestPath = "scripts/ci/loop-sync-manifest.json";
             const manifest = JSON.parse(fs.readFileSync(manifestPath, "utf8"));
+            const declared = new Set((manifest.files || []).map((entry) => entry.path));
             const identical = new Set((manifest.files || []).filter((entry) => entry.mode === "identical").map((entry) => entry.path));
-            const expected = [...changed].filter((filename) => filename !== manifestPath).sort();
-            const unregistered = expected.filter((filename) => !identical.has(filename));
-            if (unregistered.length) {
-              throw new Error("file modificati dalla PR non registrati come gemelli `identical`: " + unregistered.join(", "));
+            const unknown = [...changed]
+              .filter((filename) => filename !== manifestPath && !declared.has(filename))
+              .sort();
+            if (unknown.length) {
+              throw new Error("file modificati dalla PR non dichiarati nel manifest: " + unknown.join(", "));
+            }
+            const expected = [...changed]
+              .filter((filename) => filename !== manifestPath && identical.has(filename))
+              .sort();
+            const excluded = [...changed]
+              .filter((filename) => filename !== manifestPath && declared.has(filename) && !identical.has(filename))
+              .sort();
+            if (excluded.length) {
+              console.log("Path non-identical esclusi dal realign post-merge: " + excluded.join(", "));
             }
             const found = new Map();
             const re = /^- `([^`\n]+)` .*?\(site sha256 `([0-9a-f]{16})`\)\s*$/gm;
             for (const match of body.matchAll(re)) {
               if (!changed.has(match[1])) throw new Error("il body cita un path non presente nei file della PR: " + match[1]);
+              if (!identical.has(match[1])) continue;
               if (found.has(match[1]) && found.get(match[1]) !== match[2]) {
                 throw new Error("il body cita lo stesso path con site hash diverse: " + match[1]);
               }
@@ -80,7 +92,7 @@ jobs:
             }
             const unique = [...found].map(([filename, siteHash]) => filename + "\t" + siteHash).sort();
             fs.writeFileSync(process.env.RUNNER_TEMP + "/transport-realign.tsv", unique.length ? unique.join("\n") + "\n" : "");
-            console.log("Path realign post-merge: " + unique.length + " citati su " + expected.length + " attesi");
+            console.log("Path realign post-merge: " + unique.length + " citati su " + expected.length + " attesi; " + excluded.length + " non-identical esclusi");
           '
 
       # Il PAT corpus-owned permette il push sul branch protetto quando le
