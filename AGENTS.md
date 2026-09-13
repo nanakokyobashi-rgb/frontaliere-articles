@@ -130,7 +130,7 @@ arruolare la PR nel meccanismo, con l'identita' del PAT owner perche' il merge
 faccia scattare `publish-api.yml`. I workflow che falliscono aprono una
 issue (`workflow-failure-issues`), che viene classificata e instradata
 (`issue-triage`) e infine lavorata dal fixer (`issue-fix`) in un pool bounded di
-fino a 5 issue distinte; la chiave per-issue e i claim impediscono collisioni.
+fino a 7 issue distinte; la chiave per-issue e i claim impediscono collisioni.
 
 Il claim `agent:in-progress` è accompagnato dal proprietario: `agent:remote`
 per `issue-fix` e `agent:local` per una sessione locale. Il claim gate è
